@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2015-03-13 00:26+0000\n"
+"PO-Revision-Date: 2015-03-18 11:13+0000\n"
 "Last-Translator: Luke Hollins <luke@farcry.ca>\n"
 "Language-Team: English (Canada) (http://www.transifex.com/projects/p/clementine/language/en_CA/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -290,7 +290,7 @@ msgid ""
 "directly into the file each time they changed.</p><p>Please note it might "
 "not work for every format and, as there is no standard for doing so, other "
 "music players might not be able to read them.</p></body></html>"
-msgstr ""
+msgstr "<html><head/><body><p>If not checked, Clementine will  try to save your ratings and other statistics only in a separate database and don't modify your files.</p><p>If checked, it will save statistics both in database and directly into the file each time they changed.</p><p>Please note it might not work for every format and, as there is no standard for doing so, other music players might not be able to read them.</p></body></html>"
 
 #: ../bin/src/ui_libraryfilterwidget.h:97
 #, qt-format
@@ -301,7 +301,7 @@ msgid ""
 "artists that contain the word Bode.</p><p><span style=\" font-"
 "weight:600;\">Available fields: </span><span style=\" font-"
 "style:italic;\">%1</span>.</p></body></html>"
-msgstr ""
+msgstr "<html><head/><body><p>Prefix a word with a field name to limit the search to that field, e.g. <span style=\" font-weight:600;\">artist:</span><span style=\" font-style:italic;\">Bode</span> searches the library for all artists that contain the word Bode.</p><p><span style=\" font-weight:600;\">Available fields: </span><span style=\" font-style:italic;\">%1</span>.</p></body></html>"
 
 #: ../bin/src/ui_librarysettingspage.h:199
 msgid ""
@@ -309,42 +309,42 @@ msgid ""
 "files tags for all your library's songs.</p><p>This is not needed if the "
 "&quot;Save ratings and statistics in file tags&quot; option has always been "
 "activated.</p></body></html>"
-msgstr ""
+msgstr "<html><head/><body><p>This will write songs' ratings and statistics into files tags for all your library's songs.</p><p>This is not needed if the &quot;Save ratings and statistics in file tags&quot; option has always been activated.</p></body></html>"
 
 #: ../bin/src/ui_organisedialog.h:251
 msgid ""
 "<p>Tokens start with %, for example: %artist %album %title </p>\n"
 "\n"
 "<p>If you surround sections of text that contain a token with curly-braces, that section will be hidden if the token is empty.</p>"
-msgstr ""
+msgstr "<p>Tokens start with %, for example: %artist %album %title </p>\n\n<p>If you surround sections of text that contain a token with curly-braces, that section will be hidden if the token is empty.</p>"
 
 #: internet/grooveshark/groovesharksettingspage.cpp:123
 msgid "A Grooveshark Anywhere account is required."
-msgstr ""
+msgstr "A Grooveshark Anywhere account is required."
 
 #: internet/spotify/spotifysettingspage.cpp:166
 msgid "A Spotify Premium account is required."
-msgstr ""
+msgstr "A Spotify Premium account is required."
 
 #: ../bin/src/ui_networkremotesettingspage.h:234
 msgid "A client can connect only, if the correct code was entered."
-msgstr ""
+msgstr "A client can connect only, if the correct code was entered."
 
 #: smartplaylists/wizard.cpp:74
 msgid ""
 "A smart playlist is a dynamic list of songs that come from your library.  "
 "There are different types of smart playlist that offer different ways of "
 "selecting songs."
-msgstr ""
+msgstr "A smart playlist is a dynamic list of songs that come from your library.  There are different types of smart playlist that offer different ways of selecting songs."
 
 #: smartplaylists/querywizardplugin.cpp:157
 msgid ""
 "A song will be included in the playlist if it matches these conditions."
-msgstr ""
+msgstr "A song will be included in the playlist if it matches these conditions."
 
 #: smartplaylists/searchterm.cpp:365
 msgid "A-Z"
-msgstr ""
+msgstr "A-Z"
 
 #: ../bin/src/ui_transcodersettingspage.h:179
 msgid "AAC"
@@ -423,7 +423,7 @@ msgstr ""
 
 #: internet/podcasts/addpodcastdialog.cpp:62
 msgid "Add Podcast"
-msgstr ""
+msgstr "Add Podcast"
 
 #: ../bin/src/ui_addstreamdialog.h:113
 msgid "Add Stream"
@@ -431,15 +431,15 @@ msgstr "Add Stream"
 
 #: ../bin/src/ui_notificationssettingspage.h:431
 msgid "Add a new line if supported by the notification type"
-msgstr ""
+msgstr "Add a new line if supported by the notification type"
 
 #: ../bin/src/ui_wiimotesettingspage.h:193
 msgid "Add action"
-msgstr ""
+msgstr "Add action"
 
 #: ../bin/src/ui_transcodedialog.h:218
 msgid "Add all tracks from a directory and all its subdirectories"
-msgstr ""
+msgstr "Add all tracks from a directory and all its subdirectories"
 
 #: internet/internetradio/savedradio.cpp:112
 msgid "Add another stream..."
@@ -451,7 +451,7 @@ msgstr "Add directory..."
 
 #: ui/mainwindow.cpp:1830
 msgid "Add file"
-msgstr ""
+msgstr "Add file"
 
 #: ../bin/src/ui_mainwindow.h:713
 msgid "Add file to transcoder"
@@ -1016,13 +1016,13 @@ msgstr "Boom analyzer"
 
 #: ../bin/src/ui_boxsettingspage.h:103
 msgid "Box"
-msgstr ""
+msgstr "Box"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:146
 #: ../bin/src/ui_podcastsettingspage.h:270
 #: ../bin/src/ui_appearancesettingspage.h:287
 msgid "Browse..."
-msgstr ""
+msgstr "Browse..."
 
 #: ../bin/src/ui_playbacksettingspage.h:334
 msgid "Buffer duration"
@@ -1030,19 +1030,19 @@ msgstr ""
 
 #: engines/gstengine.cpp:876
 msgid "Buffering"
-msgstr ""
+msgstr "Buffering"
 
 #: internet/seafile/seafileservice.cpp:226
 msgid "Building Seafile index..."
-msgstr ""
+msgstr "Building Seafile index..."
 
 #: ../bin/src/ui_globalsearchview.h:211
 msgid "But these sources are disabled:"
-msgstr ""
+msgstr "But these sources are disabled:"
 
 #: ../bin/src/ui_wiimotesettingspage.h:192
 msgid "Buttons"
-msgstr ""
+msgstr "Buttons"
 
 #: ../bin/src/ui_groovesharksettingspage.h:139
 msgid "By default, Grooveshark sorts songs on date added"
@@ -1050,15 +1050,15 @@ msgstr ""
 
 #: core/song.cpp:415
 msgid "CDDA"
-msgstr ""
+msgstr "CDDA"
 
 #: library/library.cpp:117
 msgid "CUE sheet support"
-msgstr ""
+msgstr "CUE sheet support"
 
 #: ../bin/src/ui_vksettingspage.h:227
 msgid "Cache path:"
-msgstr ""
+msgstr "Cache path:"
 
 #: ../bin/src/ui_vksettingspage.h:225
 msgid "Caching"
@@ -1067,33 +1067,33 @@ msgstr ""
 #: internet/vk/vkmusiccache.cpp:120
 #, qt-format
 msgid "Caching %1"
-msgstr ""
+msgstr "Caching %1"
 
 #: internet/spotify/spotifyblobdownloader.cpp:52
 msgid "Cancel"
-msgstr ""
+msgstr "Cancel"
 
 #: internet/podcasts/podcastservice.cpp:439
 msgid "Cancel download"
-msgstr ""
+msgstr "Cancel download"
 
 #: internet/vk/vkservice.cpp:626
 msgid ""
 "Captcha is needed.\n"
 "Try to login into Vk.com with your browser,to fix this problem."
-msgstr ""
+msgstr "Captcha is needed.\nTry to login into Vk.com with your browser,to fix this problem."
 
 #: ../bin/src/ui_edittagdialog.h:667
 msgid "Change cover art"
-msgstr ""
+msgstr "Change cover art"
 
 #: songinfo/songinfotextview.cpp:73
 msgid "Change font size..."
-msgstr ""
+msgstr "Change font size..."
 
 #: core/globalshortcuts.cpp:73
 msgid "Change repeat mode"
-msgstr ""
+msgstr "Change repeat mode"
 
 #: ../bin/src/ui_globalshortcutssettingspage.h:179
 msgid "Change shortcut..."
@@ -1101,11 +1101,11 @@ msgstr "Change shortcut..."
 
 #: core/globalshortcuts.cpp:71
 msgid "Change shuffle mode"
-msgstr ""
+msgstr "Change shuffle mode"
 
 #: core/commandlineoptions.cpp:172
 msgid "Change the language"
-msgstr ""
+msgstr "Change the language"
 
 #: ../bin/src/ui_playbacksettingspage.h:338
 msgid ""
@@ -1119,7 +1119,7 @@ msgstr ""
 
 #: internet/googledrive/googledriveservice.cpp:220
 msgid "Check for updates"
-msgstr ""
+msgstr "Check for updates"
 
 #: ui/mainwindow.cpp:719
 msgid "Check for updates..."
@@ -1127,11 +1127,11 @@ msgstr "Check for updates..."
 
 #: internet/vk/vksettingspage.cpp:98
 msgid "Choose Vk.com cache directory"
-msgstr ""
+msgstr "Choose Vk.com cache directory"
 
 #: smartplaylists/wizard.cpp:84
 msgid "Choose a name for your smart playlist"
-msgstr ""
+msgstr "Choose a name for your smart playlist"
 
 #: engines/gstengine.cpp:897
 msgid "Choose automatically"
@@ -1143,11 +1143,11 @@ msgstr "Choose colour..."
 
 #: ../bin/src/ui_notificationssettingspage.h:469
 msgid "Choose font..."
-msgstr ""
+msgstr "Choose font..."
 
 #: ../bin/src/ui_visualisationselector.h:113
 msgid "Choose from the list"
-msgstr ""
+msgstr "Choose from the list"
 
 #: smartplaylists/querywizardplugin.cpp:161
 msgid "Choose how the playlist is sorted and how many songs it will contain."
@@ -1155,16 +1155,16 @@ msgstr ""
 
 #: internet/podcasts/podcastsettingspage.cpp:140
 msgid "Choose podcast download directory"
-msgstr ""
+msgstr "Choose podcast download directory"
 
 #: ../bin/src/ui_internetshowsettingspage.h:89
 msgid "Choose the internet services you want to show."
-msgstr ""
+msgstr "Choose the internet services you want to show."
 
 #: ../bin/src/ui_songinfosettingspage.h:160
 msgid ""
 "Choose the websites you want Clementine to use when searching for lyrics."
-msgstr ""
+msgstr "Choose the websites you want Clementine to use when searching for lyrics."
 
 #: ui/equalizer.cpp:112
 msgid "Classical"
@@ -1172,12 +1172,12 @@ msgstr "Classical"
 
 #: ../bin/src/ui_podcastsettingspage.h:271
 msgid "Cleaning up"
-msgstr ""
+msgstr "Cleaning up"
 
 #: transcoder/transcodedialog.cpp:61 widgets/lineedit.cpp:41
 #: ../bin/src/ui_queuemanager.h:139
 msgid "Clear"
-msgstr ""
+msgstr "Clear"
 
 #: ../bin/src/ui_mainwindow.h:654 ../bin/src/ui_mainwindow.h:656
 msgid "Clear playlist"
@@ -1206,23 +1206,23 @@ msgstr "Clementine Visualisation"
 msgid ""
 "Clementine can automatically convert the music you copy to this device into "
 "a format that it can play."
-msgstr ""
+msgstr "Clementine can automatically convert the music you copy to this device into a format that it can play."
 
 #: ../bin/src/ui_boxsettingspage.h:104
 msgid "Clementine can play music that you have uploaded to Box"
-msgstr ""
+msgstr "Clementine can play music that you have uploaded to Box"
 
 #: ../bin/src/ui_dropboxsettingspage.h:104
 msgid "Clementine can play music that you have uploaded to Dropbox"
-msgstr ""
+msgstr "Clementine can play music that you have uploaded to Dropbox"
 
 #: ../bin/src/ui_googledrivesettingspage.h:104
 msgid "Clementine can play music that you have uploaded to Google Drive"
-msgstr ""
+msgstr "Clementine can play music that you have uploaded to Google Drive"
 
 #: ../bin/src/ui_skydrivesettingspage.h:104
 msgid "Clementine can play music that you have uploaded to OneDrive"
-msgstr ""
+msgstr "Clementine can play music that you have uploaded to OneDrive"
 
 #: ../bin/src/ui_notificationssettingspage.h:437
 msgid "Clementine can show a message when the track changes."
@@ -1233,7 +1233,7 @@ msgid ""
 "Clementine can synchronize your subscription list with your other computers "
 "and podcast applications.  <a href=\"https://gpodder.net/register/\">Create "
 "an account</a>."
-msgstr ""
+msgstr "Clementine can synchronize your subscription list with your other computers and podcast applications.  <a href=\"https://gpodder.net/register/\">Create an account</a>."
 
 #: visualisations/projectmvisualisation.cpp:132
 msgid ""
@@ -1243,15 +1243,15 @@ msgstr ""
 
 #: widgets/prettyimage.cpp:200
 msgid "Clementine image viewer"
-msgstr ""
+msgstr "Clementine image viewer"
 
 #: ../bin/src/ui_trackselectiondialog.h:206
 msgid "Clementine was unable to find results for this file"
-msgstr ""
+msgstr "Clementine was unable to find results for this file"
 
 #: ../bin/src/ui_globalsearchview.h:210
 msgid "Clementine will find music in:"
-msgstr ""
+msgstr "Clementine will find music in:"
 
 #: library/libraryview.cpp:351
 msgid "Click here to add some music"
@@ -1261,11 +1261,11 @@ msgstr "Click here to add some music"
 msgid ""
 "Click here to favorite this playlist so it will be saved and remain "
 "accessible through the \"Playlists\" panel on the left side bar"
-msgstr ""
+msgstr "Click here to favorite this playlist so it will be saved and remain accessible through the \"Playlists\" panel on the left side bar"
 
 #: ../bin/src/ui_trackslider.h:72
 msgid "Click to toggle between remaining time and total time"
-msgstr ""
+msgstr "Click to toggle between remaining time and total time"
 
 #: ../bin/src/ui_soundcloudsettingspage.h:107
 #: ../bin/src/ui_googledrivesettingspage.h:106
@@ -2294,7 +2294,7 @@ msgstr "FLAC"
 
 #: ../bin/src/ui_playbacksettingspage.h:319
 msgid "Fade out on pause / fade in on resume"
-msgstr ""
+msgstr "Fade out on pause / fade in on resume"
 
 #: ../bin/src/ui_playbacksettingspage.h:313
 msgid "Fade out when stopping a track"
@@ -2311,11 +2311,11 @@ msgstr "Fading duration"
 
 #: ui/mainwindow.cpp:1897
 msgid "Failed reading CD drive"
-msgstr ""
+msgstr "Failed reading CD drive"
 
 #: internet/podcasts/gpoddertoptagspage.cpp:72
 msgid "Failed to fetch directory"
-msgstr ""
+msgstr "Failed to fetch directory"
 
 #: internet/podcasts/gpoddersearchpage.cpp:75
 #: internet/podcasts/gpoddertoptagsmodel.cpp:103
@@ -2323,21 +2323,21 @@ msgstr ""
 #: internet/podcasts/itunessearchpage.cpp:76
 #: internet/podcasts/itunessearchpage.cpp:83
 msgid "Failed to fetch podcasts"
-msgstr ""
+msgstr "Failed to fetch podcasts"
 
 #: internet/podcasts/addpodcastbyurl.cpp:69
 #: internet/podcasts/fixedopmlpage.cpp:55
 msgid "Failed to load podcast"
-msgstr ""
+msgstr "Failed to load podcast"
 
 #: internet/podcasts/podcasturlloader.cpp:175
 msgid "Failed to parse the XML for this RSS feed"
-msgstr ""
+msgstr "Failed to parse the XML for this RSS feed"
 
 #: ../bin/src/ui_transcoderoptionsflac.h:82
 #: ../bin/src/ui_transcoderoptionsmp3.h:200
 msgid "Fast"
-msgstr ""
+msgstr "Fast"
 
 #: internet/grooveshark/groovesharkservice.cpp:645
 msgid "Favorites"
@@ -2393,7 +2393,7 @@ msgstr "File name pattern:"
 
 #: ../bin/src/ui_playlistsaveoptionsdialog.h:96
 msgid "File paths"
-msgstr ""
+msgstr "File paths"
 
 #: playlist/playlist.cpp:1353 ../bin/src/ui_edittagdialog.h:677
 msgid "File size"
@@ -2419,19 +2419,19 @@ msgstr "Files to transcode"
 
 #: smartplaylists/querywizardplugin.cpp:82
 msgid "Find songs in your library that match the criteria you specify."
-msgstr ""
+msgstr "Find songs in your library that match the criteria you specify."
 
 #: internet/vk/vkservice.cpp:308
 msgid "Find this artist"
-msgstr ""
+msgstr "Find this artist"
 
 #: musicbrainz/tagfetcher.cpp:58
 msgid "Fingerprinting song"
-msgstr ""
+msgstr "Fingerprinting song"
 
 #: smartplaylists/wizard.cpp:83
 msgid "Finish"
-msgstr ""
+msgstr "Finish"
 
 #: ../bin/src/ui_groupbydialog.h:125
 msgid "First level"
@@ -2439,34 +2439,34 @@ msgstr "First level"
 
 #: widgets/nowplayingwidget.cpp:107
 msgid "Fit cover to width"
-msgstr ""
+msgstr "Fit cover to width"
 
 #: core/song.cpp:393 transcoder/transcoder.cpp:233
 msgid "Flac"
-msgstr ""
+msgstr "Flac"
 
 #: ../bin/src/ui_songinfosettingspage.h:156
 msgid "Font size"
-msgstr ""
+msgstr "Font size"
 
 #: ../bin/src/ui_spotifysettingspage.h:213
 msgid "For licensing reasons Spotify support is in a separate plugin."
-msgstr ""
+msgstr "For licensing reasons Spotify support is in a separate plugin."
 
 #: ../bin/src/ui_transcoderoptionsmp3.h:204
 msgid "Force mono encoding"
-msgstr ""
+msgstr "Force mono encoding"
 
 #: devices/deviceview.cpp:207 devices/deviceview.cpp:330
 #: devices/deviceview.cpp:335
 msgid "Forget device"
-msgstr ""
+msgstr "Forget device"
 
 #: devices/deviceview.cpp:331
 msgid ""
 "Forgetting a device will remove it from this list and Clementine will have "
 "to rescan all the songs again next time you connect it."
-msgstr ""
+msgstr "Forgetting a device will remove it from this list and Clementine will have to rescan all the songs again next time you connect it."
 
 #: ../bin/src/ui_deviceviewcontainer.h:98
 #: ../bin/src/ui_searchproviderstatuswidget.h:94
@@ -2494,20 +2494,20 @@ msgstr "Form"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:136
 msgid "Format"
-msgstr ""
+msgstr "Format"
 
 #: analyzers/analyzercontainer.cpp:52
 #: visualisations/visualisationcontainer.cpp:104
 msgid "Framerate"
-msgstr ""
+msgstr "Framerate"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:236
 msgid "Frames per buffer"
-msgstr ""
+msgstr "Frames per buffer"
 
 #: moodbar/moodbarrenderer.cpp:173
 msgid "Frozen"
-msgstr ""
+msgstr "Frozen"
 
 #: ui/equalizer.cpp:121
 msgid "Full Bass"
@@ -2523,7 +2523,7 @@ msgstr "Full Treble"
 
 #: ui/settingsdialog.cpp:138
 msgid "General"
-msgstr ""
+msgstr "General"
 
 #: ../bin/src/ui_notificationssettingspage.h:443
 msgid "General settings"
@@ -2538,12 +2538,12 @@ msgstr "Genre"
 
 #: internet/grooveshark/groovesharkservice.cpp:556
 msgid "Get a URL to share this Grooveshark playlist"
-msgstr ""
+msgstr "Get a URL to share this Grooveshark playlist"
 
 #: internet/grooveshark/groovesharkservice.cpp:553
 #: internet/grooveshark/groovesharkservice.cpp:1155
 msgid "Get a URL to share this Grooveshark song"
-msgstr ""
+msgstr "Get a URL to share this Grooveshark song"
 
 #: internet/spotify/spotifyservice.cpp:633
 #: internet/spotify/spotifyservice.cpp:674

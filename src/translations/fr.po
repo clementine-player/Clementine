@@ -6,7 +6,7 @@
 # arnaudbienner <arnaud.bienner@gmail.com>, 2013
 # arnaudbienner <arnaud.bienner@gmail.com>, 2013-2015
 # arnaudbienner <arnaud.bienner@gmail.com>, 2011-2012
-# Belvar <tornoz@laposte.net>, 2011
+# Gwenn Meynier <tornoz@laposte.net>, 2011
 # Brice <bmaron@gmail.com>, 2011
 # Brice <bmaron@gmail.com>, 2011
 # Chaopale Lamecarlate <chaopale+transifex@lamecarlate.net>, 2015
@@ -19,7 +19,7 @@
 # Fl0w3D <Fl0w3D@gmail.com>, 2013
 # Gabriel Cossette <gabriel.cossette@gmail.com>, 2012
 # hiveNzin0 <gilleshabran@gmail.com>, 2011
-# Belvar <tornoz@laposte.net>, 2011
+# Gwenn Meynier <tornoz@laposte.net>, 2011
 # hiveNzin0 <gilleshabran@gmail.com>, 2011
 # Irizion <webdingue@gmail.com>, 2012
 # jb78180 <jblum66@gmail.com>, 2012
@@ -42,8 +42,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2015-03-05 10:08+0000\n"
-"Last-Translator: Tubuntu <tubuntu@testimonium.be>\n"
+"PO-Revision-Date: 2015-03-22 09:52+0000\n"
+"Last-Translator: jipux\n"
 "Language-Team: French (http://www.transifex.com/projects/p/clementine/language/fr/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -57,7 +57,7 @@ msgid ""
 "You can favorite playlists by clicking the star icon next to a playlist name\n"
 "\n"
 "Favorited playlists will be saved here"
-msgstr "\n\nVous pouvez ajouter les listes de lecture aux favoris en cliquant sur l'icône à côté de leur nom\n\nLes listes de lectures favorites seront sauvegardées ici"
+msgstr "\n\nVous pouvez ajouter les listes de lecture aux favoris en cliquant sur l'icône à côté de leur nom\n\nLes listes de lecture favorites seront sauvegardées ici"
 
 #: ../bin/src/ui_podcastsettingspage.h:274
 msgid " days"
@@ -613,7 +613,7 @@ msgstr "Ajouter aux favoris Grooveshark"
 
 #: internet/grooveshark/groovesharkservice.cpp:1142
 msgid "Add to Grooveshark playlists"
-msgstr "Ajouter aux listes de lectures Grooveshark"
+msgstr "Ajouter aux listes de lecture Grooveshark"
 
 #: internet/vk/vkservice.cpp:312
 msgid "Add to My Music"
@@ -621,7 +621,7 @@ msgstr "Ajouter à Ma musique"
 
 #: internet/spotify/spotifyservice.cpp:617
 msgid "Add to Spotify playlists"
-msgstr "Ajouter aux listes de lectures Spotify"
+msgstr "Ajouter aux listes de lecture Spotify"
 
 #: internet/spotify/spotifyservice.cpp:610
 msgid "Add to Spotify starred"
@@ -2811,7 +2811,7 @@ msgstr "Boîte de réception"
 
 #: ../bin/src/ui_notificationssettingspage.h:450
 msgid "Include album art in the notification"
-msgstr "Inclure la pochette de l'album dans la fenêtre de notification"
+msgstr "Inclure la pochette de l'album à la notification"
 
 #: ../bin/src/ui_querysearchpage.h:118
 msgid "Include all songs"
@@ -5099,7 +5099,7 @@ msgstr "Merci à"
 #: ui/globalshortcutssettingspage.cpp:170
 #, qt-format
 msgid "The \"%1\" command could not be started."
-msgstr "La commande « %1 » ne peut pas être démarrée."
+msgstr "La commande « %1 » n'a pas pu être démarrée."
 
 #: ../bin/src/ui_appearancesettingspage.h:282
 msgid "The album cover of the currently playing song"
@@ -5156,13 +5156,13 @@ msgstr "Problème lors de la lecture de la réponse du service iTunes Store"
 msgid ""
 "There were problems copying some songs.  The following files could not be "
 "copied:"
-msgstr "Il y a un problème pour copier certains morceaux. Les fichiers suivant n'ont pas pu être copiés :"
+msgstr "Il y a eu un problème pour copier certains morceaux. Les fichiers suivant n'ont pas pu être copiés :"
 
 #: ui/organiseerrordialog.cpp:61
 msgid ""
 "There were problems deleting some songs.  The following files could not be "
 "deleted:"
-msgstr "Il y a un problème pour supprimer certains morceaux. Les fichiers suivant n'ont pas pu être supprimés :"
+msgstr "Il y a eu un problème pour supprimer certains morceaux. Les fichiers suivant n'ont pas pu être supprimés :"
 
 #: devices/deviceview.cpp:405
 msgid ""
@@ -5208,7 +5208,7 @@ msgstr "Ceci peut être modifié plus tard dans les préférences"
 msgid ""
 "This device must be connected and opened before Clementine can see what file"
 " formats it supports."
-msgstr "Ce périphérique doit être connecté et ouvert pour que Clementine puisse voir les formats de fichier qu'il supporte."
+msgstr "Ce périphérique doit être connecté et ouvert pour que Clementine puisse voir les formats de fichier qu'elle gère."
 
 #: ../bin/src/ui_deviceproperties.h:375
 msgid "This device supports the following file formats:"
@@ -5761,13 +5761,13 @@ msgstr "Vous êtes sur le point de télécharger les albums suivants"
 #, qt-format
 msgid ""
 "You are about to remove %1 playlists from your favorites, are you sure?"
-msgstr "Vous allez supprimer %1 listes de lectures de vos favoris. Êtes-vous sûr ?"
+msgstr "Vous allez supprimer %1 listes de lecture de vos favoris. Êtes-vous sûr ?"
 
 #: playlist/playlisttabbar.cpp:186
 msgid ""
 "You are about to remove a playlist which is not part of your favorite playlists: the playlist will be deleted (this action cannot be undone). \n"
 "Are you sure you want to continue?"
-msgstr "Vous êtes sur le point de fermer une liste de lecture qui ne fait pas partie de vos favoris : cette liste de lecture va être supprimée (cette action ne peut être annulée).\nÊtes-vous sur de vouloir continuer ?"
+msgstr "Vous êtes sur le point de fermer une liste de lecture qui ne fait pas partie de vos favoris : cette liste de lecture va être supprimée (cette action ne peut pas être annulée).\nÊtes-vous sûr de vouloir continuer ?"
 
 #: ../bin/src/ui_loginstatewidget.h:172
 msgid "You are not signed in."
@@ -5826,13 +5826,13 @@ msgid ""
 "You don't need to be logged in to search and to listen to music on "
 "SoundCloud. However, you need to login to access your playlists and your "
 "stream."
-msgstr "Vous ne devez pas être connecté à votre compte pour effectuer une recherche ou écouter de la musique sur SoundCloud. Par contre, vous devez être connecté à votre compte pour accéder à vos liste de lectures et votre flux."
+msgstr "Il n'est pas nécessaire d'être connecté à votre compte pour effectuer une recherche ou écouter de la musique sur SoundCloud. Par contre, vous devez être connecté pour accéder à vos listes de lecture et votre flux."
 
 #: internet/spotify/spotifyservice.cpp:204
 msgid ""
 "You have been logged out of Spotify, please re-enter your password in the "
 "Settings dialog."
-msgstr "Vous avez été déconnecté de Spotify, merci de ressaisir votre mot de passe dans la fenêtre des préférences."
+msgstr "Vous avez été déconnecté de Spotify, merci de ressaisir votre mot de passe dans la fenêtre des Préférences."
 
 #: internet/spotify/spotifysettingspage.cpp:160
 msgid "You have been logged out of Spotify, please re-enter your password."
