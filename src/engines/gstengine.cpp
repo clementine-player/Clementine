@@ -113,9 +113,6 @@ GstEngine::~GstEngine() {
 
   current_pipeline_.reset();
 
-  // Save configuration
-  gst_deinit();
-
   qDeleteAll(device_finders_);
 }
 
