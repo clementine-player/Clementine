@@ -141,6 +141,7 @@ void PlaylistContainer::SetManager(PlaylistManager* manager) {
           SLOT(SetViewModel(Playlist*)));
   connect(manager, SIGNAL(PlaylistAdded(int, QString, bool)),
           SLOT(PlaylistAdded(int, QString, bool)));
+  connect(manager, SIGNAL(PlaylistManagerInitialized()), SLOT(Started()));
   connect(manager, SIGNAL(PlaylistClosed(int)), SLOT(PlaylistClosed(int)));
   connect(manager, SIGNAL(PlaylistRenamed(int, QString)),
           SLOT(PlaylistRenamed(int, QString)));
@@ -267,6 +268,10 @@ void PlaylistContainer::PlaylistAdded(int id, const QString& name,
       SetTabBarVisible(true);
     }
   }
+}
+
+void PlaylistContainer::Started() {
+    starting_up_ = false;
 }
 
 void PlaylistContainer::PlaylistClosed(int id) {
