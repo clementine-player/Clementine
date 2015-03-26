@@ -43,9 +43,7 @@ class OAuthenticator : public QObject {
     // 'state' parameter of the URL, for services which allow only redirect URL
     // without parameters (e.g. SoundCloud). "state" parameter will be added to
     // the redirect URL by the service itself.
-    REMOTE_WITH_STATE = 2,
-
-    REMOTE_WITH_FRAGMENT = 3,
+    REMOTE_WITH_STATE = 2
   };
 
   OAuthenticator(const QString& client_id, const QString& client_secret,
