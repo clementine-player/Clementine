@@ -957,7 +957,12 @@ bool TagReader::ReadCloudFile(const QUrl& download_url, const QString& title,
                               int size, const QString& mime_type,
                               const QString& authorisation_header,
                               pb::tagreader::SongMetadata* song) const {
-  qLog(Debug) << "Loading tags from" << title;
+  qLog(Debug) << "Loading tags from"
+              << title
+              << download_url
+              << size
+              << mime_type
+              << authorisation_header;
 
   std::unique_ptr<CloudStream> stream(new CloudStream(
       download_url, title, size, authorisation_header, network_));

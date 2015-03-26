@@ -821,7 +821,7 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
   connect(ui_->action_kittens, SIGNAL(toggled(bool)), app_->network_remote(),
           SLOT(EnableKittens(bool)));
   // Hide the console
-  // connect(ui_->action_console, SIGNAL(triggered()), SLOT(ShowConsole()));
+  connect(ui_->action_console, SIGNAL(triggered()), SLOT(ShowConsole()));
   NowPlayingWidgetPositionChanged(ui_->now_playing->show_above_status_bar());
 
   // Load theme
