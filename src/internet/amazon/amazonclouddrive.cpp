@@ -96,10 +96,6 @@ void AmazonCloudDrive::ForgetCredentials() {
 void AmazonCloudDrive::ConnectFinished(OAuthenticator* oauth) {
   oauth->deleteLater();
 
-  qLog(Debug) << oauth->access_token()
-              << oauth->expiry_time()
-              << oauth->refresh_token();
-
   QSettings s;
   s.beginGroup(kSettingsGroup);
   s.setValue("refresh_token", oauth->refresh_token());
@@ -125,8 +121,6 @@ void AmazonCloudDrive::FetchEndpointFinished(QNetworkReply* reply) {
   QVariantMap response = parser.parse(reply).toMap();
   content_url_ = response["contentUrl"].toString();
   metadata_url_ = response["metadataUrl"].toString();
-  qLog(Debug) << "content_url:" << content_url_;
-  qLog(Debug) << "metadata_url:" << metadata_url_;
   QSettings s;
   s.beginGroup(kSettingsGroup);
   QString checkpoint = s.value("checkpoint", "").toString();
@@ -147,7 +141,6 @@ void AmazonCloudDrive::RequestChanges(const QString& checkpoint) {
   }
   QJson::Serializer serializer;
   QByteArray json = serializer.serialize(data);
-  qLog(Debug) << json;
 
   QNetworkRequest request(url);
   AddAuthorizationHeader(&request);
@@ -165,7 +158,6 @@ void AmazonCloudDrive::RequestChangesFinished(QNetworkReply* reply) {
 
   QJson::Parser parser;
   QVariantMap response = parser.parse(&buffer).toMap();
-  qLog(Debug) << response;
 
   QString checkpoint = response["checkpoint"].toString();
   QSettings settings;
@@ -214,11 +206,6 @@ void AmazonCloudDrive::RequestChangesFinished(QNetworkReply* reply) {
       song.set_title(node["name"].toString());
       song.set_filesize(content_properties["size"].toInt());
 
-      qLog(Debug) << "Adding:"
-                  << song.title()
-                  << mime_type
-                  << url
-                  << content_url;
       MaybeAddFileToDatabase(song, mime_type, content_url, QString("Bearer %1").arg(access_token_));
     }
   }
