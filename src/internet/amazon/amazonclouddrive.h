@@ -34,8 +34,9 @@ class AmazonCloudDrive : public CloudFileService {
 
  private:
   void FetchEndpoint();
-  void RequestChanges();
+  void RequestChanges(const QString& checkpoint);
   void AddAuthorizationHeader(QNetworkRequest* request);
+  void EnsureConnected();
 
  private slots:
   void ConnectFinished(OAuthenticator*);

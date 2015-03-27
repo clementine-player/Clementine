@@ -3,6 +3,7 @@
 #include <QIcon>
 
 #include <qjson/parser.h>
+#include <qjson/serializer.h>
 
 #include "core/application.h"
 #include "core/closure.h"
@@ -11,6 +12,7 @@
 #include "core/player.h"
 #include "internet/core/oauthenticator.h"
 #include "internet/amazon/amazonurlhandler.h"
+#include "library/librarybackend.h"
 #include "ui/settingsdialog.h"
 
 const char* AmazonCloudDrive::kServiceName = "Cloud Drive";
@@ -59,13 +61,29 @@ void AmazonCloudDrive::Connect() {
       // Amazon forbids arbitrary query parameters so REMOTE_WITH_STATE is
       // required.
       OAuthenticator::RedirectStyle::REMOTE_WITH_STATE, this);
-  oauth->StartAuthorisation(kOAuthEndpoint, kOAuthTokenEndpoint, kOAuthScope);
+
+  QSettings s;
+  s.beginGroup(kSettingsGroup);
+  QString refresh_token = s.value("refresh_token").toString();
+  if (refresh_token.isEmpty()) {
+    oauth->StartAuthorisation(kOAuthEndpoint, kOAuthTokenEndpoint, kOAuthScope);
+  } else {
+    oauth->RefreshAuthorisation(kOAuthTokenEndpoint, refresh_token);
+  }
+
   NewClosure(oauth, SIGNAL(Finished()), this,
             SLOT(ConnectFinished(OAuthenticator*)), oauth);
 }
 
-void AmazonCloudDrive::ForgetCredentials() {
+void AmazonCloudDrive::EnsureConnected() {
+}
 
+void AmazonCloudDrive::ForgetCredentials() {
+  QSettings s;
+  s.beginGroup(kSettingsGroup);
+  s.remove("");
+  access_token_ = QString();
+  expiry_time_ = QDateTime();
 }
 
 void AmazonCloudDrive::ConnectFinished(OAuthenticator* oauth) {
@@ -103,22 +121,41 @@ void AmazonCloudDrive::FetchEndpointFinished(QNetworkReply* reply) {
   metadata_url_ = response["metadataUrl"].toString();
   qLog(Debug) << "content_url:" << content_url_;
   qLog(Debug) << "metadata_url:" << metadata_url_;
-  RequestChanges();
+  QSettings s;
+  s.beginGroup(kSettingsGroup);
+  QString checkpoint = s.value("checkpoint", "").toString();
+  RequestChanges(checkpoint);
 }
 
-void AmazonCloudDrive::RequestChanges() {
+void AmazonCloudDrive::RequestChanges(const QString& checkpoint) {
   QUrl url(QString(kChangesEndpoint).arg(metadata_url_));
+
+  QVariantMap data;
+  data["includePurged"] = "true";
+  if (!checkpoint.isEmpty()) {
+    data["checkpoint"] = checkpoint;
+  }
+  QJson::Serializer serializer;
+  QByteArray json = serializer.serialize(data);
+  qLog(Debug) << json;
+
   QNetworkRequest request(url);
   AddAuthorizationHeader(&request);
-  QNetworkReply* reply = network_->post(request, QByteArray());
+  QNetworkReply* reply = network_->post(request, json);
   NewClosure(reply, SIGNAL(finished()), this,
              SLOT(RequestChangesFinished(QNetworkReply*)), reply);
 }
 
 void AmazonCloudDrive::RequestChangesFinished(QNetworkReply* reply) {
   reply->deleteLater();
+
+  QByteArray data = reply->readAll();
+  QBuffer buffer(&data);
+  buffer.open(QIODevice::ReadOnly);
+
   QJson::Parser parser;
-  QVariantMap response = parser.parse(reply).toMap();
+  QVariantMap response = parser.parse(&buffer).toMap();
+  qLog(Debug) << response;
 
   QString checkpoint = response["checkpoint"].toString();
   QSettings settings;
@@ -126,28 +163,32 @@ void AmazonCloudDrive::RequestChangesFinished(QNetworkReply* reply) {
   settings.setValue("checkpoint", checkpoint);
 
   QVariantList nodes = response["nodes"].toList();
-  qLog(Debug) << "nodes:" << nodes.length();
   for (const QVariant& n : nodes) {
     QVariantMap node = n.toMap();
-
-    qLog(Debug) << node["kind"] << node["status"];
-
     if (node["kind"].toString() == "FOLDER") {
+      // Skip directories.
       continue;
     }
+    QUrl url;
+    url.setScheme("amazonclouddrive");
+    url.setPath(node["id"].toString());
+
     QString status = node["status"].toString();
-    if (node["status"].toString() != "AVAILABLE") {
+    if (status == "PURGED") {
+      // Remove no longer available files.
+      Song song = library_backend_->GetSongByUrl(url);
+      if (song.is_valid()) {
+        library_backend_->DeleteSongs(SongList() << song);
+      }
+      continue;
+    }
+    if (status != "AVAILABLE") {
+      // Ignore any other statuses.
       continue;
     }
 
     QVariantMap content_properties = node["contentProperties"].toMap();
     QString mime_type = content_properties["contentType"].toString();
-
-    QUrl url;
-    url.setScheme("amazonclouddrive");
-    url.setPath(node["id"].toString());
-
-    qLog(Debug) << url << mime_type;
 
     if (ShouldIndexFile(url, mime_type)) {
       QString node_id = node["id"].toString();
@@ -170,6 +211,18 @@ void AmazonCloudDrive::RequestChangesFinished(QNetworkReply* reply) {
                   << content_url;
       MaybeAddFileToDatabase(song, mime_type, content_url, QString("Bearer %1").arg(access_token_));
     }
+  }
+
+  // The API potentially returns a second JSON dictionary appended with a
+  // newline at the end of the response with {"end": true} indicating that our
+  // client is up to date with the latest changes.
+  const int last_newline_index = data.lastIndexOf('\n');
+  QByteArray last_line = data.mid(last_newline_index);
+  QVariantMap end_json = parser.parse(last_line).toMap();
+  if (end_json.contains("end") && end_json["end"].toBool()) {
+    return;
+  } else {
+    RequestChanges(checkpoint);
   }
 }
 
