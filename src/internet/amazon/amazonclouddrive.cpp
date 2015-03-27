@@ -10,6 +10,7 @@
 #include "core/logging.h"
 #include "core/network.h"
 #include "core/player.h"
+#include "core/waitforsignal.h"
 #include "internet/core/oauthenticator.h"
 #include "internet/amazon/amazonurlhandler.h"
 #include "library/librarybackend.h"
@@ -49,6 +50,7 @@ bool AmazonCloudDrive::has_credentials() const {
 }
 
 QUrl AmazonCloudDrive::GetStreamingUrlFromSongId(const QUrl& url) {
+  EnsureConnected();  // Access token must be up to date.
   QUrl download_url(
       QString(kDownloadEndpoint).arg(content_url_).arg(url.path()));
   download_url.setFragment(QString("Bearer %1").arg(access_token_));
@@ -76,6 +78,11 @@ void AmazonCloudDrive::Connect() {
 }
 
 void AmazonCloudDrive::EnsureConnected() {
+  if (access_token_.isEmpty() ||
+      QDateTime::currentDateTime().secsTo(expiry_time_) < 60) {
+    Connect();
+    WaitForSignal(this, SIGNAL(Connected()));
+  }
 }
 
 void AmazonCloudDrive::ForgetCredentials() {
@@ -98,7 +105,6 @@ void AmazonCloudDrive::ConnectFinished(OAuthenticator* oauth) {
   s.setValue("refresh_token", oauth->refresh_token());
 
   access_token_ = oauth->access_token();
-  // TODO: Amazon expiry time is only an hour so refresh this regularly.
   expiry_time_ = oauth->expiry_time();
 
   FetchEndpoint();
@@ -125,9 +131,13 @@ void AmazonCloudDrive::FetchEndpointFinished(QNetworkReply* reply) {
   s.beginGroup(kSettingsGroup);
   QString checkpoint = s.value("checkpoint", "").toString();
   RequestChanges(checkpoint);
+
+  // We wait until we know the endpoint URLs before emitting Connected();
+  emit Connected();
 }
 
 void AmazonCloudDrive::RequestChanges(const QString& checkpoint) {
+  EnsureConnected();
   QUrl url(QString(kChangesEndpoint).arg(metadata_url_));
 
   QVariantMap data;
