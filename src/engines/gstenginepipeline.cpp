@@ -903,6 +903,15 @@ void GstEnginePipeline::SourceSetupCallback(GstURIDecodeBin* bin,
     g_object_set(element, "extra-headers", headers, nullptr);
     gst_structure_free(headers);
   }
+  if (g_object_class_find_property(G_OBJECT_GET_CLASS(element),
+                                   "extra-headers") &&
+      instance->url().host().contains("amazonaws.com")) {
+    GstStructure* headers = gst_structure_new(
+        "extra-headers", "Authorization", G_TYPE_STRING,
+        instance->url().fragment().toAscii().data(), nullptr);
+    g_object_set(element, "extra-headers", headers, nullptr);
+    gst_structure_free(headers);
+  }
 
   if (g_object_class_find_property(G_OBJECT_GET_CLASS(element), "user-agent")) {
     QString user_agent =
