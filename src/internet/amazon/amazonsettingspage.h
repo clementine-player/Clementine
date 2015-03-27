@@ -43,6 +43,7 @@ class AmazonSettingsPage : public SettingsPage {
  private slots:
   void LoginClicked();
   void LogoutClicked();
+  void Connected();
 
  private:
   Ui_AmazonSettingsPage* ui_;

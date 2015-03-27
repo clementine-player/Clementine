@@ -33,6 +33,7 @@ AmazonSettingsPage::AmazonSettingsPage(SettingsDialog* parent)
 
   connect(ui_->login_button, SIGNAL(clicked()), SLOT(LoginClicked()));
   connect(ui_->login_state, SIGNAL(LogoutClicked()), SLOT(LogoutClicked()));
+  connect(service_, SIGNAL(Connected()), SLOT(Connected()));
 
   dialog()->installEventFilter(this);
 }
@@ -43,10 +44,10 @@ void AmazonSettingsPage::Load() {
   QSettings s;
   s.beginGroup(AmazonCloudDrive::kSettingsGroup);
 
-  const QString name = s.value("name").toString();
+  const QString token = s.value("refresh_token").toString();
 
-  if (!name.isEmpty()) {
-    ui_->login_state->SetLoggedIn(LoginStateWidget::LoggedIn, name);
+  if (!token.isEmpty()) {
+    ui_->login_state->SetLoggedIn(LoginStateWidget::LoggedIn);
   }
 }
 
@@ -58,6 +59,7 @@ void AmazonSettingsPage::Save() {
 void AmazonSettingsPage::LoginClicked() {
   service_->Connect();
   ui_->login_button->setEnabled(false);
+  ui_->login_state->SetLoggedIn(LoginStateWidget::LoginInProgress);
 }
 
 bool AmazonSettingsPage::eventFilter(QObject* object, QEvent* event) {
@@ -72,4 +74,8 @@ bool AmazonSettingsPage::eventFilter(QObject* object, QEvent* event) {
 void AmazonSettingsPage::LogoutClicked() {
   service_->ForgetCredentials();
   ui_->login_state->SetLoggedIn(LoginStateWidget::LoggedOut);
+}
+
+void AmazonSettingsPage::Connected() {
+  ui_->login_state->SetLoggedIn(LoginStateWidget::LoggedIn);
 }
