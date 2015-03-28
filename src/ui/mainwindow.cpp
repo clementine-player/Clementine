@@ -423,9 +423,23 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
   // Playlist view actions
   ui_->action_next_playlist->setShortcuts(
       QList<QKeySequence>() << QKeySequence::fromString("Ctrl+Tab")
+#ifdef Q_OS_DARWIN
+                            // On OS X "Ctrl+Tab" == Cmd + Tab but this shorcut
+                            // is already used by default for switching between
+                            // applications.
+                            // I would have preferred to use Meta+Tab (which
+                            // means Ctrl+Tab on OS X), like in Firefox or
+                            // Chrome, but this doesn't work (probably at Qt bug)
+                            // and some applications (e.g. Qt creator) uses
+                            // Alt+Tab too so I believe it's a good shorcut anyway
+                            << QKeySequence::fromString("Alt+Tab")
+#endif Q_OS_DARWIN
                             << QKeySequence::fromString("Ctrl+PgDown"));
   ui_->action_previous_playlist->setShortcuts(
       QList<QKeySequence>() << QKeySequence::fromString("Ctrl+Shift+Tab")
+#ifdef Q_OS_DARWIN
+                            << QKeySequence::fromString("Alt+Shift+Tab")
+#endif // Q_OS_DARWIN
                             << QKeySequence::fromString("Ctrl+PgUp"));
   // Actions for switching tabs will be global to the entire window, so adding
   // them here
