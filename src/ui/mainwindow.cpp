@@ -433,7 +433,7 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
                             // and some applications (e.g. Qt creator) uses
                             // Alt+Tab too so I believe it's a good shorcut anyway
                             << QKeySequence::fromString("Alt+Tab")
-#endif Q_OS_DARWIN
+#endif // Q_OS_DARWIN
                             << QKeySequence::fromString("Ctrl+PgDown"));
   ui_->action_previous_playlist->setShortcuts(
       QList<QKeySequence>() << QKeySequence::fromString("Ctrl+Shift+Tab")
