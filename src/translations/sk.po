@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2015-03-09 12:06+0000\n"
+"PO-Revision-Date: 2015-03-29 20:28+0000\n"
 "Last-Translator: Ján Ďanovský <dagsoftware@yahoo.com>\n"
 "Language-Team: Slovak (http://www.transifex.com/projects/p/clementine/language/sk/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -769,6 +769,10 @@ msgstr "Vždy zobrazovať hlavné okno"
 msgid "Always start playing"
 msgstr "Hneď začne hrať"
 
+#: ../bin/src/ui_amazonsettingspage.h:103
+msgid "Amazon"
+msgstr "Amazon"
+
 #: internet/spotify/spotifyblobdownloader.cpp:67
 msgid ""
 "An additional plugin is required to use Spotify in Clementine.  Would you "
@@ -1028,7 +1032,7 @@ msgstr "Prehľadávať..."
 msgid "Buffer duration"
 msgstr "Dĺžka vyrovnávacej pamäte"
 
-#: engines/gstengine.cpp:876
+#: engines/gstengine.cpp:873
 msgid "Buffering"
 msgstr "Ukladá sa do vyrovnávacej pamäte"
 
@@ -1133,7 +1137,7 @@ msgstr "Vyberte priečinok vyrovnávacej pamäte na Vk.com"
 msgid "Choose a name for your smart playlist"
 msgstr "Vyberte názov pre váš inteligentný playlist"
 
-#: engines/gstengine.cpp:897
+#: engines/gstengine.cpp:894
 msgid "Choose automatically"
 msgstr "Vybrať automaticky"
 
@@ -1208,21 +1212,25 @@ msgid ""
 "a format that it can play."
 msgstr "Clementine môže automaticky konvertovať hudbu, ktorú ste skopírovali na toto zariadenie do formátu, ktorý môže prehrať."
 
+#: ../bin/src/ui_amazonsettingspage.h:104
+msgid "Clementine can play music that you have uploaded to Amazon Cloud Drive"
+msgstr "Clementine môže prehrávať hudbu, torú ste uploadli na Amazon Cloud Drive"
+
 #: ../bin/src/ui_boxsettingspage.h:104
 msgid "Clementine can play music that you have uploaded to Box"
-msgstr "Clementine môže prehrávať hudbu, ktorú ste nahrali do služby Box"
+msgstr "Clementine môže prehrávať hudbu, ktorú ste uploadli do služby Box"
 
 #: ../bin/src/ui_dropboxsettingspage.h:104
 msgid "Clementine can play music that you have uploaded to Dropbox"
-msgstr "Clementine môže prehrať hudbu, ktorú ste nahrali na Dropbox"
+msgstr "Clementine môže prehrať hudbu, ktorú ste uploadli na Dropbox"
 
 #: ../bin/src/ui_googledrivesettingspage.h:104
 msgid "Clementine can play music that you have uploaded to Google Drive"
-msgstr "Clementine môže prehrávať hudbu, ktorú ste nahrali na Google Drive"
+msgstr "Clementine môže prehrávať hudbu, ktorú ste uploadli na Google Drive"
 
 #: ../bin/src/ui_skydrivesettingspage.h:104
 msgid "Clementine can play music that you have uploaded to OneDrive"
-msgstr "Clementine môže prehrávať hudbu, ktorú ste nahrali do služby OneDrive"
+msgstr "Clementine môže prehrávať hudbu, ktorú ste uploadli do služby OneDrive"
 
 #: ../bin/src/ui_notificationssettingspage.h:437
 msgid "Clementine can show a message when the track changes."
@@ -1268,6 +1276,7 @@ msgid "Click to toggle between remaining time and total time"
 msgstr "Kliknite na prepínanie medzi zostávajúcim a celkovým časom"
 
 #: ../bin/src/ui_soundcloudsettingspage.h:107
+#: ../bin/src/ui_amazonsettingspage.h:106
 #: ../bin/src/ui_googledrivesettingspage.h:106
 #: ../bin/src/ui_dropboxsettingspage.h:106
 #: ../bin/src/ui_skydrivesettingspage.h:106
@@ -1672,7 +1681,7 @@ msgstr "Znížiť hlasitosť"
 msgid "Default background image"
 msgstr "Štandardný obrázok na pozadí"
 
-#: engines/gstengine.cpp:922
+#: engines/gstengine.cpp:919
 #, qt-format
 msgid "Default device on %1"
 msgstr "Východzie zariadenie na %1"
@@ -2521,7 +2530,7 @@ msgstr "Plné basy a výšky"
 msgid "Full Treble"
 msgstr "Plné výšky"
 
-#: ui/settingsdialog.cpp:138
+#: ui/settingsdialog.cpp:142
 msgid "General"
 msgstr "Všeobecné"
 
@@ -2837,7 +2846,7 @@ msgstr "Kontrola integrity"
 msgid "Internet"
 msgstr "Internet"
 
-#: ui/settingsdialog.cpp:161
+#: ui/settingsdialog.cpp:165
 msgid "Internet providers"
 msgstr "Internetoví poskytovatelia"
 
@@ -3071,7 +3080,7 @@ msgstr "Načítať obal z disku"
 msgid "Load cover from disk..."
 msgstr "Načítať obal z disku..."
 
-#: playlist/playlistcontainer.cpp:286
+#: playlist/playlistcontainer.cpp:291
 msgid "Load playlist"
 msgstr "Načítať playlist"
 
@@ -3126,6 +3135,7 @@ msgstr "Načítať súbory/URL adresy, nahradiť nimi aktuálny playlist"
 #: ../bin/src/ui_soundcloudsettingspage.h:106
 #: ../bin/src/ui_spotifysettingspage.h:211
 #: ../bin/src/ui_subsonicsettingspage.h:130
+#: ../bin/src/ui_amazonsettingspage.h:105
 #: ../bin/src/ui_lastfmsettingspage.h:153
 #: ../bin/src/ui_googledrivesettingspage.h:105
 #: ../bin/src/ui_dropboxsettingspage.h:105
@@ -3481,7 +3491,7 @@ msgstr "Žiadne obaly na exportovanie."
 msgid "No long blocks"
 msgstr "Žiadne dlhé bloky"
 
-#: playlist/playlistcontainer.cpp:371
+#: playlist/playlistcontainer.cpp:376
 msgid ""
 "No matches found.  Clear the search box to show the whole playlist again."
 msgstr "Nenájdené. Vymažte políčko hľadania pre opätovné zobrazenie celého playlistu."
@@ -3827,7 +3837,7 @@ msgstr "Prehrávanie"
 msgid "Player options"
 msgstr "Možnosti prehrávača"
 
-#: playlist/playlistcontainer.cpp:282 playlist/playlistlistcontainer.cpp:228
+#: playlist/playlistcontainer.cpp:287 playlist/playlistlistcontainer.cpp:228
 #: playlist/playlistmanager.cpp:87 playlist/playlistmanager.cpp:156
 #: playlist/playlistmanager.cpp:494 playlist/playlisttabbar.cpp:366
 msgid "Playlist"
@@ -5500,7 +5510,7 @@ msgstr "Použitých"
 msgid "User %1 doesn't have a Grooveshark Anywhere account"
 msgstr "Používateľ %1 nemá Grooveshark Anywhere účet"
 
-#: ui/settingsdialog.cpp:152
+#: ui/settingsdialog.cpp:156
 msgid "User interface"
 msgstr "Používateľské rozhranie"
 

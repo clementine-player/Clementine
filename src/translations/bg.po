@@ -8,15 +8,15 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # Ivailo Monev <xakepa10@gmail.com>, 2014
 # Kiril Kirilov <cybercop_montana@abv.bg>, 2013
-# mijiturka, 2014
+# mijiturka, 2014-2015
 # svetlisashkov <svetlisashkov@yahoo.com>, 2012
 # mandarinki <this.mail.sucks@mail.bg>, 2011
 # Valentin Laskov <laskov@festa.bg>, 2012
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2015-03-02 11:57+0000\n"
-"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
+"PO-Revision-Date: 2015-03-28 05:15+0000\n"
+"Last-Translator: mijiturka\n"
 "Language-Team: Bulgarian (http://www.transifex.com/projects/p/clementine/language/bg/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -445,7 +445,7 @@ msgstr "Добавяне на действие"
 
 #: ../bin/src/ui_transcodedialog.h:218
 msgid "Add all tracks from a directory and all its subdirectories"
-msgstr ""
+msgstr "Добавяне на всички песни от папка и всичките й подпапки"
 
 #: internet/internetradio/savedradio.cpp:112
 msgid "Add another stream..."
@@ -598,7 +598,7 @@ msgstr "Добавяне към списъците с песни от Spotify"
 
 #: internet/spotify/spotifyservice.cpp:610
 msgid "Add to Spotify starred"
-msgstr ""
+msgstr "Добавяне към оценените песни от Spotify"
 
 #: ui/mainwindow.cpp:1651
 msgid "Add to another playlist"
@@ -710,7 +710,7 @@ msgstr "Албуми без обложки"
 
 #: ../bin/src/ui_podcastsettingspage.h:279
 msgid "All"
-msgstr ""
+msgstr "Всички"
 
 #: ui/mainwindow.cpp:161
 msgid "All Files (*)"
@@ -774,6 +774,10 @@ msgstr "Винаги показвай основния прозорец"
 #: ../bin/src/ui_behavioursettingspage.h:304
 msgid "Always start playing"
 msgstr "Винаги започвай възпроизвеждането"
+
+#: ../bin/src/ui_amazonsettingspage.h:103
+msgid "Amazon"
+msgstr "Amazon"
 
 #: internet/spotify/spotifyblobdownloader.cpp:67
 msgid ""
@@ -1034,13 +1038,13 @@ msgstr "Избор…"
 msgid "Buffer duration"
 msgstr "Времетраене на буфера"
 
-#: engines/gstengine.cpp:876
+#: engines/gstengine.cpp:873
 msgid "Buffering"
 msgstr "Буфериране"
 
 #: internet/seafile/seafileservice.cpp:226
 msgid "Building Seafile index..."
-msgstr ""
+msgstr "Построявам Seafile индекс..."
 
 #: ../bin/src/ui_globalsearchview.h:211
 msgid "But these sources are disabled:"
@@ -1081,7 +1085,7 @@ msgstr "Отказ"
 
 #: internet/podcasts/podcastservice.cpp:439
 msgid "Cancel download"
-msgstr ""
+msgstr "Откажи свалянето"
 
 #: internet/vk/vkservice.cpp:626
 msgid ""
@@ -1139,7 +1143,7 @@ msgstr "Избор на Vk.com кеш папка"
 msgid "Choose a name for your smart playlist"
 msgstr "Изберете име за вашият умен списък с песни"
 
-#: engines/gstengine.cpp:897
+#: engines/gstengine.cpp:894
 msgid "Choose automatically"
 msgstr "Автоматичен избор"
 
@@ -1165,7 +1169,7 @@ msgstr "Избор на директория за сваляне на подка
 
 #: ../bin/src/ui_internetshowsettingspage.h:89
 msgid "Choose the internet services you want to show."
-msgstr ""
+msgstr "Изберете интернет услугите, които искате да бъдат показани."
 
 #: ../bin/src/ui_songinfosettingspage.h:160
 msgid ""
@@ -1213,6 +1217,10 @@ msgid ""
 "Clementine can automatically convert the music you copy to this device into "
 "a format that it can play."
 msgstr "Clementine може автоматично да конвертира музиката, която копирате в това устройство във формата, в който то може да я изпълнява."
+
+#: ../bin/src/ui_amazonsettingspage.h:104
+msgid "Clementine can play music that you have uploaded to Amazon Cloud Drive"
+msgstr "Clementine може да възпроизвежда музикални файлове, които сте качили в Amazon Cloud Drive"
 
 #: ../bin/src/ui_boxsettingspage.h:104
 msgid "Clementine can play music that you have uploaded to Box"
@@ -1274,6 +1282,7 @@ msgid "Click to toggle between remaining time and total time"
 msgstr "Цъкнете за да превключите между оставащо и пълно време"
 
 #: ../bin/src/ui_soundcloudsettingspage.h:107
+#: ../bin/src/ui_amazonsettingspage.h:106
 #: ../bin/src/ui_googledrivesettingspage.h:106
 #: ../bin/src/ui_dropboxsettingspage.h:106
 #: ../bin/src/ui_skydrivesettingspage.h:106
@@ -1432,11 +1441,11 @@ msgstr "Конвертиране само музиката, която това 
 
 #: ../bin/src/ui_networkremotesettingspage.h:248
 msgid "Convert lossless audiofiles before sending them to the remote."
-msgstr ""
+msgstr "Конвертира lossless аудио файлове преди да ги изпрати отдалечено."
 
 #: ../bin/src/ui_networkremotesettingspage.h:250
 msgid "Convert lossless files"
-msgstr ""
+msgstr "Конвертиране на lossless файлове"
 
 #: internet/vk/vkservice.cpp:324
 msgid "Copy share url to clipboard"
@@ -1678,7 +1687,7 @@ msgstr "Намаляване на звука"
 msgid "Default background image"
 msgstr "Фоново изображение по подразбиране"
 
-#: engines/gstengine.cpp:922
+#: engines/gstengine.cpp:919
 #, qt-format
 msgid "Default device on %1"
 msgstr "Устройство по подразбиране на %1"
@@ -1882,7 +1891,7 @@ msgstr "Да не се показва в различни изпълнители
 
 #: ../bin/src/ui_podcastsettingspage.h:278
 msgid "Don't show listened episodes"
-msgstr ""
+msgstr "Не показвай изслушани епизоди"
 
 #: widgets/osd.cpp:285 ../bin/src/ui_playlistsequence.h:107
 msgid "Don't shuffle"
@@ -1934,7 +1943,7 @@ msgstr "Опашка на свалянето"
 
 #: ../bin/src/ui_networkremotesettingspage.h:246
 msgid "Download settings"
-msgstr ""
+msgstr "Настройки на сваляне"
 
 #: ../bin/src/ui_networkremotesettingspage.h:253
 msgid "Download the Android app"
@@ -2062,7 +2071,7 @@ msgstr "Разреши бързите клавиши, само когато Clem
 
 #: ../bin/src/ui_behavioursettingspage.h:278
 msgid "Enable song metadata inline edition with click"
-msgstr ""
+msgstr "Позволи директна поправка на метаданните за песента при щракане"
 
 #: ../bin/src/ui_globalsearchsettingspage.h:147
 msgid ""
@@ -2527,7 +2536,7 @@ msgstr "Пълен бас + Високи"
 msgid "Full Treble"
 msgstr "Пълни високи"
 
-#: ui/settingsdialog.cpp:138
+#: ui/settingsdialog.cpp:142
 msgid "General"
 msgstr "Общи"
 
@@ -2554,11 +2563,11 @@ msgstr "Вземете линк за споделяне на тази песен
 #: internet/spotify/spotifyservice.cpp:633
 #: internet/spotify/spotifyservice.cpp:674
 msgid "Get a URL to share this Spotify song"
-msgstr ""
+msgstr "Вземете линк за споделяне на тази песен в Spotify"
 
 #: internet/spotify/spotifyservice.cpp:665
 msgid "Get a URL to share this playlist"
-msgstr ""
+msgstr "Вземете линк за споделяне на този плейлист"
 
 #: internet/grooveshark/groovesharkservice.cpp:830
 msgid "Getting Grooveshark popular songs"
@@ -2700,7 +2709,7 @@ msgstr "Високо (1024x1024)"
 
 #: ui/equalizer.cpp:128
 msgid "HipHop"
-msgstr ""
+msgstr "Хип Хоп"
 
 #: internet/subsonic/subsonicsettingspage.cpp:134
 msgid "Host not found, check server URL. Example: http://localhost:4040/"
@@ -2734,7 +2743,7 @@ msgstr "Идентифициране на песента"
 msgid ""
 "If activated, clicking a selected song in the playlist view will let you "
 "edit the tag value directly"
-msgstr ""
+msgstr "Ако е активирано, щракането върху селектирана песен от плейлиста ще позволява директно модифициране на тага"
 
 #: devices/devicemanager.cpp:566 devices/devicemanager.cpp:577
 msgid ""
@@ -2760,7 +2769,7 @@ msgstr "Изображения (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm
 
 #: ../bin/src/ui_transcodedialog.h:220
 msgid "Import..."
-msgstr ""
+msgstr "Импорт..."
 
 #: core/utilities.cpp:151
 #, qt-format
@@ -2843,7 +2852,7 @@ msgstr "Проверка на интегритета"
 msgid "Internet"
 msgstr "Интернет"
 
-#: ui/settingsdialog.cpp:161
+#: ui/settingsdialog.cpp:165
 msgid "Internet providers"
 msgstr "Интернет доставчици"
 
@@ -2914,7 +2923,7 @@ msgstr "Jamendo база от данни"
 
 #: ../bin/src/ui_behavioursettingspage.h:289
 msgid "Jump to previous song right away"
-msgstr ""
+msgstr "Премини към предната песен веднага"
 
 #: ../bin/src/ui_mainwindow.h:689
 msgid "Jump to the currently playing track"
@@ -2947,7 +2956,7 @@ msgstr "Котенца"
 
 #: ui/equalizer.cpp:131
 msgid "Kuduro"
-msgstr ""
+msgstr "Kuduro"
 
 #: ../bin/src/ui_behavioursettingspage.h:263
 msgid "Language"
@@ -2971,7 +2980,7 @@ msgstr "Голяма обложка (подробности отдолу)"
 
 #: widgets/nowplayingwidget.cpp:102
 msgid "Large album cover (no details)"
-msgstr ""
+msgstr "Голяма обложка (без подробности)"
 
 #: widgets/fancytabwidget.cpp:662
 msgid "Large sidebar"
@@ -3077,7 +3086,7 @@ msgstr "Зареждане на обложка от диск"
 msgid "Load cover from disk..."
 msgstr "Зареждане на обложката от диска..."
 
-#: playlist/playlistcontainer.cpp:286
+#: playlist/playlistcontainer.cpp:291
 msgid "Load playlist"
 msgstr "Зареждане на списък с песни"
 
@@ -3132,6 +3141,7 @@ msgstr "Зареждане на файлове/URL адреси, заместв�
 #: ../bin/src/ui_soundcloudsettingspage.h:106
 #: ../bin/src/ui_spotifysettingspage.h:211
 #: ../bin/src/ui_subsonicsettingspage.h:130
+#: ../bin/src/ui_amazonsettingspage.h:105
 #: ../bin/src/ui_lastfmsettingspage.h:153
 #: ../bin/src/ui_googledrivesettingspage.h:105
 #: ../bin/src/ui_dropboxsettingspage.h:105
@@ -3487,7 +3497,7 @@ msgstr "Няма обложки за експортиране."
 msgid "No long blocks"
 msgstr "No long blocks"
 
-#: playlist/playlistcontainer.cpp:371
+#: playlist/playlistcontainer.cpp:376
 msgid ""
 "No matches found.  Clear the search box to show the whole playlist again."
 msgstr "Няма намерени съвпадения. Изтрийте текста, за да видите отново цялото съдържание."
@@ -3568,7 +3578,7 @@ msgstr "В момента се изпълнява"
 
 #: ../bin/src/ui_podcastsettingspage.h:280
 msgid "Number of episodes to show"
-msgstr ""
+msgstr "Брой епизоди за показване"
 
 #: ui/notificationssettingspage.cpp:36
 msgid "OSD Preview"
@@ -3649,7 +3659,7 @@ msgstr "Отваряне на OPML файл..."
 
 #: transcoder/transcodedialog.cpp:240
 msgid "Open a directory to import music from"
-msgstr ""
+msgstr "Отваряне на папка за импортиране на музика"
 
 #: ../bin/src/ui_deviceproperties.h:382
 msgid "Open device"
@@ -3833,7 +3843,7 @@ msgstr "Възпроизвеждане"
 msgid "Player options"
 msgstr "Настройки на плеър"
 
-#: playlist/playlistcontainer.cpp:282 playlist/playlistlistcontainer.cpp:228
+#: playlist/playlistcontainer.cpp:287 playlist/playlistlistcontainer.cpp:228
 #: playlist/playlistmanager.cpp:87 playlist/playlistmanager.cpp:156
 #: playlist/playlistmanager.cpp:494 playlist/playlisttabbar.cpp:366
 msgid "Playlist"
@@ -3954,7 +3964,7 @@ msgstr "Натиснете клавишна комбинация, която д�
 
 #: ../bin/src/ui_behavioursettingspage.h:286
 msgid "Pressing \"Previous\" in player will..."
-msgstr ""
+msgstr "Натискане на \"Предишна\" в плейъра ще..."
 
 #: ../bin/src/ui_notificationssettingspage.h:458
 msgid "Pretty OSD options"
@@ -4268,7 +4278,7 @@ msgstr "Изчистване на броя възпроизвеждания"
 
 #: ../bin/src/ui_behavioursettingspage.h:290
 msgid "Restart song, then jump to previous if pressed again"
-msgstr ""
+msgstr "Започни песента отначало, после премини към предната, ако се натисне още веднъж"
 
 #: core/commandlineoptions.cpp:164
 msgid ""
@@ -4313,7 +4323,7 @@ msgstr "Печене на CD"
 
 #: ../bin/src/ui_mainwindow.h:716
 msgid "Rip audio CD"
-msgstr ""
+msgstr "Печене на аудио CD"
 
 #: ui/equalizer.cpp:148
 msgid "Rock"
@@ -4631,7 +4641,7 @@ msgstr "Показване на известяване при промяна с�
 
 #: ../bin/src/ui_notificationssettingspage.h:449
 msgid "Show a notification when I pause playback"
-msgstr ""
+msgstr "Показване на известяване при пауза"
 
 #: ../bin/src/ui_notificationssettingspage.h:442
 msgid "Show a popup from the system tray"
@@ -4696,7 +4706,7 @@ msgstr "Показване само на неотбелязани"
 
 #: ../bin/src/ui_vksettingspage.h:224
 msgid "Show playing song on your page"
-msgstr ""
+msgstr "Показване на песента, която свири, на страницата ти"
 
 #: ../bin/src/ui_globalsearchsettingspage.h:153
 msgid "Show search suggestions"
@@ -4881,7 +4891,7 @@ msgstr "Грешка в вписване в Spotify"
 
 #: internet/spotify/spotifyservice.cpp:835
 msgid "Spotify playlist's URL"
-msgstr ""
+msgstr "URL на плейлист в Spotify"
 
 #: ../bin/src/ui_spotifysettingspage.h:212
 msgid "Spotify plugin"
@@ -4893,7 +4903,7 @@ msgstr "Приставката за Spotify не е инсталирана"
 
 #: internet/spotify/spotifyservice.cpp:826
 msgid "Spotify song's URL"
-msgstr ""
+msgstr "Линк към песента в Spotify"
 
 #: ../bin/src/ui_transcoderoptionsmp3.h:201
 msgid "Standard"
@@ -5175,7 +5185,7 @@ msgstr "Този албум не е наличен в избраният фор�
 
 #: ../bin/src/ui_playlistsaveoptionsdialog.h:98
 msgid "This can be changed later through the preferences"
-msgstr ""
+msgstr "Това може да се промени по-късно от предпочитанията"
 
 #: ../bin/src/ui_deviceproperties.h:381
 msgid ""
@@ -5506,7 +5516,7 @@ msgstr "Използван"
 msgid "User %1 doesn't have a Grooveshark Anywhere account"
 msgstr "Потребител %1 няма Grooveshark Anywhere акаунт."
 
-#: ui/settingsdialog.cpp:152
+#: ui/settingsdialog.cpp:156
 msgid "User interface"
 msgstr "Потребителски интерфейс"
 

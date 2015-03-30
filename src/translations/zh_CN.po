@@ -18,8 +18,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2015-03-05 12:21+0000\n"
-"Last-Translator: zhangmin <zm1990s@gmail.com>\n"
+"PO-Revision-Date: 2015-03-27 15:10+0000\n"
+"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/projects/p/clementine/language/zh_CN/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -778,6 +778,10 @@ msgstr "总是显示主窗口"
 msgid "Always start playing"
 msgstr "总是开始播放"
 
+#: ../bin/src/ui_amazonsettingspage.h:103
+msgid "Amazon"
+msgstr ""
+
 #: internet/spotify/spotifyblobdownloader.cpp:67
 msgid ""
 "An additional plugin is required to use Spotify in Clementine.  Would you "
@@ -1037,7 +1041,7 @@ msgstr "浏览..."
 msgid "Buffer duration"
 msgstr "缓冲时长"
 
-#: engines/gstengine.cpp:876
+#: engines/gstengine.cpp:873
 msgid "Buffering"
 msgstr "缓冲中"
 
@@ -1142,7 +1146,7 @@ msgstr "选择 VK.com 缓存目录"
 msgid "Choose a name for your smart playlist"
 msgstr "为您的智能播放列表起名"
 
-#: engines/gstengine.cpp:897
+#: engines/gstengine.cpp:894
 msgid "Choose automatically"
 msgstr "自动选择"
 
@@ -1217,6 +1221,10 @@ msgid ""
 "a format that it can play."
 msgstr "Clementine 可自动将要复制到设备的文件转换为它可以播放的格式。"
 
+#: ../bin/src/ui_amazonsettingspage.h:104
+msgid "Clementine can play music that you have uploaded to Amazon Cloud Drive"
+msgstr ""
+
 #: ../bin/src/ui_boxsettingspage.h:104
 msgid "Clementine can play music that you have uploaded to Box"
 msgstr "Clementine 可以播放你上传到 Box 云存储的音乐"
@@ -1277,6 +1285,7 @@ msgid "Click to toggle between remaining time and total time"
 msgstr "单击切换剩余时间和总计时间模式"
 
 #: ../bin/src/ui_soundcloudsettingspage.h:107
+#: ../bin/src/ui_amazonsettingspage.h:106
 #: ../bin/src/ui_googledrivesettingspage.h:106
 #: ../bin/src/ui_dropboxsettingspage.h:106
 #: ../bin/src/ui_skydrivesettingspage.h:106
@@ -1681,7 +1690,7 @@ msgstr "降低音量"
 msgid "Default background image"
 msgstr "默认背景图片"
 
-#: engines/gstengine.cpp:922
+#: engines/gstengine.cpp:919
 #, qt-format
 msgid "Default device on %1"
 msgstr "%1 的默认设备"
@@ -2530,7 +2539,7 @@ msgstr "低音饱满 + 高音清丽"
 msgid "Full Treble"
 msgstr "高音"
 
-#: ui/settingsdialog.cpp:138
+#: ui/settingsdialog.cpp:142
 msgid "General"
 msgstr "一般"
 
@@ -2846,7 +2855,7 @@ msgstr "完整性检验"
 msgid "Internet"
 msgstr "互联网"
 
-#: ui/settingsdialog.cpp:161
+#: ui/settingsdialog.cpp:165
 msgid "Internet providers"
 msgstr "互联网提供商"
 
@@ -3080,7 +3089,7 @@ msgstr "从磁盘读取封面"
 msgid "Load cover from disk..."
 msgstr "从磁盘载入封面..."
 
-#: playlist/playlistcontainer.cpp:286
+#: playlist/playlistcontainer.cpp:291
 msgid "Load playlist"
 msgstr "载入播放列表"
 
@@ -3135,6 +3144,7 @@ msgstr "载入文件或URL，替换当前播放列表"
 #: ../bin/src/ui_soundcloudsettingspage.h:106
 #: ../bin/src/ui_spotifysettingspage.h:211
 #: ../bin/src/ui_subsonicsettingspage.h:130
+#: ../bin/src/ui_amazonsettingspage.h:105
 #: ../bin/src/ui_lastfmsettingspage.h:153
 #: ../bin/src/ui_googledrivesettingspage.h:105
 #: ../bin/src/ui_dropboxsettingspage.h:105
@@ -3490,7 +3500,7 @@ msgstr "无封面可供导出。"
 msgid "No long blocks"
 msgstr "无长块"
 
-#: playlist/playlistcontainer.cpp:371
+#: playlist/playlistcontainer.cpp:376
 msgid ""
 "No matches found.  Clear the search box to show the whole playlist again."
 msgstr "无匹配。清空搜索框以重新显示整个播放列表。"
@@ -3836,7 +3846,7 @@ msgstr "播放"
 msgid "Player options"
 msgstr "播放器选项"
 
-#: playlist/playlistcontainer.cpp:282 playlist/playlistlistcontainer.cpp:228
+#: playlist/playlistcontainer.cpp:287 playlist/playlistlistcontainer.cpp:228
 #: playlist/playlistmanager.cpp:87 playlist/playlistmanager.cpp:156
 #: playlist/playlistmanager.cpp:494 playlist/playlisttabbar.cpp:366
 msgid "Playlist"
@@ -5509,7 +5519,7 @@ msgstr "已使用"
 msgid "User %1 doesn't have a Grooveshark Anywhere account"
 msgstr "用户 %1 没有 Grooveshark Anywhere 帐户"
 
-#: ui/settingsdialog.cpp:152
+#: ui/settingsdialog.cpp:156
 msgid "User interface"
 msgstr "用户界面"
 

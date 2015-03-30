@@ -18,7 +18,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2015-03-02 11:57+0000\n"
+"PO-Revision-Date: 2015-03-27 15:10+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Romanian (http://www.transifex.com/projects/p/clementine/language/ro/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -778,6 +778,10 @@ msgstr "Arată întotdeauna fereastra principală"
 msgid "Always start playing"
 msgstr "Întotdeauna pornește redarea"
 
+#: ../bin/src/ui_amazonsettingspage.h:103
+msgid "Amazon"
+msgstr ""
+
 #: internet/spotify/spotifyblobdownloader.cpp:67
 msgid ""
 "An additional plugin is required to use Spotify in Clementine.  Would you "
@@ -1037,7 +1041,7 @@ msgstr "Navighează..."
 msgid "Buffer duration"
 msgstr "Durată memorie tampon"
 
-#: engines/gstengine.cpp:876
+#: engines/gstengine.cpp:873
 msgid "Buffering"
 msgstr "Se încarcă memoria tampon"
 
@@ -1142,7 +1146,7 @@ msgstr "Alegeți directorul cache pentru Vk.com"
 msgid "Choose a name for your smart playlist"
 msgstr "Alegeți un nume pentru lista de redare inteligentă"
 
-#: engines/gstengine.cpp:897
+#: engines/gstengine.cpp:894
 msgid "Choose automatically"
 msgstr "Alege automat"
 
@@ -1217,6 +1221,10 @@ msgid ""
 "a format that it can play."
 msgstr "Clementine poate converti automat muzica copiată pe acest dispozitiv într-un format pe care îl poate reda."
 
+#: ../bin/src/ui_amazonsettingspage.h:104
+msgid "Clementine can play music that you have uploaded to Amazon Cloud Drive"
+msgstr ""
+
 #: ../bin/src/ui_boxsettingspage.h:104
 msgid "Clementine can play music that you have uploaded to Box"
 msgstr "Clementine poate reda muzica pe care ați încărcat-o pe Box"
@@ -1277,6 +1285,7 @@ msgid "Click to toggle between remaining time and total time"
 msgstr "Apăsați aici pentru a comuta între timpul rămas și durata totală"
 
 #: ../bin/src/ui_soundcloudsettingspage.h:107
+#: ../bin/src/ui_amazonsettingspage.h:106
 #: ../bin/src/ui_googledrivesettingspage.h:106
 #: ../bin/src/ui_dropboxsettingspage.h:106
 #: ../bin/src/ui_skydrivesettingspage.h:106
@@ -1681,7 +1690,7 @@ msgstr "Scade volumul"
 msgid "Default background image"
 msgstr "Imagine de fundal implicită"
 
-#: engines/gstengine.cpp:922
+#: engines/gstengine.cpp:919
 #, qt-format
 msgid "Default device on %1"
 msgstr "Dispozitiv implicit pe %1"
@@ -2530,7 +2539,7 @@ msgstr "Bas complet + Înalte"
 msgid "Full Treble"
 msgstr "Înalte complet"
 
-#: ui/settingsdialog.cpp:138
+#: ui/settingsdialog.cpp:142
 msgid "General"
 msgstr "General"
 
@@ -2846,7 +2855,7 @@ msgstr "Verificare integritate"
 msgid "Internet"
 msgstr "Internet"
 
-#: ui/settingsdialog.cpp:161
+#: ui/settingsdialog.cpp:165
 msgid "Internet providers"
 msgstr "Furnizori de internet"
 
@@ -3080,7 +3089,7 @@ msgstr "Încarcă copertă de pe disc"
 msgid "Load cover from disk..."
 msgstr "Încarcă coperta pentru disc..."
 
-#: playlist/playlistcontainer.cpp:286
+#: playlist/playlistcontainer.cpp:291
 msgid "Load playlist"
 msgstr "Încarcă lista de redare"
 
@@ -3135,6 +3144,7 @@ msgstr "Încarcă fișiere/URL-uri, înlocuind lista de redare curentă"
 #: ../bin/src/ui_soundcloudsettingspage.h:106
 #: ../bin/src/ui_spotifysettingspage.h:211
 #: ../bin/src/ui_subsonicsettingspage.h:130
+#: ../bin/src/ui_amazonsettingspage.h:105
 #: ../bin/src/ui_lastfmsettingspage.h:153
 #: ../bin/src/ui_googledrivesettingspage.h:105
 #: ../bin/src/ui_dropboxsettingspage.h:105
@@ -3490,7 +3500,7 @@ msgstr "Nu sunt coperți de exportat."
 msgid "No long blocks"
 msgstr "Fără blocuri lungi"
 
-#: playlist/playlistcontainer.cpp:371
+#: playlist/playlistcontainer.cpp:376
 msgid ""
 "No matches found.  Clear the search box to show the whole playlist again."
 msgstr "Nu s-au găsit potriviri. Curățați căsuța de căutare pentru a arăta din nou întreaga listă de redare."
@@ -3836,7 +3846,7 @@ msgstr "Redare"
 msgid "Player options"
 msgstr "Opțiuni player"
 
-#: playlist/playlistcontainer.cpp:282 playlist/playlistlistcontainer.cpp:228
+#: playlist/playlistcontainer.cpp:287 playlist/playlistlistcontainer.cpp:228
 #: playlist/playlistmanager.cpp:87 playlist/playlistmanager.cpp:156
 #: playlist/playlistmanager.cpp:494 playlist/playlisttabbar.cpp:366
 msgid "Playlist"
@@ -5509,7 +5519,7 @@ msgstr "Utilizat"
 msgid "User %1 doesn't have a Grooveshark Anywhere account"
 msgstr "Utilizatorul %1 nu are un cont Grooveshark Anywhere"
 
-#: ui/settingsdialog.cpp:152
+#: ui/settingsdialog.cpp:156
 msgid "User interface"
 msgstr "Interfață utilizator "
 

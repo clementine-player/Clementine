@@ -13,7 +13,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2015-03-02 11:57+0000\n"
+"PO-Revision-Date: 2015-03-27 15:10+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Hebrew (http://www.transifex.com/projects/p/clementine/language/he/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -773,6 +773,10 @@ msgstr "תמיד יש להציג את החלון המרכזי"
 msgid "Always start playing"
 msgstr "תמיד להתחיל לנגן"
 
+#: ../bin/src/ui_amazonsettingspage.h:103
+msgid "Amazon"
+msgstr ""
+
 #: internet/spotify/spotifyblobdownloader.cpp:67
 msgid ""
 "An additional plugin is required to use Spotify in Clementine.  Would you "
@@ -1032,7 +1036,7 @@ msgstr "עיון..."
 msgid "Buffer duration"
 msgstr "משך הבאפר (buffer)"
 
-#: engines/gstengine.cpp:876
+#: engines/gstengine.cpp:873
 msgid "Buffering"
 msgstr "באגירה"
 
@@ -1137,7 +1141,7 @@ msgstr ""
 msgid "Choose a name for your smart playlist"
 msgstr "נא לבחור בשם עבור רשימת ההשמעה החכמה"
 
-#: engines/gstengine.cpp:897
+#: engines/gstengine.cpp:894
 msgid "Choose automatically"
 msgstr "בחירה אוטומטית"
 
@@ -1212,6 +1216,10 @@ msgid ""
 "a format that it can play."
 msgstr "באפשרות Clementine להמיר אוטומטית כל מוזיקה המעותקת להתקן לתבנית שההתקן מסוגל לנגן."
 
+#: ../bin/src/ui_amazonsettingspage.h:104
+msgid "Clementine can play music that you have uploaded to Amazon Cloud Drive"
+msgstr ""
+
 #: ../bin/src/ui_boxsettingspage.h:104
 msgid "Clementine can play music that you have uploaded to Box"
 msgstr "Clementine מאפשר לנגן מוזיקה שהעלאת ל-Box"
@@ -1272,6 +1280,7 @@ msgid "Click to toggle between remaining time and total time"
 msgstr "יש ללחוץ כאן על מנת לעבור בין הצגת הזמן הנותר לזמן הכולל"
 
 #: ../bin/src/ui_soundcloudsettingspage.h:107
+#: ../bin/src/ui_amazonsettingspage.h:106
 #: ../bin/src/ui_googledrivesettingspage.h:106
 #: ../bin/src/ui_dropboxsettingspage.h:106
 #: ../bin/src/ui_skydrivesettingspage.h:106
@@ -1676,7 +1685,7 @@ msgstr "הנמכת עצמת השמע"
 msgid "Default background image"
 msgstr "תמונת בררת המחדל לרקע"
 
-#: engines/gstengine.cpp:922
+#: engines/gstengine.cpp:919
 #, qt-format
 msgid "Default device on %1"
 msgstr ""
@@ -2525,7 +2534,7 @@ msgstr "בס מלא + טרבל"
 msgid "Full Treble"
 msgstr "טרבל מלא"
 
-#: ui/settingsdialog.cpp:138
+#: ui/settingsdialog.cpp:142
 msgid "General"
 msgstr "כללי"
 
@@ -2841,7 +2850,7 @@ msgstr "בדיקת שלמות"
 msgid "Internet"
 msgstr "אינטרנט"
 
-#: ui/settingsdialog.cpp:161
+#: ui/settingsdialog.cpp:165
 msgid "Internet providers"
 msgstr "ספקי אינטרנט"
 
@@ -3075,7 +3084,7 @@ msgstr "טעינת עטיפה מדיסק"
 msgid "Load cover from disk..."
 msgstr "טעינת עטיפה מהדיסק..."
 
-#: playlist/playlistcontainer.cpp:286
+#: playlist/playlistcontainer.cpp:291
 msgid "Load playlist"
 msgstr "טעינת רשימת השמעה"
 
@@ -3130,6 +3139,7 @@ msgstr "טעינת קבצים/כתובות, תוך החלפת רשימת ההש�
 #: ../bin/src/ui_soundcloudsettingspage.h:106
 #: ../bin/src/ui_spotifysettingspage.h:211
 #: ../bin/src/ui_subsonicsettingspage.h:130
+#: ../bin/src/ui_amazonsettingspage.h:105
 #: ../bin/src/ui_lastfmsettingspage.h:153
 #: ../bin/src/ui_googledrivesettingspage.h:105
 #: ../bin/src/ui_dropboxsettingspage.h:105
@@ -3485,7 +3495,7 @@ msgstr "אין עטיפות לייצא."
 msgid "No long blocks"
 msgstr "ללא מקטעים ארוכים"
 
-#: playlist/playlistcontainer.cpp:371
+#: playlist/playlistcontainer.cpp:376
 msgid ""
 "No matches found.  Clear the search box to show the whole playlist again."
 msgstr "לא נמצא פריט תואם. יש לנקות את תיבת החיפוש על מנת לראות את כל רשימת ההשמעה שוב."
@@ -3831,7 +3841,7 @@ msgstr "השמעה"
 msgid "Player options"
 msgstr "אפשרויות נגן"
 
-#: playlist/playlistcontainer.cpp:282 playlist/playlistlistcontainer.cpp:228
+#: playlist/playlistcontainer.cpp:287 playlist/playlistlistcontainer.cpp:228
 #: playlist/playlistmanager.cpp:87 playlist/playlistmanager.cpp:156
 #: playlist/playlistmanager.cpp:494 playlist/playlisttabbar.cpp:366
 msgid "Playlist"
@@ -5504,7 +5514,7 @@ msgstr "בשימוש"
 msgid "User %1 doesn't have a Grooveshark Anywhere account"
 msgstr "למשתמש %1 אין חשבון Grooveshark Anywhere"
 
-#: ui/settingsdialog.cpp:152
+#: ui/settingsdialog.cpp:156
 msgid "User interface"
 msgstr "מנשק משתמש"
 

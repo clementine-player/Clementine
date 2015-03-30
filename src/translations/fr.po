@@ -42,8 +42,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2015-03-22 09:52+0000\n"
-"Last-Translator: jipux\n"
+"PO-Revision-Date: 2015-03-28 16:13+0000\n"
+"Last-Translator: arnaudbienner <arnaud.bienner@gmail.com>\n"
 "Language-Team: French (http://www.transifex.com/projects/p/clementine/language/fr/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -802,6 +802,10 @@ msgstr "Toujours afficher la fenêtre principale"
 msgid "Always start playing"
 msgstr "Toujours commencer à lire"
 
+#: ../bin/src/ui_amazonsettingspage.h:103
+msgid "Amazon"
+msgstr "Amazon"
+
 #: internet/spotify/spotifyblobdownloader.cpp:67
 msgid ""
 "An additional plugin is required to use Spotify in Clementine.  Would you "
@@ -1061,7 +1065,7 @@ msgstr "Parcourir..."
 msgid "Buffer duration"
 msgstr "Durée du tampon"
 
-#: engines/gstengine.cpp:876
+#: engines/gstengine.cpp:873
 msgid "Buffering"
 msgstr "Mise en mémoire tampon"
 
@@ -1166,7 +1170,7 @@ msgstr "Choisissez le répertoire de cache Vk.com"
 msgid "Choose a name for your smart playlist"
 msgstr "Choisissez un nom pour votre liste de lecture intelligente"
 
-#: engines/gstengine.cpp:897
+#: engines/gstengine.cpp:894
 msgid "Choose automatically"
 msgstr "Choisir automatiquement"
 
@@ -1241,6 +1245,10 @@ msgid ""
 "a format that it can play."
 msgstr "Clementine peut automatiquement convertir la musique que vous copiez sur ce périphérique dans un format qu'il peut lire."
 
+#: ../bin/src/ui_amazonsettingspage.h:104
+msgid "Clementine can play music that you have uploaded to Amazon Cloud Drive"
+msgstr "Clementine peut jouer les morceaux que vous avez envoyé sur Amazon Cloud Drive"
+
 #: ../bin/src/ui_boxsettingspage.h:104
 msgid "Clementine can play music that you have uploaded to Box"
 msgstr "Clementine peut jouer les morceaux que vous avez envoyé sur Box"
@@ -1301,6 +1309,7 @@ msgid "Click to toggle between remaining time and total time"
 msgstr "Cliquez pour basculer entre le temps restant et le temps total"
 
 #: ../bin/src/ui_soundcloudsettingspage.h:107
+#: ../bin/src/ui_amazonsettingspage.h:106
 #: ../bin/src/ui_googledrivesettingspage.h:106
 #: ../bin/src/ui_dropboxsettingspage.h:106
 #: ../bin/src/ui_skydrivesettingspage.h:106
@@ -1705,7 +1714,7 @@ msgstr "Diminuer le volume"
 msgid "Default background image"
 msgstr "Image d'arrière-plan par défaut"
 
-#: engines/gstengine.cpp:922
+#: engines/gstengine.cpp:919
 #, qt-format
 msgid "Default device on %1"
 msgstr "Périphérique par défaut à %1"
@@ -2554,7 +2563,7 @@ msgstr "Graves + Aigus Max."
 msgid "Full Treble"
 msgstr "Aigus Max."
 
-#: ui/settingsdialog.cpp:138
+#: ui/settingsdialog.cpp:142
 msgid "General"
 msgstr "Général"
 
@@ -2870,7 +2879,7 @@ msgstr "Vérification de l'intégrité"
 msgid "Internet"
 msgstr "Internet"
 
-#: ui/settingsdialog.cpp:161
+#: ui/settingsdialog.cpp:165
 msgid "Internet providers"
 msgstr "Services de musique"
 
@@ -3104,7 +3113,7 @@ msgstr "Charger la pochette depuis le disque"
 msgid "Load cover from disk..."
 msgstr "Charger la pochette depuis le disque..."
 
-#: playlist/playlistcontainer.cpp:286
+#: playlist/playlistcontainer.cpp:291
 msgid "Load playlist"
 msgstr "Charger une liste de lecture"
 
@@ -3159,6 +3168,7 @@ msgstr "Charger des fichiers/URLs, et remplacer la liste de lecture actuelle"
 #: ../bin/src/ui_soundcloudsettingspage.h:106
 #: ../bin/src/ui_spotifysettingspage.h:211
 #: ../bin/src/ui_subsonicsettingspage.h:130
+#: ../bin/src/ui_amazonsettingspage.h:105
 #: ../bin/src/ui_lastfmsettingspage.h:153
 #: ../bin/src/ui_googledrivesettingspage.h:105
 #: ../bin/src/ui_dropboxsettingspage.h:105
@@ -3514,7 +3524,7 @@ msgstr "Aucune pochette à exporter."
 msgid "No long blocks"
 msgstr "Pas de bloc long"
 
-#: playlist/playlistcontainer.cpp:371
+#: playlist/playlistcontainer.cpp:376
 msgid ""
 "No matches found.  Clear the search box to show the whole playlist again."
 msgstr "Aucune correspondance trouvée. Videz le champ de recherche pour afficher à nouveau la totalité de la liste de lecture."
@@ -3860,7 +3870,7 @@ msgstr "Lecture sonore"
 msgid "Player options"
 msgstr "Options du lecteur"
 
-#: playlist/playlistcontainer.cpp:282 playlist/playlistlistcontainer.cpp:228
+#: playlist/playlistcontainer.cpp:287 playlist/playlistlistcontainer.cpp:228
 #: playlist/playlistmanager.cpp:87 playlist/playlistmanager.cpp:156
 #: playlist/playlistmanager.cpp:494 playlist/playlisttabbar.cpp:366
 msgid "Playlist"
@@ -5208,7 +5218,7 @@ msgstr "Ceci peut être modifié plus tard dans les préférences"
 msgid ""
 "This device must be connected and opened before Clementine can see what file"
 " formats it supports."
-msgstr "Ce périphérique doit être connecté et ouvert pour que Clementine puisse voir les formats de fichier qu'elle gère."
+msgstr "Ce périphérique doit être connecté et ouvert pour que Clementine puisse voir les formats de fichier qu'il gère."
 
 #: ../bin/src/ui_deviceproperties.h:375
 msgid "This device supports the following file formats:"
@@ -5533,7 +5543,7 @@ msgstr "Utilisé"
 msgid "User %1 doesn't have a Grooveshark Anywhere account"
 msgstr "L'utilisateur %1 n'a pas de compte Grooveshark Anywhere"
 
-#: ui/settingsdialog.cpp:152
+#: ui/settingsdialog.cpp:156
 msgid "User interface"
 msgstr "Interface utilisateur"
 

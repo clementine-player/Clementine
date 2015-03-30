@@ -12,7 +12,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2015-03-03 08:23+0000\n"
+"PO-Revision-Date: 2015-03-27 19:20+0000\n"
 "Last-Translator: Vincenzo Reale <vinx.reale@gmail.com>\n"
 "Language-Team: Italian (http://www.transifex.com/projects/p/clementine/language/it/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -772,6 +772,10 @@ msgstr "Mostra sempre la finestra principale"
 msgid "Always start playing"
 msgstr "Inizia sempre la riproduzione"
 
+#: ../bin/src/ui_amazonsettingspage.h:103
+msgid "Amazon"
+msgstr "Amazon"
+
 #: internet/spotify/spotifyblobdownloader.cpp:67
 msgid ""
 "An additional plugin is required to use Spotify in Clementine.  Would you "
@@ -1031,7 +1035,7 @@ msgstr "Sfoglia..."
 msgid "Buffer duration"
 msgstr "Durata del buffer"
 
-#: engines/gstengine.cpp:876
+#: engines/gstengine.cpp:873
 msgid "Buffering"
 msgstr "Riempimento buffer in corso"
 
@@ -1136,7 +1140,7 @@ msgstr "Scegli la cartella della cache di Vk.com"
 msgid "Choose a name for your smart playlist"
 msgstr "Scegli un nome per la scaletta veloce"
 
-#: engines/gstengine.cpp:897
+#: engines/gstengine.cpp:894
 msgid "Choose automatically"
 msgstr "Scegli automaticamente"
 
@@ -1211,6 +1215,10 @@ msgid ""
 "a format that it can play."
 msgstr "Clementine può convertire automaticamente la musica che copi sul dispositivo in un formato riproducibile."
 
+#: ../bin/src/ui_amazonsettingspage.h:104
+msgid "Clementine can play music that you have uploaded to Amazon Cloud Drive"
+msgstr "Clementine può riprodurre la musica che hai caricato su Amazon Cloud Drive"
+
 #: ../bin/src/ui_boxsettingspage.h:104
 msgid "Clementine can play music that you have uploaded to Box"
 msgstr "Clementine può riprodurre la musica che hai caricato su Box"
@@ -1271,6 +1279,7 @@ msgid "Click to toggle between remaining time and total time"
 msgstr "Clic per passare dal tempo rimanente al tempo totale"
 
 #: ../bin/src/ui_soundcloudsettingspage.h:107
+#: ../bin/src/ui_amazonsettingspage.h:106
 #: ../bin/src/ui_googledrivesettingspage.h:106
 #: ../bin/src/ui_dropboxsettingspage.h:106
 #: ../bin/src/ui_skydrivesettingspage.h:106
@@ -1675,7 +1684,7 @@ msgstr "Riduci il volume"
 msgid "Default background image"
 msgstr "Immagine di sfondo predefinita"
 
-#: engines/gstengine.cpp:922
+#: engines/gstengine.cpp:919
 #, qt-format
 msgid "Default device on %1"
 msgstr "Dispositivo predefinito su %1"
@@ -2524,7 +2533,7 @@ msgstr "Bassi e alti al massimo"
 msgid "Full Treble"
 msgstr "Alti al massimo"
 
-#: ui/settingsdialog.cpp:138
+#: ui/settingsdialog.cpp:142
 msgid "General"
 msgstr "Generale"
 
@@ -2840,7 +2849,7 @@ msgstr "Controllo d'integrità"
 msgid "Internet"
 msgstr "Internet"
 
-#: ui/settingsdialog.cpp:161
+#: ui/settingsdialog.cpp:165
 msgid "Internet providers"
 msgstr "Fornitori Internet"
 
@@ -3074,7 +3083,7 @@ msgstr "Carica copertina dal disco"
 msgid "Load cover from disk..."
 msgstr "Carica copertina da disco..."
 
-#: playlist/playlistcontainer.cpp:286
+#: playlist/playlistcontainer.cpp:291
 msgid "Load playlist"
 msgstr "Carica la scaletta"
 
@@ -3129,6 +3138,7 @@ msgstr "Carica file/URL, sostituendo la scaletta attuale"
 #: ../bin/src/ui_soundcloudsettingspage.h:106
 #: ../bin/src/ui_spotifysettingspage.h:211
 #: ../bin/src/ui_subsonicsettingspage.h:130
+#: ../bin/src/ui_amazonsettingspage.h:105
 #: ../bin/src/ui_lastfmsettingspage.h:153
 #: ../bin/src/ui_googledrivesettingspage.h:105
 #: ../bin/src/ui_dropboxsettingspage.h:105
@@ -3484,7 +3494,7 @@ msgstr "Nessuna copertina da esportare."
 msgid "No long blocks"
 msgstr "Nessun blocco lungo"
 
-#: playlist/playlistcontainer.cpp:371
+#: playlist/playlistcontainer.cpp:376
 msgid ""
 "No matches found.  Clear the search box to show the whole playlist again."
 msgstr "Nessuna corrispondenza trovata. Svuota il campo di ricerca per mostrare nuovamente la scaletta completa."
@@ -3830,7 +3840,7 @@ msgstr "Riproduzione"
 msgid "Player options"
 msgstr "Opzioni del lettore"
 
-#: playlist/playlistcontainer.cpp:282 playlist/playlistlistcontainer.cpp:228
+#: playlist/playlistcontainer.cpp:287 playlist/playlistlistcontainer.cpp:228
 #: playlist/playlistmanager.cpp:87 playlist/playlistmanager.cpp:156
 #: playlist/playlistmanager.cpp:494 playlist/playlisttabbar.cpp:366
 msgid "Playlist"
@@ -5503,7 +5513,7 @@ msgstr "Utilizzato"
 msgid "User %1 doesn't have a Grooveshark Anywhere account"
 msgstr "L'utente %1 non ha un account di Grooveshark Anywhere"
 
-#: ui/settingsdialog.cpp:152
+#: ui/settingsdialog.cpp:156
 msgid "User interface"
 msgstr "Interfaccia utente"
 

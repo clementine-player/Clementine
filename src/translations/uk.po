@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2015-03-02 13:00+0000\n"
+"PO-Revision-Date: 2015-03-27 15:13+0000\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian (http://www.transifex.com/projects/p/clementine/language/uk/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -769,6 +769,10 @@ msgstr "Завжди показувати головне вікно"
 msgid "Always start playing"
 msgstr "Завжди починати відтворення"
 
+#: ../bin/src/ui_amazonsettingspage.h:103
+msgid "Amazon"
+msgstr "Amazon"
+
 #: internet/spotify/spotifyblobdownloader.cpp:67
 msgid ""
 "An additional plugin is required to use Spotify in Clementine.  Would you "
@@ -1028,7 +1032,7 @@ msgstr "Огляд…"
 msgid "Buffer duration"
 msgstr "Місткість буфера"
 
-#: engines/gstengine.cpp:876
+#: engines/gstengine.cpp:873
 msgid "Buffering"
 msgstr "Буферизація"
 
@@ -1133,7 +1137,7 @@ msgstr "Виберіть каталог кешування даних Vk.com"
 msgid "Choose a name for your smart playlist"
 msgstr "Оберіть ім’я для вашого розумного списку відтворення"
 
-#: engines/gstengine.cpp:897
+#: engines/gstengine.cpp:894
 msgid "Choose automatically"
 msgstr "Вибрати автоматично"
 
@@ -1208,6 +1212,10 @@ msgid ""
 "a format that it can play."
 msgstr "Clementine може автоматично конвертувати скопійовану до цього пристрою музику в потрібний формат."
 
+#: ../bin/src/ui_amazonsettingspage.h:104
+msgid "Clementine can play music that you have uploaded to Amazon Cloud Drive"
+msgstr "Clementine може відтворювати музику, вивантажену вами на Amazon Cloud Drive"
+
 #: ../bin/src/ui_boxsettingspage.h:104
 msgid "Clementine can play music that you have uploaded to Box"
 msgstr "Clementine може відтворювати файли звукових даних, вивантажені на Box"
@@ -1268,6 +1276,7 @@ msgid "Click to toggle between remaining time and total time"
 msgstr "Клацніть аби перемкнутися між часом, що залишився, та загальним"
 
 #: ../bin/src/ui_soundcloudsettingspage.h:107
+#: ../bin/src/ui_amazonsettingspage.h:106
 #: ../bin/src/ui_googledrivesettingspage.h:106
 #: ../bin/src/ui_dropboxsettingspage.h:106
 #: ../bin/src/ui_skydrivesettingspage.h:106
@@ -1672,7 +1681,7 @@ msgstr "Зменшити гучність"
 msgid "Default background image"
 msgstr "Типове зображення тла"
 
-#: engines/gstengine.cpp:922
+#: engines/gstengine.cpp:919
 #, qt-format
 msgid "Default device on %1"
 msgstr "Типовий пристрій у %1"
@@ -2521,7 +2530,7 @@ msgstr "Повні баси + верхи"
 msgid "Full Treble"
 msgstr "Повні верхи"
 
-#: ui/settingsdialog.cpp:138
+#: ui/settingsdialog.cpp:142
 msgid "General"
 msgstr "Загальне"
 
@@ -2837,7 +2846,7 @@ msgstr "Перевірка цілісності даних"
 msgid "Internet"
 msgstr "Інтернет"
 
-#: ui/settingsdialog.cpp:161
+#: ui/settingsdialog.cpp:165
 msgid "Internet providers"
 msgstr "Інтернет-джерела"
 
@@ -3071,7 +3080,7 @@ msgstr "Завантажити обкладинку з диска"
 msgid "Load cover from disk..."
 msgstr "Завантажити обкладинку з диска"
 
-#: playlist/playlistcontainer.cpp:286
+#: playlist/playlistcontainer.cpp:291
 msgid "Load playlist"
 msgstr "Завантажити список відтворення"
 
@@ -3126,6 +3135,7 @@ msgstr "Завантажити файли/адреси, замінюючи по�
 #: ../bin/src/ui_soundcloudsettingspage.h:106
 #: ../bin/src/ui_spotifysettingspage.h:211
 #: ../bin/src/ui_subsonicsettingspage.h:130
+#: ../bin/src/ui_amazonsettingspage.h:105
 #: ../bin/src/ui_lastfmsettingspage.h:153
 #: ../bin/src/ui_googledrivesettingspage.h:105
 #: ../bin/src/ui_dropboxsettingspage.h:105
@@ -3481,7 +3491,7 @@ msgstr "Немає зображень обкладинок для експорт
 msgid "No long blocks"
 msgstr "Без довгих блоків"
 
-#: playlist/playlistcontainer.cpp:371
+#: playlist/playlistcontainer.cpp:376
 msgid ""
 "No matches found.  Clear the search box to show the whole playlist again."
 msgstr "Нічого не знайдено. Очистіть вікно пошуку, щоб знову показати весь список відтворення."
@@ -3827,7 +3837,7 @@ msgstr "Відтворення"
 msgid "Player options"
 msgstr "Налаштування програвача"
 
-#: playlist/playlistcontainer.cpp:282 playlist/playlistlistcontainer.cpp:228
+#: playlist/playlistcontainer.cpp:287 playlist/playlistlistcontainer.cpp:228
 #: playlist/playlistmanager.cpp:87 playlist/playlistmanager.cpp:156
 #: playlist/playlistmanager.cpp:494 playlist/playlisttabbar.cpp:366
 msgid "Playlist"
@@ -5500,7 +5510,7 @@ msgstr "Використано"
 msgid "User %1 doesn't have a Grooveshark Anywhere account"
 msgstr "У користувача %1 немає облікового запису Grooveshark Anywhere"
 
-#: ui/settingsdialog.cpp:152
+#: ui/settingsdialog.cpp:156
 msgid "User interface"
 msgstr "Інтерфейс користувача"
 

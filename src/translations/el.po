@@ -12,12 +12,13 @@
 # Nisok Kosin <nikos.efthimiou@gmail.com>, 2012
 # Wasilis Mandratzis <inactive+Wasilis@transifex.com>, 2013
 # Wasilis Mandratzis-Walz, 2015
+# Wasilis Mandratzis-Walz, 2015
 # Wasilis <m.wasilis@yahoo.de>, 2013
 # Xenophon Sp <nohponex@gmail.com>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2015-03-21 01:32+0000\n"
+"PO-Revision-Date: 2015-03-28 15:56+0000\n"
 "Last-Translator: Wasilis Mandratzis-Walz\n"
 "Language-Team: Greek (http://www.transifex.com/projects/p/clementine/language/el/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -777,6 +778,10 @@ msgstr "Να εμφανίζεις πάντα το κύριο παράθυρο"
 msgid "Always start playing"
 msgstr "Έναρξη αναπαραγωγής πάντα"
 
+#: ../bin/src/ui_amazonsettingspage.h:103
+msgid "Amazon"
+msgstr "Amazon"
+
 #: internet/spotify/spotifyblobdownloader.cpp:67
 msgid ""
 "An additional plugin is required to use Spotify in Clementine.  Would you "
@@ -1036,7 +1041,7 @@ msgstr "Αναζήτηση..."
 msgid "Buffer duration"
 msgstr "Διάρκεια του buffer"
 
-#: engines/gstengine.cpp:876
+#: engines/gstengine.cpp:873
 msgid "Buffering"
 msgstr "Αποθήκευση"
 
@@ -1141,7 +1146,7 @@ msgstr "Επιλογή του Vk.com κατάλογου προσωρινής μ�
 msgid "Choose a name for your smart playlist"
 msgstr "Επιλέξτε ένα όνομα για την έξυπνη λίστα αναπαραγωγής"
 
-#: engines/gstengine.cpp:897
+#: engines/gstengine.cpp:894
 msgid "Choose automatically"
 msgstr "Αυτόματη επιλογή"
 
@@ -1216,6 +1221,10 @@ msgid ""
 "a format that it can play."
 msgstr "Ο Clementine μπορεί να μετατρέψει αυτόματα την μουσική που αντιγράφετε σε αυτή την συσκευή σε μία μορφή που μπορεί να αναπαράγει."
 
+#: ../bin/src/ui_amazonsettingspage.h:104
+msgid "Clementine can play music that you have uploaded to Amazon Cloud Drive"
+msgstr "Το Clementine μπορεί να αναπαράγει μουσική που έχετε μεταφορτώθει στο Google Drive"
+
 #: ../bin/src/ui_boxsettingspage.h:104
 msgid "Clementine can play music that you have uploaded to Box"
 msgstr "Ο Clementine μπορεί να αναπαράγει μουσική που έχετε μεταφορτώσει στο Box"
@@ -1276,6 +1285,7 @@ msgid "Click to toggle between remaining time and total time"
 msgstr "\"Κλικ\" για εναλλαγή μεταξύ συνολικού και εναπομείναντα χρόνου"
 
 #: ../bin/src/ui_soundcloudsettingspage.h:107
+#: ../bin/src/ui_amazonsettingspage.h:106
 #: ../bin/src/ui_googledrivesettingspage.h:106
 #: ../bin/src/ui_dropboxsettingspage.h:106
 #: ../bin/src/ui_skydrivesettingspage.h:106
@@ -1680,7 +1690,7 @@ msgstr "Μείωση έντασης"
 msgid "Default background image"
 msgstr "Προεπιλεγμένη εικόνα φόντου"
 
-#: engines/gstengine.cpp:922
+#: engines/gstengine.cpp:919
 #, qt-format
 msgid "Default device on %1"
 msgstr "Προεπιλεγμένη συσκευή στο %1"
@@ -2529,7 +2539,7 @@ msgstr "Πλήρως μπάσα και πρίμα"
 msgid "Full Treble"
 msgstr "Πλήρως πρίμα"
 
-#: ui/settingsdialog.cpp:138
+#: ui/settingsdialog.cpp:142
 msgid "General"
 msgstr "Γενικά"
 
@@ -2845,7 +2855,7 @@ msgstr "έλεγχος ακεραιότητας"
 msgid "Internet"
 msgstr "Διαδίκτυο"
 
-#: ui/settingsdialog.cpp:161
+#: ui/settingsdialog.cpp:165
 msgid "Internet providers"
 msgstr "Παροχείς Internet"
 
@@ -3079,7 +3089,7 @@ msgstr "Φόρτωση εξώφυλλου από τον δίσκο"
 msgid "Load cover from disk..."
 msgstr "Φόρτωση εξώφυλλου από τον δίσκο..."
 
-#: playlist/playlistcontainer.cpp:286
+#: playlist/playlistcontainer.cpp:291
 msgid "Load playlist"
 msgstr "Φόρτωση λίστας αναπαραγωγής"
 
@@ -3134,6 +3144,7 @@ msgstr "Φορτώνει αρχεία/URLs, αντικαθιστώντας τη�
 #: ../bin/src/ui_soundcloudsettingspage.h:106
 #: ../bin/src/ui_spotifysettingspage.h:211
 #: ../bin/src/ui_subsonicsettingspage.h:130
+#: ../bin/src/ui_amazonsettingspage.h:105
 #: ../bin/src/ui_lastfmsettingspage.h:153
 #: ../bin/src/ui_googledrivesettingspage.h:105
 #: ../bin/src/ui_dropboxsettingspage.h:105
@@ -3489,7 +3500,7 @@ msgstr "Κανενα καβερ δεν επιλεχθηκε για εξαγωγ�
 msgid "No long blocks"
 msgstr "Όχι μακρά μπλοκς"
 
-#: playlist/playlistcontainer.cpp:371
+#: playlist/playlistcontainer.cpp:376
 msgid ""
 "No matches found.  Clear the search box to show the whole playlist again."
 msgstr "Δεν βρέθηκαν. Καθαρίστε το πλαίσιο αναζήτησης να να εμφανιστεί ολόκληρη η λίστα αναπαραγωγής."
@@ -3835,7 +3846,7 @@ msgstr "Αναπαραγωγή"
 msgid "Player options"
 msgstr "Επιλογές αναπαραγωγής"
 
-#: playlist/playlistcontainer.cpp:282 playlist/playlistlistcontainer.cpp:228
+#: playlist/playlistcontainer.cpp:287 playlist/playlistlistcontainer.cpp:228
 #: playlist/playlistmanager.cpp:87 playlist/playlistmanager.cpp:156
 #: playlist/playlistmanager.cpp:494 playlist/playlisttabbar.cpp:366
 msgid "Playlist"
@@ -5508,7 +5519,7 @@ msgstr "Σε χρήση"
 msgid "User %1 doesn't have a Grooveshark Anywhere account"
 msgstr "Ο χρήστης %1 δεν διαθέτει έναν λογαριασμό στο GrooveShark Anywhere"
 
-#: ui/settingsdialog.cpp:152
+#: ui/settingsdialog.cpp:156
 msgid "User interface"
 msgstr "Διασύνδεση χρήστη"
 

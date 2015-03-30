@@ -15,7 +15,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2015-03-02 11:57+0000\n"
+"PO-Revision-Date: 2015-03-27 15:10+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Arabic (http://www.transifex.com/projects/p/clementine/language/ar/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -775,6 +775,10 @@ msgstr "أظهر النافذة الرئيسية دائما"
 msgid "Always start playing"
 msgstr "ابدأ التشغيل دائما"
 
+#: ../bin/src/ui_amazonsettingspage.h:103
+msgid "Amazon"
+msgstr ""
+
 #: internet/spotify/spotifyblobdownloader.cpp:67
 msgid ""
 "An additional plugin is required to use Spotify in Clementine.  Would you "
@@ -1034,7 +1038,7 @@ msgstr "تصفح..."
 msgid "Buffer duration"
 msgstr "مدة التخزين المؤقت"
 
-#: engines/gstengine.cpp:876
+#: engines/gstengine.cpp:873
 msgid "Buffering"
 msgstr "تخزين مؤقت"
 
@@ -1139,7 +1143,7 @@ msgstr "اختر مستار تخزين VK.com المؤقت"
 msgid "Choose a name for your smart playlist"
 msgstr "اختر اسما لقائمة التشغيل"
 
-#: engines/gstengine.cpp:897
+#: engines/gstengine.cpp:894
 msgid "Choose automatically"
 msgstr "اختيار تلقائي"
 
@@ -1214,6 +1218,10 @@ msgid ""
 "a format that it can play."
 msgstr "يمكن لكلمنتاين أن يحول تلقائيا المقاطع التي تنسخ لهذا الجهاز للصيغ التي يستطيع قرائتها."
 
+#: ../bin/src/ui_amazonsettingspage.h:104
+msgid "Clementine can play music that you have uploaded to Amazon Cloud Drive"
+msgstr ""
+
 #: ../bin/src/ui_boxsettingspage.h:104
 msgid "Clementine can play music that you have uploaded to Box"
 msgstr "يستطيع كلمنتاين تشغيل المقاطع التي رفعتها على Box"
@@ -1274,6 +1282,7 @@ msgid "Click to toggle between remaining time and total time"
 msgstr "اضغط للتبديل بين الوقت المتبقي والوقت الكلي."
 
 #: ../bin/src/ui_soundcloudsettingspage.h:107
+#: ../bin/src/ui_amazonsettingspage.h:106
 #: ../bin/src/ui_googledrivesettingspage.h:106
 #: ../bin/src/ui_dropboxsettingspage.h:106
 #: ../bin/src/ui_skydrivesettingspage.h:106
@@ -1678,7 +1687,7 @@ msgstr "اخفض الصوت"
 msgid "Default background image"
 msgstr "صورة الخلفية الافتراضية"
 
-#: engines/gstengine.cpp:922
+#: engines/gstengine.cpp:919
 #, qt-format
 msgid "Default device on %1"
 msgstr "الجهاز الافتراضي 1%"
@@ -2527,7 +2536,7 @@ msgstr "Full Bass + Treble"
 msgid "Full Treble"
 msgstr "Full Treble"
 
-#: ui/settingsdialog.cpp:138
+#: ui/settingsdialog.cpp:142
 msgid "General"
 msgstr "عام"
 
@@ -2843,7 +2852,7 @@ msgstr "فحص شامل"
 msgid "Internet"
 msgstr "انترنت"
 
-#: ui/settingsdialog.cpp:161
+#: ui/settingsdialog.cpp:165
 msgid "Internet providers"
 msgstr "خدمات الانترنت"
 
@@ -3077,7 +3086,7 @@ msgstr "حمل الغلاف من القرص"
 msgid "Load cover from disk..."
 msgstr "تحميل الغلاف من القرص..."
 
-#: playlist/playlistcontainer.cpp:286
+#: playlist/playlistcontainer.cpp:291
 msgid "Load playlist"
 msgstr "تحميل قائمة تشغيل"
 
@@ -3132,6 +3141,7 @@ msgstr "تحميل ملفات/روابط، استبدال قائمة التشغ�
 #: ../bin/src/ui_soundcloudsettingspage.h:106
 #: ../bin/src/ui_spotifysettingspage.h:211
 #: ../bin/src/ui_subsonicsettingspage.h:130
+#: ../bin/src/ui_amazonsettingspage.h:105
 #: ../bin/src/ui_lastfmsettingspage.h:153
 #: ../bin/src/ui_googledrivesettingspage.h:105
 #: ../bin/src/ui_dropboxsettingspage.h:105
@@ -3487,7 +3497,7 @@ msgstr "لا توجد أغلفة للتصدير."
 msgid "No long blocks"
 msgstr "بدون أجزاء طويلة"
 
-#: playlist/playlistcontainer.cpp:371
+#: playlist/playlistcontainer.cpp:376
 msgid ""
 "No matches found.  Clear the search box to show the whole playlist again."
 msgstr "لم يتم العثور على أي نتيجة. امسح خانة البحث لإظهار جميع قوائم التشغيل من جديد."
@@ -3833,7 +3843,7 @@ msgstr "التشغيل"
 msgid "Player options"
 msgstr "خيارات المشغل"
 
-#: playlist/playlistcontainer.cpp:282 playlist/playlistlistcontainer.cpp:228
+#: playlist/playlistcontainer.cpp:287 playlist/playlistlistcontainer.cpp:228
 #: playlist/playlistmanager.cpp:87 playlist/playlistmanager.cpp:156
 #: playlist/playlistmanager.cpp:494 playlist/playlisttabbar.cpp:366
 msgid "Playlist"
@@ -5506,7 +5516,7 @@ msgstr "مستعمل"
 msgid "User %1 doesn't have a Grooveshark Anywhere account"
 msgstr "المستخدم %1 لا يملك حساب Grooveshark Anywhere"
 
-#: ui/settingsdialog.cpp:152
+#: ui/settingsdialog.cpp:156
 msgid "User interface"
 msgstr "واجهة المستخدم"
 

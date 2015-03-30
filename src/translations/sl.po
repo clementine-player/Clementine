@@ -13,8 +13,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2015-03-21 09:18+0000\n"
-"Last-Translator: Andrej Mernik <andrejm@ubuntu.si>\n"
+"PO-Revision-Date: 2015-03-27 15:10+0000\n"
+"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Slovenian (http://www.transifex.com/projects/p/clementine/language/sl/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -773,6 +773,10 @@ msgstr "Vedno pokaži glavno okno"
 msgid "Always start playing"
 msgstr "Vedno začni s predvajanjem"
 
+#: ../bin/src/ui_amazonsettingspage.h:103
+msgid "Amazon"
+msgstr ""
+
 #: internet/spotify/spotifyblobdownloader.cpp:67
 msgid ""
 "An additional plugin is required to use Spotify in Clementine.  Would you "
@@ -1032,7 +1036,7 @@ msgstr "Prebrskaj ..."
 msgid "Buffer duration"
 msgstr "Trajanje medpomnilnika"
 
-#: engines/gstengine.cpp:876
+#: engines/gstengine.cpp:873
 msgid "Buffering"
 msgstr "Medpomnjenje"
 
@@ -1137,7 +1141,7 @@ msgstr "Izberi mapo s predpomnilnikom za Vk.com"
 msgid "Choose a name for your smart playlist"
 msgstr "Izberite ime za vaš pametni seznam predvajanja"
 
-#: engines/gstengine.cpp:897
+#: engines/gstengine.cpp:894
 msgid "Choose automatically"
 msgstr "Izberi samodejno"
 
@@ -1212,6 +1216,10 @@ msgid ""
 "a format that it can play."
 msgstr "Clementine lahko samodejno pretvori glasbo, ki jo kopirate na to napravo, v vrsto, ki jo zmore naprava predvajati."
 
+#: ../bin/src/ui_amazonsettingspage.h:104
+msgid "Clementine can play music that you have uploaded to Amazon Cloud Drive"
+msgstr ""
+
 #: ../bin/src/ui_boxsettingspage.h:104
 msgid "Clementine can play music that you have uploaded to Box"
 msgstr "Clementine lahko predvaja glasbo, ki ste jo poslali na Box"
@@ -1272,6 +1280,7 @@ msgid "Click to toggle between remaining time and total time"
 msgstr "Kliknite za preklop med preostalim in celotnim časom"
 
 #: ../bin/src/ui_soundcloudsettingspage.h:107
+#: ../bin/src/ui_amazonsettingspage.h:106
 #: ../bin/src/ui_googledrivesettingspage.h:106
 #: ../bin/src/ui_dropboxsettingspage.h:106
 #: ../bin/src/ui_skydrivesettingspage.h:106
@@ -1676,7 +1685,7 @@ msgstr "Zmanjšaj glasnost"
 msgid "Default background image"
 msgstr "Privzeta slika ozadja"
 
-#: engines/gstengine.cpp:922
+#: engines/gstengine.cpp:919
 #, qt-format
 msgid "Default device on %1"
 msgstr "Privzeta naprava na %1"
@@ -2525,7 +2534,7 @@ msgstr "Polni basi in visoki toni"
 msgid "Full Treble"
 msgstr "Polni visoki toni"
 
-#: ui/settingsdialog.cpp:138
+#: ui/settingsdialog.cpp:142
 msgid "General"
 msgstr "Splošno"
 
@@ -2841,7 +2850,7 @@ msgstr "Preverjanje celovitosti"
 msgid "Internet"
 msgstr "Internet"
 
-#: ui/settingsdialog.cpp:161
+#: ui/settingsdialog.cpp:165
 msgid "Internet providers"
 msgstr "Ponudniki interneta"
 
@@ -3075,7 +3084,7 @@ msgstr "Naloži ovitek iz diska"
 msgid "Load cover from disk..."
 msgstr "Naloži ovitek iz diska ..."
 
-#: playlist/playlistcontainer.cpp:286
+#: playlist/playlistcontainer.cpp:291
 msgid "Load playlist"
 msgstr "Naloži seznam predvajanja"
 
@@ -3130,6 +3139,7 @@ msgstr "Naloži datoteke/naslove URL in zamenjaj trenutni seznam predvajanja"
 #: ../bin/src/ui_soundcloudsettingspage.h:106
 #: ../bin/src/ui_spotifysettingspage.h:211
 #: ../bin/src/ui_subsonicsettingspage.h:130
+#: ../bin/src/ui_amazonsettingspage.h:105
 #: ../bin/src/ui_lastfmsettingspage.h:153
 #: ../bin/src/ui_googledrivesettingspage.h:105
 #: ../bin/src/ui_dropboxsettingspage.h:105
@@ -3485,7 +3495,7 @@ msgstr "Ni ovitkov za izvoz."
 msgid "No long blocks"
 msgstr "Brez dolgih blokov"
 
-#: playlist/playlistcontainer.cpp:371
+#: playlist/playlistcontainer.cpp:376
 msgid ""
 "No matches found.  Clear the search box to show the whole playlist again."
 msgstr "Iskanje ni vrnilo rezultatov. Počistite iskalno polje za prikaz celotnega seznama predvajanja."
@@ -3831,7 +3841,7 @@ msgstr "Predvajanje"
 msgid "Player options"
 msgstr "Možnosti predvajalnika"
 
-#: playlist/playlistcontainer.cpp:282 playlist/playlistlistcontainer.cpp:228
+#: playlist/playlistcontainer.cpp:287 playlist/playlistlistcontainer.cpp:228
 #: playlist/playlistmanager.cpp:87 playlist/playlistmanager.cpp:156
 #: playlist/playlistmanager.cpp:494 playlist/playlisttabbar.cpp:366
 msgid "Playlist"
@@ -5504,7 +5514,7 @@ msgstr "Uporabljeno"
 msgid "User %1 doesn't have a Grooveshark Anywhere account"
 msgstr "Uporabnik %1 nima računa Grooveshark Anywhere"
 
-#: ui/settingsdialog.cpp:152
+#: ui/settingsdialog.cpp:156
 msgid "User interface"
 msgstr "Uporabniški vmesnik"
 

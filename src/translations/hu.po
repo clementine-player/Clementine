@@ -16,7 +16,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2015-03-06 12:32+0000\n"
+"PO-Revision-Date: 2015-03-30 06:59+0000\n"
 "Last-Translator: miku84\n"
 "Language-Team: Hungarian (http://www.transifex.com/projects/p/clementine/language/hu/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -776,6 +776,10 @@ msgstr "Mindig mutassa a főablakot"
 msgid "Always start playing"
 msgstr "Mindig indítja a lejátszást"
 
+#: ../bin/src/ui_amazonsettingspage.h:103
+msgid "Amazon"
+msgstr "Amazon"
+
 #: internet/spotify/spotifyblobdownloader.cpp:67
 msgid ""
 "An additional plugin is required to use Spotify in Clementine.  Would you "
@@ -1035,7 +1039,7 @@ msgstr "Tallózás…"
 msgid "Buffer duration"
 msgstr "Puffer hossza"
 
-#: engines/gstengine.cpp:876
+#: engines/gstengine.cpp:873
 msgid "Buffering"
 msgstr "Pufferelés"
 
@@ -1140,7 +1144,7 @@ msgstr "Vk.com gyorsítótár mappa"
 msgid "Choose a name for your smart playlist"
 msgstr "Válassz egy nevet az intelligens lejátszási listádnak"
 
-#: engines/gstengine.cpp:897
+#: engines/gstengine.cpp:894
 msgid "Choose automatically"
 msgstr "Automatikus választás"
 
@@ -1215,6 +1219,10 @@ msgid ""
 "a format that it can play."
 msgstr "Clementine automatikusan az eszköz által is támogatott formátumba tudja konvertálni a számokat másolás előtt."
 
+#: ../bin/src/ui_amazonsettingspage.h:104
+msgid "Clementine can play music that you have uploaded to Amazon Cloud Drive"
+msgstr "A Clementine képes lejátszani a számait amit feltöltött az Amazon Cloud Drive- ba"
+
 #: ../bin/src/ui_boxsettingspage.h:104
 msgid "Clementine can play music that you have uploaded to Box"
 msgstr "A Clementine képes lejátszani a számait amiket feltöltött a Box- ba"
@@ -1275,6 +1283,7 @@ msgid "Click to toggle between remaining time and total time"
 msgstr "Kattintásra vált a hátralévő és a teljes idő kijelzése között"
 
 #: ../bin/src/ui_soundcloudsettingspage.h:107
+#: ../bin/src/ui_amazonsettingspage.h:106
 #: ../bin/src/ui_googledrivesettingspage.h:106
 #: ../bin/src/ui_dropboxsettingspage.h:106
 #: ../bin/src/ui_skydrivesettingspage.h:106
@@ -1679,7 +1688,7 @@ msgstr "Hangerő csökkentése"
 msgid "Default background image"
 msgstr "Alapértelmezett háttérkép"
 
-#: engines/gstengine.cpp:922
+#: engines/gstengine.cpp:919
 #, qt-format
 msgid "Default device on %1"
 msgstr "Alapértelmezett eszköz a következőn: %1"
@@ -2528,7 +2537,7 @@ msgstr "Teljes basszus + Magas"
 msgid "Full Treble"
 msgstr "Teljes magas"
 
-#: ui/settingsdialog.cpp:138
+#: ui/settingsdialog.cpp:142
 msgid "General"
 msgstr "Általános"
 
@@ -2844,7 +2853,7 @@ msgstr "Integritás ellenőrzése"
 msgid "Internet"
 msgstr "Internet"
 
-#: ui/settingsdialog.cpp:161
+#: ui/settingsdialog.cpp:165
 msgid "Internet providers"
 msgstr "Internet szolgáltatók"
 
@@ -3078,7 +3087,7 @@ msgstr "Borító betöltése lemezről"
 msgid "Load cover from disk..."
 msgstr "Borító betöltése lemezről..."
 
-#: playlist/playlistcontainer.cpp:286
+#: playlist/playlistcontainer.cpp:291
 msgid "Load playlist"
 msgstr "Lejátszási lista betöltése"
 
@@ -3133,6 +3142,7 @@ msgstr "Fájlok/URL-ek betöltése, lejátszási lista cseréje"
 #: ../bin/src/ui_soundcloudsettingspage.h:106
 #: ../bin/src/ui_spotifysettingspage.h:211
 #: ../bin/src/ui_subsonicsettingspage.h:130
+#: ../bin/src/ui_amazonsettingspage.h:105
 #: ../bin/src/ui_lastfmsettingspage.h:153
 #: ../bin/src/ui_googledrivesettingspage.h:105
 #: ../bin/src/ui_dropboxsettingspage.h:105
@@ -3488,7 +3498,7 @@ msgstr "Nincsenek exportálandó boírtók"
 msgid "No long blocks"
 msgstr "Hosszú blokkok nélkül"
 
-#: playlist/playlistcontainer.cpp:371
+#: playlist/playlistcontainer.cpp:376
 msgid ""
 "No matches found.  Clear the search box to show the whole playlist again."
 msgstr "Nincs egyezés. Törölje a keresési feltételeket, hogy újra lássa a teljes lejátszási listát."
@@ -3834,7 +3844,7 @@ msgstr "Lejátszás"
 msgid "Player options"
 msgstr "Lejátszó beállítások"
 
-#: playlist/playlistcontainer.cpp:282 playlist/playlistlistcontainer.cpp:228
+#: playlist/playlistcontainer.cpp:287 playlist/playlistlistcontainer.cpp:228
 #: playlist/playlistmanager.cpp:87 playlist/playlistmanager.cpp:156
 #: playlist/playlistmanager.cpp:494 playlist/playlisttabbar.cpp:366
 msgid "Playlist"
@@ -5507,7 +5517,7 @@ msgstr "Használt"
 msgid "User %1 doesn't have a Grooveshark Anywhere account"
 msgstr "%1 felhasználónak nincs Grooveshark Anywhere fiókja"
 
-#: ui/settingsdialog.cpp:152
+#: ui/settingsdialog.cpp:156
 msgid "User interface"
 msgstr "Kezelőfelület"
 

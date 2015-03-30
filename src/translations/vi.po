@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2015-03-02 11:57+0000\n"
+"PO-Revision-Date: 2015-03-27 15:10+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Vietnamese (http://www.transifex.com/projects/p/clementine/language/vi/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -771,6 +771,10 @@ msgstr "Luôn hiện cửa sổ chính"
 msgid "Always start playing"
 msgstr "Bắt đầu phát nhạc"
 
+#: ../bin/src/ui_amazonsettingspage.h:103
+msgid "Amazon"
+msgstr ""
+
 #: internet/spotify/spotifyblobdownloader.cpp:67
 msgid ""
 "An additional plugin is required to use Spotify in Clementine.  Would you "
@@ -1030,7 +1034,7 @@ msgstr "Duyệt tìm..."
 msgid "Buffer duration"
 msgstr ""
 
-#: engines/gstengine.cpp:876
+#: engines/gstengine.cpp:873
 msgid "Buffering"
 msgstr "Đang tạo bộ đệm"
 
@@ -1135,7 +1139,7 @@ msgstr ""
 msgid "Choose a name for your smart playlist"
 msgstr "Đặt tên cho danh sách nhạc của bạn"
 
-#: engines/gstengine.cpp:897
+#: engines/gstengine.cpp:894
 msgid "Choose automatically"
 msgstr "Tự động lựa chọn"
 
@@ -1210,6 +1214,10 @@ msgid ""
 "a format that it can play."
 msgstr "Clementine có thể tự động chuyển đổi định dạng nhạc mà bạn chép sang thiết bị này sang một định dạng mà nó có thể phát."
 
+#: ../bin/src/ui_amazonsettingspage.h:104
+msgid "Clementine can play music that you have uploaded to Amazon Cloud Drive"
+msgstr ""
+
 #: ../bin/src/ui_boxsettingspage.h:104
 msgid "Clementine can play music that you have uploaded to Box"
 msgstr "Clementine có thể phát nhạc trong tài khoản Box"
@@ -1270,6 +1278,7 @@ msgid "Click to toggle between remaining time and total time"
 msgstr "Nhấn vào đây để chuyển đổi giữa thời gian còn lại và tổng thời gian"
 
 #: ../bin/src/ui_soundcloudsettingspage.h:107
+#: ../bin/src/ui_amazonsettingspage.h:106
 #: ../bin/src/ui_googledrivesettingspage.h:106
 #: ../bin/src/ui_dropboxsettingspage.h:106
 #: ../bin/src/ui_skydrivesettingspage.h:106
@@ -1674,7 +1683,7 @@ msgstr "Giảm âm lượng"
 msgid "Default background image"
 msgstr "Dùng ảnh nền mặc định"
 
-#: engines/gstengine.cpp:922
+#: engines/gstengine.cpp:919
 #, qt-format
 msgid "Default device on %1"
 msgstr ""
@@ -2523,7 +2532,7 @@ msgstr "Full Bass + Treble"
 msgid "Full Treble"
 msgstr "Full Treble"
 
-#: ui/settingsdialog.cpp:138
+#: ui/settingsdialog.cpp:142
 msgid "General"
 msgstr "Tổng quát"
 
@@ -2839,7 +2848,7 @@ msgstr "Kiểm tra tính toàn vẹn"
 msgid "Internet"
 msgstr "Internet"
 
-#: ui/settingsdialog.cpp:161
+#: ui/settingsdialog.cpp:165
 msgid "Internet providers"
 msgstr "Dịch vụ"
 
@@ -3073,7 +3082,7 @@ msgstr "Nạp ảnh bìa từ đĩa"
 msgid "Load cover from disk..."
 msgstr "Nạp ảnh bìa từ đĩa..."
 
-#: playlist/playlistcontainer.cpp:286
+#: playlist/playlistcontainer.cpp:291
 msgid "Load playlist"
 msgstr "Mở danh sách"
 
@@ -3128,6 +3137,7 @@ msgstr "Mở tập tin/URL, thay thế danh sách hiện tại"
 #: ../bin/src/ui_soundcloudsettingspage.h:106
 #: ../bin/src/ui_spotifysettingspage.h:211
 #: ../bin/src/ui_subsonicsettingspage.h:130
+#: ../bin/src/ui_amazonsettingspage.h:105
 #: ../bin/src/ui_lastfmsettingspage.h:153
 #: ../bin/src/ui_googledrivesettingspage.h:105
 #: ../bin/src/ui_dropboxsettingspage.h:105
@@ -3483,7 +3493,7 @@ msgstr "Không có ảnh bìa để xuất."
 msgid "No long blocks"
 msgstr "Các khối không dài"
 
-#: playlist/playlistcontainer.cpp:371
+#: playlist/playlistcontainer.cpp:376
 msgid ""
 "No matches found.  Clear the search box to show the whole playlist again."
 msgstr "Không có kết quả nào trùng khớp. Xóa nội dung trong ô tìm kiếm để hiện danh sách trở lại."
@@ -3829,7 +3839,7 @@ msgstr "Phát nhạc"
 msgid "Player options"
 msgstr "Tùy chỉnh phát nhạc"
 
-#: playlist/playlistcontainer.cpp:282 playlist/playlistlistcontainer.cpp:228
+#: playlist/playlistcontainer.cpp:287 playlist/playlistlistcontainer.cpp:228
 #: playlist/playlistmanager.cpp:87 playlist/playlistmanager.cpp:156
 #: playlist/playlistmanager.cpp:494 playlist/playlisttabbar.cpp:366
 msgid "Playlist"
@@ -5502,7 +5512,7 @@ msgstr "Đã dùng"
 msgid "User %1 doesn't have a Grooveshark Anywhere account"
 msgstr "Người dùng %1 không có tài khoản Grooveshark Anywhere"
 
-#: ui/settingsdialog.cpp:152
+#: ui/settingsdialog.cpp:156
 msgid "User interface"
 msgstr "Giao diện người dùng"
 

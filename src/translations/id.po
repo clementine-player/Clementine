@@ -21,7 +21,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2015-03-02 11:57+0000\n"
+"PO-Revision-Date: 2015-03-27 15:10+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Indonesian (http://www.transifex.com/projects/p/clementine/language/id/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -781,6 +781,10 @@ msgstr "Selalu tunjukkan jendela utama"
 msgid "Always start playing"
 msgstr "Selalu mulai memutar"
 
+#: ../bin/src/ui_amazonsettingspage.h:103
+msgid "Amazon"
+msgstr ""
+
 #: internet/spotify/spotifyblobdownloader.cpp:67
 msgid ""
 "An additional plugin is required to use Spotify in Clementine.  Would you "
@@ -1040,7 +1044,7 @@ msgstr "Menelusuri..."
 msgid "Buffer duration"
 msgstr "Durasi Buffer"
 
-#: engines/gstengine.cpp:876
+#: engines/gstengine.cpp:873
 msgid "Buffering"
 msgstr "Menyangga..."
 
@@ -1145,7 +1149,7 @@ msgstr "Pilih direktori cache Vk.com"
 msgid "Choose a name for your smart playlist"
 msgstr "Pilih sebuah nama untuk daftar putar pintar anda"
 
-#: engines/gstengine.cpp:897
+#: engines/gstengine.cpp:894
 msgid "Choose automatically"
 msgstr "Pilih otomatis"
 
@@ -1220,6 +1224,10 @@ msgid ""
 "a format that it can play."
 msgstr "Clementine dapat secara otomatis mengubah format yang anda copy ke perangkat supaya dapat diputar."
 
+#: ../bin/src/ui_amazonsettingspage.h:104
+msgid "Clementine can play music that you have uploaded to Amazon Cloud Drive"
+msgstr ""
+
 #: ../bin/src/ui_boxsettingspage.h:104
 msgid "Clementine can play music that you have uploaded to Box"
 msgstr "Clementine dapat memutar musik yang Anda unggah ke Box"
@@ -1280,6 +1288,7 @@ msgid "Click to toggle between remaining time and total time"
 msgstr "Klik untuk beralih antara waktu tersisa dan total waktu"
 
 #: ../bin/src/ui_soundcloudsettingspage.h:107
+#: ../bin/src/ui_amazonsettingspage.h:106
 #: ../bin/src/ui_googledrivesettingspage.h:106
 #: ../bin/src/ui_dropboxsettingspage.h:106
 #: ../bin/src/ui_skydrivesettingspage.h:106
@@ -1684,7 +1693,7 @@ msgstr "Kurangi volume"
 msgid "Default background image"
 msgstr "Gambar latar belakang standar"
 
-#: engines/gstengine.cpp:922
+#: engines/gstengine.cpp:919
 #, qt-format
 msgid "Default device on %1"
 msgstr "Perangkat standar pada %1"
@@ -2533,7 +2542,7 @@ msgstr "Bass + Treble Penuh"
 msgid "Full Treble"
 msgstr "Treble Penuh"
 
-#: ui/settingsdialog.cpp:138
+#: ui/settingsdialog.cpp:142
 msgid "General"
 msgstr "Umum"
 
@@ -2849,7 +2858,7 @@ msgstr "Cek kesatuan"
 msgid "Internet"
 msgstr "Internet"
 
-#: ui/settingsdialog.cpp:161
+#: ui/settingsdialog.cpp:165
 msgid "Internet providers"
 msgstr "penyedia layanan internet"
 
@@ -3083,7 +3092,7 @@ msgstr "Muat sampul dari cakram"
 msgid "Load cover from disk..."
 msgstr "Memuat sampul dari media penyimpan..."
 
-#: playlist/playlistcontainer.cpp:286
+#: playlist/playlistcontainer.cpp:291
 msgid "Load playlist"
 msgstr "Muat daftar putar"
 
@@ -3138,6 +3147,7 @@ msgstr "Pemuatan berkas/URL, menggantikan daftar putar saat ini"
 #: ../bin/src/ui_soundcloudsettingspage.h:106
 #: ../bin/src/ui_spotifysettingspage.h:211
 #: ../bin/src/ui_subsonicsettingspage.h:130
+#: ../bin/src/ui_amazonsettingspage.h:105
 #: ../bin/src/ui_lastfmsettingspage.h:153
 #: ../bin/src/ui_googledrivesettingspage.h:105
 #: ../bin/src/ui_dropboxsettingspage.h:105
@@ -3493,7 +3503,7 @@ msgstr "Tidak ada sampul untuk diekspor"
 msgid "No long blocks"
 msgstr "Tanpa blok panjang"
 
-#: playlist/playlistcontainer.cpp:371
+#: playlist/playlistcontainer.cpp:376
 msgid ""
 "No matches found.  Clear the search box to show the whole playlist again."
 msgstr "Tidak ada yang cocok. Kosongkan kotak pencarian untuk menampilkan lagi daftar putar keseluruhan."
@@ -3839,7 +3849,7 @@ msgstr "Pemutaran"
 msgid "Player options"
 msgstr "Opsi pemutar"
 
-#: playlist/playlistcontainer.cpp:282 playlist/playlistlistcontainer.cpp:228
+#: playlist/playlistcontainer.cpp:287 playlist/playlistlistcontainer.cpp:228
 #: playlist/playlistmanager.cpp:87 playlist/playlistmanager.cpp:156
 #: playlist/playlistmanager.cpp:494 playlist/playlisttabbar.cpp:366
 msgid "Playlist"
@@ -5512,7 +5522,7 @@ msgstr "Bekas"
 msgid "User %1 doesn't have a Grooveshark Anywhere account"
 msgstr "Pengguna %1 tidak memiliki akun Grooveshark dimana pun"
 
-#: ui/settingsdialog.cpp:152
+#: ui/settingsdialog.cpp:156
 msgid "User interface"
 msgstr "Antarmuka"
 

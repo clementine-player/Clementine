@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2015-03-02 11:57+0000\n"
+"PO-Revision-Date: 2015-03-27 15:10+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Norwegian Bokmål (http://www.transifex.com/projects/p/clementine/language/nb/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -771,6 +771,10 @@ msgstr "Alltid vis hovedvinduet"
 msgid "Always start playing"
 msgstr "Alltid start avspilling"
 
+#: ../bin/src/ui_amazonsettingspage.h:103
+msgid "Amazon"
+msgstr ""
+
 #: internet/spotify/spotifyblobdownloader.cpp:67
 msgid ""
 "An additional plugin is required to use Spotify in Clementine.  Would you "
@@ -1030,7 +1034,7 @@ msgstr "Bla gjennom..."
 msgid "Buffer duration"
 msgstr "Bufferlengde"
 
-#: engines/gstengine.cpp:876
+#: engines/gstengine.cpp:873
 msgid "Buffering"
 msgstr "Mellomlagring"
 
@@ -1135,7 +1139,7 @@ msgstr ""
 msgid "Choose a name for your smart playlist"
 msgstr "Sett et navn på den smarte spillelisten"
 
-#: engines/gstengine.cpp:897
+#: engines/gstengine.cpp:894
 msgid "Choose automatically"
 msgstr "Velg automatisk"
 
@@ -1210,6 +1214,10 @@ msgid ""
 "a format that it can play."
 msgstr "Clementine kan automatisk konvertere musikken du kopierer til denne enheten til en format som den kan spille."
 
+#: ../bin/src/ui_amazonsettingspage.h:104
+msgid "Clementine can play music that you have uploaded to Amazon Cloud Drive"
+msgstr ""
+
 #: ../bin/src/ui_boxsettingspage.h:104
 msgid "Clementine can play music that you have uploaded to Box"
 msgstr "Clementine kan spille musikk du har lastet opp til Box"
@@ -1270,6 +1278,7 @@ msgid "Click to toggle between remaining time and total time"
 msgstr "Klikk for å bytte mellom gjenværende tid og total tid"
 
 #: ../bin/src/ui_soundcloudsettingspage.h:107
+#: ../bin/src/ui_amazonsettingspage.h:106
 #: ../bin/src/ui_googledrivesettingspage.h:106
 #: ../bin/src/ui_dropboxsettingspage.h:106
 #: ../bin/src/ui_skydrivesettingspage.h:106
@@ -1674,7 +1683,7 @@ msgstr "Demp volumet"
 msgid "Default background image"
 msgstr "Standard bakgrunnsbilde"
 
-#: engines/gstengine.cpp:922
+#: engines/gstengine.cpp:919
 #, qt-format
 msgid "Default device on %1"
 msgstr ""
@@ -2523,7 +2532,7 @@ msgstr "Full Bass + Lys lyd"
 msgid "Full Treble"
 msgstr "Full lys lyd"
 
-#: ui/settingsdialog.cpp:138
+#: ui/settingsdialog.cpp:142
 msgid "General"
 msgstr "Generelt"
 
@@ -2839,7 +2848,7 @@ msgstr "Integritetskontrol"
 msgid "Internet"
 msgstr "Internett"
 
-#: ui/settingsdialog.cpp:161
+#: ui/settingsdialog.cpp:165
 msgid "Internet providers"
 msgstr "Internettilbydere"
 
@@ -3073,7 +3082,7 @@ msgstr "Hent albumbilde fra disk"
 msgid "Load cover from disk..."
 msgstr "Hent albumgrafikk fra disk..."
 
-#: playlist/playlistcontainer.cpp:286
+#: playlist/playlistcontainer.cpp:291
 msgid "Load playlist"
 msgstr "Åpne spilleliste"
 
@@ -3128,6 +3137,7 @@ msgstr "Åpne filer/URLer; erstatt gjeldende spilleliste"
 #: ../bin/src/ui_soundcloudsettingspage.h:106
 #: ../bin/src/ui_spotifysettingspage.h:211
 #: ../bin/src/ui_subsonicsettingspage.h:130
+#: ../bin/src/ui_amazonsettingspage.h:105
 #: ../bin/src/ui_lastfmsettingspage.h:153
 #: ../bin/src/ui_googledrivesettingspage.h:105
 #: ../bin/src/ui_dropboxsettingspage.h:105
@@ -3483,7 +3493,7 @@ msgstr "Ingen omslag å eksportere."
 msgid "No long blocks"
 msgstr "Ingen lange blokker"
 
-#: playlist/playlistcontainer.cpp:371
+#: playlist/playlistcontainer.cpp:376
 msgid ""
 "No matches found.  Clear the search box to show the whole playlist again."
 msgstr "Ingen treff.  Visk ut søkefeltet for å vise hele spillelisten igjen."
@@ -3829,7 +3839,7 @@ msgstr "Avspilling"
 msgid "Player options"
 msgstr "Innstillinger for avspiller"
 
-#: playlist/playlistcontainer.cpp:282 playlist/playlistlistcontainer.cpp:228
+#: playlist/playlistcontainer.cpp:287 playlist/playlistlistcontainer.cpp:228
 #: playlist/playlistmanager.cpp:87 playlist/playlistmanager.cpp:156
 #: playlist/playlistmanager.cpp:494 playlist/playlisttabbar.cpp:366
 msgid "Playlist"
@@ -5502,7 +5512,7 @@ msgstr "Brukt"
 msgid "User %1 doesn't have a Grooveshark Anywhere account"
 msgstr "Brukeren %1 har ikke en Grooveshark Anywhere-konto"
 
-#: ui/settingsdialog.cpp:152
+#: ui/settingsdialog.cpp:156
 msgid "User interface"
 msgstr "Brukergrensesnit"
 

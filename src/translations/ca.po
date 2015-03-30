@@ -14,7 +14,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2015-03-23 05:56+0000\n"
+"PO-Revision-Date: 2015-03-27 18:12+0000\n"
 "Last-Translator: Adolfo Jayme Barrientos\n"
 "Language-Team: Catalan (http://www.transifex.com/projects/p/clementine/language/ca/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -774,6 +774,10 @@ msgstr "Mostra sempre la finestra principal"
 msgid "Always start playing"
 msgstr "Comença sempre la reproducció"
 
+#: ../bin/src/ui_amazonsettingspage.h:103
+msgid "Amazon"
+msgstr "Amazon"
+
 #: internet/spotify/spotifyblobdownloader.cpp:67
 msgid ""
 "An additional plugin is required to use Spotify in Clementine.  Would you "
@@ -1033,7 +1037,7 @@ msgstr "Explora…"
 msgid "Buffer duration"
 msgstr "Durada de la memòria intermèdia"
 
-#: engines/gstengine.cpp:876
+#: engines/gstengine.cpp:873
 msgid "Buffering"
 msgstr "Emplenant la memòria intermèdia"
 
@@ -1138,7 +1142,7 @@ msgstr "Trieu la carpeta de memòria cau del Vk.com"
 msgid "Choose a name for your smart playlist"
 msgstr "Trieu un nom per a la llista de reproducció intel·ligent"
 
-#: engines/gstengine.cpp:897
+#: engines/gstengine.cpp:894
 msgid "Choose automatically"
 msgstr "Tria automàticament"
 
@@ -1213,6 +1217,10 @@ msgid ""
 "a format that it can play."
 msgstr "El Clementine pot convertir automàticament la música que copieu en aquest dispositiu a un format que pugui reproduir."
 
+#: ../bin/src/ui_amazonsettingspage.h:104
+msgid "Clementine can play music that you have uploaded to Amazon Cloud Drive"
+msgstr "El Clementine pot reproduir música que hàgiu penjat a l’Amazon Cloud Drive"
+
 #: ../bin/src/ui_boxsettingspage.h:104
 msgid "Clementine can play music that you have uploaded to Box"
 msgstr "El Clementine pot reproduir música que hàgiu penjat al Box"
@@ -1273,6 +1281,7 @@ msgid "Click to toggle between remaining time and total time"
 msgstr "Feu clic aquí per alternar entre el temps de reproducció restant i total"
 
 #: ../bin/src/ui_soundcloudsettingspage.h:107
+#: ../bin/src/ui_amazonsettingspage.h:106
 #: ../bin/src/ui_googledrivesettingspage.h:106
 #: ../bin/src/ui_dropboxsettingspage.h:106
 #: ../bin/src/ui_skydrivesettingspage.h:106
@@ -1677,7 +1686,7 @@ msgstr "Redueix el volum"
 msgid "Default background image"
 msgstr "Imatge de fons per defecte"
 
-#: engines/gstengine.cpp:922
+#: engines/gstengine.cpp:919
 #, qt-format
 msgid "Default device on %1"
 msgstr "Dispositiu per defecte a %1"
@@ -2526,7 +2535,7 @@ msgstr "Baixos i aguts complets"
 msgid "Full Treble"
 msgstr "Aguts complets"
 
-#: ui/settingsdialog.cpp:138
+#: ui/settingsdialog.cpp:142
 msgid "General"
 msgstr "General"
 
@@ -2842,7 +2851,7 @@ msgstr "Comprovació d’integritat"
 msgid "Internet"
 msgstr "Internet"
 
-#: ui/settingsdialog.cpp:161
+#: ui/settingsdialog.cpp:165
 msgid "Internet providers"
 msgstr "Proveïdors d’Internet"
 
@@ -3076,7 +3085,7 @@ msgstr "Carrega la portada des del disc dur"
 msgid "Load cover from disk..."
 msgstr "Carrega la caràtula des del disc…"
 
-#: playlist/playlistcontainer.cpp:286
+#: playlist/playlistcontainer.cpp:291
 msgid "Load playlist"
 msgstr "Carrega la llista de reproducció"
 
@@ -3131,6 +3140,7 @@ msgstr "Carregar fitxers/URLs, substituïnt l'actual llista de reproducció"
 #: ../bin/src/ui_soundcloudsettingspage.h:106
 #: ../bin/src/ui_spotifysettingspage.h:211
 #: ../bin/src/ui_subsonicsettingspage.h:130
+#: ../bin/src/ui_amazonsettingspage.h:105
 #: ../bin/src/ui_lastfmsettingspage.h:153
 #: ../bin/src/ui_googledrivesettingspage.h:105
 #: ../bin/src/ui_dropboxsettingspage.h:105
@@ -3486,7 +3496,7 @@ msgstr "No hi ha cap caràtula que exportar."
 msgid "No long blocks"
 msgstr "No utilitzis blocs llargs"
 
-#: playlist/playlistcontainer.cpp:371
+#: playlist/playlistcontainer.cpp:376
 msgid ""
 "No matches found.  Clear the search box to show the whole playlist again."
 msgstr "No s’han trobat coincidències. Netegeu el quadre de cerca per mostrar de nou la llista de reproducció completa."
@@ -3832,7 +3842,7 @@ msgstr "Reproducció"
 msgid "Player options"
 msgstr "Opcions del reproductor"
 
-#: playlist/playlistcontainer.cpp:282 playlist/playlistlistcontainer.cpp:228
+#: playlist/playlistcontainer.cpp:287 playlist/playlistlistcontainer.cpp:228
 #: playlist/playlistmanager.cpp:87 playlist/playlistmanager.cpp:156
 #: playlist/playlistmanager.cpp:494 playlist/playlisttabbar.cpp:366
 msgid "Playlist"
@@ -5505,7 +5515,7 @@ msgstr "Usat"
 msgid "User %1 doesn't have a Grooveshark Anywhere account"
 msgstr "L’usuari %1 no té un compte Grooveshark Anywhere"
 
-#: ui/settingsdialog.cpp:152
+#: ui/settingsdialog.cpp:156
 msgid "User interface"
 msgstr "Interfície d’usuari"
 

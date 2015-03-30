@@ -17,8 +17,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2015-03-03 15:42+0000\n"
-"Last-Translator: 박정용 <kladess@gmail.com>\n"
+"PO-Revision-Date: 2015-03-27 15:10+0000\n"
+"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Korean (http://www.transifex.com/projects/p/clementine/language/ko/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -777,6 +777,10 @@ msgstr "항상 메인 창 표시함"
 msgid "Always start playing"
 msgstr "항상 재생 시작"
 
+#: ../bin/src/ui_amazonsettingspage.h:103
+msgid "Amazon"
+msgstr ""
+
 #: internet/spotify/spotifyblobdownloader.cpp:67
 msgid ""
 "An additional plugin is required to use Spotify in Clementine.  Would you "
@@ -1036,7 +1040,7 @@ msgstr "찾아보기..."
 msgid "Buffer duration"
 msgstr "버퍼 시간"
 
-#: engines/gstengine.cpp:876
+#: engines/gstengine.cpp:873
 msgid "Buffering"
 msgstr "버퍼링"
 
@@ -1141,7 +1145,7 @@ msgstr "Vk.com 캐시 디렉터리 선택"
 msgid "Choose a name for your smart playlist"
 msgstr "스마트 재생목록에 이름 추가"
 
-#: engines/gstengine.cpp:897
+#: engines/gstengine.cpp:894
 msgid "Choose automatically"
 msgstr "자동 선택"
 
@@ -1216,6 +1220,10 @@ msgid ""
 "a format that it can play."
 msgstr "Clementine은 이 장치에서 복사한 곡을 재생 가능한 형식으로 자동 변환할 수 있습니다."
 
+#: ../bin/src/ui_amazonsettingspage.h:104
+msgid "Clementine can play music that you have uploaded to Amazon Cloud Drive"
+msgstr ""
+
 #: ../bin/src/ui_boxsettingspage.h:104
 msgid "Clementine can play music that you have uploaded to Box"
 msgstr "Clementine은 당신이 Box에 업로드한 음악을 재생할 수 있습니다."
@@ -1276,6 +1284,7 @@ msgid "Click to toggle between remaining time and total time"
 msgstr "남은 시간과 전체 시간을 바꾸려면 클릭하세요"
 
 #: ../bin/src/ui_soundcloudsettingspage.h:107
+#: ../bin/src/ui_amazonsettingspage.h:106
 #: ../bin/src/ui_googledrivesettingspage.h:106
 #: ../bin/src/ui_dropboxsettingspage.h:106
 #: ../bin/src/ui_skydrivesettingspage.h:106
@@ -1680,7 +1689,7 @@ msgstr "음량 줄이기"
 msgid "Default background image"
 msgstr "기본 배경 그림"
 
-#: engines/gstengine.cpp:922
+#: engines/gstengine.cpp:919
 #, qt-format
 msgid "Default device on %1"
 msgstr "%1를 기본 장치로 설정"
@@ -2529,7 +2538,7 @@ msgstr "베이스+고음 강화"
 msgid "Full Treble"
 msgstr "고음 강화"
 
-#: ui/settingsdialog.cpp:138
+#: ui/settingsdialog.cpp:142
 msgid "General"
 msgstr "일반 "
 
@@ -2845,7 +2854,7 @@ msgstr "무결성 검사"
 msgid "Internet"
 msgstr "인터넷"
 
-#: ui/settingsdialog.cpp:161
+#: ui/settingsdialog.cpp:165
 msgid "Internet providers"
 msgstr "인터넷 "
 
@@ -3079,7 +3088,7 @@ msgstr "디스크로부터 커버 열기"
 msgid "Load cover from disk..."
 msgstr "디스크로부터 커버열기..."
 
-#: playlist/playlistcontainer.cpp:286
+#: playlist/playlistcontainer.cpp:291
 msgid "Load playlist"
 msgstr "재생목록 불러오기"
 
@@ -3134,6 +3143,7 @@ msgstr "현재 재생목록을 교체할 파일/URL 불러오기"
 #: ../bin/src/ui_soundcloudsettingspage.h:106
 #: ../bin/src/ui_spotifysettingspage.h:211
 #: ../bin/src/ui_subsonicsettingspage.h:130
+#: ../bin/src/ui_amazonsettingspage.h:105
 #: ../bin/src/ui_lastfmsettingspage.h:153
 #: ../bin/src/ui_googledrivesettingspage.h:105
 #: ../bin/src/ui_dropboxsettingspage.h:105
@@ -3489,7 +3499,7 @@ msgstr "내보낼수 있는 커버가 없습니다."
 msgid "No long blocks"
 msgstr "긴 블록 "
 
-#: playlist/playlistcontainer.cpp:371
+#: playlist/playlistcontainer.cpp:376
 msgid ""
 "No matches found.  Clear the search box to show the whole playlist again."
 msgstr "일치하는 결과를 찾을 수 없습니다. 검색창을 비우시면 전체 재생목록을 보실 수 있습니다."
@@ -3835,7 +3845,7 @@ msgstr "재생"
 msgid "Player options"
 msgstr "플레이어 옵션"
 
-#: playlist/playlistcontainer.cpp:282 playlist/playlistlistcontainer.cpp:228
+#: playlist/playlistcontainer.cpp:287 playlist/playlistlistcontainer.cpp:228
 #: playlist/playlistmanager.cpp:87 playlist/playlistmanager.cpp:156
 #: playlist/playlistmanager.cpp:494 playlist/playlisttabbar.cpp:366
 msgid "Playlist"
@@ -5508,7 +5518,7 @@ msgstr "사용 됨"
 msgid "User %1 doesn't have a Grooveshark Anywhere account"
 msgstr "사용자 %1 은(는) Grooveshark Anywhere 계정이 아닙니다"
 
-#: ui/settingsdialog.cpp:152
+#: ui/settingsdialog.cpp:156
 msgid "User interface"
 msgstr "사용자 인터페이스"
 
