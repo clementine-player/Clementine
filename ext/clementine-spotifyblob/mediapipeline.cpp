@@ -53,17 +53,21 @@ bool MediaPipeline::Init(int sample_rate, int channels) {
   if (!pipeline_ || !appsrc_ || !tcpsink_) {
     if (pipeline_) {
       gst_object_unref(GST_OBJECT(pipeline_));
+      qLog(Debug) << "have pipeline_";
       pipeline_ = nullptr;
     }
     if (appsrc_) {
       gst_object_unref(GST_OBJECT(appsrc_));
+      qLog(Debug) << "have appsrc_";
       appsrc_ = nullptr;
     }
     if (gdppay) {
       gst_object_unref(GST_OBJECT(gdppay));
+      qLog(Debug) << "have gdppay";
     }
     if (tcpsink_) {
       gst_object_unref(GST_OBJECT(tcpsink_));
+      qLog(Debug) << "have tcpsink_";
       tcpsink_ = nullptr;
     }
     return false;
@@ -116,7 +120,7 @@ bool MediaPipeline::Init(int sample_rate, int channels) {
 
   // Set size
   byte_rate_ = quint64(sample_rate) * channels * 2;
-  const quint64 bytes = -1; //byte_rate_ * length_msec_ / 1000;
+  const quint64 bytes = byte_rate_ * length_msec_ / 1000;
   gst_app_src_set_size(appsrc_, bytes);
 
   // Ready to go
@@ -141,12 +145,6 @@ void MediaPipeline::WriteData(const char* data, qint64 length) {
   offset_bytes_ += length;
 
   gst_app_src_push_buffer(appsrc_, buffer);
-}
-
-void MediaPipeline::SendEvent() {
-  GstTagList* list = gst_tag_list_new_empty();
-  GstEvent* tag = gst_event_new_tag(list);
-  gst_element_send_event(pipeline_, tag);
 }
 
 void MediaPipeline::EndStream() {

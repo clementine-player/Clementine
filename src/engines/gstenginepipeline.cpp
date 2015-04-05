@@ -79,6 +79,7 @@ GstEnginePipeline::GstEnginePipeline(GstEngine* engine)
       volume_modifier_(1.0),
       pipeline_(nullptr),
       uridecodebin_(nullptr),
+      uridecodebin_next_spotify_(nullptr),
       audiobin_(nullptr),
       queue_(nullptr),
       audioconvert_(nullptr),
@@ -89,7 +90,8 @@ GstEnginePipeline::GstEnginePipeline(GstEngine* engine)
       stereo_panorama_(nullptr),
       volume_(nullptr),
       audioscale_(nullptr),
-      audiosink_(nullptr) {
+      audiosink_(nullptr),
+      spotify_port_(0) {
   if (!sElementDeleter) {
     sElementDeleter = new GstElementDeleter;
   }
@@ -147,29 +149,16 @@ bool GstEnginePipeline::ReplaceDecodeBin(const QUrl& url) {
   GstElement* new_bin = nullptr;
 
   if (url.scheme() == "spotify") {
-    new_bin = gst_bin_new("spotify_bin");
-
-    // Create elements
-    GstElement* src = engine_->CreateElement("tcpserversrc", new_bin);
-    GstElement* gdp = engine_->CreateElement("gdpdepay", new_bin);
-    if (!src || !gdp) return false;
-
-    // Pick a port number
-    const int port = Utilities::PickUnusedPort();
-    g_object_set(G_OBJECT(src), "host", "127.0.0.1", nullptr);
-    g_object_set(G_OBJECT(src), "port", port, nullptr);
-
-    // Link the elements
-    gst_element_link(src, gdp);
-
-    // Add a ghost pad
-    GstPad* pad = gst_element_get_static_pad(gdp, "src");
-    gst_element_add_pad(GST_ELEMENT(new_bin), gst_ghost_pad_new("src", pad));
-    gst_object_unref(GST_OBJECT(pad));
+    if (uridecodebin_next_spotify_) {
+      new_bin = uridecodebin_next_spotify_;
+      uridecodebin_next_spotify_ = nullptr;
+    } else {
+      new_bin = NewSpotifyBin();
+    }
 
     // Tell spotify to start sending data to us.
     InternetModel::Service<SpotifyService>()->server()->StartPlaybackLater(
-        url.toString(), port);
+        url.toString(), spotify_port_);
   } else {
     new_bin = engine_->CreateElement("uridecodebin");
     g_object_set(G_OBJECT(new_bin), "uri", url.toEncoded().constData(),
@@ -182,6 +171,30 @@ bool GstEnginePipeline::ReplaceDecodeBin(const QUrl& url) {
   }
 
   return ReplaceDecodeBin(new_bin);
+}
+
+GstElement* GstEnginePipeline::NewSpotifyBin() {
+  GstElement* new_bin = gst_bin_new("spotify_bin");
+
+  // Create elements
+  GstElement* src = engine_->CreateElement("tcpserversrc", new_bin);
+  GstElement* gdp = engine_->CreateElement("gdpdepay", new_bin);
+  if (!src || !gdp) return nullptr;
+
+  // Pick a port number
+  spotify_port_ = Utilities::PickUnusedPort();
+  g_object_set(G_OBJECT(src), "host", "127.0.0.1", nullptr);
+  g_object_set(G_OBJECT(src), "port", spotify_port_, nullptr);
+
+  // Link the elements
+  gst_element_link(src, gdp);
+
+  // Add a ghost pad
+  GstPad* pad = gst_element_get_static_pad(gdp, "src");
+  gst_element_add_pad(GST_ELEMENT(new_bin), gst_ghost_pad_new("src", pad));
+  gst_object_unref(GST_OBJECT(pad));
+
+  return new_bin;
 }
 
 GstElement* GstEnginePipeline::CreateDecodeBinFromString(const char* pipeline) {
@@ -492,7 +505,11 @@ GstBusSyncReply GstEnginePipeline::BusCallbackSync(GstBus*, GstMessage* msg,
 
   switch (GST_MESSAGE_TYPE(msg)) {
     case GST_MESSAGE_EOS:
-      emit instance->EndOfStreamReached(instance->id(), instance->has_next_valid_url());
+      if (instance->has_next_valid_url()) {
+        QMetaObject::invokeMethod(instance, "TransitionToNext", Qt::QueuedConnection);
+      } else {
+        emit instance->EndOfStreamReached(instance->id(), instance->has_next_valid_url());
+      }
       break;
 
     case GST_MESSAGE_TAG:
@@ -1159,9 +1176,12 @@ void GstEnginePipeline::SetNextUrl(const QUrl& url, qint64 beginning_nanosec,
   next_end_offset_nanosec_ = end_nanosec;
 
   if (url.scheme() == "spotify") {
+    // Call this first, then we have a new spotify_port_
+    uridecodebin_next_spotify_ = NewSpotifyBin();
+
     SpotifyService* spotify = InternetModel::Service<SpotifyService>();
     QMetaObject::invokeMethod(spotify, "SetNextUrl", Qt::QueuedConnection,
-                              Q_ARG(QUrl, url));
+                              Q_ARG(QUrl, url), Q_ARG(int, spotify_port_));
   }
 }
 

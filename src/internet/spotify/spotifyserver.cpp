@@ -39,7 +39,7 @@ SpotifyServer::SpotifyServer(QObject* parent)
 }
 
 void SpotifyServer::Init() {
-  if (!server_->listen(QHostAddress::LocalHost)) {
+  if (!server_->listen(QHostAddress::LocalHost, 56154)) {
     qLog(Error) << "Couldn't open server socket" << server_->errorString();
   }
 }
@@ -331,9 +331,11 @@ void SpotifyServer::SetPaused(const bool paused) {
   SendOrQueueMessage(message);
 }
 
-void SpotifyServer::PrefetchTrack(const QUrl& url) {
+void SpotifyServer::PrefetchTrack(const QUrl& url, const int port) {
   pb::spotify::Message message;
-  pb::spotify::PrefetchRequest* req = message.mutable_prefetch_request();
+  pb::spotify::PlaybackRequest* req = message.mutable_prefetch_request();
   req->set_track_uri(DataCommaSizeFromQString(url.toString()));
+  req->set_media_port(port);
+
   SendOrQueueMessage(message);
 }

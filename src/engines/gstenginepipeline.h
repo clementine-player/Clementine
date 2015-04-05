@@ -158,8 +158,9 @@ signals:
   void UpdateStereoBalance();
   bool ReplaceDecodeBin(GstElement* new_bin);
   bool ReplaceDecodeBin(const QUrl& url);
+  GstElement* NewSpotifyBin();
 
-  void TransitionToNext();
+  Q_INVOKABLE void TransitionToNext();
 
   // If the decodebin is special (ie. not really a uridecodebin) then it'll have
   // a src pad immediately and we can link it after everything's created.
@@ -272,6 +273,7 @@ signals:
   // Bins
   // uridecodebin ! audiobin
   GstElement* uridecodebin_;
+  GstElement* uridecodebin_next_spotify_;
   GstElement* audiobin_;
 
   // Elements in the audiobin.  See comments in Init()'s definition.
@@ -292,6 +294,8 @@ signals:
   QThreadPool set_state_threadpool_;
 
   GstSegment last_decodebin_segment_;
+
+  int spotify_port_;
 };
 
 #endif  // GSTENGINEPIPELINE_H
