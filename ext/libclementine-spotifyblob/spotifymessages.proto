@@ -108,10 +108,6 @@ message PlaybackRequest {
   required int32 media_port = 2;
 }
 
-message PrefetchRequest {
-  required string track_uri = 1;
-}
-
 message PlaybackError {
   required string error = 1;
 }
@@ -237,5 +233,5 @@ message Message {
   // ID 22 unused.
   optional AddTracksToPlaylistRequest add_tracks_to_playlist = 23;
   optional RemoveTracksFromPlaylistRequest remove_tracks_from_playlist = 24;
-  optional PrefetchRequest prefetch_request = 25;
+  optional PlaybackRequest prefetch_request = 25;
 }

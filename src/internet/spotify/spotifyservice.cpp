@@ -342,7 +342,6 @@ void SpotifyService::StartBlobProcess() {
       InstallBlob();
     }
 #endif
-
     return;
   }
 
@@ -355,8 +354,8 @@ void SpotifyService::StartBlobProcess() {
           SLOT(BlobProcessError(QProcess::ProcessError)));
 
   qLog(Info) << "Starting" << blob_path;
-  blob_process_->start(
-      blob_path, QStringList() << QString::number(server_->server_port()));
+  //blob_process_->start(
+  //    blob_path, QStringList() << QString::number(server_->server_port()));
 }
 
 bool SpotifyService::IsBlobInstalled() const {
@@ -873,10 +872,10 @@ void SpotifyService::SetPaused(bool paused) {
   server_->SetPaused(paused);
 }
 
-void SpotifyService::SetNextUrl(const QUrl &url) {
-  qLog(Debug) << "Next Spotify Url" << url;
+void SpotifyService::SetNextUrl(const QUrl &url, const int port) {
+  qLog(Debug) << "Next Spotify Url" << url << port;
   EnsureServerCreated();
-  server_->PrefetchTrack(url);
+  server_->PrefetchTrack(url, port);
 }
 
 void SpotifyService::SyncPlaylistProgress(

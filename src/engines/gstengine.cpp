@@ -657,12 +657,6 @@ void GstEngine::timerEvent(QTimerEvent* e) {
 
     // only if we know the length of the current stream...
     if (current_length > 0) {
-      if (remaining < 0) {
-        qDebug() << "Remaning 0" << current_pipeline_->has_next_valid_url();
-        EndOfStreamReached(current_pipeline_->id(), current_pipeline_->has_next_valid_url());
-        //current_pipeline_->SpotifyMovedToNextTrack();
-        return;
-      }
       // emit TrackAboutToEnd when we're a few seconds away from finishing
       if (remaining < gap + fudge) {
         EmitAboutToEnd();

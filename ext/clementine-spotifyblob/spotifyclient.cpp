@@ -851,9 +851,16 @@ void SpotifyClient::EndOfTrackCallback(sp_session* session) {
   SpotifyClient* me =
       reinterpret_cast<SpotifyClient*>(sp_session_userdata(session));
 
+  qLog(Debug) << "EndOfTrackCallback";
+
   if (me->gapless_playback_ && !me->prefetched_tracks_.isEmpty()) {
     for (const PrefetchTrackRequest req : me->prefetched_tracks_.values()) {
-      me->ContinueGaplessPlayback(req);
+      if (me->gapless_playback_ && me->media_pipeline_prefetch_) {
+        qLog(Debug) << "EndOfTrackCallback - new pipeline";
+        me->media_pipeline_.reset(me->media_pipeline_prefetch_);
+        me->media_pipeline_prefetch_ = nullptr;
+        me->ContinueGaplessPlayback(req);
+      }
     }
   } else {
     me->media_pipeline_.reset();
@@ -1030,7 +1037,7 @@ void SpotifyClient::TryPlaybackAgain(const PendingPlaybackRequest& req) {
   pending_playback_requests_.removeAll(req);
 }
 
-void SpotifyClient::PrefetchTrack(const pb::spotify::PrefetchRequest &req) {
+void SpotifyClient::PrefetchTrack(const pb::spotify::PlaybackRequest &req) {
   // Get a link object from the URI
   sp_link* link = sp_link_create_from_string(req.track_uri().c_str());
   if (!link) {
@@ -1062,8 +1069,8 @@ void SpotifyClient::PrefetchTrack(const pb::spotify::PrefetchRequest &req) {
 
   prefetched_tracks_.insert(uri, prefetch_request);
 
-  qDebug() << "Sending event";
-  media_pipeline_->SendEvent();
+  media_pipeline_prefetch_ = new MediaPipeline(req.media_port(),
+                                          sp_track_duration(track));
 }
 
 void SpotifyClient::SendPlaybackError(const QString& error) {

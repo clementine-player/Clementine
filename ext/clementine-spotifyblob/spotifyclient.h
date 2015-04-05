@@ -132,7 +132,7 @@ class SpotifyClient : public AbstractMessageHandler<pb::spotify::Message> {
   void BrowseToplist(const pb::spotify::BrowseToplistRequest& req);
   void SetPlaybackSettings(const pb::spotify::PlaybackSettings& req);
   void SetPaused(const pb::spotify::PauseRequest& req);
-  void PrefetchTrack(const pb::spotify::PrefetchRequest& req);
+  void PrefetchTrack(const pb::spotify::PlaybackRequest& req);
 
   void SendPlaylistList();
 
@@ -210,6 +210,7 @@ class SpotifyClient : public AbstractMessageHandler<pb::spotify::Message> {
   QMap<sp_albumbrowse*, sp_search*> pending_search_album_browse_responses_;
 
   QScopedPointer<MediaPipeline> media_pipeline_;
+  MediaPipeline* media_pipeline_prefetch_;
 };
 
 #endif  // SPOTIFYCLIENT_H
