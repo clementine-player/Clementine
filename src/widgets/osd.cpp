@@ -337,6 +337,8 @@ QString OSD::ReplaceVariable(const QString& variable, const Song& song) {
     return song.performer();
   } else if (variable == "%grouping%") {
     return song.grouping();
+  } else if (variable == "%lyrics%") {
+    return song.lyrics();
   } else if (variable == "%length%") {
     return song.PrettyLength();
   } else if (variable == "%disc%") {

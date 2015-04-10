@@ -51,6 +51,7 @@ message SongMetadata {
   optional string etag = 30;
   optional string performer = 31;
   optional string grouping = 32;
+  optional string lyrics = 33;
 }
 
 message ReadFileRequest {
