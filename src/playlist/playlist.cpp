@@ -1761,7 +1761,7 @@ void Playlist::ExpandDynamicPlaylist() {
 }
 
 void Playlist::RemoveItemsNotInQueue() {
-  if (queue_->is_empty()) {
+  if (queue_->is_empty() && !current_item_index_.isValid()) {
     RemoveItemsWithoutUndo(0, items_.count());
     return;
   }
@@ -1771,7 +1771,7 @@ void Playlist::RemoveItemsNotInQueue() {
     // Find a place to start - first row that isn't in the queue
     forever {
       if (start >= rowCount()) return;
-      if (!queue_->ContainsSourceRow(start)) break;
+      if (!queue_->ContainsSourceRow(start) && current_row() != start) break;
       start++;
     }
 
@@ -1780,7 +1780,9 @@ void Playlist::RemoveItemsNotInQueue() {
     int count = 1;
     forever {
       if (start + count >= rowCount()) break;
-      if (queue_->ContainsSourceRow(start + count)) break;
+      if (queue_->ContainsSourceRow(start + count) ||
+          current_row() == start + count)
+        break;
       count++;
     }
 
