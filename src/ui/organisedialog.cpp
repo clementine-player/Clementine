@@ -65,6 +65,7 @@ OrganiseDialog::OrganiseDialog(TaskManager* task_manager, QWidget* parent)
   tags[tr("Composer")] = "composer";
   tags[tr("Performer")] = "performer";
   tags[tr("Grouping")] = "grouping";
+  tags[tr("Lyrics")] = "lyrics";
   tags[tr("Track")] = "track";
   tags[tr("Disc")] = "disc";
   tags[tr("BPM")] = "bpm";
@@ -315,7 +316,8 @@ void OrganiseDialog::showEvent(QShowEvent*) {
   ui_->replace_spaces->setChecked(s.value("replace_spaces", false).toBool());
   ui_->replace_the->setChecked(s.value("replace_the", false).toBool());
   ui_->overwrite->setChecked(s.value("overwrite", false).toBool());
-  ui_->mark_as_listened->setChecked(s.value("mark_as_listened", false).toBool());
+  ui_->mark_as_listened->setChecked(
+      s.value("mark_as_listened", false).toBool());
   ui_->eject_after->setChecked(s.value("eject_after", false).toBool());
 
   QString destination = s.value("destination").toString();
@@ -349,12 +351,11 @@ void OrganiseDialog::accept() {
   const bool copy = ui_->aftercopying->currentIndex() == 0;
   Organise* organise = new Organise(
       task_manager_, storage, format_, copy, ui_->overwrite->isChecked(),
-      ui_->mark_as_listened->isChecked(),
-      new_songs_info_, ui_->eject_after->isChecked());
+      ui_->mark_as_listened->isChecked(), new_songs_info_,
+      ui_->eject_after->isChecked());
   connect(organise, SIGNAL(Finished(QStringList)),
           SLOT(OrganiseFinished(QStringList)));
-  connect(organise, SIGNAL(FileCopied(int)),
-          this, SIGNAL(FileCopied(int)));
+  connect(organise, SIGNAL(FileCopied(int)), this, SIGNAL(FileCopied(int)));
   organise->Start();
 
   QDialog::accept();

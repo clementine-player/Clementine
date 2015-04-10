@@ -331,6 +331,7 @@ QVariantMap Mpris1::GetMetadata(const Song& song) {
   AddMetadata("composer", song.composer(), &ret);
   AddMetadata("performer", song.performer(), &ret);
   AddMetadata("grouping", song.grouping(), &ret);
+  AddMetadata("lyrics", song.lyrics(), &ret);
   if (song.rating() != -1.0) {
     AddMetadata("rating", song.rating() * 5, &ret);
   }

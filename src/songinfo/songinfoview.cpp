@@ -18,6 +18,7 @@
 #include "config.h"
 #include "songinfoprovider.h"
 #include "songinfoview.h"
+#include "taglyricsinfoprovider.h"
 #include "ultimatelyricsprovider.h"
 #include "ultimatelyricsreader.h"
 
@@ -48,6 +49,7 @@ SongInfoView::SongInfoView(QWidget* parent)
 #ifdef HAVE_LIBLASTFM
   fetcher_->AddProvider(new LastfmTrackInfoProvider);
 #endif
+  fetcher_->AddProvider(new TagLyricsInfoProvider);
 }
 
 SongInfoView::~SongInfoView() {}
