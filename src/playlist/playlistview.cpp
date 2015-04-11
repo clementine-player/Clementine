@@ -27,7 +27,7 @@
 #include "covers/currentartloader.h"
 #include "ui/qt_blurimage.h"
 
-#include <QCleanlooksStyle>
+#include <QCommonStyle>
 #include <QClipboard>
 #include <QPainter>
 #include <QHeaderView>
@@ -39,6 +39,7 @@
 #include <QSortFilterProxyModel>
 #include <QScrollBar>
 #include <QTimeLine>
+#include <QMimeData>
 
 #include <math.h>
 
@@ -60,7 +61,7 @@ const int PlaylistView::kDefaultBlurRadius = 0;
 const int PlaylistView::kDefaultOpacityLevel = 40;
 
 PlaylistProxyStyle::PlaylistProxyStyle(QStyle* base)
-    : QProxyStyle(base), cleanlooks_(new QCleanlooksStyle) {}
+    : QProxyStyle(base), common_style_(new QCommonStyle) {}
 
 void PlaylistProxyStyle::drawControl(ControlElement element,
                                      const QStyleOption* option,
@@ -85,7 +86,7 @@ void PlaylistProxyStyle::drawControl(ControlElement element,
   }
 
   if (element == CE_ItemViewItem)
-    cleanlooks_->drawControl(element, option, painter, widget);
+    common_style_->drawControl(element, option, painter, widget);
   else
     QProxyStyle::drawControl(element, option, painter, widget);
 }
@@ -96,7 +97,7 @@ void PlaylistProxyStyle::drawPrimitive(PrimitiveElement element,
                                        const QWidget* widget) const {
   if (element == QStyle::PE_PanelItemViewRow ||
       element == QStyle::PE_PanelItemViewItem)
-    cleanlooks_->drawPrimitive(element, option, painter, widget);
+    common_style_->drawPrimitive(element, option, painter, widget);
   else
     QProxyStyle::drawPrimitive(element, option, painter, widget);
 }
@@ -132,7 +133,7 @@ PlaylistView::PlaylistView(QWidget* parent)
       drag_over_(false),
       dynamic_controls_(new DynamicPlaylistControls(this)) {
   setHeader(header_);
-  header_->setMovable(true);
+  header_->setSectionsMovable(true);
   setStyle(style_);
   setMouseTracking(true);
 

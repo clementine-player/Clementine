@@ -23,6 +23,7 @@
 #include "globalshortcutbackend.h"
 
 class QxtGlobalShortcut;
+class QAction;
 
 class QxtGlobalShortcutBackend : public GlobalShortcutBackend {
  public:
