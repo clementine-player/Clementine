@@ -48,7 +48,8 @@ void IcecastModel::Reset() {
 
   LazyPopulate(root_);
 
-  reset();
+  beginResetModel();
+  endResetModel();
 }
 
 void IcecastModel::LazyPopulate(IcecastItem* parent) {

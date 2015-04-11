@@ -184,12 +184,14 @@ void MergedProxyModel::SourceModelReset() {
   // Delete all mappings
   DeleteAllMappings();
 
+  // Reset the proxy
+  beginResetModel();
+
   // Clear the containers
   p_->mappings_.clear();
   merge_points_.clear();
 
-  // Reset the proxy
-  reset();
+  endResetModel();
 }
 
 void MergedProxyModel::SubModelReset() {
@@ -498,7 +500,8 @@ void MergedProxyModel::LayoutChanged() {
     const int new_row = merge_points_[key].row();
 
     if (old_row != new_row) {
-      reset();
+      beginResetModel();
+      endResetModel();
       return;
     }
   }

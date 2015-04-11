@@ -22,6 +22,7 @@
 
 #include <QSyntaxHighlighter>
 #include <QValidator>
+#include <QTextEdit>
 
 #include "core/song.h"
 

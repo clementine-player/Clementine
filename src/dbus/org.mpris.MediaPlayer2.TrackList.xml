@@ -5,9 +5,8 @@
 	<interface name='org.mpris.MediaPlayer2.TrackList'>
 		<method name='GetTracksMetadata'>
 			<arg direction='in' name='TrackIds' type='ao'/>
-			<arg direction='out' name='Metadata' type='aa{sv}'>
-				<annotation name="com.trolltech.QtDBus.QtTypeName.Out0" value="TrackMetadata" />
-			</arg>
+			<arg direction='out' name='Metadata' type='aa{sv}'/>
+			<annotation name="com.trolltech.QtDBus.QtTypeName.Out0" value="TrackMetadata" />
 		</method>
 		<method name='AddTrack'>
 			<arg direction='in' name='Uri' type='s'/>
@@ -25,19 +24,17 @@
 			<arg name='CurrentTrack' type='o'/>
 		</signal>
 		<signal name='TrackAdded'>
-			<arg name='Metadata' type='a{sv}'>
-				<annotation name="com.trolltech.QtDBus.QtTypeName.In0" value="TrackMetadata"/>
-			</arg>
+			<arg name='Metadata' type='a{sv}'/>
 			<arg name='AfterTrack' type='o'/>
+			<annotation name="com.trolltech.QtDBus.QtTypeName.In0" value="TrackMetadata"/>
 		</signal>
 		<signal name='TrackRemoved'>
 			<arg name='TrackId' type='o'/>
 		</signal>
 		<signal name='TrackMetadataChanged'>
 			<arg name='TrackId' type='o'/>
-			<arg name='Metadata' type='a{sv}'>
-				<annotation name="com.trolltech.QtDBus.QtTypeName.In1" value="TrackMetadata"/>
-			</arg>
+			<arg name='Metadata' type='a{sv}'/>
+			<annotation name="com.trolltech.QtDBus.QtTypeName.In1" value="TrackMetadata"/>
 		</signal>
 		<property name='Tracks' type='ao' access='read'/>
 		<property name='CanEditTracks' type='b' access='read'/>

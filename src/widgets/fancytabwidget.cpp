@@ -47,7 +47,7 @@
 #include <QToolButton>
 #include <QToolTip>
 #include <QVBoxLayout>
-#include <QWindowsStyle>
+#include <QCommonStyle>
 
 using namespace Core;
 using namespace Internal;
@@ -135,7 +135,7 @@ void FancyTabProxyStyle::drawControl(ControlElement element,
   p->drawText(text_rect, textFlags, text);
   p->setPen(selected ? QColor(60, 60, 60)
                      : Utils::StyleHelper::panelTextColor());
-#ifndef Q_WS_MAC
+#ifndef Q_OS_MAC
   if (widget) {
     const QString fader_key = "tab_" + text + "_fader";
     const QString animation_key = "tab_" + text + "_animation";
@@ -260,7 +260,7 @@ void FancyTab::setFader(float value) {
 
 FancyTabBar::FancyTabBar(QWidget* parent) : QWidget(parent) {
   setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Expanding);
-  setStyle(new QWindowsStyle);
+  setStyle(new QCommonStyle);
   setMinimumWidth(qMax(2 * m_rounding, 40));
   setAttribute(Qt::WA_Hover, true);
   setFocusPolicy(Qt::NoFocus);
@@ -419,7 +419,7 @@ void FancyTabBar::paintTab(QPainter* painter, int tabIndex) const {
   painter->drawText(tabTextRect, textFlags, tabText);
   painter->setPen(selected ? QColor(60, 60, 60)
                            : Utils::StyleHelper::panelTextColor());
-#ifndef Q_WS_MAC
+#ifndef Q_OS_MAC
   if (!selected) {
     painter->save();
     int fader = int(m_tabs[tabIndex]->fader());

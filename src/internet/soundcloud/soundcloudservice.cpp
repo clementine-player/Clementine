@@ -25,9 +25,11 @@
 #include <QNetworkReply>
 #include <QNetworkRequest>
 #include <QTimer>
-
-#include <qjson/parser.h>
-#include <qjson/serializer.h>
+#include <QUrlQuery>
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QJsonParseError>
+#include <QJsonArray>
 
 #include "internet/core/internetmodel.h"
 #include "internet/core/oauthenticator.h"
@@ -224,7 +226,7 @@ void SoundCloudService::RetrieveUserData() {
 void SoundCloudService::RetrieveUserTracks() {
   QList<Param> parameters;
   parameters << Param("oauth_token", access_token_);
-  QNetworkReply* reply = CreateRequest("me/tracks", parameters);
+  QNetworkReply* reply = CreateRequest("/me/tracks", parameters);
   NewClosure(reply, SIGNAL(finished()), this,
              SLOT(UserTracksRetrieved(QNetworkReply*)), reply);
 }
@@ -232,7 +234,7 @@ void SoundCloudService::RetrieveUserTracks() {
 void SoundCloudService::UserTracksRetrieved(QNetworkReply* reply) {
   reply->deleteLater();
 
-  SongList songs = ExtractSongs(ExtractResult(reply));
+  SongList songs = ExtractSongs(ExtractResult(reply).array());
   // Fill results list
   for (const Song& song : songs) {
     QStandardItem* child = CreateSongItem(song);
@@ -243,7 +245,7 @@ void SoundCloudService::UserTracksRetrieved(QNetworkReply* reply) {
 void SoundCloudService::RetrieveUserActivities() {
   QList<Param> parameters;
   parameters << Param("oauth_token", access_token_);
-  QNetworkReply* reply = CreateRequest("me/activities", parameters);
+  QNetworkReply* reply = CreateRequest("/me/activities", parameters);
   NewClosure(reply, SIGNAL(finished()), this,
              SLOT(UserActivitiesRetrieved(QNetworkReply*)), reply);
 }
@@ -251,7 +253,7 @@ void SoundCloudService::RetrieveUserActivities() {
 void SoundCloudService::UserActivitiesRetrieved(QNetworkReply* reply) {
   reply->deleteLater();
 
-  QList<QStandardItem*> activities = ExtractActivities(ExtractResult(reply));
+  QList<QStandardItem*> activities = ExtractActivities(ExtractResult(reply).object());
   // Fill results list
   for (QStandardItem* activity : activities) {
     user_activities_->appendRow(activity);
@@ -261,7 +263,7 @@ void SoundCloudService::UserActivitiesRetrieved(QNetworkReply* reply) {
 void SoundCloudService::RetrieveUserPlaylists() {
   QList<Param> parameters;
   parameters << Param("oauth_token", access_token_);
-  QNetworkReply* reply = CreateRequest("me/playlists", parameters);
+  QNetworkReply* reply = CreateRequest("/me/playlists", parameters);
   NewClosure(reply, SIGNAL(finished()), this,
              SLOT(UserPlaylistsRetrieved(QNetworkReply*)), reply);
 }
@@ -277,12 +279,12 @@ void SoundCloudService::RetrieveUserFavorites() {
 void SoundCloudService::UserPlaylistsRetrieved(QNetworkReply* reply) {
   reply->deleteLater();
 
-  QList<QVariant> playlists = ExtractResult(reply).toList();
-  for (const QVariant& playlist : playlists) {
-    QMap<QString, QVariant> playlist_map = playlist.toMap();
+  QJsonArray json_playlists = ExtractResult(reply).array();
+  for (const QJsonValue& playlist : json_playlists) {
+    QJsonObject json_playlist = playlist.toObject();
 
-    QStandardItem* playlist_item = CreatePlaylistItem(playlist_map["title"].toString());
-    SongList songs = ExtractSongs(playlist_map["tracks"]);
+    QStandardItem* playlist_item = CreatePlaylistItem(json_playlist["title"].toString());
+    SongList songs = ExtractSongs(json_playlist["tracks"].toArray());
     for (const Song& song : songs) {
       playlist_item->appendRow(CreateSongItem(song));
     }
@@ -334,7 +336,7 @@ void SoundCloudService::DoSearch() {
 void SoundCloudService::SearchFinished(QNetworkReply* reply, int task_id) {
   reply->deleteLater();
 
-  SongList songs = ExtractSongs(ExtractResult(reply));
+  SongList songs = ExtractSongs(ExtractResult(reply).array());
   // Fill results list
   for (const Song& song : songs) {
     QStandardItem* child = CreateSongItem(song);
@@ -364,7 +366,7 @@ int SoundCloudService::SimpleSearch(const QString& text) {
 void SoundCloudService::SimpleSearchFinished(QNetworkReply* reply, int id) {
   reply->deleteLater();
 
-  SongList songs = ExtractSongs(ExtractResult(reply));
+  SongList songs = ExtractSongs(ExtractResult(reply).array());
   emit SimpleSearchResults(id, songs);
 }
 
@@ -402,11 +404,14 @@ QNetworkReply* SoundCloudService::CreateRequest(const QString& ressource_name,
   QUrl url(kUrl);
 
   url.setPath(ressource_name);
+  QUrlQuery url_query;
 
-  url.addQueryItem("client_id", kApiClientId);
+  url_query.addQueryItem("client_id", kApiClientId);
   for (const Param& param : params) {
-    url.addQueryItem(param.first, param.second);
+    url_query.addQueryItem(param.first, param.second);
   }
+
+  url.setQuery(url_query);
 
   qLog(Debug) << "Request Url: " << url.toEncoded();
 
@@ -416,7 +421,7 @@ QNetworkReply* SoundCloudService::CreateRequest(const QString& ressource_name,
   return reply;
 }
 
-QVariant SoundCloudService::ExtractResult(QNetworkReply* reply) {
+QJsonDocument SoundCloudService::ExtractResult(QNetworkReply* reply) {
   if (reply->error() != QNetworkReply::NoError) {
     qLog(Error) << "Error when retrieving SoundCloud results:"
                 << reply->errorString() << QString(" (%1)").arg(reply->error());
@@ -426,16 +431,16 @@ QVariant SoundCloudService::ExtractResult(QNetworkReply* reply) {
         reply->error() == QNetworkReply::AuthenticationRequiredError) {
       // In case of access denied errors (invalid token?) logout
       Logout();
-      return QVariant();
+      return QJsonDocument();
     }
   }
-  QJson::Parser parser;
-  bool ok;
-  QVariant result = parser.parse(reply, &ok);
-  if (!ok) {
+  QJsonParseError error;
+  QJsonDocument document = QJsonDocument::fromJson(reply->readAll(), &error);
+  if (error.error != QJsonParseError::NoError) {
     qLog(Error) << "Error while parsing SoundCloud result";
   }
-  return result;
+
+  return document;
 }
 
 void SoundCloudService::RetrievePlaylist(int playlist_id,
@@ -455,42 +460,41 @@ void SoundCloudService::PlaylistRetrieved(QNetworkReply* reply,
                                           int request_id) {
   if (!pending_playlists_requests_.contains(request_id)) return;
   PlaylistInfo playlist_info = pending_playlists_requests_.take(request_id);
-  QVariant res = ExtractResult(reply);
-  SongList songs = ExtractSongs(res.toMap()["tracks"]);
+  QJsonDocument res = ExtractResult(reply);
+  SongList songs = ExtractSongs(res.object()["tracks"].toArray());
   for (const Song& song : songs) {
     QStandardItem* child = CreateSongItem(song);
     playlist_info.item_->appendRow(child);
   }
 }
 
-QList<QStandardItem*> SoundCloudService::ExtractActivities(const QVariant& result) {
+QList<QStandardItem*> SoundCloudService::ExtractActivities(const QJsonObject& result) {
   QList<QStandardItem*> activities;
-  QVariantList q_variant_list = result.toMap()["collection"].toList();
-  for (const QVariant& q : q_variant_list) {
-    QMap<QString, QVariant> activity = q.toMap();
-    const QString type = activity["type"].toString();
+  QJsonArray q_list = result["collection"].toArray();
+  for (const QJsonValue& q : q_list) {
+    QJsonObject json_activity = q.toObject();
+    const QString type = json_activity["type"].toString();
     if (type == "track") {
-      Song song = ExtractSong(activity["origin"].toMap());
+      Song song = ExtractSong(json_activity["origin"].toObject());
       if (song.is_valid()) {
         activities << CreateSongItem(song);
       }
     } else if (type == "playlist") {
-      QMap<QString, QVariant> origin_map = activity["origin"].toMap();
+      QJsonObject json_origin = json_activity["origin"].toObject();
       QStandardItem* playlist_item =
-          CreatePlaylistItem(origin_map["title"].toString());
+          CreatePlaylistItem(json_origin["title"].toString());
       activities << playlist_item;
-      RetrievePlaylist(origin_map["id"].toInt(), playlist_item);
+      RetrievePlaylist(json_origin["id"].toInt(), playlist_item);
     }
   }
   return activities;
 }
 
-SongList SoundCloudService::ExtractSongs(const QVariant& result) {
+SongList SoundCloudService::ExtractSongs(const QJsonArray & result) {
   SongList songs;
 
-  QVariantList q_variant_list = result.toList();
-  for (const QVariant& q : q_variant_list) {
-    Song song = ExtractSong(q.toMap());
+  for (const QJsonValue& q : result) {
+    Song song = ExtractSong(q.toObject());
     if (song.is_valid()) {
       songs << song;
     }
@@ -498,14 +502,16 @@ SongList SoundCloudService::ExtractSongs(const QVariant& result) {
   return songs;
 }
 
-Song SoundCloudService::ExtractSong(const QVariantMap& result_song) {
+Song SoundCloudService::ExtractSong(const QJsonObject& result_song) {
   Song song;
   if (!result_song.isEmpty() && result_song["streamable"].toBool()) {
-    QUrl stream_url = result_song["stream_url"].toUrl();
-    stream_url.addQueryItem("client_id", kApiClientId);
+    QUrl stream_url(result_song["stream_url"].toString());
+    QUrlQuery stream_url_query;
+    stream_url_query.addQueryItem("client_id", kApiClientId);
+    stream_url.setQuery(stream_url_query);
     song.set_url(stream_url);
 
-    QString username = result_song["user"].toMap()["username"].toString();
+    QString username = result_song["user"].toObject()["username"].toString();
     // We don't have a real artist name, but username is the most similar thing
     // we have
     song.set_artist(username);
@@ -516,7 +522,7 @@ Song SoundCloudService::ExtractSong(const QVariantMap& result_song) {
     QString genre = result_song["genre"].toString();
     song.set_genre(genre);
 
-    float bpm = result_song["bpm"].toFloat();
+    float bpm = result_song["bpm"].toDouble();
     song.set_bpm(bpm);
 
     QVariant cover = result_song["artwork_url"];

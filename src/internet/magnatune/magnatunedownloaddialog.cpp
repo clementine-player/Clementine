@@ -31,6 +31,7 @@
 #include <QSet>
 #include <QSettings>
 #include <QXmlStreamReader>
+#include <QUrlQuery>
 
 #include "magnatuneservice.h"
 #include "internet/core/internetmodel.h"
@@ -130,8 +131,10 @@ void MagnatuneDownloadDialog::DownloadNext() {
   QUrl url(MagnatuneService::kDownloadUrl);
   url.setUserName(service_->username());
   url.setPassword(service_->password());
-  url.addQueryItem("id", MagnatuneService::kPartnerId);
-  url.addQueryItem("sku", sku);
+
+  QUrlQuery url_query;
+  url_query.addQueryItem("id", MagnatuneService::kPartnerId);
+  url_query.addQueryItem("sku", sku);
 
   current_reply_ = network_->get(QNetworkRequest(url));
 

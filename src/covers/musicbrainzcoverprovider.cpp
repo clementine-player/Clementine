@@ -22,6 +22,7 @@
 #include <functional>
 
 #include <QXmlStreamReader>
+#include <QUrlQuery>
 
 #include "core/closure.h"
 #include "core/network.h"
@@ -46,8 +47,10 @@ bool MusicbrainzCoverProvider::StartSearch(const QString& artist,
   QString query = QString("release:\"%1\" AND artist:\"%2\"")
                       .arg(album.trimmed().replace('"', "\\\""))
                       .arg(artist.trimmed().replace('"', "\\\""));
-  url.addQueryItem("query", query);
-  url.addQueryItem("limit", "5");
+  QUrlQuery url_query;
+  url_query.addQueryItem("query", query);
+  url_query.addQueryItem("limit", "5");
+  url.setQuery(url_query);
   QNetworkRequest request(url);
 
   QNetworkReply* reply = network_->get(request);

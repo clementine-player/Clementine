@@ -24,6 +24,7 @@
 #include <QNetworkReply>
 #include <QStringList>
 #include <QXmlStreamReader>
+#include <QUrlQuery>
 
 #include "core/closure.h"
 #include "core/logging.h"
@@ -79,14 +80,14 @@ bool AmazonCoverProvider::StartSearch(const QString& artist,
   const QByteArray data_to_sign =
       QString("GET\n%1\n%2\n%3")
           .arg(url.host(), url.path(), query_items.join("&"))
-          .toAscii();
+          .toLatin1();
   const QByteArray signature(Utilities::HmacSha256(
       QByteArray::fromBase64(kSecretAccessKeyB64), data_to_sign));
 
   // Add the signature to the request
-  encoded_args << EncodedArg("Signature",
-                             QUrl::toPercentEncoding(signature.toBase64()));
-  url.setEncodedQueryItems(encoded_args);
+  QUrlQuery url_query;
+  url_query.addQueryItem("Signature", QUrl::toPercentEncoding(signature.toBase64()));
+  url.setQuery(url_query);
 
   QNetworkReply* reply = network_->get(QNetworkRequest(url));
   NewClosure(reply, SIGNAL(finished()), this,

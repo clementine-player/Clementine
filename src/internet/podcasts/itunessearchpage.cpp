@@ -19,9 +19,13 @@
 
 #include "itunessearchpage.h"
 
-#include <qjson/parser.h>
 #include <QMessageBox>
 #include <QNetworkReply>
+#include <QUrlQuery>
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QJsonParseError>
+#include <QJsonArray>
 
 #include "core/closure.h"
 #include "core/network.h"
@@ -49,7 +53,9 @@ void ITunesSearchPage::SearchClicked() {
   emit Busy(true);
 
   QUrl url(QUrl::fromEncoded(kUrlBase));
-  url.addQueryItem("term", ui_->query->text());
+  QUrlQuery url_query;
+  url_query.addQueryItem("term", ui_->query->text());
+  url.setQuery(url_query);
 
   QNetworkReply* reply = network_->get(QNetworkRequest(url));
   NewClosure(reply, SIGNAL(finished()), this,
@@ -69,37 +75,38 @@ void ITunesSearchPage::SearchFinished(QNetworkReply* reply) {
     return;
   }
 
-  QJson::Parser parser;
-  QVariant data = parser.parse(reply);
+  QJsonParseError error;
+  QJsonDocument json_document = QJsonDocument::fromJson(reply->readAll(), &error);
 
-  // Was it valid JSON?
-  if (data.isNull()) {
+  if (error.error != QJsonParseError::NoError) {
     QMessageBox::warning(
         this, tr("Failed to fetch podcasts"),
         tr("There was a problem parsing the response from the iTunes Store"));
     return;
   }
 
+  QJsonObject json_data = json_document.object();
+
   // Was there an error message in the JSON?
-  if (data.toMap().contains("errorMessage")) {
+  if (!json_data["errorMessage"].isUndefined()) {
     QMessageBox::warning(this, tr("Failed to fetch podcasts"),
-                         data.toMap()["errorMessage"].toString());
+                         json_data["errorMessage"].toString());
     return;
   }
 
-  for (const QVariant& result_variant : data.toMap()["results"].toList()) {
-    QVariantMap result(result_variant.toMap());
-    if (result["kind"].toString() != "podcast") {
+  for (const QJsonValue& result : json_data["results"].toArray()) {
+    QJsonObject json_result = result.toObject();
+    if (json_result["kind"].toString() != "podcast") {
       continue;
     }
 
     Podcast podcast;
-    podcast.set_author(result["artistName"].toString());
-    podcast.set_title(result["trackName"].toString());
-    podcast.set_url(result["feedUrl"].toUrl());
-    podcast.set_link(result["trackViewUrl"].toUrl());
-    podcast.set_image_url_small(QUrl(result["artworkUrl30"].toString()));
-    podcast.set_image_url_large(QUrl(result["artworkUrl100"].toString()));
+    podcast.set_author(json_result["artistName"].toString());
+    podcast.set_title(json_result["trackName"].toString());
+    podcast.set_url(QUrl(json_result["feedUrl"].toString()));
+    podcast.set_link(QUrl(json_result["trackViewUrl"].toString()));
+    podcast.set_image_url_small(QUrl(json_result["artworkUrl30"].toString()));
+    podcast.set_image_url_large(QUrl(json_result["artworkUrl100"].toString()));
 
     model()->appendRow(model()->CreatePodcastItem(podcast));
   }

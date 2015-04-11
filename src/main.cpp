@@ -66,8 +66,8 @@
 
 #include "tagreadermessages.pb.h"
 
-#include "qtsingleapplication.h"
-#include "qtsinglecoreapplication.h"
+#include "singleapplication.h"
+#include "singlecoreapplication.h"
 
 #include <glib-object.h>
 #include <glib.h>
@@ -100,21 +100,12 @@ const QDBusArgument& operator>>(const QDBusArgument& arg, QImage& image);
 
 // Load sqlite plugin on windows and mac.
 #include <QtPlugin>
-Q_IMPORT_PLUGIN(qsqlite)
+Q_IMPORT_PLUGIN(QSQLiteDriverPlugin)
 
 namespace {
 
 void LoadTranslation(const QString& prefix, const QString& path,
                      const QString& language) {
-#if QT_VERSION < 0x040700
-  // QTranslator::load will try to open and read "clementine" if it exists,
-  // without checking if it's a file first.
-  // This was fixed in Qt 4.7
-  QFileInfo maybe_clementine_directory(path + "/clementine");
-  if (maybe_clementine_directory.exists() &&
-      !maybe_clementine_directory.isFile())
-    return;
-#endif
 
   QTranslator* t = new PoTranslator;
   if (t->load(prefix + "_" + language, path))
@@ -289,7 +280,7 @@ int main(int argc, char* argv[]) {
     // Clementine running without needing an X server.
     // This MUST be done before parsing the commandline options so QTextCodec
     // gets the right system locale for filenames.
-    QtSingleCoreApplication a(argc, argv);
+    SingleCoreApplication a(argc, argv);
     CheckPortable();
     crash_reporting.SetApplicationPath(a.applicationFilePath());
 

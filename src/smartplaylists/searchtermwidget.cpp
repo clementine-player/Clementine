@@ -120,7 +120,7 @@ SearchTermWidget::SearchTermWidget(LibraryBackend* library, QWidget* parent)
   // Set stylesheet
   QFile stylesheet_file(":/smartplaylistsearchterm.css");
   stylesheet_file.open(QIODevice::ReadOnly);
-  QString stylesheet = QString::fromAscii(stylesheet_file.readAll());
+  QString stylesheet = QString::fromLatin1(stylesheet_file.readAll());
   const QColor base(222, 97, 97, 128);
   stylesheet.replace("%light2", Utilities::ColorToRgba(base.lighter(140)));
   stylesheet.replace("%light", Utilities::ColorToRgba(base.lighter(120)));

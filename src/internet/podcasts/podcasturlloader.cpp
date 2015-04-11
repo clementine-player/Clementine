@@ -20,6 +20,7 @@
 #include "podcasturlloader.h"
 
 #include <QNetworkReply>
+#include <QUrlQuery>
 
 #include "podcastparser.h"
 #include "core/closure.h"
@@ -73,14 +74,15 @@ QUrl PodcastUrlLoader::FixPodcastUrl(const QString& url_text) {
 
 QUrl PodcastUrlLoader::FixPodcastUrl(const QUrl& url_orig) {
   QUrl url(url_orig);
+  QUrlQuery url_query(url);
 
   // Replace schemes
   if (url.scheme().isEmpty() || url.scheme() == "feed" ||
       url.scheme() == "itpc" || url.scheme() == "itms") {
     url.setScheme("http");
   } else if (url.scheme() == "zune" && url.host() == "subscribe" &&
-             !url.queryItems().isEmpty()) {
-    url = QUrl(url.queryItems()[0].second);
+             !url_query.queryItems().isEmpty()) {
+    url = QUrl(url_query.queryItems()[0].second);
   }
 
   return url;

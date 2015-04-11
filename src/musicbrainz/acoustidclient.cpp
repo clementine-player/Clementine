@@ -20,8 +20,11 @@
 #include <QCoreApplication>
 #include <QNetworkReply>
 #include <QStringList>
-
-#include <qjson/parser.h>
+#include <QUrlQuery>
+#include <QJsonParseError>
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QJsonArray>
 
 #include "core/closure.h"
 #include "core/logging.h"
@@ -50,7 +53,9 @@ void AcoustidClient::Start(int id, const QString& fingerprint,
              << Param("fingerprint", fingerprint);
 
   QUrl url(kUrl);
-  url.setQueryItems(parameters);
+  QUrlQuery url_query;
+  url_query.setQueryItems(parameters);
+  url.setQuery(url_query);
   QNetworkRequest req(url);
 
   QNetworkReply* reply = network_->get(req);
@@ -94,15 +99,17 @@ void AcoustidClient::RequestFinished(QNetworkReply* reply, int request_id) {
     return;
   }
 
-  QJson::Parser parser;
-  bool ok = false;
-  QVariantMap result = parser.parse(reply, &ok).toMap();
-  if (!ok) {
+  QJsonParseError error;
+  QJsonDocument json_document = QJsonDocument::fromJson(reply->readAll(), &error);
+
+  if (error.error != QJsonParseError::NoError) {
     emit Finished(request_id, QStringList());
     return;
   }
 
-  QString status = result["status"].toString();
+  QJsonObject json_object = json_document.object();
+
+  QString status = json_object["status"].toString();
   if (status != "ok") {
     emit Finished(request_id, QStringList());
     return;
@@ -113,18 +120,18 @@ void AcoustidClient::RequestFinished(QNetworkReply* reply, int request_id) {
   // -then sort results by number of sources (the results are originally
   //  unsorted but results with more sources are likely to be more accurate)
   // -keep only the ids, as sources where useful only to sort the results
-  QVariantList results = result["results"].toList();
+  QJsonArray json_results = json_object["results"].toArray();
 
   // List of <id, nb of sources> pairs
   QList<IdSource> id_source_list;
 
-  for (const QVariant& v : results) {
-    QVariantMap r = v.toMap();
-    if (r.contains("recordings")) {
-      QVariantList recordings = r["recordings"].toList();
-      for (const QVariant& recording : recordings) {
-        QVariantMap o = recording.toMap();
-        if (o.contains("id")) {
+  for (const QJsonValue& v : json_results) {
+    QJsonObject r = v.toObject();
+    if (!r["recordings"].isUndefined()) {
+      QJsonArray json_recordings = r["recordings"].toArray();
+      for (const QJsonValue& recording : json_recordings) {
+        QJsonObject o = recording.toObject();
+        if (!o["id"].isUndefined()) {
           id_source_list << IdSource(o["id"].toString(), o["sources"].toInt());
         }
       }

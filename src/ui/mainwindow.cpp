@@ -1052,7 +1052,6 @@ MainWindow::~MainWindow() {
 void MainWindow::ReloadSettings() {
 #ifndef Q_OS_DARWIN
   bool show_tray = settings_.value("showtray", true).toBool();
-
   tray_icon_->SetVisible(show_tray);
   if (!show_tray && !isVisible()) show();
 #endif

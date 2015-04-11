@@ -21,6 +21,7 @@
 #include <QDesktopServices>
 #include <QMouseEvent>
 #include <QTextDocument>
+#include <QUrlQuery>
 
 #include "songinfotextview.h"
 #include "ui_songkickconcertwidget.h"
@@ -58,7 +59,7 @@ void SongKickConcertWidget::ReloadSettings() {
 void SongKickConcertWidget::Init(const QString& title, const QString& url,
                                  const QString& date, const QString& location) {
   ui_->title->setText(
-      QString("<a href=\"%1\">%2</a>").arg(Qt::escape(url), Qt::escape(title)));
+      QString("<a href=\"%1\">%2</a>").arg(url.toHtmlEscaped(), title.toHtmlEscaped()));
 
   if (!location.isEmpty()) {
     ui_->location->setText(location);
@@ -96,10 +97,12 @@ void SongKickConcertWidget::SetMap(const QString& lat, const QString& lng,
   ui_->map->show();
 
   map_url_ = QUrl("https://maps.google.com/");
-  map_url_.addQueryItem("ll", QString("%1,%2").arg(lat, lng));
+  QUrlQuery map_url_query;
+  map_url_query.addQueryItem("ll", QString("%1,%2").arg(lat, lng));
   if (!venue_name.isEmpty()) {
-    map_url_.addQueryItem("q", venue_name);
+    map_url_query.addQueryItem("q", venue_name);
   }
+  map_url_.setQuery(map_url_query);
 
   // Request the static map image
   const QUrl url(QString(kStaticMapUrl).arg(QString::number(kStaticMapWidth),

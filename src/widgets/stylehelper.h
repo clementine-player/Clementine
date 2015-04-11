@@ -30,8 +30,8 @@
 #ifndef STYLEHELPER_H
 #define STYLEHELPER_H
 
-#include <QtGui/QColor>
-#include <QtGui/QStyle>
+#include <QColor>
+#include <QStyle>
 
 #include "ui/qt_blurimage.h"
 
