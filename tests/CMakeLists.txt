@@ -69,7 +69,7 @@ set(TESTUTILS-MOC-HEADERS
   testobjectdecorators.h
 )
 
-qt4_wrap_cpp(TESTUTILS-SOURCES-MOC ${TESTUTILS-MOC-HEADERS})
+qt5_wrap_cpp(TESTUTILS-SOURCES-MOC ${TESTUTILS-MOC-HEADERS})
 
 add_library(test_utils STATIC EXCLUDE_FROM_ALL ${TESTUTILS-SOURCES} ${TESTUTILS-SOURCES-MOC})
 target_link_libraries(test_utils ${GMOCK_LIBRARIES} ${QT_LIBRARIES} ${QT_QTTEST_LIBRARY})
@@ -83,7 +83,7 @@ add_custom_target(build_tests
 )
 add_dependencies(test build_tests)
 
-qt4_add_resources(TEST-RESOURCE-SOURCES data/testdata.qrc)
+qt5_add_resources(TEST-RESOURCE-SOURCES data/testdata.qrc)
 
 add_library(test_gui_main STATIC EXCLUDE_FROM_ALL ${TEST-RESOURCE-SOURCES} main.cpp)
 target_link_libraries(test_gui_main clementine_lib)
