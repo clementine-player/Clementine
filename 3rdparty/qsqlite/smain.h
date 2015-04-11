@@ -31,22 +31,21 @@
 **
 ****************************************************************************/
 
-#include "smain.h"
+#include <qsqldriverplugin.h>
+#include <qstringlist.h>
+#include "qsql_sqlite.h"
 
 QT_BEGIN_NAMESPACE
 
-QSQLiteDriverPlugin::QSQLiteDriverPlugin()
-    : QSqlDriverPlugin()
+class QSQLiteDriverPlugin : public QSqlDriverPlugin
 {
-}
+    Q_OBJECT
+    Q_PLUGIN_METADATA(IID "org.qt-project.Qt.QSqlDriverFactoryInterface" FILE "qsqlite.json")
 
-QSqlDriver* QSQLiteDriverPlugin::create(const QString &name)
-{
-    if (name == QLatin1String("QSQLITE")) {
-        QSQLiteDriver* driver = new QSQLiteDriver();
-        return driver;
-    }
-    return 0;
-}
+public:
+    QSQLiteDriverPlugin();
+
+    QSqlDriver* create(const QString &);
+};
 
 QT_END_NAMESPACE
