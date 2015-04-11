@@ -1,39 +1,49 @@
+
 /****************************************************************************
- **
- ** Copyright (C) Qxt Foundation. Some rights reserved.
- **
- ** This file is part of the QxtCore module of the Qxt library.
- **
- ** This library is free software; you can redistribute it and/or modify it
- ** under the terms of the Common Public License, version 1.0, as published
- ** by IBM, and/or under the terms of the GNU Lesser General Public License,
- ** version 2.1, as published by the Free Software Foundation.
- **
- ** This file is provided "AS IS", without WARRANTIES OR CONDITIONS OF ANY
- ** KIND, EITHER EXPRESS OR IMPLIED INCLUDING, WITHOUT LIMITATION, ANY
- ** WARRANTIES OR CONDITIONS OF TITLE, NON-INFRINGEMENT, MERCHANTABILITY OR
- ** FITNESS FOR A PARTICULAR PURPOSE.
- **
- ** You should have received a copy of the CPL and the LGPL along with this
- ** file. See the LICENSE file and the cpl1.0.txt/lgpl-2.1.txt files
- ** included with the source distribution for more information.
- ** If you did not receive a copy of the licenses, contact the Qxt Foundation.
- **
- ** <http://libqxt.org>  <foundation@libqxt.org>
- **
- ****************************************************************************/
+** Copyright (c) 2006 - 2011, the LibQxt project.
+** See the Qxt AUTHORS file for a list of authors and copyright holders.
+** All rights reserved.
+**
+** Redistribution and use in source and binary forms, with or without
+** modification, are permitted provided that the following conditions are met:
+**     * Redistributions of source code must retain the above copyright
+**       notice, this list of conditions and the following disclaimer.
+**     * Redistributions in binary form must reproduce the above copyright
+**       notice, this list of conditions and the following disclaimer in the
+**       documentation and/or other materials provided with the distribution.
+**     * Neither the name of the LibQxt project nor the
+**       names of its contributors may be used to endorse or promote products
+**       derived from this software without specific prior written permission.
+**
+** THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+** ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+** WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+** DISCLAIMED. IN NO EVENT SHALL <COPYRIGHT HOLDER> BE LIABLE FOR ANY
+** DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+** (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+** LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+** ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+** (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+** SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+**
+** <http://libqxt.org>  <foundation@libqxt.org>
+*****************************************************************************/
 
 #ifndef QXTGLOBAL_H
 #define QXTGLOBAL_H
 
 #include <QtGlobal>
 
-#define QXT_VERSION 0x000600
-#define QXT_VERSION_STR "0.6.0"
+#define QXT_VERSION 0x000700
+#define QXT_VERSION_STR "0.7.0"
 
 //--------------------------global macros------------------------------
 
 #ifndef QXT_NO_MACROS
+
+#ifndef _countof
+#define _countof(x) (sizeof(x)/sizeof(*x))
+#endif
 
 #endif // QXT_NO_MACROS
 
@@ -41,7 +51,7 @@
 
 #define QXT_DLLEXPORT DO_NOT_USE_THIS_ANYMORE
 
-#if !defined(QXT_STATIC)
+#if !defined(QXT_STATIC) && !defined(QXT_DOXYGEN_RUN)
 #    if defined(BUILD_QXT_CORE)
 #        define QXT_CORE_EXPORT Q_DECL_EXPORT
 #    else
@@ -51,7 +61,7 @@
 #    define QXT_CORE_EXPORT
 #endif // BUILD_QXT_CORE
  
-#if !defined(QXT_STATIC)
+#if !defined(QXT_STATIC) && !defined(QXT_DOXYGEN_RUN)
 #    if defined(BUILD_QXT_GUI)
 #        define QXT_GUI_EXPORT Q_DECL_EXPORT
 #    else
@@ -61,7 +71,7 @@
 #    define QXT_GUI_EXPORT
 #endif // BUILD_QXT_GUI
  
-#if !defined(QXT_STATIC)
+#if !defined(QXT_STATIC) && !defined(QXT_DOXYGEN_RUN)
 #    if defined(BUILD_QXT_NETWORK)
 #        define QXT_NETWORK_EXPORT Q_DECL_EXPORT
 #    else
@@ -71,7 +81,7 @@
 #    define QXT_NETWORK_EXPORT
 #endif // BUILD_QXT_NETWORK
  
-#if !defined(QXT_STATIC)
+#if !defined(QXT_STATIC) && !defined(QXT_DOXYGEN_RUN)
 #    if defined(BUILD_QXT_SQL)
 #        define QXT_SQL_EXPORT Q_DECL_EXPORT
 #    else
@@ -81,7 +91,7 @@
 #    define QXT_SQL_EXPORT
 #endif // BUILD_QXT_SQL
  
-#if !defined(QXT_STATIC)
+#if !defined(QXT_STATIC) && !defined(QXT_DOXYGEN_RUN)
 #    if defined(BUILD_QXT_WEB)
 #        define QXT_WEB_EXPORT Q_DECL_EXPORT
 #    else
@@ -91,7 +101,7 @@
 #    define QXT_WEB_EXPORT
 #endif // BUILD_QXT_WEB
  
-#if !defined(QXT_STATIC)
+#if !defined(QXT_STATIC) && !defined(QXT_DOXYGEN_RUN)
 #    if defined(BUILD_QXT_BERKELEY)
 #        define QXT_BERKELEY_EXPORT Q_DECL_EXPORT
 #    else
@@ -101,7 +111,7 @@
 #    define QXT_BERKELEY_EXPORT
 #endif // BUILD_QXT_BERKELEY
 
-#if !defined(QXT_STATIC)
+#if !defined(QXT_STATIC) && !defined(QXT_DOXYGEN_RUN)
 #    if defined(BUILD_QXT_ZEROCONF)
 #        define QXT_ZEROCONF_EXPORT Q_DECL_EXPORT
 #    else
@@ -111,7 +121,7 @@
 #    define QXT_ZEROCONF_EXPORT
 #endif // QXT_ZEROCONF_EXPORT
 
-#if defined BUILD_QXT_CORE || defined BUILD_QXT_GUI || defined  BUILD_QXT_SQL || defined BUILD_QXT_NETWORK || defined BUILD_QXT_WEB || defined BUILD_QXT_BERKELEY || defined BUILD_QXT_ZEROCONF
+#if defined(BUILD_QXT_CORE) || defined(BUILD_QXT_GUI) || defined(BUILD_QXT_SQL) || defined(BUILD_QXT_NETWORK) || defined(BUILD_QXT_WEB) || defined(BUILD_QXT_BERKELEY) || defined(BUILD_QXT_ZEROCONF)
 #   define BUILD_QXT
 #endif
 
@@ -167,6 +177,14 @@ protected:
     {
         return *qxt_p_ptr;
     }
+    inline PUB* qxt_ptr()
+    {
+        return qxt_p_ptr;
+    }
+    inline const PUB* qxt_ptr() const
+    {
+        return qxt_p_ptr;
+    }
 
 private:
     PUB* qxt_p_ptr;
@@ -197,6 +215,14 @@ public:
     inline const PVT& operator()() const
     {
         return *static_cast<PVT*>(pvt);
+    }
+    inline PVT * operator->()
+    {
+	return static_cast<PVT*>(pvt);
+    }
+    inline const PVT * operator->() const
+    {
+	return static_cast<PVT*>(pvt);
     }
 private:
     QxtPrivateInterface(const QxtPrivateInterface&) { }
