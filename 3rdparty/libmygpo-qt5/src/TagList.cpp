@@ -20,67 +20,58 @@
 * USA                                                                      *
 ***************************************************************************/
 
-#include <parser.h>
+#include "TagList_p.h"
 
-#include "AddRemoveResult.h"
-#include "AddRemoveResult_p.h"
+#include "qjsonwrapper/Json.h"
 
 using namespace mygpo;
 
-AddRemoveResultPrivate::AddRemoveResultPrivate( AddRemoveResult* qq, QNetworkReply* reply ) : q( qq ), m_reply( reply ), m_error( QNetworkReply::NoError )
+TagListPrivate::TagListPrivate( TagList* qq, QNetworkReply* reply ) : q( qq ), m_reply( reply ), m_tags( QVariant() ), m_error( QNetworkReply::NoError )
 {
     QObject::connect( m_reply, SIGNAL( finished() ), this, SLOT( parseData() ) );
     QObject::connect( m_reply, SIGNAL( error( QNetworkReply::NetworkError ) ), this, SLOT( error( QNetworkReply::NetworkError ) ) );
 }
 
-AddRemoveResultPrivate::~AddRemoveResultPrivate()
+TagListPrivate::~TagListPrivate()
 {
 }
 
-
-qulonglong AddRemoveResultPrivate::timestamp() const
+QList<TagPtr> TagListPrivate::list() const
 {
-    return m_timestamp;
-}
-
-QVariant AddRemoveResultPrivate::updateUrls() const
-{
-    return m_updateUrls;
-}
-
-QList< QPair< QUrl, QUrl > > AddRemoveResultPrivate::updateUrlsList() const
-{
-    QVariantList updateVarList = updateUrls().toList();
-    QList<QPair<QUrl, QUrl > > updateUrls;
-    foreach( const QVariant & url, updateVarList )
+    QList<TagPtr> list;
+    QVariantList varList = m_tags.toList();
+    foreach( QVariant var, varList )
     {
-        QVariantList urlList = url.toList();
-        QUrl first = QUrl( urlList.at( 0 ).toString() );
-        QUrl second = QUrl( urlList.at( 1 ).toString() );
-        updateUrls.append( qMakePair( first, second ) );
+        list.append( var.value<mygpo::TagPtr>() );
     }
-    return updateUrls;
+    return list;
 }
 
-bool AddRemoveResultPrivate::parse( const QVariant& data )
+QVariant TagListPrivate::tags() const
 {
-    QJson::Parser parser;
-    if( !data.canConvert( QVariant::Map ) )
+    return m_tags;
+}
+
+bool TagListPrivate::parse( const QVariant& data )
+{
+    if( !data.canConvert( QVariant::List ) )
         return false;
-    QVariantMap resultMap = data.toMap();
-    QVariant v = resultMap.value( QLatin1String( "timestamp" ) );
-    if( !v.canConvert( QVariant::ULongLong ) )
-        return false;
-    m_timestamp = v.toULongLong();
-    m_updateUrls = resultMap.value( QLatin1String( "update_urls" ) );
+    QVariantList varList = data.toList();
+    QVariantList tagList;
+    foreach( QVariant var, varList )
+    {
+        QVariant v;
+        v.setValue<mygpo::TagPtr>( TagPtr( new Tag( var ) ) );
+        tagList.append( v );
+    }
+    m_tags = QVariant( tagList );
     return true;
 }
 
-bool AddRemoveResultPrivate::parse( const QByteArray& data )
+bool TagListPrivate::parse( const QByteArray& data )
 {
-    QJson::Parser parser;
     bool ok;
-    QVariant variant = parser.parse( data, &ok );
+    QVariant variant = QJsonWrapper::parseJson( data, &ok );
     if( ok )
     {
         ok = ( parse( variant ) );
@@ -89,12 +80,11 @@ bool AddRemoveResultPrivate::parse( const QByteArray& data )
 }
 
 
-void AddRemoveResultPrivate::parseData()
+void TagListPrivate::parseData()
 {
     if( m_reply->error() == QNetworkReply::NoError )
     {
-
-        if( parse( m_reply->readAll( ) ) )
+        if( parse( m_reply->readAll() ) )
         {
             emit q->finished();
         }
@@ -106,33 +96,28 @@ void AddRemoveResultPrivate::parseData()
     m_reply->deleteLater();
 }
 
-void AddRemoveResultPrivate::error( QNetworkReply::NetworkError error )
+void TagListPrivate::error( QNetworkReply::NetworkError error )
 {
     this->m_error = error;
     emit q->requestError( error );
 }
 
-AddRemoveResult::AddRemoveResult( QNetworkReply* reply , QObject* parent ) : QObject( parent ), d( new AddRemoveResultPrivate( this, reply ) )
+TagList::TagList( QNetworkReply* reply, QObject* parent ) : QObject( parent ), d( new TagListPrivate( this, reply ) )
 {
 
 }
 
-AddRemoveResult::~AddRemoveResult()
+TagList::~TagList()
 {
     delete d;
 }
 
-QVariant AddRemoveResult::updateUrls() const
+QList<TagPtr> TagList::list() const
 {
-    return d->updateUrls();
+    return d->list();
 }
 
-qulonglong AddRemoveResult::timestamp() const
+QVariant TagList::tags() const
 {
-    return d->timestamp();
-}
-
-QList<QPair<QUrl, QUrl> > AddRemoveResult::updateUrlsList() const
-{
-    return d->updateUrlsList();
+    return d->tags();
 }
