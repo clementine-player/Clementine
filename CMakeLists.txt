@@ -32,15 +32,22 @@ if (UNIX AND NOT APPLE)
   set(LINUX 1)
 endif (UNIX AND NOT APPLE)
 
-find_package(Qt4 4.8.1 REQUIRED QtCore QtGui QtOpenGL QtSql QtNetwork QtXml)
+set(QT_MIN_VERSION 5.0.0)
+
+find_package(Qt5 ${QT_MIN_VERSION} REQUIRED COMPONENTS Core OpenGL Sql Network Xml Widgets Concurrent)
+find_package(X11)
+if(X11_FOUND)
+  find_package(Qt5 ${QT_MIN_VERSION} REQUIRED COMPONENTS X11Extras)
+endif()
+
 
 if(NOT APPLE)
-  find_package(Qt4 COMPONENTS QtWebKit)
+  find_package(Qt5 COMPONENTS WebKitWidgets)
 endif(NOT APPLE)
 
 # Find Qt's lconvert binary.  Try qt's binary dir first, fall back to looking in PATH
-find_program(QT_LCONVERT_EXECUTABLE NAMES lconvert lconvert-qt4 PATHS ${QT_BINARY_DIR} NO_DEFAULT_PATH)
-find_program(QT_LCONVERT_EXECUTABLE NAMES lconvert lconvert-qt4)
+find_program(QT_LCONVERT_EXECUTABLE NAMES lconvert lconvert-qt5 PATHS ${QT_BINARY_DIR} NO_DEFAULT_PATH)
+find_program(QT_LCONVERT_EXECUTABLE NAMES lconvert lconvert-qt5)
 
 if(APPLE)
   if(NOT QT_MAC_USE_COCOA)
@@ -71,10 +78,9 @@ pkg_check_modules(GSTREAMER_TAG REQUIRED gstreamer-tag-1.0)
 pkg_check_modules(GSTREAMER_PBUTILS REQUIRED gstreamer-pbutils-1.0)
 pkg_check_modules(LIBGPOD libgpod-1.0>=0.7.92)
 pkg_check_modules(LIBMTP libmtp>=1.0)
-pkg_check_modules(LIBMYGPO_QT libmygpo-qt>=1.0.9)
+pkg_check_modules(LIBMYGPO_QT5 libmygpo-qt5>=1.0.7)
 pkg_check_modules(LIBPULSE libpulse)
 pkg_check_modules(LIBXML libxml-2.0)
-pkg_check_modules(QJSON REQUIRED QJson)
 pkg_check_modules(SPOTIFY libspotify>=12.1.45)
 pkg_check_modules(TAGLIB REQUIRED taglib>=1.6)
 
@@ -140,7 +146,6 @@ endif(${CMAKE_BUILD_TYPE} MATCHES "Release")
 # Set up definitions and paths
 add_definitions(${QT_DEFINITIONS})
 link_directories(${TAGLIB_LIBRARY_DIRS})
-link_directories(${QJSON_LIBRARY_DIRS})
 link_directories(${GSTREAMER_LIBRARY_DIRS})
 
 # Don't try to use webkit if their include directories couldn't be found.
@@ -150,7 +155,6 @@ endif (NOT QT_QTWEBKIT_INCLUDE_DIR)
 
 include_directories(${Boost_INCLUDE_DIRS})
 include_directories(${TAGLIB_INCLUDE_DIRS})
-include_directories(${QJSON_INCLUDE_DIRS})
 include_directories(${GSTREAMER_INCLUDE_DIRS})
 include_directories(${GSTREAMER_APP_INCLUDE_DIRS})
 include_directories(${GSTREAMER_AUDIO_INCLUDE_DIRS})
@@ -283,11 +287,11 @@ endif()
 
 # Find DBus if it's enabled
 if (HAVE_DBUS)
-  find_package(Qt4 REQUIRED QtDbus)
+  find_package(Qt5 COMPONENTS DBus)
 endif ()
 
 # We can include the Qt definitions now
-include(${QT_USE_FILE})
+set(QT_LIBRARIES Qt5::Core Qt5::OpenGL Qt5::Sql Qt5::Network Qt5::Xml Qt5::Widgets Qt5::Concurrent Qt5::X11Extras)
 
 # Remove GLU and GL from the link line - they're not really required
 # and don't exist on my mingw toolchain
@@ -317,18 +321,9 @@ endif(ENABLE_VISUALISATIONS)
 add_subdirectory(3rdparty/qsqlite)
 include_directories("3rdparty/qsqlite")
 
-# When/if upstream accepts our patches then these options can be used to link
-# to system installed qtsingleapplication instead.
-option(USE_SYSTEM_QTSINGLEAPPLICATION "Don't set this option unless your system QtSingleApplication library has been compiled with the Clementine patches in 3rdparty" OFF)
-if(USE_SYSTEM_QTSINGLEAPPLICATION)
-  find_path(QTSINGLEAPPLICATION_INCLUDE_DIRS qtsingleapplication.h PATH_SUFFIXES QtSolutions)
-  find_library(QTSINGLEAPPLICATION_LIBRARIES QtSolutions_SingleApplication-2.6)
-  find_library(QTSINGLECOREAPPLICATION_LIBRARIES QtSolutions_SingleCoreApplication-2.6)
-else(USE_SYSTEM_QTSINGLEAPPLICATION)
-  add_subdirectory(3rdparty/qtsingleapplication)
-  set(QTSINGLEAPPLICATION_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/qtsingleapplication)
-  set(QTSINGLEAPPLICATION_LIBRARIES qtsingleapplication)
-endif(USE_SYSTEM_QTSINGLEAPPLICATION)
+add_subdirectory(3rdparty/singleapplication)
+set(SINGLEAPPLICATION_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/singleapplication)
+set(SINGLEAPPLICATION_LIBRARIES singleapplication)
 
 # QtIoCompressor isn't patched, so we can use a system version if it's
 # available
@@ -385,15 +380,14 @@ else()
   set(SHA2_LIBRARIES sha2)
 endif()
 
-# Use the system libmygpo-qt if a recent enough version was found
-if(LIBMYGPO_QT_FOUND)
-  set(MYGPOQT_LIBRARIES ${LIBMYGPO_QT_LIBRARIES})
-  set(MYGPOQT_INCLUDE_DIRS ${LIBMYGPO_QT_INCLUDE_DIRS})
+# Use the system libmygpo-qt5 if a recent enough version was found
+if(LIBMYGPO_QT5_FOUND)
+  set(MYGPOQT5_LIBRARIES ${LIBMYGPO_QT5_LIBRARIES})
+  set(MYGPOQT5_INCLUDE_DIRS ${LIBMYGPO_QT5_INCLUDE_DIRS})
 else()
-  add_definitions(-DMYGPO_EXPORT=)
-  add_subdirectory(3rdparty/libmygpo-qt)
-  set(MYGPOQT_LIBRARIES mygpo-qt)
-  set(MYGPOQT_INCLUDE_DIRS ${CMAKE_SOURCE_DIR}/3rdparty/libmygpo-qt/)
+  add_subdirectory(3rdparty/libmygpo-qt5)
+  set(MYGPOQT5_LIBRARIES mygpo-qt5)
+  set(MYGPOQT5_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/libmygpo-qt5/src)
 endif()
 
 # Qocoa
