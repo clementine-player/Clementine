@@ -6,7 +6,7 @@ set(HEADERS
     qprogressindicatorspinning.h
 )
 
-qt4_wrap_cpp(MOC_SOURCES ${HEADERS})
+qt5_wrap_cpp(MOC_SOURCES ${HEADERS})
 
 if(APPLE)
     list(APPEND SOURCES
@@ -23,7 +23,7 @@ else()
     set(RESOURCES
         qprogressindicatorspinning_nonmac.qrc
     )
-    qt4_add_resources(RESOURCES_SOURCES ${RESOURCES})
+    qt5_add_resources(RESOURCES_SOURCES ${RESOURCES})
 endif()
 
 add_library(Qocoa STATIC
