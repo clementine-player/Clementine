@@ -33,15 +33,22 @@ if (UNIX AND NOT APPLE)
   set(LINUX 1)
 endif (UNIX AND NOT APPLE)
 
-find_package(Qt4 4.5.0 REQUIRED QtCore QtGui QtOpenGL QtSql QtNetwork QtXml)
+set(QT_MIN_VERSION 5.0.0)
+
+find_package(Qt5 ${QT_MIN_VERSION} REQUIRED COMPONENTS Core OpenGL Sql Network Xml Widgets Concurrent)
+find_package(X11)
+if(X11_FOUND)
+  find_package(Qt5 ${QT_MIN_VERSION} REQUIRED COMPONENTS X11Extras)
+endif()
+
 
 if(NOT APPLE)
-  find_package(Qt4 COMPONENTS QtWebKit)
+  find_package(Qt5 COMPONENTS WebKitWidgets)
 endif(NOT APPLE)
 
 # Find Qt's lconvert binary.  Try qt's binary dir first, fall back to looking in PATH
-find_program(QT_LCONVERT_EXECUTABLE NAMES lconvert lconvert-qt4 PATHS ${QT_BINARY_DIR} NO_DEFAULT_PATH)
-find_program(QT_LCONVERT_EXECUTABLE NAMES lconvert lconvert-qt4)
+find_program(QT_LCONVERT_EXECUTABLE NAMES lconvert lconvert-qt5 PATHS ${QT_BINARY_DIR} NO_DEFAULT_PATH)
+find_program(QT_LCONVERT_EXECUTABLE NAMES lconvert lconvert-qt5)
 
 if(APPLE)
   if(NOT QT_MAC_USE_COCOA)
@@ -68,11 +75,10 @@ pkg_check_modules(GSTREAMER_BASE REQUIRED gstreamer-base-1.0)
 pkg_check_modules(GSTREAMER_TAG REQUIRED gstreamer-tag-1.0)
 pkg_check_modules(LIBGPOD libgpod-1.0>=0.7.92)
 pkg_check_modules(LIBMTP libmtp>=1.0)
-pkg_check_modules(LIBMYGPO_QT libmygpo-qt>=1.0.7)
+pkg_check_modules(LIBMYGPO_QT5 libmygpo-qt5>=1.0.7)
 pkg_check_modules(LIBPULSE libpulse)
 pkg_check_modules(LIBXML libxml-2.0)
-pkg_check_modules(QCA qca2)
-pkg_check_modules(QJSON REQUIRED QJson)
+pkg_check_modules(QCA_QT5 qca2-qt5)
 pkg_check_modules(SPOTIFY libspotify>=12.1.45)
 pkg_check_modules(TAGLIB REQUIRED taglib>=1.6)
 
@@ -138,7 +144,6 @@ endif(${CMAKE_BUILD_TYPE} MATCHES "Release")
 # Set up definitions and paths
 add_definitions(${QT_DEFINITIONS})
 link_directories(${TAGLIB_LIBRARY_DIRS})
-link_directories(${QJSON_LIBRARY_DIRS})
 link_directories(${GSTREAMER_LIBRARY_DIRS})
 
 # Don't try to use webkit if their include directories couldn't be found.
@@ -148,7 +153,6 @@ endif (NOT QT_QTWEBKIT_INCLUDE_DIR)
 
 include_directories(${Boost_INCLUDE_DIRS})
 include_directories(${TAGLIB_INCLUDE_DIRS})
-include_directories(${QJSON_INCLUDE_DIRS})
 include_directories(${GSTREAMER_INCLUDE_DIRS})
 include_directories(${GSTREAMER_APP_INCLUDE_DIRS})
 include_directories(${GSTREAMER_AUDIO_INCLUDE_DIRS})
@@ -188,96 +192,96 @@ endif(WIN32)
 
 optional_component(BREAKPAD OFF "Crash reporting")
 
-optional_component(GOOGLE_DRIVE ON "Google Drive support"
+optional_component(GOOGLE_DRIVE OFF "Google Drive support"
   DEPENDS "Google sparsehash" SPARSEHASH_INCLUDE_DIRS
   DEPENDS "Taglib 1.8" "TAGLIB_VERSION VERSION_GREATER 1.7.999"
 )
 
-optional_component(DROPBOX ON "Dropbox support"
+optional_component(DROPBOX OFF "Dropbox support"
   DEPENDS "Google sparsehash" SPARSEHASH_INCLUDE_DIRS
   DEPENDS "Taglib 1.8" "TAGLIB_VERSION VERSION_GREATER 1.7.999"
 )
 
-optional_component(SKYDRIVE ON "Skydrive support"
+optional_component(SKYDRIVE OFF "Skydrive support"
   DEPENDS "Google sparsehash" SPARSEHASH_INCLUDE_DIRS
   DEPENDS "Taglib 1.8" "TAGLIB_VERSION VERSION_GREATER 1.7.999"
 )
 
-optional_component(BOX ON "Box support"
+optional_component(BOX OFF "Box support"
   DEPENDS "Google sparsehash" SPARSEHASH_INCLUDE_DIRS
   DEPENDS "Taglib 1.8" "TAGLIB_VERSION VERSION_GREATER 1.7.999"
 )
 
-optional_component(VK ON "Vk.com support")
+optional_component(VK OFF "Vk.com support")
 
-optional_component(SEAFILE ON "Seafile support"
+optional_component(SEAFILE OFF "Seafile support"
   DEPENDS "Google sparsehash" SPARSEHASH_INCLUDE_DIRS
   DEPENDS "Taglib 1.8" "TAGLIB_VERSION VERSION_GREATER 1.7.999"
 )
 
-optional_component(AUDIOCD ON "Devices: Audio CD support"
+optional_component(AUDIOCD OFF "Devices: Audio CD support"
   DEPENDS "libcdio" CDIO_FOUND
 )
 
-optional_component(LIBGPOD ON "Devices: iPod classic support"
+optional_component(LIBGPOD OFF "Devices: iPod classic support"
   DEPENDS "libgpod" LIBGPOD_FOUND
 )
 
-optional_component(GIO ON "Devices: GIO device backend"
+optional_component(GIO OFF "Devices: GIO device backend"
   DEPENDS "libgio" GIO_FOUND
   DEPENDS "Linux or Windows" "NOT APPLE"
 )
 
-optional_component(LIBMTP ON "Devices: MTP support"
+optional_component(LIBMTP OFF "Devices: MTP support"
   DEPENDS "libmtp" LIBMTP_FOUND
 )
 
-optional_component(LIBLASTFM ON "Last.fm support"
+optional_component(LIBLASTFM OFF "Last.fm support"
   DEPENDS "liblastfm" LASTFM_LIBRARIES LASTFM_INCLUDE_DIRS
 )
 
-optional_component(DBUS ON "D-Bus support"
+optional_component(DBUS OFF "D-Bus support"
   DEPENDS "Linux" LINUX
 )
 
-optional_component(WIIMOTEDEV ON "Wiimote support"
+optional_component(WIIMOTEDEV OFF "Wiimote support"
   DEPENDS "D-Bus support" HAVE_DBUS
 )
 
-optional_component(DEVICEKIT ON "Devices: DeviceKit backend"
+optional_component(DEVICEKIT OFF "Devices: DeviceKit backend"
   DEPENDS "D-Bus support" HAVE_DBUS
 )
 
-optional_component(SPOTIFY_BLOB ON "Spotify support: non-GPL binary helper"
+optional_component(SPOTIFY_BLOB OFF "Spotify support: non-GPL binary helper"
   DEPENDS "protobuf" PROTOBUF_FOUND PROTOBUF_PROTOC_EXECUTABLE
   DEPENDS "libspotify" SPOTIFY_FOUND
 )
 
-optional_component(MOODBAR ON "Moodbar support"
+optional_component(MOODBAR OFF "Moodbar support"
   DEPENDS "fftw3" FFTW3_FOUND
 )
 
-optional_component(SPARKLE ON "Sparkle integration"
+optional_component(SPARKLE OFF "Sparkle integration"
   DEPENDS "Mac OS X" APPLE
   DEPENDS "Sparkle" SPARKLE
 )
 
-optional_component(LIBPULSE ON "Pulse audio integration"
+optional_component(LIBPULSE OFF "Pulse audio integration"
   DEPENDS "libpulse" LIBPULSE_FOUND
 )
 
-optional_component(VISUALISATIONS ON "Visualisations")
+optional_component(VISUALISATIONS OFF "Visualisations")
 
-if(NOT HAVE_SPOTIFY_BLOB AND NOT QCA_FOUND)
-  message(FATAL_ERROR "Either QCA must be available or the non-GPL Spotify "
+if(NOT HAVE_SPOTIFY_BLOB AND NOT QCA_QT5_FOUND)
+  message(FATAL_ERROR "Either QCA-qt5 must be available or the non-GPL Spotify "
           "code must be compiled in")
-elseif(QCA_FOUND)
+elseif(QCA_QT5_FOUND)
   set(HAVE_SPOTIFY_DOWNLOADER ON)
 endif()
 
 # Find DBus if it's enabled
 if (HAVE_DBUS)
-  find_package(Qt4 REQUIRED QtDbus)
+  find_package(Qt5 COMPONENTS DBus)
 endif ()
 
 if (HAVE_VK)
@@ -287,7 +291,7 @@ if (HAVE_VK)
 endif(HAVE_VK)
 
 # We can include the Qt definitions now
-include(${QT_USE_FILE})
+set(QT_LIBRARIES Qt5::Core Qt5::OpenGL Qt5::Sql Qt5::Network Qt5::Xml Qt5::Widgets Qt5::Concurrent Qt5::X11Extras)
 
 # Remove GLU and GL from the link line - they're not really required
 # and don't exist on my mingw toolchain
@@ -317,18 +321,9 @@ endif(ENABLE_VISUALISATIONS)
 add_subdirectory(3rdparty/qsqlite)
 include_directories("3rdparty/qsqlite")
 
-# When/if upstream accepts our patches then these options can be used to link
-# to system installed qtsingleapplication instead.
-option(USE_SYSTEM_QTSINGLEAPPLICATION "Don't set this option unless your system QtSingleApplication library has been compiled with the Clementine patches in 3rdparty" OFF)
-if(USE_SYSTEM_QTSINGLEAPPLICATION)
-  find_path(QTSINGLEAPPLICATION_INCLUDE_DIRS qtsingleapplication.h PATH_SUFFIXES QtSolutions)
-  find_library(QTSINGLEAPPLICATION_LIBRARIES QtSolutions_SingleApplication-2.6)
-  find_library(QTSINGLECOREAPPLICATION_LIBRARIES QtSolutions_SingleCoreApplication-2.6)
-else(USE_SYSTEM_QTSINGLEAPPLICATION)
-  add_subdirectory(3rdparty/qtsingleapplication)
-  set(QTSINGLEAPPLICATION_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/qtsingleapplication)
-  set(QTSINGLEAPPLICATION_LIBRARIES qtsingleapplication)
-endif(USE_SYSTEM_QTSINGLEAPPLICATION)
+add_subdirectory(3rdparty/singleapplication)
+set(SINGLEAPPLICATION_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/singleapplication)
+set(SINGLEAPPLICATION_LIBRARIES singleapplication)
 
 # QtIoCompressor isn't patched, so we can use a system version if it's
 # available
@@ -358,8 +353,8 @@ else (USE_SYSTEM_QXT)
   endif (NOT APPLE)
 endif (USE_SYSTEM_QXT)
 
-find_path(ECHONEST_INCLUDE_DIRS echonest/echonest_export.h)
-find_library(ECHONEST_LIBRARIES echonest)
+find_path(ECHONEST5_INCLUDE_DIRS echonest5/echonest_export.h)
+find_library(ECHONEST5_LIBRARIES echonest5)
 
 # Use system gmock if it's available
 # We need to look for both gmock and gtest
@@ -388,15 +383,14 @@ else()
   set(SHA2_LIBRARIES sha2)
 endif()
 
-# Use the system libmygpo-qt if a recent enough version was found
-if(LIBMYGPO_QT_FOUND)
-  set(MYGPOQT_LIBRARIES ${LIBMYGPO_QT_LIBRARIES})
-  set(MYGPOQT_INCLUDE_DIRS ${LIBMYGPO_QT_INCLUDE_DIRS})
+# Use the system libmygpo-qt5 if a recent enough version was found
+if(LIBMYGPO_QT5_FOUND)
+  set(MYGPOQT5_LIBRARIES ${LIBMYGPO_QT5_LIBRARIES})
+  set(MYGPOQT5_INCLUDE_DIRS ${LIBMYGPO_QT5_INCLUDE_DIRS})
 else()
-  add_definitions(-DMYGPO_EXPORT=)
-  add_subdirectory(3rdparty/libmygpo-qt)
-  set(MYGPOQT_LIBRARIES mygpo-qt)
-  set(MYGPOQT_INCLUDE_DIRS ${CMAKE_SOURCE_DIR}/3rdparty/libmygpo-qt/)
+  add_subdirectory(3rdparty/libmygpo-qt5)
+  set(MYGPOQT5_LIBRARIES mygpo-qt5)
+  set(MYGPOQT5_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/libmygpo-qt5/src)
 endif()
 
 # Qocoa
