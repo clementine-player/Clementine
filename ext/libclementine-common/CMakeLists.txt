@@ -27,7 +27,7 @@ if(APPLE)
   list(APPEND SOURCES core/scoped_nsautorelease_pool.mm)
 endif(APPLE)
 
-qt4_wrap_cpp(MOC ${HEADERS})
+qt5_wrap_cpp(MOC ${HEADERS})
 
 add_library(libclementine-common STATIC
   ${SOURCES}
@@ -38,3 +38,5 @@ target_link_libraries(libclementine-common
   ${TAGLIB_LIBRARIES}
   ${CMAKE_THREAD_LIBS_INIT}
 )
+
+QT5_USE_MODULES(libclementine-common Core Network)

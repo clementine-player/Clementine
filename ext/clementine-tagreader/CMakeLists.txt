@@ -16,8 +16,8 @@ set(SOURCES
   tagreaderworker.cpp
 )
 
-qt4_wrap_cpp(MOC ${HEADERS})
-qt4_add_resources(QRC data/data.qrc)
+qt5_wrap_cpp(MOC ${HEADERS})
+qt5_add_resources(QRC data/data.qrc)
 
 add_executable(clementine-tagreader
   ${SOURCES}
