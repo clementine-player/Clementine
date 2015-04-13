@@ -15,8 +15,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2015-03-28 05:15+0000\n"
-"Last-Translator: mijiturka\n"
+"PO-Revision-Date: 2015-04-10 22:06+0000\n"
+"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Bulgarian (http://www.transifex.com/projects/p/clementine/language/bg/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -368,7 +368,7 @@ msgstr "AAC 32k"
 msgid "AAC 64k"
 msgstr "AAC 64k"
 
-#: core/song.cpp:409
+#: core/song.cpp:413
 msgid "AIFF"
 msgstr "AIFF"
 
@@ -932,7 +932,7 @@ msgstr "Среден размер на изображение"
 msgid "BBC Podcasts"
 msgstr "BBC подкасти"
 
-#: playlist/playlist.cpp:1343 ui/organisedialog.cpp:70
+#: playlist/playlist.cpp:1343 ui/organisedialog.cpp:71
 #: ../bin/src/ui_edittagdialog.h:671
 msgid "BPM"
 msgstr "Темпо"
@@ -999,7 +999,7 @@ msgstr "Поток в битове"
 msgid "Bitrate"
 msgstr "Поток в битове"
 
-#: ui/organisedialog.cpp:75
+#: ui/organisedialog.cpp:76
 msgctxt "Refers to bitrate in file organise dialog."
 msgid "Bitrate"
 msgstr "Поток в битове"
@@ -1038,7 +1038,7 @@ msgstr "Избор…"
 msgid "Buffer duration"
 msgstr "Времетраене на буфера"
 
-#: engines/gstengine.cpp:873
+#: engines/gstengine.cpp:884
 msgid "Buffering"
 msgstr "Буфериране"
 
@@ -1058,7 +1058,7 @@ msgstr "Бутони"
 msgid "By default, Grooveshark sorts songs on date added"
 msgstr "По подразбиране, Grooveshark подрежда песните по дата на добавяне"
 
-#: core/song.cpp:415
+#: core/song.cpp:419
 msgid "CDDA"
 msgstr "CDDA"
 
@@ -1143,7 +1143,7 @@ msgstr "Избор на Vk.com кеш папка"
 msgid "Choose a name for your smart playlist"
 msgstr "Изберете име за вашият умен списък с песни"
 
-#: engines/gstengine.cpp:894
+#: engines/gstengine.cpp:905
 msgid "Choose automatically"
 msgstr "Автоматичен избор"
 
@@ -1325,7 +1325,7 @@ msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Разделен със запетаи списък с class:level, level (ниво) е 0-3"
 
 #: playlist/playlist.cpp:1362 smartplaylists/searchterm.cpp:353
-#: ui/organisedialog.cpp:73 ../bin/src/ui_edittagdialog.h:697
+#: ui/organisedialog.cpp:74 ../bin/src/ui_edittagdialog.h:697
 msgid "Comment"
 msgstr "Коментар"
 
@@ -1687,7 +1687,7 @@ msgstr "Намаляване на звука"
 msgid "Default background image"
 msgstr "Фоново изображение по подразбиране"
 
-#: engines/gstengine.cpp:919
+#: engines/gstengine.cpp:930
 #, qt-format
 msgid "Default device on %1"
 msgstr "Устройство по подразбиране на %1"
@@ -1832,7 +1832,7 @@ msgctxt "Refers to search provider's status."
 msgid "Disabled"
 msgstr "Изключено"
 
-#: playlist/playlist.cpp:1317 ui/organisedialog.cpp:69
+#: playlist/playlist.cpp:1317 ui/organisedialog.cpp:70
 #: ../bin/src/ui_groupbydialog.h:138 ../bin/src/ui_groupbydialog.h:153
 #: ../bin/src/ui_groupbydialog.h:168 ../bin/src/ui_edittagdialog.h:688
 #: ../bin/src/ui_ripcddialog.h:314
@@ -2386,7 +2386,7 @@ msgstr "Грешка по време на свалянето на обложка
 msgid "File Format"
 msgstr "Файлов формат"
 
-#: ui/organisedialog.cpp:77
+#: ui/organisedialog.cpp:78
 msgid "File extension"
 msgstr "Файлово разширение"
 
@@ -2456,7 +2456,7 @@ msgstr "Първо ниво"
 msgid "Fit cover to width"
 msgstr "Сместване на обложката в ширината"
 
-#: core/song.cpp:393 transcoder/transcoder.cpp:233
+#: core/song.cpp:397 transcoder/transcoder.cpp:233
 msgid "Flac"
 msgstr "Flac"
 
@@ -2544,7 +2544,7 @@ msgstr "Общи"
 msgid "General settings"
 msgstr "Общи настройки"
 
-#: playlist/playlist.cpp:1321 ui/organisedialog.cpp:72
+#: playlist/playlist.cpp:1321 ui/organisedialog.cpp:73
 #: ../bin/src/ui_groupbydialog.h:134 ../bin/src/ui_groupbydialog.h:149
 #: ../bin/src/ui_groupbydialog.h:164 ../bin/src/ui_edittagdialog.h:695
 #: ../bin/src/ui_ripcddialog.h:317
@@ -3031,7 +3031,7 @@ msgstr "Най-малко любими песни"
 msgid "Left"
 msgstr "Ляво"
 
-#: playlist/playlist.cpp:1313 ui/organisedialog.cpp:74
+#: playlist/playlist.cpp:1313 ui/organisedialog.cpp:75
 #: ui/qtsystemtrayicon.cpp:239 ../bin/src/ui_edittagdialog.h:669
 msgid "Length"
 msgstr "Дължина"
@@ -3181,7 +3181,7 @@ msgstr "Ниско (256x256)"
 msgid "Low complexity profile (LC)"
 msgstr "Low complexity profile (LC)"
 
-#: ../bin/src/ui_songinfosettingspage.h:159
+#: ui/organisedialog.cpp:68 ../bin/src/ui_songinfosettingspage.h:159
 msgid "Lyrics"
 msgstr "Текстове на песни"
 
@@ -3190,11 +3190,15 @@ msgstr "Текстове на песни"
 msgid "Lyrics from %1"
 msgstr "Текстове на песни от %1"
 
+#: songinfo/taglyricsinfoprovider.cpp:29
+msgid "Lyrics from the ID3v2 tag"
+msgstr ""
+
 #: transcoder/transcoder.cpp:235
 msgid "M4A AAC"
 msgstr "M4A AAC"
 
-#: core/song.cpp:399 transcoder/transcoder.cpp:238
+#: core/song.cpp:403 transcoder/transcoder.cpp:238
 #: ../bin/src/ui_transcodersettingspage.h:175
 msgid "MP3"
 msgstr "MP3"
@@ -3207,11 +3211,11 @@ msgstr "MP3 256k"
 msgid "MP3 96k"
 msgstr "MP3 96k"
 
-#: core/song.cpp:395
+#: core/song.cpp:399
 msgid "MP4 AAC"
 msgstr "MP4 AAC"
 
-#: core/song.cpp:397
+#: core/song.cpp:401
 msgid "MPC"
 msgstr "MPC"
 
@@ -3588,19 +3592,19 @@ msgstr "OSD Изглед"
 msgid "Off"
 msgstr "Изключено"
 
-#: core/song.cpp:401 transcoder/transcoder.cpp:244
+#: core/song.cpp:405 transcoder/transcoder.cpp:244
 msgid "Ogg Flac"
 msgstr "Ogg Flac"
 
-#: core/song.cpp:407 transcoder/transcoder.cpp:250
+#: core/song.cpp:411 transcoder/transcoder.cpp:250
 msgid "Ogg Opus"
 msgstr "Ogg Opus"
 
-#: core/song.cpp:403 transcoder/transcoder.cpp:247
+#: core/song.cpp:407 transcoder/transcoder.cpp:247
 msgid "Ogg Speex"
 msgstr "Ogg Speex"
 
-#: core/song.cpp:405 transcoder/transcoder.cpp:241
+#: core/song.cpp:409 transcoder/transcoder.cpp:241
 #: ../bin/src/ui_magnatunedownloaddialog.h:139
 #: ../bin/src/ui_magnatunesettingspage.h:170
 msgid "Ogg Vorbis"
@@ -4355,7 +4359,7 @@ msgstr "Безопасно премахване на устройството с
 msgid "Sample rate"
 msgstr "Дискретизация"
 
-#: ui/organisedialog.cpp:76
+#: ui/organisedialog.cpp:77
 msgid "Samplerate"
 msgstr "Дискретизация"
 
@@ -4976,7 +4980,7 @@ msgstr "Спри след песен: %1"
 msgid "Stopped"
 msgstr "Спрян"
 
-#: core/song.cpp:418
+#: core/song.cpp:422
 msgid "Stream"
 msgstr "Поток"
 
@@ -5290,7 +5294,7 @@ msgstr "Общо прехвърлени байта"
 msgid "Total network requests made"
 msgstr "Общ брой направени мрежови заявки"
 
-#: playlist/playlist.cpp:1315 ui/organisedialog.cpp:68
+#: playlist/playlist.cpp:1315 ui/organisedialog.cpp:69
 #: ../bin/src/ui_edittagdialog.h:686 ../bin/src/ui_trackselectiondialog.h:213
 #: ../bin/src/ui_ripcddialog.h:305
 msgid "Track"
@@ -5321,7 +5325,7 @@ msgstr "Прекодиране на %1 файлове чрез %2 начина"
 msgid "Transcoding options"
 msgstr "Настройки на прекодиране"
 
-#: core/song.cpp:413
+#: core/song.cpp:417
 msgid "TrueAudio"
 msgstr "Инстинско Аудио"
 
@@ -5355,7 +5359,7 @@ msgstr "Не можах да се свържа"
 msgid "Unable to download %1 (%2)"
 msgstr "Неуспешно сваляне %1 (%2)"
 
-#: core/song.cpp:422 library/librarymodel.cpp:350 library/librarymodel.cpp:354
+#: core/song.cpp:426 library/librarymodel.cpp:350 library/librarymodel.cpp:354
 #: library/librarymodel.cpp:358 library/librarymodel.cpp:1066
 #: playlist/playlistdelegates.cpp:306 playlist/playlistmanager.cpp:501
 #: playlist/playlistmanager.cpp:502 ui/albumcoverchoicecontroller.cpp:124
@@ -5602,7 +5606,7 @@ msgstr "Стена"
 msgid "Warn me when closing a playlist tab"
 msgstr "Предупреди ме, преди да се затвори подпрозорец със списък от песни"
 
-#: core/song.cpp:411 transcoder/transcoder.cpp:256
+#: core/song.cpp:415 transcoder/transcoder.cpp:256
 msgid "Wav"
 msgstr "Wav"
 
@@ -5686,7 +5690,7 @@ msgstr "Windows Media 40k"
 msgid "Windows Media 64k"
 msgstr "Windows Media 64k"
 
-#: core/song.cpp:391 transcoder/transcoder.cpp:253
+#: core/song.cpp:395 transcoder/transcoder.cpp:253
 msgid "Windows Media audio"
 msgstr "Аудио — Windows Media"
 
@@ -5716,7 +5720,7 @@ msgstr "Запиши метадата"
 msgid "Wrong username or password."
 msgstr "Грешно потребителско име или парола."
 
-#: playlist/playlist.cpp:1319 ui/organisedialog.cpp:71
+#: playlist/playlist.cpp:1319 ui/organisedialog.cpp:72
 #: ../bin/src/ui_groupbydialog.h:135 ../bin/src/ui_groupbydialog.h:150
 #: ../bin/src/ui_groupbydialog.h:165 ../bin/src/ui_edittagdialog.h:690
 #: ../bin/src/ui_trackselectiondialog.h:212 ../bin/src/ui_ripcddialog.h:313
