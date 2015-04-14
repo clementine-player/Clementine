@@ -154,11 +154,10 @@ bool GstEnginePipeline::ReplaceDecodeBin(const QUrl& url) {
       uridecodebin_next_spotify_ = nullptr;
     } else {
       new_bin = NewSpotifyBin();
+      // Tell spotify to start sending data to us.
+      InternetModel::Service<SpotifyService>()->server()->StartPlaybackLater(
+          url.toString(), spotify_port_);
     }
-
-    // Tell spotify to start sending data to us.
-    InternetModel::Service<SpotifyService>()->server()->StartPlaybackLater(
-        url.toString(), spotify_port_);
   } else {
     new_bin = engine_->CreateElement("uridecodebin");
     g_object_set(G_OBJECT(new_bin), "uri", url.toEncoded().constData(),
@@ -193,6 +192,8 @@ GstElement* GstEnginePipeline::NewSpotifyBin() {
   GstPad* pad = gst_element_get_static_pad(gdp, "src");
   gst_element_add_pad(GST_ELEMENT(new_bin), gst_ghost_pad_new("src", pad));
   gst_object_unref(GST_OBJECT(pad));
+
+  qDebug() << "NewSpotifyBin done";
 
   return new_bin;
 }
@@ -500,12 +501,13 @@ GstBusSyncReply GstEnginePipeline::BusCallbackSync(GstBus*, GstMessage* msg,
                                                    gpointer self) {
   GstEnginePipeline* instance = reinterpret_cast<GstEnginePipeline*>(self);
 
-  qLog(Debug) << instance->id() << "sync bus message"
-              << GST_MESSAGE_TYPE_NAME(msg);
+  //qLog(Debug) << instance->id() << "sync bus message"
+  //            << GST_MESSAGE_TYPE_NAME(msg);
 
   switch (GST_MESSAGE_TYPE(msg)) {
     case GST_MESSAGE_EOS:
       if (instance->has_next_valid_url()) {
+        qDebug() << "TransitionToNext from EOS";
         QMetaObject::invokeMethod(instance, "TransitionToNext", Qt::QueuedConnection);
       } else {
         emit instance->EndOfStreamReached(instance->id(), instance->has_next_valid_url());
@@ -950,6 +952,7 @@ void GstEnginePipeline::SourceSetupCallback(GstURIDecodeBin* bin,
 }
 
 void GstEnginePipeline::TransitionToNext() {
+  qLog(Debug) << "TransitionToNext";
   GstElement* old_decode_bin = uridecodebin_;
 
   ignore_tags_ = true;
@@ -1191,20 +1194,7 @@ void GstEnginePipeline::SetNextUrl(const QUrl& url, qint64 beginning_nanosec,
     SpotifyService* spotify = InternetModel::Service<SpotifyService>();
     QMetaObject::invokeMethod(spotify, "SetNextUrl", Qt::QueuedConnection,
                               Q_ARG(QUrl, url), Q_ARG(int, spotify_port_));
+
+    TransitionToNext();
   }
-}
-
-void GstEnginePipeline::SpotifyMovedToNextTrack() {
-  url_ = next_url_;
-  end_offset_nanosec_ = next_end_offset_nanosec_;
-  next_url_ = QUrl();
-  next_beginning_offset_nanosec_ = 0;
-  next_end_offset_nanosec_ = 0;
-
-  // This function gets called when the source has been drained, even if the
-  // song hasn't finished playing yet.  We'll get a new stream when it really
-  // does finish, so emit TrackEnded then.
-  emit_track_ended_on_stream_start_ = true;
-
-  gst_element_seek_simple(pipeline_, GST_FORMAT_TIME, GST_SEEK_FLAG_FLUSH, 0);
 }

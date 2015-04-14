@@ -354,8 +354,8 @@ void SpotifyService::StartBlobProcess() {
           SLOT(BlobProcessError(QProcess::ProcessError)));
 
   qLog(Info) << "Starting" << blob_path;
-  //blob_process_->start(
-  //    blob_path, QStringList() << QString::number(server_->server_port()));
+  blob_process_->start(
+      blob_path, QStringList() << QString::number(server_->server_port()));
 }
 
 bool SpotifyService::IsBlobInstalled() const {

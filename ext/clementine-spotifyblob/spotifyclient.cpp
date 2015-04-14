@@ -775,6 +775,7 @@ void SpotifyClient::MetadataUpdatedCallback(sp_session* session) {
 }
 
 void SpotifyClient::ContinueGaplessPlayback(const PrefetchTrackRequest& req) {
+  qLog(Debug) << "ContinueGaplessPlayback" << gapless_playback_;
   if (!gapless_playback_)
     return;
 
@@ -787,9 +788,9 @@ void SpotifyClient::ContinueGaplessPlayback(const PrefetchTrackRequest& req) {
   sp_error error = sp_session_player_load(session_, req.track_);
   qLog(Debug) << Q_FUNC_INFO << sp_error_message(error);
 
-  //int port = media_pipeline_->port();
-  //media_pipeline_.reset(new MediaPipeline(port,
-  //                                        sp_track_duration(req.track_)));
+  qLog(Debug) << "EndOfTrackCallback - new pipeline";
+  media_pipeline_.reset(media_pipeline_prefetch_);
+  media_pipeline_prefetch_ = nullptr;
 
   error = sp_session_player_play(session_, true);
   qLog(Debug) << Q_FUNC_INFO << sp_error_message(error);
@@ -855,14 +856,13 @@ void SpotifyClient::EndOfTrackCallback(sp_session* session) {
 
   if (me->gapless_playback_ && !me->prefetched_tracks_.isEmpty()) {
     for (const PrefetchTrackRequest req : me->prefetched_tracks_.values()) {
+      qLog(Debug) << "EndOfTrackCallback - something prefetched";
       if (me->gapless_playback_ && me->media_pipeline_prefetch_) {
-        qLog(Debug) << "EndOfTrackCallback - new pipeline";
-        me->media_pipeline_.reset(me->media_pipeline_prefetch_);
-        me->media_pipeline_prefetch_ = nullptr;
         me->ContinueGaplessPlayback(req);
       }
     }
   } else {
+    qLog(Debug) << "EndOfTrackCallback - reset";
     me->media_pipeline_.reset();
   }
 }
@@ -970,6 +970,7 @@ int SpotifyClient::GetDownloadProgress(sp_playlist* playlist) {
 }
 
 void SpotifyClient::StartPlayback(const pb::spotify::PlaybackRequest& req) {
+  qLog(Debug) << "StartPlayback";
   QString uri = QString::fromStdString(req.track_uri());
 
   // Get a link object from the URI
@@ -1069,8 +1070,11 @@ void SpotifyClient::PrefetchTrack(const pb::spotify::PlaybackRequest &req) {
 
   prefetched_tracks_.insert(uri, prefetch_request);
 
+  qLog(Debug) << "media_pipeline_prefetch_ to port" << req.media_port();
   media_pipeline_prefetch_ = new MediaPipeline(req.media_port(),
                                           sp_track_duration(track));
+
+  ContinueGaplessPlayback(prefetch_request);
 }
 
 void SpotifyClient::SendPlaybackError(const QString& error) {

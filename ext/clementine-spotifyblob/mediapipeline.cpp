@@ -41,7 +41,11 @@ MediaPipeline::~MediaPipeline() {
 }
 
 bool MediaPipeline::Init(int sample_rate, int channels) {
-  if (is_initialised()) return false;
+  qLog(Debug) << "MediaPipeline::Init";
+  if (is_initialised()) {
+    qLog(Debug) << "is_initialised() true";
+    return false;
+  }
 
   pipeline_ = gst_pipeline_new("pipeline");
 
@@ -51,6 +55,7 @@ bool MediaPipeline::Init(int sample_rate, int channels) {
   tcpsink_ = gst_element_factory_make("tcpclientsink", nullptr);
 
   if (!pipeline_ || !appsrc_ || !tcpsink_) {
+    qLog(Debug) << "!pipeline_ || !appsrc_ || !tcpsink_";
     if (pipeline_) {
       gst_object_unref(GST_OBJECT(pipeline_));
       qLog(Debug) << "have pipeline_";

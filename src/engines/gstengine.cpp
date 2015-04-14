@@ -369,10 +369,14 @@ bool GstEngine::Load(const QUrl& url, Engine::TrackChangeFlags change,
       !crossfade_same_album_)
     crossfade = false;
 
+  if (current_pipeline_)
+    qLog(Debug) << !crossfade << "true" << (current_pipeline_->url() == gst_url) <<
+                   (change & Engine::Auto);
   if (!crossfade && current_pipeline_ && current_pipeline_->url() == gst_url &&
       change & Engine::Auto) {
     // We're not crossfading, and the pipeline is already playing the URI we
     // want, so just do nothing.
+    qLog(Debug) << "do nothing";
     return true;
   }
 
@@ -650,7 +654,7 @@ void GstEngine::timerEvent(QTimerEvent* e) {
     const qint64 remaining = current_length - current_position;
 
     const qint64 fudge =
-        kTimerIntervalNanosec + 100 * kNsecPerMsec;  // Mmm fudge
+        kTimerIntervalNanosec + 2500 * kNsecPerMsec;  // Mmm fudge
     const qint64 gap = buffer_duration_nanosec_ +
                        (autocrossfade_enabled_ ? fadeout_duration_nanosec_
                                                : kPreloadGapNanosec);
@@ -699,11 +703,11 @@ void GstEngine::EndOfStreamReached(int pipeline_id, bool has_next_track) {
   if (!current_pipeline_.get() || current_pipeline_->id() != pipeline_id)
     return;
 
+  qLog(Debug) << "EndOfStreamReached" << pipeline_id << has_next_track;
+
   if (!has_next_track) {
     current_pipeline_.reset();
     BufferingFinished();
-  } else {
-    current_pipeline_->SpotifyMovedToNextTrack();
   }
   emit TrackEnded();
 }

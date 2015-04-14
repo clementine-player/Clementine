@@ -39,7 +39,7 @@ SpotifyServer::SpotifyServer(QObject* parent)
 }
 
 void SpotifyServer::Init() {
-  if (!server_->listen(QHostAddress::LocalHost, 56154)) {
+  if (!server_->listen(QHostAddress::LocalHost)) {
     qLog(Error) << "Couldn't open server socket" << server_->errorString();
   }
 }

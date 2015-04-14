@@ -83,7 +83,6 @@ class GstEnginePipeline : public QObject {
                   qint64 end_nanosec);
   bool has_next_valid_url() const { return next_url_.isValid(); }
   QUrl next_url() const { return next_url_; }
-  void SpotifyMovedToNextTrack();
 
   // Get information about the music playback
   QUrl url() const { return url_; }
