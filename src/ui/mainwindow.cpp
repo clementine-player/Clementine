@@ -219,6 +219,9 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
 
   // Initialise the global search widget
   StyleHelper::setBaseColor(palette().color(QPalette::Highlight).darker());
+  
+  // Hide menu bar on application startup
+  ui_->menuBar->hide();
 
   // Add global search providers
   app_->global_search()->AddProvider(new LibrarySearchProvider(
@@ -2718,6 +2721,12 @@ void MainWindow::keyPressEvent(QKeyEvent* event) {
   } else if (event->key() == Qt::Key_Right) {
     ui_->track_slider->Seek(1);
     event->accept();
+  } else if(event->key() == Qt::Key_Alt) {
+    if(ui_->menuBar->isHidden()) {
+      ui_->menuBar->show(); 
+    } else { 
+      ui_->menuBar->hide(); 
+    }
   } else {
     QMainWindow::keyPressEvent(event);
   }
