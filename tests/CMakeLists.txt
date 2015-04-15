@@ -74,14 +74,14 @@ qt5_wrap_cpp(TESTUTILS-SOURCES-MOC ${TESTUTILS-MOC-HEADERS})
 add_library(test_utils STATIC EXCLUDE_FROM_ALL ${TESTUTILS-SOURCES} ${TESTUTILS-SOURCES-MOC})
 target_link_libraries(test_utils ${GMOCK_LIBRARIES} ${QT_LIBRARIES} ${QT_QTTEST_LIBRARY})
 
-add_custom_target(test
-    echo "Running tests"
+add_custom_target(clementine_test
+    echo "Running Clementine tests"
     WORKING_DIRECTORY ${CURRENT_BINARY_DIR}
 )
 add_custom_target(build_tests
     WORKING_DIRECTORY ${CURRENT_BINARY_DIR}
 )
-add_dependencies(test build_tests)
+add_dependencies(clementine_test build_tests)
 
 qt5_add_resources(TEST-RESOURCE-SOURCES data/testdata.qrc)
 
@@ -112,7 +112,7 @@ macro(add_test_file test_source gui_required)
       set_target_properties(${TEST_NAME} PROPERTIES COMPILE_FLAGS "-Wno-bool-conversions")
     endif (SUPPORTS_NOBOOL)
 
-    add_custom_command(TARGET test POST_BUILD
+    add_custom_command(TARGET clementine_test POST_BUILD
         COMMAND ./${TEST_NAME}${CMAKE_EXECUTABLE_SUFFIX})
     add_dependencies(build_tests ${TEST_NAME})
 endmacro (add_test_file)

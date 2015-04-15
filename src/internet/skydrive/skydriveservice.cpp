@@ -19,9 +19,12 @@
 
 #include "skydriveservice.h"
 
-#include <memory>
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QJsonArray>
+#include <QUrlQuery>
 
-#include <qjson/parser.h>
+#include <memory>
 
 #include "core/application.h"
 #include "core/player.h"
@@ -108,10 +111,9 @@ void SkydriveService::AddAuthorizationHeader(QNetworkRequest* request) {
 
 void SkydriveService::FetchUserInfoFinished(QNetworkReply* reply) {
   reply->deleteLater();
-  QJson::Parser parser;
-  QVariantMap response = parser.parse(reply).toMap();
+  QJsonObject json_response = QJsonDocument::fromBinaryData(reply->readAll()).object();
 
-  QString name = response["name"].toString();
+  QString name = json_response["name"].toString();
   if (!name.isEmpty()) {
     QSettings s;
     s.beginGroup(kSettingsGroup);
@@ -125,7 +127,9 @@ void SkydriveService::FetchUserInfoFinished(QNetworkReply* reply) {
 
 void SkydriveService::ListFiles(const QString& folder) {
   QUrl url(QString(kSkydriveBase) + folder + "/files");
-  url.addQueryItem("filter", "audio,folders");
+  QUrlQuery url_query;
+  url_query.addQueryItem("filter", "audio,folders");
+  url.setQuery(url_query);
   QNetworkRequest request(url);
   AddAuthorizationHeader(&request);
 
@@ -136,27 +140,26 @@ void SkydriveService::ListFiles(const QString& folder) {
 
 void SkydriveService::ListFilesFinished(QNetworkReply* reply) {
   reply->deleteLater();
-  QJson::Parser parser;
-  QVariantMap response = parser.parse(reply).toMap();
+  QJsonObject json_response = QJsonDocument::fromBinaryData(reply->readAll()).object();
 
-  QVariantList files = response["data"].toList();
-  for (const QVariant& f : files) {
-    QVariantMap file = f.toMap();
+  QJsonArray files = json_response["data"].toArray();
+  for (const QJsonValue& f : files) {
+    QJsonObject file = f.toObject();
     if (file["type"].toString() == "audio") {
       QString mime_type = GuessMimeTypeForFile(file["name"].toString());
       QUrl url;
       url.setScheme("skydrive");
-      url.setPath(file["id"].toString());
+      url.setPath("/" + file["id"].toString());
 
       Song song;
       song.set_url(url);
-      song.set_ctime(file["created_time"].toDateTime().toTime_t());
-      song.set_mtime(file["updated_time"].toDateTime().toTime_t());
+      song.set_ctime(QDateTime::fromString(file["created_time"].toString()).toTime_t());
+      song.set_mtime(QDateTime::fromString(file["updated_time"].toString()).toTime_t());
       song.set_comment(file["description"].toString());
       song.set_filesize(file["size"].toInt());
       song.set_title(file["name"].toString());
 
-      QUrl download_url = file["source"].toUrl();
+      QUrl download_url(file["source"].toString());
       // HTTPS appears to be broken somehow between Qt & Skydrive downloads.
       // Fortunately, just changing the scheme to HTTP works.
       download_url.setScheme("http");
@@ -176,9 +179,8 @@ QUrl SkydriveService::GetStreamingUrlFromSongId(const QString& file_id) {
   std::unique_ptr<QNetworkReply> reply(network_->get(request));
   WaitForSignal(reply.get(), SIGNAL(finished()));
 
-  QJson::Parser parser;
-  QVariantMap response = parser.parse(reply.get()).toMap();
-  return response["source"].toUrl();
+  QJsonObject json_response = QJsonDocument::fromBinaryData(reply.get()->readAll()).object();
+  return QUrl(json_response["source"].toString());
 }
 
 void SkydriveService::EnsureConnected() {

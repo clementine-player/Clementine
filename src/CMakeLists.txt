@@ -43,7 +43,7 @@ find_package(OpenGL)
 include_directories(${OPENGL_INCLUDE_DIR})
 
 if(HAVE_LIBLASTFM)
-  include_directories(${LASTFM_INCLUDE_DIRS})
+  include_directories(${LASTFM5_INCLUDE_DIRS})
 endif(HAVE_LIBLASTFM)
 
 if(HAVE_BREAKPAD)
@@ -1225,9 +1225,6 @@ add_library(clementine_lib STATIC
   ${OTHER_UIC_SOURCES}
 )
 
-add_dependencies(clementine_lib pot)
-
-
 target_link_libraries(clementine_lib
   clementine-spotifyblob-messages
   libclementine-common
@@ -1260,7 +1257,7 @@ if(ENABLE_VISUALISATIONS)
 endif(ENABLE_VISUALISATIONS)
 
 if(HAVE_LIBLASTFM)
-  target_link_libraries(clementine_lib ${LASTFM_LIBRARIES})
+  target_link_libraries(clementine_lib ${LASTFM5_LIBRARIES})
 endif(HAVE_LIBLASTFM)
 
 if(HAVE_LIBGPOD)

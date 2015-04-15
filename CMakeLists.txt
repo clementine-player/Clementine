@@ -89,9 +89,9 @@ if (WIN32)
   find_library(QTSPARKLE_LIBRARIES qtsparkle)
 endif (WIN32)
 
-find_library(LASTFM_LIBRARIES lastfm)
-find_path(LASTFM_INCLUDE_DIRS lastfm/ws.h)
-find_path(LASTFM1_INCLUDE_DIRS lastfm/Track.h)
+find_library(LASTFM5_LIBRARIES lastfm5)
+find_path(LASTFM5_INCLUDE_DIRS lastfm5/ws.h)
+find_path(LASTFM51_INCLUDE_DIRS lastfm5/Track.h)
 
 find_path(SPARSEHASH_INCLUDE_DIRS google/sparsetable)
 
@@ -117,7 +117,7 @@ else()
   set(CMAKE_REQUIRED_LIBRARIES)
 endif()
 
-if(LASTFM_INCLUDE_DIRS AND LASTFM1_INCLUDE_DIRS)
+if(LASTFM5_INCLUDE_DIRS AND LASTFM51_INCLUDE_DIRS)
   set(HAVE_LIBLASTFM1 ON)
 endif()
 
@@ -238,7 +238,7 @@ optional_component(LIBMTP ON "Devices: MTP support"
 )
 
 optional_component(LIBLASTFM ON "Last.fm support"
-  DEPENDS "liblastfm" LASTFM_LIBRARIES LASTFM_INCLUDE_DIRS
+  DEPENDS "liblastfm" LASTFM5_LIBRARIES LASTFM5_INCLUDE_DIRS
 )
 
 optional_component(DBUS ON "D-Bus support"
@@ -288,10 +288,11 @@ endif()
 # Find DBus if it's enabled
 if (HAVE_DBUS)
   find_package(Qt5 COMPONENTS DBus)
+  get_target_property(QT_DBUSXML2CPP_EXECUTABLE Qt5::qdbusxml2cpp LOCATION)
 endif ()
 
 # We can include the Qt definitions now
-set(QT_LIBRARIES Qt5::Core Qt5::OpenGL Qt5::Sql Qt5::Network Qt5::Xml Qt5::Widgets Qt5::Concurrent Qt5::X11Extras)
+set(QT_LIBRARIES Qt5::Core Qt5::OpenGL Qt5::Sql Qt5::Network Qt5::Xml Qt5::Widgets Qt5::Concurrent Qt5::X11Extras Qt5::DBus)
 
 # Remove GLU and GL from the link line - they're not really required
 # and don't exist on my mingw toolchain

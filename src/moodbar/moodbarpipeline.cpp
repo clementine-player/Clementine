@@ -57,7 +57,7 @@ bool MoodbarPipeline::IsAvailable() {
 
 GstElement* MoodbarPipeline::CreateElement(const QString& factory_name) {
   GstElement* ret =
-      gst_element_factory_make(factory_name.toAscii().constData(), nullptr);
+      gst_element_factory_make(factory_name.toLatin1().constData(), nullptr);
 
   if (ret) {
     gst_bin_add(GST_BIN(pipeline_), ret);
