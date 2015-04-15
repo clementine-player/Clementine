@@ -87,9 +87,9 @@ if (WIN32)
   find_library(QTSPARKLE_LIBRARIES qtsparkle)
 endif (WIN32)
 
-find_library(LASTFM_LIBRARIES lastfm)
-find_path(LASTFM_INCLUDE_DIRS lastfm/ws.h)
-find_path(LASTFM1_INCLUDE_DIRS lastfm/Track.h)
+find_library(LASTFM5_LIBRARIES lastfm5)
+find_path(LASTFM5_INCLUDE_DIRS lastfm5/ws.h)
+find_path(LASTFM51_INCLUDE_DIRS lastfm5/Track.h)
 
 find_path(SPARSEHASH_INCLUDE_DIRS google/sparsetable)
 
@@ -115,7 +115,7 @@ else()
   set(CMAKE_REQUIRED_LIBRARIES)
 endif()
 
-if(LASTFM_INCLUDE_DIRS AND LASTFM1_INCLUDE_DIRS)
+if(LASTFM5_INCLUDE_DIRS AND LASTFM51_INCLUDE_DIRS)
   set(HAVE_LIBLASTFM1 ON)
 endif()
 
@@ -192,85 +192,85 @@ endif(WIN32)
 
 optional_component(BREAKPAD OFF "Crash reporting")
 
-optional_component(GOOGLE_DRIVE OFF "Google Drive support"
+optional_component(GOOGLE_DRIVE ON "Google Drive support"
   DEPENDS "Google sparsehash" SPARSEHASH_INCLUDE_DIRS
   DEPENDS "Taglib 1.8" "TAGLIB_VERSION VERSION_GREATER 1.7.999"
 )
 
-optional_component(DROPBOX OFF "Dropbox support"
+optional_component(DROPBOX ON "Dropbox support"
   DEPENDS "Google sparsehash" SPARSEHASH_INCLUDE_DIRS
   DEPENDS "Taglib 1.8" "TAGLIB_VERSION VERSION_GREATER 1.7.999"
 )
 
-optional_component(SKYDRIVE OFF "Skydrive support"
+optional_component(SKYDRIVE ON "Skydrive support"
   DEPENDS "Google sparsehash" SPARSEHASH_INCLUDE_DIRS
   DEPENDS "Taglib 1.8" "TAGLIB_VERSION VERSION_GREATER 1.7.999"
 )
 
-optional_component(BOX OFF "Box support"
+optional_component(BOX ON "Box support"
   DEPENDS "Google sparsehash" SPARSEHASH_INCLUDE_DIRS
   DEPENDS "Taglib 1.8" "TAGLIB_VERSION VERSION_GREATER 1.7.999"
 )
 
-optional_component(VK OFF "Vk.com support")
+optional_component(VK ON "Vk.com support")
 
-optional_component(SEAFILE OFF "Seafile support"
+optional_component(SEAFILE ON "Seafile support"
   DEPENDS "Google sparsehash" SPARSEHASH_INCLUDE_DIRS
   DEPENDS "Taglib 1.8" "TAGLIB_VERSION VERSION_GREATER 1.7.999"
 )
 
-optional_component(AUDIOCD OFF "Devices: Audio CD support"
+optional_component(AUDIOCD ON "Devices: Audio CD support"
   DEPENDS "libcdio" CDIO_FOUND
 )
 
-optional_component(LIBGPOD OFF "Devices: iPod classic support"
+optional_component(LIBGPOD ON "Devices: iPod classic support"
   DEPENDS "libgpod" LIBGPOD_FOUND
 )
 
-optional_component(GIO OFF "Devices: GIO device backend"
+optional_component(GIO ON "Devices: GIO device backend"
   DEPENDS "libgio" GIO_FOUND
   DEPENDS "Linux or Windows" "NOT APPLE"
 )
 
-optional_component(LIBMTP OFF "Devices: MTP support"
+optional_component(LIBMTP ON "Devices: MTP support"
   DEPENDS "libmtp" LIBMTP_FOUND
 )
 
-optional_component(LIBLASTFM OFF "Last.fm support"
-  DEPENDS "liblastfm" LASTFM_LIBRARIES LASTFM_INCLUDE_DIRS
+optional_component(LIBLASTFM ON "Last.fm support"
+  DEPENDS "liblastfm" LASTFM5_LIBRARIES LASTFM5_INCLUDE_DIRS
 )
 
-optional_component(DBUS OFF "D-Bus support"
+optional_component(DBUS ON "D-Bus support"
   DEPENDS "Linux" LINUX
 )
 
-optional_component(WIIMOTEDEV OFF "Wiimote support"
+optional_component(WIIMOTEDEV ON "Wiimote support"
   DEPENDS "D-Bus support" HAVE_DBUS
 )
 
-optional_component(DEVICEKIT OFF "Devices: DeviceKit backend"
+optional_component(DEVICEKIT ON "Devices: DeviceKit backend"
   DEPENDS "D-Bus support" HAVE_DBUS
 )
 
-optional_component(SPOTIFY_BLOB OFF "Spotify support: non-GPL binary helper"
+optional_component(SPOTIFY_BLOB ON "Spotify support: non-GPL binary helper"
   DEPENDS "protobuf" PROTOBUF_FOUND PROTOBUF_PROTOC_EXECUTABLE
   DEPENDS "libspotify" SPOTIFY_FOUND
 )
 
-optional_component(MOODBAR OFF "Moodbar support"
+optional_component(MOODBAR ON "Moodbar support"
   DEPENDS "fftw3" FFTW3_FOUND
 )
 
-optional_component(SPARKLE OFF "Sparkle integration"
+optional_component(SPARKLE ON "Sparkle integration"
   DEPENDS "Mac OS X" APPLE
   DEPENDS "Sparkle" SPARKLE
 )
 
-optional_component(LIBPULSE OFF "Pulse audio integration"
+optional_component(LIBPULSE ON "Pulse audio integration"
   DEPENDS "libpulse" LIBPULSE_FOUND
 )
 
-optional_component(VISUALISATIONS OFF "Visualisations")
+optional_component(VISUALISATIONS ON "Visualisations")
 
 if(NOT HAVE_SPOTIFY_BLOB AND NOT QCA_QT5_FOUND)
   message(FATAL_ERROR "Either QCA-qt5 must be available or the non-GPL Spotify "
@@ -282,6 +282,7 @@ endif()
 # Find DBus if it's enabled
 if (HAVE_DBUS)
   find_package(Qt5 COMPONENTS DBus)
+  get_target_property(QT_DBUSXML2CPP_EXECUTABLE Qt5::qdbusxml2cpp LOCATION)
 endif ()
 
 if (HAVE_VK)
@@ -291,7 +292,7 @@ if (HAVE_VK)
 endif(HAVE_VK)
 
 # We can include the Qt definitions now
-set(QT_LIBRARIES Qt5::Core Qt5::OpenGL Qt5::Sql Qt5::Network Qt5::Xml Qt5::Widgets Qt5::Concurrent Qt5::X11Extras)
+set(QT_LIBRARIES Qt5::Core Qt5::OpenGL Qt5::Sql Qt5::Network Qt5::Xml Qt5::Widgets Qt5::Concurrent Qt5::X11Extras Qt5::DBus)
 
 # Remove GLU and GL from the link line - they're not really required
 # and don't exist on my mingw toolchain

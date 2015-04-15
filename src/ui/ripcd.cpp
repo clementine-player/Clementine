@@ -75,11 +75,11 @@ RipCD::RipCD(QWidget* parent)
   ui_->setupUi(this);
 
   // Set column widths in the QTableWidget.
-  ui_->tableWidget->horizontalHeader()->setResizeMode(
+  ui_->tableWidget->horizontalHeader()->setSectionResizeMode(
       kCheckboxColumn, QHeaderView::ResizeToContents);
-  ui_->tableWidget->horizontalHeader()->setResizeMode(
+  ui_->tableWidget->horizontalHeader()->setSectionResizeMode(
       kTrackNumberColumn, QHeaderView::ResizeToContents);
-  ui_->tableWidget->horizontalHeader()->setResizeMode(kTrackTitleColumn,
+  ui_->tableWidget->horizontalHeader()->setSectionResizeMode(kTrackTitleColumn,
                                                       QHeaderView::Stretch);
 
   // Add a rip button
