@@ -25,7 +25,7 @@
 
 #ifndef Q_WS_X11
 # include <QtPlugin>
-  Q_IMPORT_PLUGIN(qsqlite)
+  Q_IMPORT_PLUGIN(QSQLiteDriverPlugin)
 #endif
 
 int main(int argc, char** argv) {
