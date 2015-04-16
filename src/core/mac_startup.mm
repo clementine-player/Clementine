@@ -250,13 +250,8 @@ static BreakpadRef InitBreakpad() {
   [delegate_ setShortcutHandler:shortcut_handler_];
   [self setDelegate:delegate_];
 
-  Class notification_center_class =
-      NSClassFromString(@"NSUserNotificationCenter");
-  if (notification_center_class) {
-    id notification_center =
-        [notification_center_class defaultUserNotificationCenter];
-    [notification_center setDelegate:delegate_];
-  }
+  [[NSUserNotificationCenter defaultUserNotificationCenter]
+      setDelegate:delegate_];
 }
 
 - (void)sendEvent:(NSEvent*)event {
@@ -515,10 +510,6 @@ void DumpDictionary(CFDictionaryRef dict) {
 static const NSUInteger kFullScreenPrimary = 1 << 7;
 
 void EnableFullScreen(const QWidget& main_window) {
-  if (QSysInfo::MacintoshVersion == QSysInfo::MV_SNOWLEOPARD) {
-    return;  // Unsupported on 10.6
-  }
-
   NSView* view = reinterpret_cast<NSView*>(main_window.winId());
   NSWindow* window = [view window];
   [window setCollectionBehavior:kFullScreenPrimary];
@@ -526,10 +517,7 @@ void EnableFullScreen(const QWidget& main_window) {
 
 float GetDevicePixelRatio(QWidget* widget) {
   NSView* view = reinterpret_cast<NSView*>(widget->winId());
-  if ([[view window] respondsToSelector:@selector(backingScaleFactor)]) {
-    return [[view window] backingScaleFactor];
-  }
-  return 1.0f;
+  return [[view window] backingScaleFactor];
 }
 
 }  // namespace mac

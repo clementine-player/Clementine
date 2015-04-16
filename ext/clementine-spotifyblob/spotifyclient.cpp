@@ -942,15 +942,15 @@ void SpotifyClient::TryPlaybackAgain(const PendingPlaybackRequest& req) {
     return;
   }
 
-  // Remove this from the pending list now
-  pending_playback_requests_.removeAll(req);
-
   // Load the track
   sp_error error = sp_session_player_load(session_, req.track_);
   if (error != SP_ERROR_OK) {
     SendPlaybackError("Spotify playback error: " +
                       QString::fromUtf8(sp_error_message(error)));
     sp_link_release(req.link_);
+
+    // Remove this from the pending list now
+    pending_playback_requests_.removeAll(req);
     return;
   }
 
@@ -965,6 +965,9 @@ void SpotifyClient::TryPlaybackAgain(const PendingPlaybackRequest& req) {
   sp_session_player_play(session_, true);
 
   sp_link_release(req.link_);
+
+  // Remove this from the pending list now
+  pending_playback_requests_.removeAll(req);
 }
 
 void SpotifyClient::SendPlaybackError(const QString& error) {

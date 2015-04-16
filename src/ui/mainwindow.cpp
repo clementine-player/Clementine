@@ -95,6 +95,9 @@
 #include "playlist/songplaylistitem.h"
 #include "playlistparsers/playlistparser.h"
 #include "internet/podcasts/podcastservice.h"
+#ifdef HAVE_AUDIOCD
+#include "ripper/ripcddialog.h"
+#endif
 #include "smartplaylists/generator.h"
 #include "smartplaylists/generatormimedata.h"
 #include "songinfo/artistinfoview.h"
@@ -110,9 +113,6 @@
 #include "ui/organisedialog.h"
 #include "ui/organiseerrordialog.h"
 #include "ui/qtsystemtrayicon.h"
-#ifdef HAVE_AUDIOCD
-#include "ui/ripcd.h"
-#endif
 #include "ui/settingsdialog.h"
 #include "ui/systemtrayicon.h"
 #include "ui/trackselectiondialog.h"
@@ -312,6 +312,7 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
   ui_->action_quit->setIcon(IconLoader::Load("application-exit"));
   ui_->action_remove_from_playlist->setIcon(IconLoader::Load("list-remove"));
   ui_->action_repeat_mode->setIcon(IconLoader::Load("media-playlist-repeat"));
+  ui_->action_rip_audio_cd->setIcon(IconLoader::Load("media-optical"));
   ui_->action_shuffle->setIcon(IconLoader::Load("x-clementine-shuffle"));
   ui_->action_shuffle_mode->setIcon(IconLoader::Load("media-playlist-shuffle"));
   ui_->action_stop->setIcon(IconLoader::Load("media-playback-stop"));
@@ -389,7 +390,8 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
   connect(ui_->action_open_media, SIGNAL(triggered()), SLOT(AddFile()));
   connect(ui_->action_open_cd, SIGNAL(triggered()), SLOT(AddCDTracks()));
 #ifdef HAVE_AUDIOCD
-  connect(ui_->action_rip_audio_cd, SIGNAL(triggered()), SLOT(OpenRipCD()));
+  connect(ui_->action_rip_audio_cd, SIGNAL(triggered()),
+          SLOT(OpenRipCDDialog()));
 #else
   ui_->action_rip_audio_cd->setVisible(false);
 #endif
@@ -421,9 +423,23 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
   // Playlist view actions
   ui_->action_next_playlist->setShortcuts(
       QList<QKeySequence>() << QKeySequence::fromString("Ctrl+Tab")
+#ifdef Q_OS_DARWIN
+                            // On OS X "Ctrl+Tab" == Cmd + Tab but this shorcut
+                            // is already used by default for switching between
+                            // applications.
+                            // I would have preferred to use Meta+Tab (which
+                            // means Ctrl+Tab on OS X), like in Firefox or
+                            // Chrome, but this doesn't work (probably at Qt bug)
+                            // and some applications (e.g. Qt creator) uses
+                            // Alt+Tab too so I believe it's a good shorcut anyway
+                            << QKeySequence::fromString("Alt+Tab")
+#endif // Q_OS_DARWIN
                             << QKeySequence::fromString("Ctrl+PgDown"));
   ui_->action_previous_playlist->setShortcuts(
       QList<QKeySequence>() << QKeySequence::fromString("Ctrl+Shift+Tab")
+#ifdef Q_OS_DARWIN
+                            << QKeySequence::fromString("Alt+Shift+Tab")
+#endif // Q_OS_DARWIN
                             << QKeySequence::fromString("Ctrl+PgUp"));
   // Actions for switching tabs will be global to the entire window, so adding
   // them here
@@ -1882,13 +1898,13 @@ void MainWindow::AddStreamAccepted() {
   AddToPlaylist(data);
 }
 
-void MainWindow::OpenRipCD() {
+void MainWindow::OpenRipCDDialog() {
 #ifdef HAVE_AUDIOCD
-  if (!rip_cd_) {
-    rip_cd_.reset(new RipCD);
+  if (!rip_cd_dialog_) {
+    rip_cd_dialog_.reset(new RipCDDialog);
   }
-  if (rip_cd_->CheckCDIOIsValid()) {
-    rip_cd_->show();
+  if (rip_cd_dialog_->CheckCDIOIsValid()) {
+    rip_cd_dialog_->show();
   } else {
     QMessageBox cdio_fail(QMessageBox::Critical, tr("Error"),
                           tr("Failed reading CD drive"));
@@ -2658,6 +2674,7 @@ void MainWindow::HandleNotificationPreview(OSD::Behaviour type, QString line1,
     fake.set_genre("Classical");
     fake.set_composer("Anonymous");
     fake.set_performer("Anonymous");
+    fake.set_lyrics("None");
     fake.set_track(1);
     fake.set_disc(1);
     fake.set_year(2011);

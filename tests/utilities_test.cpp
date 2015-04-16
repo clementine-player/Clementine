@@ -21,6 +21,7 @@
 
 #include "core/utilities.h"
 
+#include <QDateTime>
 #include <QtDebug>
 
 TEST(UtilitiesTest, HmacFunctions) {
@@ -34,4 +35,13 @@ TEST(UtilitiesTest, HmacFunctions) {
   QByteArray result_hash_sha256 = Utilities::HmacSha256(key.toLocal8Bit(), data.toLocal8Bit()).toHex();
   bool result_sha256 = result_hash_sha256 == QString("f7bc83f430538424b13298e6aa6fb143ef4d59a14946175997479dbc2d1a3cd8");
   EXPECT_TRUE(result_sha256);
+}
+
+TEST(UtilitiesTest, ParseRFC822DateTim) {
+  QDateTime result_DateTime = Utilities::ParseRFC822DateTime(QString("22 Feb 2008 00:16:17 GMT"));
+  EXPECT_TRUE(result_DateTime.isValid());
+  result_DateTime = Utilities::ParseRFC822DateTime(QString("Thu, 13 Dec 2012 13:27:52 +0000"));
+  EXPECT_TRUE(result_DateTime.isValid());
+  result_DateTime = Utilities::ParseRFC822DateTime(QString("Mon, 12 March 2012 20:00:00 +0100"));
+  EXPECT_TRUE(result_DateTime.isValid());
 }

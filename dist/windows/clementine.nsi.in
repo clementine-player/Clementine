@@ -111,9 +111,31 @@ ShowUnInstDetails show
 @NORMAL@RequestExecutionLevel admin
 @PORTABLE@RequestExecutionLevel user
 
+; Check for previous installation, and call the uninstaller if any
+Function CheckPreviousInstall
+
+  ReadRegStr $R0 ${PRODUCT_UNINST_ROOT_KEY} ${PRODUCT_UNINST_KEY} "UninstallString"
+  StrCmp $R0 "" done
+
+  MessageBox MB_OKCANCEL|MB_ICONEXCLAMATION \
+  "${PRODUCT_NAME} is already installed. $\n$\nClick `OK` to remove the \
+  previous version or `Cancel` to cancel this upgrade." \
+  IDOK uninst
+  Abort
+; Run the uninstaller
+uninst:
+  ClearErrors
+  ExecWait '$R0 _?=$INSTDIR' ; Do not copy the uninstaller to a temp file
+
+done:
+
+FunctionEnd
+
 Function .onInit
 
   !insertmacro MUI_LANGDLL_DISPLAY
+
+  Call CheckPreviousInstall
 
 FunctionEnd
 

@@ -33,11 +33,12 @@
 #include "globalsearch/searchprovider.h"
 #include "internet/digitally/digitallyimportedclient.h"
 #include "internet/core/geolocator.h"
+#include "internet/podcasts/podcastepisode.h"
+#include "internet/podcasts/podcast.h"
 #include "internet/somafm/somafmservice.h"
 #include "library/directory.h"
 #include "playlist/playlist.h"
-#include "internet/podcasts/podcastepisode.h"
-#include "internet/podcasts/podcast.h"
+#include "songinfo/collapsibleinfopane.h"
 #include "ui/equalizer.h"
 
 #ifdef HAVE_VK
@@ -54,6 +55,8 @@ class GstEnginePipeline;
 class QNetworkReply;
 
 void RegisterMetaTypes() {
+  qRegisterMetaType<CollapsibleInfoPane::Data>("CollapsibleInfoPane::Data");
+  qRegisterMetaType<ColumnAlignmentMap>("ColumnAlignmentMap");
   qRegisterMetaType<const char*>("const char*");
   qRegisterMetaType<CoverSearchResult>("CoverSearchResult");
   qRegisterMetaType<CoverSearchResults>("CoverSearchResults");
@@ -74,16 +77,16 @@ void RegisterMetaTypes() {
   qRegisterMetaType<PlaylistItemPtr>("PlaylistItemPtr");
   qRegisterMetaType<PodcastEpisodeList>("PodcastEpisodeList");
   qRegisterMetaType<PodcastList>("PodcastList");
-  qRegisterMetaType<QList<CoverSearchResult> >("QList<CoverSearchResult>");
-  qRegisterMetaType<QList<PlaylistItemPtr> >("QList<PlaylistItemPtr>");
+  qRegisterMetaType<QList<CoverSearchResult>>("QList<CoverSearchResult>");
+  qRegisterMetaType<QList<PlaylistItemPtr>>("QList<PlaylistItemPtr>");
   qRegisterMetaType<PlaylistSequence::RepeatMode>(
       "PlaylistSequence::RepeatMode");
   qRegisterMetaType<PlaylistSequence::ShuffleMode>(
       "PlaylistSequence::ShuffleMode");
-  qRegisterMetaType<QList<PodcastEpisode> >("QList<PodcastEpisode>");
-  qRegisterMetaType<QList<Podcast> >("QList<Podcast>");
-  qRegisterMetaType<QList<QNetworkCookie> >("QList<QNetworkCookie>");
-  qRegisterMetaType<QList<Song> >("QList<Song>");
+  qRegisterMetaType<QList<PodcastEpisode>>("QList<PodcastEpisode>");
+  qRegisterMetaType<QList<Podcast>>("QList<Podcast>");
+  qRegisterMetaType<QList<QNetworkCookie>>("QList<QNetworkCookie>");
+  qRegisterMetaType<QList<Song>>("QList<Song>");
   qRegisterMetaType<QNetworkCookie>("QNetworkCookie");
   qRegisterMetaType<QNetworkReply*>("QNetworkReply*");
   qRegisterMetaType<QNetworkReply**>("QNetworkReply**");
@@ -97,12 +100,12 @@ void RegisterMetaTypes() {
   qRegisterMetaTypeStreamOperators<DigitallyImportedClient::Channel>(
       "DigitallyImportedClient::Channel");
   qRegisterMetaTypeStreamOperators<Equalizer::Params>("Equalizer::Params");
-  qRegisterMetaTypeStreamOperators<QMap<int, int> >("ColumnAlignmentMap");
+  qRegisterMetaTypeStreamOperators<QMap<int, int>>("ColumnAlignmentMap");
   qRegisterMetaTypeStreamOperators<SomaFMService::Stream>(
       "SomaFMService::Stream");
   qRegisterMetaType<SubdirectoryList>("SubdirectoryList");
   qRegisterMetaType<Subdirectory>("Subdirectory");
-  qRegisterMetaType<QList<QUrl> >("QList<QUrl>");
+  qRegisterMetaType<QList<QUrl>>("QList<QUrl>");
 
 #ifdef HAVE_VK
   qRegisterMetaType<MusicOwner>("MusicOwner");
@@ -113,7 +116,7 @@ void RegisterMetaTypes() {
   qDBusRegisterMetaType<QImage>();
   qDBusRegisterMetaType<TrackMetadata>();
   qDBusRegisterMetaType<TrackIds>();
-  qDBusRegisterMetaType<QList<QByteArray> >();
+  qDBusRegisterMetaType<QList<QByteArray>>();
   qDBusRegisterMetaType<MprisPlaylist>();
   qDBusRegisterMetaType<MaybePlaylist>();
   qDBusRegisterMetaType<MprisPlaylistList>();

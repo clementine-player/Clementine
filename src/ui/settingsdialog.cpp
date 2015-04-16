@@ -84,6 +84,10 @@
 #include "internet/seafile/seafilesettingspage.h"
 #endif
 
+#ifdef HAVE_AMAZON_CLOUD_DRIVE
+#include "internet/amazon/amazonsettingspage.h"
+#endif
+
 #include <QAbstractButton>
 #include <QDesktopWidget>
 #include <QPainter>
@@ -191,6 +195,10 @@ SettingsDialog::SettingsDialog(Application* app, BackgroundStreams* streams,
 
 #ifdef HAVE_SEAFILE
   AddPage(Page_Seafile, new SeafileSettingsPage(this), providers);
+#endif
+
+#ifdef HAVE_AMAZON_CLOUD_DRIVE
+  AddPage(Page_AmazonCloudDrive, new AmazonSettingsPage(this), providers);
 #endif
 
   AddPage(Page_Magnatune, new MagnatuneSettingsPage(this), providers);

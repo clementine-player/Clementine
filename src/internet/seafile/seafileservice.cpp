@@ -29,6 +29,7 @@
 #include <QJsonArray>
 
 #include "core/application.h"
+#include "core/taskmanager.h"
 #include "core/player.h"
 #include "core/waitforsignal.h"
 #include "internet/seafile/seafileurlhandler.h"
@@ -54,7 +55,11 @@ static const int kMaxTries = 10;
 SeafileService::SeafileService(Application* app, InternetModel* parent)
     : CloudFileService(app, parent, kServiceName, kSettingsGroup,
                        QIcon(":/providers/seafile.png"),
-                       SettingsDialog::Page_Seafile) {
+                       SettingsDialog::Page_Seafile),
+      indexing_task_id_(-1),
+      indexing_task_max_(0),
+      indexing_task_progress_(0),
+      changing_libary_(false) {
   QSettings s;
   s.beginGroup(kSettingsGroup);
   access_token_ = s.value("access_token").toString();
@@ -179,6 +184,21 @@ void SeafileService::GetLibrariesFinished(QNetworkReply* reply) {
 }
 
 void SeafileService::ChangeLibrary(const QString& new_library) {
+  if (new_library == library_updated_ || changing_libary_) return;
+
+  if (indexing_task_id_ != -1) {
+    qLog(Debug) << "Want to change the Seafile library, but Clementine waits "
+                   "the previous indexing...";
+    changing_libary_ = true;
+    NewClosure(this, SIGNAL(UpdatingLibrariesFinishedSignal()), this,
+               SLOT(ChangeLibrary(QString)), new_library);
+    return;
+  }
+
+  AbortReadTagsReplies();
+
+  qLog(Debug) << "Change the Seafile library";
+
   // Every other libraries have to be destroyed from the tree
   if (new_library != "all") {
     for (SeafileTree::TreeItem* library : tree_.libraries()) {
@@ -188,6 +208,7 @@ void SeafileService::ChangeLibrary(const QString& new_library) {
     }
   }
 
+  changing_libary_ = false;
   UpdateLibraries();
 }
 
@@ -200,6 +221,14 @@ void SeafileService::Connect() {
 }
 
 void SeafileService::UpdateLibraries() {
+  // Quit if we are already updating the libraries
+  if (indexing_task_id_ != -1) {
+    return;
+  }
+
+  indexing_task_id_ =
+      app_->task_manager()->StartTask(tr("Building Seafile index..."));
+
   connect(this, SIGNAL(GetLibrariesFinishedSignal(QMap<QString, QString>)),
           this, SLOT(UpdateLibrariesInProgress(QMap<QString, QString>)));
 
@@ -215,14 +244,20 @@ void SeafileService::UpdateLibrariesInProgress(
   s.beginGroup(kSettingsGroup);
   QString library_to_update = s.value("library").toString();
 
-  // If the library doesn't change, we don't need to update
+  // If the library didn't change, we don't need to update
   if (!library_updated_.isNull() && library_updated_ == library_to_update) {
+    app_->task_manager()->SetTaskFinished(indexing_task_id_);
+    indexing_task_id_ = -1;
+    UpdatingLibrariesFinishedSignal();
     return;
   }
 
   library_updated_ = library_to_update;
 
   if (library_to_update == "none") {
+    app_->task_manager()->SetTaskFinished(indexing_task_id_);
+    indexing_task_id_ = -1;
+    UpdatingLibrariesFinishedSignal();
     return;
   }
 
@@ -236,7 +271,7 @@ void SeafileService::UpdateLibrariesInProgress(
           SeafileTree::Entry(library.value(), library.key(),
                              SeafileTree::Entry::LIBRARY),
           "/");
-    // If not, we can destroy the library from the tree
+      // If not, we can destroy the library from the tree
     } else {
       // If the library was not in the tree, it's not a problem because
       // DeleteEntry won't do anything
@@ -244,6 +279,13 @@ void SeafileService::UpdateLibrariesInProgress(
                   SeafileTree::Entry(library.value(), library.key(),
                                      SeafileTree::Entry::LIBRARY));
     }
+  }
+
+  // If we didn't do anything, set the task finished
+  if (indexing_task_max_ == 0) {
+    app_->task_manager()->SetTaskFinished(indexing_task_id_);
+    indexing_task_id_ = -1;
+    UpdatingLibrariesFinishedSignal();
   }
 }
 
@@ -263,6 +305,8 @@ QNetworkReply* SeafileService::PrepareFetchFolderItems(const QString& library,
 
 void SeafileService::FetchAndCheckFolderItems(const SeafileTree::Entry& library,
                                               const QString& path) {
+  StartTaskInProgress();
+
   QNetworkReply* reply = PrepareFetchFolderItems(library.id(), path);
   NewClosure(reply, SIGNAL(finished()), this,
              SLOT(FetchAndCheckFolderItemsFinished(
@@ -276,6 +320,7 @@ void SeafileService::FetchAndCheckFolderItemsFinished(
   if (!CheckReply(&reply)) {
     qLog(Warning)
         << "Something wrong with the reply... (FetchFolderItemsToList)";
+    FinishedTaskInProgress();
     return;
   }
 
@@ -305,10 +350,14 @@ void SeafileService::FetchAndCheckFolderItemsFinished(
   }
 
   tree_.CheckEntries(entries, library, path);
+
+  FinishedTaskInProgress();
 }
 
 void SeafileService::AddRecursivelyFolderItems(const QString& library,
                                                const QString& path) {
+  StartTaskInProgress();
+
   QNetworkReply* reply = PrepareFetchFolderItems(library, path);
   NewClosure(
       reply, SIGNAL(finished()), this,
@@ -321,6 +370,7 @@ void SeafileService::AddRecursivelyFolderItemsFinished(QNetworkReply* reply,
                                                        const QString& path) {
   if (!CheckReply(&reply)) {
     qLog(Warning) << "Something wrong with the reply... (FetchFolderItems)";
+    FinishedTaskInProgress();
     return;
   }
 
@@ -347,9 +397,8 @@ void SeafileService::AddRecursivelyFolderItemsFinished(QNetworkReply* reply,
                              entry_type);
 
     // If AddEntry was not successful we stop
-    // It could happen when the user changes the library to update while an
-    // update was in progress
     if (!tree_.AddEntry(library, path, entry)) {
+      FinishedTaskInProgress();
       return;
     }
 
@@ -359,6 +408,8 @@ void SeafileService::AddRecursivelyFolderItemsFinished(QNetworkReply* reply,
       MaybeAddFileEntry(entry.name(), library, path);
     }
   }
+
+  FinishedTaskInProgress();
 }
 
 QNetworkReply* SeafileService::PrepareFetchContentForFile(
@@ -598,6 +649,24 @@ bool SeafileService::CheckReply(QNetworkReply** reply, int tries) {
   (*reply)->deleteLater();
   qLog(Warning) << "Error with the reply : " << status_code_variant.toInt();
   return false;
+}
+
+void SeafileService::StartTaskInProgress() {
+  indexing_task_max_++;
+  task_manager_->SetTaskProgress(indexing_task_id_, indexing_task_progress_,
+                                 indexing_task_max_);
+}
+
+void SeafileService::FinishedTaskInProgress() {
+  indexing_task_progress_++;
+  if (indexing_task_progress_ == indexing_task_max_) {
+    task_manager_->SetTaskFinished(indexing_task_id_);
+    indexing_task_id_ = -1;
+    UpdatingLibrariesFinishedSignal();
+  } else {
+    task_manager_->SetTaskProgress(indexing_task_id_, indexing_task_progress_,
+                                   indexing_task_max_);
+  }
 }
 
 SeafileService::~SeafileService() {

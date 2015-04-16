@@ -175,6 +175,7 @@ void NetworkRemote::AcceptConnection() {
     qLog(Info) << "Got a connection from public ip"
                << client_socket->peerAddress().toString();
     client_socket->close();
+    client_socket->deleteLater();
   } else {
     CreateRemoteClient(client_socket);
   }

@@ -17,22 +17,17 @@
 
 #include "macscreensaver.h"
 
+#include <IOKit/pwr_mgt/IOPMLib.h>
+
 #include <QtDebug>
 
 #include "core/utilities.h"
 
-// kIOPMAssertionTypePreventUserIdleDisplaySleep from Lion.
-#define kLionDisplayAssertion CFSTR("PreventUserIdleDisplaySleep")
-
 MacScreensaver::MacScreensaver() : assertion_id_(0) {}
 
 void MacScreensaver::Inhibit() {
-  CFStringRef assertion_type = (Utilities::GetMacVersion() >= 7)
-                                   ? kLionDisplayAssertion
-                                   : kIOPMAssertionTypeNoDisplaySleep;
-
   IOPMAssertionCreateWithName(
-      assertion_type, kIOPMAssertionLevelOn,
+      kIOPMAssertPreventUserIdleDisplaySleep, kIOPMAssertionLevelOn,
       CFSTR("Showing full-screen Clementine visualisations"), &assertion_id_);
 }
 

@@ -15,7 +15,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2015-02-01 21:34+0000\n"
+"PO-Revision-Date: 2015-04-10 22:06+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Arabic (http://www.transifex.com/projects/p/clementine/language/ar/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -152,19 +152,19 @@ msgstr "%L1 مجموع التشغيل"
 msgid "%filename%"
 msgstr "%اسم الملف%"
 
-#: transcoder/transcodedialog.cpp:208
+#: transcoder/transcodedialog.cpp:214
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n failed"
 msgstr "%n فشل"
 
-#: transcoder/transcodedialog.cpp:203
+#: transcoder/transcodedialog.cpp:209
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n finished"
 msgstr "%n إنتهى"
 
-#: transcoder/transcodedialog.cpp:197
+#: transcoder/transcodedialog.cpp:203
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n remaining"
@@ -178,7 +178,7 @@ msgstr "&محاذاة النص"
 msgid "&Center"
 msgstr "&وسط"
 
-#: ../bin/src/ui_globalshortcutssettingspage.h:188
+#: ../bin/src/ui_globalshortcutssettingspage.h:178
 msgid "&Custom"
 msgstr "&تخصيص"
 
@@ -207,7 +207,7 @@ msgstr "&يسار"
 msgid "&Music"
 msgstr "&موسيقى"
 
-#: ../bin/src/ui_globalshortcutssettingspage.h:186
+#: ../bin/src/ui_globalshortcutssettingspage.h:176
 msgid "&None"
 msgstr "&لا شيئ"
 
@@ -280,7 +280,7 @@ msgstr "128k MP3"
 msgid "40%"
 msgstr "40%"
 
-#: library/library.cpp:65
+#: library/library.cpp:64
 msgid "50 random tracks"
 msgstr "50 مقطع عشوائي"
 
@@ -368,7 +368,7 @@ msgstr "AAC 32k"
 msgid "AAC 64k"
 msgstr "AAC 64k"
 
-#: core/song.cpp:409
+#: core/song.cpp:413
 msgid "AIFF"
 msgstr "AIFF"
 
@@ -414,7 +414,7 @@ msgstr "تفاصيل الحساب(المدفوع)"
 msgid "Action"
 msgstr "عمل"
 
-#: ../bin/src/ui_globalshortcutssettingspage.h:184
+#: ../bin/src/ui_globalshortcutssettingspage.h:174
 msgctxt "Category label"
 msgid "Action"
 msgstr ""
@@ -455,7 +455,7 @@ msgstr "إضافة Stream أخر"
 msgid "Add directory..."
 msgstr "أضف مجلد..."
 
-#: ui/mainwindow.cpp:1828
+#: ui/mainwindow.cpp:1844
 msgid "Add file"
 msgstr "أضف ملفا"
 
@@ -471,11 +471,12 @@ msgstr "أضف ملف(s) للتحويل"
 msgid "Add file..."
 msgstr "أضافة ملف..."
 
-#: transcoder/transcodedialog.cpp:218
+#: transcoder/transcodedialog.cpp:224
 msgid "Add files to transcode"
 msgstr "أضف ملفات للتحويل"
 
-#: transcoder/transcodedialog.cpp:300 ui/mainwindow.cpp:1855 ui/ripcd.cpp:408
+#: transcoder/transcodedialog.cpp:306 ui/mainwindow.cpp:1871
+#: ripper/ripcddialog.cpp:185
 msgid "Add folder"
 msgstr "إضافة مجلد"
 
@@ -579,11 +580,11 @@ msgstr "أضف الأغاني إلى \"الموسيقى\" حين أنقر زر \
 msgid "Add stream..."
 msgstr "أضف رابط انترنت..."
 
-#: internet/grooveshark/groovesharkservice.cpp:1126
+#: internet/grooveshark/groovesharkservice.cpp:1127
 msgid "Add to Grooveshark favorites"
 msgstr "أضف إلى المفضلة في Grooveshark"
 
-#: internet/grooveshark/groovesharkservice.cpp:1141
+#: internet/grooveshark/groovesharkservice.cpp:1142
 msgid "Add to Grooveshark playlists"
 msgstr "أضف إلى قوائم التشغيل في Grooveshark"
 
@@ -599,7 +600,7 @@ msgstr ""
 msgid "Add to Spotify starred"
 msgstr ""
 
-#: ui/mainwindow.cpp:1649
+#: ui/mainwindow.cpp:1665
 msgid "Add to another playlist"
 msgstr "أضف إلى قائمة تشغيل أخرى"
 
@@ -648,11 +649,11 @@ msgstr "أُضيفَ اليوم"
 msgid "Added within three months"
 msgstr "أُضيفَ خلال ثلاثة أشهر"
 
-#: internet/grooveshark/groovesharkservice.cpp:1424
+#: internet/grooveshark/groovesharkservice.cpp:1425
 msgid "Adding song to My Music"
 msgstr "إضافة مقاطع صوتية إلى مقاطعي"
 
-#: internet/grooveshark/groovesharkservice.cpp:1401
+#: internet/grooveshark/groovesharkservice.cpp:1402
 msgid "Adding song to favorites"
 msgstr "أضف إلى المفضلة"
 
@@ -673,7 +674,7 @@ msgstr "بعد النسخ..."
 #: ../bin/src/ui_groupbydialog.h:144 ../bin/src/ui_groupbydialog.h:159
 #: ../bin/src/ui_albumcoversearcher.h:111
 #: ../bin/src/ui_albumcoversearcher.h:113 ../bin/src/ui_edittagdialog.h:689
-#: ../bin/src/ui_trackselectiondialog.h:209 ../bin/src/ui_ripcd.h:315
+#: ../bin/src/ui_trackselectiondialog.h:209 ../bin/src/ui_ripcddialog.h:315
 msgid "Album"
 msgstr "الألبوم"
 
@@ -741,7 +742,7 @@ msgstr "كل قوائم التشغيل (%1)"
 msgid "All the translators"
 msgstr "كل المترجمين"
 
-#: library/library.cpp:101
+#: library/library.cpp:98
 msgid "All tracks"
 msgstr "كل المقطوعات"
 
@@ -773,6 +774,10 @@ msgstr "أظهر النافذة الرئيسية دائما"
 #: ../bin/src/ui_behavioursettingspage.h:304
 msgid "Always start playing"
 msgstr "ابدأ التشغيل دائما"
+
+#: ../bin/src/ui_amazonsettingspage.h:103
+msgid "Amazon"
+msgstr ""
 
 #: internet/spotify/spotifyblobdownloader.cpp:67
 msgid ""
@@ -825,12 +830,12 @@ msgstr "أضف إلى قائمة التشغيل"
 msgid "Apply compression to prevent clipping"
 msgstr "اجعل المقاطع مضغوطة لتفادي أخطاء القص"
 
-#: ui/equalizer.cpp:216
+#: ui/equalizer.cpp:222
 #, qt-format
 msgid "Are you sure you want to delete the \"%1\" preset?"
 msgstr "هل أنت متأكد من رغبتك بحذف ملف الإعدادات \"%1\"؟"
 
-#: internet/grooveshark/groovesharkservice.cpp:1323
+#: internet/grooveshark/groovesharkservice.cpp:1324
 msgid "Are you sure you want to delete this playlist?"
 msgstr "هل أنت متأكد من رغبتك بحذف هذه القائمة؟"
 
@@ -849,7 +854,7 @@ msgstr "هل أنت متأكد من رغبتك بكتابة احصائيات ا�
 #: ../bin/src/ui_groupbydialog.h:145 ../bin/src/ui_groupbydialog.h:160
 #: ../bin/src/ui_albumcoversearcher.h:107
 #: ../bin/src/ui_albumcoversearcher.h:109 ../bin/src/ui_edittagdialog.h:687
-#: ../bin/src/ui_trackselectiondialog.h:210 ../bin/src/ui_ripcd.h:316
+#: ../bin/src/ui_trackselectiondialog.h:210 ../bin/src/ui_ripcddialog.h:316
 msgid "Artist"
 msgstr "الفنان"
 
@@ -870,7 +875,8 @@ msgid "Ask when saving"
 msgstr ""
 
 #: ../bin/src/ui_transcodedialog.h:222
-#: ../bin/src/ui_networkremotesettingspage.h:251 ../bin/src/ui_ripcd.h:323
+#: ../bin/src/ui_networkremotesettingspage.h:251
+#: ../bin/src/ui_ripcddialog.h:323
 msgid "Audio format"
 msgstr "صيغة الصوت"
 
@@ -926,7 +932,7 @@ msgstr "القياس المتوسط للصور"
 msgid "BBC Podcasts"
 msgstr "بودكاست BBC"
 
-#: playlist/playlist.cpp:1343 ui/organisedialog.cpp:70
+#: playlist/playlist.cpp:1343 ui/organisedialog.cpp:71
 #: ../bin/src/ui_edittagdialog.h:671
 msgid "BPM"
 msgstr "BPM"
@@ -993,7 +999,7 @@ msgstr "معدل البت"
 msgid "Bitrate"
 msgstr "الصبيب"
 
-#: ui/organisedialog.cpp:75
+#: ui/organisedialog.cpp:76
 msgctxt "Refers to bitrate in file organise dialog."
 msgid "Bitrate"
 msgstr "معدل البت"
@@ -1032,9 +1038,13 @@ msgstr "تصفح..."
 msgid "Buffer duration"
 msgstr "مدة التخزين المؤقت"
 
-#: engines/gstengine.cpp:876
+#: engines/gstengine.cpp:884
 msgid "Buffering"
 msgstr "تخزين مؤقت"
+
+#: internet/seafile/seafileservice.cpp:226
+msgid "Building Seafile index..."
+msgstr ""
 
 #: ../bin/src/ui_globalsearchview.h:211
 msgid "But these sources are disabled:"
@@ -1048,11 +1058,11 @@ msgstr "أزرار"
 msgid "By default, Grooveshark sorts songs on date added"
 msgstr "يقوم Grooveshark بترتيب الأغاني حسب تاريخ الإضافة"
 
-#: core/song.cpp:415
+#: core/song.cpp:419
 msgid "CDDA"
 msgstr "CDDA"
 
-#: library/library.cpp:121
+#: library/library.cpp:117
 msgid "CUE sheet support"
 msgstr "دعم CUE"
 
@@ -1095,7 +1105,7 @@ msgstr "تغيير حجم الخط..."
 msgid "Change repeat mode"
 msgstr "تغيير نمط التكرار"
 
-#: ../bin/src/ui_globalshortcutssettingspage.h:189
+#: ../bin/src/ui_globalshortcutssettingspage.h:179
 msgid "Change shortcut..."
 msgstr "تغيير اختصار لوحة المفاتيح..."
 
@@ -1121,7 +1131,7 @@ msgstr "التمس حلقات جديدة"
 msgid "Check for updates"
 msgstr ""
 
-#: ui/mainwindow.cpp:717
+#: ui/mainwindow.cpp:733
 msgid "Check for updates..."
 msgstr "التمس التحديثات"
 
@@ -1133,7 +1143,7 @@ msgstr "اختر مستار تخزين VK.com المؤقت"
 msgid "Choose a name for your smart playlist"
 msgstr "اختر اسما لقائمة التشغيل"
 
-#: engines/gstengine.cpp:897
+#: engines/gstengine.cpp:905
 msgid "Choose automatically"
 msgstr "اختيار تلقائي"
 
@@ -1208,6 +1218,10 @@ msgid ""
 "a format that it can play."
 msgstr "يمكن لكلمنتاين أن يحول تلقائيا المقاطع التي تنسخ لهذا الجهاز للصيغ التي يستطيع قرائتها."
 
+#: ../bin/src/ui_amazonsettingspage.h:104
+msgid "Clementine can play music that you have uploaded to Amazon Cloud Drive"
+msgstr ""
+
 #: ../bin/src/ui_boxsettingspage.h:104
 msgid "Clementine can play music that you have uploaded to Box"
 msgstr "يستطيع كلمنتاين تشغيل المقاطع التي رفعتها على Box"
@@ -1268,6 +1282,7 @@ msgid "Click to toggle between remaining time and total time"
 msgstr "اضغط للتبديل بين الوقت المتبقي والوقت الكلي."
 
 #: ../bin/src/ui_soundcloudsettingspage.h:107
+#: ../bin/src/ui_amazonsettingspage.h:106
 #: ../bin/src/ui_googledrivesettingspage.h:106
 #: ../bin/src/ui_dropboxsettingspage.h:106
 #: ../bin/src/ui_skydrivesettingspage.h:106
@@ -1310,7 +1325,7 @@ msgid "Comma separated list of class:level, level is 0-3"
 msgstr "لائحة عناصر مفروقة بفاصلة لـ \"class:level\"، قيمة Level بين 0-3"
 
 #: playlist/playlist.cpp:1362 smartplaylists/searchterm.cpp:353
-#: ui/organisedialog.cpp:73 ../bin/src/ui_edittagdialog.h:697
+#: ui/organisedialog.cpp:74 ../bin/src/ui_edittagdialog.h:697
 msgid "Comment"
 msgstr "تعليق"
 
@@ -1337,7 +1352,7 @@ msgstr "الملحّن"
 msgid "Configure %1..."
 msgstr "إعدادات %1..."
 
-#: internet/grooveshark/groovesharkservice.cpp:565
+#: internet/grooveshark/groovesharkservice.cpp:566
 msgid "Configure Grooveshark..."
 msgstr "إعدادات Grooveshark..."
 
@@ -1345,7 +1360,7 @@ msgstr "إعدادات Grooveshark..."
 msgid "Configure Magnatune..."
 msgstr "إعدادات Magnature"
 
-#: ../bin/src/ui_globalshortcutssettingspage.h:176
+#: ../bin/src/ui_globalshortcutssettingspage.h:167
 msgid "Configure Shortcuts"
 msgstr "إعدادات اختصارات لوحة المفاتيح"
 
@@ -1365,7 +1380,7 @@ msgstr "ضبط VK.com..."
 msgid "Configure global search..."
 msgstr "إعدادات البحث العامة..."
 
-#: ui/mainwindow.cpp:567
+#: ui/mainwindow.cpp:583
 msgid "Configure library..."
 msgstr "إعدادات المكتبة"
 
@@ -1441,11 +1456,11 @@ msgid "Copy to clipboard"
 msgstr "نسخ إلى المكتبة..."
 
 #: library/libraryview.cpp:400 internet/podcasts/podcastservice.cpp:437
-#: ui/mainwindow.cpp:616 widgets/fileviewlist.cpp:43
+#: ui/mainwindow.cpp:632 widgets/fileviewlist.cpp:43
 msgid "Copy to device..."
 msgstr "نسخ إلى جهاز..."
 
-#: devices/deviceview.cpp:225 ui/mainwindow.cpp:606
+#: devices/deviceview.cpp:225 ui/mainwindow.cpp:622
 #: widgets/fileviewlist.cpp:38
 msgid "Copy to library..."
 msgstr "نسخ إلى المكتبة..."
@@ -1524,8 +1539,8 @@ msgstr "الغلاف محدد من %1"
 msgid "Covers from %1"
 msgstr "الأغلفة من %1"
 
-#: internet/grooveshark/groovesharkservice.cpp:533
-#: internet/grooveshark/groovesharkservice.cpp:1275
+#: internet/grooveshark/groovesharkservice.cpp:534
+#: internet/grooveshark/groovesharkservice.cpp:1276
 msgid "Create a new Grooveshark playlist"
 msgstr "أنشئ قائمة تشغيل Grooveshark جديدة"
 
@@ -1652,7 +1667,7 @@ msgstr "حُرِرَ بِتاريخ"
 msgid "Days"
 msgstr "الأيام"
 
-#: ../bin/src/ui_globalshortcutssettingspage.h:187
+#: ../bin/src/ui_globalshortcutssettingspage.h:177
 msgid "De&fault"
 msgstr "&افتراضي"
 
@@ -1672,7 +1687,7 @@ msgstr "اخفض الصوت"
 msgid "Default background image"
 msgstr "صورة الخلفية الافتراضية"
 
-#: engines/gstengine.cpp:922
+#: engines/gstengine.cpp:930
 #, qt-format
 msgid "Default device on %1"
 msgstr "الجهاز الافتراضي 1%"
@@ -1690,8 +1705,8 @@ msgstr "المدة بين التأثيرات المرئية"
 msgid "Delete"
 msgstr "احذف"
 
-#: internet/grooveshark/groovesharkservice.cpp:536
-#: internet/grooveshark/groovesharkservice.cpp:1322
+#: internet/grooveshark/groovesharkservice.cpp:537
+#: internet/grooveshark/groovesharkservice.cpp:1323
 msgid "Delete Grooveshark playlist"
 msgstr "احذف قائمة تسغيل Grooveshark"
 
@@ -1700,7 +1715,7 @@ msgid "Delete downloaded data"
 msgstr "حذف البيانات المحملة"
 
 #: devices/deviceview.cpp:404 library/libraryview.cpp:636
-#: ui/mainwindow.cpp:2191 widgets/fileview.cpp:186
+#: ui/mainwindow.cpp:2207 widgets/fileview.cpp:186
 msgid "Delete files"
 msgstr "احذف الملفات"
 
@@ -1708,7 +1723,7 @@ msgstr "احذف الملفات"
 msgid "Delete from device..."
 msgstr "احذف من الجهاز"
 
-#: library/libraryview.cpp:402 ui/mainwindow.cpp:618
+#: library/libraryview.cpp:402 ui/mainwindow.cpp:634
 #: widgets/fileviewlist.cpp:44
 msgid "Delete from disk..."
 msgstr "احذف من القرص..."
@@ -1717,7 +1732,7 @@ msgstr "احذف من القرص..."
 msgid "Delete played episodes"
 msgstr "حذف الحلقات المشغلة"
 
-#: ui/equalizer.cpp:215 ../bin/src/ui_equalizer.h:169
+#: ui/equalizer.cpp:221 ../bin/src/ui_equalizer.h:169
 msgid "Delete preset"
 msgstr "احذف ملف الإعدادات"
 
@@ -1733,16 +1748,16 @@ msgstr "احذف الملفات الأصلية"
 msgid "Deleting files"
 msgstr "حذف الملفات"
 
-#: ui/mainwindow.cpp:1570
+#: ui/mainwindow.cpp:1586
 msgid "Dequeue selected tracks"
 msgstr "أزل المختارة من لائحة الانتظار"
 
-#: ui/mainwindow.cpp:1568
+#: ui/mainwindow.cpp:1584
 msgid "Dequeue track"
 msgstr "أزل المقطع من لائحة الانتظار"
 
 #: ../bin/src/ui_transcodedialog.h:224 ../bin/src/ui_organisedialog.h:241
-#: ../bin/src/ui_ripcd.h:321
+#: ../bin/src/ui_ripcddialog.h:321
 msgid "Destination"
 msgstr "الوجهة"
 
@@ -1770,7 +1785,7 @@ msgstr "خصائص الجهاز..."
 msgid "Devices"
 msgstr "أجهزة"
 
-#: ../bin/src/ui_ripcd.h:300 ../bin/src/ui_vksearchdialog.h:61
+#: ../bin/src/ui_ripcddialog.h:300 ../bin/src/ui_vksearchdialog.h:61
 msgid "Dialog"
 msgstr "الحوار"
 
@@ -1817,10 +1832,10 @@ msgctxt "Refers to search provider's status."
 msgid "Disabled"
 msgstr "معطل"
 
-#: playlist/playlist.cpp:1317 ui/organisedialog.cpp:69
+#: playlist/playlist.cpp:1317 ui/organisedialog.cpp:70
 #: ../bin/src/ui_groupbydialog.h:138 ../bin/src/ui_groupbydialog.h:153
 #: ../bin/src/ui_groupbydialog.h:168 ../bin/src/ui_edittagdialog.h:688
-#: ../bin/src/ui_ripcd.h:314
+#: ../bin/src/ui_ripcddialog.h:314
 msgid "Disc"
 msgstr "قرص مدمج"
 
@@ -1988,7 +2003,7 @@ msgstr "Dropbox"
 msgid "Dubstep"
 msgstr "Dubstep"
 
-#: ../bin/src/ui_ripcd.h:309
+#: ../bin/src/ui_ripcddialog.h:309
 msgid "Duration"
 msgstr "المدة"
 
@@ -1996,7 +2011,7 @@ msgstr "المدة"
 msgid "Dynamic mode is on"
 msgstr "النمط النشيط مفعل"
 
-#: internet/jamendo/jamendoservice.cpp:126 library/library.cpp:115
+#: internet/jamendo/jamendoservice.cpp:126 library/library.cpp:111
 msgid "Dynamic random mix"
 msgstr "مزج عشوائي تلقائيا"
 
@@ -2004,7 +2019,7 @@ msgstr "مزج عشوائي تلقائيا"
 msgid "Edit smart playlist..."
 msgstr "حرر قائمة التشغيل الذكية"
 
-#: ui/mainwindow.cpp:1612
+#: ui/mainwindow.cpp:1628
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr "حرر الوسم \"%1\""
@@ -2142,14 +2157,14 @@ msgstr "يكافئ --log-levels *:1"
 msgid "Equivalent to --log-levels *:3"
 msgstr "يكافئ --log-levels *:3"
 
-#: internet/grooveshark/groovesharkservice.cpp:1054
+#: internet/grooveshark/groovesharkservice.cpp:1055
 #: internet/magnatune/magnatunedownloaddialog.cpp:242
-#: library/libraryview.cpp:630 ui/mainwindow.cpp:1894 ui/mainwindow.cpp:2141
-#: ui/mainwindow.cpp:2289 internet/vk/vkservice.cpp:625
+#: library/libraryview.cpp:630 ui/mainwindow.cpp:1910 ui/mainwindow.cpp:2157
+#: ui/mainwindow.cpp:2305 internet/vk/vkservice.cpp:625
 msgid "Error"
 msgstr "خطأ"
 
-#: ui/ripcd.cpp:295
+#: ripper/ripcddialog.cpp:135
 msgid "Error Ripping CD"
 msgstr "خطأ في الاستخراج من القرص المضغوط"
 
@@ -2188,7 +2203,7 @@ msgstr "حدث خطأ بتطبيق %1:%2"
 msgid "Error while loading audio CD"
 msgstr "حدث خطأ  أثناء تحميل القرص الصوتي"
 
-#: library/library.cpp:69
+#: library/library.cpp:68
 msgid "Ever played"
 msgstr "لم تشغل أبدا"
 
@@ -2309,7 +2324,7 @@ msgstr "تلاشي"
 msgid "Fading duration"
 msgstr "مدة التلاشي"
 
-#: ui/mainwindow.cpp:1895
+#: ui/mainwindow.cpp:1911
 msgid "Failed reading CD drive"
 msgstr "فشل في قراءة القرص CD"
 
@@ -2339,11 +2354,11 @@ msgstr "تعذر قراءة تلقيمات RSS"
 msgid "Fast"
 msgstr "سريع"
 
-#: internet/grooveshark/groovesharkservice.cpp:644
+#: internet/grooveshark/groovesharkservice.cpp:645
 msgid "Favorites"
 msgstr "المفضلة"
 
-#: library/library.cpp:91
+#: library/library.cpp:88
 msgid "Favourite tracks"
 msgstr "المقاطع المفضلة"
 
@@ -2367,11 +2382,11 @@ msgstr "جلب مكتبة Subsonic..."
 msgid "Fetching cover error"
 msgstr "خطأ أثناء جلب الغلاف"
 
-#: ../bin/src/ui_ripcd.h:320
+#: ../bin/src/ui_ripcddialog.h:320
 msgid "File Format"
 msgstr "صيغة الملف"
 
-#: ui/organisedialog.cpp:77
+#: ui/organisedialog.cpp:78
 msgid "File extension"
 msgstr "امتداد الملف"
 
@@ -2441,7 +2456,7 @@ msgstr "المستوى الأول"
 msgid "Fit cover to width"
 msgstr ""
 
-#: core/song.cpp:393 transcoder/transcoder.cpp:233
+#: core/song.cpp:397 transcoder/transcoder.cpp:233
 msgid "Flac"
 msgstr "Flac"
 
@@ -2521,7 +2536,7 @@ msgstr "Full Bass + Treble"
 msgid "Full Treble"
 msgstr "Full Treble"
 
-#: ui/settingsdialog.cpp:138
+#: ui/settingsdialog.cpp:142
 msgid "General"
 msgstr "عام"
 
@@ -2529,19 +2544,19 @@ msgstr "عام"
 msgid "General settings"
 msgstr "إعدادات عامة"
 
-#: playlist/playlist.cpp:1321 ui/organisedialog.cpp:72
+#: playlist/playlist.cpp:1321 ui/organisedialog.cpp:73
 #: ../bin/src/ui_groupbydialog.h:134 ../bin/src/ui_groupbydialog.h:149
 #: ../bin/src/ui_groupbydialog.h:164 ../bin/src/ui_edittagdialog.h:695
-#: ../bin/src/ui_ripcd.h:317
+#: ../bin/src/ui_ripcddialog.h:317
 msgid "Genre"
 msgstr "النوع"
 
-#: internet/grooveshark/groovesharkservice.cpp:555
+#: internet/grooveshark/groovesharkservice.cpp:556
 msgid "Get a URL to share this Grooveshark playlist"
 msgstr "احصل على رابط لمشاركة قائمة تشغيل Grooveshark"
 
-#: internet/grooveshark/groovesharkservice.cpp:552
-#: internet/grooveshark/groovesharkservice.cpp:1154
+#: internet/grooveshark/groovesharkservice.cpp:553
+#: internet/grooveshark/groovesharkservice.cpp:1155
 msgid "Get a URL to share this Grooveshark song"
 msgstr "احصل على رابط لمشاركة هذا المقطع من Grooveshark"
 
@@ -2554,7 +2569,7 @@ msgstr ""
 msgid "Get a URL to share this playlist"
 msgstr ""
 
-#: internet/grooveshark/groovesharkservice.cpp:829
+#: internet/grooveshark/groovesharkservice.cpp:830
 msgid "Getting Grooveshark popular songs"
 msgstr "جلب المقاطع الشعبية على Grooveshark"
 
@@ -2600,19 +2615,19 @@ msgstr "اجعل المقاطع التي لا توجد في مكتبتي بلو�
 msgid "Grooveshark"
 msgstr "Grooveshark"
 
-#: internet/grooveshark/groovesharkservice.cpp:412
+#: internet/grooveshark/groovesharkservice.cpp:413
 msgid "Grooveshark login error"
 msgstr "خطأ بتسجيل الدخول لـ Grooveshark"
 
-#: internet/grooveshark/groovesharkservice.cpp:1205
+#: internet/grooveshark/groovesharkservice.cpp:1206
 msgid "Grooveshark playlist's URL"
 msgstr "رابط قائمة تشغيل Grooveshark"
 
-#: internet/grooveshark/groovesharkservice.cpp:624
+#: internet/grooveshark/groovesharkservice.cpp:625
 msgid "Grooveshark radio"
 msgstr "راديو Grooveshark"
 
-#: internet/grooveshark/groovesharkservice.cpp:1183
+#: internet/grooveshark/groovesharkservice.cpp:1184
 msgid "Grooveshark song's URL"
 msgstr "رابط المقطع على Grooveshark"
 
@@ -2691,6 +2706,10 @@ msgstr "أعلى (%1 fps)"
 #: visualisations/visualisationcontainer.cpp:124
 msgid "High (1024x1024)"
 msgstr "أعلى (1024x1024)"
+
+#: ui/equalizer.cpp:128
+msgid "HipHop"
+msgstr ""
 
 #: internet/subsonic/subsonicsettingspage.cpp:134
 msgid "Host not found, check server URL. Example: http://localhost:4040/"
@@ -2813,7 +2832,7 @@ msgstr "فهرسة %1"
 msgid "Information"
 msgstr "معلومات"
 
-#: ../bin/src/ui_ripcd.h:301
+#: ../bin/src/ui_ripcddialog.h:301
 msgid "Input options"
 msgstr "خيارات المدخل"
 
@@ -2833,7 +2852,7 @@ msgstr "فحص شامل"
 msgid "Internet"
 msgstr "انترنت"
 
-#: ui/settingsdialog.cpp:161
+#: ui/settingsdialog.cpp:165
 msgid "Internet providers"
 msgstr "خدمات الانترنت"
 
@@ -2870,11 +2889,11 @@ msgstr "خدمة غير متاحة"
 msgid "Invalid session key"
 msgstr "مفتاح جلسة غير صالح"
 
-#: internet/grooveshark/groovesharkservice.cpp:404
+#: internet/grooveshark/groovesharkservice.cpp:405
 msgid "Invalid username and/or password"
 msgstr "اسم مستخدم أو كلمة سر غير صالحة."
 
-#: ../bin/src/ui_ripcd.h:312
+#: ../bin/src/ui_ripcddialog.h:312
 msgid "Invert Selection"
 msgstr "اعكس الاختيار"
 
@@ -2935,15 +2954,19 @@ msgctxt "Label for buton to enable/disable kittens in the now playing widget"
 msgid "Kittens"
 msgstr "هرر"
 
+#: ui/equalizer.cpp:131
+msgid "Kuduro"
+msgstr ""
+
 #: ../bin/src/ui_behavioursettingspage.h:263
 msgid "Language"
 msgstr "اللغة"
 
-#: ui/equalizer.cpp:127
+#: ui/equalizer.cpp:133
 msgid "Laptop/Headphones"
 msgstr "جهاز محمول/سماعات"
 
-#: ui/equalizer.cpp:129
+#: ui/equalizer.cpp:135
 msgid "Large Hall"
 msgstr "قاعة واسعة"
 
@@ -2963,7 +2986,7 @@ msgstr ""
 msgid "Large sidebar"
 msgstr "عارضة جانبية عريضة"
 
-#: library/library.cpp:83
+#: library/library.cpp:80
 msgid "Last played"
 msgstr "المشغلة مؤخرا"
 
@@ -3000,7 +3023,7 @@ msgstr "اسم المستخدم"
 msgid "Last.fm wiki"
 msgstr "ويكي Last.fm"
 
-#: library/library.cpp:105
+#: library/library.cpp:102
 msgid "Least favourite tracks"
 msgstr "المقاطع الأقل تفضيلا"
 
@@ -3008,7 +3031,7 @@ msgstr "المقاطع الأقل تفضيلا"
 msgid "Left"
 msgstr "يسار"
 
-#: playlist/playlist.cpp:1313 ui/organisedialog.cpp:74
+#: playlist/playlist.cpp:1313 ui/organisedialog.cpp:75
 #: ui/qtsystemtrayicon.cpp:239 ../bin/src/ui_edittagdialog.h:669
 msgid "Length"
 msgstr "المدة"
@@ -3022,7 +3045,7 @@ msgstr "المكتبة"
 msgid "Library advanced grouping"
 msgstr "إعدادات متقدمة لتجميع المكتبة"
 
-#: ui/mainwindow.cpp:2413
+#: ui/mainwindow.cpp:2429
 msgid "Library rescan notice"
 msgstr "إشعار إعادة فحص المكتبة"
 
@@ -3034,12 +3057,12 @@ msgstr "البحث في المكتبة"
 msgid "Limits"
 msgstr "الحدود"
 
-#: internet/grooveshark/groovesharkservice.cpp:626
+#: internet/grooveshark/groovesharkservice.cpp:627
 msgid ""
 "Listen to Grooveshark songs based on what you've listened to previously"
 msgstr "استمع لمقاطع Grooveshark اعتمادا على ما استمعت عليه سابقا"
 
-#: ui/equalizer.cpp:131
+#: ui/equalizer.cpp:137
 msgid "Live"
 msgstr "مباشر"
 
@@ -3063,7 +3086,7 @@ msgstr "حمل الغلاف من القرص"
 msgid "Load cover from disk..."
 msgstr "تحميل الغلاف من القرص..."
 
-#: playlist/playlistcontainer.cpp:286
+#: playlist/playlistcontainer.cpp:291
 msgid "Load playlist"
 msgstr "تحميل قائمة تشغيل"
 
@@ -3118,6 +3141,7 @@ msgstr "تحميل ملفات/روابط، استبدال قائمة التشغ�
 #: ../bin/src/ui_soundcloudsettingspage.h:106
 #: ../bin/src/ui_spotifysettingspage.h:211
 #: ../bin/src/ui_subsonicsettingspage.h:130
+#: ../bin/src/ui_amazonsettingspage.h:105
 #: ../bin/src/ui_lastfmsettingspage.h:153
 #: ../bin/src/ui_googledrivesettingspage.h:105
 #: ../bin/src/ui_dropboxsettingspage.h:105
@@ -3157,7 +3181,7 @@ msgstr "أقل (256x256)"
 msgid "Low complexity profile (LC)"
 msgstr "ملف تعريف بأقل تعقيد (LC)"
 
-#: ../bin/src/ui_songinfosettingspage.h:159
+#: ui/organisedialog.cpp:68 ../bin/src/ui_songinfosettingspage.h:159
 msgid "Lyrics"
 msgstr "كلمات المقطع"
 
@@ -3166,11 +3190,15 @@ msgstr "كلمات المقطع"
 msgid "Lyrics from %1"
 msgstr "كلمات المقطع من %1"
 
+#: songinfo/taglyricsinfoprovider.cpp:29
+msgid "Lyrics from the ID3v2 tag"
+msgstr ""
+
 #: transcoder/transcoder.cpp:235
 msgid "M4A AAC"
 msgstr "M4A AAC"
 
-#: core/song.cpp:399 transcoder/transcoder.cpp:238
+#: core/song.cpp:403 transcoder/transcoder.cpp:238
 #: ../bin/src/ui_transcodersettingspage.h:175
 msgid "MP3"
 msgstr "MP3"
@@ -3183,11 +3211,11 @@ msgstr "MP3 256k"
 msgid "MP3 96k"
 msgstr "MP3 96k"
 
-#: core/song.cpp:395
+#: core/song.cpp:399
 msgid "MP4 AAC"
 msgstr "MP4 AAC"
 
-#: core/song.cpp:397
+#: core/song.cpp:401
 msgid "MPC"
 msgstr "MPC"
 
@@ -3262,7 +3290,7 @@ msgstr "كل نتائج البحث الشامل"
 msgid "Maximum bitrate"
 msgstr "أقصى صبيب"
 
-#: ui/ripcd.cpp:296
+#: ripper/ripcddialog.cpp:136
 msgid "Media has changed. Reloading"
 msgstr "تغيرت المادة. يعاد التحميل"
 
@@ -3325,7 +3353,7 @@ msgstr "أشرطة المزاج"
 msgid "More"
 msgstr "المزيد"
 
-#: library/library.cpp:87
+#: library/library.cpp:84
 msgid "Most played"
 msgstr "الأكثر تشغيلا"
 
@@ -3342,7 +3370,7 @@ msgstr "نقط الوصل"
 msgid "Move down"
 msgstr "أسفل"
 
-#: ui/mainwindow.cpp:609 widgets/fileviewlist.cpp:40
+#: ui/mainwindow.cpp:625 widgets/fileviewlist.cpp:40
 msgid "Move to library..."
 msgstr "انقل إلى المكتبة"
 
@@ -3351,7 +3379,7 @@ msgstr "انقل إلى المكتبة"
 msgid "Move up"
 msgstr "أعلى"
 
-#: transcoder/transcodedialog.cpp:219 ui/mainwindow.cpp:1829
+#: transcoder/transcodedialog.cpp:225 ui/mainwindow.cpp:1845
 #: internet/vk/vkservice.cpp:884
 msgid "Music"
 msgstr "موسيقى"
@@ -3369,7 +3397,7 @@ msgstr "كتم الصوت"
 msgid "My Albums"
 msgstr ""
 
-#: internet/grooveshark/groovesharkservice.cpp:633
+#: internet/grooveshark/groovesharkservice.cpp:634
 #: internet/vk/vkservice.cpp:878
 msgid "My Music"
 msgstr "مقاطعي"
@@ -3378,8 +3406,8 @@ msgstr "مقاطعي"
 msgid "My Recommendations"
 msgstr "المقترحة لي"
 
-#: internet/grooveshark/groovesharkservice.cpp:1276
-#: internet/grooveshark/groovesharkservice.cpp:1371 ui/equalizer.cpp:199
+#: internet/grooveshark/groovesharkservice.cpp:1277
+#: internet/grooveshark/groovesharkservice.cpp:1372 ui/equalizer.cpp:205
 #: ../bin/src/ui_deviceproperties.h:369 ../bin/src/ui_wizardfinishpage.h:84
 msgid "Name"
 msgstr "الاسم"
@@ -3409,7 +3437,7 @@ msgstr "شبكة عن بعد"
 msgid "Never"
 msgstr "أبدا"
 
-#: library/library.cpp:76
+#: library/library.cpp:74
 msgid "Never played"
 msgstr "لم تشغل أبدا"
 
@@ -3424,7 +3452,7 @@ msgstr "لم يبدأ تشغيلها أبدا"
 msgid "New folder"
 msgstr "مجلد جديد"
 
-#: ui/mainwindow.cpp:1666 ../bin/src/ui_mainwindow.h:691
+#: ui/mainwindow.cpp:1682 ../bin/src/ui_mainwindow.h:691
 msgid "New playlist"
 msgstr "قائمة تشغيل جديدة"
 
@@ -3440,7 +3468,7 @@ msgstr "مقاطع جديدة"
 msgid "New tracks will be added automatically."
 msgstr "مقاطع جديدة ستنضاف تلقائيا"
 
-#: library/library.cpp:95
+#: library/library.cpp:92
 msgid "Newest tracks"
 msgstr "أحدث المقاطع"
 
@@ -3473,7 +3501,7 @@ msgstr "لا توجد أغلفة للتصدير."
 msgid "No long blocks"
 msgstr "بدون أجزاء طويلة"
 
-#: playlist/playlistcontainer.cpp:371
+#: playlist/playlistcontainer.cpp:376
 msgid ""
 "No matches found.  Clear the search box to show the whole playlist again."
 msgstr "لم يتم العثور على أي نتيجة. امسح خانة البحث لإظهار جميع قوائم التشغيل من جديد."
@@ -3487,7 +3515,7 @@ msgstr "بدون أجزاء قصيرة"
 msgid "None"
 msgstr "لا شيء"
 
-#: library/libraryview.cpp:631 ui/mainwindow.cpp:2142 ui/mainwindow.cpp:2290
+#: library/libraryview.cpp:631 ui/mainwindow.cpp:2158 ui/mainwindow.cpp:2306
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "لا مقطع من المقاطع المختارة مناسب لنسخه لجهاز."
 
@@ -3564,19 +3592,19 @@ msgstr "معاينة التنبيهات"
 msgid "Off"
 msgstr "معطل"
 
-#: core/song.cpp:401 transcoder/transcoder.cpp:244
+#: core/song.cpp:405 transcoder/transcoder.cpp:244
 msgid "Ogg Flac"
 msgstr "Ogg Flac"
 
-#: core/song.cpp:407 transcoder/transcoder.cpp:250
+#: core/song.cpp:411 transcoder/transcoder.cpp:250
 msgid "Ogg Opus"
 msgstr "Ogg Opus"
 
-#: core/song.cpp:403 transcoder/transcoder.cpp:247
+#: core/song.cpp:407 transcoder/transcoder.cpp:247
 msgid "Ogg Speex"
 msgstr "Ogg Speex"
 
-#: core/song.cpp:405 transcoder/transcoder.cpp:241
+#: core/song.cpp:409 transcoder/transcoder.cpp:241
 #: ../bin/src/ui_magnatunedownloaddialog.h:139
 #: ../bin/src/ui_magnatunesettingspage.h:170
 msgid "Ogg Vorbis"
@@ -3611,7 +3639,7 @@ msgid "Opacity"
 msgstr "الشفافية"
 
 #: internet/digitally/digitallyimportedservicebase.cpp:176
-#: internet/grooveshark/groovesharkservice.cpp:559
+#: internet/grooveshark/groovesharkservice.cpp:560
 #: internet/icecast/icecastservice.cpp:302
 #: internet/jamendo/jamendoservice.cpp:434
 #: internet/magnatune/magnatuneservice.cpp:284
@@ -3633,7 +3661,7 @@ msgstr "فتح ملف OPML"
 msgid "Open OPML file..."
 msgstr "فتح ملف OPML..."
 
-#: transcoder/transcodedialog.cpp:234
+#: transcoder/transcodedialog.cpp:240
 msgid "Open a directory to import music from"
 msgstr ""
 
@@ -3664,8 +3692,8 @@ msgstr "فتح في قائمة جديدة"
 msgid "Open in your browser"
 msgstr "افتح في المتصفح"
 
-#: ../bin/src/ui_globalshortcutssettingspage.h:178
-#: ../bin/src/ui_globalshortcutssettingspage.h:181
+#: ../bin/src/ui_globalshortcutssettingspage.h:169
+#: ../bin/src/ui_globalshortcutssettingspage.h:171
 msgid "Open..."
 msgstr "فتح..."
 
@@ -3682,7 +3710,8 @@ msgid "Optimize for quality"
 msgstr "تحسين لجودة أفضل"
 
 #: ../bin/src/ui_transcodedialog.h:223
-#: ../bin/src/ui_networkremotesettingspage.h:252 ../bin/src/ui_ripcd.h:322
+#: ../bin/src/ui_networkremotesettingspage.h:252
+#: ../bin/src/ui_ripcddialog.h:322
 msgid "Options..."
 msgstr "الإعدادات..."
 
@@ -3694,7 +3723,7 @@ msgstr "Opus"
 msgid "Organise Files"
 msgstr "ترتيب الملفات"
 
-#: library/libraryview.cpp:396 ui/mainwindow.cpp:612
+#: library/libraryview.cpp:396 ui/mainwindow.cpp:628
 msgid "Organise files..."
 msgstr "ترتيب الملفات..."
 
@@ -3718,7 +3747,7 @@ msgstr "مخرج"
 msgid "Output device"
 msgstr "جهاز الإخراج"
 
-#: ../bin/src/ui_transcodedialog.h:221 ../bin/src/ui_ripcd.h:318
+#: ../bin/src/ui_transcodedialog.h:221 ../bin/src/ui_ripcddialog.h:318
 msgid "Output options"
 msgstr "خيارات المخرج"
 
@@ -3742,7 +3771,7 @@ msgstr "المالك"
 msgid "Parsing Jamendo catalogue"
 msgstr "تحليل فهرس Jamendo"
 
-#: ui/equalizer.cpp:133
+#: ui/equalizer.cpp:139
 msgid "Party"
 msgstr "حفلة"
 
@@ -3756,7 +3785,7 @@ msgstr "حفلة"
 msgid "Password"
 msgstr "كلمة السر"
 
-#: core/globalshortcuts.cpp:50 ui/mainwindow.cpp:1028 ui/mainwindow.cpp:1479
+#: core/globalshortcuts.cpp:50 ui/mainwindow.cpp:1044 ui/mainwindow.cpp:1495
 #: ui/qtsystemtrayicon.cpp:175 wiimotedev/wiimotesettingspage.cpp:107
 msgid "Pause"
 msgstr "إيقاف مؤقت"
@@ -3782,8 +3811,8 @@ msgstr "بكسل"
 msgid "Plain sidebar"
 msgstr "شريط جانبي عريض"
 
-#: core/globalshortcuts.cpp:49 ui/mainwindow.cpp:584 ui/mainwindow.cpp:996
-#: ui/mainwindow.cpp:1014 ui/mainwindow.cpp:1482 ui/qtsystemtrayicon.cpp:164
+#: core/globalshortcuts.cpp:49 ui/mainwindow.cpp:600 ui/mainwindow.cpp:1012
+#: ui/mainwindow.cpp:1030 ui/mainwindow.cpp:1498 ui/qtsystemtrayicon.cpp:164
 #: ui/qtsystemtrayicon.cpp:188 ../bin/src/ui_mainwindow.h:642
 #: wiimotedev/wiimotesettingspage.cpp:100
 msgid "Play"
@@ -3818,7 +3847,7 @@ msgstr "التشغيل"
 msgid "Player options"
 msgstr "خيارات المشغل"
 
-#: playlist/playlistcontainer.cpp:282 playlist/playlistlistcontainer.cpp:228
+#: playlist/playlistcontainer.cpp:287 playlist/playlistlistcontainer.cpp:228
 #: playlist/playlistmanager.cpp:87 playlist/playlistmanager.cpp:156
 #: playlist/playlistmanager.cpp:494 playlist/playlisttabbar.cpp:366
 msgid "Playlist"
@@ -3837,7 +3866,7 @@ msgstr "خيارات قائمة التشغيل"
 msgid "Playlist type"
 msgstr "نوع قائمة التشغيل"
 
-#: internet/grooveshark/groovesharkservice.cpp:654
+#: internet/grooveshark/groovesharkservice.cpp:655
 #: internet/soundcloud/soundcloudservice.cpp:130 ui/mainwindow.cpp:241
 msgid "Playlists"
 msgstr "قوائم التشغيل"
@@ -3855,19 +3884,19 @@ msgstr "حالة الملحق:"
 msgid "Podcasts"
 msgstr "بودكاست"
 
-#: ui/equalizer.cpp:135
+#: ui/equalizer.cpp:141
 msgid "Pop"
 msgstr "Pop"
 
-#: internet/grooveshark/groovesharkservice.cpp:591
+#: internet/grooveshark/groovesharkservice.cpp:592
 msgid "Popular songs"
 msgstr "المقاطع الشعبية"
 
-#: internet/grooveshark/groovesharkservice.cpp:595
+#: internet/grooveshark/groovesharkservice.cpp:596
 msgid "Popular songs of the Month"
 msgstr "المقاطع الشعبية لهذا الشهر"
 
-#: internet/grooveshark/groovesharkservice.cpp:604
+#: internet/grooveshark/groovesharkservice.cpp:605
 msgid "Popular songs today"
 msgstr "المقاطع الشعبية اليوم"
 
@@ -3968,7 +3997,7 @@ msgstr "اطبع معلومات النسخة"
 msgid "Profile"
 msgstr "ملف التعريف"
 
-#: ../bin/src/ui_transcodedialog.h:230 ../bin/src/ui_ripcd.h:324
+#: ../bin/src/ui_transcodedialog.h:230 ../bin/src/ui_ripcddialog.h:324
 msgid "Progress"
 msgstr "التقدم"
 
@@ -3977,7 +4006,7 @@ msgctxt "Category label"
 msgid "Progress"
 msgstr "التقدم"
 
-#: ui/equalizer.cpp:138
+#: ui/equalizer.cpp:144
 msgid "Psychedelic"
 msgstr "Psychedelic"
 
@@ -4011,12 +4040,12 @@ msgstr "الاستعلام عن الجهاز..."
 msgid "Queue Manager"
 msgstr "مدير لائحة الانتظار"
 
-#: ui/mainwindow.cpp:1574
+#: ui/mainwindow.cpp:1590
 msgid "Queue selected tracks"
 msgstr "أضف المختارة للائحة الانتظار"
 
 #: globalsearch/globalsearchview.cpp:465 library/libraryview.cpp:380
-#: ui/mainwindow.cpp:1572
+#: ui/mainwindow.cpp:1588
 msgid "Queue track"
 msgstr "أضف للائحة الانتظار"
 
@@ -4024,7 +4053,7 @@ msgstr "أضف للائحة الانتظار"
 msgid "Radio (equal loudness for all tracks)"
 msgstr "راديو (شدة صوت متساوية لجمع المقاطع)"
 
-#: internet/grooveshark/groovesharkservice.cpp:613
+#: internet/grooveshark/groovesharkservice.cpp:614
 msgid "Radios"
 msgstr "راديو"
 
@@ -4078,7 +4107,7 @@ msgstr "تريد فعلا الإلغاء؟"
 msgid "Redirect limit exceeded, verify server configuration."
 msgstr "تم تجاوز عدد مرات إعادات التوجيه المسوح به، تحقق من إعدادات الخادم."
 
-#: internet/grooveshark/groovesharkservice.cpp:561
+#: internet/grooveshark/groovesharkservice.cpp:562
 msgid "Refresh"
 msgstr "حدث"
 
@@ -4100,7 +4129,7 @@ msgstr "حدث قائمة المحطة"
 msgid "Refresh streams"
 msgstr "حدث تيارات الانترنت"
 
-#: ui/equalizer.cpp:140
+#: ui/equalizer.cpp:146
 msgid "Reggae"
 msgstr "Reggae"
 
@@ -4138,7 +4167,7 @@ msgstr "احذف المقاطع المكررة من قائمة التشغيل"
 msgid "Remove folder"
 msgstr "أزل الملف"
 
-#: internet/grooveshark/groovesharkservice.cpp:549
+#: internet/grooveshark/groovesharkservice.cpp:550
 #: internet/vk/vkservice.cpp:316
 msgid "Remove from My Music"
 msgstr "حذف من مقاطعي"
@@ -4147,11 +4176,11 @@ msgstr "حذف من مقاطعي"
 msgid "Remove from bookmarks"
 msgstr "إزالة من الإشارات المرجعية"
 
-#: internet/grooveshark/groovesharkservice.cpp:546
+#: internet/grooveshark/groovesharkservice.cpp:547
 msgid "Remove from favorites"
 msgstr "احذف من المفضلة"
 
-#: internet/grooveshark/groovesharkservice.cpp:543
+#: internet/grooveshark/groovesharkservice.cpp:544
 #: internet/spotify/spotifyservice.cpp:672 ../bin/src/ui_mainwindow.h:685
 msgid "Remove from playlist"
 msgstr "احذف من قائمة التشغيل"
@@ -4168,20 +4197,20 @@ msgstr "احذف قوائم التشغيل"
 msgid "Remove unavailable tracks from playlist"
 msgstr ""
 
-#: internet/grooveshark/groovesharkservice.cpp:1570
+#: internet/grooveshark/groovesharkservice.cpp:1571
 msgid "Removing songs from My Music"
 msgstr "حذف مقاطع صوتية من مقاطعي"
 
-#: internet/grooveshark/groovesharkservice.cpp:1518
+#: internet/grooveshark/groovesharkservice.cpp:1519
 msgid "Removing songs from favorites"
 msgstr "حذف المقاطع من المفضلة"
 
-#: internet/grooveshark/groovesharkservice.cpp:1370
+#: internet/grooveshark/groovesharkservice.cpp:1371
 #, qt-format
 msgid "Rename \"%1\" playlist"
 msgstr "أعد تسمية \"%1\" قائمة تشغيل"
 
-#: internet/grooveshark/groovesharkservice.cpp:539
+#: internet/grooveshark/groovesharkservice.cpp:540
 msgid "Rename Grooveshark playlist"
 msgstr "أعد تسمة قائمة Grooveshark"
 
@@ -4268,15 +4297,15 @@ msgstr "اكتف بأحرف ASCII"
 msgid "Resume playback on start"
 msgstr "تابع التشغيل عند البدء"
 
-#: internet/grooveshark/groovesharkservice.cpp:795
+#: internet/grooveshark/groovesharkservice.cpp:796
 msgid "Retrieving Grooveshark My Music songs"
 msgstr "جلب مقاطعي من Grooveshark"
 
-#: internet/grooveshark/groovesharkservice.cpp:762
+#: internet/grooveshark/groovesharkservice.cpp:763
 msgid "Retrieving Grooveshark favorites songs"
 msgstr "جلب المقاطع المفضلة على Grooveshark"
 
-#: internet/grooveshark/groovesharkservice.cpp:693
+#: internet/grooveshark/groovesharkservice.cpp:694
 msgid "Retrieving Grooveshark playlists"
 msgstr "جلب قوائم تشغيل Grooveshark"
 
@@ -4288,19 +4317,19 @@ msgstr "ارجع لكلمنتاين"
 msgid "Right"
 msgstr "يمين"
 
-#: ../bin/src/ui_ripcd.h:303
+#: ../bin/src/ui_ripcddialog.h:303
 msgid "Rip"
 msgstr "نسخ"
 
-#: ui/ripcd.cpp:114
+#: ripper/ripcddialog.cpp:95
 msgid "Rip CD"
 msgstr "قرص RIP"
 
 #: ../bin/src/ui_mainwindow.h:716
-msgid "Rip audio CD..."
-msgstr "قرص صوتي Rip"
+msgid "Rip audio CD"
+msgstr ""
 
-#: ui/equalizer.cpp:142
+#: ui/equalizer.cpp:148
 msgid "Rock"
 msgstr "Rock"
 
@@ -4330,7 +4359,7 @@ msgstr "احذف الجهاز بأمان بعد انتهاء النسخ"
 msgid "Sample rate"
 msgstr "معدل العينة"
 
-#: ui/organisedialog.cpp:76
+#: ui/organisedialog.cpp:77
 msgid "Samplerate"
 msgstr "معدل العينة"
 
@@ -4364,7 +4393,7 @@ msgstr "حفظ قائمة التشغيل"
 msgid "Save playlist..."
 msgstr "حفظ قائمة التشغيل..."
 
-#: ui/equalizer.cpp:199 ../bin/src/ui_equalizer.h:166
+#: ui/equalizer.cpp:205 ../bin/src/ui_equalizer.h:166
 msgid "Save preset"
 msgstr "احفظ ملف الإعدادات"
 
@@ -4380,7 +4409,7 @@ msgstr "احفظ الإحصائيات في وسوم الملف إن إمكن ذ�
 msgid "Save this stream in the Internet tab"
 msgstr "احفظ المقطع في لسان الانترنت"
 
-#: library/library.cpp:196
+#: library/library.cpp:193
 msgid "Saving songs statistics into songs files"
 msgstr "حفظ إحصائيات المقاطع في ملفات المقاطع"
 
@@ -4463,7 +4492,7 @@ msgstr "نمط البحث"
 msgid "Search options"
 msgstr "إعدادات البحث"
 
-#: internet/grooveshark/groovesharkservice.cpp:582
+#: internet/grooveshark/groovesharkservice.cpp:583
 #: internet/soundcloud/soundcloudservice.cpp:116
 #: internet/spotify/spotifyservice.cpp:406
 msgid "Search results"
@@ -4498,11 +4527,11 @@ msgstr "انتقل في المقطع الحالي إلى موضع نسبي"
 msgid "Seek the currently playing track to an absolute position"
 msgstr "انتقل في المقطع الحالي إلى موضع محدد"
 
-#: visualisations/visualisationselector.cpp:37 ../bin/src/ui_ripcd.h:310
+#: visualisations/visualisationselector.cpp:37 ../bin/src/ui_ripcddialog.h:310
 msgid "Select All"
 msgstr "اختر الكل"
 
-#: visualisations/visualisationselector.cpp:38 ../bin/src/ui_ripcd.h:311
+#: visualisations/visualisationselector.cpp:38 ../bin/src/ui_ripcddialog.h:311
 msgid "Select None"
 msgstr "لا تختر شيئا"
 
@@ -4530,7 +4559,7 @@ msgstr "اختر التأثيرات المرئية"
 msgid "Select visualizations..."
 msgstr "اختر التأثيرات المرئية..."
 
-#: ../bin/src/ui_transcodedialog.h:229 ../bin/src/ui_ripcd.h:319
+#: ../bin/src/ui_transcodedialog.h:229 ../bin/src/ui_ripcddialog.h:319
 msgid "Select..."
 msgstr "اختر..."
 
@@ -4554,7 +4583,7 @@ msgstr "معلومات الخادم"
 msgid "Service offline"
 msgstr "خدمة غير متصلة"
 
-#: ui/mainwindow.cpp:1611
+#: ui/mainwindow.cpp:1627
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr "غير %1 إلى %2"
@@ -4571,12 +4600,12 @@ msgstr "اجعل هذه القيمة لجميع المقاطع المختارة"
 msgid "Settings"
 msgstr "الإعدادات"
 
-#: ../bin/src/ui_globalshortcutssettingspage.h:183
+#: ../bin/src/ui_globalshortcutssettingspage.h:173
 msgid "Shortcut"
 msgstr "اختصار لوحة المفاتيح"
 
-#: ui/globalshortcutssettingspage.cpp:144
-#: ../bin/src/ui_globalshortcutssettingspage.h:185
+#: ui/globalshortcutssettingspage.cpp:130
+#: ../bin/src/ui_globalshortcutssettingspage.h:175
 #, qt-format
 msgid "Shortcut for %1"
 msgstr "اختصار لوحة المفاتيح لـ %1"
@@ -4630,7 +4659,7 @@ msgstr "أظهر تنبيهات كلمنتاين"
 msgid "Show above status bar"
 msgstr "أظهر فوق شريط الحالة"
 
-#: ui/mainwindow.cpp:552
+#: ui/mainwindow.cpp:568
 msgid "Show all songs"
 msgstr "أظهر جميع المقاطع"
 
@@ -4654,12 +4683,12 @@ msgstr "أظهر الحجم الأصلي..."
 msgid "Show groups in global search result"
 msgstr "أظهر المجموعات في نتائج البحث الشامل"
 
-#: library/libraryview.cpp:413 ui/mainwindow.cpp:621
+#: library/libraryview.cpp:413 ui/mainwindow.cpp:637
 #: widgets/fileviewlist.cpp:51
 msgid "Show in file browser..."
 msgstr "أظهر في متصفح الملفات..."
 
-#: ui/mainwindow.cpp:624
+#: ui/mainwindow.cpp:640
 msgid "Show in library..."
 msgstr "أظهر في المكتبة..."
 
@@ -4671,11 +4700,11 @@ msgstr "أظهر في فنانين متنوعين"
 msgid "Show moodbar"
 msgstr "أظهر عارضة المزاج"
 
-#: ui/mainwindow.cpp:554
+#: ui/mainwindow.cpp:570
 msgid "Show only duplicates"
 msgstr "أظهر المقاطع المكررة فقط"
 
-#: ui/mainwindow.cpp:556
+#: ui/mainwindow.cpp:572
 msgid "Show only untagged"
 msgstr "أظهر المقطاع غير الموسومة فقط"
 
@@ -4751,7 +4780,7 @@ msgstr "الحجم"
 msgid "Size:"
 msgstr "الحجم:"
 
-#: ui/equalizer.cpp:146
+#: ui/equalizer.cpp:152
 msgid "Ska"
 msgstr "Ska"
 
@@ -4767,11 +4796,11 @@ msgstr "تخطى العد"
 msgid "Skip forwards in playlist"
 msgstr "تجاهل اللاحق في قائمة التشغيل"
 
-#: ui/mainwindow.cpp:1585
+#: ui/mainwindow.cpp:1601
 msgid "Skip selected tracks"
 msgstr "تجاوز المسارات المختارة"
 
-#: ui/mainwindow.cpp:1583
+#: ui/mainwindow.cpp:1599
 msgid "Skip track"
 msgstr "تجاوز المسار"
 
@@ -4791,11 +4820,11 @@ msgstr "قائمة تشغيل ذكية"
 msgid "Smart playlists"
 msgstr "قوائم تشغيل ذكية"
 
-#: ui/equalizer.cpp:144
+#: ui/equalizer.cpp:150
 msgid "Soft"
 msgstr "Soft"
 
-#: ui/equalizer.cpp:148
+#: ui/equalizer.cpp:154
 msgid "Soft Rock"
 msgstr "Soft Rock"
 
@@ -4888,7 +4917,7 @@ msgstr "قياسي"
 msgid "Starred"
 msgstr "مميز"
 
-#: ui/ripcd.cpp:86
+#: ripper/ripcddialog.cpp:69
 msgid "Start ripping"
 msgstr "ابدء النسخ"
 
@@ -4896,11 +4925,11 @@ msgstr "ابدء النسخ"
 msgid "Start the playlist currently playing"
 msgstr "ابدأ قئمة التشغيل اللتي تعمل حالياً"
 
-#: transcoder/transcodedialog.cpp:89
+#: transcoder/transcodedialog.cpp:90
 msgid "Start transcoding"
 msgstr "ابدأ التحويل"
 
-#: internet/grooveshark/groovesharkservice.cpp:584
+#: internet/grooveshark/groovesharkservice.cpp:585
 #: internet/soundcloud/soundcloudservice.cpp:118
 #: internet/spotify/spotifyservice.cpp:408
 msgid ""
@@ -4917,7 +4946,7 @@ msgstr "بدأ %1"
 msgid "Starting..."
 msgstr "بدأ..."
 
-#: internet/grooveshark/groovesharkservice.cpp:617
+#: internet/grooveshark/groovesharkservice.cpp:618
 msgid "Stations"
 msgstr "محطات"
 
@@ -4930,7 +4959,7 @@ msgstr "إيقاف"
 msgid "Stop after"
 msgstr "إيقاف بعد"
 
-#: ui/mainwindow.cpp:587 ../bin/src/ui_mainwindow.h:650
+#: ui/mainwindow.cpp:603 ../bin/src/ui_mainwindow.h:650
 msgid "Stop after this track"
 msgstr "أوقف بعد هذا المقطع"
 
@@ -4951,7 +4980,7 @@ msgstr "أوقف التشغيل بعد المقطع: %1"
 msgid "Stopped"
 msgstr "تم الايقاف"
 
-#: core/song.cpp:418
+#: core/song.cpp:422
 msgid "Stream"
 msgstr "المجرى"
 
@@ -4965,7 +4994,7 @@ msgstr "الاستماع للموسيقى من خادوم Subsonic يتطلب ر
 msgid "Streaming membership"
 msgstr "عضوية الاستماع لتيارات الانترنت"
 
-#: internet/grooveshark/groovesharkservice.cpp:658
+#: internet/grooveshark/groovesharkservice.cpp:659
 msgid "Subscribed playlists"
 msgstr "قوائم التشغيل المشترك بها"
 
@@ -5042,7 +5071,7 @@ msgstr "جالب الوسوم"
 msgid "Target bitrate"
 msgstr "بدّل الصبيب"
 
-#: ui/equalizer.cpp:150
+#: ui/equalizer.cpp:156
 msgid "Techno"
 msgstr "Techno"
 
@@ -5054,7 +5083,7 @@ msgstr "خيارات النص"
 msgid "Thanks to"
 msgstr "الشكر لـ"
 
-#: ui/globalshortcutssettingspage.cpp:184
+#: ui/globalshortcutssettingspage.cpp:170
 #, qt-format
 msgid "The \"%1\" command could not be started."
 msgstr "تعذر تشغيل الأمر %1."
@@ -5086,7 +5115,7 @@ msgid ""
 "license key. Visit subsonic.org for details."
 msgstr "لقد انتهت المدة التجريبية لخادم Subsonic. الرجاء التبرع للحصول على مفتاح رخصة. لمزيد من التفاصيل زر subsonic.org."
 
-#: ui/mainwindow.cpp:2404
+#: ui/mainwindow.cpp:2420
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -5128,7 +5157,7 @@ msgid ""
 "continue?"
 msgstr "سيتم حذف هذه الملفات من الجهاز. هل أنت متأكد من رغبتك بالاستمرار؟"
 
-#: library/libraryview.cpp:637 ui/mainwindow.cpp:2192 widgets/fileview.cpp:187
+#: library/libraryview.cpp:637 ui/mainwindow.cpp:2208 widgets/fileview.cpp:187
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -5207,11 +5236,11 @@ msgstr "هذا النوع من الأجهزة غير مدعوم: %1"
 #: playlist/playlist.cpp:1307 ui/organisedialog.cpp:60
 #: ui/qtsystemtrayicon.cpp:232 ../bin/src/ui_about.h:142
 #: ../bin/src/ui_edittagdialog.h:685 ../bin/src/ui_trackselectiondialog.h:211
-#: ../bin/src/ui_ripcd.h:307
+#: ../bin/src/ui_ripcddialog.h:307
 msgid "Title"
 msgstr "العنوان"
 
-#: internet/grooveshark/groovesharkservice.cpp:1055
+#: internet/grooveshark/groovesharkservice.cpp:1056
 msgid ""
 "To start Grooveshark radio, you should first listen to a few other "
 "Grooveshark songs"
@@ -5229,7 +5258,7 @@ msgstr "بدّل تنبيهات كلمنتاين"
 msgid "Toggle fullscreen"
 msgstr "بدّل نمط ملء الشاشة"
 
-#: ui/mainwindow.cpp:1576
+#: ui/mainwindow.cpp:1592
 msgid "Toggle queue status"
 msgstr "بدّل حالة لائحة الانتظار"
 
@@ -5265,9 +5294,9 @@ msgstr "إجمالي البايتات المرسلة"
 msgid "Total network requests made"
 msgstr "إجمالي طلبات الشبكة "
 
-#: playlist/playlist.cpp:1315 ui/organisedialog.cpp:68
+#: playlist/playlist.cpp:1315 ui/organisedialog.cpp:69
 #: ../bin/src/ui_edittagdialog.h:686 ../bin/src/ui_trackselectiondialog.h:213
-#: ../bin/src/ui_ripcd.h:305
+#: ../bin/src/ui_ripcddialog.h:305
 msgid "Track"
 msgstr "المقطوعة"
 
@@ -5296,7 +5325,7 @@ msgstr "جاري تحويل %1 ملفات على %2 أشغال"
 msgid "Transcoding options"
 msgstr "إعدادات تحويل الصوتيات"
 
-#: core/song.cpp:413
+#: core/song.cpp:417
 msgid "TrueAudio"
 msgstr "TrueAudio"
 
@@ -5330,7 +5359,7 @@ msgstr ""
 msgid "Unable to download %1 (%2)"
 msgstr "تعذر تحميل %1 (%2)"
 
-#: core/song.cpp:422 library/librarymodel.cpp:350 library/librarymodel.cpp:354
+#: core/song.cpp:426 library/librarymodel.cpp:350 library/librarymodel.cpp:354
 #: library/librarymodel.cpp:358 library/librarymodel.cpp:1066
 #: playlist/playlistdelegates.cpp:306 playlist/playlistmanager.cpp:501
 #: playlist/playlistmanager.cpp:502 ui/albumcoverchoicecontroller.cpp:124
@@ -5351,11 +5380,11 @@ msgstr "خطأ مجهول"
 msgid "Unset cover"
 msgstr "ألغ الغلاف"
 
-#: ui/mainwindow.cpp:1581
+#: ui/mainwindow.cpp:1597
 msgid "Unskip selected tracks"
 msgstr "إلغاء تجاوز المسارات المختارة"
 
-#: ui/mainwindow.cpp:1579
+#: ui/mainwindow.cpp:1595
 msgid "Unskip track"
 msgstr "إلغاء تجاوز المسار"
 
@@ -5372,7 +5401,7 @@ msgstr "الحفلات القادمة"
 msgid "Update"
 msgstr "تحديث"
 
-#: internet/grooveshark/groovesharkservice.cpp:1227
+#: internet/grooveshark/groovesharkservice.cpp:1228
 msgid "Update Grooveshark playlist"
 msgstr "حدّث قائمة تشغيل Grooveshark"
 
@@ -5396,7 +5425,7 @@ msgstr "حدّث هذا البودكاست"
 msgid "Updating"
 msgstr "جاري التحديث"
 
-#: library/librarywatcher.cpp:94
+#: library/librarywatcher.cpp:92
 #, qt-format
 msgid "Updating %1"
 msgstr "جاري تحديث %1"
@@ -5406,7 +5435,7 @@ msgstr "جاري تحديث %1"
 msgid "Updating %1%..."
 msgstr "جاري تحديث %1%"
 
-#: library/librarywatcher.cpp:92
+#: library/librarywatcher.cpp:90
 msgid "Updating library"
 msgstr "تحديث المكتبة"
 
@@ -5418,7 +5447,7 @@ msgstr "الإستخدام"
 msgid "Use Album Artist tag when available"
 msgstr "استخدم وسم فنان الألبوم إن كان متوفرا"
 
-#: ../bin/src/ui_globalshortcutssettingspage.h:177
+#: ../bin/src/ui_globalshortcutssettingspage.h:168
 msgid "Use Gnome's shortcut keys"
 msgstr "استخدم مفاتيح اختصارات جنوم"
 
@@ -5486,12 +5515,12 @@ msgstr "استخدم تسوية الصوت"
 msgid "Used"
 msgstr "مستعمل"
 
-#: internet/grooveshark/groovesharkservice.cpp:407
+#: internet/grooveshark/groovesharkservice.cpp:408
 #, qt-format
 msgid "User %1 doesn't have a Grooveshark Anywhere account"
 msgstr "المستخدم %1 لا يملك حساب Grooveshark Anywhere"
 
-#: ui/settingsdialog.cpp:152
+#: ui/settingsdialog.cpp:156
 msgid "User interface"
 msgstr "واجهة المستخدم"
 
@@ -5577,7 +5606,7 @@ msgstr ""
 msgid "Warn me when closing a playlist tab"
 msgstr "نبهني عند إغلاق لسان قائمة تشغيل"
 
-#: core/song.cpp:411 transcoder/transcoder.cpp:256
+#: core/song.cpp:415 transcoder/transcoder.cpp:256
 msgid "Wav"
 msgstr "Wav"
 
@@ -5661,7 +5690,7 @@ msgstr "Windows Media 40k"
 msgid "Windows Media 64k"
 msgstr "Windows Media 64k"
 
-#: core/song.cpp:391 transcoder/transcoder.cpp:253
+#: core/song.cpp:395 transcoder/transcoder.cpp:253
 msgid "Windows Media audio"
 msgstr "Windows Media audio"
 
@@ -5675,7 +5704,7 @@ msgid ""
 "well?"
 msgstr "هل ترغب بنقل المقاطع الأخرى في هذا الألبوم لفئة فنانون متنوعون؟"
 
-#: ui/mainwindow.cpp:2411
+#: ui/mainwindow.cpp:2427
 msgid "Would you like to run a full rescan right now?"
 msgstr "هل ترغب بالقيام بفحص شامل الآن؟"
 
@@ -5691,10 +5720,10 @@ msgstr ""
 msgid "Wrong username or password."
 msgstr "اسم مستخدم أو كلمة سر خاطئة."
 
-#: playlist/playlist.cpp:1319 ui/organisedialog.cpp:71
+#: playlist/playlist.cpp:1319 ui/organisedialog.cpp:72
 #: ../bin/src/ui_groupbydialog.h:135 ../bin/src/ui_groupbydialog.h:150
 #: ../bin/src/ui_groupbydialog.h:165 ../bin/src/ui_edittagdialog.h:690
-#: ../bin/src/ui_trackselectiondialog.h:212 ../bin/src/ui_ripcd.h:313
+#: ../bin/src/ui_trackselectiondialog.h:212 ../bin/src/ui_ripcddialog.h:313
 msgid "Year"
 msgstr "السنة"
 
@@ -5800,19 +5829,12 @@ msgstr "لقد تم تسجيل خروجك من Spotify، الرجاء إعادة
 msgid "You love this track"
 msgstr "هذا المقطع يعجبك"
 
-#: ../bin/src/ui_globalshortcutssettingspage.h:180
+#: ../bin/src/ui_globalshortcutssettingspage.h:170
 msgid ""
 "You need to launch System Preferences and allow Clementine to \"<span style"
 "=\"font-style:italic\">control your computer</span>\" to use global "
 "shortcuts in Clementine."
 msgstr "عليك أن تستخدم تفضيلات النظام وتمكن كليمينتين من \"<span style=\"font-style:italic\">التحكم في حاسوبك</span>\" لتستخدم الاختصارات العامة في كليمينتين."
-
-#: ../bin/src/ui_globalshortcutssettingspage.h:179
-msgid ""
-"You need to launch System Preferences and turn on \"<span style=\" font-"
-"style:italic;\">Enable access for assistive devices</span>\" to use global "
-"shortcuts in Clementine."
-msgstr "يجب أن تشغل تفضيلات النظام وتفعل \"<span style=\"font-style:italic;\">فعّل الوصول لأجهزة المساعدة</span>\" لاستخدام اختصارات لوحة المفاتيح العامة في كلمنتاين."
 
 #: ../bin/src/ui_behavioursettingspage.h:268
 msgid "You will need to restart Clementine if you change the language."
@@ -5857,7 +5879,7 @@ msgstr "اسم المستخدم أو كلمة السر  خاطئة."
 msgid "Z-A"
 msgstr "Z-A"
 
-#: ui/equalizer.cpp:152
+#: ui/equalizer.cpp:158
 msgid "Zero"
 msgstr "صفر"
 

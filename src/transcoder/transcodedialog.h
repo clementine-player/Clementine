@@ -20,6 +20,7 @@
 
 #include <QBasicTimer>
 #include <QDialog>
+#include <QFileInfo>
 
 class Transcoder;
 class Ui_TranscodeDialog;
@@ -59,8 +60,7 @@ class TranscodeDialog : public QDialog {
   void SetWorking(bool working);
   void UpdateStatusText();
   void UpdateProgress();
-  QString TrimPath(const QString& path) const;
-  QString GetOutputFileName(const QString& input,
+  QString GetOutputFileName(const QFileInfo& input,
                             const TranscoderPreset& preset) const;
 
  private:

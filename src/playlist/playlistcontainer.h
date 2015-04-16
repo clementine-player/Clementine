@@ -74,6 +74,8 @@ signals:
   void PlaylistClosed(int id);
   void PlaylistRenamed(int id, const QString& new_name);
 
+  void Started();
+
   void ActivePlaying();
   void ActivePaused();
   void ActiveStopped();

@@ -411,7 +411,6 @@
     </property>
     <addaction name="action_open_media"/>
     <addaction name="action_open_cd"/>
-    <addaction name="action_rip_audio_cd"/>
     <addaction name="action_add_podcast"/>
     <addaction name="separator"/>
     <addaction name="action_previous_track"/>
@@ -473,6 +472,7 @@
     <addaction name="action_equalizer"/>
     <addaction name="action_visualisations"/>
     <addaction name="action_transcode"/>
+    <addaction name="action_rip_audio_cd"/>
     <addaction name="separator"/>
     <addaction name="action_update_library"/>
     <addaction name="action_full_library_scan"/>
@@ -847,7 +847,7 @@
   </action>
   <action name="action_rip_audio_cd">
    <property name="text">
-    <string>Rip audio CD...</string>
+    <string>Rip audio CD</string>
    </property>
   </action>
   <action name="action_remove_unavailable">

@@ -375,12 +375,6 @@ QString GetConfigPath(ConfigPath config) {
 }
 
 #ifdef Q_OS_DARWIN
-qint32 GetMacVersion() {
-  SInt32 minor_version;
-  Gestalt(gestaltSystemVersionMinor, &minor_version);
-  return minor_version;
-}
-
 // Better than openUrl(dirname(path)) - also highlights file at path
 void RevealFileInFinder(QString const& path) {
   QProcess::execute("/usr/bin/open", QStringList() << "-R" << path);
@@ -565,24 +559,19 @@ bool ParseUntilElement(QXmlStreamReader* reader, const QString& name) {
 }
 
 QDateTime ParseRFC822DateTime(const QString& text) {
-  // This sucks but we need it because some podcasts don't quite follow the
-  // spec properly - they might have 1-digit hour numbers for example.
-  QDateTime ret;
-  QRegExp re(
-      "([a-zA-Z]{3}),? (\\d{1,2}) ([a-zA-Z]{3}) (\\d{4}) "
-      "(\\d{1,2}):(\\d{1,2}):(\\d{1,2})");
-  if (re.indexIn(text) != -1) {
-    ret = QDateTime(
-        QDate::fromString(QString("%1 %2 %3 %4")
-                              .arg(re.cap(1), re.cap(3), re.cap(2), re.cap(4)),
-                          Qt::TextDate),
-        QTime(re.cap(5).toInt(), re.cap(6).toInt(), re.cap(7).toInt()));
+  QRegExp regexp("(\\d{1,2}) (\\w{3,12}) (\\d+) (\\d{1,2}):(\\d{1,2}):(\\d{1,2})");
+  if (regexp.indexIn(text) == -1) {
+    return QDateTime();
   }
-  if (ret.isValid()) return ret;
-  // Because http://feeds.feedburner.com/reasonabledoubts/Msxh?format=xml
-  QRegExp re2(
-      "(\\d{1,2}) ([a-zA-Z]{3}) (\\d{4}) "
-      "(\\d{1,2}):(\\d{1,2}):(\\d{1,2})");
+
+  enum class MatchNames {
+    DAYS = 1,
+    MONTHS,
+    YEARS,
+    HOURS,
+    MINUTES,
+    SECONDS
+  };
 
   QMap<QString, int> monthmap;
   monthmap["Jan"] = 1;
@@ -597,13 +586,28 @@ QDateTime ParseRFC822DateTime(const QString& text) {
   monthmap["Oct"] = 10;
   monthmap["Nov"] = 11;
   monthmap["Dec"] = 12;
+  monthmap["January"] = 1;
+  monthmap["February"] = 2;
+  monthmap["March"] = 3;
+  monthmap["April"] = 4;
+  monthmap["May"] = 5;
+  monthmap["June"] = 6;
+  monthmap["July"] = 7;
+  monthmap["August"] = 8;
+  monthmap["September"] = 9;
+  monthmap["October"] = 10;
+  monthmap["November"] = 11;
+  monthmap["December"] = 12;
 
-  if (re2.indexIn(text) != -1) {
-    QDate date(re2.cap(3).toInt(), monthmap[re2.cap(2)], re2.cap(1).toInt());
-    ret = QDateTime(date, QTime(re2.cap(4).toInt(), re2.cap(5).toInt(),
-                                re2.cap(6).toInt()));
-  }
-  return ret;
+  const QDate date(regexp.cap(static_cast<int>(MatchNames::YEARS)).toInt(),
+                   monthmap[regexp.cap(static_cast<int>(MatchNames::MONTHS))],
+                   regexp.cap(static_cast<int>(MatchNames::DAYS)).toInt());
+
+  const QTime time(regexp.cap(static_cast<int>(MatchNames::HOURS)).toInt(),
+                   regexp.cap(static_cast<int>(MatchNames::MINUTES)).toInt(),
+                   regexp.cap(static_cast<int>(MatchNames::SECONDS)).toInt());
+
+  return QDateTime (date, time);
 }
 
 const char* EnumToString(const QMetaObject& meta, const char* name, int value) {

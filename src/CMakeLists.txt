@@ -106,6 +106,7 @@ set(SOURCES
   core/stylesheetloader.cpp
   core/tagreaderclient.cpp
   core/taskmanager.cpp
+  core/thread.cpp
   core/urlhandler.cpp
   core/utilities.cpp
 
@@ -312,6 +313,7 @@ set(SOURCES
   songinfo/songkickconcerts.cpp
   songinfo/songkickconcertwidget.cpp
   songinfo/songplaystats.cpp
+  songinfo/taglyricsinfoprovider.cpp
   songinfo/ultimatelyricslyric.cpp
   songinfo/ultimatelyricsprovider.cpp
   songinfo/ultimatelyricsreader.cpp
@@ -604,6 +606,7 @@ set(HEADERS
   songinfo/songkickconcerts.h
   songinfo/songkickconcertwidget.h
   songinfo/songplaystats.h
+  songinfo/taglyricsinfoprovider.h
   songinfo/ultimatelyricslyric.h
   songinfo/ultimatelyricsprovider.h
   songinfo/ultimatelyricsreader.h
@@ -863,7 +866,6 @@ optional_source(APPLE
     core/macfslistener.mm
     core/macglobalshortcutbackend.mm
     core/mac_startup.mm
-    core/scoped_nsautorelease_pool.mm
     devices/macdevicelister.mm
     engines/osxdevicefinder.cpp
     networkremote/bonjour.mm
@@ -1035,14 +1037,16 @@ optional_source(HAVE_AUDIOCD
     devices/cddadevice.cpp
     devices/cddalister.cpp
     devices/cddasongloader.cpp
-    ui/ripcd.cpp
+    ripper/ripcddialog.cpp
+    ripper/ripper.cpp
   HEADERS
     devices/cddadevice.h
     devices/cddalister.h
     devices/cddasongloader.h
-    ui/ripcd.h
+    ripper/ripcddialog.h
+    ripper/ripper.h
   UI
-    ui/ripcd.ui
+    ripper/ripcddialog.ui
 )
 
 # mtp device
@@ -1174,6 +1178,20 @@ optional_source(HAVE_SEAFILE
     internet/seafile/seafiletree.h
   UI
     internet/seafile/seafilesettingspage.ui
+)
+
+# Amazon Cloud Drive support
+optional_source(HAVE_AMAZON_CLOUD_DRIVE
+  SOURCES
+    internet/amazon/amazonclouddrive.cpp
+    internet/amazon/amazonsettingspage.cpp
+    internet/amazon/amazonurlhandler.cpp
+  HEADERS
+    internet/amazon/amazonclouddrive.h
+    internet/amazon/amazonsettingspage.h
+    internet/amazon/amazonurlhandler.h
+  UI
+    internet/amazon/amazonsettingspage.ui
 )
 
 

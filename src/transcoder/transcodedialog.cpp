@@ -76,7 +76,8 @@ TranscodeDialog::TranscodeDialog(QWidget* parent)
   last_add_dir_ = s.value("last_add_dir", QDir::homePath()).toString();
   last_import_dir_ = s.value("last_import_dir", QDir::homePath()).toString();
 
-  QString last_output_format = s.value("last_output_format", "audio/x-vorbis").toString();
+  QString last_output_format =
+      s.value("last_output_format", "audio/x-vorbis").toString();
   for (int i = 0; i < ui_->format->count(); ++i) {
     if (last_output_format ==
         ui_->format->itemData(i).value<TranscoderPreset>().codec_mimetype_) {
@@ -142,9 +143,10 @@ void TranscodeDialog::Start() {
 
   // Add jobs to the transcoder
   for (int i = 0; i < file_model->rowCount(); ++i) {
-    QString filename = file_model->index(i, 0).data(Qt::UserRole).toString();
-    QString outfilename = GetOutputFileName(filename, preset);
-    transcoder_->AddJob(filename, preset, outfilename);
+    QFileInfo input_fileinfo(
+        file_model->index(i, 0).data(Qt::UserRole).toString());
+    QString output_filename = GetOutputFileName(input_fileinfo, preset);
+    transcoder_->AddJob(input_fileinfo.filePath(), preset, output_filename);
   }
 
   // Set up the progressbar
@@ -171,8 +173,12 @@ void TranscodeDialog::Cancel() {
   SetWorking(false);
 }
 
-void TranscodeDialog::JobComplete(const QString& input, const QString& output, bool success) {
-  (*(success ? &finished_success_ : &finished_failed_))++;
+void TranscodeDialog::JobComplete(const QString& input, const QString& output,
+                                  bool success) {
+  if (success)
+    finished_success_++;
+  else
+    finished_failed_++;
   queued_--;
 
   UpdateStatusText();
@@ -302,7 +308,7 @@ void TranscodeDialog::AddDestination() {
   if (!dir.isEmpty()) {
     // Keep only a finite number of items in the box.
     while (ui_->destination->count() >= kMaxDestinationItems) {
-      ui_->destination->removeItem(1);  // The oldest folder item.
+      ui_->destination->removeItem(1);  // Remove the oldest folder item.
     }
 
     QIcon icon = IconLoader::Load("folder");
@@ -318,21 +324,16 @@ void TranscodeDialog::AddDestination() {
   }
 }
 
-// Returns the rightmost non-empty part of 'path'.
-QString TranscodeDialog::TrimPath(const QString& path) const {
-  return path.section('/', -1, -1, QString::SectionSkipEmpty);
-}
-
 QString TranscodeDialog::GetOutputFileName(
-    const QString& input, const TranscoderPreset& preset) const {
-  QString path =
-      ui_->destination->itemData(ui_->destination->currentIndex()).toString();
-  if (path.isEmpty()) {
-    // Keep the original path.
-    return input.section('.', 0, -2) + '.' + preset.extension_;
+    const QFileInfo& input, const TranscoderPreset& preset) const {
+  QFileInfo path(
+      ui_->destination->itemData(ui_->destination->currentIndex()).toString());
+  QString output_path;
+  if (path.isDir()) {
+    output_path = path.filePath();
   } else {
-    QString file_name = TrimPath(input);
-    file_name = file_name.section('.', 0, -2);
-    return path + '/' + file_name + '.' + preset.extension_;
+    // Keep the original path.
+    output_path = input.path();
   }
+  return output_path + '/' + input.completeBaseName() + '.' + preset.extension_;
 }

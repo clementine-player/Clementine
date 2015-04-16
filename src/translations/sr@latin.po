@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2015-02-02 19:36+0000\n"
+"PO-Revision-Date: 2015-04-11 06:41+0000\n"
 "Last-Translator: Mladen Pejaković <pejakm@autistici.org>\n"
 "Language-Team: Serbian (Latin) (http://www.transifex.com/projects/p/clementine/language/sr@latin/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -147,19 +147,19 @@ msgstr "%L1 ukupnih slušanja"
 msgid "%filename%"
 msgstr "%filename%"
 
-#: transcoder/transcodedialog.cpp:208
+#: transcoder/transcodedialog.cpp:214
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n failed"
 msgstr "%n neuspešno"
 
-#: transcoder/transcodedialog.cpp:203
+#: transcoder/transcodedialog.cpp:209
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n finished"
 msgstr "%n završeno"
 
-#: transcoder/transcodedialog.cpp:197
+#: transcoder/transcodedialog.cpp:203
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n remaining"
@@ -173,7 +173,7 @@ msgstr "&Poravnaj tekst"
 msgid "&Center"
 msgstr "&centriraj"
 
-#: ../bin/src/ui_globalshortcutssettingspage.h:188
+#: ../bin/src/ui_globalshortcutssettingspage.h:178
 msgid "&Custom"
 msgstr "&Posebna"
 
@@ -202,7 +202,7 @@ msgstr "&levo"
 msgid "&Music"
 msgstr "&Muzika"
 
-#: ../bin/src/ui_globalshortcutssettingspage.h:186
+#: ../bin/src/ui_globalshortcutssettingspage.h:176
 msgid "&None"
 msgstr "&Nijedna"
 
@@ -275,7 +275,7 @@ msgstr "128k MP3"
 msgid "40%"
 msgstr "40%"
 
-#: library/library.cpp:65
+#: library/library.cpp:64
 msgid "50 random tracks"
 msgstr "50 nasumičnih pesama"
 
@@ -363,7 +363,7 @@ msgstr "AAC 32k"
 msgid "AAC 64k"
 msgstr "AAC 64k"
 
-#: core/song.cpp:409
+#: core/song.cpp:413
 msgid "AIFF"
 msgstr "AIFF"
 
@@ -409,7 +409,7 @@ msgstr "Detalji o nalogu (Premijum)"
 msgid "Action"
 msgstr "radnja"
 
-#: ../bin/src/ui_globalshortcutssettingspage.h:184
+#: ../bin/src/ui_globalshortcutssettingspage.h:174
 msgctxt "Category label"
 msgid "Action"
 msgstr "Radnja"
@@ -450,7 +450,7 @@ msgstr "Dodaj drugi tok..."
 msgid "Add directory..."
 msgstr "Dodaj fasciklu..."
 
-#: ui/mainwindow.cpp:1828
+#: ui/mainwindow.cpp:1844
 msgid "Add file"
 msgstr "Dodavanje fajla"
 
@@ -466,11 +466,12 @@ msgstr "Dodaj fajlo(ove) u prekoder"
 msgid "Add file..."
 msgstr "Dodaj fajl..."
 
-#: transcoder/transcodedialog.cpp:218
+#: transcoder/transcodedialog.cpp:224
 msgid "Add files to transcode"
 msgstr "Dodavanje fajlova za prekodiranje"
 
-#: transcoder/transcodedialog.cpp:300 ui/mainwindow.cpp:1855 ui/ripcd.cpp:408
+#: transcoder/transcodedialog.cpp:306 ui/mainwindow.cpp:1871
+#: ripper/ripcddialog.cpp:185
 msgid "Add folder"
 msgstr "Dodavanje fascikle"
 
@@ -574,11 +575,11 @@ msgstr "Dodaj pesmu u „Moju muziku“ kad kliknem na dugme „Volim“"
 msgid "Add stream..."
 msgstr "Dodaj tok..."
 
-#: internet/grooveshark/groovesharkservice.cpp:1126
+#: internet/grooveshark/groovesharkservice.cpp:1127
 msgid "Add to Grooveshark favorites"
 msgstr "Dodaj u Gruvšarkove omiljene"
 
-#: internet/grooveshark/groovesharkservice.cpp:1141
+#: internet/grooveshark/groovesharkservice.cpp:1142
 msgid "Add to Grooveshark playlists"
 msgstr "Dodaj u Gruvšarkove liste numera"
 
@@ -594,7 +595,7 @@ msgstr "Dodaj u Spotifaj liste numera"
 msgid "Add to Spotify starred"
 msgstr "Dodaj na Spotifaj ocenjeno"
 
-#: ui/mainwindow.cpp:1649
+#: ui/mainwindow.cpp:1665
 msgid "Add to another playlist"
 msgstr "Dodaj u drugu listu"
 
@@ -643,11 +644,11 @@ msgstr "dodato danas"
 msgid "Added within three months"
 msgstr "dodato u poslednja tri meseca"
 
-#: internet/grooveshark/groovesharkservice.cpp:1424
+#: internet/grooveshark/groovesharkservice.cpp:1425
 msgid "Adding song to My Music"
 msgstr "Dodavanje pesme u Moju muziku"
 
-#: internet/grooveshark/groovesharkservice.cpp:1401
+#: internet/grooveshark/groovesharkservice.cpp:1402
 msgid "Adding song to favorites"
 msgstr "Dodavanje pesme u omiljene"
 
@@ -668,7 +669,7 @@ msgstr "Nakon kopiranja:"
 #: ../bin/src/ui_groupbydialog.h:144 ../bin/src/ui_groupbydialog.h:159
 #: ../bin/src/ui_albumcoversearcher.h:111
 #: ../bin/src/ui_albumcoversearcher.h:113 ../bin/src/ui_edittagdialog.h:689
-#: ../bin/src/ui_trackselectiondialog.h:209 ../bin/src/ui_ripcd.h:315
+#: ../bin/src/ui_trackselectiondialog.h:209 ../bin/src/ui_ripcddialog.h:315
 msgid "Album"
 msgstr "album"
 
@@ -736,7 +737,7 @@ msgstr "Sve liste numera (%1)"
 msgid "All the translators"
 msgstr "svim prevodiocima"
 
-#: library/library.cpp:101
+#: library/library.cpp:98
 msgid "All tracks"
 msgstr "Sve numere"
 
@@ -768,6 +769,10 @@ msgstr "Uvek prikaži glavni prozor"
 #: ../bin/src/ui_behavioursettingspage.h:304
 msgid "Always start playing"
 msgstr "uvek će početi puštanje"
+
+#: ../bin/src/ui_amazonsettingspage.h:103
+msgid "Amazon"
+msgstr "Amazon"
 
 #: internet/spotify/spotifyblobdownloader.cpp:67
 msgid ""
@@ -820,12 +825,12 @@ msgstr "doda u listu numera"
 msgid "Apply compression to prevent clipping"
 msgstr "Primeni kompresiju kako bi se sprečilo odsecanje"
 
-#: ui/equalizer.cpp:216
+#: ui/equalizer.cpp:222
 #, qt-format
 msgid "Are you sure you want to delete the \"%1\" preset?"
 msgstr "Želite li zaista da obrišete prepostavku „%1“?"
 
-#: internet/grooveshark/groovesharkservice.cpp:1323
+#: internet/grooveshark/groovesharkservice.cpp:1324
 msgid "Are you sure you want to delete this playlist?"
 msgstr "Želite li zaista da obrišete ovu listu numera?"
 
@@ -844,7 +849,7 @@ msgstr "Želite li zaista da upišete statistiku pesme u fajl pesme za sve pesme
 #: ../bin/src/ui_groupbydialog.h:145 ../bin/src/ui_groupbydialog.h:160
 #: ../bin/src/ui_albumcoversearcher.h:107
 #: ../bin/src/ui_albumcoversearcher.h:109 ../bin/src/ui_edittagdialog.h:687
-#: ../bin/src/ui_trackselectiondialog.h:210 ../bin/src/ui_ripcd.h:316
+#: ../bin/src/ui_trackselectiondialog.h:210 ../bin/src/ui_ripcddialog.h:316
 msgid "Artist"
 msgstr "izvođač"
 
@@ -865,7 +870,8 @@ msgid "Ask when saving"
 msgstr "Pitaj prilikom upisa"
 
 #: ../bin/src/ui_transcodedialog.h:222
-#: ../bin/src/ui_networkremotesettingspage.h:251 ../bin/src/ui_ripcd.h:323
+#: ../bin/src/ui_networkremotesettingspage.h:251
+#: ../bin/src/ui_ripcddialog.h:323
 msgid "Audio format"
 msgstr "Format zvuka"
 
@@ -921,7 +927,7 @@ msgstr "Prosečna veličina slike"
 msgid "BBC Podcasts"
 msgstr "BBC-ijevi podkasti"
 
-#: playlist/playlist.cpp:1343 ui/organisedialog.cpp:70
+#: playlist/playlist.cpp:1343 ui/organisedialog.cpp:71
 #: ../bin/src/ui_edittagdialog.h:671
 msgid "BPM"
 msgstr "tempo"
@@ -988,7 +994,7 @@ msgstr "bitski protok"
 msgid "Bitrate"
 msgstr "Bitski protok"
 
-#: ui/organisedialog.cpp:75
+#: ui/organisedialog.cpp:76
 msgctxt "Refers to bitrate in file organise dialog."
 msgid "Bitrate"
 msgstr "bitski protok"
@@ -1027,9 +1033,13 @@ msgstr "Pregledaj..."
 msgid "Buffer duration"
 msgstr "Veličina bafera"
 
-#: engines/gstengine.cpp:876
+#: engines/gstengine.cpp:884
 msgid "Buffering"
 msgstr "Baferujem"
+
+#: internet/seafile/seafileservice.cpp:226
+msgid "Building Seafile index..."
+msgstr "Izgradi Seafile indeks..."
 
 #: ../bin/src/ui_globalsearchview.h:211
 msgid "But these sources are disabled:"
@@ -1043,11 +1053,11 @@ msgstr "dugmad"
 msgid "By default, Grooveshark sorts songs on date added"
 msgstr "Podrazumevano, Gruvšark ređa pesme po datumu dodavanja"
 
-#: core/song.cpp:415
+#: core/song.cpp:419
 msgid "CDDA"
 msgstr "CDDA"
 
-#: library/library.cpp:121
+#: library/library.cpp:117
 msgid "CUE sheet support"
 msgstr "Podrška za CUE list"
 
@@ -1090,7 +1100,7 @@ msgstr "Promeni veličinu fonta..."
 msgid "Change repeat mode"
 msgstr "Ponavljanje"
 
-#: ../bin/src/ui_globalshortcutssettingspage.h:189
+#: ../bin/src/ui_globalshortcutssettingspage.h:179
 msgid "Change shortcut..."
 msgstr "Izmeni prečicu..."
 
@@ -1116,7 +1126,7 @@ msgstr "Traži nove epizode"
 msgid "Check for updates"
 msgstr "Potraži nadogradnje"
 
-#: ui/mainwindow.cpp:717
+#: ui/mainwindow.cpp:733
 msgid "Check for updates..."
 msgstr "Potraži nadogradnje..."
 
@@ -1128,7 +1138,7 @@ msgstr "Izbor fascikle keša za Vk.com"
 msgid "Choose a name for your smart playlist"
 msgstr "Izaberite ime za vašu pametnu listu"
 
-#: engines/gstengine.cpp:897
+#: engines/gstengine.cpp:905
 msgid "Choose automatically"
 msgstr "Izaberi automatski"
 
@@ -1203,6 +1213,10 @@ msgid ""
 "a format that it can play."
 msgstr "Klementina može automatski da pretvori muziku koju kopirate na ovaj uređaj u format koji taj uređaj može da pusti."
 
+#: ../bin/src/ui_amazonsettingspage.h:104
+msgid "Clementine can play music that you have uploaded to Amazon Cloud Drive"
+msgstr "Klementina može da pušta muziku koju ste učitali na Amazon Cloud Drive"
+
 #: ../bin/src/ui_boxsettingspage.h:104
 msgid "Clementine can play music that you have uploaded to Box"
 msgstr "Klementina može da pušta muziku koju ste učitali na Boks"
@@ -1263,6 +1277,7 @@ msgid "Click to toggle between remaining time and total time"
 msgstr "Kliknite da promenite prikaz preostalog/ukupnog vremena"
 
 #: ../bin/src/ui_soundcloudsettingspage.h:107
+#: ../bin/src/ui_amazonsettingspage.h:106
 #: ../bin/src/ui_googledrivesettingspage.h:106
 #: ../bin/src/ui_dropboxsettingspage.h:106
 #: ../bin/src/ui_skydrivesettingspage.h:106
@@ -1305,7 +1320,7 @@ msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Zarez razdvaja listu od klasa: nivo, nivo je 0-3"
 
 #: playlist/playlist.cpp:1362 smartplaylists/searchterm.cpp:353
-#: ui/organisedialog.cpp:73 ../bin/src/ui_edittagdialog.h:697
+#: ui/organisedialog.cpp:74 ../bin/src/ui_edittagdialog.h:697
 msgid "Comment"
 msgstr "komentar"
 
@@ -1332,7 +1347,7 @@ msgstr "kompozitor"
 msgid "Configure %1..."
 msgstr "Podesi %1..."
 
-#: internet/grooveshark/groovesharkservice.cpp:565
+#: internet/grooveshark/groovesharkservice.cpp:566
 msgid "Configure Grooveshark..."
 msgstr "Podesi Gruvšark..."
 
@@ -1340,7 +1355,7 @@ msgstr "Podesi Gruvšark..."
 msgid "Configure Magnatune..."
 msgstr "Podesi Magnatjun..."
 
-#: ../bin/src/ui_globalshortcutssettingspage.h:176
+#: ../bin/src/ui_globalshortcutssettingspage.h:167
 msgid "Configure Shortcuts"
 msgstr "Postavke prečica"
 
@@ -1360,7 +1375,7 @@ msgstr "Podesi Vk.com..."
 msgid "Configure global search..."
 msgstr "Podesi opštu pretragu..."
 
-#: ui/mainwindow.cpp:567
+#: ui/mainwindow.cpp:583
 msgid "Configure library..."
 msgstr "Podesi biblioteku..."
 
@@ -1436,11 +1451,11 @@ msgid "Copy to clipboard"
 msgstr "Kopiraj na klipbord"
 
 #: library/libraryview.cpp:400 internet/podcasts/podcastservice.cpp:437
-#: ui/mainwindow.cpp:616 widgets/fileviewlist.cpp:43
+#: ui/mainwindow.cpp:632 widgets/fileviewlist.cpp:43
 msgid "Copy to device..."
 msgstr "Kopiraj na uređaj...."
 
-#: devices/deviceview.cpp:225 ui/mainwindow.cpp:606
+#: devices/deviceview.cpp:225 ui/mainwindow.cpp:622
 #: widgets/fileviewlist.cpp:38
 msgid "Copy to library..."
 msgstr "Kopiraj u biblioteku..."
@@ -1519,8 +1534,8 @@ msgstr "Omot postavljen iz %1"
 msgid "Covers from %1"
 msgstr "Omoti sa %1"
 
-#: internet/grooveshark/groovesharkservice.cpp:533
-#: internet/grooveshark/groovesharkservice.cpp:1275
+#: internet/grooveshark/groovesharkservice.cpp:534
+#: internet/grooveshark/groovesharkservice.cpp:1276
 msgid "Create a new Grooveshark playlist"
 msgstr "Napravi novu Gruvšarkovu listu numera"
 
@@ -1647,7 +1662,7 @@ msgstr "izmenjen"
 msgid "Days"
 msgstr "dana"
 
-#: ../bin/src/ui_globalshortcutssettingspage.h:187
+#: ../bin/src/ui_globalshortcutssettingspage.h:177
 msgid "De&fault"
 msgstr "Pod&razumevana"
 
@@ -1667,7 +1682,7 @@ msgstr "Smanji jačinu zvuka"
 msgid "Default background image"
 msgstr "Podrazumevana"
 
-#: engines/gstengine.cpp:922
+#: engines/gstengine.cpp:930
 #, qt-format
 msgid "Default device on %1"
 msgstr "Podrazumevani uređaj na %1"
@@ -1685,8 +1700,8 @@ msgstr "Zastoj između vizuelizacija"
 msgid "Delete"
 msgstr "Obriši"
 
-#: internet/grooveshark/groovesharkservice.cpp:536
-#: internet/grooveshark/groovesharkservice.cpp:1322
+#: internet/grooveshark/groovesharkservice.cpp:537
+#: internet/grooveshark/groovesharkservice.cpp:1323
 msgid "Delete Grooveshark playlist"
 msgstr "Obriši Gruvšarkovu listu numera"
 
@@ -1695,7 +1710,7 @@ msgid "Delete downloaded data"
 msgstr "Obriši preuzete podatke"
 
 #: devices/deviceview.cpp:404 library/libraryview.cpp:636
-#: ui/mainwindow.cpp:2191 widgets/fileview.cpp:186
+#: ui/mainwindow.cpp:2207 widgets/fileview.cpp:186
 msgid "Delete files"
 msgstr "Brisanje fajlova"
 
@@ -1703,7 +1718,7 @@ msgstr "Brisanje fajlova"
 msgid "Delete from device..."
 msgstr "Obriši sa uređaja..."
 
-#: library/libraryview.cpp:402 ui/mainwindow.cpp:618
+#: library/libraryview.cpp:402 ui/mainwindow.cpp:634
 #: widgets/fileviewlist.cpp:44
 msgid "Delete from disk..."
 msgstr "Obriši sa diska..."
@@ -1712,7 +1727,7 @@ msgstr "Obriši sa diska..."
 msgid "Delete played episodes"
 msgstr "Obriši puštene epizode"
 
-#: ui/equalizer.cpp:215 ../bin/src/ui_equalizer.h:169
+#: ui/equalizer.cpp:221 ../bin/src/ui_equalizer.h:169
 msgid "Delete preset"
 msgstr "Obriši prepostavku"
 
@@ -1728,16 +1743,16 @@ msgstr "obriši originalne fajlove"
 msgid "Deleting files"
 msgstr "Brišem fajlove"
 
-#: ui/mainwindow.cpp:1570
+#: ui/mainwindow.cpp:1586
 msgid "Dequeue selected tracks"
 msgstr "Izbaci izabrane numere iz reda"
 
-#: ui/mainwindow.cpp:1568
+#: ui/mainwindow.cpp:1584
 msgid "Dequeue track"
 msgstr "Izbaci numeru iz reda"
 
 #: ../bin/src/ui_transcodedialog.h:224 ../bin/src/ui_organisedialog.h:241
-#: ../bin/src/ui_ripcd.h:321
+#: ../bin/src/ui_ripcddialog.h:321
 msgid "Destination"
 msgstr "Odredište"
 
@@ -1765,7 +1780,7 @@ msgstr "Svojstva uređaja..."
 msgid "Devices"
 msgstr "Uređaji"
 
-#: ../bin/src/ui_ripcd.h:300 ../bin/src/ui_vksearchdialog.h:61
+#: ../bin/src/ui_ripcddialog.h:300 ../bin/src/ui_vksearchdialog.h:61
 msgid "Dialog"
 msgstr "Dijalog"
 
@@ -1812,10 +1827,10 @@ msgctxt "Refers to search provider's status."
 msgid "Disabled"
 msgstr "Onemogućen"
 
-#: playlist/playlist.cpp:1317 ui/organisedialog.cpp:69
+#: playlist/playlist.cpp:1317 ui/organisedialog.cpp:70
 #: ../bin/src/ui_groupbydialog.h:138 ../bin/src/ui_groupbydialog.h:153
 #: ../bin/src/ui_groupbydialog.h:168 ../bin/src/ui_edittagdialog.h:688
-#: ../bin/src/ui_ripcd.h:314
+#: ../bin/src/ui_ripcddialog.h:314
 msgid "Disc"
 msgstr "disk"
 
@@ -1983,7 +1998,7 @@ msgstr "Dropboks"
 msgid "Dubstep"
 msgstr "dabstep"
 
-#: ../bin/src/ui_ripcd.h:309
+#: ../bin/src/ui_ripcddialog.h:309
 msgid "Duration"
 msgstr "Trajanje"
 
@@ -1991,7 +2006,7 @@ msgstr "Trajanje"
 msgid "Dynamic mode is on"
 msgstr "Dinamički režim je uključen"
 
-#: internet/jamendo/jamendoservice.cpp:126 library/library.cpp:115
+#: internet/jamendo/jamendoservice.cpp:126 library/library.cpp:111
 msgid "Dynamic random mix"
 msgstr "Dinamički nasumični miks"
 
@@ -1999,7 +2014,7 @@ msgstr "Dinamički nasumični miks"
 msgid "Edit smart playlist..."
 msgstr "Uredi pametnu listu..."
 
-#: ui/mainwindow.cpp:1612
+#: ui/mainwindow.cpp:1628
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr "Uredi oznaku „%1“..."
@@ -2137,14 +2152,14 @@ msgstr "Isto kao i --log-levels *:1"
 msgid "Equivalent to --log-levels *:3"
 msgstr "Isto kao i --log-levels *:3"
 
-#: internet/grooveshark/groovesharkservice.cpp:1054
+#: internet/grooveshark/groovesharkservice.cpp:1055
 #: internet/magnatune/magnatunedownloaddialog.cpp:242
-#: library/libraryview.cpp:630 ui/mainwindow.cpp:1894 ui/mainwindow.cpp:2141
-#: ui/mainwindow.cpp:2289 internet/vk/vkservice.cpp:625
+#: library/libraryview.cpp:630 ui/mainwindow.cpp:1910 ui/mainwindow.cpp:2157
+#: ui/mainwindow.cpp:2305 internet/vk/vkservice.cpp:625
 msgid "Error"
 msgstr "Greška"
 
-#: ui/ripcd.cpp:295
+#: ripper/ripcddialog.cpp:135
 msgid "Error Ripping CD"
 msgstr "Greška pri čupanju CD-a"
 
@@ -2183,7 +2198,7 @@ msgstr "Greška obrade %1: %2"
 msgid "Error while loading audio CD"
 msgstr "Greška prilikom učitavanja audio CD-a"
 
-#: library/library.cpp:69
+#: library/library.cpp:68
 msgid "Ever played"
 msgstr "Već puštano"
 
@@ -2304,7 +2319,7 @@ msgstr "Utapanje"
 msgid "Fading duration"
 msgstr "Trajanje pretapanja"
 
-#: ui/mainwindow.cpp:1895
+#: ui/mainwindow.cpp:1911
 msgid "Failed reading CD drive"
 msgstr "Neuspeh čitanja CD uređaja"
 
@@ -2334,11 +2349,11 @@ msgstr "Neuspeh raščlanjivanja IksML-a za ovaj RSS dovod"
 msgid "Fast"
 msgstr "brz"
 
-#: internet/grooveshark/groovesharkservice.cpp:644
+#: internet/grooveshark/groovesharkservice.cpp:645
 msgid "Favorites"
 msgstr "Omiljene"
 
-#: library/library.cpp:91
+#: library/library.cpp:88
 msgid "Favourite tracks"
 msgstr "Omiljene numere"
 
@@ -2362,11 +2377,11 @@ msgstr "Dobavljam Subsonikovu biblioteku"
 msgid "Fetching cover error"
 msgstr "Greška dobavljanja omota"
 
-#: ../bin/src/ui_ripcd.h:320
+#: ../bin/src/ui_ripcddialog.h:320
 msgid "File Format"
 msgstr "Format fajla"
 
-#: ui/organisedialog.cpp:77
+#: ui/organisedialog.cpp:78
 msgid "File extension"
 msgstr "nastavak fajla"
 
@@ -2436,7 +2451,7 @@ msgstr "Prvi nivo"
 msgid "Fit cover to width"
 msgstr "Uklopi omot po širini"
 
-#: core/song.cpp:393 transcoder/transcoder.cpp:233
+#: core/song.cpp:397 transcoder/transcoder.cpp:233
 msgid "Flac"
 msgstr "FLAC"
 
@@ -2516,7 +2531,7 @@ msgstr "puni bas + sopran"
 msgid "Full Treble"
 msgstr "puni sopran"
 
-#: ui/settingsdialog.cpp:138
+#: ui/settingsdialog.cpp:142
 msgid "General"
 msgstr "Opšte"
 
@@ -2524,19 +2539,19 @@ msgstr "Opšte"
 msgid "General settings"
 msgstr "Opšte postavke"
 
-#: playlist/playlist.cpp:1321 ui/organisedialog.cpp:72
+#: playlist/playlist.cpp:1321 ui/organisedialog.cpp:73
 #: ../bin/src/ui_groupbydialog.h:134 ../bin/src/ui_groupbydialog.h:149
 #: ../bin/src/ui_groupbydialog.h:164 ../bin/src/ui_edittagdialog.h:695
-#: ../bin/src/ui_ripcd.h:317
+#: ../bin/src/ui_ripcddialog.h:317
 msgid "Genre"
 msgstr "žanr"
 
-#: internet/grooveshark/groovesharkservice.cpp:555
+#: internet/grooveshark/groovesharkservice.cpp:556
 msgid "Get a URL to share this Grooveshark playlist"
 msgstr "Dobavi URL za deljenje ove liste numera sa Gruvšarka"
 
-#: internet/grooveshark/groovesharkservice.cpp:552
-#: internet/grooveshark/groovesharkservice.cpp:1154
+#: internet/grooveshark/groovesharkservice.cpp:553
+#: internet/grooveshark/groovesharkservice.cpp:1155
 msgid "Get a URL to share this Grooveshark song"
 msgstr "Dobavi URL za deljenje ove pesme sa Gruvšarka"
 
@@ -2549,7 +2564,7 @@ msgstr "Dobavi URL za deljenje ove pesme sa Spotifaja"
 msgid "Get a URL to share this playlist"
 msgstr "Dobavi URL za deljenje ove liste numera"
 
-#: internet/grooveshark/groovesharkservice.cpp:829
+#: internet/grooveshark/groovesharkservice.cpp:830
 msgid "Getting Grooveshark popular songs"
 msgstr "Dobavljam popularne pesme na Gruvšarku"
 
@@ -2595,19 +2610,19 @@ msgstr "Posivi nepostojeće pesme u listi numera"
 msgid "Grooveshark"
 msgstr "Gruvšark"
 
-#: internet/grooveshark/groovesharkservice.cpp:412
+#: internet/grooveshark/groovesharkservice.cpp:413
 msgid "Grooveshark login error"
 msgstr "Greška prijave na Gruvšark"
 
-#: internet/grooveshark/groovesharkservice.cpp:1205
+#: internet/grooveshark/groovesharkservice.cpp:1206
 msgid "Grooveshark playlist's URL"
 msgstr "URL Gruvšarkove liste numera"
 
-#: internet/grooveshark/groovesharkservice.cpp:624
+#: internet/grooveshark/groovesharkservice.cpp:625
 msgid "Grooveshark radio"
 msgstr "Gruvšarkov radio"
 
-#: internet/grooveshark/groovesharkservice.cpp:1183
+#: internet/grooveshark/groovesharkservice.cpp:1184
 msgid "Grooveshark song's URL"
 msgstr "URL Gruvšarkove pesme"
 
@@ -2686,6 +2701,10 @@ msgstr "visok (%1 fps)"
 #: visualisations/visualisationcontainer.cpp:124
 msgid "High (1024x1024)"
 msgstr "visok (1024x1024)"
+
+#: ui/equalizer.cpp:128
+msgid "HipHop"
+msgstr "Hip-hop"
 
 #: internet/subsonic/subsonicsettingspage.cpp:134
 msgid "Host not found, check server URL. Example: http://localhost:4040/"
@@ -2808,7 +2827,7 @@ msgstr "Indeksiram %1"
 msgid "Information"
 msgstr "Podaci"
 
-#: ../bin/src/ui_ripcd.h:301
+#: ../bin/src/ui_ripcddialog.h:301
 msgid "Input options"
 msgstr "Opcije ulaza"
 
@@ -2828,7 +2847,7 @@ msgstr "Provera integriteta"
 msgid "Internet"
 msgstr "Internet"
 
-#: ui/settingsdialog.cpp:161
+#: ui/settingsdialog.cpp:165
 msgid "Internet providers"
 msgstr "Internet servisi"
 
@@ -2865,11 +2884,11 @@ msgstr "Neispravan servis"
 msgid "Invalid session key"
 msgstr "Nevažeći ključ sesije"
 
-#: internet/grooveshark/groovesharkservice.cpp:404
+#: internet/grooveshark/groovesharkservice.cpp:405
 msgid "Invalid username and/or password"
 msgstr "Neispravno korisničko ime i/ili lozinka"
 
-#: ../bin/src/ui_ripcd.h:312
+#: ../bin/src/ui_ripcddialog.h:312
 msgid "Invert Selection"
 msgstr "Obrni izbor"
 
@@ -2930,15 +2949,19 @@ msgctxt "Label for buton to enable/disable kittens in the now playing widget"
 msgid "Kittens"
 msgstr "Mačići"
 
+#: ui/equalizer.cpp:131
+msgid "Kuduro"
+msgstr "Kuduro"
+
 #: ../bin/src/ui_behavioursettingspage.h:263
 msgid "Language"
 msgstr "Jezik"
 
-#: ui/equalizer.cpp:127
+#: ui/equalizer.cpp:133
 msgid "Laptop/Headphones"
 msgstr "laptop/slušalice"
 
-#: ui/equalizer.cpp:129
+#: ui/equalizer.cpp:135
 msgid "Large Hall"
 msgstr "velika dvorana"
 
@@ -2958,7 +2981,7 @@ msgstr "Veliki omot albuma (bez detalja)"
 msgid "Large sidebar"
 msgstr "Široka traka"
 
-#: library/library.cpp:83
+#: library/library.cpp:80
 msgid "Last played"
 msgstr "Poslednji put puštano"
 
@@ -2995,7 +3018,7 @@ msgstr "Korisničko ime"
 msgid "Last.fm wiki"
 msgstr "Last.fm viki"
 
-#: library/library.cpp:105
+#: library/library.cpp:102
 msgid "Least favourite tracks"
 msgstr "Najmanje omiljene numere"
 
@@ -3003,7 +3026,7 @@ msgstr "Najmanje omiljene numere"
 msgid "Left"
 msgstr "Levo"
 
-#: playlist/playlist.cpp:1313 ui/organisedialog.cpp:74
+#: playlist/playlist.cpp:1313 ui/organisedialog.cpp:75
 #: ui/qtsystemtrayicon.cpp:239 ../bin/src/ui_edittagdialog.h:669
 msgid "Length"
 msgstr "dužina"
@@ -3017,7 +3040,7 @@ msgstr "Biblioteka"
 msgid "Library advanced grouping"
 msgstr "Napredno grupisanje biblioteke"
 
-#: ui/mainwindow.cpp:2413
+#: ui/mainwindow.cpp:2429
 msgid "Library rescan notice"
 msgstr "Obaveštenje o ponovnom skeniranju biblioteke"
 
@@ -3029,12 +3052,12 @@ msgstr "Pretraživanje biblioteke"
 msgid "Limits"
 msgstr "Ograničenja"
 
-#: internet/grooveshark/groovesharkservice.cpp:626
+#: internet/grooveshark/groovesharkservice.cpp:627
 msgid ""
 "Listen to Grooveshark songs based on what you've listened to previously"
 msgstr "Slušajte pesme sa Gruvšarka birane na osnovu ranije preslušanih"
 
-#: ui/equalizer.cpp:131
+#: ui/equalizer.cpp:137
 msgid "Live"
 msgstr "uživo"
 
@@ -3058,7 +3081,7 @@ msgstr "Učitavanje omota sa diska"
 msgid "Load cover from disk..."
 msgstr "Učitaj omot sa diska..."
 
-#: playlist/playlistcontainer.cpp:286
+#: playlist/playlistcontainer.cpp:291
 msgid "Load playlist"
 msgstr "Učitavanje liste numera"
 
@@ -3113,6 +3136,7 @@ msgstr "Učitava datoteke/URL-ove, zamenjujući tekuću listu"
 #: ../bin/src/ui_soundcloudsettingspage.h:106
 #: ../bin/src/ui_spotifysettingspage.h:211
 #: ../bin/src/ui_subsonicsettingspage.h:130
+#: ../bin/src/ui_amazonsettingspage.h:105
 #: ../bin/src/ui_lastfmsettingspage.h:153
 #: ../bin/src/ui_googledrivesettingspage.h:105
 #: ../bin/src/ui_dropboxsettingspage.h:105
@@ -3152,7 +3176,7 @@ msgstr "nizak (256X256)"
 msgid "Low complexity profile (LC)"
 msgstr "niska kompleksnost (LC)"
 
-#: ../bin/src/ui_songinfosettingspage.h:159
+#: ui/organisedialog.cpp:68 ../bin/src/ui_songinfosettingspage.h:159
 msgid "Lyrics"
 msgstr "Stihovi"
 
@@ -3161,11 +3185,15 @@ msgstr "Stihovi"
 msgid "Lyrics from %1"
 msgstr "Stihovi sa %1"
 
+#: songinfo/taglyricsinfoprovider.cpp:29
+msgid "Lyrics from the ID3v2 tag"
+msgstr "Stihovi iz ID3v2 oznake"
+
 #: transcoder/transcoder.cpp:235
 msgid "M4A AAC"
 msgstr "M4A AAC"
 
-#: core/song.cpp:399 transcoder/transcoder.cpp:238
+#: core/song.cpp:403 transcoder/transcoder.cpp:238
 #: ../bin/src/ui_transcodersettingspage.h:175
 msgid "MP3"
 msgstr "MP3"
@@ -3178,11 +3206,11 @@ msgstr "MP3 256k"
 msgid "MP3 96k"
 msgstr "MP3 96k"
 
-#: core/song.cpp:395
+#: core/song.cpp:399
 msgid "MP4 AAC"
 msgstr "MP4 AAC"
 
-#: core/song.cpp:397
+#: core/song.cpp:401
 msgid "MPC"
 msgstr "MPC"
 
@@ -3257,7 +3285,7 @@ msgstr "Najviše rezultata opšte pretrage"
 msgid "Maximum bitrate"
 msgstr "Najveći bitski protok"
 
-#: ui/ripcd.cpp:296
+#: ripper/ripcddialog.cpp:136
 msgid "Media has changed. Reloading"
 msgstr "Medij je promenjen. Učitavam ponovo"
 
@@ -3320,7 +3348,7 @@ msgstr "Raspoloženja"
 msgid "More"
 msgstr "Još"
 
-#: library/library.cpp:87
+#: library/library.cpp:84
 msgid "Most played"
 msgstr "Najčešće puštano"
 
@@ -3337,7 +3365,7 @@ msgstr "Tačke montiranja"
 msgid "Move down"
 msgstr "Pomeri dole"
 
-#: ui/mainwindow.cpp:609 widgets/fileviewlist.cpp:40
+#: ui/mainwindow.cpp:625 widgets/fileviewlist.cpp:40
 msgid "Move to library..."
 msgstr "Premesti u biblioteku"
 
@@ -3346,7 +3374,7 @@ msgstr "Premesti u biblioteku"
 msgid "Move up"
 msgstr "Pomeri gore"
 
-#: transcoder/transcodedialog.cpp:219 ui/mainwindow.cpp:1829
+#: transcoder/transcodedialog.cpp:225 ui/mainwindow.cpp:1845
 #: internet/vk/vkservice.cpp:884
 msgid "Music"
 msgstr "Muzika"
@@ -3364,7 +3392,7 @@ msgstr "Utišaj"
 msgid "My Albums"
 msgstr "Moji albumi"
 
-#: internet/grooveshark/groovesharkservice.cpp:633
+#: internet/grooveshark/groovesharkservice.cpp:634
 #: internet/vk/vkservice.cpp:878
 msgid "My Music"
 msgstr "Moja muzika"
@@ -3373,8 +3401,8 @@ msgstr "Moja muzika"
 msgid "My Recommendations"
 msgstr "Moje preporuke"
 
-#: internet/grooveshark/groovesharkservice.cpp:1276
-#: internet/grooveshark/groovesharkservice.cpp:1371 ui/equalizer.cpp:199
+#: internet/grooveshark/groovesharkservice.cpp:1277
+#: internet/grooveshark/groovesharkservice.cpp:1372 ui/equalizer.cpp:205
 #: ../bin/src/ui_deviceproperties.h:369 ../bin/src/ui_wizardfinishpage.h:84
 msgid "Name"
 msgstr "Ime"
@@ -3404,7 +3432,7 @@ msgstr "Mrežni daljinski"
 msgid "Never"
 msgstr "Nikad"
 
-#: library/library.cpp:76
+#: library/library.cpp:74
 msgid "Never played"
 msgstr "Nikad puštano"
 
@@ -3419,7 +3447,7 @@ msgstr "neće početi puštanje"
 msgid "New folder"
 msgstr "Nova fascikla"
 
-#: ui/mainwindow.cpp:1666 ../bin/src/ui_mainwindow.h:691
+#: ui/mainwindow.cpp:1682 ../bin/src/ui_mainwindow.h:691
 msgid "New playlist"
 msgstr "Nova lista numera"
 
@@ -3435,7 +3463,7 @@ msgstr "Nove pesme"
 msgid "New tracks will be added automatically."
 msgstr "Nove numere će biti automatski dodate."
 
-#: library/library.cpp:95
+#: library/library.cpp:92
 msgid "Newest tracks"
 msgstr "Najnovije numere"
 
@@ -3468,7 +3496,7 @@ msgstr "Nema omota za izvoz."
 msgid "No long blocks"
 msgstr "bez dugih blokova"
 
-#: playlist/playlistcontainer.cpp:371
+#: playlist/playlistcontainer.cpp:376
 msgid ""
 "No matches found.  Clear the search box to show the whole playlist again."
 msgstr "Nema poklapanja.  Očistite polje pretrage da biste prikazali celu listu ponovo."
@@ -3482,7 +3510,7 @@ msgstr "bez kratkih blokova"
 msgid "None"
 msgstr "ništa"
 
-#: library/libraryview.cpp:631 ui/mainwindow.cpp:2142 ui/mainwindow.cpp:2290
+#: library/libraryview.cpp:631 ui/mainwindow.cpp:2158 ui/mainwindow.cpp:2306
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Nijedna od izabranih pesama nije pogodna za kopiranje na uređaj"
 
@@ -3559,19 +3587,19 @@ msgstr "OSD pregled"
 msgid "Off"
 msgstr "isključeno"
 
-#: core/song.cpp:401 transcoder/transcoder.cpp:244
+#: core/song.cpp:405 transcoder/transcoder.cpp:244
 msgid "Ogg Flac"
 msgstr "OGG FLAC"
 
-#: core/song.cpp:407 transcoder/transcoder.cpp:250
+#: core/song.cpp:411 transcoder/transcoder.cpp:250
 msgid "Ogg Opus"
 msgstr "OGG Opus"
 
-#: core/song.cpp:403 transcoder/transcoder.cpp:247
+#: core/song.cpp:407 transcoder/transcoder.cpp:247
 msgid "Ogg Speex"
 msgstr "OGG Speex"
 
-#: core/song.cpp:405 transcoder/transcoder.cpp:241
+#: core/song.cpp:409 transcoder/transcoder.cpp:241
 #: ../bin/src/ui_magnatunedownloaddialog.h:139
 #: ../bin/src/ui_magnatunesettingspage.h:170
 msgid "Ogg Vorbis"
@@ -3606,7 +3634,7 @@ msgid "Opacity"
 msgstr "Prozirnost"
 
 #: internet/digitally/digitallyimportedservicebase.cpp:176
-#: internet/grooveshark/groovesharkservice.cpp:559
+#: internet/grooveshark/groovesharkservice.cpp:560
 #: internet/icecast/icecastservice.cpp:302
 #: internet/jamendo/jamendoservice.cpp:434
 #: internet/magnatune/magnatuneservice.cpp:284
@@ -3628,7 +3656,7 @@ msgstr "Otvaranje OPML fajla"
 msgid "Open OPML file..."
 msgstr "Otvori OPML fajl..."
 
-#: transcoder/transcodedialog.cpp:234
+#: transcoder/transcodedialog.cpp:240
 msgid "Open a directory to import music from"
 msgstr "Otvaranje fascikle za uvoz muzike"
 
@@ -3659,8 +3687,8 @@ msgstr "otvori u novoj listi"
 msgid "Open in your browser"
 msgstr "Otvori u pregledaču"
 
-#: ../bin/src/ui_globalshortcutssettingspage.h:178
-#: ../bin/src/ui_globalshortcutssettingspage.h:181
+#: ../bin/src/ui_globalshortcutssettingspage.h:169
+#: ../bin/src/ui_globalshortcutssettingspage.h:171
 msgid "Open..."
 msgstr "Otvori..."
 
@@ -3677,7 +3705,8 @@ msgid "Optimize for quality"
 msgstr "Optimizuj kvalitet"
 
 #: ../bin/src/ui_transcodedialog.h:223
-#: ../bin/src/ui_networkremotesettingspage.h:252 ../bin/src/ui_ripcd.h:322
+#: ../bin/src/ui_networkremotesettingspage.h:252
+#: ../bin/src/ui_ripcddialog.h:322
 msgid "Options..."
 msgstr "Opcije..."
 
@@ -3689,7 +3718,7 @@ msgstr "Opus"
 msgid "Organise Files"
 msgstr "Organizovanje fajlova"
 
-#: library/libraryview.cpp:396 ui/mainwindow.cpp:612
+#: library/libraryview.cpp:396 ui/mainwindow.cpp:628
 msgid "Organise files..."
 msgstr "Organizuj fajlove..."
 
@@ -3713,7 +3742,7 @@ msgstr "Izlaz"
 msgid "Output device"
 msgstr "Uređaj izlaza"
 
-#: ../bin/src/ui_transcodedialog.h:221 ../bin/src/ui_ripcd.h:318
+#: ../bin/src/ui_transcodedialog.h:221 ../bin/src/ui_ripcddialog.h:318
 msgid "Output options"
 msgstr "Opcije izlaza"
 
@@ -3737,7 +3766,7 @@ msgstr "Vlasnik"
 msgid "Parsing Jamendo catalogue"
 msgstr "Raščlanjujem Džamendov katalog"
 
-#: ui/equalizer.cpp:133
+#: ui/equalizer.cpp:139
 msgid "Party"
 msgstr "žurka"
 
@@ -3751,7 +3780,7 @@ msgstr "žurka"
 msgid "Password"
 msgstr "Lozinka"
 
-#: core/globalshortcuts.cpp:50 ui/mainwindow.cpp:1028 ui/mainwindow.cpp:1479
+#: core/globalshortcuts.cpp:50 ui/mainwindow.cpp:1044 ui/mainwindow.cpp:1495
 #: ui/qtsystemtrayicon.cpp:175 wiimotedev/wiimotesettingspage.cpp:107
 msgid "Pause"
 msgstr "Pauziraj"
@@ -3777,8 +3806,8 @@ msgstr "piksela"
 msgid "Plain sidebar"
 msgstr "Obična traka"
 
-#: core/globalshortcuts.cpp:49 ui/mainwindow.cpp:584 ui/mainwindow.cpp:996
-#: ui/mainwindow.cpp:1014 ui/mainwindow.cpp:1482 ui/qtsystemtrayicon.cpp:164
+#: core/globalshortcuts.cpp:49 ui/mainwindow.cpp:600 ui/mainwindow.cpp:1012
+#: ui/mainwindow.cpp:1030 ui/mainwindow.cpp:1498 ui/qtsystemtrayicon.cpp:164
 #: ui/qtsystemtrayicon.cpp:188 ../bin/src/ui_mainwindow.h:642
 #: wiimotedev/wiimotesettingspage.cpp:100
 msgid "Play"
@@ -3813,7 +3842,7 @@ msgstr "Puštanje"
 msgid "Player options"
 msgstr "Opcije plejera"
 
-#: playlist/playlistcontainer.cpp:282 playlist/playlistlistcontainer.cpp:228
+#: playlist/playlistcontainer.cpp:287 playlist/playlistlistcontainer.cpp:228
 #: playlist/playlistmanager.cpp:87 playlist/playlistmanager.cpp:156
 #: playlist/playlistmanager.cpp:494 playlist/playlisttabbar.cpp:366
 msgid "Playlist"
@@ -3832,7 +3861,7 @@ msgstr "Opcije liste numera"
 msgid "Playlist type"
 msgstr "Tip liste"
 
-#: internet/grooveshark/groovesharkservice.cpp:654
+#: internet/grooveshark/groovesharkservice.cpp:655
 #: internet/soundcloud/soundcloudservice.cpp:130 ui/mainwindow.cpp:241
 msgid "Playlists"
 msgstr "Liste numera"
@@ -3850,19 +3879,19 @@ msgstr "Stanje priključka:"
 msgid "Podcasts"
 msgstr "Podkasti"
 
-#: ui/equalizer.cpp:135
+#: ui/equalizer.cpp:141
 msgid "Pop"
 msgstr "pop"
 
-#: internet/grooveshark/groovesharkservice.cpp:591
+#: internet/grooveshark/groovesharkservice.cpp:592
 msgid "Popular songs"
 msgstr "Popularne pesme"
 
-#: internet/grooveshark/groovesharkservice.cpp:595
+#: internet/grooveshark/groovesharkservice.cpp:596
 msgid "Popular songs of the Month"
 msgstr "Popularne pesme meseca"
 
-#: internet/grooveshark/groovesharkservice.cpp:604
+#: internet/grooveshark/groovesharkservice.cpp:605
 msgid "Popular songs today"
 msgstr "Popularne pesme danas"
 
@@ -3963,7 +3992,7 @@ msgstr "Prikaži podatke o izdanju"
 msgid "Profile"
 msgstr "Profil"
 
-#: ../bin/src/ui_transcodedialog.h:230 ../bin/src/ui_ripcd.h:324
+#: ../bin/src/ui_transcodedialog.h:230 ../bin/src/ui_ripcddialog.h:324
 msgid "Progress"
 msgstr "Napredak"
 
@@ -3972,7 +4001,7 @@ msgctxt "Category label"
 msgid "Progress"
 msgstr "napredak"
 
-#: ui/equalizer.cpp:138
+#: ui/equalizer.cpp:144
 msgid "Psychedelic"
 msgstr "psihodelično"
 
@@ -4006,12 +4035,12 @@ msgstr "Ispitujem uređaj..."
 msgid "Queue Manager"
 msgstr "Menadžer redosleda"
 
-#: ui/mainwindow.cpp:1574
+#: ui/mainwindow.cpp:1590
 msgid "Queue selected tracks"
 msgstr "Stavi u red izabrane numere"
 
 #: globalsearch/globalsearchview.cpp:465 library/libraryview.cpp:380
-#: ui/mainwindow.cpp:1572
+#: ui/mainwindow.cpp:1588
 msgid "Queue track"
 msgstr "Stavi numeru u red"
 
@@ -4019,7 +4048,7 @@ msgstr "Stavi numeru u red"
 msgid "Radio (equal loudness for all tracks)"
 msgstr "radio (jednaka jačina za sve pesme)"
 
-#: internet/grooveshark/groovesharkservice.cpp:613
+#: internet/grooveshark/groovesharkservice.cpp:614
 msgid "Radios"
 msgstr "Radio"
 
@@ -4073,7 +4102,7 @@ msgstr "Zaista odustajete?"
 msgid "Redirect limit exceeded, verify server configuration."
 msgstr "Pređeno ograničenje preusmeravanja, proverite postavke servera."
 
-#: internet/grooveshark/groovesharkservice.cpp:561
+#: internet/grooveshark/groovesharkservice.cpp:562
 msgid "Refresh"
 msgstr "Osveži"
 
@@ -4095,7 +4124,7 @@ msgstr "Osveži spisak stanica"
 msgid "Refresh streams"
 msgstr "Osveži tokove"
 
-#: ui/equalizer.cpp:140
+#: ui/equalizer.cpp:146
 msgid "Reggae"
 msgstr "rege"
 
@@ -4133,7 +4162,7 @@ msgstr "Ukloni duplikate sa liste"
 msgid "Remove folder"
 msgstr "Ukloni fasciklu"
 
-#: internet/grooveshark/groovesharkservice.cpp:549
+#: internet/grooveshark/groovesharkservice.cpp:550
 #: internet/vk/vkservice.cpp:316
 msgid "Remove from My Music"
 msgstr "Ukloni iz Moje muzike"
@@ -4142,11 +4171,11 @@ msgstr "Ukloni iz Moje muzike"
 msgid "Remove from bookmarks"
 msgstr "Ukloni iz obeleživača"
 
-#: internet/grooveshark/groovesharkservice.cpp:546
+#: internet/grooveshark/groovesharkservice.cpp:547
 msgid "Remove from favorites"
 msgstr "Ukloni iz omiljenih"
 
-#: internet/grooveshark/groovesharkservice.cpp:543
+#: internet/grooveshark/groovesharkservice.cpp:544
 #: internet/spotify/spotifyservice.cpp:672 ../bin/src/ui_mainwindow.h:685
 msgid "Remove from playlist"
 msgstr "Ukloni sa liste numera"
@@ -4163,20 +4192,20 @@ msgstr "Ukloni liste numera"
 msgid "Remove unavailable tracks from playlist"
 msgstr "Ukloni nedostupne numere sa liste numera"
 
-#: internet/grooveshark/groovesharkservice.cpp:1570
+#: internet/grooveshark/groovesharkservice.cpp:1571
 msgid "Removing songs from My Music"
 msgstr "Uklanjam pesme iz Moje muzike"
 
-#: internet/grooveshark/groovesharkservice.cpp:1518
+#: internet/grooveshark/groovesharkservice.cpp:1519
 msgid "Removing songs from favorites"
 msgstr "Uklanjam pesme iz omiljenih"
 
-#: internet/grooveshark/groovesharkservice.cpp:1370
+#: internet/grooveshark/groovesharkservice.cpp:1371
 #, qt-format
 msgid "Rename \"%1\" playlist"
 msgstr "Preimenovanje „%1“ liste"
 
-#: internet/grooveshark/groovesharkservice.cpp:539
+#: internet/grooveshark/groovesharkservice.cpp:540
 msgid "Rename Grooveshark playlist"
 msgstr "Preimenuj Gruvšarkovu listu numera"
 
@@ -4263,15 +4292,15 @@ msgstr "Ograniči se na ASKI znakove"
 msgid "Resume playback on start"
 msgstr "Nastavi puštanje po pokretanju"
 
-#: internet/grooveshark/groovesharkservice.cpp:795
+#: internet/grooveshark/groovesharkservice.cpp:796
 msgid "Retrieving Grooveshark My Music songs"
 msgstr "Dobavljam pesme iz Gruvšarkove Moje muzike"
 
-#: internet/grooveshark/groovesharkservice.cpp:762
+#: internet/grooveshark/groovesharkservice.cpp:763
 msgid "Retrieving Grooveshark favorites songs"
 msgstr "Dobavljam Gruvšarkove omiljene pesme"
 
-#: internet/grooveshark/groovesharkservice.cpp:693
+#: internet/grooveshark/groovesharkservice.cpp:694
 msgid "Retrieving Grooveshark playlists"
 msgstr "Dobavljam Gruvšarkove liste numera"
 
@@ -4283,19 +4312,19 @@ msgstr "Vratite se na Klementinu"
 msgid "Right"
 msgstr "Desno"
 
-#: ../bin/src/ui_ripcd.h:303
+#: ../bin/src/ui_ripcddialog.h:303
 msgid "Rip"
 msgstr "čupaj"
 
-#: ui/ripcd.cpp:114
+#: ripper/ripcddialog.cpp:95
 msgid "Rip CD"
 msgstr "Čupanje CD-a"
 
 #: ../bin/src/ui_mainwindow.h:716
-msgid "Rip audio CD..."
-msgstr "Čupaj audio CD..."
+msgid "Rip audio CD"
+msgstr "Čupaj audio CD"
 
-#: ui/equalizer.cpp:142
+#: ui/equalizer.cpp:148
 msgid "Rock"
 msgstr "rok"
 
@@ -4325,7 +4354,7 @@ msgstr "Bezbedno izvadi uređaj posle kopiranja"
 msgid "Sample rate"
 msgstr "uzorkovanje"
 
-#: ui/organisedialog.cpp:76
+#: ui/organisedialog.cpp:77
 msgid "Samplerate"
 msgstr "uzorkovanje"
 
@@ -4359,7 +4388,7 @@ msgstr "Upis liste numera"
 msgid "Save playlist..."
 msgstr "Sačuvaj listu numera..."
 
-#: ui/equalizer.cpp:199 ../bin/src/ui_equalizer.h:166
+#: ui/equalizer.cpp:205 ../bin/src/ui_equalizer.h:166
 msgid "Save preset"
 msgstr "Sačuvaj prepostavku"
 
@@ -4375,7 +4404,7 @@ msgstr "Upiši statistiku pesme u oznake kad je to moguće"
 msgid "Save this stream in the Internet tab"
 msgstr "Sačuvaj ovaj tok u internet jezičku"
 
-#: library/library.cpp:196
+#: library/library.cpp:193
 msgid "Saving songs statistics into songs files"
 msgstr "Upisujem statistike pesama u fajlove pesama"
 
@@ -4458,7 +4487,7 @@ msgstr "Režim pretrage"
 msgid "Search options"
 msgstr "Opcije pretrage"
 
-#: internet/grooveshark/groovesharkservice.cpp:582
+#: internet/grooveshark/groovesharkservice.cpp:583
 #: internet/soundcloud/soundcloudservice.cpp:116
 #: internet/spotify/spotifyservice.cpp:406
 msgid "Search results"
@@ -4493,11 +4522,11 @@ msgstr "Idi na položaj tekuće numere za relativni iznos"
 msgid "Seek the currently playing track to an absolute position"
 msgstr "Idi na položaj tekuće numere za apsolutni iznos"
 
-#: visualisations/visualisationselector.cpp:37 ../bin/src/ui_ripcd.h:310
+#: visualisations/visualisationselector.cpp:37 ../bin/src/ui_ripcddialog.h:310
 msgid "Select All"
 msgstr "Izaberi sve"
 
-#: visualisations/visualisationselector.cpp:38 ../bin/src/ui_ripcd.h:311
+#: visualisations/visualisationselector.cpp:38 ../bin/src/ui_ripcddialog.h:311
 msgid "Select None"
 msgstr "Očisti izbor"
 
@@ -4525,7 +4554,7 @@ msgstr "Izbor vizuelizacija"
 msgid "Select visualizations..."
 msgstr "Izaberi vizuelizacije..."
 
-#: ../bin/src/ui_transcodedialog.h:229 ../bin/src/ui_ripcd.h:319
+#: ../bin/src/ui_transcodedialog.h:229 ../bin/src/ui_ripcddialog.h:319
 msgid "Select..."
 msgstr "Izaberi..."
 
@@ -4549,7 +4578,7 @@ msgstr "Detalji servera"
 msgid "Service offline"
 msgstr "Servis van mreže"
 
-#: ui/mainwindow.cpp:1611
+#: ui/mainwindow.cpp:1627
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr "Promeni %1 u „%2“..."
@@ -4566,12 +4595,12 @@ msgstr "Podesi vrednost za sve izabrane numere..."
 msgid "Settings"
 msgstr "Podešavanja"
 
-#: ../bin/src/ui_globalshortcutssettingspage.h:183
+#: ../bin/src/ui_globalshortcutssettingspage.h:173
 msgid "Shortcut"
 msgstr "prečica"
 
-#: ui/globalshortcutssettingspage.cpp:144
-#: ../bin/src/ui_globalshortcutssettingspage.h:185
+#: ui/globalshortcutssettingspage.cpp:130
+#: ../bin/src/ui_globalshortcutssettingspage.h:175
 #, qt-format
 msgid "Shortcut for %1"
 msgstr "Prečica za %1"
@@ -4625,7 +4654,7 @@ msgstr "Lepi OSD"
 msgid "Show above status bar"
 msgstr "Prikaži iznad trake stanja"
 
-#: ui/mainwindow.cpp:552
+#: ui/mainwindow.cpp:568
 msgid "Show all songs"
 msgstr "Prikaži sve pesme"
 
@@ -4649,12 +4678,12 @@ msgstr "Puna veličina..."
 msgid "Show groups in global search result"
 msgstr "Prikaži grupe u rezultatu opšte pretrage"
 
-#: library/libraryview.cpp:413 ui/mainwindow.cpp:621
+#: library/libraryview.cpp:413 ui/mainwindow.cpp:637
 #: widgets/fileviewlist.cpp:51
 msgid "Show in file browser..."
 msgstr "Prikaži u menadžeru fajlova"
 
-#: ui/mainwindow.cpp:624
+#: ui/mainwindow.cpp:640
 msgid "Show in library..."
 msgstr "Prikaži u biblioteci..."
 
@@ -4666,11 +4695,11 @@ msgstr "Prikazuj u raznim izvođačima"
 msgid "Show moodbar"
 msgstr "Prikaži raspoloženje"
 
-#: ui/mainwindow.cpp:554
+#: ui/mainwindow.cpp:570
 msgid "Show only duplicates"
 msgstr "Prikaži samo duplikate"
 
-#: ui/mainwindow.cpp:556
+#: ui/mainwindow.cpp:572
 msgid "Show only untagged"
 msgstr "Prikaži samo neoznačene"
 
@@ -4746,7 +4775,7 @@ msgstr "Veličina"
 msgid "Size:"
 msgstr "Veličina:"
 
-#: ui/equalizer.cpp:146
+#: ui/equalizer.cpp:152
 msgid "Ska"
 msgstr "ska"
 
@@ -4762,11 +4791,11 @@ msgstr "broj preskakanja"
 msgid "Skip forwards in playlist"
 msgstr "Preskoči unapred u listi numera"
 
-#: ui/mainwindow.cpp:1585
+#: ui/mainwindow.cpp:1601
 msgid "Skip selected tracks"
 msgstr "Preskoči izabrane numere"
 
-#: ui/mainwindow.cpp:1583
+#: ui/mainwindow.cpp:1599
 msgid "Skip track"
 msgstr "Preskoči numeru"
 
@@ -4786,11 +4815,11 @@ msgstr "Pametna lista"
 msgid "Smart playlists"
 msgstr "Pametne liste"
 
-#: ui/equalizer.cpp:144
+#: ui/equalizer.cpp:150
 msgid "Soft"
 msgstr "lagana"
 
-#: ui/equalizer.cpp:148
+#: ui/equalizer.cpp:154
 msgid "Soft Rock"
 msgstr "lagani rok"
 
@@ -4883,7 +4912,7 @@ msgstr "standardan"
 msgid "Starred"
 msgstr "Sa zvezdicom"
 
-#: ui/ripcd.cpp:86
+#: ripper/ripcddialog.cpp:69
 msgid "Start ripping"
 msgstr "Počni čupanje"
 
@@ -4891,11 +4920,11 @@ msgstr "Počni čupanje"
 msgid "Start the playlist currently playing"
 msgstr "Pusti tekuću listu numera"
 
-#: transcoder/transcodedialog.cpp:89
+#: transcoder/transcodedialog.cpp:90
 msgid "Start transcoding"
 msgstr "Počni prekodiranje"
 
-#: internet/grooveshark/groovesharkservice.cpp:584
+#: internet/grooveshark/groovesharkservice.cpp:585
 #: internet/soundcloud/soundcloudservice.cpp:118
 #: internet/spotify/spotifyservice.cpp:408
 msgid ""
@@ -4912,7 +4941,7 @@ msgstr "Počinjem %1"
 msgid "Starting..."
 msgstr "Počinjem..."
 
-#: internet/grooveshark/groovesharkservice.cpp:617
+#: internet/grooveshark/groovesharkservice.cpp:618
 msgid "Stations"
 msgstr "Stanice"
 
@@ -4925,7 +4954,7 @@ msgstr "Zaustavi"
 msgid "Stop after"
 msgstr "Zaustavi posle"
 
-#: ui/mainwindow.cpp:587 ../bin/src/ui_mainwindow.h:650
+#: ui/mainwindow.cpp:603 ../bin/src/ui_mainwindow.h:650
 msgid "Stop after this track"
 msgstr "Zaustavi posle ove numere"
 
@@ -4946,7 +4975,7 @@ msgstr "Zaustavi puštanje posle numere: %1"
 msgid "Stopped"
 msgstr "Zaustavljeno"
 
-#: core/song.cpp:418
+#: core/song.cpp:422
 msgid "Stream"
 msgstr "Tok"
 
@@ -4960,7 +4989,7 @@ msgstr "Puštanje toka sa Subsonikovog servera zahteva važeću licencu servera 
 msgid "Streaming membership"
 msgstr "strimovanje sadržaja"
 
-#: internet/grooveshark/groovesharkservice.cpp:658
+#: internet/grooveshark/groovesharkservice.cpp:659
 msgid "Subscribed playlists"
 msgstr "Pretplaćene liste numera"
 
@@ -5037,7 +5066,7 @@ msgstr "Dobavljač oznaka"
 msgid "Target bitrate"
 msgstr "Ciljani bitski protok"
 
-#: ui/equalizer.cpp:150
+#: ui/equalizer.cpp:156
 msgid "Techno"
 msgstr "tehno"
 
@@ -5049,7 +5078,7 @@ msgstr "Opcije teksta"
 msgid "Thanks to"
 msgstr "Zahvalnice"
 
-#: ui/globalshortcutssettingspage.cpp:184
+#: ui/globalshortcutssettingspage.cpp:170
 #, qt-format
 msgid "The \"%1\" command could not be started."
 msgstr "Naredbe „%1“ se ne mogu pokrenuti."
@@ -5081,7 +5110,7 @@ msgid ""
 "license key. Visit subsonic.org for details."
 msgstr "Probni period za Subsonikov server je istekao. Donirajte da biste dobili licencni ključ. Posetite subsonic.org za više detalja."
 
-#: ui/mainwindow.cpp:2404
+#: ui/mainwindow.cpp:2420
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -5123,7 +5152,7 @@ msgid ""
 "continue?"
 msgstr "Ovi fajlovi će biti obrisani sa uređaja, želite li zaista da nastavite?"
 
-#: library/libraryview.cpp:637 ui/mainwindow.cpp:2192 widgets/fileview.cpp:187
+#: library/libraryview.cpp:637 ui/mainwindow.cpp:2208 widgets/fileview.cpp:187
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -5202,11 +5231,11 @@ msgstr "Ovaj tip uređaja nije podržan: %1"
 #: playlist/playlist.cpp:1307 ui/organisedialog.cpp:60
 #: ui/qtsystemtrayicon.cpp:232 ../bin/src/ui_about.h:142
 #: ../bin/src/ui_edittagdialog.h:685 ../bin/src/ui_trackselectiondialog.h:211
-#: ../bin/src/ui_ripcd.h:307
+#: ../bin/src/ui_ripcddialog.h:307
 msgid "Title"
 msgstr "naslov"
 
-#: internet/grooveshark/groovesharkservice.cpp:1055
+#: internet/grooveshark/groovesharkservice.cpp:1056
 msgid ""
 "To start Grooveshark radio, you should first listen to a few other "
 "Grooveshark songs"
@@ -5224,7 +5253,7 @@ msgstr "Lepi OSD"
 msgid "Toggle fullscreen"
 msgstr "Ceo ekran"
 
-#: ui/mainwindow.cpp:1576
+#: ui/mainwindow.cpp:1592
 msgid "Toggle queue status"
 msgstr "Menjaj stanje redosleda"
 
@@ -5260,9 +5289,9 @@ msgstr "Ukupno bajtova prebačeno"
 msgid "Total network requests made"
 msgstr "Ukupno napravljenih mrežnih zahteva"
 
-#: playlist/playlist.cpp:1315 ui/organisedialog.cpp:68
+#: playlist/playlist.cpp:1315 ui/organisedialog.cpp:69
 #: ../bin/src/ui_edittagdialog.h:686 ../bin/src/ui_trackselectiondialog.h:213
-#: ../bin/src/ui_ripcd.h:305
+#: ../bin/src/ui_ripcddialog.h:305
 msgid "Track"
 msgstr "numera"
 
@@ -5291,7 +5320,7 @@ msgstr "Prekodiram %1 fajlova koristeći %2 niski"
 msgid "Transcoding options"
 msgstr "Opcije prekodiranja"
 
-#: core/song.cpp:413
+#: core/song.cpp:417
 msgid "TrueAudio"
 msgstr "TrueAudio"
 
@@ -5325,7 +5354,7 @@ msgstr "Ne mogu da se povežem"
 msgid "Unable to download %1 (%2)"
 msgstr "Ne mogu da preuzmem %1 (%2)"
 
-#: core/song.cpp:422 library/librarymodel.cpp:350 library/librarymodel.cpp:354
+#: core/song.cpp:426 library/librarymodel.cpp:350 library/librarymodel.cpp:354
 #: library/librarymodel.cpp:358 library/librarymodel.cpp:1066
 #: playlist/playlistdelegates.cpp:306 playlist/playlistmanager.cpp:501
 #: playlist/playlistmanager.cpp:502 ui/albumcoverchoicecontroller.cpp:124
@@ -5346,11 +5375,11 @@ msgstr "Nepoznata greška"
 msgid "Unset cover"
 msgstr "Ukloni omot"
 
-#: ui/mainwindow.cpp:1581
+#: ui/mainwindow.cpp:1597
 msgid "Unskip selected tracks"
 msgstr "Ukloni preskakanje numera"
 
-#: ui/mainwindow.cpp:1579
+#: ui/mainwindow.cpp:1595
 msgid "Unskip track"
 msgstr "Ukloni preskakanje"
 
@@ -5367,7 +5396,7 @@ msgstr "Predstojeći koncerti"
 msgid "Update"
 msgstr "Ažuriraj"
 
-#: internet/grooveshark/groovesharkservice.cpp:1227
+#: internet/grooveshark/groovesharkservice.cpp:1228
 msgid "Update Grooveshark playlist"
 msgstr "Ažuriraj Gruvšarkovu listu numera"
 
@@ -5391,7 +5420,7 @@ msgstr "Ažuriraj ovaj podkast"
 msgid "Updating"
 msgstr "Ažuriranje"
 
-#: library/librarywatcher.cpp:94
+#: library/librarywatcher.cpp:92
 #, qt-format
 msgid "Updating %1"
 msgstr "Ažuriram %1"
@@ -5401,7 +5430,7 @@ msgstr "Ažuriram %1"
 msgid "Updating %1%..."
 msgstr "Ažuriram %1%..."
 
-#: library/librarywatcher.cpp:92
+#: library/librarywatcher.cpp:90
 msgid "Updating library"
 msgstr "Ažuriranje biblioteke"
 
@@ -5413,7 +5442,7 @@ msgstr "Upotreba"
 msgid "Use Album Artist tag when available"
 msgstr "Koristi oznaku izvođača albuma ako je dostupna"
 
-#: ../bin/src/ui_globalshortcutssettingspage.h:177
+#: ../bin/src/ui_globalshortcutssettingspage.h:168
 msgid "Use Gnome's shortcut keys"
 msgstr "Koristi Gnomove prečice"
 
@@ -5481,12 +5510,12 @@ msgstr "Normalizacija jačine zvuka"
 msgid "Used"
 msgstr "Iskorišćeno"
 
-#: internet/grooveshark/groovesharkservice.cpp:407
+#: internet/grooveshark/groovesharkservice.cpp:408
 #, qt-format
 msgid "User %1 doesn't have a Grooveshark Anywhere account"
 msgstr "Korisnik %1 nema Gruvšarkov Bilokud nalog"
 
-#: ui/settingsdialog.cpp:152
+#: ui/settingsdialog.cpp:156
 msgid "User interface"
 msgstr "Korisničko sučelje"
 
@@ -5572,7 +5601,7 @@ msgstr "Zid"
 msgid "Warn me when closing a playlist tab"
 msgstr "Upozori me prilikom zatvaranja jezička liste numera"
 
-#: core/song.cpp:411 transcoder/transcoder.cpp:256
+#: core/song.cpp:415 transcoder/transcoder.cpp:256
 msgid "Wav"
 msgstr "VAV"
 
@@ -5656,7 +5685,7 @@ msgstr "Vindouz medija 40k"
 msgid "Windows Media 64k"
 msgstr "Vindouz medija 64k"
 
-#: core/song.cpp:391 transcoder/transcoder.cpp:253
+#: core/song.cpp:395 transcoder/transcoder.cpp:253
 msgid "Windows Media audio"
 msgstr "Vindouz medija audio"
 
@@ -5670,7 +5699,7 @@ msgid ""
 "well?"
 msgstr "Želite li da pomerite i ostale pesme iz ovog albuma u razne izvođače takođe?"
 
-#: ui/mainwindow.cpp:2411
+#: ui/mainwindow.cpp:2427
 msgid "Would you like to run a full rescan right now?"
 msgstr "Želite li sada da pokrenete potpuno skeniranje?"
 
@@ -5686,10 +5715,10 @@ msgstr "Upisuj metapodatke"
 msgid "Wrong username or password."
 msgstr "Pogrešno korisničko ime ili lozinka."
 
-#: playlist/playlist.cpp:1319 ui/organisedialog.cpp:71
+#: playlist/playlist.cpp:1319 ui/organisedialog.cpp:72
 #: ../bin/src/ui_groupbydialog.h:135 ../bin/src/ui_groupbydialog.h:150
 #: ../bin/src/ui_groupbydialog.h:165 ../bin/src/ui_edittagdialog.h:690
-#: ../bin/src/ui_trackselectiondialog.h:212 ../bin/src/ui_ripcd.h:313
+#: ../bin/src/ui_trackselectiondialog.h:212 ../bin/src/ui_ripcddialog.h:313
 msgid "Year"
 msgstr "godina"
 
@@ -5795,19 +5824,12 @@ msgstr "Odjavljeni ste sa Spotifaja, unesite vašu lozinku ponovo."
 msgid "You love this track"
 msgstr "Volite ovu numeru"
 
-#: ../bin/src/ui_globalshortcutssettingspage.h:180
+#: ../bin/src/ui_globalshortcutssettingspage.h:170
 msgid ""
 "You need to launch System Preferences and allow Clementine to \"<span style"
 "=\"font-style:italic\">control your computer</span>\" to use global "
 "shortcuts in Clementine."
 msgstr "Morate da pokrenete podešavanje sistema i dozvolite Klementini da „<span style=\"font-style:italic\">upravlja vašim računarom</span>“ da biste koristili opšte prečice u Klementini."
-
-#: ../bin/src/ui_globalshortcutssettingspage.h:179
-msgid ""
-"You need to launch System Preferences and turn on \"<span style=\" font-"
-"style:italic;\">Enable access for assistive devices</span>\" to use global "
-"shortcuts in Clementine."
-msgstr "Da biste koristili opšte prečice u Klementini morate da uključite opciju „<span style=\" font-style:italic;\">Omogući pristup pomoćnim uređajima</span>“ u podešavanjima sistema."
 
 #: ../bin/src/ui_behavioursettingspage.h:268
 msgid "You will need to restart Clementine if you change the language."
@@ -5852,7 +5874,7 @@ msgstr "Vaše korisničko ime ili lozinka su netačni."
 msgid "Z-A"
 msgstr "Ž-A"
 
-#: ui/equalizer.cpp:152
+#: ui/equalizer.cpp:158
 msgid "Zero"
 msgstr "ništa"
 

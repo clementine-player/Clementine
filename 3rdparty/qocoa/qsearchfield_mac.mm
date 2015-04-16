@@ -30,6 +30,7 @@ THE SOFTWARE.
 
 #include <QApplication>
 #include <QClipboard>
+#include <QKeyEvent>
 
 class QSearchFieldPrivate : public QObject
 {
@@ -51,8 +52,19 @@ public:
 
     void returnPressed()
     {
-        if (qSearchField)
+        if (qSearchField) {
             emit qSearchField->returnPressed();
+            QKeyEvent* event = new QKeyEvent(QEvent::KeyPress, Qt::Key_Return, Qt::NoModifier);
+            QApplication::postEvent(qSearchField, event);
+        }
+    }
+
+    void escapePressed()
+    {
+        if (qSearchField) {
+            QKeyEvent* event = new QKeyEvent(QEvent::KeyPress, Qt::Key_Escape, Qt::NoModifier);
+            QApplication::postEvent(qSearchField, event);
+        }
     }
 
     QPointer<QSearchField> qSearchField;
@@ -77,12 +89,16 @@ public:
 
 -(void)controlTextDidEndEditing:(NSNotification*)notification {
     // No Q_ASSERT here as it is called on destruction.
-    if (pimpl)
-        pimpl->textDidEndEditing();
+    if (!pimpl) return;
+
+    pimpl->textDidEndEditing();
 
     if ([[[notification userInfo] objectForKey:@"NSTextMovement"] intValue] == NSReturnTextMovement)
         pimpl->returnPressed();
+    else if ([[[notification userInfo] objectForKey:@"NSTextMovement"] intValue] == NSOtherTextMovement)
+        pimpl->escapePressed();
 }
+
 @end
 
 @interface QocoaSearchField : NSSearchField
@@ -91,32 +107,40 @@ public:
 
 @implementation QocoaSearchField
 -(BOOL)performKeyEquivalent:(NSEvent*)event {
-    if ([event type] == NSKeyDown && [event modifierFlags] & NSCommandKeyMask)
-    {
-        QString keyString = toQString([event characters]);
-        if (keyString == "a")  // Cmd+a
+
+    // First, check if we have the focus.
+    // If no, it probably means this event isn't for us.
+    NSResponder* firstResponder = [[NSApp keyWindow] firstResponder];
+    if ([firstResponder isKindOfClass:[NSText class]] &&
+            [(NSText*)firstResponder delegate] == self) {
+
+        if ([event type] == NSKeyDown && [event modifierFlags] & NSCommandKeyMask)
         {
-            [self performSelector:@selector(selectText:)];
-            return YES;
-        }
-        else if (keyString == "c")  // Cmd+c
-        {
-            QClipboard* clipboard = QApplication::clipboard();
-            clipboard->setText(toQString([self stringValue]));
-            return YES;
-        }
-        else if (keyString == "v")  // Cmd+v
-        {
-            QClipboard* clipboard = QApplication::clipboard();
-            [self setStringValue:fromQString(clipboard->text())];
-            return YES;
-        }
-        else if (keyString == "x")  // Cmd+x
-        {
-            QClipboard* clipboard = QApplication::clipboard();
-            clipboard->setText(toQString([self stringValue]));
-            [self setStringValue:@""];
-            return YES;
+            QString keyString = toQString([event characters]);
+            if (keyString == "a")  // Cmd+a
+            {
+                [self performSelector:@selector(selectText:)];
+                return YES;
+            }
+            else if (keyString == "c")  // Cmd+c
+            {
+                QClipboard* clipboard = QApplication::clipboard();
+                clipboard->setText(toQString([self stringValue]));
+                return YES;
+            }
+            else if (keyString == "v")  // Cmd+v
+            {
+                QClipboard* clipboard = QApplication::clipboard();
+                [self setStringValue:fromQString(clipboard->text())];
+                return YES;
+            }
+            else if (keyString == "x")  // Cmd+x
+            {
+                QClipboard* clipboard = QApplication::clipboard();
+                clipboard->setText(toQString([self stringValue]));
+                [self setStringValue:@""];
+                return YES;
+            }
         }
     }
 

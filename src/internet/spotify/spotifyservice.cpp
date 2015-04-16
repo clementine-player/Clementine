@@ -842,7 +842,7 @@ void SpotifyService::DropMimeData(const QMimeData* data,
 
   QModelIndex playlist_root_index = index;
   QVariant q_playlist_type = playlist_root_index.data(InternetModel::Role_Type);
-  if (!q_playlist_type.isValid()) {
+  if (!q_playlist_type.isValid() || q_playlist_type.toInt() == InternetModel::Type_Track) {
     // In case song was dropped on a playlist item, not on the playlist
     // title/root element
     playlist_root_index = index.parent();

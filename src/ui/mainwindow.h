@@ -68,7 +68,7 @@ class InternetItem;
 class InternetModel;
 class InternetViewContainer;
 class Remote;
-class RipCD;
+class RipCDDialog;
 class Song;
 class SongInfoBase;
 class SongInfoView;
@@ -218,7 +218,7 @@ signals:
   void AddFolder();
   void AddStream();
   void AddStreamAccepted();
-  void OpenRipCD();
+  void OpenRipCDDialog();
   void AddCDTracks();
   void AddPodcast();
 
@@ -297,7 +297,7 @@ signals:
   LibraryViewContainer* library_view_;
   FileView* file_view_;
 #ifdef HAVE_AUDIOCD
-  std::unique_ptr<RipCD> rip_cd_;
+  std::unique_ptr<RipCDDialog> rip_cd_dialog_;
 #endif
   PlaylistListContainer* playlist_list_;
   InternetViewContainer* internet_view_;

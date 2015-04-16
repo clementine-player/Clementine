@@ -5,13 +5,14 @@
 # Translators:
 # arnaudbienner <arnaud.bienner@gmail.com>, 2011
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010, 2011
-# Belvar <tornoz@laposte.net>, 2013
-# Belvar <tornoz@laposte.net>, 2011-2012
-# Belvar <tornoz@laposte.net>, 2014-2015
+# Gwenn Meynier <tornoz@laposte.net>, 2013
+# Gwenn Meynier <tornoz@laposte.net>, 2011-2012
+# Gwenn Meynier <tornoz@laposte.net>, 2015
+# Gwenn Meynier <tornoz@laposte.net>, 2014-2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2015-02-01 21:34+0000\n"
+"PO-Revision-Date: 2015-04-10 22:06+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Breton (http://www.transifex.com/projects/p/clementine/language/br/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -148,19 +149,19 @@ msgstr "bet selaouet %L1 gwech"
 msgid "%filename%"
 msgstr "%filename%"
 
-#: transcoder/transcodedialog.cpp:208
+#: transcoder/transcodedialog.cpp:214
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n failed"
 msgstr "%n c'hwitet"
 
-#: transcoder/transcodedialog.cpp:203
+#: transcoder/transcodedialog.cpp:209
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n finished"
 msgstr "%n echuet"
 
-#: transcoder/transcodedialog.cpp:197
+#: transcoder/transcodedialog.cpp:203
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n remaining"
@@ -174,7 +175,7 @@ msgstr "&Steudañ an destenn"
 msgid "&Center"
 msgstr "E K&reiz"
 
-#: ../bin/src/ui_globalshortcutssettingspage.h:188
+#: ../bin/src/ui_globalshortcutssettingspage.h:178
 msgid "&Custom"
 msgstr "&Personelaat"
 
@@ -203,7 +204,7 @@ msgstr "&Kleiz"
 msgid "&Music"
 msgstr "Sonerezh"
 
-#: ../bin/src/ui_globalshortcutssettingspage.h:186
+#: ../bin/src/ui_globalshortcutssettingspage.h:176
 msgid "&None"
 msgstr "&Hini ebet"
 
@@ -276,7 +277,7 @@ msgstr "MP3 128k"
 msgid "40%"
 msgstr "40%"
 
-#: library/library.cpp:65
+#: library/library.cpp:64
 msgid "50 random tracks"
 msgstr "50 ton dre zegouezh"
 
@@ -364,7 +365,7 @@ msgstr "AAC 32k"
 msgid "AAC 64k"
 msgstr "AAC 64k"
 
-#: core/song.cpp:409
+#: core/song.cpp:413
 msgid "AIFF"
 msgstr "AIFF"
 
@@ -410,7 +411,7 @@ msgstr "Titouroù ar gont (Premium)"
 msgid "Action"
 msgstr "Oberiadenn"
 
-#: ../bin/src/ui_globalshortcutssettingspage.h:184
+#: ../bin/src/ui_globalshortcutssettingspage.h:174
 msgctxt "Category label"
 msgid "Action"
 msgstr "Oberenn"
@@ -451,7 +452,7 @@ msgstr "Ouzhpennañ ul lanv all..."
 msgid "Add directory..."
 msgstr "Ouzhpennañ un teuliad..."
 
-#: ui/mainwindow.cpp:1828
+#: ui/mainwindow.cpp:1844
 msgid "Add file"
 msgstr "Ouzhpennañ ur restr"
 
@@ -467,11 +468,12 @@ msgstr "Ouzhpennañ ur restr pe muioc'h d'an treuzkemmer"
 msgid "Add file..."
 msgstr "Ouzhpennañ ur restr..."
 
-#: transcoder/transcodedialog.cpp:218
+#: transcoder/transcodedialog.cpp:224
 msgid "Add files to transcode"
 msgstr "Ouzhpennañ restroù da"
 
-#: transcoder/transcodedialog.cpp:300 ui/mainwindow.cpp:1855 ui/ripcd.cpp:408
+#: transcoder/transcodedialog.cpp:306 ui/mainwindow.cpp:1871
+#: ripper/ripcddialog.cpp:185
 msgid "Add folder"
 msgstr "Ouzhpennañ un teuliad"
 
@@ -575,11 +577,11 @@ msgstr "Ouzhpennañ tonioù da \"Ma sonerezh\" p'eo kliket ar bouton \"Karout\""
 msgid "Add stream..."
 msgstr "Ouzhpennan ul lanv..."
 
-#: internet/grooveshark/groovesharkservice.cpp:1126
+#: internet/grooveshark/groovesharkservice.cpp:1127
 msgid "Add to Grooveshark favorites"
 msgstr "Ouzhpennañ da tonioù karetañ Grooveshark"
 
-#: internet/grooveshark/groovesharkservice.cpp:1141
+#: internet/grooveshark/groovesharkservice.cpp:1142
 msgid "Add to Grooveshark playlists"
 msgstr "Ouzhpennañ da rolloù seniñ Grooveshark"
 
@@ -593,9 +595,9 @@ msgstr "Ouzhpennañ d'am rolloù-seniñ Spotify"
 
 #: internet/spotify/spotifyservice.cpp:610
 msgid "Add to Spotify starred"
-msgstr ""
+msgstr "Ouzhpennañ da tonioù karetañ Spotify"
 
-#: ui/mainwindow.cpp:1649
+#: ui/mainwindow.cpp:1665
 msgid "Add to another playlist"
 msgstr "Ouzhpennañ d'ur roll seniñ all"
 
@@ -644,11 +646,11 @@ msgstr "Ouzhpennet hiziv"
 msgid "Added within three months"
 msgstr "Ouzhpennet e-kerzh an tri miz diwezhañ"
 
-#: internet/grooveshark/groovesharkservice.cpp:1424
+#: internet/grooveshark/groovesharkservice.cpp:1425
 msgid "Adding song to My Music"
 msgstr "Oc'h ouzhpennañ an ton d'an doser sonerezh."
 
-#: internet/grooveshark/groovesharkservice.cpp:1401
+#: internet/grooveshark/groovesharkservice.cpp:1402
 msgid "Adding song to favorites"
 msgstr "Oc'h ouzhpennañ an ton d'ar re karetañ"
 
@@ -669,7 +671,7 @@ msgstr "Goude an eiladur..."
 #: ../bin/src/ui_groupbydialog.h:144 ../bin/src/ui_groupbydialog.h:159
 #: ../bin/src/ui_albumcoversearcher.h:111
 #: ../bin/src/ui_albumcoversearcher.h:113 ../bin/src/ui_edittagdialog.h:689
-#: ../bin/src/ui_trackselectiondialog.h:209 ../bin/src/ui_ripcd.h:315
+#: ../bin/src/ui_trackselectiondialog.h:209 ../bin/src/ui_ripcddialog.h:315
 msgid "Album"
 msgstr "Albom"
 
@@ -737,7 +739,7 @@ msgstr "Holl rolloù seniñ (%1)"
 msgid "All the translators"
 msgstr "An holl troerien"
 
-#: library/library.cpp:101
+#: library/library.cpp:98
 msgid "All tracks"
 msgstr "An holl roudoù"
 
@@ -769,6 +771,10 @@ msgstr "Atav diskouez ar prenestr pennañ"
 #: ../bin/src/ui_behavioursettingspage.h:304
 msgid "Always start playing"
 msgstr "Atav kregin da lenn"
+
+#: ../bin/src/ui_amazonsettingspage.h:103
+msgid "Amazon"
+msgstr ""
 
 #: internet/spotify/spotifyblobdownloader.cpp:67
 msgid ""
@@ -821,12 +827,12 @@ msgstr "Ouzhpennañ d'ar roll seniñ"
 msgid "Apply compression to prevent clipping"
 msgstr "Koazhañ a-benn mirout ouzh an troc'hadennoù"
 
-#: ui/equalizer.cpp:216
+#: ui/equalizer.cpp:222
 #, qt-format
 msgid "Are you sure you want to delete the \"%1\" preset?"
 msgstr "Ha sur oc'h da gaout c'hoant diverkañ an talvoud raktermenet « %1 »"
 
-#: internet/grooveshark/groovesharkservice.cpp:1323
+#: internet/grooveshark/groovesharkservice.cpp:1324
 msgid "Are you sure you want to delete this playlist?"
 msgstr "Ha sur oc'h ho peus c'hoant diverkañ ar roll seniñ ?"
 
@@ -845,7 +851,7 @@ msgstr "Ha sur oc'h da gaout c'hoant enrollañ an stadegoù an ton e-barzh restr
 #: ../bin/src/ui_groupbydialog.h:145 ../bin/src/ui_groupbydialog.h:160
 #: ../bin/src/ui_albumcoversearcher.h:107
 #: ../bin/src/ui_albumcoversearcher.h:109 ../bin/src/ui_edittagdialog.h:687
-#: ../bin/src/ui_trackselectiondialog.h:210 ../bin/src/ui_ripcd.h:316
+#: ../bin/src/ui_trackselectiondialog.h:210 ../bin/src/ui_ripcddialog.h:316
 msgid "Artist"
 msgstr "Arzour"
 
@@ -866,7 +872,8 @@ msgid "Ask when saving"
 msgstr "Goulenn pa vez savetaet"
 
 #: ../bin/src/ui_transcodedialog.h:222
-#: ../bin/src/ui_networkremotesettingspage.h:251 ../bin/src/ui_ripcd.h:323
+#: ../bin/src/ui_networkremotesettingspage.h:251
+#: ../bin/src/ui_ripcddialog.h:323
 msgid "Audio format"
 msgstr "Mentrezh Aodio"
 
@@ -922,7 +929,7 @@ msgstr "Ment keidennek ar skeudenn"
 msgid "BBC Podcasts"
 msgstr "Podkastoù BBC"
 
-#: playlist/playlist.cpp:1343 ui/organisedialog.cpp:70
+#: playlist/playlist.cpp:1343 ui/organisedialog.cpp:71
 #: ../bin/src/ui_edittagdialog.h:671
 msgid "BPM"
 msgstr "BPM"
@@ -989,7 +996,7 @@ msgstr "Fonnder"
 msgid "Bitrate"
 msgstr "Bitrate"
 
-#: ui/organisedialog.cpp:75
+#: ui/organisedialog.cpp:76
 msgctxt "Refers to bitrate in file organise dialog."
 msgid "Bitrate"
 msgstr "Fonnder bit"
@@ -1028,9 +1035,13 @@ msgstr "Furchal..."
 msgid "Buffer duration"
 msgstr "Padelezh ar stoker"
 
-#: engines/gstengine.cpp:876
+#: engines/gstengine.cpp:884
 msgid "Buffering"
 msgstr "O lakaat er memor skurzer"
+
+#: internet/seafile/seafileservice.cpp:226
+msgid "Building Seafile index..."
+msgstr "O sevel menegva Seafile..."
 
 #: ../bin/src/ui_globalsearchview.h:211
 msgid "But these sources are disabled:"
@@ -1044,11 +1055,11 @@ msgstr "Boutonoù"
 msgid "By default, Grooveshark sorts songs on date added"
 msgstr "Grooveshark a urzh an tonioù dre an deiziad ouzhpennet dre ziouer"
 
-#: core/song.cpp:415
+#: core/song.cpp:419
 msgid "CDDA"
 msgstr "CDDA"
 
-#: library/library.cpp:121
+#: library/library.cpp:117
 msgid "CUE sheet support"
 msgstr "Kemer e kont ar CUE sheet"
 
@@ -1091,7 +1102,7 @@ msgstr "Kemmañ ment ar font..."
 msgid "Change repeat mode"
 msgstr "Cheñch an doare adlenn"
 
-#: ../bin/src/ui_globalshortcutssettingspage.h:189
+#: ../bin/src/ui_globalshortcutssettingspage.h:179
 msgid "Change shortcut..."
 msgstr "Kemmañ ar berradenn"
 
@@ -1117,7 +1128,7 @@ msgstr "Klask pennadoù nevez"
 msgid "Check for updates"
 msgstr "Gwiriekaat an hizivadennoù"
 
-#: ui/mainwindow.cpp:717
+#: ui/mainwindow.cpp:733
 msgid "Check for updates..."
 msgstr "Klask hizivadurioù..."
 
@@ -1129,7 +1140,7 @@ msgstr "Dibab doser krubuilh Vk.com"
 msgid "Choose a name for your smart playlist"
 msgstr "Choazit un anv evit ho roll seniñ spredek"
 
-#: engines/gstengine.cpp:897
+#: engines/gstengine.cpp:905
 msgid "Choose automatically"
 msgstr "Choaz ent emgefreek"
 
@@ -1204,6 +1215,10 @@ msgid ""
 "a format that it can play."
 msgstr "Clementine a c'hell amdreiñ ar sonerezh eilet ganeoc'h war an drobarzhell-mañ d'ur mentrezh a c'hell lenn."
 
+#: ../bin/src/ui_amazonsettingspage.h:104
+msgid "Clementine can play music that you have uploaded to Amazon Cloud Drive"
+msgstr ""
+
 #: ../bin/src/ui_boxsettingspage.h:104
 msgid "Clementine can play music that you have uploaded to Box"
 msgstr "Clementine a zo gouest da seniñ sonerezh bet karget war Box"
@@ -1264,6 +1279,7 @@ msgid "Click to toggle between remaining time and total time"
 msgstr "Klikit evit kemmañ etre an amzer a chom hag an amzer total"
 
 #: ../bin/src/ui_soundcloudsettingspage.h:107
+#: ../bin/src/ui_amazonsettingspage.h:106
 #: ../bin/src/ui_googledrivesettingspage.h:106
 #: ../bin/src/ui_dropboxsettingspage.h:106
 #: ../bin/src/ui_skydrivesettingspage.h:106
@@ -1306,7 +1322,7 @@ msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Listenn dispartiet gant ur virgulenn eus klas:live, live etre 0 ha 3"
 
 #: playlist/playlist.cpp:1362 smartplaylists/searchterm.cpp:353
-#: ui/organisedialog.cpp:73 ../bin/src/ui_edittagdialog.h:697
+#: ui/organisedialog.cpp:74 ../bin/src/ui_edittagdialog.h:697
 msgid "Comment"
 msgstr "Evezhiadenn"
 
@@ -1333,7 +1349,7 @@ msgstr "Aozer"
 msgid "Configure %1..."
 msgstr "Kefluniañ %1..."
 
-#: internet/grooveshark/groovesharkservice.cpp:565
+#: internet/grooveshark/groovesharkservice.cpp:566
 msgid "Configure Grooveshark..."
 msgstr "Kefluniañ Grooveshark"
 
@@ -1341,7 +1357,7 @@ msgstr "Kefluniañ Grooveshark"
 msgid "Configure Magnatune..."
 msgstr "KefluniañMagnatune..."
 
-#: ../bin/src/ui_globalshortcutssettingspage.h:176
+#: ../bin/src/ui_globalshortcutssettingspage.h:167
 msgid "Configure Shortcuts"
 msgstr "Kefluniañ ar Berradennoù"
 
@@ -1361,7 +1377,7 @@ msgstr "Keflunian Vk.com..."
 msgid "Configure global search..."
 msgstr "Kefluniañ an enklsak hollek..."
 
-#: ui/mainwindow.cpp:567
+#: ui/mainwindow.cpp:583
 msgid "Configure library..."
 msgstr "Kefluniañ ar sonaoueg..."
 
@@ -1437,11 +1453,11 @@ msgid "Copy to clipboard"
 msgstr "Kopiañ d'ar golver"
 
 #: library/libraryview.cpp:400 internet/podcasts/podcastservice.cpp:437
-#: ui/mainwindow.cpp:616 widgets/fileviewlist.cpp:43
+#: ui/mainwindow.cpp:632 widgets/fileviewlist.cpp:43
 msgid "Copy to device..."
 msgstr "Kopiañ war an drobarzhell"
 
-#: devices/deviceview.cpp:225 ui/mainwindow.cpp:606
+#: devices/deviceview.cpp:225 ui/mainwindow.cpp:622
 #: widgets/fileviewlist.cpp:38
 msgid "Copy to library..."
 msgstr "Eilañ er sonaoueg..."
@@ -1520,8 +1536,8 @@ msgstr "Golo diuzet adalek %1"
 msgid "Covers from %1"
 msgstr "Goloioù adalek %1"
 
-#: internet/grooveshark/groovesharkservice.cpp:533
-#: internet/grooveshark/groovesharkservice.cpp:1275
+#: internet/grooveshark/groovesharkservice.cpp:534
+#: internet/grooveshark/groovesharkservice.cpp:1276
 msgid "Create a new Grooveshark playlist"
 msgstr "Krouiñ ur roll seniñ Grooveshak nevez"
 
@@ -1648,7 +1664,7 @@ msgstr "Deizad kemmadur"
 msgid "Days"
 msgstr "Deizioù"
 
-#: ../bin/src/ui_globalshortcutssettingspage.h:187
+#: ../bin/src/ui_globalshortcutssettingspage.h:177
 msgid "De&fault"
 msgstr "Dre &ziouer"
 
@@ -1668,7 +1684,7 @@ msgstr "Digreskiñ an ampled"
 msgid "Default background image"
 msgstr "Skeudenn drekleur dre ziouer"
 
-#: engines/gstengine.cpp:922
+#: engines/gstengine.cpp:930
 #, qt-format
 msgid "Default device on %1"
 msgstr "Trobarzhell dre ziouer war %1"
@@ -1686,8 +1702,8 @@ msgstr "Amzer etre ar heweladurioù"
 msgid "Delete"
 msgstr "Diverkañ"
 
-#: internet/grooveshark/groovesharkservice.cpp:536
-#: internet/grooveshark/groovesharkservice.cpp:1322
+#: internet/grooveshark/groovesharkservice.cpp:537
+#: internet/grooveshark/groovesharkservice.cpp:1323
 msgid "Delete Grooveshark playlist"
 msgstr "Diverkañ ur roll seniñ Grooveshark"
 
@@ -1696,7 +1712,7 @@ msgid "Delete downloaded data"
 msgstr "Diverkañ ar roadennoù pellgarget"
 
 #: devices/deviceview.cpp:404 library/libraryview.cpp:636
-#: ui/mainwindow.cpp:2191 widgets/fileview.cpp:186
+#: ui/mainwindow.cpp:2207 widgets/fileview.cpp:186
 msgid "Delete files"
 msgstr "Diverkañ restroù"
 
@@ -1704,7 +1720,7 @@ msgstr "Diverkañ restroù"
 msgid "Delete from device..."
 msgstr "Diverkañ eus an drobarzhell"
 
-#: library/libraryview.cpp:402 ui/mainwindow.cpp:618
+#: library/libraryview.cpp:402 ui/mainwindow.cpp:634
 #: widgets/fileviewlist.cpp:44
 msgid "Delete from disk..."
 msgstr "Diverkañ eus ar bladenn"
@@ -1713,7 +1729,7 @@ msgstr "Diverkañ eus ar bladenn"
 msgid "Delete played episodes"
 msgstr "Diverkañ ar pennadoù lennet"
 
-#: ui/equalizer.cpp:215 ../bin/src/ui_equalizer.h:169
+#: ui/equalizer.cpp:221 ../bin/src/ui_equalizer.h:169
 msgid "Delete preset"
 msgstr "Diverkañ ar ragarventennoù"
 
@@ -1729,16 +1745,16 @@ msgstr "Diverkañ ar restroù orin"
 msgid "Deleting files"
 msgstr "O tiverkañ restroù"
 
-#: ui/mainwindow.cpp:1570
+#: ui/mainwindow.cpp:1586
 msgid "Dequeue selected tracks"
 msgstr "Dilemel ar roudoù diuzet diwar al listenn c'hortoz"
 
-#: ui/mainwindow.cpp:1568
+#: ui/mainwindow.cpp:1584
 msgid "Dequeue track"
 msgstr "Dilemel ar roud-mañ diwar al listenn c'hortoz"
 
 #: ../bin/src/ui_transcodedialog.h:224 ../bin/src/ui_organisedialog.h:241
-#: ../bin/src/ui_ripcd.h:321
+#: ../bin/src/ui_ripcddialog.h:321
 msgid "Destination"
 msgstr "Pal"
 
@@ -1766,7 +1782,7 @@ msgstr "Oerzhioù an drobarzhell..."
 msgid "Devices"
 msgstr "Trobarzhelloù"
 
-#: ../bin/src/ui_ripcd.h:300 ../bin/src/ui_vksearchdialog.h:61
+#: ../bin/src/ui_ripcddialog.h:300 ../bin/src/ui_vksearchdialog.h:61
 msgid "Dialog"
 msgstr "Kendiviz"
 
@@ -1813,10 +1829,10 @@ msgctxt "Refers to search provider's status."
 msgid "Disabled"
 msgstr "Diwederakaet"
 
-#: playlist/playlist.cpp:1317 ui/organisedialog.cpp:69
+#: playlist/playlist.cpp:1317 ui/organisedialog.cpp:70
 #: ../bin/src/ui_groupbydialog.h:138 ../bin/src/ui_groupbydialog.h:153
 #: ../bin/src/ui_groupbydialog.h:168 ../bin/src/ui_edittagdialog.h:688
-#: ../bin/src/ui_ripcd.h:314
+#: ../bin/src/ui_ripcddialog.h:314
 msgid "Disc"
 msgstr "Pladenn"
 
@@ -1984,7 +2000,7 @@ msgstr "Dropbox"
 msgid "Dubstep"
 msgstr "Dubstep"
 
-#: ../bin/src/ui_ripcd.h:309
+#: ../bin/src/ui_ripcddialog.h:309
 msgid "Duration"
 msgstr "Padelezh"
 
@@ -1992,7 +2008,7 @@ msgstr "Padelezh"
 msgid "Dynamic mode is on"
 msgstr "Ar stumm dinamikel a zo aktivet"
 
-#: internet/jamendo/jamendoservice.cpp:126 library/library.cpp:115
+#: internet/jamendo/jamendoservice.cpp:126 library/library.cpp:111
 msgid "Dynamic random mix"
 msgstr "Meskaj dargouezhek dialuskel"
 
@@ -2000,7 +2016,7 @@ msgstr "Meskaj dargouezhek dialuskel"
 msgid "Edit smart playlist..."
 msgstr "Kemmañ ar roll seniñ speredek..."
 
-#: ui/mainwindow.cpp:1612
+#: ui/mainwindow.cpp:1628
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr "Cheñch an tag \"%1\"..."
@@ -2138,14 +2154,14 @@ msgstr "Kenkoulz a --log-levels *:1"
 msgid "Equivalent to --log-levels *:3"
 msgstr "Kenkoulz a --log-levels *:3"
 
-#: internet/grooveshark/groovesharkservice.cpp:1054
+#: internet/grooveshark/groovesharkservice.cpp:1055
 #: internet/magnatune/magnatunedownloaddialog.cpp:242
-#: library/libraryview.cpp:630 ui/mainwindow.cpp:1894 ui/mainwindow.cpp:2141
-#: ui/mainwindow.cpp:2289 internet/vk/vkservice.cpp:625
+#: library/libraryview.cpp:630 ui/mainwindow.cpp:1910 ui/mainwindow.cpp:2157
+#: ui/mainwindow.cpp:2305 internet/vk/vkservice.cpp:625
 msgid "Error"
 msgstr "Fazi"
 
-#: ui/ripcd.cpp:295
+#: ripper/ripcddialog.cpp:135
 msgid "Error Ripping CD"
 msgstr "Kudenn en ur eztennañ ar CD"
 
@@ -2184,7 +2200,7 @@ msgstr "Ur gudenn a zo savet e-pad treterezh %1 : %2"
 msgid "Error while loading audio CD"
 msgstr "Kudenn e-pad kargadenn ar CD audio"
 
-#: library/library.cpp:69
+#: library/library.cpp:68
 msgid "Ever played"
 msgstr "Bet lennet dija"
 
@@ -2305,7 +2321,7 @@ msgstr "Arveuz"
 msgid "Fading duration"
 msgstr "Padelezh an arveuz"
 
-#: ui/mainwindow.cpp:1895
+#: ui/mainwindow.cpp:1911
 msgid "Failed reading CD drive"
 msgstr "Kudenn en ul lenn ar CD"
 
@@ -2335,11 +2351,11 @@ msgstr "C'hwitet eo bet o lenn al lanv RSS"
 msgid "Fast"
 msgstr "Trumm"
 
-#: internet/grooveshark/groovesharkservice.cpp:644
+#: internet/grooveshark/groovesharkservice.cpp:645
 msgid "Favorites"
 msgstr "Ma re garetañ"
 
-#: library/library.cpp:91
+#: library/library.cpp:88
 msgid "Favourite tracks"
 msgstr "Roudoù karetañ"
 
@@ -2363,11 +2379,11 @@ msgstr "O tapout sonaoueg Subsonic"
 msgid "Fetching cover error"
 msgstr "Ur gudenn a zo savet e-pad pellgargadur ar golo"
 
-#: ../bin/src/ui_ripcd.h:320
+#: ../bin/src/ui_ripcddialog.h:320
 msgid "File Format"
 msgstr "Mentrezh ar restr"
 
-#: ui/organisedialog.cpp:77
+#: ui/organisedialog.cpp:78
 msgid "File extension"
 msgstr "Askouzehadenn ar restr"
 
@@ -2437,7 +2453,7 @@ msgstr "Live kentañ"
 msgid "Fit cover to width"
 msgstr "Klotañ ar golo gant al ledander"
 
-#: core/song.cpp:393 transcoder/transcoder.cpp:233
+#: core/song.cpp:397 transcoder/transcoder.cpp:233
 msgid "Flac"
 msgstr "Flac"
 
@@ -2517,7 +2533,7 @@ msgstr "Fumm Bass + Treble"
 msgid "Full Treble"
 msgstr "Full Treble"
 
-#: ui/settingsdialog.cpp:138
+#: ui/settingsdialog.cpp:142
 msgid "General"
 msgstr "Hollek"
 
@@ -2525,19 +2541,19 @@ msgstr "Hollek"
 msgid "General settings"
 msgstr "Arventennoù hollek"
 
-#: playlist/playlist.cpp:1321 ui/organisedialog.cpp:72
+#: playlist/playlist.cpp:1321 ui/organisedialog.cpp:73
 #: ../bin/src/ui_groupbydialog.h:134 ../bin/src/ui_groupbydialog.h:149
 #: ../bin/src/ui_groupbydialog.h:164 ../bin/src/ui_edittagdialog.h:695
-#: ../bin/src/ui_ripcd.h:317
+#: ../bin/src/ui_ripcddialog.h:317
 msgid "Genre"
 msgstr "Doare"
 
-#: internet/grooveshark/groovesharkservice.cpp:555
+#: internet/grooveshark/groovesharkservice.cpp:556
 msgid "Get a URL to share this Grooveshark playlist"
 msgstr "Kaout un URL evit rannañ ar roll seniñ Grooveshark"
 
-#: internet/grooveshark/groovesharkservice.cpp:552
-#: internet/grooveshark/groovesharkservice.cpp:1154
+#: internet/grooveshark/groovesharkservice.cpp:553
+#: internet/grooveshark/groovesharkservice.cpp:1155
 msgid "Get a URL to share this Grooveshark song"
 msgstr "Kaout un URL evit rannañ an ton Grooveshark"
 
@@ -2550,7 +2566,7 @@ msgstr "Kaout un URL evit rannañ an ton spotify mañ"
 msgid "Get a URL to share this playlist"
 msgstr "Kaout un URL evit rannañ ar roll-seniñ mañ"
 
-#: internet/grooveshark/groovesharkservice.cpp:829
+#: internet/grooveshark/groovesharkservice.cpp:830
 msgid "Getting Grooveshark popular songs"
 msgstr "O taspugnat tonioù brudet Grooveshark"
 
@@ -2596,19 +2612,19 @@ msgstr "Grisaat an tonioù n'int ket mui em roll seniñ"
 msgid "Grooveshark"
 msgstr "Grooveshark"
 
-#: internet/grooveshark/groovesharkservice.cpp:412
+#: internet/grooveshark/groovesharkservice.cpp:413
 msgid "Grooveshark login error"
 msgstr "Kudenn kennaskañ gant Grooveshark"
 
-#: internet/grooveshark/groovesharkservice.cpp:1205
+#: internet/grooveshark/groovesharkservice.cpp:1206
 msgid "Grooveshark playlist's URL"
 msgstr "URL ar roll seniñ Grooveshark"
 
-#: internet/grooveshark/groovesharkservice.cpp:624
+#: internet/grooveshark/groovesharkservice.cpp:625
 msgid "Grooveshark radio"
 msgstr "Skingomz Grooveshark"
 
-#: internet/grooveshark/groovesharkservice.cpp:1183
+#: internet/grooveshark/groovesharkservice.cpp:1184
 msgid "Grooveshark song's URL"
 msgstr "URL ar ganaouenn Grooveshark"
 
@@ -2687,6 +2703,10 @@ msgstr "Uhel (%1 fps)"
 #: visualisations/visualisationcontainer.cpp:124
 msgid "High (1024x1024)"
 msgstr "Uhel (1024x1024)"
+
+#: ui/equalizer.cpp:128
+msgid "HipHop"
+msgstr "HipHop"
 
 #: internet/subsonic/subsonicsettingspage.cpp:134
 msgid "Host not found, check server URL. Example: http://localhost:4040/"
@@ -2809,7 +2829,7 @@ msgstr "Menegeradur %1"
 msgid "Information"
 msgstr "Titouroù"
 
-#: ../bin/src/ui_ripcd.h:301
+#: ../bin/src/ui_ripcddialog.h:301
 msgid "Input options"
 msgstr "Dibaboù enkas"
 
@@ -2829,7 +2849,7 @@ msgstr "O gwiriañ an anterinder"
 msgid "Internet"
 msgstr "Internet"
 
-#: ui/settingsdialog.cpp:161
+#: ui/settingsdialog.cpp:165
 msgid "Internet providers"
 msgstr "Pourchaserien internet"
 
@@ -2866,11 +2886,11 @@ msgstr "Servij didalvoudek"
 msgid "Invalid session key"
 msgstr "Kudenn gant alc'hwez an dalc'h"
 
-#: internet/grooveshark/groovesharkservice.cpp:404
+#: internet/grooveshark/groovesharkservice.cpp:405
 msgid "Invalid username and/or password"
 msgstr "Kudenn gant an anv implijer pe ar ger-tremen"
 
-#: ../bin/src/ui_ripcd.h:312
+#: ../bin/src/ui_ripcddialog.h:312
 msgid "Invert Selection"
 msgstr "Tuginañ an diuzad"
 
@@ -2900,7 +2920,7 @@ msgstr "Stlennvon Jamendo"
 
 #: ../bin/src/ui_behavioursettingspage.h:289
 msgid "Jump to previous song right away"
-msgstr ""
+msgstr "Lammat diouzhtu d'an ton a-raok"
 
 #: ../bin/src/ui_mainwindow.h:689
 msgid "Jump to the currently playing track"
@@ -2931,15 +2951,19 @@ msgctxt "Label for buton to enable/disable kittens in the now playing widget"
 msgid "Kittens"
 msgstr "Bisig"
 
+#: ui/equalizer.cpp:131
+msgid "Kuduro"
+msgstr "Kuduro"
+
 #: ../bin/src/ui_behavioursettingspage.h:263
 msgid "Language"
 msgstr "Yezh"
 
-#: ui/equalizer.cpp:127
+#: ui/equalizer.cpp:133
 msgid "Laptop/Headphones"
 msgstr "Hezoug/Selaouegoù"
 
-#: ui/equalizer.cpp:129
+#: ui/equalizer.cpp:135
 msgid "Large Hall"
 msgstr "Sal bras"
 
@@ -2953,13 +2977,13 @@ msgstr "Golo albom ledan (munudoù dindan)"
 
 #: widgets/nowplayingwidget.cpp:102
 msgid "Large album cover (no details)"
-msgstr ""
+msgstr "Golo albom ledan (munudoù ebet)"
 
 #: widgets/fancytabwidget.cpp:662
 msgid "Large sidebar"
 msgstr "Barenn gostez ledan"
 
-#: library/library.cpp:83
+#: library/library.cpp:80
 msgid "Last played"
 msgstr "Selaouet e ziwezhañ"
 
@@ -2996,7 +3020,7 @@ msgstr "Anv implijer Last.fm"
 msgid "Last.fm wiki"
 msgstr "Wiki last.fm"
 
-#: library/library.cpp:105
+#: library/library.cpp:102
 msgid "Least favourite tracks"
 msgstr "Roudoù an nebeutañ plijet"
 
@@ -3004,7 +3028,7 @@ msgstr "Roudoù an nebeutañ plijet"
 msgid "Left"
 msgstr "Kleiz"
 
-#: playlist/playlist.cpp:1313 ui/organisedialog.cpp:74
+#: playlist/playlist.cpp:1313 ui/organisedialog.cpp:75
 #: ui/qtsystemtrayicon.cpp:239 ../bin/src/ui_edittagdialog.h:669
 msgid "Length"
 msgstr "Padelezh"
@@ -3018,7 +3042,7 @@ msgstr "Sonaoueg"
 msgid "Library advanced grouping"
 msgstr "Strolladur ar sonaoueg kemplesoc'h"
 
-#: ui/mainwindow.cpp:2413
+#: ui/mainwindow.cpp:2429
 msgid "Library rescan notice"
 msgstr "Kemenn hizivadur ar sonaoueg"
 
@@ -3030,12 +3054,12 @@ msgstr "Enklask ar sonaoueg"
 msgid "Limits"
 msgstr "Bevennoù"
 
-#: internet/grooveshark/groovesharkservice.cpp:626
+#: internet/grooveshark/groovesharkservice.cpp:627
 msgid ""
 "Listen to Grooveshark songs based on what you've listened to previously"
 msgstr "Selaou ouzh tonioù Grooveshark diazezet war ar pezh ho peus selaouet a-raok."
 
-#: ui/equalizer.cpp:131
+#: ui/equalizer.cpp:137
 msgid "Live"
 msgstr "End-eeun"
 
@@ -3059,7 +3083,7 @@ msgstr "Kargañ ur golo adalek ar bladenn"
 msgid "Load cover from disk..."
 msgstr "Kargañ ar golo adalek ur bladenn..."
 
-#: playlist/playlistcontainer.cpp:286
+#: playlist/playlistcontainer.cpp:291
 msgid "Load playlist"
 msgstr "Kargañ ar roll seniñ"
 
@@ -3114,6 +3138,7 @@ msgstr "Kargañ restroù pe liammoù internet, hag eilec'hiañ ar roll seniñ"
 #: ../bin/src/ui_soundcloudsettingspage.h:106
 #: ../bin/src/ui_spotifysettingspage.h:211
 #: ../bin/src/ui_subsonicsettingspage.h:130
+#: ../bin/src/ui_amazonsettingspage.h:105
 #: ../bin/src/ui_lastfmsettingspage.h:153
 #: ../bin/src/ui_googledrivesettingspage.h:105
 #: ../bin/src/ui_dropboxsettingspage.h:105
@@ -3153,7 +3178,7 @@ msgstr "Izel (256x256)"
 msgid "Low complexity profile (LC)"
 msgstr "Aelad e Luzierezh Gwan (ALG)"
 
-#: ../bin/src/ui_songinfosettingspage.h:159
+#: ui/organisedialog.cpp:68 ../bin/src/ui_songinfosettingspage.h:159
 msgid "Lyrics"
 msgstr "Komzoù"
 
@@ -3162,11 +3187,15 @@ msgstr "Komzoù"
 msgid "Lyrics from %1"
 msgstr "Komzoù eus %1"
 
+#: songinfo/taglyricsinfoprovider.cpp:29
+msgid "Lyrics from the ID3v2 tag"
+msgstr ""
+
 #: transcoder/transcoder.cpp:235
 msgid "M4A AAC"
 msgstr "M4A AAC"
 
-#: core/song.cpp:399 transcoder/transcoder.cpp:238
+#: core/song.cpp:403 transcoder/transcoder.cpp:238
 #: ../bin/src/ui_transcodersettingspage.h:175
 msgid "MP3"
 msgstr "MP3"
@@ -3179,11 +3208,11 @@ msgstr "MP3 256k"
 msgid "MP3 96k"
 msgstr "MP3 96k"
 
-#: core/song.cpp:395
+#: core/song.cpp:399
 msgid "MP4 AAC"
 msgstr "MP4 AAC"
 
-#: core/song.cpp:397
+#: core/song.cpp:401
 msgid "MPC"
 msgstr "MPC"
 
@@ -3258,7 +3287,7 @@ msgstr "Maks an disoc'hoù enklask hollek"
 msgid "Maximum bitrate"
 msgstr "Fonnder uhelañ"
 
-#: ui/ripcd.cpp:296
+#: ripper/ripcddialog.cpp:136
 msgid "Media has changed. Reloading"
 msgstr "Kemmet eo bet ar media. Adkargadenn"
 
@@ -3321,7 +3350,7 @@ msgstr "Barenn imor"
 msgid "More"
 msgstr "Muioc'h"
 
-#: library/library.cpp:87
+#: library/library.cpp:84
 msgid "Most played"
 msgstr "Lennet an aliesañ"
 
@@ -3338,7 +3367,7 @@ msgstr "Poentoù staliañ"
 msgid "Move down"
 msgstr "Dindan"
 
-#: ui/mainwindow.cpp:609 widgets/fileviewlist.cpp:40
+#: ui/mainwindow.cpp:625 widgets/fileviewlist.cpp:40
 msgid "Move to library..."
 msgstr "Dilec'hiañ davit ar sonaoueg..."
 
@@ -3347,7 +3376,7 @@ msgstr "Dilec'hiañ davit ar sonaoueg..."
 msgid "Move up"
 msgstr "A-us"
 
-#: transcoder/transcodedialog.cpp:219 ui/mainwindow.cpp:1829
+#: transcoder/transcodedialog.cpp:225 ui/mainwindow.cpp:1845
 #: internet/vk/vkservice.cpp:884
 msgid "Music"
 msgstr "Sonerezh"
@@ -3365,7 +3394,7 @@ msgstr "Mut"
 msgid "My Albums"
 msgstr "Va albomoù"
 
-#: internet/grooveshark/groovesharkservice.cpp:633
+#: internet/grooveshark/groovesharkservice.cpp:634
 #: internet/vk/vkservice.cpp:878
 msgid "My Music"
 msgstr "Ma Sonerezh"
@@ -3374,8 +3403,8 @@ msgstr "Ma Sonerezh"
 msgid "My Recommendations"
 msgstr "Ma erbedadennoù"
 
-#: internet/grooveshark/groovesharkservice.cpp:1276
-#: internet/grooveshark/groovesharkservice.cpp:1371 ui/equalizer.cpp:199
+#: internet/grooveshark/groovesharkservice.cpp:1277
+#: internet/grooveshark/groovesharkservice.cpp:1372 ui/equalizer.cpp:205
 #: ../bin/src/ui_deviceproperties.h:369 ../bin/src/ui_wizardfinishpage.h:84
 msgid "Name"
 msgstr "Anv"
@@ -3405,7 +3434,7 @@ msgstr "Rouedad pell"
 msgid "Never"
 msgstr "Morse"
 
-#: library/library.cpp:76
+#: library/library.cpp:74
 msgid "Never played"
 msgstr "Morse sonet"
 
@@ -3420,7 +3449,7 @@ msgstr "Morse kregiñ da lenn"
 msgid "New folder"
 msgstr "Teuliad nevez"
 
-#: ui/mainwindow.cpp:1666 ../bin/src/ui_mainwindow.h:691
+#: ui/mainwindow.cpp:1682 ../bin/src/ui_mainwindow.h:691
 msgid "New playlist"
 msgstr "Roll seniñ nevez"
 
@@ -3436,7 +3465,7 @@ msgstr "Tonioù nevez"
 msgid "New tracks will be added automatically."
 msgstr "Ar roudoù nevez a vo ouzhpennet ent emgefreek."
 
-#: library/library.cpp:95
+#: library/library.cpp:92
 msgid "Newest tracks"
 msgstr "Roudoù nevesañ"
 
@@ -3469,7 +3498,7 @@ msgstr "Golo ebet da ezporzhiañ"
 msgid "No long blocks"
 msgstr "Bloc'h hir ebet"
 
-#: playlist/playlistcontainer.cpp:371
+#: playlist/playlistcontainer.cpp:376
 msgid ""
 "No matches found.  Clear the search box to show the whole playlist again."
 msgstr "N'eo bet kavet netra. Diverkañ ar boest enklask evit diskouez ar roll seniñ en e-bezh."
@@ -3483,7 +3512,7 @@ msgstr "Bloc'h berr ebet"
 msgid "None"
 msgstr "Hini ebet"
 
-#: library/libraryview.cpp:631 ui/mainwindow.cpp:2142 ui/mainwindow.cpp:2290
+#: library/libraryview.cpp:631 ui/mainwindow.cpp:2158 ui/mainwindow.cpp:2306
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Ton ebet eus ar reoù diuzet a oa mat evit bezañ kopiet war an drobarzhell"
 
@@ -3560,19 +3589,19 @@ msgstr "Rakwel an OSD"
 msgid "Off"
 msgstr "Off"
 
-#: core/song.cpp:401 transcoder/transcoder.cpp:244
+#: core/song.cpp:405 transcoder/transcoder.cpp:244
 msgid "Ogg Flac"
 msgstr "Ogg Flac"
 
-#: core/song.cpp:407 transcoder/transcoder.cpp:250
+#: core/song.cpp:411 transcoder/transcoder.cpp:250
 msgid "Ogg Opus"
 msgstr "Ogg Opus"
 
-#: core/song.cpp:403 transcoder/transcoder.cpp:247
+#: core/song.cpp:407 transcoder/transcoder.cpp:247
 msgid "Ogg Speex"
 msgstr "Ogg Speex"
 
-#: core/song.cpp:405 transcoder/transcoder.cpp:241
+#: core/song.cpp:409 transcoder/transcoder.cpp:241
 #: ../bin/src/ui_magnatunedownloaddialog.h:139
 #: ../bin/src/ui_magnatunesettingspage.h:170
 msgid "Ogg Vorbis"
@@ -3607,7 +3636,7 @@ msgid "Opacity"
 msgstr "Demerez"
 
 #: internet/digitally/digitallyimportedservicebase.cpp:176
-#: internet/grooveshark/groovesharkservice.cpp:559
+#: internet/grooveshark/groovesharkservice.cpp:560
 #: internet/icecast/icecastservice.cpp:302
 #: internet/jamendo/jamendoservice.cpp:434
 #: internet/magnatune/magnatuneservice.cpp:284
@@ -3629,7 +3658,7 @@ msgstr "Digeriñ ur restr OPML"
 msgid "Open OPML file..."
 msgstr "Digeriñ ur restr OPML..."
 
-#: transcoder/transcodedialog.cpp:234
+#: transcoder/transcodedialog.cpp:240
 msgid "Open a directory to import music from"
 msgstr "Digeriñ ur c'havlec'h evit enporzhiañ ar sonerezh dioutañ"
 
@@ -3660,8 +3689,8 @@ msgstr "Digeriñ en ur roll-seniñ nevez"
 msgid "Open in your browser"
 msgstr "Digeriñ en ho merdeer"
 
-#: ../bin/src/ui_globalshortcutssettingspage.h:178
-#: ../bin/src/ui_globalshortcutssettingspage.h:181
+#: ../bin/src/ui_globalshortcutssettingspage.h:169
+#: ../bin/src/ui_globalshortcutssettingspage.h:171
 msgid "Open..."
 msgstr "Digeriñ..."
 
@@ -3678,7 +3707,8 @@ msgid "Optimize for quality"
 msgstr "Gwelladenn ar perzhded"
 
 #: ../bin/src/ui_transcodedialog.h:223
-#: ../bin/src/ui_networkremotesettingspage.h:252 ../bin/src/ui_ripcd.h:322
+#: ../bin/src/ui_networkremotesettingspage.h:252
+#: ../bin/src/ui_ripcddialog.h:322
 msgid "Options..."
 msgstr "Dibarzhioù..."
 
@@ -3690,7 +3720,7 @@ msgstr "Opus"
 msgid "Organise Files"
 msgstr "Aozañ ar restroù"
 
-#: library/libraryview.cpp:396 ui/mainwindow.cpp:612
+#: library/libraryview.cpp:396 ui/mainwindow.cpp:628
 msgid "Organise files..."
 msgstr "Aozañ ar restroù..."
 
@@ -3714,7 +3744,7 @@ msgstr "Ezkas"
 msgid "Output device"
 msgstr "Trobarzhell ezkas"
 
-#: ../bin/src/ui_transcodedialog.h:221 ../bin/src/ui_ripcd.h:318
+#: ../bin/src/ui_transcodedialog.h:221 ../bin/src/ui_ripcddialog.h:318
 msgid "Output options"
 msgstr "Dibarzhioù ezkas"
 
@@ -3738,7 +3768,7 @@ msgstr "Perc'henn"
 msgid "Parsing Jamendo catalogue"
 msgstr "O tielfennañ katalog Jamendo"
 
-#: ui/equalizer.cpp:133
+#: ui/equalizer.cpp:139
 msgid "Party"
 msgstr "Fest"
 
@@ -3752,7 +3782,7 @@ msgstr "Fest"
 msgid "Password"
 msgstr "Ger-tremen"
 
-#: core/globalshortcuts.cpp:50 ui/mainwindow.cpp:1028 ui/mainwindow.cpp:1479
+#: core/globalshortcuts.cpp:50 ui/mainwindow.cpp:1044 ui/mainwindow.cpp:1495
 #: ui/qtsystemtrayicon.cpp:175 wiimotedev/wiimotesettingspage.cpp:107
 msgid "Pause"
 msgstr "Ehan"
@@ -3778,8 +3808,8 @@ msgstr "Piksel"
 msgid "Plain sidebar"
 msgstr "Bareen gostez simpl"
 
-#: core/globalshortcuts.cpp:49 ui/mainwindow.cpp:584 ui/mainwindow.cpp:996
-#: ui/mainwindow.cpp:1014 ui/mainwindow.cpp:1482 ui/qtsystemtrayicon.cpp:164
+#: core/globalshortcuts.cpp:49 ui/mainwindow.cpp:600 ui/mainwindow.cpp:1012
+#: ui/mainwindow.cpp:1030 ui/mainwindow.cpp:1498 ui/qtsystemtrayicon.cpp:164
 #: ui/qtsystemtrayicon.cpp:188 ../bin/src/ui_mainwindow.h:642
 #: wiimotedev/wiimotesettingspage.cpp:100
 msgid "Play"
@@ -3814,7 +3844,7 @@ msgstr "Lenn sonerezh"
 msgid "Player options"
 msgstr "Dibarzhioù al lenner"
 
-#: playlist/playlistcontainer.cpp:282 playlist/playlistlistcontainer.cpp:228
+#: playlist/playlistcontainer.cpp:287 playlist/playlistlistcontainer.cpp:228
 #: playlist/playlistmanager.cpp:87 playlist/playlistmanager.cpp:156
 #: playlist/playlistmanager.cpp:494 playlist/playlisttabbar.cpp:366
 msgid "Playlist"
@@ -3833,7 +3863,7 @@ msgstr "Dibarzhioù ar roll seniñ"
 msgid "Playlist type"
 msgstr "Doare ar roll seniñ"
 
-#: internet/grooveshark/groovesharkservice.cpp:654
+#: internet/grooveshark/groovesharkservice.cpp:655
 #: internet/soundcloud/soundcloudservice.cpp:130 ui/mainwindow.cpp:241
 msgid "Playlists"
 msgstr "Rolloù seniñ"
@@ -3851,19 +3881,19 @@ msgstr "Stad an enlugellad"
 msgid "Podcasts"
 msgstr "Podkastoù"
 
-#: ui/equalizer.cpp:135
+#: ui/equalizer.cpp:141
 msgid "Pop"
 msgstr "Pop"
 
-#: internet/grooveshark/groovesharkservice.cpp:591
+#: internet/grooveshark/groovesharkservice.cpp:592
 msgid "Popular songs"
 msgstr "Tonioù brudet"
 
-#: internet/grooveshark/groovesharkservice.cpp:595
+#: internet/grooveshark/groovesharkservice.cpp:596
 msgid "Popular songs of the Month"
 msgstr "Tonioù brudet ar miz-mañ"
 
-#: internet/grooveshark/groovesharkservice.cpp:604
+#: internet/grooveshark/groovesharkservice.cpp:605
 msgid "Popular songs today"
 msgstr "Tonioù brudet hiziv"
 
@@ -3935,7 +3965,7 @@ msgstr "Pouezit war ur kombinadenn touchennoù evit implij %1"
 
 #: ../bin/src/ui_behavioursettingspage.h:286
 msgid "Pressing \"Previous\" in player will..."
-msgstr ""
+msgstr "Pouezañ \"A-raok' el lenner a..."
 
 #: ../bin/src/ui_notificationssettingspage.h:458
 msgid "Pretty OSD options"
@@ -3964,7 +3994,7 @@ msgstr "Diskouez titouroù an handelv"
 msgid "Profile"
 msgstr "Aelad"
 
-#: ../bin/src/ui_transcodedialog.h:230 ../bin/src/ui_ripcd.h:324
+#: ../bin/src/ui_transcodedialog.h:230 ../bin/src/ui_ripcddialog.h:324
 msgid "Progress"
 msgstr "Enraog"
 
@@ -3973,7 +4003,7 @@ msgctxt "Category label"
 msgid "Progress"
 msgstr "Enraog"
 
-#: ui/equalizer.cpp:138
+#: ui/equalizer.cpp:144
 msgid "Psychedelic"
 msgstr "Psykedelik"
 
@@ -4007,12 +4037,12 @@ msgstr "Goulennadeg trobarzhell"
 msgid "Queue Manager"
 msgstr "Merour listenn c'hortoz"
 
-#: ui/mainwindow.cpp:1574
+#: ui/mainwindow.cpp:1590
 msgid "Queue selected tracks"
 msgstr "Lakaat ar roudoù da heul"
 
 #: globalsearch/globalsearchview.cpp:465 library/libraryview.cpp:380
-#: ui/mainwindow.cpp:1572
+#: ui/mainwindow.cpp:1588
 msgid "Queue track"
 msgstr "Lakaat ar roud da heul"
 
@@ -4020,7 +4050,7 @@ msgstr "Lakaat ar roud da heul"
 msgid "Radio (equal loudness for all tracks)"
 msgstr "Skingomz (Ampled kevatal evit an holl roudoù)"
 
-#: internet/grooveshark/groovesharkservice.cpp:613
+#: internet/grooveshark/groovesharkservice.cpp:614
 msgid "Radios"
 msgstr "Skingomzoù"
 
@@ -4074,7 +4104,7 @@ msgstr "Sur oc'h da gaout c'hoant da nullañ"
 msgid "Redirect limit exceeded, verify server configuration."
 msgstr "Aet e biou ar vevenn adkas, gwiriekait kefluniadur ar servijer."
 
-#: internet/grooveshark/groovesharkservice.cpp:561
+#: internet/grooveshark/groovesharkservice.cpp:562
 msgid "Refresh"
 msgstr "Azbevaat"
 
@@ -4096,7 +4126,7 @@ msgstr "Hizivat listenn ar savlec'hioù"
 msgid "Refresh streams"
 msgstr "Hizivaat al lanvioù"
 
-#: ui/equalizer.cpp:140
+#: ui/equalizer.cpp:146
 msgid "Reggae"
 msgstr "Reggae"
 
@@ -4134,7 +4164,7 @@ msgstr "Tennañ an tonioù doubl eus ar roll seniñ"
 msgid "Remove folder"
 msgstr "Tennañ an teuliad"
 
-#: internet/grooveshark/groovesharkservice.cpp:549
+#: internet/grooveshark/groovesharkservice.cpp:550
 #: internet/vk/vkservice.cpp:316
 msgid "Remove from My Music"
 msgstr "Tennañ eus va sonerezh"
@@ -4143,11 +4173,11 @@ msgstr "Tennañ eus va sonerezh"
 msgid "Remove from bookmarks"
 msgstr "Tennañ eus va merkoù-pajenn"
 
-#: internet/grooveshark/groovesharkservice.cpp:546
+#: internet/grooveshark/groovesharkservice.cpp:547
 msgid "Remove from favorites"
 msgstr "Tennañ eus an tonioù karetañ"
 
-#: internet/grooveshark/groovesharkservice.cpp:543
+#: internet/grooveshark/groovesharkservice.cpp:544
 #: internet/spotify/spotifyservice.cpp:672 ../bin/src/ui_mainwindow.h:685
 msgid "Remove from playlist"
 msgstr "Tennañ kuit eus ar roll seniñ"
@@ -4164,20 +4194,20 @@ msgstr "Tennañ ar rolloù seniñ"
 msgid "Remove unavailable tracks from playlist"
 msgstr "Tennañ an tonioù dihegerz eus ar roll-seniñ"
 
-#: internet/grooveshark/groovesharkservice.cpp:1570
+#: internet/grooveshark/groovesharkservice.cpp:1571
 msgid "Removing songs from My Music"
 msgstr "Diverkañ tonioù eus va sonerezh"
 
-#: internet/grooveshark/groovesharkservice.cpp:1518
+#: internet/grooveshark/groovesharkservice.cpp:1519
 msgid "Removing songs from favorites"
 msgstr "Diverkañ tonioù eus va karetañ"
 
-#: internet/grooveshark/groovesharkservice.cpp:1370
+#: internet/grooveshark/groovesharkservice.cpp:1371
 #, qt-format
 msgid "Rename \"%1\" playlist"
 msgstr "Cheñch anv \"%1\" ar roll seniñ."
 
-#: internet/grooveshark/groovesharkservice.cpp:539
+#: internet/grooveshark/groovesharkservice.cpp:540
 msgid "Rename Grooveshark playlist"
 msgstr "Cheñch anv roll seniñ Grooveshark"
 
@@ -4249,7 +4279,7 @@ msgstr "Adderaouiñ ar konter lennadennoù"
 
 #: ../bin/src/ui_behavioursettingspage.h:290
 msgid "Restart song, then jump to previous if pressed again"
-msgstr ""
+msgstr "Adlenn an ton, ha lammat d'an hini a-raok ma vez adpouezet"
 
 #: core/commandlineoptions.cpp:164
 msgid ""
@@ -4264,15 +4294,15 @@ msgstr "Bevenniñ ouzh an arouezennoù ASCII"
 msgid "Resume playback on start"
 msgstr "Kenderc'hel da seniñ pa grog ar poellad"
 
-#: internet/grooveshark/groovesharkservice.cpp:795
+#: internet/grooveshark/groovesharkservice.cpp:796
 msgid "Retrieving Grooveshark My Music songs"
 msgstr "Oc'h adkavout tonioù \"My Music\" Grooveshark."
 
-#: internet/grooveshark/groovesharkservice.cpp:762
+#: internet/grooveshark/groovesharkservice.cpp:763
 msgid "Retrieving Grooveshark favorites songs"
 msgstr "O taspugnat ho tonioù Grooveshark karetañ"
 
-#: internet/grooveshark/groovesharkservice.cpp:693
+#: internet/grooveshark/groovesharkservice.cpp:694
 msgid "Retrieving Grooveshark playlists"
 msgstr "O taspugnat rolloù seniñ Grooveshark"
 
@@ -4284,19 +4314,19 @@ msgstr "Distreiñ war Clementine"
 msgid "Right"
 msgstr "Dehou"
 
-#: ../bin/src/ui_ripcd.h:303
+#: ../bin/src/ui_ripcddialog.h:303
 msgid "Rip"
 msgstr "Eztennañ"
 
-#: ui/ripcd.cpp:114
+#: ripper/ripcddialog.cpp:95
 msgid "Rip CD"
 msgstr "Eztennañ ar bladenn"
 
 #: ../bin/src/ui_mainwindow.h:716
-msgid "Rip audio CD..."
-msgstr "Eztennan ar bladenn aodio"
+msgid "Rip audio CD"
+msgstr "Eztennañ ar bladenn aodio"
 
-#: ui/equalizer.cpp:142
+#: ui/equalizer.cpp:148
 msgid "Rock"
 msgstr "Rock"
 
@@ -4326,7 +4356,7 @@ msgstr "Tennañ an drobarzhell diarvar goude an eilañ"
 msgid "Sample rate"
 msgstr "Standilhonañ"
 
-#: ui/organisedialog.cpp:76
+#: ui/organisedialog.cpp:77
 msgid "Samplerate"
 msgstr "Standilhonañ"
 
@@ -4360,7 +4390,7 @@ msgstr "Enrollañ ar roll seniñ"
 msgid "Save playlist..."
 msgstr "Enrollañ ar roll seniñ..."
 
-#: ui/equalizer.cpp:199 ../bin/src/ui_equalizer.h:166
+#: ui/equalizer.cpp:205 ../bin/src/ui_equalizer.h:166
 msgid "Save preset"
 msgstr "Enrollañ ar ragarventennoù"
 
@@ -4376,7 +4406,7 @@ msgstr "Enrollañ ar stadegoù e klav ar restr pa 'z eo posupl"
 msgid "Save this stream in the Internet tab"
 msgstr "Enrollañ al lanv-mañ en ivinell internet"
 
-#: library/library.cpp:196
+#: library/library.cpp:193
 msgid "Saving songs statistics into songs files"
 msgstr "O enrollañ stadegoù an tonioù e restr an tonioù"
 
@@ -4459,7 +4489,7 @@ msgstr "Doare klask"
 msgid "Search options"
 msgstr "Dibarzhioù klask"
 
-#: internet/grooveshark/groovesharkservice.cpp:582
+#: internet/grooveshark/groovesharkservice.cpp:583
 #: internet/soundcloud/soundcloudservice.cpp:116
 #: internet/spotify/spotifyservice.cpp:406
 msgid "Search results"
@@ -4494,11 +4524,11 @@ msgstr "Klask ar roud lennet gant ur sammad relativel"
 msgid "Seek the currently playing track to an absolute position"
 msgstr "Klask ar roud lennet gant ul lec'hiadur absolud"
 
-#: visualisations/visualisationselector.cpp:37 ../bin/src/ui_ripcd.h:310
+#: visualisations/visualisationselector.cpp:37 ../bin/src/ui_ripcddialog.h:310
 msgid "Select All"
 msgstr "Diuzañ an holl"
 
-#: visualisations/visualisationselector.cpp:38 ../bin/src/ui_ripcd.h:311
+#: visualisations/visualisationselector.cpp:38 ../bin/src/ui_ripcddialog.h:311
 msgid "Select None"
 msgstr "Diuzañ hini ebet"
 
@@ -4526,7 +4556,7 @@ msgstr "Diuzañ heweladurioù"
 msgid "Select visualizations..."
 msgstr "Diuzañ heweladurioù..."
 
-#: ../bin/src/ui_transcodedialog.h:229 ../bin/src/ui_ripcd.h:319
+#: ../bin/src/ui_transcodedialog.h:229 ../bin/src/ui_ripcddialog.h:319
 msgid "Select..."
 msgstr "Diuzañ..."
 
@@ -4550,7 +4580,7 @@ msgstr "Munudoù ar servijer"
 msgid "Service offline"
 msgstr "Servij ezlinenn"
 
-#: ui/mainwindow.cpp:1611
+#: ui/mainwindow.cpp:1627
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr "Termeniñ %1 d'an talvoud %2..."
@@ -4567,12 +4597,12 @@ msgstr "Lakaat un talvoud evit an holll roudoù diuzet"
 msgid "Settings"
 msgstr "Arventennoù"
 
-#: ../bin/src/ui_globalshortcutssettingspage.h:183
+#: ../bin/src/ui_globalshortcutssettingspage.h:173
 msgid "Shortcut"
 msgstr "Berradenn"
 
-#: ui/globalshortcutssettingspage.cpp:144
-#: ../bin/src/ui_globalshortcutssettingspage.h:185
+#: ui/globalshortcutssettingspage.cpp:130
+#: ../bin/src/ui_globalshortcutssettingspage.h:175
 #, qt-format
 msgid "Shortcut for %1"
 msgstr "Berradenn evit %1"
@@ -4626,7 +4656,7 @@ msgstr "Diskouez un OSD brav"
 msgid "Show above status bar"
 msgstr "Diskouez a-us d'ar varenn stad"
 
-#: ui/mainwindow.cpp:552
+#: ui/mainwindow.cpp:568
 msgid "Show all songs"
 msgstr "Diskouez an holl tonioù"
 
@@ -4650,12 +4680,12 @@ msgstr "Diskouez er ment gwirion..."
 msgid "Show groups in global search result"
 msgstr "Diskouez ar strolladoù e disoc'hoù an enklask hollek"
 
-#: library/libraryview.cpp:413 ui/mainwindow.cpp:621
+#: library/libraryview.cpp:413 ui/mainwindow.cpp:637
 #: widgets/fileviewlist.cpp:51
 msgid "Show in file browser..."
 msgstr "Diskouez er merdeer retroù"
 
-#: ui/mainwindow.cpp:624
+#: ui/mainwindow.cpp:640
 msgid "Show in library..."
 msgstr "Diskouez er sonaoueg"
 
@@ -4667,11 +4697,11 @@ msgstr "Diskouez e \"Arzourien Liesseurt\""
 msgid "Show moodbar"
 msgstr "Diskouez ar varenn imor"
 
-#: ui/mainwindow.cpp:554
+#: ui/mainwindow.cpp:570
 msgid "Show only duplicates"
 msgstr "Diskouez an doublennoù nemetken"
 
-#: ui/mainwindow.cpp:556
+#: ui/mainwindow.cpp:572
 msgid "Show only untagged"
 msgstr "Diskouez an tonioù hep klav nemetken"
 
@@ -4747,7 +4777,7 @@ msgstr "Ment"
 msgid "Size:"
 msgstr "Ment:"
 
-#: ui/equalizer.cpp:146
+#: ui/equalizer.cpp:152
 msgid "Ska"
 msgstr "Ska"
 
@@ -4763,11 +4793,11 @@ msgstr "Konter tonioù lammet"
 msgid "Skip forwards in playlist"
 msgstr "Mont dirak er roll seniñ"
 
-#: ui/mainwindow.cpp:1585
+#: ui/mainwindow.cpp:1601
 msgid "Skip selected tracks"
 msgstr "Tremen ar roudoù diuzet"
 
-#: ui/mainwindow.cpp:1583
+#: ui/mainwindow.cpp:1599
 msgid "Skip track"
 msgstr "Tremen ar roud"
 
@@ -4787,11 +4817,11 @@ msgstr "Roll seniñ speredek"
 msgid "Smart playlists"
 msgstr "Rolloù seniñ speredek"
 
-#: ui/equalizer.cpp:144
+#: ui/equalizer.cpp:150
 msgid "Soft"
 msgstr "Soft"
 
-#: ui/equalizer.cpp:148
+#: ui/equalizer.cpp:154
 msgid "Soft Rock"
 msgstr "Soft Rock"
 
@@ -4884,7 +4914,7 @@ msgstr "Boaz"
 msgid "Starred"
 msgstr "Karetañ"
 
-#: ui/ripcd.cpp:86
+#: ripper/ripcddialog.cpp:69
 msgid "Start ripping"
 msgstr "Kregiñ gant an eztennadenn"
 
@@ -4892,11 +4922,11 @@ msgstr "Kregiñ gant an eztennadenn"
 msgid "Start the playlist currently playing"
 msgstr "Kregiñ ar roll seniñ"
 
-#: transcoder/transcodedialog.cpp:89
+#: transcoder/transcodedialog.cpp:90
 msgid "Start transcoding"
 msgstr "Kregin an transkodiñ"
 
-#: internet/grooveshark/groovesharkservice.cpp:584
+#: internet/grooveshark/groovesharkservice.cpp:585
 #: internet/soundcloud/soundcloudservice.cpp:118
 #: internet/spotify/spotifyservice.cpp:408
 msgid ""
@@ -4913,7 +4943,7 @@ msgstr "O kregiñ %1"
 msgid "Starting..."
 msgstr "O kregiñ..."
 
-#: internet/grooveshark/groovesharkservice.cpp:617
+#: internet/grooveshark/groovesharkservice.cpp:618
 msgid "Stations"
 msgstr "Savlec'hioù"
 
@@ -4926,7 +4956,7 @@ msgstr "Paouez"
 msgid "Stop after"
 msgstr "Paouez goude"
 
-#: ui/mainwindow.cpp:587 ../bin/src/ui_mainwindow.h:650
+#: ui/mainwindow.cpp:603 ../bin/src/ui_mainwindow.h:650
 msgid "Stop after this track"
 msgstr "Paouez goude ar roud-mañ"
 
@@ -4947,7 +4977,7 @@ msgstr "Paouez da lenn goude ar roud : %1"
 msgid "Stopped"
 msgstr "Paouezet"
 
-#: core/song.cpp:418
+#: core/song.cpp:422
 msgid "Stream"
 msgstr "Lanv"
 
@@ -4961,7 +4991,7 @@ msgstr "Evit implij ar streaming adalek ur servijer Subsonic goude an 30 devezh 
 msgid "Streaming membership"
 msgstr "Izili streaming"
 
-#: internet/grooveshark/groovesharkservice.cpp:658
+#: internet/grooveshark/groovesharkservice.cpp:659
 msgid "Subscribed playlists"
 msgstr "Rollioù seniñ koumanantet"
 
@@ -5038,7 +5068,7 @@ msgstr "Leunier klav"
 msgid "Target bitrate"
 msgstr "Fonnder tizhet"
 
-#: ui/equalizer.cpp:150
+#: ui/equalizer.cpp:156
 msgid "Techno"
 msgstr "Tekno"
 
@@ -5050,7 +5080,7 @@ msgstr "Dibarzhioù an testenn"
 msgid "Thanks to"
 msgstr "Trugarez da"
 
-#: ui/globalshortcutssettingspage.cpp:184
+#: ui/globalshortcutssettingspage.cpp:170
 #, qt-format
 msgid "The \"%1\" command could not be started."
 msgstr "An urzh \"%1\" ne c'hell ket bezañ kroget."
@@ -5082,7 +5112,7 @@ msgid ""
 "license key. Visit subsonic.org for details."
 msgstr "Ar mare amprouiñ evit ar servijer Subsonic a zo echuet. Roit arc'hant evit kaout un alc'hwez lañvaz mar plij. KIt war subsonic.org evit ar munudoù."
 
-#: ui/mainwindow.cpp:2404
+#: ui/mainwindow.cpp:2420
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -5124,7 +5154,7 @@ msgid ""
 "continue?"
 msgstr "Ar restroù-mañ a vo diverket eus an drobarzhell, sur oc'h da gaout c'hoant kenderc'hel ?"
 
-#: library/libraryview.cpp:637 ui/mainwindow.cpp:2192 widgets/fileview.cpp:187
+#: library/libraryview.cpp:637 ui/mainwindow.cpp:2208 widgets/fileview.cpp:187
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -5203,11 +5233,11 @@ msgstr "An doare trobarzhell-mañ n'eo ket meret :%1"
 #: playlist/playlist.cpp:1307 ui/organisedialog.cpp:60
 #: ui/qtsystemtrayicon.cpp:232 ../bin/src/ui_about.h:142
 #: ../bin/src/ui_edittagdialog.h:685 ../bin/src/ui_trackselectiondialog.h:211
-#: ../bin/src/ui_ripcd.h:307
+#: ../bin/src/ui_ripcddialog.h:307
 msgid "Title"
 msgstr "Titl"
 
-#: internet/grooveshark/groovesharkservice.cpp:1055
+#: internet/grooveshark/groovesharkservice.cpp:1056
 msgid ""
 "To start Grooveshark radio, you should first listen to a few other "
 "Grooveshark songs"
@@ -5225,7 +5255,7 @@ msgstr "Gweredekaat/Diweredekaat an OSD brav"
 msgid "Toggle fullscreen"
 msgstr "Tremen e skramm leun"
 
-#: ui/mainwindow.cpp:1576
+#: ui/mainwindow.cpp:1592
 msgid "Toggle queue status"
 msgstr "Cheñch stad al listenn c'hortoz"
 
@@ -5261,9 +5291,9 @@ msgstr "Niver a eizhbit treuzkaset"
 msgid "Total network requests made"
 msgstr "Niver a atersadennoù rouedad"
 
-#: playlist/playlist.cpp:1315 ui/organisedialog.cpp:68
+#: playlist/playlist.cpp:1315 ui/organisedialog.cpp:69
 #: ../bin/src/ui_edittagdialog.h:686 ../bin/src/ui_trackselectiondialog.h:213
-#: ../bin/src/ui_ripcd.h:305
+#: ../bin/src/ui_ripcddialog.h:305
 msgid "Track"
 msgstr "Roud"
 
@@ -5292,7 +5322,7 @@ msgstr "O transkodiñ %1 restr oc'h implij %2 threads"
 msgid "Transcoding options"
 msgstr "Dibarzhioù transkodiñ"
 
-#: core/song.cpp:413
+#: core/song.cpp:417
 msgid "TrueAudio"
 msgstr "TrueAudio"
 
@@ -5326,7 +5356,7 @@ msgstr "Dibosupl kennaskañ"
 msgid "Unable to download %1 (%2)"
 msgstr "N'eus ket tu pellgargañ %1 (%2)"
 
-#: core/song.cpp:422 library/librarymodel.cpp:350 library/librarymodel.cpp:354
+#: core/song.cpp:426 library/librarymodel.cpp:350 library/librarymodel.cpp:354
 #: library/librarymodel.cpp:358 library/librarymodel.cpp:1066
 #: playlist/playlistdelegates.cpp:306 playlist/playlistmanager.cpp:501
 #: playlist/playlistmanager.cpp:502 ui/albumcoverchoicecontroller.cpp:124
@@ -5347,11 +5377,11 @@ msgstr "Kudenn dianav"
 msgid "Unset cover"
 msgstr "Ar golo n'eo ket bet lakaet"
 
-#: ui/mainwindow.cpp:1581
+#: ui/mainwindow.cpp:1597
 msgid "Unskip selected tracks"
 msgstr "Nullañ tremen ar roudoù diuzet"
 
-#: ui/mainwindow.cpp:1579
+#: ui/mainwindow.cpp:1595
 msgid "Unskip track"
 msgstr "Nullañ tremen ar roud"
 
@@ -5368,7 +5398,7 @@ msgstr "Sonadegoù o-tont"
 msgid "Update"
 msgstr "Hizivaat"
 
-#: internet/grooveshark/groovesharkservice.cpp:1227
+#: internet/grooveshark/groovesharkservice.cpp:1228
 msgid "Update Grooveshark playlist"
 msgstr "O hizivaat roll seniñ Grooveshark"
 
@@ -5392,7 +5422,7 @@ msgstr "Hizivaat ar podkast-mañ"
 msgid "Updating"
 msgstr "Hizivadur"
 
-#: library/librarywatcher.cpp:94
+#: library/librarywatcher.cpp:92
 #, qt-format
 msgid "Updating %1"
 msgstr "Hizivadenn %1"
@@ -5402,7 +5432,7 @@ msgstr "Hizivadenn %1"
 msgid "Updating %1%..."
 msgstr "Hizivadenn %1%..."
 
-#: library/librarywatcher.cpp:92
+#: library/librarywatcher.cpp:90
 msgid "Updating library"
 msgstr "O hizivaat ar sonaoueg"
 
@@ -5414,7 +5444,7 @@ msgstr "Implij"
 msgid "Use Album Artist tag when available"
 msgstr "Implij klav arzour an albom pa vez tu"
 
-#: ../bin/src/ui_globalshortcutssettingspage.h:177
+#: ../bin/src/ui_globalshortcutssettingspage.h:168
 msgid "Use Gnome's shortcut keys"
 msgstr "Implij berradennoù Gnome"
 
@@ -5482,12 +5512,12 @@ msgstr "Implij normalizadur an ampled"
 msgid "Used"
 msgstr "Implijet"
 
-#: internet/grooveshark/groovesharkservice.cpp:407
+#: internet/grooveshark/groovesharkservice.cpp:408
 #, qt-format
 msgid "User %1 doesn't have a Grooveshark Anywhere account"
 msgstr "An implijer %1 n'en deus ket a kont Grooveshark Anywhere."
 
-#: ui/settingsdialog.cpp:152
+#: ui/settingsdialog.cpp:156
 msgid "User interface"
 msgstr "Etrefas implijer"
 
@@ -5573,7 +5603,7 @@ msgstr "Moger"
 msgid "Warn me when closing a playlist tab"
 msgstr "Gervel ac'hanon pa vez serret un ivinell roll seniñ"
 
-#: core/song.cpp:411 transcoder/transcoder.cpp:256
+#: core/song.cpp:415 transcoder/transcoder.cpp:256
 msgid "Wav"
 msgstr "Wav"
 
@@ -5657,7 +5687,7 @@ msgstr "Windows Media 40k"
 msgid "Windows Media 64k"
 msgstr "Windows Media 64k"
 
-#: core/song.cpp:391 transcoder/transcoder.cpp:253
+#: core/song.cpp:395 transcoder/transcoder.cpp:253
 msgid "Windows Media audio"
 msgstr "ausio Windows Media"
 
@@ -5671,7 +5701,7 @@ msgid ""
 "well?"
 msgstr "Ha c'hoant ho peus lakaat tonioù all an albom-mañ e Arzourien Liesseurt ?"
 
-#: ui/mainwindow.cpp:2411
+#: ui/mainwindow.cpp:2427
 msgid "Would you like to run a full rescan right now?"
 msgstr "C'hoant ho peus d'ober ur c'hwilervadenn eus al levraoueg bremañ ?"
 
@@ -5687,10 +5717,10 @@ msgstr "Skrivañ ar meta-roadennoù"
 msgid "Wrong username or password."
 msgstr "Anv-implijer pe ger-tremen fall."
 
-#: playlist/playlist.cpp:1319 ui/organisedialog.cpp:71
+#: playlist/playlist.cpp:1319 ui/organisedialog.cpp:72
 #: ../bin/src/ui_groupbydialog.h:135 ../bin/src/ui_groupbydialog.h:150
 #: ../bin/src/ui_groupbydialog.h:165 ../bin/src/ui_edittagdialog.h:690
-#: ../bin/src/ui_trackselectiondialog.h:212 ../bin/src/ui_ripcd.h:313
+#: ../bin/src/ui_trackselectiondialog.h:212 ../bin/src/ui_ripcddialog.h:313
 msgid "Year"
 msgstr "Bloaz"
 
@@ -5796,19 +5826,12 @@ msgstr "Digennasket oc'h bet diouzh Spotify, adskrivit ho ker-tremen mar plij."
 msgid "You love this track"
 msgstr "Karout a rit ar roud-mañ"
 
-#: ../bin/src/ui_globalshortcutssettingspage.h:180
+#: ../bin/src/ui_globalshortcutssettingspage.h:170
 msgid ""
 "You need to launch System Preferences and allow Clementine to \"<span style"
 "=\"font-style:italic\">control your computer</span>\" to use global "
 "shortcuts in Clementine."
 msgstr "Ezhomm ho peus da lañsañ ar Gwellvezioù Reizhad ha aotren Clementine da \"<span style=\"font-style:italic\">kontroliñ ho urzhiataer</span>\" evit implij berradennoù hollek e Clementine"
-
-#: ../bin/src/ui_globalshortcutssettingspage.h:179
-msgid ""
-"You need to launch System Preferences and turn on \"<span style=\" font-"
-"style:italic;\">Enable access for assistive devices</span>\" to use global "
-"shortcuts in Clementine."
-msgstr "Ret eo deoc'h lañsañ Gwellvezioù ar reizhiad ha gweredekaat an dibab \"<span style=\" font-style:italic;\">Gweredekaat evit an trevnadoù sikour</span>\"  evit implijout ar berradennoù hollek e Clementine."
 
 #: ../bin/src/ui_behavioursettingspage.h:268
 msgid "You will need to restart Clementine if you change the language."
@@ -5853,7 +5876,7 @@ msgstr "Hoc'h anv implijer pe ho ger-tremen a zo direizh."
 msgid "Z-A"
 msgstr "Z-A"
 
-#: ui/equalizer.cpp:152
+#: ui/equalizer.cpp:158
 msgid "Zero"
 msgstr "Zero"
 

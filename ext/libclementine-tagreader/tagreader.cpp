@@ -143,6 +143,7 @@ void TagReader::ReadFile(const QString& filename,
 
   QString disc;
   QString compilation;
+  QString lyrics;
 
   // Handle all the files which have VorbisComments (Ogg, OPUS, ...) in the same
   // way;
@@ -174,6 +175,10 @@ void TagReader::ReadFile(const QString& filename,
         Decode(map["TIT1"].front()->toString(), nullptr,
                song->mutable_grouping());
 
+      if (!map["TOPE"].isEmpty())  // original artist/performer
+        Decode(map["TOPE"].front()->toString(), nullptr,
+               song->mutable_performer());
+
       // Skip TPE1 (which is the artist) here because we already fetched it
 
       if (!map["TPE2"].isEmpty())  // non-standard: Apple, Microsoft
@@ -183,6 +188,12 @@ void TagReader::ReadFile(const QString& filename,
       if (!map["TCMP"].isEmpty())
         compilation =
             TStringToQString(map["TCMP"].front()->toString()).trimmed();
+
+      if (!map["USLT"].isEmpty()) {
+        lyrics = TStringToQString((map["USLT"].front())->toString()).trimmed();
+        qLog(Debug) << "Read ULST lyrics " << lyrics;
+      } else if (!map["SYLT"].isEmpty())
+        lyrics = TStringToQString((map["SYLT"].front())->toString()).trimmed();
 
       if (!map["APIC"].isEmpty()) song->set_art_automatic(kEmbeddedCover);
 
@@ -364,6 +375,8 @@ void TagReader::ReadFile(const QString& filename,
   } else {
     song->set_compilation(compilation.toInt() == 1);
   }
+
+  if (!lyrics.isEmpty()) song->set_lyrics(lyrics.toStdString());
 
   if (fileref->audioProperties()) {
     song->set_bitrate(fileref->audioProperties()->bitrate());
@@ -612,6 +625,8 @@ bool TagReader::SaveFile(const QString& filename,
                  tag);
     SetTextFrame("TCOM", song.composer(), tag);
     SetTextFrame("TIT1", song.grouping(), tag);
+    SetTextFrame("TOPE", song.performer(), tag);
+    SetTextFrame("USLT", song.lyrics(), tag);
     // Skip TPE1 (which is the artist) here because we already set it
     SetTextFrame("TPE2", song.albumartist(), tag);
     SetTextFrame("TCMP", std::string(song.compilation() ? "1" : "0"), tag);

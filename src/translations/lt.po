@@ -12,7 +12,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2015-02-02 09:11+0000\n"
+"PO-Revision-Date: 2015-04-11 19:56+0000\n"
 "Last-Translator: Moo\n"
 "Language-Team: Lithuanian (http://www.transifex.com/projects/p/clementine/language/lt/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -149,19 +149,19 @@ msgstr "%L1 viso perklausymų"
 msgid "%filename%"
 msgstr "%failovardas%"
 
-#: transcoder/transcodedialog.cpp:208
+#: transcoder/transcodedialog.cpp:214
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n failed"
 msgstr "%n nepavyko"
 
-#: transcoder/transcodedialog.cpp:203
+#: transcoder/transcodedialog.cpp:209
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n finished"
 msgstr "%n baigta"
 
-#: transcoder/transcodedialog.cpp:197
+#: transcoder/transcodedialog.cpp:203
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n remaining"
@@ -175,7 +175,7 @@ msgstr "&Lygiuoti tekstą"
 msgid "&Center"
 msgstr "&Centras"
 
-#: ../bin/src/ui_globalshortcutssettingspage.h:188
+#: ../bin/src/ui_globalshortcutssettingspage.h:178
 msgid "&Custom"
 msgstr "&Pasirinktinas"
 
@@ -204,7 +204,7 @@ msgstr "&Kairė"
 msgid "&Music"
 msgstr "Muzika"
 
-#: ../bin/src/ui_globalshortcutssettingspage.h:186
+#: ../bin/src/ui_globalshortcutssettingspage.h:176
 msgid "&None"
 msgstr "&Nieko"
 
@@ -277,7 +277,7 @@ msgstr "128k MP3"
 msgid "40%"
 msgstr "40%"
 
-#: library/library.cpp:65
+#: library/library.cpp:64
 msgid "50 random tracks"
 msgstr "50 atsitiktinių dainų"
 
@@ -365,7 +365,7 @@ msgstr "AAC 32k"
 msgid "AAC 64k"
 msgstr "AAC 64k"
 
-#: core/song.cpp:409
+#: core/song.cpp:413
 msgid "AIFF"
 msgstr "AIFF"
 
@@ -411,7 +411,7 @@ msgstr "Paskyros informacija (Premium)"
 msgid "Action"
 msgstr "Veiksmas"
 
-#: ../bin/src/ui_globalshortcutssettingspage.h:184
+#: ../bin/src/ui_globalshortcutssettingspage.h:174
 msgctxt "Category label"
 msgid "Action"
 msgstr "Veiksmas"
@@ -452,7 +452,7 @@ msgstr "Pridėti kitą srautą..."
 msgid "Add directory..."
 msgstr "Pridėti nuorodą..."
 
-#: ui/mainwindow.cpp:1828
+#: ui/mainwindow.cpp:1844
 msgid "Add file"
 msgstr "Pridėti  failą"
 
@@ -468,11 +468,12 @@ msgstr "Pridėti failus perkodavimui"
 msgid "Add file..."
 msgstr "Pridėti failą..."
 
-#: transcoder/transcodedialog.cpp:218
+#: transcoder/transcodedialog.cpp:224
 msgid "Add files to transcode"
 msgstr "Pridėti failus perkodavimui"
 
-#: transcoder/transcodedialog.cpp:300 ui/mainwindow.cpp:1855 ui/ripcd.cpp:408
+#: transcoder/transcodedialog.cpp:306 ui/mainwindow.cpp:1871
+#: ripper/ripcddialog.cpp:185
 msgid "Add folder"
 msgstr "Pridėti aplankalą"
 
@@ -576,11 +577,11 @@ msgstr "Pridėti dainas į Mano Muziką, kai paspaudžiamas mygtukas \"Myliu\""
 msgid "Add stream..."
 msgstr "Pridėti srautą..."
 
-#: internet/grooveshark/groovesharkservice.cpp:1126
+#: internet/grooveshark/groovesharkservice.cpp:1127
 msgid "Add to Grooveshark favorites"
 msgstr "Pridėti į Grooveshark mėgstamiausius"
 
-#: internet/grooveshark/groovesharkservice.cpp:1141
+#: internet/grooveshark/groovesharkservice.cpp:1142
 msgid "Add to Grooveshark playlists"
 msgstr "Pridėti į Grooveshark grojaraščius"
 
@@ -596,7 +597,7 @@ msgstr "Pridėti į Spotify grojaraščius"
 msgid "Add to Spotify starred"
 msgstr "Pridėti į Spotify pažymėtus"
 
-#: ui/mainwindow.cpp:1649
+#: ui/mainwindow.cpp:1665
 msgid "Add to another playlist"
 msgstr "Pridėti prie kito grojaraščio"
 
@@ -645,11 +646,11 @@ msgstr "Pridėta šiandien"
 msgid "Added within three months"
 msgstr "Pridėta tryjų mėnesių tarpe"
 
-#: internet/grooveshark/groovesharkservice.cpp:1424
+#: internet/grooveshark/groovesharkservice.cpp:1425
 msgid "Adding song to My Music"
 msgstr "Daina pridedama į Mano muziką"
 
-#: internet/grooveshark/groovesharkservice.cpp:1401
+#: internet/grooveshark/groovesharkservice.cpp:1402
 msgid "Adding song to favorites"
 msgstr "Daina pridedama į mėgstamiausius"
 
@@ -670,7 +671,7 @@ msgstr "Po kopijavimo..."
 #: ../bin/src/ui_groupbydialog.h:144 ../bin/src/ui_groupbydialog.h:159
 #: ../bin/src/ui_albumcoversearcher.h:111
 #: ../bin/src/ui_albumcoversearcher.h:113 ../bin/src/ui_edittagdialog.h:689
-#: ../bin/src/ui_trackselectiondialog.h:209 ../bin/src/ui_ripcd.h:315
+#: ../bin/src/ui_trackselectiondialog.h:209 ../bin/src/ui_ripcddialog.h:315
 msgid "Album"
 msgstr "Albumas"
 
@@ -738,7 +739,7 @@ msgstr "Visi grojaraščiai (%1)"
 msgid "All the translators"
 msgstr "Visi vertėjai"
 
-#: library/library.cpp:101
+#: library/library.cpp:98
 msgid "All tracks"
 msgstr "Visos dainos"
 
@@ -770,6 +771,10 @@ msgstr "Visada rodyti pagrindinį langą"
 #: ../bin/src/ui_behavioursettingspage.h:304
 msgid "Always start playing"
 msgstr "Visada pradėti grojant"
+
+#: ../bin/src/ui_amazonsettingspage.h:103
+msgid "Amazon"
+msgstr "Amazon"
 
 #: internet/spotify/spotifyblobdownloader.cpp:67
 msgid ""
@@ -822,12 +827,12 @@ msgstr "Įterpti į grojaraštį"
 msgid "Apply compression to prevent clipping"
 msgstr "Pritaikyti suspaudimą, kad išvengti nukirtimų"
 
-#: ui/equalizer.cpp:216
+#: ui/equalizer.cpp:222
 #, qt-format
 msgid "Are you sure you want to delete the \"%1\" preset?"
 msgstr "Ar tikrai norite ištrinti \"%1\" šabloną?"
 
-#: internet/grooveshark/groovesharkservice.cpp:1323
+#: internet/grooveshark/groovesharkservice.cpp:1324
 msgid "Are you sure you want to delete this playlist?"
 msgstr "Ar tikrai norite pašalinti šį grojaraštį?"
 
@@ -846,7 +851,7 @@ msgstr "Ar tikrai norite įrašyti dainos statistiką į dainos failą visoms da
 #: ../bin/src/ui_groupbydialog.h:145 ../bin/src/ui_groupbydialog.h:160
 #: ../bin/src/ui_albumcoversearcher.h:107
 #: ../bin/src/ui_albumcoversearcher.h:109 ../bin/src/ui_edittagdialog.h:687
-#: ../bin/src/ui_trackselectiondialog.h:210 ../bin/src/ui_ripcd.h:316
+#: ../bin/src/ui_trackselectiondialog.h:210 ../bin/src/ui_ripcddialog.h:316
 msgid "Artist"
 msgstr "Atlikėjas"
 
@@ -867,7 +872,8 @@ msgid "Ask when saving"
 msgstr "Klausti išsaugant"
 
 #: ../bin/src/ui_transcodedialog.h:222
-#: ../bin/src/ui_networkremotesettingspage.h:251 ../bin/src/ui_ripcd.h:323
+#: ../bin/src/ui_networkremotesettingspage.h:251
+#: ../bin/src/ui_ripcddialog.h:323
 msgid "Audio format"
 msgstr "Audio formatas"
 
@@ -923,7 +929,7 @@ msgstr "Vidutinis paveikslo dydis"
 msgid "BBC Podcasts"
 msgstr "BBC srautas"
 
-#: playlist/playlist.cpp:1343 ui/organisedialog.cpp:70
+#: playlist/playlist.cpp:1343 ui/organisedialog.cpp:71
 #: ../bin/src/ui_edittagdialog.h:671
 msgid "BPM"
 msgstr "BPM"
@@ -990,7 +996,7 @@ msgstr "Bitų greitis"
 msgid "Bitrate"
 msgstr "Bitų dažnis"
 
-#: ui/organisedialog.cpp:75
+#: ui/organisedialog.cpp:76
 msgctxt "Refers to bitrate in file organise dialog."
 msgid "Bitrate"
 msgstr "Pralaidumas"
@@ -1029,9 +1035,13 @@ msgstr "Naršyti..."
 msgid "Buffer duration"
 msgstr "Buferio trukmė"
 
-#: engines/gstengine.cpp:876
+#: engines/gstengine.cpp:884
 msgid "Buffering"
 msgstr "Kaupiamas buferis"
+
+#: internet/seafile/seafileservice.cpp:226
+msgid "Building Seafile index..."
+msgstr "Kuriamas Seafile indeksas..."
 
 #: ../bin/src/ui_globalsearchview.h:211
 msgid "But these sources are disabled:"
@@ -1045,11 +1055,11 @@ msgstr "Mygtukai"
 msgid "By default, Grooveshark sorts songs on date added"
 msgstr "Pagal nutylėjimą, Grooveshark rikiuoja dainas pagal pridėjimo datą"
 
-#: core/song.cpp:415
+#: core/song.cpp:419
 msgid "CDDA"
 msgstr "CDDA"
 
-#: library/library.cpp:121
+#: library/library.cpp:117
 msgid "CUE sheet support"
 msgstr "\"CUE sheet\" palaikymas"
 
@@ -1092,7 +1102,7 @@ msgstr "Keisti šrifto dydį..."
 msgid "Change repeat mode"
 msgstr "Keisti kartojimo režimą"
 
-#: ../bin/src/ui_globalshortcutssettingspage.h:189
+#: ../bin/src/ui_globalshortcutssettingspage.h:179
 msgid "Change shortcut..."
 msgstr "Keisti greituką..."
 
@@ -1118,7 +1128,7 @@ msgstr "Tikrinti, ar nėra naujų epizodų"
 msgid "Check for updates"
 msgstr "Tikrinti ar yra atnaujinimų"
 
-#: ui/mainwindow.cpp:717
+#: ui/mainwindow.cpp:733
 msgid "Check for updates..."
 msgstr "Atnaujinimų tikrinimas..."
 
@@ -1130,7 +1140,7 @@ msgstr "Pasirinkite Vk.com talpyklos katalogą"
 msgid "Choose a name for your smart playlist"
 msgstr "Parinkite pavadinimą išmaniajam grojaraščiui"
 
-#: engines/gstengine.cpp:897
+#: engines/gstengine.cpp:905
 msgid "Choose automatically"
 msgstr "Automatiškai parinkti"
 
@@ -1205,17 +1215,21 @@ msgid ""
 "a format that it can play."
 msgstr "Į šį įrenginį „Clementine“ gali automatiškai konvertuoti kopijuojamą  muziką formatu, kurį įrenginys palaiko."
 
+#: ../bin/src/ui_amazonsettingspage.h:104
+msgid "Clementine can play music that you have uploaded to Amazon Cloud Drive"
+msgstr "Clementine gali groti jūsų, į Amazon Cloud diską įkeltą, muziką"
+
 #: ../bin/src/ui_boxsettingspage.h:104
 msgid "Clementine can play music that you have uploaded to Box"
-msgstr "Clementine gali groti muziką kurią įkėlėte į „Box“"
+msgstr "Clementine gali groti muziką, kurią įkėlėte į „Box“"
 
 #: ../bin/src/ui_dropboxsettingspage.h:104
 msgid "Clementine can play music that you have uploaded to Dropbox"
-msgstr "Clementine gali groti Jūsų į Dropbox įkeltą muziką"
+msgstr "Clementine gali groti jūsų, į Dropbox įkeltą, muziką"
 
 #: ../bin/src/ui_googledrivesettingspage.h:104
 msgid "Clementine can play music that you have uploaded to Google Drive"
-msgstr "Clementine gali groti Jūsų į Google diską įkeltą muziką"
+msgstr "Clementine gali groti jūsų, į Google diską įkeltą, muziką"
 
 #: ../bin/src/ui_skydrivesettingspage.h:104
 msgid "Clementine can play music that you have uploaded to OneDrive"
@@ -1265,6 +1279,7 @@ msgid "Click to toggle between remaining time and total time"
 msgstr "Spustelėkite, kad perjungti tarp likusio laiko ir viso laiko"
 
 #: ../bin/src/ui_soundcloudsettingspage.h:107
+#: ../bin/src/ui_amazonsettingspage.h:106
 #: ../bin/src/ui_googledrivesettingspage.h:106
 #: ../bin/src/ui_dropboxsettingspage.h:106
 #: ../bin/src/ui_skydrivesettingspage.h:106
@@ -1307,7 +1322,7 @@ msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Kableliais išskirtas sąrašas iš klasės:lygio, lygis yra nuo 0 iki 3"
 
 #: playlist/playlist.cpp:1362 smartplaylists/searchterm.cpp:353
-#: ui/organisedialog.cpp:73 ../bin/src/ui_edittagdialog.h:697
+#: ui/organisedialog.cpp:74 ../bin/src/ui_edittagdialog.h:697
 msgid "Comment"
 msgstr "Komentaras"
 
@@ -1334,7 +1349,7 @@ msgstr "Kompozitorius"
 msgid "Configure %1..."
 msgstr "Konfigūruoti %1..."
 
-#: internet/grooveshark/groovesharkservice.cpp:565
+#: internet/grooveshark/groovesharkservice.cpp:566
 msgid "Configure Grooveshark..."
 msgstr "Konfigūruoti Grooveshark..."
 
@@ -1342,7 +1357,7 @@ msgstr "Konfigūruoti Grooveshark..."
 msgid "Configure Magnatune..."
 msgstr "Konfigūruoti „Magnatune“..."
 
-#: ../bin/src/ui_globalshortcutssettingspage.h:176
+#: ../bin/src/ui_globalshortcutssettingspage.h:167
 msgid "Configure Shortcuts"
 msgstr "Konfigūruoti sparčiuosius klavišus"
 
@@ -1362,7 +1377,7 @@ msgstr "Konfigūruoti Vk.com..."
 msgid "Configure global search..."
 msgstr "Nustatyti visuotinę paiešką..."
 
-#: ui/mainwindow.cpp:567
+#: ui/mainwindow.cpp:583
 msgid "Configure library..."
 msgstr "Konfigūruoti fonoteką..."
 
@@ -1438,11 +1453,11 @@ msgid "Copy to clipboard"
 msgstr "Kopijuoti į atmintinę"
 
 #: library/libraryview.cpp:400 internet/podcasts/podcastservice.cpp:437
-#: ui/mainwindow.cpp:616 widgets/fileviewlist.cpp:43
+#: ui/mainwindow.cpp:632 widgets/fileviewlist.cpp:43
 msgid "Copy to device..."
 msgstr "Kopijuoti į įrenginį..."
 
-#: devices/deviceview.cpp:225 ui/mainwindow.cpp:606
+#: devices/deviceview.cpp:225 ui/mainwindow.cpp:622
 #: widgets/fileviewlist.cpp:38
 msgid "Copy to library..."
 msgstr "Kopijuoti į fonoteką..."
@@ -1521,8 +1536,8 @@ msgstr "Viršelio paveikslėlis nustatytas iš %1"
 msgid "Covers from %1"
 msgstr "Viršeliai iš %1"
 
-#: internet/grooveshark/groovesharkservice.cpp:533
-#: internet/grooveshark/groovesharkservice.cpp:1275
+#: internet/grooveshark/groovesharkservice.cpp:534
+#: internet/grooveshark/groovesharkservice.cpp:1276
 msgid "Create a new Grooveshark playlist"
 msgstr "Kurti naują Grooveshark grojaraštį"
 
@@ -1649,7 +1664,7 @@ msgstr "Pakeitimo data"
 msgid "Days"
 msgstr "Dienos"
 
-#: ../bin/src/ui_globalshortcutssettingspage.h:187
+#: ../bin/src/ui_globalshortcutssettingspage.h:177
 msgid "De&fault"
 msgstr "Numatytas"
 
@@ -1669,7 +1684,7 @@ msgstr "Sumažinti garsą"
 msgid "Default background image"
 msgstr "Numatytasis fono paveikslėlis"
 
-#: engines/gstengine.cpp:922
+#: engines/gstengine.cpp:930
 #, qt-format
 msgid "Default device on %1"
 msgstr "Numatytas įrenginys esantis %1"
@@ -1687,8 +1702,8 @@ msgstr "Delsa tarp vizualizacijų"
 msgid "Delete"
 msgstr "Trinti"
 
-#: internet/grooveshark/groovesharkservice.cpp:536
-#: internet/grooveshark/groovesharkservice.cpp:1322
+#: internet/grooveshark/groovesharkservice.cpp:537
+#: internet/grooveshark/groovesharkservice.cpp:1323
 msgid "Delete Grooveshark playlist"
 msgstr "Šalinti Grooveshark grojaraštį"
 
@@ -1697,7 +1712,7 @@ msgid "Delete downloaded data"
 msgstr "Naikinti atsiųstus duomenis"
 
 #: devices/deviceview.cpp:404 library/libraryview.cpp:636
-#: ui/mainwindow.cpp:2191 widgets/fileview.cpp:186
+#: ui/mainwindow.cpp:2207 widgets/fileview.cpp:186
 msgid "Delete files"
 msgstr "Ištrinti failus"
 
@@ -1705,7 +1720,7 @@ msgstr "Ištrinti failus"
 msgid "Delete from device..."
 msgstr "Ištrinti iš įrenginio..."
 
-#: library/libraryview.cpp:402 ui/mainwindow.cpp:618
+#: library/libraryview.cpp:402 ui/mainwindow.cpp:634
 #: widgets/fileviewlist.cpp:44
 msgid "Delete from disk..."
 msgstr "Ištrinti iš disko..."
@@ -1714,7 +1729,7 @@ msgstr "Ištrinti iš disko..."
 msgid "Delete played episodes"
 msgstr "Ištrinti atliktus epizodus"
 
-#: ui/equalizer.cpp:215 ../bin/src/ui_equalizer.h:169
+#: ui/equalizer.cpp:221 ../bin/src/ui_equalizer.h:169
 msgid "Delete preset"
 msgstr "Ištrinti šabloną"
 
@@ -1730,16 +1745,16 @@ msgstr "Ištrinti originalius failus"
 msgid "Deleting files"
 msgstr "Trinami failai"
 
-#: ui/mainwindow.cpp:1570
+#: ui/mainwindow.cpp:1586
 msgid "Dequeue selected tracks"
 msgstr "Iš eilės pažymėtus takelius"
 
-#: ui/mainwindow.cpp:1568
+#: ui/mainwindow.cpp:1584
 msgid "Dequeue track"
 msgstr "Iš eilės takelį"
 
 #: ../bin/src/ui_transcodedialog.h:224 ../bin/src/ui_organisedialog.h:241
-#: ../bin/src/ui_ripcd.h:321
+#: ../bin/src/ui_ripcddialog.h:321
 msgid "Destination"
 msgstr "Kopijuoti į aplanką"
 
@@ -1767,7 +1782,7 @@ msgstr "Įrenginio savybės..."
 msgid "Devices"
 msgstr "Įrenginiai"
 
-#: ../bin/src/ui_ripcd.h:300 ../bin/src/ui_vksearchdialog.h:61
+#: ../bin/src/ui_ripcddialog.h:300 ../bin/src/ui_vksearchdialog.h:61
 msgid "Dialog"
 msgstr "Dialogas"
 
@@ -1814,10 +1829,10 @@ msgctxt "Refers to search provider's status."
 msgid "Disabled"
 msgstr "Išjungta"
 
-#: playlist/playlist.cpp:1317 ui/organisedialog.cpp:69
+#: playlist/playlist.cpp:1317 ui/organisedialog.cpp:70
 #: ../bin/src/ui_groupbydialog.h:138 ../bin/src/ui_groupbydialog.h:153
 #: ../bin/src/ui_groupbydialog.h:168 ../bin/src/ui_edittagdialog.h:688
-#: ../bin/src/ui_ripcd.h:314
+#: ../bin/src/ui_ripcddialog.h:314
 msgid "Disc"
 msgstr "Diskas"
 
@@ -1985,7 +2000,7 @@ msgstr "Dropbox"
 msgid "Dubstep"
 msgstr "Dubstep"
 
-#: ../bin/src/ui_ripcd.h:309
+#: ../bin/src/ui_ripcddialog.h:309
 msgid "Duration"
 msgstr "Trukmė"
 
@@ -1993,7 +2008,7 @@ msgstr "Trukmė"
 msgid "Dynamic mode is on"
 msgstr "Dinaminė veiksena yra įjungta"
 
-#: internet/jamendo/jamendoservice.cpp:126 library/library.cpp:115
+#: internet/jamendo/jamendoservice.cpp:126 library/library.cpp:111
 msgid "Dynamic random mix"
 msgstr "Dinaminis atsitiktinis maišymas"
 
@@ -2001,7 +2016,7 @@ msgstr "Dinaminis atsitiktinis maišymas"
 msgid "Edit smart playlist..."
 msgstr "Taisyti išmanųjį grojaraštį..."
 
-#: ui/mainwindow.cpp:1612
+#: ui/mainwindow.cpp:1628
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr "Redaguoti žymę \"%1\"..."
@@ -2139,14 +2154,14 @@ msgstr "Tai atitinka --log-levels *:1"
 msgid "Equivalent to --log-levels *:3"
 msgstr "Tai atitinka --log-levels *:3"
 
-#: internet/grooveshark/groovesharkservice.cpp:1054
+#: internet/grooveshark/groovesharkservice.cpp:1055
 #: internet/magnatune/magnatunedownloaddialog.cpp:242
-#: library/libraryview.cpp:630 ui/mainwindow.cpp:1894 ui/mainwindow.cpp:2141
-#: ui/mainwindow.cpp:2289 internet/vk/vkservice.cpp:625
+#: library/libraryview.cpp:630 ui/mainwindow.cpp:1910 ui/mainwindow.cpp:2157
+#: ui/mainwindow.cpp:2305 internet/vk/vkservice.cpp:625
 msgid "Error"
 msgstr "Klaida"
 
-#: ui/ripcd.cpp:295
+#: ripper/ripcddialog.cpp:135
 msgid "Error Ripping CD"
 msgstr "Klaida Perrašant CD"
 
@@ -2185,7 +2200,7 @@ msgstr "Klaida apdorojant %1: %2"
 msgid "Error while loading audio CD"
 msgstr "Klaida įkeliant audio CD"
 
-#: library/library.cpp:69
+#: library/library.cpp:68
 msgid "Ever played"
 msgstr "Bet kada grota"
 
@@ -2306,7 +2321,7 @@ msgstr "Pradingimas"
 msgid "Fading duration"
 msgstr "Suliejimo trukmė"
 
-#: ui/mainwindow.cpp:1895
+#: ui/mainwindow.cpp:1911
 msgid "Failed reading CD drive"
 msgstr "Nepavyko perskaityti CD disko"
 
@@ -2336,11 +2351,11 @@ msgstr "Nepavyko apdoroti XML šiam RSS srautui"
 msgid "Fast"
 msgstr "Greitai"
 
-#: internet/grooveshark/groovesharkservice.cpp:644
+#: internet/grooveshark/groovesharkservice.cpp:645
 msgid "Favorites"
 msgstr "Mėgstamiausi"
 
-#: library/library.cpp:91
+#: library/library.cpp:88
 msgid "Favourite tracks"
 msgstr "Megstami takeliai"
 
@@ -2364,11 +2379,11 @@ msgstr "Gaunama Subsonic biblioteka"
 msgid "Fetching cover error"
 msgstr "Viršelio atsiuntimo klaida"
 
-#: ../bin/src/ui_ripcd.h:320
+#: ../bin/src/ui_ripcddialog.h:320
 msgid "File Format"
 msgstr "Failo Formatas"
 
-#: ui/organisedialog.cpp:77
+#: ui/organisedialog.cpp:78
 msgid "File extension"
 msgstr "Failo plėtinys"
 
@@ -2438,7 +2453,7 @@ msgstr "Pirmas lygis"
 msgid "Fit cover to width"
 msgstr "Pritaikyti viršelį prie pločio"
 
-#: core/song.cpp:393 transcoder/transcoder.cpp:233
+#: core/song.cpp:397 transcoder/transcoder.cpp:233
 msgid "Flac"
 msgstr "Flac"
 
@@ -2518,7 +2533,7 @@ msgstr "Visi žemi ir aukšti tonai"
 msgid "Full Treble"
 msgstr "Visi aukšti tonai"
 
-#: ui/settingsdialog.cpp:138
+#: ui/settingsdialog.cpp:142
 msgid "General"
 msgstr "Bendri"
 
@@ -2526,19 +2541,19 @@ msgstr "Bendri"
 msgid "General settings"
 msgstr "Pagrindiniai nustatymai"
 
-#: playlist/playlist.cpp:1321 ui/organisedialog.cpp:72
+#: playlist/playlist.cpp:1321 ui/organisedialog.cpp:73
 #: ../bin/src/ui_groupbydialog.h:134 ../bin/src/ui_groupbydialog.h:149
 #: ../bin/src/ui_groupbydialog.h:164 ../bin/src/ui_edittagdialog.h:695
-#: ../bin/src/ui_ripcd.h:317
+#: ../bin/src/ui_ripcddialog.h:317
 msgid "Genre"
 msgstr "Žanras"
 
-#: internet/grooveshark/groovesharkservice.cpp:555
+#: internet/grooveshark/groovesharkservice.cpp:556
 msgid "Get a URL to share this Grooveshark playlist"
 msgstr "Gauti URL šio Grooveshark grojaraščio bendrinimui"
 
-#: internet/grooveshark/groovesharkservice.cpp:552
-#: internet/grooveshark/groovesharkservice.cpp:1154
+#: internet/grooveshark/groovesharkservice.cpp:553
+#: internet/grooveshark/groovesharkservice.cpp:1155
 msgid "Get a URL to share this Grooveshark song"
 msgstr "Gauti URL šios Grooveshark dainos bendrinimui"
 
@@ -2551,7 +2566,7 @@ msgstr "Gauti URL, kad dalintis šia Spotify daina"
 msgid "Get a URL to share this playlist"
 msgstr "Gauti URL, kad dalintis šiuo grojaraščiu"
 
-#: internet/grooveshark/groovesharkservice.cpp:829
+#: internet/grooveshark/groovesharkservice.cpp:830
 msgid "Getting Grooveshark popular songs"
 msgstr "Gaunamos Grooveshark populiarios dainos"
 
@@ -2597,19 +2612,19 @@ msgstr "Pažymėti pilkai neegzistuojančias dainas mano grojaraštyje"
 msgid "Grooveshark"
 msgstr "Grooveshark"
 
-#: internet/grooveshark/groovesharkservice.cpp:412
+#: internet/grooveshark/groovesharkservice.cpp:413
 msgid "Grooveshark login error"
 msgstr "Grooveshark prisijungimo klaida"
 
-#: internet/grooveshark/groovesharkservice.cpp:1205
+#: internet/grooveshark/groovesharkservice.cpp:1206
 msgid "Grooveshark playlist's URL"
 msgstr "Grooveshark grojaraščio URL"
 
-#: internet/grooveshark/groovesharkservice.cpp:624
+#: internet/grooveshark/groovesharkservice.cpp:625
 msgid "Grooveshark radio"
 msgstr "Grooveshark radijas"
 
-#: internet/grooveshark/groovesharkservice.cpp:1183
+#: internet/grooveshark/groovesharkservice.cpp:1184
 msgid "Grooveshark song's URL"
 msgstr "Grooveshark dainos URL"
 
@@ -2688,6 +2703,10 @@ msgstr "Aukšta (%1 kps)"
 #: visualisations/visualisationcontainer.cpp:124
 msgid "High (1024x1024)"
 msgstr "Aukšta (1024x1024)"
+
+#: ui/equalizer.cpp:128
+msgid "HipHop"
+msgstr "HipHop"
 
 #: internet/subsonic/subsonicsettingspage.cpp:134
 msgid "Host not found, check server URL. Example: http://localhost:4040/"
@@ -2810,7 +2829,7 @@ msgstr "Indeksuojama %1"
 msgid "Information"
 msgstr "Informacija"
 
-#: ../bin/src/ui_ripcd.h:301
+#: ../bin/src/ui_ripcddialog.h:301
 msgid "Input options"
 msgstr "Įvesties parinktys"
 
@@ -2830,7 +2849,7 @@ msgstr "Vientisumo tikrinimas"
 msgid "Internet"
 msgstr "Internetas"
 
-#: ui/settingsdialog.cpp:161
+#: ui/settingsdialog.cpp:165
 msgid "Internet providers"
 msgstr "Interneto tiekėjai"
 
@@ -2867,11 +2886,11 @@ msgstr "Netinkama paslauga"
 msgid "Invalid session key"
 msgstr "Netinkamas sesijos raktas"
 
-#: internet/grooveshark/groovesharkservice.cpp:404
+#: internet/grooveshark/groovesharkservice.cpp:405
 msgid "Invalid username and/or password"
 msgstr "Neteisingas naudotojo vardas ir/arba slaptažodis"
 
-#: ../bin/src/ui_ripcd.h:312
+#: ../bin/src/ui_ripcddialog.h:312
 msgid "Invert Selection"
 msgstr "Invertuoti Pasirinkimą"
 
@@ -2932,15 +2951,19 @@ msgctxt "Label for buton to enable/disable kittens in the now playing widget"
 msgid "Kittens"
 msgstr "Kačiukai"
 
+#: ui/equalizer.cpp:131
+msgid "Kuduro"
+msgstr "Kuduro"
+
 #: ../bin/src/ui_behavioursettingspage.h:263
 msgid "Language"
 msgstr "Kalba"
 
-#: ui/equalizer.cpp:127
+#: ui/equalizer.cpp:133
 msgid "Laptop/Headphones"
 msgstr "Nešiojamojo kompiuterio kolonėlės/ausinės"
 
-#: ui/equalizer.cpp:129
+#: ui/equalizer.cpp:135
 msgid "Large Hall"
 msgstr "Didelė salė"
 
@@ -2960,7 +2983,7 @@ msgstr "Didelis albumo viršelis (be detalių)"
 msgid "Large sidebar"
 msgstr "Didelė juosta"
 
-#: library/library.cpp:83
+#: library/library.cpp:80
 msgid "Last played"
 msgstr "Vėliausiai grota"
 
@@ -2997,7 +3020,7 @@ msgstr "Last.fm naudotojo vardas"
 msgid "Last.fm wiki"
 msgstr "Last.fm wiki"
 
-#: library/library.cpp:105
+#: library/library.cpp:102
 msgid "Least favourite tracks"
 msgstr "Mažiausiai populiarūs takeliai"
 
@@ -3005,7 +3028,7 @@ msgstr "Mažiausiai populiarūs takeliai"
 msgid "Left"
 msgstr "Kairė"
 
-#: playlist/playlist.cpp:1313 ui/organisedialog.cpp:74
+#: playlist/playlist.cpp:1313 ui/organisedialog.cpp:75
 #: ui/qtsystemtrayicon.cpp:239 ../bin/src/ui_edittagdialog.h:669
 msgid "Length"
 msgstr "Trukmė"
@@ -3019,7 +3042,7 @@ msgstr "Fonoteka"
 msgid "Library advanced grouping"
 msgstr "Sudėtingesnis fonotekos grupavimas"
 
-#: ui/mainwindow.cpp:2413
+#: ui/mainwindow.cpp:2429
 msgid "Library rescan notice"
 msgstr "Fonotekos perskenavimo žinutė"
 
@@ -3031,12 +3054,12 @@ msgstr "Fonotekos paieška"
 msgid "Limits"
 msgstr "Apribojimai"
 
-#: internet/grooveshark/groovesharkservice.cpp:626
+#: internet/grooveshark/groovesharkservice.cpp:627
 msgid ""
 "Listen to Grooveshark songs based on what you've listened to previously"
 msgstr "Klausyti Grooveshark dainų pagal jūsų anksčiau klausytas dainas"
 
-#: ui/equalizer.cpp:131
+#: ui/equalizer.cpp:137
 msgid "Live"
 msgstr "Gyvai"
 
@@ -3060,7 +3083,7 @@ msgstr "Įkelti viršelį iš disko"
 msgid "Load cover from disk..."
 msgstr "Įkelti viršelį iš disko..."
 
-#: playlist/playlistcontainer.cpp:286
+#: playlist/playlistcontainer.cpp:291
 msgid "Load playlist"
 msgstr "Įkelti grojaraštį"
 
@@ -3115,6 +3138,7 @@ msgstr "Įkelia failus/URL, pakeičiant esamą sąrašą"
 #: ../bin/src/ui_soundcloudsettingspage.h:106
 #: ../bin/src/ui_spotifysettingspage.h:211
 #: ../bin/src/ui_subsonicsettingspage.h:130
+#: ../bin/src/ui_amazonsettingspage.h:105
 #: ../bin/src/ui_lastfmsettingspage.h:153
 #: ../bin/src/ui_googledrivesettingspage.h:105
 #: ../bin/src/ui_dropboxsettingspage.h:105
@@ -3154,7 +3178,7 @@ msgstr "Žema (256x256)"
 msgid "Low complexity profile (LC)"
 msgstr "Žemo sudėtingumo profilis (LC)"
 
-#: ../bin/src/ui_songinfosettingspage.h:159
+#: ui/organisedialog.cpp:68 ../bin/src/ui_songinfosettingspage.h:159
 msgid "Lyrics"
 msgstr "Dainų žodžiai"
 
@@ -3163,11 +3187,15 @@ msgstr "Dainų žodžiai"
 msgid "Lyrics from %1"
 msgstr "Žodžiai iš %1"
 
+#: songinfo/taglyricsinfoprovider.cpp:29
+msgid "Lyrics from the ID3v2 tag"
+msgstr "Dainos žodžiai iš ID3v2 žymės"
+
 #: transcoder/transcoder.cpp:235
 msgid "M4A AAC"
 msgstr "M4A AAC"
 
-#: core/song.cpp:399 transcoder/transcoder.cpp:238
+#: core/song.cpp:403 transcoder/transcoder.cpp:238
 #: ../bin/src/ui_transcodersettingspage.h:175
 msgid "MP3"
 msgstr "MP3"
@@ -3180,11 +3208,11 @@ msgstr "MP3 256k"
 msgid "MP3 96k"
 msgstr "MP3 96k"
 
-#: core/song.cpp:395
+#: core/song.cpp:399
 msgid "MP4 AAC"
 msgstr "MP4 AAC"
 
-#: core/song.cpp:397
+#: core/song.cpp:401
 msgid "MPC"
 msgstr "MPC"
 
@@ -3259,7 +3287,7 @@ msgstr "Maksimalus visuotinės paieškos rezultatų skaičius"
 msgid "Maximum bitrate"
 msgstr "Maksimalus bitrate"
 
-#: ui/ripcd.cpp:296
+#: ripper/ripcddialog.cpp:136
 msgid "Media has changed. Reloading"
 msgstr "Media pasikeitė. Įkeliama iš naujo"
 
@@ -3322,7 +3350,7 @@ msgstr "Nuotaikos juostos"
 msgid "More"
 msgstr "Daugiau"
 
-#: library/library.cpp:87
+#: library/library.cpp:84
 msgid "Most played"
 msgstr "Dažniausiai grota"
 
@@ -3339,7 +3367,7 @@ msgstr "Prijungimo vietos"
 msgid "Move down"
 msgstr "Perkelti žemyn"
 
-#: ui/mainwindow.cpp:609 widgets/fileviewlist.cpp:40
+#: ui/mainwindow.cpp:625 widgets/fileviewlist.cpp:40
 msgid "Move to library..."
 msgstr "Perkelti į fonoteką"
 
@@ -3348,7 +3376,7 @@ msgstr "Perkelti į fonoteką"
 msgid "Move up"
 msgstr "Perkelti aukštyn"
 
-#: transcoder/transcodedialog.cpp:219 ui/mainwindow.cpp:1829
+#: transcoder/transcodedialog.cpp:225 ui/mainwindow.cpp:1845
 #: internet/vk/vkservice.cpp:884
 msgid "Music"
 msgstr "Muzika"
@@ -3366,7 +3394,7 @@ msgstr "Nutildyti"
 msgid "My Albums"
 msgstr "Mano Albumai"
 
-#: internet/grooveshark/groovesharkservice.cpp:633
+#: internet/grooveshark/groovesharkservice.cpp:634
 #: internet/vk/vkservice.cpp:878
 msgid "My Music"
 msgstr "Mano muzika"
@@ -3375,8 +3403,8 @@ msgstr "Mano muzika"
 msgid "My Recommendations"
 msgstr "Mano rekomendacijos"
 
-#: internet/grooveshark/groovesharkservice.cpp:1276
-#: internet/grooveshark/groovesharkservice.cpp:1371 ui/equalizer.cpp:199
+#: internet/grooveshark/groovesharkservice.cpp:1277
+#: internet/grooveshark/groovesharkservice.cpp:1372 ui/equalizer.cpp:205
 #: ../bin/src/ui_deviceproperties.h:369 ../bin/src/ui_wizardfinishpage.h:84
 msgid "Name"
 msgstr "Veiksmas"
@@ -3406,7 +3434,7 @@ msgstr "Nutolęs tinklas"
 msgid "Never"
 msgstr "Naujesni"
 
-#: library/library.cpp:76
+#: library/library.cpp:74
 msgid "Never played"
 msgstr "Niekada negrota"
 
@@ -3421,7 +3449,7 @@ msgstr "Niekada nepradėti groti"
 msgid "New folder"
 msgstr "Naujas aplankas"
 
-#: ui/mainwindow.cpp:1666 ../bin/src/ui_mainwindow.h:691
+#: ui/mainwindow.cpp:1682 ../bin/src/ui_mainwindow.h:691
 msgid "New playlist"
 msgstr "Naujas grojaraštis"
 
@@ -3437,7 +3465,7 @@ msgstr "Naujos dainos"
 msgid "New tracks will be added automatically."
 msgstr "Nauji takeliai bus pridėti automatiškai."
 
-#: library/library.cpp:95
+#: library/library.cpp:92
 msgid "Newest tracks"
 msgstr "Naujausi takeliai"
 
@@ -3470,7 +3498,7 @@ msgstr "Nėra eksportuotinų viršelių."
 msgid "No long blocks"
 msgstr "Jokių ilgų blokų"
 
-#: playlist/playlistcontainer.cpp:371
+#: playlist/playlistcontainer.cpp:376
 msgid ""
 "No matches found.  Clear the search box to show the whole playlist again."
 msgstr "Nieko nerasta. Išvalykite paieškos laukelį, kad vėl matyti visą sąrašą."
@@ -3484,7 +3512,7 @@ msgstr "Jokių trumpų blokų"
 msgid "None"
 msgstr "Nėra"
 
-#: library/libraryview.cpp:631 ui/mainwindow.cpp:2142 ui/mainwindow.cpp:2290
+#: library/libraryview.cpp:631 ui/mainwindow.cpp:2158 ui/mainwindow.cpp:2306
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Nei viena iš pažymėtų dainų netinka kopijavimui į įrenginį"
 
@@ -3561,19 +3589,19 @@ msgstr "OSD peržiūra"
 msgid "Off"
 msgstr "Išjungta"
 
-#: core/song.cpp:401 transcoder/transcoder.cpp:244
+#: core/song.cpp:405 transcoder/transcoder.cpp:244
 msgid "Ogg Flac"
 msgstr "Ogg Flac"
 
-#: core/song.cpp:407 transcoder/transcoder.cpp:250
+#: core/song.cpp:411 transcoder/transcoder.cpp:250
 msgid "Ogg Opus"
 msgstr "Ogg opus"
 
-#: core/song.cpp:403 transcoder/transcoder.cpp:247
+#: core/song.cpp:407 transcoder/transcoder.cpp:247
 msgid "Ogg Speex"
 msgstr "Ogg Speex"
 
-#: core/song.cpp:405 transcoder/transcoder.cpp:241
+#: core/song.cpp:409 transcoder/transcoder.cpp:241
 #: ../bin/src/ui_magnatunedownloaddialog.h:139
 #: ../bin/src/ui_magnatunesettingspage.h:170
 msgid "Ogg Vorbis"
@@ -3608,7 +3636,7 @@ msgid "Opacity"
 msgstr "Permatomumas"
 
 #: internet/digitally/digitallyimportedservicebase.cpp:176
-#: internet/grooveshark/groovesharkservice.cpp:559
+#: internet/grooveshark/groovesharkservice.cpp:560
 #: internet/icecast/icecastservice.cpp:302
 #: internet/jamendo/jamendoservice.cpp:434
 #: internet/magnatune/magnatuneservice.cpp:284
@@ -3630,7 +3658,7 @@ msgstr "Atverti OPML failą"
 msgid "Open OPML file..."
 msgstr "Atverti OPML failą..."
 
-#: transcoder/transcodedialog.cpp:234
+#: transcoder/transcodedialog.cpp:240
 msgid "Open a directory to import music from"
 msgstr "Atidaryti katalogą, iš kurio importuoti muziką"
 
@@ -3661,8 +3689,8 @@ msgstr "Atidaryti naujame grojaraštyje"
 msgid "Open in your browser"
 msgstr "Atidaryti naršyklėje"
 
-#: ../bin/src/ui_globalshortcutssettingspage.h:178
-#: ../bin/src/ui_globalshortcutssettingspage.h:181
+#: ../bin/src/ui_globalshortcutssettingspage.h:169
+#: ../bin/src/ui_globalshortcutssettingspage.h:171
 msgid "Open..."
 msgstr "Atverti..."
 
@@ -3679,7 +3707,8 @@ msgid "Optimize for quality"
 msgstr "Optimizuoti kokybei"
 
 #: ../bin/src/ui_transcodedialog.h:223
-#: ../bin/src/ui_networkremotesettingspage.h:252 ../bin/src/ui_ripcd.h:322
+#: ../bin/src/ui_networkremotesettingspage.h:252
+#: ../bin/src/ui_ripcddialog.h:322
 msgid "Options..."
 msgstr "Pasirinktys..."
 
@@ -3691,7 +3720,7 @@ msgstr "Opus"
 msgid "Organise Files"
 msgstr "Tvarkyti failus"
 
-#: library/libraryview.cpp:396 ui/mainwindow.cpp:612
+#: library/libraryview.cpp:396 ui/mainwindow.cpp:628
 msgid "Organise files..."
 msgstr "Tvarkyti failus..."
 
@@ -3715,7 +3744,7 @@ msgstr "Išvestis"
 msgid "Output device"
 msgstr "Išvesties įrenginys"
 
-#: ../bin/src/ui_transcodedialog.h:221 ../bin/src/ui_ripcd.h:318
+#: ../bin/src/ui_transcodedialog.h:221 ../bin/src/ui_ripcddialog.h:318
 msgid "Output options"
 msgstr "Išvesties parinktys"
 
@@ -3739,7 +3768,7 @@ msgstr "Savininkas"
 msgid "Parsing Jamendo catalogue"
 msgstr "Apdorojamas Jamendo katalogas"
 
-#: ui/equalizer.cpp:133
+#: ui/equalizer.cpp:139
 msgid "Party"
 msgstr "Vakarėlis"
 
@@ -3753,7 +3782,7 @@ msgstr "Vakarėlis"
 msgid "Password"
 msgstr "Slaptažodis"
 
-#: core/globalshortcuts.cpp:50 ui/mainwindow.cpp:1028 ui/mainwindow.cpp:1479
+#: core/globalshortcuts.cpp:50 ui/mainwindow.cpp:1044 ui/mainwindow.cpp:1495
 #: ui/qtsystemtrayicon.cpp:175 wiimotedev/wiimotesettingspage.cpp:107
 msgid "Pause"
 msgstr "Pristabdyti"
@@ -3779,8 +3808,8 @@ msgstr "Pikselis"
 msgid "Plain sidebar"
 msgstr "Paprasta juosta"
 
-#: core/globalshortcuts.cpp:49 ui/mainwindow.cpp:584 ui/mainwindow.cpp:996
-#: ui/mainwindow.cpp:1014 ui/mainwindow.cpp:1482 ui/qtsystemtrayicon.cpp:164
+#: core/globalshortcuts.cpp:49 ui/mainwindow.cpp:600 ui/mainwindow.cpp:1012
+#: ui/mainwindow.cpp:1030 ui/mainwindow.cpp:1498 ui/qtsystemtrayicon.cpp:164
 #: ui/qtsystemtrayicon.cpp:188 ../bin/src/ui_mainwindow.h:642
 #: wiimotedev/wiimotesettingspage.cpp:100
 msgid "Play"
@@ -3815,7 +3844,7 @@ msgstr "Grojimas"
 msgid "Player options"
 msgstr "Leistuvo parinktys"
 
-#: playlist/playlistcontainer.cpp:282 playlist/playlistlistcontainer.cpp:228
+#: playlist/playlistcontainer.cpp:287 playlist/playlistlistcontainer.cpp:228
 #: playlist/playlistmanager.cpp:87 playlist/playlistmanager.cpp:156
 #: playlist/playlistmanager.cpp:494 playlist/playlisttabbar.cpp:366
 msgid "Playlist"
@@ -3834,7 +3863,7 @@ msgstr "Grojaraščio parinktys"
 msgid "Playlist type"
 msgstr "Grojaraščio tipas"
 
-#: internet/grooveshark/groovesharkservice.cpp:654
+#: internet/grooveshark/groovesharkservice.cpp:655
 #: internet/soundcloud/soundcloudservice.cpp:130 ui/mainwindow.cpp:241
 msgid "Playlists"
 msgstr "Grojaraščiai"
@@ -3852,19 +3881,19 @@ msgstr "Plėtinio būklė:"
 msgid "Podcasts"
 msgstr "Podcast"
 
-#: ui/equalizer.cpp:135
+#: ui/equalizer.cpp:141
 msgid "Pop"
 msgstr "Pop"
 
-#: internet/grooveshark/groovesharkservice.cpp:591
+#: internet/grooveshark/groovesharkservice.cpp:592
 msgid "Popular songs"
 msgstr "Populiarios dainos"
 
-#: internet/grooveshark/groovesharkservice.cpp:595
+#: internet/grooveshark/groovesharkservice.cpp:596
 msgid "Popular songs of the Month"
 msgstr "Populiarios mėnesio dainos"
 
-#: internet/grooveshark/groovesharkservice.cpp:604
+#: internet/grooveshark/groovesharkservice.cpp:605
 msgid "Popular songs today"
 msgstr "Populiarios šiandienos dainos"
 
@@ -3965,7 +3994,7 @@ msgstr "Išvesti versijos informaciją"
 msgid "Profile"
 msgstr "Profilis"
 
-#: ../bin/src/ui_transcodedialog.h:230 ../bin/src/ui_ripcd.h:324
+#: ../bin/src/ui_transcodedialog.h:230 ../bin/src/ui_ripcddialog.h:324
 msgid "Progress"
 msgstr "Progresas"
 
@@ -3974,7 +4003,7 @@ msgctxt "Category label"
 msgid "Progress"
 msgstr "Eiga"
 
-#: ui/equalizer.cpp:138
+#: ui/equalizer.cpp:144
 msgid "Psychedelic"
 msgstr "Psichodelinis"
 
@@ -4008,12 +4037,12 @@ msgstr "Pateikiama užklausa įrenginiui..."
 msgid "Queue Manager"
 msgstr "Eilės tvarkyklė"
 
-#: ui/mainwindow.cpp:1574
+#: ui/mainwindow.cpp:1590
 msgid "Queue selected tracks"
 msgstr "į eilę pažymėtus takelius"
 
 #: globalsearch/globalsearchview.cpp:465 library/libraryview.cpp:380
-#: ui/mainwindow.cpp:1572
+#: ui/mainwindow.cpp:1588
 msgid "Queue track"
 msgstr "į eilę takelį"
 
@@ -4021,7 +4050,7 @@ msgstr "į eilę takelį"
 msgid "Radio (equal loudness for all tracks)"
 msgstr "Radijas (vienodas garsumas visiems takeliams)"
 
-#: internet/grooveshark/groovesharkservice.cpp:613
+#: internet/grooveshark/groovesharkservice.cpp:614
 msgid "Radios"
 msgstr "Radijai"
 
@@ -4075,7 +4104,7 @@ msgstr "Tikrai atšaukti?"
 msgid "Redirect limit exceeded, verify server configuration."
 msgstr "Pasiekta nukreipimo riba, patikrinkite serverio konfigūraciją."
 
-#: internet/grooveshark/groovesharkservice.cpp:561
+#: internet/grooveshark/groovesharkservice.cpp:562
 msgid "Refresh"
 msgstr "Atnaujinti"
 
@@ -4097,7 +4126,7 @@ msgstr "Atnaujinti stočių sąrašą"
 msgid "Refresh streams"
 msgstr "Atnaujinti srautus"
 
-#: ui/equalizer.cpp:140
+#: ui/equalizer.cpp:146
 msgid "Reggae"
 msgstr "Regis"
 
@@ -4135,7 +4164,7 @@ msgstr "Pašalinti dublikatus iš grojaraščio"
 msgid "Remove folder"
 msgstr "Pašalinti aplanką"
 
-#: internet/grooveshark/groovesharkservice.cpp:549
+#: internet/grooveshark/groovesharkservice.cpp:550
 #: internet/vk/vkservice.cpp:316
 msgid "Remove from My Music"
 msgstr "Pašalinti iš Mano muzika"
@@ -4144,11 +4173,11 @@ msgstr "Pašalinti iš Mano muzika"
 msgid "Remove from bookmarks"
 msgstr "Pašalinti iš adresyno"
 
-#: internet/grooveshark/groovesharkservice.cpp:546
+#: internet/grooveshark/groovesharkservice.cpp:547
 msgid "Remove from favorites"
 msgstr "Pašalinti iš mėgstamiausių"
 
-#: internet/grooveshark/groovesharkservice.cpp:543
+#: internet/grooveshark/groovesharkservice.cpp:544
 #: internet/spotify/spotifyservice.cpp:672 ../bin/src/ui_mainwindow.h:685
 msgid "Remove from playlist"
 msgstr "Ištrinti iš grojaraščio"
@@ -4165,20 +4194,20 @@ msgstr "Pašalinti grojaraščius"
 msgid "Remove unavailable tracks from playlist"
 msgstr "Pašalinti neprieinamus takelius iš grojaraščio"
 
-#: internet/grooveshark/groovesharkservice.cpp:1570
+#: internet/grooveshark/groovesharkservice.cpp:1571
 msgid "Removing songs from My Music"
 msgstr "Šalinamos dainos iš Mano muzika"
 
-#: internet/grooveshark/groovesharkservice.cpp:1518
+#: internet/grooveshark/groovesharkservice.cpp:1519
 msgid "Removing songs from favorites"
 msgstr "Šalinamos dainos iš mėgstamiausių"
 
-#: internet/grooveshark/groovesharkservice.cpp:1370
+#: internet/grooveshark/groovesharkservice.cpp:1371
 #, qt-format
 msgid "Rename \"%1\" playlist"
 msgstr "Pervardinti %1 grojaraštį"
 
-#: internet/grooveshark/groovesharkservice.cpp:539
+#: internet/grooveshark/groovesharkservice.cpp:540
 msgid "Rename Grooveshark playlist"
 msgstr "Pervardinti Grooveshark grojaraštį"
 
@@ -4265,15 +4294,15 @@ msgstr "Naudoti tik SCII simbolius"
 msgid "Resume playback on start"
 msgstr "Paleidžiant pratęsti atkūrimą"
 
-#: internet/grooveshark/groovesharkservice.cpp:795
+#: internet/grooveshark/groovesharkservice.cpp:796
 msgid "Retrieving Grooveshark My Music songs"
 msgstr "Gaunamos Grooveshark Mano muzikos dainos"
 
-#: internet/grooveshark/groovesharkservice.cpp:762
+#: internet/grooveshark/groovesharkservice.cpp:763
 msgid "Retrieving Grooveshark favorites songs"
 msgstr "Gaunamos Grooveshark mėgstamiausios dainos"
 
-#: internet/grooveshark/groovesharkservice.cpp:693
+#: internet/grooveshark/groovesharkservice.cpp:694
 msgid "Retrieving Grooveshark playlists"
 msgstr "Gaunami Grooveshark grojaraščiai"
 
@@ -4285,19 +4314,19 @@ msgstr "Grįžti į Clementine"
 msgid "Right"
 msgstr "Dešinė"
 
-#: ../bin/src/ui_ripcd.h:303
+#: ../bin/src/ui_ripcddialog.h:303
 msgid "Rip"
 msgstr "Perrašyti"
 
-#: ui/ripcd.cpp:114
+#: ripper/ripcddialog.cpp:95
 msgid "Rip CD"
 msgstr "Perrašyti CD"
 
 #: ../bin/src/ui_mainwindow.h:716
-msgid "Rip audio CD..."
-msgstr "Perrašyti audio CD..."
+msgid "Rip audio CD"
+msgstr "Perrašyti garso įrašų CD"
 
-#: ui/equalizer.cpp:142
+#: ui/equalizer.cpp:148
 msgid "Rock"
 msgstr "Rokas"
 
@@ -4327,7 +4356,7 @@ msgstr "Saugiai pašalinti įrenginį po kopijavimo"
 msgid "Sample rate"
 msgstr "Išrankos dažnis"
 
-#: ui/organisedialog.cpp:76
+#: ui/organisedialog.cpp:77
 msgid "Samplerate"
 msgstr "Išrankosdažnis"
 
@@ -4361,7 +4390,7 @@ msgstr "Išsaugoti grojaraštį"
 msgid "Save playlist..."
 msgstr "Įrašyti grojaraštį..."
 
-#: ui/equalizer.cpp:199 ../bin/src/ui_equalizer.h:166
+#: ui/equalizer.cpp:205 ../bin/src/ui_equalizer.h:166
 msgid "Save preset"
 msgstr "Išsaugoti šabloną"
 
@@ -4377,7 +4406,7 @@ msgstr "Jei įmanoma, statistiką saugoti failo žymėse"
 msgid "Save this stream in the Internet tab"
 msgstr "Išsaugoti šį srautą interneto kortelėje"
 
-#: library/library.cpp:196
+#: library/library.cpp:193
 msgid "Saving songs statistics into songs files"
 msgstr "Dainų statistika saugoma dainų failuose"
 
@@ -4460,7 +4489,7 @@ msgstr "Paieškos veiksena"
 msgid "Search options"
 msgstr "Paieškos parinktys"
 
-#: internet/grooveshark/groovesharkservice.cpp:582
+#: internet/grooveshark/groovesharkservice.cpp:583
 #: internet/soundcloud/soundcloudservice.cpp:116
 #: internet/spotify/spotifyservice.cpp:406
 msgid "Search results"
@@ -4495,11 +4524,11 @@ msgstr "Rasti dabar grojamą takelį pagal santykinį kiekį"
 msgid "Seek the currently playing track to an absolute position"
 msgstr "Rasti dabar grojamą takelį į absoliučiąją poziciją"
 
-#: visualisations/visualisationselector.cpp:37 ../bin/src/ui_ripcd.h:310
+#: visualisations/visualisationselector.cpp:37 ../bin/src/ui_ripcddialog.h:310
 msgid "Select All"
 msgstr "Pažymėti visus"
 
-#: visualisations/visualisationselector.cpp:38 ../bin/src/ui_ripcd.h:311
+#: visualisations/visualisationselector.cpp:38 ../bin/src/ui_ripcddialog.h:311
 msgid "Select None"
 msgstr "N"
 
@@ -4527,7 +4556,7 @@ msgstr "Pasirinkti vaizdinius"
 msgid "Select visualizations..."
 msgstr "Parinkti vaizdinius"
 
-#: ../bin/src/ui_transcodedialog.h:229 ../bin/src/ui_ripcd.h:319
+#: ../bin/src/ui_transcodedialog.h:229 ../bin/src/ui_ripcddialog.h:319
 msgid "Select..."
 msgstr "Pasirinkti..."
 
@@ -4551,7 +4580,7 @@ msgstr "Serverio detalės"
 msgid "Service offline"
 msgstr "Servisas nepasiekiamas"
 
-#: ui/mainwindow.cpp:1611
+#: ui/mainwindow.cpp:1627
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr "Nustatyti %1 į \"%2\"..."
@@ -4568,12 +4597,12 @@ msgstr "Nustatyti vertę visiems pažymėtiems takeliams..."
 msgid "Settings"
 msgstr "Nustatymai"
 
-#: ../bin/src/ui_globalshortcutssettingspage.h:183
+#: ../bin/src/ui_globalshortcutssettingspage.h:173
 msgid "Shortcut"
 msgstr "Kombinacija"
 
-#: ui/globalshortcutssettingspage.cpp:144
-#: ../bin/src/ui_globalshortcutssettingspage.h:185
+#: ui/globalshortcutssettingspage.cpp:130
+#: ../bin/src/ui_globalshortcutssettingspage.h:175
 #, qt-format
 msgid "Shortcut for %1"
 msgstr "Kombinacija veiksmui: %1"
@@ -4627,7 +4656,7 @@ msgstr "Rodyti gražų OSD"
 msgid "Show above status bar"
 msgstr "Rodyti virš būsenos juostos"
 
-#: ui/mainwindow.cpp:552
+#: ui/mainwindow.cpp:568
 msgid "Show all songs"
 msgstr "Rodyti visas dainas"
 
@@ -4651,12 +4680,12 @@ msgstr "Rodyti viso dydžio..."
 msgid "Show groups in global search result"
 msgstr "Rodyti grupes visuotinės paieškos rezultatuose"
 
-#: library/libraryview.cpp:413 ui/mainwindow.cpp:621
+#: library/libraryview.cpp:413 ui/mainwindow.cpp:637
 #: widgets/fileviewlist.cpp:51
 msgid "Show in file browser..."
 msgstr "Rodyti failų naršyklėje..."
 
-#: ui/mainwindow.cpp:624
+#: ui/mainwindow.cpp:640
 msgid "Show in library..."
 msgstr "Rodyti fonotekoje..."
 
@@ -4668,11 +4697,11 @@ msgstr "Rodyti įvairiuose atlikėjuose"
 msgid "Show moodbar"
 msgstr "Rodyti nuotaikos juostą"
 
-#: ui/mainwindow.cpp:554
+#: ui/mainwindow.cpp:570
 msgid "Show only duplicates"
 msgstr "Rodyti tik duplikatus"
 
-#: ui/mainwindow.cpp:556
+#: ui/mainwindow.cpp:572
 msgid "Show only untagged"
 msgstr "Rodyti tik be žymių"
 
@@ -4748,7 +4777,7 @@ msgstr "Dydis"
 msgid "Size:"
 msgstr "Dydis:"
 
-#: ui/equalizer.cpp:146
+#: ui/equalizer.cpp:152
 msgid "Ska"
 msgstr "Ska"
 
@@ -4764,11 +4793,11 @@ msgstr "Praleisti skaičiavimą"
 msgid "Skip forwards in playlist"
 msgstr "Kitas grojaraščio kūrinys"
 
-#: ui/mainwindow.cpp:1585
+#: ui/mainwindow.cpp:1601
 msgid "Skip selected tracks"
 msgstr "Praleisti pasirinktus takelius"
 
-#: ui/mainwindow.cpp:1583
+#: ui/mainwindow.cpp:1599
 msgid "Skip track"
 msgstr "Praleisti takelį"
 
@@ -4788,11 +4817,11 @@ msgstr "Išmanusis grojaraštis"
 msgid "Smart playlists"
 msgstr "Išmanūs grojaraščiai"
 
-#: ui/equalizer.cpp:144
+#: ui/equalizer.cpp:150
 msgid "Soft"
 msgstr "Rami"
 
-#: ui/equalizer.cpp:148
+#: ui/equalizer.cpp:154
 msgid "Soft Rock"
 msgstr "Ramus rokas"
 
@@ -4885,7 +4914,7 @@ msgstr "Standartinis"
 msgid "Starred"
 msgstr "Su žvaigždute"
 
-#: ui/ripcd.cpp:86
+#: ripper/ripcddialog.cpp:69
 msgid "Start ripping"
 msgstr "Pradėti perrašymą"
 
@@ -4893,11 +4922,11 @@ msgstr "Pradėti perrašymą"
 msgid "Start the playlist currently playing"
 msgstr "Pradėti grajaraštį nuo dabar grojančio"
 
-#: transcoder/transcodedialog.cpp:89
+#: transcoder/transcodedialog.cpp:90
 msgid "Start transcoding"
 msgstr "Perkoduoti"
 
-#: internet/grooveshark/groovesharkservice.cpp:584
+#: internet/grooveshark/groovesharkservice.cpp:585
 #: internet/soundcloud/soundcloudservice.cpp:118
 #: internet/spotify/spotifyservice.cpp:408
 msgid ""
@@ -4914,7 +4943,7 @@ msgstr "Paleidžiama %1"
 msgid "Starting..."
 msgstr "Pradedama..."
 
-#: internet/grooveshark/groovesharkservice.cpp:617
+#: internet/grooveshark/groovesharkservice.cpp:618
 msgid "Stations"
 msgstr "Stotys"
 
@@ -4927,7 +4956,7 @@ msgstr "Stabdyti"
 msgid "Stop after"
 msgstr "Stabdyti po"
 
-#: ui/mainwindow.cpp:587 ../bin/src/ui_mainwindow.h:650
+#: ui/mainwindow.cpp:603 ../bin/src/ui_mainwindow.h:650
 msgid "Stop after this track"
 msgstr "Sustabdyti po šio takelio"
 
@@ -4948,7 +4977,7 @@ msgstr "Stabdyti grojimą po takelio: %1"
 msgid "Stopped"
 msgstr "Sustabdyta"
 
-#: core/song.cpp:418
+#: core/song.cpp:422
 msgid "Stream"
 msgstr "Srautas"
 
@@ -4962,7 +4991,7 @@ msgstr "Po 30 dienų bandomojo laikotarpio, transliuoti iš subsonic serverio re
 msgid "Streaming membership"
 msgstr "Transliavimo narystė"
 
-#: internet/grooveshark/groovesharkservice.cpp:658
+#: internet/grooveshark/groovesharkservice.cpp:659
 msgid "Subscribed playlists"
 msgstr "Prenumeruoti grojaraščiai"
 
@@ -5039,7 +5068,7 @@ msgstr "Žymių gavėjas"
 msgid "Target bitrate"
 msgstr "Numatomas bitrate"
 
-#: ui/equalizer.cpp:150
+#: ui/equalizer.cpp:156
 msgid "Techno"
 msgstr "Techno"
 
@@ -5051,7 +5080,7 @@ msgstr "Teksto nustatymai"
 msgid "Thanks to"
 msgstr "Dėkojame"
 
-#: ui/globalshortcutssettingspage.cpp:184
+#: ui/globalshortcutssettingspage.cpp:170
 #, qt-format
 msgid "The \"%1\" command could not be started."
 msgstr "Komanda \"%1\" negalėjo būti paleista."
@@ -5083,7 +5112,7 @@ msgid ""
 "license key. Visit subsonic.org for details."
 msgstr "Bandomasis subsonic laikotarpis baigėsi. Paaukokite ir gaukite licenciją. Norėdami sužinoti daugiau aplankykite subsonic.org."
 
-#: ui/mainwindow.cpp:2404
+#: ui/mainwindow.cpp:2420
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -5125,7 +5154,7 @@ msgid ""
 "continue?"
 msgstr "Šie failai bus ištrinti iš įrenginio, ar tikrai norite tęsti?"
 
-#: library/libraryview.cpp:637 ui/mainwindow.cpp:2192 widgets/fileview.cpp:187
+#: library/libraryview.cpp:637 ui/mainwindow.cpp:2208 widgets/fileview.cpp:187
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -5204,11 +5233,11 @@ msgstr "Šio tipo įrenginys yra nepalaikomas: %1"
 #: playlist/playlist.cpp:1307 ui/organisedialog.cpp:60
 #: ui/qtsystemtrayicon.cpp:232 ../bin/src/ui_about.h:142
 #: ../bin/src/ui_edittagdialog.h:685 ../bin/src/ui_trackselectiondialog.h:211
-#: ../bin/src/ui_ripcd.h:307
+#: ../bin/src/ui_ripcddialog.h:307
 msgid "Title"
 msgstr "Pavadinimas"
 
-#: internet/grooveshark/groovesharkservice.cpp:1055
+#: internet/grooveshark/groovesharkservice.cpp:1056
 msgid ""
 "To start Grooveshark radio, you should first listen to a few other "
 "Grooveshark songs"
@@ -5226,7 +5255,7 @@ msgstr "Išjungti gražųjį OSD"
 msgid "Toggle fullscreen"
 msgstr "Visame ekrane"
 
-#: ui/mainwindow.cpp:1576
+#: ui/mainwindow.cpp:1592
 msgid "Toggle queue status"
 msgstr "Perjungti eilės statusą"
 
@@ -5262,9 +5291,9 @@ msgstr "Viso baitų perkelta"
 msgid "Total network requests made"
 msgstr "Viso tinklo užklausų padaryta"
 
-#: playlist/playlist.cpp:1315 ui/organisedialog.cpp:68
+#: playlist/playlist.cpp:1315 ui/organisedialog.cpp:69
 #: ../bin/src/ui_edittagdialog.h:686 ../bin/src/ui_trackselectiondialog.h:213
-#: ../bin/src/ui_ripcd.h:305
+#: ../bin/src/ui_ripcddialog.h:305
 msgid "Track"
 msgstr "Takelis"
 
@@ -5293,7 +5322,7 @@ msgstr "Perkoduojami %1 failai naudojant %2 gijų"
 msgid "Transcoding options"
 msgstr "Perkodavimo pasirinktys"
 
-#: core/song.cpp:413
+#: core/song.cpp:417
 msgid "TrueAudio"
 msgstr "TrueAudio"
 
@@ -5327,7 +5356,7 @@ msgstr "Nepavyko prisijungti"
 msgid "Unable to download %1 (%2)"
 msgstr "Nepavyko atsiųsti %1 (%2)"
 
-#: core/song.cpp:422 library/librarymodel.cpp:350 library/librarymodel.cpp:354
+#: core/song.cpp:426 library/librarymodel.cpp:350 library/librarymodel.cpp:354
 #: library/librarymodel.cpp:358 library/librarymodel.cpp:1066
 #: playlist/playlistdelegates.cpp:306 playlist/playlistmanager.cpp:501
 #: playlist/playlistmanager.cpp:502 ui/albumcoverchoicecontroller.cpp:124
@@ -5348,11 +5377,11 @@ msgstr "Nežinoma klaida"
 msgid "Unset cover"
 msgstr "Pašalinti viršelį"
 
-#: ui/mainwindow.cpp:1581
+#: ui/mainwindow.cpp:1597
 msgid "Unskip selected tracks"
 msgstr "Nepraleisti pasirinktų takelių"
 
-#: ui/mainwindow.cpp:1579
+#: ui/mainwindow.cpp:1595
 msgid "Unskip track"
 msgstr "Nepraleisti takelio"
 
@@ -5369,7 +5398,7 @@ msgstr "Artėjantys koncertai"
 msgid "Update"
 msgstr "Atnaujinti"
 
-#: internet/grooveshark/groovesharkservice.cpp:1227
+#: internet/grooveshark/groovesharkservice.cpp:1228
 msgid "Update Grooveshark playlist"
 msgstr "Atnaujinti Grooveshark grojaraštį"
 
@@ -5393,7 +5422,7 @@ msgstr "Atnaujinti šią garso prenumeratą"
 msgid "Updating"
 msgstr "Atnaujinama"
 
-#: library/librarywatcher.cpp:94
+#: library/librarywatcher.cpp:92
 #, qt-format
 msgid "Updating %1"
 msgstr "Atnaujinama %1"
@@ -5403,7 +5432,7 @@ msgstr "Atnaujinama %1"
 msgid "Updating %1%..."
 msgstr "Atnaujinama %1..."
 
-#: library/librarywatcher.cpp:92
+#: library/librarywatcher.cpp:90
 msgid "Updating library"
 msgstr "Atnaujinama biblioteka"
 
@@ -5415,7 +5444,7 @@ msgstr "Naudojimas"
 msgid "Use Album Artist tag when available"
 msgstr "Naudoti albumo artisto žymę, jei galima"
 
-#: ../bin/src/ui_globalshortcutssettingspage.h:177
+#: ../bin/src/ui_globalshortcutssettingspage.h:168
 msgid "Use Gnome's shortcut keys"
 msgstr "Naudoti Gnome klavišų kombinacijas"
 
@@ -5483,12 +5512,12 @@ msgstr "Naudoti garso normalizavimą"
 msgid "Used"
 msgstr "Panaudota"
 
-#: internet/grooveshark/groovesharkservice.cpp:407
+#: internet/grooveshark/groovesharkservice.cpp:408
 #, qt-format
 msgid "User %1 doesn't have a Grooveshark Anywhere account"
 msgstr "Naudotojas %1 neturi Grooveshark Bet kur paskyros"
 
-#: ui/settingsdialog.cpp:152
+#: ui/settingsdialog.cpp:156
 msgid "User interface"
 msgstr "Naudotojo sąsaja"
 
@@ -5574,7 +5603,7 @@ msgstr "Siena"
 msgid "Warn me when closing a playlist tab"
 msgstr "Perspėti mane, kai uždaroma grojaraščio kortelė."
 
-#: core/song.cpp:411 transcoder/transcoder.cpp:256
+#: core/song.cpp:415 transcoder/transcoder.cpp:256
 msgid "Wav"
 msgstr "Wav"
 
@@ -5658,7 +5687,7 @@ msgstr "Windows Media 40k"
 msgid "Windows Media 64k"
 msgstr "Windows Media 64k"
 
-#: core/song.cpp:391 transcoder/transcoder.cpp:253
+#: core/song.cpp:395 transcoder/transcoder.cpp:253
 msgid "Windows Media audio"
 msgstr "Windows Media Audio"
 
@@ -5672,7 +5701,7 @@ msgid ""
 "well?"
 msgstr "Ar norėtumėte perkelti kitas dainas į šio atlikėjo albumą?"
 
-#: ui/mainwindow.cpp:2411
+#: ui/mainwindow.cpp:2427
 msgid "Would you like to run a full rescan right now?"
 msgstr "Ar norite paleisti pilną perskenavimą dabar?"
 
@@ -5688,10 +5717,10 @@ msgstr "Įrašyti meta duomenis"
 msgid "Wrong username or password."
 msgstr "Netinkamas naudotojo vardas ar slaptažodis."
 
-#: playlist/playlist.cpp:1319 ui/organisedialog.cpp:71
+#: playlist/playlist.cpp:1319 ui/organisedialog.cpp:72
 #: ../bin/src/ui_groupbydialog.h:135 ../bin/src/ui_groupbydialog.h:150
 #: ../bin/src/ui_groupbydialog.h:165 ../bin/src/ui_edittagdialog.h:690
-#: ../bin/src/ui_trackselectiondialog.h:212 ../bin/src/ui_ripcd.h:313
+#: ../bin/src/ui_trackselectiondialog.h:212 ../bin/src/ui_ripcddialog.h:313
 msgid "Year"
 msgstr "Metai"
 
@@ -5797,19 +5826,12 @@ msgstr "Jūs atsijungėte iš Spotify, prašome įvesti savo slaptažodį dar ka
 msgid "You love this track"
 msgstr "Jūs mylite šį takelį"
 
-#: ../bin/src/ui_globalshortcutssettingspage.h:180
+#: ../bin/src/ui_globalshortcutssettingspage.h:170
 msgid ""
 "You need to launch System Preferences and allow Clementine to \"<span style"
 "=\"font-style:italic\">control your computer</span>\" to use global "
 "shortcuts in Clementine."
 msgstr "Norėdami visuotinai naudoti Clementine sparčiuosius klavišus, privalote paleisti Sistemos Nuostatas ir leisti Clementine \"<span style=\"font-style:italic\">valdyti jūsų kompiuterį</span>\"."
-
-#: ../bin/src/ui_globalshortcutssettingspage.h:179
-msgid ""
-"You need to launch System Preferences and turn on \"<span style=\" font-"
-"style:italic;\">Enable access for assistive devices</span>\" to use global "
-"shortcuts in Clementine."
-msgstr "Jums reikia paleisti Sistemos nustatymus ir įjungti \"<span style=\" font-style:italic;\">Suteikti prieigą pagalbiniams įrenginiams</span>\", kad naudoti Bendrąsias klavišų kombinacijas Clementine programoje."
 
 #: ../bin/src/ui_behavioursettingspage.h:268
 msgid "You will need to restart Clementine if you change the language."
@@ -5854,7 +5876,7 @@ msgstr "Jūsų naudotojo vardas arba slaptažodis yra neteisingi."
 msgid "Z-A"
 msgstr "Z-A"
 
-#: ui/equalizer.cpp:152
+#: ui/equalizer.cpp:158
 msgid "Zero"
 msgstr "Nulis"
 

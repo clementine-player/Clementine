@@ -113,9 +113,6 @@ GstEngine::~GstEngine() {
 
   current_pipeline_.reset();
 
-  // Save configuration
-  gst_deinit();
-
   qDeleteAll(device_finders_);
 }
 
@@ -491,6 +488,17 @@ void GstEngine::Stop(bool stop_after) {
 
   url_ = QUrl();  // To ensure we return Empty from state()
   beginning_nanosec_ = end_nanosec_ = 0;
+
+  // Check if we started a fade out. If it isn't finished yet and the user
+  // pressed stop, we cancel the fader and just stop the playback.
+  if (is_fading_out_to_pause_) {
+    disconnect(current_pipeline_.get(), SIGNAL(FaderFinished()), 0, 0);
+    is_fading_out_to_pause_ = false;
+    has_faded_out_ = true;
+
+    fadeout_pause_pipeline_.reset();
+    fadeout_pipeline_.reset();
+  }
 
   if (fadeout_enabled_ && current_pipeline_ && !stop_after) StartFadeout();
 

@@ -30,6 +30,7 @@ class LibraryBackend;
 class LibraryModel;
 class LibraryWatcher;
 class TaskManager;
+class Thread;
 
 class Library : public QObject {
   Q_OBJECT
@@ -79,7 +80,7 @@ class Library : public QObject {
   LibraryModel* model_;
 
   LibraryWatcher* watcher_;
-  QThread* watcher_thread_;
+  Thread* watcher_thread_;
 
   bool save_statistics_in_files_;
   bool save_ratings_in_files_;

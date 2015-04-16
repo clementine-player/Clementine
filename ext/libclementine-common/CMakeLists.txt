@@ -21,6 +21,10 @@ set(HEADERS
   core/workerpool.h
 )
 
+if(APPLE)
+  list(APPEND SOURCES core/scoped_nsautorelease_pool.mm)
+endif(APPLE)
+
 qt5_wrap_cpp(MOC ${HEADERS})
 
 add_library(libclementine-common STATIC

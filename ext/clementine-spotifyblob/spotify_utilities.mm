@@ -4,11 +4,12 @@
 #import <Foundation/NSFileManager.h>
 #import <Foundation/NSPathUtilities.h>
 
+#import "core/scoped_nsautorelease_pool.h"
+
 namespace utilities {
 
 QString GetUserDataDirectory() {
-  NSAutoreleasePool* pool = [NSAutoreleasePool alloc];
-  [pool init];
+  ScopedNSAutoreleasePool pool;
 
   NSArray* paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory,
                                                        NSUserDomainMask, YES);
@@ -19,12 +20,11 @@ QString GetUserDataDirectory() {
   } else {
     ret = "~/Library/Caches";
   }
-  [pool drain];
   return ret;
 }
 
 QString GetSettingsDirectory() {
-  NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
+  ScopedNSAutoreleasePool pool;
   NSArray* paths = NSSearchPathForDirectoriesInDomains(
       NSApplicationSupportDirectory, NSUserDomainMask, YES);
   NSString* ret;
@@ -42,7 +42,7 @@ QString GetSettingsDirectory() {
                                 error:nil];
 
   QString path = QString::fromUtf8([ret UTF8String]);
-  [pool drain];
   return path;
 }
-}
+
+}  // namespace utilities

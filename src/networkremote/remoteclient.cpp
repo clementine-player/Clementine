@@ -56,6 +56,7 @@ RemoteClient::~RemoteClient() {
     client_->waitForDisconnected(2000);
 
   song_sender_->deleteLater();
+  client_->deleteLater();
 }
 
 void RemoteClient::setDownloader(bool downloader) { downloader_ = downloader; }

@@ -64,10 +64,10 @@ find_package(Protobuf REQUIRED)
 find_package(FFTW3)
 
 pkg_check_modules(CDIO libcdio)
-pkg_check_modules(CHROMAPRINT libchromaprint)
+pkg_check_modules(CHROMAPRINT REQUIRED libchromaprint)
 pkg_check_modules(GIO gio-2.0)
-pkg_check_modules(GLIB glib-2.0)
-pkg_check_modules(GOBJECT gobject-2.0)
+pkg_check_modules(GLIB REQUIRED glib-2.0)
+pkg_check_modules(GOBJECT REQUIRED gobject-2.0)
 pkg_check_modules(GSTREAMER REQUIRED gstreamer-1.0)
 pkg_check_modules(GSTREAMER_APP REQUIRED gstreamer-app-1.0)
 pkg_check_modules(GSTREAMER_AUDIO REQUIRED gstreamer-audio-1.0)
@@ -215,6 +215,11 @@ optional_component(BOX ON "Box support"
 optional_component(VK ON "Vk.com support")
 
 optional_component(SEAFILE ON "Seafile support"
+  DEPENDS "Google sparsehash" SPARSEHASH_INCLUDE_DIRS
+  DEPENDS "Taglib 1.8" "TAGLIB_VERSION VERSION_GREATER 1.7.999"
+)
+
+optional_component(AMAZON_CLOUD_DRIVE ON "Amazon Cloud Drive support"
   DEPENDS "Google sparsehash" SPARSEHASH_INCLUDE_DIRS
   DEPENDS "Taglib 1.8" "TAGLIB_VERSION VERSION_GREATER 1.7.999"
 )

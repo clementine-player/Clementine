@@ -32,10 +32,13 @@ SongInfoFetcher::SongInfoFetcher(QObject* parent)
 
 void SongInfoFetcher::AddProvider(SongInfoProvider* provider) {
   providers_ << provider;
-  connect(provider, SIGNAL(ImageReady(int, QUrl)), SLOT(ImageReady(int, QUrl)));
+  connect(provider, SIGNAL(ImageReady(int, QUrl)), SLOT(ImageReady(int, QUrl)),
+          Qt::QueuedConnection);
   connect(provider, SIGNAL(InfoReady(int, CollapsibleInfoPane::Data)),
-          SLOT(InfoReady(int, CollapsibleInfoPane::Data)));
-  connect(provider, SIGNAL(Finished(int)), SLOT(ProviderFinished(int)));
+          SLOT(InfoReady(int, CollapsibleInfoPane::Data)),
+          Qt::QueuedConnection);
+  connect(provider, SIGNAL(Finished(int)), SLOT(ProviderFinished(int)),
+          Qt::QueuedConnection);
 }
 
 int SongInfoFetcher::FetchInfo(const Song& metadata) {
