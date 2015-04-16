@@ -322,9 +322,18 @@ endif(ENABLE_VISUALISATIONS)
 add_subdirectory(3rdparty/qsqlite)
 include_directories("3rdparty/qsqlite")
 
-add_subdirectory(3rdparty/singleapplication)
-set(SINGLEAPPLICATION_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/singleapplication)
-set(SINGLEAPPLICATION_LIBRARIES singleapplication)
+# When/if upstream accepts our patches then these options can be used to link
+# to system installed qtsingleapplication instead.
+option(USE_SYSTEM_QTSINGLEAPPLICATION "Don't set this option unless your system QtSingleApplication library has been compiled with the Clementine patches in 3rdparty" OFF)
+if(USE_SYSTEM_QTSINGLEAPPLICATION)
+  find_path(QTSINGLEAPPLICATION_INCLUDE_DIRS qtsingleapplication.h PATH_SUFFIXES QtSolutions)
+  find_library(QTSINGLEAPPLICATION_LIBRARIES QtSolutions_SingleApplication-2.6)
+  find_library(QTSINGLECOREAPPLICATION_LIBRARIES QtSolutions_SingleCoreApplication-2.6)
+else(USE_SYSTEM_QTSINGLEAPPLICATION)
+  add_subdirectory(3rdparty/qtsingleapplication)
+  set(QTSINGLEAPPLICATION_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/qtsingleapplication)
+  set(QTSINGLEAPPLICATION_LIBRARIES qtsingleapplication)
+endif(USE_SYSTEM_QTSINGLEAPPLICATION)
 
 # QtIoCompressor isn't patched, so we can use a system version if it's
 # available

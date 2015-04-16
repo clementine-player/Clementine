@@ -320,7 +320,7 @@ int main(int argc, char* argv[]) {
 
   IncreaseFDLimit();
 
-  QtSingleApplication a(argc, argv);
+  SingleApplication a(argc, argv);
 
 #ifdef HAVE_LIBLASTFM
   lastfm::ws::ApiKey = LastFMService::kApiKey;
@@ -460,6 +460,7 @@ int main(int argc, char* argv[]) {
   QObject::connect(&a, SIGNAL(messageReceived(QByteArray)), &w,
                    SLOT(CommandlineOptionsReceived(QByteArray)));
 
+  w.CommandlineOptionsReceived(options);
   int ret = a.exec();
 
 #ifdef Q_OS_LINUX
