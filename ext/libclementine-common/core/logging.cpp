@@ -104,6 +104,7 @@ void Init() {
 
   sClassLevels = new QMap<QString, Level>();
   sNullDevice = new NullDevice;
+  sNullDevice->open(QIODevice::ReadWrite);
 
   // Catch other messages from Qt
   if (!sOriginalMessageHandler) {
