@@ -100,6 +100,7 @@ macro(add_test_file test_source gui_required)
       ${test_source}
     )
     target_link_libraries(${TEST_NAME} ${GMOCK_LIBRARIES} clementine_lib test_utils)
+    qt5_use_modules (${TEST_NAME} Test)
     set(GUI_REQUIRED ${gui_required})
     if (GUI_REQUIRED)
       target_link_libraries(${TEST_NAME} test_gui_main)
