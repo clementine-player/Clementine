@@ -33,7 +33,7 @@
 #include "library/librarybackend.h"
 #include "ui/settingsdialog.h"
 
-const char* AmazonCloudDrive::kServiceName = "Cloud Drive";
+const char* AmazonCloudDrive::kServiceName = "Amazon Cloud Drive";
 const char* AmazonCloudDrive::kSettingsGroup = "AmazonCloudDrive";
 
 namespace {
