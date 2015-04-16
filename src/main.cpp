@@ -317,12 +317,6 @@ int main(int argc, char* argv[]) {
       1);
 #endif
 
-#ifdef HAVE_LIBLASTFM
-  lastfm::ws::ApiKey = LastFMService::kApiKey;
-  lastfm::ws::SharedSecret = LastFMService::kSecret;
-  lastfm::setNetworkAccessManager(new NetworkAccessManager);
-#endif
-
   // Output the version, so when people attach log output to bug reports they
   // don't have to tell us which version they're using.
   qLog(Info) << "Clementine-qt5" << CLEMENTINE_VERSION_DISPLAY;
@@ -335,6 +329,12 @@ int main(int argc, char* argv[]) {
   IncreaseFDLimit();
 
   QtSingleApplication a(argc, argv);
+
+#ifdef HAVE_LIBLASTFM
+  lastfm::ws::ApiKey = LastFMService::kApiKey;
+  lastfm::ws::SharedSecret = LastFMService::kSecret;
+  lastfm::setNetworkAccessManager(new NetworkAccessManager);
+#endif
 
   // A bug in Qt means the wheel_scroll_lines setting gets ignored and replaced
   // with the default value of 3 in QApplicationPrivate::initialize.
