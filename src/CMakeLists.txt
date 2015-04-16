@@ -32,7 +32,7 @@ include_directories(${GLIB_INCLUDE_DIRS})
 include_directories(${LIBXML_INCLUDE_DIRS})
 include_directories(${GOBJECT_INCLUDE_DIRS})
 include_directories(${LIBPROJECTM_INCLUDE_DIRS})
-include_directories(${SINGLEAPPLICATION_INCLUDE_DIRS})
+include_directories(${QTSINGLEAPPLICATION_INCLUDE_DIRS})
 include_directories(${QTIOCOMPRESSOR_INCLUDE_DIRS})
 include_directories(${QXT_INCLUDE_DIRS})
 include_directories(${ECHONEST5_INCLUDE_DIRS})
@@ -1240,8 +1240,7 @@ target_link_libraries(clementine_lib
   ${GSTREAMER_LIBRARIES}
   ${GSTREAMER_APP_LIBRARIES}
   ${GSTREAMER_TAG_LIBRARIES}
-  ${SINGLEAPPLICATION_LIBRARIES}
-  ${QTSINGLECOREAPPLICATION_LIBRARIES}
+  ${QTSINGLEAPPLICATION_LIBRARIES}
   ${QTIOCOMPRESSOR_LIBRARIES}
   ${CMAKE_THREAD_LIBS_INIT}
   ${SQLITE_LIBRARIES}
@@ -1349,7 +1348,7 @@ if (UNIX AND NOT APPLE)
   endif ()
 endif ()
 
-add_dependencies(clementine_lib singleapplication)
+add_dependencies(clementine_lib qtsingleapplication)
 
 
 ###############################################################################

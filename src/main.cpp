@@ -69,8 +69,8 @@
 
 #include "tagreadermessages.pb.h"
 
-#include "singleapplication.h"
-#include "singlecoreapplication.h"
+#include "qtsingleapplication.h"
+#include "qtsinglecoreapplication.h"
 
 #include <glib-object.h>
 #include <glib.h>
@@ -288,7 +288,7 @@ int main(int argc, char* argv[]) {
     // Clementine running without needing an X server.
     // This MUST be done before parsing the commandline options so QTextCodec
     // gets the right system locale for filenames.
-    SingleCoreApplication a(argc, argv);
+    QtSingleCoreApplication a(argc, argv);
     CheckPortable();
     crash_reporting.SetApplicationPath(a.applicationFilePath());
 
@@ -297,6 +297,16 @@ int main(int argc, char* argv[]) {
     if (!options.Parse()) return 1;
     logging::SetLevels(options.log_levels());
 
+    if (a.isRunning()) {
+      if (options.is_empty()) {
+        qLog(Info)
+            << "Clementine is already running - activating existing window";
+      }
+      if (a.sendMessage(options.Serialize(), 5000)) {
+        return 0;
+      }
+      // Couldn't send the message so start anyway
+    }
   }
 
 #ifdef Q_OS_DARWIN
@@ -324,7 +334,7 @@ int main(int argc, char* argv[]) {
 
   IncreaseFDLimit();
 
-  SingleApplication a(argc, argv);
+  QtSingleApplication a(argc, argv);
 
   // A bug in Qt means the wheel_scroll_lines setting gets ignored and replaced
   // with the default value of 3 in QApplicationPrivate::initialize.
@@ -342,6 +352,10 @@ int main(int argc, char* argv[]) {
 #endif
 
   a.setQuitOnLastWindowClosed(false);
+  // Do this check again because another instance might have started by now
+  if (a.isRunning() && a.sendMessage(options.Serialize(), 5000)) {
+    return 0;
+  }
 
 #ifndef Q_OS_DARWIN
   // Gnome on Ubuntu has menu icons disabled by default.  I think that's a bad
@@ -466,8 +480,10 @@ int main(int argc, char* argv[]) {
 #ifdef HAVE_DBUS
   QObject::connect(&mpris, SIGNAL(RaiseMainWindow()), &w, SLOT(Raise()));
 #endif
-
+  QObject::connect(&a, SIGNAL(messageReceived(QString)), &w,
+                   SLOT(CommandlineOptionsReceived(QString)));
   w.CommandlineOptionsReceived(options);
+
   int ret = a.exec();
 
 #ifdef Q_OS_LINUX
