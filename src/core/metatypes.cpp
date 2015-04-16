@@ -52,7 +52,6 @@ class QNetworkReply;
 
 void RegisterMetaTypes() {
   qRegisterMetaType<CollapsibleInfoPane::Data>("CollapsibleInfoPane::Data");
-  qRegisterMetaType<ColumnAlignmentMap>("ColumnAlignmentMap");
   qRegisterMetaType<const char*>("const char*");
   qRegisterMetaType<CoverSearchResult>("CoverSearchResult");
   qRegisterMetaType<CoverSearchResults>("CoverSearchResults");
