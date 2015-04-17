@@ -20,11 +20,12 @@
 
 #include <time.h>
 
-#include <qjson/parser.h>
-
 #include <QDesktopServices>
 #include <QStringList>
 #include <QTcpSocket>
+#include <QUrlQuery>
+#include <QJsonDocument>
+#include <QJsonObject>
 
 #include "core/closure.h"
 #include "core/logging.h"
@@ -98,8 +99,10 @@ void DropboxAuthenticator::Authorise() {
              SLOT(RedirectArrived(LocalRedirectServer*)), server);
 
   QUrl url(kAuthoriseEndpoint);
-  url.addQueryItem("oauth_token", token_);
-  url.addQueryItem("oauth_callback", server->url().toString());
+  QUrlQuery url_query;
+  url_query.addQueryItem("oauth_token", token_);
+  url_query.addQueryItem("oauth_callback", server->url().toString());
+  url.setQuery(url_query);
 
   QDesktopServices::openUrl(url);
 }
@@ -108,7 +111,7 @@ void DropboxAuthenticator::RedirectArrived(LocalRedirectServer* server) {
   server->deleteLater();
   QUrl request_url = server->request_url();
   qLog(Debug) << Q_FUNC_INFO << request_url;
-  uid_ = request_url.queryItemValue("uid");
+  uid_ = QUrlQuery(request_url).queryItemValue("uid");
   RequestAccessToken();
 }
 
@@ -126,7 +129,7 @@ void DropboxAuthenticator::RequestAccessToken() {
 
 void DropboxAuthenticator::RequestAccessTokenFinished(QNetworkReply* reply) {
   reply->deleteLater();
-  QString result = QString::fromAscii(reply->readAll());
+  QString result = QString::fromLatin1(reply->readAll());
   qLog(Debug) << result;
   QMap<QString, QString> params = ParseParamList(result);
   access_token_ = params["oauth_token"];
@@ -174,8 +177,7 @@ void DropboxAuthenticator::RequestAccountInformation() {
 void DropboxAuthenticator::RequestAccountInformationFinished(
     QNetworkReply* reply) {
   reply->deleteLater();
-  QJson::Parser parser;
-  QVariantMap response = parser.parse(reply).toMap();
-  name_ = response["display_name"].toString();
+  QJsonDocument document = QJsonDocument::fromBinaryData(reply->readAll());
+  name_ = document.object()["display_name"].toString();
   emit Finished();
 }

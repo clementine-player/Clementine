@@ -289,9 +289,9 @@ void JamendoService::InsertTrackIds(const TrackIdList& ids) const {
 
   ScopedTransaction t(&db);
 
-  QSqlQuery insert(QString("INSERT INTO %1 (%2) VALUES (:id)")
-                       .arg(kTrackIdsTable, kTrackIdsColumn),
-                   db);
+  QSqlQuery insert(db);
+  insert.prepare(QString("INSERT INTO %1 (%2) VALUES (:id)")
+                       .arg(kTrackIdsTable, kTrackIdsColumn));
 
   for (int id : ids) {
     insert.bindValue(":id", id);

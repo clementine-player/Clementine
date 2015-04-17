@@ -22,9 +22,10 @@
 #include <cmath>
 #include <limits>
 
-#include <qjson/parser.h>
-
 #include <QStringList>
+#include <QJsonParseError>
+#include <QJsonDocument>
+#include <QJsonObject>
 
 #include "core/closure.h"
 #include "core/logging.h"
@@ -97,16 +98,15 @@ void Geolocator::RequestFinished(QNetworkReply* reply) {
     return;
   }
 
-  QJson::Parser parser;
-  bool ok = false;
-  QVariant result = parser.parse(reply, &ok);
-  if (!ok) {
+  QJsonParseError error;
+  QJsonDocument json_document = QJsonDocument::fromJson(reply->readAll(), &error);
+  if (error.error != QJsonParseError::NoError) {
     emit Finished(LatLng());
     return;
   }
 
-  QVariantMap map = result.toMap();
-  QString latlng = map["latlng"].toString();
+  QJsonObject json_object = json_document.object();
+  QString latlng = json_object["latlng"].toString();
 
   LatLng ll(latlng);
   emit Finished(ll);

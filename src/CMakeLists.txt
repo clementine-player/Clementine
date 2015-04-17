@@ -35,16 +35,16 @@ include_directories(${LIBPROJECTM_INCLUDE_DIRS})
 include_directories(${QTSINGLEAPPLICATION_INCLUDE_DIRS})
 include_directories(${QTIOCOMPRESSOR_INCLUDE_DIRS})
 include_directories(${QXT_INCLUDE_DIRS})
-include_directories(${ECHONEST_INCLUDE_DIRS})
+include_directories(${ECHONEST5_INCLUDE_DIRS})
 include_directories(${SHA2_INCLUDE_DIRS})
 include_directories(${CHROMAPRINT_INCLUDE_DIRS})
-include_directories(${MYGPOQT_INCLUDE_DIRS})
+include_directories(${MYGPOQT5_INCLUDE_DIRS})
 
 find_package(OpenGL)
 include_directories(${OPENGL_INCLUDE_DIR})
 
 if(HAVE_LIBLASTFM)
-  include_directories(${LASTFM_INCLUDE_DIRS})
+  include_directories(${LASTFM5_INCLUDE_DIRS})
 endif(HAVE_LIBLASTFM)
 
 if(HAVE_BREAKPAD)
@@ -855,7 +855,7 @@ optional_source(HAVE_SPOTIFY_DOWNLOADER
   HEADERS
     internet/spotify/spotifyblobdownloader.h
   INCLUDE_DIRECTORIES
-    ${QCA_INCLUDE_DIRS}
+    ${QCA_QT5_INCLUDE_DIRS}
 )
 
 # Platform specific - OS X
@@ -898,39 +898,39 @@ if(HAVE_DBUS)
   file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/dbus)
 
   # MPRIS DBUS interfaces
-  qt4_add_dbus_adaptor(SOURCES
+  qt5_add_dbus_adaptor(SOURCES
       dbus/org.freedesktop.MediaPlayer.player.xml
       core/mpris1.h mpris::Mpris1Player core/mpris_player MprisPlayer)
-  qt4_add_dbus_adaptor(SOURCES
+  qt5_add_dbus_adaptor(SOURCES
       dbus/org.freedesktop.MediaPlayer.root.xml
       core/mpris1.h mpris::Mpris1Root core/mpris_root MprisRoot)
-  qt4_add_dbus_adaptor(SOURCES
+  qt5_add_dbus_adaptor(SOURCES
       dbus/org.freedesktop.MediaPlayer.tracklist.xml
       core/mpris1.h mpris::Mpris1TrackList core/mpris_tracklist MprisTrackList)
 
   # MPRIS 2.0 DBUS interfaces
-  qt4_add_dbus_adaptor(SOURCES
+  qt5_add_dbus_adaptor(SOURCES
       dbus/org.mpris.MediaPlayer2.Player.xml
       core/mpris2.h mpris::Mpris2 core/mpris2_player Mpris2Player)
-  qt4_add_dbus_adaptor(SOURCES
+  qt5_add_dbus_adaptor(SOURCES
       dbus/org.mpris.MediaPlayer2.xml
       core/mpris2.h mpris::Mpris2 core/mpris2_root Mpris2Root)
-  qt4_add_dbus_adaptor(SOURCES
+  qt5_add_dbus_adaptor(SOURCES
       dbus/org.mpris.MediaPlayer2.TrackList.xml
       core/mpris2.h mpris::Mpris2 core/mpris2_tracklist Mpris2TrackList)
 
   # MPRIS 2.1 DBUS interfaces
-  qt4_add_dbus_adaptor(SOURCES
+  qt5_add_dbus_adaptor(SOURCES
       dbus/org.mpris.MediaPlayer2.Playlists.xml
       core/mpris2.h mpris::Mpris2 core/mpris2_playlists Mpris2Playlists)
 
   # org.freedesktop.Notifications DBUS interface
-  qt4_add_dbus_interface(SOURCES
+  qt5_add_dbus_interface(SOURCES
       dbus/org.freedesktop.Notifications.xml
       dbus/notification)
 
   # org.gnome.SettingsDaemon interface
-  qt4_add_dbus_interface(SOURCES
+  qt5_add_dbus_interface(SOURCES
       dbus/org.gnome.SettingsDaemon.MediaKeys.xml
       dbus/gnomesettingsdaemon)
 
@@ -968,17 +968,17 @@ if(HAVE_DBUS)
         PROPERTIES NO_NAMESPACE dbus/udisks)
     set_source_files_properties(dbus/org.freedesktop.UDisks.Device.xml
         PROPERTIES NO_NAMESPACE dbus/udisksdevice)
-    qt4_add_dbus_interface(SOURCES
+    qt5_add_dbus_interface(SOURCES
         dbus/org.freedesktop.UDisks.xml
         dbus/udisks)
-    qt4_add_dbus_interface(SOURCES
+    qt5_add_dbus_interface(SOURCES
         dbus/org.freedesktop.UDisks.Device.xml
         dbus/udisksdevice)
   endif(HAVE_DEVICEKIT)
 
   # Wiimotedev interface classes
   if(ENABLE_WIIMOTEDEV)
-    qt4_add_dbus_interface(SOURCES
+    qt5_add_dbus_interface(SOURCES
         dbus/org.wiimotedev.deviceEvents.xml
         dbus/wiimotedev)
   endif(ENABLE_WIIMOTEDEV)
@@ -1215,9 +1215,10 @@ configure_file(${CMAKE_CURRENT_SOURCE_DIR}/config.h.in
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/version.h.in
                ${CMAKE_CURRENT_BINARY_DIR}/version.h)
 
-qt4_wrap_cpp(MOC ${HEADERS})
-qt4_wrap_ui(UIC ${UI})
-qt4_add_resources(QRC ${RESOURCES})
+qt5_wrap_cpp(MOC ${HEADERS})
+qt5_wrap_ui(UIC ${UI})
+qt5_add_resources(QRC ${RESOURCES})
+
 
 add_pot(POT
   ${CMAKE_CURRENT_SOURCE_DIR}/translations/header
@@ -1240,9 +1241,6 @@ add_library(clementine_lib STATIC
   ${OTHER_UIC_SOURCES}
 )
 
-add_dependencies(clementine_lib pot)
-
-
 target_link_libraries(clementine_lib
   clementine-spotifyblob-messages
   libclementine-common
@@ -1250,19 +1248,17 @@ target_link_libraries(clementine_lib
   libclementine-remote
   ${SHA2_LIBRARIES}
   ${TAGLIB_LIBRARIES}
-  ${MYGPOQT_LIBRARIES}
+  ${MYGPOQT5_LIBRARIES}
   ${CHROMAPRINT_LIBRARIES}
-  ${ECHONEST_LIBRARIES}
+  ${ECHONEST5_LIBRARIES}
   ${GOBJECT_LIBRARIES}
   ${GLIB_LIBRARIES}
-  ${QJSON_LIBRARIES}
   ${QT_LIBRARIES}
   ${GSTREAMER_BASE_LIBRARIES}
   ${GSTREAMER_LIBRARIES}
   ${GSTREAMER_APP_LIBRARIES}
   ${GSTREAMER_TAG_LIBRARIES}
   ${QTSINGLEAPPLICATION_LIBRARIES}
-  ${QTSINGLECOREAPPLICATION_LIBRARIES}
   ${QTIOCOMPRESSOR_LIBRARIES}
   ${CMAKE_THREAD_LIBS_INIT}
   ${SQLITE_LIBRARIES}
@@ -1279,7 +1275,7 @@ if(ENABLE_VISUALISATIONS)
 endif(ENABLE_VISUALISATIONS)
 
 if(HAVE_LIBLASTFM)
-  target_link_libraries(clementine_lib ${LASTFM_LIBRARIES})
+  target_link_libraries(clementine_lib ${LASTFM5_LIBRARIES})
 endif(HAVE_LIBLASTFM)
 
 if(HAVE_LIBGPOD)
@@ -1315,9 +1311,9 @@ endif(HAVE_BREAKPAD)
 
 if(HAVE_SPOTIFY_DOWNLOADER)
   target_link_libraries(clementine_lib
-    ${QCA_LIBRARIES}
+    ${QCA_QT5_LIBRARIES}
   )
-  link_directories(${QCA_LIBRARY_DIRS})
+  link_directories(${QCA_QT5_LIBRARY_DIRS})
 endif(HAVE_SPOTIFY_DOWNLOADER)
 
 if(HAVE_LIBPULSE)

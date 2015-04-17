@@ -461,21 +461,20 @@ void EditTagDialog::UpdateSummaryTab(const Song& song) {
       app_->album_cover_loader()->LoadImageAsync(cover_options_, song);
 
   QString summary =
-      "<b>" + Qt::escape(song.PrettyTitleWithArtist()) + "</b><br/>";
+      "<b>" + song.PrettyTitleWithArtist().toHtmlEscaped() + "</b><br/>";
 
   bool art_is_set = true;
   if (song.has_manually_unset_cover()) {
-    summary += Qt::escape(tr("Cover art manually unset"));
+    summary += tr("Cover art manually unset").toHtmlEscaped();
     art_is_set = false;
   } else if (!song.art_manual().isEmpty()) {
-    summary += Qt::escape(tr("Cover art set from %1").arg(song.art_manual()));
+    summary += tr("Cover art set from %1").arg(song.art_manual()).toHtmlEscaped();
   } else if (song.has_embedded_cover()) {
-    summary += Qt::escape(tr("Cover art from embedded image"));
+    summary += tr("Cover art from embedded image");
   } else if (!song.art_automatic().isEmpty()) {
-    summary += Qt::escape(
-        tr("Cover art loaded automatically from %1").arg(song.art_automatic()));
+    summary += tr("Cover art loaded automatically from %1").arg(song.art_automatic()).toHtmlEscaped();
   } else {
-    summary += Qt::escape(tr("Cover art not set"));
+    summary += tr("Cover art not set").toHtmlEscaped();
     art_is_set = false;
   }
 

@@ -19,7 +19,12 @@
 
 #include "googledriveclient.h"
 
-#include <qjson/parser.h>
+#include <QUrlQuery>
+#include <QJsonParseError>
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QJsonArray>
+#include <QJsonValue>
 
 #include "internet/core/oauthenticator.h"
 #include "core/closure.h"
@@ -114,16 +119,15 @@ void Client::FetchUserInfoFinished(ConnectResponse* response,
   if (reply->attribute(QNetworkRequest::HttpStatusCodeAttribute) != 200) {
     qLog(Warning) << "Failed to get user info" << reply->readAll();
   } else {
-    QJson::Parser parser;
-    bool ok = false;
-    QVariantMap result = parser.parse(reply, &ok).toMap();
-    if (!ok) {
+    QJsonParseError error;
+    QJsonDocument document = QJsonDocument::fromJson(reply->readAll(), &error);
+    if (error.error != QJsonParseError::NoError) {
       qLog(Error) << "Failed to parse user info reply";
       return;
     }
 
-    qLog(Debug) << result;
-    response->user_email_ = result["email"].toString();
+    qLog(Debug) << document;
+    response->user_email_ = document.object()["email"].toString();
     qLog(Debug) << response->user_email_;
   }
   emit response->Finished();
@@ -157,16 +161,15 @@ GetFileResponse* Client::GetFile(const QString& file_id) {
 void Client::GetFileFinished(GetFileResponse* response, QNetworkReply* reply) {
   reply->deleteLater();
 
-  QJson::Parser parser;
-  bool ok = false;
-  QVariantMap result = parser.parse(reply, &ok).toMap();
-  if (!ok) {
+  QJsonParseError error;
+  QJsonDocument document = QJsonDocument::fromJson(reply->readAll(), &error);
+  if (error.error != QJsonParseError::NoError) {
     qLog(Error) << "Failed to fetch file with ID" << response->file_id_;
     emit response->Finished();
     return;
   }
 
-  response->file_ = File(result);
+  response->file_ = File(document.object().toVariantMap());
   emit response->Finished();
 }
 
@@ -179,12 +182,15 @@ ListChangesResponse* Client::ListChanges(const QString& cursor) {
 void Client::MakeListChangesRequest(ListChangesResponse* response,
                                     const QString& page_token) {
   QUrl url(kGoogleDriveChanges);
+  QUrlQuery url_query;
   if (!response->cursor().isEmpty()) {
-    url.addQueryItem("startChangeId", response->cursor());
+    url_query.addQueryItem("startChangeId", response->cursor());
   }
   if (!page_token.isEmpty()) {
-    url.addQueryItem("pageToken", page_token);
+    url_query.addQueryItem("pageToken", page_token);
   }
+
+  url.setQuery(url_query);
 
   qLog(Debug) << "Requesting changes at:" << response->cursor() << page_token;
 
@@ -201,33 +207,33 @@ void Client::ListChangesFinished(ListChangesResponse* response,
                                  QNetworkReply* reply) {
   reply->deleteLater();
 
-  QJson::Parser parser;
-  bool ok = false;
+  QJsonParseError error;
+  QJsonDocument document = QJsonDocument::fromJson(reply->readAll(), &error);
   // TODO(John Maguire): Put this on a separate thread as the response could be large.
-  QVariantMap result = parser.parse(reply, &ok).toMap();
-  if (!ok) {
+  if (error.error != QJsonParseError::NoError) {
     qLog(Error) << "Failed to fetch changes" << response->cursor();
     emit response->Finished();
     return;
   }
 
-  if (result.contains("largestChangeId")) {
-    response->next_cursor_ = result["largestChangeId"].toString();
+  QJsonObject json_result = document.object();
+  if (json_result.contains("largestChangeId")) {
+    response->next_cursor_ = json_result["largestChangeId"].toString();
   }
 
   // Emit the FilesFound signal for the files in the response.
   FileList files;
   QList<QUrl> files_deleted;
-  for (const QVariant& v : result["items"].toList()) {
-    QVariantMap change = v.toMap();
+  for (const QJsonValue & v : json_result["items"].toArray()) {
+    QJsonObject change = v.toObject();
     if (change["deleted"].toBool() ||
-        change["file"].toMap()["labels"].toMap()["trashed"].toBool()) {
+        change["file"].toObject()["labels"].toObject()["trashed"].toBool()) {
       QUrl url;
       url.setScheme("googledrive");
-      url.setPath(change["fileId"].toString());
+      url.setPath("/" + change["fileId"].toString());
       files_deleted << url;
     } else {
-      files << File(change["file"].toMap());
+      files << File(change["file"].toObject().toVariantMap());
     }
   }
 
@@ -235,8 +241,8 @@ void Client::ListChangesFinished(ListChangesResponse* response,
   emit response->FilesDeleted(files_deleted);
 
   // Get the next page of results if there is one.
-  if (result.contains("nextPageToken")) {
-    MakeListChangesRequest(response, result["nextPageToken"].toString());
+  if (json_result.contains("nextPageToken")) {
+    MakeListChangesRequest(response, json_result["nextPageToken"].toString());
   } else {
     emit response->Finished();
   }

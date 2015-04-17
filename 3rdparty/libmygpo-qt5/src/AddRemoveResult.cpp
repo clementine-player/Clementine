@@ -20,60 +20,65 @@
 * USA                                                                      *
 ***************************************************************************/
 
-#include "PodcastList_p.h"
+#include "AddRemoveResult.h"
+#include "AddRemoveResult_p.h"
 
-#include <parser.h>
+#include "qjsonwrapper/Json.h"
 
 using namespace mygpo;
 
-PodcastListPrivate::PodcastListPrivate( PodcastList* qq, QNetworkReply* reply, QObject* parent ) : QObject( parent ), m_reply( reply ), q( qq ), m_error( QNetworkReply::NoError )
+AddRemoveResultPrivate::AddRemoveResultPrivate( AddRemoveResult* qq, QNetworkReply* reply ) : q( qq ), m_reply( reply ), m_error( QNetworkReply::NoError )
 {
     QObject::connect( m_reply, SIGNAL( finished() ), this, SLOT( parseData() ) );
     QObject::connect( m_reply, SIGNAL( error( QNetworkReply::NetworkError ) ), this, SLOT( error( QNetworkReply::NetworkError ) ) );
 }
 
-PodcastListPrivate::~PodcastListPrivate()
+AddRemoveResultPrivate::~AddRemoveResultPrivate()
 {
 }
 
 
-QList< PodcastPtr > PodcastListPrivate::list() const
+qulonglong AddRemoveResultPrivate::timestamp() const
 {
-    QList<PodcastPtr> list;
-    QVariantList varList = m_podcasts.toList();
-    foreach( QVariant var, varList )
+    return m_timestamp;
+}
+
+QVariant AddRemoveResultPrivate::updateUrls() const
+{
+    return m_updateUrls;
+}
+
+QList< QPair< QUrl, QUrl > > AddRemoveResultPrivate::updateUrlsList() const
+{
+    QVariantList updateVarList = updateUrls().toList();
+    QList<QPair<QUrl, QUrl > > updateUrls;
+    foreach( const QVariant & url, updateVarList )
     {
-        list.append( var.value<mygpo::PodcastPtr>() );
+        QVariantList urlList = url.toList();
+        QUrl first = QUrl( urlList.at( 0 ).toString() );
+        QUrl second = QUrl( urlList.at( 1 ).toString() );
+        updateUrls.append( qMakePair( first, second ) );
     }
-    return list;
+    return updateUrls;
 }
 
-QVariant PodcastListPrivate::podcasts() const
+bool AddRemoveResultPrivate::parse( const QVariant& data )
 {
-    return m_podcasts;
-}
-
-bool PodcastListPrivate::parse( const QVariant& data )
-{
-    if( !data.canConvert( QVariant::List ) )
+    if( !data.canConvert( QVariant::Map ) )
         return false;
-    QVariantList varList = data.toList();
-    QVariantList podcastList;
-    foreach( QVariant var, varList )
-    {
-        QVariant v;
-        v.setValue<mygpo::PodcastPtr> ( PodcastPtr( new Podcast( var ) ) );
-        podcastList.append( v );
-    }
-    m_podcasts = QVariant( podcastList );
+    QVariantMap resultMap = data.toMap();
+    QVariant v = resultMap.value( QLatin1String( "timestamp" ) );
+    if( !v.canConvert( QVariant::ULongLong ) )
+        return false;
+    m_timestamp = v.toULongLong();
+    m_updateUrls = resultMap.value( QLatin1String( "update_urls" ) );
     return true;
 }
 
-bool PodcastListPrivate::parse( const QByteArray& data )
+bool AddRemoveResultPrivate::parse( const QByteArray& data )
 {
-    QJson::Parser parser;
     bool ok;
-    QVariant variant = parser.parse( data, &ok );
+    QVariant variant = QJsonWrapper::parseJson( data, &ok );
     if( ok )
     {
         ok = ( parse( variant ) );
@@ -81,11 +86,13 @@ bool PodcastListPrivate::parse( const QByteArray& data )
     return ok;
 }
 
-void PodcastListPrivate::parseData()
+
+void AddRemoveResultPrivate::parseData()
 {
     if( m_reply->error() == QNetworkReply::NoError )
     {
-        if( parse( m_reply->readAll() ) )
+
+        if( parse( m_reply->readAll( ) ) )
         {
             emit q->finished();
         }
@@ -97,28 +104,33 @@ void PodcastListPrivate::parseData()
     m_reply->deleteLater();
 }
 
-void PodcastListPrivate::error( QNetworkReply::NetworkError error )
+void AddRemoveResultPrivate::error( QNetworkReply::NetworkError error )
 {
     this->m_error = error;
     emit q->requestError( error );
 }
 
-PodcastList::PodcastList( QNetworkReply* reply, QObject* parent ) : QObject( parent ), d( new PodcastListPrivate( this, reply ) )
+AddRemoveResult::AddRemoveResult( QNetworkReply* reply , QObject* parent ) : QObject( parent ), d( new AddRemoveResultPrivate( this, reply ) )
 {
 
 }
 
-PodcastList::~PodcastList()
+AddRemoveResult::~AddRemoveResult()
 {
     delete d;
 }
 
-QList<PodcastPtr> PodcastList::list() const
+QVariant AddRemoveResult::updateUrls() const
 {
-    return d->list();
+    return d->updateUrls();
 }
 
-QVariant PodcastList::podcasts() const
+qulonglong AddRemoveResult::timestamp() const
 {
-    return d->podcasts();
+    return d->timestamp();
+}
+
+QList<QPair<QUrl, QUrl> > AddRemoveResult::updateUrlsList() const
+{
+    return d->updateUrlsList();
 }

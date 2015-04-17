@@ -18,7 +18,10 @@
 
 #include "boxservice.h"
 
-#include <qjson/parser.h>
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QJsonArray>
+#include <QUrlQuery>
 
 #include "core/application.h"
 #include "core/player.h"
@@ -122,10 +125,9 @@ void BoxService::AddAuthorizationHeader(QNetworkRequest* request) const {
 void BoxService::FetchUserInfoFinished(QNetworkReply* reply) {
   reply->deleteLater();
 
-  QJson::Parser parser;
-  QVariantMap response = parser.parse(reply).toMap();
+  QJsonObject json_response = QJsonDocument::fromJson(reply->readAll()).object();
 
-  QString name = response["name"].toString();
+  QString name = json_response["name"].toString();
   if (!name.isEmpty()) {
     QSettings s;
     s.beginGroup(kSettingsGroup);
@@ -160,7 +162,9 @@ void BoxService::UpdateFiles() {
 
 void BoxService::InitialiseEventsCursor() {
   QUrl url(kEvents);
-  url.addQueryItem("stream_position", "now");
+  QUrlQuery url_query;
+  url_query.addQueryItem("stream_position", "now");
+  url.setQuery(url_query);
   QNetworkRequest request(url);
   AddAuthorizationHeader(&request);
   QNetworkReply* reply = network_->get(request);
@@ -170,12 +174,11 @@ void BoxService::InitialiseEventsCursor() {
 
 void BoxService::InitialiseEventsFinished(QNetworkReply* reply) {
   reply->deleteLater();
-  QJson::Parser parser;
-  QVariantMap response = parser.parse(reply).toMap();
-  if (response.contains("next_stream_position")) {
+  QJsonObject json_response = QJsonDocument::fromJson(reply->readAll()).object();
+  if (json_response.contains("next_stream_position")) {
     QSettings s;
     s.beginGroup(kSettingsGroup);
-    s.setValue("cursor", response["next_stream_position"]);
+    s.setValue("cursor", json_response["next_stream_position"].toString());
   }
 }
 
@@ -189,9 +192,11 @@ void BoxService::FetchRecursiveFolderItems(const int folder_id,
          << "modified_at"
          << "name";
   QString fields_list = fields.join(",");
-  url.addQueryItem("fields", fields_list);
-  url.addQueryItem("limit", "1000");  // Maximum according to API docs.
-  url.addQueryItem("offset", QString::number(offset));
+  QUrlQuery url_query (url);
+  url_query.addQueryItem("fields", fields_list);
+  url_query.addQueryItem("limit", "1000");  // Maximum according to API docs.
+  url_query.addQueryItem("offset", QString::number(offset));
+  url.setQuery(url_query);
   QNetworkRequest request(url);
   AddAuthorizationHeader(&request);
   QNetworkReply* reply = network_->get(request);
@@ -204,21 +209,18 @@ void BoxService::FetchFolderItemsFinished(QNetworkReply* reply,
                                           const int folder_id) {
   reply->deleteLater();
 
-  QByteArray data = reply->readAll();
+  QJsonObject json_response = QJsonDocument::fromJson(reply->readAll()).object();
 
-  QJson::Parser parser;
-  QVariantMap response = parser.parse(data).toMap();
-
-  QVariantList entries = response["entries"].toList();
-  const int total_entries = response["total_count"].toInt();
-  const int offset = response["offset"].toInt();
+  QJsonArray entries = json_response["entries"].toArray();
+  const int total_entries = json_response["total_count"].toInt();
+  const int offset = json_response["offset"].toInt();
   if (entries.size() + offset < total_entries) {
     // Fetch the next page if necessary.
     FetchRecursiveFolderItems(folder_id, offset + entries.size());
   }
 
-  for (const QVariant& e : entries) {
-    QVariantMap entry = e.toMap();
+  for (const QJsonValue& e : entries) {
+    QJsonObject entry = e.toObject();
     if (entry["type"].toString() == "folder") {
       FetchRecursiveFolderItems(entry["id"].toInt());
     } else {
@@ -227,16 +229,16 @@ void BoxService::FetchFolderItemsFinished(QNetworkReply* reply,
   }
 }
 
-void BoxService::MaybeAddFileEntry(const QVariantMap& entry) {
+void BoxService::MaybeAddFileEntry(const QJsonObject &entry) {
   QString mime_type = GuessMimeTypeForFile(entry["name"].toString());
   QUrl url;
   url.setScheme("box");
-  url.setPath(entry["id"].toString());
+  url.setPath("/" + entry["id"].toString());
 
   Song song;
   song.set_url(url);
-  song.set_ctime(entry["created_at"].toDateTime().toTime_t());
-  song.set_mtime(entry["modified_at"].toDateTime().toTime_t());
+  song.set_ctime(QDateTime::fromString(entry["created_at"].toString()).toTime_t());
+  song.set_mtime(QDateTime::fromString(entry["modified_at"].toString()).toTime_t());
   song.set_filesize(entry["size"].toInt());
   song.set_title(entry["name"].toString());
 
@@ -271,8 +273,10 @@ void BoxService::RedirectFollowed(QNetworkReply* reply, const Song& song,
 
 void BoxService::UpdateFilesFromCursor(const QString& cursor) {
   QUrl url(kEvents);
-  url.addQueryItem("stream_position", cursor);
-  url.addQueryItem("limit", "5000");
+  QUrlQuery url_query;
+  url_query.addQueryItem("stream_position", cursor);
+  url_query.addQueryItem("limit", "5000");
+  url.setQuery(url_query);
   QNetworkRequest request(url);
   AddAuthorizationHeader(&request);
   QNetworkReply* reply = network_->get(request);
@@ -283,18 +287,17 @@ void BoxService::UpdateFilesFromCursor(const QString& cursor) {
 void BoxService::FetchEventsFinished(QNetworkReply* reply) {
   // TODO(John Maguire): Page through events.
   reply->deleteLater();
-  QJson::Parser parser;
-  QVariantMap response = parser.parse(reply).toMap();
+  QJsonObject json_response = QJsonDocument::fromJson(reply->readAll()).object();
 
   QSettings s;
   s.beginGroup(kSettingsGroup);
-  s.setValue("cursor", response["next_stream_position"]);
+  s.setValue("cursor", json_response["next_stream_position"].toString());
 
-  QVariantList entries = response["entries"].toList();
-  for (const QVariant& e : entries) {
-    QVariantMap event = e.toMap();
+  QJsonArray entries = json_response["entries"].toArray();
+  for (const QJsonValue& e : entries) {
+    QJsonObject event = e.toObject();
     QString type = event["event_type"].toString();
-    QVariantMap source = event["source"].toMap();
+    QJsonObject source = event["source"].toObject();
     if (source["type"] == "file") {
       if (type == "ITEM_UPLOAD") {
         // Add file.
@@ -303,7 +306,7 @@ void BoxService::FetchEventsFinished(QNetworkReply* reply) {
         // Delete file.
         QUrl url;
         url.setScheme("box");
-        url.setPath(source["id"].toString());
+        url.setPath("/" + source["id"].toString());
         Song song = library_backend_->GetSongByUrl(url);
         if (song.is_valid()) {
           library_backend_->DeleteSongs(SongList() << song);

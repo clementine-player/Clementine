@@ -6,7 +6,7 @@
 		<property name='PlaylistCount' type='u' access='read' />
 		<property name='Orderings' type='as' access='read' />
 		<property name='ActivePlaylist' type='(b(oss))' access='read'>
-			<annotation name="com.trolltech.QtDBus.QtTypeName" value="MaybePlaylist"/>
+			<annotation name="org.qtproject.QtDBus.QtTypeName" value="MaybePlaylist"/>
 		</property>
 		<method name='ActivatePlaylist'>
 			<arg direction='in' name='PlaylistId' type='o' />
@@ -17,12 +17,12 @@
 			<arg direction='in' name='Order' type='s' />
 			<arg direction='in' name='ReverseOrder' type='b' />
 			<arg direction='out' name='Playlists' type='a(oss)' />
-			<annotation name="com.trolltech.QtDBus.QtTypeName.Out0" value="MprisPlaylistList"/>
+			<annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="MprisPlaylistList"/>
 		</method>
 		<signal name='PlaylistChanged'>
 			<arg name='Playlist' type='(oss)' />
-			<annotation name="com.trolltech.QtDBus.QtTypeName.In0" value="MprisPlaylist" />
+			<annotation name="org.qtproject.QtDBus.QtTypeName.In0" value="MprisPlaylist" />
 		</signal>
-		<annotation name="com.trolltech.QtDBus.QtTypeName" value="MaybePlaylist" />
+		<annotation name="org.qtproject.QtDBus.QtTypeName" value="MaybePlaylist" />
 	</interface>
 </node>
