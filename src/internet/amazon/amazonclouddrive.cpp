@@ -17,6 +17,9 @@
 
 #include "internet/amazon/amazonclouddrive.h"
 
+#include <cmath>
+
+#include <QtGlobal>
 #include <QIcon>
 #include <QJsonDocument>
 #include <QJsonObject>
@@ -28,13 +31,16 @@
 #include "core/logging.h"
 #include "core/network.h"
 #include "core/player.h"
+#include "core/timeconstants.h"
 #include "core/waitforsignal.h"
 #include "internet/core/oauthenticator.h"
 #include "internet/amazon/amazonurlhandler.h"
 #include "library/librarybackend.h"
 #include "ui/settingsdialog.h"
 
-const char* AmazonCloudDrive::kServiceName = "Cloud Drive";
+using std::placeholders::_1;
+
+const char* AmazonCloudDrive::kServiceName = "Amazon Cloud Drive";
 const char* AmazonCloudDrive::kSettingsGroup = "AmazonCloudDrive";
 
 namespace {
@@ -92,7 +98,7 @@ void AmazonCloudDrive::Connect() {
   }
 
   NewClosure(oauth, SIGNAL(Finished()), this,
-            SLOT(ConnectFinished(OAuthenticator*)), oauth);
+             SLOT(ConnectFinished(OAuthenticator*)), oauth);
 }
 
 void AmazonCloudDrive::EnsureConnected() {
@@ -127,10 +133,7 @@ void AmazonCloudDrive::ConnectFinished(OAuthenticator* oauth) {
 void AmazonCloudDrive::FetchEndpoint() {
   QUrl url(kEndpointEndpoint);
   QNetworkRequest request(url);
-  AddAuthorizationHeader(&request);
-  QNetworkReply* reply = network_->get(request);
-  NewClosure(reply, SIGNAL(finished()), this,
-             SLOT(FetchEndpointFinished(QNetworkReply*)), reply);
+  Get(request, std::bind(&AmazonCloudDrive::FetchEndpointFinished, this, _1));
 }
 
 void AmazonCloudDrive::FetchEndpointFinished(QNetworkReply* reply) {
@@ -139,6 +142,11 @@ void AmazonCloudDrive::FetchEndpointFinished(QNetworkReply* reply) {
   QJsonObject json_response = QJsonDocument::fromJson(reply->readAll()).object();
   content_url_ = json_response["contentUrl"].toString();
   metadata_url_ = json_response["metadataUrl"].toString();
+  if (content_url_.isEmpty() || metadata_url_.isEmpty()) {
+    qLog(Debug) << "Couldn't fetch Amazon endpoint";
+    return;
+  }
+
   QSettings s;
   s.beginGroup(kSettingsGroup);
   QString checkpoint = s.value("checkpoint", "").toString();
@@ -162,10 +170,51 @@ void AmazonCloudDrive::RequestChanges(const QString& checkpoint) {
   QByteArray json = data.toBinaryData();
 
   QNetworkRequest request(url);
+  Post(request, json,
+       std::bind(&AmazonCloudDrive::RequestChangesFinished, this, _1));
+}
+
+void AmazonCloudDrive::Get(QNetworkRequest request,
+                           std::function<void(QNetworkReply*)> done,
+                           int retries) {
   AddAuthorizationHeader(&request);
-  QNetworkReply* reply = network_->post(request, json);
-  NewClosure(reply, SIGNAL(finished()), this,
-             SLOT(RequestChangesFinished(QNetworkReply*)), reply);
+  MonitorReply(network_->get(request), done, QByteArray(), retries);
+}
+
+void AmazonCloudDrive::Post(QNetworkRequest request, const QByteArray& data,
+                            std::function<void(QNetworkReply*)> done,
+                            int retries) {
+  AddAuthorizationHeader(&request);
+  MonitorReply(network_->post(request, data), done, data, retries);
+}
+
+void AmazonCloudDrive::MonitorReply(QNetworkReply* reply,
+                                    std::function<void(QNetworkReply*)> done,
+                                    const QByteArray& post_data, int retries) {
+  NewClosure(reply, SIGNAL(finished()), [=]() {
+    if (reply->error() == QNetworkReply::NoError) {
+      done(reply);
+    } else {
+      int code =
+          reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
+      if (code >= 500) {  // Retry with exponential backoff.
+        int max_delay_s = std::pow(std::min(retries + 1, 8), 2);
+        int delay_s = qrand() % max_delay_s;
+        qLog(Debug) << "Request failed with code:" << code << "- retrying after"
+                    << delay_s << "seconds";
+        DoAfter([=]() {
+          if (post_data.isEmpty()) {
+            Get(reply->request(), done, retries + 1);
+          } else {
+            Post(reply->request(), post_data, done, retries + 1);
+          }
+        }, delay_s * kMsecPerSec);
+      } else {
+        // Request failed permanently.
+        done(reply);
+      }
+    }
+  });
 }
 
 void AmazonCloudDrive::RequestChangesFinished(QNetworkReply* reply) {
@@ -221,7 +270,8 @@ void AmazonCloudDrive::RequestChangesFinished(QNetworkReply* reply) {
       song.set_title(node["name"].toString());
       song.set_filesize(content_properties["size"].toInt());
 
-      MaybeAddFileToDatabase(song, mime_type, content_url, QString("Bearer %1").arg(access_token_));
+      MaybeAddFileToDatabase(song, mime_type, content_url,
+                             QString("Bearer %1").arg(access_token_));
     }
   }
 

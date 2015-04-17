@@ -188,6 +188,7 @@ _detail::ClosureBase* NewClosure(QObject* sender, const char* signal,
 }
 
 void DoAfter(QObject* receiver, const char* slot, int msec);
+void DoAfter(std::function<void()> callback, int msec);
 void DoInAMinuteOrSo(QObject* receiver, const char* slot);
 
 #endif  // CLOSURE_H

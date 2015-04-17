@@ -45,7 +45,8 @@ CREATE TABLE jamendo.songs (
   etag TEXT,
 
   performer TEXT,
-  grouping TEXT
+  grouping TEXT,
+  lyrics TEXT
 );
 
 CREATE VIRTUAL TABLE jamendo.songs_fts USING fts3(
