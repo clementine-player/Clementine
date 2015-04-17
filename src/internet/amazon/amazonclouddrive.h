@@ -43,7 +43,7 @@ class AmazonCloudDrive : public CloudFileService {
 
   void ForgetCredentials();
 
- signals:
+signals:
   void Connected();
 
  public slots:
@@ -54,6 +54,14 @@ class AmazonCloudDrive : public CloudFileService {
   void RequestChanges(const QString& checkpoint);
   void AddAuthorizationHeader(QNetworkRequest* request);
   void EnsureConnected();
+  void Get(QNetworkRequest, std::function<void(QNetworkReply*)>,
+           int retries = 0);
+  void Post(QNetworkRequest, const QByteArray& data,
+            std::function<void(QNetworkReply*)>, int retries = 0);
+  void MonitorReply(QNetworkReply* reply,
+                    std::function<void(QNetworkReply*)> done,
+                    const QByteArray& post_data = QByteArray(),
+                    int retries = 0);
 
  private slots:
   void ConnectFinished(OAuthenticator*);
