@@ -20,59 +20,37 @@
 * USA                                                                      *
 ***************************************************************************/
 
-#include "TagList_p.h"
+#include "Settings_p.h"
 
-#include <parser.h>
+#include "qjsonwrapper/Json.h"
 
 using namespace mygpo;
 
-TagListPrivate::TagListPrivate( TagList* qq, QNetworkReply* reply ) : q( qq ), m_reply( reply ), m_tags( QVariant() ), m_error( QNetworkReply::NoError )
+SettingsPrivate::SettingsPrivate( Settings* qq, QNetworkReply* reply ): q( qq ), m_reply( reply ), m_error( QNetworkReply::NoError )
 {
     QObject::connect( m_reply, SIGNAL( finished() ), this, SLOT( parseData() ) );
     QObject::connect( m_reply, SIGNAL( error( QNetworkReply::NetworkError ) ), this, SLOT( error( QNetworkReply::NetworkError ) ) );
 }
 
-TagListPrivate::~TagListPrivate()
+SettingsPrivate::~SettingsPrivate()
 {
 }
 
-QList<TagPtr> TagListPrivate::list() const
+QVariant SettingsPrivate::settings() const
 {
-    QList<TagPtr> list;
-    QVariantList varList = m_tags.toList();
-    foreach( QVariant var, varList )
-    {
-        list.append( var.value<mygpo::TagPtr>() );
-    }
-    return list;
+    return m_settings;
 }
 
-QVariant TagListPrivate::tags() const
+bool SettingsPrivate::parse( const QVariant& data )
 {
-    return m_tags;
-}
-
-bool TagListPrivate::parse( const QVariant& data )
-{
-    if( !data.canConvert( QVariant::List ) )
-        return false;
-    QVariantList varList = data.toList();
-    QVariantList tagList;
-    foreach( QVariant var, varList )
-    {
-        QVariant v;
-        v.setValue<mygpo::TagPtr>( TagPtr( new Tag( var ) ) );
-        tagList.append( v );
-    }
-    m_tags = QVariant( tagList );
+    m_settings = data;
     return true;
 }
 
-bool TagListPrivate::parse( const QByteArray& data )
+bool SettingsPrivate::parse( const QByteArray& data )
 {
-    QJson::Parser parser;
     bool ok;
-    QVariant variant = parser.parse( data, &ok );
+    QVariant variant = QJsonWrapper::parseJson( data, &ok );
     if( ok )
     {
         ok = ( parse( variant ) );
@@ -80,8 +58,7 @@ bool TagListPrivate::parse( const QByteArray& data )
     return ok;
 }
 
-
-void TagListPrivate::parseData()
+void SettingsPrivate::parseData()
 {
     if( m_reply->error() == QNetworkReply::NoError )
     {
@@ -97,28 +74,24 @@ void TagListPrivate::parseData()
     m_reply->deleteLater();
 }
 
-void TagListPrivate::error( QNetworkReply::NetworkError error )
+
+void SettingsPrivate::error( QNetworkReply::NetworkError error )
 {
     this->m_error = error;
     emit q->requestError( error );
 }
 
-TagList::TagList( QNetworkReply* reply, QObject* parent ) : QObject( parent ), d( new TagListPrivate( this, reply ) )
+Settings::Settings( QNetworkReply* reply, QObject* parent ): QObject( parent ), d( new SettingsPrivate( this, reply ) )
 {
 
 }
 
-TagList::~TagList()
+Settings::~Settings()
 {
     delete d;
 }
 
-QList<TagPtr> TagList::list() const
+QVariant Settings::settings() const
 {
-    return d->list();
-}
-
-QVariant TagList::tags() const
-{
-    return d->tags();
+    return d->settings();
 }

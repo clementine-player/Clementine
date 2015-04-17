@@ -39,6 +39,7 @@
 #include <QList>
 #include <QMenu>
 #include <QUrl>
+#include <QMimeData>
 
 const char* AlbumCoverChoiceController::kLoadImageFileFilter = QT_TR_NOOP(
     "Images (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm)");

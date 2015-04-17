@@ -57,7 +57,7 @@ QtSystemTrayIcon::QtSystemTrayIcon(QObject* parent)
 
   QFile pattern_file(":/now_playing_tooltip.txt");
   pattern_file.open(QIODevice::ReadOnly);
-  pattern_ = QString::fromAscii(pattern_file.readAll());
+  pattern_ = QString::fromLatin1(pattern_file.readAll());
 
   connect(tray_, SIGNAL(activated(QSystemTrayIcon::ActivationReason)),
           SLOT(Clicked(QSystemTrayIcon::ActivationReason)));
@@ -216,7 +216,7 @@ void QtSystemTrayIcon::SetVisible(bool visible) { tray_->setVisible(visible); }
 
 void QtSystemTrayIcon::SetNowPlaying(const Song& song,
                                      const QString& image_path) {
-#ifdef Q_WS_WIN
+#ifdef Q_OS_WIN
   // Windows doesn't support HTML in tooltips, so just show something basic
   tray_->setToolTip(song.PrettyTitleWithArtist());
   return;
@@ -230,14 +230,14 @@ void QtSystemTrayIcon::SetNowPlaying(const Song& song,
   clone.replace("%appName", QCoreApplication::applicationName());
 
   clone.replace("%titleKey", tr("Title") % ":");
-  clone.replace("%titleValue", Qt::escape(song.PrettyTitle()));
+  clone.replace("%titleValue", song.PrettyTitle().toHtmlEscaped());
   clone.replace("%artistKey", tr("Artist") % ":");
-  clone.replace("%artistValue", Qt::escape(song.artist()));
+  clone.replace("%artistValue", song.artist().toHtmlEscaped());
   clone.replace("%albumKey", tr("Album") % ":");
-  clone.replace("%albumValue", Qt::escape(song.album()));
+  clone.replace("%albumValue", song.album().toHtmlEscaped());
 
   clone.replace("%lengthKey", tr("Length") % ":");
-  clone.replace("%lengthValue", Qt::escape(song.PrettyLength()));
+  clone.replace("%lengthValue", song.PrettyLength().toHtmlEscaped());
 
   if (columns == 2) {
     QString final_path =

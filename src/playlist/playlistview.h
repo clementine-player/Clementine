@@ -26,7 +26,7 @@
 
 #include "playlist.h"
 
-class QCleanlooksStyle;
+class QCommonStyle;
 
 class Application;
 class DynamicPlaylistControls;
@@ -40,7 +40,7 @@ class QTimeLine;
 // that uses Gtk to paint row backgrounds, ignoring any custom brush or palette
 // the caller set in the QStyleOption.  That breaks our currently playing track
 // animation, which relies on the background painted by Qt to be transparent.
-// This proxy style uses QCleanlooksStyle to paint the affected elements.
+// This proxy style uses QCommonStyle to paint the affected elements.
 // This class is used by the global search view as well.
 class PlaylistProxyStyle : public QProxyStyle {
  public:
@@ -51,7 +51,7 @@ class PlaylistProxyStyle : public QProxyStyle {
                      QPainter* painter, const QWidget* widget) const;
 
  private:
-  std::unique_ptr<QCleanlooksStyle> cleanlooks_;
+  std::unique_ptr<QCommonStyle> common_style_;
 };
 
 class PlaylistView : public QTreeView {

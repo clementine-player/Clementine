@@ -21,8 +21,10 @@
 
 #include <QDateTime>
 #include <QDesktopServices>
-
-#include <qjson/parser.h>
+#include <QUrlQuery>
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QJsonParseError>
 
 #include "core/closure.h"
 #include "core/logging.h"
@@ -95,18 +97,22 @@ bool VkConnection::hasAccount() {
 QNetworkRequest VkConnection::makeRequest(const QString& method,
                                           const QVariantMap& args) {
   QUrl url = kApiUrl;
-  url.setPath(url.path() % QLatin1Literal("/") % method);
+  url.setPath(url.path() + "/" + method);
+  QUrlQuery url_query;
   for (auto it = args.constBegin(); it != args.constEnd(); ++it) {
-    url.addEncodedQueryItem(QUrl::toPercentEncoding(it.key()),
+    url_query.addQueryItem(QUrl::toPercentEncoding(it.key()),
                             QUrl::toPercentEncoding(it.value().toString()));
   }
-  url.addEncodedQueryItem("access_token", access_token_);
+  url_query.addQueryItem("access_token", access_token_);
+  url.setQuery(url_query);
   return QNetworkRequest(url);
 }
 
 void VkConnection::decorateRequest(QNetworkRequest& request) {
   QUrl url = request.url();
-  url.addEncodedQueryItem("access_token", access_token_);
+  QUrlQuery url_query(url);
+  url_query.addQueryItem("access_token", access_token_);
+  url.setQuery(url_query);
   request.setUrl(url);
 }
 
@@ -115,11 +121,13 @@ void VkConnection::requestAccessToken() {
   server->Listen();
 
   QUrl url = kVkOAuthEndpoint;
-  url.addQueryItem("client_id", kAppID);
-  url.addQueryItem("scope",
+  QUrlQuery url_query;
+  url_query.addQueryItem("client_id", kAppID);
+  url_query.addQueryItem("scope",
                    Vreen::flagsToStrList(kScopes, kScopeNames).join(","));
-  url.addQueryItem("redirect_uri", server->url().toString());
-  url.addQueryItem("response_type", "code");
+  url_query.addQueryItem("redirect_uri", server->url().toString());
+  url_query.addQueryItem("response_type", "code");
+  url.setQuery(url_query);
 
   qLog(Debug) << "Try to login to Vk.com" << url;
 
@@ -130,13 +138,16 @@ void VkConnection::requestAccessToken() {
 }
 
 void VkConnection::codeRecived(LocalRedirectServer* server, QUrl redirect_uri) {
-  if (server->request_url().hasQueryItem("code")) {
-    code_ = server->request_url().queryItemValue("code").toUtf8();
+  QUrlQuery url_query_server(server->request_url());
+  if (url_query_server.hasQueryItem("code")) {
+    code_ = url_query_server.queryItemValue("code").toUtf8();
     QUrl url = kVkOAuthTokenEndpoint;
-    url.addQueryItem("client_id", kAppID);
-    url.addQueryItem("client_secret", kAppSecret);
-    url.addQueryItem("code", QString::fromUtf8(code_));
-    url.addQueryItem("redirect_uri", redirect_uri.toString());
+    QUrlQuery url_query;
+    url_query.addQueryItem("client_id", kAppID);
+    url_query.addQueryItem("client_secret", kAppSecret);
+    url_query.addQueryItem("code", QString::fromUtf8(code_));
+    url_query.addQueryItem("redirect_uri", redirect_uri.toString());
+    url.setQuery(url_query);
     qLog(Debug) << "Getting access token" << url;
 
     QNetworkRequest request(url);
@@ -159,21 +170,22 @@ void VkConnection::accessTokenRecived(QNetworkReply* reply) {
     return;
   }
 
-  QJson::Parser parser;
-  bool ok = false;
   QByteArray reply_data = reply->readAll();
-  QVariantMap result = parser.parse(reply_data, &ok).toMap();
-  if (!ok) {
+  QJsonParseError error;
+  QJsonDocument document = QJsonDocument::fromJson(reply_data, &error);
+  if (error.error != QJsonParseError::NoError) {
     qLog(Error) << "Failed to parse oauth reply" << reply_data;
     emit setConnectionState(Vreen::Client::StateOffline);
     clear();
     return;
   }
-  qLog(Debug) << result;
 
-  access_token_ = result["access_token"].toByteArray();
-  expires_in_ = result["expires_in"].toUInt();
-  uid_ = result["user_id"].toInt();
+  QJsonObject json_result = document.object();
+  qLog(Debug) << json_result;
+
+  access_token_ = json_result["access_token"].toString().toLatin1();
+  expires_in_ = json_result["expires_in"].toString().toUInt();
+  uid_ = json_result["user_id"].toInt();
 
   if (expires_in_) {
     expires_in_ += QDateTime::currentDateTime().toTime_t();

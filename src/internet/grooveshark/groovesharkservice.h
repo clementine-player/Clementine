@@ -106,8 +106,8 @@ class GroovesharkService : public InternetService {
   void GetPlaylistUrlToShare(int playlist_id);
   // Start autoplay for the given tag_id, fill the autoplay_state, returns a
   // first song to play
-  Song StartAutoplayTag(int tag_id, QVariantMap& autoplay_state);
-  Song StartAutoplay(QVariantMap& autoplay_state);
+  Song StartAutoplayTag(int tag_id, QVariantMap &autoplay_state);
+  Song StartAutoplay(QVariantMap &autoplay_state);
   // Get another autoplay song. autoplay_state is the autoplay_state received
   // from StartAutoplayTag
   Song GetAutoplaySong(QVariantMap& autoplay_state);
@@ -232,22 +232,22 @@ class GroovesharkService : public InternetService {
   // seconds. Returns false if reply has timeouted
   bool WaitForReply(QNetworkReply* reply);
   // Convenient function for extracting result from reply
-  QVariantMap ExtractResult(QNetworkReply* reply);
+  QJsonDocument ExtractResult(QNetworkReply* reply);
   // Convenient function for extracting songs from grooveshark result. result
   // should be the "result" field of most Grooveshark replies
-  SongList ExtractSongs(const QVariantMap& result);
+  SongList ExtractSongs(const QJsonObject &result);
   // Convenient function for extracting song from grooveshark result.
   // result_song should be the song field ('song', 'nextSong', ...) of the
   // Grooveshark reply
-  Song ExtractSong(const QVariantMap& result_song);
+  Song ExtractSong(const QJsonObject &result_song);
   // Convenient functions for extracting Grooveshark songs ids
-  QList<int> ExtractSongsIds(const QVariantMap& result);
+  QList<int> ExtractSongsIds(const QJsonObject &result);
   QList<int> ExtractSongsIds(const QList<QUrl>& urls);
   int ExtractSongId(
       const QUrl& url);  // Returns 0 if url is not a Grooveshark url
   // Convenient function for extracting basic playlist info (only 'id' and
   // 'name': QStandardItem still need to be created), and sort them by name
-  QList<PlaylistInfo> ExtractPlaylistInfo(const QVariantMap& result);
+  QList<PlaylistInfo> ExtractPlaylistInfo(const QJsonObject result);
 
   void ResetSessionId();
 
@@ -308,7 +308,7 @@ class GroovesharkService : public InternetService {
   QString password_;  // In fact, password's md5 hash
   QString user_id_;
   QString session_id_;
-  QMap<QString, QVariant> country_;
+  QVariantMap country_;
   // The last artists and songs ids th users has listened to. Used for autoplay
   QList<int> last_artists_ids_;
   QList<int> last_songs_ids_;

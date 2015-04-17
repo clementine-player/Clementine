@@ -20,6 +20,7 @@
 
 #include <QRegExp>
 #include <QtDebug>
+#include <QUrlQuery>
 
 MtpConnection::MtpConnection(const QUrl& url) : device_(nullptr) {
   QString hostname = url.host();
@@ -34,19 +35,20 @@ MtpConnection::MtpConnection(const QUrl& url) : device_(nullptr) {
   const unsigned int bus_location = host_re.cap(1).toInt();
   const unsigned int device_num = host_re.cap(2).toInt();
 
-  if (url.hasQueryItem("vendor")) {
+  QUrlQuery url_query(url);
+  if (url_query.hasQueryItem("vendor")) {
     LIBMTP_raw_device_t* raw_device =
         (LIBMTP_raw_device_t*)malloc(sizeof(LIBMTP_raw_device_t));
     raw_device->device_entry.vendor =
-        url.queryItemValue("vendor").toAscii().data();
+        url_query.queryItemValue("vendor").toLatin1().data();
     raw_device->device_entry.product =
-        url.queryItemValue("product").toAscii().data();
+        url_query.queryItemValue("product").toLatin1().data();
     raw_device->device_entry.vendor_id =
-        url.queryItemValue("vendor_id").toUShort();
+        url_query.queryItemValue("vendor_id").toUShort();
     raw_device->device_entry.product_id =
-        url.queryItemValue("product_id").toUShort();
+        url_query.queryItemValue("product_id").toUShort();
     raw_device->device_entry.device_flags =
-        url.queryItemValue("quirks").toUInt();
+        url_query.queryItemValue("quirks").toUInt();
 
     raw_device->bus_location = bus_location;
     raw_device->devnum = device_num;

@@ -20,80 +20,62 @@
 * USA                                                                      *
 ***************************************************************************/
 
-#include "Settings_p.h"
+#include <QAuthenticator>
+#include <QCoreApplication>
 
-#include <parser.h>
+#include "RequestHandler.h"
+#include "Config.h"
 
 using namespace mygpo;
 
-SettingsPrivate::SettingsPrivate( Settings* qq, QNetworkReply* reply ): q( qq ), m_reply( reply ), m_error( QNetworkReply::NoError )
-{
-    QObject::connect( m_reply, SIGNAL( finished() ), this, SLOT( parseData() ) );
-    QObject::connect( m_reply, SIGNAL( error( QNetworkReply::NetworkError ) ), this, SLOT( error( QNetworkReply::NetworkError ) ) );
-}
-
-SettingsPrivate::~SettingsPrivate()
+RequestHandler::RequestHandler( const QString& username, const QString& password, QNetworkAccessManager* nam ) : m_username( username ), m_password( password ), m_nam( nam )
 {
 }
 
-QVariant SettingsPrivate::settings() const
+RequestHandler::RequestHandler( QNetworkAccessManager* nam ) : m_username(), m_password(), m_nam( nam )
 {
-    return m_settings;
 }
 
-bool SettingsPrivate::parse( const QVariant& data )
+RequestHandler::~RequestHandler()
 {
-    m_settings = data;
-    return true;
 }
 
-bool SettingsPrivate::parse( const QByteArray& data )
+QNetworkReply* RequestHandler::getRequest( const QString& url )
 {
-    QJson::Parser parser;
-    bool ok;
-    QVariant variant = parser.parse( data, &ok );
-    if( ok )
-    {
-        ok = ( parse( variant ) );
-    }
-    return ok;
+    QUrl reqUrl( url );
+    QNetworkRequest request( reqUrl );
+    addUserAgent( request );
+    QNetworkReply* reply = m_nam->get( request );
+    return reply;
 }
 
-void SettingsPrivate::parseData()
+QNetworkReply* RequestHandler::authGetRequest( const QString& url )
 {
-    if( m_reply->error() == QNetworkReply::NoError )
-    {
-        QJson::Parser parser;
-        if( parse( m_reply->readAll() ) )
-        {
-            emit q->finished();
-        }
-        else
-        {
-            emit q->parseError();
-        }
-    }
-    m_reply->deleteLater();
+    QNetworkRequest request( url );
+    addUserAgent( request );
+    addAuthData( request );
+    QNetworkReply* reply = m_nam->get( request );
+    return reply;
 }
 
 
-void SettingsPrivate::error( QNetworkReply::NetworkError error )
+QNetworkReply* RequestHandler::postRequest( const QByteArray data, const QString& url )
 {
-    this->m_error = error;
-    emit q->requestError( error );
+    QNetworkRequest request( url );
+    addUserAgent( request );
+    addAuthData( request );
+    request.setHeader(QNetworkRequest::ContentTypeHeader, QLatin1String("application/json"));
+    QNetworkReply* reply = m_nam->post( request, data );
+    return reply;
 }
 
-Settings::Settings( QNetworkReply* reply, QObject* parent ): QObject( parent ), d( new SettingsPrivate( this, reply ) )
+void RequestHandler::addAuthData( QNetworkRequest& request )
 {
-
+    QByteArray headerData = "Basic " + QString(m_username + QLatin1String(":") + m_password).toLocal8Bit().toBase64();
+    request.setRawHeader("Authorization", headerData );
 }
 
-Settings::~Settings()
+void RequestHandler::addUserAgent( QNetworkRequest &request )
 {
-    delete d;
-}
-
-QVariant Settings::settings() const
-{
-    return d->settings();
+    request.setRawHeader("User-Agent", Config::instance()->userAgent().toLatin1() );
 }

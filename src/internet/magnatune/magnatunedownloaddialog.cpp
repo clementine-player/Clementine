@@ -31,6 +31,7 @@
 #include <QSet>
 #include <QSettings>
 #include <QXmlStreamReader>
+#include <QUrlQuery>
 
 #include "magnatuneservice.h"
 #include "internet/core/internetmodel.h"
@@ -49,8 +50,8 @@ MagnatuneDownloadDialog::MagnatuneDownloadDialog(MagnatuneService* service,
       current_reply_(nullptr),
       next_row_(0) {
   ui_->setupUi(this);
-  ui_->albums->header()->setResizeMode(QHeaderView::ResizeToContents);
-  ui_->albums->header()->setResizeMode(1, QHeaderView::Fixed);
+  ui_->albums->header()->setSectionResizeMode(QHeaderView::ResizeToContents);
+  ui_->albums->header()->setSectionResizeMode(1, QHeaderView::Fixed);
   ui_->albums->header()->resizeSection(1, 150);
   ui_->albums->setItemDelegateForColumn(1, new ProgressItemDelegate(this));
 
@@ -126,8 +127,10 @@ void MagnatuneDownloadDialog::DownloadNext() {
   QUrl url(MagnatuneService::kDownloadUrl);
   url.setUserName(service_->username());
   url.setPassword(service_->password());
-  url.addQueryItem("id", MagnatuneService::kPartnerId);
-  url.addQueryItem("sku", sku);
+
+  QUrlQuery url_query;
+  url_query.addQueryItem("id", MagnatuneService::kPartnerId);
+  url_query.addQueryItem("sku", sku);
 
   current_reply_ = network_->get(QNetworkRequest(url));
 

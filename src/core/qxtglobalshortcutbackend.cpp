@@ -40,7 +40,6 @@ bool QxtGlobalShortcutBackend::DoRegister() {
 
 void QxtGlobalShortcutBackend::AddShortcut(QAction* action) {
   if (action->shortcut().isEmpty()) return;
-
   QxtGlobalShortcut* shortcut = new QxtGlobalShortcut(action->shortcut(), this);
   connect(shortcut, SIGNAL(activated()), action, SLOT(trigger()));
   shortcuts_ << shortcut;

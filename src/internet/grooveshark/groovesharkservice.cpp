@@ -35,9 +35,11 @@
 #include <QNetworkRequest>
 #include <QPushButton>
 #include <QTimer>
-
-#include <qjson/parser.h>
-#include <qjson/serializer.h>
+#include <QUrlQuery>
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QJsonParseError>
+#include <QJsonArray>
 
 #include "qtiocompressor.h"
 
@@ -215,7 +217,7 @@ int GroovesharkService::SimpleSearch(const QString& query) {
 void GroovesharkService::SimpleSearchFinished(QNetworkReply* reply, int id) {
   reply->deleteLater();
 
-  QVariantMap result = ExtractResult(reply);
+  QJsonObject result = ExtractResult(reply).object();
   SongList songs = ExtractSongs(result);
   emit SimpleSearchResults(id, songs);
 }
@@ -238,12 +240,12 @@ int GroovesharkService::SearchAlbums(const QString& query) {
 void GroovesharkService::SearchAlbumsFinished(QNetworkReply* reply, int id) {
   reply->deleteLater();
 
-  QVariantMap result = ExtractResult(reply);
-  QVariantList albums = result["albums"].toList();
+  QJsonObject result = ExtractResult(reply).object();
+  QJsonArray json_albums = result["albums"].toArray();
 
   QList<quint64> ret;
-  for (const QVariant& v : albums) {
-    quint64 album_id = v.toMap()["AlbumID"].toULongLong();
+  for (const QJsonValue& v : json_albums) {
+    quint64 album_id = v.toObject()["AlbumID"].toString().toULongLong();
     GetAlbumSongs(album_id);
     ret << album_id;
   }
@@ -263,7 +265,7 @@ void GroovesharkService::GetAlbumSongs(quint64 album_id) {
 void GroovesharkService::GetAlbumSongsFinished(QNetworkReply* reply,
                                                quint64 album_id) {
   reply->deleteLater();
-  QVariantMap result = ExtractResult(reply);
+  QJsonObject result = ExtractResult(reply).object();
   SongList songs = ExtractSongs(result);
 
   emit AlbumSongsLoaded(album_id, songs);
@@ -291,7 +293,7 @@ void GroovesharkService::SearchSongsFinished(QNetworkReply* reply) {
 
   if (reply != last_search_reply_) return;
 
-  QVariantMap result = ExtractResult(reply);
+  QJsonObject result = ExtractResult(reply).object();
   SongList songs = ExtractSongs(result);
   app_->task_manager()->SetTaskFinished(task_search_id_);
   task_search_id_ = 0;
@@ -312,7 +314,7 @@ void GroovesharkService::InitCountry() {
   // Get country info
   QNetworkReply* reply_country = CreateRequest("getCountry", QList<Param>());
   if (WaitForReply(reply_country)) {
-    country_ = ExtractResult(reply_country);
+    country_ = ExtractResult(reply_country).object().toVariantMap();
   }
   reply_country->deleteLater();
 }
@@ -333,12 +335,12 @@ QUrl GroovesharkService::GetStreamingUrlFromSongId(const QString& song_id,
   reply->deleteLater();
   if (reply_has_timeouted) return QUrl();
 
-  QVariantMap result = ExtractResult(reply);
+  QJsonObject result = ExtractResult(reply).object();
   server_id->clear();
   server_id->append(result["StreamServerID"].toString());
   stream_key->clear();
   stream_key->append(result["StreamKey"].toString());
-  *length_nanosec = result["uSecs"].toLongLong() * 1000;
+  *length_nanosec = result["uSecs"].toString().toLongLong() * 1000;
   // Keep in mind that user has request to listen to this song
   last_songs_ids_.append(song_id.toInt());
   last_artists_ids_.append(artist_id.toInt());
@@ -376,7 +378,7 @@ void GroovesharkService::SessionCreated(QNetworkReply* reply) {
     return;
   }
 
-  QVariantMap result = ExtractResult(reply);
+  QJsonObject result = ExtractResult(reply).object();
   if (!result["success"].toBool()) {
     qLog(Error) << "Grooveshark returned an error during session creation";
   }
@@ -398,7 +400,7 @@ void GroovesharkService::AuthenticateSession() {
 void GroovesharkService::Authenticated(QNetworkReply* reply) {
   reply->deleteLater();
 
-  QVariantMap result = ExtractResult(reply);
+  QJsonObject result = ExtractResult(reply).object();
   // Check if the user has been authenticated correctly
   QString error;
   if (!result["success"].toBool() || result["UserID"].toInt() == 0) {
@@ -701,7 +703,7 @@ void GroovesharkService::RetrieveUserPlaylists() {
 void GroovesharkService::UserPlaylistsRetrieved(QNetworkReply* reply) {
   reply->deleteLater();
 
-  QVariantMap result = ExtractResult(reply);
+  QJsonObject result = ExtractResult(reply).object();
   QList<PlaylistInfo> playlists = ExtractPlaylistInfo(result);
 
   for (const PlaylistInfo& playlist_info : playlists) {
@@ -738,7 +740,7 @@ void GroovesharkService::PlaylistSongsRetrieved(QNetworkReply* reply,
                                     : &playlists_[playlist_id];
   playlist_info->item_->removeRows(0, playlist_info->item_->rowCount());
 
-  QVariantMap result = ExtractResult(reply);
+  QJsonObject result = ExtractResult(reply).object();
   SongList songs = ExtractSongs(result);
   SortSongsAlphabeticallyIfNeeded(&songs);
 
@@ -779,7 +781,7 @@ void GroovesharkService::UserFavoritesRetrieved(QNetworkReply* reply,
 
   favorites_->removeRows(0, favorites_->rowCount());
 
-  QVariantMap result = ExtractResult(reply);
+  QJsonObject result = ExtractResult(reply).object();
   SongList songs = ExtractSongs(result);
   SortSongsAlphabeticallyIfNeeded(&songs);
 
@@ -813,7 +815,7 @@ void GroovesharkService::UserLibrarySongsRetrieved(QNetworkReply* reply,
 
   library_->removeRows(0, library_->rowCount());
 
-  QVariantMap result = ExtractResult(reply);
+  QJsonObject result = ExtractResult(reply).object();
   SongList songs = ExtractSongs(result);
   SortSongsAlphabeticallyIfNeeded(&songs);
 
@@ -842,7 +844,7 @@ void GroovesharkService::RetrievePopularSongsMonth() {
 
 void GroovesharkService::PopularSongsMonthRetrieved(QNetworkReply* reply) {
   reply->deleteLater();
-  QVariantMap result = ExtractResult(reply);
+  QJsonObject result = ExtractResult(reply).object();
   SongList songs = ExtractSongs(result);
 
   app_->task_manager()->IncreaseTaskProgress(task_popular_id_, 50, 100);
@@ -868,7 +870,7 @@ void GroovesharkService::RetrievePopularSongsToday() {
 
 void GroovesharkService::PopularSongsTodayRetrieved(QNetworkReply* reply) {
   reply->deleteLater();
-  QVariantMap result = ExtractResult(reply);
+  QJsonObject result = ExtractResult(reply).object();
   SongList songs = ExtractSongs(result);
 
   app_->task_manager()->IncreaseTaskProgress(task_popular_id_, 50, 100);
@@ -894,7 +896,7 @@ void GroovesharkService::RetrieveSubscribedPlaylists() {
 void GroovesharkService::SubscribedPlaylistsRetrieved(QNetworkReply* reply) {
   reply->deleteLater();
 
-  QVariantMap result = ExtractResult(reply);
+  QJsonObject result = ExtractResult(reply).object();
   QList<PlaylistInfo> playlists = ExtractPlaylistInfo(result);
 
   for (const PlaylistInfo& playlist_info : playlists) {
@@ -925,9 +927,10 @@ void GroovesharkService::RetrieveAutoplayTags() {
 
 void GroovesharkService::AutoplayTagsRetrieved(QNetworkReply* reply) {
   reply->deleteLater();
-  QVariantMap result = ExtractResult(reply);
-  QVariantMap::const_iterator it;
+  QJsonObject result = ExtractResult(reply).object();
+  QJsonObject::const_iterator it;
   if (!stations_) return;
+
   for (it = result.constBegin(); it != result.constEnd(); ++it) {
     int id = it.key().toInt();
     QString name = it.value().toString().toLower();
@@ -956,9 +959,9 @@ Song GroovesharkService::StartAutoplayTag(int tag_id,
   reply->deleteLater();
   if (reply_has_timeouted) return Song();
 
-  QVariantMap result = ExtractResult(reply);
-  autoplay_state = result["autoplayState"].toMap();
-  return ExtractSong(result["nextSong"].toMap());
+  QJsonObject result = ExtractResult(reply).object();
+  autoplay_state = result["autoplayState"].toObject().toVariantMap();
+  return ExtractSong(result["nextSong"].toObject());
 }
 
 Song GroovesharkService::StartAutoplay(QVariantMap& autoplay_state) {
@@ -979,9 +982,9 @@ Song GroovesharkService::StartAutoplay(QVariantMap& autoplay_state) {
   reply->deleteLater();
   if (reply_has_timeouted) return Song();
 
-  QVariantMap result = ExtractResult(reply);
-  autoplay_state = result["autoplayState"].toMap();
-  return ExtractSong(result["nextSong"].toMap());
+  QJsonObject result = ExtractResult(reply).object();
+  autoplay_state = result["autoplayState"].toObject().toVariantMap();
+  return ExtractSong(result["nextSong"].toObject());
 }
 
 Song GroovesharkService::GetAutoplaySong(QVariantMap& autoplay_state) {
@@ -993,9 +996,9 @@ Song GroovesharkService::GetAutoplaySong(QVariantMap& autoplay_state) {
   reply->deleteLater();
   if (reply_has_timeouted) return Song();
 
-  QVariantMap result = ExtractResult(reply);
-  autoplay_state = result["autoplayState"].toMap();
-  return ExtractSong(result["nextSong"].toMap());
+  QJsonObject result = ExtractResult(reply).object();
+  autoplay_state = result["autoplayState"].toObject().toVariantMap();
+  return ExtractSong(result["nextSong"].toObject());
 }
 
 void GroovesharkService::MarkStreamKeyOver30Secs(const QString& stream_key,
@@ -1011,7 +1014,7 @@ void GroovesharkService::MarkStreamKeyOver30Secs(const QString& stream_key,
 
 void GroovesharkService::StreamMarked(QNetworkReply* reply) {
   reply->deleteLater();
-  QVariantMap result = ExtractResult(reply);
+  QJsonObject result = ExtractResult(reply).object();
   if (!result["success"].toBool()) {
     qLog(Warning) << "Grooveshark markStreamKeyOver30Secs failed";
   }
@@ -1031,7 +1034,7 @@ void GroovesharkService::MarkSongComplete(const QString& song_id,
 
 void GroovesharkService::SongMarkedAsComplete(QNetworkReply* reply) {
   reply->deleteLater();
-  QVariantMap result = ExtractResult(reply);
+  QJsonObject result = ExtractResult(reply).object();
   if (!result["success"].toBool()) {
     qLog(Warning) << "Grooveshark markSongComplete failed";
   }
@@ -1178,8 +1181,8 @@ void GroovesharkService::GetSongUrlToShare(int song_id) {
 void GroovesharkService::SongUrlToShareReceived(QNetworkReply* reply) {
   reply->deleteLater();
 
-  QVariantMap result = ExtractResult(reply);
-  if (!result["url"].isValid()) return;
+  QJsonObject result = ExtractResult(reply).object();
+  if (result["url"].isUndefined()) return;
   QString url = result["url"].toString();
   ShowUrlBox(tr("Grooveshark song's URL"), url);
 }
@@ -1200,8 +1203,8 @@ void GroovesharkService::GetPlaylistUrlToShare(int playlist_id) {
 
 void GroovesharkService::PlaylistUrlToShareReceived(QNetworkReply* reply) {
   reply->deleteLater();
-  QVariantMap result = ExtractResult(reply);
-  if (!result["url"].isValid()) return;
+  QJsonObject result = ExtractResult(reply).object();
+  if (result["url"].isUndefined()) return;
   QString url = result["url"].toString();
   ShowUrlBox(tr("Grooveshark playlist's URL"), url);
 }
@@ -1250,7 +1253,7 @@ void GroovesharkService::PlaylistSongsSet(QNetworkReply* reply, int playlist_id,
   reply->deleteLater();
   app_->task_manager()->SetTaskFinished(task_id);
 
-  QVariantMap result = ExtractResult(reply);
+  QJsonObject result = ExtractResult(reply).object();
   if (!result["success"].toBool()) {
     qLog(Warning) << "Grooveshark setPlaylistSongs failed";
     return;
@@ -1290,8 +1293,8 @@ void GroovesharkService::CreateNewPlaylist() {
 void GroovesharkService::NewPlaylistCreated(QNetworkReply* reply,
                                             const QString& name) {
   reply->deleteLater();
-  QVariantMap result = ExtractResult(reply);
-  if (!result["success"].toBool() || !result["playlistID"].isValid()) {
+  QJsonObject result = ExtractResult(reply).object();
+  if (!result["success"].toBool() || result["playlistID"].isUndefined()) {
     qLog(Warning) << "Grooveshark createPlaylist failed";
     return;
   }
@@ -1337,7 +1340,7 @@ void GroovesharkService::DeletePlaylist(int playlist_id) {
 void GroovesharkService::PlaylistDeleted(QNetworkReply* reply,
                                          int playlist_id) {
   reply->deleteLater();
-  QVariantMap result = ExtractResult(reply);
+  QJsonObject result = ExtractResult(reply).object();
   if (!result["success"].toBool()) {
     qLog(Warning) << "Grooveshark deletePlaylist failed";
     return;
@@ -1385,7 +1388,7 @@ void GroovesharkService::RenamePlaylist(int playlist_id) {
 void GroovesharkService::PlaylistRenamed(QNetworkReply* reply, int playlist_id,
                                          const QString& new_name) {
   reply->deleteLater();
-  QVariantMap result = ExtractResult(reply);
+  QJsonObject result = ExtractResult(reply).object();
   if (!result["success"].toBool()) {
     qLog(Warning) << "Grooveshark renamePlaylist failed";
     return;
@@ -1412,7 +1415,7 @@ void GroovesharkService::UserFavoriteSongAdded(QNetworkReply* reply,
   reply->deleteLater();
   app_->task_manager()->SetTaskFinished(task_id);
 
-  QVariantMap result = ExtractResult(reply);
+  QJsonObject result = ExtractResult(reply).object();
   if (!result["success"].toBool()) {
     qLog(Warning) << "Grooveshark addUserFavoriteSong failed";
     return;
@@ -1448,7 +1451,7 @@ void GroovesharkService::UserLibrarySongAdded(QNetworkReply* reply,
   reply->deleteLater();
   app_->task_manager()->SetTaskFinished(task_id);
 
-  QVariantMap result = ExtractResult(reply);
+  QJsonObject result = ExtractResult(reply).object();
   if (!result["success"].toBool()) {
     qLog(Warning) << "Grooveshark addUserLibrarySongs failed";
     return;
@@ -1537,7 +1540,7 @@ void GroovesharkService::SongsRemovedFromFavorites(QNetworkReply* reply,
   app_->task_manager()->SetTaskFinished(task_id);
   reply->deleteLater();
 
-  QVariantMap result = ExtractResult(reply);
+  QJsonObject result = ExtractResult(reply).object();
   if (!result["success"].toBool()) {
     qLog(Warning) << "Grooveshark removeUserFavoriteSongs failed";
     return;
@@ -1596,7 +1599,7 @@ void GroovesharkService::SongsRemovedFromLibrary(QNetworkReply* reply,
   app_->task_manager()->SetTaskFinished(task_id);
   reply->deleteLater();
 
-  QVariantMap result = ExtractResult(reply);
+  QJsonObject result = ExtractResult(reply).object();
   if (!result["success"].toBool()) {
     qLog(Warning) << "Grooveshark removeUserLibrarySongs failed";
     return;
@@ -1607,11 +1610,12 @@ void GroovesharkService::SongsRemovedFromLibrary(QNetworkReply* reply,
 QNetworkReply* GroovesharkService::CreateRequest(const QString& method_name,
                                                  const QList<Param>& params,
                                                  bool use_https) {
-  QVariantMap request_params;
-  request_params.insert("method", method_name);
+  QJsonDocument json_document;
+  QJsonObject json_request_params;
+  json_request_params.insert("method", QJsonValue(method_name));
 
-  QVariantMap header;
-  header.insert("wsKey", kApiKey);
+  QJsonObject json_header;
+  json_header.insert("wsKey", QJsonValue(kApiKey));
   if (session_id_.isEmpty()) {
     if (method_name != "startSession") {
       // It's normal to not have a session_id when calling startSession.
@@ -1619,26 +1623,28 @@ QNetworkReply* GroovesharkService::CreateRequest(const QString& method_name,
       qLog(Warning) << "Session ID is empty: will not be added to query";
     }
   } else {
-    header.insert("sessionID", session_id_);
+    json_header.insert("sessionID", QJsonValue(session_id_));
   }
-  request_params.insert("header", header);
+  json_request_params["header"] = json_header;
 
-  QVariantMap parameters;
+  QJsonObject json_parameters;
   for (const Param& param : params) {
-    parameters.insert(param.first, param.second);
+    json_parameters.insert(param.first, QJsonValue(param.second.toString()));
   }
-  request_params.insert("parameters", parameters);
+  json_request_params["parameters"] = json_parameters;
 
-  QJson::Serializer serializer;
-  QByteArray post_params = serializer.serialize(request_params);
+  json_document.setObject(json_request_params);
+  QByteArray post_params = json_document.toBinaryData();
 
   QUrl url(kUrl);
   if (use_https) {
     url.setScheme("https");
   }
-  url.setQueryItems(
+  QUrlQuery url_query;
+  url_query.setQueryItems(
       QList<QPair<QString, QString>>() << QPair<QString, QString>(
           "sig", Utilities::HmacMd5(api_key_, post_params).toHex()));
+  url.setQuery(url_query);
   QNetworkRequest req(url);
   QNetworkReply* reply = network_->post(req, post_params);
 
@@ -1674,20 +1680,24 @@ bool GroovesharkService::WaitForReply(QNetworkReply* reply) {
   return true;
 }
 
-QVariantMap GroovesharkService::ExtractResult(QNetworkReply* reply) {
-  QJson::Parser parser;
-  bool ok;
-  QVariantMap result = parser.parse(reply, &ok).toMap();
-  if (!ok) {
+QJsonDocument GroovesharkService::ExtractResult(QNetworkReply* reply) {
+  reply->deleteLater();
+
+  QJsonParseError error;
+  QJsonDocument json_document = QJsonDocument::fromJson(reply->readAll(), &error);
+  if (error.error != QJsonParseError::NoError) {
     qLog(Error) << "Error while parsing Grooveshark result";
   }
-  QVariantList errors = result["errors"].toList();
-  QVariantList::iterator it;
-  for (it = errors.begin(); it != errors.end(); ++it) {
-    QVariantMap error = (*it).toMap();
-    qLog(Error) << "Grooveshark error: (" << error["code"].toInt() << ") "
-                << error["message"].toString();
-    switch (error["code"].toInt()) {
+
+  QJsonObject json_object = json_document.object();
+  QJsonArray json_errors = json_object["errors"].toArray();
+
+  for(const QJsonValue & error : json_errors) {
+    QJsonObject json_error = error.toObject();
+
+    qLog(Error) << "Grooveshark error: (" << json_error["code"].toInt() << ") "
+                << json_error["message"].toString();
+    switch (json_error["code"].toInt()) {
       case 100:  // User auth required
       case 102:  // User premium required
       case 300:  // Session required
@@ -1698,7 +1708,10 @@ QVariantMap GroovesharkService::ExtractResult(QNetworkReply* reply) {
         break;
     }
   }
-  return result["result"].toMap();
+
+  QJsonDocument doc_ret;
+  doc_ret.setObject(json_object["result"].toObject());
+  return doc_ret;
 }
 
 namespace {
@@ -1710,24 +1723,26 @@ bool CompareSongs(const QVariant& song1, const QVariant& song2) {
   if (song1_sort == song2_sort) {
     // Favorite songs have a "TSFavorited" and (currently) no "Sort" field
     return song1_map["TSFavorited"].toString() <
-           song2_map["TSFavorited"].toString();
+        song2_map["TSFavorited"].toString();
   }
   return song1_sort < song2_sort;
 }
-}  // namespace
+} // namespace
 
-SongList GroovesharkService::ExtractSongs(const QVariantMap& result) {
-  QVariantList result_songs = result["songs"].toList();
+SongList GroovesharkService::ExtractSongs(const QJsonObject& result) {
+  QVariantList result_songs = result["songs"].toArray().toVariantList();
+  // We don't automatically sort QJsonValue because it doesn't implement swap and so I think it simplier like that
+  // https://bugreports.qt.io/browse/QTBUG-44944
   qStableSort(result_songs.begin(), result_songs.end(), CompareSongs);
   SongList songs;
   for (int i = 0; i < result_songs.size(); ++i) {
     QVariantMap result_song = result_songs[i].toMap();
-    songs << ExtractSong(result_song);
+    songs << ExtractSong(QJsonObject::fromVariantMap(result_song));
   }
   return songs;
 }
 
-Song GroovesharkService::ExtractSong(const QVariantMap& result_song) {
+Song GroovesharkService::ExtractSong(const QJsonObject& result_song) {
   Song song;
   if (!result_song.isEmpty()) {
     int song_id = result_song["SongID"].toInt();
@@ -1766,11 +1781,11 @@ Song GroovesharkService::ExtractSong(const QVariantMap& result_song) {
   return song;
 }
 
-QList<int> GroovesharkService::ExtractSongsIds(const QVariantMap& result) {
-  QVariantList result_songs = result["songs"].toList();
+QList<int> GroovesharkService::ExtractSongsIds(const QJsonObject& result) {
+  QJsonArray result_songs = result["songs"].toArray();
   QList<int> songs_ids;
   for (int i = 0; i < result_songs.size(); ++i) {
-    QVariantMap result_song = result_songs[i].toMap();
+    QJsonObject result_song = result_songs[i].toObject();
     int song_id = result_song["SongID"].toInt();
     songs_ids << song_id;
   }
@@ -1799,16 +1814,16 @@ int GroovesharkService::ExtractSongId(const QUrl& url) {
 }
 
 QList<GroovesharkService::PlaylistInfo> GroovesharkService::ExtractPlaylistInfo(
-    const QVariantMap& result) {
-  QVariantList playlists_qvariant = result["playlists"].toList();
+    const QJsonObject result) {
+  QJsonArray json_playlists = result["playlists"].toArray();
 
   QList<PlaylistInfo> playlists;
 
   // Get playlists info
-  for (const QVariant& playlist_qvariant : playlists_qvariant) {
-    QVariantMap playlist = playlist_qvariant.toMap();
-    int playlist_id = playlist["PlaylistID"].toInt();
-    QString playlist_name = playlist["PlaylistName"].toString();
+  for (const QJsonValue& playlist : json_playlists) {
+    QJsonObject json_playlist = playlist.toObject();
+    int playlist_id = json_playlist["PlaylistID"].toInt();
+    QString playlist_name = json_playlist["PlaylistName"].toString();
 
     playlists << PlaylistInfo(playlist_id, playlist_name);
   }

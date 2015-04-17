@@ -27,7 +27,7 @@ optional_source(HAVE_GOOGLE_DRIVE
     cloudstream.h
 )
 
-qt4_wrap_cpp(MOC ${HEADERS})
+qt5_wrap_cpp(MOC ${HEADERS})
 
 protobuf_generate_cpp(PROTO_SOURCES PROTO_HEADERS ${MESSAGES})
 

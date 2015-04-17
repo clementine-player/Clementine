@@ -1,6 +1,6 @@
 /***************************************************************************
 * This file is part of libmygpo-qt                                         *
-* Copyright (c) 2010 - 2013 Stefan Derkits <stefan@derkits.at>             *
+* Copyright (c) 2010 - 2014 Stefan Derkits <stefan@derkits.at>             *
 * Copyright (c) 2010 - 2011 Christian Wagner <christian.wagner86@gmx.at>   *
 * Copyright (c) 2010 - 2011 Felix Winter <ixos01@gmail.com>                *
 *                                                                          *

@@ -28,8 +28,8 @@ GlobalSearchSettingsPage::GlobalSearchSettingsPage(SettingsDialog* dialog)
     : SettingsPage(dialog), ui_(new Ui::GlobalSearchSettingsPage) {
   ui_->setupUi(this);
 
-  ui_->sources->header()->setResizeMode(0, QHeaderView::Stretch);
-  ui_->sources->header()->setResizeMode(1, QHeaderView::ResizeToContents);
+  ui_->sources->header()->setSectionResizeMode(0, QHeaderView::Stretch);
+  ui_->sources->header()->setSectionResizeMode(1, QHeaderView::ResizeToContents);
 
   warning_icon_ = IconLoader::Load("dialog-warning");
 

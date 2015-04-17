@@ -11,6 +11,7 @@ set(QXT-MOC-HEADERS
 
 find_package(X11)
 include_directories(${X11_INCLUDE_DIR})
+include_directories(${Qt5Gui_PRIVATE_INCLUDE_DIRS})
 
 if(WIN32)
   set(QXT-SOURCES ${QXT-SOURCES} qxtglobalshortcut_win.cpp)
@@ -20,9 +21,11 @@ else(WIN32)
   set(QXT-SOURCES ${QXT-SOURCES} qxtglobalshortcut_x11.cpp)
 endif(WIN32)
 
-QT4_WRAP_CPP(QXT-SOURCES-MOC ${QXT-MOC-HEADERS})
+QT5_WRAP_CPP(QXT-SOURCES-MOC ${QXT-MOC-HEADERS})
 
 ADD_LIBRARY(qxt STATIC
   ${QXT-SOURCES}
   ${QXT-SOURCES-MOC}
 )
+
+QT5_USE_MODULES(qxt Core Widgets X11Extras)

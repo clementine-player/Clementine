@@ -213,7 +213,7 @@ void LastFMService::UpdateSubscriberStatusFinished(QNetworkReply* reply) {
 
 QUrl LastFMService::FixupUrl(const QUrl& url) {
   QUrl ret;
-  ret.setEncodedUrl(url.toEncoded().replace(
+  ret.setUrl(url.toEncoded().replace(
       "USERNAME", QUrl::toPercentEncoding(lastfm::ws::Username)));
   return ret;
 }
