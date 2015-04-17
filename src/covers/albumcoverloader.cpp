@@ -196,6 +196,9 @@ AlbumCoverLoader::TryLoadResult AlbumCoverLoader::TryLoadImage(
     QMetaObject::invokeMethod(spotify, "LoadImage", Qt::QueuedConnection,
                               Q_ARG(QString, id));
     return TryLoadResult(true, false, QImage());
+  } else if (filename.isEmpty()) {
+    // Avoid "QFSFileEngine::open: No file name specified" messages if we know that the filename is empty
+    return TryLoadResult(false, false, task.options.default_output_image_);
   }
 
   QImage image(filename);
