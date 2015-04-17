@@ -198,7 +198,6 @@ void AmazonCloudDrive::MonitorReply(QNetworkReply* reply,
       if (code >= 500) {  // Retry with exponential backoff.
         int max_delay_s = std::pow(std::min(retries + 1, 8), 2);
         int delay_s = qrand() % max_delay_s;
-        qLog(Debug) << max_delay_s << delay_s;
         qLog(Debug) << "Request failed with code:" << code << "- retrying after"
                     << delay_s << "seconds";
         DoAfter([=]() {
