@@ -89,6 +89,19 @@ void SpotifySearchProvider::SearchFinishedSlot(
   PendingState state = it.value();
   queries_.erase(it);
 
+  /* Here we clean up Spotify's results for our purposes
+   *
+   * Since Spotify doesn't give us an album artist,
+   * we pick one, so there's a single album artist
+   * per album to use for sorting.
+   *
+   * We also drop any of the single tracks returned
+   * if they are already represented in an album
+   *
+   * This eliminates frequent duplicates from the
+   * "Top Tracks" results that Spotify sometimes
+   * returns
+   */
   QMap<std::string, std::string> album_dedup;
   ResultList ret;
 
@@ -96,13 +109,20 @@ void SpotifySearchProvider::SearchFinishedSlot(
     const pb::spotify::Album& album = response.album(i);
 
     QHash<QString, int> artist_count;
-    QString artist, majority_artist;
+    QString majority_artist;
     int majority_count = 0;
 
-    // Choose an album artist
+    /* We go through and find the artist that is
+     * represented most frequently in the artist
+     *
+     * For most albums this will just be one artist,
+     * but this ensures we have a consistend album artist for
+     * soundtracks, compilations, contributing artists, etc
+     */
     for (int j = 0; j < album.track_size(); ++j) {
+      // Each track can have multiple artists attributed, check them all
       for (int k = 0; k < album.track(j).artist_size(); ++k) {
-        artist = QStringFromStdString(album.track(j).artist(k));
+        QString artist = QStringFromStdString(album.track(j).artist(k));
         if (artist_count.contains(artist)) {
           artist_count[artist]++;
         } else {
@@ -116,6 +136,8 @@ void SpotifySearchProvider::SearchFinishedSlot(
     }
 
     for (int j = 0; j < album.track_size(); ++j) {
+      // Insert the album/track title into the dedup map
+      // so we can check tracks against it below
       album_dedup.insertMulti(album.track(j).album(), album.track(j).title());
 
       Result result(this);
@@ -132,6 +154,8 @@ void SpotifySearchProvider::SearchFinishedSlot(
   for (int i = 0; i < response.result_size(); ++i) {
     const pb::spotify::Track& track = response.result(i);
 
+    // Check this track/album against tracks we've already seen
+    // in the album results, and skip if it's a duplicate
     if (album_dedup.contains(track.album()) &&
         album_dedup.values(track.album()).contains(track.title())) {
       continue;
