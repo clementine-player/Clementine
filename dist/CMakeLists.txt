@@ -41,12 +41,17 @@ option(INSTALL_UBUNTU_ICONS "Install the Ubuntu themed monochrome panel icons" $
 if (NOT APPLE)
   install(FILES clementine_64.png
     DESTINATION share/icons/hicolor/64x64/apps/
-    RENAME application-x-clementine.png
+    RENAME clementine.png
+  )
+
+  install(FILES clementine_128.png
+    DESTINATION share/icons/hicolor/128x128/apps/
+    RENAME clementine.png
   )
 
   install(FILES ../data/icon.svg
     DESTINATION share/icons/hicolor/scalable/apps/
-    RENAME application-x-clementine.svg
+    RENAME clementine.svg
   )
 
   install(FILES clementine.desktop
