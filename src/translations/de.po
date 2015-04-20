@@ -11,7 +11,7 @@
 # Christian Sturm <reezer@reezer.org>, 2011, 2012
 # Claudius Henrichs <claudius.h@gmx.de>, 2011
 # daschuer <daschuer@gmx.de>, 2012
-# Ettore Atalan <atalanttore@googlemail.com>, 2014
+# Ettore Atalan <atalanttore@googlemail.com>, 2014-2015
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # geroldmittelstaedt <gerold.mittelstaedt@googlemail.com>, 2012
 # Gregor S. <inactive+santy@transifex.com>, 2012
@@ -40,8 +40,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2015-04-10 23:47+0000\n"
-"Last-Translator: Leon Scheid <megacrafter.mega@googlemail.com>\n"
+"PO-Revision-Date: 2015-04-17 23:51+0000\n"
+"Last-Translator: Tobias Bannert <tobannert@gmail.com>\n"
 "Language-Team: German (http://www.transifex.com/projects/p/clementine/language/de/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -95,7 +95,7 @@ msgstr "Titel"
 #: internet/vk/vkservice.cpp:148
 #, qt-format
 msgid "%1 (%2 songs)"
-msgstr "%1 (%2 Lieder)"
+msgstr "%1 (%2 Titel)"
 
 #: widgets/osd.cpp:194
 #, qt-format
@@ -340,7 +340,7 @@ msgid ""
 "files tags for all your library's songs.</p><p>This is not needed if the "
 "&quot;Save ratings and statistics in file tags&quot; option has always been "
 "activated.</p></body></html>"
-msgstr "<html><head/><body><p>Das wird Bewertungen und Statistiken aller Titel ihrer Bibliothek in die Tags der Lieddateien schreiben.</p><p>Das ist nicht nötig, wenn die Option &quot;Speichere alle Bewertungen und Statistiken in Titel-Tags&quot; immer aktiviert war.</p></body></html>"
+msgstr "<html><head/><body><p>Das wird Bewertungen und Statistiken aller Titel ihrer Bibliothek in die Tags der Titeldateien schreiben.</p><p>Das ist nicht nötig, wenn die Option &quot;Speichere alle Bewertungen und Statistiken in Titel-Tags&quot; immer aktiviert war.</p></body></html>"
 
 #: ../bin/src/ui_organisedialog.h:251
 msgid ""
@@ -539,23 +539,23 @@ msgstr "Interpret des aktuellen Titels"
 
 #: ../bin/src/ui_notificationssettingspage.h:428
 msgid "Add song auto score"
-msgstr "Automatischen Score hinzufügen"
+msgstr "Automatische Titelbewertung hinzufügen"
 
 #: ../bin/src/ui_notificationssettingspage.h:398
 msgid "Add song composer tag"
-msgstr "Komponist des aktuellen Titels"
+msgstr "Titelkomponist hinzufügen"
 
 #: ../bin/src/ui_notificationssettingspage.h:407
 msgid "Add song disc tag"
-msgstr "Medium des aktuellen Titels"
+msgstr "Titelmedium hinzufügen"
 
 #: ../bin/src/ui_notificationssettingspage.h:435
 msgid "Add song filename"
-msgstr "Dateiname des aktuellen Titels"
+msgstr "Titeldateiname hinzufügen"
 
 #: ../bin/src/ui_notificationssettingspage.h:413
 msgid "Add song genre tag"
-msgstr "Genre des aktuellen Titels"
+msgstr "Titelgenre hinzufügen"
 
 #: ../bin/src/ui_notificationssettingspage.h:404
 msgid "Add song grouping tag"
@@ -563,43 +563,43 @@ msgstr "Titelgruppierung hinzufügen"
 
 #: ../bin/src/ui_notificationssettingspage.h:416
 msgid "Add song length tag"
-msgstr "Länge des aktuellen Titels"
+msgstr "Titellänge hinzufügen"
 
 #: ../bin/src/ui_notificationssettingspage.h:401
 msgid "Add song performer tag"
-msgstr "Besetzung hinzufügen"
+msgstr "Titelbesetzung hinzufügen"
 
 #: ../bin/src/ui_notificationssettingspage.h:419
 msgid "Add song play count"
-msgstr "Abspielzähler des aktuellen Titels"
+msgstr "Titelwiedergabezähler hinzufügen"
 
 #: ../bin/src/ui_notificationssettingspage.h:425
 msgid "Add song rating"
-msgstr "Bewertung hinzufügen"
+msgstr "TItelbewertung hinzufügen"
 
 #: ../bin/src/ui_notificationssettingspage.h:422
 msgid "Add song skip count"
-msgstr "Sprungzähler des aktuellen Titels"
+msgstr "Titelübersprungzähler hinzufügen"
 
 #: ../bin/src/ui_notificationssettingspage.h:389
 msgid "Add song title tag"
-msgstr "Name des aktuellen Titels"
+msgstr "Titelname hinzufügen"
 
 #: internet/vk/vkservice.cpp:320
 msgid "Add song to cache"
-msgstr "Lied zum Zwischenspeicher hinzufügen"
+msgstr "Titel zum Zwischenspeicher hinzufügen"
 
 #: ../bin/src/ui_notificationssettingspage.h:410
 msgid "Add song track tag"
-msgstr "Nummer des aktuellen Titels"
+msgstr "Titelnummer hinzufügen"
 
 #: ../bin/src/ui_notificationssettingspage.h:395
 msgid "Add song year tag"
-msgstr "Erscheinungsjahr des aktuellen Titels"
+msgstr "Titelerscheinungsjahr hinzufügen"
 
 #: ../bin/src/ui_vksettingspage.h:222
 msgid "Add songs to \"My Music\" when the \"Love\" button is clicked"
-msgstr "Lieder zu »Meine Musik« hinzufügen, wenn »Lieben« geklickt wurde"
+msgstr "Titel zu »Meine Musik« hinzufügen, wenn »Lieben« geklickt wurde"
 
 #: ../bin/src/ui_mainwindow.h:673
 msgid "Add stream..."
@@ -680,7 +680,7 @@ msgstr "Titel werden zu »Meine Musik« hinzugefügt"
 
 #: internet/grooveshark/groovesharkservice.cpp:1402
 msgid "Adding song to favorites"
-msgstr "Füge Titel zu den Favoriten hinzu"
+msgstr "Titel werden zu den Favoriten hinzugefügt"
 
 #: library/libraryfilterwidget.cpp:142
 msgid "Advanced grouping..."
@@ -801,8 +801,8 @@ msgid "Always start playing"
 msgstr "Immer mit der Wiedergabe beginnen"
 
 #: ../bin/src/ui_amazonsettingspage.h:103
-msgid "Amazon"
-msgstr "Amazon"
+msgid "Amazon Cloud Drive"
+msgstr "Amazon Cloud Drive"
 
 #: internet/spotify/spotifyblobdownloader.cpp:67
 msgid ""
@@ -872,7 +872,7 @@ msgstr "Wollen Sie die Statistiken dieses Titels wirklich zurücksetzen?"
 msgid ""
 "Are you sure you want to write song's statistics into song's file for all "
 "the songs of your library?"
-msgstr "Sind Sie sicher, dass Sie, für alle Lieder Ihrer Bibliothek, die Liedstatistiken in die Lieddatei schreiben wollen?"
+msgstr "Sind Sie sicher, dass Sie für alle Titel Ihrer Bibliothek, die Titelstatistiken in die Titeldatei schreiben wollen?"
 
 #: playlist/playlist.cpp:1309 ui/organisedialog.cpp:62
 #: ui/qtsystemtrayicon.cpp:234 ../bin/src/ui_groupbydialog.h:130
@@ -1081,7 +1081,7 @@ msgstr "Tasten"
 
 #: ../bin/src/ui_groovesharksettingspage.h:139
 msgid "By default, Grooveshark sorts songs on date added"
-msgstr "Als Vorgabe sortiert Grooveshark die Lieder nach Datum, wann sie hinzugefügt wurden."
+msgstr "Als Vorgabe sortiert Grooveshark die Titel nach Datum, wann sie hinzugefügt wurden."
 
 #: core/song.cpp:419
 msgid "CDDA"
@@ -1146,7 +1146,7 @@ msgstr "Sprache ändern"
 msgid ""
 "Changing mono playback preference will be effective for the next playing "
 "songs"
-msgstr "Die Monowiedergabeeinstellung wird für den nächsten Lieder wirksam."
+msgstr "Die Monowiedergabeeinstellung wird für den nächsten Titel wirksam."
 
 #: ../bin/src/ui_podcastsettingspage.h:256
 msgid "Check for new episodes"
@@ -1199,7 +1199,7 @@ msgstr "Wählen Sie die Internetdienste aus, die Sie anzeigen möchten."
 #: ../bin/src/ui_songinfosettingspage.h:160
 msgid ""
 "Choose the websites you want Clementine to use when searching for lyrics."
-msgstr "Internetseiten, welche von Clementine, zur Liedtextsuche, verwendet werden sollen:"
+msgstr "Internetseiten, welche von Clementine zur Titeltextsuche, verwendet werden sollen:"
 
 #: ui/equalizer.cpp:112
 msgid "Classical"
@@ -1241,23 +1241,23 @@ msgstr "Clementine-Visualisierung"
 msgid ""
 "Clementine can automatically convert the music you copy to this device into "
 "a format that it can play."
-msgstr "Clementine kann die Musik, die Sie auf dieses Gerät kopieren, automatisch in ein Format konvertieren, welches das Gerät abspielen kann."
+msgstr "Clementine kann die Musik, die Sie auf dieses Gerät kopieren, automatisch in ein Format konvertieren, welches das Gerät wiedergeben kann."
 
 #: ../bin/src/ui_amazonsettingspage.h:104
 msgid "Clementine can play music that you have uploaded to Amazon Cloud Drive"
-msgstr "Clementine kann Musik, die Sie auf Amazon-Cloud-Drive hochgeladen haben, abspielen"
+msgstr "Clementine kann Musik, die Sie auf Amazon Cloud Drive hochgeladen haben, wiedergeben"
 
 #: ../bin/src/ui_boxsettingspage.h:104
 msgid "Clementine can play music that you have uploaded to Box"
-msgstr "Clementine kann Musik abspielen, die Sie auf Box hochgeladen haben."
+msgstr "Clementine kann Musik, die Sie auf Box hochgeladen haben, wiedergeben."
 
 #: ../bin/src/ui_dropboxsettingspage.h:104
 msgid "Clementine can play music that you have uploaded to Dropbox"
-msgstr "Clementine kann Musik abspielen, die Sie auf Dropbox hochgeladen haben"
+msgstr "Clementine kann Musik, die Sie auf Dropbox hochgeladen haben, wiedergeben."
 
 #: ../bin/src/ui_googledrivesettingspage.h:104
 msgid "Clementine can play music that you have uploaded to Google Drive"
-msgstr "Clementine kann Musik abspielen, die Sie auf Google Drive hochgeladen haben."
+msgstr "Clementine kann Musik, die Sie auf Google Drive hochgeladen haben, wiedergeben."
 
 #: ../bin/src/ui_skydrivesettingspage.h:104
 msgid "Clementine can play music that you have uploaded to OneDrive"
@@ -1462,7 +1462,7 @@ msgstr "Gesamte Musik konvertieren"
 
 #: ../bin/src/ui_deviceproperties.h:378
 msgid "Convert any music that the device can't play"
-msgstr "Musik konvertieren, die das Gerät nicht abspielen kann"
+msgstr "Musik konvertieren, die das Gerät nicht wiedergeben kann"
 
 #: ../bin/src/ui_networkremotesettingspage.h:248
 msgid "Convert lossless audiofiles before sending them to the remote."
@@ -2096,7 +2096,7 @@ msgstr "Tastenkürzel nur aktivieren, wenn Clementine fokussiert ist"
 
 #: ../bin/src/ui_behavioursettingspage.h:278
 msgid "Enable song metadata inline edition with click"
-msgstr "Direktausgabe der Liedmetadaten mit Klick aktivieren"
+msgstr "Direktausgabe der Titelmetadaten mit Klick aktivieren"
 
 #: ../bin/src/ui_globalsearchsettingspage.h:147
 msgid ""
@@ -2467,7 +2467,7 @@ msgstr "Diesen Interpret finden"
 
 #: musicbrainz/tagfetcher.cpp:58
 msgid "Fingerprinting song"
-msgstr "Titel analysieren"
+msgstr "Titel wird analysiert"
 
 #: smartplaylists/wizard.cpp:83
 msgid "Finish"
@@ -2583,12 +2583,12 @@ msgstr "Eine Adresse erhalten, um diese Grooveshark-Wiedergabeliste freizugeben.
 #: internet/grooveshark/groovesharkservice.cpp:553
 #: internet/grooveshark/groovesharkservice.cpp:1155
 msgid "Get a URL to share this Grooveshark song"
-msgstr "Eine Adresse erhalten, um dieses Grooveshark-Lied freizugeben."
+msgstr "Eine Adresse erhalten, um diesen Grooveshark-Titel zu teilen."
 
 #: internet/spotify/spotifyservice.cpp:633
 #: internet/spotify/spotifyservice.cpp:674
 msgid "Get a URL to share this Spotify song"
-msgstr "Eine Adresse erhalten, um dieses Spotify-Lied zu teilen"
+msgstr "Eine Adresse erhalten, um diesen Spotify-Titel zu teilen"
 
 #: internet/spotify/spotifyservice.cpp:665
 msgid "Get a URL to share this playlist"
@@ -2634,7 +2634,7 @@ msgstr "%1 Titelbilder von %2 wurden gefunden (%3 fehlgeschlagen)"
 
 #: ../bin/src/ui_behavioursettingspage.h:274
 msgid "Grey out non existent songs in my playlists"
-msgstr "Nicht gefundene Titel in meinen Wiedergabelisten ausgrauen"
+msgstr "Nicht vorhandene Titel in meinen Wiedergabelisten ausgrauen"
 
 #: ../bin/src/ui_groovesharksettingspage.h:137
 msgid "Grooveshark"
@@ -2762,13 +2762,13 @@ msgstr "Icons oben"
 
 #: musicbrainz/tagfetcher.cpp:90
 msgid "Identifying song"
-msgstr "Musiktitel erkennen"
+msgstr "Titel werden erkannt"
 
 #: ../bin/src/ui_behavioursettingspage.h:276
 msgid ""
 "If activated, clicking a selected song in the playlist view will let you "
 "edit the tag value directly"
-msgstr "Wenn aktiviert, können Sie mit einem Klick, auf ein Lied in der Wiedergabeliste, die Schlagwortwerte direkt bearbeiten"
+msgstr "Wenn aktiviert, können Sie mit einem Klick auf einen Titel in der Wiedergabeliste, die Schlagwortwerte direkt bearbeiten"
 
 #: devices/devicemanager.cpp:566 devices/devicemanager.cpp:577
 msgid ""
@@ -2948,7 +2948,7 @@ msgstr "Jamendo-Datenbank"
 
 #: ../bin/src/ui_behavioursettingspage.h:289
 msgid "Jump to previous song right away"
-msgstr "Gleich zum vorherigen Lied springen"
+msgstr "Gleich zum vorherigen Titel springen"
 
 #: ../bin/src/ui_mainwindow.h:689
 msgid "Jump to the currently playing track"
@@ -3133,7 +3133,7 @@ msgstr "Intelligente Wiedergabeliste wird geladen"
 
 #: library/librarymodel.cpp:157
 msgid "Loading songs"
-msgstr "Lade Titel"
+msgstr "Titel werden geladen"
 
 #: internet/digitally/digitallyimportedurlhandler.cpp:67
 #: internet/somafm/somafmurlhandler.cpp:53
@@ -3208,16 +3208,16 @@ msgstr "Geringes Komplexitätsprofil (LC)"
 
 #: ui/organisedialog.cpp:68 ../bin/src/ui_songinfosettingspage.h:159
 msgid "Lyrics"
-msgstr "Liedtexte"
+msgstr "Titeltexte"
 
 #: songinfo/ultimatelyricsprovider.cpp:154
 #, qt-format
 msgid "Lyrics from %1"
-msgstr "Liedtexte von %1"
+msgstr "Titeltexte von %1"
 
 #: songinfo/taglyricsinfoprovider.cpp:29
 msgid "Lyrics from the ID3v2 tag"
-msgstr "Lyrics vom ID3v2 Tag"
+msgstr "Liedtext vom ID3v2-Schlagwort"
 
 #: transcoder/transcoder.cpp:235
 msgid "M4A AAC"
@@ -3862,7 +3862,7 @@ msgstr "Spiele Stück Nummer <n> der Wiedergabeliste"
 
 #: core/globalshortcuts.cpp:51 wiimotedev/wiimotesettingspage.cpp:109
 msgid "Play/Pause"
-msgstr "Abspielen/Pause"
+msgstr "Wiedergabe/Pause"
 
 #: ../bin/src/ui_playbacksettingspage.h:310
 msgid "Playback"
@@ -4307,7 +4307,7 @@ msgstr "Abspielzähler zurücksetzen"
 
 #: ../bin/src/ui_behavioursettingspage.h:290
 msgid "Restart song, then jump to previous if pressed again"
-msgstr "Lied neu starten, dann zum vorherigen Titel springen, wenn nochmal gedrückt"
+msgstr "Titel neu starten, dann zum vorherigen Titel springen, wenn nochmal gedrückt"
 
 #: core/commandlineoptions.cpp:164
 msgid ""
@@ -4735,7 +4735,7 @@ msgstr "Nur ohne Schlagworte anzeigen"
 
 #: ../bin/src/ui_vksettingspage.h:224
 msgid "Show playing song on your page"
-msgstr "Aktuell spielendes Lied auf Ihrer Seite anzeigen"
+msgstr "Aktuell wiedergebenden Titel auf Ihrer Seite anzeigen"
 
 #: ../bin/src/ui_globalsearchsettingspage.h:153
 msgid "Show search suggestions"
@@ -4883,7 +4883,7 @@ msgstr "Sortiert nach Sendernamen"
 
 #: ../bin/src/ui_groovesharksettingspage.h:146
 msgid "Sort playlists songs alphabetically"
-msgstr "Wiedergabelistenlieder alphabetisch sortieren"
+msgstr "Wiedergabelistentitel alphabetisch sortieren"
 
 #: ../bin/src/ui_querysortpage.h:140
 msgid "Sort songs by"
@@ -4932,7 +4932,7 @@ msgstr "Spotify-Erweiterung nicht installiert"
 
 #: internet/spotify/spotifyservice.cpp:826
 msgid "Spotify song's URL"
-msgstr "Adresse des Spotify-Liedes"
+msgstr "Adresse des Spotify-Titels"
 
 #: ../bin/src/ui_transcoderoptionsmp3.h:201
 msgid "Standard"
@@ -5802,7 +5802,7 @@ msgstr "Sie können hier einstellen, wie Ihre Bibliothek sortiert wird."
 msgid ""
 "You can listen for free without an account, but Premium members can listen "
 "to higher quality streams without advertisements."
-msgstr "Das Zuhören ist kostenlos ohne Anmeldung möglich aber Premium-Mitglieder haben Zugriff auf werbefreie Datenströme mit höherer Tonqualität."
+msgstr "Das Zuhören ist kostenlos ohne Anmeldung möglich, aber Premium-Mitglieder haben Zugriff auf werbefreie Datenströme mit höherer Tonqualität."
 
 #: internet/magnatune/magnatunesettingspage.cpp:58
 msgid ""
