@@ -291,6 +291,8 @@ signals:
   QThreadPool set_state_threadpool_;
 
   GstSegment last_decodebin_segment_;
+
+  int spotify_id_;
 };
 
 #endif  // GSTENGINEPIPELINE_H

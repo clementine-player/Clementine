@@ -824,6 +824,7 @@ int SpotifyClient::MusicDeliveryCallback(sp_session* session,
   }
 
   if (!me->media_pipeline_->is_accepting_data()) {
+    qLog(Info) << "Pipeline not accepting data";
     return 0;
   }
 

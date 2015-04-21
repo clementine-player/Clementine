@@ -89,7 +89,8 @@ GstEnginePipeline::GstEnginePipeline(GstEngine* engine)
       stereo_panorama_(nullptr),
       volume_(nullptr),
       audioscale_(nullptr),
-      audiosink_(nullptr) {
+      audiosink_(nullptr),
+      spotify_id_(0) {
   if (!sElementDeleter) {
     sElementDeleter = new GstElementDeleter;
   }
@@ -147,7 +148,9 @@ bool GstEnginePipeline::ReplaceDecodeBin(const QUrl& url) {
   GstElement* new_bin = nullptr;
 
   if (url.scheme() == "spotify") {
-    new_bin = gst_bin_new("spotify_bin");
+    QString name = "spotify_bin_" + QString::number(spotify_id_++);
+    qLog(Debug) << "Spotify bin name: " << name;
+    new_bin = gst_bin_new(name.toAscii().constData());
 
     // Create elements
     GstElement* src = engine_->CreateElement("tcpserversrc", new_bin);
