@@ -875,7 +875,7 @@ void SpotifyService::SetPaused(bool paused) {
 void SpotifyService::SetNextUrl(const QUrl &url, const int port) {
   qLog(Debug) << "Next Spotify Url" << url << port;
   EnsureServerCreated();
-  server_->PrefetchTrack(url, port);
+  server_->PrefetchTrack(url.toString(), port);
 }
 
 void SpotifyService::SyncPlaylistProgress(

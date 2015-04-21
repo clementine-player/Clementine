@@ -331,10 +331,10 @@ void SpotifyServer::SetPaused(const bool paused) {
   SendOrQueueMessage(message);
 }
 
-void SpotifyServer::PrefetchTrack(const QUrl& url, const int port) {
+void SpotifyServer::PrefetchTrack(const QString& uri, quint16 port) {
   pb::spotify::Message message;
   pb::spotify::PlaybackRequest* req = message.mutable_prefetch_request();
-  req->set_track_uri(DataCommaSizeFromQString(url.toString()));
+  req->set_track_uri(DataCommaSizeFromQString(uri));
   req->set_media_port(port);
 
   SendOrQueueMessage(message);

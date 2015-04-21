@@ -61,7 +61,7 @@ class SpotifyServer : public AbstractMessageHandler<pb::spotify::Message> {
                            bool volume_normalisation);
   void LoadToplist();
   void SetPaused(const bool paused);
-  void PrefetchTrack(const QUrl& url, const int port);
+  void PrefetchTrack(const QString& uri, quint16 port);
 
   int server_port() const;
 
