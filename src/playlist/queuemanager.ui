@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>QueueManager</class>
- <widget class="QDialog" name="QueueManager">
+ <widget class="QWidget" name="QueueManager">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -14,12 +14,117 @@
    <string>Queue Manager</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="../../data/data.qrc">
+   <iconset>
     <normaloff>:/icon.png</normaloff>:/icon.png</iconset>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_2">
+   <property name="spacing">
+    <number>0</number>
+   </property>
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
+    <number>0</number>
+   </property>
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayout">
+    <layout class="QVBoxLayout" name="verticalLayout_3">
+     <property name="spacing">
+      <number>0</number>
+     </property>
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout">
+       <item>
+        <widget class="QToolButton" name="move_down">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="toolTip">
+          <string>Move down</string>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>16</width>
+           <height>16</height>
+          </size>
+         </property>
+         <property name="shortcut">
+          <string>Ctrl+Down</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QToolButton" name="move_up">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="toolTip">
+          <string>Move up</string>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>16</width>
+           <height>16</height>
+          </size>
+         </property>
+         <property name="shortcut">
+          <string>Ctrl+Up</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QToolButton" name="remove">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="toolTip">
+          <string>Remove</string>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QToolButton" name="clear">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="toolTip">
+          <string>Clear</string>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>16</width>
+           <height>16</height>
+          </size>
+         </property>
+         <property name="shortcut">
+          <string>Ctrl+K</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="horizontalSpacer">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </item>
      <item>
       <widget class="QTreeView" name="list">
        <property name="acceptDrops">
@@ -54,142 +159,10 @@
        </attribute>
       </widget>
      </item>
-     <item>
-      <layout class="QVBoxLayout" name="verticalLayout">
-       <item>
-        <widget class="QPushButton" name="move_up">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
-         <property name="toolTip">
-          <string>Move up</string>
-         </property>
-         <property name="iconSize">
-          <size>
-           <width>16</width>
-           <height>16</height>
-          </size>
-         </property>
-         <property name="shortcut">
-          <string>Ctrl+Up</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="move_down">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
-         <property name="toolTip">
-          <string>Move down</string>
-         </property>
-         <property name="iconSize">
-          <size>
-           <width>16</width>
-           <height>16</height>
-          </size>
-         </property>
-         <property name="shortcut">
-          <string>Ctrl+Down</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="remove">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
-         <property name="toolTip">
-          <string>Remove</string>
-         </property>
-         <property name="text">
-          <string/>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="clear">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
-         <property name="toolTip">
-          <string>Clear</string>
-         </property>
-         <property name="iconSize">
-          <size>
-           <width>16</width>
-           <height>16</height>
-          </size>
-         </property>
-         <property name="shortcut">
-          <string>Ctrl+K</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <spacer name="verticalSpacer">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>40</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-      </layout>
-     </item>
     </layout>
-   </item>
-   <item>
-    <widget class="QDialogButtonBox" name="buttonBox">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-     <property name="standardButtons">
-      <set>QDialogButtonBox::Close</set>
-     </property>
-    </widget>
    </item>
   </layout>
  </widget>
- <resources>
-  <include location="../../data/data.qrc"/>
- </resources>
- <connections>
-  <connection>
-   <sender>buttonBox</sender>
-   <signal>accepted()</signal>
-   <receiver>QueueManager</receiver>
-   <slot>accept()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>248</x>
-     <y>254</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>157</x>
-     <y>274</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>buttonBox</sender>
-   <signal>rejected()</signal>
-   <receiver>QueueManager</receiver>
-   <slot>reject()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>316</x>
-     <y>260</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>286</x>
-     <y>274</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
+ <resources/>
+ <connections/>
 </ui>

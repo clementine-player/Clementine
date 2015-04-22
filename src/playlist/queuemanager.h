@@ -18,7 +18,7 @@
 #ifndef QUEUEMANAGER_H
 #define QUEUEMANAGER_H
 
-#include <QDialog>
+#include <QWidget>
 
 class Playlist;
 class PlaylistManager;
@@ -26,7 +26,7 @@ class Ui_QueueManager;
 
 class QModelIndex;
 
-class QueueManager : public QDialog {
+class QueueManager : public QWidget {
   Q_OBJECT
 
  public:

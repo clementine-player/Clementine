@@ -184,6 +184,7 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
       device_view_(device_view_container_->view()),
       song_info_view_(new SongInfoView(this)),
       artist_info_view_(new ArtistInfoView(this)),
+      queue_manager_(new QueueManager(this)),
       equalizer_(new Equalizer),
       organise_dialog_(new OrganiseDialog(app_->task_manager())),
       playlist_menu_(new QMenu(this)),
@@ -244,6 +245,8 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
   ui_->tabs->AddTab(device_view_container_,
                     IconLoader::Load("multimedia-player-ipod-mini-blue"),
                     tr("Devices"));
+  ui_->tabs->AddTab(queue_manager_, IconLoader::Load("view-choose"),
+                                  tr("Queue Manager"));
   ui_->tabs->AddSpacer();
   ui_->tabs->AddTab(song_info_view_, IconLoader::Load("view-media-lyrics"),
                     tr("Song info"));
@@ -411,8 +414,6 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
           SLOT(IncrementalScan()));
   connect(ui_->action_full_library_scan, SIGNAL(triggered()), app_->library(),
           SLOT(FullScan()));
-  connect(ui_->action_queue_manager, SIGNAL(triggered()),
-          SLOT(ShowQueueManager()));
   connect(ui_->action_add_files_to_transcoder, SIGNAL(triggered()),
           SLOT(AddFilesToTranscoder()));
 
@@ -851,6 +852,8 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
   app_->playlist_manager()->Init(app_->library_backend(),
                                  app_->playlist_backend(),
                                  ui_->playlist_sequence, ui_->playlist);
+
+  queue_manager_->SetPlaylistManager(app_->playlist_manager());
 
   // This connection must be done after the playlists have been initialized.
   connect(this, SIGNAL(StopAfterToggled(bool)), osd_,
@@ -2432,14 +2435,6 @@ void MainWindow::CheckFullRescanRevisions() {
       app_->library()->FullScan();
     }
   }
-}
-
-void MainWindow::ShowQueueManager() {
-  if (!queue_manager_) {
-    queue_manager_.reset(new QueueManager);
-    queue_manager_->SetPlaylistManager(app_->playlist_manager());
-  }
-  queue_manager_->show();
 }
 
 void MainWindow::ShowVisualisations() {
