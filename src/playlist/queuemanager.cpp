@@ -50,7 +50,7 @@ QueueManager::QueueManager(QWidget* parent)
   connect(ui_->clear, SIGNAL(clicked()), SLOT(Clear()));
 }
 
-QueueManager::~QueueManager() { }
+QueueManager::~QueueManager() { delete ui_; }
 
 void QueueManager::SetPlaylistManager(PlaylistManager* manager) {
   playlists_ = manager;
