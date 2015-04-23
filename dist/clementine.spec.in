@@ -10,7 +10,7 @@ Source0:        %{name}-@CLEMENTINE_VERSION_SPARKLE@.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires:  desktop-file-utils liblastfm-devel taglib-devel gettext
-BuildRequires:  qt4-devel boost-devel gcc-c++ glew-devel libgpod-devel
+BuildRequires:  qt5-devel boost-devel gcc-c++ glew-devel libgpod-devel
 BuildRequires:  cmake gstreamer1-devel gstreamer1-plugins-base-devel
 BuildRequires:  libmtp-devel protobuf-devel protobuf-compiler libcdio-devel
 BuildRequires:  qjson-devel qca2-devel fftw-devel sparsehash-devel

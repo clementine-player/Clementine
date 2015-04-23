@@ -36,11 +36,10 @@ DeviceDatabaseBackend::DeviceList DeviceDatabaseBackend::GetAllDevices() {
 
   DeviceList ret;
 
-  QSqlQuery q(
-      "SELECT ROWID, unique_id, friendly_name, size, icon,"
+  QSqlQuery q(db);
+  q.prepare("SELECT ROWID, unique_id, friendly_name, size, icon,"
       "   transcode_mode, transcode_format"
-      " FROM devices",
-      db);
+      " FROM devices");
   q.exec();
   if (db_->CheckErrors(q)) return ret;
 
@@ -65,13 +64,12 @@ int DeviceDatabaseBackend::AddDevice(const Device& device) {
   ScopedTransaction t(&db);
 
   // Insert the device into the devices table
-  QSqlQuery q(
-      "INSERT INTO devices ("
+  QSqlQuery q(db);
+  q.prepare("INSERT INTO devices ("
       "   unique_id, friendly_name, size, icon,"
       "   transcode_mode, transcode_format)"
       " VALUES (:unique_id, :friendly_name, :size, :icon,"
-      "   :transcode_mode, :transcode_format)",
-      db);
+      "   :transcode_mode, :transcode_format)");
   q.bindValue(":unique_id", device.unique_id_);
   q.bindValue(":friendly_name", device.friendly_name_);
   q.bindValue(":size", device.size_);
@@ -103,7 +101,8 @@ void DeviceDatabaseBackend::RemoveDevice(int id) {
   ScopedTransaction t(&db);
 
   // Remove the device from the devices table
-  QSqlQuery q("DELETE FROM devices WHERE ROWID=:id", db);
+  QSqlQuery q(db);
+  q.prepare("DELETE FROM devices WHERE ROWID=:id");
   q.bindValue(":id", id);
   q.exec();
   if (db_->CheckErrors(q)) return;
@@ -125,14 +124,13 @@ void DeviceDatabaseBackend::SetDeviceOptions(int id,
   QMutexLocker l(db_->Mutex());
   QSqlDatabase db(db_->Connect());
 
-  QSqlQuery q(
-      "UPDATE devices"
+  QSqlQuery q(db);
+  q.prepare("UPDATE devices"
       " SET friendly_name=:friendly_name,"
       "     icon=:icon_name,"
       "     transcode_mode=:transcode_mode,"
       "     transcode_format=:transcode_format"
-      " WHERE ROWID=:id",
-      db);
+      " WHERE ROWID=:id");
   q.bindValue(":friendly_name", friendly_name);
   q.bindValue(":icon_name", icon_name);
   q.bindValue(":transcode_mode", mode);

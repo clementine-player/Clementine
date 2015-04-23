@@ -27,3 +27,5 @@ target_link_libraries(gstmoodbar
   ${GSTREAMER_BASE_LIBRARIES}
   ${FFTW3_FFTW_LIBRARY}
 )
+
+QT5_USE_MODULES(gstmoodbar Core)

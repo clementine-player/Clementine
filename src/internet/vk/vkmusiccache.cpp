@@ -130,7 +130,7 @@ void VkMusicCache::DownloadNext() {
 
 void VkMusicCache::DownloadProgress(qint64 bytesReceived, qint64 bytesTotal) {
   if (bytesTotal) {
-    int progress = qRound(100 * bytesReceived / bytesTotal);
+    int progress = qRound(100. * bytesReceived / bytesTotal);
     app_->task_manager()->SetTaskProgress(task_id, progress, 100);
   }
 }

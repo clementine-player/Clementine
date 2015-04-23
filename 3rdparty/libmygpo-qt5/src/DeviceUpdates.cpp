@@ -22,7 +22,7 @@
 
 #include "DeviceUpdates_p.h"
 
-#include <parser.h>
+#include "qjsonwrapper/Json.h"
 
 using namespace mygpo;
 
@@ -102,9 +102,8 @@ bool DeviceUpdatesPrivate::parse( const QVariant& data )
 
 bool DeviceUpdatesPrivate::parse( const QByteArray& data )
 {
-    QJson::Parser parser;
     bool ok;
-    QVariant variant = parser.parse( data, &ok );
+    QVariant variant = QJsonWrapper::parseJson( data, &ok );
     if( ok )
     {
         ok = ( parse( variant ) );

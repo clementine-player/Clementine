@@ -1,6 +1,6 @@
 /***************************************************************************
 * This file is part of libmygpo-qt                                         *
-* Copyright (c) 2010 - 2011 Stefan Derkits <stefan@derkits.at>             *
+* Copyright (c) 2010 - 2013 Stefan Derkits <stefan@derkits.at>             *
 * Copyright (c) 2010 - 2011 Christian Wagner <christian.wagner86@gmx.at>   *
 * Copyright (c) 2010 - 2011 Felix Winter <ixos01@gmail.com>                *
 *                                                                          *
@@ -20,62 +20,59 @@
 * USA                                                                      *
 ***************************************************************************/
 
-#include "DeviceList_p.h"
+#include "EpisodeList_p.h"
 
-#include <parser.h>
+#include "qjsonwrapper/Json.h"
 
 using namespace mygpo;
 
-DeviceListPrivate::DeviceListPrivate( DeviceList* qq, QNetworkReply* reply ) : q( qq ), m_reply( reply ), m_error( QNetworkReply::NoError )
+EpisodeListPrivate::EpisodeListPrivate( EpisodeList* qq, QNetworkReply* reply ): m_reply( reply ), q( qq ), m_error( QNetworkReply::NoError )
 {
     QObject::connect( m_reply, SIGNAL( finished() ), this, SLOT( parseData() ) );
     QObject::connect( m_reply, SIGNAL( error( QNetworkReply::NetworkError ) ), this, SLOT( error( QNetworkReply::NetworkError ) ) );
 }
 
-DeviceListPrivate::~DeviceListPrivate()
+EpisodeListPrivate::~EpisodeListPrivate()
 {
 }
 
-QVariant DeviceListPrivate::devices() const
+QList<EpisodePtr> EpisodeListPrivate::list() const
 {
-    return m_devices;
+    QList<EpisodePtr> list;
+    QVariantList varList = m_episodes.toList();
+    foreach( QVariant var, varList )
+    {
+        list.append( var.value<mygpo::EpisodePtr>() );
+    }
+    return list;
 }
 
-QList< DevicePtr > DeviceListPrivate::devicesList() const
+QVariant EpisodeListPrivate::episodes() const
 {
-    return m_devicesList;
+    return m_episodes;
 }
 
-void DeviceListPrivate::error( QNetworkReply::NetworkError error )
-{
-    m_error = error;
-    emit q->requestError( error );
-}
-
-bool DeviceListPrivate::parse( const QVariant& data )
+bool EpisodeListPrivate::parse( const QVariant& data )
 {
     if( !data.canConvert( QVariant::List ) )
         return false;
-
     QVariantList varList = data.toList();
-    QVariantList devList;
-    foreach( const QVariant & var, varList )
+    QVariantList episodeList;
+    foreach( QVariant var, varList )
     {
-        DevicePtr ptr( new Device( var, this ) );
-        m_devicesList.append( ptr );
         QVariant v;
-        v.setValue<DevicePtr>( ptr );
-        devList.append( v );
+        v.setValue<mygpo::EpisodePtr> ( EpisodePtr( new Episode( var ) ) );
+        episodeList.append( v );
     }
-    m_devices = devList;
+    m_episodes = QVariant( episodeList );
     return true;
 }
 
-bool DeviceListPrivate::parse( const QByteArray& data )
+
+bool EpisodeListPrivate::parse( const QByteArray& data )
 {
-    QJson::Parser parser;
     bool ok;
-    QVariant variant = parser.parse( data, &ok );
+    QVariant variant = QJsonWrapper::parseJson( data, &ok );
     if( ok )
     {
         ok = ( parse( variant ) );
@@ -83,8 +80,7 @@ bool DeviceListPrivate::parse( const QByteArray& data )
     return ok;
 }
 
-
-void DeviceListPrivate::parseData()
+void EpisodeListPrivate::parseData()
 {
     if( m_reply->error() == QNetworkReply::NoError )
     {
@@ -100,22 +96,32 @@ void DeviceListPrivate::parseData()
     m_reply->deleteLater();
 }
 
-DeviceList::DeviceList( QNetworkReply* reply, QObject* parent ) : QObject( parent ), d( new DeviceListPrivate( this, reply ) )
+void EpisodeListPrivate::error( QNetworkReply::NetworkError error )
+{
+    this->m_error = error;
+    emit q->requestError( error );
+}
+
+
+
+
+EpisodeList::EpisodeList( QNetworkReply* reply, QObject* parent ) : QObject( parent ), d( new EpisodeListPrivate( this, reply ) )
 {
 
 }
 
-DeviceList::~DeviceList()
+QVariant EpisodeList::episodes() const
+{
+    return d->episodes();
+}
+
+
+QList< EpisodePtr > EpisodeList::list() const
+{
+    return d->list();
+}
+
+EpisodeList::~EpisodeList()
 {
     delete d;
-}
-
-QVariant mygpo::DeviceList::devices() const
-{
-    return d->devices();
-}
-
-QList< DevicePtr > DeviceList::devicesList() const
-{
-    return d->devicesList();
 }
