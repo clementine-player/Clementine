@@ -176,6 +176,7 @@ void ProjectMVisualisation::ConsumeBuffer(GstBuffer* buffer, int) {
   }
 
   gst_buffer_unmap(buffer, &map);
+  gst_buffer_unref(buffer);
 }
 
 void ProjectMVisualisation::SetSelected(const QStringList& paths,
