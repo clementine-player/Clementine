@@ -330,6 +330,9 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
   ui_->action_kittens->setIcon(IconLoader::Load("kittens"));
   ui_->action_enterprise->setIcon(IconLoader::Load("enterprise"));
 
+  // Hide menu status
+  HideMenuStatus();
+  
   // File view connections
   connect(file_view_, SIGNAL(AddToPlaylist(QMimeData*)),
           SLOT(AddToPlaylist(QMimeData*)));
@@ -1003,6 +1006,7 @@ void MainWindow::ReloadAllSettings() {
 #ifdef HAVE_WIIMOTEDEV
   wiimotedev_shortcuts_->ReloadSettings();
 #endif
+HideMenuStatus();
 }
 
 void MainWindow::RefreshStyleSheet() { setStyleSheet(styleSheet()); }
@@ -2711,6 +2715,17 @@ void MainWindow::ShowConsole() {
   console->show();
 }
 
+void MainWindow::HideMenuStatus() {
+  // Load hide menu status setting
+  QSettings s;
+  s.beginGroup("HideMenu");
+  bool hide_menu_ = s.value("hide-menu-status", false).toBool();
+  if (hide_menu_ == true) {
+      ui_->menuBar->hide();
+  }
+  s.endGroup();
+}
+
 void MainWindow::keyPressEvent(QKeyEvent* event) {
   if (event->key() == Qt::Key_Space) {
     app_->player()->PlayPause();
@@ -2730,4 +2745,18 @@ void MainWindow::keyPressEvent(QKeyEvent* event) {
   } else {
     QMainWindow::keyPressEvent(event);
   }
+  // Menu hide (ALT key)
+  QSettings s;
+  s.beginGroup("HideMenu");
+  bool hide_menu_ = s.value("hide-menu-status", false).toBool();
+  if (hide_menu_ == true || ui_->menuBar->isHidden()) {
+    if(event->key() == Qt::Key_Alt) {
+      if(ui_->menuBar->isHidden()) {
+        ui_->menuBar->show(); 
+      } else { 
+        ui_->menuBar->hide(); 
+      }
+    }
+  }
+  s.endGroup(); 
 }
