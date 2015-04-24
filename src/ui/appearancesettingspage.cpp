@@ -107,6 +107,11 @@ void AppearanceSettingsPage::Load() {
   InitColorSelectorsColors();
   s.endGroup();
 
+  // Menubar hide status settings
+  s.beginGroup("HideMenu");
+  ui_->menu_hide_status_checkbox->setChecked(s.value("hide-menu-status", false).toBool());
+  s.endGroup();
+
   // Playlist settings
   s.beginGroup(Playlist::kSettingsGroup);
   playlist_view_background_image_type_ =
@@ -166,6 +171,11 @@ void AppearanceSettingsPage::Save() {
   } else {
     dialog()->appearance()->ResetToSystemDefaultTheme();
   }
+  s.endGroup();
+
+  // Menubar hide status settings
+  s.beginGroup("HideMenu");
+  s.setValue("hide-menu-status", ui_->menu_hide_status_checkbox->isChecked());
   s.endGroup();
 
   // Playlist settings
