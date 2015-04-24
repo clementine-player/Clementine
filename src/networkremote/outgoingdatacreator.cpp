@@ -373,6 +373,7 @@ void OutgoingDataCreator::CreateSong(const Song& song, const QImage& art,
     song_metadata->set_filename(DataCommaSizeFromQString(song.basefilename()));
     song_metadata->set_file_size(song.filesize());
     song_metadata->set_rating(song.rating());
+    song_metadata->set_url(DataCommaSizeFromQString(song.url().toString()));
 
     // Append coverart
     if (!art.isNull()) {

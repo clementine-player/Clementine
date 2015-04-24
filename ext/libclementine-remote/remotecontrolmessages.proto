@@ -86,6 +86,7 @@ message SongMetadata {
   optional string filename = 16;
   optional int32 file_size = 17;
   optional float rating = 18; // 0 (0 stars) to 1 (5 stars)
+  optional string url = 19;
 }
 
 // Playlist informations
@@ -305,7 +306,7 @@ message ResponseTranscoderStatus {
 
 // The message itself
 message Message {
-  optional int32 version = 1 [default=18];
+  optional int32 version = 1 [default=19];
   optional MsgType type = 2 [default=UNKNOWN]; // What data is in the message?
 
   optional RequestConnect request_connect = 21;
