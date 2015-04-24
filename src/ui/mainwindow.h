@@ -214,6 +214,9 @@ signals:
   void RefreshStyleSheet();
   void SetHiddenInTray() { SetHiddenInTray(true); }
 
+  //Hide menu by default
+  void HideMenuStatus();
+
   void AddFile();
   void AddFolder();
   void AddStream();
