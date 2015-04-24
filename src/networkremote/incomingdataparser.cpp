@@ -86,7 +86,7 @@ void IncomingDataParser::Parse(const pb::remote::Message& msg) {
   // Now check what's to do
   switch (msg.type()) {
     case pb::remote::CONNECT:
-      ClientConnect(msg);
+      ClientConnect(msg, client);
       break;
     case pb::remote::DISCONNECT:
       close_connection_ = true;
@@ -260,16 +260,18 @@ void IncomingDataParser::RemoveSongs(const pb::remote::Message& msg) {
   emit RemoveSongs(request.playlist_id(), songs);
 }
 
-void IncomingDataParser::ClientConnect(const pb::remote::Message& msg) {
+void IncomingDataParser::ClientConnect(const pb::remote::Message& msg, RemoteClient* client) {
   // Always sned the Clementine infos
   emit SendClementineInfo();
 
   // Check if we should send the first data
-  if (!msg.request_connect().has_send_playlist_songs()  // legacy
-      || msg.request_connect().send_playlist_songs()) {
-    emit SendFirstData(true);
-  } else {
-    emit SendFirstData(false);
+  if (!client->isDownloader()) {
+    if (!msg.request_connect().has_send_playlist_songs()  // legacy
+        || msg.request_connect().send_playlist_songs()) {
+      emit SendFirstData(true);
+    } else {
+      emit SendFirstData(false);
+    }
   }
 }
 
