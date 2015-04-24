@@ -191,11 +191,15 @@ void SongSender::OfferNextSong() {
     pb::remote::ResponseSongFileChunk* chunk =
         msg.mutable_response_song_file_chunk();
 
+    // Open the file
+    QFile file(item.song_.url().toLocalFile());
+
     // Song offer is chunk no 0
     chunk->set_chunk_count(0);
     chunk->set_chunk_number(0);
     chunk->set_file_count(item.song_count_);
     chunk->set_file_number(item.song_no_);
+    chunk->set_size(file.size());
 
     OutgoingDataCreator::CreateSong(item.song_, QImage(), -1, chunk->mutable_song_metadata());
   }
