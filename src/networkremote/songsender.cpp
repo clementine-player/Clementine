@@ -114,9 +114,12 @@ void SongSender::TranscodeLosslessFiles() {
     total_transcode_++;
   }
 
-  transcoder_->Start();
-
-  SendTranscoderStatus();
+  if (total_transcode_ > 0) {
+    transcoder_->Start();
+    SendTranscoderStatus();
+  } else {
+    StartTransfer();
+  }
 }
 
 void SongSender::TranscodeJobComplete(const QString& input, const QString& output, bool success) {
