@@ -64,15 +64,23 @@ SongSender::~SongSender() {
 }
 
 void SongSender::SendSongs(const pb::remote::RequestDownloadSongs& request) {
-  Song current_song = app_->player()->GetCurrentItem()->Metadata();
+  Song current_song;
+  if (app_->player()->GetCurrentItem()) {
+    current_song = app_->player()->GetCurrentItem()->Metadata();
+  }
+
   switch (request.download_item()) {
     case pb::remote::CurrentItem: {
-      DownloadItem item(current_song, 1, 1);
-      download_queue_.append(item);
+      if (current_song.is_valid()) {
+        DownloadItem item(current_song, 1, 1);
+        download_queue_.append(item);
+      }
       break;
     }
     case pb::remote::ItemAlbum:
-      SendAlbum(current_song);
+      if (current_song.is_valid()) {
+        SendAlbum(current_song);
+      }
       break;
     case pb::remote::APlaylist:
       SendPlaylist(request.playlist_id());
