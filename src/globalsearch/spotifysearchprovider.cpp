@@ -116,7 +116,7 @@ void SpotifySearchProvider::SearchFinishedSlot(
      * represented most frequently in the artist
      *
      * For most albums this will just be one artist,
-     * but this ensures we have a consistend album artist for
+     * but this ensures we have a consistent album artist for
      * soundtracks, compilations, contributing artists, etc
      */
     for (int j = 0; j < album.track_size(); ++j) {
