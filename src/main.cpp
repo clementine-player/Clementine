@@ -415,6 +415,11 @@ int main(int argc, char* argv[]) {
   QSslSocket::addDefaultCaCertificates(
       QSslCertificate::fromPath(":/grooveshark-valicert-ca.pem", QSsl::Pem));
 
+  // Do the same for SoundCloud, whose certificate is missing on OS X.
+  QSslSocket::addDefaultCaCertificates(
+      QSslCertificate::fromPath(":/soundcloud-ca.pem", QSsl::Pem));
+
+
   // Has the user forced a different language?
   QString override_language = options.language();
   if (override_language.isEmpty()) {
