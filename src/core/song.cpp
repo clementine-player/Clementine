@@ -1065,6 +1065,7 @@ bool Song::IsMetadataEqual(const Song& other) const {
          d->samplerate_ == other.d->samplerate_ &&
          d->art_automatic_ == other.d->art_automatic_ &&
          d->art_manual_ == other.d->art_manual_ &&
+         d->rating_ == other.d->rating_ &&
          d->cue_path_ == other.d->cue_path_ &&
          d->lyrics_ == other.d->lyrics_;
 }
@@ -1141,7 +1142,6 @@ void Song::MergeUserSetData(const Song& other) {
   set_playcount(other.playcount());
   set_skipcount(other.skipcount());
   set_lastplayed(other.lastplayed());
-  set_rating(other.rating());
   set_score(other.score());
   set_art_manual(other.art_manual());
 }
