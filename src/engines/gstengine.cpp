@@ -64,6 +64,15 @@
 #include "engines/directsounddevicefinder.h"
 #endif
 
+#ifdef Q_OS_DARWIN
+#include "core/mac_startup.h"
+#endif
+
+#ifdef Q_OS_DARWIN
+#undef signals
+#include <gio/gio.h>
+#endif
+
 using std::shared_ptr;
 using std::vector;
 
@@ -106,6 +115,13 @@ GstEngine::GstEngine(TaskManager* task_manager)
   connect(seek_timer_, SIGNAL(timeout()), SLOT(SeekNow()));
 
   ReloadSettings();
+
+#ifdef Q_OS_DARWIN
+  QDir resources_dir(mac::GetResourcesPath());
+  QString ca_cert_path = resources_dir.filePath("cacert.pem");
+  GError* error = nullptr;
+  tls_database_ = g_tls_file_database_new(ca_cert_path.toUtf8().data(), &error);
+#endif
 }
 
 GstEngine::~GstEngine() {
@@ -114,6 +130,10 @@ GstEngine::~GstEngine() {
   current_pipeline_.reset();
 
   qDeleteAll(device_finders_);
+
+#ifdef Q_OS_DARWIN
+  g_object_unref(tls_database_);
+#endif
 }
 
 bool GstEngine::Init() {

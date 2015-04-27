@@ -921,11 +921,9 @@ void GstEnginePipeline::SourceSetupCallback(GstURIDecodeBin* bin,
                  nullptr);
 
 #ifdef Q_OS_DARWIN
-    // Override the CA cert path for Soup on Mac to our shipped version.
-    QDir resources_dir(mac::GetResourcesPath());
-    QString ca_cert_path = resources_dir.filePath("cacert.pem");
+    g_object_set(element, "tls-database", instance->engine_->tls_database(), nullptr);
     g_object_set(element, "ssl-use-system-ca-file", false, nullptr);
-    g_object_set(element, "ssl-ca-file", ca_cert_path.toUtf8().data(), nullptr);
+    g_object_set(element, "ssl-strict", TRUE, nullptr);
 #endif
   }
 }
