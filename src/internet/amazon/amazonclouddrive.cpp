@@ -62,7 +62,7 @@ AmazonCloudDrive::AmazonCloudDrive(Application* app, InternetModel* parent)
     : CloudFileService(app, parent, kServiceName, kServiceId,
                        QIcon(":/providers/amazonclouddrive.png"),
                        SettingsDialog::Page_AmazonCloudDrive),
-      network_(new NetworkAccessManager) {
+      network_(new NetworkAccessManager(this)) {
   app->player()->RegisterUrlHandler(new AmazonUrlHandler(this, this));
 }
 
