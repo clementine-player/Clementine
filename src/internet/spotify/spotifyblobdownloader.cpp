@@ -21,25 +21,34 @@
 
 #include "config.h"
 #include "spotifyservice.h"
+#include "core/arraysize.h"
 #include "core/logging.h"
 #include "core/network.h"
 #include "core/utilities.h"
 
 #include <QCoreApplication>
 #include <QDir>
+#include <QFile>
+#include <QIODevice>
 #include <QMessageBox>
 #include <QNetworkReply>
 #include <QProgressDialog>
-
-#ifdef HAVE_QCA
-#include <QtCrypto>
-#endif  // HAVE_QCA
 
 #ifdef Q_OS_UNIX
 #include <unistd.h>
 #endif
 
-const char* SpotifyBlobDownloader::kSignatureSuffix = ".sha1";
+#ifdef HAVE_CRYPTOPP
+#include <crypto++/pkcspad.h>
+#include <crypto++/rsa.h>
+#endif  // HAVE_CRYPTOPP
+
+namespace {
+static const char PEM_HEADER[] = "-----BEGIN PUBLIC KEY-----\n";
+static const char PEM_FOOTER[] = "\n-----END PUBLIC KEY-----";
+}
+
+const char* SpotifyBlobDownloader::kSignatureSuffix = ".sha512";
 
 SpotifyBlobDownloader::SpotifyBlobDownloader(const QString& version,
                                              const QString& path,
@@ -125,31 +134,10 @@ void SpotifyBlobDownloader::ReplyFinished() {
     file_data[filename] = reply->readAll();
   }
 
-#ifdef HAVE_QCA
-  // Load the public key
-  QCA::ConvertResult conversion_result;
-  QCA::PublicKey key = QCA::PublicKey::fromPEMFile(
-      ":/clementine-spotify-public.pem", &conversion_result);
-  if (QCA::ConvertGood != conversion_result) {
-    ShowError("Failed to load Spotify public key");
+  if (!CheckSignature(file_data, signature_filenames)) {
+    qLog(Warning) << "Signature checks failed";
     return;
   }
-
-  // Verify signatures
-  for (const QString& signature_filename : signature_filenames) {
-    QString actual_filename = signature_filename;
-    actual_filename.remove(kSignatureSuffix);
-
-    qLog(Debug) << "Verifying" << actual_filename << "against"
-                << signature_filename;
-
-    if (!key.verifyMessage(file_data[actual_filename],
-                           file_data[signature_filename], QCA::EMSA3_SHA1)) {
-      ShowError("Invalid signature: " + actual_filename);
-      return;
-    }
-  }
-#endif  // HAVE_QCA
 
   // Make the destination directory and write the files into it
   QDir().mkpath(path_);
@@ -193,6 +181,63 @@ void SpotifyBlobDownloader::ReplyFinished() {
   }
 
   EmitFinished();
+}
+
+bool SpotifyBlobDownloader::CheckSignature(
+    const QMap<QString, QByteArray>& file_data,
+    const QStringList& signature_filenames) {
+#ifdef HAVE_CRYPTOPP
+  QFile public_key_file(":/clementine-spotify-public.pem");
+  public_key_file.open(QIODevice::ReadOnly);
+  QByteArray public_key_data = ConvertPEMToDER(public_key_file.readAll());
+
+  try {
+    CryptoPP::ByteQueue bytes;
+    bytes.Put(reinterpret_cast<const byte*>(public_key_data.constData()),
+              public_key_data.size());
+    bytes.MessageEnd();
+
+    CryptoPP::RSA::PublicKey public_key;
+    public_key.Load(bytes);
+
+    CryptoPP::RSASS<CryptoPP::PKCS1v15, CryptoPP::SHA512>::Verifier verifier(
+        public_key);
+
+    for (const QString& signature_filename : signature_filenames) {
+      QString actual_filename = signature_filename;
+      actual_filename.remove(kSignatureSuffix);
+
+      const bool result = verifier.VerifyMessage(
+          reinterpret_cast<const byte*>(file_data[actual_filename].constData()),
+          file_data[actual_filename].size(),
+          reinterpret_cast<const byte*>(
+              file_data[signature_filename].constData()),
+          file_data[signature_filename].size());
+      qLog(Debug) << "Verifying" << actual_filename << "against"
+                  << signature_filename << result;
+      if (!result) {
+        ShowError("Invalid signature: " + actual_filename);
+        return false;
+      }
+    }
+  } catch (std::exception e) {
+    // This should only happen if we fail to parse our own key.
+    qLog(Debug) << "Verifying spotify blob signature failed:" << e.what();
+    return false;
+  }
+  return true;
+#else
+  return false;
+#endif  // HAVE_CRYPTOPP
+}
+
+QByteArray SpotifyBlobDownloader::ConvertPEMToDER(const QByteArray& pem) {
+  // Ensure we used char[] not char*
+  static_assert(sizeof(PEM_HEADER) > sizeof(char*), "PEM_HEADER mis-declared");
+  static_assert(sizeof(PEM_FOOTER) > sizeof(char*), "PEM_FOOTER mis-declared");
+  int start = pem.indexOf(PEM_HEADER) + arraysize(PEM_HEADER) - 1;
+  int length = pem.indexOf(PEM_FOOTER) - start;
+  return QByteArray::fromBase64(pem.mid(start, length));
 }
 
 void SpotifyBlobDownloader::ReplyProgress() {

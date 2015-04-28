@@ -58,6 +58,7 @@ find_package(FFTW3)
 
 pkg_check_modules(CDIO libcdio)
 pkg_check_modules(CHROMAPRINT REQUIRED libchromaprint)
+pkg_check_modules(CRYPTOPP libcrypto++)
 pkg_check_modules(GIO gio-2.0)
 pkg_check_modules(GLIB REQUIRED glib-2.0)
 pkg_check_modules(GOBJECT REQUIRED gobject-2.0)
@@ -71,7 +72,6 @@ pkg_check_modules(LIBMTP libmtp>=1.0)
 pkg_check_modules(LIBMYGPO_QT libmygpo-qt>=1.0.7)
 pkg_check_modules(LIBPULSE libpulse)
 pkg_check_modules(LIBXML libxml-2.0)
-pkg_check_modules(QCA qca2)
 pkg_check_modules(QJSON REQUIRED QJson)
 pkg_check_modules(SPOTIFY libspotify>=12.1.45)
 pkg_check_modules(TAGLIB REQUIRED taglib>=1.6)
@@ -273,10 +273,11 @@ optional_component(LIBPULSE ON "Pulse audio integration"
 
 optional_component(VISUALISATIONS ON "Visualisations")
 
-if(NOT HAVE_SPOTIFY_BLOB AND NOT QCA_FOUND)
-  message(FATAL_ERROR "Either QCA must be available or the non-GPL Spotify "
+if(NOT HAVE_SPOTIFY_BLOB AND NOT CRYPTOPP_FOUND)
+  message(FATAL_ERROR "Either crypto++ must be available or the non-GPL Spotify "
           "code must be compiled in")
-elseif(QCA_FOUND)
+elseif(CRYPTOPP_FOUND)
+  set(HAVE_CRYPTOPP ON)
   set(HAVE_SPOTIFY_DOWNLOADER ON)
 endif()
 

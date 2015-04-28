@@ -855,7 +855,7 @@ optional_source(HAVE_SPOTIFY_DOWNLOADER
   HEADERS
     internet/spotify/spotifyblobdownloader.h
   INCLUDE_DIRECTORIES
-    ${QCA_INCLUDE_DIRS}
+    ${CRYPTOPP_INCLUDE_DIRS}
 )
 
 # Platform specific - OS X
@@ -1316,9 +1316,9 @@ endif(HAVE_BREAKPAD)
 
 if(HAVE_SPOTIFY_DOWNLOADER)
   target_link_libraries(clementine_lib
-    ${QCA_LIBRARIES}
+    ${CRYPTOPP_LIBRARIES}
   )
-  link_directories(${QCA_LIBRARY_DIRS})
+  link_directories(${CRYPTOPP_LIBRARY_DIRS})
 endif(HAVE_SPOTIFY_DOWNLOADER)
 
 if(HAVE_LIBPULSE)
