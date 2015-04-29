@@ -6,9 +6,8 @@
 !define PRODUCT_DISPLAY_VERSION "@CLEMENTINE_VERSION_DISPLAY@"
 !define PRODUCT_DISPLAY_VERSION_SHORT "@CLEMENTINE_VERSION_DISPLAY@"
 !define PRODUCT_WEB_SITE "http://www.clementine-player.org/"
-!define PRODUCT_ROOT_KEY "HKLM"
-!define PRODUCT_INST_KEY "Software\Clementine"
 !define PRODUCT_UNINST_KEY "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PRODUCT_NAME}"
+!define PRODUCT_UNINST_ROOT_KEY "HKLM"
 @NORMAL@!define PRODUCT_INSTALL_DIR "$PROGRAMFILES\Clementine"
 @PORTABLE@!define PRODUCT_INSTALL_DIR "C:\Clementine"
 
@@ -107,11 +106,6 @@ SetCompressor /SOLID lzma
 Name "${PRODUCT_NAME}"
 OutFile "${PRODUCT_NAME}Setup-@CLEMENTINE_VERSION_SPARKLE@.exe"
 InstallDir "${PRODUCT_INSTALL_DIR}"
-
-; Registry key to check for directory (so if you install again, it will
-; overwrite the old one automatically)
-InstallDirRegKey ${PRODUCT_ROOT_KEY} ${PRODUCT_INST_KEY} "Install_Dir"
-
 ShowInstDetails show
 ShowUnInstDetails show
 @NORMAL@RequestExecutionLevel admin
@@ -120,7 +114,7 @@ ShowUnInstDetails show
 ; Check for previous installation, and call the uninstaller if any
 Function CheckPreviousInstall
 
-  ReadRegStr $R0 ${PRODUCT_ROOT_KEY} ${PRODUCT_UNINST_KEY} "UninstallString"
+  ReadRegStr $R0 ${PRODUCT_UNINST_ROOT_KEY} ${PRODUCT_UNINST_KEY} "UninstallString"
   StrCmp $R0 "" done
 
   MessageBox MB_OKCANCEL|MB_ICONEXCLAMATION \
@@ -341,9 +335,6 @@ Section "Clementine" Clementine
 @NORMAL@  nsisos::osversion
 @NORMAL@  StrCpy $R0 $0
 @NORMAL@  IntCmp $R0 6 HasDefaultPrograms NoDefaultPrograms HasDefaultPrograms
-
-; Write the installation path into the registry
-@NORMAL@  WriteRegStr HKLM SOFTWARE\NSIS_Example2 "Install_Dir" "$INSTDIR"
 
 @NORMAL@  HasDefaultPrograms:
 @NORMAL@    ; Register Clementine with Default Programs
@@ -1038,14 +1029,14 @@ Section "Uninstaller"
   ; Create uninstaller
   WriteUninstaller "$INSTDIR\Uninstall.exe"
 
-@NORMAL@  WriteRegStr ${PRODUCT_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "DisplayName" "${PRODUCT_NAME}"
-@NORMAL@  WriteRegStr ${PRODUCT_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "UninstallString" "$INSTDIR\Uninstall.exe"
-@NORMAL@  WriteRegStr ${PRODUCT_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "DisplayIcon" "$INSTDIR\clementine.ico"
-@NORMAL@  WriteRegStr ${PRODUCT_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "DisplayVersion" "${PRODUCT_DISPLAY_VERSION}"
-@NORMAL@  WriteRegDWORD ${PRODUCT_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "VersionMajor" "${PRODUCT_VERSION_MAJOR}"
-@NORMAL@  WriteRegDWORD ${PRODUCT_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "VersionMinor" "${PRODUCT_VERSION_MINOR}"
-@NORMAL@  WriteRegStr ${PRODUCT_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "URLInfoAbout" "${PRODUCT_WEB_SITE}"
-@NORMAL@  WriteRegStr ${PRODUCT_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "Publisher" "${PRODUCT_PUBLISHER}"
+@NORMAL@  WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "DisplayName" "${PRODUCT_NAME}"
+@NORMAL@  WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "UninstallString" "$INSTDIR\Uninstall.exe"
+@NORMAL@  WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "DisplayIcon" "$INSTDIR\clementine.ico"
+@NORMAL@  WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "DisplayVersion" "${PRODUCT_DISPLAY_VERSION}"
+@NORMAL@  WriteRegDWORD ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "VersionMajor" "${PRODUCT_VERSION_MAJOR}"
+@NORMAL@  WriteRegDWORD ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "VersionMinor" "${PRODUCT_VERSION_MINOR}"
+@NORMAL@  WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "URLInfoAbout" "${PRODUCT_WEB_SITE}"
+@NORMAL@  WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "Publisher" "${PRODUCT_PUBLISHER}"
 SectionEnd
 
 Section "Uninstall"
@@ -1786,8 +1777,7 @@ Section "Uninstall"
 @NORMAL@  RMDir /r "$SMPROGRAMS\${PRODUCT_NAME}"
   
   ; Remove the entry from 'installed programs list'
-@NORMAL@  DeleteRegKey ${PRODUCT_ROOT_KEY} "${PRODUCT_UNINST_KEY}"
-@NORMAL@  DeleteRegKey ${PRODUCT_ROOT_KEY} "${PRODUCT_INST_KEY}"
+@NORMAL@  DeleteRegKey ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}"
 
   ; Check the OS.  If Vista or newer, use Default Programs
 @NORMAL@  nsisos::osversion
