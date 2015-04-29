@@ -250,9 +250,9 @@ Section "Delete old files" oldfiles
   Delete "$INSTDIR\gstreamer-plugins\libgstqtdemux.dll"
 
   ; No longer using built-in libechonest
-  Delete "libechonest.dll"
+  Delete "$INSTDIR\libechonest.dll"
   ; No longer using built-in chromaprint
-  Delete "libchromaprint.dll"
+  Delete "$INSTDIR\libchromaprint.dll"
 SectionEnd
 
 Section "Clementine" Clementine
