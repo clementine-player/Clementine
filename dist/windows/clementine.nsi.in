@@ -343,7 +343,7 @@ Section "Clementine" Clementine
 @NORMAL@  IntCmp $R0 6 HasDefaultPrograms NoDefaultPrograms HasDefaultPrograms
 
 ; Write the installation path into the registry
-@NORMAL@  WriteRegStr ${PRODUCT_ROOT_KEY} ${PRODUCT_INST_KEY} "Install_Dir" "$INSTDIR"
+@NORMAL@  WriteRegStr HKLM SOFTWARE\NSIS_Example2 "Install_Dir" "$INSTDIR"
 
 @NORMAL@  HasDefaultPrograms:
 @NORMAL@    ; Register Clementine with Default Programs
