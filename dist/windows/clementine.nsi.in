@@ -106,6 +106,10 @@ SetCompressor /SOLID lzma
 Name "${PRODUCT_NAME}"
 OutFile "${PRODUCT_NAME}Setup-@CLEMENTINE_VERSION_SPARKLE@.exe"
 InstallDir "${PRODUCT_INSTALL_DIR}"
+
+; Get the path where Clementine was installed previously and set it as default path
+InstallDirRegKey ${PRODUCT_UNINST_ROOT_KEY} ${PRODUCT_UNINST_KEY} "UninstallString"
+
 ShowInstDetails show
 ShowUnInstDetails show
 @NORMAL@RequestExecutionLevel admin
