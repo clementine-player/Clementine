@@ -58,7 +58,7 @@ find_package(FFTW3)
 
 pkg_check_modules(CDIO libcdio)
 pkg_check_modules(CHROMAPRINT REQUIRED libchromaprint)
-pkg_check_modules(CRYPTOPP libcryptopp)
+pkg_check_modules(CRYPTOPP cryptopp)
 if (NOT CRYPTOPP_FOUND)
   pkg_check_modules(CRYPTOPP libcrypto++)
 endif ()
