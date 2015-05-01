@@ -398,15 +398,7 @@ int main(int argc, char* argv[]) {
   Q_INIT_RESOURCE(data);
   Q_INIT_RESOURCE(translations);
 
-  // Grooveshark uses GoDaddy to sign its SSL certificates, which are in turn
-  // signed by a ValiCert CA.  This CA certificate isn't installed by default
-  // in Windows, it's only added by windows update, or manually browsing to a
-  // website with a certificate signed by ValiCert.  Here we explicitly add
-  // that CA to the default list used by QSslSocket, so it always works in
-  // Clementine.
-  QSslSocket::addDefaultCaCertificates(
-      QSslCertificate::fromPath(":/grooveshark-valicert-ca.pem", QSsl::Pem));
-  // Do the same for SoundCloud, whose certificate is missing on OS X.
+  // Add root CA cert for SoundCloud, whose certificate is missing on OS X.
   QSslSocket::addDefaultCaCertificates(
       QSslCertificate::fromPath(":/soundcloud-ca.pem", QSsl::Pem));
 
