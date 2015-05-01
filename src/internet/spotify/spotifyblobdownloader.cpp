@@ -39,8 +39,8 @@
 #endif
 
 #ifdef HAVE_CRYPTOPP
-#include <crypto++/pkcspad.h>
-#include <crypto++/rsa.h>
+#include <cryptopp/pkcspad.h>
+#include <cryptopp/rsa.h>
 #endif  // HAVE_CRYPTOPP
 
 namespace {
