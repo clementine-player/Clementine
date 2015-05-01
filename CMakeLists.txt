@@ -58,7 +58,7 @@ find_package(FFTW3)
 
 pkg_check_modules(CDIO libcdio)
 pkg_check_modules(CHROMAPRINT REQUIRED libchromaprint)
-pkg_search_module(CRYPTOPP REQUIRED cryptopp libcrypto++)
+pkg_search_module(CRYPTOPP cryptopp libcrypto++)
 pkg_check_modules(GIO gio-2.0)
 pkg_check_modules(GLIB REQUIRED glib-2.0)
 pkg_check_modules(GOBJECT REQUIRED gobject-2.0)
