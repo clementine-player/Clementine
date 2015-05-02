@@ -360,12 +360,24 @@ bool GstEnginePipeline::Init() {
     g_object_set(G_OBJECT(queue_), "use-buffering", true, nullptr);
   }
 
-  gst_element_link_many(queue_, audioconvert_, convert_sink, nullptr);
+  gst_element_link(queue_, audioconvert_);
+
+  // Link audioconvert_ and conver_sink with special caps. This is needed for mono playback.
+  GstCaps* caps32 = gst_caps_new_simple("audio/x-raw",
+                                        "format", G_TYPE_STRING, "F32LE",
+                                        nullptr);
+  if (mono_playback_) {
+    gst_caps_set_simple(caps32, "channels", G_TYPE_INT, 1, nullptr);
+  }
+
+  gst_element_link_filtered(audioconvert_, convert_sink, caps32);
+  gst_caps_unref(caps32);
 
   // Link the elements with special caps
   // The scope path through the tee gets 16-bit ints.
-  GstCaps* caps16 = gst_caps_new_simple("audio/x-raw", "format", G_TYPE_STRING,
-                                        "S16LE", NULL);
+  GstCaps* caps16 = gst_caps_new_simple("audio/x-raw",
+                                        "format", G_TYPE_STRING, "S16LE",
+                                        nullptr);
   gst_element_link_filtered(probe_converter, probe_sink, caps16);
   gst_caps_unref(caps16);
 
