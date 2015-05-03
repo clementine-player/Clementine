@@ -58,7 +58,8 @@ CREATE TABLE device_%deviceid_songs (
   etag TEXT,
 
   performer TEXT,
-  grouping TEXT
+  grouping TEXT,
+  lyrics TEXT
 );
 
 CREATE INDEX idx_device_%deviceid_songs_album ON device_%deviceid_songs (album);
