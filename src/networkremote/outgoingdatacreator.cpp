@@ -675,6 +675,13 @@ void OutgoingDataCreator::ResultsAvailable(int id, const SearchProvider::ResultL
   response->set_query(DataCommaSizeFromQString(search_request.query_));
   response->set_search_provider(DataCommaSizeFromQString(results.first().provider_->name()));
 
+  // Append the icon
+  QImage icon_image(results.first().provider_->icon().pixmap(48, 48).toImage());
+  QByteArray byte_array;
+  QBuffer buf(&byte_array);
+  icon_image.save(&buf, "PNG");
+  response->set_search_provider_icon(byte_array.data(), byte_array.size());
+
   for (const SearchProvider::Result& result : results) {
     pb::remote::SongMetadata* pb_song = response->add_song_metadata();
     CreateSong(result.metadata_, null_img, 0, pb_song);

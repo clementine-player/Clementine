@@ -297,6 +297,7 @@ message ResponseGlobalSearch {
   optional string query = 2;
   optional string search_provider = 3;
   repeated SongMetadata song_metadata = 4;
+  optional bytes search_provider_icon = 5;
 }
 
 message ResponseTranscoderStatus {
