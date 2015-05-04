@@ -11,8 +11,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2015-04-20 07:47+0000\n"
-"Last-Translator: gogo <trebelnik2@gmail.com>\n"
+"PO-Revision-Date: 2015-05-01 12:23+0000\n"
+"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Croatian (http://www.transifex.com/projects/p/clementine/language/hr/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -320,10 +320,6 @@ msgid ""
 "<p>If you surround sections of text that contain a token with curly-braces, that section will be hidden if the token is empty.</p>"
 msgstr "<p>Znakovi započeti s %, npr: %izvođač %album %pjesma </p>\n\n<p>Ako imate dijelove teksta koji sadrže znakove sa vitičastom zagradom, taj dio će biti sakriven ako su oznake prazne.</p>"
 
-#: internet/grooveshark/groovesharksettingspage.cpp:123
-msgid "A Grooveshark Anywhere account is required."
-msgstr "Grooveshark Anywhere račun je potreban."
-
 #: internet/spotify/spotifysettingspage.cpp:166
 msgid "A Spotify Premium account is required."
 msgstr "Spotify Premium račun je obvezan."
@@ -394,7 +390,6 @@ msgstr "O Qt..."
 msgid "Absolute"
 msgstr "Apsolutne"
 
-#: ../bin/src/ui_groovesharksettingspage.h:141
 #: ../bin/src/ui_magnatunesettingspage.h:155
 #: ../bin/src/ui_spotifysettingspage.h:208
 #: ../bin/src/ui_lastfmsettingspage.h:151 ../bin/src/ui_vksettingspage.h:217
@@ -576,14 +571,6 @@ msgstr "Dodaj pjesmu u \"Moja glazba\" kada je \"Sviđa mi se\" tipka kliknuta"
 msgid "Add stream..."
 msgstr "Dodajte stream..."
 
-#: internet/grooveshark/groovesharkservice.cpp:1127
-msgid "Add to Grooveshark favorites"
-msgstr "Dodaj u Grooveshark omiljene"
-
-#: internet/grooveshark/groovesharkservice.cpp:1142
-msgid "Add to Grooveshark playlists"
-msgstr "Dodaj u Grooveshark popis izvođenja"
-
 #: internet/vk/vkservice.cpp:312
 msgid "Add to My Music"
 msgstr "Dodaj u Moja glazba"
@@ -644,14 +631,6 @@ msgstr "Dodano danas"
 #: ../bin/src/ui_libraryfilterwidget.h:92
 msgid "Added within three months"
 msgstr "Dodano tijekom tri mjeseca"
-
-#: internet/grooveshark/groovesharkservice.cpp:1425
-msgid "Adding song to My Music"
-msgstr "Dodavanje glazbe u Moju glazbu"
-
-#: internet/grooveshark/groovesharkservice.cpp:1402
-msgid "Adding song to favorites"
-msgstr "Dodavanje pjesme u omiljene"
 
 #: library/libraryfilterwidget.cpp:142
 msgid "Advanced grouping..."
@@ -775,7 +754,7 @@ msgstr "Uvijek započinji reprodukciju glazbe"
 msgid "Amazon Cloud Drive"
 msgstr "Amazon Cloud disk"
 
-#: internet/spotify/spotifyblobdownloader.cpp:67
+#: internet/spotify/spotifyblobdownloader.cpp:76
 msgid ""
 "An additional plugin is required to use Spotify in Clementine.  Would you "
 "like to download and install it now?"
@@ -830,10 +809,6 @@ msgstr "Primjenite kompresiju da spriječite isječak"
 #, qt-format
 msgid "Are you sure you want to delete the \"%1\" preset?"
 msgstr "Sigurno želite izbrisati \"%1\" postavke?"
-
-#: internet/grooveshark/groovesharkservice.cpp:1324
-msgid "Are you sure you want to delete this playlist?"
-msgstr "Sigurno želite izbrisati ovaj popis izvođenja?"
 
 #: ui/edittagdialog.cpp:798
 msgid "Are you sure you want to reset this song's statistics?"
@@ -1034,7 +1009,7 @@ msgstr "Pogledaj..."
 msgid "Buffer duration"
 msgstr "Trajanje međuspremnika"
 
-#: engines/gstengine.cpp:884
+#: engines/gstengine.cpp:904
 msgid "Buffering"
 msgstr "Međupohrana"
 
@@ -1049,10 +1024,6 @@ msgstr "Ovi izvori su onemogućeni:"
 #: ../bin/src/ui_wiimotesettingspage.h:192
 msgid "Buttons"
 msgstr "Tipke"
-
-#: ../bin/src/ui_groovesharksettingspage.h:139
-msgid "By default, Grooveshark sorts songs on date added"
-msgstr "Uobičajeno, Grooveshark razvrstava pjesme prema datumu dodavanja"
 
 #: core/song.cpp:419
 msgid "CDDA"
@@ -1075,7 +1046,7 @@ msgstr "Priručna memorija"
 msgid "Caching %1"
 msgstr "Priručna memorija %1"
 
-#: internet/spotify/spotifyblobdownloader.cpp:52
+#: internet/spotify/spotifyblobdownloader.cpp:61
 msgid "Cancel"
 msgstr "Otkaži"
 
@@ -1139,7 +1110,7 @@ msgstr "Odaberite Vk.com direktorij priručne memorije"
 msgid "Choose a name for your smart playlist"
 msgstr "Izaberite naziv za svoj pametni popis izvođenja"
 
-#: engines/gstengine.cpp:905
+#: engines/gstengine.cpp:925
 msgid "Choose automatically"
 msgstr "Automatski odabir"
 
@@ -1348,10 +1319,6 @@ msgstr "Skladatelj"
 msgid "Configure %1..."
 msgstr "Konfiguracija %1..."
 
-#: internet/grooveshark/groovesharkservice.cpp:566
-msgid "Configure Grooveshark..."
-msgstr "Podesi Grooveshark..."
-
 #: internet/magnatune/magnatuneservice.cpp:290
 msgid "Configure Magnatune..."
 msgstr "Podesi Magnatune..."
@@ -1535,11 +1502,6 @@ msgstr "Omot albuma postavljen iz %1"
 msgid "Covers from %1"
 msgstr "Omoti s %1"
 
-#: internet/grooveshark/groovesharkservice.cpp:534
-#: internet/grooveshark/groovesharkservice.cpp:1276
-msgid "Create a new Grooveshark playlist"
-msgstr "Napravite novi Grooveshark popis izvođenja"
-
 #: ../bin/src/ui_playbacksettingspage.h:315
 msgid "Cross-fade when changing tracks automatically"
 msgstr "Postepeno utišaj kada se pjesma mijenja automatski"
@@ -1683,7 +1645,7 @@ msgstr "Smanji glasnoću zvuka"
 msgid "Default background image"
 msgstr "Uobičajena slika pozadine"
 
-#: engines/gstengine.cpp:930
+#: engines/gstengine.cpp:950
 #, qt-format
 msgid "Default device on %1"
 msgstr "Zadani uređaj na %1"
@@ -1700,11 +1662,6 @@ msgstr "Pauza između vizualizacija"
 #: ../bin/src/ui_playlistlistcontainer.h:131
 msgid "Delete"
 msgstr "Izbriši"
-
-#: internet/grooveshark/groovesharkservice.cpp:537
-#: internet/grooveshark/groovesharkservice.cpp:1323
-msgid "Delete Grooveshark playlist"
-msgstr "Izbrišite Grooveshark popis izvođenja"
 
 #: internet/podcasts/podcastservice.cpp:433
 msgid "Delete downloaded data"
@@ -1979,7 +1936,7 @@ msgstr "Preuzimanje  Jamendo kataloga"
 msgid "Downloading Magnatune catalogue"
 msgstr "Preuzimanje Magnatune kataloga"
 
-#: internet/spotify/spotifyblobdownloader.cpp:51
+#: internet/spotify/spotifyblobdownloader.cpp:60
 msgid "Downloading Spotify plugin"
 msgstr "Preuzimanje Spotify dodatka"
 
@@ -2153,7 +2110,6 @@ msgstr "Odgovara --log-levels *: 1"
 msgid "Equivalent to --log-levels *:3"
 msgstr "Odgovara --log-levels *: 3"
 
-#: internet/grooveshark/groovesharkservice.cpp:1055
 #: internet/magnatune/magnatunedownloaddialog.cpp:242
 #: library/libraryview.cpp:630 ui/mainwindow.cpp:1910 ui/mainwindow.cpp:2157
 #: ui/mainwindow.cpp:2305 internet/vk/vkservice.cpp:625
@@ -2176,7 +2132,7 @@ msgstr "Greška u kopiranju pjesama"
 msgid "Error deleting songs"
 msgstr "Greška u brisanju pjesama"
 
-#: internet/spotify/spotifyblobdownloader.cpp:222
+#: internet/spotify/spotifyblobdownloader.cpp:267
 msgid "Error downloading Spotify plugin"
 msgstr "greška pri preuzimanju Spotify dodatka"
 
@@ -2349,10 +2305,6 @@ msgstr "Neuspjela raščlamba XML-a za ovaj RSS izvor"
 #: ../bin/src/ui_transcoderoptionsmp3.h:200
 msgid "Fast"
 msgstr "Brzo"
-
-#: internet/grooveshark/groovesharkservice.cpp:645
-msgid "Favorites"
-msgstr "Omiljeno"
 
 #: library/library.cpp:88
 msgid "Favourite tracks"
@@ -2532,7 +2484,7 @@ msgstr "Pun Bas + Treble"
 msgid "Full Treble"
 msgstr "Pun Treble"
 
-#: ui/settingsdialog.cpp:142
+#: ui/settingsdialog.cpp:141
 msgid "General"
 msgstr "Općenito"
 
@@ -2547,15 +2499,6 @@ msgstr "Opće postavke"
 msgid "Genre"
 msgstr "Vrsta glazbe"
 
-#: internet/grooveshark/groovesharkservice.cpp:556
-msgid "Get a URL to share this Grooveshark playlist"
-msgstr "Preuzmi URL za dijeljenje ovog Grooveshark popisa izvođenja"
-
-#: internet/grooveshark/groovesharkservice.cpp:553
-#: internet/grooveshark/groovesharkservice.cpp:1155
-msgid "Get a URL to share this Grooveshark song"
-msgstr "Preuzmi URL za dijeljenje ove Grooveshark pjesme"
-
 #: internet/spotify/spotifyservice.cpp:633
 #: internet/spotify/spotifyservice.cpp:674
 msgid "Get a URL to share this Spotify song"
@@ -2564,10 +2507,6 @@ msgstr "Nabavi URL za dijeljenje ove Spotify pjesme"
 #: internet/spotify/spotifyservice.cpp:665
 msgid "Get a URL to share this playlist"
 msgstr "Nabavi URL za dijeljenje ovog popisa izvođenja"
-
-#: internet/grooveshark/groovesharkservice.cpp:830
-msgid "Getting Grooveshark popular songs"
-msgstr "Pribavljanje Grooveshark popularnih pjesama"
 
 #: internet/somafm/somafmservice.cpp:120
 msgid "Getting channels"
@@ -2606,26 +2545,6 @@ msgstr "Preuzeto %1 omota od %2 (%3 nije preuzeto)"
 #: ../bin/src/ui_behavioursettingspage.h:274
 msgid "Grey out non existent songs in my playlists"
 msgstr "Posivi pjesme kojih nema na popisu izvođenja"
-
-#: ../bin/src/ui_groovesharksettingspage.h:137
-msgid "Grooveshark"
-msgstr "Grooveshark"
-
-#: internet/grooveshark/groovesharkservice.cpp:413
-msgid "Grooveshark login error"
-msgstr "Grooveshark greška prijave"
-
-#: internet/grooveshark/groovesharkservice.cpp:1206
-msgid "Grooveshark playlist's URL"
-msgstr "Grooveshark popis izvođenja je URL"
-
-#: internet/grooveshark/groovesharkservice.cpp:625
-msgid "Grooveshark radio"
-msgstr "Grooveshark radio"
-
-#: internet/grooveshark/groovesharkservice.cpp:1184
-msgid "Grooveshark song's URL"
-msgstr "URL Grooveshark pjesmi"
 
 #: ../bin/src/ui_groupbydialog.h:124
 msgid "Group Library by..."
@@ -2848,7 +2767,7 @@ msgstr "Provjera integriteta"
 msgid "Internet"
 msgstr "Internet"
 
-#: ui/settingsdialog.cpp:165
+#: ui/settingsdialog.cpp:164
 msgid "Internet providers"
 msgstr "Internet usluge"
 
@@ -2884,10 +2803,6 @@ msgstr "Neispravna usluga"
 #: internet/lastfm/lastfmservice.cpp:238
 msgid "Invalid session key"
 msgstr "Neispravan ključ sesije"
-
-#: internet/grooveshark/groovesharkservice.cpp:405
-msgid "Invalid username and/or password"
-msgstr "Neispravno korisničko ime i/ili lozinka"
 
 #: ../bin/src/ui_ripcddialog.h:312
 msgid "Invert Selection"
@@ -3053,11 +2968,6 @@ msgstr "Pretraživanje fonoteke"
 msgid "Limits"
 msgstr "Granice"
 
-#: internet/grooveshark/groovesharkservice.cpp:627
-msgid ""
-"Listen to Grooveshark songs based on what you've listened to previously"
-msgstr "Slušajte Grooveshark pjesme temeljene na prijašnjim slušanjima"
-
 #: ui/equalizer.cpp:137
 msgid "Live"
 msgstr "Live"
@@ -3132,7 +3042,6 @@ msgid "Loads files/URLs, replacing current playlist"
 msgstr "Učitaj Datoteke/URL, zamijeni trenutni popis izvođenja"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:163
-#: ../bin/src/ui_groovesharksettingspage.h:144
 #: ../bin/src/ui_magnatunesettingspage.h:164
 #: ../bin/src/ui_soundcloudsettingspage.h:106
 #: ../bin/src/ui_spotifysettingspage.h:211
@@ -3393,7 +3302,6 @@ msgstr "Utišaj"
 msgid "My Albums"
 msgstr "Moji albumi"
 
-#: internet/grooveshark/groovesharkservice.cpp:634
 #: internet/vk/vkservice.cpp:878
 msgid "My Music"
 msgstr "Moja glazba"
@@ -3402,9 +3310,8 @@ msgstr "Moja glazba"
 msgid "My Recommendations"
 msgstr "Moje preporuke"
 
-#: internet/grooveshark/groovesharkservice.cpp:1277
-#: internet/grooveshark/groovesharkservice.cpp:1372 ui/equalizer.cpp:205
-#: ../bin/src/ui_deviceproperties.h:369 ../bin/src/ui_wizardfinishpage.h:84
+#: ui/equalizer.cpp:205 ../bin/src/ui_deviceproperties.h:369
+#: ../bin/src/ui_wizardfinishpage.h:84
 msgid "Name"
 msgstr "Naziv"
 
@@ -3635,7 +3542,6 @@ msgid "Opacity"
 msgstr "Zasjenjenost"
 
 #: internet/digitally/digitallyimportedservicebase.cpp:176
-#: internet/grooveshark/groovesharkservice.cpp:560
 #: internet/icecast/icecastservice.cpp:302
 #: internet/jamendo/jamendoservice.cpp:434
 #: internet/magnatune/magnatuneservice.cpp:284
@@ -3771,7 +3677,6 @@ msgstr "Raščlanjivanje Jamendo kataloga"
 msgid "Party"
 msgstr "Party"
 
-#: ../bin/src/ui_groovesharksettingspage.h:143
 #: ../bin/src/ui_magnatunesettingspage.h:165
 #: ../bin/src/ui_spotifysettingspage.h:210
 #: ../bin/src/ui_subsonicsettingspage.h:128
@@ -3862,7 +3767,6 @@ msgstr "Mogućnosti popisa izvođenja"
 msgid "Playlist type"
 msgstr "Vrsta popisa izvođenja"
 
-#: internet/grooveshark/groovesharkservice.cpp:655
 #: internet/soundcloud/soundcloudservice.cpp:130 ui/mainwindow.cpp:241
 msgid "Playlists"
 msgstr "Popis izvođenja"
@@ -3884,18 +3788,6 @@ msgstr "Podcasti"
 msgid "Pop"
 msgstr "Pop"
 
-#: internet/grooveshark/groovesharkservice.cpp:592
-msgid "Popular songs"
-msgstr "Popularne pjesme"
-
-#: internet/grooveshark/groovesharkservice.cpp:596
-msgid "Popular songs of the Month"
-msgstr "Popularne pjesme mjeseca"
-
-#: internet/grooveshark/groovesharkservice.cpp:605
-msgid "Popular songs today"
-msgstr "Danas popularne pjesme"
-
 #: ../bin/src/ui_notificationssettingspage.h:444
 msgid "Popup duration"
 msgstr "Trajanje skočnog prozora, obavijesti ili ljepšeg OSD-a"
@@ -3914,7 +3806,6 @@ msgid "Preference"
 msgstr "Osobitost"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:166
-#: ../bin/src/ui_groovesharksettingspage.h:145
 #: ../bin/src/ui_magnatunesettingspage.h:166
 #: ../bin/src/ui_spotifysettingspage.h:216 ../bin/src/ui_settingsdialog.h:116
 #: ../bin/src/ui_lastfmsettingspage.h:155 ../bin/src/ui_vksettingspage.h:220
@@ -4049,10 +3940,6 @@ msgstr "Odaberite pjesmu za reprodukciju"
 msgid "Radio (equal loudness for all tracks)"
 msgstr "Radio (jednaka glasnoća za sve pjesme)"
 
-#: internet/grooveshark/groovesharkservice.cpp:614
-msgid "Radios"
-msgstr "Radio stanice"
-
 #: core/backgroundstreams.cpp:47
 msgid "Rain"
 msgstr "Kiša"
@@ -4102,10 +3989,6 @@ msgstr "Stvarno želite prekinuti?"
 #: internet/subsonic/subsonicsettingspage.cpp:157
 msgid "Redirect limit exceeded, verify server configuration."
 msgstr "Ograničenje preusmjeravanja je premašeno, potvrdite podešavanje poslužitelja."
-
-#: internet/grooveshark/groovesharkservice.cpp:562
-msgid "Refresh"
-msgstr "Osvježi"
 
 #: internet/jamendo/jamendoservice.cpp:437
 #: internet/magnatune/magnatuneservice.cpp:287
@@ -4163,7 +4046,6 @@ msgstr "Ukloni duplikate iz popisa izvođenja"
 msgid "Remove folder"
 msgstr "Uklonite mapu"
 
-#: internet/grooveshark/groovesharkservice.cpp:550
 #: internet/vk/vkservice.cpp:316
 msgid "Remove from My Music"
 msgstr "Ukoni iz Moje glazbe"
@@ -4172,11 +4054,6 @@ msgstr "Ukoni iz Moje glazbe"
 msgid "Remove from bookmarks"
 msgstr "Ukloni iz zabilješki"
 
-#: internet/grooveshark/groovesharkservice.cpp:547
-msgid "Remove from favorites"
-msgstr "Ukloni iz omiljenih"
-
-#: internet/grooveshark/groovesharkservice.cpp:544
 #: internet/spotify/spotifyservice.cpp:672 ../bin/src/ui_mainwindow.h:685
 msgid "Remove from playlist"
 msgstr "Uklonite iz popisa izvođenja"
@@ -4192,23 +4069,6 @@ msgstr "Ukloni popise izvođenja"
 #: ../bin/src/ui_mainwindow.h:717
 msgid "Remove unavailable tracks from playlist"
 msgstr "Ukloni nedostupne pjesme s popisa izvođenja"
-
-#: internet/grooveshark/groovesharkservice.cpp:1571
-msgid "Removing songs from My Music"
-msgstr "Uklanjanje pjesama iz Moje glazbe"
-
-#: internet/grooveshark/groovesharkservice.cpp:1519
-msgid "Removing songs from favorites"
-msgstr "Uklanjanje pjesama iz omiljenih"
-
-#: internet/grooveshark/groovesharkservice.cpp:1371
-#, qt-format
-msgid "Rename \"%1\" playlist"
-msgstr "Promijeni naziv \"%1\" popisa izvođenja"
-
-#: internet/grooveshark/groovesharkservice.cpp:540
-msgid "Rename Grooveshark playlist"
-msgstr "Promijeni naziv Grooveshark popisa izvođenja"
 
 #: playlist/playlisttabbar.cpp:146
 msgid "Rename playlist"
@@ -4292,18 +4152,6 @@ msgstr "Ograniči na ASCII znakove"
 #: ../bin/src/ui_behavioursettingspage.h:273
 msgid "Resume playback on start"
 msgstr "Nastavi reprodukciju od prošloga pokretanja"
-
-#: internet/grooveshark/groovesharkservice.cpp:796
-msgid "Retrieving Grooveshark My Music songs"
-msgstr "Primanje Grooveshark pjesama Moje glazbe"
-
-#: internet/grooveshark/groovesharkservice.cpp:763
-msgid "Retrieving Grooveshark favorites songs"
-msgstr "Dobivanje Grooveshark omiljenih pjesama"
-
-#: internet/grooveshark/groovesharkservice.cpp:694
-msgid "Retrieving Grooveshark playlists"
-msgstr "Dobivanje Grooveshark popisa izvođenja"
 
 #: ../data/oauthsuccess.html:5
 msgid "Return to Clementine"
@@ -4488,7 +4336,6 @@ msgstr "Način pretraživanja"
 msgid "Search options"
 msgstr "Mogućnosti pretraživanja"
 
-#: internet/grooveshark/groovesharkservice.cpp:583
 #: internet/soundcloud/soundcloudservice.cpp:116
 #: internet/spotify/spotifyservice.cpp:406
 msgid "Search results"
@@ -4498,10 +4345,6 @@ msgstr "Rezultati pretrage"
 #: ../bin/src/ui_querysearchpage.h:120
 msgid "Search terms"
 msgstr "Uvjeti pretraživanja"
-
-#: internet/grooveshark/groovesharkservice.cpp:275
-msgid "Searching on Grooveshark"
-msgstr "Pretraživanje Groovesharka"
 
 #: ../bin/src/ui_groupbydialog.h:140
 msgid "Second level"
@@ -4852,10 +4695,6 @@ msgstr "Razvrstaj po vrsti glazbe (po popularnosti)"
 msgid "Sort by station name"
 msgstr "Razvrstaj po nazivu stanica"
 
-#: ../bin/src/ui_groovesharksettingspage.h:146
-msgid "Sort playlists songs alphabetically"
-msgstr "Razvrstaj popise izvođenja abecednim redosljedom"
-
 #: ../bin/src/ui_querysortpage.h:140
 msgid "Sort songs by"
 msgstr "Razvrstaj pjesmu po"
@@ -4897,7 +4736,7 @@ msgstr "URL Spotify popisa izvođenja"
 msgid "Spotify plugin"
 msgstr "Spotify dodatak"
 
-#: internet/spotify/spotifyblobdownloader.cpp:66
+#: internet/spotify/spotifyblobdownloader.cpp:75
 msgid "Spotify plugin not installed"
 msgstr "Spotify dodatak nije instaliran"
 
@@ -4925,7 +4764,6 @@ msgstr "Pokrenite popis izvođenja koji se trenutno izvodi"
 msgid "Start transcoding"
 msgstr "Započni enkôdiranje"
 
-#: internet/grooveshark/groovesharkservice.cpp:585
 #: internet/soundcloud/soundcloudservice.cpp:118
 #: internet/spotify/spotifyservice.cpp:408
 msgid ""
@@ -4941,10 +4779,6 @@ msgstr "Započinjem %1"
 #: internet/magnatune/magnatunedownloaddialog.cpp:124
 msgid "Starting..."
 msgstr "Započinjem..."
-
-#: internet/grooveshark/groovesharkservice.cpp:618
-msgid "Stations"
-msgstr "Stanice"
 
 #: core/globalshortcuts.cpp:53 ../bin/src/ui_mainwindow.h:644
 #: wiimotedev/wiimotesettingspage.cpp:101
@@ -4989,10 +4823,6 @@ msgstr "Streamanje sa Subsonic poslužitelja zahtijeva valjanu licencu poslužit
 #: ../bin/src/ui_magnatunesettingspage.h:160
 msgid "Streaming membership"
 msgstr "Streaming račun"
-
-#: internet/grooveshark/groovesharkservice.cpp:659
-msgid "Subscribed playlists"
-msgstr "Pretplaćeni popis izvođenja"
 
 #: ../bin/src/ui_podcastinfowidget.h:196
 msgid "Subscribers"
@@ -5236,12 +5066,6 @@ msgstr "Ova vrst uređaja nije podržana: %1"
 msgid "Title"
 msgstr "Naziv"
 
-#: internet/grooveshark/groovesharkservice.cpp:1056
-msgid ""
-"To start Grooveshark radio, you should first listen to a few other "
-"Grooveshark songs"
-msgstr "Za pokretanje Grooveshark radija, Prvo biste trebali poslušati nekoliko drugih Grooveshark pjesama"
-
 #: core/utilities.cpp:137 core/utilities.cpp:149
 msgid "Today"
 msgstr "Danas"
@@ -5397,10 +5221,6 @@ msgstr "Nadolazeći koncerti"
 msgid "Update"
 msgstr "Ažuriranje"
 
-#: internet/grooveshark/groovesharkservice.cpp:1228
-msgid "Update Grooveshark playlist"
-msgstr "Ažuriraj Grooveshark popis izvođenja"
-
 #: internet/podcasts/podcastservice.cpp:419
 msgid "Update all podcasts"
 msgstr "Ažuriraj sve podcaste"
@@ -5511,16 +5331,10 @@ msgstr "Koristi normalizaciju glasnoće zvuka"
 msgid "Used"
 msgstr "Iskorišteno"
 
-#: internet/grooveshark/groovesharkservice.cpp:408
-#, qt-format
-msgid "User %1 doesn't have a Grooveshark Anywhere account"
-msgstr "Korisnik %1 nema Grooveshark Anywhere račun"
-
-#: ui/settingsdialog.cpp:156
+#: ui/settingsdialog.cpp:155
 msgid "User interface"
 msgstr "Korisničko sučelje"
 
-#: ../bin/src/ui_groovesharksettingspage.h:142
 #: ../bin/src/ui_magnatunesettingspage.h:163
 #: ../bin/src/ui_spotifysettingspage.h:209
 #: ../bin/src/ui_subsonicsettingspage.h:127
@@ -5792,10 +5606,6 @@ msgid ""
 "Clementine wiki</a> for more information.\n"
 msgstr "Možete koristiti vaš Wii Daljinski upravljač za daljinsko upravljanje Clementineom. <a href=\"http://www.clementine-player.org/wiimote\">Za više informacija pogledajte Clementine wiki</a> stranicu.\n"
 
-#: internet/grooveshark/groovesharksettingspage.cpp:113
-msgid "You do not have a Grooveshark Anywhere account."
-msgstr "Nemate Grooveshark Anywhere račun."
-
 #: internet/spotify/spotifysettingspage.cpp:149
 msgid "You do not have a Spotify Premium account."
 msgstr "Nemate Spotify Premium račun."
@@ -5866,7 +5676,6 @@ msgstr "Vaši scrobbles: %1"
 msgid "Your system is missing OpenGL support, visualizations are unavailable."
 msgstr "Vašem sustavu nedostaje OpenGL podrška, vizualizacija je nedostupna."
 
-#: internet/grooveshark/groovesharksettingspage.cpp:118
 #: internet/spotify/spotifysettingspage.cpp:155
 msgid "Your username or password was incorrect."
 msgstr "Vaše korisničko ime ili lozinka su neispravni."

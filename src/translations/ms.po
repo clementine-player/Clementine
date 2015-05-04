@@ -9,8 +9,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2015-04-19 14:42+0000\n"
-"Last-Translator: abuyop <abuyop@gmail.com>\n"
+"PO-Revision-Date: 2015-05-01 12:23+0000\n"
+"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Malay (http://www.transifex.com/projects/p/clementine/language/ms/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -318,10 +318,6 @@ msgid ""
 "<p>If you surround sections of text that contain a token with curly-braces, that section will be hidden if the token is empty.</p>"
 msgstr "<p>Token bermula dengan %, contohnya: %artist %album %title </p>\n\n<p>Jika anda lihat seksyen teks yang mengandungi dengan tanda kurungan-kerinting, seksyen tersebut akan tersembunyi jika token kosong.</p>"
 
-#: internet/grooveshark/groovesharksettingspage.cpp:123
-msgid "A Grooveshark Anywhere account is required."
-msgstr "Akaun Grooveshark Anywhere diperlukan."
-
 #: internet/spotify/spotifysettingspage.cpp:166
 msgid "A Spotify Premium account is required."
 msgstr "Akaun Spotify Premium diperlukan"
@@ -392,7 +388,6 @@ msgstr "Perihal Qt..."
 msgid "Absolute"
 msgstr "Mutlak"
 
-#: ../bin/src/ui_groovesharksettingspage.h:141
 #: ../bin/src/ui_magnatunesettingspage.h:155
 #: ../bin/src/ui_spotifysettingspage.h:208
 #: ../bin/src/ui_lastfmsettingspage.h:151 ../bin/src/ui_vksettingspage.h:217
@@ -574,14 +569,6 @@ msgstr "Tambah lagu ke \"Muzik Saya\" bila butang \"Suka\" diklik"
 msgid "Add stream..."
 msgstr "Tambah stream..."
 
-#: internet/grooveshark/groovesharkservice.cpp:1127
-msgid "Add to Grooveshark favorites"
-msgstr "Tambah ke kegemaran Grooveshark"
-
-#: internet/grooveshark/groovesharkservice.cpp:1142
-msgid "Add to Grooveshark playlists"
-msgstr "Tambah ke senarai main Grooveshark"
-
 #: internet/vk/vkservice.cpp:312
 msgid "Add to My Music"
 msgstr "Tambah ke Muzik Saya"
@@ -642,14 +629,6 @@ msgstr "Ditambah pada hari ini"
 #: ../bin/src/ui_libraryfilterwidget.h:92
 msgid "Added within three months"
 msgstr "Ditambah dalam tiga bulan"
-
-#: internet/grooveshark/groovesharkservice.cpp:1425
-msgid "Adding song to My Music"
-msgstr "Menambah lagu ke Muzik Saya"
-
-#: internet/grooveshark/groovesharkservice.cpp:1402
-msgid "Adding song to favorites"
-msgstr "Menambah lagu ke kegemaran"
 
 #: library/libraryfilterwidget.cpp:142
 msgid "Advanced grouping..."
@@ -773,7 +752,7 @@ msgstr "Sentiasa mula bermain"
 msgid "Amazon Cloud Drive"
 msgstr "Peranti Awan Amazon"
 
-#: internet/spotify/spotifyblobdownloader.cpp:67
+#: internet/spotify/spotifyblobdownloader.cpp:76
 msgid ""
 "An additional plugin is required to use Spotify in Clementine.  Would you "
 "like to download and install it now?"
@@ -828,10 +807,6 @@ msgstr "Laksana pemampatan untuk hindari pengeratan"
 #, qt-format
 msgid "Are you sure you want to delete the \"%1\" preset?"
 msgstr "Anda pasti mahu memadam praset \"%1\"?"
-
-#: internet/grooveshark/groovesharkservice.cpp:1324
-msgid "Are you sure you want to delete this playlist?"
-msgstr "Anda pasti mahu memadam senarai main ini?"
 
 #: ui/edittagdialog.cpp:798
 msgid "Are you sure you want to reset this song's statistics?"
@@ -1032,7 +1007,7 @@ msgstr "Layar..."
 msgid "Buffer duration"
 msgstr "Jangkamasa penimbal"
 
-#: engines/gstengine.cpp:884
+#: engines/gstengine.cpp:904
 msgid "Buffering"
 msgstr "Menimbal"
 
@@ -1047,10 +1022,6 @@ msgstr "Tetapi sumber ini telah dilumpuhkan:"
 #: ../bin/src/ui_wiimotesettingspage.h:192
 msgid "Buttons"
 msgstr "Bebutang"
-
-#: ../bin/src/ui_groovesharksettingspage.h:139
-msgid "By default, Grooveshark sorts songs on date added"
-msgstr "Secara lalai, Grooveshark mengisih lagu ikut tarikh ditambah"
 
 #: core/song.cpp:419
 msgid "CDDA"
@@ -1073,7 +1044,7 @@ msgstr "Membuat cache"
 msgid "Caching %1"
 msgstr "Membuat cache %1"
 
-#: internet/spotify/spotifyblobdownloader.cpp:52
+#: internet/spotify/spotifyblobdownloader.cpp:61
 msgid "Cancel"
 msgstr "Batal"
 
@@ -1137,7 +1108,7 @@ msgstr "Pilih direktori cache Vk.com"
 msgid "Choose a name for your smart playlist"
 msgstr "Pilih satu nama untuk senarai main pintar anda"
 
-#: engines/gstengine.cpp:905
+#: engines/gstengine.cpp:925
 msgid "Choose automatically"
 msgstr "Pilih secara automatik"
 
@@ -1346,10 +1317,6 @@ msgstr "Penggubah"
 msgid "Configure %1..."
 msgstr "Konfigur %1..."
 
-#: internet/grooveshark/groovesharkservice.cpp:566
-msgid "Configure Grooveshark..."
-msgstr "Konfigur Grooveshark..."
-
 #: internet/magnatune/magnatuneservice.cpp:290
 msgid "Configure Magnatune..."
 msgstr "Konfigur Magnatune..."
@@ -1533,11 +1500,6 @@ msgstr "Seni kulit muka ditetap dari %1"
 msgid "Covers from %1"
 msgstr "Kulit muka dari %1"
 
-#: internet/grooveshark/groovesharkservice.cpp:534
-#: internet/grooveshark/groovesharkservice.cpp:1276
-msgid "Create a new Grooveshark playlist"
-msgstr "Cipta senarai main Grooveshark baharu"
-
 #: ../bin/src/ui_playbacksettingspage.h:315
 msgid "Cross-fade when changing tracks automatically"
 msgstr "Resap-silang bila mengubah trek secara automatik"
@@ -1681,7 +1643,7 @@ msgstr "Kurangkan volum"
 msgid "Default background image"
 msgstr "Imej latar belakang lalai"
 
-#: engines/gstengine.cpp:930
+#: engines/gstengine.cpp:950
 #, qt-format
 msgid "Default device on %1"
 msgstr "Peranti lalai pada %1"
@@ -1698,11 +1660,6 @@ msgstr "Lengah diantara pengvisualan"
 #: ../bin/src/ui_playlistlistcontainer.h:131
 msgid "Delete"
 msgstr "Padam"
-
-#: internet/grooveshark/groovesharkservice.cpp:537
-#: internet/grooveshark/groovesharkservice.cpp:1323
-msgid "Delete Grooveshark playlist"
-msgstr "Padam senarai main Grooveshark"
 
 #: internet/podcasts/podcastservice.cpp:433
 msgid "Delete downloaded data"
@@ -1977,7 +1934,7 @@ msgstr "Memuat turun katalog Jamendo"
 msgid "Downloading Magnatune catalogue"
 msgstr "Memuat turun katalog Magnatune"
 
-#: internet/spotify/spotifyblobdownloader.cpp:51
+#: internet/spotify/spotifyblobdownloader.cpp:60
 msgid "Downloading Spotify plugin"
 msgstr "Memuat turun pemalam Spotify"
 
@@ -2151,7 +2108,6 @@ msgstr "Sama dengan --log-levels *:1"
 msgid "Equivalent to --log-levels *:3"
 msgstr "Sama dengan --log-levels *:3"
 
-#: internet/grooveshark/groovesharkservice.cpp:1055
 #: internet/magnatune/magnatunedownloaddialog.cpp:242
 #: library/libraryview.cpp:630 ui/mainwindow.cpp:1910 ui/mainwindow.cpp:2157
 #: ui/mainwindow.cpp:2305 internet/vk/vkservice.cpp:625
@@ -2174,7 +2130,7 @@ msgstr "Ralat menyalin lagu"
 msgid "Error deleting songs"
 msgstr "Ralat memadam lagu"
 
-#: internet/spotify/spotifyblobdownloader.cpp:222
+#: internet/spotify/spotifyblobdownloader.cpp:267
 msgid "Error downloading Spotify plugin"
 msgstr "Ralat memuat turun pemalam Spotify"
 
@@ -2347,10 +2303,6 @@ msgstr "Gagal menghurai XML untuk suapan RSS ini"
 #: ../bin/src/ui_transcoderoptionsmp3.h:200
 msgid "Fast"
 msgstr "Pantas"
-
-#: internet/grooveshark/groovesharkservice.cpp:645
-msgid "Favorites"
-msgstr "Kegemaran"
 
 #: library/library.cpp:88
 msgid "Favourite tracks"
@@ -2530,7 +2482,7 @@ msgstr "Bass Penuh + Trebel"
 msgid "Full Treble"
 msgstr "Trebel Penuh"
 
-#: ui/settingsdialog.cpp:142
+#: ui/settingsdialog.cpp:141
 msgid "General"
 msgstr "Am"
 
@@ -2545,15 +2497,6 @@ msgstr "Tetapan am"
 msgid "Genre"
 msgstr "Genre"
 
-#: internet/grooveshark/groovesharkservice.cpp:556
-msgid "Get a URL to share this Grooveshark playlist"
-msgstr "Dapatkan URL untuk kongsi senarai main Grooveshark"
-
-#: internet/grooveshark/groovesharkservice.cpp:553
-#: internet/grooveshark/groovesharkservice.cpp:1155
-msgid "Get a URL to share this Grooveshark song"
-msgstr "Dapatkan URL untuk kongsi lagu Grooveshark"
-
 #: internet/spotify/spotifyservice.cpp:633
 #: internet/spotify/spotifyservice.cpp:674
 msgid "Get a URL to share this Spotify song"
@@ -2562,10 +2505,6 @@ msgstr "Dapatkan URL untuk kongsikan lagu Spotify ini"
 #: internet/spotify/spotifyservice.cpp:665
 msgid "Get a URL to share this playlist"
 msgstr "Dapatkan URL untuk kongsikan senarai main ini"
-
-#: internet/grooveshark/groovesharkservice.cpp:830
-msgid "Getting Grooveshark popular songs"
-msgstr "Mendapatkan lagu popular Grooveshark"
 
 #: internet/somafm/somafmservice.cpp:120
 msgid "Getting channels"
@@ -2604,26 +2543,6 @@ msgstr "Dapat %1 kulit muka dari %2 (%3 gagal)"
 #: ../bin/src/ui_behavioursettingspage.h:274
 msgid "Grey out non existent songs in my playlists"
 msgstr "Malapkan lagu yang tidak wujud dalam senarai main saya"
-
-#: ../bin/src/ui_groovesharksettingspage.h:137
-msgid "Grooveshark"
-msgstr "Grooveshark"
-
-#: internet/grooveshark/groovesharkservice.cpp:413
-msgid "Grooveshark login error"
-msgstr "Ralat daftar masuk Grooveshark"
-
-#: internet/grooveshark/groovesharkservice.cpp:1206
-msgid "Grooveshark playlist's URL"
-msgstr "URL senarai main Grooveshark"
-
-#: internet/grooveshark/groovesharkservice.cpp:625
-msgid "Grooveshark radio"
-msgstr "Radio Grooveshark"
-
-#: internet/grooveshark/groovesharkservice.cpp:1184
-msgid "Grooveshark song's URL"
-msgstr "URL lagu Grooveshark"
 
 #: ../bin/src/ui_groupbydialog.h:124
 msgid "Group Library by..."
@@ -2846,7 +2765,7 @@ msgstr "Semakan integriti"
 msgid "Internet"
 msgstr "Internet"
 
-#: ui/settingsdialog.cpp:165
+#: ui/settingsdialog.cpp:164
 msgid "Internet providers"
 msgstr "Penyedia Internet"
 
@@ -2882,10 +2801,6 @@ msgstr "Perkhidmatan tidak sah"
 #: internet/lastfm/lastfmservice.cpp:238
 msgid "Invalid session key"
 msgstr "Kunci sesi tidak sah"
-
-#: internet/grooveshark/groovesharkservice.cpp:405
-msgid "Invalid username and/or password"
-msgstr "Nama pengguna dan/atau kata laluan tidak sah"
 
 #: ../bin/src/ui_ripcddialog.h:312
 msgid "Invert Selection"
@@ -3051,11 +2966,6 @@ msgstr "Gelintar pustaka"
 msgid "Limits"
 msgstr "Had"
 
-#: internet/grooveshark/groovesharkservice.cpp:627
-msgid ""
-"Listen to Grooveshark songs based on what you've listened to previously"
-msgstr "Dengar lagu Grooveshark berdasarkan apa yang anda dengari sebelum ini"
-
 #: ui/equalizer.cpp:137
 msgid "Live"
 msgstr "Langsung"
@@ -3130,7 +3040,6 @@ msgid "Loads files/URLs, replacing current playlist"
 msgstr "Memuat fail/URL, menggantikan senarai main semasa"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:163
-#: ../bin/src/ui_groovesharksettingspage.h:144
 #: ../bin/src/ui_magnatunesettingspage.h:164
 #: ../bin/src/ui_soundcloudsettingspage.h:106
 #: ../bin/src/ui_spotifysettingspage.h:211
@@ -3391,7 +3300,6 @@ msgstr "Senyap"
 msgid "My Albums"
 msgstr "Album Saya"
 
-#: internet/grooveshark/groovesharkservice.cpp:634
 #: internet/vk/vkservice.cpp:878
 msgid "My Music"
 msgstr "Muzik Saya"
@@ -3400,9 +3308,8 @@ msgstr "Muzik Saya"
 msgid "My Recommendations"
 msgstr "Cadangan Saya"
 
-#: internet/grooveshark/groovesharkservice.cpp:1277
-#: internet/grooveshark/groovesharkservice.cpp:1372 ui/equalizer.cpp:205
-#: ../bin/src/ui_deviceproperties.h:369 ../bin/src/ui_wizardfinishpage.h:84
+#: ui/equalizer.cpp:205 ../bin/src/ui_deviceproperties.h:369
+#: ../bin/src/ui_wizardfinishpage.h:84
 msgid "Name"
 msgstr "Nama"
 
@@ -3633,7 +3540,6 @@ msgid "Opacity"
 msgstr "Kelegapan"
 
 #: internet/digitally/digitallyimportedservicebase.cpp:176
-#: internet/grooveshark/groovesharkservice.cpp:560
 #: internet/icecast/icecastservice.cpp:302
 #: internet/jamendo/jamendoservice.cpp:434
 #: internet/magnatune/magnatuneservice.cpp:284
@@ -3769,7 +3675,6 @@ msgstr "Menghurai katalog Jamendo"
 msgid "Party"
 msgstr "Parti"
 
-#: ../bin/src/ui_groovesharksettingspage.h:143
 #: ../bin/src/ui_magnatunesettingspage.h:165
 #: ../bin/src/ui_spotifysettingspage.h:210
 #: ../bin/src/ui_subsonicsettingspage.h:128
@@ -3860,7 +3765,6 @@ msgstr "Pilihan senarai main"
 msgid "Playlist type"
 msgstr "Jenis senarai main"
 
-#: internet/grooveshark/groovesharkservice.cpp:655
 #: internet/soundcloud/soundcloudservice.cpp:130 ui/mainwindow.cpp:241
 msgid "Playlists"
 msgstr "Senarai main"
@@ -3882,18 +3786,6 @@ msgstr "Podcats"
 msgid "Pop"
 msgstr "Pop"
 
-#: internet/grooveshark/groovesharkservice.cpp:592
-msgid "Popular songs"
-msgstr "Lagu popular"
-
-#: internet/grooveshark/groovesharkservice.cpp:596
-msgid "Popular songs of the Month"
-msgstr "Lagu popular bulanan"
-
-#: internet/grooveshark/groovesharkservice.cpp:605
-msgid "Popular songs today"
-msgstr "Lagu popular hari ini"
-
 #: ../bin/src/ui_notificationssettingspage.h:444
 msgid "Popup duration"
 msgstr "Jangkamasa timbul"
@@ -3912,7 +3804,6 @@ msgid "Preference"
 msgstr "Keutamaan"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:166
-#: ../bin/src/ui_groovesharksettingspage.h:145
 #: ../bin/src/ui_magnatunesettingspage.h:166
 #: ../bin/src/ui_spotifysettingspage.h:216 ../bin/src/ui_settingsdialog.h:116
 #: ../bin/src/ui_lastfmsettingspage.h:155 ../bin/src/ui_vksettingspage.h:220
@@ -4047,10 +3938,6 @@ msgstr "Baris gilir trek"
 msgid "Radio (equal loudness for all tracks)"
 msgstr "Radio (sama kelantangan untuk semua trek)"
 
-#: internet/grooveshark/groovesharkservice.cpp:614
-msgid "Radios"
-msgstr "Radio"
-
 #: core/backgroundstreams.cpp:47
 msgid "Rain"
 msgstr "Rain"
@@ -4100,10 +3987,6 @@ msgstr "Betul batalkan?"
 #: internet/subsonic/subsonicsettingspage.cpp:157
 msgid "Redirect limit exceeded, verify server configuration."
 msgstr "Had arah semula dilampaui, sahkan konfigurasi pelayan."
-
-#: internet/grooveshark/groovesharkservice.cpp:562
-msgid "Refresh"
-msgstr "Segar semula"
 
 #: internet/jamendo/jamendoservice.cpp:437
 #: internet/magnatune/magnatuneservice.cpp:287
@@ -4161,7 +4044,6 @@ msgstr "Buang pendua dari senarai main"
 msgid "Remove folder"
 msgstr "Buang folder"
 
-#: internet/grooveshark/groovesharkservice.cpp:550
 #: internet/vk/vkservice.cpp:316
 msgid "Remove from My Music"
 msgstr "Buang dari Muzik Saya"
@@ -4170,11 +4052,6 @@ msgstr "Buang dari Muzik Saya"
 msgid "Remove from bookmarks"
 msgstr "Buang dari tanda buku"
 
-#: internet/grooveshark/groovesharkservice.cpp:547
-msgid "Remove from favorites"
-msgstr "Buang dari kegemaran"
-
-#: internet/grooveshark/groovesharkservice.cpp:544
 #: internet/spotify/spotifyservice.cpp:672 ../bin/src/ui_mainwindow.h:685
 msgid "Remove from playlist"
 msgstr "Buang dari senarai main"
@@ -4190,23 +4067,6 @@ msgstr "Buang senarai main"
 #: ../bin/src/ui_mainwindow.h:717
 msgid "Remove unavailable tracks from playlist"
 msgstr "Buang trek tidak tersedia dari senarai main"
-
-#: internet/grooveshark/groovesharkservice.cpp:1571
-msgid "Removing songs from My Music"
-msgstr "Membuang lagu dari Muzik Saya"
-
-#: internet/grooveshark/groovesharkservice.cpp:1519
-msgid "Removing songs from favorites"
-msgstr "Membuang lagu dari kegemaran"
-
-#: internet/grooveshark/groovesharkservice.cpp:1371
-#, qt-format
-msgid "Rename \"%1\" playlist"
-msgstr "Nama semula senarai main \"%1\""
-
-#: internet/grooveshark/groovesharkservice.cpp:540
-msgid "Rename Grooveshark playlist"
-msgstr "Nama semula senarai main Grooveshark"
 
 #: playlist/playlisttabbar.cpp:146
 msgid "Rename playlist"
@@ -4290,18 +4150,6 @@ msgstr "Hadkan aksara ASCII"
 #: ../bin/src/ui_behavioursettingspage.h:273
 msgid "Resume playback on start"
 msgstr "Sambung semula main balik ketika mula"
-
-#: internet/grooveshark/groovesharkservice.cpp:796
-msgid "Retrieving Grooveshark My Music songs"
-msgstr "Mendapatkan lagu Muzik Saya Grooveshark"
-
-#: internet/grooveshark/groovesharkservice.cpp:763
-msgid "Retrieving Grooveshark favorites songs"
-msgstr "Mendapatkan lagu kegemaran Grooveshark"
-
-#: internet/grooveshark/groovesharkservice.cpp:694
-msgid "Retrieving Grooveshark playlists"
-msgstr "Mendapatkan senarai main Grooveshark"
 
 #: ../data/oauthsuccess.html:5
 msgid "Return to Clementine"
@@ -4486,7 +4334,6 @@ msgstr "Mod gelintar"
 msgid "Search options"
 msgstr "Pilihan gelintar"
 
-#: internet/grooveshark/groovesharkservice.cpp:583
 #: internet/soundcloud/soundcloudservice.cpp:116
 #: internet/spotify/spotifyservice.cpp:406
 msgid "Search results"
@@ -4496,10 +4343,6 @@ msgstr "Keputusan gelintar"
 #: ../bin/src/ui_querysearchpage.h:120
 msgid "Search terms"
 msgstr "Terma gelintar"
-
-#: internet/grooveshark/groovesharkservice.cpp:275
-msgid "Searching on Grooveshark"
-msgstr "Menggelintar Grooveshark"
 
 #: ../bin/src/ui_groupbydialog.h:140
 msgid "Second level"
@@ -4850,10 +4693,6 @@ msgstr "Isih mengikut genre (mengikut populariti)"
 msgid "Sort by station name"
 msgstr "Isih mengikut nama stesen"
 
-#: ../bin/src/ui_groovesharksettingspage.h:146
-msgid "Sort playlists songs alphabetically"
-msgstr "Isih lagu senarai main secara berabjad"
-
 #: ../bin/src/ui_querysortpage.h:140
 msgid "Sort songs by"
 msgstr "Isih lagu mengikut"
@@ -4895,7 +4734,7 @@ msgstr "URL senarai main Spotify"
 msgid "Spotify plugin"
 msgstr "Pemalam Spotify"
 
-#: internet/spotify/spotifyblobdownloader.cpp:66
+#: internet/spotify/spotifyblobdownloader.cpp:75
 msgid "Spotify plugin not installed"
 msgstr "Pemalam Spotify tidak dipasang"
 
@@ -4923,7 +4762,6 @@ msgstr "Mulakan senarai main semasa dimainkan"
 msgid "Start transcoding"
 msgstr "Mulakan transkod"
 
-#: internet/grooveshark/groovesharkservice.cpp:585
 #: internet/soundcloud/soundcloudservice.cpp:118
 #: internet/spotify/spotifyservice.cpp:408
 msgid ""
@@ -4939,10 +4777,6 @@ msgstr "Memulakan %1"
 #: internet/magnatune/magnatunedownloaddialog.cpp:124
 msgid "Starting..."
 msgstr "Memulakan..."
-
-#: internet/grooveshark/groovesharkservice.cpp:618
-msgid "Stations"
-msgstr "Stesen"
 
 #: core/globalshortcuts.cpp:53 ../bin/src/ui_mainwindow.h:644
 #: wiimotedev/wiimotesettingspage.cpp:101
@@ -4987,10 +4821,6 @@ msgstr "Penstriman dari pelayan Subsonic memerlukan lesen pelayan yang sah selep
 #: ../bin/src/ui_magnatunesettingspage.h:160
 msgid "Streaming membership"
 msgstr "Keahlian penstriman"
-
-#: internet/grooveshark/groovesharkservice.cpp:659
-msgid "Subscribed playlists"
-msgstr "Senarai main dilanggan"
 
 #: ../bin/src/ui_podcastinfowidget.h:196
 msgid "Subscribers"
@@ -5234,12 +5064,6 @@ msgstr "Peranti jenis ini tidak disokong: %1"
 msgid "Title"
 msgstr "Tajuk"
 
-#: internet/grooveshark/groovesharkservice.cpp:1056
-msgid ""
-"To start Grooveshark radio, you should first listen to a few other "
-"Grooveshark songs"
-msgstr "Untuk memulakan radio Grooveshark, terlebih dahulu anda perlu dengan beberapa lagu Grooveshark yang lain"
-
 #: core/utilities.cpp:137 core/utilities.cpp:149
 msgid "Today"
 msgstr "Hari ini"
@@ -5395,10 +5219,6 @@ msgstr "Konsert Akan Datang"
 msgid "Update"
 msgstr "Kemaskini"
 
-#: internet/grooveshark/groovesharkservice.cpp:1228
-msgid "Update Grooveshark playlist"
-msgstr "Kemaskini senarai main Grooveshark"
-
 #: internet/podcasts/podcastservice.cpp:419
 msgid "Update all podcasts"
 msgstr "Kemaskini semua podcast"
@@ -5509,16 +5329,10 @@ msgstr "Guna penormalan volum"
 msgid "Used"
 msgstr "Digunakan"
 
-#: internet/grooveshark/groovesharkservice.cpp:408
-#, qt-format
-msgid "User %1 doesn't have a Grooveshark Anywhere account"
-msgstr "Pengguna %1 tidak memiliki akaun Grooveshark Anywhere"
-
-#: ui/settingsdialog.cpp:156
+#: ui/settingsdialog.cpp:155
 msgid "User interface"
 msgstr "Antaramuka pengguna"
 
-#: ../bin/src/ui_groovesharksettingspage.h:142
 #: ../bin/src/ui_magnatunesettingspage.h:163
 #: ../bin/src/ui_spotifysettingspage.h:209
 #: ../bin/src/ui_subsonicsettingspage.h:127
@@ -5790,10 +5604,6 @@ msgid ""
 "Clementine wiki</a> for more information.\n"
 msgstr "Anda boleh guna Wii Remote anda sebagai kawalan jauh untuk Clementine.  <a href=\"http://www.clementine-player.org/wiimote\">Sila rujuk wiki Clementine</a> untuk maklumat lanjut.\n"
 
-#: internet/grooveshark/groovesharksettingspage.cpp:113
-msgid "You do not have a Grooveshark Anywhere account."
-msgstr "Anda tidak mempunyai akaun Grooveshark Anywhere."
-
 #: internet/spotify/spotifysettingspage.cpp:149
 msgid "You do not have a Spotify Premium account."
 msgstr "Anda tidak mempunyai akaun Perdana Spotify."
@@ -5864,7 +5674,6 @@ msgstr "Scrobble anda: %1"
 msgid "Your system is missing OpenGL support, visualizations are unavailable."
 msgstr "Sistem anda tiada sokongan OpenGL, pengvisualan tidak tersedia."
 
-#: internet/grooveshark/groovesharksettingspage.cpp:118
 #: internet/spotify/spotifysettingspage.cpp:155
 msgid "Your username or password was incorrect."
 msgstr "Nama pengguna atau kata laluan anda tidak betul."

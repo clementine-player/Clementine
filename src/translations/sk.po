@@ -9,8 +9,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2015-04-17 14:40+0000\n"
-"Last-Translator: Ján Ďanovský <dagsoftware@yahoo.com>\n"
+"PO-Revision-Date: 2015-05-01 12:23+0000\n"
+"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Slovak (http://www.transifex.com/projects/p/clementine/language/sk/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -318,10 +318,6 @@ msgid ""
 "<p>If you surround sections of text that contain a token with curly-braces, that section will be hidden if the token is empty.</p>"
 msgstr "<p>Štítky začínajte s %, napríklad: %artist %album %title </p>\n\n<p>Ak naplníte sekciu znakmi ktoré obsahujú štítok so zloženými zátvorkami, táto sekcia bude skrytá, ak je štítok prázdny.</p>"
 
-#: internet/grooveshark/groovesharksettingspage.cpp:123
-msgid "A Grooveshark Anywhere account is required."
-msgstr "Je vyžadovaný Grooveshark Anywhere účet."
-
 #: internet/spotify/spotifysettingspage.cpp:166
 msgid "A Spotify Premium account is required."
 msgstr "Je vyžadovaný prémium účet na Spotify."
@@ -392,7 +388,6 @@ msgstr "O Qt.."
 msgid "Absolute"
 msgstr "absolútne"
 
-#: ../bin/src/ui_groovesharksettingspage.h:141
 #: ../bin/src/ui_magnatunesettingspage.h:155
 #: ../bin/src/ui_spotifysettingspage.h:208
 #: ../bin/src/ui_lastfmsettingspage.h:151 ../bin/src/ui_vksettingspage.h:217
@@ -574,14 +569,6 @@ msgstr "Pridať piesne do \"Moja hudba\", pri kliknutí na tlačítko Obľúbiť
 msgid "Add stream..."
 msgstr "Pridať stream..."
 
-#: internet/grooveshark/groovesharkservice.cpp:1127
-msgid "Add to Grooveshark favorites"
-msgstr "Pridať k obľúbeným na Grooveshark"
-
-#: internet/grooveshark/groovesharkservice.cpp:1142
-msgid "Add to Grooveshark playlists"
-msgstr "Pridať do Grooveshark playlistov"
-
 #: internet/vk/vkservice.cpp:312
 msgid "Add to My Music"
 msgstr "Pridať do Moja hudba"
@@ -642,14 +629,6 @@ msgstr "Pridané dnes"
 #: ../bin/src/ui_libraryfilterwidget.h:92
 msgid "Added within three months"
 msgstr "Pridané posledný štvrťrok"
-
-#: internet/grooveshark/groovesharkservice.cpp:1425
-msgid "Adding song to My Music"
-msgstr "Pridáva sa pieseň do Mojej hudby"
-
-#: internet/grooveshark/groovesharkservice.cpp:1402
-msgid "Adding song to favorites"
-msgstr "Pridať pieseň k obľúbeným"
 
 #: library/libraryfilterwidget.cpp:142
 msgid "Advanced grouping..."
@@ -773,7 +752,7 @@ msgstr "Hneď začne hrať"
 msgid "Amazon Cloud Drive"
 msgstr "Amazon Cloud Drive"
 
-#: internet/spotify/spotifyblobdownloader.cpp:67
+#: internet/spotify/spotifyblobdownloader.cpp:76
 msgid ""
 "An additional plugin is required to use Spotify in Clementine.  Would you "
 "like to download and install it now?"
@@ -828,10 +807,6 @@ msgstr "Použiť kompresiu na zabránenie odrezávania"
 #, qt-format
 msgid "Are you sure you want to delete the \"%1\" preset?"
 msgstr "Ste si istý, že chcete vymazať predvoľbu \"%1\"?"
-
-#: internet/grooveshark/groovesharkservice.cpp:1324
-msgid "Are you sure you want to delete this playlist?"
-msgstr "Ste si istí, že chcete zmazať tento playlist?"
 
 #: ui/edittagdialog.cpp:798
 msgid "Are you sure you want to reset this song's statistics?"
@@ -1032,7 +1007,7 @@ msgstr "Prehľadávať..."
 msgid "Buffer duration"
 msgstr "Dĺžka vyrovnávacej pamäte"
 
-#: engines/gstengine.cpp:884
+#: engines/gstengine.cpp:904
 msgid "Buffering"
 msgstr "Ukladá sa do vyrovnávacej pamäte"
 
@@ -1047,10 +1022,6 @@ msgstr "Ale tieto zdroje sú zakázané:"
 #: ../bin/src/ui_wiimotesettingspage.h:192
 msgid "Buttons"
 msgstr "Tlačidlá"
-
-#: ../bin/src/ui_groovesharksettingspage.h:139
-msgid "By default, Grooveshark sorts songs on date added"
-msgstr "Štandardne Grooveshark radí piesne podľa dátumu pridania"
 
 #: core/song.cpp:419
 msgid "CDDA"
@@ -1073,7 +1044,7 @@ msgstr "Ukladá sa do vyrovnávacej pamäte"
 msgid "Caching %1"
 msgstr "%1 sa ukladá do vyrovnávacej pamäte"
 
-#: internet/spotify/spotifyblobdownloader.cpp:52
+#: internet/spotify/spotifyblobdownloader.cpp:61
 msgid "Cancel"
 msgstr "Zrušiť"
 
@@ -1137,7 +1108,7 @@ msgstr "Vyberte priečinok vyrovnávacej pamäte na Vk.com"
 msgid "Choose a name for your smart playlist"
 msgstr "Vyberte názov pre váš inteligentný playlist"
 
-#: engines/gstengine.cpp:905
+#: engines/gstengine.cpp:925
 msgid "Choose automatically"
 msgstr "Vybrať automaticky"
 
@@ -1346,10 +1317,6 @@ msgstr "Skladateľ"
 msgid "Configure %1..."
 msgstr "Nastaviť %1..."
 
-#: internet/grooveshark/groovesharkservice.cpp:566
-msgid "Configure Grooveshark..."
-msgstr "Nastaviť Grooveshark ..."
-
 #: internet/magnatune/magnatuneservice.cpp:290
 msgid "Configure Magnatune..."
 msgstr "Nastaviť Magnatune..."
@@ -1533,11 +1500,6 @@ msgstr "Obal nastavený z %1"
 msgid "Covers from %1"
 msgstr "Obaly z %1"
 
-#: internet/grooveshark/groovesharkservice.cpp:534
-#: internet/grooveshark/groovesharkservice.cpp:1276
-msgid "Create a new Grooveshark playlist"
-msgstr "Vytvoriť nový playlist Grooveshark"
-
 #: ../bin/src/ui_playbacksettingspage.h:315
 msgid "Cross-fade when changing tracks automatically"
 msgstr "Prelínať keď sa zmení skladba automaticky"
@@ -1681,7 +1643,7 @@ msgstr "Znížiť hlasitosť"
 msgid "Default background image"
 msgstr "Štandardný obrázok na pozadí"
 
-#: engines/gstengine.cpp:930
+#: engines/gstengine.cpp:950
 #, qt-format
 msgid "Default device on %1"
 msgstr "Východzie zariadenie na %1"
@@ -1698,11 +1660,6 @@ msgstr "Oneskorenie medzi vizualizáciami"
 #: ../bin/src/ui_playlistlistcontainer.h:131
 msgid "Delete"
 msgstr "Vymazať"
-
-#: internet/grooveshark/groovesharkservice.cpp:537
-#: internet/grooveshark/groovesharkservice.cpp:1323
-msgid "Delete Grooveshark playlist"
-msgstr "Vymazať Grooveshark playlist"
 
 #: internet/podcasts/podcastservice.cpp:433
 msgid "Delete downloaded data"
@@ -1977,7 +1934,7 @@ msgstr "Sťahuje sa Jamendo katalóg"
 msgid "Downloading Magnatune catalogue"
 msgstr "Sťahuje sa Magnatune katalóg"
 
-#: internet/spotify/spotifyblobdownloader.cpp:51
+#: internet/spotify/spotifyblobdownloader.cpp:60
 msgid "Downloading Spotify plugin"
 msgstr "Sťahuje sa Spotify plugin"
 
@@ -2151,7 +2108,6 @@ msgstr "Ekvivalent k --log-levels *:1"
 msgid "Equivalent to --log-levels *:3"
 msgstr "Ekvivalent k --log-levels *:3"
 
-#: internet/grooveshark/groovesharkservice.cpp:1055
 #: internet/magnatune/magnatunedownloaddialog.cpp:242
 #: library/libraryview.cpp:630 ui/mainwindow.cpp:1910 ui/mainwindow.cpp:2157
 #: ui/mainwindow.cpp:2305 internet/vk/vkservice.cpp:625
@@ -2174,7 +2130,7 @@ msgstr "Chyba pri kopírovaní piesní"
 msgid "Error deleting songs"
 msgstr "Chyba pri vymazávaní piesní"
 
-#: internet/spotify/spotifyblobdownloader.cpp:222
+#: internet/spotify/spotifyblobdownloader.cpp:267
 msgid "Error downloading Spotify plugin"
 msgstr "Chyba pri sťahovaní Spotify pluginu."
 
@@ -2347,10 +2303,6 @@ msgstr "Zlyhalo spracovanie XML pre tento RSS kanál"
 #: ../bin/src/ui_transcoderoptionsmp3.h:200
 msgid "Fast"
 msgstr "Rýchla"
-
-#: internet/grooveshark/groovesharkservice.cpp:645
-msgid "Favorites"
-msgstr "Obľúbené"
 
 #: library/library.cpp:88
 msgid "Favourite tracks"
@@ -2530,7 +2482,7 @@ msgstr "Plné basy a výšky"
 msgid "Full Treble"
 msgstr "Plné výšky"
 
-#: ui/settingsdialog.cpp:142
+#: ui/settingsdialog.cpp:141
 msgid "General"
 msgstr "Všeobecné"
 
@@ -2545,15 +2497,6 @@ msgstr "Všeobecné nastavenia"
 msgid "Genre"
 msgstr "Žáner"
 
-#: internet/grooveshark/groovesharkservice.cpp:556
-msgid "Get a URL to share this Grooveshark playlist"
-msgstr "Získať URL adresu na zdieľanie tohto playlistu na Grooveshark"
-
-#: internet/grooveshark/groovesharkservice.cpp:553
-#: internet/grooveshark/groovesharkservice.cpp:1155
-msgid "Get a URL to share this Grooveshark song"
-msgstr "Získať URL adresu na zdieľanie tejto piesne na Grooveshark"
-
 #: internet/spotify/spotifyservice.cpp:633
 #: internet/spotify/spotifyservice.cpp:674
 msgid "Get a URL to share this Spotify song"
@@ -2562,10 +2505,6 @@ msgstr "Získať URL adresu na zdieľanie tejto piesne na Spotify"
 #: internet/spotify/spotifyservice.cpp:665
 msgid "Get a URL to share this playlist"
 msgstr "Získať URL adresu na zdieľanie tohto playlistu"
-
-#: internet/grooveshark/groovesharkservice.cpp:830
-msgid "Getting Grooveshark popular songs"
-msgstr "Získavajú sa populárne piesne z Grooveshark"
 
 #: internet/somafm/somafmservice.cpp:120
 msgid "Getting channels"
@@ -2604,26 +2543,6 @@ msgstr "Získaných %1 obalov z %2 (%3 zlyhalo)"
 #: ../bin/src/ui_behavioursettingspage.h:274
 msgid "Grey out non existent songs in my playlists"
 msgstr "Zošednúť neexistujúce piesne v playlistoch"
-
-#: ../bin/src/ui_groovesharksettingspage.h:137
-msgid "Grooveshark"
-msgstr "Grooveshark"
-
-#: internet/grooveshark/groovesharkservice.cpp:413
-msgid "Grooveshark login error"
-msgstr "Chyba pri prihlásení na Grooveshark"
-
-#: internet/grooveshark/groovesharkservice.cpp:1206
-msgid "Grooveshark playlist's URL"
-msgstr "URL adresa playlistu na Grooveshark-u"
-
-#: internet/grooveshark/groovesharkservice.cpp:625
-msgid "Grooveshark radio"
-msgstr "Grooveshark rádio"
-
-#: internet/grooveshark/groovesharkservice.cpp:1184
-msgid "Grooveshark song's URL"
-msgstr "URL adresa piesne na Grooveshark-u"
 
 #: ../bin/src/ui_groupbydialog.h:124
 msgid "Group Library by..."
@@ -2846,7 +2765,7 @@ msgstr "Kontrola integrity"
 msgid "Internet"
 msgstr "Internet"
 
-#: ui/settingsdialog.cpp:165
+#: ui/settingsdialog.cpp:164
 msgid "Internet providers"
 msgstr "Internetoví poskytovatelia"
 
@@ -2882,10 +2801,6 @@ msgstr "Nefunkčná služba"
 #: internet/lastfm/lastfmservice.cpp:238
 msgid "Invalid session key"
 msgstr "Neplatný kľúč sedenia"
-
-#: internet/grooveshark/groovesharkservice.cpp:405
-msgid "Invalid username and/or password"
-msgstr "Neplatné meno používateľa a/alebo heslo"
 
 #: ../bin/src/ui_ripcddialog.h:312
 msgid "Invert Selection"
@@ -3051,11 +2966,6 @@ msgstr "Hľadanie v zbierke"
 msgid "Limits"
 msgstr "Obmedzenia"
 
-#: internet/grooveshark/groovesharkservice.cpp:627
-msgid ""
-"Listen to Grooveshark songs based on what you've listened to previously"
-msgstr "Počúvať Grooveshark piesne založené na tom, čo ste počúvali predtým"
-
 #: ui/equalizer.cpp:137
 msgid "Live"
 msgstr "Live"
@@ -3130,7 +3040,6 @@ msgid "Loads files/URLs, replacing current playlist"
 msgstr "Načítať súbory/URL adresy, nahradiť nimi aktuálny playlist"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:163
-#: ../bin/src/ui_groovesharksettingspage.h:144
 #: ../bin/src/ui_magnatunesettingspage.h:164
 #: ../bin/src/ui_soundcloudsettingspage.h:106
 #: ../bin/src/ui_spotifysettingspage.h:211
@@ -3391,7 +3300,6 @@ msgstr "Stlmiť"
 msgid "My Albums"
 msgstr "Moje albumy"
 
-#: internet/grooveshark/groovesharkservice.cpp:634
 #: internet/vk/vkservice.cpp:878
 msgid "My Music"
 msgstr "Moja hudba"
@@ -3400,9 +3308,8 @@ msgstr "Moja hudba"
 msgid "My Recommendations"
 msgstr "Moje odporúčania"
 
-#: internet/grooveshark/groovesharkservice.cpp:1277
-#: internet/grooveshark/groovesharkservice.cpp:1372 ui/equalizer.cpp:205
-#: ../bin/src/ui_deviceproperties.h:369 ../bin/src/ui_wizardfinishpage.h:84
+#: ui/equalizer.cpp:205 ../bin/src/ui_deviceproperties.h:369
+#: ../bin/src/ui_wizardfinishpage.h:84
 msgid "Name"
 msgstr "Názov"
 
@@ -3633,7 +3540,6 @@ msgid "Opacity"
 msgstr "Nepriehľadnosť"
 
 #: internet/digitally/digitallyimportedservicebase.cpp:176
-#: internet/grooveshark/groovesharkservice.cpp:560
 #: internet/icecast/icecastservice.cpp:302
 #: internet/jamendo/jamendoservice.cpp:434
 #: internet/magnatune/magnatuneservice.cpp:284
@@ -3769,7 +3675,6 @@ msgstr "Analyzuje sa Jamendo katalóg"
 msgid "Party"
 msgstr "Party"
 
-#: ../bin/src/ui_groovesharksettingspage.h:143
 #: ../bin/src/ui_magnatunesettingspage.h:165
 #: ../bin/src/ui_spotifysettingspage.h:210
 #: ../bin/src/ui_subsonicsettingspage.h:128
@@ -3860,7 +3765,6 @@ msgstr "Možnosti playlistu"
 msgid "Playlist type"
 msgstr "Typ playlistu"
 
-#: internet/grooveshark/groovesharkservice.cpp:655
 #: internet/soundcloud/soundcloudservice.cpp:130 ui/mainwindow.cpp:241
 msgid "Playlists"
 msgstr "Playlisty"
@@ -3882,18 +3786,6 @@ msgstr "Podcasty"
 msgid "Pop"
 msgstr "Pop"
 
-#: internet/grooveshark/groovesharkservice.cpp:592
-msgid "Popular songs"
-msgstr "Populárne piesne"
-
-#: internet/grooveshark/groovesharkservice.cpp:596
-msgid "Popular songs of the Month"
-msgstr "Populárne piesne tohto mesiaca"
-
-#: internet/grooveshark/groovesharkservice.cpp:605
-msgid "Popular songs today"
-msgstr "Populárne piesne dneška"
-
 #: ../bin/src/ui_notificationssettingspage.h:444
 msgid "Popup duration"
 msgstr "Trvanie upozornenia"
@@ -3912,7 +3804,6 @@ msgid "Preference"
 msgstr "Nastavenie"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:166
-#: ../bin/src/ui_groovesharksettingspage.h:145
 #: ../bin/src/ui_magnatunesettingspage.h:166
 #: ../bin/src/ui_spotifysettingspage.h:216 ../bin/src/ui_settingsdialog.h:116
 #: ../bin/src/ui_lastfmsettingspage.h:155 ../bin/src/ui_vksettingspage.h:220
@@ -4047,10 +3938,6 @@ msgstr "Zaradiť skladbu"
 msgid "Radio (equal loudness for all tracks)"
 msgstr "Rádio (rovnaká hlasitosť pre všetky skladby)"
 
-#: internet/grooveshark/groovesharkservice.cpp:614
-msgid "Radios"
-msgstr "Rádiá"
-
 #: core/backgroundstreams.cpp:47
 msgid "Rain"
 msgstr "Dážď"
@@ -4100,10 +3987,6 @@ msgstr "Naozaj zrušiť?"
 #: internet/subsonic/subsonicsettingspage.cpp:157
 msgid "Redirect limit exceeded, verify server configuration."
 msgstr "Prekročený limit presmerovaní, overte nastavenie servra"
-
-#: internet/grooveshark/groovesharkservice.cpp:562
-msgid "Refresh"
-msgstr "Obnoviť"
 
 #: internet/jamendo/jamendoservice.cpp:437
 #: internet/magnatune/magnatuneservice.cpp:287
@@ -4161,7 +4044,6 @@ msgstr "Odstrániť duplikáty z playlistu"
 msgid "Remove folder"
 msgstr "Odstrániť priečinok"
 
-#: internet/grooveshark/groovesharkservice.cpp:550
 #: internet/vk/vkservice.cpp:316
 msgid "Remove from My Music"
 msgstr "Odstrániť z Mojej hudby"
@@ -4170,11 +4052,6 @@ msgstr "Odstrániť z Mojej hudby"
 msgid "Remove from bookmarks"
 msgstr "Odstrániť zo záložiek"
 
-#: internet/grooveshark/groovesharkservice.cpp:547
-msgid "Remove from favorites"
-msgstr "Odstrániť z obľúbených"
-
-#: internet/grooveshark/groovesharkservice.cpp:544
 #: internet/spotify/spotifyservice.cpp:672 ../bin/src/ui_mainwindow.h:685
 msgid "Remove from playlist"
 msgstr "Odstrániť z playlistu"
@@ -4190,23 +4067,6 @@ msgstr "Odstrániť playlisty"
 #: ../bin/src/ui_mainwindow.h:717
 msgid "Remove unavailable tracks from playlist"
 msgstr "Odstrániť nedostupné skladby z playlistu"
-
-#: internet/grooveshark/groovesharkservice.cpp:1571
-msgid "Removing songs from My Music"
-msgstr "Odstraňujú sa piesne z Mojej hudby"
-
-#: internet/grooveshark/groovesharkservice.cpp:1519
-msgid "Removing songs from favorites"
-msgstr "Odstraňujú sa piesne z obľúbených"
-
-#: internet/grooveshark/groovesharkservice.cpp:1371
-#, qt-format
-msgid "Rename \"%1\" playlist"
-msgstr "Premenovať playlist \"%1\""
-
-#: internet/grooveshark/groovesharkservice.cpp:540
-msgid "Rename Grooveshark playlist"
-msgstr "Premenovať Grooveshark playlist"
 
 #: playlist/playlisttabbar.cpp:146
 msgid "Rename playlist"
@@ -4290,18 +4150,6 @@ msgstr "Obmedziť na ASCII písmená"
 #: ../bin/src/ui_behavioursettingspage.h:273
 msgid "Resume playback on start"
 msgstr "Obnoviť prehrávanie pri spustení"
-
-#: internet/grooveshark/groovesharkservice.cpp:796
-msgid "Retrieving Grooveshark My Music songs"
-msgstr "Získavajú sa piesne z Mojej hudby na Groovesharku"
-
-#: internet/grooveshark/groovesharkservice.cpp:763
-msgid "Retrieving Grooveshark favorites songs"
-msgstr "Získavanie populárnych piesní z Grooveshark"
-
-#: internet/grooveshark/groovesharkservice.cpp:694
-msgid "Retrieving Grooveshark playlists"
-msgstr "Získavajú sa Grooveshark playlisty"
 
 #: ../data/oauthsuccess.html:5
 msgid "Return to Clementine"
@@ -4486,7 +4334,6 @@ msgstr "Režim hľadania"
 msgid "Search options"
 msgstr "Možnosti hľadania"
 
-#: internet/grooveshark/groovesharkservice.cpp:583
 #: internet/soundcloud/soundcloudservice.cpp:116
 #: internet/spotify/spotifyservice.cpp:406
 msgid "Search results"
@@ -4496,10 +4343,6 @@ msgstr "Výsledky hľadania"
 #: ../bin/src/ui_querysearchpage.h:120
 msgid "Search terms"
 msgstr "Výrazy na hľadanie"
-
-#: internet/grooveshark/groovesharkservice.cpp:275
-msgid "Searching on Grooveshark"
-msgstr "Hľadanie na Grooveshak"
 
 #: ../bin/src/ui_groupbydialog.h:140
 msgid "Second level"
@@ -4850,10 +4693,6 @@ msgstr "Usporiadať podľa žánru (podľa populatity)"
 msgid "Sort by station name"
 msgstr "Usporiadať podľa názvu stanice"
 
-#: ../bin/src/ui_groovesharksettingspage.h:146
-msgid "Sort playlists songs alphabetically"
-msgstr "Radiť piesne v playlistoch podľa abecedy"
-
 #: ../bin/src/ui_querysortpage.h:140
 msgid "Sort songs by"
 msgstr "Zoradiť piesne podľa"
@@ -4895,7 +4734,7 @@ msgstr "URL adresa playlistu na Spotify"
 msgid "Spotify plugin"
 msgstr "Spotify plugin"
 
-#: internet/spotify/spotifyblobdownloader.cpp:66
+#: internet/spotify/spotifyblobdownloader.cpp:75
 msgid "Spotify plugin not installed"
 msgstr "Spotify plugin nieje nainštalovaný"
 
@@ -4923,7 +4762,6 @@ msgstr "Začať playlist práve prehrávanou"
 msgid "Start transcoding"
 msgstr "Začať transkódovanie"
 
-#: internet/grooveshark/groovesharkservice.cpp:585
 #: internet/soundcloud/soundcloudservice.cpp:118
 #: internet/spotify/spotifyservice.cpp:408
 msgid ""
@@ -4939,10 +4777,6 @@ msgstr "Začína sa %1"
 #: internet/magnatune/magnatunedownloaddialog.cpp:124
 msgid "Starting..."
 msgstr "Začína sa ..."
-
-#: internet/grooveshark/groovesharkservice.cpp:618
-msgid "Stations"
-msgstr "Stanice"
 
 #: core/globalshortcuts.cpp:53 ../bin/src/ui_mainwindow.h:644
 #: wiimotedev/wiimotesettingspage.cpp:101
@@ -4987,10 +4821,6 @@ msgstr "Streamovanie zo servru Subsonic vyžaduje po 30 dňovej skúšobnej dobe
 #: ../bin/src/ui_magnatunesettingspage.h:160
 msgid "Streaming membership"
 msgstr "Streamovacie členstvo"
-
-#: internet/grooveshark/groovesharkservice.cpp:659
-msgid "Subscribed playlists"
-msgstr "Podpísané playlisty"
 
 #: ../bin/src/ui_podcastinfowidget.h:196
 msgid "Subscribers"
@@ -5234,12 +5064,6 @@ msgstr "Tento typ zariadení nieje podporovaný: %1"
 msgid "Title"
 msgstr "Názov"
 
-#: internet/grooveshark/groovesharkservice.cpp:1056
-msgid ""
-"To start Grooveshark radio, you should first listen to a few other "
-"Grooveshark songs"
-msgstr "Pred spustením Grooveshark rádia, by ste si mali najprv vypočuť niekoľko ďalších Grooveshark piesní"
-
 #: core/utilities.cpp:137 core/utilities.cpp:149
 msgid "Today"
 msgstr "Dnes"
@@ -5395,10 +5219,6 @@ msgstr "Pripravované koncerty"
 msgid "Update"
 msgstr "Aktualizovať"
 
-#: internet/grooveshark/groovesharkservice.cpp:1228
-msgid "Update Grooveshark playlist"
-msgstr "Aktualizovať Grooveshark playlist"
-
 #: internet/podcasts/podcastservice.cpp:419
 msgid "Update all podcasts"
 msgstr "Aktualizovať všetky podcasty"
@@ -5509,16 +5329,10 @@ msgstr "Použiť normalizáciu hlasitosti"
 msgid "Used"
 msgstr "Použitých"
 
-#: internet/grooveshark/groovesharkservice.cpp:408
-#, qt-format
-msgid "User %1 doesn't have a Grooveshark Anywhere account"
-msgstr "Používateľ %1 nemá Grooveshark Anywhere účet"
-
-#: ui/settingsdialog.cpp:156
+#: ui/settingsdialog.cpp:155
 msgid "User interface"
 msgstr "Používateľské rozhranie"
 
-#: ../bin/src/ui_groovesharksettingspage.h:142
 #: ../bin/src/ui_magnatunesettingspage.h:163
 #: ../bin/src/ui_spotifysettingspage.h:209
 #: ../bin/src/ui_subsonicsettingspage.h:127
@@ -5790,10 +5604,6 @@ msgid ""
 "Clementine wiki</a> for more information.\n"
 msgstr "Môžete použiť vaše Wii diaľkové ako diaľkový ovládač pre Clementine.  <a href=\"http://www.clementine-player.org/wiimote\">Pozrite si stránku na Clementine wiki</a> pre viac informácií.\n"
 
-#: internet/grooveshark/groovesharksettingspage.cpp:113
-msgid "You do not have a Grooveshark Anywhere account."
-msgstr "Nemáte Grooveshark Anywhere účet."
-
 #: internet/spotify/spotifysettingspage.cpp:149
 msgid "You do not have a Spotify Premium account."
 msgstr "Nemáte Spotify prémium účet."
@@ -5864,7 +5674,6 @@ msgstr "Skroblujete: %1"
 msgid "Your system is missing OpenGL support, visualizations are unavailable."
 msgstr "Vášmu systému chýba OpenGL podpora, vizualizácie nebudú dostupné."
 
-#: internet/grooveshark/groovesharksettingspage.cpp:118
 #: internet/spotify/spotifysettingspage.cpp:155
 msgid "Your username or password was incorrect."
 msgstr "Vaše meno používateľa alebo heslo bolo nesprávne."

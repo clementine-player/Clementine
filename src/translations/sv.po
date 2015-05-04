@@ -20,7 +20,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2015-04-17 12:11+0000\n"
+"PO-Revision-Date: 2015-05-01 12:23+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Swedish (http://www.transifex.com/projects/p/clementine/language/sv/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -329,10 +329,6 @@ msgid ""
 "<p>If you surround sections of text that contain a token with curly-braces, that section will be hidden if the token is empty.</p>"
 msgstr "<p>En variabel  påbörjas med %, till exempel: %artist %album %titel </p>\n\n<p>Om du omgärdar en variabel med klammerparanteser (måsvingar), så kommer den inte att visas om variabeln är tom.</p>"
 
-#: internet/grooveshark/groovesharksettingspage.cpp:123
-msgid "A Grooveshark Anywhere account is required."
-msgstr "Ett Grooveshark Anywhere konto krävs."
-
 #: internet/spotify/spotifysettingspage.cpp:166
 msgid "A Spotify Premium account is required."
 msgstr "Kräver ett Spotify Premium-konto."
@@ -403,7 +399,6 @@ msgstr "Om Qt..."
 msgid "Absolute"
 msgstr "Absolut"
 
-#: ../bin/src/ui_groovesharksettingspage.h:141
 #: ../bin/src/ui_magnatunesettingspage.h:155
 #: ../bin/src/ui_spotifysettingspage.h:208
 #: ../bin/src/ui_lastfmsettingspage.h:151 ../bin/src/ui_vksettingspage.h:217
@@ -585,14 +580,6 @@ msgstr "Lägg till låtar i \"Min musik\" när \"Älskar\" knappen klickas"
 msgid "Add stream..."
 msgstr "Lägg till ström..."
 
-#: internet/grooveshark/groovesharkservice.cpp:1127
-msgid "Add to Grooveshark favorites"
-msgstr "Lägg till i Grooveshark-favoriter"
-
-#: internet/grooveshark/groovesharkservice.cpp:1142
-msgid "Add to Grooveshark playlists"
-msgstr "Lägg till i Grooveshark-spellistor"
-
 #: internet/vk/vkservice.cpp:312
 msgid "Add to My Music"
 msgstr "Lägg till i Min Musik"
@@ -653,14 +640,6 @@ msgstr "Tillagda idag"
 #: ../bin/src/ui_libraryfilterwidget.h:92
 msgid "Added within three months"
 msgstr "Tillagda senaste tre månaderna"
-
-#: internet/grooveshark/groovesharkservice.cpp:1425
-msgid "Adding song to My Music"
-msgstr "Lägger till låt i Min Musik"
-
-#: internet/grooveshark/groovesharkservice.cpp:1402
-msgid "Adding song to favorites"
-msgstr "Lägg till låtar till favoriter"
 
 #: library/libraryfilterwidget.cpp:142
 msgid "Advanced grouping..."
@@ -784,7 +763,7 @@ msgstr "Starta alltid uppspelning"
 msgid "Amazon Cloud Drive"
 msgstr ""
 
-#: internet/spotify/spotifyblobdownloader.cpp:67
+#: internet/spotify/spotifyblobdownloader.cpp:76
 msgid ""
 "An additional plugin is required to use Spotify in Clementine.  Would you "
 "like to download and install it now?"
@@ -839,10 +818,6 @@ msgstr "Tillämpa komprimering för att förhindra distorsion"
 #, qt-format
 msgid "Are you sure you want to delete the \"%1\" preset?"
 msgstr "Är du säker på att du vill ta bort förinställningen \"%1\"?"
-
-#: internet/grooveshark/groovesharkservice.cpp:1324
-msgid "Are you sure you want to delete this playlist?"
-msgstr "Är du säker på att du vill ta bort denna spellista?"
 
 #: ui/edittagdialog.cpp:798
 msgid "Are you sure you want to reset this song's statistics?"
@@ -1043,7 +1018,7 @@ msgstr "Bläddra..."
 msgid "Buffer duration"
 msgstr "Längd på buffer"
 
-#: engines/gstengine.cpp:884
+#: engines/gstengine.cpp:904
 msgid "Buffering"
 msgstr "Buffrar"
 
@@ -1058,10 +1033,6 @@ msgstr "Men dessa källor är inaktiverade:"
 #: ../bin/src/ui_wiimotesettingspage.h:192
 msgid "Buttons"
 msgstr "Knappar"
-
-#: ../bin/src/ui_groovesharksettingspage.h:139
-msgid "By default, Grooveshark sorts songs on date added"
-msgstr "Som standard, sorterar Grooveshark låtar efter tillagt datum"
 
 #: core/song.cpp:419
 msgid "CDDA"
@@ -1084,7 +1055,7 @@ msgstr "Cachar"
 msgid "Caching %1"
 msgstr "Cachar %1"
 
-#: internet/spotify/spotifyblobdownloader.cpp:52
+#: internet/spotify/spotifyblobdownloader.cpp:61
 msgid "Cancel"
 msgstr "Avbryt"
 
@@ -1148,7 +1119,7 @@ msgstr "Välj Vk.com cache-katalog"
 msgid "Choose a name for your smart playlist"
 msgstr "Välj ett namn för din smara spellista"
 
-#: engines/gstengine.cpp:905
+#: engines/gstengine.cpp:925
 msgid "Choose automatically"
 msgstr "Välj automatiskt"
 
@@ -1357,10 +1328,6 @@ msgstr "Kompositör"
 msgid "Configure %1..."
 msgstr "Ställ in %1..."
 
-#: internet/grooveshark/groovesharkservice.cpp:566
-msgid "Configure Grooveshark..."
-msgstr "Konfigurera Grooveshark..."
-
 #: internet/magnatune/magnatuneservice.cpp:290
 msgid "Configure Magnatune..."
 msgstr "Konfigurera Magnatune..."
@@ -1544,11 +1511,6 @@ msgstr "Omslagsbild angiven från %1"
 msgid "Covers from %1"
 msgstr "Omslagsbilder från %1"
 
-#: internet/grooveshark/groovesharkservice.cpp:534
-#: internet/grooveshark/groovesharkservice.cpp:1276
-msgid "Create a new Grooveshark playlist"
-msgstr "Skapa ny Grooveshark spellista"
-
 #: ../bin/src/ui_playbacksettingspage.h:315
 msgid "Cross-fade when changing tracks automatically"
 msgstr "Korstona vid automatiskt byte av spår"
@@ -1692,7 +1654,7 @@ msgstr "Sänk volymen"
 msgid "Default background image"
 msgstr "Standardbakgrund"
 
-#: engines/gstengine.cpp:930
+#: engines/gstengine.cpp:950
 #, qt-format
 msgid "Default device on %1"
 msgstr "Standardenhet på %1"
@@ -1709,11 +1671,6 @@ msgstr "Fördröjning mellan visualiseringar"
 #: ../bin/src/ui_playlistlistcontainer.h:131
 msgid "Delete"
 msgstr "Ta bort"
-
-#: internet/grooveshark/groovesharkservice.cpp:537
-#: internet/grooveshark/groovesharkservice.cpp:1323
-msgid "Delete Grooveshark playlist"
-msgstr "Ta bort Grooveshark spellista"
 
 #: internet/podcasts/podcastservice.cpp:433
 msgid "Delete downloaded data"
@@ -1988,7 +1945,7 @@ msgstr "Ladda ner Jamendo-katalog"
 msgid "Downloading Magnatune catalogue"
 msgstr "Hämtar katalog från Magnatune"
 
-#: internet/spotify/spotifyblobdownloader.cpp:51
+#: internet/spotify/spotifyblobdownloader.cpp:60
 msgid "Downloading Spotify plugin"
 msgstr "Laddar ner Spotify-insticket"
 
@@ -2162,7 +2119,6 @@ msgstr "Motsvarar --log-levels *:1"
 msgid "Equivalent to --log-levels *:3"
 msgstr "Motsvarar --log-levels *:3"
 
-#: internet/grooveshark/groovesharkservice.cpp:1055
 #: internet/magnatune/magnatunedownloaddialog.cpp:242
 #: library/libraryview.cpp:630 ui/mainwindow.cpp:1910 ui/mainwindow.cpp:2157
 #: ui/mainwindow.cpp:2305 internet/vk/vkservice.cpp:625
@@ -2185,7 +2141,7 @@ msgstr "Fel vid kopiering av låtar"
 msgid "Error deleting songs"
 msgstr "Fel vid borttagning av låtar"
 
-#: internet/spotify/spotifyblobdownloader.cpp:222
+#: internet/spotify/spotifyblobdownloader.cpp:267
 msgid "Error downloading Spotify plugin"
 msgstr "Fel vid hämtning av Spotify-insticket"
 
@@ -2358,10 +2314,6 @@ msgstr "Misslyckades att tolka XML för denna RSS-flöde"
 #: ../bin/src/ui_transcoderoptionsmp3.h:200
 msgid "Fast"
 msgstr "Snabb"
-
-#: internet/grooveshark/groovesharkservice.cpp:645
-msgid "Favorites"
-msgstr "Favoriter"
 
 #: library/library.cpp:88
 msgid "Favourite tracks"
@@ -2541,7 +2493,7 @@ msgstr "Full bas + diskant"
 msgid "Full Treble"
 msgstr "Full diskant"
 
-#: ui/settingsdialog.cpp:142
+#: ui/settingsdialog.cpp:141
 msgid "General"
 msgstr "Allmänt"
 
@@ -2556,15 +2508,6 @@ msgstr "Allmänna inställningar"
 msgid "Genre"
 msgstr "Genre"
 
-#: internet/grooveshark/groovesharkservice.cpp:556
-msgid "Get a URL to share this Grooveshark playlist"
-msgstr "Hämta en URL för att dela Grooveshark spellista"
-
-#: internet/grooveshark/groovesharkservice.cpp:553
-#: internet/grooveshark/groovesharkservice.cpp:1155
-msgid "Get a URL to share this Grooveshark song"
-msgstr "Hämta en URL för att dela Grooveshark låt"
-
 #: internet/spotify/spotifyservice.cpp:633
 #: internet/spotify/spotifyservice.cpp:674
 msgid "Get a URL to share this Spotify song"
@@ -2573,10 +2516,6 @@ msgstr "Hämta en URL för att dela Spotify låt"
 #: internet/spotify/spotifyservice.cpp:665
 msgid "Get a URL to share this playlist"
 msgstr "Hämta en URL för delning av denna spellista"
-
-#: internet/grooveshark/groovesharkservice.cpp:830
-msgid "Getting Grooveshark popular songs"
-msgstr "Ladda populära Groovesharklåtar"
 
 #: internet/somafm/somafmservice.cpp:120
 msgid "Getting channels"
@@ -2615,26 +2554,6 @@ msgstr "Erhöll %1 omslagsbild utav %2 (%3 misslyckades)"
 #: ../bin/src/ui_behavioursettingspage.h:274
 msgid "Grey out non existent songs in my playlists"
 msgstr "Gråa ut icke-existerande låtar i mina spellistor"
-
-#: ../bin/src/ui_groovesharksettingspage.h:137
-msgid "Grooveshark"
-msgstr "Grooveshark"
-
-#: internet/grooveshark/groovesharkservice.cpp:413
-msgid "Grooveshark login error"
-msgstr "Grooveshark login fel"
-
-#: internet/grooveshark/groovesharkservice.cpp:1206
-msgid "Grooveshark playlist's URL"
-msgstr "Adress för Groovesharkspellista"
-
-#: internet/grooveshark/groovesharkservice.cpp:625
-msgid "Grooveshark radio"
-msgstr "Groovesharkradio"
-
-#: internet/grooveshark/groovesharkservice.cpp:1184
-msgid "Grooveshark song's URL"
-msgstr "Adresser för Groovesharklåtar"
 
 #: ../bin/src/ui_groupbydialog.h:124
 msgid "Group Library by..."
@@ -2857,7 +2776,7 @@ msgstr "Integritetskontroll"
 msgid "Internet"
 msgstr "Internet"
 
-#: ui/settingsdialog.cpp:165
+#: ui/settingsdialog.cpp:164
 msgid "Internet providers"
 msgstr "Internetoperatörer"
 
@@ -2893,10 +2812,6 @@ msgstr "Ogiltig tjänst"
 #: internet/lastfm/lastfmservice.cpp:238
 msgid "Invalid session key"
 msgstr "Felaktig sessionsnyckel"
-
-#: internet/grooveshark/groovesharkservice.cpp:405
-msgid "Invalid username and/or password"
-msgstr "Fel användarnamn och/eller lösenord"
 
 #: ../bin/src/ui_ripcddialog.h:312
 msgid "Invert Selection"
@@ -3062,11 +2977,6 @@ msgstr "Bibliotekssökning"
 msgid "Limits"
 msgstr "Begränsningar"
 
-#: internet/grooveshark/groovesharkservice.cpp:627
-msgid ""
-"Listen to Grooveshark songs based on what you've listened to previously"
-msgstr "Lyssna på Groovesharklåtar som baseras efter vad du tidigare lyssnat på."
-
 #: ui/equalizer.cpp:137
 msgid "Live"
 msgstr "Live"
@@ -3141,7 +3051,6 @@ msgid "Loads files/URLs, replacing current playlist"
 msgstr "Läser in filer/webbadresser, ersätter aktuell spellista"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:163
-#: ../bin/src/ui_groovesharksettingspage.h:144
 #: ../bin/src/ui_magnatunesettingspage.h:164
 #: ../bin/src/ui_soundcloudsettingspage.h:106
 #: ../bin/src/ui_spotifysettingspage.h:211
@@ -3402,7 +3311,6 @@ msgstr "Tyst"
 msgid "My Albums"
 msgstr "Mina Album"
 
-#: internet/grooveshark/groovesharkservice.cpp:634
 #: internet/vk/vkservice.cpp:878
 msgid "My Music"
 msgstr "Min Musik"
@@ -3411,9 +3319,8 @@ msgstr "Min Musik"
 msgid "My Recommendations"
 msgstr "Mina rekommendationer"
 
-#: internet/grooveshark/groovesharkservice.cpp:1277
-#: internet/grooveshark/groovesharkservice.cpp:1372 ui/equalizer.cpp:205
-#: ../bin/src/ui_deviceproperties.h:369 ../bin/src/ui_wizardfinishpage.h:84
+#: ui/equalizer.cpp:205 ../bin/src/ui_deviceproperties.h:369
+#: ../bin/src/ui_wizardfinishpage.h:84
 msgid "Name"
 msgstr "Namn"
 
@@ -3644,7 +3551,6 @@ msgid "Opacity"
 msgstr "Opacitet"
 
 #: internet/digitally/digitallyimportedservicebase.cpp:176
-#: internet/grooveshark/groovesharkservice.cpp:560
 #: internet/icecast/icecastservice.cpp:302
 #: internet/jamendo/jamendoservice.cpp:434
 #: internet/magnatune/magnatuneservice.cpp:284
@@ -3780,7 +3686,6 @@ msgstr "Sorterar Jamendos katalog"
 msgid "Party"
 msgstr "Party"
 
-#: ../bin/src/ui_groovesharksettingspage.h:143
 #: ../bin/src/ui_magnatunesettingspage.h:165
 #: ../bin/src/ui_spotifysettingspage.h:210
 #: ../bin/src/ui_subsonicsettingspage.h:128
@@ -3871,7 +3776,6 @@ msgstr "Alternativ för spellista"
 msgid "Playlist type"
 msgstr "Spellistetyp"
 
-#: internet/grooveshark/groovesharkservice.cpp:655
 #: internet/soundcloud/soundcloudservice.cpp:130 ui/mainwindow.cpp:241
 msgid "Playlists"
 msgstr "Spellistor"
@@ -3893,18 +3797,6 @@ msgstr "Podsändning"
 msgid "Pop"
 msgstr "Pop"
 
-#: internet/grooveshark/groovesharkservice.cpp:592
-msgid "Popular songs"
-msgstr "Populära låtar"
-
-#: internet/grooveshark/groovesharkservice.cpp:596
-msgid "Popular songs of the Month"
-msgstr "Poplära låtar under månaden"
-
-#: internet/grooveshark/groovesharkservice.cpp:605
-msgid "Popular songs today"
-msgstr "Populära låtar idag"
-
 #: ../bin/src/ui_notificationssettingspage.h:444
 msgid "Popup duration"
 msgstr "Popup-varaktighet"
@@ -3923,7 +3815,6 @@ msgid "Preference"
 msgstr "Inställning"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:166
-#: ../bin/src/ui_groovesharksettingspage.h:145
 #: ../bin/src/ui_magnatunesettingspage.h:166
 #: ../bin/src/ui_spotifysettingspage.h:216 ../bin/src/ui_settingsdialog.h:116
 #: ../bin/src/ui_lastfmsettingspage.h:155 ../bin/src/ui_vksettingspage.h:220
@@ -4058,10 +3949,6 @@ msgstr "Kölägg spår"
 msgid "Radio (equal loudness for all tracks)"
 msgstr "Radio (likvärdig ljudstyrka för alla spår)"
 
-#: internet/grooveshark/groovesharkservice.cpp:614
-msgid "Radios"
-msgstr "Radio"
-
 #: core/backgroundstreams.cpp:47
 msgid "Rain"
 msgstr "Regn"
@@ -4111,10 +3998,6 @@ msgstr "Verkligen avbryta?"
 #: internet/subsonic/subsonicsettingspage.cpp:157
 msgid "Redirect limit exceeded, verify server configuration."
 msgstr "Gränsen för omdirigering överskriden, verifiera serverkonfiguration."
-
-#: internet/grooveshark/groovesharkservice.cpp:562
-msgid "Refresh"
-msgstr "Uppdatera"
 
 #: internet/jamendo/jamendoservice.cpp:437
 #: internet/magnatune/magnatuneservice.cpp:287
@@ -4172,7 +4055,6 @@ msgstr "Ta bort dubbletter från spellistan"
 msgid "Remove folder"
 msgstr "Ta bort mapp"
 
-#: internet/grooveshark/groovesharkservice.cpp:550
 #: internet/vk/vkservice.cpp:316
 msgid "Remove from My Music"
 msgstr "Ta bort från Min Musik"
@@ -4181,11 +4063,6 @@ msgstr "Ta bort från Min Musik"
 msgid "Remove from bookmarks"
 msgstr "Ta bort från bokmärken"
 
-#: internet/grooveshark/groovesharkservice.cpp:547
-msgid "Remove from favorites"
-msgstr "Ta bort från favoriter"
-
-#: internet/grooveshark/groovesharkservice.cpp:544
 #: internet/spotify/spotifyservice.cpp:672 ../bin/src/ui_mainwindow.h:685
 msgid "Remove from playlist"
 msgstr "Ta bort från spellistan"
@@ -4201,23 +4078,6 @@ msgstr "Ta bort spellistor"
 #: ../bin/src/ui_mainwindow.h:717
 msgid "Remove unavailable tracks from playlist"
 msgstr "Ta bort otillgängliga låtar från spellistan"
-
-#: internet/grooveshark/groovesharkservice.cpp:1571
-msgid "Removing songs from My Music"
-msgstr "Tar bort låtar från Min Musik"
-
-#: internet/grooveshark/groovesharkservice.cpp:1519
-msgid "Removing songs from favorites"
-msgstr "Tar bort låtar från favoriter"
-
-#: internet/grooveshark/groovesharkservice.cpp:1371
-#, qt-format
-msgid "Rename \"%1\" playlist"
-msgstr "Byt namn på %1 spellista"
-
-#: internet/grooveshark/groovesharkservice.cpp:540
-msgid "Rename Grooveshark playlist"
-msgstr "Byt namn på Groovesharkspellista"
 
 #: playlist/playlisttabbar.cpp:146
 msgid "Rename playlist"
@@ -4301,18 +4161,6 @@ msgstr "Begränsa till ASCII-tecken"
 #: ../bin/src/ui_behavioursettingspage.h:273
 msgid "Resume playback on start"
 msgstr "Fortsätt uppspelning vid start"
-
-#: internet/grooveshark/groovesharkservice.cpp:796
-msgid "Retrieving Grooveshark My Music songs"
-msgstr "Hämtar Grooveshark Min Musik låtar"
-
-#: internet/grooveshark/groovesharkservice.cpp:763
-msgid "Retrieving Grooveshark favorites songs"
-msgstr "Hämta favoritlåtar från Grooveshark"
-
-#: internet/grooveshark/groovesharkservice.cpp:694
-msgid "Retrieving Grooveshark playlists"
-msgstr "Hämta spellistor från Grooveshark"
 
 #: ../data/oauthsuccess.html:5
 msgid "Return to Clementine"
@@ -4497,7 +4345,6 @@ msgstr "Sökläge"
 msgid "Search options"
 msgstr "Sökalternativ"
 
-#: internet/grooveshark/groovesharkservice.cpp:583
 #: internet/soundcloud/soundcloudservice.cpp:116
 #: internet/spotify/spotifyservice.cpp:406
 msgid "Search results"
@@ -4507,10 +4354,6 @@ msgstr "Sökresultat"
 #: ../bin/src/ui_querysearchpage.h:120
 msgid "Search terms"
 msgstr "Söktermer"
-
-#: internet/grooveshark/groovesharkservice.cpp:275
-msgid "Searching on Grooveshark"
-msgstr "Söker på Grooveshark"
 
 #: ../bin/src/ui_groupbydialog.h:140
 msgid "Second level"
@@ -4861,10 +4704,6 @@ msgstr "Sortera på genre (ordning efter popularitet)"
 msgid "Sort by station name"
 msgstr "Sortera efter stationsnamn"
 
-#: ../bin/src/ui_groovesharksettingspage.h:146
-msgid "Sort playlists songs alphabetically"
-msgstr "Sortera spellistors innehåll i bokstavsordning"
-
 #: ../bin/src/ui_querysortpage.h:140
 msgid "Sort songs by"
 msgstr "Ordna låtar efter"
@@ -4906,7 +4745,7 @@ msgstr "URL för Spotify's spellistor"
 msgid "Spotify plugin"
 msgstr "Spotify-insticksprogram"
 
-#: internet/spotify/spotifyblobdownloader.cpp:66
+#: internet/spotify/spotifyblobdownloader.cpp:75
 msgid "Spotify plugin not installed"
 msgstr "Spotify-insticksprogrammet är inte installerat"
 
@@ -4934,7 +4773,6 @@ msgstr "Starta spellistan som spelas för närvarande"
 msgid "Start transcoding"
 msgstr "Starta omkodning"
 
-#: internet/grooveshark/groovesharkservice.cpp:585
 #: internet/soundcloud/soundcloudservice.cpp:118
 #: internet/spotify/spotifyservice.cpp:408
 msgid ""
@@ -4950,10 +4788,6 @@ msgstr "Startar %1"
 #: internet/magnatune/magnatunedownloaddialog.cpp:124
 msgid "Starting..."
 msgstr "Startar..."
-
-#: internet/grooveshark/groovesharkservice.cpp:618
-msgid "Stations"
-msgstr "Stationer"
 
 #: core/globalshortcuts.cpp:53 ../bin/src/ui_mainwindow.h:644
 #: wiimotedev/wiimotesettingspage.cpp:101
@@ -4998,10 +4832,6 @@ msgstr "För att streama från Subsonics servrar krävs en giltig licens efter e
 #: ../bin/src/ui_magnatunesettingspage.h:160
 msgid "Streaming membership"
 msgstr "Strömmningsmedlemskap"
-
-#: internet/grooveshark/groovesharkservice.cpp:659
-msgid "Subscribed playlists"
-msgstr "Bevakade spellistor"
 
 #: ../bin/src/ui_podcastinfowidget.h:196
 msgid "Subscribers"
@@ -5245,12 +5075,6 @@ msgstr "Denna typ av enhet är inte stödd: %1"
 msgid "Title"
 msgstr "Titel"
 
-#: internet/grooveshark/groovesharkservice.cpp:1056
-msgid ""
-"To start Grooveshark radio, you should first listen to a few other "
-"Grooveshark songs"
-msgstr "För att starta Groovesharkradio bör du först ha lyssnat på några låtar från Grooveshark."
-
 #: core/utilities.cpp:137 core/utilities.cpp:149
 msgid "Today"
 msgstr "Idag"
@@ -5406,10 +5230,6 @@ msgstr "Kommande konserter"
 msgid "Update"
 msgstr "Uppdatering"
 
-#: internet/grooveshark/groovesharkservice.cpp:1228
-msgid "Update Grooveshark playlist"
-msgstr "Uppdatera Groovesharkspellista "
-
 #: internet/podcasts/podcastservice.cpp:419
 msgid "Update all podcasts"
 msgstr "Uppdatera alla podsändningar"
@@ -5520,16 +5340,10 @@ msgstr "Använd ljudnormalisering"
 msgid "Used"
 msgstr "Använd"
 
-#: internet/grooveshark/groovesharkservice.cpp:408
-#, qt-format
-msgid "User %1 doesn't have a Grooveshark Anywhere account"
-msgstr "Användaren %1 har inte ett Grooveshark Anywhere konto"
-
-#: ui/settingsdialog.cpp:156
+#: ui/settingsdialog.cpp:155
 msgid "User interface"
 msgstr "Användargränssnitt"
 
-#: ../bin/src/ui_groovesharksettingspage.h:142
 #: ../bin/src/ui_magnatunesettingspage.h:163
 #: ../bin/src/ui_spotifysettingspage.h:209
 #: ../bin/src/ui_subsonicsettingspage.h:127
@@ -5801,10 +5615,6 @@ msgid ""
 "Clementine wiki</a> for more information.\n"
 msgstr "Du kan använda din Wii-kontroll som en fjärrkontroll för Clementine. <a href=\"http://www.clementine-player.org/wiimote\">Se sidan på Clementine-wikin</a> för mer information.\n"
 
-#: internet/grooveshark/groovesharksettingspage.cpp:113
-msgid "You do not have a Grooveshark Anywhere account."
-msgstr "Du har inte ett Grooveshark Anywhere konto."
-
 #: internet/spotify/spotifysettingspage.cpp:149
 msgid "You do not have a Spotify Premium account."
 msgstr "Du har inget Spotify Premium konto"
@@ -5875,7 +5685,6 @@ msgstr "Dina skrobblingar: %1"
 msgid "Your system is missing OpenGL support, visualizations are unavailable."
 msgstr "Ditt system saknar OpenGL support, visualiseringar är inte tillgängliga."
 
-#: internet/grooveshark/groovesharksettingspage.cpp:118
 #: internet/spotify/spotifysettingspage.cpp:155
 msgid "Your username or password was incorrect."
 msgstr "Ditt användarnamn eller lösenord var felaktigt"

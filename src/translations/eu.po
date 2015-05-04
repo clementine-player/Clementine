@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2015-04-17 12:11+0000\n"
+"PO-Revision-Date: 2015-05-01 12:23+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Basque (http://www.transifex.com/projects/p/clementine/language/eu/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -320,10 +320,6 @@ msgid ""
 "<p>If you surround sections of text that contain a token with curly-braces, that section will be hidden if the token is empty.</p>"
 msgstr "<p>Tokenak %-rekin hasten dira, adibidez: %artista %albuma %titulua</p>\n\n<p>Tokena duten testu zatiak giltzekin inguratzen badituzu, zati hori ezkutaturik egongo da tokena hutsik badago.</p>"
 
-#: internet/grooveshark/groovesharksettingspage.cpp:123
-msgid "A Grooveshark Anywhere account is required."
-msgstr "Beharrezkoa da Grooveshark Anywhere kontua izatea"
-
 #: internet/spotify/spotifysettingspage.cpp:166
 msgid "A Spotify Premium account is required."
 msgstr "Beharrezkoa da Spotify Premium kontua izatea."
@@ -394,7 +390,6 @@ msgstr "Qt-ri buruz..."
 msgid "Absolute"
 msgstr ""
 
-#: ../bin/src/ui_groovesharksettingspage.h:141
 #: ../bin/src/ui_magnatunesettingspage.h:155
 #: ../bin/src/ui_spotifysettingspage.h:208
 #: ../bin/src/ui_lastfmsettingspage.h:151 ../bin/src/ui_vksettingspage.h:217
@@ -576,14 +571,6 @@ msgstr ""
 msgid "Add stream..."
 msgstr "Gehitu jarioa..."
 
-#: internet/grooveshark/groovesharkservice.cpp:1127
-msgid "Add to Grooveshark favorites"
-msgstr "Gehitu Grooveshark-eko gogokoenetara"
-
-#: internet/grooveshark/groovesharkservice.cpp:1142
-msgid "Add to Grooveshark playlists"
-msgstr "Gehitu Grooveshark-eko erreprodukzio-zerrendetara"
-
 #: internet/vk/vkservice.cpp:312
 msgid "Add to My Music"
 msgstr ""
@@ -644,14 +631,6 @@ msgstr "Gaur gehitua"
 #: ../bin/src/ui_libraryfilterwidget.h:92
 msgid "Added within three months"
 msgstr "Azken hiru hilabeteetan gehitua"
-
-#: internet/grooveshark/groovesharkservice.cpp:1425
-msgid "Adding song to My Music"
-msgstr "Abestia Nire Musikara gehitzen"
-
-#: internet/grooveshark/groovesharkservice.cpp:1402
-msgid "Adding song to favorites"
-msgstr "Abestia gogokoenetara gehitzen"
 
 #: library/libraryfilterwidget.cpp:142
 msgid "Advanced grouping..."
@@ -775,7 +754,7 @@ msgstr "Beti hasi erreproduzitzen"
 msgid "Amazon Cloud Drive"
 msgstr ""
 
-#: internet/spotify/spotifyblobdownloader.cpp:67
+#: internet/spotify/spotifyblobdownloader.cpp:76
 msgid ""
 "An additional plugin is required to use Spotify in Clementine.  Would you "
 "like to download and install it now?"
@@ -830,10 +809,6 @@ msgstr "Konpresioa aplikatu laburketak ekiditeko"
 #, qt-format
 msgid "Are you sure you want to delete the \"%1\" preset?"
 msgstr "\"%1\" aurrezarpena ezabatu?"
-
-#: internet/grooveshark/groovesharkservice.cpp:1324
-msgid "Are you sure you want to delete this playlist?"
-msgstr "Erreprodukzio-zerrenda hau ezabatu?"
 
 #: ui/edittagdialog.cpp:798
 msgid "Are you sure you want to reset this song's statistics?"
@@ -1034,7 +1009,7 @@ msgstr "Arakatu..."
 msgid "Buffer duration"
 msgstr ""
 
-#: engines/gstengine.cpp:884
+#: engines/gstengine.cpp:904
 msgid "Buffering"
 msgstr "Bufferra betetzen"
 
@@ -1049,10 +1024,6 @@ msgstr "Baina iturri hauek desgaiturik daude:"
 #: ../bin/src/ui_wiimotesettingspage.h:192
 msgid "Buttons"
 msgstr "Botoiak"
-
-#: ../bin/src/ui_groovesharksettingspage.h:139
-msgid "By default, Grooveshark sorts songs on date added"
-msgstr ""
 
 #: core/song.cpp:419
 msgid "CDDA"
@@ -1075,7 +1046,7 @@ msgstr ""
 msgid "Caching %1"
 msgstr ""
 
-#: internet/spotify/spotifyblobdownloader.cpp:52
+#: internet/spotify/spotifyblobdownloader.cpp:61
 msgid "Cancel"
 msgstr "Utzi"
 
@@ -1139,7 +1110,7 @@ msgstr ""
 msgid "Choose a name for your smart playlist"
 msgstr "Erreprodukzio-zerrenda adimendunaren izena hautatu"
 
-#: engines/gstengine.cpp:905
+#: engines/gstengine.cpp:925
 msgid "Choose automatically"
 msgstr "Automatikoki hautatu"
 
@@ -1348,10 +1319,6 @@ msgstr "Konpositorea"
 msgid "Configure %1..."
 msgstr "%1 konfiguratu..."
 
-#: internet/grooveshark/groovesharkservice.cpp:566
-msgid "Configure Grooveshark..."
-msgstr "Konfiguratu Grooveshark..."
-
 #: internet/magnatune/magnatuneservice.cpp:290
 msgid "Configure Magnatune..."
 msgstr "Konfiguratu Magnatune..."
@@ -1535,11 +1502,6 @@ msgstr "%1-(e)tik ezarritako azalak"
 msgid "Covers from %1"
 msgstr "%1-(e)ko azalak"
 
-#: internet/grooveshark/groovesharkservice.cpp:534
-#: internet/grooveshark/groovesharkservice.cpp:1276
-msgid "Create a new Grooveshark playlist"
-msgstr "Grooveshark-eko erreprodukzio-zerrenda berria sortu"
-
 #: ../bin/src/ui_playbacksettingspage.h:315
 msgid "Cross-fade when changing tracks automatically"
 msgstr "Iraungi automatikoki kantak aldatzen direnean"
@@ -1683,7 +1645,7 @@ msgstr "Bolumena jaitsi"
 msgid "Default background image"
 msgstr "Atzeko planoko irudi lehenetsia"
 
-#: engines/gstengine.cpp:930
+#: engines/gstengine.cpp:950
 #, qt-format
 msgid "Default device on %1"
 msgstr ""
@@ -1700,11 +1662,6 @@ msgstr "Bistaratzeen arteko atzerapena"
 #: ../bin/src/ui_playlistlistcontainer.h:131
 msgid "Delete"
 msgstr "Ezabatu"
-
-#: internet/grooveshark/groovesharkservice.cpp:537
-#: internet/grooveshark/groovesharkservice.cpp:1323
-msgid "Delete Grooveshark playlist"
-msgstr "Ezabatu Grooveshark-eko erreprodukzio-zerrenda"
 
 #: internet/podcasts/podcastservice.cpp:433
 msgid "Delete downloaded data"
@@ -1979,7 +1936,7 @@ msgstr "Jamendo katalogoa deskargatzen"
 msgid "Downloading Magnatune catalogue"
 msgstr "Magnatune katalogoa deskargatzen"
 
-#: internet/spotify/spotifyblobdownloader.cpp:51
+#: internet/spotify/spotifyblobdownloader.cpp:60
 msgid "Downloading Spotify plugin"
 msgstr "Spotify plugina deskargatzen"
 
@@ -2153,7 +2110,6 @@ msgstr "--log-levels *:1-en baliokidea"
 msgid "Equivalent to --log-levels *:3"
 msgstr "--log-levels *:3-en baliokidea"
 
-#: internet/grooveshark/groovesharkservice.cpp:1055
 #: internet/magnatune/magnatunedownloaddialog.cpp:242
 #: library/libraryview.cpp:630 ui/mainwindow.cpp:1910 ui/mainwindow.cpp:2157
 #: ui/mainwindow.cpp:2305 internet/vk/vkservice.cpp:625
@@ -2176,7 +2132,7 @@ msgstr "Errorea abestiak kopiatzean"
 msgid "Error deleting songs"
 msgstr "Errorea abestiak ezabatzean"
 
-#: internet/spotify/spotifyblobdownloader.cpp:222
+#: internet/spotify/spotifyblobdownloader.cpp:267
 msgid "Error downloading Spotify plugin"
 msgstr "Errorea Spotify plugin-a deskargatzean"
 
@@ -2349,10 +2305,6 @@ msgstr "RSS kanal honen XML ezin izan da parseatu"
 #: ../bin/src/ui_transcoderoptionsmp3.h:200
 msgid "Fast"
 msgstr "Azkarra"
-
-#: internet/grooveshark/groovesharkservice.cpp:645
-msgid "Favorites"
-msgstr "Gogokoenak"
 
 #: library/library.cpp:88
 msgid "Favourite tracks"
@@ -2532,7 +2484,7 @@ msgstr "Baxu osoak + Altua"
 msgid "Full Treble"
 msgstr "Altu osoak"
 
-#: ui/settingsdialog.cpp:142
+#: ui/settingsdialog.cpp:141
 msgid "General"
 msgstr "Orokorra"
 
@@ -2547,15 +2499,6 @@ msgstr "Ezarpen orokorrak"
 msgid "Genre"
 msgstr "Generoa"
 
-#: internet/grooveshark/groovesharkservice.cpp:556
-msgid "Get a URL to share this Grooveshark playlist"
-msgstr "URL bat lortu erreprodukzio-zerrenda hau Grooveshark-en partekatzeko"
-
-#: internet/grooveshark/groovesharkservice.cpp:553
-#: internet/grooveshark/groovesharkservice.cpp:1155
-msgid "Get a URL to share this Grooveshark song"
-msgstr "URL bat lortu abesti hau Grooveshark-en partekatzeko"
-
 #: internet/spotify/spotifyservice.cpp:633
 #: internet/spotify/spotifyservice.cpp:674
 msgid "Get a URL to share this Spotify song"
@@ -2564,10 +2507,6 @@ msgstr ""
 #: internet/spotify/spotifyservice.cpp:665
 msgid "Get a URL to share this playlist"
 msgstr ""
-
-#: internet/grooveshark/groovesharkservice.cpp:830
-msgid "Getting Grooveshark popular songs"
-msgstr "Grooveshark-eko abesti ezagunak eskuratzen"
 
 #: internet/somafm/somafmservice.cpp:120
 msgid "Getting channels"
@@ -2606,26 +2545,6 @@ msgstr "%2-(e)tik %1 azal eskuratu dira (%3-(e)k huts egin dute)"
 #: ../bin/src/ui_behavioursettingspage.h:274
 msgid "Grey out non existent songs in my playlists"
 msgstr "Existitzen ez diren abestiak ilundu erreprodukzio-zerrendetan"
-
-#: ../bin/src/ui_groovesharksettingspage.h:137
-msgid "Grooveshark"
-msgstr "Grooveshark"
-
-#: internet/grooveshark/groovesharkservice.cpp:413
-msgid "Grooveshark login error"
-msgstr "Grooveshark-eko saio-hasierak huts egin du"
-
-#: internet/grooveshark/groovesharkservice.cpp:1206
-msgid "Grooveshark playlist's URL"
-msgstr "Grooveshark-eko erreprodukzio-zerrendaren URLa"
-
-#: internet/grooveshark/groovesharkservice.cpp:625
-msgid "Grooveshark radio"
-msgstr "Grooveshark irratia"
-
-#: internet/grooveshark/groovesharkservice.cpp:1184
-msgid "Grooveshark song's URL"
-msgstr "Grooveshark-eko kantaren URLa"
 
 #: ../bin/src/ui_groupbydialog.h:124
 msgid "Group Library by..."
@@ -2848,7 +2767,7 @@ msgstr "Osotasunaren egiaztapena"
 msgid "Internet"
 msgstr "Internet"
 
-#: ui/settingsdialog.cpp:165
+#: ui/settingsdialog.cpp:164
 msgid "Internet providers"
 msgstr "Internet hornitzaileak"
 
@@ -2884,10 +2803,6 @@ msgstr "Zerbitzu baliogabea"
 #: internet/lastfm/lastfmservice.cpp:238
 msgid "Invalid session key"
 msgstr "Sesio-gako baliogabea"
-
-#: internet/grooveshark/groovesharkservice.cpp:405
-msgid "Invalid username and/or password"
-msgstr "Erabiltzaile-izen edota pasahitz baliogabea"
 
 #: ../bin/src/ui_ripcddialog.h:312
 msgid "Invert Selection"
@@ -3053,11 +2968,6 @@ msgstr "Bilatu bilduman"
 msgid "Limits"
 msgstr "Limiteak"
 
-#: internet/grooveshark/groovesharkservice.cpp:627
-msgid ""
-"Listen to Grooveshark songs based on what you've listened to previously"
-msgstr "Entzun Grooveshark-eko abestiak aurretik entzun duzunean oinarrituz"
-
 #: ui/equalizer.cpp:137
 msgid "Live"
 msgstr "Zuzenean"
@@ -3132,7 +3042,6 @@ msgid "Loads files/URLs, replacing current playlist"
 msgstr "Fitxategiak/URLak kargatzen ditu, momentuko erreprodukzio-zerrenda ordezkatuz"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:163
-#: ../bin/src/ui_groovesharksettingspage.h:144
 #: ../bin/src/ui_magnatunesettingspage.h:164
 #: ../bin/src/ui_soundcloudsettingspage.h:106
 #: ../bin/src/ui_spotifysettingspage.h:211
@@ -3393,7 +3302,6 @@ msgstr "Mututu"
 msgid "My Albums"
 msgstr ""
 
-#: internet/grooveshark/groovesharkservice.cpp:634
 #: internet/vk/vkservice.cpp:878
 msgid "My Music"
 msgstr "Nire Musika"
@@ -3402,9 +3310,8 @@ msgstr "Nire Musika"
 msgid "My Recommendations"
 msgstr "Nire gomendioak"
 
-#: internet/grooveshark/groovesharkservice.cpp:1277
-#: internet/grooveshark/groovesharkservice.cpp:1372 ui/equalizer.cpp:205
-#: ../bin/src/ui_deviceproperties.h:369 ../bin/src/ui_wizardfinishpage.h:84
+#: ui/equalizer.cpp:205 ../bin/src/ui_deviceproperties.h:369
+#: ../bin/src/ui_wizardfinishpage.h:84
 msgid "Name"
 msgstr "Izena"
 
@@ -3635,7 +3542,6 @@ msgid "Opacity"
 msgstr ""
 
 #: internet/digitally/digitallyimportedservicebase.cpp:176
-#: internet/grooveshark/groovesharkservice.cpp:560
 #: internet/icecast/icecastservice.cpp:302
 #: internet/jamendo/jamendoservice.cpp:434
 #: internet/magnatune/magnatuneservice.cpp:284
@@ -3771,7 +3677,6 @@ msgstr "Jamendoko katalogoa analizatzen"
 msgid "Party"
 msgstr "Jaia"
 
-#: ../bin/src/ui_groovesharksettingspage.h:143
 #: ../bin/src/ui_magnatunesettingspage.h:165
 #: ../bin/src/ui_spotifysettingspage.h:210
 #: ../bin/src/ui_subsonicsettingspage.h:128
@@ -3862,7 +3767,6 @@ msgstr "Erreprodukzio-zerrendaren aukerak"
 msgid "Playlist type"
 msgstr "Erreprodukzio-zerrenda mota"
 
-#: internet/grooveshark/groovesharkservice.cpp:655
 #: internet/soundcloud/soundcloudservice.cpp:130 ui/mainwindow.cpp:241
 msgid "Playlists"
 msgstr "Erreprodukzio-zerrendak"
@@ -3884,18 +3788,6 @@ msgstr "Podcast-ak"
 msgid "Pop"
 msgstr "Pop"
 
-#: internet/grooveshark/groovesharkservice.cpp:592
-msgid "Popular songs"
-msgstr "Abesti ezagunak"
-
-#: internet/grooveshark/groovesharkservice.cpp:596
-msgid "Popular songs of the Month"
-msgstr "Hilabeteko abesti ezagunak"
-
-#: internet/grooveshark/groovesharkservice.cpp:605
-msgid "Popular songs today"
-msgstr "Abesti ezagunak gaur"
-
 #: ../bin/src/ui_notificationssettingspage.h:444
 msgid "Popup duration"
 msgstr "Laster-leihoaren iraupena"
@@ -3914,7 +3806,6 @@ msgid "Preference"
 msgstr ""
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:166
-#: ../bin/src/ui_groovesharksettingspage.h:145
 #: ../bin/src/ui_magnatunesettingspage.h:166
 #: ../bin/src/ui_spotifysettingspage.h:216 ../bin/src/ui_settingsdialog.h:116
 #: ../bin/src/ui_lastfmsettingspage.h:155 ../bin/src/ui_vksettingspage.h:220
@@ -4049,10 +3940,6 @@ msgstr "Pista ilaran jarri"
 msgid "Radio (equal loudness for all tracks)"
 msgstr "Irratia (ozentasun berdina pista denentzat)"
 
-#: internet/grooveshark/groovesharkservice.cpp:614
-msgid "Radios"
-msgstr "Irratiak"
-
 #: core/backgroundstreams.cpp:47
 msgid "Rain"
 msgstr "Euria"
@@ -4102,10 +3989,6 @@ msgstr "Benetan utzi?"
 #: internet/subsonic/subsonicsettingspage.cpp:157
 msgid "Redirect limit exceeded, verify server configuration."
 msgstr ""
-
-#: internet/grooveshark/groovesharkservice.cpp:562
-msgid "Refresh"
-msgstr "Freskatu"
 
 #: internet/jamendo/jamendoservice.cpp:437
 #: internet/magnatune/magnatuneservice.cpp:287
@@ -4163,7 +4046,6 @@ msgstr "Abesti bikoiztuak kendu erreprodukzio-zerrendatik "
 msgid "Remove folder"
 msgstr "Kendu karpeta"
 
-#: internet/grooveshark/groovesharkservice.cpp:550
 #: internet/vk/vkservice.cpp:316
 msgid "Remove from My Music"
 msgstr "Nire Musikatik kendu"
@@ -4172,11 +4054,6 @@ msgstr "Nire Musikatik kendu"
 msgid "Remove from bookmarks"
 msgstr ""
 
-#: internet/grooveshark/groovesharkservice.cpp:547
-msgid "Remove from favorites"
-msgstr "Kendu gogokoenetatik"
-
-#: internet/grooveshark/groovesharkservice.cpp:544
 #: internet/spotify/spotifyservice.cpp:672 ../bin/src/ui_mainwindow.h:685
 msgid "Remove from playlist"
 msgstr "Kendu erreprodukzio-zerrendatik"
@@ -4192,23 +4069,6 @@ msgstr ""
 #: ../bin/src/ui_mainwindow.h:717
 msgid "Remove unavailable tracks from playlist"
 msgstr ""
-
-#: internet/grooveshark/groovesharkservice.cpp:1571
-msgid "Removing songs from My Music"
-msgstr "Abestiak Nire Musikatik kentzen"
-
-#: internet/grooveshark/groovesharkservice.cpp:1519
-msgid "Removing songs from favorites"
-msgstr "Abestiak gogokoenetatik kentzen"
-
-#: internet/grooveshark/groovesharkservice.cpp:1371
-#, qt-format
-msgid "Rename \"%1\" playlist"
-msgstr "Berrizendatu \"%1\" erreprodukzio-zerrenda"
-
-#: internet/grooveshark/groovesharkservice.cpp:540
-msgid "Rename Grooveshark playlist"
-msgstr "Berrizendatu Grooveshark-eko erreprodukzio-zerrenda"
 
 #: playlist/playlisttabbar.cpp:146
 msgid "Rename playlist"
@@ -4292,18 +4152,6 @@ msgstr "Mugatu ASCII karaktereetara"
 #: ../bin/src/ui_behavioursettingspage.h:273
 msgid "Resume playback on start"
 msgstr ""
-
-#: internet/grooveshark/groovesharkservice.cpp:796
-msgid "Retrieving Grooveshark My Music songs"
-msgstr "Grooveshark-eko Nire Musikako abestiak berreskuratzen"
-
-#: internet/grooveshark/groovesharkservice.cpp:763
-msgid "Retrieving Grooveshark favorites songs"
-msgstr "Grooveshark-eko abesti gogokoenak eskuratzen"
-
-#: internet/grooveshark/groovesharkservice.cpp:694
-msgid "Retrieving Grooveshark playlists"
-msgstr "Grooveshark-eko erreprodukzio-zerrendak eskuratzen"
 
 #: ../data/oauthsuccess.html:5
 msgid "Return to Clementine"
@@ -4488,7 +4336,6 @@ msgstr "Bilaketa-modua"
 msgid "Search options"
 msgstr "Bilaketa-aukerak"
 
-#: internet/grooveshark/groovesharkservice.cpp:583
 #: internet/soundcloud/soundcloudservice.cpp:116
 #: internet/spotify/spotifyservice.cpp:406
 msgid "Search results"
@@ -4498,10 +4345,6 @@ msgstr "Bilaketaren emaitzak"
 #: ../bin/src/ui_querysearchpage.h:120
 msgid "Search terms"
 msgstr "Bilaketa terminoak"
-
-#: internet/grooveshark/groovesharkservice.cpp:275
-msgid "Searching on Grooveshark"
-msgstr "Grooveshark-en bilatzen"
 
 #: ../bin/src/ui_groupbydialog.h:140
 msgid "Second level"
@@ -4852,10 +4695,6 @@ msgstr "Ordenatu generoaren arabera (ospearen arabera)"
 msgid "Sort by station name"
 msgstr "Ordenatu irrati izenaren arabera"
 
-#: ../bin/src/ui_groovesharksettingspage.h:146
-msgid "Sort playlists songs alphabetically"
-msgstr ""
-
 #: ../bin/src/ui_querysortpage.h:140
 msgid "Sort songs by"
 msgstr "Ordenatu abestiak honen arabera"
@@ -4897,7 +4736,7 @@ msgstr ""
 msgid "Spotify plugin"
 msgstr "Spotify plugina"
 
-#: internet/spotify/spotifyblobdownloader.cpp:66
+#: internet/spotify/spotifyblobdownloader.cpp:75
 msgid "Spotify plugin not installed"
 msgstr "Spotify plugina ez dago instalatuta"
 
@@ -4925,7 +4764,6 @@ msgstr "Hasi oraingo erreprodukzio-zerrenda"
 msgid "Start transcoding"
 msgstr "Hasi transkodetzen"
 
-#: internet/grooveshark/groovesharkservice.cpp:585
 #: internet/soundcloud/soundcloudservice.cpp:118
 #: internet/spotify/spotifyservice.cpp:408
 msgid ""
@@ -4941,10 +4779,6 @@ msgstr "%1 hasten"
 #: internet/magnatune/magnatunedownloaddialog.cpp:124
 msgid "Starting..."
 msgstr "Hasten..."
-
-#: internet/grooveshark/groovesharkservice.cpp:618
-msgid "Stations"
-msgstr "Irratiak"
 
 #: core/globalshortcuts.cpp:53 ../bin/src/ui_mainwindow.h:644
 #: wiimotedev/wiimotesettingspage.cpp:101
@@ -4989,10 +4823,6 @@ msgstr ""
 #: ../bin/src/ui_magnatunesettingspage.h:160
 msgid "Streaming membership"
 msgstr "Streaming bazkidetza"
-
-#: internet/grooveshark/groovesharkservice.cpp:659
-msgid "Subscribed playlists"
-msgstr "Harpidetutako erreprodukzio-zerrenda"
 
 #: ../bin/src/ui_podcastinfowidget.h:196
 msgid "Subscribers"
@@ -5236,12 +5066,6 @@ msgstr "Gailu mota hau ez da onartzen :%1"
 msgid "Title"
 msgstr "Izenburua"
 
-#: internet/grooveshark/groovesharkservice.cpp:1056
-msgid ""
-"To start Grooveshark radio, you should first listen to a few other "
-"Grooveshark songs"
-msgstr "Grooveshark irratia hasteko, aurretik beste Grooveshark abesti batzuk entzun behar dituzu"
-
 #: core/utilities.cpp:137 core/utilities.cpp:149
 msgid "Today"
 msgstr "Gaur"
@@ -5397,10 +5221,6 @@ msgstr "Hurrengo Kontzertuak"
 msgid "Update"
 msgstr ""
 
-#: internet/grooveshark/groovesharkservice.cpp:1228
-msgid "Update Grooveshark playlist"
-msgstr "Grooveshark erreprodukzio-zerrenda eguneratu"
-
 #: internet/podcasts/podcastservice.cpp:419
 msgid "Update all podcasts"
 msgstr "Eguneratu podcast guztiak"
@@ -5511,16 +5331,10 @@ msgstr "Erabili bolumenaren normalizazioa"
 msgid "Used"
 msgstr "Erabilia"
 
-#: internet/grooveshark/groovesharkservice.cpp:408
-#, qt-format
-msgid "User %1 doesn't have a Grooveshark Anywhere account"
-msgstr "%1 erabiltzaileak ez du Grooveshark Anywhere konturik"
-
-#: ui/settingsdialog.cpp:156
+#: ui/settingsdialog.cpp:155
 msgid "User interface"
 msgstr "Erabiltzaile-interfazea"
 
-#: ../bin/src/ui_groovesharksettingspage.h:142
 #: ../bin/src/ui_magnatunesettingspage.h:163
 #: ../bin/src/ui_spotifysettingspage.h:209
 #: ../bin/src/ui_subsonicsettingspage.h:127
@@ -5792,10 +5606,6 @@ msgid ""
 "Clementine wiki</a> for more information.\n"
 msgstr "Zure Wii urruneko kontrola erabili dezakezu Clementine kontrolatzeko. Ikus <a href=\"http://www.clementine-player.org/wiimote\">Clementine-ren wikiko orria</a> informazio gehiagorako. \n"
 
-#: internet/grooveshark/groovesharksettingspage.cpp:113
-msgid "You do not have a Grooveshark Anywhere account."
-msgstr "Ez daukazu Grooveshark Anywhere konturik."
-
 #: internet/spotify/spotifysettingspage.cpp:149
 msgid "You do not have a Spotify Premium account."
 msgstr "Ez daukazu Spotify Premium konturik."
@@ -5866,7 +5676,6 @@ msgstr "Partekatzeak: %1"
 msgid "Your system is missing OpenGL support, visualizations are unavailable."
 msgstr "Zure sistema ez da bateragarria OpenGL-rekin, bistaratzeak erabilezinak daude."
 
-#: internet/grooveshark/groovesharksettingspage.cpp:118
 #: internet/spotify/spotifysettingspage.cpp:155
 msgid "Your username or password was incorrect."
 msgstr "Erabiltzaile-izena edo pasahitza ez zen zuzena."

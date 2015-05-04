@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2015-04-17 12:11+0000\n"
+"PO-Revision-Date: 2015-05-01 12:23+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Galician (http://www.transifex.com/projects/p/clementine/language/gl/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -320,10 +320,6 @@ msgid ""
 "<p>If you surround sections of text that contain a token with curly-braces, that section will be hidden if the token is empty.</p>"
 msgstr "<p>As marcas de substitución comezan con %. Por exemplo: %artist %album %title.</p>\n<p>Se rodea seccións de texto que conteñen unha marca de substitución, esa sección non se amosará se a marca de substitución estará baleira.</p>"
 
-#: internet/grooveshark/groovesharksettingspage.cpp:123
-msgid "A Grooveshark Anywhere account is required."
-msgstr "Requírese unha conta Grooveshark Anywhere"
-
 #: internet/spotify/spotifysettingspage.cpp:166
 msgid "A Spotify Premium account is required."
 msgstr "Precisas ter unha conta Premium en Spotify"
@@ -394,7 +390,6 @@ msgstr "Acerca Qt..."
 msgid "Absolute"
 msgstr ""
 
-#: ../bin/src/ui_groovesharksettingspage.h:141
 #: ../bin/src/ui_magnatunesettingspage.h:155
 #: ../bin/src/ui_spotifysettingspage.h:208
 #: ../bin/src/ui_lastfmsettingspage.h:151 ../bin/src/ui_vksettingspage.h:217
@@ -576,14 +571,6 @@ msgstr ""
 msgid "Add stream..."
 msgstr "Engadir fluxo..."
 
-#: internet/grooveshark/groovesharkservice.cpp:1127
-msgid "Add to Grooveshark favorites"
-msgstr "Engadir aos favoritos en Grooveshark"
-
-#: internet/grooveshark/groovesharkservice.cpp:1142
-msgid "Add to Grooveshark playlists"
-msgstr "Engadir ás listas en Grooveshark"
-
 #: internet/vk/vkservice.cpp:312
 msgid "Add to My Music"
 msgstr ""
@@ -644,14 +631,6 @@ msgstr "Engadido hoxe"
 #: ../bin/src/ui_libraryfilterwidget.h:92
 msgid "Added within three months"
 msgstr "Engadido os derradeiros tres meses"
-
-#: internet/grooveshark/groovesharkservice.cpp:1425
-msgid "Adding song to My Music"
-msgstr "Engadir á música persoal"
-
-#: internet/grooveshark/groovesharkservice.cpp:1402
-msgid "Adding song to favorites"
-msgstr "Engadir aos favoritos"
 
 #: library/libraryfilterwidget.cpp:142
 msgid "Advanced grouping..."
@@ -775,7 +754,7 @@ msgstr "Sempre comezar reproducindo"
 msgid "Amazon Cloud Drive"
 msgstr ""
 
-#: internet/spotify/spotifyblobdownloader.cpp:67
+#: internet/spotify/spotifyblobdownloader.cpp:76
 msgid ""
 "An additional plugin is required to use Spotify in Clementine.  Would you "
 "like to download and install it now?"
@@ -830,10 +809,6 @@ msgstr "Aplicar compresión para evitar clipping"
 #, qt-format
 msgid "Are you sure you want to delete the \"%1\" preset?"
 msgstr "Está certo que quer apagar o \"%1\" predefinido?"
-
-#: internet/grooveshark/groovesharkservice.cpp:1324
-msgid "Are you sure you want to delete this playlist?"
-msgstr "Está seguro de que quere eliminar a lista?"
 
 #: ui/edittagdialog.cpp:798
 msgid "Are you sure you want to reset this song's statistics?"
@@ -1034,7 +1009,7 @@ msgstr "Examinar..."
 msgid "Buffer duration"
 msgstr "Duración de almacenado en búfer"
 
-#: engines/gstengine.cpp:884
+#: engines/gstengine.cpp:904
 msgid "Buffering"
 msgstr "Almacenando no búfer…"
 
@@ -1049,10 +1024,6 @@ msgstr "Pero as seguintes orixes están desactivadas:"
 #: ../bin/src/ui_wiimotesettingspage.h:192
 msgid "Buttons"
 msgstr "Botóns"
-
-#: ../bin/src/ui_groovesharksettingspage.h:139
-msgid "By default, Grooveshark sorts songs on date added"
-msgstr ""
 
 #: core/song.cpp:419
 msgid "CDDA"
@@ -1075,7 +1046,7 @@ msgstr ""
 msgid "Caching %1"
 msgstr ""
 
-#: internet/spotify/spotifyblobdownloader.cpp:52
+#: internet/spotify/spotifyblobdownloader.cpp:61
 msgid "Cancel"
 msgstr "Cancelar"
 
@@ -1139,7 +1110,7 @@ msgstr ""
 msgid "Choose a name for your smart playlist"
 msgstr "Escolla un nome para a súa lista intelixente"
 
-#: engines/gstengine.cpp:905
+#: engines/gstengine.cpp:925
 msgid "Choose automatically"
 msgstr "Elixir automaticamente"
 
@@ -1348,10 +1319,6 @@ msgstr "Compositor"
 msgid "Configure %1..."
 msgstr "Configurar %1…"
 
-#: internet/grooveshark/groovesharkservice.cpp:566
-msgid "Configure Grooveshark..."
-msgstr "Configura Grooveshark..."
-
 #: internet/magnatune/magnatuneservice.cpp:290
 msgid "Configure Magnatune..."
 msgstr "Configura Maganatune..."
@@ -1535,11 +1502,6 @@ msgstr "Covert art montado de %1"
 msgid "Covers from %1"
 msgstr "Portadas de %1"
 
-#: internet/grooveshark/groovesharkservice.cpp:534
-#: internet/grooveshark/groovesharkservice.cpp:1276
-msgid "Create a new Grooveshark playlist"
-msgstr "Crear unha nova lista de Grooveshark"
-
 #: ../bin/src/ui_playbacksettingspage.h:315
 msgid "Cross-fade when changing tracks automatically"
 msgstr "Desvanecer ao cambiar de canción automaticamente."
@@ -1683,7 +1645,7 @@ msgstr "Diminuír o volume"
 msgid "Default background image"
 msgstr "Imaxe de fondo predeterminada"
 
-#: engines/gstengine.cpp:930
+#: engines/gstengine.cpp:950
 #, qt-format
 msgid "Default device on %1"
 msgstr ""
@@ -1700,11 +1662,6 @@ msgstr "Atraso entre as visualizacións"
 #: ../bin/src/ui_playlistlistcontainer.h:131
 msgid "Delete"
 msgstr "Eliminar"
-
-#: internet/grooveshark/groovesharkservice.cpp:537
-#: internet/grooveshark/groovesharkservice.cpp:1323
-msgid "Delete Grooveshark playlist"
-msgstr "Eliminar a lista de Grooveshark"
 
 #: internet/podcasts/podcastservice.cpp:433
 msgid "Delete downloaded data"
@@ -1979,7 +1936,7 @@ msgstr "Descargando o catálogo de Jamendo…"
 msgid "Downloading Magnatune catalogue"
 msgstr "Descargando o catálogo de Magnatune…"
 
-#: internet/spotify/spotifyblobdownloader.cpp:51
+#: internet/spotify/spotifyblobdownloader.cpp:60
 msgid "Downloading Spotify plugin"
 msgstr "Descargando o complemento de Spotify…"
 
@@ -2153,7 +2110,6 @@ msgstr "Equivalente a «--log-levels *:1»."
 msgid "Equivalent to --log-levels *:3"
 msgstr "Equivalente a «--log-levels *:3»."
 
-#: internet/grooveshark/groovesharkservice.cpp:1055
 #: internet/magnatune/magnatunedownloaddialog.cpp:242
 #: library/libraryview.cpp:630 ui/mainwindow.cpp:1910 ui/mainwindow.cpp:2157
 #: ui/mainwindow.cpp:2305 internet/vk/vkservice.cpp:625
@@ -2176,7 +2132,7 @@ msgstr "Erro ao copiar as cancións"
 msgid "Error deleting songs"
 msgstr "Erro ao eliminar as cancións"
 
-#: internet/spotify/spotifyblobdownloader.cpp:222
+#: internet/spotify/spotifyblobdownloader.cpp:267
 msgid "Error downloading Spotify plugin"
 msgstr "Erro ao baixar o engadido de Spotify"
 
@@ -2349,10 +2305,6 @@ msgstr "Non foi posíbel analizar o XML da fonte RSS."
 #: ../bin/src/ui_transcoderoptionsmp3.h:200
 msgid "Fast"
 msgstr "Rápido"
-
-#: internet/grooveshark/groovesharkservice.cpp:645
-msgid "Favorites"
-msgstr "Favoritos"
 
 #: library/library.cpp:88
 msgid "Favourite tracks"
@@ -2532,7 +2484,7 @@ msgstr "Full Bass + Treble"
 msgid "Full Treble"
 msgstr "Full Treble"
 
-#: ui/settingsdialog.cpp:142
+#: ui/settingsdialog.cpp:141
 msgid "General"
 msgstr "Xeral"
 
@@ -2547,15 +2499,6 @@ msgstr "Configuración xeral"
 msgid "Genre"
 msgstr "Xénero"
 
-#: internet/grooveshark/groovesharkservice.cpp:556
-msgid "Get a URL to share this Grooveshark playlist"
-msgstr "Obter un enderezo URL para compartir esta lista de Grooveshark"
-
-#: internet/grooveshark/groovesharkservice.cpp:553
-#: internet/grooveshark/groovesharkservice.cpp:1155
-msgid "Get a URL to share this Grooveshark song"
-msgstr "Obter un enderezo URL para compartir esta canción de Grooveshark"
-
 #: internet/spotify/spotifyservice.cpp:633
 #: internet/spotify/spotifyservice.cpp:674
 msgid "Get a URL to share this Spotify song"
@@ -2564,10 +2507,6 @@ msgstr ""
 #: internet/spotify/spotifyservice.cpp:665
 msgid "Get a URL to share this playlist"
 msgstr ""
-
-#: internet/grooveshark/groovesharkservice.cpp:830
-msgid "Getting Grooveshark popular songs"
-msgstr "Descargando as cancións populares de Grooveshark…"
 
 #: internet/somafm/somafmservice.cpp:120
 msgid "Getting channels"
@@ -2606,26 +2545,6 @@ msgstr "Descargáronse %1 das %2 portadas (quedaron %3 por descargar)."
 #: ../bin/src/ui_behavioursettingspage.h:274
 msgid "Grey out non existent songs in my playlists"
 msgstr "Marcar en gris as cancións da lista que non existan."
-
-#: ../bin/src/ui_groovesharksettingspage.h:137
-msgid "Grooveshark"
-msgstr "Grooveshark"
-
-#: internet/grooveshark/groovesharkservice.cpp:413
-msgid "Grooveshark login error"
-msgstr "Produciuse un erro ao intentar acceder a Grooveshark."
-
-#: internet/grooveshark/groovesharkservice.cpp:1206
-msgid "Grooveshark playlist's URL"
-msgstr "URL da lista de Grooveshark"
-
-#: internet/grooveshark/groovesharkservice.cpp:625
-msgid "Grooveshark radio"
-msgstr "Radio de Grooveshark"
-
-#: internet/grooveshark/groovesharkservice.cpp:1184
-msgid "Grooveshark song's URL"
-msgstr "URL da canción de Grooveshark"
 
 #: ../bin/src/ui_groupbydialog.h:124
 msgid "Group Library by..."
@@ -2848,7 +2767,7 @@ msgstr "Comprobación da integridade"
 msgid "Internet"
 msgstr "Internet"
 
-#: ui/settingsdialog.cpp:165
+#: ui/settingsdialog.cpp:164
 msgid "Internet providers"
 msgstr "Fornecedores de internet"
 
@@ -2884,10 +2803,6 @@ msgstr "Servizo Inválido"
 #: internet/lastfm/lastfmservice.cpp:238
 msgid "Invalid session key"
 msgstr "Chave de sesón non válida"
-
-#: internet/grooveshark/groovesharkservice.cpp:405
-msgid "Invalid username and/or password"
-msgstr "Nome de usuario ou contrasinal inválidos"
 
 #: ../bin/src/ui_ripcddialog.h:312
 msgid "Invert Selection"
@@ -3053,11 +2968,6 @@ msgstr "Busca na biblioteca"
 msgid "Limits"
 msgstr "Límites"
 
-#: internet/grooveshark/groovesharkservice.cpp:627
-msgid ""
-"Listen to Grooveshark songs based on what you've listened to previously"
-msgstr "Escoitar cancións de Grooveshark en base ao que escoitou previamente."
-
 #: ui/equalizer.cpp:137
 msgid "Live"
 msgstr "Ao Vivo"
@@ -3132,7 +3042,6 @@ msgid "Loads files/URLs, replacing current playlist"
 msgstr "Carga ficheiros ou enderezos URL, substituíndo a lista actual."
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:163
-#: ../bin/src/ui_groovesharksettingspage.h:144
 #: ../bin/src/ui_magnatunesettingspage.h:164
 #: ../bin/src/ui_soundcloudsettingspage.h:106
 #: ../bin/src/ui_spotifysettingspage.h:211
@@ -3393,7 +3302,6 @@ msgstr "Silencio"
 msgid "My Albums"
 msgstr ""
 
-#: internet/grooveshark/groovesharkservice.cpp:634
 #: internet/vk/vkservice.cpp:878
 msgid "My Music"
 msgstr "Música persoal"
@@ -3402,9 +3310,8 @@ msgstr "Música persoal"
 msgid "My Recommendations"
 msgstr "As miñas recomendazóns"
 
-#: internet/grooveshark/groovesharkservice.cpp:1277
-#: internet/grooveshark/groovesharkservice.cpp:1372 ui/equalizer.cpp:205
-#: ../bin/src/ui_deviceproperties.h:369 ../bin/src/ui_wizardfinishpage.h:84
+#: ui/equalizer.cpp:205 ../bin/src/ui_deviceproperties.h:369
+#: ../bin/src/ui_wizardfinishpage.h:84
 msgid "Name"
 msgstr "Nome"
 
@@ -3635,7 +3542,6 @@ msgid "Opacity"
 msgstr "Opacidade"
 
 #: internet/digitally/digitallyimportedservicebase.cpp:176
-#: internet/grooveshark/groovesharkservice.cpp:560
 #: internet/icecast/icecastservice.cpp:302
 #: internet/jamendo/jamendoservice.cpp:434
 #: internet/magnatune/magnatuneservice.cpp:284
@@ -3771,7 +3677,6 @@ msgstr "Analizando o catálogo de Jamendo"
 msgid "Party"
 msgstr "Festa"
 
-#: ../bin/src/ui_groovesharksettingspage.h:143
 #: ../bin/src/ui_magnatunesettingspage.h:165
 #: ../bin/src/ui_spotifysettingspage.h:210
 #: ../bin/src/ui_subsonicsettingspage.h:128
@@ -3862,7 +3767,6 @@ msgstr "Opcións da lista de reprodución"
 msgid "Playlist type"
 msgstr "Tipo de lista"
 
-#: internet/grooveshark/groovesharkservice.cpp:655
 #: internet/soundcloud/soundcloudservice.cpp:130 ui/mainwindow.cpp:241
 msgid "Playlists"
 msgstr "Listas de reprodución"
@@ -3884,18 +3788,6 @@ msgstr "Podcasts"
 msgid "Pop"
 msgstr "Pop"
 
-#: internet/grooveshark/groovesharkservice.cpp:592
-msgid "Popular songs"
-msgstr "Cancións populares"
-
-#: internet/grooveshark/groovesharkservice.cpp:596
-msgid "Popular songs of the Month"
-msgstr "Cancións populares do mes"
-
-#: internet/grooveshark/groovesharkservice.cpp:605
-msgid "Popular songs today"
-msgstr "Cancións populares do día"
-
 #: ../bin/src/ui_notificationssettingspage.h:444
 msgid "Popup duration"
 msgstr "Duración do diálogo"
@@ -3914,7 +3806,6 @@ msgid "Preference"
 msgstr ""
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:166
-#: ../bin/src/ui_groovesharksettingspage.h:145
 #: ../bin/src/ui_magnatunesettingspage.h:166
 #: ../bin/src/ui_spotifysettingspage.h:216 ../bin/src/ui_settingsdialog.h:116
 #: ../bin/src/ui_lastfmsettingspage.h:155 ../bin/src/ui_vksettingspage.h:220
@@ -4049,10 +3940,6 @@ msgstr "Engadir á lista"
 msgid "Radio (equal loudness for all tracks)"
 msgstr "Radio (mesmo volume para todas as pistas)"
 
-#: internet/grooveshark/groovesharkservice.cpp:614
-msgid "Radios"
-msgstr "Radios"
-
 #: core/backgroundstreams.cpp:47
 msgid "Rain"
 msgstr "Chuvia"
@@ -4102,10 +3989,6 @@ msgstr "Cancelar mesmo?"
 #: internet/subsonic/subsonicsettingspage.cpp:157
 msgid "Redirect limit exceeded, verify server configuration."
 msgstr "Excedeuse o límite de redireccións, comprobe a configuración do servidor."
-
-#: internet/grooveshark/groovesharkservice.cpp:562
-msgid "Refresh"
-msgstr "Actualizar"
 
 #: internet/jamendo/jamendoservice.cpp:437
 #: internet/magnatune/magnatuneservice.cpp:287
@@ -4163,7 +4046,6 @@ msgstr "Eliminar as entradas duplicadas da lista"
 msgid "Remove folder"
 msgstr "Eliminar cartafol"
 
-#: internet/grooveshark/groovesharkservice.cpp:550
 #: internet/vk/vkservice.cpp:316
 msgid "Remove from My Music"
 msgstr "Quitar da música persoal"
@@ -4172,11 +4054,6 @@ msgstr "Quitar da música persoal"
 msgid "Remove from bookmarks"
 msgstr ""
 
-#: internet/grooveshark/groovesharkservice.cpp:547
-msgid "Remove from favorites"
-msgstr "Retirar dos favoritos"
-
-#: internet/grooveshark/groovesharkservice.cpp:544
 #: internet/spotify/spotifyservice.cpp:672 ../bin/src/ui_mainwindow.h:685
 msgid "Remove from playlist"
 msgstr "Eliminar da lista de reprodución"
@@ -4192,23 +4069,6 @@ msgstr "Eliminar listas de reprodución"
 #: ../bin/src/ui_mainwindow.h:717
 msgid "Remove unavailable tracks from playlist"
 msgstr ""
-
-#: internet/grooveshark/groovesharkservice.cpp:1571
-msgid "Removing songs from My Music"
-msgstr "Retirando cancións da música persoal…"
-
-#: internet/grooveshark/groovesharkservice.cpp:1519
-msgid "Removing songs from favorites"
-msgstr "Retirando cancións de entre as favoritas…"
-
-#: internet/grooveshark/groovesharkservice.cpp:1371
-#, qt-format
-msgid "Rename \"%1\" playlist"
-msgstr "Renomear a lista «%1»"
-
-#: internet/grooveshark/groovesharkservice.cpp:540
-msgid "Rename Grooveshark playlist"
-msgstr "Renomear a lista de Grooveshark"
 
 #: playlist/playlisttabbar.cpp:146
 msgid "Rename playlist"
@@ -4292,18 +4152,6 @@ msgstr "Limitado a caracteres ASCII"
 #: ../bin/src/ui_behavioursettingspage.h:273
 msgid "Resume playback on start"
 msgstr "Retomar a reprodución ó inicio"
-
-#: internet/grooveshark/groovesharkservice.cpp:796
-msgid "Retrieving Grooveshark My Music songs"
-msgstr "Descargando cancións da música persoal de Grooveshark…"
-
-#: internet/grooveshark/groovesharkservice.cpp:763
-msgid "Retrieving Grooveshark favorites songs"
-msgstr "Descargando as cancións favoritas de Grooveshark…"
-
-#: internet/grooveshark/groovesharkservice.cpp:694
-msgid "Retrieving Grooveshark playlists"
-msgstr "Descargando as listas de Grooveshark…"
 
 #: ../data/oauthsuccess.html:5
 msgid "Return to Clementine"
@@ -4488,7 +4336,6 @@ msgstr "Modo búsqueda"
 msgid "Search options"
 msgstr "Opcións de búsqueda"
 
-#: internet/grooveshark/groovesharkservice.cpp:583
 #: internet/soundcloud/soundcloudservice.cpp:116
 #: internet/spotify/spotifyservice.cpp:406
 msgid "Search results"
@@ -4498,10 +4345,6 @@ msgstr "Resultados da busca"
 #: ../bin/src/ui_querysearchpage.h:120
 msgid "Search terms"
 msgstr "Termos de búsqueda"
-
-#: internet/grooveshark/groovesharkservice.cpp:275
-msgid "Searching on Grooveshark"
-msgstr "Buscando en Grooveshark…"
 
 #: ../bin/src/ui_groupbydialog.h:140
 msgid "Second level"
@@ -4852,10 +4695,6 @@ msgstr "Ordenar pola popularidade do xénero"
 msgid "Sort by station name"
 msgstr "Ordenar polo nome da emisora"
 
-#: ../bin/src/ui_groovesharksettingspage.h:146
-msgid "Sort playlists songs alphabetically"
-msgstr ""
-
 #: ../bin/src/ui_querysortpage.h:140
 msgid "Sort songs by"
 msgstr "Ordenar as cancións por:"
@@ -4897,7 +4736,7 @@ msgstr ""
 msgid "Spotify plugin"
 msgstr "Complemento de Spotify"
 
-#: internet/spotify/spotifyblobdownloader.cpp:66
+#: internet/spotify/spotifyblobdownloader.cpp:75
 msgid "Spotify plugin not installed"
 msgstr "O complemento de Spotify non está instalado."
 
@@ -4925,7 +4764,6 @@ msgstr "Reproducir a playlist actualmente reproducindo"
 msgid "Start transcoding"
 msgstr "Iniciar a conversión"
 
-#: internet/grooveshark/groovesharkservice.cpp:585
 #: internet/soundcloud/soundcloudservice.cpp:118
 #: internet/spotify/spotifyservice.cpp:408
 msgid ""
@@ -4941,10 +4779,6 @@ msgstr "Iniciando %1…"
 #: internet/magnatune/magnatunedownloaddialog.cpp:124
 msgid "Starting..."
 msgstr "Iniciando…"
-
-#: internet/grooveshark/groovesharkservice.cpp:618
-msgid "Stations"
-msgstr "Emisoras"
 
 #: core/globalshortcuts.cpp:53 ../bin/src/ui_mainwindow.h:644
 #: wiimotedev/wiimotesettingspage.cpp:101
@@ -4989,10 +4823,6 @@ msgstr "Necesitará unha licenza válida para continuar usando o servidor de Sub
 #: ../bin/src/ui_magnatunesettingspage.h:160
 msgid "Streaming membership"
 msgstr "Relación co fluxo:"
-
-#: internet/grooveshark/groovesharkservice.cpp:659
-msgid "Subscribed playlists"
-msgstr "Listas que segue"
 
 #: ../bin/src/ui_podcastinfowidget.h:196
 msgid "Subscribers"
@@ -5236,12 +5066,6 @@ msgstr "Clementine non é compatíbel con este tipo de dispositivo: %1."
 msgid "Title"
 msgstr "Título"
 
-#: internet/grooveshark/groovesharkservice.cpp:1056
-msgid ""
-"To start Grooveshark radio, you should first listen to a few other "
-"Grooveshark songs"
-msgstr "Para iniciar a radio de Grooveshark, antes debería escoitar máis cancións de Grooveshark."
-
 #: core/utilities.cpp:137 core/utilities.cpp:149
 msgid "Today"
 msgstr "Hoxe"
@@ -5397,10 +5221,6 @@ msgstr "Vindeiros concertos"
 msgid "Update"
 msgstr ""
 
-#: internet/grooveshark/groovesharkservice.cpp:1228
-msgid "Update Grooveshark playlist"
-msgstr "Actualizar a lista de Grooveshark"
-
 #: internet/podcasts/podcastservice.cpp:419
 msgid "Update all podcasts"
 msgstr "Actualizar todos os podcasts"
@@ -5511,16 +5331,10 @@ msgstr "Empregar a normalización do volume."
 msgid "Used"
 msgstr "Empregado"
 
-#: internet/grooveshark/groovesharkservice.cpp:408
-#, qt-format
-msgid "User %1 doesn't have a Grooveshark Anywhere account"
-msgstr "O usuario «%1» non ten conta de Grooveshark Anywhere («Grooveshark en calquera parte»)."
-
-#: ui/settingsdialog.cpp:156
+#: ui/settingsdialog.cpp:155
 msgid "User interface"
 msgstr "Interface de usuario"
 
-#: ../bin/src/ui_groovesharksettingspage.h:142
 #: ../bin/src/ui_magnatunesettingspage.h:163
 #: ../bin/src/ui_spotifysettingspage.h:209
 #: ../bin/src/ui_subsonicsettingspage.h:127
@@ -5792,10 +5606,6 @@ msgid ""
 "Clementine wiki</a> for more information.\n"
 msgstr "Pode empregar os mandos da Wii para controlar Clementine. Para máis información, consulte <a href=\"http://www.clementine-player.org/wiimote\">o wiki de Clementine</a>.\n"
 
-#: internet/grooveshark/groovesharksettingspage.cpp:113
-msgid "You do not have a Grooveshark Anywhere account."
-msgstr "Carece vostede dunha conta de Grooveshark Anywhere («Grooveshark en calquera parte»)."
-
 #: internet/spotify/spotifysettingspage.cpp:149
 msgid "You do not have a Spotify Premium account."
 msgstr "Carece vostede dunha conta preferente de Spotify."
@@ -5866,7 +5676,6 @@ msgstr "Escoitas: %1"
 msgid "Your system is missing OpenGL support, visualizations are unavailable."
 msgstr "O seu sistema non é compatíbel con OpenGL, así que as visualizacións non estarán dispoñíbeis."
 
-#: internet/grooveshark/groovesharksettingspage.cpp:118
 #: internet/spotify/spotifysettingspage.cpp:155
 msgid "Your username or password was incorrect."
 msgstr "O usuario ou contrasinal non eran correctos."

@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2015-04-17 12:11+0000\n"
+"PO-Revision-Date: 2015-05-01 12:23+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Persian (http://www.transifex.com/projects/p/clementine/language/fa/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -320,10 +320,6 @@ msgid ""
 "<p>If you surround sections of text that contain a token with curly-braces, that section will be hidden if the token is empty.</p>"
 msgstr "<p>نشان‌ها با  % شروع می‌شود، به عنوان مثال: %هنرمند %آلبوم %عنوان </p>\n\n<p>اگر قسمتی از متن را احاطه کنید که دارای نشان‌هایی درون آکولاد باش، آن نشان‌ها پنهان می‌شوند اگر نشان تهی باشد.</p>"
 
-#: internet/grooveshark/groovesharksettingspage.cpp:123
-msgid "A Grooveshark Anywhere account is required."
-msgstr "نیاز به اکانت «گرووشارک همه‌جا» دارد."
-
 #: internet/spotify/spotifysettingspage.cpp:166
 msgid "A Spotify Premium account is required."
 msgstr "نیاز به اکانت برتر اسپاتیفای دارد."
@@ -394,7 +390,6 @@ msgstr "درباره‌ی کیو‌ت..."
 msgid "Absolute"
 msgstr ""
 
-#: ../bin/src/ui_groovesharksettingspage.h:141
 #: ../bin/src/ui_magnatunesettingspage.h:155
 #: ../bin/src/ui_spotifysettingspage.h:208
 #: ../bin/src/ui_lastfmsettingspage.h:151 ../bin/src/ui_vksettingspage.h:217
@@ -576,14 +571,6 @@ msgstr ""
 msgid "Add stream..."
 msgstr "افزودن جریان..."
 
-#: internet/grooveshark/groovesharkservice.cpp:1127
-msgid "Add to Grooveshark favorites"
-msgstr "افزودن به دلخواه گرووشارک"
-
-#: internet/grooveshark/groovesharkservice.cpp:1142
-msgid "Add to Grooveshark playlists"
-msgstr "افزودن به لیست‌پخش‌های گرووشارک"
-
 #: internet/vk/vkservice.cpp:312
 msgid "Add to My Music"
 msgstr ""
@@ -644,14 +631,6 @@ msgstr "افزوده شده در امروز"
 #: ../bin/src/ui_libraryfilterwidget.h:92
 msgid "Added within three months"
 msgstr "افزوده شده در سه ماه گذشته"
-
-#: internet/grooveshark/groovesharkservice.cpp:1425
-msgid "Adding song to My Music"
-msgstr "افزودن آهنگ به آهنگ‌های من"
-
-#: internet/grooveshark/groovesharkservice.cpp:1402
-msgid "Adding song to favorites"
-msgstr "اضافه کردن آهنگ به پسندیده‌ها"
 
 #: library/libraryfilterwidget.cpp:142
 msgid "Advanced grouping..."
@@ -775,7 +754,7 @@ msgstr "همواره آغاز به پخش می‌کند"
 msgid "Amazon Cloud Drive"
 msgstr ""
 
-#: internet/spotify/spotifyblobdownloader.cpp:67
+#: internet/spotify/spotifyblobdownloader.cpp:76
 msgid ""
 "An additional plugin is required to use Spotify in Clementine.  Would you "
 "like to download and install it now?"
@@ -830,10 +809,6 @@ msgstr "فشرده‌سازی برای چیده نشدن"
 #, qt-format
 msgid "Are you sure you want to delete the \"%1\" preset?"
 msgstr "آیا مطمئنید که می‌خواهید پیش‌نشانده‌ی «%1» را پاک کنید؟"
-
-#: internet/grooveshark/groovesharkservice.cpp:1324
-msgid "Are you sure you want to delete this playlist?"
-msgstr "آیا مطمئن هستید که می‌خواهید این لیست‌پخش را پاک کنید."
 
 #: ui/edittagdialog.cpp:798
 msgid "Are you sure you want to reset this song's statistics?"
@@ -1034,7 +1009,7 @@ msgstr "مرور..."
 msgid "Buffer duration"
 msgstr ""
 
-#: engines/gstengine.cpp:884
+#: engines/gstengine.cpp:904
 msgid "Buffering"
 msgstr "میان‌گیری"
 
@@ -1049,10 +1024,6 @@ msgstr "اما این سرچشمه‌ها ناپویا هستند:"
 #: ../bin/src/ui_wiimotesettingspage.h:192
 msgid "Buttons"
 msgstr "دکمه‌ها"
-
-#: ../bin/src/ui_groovesharksettingspage.h:139
-msgid "By default, Grooveshark sorts songs on date added"
-msgstr ""
 
 #: core/song.cpp:419
 msgid "CDDA"
@@ -1075,7 +1046,7 @@ msgstr ""
 msgid "Caching %1"
 msgstr ""
 
-#: internet/spotify/spotifyblobdownloader.cpp:52
+#: internet/spotify/spotifyblobdownloader.cpp:61
 msgid "Cancel"
 msgstr "کنسل"
 
@@ -1139,7 +1110,7 @@ msgstr ""
 msgid "Choose a name for your smart playlist"
 msgstr "گزینش نام برای لیست‌پخش هوشمند"
 
-#: engines/gstengine.cpp:905
+#: engines/gstengine.cpp:925
 msgid "Choose automatically"
 msgstr "گزینش خودکار"
 
@@ -1348,10 +1319,6 @@ msgstr "تنظیم‌کننده"
 msgid "Configure %1..."
 msgstr "پیکربندی %1..."
 
-#: internet/grooveshark/groovesharkservice.cpp:566
-msgid "Configure Grooveshark..."
-msgstr "پیکربندی گرووشارک..."
-
 #: internet/magnatune/magnatuneservice.cpp:290
 msgid "Configure Magnatune..."
 msgstr "پیکربندی مگناتیون..."
@@ -1535,11 +1502,6 @@ msgstr "جلد هنری از %1 نشانده شد"
 msgid "Covers from %1"
 msgstr "جلدها از %1"
 
-#: internet/grooveshark/groovesharkservice.cpp:534
-#: internet/grooveshark/groovesharkservice.cpp:1276
-msgid "Create a new Grooveshark playlist"
-msgstr "افزودن لیست‌پخش تازه‌ی گرووشارک"
-
 #: ../bin/src/ui_playbacksettingspage.h:315
 msgid "Cross-fade when changing tracks automatically"
 msgstr "پژمردن آهنگ زمانی که ترک‌ها خودکار تغییر می‌کنند"
@@ -1683,7 +1645,7 @@ msgstr "کاهش صدا"
 msgid "Default background image"
 msgstr "فرتور پس‌زمینه‌ی پیشفرض"
 
-#: engines/gstengine.cpp:930
+#: engines/gstengine.cpp:950
 #, qt-format
 msgid "Default device on %1"
 msgstr ""
@@ -1700,11 +1662,6 @@ msgstr "تأخیر بین فرتورسازیها"
 #: ../bin/src/ui_playlistlistcontainer.h:131
 msgid "Delete"
 msgstr "پاک‌کردن"
-
-#: internet/grooveshark/groovesharkservice.cpp:537
-#: internet/grooveshark/groovesharkservice.cpp:1323
-msgid "Delete Grooveshark playlist"
-msgstr "پاک‌کردن لیست پخش گرووشارک"
 
 #: internet/podcasts/podcastservice.cpp:433
 msgid "Delete downloaded data"
@@ -1979,7 +1936,7 @@ msgstr "بارگیری کاتالوگ جامندو"
 msgid "Downloading Magnatune catalogue"
 msgstr "بارگیری کاتالوگ مگناتیون"
 
-#: internet/spotify/spotifyblobdownloader.cpp:51
+#: internet/spotify/spotifyblobdownloader.cpp:60
 msgid "Downloading Spotify plugin"
 msgstr "بارگیری افزونه‌ی اسپاتیفای"
 
@@ -2153,7 +2110,6 @@ msgstr "برابر است با --log-levels *:1"
 msgid "Equivalent to --log-levels *:3"
 msgstr "برابر است با --log-levels *:3"
 
-#: internet/grooveshark/groovesharkservice.cpp:1055
 #: internet/magnatune/magnatunedownloaddialog.cpp:242
 #: library/libraryview.cpp:630 ui/mainwindow.cpp:1910 ui/mainwindow.cpp:2157
 #: ui/mainwindow.cpp:2305 internet/vk/vkservice.cpp:625
@@ -2176,7 +2132,7 @@ msgstr "خطا در کپی کردن آهنگ‌ها"
 msgid "Error deleting songs"
 msgstr "خطا در پاک کردن آهنگ‌ها"
 
-#: internet/spotify/spotifyblobdownloader.cpp:222
+#: internet/spotify/spotifyblobdownloader.cpp:267
 msgid "Error downloading Spotify plugin"
 msgstr "خطا در بارگیری افزونه‌ی Spotify"
 
@@ -2349,10 +2305,6 @@ msgstr "ناتوان در موشکافی XML برای خوراک RSS"
 #: ../bin/src/ui_transcoderoptionsmp3.h:200
 msgid "Fast"
 msgstr "تند"
-
-#: internet/grooveshark/groovesharkservice.cpp:645
-msgid "Favorites"
-msgstr "دلخواه"
 
 #: library/library.cpp:88
 msgid "Favourite tracks"
@@ -2532,7 +2484,7 @@ msgstr "باس کامل + لرزش"
 msgid "Full Treble"
 msgstr "لرزش کامل"
 
-#: ui/settingsdialog.cpp:142
+#: ui/settingsdialog.cpp:141
 msgid "General"
 msgstr "عمومی"
 
@@ -2547,15 +2499,6 @@ msgstr "تنظیم‌های عمومی"
 msgid "Genre"
 msgstr "ژانر"
 
-#: internet/grooveshark/groovesharkservice.cpp:556
-msgid "Get a URL to share this Grooveshark playlist"
-msgstr "دریافت یک نشانی اینترنتی برای اشتراک این لیست‌پخش گرووشارک"
-
-#: internet/grooveshark/groovesharkservice.cpp:553
-#: internet/grooveshark/groovesharkservice.cpp:1155
-msgid "Get a URL to share this Grooveshark song"
-msgstr "دریافت یک نشانی اینترنتی برای اشتراک این آهنگ گرووشارک"
-
 #: internet/spotify/spotifyservice.cpp:633
 #: internet/spotify/spotifyservice.cpp:674
 msgid "Get a URL to share this Spotify song"
@@ -2564,10 +2507,6 @@ msgstr ""
 #: internet/spotify/spotifyservice.cpp:665
 msgid "Get a URL to share this playlist"
 msgstr ""
-
-#: internet/grooveshark/groovesharkservice.cpp:830
-msgid "Getting Grooveshark popular songs"
-msgstr "دریافت آهنگ‌های مردمی گرووشارک"
 
 #: internet/somafm/somafmservice.cpp:120
 msgid "Getting channels"
@@ -2606,26 +2545,6 @@ msgstr "%1 از %2 جلدها دریافت شد (%3 ناموفق)"
 #: ../bin/src/ui_behavioursettingspage.h:274
 msgid "Grey out non existent songs in my playlists"
 msgstr "آهنگ‌های ناموجود لیست‌پخش‌های من را خاکستری کن"
-
-#: ../bin/src/ui_groovesharksettingspage.h:137
-msgid "Grooveshark"
-msgstr "گرووشارک"
-
-#: internet/grooveshark/groovesharkservice.cpp:413
-msgid "Grooveshark login error"
-msgstr "خطا در ورود به گرووشارک"
-
-#: internet/grooveshark/groovesharkservice.cpp:1206
-msgid "Grooveshark playlist's URL"
-msgstr "نشانی اینترنتی لیست‌پخش گرووشارک"
-
-#: internet/grooveshark/groovesharkservice.cpp:625
-msgid "Grooveshark radio"
-msgstr "رادیوی گرووشارک"
-
-#: internet/grooveshark/groovesharkservice.cpp:1184
-msgid "Grooveshark song's URL"
-msgstr "نشانی اینترنتی آهنگ‌های گرووشارک"
 
 #: ../bin/src/ui_groupbydialog.h:124
 msgid "Group Library by..."
@@ -2848,7 +2767,7 @@ msgstr "بررسی درستی"
 msgid "Internet"
 msgstr "اینترنت"
 
-#: ui/settingsdialog.cpp:165
+#: ui/settingsdialog.cpp:164
 msgid "Internet providers"
 msgstr "فراهم‌کنندگان اینترنت"
 
@@ -2884,10 +2803,6 @@ msgstr "سرویس نامعتبر"
 #: internet/lastfm/lastfmservice.cpp:238
 msgid "Invalid session key"
 msgstr "کلید جلسه‌ی نامعتبر"
-
-#: internet/grooveshark/groovesharkservice.cpp:405
-msgid "Invalid username and/or password"
-msgstr "شناسه و/یا گذرواژه‌ی نادرست"
 
 #: ../bin/src/ui_ripcddialog.h:312
 msgid "Invert Selection"
@@ -3053,11 +2968,6 @@ msgstr "جستجوی کتابخانه"
 msgid "Limits"
 msgstr "محدودیت‌ها"
 
-#: internet/grooveshark/groovesharkservice.cpp:627
-msgid ""
-"Listen to Grooveshark songs based on what you've listened to previously"
-msgstr "شنیدن آهنگ‌های گرووشارک برپایه‌ی چیزهایی که پیش از این شنیده‌اید"
-
 #: ui/equalizer.cpp:137
 msgid "Live"
 msgstr "زنده"
@@ -3132,7 +3042,6 @@ msgid "Loads files/URLs, replacing current playlist"
 msgstr "بارگیری پرونده‌ها/نشانی‌ها، جانشانی دوباره‌ی لیست‌پخش جاری"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:163
-#: ../bin/src/ui_groovesharksettingspage.h:144
 #: ../bin/src/ui_magnatunesettingspage.h:164
 #: ../bin/src/ui_soundcloudsettingspage.h:106
 #: ../bin/src/ui_spotifysettingspage.h:211
@@ -3393,7 +3302,6 @@ msgstr "بی‌صدا"
 msgid "My Albums"
 msgstr ""
 
-#: internet/grooveshark/groovesharkservice.cpp:634
 #: internet/vk/vkservice.cpp:878
 msgid "My Music"
 msgstr "آهنگ‌های من"
@@ -3402,9 +3310,8 @@ msgstr "آهنگ‌های من"
 msgid "My Recommendations"
 msgstr "پیشنهادهای من"
 
-#: internet/grooveshark/groovesharkservice.cpp:1277
-#: internet/grooveshark/groovesharkservice.cpp:1372 ui/equalizer.cpp:205
-#: ../bin/src/ui_deviceproperties.h:369 ../bin/src/ui_wizardfinishpage.h:84
+#: ui/equalizer.cpp:205 ../bin/src/ui_deviceproperties.h:369
+#: ../bin/src/ui_wizardfinishpage.h:84
 msgid "Name"
 msgstr "نام"
 
@@ -3635,7 +3542,6 @@ msgid "Opacity"
 msgstr "تاری"
 
 #: internet/digitally/digitallyimportedservicebase.cpp:176
-#: internet/grooveshark/groovesharkservice.cpp:560
 #: internet/icecast/icecastservice.cpp:302
 #: internet/jamendo/jamendoservice.cpp:434
 #: internet/magnatune/magnatuneservice.cpp:284
@@ -3771,7 +3677,6 @@ msgstr "بررسی کاتالوگ جامندو"
 msgid "Party"
 msgstr "مهمانی"
 
-#: ../bin/src/ui_groovesharksettingspage.h:143
 #: ../bin/src/ui_magnatunesettingspage.h:165
 #: ../bin/src/ui_spotifysettingspage.h:210
 #: ../bin/src/ui_subsonicsettingspage.h:128
@@ -3862,7 +3767,6 @@ msgstr "گزینه‌های لیست‌پخش"
 msgid "Playlist type"
 msgstr "سبک لیست‌پخش"
 
-#: internet/grooveshark/groovesharkservice.cpp:655
 #: internet/soundcloud/soundcloudservice.cpp:130 ui/mainwindow.cpp:241
 msgid "Playlists"
 msgstr "لیست‌های پخش"
@@ -3884,18 +3788,6 @@ msgstr "پادکست"
 msgid "Pop"
 msgstr "پاپ"
 
-#: internet/grooveshark/groovesharkservice.cpp:592
-msgid "Popular songs"
-msgstr "آهنگ‌های مردمی"
-
-#: internet/grooveshark/groovesharkservice.cpp:596
-msgid "Popular songs of the Month"
-msgstr "ترانه‌های محبوب ماه"
-
-#: internet/grooveshark/groovesharkservice.cpp:605
-msgid "Popular songs today"
-msgstr "ترانه‌های محبوب امروز"
-
 #: ../bin/src/ui_notificationssettingspage.h:444
 msgid "Popup duration"
 msgstr "پنجرک"
@@ -3914,7 +3806,6 @@ msgid "Preference"
 msgstr ""
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:166
-#: ../bin/src/ui_groovesharksettingspage.h:145
 #: ../bin/src/ui_magnatunesettingspage.h:166
 #: ../bin/src/ui_spotifysettingspage.h:216 ../bin/src/ui_settingsdialog.h:116
 #: ../bin/src/ui_lastfmsettingspage.h:155 ../bin/src/ui_vksettingspage.h:220
@@ -4049,10 +3940,6 @@ msgstr "به‌خط کردن ترک"
 msgid "Radio (equal loudness for all tracks)"
 msgstr "رادیو (بلندی یکسان برای همه‌ی ترک‌ها)"
 
-#: internet/grooveshark/groovesharkservice.cpp:614
-msgid "Radios"
-msgstr "رادیوها"
-
 #: core/backgroundstreams.cpp:47
 msgid "Rain"
 msgstr "باران"
@@ -4102,10 +3989,6 @@ msgstr "واقعا کنسل شود؟"
 #: internet/subsonic/subsonicsettingspage.cpp:157
 msgid "Redirect limit exceeded, verify server configuration."
 msgstr ""
-
-#: internet/grooveshark/groovesharkservice.cpp:562
-msgid "Refresh"
-msgstr "نوسازی"
 
 #: internet/jamendo/jamendoservice.cpp:437
 #: internet/magnatune/magnatuneservice.cpp:287
@@ -4163,7 +4046,6 @@ msgstr "پاک‌کردن تکراری‌ها از لیست‌پخش"
 msgid "Remove folder"
 msgstr "پاک کردن پوشه"
 
-#: internet/grooveshark/groovesharkservice.cpp:550
 #: internet/vk/vkservice.cpp:316
 msgid "Remove from My Music"
 msgstr "پاک‌کردن از آهنگ‌های من"
@@ -4172,11 +4054,6 @@ msgstr "پاک‌کردن از آهنگ‌های من"
 msgid "Remove from bookmarks"
 msgstr ""
 
-#: internet/grooveshark/groovesharkservice.cpp:547
-msgid "Remove from favorites"
-msgstr "پاک‌کردن از دلخواه"
-
-#: internet/grooveshark/groovesharkservice.cpp:544
 #: internet/spotify/spotifyservice.cpp:672 ../bin/src/ui_mainwindow.h:685
 msgid "Remove from playlist"
 msgstr "از لیست‌پخش پاک کن"
@@ -4192,23 +4069,6 @@ msgstr ""
 #: ../bin/src/ui_mainwindow.h:717
 msgid "Remove unavailable tracks from playlist"
 msgstr ""
-
-#: internet/grooveshark/groovesharkservice.cpp:1571
-msgid "Removing songs from My Music"
-msgstr "پاک‌کردن آهنگ از آهنگ‌های من"
-
-#: internet/grooveshark/groovesharkservice.cpp:1519
-msgid "Removing songs from favorites"
-msgstr "پاک‌کردن آهنگ از دلخواه‌ها"
-
-#: internet/grooveshark/groovesharkservice.cpp:1371
-#, qt-format
-msgid "Rename \"%1\" playlist"
-msgstr "نام‌گردانی لیست‌پخش «%1»"
-
-#: internet/grooveshark/groovesharkservice.cpp:540
-msgid "Rename Grooveshark playlist"
-msgstr "نام‌گردانی لیست‌پخش گرووشارک"
 
 #: playlist/playlisttabbar.cpp:146
 msgid "Rename playlist"
@@ -4292,18 +4152,6 @@ msgstr "محدود به حروف اَسکی کن"
 #: ../bin/src/ui_behavioursettingspage.h:273
 msgid "Resume playback on start"
 msgstr ""
-
-#: internet/grooveshark/groovesharkservice.cpp:796
-msgid "Retrieving Grooveshark My Music songs"
-msgstr "بازبینی آهنگ‌های «آهنگ‌های من» از گرووشارک"
-
-#: internet/grooveshark/groovesharkservice.cpp:763
-msgid "Retrieving Grooveshark favorites songs"
-msgstr "بازبینی آهنگ‌های دلخواه گرووشارک"
-
-#: internet/grooveshark/groovesharkservice.cpp:694
-msgid "Retrieving Grooveshark playlists"
-msgstr "بازبینی لیست‌پخش‌های گرووشارک"
 
 #: ../data/oauthsuccess.html:5
 msgid "Return to Clementine"
@@ -4488,7 +4336,6 @@ msgstr "سبک جستجو"
 msgid "Search options"
 msgstr "گزینه‌های جستجو"
 
-#: internet/grooveshark/groovesharkservice.cpp:583
 #: internet/soundcloud/soundcloudservice.cpp:116
 #: internet/spotify/spotifyservice.cpp:406
 msgid "Search results"
@@ -4498,10 +4345,6 @@ msgstr "دستاورد جستجو"
 #: ../bin/src/ui_querysearchpage.h:120
 msgid "Search terms"
 msgstr "عبارات جستجو"
-
-#: internet/grooveshark/groovesharkservice.cpp:275
-msgid "Searching on Grooveshark"
-msgstr "جستجو در گرووشارک"
 
 #: ../bin/src/ui_groupbydialog.h:140
 msgid "Second level"
@@ -4852,10 +4695,6 @@ msgstr "مرتب‌سازی برپایه‌ی ژانر ( برپایه‌ی مح�
 msgid "Sort by station name"
 msgstr "مرتب‌سازی برپایه‌ی نام ایستگاه"
 
-#: ../bin/src/ui_groovesharksettingspage.h:146
-msgid "Sort playlists songs alphabetically"
-msgstr ""
-
 #: ../bin/src/ui_querysortpage.h:140
 msgid "Sort songs by"
 msgstr "مرتب‌سازی آهنگ‌ها برپایه‌ی"
@@ -4897,7 +4736,7 @@ msgstr ""
 msgid "Spotify plugin"
 msgstr "افزونه‌ی اسپاتیفای"
 
-#: internet/spotify/spotifyblobdownloader.cpp:66
+#: internet/spotify/spotifyblobdownloader.cpp:75
 msgid "Spotify plugin not installed"
 msgstr "افزونه‌ی اسپاتیفای نصب نیست"
 
@@ -4925,7 +4764,6 @@ msgstr "شروع لیست‌پخش در حال پخش"
 msgid "Start transcoding"
 msgstr "آغاز تراکد"
 
-#: internet/grooveshark/groovesharkservice.cpp:585
 #: internet/soundcloud/soundcloudservice.cpp:118
 #: internet/spotify/spotifyservice.cpp:408
 msgid ""
@@ -4941,10 +4779,6 @@ msgstr "شروع %1"
 #: internet/magnatune/magnatunedownloaddialog.cpp:124
 msgid "Starting..."
 msgstr "شروع..."
-
-#: internet/grooveshark/groovesharkservice.cpp:618
-msgid "Stations"
-msgstr "ایستگاه‌ها"
 
 #: core/globalshortcuts.cpp:53 ../bin/src/ui_mainwindow.h:644
 #: wiimotedev/wiimotesettingspage.cpp:101
@@ -4989,10 +4823,6 @@ msgstr "جریان‌گیری از یک سرور ساب‌سونیک نیازم�
 #: ../bin/src/ui_magnatunesettingspage.h:160
 msgid "Streaming membership"
 msgstr "هموندی جریان"
-
-#: internet/grooveshark/groovesharkservice.cpp:659
-msgid "Subscribed playlists"
-msgstr "لیست‌پخش‌های عضو شده"
 
 #: ../bin/src/ui_podcastinfowidget.h:196
 msgid "Subscribers"
@@ -5236,12 +5066,6 @@ msgstr "این گونه از دستگاه پشتیبانی نمی‌شود: %1"
 msgid "Title"
 msgstr "عنوان"
 
-#: internet/grooveshark/groovesharkservice.cpp:1056
-msgid ""
-"To start Grooveshark radio, you should first listen to a few other "
-"Grooveshark songs"
-msgstr "برای راه‌اندازی رادیوی گرووشارک، ابتدا باید چند آهنگ دیگر از گرووشارک را بشنوید"
-
 #: core/utilities.cpp:137 core/utilities.cpp:149
 msgid "Today"
 msgstr "امروز"
@@ -5397,10 +5221,6 @@ msgstr "کنسرت‌های پیش‌رو"
 msgid "Update"
 msgstr ""
 
-#: internet/grooveshark/groovesharkservice.cpp:1228
-msgid "Update Grooveshark playlist"
-msgstr "به‌روز رسانی لیست‌پخش گرووشارک"
-
 #: internet/podcasts/podcastservice.cpp:419
 msgid "Update all podcasts"
 msgstr "به‌روز رسانی همه‌ی پادکست‌ها"
@@ -5511,16 +5331,10 @@ msgstr "استفاده از نرمال‌سازی صدا"
 msgid "Used"
 msgstr "استفاده‌شده"
 
-#: internet/grooveshark/groovesharkservice.cpp:408
-#, qt-format
-msgid "User %1 doesn't have a Grooveshark Anywhere account"
-msgstr "کاربر %1 اکانت گرووشارک در هیچ‌جا ندارد"
-
-#: ui/settingsdialog.cpp:156
+#: ui/settingsdialog.cpp:155
 msgid "User interface"
 msgstr "رابط کاربری"
 
-#: ../bin/src/ui_groovesharksettingspage.h:142
 #: ../bin/src/ui_magnatunesettingspage.h:163
 #: ../bin/src/ui_spotifysettingspage.h:209
 #: ../bin/src/ui_subsonicsettingspage.h:127
@@ -5792,10 +5606,6 @@ msgid ""
 "Clementine wiki</a> for more information.\n"
 msgstr "می‌توانید کنترل Wii خود را برای کنترل از راه دور کلمنتاین بکار برید. برای اطلاعات بیشتر به <a href=\"http://www.clementine-player.org/wiimote\">صفحه‌ی ویکی کلمنتاین</a> مراجعه کنید.\n"
 
-#: internet/grooveshark/groovesharksettingspage.cpp:113
-msgid "You do not have a Grooveshark Anywhere account."
-msgstr "شما در هیچ‌جا اکانت گرووشارک ندارید."
-
 #: internet/spotify/spotifysettingspage.cpp:149
 msgid "You do not have a Spotify Premium account."
 msgstr "شما اکانت برجسته‌ی اسپاتیفای ندارید."
@@ -5866,7 +5676,6 @@ msgstr "برونکشی‌های شما: %1"
 msgid "Your system is missing OpenGL support, visualizations are unavailable."
 msgstr "سیستم شما دارای OpenGL نیست، فرتورگری‌ها در دسترس نیستند."
 
-#: internet/grooveshark/groovesharksettingspage.cpp:118
 #: internet/spotify/spotifysettingspage.cpp:155
 msgid "Your username or password was incorrect."
 msgstr "شناسه یا گذرواژه نادرست است."

@@ -34,13 +34,13 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2015-04-17 12:13+0000\n"
-"Last-Translator: Andrei Stepanov\n"
+"PO-Revision-Date: 2015-05-01 12:23+0000\n"
+"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Russian (http://www.transifex.com/projects/p/clementine/language/ru/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: ru\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);\n"
 
 #: playlist/playlistlistview.cpp:37
 msgid ""
@@ -343,10 +343,6 @@ msgid ""
 "<p>If you surround sections of text that contain a token with curly-braces, that section will be hidden if the token is empty.</p>"
 msgstr "<p>Поля начинаются со знака %, например: %artist %album %title </p>\n\n<p>Если Вы окружили часть текста фигурными скобками, то эта часть текста не будет видна, если значения полей будут пустыми</p>"
 
-#: internet/grooveshark/groovesharksettingspage.cpp:123
-msgid "A Grooveshark Anywhere account is required."
-msgstr "Требуется учётная запись Grooveshark Anywhere."
-
 #: internet/spotify/spotifysettingspage.cpp:166
 msgid "A Spotify Premium account is required."
 msgstr "Требуется премиум аккаунт Spotify."
@@ -417,7 +413,6 @@ msgstr "Информация о Qt"
 msgid "Absolute"
 msgstr "Абсолютные"
 
-#: ../bin/src/ui_groovesharksettingspage.h:141
 #: ../bin/src/ui_magnatunesettingspage.h:155
 #: ../bin/src/ui_spotifysettingspage.h:208
 #: ../bin/src/ui_lastfmsettingspage.h:151 ../bin/src/ui_vksettingspage.h:217
@@ -599,14 +594,6 @@ msgstr "Добавить песни в \"Мою музыку\", если наж�
 msgid "Add stream..."
 msgstr "Добавить поток..."
 
-#: internet/grooveshark/groovesharkservice.cpp:1127
-msgid "Add to Grooveshark favorites"
-msgstr "Добавить в избранное Grooveshark"
-
-#: internet/grooveshark/groovesharkservice.cpp:1142
-msgid "Add to Grooveshark playlists"
-msgstr "Добавить в плейлисты Grooveshark"
-
 #: internet/vk/vkservice.cpp:312
 msgid "Add to My Music"
 msgstr "Добавить в Мою музыку"
@@ -667,14 +654,6 @@ msgstr "Добавлено сегодня"
 #: ../bin/src/ui_libraryfilterwidget.h:92
 msgid "Added within three months"
 msgstr "Добавлено за три месяца"
-
-#: internet/grooveshark/groovesharkservice.cpp:1425
-msgid "Adding song to My Music"
-msgstr "Добавление композиции в Мою музыку"
-
-#: internet/grooveshark/groovesharkservice.cpp:1402
-msgid "Adding song to favorites"
-msgstr "Добавление композиции в избранное"
 
 #: library/libraryfilterwidget.cpp:142
 msgid "Advanced grouping..."
@@ -798,7 +777,7 @@ msgstr "Всегда начинать воспроизведение"
 msgid "Amazon Cloud Drive"
 msgstr "Amazon Cloud Drive"
 
-#: internet/spotify/spotifyblobdownloader.cpp:67
+#: internet/spotify/spotifyblobdownloader.cpp:76
 msgid ""
 "An additional plugin is required to use Spotify in Clementine.  Would you "
 "like to download and install it now?"
@@ -853,10 +832,6 @@ msgstr "Применить сжатие для предотвращения ис
 #, qt-format
 msgid "Are you sure you want to delete the \"%1\" preset?"
 msgstr "Вы действительно хотите удалить профиль \"%1\"?"
-
-#: internet/grooveshark/groovesharkservice.cpp:1324
-msgid "Are you sure you want to delete this playlist?"
-msgstr "Вы действительно хотите удалить плейлист?"
 
 #: ui/edittagdialog.cpp:798
 msgid "Are you sure you want to reset this song's statistics?"
@@ -1057,7 +1032,7 @@ msgstr "Обзор..."
 msgid "Buffer duration"
 msgstr "Размер буфера"
 
-#: engines/gstengine.cpp:884
+#: engines/gstengine.cpp:904
 msgid "Buffering"
 msgstr "Буферизация"
 
@@ -1072,10 +1047,6 @@ msgstr "Эти источники отключены:"
 #: ../bin/src/ui_wiimotesettingspage.h:192
 msgid "Buttons"
 msgstr "Клавиши"
-
-#: ../bin/src/ui_groovesharksettingspage.h:139
-msgid "By default, Grooveshark sorts songs on date added"
-msgstr "По умолчанию Grooveshark сортирует песни по дате добавления"
 
 #: core/song.cpp:419
 msgid "CDDA"
@@ -1098,7 +1069,7 @@ msgstr "Кэширование"
 msgid "Caching %1"
 msgstr "Кэширование %1"
 
-#: internet/spotify/spotifyblobdownloader.cpp:52
+#: internet/spotify/spotifyblobdownloader.cpp:61
 msgid "Cancel"
 msgstr "Отмена"
 
@@ -1162,7 +1133,7 @@ msgstr "Выберите папку для кэша VK.com"
 msgid "Choose a name for your smart playlist"
 msgstr "Выберите название умного плейлиста"
 
-#: engines/gstengine.cpp:905
+#: engines/gstengine.cpp:925
 msgid "Choose automatically"
 msgstr "Выбирать автоматически"
 
@@ -1371,10 +1342,6 @@ msgstr "Композитор"
 msgid "Configure %1..."
 msgstr "Настроить %1..."
 
-#: internet/grooveshark/groovesharkservice.cpp:566
-msgid "Configure Grooveshark..."
-msgstr "Настройка Grooveshark..."
-
 #: internet/magnatune/magnatuneservice.cpp:290
 msgid "Configure Magnatune..."
 msgstr "Настройка Magnatune..."
@@ -1558,11 +1525,6 @@ msgstr "Обложка задана из %1"
 msgid "Covers from %1"
 msgstr "Обложки из %1"
 
-#: internet/grooveshark/groovesharkservice.cpp:534
-#: internet/grooveshark/groovesharkservice.cpp:1276
-msgid "Create a new Grooveshark playlist"
-msgstr "Создать новый плейлист Grooveshark"
-
 #: ../bin/src/ui_playbacksettingspage.h:315
 msgid "Cross-fade when changing tracks automatically"
 msgstr "Перекрестное затухание при автоматической смене композиции"
@@ -1706,7 +1668,7 @@ msgstr "Уменьшить громкость"
 msgid "Default background image"
 msgstr "Стандартное фоновое изображение"
 
-#: engines/gstengine.cpp:930
+#: engines/gstengine.cpp:950
 #, qt-format
 msgid "Default device on %1"
 msgstr "Стандартное для %1"
@@ -1723,11 +1685,6 @@ msgstr "Задержка между визуализациями"
 #: ../bin/src/ui_playlistlistcontainer.h:131
 msgid "Delete"
 msgstr "Удалить"
-
-#: internet/grooveshark/groovesharkservice.cpp:537
-#: internet/grooveshark/groovesharkservice.cpp:1323
-msgid "Delete Grooveshark playlist"
-msgstr "Удалить плейлист Grooveshark"
 
 #: internet/podcasts/podcastservice.cpp:433
 msgid "Delete downloaded data"
@@ -2002,7 +1959,7 @@ msgstr "Загружается каталог Jamendo"
 msgid "Downloading Magnatune catalogue"
 msgstr "Загружается каталог Magnatune"
 
-#: internet/spotify/spotifyblobdownloader.cpp:51
+#: internet/spotify/spotifyblobdownloader.cpp:60
 msgid "Downloading Spotify plugin"
 msgstr "Загружается модуль Spotify"
 
@@ -2176,7 +2133,6 @@ msgstr "Аналогично --log-levels *:1"
 msgid "Equivalent to --log-levels *:3"
 msgstr "Аналогично --log-levels *:3"
 
-#: internet/grooveshark/groovesharkservice.cpp:1055
 #: internet/magnatune/magnatunedownloaddialog.cpp:242
 #: library/libraryview.cpp:630 ui/mainwindow.cpp:1910 ui/mainwindow.cpp:2157
 #: ui/mainwindow.cpp:2305 internet/vk/vkservice.cpp:625
@@ -2199,7 +2155,7 @@ msgstr "Ошибка копирования композиций"
 msgid "Error deleting songs"
 msgstr "Ошибка удаления композиций"
 
-#: internet/spotify/spotifyblobdownloader.cpp:222
+#: internet/spotify/spotifyblobdownloader.cpp:267
 msgid "Error downloading Spotify plugin"
 msgstr "Ошибка загрузки модуля Spotify"
 
@@ -2372,10 +2328,6 @@ msgstr "Ошибка разбора XML в данной RSS подписке"
 #: ../bin/src/ui_transcoderoptionsmp3.h:200
 msgid "Fast"
 msgstr "Быстрое"
-
-#: internet/grooveshark/groovesharkservice.cpp:645
-msgid "Favorites"
-msgstr "Избранное"
 
 #: library/library.cpp:88
 msgid "Favourite tracks"
@@ -2555,7 +2507,7 @@ msgstr "Бас + высокие частоты"
 msgid "Full Treble"
 msgstr "Высокие частоты"
 
-#: ui/settingsdialog.cpp:142
+#: ui/settingsdialog.cpp:141
 msgid "General"
 msgstr "Общие"
 
@@ -2570,15 +2522,6 @@ msgstr "Общие настройки"
 msgid "Genre"
 msgstr "Жанр"
 
-#: internet/grooveshark/groovesharkservice.cpp:556
-msgid "Get a URL to share this Grooveshark playlist"
-msgstr "Получить адрес этого плейлиста в Grooveshark для публикции"
-
-#: internet/grooveshark/groovesharkservice.cpp:553
-#: internet/grooveshark/groovesharkservice.cpp:1155
-msgid "Get a URL to share this Grooveshark song"
-msgstr "Получить адрес композиции в Grooveshark для публикации"
-
 #: internet/spotify/spotifyservice.cpp:633
 #: internet/spotify/spotifyservice.cpp:674
 msgid "Get a URL to share this Spotify song"
@@ -2587,10 +2530,6 @@ msgstr "Получить адрес песни со Spotify для публик�
 #: internet/spotify/spotifyservice.cpp:665
 msgid "Get a URL to share this playlist"
 msgstr "Получить адрес плейлиста для публикации"
-
-#: internet/grooveshark/groovesharkservice.cpp:830
-msgid "Getting Grooveshark popular songs"
-msgstr "Получение популярных композиций из Grooveshark"
 
 #: internet/somafm/somafmservice.cpp:120
 msgid "Getting channels"
@@ -2629,26 +2568,6 @@ msgstr "Получено %1 обложек из %2 (%3 загрузить не �
 #: ../bin/src/ui_behavioursettingspage.h:274
 msgid "Grey out non existent songs in my playlists"
 msgstr "Отмечать серым несуществующие песни в моих плейлистах"
-
-#: ../bin/src/ui_groovesharksettingspage.h:137
-msgid "Grooveshark"
-msgstr "Grooveshark"
-
-#: internet/grooveshark/groovesharkservice.cpp:413
-msgid "Grooveshark login error"
-msgstr "Ошибка при входе на сервис Grooveshark"
-
-#: internet/grooveshark/groovesharkservice.cpp:1206
-msgid "Grooveshark playlist's URL"
-msgstr "Адрес плейлиста в Grooveshark"
-
-#: internet/grooveshark/groovesharkservice.cpp:625
-msgid "Grooveshark radio"
-msgstr "Радио Grooveshark"
-
-#: internet/grooveshark/groovesharkservice.cpp:1184
-msgid "Grooveshark song's URL"
-msgstr "Адрес композиции на Grooveshark"
 
 #: ../bin/src/ui_groupbydialog.h:124
 msgid "Group Library by..."
@@ -2871,7 +2790,7 @@ msgstr "Проверка целостности"
 msgid "Internet"
 msgstr "Интернет"
 
-#: ui/settingsdialog.cpp:165
+#: ui/settingsdialog.cpp:164
 msgid "Internet providers"
 msgstr "Службы интернет"
 
@@ -2907,10 +2826,6 @@ msgstr "Неверная служба"
 #: internet/lastfm/lastfmservice.cpp:238
 msgid "Invalid session key"
 msgstr "Неверный ключ сессии"
-
-#: internet/grooveshark/groovesharkservice.cpp:405
-msgid "Invalid username and/or password"
-msgstr "Неверное имя пользователя и(или) пароль"
 
 #: ../bin/src/ui_ripcddialog.h:312
 msgid "Invert Selection"
@@ -3076,11 +2991,6 @@ msgstr "Поиск по фонотеке"
 msgid "Limits"
 msgstr "Ограничения"
 
-#: internet/grooveshark/groovesharkservice.cpp:627
-msgid ""
-"Listen to Grooveshark songs based on what you've listened to previously"
-msgstr "Слушать композиции на сервисе Grooveshark на основе ранее прослушанных"
-
 #: ui/equalizer.cpp:137
 msgid "Live"
 msgstr "Лайв"
@@ -3155,7 +3065,6 @@ msgid "Loads files/URLs, replacing current playlist"
 msgstr "Загрузка файлов или ссылок с заменой текущего плейлиста"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:163
-#: ../bin/src/ui_groovesharksettingspage.h:144
 #: ../bin/src/ui_magnatunesettingspage.h:164
 #: ../bin/src/ui_soundcloudsettingspage.h:106
 #: ../bin/src/ui_spotifysettingspage.h:211
@@ -3416,7 +3325,6 @@ msgstr "Выключить звук"
 msgid "My Albums"
 msgstr "Мои альбомы"
 
-#: internet/grooveshark/groovesharkservice.cpp:634
 #: internet/vk/vkservice.cpp:878
 msgid "My Music"
 msgstr "Моя музыка"
@@ -3425,9 +3333,8 @@ msgstr "Моя музыка"
 msgid "My Recommendations"
 msgstr "Мои рекомендации"
 
-#: internet/grooveshark/groovesharkservice.cpp:1277
-#: internet/grooveshark/groovesharkservice.cpp:1372 ui/equalizer.cpp:205
-#: ../bin/src/ui_deviceproperties.h:369 ../bin/src/ui_wizardfinishpage.h:84
+#: ui/equalizer.cpp:205 ../bin/src/ui_deviceproperties.h:369
+#: ../bin/src/ui_wizardfinishpage.h:84
 msgid "Name"
 msgstr "Имя"
 
@@ -3658,7 +3565,6 @@ msgid "Opacity"
 msgstr "Непрозрачность"
 
 #: internet/digitally/digitallyimportedservicebase.cpp:176
-#: internet/grooveshark/groovesharkservice.cpp:560
 #: internet/icecast/icecastservice.cpp:302
 #: internet/jamendo/jamendoservice.cpp:434
 #: internet/magnatune/magnatuneservice.cpp:284
@@ -3794,7 +3700,6 @@ msgstr "Анализ каталога Jamendo"
 msgid "Party"
 msgstr "Вечеринка"
 
-#: ../bin/src/ui_groovesharksettingspage.h:143
 #: ../bin/src/ui_magnatunesettingspage.h:165
 #: ../bin/src/ui_spotifysettingspage.h:210
 #: ../bin/src/ui_subsonicsettingspage.h:128
@@ -3885,7 +3790,6 @@ msgstr "Настройки плейлиста"
 msgid "Playlist type"
 msgstr "Тип плейлиста"
 
-#: internet/grooveshark/groovesharkservice.cpp:655
 #: internet/soundcloud/soundcloudservice.cpp:130 ui/mainwindow.cpp:241
 msgid "Playlists"
 msgstr "Списки"
@@ -3907,18 +3811,6 @@ msgstr "Подкасты"
 msgid "Pop"
 msgstr "Поп"
 
-#: internet/grooveshark/groovesharkservice.cpp:592
-msgid "Popular songs"
-msgstr "Популярные композиции"
-
-#: internet/grooveshark/groovesharkservice.cpp:596
-msgid "Popular songs of the Month"
-msgstr "Популярные композиции месяца"
-
-#: internet/grooveshark/groovesharkservice.cpp:605
-msgid "Popular songs today"
-msgstr "Популярные композиции сегодня"
-
 #: ../bin/src/ui_notificationssettingspage.h:444
 msgid "Popup duration"
 msgstr "Длительность отображения"
@@ -3937,7 +3829,6 @@ msgid "Preference"
 msgstr "Настройки"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:166
-#: ../bin/src/ui_groovesharksettingspage.h:145
 #: ../bin/src/ui_magnatunesettingspage.h:166
 #: ../bin/src/ui_spotifysettingspage.h:216 ../bin/src/ui_settingsdialog.h:116
 #: ../bin/src/ui_lastfmsettingspage.h:155 ../bin/src/ui_vksettingspage.h:220
@@ -4072,10 +3963,6 @@ msgstr "Трек в очередь"
 msgid "Radio (equal loudness for all tracks)"
 msgstr "Радио (одинаковая громкость для всех треков)"
 
-#: internet/grooveshark/groovesharkservice.cpp:614
-msgid "Radios"
-msgstr "Радио"
-
 #: core/backgroundstreams.cpp:47
 msgid "Rain"
 msgstr "Дождь"
@@ -4125,10 +4012,6 @@ msgstr "Действительно отменить?"
 #: internet/subsonic/subsonicsettingspage.cpp:157
 msgid "Redirect limit exceeded, verify server configuration."
 msgstr "Превышен предел перенаправлений, проверьте настройку сервера."
-
-#: internet/grooveshark/groovesharkservice.cpp:562
-msgid "Refresh"
-msgstr "Обновить"
 
 #: internet/jamendo/jamendoservice.cpp:437
 #: internet/magnatune/magnatuneservice.cpp:287
@@ -4186,7 +4069,6 @@ msgstr "Удалить повторы из плейлиста"
 msgid "Remove folder"
 msgstr "Удалить папку"
 
-#: internet/grooveshark/groovesharkservice.cpp:550
 #: internet/vk/vkservice.cpp:316
 msgid "Remove from My Music"
 msgstr "Удалить из Моей музыки"
@@ -4195,11 +4077,6 @@ msgstr "Удалить из Моей музыки"
 msgid "Remove from bookmarks"
 msgstr "Удалить из закладок"
 
-#: internet/grooveshark/groovesharkservice.cpp:547
-msgid "Remove from favorites"
-msgstr "Удалить из избранных"
-
-#: internet/grooveshark/groovesharkservice.cpp:544
 #: internet/spotify/spotifyservice.cpp:672 ../bin/src/ui_mainwindow.h:685
 msgid "Remove from playlist"
 msgstr "Удалить из плейлиста"
@@ -4215,23 +4092,6 @@ msgstr "Удалить плейлисты"
 #: ../bin/src/ui_mainwindow.h:717
 msgid "Remove unavailable tracks from playlist"
 msgstr "Удалить недоступные треки"
-
-#: internet/grooveshark/groovesharkservice.cpp:1571
-msgid "Removing songs from My Music"
-msgstr "Удаление треков из Моей музыки"
-
-#: internet/grooveshark/groovesharkservice.cpp:1519
-msgid "Removing songs from favorites"
-msgstr "Удаление треков из избранных"
-
-#: internet/grooveshark/groovesharkservice.cpp:1371
-#, qt-format
-msgid "Rename \"%1\" playlist"
-msgstr "Переименовать плейлист \"%1\""
-
-#: internet/grooveshark/groovesharkservice.cpp:540
-msgid "Rename Grooveshark playlist"
-msgstr "Переименовать плейлист Grooveshark"
 
 #: playlist/playlisttabbar.cpp:146
 msgid "Rename playlist"
@@ -4315,18 +4175,6 @@ msgstr "Ограничить только символами ASCII"
 #: ../bin/src/ui_behavioursettingspage.h:273
 msgid "Resume playback on start"
 msgstr "Продолжить воспроизведение при запуске"
-
-#: internet/grooveshark/groovesharkservice.cpp:796
-msgid "Retrieving Grooveshark My Music songs"
-msgstr "Получение треков с \"Моей музыкы\" на Grooveshark  "
-
-#: internet/grooveshark/groovesharkservice.cpp:763
-msgid "Retrieving Grooveshark favorites songs"
-msgstr "Получение избранных композиций из Grooveshark  "
-
-#: internet/grooveshark/groovesharkservice.cpp:694
-msgid "Retrieving Grooveshark playlists"
-msgstr "Получение плейлистов из Grooveshark  "
 
 #: ../data/oauthsuccess.html:5
 msgid "Return to Clementine"
@@ -4511,7 +4359,6 @@ msgstr "Режим поиска"
 msgid "Search options"
 msgstr "Параметры поиска"
 
-#: internet/grooveshark/groovesharkservice.cpp:583
 #: internet/soundcloud/soundcloudservice.cpp:116
 #: internet/spotify/spotifyservice.cpp:406
 msgid "Search results"
@@ -4521,10 +4368,6 @@ msgstr "Результаты поиска"
 #: ../bin/src/ui_querysearchpage.h:120
 msgid "Search terms"
 msgstr "Условия поиска"
-
-#: internet/grooveshark/groovesharkservice.cpp:275
-msgid "Searching on Grooveshark"
-msgstr "Поиск на Grooveshark"
 
 #: ../bin/src/ui_groupbydialog.h:140
 msgid "Second level"
@@ -4875,10 +4718,6 @@ msgstr "Сортировать по жанру (по популярности)"
 msgid "Sort by station name"
 msgstr "Сортировать по названию станции"
 
-#: ../bin/src/ui_groovesharksettingspage.h:146
-msgid "Sort playlists songs alphabetically"
-msgstr "Упорядочить песни в плейлисте по алфавиту"
-
 #: ../bin/src/ui_querysortpage.h:140
 msgid "Sort songs by"
 msgstr "Сортировать песни по"
@@ -4920,7 +4759,7 @@ msgstr "Адрес плейлиста Spotify"
 msgid "Spotify plugin"
 msgstr "Модуль Spotify"
 
-#: internet/spotify/spotifyblobdownloader.cpp:66
+#: internet/spotify/spotifyblobdownloader.cpp:75
 msgid "Spotify plugin not installed"
 msgstr "Модуль Spotify не установлен"
 
@@ -4948,7 +4787,6 @@ msgstr "Запустить проигрываемый сейчас плейли�
 msgid "Start transcoding"
 msgstr "Конвертировать"
 
-#: internet/grooveshark/groovesharkservice.cpp:585
 #: internet/soundcloud/soundcloudservice.cpp:118
 #: internet/spotify/spotifyservice.cpp:408
 msgid ""
@@ -4964,10 +4802,6 @@ msgstr "Запуск %1"
 #: internet/magnatune/magnatunedownloaddialog.cpp:124
 msgid "Starting..."
 msgstr "Запуск..."
-
-#: internet/grooveshark/groovesharkservice.cpp:618
-msgid "Stations"
-msgstr "Станции"
 
 #: core/globalshortcuts.cpp:53 ../bin/src/ui_mainwindow.h:644
 #: wiimotedev/wiimotesettingspage.cpp:101
@@ -5012,10 +4846,6 @@ msgstr "Для потокового вещания с сервера Subsonic п
 #: ../bin/src/ui_magnatunesettingspage.h:160
 msgid "Streaming membership"
 msgstr "\"Streaming\" подписка"
-
-#: internet/grooveshark/groovesharkservice.cpp:659
-msgid "Subscribed playlists"
-msgstr "Плейлисты подписок"
 
 #: ../bin/src/ui_podcastinfowidget.h:196
 msgid "Subscribers"
@@ -5259,12 +5089,6 @@ msgstr "Не поддерживаемый тип устройства: %1"
 msgid "Title"
 msgstr "Название"
 
-#: internet/grooveshark/groovesharkservice.cpp:1056
-msgid ""
-"To start Grooveshark radio, you should first listen to a few other "
-"Grooveshark songs"
-msgstr "Для включения радио Grooveshark требуется прослушать несколько композиций на Grooveshark"
-
 #: core/utilities.cpp:137 core/utilities.cpp:149
 msgid "Today"
 msgstr "Сегодня"
@@ -5420,10 +5244,6 @@ msgstr "Предстоящие концерты"
 msgid "Update"
 msgstr "Обновить"
 
-#: internet/grooveshark/groovesharkservice.cpp:1228
-msgid "Update Grooveshark playlist"
-msgstr "Обновить плейлист на Grooveshark"
-
 #: internet/podcasts/podcastservice.cpp:419
 msgid "Update all podcasts"
 msgstr "Обновить все подкасты"
@@ -5534,16 +5354,10 @@ msgstr "Использовать нормализацию громкости"
 msgid "Used"
 msgstr "Использовано"
 
-#: internet/grooveshark/groovesharkservice.cpp:408
-#, qt-format
-msgid "User %1 doesn't have a Grooveshark Anywhere account"
-msgstr "У пользователь %1 нет учетной записи Grooveshark Anywhere"
-
-#: ui/settingsdialog.cpp:156
+#: ui/settingsdialog.cpp:155
 msgid "User interface"
 msgstr "Интерфейс"
 
-#: ../bin/src/ui_groovesharksettingspage.h:142
 #: ../bin/src/ui_magnatunesettingspage.h:163
 #: ../bin/src/ui_spotifysettingspage.h:209
 #: ../bin/src/ui_subsonicsettingspage.h:127
@@ -5815,10 +5629,6 @@ msgid ""
 "Clementine wiki</a> for more information.\n"
 msgstr "Для дистанционного управления Clementine можно использовать пульт Wii. <a href=\"http://www.clementine-player.org/wiimote\">Подробнее на wiki-странице Clementine</a>.\n\n"
 
-#: internet/grooveshark/groovesharksettingspage.cpp:113
-msgid "You do not have a Grooveshark Anywhere account."
-msgstr "У вас нет учетной записи Grooveshark Anywhere."
-
 #: internet/spotify/spotifysettingspage.cpp:149
 msgid "You do not have a Spotify Premium account."
 msgstr "У вас нет учетной записи Spotify Premium."
@@ -5889,7 +5699,6 @@ msgstr "Заскробблено: %1"
 msgid "Your system is missing OpenGL support, visualizations are unavailable."
 msgstr "Отсутствует поддержка OpenGL в системе, визуализации недоступны."
 
-#: internet/grooveshark/groovesharksettingspage.cpp:118
 #: internet/spotify/spotifysettingspage.cpp:155
 msgid "Your username or password was incorrect."
 msgstr "Имя пользователя или пароль указаны неверно."
