@@ -18,14 +18,11 @@
 #ifndef CHROMAPRINTER_H
 #define CHROMAPRINTER_H
 
-#include <glib.h>
 #include <gst/gst.h>
 #include <gst/app/gstappsink.h>
 
 #include <QBuffer>
 #include <QString>
-
-class QEventLoop;
 
 class Chromaprinter {
   // Creates a Chromaprint fingerprint from a song.
@@ -48,23 +45,15 @@ class Chromaprinter {
   GstElement* CreateElement(const QString& factory_name,
                             GstElement* bin = nullptr);
 
-  void ReportError(GstMessage* message);
-
   static void NewPadCallback(GstElement*, GstPad* pad, gpointer data);
-  static gboolean BusCallback(GstBus*, GstMessage* msg, gpointer data);
-  static GstBusSyncReply BusCallbackSync(GstBus*, GstMessage* msg,
-                                         gpointer data);
   static GstFlowReturn NewBufferCallback(GstAppSink* app_sink, gpointer self);
 
  private:
   QString filename_;
-  GMainLoop* event_loop_;
 
   GstElement* convert_element_;
-  GstElement* pipeline_;
 
   QBuffer buffer_;
-  bool finishing_;
 };
 
 #endif  // CHROMAPRINTER_H
