@@ -31,7 +31,8 @@
 
 static const int kDecodeRate = 11025;
 static const int kDecodeChannels = 1;
-static const int kPlayLength = 30; // seconds
+static const int kPlayLengthSecs = 30;
+static const int kTimeoutSecs = 10;
 
 Chromaprinter::Chromaprinter(const QString& filename)
     : filename_(filename), convert_element_(nullptr) {}
@@ -99,10 +100,10 @@ QString Chromaprinter::CreateFingerprint() {
   // Play only first x seconds
   gst_element_set_state(pipeline, GST_STATE_PAUSED);
   // wait for state change before seeking
-  gst_element_get_state(pipeline, nullptr, nullptr, 10 * GST_SECOND);
+  gst_element_get_state(pipeline, nullptr, nullptr, kTimeoutSecs * GST_SECOND);
   gst_element_seek(pipeline, 1.0, GST_FORMAT_TIME, GST_SEEK_FLAG_FLUSH,
                    GST_SEEK_TYPE_SET, 0 * GST_SECOND, GST_SEEK_TYPE_SET,
-                   kPlayLength * GST_SECOND);
+                   kPlayLengthSecs * GST_SECOND);
 
   QTime time;
   time.start();
@@ -112,14 +113,14 @@ QString Chromaprinter::CreateFingerprint() {
 
   // Wait until EOS or error
   GstMessage* msg = gst_bus_timed_pop_filtered(
-      bus, 10 * GST_SECOND,
+      bus, kTimeoutSecs * GST_SECOND,
       static_cast<GstMessageType>(GST_MESSAGE_EOS | GST_MESSAGE_ERROR));
 
   if (msg != nullptr) {
     if (msg->type == GST_MESSAGE_ERROR) {
       // Report error
-      GError* error;
-      gchar* debugs;
+      GError* error = nullptr;
+      gchar* debugs = nullptr;
 
       gst_message_parse_error(msg, &error, &debugs);
       QString message = QString::fromLocal8Bit(error->message);
