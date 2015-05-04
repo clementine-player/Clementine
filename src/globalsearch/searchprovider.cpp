@@ -89,11 +89,12 @@ void BlockingSearchProvider::SearchAsync(int id, const QString& query) {
 void BlockingSearchProvider::BlockingSearchFinished() {
   BoundFutureWatcher<ResultList, int>* watcher =
       static_cast<BoundFutureWatcher<ResultList, int>*>(sender());
-  watcher->deleteLater();
 
   const int id = watcher->data();
   emit ResultsAvailable(id, watcher->result());
   emit SearchFinished(id);
+
+  watcher->deleteLater();
 }
 
 QImage SearchProvider::ScaleAndPad(const QImage& image) {
