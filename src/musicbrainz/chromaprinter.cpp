@@ -28,16 +28,14 @@
 
 #include "core/logging.h"
 #include "core/signalchecker.h"
-#include "core/timeconstants.h"
 
 static const int kDecodeRate = 11025;
 static const int kDecodeChannels = 1;
+static const int kPlayLengthSecs = 30;
+static const int kTimeoutSecs = 10;
 
 Chromaprinter::Chromaprinter(const QString& filename)
-    : filename_(filename),
-      event_loop_(nullptr),
-      convert_element_(nullptr),
-      finishing_(false) {}
+    : filename_(filename), convert_element_(nullptr) {}
 
 Chromaprinter::~Chromaprinter() {}
 
@@ -60,16 +58,12 @@ QString Chromaprinter::CreateFingerprint() {
 
   buffer_.open(QIODevice::WriteOnly);
 
-  GMainContext* context = g_main_context_new();
-  g_main_context_push_thread_default(context);
-  event_loop_ = g_main_loop_new(context, FALSE);
-
-  pipeline_ = gst_pipeline_new("pipeline");
-  GstElement* src = CreateElement("filesrc", pipeline_);
-  GstElement* decode = CreateElement("decodebin", pipeline_);
-  GstElement* convert  = CreateElement("audioconvert", pipeline_);
-  GstElement* resample = CreateElement("audioresample", pipeline_);
-  GstElement* sink = CreateElement("appsink", pipeline_);
+  GstElement* pipeline = gst_pipeline_new("pipeline");
+  GstElement* src = CreateElement("filesrc", pipeline);
+  GstElement* decode = CreateElement("decodebin", pipeline);
+  GstElement* convert = CreateElement("audioconvert", pipeline);
+  GstElement* resample = CreateElement("audioresample", pipeline);
+  GstElement* sink = CreateElement("appsink", pipeline);
 
   if (!src || !decode || !convert || !resample || !sink) {
     return QString();
@@ -83,11 +77,8 @@ QString Chromaprinter::CreateFingerprint() {
 
   // Chromaprint expects mono 16-bit ints at a sample rate of 11025Hz.
   GstCaps* caps = gst_caps_new_simple(
-      "audio/x-raw",
-      "format", G_TYPE_STRING, "S16LE",
-      "channels", G_TYPE_INT, kDecodeChannels,
-      "rate", G_TYPE_INT, kDecodeRate,
-      NULL);
+      "audio/x-raw", "format", G_TYPE_STRING, "S16LE", "channels", G_TYPE_INT,
+      kDecodeChannels, "rate", G_TYPE_INT, kDecodeRate, NULL);
   gst_element_link_filtered(resample, sink, caps);
   gst_caps_unref(caps);
 
@@ -103,25 +94,50 @@ QString Chromaprinter::CreateFingerprint() {
   g_object_set(src, "location", filename_.toUtf8().constData(), nullptr);
 
   // Connect signals
+  GstBus* bus = gst_pipeline_get_bus(GST_PIPELINE(pipeline));
   CHECKED_GCONNECT(decode, "pad-added", &NewPadCallback, this);
-  gst_bus_set_sync_handler(gst_pipeline_get_bus(GST_PIPELINE(pipeline_)),
-                           BusCallbackSync, this, nullptr);
-  guint bus_callback_id = gst_bus_add_watch(
-        gst_pipeline_get_bus(GST_PIPELINE(pipeline_)), BusCallback, this);
+
+  // Play only first x seconds
+  gst_element_set_state(pipeline, GST_STATE_PAUSED);
+  // wait for state change before seeking
+  gst_element_get_state(pipeline, nullptr, nullptr, kTimeoutSecs * GST_SECOND);
+  gst_element_seek(pipeline, 1.0, GST_FORMAT_TIME, GST_SEEK_FLAG_FLUSH,
+                   GST_SEEK_TYPE_SET, 0 * GST_SECOND, GST_SEEK_TYPE_SET,
+                   kPlayLengthSecs * GST_SECOND);
 
   QTime time;
   time.start();
 
   // Start playing
-  gst_element_set_state(pipeline_, GST_STATE_PLAYING);
+  gst_element_set_state(pipeline, GST_STATE_PLAYING);
 
-  g_main_loop_run(event_loop_);
-  g_main_loop_unref(event_loop_);
-  g_main_context_unref(context);
+  // Wait until EOS or error
+  GstMessage* msg = gst_bus_timed_pop_filtered(
+      bus, kTimeoutSecs * GST_SECOND,
+      static_cast<GstMessageType>(GST_MESSAGE_EOS | GST_MESSAGE_ERROR));
+
+  if (msg != nullptr) {
+    if (msg->type == GST_MESSAGE_ERROR) {
+      // Report error
+      GError* error = nullptr;
+      gchar* debugs = nullptr;
+
+      gst_message_parse_error(msg, &error, &debugs);
+      QString message = QString::fromLocal8Bit(error->message);
+
+      g_error_free(error);
+      free(debugs);
+
+      qLog(Debug) << "Error processing" << filename_ << ":" << message;
+    }
+    gst_message_unref(msg);
+  }
 
   int decode_time = time.restart();
 
   buffer_.close();
+
+  // Generate fingerprint from recorded buffer data
   QByteArray data = buffer_.data();
 
   ChromaprintContext* chromaprint =
@@ -154,13 +170,9 @@ QString Chromaprinter::CreateFingerprint() {
 
   // Cleanup
   callbacks.new_sample = nullptr;
-  gst_app_sink_set_callbacks(reinterpret_cast<GstAppSink*>(sink), &callbacks,
-                             this, nullptr);
-  gst_bus_set_sync_handler(gst_pipeline_get_bus(GST_PIPELINE(pipeline_)),
-                           nullptr, nullptr, nullptr);
-  g_source_remove(bus_callback_id);
-  gst_element_set_state(pipeline_, GST_STATE_NULL);
-  gst_object_unref(pipeline_);
+  gst_object_unref(bus);
+  gst_element_set_state(pipeline, GST_STATE_NULL);
+  gst_object_unref(pipeline);
 
   return fingerprint;
 }
@@ -179,69 +191,9 @@ void Chromaprinter::NewPadCallback(GstElement*, GstPad* pad, gpointer data) {
   gst_object_unref(audiopad);
 }
 
-void Chromaprinter::ReportError(GstMessage* msg) {
-  GError* error;
-  gchar* debugs;
-
-  gst_message_parse_error(msg, &error, &debugs);
-  QString message = QString::fromLocal8Bit(error->message);
-
-  g_error_free(error);
-  free(debugs);
-
-  qLog(Error) << "Error processing" << filename_ << ":" << message;
-}
-
-gboolean Chromaprinter::BusCallback(GstBus*, GstMessage* msg, gpointer data) {
-  Chromaprinter* instance = reinterpret_cast<Chromaprinter*>(data);
-  if (instance->finishing_) {
-    return GST_BUS_DROP;
-  }
-
-  switch (GST_MESSAGE_TYPE(msg)) {
-    case GST_MESSAGE_ERROR:
-      instance->ReportError(msg);
-      instance->finishing_ = true;
-      g_main_loop_quit(instance->event_loop_);
-      break;
-
-    default:
-      break;
-  }
-  return GST_BUS_DROP;
-}
-
-GstBusSyncReply Chromaprinter::BusCallbackSync(GstBus*, GstMessage* msg,
-                                               gpointer data) {
-  Chromaprinter* instance = reinterpret_cast<Chromaprinter*>(data);
-  if (instance->finishing_) {
-    return GST_BUS_PASS;
-  }
-
-  switch (GST_MESSAGE_TYPE(msg)) {
-    case GST_MESSAGE_EOS:
-      instance->finishing_ = true;
-      g_main_loop_quit(instance->event_loop_);
-      break;
-
-    case GST_MESSAGE_ERROR:
-      instance->ReportError(msg);
-      instance->finishing_ = true;
-      g_main_loop_quit(instance->event_loop_);
-      break;
-
-    default:
-      break;
-  }
-  return GST_BUS_PASS;
-}
-
 GstFlowReturn Chromaprinter::NewBufferCallback(GstAppSink* app_sink,
                                                gpointer self) {
   Chromaprinter* me = reinterpret_cast<Chromaprinter*>(self);
-  if (me->finishing_) {
-    return GST_FLOW_OK;
-  }
 
   GstSample* sample = gst_app_sink_pull_sample(app_sink);
   GstBuffer* buffer = gst_sample_get_buffer(sample);
@@ -251,11 +203,5 @@ GstFlowReturn Chromaprinter::NewBufferCallback(GstAppSink* app_sink,
   gst_buffer_unmap(buffer, &map);
   gst_buffer_unref(buffer);
 
-  gint64 pos = 0;
-  gboolean ret = gst_element_query_position(me->pipeline_, GST_FORMAT_TIME, &pos);
-  if (ret && pos > 30 * kNsecPerSec) {
-    me->finishing_ = true;
-    g_main_loop_quit(me->event_loop_);
-  }
   return GST_FLOW_OK;
 }
