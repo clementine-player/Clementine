@@ -495,6 +495,9 @@ void OutgoingDataCreator::SendRepeatMode(PlaylistSequence::RepeatMode mode) {
     case PlaylistSequence::Repeat_Playlist:
       msg.mutable_repeat()->set_repeat_mode(pb::remote::Repeat_Playlist);
       break;
+    case PlaylistSequence::Repeat_OneByOne:
+      msg.mutable_repeat()->set_repeat_mode(pb::remote::Repeat_OneByOne);
+      break;
   }
 
   SendDataToClients(&msg);
