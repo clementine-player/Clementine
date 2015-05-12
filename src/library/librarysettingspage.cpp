@@ -93,6 +93,7 @@ void LibrarySettingsPage::Save() {
   s.beginGroup(LibraryWatcher::kSettingsGroup);
   s.setValue("startup_scan", ui_->startup_scan->isChecked());
   s.setValue("monitor", ui_->monitor->isChecked());
+  s.setValue("prevent_delete", ui_->prevent_delete->isChecked());
 
   QString filter_text = ui_->cover_art_patterns->text();
   QStringList filters = filter_text.split(',', QString::SkipEmptyParts);

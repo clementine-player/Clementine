@@ -38,7 +38,7 @@ class LibraryWatcher : public QObject {
   Q_OBJECT
 
  public:
-  LibraryWatcher(QObject* parent = nullptr);
+  LibraryWatcher(QObject* parent = 0);
 
   static const char* kSettingsGroup;
 
@@ -89,7 +89,7 @@ signals:
   class ScanTransaction {
    public:
     ScanTransaction(LibraryWatcher* watcher, int dir, bool incremental,
-                    bool ignores_mtime = false);
+                    bool ignores_mtime, bool prevent_delete);
     ~ScanTransaction();
 
     SongList FindSongsInSubdirectory(const QString& path);
@@ -135,6 +135,10 @@ signals:
     // it will go as deep in the folder hierarchy as it's possible.
     bool ignores_mtime_;
 
+    // Set this to true to prevent deleting missing files from database.
+    // Useful for unstable network connections.
+    bool prevent_delete_;
+
     LibraryWatcher* watcher_;
 
     SongList cached_songs_;
@@ -142,6 +146,7 @@ signals:
 
     SubdirectoryList known_subdirs_;
     bool known_subdirs_dirty_;
+
   };
 
  private slots:
@@ -223,6 +228,8 @@ signals:
   static QStringList sValidImages;
 
   SongList song_rescan_queue_; // Set by ui thread
+
+  bool prevent_delete_;
 };
 
 inline QString LibraryWatcher::NoExtensionPart(const QString& fileName) {

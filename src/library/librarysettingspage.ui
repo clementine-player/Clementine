@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>509</width>
-    <height>452</height>
+    <height>480</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -106,6 +106,13 @@
         </property>
         <property name="text">
          <string>Save statistics in file tags when possible</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="prevent_delete">
+        <property name="text">
+         <string>Never delete tracks from library</string>
         </property>
        </widget>
       </item>
