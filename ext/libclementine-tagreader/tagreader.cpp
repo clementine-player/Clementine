@@ -537,8 +537,10 @@ void TagReader::SetVorbisComments(
       "COMPILATION", StdStringToTaglibString(song.compilation() ? "1" : "0"),
       true);
 
-  vorbis_comments->addField("ALBUM ARTIST",
+  // Try to be coherent, the two forms are used but the first one is preferred
+  vorbis_comments->addField("ALBUMARTIST",
                             StdStringToTaglibString(song.albumartist()), true);
+  vorbis_comments->removeField("ALBUM ARTIST");
 }
 
 void TagReader::SetFMPSStatisticsVorbisComments(
