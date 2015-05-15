@@ -264,6 +264,8 @@ void SubsonicService::ReloadDatabaseFinished() {
 void SubsonicService::OnLoginStateChanged(
     SubsonicService::LoginState newstate) {
   // TODO(Alan Briolat): library refresh logic?
+  if(newstate != LoginState_Loggedin)
+    library_backend_->DeleteAll();
 }
 
 void SubsonicService::OnPingFinished(QNetworkReply* reply) {
