@@ -392,6 +392,8 @@ void SubsonicLibraryScanner::OnGetAlbumListFinished(QNetworkReply* reply,
                                                     int offset) {
   reply->deleteLater();
 
+  bool skip_read_albums = false;
+
   QXmlStreamReader reader(reply);
   reader.readNextStartElement();
   Q_ASSERT(reader.name() == "subsonic-response");
@@ -404,6 +406,7 @@ void SubsonicLibraryScanner::OnGetAlbumListFinished(QNetworkReply* reply,
     // whereas Subsonic returns empty albumList2 tag
     switch (error) {
       case SubsonicService::ApiError_NotFound:
+        skip_read_albums = true;
         break;
       default:
         return;
@@ -411,13 +414,15 @@ void SubsonicLibraryScanner::OnGetAlbumListFinished(QNetworkReply* reply,
   }
 
   int albums_added = 0;
-  reader.readNextStartElement();
-  Q_ASSERT(reader.name() == "albumList2");
-  while (reader.readNextStartElement()) {
-    Q_ASSERT(reader.name() == "album");
-    album_queue_ << reader.attributes().value("id").toString();
-    albums_added++;
-    reader.skipCurrentElement();
+  if(skip_read_albums == false) {
+    reader.readNextStartElement();
+    Q_ASSERT(reader.name() == "albumList2");
+    while (reader.readNextStartElement()) {
+      Q_ASSERT(reader.name() == "album");
+      album_queue_ << reader.attributes().value("id").toString();
+      albums_added++;
+      reader.skipCurrentElement();
+    }
   }
 
   if (albums_added > 0) {
