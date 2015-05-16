@@ -155,6 +155,7 @@ set(SOURCES
   globalsearch/simplesearchprovider.cpp
   globalsearch/somafmsearchprovider.cpp
   globalsearch/soundcloudsearchprovider.cpp
+  globalsearch/playmusicsearchprovider.cpp
   globalsearch/spotifysearchprovider.cpp
   globalsearch/suggestionwidget.cpp
   globalsearch/urlsearchprovider.cpp
@@ -198,6 +199,9 @@ set(SOURCES
   internet/subsonic/subsonicservice.cpp
   internet/subsonic/subsonicsettingspage.cpp
   internet/subsonic/subsonicurlhandler.cpp
+  internet/playmusic/playmusicservice.cpp
+  internet/playmusic/playmusicsettingspage.cpp
+  internet/playmusic/playmusicurlhandler.cpp
 
   library/groupbydialog.cpp
   library/library.cpp
@@ -462,6 +466,7 @@ set(HEADERS
   globalsearch/searchprovider.h
   globalsearch/simplesearchprovider.h
   globalsearch/soundcloudsearchprovider.h
+  globalsearch/playmusicsearchprovider.h
   globalsearch/spotifysearchprovider.h
   globalsearch/suggestionwidget.h
 
@@ -501,6 +506,13 @@ set(HEADERS
   internet/subsonic/subsonicservice.h
   internet/subsonic/subsonicsettingspage.h
   internet/subsonic/subsonicurlhandler.h
+  internet/playmusic/playmusicservice.h
+  internet/playmusic/playmusicsettingspage.h
+  internet/playmusic/playmusicurlhandler.h
+  internet/playmusic/cryptlite/base64.h
+  internet/playmusic/cryptlite/sha1.h
+  internet/playmusic/cryptlite/hmac.h
+  internet/playmusic/cryptlite/sha256.h
 
   library/groupbydialog.h
   library/library.h
@@ -694,6 +706,7 @@ set(UI
   internet/soundcloud/soundcloudsettingspage.ui
   internet/spotify/spotifysettingspage.ui
   internet/subsonic/subsonicsettingspage.ui
+  internet/playmusic/playmusicsettingspage.ui
 
   library/groupbydialog.ui
   library/libraryfilterwidget.ui
