@@ -213,6 +213,7 @@ void PlayMusicService::LoadWebTokenFinished(QNetworkReply *reply) {
   } else {
     qLog(Warning) << "PlayMusic: Error getting WebToken";
     this->xt_ = QString();
+    return;
   }
 
   if (device_id_.isEmpty()) {
