@@ -509,10 +509,6 @@ set(HEADERS
   internet/playmusic/playmusicservice.h
   internet/playmusic/playmusicsettingspage.h
   internet/playmusic/playmusicurlhandler.h
-  internet/playmusic/cryptlite/base64.h
-  internet/playmusic/cryptlite/sha1.h
-  internet/playmusic/cryptlite/hmac.h
-  internet/playmusic/cryptlite/sha256.h
 
   library/groupbydialog.h
   library/library.h

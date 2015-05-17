@@ -43,9 +43,6 @@
 #include "playmusicurlhandler.h"
 #include "ui/iconloader.h"
 
-#include "cryptlite/sha1.h"
-#include "cryptlite/hmac.h"
-
 
 const char* PlayMusicService::kS1 = "VzeC4H4h+T2f0VI180nVX8x+Mb5HiTtGnKgH52Otj8ZCGDz9jRW"
         "yHb6QXK0JskSiOgzQfwTY5xgLLSdUSreaLVMsVVWfxfa8Rw==";
@@ -309,9 +306,32 @@ QString PlayMusicService::GenerateSalt(int len) {
   return randomString;
 }
 
-void PlayMusicService::LoadStreamUrl(QString id) {
-  using namespace cryptlite;
+QByteArray PlayMusicService::HmacSHA1(const QByteArray& text, const QByteArray& in_key)
+{
+    int blocksize = 64;
 
+    QByteArray key(in_key);
+
+    if (key.length() > blocksize) {
+        key = QCryptographicHash::hash(key, QCryptographicHash::Sha1);
+    }
+    if (key.length() < blocksize) {
+        key += QByteArray(blocksize-key.length(), 0);
+    }
+
+    QByteArray o_pad(blocksize, char(0x5c));
+    QByteArray i_pad(blocksize, char(0x36));
+
+    for (int i=0; i<blocksize; ++i) {
+        o_pad[i] = o_pad[i] ^ key[i];
+        i_pad[i] = i_pad[i] ^ key[i];
+    }
+
+    return QCryptographicHash::hash(o_pad +
+        QCryptographicHash::hash(i_pad + text, QCryptographicHash::Sha1), QCryptographicHash::Sha1);
+}
+
+void PlayMusicService::LoadStreamUrl(QString id) {
   LoadAccessTokenIfEmpty();
 
   if (id[0].isLower()) {
@@ -319,9 +339,7 @@ void PlayMusicService::LoadStreamUrl(QString id) {
   }
   QString salt = GenerateSalt(13);
 
-  boost::uint8_t hmacsha1digest[sha1::HASH_SIZE];
-  hmac<sha1>::calc(QString(id+salt).toStdString(), key_.toStdString(), hmacsha1digest);
-  QString sig = QString::fromStdString(base64::encode_from_array(hmacsha1digest, sha1::HASH_SIZE))
+  QString sig = HmacSHA1(QString(id+salt).toAscii(), key_.toAscii()).toBase64()
           .replace("=", "")
           .replace("+","-")
           .replace("/", "_");

@@ -91,6 +91,7 @@ private:
   Song ExtractSong(const QVariantMap& result_song);
 
   static QString GenerateSalt(int len);
+  static QByteArray HmacSHA1(const QByteArray &text, const QByteArray &in_key);
 
   QStandardItem* root_;
   QStandardItem* search_;
