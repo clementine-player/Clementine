@@ -437,7 +437,7 @@ void Player::SeekTo(int seconds) {
   engine_->Seek(nanosec);
 
   // If we seek the track we need to move the scrobble point
-  qLog(Info) << "Track seeked to" << nanosec << "ns - updating srobble point";
+  qLog(Info) << "Track seeked to" << nanosec << "ns - updating scrobble point";
   app_->playlist_manager()->active()->UpdateScrobblePoint(nanosec);
 
   emit Seeked(nanosec / 1000);
