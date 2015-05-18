@@ -227,6 +227,7 @@ class Playlist : public QAbstractListModel {
   }
   void set_lastfm_status(LastFMStatus status) { lastfm_status_ = status; }
   void set_have_incremented_playcount() { have_incremented_playcount_ = true; }
+  void UpdateScrobblePoint(qint64 seek_point = 0);
 
   // Changing the playlist
   void InsertItems(const PlaylistItemList& items, int pos = -1,
@@ -351,7 +352,6 @@ signals:
 
  private:
   void SetCurrentIsPaused(bool paused);
-  void UpdateScrobblePoint();
   int NextVirtualIndex(int i, bool ignore_repeat_track) const;
   int PreviousVirtualIndex(int i, bool ignore_repeat_track) const;
   bool FilterContainsVirtualIndex(int i) const;

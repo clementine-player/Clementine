@@ -436,13 +436,9 @@ void Player::SeekTo(int seconds) {
       qBound(0ll, qint64(seconds) * kNsecPerSec, length_nanosec);
   engine_->Seek(nanosec);
 
-  // If we seek the track we don't want to submit it to last.fm
-  qLog(Info) << "Track seeked to" << nanosec << "ns - not scrobbling";
-  if (app_->playlist_manager()->active()->get_lastfm_status() ==
-      Playlist::LastFM_New) {
-    app_->playlist_manager()->active()->set_lastfm_status(
-        Playlist::LastFM_Seeked);
-  }
+  // If we seek the track we need to move the scrobble point
+  qLog(Info) << "Track seeked to" << nanosec << "ns - updating srobble point";
+  app_->playlist_manager()->active()->UpdateScrobblePoint(nanosec);
 
   emit Seeked(nanosec / 1000);
 }

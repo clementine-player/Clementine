@@ -1705,14 +1705,25 @@ Song Playlist::current_item_metadata() const {
   return current_item()->Metadata();
 }
 
-void Playlist::UpdateScrobblePoint() {
+void Playlist::UpdateScrobblePoint(qint64 seek_point) {
   const qint64 length = current_item_metadata().length_nanosec();
 
-  if (length == 0) {
-    scrobble_point_ = 240ll * kNsecPerSec;  // 4 minutes
+  if (seek_point == 0) {
+    if (length == 0) {
+      scrobble_point_ = 240ll * kNsecPerSec;  // 4 minutes
+    } else {
+      scrobble_point_ =
+          qBound(31ll * kNsecPerSec, length / 2, 240ll * kNsecPerSec);
+    }
   } else {
-    scrobble_point_ =
-        qBound(31ll * kNsecPerSec, length / 2, 240ll * kNsecPerSec);
+    if (length == 0) {
+      // current time + 4 minutes
+      scrobble_point_ = seek_point + (240ll * kNsecPerSec);
+    } else {
+      scrobble_point_ =
+          qBound(seek_point + (31ll * kNsecPerSec), seek_point + (length / 2),
+                 seek_point + (240ll * kNsecPerSec));
+    }
   }
 
   set_lastfm_status(LastFM_New);
