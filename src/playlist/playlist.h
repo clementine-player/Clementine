@@ -160,6 +160,9 @@ class Playlist : public QAbstractListModel {
   static const int kUndoStackSize;
   static const int kUndoItemLimit;
 
+  static const qint64 kMinScrobblePointNsecs;
+  static const qint64 kMaxScrobblePointNsecs;
+
   static bool CompareItems(int column, Qt::SortOrder order, PlaylistItemPtr a,
                            PlaylistItemPtr b);
 
@@ -227,7 +230,7 @@ class Playlist : public QAbstractListModel {
   }
   void set_lastfm_status(LastFMStatus status) { lastfm_status_ = status; }
   void set_have_incremented_playcount() { have_incremented_playcount_ = true; }
-  void UpdateScrobblePoint(qint64 seek_point = 0);
+  void UpdateScrobblePoint(qint64 seek_point_nanosec = 0);
 
   // Changing the playlist
   void InsertItems(const PlaylistItemList& items, int pos = -1,
