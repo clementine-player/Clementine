@@ -95,6 +95,9 @@ const char* Playlist::kWriteMetadata = "write_metadata";
 const int Playlist::kUndoStackSize = 20;
 const int Playlist::kUndoItemLimit = 500;
 
+const qint64 Playlist::kMinScrobblePointNsecs = 31ll * kNsecPerSec;
+const qint64 Playlist::kMaxScrobblePointNsecs = 240ll * kNsecPerSec;
+
 Playlist::Playlist(PlaylistBackend* backend, TaskManager* task_manager,
                    LibraryBackend* library, int id, const QString& special_type,
                    bool favorite, QObject* parent)
@@ -1705,14 +1708,25 @@ Song Playlist::current_item_metadata() const {
   return current_item()->Metadata();
 }
 
-void Playlist::UpdateScrobblePoint() {
+void Playlist::UpdateScrobblePoint(qint64 seek_point_nanosec) {
   const qint64 length = current_item_metadata().length_nanosec();
 
-  if (length == 0) {
-    scrobble_point_ = 240ll * kNsecPerSec;  // 4 minutes
+  if (seek_point_nanosec == 0) {
+    if (length == 0) {
+      scrobble_point_ = kMaxScrobblePointNsecs;  // 4 minutes
+    } else {
+      scrobble_point_ =
+          qBound(kMinScrobblePointNsecs, length / 2, kMaxScrobblePointNsecs);
+    }
   } else {
-    scrobble_point_ =
-        qBound(31ll * kNsecPerSec, length / 2, 240ll * kNsecPerSec);
+    if (length == 0) {
+      // current time + 4 minutes
+      scrobble_point_ = seek_point_nanosec + kMaxScrobblePointNsecs;
+    } else {
+      scrobble_point_ = qBound(seek_point_nanosec + kMinScrobblePointNsecs,
+                               seek_point_nanosec + (length / 2),
+                               seek_point_nanosec + kMaxScrobblePointNsecs);
+    }
   }
 
   set_lastfm_status(LastFM_New);
