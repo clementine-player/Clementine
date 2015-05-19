@@ -315,7 +315,7 @@ void OSD::RepeatModeChanged(PlaylistSequence::RepeatMode mode) {
         current_mode = tr("Repeat playlist");
         break;
       case PlaylistSequence::Repeat_OneByOne:
-        current_mode = tr("Tracks one by one");
+        current_mode = tr("Stop after every track");
         break;
     }
     ShowMessage(QCoreApplication::applicationName(), current_mode);
