@@ -292,7 +292,7 @@ void Player::RestartOrPrevious() {
 
 void Player::Stop(bool stop_after) {
   engine_->Stop(stop_after);
-  app_->playlist_manager()->active()->set_current_row(-1);
+  //app_->playlist_manager()->active()->set_current_row(-1);
   current_item_.reset();
 }
 
