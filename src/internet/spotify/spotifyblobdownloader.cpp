@@ -33,6 +33,7 @@
 #include <QMessageBox>
 #include <QNetworkReply>
 #include <QProgressDialog>
+#include <QSslKey>
 
 #ifdef Q_OS_UNIX
 #include <unistd.h>
@@ -42,11 +43,6 @@
 #include <cryptopp/pkcspad.h>
 #include <cryptopp/rsa.h>
 #endif  // HAVE_CRYPTOPP
-
-namespace {
-static const char PEM_HEADER[] = "-----BEGIN PUBLIC KEY-----\n";
-static const char PEM_FOOTER[] = "\n-----END PUBLIC KEY-----";
-}
 
 const char* SpotifyBlobDownloader::kSignatureSuffix = ".sha512";
 
@@ -189,7 +185,7 @@ bool SpotifyBlobDownloader::CheckSignature(
 #ifdef HAVE_CRYPTOPP
   QFile public_key_file(":/clementine-spotify-public.pem");
   public_key_file.open(QIODevice::ReadOnly);
-  QByteArray public_key_data = ConvertPEMToDER(public_key_file.readAll());
+  const QByteArray public_key_data = ConvertPEMToDER(public_key_file.readAll());
 
   try {
     CryptoPP::ByteQueue bytes;
@@ -232,12 +228,9 @@ bool SpotifyBlobDownloader::CheckSignature(
 }
 
 QByteArray SpotifyBlobDownloader::ConvertPEMToDER(const QByteArray& pem) {
-  // Ensure we used char[] not char*
-  static_assert(sizeof(PEM_HEADER) > sizeof(char*), "PEM_HEADER mis-declared");
-  static_assert(sizeof(PEM_FOOTER) > sizeof(char*), "PEM_FOOTER mis-declared");
-  int start = pem.indexOf(PEM_HEADER) + arraysize(PEM_HEADER) - 1;
-  int length = pem.indexOf(PEM_FOOTER) - start;
-  return QByteArray::fromBase64(pem.mid(start, length));
+  QSslKey key(pem, QSsl::Rsa, QSsl::Pem, QSsl::PublicKey);
+  Q_ASSERT(!key.isNull());
+  return key.toDer();
 }
 
 void SpotifyBlobDownloader::ReplyProgress() {
