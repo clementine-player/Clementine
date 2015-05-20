@@ -272,6 +272,7 @@ void PlaylistView::SetPlaylist(Playlist* playlist) {
   DynamicModeChanged(playlist->is_dynamic());
   setFocus();
   read_only_settings_ = false;
+  JumpToLastPlayedTrack();
 
   connect(playlist_, SIGNAL(RestoreFinished()), SLOT(JumpToLastPlayedTrack()));
   connect(playlist_, SIGNAL(CurrentSongChanged(Song)), SLOT(MaybeAutoscroll()));
