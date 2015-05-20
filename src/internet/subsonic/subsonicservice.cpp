@@ -264,6 +264,7 @@ void SubsonicService::ReloadDatabaseFinished() {
 void SubsonicService::OnLoginStateChanged(
     SubsonicService::LoginState newstate) {
   // TODO(Alan Briolat): library refresh logic?
+  if (newstate != LoginState_Loggedin) library_backend_->DeleteAll();
 }
 
 void SubsonicService::OnPingFinished(QNetworkReply* reply) {
@@ -392,9 +393,16 @@ void SubsonicLibraryScanner::OnGetAlbumListFinished(QNetworkReply* reply,
                                                     int offset) {
   reply->deleteLater();
 
+  bool skip_read_albums = false;
+
   QXmlStreamReader reader(reply);
   reader.readNextStartElement();
-  Q_ASSERT(reader.name() == "subsonic-response");
+
+  if (reader.name() != "subsonic-response") {
+    ParsingError("Not a subsonic-response. Aborting scan.");
+    return;
+  }
+
   if (reader.attributes().value("status") != "ok") {
     reader.readNextStartElement();
     int error = reader.attributes().value("code").toString().toInt();
@@ -404,20 +412,32 @@ void SubsonicLibraryScanner::OnGetAlbumListFinished(QNetworkReply* reply,
     // whereas Subsonic returns empty albumList2 tag
     switch (error) {
       case SubsonicService::ApiError_NotFound:
+        skip_read_albums = true;
         break;
       default:
+        ParsingError("Response status not ok. Aborting scan.");
         return;
     }
   }
 
   int albums_added = 0;
-  reader.readNextStartElement();
-  Q_ASSERT(reader.name() == "albumList2");
-  while (reader.readNextStartElement()) {
-    Q_ASSERT(reader.name() == "album");
-    album_queue_ << reader.attributes().value("id").toString();
-    albums_added++;
-    reader.skipCurrentElement();
+  if (!skip_read_albums) {
+    reader.readNextStartElement();
+    if (reader.name() != "albumList2") {
+      ParsingError("albumList2 tag expected. Aborting scan.");
+      return;
+    }
+
+    while (reader.readNextStartElement()) {
+      if (reader.name() != "album") {
+        ParsingError("album tag expected. Aborting scan.");
+        return;
+      }
+
+      album_queue_ << reader.attributes().value("id").toString();
+      albums_added++;
+      reader.skipCurrentElement();
+    }
   }
 
   if (albums_added > 0) {
@@ -443,7 +463,12 @@ void SubsonicLibraryScanner::OnGetAlbumFinished(QNetworkReply* reply) {
 
   QXmlStreamReader reader(reply);
   reader.readNextStartElement();
-  Q_ASSERT(reader.name() == "subsonic-response");
+
+  if (reader.name() != "subsonic-response") {
+    ParsingError("Not a subsonic-response. Aborting scan.");
+    return;
+  }
+
   if (reader.attributes().value("status") != "ok") {
     // TODO(Alan Briolat): error handling
     return;
@@ -451,12 +476,20 @@ void SubsonicLibraryScanner::OnGetAlbumFinished(QNetworkReply* reply) {
 
   // Read album information
   reader.readNextStartElement();
-  Q_ASSERT(reader.name() == "album");
+  if (reader.name() != "album") {
+    ParsingError("album tag expected. Aborting scan.");
+    return;
+  }
+
   QString album_artist = reader.attributes().value("artist").toString();
 
   // Read song information
   while (reader.readNextStartElement()) {
-    Q_ASSERT(reader.name() == "song");
+    if (reader.name() != "song") {
+      ParsingError("song tag expected. Aborting scan.");
+      return;
+    }
+
     Song song;
     QString id = reader.attributes().value("id").toString();
     song.set_title(reader.attributes().value("title").toString());
@@ -511,4 +544,10 @@ void SubsonicLibraryScanner::GetAlbum(const QString& id) {
   NewClosure(reply, SIGNAL(finished()), this,
              SLOT(OnGetAlbumFinished(QNetworkReply*)), reply);
   pending_requests_.insert(reply);
+}
+
+void SubsonicLibraryScanner::ParsingError(const QString& message) {
+  qLog(Warning) << "Subsonic parsing error: " << message;
+  scanning_ = false;
+  emit ScanFinished();
 }
