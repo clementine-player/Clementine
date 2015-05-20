@@ -75,8 +75,7 @@ void OutgoingDataCreator::SetClients(QList<RemoteClient*>* clients) {
           SLOT(ResultsAvailable(int, SearchProvider::ResultList)),
           Qt::QueuedConnection);
 
-  connect(app_->global_search(),
-          SIGNAL(SearchFinished(int)),
+  connect(app_->global_search(), SIGNAL(SearchFinished(int)),
           SLOT(SearchFinished(int)));
 }
 
@@ -130,8 +129,8 @@ void OutgoingDataCreator::CheckEnabledProviders() {
   }
 }
 
-SongInfoProvider* OutgoingDataCreator::ProviderByName(const QString& name)
-    const {
+SongInfoProvider* OutgoingDataCreator::ProviderByName(
+    const QString& name) const {
   for (SongInfoProvider* provider : fetcher_->providers()) {
     if (UltimateLyricsProvider* lyrics =
             qobject_cast<UltimateLyricsProvider*>(provider)) {
@@ -656,14 +655,16 @@ void OutgoingDataCreator::SendKitten(const QImage& kitten) {
   }
 }
 
-void OutgoingDataCreator::DoGlobalSearch(const QString &query, RemoteClient *client) {
+void OutgoingDataCreator::DoGlobalSearch(const QString& query,
+                                         RemoteClient* client) {
   int id = app_->global_search()->SearchAsync(query);
 
   GlobalSearchRequest request(id, query, client);
   global_search_result_map_.insert(id, request);
 }
 
-void OutgoingDataCreator::ResultsAvailable(int id, const SearchProvider::ResultList& results) {
+void OutgoingDataCreator::ResultsAvailable(
+    int id, const SearchProvider::ResultList& results) {
   if (!global_search_result_map_.contains(id)) return;
 
   GlobalSearchRequest search_request = global_search_result_map_.value(id);
@@ -671,12 +672,14 @@ void OutgoingDataCreator::ResultsAvailable(int id, const SearchProvider::ResultL
   QImage null_img;
 
   pb::remote::Message msg;
-  pb::remote::ResponseGlobalSearch* response = msg.mutable_response_global_search();
+  pb::remote::ResponseGlobalSearch* response =
+      msg.mutable_response_global_search();
 
   msg.set_type(pb::remote::GLOBAL_SEARCH_RESULT);
   response->set_id(search_request.id_);
   response->set_query(DataCommaSizeFromQString(search_request.query_));
-  response->set_search_provider(DataCommaSizeFromQString(results.first().provider_->name()));
+  response->set_search_provider(
+      DataCommaSizeFromQString(results.first().provider_->name()));
 
   // Append the icon
   QImage icon_image(results.first().provider_->icon().pixmap(48, 48).toImage());
