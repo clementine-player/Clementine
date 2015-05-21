@@ -70,7 +70,6 @@ PlayMusicService::PlayMusicService(Application* app, InternetModel* parent)
           search_box_(new SearchBoxWidget(this)),
           search_delay_(new QTimer(this)),
           next_pending_search_id_(0) {
-  qsrand(QTime::currentTime().msec());
 
   QByteArray s1 = QByteArray::fromBase64(kS1);
   QByteArray s2 = QByteArray::fromBase64(kS2);
