@@ -1684,11 +1684,6 @@ void Playlist::ClearStreamMetadata() {
 }
 
 bool Playlist::stop_after_current() const {
-  PlaylistSequence::RepeatMode repeat_mode = playlist_sequence_->repeat_mode();
-  if (repeat_mode == PlaylistSequence::Repeat_OneByOne) {
-    return true;
-  }
-
   return stop_after_.isValid() && current_item_index_.isValid() &&
          stop_after_.row() == current_item_index_.row();
 }

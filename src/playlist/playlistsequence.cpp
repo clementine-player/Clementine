@@ -52,7 +52,6 @@ PlaylistSequence::PlaylistSequence(QWidget* parent, SettingsProvider* settings)
   repeat_group->addAction(ui_->action_repeat_track);
   repeat_group->addAction(ui_->action_repeat_album);
   repeat_group->addAction(ui_->action_repeat_playlist);
-  repeat_group->addAction(ui_->action_repeat_onebyone);
   repeat_menu_->addActions(repeat_group->actions());
   ui_->repeat->setMenu(repeat_menu_);
 
@@ -119,7 +118,6 @@ void PlaylistSequence::RepeatActionTriggered(QAction* action) {
   if (action == ui_->action_repeat_track) mode = Repeat_Track;
   if (action == ui_->action_repeat_album) mode = Repeat_Album;
   if (action == ui_->action_repeat_playlist) mode = Repeat_Playlist;
-  if (action == ui_->action_repeat_onebyone) mode = Repeat_OneByOne;
 
   SetRepeatMode(mode);
 }
@@ -148,9 +146,6 @@ void PlaylistSequence::SetRepeatMode(RepeatMode mode) {
       break;
     case Repeat_Playlist:
       ui_->action_repeat_playlist->setChecked(true);
-      break;
-    case Repeat_OneByOne:
-      ui_->action_repeat_onebyone->setChecked(true);
       break;
   }
 
@@ -242,9 +237,6 @@ void PlaylistSequence::CycleRepeatMode() {
       mode = Repeat_Playlist;
       break;
     case Repeat_Playlist:
-      mode = Repeat_OneByOne;
-      break;
-    case Repeat_OneByOne:
       break;
   }
 
