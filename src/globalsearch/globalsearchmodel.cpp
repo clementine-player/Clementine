@@ -249,7 +249,8 @@ void GlobalSearchModel::GetChildResults(
       if (is_provider) {
         // Go through all the items (through the proxy to keep them ordered) and
         // add the ones belonging to this provider to our list
-        for (int i = 0; i < proxy_->rowCount(invisibleRootItem()->index()); ++i) {
+        for (int i = 0; i < proxy_->rowCount(invisibleRootItem()->index());
+             ++i) {
           QModelIndex child_index =
               proxy_->index(i, 0, invisibleRootItem()->index());
           const QStandardItem* child_item =

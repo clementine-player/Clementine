@@ -919,7 +919,8 @@ LibraryItem* LibraryModel::ItemFromQuery(GroupBy type, bool signal,
       item->metadata.set_album(row.value(1).toString());
       item->metadata.set_grouping(row.value(2).toString());
       item->key = PrettyYearAlbum(year, item->metadata.album());
-      item->sort_text = SortTextForNumber(year) + item->metadata.grouping() + item->metadata.album();
+      item->sort_text = SortTextForNumber(year) + item->metadata.grouping() +
+                        item->metadata.album();
       break;
 
     case GroupBy_Year:
