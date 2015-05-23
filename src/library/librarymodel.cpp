@@ -207,7 +207,7 @@ void LibraryModel::SongsDiscovered(const SongList& songs) {
             key = song.performer();
             break;
           case GroupBy_Disc:
-            key = song.disc();
+            key = QString::number(song.disc());
             break;
           case GroupBy_Grouping:
             key = song.grouping();
@@ -313,13 +313,13 @@ QString LibraryModel::DividerKey(GroupBy type, LibraryItem* item) const {
     }
 
     case GroupBy_Year:
-      return SortTextForYear(item->sort_text.toInt() / 10 * 10);
+      return SortTextForNumber(item->sort_text.toInt() / 10 * 10);
 
     case GroupBy_YearAlbum:
-      return SortTextForYear(item->metadata.year());
+      return SortTextForNumber(item->metadata.year());
 
     case GroupBy_Bitrate:
-      return SortTextForBitrate(item->metadata.bitrate());
+      return SortTextForNumber(item->metadata.bitrate());
 
     case GroupBy_None:
       return QString();
@@ -904,6 +904,7 @@ LibraryItem* LibraryModel::ItemFromQuery(GroupBy type, bool signal,
   LibraryItem* item = InitItem(type, signal, parent, container_level);
   int year = 0;
   int bitrate = 0;
+  int disc = 0;
 
   switch (type) {
     case GroupBy_Artist:
@@ -918,18 +919,17 @@ LibraryItem* LibraryModel::ItemFromQuery(GroupBy type, bool signal,
       item->metadata.set_album(row.value(1).toString());
       item->metadata.set_grouping(row.value(2).toString());
       item->key = PrettyYearAlbum(year, item->metadata.album());
-      item->sort_text = SortTextForYear(year) + item->metadata.grouping() + item->metadata.album();
+      item->sort_text = SortTextForNumber(year) + item->metadata.grouping() + item->metadata.album();
       break;
 
     case GroupBy_Year:
       year = qMax(0, row.value(0).toInt());
       item->key = QString::number(year);
-      item->sort_text = SortTextForYear(year) + " ";
+      item->sort_text = SortTextForNumber(year) + " ";
       break;
 
     case GroupBy_Composer:
     case GroupBy_Performer:
-    case GroupBy_Disc:
     case GroupBy_Grouping:
     case GroupBy_Genre:
     case GroupBy_Album:
@@ -937,6 +937,12 @@ LibraryItem* LibraryModel::ItemFromQuery(GroupBy type, bool signal,
       item->key = row.value(0).toString();
       item->display_text = TextOrUnknown(item->key);
       item->sort_text = SortTextForArtist(item->key);
+      break;
+
+    case GroupBy_Disc:
+      disc = row.value(0).toInt();
+      item->key = QString::number(disc);
+      item->sort_text = SortTextForNumber(disc);
       break;
 
     case GroupBy_FileType:
@@ -947,7 +953,7 @@ LibraryItem* LibraryModel::ItemFromQuery(GroupBy type, bool signal,
     case GroupBy_Bitrate:
       bitrate = qMax(0, row.value(0).toInt());
       item->key = QString::number(bitrate);
-      item->sort_text = SortTextForBitrate(bitrate) + " ";
+      item->sort_text = SortTextForNumber(bitrate) + " ";
       break;
 
     case GroupBy_None:
@@ -982,21 +988,19 @@ LibraryItem* LibraryModel::ItemFromSong(GroupBy type, bool signal,
       item->metadata.set_year(year);
       item->metadata.set_album(s.album());
       item->key = PrettyYearAlbum(year, s.album());
-      item->sort_text = SortTextForYear(year) + s.grouping() + s.album();
+      item->sort_text = SortTextForNumber(year) + s.grouping() + s.album();
       break;
 
     case GroupBy_Year:
       year = qMax(0, s.year());
       item->key = QString::number(year);
-      item->sort_text = SortTextForYear(year) + " ";
+      item->sort_text = SortTextForNumber(year) + " ";
       break;
 
     case GroupBy_Composer:
       item->key = s.composer();
     case GroupBy_Performer:
       item->key = s.performer();
-    case GroupBy_Disc:
-      item->key = s.disc();
     case GroupBy_Grouping:
       item->key = s.grouping();
     case GroupBy_Genre:
@@ -1009,6 +1013,11 @@ LibraryItem* LibraryModel::ItemFromSong(GroupBy type, bool signal,
       item->sort_text = SortTextForArtist(item->key);
       break;
 
+    case GroupBy_Disc:
+      item->key = QString::number(s.disc());
+      item->sort_text = SortTextForNumber(s.disc());
+      break;
+
     case GroupBy_FileType:
       item->metadata.set_filetype(s.filetype());
       item->key = s.TextForFiletype();
@@ -1017,7 +1026,7 @@ LibraryItem* LibraryModel::ItemFromSong(GroupBy type, bool signal,
     case GroupBy_Bitrate:
       bitrate = qMax(0, s.bitrate());
       item->key = QString::number(bitrate);
-      item->sort_text = SortTextForBitrate(bitrate) + " ";
+      item->sort_text = SortTextForNumber(bitrate) + " ";
       break;
 
     case GroupBy_None:
@@ -1098,14 +1107,9 @@ QString LibraryModel::SortTextForArtist(QString artist) {
   return artist;
 }
 
-QString LibraryModel::SortTextForYear(int year) {
-  QString str = QString::number(year);
-  return QString("0").repeated(qMax(0, 4 - str.length())) + str;
-}
-
-QString LibraryModel::SortTextForBitrate(int bitrate) {
-  QString str = QString::number(bitrate);
-  return QString("0").repeated(qMax(0, 3 - str.length())) + str;
+QString LibraryModel::SortTextForNumber(int number) {
+  QString str = QString("%1").arg(number, 4, 10, QChar('0'));
+  return str;
 }
 
 QString LibraryModel::SortTextForSong(const Song& song) {
