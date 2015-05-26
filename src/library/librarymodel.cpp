@@ -1109,8 +1109,7 @@ QString LibraryModel::SortTextForArtist(QString artist) {
 }
 
 QString LibraryModel::SortTextForNumber(int number) {
-  QString str = QString("%1").arg(number, 4, 10, QChar('0'));
-  return str;
+  return QString("%1").arg(number, 4, 10, QChar('0'));
 }
 
 QString LibraryModel::SortTextForSong(const Song& song) {
