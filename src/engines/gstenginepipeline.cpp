@@ -19,6 +19,7 @@
 
 #include <QCoreApplication>
 #include <QDir>
+#include <QRegExp>
 #include <QUuid>
 
 #include "bufferconsumer.h"
@@ -601,12 +602,41 @@ void GstEnginePipeline::ErrorMessageReceived(GstMessage* msg) {
   emit Error(id(), message, domain, code);
 }
 
+namespace {
+
+/*
+ * Streams served by Akamai tend to have a weird tag format embedded.
+ *
+ * Example:
+ * All Things Dance - text="Evolution" song_spot="T" MediaBaseId="0"
+ * itunesTrackId="0" amgTrackId="0" amgArtistId="0" TAID="0" TPID="0"
+ * cartcutId="0"
+ */
+QString ParseAkamaiTag(const QString& tag) {
+  QRegExp re(" - text=\"([^\"]+)");
+  re.indexIn(tag);
+  QStringList captured = re.capturedTexts();
+  if (captured.length() >= 2) {
+    return re.cap(1);
+  }
+  return tag;
+}
+
+bool IsAkamaiTag(const QString& tag) {
+  return tag.contains("- text=\"");
+}
+
+}
+
 void GstEnginePipeline::TagMessageReceived(GstMessage* msg) {
   GstTagList* taglist = nullptr;
   gst_message_parse_tag(msg, &taglist);
 
   Engine::SimpleMetaBundle bundle;
   bundle.title = ParseTag(taglist, GST_TAG_TITLE);
+  if (IsAkamaiTag(bundle.title)) {
+    bundle.title = ParseAkamaiTag(bundle.title);
+  }
   bundle.artist = ParseTag(taglist, GST_TAG_ARTIST);
   bundle.comment = ParseTag(taglist, GST_TAG_COMMENT);
   bundle.album = ParseTag(taglist, GST_TAG_ALBUM);
