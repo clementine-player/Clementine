@@ -19,6 +19,7 @@
 
 #include <QCoreApplication>
 #include <QDir>
+#include <QPair>
 #include <QRegExp>
 #include <QUuid>
 
@@ -612,14 +613,13 @@ namespace {
  * itunesTrackId="0" amgTrackId="0" amgArtistId="0" TAID="0" TPID="0"
  * cartcutId="0"
  */
-QString ParseAkamaiTag(const QString& tag) {
-  QRegExp re(" - text=\"([^\"]+)");
+QPair<QString, QString> ParseAkamaiTag(const QString& tag) {
+  QRegExp re("(.*) - text=\"([^\"]+)");
   re.indexIn(tag);
-  QStringList captured = re.capturedTexts();
-  if (captured.length() >= 2) {
-    return re.cap(1);
+  if (re.capturedTexts().length() >= 3) {
+    return qMakePair(re.cap(1), re.cap(2));
   }
-  return tag;
+  return qMakePair(tag, QString());
 }
 
 bool IsAkamaiTag(const QString& tag) {
@@ -635,11 +635,14 @@ void GstEnginePipeline::TagMessageReceived(GstMessage* msg) {
   Engine::SimpleMetaBundle bundle;
   bundle.title = ParseTag(taglist, GST_TAG_TITLE);
   if (IsAkamaiTag(bundle.title)) {
-    bundle.title = ParseAkamaiTag(bundle.title);
+    QPair<QString, QString> artistTitlePair = ParseAkamaiTag(bundle.title);
+    bundle.artist = artistTitlePair.first;
+    bundle.title = artistTitlePair.second;
+  } else {
+    bundle.artist = ParseTag(taglist, GST_TAG_ARTIST);
+    bundle.comment = ParseTag(taglist, GST_TAG_COMMENT);
+    bundle.album = ParseTag(taglist, GST_TAG_ALBUM);
   }
-  bundle.artist = ParseTag(taglist, GST_TAG_ARTIST);
-  bundle.comment = ParseTag(taglist, GST_TAG_COMMENT);
-  bundle.album = ParseTag(taglist, GST_TAG_ALBUM);
 
   gst_tag_list_free(taglist);
 
