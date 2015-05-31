@@ -23,7 +23,9 @@
 #include "core/logging.h"
 #include "core/timeconstants.h"
 #include "core/utilities.h"
+#include "globalsearch/librarysearchprovider.h"
 #include "library/librarybackend.h"
+#include "ui/iconloader.h"
 
 #include <QSqlDatabase>
 #include <QSqlQuery>
@@ -70,13 +72,17 @@ void OutgoingDataCreator::SetClients(QList<RemoteClient*>* clients) {
   CheckEnabledProviders();
 
   // Setup global search
+  app_->global_search()->ReloadSettings();
+
   connect(app_->global_search(),
           SIGNAL(ResultsAvailable(int, SearchProvider::ResultList)),
           SLOT(ResultsAvailable(int, SearchProvider::ResultList)),
           Qt::QueuedConnection);
 
-  connect(app_->global_search(), SIGNAL(SearchFinished(int)),
-          SLOT(SearchFinished(int)));
+  connect(app_->global_search(),
+          SIGNAL(SearchFinished(int)),
+          SLOT(SearchFinished(int)),
+          Qt::QueuedConnection);
 }
 
 void OutgoingDataCreator::CheckEnabledProviders() {
@@ -661,6 +667,19 @@ void OutgoingDataCreator::DoGlobalSearch(const QString& query,
 
   GlobalSearchRequest request(id, query, client);
   global_search_result_map_.insert(id, request);
+
+  // Send status message
+  pb::remote::Message msg;
+  pb::remote::ResponseGlobalSearchStatus* status = msg.mutable_response_global_search_status();
+
+  msg.set_type(pb::remote::GLOBAL_SEARCH_STATUS);
+  status->set_id(id);
+  status->set_query(DataCommaSizeFromQString(query));
+  status->set_status(pb::remote::GlobalSearchStarted);
+
+  client->SendData(&msg);
+
+  qLog(Debug) << "DoGlobalSearch" << id << query;
 }
 
 void OutgoingDataCreator::ResultsAvailable(
@@ -682,11 +701,12 @@ void OutgoingDataCreator::ResultsAvailable(
       DataCommaSizeFromQString(results.first().provider_->name()));
 
   // Append the icon
-  QImage icon_image(results.first().provider_->icon().pixmap(48, 48).toImage());
+  QImage icon_image(results.first().provider_->icon_as_image());
   QByteArray byte_array;
   QBuffer buf(&byte_array);
+  buf.open(QIODevice::WriteOnly);
   icon_image.save(&buf, "PNG");
-  response->set_search_provider_icon(byte_array.data(), byte_array.size());
+  response->set_search_provider_icon(byte_array.constData(), byte_array.size());
 
   for (const SearchProvider::Result& result : results) {
     pb::remote::SongMetadata* pb_song = response->add_song_metadata();
@@ -694,8 +714,25 @@ void OutgoingDataCreator::ResultsAvailable(
   }
 
   client->SendData(&msg);
+
+  qLog(Debug) << "ResultsAvailable" << id << results.first().provider_->name() << results.size();
 }
 
 void OutgoingDataCreator::SearchFinished(int id) {
-  global_search_result_map_.remove(id);
+  if (!global_search_result_map_.contains(id)) return;
+
+  GlobalSearchRequest req = global_search_result_map_.take(id);
+
+  // Send status message
+  pb::remote::Message msg;
+  pb::remote::ResponseGlobalSearchStatus* status = msg.mutable_response_global_search_status();
+
+  msg.set_type(pb::remote::GLOBAL_SEARCH_STATUS);
+  status->set_id(req.id_);
+  status->set_query(DataCommaSizeFromQString(req.query_));
+  status->set_status(pb::remote::GlobalSearchFinished);
+
+  req.client_->SendData(&msg);
+
+  qLog(Debug) << "SearchFinished" << req.id_ << req.query_;
 }

@@ -104,6 +104,7 @@ class SearchProvider : public QObject {
   const QString& name() const { return name_; }
   const QString& id() const { return id_; }
   const QIcon& icon() const { return icon_; }
+  const QImage& icon_as_image() const { return icon_as_image_; }
 
   Hints hints() const { return hints_; }
   bool wants_delayed_queries() const { return hints() & WantsDelayedQueries; }
@@ -190,6 +191,7 @@ signals:
   QString id_;
   QIcon icon_;
   Hints hints_;
+  QImage icon_as_image_;
 };
 
 Q_DECLARE_METATYPE(SearchProvider::Result)

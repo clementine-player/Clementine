@@ -35,6 +35,7 @@ void SearchProvider::Init(const QString& name, const QString& id,
   id_ = id;
   icon_ = icon;
   hints_ = hints;
+  icon_as_image_ = QImage(icon.pixmap(48, 48).toImage());
 }
 
 void SearchProvider::SetHint(Hint hint, bool set) {
