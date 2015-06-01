@@ -39,6 +39,7 @@
 #include "internet/core/internetshowsettingspage.h"
 #include "internet/magnatune/magnatunesettingspage.h"
 #include "internet/soundcloud/soundcloudsettingspage.h"
+#include "internet/playmusic//playmusicsettingspage.h"
 #include "internet/spotify/spotifysettingspage.h"
 #include "internet/subsonic/subsonicsettingspage.h"
 #include "library/librarysettingspage.h"
@@ -184,6 +185,7 @@ SettingsDialog::SettingsDialog(Application* app, BackgroundStreams* streams,
 #endif
 
   AddPage(Page_SoundCloud, new SoundCloudSettingsPage(this), providers);
+  AddPage(Page_PlayMusic, new PlayMusicSettingsPage(this), providers);
   AddPage(Page_Spotify, new SpotifySettingsPage(this), providers);
 
 #ifdef HAVE_VK

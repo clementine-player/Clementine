@@ -69,6 +69,7 @@ class SettingsDialog : public QDialog {
     Page_Library,
     Page_Lastfm,
     Page_SoundCloud,
+    Page_PlayMusic,
     Page_Spotify,
     Page_Magnatune,
     Page_DigitallyImported,
