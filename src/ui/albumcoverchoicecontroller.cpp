@@ -218,8 +218,9 @@ void AlbumCoverChoiceController::ShowCover(const Song& song) {
   // if the cover is larger than the screen, resize the window
   // 85% seems to be enough to account for title bar and taskbar etc.
   QDesktopWidget desktop;
-  int desktop_height = desktop.geometry().height();
-  int desktop_width = desktop.geometry().width();
+  int current_screen = desktop.screenNumber(this);
+  int desktop_height = desktop.screenGeometry(current_screen).height();
+  int desktop_width = desktop.screenGeometry(current_screen).width();
 
   // resize differently if monitor is in portrait mode
   if (desktop_width < desktop_height) {

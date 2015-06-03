@@ -77,6 +77,7 @@ void RegisterMetaTypes() {
   qRegisterMetaType<PodcastEpisodeList>("PodcastEpisodeList");
   qRegisterMetaType<PodcastList>("PodcastList");
   qRegisterMetaType<QList<CoverSearchResult>>("QList<CoverSearchResult>");
+  qRegisterMetaType<QList<int>>("QList<int>");
   qRegisterMetaType<QList<PlaylistItemPtr>>("QList<PlaylistItemPtr>");
   qRegisterMetaType<PlaylistSequence::RepeatMode>(
       "PlaylistSequence::RepeatMode");

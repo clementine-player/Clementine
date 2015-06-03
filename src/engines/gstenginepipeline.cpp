@@ -19,6 +19,8 @@
 
 #include <QCoreApplication>
 #include <QDir>
+#include <QPair>
+#include <QRegExp>
 #include <QUuid>
 
 #include "bufferconsumer.h"
@@ -601,15 +603,46 @@ void GstEnginePipeline::ErrorMessageReceived(GstMessage* msg) {
   emit Error(id(), message, domain, code);
 }
 
+namespace {
+
+/*
+ * Streams served by Akamai tend to have a weird tag format embedded.
+ *
+ * Example:
+ * All Things Dance - text="Evolution" song_spot="T" MediaBaseId="0"
+ * itunesTrackId="0" amgTrackId="0" amgArtistId="0" TAID="0" TPID="0"
+ * cartcutId="0"
+ */
+QPair<QString, QString> ParseAkamaiTag(const QString& tag) {
+  QRegExp re("(.*) - text=\"([^\"]+)");
+  re.indexIn(tag);
+  if (re.capturedTexts().length() >= 3) {
+    return qMakePair(re.cap(1), re.cap(2));
+  }
+  return qMakePair(tag, QString());
+}
+
+bool IsAkamaiTag(const QString& tag) {
+  return tag.contains("- text=\"");
+}
+
+}
+
 void GstEnginePipeline::TagMessageReceived(GstMessage* msg) {
   GstTagList* taglist = nullptr;
   gst_message_parse_tag(msg, &taglist);
 
   Engine::SimpleMetaBundle bundle;
   bundle.title = ParseTag(taglist, GST_TAG_TITLE);
-  bundle.artist = ParseTag(taglist, GST_TAG_ARTIST);
-  bundle.comment = ParseTag(taglist, GST_TAG_COMMENT);
-  bundle.album = ParseTag(taglist, GST_TAG_ALBUM);
+  if (IsAkamaiTag(bundle.title)) {
+    QPair<QString, QString> artistTitlePair = ParseAkamaiTag(bundle.title);
+    bundle.artist = artistTitlePair.first;
+    bundle.title = artistTitlePair.second;
+  } else {
+    bundle.artist = ParseTag(taglist, GST_TAG_ARTIST);
+    bundle.comment = ParseTag(taglist, GST_TAG_COMMENT);
+    bundle.album = ParseTag(taglist, GST_TAG_ALBUM);
+  }
 
   gst_tag_list_free(taglist);
 
@@ -892,19 +925,6 @@ void GstEnginePipeline::SourceSetupCallback(GstURIDecodeBin* bin,
   }
   if (g_object_class_find_property(G_OBJECT_GET_CLASS(element),
                                    "extra-headers") &&
-      instance->url().host().contains("grooveshark")) {
-    // Grooveshark streaming servers will answer with a 400 error 'Bad request'
-    // if we don't specify 'Range' field in HTTP header.
-    // Maybe it could be useful in some other cases, but for now, I prefer to
-    // keep this grooveshark specific.
-    GstStructure* headers;
-    headers = gst_structure_new("extra-headers", "Range", G_TYPE_STRING,
-                                "bytes=0-", nullptr);
-    g_object_set(element, "extra-headers", headers, nullptr);
-    gst_structure_free(headers);
-  }
-  if (g_object_class_find_property(G_OBJECT_GET_CLASS(element),
-                                   "extra-headers") &&
       instance->url().host().contains("amazonaws.com")) {
     GstStructure* headers = gst_structure_new(
         "extra-headers", "Authorization", G_TYPE_STRING,
@@ -921,11 +941,9 @@ void GstEnginePipeline::SourceSetupCallback(GstURIDecodeBin* bin,
                  nullptr);
 
 #ifdef Q_OS_DARWIN
-    // Override the CA cert path for Soup on Mac to our shipped version.
-    QDir resources_dir(mac::GetResourcesPath());
-    QString ca_cert_path = resources_dir.filePath("cacert.pem");
+    g_object_set(element, "tls-database", instance->engine_->tls_database(), nullptr);
     g_object_set(element, "ssl-use-system-ca-file", false, nullptr);
-    g_object_set(element, "ssl-ca-file", ca_cert_path.toUtf8().data(), nullptr);
+    g_object_set(element, "ssl-strict", TRUE, nullptr);
 #endif
   }
 }
