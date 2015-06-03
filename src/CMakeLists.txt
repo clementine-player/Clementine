@@ -17,13 +17,7 @@ if(WIN32)
 endif(WIN32)
 
 # Activate fast QString concatenation
-if (QT_VERSION_MINOR GREATER 5)
-  if (QT_VERSION_MINOR GREATER 7)
-    add_definitions(-DQT_USE_QSTRINGBUILDER)
-  else(QT_VERSION_MINOR GREATER 7)
-    add_definitions(-DQT_USE_FAST_CONCATENATION -DQT_USE_FAST_OPERATOR_PLUS)
-  endif(QT_VERSION_MINOR GREATER 7)
-endif(QT_VERSION_MINOR GREATER 5)
+add_definitions(-DQT_USE_QSTRINGBUILDER)
 add_definitions(-DQT_NO_URL_CAST_FROM_STRING)
 add_definitions(-DBOOST_BIND_NO_PLACEHOLDERS)
 

@@ -28,14 +28,7 @@
 // some functions in their includes files, which aren't compatible with
 // QStringBuilder, we undef it here
 #include <QtGlobal>
-#if QT_VERSION >= 0x040600
-#if QT_VERSION >= 0x040800
 #undef QT_USE_QSTRINGBUILDER
-#else
-#undef QT_USE_FAST_CONCATENATION
-#undef QT_USE_FAST_OPERATOR_PLUS
-#endif  // QT_VERSION >= 0x040800
-#endif  // QT_VERSION >= 0x040600
 
 #include "lastfmservice.h"
 

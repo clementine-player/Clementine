@@ -21,6 +21,7 @@
 #include "core/logging.h"
 #include "core/utilities.h"
 
+#include <QFile>
 #include <QtDebug>
 #include <QDir>
 #include <QSettings>
@@ -49,12 +50,10 @@ QIcon IconLoader::Load(const QString& name, const IconType& icontype) {
     return ret;
   }
 
-#if QT_VERSION >= 0x040600
   if (use_sys_icons_) {
     ret = QIcon::fromTheme(name);
     if (!ret.isNull()) return ret;
   }
-#endif
 
   // Set the icon load location based on IConType
   switch (icontype) {
@@ -113,12 +112,11 @@ QIcon IconLoader::Load(const QString& name, const IconType& icontype) {
 
     // Load icon from system theme only if it hasn't been found
   if (ret.isNull()) {
-#if QT_VERSION >= 0x040600
     ret = QIcon::fromTheme(name);
     if (!ret.isNull()) return ret;
-#endif
     qLog(Warning) << "Couldn't load icon" << name;
   }
+  else qLog(Warning) << "Couldn't load icon" << name;
 
   return ret;
 }
