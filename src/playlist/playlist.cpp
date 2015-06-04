@@ -48,7 +48,6 @@
 #include "core/closure.h"
 #include "core/logging.h"
 #include "core/modelfuturewatcher.h"
-#include "core/qhash_qurl.h"
 #include "core/tagreaderclient.h"
 #include "core/timeconstants.h"
 #include "internet/jamendo/jamendoplaylistitem.h"
