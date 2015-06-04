@@ -47,6 +47,7 @@
 #include "core/application.h"
 #include "core/closure.h"
 #include "core/logging.h"
+#include "core/modelfuturewatcher.h"
 #include "core/qhash_qurl.h"
 #include "core/tagreaderclient.h"
 #include "core/timeconstants.h"
@@ -416,20 +417,21 @@ bool Playlist::setData(const QModelIndex& index, const QVariant& value,
 void Playlist::SongSaveComplete(TagReaderReply* reply,
                                 const QPersistentModelIndex& index) {
   if (reply->is_successful() && index.isValid()) {
-    if (reply->message().save_file_response().success()) {
-      QFuture<void> future = item_at(index.row())->BackgroundReload();
-      NewClosure(future, this, SLOT(ItemReloadComplete(QPersistentModelIndex)),
-                 index);
-    } else {
-      emit Error(tr("An error occurred writing metadata to '%1'").arg(
-          QString::fromStdString(
-              reply->request_message().save_file_request().filename())));
-    }
+    QFuture<void> future = item_at(index.row())->BackgroundReload();
+    ModelFutureWatcher<void>* watcher =
+        new ModelFutureWatcher<void>(index, this);
+    watcher->setFuture(future);
+    connect(watcher, SIGNAL(finished()), SLOT(ItemReloadComplete()));
   }
+
   reply->deleteLater();
 }
 
-void Playlist::ItemReloadComplete(const QPersistentModelIndex& index) {
+void Playlist::ItemReloadComplete() {
+  ModelFutureWatcher<void>* watcher =
+      static_cast<ModelFutureWatcher<void>*>(sender());
+  watcher->deleteLater();
+  const QPersistentModelIndex& index = watcher->index();
   if (index.isValid()) {
     emit dataChanged(index, index);
     emit EditingFinished(index);
@@ -634,6 +636,10 @@ void Playlist::set_current_row(int i, bool is_stopping) {
                          old_current_item_index.row(), ColumnCount - 1));
   }
 
+  if (current_item_index_.isValid() && !is_stopping) {
+    InformOfCurrentSongChange();
+  }
+
   // Update the virtual index
   if (i == -1) {
     current_virtual_index_ = -1;
@@ -699,7 +705,7 @@ void Playlist::set_current_row(int i, bool is_stopping) {
 void Playlist::InsertDynamicItems(int count) {
   GeneratorInserter* inserter =
       new GeneratorInserter(task_manager_, library_, this);
-  connect(inserter, SIGNAL(Error(QString)), SIGNAL(Error(QString)));
+  connect(inserter, SIGNAL(Error(QString)), SIGNAL(LoadTracksError(QString)));
   connect(inserter, SIGNAL(PlayRequested(QModelIndex)),
           SIGNAL(PlayRequested(QModelIndex)));
 
@@ -827,7 +833,7 @@ bool Playlist::dropMimeData(const QMimeData* data, Qt::DropAction action,
   } else if (data->hasFormat(kCddaMimeType)) {
     SongLoaderInserter* inserter = new SongLoaderInserter(
         task_manager_, library_, backend_->app()->player());
-    connect(inserter, SIGNAL(Error(QString)), SIGNAL(Error(QString)));
+    connect(inserter, SIGNAL(Error(QString)), SIGNAL(LoadTracksError(QString)));
     inserter->LoadAudioCD(this, row, play_now, enqueue_now);
   } else if (data->hasUrls()) {
     // URL list dragged from the file list or some other app
@@ -841,7 +847,7 @@ void Playlist::InsertUrls(const QList<QUrl>& urls, int pos, bool play_now,
                           bool enqueue) {
   SongLoaderInserter* inserter = new SongLoaderInserter(
       task_manager_, library_, backend_->app()->player());
-  connect(inserter, SIGNAL(Error(QString)), SIGNAL(Error(QString)));
+  connect(inserter, SIGNAL(Error(QString)), SIGNAL(LoadTracksError(QString)));
 
   inserter->Load(this, pos, play_now, enqueue, urls);
 }
@@ -855,7 +861,7 @@ void Playlist::InsertSmartPlaylist(GeneratorPtr generator, int pos,
 
   GeneratorInserter* inserter =
       new GeneratorInserter(task_manager_, library_, this);
-  connect(inserter, SIGNAL(Error(QString)), SIGNAL(Error(QString)));
+  connect(inserter, SIGNAL(Error(QString)), SIGNAL(LoadTracksError(QString)));
 
   inserter->Load(this, pos, play_now, enqueue, generator);
 
@@ -1487,6 +1493,10 @@ void Playlist::Save() const {
                               dynamic_playlist_);
 }
 
+namespace {
+typedef QFutureWatcher<QList<PlaylistItemPtr>> PlaylistItemFutureWatcher;
+}
+
 void Playlist::Restore() {
   if (!backend_) return;
 
@@ -1497,14 +1507,17 @@ void Playlist::Restore() {
   cancel_restore_ = false;
   QFuture<QList<PlaylistItemPtr>> future =
       QtConcurrent::run(backend_, &PlaylistBackend::GetPlaylistItems, id_);
-  NewClosure(future, this, SLOT(ItemsLoaded(QFuture<PlaylistItemList>)),
-             future);
+  PlaylistItemFutureWatcher* watcher = new PlaylistItemFutureWatcher(this);
+  watcher->setFuture(future);
+  connect(watcher, SIGNAL(finished()), SLOT(ItemsLoaded()));
 }
 
-void Playlist::ItemsLoaded(QFuture<PlaylistItemList> future) {
-  if (cancel_restore_) return;
+void Playlist::ItemsLoaded() {
+  PlaylistItemFutureWatcher* watcher =
+      static_cast<PlaylistItemFutureWatcher*>(sender());
+  watcher->deleteLater();
 
-  PlaylistItemList items = future.result();
+  PlaylistItemList items = watcher->future().result();
 
   // backend returns empty elements for library items which it couldn't
   // match (because they got deleted); we don't need those
@@ -1695,6 +1708,8 @@ void Playlist::StopAfter(int row) {
 }
 
 void Playlist::SetStreamMetadata(const QUrl& url, const Song& song) {
+  qLog(Debug) << "Setting metadata for" << url << "to" << song.artist()
+              << song.title();
   if (!current_item()) return;
 
   if (current_item()->Url() != url) return;
