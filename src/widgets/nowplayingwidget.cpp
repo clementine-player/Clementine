@@ -562,9 +562,9 @@ void NowPlayingWidget::contextMenuEvent(QContextMenuEvent* e) {
   menu_->popup(mapToGlobal(e->pos()));
 }
 
-void NowPlayingWidget::mouseReleaseEvent(QMouseEvent*) {
+void NowPlayingWidget::mouseReleaseEvent(QMouseEvent* e) {
   // Same behaviour as right-click > Show Fullsize
-  if (!aww_ && !hypnotoad_.get()) {
+  if (e->button() == Qt::LeftButton && !aww_ && !hypnotoad_.get()) {
     ShowCover();
   }
 }
