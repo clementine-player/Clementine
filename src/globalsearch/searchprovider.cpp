@@ -35,6 +35,7 @@ void SearchProvider::Init(const QString& name, const QString& id,
   id_ = id;
   icon_ = icon;
   hints_ = hints;
+  icon_as_image_ = QImage(icon.pixmap(48, 48).toImage());
 }
 
 void SearchProvider::SetHint(Hint hint, bool set) {
@@ -89,11 +90,12 @@ void BlockingSearchProvider::SearchAsync(int id, const QString& query) {
 void BlockingSearchProvider::BlockingSearchFinished() {
   BoundFutureWatcher<ResultList, int>* watcher =
       static_cast<BoundFutureWatcher<ResultList, int>*>(sender());
-  watcher->deleteLater();
 
   const int id = watcher->data();
   emit ResultsAvailable(id, watcher->result());
   emit SearchFinished(id);
+
+  watcher->deleteLater();
 }
 
 QImage SearchProvider::ScaleAndPad(const QImage& image) {

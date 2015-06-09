@@ -14,7 +14,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2015-04-10 22:06+0000\n"
+"PO-Revision-Date: 2015-05-22 14:54+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Japanese (http://www.transifex.com/projects/p/clementine/language/ja/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -246,7 +246,7 @@ msgstr "(複数の曲で一致しません)"
 msgid ", by "
 msgstr ""
 
-#: ui/about.cpp:83
+#: ui/about.cpp:84
 msgid "...and all the Amarok contributors"
 msgstr "... そして Amarok に貢献したすべての方々"
 
@@ -323,10 +323,6 @@ msgid ""
 "<p>If you surround sections of text that contain a token with curly-braces, that section will be hidden if the token is empty.</p>"
 msgstr "<p>トークンは % で始まります (例: %artist %album %title)。 </p>\n\n<p>トークンを含むテキストの一部を「{ }」で囲むと、トークンが空の場合、{ } で選択した部分が非表示になります。</p>"
 
-#: internet/grooveshark/groovesharksettingspage.cpp:123
-msgid "A Grooveshark Anywhere account is required."
-msgstr "Grooveshark Anywhere のアカウントが必要です。"
-
 #: internet/spotify/spotifysettingspage.cpp:166
 msgid "A Spotify Premium account is required."
 msgstr "Spotify のプレミアムアカウントが必要です。"
@@ -397,7 +393,6 @@ msgstr "Qt について..."
 msgid "Absolute"
 msgstr "絶対的"
 
-#: ../bin/src/ui_groovesharksettingspage.h:141
 #: ../bin/src/ui_magnatunesettingspage.h:155
 #: ../bin/src/ui_spotifysettingspage.h:208
 #: ../bin/src/ui_lastfmsettingspage.h:151 ../bin/src/ui_vksettingspage.h:217
@@ -579,14 +574,6 @@ msgstr "「Love」ボタンをクリックしたときに「マイミュージ�
 msgid "Add stream..."
 msgstr "ストリームを追加..."
 
-#: internet/grooveshark/groovesharkservice.cpp:1127
-msgid "Add to Grooveshark favorites"
-msgstr "Grooveshark のお気に入りに追加"
-
-#: internet/grooveshark/groovesharkservice.cpp:1142
-msgid "Add to Grooveshark playlists"
-msgstr "Grooveshark のプレイリストに追加する"
-
 #: internet/vk/vkservice.cpp:312
 msgid "Add to My Music"
 msgstr "マイミュージックに追加する"
@@ -648,14 +635,6 @@ msgstr "今日追加されたもの"
 msgid "Added within three months"
 msgstr "3 ヶ月以内に追加されたもの"
 
-#: internet/grooveshark/groovesharkservice.cpp:1425
-msgid "Adding song to My Music"
-msgstr "曲をマイミュージックに追加中"
-
-#: internet/grooveshark/groovesharkservice.cpp:1402
-msgid "Adding song to favorites"
-msgstr "曲をお気に入りに追加中"
-
 #: library/libraryfilterwidget.cpp:142
 msgid "Advanced grouping..."
 msgstr "高度なグループ化..."
@@ -668,7 +647,7 @@ msgstr "後"
 msgid "After copying..."
 msgstr "コピー後..."
 
-#: playlist/playlist.cpp:1311 ui/organisedialog.cpp:61
+#: playlist/playlist.cpp:1314 ui/organisedialog.cpp:61
 #: ui/qtsystemtrayicon.cpp:236 ../bin/src/ui_groupbydialog.h:129
 #: ../bin/src/ui_groupbydialog.h:144 ../bin/src/ui_groupbydialog.h:159
 #: ../bin/src/ui_albumcoversearcher.h:111
@@ -681,7 +660,7 @@ msgstr "アルバム"
 msgid "Album (ideal loudness for all tracks)"
 msgstr "アルバム (すべてのトラックで最適な音量)"
 
-#: playlist/playlist.cpp:1323 ui/organisedialog.cpp:64
+#: playlist/playlist.cpp:1326 ui/organisedialog.cpp:64
 #: ../bin/src/ui_groupbydialog.h:131 ../bin/src/ui_groupbydialog.h:146
 #: ../bin/src/ui_groupbydialog.h:161 ../bin/src/ui_edittagdialog.h:691
 msgid "Album artist"
@@ -737,7 +716,7 @@ msgstr "すべてのファイル (*)"
 msgid "All playlists (%1)"
 msgstr "すべてのプレイリスト (%1)"
 
-#: ui/about.cpp:79
+#: ui/about.cpp:80
 msgid "All the translators"
 msgstr "すべての翻訳者"
 
@@ -775,10 +754,10 @@ msgid "Always start playing"
 msgstr "常に再生を開始する"
 
 #: ../bin/src/ui_amazonsettingspage.h:103
-msgid "Amazon"
+msgid "Amazon Cloud Drive"
 msgstr ""
 
-#: internet/spotify/spotifyblobdownloader.cpp:67
+#: internet/spotify/spotifyblobdownloader.cpp:72
 msgid ""
 "An additional plugin is required to use Spotify in Clementine.  Would you "
 "like to download and install it now?"
@@ -797,7 +776,7 @@ msgstr "メタデータを '%1' へ書き込み中にエラーが発生しまし
 msgid "An unspecified error occurred."
 msgstr "原因不明のエラーが発生しました。"
 
-#: ui/about.cpp:84
+#: ui/about.cpp:85
 msgid "And:"
 msgstr "そして:"
 
@@ -834,10 +813,6 @@ msgstr "クリップ防止のために音量を制限する"
 msgid "Are you sure you want to delete the \"%1\" preset?"
 msgstr "プリセット「%1」を削除してもよろしいですか?"
 
-#: internet/grooveshark/groovesharkservice.cpp:1324
-msgid "Are you sure you want to delete this playlist?"
-msgstr "本当にこのプレイリストを削除しますか?"
-
 #: ui/edittagdialog.cpp:798
 msgid "Are you sure you want to reset this song's statistics?"
 msgstr "この曲の統計をリセットしてもよろしいですか?"
@@ -848,7 +823,7 @@ msgid ""
 "the songs of your library?"
 msgstr "ライブラリーのすべての曲の統計情報を曲ファイルに保存してもよろしいですか?"
 
-#: playlist/playlist.cpp:1309 ui/organisedialog.cpp:62
+#: playlist/playlist.cpp:1312 ui/organisedialog.cpp:62
 #: ui/qtsystemtrayicon.cpp:234 ../bin/src/ui_groupbydialog.h:130
 #: ../bin/src/ui_groupbydialog.h:145 ../bin/src/ui_groupbydialog.h:160
 #: ../bin/src/ui_albumcoversearcher.h:107
@@ -894,7 +869,7 @@ msgstr "認証に失敗しました"
 msgid "Author"
 msgstr "作者"
 
-#: ui/about.cpp:67
+#: ui/about.cpp:68
 msgid "Authors"
 msgstr "作者"
 
@@ -931,7 +906,7 @@ msgstr "平均画像サイズ"
 msgid "BBC Podcasts"
 msgstr "BBC ポッドキャスト"
 
-#: playlist/playlist.cpp:1343 ui/organisedialog.cpp:71
+#: playlist/playlist.cpp:1346 ui/organisedialog.cpp:71
 #: ../bin/src/ui_edittagdialog.h:671
 msgid "BPM"
 msgstr "BPM"
@@ -985,7 +960,7 @@ msgstr "良"
 msgid "Biography from %1"
 msgstr "%1 からのバイオグラフィ"
 
-#: playlist/playlist.cpp:1345 ../bin/src/ui_edittagdialog.h:673
+#: playlist/playlist.cpp:1348 ../bin/src/ui_edittagdialog.h:673
 msgid "Bit rate"
 msgstr "ビットレート"
 
@@ -1037,7 +1012,7 @@ msgstr "参照..."
 msgid "Buffer duration"
 msgstr "バッファーの長さ"
 
-#: engines/gstengine.cpp:884
+#: engines/gstengine.cpp:904
 msgid "Buffering"
 msgstr "バッファ中"
 
@@ -1052,10 +1027,6 @@ msgstr "ただし次のソースは無効になっています:"
 #: ../bin/src/ui_wiimotesettingspage.h:192
 msgid "Buttons"
 msgstr "ボタン"
-
-#: ../bin/src/ui_groovesharksettingspage.h:139
-msgid "By default, Grooveshark sorts songs on date added"
-msgstr "既定では Grooveshark は追加した日付で曲をソートします"
 
 #: core/song.cpp:419
 msgid "CDDA"
@@ -1078,7 +1049,7 @@ msgstr "キャッシュ中"
 msgid "Caching %1"
 msgstr "%1 キャッシュ中"
 
-#: internet/spotify/spotifyblobdownloader.cpp:52
+#: internet/spotify/spotifyblobdownloader.cpp:57
 msgid "Cancel"
 msgstr "キャンセル"
 
@@ -1142,7 +1113,7 @@ msgstr "Vk.com のキャッシュディレクトリーを選択する"
 msgid "Choose a name for your smart playlist"
 msgstr "スマートプレイリストの名前を選択してください"
 
-#: engines/gstengine.cpp:905
+#: engines/gstengine.cpp:925
 msgid "Choose automatically"
 msgstr "自動的に選択する"
 
@@ -1323,7 +1294,7 @@ msgstr "色"
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "コンマ区切りの クラス:レベル のリスト、レベルは 0-3"
 
-#: playlist/playlist.cpp:1362 smartplaylists/searchterm.cpp:353
+#: playlist/playlist.cpp:1365 smartplaylists/searchterm.cpp:353
 #: ui/organisedialog.cpp:74 ../bin/src/ui_edittagdialog.h:697
 msgid "Comment"
 msgstr "コメント"
@@ -1340,7 +1311,7 @@ msgstr "タグの自動補完"
 msgid "Complete tags automatically..."
 msgstr "タグを自動補完..."
 
-#: playlist/playlist.cpp:1325 ui/organisedialog.cpp:65
+#: playlist/playlist.cpp:1328 ui/organisedialog.cpp:65
 #: ../bin/src/ui_groupbydialog.h:132 ../bin/src/ui_groupbydialog.h:147
 #: ../bin/src/ui_groupbydialog.h:162 ../bin/src/ui_edittagdialog.h:692
 msgid "Composer"
@@ -1350,10 +1321,6 @@ msgstr "作曲者"
 #, qt-format
 msgid "Configure %1..."
 msgstr "%1 の設定..."
-
-#: internet/grooveshark/groovesharkservice.cpp:566
-msgid "Configure Grooveshark..."
-msgstr "Grooveshark の設定..."
 
 #: internet/magnatune/magnatuneservice.cpp:290
 msgid "Configure Magnatune..."
@@ -1538,11 +1505,6 @@ msgstr "%1 からのカバーアートセット"
 msgid "Covers from %1"
 msgstr "%1 からのカバー"
 
-#: internet/grooveshark/groovesharkservice.cpp:534
-#: internet/grooveshark/groovesharkservice.cpp:1276
-msgid "Create a new Grooveshark playlist"
-msgstr "新規 Grooveshark プレイリストの作成"
-
 #: ../bin/src/ui_playbacksettingspage.h:315
 msgid "Cross-fade when changing tracks automatically"
 msgstr "トラックが自動で変更するときにクロスフェードする"
@@ -1654,11 +1616,11 @@ msgid ""
 "recover your database"
 msgstr "データベースの破損が見つかりました。データベースの復旧方法については https://code.google.com/p/clementine-player/wiki/DatabaseCorruption をお読みください"
 
-#: playlist/playlist.cpp:1359 ../bin/src/ui_edittagdialog.h:682
+#: playlist/playlist.cpp:1362 ../bin/src/ui_edittagdialog.h:682
 msgid "Date created"
 msgstr "作成日時"
 
-#: playlist/playlist.cpp:1357 ../bin/src/ui_edittagdialog.h:681
+#: playlist/playlist.cpp:1360 ../bin/src/ui_edittagdialog.h:681
 msgid "Date modified"
 msgstr "更新日時"
 
@@ -1686,7 +1648,7 @@ msgstr "音量を下げる"
 msgid "Default background image"
 msgstr "既定の背景画像"
 
-#: engines/gstengine.cpp:930
+#: engines/gstengine.cpp:950
 #, qt-format
 msgid "Default device on %1"
 msgstr "デフォルトのデバイス %1"
@@ -1703,11 +1665,6 @@ msgstr "ビジュアライゼーションの間の遅延"
 #: ../bin/src/ui_playlistlistcontainer.h:131
 msgid "Delete"
 msgstr "削除"
-
-#: internet/grooveshark/groovesharkservice.cpp:537
-#: internet/grooveshark/groovesharkservice.cpp:1323
-msgid "Delete Grooveshark playlist"
-msgstr "Grooveshark プレイリストの削除"
 
 #: internet/podcasts/podcastservice.cpp:433
 msgid "Delete downloaded data"
@@ -1831,7 +1788,7 @@ msgctxt "Refers to search provider's status."
 msgid "Disabled"
 msgstr "無効"
 
-#: playlist/playlist.cpp:1317 ui/organisedialog.cpp:70
+#: playlist/playlist.cpp:1320 ui/organisedialog.cpp:70
 #: ../bin/src/ui_groupbydialog.h:138 ../bin/src/ui_groupbydialog.h:153
 #: ../bin/src/ui_groupbydialog.h:168 ../bin/src/ui_edittagdialog.h:688
 #: ../bin/src/ui_ripcddialog.h:314
@@ -1880,7 +1837,7 @@ msgid ""
 "music in Google Drive which may take some time."
 msgstr "完全再スキャンを行なうと、Clementine 中に保存されているカバーアート、再生数、評価などのメタデータは失なわれます。Clementine は Google ドライブにあるあなたの曲を再スキャンしますが、これには時間がかかります。"
 
-#: widgets/osd.cpp:306 ../bin/src/ui_playlistsequence.h:103
+#: widgets/osd.cpp:306 ../bin/src/ui_playlistsequence.h:107
 msgid "Don't repeat"
 msgstr "リピートしない"
 
@@ -1892,7 +1849,7 @@ msgstr "さまざまなアーティストに表示しない"
 msgid "Don't show listened episodes"
 msgstr ""
 
-#: widgets/osd.cpp:285 ../bin/src/ui_playlistsequence.h:107
+#: widgets/osd.cpp:285 ../bin/src/ui_playlistsequence.h:112
 msgid "Don't shuffle"
 msgstr "シャッフルしない"
 
@@ -1982,7 +1939,7 @@ msgstr "Jamendo カタログをダウンロード中"
 msgid "Downloading Magnatune catalogue"
 msgstr "Magnatune カタログをダウンロード中"
 
-#: internet/spotify/spotifyblobdownloader.cpp:51
+#: internet/spotify/spotifyblobdownloader.cpp:56
 msgid "Downloading Spotify plugin"
 msgstr "Spotify のプラグインをダウンロード中"
 
@@ -2156,7 +2113,6 @@ msgstr "--log-levels *:1 と同じ"
 msgid "Equivalent to --log-levels *:3"
 msgstr "--log-levels *:3 と同じ"
 
-#: internet/grooveshark/groovesharkservice.cpp:1055
 #: internet/magnatune/magnatunedownloaddialog.cpp:242
 #: library/libraryview.cpp:630 ui/mainwindow.cpp:1910 ui/mainwindow.cpp:2157
 #: ui/mainwindow.cpp:2305 internet/vk/vkservice.cpp:625
@@ -2179,7 +2135,7 @@ msgstr "曲のコピーエラー"
 msgid "Error deleting songs"
 msgstr "曲の削除エラー"
 
-#: internet/spotify/spotifyblobdownloader.cpp:222
+#: internet/spotify/spotifyblobdownloader.cpp:260
 msgid "Error downloading Spotify plugin"
 msgstr "Spotify プラグインのダウンロードエラー"
 
@@ -2353,10 +2309,6 @@ msgstr "この RSS フィードの XML の分析に失敗しました"
 msgid "Fast"
 msgstr "速"
 
-#: internet/grooveshark/groovesharkservice.cpp:645
-msgid "Favorites"
-msgstr "お気に入り"
-
 #: library/library.cpp:88
 msgid "Favourite tracks"
 msgstr "お気に入りのトラック"
@@ -2393,11 +2345,11 @@ msgstr "ファイル拡張子"
 msgid "File formats"
 msgstr "ファイル形式"
 
-#: playlist/playlist.cpp:1349 ../bin/src/ui_edittagdialog.h:683
+#: playlist/playlist.cpp:1352 ../bin/src/ui_edittagdialog.h:683
 msgid "File name"
 msgstr "ファイル名"
 
-#: playlist/playlist.cpp:1351
+#: playlist/playlist.cpp:1354
 msgid "File name (without path)"
 msgstr "ファイル名 (パスなし)"
 
@@ -2409,11 +2361,11 @@ msgstr "ファイル名パターン:"
 msgid "File paths"
 msgstr "ファイルのパス"
 
-#: playlist/playlist.cpp:1353 ../bin/src/ui_edittagdialog.h:677
+#: playlist/playlist.cpp:1356 ../bin/src/ui_edittagdialog.h:677
 msgid "File size"
 msgstr "ファイルサイズ"
 
-#: playlist/playlist.cpp:1355 ../bin/src/ui_groupbydialog.h:133
+#: playlist/playlist.cpp:1358 ../bin/src/ui_groupbydialog.h:133
 #: ../bin/src/ui_groupbydialog.h:148 ../bin/src/ui_groupbydialog.h:163
 #: ../bin/src/ui_edittagdialog.h:679
 msgid "File type"
@@ -2535,7 +2487,7 @@ msgstr "Full Bass + Treble"
 msgid "Full Treble"
 msgstr "Full Treble"
 
-#: ui/settingsdialog.cpp:142
+#: ui/settingsdialog.cpp:141
 msgid "General"
 msgstr "全般"
 
@@ -2543,21 +2495,12 @@ msgstr "全般"
 msgid "General settings"
 msgstr "全般設定"
 
-#: playlist/playlist.cpp:1321 ui/organisedialog.cpp:73
+#: playlist/playlist.cpp:1324 ui/organisedialog.cpp:73
 #: ../bin/src/ui_groupbydialog.h:134 ../bin/src/ui_groupbydialog.h:149
 #: ../bin/src/ui_groupbydialog.h:164 ../bin/src/ui_edittagdialog.h:695
 #: ../bin/src/ui_ripcddialog.h:317
 msgid "Genre"
 msgstr "ジャンル"
-
-#: internet/grooveshark/groovesharkservice.cpp:556
-msgid "Get a URL to share this Grooveshark playlist"
-msgstr "この Grooveshark プレイリストを共有するための URL の取得"
-
-#: internet/grooveshark/groovesharkservice.cpp:553
-#: internet/grooveshark/groovesharkservice.cpp:1155
-msgid "Get a URL to share this Grooveshark song"
-msgstr "この Grooveshark 曲を共有するための URL の取得"
 
 #: internet/spotify/spotifyservice.cpp:633
 #: internet/spotify/spotifyservice.cpp:674
@@ -2567,10 +2510,6 @@ msgstr ""
 #: internet/spotify/spotifyservice.cpp:665
 msgid "Get a URL to share this playlist"
 msgstr ""
-
-#: internet/grooveshark/groovesharkservice.cpp:830
-msgid "Getting Grooveshark popular songs"
-msgstr "Grooveshark で人気の曲を取得中"
 
 #: internet/somafm/somafmservice.cpp:120
 msgid "Getting channels"
@@ -2610,26 +2549,6 @@ msgstr "%2 個中 %1 個のカバーを取得しました (%3 個失敗しまし
 msgid "Grey out non existent songs in my playlists"
 msgstr "プレイリスト上の存在しない曲をグレーで表示する"
 
-#: ../bin/src/ui_groovesharksettingspage.h:137
-msgid "Grooveshark"
-msgstr "Grooveshark"
-
-#: internet/grooveshark/groovesharkservice.cpp:413
-msgid "Grooveshark login error"
-msgstr "Grooveshark ログインエラー"
-
-#: internet/grooveshark/groovesharkservice.cpp:1206
-msgid "Grooveshark playlist's URL"
-msgstr "Grooveshark プレイリストの URL"
-
-#: internet/grooveshark/groovesharkservice.cpp:625
-msgid "Grooveshark radio"
-msgstr "Grooveshark ラジオ"
-
-#: internet/grooveshark/groovesharkservice.cpp:1184
-msgid "Grooveshark song's URL"
-msgstr "Grooveshark の曲の URL"
-
 #: ../bin/src/ui_groupbydialog.h:124
 msgid "Group Library by..."
 msgstr "ライブラリのグループ化..."
@@ -2662,7 +2581,7 @@ msgstr "ジャンル/アルバムでグループ化"
 msgid "Group by Genre/Artist/Album"
 msgstr "ジャンル/アーティスト/アルバムでグループ化"
 
-#: playlist/playlist.cpp:1329 ui/organisedialog.cpp:67
+#: playlist/playlist.cpp:1332 ui/organisedialog.cpp:67
 #: ../bin/src/ui_edittagdialog.h:694
 msgid "Grouping"
 msgstr "分類"
@@ -2851,7 +2770,7 @@ msgstr "整合性の検査"
 msgid "Internet"
 msgstr "インターネット"
 
-#: ui/settingsdialog.cpp:165
+#: ui/settingsdialog.cpp:164
 msgid "Internet providers"
 msgstr "インターネットプロバイダ"
 
@@ -2887,10 +2806,6 @@ msgstr "不正なサービスです"
 #: internet/lastfm/lastfmservice.cpp:238
 msgid "Invalid session key"
 msgstr "不正なセッションキーです"
-
-#: internet/grooveshark/groovesharkservice.cpp:405
-msgid "Invalid username and/or password"
-msgstr "ユーザー名またはパスワードが違います"
 
 #: ../bin/src/ui_ripcddialog.h:312
 msgid "Invert Selection"
@@ -2989,7 +2904,7 @@ msgstr "大きいサイドバー"
 msgid "Last played"
 msgstr "最終再生"
 
-#: playlist/playlist.cpp:1338 ../bin/src/ui_edittagdialog.h:674
+#: playlist/playlist.cpp:1341 ../bin/src/ui_edittagdialog.h:674
 msgctxt "A playlist's tag."
 msgid "Last played"
 msgstr "最後に再生"
@@ -3030,7 +2945,7 @@ msgstr "嫌いなトラック"
 msgid "Left"
 msgstr "左"
 
-#: playlist/playlist.cpp:1313 ui/organisedialog.cpp:75
+#: playlist/playlist.cpp:1316 ui/organisedialog.cpp:75
 #: ui/qtsystemtrayicon.cpp:239 ../bin/src/ui_edittagdialog.h:669
 msgid "Length"
 msgstr "長さ"
@@ -3055,11 +2970,6 @@ msgstr "ライブラリ検索"
 #: ../bin/src/ui_querysortpage.h:141
 msgid "Limits"
 msgstr "制限"
-
-#: internet/grooveshark/groovesharkservice.cpp:627
-msgid ""
-"Listen to Grooveshark songs based on what you've listened to previously"
-msgstr "以前聴いた曲をもとに Grooveshark の曲を聴きます"
 
 #: ui/equalizer.cpp:137
 msgid "Live"
@@ -3135,7 +3045,6 @@ msgid "Loads files/URLs, replacing current playlist"
 msgstr "ファイル・URL を読み込んで、現在のプレイリストを置き換えます"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:163
-#: ../bin/src/ui_groovesharksettingspage.h:144
 #: ../bin/src/ui_magnatunesettingspage.h:164
 #: ../bin/src/ui_soundcloudsettingspage.h:106
 #: ../bin/src/ui_spotifysettingspage.h:211
@@ -3335,7 +3244,7 @@ msgstr "モノラル再生"
 msgid "Months"
 msgstr "ヶ月"
 
-#: playlist/playlist.cpp:1366
+#: playlist/playlist.cpp:1369
 msgid "Mood"
 msgstr "ムード"
 
@@ -3396,7 +3305,6 @@ msgstr "ミュート"
 msgid "My Albums"
 msgstr ""
 
-#: internet/grooveshark/groovesharkservice.cpp:634
 #: internet/vk/vkservice.cpp:878
 msgid "My Music"
 msgstr "マイミュージック"
@@ -3405,9 +3313,8 @@ msgstr "マイミュージック"
 msgid "My Recommendations"
 msgstr "おすすめ"
 
-#: internet/grooveshark/groovesharkservice.cpp:1277
-#: internet/grooveshark/groovesharkservice.cpp:1372 ui/equalizer.cpp:205
-#: ../bin/src/ui_deviceproperties.h:369 ../bin/src/ui_wizardfinishpage.h:84
+#: ui/equalizer.cpp:205 ../bin/src/ui_deviceproperties.h:369
+#: ../bin/src/ui_wizardfinishpage.h:84
 msgid "Name"
 msgstr "名前"
 
@@ -3526,7 +3433,7 @@ msgstr "ふつう"
 msgid "Normal block type"
 msgstr "通常ブロックタイプ"
 
-#: playlist/playlistsequence.cpp:189
+#: playlist/playlistsequence.cpp:194
 msgid "Not available while using a dynamic playlist"
 msgstr "ダイナミック プレイリストの使用中は利用できません"
 
@@ -3638,7 +3545,6 @@ msgid "Opacity"
 msgstr "不透明度"
 
 #: internet/digitally/digitallyimportedservicebase.cpp:176
-#: internet/grooveshark/groovesharkservice.cpp:560
 #: internet/icecast/icecastservice.cpp:302
 #: internet/jamendo/jamendoservice.cpp:434
 #: internet/magnatune/magnatuneservice.cpp:284
@@ -3774,7 +3680,6 @@ msgstr "Jamendo カタログの分析中"
 msgid "Party"
 msgstr "パーティー"
 
-#: ../bin/src/ui_groovesharksettingspage.h:143
 #: ../bin/src/ui_magnatunesettingspage.h:165
 #: ../bin/src/ui_spotifysettingspage.h:210
 #: ../bin/src/ui_subsonicsettingspage.h:128
@@ -3797,7 +3702,7 @@ msgstr "再生を一時停止します"
 msgid "Paused"
 msgstr "一時停止中"
 
-#: playlist/playlist.cpp:1327 ui/organisedialog.cpp:66
+#: playlist/playlist.cpp:1330 ui/organisedialog.cpp:66
 #: ../bin/src/ui_edittagdialog.h:693
 msgid "Performer"
 msgstr "出演者"
@@ -3817,7 +3722,7 @@ msgstr "プレーンサイドバー"
 msgid "Play"
 msgstr "再生"
 
-#: playlist/playlist.cpp:1334 ../bin/src/ui_edittagdialog.h:670
+#: playlist/playlist.cpp:1337 ../bin/src/ui_edittagdialog.h:670
 msgid "Play count"
 msgstr "再生回数"
 
@@ -3865,7 +3770,6 @@ msgstr "プレイリストのオプション"
 msgid "Playlist type"
 msgstr "プレイリストの種類"
 
-#: internet/grooveshark/groovesharkservice.cpp:655
 #: internet/soundcloud/soundcloudservice.cpp:130 ui/mainwindow.cpp:241
 msgid "Playlists"
 msgstr "プレイリスト"
@@ -3887,18 +3791,6 @@ msgstr "ポッドキャスト"
 msgid "Pop"
 msgstr "Pop"
 
-#: internet/grooveshark/groovesharkservice.cpp:592
-msgid "Popular songs"
-msgstr "人気の曲"
-
-#: internet/grooveshark/groovesharkservice.cpp:596
-msgid "Popular songs of the Month"
-msgstr "今月人気の曲"
-
-#: internet/grooveshark/groovesharkservice.cpp:605
-msgid "Popular songs today"
-msgstr "今日人気の曲"
-
 #: ../bin/src/ui_notificationssettingspage.h:444
 msgid "Popup duration"
 msgstr "ポップアップの長さ"
@@ -3917,7 +3809,6 @@ msgid "Preference"
 msgstr "設定"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:166
-#: ../bin/src/ui_groovesharksettingspage.h:145
 #: ../bin/src/ui_magnatunesettingspage.h:166
 #: ../bin/src/ui_spotifysettingspage.h:216 ../bin/src/ui_settingsdialog.h:116
 #: ../bin/src/ui_lastfmsettingspage.h:155 ../bin/src/ui_vksettingspage.h:220
@@ -4052,10 +3943,6 @@ msgstr "トラックをキューに追加"
 msgid "Radio (equal loudness for all tracks)"
 msgstr "ラジオ (すべてのトラックで均一の音量)"
 
-#: internet/grooveshark/groovesharkservice.cpp:614
-msgid "Radios"
-msgstr "ラジオ"
-
 #: core/backgroundstreams.cpp:47
 msgid "Rain"
 msgstr "Rain"
@@ -4093,7 +3980,7 @@ msgstr "現在の曲を星 4 つと評価する"
 msgid "Rate the current song 5 stars"
 msgstr "現在の曲を星 5 つと評価する"
 
-#: playlist/playlist.cpp:1332 ../bin/src/ui_edittagdialog.h:678
+#: playlist/playlist.cpp:1335 ../bin/src/ui_edittagdialog.h:678
 msgid "Rating"
 msgstr "評価"
 
@@ -4105,10 +3992,6 @@ msgstr "本当に取り消しますか?"
 #: internet/subsonic/subsonicsettingspage.cpp:157
 msgid "Redirect limit exceeded, verify server configuration."
 msgstr "リダイレクト回数制限を超えました。サーバーの設定を確認してください。"
-
-#: internet/grooveshark/groovesharkservice.cpp:562
-msgid "Refresh"
-msgstr "更新"
 
 #: internet/jamendo/jamendoservice.cpp:437
 #: internet/magnatune/magnatuneservice.cpp:287
@@ -4166,7 +4049,6 @@ msgstr "重複するものをプレイリストから削除"
 msgid "Remove folder"
 msgstr "フォルダーの削除"
 
-#: internet/grooveshark/groovesharkservice.cpp:550
 #: internet/vk/vkservice.cpp:316
 msgid "Remove from My Music"
 msgstr "マイミュージックから削除する"
@@ -4175,11 +4057,6 @@ msgstr "マイミュージックから削除する"
 msgid "Remove from bookmarks"
 msgstr "ブックマークから削除する"
 
-#: internet/grooveshark/groovesharkservice.cpp:547
-msgid "Remove from favorites"
-msgstr "お気に入りから削除する"
-
-#: internet/grooveshark/groovesharkservice.cpp:544
 #: internet/spotify/spotifyservice.cpp:672 ../bin/src/ui_mainwindow.h:685
 msgid "Remove from playlist"
 msgstr "プレイリストから削除"
@@ -4196,23 +4073,6 @@ msgstr "プレイリストを削除する"
 msgid "Remove unavailable tracks from playlist"
 msgstr "無効なトラックをプレイリストから削除"
 
-#: internet/grooveshark/groovesharkservice.cpp:1571
-msgid "Removing songs from My Music"
-msgstr "マイミュージックから曲を削除しています"
-
-#: internet/grooveshark/groovesharkservice.cpp:1519
-msgid "Removing songs from favorites"
-msgstr "お気に入りから曲を削除しています"
-
-#: internet/grooveshark/groovesharkservice.cpp:1371
-#, qt-format
-msgid "Rename \"%1\" playlist"
-msgstr "プレイリスト「%1」の名前を変更"
-
-#: internet/grooveshark/groovesharkservice.cpp:540
-msgid "Rename Grooveshark playlist"
-msgstr "Grooveshark のプレイリストの名前を変更"
-
 #: playlist/playlisttabbar.cpp:146
 msgid "Rename playlist"
 msgstr "プレイリストの名前の変更"
@@ -4225,19 +4085,19 @@ msgstr "プレイリストの名前の変更..."
 msgid "Renumber tracks in this order..."
 msgstr "この順序でトラック番号を振る..."
 
-#: playlist/playlistsequence.cpp:193 ../bin/src/ui_playlistsequence.h:112
+#: playlist/playlistsequence.cpp:198 ../bin/src/ui_playlistsequence.h:117
 msgid "Repeat"
 msgstr "リピート"
 
-#: widgets/osd.cpp:312 ../bin/src/ui_playlistsequence.h:105
+#: widgets/osd.cpp:312 ../bin/src/ui_playlistsequence.h:109
 msgid "Repeat album"
 msgstr "アルバムをリピート"
 
-#: widgets/osd.cpp:315 ../bin/src/ui_playlistsequence.h:106
+#: widgets/osd.cpp:315 ../bin/src/ui_playlistsequence.h:110
 msgid "Repeat playlist"
 msgstr "プレイリストをリピート"
 
-#: widgets/osd.cpp:309 ../bin/src/ui_playlistsequence.h:104
+#: widgets/osd.cpp:309 ../bin/src/ui_playlistsequence.h:108
 msgid "Repeat track"
 msgstr "トラックをリピート"
 
@@ -4296,18 +4156,6 @@ msgstr "ASCII 文字に限定する"
 msgid "Resume playback on start"
 msgstr "起動時に再生を再開する"
 
-#: internet/grooveshark/groovesharkservice.cpp:796
-msgid "Retrieving Grooveshark My Music songs"
-msgstr "Grooveshark のマイミュージックの曲を取得中"
-
-#: internet/grooveshark/groovesharkservice.cpp:763
-msgid "Retrieving Grooveshark favorites songs"
-msgstr "Grooveshark のお気に入りの曲を取得中"
-
-#: internet/grooveshark/groovesharkservice.cpp:694
-msgid "Retrieving Grooveshark playlists"
-msgstr "Grooveshark のプレイリストを取得中"
-
 #: ../data/oauthsuccess.html:5
 msgid "Return to Clementine"
 msgstr "Clementine に戻る"
@@ -4354,7 +4202,7 @@ msgstr "デバイスを安全に取り外す"
 msgid "Safely remove the device after copying"
 msgstr "コピー後にデバイスを安全に取り外す"
 
-#: playlist/playlist.cpp:1347 ../bin/src/ui_edittagdialog.h:675
+#: playlist/playlist.cpp:1350 ../bin/src/ui_edittagdialog.h:675
 msgid "Sample rate"
 msgstr "サンプルレート"
 
@@ -4424,7 +4272,7 @@ msgstr "Scalable Sampling Rate プロファイル (SSR)"
 msgid "Scale size"
 msgstr "サイズを調整する"
 
-#: playlist/playlist.cpp:1340 ../bin/src/ui_edittagdialog.h:676
+#: playlist/playlist.cpp:1343 ../bin/src/ui_edittagdialog.h:676
 msgid "Score"
 msgstr "スコア"
 
@@ -4491,7 +4339,6 @@ msgstr "検索モード"
 msgid "Search options"
 msgstr "検索オプション"
 
-#: internet/grooveshark/groovesharkservice.cpp:583
 #: internet/soundcloud/soundcloudservice.cpp:116
 #: internet/spotify/spotifyservice.cpp:406
 msgid "Search results"
@@ -4501,10 +4348,6 @@ msgstr "検索結果"
 #: ../bin/src/ui_querysearchpage.h:120
 msgid "Search terms"
 msgstr "検索条件"
-
-#: internet/grooveshark/groovesharkservice.cpp:275
-msgid "Searching on Grooveshark"
-msgstr "Grooveshark を検索中"
 
 #: ../bin/src/ui_groupbydialog.h:140
 msgid "Second level"
@@ -4735,15 +4578,15 @@ msgstr "有効および無効になっているソースを表示する"
 msgid "Show/Hide"
 msgstr "表示・非表示の切り替え"
 
-#: playlist/playlistsequence.cpp:192 ../bin/src/ui_playlistsequence.h:115
+#: playlist/playlistsequence.cpp:197 ../bin/src/ui_playlistsequence.h:120
 msgid "Shuffle"
 msgstr "シャッフル"
 
-#: widgets/osd.cpp:294 ../bin/src/ui_playlistsequence.h:110
+#: widgets/osd.cpp:294 ../bin/src/ui_playlistsequence.h:115
 msgid "Shuffle albums"
 msgstr "アルバムをシャッフル"
 
-#: widgets/osd.cpp:288 ../bin/src/ui_playlistsequence.h:109
+#: widgets/osd.cpp:288 ../bin/src/ui_playlistsequence.h:114
 msgid "Shuffle all"
 msgstr "すべてシャッフル"
 
@@ -4751,7 +4594,7 @@ msgstr "すべてシャッフル"
 msgid "Shuffle playlist"
 msgstr "プレイリストをシャッフル"
 
-#: widgets/osd.cpp:291 ../bin/src/ui_playlistsequence.h:108
+#: widgets/osd.cpp:291 ../bin/src/ui_playlistsequence.h:113
 msgid "Shuffle tracks in this album"
 msgstr "このアルバムのトラックをシャッフル"
 
@@ -4787,7 +4630,7 @@ msgstr "Ska"
 msgid "Skip backwards in playlist"
 msgstr "プレイリストで後ろにスキップ"
 
-#: playlist/playlist.cpp:1336 ../bin/src/ui_edittagdialog.h:672
+#: playlist/playlist.cpp:1339 ../bin/src/ui_edittagdialog.h:672
 msgid "Skip count"
 msgstr "スキップ回数"
 
@@ -4815,7 +4658,7 @@ msgstr "小さいサイドバー"
 msgid "Smart playlist"
 msgstr "スマートプレイリスト"
 
-#: library/librarymodel.cpp:1280
+#: library/librarymodel.cpp:1284
 msgid "Smart playlists"
 msgstr "スマートプレイリスト"
 
@@ -4855,10 +4698,6 @@ msgstr "ジャンルで整列 (人気順)"
 msgid "Sort by station name"
 msgstr "局名で整列"
 
-#: ../bin/src/ui_groovesharksettingspage.h:146
-msgid "Sort playlists songs alphabetically"
-msgstr "プレイリストの曲を名前順に整列"
-
 #: ../bin/src/ui_querysortpage.h:140
 msgid "Sort songs by"
 msgstr "曲の並べ替え"
@@ -4871,7 +4710,7 @@ msgstr "並べ替え中"
 msgid "SoundCloud"
 msgstr "SoundCloud"
 
-#: playlist/playlist.cpp:1364
+#: playlist/playlist.cpp:1367
 msgid "Source"
 msgstr "ソース"
 
@@ -4900,7 +4739,7 @@ msgstr ""
 msgid "Spotify plugin"
 msgstr "Spotify プラグイン"
 
-#: internet/spotify/spotifyblobdownloader.cpp:66
+#: internet/spotify/spotifyblobdownloader.cpp:71
 msgid "Spotify plugin not installed"
 msgstr "Spotify プラグインはインストールされていません"
 
@@ -4928,7 +4767,6 @@ msgstr "現在再生中のプレイリストを開始する"
 msgid "Start transcoding"
 msgstr "トランスコードの開始"
 
-#: internet/grooveshark/groovesharkservice.cpp:585
 #: internet/soundcloud/soundcloudservice.cpp:118
 #: internet/spotify/spotifyservice.cpp:408
 msgid ""
@@ -4945,10 +4783,6 @@ msgstr "%1 の開始中"
 msgid "Starting..."
 msgstr "開始しています..."
 
-#: internet/grooveshark/groovesharkservice.cpp:618
-msgid "Stations"
-msgstr "局"
-
 #: core/globalshortcuts.cpp:53 ../bin/src/ui_mainwindow.h:644
 #: wiimotedev/wiimotesettingspage.cpp:101
 msgid "Stop"
@@ -4957,6 +4791,14 @@ msgstr "停止"
 #: wiimotedev/wiimotesettingspage.cpp:114
 msgid "Stop after"
 msgstr "次で停止"
+
+#: ../bin/src/ui_playlistsequence.h:111
+msgid "Stop after each track"
+msgstr ""
+
+#: widgets/osd.cpp:318
+msgid "Stop after every track"
+msgstr ""
 
 #: ui/mainwindow.cpp:603 ../bin/src/ui_mainwindow.h:650
 msgid "Stop after this track"
@@ -4992,10 +4834,6 @@ msgstr "Subsonic サーバーのストリーミング再生は 30日のお試し
 #: ../bin/src/ui_magnatunesettingspage.h:160
 msgid "Streaming membership"
 msgstr "ストリーミングのメンバーシップ"
-
-#: internet/grooveshark/groovesharkservice.cpp:659
-msgid "Subscribed playlists"
-msgstr "購読しているプレイリスト"
 
 #: ../bin/src/ui_podcastinfowidget.h:196
 msgid "Subscribers"
@@ -5078,7 +4916,7 @@ msgstr "テクノ"
 msgid "Text options"
 msgstr "文字のオプション"
 
-#: ui/about.cpp:73
+#: ui/about.cpp:74
 msgid "Thanks to"
 msgstr "謝辞"
 
@@ -5232,18 +5070,12 @@ msgstr "このストリームは有料会員専用です"
 msgid "This type of device is not supported: %1"
 msgstr "この種類のデバイスはサポートされていません: %1"
 
-#: playlist/playlist.cpp:1307 ui/organisedialog.cpp:60
+#: playlist/playlist.cpp:1310 ui/organisedialog.cpp:60
 #: ui/qtsystemtrayicon.cpp:232 ../bin/src/ui_about.h:142
 #: ../bin/src/ui_edittagdialog.h:685 ../bin/src/ui_trackselectiondialog.h:211
 #: ../bin/src/ui_ripcddialog.h:307
 msgid "Title"
 msgstr "タイトル"
-
-#: internet/grooveshark/groovesharkservice.cpp:1056
-msgid ""
-"To start Grooveshark radio, you should first listen to a few other "
-"Grooveshark songs"
-msgstr "Grooveshark のラジオを開始するには、まず始めに他の Grooveshark の曲をいくつか聴くとよいでしょう"
 
 #: core/utilities.cpp:137 core/utilities.cpp:149
 msgid "Today"
@@ -5293,7 +5125,7 @@ msgstr "合計転送バイト数"
 msgid "Total network requests made"
 msgstr "合計ネットワーク要求回数"
 
-#: playlist/playlist.cpp:1315 ui/organisedialog.cpp:69
+#: playlist/playlist.cpp:1318 ui/organisedialog.cpp:69
 #: ../bin/src/ui_edittagdialog.h:686 ../bin/src/ui_trackselectiondialog.h:213
 #: ../bin/src/ui_ripcddialog.h:305
 msgid "Track"
@@ -5359,7 +5191,7 @@ msgid "Unable to download %1 (%2)"
 msgstr "%1 をダウンロードできません (%2)"
 
 #: core/song.cpp:426 library/librarymodel.cpp:350 library/librarymodel.cpp:354
-#: library/librarymodel.cpp:358 library/librarymodel.cpp:1066
+#: library/librarymodel.cpp:358 library/librarymodel.cpp:1076
 #: playlist/playlistdelegates.cpp:306 playlist/playlistmanager.cpp:501
 #: playlist/playlistmanager.cpp:502 ui/albumcoverchoicecontroller.cpp:124
 #: ui/edittagdialog.cpp:452 ui/edittagdialog.cpp:496
@@ -5399,10 +5231,6 @@ msgstr "次のコンサート"
 #: internet/vk/vkservice.cpp:332
 msgid "Update"
 msgstr "更新"
-
-#: internet/grooveshark/groovesharkservice.cpp:1228
-msgid "Update Grooveshark playlist"
-msgstr "Grooveshark のプレイリストを更新"
 
 #: internet/podcasts/podcastservice.cpp:419
 msgid "Update all podcasts"
@@ -5514,16 +5342,10 @@ msgstr "音量の正規化を使用する"
 msgid "Used"
 msgstr "使用中"
 
-#: internet/grooveshark/groovesharkservice.cpp:408
-#, qt-format
-msgid "User %1 doesn't have a Grooveshark Anywhere account"
-msgstr "ユーザー %1 には Grooveshark Anywhere のアカウントがありません。"
-
-#: ui/settingsdialog.cpp:156
+#: ui/settingsdialog.cpp:155
 msgid "User interface"
 msgstr "ユーザーインターフェース"
 
-#: ../bin/src/ui_groovesharksettingspage.h:142
 #: ../bin/src/ui_magnatunesettingspage.h:163
 #: ../bin/src/ui_spotifysettingspage.h:209
 #: ../bin/src/ui_subsonicsettingspage.h:127
@@ -5719,7 +5541,7 @@ msgstr "メタデータの書き込み"
 msgid "Wrong username or password."
 msgstr "ユーザー名またはパスワードが違います。"
 
-#: playlist/playlist.cpp:1319 ui/organisedialog.cpp:72
+#: playlist/playlist.cpp:1322 ui/organisedialog.cpp:72
 #: ../bin/src/ui_groupbydialog.h:135 ../bin/src/ui_groupbydialog.h:150
 #: ../bin/src/ui_groupbydialog.h:165 ../bin/src/ui_edittagdialog.h:690
 #: ../bin/src/ui_trackselectiondialog.h:212 ../bin/src/ui_ripcddialog.h:313
@@ -5795,10 +5617,6 @@ msgid ""
 "Clementine wiki</a> for more information.\n"
 msgstr "Clementine のリモートコントロールとして Wii リモコンを使用できます。詳細は<a href=\"http://www.clementine-player.org/wiimote\">Clementine wiki のページをご覧ください</a>。\n"
 
-#: internet/grooveshark/groovesharksettingspage.cpp:113
-msgid "You do not have a Grooveshark Anywhere account."
-msgstr "Grooveshark Anywhere のアカウントがありません。"
-
 #: internet/spotify/spotifysettingspage.cpp:149
 msgid "You do not have a Spotify Premium account."
 msgstr "Spotify のプレミアムアカウントがありません。"
@@ -5869,7 +5687,6 @@ msgstr "Scrobble 回数: %1"
 msgid "Your system is missing OpenGL support, visualizations are unavailable."
 msgstr "システムが OpenGL をサポートしていないため、ビジュアライゼーションを利用できません。"
 
-#: internet/grooveshark/groovesharksettingspage.cpp:118
 #: internet/spotify/spotifysettingspage.cpp:155
 msgid "Your username or password was incorrect."
 msgstr "ユーザー名またはパスワードが間違っています。"

@@ -64,15 +64,23 @@ SongSender::~SongSender() {
 }
 
 void SongSender::SendSongs(const pb::remote::RequestDownloadSongs& request) {
-  Song current_song = app_->player()->GetCurrentItem()->Metadata();
+  Song current_song;
+  if (app_->player()->GetCurrentItem()) {
+    current_song = app_->player()->GetCurrentItem()->Metadata();
+  }
+
   switch (request.download_item()) {
     case pb::remote::CurrentItem: {
-      DownloadItem item(current_song, 1, 1);
-      download_queue_.append(item);
+      if (current_song.is_valid()) {
+        DownloadItem item(current_song, 1, 1);
+        download_queue_.append(item);
+      }
       break;
     }
     case pb::remote::ItemAlbum:
-      SendAlbum(current_song);
+      if (current_song.is_valid()) {
+        SendAlbum(current_song);
+      }
       break;
     case pb::remote::APlaylist:
       SendPlaylist(request.playlist_id());
@@ -106,9 +114,12 @@ void SongSender::TranscodeLosslessFiles() {
     total_transcode_++;
   }
 
-  transcoder_->Start();
-
-  SendTranscoderStatus();
+  if (total_transcode_ > 0) {
+    transcoder_->Start();
+    SendTranscoderStatus();
+  } else {
+    StartTransfer();
+  }
 }
 
 void SongSender::TranscodeJobComplete(const QString& input, const QString& output, bool success) {
@@ -183,11 +194,15 @@ void SongSender::OfferNextSong() {
     pb::remote::ResponseSongFileChunk* chunk =
         msg.mutable_response_song_file_chunk();
 
+    // Open the file
+    QFile file(item.song_.url().toLocalFile());
+
     // Song offer is chunk no 0
     chunk->set_chunk_count(0);
     chunk->set_chunk_number(0);
     chunk->set_file_count(item.song_count_);
     chunk->set_file_number(item.song_no_);
+    chunk->set_size(file.size());
 
     OutgoingDataCreator::CreateSong(item.song_, QImage(), -1, chunk->mutable_song_metadata());
   }
