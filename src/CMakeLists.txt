@@ -17,13 +17,7 @@ if(WIN32)
 endif(WIN32)
 
 # Activate fast QString concatenation
-if (QT_VERSION_MINOR GREATER 5)
-  if (QT_VERSION_MINOR GREATER 7)
-    add_definitions(-DQT_USE_QSTRINGBUILDER)
-  else(QT_VERSION_MINOR GREATER 7)
-    add_definitions(-DQT_USE_FAST_CONCATENATION -DQT_USE_FAST_OPERATOR_PLUS)
-  endif(QT_VERSION_MINOR GREATER 7)
-endif(QT_VERSION_MINOR GREATER 5)
+add_definitions(-DQT_USE_QSTRINGBUILDER)
 add_definitions(-DQT_NO_URL_CAST_FROM_STRING)
 add_definitions(-DBOOST_BIND_NO_PLACEHOLDERS)
 
@@ -147,7 +141,6 @@ set(SOURCES
   globalsearch/globalsearchsettingspage.cpp
   globalsearch/globalsearchsortmodel.cpp
   globalsearch/globalsearchview.cpp
-  globalsearch/groovesharksearchprovider.cpp
   globalsearch/icecastsearchprovider.cpp
   globalsearch/librarysearchprovider.cpp
   globalsearch/savedradiosearchprovider.cpp
@@ -167,10 +160,6 @@ set(SOURCES
   internet/digitally/digitallyimportedsettingspage.cpp
   internet/digitally/digitallyimportedurlhandler.cpp
   internet/core/geolocator.cpp
-  internet/grooveshark/groovesharkradio.cpp
-  internet/grooveshark/groovesharkservice.cpp
-  internet/grooveshark/groovesharksettingspage.cpp
-  internet/grooveshark/groovesharkurlhandler.cpp
   internet/icecast/icecastbackend.cpp
   internet/icecast/icecastfilterwidget.cpp
   internet/icecast/icecastmodel.cpp
@@ -464,7 +453,6 @@ set(HEADERS
   globalsearch/globalsearchmodel.h
   globalsearch/globalsearchsettingspage.h
   globalsearch/globalsearchview.h
-  globalsearch/groovesharksearchprovider.h
   globalsearch/searchprovider.h
   globalsearch/simplesearchprovider.h
   globalsearch/soundcloudsearchprovider.h
@@ -476,9 +464,6 @@ set(HEADERS
   internet/digitally/digitallyimportedservicebase.h
   internet/digitally/digitallyimportedsettingspage.h
   internet/core/geolocator.h
-  internet/grooveshark/groovesharkservice.h
-  internet/grooveshark/groovesharksettingspage.h
-  internet/grooveshark/groovesharkurlhandler.h
   internet/icecast/icecastbackend.h
   internet/icecast/icecastfilterwidget.h
   internet/icecast/icecastmodel.h
@@ -694,7 +679,6 @@ set(UI
   globalsearch/suggestionwidget.ui
 
   internet/digitally/digitallyimportedsettingspage.ui
-  internet/grooveshark/groovesharksettingspage.ui
   internet/icecast/icecastfilterwidget.ui
   internet/core/internetshowsettingspage.ui
   internet/core/internetviewcontainer.ui
@@ -855,7 +839,7 @@ optional_source(HAVE_SPOTIFY_DOWNLOADER
   HEADERS
     internet/spotify/spotifyblobdownloader.h
   INCLUDE_DIRECTORIES
-    ${QCA_QT5_INCLUDE_DIRS}
+    ${CRYPTOPP_INCLUDE_DIRS}
 )
 
 # Platform specific - OS X
@@ -1253,6 +1237,7 @@ target_link_libraries(clementine_lib
   ${ECHONEST5_LIBRARIES}
   ${GOBJECT_LIBRARIES}
   ${GLIB_LIBRARIES}
+  ${GIO_LIBRARIES}
   ${QT_LIBRARIES}
   ${GSTREAMER_BASE_LIBRARIES}
   ${GSTREAMER_LIBRARIES}
@@ -1311,9 +1296,9 @@ endif(HAVE_BREAKPAD)
 
 if(HAVE_SPOTIFY_DOWNLOADER)
   target_link_libraries(clementine_lib
-    ${QCA_QT5_LIBRARIES}
+    ${CRYPTOPP_LIBRARIES}
   )
-  link_directories(${QCA_QT5_LIBRARY_DIRS})
+  link_directories(${CRYPTOPP_LIBRARY_DIRS})
 endif(HAVE_SPOTIFY_DOWNLOADER)
 
 if(HAVE_LIBPULSE)

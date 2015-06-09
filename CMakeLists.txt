@@ -33,7 +33,8 @@ if (UNIX AND NOT APPLE)
   set(LINUX 1)
 endif (UNIX AND NOT APPLE)
 
-set(QT_MIN_VERSION 5.0.0)
+# See https://bugreports.qt.io/browse/QTBUG-43859
+set(QT_MIN_VERSION 5.4.2)
 
 find_package(Qt5 ${QT_MIN_VERSION} REQUIRED COMPONENTS Core OpenGL Sql Network Xml Widgets Concurrent Test)
 find_package(X11)
@@ -65,6 +66,7 @@ find_package(FFTW3)
 
 pkg_check_modules(CDIO libcdio)
 pkg_check_modules(CHROMAPRINT REQUIRED libchromaprint)
+pkg_search_module(CRYPTOPP cryptopp libcrypto++)
 pkg_check_modules(GIO gio-2.0)
 pkg_check_modules(GLIB REQUIRED glib-2.0)
 pkg_check_modules(GOBJECT REQUIRED gobject-2.0)
@@ -78,7 +80,6 @@ pkg_check_modules(LIBMTP libmtp>=1.0)
 pkg_check_modules(LIBMYGPO_QT5 libmygpo-qt5>=1.0.7)
 pkg_check_modules(LIBPULSE libpulse)
 pkg_check_modules(LIBXML libxml-2.0)
-pkg_check_modules(QCA_QT5 qca2-qt5)
 pkg_check_modules(SPOTIFY libspotify>=12.1.45)
 pkg_check_modules(TAGLIB REQUIRED taglib>=1.6)
 
@@ -277,10 +278,11 @@ optional_component(LIBPULSE ON "Pulse audio integration"
 
 optional_component(VISUALISATIONS ON "Visualisations")
 
-if(NOT HAVE_SPOTIFY_BLOB AND NOT QCA_QT5_FOUND)
-  message(FATAL_ERROR "Either QCA-qt5 must be available or the non-GPL Spotify "
+if(NOT HAVE_SPOTIFY_BLOB AND NOT CRYPTOPP_FOUND)
+  message(FATAL_ERROR "Either crypto++ must be available or the non-GPL Spotify "
           "code must be compiled in")
-elseif(QCA_QT5_FOUND)
+elseif(CRYPTOPP_FOUND)
+  set(HAVE_CRYPTOPP ON)
   set(HAVE_SPOTIFY_DOWNLOADER ON)
 endif()
 

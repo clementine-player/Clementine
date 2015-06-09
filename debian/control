@@ -15,6 +15,7 @@ Build-Depends: debhelper (>= 7),
                libboost-serialization-dev,
                libcdio-cdda1,
                libchromaprint-dev,
+               libcrypto++-dev,
                libechonest-dev,
                libglew1.5-dev |
                libglew-dev,
@@ -25,14 +26,12 @@ Build-Depends: debhelper (>= 7),
                libgstreamer1.0-dev,
                libgstreamer-plugins-base1.0-dev,
                libgpod-dev,
-               libimobiledevice-dev,
                libplist-dev,
                libusbmuxd-dev,
                libmtp-dev,
                libqjson-dev,
                protobuf-compiler,
                libprotobuf-dev,
-               libqca2-dev,
                libfftw3-dev,
                libsparsehash-dev,
                libsqlite3-dev,
@@ -49,8 +48,7 @@ Depends: ${shlibs:Depends}, ${misc:Depends},
          gstreamer1.0-plugins-good,
          gstreamer1.0-plugins-ugly,
          gstreamer1.0-pulseaudio,
-         libprojectm-data | projectm-data,
-         libqca2-plugin-ossl
+         libprojectm-data | projectm-data
 Description: Modern music player and library organiser inspired by Amarok 1.4
  Clementine focuses on a fast and easy-to-use interface for searching and
  playing your music.

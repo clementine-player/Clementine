@@ -20,6 +20,7 @@
 #ifndef INTERNET_SPOTIFY_SPOTIFYBLOBDOWNLOADER_H_
 #define INTERNET_SPOTIFY_SPOTIFYBLOBDOWNLOADER_H_
 
+#include <QMap>
 #include <QObject>
 
 class QNetworkAccessManager;
@@ -40,7 +41,7 @@ class SpotifyBlobDownloader : public QObject {
 
   void Start();
 
- signals:
+signals:
   void Finished();
 
  private slots:
@@ -51,6 +52,10 @@ class SpotifyBlobDownloader : public QObject {
  private:
   void ShowError(const QString& message);
   void EmitFinished();
+
+  bool CheckSignature(const QMap<QString, QByteArray>& file_data,
+                      const QStringList& signature_filenames);
+  static QByteArray ConvertPEMToDER(const QByteArray& pem);
 
  private:
   QString version_;

@@ -29,7 +29,6 @@
 #include <QtDebug>
 
 #include "internet/digitally/digitallyimportedservicebase.h"
-#include "internet/grooveshark/groovesharkservice.h"
 #include "internet/icecast/icecastservice.h"
 #include "internet/core/internetmimedata.h"
 #include "internet/core/internetservice.h"
@@ -90,7 +89,6 @@ InternetModel::InternetModel(Application* app, QObject* parent)
   AddService(new DigitallyImportedService(app, this));
   AddService(new IcecastService(app, this));
   AddService(new JamendoService(app, this));
-  AddService(new GroovesharkService(app, this));
   AddService(new JazzRadioService(app, this));
   AddService(new MagnatuneService(app, this));
   AddService(new PodcastService(app, this));
