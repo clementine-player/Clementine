@@ -48,6 +48,7 @@
 #include <textidentificationframe.h>
 #include <trueaudiofile.h>
 #include <tstring.h>
+#include <unsynchronizedlyricsframe.h>
 #include <vorbisfile.h>
 #include <wavfile.h>
 
@@ -190,10 +191,12 @@ void TagReader::ReadFile(const QString& filename,
             TStringToQString(map["TCMP"].front()->toString()).trimmed();
 
       if (!map["USLT"].isEmpty()) {
-        lyrics = TStringToQString((map["USLT"].front())->toString()).trimmed();
-        qLog(Debug) << "Read ULST lyrics " << lyrics;
-      } else if (!map["SYLT"].isEmpty())
-        lyrics = TStringToQString((map["SYLT"].front())->toString()).trimmed();
+        Decode(map["USLT"].front()->toString(), nullptr,
+               song->mutable_lyrics());
+      } else if (!map["SYLT"].isEmpty()) {
+        Decode(map["SYLT"].front()->toString(), nullptr,
+               song->mutable_lyrics());
+      }
 
       if (!map["APIC"].isEmpty()) song->set_art_automatic(kEmbeddedCover);
 
@@ -628,7 +631,7 @@ bool TagReader::SaveFile(const QString& filename,
     SetTextFrame("TCOM", song.composer(), tag);
     SetTextFrame("TIT1", song.grouping(), tag);
     SetTextFrame("TOPE", song.performer(), tag);
-    SetTextFrame("USLT", song.lyrics(), tag);
+    SetUnsyncLyricsFrame(song.lyrics(), tag);
     // Skip TPE1 (which is the artist) here because we already set it
     SetTextFrame("TPE2", song.albumartist(), tag);
     SetTextFrame("TCMP", std::string(song.compilation() ? "1" : "0"), tag);
@@ -853,6 +856,23 @@ void TagReader::SetTextFrame(const char* id, const std::string& value,
   TagLib::ID3v2::TextIdentificationFrame* frame =
       new TagLib::ID3v2::TextIdentificationFrame(id_vector,
                                                  TagLib::String::UTF8);
+  frame->setText(StdStringToTaglibString(value));
+  tag->addFrame(frame);
+}
+
+void TagReader::SetUnsyncLyricsFrame(const std::string& value,
+                                     TagLib::ID3v2::Tag* tag) const {
+  TagLib::ByteVector id_vector("USLT");
+
+  // Remove the frame if it already exists
+  while (tag->frameListMap().contains(id_vector) &&
+         tag->frameListMap()[id_vector].size() != 0) {
+    tag->removeFrame(tag->frameListMap()[id_vector].front());
+  }
+
+  // Create and add a new frame
+  TagLib::ID3v2::UnsynchronizedLyricsFrame* frame =
+      new TagLib::ID3v2::UnsynchronizedLyricsFrame(TagLib::String::UTF8);
   frame->setText(StdStringToTaglibString(value));
   tag->addFrame(frame);
 }
