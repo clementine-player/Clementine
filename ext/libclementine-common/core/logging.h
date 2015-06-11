@@ -30,10 +30,44 @@
 #define qLog(level) \
   while (false) QNoDebug()
 #else
-#define qLog(level)                                                        \
+#define qLog(level) \
+  qLog##level()
+
+#define qCreateLogger(level) \
   logging::CreateLogger(logging::Level_##level,                            \
                         logging::ParsePrettyFunction(__PRETTY_FUNCTION__), \
                         __LINE__)
+
+#define qLogFatal() \
+  qCreateLogger(Fatal)
+
+#define qLogError() \
+  qCreateLogger(Error)
+
+#ifdef QT_NO_WARNING_OUTPUT
+#define qLogWarning() \
+  while (false) QNoDebug()
+#else
+#define qLogWarning() \
+  qCreateLogger(Warning)
+#endif
+
+
+#ifdef QT_NO_DEBUG_OUTPUT
+#define qLogInfo() \
+  while (false) QNoDebug()
+
+#define qLogDebug() \
+  while (false) QNoDebug()
+#else
+#define qLogInfo() \
+  qCreateLogger(Info)
+
+#define qLogDebug() \
+  qCreateLogger(Debug)
+#endif
+
+
 #endif
 
 namespace logging {
