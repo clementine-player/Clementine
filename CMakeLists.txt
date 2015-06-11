@@ -140,6 +140,7 @@ find_package(Threads)
 if(${CMAKE_BUILD_TYPE} MATCHES "Release")
   add_definitions(-DNDEBUG)
   add_definitions(-DQT_NO_DEBUG_OUTPUT)
+  add_definitions(-DQT_NO_WARNING_OUTPUT)
 endif(${CMAKE_BUILD_TYPE} MATCHES "Release")
 
 # Set up definitions and paths
