@@ -30,45 +30,16 @@
 #define qLog(level) \
   while (false) QNoDebug()
 #else
+
 #define qLog(level) \
-  qLog##level()
+  logging::CreateLogger##level()
 
 #define qCreateLogger(level) \
   logging::CreateLogger(logging::Level_##level,                            \
                         logging::ParsePrettyFunction(__PRETTY_FUNCTION__), \
                         __LINE__)
 
-#define qLogFatal() \
-  qCreateLogger(Fatal)
-
-#define qLogError() \
-  qCreateLogger(Error)
-
-#ifdef QT_NO_WARNING_OUTPUT
-#define qLogWarning() \
-  while (false) QNoDebug()
-#else
-#define qLogWarning() \
-  qCreateLogger(Warning)
-#endif
-
-
-#ifdef QT_NO_DEBUG_OUTPUT
-#define qLogInfo() \
-  while (false) QNoDebug()
-
-#define qLogDebug() \
-  while (false) QNoDebug()
-#else
-#define qLogInfo() \
-  qCreateLogger(Info)
-
-#define qLogDebug() \
-  qCreateLogger(Debug)
-#endif
-
-
-#endif
+#endif // QT_NO_DEBUG_STREAM
 
 namespace logging {
 class NullDevice : public QIODevice {
@@ -92,6 +63,24 @@ void DumpStackTrace();
 
 QString ParsePrettyFunction(const char* pretty_function);
 QDebug CreateLogger(Level level, const QString& class_name, int line);
+
+QDebug CreateLoggerFatal() { return qCreateLogger(Fatal); }
+QDebug CreateLoggerError() { return qCreateLogger(Error); }
+
+#ifdef QT_NO_WARNING_OUTPUT
+QNoDebug CreateLoggerWarning() { return QNoDebug(); }
+#else
+QDebug CreateLoggerWarning() { return qCreateLogger(Warning); }
+#endif // QT_NO_WARNING_OUTPUT
+
+#ifdef QT_NO_DEBUG_OUTPUT
+QNoDebug CreateLoggerInfo() { return QNoDebug(); }
+QNoDebug CreateLoggerDebug() { return QNoDebug(); }
+#else
+QDebug CreateLoggerInfo() { return qCreateLogger(Info); }
+QDebug CreateLoggerDebug() { return qCreateLogger(Debug); }
+#endif // QT_NO_DEBUG_OUTPUT
+
 
 void GLog(const char* domain, int level, const char* message, void* user_data);
 
