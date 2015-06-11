@@ -99,8 +99,8 @@ NowPlayingWidget::NowPlayingWidget(QWidget* parent)
   CreateModeAction(LargeSongDetailsBelow,
                    tr("Large album cover (details below)"), mode_group,
                    mode_mapper);
-  CreateModeAction(LargeNoSongDetails, tr("Large album cover (no details)"), mode_group,
-                   mode_mapper);
+  CreateModeAction(LargeNoSongDetails, tr("Large album cover (no details)"),
+                   mode_group, mode_mapper);
 
   menu_->addActions(mode_group->actions());
 
@@ -528,7 +528,8 @@ void NowPlayingWidget::SetMode(int mode) {
 
 void NowPlayingWidget::resizeEvent(QResizeEvent* e) {
   if (visible_ && e->oldSize() != e->size()) {
-    if (mode_ == LargeSongDetails || mode_ == LargeNoSongDetails || mode_ == LargeSongDetailsBelow) {
+    if (mode_ == LargeSongDetails || mode_ == LargeNoSongDetails ||
+        mode_ == LargeSongDetailsBelow) {
       UpdateHeight();
       UpdateDetailsText();
     }
