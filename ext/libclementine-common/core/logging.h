@@ -64,21 +64,21 @@ void DumpStackTrace();
 QString ParsePrettyFunction(const char* pretty_function);
 QDebug CreateLogger(Level level, const QString& class_name, int line);
 
-QDebug CreateLoggerFatal() { return qCreateLogger(Fatal); }
-QDebug CreateLoggerError() { return qCreateLogger(Error); }
+QDebug CreateLoggerFatal();
+QDebug CreateLoggerError();
 
 #ifdef QT_NO_WARNING_OUTPUT
-QNoDebug CreateLoggerWarning() { return QNoDebug(); }
+QNoDebug CreateLoggerWarning();
 #else
-QDebug CreateLoggerWarning() { return qCreateLogger(Warning); }
+QDebug CreateLoggerWarning();
 #endif // QT_NO_WARNING_OUTPUT
 
 #ifdef QT_NO_DEBUG_OUTPUT
-QNoDebug CreateLoggerInfo() { return QNoDebug(); }
-QNoDebug CreateLoggerDebug() { return QNoDebug(); }
+QNoDebug CreateLoggerInfo();
+QNoDebug CreateLoggerDebug();
 #else
-QDebug CreateLoggerInfo() { return qCreateLogger(Info); }
-QDebug CreateLoggerDebug() { return qCreateLogger(Debug); }
+QDebug CreateLoggerInfo();
+QDebug CreateLoggerDebug();
 #endif // QT_NO_DEBUG_OUTPUT
 
 
