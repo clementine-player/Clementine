@@ -267,4 +267,21 @@ void DumpStackTrace() {
 #endif
 }
 
+QDebug CreateLoggerFatal() { return qCreateLogger(Fatal); }
+QDebug CreateLoggerError() { return qCreateLogger(Error); }
+
+#ifdef QT_NO_WARNING_OUTPUT
+QNoDebug CreateLoggerWarning() { return QNoDebug(); }
+#else
+QDebug CreateLoggerWarning() { return qCreateLogger(Warning); }
+#endif // QT_NO_WARNING_OUTPUT
+
+#ifdef QT_NO_DEBUG_OUTPUT
+QNoDebug CreateLoggerInfo() { return QNoDebug(); }
+QNoDebug CreateLoggerDebug() { return QNoDebug(); }
+#else
+QDebug CreateLoggerInfo() { return qCreateLogger(Info); }
+QDebug CreateLoggerDebug() { return qCreateLogger(Debug); }
+#endif // QT_NO_DEBUG_OUTPUT
+
 }  // namespace logging
