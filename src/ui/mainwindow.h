@@ -137,8 +137,6 @@ signals:
   // Signals that stop playing after track was toggled.
   void StopAfterToggled(bool stop);
 
-  void IntroPointReached();
-
  private slots:
   void FilePathChanged(const QString& path);
 

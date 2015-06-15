@@ -653,9 +653,9 @@ msgstr "Μετά την αντιγραφή..."
 
 #: playlist/playlist.cpp:1314 ui/organisedialog.cpp:61
 #: ui/qtsystemtrayicon.cpp:236 ../bin/src/ui_groupbydialog.h:129
-#: ../bin/src/ui_groupbydialog.h:144 ../bin/src/ui_groupbydialog.h:159
+#: ../bin/src/ui_groupbydialog.h:146 ../bin/src/ui_groupbydialog.h:163
 #: ../bin/src/ui_albumcoversearcher.h:111
-#: ../bin/src/ui_albumcoversearcher.h:113 ../bin/src/ui_edittagdialog.h:689
+#: ../bin/src/ui_albumcoversearcher.h:113 ../bin/src/ui_edittagdialog.h:738
 #: ../bin/src/ui_trackselectiondialog.h:209 ../bin/src/ui_ripcddialog.h:315
 msgid "Album"
 msgstr "Άλμπουμ"
@@ -665,8 +665,8 @@ msgid "Album (ideal loudness for all tracks)"
 msgstr "Άλμπουμ (ιδανική ένταση για όλα τα κομμάτια)"
 
 #: playlist/playlist.cpp:1326 ui/organisedialog.cpp:64
-#: ../bin/src/ui_groupbydialog.h:131 ../bin/src/ui_groupbydialog.h:146
-#: ../bin/src/ui_groupbydialog.h:161 ../bin/src/ui_edittagdialog.h:691
+#: ../bin/src/ui_groupbydialog.h:131 ../bin/src/ui_groupbydialog.h:148
+#: ../bin/src/ui_groupbydialog.h:165 ../bin/src/ui_edittagdialog.h:740
 msgid "Album artist"
 msgstr "Καλλιτέχνης άλμπουμ"
 
@@ -771,7 +771,7 @@ msgstr "Απαιτείται ένα πρόσθετο για να χρησιμο�
 msgid "An error occurred loading the iTunes database"
 msgstr "Προέκυψε σφάλμα στην φόρτωση της βάσης δεδομένων iTunes"
 
-#: ui/edittagdialog.cpp:692
+#: ui/edittagdialog.cpp:695
 #, qt-format
 msgid "An error occurred writing metadata to '%1'"
 msgstr "Προέκυψε σφάλμα κατά την εγγραφή μεταδεδομένων στο '%1'"
@@ -817,7 +817,7 @@ msgstr "Εφαρμογή συμπίεσης για αποφυγή κολλημά
 msgid "Are you sure you want to delete the \"%1\" preset?"
 msgstr "Είστε σίγουροι πως θέλετε να διαγράψετε τη ρύθμιση \"%1\";"
 
-#: ui/edittagdialog.cpp:798
+#: ui/edittagdialog.cpp:801
 msgid "Are you sure you want to reset this song's statistics?"
 msgstr "Είστε σίγουροι πως θέλετε να επαναφέρετε τα στατιστικά του τραγουδιού;"
 
@@ -829,9 +829,9 @@ msgstr "Είστε σίγουροι πως θέλετε να γράψετε τα
 
 #: playlist/playlist.cpp:1312 ui/organisedialog.cpp:62
 #: ui/qtsystemtrayicon.cpp:234 ../bin/src/ui_groupbydialog.h:130
-#: ../bin/src/ui_groupbydialog.h:145 ../bin/src/ui_groupbydialog.h:160
+#: ../bin/src/ui_groupbydialog.h:147 ../bin/src/ui_groupbydialog.h:164
 #: ../bin/src/ui_albumcoversearcher.h:107
-#: ../bin/src/ui_albumcoversearcher.h:109 ../bin/src/ui_edittagdialog.h:687
+#: ../bin/src/ui_albumcoversearcher.h:109 ../bin/src/ui_edittagdialog.h:736
 #: ../bin/src/ui_trackselectiondialog.h:210 ../bin/src/ui_ripcddialog.h:316
 msgid "Artist"
 msgstr "Καλλιτέχνης"
@@ -911,7 +911,7 @@ msgid "BBC Podcasts"
 msgstr "BBC Podcasts"
 
 #: playlist/playlist.cpp:1346 ui/organisedialog.cpp:71
-#: ../bin/src/ui_edittagdialog.h:671
+#: ../bin/src/ui_edittagdialog.h:720
 msgid "BPM"
 msgstr "BPM"
 
@@ -964,12 +964,12 @@ msgstr "Βέλτιστος"
 msgid "Biography from %1"
 msgstr "Βιογραφία από %1"
 
-#: playlist/playlist.cpp:1348 ../bin/src/ui_edittagdialog.h:673
+#: playlist/playlist.cpp:1348 ../bin/src/ui_edittagdialog.h:722
 msgid "Bit rate"
 msgstr "Ρυθμός bit"
 
-#: ../bin/src/ui_groupbydialog.h:137 ../bin/src/ui_groupbydialog.h:152
-#: ../bin/src/ui_groupbydialog.h:167 ../bin/src/ui_transcoderoptionsaac.h:129
+#: ../bin/src/ui_groupbydialog.h:137 ../bin/src/ui_groupbydialog.h:154
+#: ../bin/src/ui_groupbydialog.h:171 ../bin/src/ui_transcoderoptionsaac.h:129
 #: ../bin/src/ui_transcoderoptionsmp3.h:194
 #: ../bin/src/ui_transcoderoptionsopus.h:80
 #: ../bin/src/ui_transcoderoptionsspeex.h:218
@@ -1067,7 +1067,7 @@ msgid ""
 "Try to login into Vk.com with your browser,to fix this problem."
 msgstr "Το CAPTCHA είναι αναγκαιο.\nΠροσπαθήστε για συνδεθείτε στο Vk.com με τον περιηγητή σας, για να διορθώσετε αυτό το πρόβλημα."
 
-#: ../bin/src/ui_edittagdialog.h:667
+#: ../bin/src/ui_edittagdialog.h:716
 msgid "Change cover art"
 msgstr "Αλλαγή εξώφυλλου καλλιτέχνη"
 
@@ -1299,7 +1299,7 @@ msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Λίστα χωρισμένη με κόμμα από class:level, το level είναι 0-3"
 
 #: playlist/playlist.cpp:1365 smartplaylists/searchterm.cpp:353
-#: ui/organisedialog.cpp:74 ../bin/src/ui_edittagdialog.h:697
+#: ui/organisedialog.cpp:74 ../bin/src/ui_edittagdialog.h:747
 msgid "Comment"
 msgstr "Σχόλια"
 
@@ -1307,7 +1307,7 @@ msgstr "Σχόλια"
 msgid "Community Radio"
 msgstr "Κοινοτικό Ραδιόφωνο"
 
-#: ../bin/src/ui_edittagdialog.h:696
+#: ../bin/src/ui_edittagdialog.h:745
 msgid "Complete tags automatically"
 msgstr "Συμπλήρωση των ετικετών αυτόματα"
 
@@ -1316,8 +1316,8 @@ msgid "Complete tags automatically..."
 msgstr "Συμπλήρωση των ετικετών αυτόματα..."
 
 #: playlist/playlist.cpp:1328 ui/organisedialog.cpp:65
-#: ../bin/src/ui_groupbydialog.h:132 ../bin/src/ui_groupbydialog.h:147
-#: ../bin/src/ui_groupbydialog.h:162 ../bin/src/ui_edittagdialog.h:692
+#: ../bin/src/ui_groupbydialog.h:132 ../bin/src/ui_groupbydialog.h:149
+#: ../bin/src/ui_groupbydialog.h:166 ../bin/src/ui_edittagdialog.h:741
 msgid "Composer"
 msgstr "Συνθέτης"
 
@@ -1482,24 +1482,24 @@ msgstr "Δεν μπορεί να ανοίξει το αρχείο εξόδου %
 msgid "Cover Manager"
 msgstr "Διαχείριση εξώφυλλων"
 
-#: ui/edittagdialog.cpp:473
+#: ui/edittagdialog.cpp:476
 msgid "Cover art from embedded image"
 msgstr "Εξώφυλλο από ενσωματωμένη εικόνα"
 
-#: ui/edittagdialog.cpp:476
+#: ui/edittagdialog.cpp:479
 #, qt-format
 msgid "Cover art loaded automatically from %1"
 msgstr "Το εξώφυλλο φορτώθηκε αυτόματα από %1"
 
-#: ui/edittagdialog.cpp:468
+#: ui/edittagdialog.cpp:471
 msgid "Cover art manually unset"
 msgstr "Το εξώφυλλο αφαιρέθηκε χειροκίνητα"
 
-#: ui/edittagdialog.cpp:478
+#: ui/edittagdialog.cpp:481
 msgid "Cover art not set"
 msgstr "Δεν έχει οριστεί εξώφυλλο"
 
-#: ui/edittagdialog.cpp:471
+#: ui/edittagdialog.cpp:474
 #, qt-format
 msgid "Cover art set from %1"
 msgstr "Το εξώφυλλο ορίστηκε από %1"
@@ -1620,11 +1620,11 @@ msgid ""
 "recover your database"
 msgstr "Εντοπίστηκε κατακερματισμός στην βάση δεδομένων. Παρακαλώ διαβάστε το https://code.google.com/p/clementine-player/wiki/DatabaseCorruption για οδηγίες ανάκτησης της βάσης δεδομένων"
 
-#: playlist/playlist.cpp:1362 ../bin/src/ui_edittagdialog.h:682
+#: playlist/playlist.cpp:1362 ../bin/src/ui_edittagdialog.h:731
 msgid "Date created"
 msgstr "Ημερομηνία δημιουργίας"
 
-#: playlist/playlist.cpp:1360 ../bin/src/ui_edittagdialog.h:681
+#: playlist/playlist.cpp:1360 ../bin/src/ui_edittagdialog.h:730
 msgid "Date modified"
 msgstr "Ημερομηνία τροποποίησης"
 
@@ -1793,8 +1793,8 @@ msgid "Disabled"
 msgstr "Απενεργοποιημένο"
 
 #: playlist/playlist.cpp:1320 ui/organisedialog.cpp:70
-#: ../bin/src/ui_groupbydialog.h:138 ../bin/src/ui_groupbydialog.h:153
-#: ../bin/src/ui_groupbydialog.h:168 ../bin/src/ui_edittagdialog.h:688
+#: ../bin/src/ui_groupbydialog.h:138 ../bin/src/ui_groupbydialog.h:155
+#: ../bin/src/ui_groupbydialog.h:172 ../bin/src/ui_edittagdialog.h:737
 #: ../bin/src/ui_ripcddialog.h:314
 msgid "Disc"
 msgstr "Δίσκος"
@@ -1988,11 +1988,11 @@ msgstr "Τροποποίηση ετικέτας \"%1\"..."
 msgid "Edit tag..."
 msgstr "Τροποποίηση ετικέτας..."
 
-#: ../bin/src/ui_edittagdialog.h:698
+#: ../bin/src/ui_edittagdialog.h:748
 msgid "Edit tags"
 msgstr "Επεξεργασία ετικετών"
 
-#: ../bin/src/ui_edittagdialog.h:665
+#: ../bin/src/ui_edittagdialog.h:714
 msgid "Edit track information"
 msgstr "Τροποποίηση πληροφοριών κομματιού"
 
@@ -2349,7 +2349,7 @@ msgstr "Επέκταση αρχείου"
 msgid "File formats"
 msgstr "Μορφή αρχείων"
 
-#: playlist/playlist.cpp:1352 ../bin/src/ui_edittagdialog.h:683
+#: playlist/playlist.cpp:1352 ../bin/src/ui_edittagdialog.h:732
 msgid "File name"
 msgstr "Όνομα αρχείου"
 
@@ -2365,13 +2365,13 @@ msgstr "Αρχείο μοτίβου όνομα:"
 msgid "File paths"
 msgstr "διαδρομές των αρχείων"
 
-#: playlist/playlist.cpp:1356 ../bin/src/ui_edittagdialog.h:677
+#: playlist/playlist.cpp:1356 ../bin/src/ui_edittagdialog.h:726
 msgid "File size"
 msgstr "Μέγεθος αρχείου"
 
 #: playlist/playlist.cpp:1358 ../bin/src/ui_groupbydialog.h:133
-#: ../bin/src/ui_groupbydialog.h:148 ../bin/src/ui_groupbydialog.h:163
-#: ../bin/src/ui_edittagdialog.h:679
+#: ../bin/src/ui_groupbydialog.h:150 ../bin/src/ui_groupbydialog.h:167
+#: ../bin/src/ui_edittagdialog.h:728
 msgid "File type"
 msgstr "Τύπος αρχείου"
 
@@ -2500,8 +2500,8 @@ msgid "General settings"
 msgstr "Γενικές ρυθμίσεις"
 
 #: playlist/playlist.cpp:1324 ui/organisedialog.cpp:73
-#: ../bin/src/ui_groupbydialog.h:134 ../bin/src/ui_groupbydialog.h:149
-#: ../bin/src/ui_groupbydialog.h:164 ../bin/src/ui_edittagdialog.h:695
+#: ../bin/src/ui_groupbydialog.h:134 ../bin/src/ui_groupbydialog.h:151
+#: ../bin/src/ui_groupbydialog.h:168 ../bin/src/ui_edittagdialog.h:744
 #: ../bin/src/ui_ripcddialog.h:317
 msgid "Genre"
 msgstr "Είδος"
@@ -2586,7 +2586,8 @@ msgid "Group by Genre/Artist/Album"
 msgstr "Ομαδοποίηση κατά Είδος/Καλλιντέχνη/Άλμπουμ"
 
 #: playlist/playlist.cpp:1332 ui/organisedialog.cpp:67
-#: ../bin/src/ui_edittagdialog.h:694
+#: ../bin/src/ui_groupbydialog.h:140 ../bin/src/ui_groupbydialog.h:157
+#: ../bin/src/ui_groupbydialog.h:174 ../bin/src/ui_edittagdialog.h:743
 msgid "Grouping"
 msgstr "Ομαδοποίηση"
 
@@ -2908,7 +2909,7 @@ msgstr "Μεγάλη πλευρική μπάρα"
 msgid "Last played"
 msgstr "Τελευταία εκτέλεση"
 
-#: playlist/playlist.cpp:1341 ../bin/src/ui_edittagdialog.h:674
+#: playlist/playlist.cpp:1341 ../bin/src/ui_edittagdialog.h:723
 msgctxt "A playlist's tag."
 msgid "Last played"
 msgstr "Τελευταία εκτέλεση"
@@ -2950,7 +2951,7 @@ msgid "Left"
 msgstr "Αριστερά"
 
 #: playlist/playlist.cpp:1316 ui/organisedialog.cpp:75
-#: ui/qtsystemtrayicon.cpp:239 ../bin/src/ui_edittagdialog.h:669
+#: ui/qtsystemtrayicon.cpp:239 ../bin/src/ui_edittagdialog.h:718
 msgid "Length"
 msgstr "Διάρκεια"
 
@@ -3094,6 +3095,7 @@ msgid "Low complexity profile (LC)"
 msgstr "Προφίλ χαμηλής πολυπλοκότητας (LC)"
 
 #: ui/organisedialog.cpp:68 ../bin/src/ui_songinfosettingspage.h:159
+#: ../bin/src/ui_edittagdialog.h:746
 msgid "Lyrics"
 msgstr "Στίχοι"
 
@@ -3343,7 +3345,7 @@ msgstr "Διαμεσολαβητής Δικτύου"
 msgid "Network Remote"
 msgstr "Τηλεχειριστήριο Δικτύου"
 
-#: playlist/playlistdelegates.cpp:296 ui/edittagdialog.cpp:520
+#: playlist/playlistdelegates.cpp:296 ui/edittagdialog.cpp:523
 msgid "Never"
 msgstr "Ποτέ"
 
@@ -3420,8 +3422,8 @@ msgstr "Δεν βρέθηκαν. Καθαρίστε το πλαίσιο αναζ
 msgid "No short blocks"
 msgstr "Όχι βραχαία μπλοκς"
 
-#: ../bin/src/ui_groupbydialog.h:128 ../bin/src/ui_groupbydialog.h:143
-#: ../bin/src/ui_groupbydialog.h:158
+#: ../bin/src/ui_groupbydialog.h:128 ../bin/src/ui_groupbydialog.h:145
+#: ../bin/src/ui_groupbydialog.h:162
 msgid "None"
 msgstr "Κανένα"
 
@@ -3707,7 +3709,8 @@ msgid "Paused"
 msgstr "Σταματημένο"
 
 #: playlist/playlist.cpp:1330 ui/organisedialog.cpp:66
-#: ../bin/src/ui_edittagdialog.h:693
+#: ../bin/src/ui_groupbydialog.h:139 ../bin/src/ui_groupbydialog.h:156
+#: ../bin/src/ui_groupbydialog.h:173 ../bin/src/ui_edittagdialog.h:742
 msgid "Performer"
 msgstr "Εκτελεστής"
 
@@ -3726,7 +3729,7 @@ msgstr "Απλή πλευρική μπάρα"
 msgid "Play"
 msgstr "Αναπαραγωγή"
 
-#: playlist/playlist.cpp:1337 ../bin/src/ui_edittagdialog.h:670
+#: playlist/playlist.cpp:1337 ../bin/src/ui_edittagdialog.h:719
 msgid "Play count"
 msgstr "Μετρητής εκτελέσεων"
 
@@ -3757,7 +3760,7 @@ msgstr "Επιλογές αναπαραγωγής"
 
 #: playlist/playlistcontainer.cpp:287 playlist/playlistlistcontainer.cpp:228
 #: playlist/playlistmanager.cpp:87 playlist/playlistmanager.cpp:156
-#: playlist/playlistmanager.cpp:494 playlist/playlisttabbar.cpp:366
+#: playlist/playlistmanager.cpp:501 playlist/playlisttabbar.cpp:366
 msgid "Playlist"
 msgstr "Λίστα"
 
@@ -3984,7 +3987,7 @@ msgstr "Βαθμολογία τρέχοντος τραγουδιού με 4 ασ
 msgid "Rate the current song 5 stars"
 msgstr "Βαθμολογία τρέχοντος τραγουδιού με 5 αστέρια"
 
-#: playlist/playlist.cpp:1335 ../bin/src/ui_edittagdialog.h:678
+#: playlist/playlist.cpp:1335 ../bin/src/ui_edittagdialog.h:727
 msgid "Rating"
 msgstr "Βαθμολόγηση"
 
@@ -4139,7 +4142,7 @@ msgstr "Απαίτηση κωδικού επαλήθευσης"
 msgid "Reset"
 msgstr "Επαναφορά"
 
-#: ui/edittagdialog.cpp:797 ../bin/src/ui_edittagdialog.h:668
+#: ui/edittagdialog.cpp:800 ../bin/src/ui_edittagdialog.h:717
 msgid "Reset play counts"
 msgstr "Επαναφορά μετρητή εκτελέσεων"
 
@@ -4206,7 +4209,7 @@ msgstr "Ασφαλής αφαίρεση συσκευής"
 msgid "Safely remove the device after copying"
 msgstr "Ασφαλής αφαίρεση συσκευής μετά την αντιγραφή"
 
-#: playlist/playlist.cpp:1350 ../bin/src/ui_edittagdialog.h:675
+#: playlist/playlist.cpp:1350 ../bin/src/ui_edittagdialog.h:724
 msgid "Sample rate"
 msgstr "Ρυθμός δειγματοληψίας"
 
@@ -4264,7 +4267,7 @@ msgstr "Αποθήκευση της ροής στην καρτέλα Internet"
 msgid "Saving songs statistics into songs files"
 msgstr "Αποθήκευση των στατιστικών των τραγουδιών στα αρχεία των τραγουδιών"
 
-#: ui/edittagdialog.cpp:700 ui/trackselectiondialog.cpp:254
+#: ui/edittagdialog.cpp:703 ui/trackselectiondialog.cpp:254
 msgid "Saving tracks"
 msgstr "Αποθήκευση κομματιών"
 
@@ -4276,7 +4279,7 @@ msgstr "Προφίλ κλιμακούμενου ρυθμού δειγματολ�
 msgid "Scale size"
 msgstr "Διαβάθμιση μεγέθους"
 
-#: playlist/playlist.cpp:1343 ../bin/src/ui_edittagdialog.h:676
+#: playlist/playlist.cpp:1343 ../bin/src/ui_edittagdialog.h:725
 msgid "Score"
 msgstr "Σκορ"
 
@@ -4353,7 +4356,7 @@ msgstr "Εύρεση αποτελεσμάτων"
 msgid "Search terms"
 msgstr "Όροι αναζήτησης"
 
-#: ../bin/src/ui_groupbydialog.h:140
+#: ../bin/src/ui_groupbydialog.h:142
 msgid "Second level"
 msgstr "Δεύτερο επίπεδο"
 
@@ -4634,7 +4637,7 @@ msgstr "Ska"
 msgid "Skip backwards in playlist"
 msgstr "Παράλειψη προς τα πίσω στη λίστα"
 
-#: playlist/playlist.cpp:1339 ../bin/src/ui_edittagdialog.h:672
+#: playlist/playlist.cpp:1339 ../bin/src/ui_edittagdialog.h:721
 msgid "Skip count"
 msgstr "Μετρητής παραλήψεων"
 
@@ -4861,7 +4864,7 @@ msgstr "Επιτυχία εγγραφής του %1"
 msgid "Suggested tags"
 msgstr "Προτεινόμενες ετικέτες"
 
-#: ../bin/src/ui_edittagdialog.h:684
+#: ../bin/src/ui_edittagdialog.h:733
 #: ../bin/src/ui_notificationssettingspage.h:455
 msgid "Summary"
 msgstr "Σύνοψη"
@@ -5014,7 +5017,7 @@ msgid ""
 "converting music before copying it to a device."
 msgstr "Αυτές οι ρυθμίσεις χρησιμοποιούνται στον διάλογο \"Επανακωδικοποίηση Μουσικής\" όταν γίνεται μετατροπή της μουσικής πριν την αντιγραφή της σε μια συσκευή."
 
-#: ../bin/src/ui_groupbydialog.h:155
+#: ../bin/src/ui_groupbydialog.h:159
 msgid "Third level"
 msgstr "Τρίτο επίπεδο"
 
@@ -5076,7 +5079,7 @@ msgstr "Αυτού του τύπου η συσκευή δεν υποστηρίζ
 
 #: playlist/playlist.cpp:1310 ui/organisedialog.cpp:60
 #: ui/qtsystemtrayicon.cpp:232 ../bin/src/ui_about.h:142
-#: ../bin/src/ui_edittagdialog.h:685 ../bin/src/ui_trackselectiondialog.h:211
+#: ../bin/src/ui_edittagdialog.h:734 ../bin/src/ui_trackselectiondialog.h:211
 #: ../bin/src/ui_ripcddialog.h:307
 msgid "Title"
 msgstr "Τίτλος"
@@ -5130,7 +5133,7 @@ msgid "Total network requests made"
 msgstr "Συνολικές αιτήσεις δικτύου που πραγματοποιήθηκαν"
 
 #: playlist/playlist.cpp:1318 ui/organisedialog.cpp:69
-#: ../bin/src/ui_edittagdialog.h:686 ../bin/src/ui_trackselectiondialog.h:213
+#: ../bin/src/ui_edittagdialog.h:735 ../bin/src/ui_trackselectiondialog.h:213
 #: ../bin/src/ui_ripcddialog.h:305
 msgid "Track"
 msgstr "Κομμάτι"
@@ -5196,9 +5199,9 @@ msgstr "Αδυναμία \"κατεβάσματος\" του %1 (%2)"
 
 #: core/song.cpp:426 library/librarymodel.cpp:350 library/librarymodel.cpp:354
 #: library/librarymodel.cpp:358 library/librarymodel.cpp:1076
-#: playlist/playlistdelegates.cpp:306 playlist/playlistmanager.cpp:501
-#: playlist/playlistmanager.cpp:502 ui/albumcoverchoicecontroller.cpp:124
-#: ui/edittagdialog.cpp:452 ui/edittagdialog.cpp:496
+#: playlist/playlistdelegates.cpp:306 playlist/playlistmanager.cpp:508
+#: playlist/playlistmanager.cpp:509 ui/albumcoverchoicecontroller.cpp:124
+#: ui/edittagdialog.cpp:455 ui/edittagdialog.cpp:499
 msgid "Unknown"
 msgstr "Άγνωστο"
 
@@ -5372,7 +5375,7 @@ msgid "Variable bit rate"
 msgstr "Μεταβαλλόμενος ρυθμός bit"
 
 #: globalsearch/globalsearchmodel.cpp:106 library/librarymodel.cpp:281
-#: playlist/playlistmanager.cpp:513 ui/albumcovermanager.cpp:270
+#: playlist/playlistmanager.cpp:520 ui/albumcovermanager.cpp:270
 msgid "Various artists"
 msgstr "Διάφοροι καλλιτέχνες"
 
@@ -5546,14 +5549,14 @@ msgid "Wrong username or password."
 msgstr "Λάθος όνομα χρήστη ή συνθηματικό"
 
 #: playlist/playlist.cpp:1322 ui/organisedialog.cpp:72
-#: ../bin/src/ui_groupbydialog.h:135 ../bin/src/ui_groupbydialog.h:150
-#: ../bin/src/ui_groupbydialog.h:165 ../bin/src/ui_edittagdialog.h:690
+#: ../bin/src/ui_groupbydialog.h:135 ../bin/src/ui_groupbydialog.h:152
+#: ../bin/src/ui_groupbydialog.h:169 ../bin/src/ui_edittagdialog.h:739
 #: ../bin/src/ui_trackselectiondialog.h:212 ../bin/src/ui_ripcddialog.h:313
 msgid "Year"
 msgstr "Έτος"
 
-#: ../bin/src/ui_groupbydialog.h:136 ../bin/src/ui_groupbydialog.h:151
-#: ../bin/src/ui_groupbydialog.h:166
+#: ../bin/src/ui_groupbydialog.h:136 ../bin/src/ui_groupbydialog.h:153
+#: ../bin/src/ui_groupbydialog.h:170
 msgid "Year - Album"
 msgstr "Έτος - Άλμπουμ"
 
@@ -5737,7 +5740,7 @@ msgstr "μεταξύ"
 msgid "biggest first"
 msgstr "το μεγαλύτερο πρώτα"
 
-#: playlist/playlistview.cpp:228 ui/edittagdialog.cpp:489
+#: playlist/playlistview.cpp:228 ui/edittagdialog.cpp:492
 msgid "bpm"
 msgstr "bpm"
 
@@ -5791,7 +5794,7 @@ msgstr "εντός των τελευταίων"
 #: internet/spotify/spotifysettingspage.cpp:62
 #: internet/spotify/spotifysettingspage.cpp:63
 #: internet/spotify/spotifysettingspage.cpp:64 playlist/playlistview.cpp:232
-#: ui/edittagdialog.cpp:491
+#: ui/edittagdialog.cpp:494
 msgid "kbps"
 msgstr "kbps"
 
