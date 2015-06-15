@@ -660,9 +660,9 @@ msgstr "Kopyalandıktan sonra..."
 
 #: playlist/playlist.cpp:1314 ui/organisedialog.cpp:61
 #: ui/qtsystemtrayicon.cpp:236 ../bin/src/ui_groupbydialog.h:129
-#: ../bin/src/ui_groupbydialog.h:144 ../bin/src/ui_groupbydialog.h:159
+#: ../bin/src/ui_groupbydialog.h:146 ../bin/src/ui_groupbydialog.h:163
 #: ../bin/src/ui_albumcoversearcher.h:111
-#: ../bin/src/ui_albumcoversearcher.h:113 ../bin/src/ui_edittagdialog.h:689
+#: ../bin/src/ui_albumcoversearcher.h:113 ../bin/src/ui_edittagdialog.h:738
 #: ../bin/src/ui_trackselectiondialog.h:209 ../bin/src/ui_ripcddialog.h:315
 msgid "Album"
 msgstr "Albüm"
@@ -672,8 +672,8 @@ msgid "Album (ideal loudness for all tracks)"
 msgstr "Albüm (tüm parçalar için ideal ses yüksekliği)"
 
 #: playlist/playlist.cpp:1326 ui/organisedialog.cpp:64
-#: ../bin/src/ui_groupbydialog.h:131 ../bin/src/ui_groupbydialog.h:146
-#: ../bin/src/ui_groupbydialog.h:161 ../bin/src/ui_edittagdialog.h:691
+#: ../bin/src/ui_groupbydialog.h:131 ../bin/src/ui_groupbydialog.h:148
+#: ../bin/src/ui_groupbydialog.h:165 ../bin/src/ui_edittagdialog.h:740
 msgid "Album artist"
 msgstr "Albüm sanatçısı"
 
@@ -778,7 +778,7 @@ msgstr "Spotify'ın Clementine'de kullanılması için harici bir eklenti gerekm
 msgid "An error occurred loading the iTunes database"
 msgstr "iTunes veritabanı yüklenirken hata oluştu"
 
-#: ui/edittagdialog.cpp:692
+#: ui/edittagdialog.cpp:695
 #, qt-format
 msgid "An error occurred writing metadata to '%1'"
 msgstr "'%1' dosyasına metadata yazarken hata oluştu"
@@ -824,7 +824,7 @@ msgstr "Kesintiyi engellemek için sıkıştırma uygula"
 msgid "Are you sure you want to delete the \"%1\" preset?"
 msgstr "\"%1\" ayarını silmek istediğinizden emin misiniz?"
 
-#: ui/edittagdialog.cpp:798
+#: ui/edittagdialog.cpp:801
 msgid "Are you sure you want to reset this song's statistics?"
 msgstr "Bu şarkının istatistik bilgisini sıfırlamak istiyor musunuz?"
 
@@ -836,9 +836,9 @@ msgstr "Şarkıların istatistiklerini, kütüphanenizdeki tüm şarkıların ke
 
 #: playlist/playlist.cpp:1312 ui/organisedialog.cpp:62
 #: ui/qtsystemtrayicon.cpp:234 ../bin/src/ui_groupbydialog.h:130
-#: ../bin/src/ui_groupbydialog.h:145 ../bin/src/ui_groupbydialog.h:160
+#: ../bin/src/ui_groupbydialog.h:147 ../bin/src/ui_groupbydialog.h:164
 #: ../bin/src/ui_albumcoversearcher.h:107
-#: ../bin/src/ui_albumcoversearcher.h:109 ../bin/src/ui_edittagdialog.h:687
+#: ../bin/src/ui_albumcoversearcher.h:109 ../bin/src/ui_edittagdialog.h:736
 #: ../bin/src/ui_trackselectiondialog.h:210 ../bin/src/ui_ripcddialog.h:316
 msgid "Artist"
 msgstr "Sanatçı"
@@ -918,7 +918,7 @@ msgid "BBC Podcasts"
 msgstr "BBC Podcastları"
 
 #: playlist/playlist.cpp:1346 ui/organisedialog.cpp:71
-#: ../bin/src/ui_edittagdialog.h:671
+#: ../bin/src/ui_edittagdialog.h:720
 msgid "BPM"
 msgstr "BPM"
 
@@ -971,12 +971,12 @@ msgstr "En iyi"
 msgid "Biography from %1"
 msgstr "%1 sitesinden biyografi"
 
-#: playlist/playlist.cpp:1348 ../bin/src/ui_edittagdialog.h:673
+#: playlist/playlist.cpp:1348 ../bin/src/ui_edittagdialog.h:722
 msgid "Bit rate"
 msgstr "Bit oranı"
 
-#: ../bin/src/ui_groupbydialog.h:137 ../bin/src/ui_groupbydialog.h:152
-#: ../bin/src/ui_groupbydialog.h:167 ../bin/src/ui_transcoderoptionsaac.h:129
+#: ../bin/src/ui_groupbydialog.h:137 ../bin/src/ui_groupbydialog.h:154
+#: ../bin/src/ui_groupbydialog.h:171 ../bin/src/ui_transcoderoptionsaac.h:129
 #: ../bin/src/ui_transcoderoptionsmp3.h:194
 #: ../bin/src/ui_transcoderoptionsopus.h:80
 #: ../bin/src/ui_transcoderoptionsspeex.h:218
@@ -1074,7 +1074,7 @@ msgid ""
 "Try to login into Vk.com with your browser,to fix this problem."
 msgstr "Resim doğrulaması gerekli.\nBu sorunu çözmek için Vk.com'da tarayıcınızla oturum açmayı deneyin."
 
-#: ../bin/src/ui_edittagdialog.h:667
+#: ../bin/src/ui_edittagdialog.h:716
 msgid "Change cover art"
 msgstr "Kapak resmini değiştir"
 
@@ -1306,7 +1306,7 @@ msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Virgülle ayrılmış sınıf:seviye listesi, sınıf 0-3 arasında olabilir "
 
 #: playlist/playlist.cpp:1365 smartplaylists/searchterm.cpp:353
-#: ui/organisedialog.cpp:74 ../bin/src/ui_edittagdialog.h:697
+#: ui/organisedialog.cpp:74 ../bin/src/ui_edittagdialog.h:747
 msgid "Comment"
 msgstr "Yorum"
 
@@ -1314,7 +1314,7 @@ msgstr "Yorum"
 msgid "Community Radio"
 msgstr "Topluluk Radyosu"
 
-#: ../bin/src/ui_edittagdialog.h:696
+#: ../bin/src/ui_edittagdialog.h:745
 msgid "Complete tags automatically"
 msgstr "Etiketleri otomatik tamamla"
 
@@ -1323,8 +1323,8 @@ msgid "Complete tags automatically..."
 msgstr "Etiketleri otomatik tamamla..."
 
 #: playlist/playlist.cpp:1328 ui/organisedialog.cpp:65
-#: ../bin/src/ui_groupbydialog.h:132 ../bin/src/ui_groupbydialog.h:147
-#: ../bin/src/ui_groupbydialog.h:162 ../bin/src/ui_edittagdialog.h:692
+#: ../bin/src/ui_groupbydialog.h:132 ../bin/src/ui_groupbydialog.h:149
+#: ../bin/src/ui_groupbydialog.h:166 ../bin/src/ui_edittagdialog.h:741
 msgid "Composer"
 msgstr "Besteci"
 
@@ -1489,24 +1489,24 @@ msgstr "%1 çıktı dosyası açılamadı"
 msgid "Cover Manager"
 msgstr "Kapak Yöneticisi"
 
-#: ui/edittagdialog.cpp:473
+#: ui/edittagdialog.cpp:476
 msgid "Cover art from embedded image"
 msgstr "Gömülü resimden kapak resmi"
 
-#: ui/edittagdialog.cpp:476
+#: ui/edittagdialog.cpp:479
 #, qt-format
 msgid "Cover art loaded automatically from %1"
 msgstr "Kapak resmi %1 adresinden otomatik olarak yüklendi"
 
-#: ui/edittagdialog.cpp:468
+#: ui/edittagdialog.cpp:471
 msgid "Cover art manually unset"
 msgstr "Kapak resmi elle çıkarıldı"
 
-#: ui/edittagdialog.cpp:478
+#: ui/edittagdialog.cpp:481
 msgid "Cover art not set"
 msgstr "Kapak resmi ayarlanmamış"
 
-#: ui/edittagdialog.cpp:471
+#: ui/edittagdialog.cpp:474
 #, qt-format
 msgid "Cover art set from %1"
 msgstr "Kapak resmi %1 adresinden ayarlandı"
@@ -1627,11 +1627,11 @@ msgid ""
 "recover your database"
 msgstr "Veritabanında bozulma tespit edildi. Lütfen https://code.google.com/p/clementine-player/wiki/DatabaseCorruption adresindeki veritabanınızı nasıl kurtaracağınıza ilişkin talimatları okuyun."
 
-#: playlist/playlist.cpp:1362 ../bin/src/ui_edittagdialog.h:682
+#: playlist/playlist.cpp:1362 ../bin/src/ui_edittagdialog.h:731
 msgid "Date created"
 msgstr "Oluşturulduğu tarih"
 
-#: playlist/playlist.cpp:1360 ../bin/src/ui_edittagdialog.h:681
+#: playlist/playlist.cpp:1360 ../bin/src/ui_edittagdialog.h:730
 msgid "Date modified"
 msgstr "Değiştirildiği tarih"
 
@@ -1800,8 +1800,8 @@ msgid "Disabled"
 msgstr "Devre Dışı"
 
 #: playlist/playlist.cpp:1320 ui/organisedialog.cpp:70
-#: ../bin/src/ui_groupbydialog.h:138 ../bin/src/ui_groupbydialog.h:153
-#: ../bin/src/ui_groupbydialog.h:168 ../bin/src/ui_edittagdialog.h:688
+#: ../bin/src/ui_groupbydialog.h:138 ../bin/src/ui_groupbydialog.h:155
+#: ../bin/src/ui_groupbydialog.h:172 ../bin/src/ui_edittagdialog.h:737
 #: ../bin/src/ui_ripcddialog.h:314
 msgid "Disc"
 msgstr "Disk"
@@ -1995,11 +1995,11 @@ msgstr "\"%1\" etiketini düzenle..."
 msgid "Edit tag..."
 msgstr "Etiketi düzenle..."
 
-#: ../bin/src/ui_edittagdialog.h:698
+#: ../bin/src/ui_edittagdialog.h:748
 msgid "Edit tags"
 msgstr "Etiketleri düzenle"
 
-#: ../bin/src/ui_edittagdialog.h:665
+#: ../bin/src/ui_edittagdialog.h:714
 msgid "Edit track information"
 msgstr "Parça bilgisini düzenle"
 
@@ -2356,7 +2356,7 @@ msgstr "Dosya uzantısı"
 msgid "File formats"
 msgstr "Dosya biçimleri"
 
-#: playlist/playlist.cpp:1352 ../bin/src/ui_edittagdialog.h:683
+#: playlist/playlist.cpp:1352 ../bin/src/ui_edittagdialog.h:732
 msgid "File name"
 msgstr "Dosya adı"
 
@@ -2372,13 +2372,13 @@ msgstr "Dosya adı deseni:"
 msgid "File paths"
 msgstr "Dosya yolları"
 
-#: playlist/playlist.cpp:1356 ../bin/src/ui_edittagdialog.h:677
+#: playlist/playlist.cpp:1356 ../bin/src/ui_edittagdialog.h:726
 msgid "File size"
 msgstr "Dosya boyutu"
 
 #: playlist/playlist.cpp:1358 ../bin/src/ui_groupbydialog.h:133
-#: ../bin/src/ui_groupbydialog.h:148 ../bin/src/ui_groupbydialog.h:163
-#: ../bin/src/ui_edittagdialog.h:679
+#: ../bin/src/ui_groupbydialog.h:150 ../bin/src/ui_groupbydialog.h:167
+#: ../bin/src/ui_edittagdialog.h:728
 msgid "File type"
 msgstr "Dosya türü"
 
@@ -2507,8 +2507,8 @@ msgid "General settings"
 msgstr "Genel ayarlar"
 
 #: playlist/playlist.cpp:1324 ui/organisedialog.cpp:73
-#: ../bin/src/ui_groupbydialog.h:134 ../bin/src/ui_groupbydialog.h:149
-#: ../bin/src/ui_groupbydialog.h:164 ../bin/src/ui_edittagdialog.h:695
+#: ../bin/src/ui_groupbydialog.h:134 ../bin/src/ui_groupbydialog.h:151
+#: ../bin/src/ui_groupbydialog.h:168 ../bin/src/ui_edittagdialog.h:744
 #: ../bin/src/ui_ripcddialog.h:317
 msgid "Genre"
 msgstr "Tür"
@@ -2593,7 +2593,8 @@ msgid "Group by Genre/Artist/Album"
 msgstr "Tür/Sanatçı/Albüme göre grupla"
 
 #: playlist/playlist.cpp:1332 ui/organisedialog.cpp:67
-#: ../bin/src/ui_edittagdialog.h:694
+#: ../bin/src/ui_groupbydialog.h:140 ../bin/src/ui_groupbydialog.h:157
+#: ../bin/src/ui_groupbydialog.h:174 ../bin/src/ui_edittagdialog.h:743
 msgid "Grouping"
 msgstr "Gruplandırma"
 
@@ -2915,7 +2916,7 @@ msgstr "Büyük kenar çubuğu"
 msgid "Last played"
 msgstr "Son çalınan"
 
-#: playlist/playlist.cpp:1341 ../bin/src/ui_edittagdialog.h:674
+#: playlist/playlist.cpp:1341 ../bin/src/ui_edittagdialog.h:723
 msgctxt "A playlist's tag."
 msgid "Last played"
 msgstr "Son çalınan"
@@ -2957,7 +2958,7 @@ msgid "Left"
 msgstr "So"
 
 #: playlist/playlist.cpp:1316 ui/organisedialog.cpp:75
-#: ui/qtsystemtrayicon.cpp:239 ../bin/src/ui_edittagdialog.h:669
+#: ui/qtsystemtrayicon.cpp:239 ../bin/src/ui_edittagdialog.h:718
 msgid "Length"
 msgstr "Süre"
 
@@ -3101,6 +3102,7 @@ msgid "Low complexity profile (LC)"
 msgstr "Düşük karmaşıklık profili (LC)"
 
 #: ui/organisedialog.cpp:68 ../bin/src/ui_songinfosettingspage.h:159
+#: ../bin/src/ui_edittagdialog.h:746
 msgid "Lyrics"
 msgstr "Şarkı sözleri"
 
@@ -3350,7 +3352,7 @@ msgstr "Vekil Sunucu"
 msgid "Network Remote"
 msgstr "Ağ Denetimi"
 
-#: playlist/playlistdelegates.cpp:296 ui/edittagdialog.cpp:520
+#: playlist/playlistdelegates.cpp:296 ui/edittagdialog.cpp:523
 msgid "Never"
 msgstr "Hiçbir zaman"
 
@@ -3427,8 +3429,8 @@ msgstr "Eşleşen bulunmadı. Çalma listesini tekrar görmek için arama çubu�
 msgid "No short blocks"
 msgstr "Kısa blok yok"
 
-#: ../bin/src/ui_groupbydialog.h:128 ../bin/src/ui_groupbydialog.h:143
-#: ../bin/src/ui_groupbydialog.h:158
+#: ../bin/src/ui_groupbydialog.h:128 ../bin/src/ui_groupbydialog.h:145
+#: ../bin/src/ui_groupbydialog.h:162
 msgid "None"
 msgstr "Hiçbiri"
 
@@ -3714,7 +3716,8 @@ msgid "Paused"
 msgstr "Duraklatıldı"
 
 #: playlist/playlist.cpp:1330 ui/organisedialog.cpp:66
-#: ../bin/src/ui_edittagdialog.h:693
+#: ../bin/src/ui_groupbydialog.h:139 ../bin/src/ui_groupbydialog.h:156
+#: ../bin/src/ui_groupbydialog.h:173 ../bin/src/ui_edittagdialog.h:742
 msgid "Performer"
 msgstr "Sanatçı"
 
@@ -3733,7 +3736,7 @@ msgstr "Düz kenar çubuğu"
 msgid "Play"
 msgstr "Çal"
 
-#: playlist/playlist.cpp:1337 ../bin/src/ui_edittagdialog.h:670
+#: playlist/playlist.cpp:1337 ../bin/src/ui_edittagdialog.h:719
 msgid "Play count"
 msgstr "Çalma sayısı"
 
@@ -3764,7 +3767,7 @@ msgstr "Oynatıcı seçenekleri"
 
 #: playlist/playlistcontainer.cpp:287 playlist/playlistlistcontainer.cpp:228
 #: playlist/playlistmanager.cpp:87 playlist/playlistmanager.cpp:156
-#: playlist/playlistmanager.cpp:494 playlist/playlisttabbar.cpp:366
+#: playlist/playlistmanager.cpp:501 playlist/playlisttabbar.cpp:366
 msgid "Playlist"
 msgstr "Çalma Listesi"
 
@@ -3991,7 +3994,7 @@ msgstr "Geçerli şarkıyı 4 yıldızla oyla"
 msgid "Rate the current song 5 stars"
 msgstr "Geçerli şarkıyı 5 yıldızla oyla"
 
-#: playlist/playlist.cpp:1335 ../bin/src/ui_edittagdialog.h:678
+#: playlist/playlist.cpp:1335 ../bin/src/ui_edittagdialog.h:727
 msgid "Rating"
 msgstr "Beğeni"
 
@@ -4146,7 +4149,7 @@ msgstr "Doğrulama kodu iste"
 msgid "Reset"
 msgstr "Sıfırla"
 
-#: ui/edittagdialog.cpp:797 ../bin/src/ui_edittagdialog.h:668
+#: ui/edittagdialog.cpp:800 ../bin/src/ui_edittagdialog.h:717
 msgid "Reset play counts"
 msgstr "Çalma sayısını sıfırla"
 
@@ -4213,7 +4216,7 @@ msgstr "Aygıtı güvenli kaldır"
 msgid "Safely remove the device after copying"
 msgstr "Kopyalama işleminden sonra aygıtı güvenli kaldır"
 
-#: playlist/playlist.cpp:1350 ../bin/src/ui_edittagdialog.h:675
+#: playlist/playlist.cpp:1350 ../bin/src/ui_edittagdialog.h:724
 msgid "Sample rate"
 msgstr "Örnekleme oranı"
 
@@ -4271,7 +4274,7 @@ msgstr "Bu akışı Internet sekmesine kaydet"
 msgid "Saving songs statistics into songs files"
 msgstr "Şarkı istatistikleri şarkı dosyalarına kaydediliyor"
 
-#: ui/edittagdialog.cpp:700 ui/trackselectiondialog.cpp:254
+#: ui/edittagdialog.cpp:703 ui/trackselectiondialog.cpp:254
 msgid "Saving tracks"
 msgstr "Parçalar kaydediliyor"
 
@@ -4283,7 +4286,7 @@ msgstr "Ölçeklenebilir örnekleme oranı profili (SSR)"
 msgid "Scale size"
 msgstr "ÖLçek boyutu"
 
-#: playlist/playlist.cpp:1343 ../bin/src/ui_edittagdialog.h:676
+#: playlist/playlist.cpp:1343 ../bin/src/ui_edittagdialog.h:725
 msgid "Score"
 msgstr "Puan"
 
@@ -4360,7 +4363,7 @@ msgstr "Arama sonuçları"
 msgid "Search terms"
 msgstr "Arama terimleri"
 
-#: ../bin/src/ui_groupbydialog.h:140
+#: ../bin/src/ui_groupbydialog.h:142
 msgid "Second level"
 msgstr "İkinci seviye"
 
@@ -4641,7 +4644,7 @@ msgstr "Ska"
 msgid "Skip backwards in playlist"
 msgstr "Parça listesinde geri git"
 
-#: playlist/playlist.cpp:1339 ../bin/src/ui_edittagdialog.h:672
+#: playlist/playlist.cpp:1339 ../bin/src/ui_edittagdialog.h:721
 msgid "Skip count"
 msgstr "Atlama sayısı"
 
@@ -4868,7 +4871,7 @@ msgstr "%1 başarıyla yazıldı"
 msgid "Suggested tags"
 msgstr "Önerilen etiketler"
 
-#: ../bin/src/ui_edittagdialog.h:684
+#: ../bin/src/ui_edittagdialog.h:733
 #: ../bin/src/ui_notificationssettingspage.h:455
 msgid "Summary"
 msgstr "Özet"
@@ -5021,7 +5024,7 @@ msgid ""
 "converting music before copying it to a device."
 msgstr "Bu seçenekler \"Müzik Dönüştür\" penceresinde ve aygıta müzik kopyalamadan önce dönüştürme işleminde kullanılır."
 
-#: ../bin/src/ui_groupbydialog.h:155
+#: ../bin/src/ui_groupbydialog.h:159
 msgid "Third level"
 msgstr "Üçüncü seviye"
 
@@ -5083,7 +5086,7 @@ msgstr "Bu tür bir aygıt desteklenmiyor: %1"
 
 #: playlist/playlist.cpp:1310 ui/organisedialog.cpp:60
 #: ui/qtsystemtrayicon.cpp:232 ../bin/src/ui_about.h:142
-#: ../bin/src/ui_edittagdialog.h:685 ../bin/src/ui_trackselectiondialog.h:211
+#: ../bin/src/ui_edittagdialog.h:734 ../bin/src/ui_trackselectiondialog.h:211
 #: ../bin/src/ui_ripcddialog.h:307
 msgid "Title"
 msgstr "Başlık"
@@ -5137,7 +5140,7 @@ msgid "Total network requests made"
 msgstr "Yapılmış toplam ağ istemi"
 
 #: playlist/playlist.cpp:1318 ui/organisedialog.cpp:69
-#: ../bin/src/ui_edittagdialog.h:686 ../bin/src/ui_trackselectiondialog.h:213
+#: ../bin/src/ui_edittagdialog.h:735 ../bin/src/ui_trackselectiondialog.h:213
 #: ../bin/src/ui_ripcddialog.h:305
 msgid "Track"
 msgstr "Parça"
@@ -5203,9 +5206,9 @@ msgstr "%1 indirilemedi (%2)"
 
 #: core/song.cpp:426 library/librarymodel.cpp:350 library/librarymodel.cpp:354
 #: library/librarymodel.cpp:358 library/librarymodel.cpp:1076
-#: playlist/playlistdelegates.cpp:306 playlist/playlistmanager.cpp:501
-#: playlist/playlistmanager.cpp:502 ui/albumcoverchoicecontroller.cpp:124
-#: ui/edittagdialog.cpp:452 ui/edittagdialog.cpp:496
+#: playlist/playlistdelegates.cpp:306 playlist/playlistmanager.cpp:508
+#: playlist/playlistmanager.cpp:509 ui/albumcoverchoicecontroller.cpp:124
+#: ui/edittagdialog.cpp:455 ui/edittagdialog.cpp:499
 msgid "Unknown"
 msgstr "Bilinmeyen"
 
@@ -5379,7 +5382,7 @@ msgid "Variable bit rate"
 msgstr "Değişken bit oranı"
 
 #: globalsearch/globalsearchmodel.cpp:106 library/librarymodel.cpp:281
-#: playlist/playlistmanager.cpp:513 ui/albumcovermanager.cpp:270
+#: playlist/playlistmanager.cpp:520 ui/albumcovermanager.cpp:270
 msgid "Various artists"
 msgstr "Çeşitli sanatçılar"
 
@@ -5553,14 +5556,14 @@ msgid "Wrong username or password."
 msgstr "Yanlış kullanıcı adı veya parola."
 
 #: playlist/playlist.cpp:1322 ui/organisedialog.cpp:72
-#: ../bin/src/ui_groupbydialog.h:135 ../bin/src/ui_groupbydialog.h:150
-#: ../bin/src/ui_groupbydialog.h:165 ../bin/src/ui_edittagdialog.h:690
+#: ../bin/src/ui_groupbydialog.h:135 ../bin/src/ui_groupbydialog.h:152
+#: ../bin/src/ui_groupbydialog.h:169 ../bin/src/ui_edittagdialog.h:739
 #: ../bin/src/ui_trackselectiondialog.h:212 ../bin/src/ui_ripcddialog.h:313
 msgid "Year"
 msgstr "Yıl"
 
-#: ../bin/src/ui_groupbydialog.h:136 ../bin/src/ui_groupbydialog.h:151
-#: ../bin/src/ui_groupbydialog.h:166
+#: ../bin/src/ui_groupbydialog.h:136 ../bin/src/ui_groupbydialog.h:153
+#: ../bin/src/ui_groupbydialog.h:170
 msgid "Year - Album"
 msgstr "Yıl - Albüm"
 
@@ -5744,7 +5747,7 @@ msgstr "arasında"
 msgid "biggest first"
 msgstr "ilk önce en büyüğü"
 
-#: playlist/playlistview.cpp:228 ui/edittagdialog.cpp:489
+#: playlist/playlistview.cpp:228 ui/edittagdialog.cpp:492
 msgid "bpm"
 msgstr "bpm"
 
@@ -5798,7 +5801,7 @@ msgstr "Sonuncu"
 #: internet/spotify/spotifysettingspage.cpp:62
 #: internet/spotify/spotifysettingspage.cpp:63
 #: internet/spotify/spotifysettingspage.cpp:64 playlist/playlistview.cpp:232
-#: ui/edittagdialog.cpp:491
+#: ui/edittagdialog.cpp:494
 msgid "kbps"
 msgstr "kbps"
 
