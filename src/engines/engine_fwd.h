@@ -27,6 +27,7 @@ enum TrackChangeType {
   First = 0x01,
   Manual = 0x02,
   Auto = 0x04,
+  Intro = 0x08,
 
   // Any of:
   SameAlbum = 0x10,

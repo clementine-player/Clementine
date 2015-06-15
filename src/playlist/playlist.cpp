@@ -563,6 +563,7 @@ int Playlist::next_row(bool ignore_repeat_track) const {
 
     switch (playlist_sequence_->repeat_mode()) {
       case PlaylistSequence::Repeat_Off:
+      case PlaylistSequence::Repeat_Intro:
         return -1;
       case PlaylistSequence::Repeat_Track:
         next_virtual_index = current_virtual_index_;
