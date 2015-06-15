@@ -41,9 +41,7 @@ class MusicBrainzClientTest : public ::testing::Test {
     qRegisterMetaType<ResultList>("MusicBrainzClient::ResultList");
   }
 
-  void SetUp() {
-    mock_network_.reset(new MockNetworkAccessManager);
-  }
+  void SetUp() { mock_network_.reset(new MockNetworkAccessManager); }
 
   // Reads the data from a file into a QByteArray and returns it.
   QByteArray ReadDataFromFile(const QString& filename) {
@@ -55,7 +53,6 @@ class MusicBrainzClientTest : public ::testing::Test {
 
   std::unique_ptr<MockNetworkAccessManager> mock_network_;
 };
-
 
 // Test if a discid that do not exist in the musicbrainz database
 // generates an empty result.
@@ -111,6 +108,7 @@ TEST_F(MusicBrainzClientTest, ParseDiscID) {
   const QString expected_artist = "Symphony X";
   const QString expected_title = "Live on the Edge of Forever";
   const int expected_number_of_tracks = 6;
+  const int expected_year = 2001;
 
   // Create a MusicBrainzClient instance with mock_network_.
   MusicBrainzClient musicbrainz_client(nullptr, mock_network_.get());
@@ -149,9 +147,10 @@ TEST_F(MusicBrainzClientTest, ParseDiscID) {
   EXPECT_EQ(expected_number_of_tracks, tracks.count());
 
   // Check that the tracks is ordered by track number in ascending
-  // order.
+  // order and that the expected year is added to all tracks.
   for (int i = 0; i < tracks.count(); ++i) {
     EXPECT_EQ(i + 1, tracks[i].track_);
+    EXPECT_EQ(expected_year, tracks[i].year_);
   }
 
   // Check some track information.
@@ -174,6 +173,7 @@ TEST_F(MusicBrainzClientTest, ParseTrack) {
   const QString expected_title = "Victoria und ihr Husar: Pardon Madame";
   const QString expected_artist = "Paul Abraham";
   const QString expected_album = "An Evening at the Operetta";
+  const int expected_year = 1992;
 
   // Create a MusicBrainzClient instance with mock_network_.
   MusicBrainzClient musicbrainz_client(nullptr, mock_network_.get());
@@ -207,6 +207,7 @@ TEST_F(MusicBrainzClientTest, ParseTrack) {
     EXPECT_EQ(expected_title, track.title_);
     EXPECT_EQ(expected_artist, track.artist_);
     EXPECT_EQ(expected_album, track.album_);
+    EXPECT_EQ(expected_year, track.year_);
   }
 }
 
