@@ -589,8 +589,6 @@ void Player::TrackAboutToEnd() {
                            next_item->Metadata().end_nanosec());
 }
 
-void Player::IntroPointReached() { NextInternal(Engine::Intro); }
-
 void Player::ValidSongRequested(const QUrl& url) {
   emit SongChangeRequestProcessed(url, true);
 }
