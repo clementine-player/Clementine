@@ -494,8 +494,6 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
   connect(app_->player(), SIGNAL(Seeked(qlonglong)), SLOT(Seeked(qlonglong)));
   connect(app_->player(), SIGNAL(TrackSkipped(PlaylistItemPtr)),
           SLOT(TrackSkipped(PlaylistItemPtr)));
-  connect(this, SIGNAL(IntroPointReached()), app_->player(),
-          SLOT(IntroPointReached()));
   connect(app_->player(), SIGNAL(VolumeChanged(int)), SLOT(VolumeChanged(int)));
 
   connect(app_->player(), SIGNAL(Paused()), ui_->playlist,
@@ -1337,13 +1335,6 @@ void MainWindow::UpdateTrackPosition() {
         playlist->get_lastfm_status() != Playlist::LastFM_Seeked) {
       app_->library_backend()->IncrementPlayCountAsync(item->Metadata().id());
       playlist->set_have_incremented_playcount();
-    }
-  }
-
-  // (just after) the scrobble point is a good point to change tracks in intro mode
-  if (position >= scrobble_point + 5) {
-    if (playlist->sequence()->repeat_mode() == PlaylistSequence::Repeat_Intro) {
-      emit IntroPointReached();
     }
   }
 
