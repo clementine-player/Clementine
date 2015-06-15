@@ -381,7 +381,7 @@ void OutgoingDataCreator::CreateSong(const Song& song, const QImage& art,
         DataCommaSizeFromQString(song.art_automatic()));
     song_metadata->set_art_manual(DataCommaSizeFromQString(song.art_manual()));
     song_metadata->set_type(
-        static_cast<::pb::remote::SongMetadata_Type>(song.filetype()));
+        static_cast< ::pb::remote::SongMetadata_Type>(song.filetype()));
 
     // Append coverart
     if (!art.isNull()) {
