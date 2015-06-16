@@ -92,7 +92,7 @@ class PlayerInterface : public QObject {
   virtual void Play() = 0;
   virtual void ShowOSD() = 0;
 
- signals:
+signals:
   void Playing();
   void Paused();
   void Stopped();
@@ -163,6 +163,7 @@ class Player : public PlayerInterface {
   void Pause();
   void Stop(bool stop_after = false);
   void StopAfterCurrent();
+  void IntroPointReached();
   void Play();
   void ShowOSD();
   void TogglePrettyOSD();

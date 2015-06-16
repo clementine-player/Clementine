@@ -41,6 +41,7 @@ class PlaylistSequence : public QWidget {
     Repeat_Album = 2,
     Repeat_Playlist = 3,
     Repeat_OneByOne = 4,
+    Repeat_Intro = 5,
   };
   enum ShuffleMode {
     Shuffle_Off = 0,
