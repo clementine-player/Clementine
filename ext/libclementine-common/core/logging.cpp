@@ -267,21 +267,21 @@ void DumpStackTrace() {
 #endif
 }
 
-QDebug CreateLoggerFatal() { return qCreateLogger(Fatal); }
-QDebug CreateLoggerError() { return qCreateLogger(Error); }
+QDebug CreateLoggerFatal(int line, const char *class_name) { return qCreateLogger(line, class_name, Fatal); }
+QDebug CreateLoggerError(int line, const char *class_name) { return qCreateLogger(line, class_name, Error); }
 
 #ifdef QT_NO_WARNING_OUTPUT
-QNoDebug CreateLoggerWarning() { return QNoDebug(); }
+QNoDebug CreateLoggerWarning(int, const char*) { return QNoDebug(); }
 #else
-QDebug CreateLoggerWarning() { return qCreateLogger(Warning); }
+QDebug CreateLoggerWarning(int line, const char *class_name) { return qCreateLogger(line, class_name, Warning); }
 #endif // QT_NO_WARNING_OUTPUT
 
 #ifdef QT_NO_DEBUG_OUTPUT
-QNoDebug CreateLoggerInfo() { return QNoDebug(); }
-QNoDebug CreateLoggerDebug() { return QNoDebug(); }
+QNoDebug CreateLoggerInfo(int, const char*) { return QNoDebug(); }
+QNoDebug CreateLoggerDebug(int, const char*) { return QNoDebug(); }
 #else
-QDebug CreateLoggerInfo() { return qCreateLogger(Info); }
-QDebug CreateLoggerDebug() { return qCreateLogger(Debug); }
+QDebug CreateLoggerInfo(int line, const char *class_name) { return qCreateLogger(line, class_name, Info); }
+QDebug CreateLoggerDebug(int line, const char *class_name) { return qCreateLogger(line, class_name, Debug); }
 #endif // QT_NO_DEBUG_OUTPUT
 
 }  // namespace logging
