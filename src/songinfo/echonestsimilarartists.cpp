@@ -20,7 +20,7 @@
 #include "core/logging.h"
 #include "ui/iconloader.h"
 
-#include <echonest/Artist.h>
+#include <echonest5/Artist.h>
 
 Q_DECLARE_METATYPE(QVector<QString>);
 
