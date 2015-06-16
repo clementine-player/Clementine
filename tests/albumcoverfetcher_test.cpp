@@ -18,7 +18,7 @@
 #include "core/albumcoverfetcher.h"
 #include "core/networkaccessmanager.h"
 
-#include <lastfm/ws.h>
+#include <lastfm5/ws.h>
 
 #include <QCoreApplication>
 #include <QEventLoop>
