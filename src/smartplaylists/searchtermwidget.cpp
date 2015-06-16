@@ -363,7 +363,7 @@ void SearchTermWidget::Overlay::Grab() {
   hide();
 
   // Take a "screenshot" of the window
-  QPixmap pixmap = QPixmap::grabWidget(parent_);
+  QPixmap pixmap = parent_->grab();
   QImage image = pixmap.toImage();
 
   // Blur it
