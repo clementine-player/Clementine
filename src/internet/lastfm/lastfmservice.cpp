@@ -36,9 +36,9 @@
 #include <QSettings>
 
 #ifdef HAVE_LIBLASTFM1
-#include <lastfm/RadioStation.h>
+#include <lastfm5/RadioStation.h>
 #else
-#include <lastfm/RadioStation>
+#include <lastfm5/RadioStation>
 #endif
 
 #include "lastfmcompat.h"
