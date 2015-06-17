@@ -776,6 +776,8 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
 #ifdef HAVE_LIBLASTFM
   connect(global_shortcuts_, SIGNAL(ToggleScrobbling()), app_->scrobbler(),
           SLOT(ToggleScrobbling()));
+  connect(global_shortcuts_, SIGNAL(Love()), app_->scrobbler(), SLOT(Love()));
+  connect(global_shortcuts_, SIGNAL(Ban()), app_->scrobbler(), SLOT(Ban()));
 #endif
 
   connect(global_shortcuts_, SIGNAL(RateCurrentSong(int)),
