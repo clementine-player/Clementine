@@ -76,7 +76,7 @@ void BlockAnalyzer::resizeEvent(QResizeEvent* e) {
 
   // all is explained in analyze()..
   // +1 to counter -1 in maxSizes, trust me we need this!
-  m_columns = qMax(static_cast<uint>(static_cast<double>(width() + 1) / (WIDTH + 1)), MAX_COLUMNS);
+  m_columns = qMin(static_cast<uint>(static_cast<double>(width() + 1) / (WIDTH + 1)) + 1, MAX_COLUMNS);
   m_rows = static_cast<uint>(static_cast<double>(height() + 1) / (HEIGHT + 1));
 
   // this is the y-offset for drawing from the top of the widget
