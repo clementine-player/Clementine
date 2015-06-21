@@ -827,8 +827,8 @@ QStandardItem* VkService::AppendAlbumList(QStandardItem* parent, bool myself) {
 
   if (myself) {
     item = new QStandardItem(QIcon(":vk/discography.png"), tr("My Albums"));
-    // TODO(Ivan Leontiev): Do this better. We have incomplete MusicOwner instance
-    // for logged in user.
+    // TODO(Ivan Leontiev): Do this better. We have incomplete MusicOwner
+    // instance for logged in user.
     owner.setId(UserID());
     my_albums_item_ = item;
   } else {
@@ -885,8 +885,8 @@ QStandardItem* VkService::AppendMusic(QStandardItem* parent, bool myself) {
 
   if (myself) {
     item = new QStandardItem(QIcon(":vk/my_music.png"), tr("My Music"));
-    // TODO(Ivan Leontiev): Do this better. We have incomplete MusicOwner instance
-    // for logged in user.
+    // TODO(Ivan Leontiev): Do this better. We have incomplete MusicOwner
+    // instance for logged in user.
     owner.setId(UserID());
     my_music_item_ = item;
   } else {
@@ -971,8 +971,8 @@ void VkService::FindThisArtist() {
 void VkService::AddToMyMusic() {
   SongId id = ExtractIds(selected_song_.url());
   auto reply = audio_provider_->addToLibrary(id.audio_id, id.owner_id);
-  connect(reply, SIGNAL(resultReady(QVariant)), this,
-          SLOT(UpdateMusic(my_music_item_)));
+  NewClosure(reply, SIGNAL(resultReady(QVariant)), this,
+             SLOT(UpdateMusic(QStandardItem*)), my_music_item_);
 }
 
 void VkService::AddToMyMusicCurrent() {
@@ -986,8 +986,8 @@ void VkService::RemoveFromMyMusic() {
   SongId id = ExtractIds(selected_song_.url());
   if (id.owner_id == UserID()) {
     auto reply = audio_provider_->removeFromLibrary(id.audio_id, id.owner_id);
-    connect(reply, SIGNAL(resultReady(QVariant)), this,
-            SLOT(UpdateMusic(my_music_item_)));
+    NewClosure(reply, SIGNAL(resultReady(QVariant)), this,
+               SLOT(UpdateMusic(QStandardItem*)), my_music_item_);
   } else {
     qLog(Error) << "Tried to delete song that not owned by user (" << UserID()
                 << selected_song_.url();
