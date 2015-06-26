@@ -2,7 +2,7 @@
    Copyright 2004, Max Howell <max.howell@methylblue.com>
    Copyright 2009-2010, David Sansome <davidsansome@gmail.com>
    Copyright 2010, 2014, John Maguire <john.maguire@gmail.com>
-   Copyright 2014, Mark Furneaux <mark@romaco.ca>
+   Copyright 2014-2015, Mark Furneaux <mark@furneaux.ca>
    Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
@@ -28,20 +28,30 @@
 
 using Analyzer::Scope;
 
+const uint BoomAnalyzer::COLUMN_WIDTH = 4;
+const uint BoomAnalyzer::MAX_BAND_COUNT = 256;
+const uint BoomAnalyzer::MIN_BAND_COUNT = 32;
+
 const char* BoomAnalyzer::kName =
     QT_TRANSLATE_NOOP("AnalyzerContainer", "Boom analyzer");
 
 BoomAnalyzer::BoomAnalyzer(QWidget* parent)
     : Analyzer::Base(parent, 9),
+      m_bands(0),
+      m_scope(MIN_BAND_COUNT),
+      m_fg(palette().color(QPalette::Highlight)),
       K_barHeight(1.271)  // 1.471
       ,
       F_peakSpeed(1.103)  // 1.122
       ,
       F(1.0),
-      bar_height(BAND_COUNT, 0),
-      peak_height(BAND_COUNT, 0),
-      peak_speed(BAND_COUNT, 0.01),
-      barPixmap(COLUMN_WIDTH, 50) {}
+      bar_height(MAX_BAND_COUNT, 0),
+      peak_height(MAX_BAND_COUNT, 0),
+      peak_speed(MAX_BAND_COUNT, 0.01),
+      barPixmap(COLUMN_WIDTH, 50) {
+  setMinimumWidth(MIN_BAND_COUNT * (COLUMN_WIDTH + 1) - 1);
+  setMaximumWidth(MAX_BAND_COUNT * (COLUMN_WIDTH + 1) - 1);
+}
 
 void BoomAnalyzer::changeK_barHeight(int newValue) {
   K_barHeight = static_cast<double>(newValue) / 1000;
@@ -51,11 +61,17 @@ void BoomAnalyzer::changeF_peakSpeed(int newValue) {
   F_peakSpeed = static_cast<double>(newValue) / 1000;
 }
 
-void BoomAnalyzer::resizeEvent(QResizeEvent*) { init(); }
+void BoomAnalyzer::resizeEvent(QResizeEvent* e) {
+  QWidget::resizeEvent(e);
 
-void BoomAnalyzer::init() {
   const uint HEIGHT = height() - 2;
   const double h = 1.2 / HEIGHT;
+
+  m_bands = qMin(
+      static_cast<uint>(static_cast<double>(width() + 1) / (COLUMN_WIDTH + 1)) +
+          1,
+      MAX_BAND_COUNT);
+  m_scope.resize(m_bands);
 
   F = static_cast<double>(HEIGHT) / (log10(256) * 1.1 /*<- max. amplitude*/);
 
@@ -78,19 +94,10 @@ void BoomAnalyzer::transform(Scope& s) {
   float* front = static_cast<float*>(&s.front());
 
   m_fht->spectrum(front);
-  m_fht->scale(front, 1.0 / 60);
+  m_fht->scale(front, 1.0 / 50);
 
-  Scope scope(32, 0);
-
-  const uint xscale[] = {0,  1,  2,  3,  4,  5,   6,   7,   8,   9,   10,
-                         11, 12, 13, 14, 15, 16,  17,  19,  24,  29,  36,
-                         43, 52, 63, 76, 91, 108, 129, 153, 182, 216, 255};
-
-  for (uint j, i = 0; i < 32; i++)
-    for (j = xscale[i]; j < xscale[i + 1]; j++)
-      if (s[j] > scope[i]) scope[i] = s[j];
-
-  s = scope;
+  s.resize(m_scope.size() <= MAX_BAND_COUNT / 2 ? MAX_BAND_COUNT / 2
+                                                : m_scope.size());
 }
 
 void BoomAnalyzer::analyze(QPainter& p, const Scope& scope, bool new_frame) {
@@ -104,8 +111,10 @@ void BoomAnalyzer::analyze(QPainter& p, const Scope& scope, bool new_frame) {
   QPainter canvas_painter(&canvas_);
   canvas_.fill(palette().color(QPalette::Background));
 
-  for (uint i = 0, x = 0, y; i < BAND_COUNT; ++i, x += COLUMN_WIDTH + 1) {
-    h = log10(scope[i] * 256.0) * F;
+  Analyzer::interpolate(scope, m_scope);
+
+  for (uint i = 0, x = 0, y; i < m_bands; ++i, x += COLUMN_WIDTH + 1) {
+    h = log10(m_scope[i] * 256.0) * F;
 
     if (h > MAX_HEIGHT) h = MAX_HEIGHT;
 
@@ -137,14 +146,20 @@ void BoomAnalyzer::analyze(QPainter& p, const Scope& scope, bool new_frame) {
 
     y = height() - uint(bar_height[i]);
     canvas_painter.drawPixmap(x + 1, y, barPixmap, 0, y, -1, -1);
-    canvas_painter.setPen(palette().color(QPalette::Highlight));
+    canvas_painter.setPen(m_fg);
     if (bar_height[i] > 0)
       canvas_painter.drawRect(x, y, COLUMN_WIDTH - 1, height() - y - 1);
 
     y = height() - uint(peak_height[i]);
-    canvas_painter.setPen(palette().color(QPalette::Base));
+    canvas_painter.setPen(palette().color(QPalette::Midlight));
     canvas_painter.drawLine(x, y, x + COLUMN_WIDTH - 1, y);
   }
 
   p.drawPixmap(0, 0, canvas_);
+}
+
+void BoomAnalyzer::paletteChange(const QPalette&) {
+  // the highlight colour changes when the main window loses focus,
+  // so we use save and use the focused colour
+  m_fg = palette().color(QPalette::Highlight);
 }

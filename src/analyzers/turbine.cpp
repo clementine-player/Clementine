@@ -2,7 +2,7 @@
    Copyright 2003, Stanislav Karchebny <berkus@users.sf.net>
    Copyright 2003, Max Howell <max.howell@methylblue.com>
    Copyright 2009-2010, David Sansome <davidsansome@gmail.com>
-   Copyright 2014, Mark Furneaux <mark@romaco.ca>
+   Copyright 2014-2015, Mark Furneaux <mark@furneaux.ca>
    Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
    Copyright 2014, John Maguire <john.maguire@gmail.com>
 
@@ -21,7 +21,7 @@
 */
 
 /* Original Author:  Stanislav Karchebny  <berkus@users.sf.net>   2003
- * Original Author:  Max Howell  <max.howell@methylblue.com>  2003 
+ * Original Author:  Max Howell  <max.howell@methylblue.com>  2003
  */
 
 #include <cmath>
@@ -47,8 +47,10 @@ void TurbineAnalyzer::analyze(QPainter& p, const Scope& scope, bool new_frame) {
   QPainter canvas_painter(&canvas_);
   canvas_.fill(palette().color(QPalette::Background));
 
-  for (uint i = 0, x = 0, y; i < BAND_COUNT; ++i, x += COLUMN_WIDTH + 1) {
-    h = log10(scope[i] * 256.0) * F * 0.5;
+  Analyzer::interpolate(scope, m_scope);
+
+  for (uint i = 0, x = 0, y; i < m_bands; ++i, x += COLUMN_WIDTH + 1) {
+    h = log10(m_scope[i] * 256.0) * F * 0.5;
 
     if (h > MAX_HEIGHT) h = MAX_HEIGHT;
 
@@ -81,16 +83,15 @@ void TurbineAnalyzer::analyze(QPainter& p, const Scope& scope, bool new_frame) {
     y = hd2 - static_cast<uint>(bar_height[i]);
     canvas_painter.drawPixmap(x + 1, y, barPixmap, 0, y, -1, -1);
     canvas_painter.drawPixmap(x + 1, hd2, barPixmap, 0,
-                              static_cast<int>(bar_height[i]),
-                              -1, -1);
+                              static_cast<int>(bar_height[i]), -1, -1);
 
-    canvas_painter.setPen(palette().color(QPalette::Highlight));
+    canvas_painter.setPen(m_fg);
     if (bar_height[i] > 0)
       canvas_painter.drawRect(x, y, COLUMN_WIDTH - 1,
                               static_cast<int>(bar_height[i]) * 2 - 1);
 
     const uint x2 = x + COLUMN_WIDTH - 1;
-    canvas_painter.setPen(palette().color(QPalette::Base));
+    canvas_painter.setPen(palette().color(QPalette::Midlight));
     y = hd2 - uint(peak_height[i]);
     canvas_painter.drawLine(x, y, x2, y);
     y = hd2 + uint(peak_height[i]);

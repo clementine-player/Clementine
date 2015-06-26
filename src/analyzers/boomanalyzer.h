@@ -1,7 +1,7 @@
 /* This file is part of Clementine.
    Copyright 2004, Max Howell <max.howell@methylblue.com>
    Copyright 2009-2010, David Sansome <davidsansome@gmail.com>
-   Copyright 2014, Mark Furneaux <mark@romaco.ca>
+   Copyright 2014-2015, Mark Furneaux <mark@furneaux.ca>
    Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
    Copyright 2014, John Maguire <john.maguire@gmail.com>
 
@@ -27,10 +27,6 @@
 
 #include "analyzerbase.h"
 
-/**
-@author Max Howell
-*/
-
 class BoomAnalyzer : public Analyzer::Base {
   Q_OBJECT
 
@@ -39,7 +35,6 @@ class BoomAnalyzer : public Analyzer::Base {
 
   static const char* kName;
 
-  virtual void init();
   virtual void transform(Analyzer::Scope& s);
   virtual void analyze(QPainter& p, const Analyzer::Scope&, bool new_frame);
 
@@ -49,9 +44,15 @@ class BoomAnalyzer : public Analyzer::Base {
 
  protected:
   void resizeEvent(QResizeEvent* e);
+  void paletteChange(const QPalette&);
 
-  static const uint COLUMN_WIDTH = 4;
-  static const uint BAND_COUNT = 32;
+  static const uint COLUMN_WIDTH;
+  static const uint MAX_BAND_COUNT;
+  static const uint MIN_BAND_COUNT;
+
+  uint m_bands;
+  Analyzer::Scope m_scope;
+  QColor m_fg;
 
   double K_barHeight, F_peakSpeed, F;
 
