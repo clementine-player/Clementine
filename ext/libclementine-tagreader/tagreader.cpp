@@ -193,6 +193,9 @@ void TagReader::ReadFile(const QString& filename,
       if (!map["TDOR"].isEmpty())
         song->set_originalyear(
             map["TDOR"].front()->toString().substr(0, 4).toInt());
+      else if (!map["TORY"].isEmpty())
+        song->set_originalyear(
+            map["TORY"].front()->toString().substr(0, 4).toInt());
 
       if (!map["USLT"].isEmpty()) {
         Decode(map["USLT"].front()->toString(), nullptr,
@@ -317,6 +320,12 @@ void TagReader::ReadFile(const QString& filename,
         Decode(items["\251grp"].toStringList().toString(" "), nullptr,
                song->mutable_grouping());
       }
+
+      if (items.contains("----:com.apple.iTunes:ORIGINAL YEAR"))
+        song->set_originalyear(
+            TStringToQString(items["----:com.apple.iTunes:ORIGINAL YEAR"]
+            .toStringList().toString('\n')).left(4).toInt());
+
       Decode(mp4_tag->comment(), nullptr, song->mutable_comment());
     }
   }
@@ -356,6 +365,20 @@ void TagReader::ReadFile(const QString& filename,
           song->set_score(score);
         }
       }
+    }
+
+    if (attributes_map.contains("WM/OriginalReleaseTime")) {
+      const TagLib::ASF::AttributeList& attributes =
+          attributes_map["WM/OriginalReleaseTime"];
+      if (!attributes.isEmpty())
+        song->set_originalyear(
+            TStringToQString(attributes.front().toString()).left(4).toInt());
+    } else if (attributes_map.contains("WM/OriginalReleaseYear")) {
+      const TagLib::ASF::AttributeList& attributes =
+          attributes_map["WM/OriginalReleaseYear"];
+      if (!attributes.isEmpty())
+        song->set_originalyear(
+            TStringToQString(attributes.front().toString()).left(4).toInt());
     }
   }
 #endif
@@ -496,6 +519,9 @@ void TagReader::ParseOggTag(const TagLib::Ogg::FieldListMap& map,
   if (!map["ORIGINALDATE"].isEmpty())
     song->set_originalyear(
         TStringToQString(map["ORIGINALDATE"].front()).left(4).toInt());
+  else if (!map["ORIGINALYEAR"].isEmpty())
+    song->set_originalyear(
+        TStringToQString(map["ORIGINALYEAR"].front()).toInt());
 
   if (!map["BPM"].isEmpty())
     song->set_bpm(TStringToQString(map["BPM"].front()).trimmed().toFloat());
