@@ -190,8 +190,9 @@ void TagReader::ReadFile(const QString& filename,
         compilation =
             TStringToQString(map["TCMP"].front()->toString()).trimmed();
 
-      if(!map["TDOR"].isEmpty())
-        song->set_originalyear(map["TDOR"].front()->toString().substr(0, 4).toInt());
+      if (!map["TDOR"].isEmpty())
+        song->set_originalyear(
+            map["TDOR"].front()->toString().substr(0, 4).toInt());
 
       if (!map["USLT"].isEmpty()) {
         Decode(map["USLT"].front()->toString(), nullptr,
@@ -493,7 +494,8 @@ void TagReader::ParseOggTag(const TagLib::Ogg::FieldListMap& map,
   }
 
   if (!map["ORIGINALDATE"].isEmpty())
-    song->set_originalyear(TStringToQString(map["ORIGINALDATE"].front()).left(4).toInt());
+    song->set_originalyear(
+        TStringToQString(map["ORIGINALDATE"].front()).left(4).toInt());
 
   if (!map["BPM"].isEmpty())
     song->set_bpm(TStringToQString(map["BPM"].front()).trimmed().toFloat());
