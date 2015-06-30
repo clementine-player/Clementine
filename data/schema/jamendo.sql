@@ -46,7 +46,10 @@ CREATE TABLE jamendo.songs (
 
   performer TEXT,
   grouping TEXT,
-  lyrics TEXT
+  lyrics TEXT,
+
+  originalyear INTEGER,
+  effective_originalyear INTEGER
 );
 
 CREATE VIRTUAL TABLE jamendo.songs_fts USING fts3(

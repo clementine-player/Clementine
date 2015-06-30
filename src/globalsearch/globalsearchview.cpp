@@ -337,7 +337,8 @@ void GlobalSearchView::LazyLoadArt(const QModelIndex& proxy_index) {
       proxy_index.data(LibraryModel::Role_ContainerType).toInt());
   if (container_type != LibraryModel::GroupBy_Album &&
       container_type != LibraryModel::GroupBy_AlbumArtist &&
-      container_type != LibraryModel::GroupBy_YearAlbum) {
+      container_type != LibraryModel::GroupBy_YearAlbum &&
+      container_type != LibraryModel::GroupBy_OriginalYearAlbum) {
     return;
   }
 

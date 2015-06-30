@@ -120,8 +120,22 @@ QStandardItem* GlobalSearchModel::BuildContainers(const Song& s,
       has_album_icon = true;
       break;
 
+    case LibraryModel::GroupBy_OriginalYearAlbum:
+      year = qMax(0, s.effective_originalyear());
+      display_text = LibraryModel::PrettyYearAlbum(year, s.album());
+      sort_text = LibraryModel::SortTextForNumber(year) + s.album();
+      unique_tag = s.album_id();
+      has_album_icon = true;
+      break;
+
     case LibraryModel::GroupBy_Year:
       year = qMax(0, s.year());
+      display_text = QString::number(year);
+      sort_text = LibraryModel::SortTextForNumber(year) + " ";
+      break;
+
+    case LibraryModel::GroupBy_OriginalYear:
+      year = qMax(0, s.effective_originalyear());
       display_text = QString::number(year);
       sort_text = LibraryModel::SortTextForNumber(year) + " ";
       break;
