@@ -320,6 +320,7 @@ void PlaylistView::LoadGeometry() {
     if (!header_->restoreState(state)) {
       header_->HideSection(Playlist::Column_Disc);
       header_->HideSection(Playlist::Column_Year);
+      header_->HideSection(Playlist::Column_OriginalYear);
       header_->HideSection(Playlist::Column_Genre);
       header_->HideSection(Playlist::Column_BPM);
       header_->HideSection(Playlist::Column_Bitrate);
@@ -1190,6 +1191,7 @@ ColumnAlignmentMap PlaylistView::DefaultColumnAlignment() {
                   ret[Playlist::Column_Filesize] =
                       ret[Playlist::Column_PlayCount] =
                           ret[Playlist::Column_SkipCount] =
+                              ret[Playlist::Column_OriginalYear] =
                               (Qt::AlignRight | Qt::AlignVCenter);
   ret[Playlist::Column_Score] = (Qt::AlignCenter);
 
