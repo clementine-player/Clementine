@@ -107,6 +107,14 @@ const char* TagReader::kMP4_FMPS_Playcount_ID =
 const char* TagReader::kMP4_FMPS_Score_ID =
     "----:com.apple.iTunes:FMPS_Rating_Amarok_Score";
 
+namespace {
+// Tags containing the year the album was originally released (in contrast to
+// other tags that contain the release year of the current edition)
+const char* kMP4_OriginalYear_ID = "----:com.apple.iTunes:ORIGINAL YEAR";
+const char* kASF_OriginalDate_ID = "WM/OriginalReleaseTime";
+const char* kASF_OriginalYear_ID = "WM/OriginalReleaseYear";
+}
+
 TagReader::TagReader()
     : factory_(new TagLibFileRefFactory),
       network_(new QNetworkAccessManager),
@@ -189,6 +197,14 @@ void TagReader::ReadFile(const QString& filename,
       if (!map["TCMP"].isEmpty())
         compilation =
             TStringToQString(map["TCMP"].front()->toString()).trimmed();
+
+      if (!map["TDOR"].isEmpty()) {
+        song->set_originalyear(
+            map["TDOR"].front()->toString().substr(0, 4).toInt());
+      } else if (!map["TORY"].isEmpty()) {
+        song->set_originalyear(
+            map["TORY"].front()->toString().substr(0, 4).toInt());
+      }
 
       if (!map["USLT"].isEmpty()) {
         Decode(map["USLT"].front()->toString(), nullptr,
@@ -313,6 +329,15 @@ void TagReader::ReadFile(const QString& filename,
         Decode(items["\251grp"].toStringList().toString(" "), nullptr,
                song->mutable_grouping());
       }
+
+      if (items.contains(kMP4_OriginalYear_ID)) {
+        song->set_originalyear(
+            TStringToQString(
+                items[kMP4_OriginalYear_ID].toStringList().toString('\n'))
+                .left(4)
+                .toInt());
+      }
+
       Decode(mp4_tag->comment(), nullptr, song->mutable_comment());
     }
   }
@@ -351,6 +376,22 @@ void TagReader::ReadFile(const QString& filename,
         if (song->score() <= 0 && score > 0) {
           song->set_score(score);
         }
+      }
+    }
+
+    if (attributes_map.contains(kASF_OriginalDate_ID)) {
+      const TagLib::ASF::AttributeList& attributes =
+          attributes_map[kASF_OriginalDate_ID];
+      if (!attributes.isEmpty()) {
+        song->set_originalyear(
+            TStringToQString(attributes.front().toString()).left(4).toInt());
+      }
+    } else if (attributes_map.contains(kASF_OriginalYear_ID)) {
+      const TagLib::ASF::AttributeList& attributes =
+          attributes_map[kASF_OriginalYear_ID];
+      if (!attributes.isEmpty()) {
+        song->set_originalyear(
+            TStringToQString(attributes.front().toString()).left(4).toInt());
       }
     }
   }
@@ -488,6 +529,13 @@ void TagReader::ParseOggTag(const TagLib::Ogg::FieldListMap& map,
   } else if (!map["ALBUM ARTIST"].isEmpty()) {
     Decode(map["ALBUM ARTIST"].front(), codec, song->mutable_albumartist());
   }
+
+  if (!map["ORIGINALDATE"].isEmpty())
+    song->set_originalyear(
+        TStringToQString(map["ORIGINALDATE"].front()).left(4).toInt());
+  else if (!map["ORIGINALYEAR"].isEmpty())
+    song->set_originalyear(
+        TStringToQString(map["ORIGINALYEAR"].front()).toInt());
 
   if (!map["BPM"].isEmpty())
     song->set_bpm(TStringToQString(map["BPM"].front()).trimmed().toFloat());
