@@ -555,6 +555,7 @@ void Song::ToProtobuf(pb::tagreader::SongMetadata* pb) const {
   pb->set_disc(d->disc_);
   pb->set_bpm(d->bpm_);
   pb->set_year(d->year_);
+  pb->set_originalyear(d->originalyear_);
   pb->set_genre(DataCommaSizeFromQString(d->genre_));
   pb->set_comment(DataCommaSizeFromQString(d->comment_));
   pb->set_compilation(d->compilation_);
