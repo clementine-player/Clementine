@@ -46,21 +46,21 @@ class BoomAnalyzer : public Analyzer::Base {
   void resizeEvent(QResizeEvent* e);
   void paletteChange(const QPalette&);
 
-  static const uint COLUMN_WIDTH;
-  static const uint MAX_BAND_COUNT;
-  static const uint MIN_BAND_COUNT;
+  static const uint kColumnWidth;
+  static const uint kMaxBandCount;
+  static const uint kMinBandCount;
 
-  uint m_bands;
-  Analyzer::Scope m_scope;
-  QColor m_fg;
+  uint bands_;
+  Analyzer::Scope scope_;
+  QColor fg_;
 
-  double K_barHeight, F_peakSpeed, F;
+  double K_barHeight_, F_peakSpeed_, F_;
 
-  std::vector<float> bar_height;
-  std::vector<float> peak_height;
-  std::vector<float> peak_speed;
+  std::vector<float> bar_height_;
+  std::vector<float> peak_height_;
+  std::vector<float> peak_speed_;
 
-  QPixmap barPixmap;
+  QPixmap barPixmap_;
   QPixmap canvas_;
 };
 
