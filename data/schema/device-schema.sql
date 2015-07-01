@@ -59,7 +59,10 @@ CREATE TABLE device_%deviceid_songs (
 
   performer TEXT,
   grouping TEXT,
-  lyrics TEXT
+  lyrics TEXT,
+
+  originalyear INTEGER,
+  effective_originalyear INTEGER
 );
 
 CREATE INDEX idx_device_%deviceid_songs_album ON device_%deviceid_songs (album);

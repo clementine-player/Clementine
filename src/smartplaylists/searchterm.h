@@ -52,6 +52,7 @@ class SearchTerm {
     Field_Filepath,
     Field_Performer,
     Field_Grouping,
+    Field_OriginalYear,
     FieldCount
   };
 

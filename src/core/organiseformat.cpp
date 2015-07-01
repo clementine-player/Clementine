@@ -51,7 +51,8 @@ const QStringList OrganiseFormat::kKnownTags = QStringList() << "title"
                                                              << "extension"
                                                              << "performer"
                                                              << "grouping"
-                                                             << "lyrics";
+                                                             << "lyrics"
+                                                             << "originalyear";
 
 // From http://en.wikipedia.org/wiki/8.3_filename#Directory_table
 const char OrganiseFormat::kInvalidFatCharacters[] = "\"*/\\:<>?|";
@@ -200,6 +201,8 @@ QString OrganiseFormat::TagValue(const QString& tag, const Song& song) const {
     value = song.comment();
   else if (tag == "year")
     value = QString::number(song.year());
+  else if (tag == "originalyear")
+    value = QString::number(song.effective_originalyear());
   else if (tag == "track")
     value = QString::number(song.track());
   else if (tag == "disc")
