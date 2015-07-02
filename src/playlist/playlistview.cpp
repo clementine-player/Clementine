@@ -586,10 +586,10 @@ void PlaylistView::keyPressEvent(QKeyEvent* event) {
     emit PlayPause();
     event->accept();
   } else if (event->key() == Qt::Key_Left) {
-    emit SeekTrack(-1);
+    emit SeekBackward();
     event->accept();
   } else if (event->key() == Qt::Key_Right) {
-    emit SeekTrack(1);
+    emit SeekForward();
     event->accept();
   } else if (event->modifiers() ==
                  Qt::NoModifier  // No modifier keys currently pressed...
@@ -1192,7 +1192,7 @@ ColumnAlignmentMap PlaylistView::DefaultColumnAlignment() {
                       ret[Playlist::Column_PlayCount] =
                           ret[Playlist::Column_SkipCount] =
                               ret[Playlist::Column_OriginalYear] =
-                              (Qt::AlignRight | Qt::AlignVCenter);
+                                  (Qt::AlignRight | Qt::AlignVCenter);
   ret[Playlist::Column_Score] = (Qt::AlignCenter);
 
   return ret;

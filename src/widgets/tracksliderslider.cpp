@@ -100,10 +100,10 @@ void TrackSliderSlider::leaveEvent(QEvent* e) {
 
 void TrackSliderSlider::keyPressEvent(QKeyEvent* event) {
   if (event->key() == Qt::Key_Left || event->key() == Qt::Key_Down) {
-    if (isEnabled()) setValue(value() - 1 * kMsecPerSec);
+    emit SeekBackward();
     event->accept();
   } else if (event->key() == Qt::Key_Right || event->key() == Qt::Key_Up) {
-    if (isEnabled()) setValue(value() + 1 * kMsecPerSec);
+    emit SeekForward();
     event->accept();
   } else {
     QSlider::keyPressEvent(event);

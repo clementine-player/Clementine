@@ -536,13 +536,19 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
           SLOT(PlayPause()));
   connect(ui_->playlist->view(), SIGNAL(RightClicked(QPoint, QModelIndex)),
           SLOT(PlaylistRightClick(QPoint, QModelIndex)));
-  connect(ui_->playlist->view(), SIGNAL(SeekTrack(int)), ui_->track_slider,
-          SLOT(Seek(int)));
+  connect(ui_->playlist->view(), SIGNAL(SeekForward()), app_->player(),
+          SLOT(SeekForward()));
+  connect(ui_->playlist->view(), SIGNAL(SeekBackward()), app_->player(),
+          SLOT(SeekBackward()));
   connect(ui_->playlist->view(), SIGNAL(BackgroundPropertyChanged()),
           SLOT(RefreshStyleSheet()));
 
   connect(ui_->track_slider, SIGNAL(ValueChangedSeconds(int)), app_->player(),
           SLOT(SeekTo(int)));
+  connect(ui_->track_slider, SIGNAL(SeekForward()), app_->player(),
+          SLOT(SeekForward()));
+  connect(ui_->track_slider, SIGNAL(SeekBackward()), app_->player(),
+          SLOT(SeekBackward()));
 
   // Library connections
   connect(library_view_->view(), SIGNAL(AddToPlaylistSignal(QMimeData*)),
@@ -1342,7 +1348,8 @@ void MainWindow::UpdateTrackPosition() {
     }
   }
 
-  // (just after) the scrobble point is a good point to change tracks in intro mode
+  // (just after) the scrobble point is a good point to change tracks in intro
+  // mode
   if (position >= scrobble_point + 5) {
     if (playlist->sequence()->repeat_mode() == PlaylistSequence::Repeat_Intro) {
       emit IntroPointReached();
@@ -2727,10 +2734,10 @@ void MainWindow::keyPressEvent(QKeyEvent* event) {
     app_->player()->PlayPause();
     event->accept();
   } else if (event->key() == Qt::Key_Left) {
-    ui_->track_slider->Seek(-1);
+    app_->player()->SeekBackward();
     event->accept();
   } else if (event->key() == Qt::Key_Right) {
-    ui_->track_slider->Seek(1);
+    app_->player()->SeekForward();
     event->accept();
   } else {
     QMainWindow::keyPressEvent(event);
