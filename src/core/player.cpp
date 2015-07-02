@@ -52,7 +52,10 @@
 using std::shared_ptr;
 
 const char* Player::kSettingsGroup = "Player";
-const int kSeekSec = 10;
+
+namespace {
+const int kSeekStepSec = 10;
+}
 
 Player::Player(Application* app, QObject* parent)
     : PlayerInterface(parent),
@@ -445,11 +448,11 @@ void Player::SeekTo(int seconds) {
 }
 
 void Player::SeekForward() {
-  SeekTo(engine()->position_nanosec() / kNsecPerSec + kSeekSec);
+  SeekTo(engine()->position_nanosec() / kNsecPerSec + kSeekStepSec);
 }
 
 void Player::SeekBackward() {
-  SeekTo(engine()->position_nanosec() / kNsecPerSec - kSeekSec);
+  SeekTo(engine()->position_nanosec() / kNsecPerSec - kSeekStepSec);
 }
 
 void Player::EngineMetadataReceived(const Engine::SimpleMetaBundle& bundle) {
