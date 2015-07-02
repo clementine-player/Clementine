@@ -35,6 +35,7 @@ class TrackSliderSlider : public QSlider {
   void mouseMoveEvent(QMouseEvent* e);
   void enterEvent(QEvent*);
   void leaveEvent(QEvent*);
+  void keyPressEvent(QKeyEvent* event);
 
  private slots:
   void UpdateDeltaTime();
