@@ -263,7 +263,7 @@ signals:
   // correct call to gst_element_query_position() or after a seek), we store
   // it here so that we can use it when using gst_element_query_position() is
   // not possible.
-  mutable gint64 last_known_position_;
+  mutable gint64 last_known_position_ns_;
 
   int volume_percent_;
   qreal volume_modifier_;
