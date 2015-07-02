@@ -49,6 +49,11 @@ void TurbineAnalyzer::analyze(QPainter& p, const Scope& scope, bool new_frame) {
 
   Analyzer::interpolate(scope, scope_);
 
+  // update the graphics with the new colour
+  if (psychedelic_enabled_) {
+    paletteChange(QPalette());
+  }
+
   for (uint i = 0, x = 0, y; i < bands_; ++i, x += kColumnWidth + 1) {
     h = log10(scope_[i] * 256.0) * F_ * 0.5;
 

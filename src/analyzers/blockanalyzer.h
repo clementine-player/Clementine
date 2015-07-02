@@ -2,7 +2,7 @@
    Copyright 2003-2005, Max Howell <max.howell@methylblue.com>
    Copyright 2009-2010, David Sansome <davidsansome@gmail.com>
    Copyright 2010, 2014, John Maguire <john.maguire@gmail.com>
-   Copyright 2014, Mark Furneaux <mark@romaco.ca>
+   Copyright 2014-2015, Mark Furneaux <mark@furneaux.ca>
    Copyright 2014, Krzysztof A. Sobiecki <sobkas@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
@@ -39,12 +39,12 @@ class BlockAnalyzer : public Analyzer::Base {
   Q_INVOKABLE BlockAnalyzer(QWidget*);
   ~BlockAnalyzer();
 
-  static const uint HEIGHT;
-  static const uint WIDTH;
-  static const uint MIN_ROWS;
-  static const uint MIN_COLUMNS;
-  static const uint MAX_COLUMNS;
-  static const uint FADE_SIZE;
+  static const uint kHeight;
+  static const uint kWidth;
+  static const uint kMinRows;
+  static const uint kMinColumns;
+  static const uint kMaxColumns;
+  static const uint kFadeSize;
 
   static const char* kName;
 
@@ -54,29 +54,30 @@ class BlockAnalyzer : public Analyzer::Base {
   virtual void resizeEvent(QResizeEvent*);
   virtual void paletteChange(const QPalette&);
   virtual void framerateChanged();
+  virtual void psychedelicModeChanged(bool);
 
   void drawBackground();
   void determineStep();
 
  private:
-  QPixmap* bar() { return &m_barPixmap; }
+  QPixmap* bar() { return &barPixmap_; }
 
-  uint m_columns, m_rows;  // number of rows and columns of blocks
-  uint m_y;                // y-offset from top of widget
-  QPixmap m_barPixmap;
-  QPixmap m_topBarPixmap;
-  QPixmap m_background;
+  uint columns_, rows_;  // number of rows and columns of blocks
+  uint y_;               // y-offset from top of widget
+  QPixmap barPixmap_;
+  QPixmap topBarPixmap_;
+  QPixmap background_;
   QPixmap canvas_;
-  Analyzer::Scope m_scope;     // so we don't create a vector every frame
-  std::vector<float> m_store;  // current bar heights
-  std::vector<float> m_yscale;
+  Analyzer::Scope scope_;     // so we don't create a vector every frame
+  std::vector<float> store_;  // current bar kHeights
+  std::vector<float> yscale_;
 
   // FIXME why can't I namespace these? c++ issue?
-  std::vector<QPixmap> m_fade_bars;
-  std::vector<uint> m_fade_pos;
-  std::vector<int> m_fade_intensity;
+  std::vector<QPixmap> fade_bars_;
+  std::vector<uint> fade_pos_;
+  std::vector<int> fade_intensity_;
 
-  float m_step;  // rows to fall per frame
+  float step_;  // rows to fall per frame
 };
 
 #endif  // ANALYZERS_BLOCKANALYZER_H_

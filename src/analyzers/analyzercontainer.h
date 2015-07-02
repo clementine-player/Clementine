@@ -4,6 +4,7 @@
    Copyright 2011-2012, Arnaud Bienner <arnaud.bienner@gmail.com>
    Copyright 2013, Vasily Fomin <vasili.fomin@gmail.com>
    Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
+   Copyright 2015, Mark Furneaux <mark@furneaux.ca>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -40,7 +41,7 @@ class AnalyzerContainer : public QWidget {
   static const char* kSettingsGroup;
   static const char* kSettingsFramerate;
 
- signals:
+signals:
   void WheelEvent(int delta);
 
  protected:
@@ -53,6 +54,7 @@ class AnalyzerContainer : public QWidget {
   void ChangeFramerate(int new_framerate);
   void DisableAnalyzer();
   void ShowPopupMenu();
+  void TogglePsychedelicColors();
 
  private:
   static const int kLowFramerate;
@@ -63,6 +65,7 @@ class AnalyzerContainer : public QWidget {
   void Load();
   void Save();
   void SaveFramerate(int framerate);
+  void SavePsychedelic();
   template <typename T>
   void AddAnalyzerType();
   void AddFramerate(const QString& name, int framerate);
@@ -80,11 +83,13 @@ class AnalyzerContainer : public QWidget {
   QList<int> framerate_list_;
   QList<QAction*> actions_;
   QAction* disable_action_;
+  QAction* psychedelic_enable_;
 
   QAction* visualisation_action_;
   QTimer* double_click_timer_;
   QPoint last_click_pos_;
   bool ignore_next_click_;
+  bool psychedelic_colors_on_;
 
   Analyzer::Base* current_analyzer_;
   EngineBase* engine_;

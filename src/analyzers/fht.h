@@ -32,11 +32,11 @@
  * [1] Computer in Physics, Vol. 9, No. 4, Jul/Aug 1995 pp 373-379
  */
 class FHT {
-  int m_exp2;
-  int m_num;
-  float* m_buf;
-  float* m_tab;
-  int* m_log;
+  int exp2_;
+  int num_;
+  float* buf_;
+  float* tab_;
+  int* log_;
 
   /**
    * Create a table of "cas" (cosine and sine) values.
@@ -59,8 +59,8 @@ class FHT {
   explicit FHT(int);
 
   ~FHT();
-  inline int sizeExp() const { return m_exp2; }
-  inline int size() const { return m_num; }
+  inline int sizeExp() const { return exp2_; }
+  inline int size() const { return num_; }
   float* copy(float*, float*);
   float* clear(float*);
   void scale(float*, float);

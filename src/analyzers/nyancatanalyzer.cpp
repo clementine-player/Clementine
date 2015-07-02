@@ -57,7 +57,7 @@ NyanCatAnalyzer::NyanCatAnalyzer(QWidget* parent)
   }
 }
 
-void NyanCatAnalyzer::transform(Scope& s) { m_fht->spectrum(&s.front()); }
+void NyanCatAnalyzer::transform(Scope& s) { fht_->spectrum(&s.front()); }
 
 void NyanCatAnalyzer::timerEvent(QTimerEvent* e) {
   if (e->timerId() == timer_id_) {
@@ -74,7 +74,8 @@ void NyanCatAnalyzer::resizeEvent(QResizeEvent* e) {
   buffer_[1] = QPixmap();
 
   available_rainbow_width_ = width() - kCatWidth + kRainbowOverlap;
-  px_per_frame_ = static_cast<float>(available_rainbow_width_) / (kHistorySize - 1) + 1;
+  px_per_frame_ =
+      static_cast<float>(available_rainbow_width_) / (kHistorySize - 1) + 1;
   x_offset_ = px_per_frame_ * (kHistorySize - 1) - available_rainbow_width_;
 }
 
@@ -112,11 +113,13 @@ void NyanCatAnalyzer::analyze(QPainter& p, const Analyzer::Scope& s,
     QPointF* dest = polyline;
     float* source = history_;
 
-    const float top_of_cat = static_cast<float>(height()) / 2 - static_cast<float>(kCatHeight) / 2;
+    const float top_of_cat =
+        static_cast<float>(height()) / 2 - static_cast<float>(kCatHeight) / 2;
     for (int band = 0; band < kRainbowBands; ++band) {
       // Calculate the Y position of this band.
       const float y =
-          static_cast<float>(kCatHeight) / (kRainbowBands + 1) * (band + 0.5) + top_of_cat;
+          static_cast<float>(kCatHeight) / (kRainbowBands + 1) * (band + 0.5) +
+          top_of_cat;
 
       // Add each point in the line.
       for (int x = 0; x < kHistorySize; ++x) {

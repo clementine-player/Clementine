@@ -88,16 +88,18 @@ void BoomAnalyzer::resizeEvent(QResizeEvent* e) {
                     qMax(0, 255 - static_cast<int>(191.0 * F))));
     p.drawLine(0, y, kColumnWidth - 2, y);
   }
+
+  updateBandSize(bands_);
 }
 
 void BoomAnalyzer::transform(Scope& s) {
   float* front = static_cast<float*>(&s.front());
 
-  m_fht->spectrum(front);
-  m_fht->scale(front, 1.0 / 50);
+  fht_->spectrum(front);
+  fht_->scale(front, 1.0 / 50);
 
   s.resize(scope_.size() <= kMaxBandCount / 2 ? kMaxBandCount / 2
-                                                : scope_.size());
+                                              : scope_.size());
 }
 
 void BoomAnalyzer::analyze(QPainter& p, const Scope& scope, bool new_frame) {
@@ -112,6 +114,11 @@ void BoomAnalyzer::analyze(QPainter& p, const Scope& scope, bool new_frame) {
   canvas_.fill(palette().color(QPalette::Background));
 
   Analyzer::interpolate(scope, scope_);
+
+  // update the graphics with the new colour
+  if (psychedelic_enabled_) {
+    paletteChange(QPalette());
+  }
 
   for (uint i = 0, x = 0, y; i < bands_; ++i, x += kColumnWidth + 1) {
     h = log10(scope_[i] * 256.0) * F_;
@@ -158,8 +165,18 @@ void BoomAnalyzer::analyze(QPainter& p, const Scope& scope, bool new_frame) {
   p.drawPixmap(0, 0, canvas_);
 }
 
+void BoomAnalyzer::psychedelicModeChanged(bool enabled) {
+  psychedelic_enabled_ = enabled;
+  // reset colours back to normal
+  paletteChange(QPalette());
+}
+
 void BoomAnalyzer::paletteChange(const QPalette&) {
-  // the highlight colour changes when the main window loses focus,
-  // so we use save and use the focused colour
-  fg_ = palette().color(QPalette::Highlight);
+  if (psychedelic_enabled_) {
+    fg_ = getPsychedelicColor(scope_, 50, 100);
+  } else {
+    // the highlight colour changes when the main window loses focus,
+    // so we use save and use the focused colour
+    fg_ = palette().color(QPalette::Highlight);
+  }
 }

@@ -37,6 +37,7 @@ class BoomAnalyzer : public Analyzer::Base {
 
   virtual void transform(Analyzer::Scope& s);
   virtual void analyze(QPainter& p, const Analyzer::Scope&, bool new_frame);
+  virtual void psychedelicModeChanged(bool);
 
  public slots:
   void changeK_barHeight(int);
