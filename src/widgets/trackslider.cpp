@@ -47,6 +47,8 @@ TrackSlider::TrackSlider(QWidget* parent)
 
   connect(ui_->slider, SIGNAL(sliderMoved(int)), SIGNAL(ValueChanged(int)));
   connect(ui_->slider, SIGNAL(valueChanged(int)), SLOT(ValueMaybeChanged(int)));
+  connect(ui_->slider, SIGNAL(SeekForward()), SIGNAL(SeekForward()));
+  connect(ui_->slider, SIGNAL(SeekBackward()), SIGNAL(SeekBackward()));
   connect(ui_->remaining, SIGNAL(Clicked()), SLOT(ToggleTimeDisplay()));
 }
 
