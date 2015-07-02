@@ -152,7 +152,7 @@ void AnalyzerContainer::DisableAnalyzer() {
 }
 
 void AnalyzerContainer::TogglePsychedelicColors() {
-  psychedelic_colors_on_ ^= true;
+  psychedelic_colors_on_ = !psychedelic_colors_on_;
   current_analyzer_->psychedelicModeChanged(psychedelic_colors_on_);
   SavePsychedelic();
 }
