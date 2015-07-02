@@ -77,6 +77,7 @@ GstEnginePipeline::GstEnginePipeline(GstEngine* engine)
       pipeline_is_initialised_(false),
       pipeline_is_connected_(false),
       pending_seek_nanosec_(-1),
+      last_known_position_ns_(0),
       volume_percent_(100),
       volume_modifier_(1.0),
       pipeline_(nullptr),
@@ -976,10 +977,10 @@ void GstEnginePipeline::TransitionToNext() {
 }
 
 qint64 GstEnginePipeline::position() const {
-  gint64 value = 0;
-  gst_element_query_position(pipeline_, GST_FORMAT_TIME, &value);
+  if (pipeline_is_initialised_)
+    gst_element_query_position(pipeline_, GST_FORMAT_TIME, &last_known_position_ns_);
 
-  return value;
+  return last_known_position_ns_;
 }
 
 qint64 GstEnginePipeline::length() const {
@@ -1033,6 +1034,7 @@ bool GstEnginePipeline::Seek(qint64 nanosec) {
   }
 
   pending_seek_nanosec_ = -1;
+  last_known_position_ns_ = nanosec;
   return gst_element_seek_simple(pipeline_, GST_FORMAT_TIME,
                                  GST_SEEK_FLAG_FLUSH, nanosec);
 }
