@@ -104,3 +104,7 @@ void TrackSliderSlider::UpdateDeltaTime() {
     popup_->SetSmallText(Utilities::PrettyTimeDelta(delta_seconds));
   }
 }
+
+void TrackSliderSlider::wheelEvent(QWheelEvent* e) {
+  emit WheelEvent(e->delta());
+}

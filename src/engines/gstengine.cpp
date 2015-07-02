@@ -210,6 +210,11 @@ qint64 GstEngine::position_nanosec() const {
   if (!current_pipeline_) return 0;
 
   const qint64 result = current_pipeline_->position() - beginning_nanosec_;
+
+  // To prevent returning 0 when pipeline is in GST_STATE_PAUSED state.
+  if (seek_timer_->isActive() || result == 0)
+    return qint64(qMax(0ll, qint64(seek_pos_)));
+
   return qint64(qMax(0ll, result));
 }
 
@@ -450,6 +455,8 @@ bool GstEngine::Play(quint64 offset_nanosec) {
 
   if (!current_pipeline_ || current_pipeline_->is_buffering()) return false;
 
+  seek_pos_ = 0;
+
   QFuture<GstStateChangeReturn> future =
       current_pipeline_->SetState(GST_STATE_PLAYING);
   PlayFutureWatcher* watcher = new PlayFutureWatcher(
@@ -603,10 +610,7 @@ void GstEngine::Seek(quint64 offset_nanosec) {
   seek_pos_ = beginning_nanosec_ + offset_nanosec;
   waiting_to_seek_ = true;
 
-  if (!seek_timer_->isActive()) {
-    SeekNow();
-    seek_timer_->start();  // Stop us from seeking again for a little while
-  }
+  if (!seek_timer_->isActive()) SeekNow();
 }
 
 void GstEngine::SeekNow() {
@@ -614,6 +618,8 @@ void GstEngine::SeekNow() {
   waiting_to_seek_ = false;
 
   if (!current_pipeline_) return;
+
+  seek_timer_->start();
 
   if (!current_pipeline_->Seek(seek_pos_)) {
     qLog(Warning) << "Seek failed";
