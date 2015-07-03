@@ -998,6 +998,9 @@ void Song::ToLastFM(lastfm::Track* track, bool prefer_album_artist) const {
   } else {
     mtrack.setArtist(d->artist_);
   }
+#if LASTFM_MAJOR_VERSION >= 1
+  mtrack.setAlbumArtist(d->albumartist_);
+#endif
   mtrack.setAlbum(d->album_);
   mtrack.setTitle(d->title_);
   mtrack.setDuration(length_nanosec() / kNsecPerSec);
