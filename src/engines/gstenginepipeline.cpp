@@ -387,7 +387,18 @@ bool GstEnginePipeline::Init() {
   gst_element_link(probe_queue, probe_converter);
   gst_element_link_many(audio_queue, equalizer_preamp_, equalizer_,
                         stereo_panorama_, volume_, audioscale_, convert,
-                        audiosink_, nullptr);
+                        nullptr);
+
+  // add caps for mono, but only if requested
+  if (mono_playback_) {
+    GstCaps* caps32 = gst_caps_new_simple("audio/x-raw", "format",
+                                          G_TYPE_STRING, "S32LE", nullptr);
+    gst_caps_set_simple(caps32, "channels", G_TYPE_INT, 1, nullptr);
+    gst_element_link_filtered(convert, audiosink_, caps32);
+    gst_caps_unref(caps32);
+  } else {
+    gst_element_link(convert, audiosink_);
+  }
 
   // Add probes and handlers.
   gst_pad_add_probe(gst_element_get_static_pad(probe_converter, "src"),
@@ -623,10 +634,7 @@ QPair<QString, QString> ParseAkamaiTag(const QString& tag) {
   return qMakePair(tag, QString());
 }
 
-bool IsAkamaiTag(const QString& tag) {
-  return tag.contains("- text=\"");
-}
-
+bool IsAkamaiTag(const QString& tag) { return tag.contains("- text=\""); }
 }
 
 void GstEnginePipeline::TagMessageReceived(GstMessage* msg) {
@@ -927,9 +935,9 @@ void GstEnginePipeline::SourceSetupCallback(GstURIDecodeBin* bin,
   if (g_object_class_find_property(G_OBJECT_GET_CLASS(element),
                                    "extra-headers") &&
       instance->url().host().contains("amazonaws.com")) {
-    GstStructure* headers = gst_structure_new(
-        "extra-headers", "Authorization", G_TYPE_STRING,
-        instance->url().fragment().toAscii().data(), nullptr);
+    GstStructure* headers =
+        gst_structure_new("extra-headers", "Authorization", G_TYPE_STRING,
+                          instance->url().fragment().toAscii().data(), nullptr);
     g_object_set(element, "extra-headers", headers, nullptr);
     gst_structure_free(headers);
   }
@@ -942,7 +950,8 @@ void GstEnginePipeline::SourceSetupCallback(GstURIDecodeBin* bin,
                  nullptr);
 
 #ifdef Q_OS_DARWIN
-    g_object_set(element, "tls-database", instance->engine_->tls_database(), nullptr);
+    g_object_set(element, "tls-database", instance->engine_->tls_database(),
+                 nullptr);
     g_object_set(element, "ssl-use-system-ca-file", false, nullptr);
     g_object_set(element, "ssl-strict", TRUE, nullptr);
 #endif
@@ -978,7 +987,8 @@ void GstEnginePipeline::TransitionToNext() {
 
 qint64 GstEnginePipeline::position() const {
   if (pipeline_is_initialised_)
-    gst_element_query_position(pipeline_, GST_FORMAT_TIME, &last_known_position_ns_);
+    gst_element_query_position(pipeline_, GST_FORMAT_TIME,
+                               &last_known_position_ns_);
 
   return last_known_position_ns_;
 }
