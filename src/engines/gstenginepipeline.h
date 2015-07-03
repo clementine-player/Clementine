@@ -258,6 +258,13 @@ signals:
   bool pipeline_is_connected_;
   qint64 pending_seek_nanosec_;
 
+  // We can only use gst_element_query_position() when the pipeline is in
+  // PAUSED nor PLAYING state. Whenever we get a new position (e.g. after a
+  // correct call to gst_element_query_position() or after a seek), we store
+  // it here so that we can use it when using gst_element_query_position() is
+  // not possible.
+  mutable gint64 last_known_position_ns_;
+
   int volume_percent_;
   qreal volume_modifier_;
 

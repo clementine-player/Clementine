@@ -3,7 +3,7 @@
    Copyright 2010, 2014, John Maguire <john.maguire@gmail.com>
    Copyright 2011-2012, Arnaud Bienner <arnaud.bienner@gmail.com>
    Copyright 2013, Vasily Fomin <vasili.fomin@gmail.com>
-   Copyright 2014, Mark Furneaux <mark@romaco.ca>
+   Copyright 2014-2015, Mark Furneaux <mark@furneaux.ca>
    Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
@@ -57,6 +57,7 @@ AnalyzerContainer::AnalyzerContainer(QWidget* parent)
       visualisation_action_(nullptr),
       double_click_timer_(new QTimer(this)),
       ignore_next_click_(false),
+      psychedelic_colors_on_(false),
       current_analyzer_(nullptr),
       engine_(nullptr) {
   QHBoxLayout* layout = new QHBoxLayout(this);
@@ -87,6 +88,11 @@ AnalyzerContainer::AnalyzerContainer(QWidget* parent)
                                              SLOT(DisableAnalyzer()));
   disable_action_->setCheckable(true);
   group_->addAction(disable_action_);
+
+  context_menu_->addSeparator();
+  psychedelic_enable_ = context_menu_->addAction(
+      tr("Use Psychedelic Colors"), this, SLOT(TogglePsychedelicColors()));
+  psychedelic_enable_->setCheckable(true);
 
   context_menu_->addSeparator();
   // Visualisation action gets added in SetActions
@@ -145,6 +151,12 @@ void AnalyzerContainer::DisableAnalyzer() {
   Save();
 }
 
+void AnalyzerContainer::TogglePsychedelicColors() {
+  psychedelic_colors_on_ = !psychedelic_colors_on_;
+  current_analyzer_->psychedelicModeChanged(psychedelic_colors_on_);
+  SavePsychedelic();
+}
+
 void AnalyzerContainer::ChangeAnalyzer(int id) {
   QObject* instance = analyzer_types_[id]->newInstance(Q_ARG(QWidget*, this));
 
@@ -161,6 +173,7 @@ void AnalyzerContainer::ChangeAnalyzer(int id) {
   current_framerate_ =
       current_framerate_ == 0 ? kMediumFramerate : current_framerate_;
   current_analyzer_->changeTimeout(1000 / current_framerate_);
+  current_analyzer_->psychedelicModeChanged(psychedelic_colors_on_);
 
   layout()->addWidget(current_analyzer_);
 
@@ -182,6 +195,10 @@ void AnalyzerContainer::ChangeFramerate(int new_framerate) {
 void AnalyzerContainer::Load() {
   QSettings s;
   s.beginGroup(kSettingsGroup);
+
+  // Colours
+  psychedelic_colors_on_ = s.value("psychedelic", false).toBool();
+  psychedelic_enable_->setChecked(psychedelic_colors_on_);
 
   // Analyzer
   QString type = s.value("type", "BlockAnalyzer").toString();
@@ -225,6 +242,13 @@ void AnalyzerContainer::Save() {
   s.setValue("type", current_analyzer_
                          ? current_analyzer_->metaObject()->className()
                          : QVariant());
+}
+
+void AnalyzerContainer::SavePsychedelic() {
+  QSettings s;
+  s.beginGroup(kSettingsGroup);
+
+  s.setValue("psychedelic", psychedelic_colors_on_);
 }
 
 void AnalyzerContainer::AddFramerate(const QString& name, int framerate) {

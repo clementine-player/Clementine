@@ -112,7 +112,9 @@ const QStringList Song::kColumns = QStringList() << "title"
                                                  << "etag"
                                                  << "performer"
                                                  << "grouping"
-                                                 << "lyrics";
+                                                 << "lyrics"
+                                                 << "originalyear"
+                                                 << "effective_originalyear";
 
 const QString Song::kColumnSpec = Song::kColumns.join(", ");
 const QString Song::kBindSpec =
@@ -157,6 +159,7 @@ struct Song::Private : public QSharedData {
   int disc_;
   float bpm_;
   int year_;
+  int originalyear_;
   QString genre_;
   QString comment_;
   bool compilation_;             // From the file tag
@@ -230,6 +233,7 @@ Song::Private::Private()
       disc_(-1),
       bpm_(-1),
       year_(-1),
+      originalyear_(-1),
       compilation_(false),
       sampler_(false),
       forced_compilation_on_(false),
@@ -285,6 +289,10 @@ int Song::track() const { return d->track_; }
 int Song::disc() const { return d->disc_; }
 float Song::bpm() const { return d->bpm_; }
 int Song::year() const { return d->year_; }
+int Song::originalyear() const { return d->originalyear_; }
+int Song::effective_originalyear() const {
+  return d->originalyear_ < 0 ? d->year_ : d->originalyear_;
+}
 const QString& Song::genre() const { return d->genre_; }
 const QString& Song::comment() const { return d->comment_; }
 bool Song::is_compilation() const {
@@ -342,6 +350,7 @@ void Song::set_track(int v) { d->track_ = v; }
 void Song::set_disc(int v) { d->disc_ = v; }
 void Song::set_bpm(float v) { d->bpm_ = v; }
 void Song::set_year(int v) { d->year_ = v; }
+void Song::set_originalyear(int v) { d->originalyear_ = v; }
 void Song::set_genre(const QString& v) { d->genre_ = v; }
 void Song::set_comment(const QString& v) { d->comment_ = v; }
 void Song::set_compilation(bool v) { d->compilation_ = v; }
@@ -499,6 +508,7 @@ void Song::InitFromProtobuf(const pb::tagreader::SongMetadata& pb) {
   d->disc_ = pb.disc();
   d->bpm_ = pb.bpm();
   d->year_ = pb.year();
+  d->originalyear_ = pb.originalyear();
   d->genre_ = QStringFromStdString(pb.genre());
   d->comment_ = QStringFromStdString(pb.comment());
   d->compilation_ = pb.compilation();
@@ -545,6 +555,7 @@ void Song::ToProtobuf(pb::tagreader::SongMetadata* pb) const {
   pb->set_disc(d->disc_);
   pb->set_bpm(d->bpm_);
   pb->set_year(d->year_);
+  pb->set_originalyear(d->originalyear_);
   pb->set_genre(DataCommaSizeFromQString(d->genre_));
   pb->set_comment(DataCommaSizeFromQString(d->comment_));
   pb->set_compilation(d->compilation_);
@@ -585,6 +596,7 @@ void Song::InitFromQuery(const SqlRow& q, bool reliable_metadata, int col) {
   d->disc_ = toint(col + 7);
   d->bpm_ = tofloat(col + 8);
   d->year_ = toint(col + 9);
+  d->originalyear_ = toint(col + 41);
   d->genre_ = tostr(col + 10);
   d->comment_ = tostr(col + 11);
   d->compilation_ = q.value(col + 12).toBool();
@@ -957,6 +969,8 @@ void Song::BindToQuery(QSqlQuery* query) const {
   query->bindValue(":performer", strval(d->performer_));
   query->bindValue(":grouping", strval(d->grouping_));
   query->bindValue(":lyrics", strval(d->lyrics_));
+  query->bindValue(":originalyear", intval(d->originalyear_));
+  query->bindValue(":effective_originalyear", intval(this->effective_originalyear()));
 
 #undef intval
 #undef notnullintval
@@ -1056,7 +1070,8 @@ bool Song::IsMetadataEqual(const Song& other) const {
          d->performer_ == other.d->performer_ &&
          d->grouping_ == other.d->grouping_ && d->track_ == other.d->track_ &&
          d->disc_ == other.d->disc_ && qFuzzyCompare(d->bpm_, other.d->bpm_) &&
-         d->year_ == other.d->year_ && d->genre_ == other.d->genre_ &&
+         d->year_ == other.d->year_ && d->originalyear_ == other.d->originalyear_ &&
+         d->genre_ == other.d->genre_ &&
          d->comment_ == other.d->comment_ &&
          d->compilation_ == other.d->compilation_ &&
          d->beginning_ == other.d->beginning_ &&

@@ -3,7 +3,7 @@
    Copyright 2009-2010, David Sansome <davidsansome@gmail.com>
    Copyright 2010, 2014, John Maguire <john.maguire@gmail.com>
    Copyright 2011, Arnaud Bienner <arnaud.bienner@gmail.com>
-   Copyright 2014, Mark Furneaux <mark@romaco.ca>
+   Copyright 2014-2015, Mark Furneaux <mark@furneaux.ca>
    Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
@@ -58,21 +58,22 @@ class Base : public QWidget {
   Q_OBJECT
 
  public:
-  ~Base() { delete m_fht; }
+  ~Base() { delete fht_; }
 
-  uint timeout() const { return m_timeout; }
+  uint timeout() const { return timeout_; }
 
-  void set_engine(EngineBase* engine) { m_engine = engine; }
+  void set_engine(EngineBase* engine) { engine_ = engine; }
 
   void changeTimeout(uint newTimeout) {
-    m_timeout = newTimeout;
-    if (m_timer.isActive()) {
-      m_timer.stop();
-      m_timer.start(m_timeout, this);
+    timeout_ = newTimeout;
+    if (timer_.isActive()) {
+      timer_.stop();
+      timer_.start(timeout_, this);
     }
   }
 
   virtual void framerateChanged() {}
+  virtual void psychedelicModeChanged(bool);
 
  protected:
   explicit Base(QWidget*, uint scopeSize = 7);
@@ -86,21 +87,32 @@ class Base : public QWidget {
 
   int resizeExponent(int);
   int resizeForBands(int);
+  int BandFrequency(int) const;
+  void updateBandSize(const int);
+  QColor getPsychedelicColor(const Scope&, const int, const int);
   virtual void init() {}
   virtual void transform(Scope&);
   virtual void analyze(QPainter& p, const Scope&, bool new_frame) = 0;
   virtual void demo(QPainter& p);
 
  protected:
-  QBasicTimer m_timer;
-  uint m_timeout;
-  FHT* m_fht;
-  EngineBase* m_engine;
-  Scope m_lastScope;
-  int current_chunk_;
+  static const int kSampleRate =
+      44100;  // we shouldn't need to care about ultrasonics
+
+  QBasicTimer timer_;
+  uint timeout_;
+  FHT* fht_;
+  EngineBase* engine_;
+  Scope lastScope_;
 
   bool new_frame_;
   bool is_playing_;
+
+  QList<uint> barkband_table_;
+  double prev_colors_[10][3];
+  int prev_color_index_;
+  int bands_;
+  bool psychedelic_enabled_;
 };
 
 void interpolate(const Scope&, Scope&);

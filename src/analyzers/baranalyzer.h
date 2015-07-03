@@ -2,7 +2,7 @@
    Copyright 2003-2005, Max Howell <max.howell@methylblue.com>
    Copyright 2005, Mark Kretschmann <markey@web.de>
    Copyright 2009-2010, David Sansome <davidsansome@gmail.com>
-   Copyright 2014, Mark Furneaux <mark@romaco.ca>
+   Copyright 2014-2015, Mark Furneaux <mark@furneaux.ca>
    Copyright 2014, Krzysztof A. Sobiecki <sobkas@gmail.com>
    Copyright 2014, John Maguire <john.maguire@gmail.com>
 
@@ -39,44 +39,45 @@ class BarAnalyzer : public Analyzer::Base {
 
   void init();
   virtual void analyze(QPainter& p, const Analyzer::Scope&, bool new_frame);
-  // virtual void transform( Scope& );
+  virtual void psychedelicModeChanged(bool);
 
   /**
    * Resizes the widget to a new geometry according to @p e
    * @param e The resize-event
    */
   void resizeEvent(QResizeEvent* e);
+  void colorChanged();
 
-  uint BAND_COUNT;
-  int MAX_DOWN;
-  int MAX_UP;
-  static const uint ROOF_HOLD_TIME = 48;
-  static const int ROOF_VELOCITY_REDUCTION_FACTOR = 32;
-  static const uint NUM_ROOFS = 16;
-  static const uint COLUMN_WIDTH = 4;
+  uint band_count_;
+  int max_down_;
+  int max_up_;
+  static const uint kRoofHoldTime = 48;
+  static const int kRoofVelocityReductionFactor = 32;
+  static const uint kNumRoofs = 16;
+  static const uint kColumnWidth = 4;
 
   static const char* kName;
 
  protected:
-  QPixmap m_pixRoof[NUM_ROOFS];
-  // vector<uint> m_roofMem[BAND_COUNT];
+  QPixmap pixRoof_[kNumRoofs];
+  // vector<uint> roofMem_[band_count_];
 
   // Scope m_bands; //copy of the Scope to prevent creating/destroying a Scope
   // every iteration
-  uint m_lvlMapper[256];
-  std::vector<aroofMemVec> m_roofMem;
-  std::vector<uint> barVector;           // positions of bars
-  std::vector<int> roofVector;           // positions of roofs
-  std::vector<uint> roofVelocityVector;  // speed that roofs falls
+  uint lvlMapper_[256];
+  std::vector<aroofMemVec> roofMem_;
+  std::vector<uint> barVector_;           // positions of bars
+  std::vector<int> roofVector_;           // positions of roofs
+  std::vector<uint> roofVelocityVector_;  // speed that roofs falls
 
-  const QPixmap* gradient() const { return &m_pixBarGradient; }
+  const QPixmap* gradient() const { return &pixBarGradient_; }
 
  private:
-  QPixmap m_pixBarGradient;
-  QPixmap m_pixCompose;
+  QPixmap pixBarGradient_;
+  QPixmap pixCompose_;
   QPixmap canvas_;
-  Analyzer::Scope m_scope;  // so we don't create a vector every frame
-  QColor m_bg;
+  Analyzer::Scope scope_;  // so we don't create a vector every frame
+  QColor bg_;
 };
 
 #endif  // ANALYZERS_BARANALYZER_H_

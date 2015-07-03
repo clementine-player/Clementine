@@ -115,6 +115,7 @@ Library::Library(Application* app, QObject* parent)
 
   // full rescan revisions
   full_rescan_revisions_[26] = tr("CUE sheet support");
+  full_rescan_revisions_[50] = tr("Original year tag support");
 
   ReloadSettings();
 }

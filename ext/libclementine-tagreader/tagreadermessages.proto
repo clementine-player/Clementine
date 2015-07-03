@@ -52,6 +52,7 @@ message SongMetadata {
   optional string performer = 31;
   optional string grouping = 32;
   optional string lyrics = 33;
+  optional int32 originalyear = 34;
 }
 
 message ReadFileRequest {

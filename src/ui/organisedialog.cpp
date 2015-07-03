@@ -70,6 +70,7 @@ OrganiseDialog::OrganiseDialog(TaskManager* task_manager, QWidget* parent)
   tags[tr("Disc")] = "disc";
   tags[tr("BPM")] = "bpm";
   tags[tr("Year")] = "year";
+  tags[tr("Original year")] = "originalyear";
   tags[tr("Genre")] = "genre";
   tags[tr("Comment")] = "comment";
   tags[tr("Length")] = "length";

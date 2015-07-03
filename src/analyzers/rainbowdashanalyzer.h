@@ -1,6 +1,6 @@
 /* This file is part of Clementine.
    Copyright 2014, Alibek Omarov <a1ba.omarov@gmail.com>
-   Copyright 2014, Mark Furneaux <mark@romaco.ca>
+   Copyright 2014-2015, Mark Furneaux <mark@furneaux.ca>
    Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
