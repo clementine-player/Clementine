@@ -129,6 +129,10 @@ void BehaviourSettingsPage::Load() {
       s.value("resume_playback_after_start", false).toBool());
   s.endGroup();
 
+  s.beginGroup(Player::kSettingsGroup);
+  ui_->seek_step_sec->setValue(s.value("seek_step_sec", 10).toInt());
+  s.endGroup();
+
   s.beginGroup("General");
   QString name = language_map_.key(s.value("language").toString());
   if (name.isEmpty())
@@ -217,6 +221,7 @@ void BehaviourSettingsPage::Save() {
 
   s.beginGroup(Player::kSettingsGroup);
   s.setValue("menu_previousmode", menu_previousmode);
+  s.setValue("seek_step_sec", ui_->seek_step_sec->value());
   s.endGroup();
 
   s.beginGroup("General");
