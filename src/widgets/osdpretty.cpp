@@ -317,8 +317,14 @@ void OSDPretty::Reposition() {
   int y = popup_pos_.y() < 0 ? geometry.bottom() - height()
                              : geometry.top() + popup_pos_.y();
 
-  move(qBound(0, x, geometry.right() - width()),
-       qBound(0, y, geometry.bottom() - height()));
+#ifndef Q_OS_WIN32
+  // windows needs negative coordinates for monitors
+  // to the left or above the primary
+  x = qBound(0, x, geometry.right() - width());
+  y = qBound(0, y, geometry.bottom() - height());
+#endif
+
+  move(x, y);
 
   // Create a mask for the actual area of the OSD
   QBitmap mask(size());
