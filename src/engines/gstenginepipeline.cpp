@@ -391,11 +391,10 @@ bool GstEnginePipeline::Init() {
 
   // add caps for mono, but only if requested
   if (mono_playback_) {
-    GstCaps* caps32 = gst_caps_new_simple("audio/x-raw", "format",
-                                          G_TYPE_STRING, "S32LE", nullptr);
-    gst_caps_set_simple(caps32, "channels", G_TYPE_INT, 1, nullptr);
-    gst_element_link_filtered(convert, audiosink_, caps32);
-    gst_caps_unref(caps32);
+    GstCaps* capsmono = gst_caps_new_simple("audio/x-raw", "channels",
+                                          G_TYPE_INT, 1, nullptr);
+    gst_element_link_filtered(convert, audiosink_, capsmono);
+    gst_caps_unref(capsmono);
   } else {
     gst_element_link(convert, audiosink_);
   }
