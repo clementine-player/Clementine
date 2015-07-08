@@ -66,8 +66,8 @@
 
 #include "tagreadermessages.pb.h"
 
-#include "singleapplication.h"
-#include "singlecoreapplication.h"
+#include "qtsingleapplication.h"
+#include "qtsinglecoreapplication.h"
 
 #include <glib-object.h>
 #include <glib.h>
@@ -280,7 +280,7 @@ int main(int argc, char* argv[]) {
     // Clementine running without needing an X server.
     // This MUST be done before parsing the commandline options so QTextCodec
     // gets the right system locale for filenames.
-    SingleCoreApplication a(argc, argv);
+    QtSingleCoreApplication a(argc, argv);
     CheckPortable();
     crash_reporting.SetApplicationPath(a.applicationFilePath());
 
@@ -320,13 +320,7 @@ int main(int argc, char* argv[]) {
 
   IncreaseFDLimit();
 
-  SingleApplication a(argc, argv);
-
-#ifdef HAVE_LIBLASTFM
-  lastfm::ws::ApiKey = LastFMService::kApiKey;
-  lastfm::ws::SharedSecret = LastFMService::kSecret;
-  lastfm::setNetworkAccessManager(new NetworkAccessManager);
-#endif
+  QtSingleApplication a(argc, argv);
 
 #ifdef HAVE_LIBLASTFM
   lastfm::ws::ApiKey = LastFMService::kApiKey;
@@ -467,6 +461,7 @@ int main(int argc, char* argv[]) {
                    SLOT(CommandlineOptionsReceived(QByteArray)));
 
   w.CommandlineOptionsReceived(options);
+
   int ret = a.exec();
 
 #ifdef Q_OS_LINUX
