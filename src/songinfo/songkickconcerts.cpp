@@ -24,7 +24,7 @@
 #include <QJsonObject>
 #include <QJsonArray>
 
-#include <echonest5/Artist.h>
+#include <Artist.h>
 
 #include "core/closure.h"
 #include "core/logging.h"

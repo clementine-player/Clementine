@@ -76,7 +76,7 @@
 #include <glib.h>
 #include <gst/gst.h>
 
-#include <echonest5/Config.h>
+#include <Config.h>
 
 #ifdef Q_OS_DARWIN
 #include <sys/resource.h>
