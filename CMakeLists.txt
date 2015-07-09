@@ -371,7 +371,7 @@ else (USE_SYSTEM_QXT)
   endif (NOT APPLE)
 endif (USE_SYSTEM_QXT)
 
-find_path(ECHONEST5_INCLUDE_DIRS echonest5/echonest_export.h)
+find_path(ECHONEST5_INCLUDE_DIRS Artist.h PATH_SUFFIXES echonest5 echonest)
 find_library(ECHONEST5_LIBRARIES echonest5)
 
 # Use system gmock if it's available

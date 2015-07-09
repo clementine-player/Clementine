@@ -19,7 +19,7 @@
 
 #include <memory>
 
-#include <echonest5/Artist.h>
+#include <Artist.h>
 
 #include "core/logging.h"
 
