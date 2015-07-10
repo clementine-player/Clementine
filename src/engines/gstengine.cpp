@@ -103,6 +103,7 @@ GstEngine::GstEngine(TaskManager* task_manager)
       buffer_duration_nanosec_(1 * kNsecPerSec),  // 1s
       buffer_min_fill_(33),
       mono_playback_(false),
+      sample_rate_(kAutoSampleRate),
       seek_timer_(new QTimer(this)),
       timer_id_(-1),
       next_element_id_(0),
@@ -204,6 +205,7 @@ void GstEngine::ReloadSettings() {
   buffer_min_fill_ = s.value("bufferminfill", 33).toInt();
 
   mono_playback_ = s.value("monoplayback", false).toBool();
+  sample_rate_ = s.value("samplerate", kAutoSampleRate).toInt();
 }
 
 qint64 GstEngine::position_nanosec() const {
@@ -788,6 +790,7 @@ shared_ptr<GstEnginePipeline> GstEngine::CreatePipeline() {
   ret->set_buffer_duration_nanosec(buffer_duration_nanosec_);
   ret->set_buffer_min_fill(buffer_min_fill_);
   ret->set_mono_playback(mono_playback_);
+  ret->set_sample_rate(sample_rate_);
 
   ret->AddBufferConsumer(this);
   for (BufferConsumer* consumer : buffer_consumers_) {

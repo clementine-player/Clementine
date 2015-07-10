@@ -55,6 +55,7 @@ class GstEnginePipeline : public QObject {
   void set_buffer_duration_nanosec(qint64 duration_nanosec);
   void set_buffer_min_fill(int percent);
   void set_mono_playback(bool enabled);
+  void set_sample_rate(int rate);
 
   // Creates the pipeline, returns false on error
   bool InitFromUrl(const QUrl& url, qint64 end_nanosec);
@@ -220,6 +221,7 @@ signals:
   bool buffering_;
 
   bool mono_playback_;
+  int sample_rate_;
 
   // The URL that is currently playing, and the URL that is to be preloaded
   // when the current track is close to finishing.

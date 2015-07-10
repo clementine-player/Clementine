@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>596</width>
-    <height>638</height>
+    <height>667</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -300,22 +300,12 @@
         </property>
        </widget>
       </item>
-      <item row="4" column="0" colspan="2">
-       <widget class="QCheckBox" name="mono_playback">
-        <property name="toolTip">
-         <string>Changing mono playback preference will be effective for the next playing songs</string>
-        </property>
-        <property name="text">
-         <string>Mono playback</string>
-        </property>
-       </widget>
-      </item>
       <item row="2" column="1">
        <layout class="QHBoxLayout" name="horizontalLayout_3">
         <item>
          <widget class="QLabel" name="buffer_min_fill_value_label">
           <property name="text">
-           <string> </string>
+           <string/>
           </property>
          </widget>
         </item>
@@ -337,6 +327,87 @@
            <number>1</number>
           </property>
          </widget>
+        </item>
+       </layout>
+      </item>
+      <item row="5" column="0" colspan="2">
+       <widget class="QCheckBox" name="mono_playback">
+        <property name="toolTip">
+         <string>Changing mono playback preference will be effective for the next playing songs</string>
+        </property>
+        <property name="text">
+         <string>Mono playback</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="0">
+       <widget class="QLabel" name="sample_rate_label">
+        <property name="text">
+         <string>Sample Rate</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="1">
+       <layout class="QHBoxLayout" name="horizontalLayout_5">
+        <item>
+         <widget class="QComboBox" name="sample_rate">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="baseSize">
+           <size>
+            <width>0</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="toolTip">
+           <string>Changes will take place when the next song starts playing</string>
+          </property>
+          <property name="sizeAdjustPolicy">
+           <enum>QComboBox::AdjustToContents</enum>
+          </property>
+          <item>
+           <property name="text">
+            <string>Auto</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>44,100Hz</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>48,000Hz</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>96,000Hz</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>192,000Hz</string>
+           </property>
+          </item>
+         </widget>
+        </item>
+        <item>
+         <spacer name="horizontalSpacer_3">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
         </item>
        </layout>
       </item>
