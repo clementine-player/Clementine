@@ -69,6 +69,7 @@ GstEnginePipeline::GstEnginePipeline(GstEngine* engine)
       buffer_min_fill_(33),
       buffering_(false),
       mono_playback_(false),
+      sample_rate_(GstEngine::kAutoSampleRate),
       end_offset_nanosec_(-1),
       next_beginning_offset_nanosec_(-1),
       next_end_offset_nanosec_(-1),
@@ -126,6 +127,8 @@ void GstEnginePipeline::set_buffer_min_fill(int percent) {
 void GstEnginePipeline::set_mono_playback(bool enabled) {
   mono_playback_ = enabled;
 }
+
+void GstEnginePipeline::set_sample_rate(int rate) { sample_rate_ = rate; }
 
 bool GstEnginePipeline::ReplaceDecodeBin(GstElement* new_bin) {
   if (!new_bin) return false;
@@ -389,10 +392,19 @@ bool GstEnginePipeline::Init() {
                         stereo_panorama_, volume_, audioscale_, convert,
                         nullptr);
 
-  // add caps for mono, but only if requested
-  if (mono_playback_) {
-    GstCaps* capsmono = gst_caps_new_simple("audio/x-raw", "channels",
-                                          G_TYPE_INT, 1, nullptr);
+  // add caps for fixed sample rate and mono, but only if requested
+  if (sample_rate_ != GstEngine::kAutoSampleRate && sample_rate_ > 0) {
+    GstCaps* caps = gst_caps_new_simple("audio/x-raw", "rate", G_TYPE_INT,
+                                        sample_rate_, nullptr);
+    if (mono_playback_) {
+      gst_caps_set_simple(caps, "channels", G_TYPE_INT, 1, nullptr);
+    }
+
+    gst_element_link_filtered(convert, audiosink_, caps);
+    gst_caps_unref(caps);
+  } else if (mono_playback_) {
+    GstCaps* capsmono =
+        gst_caps_new_simple("audio/x-raw", "channels", G_TYPE_INT, 1, nullptr);
     gst_element_link_filtered(convert, audiosink_, capsmono);
     gst_caps_unref(capsmono);
   } else {
