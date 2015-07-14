@@ -38,6 +38,7 @@
 #endif
 #include <QVector>
 #include <X11/Xlib.h>
+#include "keymapper_x11.h"
 
 namespace {
 
@@ -214,15 +215,30 @@ quint32 QxtGlobalShortcutPrivate::nativeModifiers(Qt::KeyboardModifiers modifier
 
 quint32 QxtGlobalShortcutPrivate::nativeKeycode(Qt::Key key)
 {
-    QxtX11Data x11;
-    if (!x11.isValid())
-        return 0;
+  // (davidsansome) Try the table from QKeyMapper first - this seems to be
+  // the only way to get Keysyms for the media keys.
+  unsigned int keysym = 0;
+  int i = 0;
+  while (KeyTbl[i]) {
+    if (KeyTbl[i+1] == static_cast<uint>(key)) {
+      keysym = KeyTbl[i];
+      break;
+    }
+    i += 2;
+  }
 
-    KeySym keysym = XStringToKeysym(QKeySequence(key).toString().toLatin1().data());
+  // If that didn't work then fall back on XStringToKeysym
+  if (!keysym) {
+    keysym = XStringToKeysym(QKeySequence(key).toString().toLatin1().data());
     if (keysym == NoSymbol)
-        keysym = static_cast<ushort>(key);
+      keysym = static_cast<ushort>(key);
+  }
 
-    return XKeysymToKeycode(x11.display(), keysym);
+  QxtX11Data x11;
+  if (!x11.isValid())
+    return 0;
+
+  return XKeysymToKeycode(x11.display(), keysym);
 }
 
 bool QxtGlobalShortcutPrivate::registerShortcut(quint32 nativeKey, quint32 nativeMods)
