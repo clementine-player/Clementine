@@ -53,10 +53,6 @@ using std::shared_ptr;
 
 const char* Player::kSettingsGroup = "Player";
 
-namespace {
-const int kSeekStepSec = 10;
-}
-
 Player::Player(Application* app, QObject* parent)
     : PlayerInterface(parent),
       app_(app),
@@ -67,7 +63,8 @@ Player::Player(Application* app, QObject* parent)
       nb_errors_received_(0),
       volume_before_mute_(50),
       last_pressed_previous_(QDateTime::currentDateTime()),
-      menu_previousmode_(PreviousBehaviour_DontRestart) {
+      menu_previousmode_(PreviousBehaviour_DontRestart),
+      seek_step_sec_(10) {
   settings_.beginGroup("Player");
 
   SetVolume(settings_.value("volume", 50).toInt());
@@ -107,7 +104,11 @@ void Player::ReloadSettings() {
 
   menu_previousmode_ = PreviousBehaviour(
       s.value("menu_previousmode", PreviousBehaviour_DontRestart).toInt());
+
+  seek_step_sec_ = s.value("seek_step_sec", 10).toInt();
+
   s.endGroup();
+
 
   engine_->ReloadSettings();
 }
@@ -448,11 +449,11 @@ void Player::SeekTo(int seconds) {
 }
 
 void Player::SeekForward() {
-  SeekTo(engine()->position_nanosec() / kNsecPerSec + kSeekStepSec);
+  SeekTo(engine()->position_nanosec() / kNsecPerSec + seek_step_sec_);
 }
 
 void Player::SeekBackward() {
-  SeekTo(engine()->position_nanosec() / kNsecPerSec - kSeekStepSec);
+  SeekTo(engine()->position_nanosec() / kNsecPerSec - seek_step_sec_);
 }
 
 void Player::EngineMetadataReceived(const Engine::SimpleMetaBundle& bundle) {
