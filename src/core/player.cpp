@@ -109,7 +109,6 @@ void Player::ReloadSettings() {
 
   s.endGroup();
 
-
   engine_->ReloadSettings();
 }
 

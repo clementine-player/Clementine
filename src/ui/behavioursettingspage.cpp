@@ -130,6 +130,8 @@ void BehaviourSettingsPage::Load() {
   s.endGroup();
 
   s.beginGroup(Player::kSettingsGroup);
+  ui_->menu_previousmode->setCurrentIndex(ui_->menu_previousmode->findData(
+      s.value("menu_previousmode", Player::PreviousBehaviour_DontRestart).toInt()));
   ui_->seek_step_sec->setValue(s.value("seek_step_sec", 10).toInt());
   s.endGroup();
 
