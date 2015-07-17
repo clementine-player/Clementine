@@ -560,6 +560,11 @@ void GlobalSearchView::GroupByClicked(QAction* action) {
 }
 
 void GlobalSearchView::SetGroupBy(const LibraryModel::Grouping& g) {
+  // Clear requests: changing "group by" on the models will cause all the items to be removed/added
+  // again, so all the QModelIndex here will become invalid. New requests will be created for those
+  // songs when they will be displayed again anyway (when GlobalSearchItemDelegate::paint will call
+  // LazyLoadArt)
+  art_requests_.clear();
   // Update the models
   front_model_->SetGroupBy(g, true);
   back_model_->SetGroupBy(g, false);
