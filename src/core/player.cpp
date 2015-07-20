@@ -305,6 +305,13 @@ void Player::StopAfterCurrent() {
       app_->playlist_manager()->active()->current_row());
 }
 
+bool Player::PreviousWouldRestartTrack() const {
+  // Check if it has been over two seconds since previous button was pressed
+  return menu_previousmode_ == PreviousBehaviour_Restart &&
+         last_pressed_previous_.isValid() &&
+         last_pressed_previous_.secsTo(QDateTime::currentDateTime()) >= 2;
+}
+
 void Player::Previous() { PreviousItem(Engine::Manual); }
 
 void Player::PreviousItem(Engine::TrackChangeFlags change) {
