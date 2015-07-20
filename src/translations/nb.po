@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2015-07-02 13:48+0000\n"
+"PO-Revision-Date: 2015-07-15 13:28+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Norwegian Bokmål (http://www.transifex.com/p/clementine/language/nb/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -44,15 +44,19 @@ msgstr "dager"
 msgid " kbps"
 msgstr "kbps"
 
-#: ../bin/src/ui_playbacksettingspage.h:318
-#: ../bin/src/ui_playbacksettingspage.h:321
-#: ../bin/src/ui_playbacksettingspage.h:335
+#: ../bin/src/ui_playbacksettingspage.h:348
+#: ../bin/src/ui_playbacksettingspage.h:351
+#: ../bin/src/ui_playbacksettingspage.h:365
 msgid " ms"
 msgstr "Normaliseringsmodus"
 
 #: ../bin/src/ui_songinfosettingspage.h:157
 msgid " pt"
 msgstr "pkt"
+
+#: ../bin/src/ui_behavioursettingspage.h:338
+msgid " s"
+msgstr ""
 
 #: ../bin/src/ui_notificationssettingspage.h:445
 #: ../bin/src/ui_visualisationselector.h:116
@@ -272,13 +276,29 @@ msgstr "1 spor"
 msgid "128k MP3"
 msgstr "128k MP3"
 
+#: ../bin/src/ui_playbacksettingspage.h:379
+msgid "192,000Hz"
+msgstr ""
+
 #: ../bin/src/ui_appearancesettingspage.h:291
 msgid "40%"
 msgstr "40%"
 
+#: ../bin/src/ui_playbacksettingspage.h:376
+msgid "44,100Hz"
+msgstr ""
+
+#: ../bin/src/ui_playbacksettingspage.h:377
+msgid "48,000Hz"
+msgstr ""
+
 #: library/library.cpp:64
 msgid "50 random tracks"
 msgstr "50 tilfeldige spor"
+
+#: ../bin/src/ui_playbacksettingspage.h:378
+msgid "96,000Hz"
+msgstr ""
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:165
 msgid "<a href=\"http://www.di.fm/premium/\">Upgrade to Premium now</a>"
@@ -386,7 +406,7 @@ msgid "About Qt..."
 msgstr "Om Qt..."
 
 #: playlist/playlistsaveoptionsdialog.cpp:34
-#: ../bin/src/ui_behavioursettingspage.h:308
+#: ../bin/src/ui_behavioursettingspage.h:342
 msgid "Absolute"
 msgstr "Absolutt"
 
@@ -595,7 +615,7 @@ msgstr "Legg til i bokmerker"
 msgid "Add to playlist"
 msgstr "Legg til på spilleliste"
 
-#: ../bin/src/ui_behavioursettingspage.h:298
+#: ../bin/src/ui_behavioursettingspage.h:328
 msgid "Add to the queue"
 msgstr "Legg i kø"
 
@@ -653,7 +673,7 @@ msgstr "Etter kopiering..."
 msgid "Album"
 msgstr "Album"
 
-#: ../bin/src/ui_playbacksettingspage.h:328
+#: ../bin/src/ui_playbacksettingspage.h:358
 msgid "Album (ideal loudness for all tracks)"
 msgstr "Album (ideell lydstyrke for alle spor)"
 
@@ -737,16 +757,16 @@ msgstr "Tillat midt/side-koding"
 msgid "Alongside the originals"
 msgstr "Sammen med originalene"
 
-#: ../bin/src/ui_behavioursettingspage.h:271
+#: ../bin/src/ui_behavioursettingspage.h:301
 msgid "Always hide the main window"
 msgstr "Alltid gjem hovedvinduet"
 
-#: ../bin/src/ui_behavioursettingspage.h:270
+#: ../bin/src/ui_behavioursettingspage.h:300
 msgid "Always show the main window"
 msgstr "Alltid vis hovedvinduet"
 
-#: ../bin/src/ui_behavioursettingspage.h:284
-#: ../bin/src/ui_behavioursettingspage.h:304
+#: ../bin/src/ui_behavioursettingspage.h:314
+#: ../bin/src/ui_behavioursettingspage.h:334
 msgid "Always start playing"
 msgstr "Alltid start avspilling"
 
@@ -797,11 +817,11 @@ msgstr "Tilføy filer/URLer til spillelista"
 msgid "Append to current playlist"
 msgstr "Legg til i gjeldende spilleliste"
 
-#: ../bin/src/ui_behavioursettingspage.h:295
+#: ../bin/src/ui_behavioursettingspage.h:325
 msgid "Append to the playlist"
 msgstr "Legg til i spilleliste"
 
-#: ../bin/src/ui_playbacksettingspage.h:331
+#: ../bin/src/ui_playbacksettingspage.h:361
 msgid "Apply compression to prevent clipping"
 msgstr "Legg til kompressor, for å unngå klipping"
 
@@ -841,7 +861,7 @@ msgstr "Artist etiketter"
 msgid "Artist's initial"
 msgstr "Artistens initial"
 
-#: ../bin/src/ui_behavioursettingspage.h:310
+#: ../bin/src/ui_behavioursettingspage.h:344
 msgid "Ask when saving"
 msgstr "Spør ved lagring"
 
@@ -851,7 +871,7 @@ msgstr "Spør ved lagring"
 msgid "Audio format"
 msgstr "Lydformat"
 
-#: ../bin/src/ui_playbacksettingspage.h:332
+#: ../bin/src/ui_playbacksettingspage.h:362
 msgid "Audio output"
 msgstr "Lyd-utenhet"
 
@@ -871,11 +891,12 @@ msgid "Authors"
 msgstr "Forfattere"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:227
+#: ../bin/src/ui_playbacksettingspage.h:375
 msgid "Auto"
 msgstr "Automatisk"
 
 #: playlist/playlistsaveoptionsdialog.cpp:32
-#: ../bin/src/ui_behavioursettingspage.h:307
+#: ../bin/src/ui_behavioursettingspage.h:341
 msgid "Automatic"
 msgstr "Automatisk"
 
@@ -948,7 +969,7 @@ msgstr "Blå"
 msgid "Basic audio type"
 msgstr "Grunnleggende lydtype"
 
-#: ../bin/src/ui_behavioursettingspage.h:259
+#: ../bin/src/ui_behavioursettingspage.h:289
 msgid "Behavior"
 msgstr "Atferd"
 
@@ -1009,11 +1030,11 @@ msgstr "Box"
 msgid "Browse..."
 msgstr "Bla gjennom..."
 
-#: ../bin/src/ui_playbacksettingspage.h:334
+#: ../bin/src/ui_playbacksettingspage.h:364
 msgid "Buffer duration"
 msgstr "Bufferlengde"
 
-#: engines/gstengine.cpp:904
+#: engines/gstengine.cpp:907
 msgid "Buffering"
 msgstr "Mellomlagring"
 
@@ -1088,7 +1109,11 @@ msgstr "Endre stokke-modus"
 msgid "Change the language"
 msgstr "Endre språket"
 
-#: ../bin/src/ui_playbacksettingspage.h:338
+#: ../bin/src/ui_playbacksettingspage.h:382
+msgid "Changes will take place when the next song starts playing"
+msgstr ""
+
+#: ../bin/src/ui_playbacksettingspage.h:369
 msgid ""
 "Changing mono playback preference will be effective for the next playing "
 "songs"
@@ -1114,7 +1139,7 @@ msgstr "Velg Vk.com-hurtiglagerplassering"
 msgid "Choose a name for your smart playlist"
 msgstr "Sett et navn på den smarte spillelisten"
 
-#: engines/gstengine.cpp:925
+#: engines/gstengine.cpp:928
 msgid "Choose automatically"
 msgstr "Velg automatisk"
 
@@ -1506,11 +1531,11 @@ msgstr "Omslagsgrafikk satt fra %1"
 msgid "Covers from %1"
 msgstr "Omslag fra %1"
 
-#: ../bin/src/ui_playbacksettingspage.h:315
+#: ../bin/src/ui_playbacksettingspage.h:345
 msgid "Cross-fade when changing tracks automatically"
 msgstr "Mikse overgang når spor skiftes automatisk"
 
-#: ../bin/src/ui_playbacksettingspage.h:314
+#: ../bin/src/ui_playbacksettingspage.h:344
 msgid "Cross-fade when changing tracks manually"
 msgstr "Mikse overgang når du skifter spor selv"
 
@@ -1649,7 +1674,7 @@ msgstr "Demp volumet"
 msgid "Default background image"
 msgstr "Standard bakgrunnsbilde"
 
-#: engines/gstengine.cpp:950
+#: engines/gstengine.cpp:953
 #, qt-format
 msgid "Default device on %1"
 msgstr "Standerd enhet på %1"
@@ -1867,7 +1892,7 @@ msgstr "Donér"
 msgid "Double click to open"
 msgstr "Dobbelklikk for å åpne"
 
-#: ../bin/src/ui_behavioursettingspage.h:292
+#: ../bin/src/ui_behavioursettingspage.h:322
 msgid "Double clicking a song will..."
 msgstr "Når jeg dobbelklikker en sang, ..."
 
@@ -2026,7 +2051,7 @@ msgstr "Slå på equalizer"
 msgid "Enable shortcuts only when Clementine is focused"
 msgstr "Bruk hurtigtaster bare når Clementine har fokus"
 
-#: ../bin/src/ui_behavioursettingspage.h:278
+#: ../bin/src/ui_behavioursettingspage.h:308
 msgid "Enable song metadata inline edition with click"
 msgstr "Slå på direkteredigering med ett klikk"
 
@@ -2191,7 +2216,7 @@ msgstr "Hver 6. time"
 msgid "Every hour"
 msgstr "Hver time"
 
-#: ../bin/src/ui_playbacksettingspage.h:316
+#: ../bin/src/ui_playbacksettingspage.h:346
 msgid "Except between tracks on the same album or in the same CUE sheet"
 msgstr "Unntatt mellom spor fra samme album eller CUE-fil"
 
@@ -2263,20 +2288,20 @@ msgstr "F8"
 msgid "FLAC"
 msgstr "FLAC"
 
-#: ../bin/src/ui_playbacksettingspage.h:319
+#: ../bin/src/ui_playbacksettingspage.h:349
 msgid "Fade out on pause / fade in on resume"
 msgstr "Fade ut/inn ved pause/start"
 
-#: ../bin/src/ui_playbacksettingspage.h:313
+#: ../bin/src/ui_playbacksettingspage.h:343
 msgid "Fade out when stopping a track"
 msgstr "Ton ut når sporet stoppes"
 
-#: ../bin/src/ui_playbacksettingspage.h:312
+#: ../bin/src/ui_playbacksettingspage.h:342
 msgid "Fading"
 msgstr "Ton inn/ut"
 
-#: ../bin/src/ui_playbacksettingspage.h:317
-#: ../bin/src/ui_playbacksettingspage.h:320
+#: ../bin/src/ui_playbacksettingspage.h:347
+#: ../bin/src/ui_playbacksettingspage.h:350
 msgid "Fading duration"
 msgstr "Toning-varighet"
 
@@ -2546,7 +2571,7 @@ msgstr "Google Disk"
 msgid "Got %1 covers out of %2 (%3 failed)"
 msgstr "Hentet %1 av %2 albumbilder (%3 feilet)"
 
-#: ../bin/src/ui_behavioursettingspage.h:274
+#: ../bin/src/ui_behavioursettingspage.h:304
 msgid "Grey out non existent songs in my playlists"
 msgstr "Merk ikke-eksisterende sanger med grått i mine spillelister"
 
@@ -2659,7 +2684,7 @@ msgstr "Ikoner øverst"
 msgid "Identifying song"
 msgstr "Identifiserer sangen"
 
-#: ../bin/src/ui_behavioursettingspage.h:276
+#: ../bin/src/ui_behavioursettingspage.h:306
 msgid ""
 "If activated, clicking a selected song in the playlist view will let you "
 "edit the tag value directly"
@@ -2841,7 +2866,7 @@ msgstr "Ukas favoritter på Jamendo"
 msgid "Jamendo database"
 msgstr "Jamendo-database"
 
-#: ../bin/src/ui_behavioursettingspage.h:289
+#: ../bin/src/ui_behavioursettingspage.h:319
 msgid "Jump to previous song right away"
 msgstr "Gå til forrige sang nå"
 
@@ -2861,7 +2886,7 @@ msgstr "Hold nede knappen i %1 sekund(er)..."
 msgid "Keep buttons for %1 seconds..."
 msgstr "Hold nede knappen i %1 sekund(er)..."
 
-#: ../bin/src/ui_behavioursettingspage.h:261
+#: ../bin/src/ui_behavioursettingspage.h:291
 msgid "Keep running in the background when the window is closed"
 msgstr "Fortsett i bakgrunnen selv om du lukker vinduet"
 
@@ -2878,7 +2903,7 @@ msgstr "Småpus"
 msgid "Kuduro"
 msgstr "Kuduro"
 
-#: ../bin/src/ui_behavioursettingspage.h:263
+#: ../bin/src/ui_behavioursettingspage.h:293
 msgid "Language"
 msgstr "Språk"
 
@@ -3231,7 +3256,7 @@ msgstr "Type medlemskap"
 msgid "Minimum bitrate"
 msgstr "Minimal bitrate"
 
-#: ../bin/src/ui_playbacksettingspage.h:336
+#: ../bin/src/ui_playbacksettingspage.h:366
 msgid "Minimum buffer fill"
 msgstr "Minimum bufferfyll"
 
@@ -3247,7 +3272,7 @@ msgstr "Modell"
 msgid "Monitor the library for changes"
 msgstr "Følg med på endringer i biblioteket"
 
-#: ../bin/src/ui_playbacksettingspage.h:340
+#: ../bin/src/ui_playbacksettingspage.h:371
 msgid "Mono playback"
 msgstr "Spill av i mono"
 
@@ -3358,8 +3383,8 @@ msgstr "Aldri"
 msgid "Never played"
 msgstr "Aldri spilt"
 
-#: ../bin/src/ui_behavioursettingspage.h:282
-#: ../bin/src/ui_behavioursettingspage.h:302
+#: ../bin/src/ui_behavioursettingspage.h:312
+#: ../bin/src/ui_behavioursettingspage.h:332
 msgid "Never start playing"
 msgstr "Begynn aldri avspilling"
 
@@ -3599,7 +3624,7 @@ msgstr "Åpne i Google Disk"
 msgid "Open in new playlist"
 msgstr "Åpne i ny spilleliste"
 
-#: ../bin/src/ui_behavioursettingspage.h:297
+#: ../bin/src/ui_behavioursettingspage.h:327
 msgctxt "Refers to behavior settings in Clementine settings page."
 msgid "Open in new playlist"
 msgstr "Åpne i ny spilleliste"
@@ -3674,7 +3699,7 @@ msgstr "Andre innstillinger"
 msgid "Output"
 msgstr "Ut"
 
-#: ../bin/src/ui_playbacksettingspage.h:333
+#: ../bin/src/ui_playbacksettingspage.h:363
 msgid "Output device"
 msgstr "Ut-enhet"
 
@@ -3757,8 +3782,8 @@ msgstr "Antall ganger spilt av"
 msgid "Play if stopped, pause if playing"
 msgstr "Hvis stoppet: spill av. Hvis spiller: pause"
 
-#: ../bin/src/ui_behavioursettingspage.h:283
-#: ../bin/src/ui_behavioursettingspage.h:303
+#: ../bin/src/ui_behavioursettingspage.h:313
+#: ../bin/src/ui_behavioursettingspage.h:333
 msgid "Play if there is nothing already playing"
 msgstr "Spill hvis det ikke er noe annet som spilles av for øyeblikket"
 
@@ -3770,7 +3795,7 @@ msgstr "Spill av <n>ende spor i spillelista"
 msgid "Play/Pause"
 msgstr "Spill av/Pause"
 
-#: ../bin/src/ui_playbacksettingspage.h:310
+#: ../bin/src/ui_playbacksettingspage.h:340
 msgid "Playback"
 msgstr "Avspilling"
 
@@ -3827,7 +3852,7 @@ msgstr "Hvor lenge skal informasjonsvinduet vises"
 msgid "Port"
 msgstr "Portnummer"
 
-#: ui/equalizer.cpp:44 ../bin/src/ui_playbacksettingspage.h:330
+#: ui/equalizer.cpp:44 ../bin/src/ui_playbacksettingspage.h:360
 msgid "Pre-amp"
 msgstr "Lydforsterkning"
 
@@ -3883,7 +3908,7 @@ msgstr "Trykk en tast"
 msgid "Press a key combination to use for %1..."
 msgstr "Trykk en tastekombinasjon å bruke til %1..."
 
-#: ../bin/src/ui_behavioursettingspage.h:286
+#: ../bin/src/ui_behavioursettingspage.h:316
 msgid "Pressing \"Previous\" in player will..."
 msgstr "Når du trykker \"Forrige\" i spilleren, …"
 
@@ -3966,7 +3991,7 @@ msgstr "Legg valgte spor i kø"
 msgid "Queue track"
 msgstr "Legg spor i kø"
 
-#: ../bin/src/ui_playbacksettingspage.h:327
+#: ../bin/src/ui_playbacksettingspage.h:357
 msgid "Radio (equal loudness for all tracks)"
 msgstr "Radio (lik loudness for alle spor)"
 
@@ -4043,7 +4068,7 @@ msgid "Reggae"
 msgstr "Reggae"
 
 #: playlist/playlistsaveoptionsdialog.cpp:33
-#: ../bin/src/ui_behavioursettingspage.h:309
+#: ../bin/src/ui_behavioursettingspage.h:343
 msgid "Relative"
 msgstr "Relativ"
 
@@ -4051,7 +4076,7 @@ msgstr "Relativ"
 msgid "Remember Wii remote swing"
 msgstr "Husk Wii-fjernkontroll-bevegelse"
 
-#: ../bin/src/ui_behavioursettingspage.h:272
+#: ../bin/src/ui_behavioursettingspage.h:302
 msgid "Remember from last time"
 msgstr "Husk fra forrige gang"
 
@@ -4134,7 +4159,7 @@ msgstr "Repetér spor"
 msgid "Replace current playlist"
 msgstr "Erstatt gjeldende spilleliste"
 
-#: ../bin/src/ui_behavioursettingspage.h:296
+#: ../bin/src/ui_behavioursettingspage.h:326
 msgid "Replace the playlist"
 msgstr "Erstatt spillelista"
 
@@ -4142,11 +4167,11 @@ msgstr "Erstatt spillelista"
 msgid "Replaces spaces with underscores"
 msgstr "Erstatt mellomrom med understrek"
 
-#: ../bin/src/ui_playbacksettingspage.h:322
+#: ../bin/src/ui_playbacksettingspage.h:352
 msgid "Replay Gain"
 msgstr "Normalisering"
 
-#: ../bin/src/ui_playbacksettingspage.h:324
+#: ../bin/src/ui_playbacksettingspage.h:354
 msgid "Replay Gain mode"
 msgstr "Replay Gain-modus"
 
@@ -4166,7 +4191,7 @@ msgstr "Resett"
 msgid "Reset play counts"
 msgstr "Resett avspillingsteller"
 
-#: ../bin/src/ui_behavioursettingspage.h:290
+#: ../bin/src/ui_behavioursettingspage.h:320
 msgid "Restart song, then jump to previous if pressed again"
 msgstr "Start om sangen, gå så til forrige hvis du trykker én gang til"
 
@@ -4179,7 +4204,7 @@ msgstr "Start sporet igjen, eller spill forrige spor hvis du er innen de første
 msgid "Restrict to ASCII characters"
 msgstr "Begrens til ASCII-tegn"
 
-#: ../bin/src/ui_behavioursettingspage.h:273
+#: ../bin/src/ui_behavioursettingspage.h:303
 msgid "Resume playback on start"
 msgstr "Gjenoppta avspilling etter oppstart"
 
@@ -4228,6 +4253,10 @@ msgstr "Trygg fjerning av enhet"
 #: ../bin/src/ui_organisedialog.h:248
 msgid "Safely remove the device after copying"
 msgstr "Kjør trygg fjerning av enhet etter kopiering"
+
+#: ../bin/src/ui_playbacksettingspage.h:372
+msgid "Sample Rate"
+msgstr ""
 
 #: playlist/playlist.cpp:1357 ../bin/src/ui_edittagdialog.h:724
 msgid "Sample rate"
@@ -4396,6 +4425,10 @@ msgstr "Gå frem-/bakover en viss tidsperiode i sporet"
 msgid "Seek the currently playing track to an absolute position"
 msgstr "Gå til et bestemt tidspunkt i sporet"
 
+#: ../bin/src/ui_behavioursettingspage.h:336
+msgid "Seeking using a keyboard shortcut"
+msgstr ""
+
 #: visualisations/visualisationselector.cpp:37 ../bin/src/ui_ripcddialog.h:310
 msgid "Select All"
 msgstr "Velg alle"
@@ -4492,7 +4525,7 @@ msgstr "Vis"
 msgid "Show OSD"
 msgstr "Vis display"
 
-#: ../bin/src/ui_playbacksettingspage.h:311
+#: ../bin/src/ui_playbacksettingspage.h:341
 msgid "Show a glowing animation on the current track"
 msgstr "Vis aura rundt gjeldende spor"
 
@@ -4593,7 +4626,7 @@ msgstr "Vis «elsker»-knappen"
 msgid "Show the scrobble button in the main window"
 msgstr "Vis scrobble-knappen i hovedvinduet"
 
-#: ../bin/src/ui_behavioursettingspage.h:260
+#: ../bin/src/ui_behavioursettingspage.h:290
 msgid "Show tray icon"
 msgstr "Vis systemkurvikon"
 
@@ -5097,6 +5130,10 @@ msgstr "Denne tjenesten er kun for betalende kunder"
 msgid "This type of device is not supported: %1"
 msgstr "Denne enhetstypen (%1) støttes ikke."
 
+#: ../bin/src/ui_behavioursettingspage.h:337
+msgid "Time step"
+msgstr ""
+
 #: playlist/playlist.cpp:1315 ui/organisedialog.cpp:60
 #: ui/qtsystemtrayicon.cpp:232 ../bin/src/ui_about.h:142
 #: ../bin/src/ui_edittagdialog.h:734 ../bin/src/ui_trackselectiondialog.h:211
@@ -5309,7 +5346,7 @@ msgstr "Bruk hurtigtaster fra Gnome"
 msgid "Use Psychedelic Colors"
 msgstr ""
 
-#: ../bin/src/ui_playbacksettingspage.h:323
+#: ../bin/src/ui_playbacksettingspage.h:353
 msgid "Use Replay Gain metadata if it is available"
 msgstr "Bruk normaliserings-metadata hvis tilgjengelig"
 
@@ -5353,7 +5390,7 @@ msgstr "Vis meldinger om Wii-fjernkontrollen"
 msgid "Use temporal noise shaping"
 msgstr "Bruk \"temporal noise shaping\""
 
-#: ../bin/src/ui_behavioursettingspage.h:266
+#: ../bin/src/ui_behavioursettingspage.h:296
 msgid "Use the system default"
 msgstr "Bruk systemstandard"
 
@@ -5385,7 +5422,7 @@ msgstr "Brukergrensesnit"
 msgid "Username"
 msgstr "Brukernavn"
 
-#: ../bin/src/ui_behavioursettingspage.h:279
+#: ../bin/src/ui_behavioursettingspage.h:309
 msgid "Using the menu to add a song will..."
 msgstr "Hvis du bruker menyen for å legge til en sang..."
 
@@ -5454,7 +5491,7 @@ msgstr "WMA"
 msgid "Wall"
 msgstr "Vegg"
 
-#: playlist/playlisttabbar.cpp:192 ../bin/src/ui_behavioursettingspage.h:262
+#: playlist/playlisttabbar.cpp:192 ../bin/src/ui_behavioursettingspage.h:292
 msgid "Warn me when closing a playlist tab"
 msgstr "Advarsel når jeg lukker en spilleliste-flik"
 
@@ -5470,7 +5507,7 @@ msgstr "Webside"
 msgid "Weeks"
 msgstr "Uker"
 
-#: ../bin/src/ui_behavioursettingspage.h:269
+#: ../bin/src/ui_behavioursettingspage.h:299
 msgid "When Clementine starts"
 msgstr "Når Clementine starter"
 
@@ -5480,7 +5517,7 @@ msgid ""
 "If there are no matches then it will use the largest image in the directory."
 msgstr "Clementine søker først etter albumbilder som inneholder et av disse ordene.\nHvis ingen ord passer, blir det største bildet i katalogen brukt."
 
-#: ../bin/src/ui_behavioursettingspage.h:306
+#: ../bin/src/ui_behavioursettingspage.h:340
 msgid "When saving a playlist, file paths should be"
 msgstr "Når du lagrer spillelisten, skal filplasseringen"
 
@@ -5564,7 +5601,7 @@ msgstr "Vil du se gjennom hele biblioteket på ny nå?"
 msgid "Write all songs statistics into songs' files"
 msgstr "Skriv all statistikk til sangfilene"
 
-#: ../bin/src/ui_behavioursettingspage.h:311
+#: ../bin/src/ui_behavioursettingspage.h:345
 msgid "Write metadata"
 msgstr "Skriv metadata"
 
@@ -5684,7 +5721,7 @@ msgid ""
 "shortcuts in Clementine."
 msgstr "Du må åpne Systemvalg og gi Clementine tilgang til \"<span style=\"font-style:italic\">styre datamaskinen din</span>\" for å bruke globale snarveier i Clementine."
 
-#: ../bin/src/ui_behavioursettingspage.h:268
+#: ../bin/src/ui_behavioursettingspage.h:298
 msgid "You will need to restart Clementine if you change the language."
 msgstr "Du må starte Clementine på nytt for å bytte språk."
 

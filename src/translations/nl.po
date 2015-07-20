@@ -16,8 +16,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2015-07-02 13:48+0000\n"
-"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
+"PO-Revision-Date: 2015-07-15 15:05+0000\n"
+"Last-Translator: Senno Kaasjager <senno.kaasjager@gmail.com>\n"
 "Language-Team: Dutch (http://www.transifex.com/p/clementine/language/nl/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -49,15 +49,19 @@ msgstr " dagen"
 msgid " kbps"
 msgstr " kbps"
 
-#: ../bin/src/ui_playbacksettingspage.h:318
-#: ../bin/src/ui_playbacksettingspage.h:321
-#: ../bin/src/ui_playbacksettingspage.h:335
+#: ../bin/src/ui_playbacksettingspage.h:348
+#: ../bin/src/ui_playbacksettingspage.h:351
+#: ../bin/src/ui_playbacksettingspage.h:365
 msgid " ms"
 msgstr " msec"
 
 #: ../bin/src/ui_songinfosettingspage.h:157
 msgid " pt"
 msgstr " pt"
+
+#: ../bin/src/ui_behavioursettingspage.h:338
+msgid " s"
+msgstr " s"
 
 #: ../bin/src/ui_notificationssettingspage.h:445
 #: ../bin/src/ui_visualisationselector.h:116
@@ -277,13 +281,29 @@ msgstr "1 nummer"
 msgid "128k MP3"
 msgstr "128k MP3"
 
+#: ../bin/src/ui_playbacksettingspage.h:379
+msgid "192,000Hz"
+msgstr "192.000Hz"
+
 #: ../bin/src/ui_appearancesettingspage.h:291
 msgid "40%"
 msgstr "40%"
 
+#: ../bin/src/ui_playbacksettingspage.h:376
+msgid "44,100Hz"
+msgstr "44.100Hz"
+
+#: ../bin/src/ui_playbacksettingspage.h:377
+msgid "48,000Hz"
+msgstr "48.000Hz"
+
 #: library/library.cpp:64
 msgid "50 random tracks"
 msgstr "50 willekeurige nummers"
+
+#: ../bin/src/ui_playbacksettingspage.h:378
+msgid "96,000Hz"
+msgstr "96.000Hz"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:165
 msgid "<a href=\"http://www.di.fm/premium/\">Upgrade to Premium now</a>"
@@ -391,7 +411,7 @@ msgid "About Qt..."
 msgstr "Over Qt…"
 
 #: playlist/playlistsaveoptionsdialog.cpp:34
-#: ../bin/src/ui_behavioursettingspage.h:308
+#: ../bin/src/ui_behavioursettingspage.h:342
 msgid "Absolute"
 msgstr "Absoluut"
 
@@ -600,7 +620,7 @@ msgstr "Toevoegen aan bladwijzers"
 msgid "Add to playlist"
 msgstr "Aan afspeellijst toevoegen"
 
-#: ../bin/src/ui_behavioursettingspage.h:298
+#: ../bin/src/ui_behavioursettingspage.h:328
 msgid "Add to the queue"
 msgstr "Aan de wachtrij toevoegen"
 
@@ -658,7 +678,7 @@ msgstr "Na het kopiëren…"
 msgid "Album"
 msgstr "Album"
 
-#: ../bin/src/ui_playbacksettingspage.h:328
+#: ../bin/src/ui_playbacksettingspage.h:358
 msgid "Album (ideal loudness for all tracks)"
 msgstr "Album (ideaal volume voor alle nummers)"
 
@@ -742,16 +762,16 @@ msgstr "Sta mid/side-encoding toe"
 msgid "Alongside the originals"
 msgstr "Bij het origineel"
 
-#: ../bin/src/ui_behavioursettingspage.h:271
+#: ../bin/src/ui_behavioursettingspage.h:301
 msgid "Always hide the main window"
 msgstr "Hoofdscherm altijd verbergen"
 
-#: ../bin/src/ui_behavioursettingspage.h:270
+#: ../bin/src/ui_behavioursettingspage.h:300
 msgid "Always show the main window"
 msgstr "Hoofdscherm altijd weergeven"
 
-#: ../bin/src/ui_behavioursettingspage.h:284
-#: ../bin/src/ui_behavioursettingspage.h:304
+#: ../bin/src/ui_behavioursettingspage.h:314
+#: ../bin/src/ui_behavioursettingspage.h:334
 msgid "Always start playing"
 msgstr "Altijd afspelen"
 
@@ -802,11 +822,11 @@ msgstr "Bestanden/URLs aan afspeellijst toevoegen"
 msgid "Append to current playlist"
 msgstr "Aan huidige afspeellijst toevoegen"
 
-#: ../bin/src/ui_behavioursettingspage.h:295
+#: ../bin/src/ui_behavioursettingspage.h:325
 msgid "Append to the playlist"
 msgstr "Aan de afspeellijst toevoegen"
 
-#: ../bin/src/ui_playbacksettingspage.h:331
+#: ../bin/src/ui_playbacksettingspage.h:361
 msgid "Apply compression to prevent clipping"
 msgstr "Compressie toepassen om vervorming te voorkomen"
 
@@ -846,7 +866,7 @@ msgstr "Artiestlabels"
 msgid "Artist's initial"
 msgstr "Artiest's initiaal"
 
-#: ../bin/src/ui_behavioursettingspage.h:310
+#: ../bin/src/ui_behavioursettingspage.h:344
 msgid "Ask when saving"
 msgstr "Vraag bij opslaan"
 
@@ -856,7 +876,7 @@ msgstr "Vraag bij opslaan"
 msgid "Audio format"
 msgstr "Audioformaat"
 
-#: ../bin/src/ui_playbacksettingspage.h:332
+#: ../bin/src/ui_playbacksettingspage.h:362
 msgid "Audio output"
 msgstr "Audiouitvoer"
 
@@ -876,11 +896,12 @@ msgid "Authors"
 msgstr "Auteurs"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:227
+#: ../bin/src/ui_playbacksettingspage.h:375
 msgid "Auto"
 msgstr "Automatisch"
 
 #: playlist/playlistsaveoptionsdialog.cpp:32
-#: ../bin/src/ui_behavioursettingspage.h:307
+#: ../bin/src/ui_behavioursettingspage.h:341
 msgid "Automatic"
 msgstr "Automatisch"
 
@@ -939,7 +960,7 @@ msgstr "Balans"
 
 #: core/globalshortcuts.cpp:80
 msgid "Ban (Last.fm scrobbling)"
-msgstr ""
+msgstr "Ban (Last.fm scrobblen)"
 
 #: analyzers/baranalyzer.cpp:34
 msgid "Bar analyzer"
@@ -953,7 +974,7 @@ msgstr "Basic Blue"
 msgid "Basic audio type"
 msgstr "Standaard audio formaat"
 
-#: ../bin/src/ui_behavioursettingspage.h:259
+#: ../bin/src/ui_behavioursettingspage.h:289
 msgid "Behavior"
 msgstr "Gedrag"
 
@@ -1014,11 +1035,11 @@ msgstr "Box"
 msgid "Browse..."
 msgstr "Bladeren…"
 
-#: ../bin/src/ui_playbacksettingspage.h:334
+#: ../bin/src/ui_playbacksettingspage.h:364
 msgid "Buffer duration"
 msgstr "Buffer duur"
 
-#: engines/gstengine.cpp:904
+#: engines/gstengine.cpp:907
 msgid "Buffering"
 msgstr "Bufferen"
 
@@ -1093,7 +1114,11 @@ msgstr "Shuffle-modus wijzigen"
 msgid "Change the language"
 msgstr "De taal wijzigen"
 
-#: ../bin/src/ui_playbacksettingspage.h:338
+#: ../bin/src/ui_playbacksettingspage.h:382
+msgid "Changes will take place when the next song starts playing"
+msgstr "Veranderingen worden doorgevoerd als het volgende nummer begint te spelen"
+
+#: ../bin/src/ui_playbacksettingspage.h:369
 msgid ""
 "Changing mono playback preference will be effective for the next playing "
 "songs"
@@ -1119,7 +1144,7 @@ msgstr "Kies Vk.com cachemap"
 msgid "Choose a name for your smart playlist"
 msgstr "Kies een naam voor uw slimme-afspeellijst"
 
-#: engines/gstengine.cpp:925
+#: engines/gstengine.cpp:928
 msgid "Choose automatically"
 msgstr "Automatisch kiezen"
 
@@ -1511,11 +1536,11 @@ msgstr "Albumhoes ingesteld van %1"
 msgid "Covers from %1"
 msgstr "Albumhoes van %1"
 
-#: ../bin/src/ui_playbacksettingspage.h:315
+#: ../bin/src/ui_playbacksettingspage.h:345
 msgid "Cross-fade when changing tracks automatically"
 msgstr "Cross-fade wanneer automatisch van nummer veranderd wordt"
 
-#: ../bin/src/ui_playbacksettingspage.h:314
+#: ../bin/src/ui_playbacksettingspage.h:344
 msgid "Cross-fade when changing tracks manually"
 msgstr "Cross-fade wanneer handmatig van nummer veranderd wordt"
 
@@ -1654,7 +1679,7 @@ msgstr "Volume verlagen"
 msgid "Default background image"
 msgstr "Standaard achtergrondafbeelding"
 
-#: engines/gstengine.cpp:950
+#: engines/gstengine.cpp:953
 #, qt-format
 msgid "Default device on %1"
 msgstr "Standaard apparaat op %1"
@@ -1872,7 +1897,7 @@ msgstr "Doneer"
 msgid "Double click to open"
 msgstr "Dubbeklik om te openen"
 
-#: ../bin/src/ui_behavioursettingspage.h:292
+#: ../bin/src/ui_behavioursettingspage.h:322
 msgid "Double clicking a song will..."
 msgstr "Dubbelklikken op een nummer zal…"
 
@@ -2031,7 +2056,7 @@ msgstr "Equalizer inschakelen"
 msgid "Enable shortcuts only when Clementine is focused"
 msgstr "Sneltoetsen alleen inschakelen wanneer Clementine de focus heeft"
 
-#: ../bin/src/ui_behavioursettingspage.h:278
+#: ../bin/src/ui_behavioursettingspage.h:308
 msgid "Enable song metadata inline edition with click"
 msgstr "Schakel direct bewerken van metadata in bij klik"
 
@@ -2196,7 +2221,7 @@ msgstr "Elke 6 uur"
 msgid "Every hour"
 msgstr "Elk uur"
 
-#: ../bin/src/ui_playbacksettingspage.h:316
+#: ../bin/src/ui_playbacksettingspage.h:346
 msgid "Except between tracks on the same album or in the same CUE sheet"
 msgstr "Behalve tussen nummers van hetzelfde album of in dezelfde CUE-sheet"
 
@@ -2268,20 +2293,20 @@ msgstr "F8"
 msgid "FLAC"
 msgstr "FLAC"
 
-#: ../bin/src/ui_playbacksettingspage.h:319
+#: ../bin/src/ui_playbacksettingspage.h:349
 msgid "Fade out on pause / fade in on resume"
 msgstr "Uitvagen bij pauze / Invagen bij hervatten"
 
-#: ../bin/src/ui_playbacksettingspage.h:313
+#: ../bin/src/ui_playbacksettingspage.h:343
 msgid "Fade out when stopping a track"
 msgstr "Uitvagen bij stoppen van een nummer"
 
-#: ../bin/src/ui_playbacksettingspage.h:312
+#: ../bin/src/ui_playbacksettingspage.h:342
 msgid "Fading"
 msgstr "Uitvagen"
 
-#: ../bin/src/ui_playbacksettingspage.h:317
-#: ../bin/src/ui_playbacksettingspage.h:320
+#: ../bin/src/ui_playbacksettingspage.h:347
+#: ../bin/src/ui_playbacksettingspage.h:350
 msgid "Fading duration"
 msgstr "Uitvaagduur"
 
@@ -2551,7 +2576,7 @@ msgstr "Google Drive"
 msgid "Got %1 covers out of %2 (%3 failed)"
 msgstr "%1 van de %2 albumhoezen opgehaald (%3 mislukt)"
 
-#: ../bin/src/ui_behavioursettingspage.h:274
+#: ../bin/src/ui_behavioursettingspage.h:304
 msgid "Grey out non existent songs in my playlists"
 msgstr "Niet-bestaande nummer in de afspeellijst vervagen"
 
@@ -2664,7 +2689,7 @@ msgstr "Pictogrammen bovenaan"
 msgid "Identifying song"
 msgstr "Nummer identificeren"
 
-#: ../bin/src/ui_behavioursettingspage.h:276
+#: ../bin/src/ui_behavioursettingspage.h:306
 msgid ""
 "If activated, clicking a selected song in the playlist view will let you "
 "edit the tag value directly"
@@ -2846,7 +2871,7 @@ msgstr "Jamendo, beste nummers van de week"
 msgid "Jamendo database"
 msgstr "Jamendo database"
 
-#: ../bin/src/ui_behavioursettingspage.h:289
+#: ../bin/src/ui_behavioursettingspage.h:319
 msgid "Jump to previous song right away"
 msgstr "Meteen naar vorige nummer springen"
 
@@ -2866,7 +2891,7 @@ msgstr "Hou de toetsen voor %1 seconde ingedrukt…"
 msgid "Keep buttons for %1 seconds..."
 msgstr "Hou de toetsen voor %1 seconden ingedrukt…"
 
-#: ../bin/src/ui_behavioursettingspage.h:261
+#: ../bin/src/ui_behavioursettingspage.h:291
 msgid "Keep running in the background when the window is closed"
 msgstr "In de achtergrond laten draaien als het venter gesloten wordt"
 
@@ -2883,7 +2908,7 @@ msgstr "Poesjes"
 msgid "Kuduro"
 msgstr "Kuduro"
 
-#: ../bin/src/ui_behavioursettingspage.h:263
+#: ../bin/src/ui_behavioursettingspage.h:293
 msgid "Language"
 msgstr "Taal"
 
@@ -3088,7 +3113,7 @@ msgstr "Mooi"
 
 #: core/globalshortcuts.cpp:78
 msgid "Love (Last.fm scrobbling)"
-msgstr ""
+msgstr "Love (Last.fm scrobblen)"
 
 #: analyzers/analyzercontainer.cpp:68
 #: visualisations/visualisationcontainer.cpp:107
@@ -3236,7 +3261,7 @@ msgstr "Type lidmaatschap"
 msgid "Minimum bitrate"
 msgstr "Minimale bitrate"
 
-#: ../bin/src/ui_playbacksettingspage.h:336
+#: ../bin/src/ui_playbacksettingspage.h:366
 msgid "Minimum buffer fill"
 msgstr "Minimale buffervulling"
 
@@ -3252,7 +3277,7 @@ msgstr "Model"
 msgid "Monitor the library for changes"
 msgstr "De bibliotheek op wijzigingen blijven controleren"
 
-#: ../bin/src/ui_playbacksettingspage.h:340
+#: ../bin/src/ui_playbacksettingspage.h:371
 msgid "Mono playback"
 msgstr "Mono afspelen"
 
@@ -3363,8 +3388,8 @@ msgstr "Nooit"
 msgid "Never played"
 msgstr "Nooit afgespeeld"
 
-#: ../bin/src/ui_behavioursettingspage.h:282
-#: ../bin/src/ui_behavioursettingspage.h:302
+#: ../bin/src/ui_behavioursettingspage.h:312
+#: ../bin/src/ui_behavioursettingspage.h:332
 msgid "Never start playing"
 msgstr "Nooit afspelen"
 
@@ -3604,7 +3629,7 @@ msgstr "In Google Drive openen"
 msgid "Open in new playlist"
 msgstr "In een nieuwe afspeellijst openen"
 
-#: ../bin/src/ui_behavioursettingspage.h:297
+#: ../bin/src/ui_behavioursettingspage.h:327
 msgctxt "Refers to behavior settings in Clementine settings page."
 msgid "Open in new playlist"
 msgstr "Openen in een nieuwe afspeellijst"
@@ -3660,16 +3685,16 @@ msgstr "Originele labels"
 #: ../bin/src/ui_groupbydialog.h:136 ../bin/src/ui_groupbydialog.h:155
 #: ../bin/src/ui_groupbydialog.h:174
 msgid "Original year"
-msgstr ""
+msgstr "Oorspronkelijk jaar"
 
 #: ../bin/src/ui_groupbydialog.h:138 ../bin/src/ui_groupbydialog.h:157
 #: ../bin/src/ui_groupbydialog.h:176
 msgid "Original year - Album"
-msgstr ""
+msgstr "Oorspronkelijk jaar - Album"
 
 #: library/library.cpp:118
 msgid "Original year tag support"
-msgstr ""
+msgstr "Tag ondersteuning oorspronkelijk jaar"
 
 #: core/commandlineoptions.cpp:170
 msgid "Other options"
@@ -3679,7 +3704,7 @@ msgstr "Overige opties"
 msgid "Output"
 msgstr "Output"
 
-#: ../bin/src/ui_playbacksettingspage.h:333
+#: ../bin/src/ui_playbacksettingspage.h:363
 msgid "Output device"
 msgstr "Uitvoer apparaat"
 
@@ -3762,8 +3787,8 @@ msgstr "Aantal maal afgespeeld"
 msgid "Play if stopped, pause if playing"
 msgstr "Afspelen indien gestopt, pauzeren indien afgespeeld"
 
-#: ../bin/src/ui_behavioursettingspage.h:283
-#: ../bin/src/ui_behavioursettingspage.h:303
+#: ../bin/src/ui_behavioursettingspage.h:313
+#: ../bin/src/ui_behavioursettingspage.h:333
 msgid "Play if there is nothing already playing"
 msgstr "Afspelen wanneer niets aan het afspelen is"
 
@@ -3775,7 +3800,7 @@ msgstr "De <n>de/ste track in de afspeellijst afspelen"
 msgid "Play/Pause"
 msgstr "Afspelen/pauzeren"
 
-#: ../bin/src/ui_playbacksettingspage.h:310
+#: ../bin/src/ui_playbacksettingspage.h:340
 msgid "Playback"
 msgstr "Weergave"
 
@@ -3832,7 +3857,7 @@ msgstr "Pop-up duur"
 msgid "Port"
 msgstr "Poort"
 
-#: ui/equalizer.cpp:44 ../bin/src/ui_playbacksettingspage.h:330
+#: ui/equalizer.cpp:44 ../bin/src/ui_playbacksettingspage.h:360
 msgid "Pre-amp"
 msgstr "Voorversterking"
 
@@ -3888,7 +3913,7 @@ msgstr "Druk een toets"
 msgid "Press a key combination to use for %1..."
 msgstr "Druk een toetsencombinatie om voor %1 te gebruiken..."
 
-#: ../bin/src/ui_behavioursettingspage.h:286
+#: ../bin/src/ui_behavioursettingspage.h:316
 msgid "Pressing \"Previous\" in player will..."
 msgstr "Op \"Vorige\" drukken in de speler zal..."
 
@@ -3971,7 +3996,7 @@ msgstr "Geselecteerde nummers in de wachtrij plaatsen"
 msgid "Queue track"
 msgstr "Nummer in de wachtrij plaatsen"
 
-#: ../bin/src/ui_playbacksettingspage.h:327
+#: ../bin/src/ui_playbacksettingspage.h:357
 msgid "Radio (equal loudness for all tracks)"
 msgstr "Radio (gelijk volume voor alle nummers)"
 
@@ -4048,7 +4073,7 @@ msgid "Reggae"
 msgstr "Reggae"
 
 #: playlist/playlistsaveoptionsdialog.cpp:33
-#: ../bin/src/ui_behavioursettingspage.h:309
+#: ../bin/src/ui_behavioursettingspage.h:343
 msgid "Relative"
 msgstr "Relatief"
 
@@ -4056,7 +4081,7 @@ msgstr "Relatief"
 msgid "Remember Wii remote swing"
 msgstr "Onthou Wii remote zwaai"
 
-#: ../bin/src/ui_behavioursettingspage.h:272
+#: ../bin/src/ui_behavioursettingspage.h:302
 msgid "Remember from last time"
 msgstr "Laatste instelling onthouden"
 
@@ -4139,7 +4164,7 @@ msgstr "Nummer herhalen"
 msgid "Replace current playlist"
 msgstr "Huidige afspeellijst vervangen"
 
-#: ../bin/src/ui_behavioursettingspage.h:296
+#: ../bin/src/ui_behavioursettingspage.h:326
 msgid "Replace the playlist"
 msgstr "Afspeellijst vervangen"
 
@@ -4147,11 +4172,11 @@ msgstr "Afspeellijst vervangen"
 msgid "Replaces spaces with underscores"
 msgstr "Vervangt spaties door underscores"
 
-#: ../bin/src/ui_playbacksettingspage.h:322
+#: ../bin/src/ui_playbacksettingspage.h:352
 msgid "Replay Gain"
 msgstr "Replay Gain"
 
-#: ../bin/src/ui_playbacksettingspage.h:324
+#: ../bin/src/ui_playbacksettingspage.h:354
 msgid "Replay Gain mode"
 msgstr "Replay Gain modus"
 
@@ -4171,7 +4196,7 @@ msgstr "Herstel"
 msgid "Reset play counts"
 msgstr "Reset afspeelstatistieken"
 
-#: ../bin/src/ui_behavioursettingspage.h:290
+#: ../bin/src/ui_behavioursettingspage.h:320
 msgid "Restart song, then jump to previous if pressed again"
 msgstr "Nummer herstarten, daarna naar vorige springen bij weer indrukken"
 
@@ -4184,7 +4209,7 @@ msgstr "Herstart het afspelen van track, of speel het vorige nummer af bij 8 sec
 msgid "Restrict to ASCII characters"
 msgstr "Beperken tot ASCII karakters"
 
-#: ../bin/src/ui_behavioursettingspage.h:273
+#: ../bin/src/ui_behavioursettingspage.h:303
 msgid "Resume playback on start"
 msgstr "Afspelen hervatten bij opstarten"
 
@@ -4233,6 +4258,10 @@ msgstr "Apparaat veilig verwijderen"
 #: ../bin/src/ui_organisedialog.h:248
 msgid "Safely remove the device after copying"
 msgstr "Apparaat veilig verwijderen na het kopiëren"
+
+#: ../bin/src/ui_playbacksettingspage.h:372
+msgid "Sample Rate"
+msgstr "Samplerate"
 
 #: playlist/playlist.cpp:1357 ../bin/src/ui_edittagdialog.h:724
 msgid "Sample rate"
@@ -4401,6 +4430,10 @@ msgstr "Spoel momenteel spelende nummer met een relatieve hoeveelheid door"
 msgid "Seek the currently playing track to an absolute position"
 msgstr "Spoel het momenteel spelende nummer naar een absolute positie door"
 
+#: ../bin/src/ui_behavioursettingspage.h:336
+msgid "Seeking using a keyboard shortcut"
+msgstr "Zoeken met behulp van een toetsenbordsnelkoppeling"
+
 #: visualisations/visualisationselector.cpp:37 ../bin/src/ui_ripcddialog.h:310
 msgid "Select All"
 msgstr "Alles selecteren"
@@ -4497,7 +4530,7 @@ msgstr "Weergeven"
 msgid "Show OSD"
 msgstr "Infoschermvenster weergeven"
 
-#: ../bin/src/ui_playbacksettingspage.h:311
+#: ../bin/src/ui_playbacksettingspage.h:341
 msgid "Show a glowing animation on the current track"
 msgstr "Een oplichtende animatie weergeven op het huidige nummer"
 
@@ -4598,7 +4631,7 @@ msgstr "Knop \"love\" weergeven"
 msgid "Show the scrobble button in the main window"
 msgstr "Toon de scrobble knop in het hoofdvenster"
 
-#: ../bin/src/ui_behavioursettingspage.h:260
+#: ../bin/src/ui_behavioursettingspage.h:290
 msgid "Show tray icon"
 msgstr "Systeemvakpictogram weergeven"
 
@@ -5102,6 +5135,10 @@ msgstr "Deze stream is alleen voor betalende abonnees"
 msgid "This type of device is not supported: %1"
 msgstr "Dit type apparaat wordt niet ondersteund: %1"
 
+#: ../bin/src/ui_behavioursettingspage.h:337
+msgid "Time step"
+msgstr "TIjdstap"
+
 #: playlist/playlist.cpp:1315 ui/organisedialog.cpp:60
 #: ui/qtsystemtrayicon.cpp:232 ../bin/src/ui_about.h:142
 #: ../bin/src/ui_edittagdialog.h:734 ../bin/src/ui_trackselectiondialog.h:211
@@ -5312,9 +5349,9 @@ msgstr "Gnome-sneltoetsen gebruiken"
 
 #: analyzers/analyzercontainer.cpp:94
 msgid "Use Psychedelic Colors"
-msgstr ""
+msgstr "Gebruik psychedelische kleuren"
 
-#: ../bin/src/ui_playbacksettingspage.h:323
+#: ../bin/src/ui_playbacksettingspage.h:353
 msgid "Use Replay Gain metadata if it is available"
 msgstr "Replay Gain-metadata gebruiken, als deze beschikbaar is"
 
@@ -5358,7 +5395,7 @@ msgstr "Gebruik notificaties om de status van de Wii Remote weer te geven"
 msgid "Use temporal noise shaping"
 msgstr "Gebruik tijdelijke ruisvervorming"
 
-#: ../bin/src/ui_behavioursettingspage.h:266
+#: ../bin/src/ui_behavioursettingspage.h:296
 msgid "Use the system default"
 msgstr "De systeemstandaard gebruiken"
 
@@ -5390,7 +5427,7 @@ msgstr "Gebruikersinterface"
 msgid "Username"
 msgstr "Gebruikersnaam"
 
-#: ../bin/src/ui_behavioursettingspage.h:279
+#: ../bin/src/ui_behavioursettingspage.h:309
 msgid "Using the menu to add a song will..."
 msgstr "Het menu gebruiken om een nummer toe te voegen zal…"
 
@@ -5459,7 +5496,7 @@ msgstr "WMA"
 msgid "Wall"
 msgstr "Muur"
 
-#: playlist/playlisttabbar.cpp:192 ../bin/src/ui_behavioursettingspage.h:262
+#: playlist/playlisttabbar.cpp:192 ../bin/src/ui_behavioursettingspage.h:292
 msgid "Warn me when closing a playlist tab"
 msgstr "Waarschuw mij wanneer een afspeellijst tab wordt gesloten"
 
@@ -5475,7 +5512,7 @@ msgstr "Website"
 msgid "Weeks"
 msgstr "Weken"
 
-#: ../bin/src/ui_behavioursettingspage.h:269
+#: ../bin/src/ui_behavioursettingspage.h:299
 msgid "When Clementine starts"
 msgstr "Zodra Clementine wordt gestart"
 
@@ -5485,7 +5522,7 @@ msgid ""
 "If there are no matches then it will use the largest image in the directory."
 msgstr "Bij het zoeken naar albumhoezen zoekt Clementine eerst naar bestandsnamen die een van de volgende woorden bevatten.\nAls er geen match is wordt de grootste afbeelding uit de map gebruikt."
 
-#: ../bin/src/ui_behavioursettingspage.h:306
+#: ../bin/src/ui_behavioursettingspage.h:340
 msgid "When saving a playlist, file paths should be"
 msgstr "Wanneer een afspeellijst wordt opgeslagen, zijn de paden"
 
@@ -5569,7 +5606,7 @@ msgstr "Wilt u op dit moment een volledige herscan laten uitvoeren?"
 msgid "Write all songs statistics into songs' files"
 msgstr "Sla alle statistieken op in muziekbestanden"
 
-#: ../bin/src/ui_behavioursettingspage.h:311
+#: ../bin/src/ui_behavioursettingspage.h:345
 msgid "Write metadata"
 msgstr "Sla metadata op"
 
@@ -5689,7 +5726,7 @@ msgid ""
 "shortcuts in Clementine."
 msgstr "U moet Systeemvoorkeuren openen en Clementine toestaan om \"<span style=\"font-style:italic\">uw computer te bedienen</span>\" om globale sneltoetsen te gebruiken in Clementine."
 
-#: ../bin/src/ui_behavioursettingspage.h:268
+#: ../bin/src/ui_behavioursettingspage.h:298
 msgid "You will need to restart Clementine if you change the language."
 msgstr "Clementine moet herstart worden als u de taal veranderd."
 

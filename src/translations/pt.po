@@ -14,7 +14,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2015-07-09 13:01+0000\n"
+"PO-Revision-Date: 2015-07-15 14:52+0000\n"
 "Last-Translator: Sérgio Marques <smarquespt@gmail.com>\n"
 "Language-Team: Portuguese (http://www.transifex.com/p/clementine/language/pt/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -47,15 +47,19 @@ msgstr " dias"
 msgid " kbps"
 msgstr " kbps"
 
-#: ../bin/src/ui_playbacksettingspage.h:318
-#: ../bin/src/ui_playbacksettingspage.h:321
-#: ../bin/src/ui_playbacksettingspage.h:335
+#: ../bin/src/ui_playbacksettingspage.h:348
+#: ../bin/src/ui_playbacksettingspage.h:351
+#: ../bin/src/ui_playbacksettingspage.h:365
 msgid " ms"
 msgstr " ms"
 
 #: ../bin/src/ui_songinfosettingspage.h:157
 msgid " pt"
 msgstr " pt"
+
+#: ../bin/src/ui_behavioursettingspage.h:338
+msgid " s"
+msgstr " s"
 
 #: ../bin/src/ui_notificationssettingspage.h:445
 #: ../bin/src/ui_visualisationselector.h:116
@@ -275,13 +279,29 @@ msgstr "1 faixa"
 msgid "128k MP3"
 msgstr "128k MP3"
 
+#: ../bin/src/ui_playbacksettingspage.h:379
+msgid "192,000Hz"
+msgstr "192 000Hz"
+
 #: ../bin/src/ui_appearancesettingspage.h:291
 msgid "40%"
 msgstr "40%"
 
+#: ../bin/src/ui_playbacksettingspage.h:376
+msgid "44,100Hz"
+msgstr "44 100Hz"
+
+#: ../bin/src/ui_playbacksettingspage.h:377
+msgid "48,000Hz"
+msgstr "48 000Hz"
+
 #: library/library.cpp:64
 msgid "50 random tracks"
 msgstr "50 faixas aleatórias"
+
+#: ../bin/src/ui_playbacksettingspage.h:378
+msgid "96,000Hz"
+msgstr "96 000Hz"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:165
 msgid "<a href=\"http://www.di.fm/premium/\">Upgrade to Premium now</a>"
@@ -389,7 +409,7 @@ msgid "About Qt..."
 msgstr "Sobre o Qt..."
 
 #: playlist/playlistsaveoptionsdialog.cpp:34
-#: ../bin/src/ui_behavioursettingspage.h:308
+#: ../bin/src/ui_behavioursettingspage.h:342
 msgid "Absolute"
 msgstr "Absolutos"
 
@@ -598,7 +618,7 @@ msgstr "Adicionar aos marcadores"
 msgid "Add to playlist"
 msgstr "Adicionar à lista de reprodução"
 
-#: ../bin/src/ui_behavioursettingspage.h:298
+#: ../bin/src/ui_behavioursettingspage.h:328
 msgid "Add to the queue"
 msgstr "Adicionar à fila de reprodução"
 
@@ -656,7 +676,7 @@ msgstr "Depois de copiar..."
 msgid "Album"
 msgstr "Álbum"
 
-#: ../bin/src/ui_playbacksettingspage.h:328
+#: ../bin/src/ui_playbacksettingspage.h:358
 msgid "Album (ideal loudness for all tracks)"
 msgstr "Álbum (volume ideal para todas as faixas)"
 
@@ -740,16 +760,16 @@ msgstr "Permitir codificação mid/side"
 msgid "Alongside the originals"
 msgstr "Juntamente aos originais"
 
-#: ../bin/src/ui_behavioursettingspage.h:271
+#: ../bin/src/ui_behavioursettingspage.h:301
 msgid "Always hide the main window"
 msgstr "Ocultar sempre a janela principal"
 
-#: ../bin/src/ui_behavioursettingspage.h:270
+#: ../bin/src/ui_behavioursettingspage.h:300
 msgid "Always show the main window"
 msgstr "Mostrar sempre a janela principal"
 
-#: ../bin/src/ui_behavioursettingspage.h:284
-#: ../bin/src/ui_behavioursettingspage.h:304
+#: ../bin/src/ui_behavioursettingspage.h:314
+#: ../bin/src/ui_behavioursettingspage.h:334
 msgid "Always start playing"
 msgstr "Iniciar sempre a reprodução"
 
@@ -800,11 +820,11 @@ msgstr "Adicionar ficheiros/URL à lista de reprodução"
 msgid "Append to current playlist"
 msgstr "Juntar à lista de reprodução atual"
 
-#: ../bin/src/ui_behavioursettingspage.h:295
+#: ../bin/src/ui_behavioursettingspage.h:325
 msgid "Append to the playlist"
 msgstr "Juntar à lista de reprodução"
 
-#: ../bin/src/ui_playbacksettingspage.h:331
+#: ../bin/src/ui_playbacksettingspage.h:361
 msgid "Apply compression to prevent clipping"
 msgstr "Aplicar compressão para impedir a distorção"
 
@@ -838,13 +858,13 @@ msgstr "Info do artista"
 
 #: songinfo/echonesttags.cpp:61
 msgid "Artist tags"
-msgstr "\"Tags\" do artista"
+msgstr "Tags do artista"
 
 #: ui/organisedialog.cpp:63
 msgid "Artist's initial"
 msgstr "Iniciais do artista"
 
-#: ../bin/src/ui_behavioursettingspage.h:310
+#: ../bin/src/ui_behavioursettingspage.h:344
 msgid "Ask when saving"
 msgstr "Perguntar ao gravar"
 
@@ -854,7 +874,7 @@ msgstr "Perguntar ao gravar"
 msgid "Audio format"
 msgstr "Formato áudio"
 
-#: ../bin/src/ui_playbacksettingspage.h:332
+#: ../bin/src/ui_playbacksettingspage.h:362
 msgid "Audio output"
 msgstr "Dispositivo áudio"
 
@@ -874,11 +894,12 @@ msgid "Authors"
 msgstr "Autores"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:227
+#: ../bin/src/ui_playbacksettingspage.h:375
 msgid "Auto"
 msgstr "Automático"
 
 #: playlist/playlistsaveoptionsdialog.cpp:32
-#: ../bin/src/ui_behavioursettingspage.h:307
+#: ../bin/src/ui_behavioursettingspage.h:341
 msgid "Automatic"
 msgstr "Automáticos"
 
@@ -951,7 +972,7 @@ msgstr "Azul"
 msgid "Basic audio type"
 msgstr "Serviço básico"
 
-#: ../bin/src/ui_behavioursettingspage.h:259
+#: ../bin/src/ui_behavioursettingspage.h:289
 msgid "Behavior"
 msgstr "Comportamento"
 
@@ -1012,11 +1033,11 @@ msgstr "Box"
 msgid "Browse..."
 msgstr "Procurar..."
 
-#: ../bin/src/ui_playbacksettingspage.h:334
+#: ../bin/src/ui_playbacksettingspage.h:364
 msgid "Buffer duration"
 msgstr "Duração da memória"
 
-#: engines/gstengine.cpp:904
+#: engines/gstengine.cpp:907
 msgid "Buffering"
 msgstr "A processar..."
 
@@ -1091,7 +1112,11 @@ msgstr "Alterar modo de desordenação"
 msgid "Change the language"
 msgstr "Alterar idioma"
 
-#: ../bin/src/ui_playbacksettingspage.h:338
+#: ../bin/src/ui_playbacksettingspage.h:382
+msgid "Changes will take place when the next song starts playing"
+msgstr "As alterações serão aplicadas a partir da próxima faixa"
+
+#: ../bin/src/ui_playbacksettingspage.h:369
 msgid ""
 "Changing mono playback preference will be effective for the next playing "
 "songs"
@@ -1117,7 +1142,7 @@ msgstr "Escolher diretório de cache Vk.com"
 msgid "Choose a name for your smart playlist"
 msgstr "Escolha o nome da lista de reprodução inteligente"
 
-#: engines/gstengine.cpp:925
+#: engines/gstengine.cpp:928
 msgid "Choose automatically"
 msgstr "Escolher automaticamente"
 
@@ -1509,11 +1534,11 @@ msgstr "Capa de álbum em %1"
 msgid "Covers from %1"
 msgstr "Capas de álbum em %1"
 
-#: ../bin/src/ui_playbacksettingspage.h:315
+#: ../bin/src/ui_playbacksettingspage.h:345
 msgid "Cross-fade when changing tracks automatically"
 msgstr "Sobreposição ao mudar automaticamente de faixas"
 
-#: ../bin/src/ui_playbacksettingspage.h:314
+#: ../bin/src/ui_playbacksettingspage.h:344
 msgid "Cross-fade when changing tracks manually"
 msgstr "Sobreposição ao mudar manualmente de faixas"
 
@@ -1652,7 +1677,7 @@ msgstr "Diminuir volume"
 msgid "Default background image"
 msgstr "Imagem de fundo padrão"
 
-#: engines/gstengine.cpp:950
+#: engines/gstengine.cpp:953
 #, qt-format
 msgid "Default device on %1"
 msgstr "Dispositivo pré-definido em %1"
@@ -1870,7 +1895,7 @@ msgstr "Donativos"
 msgid "Double click to open"
 msgstr "Duplo clique para abrir"
 
-#: ../bin/src/ui_behavioursettingspage.h:292
+#: ../bin/src/ui_behavioursettingspage.h:322
 msgid "Double clicking a song will..."
 msgstr "Ao clicar duas vezes numa faixa..."
 
@@ -2011,7 +2036,7 @@ msgstr "Editar..."
 
 #: ../bin/src/ui_seafilesettingspage.h:172
 msgid "Email"
-msgstr "Endereço eletrónico"
+msgstr "E-mail"
 
 #: ../bin/src/ui_wiimotesettingspage.h:183
 msgid "Enable Wii Remote support"
@@ -2029,7 +2054,7 @@ msgstr "Ativar equalizador"
 msgid "Enable shortcuts only when Clementine is focused"
 msgstr "Apenas ativar os atalhos se o Clementine estiver evidenciado"
 
-#: ../bin/src/ui_behavioursettingspage.h:278
+#: ../bin/src/ui_behavioursettingspage.h:308
 msgid "Enable song metadata inline edition with click"
 msgstr "Ativar edição imediata dos detalhes das faixas ao clicar"
 
@@ -2194,7 +2219,7 @@ msgstr "A cada 6 horas"
 msgid "Every hour"
 msgstr "A cada hora"
 
-#: ../bin/src/ui_playbacksettingspage.h:316
+#: ../bin/src/ui_playbacksettingspage.h:346
 msgid "Except between tracks on the same album or in the same CUE sheet"
 msgstr "Exceto entre faixas do mesmo álbum ou ficheiros CUE"
 
@@ -2266,20 +2291,20 @@ msgstr "F8"
 msgid "FLAC"
 msgstr "FLAC"
 
-#: ../bin/src/ui_playbacksettingspage.h:319
+#: ../bin/src/ui_playbacksettingspage.h:349
 msgid "Fade out on pause / fade in on resume"
 msgstr "Redução/aumento gradual de volume ao pausar/retomar"
 
-#: ../bin/src/ui_playbacksettingspage.h:313
+#: ../bin/src/ui_playbacksettingspage.h:343
 msgid "Fade out when stopping a track"
 msgstr "Redução gradual ao parar uma faixa"
 
-#: ../bin/src/ui_playbacksettingspage.h:312
+#: ../bin/src/ui_playbacksettingspage.h:342
 msgid "Fading"
 msgstr "Desvanecimento"
 
-#: ../bin/src/ui_playbacksettingspage.h:317
-#: ../bin/src/ui_playbacksettingspage.h:320
+#: ../bin/src/ui_playbacksettingspage.h:347
+#: ../bin/src/ui_playbacksettingspage.h:350
 msgid "Fading duration"
 msgstr "Duração"
 
@@ -2417,7 +2442,7 @@ msgstr "Flac"
 
 #: ../bin/src/ui_songinfosettingspage.h:156
 msgid "Font size"
-msgstr "Tamanho de letra"
+msgstr "Tamanho da letra"
 
 #: ../bin/src/ui_spotifysettingspage.h:213
 msgid "For licensing reasons Spotify support is in a separate plugin."
@@ -2549,7 +2574,7 @@ msgstr "Google Drive"
 msgid "Got %1 covers out of %2 (%3 failed)"
 msgstr "Foram obtidas %1 de %2 capas (não foram obtidas %3)"
 
-#: ../bin/src/ui_behavioursettingspage.h:274
+#: ../bin/src/ui_behavioursettingspage.h:304
 msgid "Grey out non existent songs in my playlists"
 msgstr "Nas listas de reprodução, escurecer as faixas inexistentes"
 
@@ -2662,7 +2687,7 @@ msgstr "Ícones no topo"
 msgid "Identifying song"
 msgstr "A identificar faixa"
 
-#: ../bin/src/ui_behavioursettingspage.h:276
+#: ../bin/src/ui_behavioursettingspage.h:306
 msgid ""
 "If activated, clicking a selected song in the playlist view will let you "
 "edit the tag value directly"
@@ -2786,7 +2811,7 @@ msgstr "Serviços web"
 
 #: widgets/osd.cpp:321 ../bin/src/ui_playlistsequence.h:116
 msgid "Intro tracks"
-msgstr "Faixas de introdução"
+msgstr "Metade das faixas"
 
 #: internet/lastfm/lastfmservice.cpp:240
 msgid "Invalid API key"
@@ -2844,7 +2869,7 @@ msgstr "As melhores faixas da semana no Jamendo"
 msgid "Jamendo database"
 msgstr "Base de dados Jamendo"
 
-#: ../bin/src/ui_behavioursettingspage.h:289
+#: ../bin/src/ui_behavioursettingspage.h:319
 msgid "Jump to previous song right away"
 msgstr "Imediatamente para a faixa anterior "
 
@@ -2855,16 +2880,16 @@ msgstr "Ir para a faixa em reprodução"
 #: wiimotedev/wiimoteshortcutgrabber.cpp:69
 #, qt-format
 msgid "Keep buttons for %1 second..."
-msgstr "Manter botões por %1 segundo..."
+msgstr "Manter botões durante %1 segundo..."
 
 #: ../bin/src/ui_wiimoteshortcutgrabber.h:127
 #: wiimotedev/wiimoteshortcutgrabber.cpp:72
 #: wiimotedev/wiimoteshortcutgrabber.cpp:114
 #, qt-format
 msgid "Keep buttons for %1 seconds..."
-msgstr "Manter botões por %1 segundos..."
+msgstr "Manter botões durante %1 segundos..."
 
-#: ../bin/src/ui_behavioursettingspage.h:261
+#: ../bin/src/ui_behavioursettingspage.h:291
 msgid "Keep running in the background when the window is closed"
 msgstr "Executar em segundo plano ao fechar a janela principal"
 
@@ -2881,7 +2906,7 @@ msgstr "Gatinhos"
 msgid "Kuduro"
 msgstr "Kuduro"
 
-#: ../bin/src/ui_behavioursettingspage.h:263
+#: ../bin/src/ui_behavioursettingspage.h:293
 msgid "Language"
 msgstr "Idioma"
 
@@ -3234,7 +3259,7 @@ msgstr "Tipo de adesão"
 msgid "Minimum bitrate"
 msgstr "Taxa de dados mínima"
 
-#: ../bin/src/ui_playbacksettingspage.h:336
+#: ../bin/src/ui_playbacksettingspage.h:366
 msgid "Minimum buffer fill"
 msgstr "Valor mínimo de memória"
 
@@ -3250,7 +3275,7 @@ msgstr "Modelo"
 msgid "Monitor the library for changes"
 msgstr "Monitorizar alterações na coleção"
 
-#: ../bin/src/ui_playbacksettingspage.h:340
+#: ../bin/src/ui_playbacksettingspage.h:371
 msgid "Mono playback"
 msgstr "Reprodução mono"
 
@@ -3361,8 +3386,8 @@ msgstr "Nunca"
 msgid "Never played"
 msgstr "Nunca reproduzidas"
 
-#: ../bin/src/ui_behavioursettingspage.h:282
-#: ../bin/src/ui_behavioursettingspage.h:302
+#: ../bin/src/ui_behavioursettingspage.h:312
+#: ../bin/src/ui_behavioursettingspage.h:332
 msgid "Never start playing"
 msgstr "Nunca iniciar a reprodução"
 
@@ -3602,7 +3627,7 @@ msgstr "Abrir no Google Drive"
 msgid "Open in new playlist"
 msgstr "Abrir numa nova lista de reprodução"
 
-#: ../bin/src/ui_behavioursettingspage.h:297
+#: ../bin/src/ui_behavioursettingspage.h:327
 msgctxt "Refers to behavior settings in Clementine settings page."
 msgid "Open in new playlist"
 msgstr "Abrir em nova lista de reprodução"
@@ -3677,7 +3702,7 @@ msgstr "Outras opções"
 msgid "Output"
 msgstr "Destino"
 
-#: ../bin/src/ui_playbacksettingspage.h:333
+#: ../bin/src/ui_playbacksettingspage.h:363
 msgid "Output device"
 msgstr "Dispositivo"
 
@@ -3725,7 +3750,7 @@ msgstr "Pausa"
 
 #: core/commandlineoptions.cpp:152
 msgid "Pause playback"
-msgstr "Pausar a reprodução"
+msgstr "Pausa na reprodução"
 
 #: widgets/osd.cpp:156
 msgid "Paused"
@@ -3760,20 +3785,20 @@ msgstr "Número de reproduções"
 msgid "Play if stopped, pause if playing"
 msgstr "Reproduzir se parado, pausa se em reprodução"
 
-#: ../bin/src/ui_behavioursettingspage.h:283
-#: ../bin/src/ui_behavioursettingspage.h:303
+#: ../bin/src/ui_behavioursettingspage.h:313
+#: ../bin/src/ui_behavioursettingspage.h:333
 msgid "Play if there is nothing already playing"
 msgstr "Reproduzir, se não existir qualquer faixa em reprodução"
 
 #: core/commandlineoptions.cpp:169
 msgid "Play the <n>th track in the playlist"
-msgstr "Reproduzir a <n>.ª faixa na lista de reprodução"
+msgstr "Reproduzir a <n>.ª faixa da lista de reprodução"
 
 #: core/globalshortcuts.cpp:51 wiimotedev/wiimotesettingspage.cpp:109
 msgid "Play/Pause"
 msgstr "Reproduzir/Pausa"
 
-#: ../bin/src/ui_playbacksettingspage.h:310
+#: ../bin/src/ui_playbacksettingspage.h:340
 msgid "Playback"
 msgstr "Reprodução"
 
@@ -3830,7 +3855,7 @@ msgstr "Duração do alerta"
 msgid "Port"
 msgstr "Porta"
 
-#: ui/equalizer.cpp:44 ../bin/src/ui_playbacksettingspage.h:330
+#: ui/equalizer.cpp:44 ../bin/src/ui_playbacksettingspage.h:360
 msgid "Pre-amp"
 msgstr "Amplificador"
 
@@ -3886,7 +3911,7 @@ msgstr "Prima uma tecla"
 msgid "Press a key combination to use for %1..."
 msgstr "Prima a combinação a utilizar para %1..."
 
-#: ../bin/src/ui_behavioursettingspage.h:286
+#: ../bin/src/ui_behavioursettingspage.h:316
 msgid "Pressing \"Previous\" in player will..."
 msgstr "A clicar em \"Anterior\", o reprodutor irá..."
 
@@ -3969,7 +3994,7 @@ msgstr "Colocar em fila as faixas selecionadas"
 msgid "Queue track"
 msgstr "Colocar esta faixa na fila"
 
-#: ../bin/src/ui_playbacksettingspage.h:327
+#: ../bin/src/ui_playbacksettingspage.h:357
 msgid "Radio (equal loudness for all tracks)"
 msgstr "Faixa (volume igual para todas as faixas)"
 
@@ -4046,7 +4071,7 @@ msgid "Reggae"
 msgstr "Reggae"
 
 #: playlist/playlistsaveoptionsdialog.cpp:33
-#: ../bin/src/ui_behavioursettingspage.h:309
+#: ../bin/src/ui_behavioursettingspage.h:343
 msgid "Relative"
 msgstr "Relativos"
 
@@ -4054,7 +4079,7 @@ msgstr "Relativos"
 msgid "Remember Wii remote swing"
 msgstr "Lembrar cadência do Wii remote"
 
-#: ../bin/src/ui_behavioursettingspage.h:272
+#: ../bin/src/ui_behavioursettingspage.h:302
 msgid "Remember from last time"
 msgstr "Lembrar última opção"
 
@@ -4137,7 +4162,7 @@ msgstr "Repetir faixa"
 msgid "Replace current playlist"
 msgstr "Substituir lista de reprodução atual"
 
-#: ../bin/src/ui_behavioursettingspage.h:296
+#: ../bin/src/ui_behavioursettingspage.h:326
 msgid "Replace the playlist"
 msgstr "Substituir lista de reprodução"
 
@@ -4145,11 +4170,11 @@ msgstr "Substituir lista de reprodução"
 msgid "Replaces spaces with underscores"
 msgstr "Substituir espaços por \"underscores\""
 
-#: ../bin/src/ui_playbacksettingspage.h:322
+#: ../bin/src/ui_playbacksettingspage.h:352
 msgid "Replay Gain"
 msgstr "Consistência (Replay Gain)"
 
-#: ../bin/src/ui_playbacksettingspage.h:324
+#: ../bin/src/ui_playbacksettingspage.h:354
 msgid "Replay Gain mode"
 msgstr "Modo Replay Gain"
 
@@ -4169,7 +4194,7 @@ msgstr "Reiniciar"
 msgid "Reset play counts"
 msgstr "Reiniciar número de contagens"
 
-#: ../bin/src/ui_behavioursettingspage.h:290
+#: ../bin/src/ui_behavioursettingspage.h:320
 msgid "Restart song, then jump to previous if pressed again"
 msgstr "Reiniciar a faixa atual e passar para a anterior se clicar novamente"
 
@@ -4182,7 +4207,7 @@ msgstr "Reiniciar faixa ou reproduzir a anterior se o tempo de reprodução for 
 msgid "Restrict to ASCII characters"
 msgstr "Restringir a caracteres ASCII"
 
-#: ../bin/src/ui_behavioursettingspage.h:273
+#: ../bin/src/ui_behavioursettingspage.h:303
 msgid "Resume playback on start"
 msgstr "Retomar reprodução ao iniciar"
 
@@ -4231,6 +4256,10 @@ msgstr "Remover dispositivo em segurança"
 #: ../bin/src/ui_organisedialog.h:248
 msgid "Safely remove the device after copying"
 msgstr "Depois de copiar, remover dispositivo em segurança"
+
+#: ../bin/src/ui_playbacksettingspage.h:372
+msgid "Sample Rate"
+msgstr "Frequência"
 
 #: playlist/playlist.cpp:1357 ../bin/src/ui_edittagdialog.h:724
 msgid "Sample rate"
@@ -4288,11 +4317,11 @@ msgstr "Guardar esta emissão no separador Internet"
 
 #: library/library.cpp:194
 msgid "Saving songs statistics into songs files"
-msgstr "Gravar estatísticas nos ficheiros"
+msgstr "Guardar estatísticas nos ficheiros"
 
 #: ui/edittagdialog.cpp:703 ui/trackselectiondialog.cpp:254
 msgid "Saving tracks"
-msgstr "A gravar faixas"
+msgstr "A guardar faixas"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:136
 msgid "Scalable sampling rate profile (SSR)"
@@ -4399,6 +4428,10 @@ msgstr "Avançar um tempo relativo na faixa atual"
 msgid "Seek the currently playing track to an absolute position"
 msgstr "Avançar para uma posição absoluta na faixa atual"
 
+#: ../bin/src/ui_behavioursettingspage.h:336
+msgid "Seeking using a keyboard shortcut"
+msgstr "Procurar através de uma tecla de atalho"
+
 #: visualisations/visualisationselector.cpp:37 ../bin/src/ui_ripcddialog.h:310
 msgid "Select All"
 msgstr "Todas"
@@ -4495,7 +4528,7 @@ msgstr "Mostrar"
 msgid "Show OSD"
 msgstr "Mostrar notificação"
 
-#: ../bin/src/ui_playbacksettingspage.h:311
+#: ../bin/src/ui_playbacksettingspage.h:341
 msgid "Show a glowing animation on the current track"
 msgstr "Mostrar animação na faixa reproduzida"
 
@@ -4596,7 +4629,7 @@ msgstr "Mostrar o botão \"Gosto\""
 msgid "Show the scrobble button in the main window"
 msgstr "Mostrar o botão \"Enviar\""
 
-#: ../bin/src/ui_behavioursettingspage.h:260
+#: ../bin/src/ui_behavioursettingspage.h:290
 msgid "Show tray icon"
 msgstr "Mostrar ícone na área de notificação"
 
@@ -4876,7 +4909,7 @@ msgstr "Subsonic"
 
 #: ../data/oauthsuccess.html:36
 msgid "Success!"
-msgstr "Bem sucedido!"
+msgstr "Sucesso!"
 
 #: transcoder/transcoder.cpp:189
 #, qt-format
@@ -5100,6 +5133,10 @@ msgstr "Só os assinantes têm acesso a esta emissão"
 msgid "This type of device is not supported: %1"
 msgstr "Este tipo de dispositivo não é suportado: %1"
 
+#: ../bin/src/ui_behavioursettingspage.h:337
+msgid "Time step"
+msgstr "Valor de tempo"
+
 #: playlist/playlist.cpp:1315 ui/organisedialog.cpp:60
 #: ui/qtsystemtrayicon.cpp:232 ../bin/src/ui_about.h:142
 #: ../bin/src/ui_edittagdialog.h:734 ../bin/src/ui_trackselectiondialog.h:211
@@ -5312,7 +5349,7 @@ msgstr "Utilizar teclas de atalho Gnome"
 msgid "Use Psychedelic Colors"
 msgstr "Utilizar cores psicadélicas"
 
-#: ../bin/src/ui_playbacksettingspage.h:323
+#: ../bin/src/ui_playbacksettingspage.h:353
 msgid "Use Replay Gain metadata if it is available"
 msgstr "Se disponível, utilizar consistência de dados (Replay Gain)"
 
@@ -5356,7 +5393,7 @@ msgstr "Utilizar notificações para reportar o estado do Wii Remote"
 msgid "Use temporal noise shaping"
 msgstr "Utilizar modelação de ruído"
 
-#: ../bin/src/ui_behavioursettingspage.h:266
+#: ../bin/src/ui_behavioursettingspage.h:296
 msgid "Use the system default"
 msgstr "Utilizar definições do sistema"
 
@@ -5388,7 +5425,7 @@ msgstr "Interface de utilizador"
 msgid "Username"
 msgstr "Utilizador"
 
-#: ../bin/src/ui_behavioursettingspage.h:279
+#: ../bin/src/ui_behavioursettingspage.h:309
 msgid "Using the menu to add a song will..."
 msgstr "Ao utilizar o menu para adicionar uma faixa..."
 
@@ -5457,7 +5494,7 @@ msgstr "WMA"
 msgid "Wall"
 msgstr "Mural"
 
-#: playlist/playlisttabbar.cpp:192 ../bin/src/ui_behavioursettingspage.h:262
+#: playlist/playlisttabbar.cpp:192 ../bin/src/ui_behavioursettingspage.h:292
 msgid "Warn me when closing a playlist tab"
 msgstr "Avisar ao fechar um separador de lista de reprodução"
 
@@ -5473,7 +5510,7 @@ msgstr "Sítio web"
 msgid "Weeks"
 msgstr "Semanas"
 
-#: ../bin/src/ui_behavioursettingspage.h:269
+#: ../bin/src/ui_behavioursettingspage.h:299
 msgid "When Clementine starts"
 msgstr "Ao iniciar o Clementine"
 
@@ -5483,7 +5520,7 @@ msgid ""
 "If there are no matches then it will use the largest image in the directory."
 msgstr "Ao procurar pelas capas dos álbuns, o Clementine irá procurar as imagens que possuam uma destas palavras.\nSe não existirem ocorrências, o Clementine utilizará a maior imagem do diretório."
 
-#: ../bin/src/ui_behavioursettingspage.h:306
+#: ../bin/src/ui_behavioursettingspage.h:340
 msgid "When saving a playlist, file paths should be"
 msgstr "Ao gravar uma lista de reprodução, os caminhos devem ser"
 
@@ -5493,7 +5530,7 @@ msgstr "Se a lista estiver vazia..."
 
 #: ../bin/src/ui_globalsearchview.h:212
 msgid "Why not try..."
-msgstr "Porque não tentar..."
+msgstr "Porque não tenta..."
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:229
 msgid "Wide band (WB)"
@@ -5561,13 +5598,13 @@ msgstr "Pretende mover as outras faixas deste álbum para Vários artistas?"
 
 #: ui/mainwindow.cpp:2448
 msgid "Would you like to run a full rescan right now?"
-msgstr "Pretende executar a nova análise?"
+msgstr "Pretende executar uma nova análise?"
 
 #: library/librarysettingspage.cpp:154
 msgid "Write all songs statistics into songs' files"
 msgstr "Gravar todas as estatísticas nos detalhes dos ficheiros"
 
-#: ../bin/src/ui_behavioursettingspage.h:311
+#: ../bin/src/ui_behavioursettingspage.h:345
 msgid "Write metadata"
 msgstr "Gravar metadados"
 
@@ -5687,7 +5724,7 @@ msgid ""
 "shortcuts in Clementine."
 msgstr "Tem que abrir as preferências do sistema e permitir que o Clementine possa \"<span style=\"font-style:italic\">controlar o seu computador</span>\" para conseguir utilizar os atalhos globais do Clementine."
 
-#: ../bin/src/ui_behavioursettingspage.h:268
+#: ../bin/src/ui_behavioursettingspage.h:298
 msgid "You will need to restart Clementine if you change the language."
 msgstr "Se mudar o idioma, tem que reiniciar o Clementine para aplicar as alterações"
 
@@ -5873,7 +5910,7 @@ msgstr "ou processe o código QR!"
 
 #: widgets/didyoumean.cpp:56
 msgid "press enter"
-msgstr "prima enter"
+msgstr "prima Enter"
 
 #: playlist/playlistundocommands.cpp:53 playlist/playlistundocommands.cpp:75
 #, c-format, qt-plural-format

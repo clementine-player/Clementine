@@ -9,8 +9,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2015-07-02 13:50+0000\n"
-"Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
+"PO-Revision-Date: 2015-07-15 13:28+0000\n"
+"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Ukrainian (http://www.transifex.com/p/clementine/language/uk/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -42,15 +42,19 @@ msgstr " днів"
 msgid " kbps"
 msgstr " кб/с"
 
-#: ../bin/src/ui_playbacksettingspage.h:318
-#: ../bin/src/ui_playbacksettingspage.h:321
-#: ../bin/src/ui_playbacksettingspage.h:335
+#: ../bin/src/ui_playbacksettingspage.h:348
+#: ../bin/src/ui_playbacksettingspage.h:351
+#: ../bin/src/ui_playbacksettingspage.h:365
 msgid " ms"
 msgstr " мс"
 
 #: ../bin/src/ui_songinfosettingspage.h:157
 msgid " pt"
 msgstr " тчк"
+
+#: ../bin/src/ui_behavioursettingspage.h:338
+msgid " s"
+msgstr ""
 
 #: ../bin/src/ui_notificationssettingspage.h:445
 #: ../bin/src/ui_visualisationselector.h:116
@@ -270,13 +274,29 @@ msgstr "1 доріжка"
 msgid "128k MP3"
 msgstr "128k MP3"
 
+#: ../bin/src/ui_playbacksettingspage.h:379
+msgid "192,000Hz"
+msgstr "192000 Гц"
+
 #: ../bin/src/ui_appearancesettingspage.h:291
 msgid "40%"
 msgstr "40%"
 
+#: ../bin/src/ui_playbacksettingspage.h:376
+msgid "44,100Hz"
+msgstr "44100 Гц"
+
+#: ../bin/src/ui_playbacksettingspage.h:377
+msgid "48,000Hz"
+msgstr "48000 Гц"
+
 #: library/library.cpp:64
 msgid "50 random tracks"
 msgstr "50 випадкових доріжок"
+
+#: ../bin/src/ui_playbacksettingspage.h:378
+msgid "96,000Hz"
+msgstr "96000 Гц"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:165
 msgid "<a href=\"http://www.di.fm/premium/\">Upgrade to Premium now</a>"
@@ -384,7 +404,7 @@ msgid "About Qt..."
 msgstr "Про Qt…"
 
 #: playlist/playlistsaveoptionsdialog.cpp:34
-#: ../bin/src/ui_behavioursettingspage.h:308
+#: ../bin/src/ui_behavioursettingspage.h:342
 msgid "Absolute"
 msgstr "Абсолютними"
 
@@ -593,7 +613,7 @@ msgstr "Додати до закладок"
 msgid "Add to playlist"
 msgstr "Додати до списку відтворення"
 
-#: ../bin/src/ui_behavioursettingspage.h:298
+#: ../bin/src/ui_behavioursettingspage.h:328
 msgid "Add to the queue"
 msgstr "Додати до черги"
 
@@ -651,7 +671,7 @@ msgstr "Після копіювання…"
 msgid "Album"
 msgstr "Альбом"
 
-#: ../bin/src/ui_playbacksettingspage.h:328
+#: ../bin/src/ui_playbacksettingspage.h:358
 msgid "Album (ideal loudness for all tracks)"
 msgstr "Альбом (ідеальна гучність для всіх композицій)"
 
@@ -735,16 +755,16 @@ msgstr "Дозволити mid/side кодування"
 msgid "Alongside the originals"
 msgstr "Разом з оригіналами"
 
-#: ../bin/src/ui_behavioursettingspage.h:271
+#: ../bin/src/ui_behavioursettingspage.h:301
 msgid "Always hide the main window"
 msgstr "Завжди приховувати головне вікно"
 
-#: ../bin/src/ui_behavioursettingspage.h:270
+#: ../bin/src/ui_behavioursettingspage.h:300
 msgid "Always show the main window"
 msgstr "Завжди показувати головне вікно"
 
-#: ../bin/src/ui_behavioursettingspage.h:284
-#: ../bin/src/ui_behavioursettingspage.h:304
+#: ../bin/src/ui_behavioursettingspage.h:314
+#: ../bin/src/ui_behavioursettingspage.h:334
 msgid "Always start playing"
 msgstr "Завжди починати відтворення"
 
@@ -795,11 +815,11 @@ msgstr "Додати файли/адреси до списку відтворе�
 msgid "Append to current playlist"
 msgstr "Додати до списку відтворення"
 
-#: ../bin/src/ui_behavioursettingspage.h:295
+#: ../bin/src/ui_behavioursettingspage.h:325
 msgid "Append to the playlist"
 msgstr "Додати  до списку відтворення"
 
-#: ../bin/src/ui_playbacksettingspage.h:331
+#: ../bin/src/ui_playbacksettingspage.h:361
 msgid "Apply compression to prevent clipping"
 msgstr "Застосувати стиснення для запобігання зрізанню"
 
@@ -839,7 +859,7 @@ msgstr "Мітки виконавця"
 msgid "Artist's initial"
 msgstr "Ініціали виконавця"
 
-#: ../bin/src/ui_behavioursettingspage.h:310
+#: ../bin/src/ui_behavioursettingspage.h:344
 msgid "Ask when saving"
 msgstr "Питати під час збереження"
 
@@ -849,7 +869,7 @@ msgstr "Питати під час збереження"
 msgid "Audio format"
 msgstr "Аудіо-формат"
 
-#: ../bin/src/ui_playbacksettingspage.h:332
+#: ../bin/src/ui_playbacksettingspage.h:362
 msgid "Audio output"
 msgstr "Виведення звуку"
 
@@ -869,11 +889,12 @@ msgid "Authors"
 msgstr "Автори"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:227
+#: ../bin/src/ui_playbacksettingspage.h:375
 msgid "Auto"
 msgstr "Автоматично"
 
 #: playlist/playlistsaveoptionsdialog.cpp:32
-#: ../bin/src/ui_behavioursettingspage.h:307
+#: ../bin/src/ui_behavioursettingspage.h:341
 msgid "Automatic"
 msgstr "Автоматично"
 
@@ -946,7 +967,7 @@ msgstr "Стандартний синій"
 msgid "Basic audio type"
 msgstr "Основний тип звуку"
 
-#: ../bin/src/ui_behavioursettingspage.h:259
+#: ../bin/src/ui_behavioursettingspage.h:289
 msgid "Behavior"
 msgstr "Поведінка"
 
@@ -1007,11 +1028,11 @@ msgstr "Box"
 msgid "Browse..."
 msgstr "Огляд…"
 
-#: ../bin/src/ui_playbacksettingspage.h:334
+#: ../bin/src/ui_playbacksettingspage.h:364
 msgid "Buffer duration"
 msgstr "Місткість буфера"
 
-#: engines/gstengine.cpp:904
+#: engines/gstengine.cpp:907
 msgid "Buffering"
 msgstr "Буферизація"
 
@@ -1086,7 +1107,11 @@ msgstr "Змінити режим перемішування"
 msgid "Change the language"
 msgstr "Змінити мову"
 
-#: ../bin/src/ui_playbacksettingspage.h:338
+#: ../bin/src/ui_playbacksettingspage.h:382
+msgid "Changes will take place when the next song starts playing"
+msgstr "Зміни набудуть чинності на початку відтворення наступної композиції"
+
+#: ../bin/src/ui_playbacksettingspage.h:369
 msgid ""
 "Changing mono playback preference will be effective for the next playing "
 "songs"
@@ -1112,7 +1137,7 @@ msgstr "Виберіть каталог кешування даних Vk.com"
 msgid "Choose a name for your smart playlist"
 msgstr "Оберіть ім’я для вашого розумного списку відтворення"
 
-#: engines/gstengine.cpp:925
+#: engines/gstengine.cpp:928
 msgid "Choose automatically"
 msgstr "Вибрати автоматично"
 
@@ -1504,11 +1529,11 @@ msgstr "Обкладинку встановлено з %1"
 msgid "Covers from %1"
 msgstr "Обкладинки з %1"
 
-#: ../bin/src/ui_playbacksettingspage.h:315
+#: ../bin/src/ui_playbacksettingspage.h:345
 msgid "Cross-fade when changing tracks automatically"
 msgstr "Перехресне згасання під час автоматичної зміни доріжок"
 
-#: ../bin/src/ui_playbacksettingspage.h:314
+#: ../bin/src/ui_playbacksettingspage.h:344
 msgid "Cross-fade when changing tracks manually"
 msgstr "Перехресне згасання під час ручної зміни доріжок"
 
@@ -1647,7 +1672,7 @@ msgstr "Зменшити гучність"
 msgid "Default background image"
 msgstr "Типове зображення тла"
 
-#: engines/gstengine.cpp:950
+#: engines/gstengine.cpp:953
 #, qt-format
 msgid "Default device on %1"
 msgstr "Типовий пристрій у %1"
@@ -1865,7 +1890,7 @@ msgstr "Підтримати фінансово"
 msgid "Double click to open"
 msgstr "Подвійне клацання, щоб відкрити"
 
-#: ../bin/src/ui_behavioursettingspage.h:292
+#: ../bin/src/ui_behavioursettingspage.h:322
 msgid "Double clicking a song will..."
 msgstr "Подвійне клацання на пісні:"
 
@@ -2024,7 +2049,7 @@ msgstr "Увімкнути еквалайзер"
 msgid "Enable shortcuts only when Clementine is focused"
 msgstr "Використовувати глобальні скорочення лише коли Clementine у фокусі"
 
-#: ../bin/src/ui_behavioursettingspage.h:278
+#: ../bin/src/ui_behavioursettingspage.h:308
 msgid "Enable song metadata inline edition with click"
 msgstr "Уможливити вбудоване редагування метаданих композиції клацанням"
 
@@ -2189,7 +2214,7 @@ msgstr "Кожні 6 годин"
 msgid "Every hour"
 msgstr "Кожну годину"
 
-#: ../bin/src/ui_playbacksettingspage.h:316
+#: ../bin/src/ui_playbacksettingspage.h:346
 msgid "Except between tracks on the same album or in the same CUE sheet"
 msgstr "Крім як між треками на одному альбомі, або в тому ж CUE листі"
 
@@ -2261,20 +2286,20 @@ msgstr "F8"
 msgid "FLAC"
 msgstr "FLAC"
 
-#: ../bin/src/ui_playbacksettingspage.h:319
+#: ../bin/src/ui_playbacksettingspage.h:349
 msgid "Fade out on pause / fade in on resume"
 msgstr "Зтишувати під час призупинення і робити голоснішим під час відновлення"
 
-#: ../bin/src/ui_playbacksettingspage.h:313
+#: ../bin/src/ui_playbacksettingspage.h:343
 msgid "Fade out when stopping a track"
 msgstr "Згасання під час зупинки відтворення"
 
-#: ../bin/src/ui_playbacksettingspage.h:312
+#: ../bin/src/ui_playbacksettingspage.h:342
 msgid "Fading"
 msgstr "Згасання"
 
-#: ../bin/src/ui_playbacksettingspage.h:317
-#: ../bin/src/ui_playbacksettingspage.h:320
+#: ../bin/src/ui_playbacksettingspage.h:347
+#: ../bin/src/ui_playbacksettingspage.h:350
 msgid "Fading duration"
 msgstr "Тривалість згасання"
 
@@ -2544,7 +2569,7 @@ msgstr "Google Drive"
 msgid "Got %1 covers out of %2 (%3 failed)"
 msgstr "Отримано %1 обкладинок з %2 (%3 не вдалось)"
 
-#: ../bin/src/ui_behavioursettingspage.h:274
+#: ../bin/src/ui_behavioursettingspage.h:304
 msgid "Grey out non existent songs in my playlists"
 msgstr "Позначати сірим пісні у списках відтворення, що не існують"
 
@@ -2657,7 +2682,7 @@ msgstr "Значки зверху"
 msgid "Identifying song"
 msgstr "Визначаю пісню"
 
-#: ../bin/src/ui_behavioursettingspage.h:276
+#: ../bin/src/ui_behavioursettingspage.h:306
 msgid ""
 "If activated, clicking a selected song in the playlist view will let you "
 "edit the tag value directly"
@@ -2839,7 +2864,7 @@ msgstr "Найпопулярніші композиції тижня в Jamendo"
 msgid "Jamendo database"
 msgstr "База даних Jamendo"
 
-#: ../bin/src/ui_behavioursettingspage.h:289
+#: ../bin/src/ui_behavioursettingspage.h:319
 msgid "Jump to previous song right away"
 msgstr "Перейти до попередньої композиції негайно"
 
@@ -2859,7 +2884,7 @@ msgstr "Тримати кнопки %1 секунду…"
 msgid "Keep buttons for %1 seconds..."
 msgstr "Тримати кнопки %1 секунд…"
 
-#: ../bin/src/ui_behavioursettingspage.h:261
+#: ../bin/src/ui_behavioursettingspage.h:291
 msgid "Keep running in the background when the window is closed"
 msgstr "Продовжувати виконання у фоні коли вікно зачинено"
 
@@ -2876,7 +2901,7 @@ msgstr "Кошенята"
 msgid "Kuduro"
 msgstr "Кудуро"
 
-#: ../bin/src/ui_behavioursettingspage.h:263
+#: ../bin/src/ui_behavioursettingspage.h:293
 msgid "Language"
 msgstr "Мова"
 
@@ -3229,7 +3254,7 @@ msgstr "Тип членства"
 msgid "Minimum bitrate"
 msgstr "Найменша бітова швидкість"
 
-#: ../bin/src/ui_playbacksettingspage.h:336
+#: ../bin/src/ui_playbacksettingspage.h:366
 msgid "Minimum buffer fill"
 msgstr "Мінімальне заповнення буфера"
 
@@ -3245,7 +3270,7 @@ msgstr "Модель"
 msgid "Monitor the library for changes"
 msgstr "Стежити за змінами у фонотеці"
 
-#: ../bin/src/ui_playbacksettingspage.h:340
+#: ../bin/src/ui_playbacksettingspage.h:371
 msgid "Mono playback"
 msgstr "Відтворення у режимі моно"
 
@@ -3356,8 +3381,8 @@ msgstr "Ніколи"
 msgid "Never played"
 msgstr "Ніколи не відтворені"
 
-#: ../bin/src/ui_behavioursettingspage.h:282
-#: ../bin/src/ui_behavioursettingspage.h:302
+#: ../bin/src/ui_behavioursettingspage.h:312
+#: ../bin/src/ui_behavioursettingspage.h:332
 msgid "Never start playing"
 msgstr "Ніколи не починати відтворення"
 
@@ -3597,7 +3622,7 @@ msgstr "Відкрити у Google Drive"
 msgid "Open in new playlist"
 msgstr "Відкрити у новому списку відтворення"
 
-#: ../bin/src/ui_behavioursettingspage.h:297
+#: ../bin/src/ui_behavioursettingspage.h:327
 msgctxt "Refers to behavior settings in Clementine settings page."
 msgid "Open in new playlist"
 msgstr "Відкрити у новому списку відтворення"
@@ -3672,7 +3697,7 @@ msgstr "Інші налаштування"
 msgid "Output"
 msgstr "Результат"
 
-#: ../bin/src/ui_playbacksettingspage.h:333
+#: ../bin/src/ui_playbacksettingspage.h:363
 msgid "Output device"
 msgstr "Пристрій відтворення"
 
@@ -3755,8 +3780,8 @@ msgstr "Кількість відтворень"
 msgid "Play if stopped, pause if playing"
 msgstr "Відтворити, якщо зупинено; призупинити, якщо відтворюється"
 
-#: ../bin/src/ui_behavioursettingspage.h:283
-#: ../bin/src/ui_behavioursettingspage.h:303
+#: ../bin/src/ui_behavioursettingspage.h:313
+#: ../bin/src/ui_behavioursettingspage.h:333
 msgid "Play if there is nothing already playing"
 msgstr "Відтворювати, якщо зараз нічого не відтворюється"
 
@@ -3768,7 +3793,7 @@ msgstr "Відтворити <n> доріжку в списку відтворе
 msgid "Play/Pause"
 msgstr "Відтворити/Призупинити"
 
-#: ../bin/src/ui_playbacksettingspage.h:310
+#: ../bin/src/ui_playbacksettingspage.h:340
 msgid "Playback"
 msgstr "Відтворення"
 
@@ -3825,7 +3850,7 @@ msgstr "Тривалість виринаючого повідомлення"
 msgid "Port"
 msgstr "Порт"
 
-#: ui/equalizer.cpp:44 ../bin/src/ui_playbacksettingspage.h:330
+#: ui/equalizer.cpp:44 ../bin/src/ui_playbacksettingspage.h:360
 msgid "Pre-amp"
 msgstr "Підсилення"
 
@@ -3881,7 +3906,7 @@ msgstr "Натисніть клавішу"
 msgid "Press a key combination to use for %1..."
 msgstr "Натисніть комбінацію клавіш для %1…"
 
-#: ../bin/src/ui_behavioursettingspage.h:286
+#: ../bin/src/ui_behavioursettingspage.h:316
 msgid "Pressing \"Previous\" in player will..."
 msgstr "Натискання «Попередня» у програвачі виконує дію…"
 
@@ -3964,7 +3989,7 @@ msgstr "Поставити в чергу вибрані доріжки"
 msgid "Queue track"
 msgstr "Поставити в чергу доріжки"
 
-#: ../bin/src/ui_playbacksettingspage.h:327
+#: ../bin/src/ui_playbacksettingspage.h:357
 msgid "Radio (equal loudness for all tracks)"
 msgstr "Радіо (однакова гучність всіх композицій)"
 
@@ -4041,7 +4066,7 @@ msgid "Reggae"
 msgstr "Реґґі"
 
 #: playlist/playlistsaveoptionsdialog.cpp:33
-#: ../bin/src/ui_behavioursettingspage.h:309
+#: ../bin/src/ui_behavioursettingspage.h:343
 msgid "Relative"
 msgstr "Відносними"
 
@@ -4049,7 +4074,7 @@ msgstr "Відносними"
 msgid "Remember Wii remote swing"
 msgstr "Пам’ятати рухи в Wii remote"
 
-#: ../bin/src/ui_behavioursettingspage.h:272
+#: ../bin/src/ui_behavioursettingspage.h:302
 msgid "Remember from last time"
 msgstr "Пам'ятати з минулого разу"
 
@@ -4132,7 +4157,7 @@ msgstr "Повторювати композицію"
 msgid "Replace current playlist"
 msgstr "Замінити список відтворення"
 
-#: ../bin/src/ui_behavioursettingspage.h:296
+#: ../bin/src/ui_behavioursettingspage.h:326
 msgid "Replace the playlist"
 msgstr "Замінити список відтворення"
 
@@ -4140,11 +4165,11 @@ msgstr "Замінити список відтворення"
 msgid "Replaces spaces with underscores"
 msgstr "Замінити пробіли підкресленнями"
 
-#: ../bin/src/ui_playbacksettingspage.h:322
+#: ../bin/src/ui_playbacksettingspage.h:352
 msgid "Replay Gain"
 msgstr "Replay Gain"
 
-#: ../bin/src/ui_playbacksettingspage.h:324
+#: ../bin/src/ui_playbacksettingspage.h:354
 msgid "Replay Gain mode"
 msgstr "Режим вирівнювання гучності"
 
@@ -4164,7 +4189,7 @@ msgstr "Скинути"
 msgid "Reset play counts"
 msgstr "Скинути лічильник відтворень"
 
-#: ../bin/src/ui_behavioursettingspage.h:290
+#: ../bin/src/ui_behavioursettingspage.h:320
 msgid "Restart song, then jump to previous if pressed again"
 msgstr "Перезапустити композицію, потім перейти до попередньої, якщо натиснуто ще раз"
 
@@ -4177,7 +4202,7 @@ msgstr "Повторно відтворити композицію або від
 msgid "Restrict to ASCII characters"
 msgstr "Обмежитись символами ASCII"
 
-#: ../bin/src/ui_behavioursettingspage.h:273
+#: ../bin/src/ui_behavioursettingspage.h:303
 msgid "Resume playback on start"
 msgstr "Відновлювати відтворення після запуску"
 
@@ -4226,6 +4251,10 @@ msgstr "Безпечно вилучити пристрій"
 #: ../bin/src/ui_organisedialog.h:248
 msgid "Safely remove the device after copying"
 msgstr "Безпечне вилучення пристрою після копіювання"
+
+#: ../bin/src/ui_playbacksettingspage.h:372
+msgid "Sample Rate"
+msgstr "Частота дискретизації"
 
 #: playlist/playlist.cpp:1357 ../bin/src/ui_edittagdialog.h:724
 msgid "Sample rate"
@@ -4394,6 +4423,10 @@ msgstr "Трохи перемотати поточну доріжку"
 msgid "Seek the currently playing track to an absolute position"
 msgstr "Перемотати поточну доріжку на абсолютну позицію"
 
+#: ../bin/src/ui_behavioursettingspage.h:336
+msgid "Seeking using a keyboard shortcut"
+msgstr ""
+
 #: visualisations/visualisationselector.cpp:37 ../bin/src/ui_ripcddialog.h:310
 msgid "Select All"
 msgstr "Вибрати все"
@@ -4490,7 +4523,7 @@ msgstr "Показати"
 msgid "Show OSD"
 msgstr "Показувати OSD"
 
-#: ../bin/src/ui_playbacksettingspage.h:311
+#: ../bin/src/ui_playbacksettingspage.h:341
 msgid "Show a glowing animation on the current track"
 msgstr "Показувати для поточної доріжки блимаючу анімацію"
 
@@ -4591,7 +4624,7 @@ msgstr "Показувати кнопку «love»"
 msgid "Show the scrobble button in the main window"
 msgstr "Показувати кнопку скроблінга в головному вікні"
 
-#: ../bin/src/ui_behavioursettingspage.h:260
+#: ../bin/src/ui_behavioursettingspage.h:290
 msgid "Show tray icon"
 msgstr "Показувати значок в лотку"
 
@@ -5095,6 +5128,10 @@ msgstr "Цей потік лише для платних передплатни�
 msgid "This type of device is not supported: %1"
 msgstr "Цей тип пристрою не підтримується: %1"
 
+#: ../bin/src/ui_behavioursettingspage.h:337
+msgid "Time step"
+msgstr ""
+
 #: playlist/playlist.cpp:1315 ui/organisedialog.cpp:60
 #: ui/qtsystemtrayicon.cpp:232 ../bin/src/ui_about.h:142
 #: ../bin/src/ui_edittagdialog.h:734 ../bin/src/ui_trackselectiondialog.h:211
@@ -5307,7 +5344,7 @@ msgstr "Використовувати комбінації клавіш Gnome"
 msgid "Use Psychedelic Colors"
 msgstr "Психоделічні кольори"
 
-#: ../bin/src/ui_playbacksettingspage.h:323
+#: ../bin/src/ui_playbacksettingspage.h:353
 msgid "Use Replay Gain metadata if it is available"
 msgstr "Використовувати метадані Replay Gain, якщо такі є"
 
@@ -5351,7 +5388,7 @@ msgstr "Використовувати повідомлення для звіт�
 msgid "Use temporal noise shaping"
 msgstr "Використати тимчасове формування шуму"
 
-#: ../bin/src/ui_behavioursettingspage.h:266
+#: ../bin/src/ui_behavioursettingspage.h:296
 msgid "Use the system default"
 msgstr "Використовувати системну"
 
@@ -5383,7 +5420,7 @@ msgstr "Інтерфейс користувача"
 msgid "Username"
 msgstr "Користувач"
 
-#: ../bin/src/ui_behavioursettingspage.h:279
+#: ../bin/src/ui_behavioursettingspage.h:309
 msgid "Using the menu to add a song will..."
 msgstr "Використання меню для додавання композиції…"
 
@@ -5452,7 +5489,7 @@ msgstr "WMA"
 msgid "Wall"
 msgstr "Стіна"
 
-#: playlist/playlisttabbar.cpp:192 ../bin/src/ui_behavioursettingspage.h:262
+#: playlist/playlisttabbar.cpp:192 ../bin/src/ui_behavioursettingspage.h:292
 msgid "Warn me when closing a playlist tab"
 msgstr "Попереджати про закриття вкладки списку відтворення"
 
@@ -5468,7 +5505,7 @@ msgstr "Веб-сайт"
 msgid "Weeks"
 msgstr "Тижнів"
 
-#: ../bin/src/ui_behavioursettingspage.h:269
+#: ../bin/src/ui_behavioursettingspage.h:299
 msgid "When Clementine starts"
 msgstr "Під час запуску Clementine"
 
@@ -5478,7 +5515,7 @@ msgid ""
 "If there are no matches then it will use the largest image in the directory."
 msgstr "Під час пошуку обкладинок, Clementine спочатку шукатиме файли зображень, що містять одне з цих слів.\nЯкщо відповідників не буде, використовуватиметься найбільше зображення в каталозі."
 
-#: ../bin/src/ui_behavioursettingspage.h:306
+#: ../bin/src/ui_behavioursettingspage.h:340
 msgid "When saving a playlist, file paths should be"
 msgstr "Шляхи під час збереження списків відтворення мають бути"
 
@@ -5562,7 +5599,7 @@ msgstr "Бажаєте зараз виконати повторне сканув
 msgid "Write all songs statistics into songs' files"
 msgstr "Записати статичні дані щодо всіх композицій до файлів композицій"
 
-#: ../bin/src/ui_behavioursettingspage.h:311
+#: ../bin/src/ui_behavioursettingspage.h:345
 msgid "Write metadata"
 msgstr "Записати метадані"
 
@@ -5682,7 +5719,7 @@ msgid ""
 "shortcuts in Clementine."
 msgstr "Щоб мати змогу користуватися загальними клавіатурними скороченнями у Clementine, вам слід запустити програму «Системні налаштування» і дозволити Clementine «<span style=\"font-style:italic\">керувати вашим комп’ютером</span>»."
 
-#: ../bin/src/ui_behavioursettingspage.h:268
+#: ../bin/src/ui_behavioursettingspage.h:298
 msgid "You will need to restart Clementine if you change the language."
 msgstr "Потрібно перезапустити Clementine, щоб змінити мову."
 

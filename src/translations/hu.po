@@ -4,6 +4,7 @@
 # 
 # Translators:
 # andrewtranslates <andrewtranslates@aol.com>, 2014
+# Balázs Meskó <meskobalazs@gmail.com>, 2015
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # Bendegúz Gyönki <gyonkibendeguz@gmail.com>, 2012
 # lukibeni <lukacs.bence1@gmail.com>, 2012
@@ -16,7 +17,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2015-07-04 16:22+0000\n"
+"PO-Revision-Date: 2015-07-15 18:24+0000\n"
 "Last-Translator: miku84\n"
 "Language-Team: Hungarian (http://www.transifex.com/p/clementine/language/hu/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -49,15 +50,19 @@ msgstr " napok"
 msgid " kbps"
 msgstr " kbit/s"
 
-#: ../bin/src/ui_playbacksettingspage.h:318
-#: ../bin/src/ui_playbacksettingspage.h:321
-#: ../bin/src/ui_playbacksettingspage.h:335
+#: ../bin/src/ui_playbacksettingspage.h:348
+#: ../bin/src/ui_playbacksettingspage.h:351
+#: ../bin/src/ui_playbacksettingspage.h:365
 msgid " ms"
 msgstr " ms"
 
 #: ../bin/src/ui_songinfosettingspage.h:157
 msgid " pt"
 msgstr " pt"
+
+#: ../bin/src/ui_behavioursettingspage.h:338
+msgid " s"
+msgstr "s"
 
 #: ../bin/src/ui_notificationssettingspage.h:445
 #: ../bin/src/ui_visualisationselector.h:116
@@ -277,13 +282,29 @@ msgstr "1 szám"
 msgid "128k MP3"
 msgstr "128k MP3"
 
+#: ../bin/src/ui_playbacksettingspage.h:379
+msgid "192,000Hz"
+msgstr "192,000Hz"
+
 #: ../bin/src/ui_appearancesettingspage.h:291
 msgid "40%"
 msgstr "40%"
 
+#: ../bin/src/ui_playbacksettingspage.h:376
+msgid "44,100Hz"
+msgstr "44,100Hz"
+
+#: ../bin/src/ui_playbacksettingspage.h:377
+msgid "48,000Hz"
+msgstr "48,000Hz"
+
 #: library/library.cpp:64
 msgid "50 random tracks"
 msgstr "50 véletlen szám"
+
+#: ../bin/src/ui_playbacksettingspage.h:378
+msgid "96,000Hz"
+msgstr "96,000Hz"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:165
 msgid "<a href=\"http://www.di.fm/premium/\">Upgrade to Premium now</a>"
@@ -391,7 +412,7 @@ msgid "About Qt..."
 msgstr "Qt névjegye…"
 
 #: playlist/playlistsaveoptionsdialog.cpp:34
-#: ../bin/src/ui_behavioursettingspage.h:308
+#: ../bin/src/ui_behavioursettingspage.h:342
 msgid "Absolute"
 msgstr "Abszolút"
 
@@ -600,7 +621,7 @@ msgstr "Add a könyvjelzőkhöz"
 msgid "Add to playlist"
 msgstr "Hozzáadás a lejátszási listához"
 
-#: ../bin/src/ui_behavioursettingspage.h:298
+#: ../bin/src/ui_behavioursettingspage.h:328
 msgid "Add to the queue"
 msgstr "Sorbaállít"
 
@@ -658,7 +679,7 @@ msgstr "Másolás után…"
 msgid "Album"
 msgstr "Album"
 
-#: ../bin/src/ui_playbacksettingspage.h:328
+#: ../bin/src/ui_playbacksettingspage.h:358
 msgid "Album (ideal loudness for all tracks)"
 msgstr "Album (ideális hangerő minden számhoz)"
 
@@ -742,16 +763,16 @@ msgstr "Mid/side kódolás engedélyezése"
 msgid "Alongside the originals"
 msgstr "Az eredetiek mellett"
 
-#: ../bin/src/ui_behavioursettingspage.h:271
+#: ../bin/src/ui_behavioursettingspage.h:301
 msgid "Always hide the main window"
 msgstr "Mindig rejtse a főablakot"
 
-#: ../bin/src/ui_behavioursettingspage.h:270
+#: ../bin/src/ui_behavioursettingspage.h:300
 msgid "Always show the main window"
 msgstr "Mindig mutassa a főablakot"
 
-#: ../bin/src/ui_behavioursettingspage.h:284
-#: ../bin/src/ui_behavioursettingspage.h:304
+#: ../bin/src/ui_behavioursettingspage.h:314
+#: ../bin/src/ui_behavioursettingspage.h:334
 msgid "Always start playing"
 msgstr "Mindig indítja a lejátszást"
 
@@ -802,11 +823,11 @@ msgstr "Fájlok/URL-ek hozzáadása a lejátszási listához"
 msgid "Append to current playlist"
 msgstr "Hozzáfűz az aktuális listához"
 
-#: ../bin/src/ui_behavioursettingspage.h:295
+#: ../bin/src/ui_behavioursettingspage.h:325
 msgid "Append to the playlist"
 msgstr "Hozzáadja a lejátszási listához"
 
-#: ../bin/src/ui_playbacksettingspage.h:331
+#: ../bin/src/ui_playbacksettingspage.h:361
 msgid "Apply compression to prevent clipping"
 msgstr "Tömörítés engedélyezése a túlvezérlés elkerülése érdekében"
 
@@ -846,7 +867,7 @@ msgstr "Előadó címkék"
 msgid "Artist's initial"
 msgstr "Előadó kezdése"
 
-#: ../bin/src/ui_behavioursettingspage.h:310
+#: ../bin/src/ui_behavioursettingspage.h:344
 msgid "Ask when saving"
 msgstr "Mentéskor rákérdez"
 
@@ -856,7 +877,7 @@ msgstr "Mentéskor rákérdez"
 msgid "Audio format"
 msgstr "Hang formátum"
 
-#: ../bin/src/ui_playbacksettingspage.h:332
+#: ../bin/src/ui_playbacksettingspage.h:362
 msgid "Audio output"
 msgstr "Hang kimenet"
 
@@ -876,11 +897,12 @@ msgid "Authors"
 msgstr "Szerzők"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:227
+#: ../bin/src/ui_playbacksettingspage.h:375
 msgid "Auto"
 msgstr "Automatikus"
 
 #: playlist/playlistsaveoptionsdialog.cpp:32
-#: ../bin/src/ui_behavioursettingspage.h:307
+#: ../bin/src/ui_behavioursettingspage.h:341
 msgid "Automatic"
 msgstr "Automatikus"
 
@@ -953,7 +975,7 @@ msgstr "Egyszerű kék"
 msgid "Basic audio type"
 msgstr "Alap audió típus"
 
-#: ../bin/src/ui_behavioursettingspage.h:259
+#: ../bin/src/ui_behavioursettingspage.h:289
 msgid "Behavior"
 msgstr "Viselkedés"
 
@@ -1014,11 +1036,11 @@ msgstr "Box"
 msgid "Browse..."
 msgstr "Tallózás…"
 
-#: ../bin/src/ui_playbacksettingspage.h:334
+#: ../bin/src/ui_playbacksettingspage.h:364
 msgid "Buffer duration"
 msgstr "Puffer hossza"
 
-#: engines/gstengine.cpp:904
+#: engines/gstengine.cpp:907
 msgid "Buffering"
 msgstr "Pufferelés"
 
@@ -1093,7 +1115,11 @@ msgstr "Véletlenszerű lejátszási mód megváltoztatása"
 msgid "Change the language"
 msgstr "Nyelv váltása"
 
-#: ../bin/src/ui_playbacksettingspage.h:338
+#: ../bin/src/ui_playbacksettingspage.h:382
+msgid "Changes will take place when the next song starts playing"
+msgstr "A változtatások a következő zeneszámnál kerülnek beállításra"
+
+#: ../bin/src/ui_playbacksettingspage.h:369
 msgid ""
 "Changing mono playback preference will be effective for the next playing "
 "songs"
@@ -1119,7 +1145,7 @@ msgstr "Vk.com gyorsítótár mappa"
 msgid "Choose a name for your smart playlist"
 msgstr "Válassz egy nevet az intelligens lejátszási listádnak"
 
-#: engines/gstengine.cpp:925
+#: engines/gstengine.cpp:928
 msgid "Choose automatically"
 msgstr "Automatikus választás"
 
@@ -1511,11 +1537,11 @@ msgstr "Albumborító beállítva %1 helyről"
 msgid "Covers from %1"
 msgstr "Borítók %1 helyről"
 
-#: ../bin/src/ui_playbacksettingspage.h:315
+#: ../bin/src/ui_playbacksettingspage.h:345
 msgid "Cross-fade when changing tracks automatically"
 msgstr "Átúsztatás használata számok automatikus váltásánál"
 
-#: ../bin/src/ui_playbacksettingspage.h:314
+#: ../bin/src/ui_playbacksettingspage.h:344
 msgid "Cross-fade when changing tracks manually"
 msgstr "Átúsztatás használata számok manuális váltásánál"
 
@@ -1654,7 +1680,7 @@ msgstr "Hangerő csökkentése"
 msgid "Default background image"
 msgstr "Alapértelmezett háttérkép"
 
-#: engines/gstengine.cpp:950
+#: engines/gstengine.cpp:953
 #, qt-format
 msgid "Default device on %1"
 msgstr "Alapértelmezett eszköz a következőn: %1"
@@ -1872,7 +1898,7 @@ msgstr "Adakozás"
 msgid "Double click to open"
 msgstr "Dupla kattintás a megnyitáshoz"
 
-#: ../bin/src/ui_behavioursettingspage.h:292
+#: ../bin/src/ui_behavioursettingspage.h:322
 msgid "Double clicking a song will..."
 msgstr "Dupla kattintásra egy számon..."
 
@@ -2031,7 +2057,7 @@ msgstr "Hangszínszabályzó engedélyezése"
 msgid "Enable shortcuts only when Clementine is focused"
 msgstr "Gyorsbillentyűk engedélyezése csak akkor, ha a Clementine fókuszba kerül"
 
-#: ../bin/src/ui_behavioursettingspage.h:278
+#: ../bin/src/ui_behavioursettingspage.h:308
 msgid "Enable song metadata inline edition with click"
 msgstr "A szám belső metaadatainak endegélyezése kattintáskor"
 
@@ -2196,7 +2222,7 @@ msgstr "Minden 6. órában"
 msgid "Every hour"
 msgstr "Minden órában"
 
-#: ../bin/src/ui_playbacksettingspage.h:316
+#: ../bin/src/ui_playbacksettingspage.h:346
 msgid "Except between tracks on the same album or in the same CUE sheet"
 msgstr "Kivéve az azonos albumon vagy azonos CUE fájlban lévő számok között"
 
@@ -2268,20 +2294,20 @@ msgstr "F8"
 msgid "FLAC"
 msgstr "FLAC"
 
-#: ../bin/src/ui_playbacksettingspage.h:319
+#: ../bin/src/ui_playbacksettingspage.h:349
 msgid "Fade out on pause / fade in on resume"
 msgstr "Áttünés szünet megnyomásakor és a folytatáskor"
 
-#: ../bin/src/ui_playbacksettingspage.h:313
+#: ../bin/src/ui_playbacksettingspage.h:343
 msgid "Fade out when stopping a track"
 msgstr "Elhalkulás szám megállításakor"
 
-#: ../bin/src/ui_playbacksettingspage.h:312
+#: ../bin/src/ui_playbacksettingspage.h:342
 msgid "Fading"
 msgstr "Elhalkulás"
 
-#: ../bin/src/ui_playbacksettingspage.h:317
-#: ../bin/src/ui_playbacksettingspage.h:320
+#: ../bin/src/ui_playbacksettingspage.h:347
+#: ../bin/src/ui_playbacksettingspage.h:350
 msgid "Fading duration"
 msgstr "Elhalkulás hossza"
 
@@ -2551,7 +2577,7 @@ msgstr "Google Drive"
 msgid "Got %1 covers out of %2 (%3 failed)"
 msgstr "%1 borító a %2-ból/ből letöltve (%3 sikertelen)"
 
-#: ../bin/src/ui_behavioursettingspage.h:274
+#: ../bin/src/ui_behavioursettingspage.h:304
 msgid "Grey out non existent songs in my playlists"
 msgstr "Nem létező számok szürke színnel jelölése a lejátszási listákon"
 
@@ -2664,7 +2690,7 @@ msgstr "Ikonok felül"
 msgid "Identifying song"
 msgstr "Zeneszám azonosítása"
 
-#: ../bin/src/ui_behavioursettingspage.h:276
+#: ../bin/src/ui_behavioursettingspage.h:306
 msgid ""
 "If activated, clicking a selected song in the playlist view will let you "
 "edit the tag value directly"
@@ -2846,7 +2872,7 @@ msgstr "A Jamendo legnépszerűbb számai a héten"
 msgid "Jamendo database"
 msgstr "Jamendo adatbázis"
 
-#: ../bin/src/ui_behavioursettingspage.h:289
+#: ../bin/src/ui_behavioursettingspage.h:319
 msgid "Jump to previous song right away"
 msgstr "Azonnal ugorj az előző számra"
 
@@ -2866,7 +2892,7 @@ msgstr "Tartsa nyomva a gombokat %1 másodpercig"
 msgid "Keep buttons for %1 seconds..."
 msgstr "Tartsa nyomva a gombokat %1 másodpercig"
 
-#: ../bin/src/ui_behavioursettingspage.h:261
+#: ../bin/src/ui_behavioursettingspage.h:291
 msgid "Keep running in the background when the window is closed"
 msgstr "Futás a háttérben bezárt ablak esetén is"
 
@@ -2883,7 +2909,7 @@ msgstr "Kismacskák"
 msgid "Kuduro"
 msgstr "Kuduro"
 
-#: ../bin/src/ui_behavioursettingspage.h:263
+#: ../bin/src/ui_behavioursettingspage.h:293
 msgid "Language"
 msgstr "Nyelv"
 
@@ -3236,7 +3262,7 @@ msgstr "Tagság típusa"
 msgid "Minimum bitrate"
 msgstr "Minimális bitráta"
 
-#: ../bin/src/ui_playbacksettingspage.h:336
+#: ../bin/src/ui_playbacksettingspage.h:366
 msgid "Minimum buffer fill"
 msgstr "Minimum puffer"
 
@@ -3252,7 +3278,7 @@ msgstr "Modell"
 msgid "Monitor the library for changes"
 msgstr "Zenetár figyelése változások után"
 
-#: ../bin/src/ui_playbacksettingspage.h:340
+#: ../bin/src/ui_playbacksettingspage.h:371
 msgid "Mono playback"
 msgstr "Mono lejátszás"
 
@@ -3363,8 +3389,8 @@ msgstr "Soha"
 msgid "Never played"
 msgstr "Sohasem játszott"
 
-#: ../bin/src/ui_behavioursettingspage.h:282
-#: ../bin/src/ui_behavioursettingspage.h:302
+#: ../bin/src/ui_behavioursettingspage.h:312
+#: ../bin/src/ui_behavioursettingspage.h:332
 msgid "Never start playing"
 msgstr "Soha ne indítsa el a lejátszást"
 
@@ -3604,7 +3630,7 @@ msgstr "Google Drive megnyitása"
 msgid "Open in new playlist"
 msgstr "Megnyitás új lejátszási listán"
 
-#: ../bin/src/ui_behavioursettingspage.h:297
+#: ../bin/src/ui_behavioursettingspage.h:327
 msgctxt "Refers to behavior settings in Clementine settings page."
 msgid "Open in new playlist"
 msgstr "Megnyitás új lejátszási listán"
@@ -3679,7 +3705,7 @@ msgstr "Egyéb beállítások"
 msgid "Output"
 msgstr "Kimenet"
 
-#: ../bin/src/ui_playbacksettingspage.h:333
+#: ../bin/src/ui_playbacksettingspage.h:363
 msgid "Output device"
 msgstr "Kimeneti eszköz"
 
@@ -3762,8 +3788,8 @@ msgstr "Lejátszások száma"
 msgid "Play if stopped, pause if playing"
 msgstr "Lejátszás, ha le van állítva, különben szünet"
 
-#: ../bin/src/ui_behavioursettingspage.h:283
-#: ../bin/src/ui_behavioursettingspage.h:303
+#: ../bin/src/ui_behavioursettingspage.h:313
+#: ../bin/src/ui_behavioursettingspage.h:333
 msgid "Play if there is nothing already playing"
 msgstr "Lejátszás, ha nincs lejátszás folyamatban"
 
@@ -3775,7 +3801,7 @@ msgstr "A(z) <n>. szám lejátszása a listában"
 msgid "Play/Pause"
 msgstr "Lejátszás/Szünet"
 
-#: ../bin/src/ui_playbacksettingspage.h:310
+#: ../bin/src/ui_playbacksettingspage.h:340
 msgid "Playback"
 msgstr "Lejátszás"
 
@@ -3832,7 +3858,7 @@ msgstr "Értesítés időtartama"
 msgid "Port"
 msgstr "Port"
 
-#: ui/equalizer.cpp:44 ../bin/src/ui_playbacksettingspage.h:330
+#: ui/equalizer.cpp:44 ../bin/src/ui_playbacksettingspage.h:360
 msgid "Pre-amp"
 msgstr "Előerősítő"
 
@@ -3888,7 +3914,7 @@ msgstr "Nyomjon meg egy billentyűt"
 msgid "Press a key combination to use for %1..."
 msgstr "Nyomjon meg egy billentyű kombinációt a %1 használatához..."
 
-#: ../bin/src/ui_behavioursettingspage.h:286
+#: ../bin/src/ui_behavioursettingspage.h:316
 msgid "Pressing \"Previous\" in player will..."
 msgstr "Az \"Előző\" gomb megnyomásakor..."
 
@@ -3971,7 +3997,7 @@ msgstr "Sorba állítja a kiválasztott számokat"
 msgid "Queue track"
 msgstr "Szám sorba állítása"
 
-#: ../bin/src/ui_playbacksettingspage.h:327
+#: ../bin/src/ui_playbacksettingspage.h:357
 msgid "Radio (equal loudness for all tracks)"
 msgstr "Rádió (egyenlő hangerő minden számhoz)"
 
@@ -4048,7 +4074,7 @@ msgid "Reggae"
 msgstr "Reggae"
 
 #: playlist/playlistsaveoptionsdialog.cpp:33
-#: ../bin/src/ui_behavioursettingspage.h:309
+#: ../bin/src/ui_behavioursettingspage.h:343
 msgid "Relative"
 msgstr "Relatív"
 
@@ -4056,7 +4082,7 @@ msgstr "Relatív"
 msgid "Remember Wii remote swing"
 msgstr "Emlékezzen a Wii távvezérlő mozdulatra"
 
-#: ../bin/src/ui_behavioursettingspage.h:272
+#: ../bin/src/ui_behavioursettingspage.h:302
 msgid "Remember from last time"
 msgstr "Ahogy legutoljára volt"
 
@@ -4139,7 +4165,7 @@ msgstr "Szám ismétlése"
 msgid "Replace current playlist"
 msgstr "Az aktuális lista cseréje"
 
-#: ../bin/src/ui_behavioursettingspage.h:296
+#: ../bin/src/ui_behavioursettingspage.h:326
 msgid "Replace the playlist"
 msgstr "Lejátszási lista cseréje"
 
@@ -4147,11 +4173,11 @@ msgstr "Lejátszási lista cseréje"
 msgid "Replaces spaces with underscores"
 msgstr "Szóközök alulvonásokkal való helyettesítése"
 
-#: ../bin/src/ui_playbacksettingspage.h:322
+#: ../bin/src/ui_playbacksettingspage.h:352
 msgid "Replay Gain"
 msgstr "Replay Gain"
 
-#: ../bin/src/ui_playbacksettingspage.h:324
+#: ../bin/src/ui_playbacksettingspage.h:354
 msgid "Replay Gain mode"
 msgstr "Lejátszás újra hangosság kiegyenlítő módban"
 
@@ -4171,7 +4197,7 @@ msgstr "Visszaállítás"
 msgid "Reset play counts"
 msgstr "Lejátszás számlálók visszaállítása"
 
-#: ../bin/src/ui_behavioursettingspage.h:290
+#: ../bin/src/ui_behavioursettingspage.h:320
 msgid "Restart song, then jump to previous if pressed again"
 msgstr "Szám újraindítása és újboli megnyomáskor ugrás az előzőre"
 
@@ -4184,7 +4210,7 @@ msgstr "Szám újraindítása, vagy az előző szám lejátszása, ha 8 msp- en 
 msgid "Restrict to ASCII characters"
 msgstr "Korlátozás ASCII karakterekre"
 
-#: ../bin/src/ui_behavioursettingspage.h:273
+#: ../bin/src/ui_behavioursettingspage.h:303
 msgid "Resume playback on start"
 msgstr "Lejátszás folytatása induláskor"
 
@@ -4233,6 +4259,10 @@ msgstr "Eszköz biztonságos eltávolítása"
 #: ../bin/src/ui_organisedialog.h:248
 msgid "Safely remove the device after copying"
 msgstr "Eszköz biztonságos eltávolítása másolás után"
+
+#: ../bin/src/ui_playbacksettingspage.h:372
+msgid "Sample Rate"
+msgstr "Mintavételi sűrűség"
 
 #: playlist/playlist.cpp:1357 ../bin/src/ui_edittagdialog.h:724
 msgid "Sample rate"
@@ -4401,6 +4431,10 @@ msgstr "Léptetés hátra"
 msgid "Seek the currently playing track to an absolute position"
 msgstr "A lejátszott szám adott pozícióra léptetése"
 
+#: ../bin/src/ui_behavioursettingspage.h:336
+msgid "Seeking using a keyboard shortcut"
+msgstr "Keresés billentyűparanccsal"
+
 #: visualisations/visualisationselector.cpp:37 ../bin/src/ui_ripcddialog.h:310
 msgid "Select All"
 msgstr "Összes kiválasztása"
@@ -4497,7 +4531,7 @@ msgstr "Megjelenítés"
 msgid "Show OSD"
 msgstr "OSD megjelenítése"
 
-#: ../bin/src/ui_playbacksettingspage.h:311
+#: ../bin/src/ui_playbacksettingspage.h:341
 msgid "Show a glowing animation on the current track"
 msgstr "Ragyogás animáció megjelenítése a játszott számon a lejátszási listában"
 
@@ -4598,7 +4632,7 @@ msgstr "Jelenítse meg a \"szeret\" gombot"
 msgid "Show the scrobble button in the main window"
 msgstr "Scrobble gomb mutatása a főablakban"
 
-#: ../bin/src/ui_behavioursettingspage.h:260
+#: ../bin/src/ui_behavioursettingspage.h:290
 msgid "Show tray icon"
 msgstr "Tálcaikon megjelenítése"
 
@@ -5102,6 +5136,10 @@ msgstr "Ez az adatfolyam csak előfizetőknek érhető el"
 msgid "This type of device is not supported: %1"
 msgstr "A %1 eszköztípus nem támogatott"
 
+#: ../bin/src/ui_behavioursettingspage.h:337
+msgid "Time step"
+msgstr "Idő lépés"
+
 #: playlist/playlist.cpp:1315 ui/organisedialog.cpp:60
 #: ui/qtsystemtrayicon.cpp:232 ../bin/src/ui_about.h:142
 #: ../bin/src/ui_edittagdialog.h:734 ../bin/src/ui_trackselectiondialog.h:211
@@ -5314,7 +5352,7 @@ msgstr "Gnome gyorsbillentyűk használata"
 msgid "Use Psychedelic Colors"
 msgstr "Pszichedelikus színek használata"
 
-#: ../bin/src/ui_playbacksettingspage.h:323
+#: ../bin/src/ui_playbacksettingspage.h:353
 msgid "Use Replay Gain metadata if it is available"
 msgstr "Replay Gain adatok használata, ha elérhetőek"
 
@@ -5358,7 +5396,7 @@ msgstr "Értesítések használata a Wii távvezérlő állapotváltozásaihoz"
 msgid "Use temporal noise shaping"
 msgstr "Átmeneti zajszűrő alkalmazása"
 
-#: ../bin/src/ui_behavioursettingspage.h:266
+#: ../bin/src/ui_behavioursettingspage.h:296
 msgid "Use the system default"
 msgstr "Rendszer alapértelmezés használata"
 
@@ -5390,7 +5428,7 @@ msgstr "Kezelőfelület"
 msgid "Username"
 msgstr "Felhasználónév"
 
-#: ../bin/src/ui_behavioursettingspage.h:279
+#: ../bin/src/ui_behavioursettingspage.h:309
 msgid "Using the menu to add a song will..."
 msgstr "Szám felvételéhez a menü használatával..."
 
@@ -5459,7 +5497,7 @@ msgstr "WMA"
 msgid "Wall"
 msgstr "Fal"
 
-#: playlist/playlisttabbar.cpp:192 ../bin/src/ui_behavioursettingspage.h:262
+#: playlist/playlisttabbar.cpp:192 ../bin/src/ui_behavioursettingspage.h:292
 msgid "Warn me when closing a playlist tab"
 msgstr "Figyelmeztessen a lejátszási lista bezárásakor"
 
@@ -5475,7 +5513,7 @@ msgstr "Weboldal"
 msgid "Weeks"
 msgstr "Hét"
 
-#: ../bin/src/ui_behavioursettingspage.h:269
+#: ../bin/src/ui_behavioursettingspage.h:299
 msgid "When Clementine starts"
 msgstr "Amikor a Clementine elindul"
 
@@ -5485,7 +5523,7 @@ msgid ""
 "If there are no matches then it will use the largest image in the directory."
 msgstr "Amikor a Clementine albumborítót keres, először azokat a fájlokat ellenőrzi, melyek neve tartalmazza az alábbi szavakat.\nHa nincs egyezés, akkor a legnagyobb képet veszi a könyvtárból."
 
-#: ../bin/src/ui_behavioursettingspage.h:306
+#: ../bin/src/ui_behavioursettingspage.h:340
 msgid "When saving a playlist, file paths should be"
 msgstr "A lejátszási lista mentésekor a fájl elérési útvonal"
 
@@ -5569,7 +5607,7 @@ msgstr "Akarsz futtatni egy teljes újraolvasást most?"
 msgid "Write all songs statistics into songs' files"
 msgstr "Minde szám statisztikájának mentése zenefájlokba"
 
-#: ../bin/src/ui_behavioursettingspage.h:311
+#: ../bin/src/ui_behavioursettingspage.h:345
 msgid "Write metadata"
 msgstr "Metaadatok írása"
 
@@ -5689,7 +5727,7 @@ msgid ""
 "shortcuts in Clementine."
 msgstr "A Rendszerbeállításokban engedélyezned kell a \"<span style=\" font-style:italic;\">számítógép irányítása</span>\" opciót a globális billentyűparancsok használatához."
 
-#: ../bin/src/ui_behavioursettingspage.h:268
+#: ../bin/src/ui_behavioursettingspage.h:298
 msgid "You will need to restart Clementine if you change the language."
 msgstr "A nyelv megváltoztatásához újra kell indítania a Clementinet."
 

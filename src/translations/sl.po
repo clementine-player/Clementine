@@ -13,7 +13,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2015-07-02 13:48+0000\n"
+"PO-Revision-Date: 2015-07-15 13:28+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Slovenian (http://www.transifex.com/p/clementine/language/sl/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -46,15 +46,19 @@ msgstr " dni"
 msgid " kbps"
 msgstr " kb/s"
 
-#: ../bin/src/ui_playbacksettingspage.h:318
-#: ../bin/src/ui_playbacksettingspage.h:321
-#: ../bin/src/ui_playbacksettingspage.h:335
+#: ../bin/src/ui_playbacksettingspage.h:348
+#: ../bin/src/ui_playbacksettingspage.h:351
+#: ../bin/src/ui_playbacksettingspage.h:365
 msgid " ms"
 msgstr " ms"
 
 #: ../bin/src/ui_songinfosettingspage.h:157
 msgid " pt"
 msgstr " pt"
+
+#: ../bin/src/ui_behavioursettingspage.h:338
+msgid " s"
+msgstr ""
 
 #: ../bin/src/ui_notificationssettingspage.h:445
 #: ../bin/src/ui_visualisationselector.h:116
@@ -274,13 +278,29 @@ msgstr "1 skladba"
 msgid "128k MP3"
 msgstr "128k MP3"
 
+#: ../bin/src/ui_playbacksettingspage.h:379
+msgid "192,000Hz"
+msgstr ""
+
 #: ../bin/src/ui_appearancesettingspage.h:291
 msgid "40%"
 msgstr "40 %"
 
+#: ../bin/src/ui_playbacksettingspage.h:376
+msgid "44,100Hz"
+msgstr ""
+
+#: ../bin/src/ui_playbacksettingspage.h:377
+msgid "48,000Hz"
+msgstr ""
+
 #: library/library.cpp:64
 msgid "50 random tracks"
 msgstr "50 naključnih skladb"
+
+#: ../bin/src/ui_playbacksettingspage.h:378
+msgid "96,000Hz"
+msgstr ""
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:165
 msgid "<a href=\"http://www.di.fm/premium/\">Upgrade to Premium now</a>"
@@ -388,7 +408,7 @@ msgid "About Qt..."
 msgstr "O Qt ..."
 
 #: playlist/playlistsaveoptionsdialog.cpp:34
-#: ../bin/src/ui_behavioursettingspage.h:308
+#: ../bin/src/ui_behavioursettingspage.h:342
 msgid "Absolute"
 msgstr "Absolutne"
 
@@ -597,7 +617,7 @@ msgstr "Dodaj med zaznamke"
 msgid "Add to playlist"
 msgstr "Dodaj na seznam predvajanja"
 
-#: ../bin/src/ui_behavioursettingspage.h:298
+#: ../bin/src/ui_behavioursettingspage.h:328
 msgid "Add to the queue"
 msgstr "Dodaj v vrsto"
 
@@ -655,7 +675,7 @@ msgstr "Po kopiranju ..."
 msgid "Album"
 msgstr "Album"
 
-#: ../bin/src/ui_playbacksettingspage.h:328
+#: ../bin/src/ui_playbacksettingspage.h:358
 msgid "Album (ideal loudness for all tracks)"
 msgstr "Album (najboljša glasnost za vse skladbe)"
 
@@ -739,16 +759,16 @@ msgstr "Dovoli kodiranje mid/side (MS)"
 msgid "Alongside the originals"
 msgstr "Ob izvirnikih"
 
-#: ../bin/src/ui_behavioursettingspage.h:271
+#: ../bin/src/ui_behavioursettingspage.h:301
 msgid "Always hide the main window"
 msgstr "Vedno skrij glavno okno"
 
-#: ../bin/src/ui_behavioursettingspage.h:270
+#: ../bin/src/ui_behavioursettingspage.h:300
 msgid "Always show the main window"
 msgstr "Vedno pokaži glavno okno"
 
-#: ../bin/src/ui_behavioursettingspage.h:284
-#: ../bin/src/ui_behavioursettingspage.h:304
+#: ../bin/src/ui_behavioursettingspage.h:314
+#: ../bin/src/ui_behavioursettingspage.h:334
 msgid "Always start playing"
 msgstr "Vedno začni s predvajanjem"
 
@@ -799,11 +819,11 @@ msgstr "Pripni datoteke/naslove URL seznamu predvajanja"
 msgid "Append to current playlist"
 msgstr "Pripni trenutnemu seznamu predvajanja"
 
-#: ../bin/src/ui_behavioursettingspage.h:295
+#: ../bin/src/ui_behavioursettingspage.h:325
 msgid "Append to the playlist"
 msgstr "Pripni k seznamu predvajanja"
 
-#: ../bin/src/ui_playbacksettingspage.h:331
+#: ../bin/src/ui_playbacksettingspage.h:361
 msgid "Apply compression to prevent clipping"
 msgstr "Uporabi stiskanje za preprečitev odrezanja"
 
@@ -843,7 +863,7 @@ msgstr "Oznake izvajalcev"
 msgid "Artist's initial"
 msgstr "Začetnice izvajalca"
 
-#: ../bin/src/ui_behavioursettingspage.h:310
+#: ../bin/src/ui_behavioursettingspage.h:344
 msgid "Ask when saving"
 msgstr "Vprašaj med shranjevanjem"
 
@@ -853,7 +873,7 @@ msgstr "Vprašaj med shranjevanjem"
 msgid "Audio format"
 msgstr "Vrsta zvoka"
 
-#: ../bin/src/ui_playbacksettingspage.h:332
+#: ../bin/src/ui_playbacksettingspage.h:362
 msgid "Audio output"
 msgstr "Izhod zvoka"
 
@@ -873,11 +893,12 @@ msgid "Authors"
 msgstr "Avtorji"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:227
+#: ../bin/src/ui_playbacksettingspage.h:375
 msgid "Auto"
 msgstr "Samodejno"
 
 #: playlist/playlistsaveoptionsdialog.cpp:32
-#: ../bin/src/ui_behavioursettingspage.h:307
+#: ../bin/src/ui_behavioursettingspage.h:341
 msgid "Automatic"
 msgstr "Samodejne"
 
@@ -950,7 +971,7 @@ msgstr "Preprosta modra"
 msgid "Basic audio type"
 msgstr "Osnovna vrsta zvoka"
 
-#: ../bin/src/ui_behavioursettingspage.h:259
+#: ../bin/src/ui_behavioursettingspage.h:289
 msgid "Behavior"
 msgstr "Obnašanje"
 
@@ -1011,11 +1032,11 @@ msgstr "Box"
 msgid "Browse..."
 msgstr "Prebrskaj ..."
 
-#: ../bin/src/ui_playbacksettingspage.h:334
+#: ../bin/src/ui_playbacksettingspage.h:364
 msgid "Buffer duration"
 msgstr "Trajanje medpomnilnika"
 
-#: engines/gstengine.cpp:904
+#: engines/gstengine.cpp:907
 msgid "Buffering"
 msgstr "Medpomnjenje"
 
@@ -1090,7 +1111,11 @@ msgstr "Spremeni način naključnega predvajanja"
 msgid "Change the language"
 msgstr "Sprememba jezika"
 
-#: ../bin/src/ui_playbacksettingspage.h:338
+#: ../bin/src/ui_playbacksettingspage.h:382
+msgid "Changes will take place when the next song starts playing"
+msgstr ""
+
+#: ../bin/src/ui_playbacksettingspage.h:369
 msgid ""
 "Changing mono playback preference will be effective for the next playing "
 "songs"
@@ -1116,7 +1141,7 @@ msgstr "Izberi mapo s predpomnilnikom za Vk.com"
 msgid "Choose a name for your smart playlist"
 msgstr "Izberite ime za vaš pametni seznam predvajanja"
 
-#: engines/gstengine.cpp:925
+#: engines/gstengine.cpp:928
 msgid "Choose automatically"
 msgstr "Izberi samodejno"
 
@@ -1508,11 +1533,11 @@ msgstr "Ovitek albuma je nastavljen iz %1"
 msgid "Covers from %1"
 msgstr "Ovitki iz %1"
 
-#: ../bin/src/ui_playbacksettingspage.h:315
+#: ../bin/src/ui_playbacksettingspage.h:345
 msgid "Cross-fade when changing tracks automatically"
 msgstr "Postopni prehod med samodejno spremembo skladb"
 
-#: ../bin/src/ui_playbacksettingspage.h:314
+#: ../bin/src/ui_playbacksettingspage.h:344
 msgid "Cross-fade when changing tracks manually"
 msgstr "Postopni prehod med ročno spremembo skladb"
 
@@ -1651,7 +1676,7 @@ msgstr "Zmanjšaj glasnost"
 msgid "Default background image"
 msgstr "Privzeta slika ozadja"
 
-#: engines/gstengine.cpp:950
+#: engines/gstengine.cpp:953
 #, qt-format
 msgid "Default device on %1"
 msgstr "Privzeta naprava na %1"
@@ -1869,7 +1894,7 @@ msgstr "Donacija"
 msgid "Double click to open"
 msgstr "Dvoklik za odpiranje"
 
-#: ../bin/src/ui_behavioursettingspage.h:292
+#: ../bin/src/ui_behavioursettingspage.h:322
 msgid "Double clicking a song will..."
 msgstr "Dvoklik skladbe bo povzročil sledeče ..."
 
@@ -2028,7 +2053,7 @@ msgstr "Omogoči uravnalnik"
 msgid "Enable shortcuts only when Clementine is focused"
 msgstr "Omogoči bližnjice le, ko je Clementine v žarišču"
 
-#: ../bin/src/ui_behavioursettingspage.h:278
+#: ../bin/src/ui_behavioursettingspage.h:308
 msgid "Enable song metadata inline edition with click"
 msgstr "Omogoči znotrajvrstično urejanje metapodatkov skladbe s klikom"
 
@@ -2193,7 +2218,7 @@ msgstr "Vsakih 6 ur"
 msgid "Every hour"
 msgstr "Vsako uro"
 
-#: ../bin/src/ui_playbacksettingspage.h:316
+#: ../bin/src/ui_playbacksettingspage.h:346
 msgid "Except between tracks on the same album or in the same CUE sheet"
 msgstr "Razen med skladbami na istem albumu ali v isti predlogi CUE"
 
@@ -2265,20 +2290,20 @@ msgstr "F8"
 msgid "FLAC"
 msgstr "FLAC"
 
-#: ../bin/src/ui_playbacksettingspage.h:319
+#: ../bin/src/ui_playbacksettingspage.h:349
 msgid "Fade out on pause / fade in on resume"
 msgstr "Pojemaj ob premoru / povečaj ob nadaljevanju"
 
-#: ../bin/src/ui_playbacksettingspage.h:313
+#: ../bin/src/ui_playbacksettingspage.h:343
 msgid "Fade out when stopping a track"
 msgstr "Pojemanje glasnosti ob zaustavitvi predvajanja"
 
-#: ../bin/src/ui_playbacksettingspage.h:312
+#: ../bin/src/ui_playbacksettingspage.h:342
 msgid "Fading"
 msgstr "Pojemanje"
 
-#: ../bin/src/ui_playbacksettingspage.h:317
-#: ../bin/src/ui_playbacksettingspage.h:320
+#: ../bin/src/ui_playbacksettingspage.h:347
+#: ../bin/src/ui_playbacksettingspage.h:350
 msgid "Fading duration"
 msgstr "Trajanje pojemanja"
 
@@ -2548,7 +2573,7 @@ msgstr "Google Drive"
 msgid "Got %1 covers out of %2 (%3 failed)"
 msgstr "Pridobljenih je bilo %1  od %2 ovitkov (%3 spodletelih)"
 
-#: ../bin/src/ui_behavioursettingspage.h:274
+#: ../bin/src/ui_behavioursettingspage.h:304
 msgid "Grey out non existent songs in my playlists"
 msgstr "Označi s sivo skladbe, ki so na seznamih predvajanja in ne obstajajo več"
 
@@ -2661,7 +2686,7 @@ msgstr "Ikone na vrhu"
 msgid "Identifying song"
 msgstr "Prepoznavanje skladbe"
 
-#: ../bin/src/ui_behavioursettingspage.h:276
+#: ../bin/src/ui_behavioursettingspage.h:306
 msgid ""
 "If activated, clicking a selected song in the playlist view will let you "
 "edit the tag value directly"
@@ -2843,7 +2868,7 @@ msgstr "Jamendo: najboljše skladbe tedna"
 msgid "Jamendo database"
 msgstr "Podatkovna zbirka Jamendo"
 
-#: ../bin/src/ui_behavioursettingspage.h:289
+#: ../bin/src/ui_behavioursettingspage.h:319
 msgid "Jump to previous song right away"
 msgstr "takoj skočilo na predhodno skladbo"
 
@@ -2863,7 +2888,7 @@ msgstr "Ohrani gumbe za %1 sekundo ..."
 msgid "Keep buttons for %1 seconds..."
 msgstr "Ohrani gumbe za %1 sekund ..."
 
-#: ../bin/src/ui_behavioursettingspage.h:261
+#: ../bin/src/ui_behavioursettingspage.h:291
 msgid "Keep running in the background when the window is closed"
 msgstr "Ostani zagnan v ozadju dokler se ne zapre okno"
 
@@ -2880,7 +2905,7 @@ msgstr "Mucke"
 msgid "Kuduro"
 msgstr "Kuduro"
 
-#: ../bin/src/ui_behavioursettingspage.h:263
+#: ../bin/src/ui_behavioursettingspage.h:293
 msgid "Language"
 msgstr "Jezik"
 
@@ -3233,7 +3258,7 @@ msgstr "Vrsta članstva"
 msgid "Minimum bitrate"
 msgstr "Najmanjša bitna hitrost"
 
-#: ../bin/src/ui_playbacksettingspage.h:336
+#: ../bin/src/ui_playbacksettingspage.h:366
 msgid "Minimum buffer fill"
 msgstr "Najmanjša zapolnitev medpomnilnika"
 
@@ -3249,7 +3274,7 @@ msgstr "Model"
 msgid "Monitor the library for changes"
 msgstr "Spremljaj knjižnico za spremembami"
 
-#: ../bin/src/ui_playbacksettingspage.h:340
+#: ../bin/src/ui_playbacksettingspage.h:371
 msgid "Mono playback"
 msgstr "Predvajanje v načinu mono"
 
@@ -3360,8 +3385,8 @@ msgstr "Nikoli"
 msgid "Never played"
 msgstr "Nikoli predvajano"
 
-#: ../bin/src/ui_behavioursettingspage.h:282
-#: ../bin/src/ui_behavioursettingspage.h:302
+#: ../bin/src/ui_behavioursettingspage.h:312
+#: ../bin/src/ui_behavioursettingspage.h:332
 msgid "Never start playing"
 msgstr "Nikoli ne začni s predvajanjem"
 
@@ -3601,7 +3626,7 @@ msgstr "Odpri v Google Drive"
 msgid "Open in new playlist"
 msgstr "Odpri v novem seznamu predvajanja"
 
-#: ../bin/src/ui_behavioursettingspage.h:297
+#: ../bin/src/ui_behavioursettingspage.h:327
 msgctxt "Refers to behavior settings in Clementine settings page."
 msgid "Open in new playlist"
 msgstr "Odpri v novem seznamu predvajanja"
@@ -3676,7 +3701,7 @@ msgstr "Druge možnosti"
 msgid "Output"
 msgstr "Izhod"
 
-#: ../bin/src/ui_playbacksettingspage.h:333
+#: ../bin/src/ui_playbacksettingspage.h:363
 msgid "Output device"
 msgstr "Izhodna naprava"
 
@@ -3759,8 +3784,8 @@ msgstr "Število predvajanj"
 msgid "Play if stopped, pause if playing"
 msgstr "Predvajaj, če je zaustavljeno, napravi premor, če se predvaja"
 
-#: ../bin/src/ui_behavioursettingspage.h:283
-#: ../bin/src/ui_behavioursettingspage.h:303
+#: ../bin/src/ui_behavioursettingspage.h:313
+#: ../bin/src/ui_behavioursettingspage.h:333
 msgid "Play if there is nothing already playing"
 msgstr "Predvajaj, če se trenutno ne predvaja nič"
 
@@ -3772,7 +3797,7 @@ msgstr "Predvajaj <n>-to skladbo v seznamu predvajanja"
 msgid "Play/Pause"
 msgstr "Predvajaj/premor"
 
-#: ../bin/src/ui_playbacksettingspage.h:310
+#: ../bin/src/ui_playbacksettingspage.h:340
 msgid "Playback"
 msgstr "Predvajanje"
 
@@ -3829,7 +3854,7 @@ msgstr "Trajanje pojavnega obvestila"
 msgid "Port"
 msgstr "Vrata"
 
-#: ui/equalizer.cpp:44 ../bin/src/ui_playbacksettingspage.h:330
+#: ui/equalizer.cpp:44 ../bin/src/ui_playbacksettingspage.h:360
 msgid "Pre-amp"
 msgstr "Predojačanje"
 
@@ -3885,7 +3910,7 @@ msgstr "Pritisnite tipko"
 msgid "Press a key combination to use for %1..."
 msgstr "Pritisnite kombinacijo tipk, ki jo želite uporabiti za %1 ..."
 
-#: ../bin/src/ui_behavioursettingspage.h:286
+#: ../bin/src/ui_behavioursettingspage.h:316
 msgid "Pressing \"Previous\" in player will..."
 msgstr "Klik na »Predhodno« v predvajalniku bo ..."
 
@@ -3968,7 +3993,7 @@ msgstr "Postavi izbrane skladbe v vrsto"
 msgid "Queue track"
 msgstr "Postavi skladbo v vrsto"
 
-#: ../bin/src/ui_playbacksettingspage.h:327
+#: ../bin/src/ui_playbacksettingspage.h:357
 msgid "Radio (equal loudness for all tracks)"
 msgstr "Radio (enaka glasnost za vse skladbe)"
 
@@ -4045,7 +4070,7 @@ msgid "Reggae"
 msgstr "Reggae"
 
 #: playlist/playlistsaveoptionsdialog.cpp:33
-#: ../bin/src/ui_behavioursettingspage.h:309
+#: ../bin/src/ui_behavioursettingspage.h:343
 msgid "Relative"
 msgstr "Relativne"
 
@@ -4053,7 +4078,7 @@ msgstr "Relativne"
 msgid "Remember Wii remote swing"
 msgstr "Zapomni si Wii remote zamah"
 
-#: ../bin/src/ui_behavioursettingspage.h:272
+#: ../bin/src/ui_behavioursettingspage.h:302
 msgid "Remember from last time"
 msgstr "Zapomni si od zadnjič"
 
@@ -4136,7 +4161,7 @@ msgstr "Ponavljaj skladbo"
 msgid "Replace current playlist"
 msgstr "Zamenjaj trenuten seznam predvajanja"
 
-#: ../bin/src/ui_behavioursettingspage.h:296
+#: ../bin/src/ui_behavioursettingspage.h:326
 msgid "Replace the playlist"
 msgstr "Zamenjaj seznam predvajanja"
 
@@ -4144,11 +4169,11 @@ msgstr "Zamenjaj seznam predvajanja"
 msgid "Replaces spaces with underscores"
 msgstr "Zamenja presledke s podčrtaji"
 
-#: ../bin/src/ui_playbacksettingspage.h:322
+#: ../bin/src/ui_playbacksettingspage.h:352
 msgid "Replay Gain"
 msgstr "Jakost predvajanja"
 
-#: ../bin/src/ui_playbacksettingspage.h:324
+#: ../bin/src/ui_playbacksettingspage.h:354
 msgid "Replay Gain mode"
 msgstr "Način Jakosti predvajanja"
 
@@ -4168,7 +4193,7 @@ msgstr "Ponastavi"
 msgid "Reset play counts"
 msgstr "Ponastavi število predvajanj"
 
-#: ../bin/src/ui_behavioursettingspage.h:290
+#: ../bin/src/ui_behavioursettingspage.h:320
 msgid "Restart song, then jump to previous if pressed again"
 msgstr "ponovil skladbo, nato pa ob ponovnem kliku skočil na predhodno"
 
@@ -4181,7 +4206,7 @@ msgstr "Znova zaženi skladbo ali predvajaj predhodno skladbo, če je znotraj 8 
 msgid "Restrict to ASCII characters"
 msgstr "Omeji na znake ASCII"
 
-#: ../bin/src/ui_behavioursettingspage.h:273
+#: ../bin/src/ui_behavioursettingspage.h:303
 msgid "Resume playback on start"
 msgstr "Ob zagonu nadaljuj s predvajanjem"
 
@@ -4230,6 +4255,10 @@ msgstr "Varno odstrani napravo"
 #: ../bin/src/ui_organisedialog.h:248
 msgid "Safely remove the device after copying"
 msgstr "Varno odstrani napravo po kopiranju"
+
+#: ../bin/src/ui_playbacksettingspage.h:372
+msgid "Sample Rate"
+msgstr ""
 
 #: playlist/playlist.cpp:1357 ../bin/src/ui_edittagdialog.h:724
 msgid "Sample rate"
@@ -4398,6 +4427,10 @@ msgstr "Previj trenutno predvajano skladbo za relativno količino"
 msgid "Seek the currently playing track to an absolute position"
 msgstr "Previj trenutno predvajano skladbo na absoluten položaj"
 
+#: ../bin/src/ui_behavioursettingspage.h:336
+msgid "Seeking using a keyboard shortcut"
+msgstr ""
+
 #: visualisations/visualisationselector.cpp:37 ../bin/src/ui_ripcddialog.h:310
 msgid "Select All"
 msgstr "Izberi vse"
@@ -4494,7 +4527,7 @@ msgstr "Pokaži"
 msgid "Show OSD"
 msgstr "Pokaži prikaz na zaslonu"
 
-#: ../bin/src/ui_playbacksettingspage.h:311
+#: ../bin/src/ui_playbacksettingspage.h:341
 msgid "Show a glowing animation on the current track"
 msgstr "Pokaži žarečo animacijo na trenutni skladbi"
 
@@ -4595,7 +4628,7 @@ msgstr "Pokaži gumb \"Priljubljena\""
 msgid "Show the scrobble button in the main window"
 msgstr "Kaži gumb za pošiljanje podatkov o predvajanih skladbah"
 
-#: ../bin/src/ui_behavioursettingspage.h:260
+#: ../bin/src/ui_behavioursettingspage.h:290
 msgid "Show tray icon"
 msgstr "Pokaži ikono v sistemski vrstici"
 
@@ -5099,6 +5132,10 @@ msgstr "Ta pretok je le za plačane naročnike"
 msgid "This type of device is not supported: %1"
 msgstr "Ta vrsta naprave ni podprta: %1"
 
+#: ../bin/src/ui_behavioursettingspage.h:337
+msgid "Time step"
+msgstr ""
+
 #: playlist/playlist.cpp:1315 ui/organisedialog.cpp:60
 #: ui/qtsystemtrayicon.cpp:232 ../bin/src/ui_about.h:142
 #: ../bin/src/ui_edittagdialog.h:734 ../bin/src/ui_trackselectiondialog.h:211
@@ -5311,7 +5348,7 @@ msgstr "Uporabi bližnjice Gnome"
 msgid "Use Psychedelic Colors"
 msgstr ""
 
-#: ../bin/src/ui_playbacksettingspage.h:323
+#: ../bin/src/ui_playbacksettingspage.h:353
 msgid "Use Replay Gain metadata if it is available"
 msgstr "Uporabi metapodatke Jakosti predvajanja, če je mogoče"
 
@@ -5355,7 +5392,7 @@ msgstr "Uporabi obvestila za poročanje o stanju Wii Remote"
 msgid "Use temporal noise shaping"
 msgstr "Uporabi začasno oblikovanje šuma"
 
-#: ../bin/src/ui_behavioursettingspage.h:266
+#: ../bin/src/ui_behavioursettingspage.h:296
 msgid "Use the system default"
 msgstr "Uporabi privzeto za sistem"
 
@@ -5387,7 +5424,7 @@ msgstr "Uporabniški vmesnik"
 msgid "Username"
 msgstr "Uporabniško ime"
 
-#: ../bin/src/ui_behavioursettingspage.h:279
+#: ../bin/src/ui_behavioursettingspage.h:309
 msgid "Using the menu to add a song will..."
 msgstr "Uporaba menija za dodajanje skladbe bo povzročila sledeče ..."
 
@@ -5456,7 +5493,7 @@ msgstr "WMA"
 msgid "Wall"
 msgstr "Zid"
 
-#: playlist/playlisttabbar.cpp:192 ../bin/src/ui_behavioursettingspage.h:262
+#: playlist/playlisttabbar.cpp:192 ../bin/src/ui_behavioursettingspage.h:292
 msgid "Warn me when closing a playlist tab"
 msgstr "Opozori med pred zapiranjem zavihkov seznamov predvajanja"
 
@@ -5472,7 +5509,7 @@ msgstr "Spletišče"
 msgid "Weeks"
 msgstr "Tednov"
 
-#: ../bin/src/ui_behavioursettingspage.h:269
+#: ../bin/src/ui_behavioursettingspage.h:299
 msgid "When Clementine starts"
 msgstr "Ko se Clementine zažene"
 
@@ -5482,7 +5519,7 @@ msgid ""
 "If there are no matches then it will use the largest image in the directory."
 msgstr "Med iskanjem ovitkov albumov bo Clementine najprej poiskal datoteke s slikami, ki vsebujejo te besede. \nČe ne bo ujemanj, bo uporabil največjo sliko v mapi"
 
-#: ../bin/src/ui_behavioursettingspage.h:306
+#: ../bin/src/ui_behavioursettingspage.h:340
 msgid "When saving a playlist, file paths should be"
 msgstr "Med shranjevanjem seznama predvajanja naj bodo poti datotek"
 
@@ -5566,7 +5603,7 @@ msgstr "Ali želite opraviti ponovno preiskovanje celotne knjižnice?"
 msgid "Write all songs statistics into songs' files"
 msgstr "Zapiši vse statistike skladb v datoteke skladb"
 
-#: ../bin/src/ui_behavioursettingspage.h:311
+#: ../bin/src/ui_behavioursettingspage.h:345
 msgid "Write metadata"
 msgstr "Zapiši metapodatke"
 
@@ -5686,7 +5723,7 @@ msgid ""
 "shortcuts in Clementine."
 msgstr "V sistemskih nastavitvah morate vklopiti \"<span style=\"font-style:italic\">nadzor vašega računalnika</span>\",  da boste lahko uporabili splošne bližnjice v Clementine."
 
-#: ../bin/src/ui_behavioursettingspage.h:268
+#: ../bin/src/ui_behavioursettingspage.h:298
 msgid "You will need to restart Clementine if you change the language."
 msgstr "Za spremembo jezika morate ponovno zagnati Clementine"
 

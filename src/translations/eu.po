@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2015-07-02 13:48+0000\n"
+"PO-Revision-Date: 2015-07-15 13:28+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Basque (http://www.transifex.com/p/clementine/language/eu/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -44,15 +44,19 @@ msgstr "egun"
 msgid " kbps"
 msgstr " kbps"
 
-#: ../bin/src/ui_playbacksettingspage.h:318
-#: ../bin/src/ui_playbacksettingspage.h:321
-#: ../bin/src/ui_playbacksettingspage.h:335
+#: ../bin/src/ui_playbacksettingspage.h:348
+#: ../bin/src/ui_playbacksettingspage.h:351
+#: ../bin/src/ui_playbacksettingspage.h:365
 msgid " ms"
 msgstr " ms"
 
 #: ../bin/src/ui_songinfosettingspage.h:157
 msgid " pt"
 msgstr " pt"
+
+#: ../bin/src/ui_behavioursettingspage.h:338
+msgid " s"
+msgstr ""
 
 #: ../bin/src/ui_notificationssettingspage.h:445
 #: ../bin/src/ui_visualisationselector.h:116
@@ -272,13 +276,29 @@ msgstr "Pista 1"
 msgid "128k MP3"
 msgstr "128k MP3"
 
+#: ../bin/src/ui_playbacksettingspage.h:379
+msgid "192,000Hz"
+msgstr ""
+
 #: ../bin/src/ui_appearancesettingspage.h:291
 msgid "40%"
+msgstr ""
+
+#: ../bin/src/ui_playbacksettingspage.h:376
+msgid "44,100Hz"
+msgstr ""
+
+#: ../bin/src/ui_playbacksettingspage.h:377
+msgid "48,000Hz"
 msgstr ""
 
 #: library/library.cpp:64
 msgid "50 random tracks"
 msgstr "50 ausazko pista"
+
+#: ../bin/src/ui_playbacksettingspage.h:378
+msgid "96,000Hz"
+msgstr ""
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:165
 msgid "<a href=\"http://www.di.fm/premium/\">Upgrade to Premium now</a>"
@@ -386,7 +406,7 @@ msgid "About Qt..."
 msgstr "Qt-ri buruz..."
 
 #: playlist/playlistsaveoptionsdialog.cpp:34
-#: ../bin/src/ui_behavioursettingspage.h:308
+#: ../bin/src/ui_behavioursettingspage.h:342
 msgid "Absolute"
 msgstr ""
 
@@ -595,7 +615,7 @@ msgstr ""
 msgid "Add to playlist"
 msgstr "Gehitu erreprodukzio-zerrendara"
 
-#: ../bin/src/ui_behavioursettingspage.h:298
+#: ../bin/src/ui_behavioursettingspage.h:328
 msgid "Add to the queue"
 msgstr "Gehitu ilarara"
 
@@ -653,7 +673,7 @@ msgstr "Kopiatu ondoren..."
 msgid "Album"
 msgstr "Albuma"
 
-#: ../bin/src/ui_playbacksettingspage.h:328
+#: ../bin/src/ui_playbacksettingspage.h:358
 msgid "Album (ideal loudness for all tracks)"
 msgstr "Albuma (pista guztientzako bolumen ideala)"
 
@@ -737,16 +757,16 @@ msgstr "Mid/side kodeketa baimendu"
 msgid "Alongside the originals"
 msgstr "Jatorrizkoekin batera"
 
-#: ../bin/src/ui_behavioursettingspage.h:271
+#: ../bin/src/ui_behavioursettingspage.h:301
 msgid "Always hide the main window"
 msgstr "Leiho nagusia beti ezkutatu"
 
-#: ../bin/src/ui_behavioursettingspage.h:270
+#: ../bin/src/ui_behavioursettingspage.h:300
 msgid "Always show the main window"
 msgstr "Leiho nagusia beti erakutsi"
 
-#: ../bin/src/ui_behavioursettingspage.h:284
-#: ../bin/src/ui_behavioursettingspage.h:304
+#: ../bin/src/ui_behavioursettingspage.h:314
+#: ../bin/src/ui_behavioursettingspage.h:334
 msgid "Always start playing"
 msgstr "Beti hasi erreproduzitzen"
 
@@ -797,11 +817,11 @@ msgstr "Erantsi Fitxategiak/URL-ak erreprodukzio-zerrendari"
 msgid "Append to current playlist"
 msgstr "Erantsi oraingo erreprodukzio-zerrendari"
 
-#: ../bin/src/ui_behavioursettingspage.h:295
+#: ../bin/src/ui_behavioursettingspage.h:325
 msgid "Append to the playlist"
 msgstr "Erantsi erreprodukzio-zerrendari"
 
-#: ../bin/src/ui_playbacksettingspage.h:331
+#: ../bin/src/ui_playbacksettingspage.h:361
 msgid "Apply compression to prevent clipping"
 msgstr "Konpresioa aplikatu laburketak ekiditeko"
 
@@ -841,7 +861,7 @@ msgstr "Artistaren etiketak"
 msgid "Artist's initial"
 msgstr "Artistaren inizialak"
 
-#: ../bin/src/ui_behavioursettingspage.h:310
+#: ../bin/src/ui_behavioursettingspage.h:344
 msgid "Ask when saving"
 msgstr ""
 
@@ -851,7 +871,7 @@ msgstr ""
 msgid "Audio format"
 msgstr "Audio formatua"
 
-#: ../bin/src/ui_playbacksettingspage.h:332
+#: ../bin/src/ui_playbacksettingspage.h:362
 msgid "Audio output"
 msgstr ""
 
@@ -871,11 +891,12 @@ msgid "Authors"
 msgstr "Egileak"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:227
+#: ../bin/src/ui_playbacksettingspage.h:375
 msgid "Auto"
 msgstr "Automatikoa"
 
 #: playlist/playlistsaveoptionsdialog.cpp:32
-#: ../bin/src/ui_behavioursettingspage.h:307
+#: ../bin/src/ui_behavioursettingspage.h:341
 msgid "Automatic"
 msgstr ""
 
@@ -948,7 +969,7 @@ msgstr "Oinarrizko urdina"
 msgid "Basic audio type"
 msgstr "Oinarrizko audio mota"
 
-#: ../bin/src/ui_behavioursettingspage.h:259
+#: ../bin/src/ui_behavioursettingspage.h:289
 msgid "Behavior"
 msgstr "Portaera"
 
@@ -1009,11 +1030,11 @@ msgstr ""
 msgid "Browse..."
 msgstr "Arakatu..."
 
-#: ../bin/src/ui_playbacksettingspage.h:334
+#: ../bin/src/ui_playbacksettingspage.h:364
 msgid "Buffer duration"
 msgstr ""
 
-#: engines/gstengine.cpp:904
+#: engines/gstengine.cpp:907
 msgid "Buffering"
 msgstr "Bufferra betetzen"
 
@@ -1088,7 +1109,11 @@ msgstr "Aldatu ausazko modua"
 msgid "Change the language"
 msgstr "Aldatu hizkuntza"
 
-#: ../bin/src/ui_playbacksettingspage.h:338
+#: ../bin/src/ui_playbacksettingspage.h:382
+msgid "Changes will take place when the next song starts playing"
+msgstr ""
+
+#: ../bin/src/ui_playbacksettingspage.h:369
 msgid ""
 "Changing mono playback preference will be effective for the next playing "
 "songs"
@@ -1114,7 +1139,7 @@ msgstr ""
 msgid "Choose a name for your smart playlist"
 msgstr "Erreprodukzio-zerrenda adimendunaren izena hautatu"
 
-#: engines/gstengine.cpp:925
+#: engines/gstengine.cpp:928
 msgid "Choose automatically"
 msgstr "Automatikoki hautatu"
 
@@ -1506,11 +1531,11 @@ msgstr "%1-(e)tik ezarritako azalak"
 msgid "Covers from %1"
 msgstr "%1-(e)ko azalak"
 
-#: ../bin/src/ui_playbacksettingspage.h:315
+#: ../bin/src/ui_playbacksettingspage.h:345
 msgid "Cross-fade when changing tracks automatically"
 msgstr "Iraungi automatikoki kantak aldatzen direnean"
 
-#: ../bin/src/ui_playbacksettingspage.h:314
+#: ../bin/src/ui_playbacksettingspage.h:344
 msgid "Cross-fade when changing tracks manually"
 msgstr "Iraungi eskuz kantak aldatzen direnean"
 
@@ -1649,7 +1674,7 @@ msgstr "Bolumena jaitsi"
 msgid "Default background image"
 msgstr "Atzeko planoko irudi lehenetsia"
 
-#: engines/gstengine.cpp:950
+#: engines/gstengine.cpp:953
 #, qt-format
 msgid "Default device on %1"
 msgstr ""
@@ -1867,7 +1892,7 @@ msgstr ""
 msgid "Double click to open"
 msgstr "Klik bikoitza irekitzeko"
 
-#: ../bin/src/ui_behavioursettingspage.h:292
+#: ../bin/src/ui_behavioursettingspage.h:322
 msgid "Double clicking a song will..."
 msgstr "Abesti batean klik bikoitza eginez gero..."
 
@@ -2026,7 +2051,7 @@ msgstr "Gaitu ekualizadorea"
 msgid "Enable shortcuts only when Clementine is focused"
 msgstr "Gaitu lasterbideak Clementine fokaturik dagoenean bakarrik"
 
-#: ../bin/src/ui_behavioursettingspage.h:278
+#: ../bin/src/ui_behavioursettingspage.h:308
 msgid "Enable song metadata inline edition with click"
 msgstr ""
 
@@ -2191,7 +2216,7 @@ msgstr "6 orduro"
 msgid "Every hour"
 msgstr "Orduro"
 
-#: ../bin/src/ui_playbacksettingspage.h:316
+#: ../bin/src/ui_playbacksettingspage.h:346
 msgid "Except between tracks on the same album or in the same CUE sheet"
 msgstr "Album edo CUE orri bereko pisten artean izan ezik"
 
@@ -2263,20 +2288,20 @@ msgstr "F8"
 msgid "FLAC"
 msgstr "FLAC"
 
-#: ../bin/src/ui_playbacksettingspage.h:319
+#: ../bin/src/ui_playbacksettingspage.h:349
 msgid "Fade out on pause / fade in on resume"
 msgstr ""
 
-#: ../bin/src/ui_playbacksettingspage.h:313
+#: ../bin/src/ui_playbacksettingspage.h:343
 msgid "Fade out when stopping a track"
 msgstr "Pista gelditzerakoan iraungitu"
 
-#: ../bin/src/ui_playbacksettingspage.h:312
+#: ../bin/src/ui_playbacksettingspage.h:342
 msgid "Fading"
 msgstr "Iraungitzea"
 
-#: ../bin/src/ui_playbacksettingspage.h:317
-#: ../bin/src/ui_playbacksettingspage.h:320
+#: ../bin/src/ui_playbacksettingspage.h:347
+#: ../bin/src/ui_playbacksettingspage.h:350
 msgid "Fading duration"
 msgstr "Iraungitzearen iraupena"
 
@@ -2546,7 +2571,7 @@ msgstr "Google Drive"
 msgid "Got %1 covers out of %2 (%3 failed)"
 msgstr "%2-(e)tik %1 azal eskuratu dira (%3-(e)k huts egin dute)"
 
-#: ../bin/src/ui_behavioursettingspage.h:274
+#: ../bin/src/ui_behavioursettingspage.h:304
 msgid "Grey out non existent songs in my playlists"
 msgstr "Existitzen ez diren abestiak ilundu erreprodukzio-zerrendetan"
 
@@ -2659,7 +2684,7 @@ msgstr "Ikonoak goian"
 msgid "Identifying song"
 msgstr "Abestia identifikatzen"
 
-#: ../bin/src/ui_behavioursettingspage.h:276
+#: ../bin/src/ui_behavioursettingspage.h:306
 msgid ""
 "If activated, clicking a selected song in the playlist view will let you "
 "edit the tag value directly"
@@ -2841,7 +2866,7 @@ msgstr "Jamendo-ko asteko kantarik onenak"
 msgid "Jamendo database"
 msgstr "Jamendo datu-basea"
 
-#: ../bin/src/ui_behavioursettingspage.h:289
+#: ../bin/src/ui_behavioursettingspage.h:319
 msgid "Jump to previous song right away"
 msgstr ""
 
@@ -2861,7 +2886,7 @@ msgstr "Sakatu botoiak segundu %1-ez..."
 msgid "Keep buttons for %1 seconds..."
 msgstr "Sakatu botoiak %1 segunduz..."
 
-#: ../bin/src/ui_behavioursettingspage.h:261
+#: ../bin/src/ui_behavioursettingspage.h:291
 msgid "Keep running in the background when the window is closed"
 msgstr "Jarraitu atzealdean exekutatzen leihoa ixten denean"
 
@@ -2878,7 +2903,7 @@ msgstr ""
 msgid "Kuduro"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:263
+#: ../bin/src/ui_behavioursettingspage.h:293
 msgid "Language"
 msgstr "Hizkuntza"
 
@@ -3231,7 +3256,7 @@ msgstr "Bazkidetza mota"
 msgid "Minimum bitrate"
 msgstr "Bit-tasa minimoa"
 
-#: ../bin/src/ui_playbacksettingspage.h:336
+#: ../bin/src/ui_playbacksettingspage.h:366
 msgid "Minimum buffer fill"
 msgstr ""
 
@@ -3247,7 +3272,7 @@ msgstr "Modeloa"
 msgid "Monitor the library for changes"
 msgstr "Bildumako aldaketen segimendua egin"
 
-#: ../bin/src/ui_playbacksettingspage.h:340
+#: ../bin/src/ui_playbacksettingspage.h:371
 msgid "Mono playback"
 msgstr "Mono erreprodukzioa"
 
@@ -3358,8 +3383,8 @@ msgstr "Inoiz ez"
 msgid "Never played"
 msgstr "Inoiz ez erreproduzituak"
 
-#: ../bin/src/ui_behavioursettingspage.h:282
-#: ../bin/src/ui_behavioursettingspage.h:302
+#: ../bin/src/ui_behavioursettingspage.h:312
+#: ../bin/src/ui_behavioursettingspage.h:332
 msgid "Never start playing"
 msgstr "Inoiz ez hasi erreproduzitzen"
 
@@ -3599,7 +3624,7 @@ msgstr "Google Drive-n iriki"
 msgid "Open in new playlist"
 msgstr "Ireki erreprodukzio-zerrenda berrian"
 
-#: ../bin/src/ui_behavioursettingspage.h:297
+#: ../bin/src/ui_behavioursettingspage.h:327
 msgctxt "Refers to behavior settings in Clementine settings page."
 msgid "Open in new playlist"
 msgstr ""
@@ -3674,7 +3699,7 @@ msgstr "Bestelako aukerak"
 msgid "Output"
 msgstr ""
 
-#: ../bin/src/ui_playbacksettingspage.h:333
+#: ../bin/src/ui_playbacksettingspage.h:363
 msgid "Output device"
 msgstr ""
 
@@ -3757,8 +3782,8 @@ msgstr "Erreprodukzio kopurua"
 msgid "Play if stopped, pause if playing"
 msgstr "Erreproduzitu pausatua badago, pausarazi erreproduzitzen ari bada"
 
-#: ../bin/src/ui_behavioursettingspage.h:283
-#: ../bin/src/ui_behavioursettingspage.h:303
+#: ../bin/src/ui_behavioursettingspage.h:313
+#: ../bin/src/ui_behavioursettingspage.h:333
 msgid "Play if there is nothing already playing"
 msgstr "Erreproduzitu ez badago ezer aurretik erreproduzitzen"
 
@@ -3770,7 +3795,7 @@ msgstr "Erreproduzitu erreprodukzio-zerrendako <n>. pista"
 msgid "Play/Pause"
 msgstr "Erreproduzitu/Pausarazi"
 
-#: ../bin/src/ui_playbacksettingspage.h:310
+#: ../bin/src/ui_playbacksettingspage.h:340
 msgid "Playback"
 msgstr "Erreprodukzioa"
 
@@ -3827,7 +3852,7 @@ msgstr "Laster-leihoaren iraupena"
 msgid "Port"
 msgstr "Ataka"
 
-#: ui/equalizer.cpp:44 ../bin/src/ui_playbacksettingspage.h:330
+#: ui/equalizer.cpp:44 ../bin/src/ui_playbacksettingspage.h:360
 msgid "Pre-amp"
 msgstr "Aurre-anplifikadorea"
 
@@ -3883,7 +3908,7 @@ msgstr "Sakatu edozein tekla"
 msgid "Press a key combination to use for %1..."
 msgstr "Sakatu %1 egiteko erabiliko den tekla-konbinazioa..."
 
-#: ../bin/src/ui_behavioursettingspage.h:286
+#: ../bin/src/ui_behavioursettingspage.h:316
 msgid "Pressing \"Previous\" in player will..."
 msgstr ""
 
@@ -3966,7 +3991,7 @@ msgstr "Aukeraturiko pistak ilaran jarri"
 msgid "Queue track"
 msgstr "Pista ilaran jarri"
 
-#: ../bin/src/ui_playbacksettingspage.h:327
+#: ../bin/src/ui_playbacksettingspage.h:357
 msgid "Radio (equal loudness for all tracks)"
 msgstr "Irratia (ozentasun berdina pista denentzat)"
 
@@ -4043,7 +4068,7 @@ msgid "Reggae"
 msgstr "Reggae"
 
 #: playlist/playlistsaveoptionsdialog.cpp:33
-#: ../bin/src/ui_behavioursettingspage.h:309
+#: ../bin/src/ui_behavioursettingspage.h:343
 msgid "Relative"
 msgstr ""
 
@@ -4051,7 +4076,7 @@ msgstr ""
 msgid "Remember Wii remote swing"
 msgstr "Wiimote-aren mugimendua gogoratu"
 
-#: ../bin/src/ui_behavioursettingspage.h:272
+#: ../bin/src/ui_behavioursettingspage.h:302
 msgid "Remember from last time"
 msgstr "Azken alditik gogoratu"
 
@@ -4134,7 +4159,7 @@ msgstr "Errepikatu pista"
 msgid "Replace current playlist"
 msgstr "Ordeztu oraingo erreprodukzio-zerrenda"
 
-#: ../bin/src/ui_behavioursettingspage.h:296
+#: ../bin/src/ui_behavioursettingspage.h:326
 msgid "Replace the playlist"
 msgstr "Ordeztu erreprodukzio-zerrenda"
 
@@ -4142,11 +4167,11 @@ msgstr "Ordeztu erreprodukzio-zerrenda"
 msgid "Replaces spaces with underscores"
 msgstr "Zuriuneak azpimarrekin ordezten ditu"
 
-#: ../bin/src/ui_playbacksettingspage.h:322
+#: ../bin/src/ui_playbacksettingspage.h:352
 msgid "Replay Gain"
 msgstr "Errepikatze-irabazia"
 
-#: ../bin/src/ui_playbacksettingspage.h:324
+#: ../bin/src/ui_playbacksettingspage.h:354
 msgid "Replay Gain mode"
 msgstr ""
 
@@ -4166,7 +4191,7 @@ msgstr "Berrezarri"
 msgid "Reset play counts"
 msgstr "Berrezarri erreprodukzio kopurua"
 
-#: ../bin/src/ui_behavioursettingspage.h:290
+#: ../bin/src/ui_behavioursettingspage.h:320
 msgid "Restart song, then jump to previous if pressed again"
 msgstr ""
 
@@ -4179,7 +4204,7 @@ msgstr ""
 msgid "Restrict to ASCII characters"
 msgstr "Mugatu ASCII karaktereetara"
 
-#: ../bin/src/ui_behavioursettingspage.h:273
+#: ../bin/src/ui_behavioursettingspage.h:303
 msgid "Resume playback on start"
 msgstr ""
 
@@ -4228,6 +4253,10 @@ msgstr "Kendu gailua arriskurik gabe"
 #: ../bin/src/ui_organisedialog.h:248
 msgid "Safely remove the device after copying"
 msgstr "Kopiatu ondoren kendu gailua arriskurik gabe"
+
+#: ../bin/src/ui_playbacksettingspage.h:372
+msgid "Sample Rate"
+msgstr ""
 
 #: playlist/playlist.cpp:1357 ../bin/src/ui_edittagdialog.h:724
 msgid "Sample rate"
@@ -4396,6 +4425,10 @@ msgstr "Oraingo pistan mugitu posizio erlatibo baten arabera"
 msgid "Seek the currently playing track to an absolute position"
 msgstr "Oraingo pistan mugitu posizio absolutu baten arabera"
 
+#: ../bin/src/ui_behavioursettingspage.h:336
+msgid "Seeking using a keyboard shortcut"
+msgstr ""
+
 #: visualisations/visualisationselector.cpp:37 ../bin/src/ui_ripcddialog.h:310
 msgid "Select All"
 msgstr "Hautatu dena"
@@ -4492,7 +4525,7 @@ msgstr "Erakutsi"
 msgid "Show OSD"
 msgstr "Erakutsi OSD"
 
-#: ../bin/src/ui_playbacksettingspage.h:311
+#: ../bin/src/ui_playbacksettingspage.h:341
 msgid "Show a glowing animation on the current track"
 msgstr "Erakutsi oraingo pistaren animazio distiratsua"
 
@@ -4593,7 +4626,7 @@ msgstr ""
 msgid "Show the scrobble button in the main window"
 msgstr "Erakutsi partekatu botoia leiho nagusian"
 
-#: ../bin/src/ui_behavioursettingspage.h:260
+#: ../bin/src/ui_behavioursettingspage.h:290
 msgid "Show tray icon"
 msgstr "Erakutsi erretilu-ikonoa"
 
@@ -5097,6 +5130,10 @@ msgstr "Jario hau ordainpeko harpidedunentzat da bakarrik"
 msgid "This type of device is not supported: %1"
 msgstr "Gailu mota hau ez da onartzen :%1"
 
+#: ../bin/src/ui_behavioursettingspage.h:337
+msgid "Time step"
+msgstr ""
+
 #: playlist/playlist.cpp:1315 ui/organisedialog.cpp:60
 #: ui/qtsystemtrayicon.cpp:232 ../bin/src/ui_about.h:142
 #: ../bin/src/ui_edittagdialog.h:734 ../bin/src/ui_trackselectiondialog.h:211
@@ -5309,7 +5346,7 @@ msgstr "Erabili Gnome-ren laster-teklak"
 msgid "Use Psychedelic Colors"
 msgstr ""
 
-#: ../bin/src/ui_playbacksettingspage.h:323
+#: ../bin/src/ui_playbacksettingspage.h:353
 msgid "Use Replay Gain metadata if it is available"
 msgstr "Erabili errepikatze-irabaziaren metadatuak eskuragarri daudenean"
 
@@ -5353,7 +5390,7 @@ msgstr "Erabili jakinarazpenak Wii-ko urruneko kontrolaren egoera jakinarazteko"
 msgid "Use temporal noise shaping"
 msgstr "Erabili zarata karrakaketa behin-behinekoa"
 
-#: ../bin/src/ui_behavioursettingspage.h:266
+#: ../bin/src/ui_behavioursettingspage.h:296
 msgid "Use the system default"
 msgstr "Erabili sistemako lehenetsia"
 
@@ -5385,7 +5422,7 @@ msgstr "Erabiltzaile-interfazea"
 msgid "Username"
 msgstr "Erabiltzaile-izena"
 
-#: ../bin/src/ui_behavioursettingspage.h:279
+#: ../bin/src/ui_behavioursettingspage.h:309
 msgid "Using the menu to add a song will..."
 msgstr "Abesti bat gehitzeko menua erabiltzeak ondorengoa egingo du..."
 
@@ -5454,7 +5491,7 @@ msgstr "WMA"
 msgid "Wall"
 msgstr ""
 
-#: playlist/playlisttabbar.cpp:192 ../bin/src/ui_behavioursettingspage.h:262
+#: playlist/playlisttabbar.cpp:192 ../bin/src/ui_behavioursettingspage.h:292
 msgid "Warn me when closing a playlist tab"
 msgstr ""
 
@@ -5470,7 +5507,7 @@ msgstr "Webgunea"
 msgid "Weeks"
 msgstr "Aste"
 
-#: ../bin/src/ui_behavioursettingspage.h:269
+#: ../bin/src/ui_behavioursettingspage.h:299
 msgid "When Clementine starts"
 msgstr "Clementine abiaraztean"
 
@@ -5480,7 +5517,7 @@ msgid ""
 "If there are no matches then it will use the largest image in the directory."
 msgstr "Albumetako azalen bilatzean, Clementine-k aurretik honako hitzetako bat duten irudi fitxategiak begiratuko ditu.\n Ez badago bat-etortzerik, direktorioko irudirik handiena erabiliko du orduan."
 
-#: ../bin/src/ui_behavioursettingspage.h:306
+#: ../bin/src/ui_behavioursettingspage.h:340
 msgid "When saving a playlist, file paths should be"
 msgstr ""
 
@@ -5564,7 +5601,7 @@ msgstr "Berreskaneo osoa orain egitea nahi duzu?"
 msgid "Write all songs statistics into songs' files"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:311
+#: ../bin/src/ui_behavioursettingspage.h:345
 msgid "Write metadata"
 msgstr ""
 
@@ -5684,7 +5721,7 @@ msgid ""
 "shortcuts in Clementine."
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:268
+#: ../bin/src/ui_behavioursettingspage.h:298
 msgid "You will need to restart Clementine if you change the language."
 msgstr "Hizkuntzaz aldatuz gero, Clementine berrabiarazi behar da."
 

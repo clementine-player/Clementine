@@ -25,7 +25,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2015-07-02 13:48+0000\n"
+"PO-Revision-Date: 2015-07-15 13:28+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Turkish (http://www.transifex.com/p/clementine/language/tr/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -58,15 +58,19 @@ msgstr " günler"
 msgid " kbps"
 msgstr " kbps"
 
-#: ../bin/src/ui_playbacksettingspage.h:318
-#: ../bin/src/ui_playbacksettingspage.h:321
-#: ../bin/src/ui_playbacksettingspage.h:335
+#: ../bin/src/ui_playbacksettingspage.h:348
+#: ../bin/src/ui_playbacksettingspage.h:351
+#: ../bin/src/ui_playbacksettingspage.h:365
 msgid " ms"
 msgstr " ms"
 
 #: ../bin/src/ui_songinfosettingspage.h:157
 msgid " pt"
 msgstr " pt"
+
+#: ../bin/src/ui_behavioursettingspage.h:338
+msgid " s"
+msgstr ""
 
 #: ../bin/src/ui_notificationssettingspage.h:445
 #: ../bin/src/ui_visualisationselector.h:116
@@ -286,13 +290,29 @@ msgstr "1 parça"
 msgid "128k MP3"
 msgstr "128k MP3"
 
+#: ../bin/src/ui_playbacksettingspage.h:379
+msgid "192,000Hz"
+msgstr ""
+
 #: ../bin/src/ui_appearancesettingspage.h:291
 msgid "40%"
 msgstr "40%"
 
+#: ../bin/src/ui_playbacksettingspage.h:376
+msgid "44,100Hz"
+msgstr ""
+
+#: ../bin/src/ui_playbacksettingspage.h:377
+msgid "48,000Hz"
+msgstr ""
+
 #: library/library.cpp:64
 msgid "50 random tracks"
 msgstr "50 rastgele parça"
+
+#: ../bin/src/ui_playbacksettingspage.h:378
+msgid "96,000Hz"
+msgstr ""
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:165
 msgid "<a href=\"http://www.di.fm/premium/\">Upgrade to Premium now</a>"
@@ -400,7 +420,7 @@ msgid "About Qt..."
 msgstr "Qt Hakkında..."
 
 #: playlist/playlistsaveoptionsdialog.cpp:34
-#: ../bin/src/ui_behavioursettingspage.h:308
+#: ../bin/src/ui_behavioursettingspage.h:342
 msgid "Absolute"
 msgstr "Kesin"
 
@@ -609,7 +629,7 @@ msgstr "Yer imlerine ekle"
 msgid "Add to playlist"
 msgstr "Çalma listesine ekle"
 
-#: ../bin/src/ui_behavioursettingspage.h:298
+#: ../bin/src/ui_behavioursettingspage.h:328
 msgid "Add to the queue"
 msgstr "Kuyruğa ekle"
 
@@ -667,7 +687,7 @@ msgstr "Kopyalandıktan sonra..."
 msgid "Album"
 msgstr "Albüm"
 
-#: ../bin/src/ui_playbacksettingspage.h:328
+#: ../bin/src/ui_playbacksettingspage.h:358
 msgid "Album (ideal loudness for all tracks)"
 msgstr "Albüm (tüm parçalar için ideal ses yüksekliği)"
 
@@ -751,16 +771,16 @@ msgstr "Mid/side kodlamaya izin ver"
 msgid "Alongside the originals"
 msgstr "Orijinallerin yanına"
 
-#: ../bin/src/ui_behavioursettingspage.h:271
+#: ../bin/src/ui_behavioursettingspage.h:301
 msgid "Always hide the main window"
 msgstr "Ana pencereyi her zaman gizle"
 
-#: ../bin/src/ui_behavioursettingspage.h:270
+#: ../bin/src/ui_behavioursettingspage.h:300
 msgid "Always show the main window"
 msgstr "Ana pencereyi her zaman göster"
 
-#: ../bin/src/ui_behavioursettingspage.h:284
-#: ../bin/src/ui_behavioursettingspage.h:304
+#: ../bin/src/ui_behavioursettingspage.h:314
+#: ../bin/src/ui_behavioursettingspage.h:334
 msgid "Always start playing"
 msgstr "Her zaman çalarak başlat"
 
@@ -811,11 +831,11 @@ msgstr "Çalma listesine dosya/URL ekle"
 msgid "Append to current playlist"
 msgstr "Şu anki çalma listesine ekle"
 
-#: ../bin/src/ui_behavioursettingspage.h:295
+#: ../bin/src/ui_behavioursettingspage.h:325
 msgid "Append to the playlist"
 msgstr "Çalma listesine ekle"
 
-#: ../bin/src/ui_playbacksettingspage.h:331
+#: ../bin/src/ui_playbacksettingspage.h:361
 msgid "Apply compression to prevent clipping"
 msgstr "Kesintiyi engellemek için sıkıştırma uygula"
 
@@ -855,7 +875,7 @@ msgstr "Sanatçı etiketleri"
 msgid "Artist's initial"
 msgstr "Sanatçının kısaltması"
 
-#: ../bin/src/ui_behavioursettingspage.h:310
+#: ../bin/src/ui_behavioursettingspage.h:344
 msgid "Ask when saving"
 msgstr "Kaydederken sor"
 
@@ -865,7 +885,7 @@ msgstr "Kaydederken sor"
 msgid "Audio format"
 msgstr "Ses biçimi"
 
-#: ../bin/src/ui_playbacksettingspage.h:332
+#: ../bin/src/ui_playbacksettingspage.h:362
 msgid "Audio output"
 msgstr "Ses çıkışı"
 
@@ -885,11 +905,12 @@ msgid "Authors"
 msgstr "Yazarlar"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:227
+#: ../bin/src/ui_playbacksettingspage.h:375
 msgid "Auto"
 msgstr "Otomatik"
 
 #: playlist/playlistsaveoptionsdialog.cpp:32
-#: ../bin/src/ui_behavioursettingspage.h:307
+#: ../bin/src/ui_behavioursettingspage.h:341
 msgid "Automatic"
 msgstr "Otomatik"
 
@@ -962,7 +983,7 @@ msgstr "Temel Mavi"
 msgid "Basic audio type"
 msgstr "Temel ses tipi"
 
-#: ../bin/src/ui_behavioursettingspage.h:259
+#: ../bin/src/ui_behavioursettingspage.h:289
 msgid "Behavior"
 msgstr "Davranış"
 
@@ -1023,11 +1044,11 @@ msgstr "Box"
 msgid "Browse..."
 msgstr "Gözat..."
 
-#: ../bin/src/ui_playbacksettingspage.h:334
+#: ../bin/src/ui_playbacksettingspage.h:364
 msgid "Buffer duration"
 msgstr "Önbellek süresi"
 
-#: engines/gstengine.cpp:904
+#: engines/gstengine.cpp:907
 msgid "Buffering"
 msgstr "Arabelleğe alınıyor"
 
@@ -1102,7 +1123,11 @@ msgstr "Karıştırma kipini değiştir"
 msgid "Change the language"
 msgstr "Dili değiştir"
 
-#: ../bin/src/ui_playbacksettingspage.h:338
+#: ../bin/src/ui_playbacksettingspage.h:382
+msgid "Changes will take place when the next song starts playing"
+msgstr ""
+
+#: ../bin/src/ui_playbacksettingspage.h:369
 msgid ""
 "Changing mono playback preference will be effective for the next playing "
 "songs"
@@ -1128,7 +1153,7 @@ msgstr "Vk.com önbellek dizinini seç"
 msgid "Choose a name for your smart playlist"
 msgstr "Akıllı çalma listesi için isim seçin"
 
-#: engines/gstengine.cpp:925
+#: engines/gstengine.cpp:928
 msgid "Choose automatically"
 msgstr "Otomatik seç"
 
@@ -1520,11 +1545,11 @@ msgstr "Kapak resmi %1 adresinden ayarlandı"
 msgid "Covers from %1"
 msgstr "%1 adresindeki kapak resimleri"
 
-#: ../bin/src/ui_playbacksettingspage.h:315
+#: ../bin/src/ui_playbacksettingspage.h:345
 msgid "Cross-fade when changing tracks automatically"
 msgstr "Parça değiştirirken otomatik olarak çapraz geçiş yap"
 
-#: ../bin/src/ui_playbacksettingspage.h:314
+#: ../bin/src/ui_playbacksettingspage.h:344
 msgid "Cross-fade when changing tracks manually"
 msgstr "Parça değiştirirken elle çapraz geçiş yap"
 
@@ -1663,7 +1688,7 @@ msgstr "Sesi azalt"
 msgid "Default background image"
 msgstr "Varsayılan arkaplan resmi"
 
-#: engines/gstengine.cpp:950
+#: engines/gstengine.cpp:953
 #, qt-format
 msgid "Default device on %1"
 msgstr "%1 üzerinde öntanımlı aygıt"
@@ -1881,7 +1906,7 @@ msgstr "Bağış Yap"
 msgid "Double click to open"
 msgstr "Açmak için çift tıkla"
 
-#: ../bin/src/ui_behavioursettingspage.h:292
+#: ../bin/src/ui_behavioursettingspage.h:322
 msgid "Double clicking a song will..."
 msgstr "Bir şarkıyı çift tıklamak..."
 
@@ -2040,7 +2065,7 @@ msgstr "Ekolayzırı etkinleştir"
 msgid "Enable shortcuts only when Clementine is focused"
 msgstr "Kısayolları sadece Clementine odaktayken etkinleştir"
 
-#: ../bin/src/ui_behavioursettingspage.h:278
+#: ../bin/src/ui_behavioursettingspage.h:308
 msgid "Enable song metadata inline edition with click"
 msgstr "Tıklama ile şarkı üst veri satır içi sürümünü etkinleştir"
 
@@ -2205,7 +2230,7 @@ msgstr "Her 6 saatte"
 msgid "Every hour"
 msgstr "Her saat"
 
-#: ../bin/src/ui_playbacksettingspage.h:316
+#: ../bin/src/ui_playbacksettingspage.h:346
 msgid "Except between tracks on the same album or in the same CUE sheet"
 msgstr "Aynı albümde veya aynı CUE dosyasında bulunan parçalar hariç"
 
@@ -2277,20 +2302,20 @@ msgstr "F8"
 msgid "FLAC"
 msgstr "FLAC"
 
-#: ../bin/src/ui_playbacksettingspage.h:319
+#: ../bin/src/ui_playbacksettingspage.h:349
 msgid "Fade out on pause / fade in on resume"
 msgstr "Bekletmede sesi yavaşça kıs / devam ettiğinde aç"
 
-#: ../bin/src/ui_playbacksettingspage.h:313
+#: ../bin/src/ui_playbacksettingspage.h:343
 msgid "Fade out when stopping a track"
 msgstr "Bir parça durdurulurken yumuşak geç"
 
-#: ../bin/src/ui_playbacksettingspage.h:312
+#: ../bin/src/ui_playbacksettingspage.h:342
 msgid "Fading"
 msgstr "Yumuşak geçiş"
 
-#: ../bin/src/ui_playbacksettingspage.h:317
-#: ../bin/src/ui_playbacksettingspage.h:320
+#: ../bin/src/ui_playbacksettingspage.h:347
+#: ../bin/src/ui_playbacksettingspage.h:350
 msgid "Fading duration"
 msgstr "Yumuşak geçiş süresi"
 
@@ -2560,7 +2585,7 @@ msgstr "Google Drive"
 msgid "Got %1 covers out of %2 (%3 failed)"
 msgstr "%2 kapaktan %1 tanesi alındı (%3 tanesi başarısız)"
 
-#: ../bin/src/ui_behavioursettingspage.h:274
+#: ../bin/src/ui_behavioursettingspage.h:304
 msgid "Grey out non existent songs in my playlists"
 msgstr "Çalma listemde olmayan şarkıları gri göster"
 
@@ -2673,7 +2698,7 @@ msgstr "Üstteki simgeler"
 msgid "Identifying song"
 msgstr "Şarkı teşhis ediliyor"
 
-#: ../bin/src/ui_behavioursettingspage.h:276
+#: ../bin/src/ui_behavioursettingspage.h:306
 msgid ""
 "If activated, clicking a selected song in the playlist view will let you "
 "edit the tag value directly"
@@ -2855,7 +2880,7 @@ msgstr "Jamendo Haftanın Zirvedeki Parçaları"
 msgid "Jamendo database"
 msgstr "Jamendo veritabanı"
 
-#: ../bin/src/ui_behavioursettingspage.h:289
+#: ../bin/src/ui_behavioursettingspage.h:319
 msgid "Jump to previous song right away"
 msgstr "Hemen bir önceki şarkıya gidecek"
 
@@ -2875,7 +2900,7 @@ msgstr "Düğmeleri %1 saniye tut..."
 msgid "Keep buttons for %1 seconds..."
 msgstr "Düğmeleri %1 saniye tut..."
 
-#: ../bin/src/ui_behavioursettingspage.h:261
+#: ../bin/src/ui_behavioursettingspage.h:291
 msgid "Keep running in the background when the window is closed"
 msgstr "Pencere kapandığında arkaplanda çalışmaya devam et"
 
@@ -2892,7 +2917,7 @@ msgstr "Kedicikler"
 msgid "Kuduro"
 msgstr "Kuduro"
 
-#: ../bin/src/ui_behavioursettingspage.h:263
+#: ../bin/src/ui_behavioursettingspage.h:293
 msgid "Language"
 msgstr "Dil"
 
@@ -3245,7 +3270,7 @@ msgstr "Üyelik türü"
 msgid "Minimum bitrate"
 msgstr "Minimum bit oranı"
 
-#: ../bin/src/ui_playbacksettingspage.h:336
+#: ../bin/src/ui_playbacksettingspage.h:366
 msgid "Minimum buffer fill"
 msgstr "Asgari tampon doldurma"
 
@@ -3261,7 +3286,7 @@ msgstr "Model"
 msgid "Monitor the library for changes"
 msgstr "Kütüphanede olacak değişiklikleri izle"
 
-#: ../bin/src/ui_playbacksettingspage.h:340
+#: ../bin/src/ui_playbacksettingspage.h:371
 msgid "Mono playback"
 msgstr "Tekli oynat"
 
@@ -3372,8 +3397,8 @@ msgstr "Hiçbir zaman"
 msgid "Never played"
 msgstr "Hiç çalınmamış"
 
-#: ../bin/src/ui_behavioursettingspage.h:282
-#: ../bin/src/ui_behavioursettingspage.h:302
+#: ../bin/src/ui_behavioursettingspage.h:312
+#: ../bin/src/ui_behavioursettingspage.h:332
 msgid "Never start playing"
 msgstr "Asla çalarak başlama"
 
@@ -3613,7 +3638,7 @@ msgstr "Google Drive'da aç"
 msgid "Open in new playlist"
 msgstr "Yeni çalma listesinde aç"
 
-#: ../bin/src/ui_behavioursettingspage.h:297
+#: ../bin/src/ui_behavioursettingspage.h:327
 msgctxt "Refers to behavior settings in Clementine settings page."
 msgid "Open in new playlist"
 msgstr "Yeni çalma listesinde aç"
@@ -3688,7 +3713,7 @@ msgstr "Diğer seçenekler"
 msgid "Output"
 msgstr "Çıktı"
 
-#: ../bin/src/ui_playbacksettingspage.h:333
+#: ../bin/src/ui_playbacksettingspage.h:363
 msgid "Output device"
 msgstr "Çıktı aygıtı"
 
@@ -3771,8 +3796,8 @@ msgstr "Çalma sayısı"
 msgid "Play if stopped, pause if playing"
 msgstr "Duraklatılmışsa çal, çalıyorsa beklet"
 
-#: ../bin/src/ui_behavioursettingspage.h:283
-#: ../bin/src/ui_behavioursettingspage.h:303
+#: ../bin/src/ui_behavioursettingspage.h:313
+#: ../bin/src/ui_behavioursettingspage.h:333
 msgid "Play if there is nothing already playing"
 msgstr "Çalan bir şey yoksa çal"
 
@@ -3784,7 +3809,7 @@ msgstr "Listedeki <n> numaralı parçayı çal"
 msgid "Play/Pause"
 msgstr "Çal/Duraklat"
 
-#: ../bin/src/ui_playbacksettingspage.h:310
+#: ../bin/src/ui_playbacksettingspage.h:340
 msgid "Playback"
 msgstr "Oynat"
 
@@ -3841,7 +3866,7 @@ msgstr "Açılır pencere süresi"
 msgid "Port"
 msgstr "Port"
 
-#: ui/equalizer.cpp:44 ../bin/src/ui_playbacksettingspage.h:330
+#: ui/equalizer.cpp:44 ../bin/src/ui_playbacksettingspage.h:360
 msgid "Pre-amp"
 msgstr "Ön yükseltici"
 
@@ -3897,7 +3922,7 @@ msgstr "Bir tuşa basın"
 msgid "Press a key combination to use for %1..."
 msgstr "%1 için kullanmak için bir tuş kombinasyonun basın..."
 
-#: ../bin/src/ui_behavioursettingspage.h:286
+#: ../bin/src/ui_behavioursettingspage.h:316
 msgid "Pressing \"Previous\" in player will..."
 msgstr "Oynatıcıda \"Önceki\" düğmesine basmak..."
 
@@ -3980,7 +4005,7 @@ msgstr "Seçili parçaları kuyruğa ekle"
 msgid "Queue track"
 msgstr "Parçayı kuyruğa ekle"
 
-#: ../bin/src/ui_playbacksettingspage.h:327
+#: ../bin/src/ui_playbacksettingspage.h:357
 msgid "Radio (equal loudness for all tracks)"
 msgstr "Radyo (tüm parçalar için eşit ses seviyesi)"
 
@@ -4057,7 +4082,7 @@ msgid "Reggae"
 msgstr "Reggae"
 
 #: playlist/playlistsaveoptionsdialog.cpp:33
-#: ../bin/src/ui_behavioursettingspage.h:309
+#: ../bin/src/ui_behavioursettingspage.h:343
 msgid "Relative"
 msgstr "Bağıl"
 
@@ -4065,7 +4090,7 @@ msgstr "Bağıl"
 msgid "Remember Wii remote swing"
 msgstr "Wii kumanda sallamayı hatırla"
 
-#: ../bin/src/ui_behavioursettingspage.h:272
+#: ../bin/src/ui_behavioursettingspage.h:302
 msgid "Remember from last time"
 msgstr "Son seferkinden hatırla"
 
@@ -4148,7 +4173,7 @@ msgstr "Parçayı tekrarla"
 msgid "Replace current playlist"
 msgstr "Şu anki çalma listesinin yerine geç"
 
-#: ../bin/src/ui_behavioursettingspage.h:296
+#: ../bin/src/ui_behavioursettingspage.h:326
 msgid "Replace the playlist"
 msgstr "Çalma listesinin yerine geç"
 
@@ -4156,11 +4181,11 @@ msgstr "Çalma listesinin yerine geç"
 msgid "Replaces spaces with underscores"
 msgstr "Boşlukları alt çizgiyle değiştirir"
 
-#: ../bin/src/ui_playbacksettingspage.h:322
+#: ../bin/src/ui_playbacksettingspage.h:352
 msgid "Replay Gain"
 msgstr "Replay Gain"
 
-#: ../bin/src/ui_playbacksettingspage.h:324
+#: ../bin/src/ui_playbacksettingspage.h:354
 msgid "Replay Gain mode"
 msgstr "Yeniden Oynatma Kazanç kipi"
 
@@ -4180,7 +4205,7 @@ msgstr "Sıfırla"
 msgid "Reset play counts"
 msgstr "Çalma sayısını sıfırla"
 
-#: ../bin/src/ui_behavioursettingspage.h:290
+#: ../bin/src/ui_behavioursettingspage.h:320
 msgid "Restart song, then jump to previous if pressed again"
 msgstr "Şarkıyı yeniden başlatacak, ardından tekrar basılırsa öncekine gidecek"
 
@@ -4193,7 +4218,7 @@ msgstr "Eğer başlangıçtan en fazla 8 saniye geçmişse parçayı yeniden ba�
 msgid "Restrict to ASCII characters"
 msgstr "ASCII karakterler olarak kısıtla"
 
-#: ../bin/src/ui_behavioursettingspage.h:273
+#: ../bin/src/ui_behavioursettingspage.h:303
 msgid "Resume playback on start"
 msgstr "Başlarken çalmaya devam et"
 
@@ -4242,6 +4267,10 @@ msgstr "Aygıtı güvenli kaldır"
 #: ../bin/src/ui_organisedialog.h:248
 msgid "Safely remove the device after copying"
 msgstr "Kopyalama işleminden sonra aygıtı güvenli kaldır"
+
+#: ../bin/src/ui_playbacksettingspage.h:372
+msgid "Sample Rate"
+msgstr ""
 
 #: playlist/playlist.cpp:1357 ../bin/src/ui_edittagdialog.h:724
 msgid "Sample rate"
@@ -4410,6 +4439,10 @@ msgstr "Çalan parçayı görece miktara göre ara"
 msgid "Seek the currently playing track to an absolute position"
 msgstr "Çalan parçayı kesin bir konuma göre ara"
 
+#: ../bin/src/ui_behavioursettingspage.h:336
+msgid "Seeking using a keyboard shortcut"
+msgstr ""
+
 #: visualisations/visualisationselector.cpp:37 ../bin/src/ui_ripcddialog.h:310
 msgid "Select All"
 msgstr "Tümünü Seç"
@@ -4506,7 +4539,7 @@ msgstr "Göster"
 msgid "Show OSD"
 msgstr "OSD göster"
 
-#: ../bin/src/ui_playbacksettingspage.h:311
+#: ../bin/src/ui_playbacksettingspage.h:341
 msgid "Show a glowing animation on the current track"
 msgstr "Mevcut parçada parlayan bir animasyon göster"
 
@@ -4607,7 +4640,7 @@ msgstr "\"Beğen\" düğmesini göster"
 msgid "Show the scrobble button in the main window"
 msgstr "Ana pencerede skroplama düğmesini göster"
 
-#: ../bin/src/ui_behavioursettingspage.h:260
+#: ../bin/src/ui_behavioursettingspage.h:290
 msgid "Show tray icon"
 msgstr "Sistem çekmecesi simgesini göster"
 
@@ -5111,6 +5144,10 @@ msgstr "Bu yayın sadece abone olan kullanıcılar içindir"
 msgid "This type of device is not supported: %1"
 msgstr "Bu tür bir aygıt desteklenmiyor: %1"
 
+#: ../bin/src/ui_behavioursettingspage.h:337
+msgid "Time step"
+msgstr ""
+
 #: playlist/playlist.cpp:1315 ui/organisedialog.cpp:60
 #: ui/qtsystemtrayicon.cpp:232 ../bin/src/ui_about.h:142
 #: ../bin/src/ui_edittagdialog.h:734 ../bin/src/ui_trackselectiondialog.h:211
@@ -5323,7 +5360,7 @@ msgstr "Gnome kısayol tuşlarını kullan"
 msgid "Use Psychedelic Colors"
 msgstr ""
 
-#: ../bin/src/ui_playbacksettingspage.h:323
+#: ../bin/src/ui_playbacksettingspage.h:353
 msgid "Use Replay Gain metadata if it is available"
 msgstr "Varsa Replay Gain verisini kullan"
 
@@ -5367,7 +5404,7 @@ msgstr "Wii kumanda durumunu raporlamak için bildirimleri kullan"
 msgid "Use temporal noise shaping"
 msgstr "Temporal noise shaping kullan"
 
-#: ../bin/src/ui_behavioursettingspage.h:266
+#: ../bin/src/ui_behavioursettingspage.h:296
 msgid "Use the system default"
 msgstr "Sistem öntanımlısını kullan"
 
@@ -5399,7 +5436,7 @@ msgstr "Kullanıcı arayüzü"
 msgid "Username"
 msgstr "Kullanıcı Adı"
 
-#: ../bin/src/ui_behavioursettingspage.h:279
+#: ../bin/src/ui_behavioursettingspage.h:309
 msgid "Using the menu to add a song will..."
 msgstr "Menü kullanarak şarkı eklemek..."
 
@@ -5468,7 +5505,7 @@ msgstr "WMA"
 msgid "Wall"
 msgstr "Duvar"
 
-#: playlist/playlisttabbar.cpp:192 ../bin/src/ui_behavioursettingspage.h:262
+#: playlist/playlisttabbar.cpp:192 ../bin/src/ui_behavioursettingspage.h:292
 msgid "Warn me when closing a playlist tab"
 msgstr "Bir çalma listesi sekmesini kapatırken beni uyar"
 
@@ -5484,7 +5521,7 @@ msgstr "İnternet sitesi"
 msgid "Weeks"
 msgstr "Haftalar"
 
-#: ../bin/src/ui_behavioursettingspage.h:269
+#: ../bin/src/ui_behavioursettingspage.h:299
 msgid "When Clementine starts"
 msgstr "Clementine başladığında"
 
@@ -5494,7 +5531,7 @@ msgid ""
 "If there are no matches then it will use the largest image in the directory."
 msgstr "Clementine albüm kapağı ararken ilk önce dosya adında şu kelimelerden birini içeren resim dosyasına bakacak.\nEğer eşleşen bir dosya bulamazsa, bulunduğu dizindeki en büyük resmi kullanacak."
 
-#: ../bin/src/ui_behavioursettingspage.h:306
+#: ../bin/src/ui_behavioursettingspage.h:340
 msgid "When saving a playlist, file paths should be"
 msgstr "Bir çalma listesi kaydederken, yollar şöyle olmalı"
 
@@ -5578,7 +5615,7 @@ msgstr "Şu anda tam bir yeniden tarama çalıştırmak ister misiniz?"
 msgid "Write all songs statistics into songs' files"
 msgstr "Tüm şarkı istatistiklerini şarkı dosyalarına yaz"
 
-#: ../bin/src/ui_behavioursettingspage.h:311
+#: ../bin/src/ui_behavioursettingspage.h:345
 msgid "Write metadata"
 msgstr "Üstveriyi yaz"
 
@@ -5698,7 +5735,7 @@ msgid ""
 "shortcuts in Clementine."
 msgstr "Clementine'da genel kısayolları kullanabilmek için Sistem Tercihleri'ne girmeli ve \"<span style=\" font-style:italic;\">bilgisayarı denetleme</span>\"si için etkinleştirmelisiniz.."
 
-#: ../bin/src/ui_behavioursettingspage.h:268
+#: ../bin/src/ui_behavioursettingspage.h:298
 msgid "You will need to restart Clementine if you change the language."
 msgstr "Dili değiştirdiyseniz programı yeniden başlatmanız gerekmektedir."
 
