@@ -262,6 +262,64 @@
     </widget>
    </item>
    <item>
+    <widget class="QGroupBox" name="groupBox_2CPL">
+     <property name="title">
+      <string>Double clicking a song in the playlist will...</string>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout_2CPL">
+      <item>
+       <widget class="QComboBox" name="doubleclick_addmode2CPL">
+        <property name="currentIndex">
+         <number>0</number>
+        </property>
+        <item>
+         <property name="text">
+          <string>Change the currently playing song</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Add to the queue</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Replace the queue</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Do nothing</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+      <item>
+       <widget class="QComboBox" name="doubleclick_playmode2CPL">
+        <property name="currentIndex">
+         <number>1</number>
+        </property>
+        <item>
+         <property name="text">
+          <string>Never start playing</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Play if there is nothing already playing</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Always start playing</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
     <widget class="QGroupBox" name="groupBox_seekstep">
      <property name="title">
       <string>Seeking using a keyboard shortcut</string>
