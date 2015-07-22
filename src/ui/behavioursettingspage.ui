@@ -266,9 +266,9 @@
      <property name="title">
       <string>Double clicking a song in the playlist will...</string>
      </property>
-     <layout class="QHBoxLayout" name="horizontalLayout_2CPL">
+     <layout class="QHBoxLayout" name="horizontalLayout_doubleclick_playlist">
       <item>
-       <widget class="QComboBox" name="doubleclick_addmode2CPL">
+       <widget class="QComboBox" name="doubleclick_playlist_addmode">
         <property name="currentIndex">
          <number>0</number>
         </property>
@@ -295,7 +295,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QComboBox" name="doubleclick_playmode2CPL">
+       <widget class="QComboBox" name="doubleclick_playlist_playmode">
         <property name="currentIndex">
          <number>1</number>
         </property>
