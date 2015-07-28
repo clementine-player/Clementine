@@ -25,6 +25,7 @@
 #include <QNetworkAccessManager>
 #include <QTextCodec>
 #include <QUrl>
+#include <QVector>
 
 #include <aifffile.h>
 #include <asffile.h>
@@ -893,36 +894,67 @@ void TagReader::SetTextFrame(const char* id, const QString& value,
 void TagReader::SetTextFrame(const char* id, const std::string& value,
                              TagLib::ID3v2::Tag* tag) const {
   TagLib::ByteVector id_vector(id);
+  QVector<TagLib::ByteVector> frames_buffer;
 
-  // Remove the frame if it already exists
+  // Store and clear existing frames
   while (tag->frameListMap().contains(id_vector) &&
          tag->frameListMap()[id_vector].size() != 0) {
+    frames_buffer.push_back(tag->frameListMap()[id_vector].front()->render());
     tag->removeFrame(tag->frameListMap()[id_vector].front());
   }
 
-  // Create and add a new frame
-  TagLib::ID3v2::TextIdentificationFrame* frame =
-      new TagLib::ID3v2::TextIdentificationFrame(id_vector,
+  // If no frames stored create empty frame
+  if (frames_buffer.isEmpty()) {
+    TagLib::ID3v2::TextIdentificationFrame frame(id_vector,
                                                  TagLib::String::UTF8);
-  frame->setText(StdStringToTaglibString(value));
-  tag->addFrame(frame);
+    frames_buffer.push_back(frame.render());
+  }
+
+  // Update and add the frames
+  for (int lyrics_index = 0; lyrics_index < frames_buffer.size();
+       lyrics_index++) {
+    TagLib::ID3v2::TextIdentificationFrame* frame =
+        new TagLib::ID3v2::TextIdentificationFrame(
+            frames_buffer.at(lyrics_index));
+    if (lyrics_index == 0) {
+      frame->setText(StdStringToTaglibString(value));
+    }
+    // add frame takes ownership and clears the memory
+    tag->addFrame(frame);
+  }
 }
 
 void TagReader::SetUnsyncLyricsFrame(const std::string& value,
                                      TagLib::ID3v2::Tag* tag) const {
   TagLib::ByteVector id_vector("USLT");
+  QVector<TagLib::ByteVector> frames_buffer;
 
-  // Remove the frame if it already exists
+  // Store and clear existing frames
   while (tag->frameListMap().contains(id_vector) &&
          tag->frameListMap()[id_vector].size() != 0) {
+    frames_buffer.push_back(tag->frameListMap()[id_vector].front()->render());
     tag->removeFrame(tag->frameListMap()[id_vector].front());
   }
 
-  // Create and add a new frame
-  TagLib::ID3v2::UnsynchronizedLyricsFrame* frame =
-      new TagLib::ID3v2::UnsynchronizedLyricsFrame(TagLib::String::UTF8);
-  frame->setText(StdStringToTaglibString(value));
-  tag->addFrame(frame);
+  // If no frames stored create empty frame
+  if (frames_buffer.isEmpty()) {
+    TagLib::ID3v2::UnsynchronizedLyricsFrame frame(TagLib::String::UTF8);
+    frame.setDescription("Clementine editor");
+    frames_buffer.push_back(frame.render());
+  }
+
+  // Update and add the frames
+  for (int lyrics_index = 0; lyrics_index < frames_buffer.size();
+       lyrics_index++) {
+    TagLib::ID3v2::UnsynchronizedLyricsFrame* frame =
+        new TagLib::ID3v2::UnsynchronizedLyricsFrame(
+            frames_buffer.at(lyrics_index));
+    if (lyrics_index == 0) {
+      frame->setText(StdStringToTaglibString(value));
+    }
+    // add frame takes ownership and clears the memory
+    tag->addFrame(frame);
+  }
 }
 
 bool TagReader::IsMediaFile(const QString& filename) const {
