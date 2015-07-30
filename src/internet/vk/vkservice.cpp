@@ -63,7 +63,8 @@ const char* VkService::kUrlScheme = "vk";
 const char* VkService::kDefCacheFilename = "%artist - %title";
 const int VkService::kMaxVkSongList = 6000;
 const int VkService::kMaxVkWallPostList = 100;
-const int VkService::kCustomSongCount = 50;
+const int VkService::kMaxVkSongCount = 300;
+const int VkService::kSearchDelayMsec = 400;
 
 QString VkService::DefaultCacheDir() {
   return QDir::toNativeSeparators(
@@ -220,7 +221,8 @@ VkService::VkService(Application* app, InternetModel* parent)
       url_handler_(new VkUrlHandler(this, this)),
       audio_provider_(new Vreen::AudioProvider(client_.get())),
       cache_(new VkMusicCache(app_, this)),
-      last_search_id_(0) {
+      last_search_id_(0),
+      search_delay_(new QTimer(this)) {
   QSettings s;
   s.beginGroup(kSettingGroup);
 
@@ -245,7 +247,14 @@ VkService::VkService(Application* app, InternetModel* parent)
   VkSearchProvider* search_provider = new VkSearchProvider(app_, this);
   search_provider->Init(this);
   app_->global_search()->AddProvider(search_provider);
+
+  search_delay_->setInterval(kSearchDelayMsec);
+  search_delay_->setSingleShot(true);
+  connect(search_delay_, SIGNAL(timeout()), SLOT(DoLocalSearch()));
+
   connect(search_box_, SIGNAL(TextChanged(QString)), SLOT(FindSongs(QString)));
+  connect(this, SIGNAL(SongSearchResult(SearchID, SongList)),
+          SLOT(SearchResultLoaded(SearchID, SongList)));
 
   app_->player()->RegisterUrlHandler(url_handler_);
 }
@@ -662,7 +671,7 @@ void VkService::UpdateRecommendations() {
   CreateAndAppendRow(recommendations_item_, Type_Loading);
 
   auto my_audio =
-      audio_provider_->getRecommendationsForUser(0, kCustomSongCount, 0);
+      audio_provider_->getRecommendationsForUser(0, kMaxVkSongCount, 0);
 
   NewClosure(my_audio, SIGNAL(resultReady(QVariant)), this,
              SLOT(RecommendationsLoaded(Vreen::AudioItemListReply*)), my_audio);
@@ -673,7 +682,7 @@ void VkService::MoreRecommendations() {
   CreateAndAppendRow(recommendations_item_, Type_Loading);
 
   auto my_audio = audio_provider_->getRecommendationsForUser(
-      0, kCustomSongCount, recommendations_item_->rowCount() - 1);
+      0, kMaxVkSongCount, recommendations_item_->rowCount() - 1);
 
   NewClosure(my_audio, SIGNAL(resultReady(QVariant)), this,
              SLOT(RecommendationsLoaded(Vreen::AudioItemListReply*)), my_audio);
@@ -818,8 +827,8 @@ QStandardItem* VkService::AppendAlbumList(QStandardItem* parent, bool myself) {
 
   if (myself) {
     item = new QStandardItem(QIcon(":vk/discography.png"), tr("My Albums"));
-    // TODO(Ivan Leontiev): Do this better. We have incomplete MusicOwner instance
-    // for logged in user.
+    // TODO(Ivan Leontiev): Do this better. We have incomplete MusicOwner
+    // instance for logged in user.
     owner.setId(UserID());
     my_albums_item_ = item;
   } else {
@@ -876,8 +885,8 @@ QStandardItem* VkService::AppendMusic(QStandardItem* parent, bool myself) {
 
   if (myself) {
     item = new QStandardItem(QIcon(":vk/my_music.png"), tr("My Music"));
-    // TODO(Ivan Leontiev): Do this better. We have incomplete MusicOwner instance
-    // for logged in user.
+    // TODO(Ivan Leontiev): Do this better. We have incomplete MusicOwner
+    // instance for logged in user.
     owner.setId(UserID());
     my_music_item_ = item;
   } else {
@@ -962,8 +971,8 @@ void VkService::FindThisArtist() {
 void VkService::AddToMyMusic() {
   SongId id = ExtractIds(selected_song_.url());
   auto reply = audio_provider_->addToLibrary(id.audio_id, id.owner_id);
-  connect(reply, SIGNAL(resultReady(QVariant)), this,
-          SLOT(UpdateMusic(my_music_item_)));
+  NewClosure(reply, SIGNAL(resultReady(QVariant)), this,
+             SLOT(UpdateMusic(QStandardItem*)), my_music_item_);
 }
 
 void VkService::AddToMyMusicCurrent() {
@@ -977,8 +986,8 @@ void VkService::RemoveFromMyMusic() {
   SongId id = ExtractIds(selected_song_.url());
   if (id.owner_id == UserID()) {
     auto reply = audio_provider_->removeFromLibrary(id.audio_id, id.owner_id);
-    connect(reply, SIGNAL(resultReady(QVariant)), this,
-            SLOT(UpdateMusic(my_music_item_)));
+    NewClosure(reply, SIGNAL(resultReady(QVariant)), this,
+               SLOT(UpdateMusic(QStandardItem*)), my_music_item_);
   } else {
     qLog(Error) << "Tried to delete song that not owned by user (" << UserID()
                 << selected_song_.url();
@@ -1003,29 +1012,40 @@ void VkService::CopyShareUrl() {
  * Search
  */
 
+void VkService::DoLocalSearch() {
+  ClearStandardItem(search_result_item_);
+  CreateAndAppendRow(search_result_item_, Type_Loading);
+  SearchID id(SearchID::LocalSearch);
+
+  last_search_id_ = id.id();
+  SongSearch(id, last_query_);
+}
+
 void VkService::FindSongs(const QString& query) {
+  last_query_ = query;
+
   if (query.isEmpty()) {
+    search_delay_->stop();
     root_item_->removeRow(search_result_item_->row());
     search_result_item_ = NULL;
     last_search_id_ = 0;
-  } else {
-    last_query_ = query;
-    if (!search_result_item_) {
-      CreateAndAppendRow(root_item_, Type_Search);
-      connect(this, SIGNAL(SongSearchResult(SearchID, SongList)),
-              SLOT(SearchResultLoaded(SearchID, SongList)));
-    }
-    ClearStandardItem(search_result_item_);
-    CreateAndAppendRow(search_result_item_, Type_Loading);
-    SongSearch(SearchID(SearchID::LocalSearch), query);
+    return;
+  }
+
+  search_delay_->start();
+
+  if (!search_result_item_) {
+    CreateAndAppendRow(root_item_, Type_Search);
   }
 }
 
 void VkService::FindMore() {
   RemoveLastRow(search_result_item_, Type_More);
-
+  CreateAndAppendRow(search_result_item_, Type_Loading);
   SearchID id(SearchID::MoreLocalSearch);
-  SongSearch(id, last_query_, kCustomSongCount,
+
+  last_search_id_ = id.id();
+  SongSearch(id, last_query_, kMaxVkSongCount,
              search_result_item_->rowCount() - 1);
 }
 
@@ -1034,7 +1054,7 @@ void VkService::SearchResultLoaded(const SearchID& id, const SongList& songs) {
     return;  // Result received when search is already over.
   }
 
-  if (id.id() >= last_search_id_) {
+  if (id.id() == last_search_id_) {
     if (id.type() == SearchID::LocalSearch) {
       ClearStandardItem(search_result_item_);
     } else if (id.type() == SearchID::MoreLocalSearch) {
@@ -1042,8 +1062,6 @@ void VkService::SearchResultLoaded(const SearchID& id, const SongList& songs) {
     } else {
       return;  // Others request types ignored.
     }
-
-    last_search_id_ = id.id();
 
     if (!songs.isEmpty()) {
       AppendSongs(search_result_item_, songs);
@@ -1444,7 +1462,7 @@ void VkService::AppendSongs(QStandardItem* parent, const SongList& songs) {
 void VkService::ReloadSettings() {
   QSettings s;
   s.beginGroup(kSettingGroup);
-  maxGlobalSearch_ = s.value("max_global_search", kCustomSongCount).toInt();
+  maxGlobalSearch_ = s.value("max_global_search", kMaxVkSongCount).toInt();
   cachingEnabled_ = s.value("cache_enabled", false).toBool();
   cacheDir_ = s.value("cache_dir", DefaultCacheDir()).toString();
   cacheFilename_ = s.value("cache_filename", kDefCacheFilename).toString();
