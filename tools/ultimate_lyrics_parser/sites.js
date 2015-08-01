@@ -377,7 +377,7 @@ const siteDescriptors = {
 		extract: [['</a>?','<div']]
 	},
 	"letras.mus.br": {
-		charset: "iso-8859-1",
+		charset: "utf-8",
 		url: "http://letras.terra.com.br/winamp.php?musica={title}&artista={artist}",
 		urlFormat : [
 			{rep: "_", punct: "_@,;&\\/\"" },
