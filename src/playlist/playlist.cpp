@@ -1402,8 +1402,18 @@ void Playlist::sort(int column, Qt::SortOrder order) {
   if (dynamic_playlist_ && current_item_index_.isValid())
     begin += current_item_index_.row() + 1;
 
-  qStableSort(begin, new_items.end(),
+  if (column == Column_Album) {
+    // When sorting by album, also take into account discs and tracks.
+      qStableSort(begin, new_items.end(),
+            std::bind(&Playlist::CompareItems, Column_Track, order, _1, _2));
+      qStableSort(begin, new_items.end(),
+            std::bind(&Playlist::CompareItems, Column_Disc, order, _1, _2));
+      qStableSort(begin, new_items.end(),
+            std::bind(&Playlist::CompareItems, Column_Album, order, _1, _2));
+  } else {
+        qStableSort(begin, new_items.end(),
               std::bind(&Playlist::CompareItems, column, order, _1, _2));
+  }
 
   undo_stack_->push(
       new PlaylistUndoCommands::SortItems(this, column, order, new_items));
