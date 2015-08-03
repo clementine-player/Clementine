@@ -27,6 +27,7 @@
 #include "ui/albumcoverchoicecontroller.h"
 #include "ui/iconloader.h"
 
+#include <QDesktopWidget>
 #include <QMenu>
 #include <QMovie>
 #include <QPainter>
@@ -653,7 +654,10 @@ void NowPlayingWidget::SearchCoverAutomatically() {
 }
 
 void NowPlayingWidget::Bask() {
+  QDesktopWidget desktop;
+  int current_screen = desktop.screenNumber(this);
   big_hypnotoad_.reset(new FullscreenHypnotoad);
+  big_hypnotoad_->setGeometry(desktop.screenGeometry(current_screen));
   big_hypnotoad_->showFullScreen();
 }
 
