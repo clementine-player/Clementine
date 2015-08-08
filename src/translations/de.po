@@ -17,6 +17,7 @@
 # Gregor S. <inactive+santy@transifex.com>, 2012
 # janlaymann <janlaymann@googlemail.com>, 2012
 # jonas.mue <jonas.mue@gmail.com>, 2013
+# Konrad <ko.heidler@gmail.com>, 2015
 # Lenzitsch <lenz.furrer@gmail.com>, 2013
 # Lenzitsch <lenz.furrer@gmail.com>, 2012
 # Leon Scheid <megacrafter.mega@googlemail.com>, 2015
@@ -40,8 +41,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2015-07-22 15:24+0000\n"
-"Last-Translator: Tobias Bannert <tobannert@gmail.com>\n"
+"PO-Revision-Date: 2015-08-02 13:08+0000\n"
+"Last-Translator: Konrad <ko.heidler@gmail.com>\n"
 "Language-Team: German (http://www.transifex.com/projects/p/clementine/language/de/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -96,7 +97,7 @@ msgstr " Sekunden"
 msgid " songs"
 msgstr "Titel"
 
-#: internet/vk/vkservice.cpp:148
+#: internet/vk/vkservice.cpp:149
 #, qt-format
 msgid "%1 (%2 songs)"
 msgstr "%1 (%2 Titel)"
@@ -600,7 +601,7 @@ msgstr "Titelübersprungzähler hinzufügen"
 msgid "Add song title tag"
 msgstr "Titelname hinzufügen"
 
-#: internet/vk/vkservice.cpp:320
+#: internet/vk/vkservice.cpp:329
 msgid "Add song to cache"
 msgstr "Titel zum Zwischenspeicher hinzufügen"
 
@@ -620,7 +621,7 @@ msgstr "Titel zu »Meine Musik« hinzufügen, wenn »Lieben« geklickt wurde"
 msgid "Add stream..."
 msgstr "Datenstrom hinzufügen …"
 
-#: internet/vk/vkservice.cpp:312
+#: internet/vk/vkservice.cpp:321
 msgid "Add to My Music"
 msgstr "Zu »Meine Musik« hinzufügen"
 
@@ -636,7 +637,7 @@ msgstr "Markierte Stücke von Spotify hinzufügen"
 msgid "Add to another playlist"
 msgstr "Zu anderer Wiedergabeliste hinzufügen"
 
-#: internet/vk/vkservice.cpp:298
+#: internet/vk/vkservice.cpp:307
 msgid "Add to bookmarks"
 msgstr "Zu Lesezeichen hinzufügen"
 
@@ -648,7 +649,7 @@ msgstr "Zur Wiedergabeliste hinzufügen"
 msgid "Add to the queue"
 msgstr "In die Warteschlange einreihen"
 
-#: internet/vk/vkservice.cpp:328
+#: internet/vk/vkservice.cpp:337
 msgid "Add user/group to bookmarks"
 msgstr "Nutzer/Gruppe zu Lesezeichen hinzufügen"
 
@@ -720,7 +721,7 @@ msgstr "Titelbild"
 msgid "Album info on jamendo.com..."
 msgstr "Albuminformationen auf jamendo.com …"
 
-#: internet/vk/vkservice.cpp:827
+#: internet/vk/vkservice.cpp:836
 msgid "Albums"
 msgstr "Alben"
 
@@ -1108,7 +1109,7 @@ msgstr "Abbrechen"
 msgid "Cancel download"
 msgstr "Herunterladen abbrechen"
 
-#: internet/vk/vkservice.cpp:626
+#: internet/vk/vkservice.cpp:635
 msgid ""
 "Captcha is needed.\n"
 "Try to login into Vk.com with your browser,to fix this problem."
@@ -1354,7 +1355,7 @@ msgstr "Komma getrennte Liste mit »class:level«, Level zwischen 0-3"
 msgid "Comment"
 msgstr "Kommentar"
 
-#: internet/vk/vkservice.cpp:154
+#: internet/vk/vkservice.cpp:155
 msgid "Community Radio"
 msgstr "Gemeinschaftsradio"
 
@@ -1393,7 +1394,7 @@ msgstr "Spotify konfigurieren …"
 msgid "Configure Subsonic..."
 msgstr "Subsonic wird konfiguriert …"
 
-#: internet/vk/vkservice.cpp:337
+#: internet/vk/vkservice.cpp:346
 msgid "Configure Vk.com..."
 msgstr "Vk.com konfigurieren …"
 
@@ -1440,7 +1441,7 @@ msgid ""
 "Connection timed out, check server URL. Example: http://localhost:4040/"
 msgstr "Zeitüberschreitung, bitte überprüfen Sie die Server-Adresse. Beispiel: http://localhost:4040/"
 
-#: internet/vk/vkservice.cpp:1095
+#: internet/vk/vkservice.cpp:1113
 msgid "Connection trouble or audio is disabled by owner"
 msgstr "Verbindungsproblem, oder der Ton wurde vom Besitzer deaktiviert"
 
@@ -1468,7 +1469,7 @@ msgstr "Tondateien verlustfrei umrechnen, bevor sie zur Fernsteuerung gesendet w
 msgid "Convert lossless files"
 msgstr "Verlustfreie Dateien umwandeln"
 
-#: internet/vk/vkservice.cpp:324
+#: internet/vk/vkservice.cpp:333
 msgid "Copy share url to clipboard"
 msgstr "Adresse zum freigeben in Zwischenablage kopieren"
 
@@ -2170,7 +2171,7 @@ msgstr "Äquivalent zu --log-levels *:3"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:242
 #: library/libraryview.cpp:630 ui/mainwindow.cpp:1931 ui/mainwindow.cpp:2178
-#: ui/mainwindow.cpp:2326 internet/vk/vkservice.cpp:625
+#: ui/mainwindow.cpp:2326 internet/vk/vkservice.cpp:634
 msgid "Error"
 msgstr "Fehler"
 
@@ -2442,7 +2443,7 @@ msgstr "Dateien zum Umwandeln"
 msgid "Find songs in your library that match the criteria you specify."
 msgstr "Titel in Ihrer Bibliothek finden, die den Kriterien entsprechen."
 
-#: internet/vk/vkservice.cpp:308
+#: internet/vk/vkservice.cpp:317
 msgid "Find this artist"
 msgstr "Diesen Interpret finden"
 
@@ -3096,7 +3097,7 @@ msgstr "Lade Stückinfo"
 #: internet/podcasts/podcastdiscoverymodel.cpp:105 widgets/prettyimage.cpp:168
 #: widgets/widgetfadehelper.cpp:96 ../bin/src/ui_addpodcastdialog.h:180
 #: ../bin/src/ui_searchpreview.h:106 ../bin/src/ui_organisedialog.h:262
-#: internet/vk/vkservice.cpp:499 internet/vk/vksettingspage.cpp:122
+#: internet/vk/vkservice.cpp:508 internet/vk/vksettingspage.cpp:122
 msgid "Loading..."
 msgstr "Wird geladen …"
 
@@ -3322,7 +3323,7 @@ msgstr "Stimmungsbarometerstil"
 msgid "Moodbars"
 msgstr "Stimmungsbarometer"
 
-#: internet/vk/vkservice.cpp:503
+#: internet/vk/vkservice.cpp:512
 msgid "More"
 msgstr "Mehr"
 
@@ -3353,7 +3354,7 @@ msgid "Move up"
 msgstr "Nach oben"
 
 #: transcoder/transcodedialog.cpp:225 ui/mainwindow.cpp:1866
-#: internet/vk/vkservice.cpp:884
+#: internet/vk/vkservice.cpp:893
 msgid "Music"
 msgstr "Musik"
 
@@ -3366,15 +3367,15 @@ msgstr "Musikbibliothek"
 msgid "Mute"
 msgstr "Stumm"
 
-#: internet/vk/vkservice.cpp:820
+#: internet/vk/vkservice.cpp:829
 msgid "My Albums"
 msgstr "Meine Alben"
 
-#: internet/vk/vkservice.cpp:878
+#: internet/vk/vkservice.cpp:887
 msgid "My Music"
 msgstr "Meine Musik"
 
-#: internet/vk/vkservice.cpp:510
+#: internet/vk/vkservice.cpp:519
 msgid "My Recommendations"
 msgstr "Meine Empfehlungen"
 
@@ -4130,11 +4131,11 @@ msgstr "Doppelte aus der Wiedergabeliste entfernen"
 msgid "Remove folder"
 msgstr "Ordner entfernen"
 
-#: internet/vk/vkservice.cpp:316
+#: internet/vk/vkservice.cpp:325
 msgid "Remove from My Music"
 msgstr "Aus »Meine Musik« entfernen"
 
-#: internet/vk/vkservice.cpp:302
+#: internet/vk/vkservice.cpp:311
 msgid "Remove from bookmarks"
 msgstr "Aus den Lesezeichen entfernen"
 
@@ -4368,7 +4369,7 @@ msgstr "Seafile"
 
 #: ui/albumcoversearcher.cpp:165 ui/albumcoversearcher.cpp:182
 #: ../bin/src/ui_gpoddersearchpage.h:78 ../bin/src/ui_itunessearchpage.h:78
-#: ../bin/src/ui_albumcoversearcher.h:114 internet/vk/vkservice.cpp:518
+#: ../bin/src/ui_albumcoversearcher.h:114 internet/vk/vkservice.cpp:527
 msgid "Search"
 msgstr "Suche"
 
@@ -5205,7 +5206,7 @@ msgstr "Top-Titel"
 
 #: ../bin/src/ui_albumcovermanager.h:221
 msgid "Total albums:"
-msgstr "Gesammte Alben:"
+msgstr "Gesamte Alben:"
 
 #: covers/coversearchstatisticsdialog.cpp:70
 msgid "Total bytes transferred"
@@ -5318,7 +5319,7 @@ msgstr "Abonnement kündigen"
 msgid "Upcoming Concerts"
 msgstr "Nächste Konzerte"
 
-#: internet/vk/vkservice.cpp:332
+#: internet/vk/vkservice.cpp:341
 msgid "Update"
 msgstr "Aktualisieren"
 
@@ -5513,7 +5514,7 @@ msgstr "WAV"
 msgid "WMA"
 msgstr "WMA"
 
-#: internet/vk/vkservice.cpp:860
+#: internet/vk/vkservice.cpp:869
 msgid "Wall"
 msgstr "Pinnwand"
 

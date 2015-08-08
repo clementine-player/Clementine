@@ -1196,14 +1196,14 @@ UrlHandler::LoadResult VkService::GetSongResult(const QUrl& url) {
                                   media_url, song.length_nanosec());
   }
 
-  return UrlHandler::LoadResult();
+  return UrlHandler::LoadResult(url);
 }
 
 UrlHandler::LoadResult VkService::GetGroupNextSongUrl(const QUrl& url) {
   QStringList tokens = url.path().split('/');
   if (tokens.count() < 3) {
     qLog(Error) << "Wrong url" << url;
-    return UrlHandler::LoadResult();
+    return UrlHandler::LoadResult(url);
   }
 
   int gid = tokens[1].toInt();
@@ -1232,7 +1232,7 @@ UrlHandler::LoadResult VkService::GetGroupNextSongUrl(const QUrl& url) {
   }
 
   qLog(Info) << "Unresolved group url" << url;
-  return UrlHandler::LoadResult();
+  return UrlHandler::LoadResult(url);
 }
 
 /***
