@@ -167,6 +167,15 @@ void MoodbarLoader::RequestFinished(MoodbarPipeline* request, const QUrl& url) {
       QFile mood_file(mood_filename);
       if (mood_file.open(QIODevice::WriteOnly)) {
         mood_file.write(request->data());
+
+#ifdef Q_OS_WIN32
+        if (!SetFileAttributes((LPCTSTR)mood_filename.utf16(),
+                               FILE_ATTRIBUTE_HIDDEN)) {
+          qLog(Warning) << "Error changing hidden attribute for file"
+                        << mood_filename;
+        }
+#endif
+
       } else {
         qLog(Warning) << "Error opening mood file for writing" << mood_filename;
       }
