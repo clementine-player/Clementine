@@ -171,7 +171,7 @@ void MoodbarLoader::RequestFinished(MoodbarPipeline* request, const QUrl& url) {
 #ifdef Q_OS_WIN32
         if (!SetFileAttributes((LPCTSTR)mood_filename.utf16(),
                                FILE_ATTRIBUTE_HIDDEN)) {
-          qLog(Warning) << "Error changing hidden attribute for file"
+          qLog(Warning) << "Error setting hidden attribute for file"
                         << mood_filename;
         }
 #endif
