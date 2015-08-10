@@ -529,7 +529,7 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
           SLOT(PlayIndex(QModelIndex)));
 
   connect(ui_->playlist->view(), SIGNAL(doubleClicked(QModelIndex)),
-          SLOT(PlayIndex(QModelIndex)));
+          SLOT(PlaylistDoubleClick(QModelIndex)));
   connect(ui_->playlist->view(), SIGNAL(PlayItem(QModelIndex)),
           SLOT(PlayIndex(QModelIndex)));
   connect(ui_->playlist->view(), SIGNAL(PlayPause()), app_->player(),
@@ -990,6 +990,12 @@ void MainWindow::ReloadSettings() {
       AddBehaviour(s.value("doubleclick_addmode", AddBehaviour_Append).toInt());
   doubleclick_playmode_ = PlayBehaviour(
       s.value("doubleclick_playmode", PlayBehaviour_IfStopped).toInt());
+  doubleclick_playlist_addmode_ =
+      PlaylistAddBehaviour(s.value("doubleclick_playlist_addmode",
+          PlaylistAddBehaviour_Play).toInt());
+  doubleclick_playlist_playmode_ = PlaylistPlayBehaviour(
+      s.value("doubleclick_playlist_playmode",
+          PlaylistPlayBehaviour_IfStopped).toInt());
   menu_playmode_ =
       PlayBehaviour(s.value("menu_playmode", PlayBehaviour_IfStopped).toInt());
 }
@@ -1225,6 +1231,68 @@ void MainWindow::PlayIndex(const QModelIndex& index) {
 
   app_->playlist_manager()->SetActiveToCurrent();
   app_->player()->PlayAt(row, Engine::Manual, true);
+}
+
+void MainWindow::PlaylistDoubleClick(const QModelIndex& index) {
+  if (!index.isValid()) return;
+
+  int row = index.row();
+  if (index.model() == app_->playlist_manager()->current()->proxy()) {
+    // The index was in the proxy model (might've been filtered), so we need
+    // to get the actual row in the source model.
+    row =
+        app_->playlist_manager()->current()->proxy()->mapToSource(index).row();
+  }
+
+  QModelIndexList dummyIndexList;
+
+  // the following block considers each possible combination of options
+  //   for double clicking on playlist entries
+  switch (doubleclick_playlist_addmode_) {
+    case PlaylistAddBehaviour_Play:
+      switch (doubleclick_playlist_playmode_) {
+        case PlaylistPlayBehaviour_IfStopped:
+          if (app_->player()->GetState() == Engine::Playing) {
+            break; // don't play if already playing
+          } // otherwise, behave the same as for "Always" (no break statement)
+
+        case PlaylistPlayBehaviour_Always:
+          app_->playlist_manager()->SetActiveToCurrent();
+          app_->player()->PlayAt(row, Engine::Manual, true);
+          break;
+
+        case PlaylistPlayBehaviour_Never:
+          // deliberately do nothing here
+          break;
+      }
+      break;
+
+    case PlaylistAddBehaviour_PlayNext:
+      app_->playlist_manager()->current()->queue()->Clear();
+      // continue as if enqueueing (no break statement)
+    case PlaylistAddBehaviour_Enqueue:
+      dummyIndexList.append(index);
+      app_->playlist_manager()->current()->queue()->
+        ToggleTracks(dummyIndexList);
+      switch (doubleclick_playlist_playmode_) {
+        case PlaylistPlayBehaviour_Always:
+        case PlaylistPlayBehaviour_IfStopped:
+          app_->player()->PlayPause();
+          break;
+        case PlaylistPlayBehaviour_Never:
+          // deliberately do nothing here
+           break;
+      }
+      break;
+
+    case PlaylistAddBehaviour_Nothing:
+      // deliberately do nothing here
+      break;
+  }
+
+  app_->playlist_manager()->SetActiveToCurrent();
+  app_->player()->PlayAt(row, Engine::Manual, true);
+
 }
 
 void MainWindow::VolumeWheelEvent(int delta) {

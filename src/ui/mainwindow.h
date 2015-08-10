@@ -193,6 +193,7 @@ signals:
   void ChangeLibraryQueryMode(QAction* action);
 
   void PlayIndex(const QModelIndex& index);
+  void PlaylistDoubleClick(const QModelIndex& index);
   void StopAfterCurrent();
 
   void SongChanged(const Song& song);
@@ -377,6 +378,8 @@ signals:
   Engine::State saved_playback_state_;
   AddBehaviour doubleclick_addmode_;
   PlayBehaviour doubleclick_playmode_;
+  PlaylistAddBehaviour doubleclick_playlist_addmode_;
+  PlaylistPlayBehaviour doubleclick_playlist_playmode_;
   PlayBehaviour menu_playmode_;
 
   BackgroundStreams* background_streams_;
