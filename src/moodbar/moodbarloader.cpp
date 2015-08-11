@@ -34,6 +34,10 @@
 #include "core/qhash_qurl.h"
 #include "core/utilities.h"
 
+#ifdef Q_OS_WIN32
+#include <windows.h>
+#endif
+
 MoodbarLoader::MoodbarLoader(Application* app, QObject* parent)
     : QObject(parent),
       cache_(new QNetworkDiskCache(this)),
