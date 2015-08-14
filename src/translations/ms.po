@@ -9,9 +9,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2015-07-02 13:48+0000\n"
-"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
-"Language-Team: Malay (http://www.transifex.com/p/clementine/language/ms/)\n"
+"PO-Revision-Date: 2015-08-02 00:21+0000\n"
+"Last-Translator: abuyop <abuyop@gmail.com>\n"
+"Language-Team: Malay (http://www.transifex.com/davidsansome/clementine/language/ms/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: ms\n"
@@ -42,15 +42,19 @@ msgstr "hari"
 msgid " kbps"
 msgstr " kbps"
 
-#: ../bin/src/ui_playbacksettingspage.h:318
-#: ../bin/src/ui_playbacksettingspage.h:321
-#: ../bin/src/ui_playbacksettingspage.h:335
+#: ../bin/src/ui_playbacksettingspage.h:348
+#: ../bin/src/ui_playbacksettingspage.h:351
+#: ../bin/src/ui_playbacksettingspage.h:365
 msgid " ms"
 msgstr " ms"
 
 #: ../bin/src/ui_songinfosettingspage.h:157
 msgid " pt"
 msgstr " pt"
+
+#: ../bin/src/ui_behavioursettingspage.h:338
+msgid " s"
+msgstr " s"
 
 #: ../bin/src/ui_notificationssettingspage.h:445
 #: ../bin/src/ui_visualisationselector.h:116
@@ -61,7 +65,7 @@ msgstr " saat"
 msgid " songs"
 msgstr " lagu"
 
-#: internet/vk/vkservice.cpp:148
+#: internet/vk/vkservice.cpp:149
 #, qt-format
 msgid "%1 (%2 songs)"
 msgstr "%1 (%2 lagu)"
@@ -270,13 +274,29 @@ msgstr "1 trek"
 msgid "128k MP3"
 msgstr "128k MP3"
 
+#: ../bin/src/ui_playbacksettingspage.h:379
+msgid "192,000Hz"
+msgstr "192,000Hz"
+
 #: ../bin/src/ui_appearancesettingspage.h:291
 msgid "40%"
 msgstr "40%"
 
+#: ../bin/src/ui_playbacksettingspage.h:376
+msgid "44,100Hz"
+msgstr "44,100Hz"
+
+#: ../bin/src/ui_playbacksettingspage.h:377
+msgid "48,000Hz"
+msgstr "48,000Hz"
+
 #: library/library.cpp:64
 msgid "50 random tracks"
 msgstr "50 trek rawak"
+
+#: ../bin/src/ui_playbacksettingspage.h:378
+msgid "96,000Hz"
+msgstr "96,000Hz"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:165
 msgid "<a href=\"http://www.di.fm/premium/\">Upgrade to Premium now</a>"
@@ -362,7 +382,7 @@ msgstr "AAC 64k"
 msgid "AIFF"
 msgstr "AIFF"
 
-#: widgets/nowplayingwidget.cpp:148
+#: widgets/nowplayingwidget.cpp:149
 msgid "ALL GLORY TO THE HYPNOTOAD"
 msgstr "HIDUP HYPNOTOAD"
 
@@ -384,7 +404,7 @@ msgid "About Qt..."
 msgstr "Perihal Qt..."
 
 #: playlist/playlistsaveoptionsdialog.cpp:34
-#: ../bin/src/ui_behavioursettingspage.h:308
+#: ../bin/src/ui_behavioursettingspage.h:342
 msgid "Absolute"
 msgstr "Mutlak"
 
@@ -549,7 +569,7 @@ msgstr "Tambahkan kiraan langkau lagu"
 msgid "Add song title tag"
 msgstr "Tambah tag tajuk lagu"
 
-#: internet/vk/vkservice.cpp:320
+#: internet/vk/vkservice.cpp:329
 msgid "Add song to cache"
 msgstr "Tambah lagu untuk dicache"
 
@@ -569,7 +589,7 @@ msgstr "Tambah lagu ke \"Muzik Saya\" bila butang \"Suka\" diklik"
 msgid "Add stream..."
 msgstr "Tambah stream..."
 
-#: internet/vk/vkservice.cpp:312
+#: internet/vk/vkservice.cpp:321
 msgid "Add to My Music"
 msgstr "Tambah ke Muzik Saya"
 
@@ -585,7 +605,7 @@ msgstr "Tambah ke Spotify dibintangi"
 msgid "Add to another playlist"
 msgstr "Tambahkan ke senarai main lain"
 
-#: internet/vk/vkservice.cpp:298
+#: internet/vk/vkservice.cpp:307
 msgid "Add to bookmarks"
 msgstr "Tambah ke tanda buku"
 
@@ -593,11 +613,11 @@ msgstr "Tambah ke tanda buku"
 msgid "Add to playlist"
 msgstr "Tambahkan ke senarai main"
 
-#: ../bin/src/ui_behavioursettingspage.h:298
+#: ../bin/src/ui_behavioursettingspage.h:328
 msgid "Add to the queue"
 msgstr "Tambah ke dalam senarai"
 
-#: internet/vk/vkservice.cpp:328
+#: internet/vk/vkservice.cpp:337
 msgid "Add user/group to bookmarks"
 msgstr "Tambah pengguna/kumpulan ke tanda buku"
 
@@ -651,7 +671,7 @@ msgstr "Selepas menyalin..."
 msgid "Album"
 msgstr "Album"
 
-#: ../bin/src/ui_playbacksettingspage.h:328
+#: ../bin/src/ui_playbacksettingspage.h:358
 msgid "Album (ideal loudness for all tracks)"
 msgstr "Album (kelantangan ideal untuk semua trek)"
 
@@ -669,7 +689,7 @@ msgstr "Kulit album"
 msgid "Album info on jamendo.com..."
 msgstr "Info album di jamendo.com..."
 
-#: internet/vk/vkservice.cpp:827
+#: internet/vk/vkservice.cpp:836
 msgid "Albums"
 msgstr "Album"
 
@@ -735,16 +755,16 @@ msgstr "Benarka pengekodan mid/sisi"
 msgid "Alongside the originals"
 msgstr "Bersama-sama yang asal"
 
-#: ../bin/src/ui_behavioursettingspage.h:271
+#: ../bin/src/ui_behavioursettingspage.h:301
 msgid "Always hide the main window"
 msgstr "Sentiasa sembunyikan tetingkap utama"
 
-#: ../bin/src/ui_behavioursettingspage.h:270
+#: ../bin/src/ui_behavioursettingspage.h:300
 msgid "Always show the main window"
 msgstr "Sentiasa tunjukkan tetingkap utama"
 
-#: ../bin/src/ui_behavioursettingspage.h:284
-#: ../bin/src/ui_behavioursettingspage.h:304
+#: ../bin/src/ui_behavioursettingspage.h:314
+#: ../bin/src/ui_behavioursettingspage.h:334
 msgid "Always start playing"
 msgstr "Sentiasa mula bermain"
 
@@ -795,11 +815,11 @@ msgstr "Tambah fail/URL ke senarai main"
 msgid "Append to current playlist"
 msgstr "Tambah ke senarai main semasa"
 
-#: ../bin/src/ui_behavioursettingspage.h:295
+#: ../bin/src/ui_behavioursettingspage.h:325
 msgid "Append to the playlist"
 msgstr "Tambah ke senarai main"
 
-#: ../bin/src/ui_playbacksettingspage.h:331
+#: ../bin/src/ui_playbacksettingspage.h:361
 msgid "Apply compression to prevent clipping"
 msgstr "Laksana pemampatan untuk hindari pengeratan"
 
@@ -839,7 +859,7 @@ msgstr "Tag artis"
 msgid "Artist's initial"
 msgstr "Nama awal artis"
 
-#: ../bin/src/ui_behavioursettingspage.h:310
+#: ../bin/src/ui_behavioursettingspage.h:344
 msgid "Ask when saving"
 msgstr "Tanya bila menyimpan"
 
@@ -849,7 +869,7 @@ msgstr "Tanya bila menyimpan"
 msgid "Audio format"
 msgstr "Format audio"
 
-#: ../bin/src/ui_playbacksettingspage.h:332
+#: ../bin/src/ui_playbacksettingspage.h:362
 msgid "Audio output"
 msgstr "Output audio"
 
@@ -869,11 +889,12 @@ msgid "Authors"
 msgstr "Pengarang-pengarang"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:227
+#: ../bin/src/ui_playbacksettingspage.h:375
 msgid "Auto"
 msgstr "Auto"
 
 #: playlist/playlistsaveoptionsdialog.cpp:32
-#: ../bin/src/ui_behavioursettingspage.h:307
+#: ../bin/src/ui_behavioursettingspage.h:341
 msgid "Automatic"
 msgstr "Automatik"
 
@@ -932,7 +953,7 @@ msgstr "Imbangan"
 
 #: core/globalshortcuts.cpp:80
 msgid "Ban (Last.fm scrobbling)"
-msgstr ""
+msgstr "Ban (Last.fm scrobbling)"
 
 #: analyzers/baranalyzer.cpp:34
 msgid "Bar analyzer"
@@ -946,7 +967,7 @@ msgstr "Biru Asasi"
 msgid "Basic audio type"
 msgstr "Jenis audio asas"
 
-#: ../bin/src/ui_behavioursettingspage.h:259
+#: ../bin/src/ui_behavioursettingspage.h:289
 msgid "Behavior"
 msgstr "Kelakuan"
 
@@ -1007,11 +1028,11 @@ msgstr "Box"
 msgid "Browse..."
 msgstr "Layar..."
 
-#: ../bin/src/ui_playbacksettingspage.h:334
+#: ../bin/src/ui_playbacksettingspage.h:364
 msgid "Buffer duration"
 msgstr "Jangkamasa penimbal"
 
-#: engines/gstengine.cpp:904
+#: engines/gstengine.cpp:907
 msgid "Buffering"
 msgstr "Menimbal"
 
@@ -1056,7 +1077,7 @@ msgstr "Batal"
 msgid "Cancel download"
 msgstr "Batal muat turun"
 
-#: internet/vk/vkservice.cpp:626
+#: internet/vk/vkservice.cpp:635
 msgid ""
 "Captcha is needed.\n"
 "Try to login into Vk.com with your browser,to fix this problem."
@@ -1086,7 +1107,11 @@ msgstr "Ubah mod kocok"
 msgid "Change the language"
 msgstr "Ubah bahasa"
 
-#: ../bin/src/ui_playbacksettingspage.h:338
+#: ../bin/src/ui_playbacksettingspage.h:382
+msgid "Changes will take place when the next song starts playing"
+msgstr "Perubahan akan berlaku bila lagu berikutnya mula dimainkan"
+
+#: ../bin/src/ui_playbacksettingspage.h:369
 msgid ""
 "Changing mono playback preference will be effective for the next playing "
 "songs"
@@ -1112,7 +1137,7 @@ msgstr "Pilih direktori cache Vk.com"
 msgid "Choose a name for your smart playlist"
 msgstr "Pilih satu nama untuk senarai main pintar anda"
 
-#: engines/gstengine.cpp:925
+#: engines/gstengine.cpp:928
 msgid "Choose automatically"
 msgstr "Pilih secara automatik"
 
@@ -1298,7 +1323,7 @@ msgstr "Senarai kelas dipisah dengan tanda koma: aras, aras diantara 0-3"
 msgid "Comment"
 msgstr "Komen"
 
-#: internet/vk/vkservice.cpp:154
+#: internet/vk/vkservice.cpp:155
 msgid "Community Radio"
 msgstr "Radio Komuniti"
 
@@ -1337,7 +1362,7 @@ msgstr "Konfigur Spotify..."
 msgid "Configure Subsonic..."
 msgstr "Konfigur Subsonic..."
 
-#: internet/vk/vkservice.cpp:337
+#: internet/vk/vkservice.cpp:346
 msgid "Configure Vk.com..."
 msgstr "Konfigur Vk.com..."
 
@@ -1384,7 +1409,7 @@ msgid ""
 "Connection timed out, check server URL. Example: http://localhost:4040/"
 msgstr "Sambungan tamat masa, periksa URL pelayan. Contoh: http://localhost:4040/"
 
-#: internet/vk/vkservice.cpp:1095
+#: internet/vk/vkservice.cpp:1113
 msgid "Connection trouble or audio is disabled by owner"
 msgstr "Sambungan bermasalah atau audio dilumpuhkan oleh pemilik"
 
@@ -1412,7 +1437,7 @@ msgstr "Tukar fail audio tak hilang sebelum menghantarnya ke jauh."
 msgid "Convert lossless files"
 msgstr "Tukar fail tak hilang"
 
-#: internet/vk/vkservice.cpp:324
+#: internet/vk/vkservice.cpp:333
 msgid "Copy share url to clipboard"
 msgstr "Salin url kongsi ke papan keratan"
 
@@ -1504,11 +1529,11 @@ msgstr "Seni kulit muka ditetap dari %1"
 msgid "Covers from %1"
 msgstr "Kulit muka dari %1"
 
-#: ../bin/src/ui_playbacksettingspage.h:315
+#: ../bin/src/ui_playbacksettingspage.h:345
 msgid "Cross-fade when changing tracks automatically"
 msgstr "Resap-silang bila mengubah trek secara automatik"
 
-#: ../bin/src/ui_playbacksettingspage.h:314
+#: ../bin/src/ui_playbacksettingspage.h:344
 msgid "Cross-fade when changing tracks manually"
 msgstr "Resap-silang bila mengubah trek secara manual"
 
@@ -1647,7 +1672,7 @@ msgstr "Kurangkan volum"
 msgid "Default background image"
 msgstr "Imej latar belakang lalai"
 
-#: engines/gstengine.cpp:950
+#: engines/gstengine.cpp:953
 #, qt-format
 msgid "Default device on %1"
 msgstr "Peranti lalai pada %1"
@@ -1865,7 +1890,7 @@ msgstr "Derma"
 msgid "Double click to open"
 msgstr "Dwi klik untuk buka"
 
-#: ../bin/src/ui_behavioursettingspage.h:292
+#: ../bin/src/ui_behavioursettingspage.h:322
 msgid "Double clicking a song will..."
 msgstr "Dwi klik sesuatu lagu akan..."
 
@@ -2024,7 +2049,7 @@ msgstr "Benarkan penyama"
 msgid "Enable shortcuts only when Clementine is focused"
 msgstr "Benarkan pintasan hanya apabila Clementine difokus"
 
-#: ../bin/src/ui_behavioursettingspage.h:278
+#: ../bin/src/ui_behavioursettingspage.h:308
 msgid "Enable song metadata inline edition with click"
 msgstr "Benarkan data meta lagu edisi inline dengan klik"
 
@@ -2114,7 +2139,7 @@ msgstr "Sama dengan --log-levels *:3"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:242
 #: library/libraryview.cpp:630 ui/mainwindow.cpp:1931 ui/mainwindow.cpp:2178
-#: ui/mainwindow.cpp:2326 internet/vk/vkservice.cpp:625
+#: ui/mainwindow.cpp:2326 internet/vk/vkservice.cpp:634
 msgid "Error"
 msgstr "Ralat"
 
@@ -2189,7 +2214,7 @@ msgstr "Setiap 6 jam"
 msgid "Every hour"
 msgstr "Setiap jam"
 
-#: ../bin/src/ui_playbacksettingspage.h:316
+#: ../bin/src/ui_playbacksettingspage.h:346
 msgid "Except between tracks on the same album or in the same CUE sheet"
 msgstr "Kecuali di antara trek-trek dalam album yang sama atau dalam lembaran CUE yang sama"
 
@@ -2261,20 +2286,20 @@ msgstr "F8"
 msgid "FLAC"
 msgstr "FLAC"
 
-#: ../bin/src/ui_playbacksettingspage.h:319
+#: ../bin/src/ui_playbacksettingspage.h:349
 msgid "Fade out on pause / fade in on resume"
 msgstr "Resap lenyap bila di jeda / resap masuk bila sambung semula"
 
-#: ../bin/src/ui_playbacksettingspage.h:313
+#: ../bin/src/ui_playbacksettingspage.h:343
 msgid "Fade out when stopping a track"
 msgstr "Resap keluar bila menghentikan trek"
 
-#: ../bin/src/ui_playbacksettingspage.h:312
+#: ../bin/src/ui_playbacksettingspage.h:342
 msgid "Fading"
 msgstr "Peresapan"
 
-#: ../bin/src/ui_playbacksettingspage.h:317
-#: ../bin/src/ui_playbacksettingspage.h:320
+#: ../bin/src/ui_playbacksettingspage.h:347
+#: ../bin/src/ui_playbacksettingspage.h:350
 msgid "Fading duration"
 msgstr "Jangkamasa peresapan"
 
@@ -2386,7 +2411,7 @@ msgstr "Fail untuk ditranskod"
 msgid "Find songs in your library that match the criteria you specify."
 msgstr "Cari lagu-lagu dalam pustaka anda yang berpadanan dengan kriteria yang anda tetapkan."
 
-#: internet/vk/vkservice.cpp:308
+#: internet/vk/vkservice.cpp:317
 msgid "Find this artist"
 msgstr "Cari artis ini"
 
@@ -2402,7 +2427,7 @@ msgstr "Selesai"
 msgid "First level"
 msgstr "Aras pertama"
 
-#: widgets/nowplayingwidget.cpp:107
+#: widgets/nowplayingwidget.cpp:108
 msgid "Fit cover to width"
 msgstr "Suai muat kulit muka mengikut lebar"
 
@@ -2544,7 +2569,7 @@ msgstr "Google Drive"
 msgid "Got %1 covers out of %2 (%3 failed)"
 msgstr "Dapat %1 kulit muka dari %2 (%3 gagal)"
 
-#: ../bin/src/ui_behavioursettingspage.h:274
+#: ../bin/src/ui_behavioursettingspage.h:304
 msgid "Grey out non existent songs in my playlists"
 msgstr "Malapkan lagu yang tidak wujud dalam senarai main saya"
 
@@ -2657,7 +2682,7 @@ msgstr "Ikon di atas"
 msgid "Identifying song"
 msgstr "Mengenalpasti lagu"
 
-#: ../bin/src/ui_behavioursettingspage.h:276
+#: ../bin/src/ui_behavioursettingspage.h:306
 msgid ""
 "If activated, clicking a selected song in the playlist view will let you "
 "edit the tag value directly"
@@ -2781,7 +2806,7 @@ msgstr "Perkhidmatan Internet"
 
 #: widgets/osd.cpp:321 ../bin/src/ui_playlistsequence.h:116
 msgid "Intro tracks"
-msgstr ""
+msgstr "Trek pengenalan"
 
 #: internet/lastfm/lastfmservice.cpp:240
 msgid "Invalid API key"
@@ -2839,7 +2864,7 @@ msgstr "Trek Terbaik Mingguan Jamendo"
 msgid "Jamendo database"
 msgstr "Pangkalan data Jamendo"
 
-#: ../bin/src/ui_behavioursettingspage.h:289
+#: ../bin/src/ui_behavioursettingspage.h:319
 msgid "Jump to previous song right away"
 msgstr "Lompat ke lagu terdahulu sekarang jua"
 
@@ -2859,7 +2884,7 @@ msgstr "Kekalkan butang dalam tempoh %1 saat..."
 msgid "Keep buttons for %1 seconds..."
 msgstr "Kekalkan butang dalam tempoh %1 saat..."
 
-#: ../bin/src/ui_behavioursettingspage.h:261
+#: ../bin/src/ui_behavioursettingspage.h:291
 msgid "Keep running in the background when the window is closed"
 msgstr "Kekal berjalan di balik tabir bila tetingkap ditutup"
 
@@ -2876,7 +2901,7 @@ msgstr "Kittens"
 msgid "Kuduro"
 msgstr "Kuduro"
 
-#: ../bin/src/ui_behavioursettingspage.h:263
+#: ../bin/src/ui_behavioursettingspage.h:293
 msgid "Language"
 msgstr "Bahasa"
 
@@ -2888,15 +2913,15 @@ msgstr "Komputer Riba/Fon Kepala"
 msgid "Large Hall"
 msgstr "Dewan Besar"
 
-#: widgets/nowplayingwidget.cpp:97
+#: widgets/nowplayingwidget.cpp:98
 msgid "Large album cover"
 msgstr "Muka album besar"
 
-#: widgets/nowplayingwidget.cpp:100
+#: widgets/nowplayingwidget.cpp:101
 msgid "Large album cover (details below)"
 msgstr "Kulit album besar (perincian di bawah)"
 
-#: widgets/nowplayingwidget.cpp:102
+#: widgets/nowplayingwidget.cpp:103
 msgid "Large album cover (no details)"
 msgstr "Kulit album besar (tiada perincian)"
 
@@ -3040,7 +3065,7 @@ msgstr "Memuatkan maklumat trek"
 #: internet/podcasts/podcastdiscoverymodel.cpp:105 widgets/prettyimage.cpp:168
 #: widgets/widgetfadehelper.cpp:96 ../bin/src/ui_addpodcastdialog.h:180
 #: ../bin/src/ui_searchpreview.h:106 ../bin/src/ui_organisedialog.h:262
-#: internet/vk/vkservice.cpp:499 internet/vk/vksettingspage.cpp:122
+#: internet/vk/vkservice.cpp:508 internet/vk/vksettingspage.cpp:122
 msgid "Loading..."
 msgstr "Memuatkan..."
 
@@ -3081,7 +3106,7 @@ msgstr "Suka"
 
 #: core/globalshortcuts.cpp:78
 msgid "Love (Last.fm scrobbling)"
-msgstr ""
+msgstr "Love (Last.fm scrobbling)"
 
 #: analyzers/analyzercontainer.cpp:68
 #: visualisations/visualisationcontainer.cpp:107
@@ -3229,7 +3254,7 @@ msgstr "Jenis keahlian"
 msgid "Minimum bitrate"
 msgstr "Kadar bit minimum"
 
-#: ../bin/src/ui_playbacksettingspage.h:336
+#: ../bin/src/ui_playbacksettingspage.h:366
 msgid "Minimum buffer fill"
 msgstr "Isian penimbal minimum"
 
@@ -3245,7 +3270,7 @@ msgstr "Model"
 msgid "Monitor the library for changes"
 msgstr "Pantau pustaka untuk perubahan"
 
-#: ../bin/src/ui_playbacksettingspage.h:340
+#: ../bin/src/ui_playbacksettingspage.h:371
 msgid "Mono playback"
 msgstr "Main balik mono"
 
@@ -3266,7 +3291,7 @@ msgstr "Gaya palang suasana"
 msgid "Moodbars"
 msgstr "Palang suasana"
 
-#: internet/vk/vkservice.cpp:503
+#: internet/vk/vkservice.cpp:512
 msgid "More"
 msgstr "Lagi"
 
@@ -3297,7 +3322,7 @@ msgid "Move up"
 msgstr "Alih ke atas"
 
 #: transcoder/transcodedialog.cpp:225 ui/mainwindow.cpp:1866
-#: internet/vk/vkservice.cpp:884
+#: internet/vk/vkservice.cpp:893
 msgid "Music"
 msgstr "Muzik"
 
@@ -3310,15 +3335,15 @@ msgstr "Pustaka Muzik"
 msgid "Mute"
 msgstr "Senyap"
 
-#: internet/vk/vkservice.cpp:820
+#: internet/vk/vkservice.cpp:829
 msgid "My Albums"
 msgstr "Album Saya"
 
-#: internet/vk/vkservice.cpp:878
+#: internet/vk/vkservice.cpp:887
 msgid "My Music"
 msgstr "Muzik Saya"
 
-#: internet/vk/vkservice.cpp:510
+#: internet/vk/vkservice.cpp:519
 msgid "My Recommendations"
 msgstr "Cadangan Saya"
 
@@ -3356,8 +3381,8 @@ msgstr "Tidak Sesekali"
 msgid "Never played"
 msgstr "Tidak pernah dimainkan"
 
-#: ../bin/src/ui_behavioursettingspage.h:282
-#: ../bin/src/ui_behavioursettingspage.h:302
+#: ../bin/src/ui_behavioursettingspage.h:312
+#: ../bin/src/ui_behavioursettingspage.h:332
 msgid "Never start playing"
 msgstr "Tidak sesekali mula dimainkan"
 
@@ -3597,7 +3622,7 @@ msgstr "Buka dalam Google Drive"
 msgid "Open in new playlist"
 msgstr "Buka dalam senarai main baharu"
 
-#: ../bin/src/ui_behavioursettingspage.h:297
+#: ../bin/src/ui_behavioursettingspage.h:327
 msgctxt "Refers to behavior settings in Clementine settings page."
 msgid "Open in new playlist"
 msgstr "Buka dalam senarai main baharu"
@@ -3653,16 +3678,16 @@ msgstr "Tag asal"
 #: ../bin/src/ui_groupbydialog.h:136 ../bin/src/ui_groupbydialog.h:155
 #: ../bin/src/ui_groupbydialog.h:174
 msgid "Original year"
-msgstr ""
+msgstr "Tahun asal"
 
 #: ../bin/src/ui_groupbydialog.h:138 ../bin/src/ui_groupbydialog.h:157
 #: ../bin/src/ui_groupbydialog.h:176
 msgid "Original year - Album"
-msgstr ""
+msgstr "Tahun asal - Album"
 
 #: library/library.cpp:118
 msgid "Original year tag support"
-msgstr ""
+msgstr "Sokongan tag tahun asal"
 
 #: core/commandlineoptions.cpp:170
 msgid "Other options"
@@ -3672,7 +3697,7 @@ msgstr "Pilihan lain"
 msgid "Output"
 msgstr "Output"
 
-#: ../bin/src/ui_playbacksettingspage.h:333
+#: ../bin/src/ui_playbacksettingspage.h:363
 msgid "Output device"
 msgstr "Peranti output"
 
@@ -3755,8 +3780,8 @@ msgstr "Kiraan main"
 msgid "Play if stopped, pause if playing"
 msgstr "Main sekiranya telah dihenti, jeda sekiranya dimainkan"
 
-#: ../bin/src/ui_behavioursettingspage.h:283
-#: ../bin/src/ui_behavioursettingspage.h:303
+#: ../bin/src/ui_behavioursettingspage.h:313
+#: ../bin/src/ui_behavioursettingspage.h:333
 msgid "Play if there is nothing already playing"
 msgstr "Main sekiranya tiada apa yang tersedia dimainkan"
 
@@ -3768,7 +3793,7 @@ msgstr "Mainkan trek ke-<n> dalam senarai main"
 msgid "Play/Pause"
 msgstr "Main/Jeda"
 
-#: ../bin/src/ui_playbacksettingspage.h:310
+#: ../bin/src/ui_playbacksettingspage.h:340
 msgid "Playback"
 msgstr "Main balik"
 
@@ -3825,7 +3850,7 @@ msgstr "Jangkamasa timbul"
 msgid "Port"
 msgstr "Port"
 
-#: ui/equalizer.cpp:44 ../bin/src/ui_playbacksettingspage.h:330
+#: ui/equalizer.cpp:44 ../bin/src/ui_playbacksettingspage.h:360
 msgid "Pre-amp"
 msgstr "Pra-amp"
 
@@ -3881,7 +3906,7 @@ msgstr "Tekan satu kekunci"
 msgid "Press a key combination to use for %1..."
 msgstr "Tekan satu gabungan kekunci untuk digunakan bagi %1..."
 
-#: ../bin/src/ui_behavioursettingspage.h:286
+#: ../bin/src/ui_behavioursettingspage.h:316
 msgid "Pressing \"Previous\" in player will..."
 msgstr "Menekan \"Terdahulu\" di pemain akan..."
 
@@ -3964,7 +3989,7 @@ msgstr "Baris gilir trek terpilih"
 msgid "Queue track"
 msgstr "Baris gilir trek"
 
-#: ../bin/src/ui_playbacksettingspage.h:327
+#: ../bin/src/ui_playbacksettingspage.h:357
 msgid "Radio (equal loudness for all tracks)"
 msgstr "Radio (sama kelantangan untuk semua trek)"
 
@@ -4041,7 +4066,7 @@ msgid "Reggae"
 msgstr "Reggae"
 
 #: playlist/playlistsaveoptionsdialog.cpp:33
-#: ../bin/src/ui_behavioursettingspage.h:309
+#: ../bin/src/ui_behavioursettingspage.h:343
 msgid "Relative"
 msgstr "Relatif"
 
@@ -4049,7 +4074,7 @@ msgstr "Relatif"
 msgid "Remember Wii remote swing"
 msgstr "Ingat ayunan Wii remote"
 
-#: ../bin/src/ui_behavioursettingspage.h:272
+#: ../bin/src/ui_behavioursettingspage.h:302
 msgid "Remember from last time"
 msgstr "Ingat dari kedudukan terakhir"
 
@@ -4074,11 +4099,11 @@ msgstr "Buang pendua dari senarai main"
 msgid "Remove folder"
 msgstr "Buang folder"
 
-#: internet/vk/vkservice.cpp:316
+#: internet/vk/vkservice.cpp:325
 msgid "Remove from My Music"
 msgstr "Buang dari Muzik Saya"
 
-#: internet/vk/vkservice.cpp:302
+#: internet/vk/vkservice.cpp:311
 msgid "Remove from bookmarks"
 msgstr "Buang dari tanda buku"
 
@@ -4132,7 +4157,7 @@ msgstr "Ulang trek"
 msgid "Replace current playlist"
 msgstr "Ganti senarai main semasa"
 
-#: ../bin/src/ui_behavioursettingspage.h:296
+#: ../bin/src/ui_behavioursettingspage.h:326
 msgid "Replace the playlist"
 msgstr "Ganti senarai main"
 
@@ -4140,11 +4165,11 @@ msgstr "Ganti senarai main"
 msgid "Replaces spaces with underscores"
 msgstr "Ganti jarak dengan underscore"
 
-#: ../bin/src/ui_playbacksettingspage.h:322
+#: ../bin/src/ui_playbacksettingspage.h:352
 msgid "Replay Gain"
 msgstr "Gandaan Main Semula"
 
-#: ../bin/src/ui_playbacksettingspage.h:324
+#: ../bin/src/ui_playbacksettingspage.h:354
 msgid "Replay Gain mode"
 msgstr "Mod Gandaan Main Semula"
 
@@ -4164,7 +4189,7 @@ msgstr "Tetap semula"
 msgid "Reset play counts"
 msgstr "Tetap semula kiraan main"
 
-#: ../bin/src/ui_behavioursettingspage.h:290
+#: ../bin/src/ui_behavioursettingspage.h:320
 msgid "Restart song, then jump to previous if pressed again"
 msgstr "Memulakan semula lagu, kemudian lompat ke kedudukan terdahulu jika ditekan sekali lagi"
 
@@ -4177,7 +4202,7 @@ msgstr "Mula semula trek, atau mainkan trek sebelum ini jika dalam tempoh 8 saat
 msgid "Restrict to ASCII characters"
 msgstr "Hadkan aksara ASCII"
 
-#: ../bin/src/ui_behavioursettingspage.h:273
+#: ../bin/src/ui_behavioursettingspage.h:303
 msgid "Resume playback on start"
 msgstr "Sambung semula main balik ketika mula"
 
@@ -4228,6 +4253,7 @@ msgid "Safely remove the device after copying"
 msgstr "Tanggal peranti secara selamat selepas menyalin"
 
 #: playlist/playlist.cpp:1357 ../bin/src/ui_edittagdialog.h:724
+#: ../bin/src/ui_playbacksettingspage.h:372
 msgid "Sample rate"
 msgstr "Kadar sampel"
 
@@ -4311,7 +4337,7 @@ msgstr "Seafile"
 
 #: ui/albumcoversearcher.cpp:165 ui/albumcoversearcher.cpp:182
 #: ../bin/src/ui_gpoddersearchpage.h:78 ../bin/src/ui_itunessearchpage.h:78
-#: ../bin/src/ui_albumcoversearcher.h:114 internet/vk/vkservice.cpp:518
+#: ../bin/src/ui_albumcoversearcher.h:114 internet/vk/vkservice.cpp:527
 msgid "Search"
 msgstr "Gelintar"
 
@@ -4393,6 +4419,10 @@ msgstr "Jangkau trek semasa dimainkan mengikut amaun relatif"
 #: core/commandlineoptions.cpp:160
 msgid "Seek the currently playing track to an absolute position"
 msgstr "Jangkau trek semasa dimainkan ke kedudukan mutlak"
+
+#: ../bin/src/ui_behavioursettingspage.h:336
+msgid "Seeking using a keyboard shortcut"
+msgstr "Penjangkauan menggunakan pintasan papan kekunci"
 
 #: visualisations/visualisationselector.cpp:37 ../bin/src/ui_ripcddialog.h:310
 msgid "Select All"
@@ -4490,7 +4520,7 @@ msgstr "Tunjuk"
 msgid "Show OSD"
 msgstr "Tunjuk OSD"
 
-#: ../bin/src/ui_playbacksettingspage.h:311
+#: ../bin/src/ui_playbacksettingspage.h:341
 msgid "Show a glowing animation on the current track"
 msgstr "Tunjuk animasi bersinar pada trek semasa"
 
@@ -4522,7 +4552,7 @@ msgstr "Tunjukan dialog timbul dari talam sistem"
 msgid "Show a pretty OSD"
 msgstr "Tunjuk OSD menarik"
 
-#: widgets/nowplayingwidget.cpp:139
+#: widgets/nowplayingwidget.cpp:140
 msgid "Show above status bar"
 msgstr "Tunjuk di atas palang status"
 
@@ -4591,7 +4621,7 @@ msgstr "Tunjuk butang \"suka\""
 msgid "Show the scrobble button in the main window"
 msgstr "Tunjuk butang scrobble dalam tetingkap utama"
 
-#: ../bin/src/ui_behavioursettingspage.h:260
+#: ../bin/src/ui_behavioursettingspage.h:290
 msgid "Show tray icon"
 msgstr "Tunjuk ikon talam"
 
@@ -4671,7 +4701,7 @@ msgstr "Langkau trek terpilih"
 msgid "Skip track"
 msgstr "Langkau trek"
 
-#: widgets/nowplayingwidget.cpp:95
+#: widgets/nowplayingwidget.cpp:96
 msgid "Small album cover"
 msgstr "Kulit album kecil"
 
@@ -4819,11 +4849,11 @@ msgstr "Henti selepas"
 
 #: ../bin/src/ui_playlistsequence.h:115
 msgid "Stop after each track"
-msgstr ""
+msgstr "Henti selepas setiap trek"
 
 #: widgets/osd.cpp:318
 msgid "Stop after every track"
-msgstr ""
+msgstr "Henti selepas setiap trek"
 
 #: ui/mainwindow.cpp:612 ../bin/src/ui_mainwindow.h:650
 msgid "Stop after this track"
@@ -5095,6 +5125,10 @@ msgstr "Strim ini untuk pelanggan berbayar sahaja"
 msgid "This type of device is not supported: %1"
 msgstr "Peranti jenis ini tidak disokong: %1"
 
+#: ../bin/src/ui_behavioursettingspage.h:337
+msgid "Time step"
+msgstr "Langkah masa"
+
 #: playlist/playlist.cpp:1315 ui/organisedialog.cpp:60
 #: ui/qtsystemtrayicon.cpp:232 ../bin/src/ui_about.h:142
 #: ../bin/src/ui_edittagdialog.h:734 ../bin/src/ui_trackselectiondialog.h:211
@@ -5253,7 +5287,7 @@ msgstr "Jangan langgan"
 msgid "Upcoming Concerts"
 msgstr "Konsert Akan Datang"
 
-#: internet/vk/vkservice.cpp:332
+#: internet/vk/vkservice.cpp:341
 msgid "Update"
 msgstr "Kemaskini"
 
@@ -5305,9 +5339,9 @@ msgstr "Guna kekunci pintasan Gnome"
 
 #: analyzers/analyzercontainer.cpp:94
 msgid "Use Psychedelic Colors"
-msgstr ""
+msgstr "Guna Warna Psikedelik"
 
-#: ../bin/src/ui_playbacksettingspage.h:323
+#: ../bin/src/ui_playbacksettingspage.h:353
 msgid "Use Replay Gain metadata if it is available"
 msgstr "Guna data meta Gandaan Main Semula jika tersedia"
 
@@ -5351,7 +5385,7 @@ msgstr "Guna pemberitahuan untuk laporkan status Wii Remote"
 msgid "Use temporal noise shaping"
 msgstr "Guna pembentukan hingar sementara"
 
-#: ../bin/src/ui_behavioursettingspage.h:266
+#: ../bin/src/ui_behavioursettingspage.h:296
 msgid "Use the system default"
 msgstr "Guna lalai sistem"
 
@@ -5383,7 +5417,7 @@ msgstr "Antaramuka pengguna"
 msgid "Username"
 msgstr "Nama pengguna"
 
-#: ../bin/src/ui_behavioursettingspage.h:279
+#: ../bin/src/ui_behavioursettingspage.h:309
 msgid "Using the menu to add a song will..."
 msgstr "Menggunakan menu untuk tambah lagu akan..."
 
@@ -5448,11 +5482,11 @@ msgstr "WAV"
 msgid "WMA"
 msgstr "WMA"
 
-#: internet/vk/vkservice.cpp:860
+#: internet/vk/vkservice.cpp:869
 msgid "Wall"
 msgstr "Dinding"
 
-#: playlist/playlisttabbar.cpp:192 ../bin/src/ui_behavioursettingspage.h:262
+#: playlist/playlisttabbar.cpp:192 ../bin/src/ui_behavioursettingspage.h:292
 msgid "Warn me when closing a playlist tab"
 msgstr "Beri amaran bila menutup tab senarai main"
 
@@ -5468,7 +5502,7 @@ msgstr "Laman Sesawang"
 msgid "Weeks"
 msgstr "Minggu"
 
-#: ../bin/src/ui_behavioursettingspage.h:269
+#: ../bin/src/ui_behavioursettingspage.h:299
 msgid "When Clementine starts"
 msgstr "Bila Clementine bermula"
 
@@ -5478,7 +5512,7 @@ msgid ""
 "If there are no matches then it will use the largest image in the directory."
 msgstr "Apabila mencari hasil seni album Clementine akan terlebih dahulu mencari fail gambar yang mengandungi salah satu dari perkataan ini.  \nSekiranya tiada padanan ia akan menggunakan imej terbesar dalam direktori."
 
-#: ../bin/src/ui_behavioursettingspage.h:306
+#: ../bin/src/ui_behavioursettingspage.h:340
 msgid "When saving a playlist, file paths should be"
 msgstr "Bila menyimpan senarai main, laluan fail sepatutnya"
 
@@ -5562,7 +5596,7 @@ msgstr "Anda mahu jalankan imbas semula penuh sekarang?"
 msgid "Write all songs statistics into songs' files"
 msgstr "Tulis semua statistik lagu ke dalam fail lagu"
 
-#: ../bin/src/ui_behavioursettingspage.h:311
+#: ../bin/src/ui_behavioursettingspage.h:345
 msgid "Write metadata"
 msgstr "Tulis data meta"
 
@@ -5682,7 +5716,7 @@ msgid ""
 "shortcuts in Clementine."
 msgstr "Anda perlu lancar Keutamaan Sistem dan membolehkan Clementine untuk \"<span style=\"font-style:italic\">kawal komputer anda</span>\" untuk guna pintasan sejagat dalam Clementine."
 
-#: ../bin/src/ui_behavioursettingspage.h:268
+#: ../bin/src/ui_behavioursettingspage.h:298
 msgid "You will need to restart Clementine if you change the language."
 msgstr "Anda perlu mulakan semula Clementine jika anda ubah bahasa."
 

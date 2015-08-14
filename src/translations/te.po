@@ -7,9 +7,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2015-07-02 13:48+0000\n"
+"PO-Revision-Date: 2015-07-21 19:18+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
-"Language-Team: Telugu (http://www.transifex.com/p/clementine/language/te/)\n"
+"Language-Team: Telugu (http://www.transifex.com/davidsansome/clementine/language/te/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: te\n"
@@ -40,14 +40,18 @@ msgstr ""
 msgid " kbps"
 msgstr ""
 
-#: ../bin/src/ui_playbacksettingspage.h:318
-#: ../bin/src/ui_playbacksettingspage.h:321
-#: ../bin/src/ui_playbacksettingspage.h:335
+#: ../bin/src/ui_playbacksettingspage.h:348
+#: ../bin/src/ui_playbacksettingspage.h:351
+#: ../bin/src/ui_playbacksettingspage.h:365
 msgid " ms"
 msgstr ""
 
 #: ../bin/src/ui_songinfosettingspage.h:157
 msgid " pt"
+msgstr ""
+
+#: ../bin/src/ui_behavioursettingspage.h:338
+msgid " s"
 msgstr ""
 
 #: ../bin/src/ui_notificationssettingspage.h:445
@@ -59,7 +63,7 @@ msgstr "సెకనులు"
 msgid " songs"
 msgstr "పాటలు"
 
-#: internet/vk/vkservice.cpp:148
+#: internet/vk/vkservice.cpp:149
 #, qt-format
 msgid "%1 (%2 songs)"
 msgstr ""
@@ -268,12 +272,28 @@ msgstr ""
 msgid "128k MP3"
 msgstr ""
 
+#: ../bin/src/ui_playbacksettingspage.h:379
+msgid "192,000Hz"
+msgstr ""
+
 #: ../bin/src/ui_appearancesettingspage.h:291
 msgid "40%"
 msgstr ""
 
+#: ../bin/src/ui_playbacksettingspage.h:376
+msgid "44,100Hz"
+msgstr ""
+
+#: ../bin/src/ui_playbacksettingspage.h:377
+msgid "48,000Hz"
+msgstr ""
+
 #: library/library.cpp:64
 msgid "50 random tracks"
+msgstr ""
+
+#: ../bin/src/ui_playbacksettingspage.h:378
+msgid "96,000Hz"
 msgstr ""
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:165
@@ -360,7 +380,7 @@ msgstr ""
 msgid "AIFF"
 msgstr ""
 
-#: widgets/nowplayingwidget.cpp:148
+#: widgets/nowplayingwidget.cpp:149
 msgid "ALL GLORY TO THE HYPNOTOAD"
 msgstr ""
 
@@ -382,7 +402,7 @@ msgid "About Qt..."
 msgstr ""
 
 #: playlist/playlistsaveoptionsdialog.cpp:34
-#: ../bin/src/ui_behavioursettingspage.h:308
+#: ../bin/src/ui_behavioursettingspage.h:342
 msgid "Absolute"
 msgstr ""
 
@@ -547,7 +567,7 @@ msgstr ""
 msgid "Add song title tag"
 msgstr ""
 
-#: internet/vk/vkservice.cpp:320
+#: internet/vk/vkservice.cpp:329
 msgid "Add song to cache"
 msgstr ""
 
@@ -567,7 +587,7 @@ msgstr ""
 msgid "Add stream..."
 msgstr ""
 
-#: internet/vk/vkservice.cpp:312
+#: internet/vk/vkservice.cpp:321
 msgid "Add to My Music"
 msgstr ""
 
@@ -583,7 +603,7 @@ msgstr ""
 msgid "Add to another playlist"
 msgstr ""
 
-#: internet/vk/vkservice.cpp:298
+#: internet/vk/vkservice.cpp:307
 msgid "Add to bookmarks"
 msgstr ""
 
@@ -591,11 +611,11 @@ msgstr ""
 msgid "Add to playlist"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:298
+#: ../bin/src/ui_behavioursettingspage.h:328
 msgid "Add to the queue"
 msgstr ""
 
-#: internet/vk/vkservice.cpp:328
+#: internet/vk/vkservice.cpp:337
 msgid "Add user/group to bookmarks"
 msgstr ""
 
@@ -649,7 +669,7 @@ msgstr ""
 msgid "Album"
 msgstr ""
 
-#: ../bin/src/ui_playbacksettingspage.h:328
+#: ../bin/src/ui_playbacksettingspage.h:358
 msgid "Album (ideal loudness for all tracks)"
 msgstr ""
 
@@ -667,7 +687,7 @@ msgstr ""
 msgid "Album info on jamendo.com..."
 msgstr ""
 
-#: internet/vk/vkservice.cpp:827
+#: internet/vk/vkservice.cpp:836
 msgid "Albums"
 msgstr ""
 
@@ -733,16 +753,16 @@ msgstr ""
 msgid "Alongside the originals"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:271
+#: ../bin/src/ui_behavioursettingspage.h:301
 msgid "Always hide the main window"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:270
+#: ../bin/src/ui_behavioursettingspage.h:300
 msgid "Always show the main window"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:284
-#: ../bin/src/ui_behavioursettingspage.h:304
+#: ../bin/src/ui_behavioursettingspage.h:314
+#: ../bin/src/ui_behavioursettingspage.h:334
 msgid "Always start playing"
 msgstr ""
 
@@ -793,11 +813,11 @@ msgstr ""
 msgid "Append to current playlist"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:295
+#: ../bin/src/ui_behavioursettingspage.h:325
 msgid "Append to the playlist"
 msgstr ""
 
-#: ../bin/src/ui_playbacksettingspage.h:331
+#: ../bin/src/ui_playbacksettingspage.h:361
 msgid "Apply compression to prevent clipping"
 msgstr ""
 
@@ -837,7 +857,7 @@ msgstr ""
 msgid "Artist's initial"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:310
+#: ../bin/src/ui_behavioursettingspage.h:344
 msgid "Ask when saving"
 msgstr ""
 
@@ -847,7 +867,7 @@ msgstr ""
 msgid "Audio format"
 msgstr ""
 
-#: ../bin/src/ui_playbacksettingspage.h:332
+#: ../bin/src/ui_playbacksettingspage.h:362
 msgid "Audio output"
 msgstr ""
 
@@ -867,11 +887,12 @@ msgid "Authors"
 msgstr ""
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:227
+#: ../bin/src/ui_playbacksettingspage.h:375
 msgid "Auto"
 msgstr ""
 
 #: playlist/playlistsaveoptionsdialog.cpp:32
-#: ../bin/src/ui_behavioursettingspage.h:307
+#: ../bin/src/ui_behavioursettingspage.h:341
 msgid "Automatic"
 msgstr ""
 
@@ -944,7 +965,7 @@ msgstr ""
 msgid "Basic audio type"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:259
+#: ../bin/src/ui_behavioursettingspage.h:289
 msgid "Behavior"
 msgstr ""
 
@@ -1005,11 +1026,11 @@ msgstr ""
 msgid "Browse..."
 msgstr ""
 
-#: ../bin/src/ui_playbacksettingspage.h:334
+#: ../bin/src/ui_playbacksettingspage.h:364
 msgid "Buffer duration"
 msgstr ""
 
-#: engines/gstengine.cpp:904
+#: engines/gstengine.cpp:907
 msgid "Buffering"
 msgstr ""
 
@@ -1054,7 +1075,7 @@ msgstr ""
 msgid "Cancel download"
 msgstr ""
 
-#: internet/vk/vkservice.cpp:626
+#: internet/vk/vkservice.cpp:635
 msgid ""
 "Captcha is needed.\n"
 "Try to login into Vk.com with your browser,to fix this problem."
@@ -1084,7 +1105,11 @@ msgstr ""
 msgid "Change the language"
 msgstr ""
 
-#: ../bin/src/ui_playbacksettingspage.h:338
+#: ../bin/src/ui_playbacksettingspage.h:382
+msgid "Changes will take place when the next song starts playing"
+msgstr ""
+
+#: ../bin/src/ui_playbacksettingspage.h:369
 msgid ""
 "Changing mono playback preference will be effective for the next playing "
 "songs"
@@ -1110,7 +1135,7 @@ msgstr ""
 msgid "Choose a name for your smart playlist"
 msgstr ""
 
-#: engines/gstengine.cpp:925
+#: engines/gstengine.cpp:928
 msgid "Choose automatically"
 msgstr ""
 
@@ -1296,7 +1321,7 @@ msgstr ""
 msgid "Comment"
 msgstr ""
 
-#: internet/vk/vkservice.cpp:154
+#: internet/vk/vkservice.cpp:155
 msgid "Community Radio"
 msgstr ""
 
@@ -1335,7 +1360,7 @@ msgstr ""
 msgid "Configure Subsonic..."
 msgstr ""
 
-#: internet/vk/vkservice.cpp:337
+#: internet/vk/vkservice.cpp:346
 msgid "Configure Vk.com..."
 msgstr ""
 
@@ -1382,7 +1407,7 @@ msgid ""
 "Connection timed out, check server URL. Example: http://localhost:4040/"
 msgstr ""
 
-#: internet/vk/vkservice.cpp:1095
+#: internet/vk/vkservice.cpp:1113
 msgid "Connection trouble or audio is disabled by owner"
 msgstr ""
 
@@ -1410,7 +1435,7 @@ msgstr ""
 msgid "Convert lossless files"
 msgstr ""
 
-#: internet/vk/vkservice.cpp:324
+#: internet/vk/vkservice.cpp:333
 msgid "Copy share url to clipboard"
 msgstr ""
 
@@ -1502,11 +1527,11 @@ msgstr ""
 msgid "Covers from %1"
 msgstr ""
 
-#: ../bin/src/ui_playbacksettingspage.h:315
+#: ../bin/src/ui_playbacksettingspage.h:345
 msgid "Cross-fade when changing tracks automatically"
 msgstr ""
 
-#: ../bin/src/ui_playbacksettingspage.h:314
+#: ../bin/src/ui_playbacksettingspage.h:344
 msgid "Cross-fade when changing tracks manually"
 msgstr ""
 
@@ -1645,7 +1670,7 @@ msgstr ""
 msgid "Default background image"
 msgstr ""
 
-#: engines/gstengine.cpp:950
+#: engines/gstengine.cpp:953
 #, qt-format
 msgid "Default device on %1"
 msgstr ""
@@ -1863,7 +1888,7 @@ msgstr ""
 msgid "Double click to open"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:292
+#: ../bin/src/ui_behavioursettingspage.h:322
 msgid "Double clicking a song will..."
 msgstr ""
 
@@ -2022,7 +2047,7 @@ msgstr ""
 msgid "Enable shortcuts only when Clementine is focused"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:278
+#: ../bin/src/ui_behavioursettingspage.h:308
 msgid "Enable song metadata inline edition with click"
 msgstr ""
 
@@ -2112,7 +2137,7 @@ msgstr ""
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:242
 #: library/libraryview.cpp:630 ui/mainwindow.cpp:1931 ui/mainwindow.cpp:2178
-#: ui/mainwindow.cpp:2326 internet/vk/vkservice.cpp:625
+#: ui/mainwindow.cpp:2326 internet/vk/vkservice.cpp:634
 msgid "Error"
 msgstr ""
 
@@ -2187,7 +2212,7 @@ msgstr ""
 msgid "Every hour"
 msgstr ""
 
-#: ../bin/src/ui_playbacksettingspage.h:316
+#: ../bin/src/ui_playbacksettingspage.h:346
 msgid "Except between tracks on the same album or in the same CUE sheet"
 msgstr ""
 
@@ -2259,20 +2284,20 @@ msgstr ""
 msgid "FLAC"
 msgstr ""
 
-#: ../bin/src/ui_playbacksettingspage.h:319
+#: ../bin/src/ui_playbacksettingspage.h:349
 msgid "Fade out on pause / fade in on resume"
 msgstr ""
 
-#: ../bin/src/ui_playbacksettingspage.h:313
+#: ../bin/src/ui_playbacksettingspage.h:343
 msgid "Fade out when stopping a track"
 msgstr ""
 
-#: ../bin/src/ui_playbacksettingspage.h:312
+#: ../bin/src/ui_playbacksettingspage.h:342
 msgid "Fading"
 msgstr ""
 
-#: ../bin/src/ui_playbacksettingspage.h:317
-#: ../bin/src/ui_playbacksettingspage.h:320
+#: ../bin/src/ui_playbacksettingspage.h:347
+#: ../bin/src/ui_playbacksettingspage.h:350
 msgid "Fading duration"
 msgstr ""
 
@@ -2384,7 +2409,7 @@ msgstr ""
 msgid "Find songs in your library that match the criteria you specify."
 msgstr ""
 
-#: internet/vk/vkservice.cpp:308
+#: internet/vk/vkservice.cpp:317
 msgid "Find this artist"
 msgstr ""
 
@@ -2400,7 +2425,7 @@ msgstr ""
 msgid "First level"
 msgstr ""
 
-#: widgets/nowplayingwidget.cpp:107
+#: widgets/nowplayingwidget.cpp:108
 msgid "Fit cover to width"
 msgstr ""
 
@@ -2542,7 +2567,7 @@ msgstr ""
 msgid "Got %1 covers out of %2 (%3 failed)"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:274
+#: ../bin/src/ui_behavioursettingspage.h:304
 msgid "Grey out non existent songs in my playlists"
 msgstr ""
 
@@ -2655,7 +2680,7 @@ msgstr ""
 msgid "Identifying song"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:276
+#: ../bin/src/ui_behavioursettingspage.h:306
 msgid ""
 "If activated, clicking a selected song in the playlist view will let you "
 "edit the tag value directly"
@@ -2837,7 +2862,7 @@ msgstr ""
 msgid "Jamendo database"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:289
+#: ../bin/src/ui_behavioursettingspage.h:319
 msgid "Jump to previous song right away"
 msgstr ""
 
@@ -2857,7 +2882,7 @@ msgstr ""
 msgid "Keep buttons for %1 seconds..."
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:261
+#: ../bin/src/ui_behavioursettingspage.h:291
 msgid "Keep running in the background when the window is closed"
 msgstr ""
 
@@ -2874,7 +2899,7 @@ msgstr ""
 msgid "Kuduro"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:263
+#: ../bin/src/ui_behavioursettingspage.h:293
 msgid "Language"
 msgstr ""
 
@@ -2886,15 +2911,15 @@ msgstr ""
 msgid "Large Hall"
 msgstr ""
 
-#: widgets/nowplayingwidget.cpp:97
+#: widgets/nowplayingwidget.cpp:98
 msgid "Large album cover"
 msgstr ""
 
-#: widgets/nowplayingwidget.cpp:100
+#: widgets/nowplayingwidget.cpp:101
 msgid "Large album cover (details below)"
 msgstr ""
 
-#: widgets/nowplayingwidget.cpp:102
+#: widgets/nowplayingwidget.cpp:103
 msgid "Large album cover (no details)"
 msgstr ""
 
@@ -3038,7 +3063,7 @@ msgstr ""
 #: internet/podcasts/podcastdiscoverymodel.cpp:105 widgets/prettyimage.cpp:168
 #: widgets/widgetfadehelper.cpp:96 ../bin/src/ui_addpodcastdialog.h:180
 #: ../bin/src/ui_searchpreview.h:106 ../bin/src/ui_organisedialog.h:262
-#: internet/vk/vkservice.cpp:499 internet/vk/vksettingspage.cpp:122
+#: internet/vk/vkservice.cpp:508 internet/vk/vksettingspage.cpp:122
 msgid "Loading..."
 msgstr ""
 
@@ -3227,7 +3252,7 @@ msgstr ""
 msgid "Minimum bitrate"
 msgstr ""
 
-#: ../bin/src/ui_playbacksettingspage.h:336
+#: ../bin/src/ui_playbacksettingspage.h:366
 msgid "Minimum buffer fill"
 msgstr ""
 
@@ -3243,7 +3268,7 @@ msgstr ""
 msgid "Monitor the library for changes"
 msgstr ""
 
-#: ../bin/src/ui_playbacksettingspage.h:340
+#: ../bin/src/ui_playbacksettingspage.h:371
 msgid "Mono playback"
 msgstr ""
 
@@ -3264,7 +3289,7 @@ msgstr ""
 msgid "Moodbars"
 msgstr ""
 
-#: internet/vk/vkservice.cpp:503
+#: internet/vk/vkservice.cpp:512
 msgid "More"
 msgstr ""
 
@@ -3295,7 +3320,7 @@ msgid "Move up"
 msgstr ""
 
 #: transcoder/transcodedialog.cpp:225 ui/mainwindow.cpp:1866
-#: internet/vk/vkservice.cpp:884
+#: internet/vk/vkservice.cpp:893
 msgid "Music"
 msgstr ""
 
@@ -3308,15 +3333,15 @@ msgstr ""
 msgid "Mute"
 msgstr ""
 
-#: internet/vk/vkservice.cpp:820
+#: internet/vk/vkservice.cpp:829
 msgid "My Albums"
 msgstr ""
 
-#: internet/vk/vkservice.cpp:878
+#: internet/vk/vkservice.cpp:887
 msgid "My Music"
 msgstr ""
 
-#: internet/vk/vkservice.cpp:510
+#: internet/vk/vkservice.cpp:519
 msgid "My Recommendations"
 msgstr ""
 
@@ -3354,8 +3379,8 @@ msgstr ""
 msgid "Never played"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:282
-#: ../bin/src/ui_behavioursettingspage.h:302
+#: ../bin/src/ui_behavioursettingspage.h:312
+#: ../bin/src/ui_behavioursettingspage.h:332
 msgid "Never start playing"
 msgstr ""
 
@@ -3595,7 +3620,7 @@ msgstr ""
 msgid "Open in new playlist"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:297
+#: ../bin/src/ui_behavioursettingspage.h:327
 msgctxt "Refers to behavior settings in Clementine settings page."
 msgid "Open in new playlist"
 msgstr ""
@@ -3670,7 +3695,7 @@ msgstr ""
 msgid "Output"
 msgstr ""
 
-#: ../bin/src/ui_playbacksettingspage.h:333
+#: ../bin/src/ui_playbacksettingspage.h:363
 msgid "Output device"
 msgstr ""
 
@@ -3753,8 +3778,8 @@ msgstr ""
 msgid "Play if stopped, pause if playing"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:283
-#: ../bin/src/ui_behavioursettingspage.h:303
+#: ../bin/src/ui_behavioursettingspage.h:313
+#: ../bin/src/ui_behavioursettingspage.h:333
 msgid "Play if there is nothing already playing"
 msgstr ""
 
@@ -3766,7 +3791,7 @@ msgstr ""
 msgid "Play/Pause"
 msgstr ""
 
-#: ../bin/src/ui_playbacksettingspage.h:310
+#: ../bin/src/ui_playbacksettingspage.h:340
 msgid "Playback"
 msgstr ""
 
@@ -3823,7 +3848,7 @@ msgstr ""
 msgid "Port"
 msgstr ""
 
-#: ui/equalizer.cpp:44 ../bin/src/ui_playbacksettingspage.h:330
+#: ui/equalizer.cpp:44 ../bin/src/ui_playbacksettingspage.h:360
 msgid "Pre-amp"
 msgstr ""
 
@@ -3879,7 +3904,7 @@ msgstr ""
 msgid "Press a key combination to use for %1..."
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:286
+#: ../bin/src/ui_behavioursettingspage.h:316
 msgid "Pressing \"Previous\" in player will..."
 msgstr ""
 
@@ -3962,7 +3987,7 @@ msgstr ""
 msgid "Queue track"
 msgstr ""
 
-#: ../bin/src/ui_playbacksettingspage.h:327
+#: ../bin/src/ui_playbacksettingspage.h:357
 msgid "Radio (equal loudness for all tracks)"
 msgstr ""
 
@@ -4039,7 +4064,7 @@ msgid "Reggae"
 msgstr ""
 
 #: playlist/playlistsaveoptionsdialog.cpp:33
-#: ../bin/src/ui_behavioursettingspage.h:309
+#: ../bin/src/ui_behavioursettingspage.h:343
 msgid "Relative"
 msgstr ""
 
@@ -4047,7 +4072,7 @@ msgstr ""
 msgid "Remember Wii remote swing"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:272
+#: ../bin/src/ui_behavioursettingspage.h:302
 msgid "Remember from last time"
 msgstr ""
 
@@ -4072,11 +4097,11 @@ msgstr ""
 msgid "Remove folder"
 msgstr ""
 
-#: internet/vk/vkservice.cpp:316
+#: internet/vk/vkservice.cpp:325
 msgid "Remove from My Music"
 msgstr ""
 
-#: internet/vk/vkservice.cpp:302
+#: internet/vk/vkservice.cpp:311
 msgid "Remove from bookmarks"
 msgstr ""
 
@@ -4130,7 +4155,7 @@ msgstr ""
 msgid "Replace current playlist"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:296
+#: ../bin/src/ui_behavioursettingspage.h:326
 msgid "Replace the playlist"
 msgstr ""
 
@@ -4138,11 +4163,11 @@ msgstr ""
 msgid "Replaces spaces with underscores"
 msgstr ""
 
-#: ../bin/src/ui_playbacksettingspage.h:322
+#: ../bin/src/ui_playbacksettingspage.h:352
 msgid "Replay Gain"
 msgstr ""
 
-#: ../bin/src/ui_playbacksettingspage.h:324
+#: ../bin/src/ui_playbacksettingspage.h:354
 msgid "Replay Gain mode"
 msgstr ""
 
@@ -4162,7 +4187,7 @@ msgstr ""
 msgid "Reset play counts"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:290
+#: ../bin/src/ui_behavioursettingspage.h:320
 msgid "Restart song, then jump to previous if pressed again"
 msgstr ""
 
@@ -4175,7 +4200,7 @@ msgstr ""
 msgid "Restrict to ASCII characters"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:273
+#: ../bin/src/ui_behavioursettingspage.h:303
 msgid "Resume playback on start"
 msgstr ""
 
@@ -4226,6 +4251,7 @@ msgid "Safely remove the device after copying"
 msgstr ""
 
 #: playlist/playlist.cpp:1357 ../bin/src/ui_edittagdialog.h:724
+#: ../bin/src/ui_playbacksettingspage.h:372
 msgid "Sample rate"
 msgstr ""
 
@@ -4309,7 +4335,7 @@ msgstr ""
 
 #: ui/albumcoversearcher.cpp:165 ui/albumcoversearcher.cpp:182
 #: ../bin/src/ui_gpoddersearchpage.h:78 ../bin/src/ui_itunessearchpage.h:78
-#: ../bin/src/ui_albumcoversearcher.h:114 internet/vk/vkservice.cpp:518
+#: ../bin/src/ui_albumcoversearcher.h:114 internet/vk/vkservice.cpp:527
 msgid "Search"
 msgstr ""
 
@@ -4390,6 +4416,10 @@ msgstr ""
 
 #: core/commandlineoptions.cpp:160
 msgid "Seek the currently playing track to an absolute position"
+msgstr ""
+
+#: ../bin/src/ui_behavioursettingspage.h:336
+msgid "Seeking using a keyboard shortcut"
 msgstr ""
 
 #: visualisations/visualisationselector.cpp:37 ../bin/src/ui_ripcddialog.h:310
@@ -4488,7 +4518,7 @@ msgstr ""
 msgid "Show OSD"
 msgstr ""
 
-#: ../bin/src/ui_playbacksettingspage.h:311
+#: ../bin/src/ui_playbacksettingspage.h:341
 msgid "Show a glowing animation on the current track"
 msgstr ""
 
@@ -4520,7 +4550,7 @@ msgstr ""
 msgid "Show a pretty OSD"
 msgstr ""
 
-#: widgets/nowplayingwidget.cpp:139
+#: widgets/nowplayingwidget.cpp:140
 msgid "Show above status bar"
 msgstr ""
 
@@ -4589,7 +4619,7 @@ msgstr ""
 msgid "Show the scrobble button in the main window"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:260
+#: ../bin/src/ui_behavioursettingspage.h:290
 msgid "Show tray icon"
 msgstr ""
 
@@ -4669,7 +4699,7 @@ msgstr ""
 msgid "Skip track"
 msgstr ""
 
-#: widgets/nowplayingwidget.cpp:95
+#: widgets/nowplayingwidget.cpp:96
 msgid "Small album cover"
 msgstr ""
 
@@ -5093,6 +5123,10 @@ msgstr ""
 msgid "This type of device is not supported: %1"
 msgstr ""
 
+#: ../bin/src/ui_behavioursettingspage.h:337
+msgid "Time step"
+msgstr ""
+
 #: playlist/playlist.cpp:1315 ui/organisedialog.cpp:60
 #: ui/qtsystemtrayicon.cpp:232 ../bin/src/ui_about.h:142
 #: ../bin/src/ui_edittagdialog.h:734 ../bin/src/ui_trackselectiondialog.h:211
@@ -5251,7 +5285,7 @@ msgstr ""
 msgid "Upcoming Concerts"
 msgstr ""
 
-#: internet/vk/vkservice.cpp:332
+#: internet/vk/vkservice.cpp:341
 msgid "Update"
 msgstr ""
 
@@ -5305,7 +5339,7 @@ msgstr ""
 msgid "Use Psychedelic Colors"
 msgstr ""
 
-#: ../bin/src/ui_playbacksettingspage.h:323
+#: ../bin/src/ui_playbacksettingspage.h:353
 msgid "Use Replay Gain metadata if it is available"
 msgstr ""
 
@@ -5349,7 +5383,7 @@ msgstr ""
 msgid "Use temporal noise shaping"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:266
+#: ../bin/src/ui_behavioursettingspage.h:296
 msgid "Use the system default"
 msgstr ""
 
@@ -5381,7 +5415,7 @@ msgstr ""
 msgid "Username"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:279
+#: ../bin/src/ui_behavioursettingspage.h:309
 msgid "Using the menu to add a song will..."
 msgstr ""
 
@@ -5446,11 +5480,11 @@ msgstr ""
 msgid "WMA"
 msgstr ""
 
-#: internet/vk/vkservice.cpp:860
+#: internet/vk/vkservice.cpp:869
 msgid "Wall"
 msgstr ""
 
-#: playlist/playlisttabbar.cpp:192 ../bin/src/ui_behavioursettingspage.h:262
+#: playlist/playlisttabbar.cpp:192 ../bin/src/ui_behavioursettingspage.h:292
 msgid "Warn me when closing a playlist tab"
 msgstr ""
 
@@ -5466,7 +5500,7 @@ msgstr ""
 msgid "Weeks"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:269
+#: ../bin/src/ui_behavioursettingspage.h:299
 msgid "When Clementine starts"
 msgstr ""
 
@@ -5476,7 +5510,7 @@ msgid ""
 "If there are no matches then it will use the largest image in the directory."
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:306
+#: ../bin/src/ui_behavioursettingspage.h:340
 msgid "When saving a playlist, file paths should be"
 msgstr ""
 
@@ -5560,7 +5594,7 @@ msgstr ""
 msgid "Write all songs statistics into songs' files"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:311
+#: ../bin/src/ui_behavioursettingspage.h:345
 msgid "Write metadata"
 msgstr ""
 
@@ -5680,7 +5714,7 @@ msgid ""
 "shortcuts in Clementine."
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:268
+#: ../bin/src/ui_behavioursettingspage.h:298
 msgid "You will need to restart Clementine if you change the language."
 msgstr ""
 

@@ -10,9 +10,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2015-07-02 15:33+0000\n"
+"PO-Revision-Date: 2015-07-28 13:23+0000\n"
 "Last-Translator: Mladen Pejaković <pejakm@autistici.org>\n"
-"Language-Team: Serbian (http://www.transifex.com/p/clementine/language/sr/)\n"
+"Language-Team: Serbian (http://www.transifex.com/davidsansome/clementine/language/sr/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: sr\n"
@@ -43,15 +43,19 @@ msgstr " дана"
 msgid " kbps"
 msgstr " kb/s"
 
-#: ../bin/src/ui_playbacksettingspage.h:318
-#: ../bin/src/ui_playbacksettingspage.h:321
-#: ../bin/src/ui_playbacksettingspage.h:335
+#: ../bin/src/ui_playbacksettingspage.h:348
+#: ../bin/src/ui_playbacksettingspage.h:351
+#: ../bin/src/ui_playbacksettingspage.h:365
 msgid " ms"
 msgstr " ms"
 
 #: ../bin/src/ui_songinfosettingspage.h:157
 msgid " pt"
 msgstr " pt"
+
+#: ../bin/src/ui_behavioursettingspage.h:338
+msgid " s"
+msgstr " s"
 
 #: ../bin/src/ui_notificationssettingspage.h:445
 #: ../bin/src/ui_visualisationselector.h:116
@@ -62,7 +66,7 @@ msgstr " секунди"
 msgid " songs"
 msgstr " песама"
 
-#: internet/vk/vkservice.cpp:148
+#: internet/vk/vkservice.cpp:149
 #, qt-format
 msgid "%1 (%2 songs)"
 msgstr "%1 (%2 песама)"
@@ -271,13 +275,29 @@ msgstr "1 нумера"
 msgid "128k MP3"
 msgstr "128k МП3"
 
+#: ../bin/src/ui_playbacksettingspage.h:379
+msgid "192,000Hz"
+msgstr "192.000Hz"
+
 #: ../bin/src/ui_appearancesettingspage.h:291
 msgid "40%"
 msgstr "40%"
 
+#: ../bin/src/ui_playbacksettingspage.h:376
+msgid "44,100Hz"
+msgstr "44.100Hz"
+
+#: ../bin/src/ui_playbacksettingspage.h:377
+msgid "48,000Hz"
+msgstr "48.000Hz"
+
 #: library/library.cpp:64
 msgid "50 random tracks"
 msgstr "50 насумичних песама"
+
+#: ../bin/src/ui_playbacksettingspage.h:378
+msgid "96,000Hz"
+msgstr "96.000Hz"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:165
 msgid "<a href=\"http://www.di.fm/premium/\">Upgrade to Premium now</a>"
@@ -363,7 +383,7 @@ msgstr "ААЦ 64k"
 msgid "AIFF"
 msgstr "АИФФ"
 
-#: widgets/nowplayingwidget.cpp:148
+#: widgets/nowplayingwidget.cpp:149
 msgid "ALL GLORY TO THE HYPNOTOAD"
 msgstr "СЛАВА ХИПНОЖАПЦУ"
 
@@ -385,7 +405,7 @@ msgid "About Qt..."
 msgstr "Више о Куту..."
 
 #: playlist/playlistsaveoptionsdialog.cpp:34
-#: ../bin/src/ui_behavioursettingspage.h:308
+#: ../bin/src/ui_behavioursettingspage.h:342
 msgid "Absolute"
 msgstr "Апсолутне"
 
@@ -550,7 +570,7 @@ msgstr "Уметни број прескока песме"
 msgid "Add song title tag"
 msgstr "Уметни наслов песме"
 
-#: internet/vk/vkservice.cpp:320
+#: internet/vk/vkservice.cpp:329
 msgid "Add song to cache"
 msgstr "Додај песму у кеш"
 
@@ -570,7 +590,7 @@ msgstr "Додај песму у „Моју музику“ кад кликне
 msgid "Add stream..."
 msgstr "Додај ток..."
 
-#: internet/vk/vkservice.cpp:312
+#: internet/vk/vkservice.cpp:321
 msgid "Add to My Music"
 msgstr "Додај у Моју музику"
 
@@ -586,7 +606,7 @@ msgstr "Додај на Спотифај оцењено"
 msgid "Add to another playlist"
 msgstr "Додај у другу листу"
 
-#: internet/vk/vkservice.cpp:298
+#: internet/vk/vkservice.cpp:307
 msgid "Add to bookmarks"
 msgstr "Додај у обележиваче"
 
@@ -594,11 +614,11 @@ msgstr "Додај у обележиваче"
 msgid "Add to playlist"
 msgstr "Додај у листу нумера"
 
-#: ../bin/src/ui_behavioursettingspage.h:298
+#: ../bin/src/ui_behavioursettingspage.h:328
 msgid "Add to the queue"
 msgstr "стави у ред"
 
-#: internet/vk/vkservice.cpp:328
+#: internet/vk/vkservice.cpp:337
 msgid "Add user/group to bookmarks"
 msgstr "Додај корисника/групу у обележиваче"
 
@@ -652,7 +672,7 @@ msgstr "Након копирања:"
 msgid "Album"
 msgstr "албум"
 
-#: ../bin/src/ui_playbacksettingspage.h:328
+#: ../bin/src/ui_playbacksettingspage.h:358
 msgid "Album (ideal loudness for all tracks)"
 msgstr "албум (идеална јачина за све песме)"
 
@@ -670,7 +690,7 @@ msgstr "Омот албума"
 msgid "Album info on jamendo.com..."
 msgstr "Подаци албума са Џаменда..."
 
-#: internet/vk/vkservice.cpp:827
+#: internet/vk/vkservice.cpp:836
 msgid "Albums"
 msgstr "Албуми"
 
@@ -736,16 +756,16 @@ msgstr "Дозволи „mid/side“ кодирање"
 msgid "Alongside the originals"
 msgstr "поред оригинала"
 
-#: ../bin/src/ui_behavioursettingspage.h:271
+#: ../bin/src/ui_behavioursettingspage.h:301
 msgid "Always hide the main window"
 msgstr "Увек сакриј главни прозор"
 
-#: ../bin/src/ui_behavioursettingspage.h:270
+#: ../bin/src/ui_behavioursettingspage.h:300
 msgid "Always show the main window"
 msgstr "Увек прикажи главни прозор"
 
-#: ../bin/src/ui_behavioursettingspage.h:284
-#: ../bin/src/ui_behavioursettingspage.h:304
+#: ../bin/src/ui_behavioursettingspage.h:314
+#: ../bin/src/ui_behavioursettingspage.h:334
 msgid "Always start playing"
 msgstr "увек ће почети пуштање"
 
@@ -796,11 +816,11 @@ msgstr "Додај нумере/УРЛ токове у листу нумера"
 msgid "Append to current playlist"
 msgstr "Додај у текућу листу нумера"
 
-#: ../bin/src/ui_behavioursettingspage.h:295
+#: ../bin/src/ui_behavioursettingspage.h:325
 msgid "Append to the playlist"
 msgstr "дода у листу нумера"
 
-#: ../bin/src/ui_playbacksettingspage.h:331
+#: ../bin/src/ui_playbacksettingspage.h:361
 msgid "Apply compression to prevent clipping"
 msgstr "Примени компресију како би се спречило одсецање"
 
@@ -840,7 +860,7 @@ msgstr "Ознаке извођача"
 msgid "Artist's initial"
 msgstr "иницијали извођача"
 
-#: ../bin/src/ui_behavioursettingspage.h:310
+#: ../bin/src/ui_behavioursettingspage.h:344
 msgid "Ask when saving"
 msgstr "Питај приликом уписа"
 
@@ -850,7 +870,7 @@ msgstr "Питај приликом уписа"
 msgid "Audio format"
 msgstr "Формат звука"
 
-#: ../bin/src/ui_playbacksettingspage.h:332
+#: ../bin/src/ui_playbacksettingspage.h:362
 msgid "Audio output"
 msgstr "Излаз звука"
 
@@ -870,11 +890,12 @@ msgid "Authors"
 msgstr "Аутори"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:227
+#: ../bin/src/ui_playbacksettingspage.h:375
 msgid "Auto"
 msgstr "аутоматски"
 
 #: playlist/playlistsaveoptionsdialog.cpp:32
-#: ../bin/src/ui_behavioursettingspage.h:307
+#: ../bin/src/ui_behavioursettingspage.h:341
 msgid "Automatic"
 msgstr "Аутоматски"
 
@@ -947,7 +968,7 @@ msgstr "основна плава"
 msgid "Basic audio type"
 msgstr "Тип звука (основно)"
 
-#: ../bin/src/ui_behavioursettingspage.h:259
+#: ../bin/src/ui_behavioursettingspage.h:289
 msgid "Behavior"
 msgstr "Понашање"
 
@@ -1008,11 +1029,11 @@ msgstr "Бокс"
 msgid "Browse..."
 msgstr "Прегледај..."
 
-#: ../bin/src/ui_playbacksettingspage.h:334
+#: ../bin/src/ui_playbacksettingspage.h:364
 msgid "Buffer duration"
 msgstr "Величина бафера"
 
-#: engines/gstengine.cpp:904
+#: engines/gstengine.cpp:907
 msgid "Buffering"
 msgstr "Баферујем"
 
@@ -1057,7 +1078,7 @@ msgstr "Одустани"
 msgid "Cancel download"
 msgstr "Прекини преузимање"
 
-#: internet/vk/vkservice.cpp:626
+#: internet/vk/vkservice.cpp:635
 msgid ""
 "Captcha is needed.\n"
 "Try to login into Vk.com with your browser,to fix this problem."
@@ -1087,7 +1108,11 @@ msgstr "Насумичност"
 msgid "Change the language"
 msgstr "Промени језик"
 
-#: ../bin/src/ui_playbacksettingspage.h:338
+#: ../bin/src/ui_playbacksettingspage.h:382
+msgid "Changes will take place when the next song starts playing"
+msgstr "Измене ће наступити по пуштању следеће песме"
+
+#: ../bin/src/ui_playbacksettingspage.h:369
 msgid ""
 "Changing mono playback preference will be effective for the next playing "
 "songs"
@@ -1113,7 +1138,7 @@ msgstr "Избор фасцикле кеша за Vk.com"
 msgid "Choose a name for your smart playlist"
 msgstr "Изаберите име за вашу паметну листу"
 
-#: engines/gstengine.cpp:925
+#: engines/gstengine.cpp:928
 msgid "Choose automatically"
 msgstr "Изабери аутоматски"
 
@@ -1299,7 +1324,7 @@ msgstr "Зарез раздваја листу од класа: ниво, нив
 msgid "Comment"
 msgstr "коментар"
 
-#: internet/vk/vkservice.cpp:154
+#: internet/vk/vkservice.cpp:155
 msgid "Community Radio"
 msgstr "Друштвени радио"
 
@@ -1338,7 +1363,7 @@ msgstr "Подеси Спотифај..."
 msgid "Configure Subsonic..."
 msgstr "Подеси Субсоник..."
 
-#: internet/vk/vkservice.cpp:337
+#: internet/vk/vkservice.cpp:346
 msgid "Configure Vk.com..."
 msgstr "Подеси vk.com..."
 
@@ -1385,7 +1410,7 @@ msgid ""
 "Connection timed out, check server URL. Example: http://localhost:4040/"
 msgstr "Прековреме истекло, проверите УРЛ сервера. Пример: http://localhost:4040/"
 
-#: internet/vk/vkservice.cpp:1095
+#: internet/vk/vkservice.cpp:1113
 msgid "Connection trouble or audio is disabled by owner"
 msgstr "Проблем са повезивањем или је власник онемогућио звук"
 
@@ -1413,7 +1438,7 @@ msgstr "Претвори безгубитне аудио фајлове пре �
 msgid "Convert lossless files"
 msgstr "Претвори безгубитне фајлове"
 
-#: internet/vk/vkservice.cpp:324
+#: internet/vk/vkservice.cpp:333
 msgid "Copy share url to clipboard"
 msgstr "Копирај УРЛ дељења на клипборд"
 
@@ -1505,11 +1530,11 @@ msgstr "Омот постављен из %1"
 msgid "Covers from %1"
 msgstr "Омоти са %1"
 
-#: ../bin/src/ui_playbacksettingspage.h:315
+#: ../bin/src/ui_playbacksettingspage.h:345
 msgid "Cross-fade when changing tracks automatically"
 msgstr "Претапање при аутоматској измени нумера"
 
-#: ../bin/src/ui_playbacksettingspage.h:314
+#: ../bin/src/ui_playbacksettingspage.h:344
 msgid "Cross-fade when changing tracks manually"
 msgstr "Претапање при ручној измени нумера"
 
@@ -1648,7 +1673,7 @@ msgstr "Смањи јачину звука"
 msgid "Default background image"
 msgstr "Подразумевана"
 
-#: engines/gstengine.cpp:950
+#: engines/gstengine.cpp:953
 #, qt-format
 msgid "Default device on %1"
 msgstr "Подразумевани уређај на %1"
@@ -1866,7 +1891,7 @@ msgstr "Донирај"
 msgid "Double click to open"
 msgstr "Кликните двапут да отворите"
 
-#: ../bin/src/ui_behavioursettingspage.h:292
+#: ../bin/src/ui_behavioursettingspage.h:322
 msgid "Double clicking a song will..."
 msgstr "Двоклик на песму ће да је..."
 
@@ -2025,7 +2050,7 @@ msgstr "Укључи еквилајзер"
 msgid "Enable shortcuts only when Clementine is focused"
 msgstr "Омогући пречице само кад је Клементина у фокусу"
 
-#: ../bin/src/ui_behavioursettingspage.h:278
+#: ../bin/src/ui_behavioursettingspage.h:308
 msgid "Enable song metadata inline edition with click"
 msgstr "Омогући уткано уређивање метаподатака песме кликом"
 
@@ -2115,7 +2140,7 @@ msgstr "Исто као и --log-levels *:3"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:242
 #: library/libraryview.cpp:630 ui/mainwindow.cpp:1931 ui/mainwindow.cpp:2178
-#: ui/mainwindow.cpp:2326 internet/vk/vkservice.cpp:625
+#: ui/mainwindow.cpp:2326 internet/vk/vkservice.cpp:634
 msgid "Error"
 msgstr "Грешка"
 
@@ -2190,7 +2215,7 @@ msgstr "сваких 6 сати"
 msgid "Every hour"
 msgstr "сваког сата"
 
-#: ../bin/src/ui_playbacksettingspage.h:316
+#: ../bin/src/ui_playbacksettingspage.h:346
 msgid "Except between tracks on the same album or in the same CUE sheet"
 msgstr "Осим између нумера на истом албуму или на истом ЦУЕ листу"
 
@@ -2262,20 +2287,20 @@ msgstr "F8"
 msgid "FLAC"
 msgstr "ФЛАЦ"
 
-#: ../bin/src/ui_playbacksettingspage.h:319
+#: ../bin/src/ui_playbacksettingspage.h:349
 msgid "Fade out on pause / fade in on resume"
 msgstr "Утапај при паузи/настављању"
 
-#: ../bin/src/ui_playbacksettingspage.h:313
+#: ../bin/src/ui_playbacksettingspage.h:343
 msgid "Fade out when stopping a track"
 msgstr "Утапај нумеру при заустављању"
 
-#: ../bin/src/ui_playbacksettingspage.h:312
+#: ../bin/src/ui_playbacksettingspage.h:342
 msgid "Fading"
 msgstr "Утапање"
 
-#: ../bin/src/ui_playbacksettingspage.h:317
-#: ../bin/src/ui_playbacksettingspage.h:320
+#: ../bin/src/ui_playbacksettingspage.h:347
+#: ../bin/src/ui_playbacksettingspage.h:350
 msgid "Fading duration"
 msgstr "Трајање претапања"
 
@@ -2387,7 +2412,7 @@ msgstr "Фајлови за прекодирање"
 msgid "Find songs in your library that match the criteria you specify."
 msgstr "Пронађите песме у библиотеци које одговарају одређеном критеријуму."
 
-#: internet/vk/vkservice.cpp:308
+#: internet/vk/vkservice.cpp:317
 msgid "Find this artist"
 msgstr "Пронађи овог извођача"
 
@@ -2403,7 +2428,7 @@ msgstr "Заврши"
 msgid "First level"
 msgstr "Први ниво"
 
-#: widgets/nowplayingwidget.cpp:107
+#: widgets/nowplayingwidget.cpp:108
 msgid "Fit cover to width"
 msgstr "Уклопи омот по ширини"
 
@@ -2545,7 +2570,7 @@ msgstr "Гугл Драјв"
 msgid "Got %1 covers out of %2 (%3 failed)"
 msgstr "Добављено %1 омота од %2 (%3 неуспешно)"
 
-#: ../bin/src/ui_behavioursettingspage.h:274
+#: ../bin/src/ui_behavioursettingspage.h:304
 msgid "Grey out non existent songs in my playlists"
 msgstr "Посиви непостојеће песме у листи нумера"
 
@@ -2658,7 +2683,7 @@ msgstr "Иконе на врху"
 msgid "Identifying song"
 msgstr "Идентификујем песму"
 
-#: ../bin/src/ui_behavioursettingspage.h:276
+#: ../bin/src/ui_behavioursettingspage.h:306
 msgid ""
 "If activated, clicking a selected song in the playlist view will let you "
 "edit the tag value directly"
@@ -2840,7 +2865,7 @@ msgstr "Џамендове најбоље нумере ове седмице"
 msgid "Jamendo database"
 msgstr "Џамендова база података"
 
-#: ../bin/src/ui_behavioursettingspage.h:289
+#: ../bin/src/ui_behavioursettingspage.h:319
 msgid "Jump to previous song right away"
 msgstr "пушта претходну песму одмах"
 
@@ -2860,7 +2885,7 @@ msgstr "Држите тастере %1 секунду..."
 msgid "Keep buttons for %1 seconds..."
 msgstr "Држите тастере %1 секунди..."
 
-#: ../bin/src/ui_behavioursettingspage.h:261
+#: ../bin/src/ui_behavioursettingspage.h:291
 msgid "Keep running in the background when the window is closed"
 msgstr "Настави рад у позадини кад се прозор затвори"
 
@@ -2877,7 +2902,7 @@ msgstr "Мачићи"
 msgid "Kuduro"
 msgstr "Кудуро"
 
-#: ../bin/src/ui_behavioursettingspage.h:263
+#: ../bin/src/ui_behavioursettingspage.h:293
 msgid "Language"
 msgstr "Језик"
 
@@ -2889,15 +2914,15 @@ msgstr "лаптоп/слушалице"
 msgid "Large Hall"
 msgstr "велика дворана"
 
-#: widgets/nowplayingwidget.cpp:97
+#: widgets/nowplayingwidget.cpp:98
 msgid "Large album cover"
 msgstr "Велики омот"
 
-#: widgets/nowplayingwidget.cpp:100
+#: widgets/nowplayingwidget.cpp:101
 msgid "Large album cover (details below)"
 msgstr "Велики омот албума (детаљи испод)"
 
-#: widgets/nowplayingwidget.cpp:102
+#: widgets/nowplayingwidget.cpp:103
 msgid "Large album cover (no details)"
 msgstr "Велики омот албума (без детаља)"
 
@@ -3041,7 +3066,7 @@ msgstr "Учитавам податке о нумерама"
 #: internet/podcasts/podcastdiscoverymodel.cpp:105 widgets/prettyimage.cpp:168
 #: widgets/widgetfadehelper.cpp:96 ../bin/src/ui_addpodcastdialog.h:180
 #: ../bin/src/ui_searchpreview.h:106 ../bin/src/ui_organisedialog.h:262
-#: internet/vk/vkservice.cpp:499 internet/vk/vksettingspage.cpp:122
+#: internet/vk/vkservice.cpp:508 internet/vk/vksettingspage.cpp:122
 msgid "Loading..."
 msgstr "Учитавам..."
 
@@ -3230,7 +3255,7 @@ msgstr "Тип чланства"
 msgid "Minimum bitrate"
 msgstr "Најмањи битски проток"
 
-#: ../bin/src/ui_playbacksettingspage.h:336
+#: ../bin/src/ui_playbacksettingspage.h:366
 msgid "Minimum buffer fill"
 msgstr "Најмањи испун бафера"
 
@@ -3246,7 +3271,7 @@ msgstr "Модел"
 msgid "Monitor the library for changes"
 msgstr "Надгледај измене у библиотеци"
 
-#: ../bin/src/ui_playbacksettingspage.h:340
+#: ../bin/src/ui_playbacksettingspage.h:371
 msgid "Mono playback"
 msgstr "Моно репродукција"
 
@@ -3267,7 +3292,7 @@ msgstr "Стил расположења"
 msgid "Moodbars"
 msgstr "Расположења"
 
-#: internet/vk/vkservice.cpp:503
+#: internet/vk/vkservice.cpp:512
 msgid "More"
 msgstr "Још"
 
@@ -3298,7 +3323,7 @@ msgid "Move up"
 msgstr "Помери горе"
 
 #: transcoder/transcodedialog.cpp:225 ui/mainwindow.cpp:1866
-#: internet/vk/vkservice.cpp:884
+#: internet/vk/vkservice.cpp:893
 msgid "Music"
 msgstr "Музика"
 
@@ -3311,15 +3336,15 @@ msgstr "Музичка библиотека"
 msgid "Mute"
 msgstr "Утишај"
 
-#: internet/vk/vkservice.cpp:820
+#: internet/vk/vkservice.cpp:829
 msgid "My Albums"
 msgstr "Моји албуми"
 
-#: internet/vk/vkservice.cpp:878
+#: internet/vk/vkservice.cpp:887
 msgid "My Music"
 msgstr "Моја музика"
 
-#: internet/vk/vkservice.cpp:510
+#: internet/vk/vkservice.cpp:519
 msgid "My Recommendations"
 msgstr "Моје препоруке"
 
@@ -3357,8 +3382,8 @@ msgstr "Никад"
 msgid "Never played"
 msgstr "Никад пуштано"
 
-#: ../bin/src/ui_behavioursettingspage.h:282
-#: ../bin/src/ui_behavioursettingspage.h:302
+#: ../bin/src/ui_behavioursettingspage.h:312
+#: ../bin/src/ui_behavioursettingspage.h:332
 msgid "Never start playing"
 msgstr "неће почети пуштање"
 
@@ -3598,7 +3623,7 @@ msgstr "Отвори у Гугл Драјву"
 msgid "Open in new playlist"
 msgstr "Отвори у новој листи"
 
-#: ../bin/src/ui_behavioursettingspage.h:297
+#: ../bin/src/ui_behavioursettingspage.h:327
 msgctxt "Refers to behavior settings in Clementine settings page."
 msgid "Open in new playlist"
 msgstr "отвори у новој листи"
@@ -3673,7 +3698,7 @@ msgstr "Остале опције"
 msgid "Output"
 msgstr "Излаз"
 
-#: ../bin/src/ui_playbacksettingspage.h:333
+#: ../bin/src/ui_playbacksettingspage.h:363
 msgid "Output device"
 msgstr "Уређај излаза"
 
@@ -3756,8 +3781,8 @@ msgstr "број пуштања"
 msgid "Play if stopped, pause if playing"
 msgstr "Пусти ако је заустављено, заустави ако се пушта"
 
-#: ../bin/src/ui_behavioursettingspage.h:283
-#: ../bin/src/ui_behavioursettingspage.h:303
+#: ../bin/src/ui_behavioursettingspage.h:313
+#: ../bin/src/ui_behavioursettingspage.h:333
 msgid "Play if there is nothing already playing"
 msgstr "почеће пуштање ако тренутно ништа није пуштено"
 
@@ -3769,7 +3794,7 @@ msgstr "Пусти <n>у нумеру са листе"
 msgid "Play/Pause"
 msgstr "Пусти/паузирај"
 
-#: ../bin/src/ui_playbacksettingspage.h:310
+#: ../bin/src/ui_playbacksettingspage.h:340
 msgid "Playback"
 msgstr "Пуштање"
 
@@ -3826,7 +3851,7 @@ msgstr "Трајање"
 msgid "Port"
 msgstr "Порт"
 
-#: ui/equalizer.cpp:44 ../bin/src/ui_playbacksettingspage.h:330
+#: ui/equalizer.cpp:44 ../bin/src/ui_playbacksettingspage.h:360
 msgid "Pre-amp"
 msgstr "Претпојачање"
 
@@ -3882,7 +3907,7 @@ msgstr "Притисните тастер"
 msgid "Press a key combination to use for %1..."
 msgstr "Притисните комбинацију тастера за %1..."
 
-#: ../bin/src/ui_behavioursettingspage.h:286
+#: ../bin/src/ui_behavioursettingspage.h:316
 msgid "Pressing \"Previous\" in player will..."
 msgstr "Дугме „Претходна“ у плејеру..."
 
@@ -3965,7 +3990,7 @@ msgstr "Стави у ред изабране нумере"
 msgid "Queue track"
 msgstr "Стави нумеру у ред"
 
-#: ../bin/src/ui_playbacksettingspage.h:327
+#: ../bin/src/ui_playbacksettingspage.h:357
 msgid "Radio (equal loudness for all tracks)"
 msgstr "радио (једнака јачина за све песме)"
 
@@ -4042,7 +4067,7 @@ msgid "Reggae"
 msgstr "реге"
 
 #: playlist/playlistsaveoptionsdialog.cpp:33
-#: ../bin/src/ui_behavioursettingspage.h:309
+#: ../bin/src/ui_behavioursettingspage.h:343
 msgid "Relative"
 msgstr "Релативне"
 
@@ -4050,7 +4075,7 @@ msgstr "Релативне"
 msgid "Remember Wii remote swing"
 msgstr "Упамти замах"
 
-#: ../bin/src/ui_behavioursettingspage.h:272
+#: ../bin/src/ui_behavioursettingspage.h:302
 msgid "Remember from last time"
 msgstr "Сети се од прошлог пута"
 
@@ -4075,11 +4100,11 @@ msgstr "Уклони дупликате са листе"
 msgid "Remove folder"
 msgstr "Уклони фасциклу"
 
-#: internet/vk/vkservice.cpp:316
+#: internet/vk/vkservice.cpp:325
 msgid "Remove from My Music"
 msgstr "Уклони из Моје музике"
 
-#: internet/vk/vkservice.cpp:302
+#: internet/vk/vkservice.cpp:311
 msgid "Remove from bookmarks"
 msgstr "Уклони из обележивача"
 
@@ -4133,7 +4158,7 @@ msgstr "Понављај нумеру"
 msgid "Replace current playlist"
 msgstr "Замени текућу листу"
 
-#: ../bin/src/ui_behavioursettingspage.h:296
+#: ../bin/src/ui_behavioursettingspage.h:326
 msgid "Replace the playlist"
 msgstr "замени листу нумера"
 
@@ -4141,11 +4166,11 @@ msgstr "замени листу нумера"
 msgid "Replaces spaces with underscores"
 msgstr "Замени размаке подвлаком"
 
-#: ../bin/src/ui_playbacksettingspage.h:322
+#: ../bin/src/ui_playbacksettingspage.h:352
 msgid "Replay Gain"
 msgstr "Нивелатор јачине"
 
-#: ../bin/src/ui_playbacksettingspage.h:324
+#: ../bin/src/ui_playbacksettingspage.h:354
 msgid "Replay Gain mode"
 msgstr "Режим нивелатора јачине"
 
@@ -4165,7 +4190,7 @@ msgstr "Ресетуј"
 msgid "Reset play counts"
 msgstr "Поништи број пуштања"
 
-#: ../bin/src/ui_behavioursettingspage.h:290
+#: ../bin/src/ui_behavioursettingspage.h:320
 msgid "Restart song, then jump to previous if pressed again"
 msgstr "понавља песму, и пушта претходну ако је поново притиснуто"
 
@@ -4178,7 +4203,7 @@ msgstr "Поново пусти нумеру или пусти претходн�
 msgid "Restrict to ASCII characters"
 msgstr "Ограничи се на АСКИ знакове"
 
-#: ../bin/src/ui_behavioursettingspage.h:273
+#: ../bin/src/ui_behavioursettingspage.h:303
 msgid "Resume playback on start"
 msgstr "Настави пуштање по покретању"
 
@@ -4229,6 +4254,7 @@ msgid "Safely remove the device after copying"
 msgstr "Безбедно извади уређај после копирања"
 
 #: playlist/playlist.cpp:1357 ../bin/src/ui_edittagdialog.h:724
+#: ../bin/src/ui_playbacksettingspage.h:372
 msgid "Sample rate"
 msgstr "узорковање"
 
@@ -4312,7 +4338,7 @@ msgstr "Сифајл"
 
 #: ui/albumcoversearcher.cpp:165 ui/albumcoversearcher.cpp:182
 #: ../bin/src/ui_gpoddersearchpage.h:78 ../bin/src/ui_itunessearchpage.h:78
-#: ../bin/src/ui_albumcoversearcher.h:114 internet/vk/vkservice.cpp:518
+#: ../bin/src/ui_albumcoversearcher.h:114 internet/vk/vkservice.cpp:527
 msgid "Search"
 msgstr "Тражи"
 
@@ -4394,6 +4420,10 @@ msgstr "Иди на положај текуће нумере за релатив
 #: core/commandlineoptions.cpp:160
 msgid "Seek the currently playing track to an absolute position"
 msgstr "Иди на положај текуће нумере за апсолутни износ"
+
+#: ../bin/src/ui_behavioursettingspage.h:336
+msgid "Seeking using a keyboard shortcut"
+msgstr "Бирање положаја пречицом тастатуре"
 
 #: visualisations/visualisationselector.cpp:37 ../bin/src/ui_ripcddialog.h:310
 msgid "Select All"
@@ -4491,7 +4521,7 @@ msgstr "Прикажи"
 msgid "Show OSD"
 msgstr "Прикажи ОСД"
 
-#: ../bin/src/ui_playbacksettingspage.h:311
+#: ../bin/src/ui_playbacksettingspage.h:341
 msgid "Show a glowing animation on the current track"
 msgstr "Прикажи шљаштећу анимацију на пуштеној нумери"
 
@@ -4523,7 +4553,7 @@ msgstr "Облачић са системске касете"
 msgid "Show a pretty OSD"
 msgstr "Лепи ОСД"
 
-#: widgets/nowplayingwidget.cpp:139
+#: widgets/nowplayingwidget.cpp:140
 msgid "Show above status bar"
 msgstr "Прикажи изнад траке стања"
 
@@ -4592,7 +4622,7 @@ msgstr "Прикажи „волим“ дугме"
 msgid "Show the scrobble button in the main window"
 msgstr "Прикажи дугме скробловања у главном прозору"
 
-#: ../bin/src/ui_behavioursettingspage.h:260
+#: ../bin/src/ui_behavioursettingspage.h:290
 msgid "Show tray icon"
 msgstr "Усидри у системску касету"
 
@@ -4672,7 +4702,7 @@ msgstr "Прескочи изабране нумере"
 msgid "Skip track"
 msgstr "Прескочи нумеру"
 
-#: widgets/nowplayingwidget.cpp:95
+#: widgets/nowplayingwidget.cpp:96
 msgid "Small album cover"
 msgstr "Мали омот"
 
@@ -5096,6 +5126,10 @@ msgstr "Овај ток је само за претплатнике"
 msgid "This type of device is not supported: %1"
 msgstr "Овај тип уређаја није подржан: %1"
 
+#: ../bin/src/ui_behavioursettingspage.h:337
+msgid "Time step"
+msgstr "Временски корак"
+
 #: playlist/playlist.cpp:1315 ui/organisedialog.cpp:60
 #: ui/qtsystemtrayicon.cpp:232 ../bin/src/ui_about.h:142
 #: ../bin/src/ui_edittagdialog.h:734 ../bin/src/ui_trackselectiondialog.h:211
@@ -5254,7 +5288,7 @@ msgstr "Уклони претплату"
 msgid "Upcoming Concerts"
 msgstr "Предстојећи концерти"
 
-#: internet/vk/vkservice.cpp:332
+#: internet/vk/vkservice.cpp:341
 msgid "Update"
 msgstr "Ажурирај"
 
@@ -5308,7 +5342,7 @@ msgstr "Користи Гномове пречице"
 msgid "Use Psychedelic Colors"
 msgstr "Користи психоделичне боје"
 
-#: ../bin/src/ui_playbacksettingspage.h:323
+#: ../bin/src/ui_playbacksettingspage.h:353
 msgid "Use Replay Gain metadata if it is available"
 msgstr "Користи метаподатке нивелисања ако су доступни"
 
@@ -5352,7 +5386,7 @@ msgstr "Користите обавештења за пријаву стања W
 msgid "Use temporal noise shaping"
 msgstr "Временско обликовање шума"
 
-#: ../bin/src/ui_behavioursettingspage.h:266
+#: ../bin/src/ui_behavioursettingspage.h:296
 msgid "Use the system default"
 msgstr "системски подразумеван"
 
@@ -5384,7 +5418,7 @@ msgstr "Корисничко сучеље"
 msgid "Username"
 msgstr "Корисничко име"
 
-#: ../bin/src/ui_behavioursettingspage.h:279
+#: ../bin/src/ui_behavioursettingspage.h:309
 msgid "Using the menu to add a song will..."
 msgstr "Радња менија за додавање песме..."
 
@@ -5449,11 +5483,11 @@ msgstr "ВАВ"
 msgid "WMA"
 msgstr "ВМА"
 
-#: internet/vk/vkservice.cpp:860
+#: internet/vk/vkservice.cpp:869
 msgid "Wall"
 msgstr "Зид"
 
-#: playlist/playlisttabbar.cpp:192 ../bin/src/ui_behavioursettingspage.h:262
+#: playlist/playlisttabbar.cpp:192 ../bin/src/ui_behavioursettingspage.h:292
 msgid "Warn me when closing a playlist tab"
 msgstr "Упозори ме приликом затварања језичка листе нумера"
 
@@ -5469,7 +5503,7 @@ msgstr "Вебсајт"
 msgid "Weeks"
 msgstr "седмица"
 
-#: ../bin/src/ui_behavioursettingspage.h:269
+#: ../bin/src/ui_behavioursettingspage.h:299
 msgid "When Clementine starts"
 msgstr "Када се Клементина покрене"
 
@@ -5479,7 +5513,7 @@ msgid ""
 "If there are no matches then it will use the largest image in the directory."
 msgstr "Приликом тражења омота албума Клементина ће најпре да тражи фајлове слика који садрже неке од ових речи.\nАко нема поклапања онда ће да користи највећу слику у директоријуму."
 
-#: ../bin/src/ui_behavioursettingspage.h:306
+#: ../bin/src/ui_behavioursettingspage.h:340
 msgid "When saving a playlist, file paths should be"
 msgstr "При упису листе нумера, путање фајлова треба да буду"
 
@@ -5563,7 +5597,7 @@ msgstr "Желите ли сада да покренете потпуно ске
 msgid "Write all songs statistics into songs' files"
 msgstr "Уписивање статистика свих песама у фајлове песама"
 
-#: ../bin/src/ui_behavioursettingspage.h:311
+#: ../bin/src/ui_behavioursettingspage.h:345
 msgid "Write metadata"
 msgstr "Уписуј метаподатке"
 
@@ -5683,7 +5717,7 @@ msgid ""
 "shortcuts in Clementine."
 msgstr "Морате да покренете подешавање система и дозволите Клементини да „<span style=\"font-style:italic\">управља вашим рачунаром</span>“ да бисте користили опште пречице у Клементини."
 
-#: ../bin/src/ui_behavioursettingspage.h:268
+#: ../bin/src/ui_behavioursettingspage.h:298
 msgid "You will need to restart Clementine if you change the language."
 msgstr "Морате поново да покренете Клементину да бисте променили језик."
 

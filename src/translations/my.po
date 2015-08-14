@@ -7,9 +7,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2015-07-02 13:48+0000\n"
+"PO-Revision-Date: 2015-07-21 19:18+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
-"Language-Team: Burmese (http://www.transifex.com/p/clementine/language/my/)\n"
+"Language-Team: Burmese (http://www.transifex.com/davidsansome/clementine/language/my/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: my\n"
@@ -40,15 +40,19 @@ msgstr "နေ့များ"
 msgid " kbps"
 msgstr "တစ်စက္ကန့်ကီလိုဘိုက်နှုန်း"
 
-#: ../bin/src/ui_playbacksettingspage.h:318
-#: ../bin/src/ui_playbacksettingspage.h:321
-#: ../bin/src/ui_playbacksettingspage.h:335
+#: ../bin/src/ui_playbacksettingspage.h:348
+#: ../bin/src/ui_playbacksettingspage.h:351
+#: ../bin/src/ui_playbacksettingspage.h:365
 msgid " ms"
 msgstr "မိုက်ခရိုစက္ကန့်"
 
 #: ../bin/src/ui_songinfosettingspage.h:157
 msgid " pt"
 msgstr "ပွိုင့်ပမာဏ"
+
+#: ../bin/src/ui_behavioursettingspage.h:338
+msgid " s"
+msgstr ""
 
 #: ../bin/src/ui_notificationssettingspage.h:445
 #: ../bin/src/ui_visualisationselector.h:116
@@ -59,7 +63,7 @@ msgstr "စက္ကန့်များ"
 msgid " songs"
 msgstr "သီချင်းများ"
 
-#: internet/vk/vkservice.cpp:148
+#: internet/vk/vkservice.cpp:149
 #, qt-format
 msgid "%1 (%2 songs)"
 msgstr "%1 (%2 သီချင်းများ)"
@@ -268,13 +272,29 @@ msgstr "တေးသံလမ်းကြောတစ်ခု"
 msgid "128k MP3"
 msgstr "၁၂၈ကီလိုအမ်ပီသရီး"
 
+#: ../bin/src/ui_playbacksettingspage.h:379
+msgid "192,000Hz"
+msgstr ""
+
 #: ../bin/src/ui_appearancesettingspage.h:291
 msgid "40%"
 msgstr "၄၀%"
 
+#: ../bin/src/ui_playbacksettingspage.h:376
+msgid "44,100Hz"
+msgstr ""
+
+#: ../bin/src/ui_playbacksettingspage.h:377
+msgid "48,000Hz"
+msgstr ""
+
 #: library/library.cpp:64
 msgid "50 random tracks"
 msgstr "ကျပန်းတေးသံလမ်းကြောများ၅၀"
+
+#: ../bin/src/ui_playbacksettingspage.h:378
+msgid "96,000Hz"
+msgstr ""
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:165
 msgid "<a href=\"http://www.di.fm/premium/\">Upgrade to Premium now</a>"
@@ -360,7 +380,7 @@ msgstr "အေအေစီ၆၄ကီလို"
 msgid "AIFF"
 msgstr "အေအိုင်အက်ဖ်အက်ဖ်"
 
-#: widgets/nowplayingwidget.cpp:148
+#: widgets/nowplayingwidget.cpp:149
 msgid "ALL GLORY TO THE HYPNOTOAD"
 msgstr "အံ့မခန်းဖွယ်အားလံုးကိုဟိုက်ဖ်နိုဖားသို့"
 
@@ -382,7 +402,7 @@ msgid "About Qt..."
 msgstr "ကျူတီအကြောင်း..."
 
 #: playlist/playlistsaveoptionsdialog.cpp:34
-#: ../bin/src/ui_behavioursettingspage.h:308
+#: ../bin/src/ui_behavioursettingspage.h:342
 msgid "Absolute"
 msgstr "အကြွင်းမဲ့"
 
@@ -547,7 +567,7 @@ msgstr "သီချင်းကျော်သံအရေအတွက်ထည
 msgid "Add song title tag"
 msgstr "သီချင်းခေါင်းစဉ်အမည်ထည့်"
 
-#: internet/vk/vkservice.cpp:320
+#: internet/vk/vkservice.cpp:329
 msgid "Add song to cache"
 msgstr "မှတ်ဉာဏ်ဝှက်ထဲသို့သီချင်းထည့်"
 
@@ -567,7 +587,7 @@ msgstr "\"အချစ်\" ခလုပ်ကိုနှိပ်လိုက�
 msgid "Add stream..."
 msgstr "သီချင်းစီးကြောင်းထည့်..."
 
-#: internet/vk/vkservice.cpp:312
+#: internet/vk/vkservice.cpp:321
 msgid "Add to My Music"
 msgstr "\"ငါ့သီချင်း\" ထဲသို့ထည့်"
 
@@ -583,7 +603,7 @@ msgstr ""
 msgid "Add to another playlist"
 msgstr "သီချင်းစာရင်းနောက်တစ်ခုသို့ထည့်"
 
-#: internet/vk/vkservice.cpp:298
+#: internet/vk/vkservice.cpp:307
 msgid "Add to bookmarks"
 msgstr "မှတ်သားခြင်းစာရင်းများသို့ထည့်"
 
@@ -591,11 +611,11 @@ msgstr "မှတ်သားခြင်းစာရင်းများသိ
 msgid "Add to playlist"
 msgstr "သီချင်းစာရင်းသို့ထည့်"
 
-#: ../bin/src/ui_behavioursettingspage.h:298
+#: ../bin/src/ui_behavioursettingspage.h:328
 msgid "Add to the queue"
 msgstr "စီတန်းထဲသို့ထည့်ပါ"
 
-#: internet/vk/vkservice.cpp:328
+#: internet/vk/vkservice.cpp:337
 msgid "Add user/group to bookmarks"
 msgstr "မှတ်သားခြင်းစာရင်းများသို့အသုံးပြုသူထည့်"
 
@@ -649,7 +669,7 @@ msgstr "ကူးယူပြီးနောက်..."
 msgid "Album"
 msgstr "အယ်လဘမ်"
 
-#: ../bin/src/ui_playbacksettingspage.h:328
+#: ../bin/src/ui_playbacksettingspage.h:358
 msgid "Album (ideal loudness for all tracks)"
 msgstr "အယ်လဘမ် (တေးသံလမ်းကြောများအားလံုးအတွက်အကောင်းဆုံးအသံကျယ်ကျယ်)"
 
@@ -667,7 +687,7 @@ msgstr "အယ်လဘမ်အဖုံး"
 msgid "Album info on jamendo.com..."
 msgstr "ဂျမန်ဒို.ကွမ်းမှအယ်လဘမ်အချက်အလက်..."
 
-#: internet/vk/vkservice.cpp:827
+#: internet/vk/vkservice.cpp:836
 msgid "Albums"
 msgstr ""
 
@@ -733,16 +753,16 @@ msgstr "အလယ်/ဘေးကုဒ်ပြောင်းခွင့်�
 msgid "Alongside the originals"
 msgstr "မူရင်းများနှင့်အတူ"
 
-#: ../bin/src/ui_behavioursettingspage.h:271
+#: ../bin/src/ui_behavioursettingspage.h:301
 msgid "Always hide the main window"
 msgstr "အဓိကဝင်းဒိုးအမြဲတမ်းဖုံးကွယ်"
 
-#: ../bin/src/ui_behavioursettingspage.h:270
+#: ../bin/src/ui_behavioursettingspage.h:300
 msgid "Always show the main window"
 msgstr "အဓိကဝင်းဒိုးအမြဲတမ်းပြသ"
 
-#: ../bin/src/ui_behavioursettingspage.h:284
-#: ../bin/src/ui_behavioursettingspage.h:304
+#: ../bin/src/ui_behavioursettingspage.h:314
+#: ../bin/src/ui_behavioursettingspage.h:334
 msgid "Always start playing"
 msgstr "သီချင်းအမြဲတမ်းစတင်ဖွင့်"
 
@@ -793,11 +813,11 @@ msgstr "ဖိုင်များ/ယူအာအလ်များသီခ�
 msgid "Append to current playlist"
 msgstr "ယခုသီချင်းစာရင်းသို့ဖြည့်စွက်"
 
-#: ../bin/src/ui_behavioursettingspage.h:295
+#: ../bin/src/ui_behavioursettingspage.h:325
 msgid "Append to the playlist"
 msgstr "သီချင်းစာရင်းသို့ဖြည့်စွက်"
 
-#: ../bin/src/ui_playbacksettingspage.h:331
+#: ../bin/src/ui_playbacksettingspage.h:361
 msgid "Apply compression to prevent clipping"
 msgstr "ဖြတ်ညှပ်ခံရခြင်းကာကွယ်ရန်ချုံ့"
 
@@ -837,7 +857,7 @@ msgstr "အနုပညာရှင်အမည်များ"
 msgid "Artist's initial"
 msgstr "အနုပညာရှင်အမည်၏အစ"
 
-#: ../bin/src/ui_behavioursettingspage.h:310
+#: ../bin/src/ui_behavioursettingspage.h:344
 msgid "Ask when saving"
 msgstr ""
 
@@ -847,7 +867,7 @@ msgstr ""
 msgid "Audio format"
 msgstr "အသံပုံစံ"
 
-#: ../bin/src/ui_playbacksettingspage.h:332
+#: ../bin/src/ui_playbacksettingspage.h:362
 msgid "Audio output"
 msgstr "အသံထွက်အား"
 
@@ -867,11 +887,12 @@ msgid "Authors"
 msgstr "စာဆိုများ"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:227
+#: ../bin/src/ui_playbacksettingspage.h:375
 msgid "Auto"
 msgstr "အလိုအလျောက်"
 
 #: playlist/playlistsaveoptionsdialog.cpp:32
-#: ../bin/src/ui_behavioursettingspage.h:307
+#: ../bin/src/ui_behavioursettingspage.h:341
 msgid "Automatic"
 msgstr "အလိုအလျောက်"
 
@@ -944,7 +965,7 @@ msgstr "အခြေခံအပြာရောင်"
 msgid "Basic audio type"
 msgstr "အခြေခံအသံအမျိုးအစား"
 
-#: ../bin/src/ui_behavioursettingspage.h:259
+#: ../bin/src/ui_behavioursettingspage.h:289
 msgid "Behavior"
 msgstr "လုပ်ဆောင်ပုံ"
 
@@ -1005,11 +1026,11 @@ msgstr "သေတ္တာ"
 msgid "Browse..."
 msgstr "လျှောက်ကြည့်..."
 
-#: ../bin/src/ui_playbacksettingspage.h:334
+#: ../bin/src/ui_playbacksettingspage.h:364
 msgid "Buffer duration"
 msgstr "ကြားခံကြာချိန်"
 
-#: engines/gstengine.cpp:904
+#: engines/gstengine.cpp:907
 msgid "Buffering"
 msgstr "ကြားခံ"
 
@@ -1054,7 +1075,7 @@ msgstr "ပယ်ဖျက်"
 msgid "Cancel download"
 msgstr ""
 
-#: internet/vk/vkservice.cpp:626
+#: internet/vk/vkservice.cpp:635
 msgid ""
 "Captcha is needed.\n"
 "Try to login into Vk.com with your browser,to fix this problem."
@@ -1084,7 +1105,11 @@ msgstr "ကုလားဖန်ထိုးစနစ်ပြောင်းလ
 msgid "Change the language"
 msgstr "ဒီဘာသာစကားပြောင်းလဲ"
 
-#: ../bin/src/ui_playbacksettingspage.h:338
+#: ../bin/src/ui_playbacksettingspage.h:382
+msgid "Changes will take place when the next song starts playing"
+msgstr ""
+
+#: ../bin/src/ui_playbacksettingspage.h:369
 msgid ""
 "Changing mono playback preference will be effective for the next playing "
 "songs"
@@ -1110,7 +1135,7 @@ msgstr "Vk.com မှတ်ဉာဏ်ဝှက်ဖိုင်လမ်း�
 msgid "Choose a name for your smart playlist"
 msgstr "သင့်ရဲ့ချက်ချာသီချင်းစာရင်းအတွက်နာမည်တစ်ခုရွေး"
 
-#: engines/gstengine.cpp:925
+#: engines/gstengine.cpp:928
 msgid "Choose automatically"
 msgstr "အလိုအလျောက်ရွေးချယ်ခြင်း"
 
@@ -1296,7 +1321,7 @@ msgstr "အမျိုးအစားစာရင်းခွဲခြားရ
 msgid "Comment"
 msgstr "ထင်မြင်ချက်"
 
-#: internet/vk/vkservice.cpp:154
+#: internet/vk/vkservice.cpp:155
 msgid "Community Radio"
 msgstr "အသိုင်းအဝိုင်းရေဒီယို"
 
@@ -1335,7 +1360,7 @@ msgstr "စပေါ့တီဖိုင်ပုံစံပြင်..."
 msgid "Configure Subsonic..."
 msgstr "ဆပ်ဆိုးနစ်ပုံစံပြင်..."
 
-#: internet/vk/vkservice.cpp:337
+#: internet/vk/vkservice.cpp:346
 msgid "Configure Vk.com..."
 msgstr "Vk.com ပုံစံပြင်..."
 
@@ -1382,7 +1407,7 @@ msgid ""
 "Connection timed out, check server URL. Example: http://localhost:4040/"
 msgstr "ဆက်သွယ်ချိန်ကုန်ဆံုး၊ ဆာဗာယူအာအယ်ပြန်စစ်ဆေးပါ။ ဥပမာ: http://localhost:4040/"
 
-#: internet/vk/vkservice.cpp:1095
+#: internet/vk/vkservice.cpp:1113
 msgid "Connection trouble or audio is disabled by owner"
 msgstr ""
 
@@ -1410,7 +1435,7 @@ msgstr ""
 msgid "Convert lossless files"
 msgstr ""
 
-#: internet/vk/vkservice.cpp:324
+#: internet/vk/vkservice.cpp:333
 msgid "Copy share url to clipboard"
 msgstr ""
 
@@ -1502,11 +1527,11 @@ msgstr "%1 မှအနုပညာအဖုံးသတ်မှတ်"
 msgid "Covers from %1"
 msgstr "%1 မှအဖုံးများ"
 
-#: ../bin/src/ui_playbacksettingspage.h:315
+#: ../bin/src/ui_playbacksettingspage.h:345
 msgid "Cross-fade when changing tracks automatically"
 msgstr "တေးသံလမ်းကြောများအလိုအလျောက်ပြောင်းလဲသွားသောအခါအရောင်မှိန်ဖြတ်သန်း"
 
-#: ../bin/src/ui_playbacksettingspage.h:314
+#: ../bin/src/ui_playbacksettingspage.h:344
 msgid "Cross-fade when changing tracks manually"
 msgstr "တေးသံလမ်းကြောများလက်အားသံုးပြောင်းလဲသွားသောအခါအရောင်မှိန်ဖြတ်သန်း"
 
@@ -1645,7 +1670,7 @@ msgstr "အသံပမာဏလျှော့ချ"
 msgid "Default background image"
 msgstr "မူလပံုစံနောက်ခံပုံ"
 
-#: engines/gstengine.cpp:950
+#: engines/gstengine.cpp:953
 #, qt-format
 msgid "Default device on %1"
 msgstr ""
@@ -1863,7 +1888,7 @@ msgstr "လှုဒါန်း"
 msgid "Double click to open"
 msgstr "ဖွင့်ရန်ကလစ်နှစ်ခါနှိပ်"
 
-#: ../bin/src/ui_behavioursettingspage.h:292
+#: ../bin/src/ui_behavioursettingspage.h:322
 msgid "Double clicking a song will..."
 msgstr "ကလစ်နှစ်ခါနှိပ်ခြင်းဖြင့်သီချင်းဟာ..."
 
@@ -2022,7 +2047,7 @@ msgstr "အသံထိန်းညှိသူလုပ်ဆောင်စေ
 msgid "Enable shortcuts only when Clementine is focused"
 msgstr "ကလီမန်တိုင်းအလုပ်လုပ်နေစဉ်အတိုကောက်များလုပ်ဆောင်စေ"
 
-#: ../bin/src/ui_behavioursettingspage.h:278
+#: ../bin/src/ui_behavioursettingspage.h:308
 msgid "Enable song metadata inline edition with click"
 msgstr ""
 
@@ -2112,7 +2137,7 @@ msgstr "Equivalent to --log-levels *:3တူညီ"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:242
 #: library/libraryview.cpp:630 ui/mainwindow.cpp:1931 ui/mainwindow.cpp:2178
-#: ui/mainwindow.cpp:2326 internet/vk/vkservice.cpp:625
+#: ui/mainwindow.cpp:2326 internet/vk/vkservice.cpp:634
 msgid "Error"
 msgstr "အမှားပြ"
 
@@ -2187,7 +2212,7 @@ msgstr "၆နာရီတိုင်း"
 msgid "Every hour"
 msgstr "နာရီတိုင်း"
 
-#: ../bin/src/ui_playbacksettingspage.h:316
+#: ../bin/src/ui_playbacksettingspage.h:346
 msgid "Except between tracks on the same album or in the same CUE sheet"
 msgstr "အယ်လဘမ်တူသို့ကယူးအပြားပေါ်မှတေးသံလမ်းကြောများအကြားမှလွဲ၍"
 
@@ -2259,20 +2284,20 @@ msgstr "အက်ဖ်၈"
 msgid "FLAC"
 msgstr "အက်ဖ်အယ်အေစီ"
 
-#: ../bin/src/ui_playbacksettingspage.h:319
+#: ../bin/src/ui_playbacksettingspage.h:349
 msgid "Fade out on pause / fade in on resume"
 msgstr "ရပ်တန့်နေစဥ်အပြင်သို့အရောင်မှိန်၊ပြန်စလျှင်အတွင်းသို့အရောင်မှိန်"
 
-#: ../bin/src/ui_playbacksettingspage.h:313
+#: ../bin/src/ui_playbacksettingspage.h:343
 msgid "Fade out when stopping a track"
 msgstr "တေးသံလမ်းကြောရပ်နေစဉ်အပြင်သို့အရောင်မှိန်"
 
-#: ../bin/src/ui_playbacksettingspage.h:312
+#: ../bin/src/ui_playbacksettingspage.h:342
 msgid "Fading"
 msgstr "အရောင်မှိန်"
 
-#: ../bin/src/ui_playbacksettingspage.h:317
-#: ../bin/src/ui_playbacksettingspage.h:320
+#: ../bin/src/ui_playbacksettingspage.h:347
+#: ../bin/src/ui_playbacksettingspage.h:350
 msgid "Fading duration"
 msgstr "အရောင်မှိန်ကြာချိန်"
 
@@ -2384,7 +2409,7 @@ msgstr "ဖိုင်များကိုပံုစံပြောင်း
 msgid "Find songs in your library that match the criteria you specify."
 msgstr "သတ်မှတ်ထားသောစံဟပ်စပ်သောသီချင်းများသီချင်းတိုက်တွင်ရှာဖွေ"
 
-#: internet/vk/vkservice.cpp:308
+#: internet/vk/vkservice.cpp:317
 msgid "Find this artist"
 msgstr ""
 
@@ -2400,7 +2425,7 @@ msgstr "ပြီးဆုံး"
 msgid "First level"
 msgstr "ပထမဆံုးအဆင့်"
 
-#: widgets/nowplayingwidget.cpp:107
+#: widgets/nowplayingwidget.cpp:108
 msgid "Fit cover to width"
 msgstr ""
 
@@ -2542,7 +2567,7 @@ msgstr "ဂူဂယ်ဒရိုက်ဗ်"
 msgid "Got %1 covers out of %2 (%3 failed)"
 msgstr "%1 အဖံုးများရရှိ %2 မှ (%3 ) ဖွင့်မရ"
 
-#: ../bin/src/ui_behavioursettingspage.h:274
+#: ../bin/src/ui_behavioursettingspage.h:304
 msgid "Grey out non existent songs in my playlists"
 msgstr "သီချင်းစာရင်းများတွင်မရှိနေသောသီချင်းများကိုမီးခိုးရောင်ပြ"
 
@@ -2655,7 +2680,7 @@ msgstr "သင်္ကေတများကိုအပေါ်သို့"
 msgid "Identifying song"
 msgstr "သီချင်းများစစ်ရွေးနေ"
 
-#: ../bin/src/ui_behavioursettingspage.h:276
+#: ../bin/src/ui_behavioursettingspage.h:306
 msgid ""
 "If activated, clicking a selected song in the playlist view will let you "
 "edit the tag value directly"
@@ -2837,7 +2862,7 @@ msgstr "ဂျမန်တိုယခုအပတ်ထိပ်တန်းတ
 msgid "Jamendo database"
 msgstr "ဂျမန်တိုအချက်အလက်အစု"
 
-#: ../bin/src/ui_behavioursettingspage.h:289
+#: ../bin/src/ui_behavioursettingspage.h:319
 msgid "Jump to previous song right away"
 msgstr ""
 
@@ -2857,7 +2882,7 @@ msgstr "ခလုတ်များကို %1 စက္ကန့်ကြာ�
 msgid "Keep buttons for %1 seconds..."
 msgstr "ခလုတ်များကို %1 စက္ကန့်များကြာထိန်းထား..."
 
-#: ../bin/src/ui_behavioursettingspage.h:261
+#: ../bin/src/ui_behavioursettingspage.h:291
 msgid "Keep running in the background when the window is closed"
 msgstr "ဝင်းဒိုးပိတ်နေစဉ်နောက်ခံအလုပ်လုပ်စေခြင်း"
 
@@ -2874,7 +2899,7 @@ msgstr "ကြောင်ပေါက်စများ"
 msgid "Kuduro"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:263
+#: ../bin/src/ui_behavioursettingspage.h:293
 msgid "Language"
 msgstr "ဘာသာစကား"
 
@@ -2886,15 +2911,15 @@ msgstr "လက်ဆွဲကွန်ပျူတာ/နားကြပ်မ�
 msgid "Large Hall"
 msgstr "ခန်းမကြီး"
 
-#: widgets/nowplayingwidget.cpp:97
+#: widgets/nowplayingwidget.cpp:98
 msgid "Large album cover"
 msgstr "အယ်လဘမ်အဖုံးကြီး"
 
-#: widgets/nowplayingwidget.cpp:100
+#: widgets/nowplayingwidget.cpp:101
 msgid "Large album cover (details below)"
 msgstr ""
 
-#: widgets/nowplayingwidget.cpp:102
+#: widgets/nowplayingwidget.cpp:103
 msgid "Large album cover (no details)"
 msgstr ""
 
@@ -3038,7 +3063,7 @@ msgstr "တေးသံလမ်းကြောအချက်အလက်မျ
 #: internet/podcasts/podcastdiscoverymodel.cpp:105 widgets/prettyimage.cpp:168
 #: widgets/widgetfadehelper.cpp:96 ../bin/src/ui_addpodcastdialog.h:180
 #: ../bin/src/ui_searchpreview.h:106 ../bin/src/ui_organisedialog.h:262
-#: internet/vk/vkservice.cpp:499 internet/vk/vksettingspage.cpp:122
+#: internet/vk/vkservice.cpp:508 internet/vk/vksettingspage.cpp:122
 msgid "Loading..."
 msgstr "ထည့်သွင်းနေ..."
 
@@ -3227,7 +3252,7 @@ msgstr "အသင်းဝင်အမျိုးအစား"
 msgid "Minimum bitrate"
 msgstr "အနည်းဆုံးဘစ်နှုန်း"
 
-#: ../bin/src/ui_playbacksettingspage.h:336
+#: ../bin/src/ui_playbacksettingspage.h:366
 msgid "Minimum buffer fill"
 msgstr ""
 
@@ -3243,7 +3268,7 @@ msgstr "ပုံစံ"
 msgid "Monitor the library for changes"
 msgstr "သီချင်းတိုက်ပြောင်းလဲမှုများစောင့်ကြည့်"
 
-#: ../bin/src/ui_playbacksettingspage.h:340
+#: ../bin/src/ui_playbacksettingspage.h:371
 msgid "Mono playback"
 msgstr "မိုနိတစ်ခုတည်း"
 
@@ -3264,7 +3289,7 @@ msgstr "စိတ်နေစိတ်ထားဘားမျဉ်းပုံ
 msgid "Moodbars"
 msgstr "စိတ်နေစိတ်ထားဘားမျဉ်းများ"
 
-#: internet/vk/vkservice.cpp:503
+#: internet/vk/vkservice.cpp:512
 msgid "More"
 msgstr "နောက်ထပ်"
 
@@ -3295,7 +3320,7 @@ msgid "Move up"
 msgstr "အပေါ်သို့ရွှေ့"
 
 #: transcoder/transcodedialog.cpp:225 ui/mainwindow.cpp:1866
-#: internet/vk/vkservice.cpp:884
+#: internet/vk/vkservice.cpp:893
 msgid "Music"
 msgstr "ဂီတ"
 
@@ -3308,15 +3333,15 @@ msgstr "ဂီတတိုက်"
 msgid "Mute"
 msgstr "အသံအုပ်"
 
-#: internet/vk/vkservice.cpp:820
+#: internet/vk/vkservice.cpp:829
 msgid "My Albums"
 msgstr ""
 
-#: internet/vk/vkservice.cpp:878
+#: internet/vk/vkservice.cpp:887
 msgid "My Music"
 msgstr "ငါ့ဂီတ"
 
-#: internet/vk/vkservice.cpp:510
+#: internet/vk/vkservice.cpp:519
 msgid "My Recommendations"
 msgstr "ငါ့ထောက်ခံချက်များ"
 
@@ -3354,8 +3379,8 @@ msgstr "ဘယ်သောအခါမှ"
 msgid "Never played"
 msgstr "သီချင်းမဖွင့်ခဲ့သမျှ"
 
-#: ../bin/src/ui_behavioursettingspage.h:282
-#: ../bin/src/ui_behavioursettingspage.h:302
+#: ../bin/src/ui_behavioursettingspage.h:312
+#: ../bin/src/ui_behavioursettingspage.h:332
 msgid "Never start playing"
 msgstr "သီချင်းလုံးဝစတင်မဖွင့်"
 
@@ -3595,7 +3620,7 @@ msgstr "ဂူဂယ်ဒရိုက်ဗ်တွင်ဖွင့်"
 msgid "Open in new playlist"
 msgstr "သီချင်းစာရင်းအသစ်တွင်ဖွင့်"
 
-#: ../bin/src/ui_behavioursettingspage.h:297
+#: ../bin/src/ui_behavioursettingspage.h:327
 msgctxt "Refers to behavior settings in Clementine settings page."
 msgid "Open in new playlist"
 msgstr ""
@@ -3670,7 +3695,7 @@ msgstr "အခြားရွေးပိုင်ခွင့်များ"
 msgid "Output"
 msgstr "ပေးပို့"
 
-#: ../bin/src/ui_playbacksettingspage.h:333
+#: ../bin/src/ui_playbacksettingspage.h:363
 msgid "Output device"
 msgstr "ပေးပို့ပစ္စည်း"
 
@@ -3753,8 +3778,8 @@ msgstr "ဖွင့်သံအရေအတွက်"
 msgid "Play if stopped, pause if playing"
 msgstr "ရပ်တန့်ပြီးလျှင်ဖွင့်၊ ဖွင့်ပြီးလျှင်ရပ်တန့်"
 
-#: ../bin/src/ui_behavioursettingspage.h:283
-#: ../bin/src/ui_behavioursettingspage.h:303
+#: ../bin/src/ui_behavioursettingspage.h:313
+#: ../bin/src/ui_behavioursettingspage.h:333
 msgid "Play if there is nothing already playing"
 msgstr "ဘယ်သီချင်းမှဖွင့်မနေလျှင်စတင်ဖွင့်"
 
@@ -3766,7 +3791,7 @@ msgstr "သီချင်းစာရင်းတွင်တေးသံလမ
 msgid "Play/Pause"
 msgstr "ဖွင့်/ရပ်တန့်"
 
-#: ../bin/src/ui_playbacksettingspage.h:310
+#: ../bin/src/ui_playbacksettingspage.h:340
 msgid "Playback"
 msgstr "ပြန်ဖွင့်"
 
@@ -3823,7 +3848,7 @@ msgstr "ထွက်ပေါ်ကြာချိန်"
 msgid "Port"
 msgstr "နံပါတ်ပေါက်"
 
-#: ui/equalizer.cpp:44 ../bin/src/ui_playbacksettingspage.h:330
+#: ui/equalizer.cpp:44 ../bin/src/ui_playbacksettingspage.h:360
 msgid "Pre-amp"
 msgstr "အသံချဲ့အကြို"
 
@@ -3879,7 +3904,7 @@ msgstr "စာတစ်လံုးခေါက်"
 msgid "Press a key combination to use for %1..."
 msgstr "%1 အတွက်အသုံးပြုရန်ခလုတ်များပေါင်းခေါက်..."
 
-#: ../bin/src/ui_behavioursettingspage.h:286
+#: ../bin/src/ui_behavioursettingspage.h:316
 msgid "Pressing \"Previous\" in player will..."
 msgstr ""
 
@@ -3962,7 +3987,7 @@ msgstr "ရွေးချယ်တေးသံလမ်းကြောမျာ
 msgid "Queue track"
 msgstr "တေးသံလမ်းကြောစီတန်း"
 
-#: ../bin/src/ui_playbacksettingspage.h:327
+#: ../bin/src/ui_playbacksettingspage.h:357
 msgid "Radio (equal loudness for all tracks)"
 msgstr "ရေဒီယို (တေးသံလမ်းကြောများအားလံုးအတွက်တူညီအသံကျယ်ကျယ်)"
 
@@ -4039,7 +4064,7 @@ msgid "Reggae"
 msgstr "ရက်ပ်ဂယ်"
 
 #: playlist/playlistsaveoptionsdialog.cpp:33
-#: ../bin/src/ui_behavioursettingspage.h:309
+#: ../bin/src/ui_behavioursettingspage.h:343
 msgid "Relative"
 msgstr "အဆက်အစပ်"
 
@@ -4047,7 +4072,7 @@ msgstr "အဆက်အစပ်"
 msgid "Remember Wii remote swing"
 msgstr "ဝီအဝေးထိန်းပြောင်းလဲခြင်းမှတ်သား"
 
-#: ../bin/src/ui_behavioursettingspage.h:272
+#: ../bin/src/ui_behavioursettingspage.h:302
 msgid "Remember from last time"
 msgstr "နောက်ဆံုးအချိန်မှမှတ်သား"
 
@@ -4072,11 +4097,11 @@ msgstr "သီချင်းစာရင်းမှပုံတူများ
 msgid "Remove folder"
 msgstr "ဖိုင်တွဲဖယ်ရှား"
 
-#: internet/vk/vkservice.cpp:316
+#: internet/vk/vkservice.cpp:325
 msgid "Remove from My Music"
 msgstr "ငါ့ဂီတမှဖယ်ရှား"
 
-#: internet/vk/vkservice.cpp:302
+#: internet/vk/vkservice.cpp:311
 msgid "Remove from bookmarks"
 msgstr "မှတ်သားခြင်းစာရင်းများမှဖယ်ရှား"
 
@@ -4130,7 +4155,7 @@ msgstr "တေးသံလမ်းကြောပြန်ဆို"
 msgid "Replace current playlist"
 msgstr "ယခုသီချင်းစာရင်းအစားထိုး"
 
-#: ../bin/src/ui_behavioursettingspage.h:296
+#: ../bin/src/ui_behavioursettingspage.h:326
 msgid "Replace the playlist"
 msgstr "သီချင်းစာရင်းအစားထိုး"
 
@@ -4138,11 +4163,11 @@ msgstr "သီချင်းစာရင်းအစားထိုး"
 msgid "Replaces spaces with underscores"
 msgstr "ကွက်လပ်များကိုအောက်မျဉ်းများနှင့်အစားထိုး"
 
-#: ../bin/src/ui_playbacksettingspage.h:322
+#: ../bin/src/ui_playbacksettingspage.h:352
 msgid "Replay Gain"
 msgstr "ရီပလေးဂိမ်း"
 
-#: ../bin/src/ui_playbacksettingspage.h:324
+#: ../bin/src/ui_playbacksettingspage.h:354
 msgid "Replay Gain mode"
 msgstr "ဂိမ်းစနစ်ပြန်ဖွင့်"
 
@@ -4162,7 +4187,7 @@ msgstr "ပြန်လည်ထိန်းညှိ"
 msgid "Reset play counts"
 msgstr "ဖွင့်သံအရေအတွက်များပြန်လည်ထိန်းညှိ"
 
-#: ../bin/src/ui_behavioursettingspage.h:290
+#: ../bin/src/ui_behavioursettingspage.h:320
 msgid "Restart song, then jump to previous if pressed again"
 msgstr ""
 
@@ -4175,7 +4200,7 @@ msgstr "တေးသံလမ်းကြောပြန်လည်စတင်
 msgid "Restrict to ASCII characters"
 msgstr "အက်စ်စီအက္ခရာများသို့ကန့်သတ်"
 
-#: ../bin/src/ui_behavioursettingspage.h:273
+#: ../bin/src/ui_behavioursettingspage.h:303
 msgid "Resume playback on start"
 msgstr "ပြန်ဖွင့်ကိုစသံုးတိုင်းပြန်စ"
 
@@ -4226,6 +4251,7 @@ msgid "Safely remove the device after copying"
 msgstr "ကူးယူပြီးနောက်ပစ္စည်းလုံလုံခြုံခြုံဖယ်ရှား"
 
 #: playlist/playlist.cpp:1357 ../bin/src/ui_edittagdialog.h:724
+#: ../bin/src/ui_playbacksettingspage.h:372
 msgid "Sample rate"
 msgstr "နမူနာနှုန်း"
 
@@ -4309,7 +4335,7 @@ msgstr ""
 
 #: ui/albumcoversearcher.cpp:165 ui/albumcoversearcher.cpp:182
 #: ../bin/src/ui_gpoddersearchpage.h:78 ../bin/src/ui_itunessearchpage.h:78
-#: ../bin/src/ui_albumcoversearcher.h:114 internet/vk/vkservice.cpp:518
+#: ../bin/src/ui_albumcoversearcher.h:114 internet/vk/vkservice.cpp:527
 msgid "Search"
 msgstr "ရှာဖွေ"
 
@@ -4391,6 +4417,10 @@ msgstr "လက်ရှိဖွင့်ဆဲတေးသံလမ်းကြ
 #: core/commandlineoptions.cpp:160
 msgid "Seek the currently playing track to an absolute position"
 msgstr "လက်ရှိဖွင့်ဆဲတေးသံလမ်းကြောမှပကတိနေရာသို့ရှာဖွေ"
+
+#: ../bin/src/ui_behavioursettingspage.h:336
+msgid "Seeking using a keyboard shortcut"
+msgstr ""
 
 #: visualisations/visualisationselector.cpp:37 ../bin/src/ui_ripcddialog.h:310
 msgid "Select All"
@@ -4488,7 +4518,7 @@ msgstr "ပြသ"
 msgid "Show OSD"
 msgstr "ဖန်သားပြင်ပေါ်ပံုရိပ်ပြသ"
 
-#: ../bin/src/ui_playbacksettingspage.h:311
+#: ../bin/src/ui_playbacksettingspage.h:341
 msgid "Show a glowing animation on the current track"
 msgstr "လက်ရှိတေးသံလမ်းကြောပေါ်ခပ်မှိန်မှိန်အန်နီမေးရှင်းပြသ"
 
@@ -4520,7 +4550,7 @@ msgstr "စနစ်အသေးမှထွက်ပေါ်ပြသ"
 msgid "Show a pretty OSD"
 msgstr "ဖန်သားပြင်ပေါ်ပံုရိပ်လှလှတစ်ခုပြသ"
 
-#: widgets/nowplayingwidget.cpp:139
+#: widgets/nowplayingwidget.cpp:140
 msgid "Show above status bar"
 msgstr "အခြေအနေပြတိုင်အပေါ်မှာပြသ"
 
@@ -4589,7 +4619,7 @@ msgstr ""
 msgid "Show the scrobble button in the main window"
 msgstr "အဓိကဝင်းဒိုးထဲတွင်လိုလျှောက်နာမည်ပေးပို့ခလုတ်ပြသ"
 
-#: ../bin/src/ui_behavioursettingspage.h:260
+#: ../bin/src/ui_behavioursettingspage.h:290
 msgid "Show tray icon"
 msgstr "စနစ်သင်္ကေတပြသ"
 
@@ -4669,7 +4699,7 @@ msgstr ""
 msgid "Skip track"
 msgstr ""
 
-#: widgets/nowplayingwidget.cpp:95
+#: widgets/nowplayingwidget.cpp:96
 msgid "Small album cover"
 msgstr "အယ်လဘမ်အဖုံးသေး"
 
@@ -5093,6 +5123,10 @@ msgstr "ယခုသီချင်းစီးကြောင်းသည်အ
 msgid "This type of device is not supported: %1"
 msgstr "ယခုပစ္စည်းအမျိုးအစားမလက်ခံ: %1"
 
+#: ../bin/src/ui_behavioursettingspage.h:337
+msgid "Time step"
+msgstr ""
+
 #: playlist/playlist.cpp:1315 ui/organisedialog.cpp:60
 #: ui/qtsystemtrayicon.cpp:232 ../bin/src/ui_about.h:142
 #: ../bin/src/ui_edittagdialog.h:734 ../bin/src/ui_trackselectiondialog.h:211
@@ -5251,7 +5285,7 @@ msgstr "မမှာယူ"
 msgid "Upcoming Concerts"
 msgstr "လာမည့်ဂီတဖြေဖျော်ပွဲများ"
 
-#: internet/vk/vkservice.cpp:332
+#: internet/vk/vkservice.cpp:341
 msgid "Update"
 msgstr "မွမ်းမံ"
 
@@ -5305,7 +5339,7 @@ msgstr "ဂျီနှုန်းအတိုကောက်ကီးမျာ
 msgid "Use Psychedelic Colors"
 msgstr ""
 
-#: ../bin/src/ui_playbacksettingspage.h:323
+#: ../bin/src/ui_playbacksettingspage.h:353
 msgid "Use Replay Gain metadata if it is available"
 msgstr "ရနိုင်ခဲ့ပါကရီပလေးဂိမ်းအချက်အလက်ဖွဲ့စည်းမှုသံုး"
 
@@ -5349,7 +5383,7 @@ msgstr "ဝီအဝေးထိန်းအခြေအနေအစီရင်
 msgid "Use temporal noise shaping"
 msgstr "ယာယီအနှောက်အယှက်ပံုသဏ္ဎာန်သံုး"
 
-#: ../bin/src/ui_behavioursettingspage.h:266
+#: ../bin/src/ui_behavioursettingspage.h:296
 msgid "Use the system default"
 msgstr "မူလစနစ်ပံုစံသံုး"
 
@@ -5381,7 +5415,7 @@ msgstr "အသံုးပြုသူမျက်နှာပြင်"
 msgid "Username"
 msgstr "အသင်းဝင်အမည်"
 
-#: ../bin/src/ui_behavioursettingspage.h:279
+#: ../bin/src/ui_behavioursettingspage.h:309
 msgid "Using the menu to add a song will..."
 msgstr "သီချင်းထည့်ရန်ဇယားကိုသံုးခြင်းသည်..."
 
@@ -5446,11 +5480,11 @@ msgstr "တပလူအေဗီ"
 msgid "WMA"
 msgstr "တပလူအမ်အေ"
 
-#: internet/vk/vkservice.cpp:860
+#: internet/vk/vkservice.cpp:869
 msgid "Wall"
 msgstr ""
 
-#: playlist/playlisttabbar.cpp:192 ../bin/src/ui_behavioursettingspage.h:262
+#: playlist/playlisttabbar.cpp:192 ../bin/src/ui_behavioursettingspage.h:292
 msgid "Warn me when closing a playlist tab"
 msgstr "သီချင်းစာရင်းမျက်နှာစာကိုပိတ်နေတုန်းသတိပေး"
 
@@ -5466,7 +5500,7 @@ msgstr "ဝက်ဘ်ဆိုက်"
 msgid "Weeks"
 msgstr "အပတ်များ"
 
-#: ../bin/src/ui_behavioursettingspage.h:269
+#: ../bin/src/ui_behavioursettingspage.h:299
 msgid "When Clementine starts"
 msgstr "ကလီမန်တိုင်းစတင်သောအခါ"
 
@@ -5476,7 +5510,7 @@ msgid ""
 "If there are no matches then it will use the largest image in the directory."
 msgstr "အယ်လဘမ်အနုပညာကိုရှာဖွေသောအခါကလီမန်တိုင်းသည်စကားလံုးပါဝင်သောပံုများကိုအရင်ရှာဖွေ။⏎ ဟက်စပ်မှုမရှိပါကဖိုင်လမ်းညွှန်ထဲရှိအကြီးဆံုးပံုကိုသံုး။"
 
-#: ../bin/src/ui_behavioursettingspage.h:306
+#: ../bin/src/ui_behavioursettingspage.h:340
 msgid "When saving a playlist, file paths should be"
 msgstr ""
 
@@ -5560,7 +5594,7 @@ msgstr "ယခုနောက်တစ်ချိန်အပြည့်ပြ
 msgid "Write all songs statistics into songs' files"
 msgstr "သီချင်းဖိုင်များထဲသို့သီချင်းများကိန်းဂဏန်းအချက်အလက်များရေးသား"
 
-#: ../bin/src/ui_behavioursettingspage.h:311
+#: ../bin/src/ui_behavioursettingspage.h:345
 msgid "Write metadata"
 msgstr ""
 
@@ -5680,7 +5714,7 @@ msgid ""
 "shortcuts in Clementine."
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:268
+#: ../bin/src/ui_behavioursettingspage.h:298
 msgid "You will need to restart Clementine if you change the language."
 msgstr "ဘာသာစကားပြောင်းလဲပါကကလီမန်တိုင်းကိုပြန်လည်စတင်ပါ။"
 

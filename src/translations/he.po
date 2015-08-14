@@ -14,9 +14,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2015-07-02 13:48+0000\n"
+"PO-Revision-Date: 2015-07-21 19:18+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
-"Language-Team: Hebrew (http://www.transifex.com/p/clementine/language/he/)\n"
+"Language-Team: Hebrew (http://www.transifex.com/davidsansome/clementine/language/he/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: he\n"
@@ -47,15 +47,19 @@ msgstr "ימים"
 msgid " kbps"
 msgstr "קילו בתים לשניה"
 
-#: ../bin/src/ui_playbacksettingspage.h:318
-#: ../bin/src/ui_playbacksettingspage.h:321
-#: ../bin/src/ui_playbacksettingspage.h:335
+#: ../bin/src/ui_playbacksettingspage.h:348
+#: ../bin/src/ui_playbacksettingspage.h:351
+#: ../bin/src/ui_playbacksettingspage.h:365
 msgid " ms"
 msgstr " מילישניות"
 
 #: ../bin/src/ui_songinfosettingspage.h:157
 msgid " pt"
 msgstr " נק׳"
+
+#: ../bin/src/ui_behavioursettingspage.h:338
+msgid " s"
+msgstr ""
 
 #: ../bin/src/ui_notificationssettingspage.h:445
 #: ../bin/src/ui_visualisationselector.h:116
@@ -66,7 +70,7 @@ msgstr " שניות"
 msgid " songs"
 msgstr " שירים"
 
-#: internet/vk/vkservice.cpp:148
+#: internet/vk/vkservice.cpp:149
 #, qt-format
 msgid "%1 (%2 songs)"
 msgstr "%1 (%2 שירים)"
@@ -275,13 +279,29 @@ msgstr "רצועה אחת"
 msgid "128k MP3"
 msgstr "128k MP3"
 
+#: ../bin/src/ui_playbacksettingspage.h:379
+msgid "192,000Hz"
+msgstr ""
+
 #: ../bin/src/ui_appearancesettingspage.h:291
 msgid "40%"
 msgstr "40%"
 
+#: ../bin/src/ui_playbacksettingspage.h:376
+msgid "44,100Hz"
+msgstr ""
+
+#: ../bin/src/ui_playbacksettingspage.h:377
+msgid "48,000Hz"
+msgstr ""
+
 #: library/library.cpp:64
 msgid "50 random tracks"
 msgstr "50 רצועות אקראיות"
+
+#: ../bin/src/ui_playbacksettingspage.h:378
+msgid "96,000Hz"
+msgstr ""
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:165
 msgid "<a href=\"http://www.di.fm/premium/\">Upgrade to Premium now</a>"
@@ -367,7 +387,7 @@ msgstr "AAC 64k"
 msgid "AIFF"
 msgstr "AIFF"
 
-#: widgets/nowplayingwidget.cpp:148
+#: widgets/nowplayingwidget.cpp:149
 msgid "ALL GLORY TO THE HYPNOTOAD"
 msgstr "הללו את ה־Hypnotoad!"
 
@@ -389,7 +409,7 @@ msgid "About Qt..."
 msgstr "על אודות Qt..."
 
 #: playlist/playlistsaveoptionsdialog.cpp:34
-#: ../bin/src/ui_behavioursettingspage.h:308
+#: ../bin/src/ui_behavioursettingspage.h:342
 msgid "Absolute"
 msgstr ""
 
@@ -554,7 +574,7 @@ msgstr "הוספת מספר דילוגים לשיר"
 msgid "Add song title tag"
 msgstr "הוספת תג כותרת לשיר"
 
-#: internet/vk/vkservice.cpp:320
+#: internet/vk/vkservice.cpp:329
 msgid "Add song to cache"
 msgstr "הוסף שיר למטמון"
 
@@ -574,7 +594,7 @@ msgstr "הוסף שירים ל-\"שירים שלי\" אם כפתור ה-\"אוה
 msgid "Add stream..."
 msgstr "הוספת תזרים"
 
-#: internet/vk/vkservice.cpp:312
+#: internet/vk/vkservice.cpp:321
 msgid "Add to My Music"
 msgstr "הוסף לשירים שלי"
 
@@ -590,7 +610,7 @@ msgstr "הוסף למועדפים של Spotify"
 msgid "Add to another playlist"
 msgstr "הוספה לרשימת השמעה אחרת"
 
-#: internet/vk/vkservice.cpp:298
+#: internet/vk/vkservice.cpp:307
 msgid "Add to bookmarks"
 msgstr "הוסף לסימניות"
 
@@ -598,11 +618,11 @@ msgstr "הוסף לסימניות"
 msgid "Add to playlist"
 msgstr "הוספה לרשימת ההשמעה"
 
-#: ../bin/src/ui_behavioursettingspage.h:298
+#: ../bin/src/ui_behavioursettingspage.h:328
 msgid "Add to the queue"
 msgstr "הוספה לתור"
 
-#: internet/vk/vkservice.cpp:328
+#: internet/vk/vkservice.cpp:337
 msgid "Add user/group to bookmarks"
 msgstr "הוסף משתמש\\קבוצה לסימניות"
 
@@ -656,7 +676,7 @@ msgstr "אחרי העתקה..."
 msgid "Album"
 msgstr "אלבום"
 
-#: ../bin/src/ui_playbacksettingspage.h:328
+#: ../bin/src/ui_playbacksettingspage.h:358
 msgid "Album (ideal loudness for all tracks)"
 msgstr "אלבום (עצמת שמע אידאלית לכל הרצועות)"
 
@@ -674,7 +694,7 @@ msgstr "עטיפת אלבום"
 msgid "Album info on jamendo.com..."
 msgstr "מידע על האלבום ב־jamendo.com..."
 
-#: internet/vk/vkservice.cpp:827
+#: internet/vk/vkservice.cpp:836
 msgid "Albums"
 msgstr "כל האלבומים"
 
@@ -740,16 +760,16 @@ msgstr "מתן האפשרות לקידוד mid/side"
 msgid "Alongside the originals"
 msgstr "צמוד למקוריים"
 
-#: ../bin/src/ui_behavioursettingspage.h:271
+#: ../bin/src/ui_behavioursettingspage.h:301
 msgid "Always hide the main window"
 msgstr "תמיד יש להסתיר את החלון המרכזי"
 
-#: ../bin/src/ui_behavioursettingspage.h:270
+#: ../bin/src/ui_behavioursettingspage.h:300
 msgid "Always show the main window"
 msgstr "תמיד יש להציג את החלון המרכזי"
 
-#: ../bin/src/ui_behavioursettingspage.h:284
-#: ../bin/src/ui_behavioursettingspage.h:304
+#: ../bin/src/ui_behavioursettingspage.h:314
+#: ../bin/src/ui_behavioursettingspage.h:334
 msgid "Always start playing"
 msgstr "תמיד להתחיל לנגן"
 
@@ -800,11 +820,11 @@ msgstr "הוסף קבצים/כתובות לסוף רשימת ההשמעה"
 msgid "Append to current playlist"
 msgstr "הוספה לרשימת ההשמעה הנוכחית"
 
-#: ../bin/src/ui_behavioursettingspage.h:295
+#: ../bin/src/ui_behavioursettingspage.h:325
 msgid "Append to the playlist"
 msgstr "הוספת לרשימת ההשמעה"
 
-#: ../bin/src/ui_playbacksettingspage.h:331
+#: ../bin/src/ui_playbacksettingspage.h:361
 msgid "Apply compression to prevent clipping"
 msgstr "הפעלת כיווץ כדי למנוע חיתוך"
 
@@ -844,7 +864,7 @@ msgstr "תגיות אמן"
 msgid "Artist's initial"
 msgstr "ראשי תיבות של האמן"
 
-#: ../bin/src/ui_behavioursettingspage.h:310
+#: ../bin/src/ui_behavioursettingspage.h:344
 msgid "Ask when saving"
 msgstr ""
 
@@ -854,7 +874,7 @@ msgstr ""
 msgid "Audio format"
 msgstr "להמיר לתבנית"
 
-#: ../bin/src/ui_playbacksettingspage.h:332
+#: ../bin/src/ui_playbacksettingspage.h:362
 msgid "Audio output"
 msgstr ""
 
@@ -874,11 +894,12 @@ msgid "Authors"
 msgstr "יוצרים"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:227
+#: ../bin/src/ui_playbacksettingspage.h:375
 msgid "Auto"
 msgstr "אוטומטי"
 
 #: playlist/playlistsaveoptionsdialog.cpp:32
-#: ../bin/src/ui_behavioursettingspage.h:307
+#: ../bin/src/ui_behavioursettingspage.h:341
 msgid "Automatic"
 msgstr ""
 
@@ -951,7 +972,7 @@ msgstr "כחול בסיסי"
 msgid "Basic audio type"
 msgstr "סוג שמע בסיסי"
 
-#: ../bin/src/ui_behavioursettingspage.h:259
+#: ../bin/src/ui_behavioursettingspage.h:289
 msgid "Behavior"
 msgstr "התנהגות"
 
@@ -1012,11 +1033,11 @@ msgstr "קופסא"
 msgid "Browse..."
 msgstr "עיון..."
 
-#: ../bin/src/ui_playbacksettingspage.h:334
+#: ../bin/src/ui_playbacksettingspage.h:364
 msgid "Buffer duration"
 msgstr "משך הבאפר (buffer)"
 
-#: engines/gstengine.cpp:904
+#: engines/gstengine.cpp:907
 msgid "Buffering"
 msgstr "באגירה"
 
@@ -1061,7 +1082,7 @@ msgstr "ביטול"
 msgid "Cancel download"
 msgstr "בטל הורדה"
 
-#: internet/vk/vkservice.cpp:626
+#: internet/vk/vkservice.cpp:635
 msgid ""
 "Captcha is needed.\n"
 "Try to login into Vk.com with your browser,to fix this problem."
@@ -1091,7 +1112,11 @@ msgstr "שינוי מצב ערבוב"
 msgid "Change the language"
 msgstr "שינוי השפה"
 
-#: ../bin/src/ui_playbacksettingspage.h:338
+#: ../bin/src/ui_playbacksettingspage.h:382
+msgid "Changes will take place when the next song starts playing"
+msgstr ""
+
+#: ../bin/src/ui_playbacksettingspage.h:369
 msgid ""
 "Changing mono playback preference will be effective for the next playing "
 "songs"
@@ -1117,7 +1142,7 @@ msgstr ""
 msgid "Choose a name for your smart playlist"
 msgstr "נא לבחור בשם עבור רשימת ההשמעה החכמה"
 
-#: engines/gstengine.cpp:925
+#: engines/gstengine.cpp:928
 msgid "Choose automatically"
 msgstr "בחירה אוטומטית"
 
@@ -1303,7 +1328,7 @@ msgstr "רשימה מופרדת בפסיקים של class:level,level יכול �
 msgid "Comment"
 msgstr "הערה"
 
-#: internet/vk/vkservice.cpp:154
+#: internet/vk/vkservice.cpp:155
 msgid "Community Radio"
 msgstr ""
 
@@ -1342,7 +1367,7 @@ msgstr "הגדרת Spotify..."
 msgid "Configure Subsonic..."
 msgstr "הגדרת תת קולי"
 
-#: internet/vk/vkservice.cpp:337
+#: internet/vk/vkservice.cpp:346
 msgid "Configure Vk.com..."
 msgstr ""
 
@@ -1389,7 +1414,7 @@ msgid ""
 "Connection timed out, check server URL. Example: http://localhost:4040/"
 msgstr ""
 
-#: internet/vk/vkservice.cpp:1095
+#: internet/vk/vkservice.cpp:1113
 msgid "Connection trouble or audio is disabled by owner"
 msgstr ""
 
@@ -1417,7 +1442,7 @@ msgstr ""
 msgid "Convert lossless files"
 msgstr ""
 
-#: internet/vk/vkservice.cpp:324
+#: internet/vk/vkservice.cpp:333
 msgid "Copy share url to clipboard"
 msgstr ""
 
@@ -1509,11 +1534,11 @@ msgstr "עטיפת אלבום נבחרה מתוך %1"
 msgid "Covers from %1"
 msgstr "עטיפות מ־%1"
 
-#: ../bin/src/ui_playbacksettingspage.h:315
+#: ../bin/src/ui_playbacksettingspage.h:345
 msgid "Cross-fade when changing tracks automatically"
 msgstr "מעבר באמצעות עמעום בין רצועות, בהחלפה אוטומטית של רצועות"
 
-#: ../bin/src/ui_playbacksettingspage.h:314
+#: ../bin/src/ui_playbacksettingspage.h:344
 msgid "Cross-fade when changing tracks manually"
 msgstr "מעבר באמצעות עמעום בין רצועות, בהחלפה ידנית של רצועות"
 
@@ -1652,7 +1677,7 @@ msgstr "הנמכת עצמת השמע"
 msgid "Default background image"
 msgstr "תמונת בררת המחדל לרקע"
 
-#: engines/gstengine.cpp:950
+#: engines/gstengine.cpp:953
 #, qt-format
 msgid "Default device on %1"
 msgstr ""
@@ -1870,7 +1895,7 @@ msgstr "לתרום"
 msgid "Double click to open"
 msgstr "לחיצה כפולה לפתיחה"
 
-#: ../bin/src/ui_behavioursettingspage.h:292
+#: ../bin/src/ui_behavioursettingspage.h:322
 msgid "Double clicking a song will..."
 msgstr "לחיצה כפולה על שיר לביצוע..."
 
@@ -2029,7 +2054,7 @@ msgstr "הפעלת אקולייזר"
 msgid "Enable shortcuts only when Clementine is focused"
 msgstr "הפעלת קיצורי מקלדת רק כאשר המיקוד הוא על Clementine"
 
-#: ../bin/src/ui_behavioursettingspage.h:278
+#: ../bin/src/ui_behavioursettingspage.h:308
 msgid "Enable song metadata inline edition with click"
 msgstr ""
 
@@ -2119,7 +2144,7 @@ msgstr "זהה לאפשרות--log-levels *:3"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:242
 #: library/libraryview.cpp:630 ui/mainwindow.cpp:1931 ui/mainwindow.cpp:2178
-#: ui/mainwindow.cpp:2326 internet/vk/vkservice.cpp:625
+#: ui/mainwindow.cpp:2326 internet/vk/vkservice.cpp:634
 msgid "Error"
 msgstr "שגיאה"
 
@@ -2194,7 +2219,7 @@ msgstr "בכל 6 שעות"
 msgid "Every hour"
 msgstr "בכל שעה"
 
-#: ../bin/src/ui_playbacksettingspage.h:316
+#: ../bin/src/ui_playbacksettingspage.h:346
 msgid "Except between tracks on the same album or in the same CUE sheet"
 msgstr "מלבד בין שירים באותו אלבום או אותו CUE sheet"
 
@@ -2266,20 +2291,20 @@ msgstr "F8"
 msgid "FLAC"
 msgstr "FLAC"
 
-#: ../bin/src/ui_playbacksettingspage.h:319
+#: ../bin/src/ui_playbacksettingspage.h:349
 msgid "Fade out on pause / fade in on resume"
 msgstr ""
 
-#: ../bin/src/ui_playbacksettingspage.h:313
+#: ../bin/src/ui_playbacksettingspage.h:343
 msgid "Fade out when stopping a track"
 msgstr "עמעום המוזיקה בעצירת רצועה"
 
-#: ../bin/src/ui_playbacksettingspage.h:312
+#: ../bin/src/ui_playbacksettingspage.h:342
 msgid "Fading"
 msgstr "עמעום מוזיקה"
 
-#: ../bin/src/ui_playbacksettingspage.h:317
-#: ../bin/src/ui_playbacksettingspage.h:320
+#: ../bin/src/ui_playbacksettingspage.h:347
+#: ../bin/src/ui_playbacksettingspage.h:350
 msgid "Fading duration"
 msgstr "משך זמן עמעום המוזיקה"
 
@@ -2391,7 +2416,7 @@ msgstr "קובצי מוזיקה להמרה"
 msgid "Find songs in your library that match the criteria you specify."
 msgstr "חיפוש שירים בספרייה על פי קריטריונים מוגדרים."
 
-#: internet/vk/vkservice.cpp:308
+#: internet/vk/vkservice.cpp:317
 msgid "Find this artist"
 msgstr ""
 
@@ -2407,7 +2432,7 @@ msgstr "סיום"
 msgid "First level"
 msgstr "רמה ראשונה"
 
-#: widgets/nowplayingwidget.cpp:107
+#: widgets/nowplayingwidget.cpp:108
 msgid "Fit cover to width"
 msgstr ""
 
@@ -2549,7 +2574,7 @@ msgstr "גוגל דרייב"
 msgid "Got %1 covers out of %2 (%3 failed)"
 msgstr "נמצאו %1 עטיפות מתוך %2 (%3 נכשלו)"
 
-#: ../bin/src/ui_behavioursettingspage.h:274
+#: ../bin/src/ui_behavioursettingspage.h:304
 msgid "Grey out non existent songs in my playlists"
 msgstr "ברשימת ההשמעה, סימון שירים שאינם קיימים באפור"
 
@@ -2662,7 +2687,7 @@ msgstr "צלמיות למעלה"
 msgid "Identifying song"
 msgstr "מזהה שיר"
 
-#: ../bin/src/ui_behavioursettingspage.h:276
+#: ../bin/src/ui_behavioursettingspage.h:306
 msgid ""
 "If activated, clicking a selected song in the playlist view will let you "
 "edit the tag value directly"
@@ -2844,7 +2869,7 @@ msgstr "הרצועות החמות ביותר השבוע ב־Jamendo"
 msgid "Jamendo database"
 msgstr "מסד הנתונים של Jamendo"
 
-#: ../bin/src/ui_behavioursettingspage.h:289
+#: ../bin/src/ui_behavioursettingspage.h:319
 msgid "Jump to previous song right away"
 msgstr ""
 
@@ -2864,7 +2889,7 @@ msgstr "השארת הלחצנים ל־%1 שניות..."
 msgid "Keep buttons for %1 seconds..."
 msgstr "השארת הלחצנים ל-%1 שניות..."
 
-#: ../bin/src/ui_behavioursettingspage.h:261
+#: ../bin/src/ui_behavioursettingspage.h:291
 msgid "Keep running in the background when the window is closed"
 msgstr "להמשיך ולהריץ ברקע כאשר החלון סגור"
 
@@ -2881,7 +2906,7 @@ msgstr ""
 msgid "Kuduro"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:263
+#: ../bin/src/ui_behavioursettingspage.h:293
 msgid "Language"
 msgstr "שפה"
 
@@ -2893,15 +2918,15 @@ msgstr "מחשב נייד/אוזניות"
 msgid "Large Hall"
 msgstr "חלל גדול"
 
-#: widgets/nowplayingwidget.cpp:97
+#: widgets/nowplayingwidget.cpp:98
 msgid "Large album cover"
 msgstr "עטיפת אלבום גדולה"
 
-#: widgets/nowplayingwidget.cpp:100
+#: widgets/nowplayingwidget.cpp:101
 msgid "Large album cover (details below)"
 msgstr ""
 
-#: widgets/nowplayingwidget.cpp:102
+#: widgets/nowplayingwidget.cpp:103
 msgid "Large album cover (no details)"
 msgstr ""
 
@@ -3045,7 +3070,7 @@ msgstr "נטען מידע אודות השירים"
 #: internet/podcasts/podcastdiscoverymodel.cpp:105 widgets/prettyimage.cpp:168
 #: widgets/widgetfadehelper.cpp:96 ../bin/src/ui_addpodcastdialog.h:180
 #: ../bin/src/ui_searchpreview.h:106 ../bin/src/ui_organisedialog.h:262
-#: internet/vk/vkservice.cpp:499 internet/vk/vksettingspage.cpp:122
+#: internet/vk/vkservice.cpp:508 internet/vk/vksettingspage.cpp:122
 msgid "Loading..."
 msgstr "בטעינה..."
 
@@ -3234,7 +3259,7 @@ msgstr "סוג חברות"
 msgid "Minimum bitrate"
 msgstr "קצב סיביות מזערי"
 
-#: ../bin/src/ui_playbacksettingspage.h:336
+#: ../bin/src/ui_playbacksettingspage.h:366
 msgid "Minimum buffer fill"
 msgstr ""
 
@@ -3250,7 +3275,7 @@ msgstr "דגם"
 msgid "Monitor the library for changes"
 msgstr "מעקב אחר שינויים בספרייה"
 
-#: ../bin/src/ui_playbacksettingspage.h:340
+#: ../bin/src/ui_playbacksettingspage.h:371
 msgid "Mono playback"
 msgstr "השמעת מונו"
 
@@ -3271,7 +3296,7 @@ msgstr "סגנון סרגל האווירה"
 msgid "Moodbars"
 msgstr "סרגלי אווירה"
 
-#: internet/vk/vkservice.cpp:503
+#: internet/vk/vkservice.cpp:512
 msgid "More"
 msgstr ""
 
@@ -3302,7 +3327,7 @@ msgid "Move up"
 msgstr "הזזה מעלה"
 
 #: transcoder/transcodedialog.cpp:225 ui/mainwindow.cpp:1866
-#: internet/vk/vkservice.cpp:884
+#: internet/vk/vkservice.cpp:893
 msgid "Music"
 msgstr "מוזיקה"
 
@@ -3315,15 +3340,15 @@ msgstr "ספריית המוזיקה"
 msgid "Mute"
 msgstr "השתקה"
 
-#: internet/vk/vkservice.cpp:820
+#: internet/vk/vkservice.cpp:829
 msgid "My Albums"
 msgstr ""
 
-#: internet/vk/vkservice.cpp:878
+#: internet/vk/vkservice.cpp:887
 msgid "My Music"
 msgstr "המוסיקה שלי"
 
-#: internet/vk/vkservice.cpp:510
+#: internet/vk/vkservice.cpp:519
 msgid "My Recommendations"
 msgstr "ההמלצות שלי"
 
@@ -3361,8 +3386,8 @@ msgstr "לעולם לא"
 msgid "Never played"
 msgstr "לא נוגן אף פעם"
 
-#: ../bin/src/ui_behavioursettingspage.h:282
-#: ../bin/src/ui_behavioursettingspage.h:302
+#: ../bin/src/ui_behavioursettingspage.h:312
+#: ../bin/src/ui_behavioursettingspage.h:332
 msgid "Never start playing"
 msgstr "אין להתחיל להשמיע אף פעם"
 
@@ -3602,7 +3627,7 @@ msgstr "פתיחה ב "
 msgid "Open in new playlist"
 msgstr "פתיחה ברשימת השמעה חדשה"
 
-#: ../bin/src/ui_behavioursettingspage.h:297
+#: ../bin/src/ui_behavioursettingspage.h:327
 msgctxt "Refers to behavior settings in Clementine settings page."
 msgid "Open in new playlist"
 msgstr ""
@@ -3677,7 +3702,7 @@ msgstr "אפשרויות נוספות"
 msgid "Output"
 msgstr "פלט"
 
-#: ../bin/src/ui_playbacksettingspage.h:333
+#: ../bin/src/ui_playbacksettingspage.h:363
 msgid "Output device"
 msgstr "התקן פלט"
 
@@ -3760,8 +3785,8 @@ msgstr "מונה השמעות"
 msgid "Play if stopped, pause if playing"
 msgstr "ניגון אם מושהה, השהייה אם מנגן"
 
-#: ../bin/src/ui_behavioursettingspage.h:283
-#: ../bin/src/ui_behavioursettingspage.h:303
+#: ../bin/src/ui_behavioursettingspage.h:313
+#: ../bin/src/ui_behavioursettingspage.h:333
 msgid "Play if there is nothing already playing"
 msgstr "השמעה אם אין שום שמושמע כרגע"
 
@@ -3773,7 +3798,7 @@ msgstr "נגן הרצועה ה־<n> מרשימת ההשמעה"
 msgid "Play/Pause"
 msgstr "ניגון/השהייה"
 
-#: ../bin/src/ui_playbacksettingspage.h:310
+#: ../bin/src/ui_playbacksettingspage.h:340
 msgid "Playback"
 msgstr "השמעה"
 
@@ -3830,7 +3855,7 @@ msgstr "משך זמן חלונית קופצת"
 msgid "Port"
 msgstr "פתחה"
 
-#: ui/equalizer.cpp:44 ../bin/src/ui_playbacksettingspage.h:330
+#: ui/equalizer.cpp:44 ../bin/src/ui_playbacksettingspage.h:360
 msgid "Pre-amp"
 msgstr "הגברה טרומית"
 
@@ -3886,7 +3911,7 @@ msgstr "יש ללחוץ על מקש כלשהו"
 msgid "Press a key combination to use for %1..."
 msgstr "יש ללחוץ על צירוף מקשים שיוקצה עבור %1..."
 
-#: ../bin/src/ui_behavioursettingspage.h:286
+#: ../bin/src/ui_behavioursettingspage.h:316
 msgid "Pressing \"Previous\" in player will..."
 msgstr ""
 
@@ -3969,7 +3994,7 @@ msgstr "הוספת הרצועות הנבחרות"
 msgid "Queue track"
 msgstr "הוספת הרצועה לתור"
 
-#: ../bin/src/ui_playbacksettingspage.h:327
+#: ../bin/src/ui_playbacksettingspage.h:357
 msgid "Radio (equal loudness for all tracks)"
 msgstr "רדיו (עצמה זהה לכל הרצועות)"
 
@@ -4046,7 +4071,7 @@ msgid "Reggae"
 msgstr "רגאיי"
 
 #: playlist/playlistsaveoptionsdialog.cpp:33
-#: ../bin/src/ui_behavioursettingspage.h:309
+#: ../bin/src/ui_behavioursettingspage.h:343
 msgid "Relative"
 msgstr ""
 
@@ -4054,7 +4079,7 @@ msgstr ""
 msgid "Remember Wii remote swing"
 msgstr "שמירת הנפת ה־Wii remote"
 
-#: ../bin/src/ui_behavioursettingspage.h:272
+#: ../bin/src/ui_behavioursettingspage.h:302
 msgid "Remember from last time"
 msgstr "שמירה מהפעם הקודמת"
 
@@ -4079,11 +4104,11 @@ msgstr "הסרת כפילויות מרשימת ההשמעה"
 msgid "Remove folder"
 msgstr "הסרת תיקייה"
 
-#: internet/vk/vkservice.cpp:316
+#: internet/vk/vkservice.cpp:325
 msgid "Remove from My Music"
 msgstr "הסרה מהמוסיקה שלי"
 
-#: internet/vk/vkservice.cpp:302
+#: internet/vk/vkservice.cpp:311
 msgid "Remove from bookmarks"
 msgstr ""
 
@@ -4137,7 +4162,7 @@ msgstr "חזרה על הרצועה"
 msgid "Replace current playlist"
 msgstr "החלפת רשימת ההשמעה הנוכחית"
 
-#: ../bin/src/ui_behavioursettingspage.h:296
+#: ../bin/src/ui_behavioursettingspage.h:326
 msgid "Replace the playlist"
 msgstr "החלפת רשימת ההשמעה"
 
@@ -4145,11 +4170,11 @@ msgstr "החלפת רשימת ההשמעה"
 msgid "Replaces spaces with underscores"
 msgstr "החלפת רווחים עם קו תחתון"
 
-#: ../bin/src/ui_playbacksettingspage.h:322
+#: ../bin/src/ui_playbacksettingspage.h:352
 msgid "Replay Gain"
 msgstr "הגברת ניגון חוזר"
 
-#: ../bin/src/ui_playbacksettingspage.h:324
+#: ../bin/src/ui_playbacksettingspage.h:354
 msgid "Replay Gain mode"
 msgstr ""
 
@@ -4169,7 +4194,7 @@ msgstr "איפוס"
 msgid "Reset play counts"
 msgstr "איפוס מונה ההשמעות"
 
-#: ../bin/src/ui_behavioursettingspage.h:290
+#: ../bin/src/ui_behavioursettingspage.h:320
 msgid "Restart song, then jump to previous if pressed again"
 msgstr ""
 
@@ -4182,7 +4207,7 @@ msgstr ""
 msgid "Restrict to ASCII characters"
 msgstr "הגבלה לתווי ASCII"
 
-#: ../bin/src/ui_behavioursettingspage.h:273
+#: ../bin/src/ui_behavioursettingspage.h:303
 msgid "Resume playback on start"
 msgstr ""
 
@@ -4233,6 +4258,7 @@ msgid "Safely remove the device after copying"
 msgstr "הסרת ההתקן באופן בטוח לאחר סיום ההעתקה"
 
 #: playlist/playlist.cpp:1357 ../bin/src/ui_edittagdialog.h:724
+#: ../bin/src/ui_playbacksettingspage.h:372
 msgid "Sample rate"
 msgstr "קצב הדגימה"
 
@@ -4316,7 +4342,7 @@ msgstr ""
 
 #: ui/albumcoversearcher.cpp:165 ui/albumcoversearcher.cpp:182
 #: ../bin/src/ui_gpoddersearchpage.h:78 ../bin/src/ui_itunessearchpage.h:78
-#: ../bin/src/ui_albumcoversearcher.h:114 internet/vk/vkservice.cpp:518
+#: ../bin/src/ui_albumcoversearcher.h:114 internet/vk/vkservice.cpp:527
 msgid "Search"
 msgstr "חיפוש"
 
@@ -4398,6 +4424,10 @@ msgstr "דילוג בתוך הרצועה המתנגנת כעת למיקום יח
 #: core/commandlineoptions.cpp:160
 msgid "Seek the currently playing track to an absolute position"
 msgstr "דילוג בתוך הרצועה המתנגנת כעת למיקום מוחלט"
+
+#: ../bin/src/ui_behavioursettingspage.h:336
+msgid "Seeking using a keyboard shortcut"
+msgstr ""
 
 #: visualisations/visualisationselector.cpp:37 ../bin/src/ui_ripcddialog.h:310
 msgid "Select All"
@@ -4495,7 +4525,7 @@ msgstr "הצגה"
 msgid "Show OSD"
 msgstr "הצגת חיווי המסך"
 
-#: ../bin/src/ui_playbacksettingspage.h:311
+#: ../bin/src/ui_playbacksettingspage.h:341
 msgid "Show a glowing animation on the current track"
 msgstr "הנפשה זוהרת על הרצועה הנוכחית"
 
@@ -4527,7 +4557,7 @@ msgstr "הצגת חלונית קופצת ממגשית המערכת"
 msgid "Show a pretty OSD"
 msgstr "הצגת חיווי מסך נאה"
 
-#: widgets/nowplayingwidget.cpp:139
+#: widgets/nowplayingwidget.cpp:140
 msgid "Show above status bar"
 msgstr "הצגה מעל לשורת המצב"
 
@@ -4596,7 +4626,7 @@ msgstr ""
 msgid "Show the scrobble button in the main window"
 msgstr "הצגת הכפתור scrobble בחלון הראשי"
 
-#: ../bin/src/ui_behavioursettingspage.h:260
+#: ../bin/src/ui_behavioursettingspage.h:290
 msgid "Show tray icon"
 msgstr "הצגת סמל באזור הדיווחים"
 
@@ -4676,7 +4706,7 @@ msgstr ""
 msgid "Skip track"
 msgstr ""
 
-#: widgets/nowplayingwidget.cpp:95
+#: widgets/nowplayingwidget.cpp:96
 msgid "Small album cover"
 msgstr "עטיפת אלבום קטנה"
 
@@ -5100,6 +5130,10 @@ msgstr "המדיה הזורמת הזו היא עבור חברות בתשלום �
 msgid "This type of device is not supported: %1"
 msgstr "סוג התקן זה לא נתמך: %1"
 
+#: ../bin/src/ui_behavioursettingspage.h:337
+msgid "Time step"
+msgstr ""
+
 #: playlist/playlist.cpp:1315 ui/organisedialog.cpp:60
 #: ui/qtsystemtrayicon.cpp:232 ../bin/src/ui_about.h:142
 #: ../bin/src/ui_edittagdialog.h:734 ../bin/src/ui_trackselectiondialog.h:211
@@ -5258,7 +5292,7 @@ msgstr "הסרת מינוי"
 msgid "Upcoming Concerts"
 msgstr "קונצרטים צפויים"
 
-#: internet/vk/vkservice.cpp:332
+#: internet/vk/vkservice.cpp:341
 msgid "Update"
 msgstr ""
 
@@ -5312,7 +5346,7 @@ msgstr "השתמש בקיצורי המקלדת של גנום"
 msgid "Use Psychedelic Colors"
 msgstr ""
 
-#: ../bin/src/ui_playbacksettingspage.h:323
+#: ../bin/src/ui_playbacksettingspage.h:353
 msgid "Use Replay Gain metadata if it is available"
 msgstr "שימוש במידע נוסף על הגברת ניגון חוזר אם זמין"
 
@@ -5356,7 +5390,7 @@ msgstr "שימוש בהתרעות לדיווח על מצב ה־Wii Remote"
 msgid "Use temporal noise shaping"
 msgstr "שימוש בתצורת רעשים טמפורלית"
 
-#: ../bin/src/ui_behavioursettingspage.h:266
+#: ../bin/src/ui_behavioursettingspage.h:296
 msgid "Use the system default"
 msgstr "שימוש בבררת המחדל של המערכת"
 
@@ -5388,7 +5422,7 @@ msgstr "מנשק משתמש"
 msgid "Username"
 msgstr "שם משתמש"
 
-#: ../bin/src/ui_behavioursettingspage.h:279
+#: ../bin/src/ui_behavioursettingspage.h:309
 msgid "Using the menu to add a song will..."
 msgstr "שימוש בתפריט להוספת שיר יגרום ל..."
 
@@ -5453,11 +5487,11 @@ msgstr "WAV"
 msgid "WMA"
 msgstr "WMA"
 
-#: internet/vk/vkservice.cpp:860
+#: internet/vk/vkservice.cpp:869
 msgid "Wall"
 msgstr ""
 
-#: playlist/playlisttabbar.cpp:192 ../bin/src/ui_behavioursettingspage.h:262
+#: playlist/playlisttabbar.cpp:192 ../bin/src/ui_behavioursettingspage.h:292
 msgid "Warn me when closing a playlist tab"
 msgstr ""
 
@@ -5473,7 +5507,7 @@ msgstr "אתר"
 msgid "Weeks"
 msgstr "שבועות"
 
-#: ../bin/src/ui_behavioursettingspage.h:269
+#: ../bin/src/ui_behavioursettingspage.h:299
 msgid "When Clementine starts"
 msgstr "בהפעלת Clementine"
 
@@ -5483,7 +5517,7 @@ msgid ""
 "If there are no matches then it will use the largest image in the directory."
 msgstr "בחיפוש אחר תמונות אלבום, Clementine יחפש קודם קבצי תמונה המכילים אחת המילים האלו.\nאם לא נמצאו קבצים מתאימים, אז תיבחר התמונה הגדולה ביותר בתיקייה."
 
-#: ../bin/src/ui_behavioursettingspage.h:306
+#: ../bin/src/ui_behavioursettingspage.h:340
 msgid "When saving a playlist, file paths should be"
 msgstr ""
 
@@ -5567,7 +5601,7 @@ msgstr "האם ברצונך לבצע סריקה חוזרת כעת?"
 msgid "Write all songs statistics into songs' files"
 msgstr "רשום את כל הסטטיסטיקות עבור השירים לתוך קבצי שירים"
 
-#: ../bin/src/ui_behavioursettingspage.h:311
+#: ../bin/src/ui_behavioursettingspage.h:345
 msgid "Write metadata"
 msgstr ""
 
@@ -5687,7 +5721,7 @@ msgid ""
 "shortcuts in Clementine."
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:268
+#: ../bin/src/ui_behavioursettingspage.h:298
 msgid "You will need to restart Clementine if you change the language."
 msgstr "יש להפעיל מחדש את Clementine לאחר שינוי השפה."
 

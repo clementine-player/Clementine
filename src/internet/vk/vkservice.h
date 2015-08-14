@@ -116,7 +116,8 @@ class VkService : public InternetService {
   static QString DefaultCacheDir();
   static const int kMaxVkSongList;
   static const int kMaxVkWallPostList;
-  static const int kCustomSongCount;
+  static const int kMaxVkSongCount;
+  static const int kSearchDelayMsec;
 
   enum ItemType {
     Type_Loading = InternetModel::TypeCount,
@@ -167,8 +168,8 @@ class VkService : public InternetService {
   // Return random song result from group playlist.
   UrlHandler::LoadResult GetGroupNextSongUrl(const QUrl& url);
 
-  void SongSearch(SearchID id, const QString& query, int count = 50,
-                  int offset = 0);
+  void SongSearch(SearchID id, const QString& query,
+                  int count = kMaxVkSongCount, int offset = 0);
   void GroupSearch(SearchID id, const QString& query);
 
   /* Settings */
@@ -181,7 +182,7 @@ class VkService : public InternetService {
   QString cacheFilename() const { return cacheFilename_; }
   bool isLoveAddToMyMusic() const { return love_is_add_to_mymusic_; }
 
- signals:
+signals:
   void NameUpdated(const QString& name);
   void ConnectionStateChanged(Vreen::Client::State state);
   void LoginSuccess(bool success);
@@ -195,6 +196,7 @@ class VkService : public InternetService {
   void UpdateRoot();
   void ShowConfig();
   void FindUserOrGroup(const QString& q);
+  void DoLocalSearch();
 
  private slots:
   /* Interface */
@@ -304,6 +306,7 @@ class VkService : public InternetService {
   // Keeping when more recent results recived.
   // Using for prevent loading tardy result instead.
   uint last_search_id_;
+  QTimer* search_delay_;
   QString last_query_;
   Song selected_song_;  // Store for context menu actions.
   Song current_song_;   // Store for actions with now playing song.

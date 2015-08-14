@@ -52,7 +52,7 @@ class UrlHandler : public QObject {
       TrackAvailable,
     };
 
-    LoadResult(const QUrl& original_url = QUrl(), Type type = NoMoreTracks,
+    LoadResult(const QUrl& original_url, Type type = NoMoreTracks,
                const QUrl& media_url = QUrl(), qint64 length_nanosec_ = -1);
 
     // The url that the playlist item has in Url().

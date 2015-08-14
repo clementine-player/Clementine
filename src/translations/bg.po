@@ -15,9 +15,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2015-07-02 13:48+0000\n"
+"PO-Revision-Date: 2015-07-21 19:18+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
-"Language-Team: Bulgarian (http://www.transifex.com/p/clementine/language/bg/)\n"
+"Language-Team: Bulgarian (http://www.transifex.com/davidsansome/clementine/language/bg/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: bg\n"
@@ -48,15 +48,19 @@ msgstr " дни"
 msgid " kbps"
 msgstr " кбита/сек"
 
-#: ../bin/src/ui_playbacksettingspage.h:318
-#: ../bin/src/ui_playbacksettingspage.h:321
-#: ../bin/src/ui_playbacksettingspage.h:335
+#: ../bin/src/ui_playbacksettingspage.h:348
+#: ../bin/src/ui_playbacksettingspage.h:351
+#: ../bin/src/ui_playbacksettingspage.h:365
 msgid " ms"
 msgstr " ms"
 
 #: ../bin/src/ui_songinfosettingspage.h:157
 msgid " pt"
 msgstr " точки"
+
+#: ../bin/src/ui_behavioursettingspage.h:338
+msgid " s"
+msgstr ""
 
 #: ../bin/src/ui_notificationssettingspage.h:445
 #: ../bin/src/ui_visualisationselector.h:116
@@ -67,7 +71,7 @@ msgstr " секунди"
 msgid " songs"
 msgstr " песни"
 
-#: internet/vk/vkservice.cpp:148
+#: internet/vk/vkservice.cpp:149
 #, qt-format
 msgid "%1 (%2 songs)"
 msgstr "%1 (%2 песни)"
@@ -276,13 +280,29 @@ msgstr "1 песен"
 msgid "128k MP3"
 msgstr "128k MP3"
 
+#: ../bin/src/ui_playbacksettingspage.h:379
+msgid "192,000Hz"
+msgstr ""
+
 #: ../bin/src/ui_appearancesettingspage.h:291
 msgid "40%"
 msgstr "40%"
 
+#: ../bin/src/ui_playbacksettingspage.h:376
+msgid "44,100Hz"
+msgstr ""
+
+#: ../bin/src/ui_playbacksettingspage.h:377
+msgid "48,000Hz"
+msgstr ""
+
 #: library/library.cpp:64
 msgid "50 random tracks"
 msgstr "50 случайни песни"
+
+#: ../bin/src/ui_playbacksettingspage.h:378
+msgid "96,000Hz"
+msgstr ""
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:165
 msgid "<a href=\"http://www.di.fm/premium/\">Upgrade to Premium now</a>"
@@ -368,7 +388,7 @@ msgstr "AAC 64k"
 msgid "AIFF"
 msgstr "AIFF"
 
-#: widgets/nowplayingwidget.cpp:148
+#: widgets/nowplayingwidget.cpp:149
 msgid "ALL GLORY TO THE HYPNOTOAD"
 msgstr "Славният хипножабок!"
 
@@ -390,7 +410,7 @@ msgid "About Qt..."
 msgstr "Относно QT..."
 
 #: playlist/playlistsaveoptionsdialog.cpp:34
-#: ../bin/src/ui_behavioursettingspage.h:308
+#: ../bin/src/ui_behavioursettingspage.h:342
 msgid "Absolute"
 msgstr "Абосолютен"
 
@@ -555,7 +575,7 @@ msgstr "Добавяне брой пропускания на песента"
 msgid "Add song title tag"
 msgstr "Добавяне на етикет за име на песен"
 
-#: internet/vk/vkservice.cpp:320
+#: internet/vk/vkservice.cpp:329
 msgid "Add song to cache"
 msgstr "Добавяне на песента към кеш"
 
@@ -575,7 +595,7 @@ msgstr "Добавяне на песните в \"Моята музика\", к�
 msgid "Add stream..."
 msgstr "Добавяне на поток..."
 
-#: internet/vk/vkservice.cpp:312
+#: internet/vk/vkservice.cpp:321
 msgid "Add to My Music"
 msgstr "Добавяне в Моята музика"
 
@@ -591,7 +611,7 @@ msgstr "Добавяне към оценените песни от Spotify"
 msgid "Add to another playlist"
 msgstr "Добави в друг списък с песни"
 
-#: internet/vk/vkservice.cpp:298
+#: internet/vk/vkservice.cpp:307
 msgid "Add to bookmarks"
 msgstr "Добавяне в отметки"
 
@@ -599,11 +619,11 @@ msgstr "Добавяне в отметки"
 msgid "Add to playlist"
 msgstr "Добавяне към списъка с песни"
 
-#: ../bin/src/ui_behavioursettingspage.h:298
+#: ../bin/src/ui_behavioursettingspage.h:328
 msgid "Add to the queue"
 msgstr "Добави към опашката"
 
-#: internet/vk/vkservice.cpp:328
+#: internet/vk/vkservice.cpp:337
 msgid "Add user/group to bookmarks"
 msgstr "Добавяне на потребител/група в отметки"
 
@@ -657,7 +677,7 @@ msgstr "След копиране..."
 msgid "Album"
 msgstr "Албум"
 
-#: ../bin/src/ui_playbacksettingspage.h:328
+#: ../bin/src/ui_playbacksettingspage.h:358
 msgid "Album (ideal loudness for all tracks)"
 msgstr "Албум (идеална сила на звука за всички песни)"
 
@@ -675,7 +695,7 @@ msgstr "Обложка на албума"
 msgid "Album info on jamendo.com..."
 msgstr "Информация за албума на jamendo.com..."
 
-#: internet/vk/vkservice.cpp:827
+#: internet/vk/vkservice.cpp:836
 msgid "Albums"
 msgstr "Албуми"
 
@@ -741,16 +761,16 @@ msgstr "Позволи mid/side кодиране"
 msgid "Alongside the originals"
 msgstr "Заедно с оригиналите"
 
-#: ../bin/src/ui_behavioursettingspage.h:271
+#: ../bin/src/ui_behavioursettingspage.h:301
 msgid "Always hide the main window"
 msgstr "Винаги скриване на основния прозорец"
 
-#: ../bin/src/ui_behavioursettingspage.h:270
+#: ../bin/src/ui_behavioursettingspage.h:300
 msgid "Always show the main window"
 msgstr "Винаги показвай основния прозорец"
 
-#: ../bin/src/ui_behavioursettingspage.h:284
-#: ../bin/src/ui_behavioursettingspage.h:304
+#: ../bin/src/ui_behavioursettingspage.h:314
+#: ../bin/src/ui_behavioursettingspage.h:334
 msgid "Always start playing"
 msgstr "Винаги започвай възпроизвеждането"
 
@@ -801,11 +821,11 @@ msgstr "Добавяне на файлове/URL адреси към списъ�
 msgid "Append to current playlist"
 msgstr "Добавяне към текущия списък с песни"
 
-#: ../bin/src/ui_behavioursettingspage.h:295
+#: ../bin/src/ui_behavioursettingspage.h:325
 msgid "Append to the playlist"
 msgstr "Добавяне към списъка с песни"
 
-#: ../bin/src/ui_playbacksettingspage.h:331
+#: ../bin/src/ui_playbacksettingspage.h:361
 msgid "Apply compression to prevent clipping"
 msgstr "Прилагане на компресия за да се предотврати орязване"
 
@@ -845,7 +865,7 @@ msgstr "Етикети за изпълнителя"
 msgid "Artist's initial"
 msgstr "Инициали на изпълнителя"
 
-#: ../bin/src/ui_behavioursettingspage.h:310
+#: ../bin/src/ui_behavioursettingspage.h:344
 msgid "Ask when saving"
 msgstr "Питай при запис"
 
@@ -855,7 +875,7 @@ msgstr "Питай при запис"
 msgid "Audio format"
 msgstr "Аудио формат"
 
-#: ../bin/src/ui_playbacksettingspage.h:332
+#: ../bin/src/ui_playbacksettingspage.h:362
 msgid "Audio output"
 msgstr "Аудио изход"
 
@@ -875,11 +895,12 @@ msgid "Authors"
 msgstr "Автори"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:227
+#: ../bin/src/ui_playbacksettingspage.h:375
 msgid "Auto"
 msgstr "Автоматично"
 
 #: playlist/playlistsaveoptionsdialog.cpp:32
-#: ../bin/src/ui_behavioursettingspage.h:307
+#: ../bin/src/ui_behavioursettingspage.h:341
 msgid "Automatic"
 msgstr "Автоматично"
 
@@ -952,7 +973,7 @@ msgstr "Основно синьо"
 msgid "Basic audio type"
 msgstr "Обикновен тип на звука"
 
-#: ../bin/src/ui_behavioursettingspage.h:259
+#: ../bin/src/ui_behavioursettingspage.h:289
 msgid "Behavior"
 msgstr "Поведение"
 
@@ -1013,11 +1034,11 @@ msgstr "Box"
 msgid "Browse..."
 msgstr "Избор…"
 
-#: ../bin/src/ui_playbacksettingspage.h:334
+#: ../bin/src/ui_playbacksettingspage.h:364
 msgid "Buffer duration"
 msgstr "Времетраене на буфера"
 
-#: engines/gstengine.cpp:904
+#: engines/gstengine.cpp:907
 msgid "Buffering"
 msgstr "Буфериране"
 
@@ -1062,7 +1083,7 @@ msgstr "Отказ"
 msgid "Cancel download"
 msgstr "Откажи свалянето"
 
-#: internet/vk/vkservice.cpp:626
+#: internet/vk/vkservice.cpp:635
 msgid ""
 "Captcha is needed.\n"
 "Try to login into Vk.com with your browser,to fix this problem."
@@ -1092,7 +1113,11 @@ msgstr "Смени режим разбъркване"
 msgid "Change the language"
 msgstr "Промяна на езика"
 
-#: ../bin/src/ui_playbacksettingspage.h:338
+#: ../bin/src/ui_playbacksettingspage.h:382
+msgid "Changes will take place when the next song starts playing"
+msgstr ""
+
+#: ../bin/src/ui_playbacksettingspage.h:369
 msgid ""
 "Changing mono playback preference will be effective for the next playing "
 "songs"
@@ -1118,7 +1143,7 @@ msgstr "Избор на Vk.com кеш папка"
 msgid "Choose a name for your smart playlist"
 msgstr "Изберете име за вашият умен списък с песни"
 
-#: engines/gstengine.cpp:925
+#: engines/gstengine.cpp:928
 msgid "Choose automatically"
 msgstr "Автоматичен избор"
 
@@ -1304,7 +1329,7 @@ msgstr "Разделен със запетаи списък с class:level, leve
 msgid "Comment"
 msgstr "Коментар"
 
-#: internet/vk/vkservice.cpp:154
+#: internet/vk/vkservice.cpp:155
 msgid "Community Radio"
 msgstr "Обществено радио"
 
@@ -1343,7 +1368,7 @@ msgstr "Настройване на Spotify..."
 msgid "Configure Subsonic..."
 msgstr "Конфигурация на Subsonic..."
 
-#: internet/vk/vkservice.cpp:337
+#: internet/vk/vkservice.cpp:346
 msgid "Configure Vk.com..."
 msgstr "Настройка на Vk.com..."
 
@@ -1390,7 +1415,7 @@ msgid ""
 "Connection timed out, check server URL. Example: http://localhost:4040/"
 msgstr "Позволеното време за връзка изтече, проверете URL адреса на съвъра. Например: http://localhost:4040/"
 
-#: internet/vk/vkservice.cpp:1095
+#: internet/vk/vkservice.cpp:1113
 msgid "Connection trouble or audio is disabled by owner"
 msgstr "Проблем при връзката, или аудиото е изключено от собственика"
 
@@ -1418,7 +1443,7 @@ msgstr "Конвертира lossless аудио файлове преди да 
 msgid "Convert lossless files"
 msgstr "Конвертиране на lossless файлове"
 
-#: internet/vk/vkservice.cpp:324
+#: internet/vk/vkservice.cpp:333
 msgid "Copy share url to clipboard"
 msgstr "Копиране на url адреса за споделяне в буфера"
 
@@ -1510,11 +1535,11 @@ msgstr "Обложката е зададена от %1"
 msgid "Covers from %1"
 msgstr "Обложки от %1"
 
-#: ../bin/src/ui_playbacksettingspage.h:315
+#: ../bin/src/ui_playbacksettingspage.h:345
 msgid "Cross-fade when changing tracks automatically"
 msgstr "Плавен преход при автоматична смяна на песни"
 
-#: ../bin/src/ui_playbacksettingspage.h:314
+#: ../bin/src/ui_playbacksettingspage.h:344
 msgid "Cross-fade when changing tracks manually"
 msgstr "Плавен преход при ръчна смяна на песни"
 
@@ -1653,7 +1678,7 @@ msgstr "Намаляване на звука"
 msgid "Default background image"
 msgstr "Фоново изображение по подразбиране"
 
-#: engines/gstengine.cpp:950
+#: engines/gstengine.cpp:953
 #, qt-format
 msgid "Default device on %1"
 msgstr "Устройство по подразбиране на %1"
@@ -1871,7 +1896,7 @@ msgstr "Дарете"
 msgid "Double click to open"
 msgstr "Двойно цъкване за отваряне"
 
-#: ../bin/src/ui_behavioursettingspage.h:292
+#: ../bin/src/ui_behavioursettingspage.h:322
 msgid "Double clicking a song will..."
 msgstr "Двойното цъкване върху песен ще..."
 
@@ -2030,7 +2055,7 @@ msgstr "Разреши еквалазйзера"
 msgid "Enable shortcuts only when Clementine is focused"
 msgstr "Разреши бързите клавиши, само когато Clementine е активен прозорец"
 
-#: ../bin/src/ui_behavioursettingspage.h:278
+#: ../bin/src/ui_behavioursettingspage.h:308
 msgid "Enable song metadata inline edition with click"
 msgstr "Позволи директна поправка на метаданните за песента при щракане"
 
@@ -2120,7 +2145,7 @@ msgstr "Еквивалентно на --log-levels *:3"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:242
 #: library/libraryview.cpp:630 ui/mainwindow.cpp:1931 ui/mainwindow.cpp:2178
-#: ui/mainwindow.cpp:2326 internet/vk/vkservice.cpp:625
+#: ui/mainwindow.cpp:2326 internet/vk/vkservice.cpp:634
 msgid "Error"
 msgstr "Грешка"
 
@@ -2195,7 +2220,7 @@ msgstr "Всеки 6 часа"
 msgid "Every hour"
 msgstr "Всеки час"
 
-#: ../bin/src/ui_playbacksettingspage.h:316
+#: ../bin/src/ui_playbacksettingspage.h:346
 msgid "Except between tracks on the same album or in the same CUE sheet"
 msgstr "Освен между песните в един и същи албум или в един и същи CUE лист"
 
@@ -2267,20 +2292,20 @@ msgstr "F8"
 msgid "FLAC"
 msgstr "FLAC"
 
-#: ../bin/src/ui_playbacksettingspage.h:319
+#: ../bin/src/ui_playbacksettingspage.h:349
 msgid "Fade out on pause / fade in on resume"
 msgstr "Заглушаване при пауза / плавен преход при продължаване"
 
-#: ../bin/src/ui_playbacksettingspage.h:313
+#: ../bin/src/ui_playbacksettingspage.h:343
 msgid "Fade out when stopping a track"
 msgstr "Заглушаване при спиране на песен"
 
-#: ../bin/src/ui_playbacksettingspage.h:312
+#: ../bin/src/ui_playbacksettingspage.h:342
 msgid "Fading"
 msgstr "Заглушаване"
 
-#: ../bin/src/ui_playbacksettingspage.h:317
-#: ../bin/src/ui_playbacksettingspage.h:320
+#: ../bin/src/ui_playbacksettingspage.h:347
+#: ../bin/src/ui_playbacksettingspage.h:350
 msgid "Fading duration"
 msgstr "Продължителност на заглушаване"
 
@@ -2392,7 +2417,7 @@ msgstr "Файлове за прекодиране"
 msgid "Find songs in your library that match the criteria you specify."
 msgstr "Намери песни в библиотеката, които спазват вашият критерия"
 
-#: internet/vk/vkservice.cpp:308
+#: internet/vk/vkservice.cpp:317
 msgid "Find this artist"
 msgstr "Намиране на този изпълнител"
 
@@ -2408,7 +2433,7 @@ msgstr "Край"
 msgid "First level"
 msgstr "Първо ниво"
 
-#: widgets/nowplayingwidget.cpp:107
+#: widgets/nowplayingwidget.cpp:108
 msgid "Fit cover to width"
 msgstr "Сместване на обложката в ширината"
 
@@ -2550,7 +2575,7 @@ msgstr "Google Drive"
 msgid "Got %1 covers out of %2 (%3 failed)"
 msgstr "Успешно изтегляне на %1 от общо %2 обложки (неуспешно на %3)"
 
-#: ../bin/src/ui_behavioursettingspage.h:274
+#: ../bin/src/ui_behavioursettingspage.h:304
 msgid "Grey out non existent songs in my playlists"
 msgstr "Посивяване на песните, които не съществуват в моят списък с песни"
 
@@ -2663,7 +2688,7 @@ msgstr "Иконите отгоре"
 msgid "Identifying song"
 msgstr "Идентифициране на песента"
 
-#: ../bin/src/ui_behavioursettingspage.h:276
+#: ../bin/src/ui_behavioursettingspage.h:306
 msgid ""
 "If activated, clicking a selected song in the playlist view will let you "
 "edit the tag value directly"
@@ -2845,7 +2870,7 @@ msgstr "Най-високо класираните парчета в Jamendo т�
 msgid "Jamendo database"
 msgstr "Jamendo база от данни"
 
-#: ../bin/src/ui_behavioursettingspage.h:289
+#: ../bin/src/ui_behavioursettingspage.h:319
 msgid "Jump to previous song right away"
 msgstr "Премини към предната песен веднага"
 
@@ -2865,7 +2890,7 @@ msgstr "Пази бутоните за %1 секундa..."
 msgid "Keep buttons for %1 seconds..."
 msgstr "Пази бутоните за %1 секунди..."
 
-#: ../bin/src/ui_behavioursettingspage.h:261
+#: ../bin/src/ui_behavioursettingspage.h:291
 msgid "Keep running in the background when the window is closed"
 msgstr "Продължи ипзълнението и във фонов режим, дори когато прозореца е затворен"
 
@@ -2882,7 +2907,7 @@ msgstr "Котенца"
 msgid "Kuduro"
 msgstr "Kuduro"
 
-#: ../bin/src/ui_behavioursettingspage.h:263
+#: ../bin/src/ui_behavioursettingspage.h:293
 msgid "Language"
 msgstr "Език"
 
@@ -2894,15 +2919,15 @@ msgstr "Лаптоп/Слушалки"
 msgid "Large Hall"
 msgstr "Голяма зала"
 
-#: widgets/nowplayingwidget.cpp:97
+#: widgets/nowplayingwidget.cpp:98
 msgid "Large album cover"
 msgstr "Голяма обложка"
 
-#: widgets/nowplayingwidget.cpp:100
+#: widgets/nowplayingwidget.cpp:101
 msgid "Large album cover (details below)"
 msgstr "Голяма обложка (подробности отдолу)"
 
-#: widgets/nowplayingwidget.cpp:102
+#: widgets/nowplayingwidget.cpp:103
 msgid "Large album cover (no details)"
 msgstr "Голяма обложка (без подробности)"
 
@@ -3046,7 +3071,7 @@ msgstr "Зареждане на информация за песните"
 #: internet/podcasts/podcastdiscoverymodel.cpp:105 widgets/prettyimage.cpp:168
 #: widgets/widgetfadehelper.cpp:96 ../bin/src/ui_addpodcastdialog.h:180
 #: ../bin/src/ui_searchpreview.h:106 ../bin/src/ui_organisedialog.h:262
-#: internet/vk/vkservice.cpp:499 internet/vk/vksettingspage.cpp:122
+#: internet/vk/vkservice.cpp:508 internet/vk/vksettingspage.cpp:122
 msgid "Loading..."
 msgstr "Зареждане…"
 
@@ -3235,7 +3260,7 @@ msgstr "Тип членство"
 msgid "Minimum bitrate"
 msgstr "Минимален битов поток"
 
-#: ../bin/src/ui_playbacksettingspage.h:336
+#: ../bin/src/ui_playbacksettingspage.h:366
 msgid "Minimum buffer fill"
 msgstr "Минимално запълване на буфера"
 
@@ -3251,7 +3276,7 @@ msgstr "Модел"
 msgid "Monitor the library for changes"
 msgstr "Следи за промени в библиотеката"
 
-#: ../bin/src/ui_playbacksettingspage.h:340
+#: ../bin/src/ui_playbacksettingspage.h:371
 msgid "Mono playback"
 msgstr "Моно възпроизвеждане"
 
@@ -3272,7 +3297,7 @@ msgstr "Стил на лентата по настроение"
 msgid "Moodbars"
 msgstr "Ленти по настроение"
 
-#: internet/vk/vkservice.cpp:503
+#: internet/vk/vkservice.cpp:512
 msgid "More"
 msgstr "Още"
 
@@ -3303,7 +3328,7 @@ msgid "Move up"
 msgstr "Преместване нагоре"
 
 #: transcoder/transcodedialog.cpp:225 ui/mainwindow.cpp:1866
-#: internet/vk/vkservice.cpp:884
+#: internet/vk/vkservice.cpp:893
 msgid "Music"
 msgstr "Музика"
 
@@ -3316,15 +3341,15 @@ msgstr "Музикална Библиотека"
 msgid "Mute"
 msgstr "Без звук"
 
-#: internet/vk/vkservice.cpp:820
+#: internet/vk/vkservice.cpp:829
 msgid "My Albums"
 msgstr "Мои Албуми"
 
-#: internet/vk/vkservice.cpp:878
+#: internet/vk/vkservice.cpp:887
 msgid "My Music"
 msgstr "Моята музика"
 
-#: internet/vk/vkservice.cpp:510
+#: internet/vk/vkservice.cpp:519
 msgid "My Recommendations"
 msgstr "Моите Препоръки"
 
@@ -3362,8 +3387,8 @@ msgstr "Никога"
 msgid "Never played"
 msgstr "Никога пускани"
 
-#: ../bin/src/ui_behavioursettingspage.h:282
-#: ../bin/src/ui_behavioursettingspage.h:302
+#: ../bin/src/ui_behavioursettingspage.h:312
+#: ../bin/src/ui_behavioursettingspage.h:332
 msgid "Never start playing"
 msgstr "Никога да не се пуска възпроизвеждането"
 
@@ -3603,7 +3628,7 @@ msgstr "Отвори в Google Drive"
 msgid "Open in new playlist"
 msgstr "Отворяне в нов списък с песни"
 
-#: ../bin/src/ui_behavioursettingspage.h:297
+#: ../bin/src/ui_behavioursettingspage.h:327
 msgctxt "Refers to behavior settings in Clementine settings page."
 msgid "Open in new playlist"
 msgstr "Отваряне в нов списък с песни"
@@ -3678,7 +3703,7 @@ msgstr "Други настройки"
 msgid "Output"
 msgstr "Изход"
 
-#: ../bin/src/ui_playbacksettingspage.h:333
+#: ../bin/src/ui_playbacksettingspage.h:363
 msgid "Output device"
 msgstr "Изходно устройство"
 
@@ -3761,8 +3786,8 @@ msgstr "Брой изпълнения"
 msgid "Play if stopped, pause if playing"
 msgstr "Продължаване ако е спряно и обратно"
 
-#: ../bin/src/ui_behavioursettingspage.h:283
-#: ../bin/src/ui_behavioursettingspage.h:303
+#: ../bin/src/ui_behavioursettingspage.h:313
+#: ../bin/src/ui_behavioursettingspage.h:333
 msgid "Play if there is nothing already playing"
 msgstr "Възпроизвеждане, ако има песен, която вече се изпълнява"
 
@@ -3774,7 +3799,7 @@ msgstr "Възпроизвеждане на <n>тата песен от спис
 msgid "Play/Pause"
 msgstr "Възпроизвеждане/Пауза"
 
-#: ../bin/src/ui_playbacksettingspage.h:310
+#: ../bin/src/ui_playbacksettingspage.h:340
 msgid "Playback"
 msgstr "Възпроизвеждане"
 
@@ -3831,7 +3856,7 @@ msgstr "Врементраене на балончето"
 msgid "Port"
 msgstr "Порт"
 
-#: ui/equalizer.cpp:44 ../bin/src/ui_playbacksettingspage.h:330
+#: ui/equalizer.cpp:44 ../bin/src/ui_playbacksettingspage.h:360
 msgid "Pre-amp"
 msgstr "Предусилвател"
 
@@ -3887,7 +3912,7 @@ msgstr "Натиснете клавиш"
 msgid "Press a key combination to use for %1..."
 msgstr "Натиснете клавишна комбинация, която да използвате за %1..."
 
-#: ../bin/src/ui_behavioursettingspage.h:286
+#: ../bin/src/ui_behavioursettingspage.h:316
 msgid "Pressing \"Previous\" in player will..."
 msgstr "Натискане на \"Предишна\" в плейъра ще..."
 
@@ -3970,7 +3995,7 @@ msgstr "Пратете избраните песни на опашката"
 msgid "Queue track"
 msgstr "Прати избрана песен на опашката"
 
-#: ../bin/src/ui_playbacksettingspage.h:327
+#: ../bin/src/ui_playbacksettingspage.h:357
 msgid "Radio (equal loudness for all tracks)"
 msgstr "Радио (еднаква сила на звука за всички песни)"
 
@@ -4047,7 +4072,7 @@ msgid "Reggae"
 msgstr "Реге"
 
 #: playlist/playlistsaveoptionsdialog.cpp:33
-#: ../bin/src/ui_behavioursettingspage.h:309
+#: ../bin/src/ui_behavioursettingspage.h:343
 msgid "Relative"
 msgstr "Релативен"
 
@@ -4055,7 +4080,7 @@ msgstr "Релативен"
 msgid "Remember Wii remote swing"
 msgstr "Запомни Wiiremote суинг"
 
-#: ../bin/src/ui_behavioursettingspage.h:272
+#: ../bin/src/ui_behavioursettingspage.h:302
 msgid "Remember from last time"
 msgstr "Помни от предния път"
 
@@ -4080,11 +4105,11 @@ msgstr "Премахни дублиранията от плейлиста"
 msgid "Remove folder"
 msgstr "Премахване на папката"
 
-#: internet/vk/vkservice.cpp:316
+#: internet/vk/vkservice.cpp:325
 msgid "Remove from My Music"
 msgstr "Премахни от Моята музика"
 
-#: internet/vk/vkservice.cpp:302
+#: internet/vk/vkservice.cpp:311
 msgid "Remove from bookmarks"
 msgstr "Премахване от отметки"
 
@@ -4138,7 +4163,7 @@ msgstr "Повтаряне на песента"
 msgid "Replace current playlist"
 msgstr "Заместване на текущия списък с песни"
 
-#: ../bin/src/ui_behavioursettingspage.h:296
+#: ../bin/src/ui_behavioursettingspage.h:326
 msgid "Replace the playlist"
 msgstr "Заместване на списъка с песни"
 
@@ -4146,11 +4171,11 @@ msgstr "Заместване на списъка с песни"
 msgid "Replaces spaces with underscores"
 msgstr "Заменя интервалите със символи"
 
-#: ../bin/src/ui_playbacksettingspage.h:322
+#: ../bin/src/ui_playbacksettingspage.h:352
 msgid "Replay Gain"
 msgstr "Изравняване на усилването"
 
-#: ../bin/src/ui_playbacksettingspage.h:324
+#: ../bin/src/ui_playbacksettingspage.h:354
 msgid "Replay Gain mode"
 msgstr "Режим Изравняване на усилването"
 
@@ -4170,7 +4195,7 @@ msgstr "Възстановяване"
 msgid "Reset play counts"
 msgstr "Изчистване на броя възпроизвеждания"
 
-#: ../bin/src/ui_behavioursettingspage.h:290
+#: ../bin/src/ui_behavioursettingspage.h:320
 msgid "Restart song, then jump to previous if pressed again"
 msgstr "Започни песента отначало, после премини към предната, ако се натисне още веднъж"
 
@@ -4183,7 +4208,7 @@ msgstr "Рестартиране на песента, или свирене на
 msgid "Restrict to ASCII characters"
 msgstr "Само ASCII символи"
 
-#: ../bin/src/ui_behavioursettingspage.h:273
+#: ../bin/src/ui_behavioursettingspage.h:303
 msgid "Resume playback on start"
 msgstr "Продължаване на възпроизвеждането при стартиране"
 
@@ -4234,6 +4259,7 @@ msgid "Safely remove the device after copying"
 msgstr "Безопасно премахване на устройството след приключване на копирането"
 
 #: playlist/playlist.cpp:1357 ../bin/src/ui_edittagdialog.h:724
+#: ../bin/src/ui_playbacksettingspage.h:372
 msgid "Sample rate"
 msgstr "Дискретизация"
 
@@ -4317,7 +4343,7 @@ msgstr "Seafile"
 
 #: ui/albumcoversearcher.cpp:165 ui/albumcoversearcher.cpp:182
 #: ../bin/src/ui_gpoddersearchpage.h:78 ../bin/src/ui_itunessearchpage.h:78
-#: ../bin/src/ui_albumcoversearcher.h:114 internet/vk/vkservice.cpp:518
+#: ../bin/src/ui_albumcoversearcher.h:114 internet/vk/vkservice.cpp:527
 msgid "Search"
 msgstr "Търсене"
 
@@ -4399,6 +4425,10 @@ msgstr "Следене на текущата песен с относителн�
 #: core/commandlineoptions.cpp:160
 msgid "Seek the currently playing track to an absolute position"
 msgstr "Следене на текущата песен с абсолютно позиция"
+
+#: ../bin/src/ui_behavioursettingspage.h:336
+msgid "Seeking using a keyboard shortcut"
+msgstr ""
 
 #: visualisations/visualisationselector.cpp:37 ../bin/src/ui_ripcddialog.h:310
 msgid "Select All"
@@ -4496,7 +4526,7 @@ msgstr "Показване"
 msgid "Show OSD"
 msgstr "Показване на OSD"
 
-#: ../bin/src/ui_playbacksettingspage.h:311
+#: ../bin/src/ui_playbacksettingspage.h:341
 msgid "Show a glowing animation on the current track"
 msgstr "Показва светеща анимация на текущата песен"
 
@@ -4528,7 +4558,7 @@ msgstr "Покажи изкачащо прозорче в областа за у
 msgid "Show a pretty OSD"
 msgstr "Показване на красиво OSD"
 
-#: widgets/nowplayingwidget.cpp:139
+#: widgets/nowplayingwidget.cpp:140
 msgid "Show above status bar"
 msgstr "Покажи над status bar-а"
 
@@ -4597,7 +4627,7 @@ msgstr "Показване на бутона \"харесвам\""
 msgid "Show the scrobble button in the main window"
 msgstr "Показване на бутона скроблинг в главния прозорец"
 
-#: ../bin/src/ui_behavioursettingspage.h:260
+#: ../bin/src/ui_behavioursettingspage.h:290
 msgid "Show tray icon"
 msgstr "Показване на икона в областта за уведомяване"
 
@@ -4677,7 +4707,7 @@ msgstr "Прескачане на избраните песни"
 msgid "Skip track"
 msgstr "Прескачане на песента"
 
-#: widgets/nowplayingwidget.cpp:95
+#: widgets/nowplayingwidget.cpp:96
 msgid "Small album cover"
 msgstr "Малки обложки"
 
@@ -5101,6 +5131,10 @@ msgstr "Този поток е само за платени регистраци
 msgid "This type of device is not supported: %1"
 msgstr "Този тип устройство не е подържано:%1"
 
+#: ../bin/src/ui_behavioursettingspage.h:337
+msgid "Time step"
+msgstr ""
+
 #: playlist/playlist.cpp:1315 ui/organisedialog.cpp:60
 #: ui/qtsystemtrayicon.cpp:232 ../bin/src/ui_about.h:142
 #: ../bin/src/ui_edittagdialog.h:734 ../bin/src/ui_trackselectiondialog.h:211
@@ -5259,7 +5293,7 @@ msgstr "Премахване абонамент"
 msgid "Upcoming Concerts"
 msgstr "Наближаващи концерти"
 
-#: internet/vk/vkservice.cpp:332
+#: internet/vk/vkservice.cpp:341
 msgid "Update"
 msgstr "Обновяване"
 
@@ -5313,7 +5347,7 @@ msgstr "Използване на клавишните комбинации на
 msgid "Use Psychedelic Colors"
 msgstr ""
 
-#: ../bin/src/ui_playbacksettingspage.h:323
+#: ../bin/src/ui_playbacksettingspage.h:353
 msgid "Use Replay Gain metadata if it is available"
 msgstr "Ако е възможно да се използват мета данни на Изравняване на усилването"
 
@@ -5357,7 +5391,7 @@ msgstr "Използвай известия за докладване на ст�
 msgid "Use temporal noise shaping"
 msgstr "Използване на оформяне на звук по време"
 
-#: ../bin/src/ui_behavioursettingspage.h:266
+#: ../bin/src/ui_behavioursettingspage.h:296
 msgid "Use the system default"
 msgstr "Използвай подразбиращия се за систмета"
 
@@ -5389,7 +5423,7 @@ msgstr "Потребителски интерфейс"
 msgid "Username"
 msgstr "Потребителско име"
 
-#: ../bin/src/ui_behavioursettingspage.h:279
+#: ../bin/src/ui_behavioursettingspage.h:309
 msgid "Using the menu to add a song will..."
 msgstr "Използването на менюто за добавяне на песен ще..."
 
@@ -5454,11 +5488,11 @@ msgstr "WAV"
 msgid "WMA"
 msgstr "WMA"
 
-#: internet/vk/vkservice.cpp:860
+#: internet/vk/vkservice.cpp:869
 msgid "Wall"
 msgstr "Стена"
 
-#: playlist/playlisttabbar.cpp:192 ../bin/src/ui_behavioursettingspage.h:262
+#: playlist/playlisttabbar.cpp:192 ../bin/src/ui_behavioursettingspage.h:292
 msgid "Warn me when closing a playlist tab"
 msgstr "Предупреди ме, преди да се затвори подпрозорец със списък от песни"
 
@@ -5474,7 +5508,7 @@ msgstr "Уебсайт"
 msgid "Weeks"
 msgstr "Седмици"
 
-#: ../bin/src/ui_behavioursettingspage.h:269
+#: ../bin/src/ui_behavioursettingspage.h:299
 msgid "When Clementine starts"
 msgstr "При стартиране на Clementine"
 
@@ -5484,7 +5518,7 @@ msgid ""
 "If there are no matches then it will use the largest image in the directory."
 msgstr "Когато Clementine търси обложки първо ще потърси за картинки съдържащи една от тези думи.\nАко няма свъпадения тогава ще използва най-големите изображения в директорията,"
 
-#: ../bin/src/ui_behavioursettingspage.h:306
+#: ../bin/src/ui_behavioursettingspage.h:340
 msgid "When saving a playlist, file paths should be"
 msgstr "При запис на списъци с песни, пътищата на файла трябва да са"
 
@@ -5568,7 +5602,7 @@ msgstr "Искате ли да изпълните пълно повторно с
 msgid "Write all songs statistics into songs' files"
 msgstr "Записване на всички статистики за песните във файловете на песните"
 
-#: ../bin/src/ui_behavioursettingspage.h:311
+#: ../bin/src/ui_behavioursettingspage.h:345
 msgid "Write metadata"
 msgstr "Запиши метадата"
 
@@ -5688,7 +5722,7 @@ msgid ""
 "shortcuts in Clementine."
 msgstr "Трябва да влезете в Системните Настройки и да позволите на Clementine да \"<span style=\" font-style:italic;\">контролира вашия компютър</span>\" за да изпозлвате глобалните клавишни комбинации в Clementine."
 
-#: ../bin/src/ui_behavioursettingspage.h:268
+#: ../bin/src/ui_behavioursettingspage.h:298
 msgid "You will need to restart Clementine if you change the language."
 msgstr "Трябва да рестартирате Clementine, ако смените езика."
 

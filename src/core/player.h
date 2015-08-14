@@ -142,6 +142,8 @@ class Player : public PlayerInterface {
 
   const UrlHandler* HandlerForUrl(const QUrl& url) const;
 
+  bool PreviousWouldRestartTrack() const;
+
  public slots:
   void ReloadSettings();
 

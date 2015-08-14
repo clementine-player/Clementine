@@ -17,8 +17,6 @@
 
 #include "closure.h"
 
-#include <QTimer>
-
 #include "core/timeconstants.h"
 
 namespace _detail {
@@ -64,12 +62,4 @@ void DoAfter(QObject* receiver, const char* slot, int msec) {
 void DoInAMinuteOrSo(QObject* receiver, const char* slot) {
   int msec = (60 + (qrand() % 60)) * kMsecPerSec;
   DoAfter(receiver, slot, msec);
-}
-
-void DoAfter(std::function<void()> callback, int msec) {
-  QTimer* timer = new QTimer;
-  timer->setSingleShot(true);
-  NewClosure(timer, SIGNAL(timeout()), callback);
-  QObject::connect(timer, SIGNAL(timeout()), timer, SLOT(deleteLater()));
-  timer->start(msec);
 }

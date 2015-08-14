@@ -5,16 +5,17 @@
 # Translators:
 # arnaudbienner <arnaud.bienner@gmail.com>, 2011
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010, 2011
-# Gwenn Meynier <tornoz@laposte.net>, 2013
-# Gwenn Meynier <tornoz@laposte.net>, 2011-2012
-# Gwenn Meynier <tornoz@laposte.net>, 2015
-# Gwenn Meynier <tornoz@laposte.net>, 2014-2015
+# Gwenn M <tornoz@laposte.net>, 2013
+# Gwenn M <tornoz@laposte.net>, 2011-2012
+# Gwenn M <tornoz@laposte.net>, 2015
+# Gwenn M <tornoz@laposte.net>, 2015
+# Gwenn M <tornoz@laposte.net>, 2014-2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2015-07-12 16:18+0000\n"
-"Last-Translator: Gwenn Meynier <tornoz@laposte.net>\n"
-"Language-Team: Breton (http://www.transifex.com/p/clementine/language/br/)\n"
+"PO-Revision-Date: 2015-07-28 12:12+0000\n"
+"Last-Translator: Gwenn M <tornoz@laposte.net>\n"
+"Language-Team: Breton (http://www.transifex.com/davidsansome/clementine/language/br/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: br\n"
@@ -45,15 +46,19 @@ msgstr " devez"
 msgid " kbps"
 msgstr " kbde"
 
-#: ../bin/src/ui_playbacksettingspage.h:318
-#: ../bin/src/ui_playbacksettingspage.h:321
-#: ../bin/src/ui_playbacksettingspage.h:335
+#: ../bin/src/ui_playbacksettingspage.h:348
+#: ../bin/src/ui_playbacksettingspage.h:351
+#: ../bin/src/ui_playbacksettingspage.h:365
 msgid " ms"
 msgstr " me"
 
 #: ../bin/src/ui_songinfosettingspage.h:157
 msgid " pt"
 msgstr " pik"
+
+#: ../bin/src/ui_behavioursettingspage.h:338
+msgid " s"
+msgstr ""
 
 #: ../bin/src/ui_notificationssettingspage.h:445
 #: ../bin/src/ui_visualisationselector.h:116
@@ -64,7 +69,7 @@ msgstr " eilenn"
 msgid " songs"
 msgstr " ton"
 
-#: internet/vk/vkservice.cpp:148
+#: internet/vk/vkservice.cpp:149
 #, qt-format
 msgid "%1 (%2 songs)"
 msgstr "%1 (%2 ton)"
@@ -273,13 +278,29 @@ msgstr "1 ton"
 msgid "128k MP3"
 msgstr "MP3 128k"
 
+#: ../bin/src/ui_playbacksettingspage.h:379
+msgid "192,000Hz"
+msgstr ""
+
 #: ../bin/src/ui_appearancesettingspage.h:291
 msgid "40%"
 msgstr "40%"
 
+#: ../bin/src/ui_playbacksettingspage.h:376
+msgid "44,100Hz"
+msgstr ""
+
+#: ../bin/src/ui_playbacksettingspage.h:377
+msgid "48,000Hz"
+msgstr ""
+
 #: library/library.cpp:64
 msgid "50 random tracks"
 msgstr "50 ton dre zegouezh"
+
+#: ../bin/src/ui_playbacksettingspage.h:378
+msgid "96,000Hz"
+msgstr ""
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:165
 msgid "<a href=\"http://www.di.fm/premium/\">Upgrade to Premium now</a>"
@@ -365,7 +386,7 @@ msgstr "AAC 64k"
 msgid "AIFF"
 msgstr "AIFF"
 
-#: widgets/nowplayingwidget.cpp:148
+#: widgets/nowplayingwidget.cpp:149
 msgid "ALL GLORY TO THE HYPNOTOAD"
 msgstr "ALL GLORY TO THE HYPNOTOAD"
 
@@ -387,7 +408,7 @@ msgid "About Qt..."
 msgstr "A-zivout Qt..."
 
 #: playlist/playlistsaveoptionsdialog.cpp:34
-#: ../bin/src/ui_behavioursettingspage.h:308
+#: ../bin/src/ui_behavioursettingspage.h:342
 msgid "Absolute"
 msgstr "Absolut"
 
@@ -552,7 +573,7 @@ msgstr "Ouzhpennañ an niver a wech ma 'z eo bet lammet an ton"
 msgid "Add song title tag"
 msgstr "Ouzhpennañ klav titl an ton"
 
-#: internet/vk/vkservice.cpp:320
+#: internet/vk/vkservice.cpp:329
 msgid "Add song to cache"
 msgstr "Ouzhpennañ an ton d'ar grubuilh"
 
@@ -572,7 +593,7 @@ msgstr "Ouzhpennañ tonioù da \"Ma sonerezh\" p'eo kliket ar bouton \"Karout\""
 msgid "Add stream..."
 msgstr "Ouzhpennan ul lanv..."
 
-#: internet/vk/vkservice.cpp:312
+#: internet/vk/vkservice.cpp:321
 msgid "Add to My Music"
 msgstr "Ouzhpennañ d'am sonerezh"
 
@@ -588,7 +609,7 @@ msgstr "Ouzhpennañ da tonioù karetañ Spotify"
 msgid "Add to another playlist"
 msgstr "Ouzhpennañ d'ur roll seniñ all"
 
-#: internet/vk/vkservice.cpp:298
+#: internet/vk/vkservice.cpp:307
 msgid "Add to bookmarks"
 msgstr "Ouzhpennañ d'ar merkoù-pajenn"
 
@@ -596,11 +617,11 @@ msgstr "Ouzhpennañ d'ar merkoù-pajenn"
 msgid "Add to playlist"
 msgstr "Ouzhpennañ d'ar roll seniñ"
 
-#: ../bin/src/ui_behavioursettingspage.h:298
+#: ../bin/src/ui_behavioursettingspage.h:328
 msgid "Add to the queue"
 msgstr "Ouzhpennañ d'al listenn c'hortoz"
 
-#: internet/vk/vkservice.cpp:328
+#: internet/vk/vkservice.cpp:337
 msgid "Add user/group to bookmarks"
 msgstr "Ouzhpennañ an implijer/strollad d'ar merkoù-pajenn"
 
@@ -654,7 +675,7 @@ msgstr "Goude an eiladur..."
 msgid "Album"
 msgstr "Albom"
 
-#: ../bin/src/ui_playbacksettingspage.h:328
+#: ../bin/src/ui_playbacksettingspage.h:358
 msgid "Album (ideal loudness for all tracks)"
 msgstr "Albom (Ampled peurvat evit an holl roud)"
 
@@ -672,7 +693,7 @@ msgstr "Golo Albom"
 msgid "Album info on jamendo.com..."
 msgstr "Titouroù an albom war jamendo.com..."
 
-#: internet/vk/vkservice.cpp:827
+#: internet/vk/vkservice.cpp:836
 msgid "Albums"
 msgstr "Albomoù"
 
@@ -738,16 +759,16 @@ msgstr "Aotren an enkodiñ mid/side"
 msgid "Alongside the originals"
 msgstr "E-kichen ar reoù orin"
 
-#: ../bin/src/ui_behavioursettingspage.h:271
+#: ../bin/src/ui_behavioursettingspage.h:301
 msgid "Always hide the main window"
 msgstr "Atav kuzhat ar prenestr pennañ"
 
-#: ../bin/src/ui_behavioursettingspage.h:270
+#: ../bin/src/ui_behavioursettingspage.h:300
 msgid "Always show the main window"
 msgstr "Atav diskouez ar prenestr pennañ"
 
-#: ../bin/src/ui_behavioursettingspage.h:284
-#: ../bin/src/ui_behavioursettingspage.h:304
+#: ../bin/src/ui_behavioursettingspage.h:314
+#: ../bin/src/ui_behavioursettingspage.h:334
 msgid "Always start playing"
 msgstr "Atav kregin da lenn"
 
@@ -798,11 +819,11 @@ msgstr "Ouzhpennañ restroù pe liammoù internet d'ar roll seniñ"
 msgid "Append to current playlist"
 msgstr "Ouzhpennañ d'ar roll seniñ lennet"
 
-#: ../bin/src/ui_behavioursettingspage.h:295
+#: ../bin/src/ui_behavioursettingspage.h:325
 msgid "Append to the playlist"
 msgstr "Ouzhpennañ d'ar roll seniñ"
 
-#: ../bin/src/ui_playbacksettingspage.h:331
+#: ../bin/src/ui_playbacksettingspage.h:361
 msgid "Apply compression to prevent clipping"
 msgstr "Koazhañ a-benn mirout ouzh an troc'hadennoù"
 
@@ -832,7 +853,7 @@ msgstr "Arzour"
 
 #: ui/mainwindow.cpp:251
 msgid "Artist info"
-msgstr "Titouroù war an arzour"
+msgstr "Arzour"
 
 #: songinfo/echonesttags.cpp:61
 msgid "Artist tags"
@@ -842,7 +863,7 @@ msgstr "Klavioù an arzour"
 msgid "Artist's initial"
 msgstr "Lizherennoù-tal an arzour"
 
-#: ../bin/src/ui_behavioursettingspage.h:310
+#: ../bin/src/ui_behavioursettingspage.h:344
 msgid "Ask when saving"
 msgstr "Goulenn pa vez savetaet"
 
@@ -852,7 +873,7 @@ msgstr "Goulenn pa vez savetaet"
 msgid "Audio format"
 msgstr "Mentrezh Aodio"
 
-#: ../bin/src/ui_playbacksettingspage.h:332
+#: ../bin/src/ui_playbacksettingspage.h:362
 msgid "Audio output"
 msgstr "Ezkas son"
 
@@ -872,11 +893,12 @@ msgid "Authors"
 msgstr "Aozerien"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:227
+#: ../bin/src/ui_playbacksettingspage.h:375
 msgid "Auto"
 msgstr "Emgefreek"
 
 #: playlist/playlistsaveoptionsdialog.cpp:32
-#: ../bin/src/ui_behavioursettingspage.h:307
+#: ../bin/src/ui_behavioursettingspage.h:341
 msgid "Automatic"
 msgstr "Ent emgefreek"
 
@@ -949,7 +971,7 @@ msgstr "Glas boutin"
 msgid "Basic audio type"
 msgstr "Stumm audio boaz"
 
-#: ../bin/src/ui_behavioursettingspage.h:259
+#: ../bin/src/ui_behavioursettingspage.h:289
 msgid "Behavior"
 msgstr "Emzalc'h"
 
@@ -1010,11 +1032,11 @@ msgstr "Box"
 msgid "Browse..."
 msgstr "Furchal..."
 
-#: ../bin/src/ui_playbacksettingspage.h:334
+#: ../bin/src/ui_playbacksettingspage.h:364
 msgid "Buffer duration"
 msgstr "Padelezh ar stoker"
 
-#: engines/gstengine.cpp:904
+#: engines/gstengine.cpp:907
 msgid "Buffering"
 msgstr "O lakaat er memor skurzer"
 
@@ -1059,7 +1081,7 @@ msgstr "Nullañ"
 msgid "Cancel download"
 msgstr "Nullañ ar pellgargadur"
 
-#: internet/vk/vkservice.cpp:626
+#: internet/vk/vkservice.cpp:635
 msgid ""
 "Captcha is needed.\n"
 "Try to login into Vk.com with your browser,to fix this problem."
@@ -1089,7 +1111,11 @@ msgstr "Cheñch an doare meskañ"
 msgid "Change the language"
 msgstr "Kemmañ ar yezh"
 
-#: ../bin/src/ui_playbacksettingspage.h:338
+#: ../bin/src/ui_playbacksettingspage.h:382
+msgid "Changes will take place when the next song starts playing"
+msgstr ""
+
+#: ../bin/src/ui_playbacksettingspage.h:369
 msgid ""
 "Changing mono playback preference will be effective for the next playing "
 "songs"
@@ -1115,7 +1141,7 @@ msgstr "Dibab doser krubuilh Vk.com"
 msgid "Choose a name for your smart playlist"
 msgstr "Choazit un anv evit ho roll seniñ spredek"
 
-#: engines/gstengine.cpp:925
+#: engines/gstengine.cpp:928
 msgid "Choose automatically"
 msgstr "Choaz ent emgefreek"
 
@@ -1301,7 +1327,7 @@ msgstr "Listenn dispartiet gant ur virgulenn eus klas:live, live etre 0 ha 3"
 msgid "Comment"
 msgstr "Evezhiadenn"
 
-#: internet/vk/vkservice.cpp:154
+#: internet/vk/vkservice.cpp:155
 msgid "Community Radio"
 msgstr "Skingomz ar gumunelezh "
 
@@ -1340,7 +1366,7 @@ msgstr "Kefluniañ Spotify"
 msgid "Configure Subsonic..."
 msgstr "Kefluniañ Subsonic..."
 
-#: internet/vk/vkservice.cpp:337
+#: internet/vk/vkservice.cpp:346
 msgid "Configure Vk.com..."
 msgstr "Keflunian Vk.com..."
 
@@ -1387,7 +1413,7 @@ msgid ""
 "Connection timed out, check server URL. Example: http://localhost:4040/"
 msgstr "Ar c'hennask a lak re a amzer, gwiriekait URL ar servijer. Da skouer : http://localhost:4040/"
 
-#: internet/vk/vkservice.cpp:1095
+#: internet/vk/vkservice.cpp:1113
 msgid "Connection trouble or audio is disabled by owner"
 msgstr "Kudennoù kennaskañ pe diweredekaet eo bet ar son gant an implijer"
 
@@ -1415,7 +1441,7 @@ msgstr "Treuzkemm ar restroù son lossless a-raok kas anezhe d'ar pellurzhier."
 msgid "Convert lossless files"
 msgstr "Treuzkemm ar restroù lossless"
 
-#: internet/vk/vkservice.cpp:324
+#: internet/vk/vkservice.cpp:333
 msgid "Copy share url to clipboard"
 msgstr "Kopiañ an url kenrannañ er golver"
 
@@ -1507,11 +1533,11 @@ msgstr "Golo diuzet adalek %1"
 msgid "Covers from %1"
 msgstr "Goloioù adalek %1"
 
-#: ../bin/src/ui_playbacksettingspage.h:315
+#: ../bin/src/ui_playbacksettingspage.h:345
 msgid "Cross-fade when changing tracks automatically"
 msgstr "Lakaat un treveuz pa vez kemmet ar roud ent emgefreek"
 
-#: ../bin/src/ui_playbacksettingspage.h:314
+#: ../bin/src/ui_playbacksettingspage.h:344
 msgid "Cross-fade when changing tracks manually"
 msgstr "Lakaat un treveuz pa vez kemmet ar roudoù gant an dorn"
 
@@ -1650,7 +1676,7 @@ msgstr "Digreskiñ an ampled"
 msgid "Default background image"
 msgstr "Skeudenn drekleur dre ziouer"
 
-#: engines/gstengine.cpp:950
+#: engines/gstengine.cpp:953
 #, qt-format
 msgid "Default device on %1"
 msgstr "Trobarzhell dre ziouer war %1"
@@ -1741,7 +1767,7 @@ msgstr "Oerzhioù an drobarzhell..."
 
 #: ui/mainwindow.cpp:246
 msgid "Devices"
-msgstr "Trobarzhelloù"
+msgstr "Trevnadoù"
 
 #: ../bin/src/ui_ripcddialog.h:300 ../bin/src/ui_vksearchdialog.h:61
 msgid "Dialog"
@@ -1868,7 +1894,7 @@ msgstr "Reiñ arc'hant"
 msgid "Double click to open"
 msgstr "Daouglikañ evit digeriñ"
 
-#: ../bin/src/ui_behavioursettingspage.h:292
+#: ../bin/src/ui_behavioursettingspage.h:322
 msgid "Double clicking a song will..."
 msgstr "Daouglikañ war un ton..."
 
@@ -2027,7 +2053,7 @@ msgstr "Aktivañ ar c'hevataler"
 msgid "Enable shortcuts only when Clementine is focused"
 msgstr "Aotren ar beradennoù pa vez enaouet prenestr Clementine nemetken"
 
-#: ../bin/src/ui_behavioursettingspage.h:278
+#: ../bin/src/ui_behavioursettingspage.h:308
 msgid "Enable song metadata inline edition with click"
 msgstr "Gweredekaat an embann meta-roadennoù eeun gant ur c'hlik"
 
@@ -2117,7 +2143,7 @@ msgstr "Kenkoulz a --log-levels *:3"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:242
 #: library/libraryview.cpp:630 ui/mainwindow.cpp:1931 ui/mainwindow.cpp:2178
-#: ui/mainwindow.cpp:2326 internet/vk/vkservice.cpp:625
+#: ui/mainwindow.cpp:2326 internet/vk/vkservice.cpp:634
 msgid "Error"
 msgstr "Fazi"
 
@@ -2192,7 +2218,7 @@ msgstr "Bep 6 eurvezh"
 msgid "Every hour"
 msgstr "Bep eurvezh"
 
-#: ../bin/src/ui_playbacksettingspage.h:316
+#: ../bin/src/ui_playbacksettingspage.h:346
 msgid "Except between tracks on the same album or in the same CUE sheet"
 msgstr "War-bouezh etre ar roudoù eus ar memes albom pe eus ar memes follenn CUE"
 
@@ -2264,20 +2290,20 @@ msgstr "F8"
 msgid "FLAC"
 msgstr "FLAC"
 
-#: ../bin/src/ui_playbacksettingspage.h:319
+#: ../bin/src/ui_playbacksettingspage.h:349
 msgid "Fade out on pause / fade in on resume"
 msgstr "Izelaat ar son tamm-ha-tamm evit an ehan / Uhelat evit adkregiñ"
 
-#: ../bin/src/ui_playbacksettingspage.h:313
+#: ../bin/src/ui_playbacksettingspage.h:343
 msgid "Fade out when stopping a track"
 msgstr "Echuiñ gant un treveuz pa vez paouezet ur roud"
 
-#: ../bin/src/ui_playbacksettingspage.h:312
+#: ../bin/src/ui_playbacksettingspage.h:342
 msgid "Fading"
 msgstr "Arveuz"
 
-#: ../bin/src/ui_playbacksettingspage.h:317
-#: ../bin/src/ui_playbacksettingspage.h:320
+#: ../bin/src/ui_playbacksettingspage.h:347
+#: ../bin/src/ui_playbacksettingspage.h:350
 msgid "Fading duration"
 msgstr "Padelezh an arveuz"
 
@@ -2389,7 +2415,7 @@ msgstr "Restroù da treuzkemmañ"
 msgid "Find songs in your library that match the criteria you specify."
 msgstr "Kavout an tonioù e-barzh ho sonaoueg a glot gant an dezverkoù bet meneget ganeoc'h."
 
-#: internet/vk/vkservice.cpp:308
+#: internet/vk/vkservice.cpp:317
 msgid "Find this artist"
 msgstr "Kavout an arzour-mañ"
 
@@ -2405,7 +2431,7 @@ msgstr "Echuiñ"
 msgid "First level"
 msgstr "Live kentañ"
 
-#: widgets/nowplayingwidget.cpp:107
+#: widgets/nowplayingwidget.cpp:108
 msgid "Fit cover to width"
 msgstr "Klotañ ar golo gant al ledander"
 
@@ -2547,7 +2573,7 @@ msgstr "Google Drive"
 msgid "Got %1 covers out of %2 (%3 failed)"
 msgstr "Kavet %1 golo diwar %2 (%3 c'hwitet)"
 
-#: ../bin/src/ui_behavioursettingspage.h:274
+#: ../bin/src/ui_behavioursettingspage.h:304
 msgid "Grey out non existent songs in my playlists"
 msgstr "Grisaat an tonioù n'int ket mui em roll seniñ"
 
@@ -2660,7 +2686,7 @@ msgstr "Arlunioù en uhelañ"
 msgid "Identifying song"
 msgstr "Anaoudadur an ton"
 
-#: ../bin/src/ui_behavioursettingspage.h:276
+#: ../bin/src/ui_behavioursettingspage.h:306
 msgid ""
 "If activated, clicking a selected song in the playlist view will let you "
 "edit the tag value directly"
@@ -2842,7 +2868,7 @@ msgstr "Top ar sizhun roudoù Jamendo"
 msgid "Jamendo database"
 msgstr "Stlennvon Jamendo"
 
-#: ../bin/src/ui_behavioursettingspage.h:289
+#: ../bin/src/ui_behavioursettingspage.h:319
 msgid "Jump to previous song right away"
 msgstr "Lammat diouzhtu d'an ton a-raok"
 
@@ -2862,7 +2888,7 @@ msgstr "Pouezhit war ar bouton e-pad %1 eilenn..."
 msgid "Keep buttons for %1 seconds..."
 msgstr "Pouezhit war ar boutoñn e-pad %1 eilenn..."
 
-#: ../bin/src/ui_behavioursettingspage.h:261
+#: ../bin/src/ui_behavioursettingspage.h:291
 msgid "Keep running in the background when the window is closed"
 msgstr "Leuskel da dreiñ pa 'z eo serret ar prenstr"
 
@@ -2879,7 +2905,7 @@ msgstr "Bisig"
 msgid "Kuduro"
 msgstr "Kuduro"
 
-#: ../bin/src/ui_behavioursettingspage.h:263
+#: ../bin/src/ui_behavioursettingspage.h:293
 msgid "Language"
 msgstr "Yezh"
 
@@ -2891,15 +2917,15 @@ msgstr "Hezoug/Selaouegoù"
 msgid "Large Hall"
 msgstr "Sal bras"
 
-#: widgets/nowplayingwidget.cpp:97
+#: widgets/nowplayingwidget.cpp:98
 msgid "Large album cover"
 msgstr "Golo albom tev"
 
-#: widgets/nowplayingwidget.cpp:100
+#: widgets/nowplayingwidget.cpp:101
 msgid "Large album cover (details below)"
 msgstr "Golo albom ledan (munudoù dindan)"
 
-#: widgets/nowplayingwidget.cpp:102
+#: widgets/nowplayingwidget.cpp:103
 msgid "Large album cover (no details)"
 msgstr "Golo albom ledan (munudoù ebet)"
 
@@ -3043,7 +3069,7 @@ msgstr "O kargañ titouroù ar roud"
 #: internet/podcasts/podcastdiscoverymodel.cpp:105 widgets/prettyimage.cpp:168
 #: widgets/widgetfadehelper.cpp:96 ../bin/src/ui_addpodcastdialog.h:180
 #: ../bin/src/ui_searchpreview.h:106 ../bin/src/ui_organisedialog.h:262
-#: internet/vk/vkservice.cpp:499 internet/vk/vksettingspage.cpp:122
+#: internet/vk/vkservice.cpp:508 internet/vk/vksettingspage.cpp:122
 msgid "Loading..."
 msgstr "O kargañ..."
 
@@ -3232,7 +3258,7 @@ msgstr "Doare emezeladur"
 msgid "Minimum bitrate"
 msgstr "Fonnder izelañ"
 
-#: ../bin/src/ui_playbacksettingspage.h:336
+#: ../bin/src/ui_playbacksettingspage.h:366
 msgid "Minimum buffer fill"
 msgstr "Leuniadur minimum ar skurzer"
 
@@ -3248,7 +3274,7 @@ msgstr "Patrom"
 msgid "Monitor the library for changes"
 msgstr "Evezhiañ cheñchamantoù ar sonaoueg"
 
-#: ../bin/src/ui_playbacksettingspage.h:340
+#: ../bin/src/ui_playbacksettingspage.h:371
 msgid "Mono playback"
 msgstr "Lenn e mono"
 
@@ -3269,7 +3295,7 @@ msgstr "Doare ar varenn imor"
 msgid "Moodbars"
 msgstr "Barenn imor"
 
-#: internet/vk/vkservice.cpp:503
+#: internet/vk/vkservice.cpp:512
 msgid "More"
 msgstr "Muioc'h"
 
@@ -3300,7 +3326,7 @@ msgid "Move up"
 msgstr "A-us"
 
 #: transcoder/transcodedialog.cpp:225 ui/mainwindow.cpp:1866
-#: internet/vk/vkservice.cpp:884
+#: internet/vk/vkservice.cpp:893
 msgid "Music"
 msgstr "Sonerezh"
 
@@ -3313,15 +3339,15 @@ msgstr "Sonaoueg"
 msgid "Mute"
 msgstr "Mut"
 
-#: internet/vk/vkservice.cpp:820
+#: internet/vk/vkservice.cpp:829
 msgid "My Albums"
 msgstr "Va albomoù"
 
-#: internet/vk/vkservice.cpp:878
+#: internet/vk/vkservice.cpp:887
 msgid "My Music"
 msgstr "Ma Sonerezh"
 
-#: internet/vk/vkservice.cpp:510
+#: internet/vk/vkservice.cpp:519
 msgid "My Recommendations"
 msgstr "Ma erbedadennoù"
 
@@ -3359,8 +3385,8 @@ msgstr "Morse"
 msgid "Never played"
 msgstr "Morse sonet"
 
-#: ../bin/src/ui_behavioursettingspage.h:282
-#: ../bin/src/ui_behavioursettingspage.h:302
+#: ../bin/src/ui_behavioursettingspage.h:312
+#: ../bin/src/ui_behavioursettingspage.h:332
 msgid "Never start playing"
 msgstr "Morse kregiñ da lenn"
 
@@ -3600,7 +3626,7 @@ msgstr "Digeriñ e-barzh Google Drive"
 msgid "Open in new playlist"
 msgstr "Digerin en ur roll seniñ nevez"
 
-#: ../bin/src/ui_behavioursettingspage.h:297
+#: ../bin/src/ui_behavioursettingspage.h:327
 msgctxt "Refers to behavior settings in Clementine settings page."
 msgid "Open in new playlist"
 msgstr "Digeriñ en ur roll-seniñ nevez"
@@ -3675,7 +3701,7 @@ msgstr "Dibarzhioù all"
 msgid "Output"
 msgstr "Ezkas"
 
-#: ../bin/src/ui_playbacksettingspage.h:333
+#: ../bin/src/ui_playbacksettingspage.h:363
 msgid "Output device"
 msgstr "Trobarzhell ezkas"
 
@@ -3758,8 +3784,8 @@ msgstr "Konter selaouadennoù"
 msgid "Play if stopped, pause if playing"
 msgstr "Lenn pe ehan, hervez ar stad"
 
-#: ../bin/src/ui_behavioursettingspage.h:283
-#: ../bin/src/ui_behavioursettingspage.h:303
+#: ../bin/src/ui_behavioursettingspage.h:313
+#: ../bin/src/ui_behavioursettingspage.h:333
 msgid "Play if there is nothing already playing"
 msgstr "Lenn ma vez netra all o vezañ lennet"
 
@@ -3771,7 +3797,7 @@ msgstr "Seniñ an <n>vet roud eus ar roll seniñ"
 msgid "Play/Pause"
 msgstr "Lenn/Ehan"
 
-#: ../bin/src/ui_playbacksettingspage.h:310
+#: ../bin/src/ui_playbacksettingspage.h:340
 msgid "Playback"
 msgstr "Lenn sonerezh"
 
@@ -3828,7 +3854,7 @@ msgstr "Padelezh ar popup"
 msgid "Port"
 msgstr "Porzh"
 
-#: ui/equalizer.cpp:44 ../bin/src/ui_playbacksettingspage.h:330
+#: ui/equalizer.cpp:44 ../bin/src/ui_playbacksettingspage.h:360
 msgid "Pre-amp"
 msgstr "Rak-ampled"
 
@@ -3884,7 +3910,7 @@ msgstr "Pouezit war un douchenn"
 msgid "Press a key combination to use for %1..."
 msgstr "Pouezit war ur kombinadenn touchennoù evit implij %1"
 
-#: ../bin/src/ui_behavioursettingspage.h:286
+#: ../bin/src/ui_behavioursettingspage.h:316
 msgid "Pressing \"Previous\" in player will..."
 msgstr "Pouezañ \"A-raok' el lenner a..."
 
@@ -3967,7 +3993,7 @@ msgstr "Lakaat ar roudoù da heul"
 msgid "Queue track"
 msgstr "Lakaat ar roud da heul"
 
-#: ../bin/src/ui_playbacksettingspage.h:327
+#: ../bin/src/ui_playbacksettingspage.h:357
 msgid "Radio (equal loudness for all tracks)"
 msgstr "Skingomz (Ampled kevatal evit an holl roudoù)"
 
@@ -4044,7 +4070,7 @@ msgid "Reggae"
 msgstr "Reggae"
 
 #: playlist/playlistsaveoptionsdialog.cpp:33
-#: ../bin/src/ui_behavioursettingspage.h:309
+#: ../bin/src/ui_behavioursettingspage.h:343
 msgid "Relative"
 msgstr "Relativel"
 
@@ -4052,7 +4078,7 @@ msgstr "Relativel"
 msgid "Remember Wii remote swing"
 msgstr "Kaout soñj eus fiñv ar Wii remote"
 
-#: ../bin/src/ui_behavioursettingspage.h:272
+#: ../bin/src/ui_behavioursettingspage.h:302
 msgid "Remember from last time"
 msgstr "Kaout soñj eus ar wech diwezhañ"
 
@@ -4077,11 +4103,11 @@ msgstr "Tennañ an tonioù doubl eus ar roll seniñ"
 msgid "Remove folder"
 msgstr "Tennañ an teuliad"
 
-#: internet/vk/vkservice.cpp:316
+#: internet/vk/vkservice.cpp:325
 msgid "Remove from My Music"
 msgstr "Tennañ eus va sonerezh"
 
-#: internet/vk/vkservice.cpp:302
+#: internet/vk/vkservice.cpp:311
 msgid "Remove from bookmarks"
 msgstr "Tennañ eus va merkoù-pajenn"
 
@@ -4135,7 +4161,7 @@ msgstr "Adlenn an ton"
 msgid "Replace current playlist"
 msgstr "Eillec'hiañ ar roll seniñ lennet"
 
-#: ../bin/src/ui_behavioursettingspage.h:296
+#: ../bin/src/ui_behavioursettingspage.h:326
 msgid "Replace the playlist"
 msgstr "Eillec'hiañ ar roll seniñ"
 
@@ -4143,11 +4169,11 @@ msgstr "Eillec'hiañ ar roll seniñ"
 msgid "Replaces spaces with underscores"
 msgstr "Eillec'hiañ esaoù gant is-linennoù"
 
-#: ../bin/src/ui_playbacksettingspage.h:322
+#: ../bin/src/ui_playbacksettingspage.h:352
 msgid "Replay Gain"
 msgstr "Replay Gain"
 
-#: ../bin/src/ui_playbacksettingspage.h:324
+#: ../bin/src/ui_playbacksettingspage.h:354
 msgid "Replay Gain mode"
 msgstr "Doare Replay Gain"
 
@@ -4167,7 +4193,7 @@ msgstr "Adderaouiñ"
 msgid "Reset play counts"
 msgstr "Adderaouiñ ar konter lennadennoù"
 
-#: ../bin/src/ui_behavioursettingspage.h:290
+#: ../bin/src/ui_behavioursettingspage.h:320
 msgid "Restart song, then jump to previous if pressed again"
 msgstr "Adlenn an ton, ha lammat d'an hini a-raok ma vez adpouezet"
 
@@ -4180,7 +4206,7 @@ msgstr "Adkregiñ ar roud, pe lenn ar roud a-raok m'eo kroget abaoe 8 eilenn pe 
 msgid "Restrict to ASCII characters"
 msgstr "Bevenniñ ouzh an arouezennoù ASCII"
 
-#: ../bin/src/ui_behavioursettingspage.h:273
+#: ../bin/src/ui_behavioursettingspage.h:303
 msgid "Resume playback on start"
 msgstr "Kenderc'hel da seniñ pa grog ar poellad"
 
@@ -4231,6 +4257,7 @@ msgid "Safely remove the device after copying"
 msgstr "Tennañ an drobarzhell diarvar goude an eilañ"
 
 #: playlist/playlist.cpp:1357 ../bin/src/ui_edittagdialog.h:724
+#: ../bin/src/ui_playbacksettingspage.h:372
 msgid "Sample rate"
 msgstr "Standilhonañ"
 
@@ -4314,7 +4341,7 @@ msgstr "Seafile"
 
 #: ui/albumcoversearcher.cpp:165 ui/albumcoversearcher.cpp:182
 #: ../bin/src/ui_gpoddersearchpage.h:78 ../bin/src/ui_itunessearchpage.h:78
-#: ../bin/src/ui_albumcoversearcher.h:114 internet/vk/vkservice.cpp:518
+#: ../bin/src/ui_albumcoversearcher.h:114 internet/vk/vkservice.cpp:527
 msgid "Search"
 msgstr "Klask"
 
@@ -4396,6 +4423,10 @@ msgstr "Klask ar roud lennet gant ur sammad relativel"
 #: core/commandlineoptions.cpp:160
 msgid "Seek the currently playing track to an absolute position"
 msgstr "Klask ar roud lennet gant ul lec'hiadur absolud"
+
+#: ../bin/src/ui_behavioursettingspage.h:336
+msgid "Seeking using a keyboard shortcut"
+msgstr ""
 
 #: visualisations/visualisationselector.cpp:37 ../bin/src/ui_ripcddialog.h:310
 msgid "Select All"
@@ -4493,7 +4524,7 @@ msgstr "Diskouez"
 msgid "Show OSD"
 msgstr "Diskouez OSD"
 
-#: ../bin/src/ui_playbacksettingspage.h:311
+#: ../bin/src/ui_playbacksettingspage.h:341
 msgid "Show a glowing animation on the current track"
 msgstr "Lugerniñ ar roud o vezañ lennet"
 
@@ -4525,7 +4556,7 @@ msgstr "Diskouez ur popup e-kichen ar zonenn kemenadennoù"
 msgid "Show a pretty OSD"
 msgstr "Diskouez un OSD brav"
 
-#: widgets/nowplayingwidget.cpp:139
+#: widgets/nowplayingwidget.cpp:140
 msgid "Show above status bar"
 msgstr "Diskouez a-us d'ar varenn stad"
 
@@ -4594,7 +4625,7 @@ msgstr "Diskouez ar bouton \"karout\""
 msgid "Show the scrobble button in the main window"
 msgstr "Diskouez ar bouton scrobbling er prenestr pennañ"
 
-#: ../bin/src/ui_behavioursettingspage.h:260
+#: ../bin/src/ui_behavioursettingspage.h:290
 msgid "Show tray icon"
 msgstr "Diskouez an ikon er zonenn kemenadennoù"
 
@@ -4674,7 +4705,7 @@ msgstr "Tremen ar roudoù diuzet"
 msgid "Skip track"
 msgstr "Tremen ar roud"
 
-#: widgets/nowplayingwidget.cpp:95
+#: widgets/nowplayingwidget.cpp:96
 msgid "Small album cover"
 msgstr "Golo album bihan"
 
@@ -4704,7 +4735,7 @@ msgstr "Titouroù an ton"
 
 #: ui/mainwindow.cpp:249
 msgid "Song info"
-msgstr "Titouroù an ton"
+msgstr "Ton"
 
 #: analyzers/sonogram.cpp:32
 msgid "Sonogram"
@@ -5098,6 +5129,10 @@ msgstr "Al lanv-mañ a zo evit an izili o deus paet."
 msgid "This type of device is not supported: %1"
 msgstr "An doare trobarzhell-mañ n'eo ket meret :%1"
 
+#: ../bin/src/ui_behavioursettingspage.h:337
+msgid "Time step"
+msgstr ""
+
 #: playlist/playlist.cpp:1315 ui/organisedialog.cpp:60
 #: ui/qtsystemtrayicon.cpp:232 ../bin/src/ui_about.h:142
 #: ../bin/src/ui_edittagdialog.h:734 ../bin/src/ui_trackselectiondialog.h:211
@@ -5256,7 +5291,7 @@ msgstr "Digoumanantiñ"
 msgid "Upcoming Concerts"
 msgstr "Sonadegoù o-tont"
 
-#: internet/vk/vkservice.cpp:332
+#: internet/vk/vkservice.cpp:341
 msgid "Update"
 msgstr "Hizivaat"
 
@@ -5310,7 +5345,7 @@ msgstr "Implij berradennoù Gnome"
 msgid "Use Psychedelic Colors"
 msgstr "Ober gant livioù psikedelek"
 
-#: ../bin/src/ui_playbacksettingspage.h:323
+#: ../bin/src/ui_playbacksettingspage.h:353
 msgid "Use Replay Gain metadata if it is available"
 msgstr "Implij metaroadenn Replay Gain ma 'z eo posubl"
 
@@ -5354,7 +5389,7 @@ msgstr "Implij ar c'hemennadennoù evit embann stad ar wiimote"
 msgid "Use temporal noise shaping"
 msgstr "Implij ar mod kemmañ ar sonioù evit ur mare"
 
-#: ../bin/src/ui_behavioursettingspage.h:266
+#: ../bin/src/ui_behavioursettingspage.h:296
 msgid "Use the system default"
 msgstr "Implij yezh dre ziouer ar reizhad"
 
@@ -5386,7 +5421,7 @@ msgstr "Etrefas implijer"
 msgid "Username"
 msgstr "Lezanv"
 
-#: ../bin/src/ui_behavioursettingspage.h:279
+#: ../bin/src/ui_behavioursettingspage.h:309
 msgid "Using the menu to add a song will..."
 msgstr "Implij ar roll evit ouzhpennañ un ton a..."
 
@@ -5451,11 +5486,11 @@ msgstr "WAV"
 msgid "WMA"
 msgstr "WMA"
 
-#: internet/vk/vkservice.cpp:860
+#: internet/vk/vkservice.cpp:869
 msgid "Wall"
 msgstr "Moger"
 
-#: playlist/playlisttabbar.cpp:192 ../bin/src/ui_behavioursettingspage.h:262
+#: playlist/playlisttabbar.cpp:192 ../bin/src/ui_behavioursettingspage.h:292
 msgid "Warn me when closing a playlist tab"
 msgstr "Gervel ac'hanon pa vez serret un ivinell roll seniñ"
 
@@ -5471,7 +5506,7 @@ msgstr "Lec'hienn web"
 msgid "Weeks"
 msgstr "Sizhunvezhioù"
 
-#: ../bin/src/ui_behavioursettingspage.h:269
+#: ../bin/src/ui_behavioursettingspage.h:299
 msgid "When Clementine starts"
 msgstr "Pa grog Clementine"
 
@@ -5481,7 +5516,7 @@ msgid ""
 "If there are no matches then it will use the largest image in the directory."
 msgstr "E-pad ma klask Clementine goloioù, implij a raio e penn kentañ ar restroù gant unan eus an anvioù-se. Ma n'eus ket diouto, Clementine a implijo skeudenn brasañ an teuliad."
 
-#: ../bin/src/ui_behavioursettingspage.h:306
+#: ../bin/src/ui_behavioursettingspage.h:340
 msgid "When saving a playlist, file paths should be"
 msgstr "Pa vez savetaet ur roll-seniñ, ar c'havlec'hioù a rank bezañ"
 
@@ -5565,7 +5600,7 @@ msgstr "C'hoant ho peus d'ober ur c'hwilervadenn eus al levraoueg bremañ ?"
 msgid "Write all songs statistics into songs' files"
 msgstr "Skrivañ stadegoù an holl tonioù e restroù an tonioù"
 
-#: ../bin/src/ui_behavioursettingspage.h:311
+#: ../bin/src/ui_behavioursettingspage.h:345
 msgid "Write metadata"
 msgstr "Skrivañ ar meta-roadennoù"
 
@@ -5685,7 +5720,7 @@ msgid ""
 "shortcuts in Clementine."
 msgstr "Ezhomm ho peus da lañsañ ar Gwellvezioù Reizhad ha aotren Clementine da \"<span style=\"font-style:italic\">kontroliñ ho urzhiataer</span>\" evit implij berradennoù hollek e Clementine"
 
-#: ../bin/src/ui_behavioursettingspage.h:268
+#: ../bin/src/ui_behavioursettingspage.h:298
 msgid "You will need to restart Clementine if you change the language."
 msgstr "Ezhomm a vo adloc'hañ Clementine ma cheñchit ar yezh."
 

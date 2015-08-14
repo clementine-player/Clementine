@@ -18,9 +18,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2015-07-02 13:48+0000\n"
+"PO-Revision-Date: 2015-07-21 19:18+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
-"Language-Team: Romanian (http://www.transifex.com/p/clementine/language/ro/)\n"
+"Language-Team: Romanian (http://www.transifex.com/davidsansome/clementine/language/ro/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: ro\n"
@@ -51,15 +51,19 @@ msgstr "zile"
 msgid " kbps"
 msgstr "kbps"
 
-#: ../bin/src/ui_playbacksettingspage.h:318
-#: ../bin/src/ui_playbacksettingspage.h:321
-#: ../bin/src/ui_playbacksettingspage.h:335
+#: ../bin/src/ui_playbacksettingspage.h:348
+#: ../bin/src/ui_playbacksettingspage.h:351
+#: ../bin/src/ui_playbacksettingspage.h:365
 msgid " ms"
 msgstr "ms"
 
 #: ../bin/src/ui_songinfosettingspage.h:157
 msgid " pt"
 msgstr "pct"
+
+#: ../bin/src/ui_behavioursettingspage.h:338
+msgid " s"
+msgstr " s"
 
 #: ../bin/src/ui_notificationssettingspage.h:445
 #: ../bin/src/ui_visualisationselector.h:116
@@ -70,7 +74,7 @@ msgstr " secunde"
 msgid " songs"
 msgstr " melodii"
 
-#: internet/vk/vkservice.cpp:148
+#: internet/vk/vkservice.cpp:149
 #, qt-format
 msgid "%1 (%2 songs)"
 msgstr "%1 (%2 melodii)"
@@ -279,13 +283,29 @@ msgstr "1 pistă"
 msgid "128k MP3"
 msgstr "128k MP3"
 
+#: ../bin/src/ui_playbacksettingspage.h:379
+msgid "192,000Hz"
+msgstr "192,000Hz"
+
 #: ../bin/src/ui_appearancesettingspage.h:291
 msgid "40%"
 msgstr "40%"
 
+#: ../bin/src/ui_playbacksettingspage.h:376
+msgid "44,100Hz"
+msgstr "44,100Hz"
+
+#: ../bin/src/ui_playbacksettingspage.h:377
+msgid "48,000Hz"
+msgstr "48,000Hz"
+
 #: library/library.cpp:64
 msgid "50 random tracks"
 msgstr "50 de piste aleatoare"
+
+#: ../bin/src/ui_playbacksettingspage.h:378
+msgid "96,000Hz"
+msgstr "96,000Hz"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:165
 msgid "<a href=\"http://www.di.fm/premium/\">Upgrade to Premium now</a>"
@@ -371,7 +391,7 @@ msgstr "AAC 64k"
 msgid "AIFF"
 msgstr "AIFF"
 
-#: widgets/nowplayingwidget.cpp:148
+#: widgets/nowplayingwidget.cpp:149
 msgid "ALL GLORY TO THE HYPNOTOAD"
 msgstr "TOATĂ SLAVA HYPNOTOADULUI"
 
@@ -393,7 +413,7 @@ msgid "About Qt..."
 msgstr "Despre Qt..."
 
 #: playlist/playlistsaveoptionsdialog.cpp:34
-#: ../bin/src/ui_behavioursettingspage.h:308
+#: ../bin/src/ui_behavioursettingspage.h:342
 msgid "Absolute"
 msgstr "Absolut"
 
@@ -558,7 +578,7 @@ msgstr "Adaugă numărul de omiteri melodie"
 msgid "Add song title tag"
 msgstr "Adaugă eticheta titlului melodiei"
 
-#: internet/vk/vkservice.cpp:320
+#: internet/vk/vkservice.cpp:329
 msgid "Add song to cache"
 msgstr "Adaugă melodie din cache"
 
@@ -578,7 +598,7 @@ msgstr "Adaugă melodiile la \"Muzica mea\" când este apăsat butonul \"Iubeșt
 msgid "Add stream..."
 msgstr "Adaugă flux..."
 
-#: internet/vk/vkservice.cpp:312
+#: internet/vk/vkservice.cpp:321
 msgid "Add to My Music"
 msgstr "Adaugă la Muzica mea"
 
@@ -594,7 +614,7 @@ msgstr ""
 msgid "Add to another playlist"
 msgstr "Adaugă la altă listă de redare"
 
-#: internet/vk/vkservice.cpp:298
+#: internet/vk/vkservice.cpp:307
 msgid "Add to bookmarks"
 msgstr "Adaugă la semnele de carte"
 
@@ -602,11 +622,11 @@ msgstr "Adaugă la semnele de carte"
 msgid "Add to playlist"
 msgstr "Adaugă în lista de redare"
 
-#: ../bin/src/ui_behavioursettingspage.h:298
+#: ../bin/src/ui_behavioursettingspage.h:328
 msgid "Add to the queue"
 msgstr "Adaugă la coadă"
 
-#: internet/vk/vkservice.cpp:328
+#: internet/vk/vkservice.cpp:337
 msgid "Add user/group to bookmarks"
 msgstr "Adaugă utilizator/grup la semne de carte"
 
@@ -660,7 +680,7 @@ msgstr "După copiere..."
 msgid "Album"
 msgstr "Album"
 
-#: ../bin/src/ui_playbacksettingspage.h:328
+#: ../bin/src/ui_playbacksettingspage.h:358
 msgid "Album (ideal loudness for all tracks)"
 msgstr "Album (efect loudness ideal pentru toate pistele)"
 
@@ -678,7 +698,7 @@ msgstr "Copertă album"
 msgid "Album info on jamendo.com..."
 msgstr "Informații album pe jamendo.com..."
 
-#: internet/vk/vkservice.cpp:827
+#: internet/vk/vkservice.cpp:836
 msgid "Albums"
 msgstr "Albume"
 
@@ -744,22 +764,22 @@ msgstr "Permite codarea mijloc/părți"
 msgid "Alongside the originals"
 msgstr "Lângă originale"
 
-#: ../bin/src/ui_behavioursettingspage.h:271
+#: ../bin/src/ui_behavioursettingspage.h:301
 msgid "Always hide the main window"
 msgstr "Ascunde întotdeauna fereastra principală"
 
-#: ../bin/src/ui_behavioursettingspage.h:270
+#: ../bin/src/ui_behavioursettingspage.h:300
 msgid "Always show the main window"
 msgstr "Arată întotdeauna fereastra principală"
 
-#: ../bin/src/ui_behavioursettingspage.h:284
-#: ../bin/src/ui_behavioursettingspage.h:304
+#: ../bin/src/ui_behavioursettingspage.h:314
+#: ../bin/src/ui_behavioursettingspage.h:334
 msgid "Always start playing"
 msgstr "Întotdeauna pornește redarea"
 
 #: ../bin/src/ui_amazonsettingspage.h:103
 msgid "Amazon Cloud Drive"
-msgstr ""
+msgstr "Amazon Cloud Drive"
 
 #: internet/spotify/spotifyblobdownloader.cpp:72
 msgid ""
@@ -804,11 +824,11 @@ msgstr "Adaugă fișiere/URL-uri în lista de redare"
 msgid "Append to current playlist"
 msgstr "Adaugă în lista de redare curentă"
 
-#: ../bin/src/ui_behavioursettingspage.h:295
+#: ../bin/src/ui_behavioursettingspage.h:325
 msgid "Append to the playlist"
 msgstr "Adaugă în lista de redare"
 
-#: ../bin/src/ui_playbacksettingspage.h:331
+#: ../bin/src/ui_playbacksettingspage.h:361
 msgid "Apply compression to prevent clipping"
 msgstr "Aplicați compresia pentru a preveni tăierea"
 
@@ -848,7 +868,7 @@ msgstr "Etichetele artistului"
 msgid "Artist's initial"
 msgstr "Inițiala artistului"
 
-#: ../bin/src/ui_behavioursettingspage.h:310
+#: ../bin/src/ui_behavioursettingspage.h:344
 msgid "Ask when saving"
 msgstr "Întreabă când se salvează"
 
@@ -858,7 +878,7 @@ msgstr "Întreabă când se salvează"
 msgid "Audio format"
 msgstr "Format audio"
 
-#: ../bin/src/ui_playbacksettingspage.h:332
+#: ../bin/src/ui_playbacksettingspage.h:362
 msgid "Audio output"
 msgstr "Ieșire audio"
 
@@ -878,11 +898,12 @@ msgid "Authors"
 msgstr "Autori"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:227
+#: ../bin/src/ui_playbacksettingspage.h:375
 msgid "Auto"
 msgstr "Automat"
 
 #: playlist/playlistsaveoptionsdialog.cpp:32
-#: ../bin/src/ui_behavioursettingspage.h:307
+#: ../bin/src/ui_behavioursettingspage.h:341
 msgid "Automatic"
 msgstr "Automat"
 
@@ -955,7 +976,7 @@ msgstr "Albastru de bază"
 msgid "Basic audio type"
 msgstr "Tip audio de bază"
 
-#: ../bin/src/ui_behavioursettingspage.h:259
+#: ../bin/src/ui_behavioursettingspage.h:289
 msgid "Behavior"
 msgstr "Comportament"
 
@@ -1016,11 +1037,11 @@ msgstr "Box"
 msgid "Browse..."
 msgstr "Navighează..."
 
-#: ../bin/src/ui_playbacksettingspage.h:334
+#: ../bin/src/ui_playbacksettingspage.h:364
 msgid "Buffer duration"
 msgstr "Durată memorie tampon"
 
-#: engines/gstengine.cpp:904
+#: engines/gstengine.cpp:907
 msgid "Buffering"
 msgstr "Se încarcă memoria tampon"
 
@@ -1065,7 +1086,7 @@ msgstr "Anulare"
 msgid "Cancel download"
 msgstr "Anuleaza decarcarea"
 
-#: internet/vk/vkservice.cpp:626
+#: internet/vk/vkservice.cpp:635
 msgid ""
 "Captcha is needed.\n"
 "Try to login into Vk.com with your browser,to fix this problem."
@@ -1095,7 +1116,11 @@ msgstr "Schimbă modul amestecare"
 msgid "Change the language"
 msgstr "Schimbă limba"
 
-#: ../bin/src/ui_playbacksettingspage.h:338
+#: ../bin/src/ui_playbacksettingspage.h:382
+msgid "Changes will take place when the next song starts playing"
+msgstr ""
+
+#: ../bin/src/ui_playbacksettingspage.h:369
 msgid ""
 "Changing mono playback preference will be effective for the next playing "
 "songs"
@@ -1121,7 +1146,7 @@ msgstr "Alegeți directorul cache pentru Vk.com"
 msgid "Choose a name for your smart playlist"
 msgstr "Alegeți un nume pentru lista de redare inteligentă"
 
-#: engines/gstengine.cpp:925
+#: engines/gstengine.cpp:928
 msgid "Choose automatically"
 msgstr "Alege automat"
 
@@ -1307,7 +1332,7 @@ msgstr "Listă separată prin virgulă de clasă:nivel, nivelul este 0-3"
 msgid "Comment"
 msgstr "Comentariu"
 
-#: internet/vk/vkservice.cpp:154
+#: internet/vk/vkservice.cpp:155
 msgid "Community Radio"
 msgstr "Radio comunitar"
 
@@ -1346,7 +1371,7 @@ msgstr "Configurați Spotify..."
 msgid "Configure Subsonic..."
 msgstr "Configurați Subsonic..."
 
-#: internet/vk/vkservice.cpp:337
+#: internet/vk/vkservice.cpp:346
 msgid "Configure Vk.com..."
 msgstr "Configurați Vk.com..."
 
@@ -1393,7 +1418,7 @@ msgid ""
 "Connection timed out, check server URL. Example: http://localhost:4040/"
 msgstr "Conexiunea a expirat, verificați adresa URL a serverului. Exemplu: http://localhost:4040/"
 
-#: internet/vk/vkservice.cpp:1095
+#: internet/vk/vkservice.cpp:1113
 msgid "Connection trouble or audio is disabled by owner"
 msgstr "Probleme cu conexiunea sau audio este dezactivat de către proprietar"
 
@@ -1421,7 +1446,7 @@ msgstr "Convertiți fișierele audio fără pierdere, înainte de trimiterea lor
 msgid "Convert lossless files"
 msgstr "Convertește fișiere fără pierdere"
 
-#: internet/vk/vkservice.cpp:324
+#: internet/vk/vkservice.cpp:333
 msgid "Copy share url to clipboard"
 msgstr "Copiază în memoria temporară url-ul partajat"
 
@@ -1513,11 +1538,11 @@ msgstr "Copertă stabilită de la %1"
 msgid "Covers from %1"
 msgstr "Coperte de la %1"
 
-#: ../bin/src/ui_playbacksettingspage.h:315
+#: ../bin/src/ui_playbacksettingspage.h:345
 msgid "Cross-fade when changing tracks automatically"
 msgstr "Estompare-încrucișată când se schimbă automat pistele"
 
-#: ../bin/src/ui_playbacksettingspage.h:314
+#: ../bin/src/ui_playbacksettingspage.h:344
 msgid "Cross-fade when changing tracks manually"
 msgstr "Estompare-încrucișată când se schimbă manual pistele"
 
@@ -1656,7 +1681,7 @@ msgstr "Scade volumul"
 msgid "Default background image"
 msgstr "Imagine de fundal implicită"
 
-#: engines/gstengine.cpp:950
+#: engines/gstengine.cpp:953
 #, qt-format
 msgid "Default device on %1"
 msgstr "Dispozitiv implicit pe %1"
@@ -1874,7 +1899,7 @@ msgstr "Donați"
 msgid "Double click to open"
 msgstr "Dublu clic pentru a deschide"
 
-#: ../bin/src/ui_behavioursettingspage.h:292
+#: ../bin/src/ui_behavioursettingspage.h:322
 msgid "Double clicking a song will..."
 msgstr "Dublu clic pe o melodie va..."
 
@@ -2033,7 +2058,7 @@ msgstr "Activare egalizator"
 msgid "Enable shortcuts only when Clementine is focused"
 msgstr "Activează scurtăturile numai când Clementine este focalizat"
 
-#: ../bin/src/ui_behavioursettingspage.h:278
+#: ../bin/src/ui_behavioursettingspage.h:308
 msgid "Enable song metadata inline edition with click"
 msgstr "Activati editarea inline a melodiilor prin click"
 
@@ -2123,7 +2148,7 @@ msgstr "Echivalent cu --log-levels *:3"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:242
 #: library/libraryview.cpp:630 ui/mainwindow.cpp:1931 ui/mainwindow.cpp:2178
-#: ui/mainwindow.cpp:2326 internet/vk/vkservice.cpp:625
+#: ui/mainwindow.cpp:2326 internet/vk/vkservice.cpp:634
 msgid "Error"
 msgstr "Eroare"
 
@@ -2198,7 +2223,7 @@ msgstr "La fiecare 6 ore"
 msgid "Every hour"
 msgstr "La fiecare oră"
 
-#: ../bin/src/ui_playbacksettingspage.h:316
+#: ../bin/src/ui_playbacksettingspage.h:346
 msgid "Except between tracks on the same album or in the same CUE sheet"
 msgstr "Excepție între pistele de pe același album sau în aceeași filă CUE"
 
@@ -2270,20 +2295,20 @@ msgstr "F8"
 msgid "FLAC"
 msgstr "FLAC"
 
-#: ../bin/src/ui_playbacksettingspage.h:319
+#: ../bin/src/ui_playbacksettingspage.h:349
 msgid "Fade out on pause / fade in on resume"
 msgstr "Estompare ieșire la pauzare / estompare intrare la reluare"
 
-#: ../bin/src/ui_playbacksettingspage.h:313
+#: ../bin/src/ui_playbacksettingspage.h:343
 msgid "Fade out when stopping a track"
 msgstr "Estompare ieșire la oprirea unei piese"
 
-#: ../bin/src/ui_playbacksettingspage.h:312
+#: ../bin/src/ui_playbacksettingspage.h:342
 msgid "Fading"
 msgstr "Se estompează"
 
-#: ../bin/src/ui_playbacksettingspage.h:317
-#: ../bin/src/ui_playbacksettingspage.h:320
+#: ../bin/src/ui_playbacksettingspage.h:347
+#: ../bin/src/ui_playbacksettingspage.h:350
 msgid "Fading duration"
 msgstr "Durata estompării"
 
@@ -2395,7 +2420,7 @@ msgstr "Fișiere pentru transcodificare"
 msgid "Find songs in your library that match the criteria you specify."
 msgstr "Căutați melodii în biblioteca dumneavoastră care se potrivesc cu criteriul specificat."
 
-#: internet/vk/vkservice.cpp:308
+#: internet/vk/vkservice.cpp:317
 msgid "Find this artist"
 msgstr "Găsește acest artist"
 
@@ -2411,7 +2436,7 @@ msgstr "Sfârșit"
 msgid "First level"
 msgstr "Primul nivel"
 
-#: widgets/nowplayingwidget.cpp:107
+#: widgets/nowplayingwidget.cpp:108
 msgid "Fit cover to width"
 msgstr "Ajusteaza coperta in functie de latime"
 
@@ -2553,7 +2578,7 @@ msgstr "Google Drive"
 msgid "Got %1 covers out of %2 (%3 failed)"
 msgstr "S-au exportat %1 coperte din %2 (%3 omise) "
 
-#: ../bin/src/ui_behavioursettingspage.h:274
+#: ../bin/src/ui_behavioursettingspage.h:304
 msgid "Grey out non existent songs in my playlists"
 msgstr "Colorează în gri melodiile inexistente în listele mele de redare"
 
@@ -2666,7 +2691,7 @@ msgstr "Miniaturile în partea de sus"
 msgid "Identifying song"
 msgstr "Identificare melodie"
 
-#: ../bin/src/ui_behavioursettingspage.h:276
+#: ../bin/src/ui_behavioursettingspage.h:306
 msgid ""
 "If activated, clicking a selected song in the playlist view will let you "
 "edit the tag value directly"
@@ -2848,7 +2873,7 @@ msgstr "Jamedo pistele de top ale săptămânii"
 msgid "Jamendo database"
 msgstr "Baza de date Jamendo"
 
-#: ../bin/src/ui_behavioursettingspage.h:289
+#: ../bin/src/ui_behavioursettingspage.h:319
 msgid "Jump to previous song right away"
 msgstr ""
 
@@ -2868,7 +2893,7 @@ msgstr "Mențineți butoanele pentru %1 secundă..."
 msgid "Keep buttons for %1 seconds..."
 msgstr "Mențineți butoanele pentru %1 secunde..."
 
-#: ../bin/src/ui_behavioursettingspage.h:261
+#: ../bin/src/ui_behavioursettingspage.h:291
 msgid "Keep running in the background when the window is closed"
 msgstr "Menține rularea în fundal atunci când fereastra este închisă"
 
@@ -2885,7 +2910,7 @@ msgstr "Pisicuțe"
 msgid "Kuduro"
 msgstr "Kuduro"
 
-#: ../bin/src/ui_behavioursettingspage.h:263
+#: ../bin/src/ui_behavioursettingspage.h:293
 msgid "Language"
 msgstr "Limbă"
 
@@ -2897,15 +2922,15 @@ msgstr "Laptop/Căști"
 msgid "Large Hall"
 msgstr "Sală mare"
 
-#: widgets/nowplayingwidget.cpp:97
+#: widgets/nowplayingwidget.cpp:98
 msgid "Large album cover"
 msgstr "Copertă album mare"
 
-#: widgets/nowplayingwidget.cpp:100
+#: widgets/nowplayingwidget.cpp:101
 msgid "Large album cover (details below)"
 msgstr "Copertă album mare (detaliile dedesubt)"
 
-#: widgets/nowplayingwidget.cpp:102
+#: widgets/nowplayingwidget.cpp:103
 msgid "Large album cover (no details)"
 msgstr ""
 
@@ -3049,7 +3074,7 @@ msgstr "Se încarcă informație piste"
 #: internet/podcasts/podcastdiscoverymodel.cpp:105 widgets/prettyimage.cpp:168
 #: widgets/widgetfadehelper.cpp:96 ../bin/src/ui_addpodcastdialog.h:180
 #: ../bin/src/ui_searchpreview.h:106 ../bin/src/ui_organisedialog.h:262
-#: internet/vk/vkservice.cpp:499 internet/vk/vksettingspage.cpp:122
+#: internet/vk/vkservice.cpp:508 internet/vk/vksettingspage.cpp:122
 msgid "Loading..."
 msgstr "Se încarcă..."
 
@@ -3238,7 +3263,7 @@ msgstr "Tipul de apartenenta"
 msgid "Minimum bitrate"
 msgstr "Rata de biți minimă"
 
-#: ../bin/src/ui_playbacksettingspage.h:336
+#: ../bin/src/ui_playbacksettingspage.h:366
 msgid "Minimum buffer fill"
 msgstr "Umplere minima a tamponului"
 
@@ -3254,7 +3279,7 @@ msgstr "Model"
 msgid "Monitor the library for changes"
 msgstr "Monitorizează biblioteca pentru schimbări"
 
-#: ../bin/src/ui_playbacksettingspage.h:340
+#: ../bin/src/ui_playbacksettingspage.h:371
 msgid "Mono playback"
 msgstr "Redare mono"
 
@@ -3275,7 +3300,7 @@ msgstr "Stil bară dispoziție"
 msgid "Moodbars"
 msgstr "Bare dispoziție"
 
-#: internet/vk/vkservice.cpp:503
+#: internet/vk/vkservice.cpp:512
 msgid "More"
 msgstr "Mai mult"
 
@@ -3306,7 +3331,7 @@ msgid "Move up"
 msgstr "Mută în sus"
 
 #: transcoder/transcodedialog.cpp:225 ui/mainwindow.cpp:1866
-#: internet/vk/vkservice.cpp:884
+#: internet/vk/vkservice.cpp:893
 msgid "Music"
 msgstr "Muzică"
 
@@ -3319,15 +3344,15 @@ msgstr "Biblioteca muzicală"
 msgid "Mute"
 msgstr "Mut"
 
-#: internet/vk/vkservice.cpp:820
+#: internet/vk/vkservice.cpp:829
 msgid "My Albums"
 msgstr "Albumele mele"
 
-#: internet/vk/vkservice.cpp:878
+#: internet/vk/vkservice.cpp:887
 msgid "My Music"
 msgstr "Muzica mea"
 
-#: internet/vk/vkservice.cpp:510
+#: internet/vk/vkservice.cpp:519
 msgid "My Recommendations"
 msgstr "Recomandările mele"
 
@@ -3365,8 +3390,8 @@ msgstr "Niciodată"
 msgid "Never played"
 msgstr "Niciodată redate"
 
-#: ../bin/src/ui_behavioursettingspage.h:282
-#: ../bin/src/ui_behavioursettingspage.h:302
+#: ../bin/src/ui_behavioursettingspage.h:312
+#: ../bin/src/ui_behavioursettingspage.h:332
 msgid "Never start playing"
 msgstr "Nu începe redarea niciodată"
 
@@ -3606,7 +3631,7 @@ msgstr "Deschide în Google Drive"
 msgid "Open in new playlist"
 msgstr "Deschide în listă de redare nouă"
 
-#: ../bin/src/ui_behavioursettingspage.h:297
+#: ../bin/src/ui_behavioursettingspage.h:327
 msgctxt "Refers to behavior settings in Clementine settings page."
 msgid "Open in new playlist"
 msgstr "Deschide în listă de redare nouă"
@@ -3662,12 +3687,12 @@ msgstr "Etichete originale"
 #: ../bin/src/ui_groupbydialog.h:136 ../bin/src/ui_groupbydialog.h:155
 #: ../bin/src/ui_groupbydialog.h:174
 msgid "Original year"
-msgstr ""
+msgstr "An original"
 
 #: ../bin/src/ui_groupbydialog.h:138 ../bin/src/ui_groupbydialog.h:157
 #: ../bin/src/ui_groupbydialog.h:176
 msgid "Original year - Album"
-msgstr ""
+msgstr "An original - Album"
 
 #: library/library.cpp:118
 msgid "Original year tag support"
@@ -3681,7 +3706,7 @@ msgstr "Alte opțiuni"
 msgid "Output"
 msgstr "Ieșire"
 
-#: ../bin/src/ui_playbacksettingspage.h:333
+#: ../bin/src/ui_playbacksettingspage.h:363
 msgid "Output device"
 msgstr "Dispozitiv de ieșire"
 
@@ -3764,8 +3789,8 @@ msgstr "Număr redări"
 msgid "Play if stopped, pause if playing"
 msgstr "Redă dacă este oprit, întrerupe dacă se redă"
 
-#: ../bin/src/ui_behavioursettingspage.h:283
-#: ../bin/src/ui_behavioursettingspage.h:303
+#: ../bin/src/ui_behavioursettingspage.h:313
+#: ../bin/src/ui_behavioursettingspage.h:333
 msgid "Play if there is nothing already playing"
 msgstr "Redă numai dacă nu se redă deja ceva"
 
@@ -3777,7 +3802,7 @@ msgstr "Redă melodia a <n>a din lista de redare"
 msgid "Play/Pause"
 msgstr "Redare/Pauză"
 
-#: ../bin/src/ui_playbacksettingspage.h:310
+#: ../bin/src/ui_playbacksettingspage.h:340
 msgid "Playback"
 msgstr "Redare"
 
@@ -3834,7 +3859,7 @@ msgstr "Durată afișare "
 msgid "Port"
 msgstr "Port"
 
-#: ui/equalizer.cpp:44 ../bin/src/ui_playbacksettingspage.h:330
+#: ui/equalizer.cpp:44 ../bin/src/ui_playbacksettingspage.h:360
 msgid "Pre-amp"
 msgstr "Preamplificare"
 
@@ -3890,7 +3915,7 @@ msgstr "Apăsați o tastă"
 msgid "Press a key combination to use for %1..."
 msgstr "Apăsați o combinație de taste pentru a fi utilizată la %1..."
 
-#: ../bin/src/ui_behavioursettingspage.h:286
+#: ../bin/src/ui_behavioursettingspage.h:316
 msgid "Pressing \"Previous\" in player will..."
 msgstr ""
 
@@ -3973,7 +3998,7 @@ msgstr "Adaugă în coadă pistele selectate"
 msgid "Queue track"
 msgstr "Adaugă în coadă pista"
 
-#: ../bin/src/ui_playbacksettingspage.h:327
+#: ../bin/src/ui_playbacksettingspage.h:357
 msgid "Radio (equal loudness for all tracks)"
 msgstr "Radio (egalizare loudness pentru toate pistele)"
 
@@ -4050,7 +4075,7 @@ msgid "Reggae"
 msgstr "Reggae"
 
 #: playlist/playlistsaveoptionsdialog.cpp:33
-#: ../bin/src/ui_behavioursettingspage.h:309
+#: ../bin/src/ui_behavioursettingspage.h:343
 msgid "Relative"
 msgstr "Relativ"
 
@@ -4058,7 +4083,7 @@ msgstr "Relativ"
 msgid "Remember Wii remote swing"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:272
+#: ../bin/src/ui_behavioursettingspage.h:302
 msgid "Remember from last time"
 msgstr "Ține minte de ultima dată"
 
@@ -4083,11 +4108,11 @@ msgstr "Elimină duplicatele din lista de redare"
 msgid "Remove folder"
 msgstr "Elimină dosar"
 
-#: internet/vk/vkservice.cpp:316
+#: internet/vk/vkservice.cpp:325
 msgid "Remove from My Music"
 msgstr "Elimină din Muzica mea"
 
-#: internet/vk/vkservice.cpp:302
+#: internet/vk/vkservice.cpp:311
 msgid "Remove from bookmarks"
 msgstr "Elimină din semne de carte"
 
@@ -4141,7 +4166,7 @@ msgstr "Repetă pista"
 msgid "Replace current playlist"
 msgstr "Înlocuiește lista de redare curentă"
 
-#: ../bin/src/ui_behavioursettingspage.h:296
+#: ../bin/src/ui_behavioursettingspage.h:326
 msgid "Replace the playlist"
 msgstr "Înlocuiește lista de redare"
 
@@ -4149,11 +4174,11 @@ msgstr "Înlocuiește lista de redare"
 msgid "Replaces spaces with underscores"
 msgstr "Înlocuiește spațiul cu subliniere"
 
-#: ../bin/src/ui_playbacksettingspage.h:322
+#: ../bin/src/ui_playbacksettingspage.h:352
 msgid "Replay Gain"
 msgstr ""
 
-#: ../bin/src/ui_playbacksettingspage.h:324
+#: ../bin/src/ui_playbacksettingspage.h:354
 msgid "Replay Gain mode"
 msgstr ""
 
@@ -4173,7 +4198,7 @@ msgstr "Resetare"
 msgid "Reset play counts"
 msgstr "Resetează numărul de ascultări"
 
-#: ../bin/src/ui_behavioursettingspage.h:290
+#: ../bin/src/ui_behavioursettingspage.h:320
 msgid "Restart song, then jump to previous if pressed again"
 msgstr ""
 
@@ -4186,7 +4211,7 @@ msgstr ""
 msgid "Restrict to ASCII characters"
 msgstr "Restricionat la caractere ASCII"
 
-#: ../bin/src/ui_behavioursettingspage.h:273
+#: ../bin/src/ui_behavioursettingspage.h:303
 msgid "Resume playback on start"
 msgstr "Reia redarea la pornire"
 
@@ -4237,6 +4262,7 @@ msgid "Safely remove the device after copying"
 msgstr "Scoate în siguranță dispozitivul după copiere"
 
 #: playlist/playlist.cpp:1357 ../bin/src/ui_edittagdialog.h:724
+#: ../bin/src/ui_playbacksettingspage.h:372
 msgid "Sample rate"
 msgstr "Rată de eșantionare"
 
@@ -4320,7 +4346,7 @@ msgstr ""
 
 #: ui/albumcoversearcher.cpp:165 ui/albumcoversearcher.cpp:182
 #: ../bin/src/ui_gpoddersearchpage.h:78 ../bin/src/ui_itunessearchpage.h:78
-#: ../bin/src/ui_albumcoversearcher.h:114 internet/vk/vkservice.cpp:518
+#: ../bin/src/ui_albumcoversearcher.h:114 internet/vk/vkservice.cpp:527
 msgid "Search"
 msgstr "Căutare"
 
@@ -4402,6 +4428,10 @@ msgstr "Caută în pista redată curent cu o cantitate relativă"
 #: core/commandlineoptions.cpp:160
 msgid "Seek the currently playing track to an absolute position"
 msgstr "Caută în pista redată curent pentru o poziție absolută"
+
+#: ../bin/src/ui_behavioursettingspage.h:336
+msgid "Seeking using a keyboard shortcut"
+msgstr ""
 
 #: visualisations/visualisationselector.cpp:37 ../bin/src/ui_ripcddialog.h:310
 msgid "Select All"
@@ -4499,7 +4529,7 @@ msgstr "Arată"
 msgid "Show OSD"
 msgstr "Arată OSD"
 
-#: ../bin/src/ui_playbacksettingspage.h:311
+#: ../bin/src/ui_playbacksettingspage.h:341
 msgid "Show a glowing animation on the current track"
 msgstr "Arată o animație strălucitoare pe pista curentă"
 
@@ -4531,7 +4561,7 @@ msgstr "Arată o notificare din zona de notificări"
 msgid "Show a pretty OSD"
 msgstr "Arată un OSD drăguț"
 
-#: widgets/nowplayingwidget.cpp:139
+#: widgets/nowplayingwidget.cpp:140
 msgid "Show above status bar"
 msgstr "Arată deasupra bării de stare"
 
@@ -4600,7 +4630,7 @@ msgstr "Arată butonul \"iubire\""
 msgid "Show the scrobble button in the main window"
 msgstr "Arată butonul scrobble în fereastra principală"
 
-#: ../bin/src/ui_behavioursettingspage.h:260
+#: ../bin/src/ui_behavioursettingspage.h:290
 msgid "Show tray icon"
 msgstr "Arată pictograma în tava de sistem"
 
@@ -4680,7 +4710,7 @@ msgstr "Omite pistele selectate"
 msgid "Skip track"
 msgstr "Omite pista"
 
-#: widgets/nowplayingwidget.cpp:95
+#: widgets/nowplayingwidget.cpp:96
 msgid "Small album cover"
 msgstr "Copertă album mică"
 
@@ -5104,6 +5134,10 @@ msgstr "Acest flux este numai pentru abonații cu plată"
 msgid "This type of device is not supported: %1"
 msgstr "Acest tip de dispozitiv nu este suportat: %1"
 
+#: ../bin/src/ui_behavioursettingspage.h:337
+msgid "Time step"
+msgstr ""
+
 #: playlist/playlist.cpp:1315 ui/organisedialog.cpp:60
 #: ui/qtsystemtrayicon.cpp:232 ../bin/src/ui_about.h:142
 #: ../bin/src/ui_edittagdialog.h:734 ../bin/src/ui_trackselectiondialog.h:211
@@ -5262,7 +5296,7 @@ msgstr "Dezabonare"
 msgid "Upcoming Concerts"
 msgstr "Concerte viitoare"
 
-#: internet/vk/vkservice.cpp:332
+#: internet/vk/vkservice.cpp:341
 msgid "Update"
 msgstr "Actualizare"
 
@@ -5314,9 +5348,9 @@ msgstr "Utilizați scurtăturile de taste Gnome"
 
 #: analyzers/analyzercontainer.cpp:94
 msgid "Use Psychedelic Colors"
-msgstr ""
+msgstr "Utilizează culori psihedelice"
 
-#: ../bin/src/ui_playbacksettingspage.h:323
+#: ../bin/src/ui_playbacksettingspage.h:353
 msgid "Use Replay Gain metadata if it is available"
 msgstr ""
 
@@ -5360,7 +5394,7 @@ msgstr "Utilizează notificările pentru raportare stare Wii Remote"
 msgid "Use temporal noise shaping"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:266
+#: ../bin/src/ui_behavioursettingspage.h:296
 msgid "Use the system default"
 msgstr "Utilizează cele implicite de sistem"
 
@@ -5392,7 +5426,7 @@ msgstr "Interfață utilizator "
 msgid "Username"
 msgstr "Nume utilizator"
 
-#: ../bin/src/ui_behavioursettingspage.h:279
+#: ../bin/src/ui_behavioursettingspage.h:309
 msgid "Using the menu to add a song will..."
 msgstr "Utilizarea meniului pentru a adăuga o melodie va..."
 
@@ -5457,11 +5491,11 @@ msgstr "WAV"
 msgid "WMA"
 msgstr "WMA"
 
-#: internet/vk/vkservice.cpp:860
+#: internet/vk/vkservice.cpp:869
 msgid "Wall"
 msgstr "Zid"
 
-#: playlist/playlisttabbar.cpp:192 ../bin/src/ui_behavioursettingspage.h:262
+#: playlist/playlisttabbar.cpp:192 ../bin/src/ui_behavioursettingspage.h:292
 msgid "Warn me when closing a playlist tab"
 msgstr "Atenționează-mă când închid o filă listă de redare"
 
@@ -5477,7 +5511,7 @@ msgstr "Site web"
 msgid "Weeks"
 msgstr "Săptămâni"
 
-#: ../bin/src/ui_behavioursettingspage.h:269
+#: ../bin/src/ui_behavioursettingspage.h:299
 msgid "When Clementine starts"
 msgstr "Când pornește Clementine"
 
@@ -5487,7 +5521,7 @@ msgid ""
 "If there are no matches then it will use the largest image in the directory."
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:306
+#: ../bin/src/ui_behavioursettingspage.h:340
 msgid "When saving a playlist, file paths should be"
 msgstr "Când se salvează o listă de redare, calea fișierului ar trebui să fie"
 
@@ -5571,7 +5605,7 @@ msgstr "Doriți să rulați o rescanare completă chiar acum?"
 msgid "Write all songs statistics into songs' files"
 msgstr "Scrie toate statisticile melodiilor în fișierele melodiei"
 
-#: ../bin/src/ui_behavioursettingspage.h:311
+#: ../bin/src/ui_behavioursettingspage.h:345
 msgid "Write metadata"
 msgstr "Scrie metadatele"
 
@@ -5691,7 +5725,7 @@ msgid ""
 "shortcuts in Clementine."
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:268
+#: ../bin/src/ui_behavioursettingspage.h:298
 msgid "You will need to restart Clementine if you change the language."
 msgstr "Va trebui să reporniți Clementine dacă schimbați limba."
 

@@ -113,6 +113,15 @@ void Player::ReloadSettings() {
 }
 
 void Player::HandleLoadResult(const UrlHandler::LoadResult& result) {
+  // Might've been an async load, so check we're still on the same item
+  shared_ptr<PlaylistItem> item = app_->playlist_manager()->active()->current_item();
+  if (!item) {
+    loading_async_ = QUrl();
+    return;
+  }
+
+  if (item->Url() != result.original_url_) return;
+
   switch (result.type_) {
     case UrlHandler::LoadResult::NoMoreTracks:
       qLog(Debug) << "URL handler for" << result.original_url_
@@ -123,14 +132,6 @@ void Player::HandleLoadResult(const UrlHandler::LoadResult& result) {
       break;
 
     case UrlHandler::LoadResult::TrackAvailable: {
-      // Might've been an async load, so check we're still on the same item
-      int current_index = app_->playlist_manager()->active()->current_row();
-      if (current_index == -1) return;
-
-      shared_ptr<PlaylistItem> item =
-          app_->playlist_manager()->active()->item_at(current_index);
-      if (!item || item->Url() != result.original_url_) return;
-
       qLog(Debug) << "URL handler for" << result.original_url_ << "returned"
                   << result.media_url_;
 
@@ -303,6 +304,13 @@ void Player::Stop(bool stop_after) {
 void Player::StopAfterCurrent() {
   app_->playlist_manager()->active()->StopAfter(
       app_->playlist_manager()->active()->current_row());
+}
+
+bool Player::PreviousWouldRestartTrack() const {
+  // Check if it has been over two seconds since previous button was pressed
+  return menu_previousmode_ == PreviousBehaviour_Restart &&
+         last_pressed_previous_.isValid() &&
+         last_pressed_previous_.secsTo(QDateTime::currentDateTime()) >= 2;
 }
 
 void Player::Previous() { PreviousItem(Engine::Manual); }
