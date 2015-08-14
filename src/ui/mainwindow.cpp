@@ -992,10 +992,10 @@ void MainWindow::ReloadSettings() {
       s.value("doubleclick_playmode", PlayBehaviour_IfStopped).toInt());
   doubleclick_playlist_addmode_ =
       PlaylistAddBehaviour(s.value("doubleclick_playlist_addmode",
-          PlaylistAddBehaviour_Play).toInt());
-  doubleclick_playlist_playmode_ = PlaylistPlayBehaviour(
-      s.value("doubleclick_playlist_playmode",
-          PlaylistPlayBehaviour_IfStopped).toInt());
+                                   PlaylistAddBehaviour_Play).toInt());
+  doubleclick_playlist_playmode_ =
+      PlaylistPlayBehaviour(s.value("doubleclick_playlist_playmode",
+                                    PlaylistPlayBehaviour_IfStopped).toInt());
   menu_playmode_ =
       PlayBehaviour(s.value("menu_playmode", PlayBehaviour_IfStopped).toInt());
 }
@@ -1253,8 +1253,8 @@ void MainWindow::PlaylistDoubleClick(const QModelIndex& index) {
       switch (doubleclick_playlist_playmode_) {
         case PlaylistPlayBehaviour_IfStopped:
           if (app_->player()->GetState() == Engine::Playing) {
-            break; // don't play if already playing
-          } // otherwise, behave the same as for "Always" (no break statement)
+            break;  // don't play if already playing
+          }  // otherwise, behave the same as for "Always" (no break statement)
 
         case PlaylistPlayBehaviour_Always:
           app_->playlist_manager()->SetActiveToCurrent();
@@ -1269,23 +1269,23 @@ void MainWindow::PlaylistDoubleClick(const QModelIndex& index) {
 
     case PlaylistAddBehaviour_PlayNext:
       app_->playlist_manager()->current()->queue()->Clear();
-      // continue as if enqueueing (no break statement)
+    // continue as if enqueueing (no break statement)
     case PlaylistAddBehaviour_Enqueue:
       dummyIndexList.append(index);
-      app_->playlist_manager()->current()->queue()->
-        ToggleTracks(dummyIndexList);
+      app_->playlist_manager()->current()->queue()->ToggleTracks(
+          dummyIndexList);
       switch (doubleclick_playlist_playmode_) {
         case PlaylistPlayBehaviour_Always:
         case PlaylistPlayBehaviour_IfStopped:
           if (app_->player()->GetState() != Engine::Playing) {
             app_->player()->PlayAt(
-              app_->playlist_manager()->current()->queue()->TakeNext(),
+                app_->playlist_manager()->current()->queue()->TakeNext(),
                 Engine::Manual, true);
           }
           break;
         case PlaylistPlayBehaviour_Never:
           // deliberately do nothing here
-           break;
+          break;
       }
       break;
 
@@ -1293,7 +1293,6 @@ void MainWindow::PlaylistDoubleClick(const QModelIndex& index) {
       // deliberately do nothing here
       break;
   }
-
 }
 
 void MainWindow::VolumeWheelEvent(int delta) {
