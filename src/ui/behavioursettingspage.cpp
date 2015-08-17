@@ -47,6 +47,22 @@ BehaviourSettingsPage::BehaviourSettingsPage(SettingsDialog* dialog)
                                          MainWindow::PlayBehaviour_IfStopped);
   ui_->doubleclick_playmode->setItemData(2, MainWindow::PlayBehaviour_Always);
 
+  ui_->doubleclick_playlist_addmode->setItemData(
+      0, MainWindow::PlaylistAddBehaviour_Play);
+  ui_->doubleclick_playlist_addmode->setItemData(
+      1, MainWindow::PlaylistAddBehaviour_Enqueue);
+  ui_->doubleclick_playlist_addmode->setItemData(
+      2, MainWindow::PlaylistAddBehaviour_PlayNext);
+  ui_->doubleclick_playlist_addmode->setItemData(
+      3, MainWindow::PlaylistAddBehaviour_Nothing);
+
+  ui_->doubleclick_playlist_playmode->setItemData(
+      0, MainWindow::PlaylistPlayBehaviour_Never);
+  ui_->doubleclick_playlist_playmode->setItemData(
+      1, MainWindow::PlaylistPlayBehaviour_IfStopped);
+  ui_->doubleclick_playlist_playmode->setItemData(
+      2, MainWindow::PlaylistPlayBehaviour_Always);
+
   ui_->menu_playmode->setItemData(0, MainWindow::PlayBehaviour_Never);
   ui_->menu_playmode->setItemData(1, MainWindow::PlayBehaviour_IfStopped);
   ui_->menu_playmode->setItemData(2, MainWindow::PlayBehaviour_Always);
@@ -65,9 +81,9 @@ BehaviourSettingsPage::BehaviourSettingsPage(SettingsDialog* dialog)
 
     QString code = lang_re.cap(1);
     QString lookup_code = QString(code)
-        .replace("@latin", "_Latn")
-        .replace("_CN", "_Hans_CN")
-        .replace("_TW", "_Hant_TW");
+                              .replace("@latin", "_Latn")
+                              .replace("_CN", "_Hans_CN")
+                              .replace("_TW", "_Hant_TW");
     QString language_name =
         QLocale::languageToString(QLocale(lookup_code).language());
 #if QT_VERSION >= 0x040800
@@ -109,6 +125,14 @@ void BehaviourSettingsPage::Load() {
       ui_->doubleclick_playmode->findData(
           s.value("doubleclick_playmode", MainWindow::PlayBehaviour_IfStopped)
               .toInt()));
+  ui_->doubleclick_playlist_addmode->setCurrentIndex(
+      ui_->doubleclick_playlist_addmode->findData(
+          s.value("doubleclick_playlist_addmode",
+                  MainWindow::PlaylistAddBehaviour_Play).toInt()));
+  ui_->doubleclick_playlist_playmode->setCurrentIndex(
+      ui_->doubleclick_playlist_playmode->findData(
+          s.value("doubleclick_playlist_playmode",
+                  MainWindow::PlaylistPlayBehaviour_IfStopped).toInt()));
   ui_->menu_playmode->setCurrentIndex(ui_->menu_playmode->findData(
       s.value("menu_playmode", MainWindow::PlayBehaviour_IfStopped).toInt()));
 
@@ -131,7 +155,8 @@ void BehaviourSettingsPage::Load() {
 
   s.beginGroup(Player::kSettingsGroup);
   ui_->menu_previousmode->setCurrentIndex(ui_->menu_previousmode->findData(
-      s.value("menu_previousmode", Player::PreviousBehaviour_DontRestart).toInt()));
+      s.value("menu_previousmode", Player::PreviousBehaviour_DontRestart)
+          .toInt()));
   ui_->seek_step_sec->setValue(s.value("seek_step_sec", 10).toInt());
   s.endGroup();
 
@@ -192,6 +217,16 @@ void BehaviourSettingsPage::Save() {
       ui_->doubleclick_playmode->itemData(
                                      ui_->doubleclick_playmode->currentIndex())
           .toInt());
+  MainWindow::PlaylistAddBehaviour doubleclick_playlist_addmode =
+      MainWindow::PlaylistAddBehaviour(
+          ui_->doubleclick_playlist_addmode
+              ->itemData(ui_->doubleclick_playlist_addmode->currentIndex())
+              .toInt());
+  MainWindow::PlaylistPlayBehaviour doubleclick_playlist_playmode =
+      MainWindow::PlaylistPlayBehaviour(
+          ui_->doubleclick_playlist_playmode
+              ->itemData(ui_->doubleclick_playlist_playmode->currentIndex())
+              .toInt());
   MainWindow::PlayBehaviour menu_playmode = MainWindow::PlayBehaviour(
       ui_->menu_playmode->itemData(ui_->menu_playmode->currentIndex()).toInt());
 
@@ -216,6 +251,8 @@ void BehaviourSettingsPage::Save() {
   s.setValue("startupbehaviour", int(behaviour));
   s.setValue("doubleclick_addmode", doubleclick_addmode);
   s.setValue("doubleclick_playmode", doubleclick_playmode);
+  s.setValue("doubleclick_playlist_addmode", doubleclick_playlist_addmode);
+  s.setValue("doubleclick_playlist_playmode", doubleclick_playlist_playmode);
   s.setValue("menu_playmode", menu_playmode);
   s.setValue("resume_playback_after_start",
              ui_->resume_after_start_->isChecked());
