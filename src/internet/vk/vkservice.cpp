@@ -1191,7 +1191,11 @@ UrlHandler::LoadResult VkService::GetSongResult(const QUrl& url) {
   if (media_url.isValid()) {
     Song song = FromAudioItem(audio_item);
     SongStarting(song);
-    cache_->AddToCache(url, media_url);
+
+    if (cachingEnabled_) {
+      cache_->AddToCache(url, media_url);
+    }
+
     return UrlHandler::LoadResult(url, UrlHandler::LoadResult::TrackAvailable,
                                   media_url, song.length_nanosec());
   }
