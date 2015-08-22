@@ -42,11 +42,15 @@
 #include <QMenu>
 #include <QSettings>
 
+#ifdef HAVE_LIBSCROBBLER
+#include <scrobbler/RadioStation.h>
+#else  // DO NOT HAVE_LIBSCROBBLER
 #ifdef HAVE_LIBLASTFM1
 #include <lastfm/RadioStation.h>
-#else
+#else  // DO NOT HAVE_LIBLASTFM1
 #include <lastfm/RadioStation>
-#endif
+#endif  // HAVE_LIBLASTFM1
+#endif  // HAVE_LIBSCROBBLER
 
 #include "lastfmcompat.h"
 #include "internet/core/internetmodel.h"
@@ -99,6 +103,10 @@ void LastFMService::ReloadSettings() {
   settings.beginGroup(kSettingsGroup);
   lastfm::ws::Username = settings.value("Username").toString();
   lastfm::ws::SessionKey = settings.value("Session").toString();
+#ifdef HAVE_LIBSCROBBLER
+  lastfm::ws::Server = settings.value("Server").toString();
+#endif
+
   scrobbling_enabled_ = settings.value("ScrobblingEnabled", true).toBool();
   buttons_visible_ = settings.value("ShowLoveBanButtons", true).toBool();
   scrobble_button_visible_ =
@@ -127,17 +135,34 @@ bool LastFMService::IsSubscriber() const {
   return settings.value("Subscriber", false).toBool();
 }
 
+#ifdef HAVE_LIBSCROBBLER
+void LastFMService::Authenticate(const QString& username,
+                                 const QString& password,
+                                 const QString& server) {
+#else
 void LastFMService::Authenticate(const QString& username,
                                  const QString& password) {
+#endif
   QMap<QString, QString> params;
   params["method"] = "auth.getMobileSession";
   params["username"] = username;
   params["authToken"] =
       lastfm::md5((username + lastfm::md5(password.toUtf8())).toUtf8());
 
+#ifdef HAVE_LIBSCROBBLER
+  lastfm::ws::Server = server;
+#endif
+
   QNetworkReply* reply = lastfm::ws::post(params);
+
+#ifdef HAVE_LIBSCROBBLER
+  NewClosure(reply, SIGNAL(finished()), this,
+             SLOT(AuthenticateReplyFinished(QNetworkReply*, QString)), reply,
+             server);
+#else
   NewClosure(reply, SIGNAL(finished()), this,
              SLOT(AuthenticateReplyFinished(QNetworkReply*)), reply);
+#endif
   // If we need more detailed error reporting, handle error(NetworkError) signal
 }
 
@@ -150,9 +175,19 @@ void LastFMService::SignOut() {
 
   settings.setValue("Username", QString());
   settings.setValue("Session", QString());
+
+#ifdef HAVE_LIBSCROBBLER
+  lastfm::ws::Server.clear();
+  settings.setValue("Server", QString());
+#endif
 }
 
+#ifdef HAVE_LIBSCROBBLER
+void LastFMService::AuthenticateReplyFinished(QNetworkReply* reply,
+                                              const QString& server) {
+#else
 void LastFMService::AuthenticateReplyFinished(QNetworkReply* reply) {
+#endif
   reply->deleteLater();
 
   // Parse the reply
@@ -160,6 +195,9 @@ void LastFMService::AuthenticateReplyFinished(QNetworkReply* reply) {
   if (lastfm::compat::ParseQuery(reply->readAll(), &lfm)) {
     lastfm::ws::Username = lfm["session"]["name"].text();
     lastfm::ws::SessionKey = lfm["session"]["key"].text();
+#ifdef HAVE_LIBSCROBBLER
+    lastfm::ws::Server = server;
+#endif
     QString subscribed = lfm["session"]["subscriber"].text();
     const bool is_subscriber = (subscribed.toInt() == 1);
 
@@ -168,6 +206,9 @@ void LastFMService::AuthenticateReplyFinished(QNetworkReply* reply) {
     settings.beginGroup(kSettingsGroup);
     settings.setValue("Username", lastfm::ws::Username);
     settings.setValue("Session", lastfm::ws::SessionKey);
+#ifdef HAVE_LIBSCROBBLER
+    settings.setValue("Server", lastfm::ws::Server);
+#endif
     settings.setValue("Subscriber", is_subscriber);
   } else {
     emit AuthenticationComplete(false, lfm["error"].text().trimmed());
@@ -272,8 +313,13 @@ bool LastFMService::InitScrobbler() {
 
 // reemit the signal since the sender is private
 #ifdef HAVE_LIBLASTFM1
+#ifdef HAVE_LIBSCROBBLER
+  connect(scrobbler_, SIGNAL(scrobblesSubmitted(QList<scrobbler::Track>)),
+          SIGNAL(ScrobbleSubmitted()));
+#else
   connect(scrobbler_, SIGNAL(scrobblesSubmitted(QList<lastfm::Track>)),
           SIGNAL(ScrobbleSubmitted()));
+#endif
   connect(scrobbler_, SIGNAL(nowPlayingError(int, QString)),
           SIGNAL(ScrobbleError(int)));
 #else

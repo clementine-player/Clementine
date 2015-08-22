@@ -22,7 +22,16 @@
 #include "lastfmsettingspage.h"
 #include "ui_lastfmsettingspage.h"
 
+#ifdef HAVE_LIBSCROBBLER
+#include <scrobbler/ws.h>
+namespace lastfm {
+namespace ws {
+using namespace scrobbler::ws;
+}
+}
+#else
 #include <lastfm/ws.h>
+#endif
 
 #include <QMessageBox>
 #include <QSettings>
@@ -52,6 +61,17 @@ LastFMSettingsPage::LastFMSettingsPage(SettingsDialog* dialog)
   ui_->login_state->AddCredentialField(ui_->password);
   ui_->login_state->AddCredentialGroup(ui_->groupBox);
 
+#ifdef HAVE_LIBSCROBBLER
+  connect(ui_->advanced_options, SIGNAL(stateChanged(int)),
+          SLOT(AdvancedOptionsChanged(int)));
+  connect(ui_->server, SIGNAL(editingFinished()), SLOT(AddHttpServer()));
+  ui_->login_state->AddCredentialField(ui_->server);
+  ui_->login_state->AddCredentialField(ui_->advanced_options);
+#else
+  ui_->server->setHidden(true);
+  ui_->label_server->setHidden(true);
+#endif
+
   ui_->username->setMinimumWidth(QFontMetrics(QFont()).width("WWWWWWWWWWWW"));
   resize(sizeHint());
 }
@@ -62,7 +82,12 @@ void LastFMSettingsPage::Login() {
   waiting_for_auth_ = true;
 
   ui_->login_state->SetLoggedIn(LoginStateWidget::LoginInProgress);
+#ifdef HAVE_LIBSCROBBLER
+  service_->Authenticate(ui_->username->text(), ui_->password->text(),
+                         ui_->server->text());
+#else
   service_->Authenticate(ui_->username->text(), ui_->password->text());
+#endif
 }
 
 void LastFMSettingsPage::AuthenticationComplete(bool success,
@@ -77,7 +102,7 @@ void LastFMSettingsPage::AuthenticationComplete(bool success,
     // Save settings
     Save();
   } else {
-    QString dialog_text = tr("Your Last.fm credentials were incorrect");
+    QString dialog_text = tr("Your credentials were incorrect");
     if (!message.isEmpty()) {
       dialog_text = message;
     }
@@ -92,6 +117,16 @@ void LastFMSettingsPage::Load() {
   ui_->love_ban_->setChecked(service_->AreButtonsVisible());
   ui_->scrobble_button->setChecked(service_->IsScrobbleButtonVisible());
   ui_->prefer_albumartist->setChecked(service_->PreferAlbumArtist());
+#ifdef HAVE_LIBSCROBBLER
+  ui_->server->setText(service_->server());
+
+  QSettings s;
+  s.beginGroup(LastFMService::kSettingsGroup);
+  bool state = s.value("AdvancedOptions").toBool();
+  ui_->advanced_options->setChecked(state);
+  AdvancedOptionsChanged(state);
+  s.endGroup();
+#endif
 
   RefreshControls(service_->IsAuthenticated());
 }
@@ -111,6 +146,9 @@ void LastFMSettingsPage::Save() {
 void LastFMSettingsPage::Logout() {
   ui_->username->clear();
   ui_->password->clear();
+#ifdef HAVE_LIBSCROBBLER
+  ui_->server->clear();
+#endif
   RefreshControls(false);
 
   service_->SignOut();
@@ -121,3 +159,21 @@ void LastFMSettingsPage::RefreshControls(bool authenticated) {
       authenticated ? LoginStateWidget::LoggedIn : LoginStateWidget::LoggedOut,
       lastfm::ws::Username);
 }
+
+#ifdef HAVE_LIBSCROBBLER
+void LastFMSettingsPage::AdvancedOptionsChanged(int state) {
+  ui_->server->setVisible(state);
+  ui_->label_server->setVisible(state);
+
+  if (ui_->server->isHidden()) {
+    ui_->server->setText("");
+  }
+}
+
+void LastFMSettingsPage::AddHttpServer() {
+  QString server_text = ui_->server->text();
+  if (!server_text.isEmpty() && !server_text.contains(QRegExp("^https?://"))) {
+    ui_->server->setText(QString("http://%1").arg(server_text));
+  }
+}
+#endif

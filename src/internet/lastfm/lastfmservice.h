@@ -24,16 +24,22 @@
 #define INTERNET_LASTFM_LASTFMSERVICE_H_
 
 #include <memory>
+#include <QtGlobal>
 
+#include "config.h"
+
+#ifdef HAVE_LIBSCROBBLER
+#include <scrobbler/Track.h>
+namespace lastfm {
+using scrobbler::Track;
+}
+#else
 namespace lastfm {
 class Track;
 }
-
-#include <QtGlobal>
-uint qHash(const lastfm::Track& track);
+#endif
 
 #include "lastfmcompat.h"
-
 #include "internet/core/scrobbler.h"
 
 class Application;
@@ -41,6 +47,8 @@ class LastFMUrlHandler;
 class QAction;
 class QNetworkAccessManager;
 class Song;
+
+uint qHash(const lastfm::Track& track);
 
 class LastFMService : public Scrobbler {
   Q_OBJECT
@@ -68,7 +76,13 @@ class LastFMService : public Scrobbler {
   bool PreferAlbumArtist() const { return prefer_albumartist_; }
   bool HasConnectionProblems() const { return connection_problems_; }
 
+#ifdef HAVE_LIBSCROBBLER
+  void Authenticate(const QString& username, const QString& password,
+                    const QString& server = QString());
+  QString server() { return lastfm::ws::Server; }
+#else
   void Authenticate(const QString& username, const QString& password);
+#endif
   void SignOut();
   void UpdateSubscriberStatus();
 
@@ -80,7 +94,7 @@ class LastFMService : public Scrobbler {
   void ShowConfig();
   void ToggleScrobbling();
 
- signals:
+signals:
   void AuthenticationComplete(bool success, const QString& error_message);
   void ScrobblingEnabledChanged(bool value);
   void ButtonVisibilityChanged(bool value);
@@ -94,7 +108,11 @@ class LastFMService : public Scrobbler {
   void SavedItemsChanged();
 
  private slots:
+#ifdef HAVE_LIBSCROBBLER
+  void AuthenticateReplyFinished(QNetworkReply* reply, const QString& server);
+#else
   void AuthenticateReplyFinished(QNetworkReply* reply);
+#endif
   void UpdateSubscriberStatusFinished(QNetworkReply* reply);
 
   void ScrobblerStatus(int value);

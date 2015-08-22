@@ -81,9 +81,18 @@ if (WIN32)
   find_library(QTSPARKLE_LIBRARIES qtsparkle)
 endif (WIN32)
 
-find_library(LASTFM_LIBRARIES lastfm)
-find_path(LASTFM_INCLUDE_DIRS lastfm/ws.h)
-find_path(LASTFM1_INCLUDE_DIRS lastfm/Track.h)
+find_library(SCROBBLER_LIBRARIES scrobbler)
+
+if (NOT SCROBBLER_LIBRARIES)
+  find_library(LASTFM_LIBRARIES lastfm)
+  find_path(LASTFM_INCLUDE_DIRS lastfm/ws.h)
+  find_path(LASTFM1_INCLUDE_DIRS lastfm/Track.h)
+else()
+  set(LASTFM_LIBRARIES scrobbler)
+  find_path(LASTFM_INCLUDE_DIRS scrobbler/ws.h)
+  find_path(LASTFM1_INCLUDE_DIRS scrobbler/Track.h)
+  set(HAVE_LIBSCROBBLER ON)
+endif()
 
 find_path(SPARSEHASH_INCLUDE_DIRS google/sparsetable)
 
@@ -239,6 +248,10 @@ optional_component(LIBMTP ON "Devices: MTP support"
 
 optional_component(LIBLASTFM ON "Last.fm support"
   DEPENDS "liblastfm" LASTFM_LIBRARIES LASTFM_INCLUDE_DIRS
+)
+
+optional_component(LIBSCROBBLER ON "Custom scrobbling support"
+  DEPENDS "libscrobbler" SCROBBLER_LIBRARIES LASTFM_INCLUDE_DIRS
 )
 
 optional_component(DBUS ON "D-Bus support"

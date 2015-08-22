@@ -26,10 +26,17 @@
       <property name="fieldGrowthPolicy">
        <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
       </property>
+      <item row="0" column="0">
+       <widget class="QLabel" name="label_server">
+        <property name="text">
+         <string>Server</string>
+        </property>
+       </widget>
+      </item>
       <item row="1" column="0">
        <widget class="QLabel" name="label_2">
         <property name="text">
-         <string>Last.fm username</string>
+         <string>Username</string>
         </property>
        </widget>
       </item>
@@ -50,7 +57,7 @@
       <item row="2" column="0">
        <widget class="QLabel" name="label_3">
         <property name="text">
-         <string>Last.fm password</string>
+         <string>Password</string>
         </property>
        </widget>
       </item>
@@ -58,6 +65,20 @@
        <widget class="QLineEdit" name="password">
         <property name="echoMode">
          <enum>QLineEdit::Password</enum>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QLineEdit" name="server">
+        <property name="placeholderText">
+         <string>Lastfm server if empty</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="1">
+       <widget class="QCheckBox" name="advanced_options">
+        <property name="text">
+         <string>Show advanced options</string>
         </property>
        </widget>
       </item>
@@ -131,13 +152,17 @@
   </customwidget>
  </customwidgets>
  <tabstops>
+  <tabstop>server</tabstop>
   <tabstop>username</tabstop>
   <tabstop>password</tabstop>
-  <tabstop>login</tabstop>
+  <tabstop>advanced_options</tabstop>
   <tabstop>scrobble</tabstop>
   <tabstop>love_ban_</tabstop>
   <tabstop>scrobble_button</tabstop>
+  <tabstop>prefer_albumartist</tabstop>
+  <tabstop>login</tabstop>
  </tabstops>
  <resources/>
  <connections/>
 </ui>
+

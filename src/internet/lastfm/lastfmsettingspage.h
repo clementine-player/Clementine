@@ -40,6 +40,10 @@ class LastFMSettingsPage : public SettingsPage {
   void Login();
   void AuthenticationComplete(bool success, const QString& error_message);
   void Logout();
+#ifdef HAVE_LIBSCROBBLER
+  void AdvancedOptionsChanged(int state);
+  void AddHttpServer();
+#endif
 
  private:
   LastFMService* service_;
