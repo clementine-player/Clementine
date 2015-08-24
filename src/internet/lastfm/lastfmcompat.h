@@ -23,6 +23,15 @@
 #include "config.h"
 #include "fixlastfm.h"
 
+#ifdef HAVE_LIBSCROBBLER
+#include <scrobbler/Audioscrobbler.h>
+#include <scrobbler/misc.h>
+#include <scrobbler/ScrobbleCache.h>
+#include <scrobbler/ScrobblePoint.h>
+#include <scrobbler/User.h>
+#include <scrobbler/ws.h>
+#include <scrobbler/XmlQuery.h>
+#else  // DO NOT HAVE_LIBSCROBBLER
 #ifdef HAVE_LIBLASTFM1
 #include <lastfm/Audioscrobbler.h>
 #include <lastfm/misc.h>
@@ -31,7 +40,7 @@
 #include <lastfm/User.h>
 #include <lastfm/ws.h>
 #include <lastfm/XmlQuery.h>
-#else
+#else  // DO NOT HAVE_LIBLASTFM1
 #include <lastfm/Audioscrobbler>
 #include <lastfm/misc.h>
 #include <lastfm/ScrobbleCache>
@@ -39,9 +48,19 @@
 #include <lastfm/User>
 #include <lastfm/ws.h>
 #include <lastfm/XmlQuery>
-#endif
+#endif  // HAVE_LIBALASTFM1
+#endif  // HAVE_LIBSCROBBLER
 
 namespace lastfm {
+
+#ifdef HAVE_LIBSCROBBLER
+using namespace scrobbler;
+
+namespace ws {
+using namespace scrobbler::ws;
+}
+#endif
+
 namespace compat {
 
 lastfm::XmlQuery EmptyXmlQuery();

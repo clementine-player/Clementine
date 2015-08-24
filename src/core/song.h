@@ -38,6 +38,18 @@
 #include "config.h"
 #include "engines/engine_fwd.h"
 
+#ifdef HAVE_LIBLASTFM
+#ifdef HAVE_LIBSCROBBLER
+#include <scrobbler/Track.h>
+#else  // DO NOT HAVE LIBSCROBBLER
+#ifdef HAVE_LIBLASTFM1
+#include <lastfm/Track.h>
+#else  // DO NOT HAVE LIBLASTFM1
+#include <lastfm/Track>
+#endif
+#endif
+#endif
+
 namespace pb {
 namespace tagreader {
 class SongMetadata;
@@ -55,9 +67,9 @@ struct _Itdb_Track;
 struct LIBMTP_track_struct;
 #endif
 
-#ifdef HAVE_LIBLASTFM
+#ifdef HAVE_LIBSCROBBLER
 namespace lastfm {
-class Track;
+using namespace scrobbler;
 }
 #endif
 

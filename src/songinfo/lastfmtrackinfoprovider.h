@@ -20,9 +20,16 @@
 
 #include "songinfoprovider.h"
 
+#ifdef HAVE_LIBSCROBBLER
+#include <scrobbler/XmlQuery.h>
+namespace lastfm {
+using scrobbler::XmlQuery;
+}
+#else
 namespace lastfm {
 class XmlQuery;
 }
+#endif
 
 class QNetworkReply;
 
