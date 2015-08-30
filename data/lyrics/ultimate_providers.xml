@@ -207,7 +207,7 @@
     <invalidIndicator value="Sorry, we have no"/>
     <invalidIndicator value="This is an upcoming album and we do not have the"/>
   </provider>
-  <provider name="tekstowo.pl (Polish translations)" title="{artist} - {title} - tekst" charset="utf-8" url="http://www.tekstowo.pl/piosenka,{artist},{title}.html">
+  <provider name="tekstowo.pl (Original lyric language)" title="{artist} - {title} - tekst" charset="utf-8" url="http://www.tekstowo.pl/piosenka,{artist},{title}.html">
     <urlFormat replace=" _@,;&amp;\/'&quot;." with="_"/>
     <extract>
       <item begin="&lt;div class=&quot;song-text&quot;&gt;" end="&lt;a href=&quot;javascript:;&quot;"/>
@@ -219,6 +219,15 @@
       <item begin="&lt;h2&gt;" end="&lt;/h2&gt;&lt;br /&gt;"/>
     </exclude>
   </provider>
+  <provider name="tekstowo.pl (Translated to Polish)" title="{artist} - {title} - tekst" charset="utf-8" url="http://www.tekstowo.pl/piosenka,{artist},{title}.html">
+    <urlFormat replace=" _@,;&amp;\/'&quot;." with="_"/>
+    <extract>
+      <item begin="&lt;div id=&quot;translation&quot; class=" end="&lt;a href="/>
+    </extract>
+    <exclude>
+      <item begin="&quot;id-" end="&quot;&gt;"/>
+    </exclude>
+  </provider>  
   <provider name="teksty.org" title="{artist} - {title} - tekst" charset="utf-8" url="http://teksty.org/{artist},{title},tekst-piosenki">
     <urlFormat replace=" _@,;&amp;\/&quot;'" with="-"/>
     <urlFormat replace="." with=""/>
