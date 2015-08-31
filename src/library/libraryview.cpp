@@ -62,6 +62,8 @@ void LibraryItemDelegate::paint(QPainter* painter,
     QString text(index.data().toString());
 
     painter->save();
+    painter->setRenderHint(QPainter::Antialiasing);
+    painter->setRenderHint(QPainter::HighQualityAntialiasing);
 
     QRect text_rect(opt.rect);
 
@@ -89,23 +91,42 @@ void LibraryItemDelegate::paint(QPainter* painter,
 
       painter->drawPixmap(icon_rect, pixmap);
     } else {
-      text_rect.setLeft(text_rect.left() + 30);
+      text_rect.setLeft(text_rect.right() - (text_rect.height() + 10));
+      text_rect.setWidth(text_rect.height());
+    }
+
+    QRect highlight_rect;
+    QFont norm_font(opt.font);
+    QColor highlight_color(opt.palette.color(QPalette::Text));
+    highlight_color.setAlpha(200);
+    QBrush brush(highlight_color, Qt::SolidPattern);
+    painter->setPen(QColor(0, 0, 0, 0));
+    painter->setBrush(brush);
+    
+    // Draw text highlight fill
+    if (text.length() == 1) {
+      highlight_rect = text_rect;
+      highlight_rect.setWidth(text_rect.width() - 1);
+      highlight_rect.setHeight(text_rect.height() - 1);
+      highlight_rect.setLeft(text_rect.left() + 1);
+      highlight_rect.setTop(text_rect.top() + 1);
+      painter->drawEllipse(highlight_rect);
+    } else {
+      QFontMetrics fm(norm_font);
+      text_rect.setLeft(text_rect.right() - (fm.width(text) + 22));
+      text_rect.setWidth(fm.width(text) + 12);
+      highlight_rect = text_rect;
+      highlight_rect.setWidth(text_rect.width() - 1);
+      highlight_rect.setHeight(text_rect.height() - 1);
+      highlight_rect.setLeft(text_rect.left() + 1);
+      highlight_rect.setTop(text_rect.top() + 1);
+      painter->fillRect(highlight_rect, brush);
     }
 
     // Draw the text
-    QFont bold_font(opt.font);
-    bold_font.setBold(true);
-
-    painter->setPen(opt.palette.color(QPalette::Text));
-    painter->setFont(bold_font);
-    painter->drawText(text_rect, text);
-
-    // Draw the line under the item
-    QPen line_pen(opt.palette.color(QPalette::Dark));
-    line_pen.setWidth(2);
-
-    painter->setPen(line_pen);
-    painter->drawLine(opt.rect.bottomLeft(), opt.rect.bottomRight());
+    painter->setPen(opt.palette.color(QPalette::Window));
+    painter->setFont(norm_font);
+    painter->drawText(text_rect, text, Qt::AlignVCenter | Qt::AlignHCenter);
 
     painter->restore();
   } else {
