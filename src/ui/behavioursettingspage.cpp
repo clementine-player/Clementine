@@ -132,7 +132,7 @@ void BehaviourSettingsPage::Load() {
   ui_->doubleclick_playlist_playmode->setCurrentIndex(
       ui_->doubleclick_playlist_playmode->findData(
           s.value("doubleclick_playlist_playmode",
-                  MainWindow::PlaylistPlayBehaviour_IfStopped).toInt()));
+                  MainWindow::PlaylistPlayBehaviour_Always).toInt()));
   ui_->menu_playmode->setCurrentIndex(ui_->menu_playmode->findData(
       s.value("menu_playmode", MainWindow::PlayBehaviour_IfStopped).toInt()));
 
