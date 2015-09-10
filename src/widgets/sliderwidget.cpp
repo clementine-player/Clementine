@@ -307,10 +307,11 @@ void Amarok::VolumeSlider::paintEvent(QPaintEvent*) {
                m_handlePixmaps[m_animCount]);
 
   // Draw percentage number
-  p.setPen(palette().color(QPalette::Disabled, QPalette::Text).dark());
-  QFont font;
-  font.setPixelSize(9);
-  p.setFont(font);
+  QStyleOptionViewItem opt;
+  p.setPen(opt.palette.color(QPalette::Disabled, QPalette::Text));
+  QFont vol_font(opt.font);
+  vol_font.setPixelSize(9);
+  p.setFont(vol_font);
   const QRect rect(0, 0, 34, 15);
   p.drawText(rect, Qt::AlignRight | Qt::AlignVCenter,
              QString::number(value()) + '%');
