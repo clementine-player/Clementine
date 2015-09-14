@@ -338,12 +338,13 @@ void Amarok::VolumeSlider::paletteChange(const QPalette&) {
   generateGradient();
 }
 
-QPixmap Amarok::VolumeSlider::volumePixmapDraw () {
-  QPixmap pixmap (112, 36);
+QPixmap Amarok::VolumeSlider::volumePixmapDraw () const {
+  QPixmap pixmap(112, 36);
   pixmap.fill(Qt::transparent);
-  QPainter painter( &pixmap );
+  QPainter painter(&pixmap);
   QPen pen(palette().color(QPalette::WindowText), 0.3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
   painter.setPen(pen);
+  
   painter.setRenderHint(QPainter::Antialiasing);
   painter.setRenderHint(QPainter::SmoothPixmapTransform);
   // Draw volume control pixmap
