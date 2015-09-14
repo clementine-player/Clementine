@@ -814,7 +814,7 @@ msgid "Append files/URLs to the playlist"
 msgstr "Pievienot failus/saites dziesmu listei"
 
 #: devices/deviceview.cpp:216 globalsearch/globalsearchview.cpp:453
-#: internet/core/internetservice.cpp:80 library/libraryview.cpp:370
+#: internet/core/internetservice.cpp:80 library/libraryview.cpp:391
 #: widgets/fileviewlist.cpp:31
 msgid "Append to current playlist"
 msgstr "Papildināt pašreizējo dziesmu listi"
@@ -1269,7 +1269,7 @@ msgstr "Clementine nespēja atrast rezultātus šim failam"
 msgid "Clementine will find music in:"
 msgstr ""
 
-#: library/libraryview.cpp:351
+#: library/libraryview.cpp:372
 msgid "Click here to add some music"
 msgstr "Spiediet te lai pievienotu mūziku"
 
@@ -1452,7 +1452,7 @@ msgstr ""
 msgid "Copy to clipboard"
 msgstr "Kopēt starpliktuvē"
 
-#: library/libraryview.cpp:400 internet/podcasts/podcastservice.cpp:437
+#: library/libraryview.cpp:421 internet/podcasts/podcastservice.cpp:437
 #: ui/mainwindow.cpp:641 widgets/fileviewlist.cpp:43
 msgid "Copy to device..."
 msgstr "Kopēt uz ierīci..."
@@ -1701,7 +1701,7 @@ msgstr "Dzēst"
 msgid "Delete downloaded data"
 msgstr "Dzēst lejuplādētos datus"
 
-#: devices/deviceview.cpp:404 library/libraryview.cpp:636
+#: devices/deviceview.cpp:404 library/libraryview.cpp:657
 #: ui/mainwindow.cpp:2294 widgets/fileview.cpp:186
 msgid "Delete files"
 msgstr "Dzēst failus"
@@ -1710,7 +1710,7 @@ msgstr "Dzēst failus"
 msgid "Delete from device..."
 msgstr "Dzēst no ierīces..."
 
-#: library/libraryview.cpp:402 ui/mainwindow.cpp:643
+#: library/libraryview.cpp:423 ui/mainwindow.cpp:643
 #: widgets/fileviewlist.cpp:44
 msgid "Delete from disk..."
 msgstr "Dzēst no diska..."
@@ -1723,7 +1723,7 @@ msgstr ""
 msgid "Delete preset"
 msgstr "Dzēst uzstādījumu"
 
-#: library/libraryview.cpp:391
+#: library/libraryview.cpp:412
 msgid "Delete smart playlist"
 msgstr "Dzēst Smart Playlist"
 
@@ -1876,7 +1876,7 @@ msgstr ""
 msgid "Don't repeat"
 msgstr "Neatkārtot"
 
-#: library/libraryview.cpp:420
+#: library/libraryview.cpp:441
 msgid "Don't show in various artists"
 msgstr "Nerādīt pie dažādiem izpildītājiem"
 
@@ -2010,7 +2010,7 @@ msgstr "Dinamiskais režīms ieslēgts"
 msgid "Dynamic random mix"
 msgstr "Dinamisks nejaušs mikss"
 
-#: library/libraryview.cpp:388
+#: library/libraryview.cpp:409
 msgid "Edit smart playlist..."
 msgstr "Rediģēt gudro dziesmu listi..."
 
@@ -2031,12 +2031,12 @@ msgstr "Rediģēt birkas"
 msgid "Edit track information"
 msgstr "Rediģēt dziesmas informāciju"
 
-#: library/libraryview.cpp:407 widgets/fileviewlist.cpp:49
+#: library/libraryview.cpp:428 widgets/fileviewlist.cpp:49
 #: ../bin/src/ui_mainwindow.h:658
 msgid "Edit track information..."
 msgstr "Rediģēt dziesmas informāciju..."
 
-#: library/libraryview.cpp:410
+#: library/libraryview.cpp:431
 msgid "Edit tracks information..."
 msgstr "Rediģēt dziesmu informāciju..."
 
@@ -2153,7 +2153,7 @@ msgid "Equivalent to --log-levels *:3"
 msgstr "Vienāds ar --log-levels *:3"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:242
-#: library/libraryview.cpp:630 ui/mainwindow.cpp:1997 ui/mainwindow.cpp:2244
+#: library/libraryview.cpp:651 ui/mainwindow.cpp:1997 ui/mainwindow.cpp:2244
 #: ui/mainwindow.cpp:2392 internet/vk/vkservice.cpp:634
 msgid "Error"
 msgstr "Kļūda"
@@ -3413,7 +3413,7 @@ msgstr "Jauna mape"
 msgid "New playlist"
 msgstr "Jauna dziesmu liste"
 
-#: library/libraryview.cpp:385
+#: library/libraryview.cpp:406
 msgid "New smart playlist..."
 msgstr "Jauna gudrā dziesmu liste..."
 
@@ -3472,7 +3472,7 @@ msgstr "Bez īsiem blokiem"
 msgid "None"
 msgstr "Nekas"
 
-#: library/libraryview.cpp:631 ui/mainwindow.cpp:2245 ui/mainwindow.cpp:2393
+#: library/libraryview.cpp:652 ui/mainwindow.cpp:2245 ui/mainwindow.cpp:2393
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Neviena no izvēlētajām dziesmām nav piemērota kopēšanai uz ierīci"
 
@@ -3634,7 +3634,7 @@ msgid "Open in Google Drive"
 msgstr ""
 
 #: devices/deviceview.cpp:221 globalsearch/globalsearchview.cpp:461
-#: internet/core/internetservice.cpp:102 library/libraryview.cpp:375
+#: internet/core/internetservice.cpp:102 library/libraryview.cpp:396
 #: widgets/fileviewlist.cpp:35
 msgid "Open in new playlist"
 msgstr "Atvērt jaunā skaņsarakstā"
@@ -3679,7 +3679,7 @@ msgstr ""
 msgid "Organise Files"
 msgstr "Organizēt Failus"
 
-#: library/libraryview.cpp:396 ui/mainwindow.cpp:637
+#: library/libraryview.cpp:417 ui/mainwindow.cpp:637
 msgid "Organise files..."
 msgstr "Organizēt failus..."
 
@@ -4002,7 +4002,7 @@ msgstr "Rindas pārvaldnieks"
 msgid "Queue selected tracks"
 msgstr "Ierindot izvēlētās dziesmas"
 
-#: globalsearch/globalsearchview.cpp:466 library/libraryview.cpp:380
+#: globalsearch/globalsearchview.cpp:466 library/libraryview.cpp:401
 #: ui/mainwindow.cpp:1675
 msgid "Queue track"
 msgstr "Ierindot dziesmu"
@@ -4170,7 +4170,7 @@ msgid "Repeat track"
 msgstr "Atkārtot dziesmu"
 
 #: devices/deviceview.cpp:219 globalsearch/globalsearchview.cpp:457
-#: internet/core/internetservice.cpp:91 library/libraryview.cpp:372
+#: internet/core/internetservice.cpp:91 library/libraryview.cpp:393
 #: widgets/fileviewlist.cpp:34
 msgid "Replace current playlist"
 msgstr "Aizstāt pašreizējo dziesmu listi"
@@ -4602,7 +4602,7 @@ msgstr "Radīt pa visu ekrānu..."
 msgid "Show groups in global search result"
 msgstr ""
 
-#: library/libraryview.cpp:413 ui/mainwindow.cpp:646
+#: library/libraryview.cpp:434 ui/mainwindow.cpp:646
 #: widgets/fileviewlist.cpp:51
 msgid "Show in file browser..."
 msgstr "Rādīt failu pārlūkā..."
@@ -4611,7 +4611,7 @@ msgstr "Rādīt failu pārlūkā..."
 msgid "Show in library..."
 msgstr ""
 
-#: library/libraryview.cpp:417
+#: library/libraryview.cpp:438
 msgid "Show in various artists"
 msgstr "Rādīt pie dažādiem izpildītājiem"
 
@@ -5035,7 +5035,7 @@ msgid ""
 "rescan because of the new features listed below:"
 msgstr "Jaunā Clementine versija pieprasa pilnu bibliotēkas skenēšanu šādu funkciju dēļ:"
 
-#: library/libraryview.cpp:553
+#: library/libraryview.cpp:574
 msgid "There are other songs in this album"
 msgstr ""
 
@@ -5071,7 +5071,7 @@ msgid ""
 "continue?"
 msgstr "Šie faili tiks dzēsti no ierīces. Vai jūs tiešām vēlaties turpināt?"
 
-#: library/libraryview.cpp:637 ui/mainwindow.cpp:2295 widgets/fileview.cpp:187
+#: library/libraryview.cpp:658 ui/mainwindow.cpp:2295 widgets/fileview.cpp:187
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -5604,7 +5604,7 @@ msgstr "Windows Media audio"
 msgid "Without cover:"
 msgstr ""
 
-#: library/libraryview.cpp:554
+#: library/libraryview.cpp:575
 msgid ""
 "Would you like to move the other songs in this album to Various Artists as "
 "well?"
@@ -5754,7 +5754,7 @@ msgstr "Jūsu Last.fm dati ir nepareizi"
 msgid "Your Magnatune credentials were incorrect"
 msgstr "Jūsu Magnatude dati ir nepareizi"
 
-#: library/libraryview.cpp:345
+#: library/libraryview.cpp:366
 msgid "Your library is empty!"
 msgstr "Jūsu bibliotēka ir tukša!"
 

@@ -830,7 +830,7 @@ msgid "Append files/URLs to the playlist"
 msgstr "Tambahkan berkas/URL ke daftar putar"
 
 #: devices/deviceview.cpp:216 globalsearch/globalsearchview.cpp:453
-#: internet/core/internetservice.cpp:80 library/libraryview.cpp:370
+#: internet/core/internetservice.cpp:80 library/libraryview.cpp:391
 #: widgets/fileviewlist.cpp:31
 msgid "Append to current playlist"
 msgstr "Tambahkan ke daftar putar saat ini"
@@ -1285,7 +1285,7 @@ msgstr "Clementine tidak dapat menemukan hasil untuk berkas ini"
 msgid "Clementine will find music in:"
 msgstr "Clementine akan mencari musik di:"
 
-#: library/libraryview.cpp:351
+#: library/libraryview.cpp:372
 msgid "Click here to add some music"
 msgstr "Klik di sini untuk menambahkan musik"
 
@@ -1468,7 +1468,7 @@ msgstr "Salin url berbagi ke papan klip"
 msgid "Copy to clipboard"
 msgstr "Salin ke papan klip"
 
-#: library/libraryview.cpp:400 internet/podcasts/podcastservice.cpp:437
+#: library/libraryview.cpp:421 internet/podcasts/podcastservice.cpp:437
 #: ui/mainwindow.cpp:641 widgets/fileviewlist.cpp:43
 msgid "Copy to device..."
 msgstr "Salin ke perangkat..."
@@ -1717,7 +1717,7 @@ msgstr "Hapus"
 msgid "Delete downloaded data"
 msgstr "Hapus data yang sudah diunduh"
 
-#: devices/deviceview.cpp:404 library/libraryview.cpp:636
+#: devices/deviceview.cpp:404 library/libraryview.cpp:657
 #: ui/mainwindow.cpp:2294 widgets/fileview.cpp:186
 msgid "Delete files"
 msgstr "Hapus berkas"
@@ -1726,7 +1726,7 @@ msgstr "Hapus berkas"
 msgid "Delete from device..."
 msgstr "Hapus dari perangkat..."
 
-#: library/libraryview.cpp:402 ui/mainwindow.cpp:643
+#: library/libraryview.cpp:423 ui/mainwindow.cpp:643
 #: widgets/fileviewlist.cpp:44
 msgid "Delete from disk..."
 msgstr "Hapus dari diska..."
@@ -1739,7 +1739,7 @@ msgstr "Hapus episode yang sudah diputar"
 msgid "Delete preset"
 msgstr "Hapus prasetel"
 
-#: library/libraryview.cpp:391
+#: library/libraryview.cpp:412
 msgid "Delete smart playlist"
 msgstr "Hapus daftar putar cerdas"
 
@@ -1892,7 +1892,7 @@ msgstr "Melakukan pemindaian ulang menyeluruh akan kehilangan semua metadata yan
 msgid "Don't repeat"
 msgstr "Jangan ulang"
 
-#: library/libraryview.cpp:420
+#: library/libraryview.cpp:441
 msgid "Don't show in various artists"
 msgstr "Jangan tampilkan di artis beragam"
 
@@ -2026,7 +2026,7 @@ msgstr "Mode dinamis nyala"
 msgid "Dynamic random mix"
 msgstr "Miks acak dinamis"
 
-#: library/libraryview.cpp:388
+#: library/libraryview.cpp:409
 msgid "Edit smart playlist..."
 msgstr "Sunting daftar putar cerdas..."
 
@@ -2047,12 +2047,12 @@ msgstr "Sunting tag"
 msgid "Edit track information"
 msgstr "Sunting informasi trek"
 
-#: library/libraryview.cpp:407 widgets/fileviewlist.cpp:49
+#: library/libraryview.cpp:428 widgets/fileviewlist.cpp:49
 #: ../bin/src/ui_mainwindow.h:658
 msgid "Edit track information..."
 msgstr "Sunting informasi trek..."
 
-#: library/libraryview.cpp:410
+#: library/libraryview.cpp:431
 msgid "Edit tracks information..."
 msgstr "Sunting informasi trek..."
 
@@ -2169,7 +2169,7 @@ msgid "Equivalent to --log-levels *:3"
 msgstr "Setara dengan --log-level *: 3"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:242
-#: library/libraryview.cpp:630 ui/mainwindow.cpp:1997 ui/mainwindow.cpp:2244
+#: library/libraryview.cpp:651 ui/mainwindow.cpp:1997 ui/mainwindow.cpp:2244
 #: ui/mainwindow.cpp:2392 internet/vk/vkservice.cpp:634
 msgid "Error"
 msgstr "Galat"
@@ -3429,7 +3429,7 @@ msgstr "Folder baru"
 msgid "New playlist"
 msgstr "Daftar putar baru"
 
-#: library/libraryview.cpp:385
+#: library/libraryview.cpp:406
 msgid "New smart playlist..."
 msgstr "Daftar putar cerdas baru..."
 
@@ -3488,7 +3488,7 @@ msgstr "Tanpa blok pendek"
 msgid "None"
 msgstr "Nihil"
 
-#: library/libraryview.cpp:631 ui/mainwindow.cpp:2245 ui/mainwindow.cpp:2393
+#: library/libraryview.cpp:652 ui/mainwindow.cpp:2245 ui/mainwindow.cpp:2393
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Tidak satu pun dari lagu yang dipilih cocok untuk disalin ke perangkat"
 
@@ -3650,7 +3650,7 @@ msgid "Open in Google Drive"
 msgstr "Buka di Google Drive"
 
 #: devices/deviceview.cpp:221 globalsearch/globalsearchview.cpp:461
-#: internet/core/internetservice.cpp:102 library/libraryview.cpp:375
+#: internet/core/internetservice.cpp:102 library/libraryview.cpp:396
 #: widgets/fileviewlist.cpp:35
 msgid "Open in new playlist"
 msgstr "Buka di daftar putar baru"
@@ -3695,7 +3695,7 @@ msgstr "Opus"
 msgid "Organise Files"
 msgstr "Atur Berkas"
 
-#: library/libraryview.cpp:396 ui/mainwindow.cpp:637
+#: library/libraryview.cpp:417 ui/mainwindow.cpp:637
 msgid "Organise files..."
 msgstr "Atur berkas..."
 
@@ -4018,7 +4018,7 @@ msgstr "Pengelola antrean"
 msgid "Queue selected tracks"
 msgstr "Antre trek terpilih"
 
-#: globalsearch/globalsearchview.cpp:466 library/libraryview.cpp:380
+#: globalsearch/globalsearchview.cpp:466 library/libraryview.cpp:401
 #: ui/mainwindow.cpp:1675
 msgid "Queue track"
 msgstr "Antre trek"
@@ -4186,7 +4186,7 @@ msgid "Repeat track"
 msgstr "Ulang trek"
 
 #: devices/deviceview.cpp:219 globalsearch/globalsearchview.cpp:457
-#: internet/core/internetservice.cpp:91 library/libraryview.cpp:372
+#: internet/core/internetservice.cpp:91 library/libraryview.cpp:393
 #: widgets/fileviewlist.cpp:34
 msgid "Replace current playlist"
 msgstr "Ganti daftar putar saat ini"
@@ -4618,7 +4618,7 @@ msgstr "Tampilkan ukuran penuh"
 msgid "Show groups in global search result"
 msgstr "Tampilkan grup di dalam hasil pencarian global"
 
-#: library/libraryview.cpp:413 ui/mainwindow.cpp:646
+#: library/libraryview.cpp:434 ui/mainwindow.cpp:646
 #: widgets/fileviewlist.cpp:51
 msgid "Show in file browser..."
 msgstr "Tampilkan di peramban berkas..."
@@ -4627,7 +4627,7 @@ msgstr "Tampilkan di peramban berkas..."
 msgid "Show in library..."
 msgstr "Tampilkan di pustaka..."
 
-#: library/libraryview.cpp:417
+#: library/libraryview.cpp:438
 msgid "Show in various artists"
 msgstr "Tampilkan di artis beragam"
 
@@ -5051,7 +5051,7 @@ msgid ""
 "rescan because of the new features listed below:"
 msgstr "Versi Clementine yang baru saja anda perbarui membutuhkan pemindaian ulang pustaka menyeluruh karena fitur baru yang tercantum di bawah ini:"
 
-#: library/libraryview.cpp:553
+#: library/libraryview.cpp:574
 msgid "There are other songs in this album"
 msgstr "Ada lagu lainnya di dalam album ini"
 
@@ -5087,7 +5087,7 @@ msgid ""
 "continue?"
 msgstr "Berkas-berkas ini akan dihapus dari perangkat, apakah anda yakin ingin melanjutkan?"
 
-#: library/libraryview.cpp:637 ui/mainwindow.cpp:2295 widgets/fileview.cpp:187
+#: library/libraryview.cpp:658 ui/mainwindow.cpp:2295 widgets/fileview.cpp:187
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -5620,7 +5620,7 @@ msgstr "Windows Media audio"
 msgid "Without cover:"
 msgstr "Tanpa sampul:"
 
-#: library/libraryview.cpp:554
+#: library/libraryview.cpp:575
 msgid ""
 "Would you like to move the other songs in this album to Various Artists as "
 "well?"
@@ -5770,7 +5770,7 @@ msgstr "Kredensial Last.fm anda tidak benar"
 msgid "Your Magnatune credentials were incorrect"
 msgstr "Kredensial Magnatune anda tidak benar"
 
-#: library/libraryview.cpp:345
+#: library/libraryview.cpp:366
 msgid "Your library is empty!"
 msgstr "Pustaka anda kosong!"
 

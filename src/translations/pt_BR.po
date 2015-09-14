@@ -822,7 +822,7 @@ msgid "Append files/URLs to the playlist"
 msgstr "Acrescentar arquivos/sites para a lista de reprodução"
 
 #: devices/deviceview.cpp:216 globalsearch/globalsearchview.cpp:453
-#: internet/core/internetservice.cpp:80 library/libraryview.cpp:370
+#: internet/core/internetservice.cpp:80 library/libraryview.cpp:391
 #: widgets/fileviewlist.cpp:31
 msgid "Append to current playlist"
 msgstr "Adicionar à lista de reprodução atual"
@@ -1277,7 +1277,7 @@ msgstr "O Clementine não conseguiu encontrar resultados para este arquivo"
 msgid "Clementine will find music in:"
 msgstr "O Clementine irá buscar música em:"
 
-#: library/libraryview.cpp:351
+#: library/libraryview.cpp:372
 msgid "Click here to add some music"
 msgstr "Clique aqui para adicionar algumas músicas"
 
@@ -1460,7 +1460,7 @@ msgstr "Copiar url compartilhada para a área de transferência"
 msgid "Copy to clipboard"
 msgstr "Copiar para a área de transferência"
 
-#: library/libraryview.cpp:400 internet/podcasts/podcastservice.cpp:437
+#: library/libraryview.cpp:421 internet/podcasts/podcastservice.cpp:437
 #: ui/mainwindow.cpp:641 widgets/fileviewlist.cpp:43
 msgid "Copy to device..."
 msgstr "Copiar para o dispositivo..."
@@ -1709,7 +1709,7 @@ msgstr "Apagar"
 msgid "Delete downloaded data"
 msgstr "Apagar dados baixados"
 
-#: devices/deviceview.cpp:404 library/libraryview.cpp:636
+#: devices/deviceview.cpp:404 library/libraryview.cpp:657
 #: ui/mainwindow.cpp:2294 widgets/fileview.cpp:186
 msgid "Delete files"
 msgstr "Excluir arquivos"
@@ -1718,7 +1718,7 @@ msgstr "Excluir arquivos"
 msgid "Delete from device..."
 msgstr "Apagar do dispositivo..."
 
-#: library/libraryview.cpp:402 ui/mainwindow.cpp:643
+#: library/libraryview.cpp:423 ui/mainwindow.cpp:643
 #: widgets/fileviewlist.cpp:44
 msgid "Delete from disk..."
 msgstr "Apagar do disco..."
@@ -1731,7 +1731,7 @@ msgstr "Apagar episódios reproduzidos"
 msgid "Delete preset"
 msgstr "Apagar pré-regulagem"
 
-#: library/libraryview.cpp:391
+#: library/libraryview.cpp:412
 msgid "Delete smart playlist"
 msgstr "Apagar lista inteligente"
 
@@ -1884,7 +1884,7 @@ msgstr "Ao reescanear por completo, você perderá quaisquer metadados salvos no
 msgid "Don't repeat"
 msgstr "Não repetir"
 
-#: library/libraryview.cpp:420
+#: library/libraryview.cpp:441
 msgid "Don't show in various artists"
 msgstr "Não exibir em vários artistas"
 
@@ -2018,7 +2018,7 @@ msgstr "Modo dinâmico ligado"
 msgid "Dynamic random mix"
 msgstr "Mix aleatório dinâmico"
 
-#: library/libraryview.cpp:388
+#: library/libraryview.cpp:409
 msgid "Edit smart playlist..."
 msgstr "Editar lista de reprodução inteligente..."
 
@@ -2039,12 +2039,12 @@ msgstr "Editar tag"
 msgid "Edit track information"
 msgstr "Editar informações da faixa"
 
-#: library/libraryview.cpp:407 widgets/fileviewlist.cpp:49
+#: library/libraryview.cpp:428 widgets/fileviewlist.cpp:49
 #: ../bin/src/ui_mainwindow.h:658
 msgid "Edit track information..."
 msgstr "Editar informações da faixa..."
 
-#: library/libraryview.cpp:410
+#: library/libraryview.cpp:431
 msgid "Edit tracks information..."
 msgstr "Editar informações da faixa..."
 
@@ -2161,7 +2161,7 @@ msgid "Equivalent to --log-levels *:3"
 msgstr "Equivalente ao --log-levels *:3"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:242
-#: library/libraryview.cpp:630 ui/mainwindow.cpp:1997 ui/mainwindow.cpp:2244
+#: library/libraryview.cpp:651 ui/mainwindow.cpp:1997 ui/mainwindow.cpp:2244
 #: ui/mainwindow.cpp:2392 internet/vk/vkservice.cpp:634
 msgid "Error"
 msgstr "Erro"
@@ -3421,7 +3421,7 @@ msgstr "Nova pasta"
 msgid "New playlist"
 msgstr "Nova lista de reprodução"
 
-#: library/libraryview.cpp:385
+#: library/libraryview.cpp:406
 msgid "New smart playlist..."
 msgstr "Nova lista de reprodução inteligente..."
 
@@ -3480,7 +3480,7 @@ msgstr "Sem blocos curtos"
 msgid "None"
 msgstr "Nenhum"
 
-#: library/libraryview.cpp:631 ui/mainwindow.cpp:2245 ui/mainwindow.cpp:2393
+#: library/libraryview.cpp:652 ui/mainwindow.cpp:2245 ui/mainwindow.cpp:2393
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Nenhuma das músicas selecionadas estão adequadas para copiar para um dispositivo"
 
@@ -3642,7 +3642,7 @@ msgid "Open in Google Drive"
 msgstr "Abrir no Google Drive"
 
 #: devices/deviceview.cpp:221 globalsearch/globalsearchview.cpp:461
-#: internet/core/internetservice.cpp:102 library/libraryview.cpp:375
+#: internet/core/internetservice.cpp:102 library/libraryview.cpp:396
 #: widgets/fileviewlist.cpp:35
 msgid "Open in new playlist"
 msgstr "Abrir em nova lista de reprodução"
@@ -3687,7 +3687,7 @@ msgstr "Opus"
 msgid "Organise Files"
 msgstr "Organizar Arquivos"
 
-#: library/libraryview.cpp:396 ui/mainwindow.cpp:637
+#: library/libraryview.cpp:417 ui/mainwindow.cpp:637
 msgid "Organise files..."
 msgstr "Organizar arquivos..."
 
@@ -4010,7 +4010,7 @@ msgstr "Gerenciador de Fila"
 msgid "Queue selected tracks"
 msgstr "Colocar as faixas selecionadas na fila"
 
-#: globalsearch/globalsearchview.cpp:466 library/libraryview.cpp:380
+#: globalsearch/globalsearchview.cpp:466 library/libraryview.cpp:401
 #: ui/mainwindow.cpp:1675
 msgid "Queue track"
 msgstr "Colocar a faixa na fila"
@@ -4178,7 +4178,7 @@ msgid "Repeat track"
 msgstr "Repetir uma faixa"
 
 #: devices/deviceview.cpp:219 globalsearch/globalsearchview.cpp:457
-#: internet/core/internetservice.cpp:91 library/libraryview.cpp:372
+#: internet/core/internetservice.cpp:91 library/libraryview.cpp:393
 #: widgets/fileviewlist.cpp:34
 msgid "Replace current playlist"
 msgstr "Substituir lista de reprodução atual"
@@ -4610,7 +4610,7 @@ msgstr "Exibir em tamanho real..."
 msgid "Show groups in global search result"
 msgstr "Exibir grupos no resultado da busca global"
 
-#: library/libraryview.cpp:413 ui/mainwindow.cpp:646
+#: library/libraryview.cpp:434 ui/mainwindow.cpp:646
 #: widgets/fileviewlist.cpp:51
 msgid "Show in file browser..."
 msgstr "Mostrar no navegador de arquivos..."
@@ -4619,7 +4619,7 @@ msgstr "Mostrar no navegador de arquivos..."
 msgid "Show in library..."
 msgstr "Mostrar na biblioteca..."
 
-#: library/libraryview.cpp:417
+#: library/libraryview.cpp:438
 msgid "Show in various artists"
 msgstr "Exibir em vários artistas"
 
@@ -5043,7 +5043,7 @@ msgid ""
 "rescan because of the new features listed below:"
 msgstr "A versão do Clementine para a qual você atualizou requer um reescaneamento completo da biblioteca por causa dos novos recursos listados abaixo:"
 
-#: library/libraryview.cpp:553
+#: library/libraryview.cpp:574
 msgid "There are other songs in this album"
 msgstr "Há outras músicas neste álbum"
 
@@ -5079,7 +5079,7 @@ msgid ""
 "continue?"
 msgstr "Estes arquivos serão deletados do dispositivo, tem certeza que deseja continuar?"
 
-#: library/libraryview.cpp:637 ui/mainwindow.cpp:2295 widgets/fileview.cpp:187
+#: library/libraryview.cpp:658 ui/mainwindow.cpp:2295 widgets/fileview.cpp:187
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -5612,7 +5612,7 @@ msgstr "Áudio do Windows Media"
 msgid "Without cover:"
 msgstr "Sem capas:"
 
-#: library/libraryview.cpp:554
+#: library/libraryview.cpp:575
 msgid ""
 "Would you like to move the other songs in this album to Various Artists as "
 "well?"
@@ -5762,7 +5762,7 @@ msgstr "Suas credencias do Last.fm estavam incorretas"
 msgid "Your Magnatune credentials were incorrect"
 msgstr "Suas credenciais do Magnatune estão incorretas"
 
-#: library/libraryview.cpp:345
+#: library/libraryview.cpp:366
 msgid "Your library is empty!"
 msgstr "Sua biblioteca está vazia!"
 

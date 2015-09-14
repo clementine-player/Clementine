@@ -20,8 +20,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2015-08-17 13:03+0000\n"
-"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
+"PO-Revision-Date: 2015-09-10 03:50+0000\n"
+"Last-Translator: Kristian <kristianm24@gmail.com>\n"
 "Language-Team: Swedish (http://www.transifex.com/davidsansome/clementine/language/sv/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -65,7 +65,7 @@ msgstr " pt"
 
 #: ../bin/src/ui_behavioursettingspage.h:374
 msgid " s"
-msgstr ""
+msgstr "s"
 
 #: ../bin/src/ui_notificationssettingspage.h:444
 #: ../bin/src/ui_visualisationselector.h:115
@@ -622,12 +622,12 @@ msgstr "Lägg till i bokmärken"
 
 #: ../bin/src/ui_albumcovermanager.h:217
 msgid "Add to playlist"
-msgstr "Lägg till i spellistan"
+msgstr "Lägga till den i spellistan"
 
 #: ../bin/src/ui_behavioursettingspage.h:350
 #: ../bin/src/ui_behavioursettingspage.h:362
 msgid "Add to the queue"
-msgstr "Lägg till kön"
+msgstr "Lägga till den i spelkön"
 
 #: internet/vk/vkservice.cpp:337
 msgid "Add user/group to bookmarks"
@@ -823,7 +823,7 @@ msgid "Append files/URLs to the playlist"
 msgstr "Lägg till filer/webbadresser till spellistan"
 
 #: devices/deviceview.cpp:216 globalsearch/globalsearchview.cpp:453
-#: internet/core/internetservice.cpp:80 library/libraryview.cpp:370
+#: internet/core/internetservice.cpp:80 library/libraryview.cpp:391
 #: widgets/fileviewlist.cpp:31
 msgid "Append to current playlist"
 msgstr "Lägg till i den aktuella spellistan"
@@ -1118,7 +1118,7 @@ msgstr "Ändra blandningsläge"
 
 #: ../bin/src/ui_behavioursettingspage.h:361
 msgid "Change the currently playing song"
-msgstr ""
+msgstr "Byta ut låten som spelas för tillfället"
 
 #: core/commandlineoptions.cpp:172
 msgid "Change the language"
@@ -1278,7 +1278,7 @@ msgstr "Clementine kunde inte hitta resultat för den här filen"
 msgid "Clementine will find music in:"
 msgstr "Clementine kommer att söka musik i:"
 
-#: library/libraryview.cpp:351
+#: library/libraryview.cpp:372
 msgid "Click here to add some music"
 msgstr "Klicka här för att lägga till musik"
 
@@ -1461,7 +1461,7 @@ msgstr "Kopiera delad url till urklipp"
 msgid "Copy to clipboard"
 msgstr "Kopiera till klippbordet"
 
-#: library/libraryview.cpp:400 internet/podcasts/podcastservice.cpp:437
+#: library/libraryview.cpp:421 internet/podcasts/podcastservice.cpp:437
 #: ui/mainwindow.cpp:641 widgets/fileviewlist.cpp:43
 msgid "Copy to device..."
 msgstr "Kopiera till enhet..."
@@ -1710,7 +1710,7 @@ msgstr "Ta bort"
 msgid "Delete downloaded data"
 msgstr "Ta bort nedladdad data"
 
-#: devices/deviceview.cpp:404 library/libraryview.cpp:636
+#: devices/deviceview.cpp:404 library/libraryview.cpp:657
 #: ui/mainwindow.cpp:2294 widgets/fileview.cpp:186
 msgid "Delete files"
 msgstr "Ta bort filer"
@@ -1719,7 +1719,7 @@ msgstr "Ta bort filer"
 msgid "Delete from device..."
 msgstr "Ta bort från enhet..."
 
-#: library/libraryview.cpp:402 ui/mainwindow.cpp:643
+#: library/libraryview.cpp:423 ui/mainwindow.cpp:643
 #: widgets/fileviewlist.cpp:44
 msgid "Delete from disk..."
 msgstr "Ta bort från disk..."
@@ -1732,7 +1732,7 @@ msgstr "Ta bort uppspelade avsnitt"
 msgid "Delete preset"
 msgstr "Ta bort förinställning"
 
-#: library/libraryview.cpp:391
+#: library/libraryview.cpp:412
 msgid "Delete smart playlist"
 msgstr "Radera smart spellista"
 
@@ -1872,7 +1872,7 @@ msgstr "Skriv ej över"
 
 #: ../bin/src/ui_behavioursettingspage.h:364
 msgid "Do nothing"
-msgstr ""
+msgstr "Göra ingenting"
 
 #: internet/googledrive/googledriveservice.cpp:268
 msgid ""
@@ -1885,7 +1885,7 @@ msgstr "Att göra en fullständig omskanning kommer ta bort all metadata du har 
 msgid "Don't repeat"
 msgstr "Upprepa inte"
 
-#: library/libraryview.cpp:420
+#: library/libraryview.cpp:441
 msgid "Don't show in various artists"
 msgstr "Visa inte i diverse artister"
 
@@ -1912,7 +1912,7 @@ msgstr "Dubbelklicka för att öppna"
 
 #: ../bin/src/ui_behavioursettingspage.h:358
 msgid "Double clicking a song in the playlist will..."
-msgstr ""
+msgstr "Att dubbelklicka på en låt i spellistan kommer att..."
 
 #: ../bin/src/ui_behavioursettingspage.h:344
 msgid "Double clicking a song will..."
@@ -2019,7 +2019,7 @@ msgstr "Dynamiskt läge är på"
 msgid "Dynamic random mix"
 msgstr "Dynamisk slumpmässig blandning"
 
-#: library/libraryview.cpp:388
+#: library/libraryview.cpp:409
 msgid "Edit smart playlist..."
 msgstr "Redigera smart spellista..."
 
@@ -2040,12 +2040,12 @@ msgstr "Redigera etiketter"
 msgid "Edit track information"
 msgstr "Redigera spårinformation"
 
-#: library/libraryview.cpp:407 widgets/fileviewlist.cpp:49
+#: library/libraryview.cpp:428 widgets/fileviewlist.cpp:49
 #: ../bin/src/ui_mainwindow.h:658
 msgid "Edit track information..."
 msgstr "Redigera spårinformation..."
 
-#: library/libraryview.cpp:410
+#: library/libraryview.cpp:431
 msgid "Edit tracks information..."
 msgstr "Redigera spårinformation..."
 
@@ -2162,7 +2162,7 @@ msgid "Equivalent to --log-levels *:3"
 msgstr "Motsvarar --log-levels *:3"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:242
-#: library/libraryview.cpp:630 ui/mainwindow.cpp:1997 ui/mainwindow.cpp:2244
+#: library/libraryview.cpp:651 ui/mainwindow.cpp:1997 ui/mainwindow.cpp:2244
 #: ui/mainwindow.cpp:2392 internet/vk/vkservice.cpp:634
 msgid "Error"
 msgstr "Fel"
@@ -3422,7 +3422,7 @@ msgstr "Ny mapp"
 msgid "New playlist"
 msgstr "Ny spellista"
 
-#: library/libraryview.cpp:385
+#: library/libraryview.cpp:406
 msgid "New smart playlist..."
 msgstr "Ny smart spellista..."
 
@@ -3481,7 +3481,7 @@ msgstr "Inga korta block"
 msgid "None"
 msgstr "Inga"
 
-#: library/libraryview.cpp:631 ui/mainwindow.cpp:2245 ui/mainwindow.cpp:2393
+#: library/libraryview.cpp:652 ui/mainwindow.cpp:2245 ui/mainwindow.cpp:2393
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Ingen av de valda låtarna lämpar sig för kopiering till en enhet"
 
@@ -3643,10 +3643,10 @@ msgid "Open in Google Drive"
 msgstr "Öppna i Google Drive"
 
 #: devices/deviceview.cpp:221 globalsearch/globalsearchview.cpp:461
-#: internet/core/internetservice.cpp:102 library/libraryview.cpp:375
+#: internet/core/internetservice.cpp:102 library/libraryview.cpp:396
 #: widgets/fileviewlist.cpp:35
 msgid "Open in new playlist"
-msgstr "Öppna i ny spellista"
+msgstr "Öppna i en ny spellista"
 
 #: ../bin/src/ui_behavioursettingspage.h:349
 msgctxt "Refers to behavior settings in Clementine settings page."
@@ -3688,7 +3688,7 @@ msgstr "Opus"
 msgid "Organise Files"
 msgstr "Organisera filer"
 
-#: library/libraryview.cpp:396 ui/mainwindow.cpp:637
+#: library/libraryview.cpp:417 ui/mainwindow.cpp:637
 msgid "Organise files..."
 msgstr "Organisera filer..."
 
@@ -4011,7 +4011,7 @@ msgstr "Köhanterare"
 msgid "Queue selected tracks"
 msgstr "Kölägg valda spår"
 
-#: globalsearch/globalsearchview.cpp:466 library/libraryview.cpp:380
+#: globalsearch/globalsearchview.cpp:466 library/libraryview.cpp:401
 #: ui/mainwindow.cpp:1675
 msgid "Queue track"
 msgstr "Kölägg spår"
@@ -4179,18 +4179,18 @@ msgid "Repeat track"
 msgstr "Upprepa spår"
 
 #: devices/deviceview.cpp:219 globalsearch/globalsearchview.cpp:457
-#: internet/core/internetservice.cpp:91 library/libraryview.cpp:372
+#: internet/core/internetservice.cpp:91 library/libraryview.cpp:393
 #: widgets/fileviewlist.cpp:34
 msgid "Replace current playlist"
 msgstr "Ersätt den aktuella spellistan"
 
 #: ../bin/src/ui_behavioursettingspage.h:348
 msgid "Replace the playlist"
-msgstr "Ersätt spellistan"
+msgstr "Ersätta spellistan"
 
 #: ../bin/src/ui_behavioursettingspage.h:363
 msgid "Replace the queue"
-msgstr ""
+msgstr "Ersätta spelkön"
 
 #: ../bin/src/ui_organisedialog.h:256
 msgid "Replaces spaces with underscores"
@@ -4611,7 +4611,7 @@ msgstr "Visa full storlek..."
 msgid "Show groups in global search result"
 msgstr "Visa grupper i globala sökresultat"
 
-#: library/libraryview.cpp:413 ui/mainwindow.cpp:646
+#: library/libraryview.cpp:434 ui/mainwindow.cpp:646
 #: widgets/fileviewlist.cpp:51
 msgid "Show in file browser..."
 msgstr "Visa i filhanterare..."
@@ -4620,7 +4620,7 @@ msgstr "Visa i filhanterare..."
 msgid "Show in library..."
 msgstr "Visa i biblioteket"
 
-#: library/libraryview.cpp:417
+#: library/libraryview.cpp:438
 msgid "Show in various artists"
 msgstr "Visa i diverse artister"
 
@@ -5044,7 +5044,7 @@ msgid ""
 "rescan because of the new features listed below:"
 msgstr "Den version av Clementine du precis uppdaterade till kräver en fullständig omsökning av biblioteket på grund av dessa nya funktioner:"
 
-#: library/libraryview.cpp:553
+#: library/libraryview.cpp:574
 msgid "There are other songs in this album"
 msgstr "Det finns 'andra låtar' i det här albumet."
 
@@ -5080,7 +5080,7 @@ msgid ""
 "continue?"
 msgstr "Filerna kommer att tas bort från enheten, är du säker på att du vill fortsätta?"
 
-#: library/libraryview.cpp:637 ui/mainwindow.cpp:2295 widgets/fileview.cpp:187
+#: library/libraryview.cpp:658 ui/mainwindow.cpp:2295 widgets/fileview.cpp:187
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -5613,7 +5613,7 @@ msgstr "Windows Media-ljud"
 msgid "Without cover:"
 msgstr "Utan omslag:"
 
-#: library/libraryview.cpp:554
+#: library/libraryview.cpp:575
 msgid ""
 "Would you like to move the other songs in this album to Various Artists as "
 "well?"
@@ -5763,7 +5763,7 @@ msgstr "Dina Last.fm-uppgifter var felaktiga"
 msgid "Your Magnatune credentials were incorrect"
 msgstr "Dina uppgifter för Magnatune var felaktiga"
 
-#: library/libraryview.cpp:345
+#: library/libraryview.cpp:366
 msgid "Your library is empty!"
 msgstr "Ditt bibliotek är tomt!"
 

@@ -823,7 +823,7 @@ msgid "Append files/URLs to the playlist"
 msgstr "Přidat soubory/adresy do seznamu skladeb"
 
 #: devices/deviceview.cpp:216 globalsearch/globalsearchview.cpp:453
-#: internet/core/internetservice.cpp:80 library/libraryview.cpp:370
+#: internet/core/internetservice.cpp:80 library/libraryview.cpp:391
 #: widgets/fileviewlist.cpp:31
 msgid "Append to current playlist"
 msgstr "Přidat do současného seznamu skladeb"
@@ -1278,7 +1278,7 @@ msgstr "Clementine se pro tento soubor výsledky najít nepodařilo"
 msgid "Clementine will find music in:"
 msgstr "Clementine bude hledat hudbu v:"
 
-#: library/libraryview.cpp:351
+#: library/libraryview.cpp:372
 msgid "Click here to add some music"
 msgstr "Klepněte sem pro přidání nějaké hudby"
 
@@ -1461,7 +1461,7 @@ msgstr "Kopírovat sdílenou adresu (URL) do schránky"
 msgid "Copy to clipboard"
 msgstr "Kopírovat do schránky"
 
-#: library/libraryview.cpp:400 internet/podcasts/podcastservice.cpp:437
+#: library/libraryview.cpp:421 internet/podcasts/podcastservice.cpp:437
 #: ui/mainwindow.cpp:641 widgets/fileviewlist.cpp:43
 msgid "Copy to device..."
 msgstr "Zkopírovat do zařízení..."
@@ -1710,7 +1710,7 @@ msgstr "Smazat"
 msgid "Delete downloaded data"
 msgstr "Smazat stažená data"
 
-#: devices/deviceview.cpp:404 library/libraryview.cpp:636
+#: devices/deviceview.cpp:404 library/libraryview.cpp:657
 #: ui/mainwindow.cpp:2294 widgets/fileview.cpp:186
 msgid "Delete files"
 msgstr "Smazat soubory"
@@ -1719,7 +1719,7 @@ msgstr "Smazat soubory"
 msgid "Delete from device..."
 msgstr "Smazat ze zařízení..."
 
-#: library/libraryview.cpp:402 ui/mainwindow.cpp:643
+#: library/libraryview.cpp:423 ui/mainwindow.cpp:643
 #: widgets/fileviewlist.cpp:44
 msgid "Delete from disk..."
 msgstr "Smazat z disku..."
@@ -1732,7 +1732,7 @@ msgstr "Smazat přehrané díly"
 msgid "Delete preset"
 msgstr "Smazat předvolbu"
 
-#: library/libraryview.cpp:391
+#: library/libraryview.cpp:412
 msgid "Delete smart playlist"
 msgstr "Smazat chytrý seznam skladeb"
 
@@ -1885,7 +1885,7 @@ msgstr "Úplné znovuprohledání povede ke ztrátě popisných dat uložených 
 msgid "Don't repeat"
 msgstr "Neopakovat"
 
-#: library/libraryview.cpp:420
+#: library/libraryview.cpp:441
 msgid "Don't show in various artists"
 msgstr "Nezobrazovat pod různými umělci"
 
@@ -2019,7 +2019,7 @@ msgstr "Je zapnut dynamický režim"
 msgid "Dynamic random mix"
 msgstr "Dynamický náhodný výběr"
 
-#: library/libraryview.cpp:388
+#: library/libraryview.cpp:409
 msgid "Edit smart playlist..."
 msgstr "Upravit chytrý seznam skladeb..."
 
@@ -2040,12 +2040,12 @@ msgstr "Upravit značky"
 msgid "Edit track information"
 msgstr "Upravit informace o skladbě"
 
-#: library/libraryview.cpp:407 widgets/fileviewlist.cpp:49
+#: library/libraryview.cpp:428 widgets/fileviewlist.cpp:49
 #: ../bin/src/ui_mainwindow.h:658
 msgid "Edit track information..."
 msgstr "Upravit informace o skladbě..."
 
-#: library/libraryview.cpp:410
+#: library/libraryview.cpp:431
 msgid "Edit tracks information..."
 msgstr "Upravit informace o skladbách..."
 
@@ -2162,7 +2162,7 @@ msgid "Equivalent to --log-levels *:3"
 msgstr "Rovnocenné s --log-levels *:3"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:242
-#: library/libraryview.cpp:630 ui/mainwindow.cpp:1997 ui/mainwindow.cpp:2244
+#: library/libraryview.cpp:651 ui/mainwindow.cpp:1997 ui/mainwindow.cpp:2244
 #: ui/mainwindow.cpp:2392 internet/vk/vkservice.cpp:634
 msgid "Error"
 msgstr "Chyba"
@@ -3422,7 +3422,7 @@ msgstr "Nová složka"
 msgid "New playlist"
 msgstr "Nový seznam skladeb"
 
-#: library/libraryview.cpp:385
+#: library/libraryview.cpp:406
 msgid "New smart playlist..."
 msgstr "Nový chytrý seznam skladeb..."
 
@@ -3481,7 +3481,7 @@ msgstr "Žádné krátké bloky"
 msgid "None"
 msgstr "Žádná"
 
-#: library/libraryview.cpp:631 ui/mainwindow.cpp:2245 ui/mainwindow.cpp:2393
+#: library/libraryview.cpp:652 ui/mainwindow.cpp:2245 ui/mainwindow.cpp:2393
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Žádná z vybraných písní nebyla vhodná ke zkopírování do zařízení"
 
@@ -3643,7 +3643,7 @@ msgid "Open in Google Drive"
 msgstr "Otevřít v Google Drive"
 
 #: devices/deviceview.cpp:221 globalsearch/globalsearchview.cpp:461
-#: internet/core/internetservice.cpp:102 library/libraryview.cpp:375
+#: internet/core/internetservice.cpp:102 library/libraryview.cpp:396
 #: widgets/fileviewlist.cpp:35
 msgid "Open in new playlist"
 msgstr "Otevřít v novém seznamu skladeb"
@@ -3688,7 +3688,7 @@ msgstr "Opus"
 msgid "Organise Files"
 msgstr "Uspořádat soubory"
 
-#: library/libraryview.cpp:396 ui/mainwindow.cpp:637
+#: library/libraryview.cpp:417 ui/mainwindow.cpp:637
 msgid "Organise files..."
 msgstr "Uspořádat soubory..."
 
@@ -4011,7 +4011,7 @@ msgstr "Správce řady"
 msgid "Queue selected tracks"
 msgstr "Přidat vybrané skladby do řady"
 
-#: globalsearch/globalsearchview.cpp:466 library/libraryview.cpp:380
+#: globalsearch/globalsearchview.cpp:466 library/libraryview.cpp:401
 #: ui/mainwindow.cpp:1675
 msgid "Queue track"
 msgstr "Přidat skladbu do řady"
@@ -4179,7 +4179,7 @@ msgid "Repeat track"
 msgstr "Opakovat skladbu"
 
 #: devices/deviceview.cpp:219 globalsearch/globalsearchview.cpp:457
-#: internet/core/internetservice.cpp:91 library/libraryview.cpp:372
+#: internet/core/internetservice.cpp:91 library/libraryview.cpp:393
 #: widgets/fileviewlist.cpp:34
 msgid "Replace current playlist"
 msgstr "Nahradit současný seznam skladeb"
@@ -4611,7 +4611,7 @@ msgstr "Ukázat v plné velikosti..."
 msgid "Show groups in global search result"
 msgstr "Ukázat skupiny ve výsledcích celkového hledání"
 
-#: library/libraryview.cpp:413 ui/mainwindow.cpp:646
+#: library/libraryview.cpp:434 ui/mainwindow.cpp:646
 #: widgets/fileviewlist.cpp:51
 msgid "Show in file browser..."
 msgstr "Ukázat v prohlížeči souborů..."
@@ -4620,7 +4620,7 @@ msgstr "Ukázat v prohlížeči souborů..."
 msgid "Show in library..."
 msgstr "Ukazovat ve sbírce..."
 
-#: library/libraryview.cpp:417
+#: library/libraryview.cpp:438
 msgid "Show in various artists"
 msgstr "Ukázat pod různými umělci"
 
@@ -5044,7 +5044,7 @@ msgid ""
 "rescan because of the new features listed below:"
 msgstr "Verze Clementine, na kterou jste právě povýšili, vyžaduje z důvodu nových vlastností vypsaných níže úplné nové prohledání sbírky:"
 
-#: library/libraryview.cpp:553
+#: library/libraryview.cpp:574
 msgid "There are other songs in this album"
 msgstr "Na tomto albu jsou další písně"
 
@@ -5080,7 +5080,7 @@ msgid ""
 "continue?"
 msgstr "Tyto soubory budou smazány ze zařízení. Opravdu chcete pokračovat?"
 
-#: library/libraryview.cpp:637 ui/mainwindow.cpp:2295 widgets/fileview.cpp:187
+#: library/libraryview.cpp:658 ui/mainwindow.cpp:2295 widgets/fileview.cpp:187
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -5613,7 +5613,7 @@ msgstr "Windows Media Audio"
 msgid "Without cover:"
 msgstr "Bez obalu:"
 
-#: library/libraryview.cpp:554
+#: library/libraryview.cpp:575
 msgid ""
 "Would you like to move the other songs in this album to Various Artists as "
 "well?"
@@ -5763,7 +5763,7 @@ msgstr "Vaše přihlašovací údaje k Last.fm byly nesprávné"
 msgid "Your Magnatune credentials were incorrect"
 msgstr "Vaše přihlašovací údaje k Magnatune byly nesprávné"
 
-#: library/libraryview.cpp:345
+#: library/libraryview.cpp:366
 msgid "Your library is empty!"
 msgstr "Vaše hudební sbírka je prázdná!"
 
