@@ -198,6 +198,8 @@ Amarok::VolumeSlider::VolumeSlider(QWidget* parent, uint max)
       m_pixmapInset(QPixmap(volumePixmapDraw ())) {
   setFocusPolicy(Qt::NoFocus);
 
+  WindowText_color = palette().color(QPalette::WindowText);
+
   // BEGIN Calculate handle animation pixmaps for mouse-over effect
   QImage pixmapHandle(":volumeslider-handle.png");
   QImage pixmapHandleGlow(":volumeslider-handle_glow.png");
@@ -301,7 +303,10 @@ void Amarok::VolumeSlider::paintEvent(QPaintEvent*) {
   const int padding = 7;
   const int offset = int(double((width() - 2 * padding) * value()) / maximum());
 
-  m_pixmapInset = volumePixmapDraw();
+  if (WindowText_color != palette().color(QPalette::WindowText)) {
+    m_pixmapInset = volumePixmapDraw();
+    WindowText_color = palette().color(QPalette::WindowText);
+  }
 
   p.drawPixmap(0, 0, m_pixmapGradient, 0, 0, offset + padding, 0);
   p.drawPixmap(0, 0, m_pixmapInset);
