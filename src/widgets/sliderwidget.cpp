@@ -195,8 +195,11 @@ Amarok::VolumeSlider::VolumeSlider(QWidget* parent, uint max)
     : Amarok::Slider(Qt::Horizontal, parent, max),
       m_animCount(0),
       m_animTimer(new QTimer(this)),
-      m_pixmapInset(QPixmap(":volumeslider-inset.png")) {
+      m_pixmapInset(QPixmap(volumePixmapDraw ())) {
   setFocusPolicy(Qt::NoFocus);
+
+  // Store window text color to check theme change at paintEvent
+  m_previous_theme_text_color = palette().color(QPalette::WindowText);
 
   // BEGIN Calculate handle animation pixmaps for mouse-over effect
   QImage pixmapHandle(":volumeslider-handle.png");
@@ -301,6 +304,12 @@ void Amarok::VolumeSlider::paintEvent(QPaintEvent*) {
   const int padding = 7;
   const int offset = int(double((width() - 2 * padding) * value()) / maximum());
 
+  // If theme changed since last paintEvent, redraw the volume pixmap with new theme colors 
+  if (m_previous_theme_text_color != palette().color(QPalette::WindowText)) {
+    m_pixmapInset = volumePixmapDraw();
+    m_previous_theme_text_color = palette().color(QPalette::WindowText);
+  }
+
   p.drawPixmap(0, 0, m_pixmapGradient, 0, 0, offset + padding, 0);
   p.drawPixmap(0, 0, m_pixmapInset);
   p.drawPixmap(offset - m_handlePixmaps[0].width() / 2 + padding, 0,
@@ -334,4 +343,26 @@ void Amarok::VolumeSlider::leaveEvent(QEvent*) {
 
 void Amarok::VolumeSlider::paletteChange(const QPalette&) {
   generateGradient();
+}
+
+QPixmap Amarok::VolumeSlider::volumePixmapDraw () const {
+  QPixmap pixmap(112, 36);
+  pixmap.fill(Qt::transparent);
+  QPainter painter(&pixmap);
+  QPen pen(palette().color(QPalette::WindowText), 0.3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
+  painter.setPen(pen);
+  
+  painter.setRenderHint(QPainter::Antialiasing);
+  painter.setRenderHint(QPainter::SmoothPixmapTransform);
+  // Draw volume control pixmap
+  QPolygon poly;
+  poly << QPoint(6, 21) << QPoint(104, 21)
+       << QPoint(104, 7) << QPoint(6, 16)
+       << QPoint(6, 21);
+  QPainterPath path;
+  path.addPolygon(poly);
+  painter.drawPolygon(poly);
+  painter.drawLine(6, 29, 104, 29);
+  // Return QPixmap
+  return pixmap;
 }
