@@ -120,7 +120,7 @@ SearchTermWidget::SearchTermWidget(LibraryBackend* library, QWidget* parent)
   // Set stylesheet
   QFile stylesheet_file(":/smartplaylistsearchterm.css");
   stylesheet_file.open(QIODevice::ReadOnly);
-  QString stylesheet = QString::fromAscii(stylesheet_file.readAll());
+  QString stylesheet = QString::fromLatin1(stylesheet_file.readAll());
   const QColor base(222, 97, 97, 128);
   stylesheet.replace("%light2", Utilities::ColorToRgba(base.lighter(140)));
   stylesheet.replace("%light", Utilities::ColorToRgba(base.lighter(120)));
@@ -368,7 +368,7 @@ void SearchTermWidget::Overlay::Grab() {
   hide();
 
   // Take a "screenshot" of the window
-  QPixmap pixmap = QPixmap::grabWidget(parent_);
+  QPixmap pixmap = parent_->grab();
   QImage image = pixmap.toImage();
 
   // Blur it

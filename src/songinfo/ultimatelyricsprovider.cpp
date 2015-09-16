@@ -37,7 +37,7 @@ UltimateLyricsProvider::UltimateLyricsProvider()
 void UltimateLyricsProvider::FetchInfo(int id, const Song& metadata) {
   // Get the text codec
   const QTextCodec* codec =
-      QTextCodec::codecForName(charset_.toAscii().constData());
+      QTextCodec::codecForName(charset_.toLatin1().constData());
   if (!codec) {
     qLog(Warning) << "Invalid codec" << charset_;
     emit Finished(id);
@@ -100,7 +100,7 @@ void UltimateLyricsProvider::LyricsFetched() {
   }
 
   const QTextCodec* codec =
-      QTextCodec::codecForName(charset_.toAscii().constData());
+      QTextCodec::codecForName(charset_.toLatin1().constData());
   const QString original_content = codec->toUnicode(reply->readAll());
   QString lyrics;
 

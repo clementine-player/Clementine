@@ -22,9 +22,10 @@
 
 #include <QtGlobal>
 #include <QIcon>
-
-#include <qjson/parser.h>
-#include <qjson/serializer.h>
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QJsonValue>
+#include <QJsonArray>
 
 #include "core/application.h"
 #include "core/closure.h"
@@ -140,14 +141,14 @@ void AmazonCloudDrive::FetchEndpoint() {
 void AmazonCloudDrive::FetchEndpointFinished(QNetworkReply* reply) {
   reply->deleteLater();
 
-  QJson::Parser parser;
-  QVariantMap response = parser.parse(reply).toMap();
-  content_url_ = response["contentUrl"].toString();
-  metadata_url_ = response["metadataUrl"].toString();
+  QJsonObject json_response = QJsonDocument::fromJson(reply->readAll()).object();
+  content_url_ = json_response["contentUrl"].toString();
+  metadata_url_ = json_response["metadataUrl"].toString();
   if (content_url_.isEmpty() || metadata_url_.isEmpty()) {
     qLog(Debug) << "Couldn't fetch Amazon endpoint";
     return;
   }
+
   QSettings s;
   s.beginGroup(kSettingsGroup);
   QString checkpoint = s.value("checkpoint", "").toString();
@@ -161,13 +162,14 @@ void AmazonCloudDrive::RequestChanges(const QString& checkpoint) {
   EnsureConnected();
   QUrl url(QString(kChangesEndpoint).arg(metadata_url_));
 
-  QVariantMap data;
-  data["includePurged"] = "true";
+  QJsonDocument data;
+  QJsonObject object;
+  object.insert("includePurged", QJsonValue("true"));
   if (!checkpoint.isEmpty()) {
-    data["checkpoint"] = checkpoint;
+    object.insert("checkpoint", checkpoint);
   }
-  QJson::Serializer serializer;
-  QByteArray json = serializer.serialize(data);
+  data.setObject(object);
+  QByteArray json = data.toBinaryData();
 
   QNetworkRequest request(url);
   Post(request, json,
@@ -221,27 +223,23 @@ void AmazonCloudDrive::RequestChangesFinished(QNetworkReply* reply) {
   reply->deleteLater();
 
   QByteArray data = reply->readAll();
-  QBuffer buffer(&data);
-  buffer.open(QIODevice::ReadOnly);
+  QJsonObject json_response = QJsonDocument::fromBinaryData(data).object();
 
-  QJson::Parser parser;
-  QVariantMap response = parser.parse(&buffer).toMap();
-
-  QString checkpoint = response["checkpoint"].toString();
+  QString checkpoint = json_response["checkpoint"].toString();
   QSettings settings;
   settings.beginGroup(kSettingsGroup);
   settings.setValue("checkpoint", checkpoint);
 
-  QVariantList nodes = response["nodes"].toList();
-  for (const QVariant& n : nodes) {
-    QVariantMap node = n.toMap();
+  QJsonArray nodes = json_response["nodes"].toArray();
+  for (const QJsonValue& n : nodes) {
+    QJsonObject node = n.toObject();
     if (node["kind"].toString() == "FOLDER") {
       // Skip directories.
       continue;
     }
     QUrl url;
     url.setScheme("amazonclouddrive");
-    url.setPath(node["id"].toString());
+    url.setPath("/" + node["id"].toString());
 
     QString status = node["status"].toString();
     if (status == "PURGED") {
@@ -257,7 +255,7 @@ void AmazonCloudDrive::RequestChangesFinished(QNetworkReply* reply) {
       continue;
     }
 
-    QVariantMap content_properties = node["contentProperties"].toMap();
+    QJsonObject content_properties = node["contentProperties"].toObject();
     QString mime_type = content_properties["contentType"].toString();
 
     if (ShouldIndexFile(url, mime_type)) {
@@ -269,8 +267,8 @@ void AmazonCloudDrive::RequestChangesFinished(QNetworkReply* reply) {
       Song song;
       song.set_url(url);
       song.set_etag(md5);
-      song.set_mtime(node["modifiedDate"].toDateTime().toTime_t());
-      song.set_ctime(node["createdDate"].toDateTime().toTime_t());
+      song.set_mtime(QDateTime::fromString(node["modifiedDate"].toString()).toTime_t());
+      song.set_ctime(QDateTime::fromString(node["createdDate"].toString()).toTime_t());
       song.set_title(node["name"].toString());
       song.set_filesize(content_properties["size"].toInt());
 
@@ -284,7 +282,7 @@ void AmazonCloudDrive::RequestChangesFinished(QNetworkReply* reply) {
   // client is up to date with the latest changes.
   const int last_newline_index = data.lastIndexOf('\n');
   QByteArray last_line = data.mid(last_newline_index);
-  QVariantMap end_json = parser.parse(last_line).toMap();
+  QJsonObject end_json = QJsonDocument::fromJson(last_line).object();
   if (end_json.contains("end") && end_json["end"].toBool()) {
     return;
   } else {

@@ -28,6 +28,7 @@
 #include <QCoreApplication>
 #include <QDateTime>
 #include <QStringList>
+#include <QtMessageHandler>
 
 #include <glib.h>
 
@@ -43,7 +44,7 @@ const char* kDefaultLogLevels = "GstEnginePipeline:2,*:3";
 
 static const char* kMessageHandlerMagic = "__logging_message__";
 static const int kMessageHandlerMagicLength = strlen(kMessageHandlerMagic);
-static QtMsgHandler sOriginalMessageHandler = nullptr;
+static QtMessageHandler sOriginalMessageHandler = nullptr;
 
 void GLog(const char* domain, int level, const char* message, void* user_data) {
   switch (level) {
@@ -67,9 +68,9 @@ void GLog(const char* domain, int level, const char* message, void* user_data) {
   }
 }
 
-static void MessageHandler(QtMsgType type, const char* message) {
-  if (strncmp(kMessageHandlerMagic, message, kMessageHandlerMagicLength) == 0) {
-    fprintf(stderr, "%s\n", message + kMessageHandlerMagicLength);
+static void MessageHandler(QtMsgType type, const QMessageLogContext &context, const QString &message) {
+  if (strncmp(kMessageHandlerMagic, message.toLocal8Bit().data(), kMessageHandlerMagicLength) == 0) {
+    fprintf(stderr, "%s\n", message.toLocal8Bit().data() + kMessageHandlerMagicLength);
     return;
   }
 
@@ -88,7 +89,7 @@ static void MessageHandler(QtMsgType type, const char* message) {
       break;
   }
 
-  for (const QString& line : QString::fromLocal8Bit(message).split('\n')) {
+  for (const QString& line : message.split('\n')) {
     CreateLogger(level, "unknown", -1) << line.toLocal8Bit().constData();
   }
 
@@ -103,10 +104,11 @@ void Init() {
 
   sClassLevels = new QMap<QString, Level>();
   sNullDevice = new NullDevice;
+  sNullDevice->open(QIODevice::ReadWrite);
 
   // Catch other messages from Qt
   if (!sOriginalMessageHandler) {
-    sOriginalMessageHandler = qInstallMsgHandler(MessageHandler);
+    sOriginalMessageHandler = qInstallMessageHandler(MessageHandler);
   }
 }
 
@@ -204,9 +206,9 @@ QDebug CreateLogger(Level level, const QString& class_name, int line) {
   QDebug ret(type);
   ret.nospace() << kMessageHandlerMagic << QDateTime::currentDateTime()
                                                .toString("hh:mm:ss.zzz")
-                                               .toAscii()
+                                               .toLatin1()
                                                .constData() << level_name
-                << function_line.leftJustified(32).toAscii().constData();
+                << function_line.leftJustified(32).toLatin1().constData();
 
   return ret.space();
 }
@@ -214,9 +216,9 @@ QDebug CreateLogger(Level level, const QString& class_name, int line) {
 QString CXXDemangle(const QString& mangled_function) {
   int status;
   char* demangled_function = abi::__cxa_demangle(
-      mangled_function.toAscii().constData(), nullptr, nullptr, &status);
+      mangled_function.toLatin1().constData(), nullptr, nullptr, &status);
   if (status == 0) {
-    QString ret = QString::fromAscii(demangled_function);
+    QString ret = QString::fromLatin1(demangled_function);
     free(demangled_function);
     return ret;
   }
@@ -257,13 +259,30 @@ void DumpStackTrace() {
       backtrace_symbols(reinterpret_cast<void**>(&callstack), callstack_size);
   // Start from 1 to skip ourself.
   for (int i = 1; i < callstack_size; ++i) {
-    qLog(Debug) << DemangleSymbol(QString::fromAscii(symbols[i]));
+    qLog(Debug) << DemangleSymbol(QString::fromLatin1(symbols[i]));
   }
   free(symbols);
 #else
   qLog(Debug) << "FIXME: Implement printing stack traces on this platform";
 #endif
 }
+
+QDebug CreateLoggerFatal(int line, const char *class_name) { return qCreateLogger(line, class_name, Fatal); }
+QDebug CreateLoggerError(int line, const char *class_name) { return qCreateLogger(line, class_name, Error); }
+
+#ifdef QT_NO_WARNING_OUTPUT
+QNoDebug CreateLoggerWarning(int, const char*) { return QNoDebug(); }
+#else
+QDebug CreateLoggerWarning(int line, const char *class_name) { return qCreateLogger(line, class_name, Warning); }
+#endif // QT_NO_WARNING_OUTPUT
+
+#ifdef QT_NO_DEBUG_OUTPUT
+QNoDebug CreateLoggerInfo(int, const char*) { return QNoDebug(); }
+QNoDebug CreateLoggerDebug(int, const char*) { return QNoDebug(); }
+#else
+QDebug CreateLoggerInfo(int line, const char *class_name) { return qCreateLogger(line, class_name, Info); }
+QDebug CreateLoggerDebug(int line, const char *class_name) { return qCreateLogger(line, class_name, Debug); }
+#endif // QT_NO_DEBUG_OUTPUT
 
 }  // namespace logging
 

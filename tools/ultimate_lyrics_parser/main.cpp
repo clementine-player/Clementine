@@ -17,8 +17,6 @@
 
 #include <QApplication>
 #include <QFile>
-#include <QWebFrame>
-#include <QWebPage>
 #include <QXmlStreamWriter>
 #include <QtDebug>
 

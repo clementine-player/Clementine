@@ -978,7 +978,6 @@ MainWindow::~MainWindow() {
 void MainWindow::ReloadSettings() {
 #ifndef Q_OS_DARWIN
   bool show_tray = settings_.value("showtray", true).toBool();
-
   tray_icon_->SetVisible(show_tray);
   if (!show_tray && !isVisible()) show();
 #endif
@@ -2047,14 +2046,14 @@ void MainWindow::PlaylistEditFinished(const QModelIndex& index) {
 }
 
 void MainWindow::CommandlineOptionsReceived(
-    const QByteArray& serialized_options) {
+    const QString& serialized_options) {
   if (serialized_options == "wake up!") {
     // Old versions of Clementine sent this - just ignore it
     return;
   }
 
   CommandlineOptions options;
-  options.Load(serialized_options);
+  options.Load(serialized_options.toLatin1());
 
   if (options.is_empty()) {
     show();

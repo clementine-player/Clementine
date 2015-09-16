@@ -29,6 +29,7 @@
 #include "covers/albumcoverfetcher.h"
 #include "engines/enginebase.h"
 #include "engines/gstengine.h"
+#include "engines/gstenginepipeline.h"
 #include "globalsearch/searchprovider.h"
 #include "internet/digitally/digitallyimportedclient.h"
 #include "internet/core/geolocator.h"
@@ -55,7 +56,6 @@ class QNetworkReply;
 
 void RegisterMetaTypes() {
   qRegisterMetaType<CollapsibleInfoPane::Data>("CollapsibleInfoPane::Data");
-  qRegisterMetaType<ColumnAlignmentMap>("ColumnAlignmentMap");
   qRegisterMetaType<const char*>("const char*");
   qRegisterMetaType<CoverSearchResult>("CoverSearchResult");
   qRegisterMetaType<CoverSearchResults>("CoverSearchResults");

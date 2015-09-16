@@ -25,6 +25,7 @@
 #include "attachment.h"
 #include <QSharedData>
 #include <QStringList>
+#include <QDataStream>
 
 namespace Vreen {
 

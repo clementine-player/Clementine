@@ -22,7 +22,7 @@
 
 #include "Podcast_p.h"
 
-#include <parser.h>
+#include "qjsonwrapper/Json.h"
 
 using namespace mygpo;
 
@@ -181,9 +181,8 @@ bool PodcastPrivate::parse( const QVariant& data )
 
 bool PodcastPrivate::parse( const QByteArray& data )
 {
-    QJson::Parser parser;
     bool ok;
-    QVariant variant = parser.parse( data, &ok );
+    QVariant variant = QJsonWrapper::parseJson( data, &ok );
     if ( ok )
     {
         if ( !parse( variant ) ) return false;
@@ -197,8 +196,6 @@ bool PodcastPrivate::parse( const QByteArray& data )
 
 void PodcastPrivate::parseData()
 {
-    //parsen und signal senden
-    QJson::Parser parser;
     if ( parse( m_reply->readAll( ) ) )
     {
         emit q->finished();

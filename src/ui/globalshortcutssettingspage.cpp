@@ -39,7 +39,7 @@ GlobalShortcutsSettingsPage::GlobalShortcutsSettingsPage(SettingsDialog* dialog)
       grabber_(new GlobalShortcutGrabber) {
   ui_->setupUi(this);
   ui_->shortcut_options->setEnabled(false);
-  ui_->list->header()->setResizeMode(QHeaderView::ResizeToContents);
+  ui_->list->header()->setSectionResizeMode(QHeaderView::ResizeToContents);
   setWindowIcon(IconLoader::Load("input-keyboard"));
 
   settings_.beginGroup(GlobalShortcuts::kSettingsGroup);

@@ -30,12 +30,12 @@
 #include "stylehelper.h"
 
 #include <QtGui/QPixmapCache>
-#include <QtGui/QWidget>
+#include <QWidget>
 #include <QtCore/QRect>
 #include <QtGui/QPainter>
-#include <QtGui/QApplication>
+#include <QApplication>
 #include <QtGui/QPalette>
-#include <QtGui/QStyleOption>
+#include <QStyleOption>
 #include <QtCore/QObject>
 
 // Clamps float color values within (0, 255)
@@ -47,7 +47,7 @@ static int clamp(float x) {
 namespace Utils {
 
 qreal StyleHelper::sidebarFontSize() {
-#if defined(Q_WS_MAC)
+#if defined(Q_OS_MAC)
   return 10;
 #else
   return 7.5;

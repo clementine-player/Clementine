@@ -28,6 +28,7 @@
 #include <QSharedData>
 #include <QStringList>
 #include <QDateTime>
+#include <QDataStream>
 
 namespace Vreen {
 

@@ -694,16 +694,12 @@ bool IsLaptop() {
 }
 
 QString SystemLanguageName() {
-#if QT_VERSION >= 0x040800
   QString system_language = QLocale::system().uiLanguages().empty()
                                 ? QLocale::system().name()
                                 : QLocale::system().uiLanguages().first();
   // uiLanguages returns strings with "-" as separators for language/region;
   // however QTranslator needs "_" separators
   system_language.replace("-", "_");
-#else
-  QString system_language = QLocale::system().name();
-#endif
 
   return system_language;
 }

@@ -21,8 +21,10 @@
 
 #include <QFileInfo>
 #include <QTimer>
-
-#include <qjson/parser.h>
+#include <QUrlQuery>
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QJsonArray>
 
 #include "core/application.h"
 #include "core/logging.h"
@@ -103,9 +105,11 @@ void DropboxService::RequestFileList() {
   s.beginGroup(kSettingsGroup);
 
   QUrl url = QUrl(QString(kDeltaEndpoint));
+  QUrlQuery url_query;
   if (s.contains("cursor")) {
-    url.addQueryItem("cursor", s.value("cursor").toString());
+    url_query.addQueryItem("cursor", s.value("cursor").toString());
   }
+  url.setQuery(url_query);
   QNetworkRequest request(url);
   request.setRawHeader("Authorization", GenerateAuthorisationHeader());
 
@@ -117,21 +121,22 @@ void DropboxService::RequestFileList() {
 void DropboxService::RequestFileListFinished(QNetworkReply* reply) {
   reply->deleteLater();
 
-  QJson::Parser parser;
-  QVariantMap response = parser.parse(reply).toMap();
-  if (response.contains("reset") && response["reset"].toBool()) {
+  QJsonDocument document = QJsonDocument::fromBinaryData(reply->readAll());
+  QJsonObject json_response = document.object();
+
+  if (json_response.contains("reset") && json_response["reset"].toBool()) {
     qLog(Debug) << "Resetting Dropbox DB";
     library_backend_->DeleteAll();
   }
 
   QSettings settings;
   settings.beginGroup(kSettingsGroup);
-  settings.setValue("cursor", response["cursor"].toString());
+  settings.setValue("cursor", json_response["cursor"].toString());
 
-  QVariantList contents = response["entries"].toList();
+  QJsonArray contents = json_response["entries"].toArray();
   qLog(Debug) << "Delta found:" << contents.size();
-  for (const QVariant& c : contents) {
-    QVariantList item = c.toList();
+  for (const QJsonValue& c : contents) {
+    QJsonArray item = c.toArray();
     QString path = item[0].toString();
 
     QUrl url;
@@ -148,7 +153,7 @@ void DropboxService::RequestFileListFinished(QNetworkReply* reply) {
       continue;
     }
 
-    QVariantMap metadata = item[1].toMap();
+    QJsonObject metadata = item[1].toObject();
     if (metadata["is_dir"].toBool()) {
       continue;
     }
@@ -168,7 +173,7 @@ void DropboxService::RequestFileListFinished(QNetworkReply* reply) {
     }
   }
 
-  if (response.contains("has_more") && response["has_more"].toBool()) {
+  if (json_response.contains("has_more") && json_response["has_more"].toBool()) {
     RequestFileList();
   } else {
     // Long-poll wait for changes.
@@ -181,9 +186,11 @@ void DropboxService::LongPollDelta() {
   s.beginGroup(kSettingsGroup);
 
   QUrl request_url = QUrl(QString(kLongPollEndpoint));
+  QUrlQuery url_query;
   if (s.contains("cursor")) {
-    request_url.addQueryItem("cursor", s.value("cursor").toString());
+    url_query.addQueryItem("cursor", s.value("cursor").toString());
   }
+  request_url.setQuery(url_query);
   QNetworkRequest request(request_url);
   request.setRawHeader("Authorization", GenerateAuthorisationHeader());
   QNetworkReply* reply = network_->get(request);
@@ -193,15 +200,14 @@ void DropboxService::LongPollDelta() {
 
 void DropboxService::LongPollFinished(QNetworkReply* reply) {
   reply->deleteLater();
-  QJson::Parser parser;
-  QVariantMap response = parser.parse(reply).toMap();
-  if (response["changes"].toBool()) {
+  QJsonObject json_response = QJsonDocument::fromBinaryData(reply->readAll()).object();
+  if (json_response["changes"].toBool()) {
     // New changes, we should request deltas again.
     qLog(Debug) << "Detected new dropbox changes; fetching...";
     RequestFileList();
   } else {
     bool ok = false;
-    int backoff_secs = response["backoff"].toInt(&ok);
+    int backoff_secs = json_response["backoff"].toString().toInt(&ok);
     backoff_secs = ok ? backoff_secs : 0;
 
     QTimer::singleShot(backoff_secs * 1000, this, SLOT(LongPollDelta()));
@@ -219,8 +225,7 @@ QNetworkReply* DropboxService::FetchContentUrl(const QUrl& url) {
 void DropboxService::FetchContentUrlFinished(QNetworkReply* reply,
                                              const QVariantMap& data) {
   reply->deleteLater();
-  QJson::Parser parser;
-  QVariantMap response = parser.parse(reply).toMap();
+  QJsonObject json_response = QJsonDocument::fromBinaryData(reply->readAll()).object();
   QFileInfo info(data["path"].toString());
 
   QUrl url;
@@ -236,7 +241,7 @@ void DropboxService::FetchContentUrlFinished(QNetworkReply* reply,
   song.set_ctime(0);
 
   MaybeAddFileToDatabase(song, data["mime_type"].toString(),
-                         QUrl::fromEncoded(response["url"].toByteArray()),
+                         QUrl::fromEncoded(json_response["url"].toString().toLatin1()),
                          QString::null);
 }
 
@@ -244,7 +249,6 @@ QUrl DropboxService::GetStreamingUrlFromSongId(const QUrl& url) {
   QNetworkReply* reply = FetchContentUrl(url);
   WaitForSignal(reply, SIGNAL(finished()));
 
-  QJson::Parser parser;
-  QVariantMap response = parser.parse(reply).toMap();
-  return QUrl::fromEncoded(response["url"].toByteArray());
+  QJsonObject json_response = QJsonDocument::fromJson(reply->readAll()).object();
+  return QUrl::fromEncoded(json_response["url"].toString().toLatin1());
 }

@@ -438,7 +438,7 @@ bool GstEnginePipeline::InitFromString(const QString& pipeline) {
   pipeline_ = gst_pipeline_new("pipeline");
 
   GstElement* new_bin =
-      CreateDecodeBinFromString(pipeline.toAscii().constData());
+      CreateDecodeBinFromString(pipeline.toLatin1().constData());
   if (!new_bin) {
     return false;
   }
@@ -946,9 +946,9 @@ void GstEnginePipeline::SourceSetupCallback(GstURIDecodeBin* bin,
   if (g_object_class_find_property(G_OBJECT_GET_CLASS(element),
                                    "extra-headers") &&
       instance->url().host().contains("amazonaws.com")) {
-    GstStructure* headers =
-        gst_structure_new("extra-headers", "Authorization", G_TYPE_STRING,
-                          instance->url().fragment().toAscii().data(), nullptr);
+    GstStructure* headers = gst_structure_new(
+        "extra-headers", "Authorization", G_TYPE_STRING,
+        instance->url().fragment().toLatin1().data(), nullptr);
     g_object_set(element, "extra-headers", headers, nullptr);
     gst_structure_free(headers);
   }

@@ -1,11 +1,5 @@
-# Extra bits for Clementine.
-set( MYGPO_QT_VERSION_MAJOR "1" )
-set( MYGPO_QT_VERSION_MINOR "0" )
-set( MYGPO_QT_VERSION_PATCH "7" )
-configure_file( Version.h.in ${CMAKE_CURRENT_BINARY_DIR}/Version.h )
-include_directories("${QJSON_INCLUDEDIR}/qjson")
 
-include_directories( ${QT_INCLUDES} ${QJSON_INCLUDE_DIR} ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR} )
+include_directories( ${QJSON_INCLUDE_DIR} ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR} )
 
 set ( LIBMYGPO_QT_SRC
         Config.cpp
@@ -27,6 +21,7 @@ set ( LIBMYGPO_QT_SRC
         DeviceUpdates.cpp
         DeviceList.cpp
         Device.cpp
+        qjsonwrapper/Json.cpp
 )
 
 set ( LIBMYGPO_QT_MOC_H
@@ -80,9 +75,9 @@ set ( LIBMYGPO_QT_INSTALL_H
         AddRemoveResult.h
 )
 
-QT4_WRAP_CPP(LIBMYGPO_QT_MOC_SRC ${LIBMYGPO_QT_MOC_H} )
+QT_WRAP_CPP(LIBMYGPO_QT_MOC_SRC ${LIBMYGPO_QT_MOC_H} )
 
-add_library( mygpo-qt STATIC ${LIBMYGPO_QT_SRC} ${LIBMYGPO_QT_MOC_SRC} )
+add_library( ${MYGPO_QT_TARGET_NAME} STATIC ${LIBMYGPO_QT_SRC} ${LIBMYGPO_QT_MOC_SRC} )
 
-target_link_libraries( mygpo-qt ${QJSON_LIBRARIES} ${QT_QTCORE_LIBRARY} ${QT_QTNETWORK_LIBRARY}  )
-set_target_properties( mygpo-qt PROPERTIES VERSION ${MYGPO_QT_VERSION} SOVERSION ${MYGPO_QT_SONAME} DEFINE_SYMBOL MYGPO_MAKEDLL)
+target_link_libraries( ${MYGPO_QT_TARGET_NAME} ${QJSON_LIBRARIES} ${QT_QTCORE_LIBRARY} ${QT_QTNETWORK_LIBRARY}  )
+qt5_use_modules( ${MYGPO_QT_TARGET_NAME} Core Network )

@@ -16,7 +16,7 @@ option(VREEN_WITH_EXAMPLES "Enable vreen tests" ON)
 option(VREEN_WITH_TESTS "Enable vreen examples" ON)
 option(VREEN_INSTALL_HEADERS "Install devel headers for vreen" ON)
 option(VREEN_DEVELOPER_BUILD "Install devel headers for vreen" OFF)
-option(USE_QT5 "Build with Qt 5" OFF)
+option(USE_QT5 "Build with Qt 5" ON)
 
 #TODO check if vars is defined
 set(RLIBDIR bin)

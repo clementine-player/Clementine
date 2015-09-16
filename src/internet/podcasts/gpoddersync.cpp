@@ -31,7 +31,6 @@
 #include "core/closure.h"
 #include "core/logging.h"
 #include "core/network.h"
-#include "core/qhash_qurl.h"
 #include "core/timeconstants.h"
 #include "core/utilities.h"
 

@@ -240,7 +240,7 @@ signals:
   void AddCDTracks();
   void AddPodcast();
 
-  void CommandlineOptionsReceived(const QByteArray& serialized_options);
+  void CommandlineOptionsReceived(const QString &serialized_options);
 
   void CheckForUpdates();
 

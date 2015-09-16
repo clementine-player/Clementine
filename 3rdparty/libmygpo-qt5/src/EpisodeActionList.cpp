@@ -22,7 +22,7 @@
 
 #include "EpisodeActionList_p.h"
 
-#include <parser.h>
+#include "qjsonwrapper/Json.h"
 
 using namespace mygpo;
 
@@ -88,9 +88,8 @@ bool EpisodeActionListPrivate::parse( const QVariant& data )
 
 bool EpisodeActionListPrivate::parse( const QByteArray& data )
 {
-    QJson::Parser parser;
     bool ok;
-    QVariant variant = parser.parse( data, &ok );
+    QVariant variant = QJsonWrapper::parseJson( data, &ok );
     if( ok )
     {
         ok = ( parse( variant ) );

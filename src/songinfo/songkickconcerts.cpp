@@ -20,10 +20,11 @@
 #include <QImage>
 #include <QVBoxLayout>
 #include <QXmlStreamWriter>
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QJsonArray>
 
-#include <echonest/Artist.h>
-
-#include <qjson/parser.h>
+#include <Artist.h>
 
 #include "core/closure.h"
 #include "core/logging.h"
@@ -107,22 +108,23 @@ void SongkickConcerts::FetchSongkickCalendar(const QString& artist_id, int id) {
 }
 
 void SongkickConcerts::CalendarRequestFinished(QNetworkReply* reply, int id) {
-  QJson::Parser parser;
-  bool ok = false;
-  QVariant result = parser.parse(reply, &ok);
+  reply->deleteLater();
 
-  if (!ok) {
+  QJsonParseError error;
+  QJsonDocument json_document = QJsonDocument::fromJson(reply->readAll(), &error);
+
+  if (error.error != QJsonParseError::NoError) {
     qLog(Error) << "Error parsing Songkick reply";
     emit Finished(id);
     return;
   }
 
-  QVariantMap root = result.toMap();
-  QVariantMap results_page = root["resultsPage"].toMap();
-  QVariantMap results = results_page["results"].toMap();
-  QVariantList events = results["event"].toList();
+  QJsonObject json_root = json_document.object();
+  QJsonObject json_results_page = json_root["resultsPage"].toObject();
+  QJsonObject json_results = json_results_page["results"].toObject();
+  QJsonArray json_events = json_results["event"].toArray();
 
-  if (events.isEmpty()) {
+  if (json_events.isEmpty()) {
     emit Finished(id);
     return;
   }
@@ -130,21 +132,21 @@ void SongkickConcerts::CalendarRequestFinished(QNetworkReply* reply, int id) {
   QWidget* container = new QWidget;
   QVBoxLayout* layout = new QVBoxLayout(container);
 
-  for (const QVariant& v : events) {
-    QVariantMap event = v.toMap();
-    QString display_name = event["displayName"].toString();
-    QString start_date = event["start"].toMap()["date"].toString();
-    QString city = event["location"].toMap()["city"].toString();
-    QString uri = event["uri"].toString();
+  for (const QJsonValue& v : json_events) {
+    QJsonObject json_event = v.toObject();
+    QString display_name = json_event["displayName"].toString();
+    QString start_date = json_event["start"].toObject()["date"].toString();
+    QString city = json_event["location"].toObject()["city"].toString();
+    QString uri = json_event["uri"].toString();
 
     // Try to get the lat/lng coordinates of the venue.
-    QVariantMap venue = event["venue"].toMap();
-    const bool valid_latlng = venue["lng"].isValid() && venue["lat"].isValid();
+    QJsonObject json_venue = json_event["venue"].toObject();
+    const bool valid_latlng = !json_venue["lng"].isUndefined() && !json_venue["lat"].isUndefined();
 
     if (valid_latlng && latlng_.IsValid()) {
       static const int kFilterDistanceMetres = 250 * 1e3;  // 250km
-      Geolocator::LatLng latlng(venue["lat"].toString(),
-                                venue["lng"].toString());
+      Geolocator::LatLng latlng(json_venue["lat"].toString(),
+                                json_venue["lng"].toString());
       if (latlng_.IsValid() && latlng.IsValid()) {
         int distance_metres = latlng_.Distance(latlng);
         if (distance_metres > kFilterDistanceMetres) {
@@ -159,8 +161,8 @@ void SongkickConcerts::CalendarRequestFinished(QNetworkReply* reply, int id) {
     widget->Init(display_name, uri, start_date, city);
 
     if (valid_latlng) {
-      widget->SetMap(venue["lat"].toString(), venue["lng"].toString(),
-                     venue["displayName"].toString());
+      widget->SetMap(json_venue["lat"].toString(), json_venue["lng"].toString(),
+                     json_venue["displayName"].toString());
     }
 
     layout->addWidget(widget);
