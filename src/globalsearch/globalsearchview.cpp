@@ -101,12 +101,12 @@ GlobalSearchView::GlobalSearchView(Application* app, QWidget* parent)
   disabled_layout->setContentsMargins(16, 0, 16, 32);
   suggestions_layout->setContentsMargins(16, 0, 16, 6);
 
-  // Set the colour of the help text to the disabled text colour
+  // Set the colour of the help text to the disabled window text colour
   QPalette help_palette = ui_->help_text->palette();
   const QColor help_color =
-      help_palette.color(QPalette::Disabled, QPalette::Text);
-  help_palette.setColor(QPalette::Normal, QPalette::Text, help_color);
-  help_palette.setColor(QPalette::Inactive, QPalette::Text, help_color);
+      help_palette.color(QPalette::Disabled, QPalette::WindowText);
+  help_palette.setColor(QPalette::Normal, QPalette::WindowText, help_color);
+  help_palette.setColor(QPalette::Inactive, QPalette::WindowText, help_color);
   ui_->help_text->setPalette(help_palette);
 
   // Create suggestion widgets
