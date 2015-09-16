@@ -101,12 +101,12 @@ GlobalSearchView::GlobalSearchView(Application* app, QWidget* parent)
   disabled_layout->setContentsMargins(16, 0, 16, 32);
   suggestions_layout->setContentsMargins(16, 0, 16, 6);
 
-  // Set the colour of the help text to the disabled text colour
+  // Set the colour of the help text to the disabled window text colour
   QPalette help_palette = ui_->help_text->palette();
   const QColor help_color =
-      help_palette.color(QPalette::Disabled, QPalette::Text);
-  help_palette.setColor(QPalette::Normal, QPalette::Text, help_color);
-  help_palette.setColor(QPalette::Inactive, QPalette::Text, help_color);
+      help_palette.color(QPalette::Disabled, QPalette::WindowText);
+  help_palette.setColor(QPalette::Normal, QPalette::WindowText, help_color);
+  help_palette.setColor(QPalette::Inactive, QPalette::WindowText, help_color);
   ui_->help_text->setPalette(help_palette);
 
   // Create suggestion widgets
@@ -337,7 +337,8 @@ void GlobalSearchView::LazyLoadArt(const QModelIndex& proxy_index) {
       proxy_index.data(LibraryModel::Role_ContainerType).toInt());
   if (container_type != LibraryModel::GroupBy_Album &&
       container_type != LibraryModel::GroupBy_AlbumArtist &&
-      container_type != LibraryModel::GroupBy_YearAlbum) {
+      container_type != LibraryModel::GroupBy_YearAlbum &&
+      container_type != LibraryModel::GroupBy_OriginalYearAlbum) {
     return;
   }
 
@@ -559,6 +560,11 @@ void GlobalSearchView::GroupByClicked(QAction* action) {
 }
 
 void GlobalSearchView::SetGroupBy(const LibraryModel::Grouping& g) {
+  // Clear requests: changing "group by" on the models will cause all the items to be removed/added
+  // again, so all the QModelIndex here will become invalid. New requests will be created for those
+  // songs when they will be displayed again anyway (when GlobalSearchItemDelegate::paint will call
+  // LazyLoadArt)
+  art_requests_.clear();
   // Update the models
   front_model_->SetGroupBy(g, true);
   back_model_->SetGroupBy(g, false);

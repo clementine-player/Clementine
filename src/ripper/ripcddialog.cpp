@@ -286,12 +286,14 @@ QString RipCDDialog::GetOutputFileName(const QString& basename) const {
 QString RipCDDialog::ParseFileFormatString(const QString& file_format,
                                            int track_no) const {
   QString to_return = file_format;
-  to_return.replace(QString("%artist%"), ui_->artistLineEdit->text());
-  to_return.replace(QString("%album%"), ui_->albumLineEdit->text());
-  to_return.replace(QString("%genre%"), ui_->genreLineEdit->text());
-  to_return.replace(QString("%year%"), ui_->yearLineEdit->text());
-  to_return.replace(QString("%tracknum%"), QString::number(track_no));
-  to_return.replace(QString("%track%"),
+  to_return.replace(QString("%artist"), ui_->artistLineEdit->text());
+  to_return.replace(QString("%album"), ui_->albumLineEdit->text());
+  to_return.replace(QString("%disc"), ui_->discLineEdit->text());
+  to_return.replace(QString("%genre"), ui_->genreLineEdit->text());
+  to_return.replace(QString("%year"), ui_->yearLineEdit->text());
+  to_return.replace(QString("%title"),
                     track_names_.value(track_no - 1)->text());
+  to_return.replace(QString("%track"), QString::number(track_no));
+
   return to_return;
 }

@@ -63,7 +63,8 @@ Player::Player(Application* app, QObject* parent)
       nb_errors_received_(0),
       volume_before_mute_(50),
       last_pressed_previous_(QDateTime::currentDateTime()),
-      menu_previousmode_(PreviousBehaviour_DontRestart) {
+      menu_previousmode_(PreviousBehaviour_DontRestart),
+      seek_step_sec_(10) {
   settings_.beginGroup("Player");
 
   SetVolume(settings_.value("volume", 50).toInt());
@@ -103,12 +104,24 @@ void Player::ReloadSettings() {
 
   menu_previousmode_ = PreviousBehaviour(
       s.value("menu_previousmode", PreviousBehaviour_DontRestart).toInt());
+
+  seek_step_sec_ = s.value("seek_step_sec", 10).toInt();
+
   s.endGroup();
 
   engine_->ReloadSettings();
 }
 
 void Player::HandleLoadResult(const UrlHandler::LoadResult& result) {
+  // Might've been an async load, so check we're still on the same item
+  shared_ptr<PlaylistItem> item = app_->playlist_manager()->active()->current_item();
+  if (!item) {
+    loading_async_ = QUrl();
+    return;
+  }
+
+  if (item->Url() != result.original_url_) return;
+
   switch (result.type_) {
     case UrlHandler::LoadResult::NoMoreTracks:
       qLog(Debug) << "URL handler for" << result.original_url_
@@ -119,14 +132,6 @@ void Player::HandleLoadResult(const UrlHandler::LoadResult& result) {
       break;
 
     case UrlHandler::LoadResult::TrackAvailable: {
-      // Might've been an async load, so check we're still on the same item
-      int current_index = app_->playlist_manager()->active()->current_row();
-      if (current_index == -1) return;
-
-      shared_ptr<PlaylistItem> item =
-          app_->playlist_manager()->active()->item_at(current_index);
-      if (!item || item->Url() != result.original_url_) return;
-
       qLog(Debug) << "URL handler for" << result.original_url_ << "returned"
                   << result.media_url_;
 
@@ -301,6 +306,13 @@ void Player::StopAfterCurrent() {
       app_->playlist_manager()->active()->current_row());
 }
 
+bool Player::PreviousWouldRestartTrack() const {
+  // Check if it has been over two seconds since previous button was pressed
+  return menu_previousmode_ == PreviousBehaviour_Restart &&
+         last_pressed_previous_.isValid() &&
+         last_pressed_previous_.secsTo(QDateTime::currentDateTime()) >= 2;
+}
+
 void Player::Previous() { PreviousItem(Engine::Manual); }
 
 void Player::PreviousItem(Engine::TrackChangeFlags change) {
@@ -444,11 +456,11 @@ void Player::SeekTo(int seconds) {
 }
 
 void Player::SeekForward() {
-  SeekTo(engine()->position_nanosec() / kNsecPerSec + 10);
+  SeekTo(engine()->position_nanosec() / kNsecPerSec + seek_step_sec_);
 }
 
 void Player::SeekBackward() {
-  SeekTo(engine()->position_nanosec() / kNsecPerSec - 10);
+  SeekTo(engine()->position_nanosec() / kNsecPerSec - seek_step_sec_);
 }
 
 void Player::EngineMetadataReceived(const Engine::SimpleMetaBundle& bundle) {
@@ -588,6 +600,8 @@ void Player::TrackAboutToEnd() {
                            next_item->Metadata().beginning_nanosec(),
                            next_item->Metadata().end_nanosec());
 }
+
+void Player::IntroPointReached() { NextInternal(Engine::Intro); }
 
 void Player::ValidSongRequested(const QUrl& url) {
   emit SongChangeRequestProcessed(url, true);

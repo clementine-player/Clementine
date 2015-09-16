@@ -28,7 +28,7 @@ SubsonicUrlHandler::SubsonicUrlHandler(SubsonicService* service,
 
 UrlHandler::LoadResult SubsonicUrlHandler::StartLoading(const QUrl& url) {
   if (service_->login_state() != SubsonicService::LoginState_Loggedin)
-    return LoadResult();
+    return LoadResult(url);
 
   QUrl newurl = service_->BuildRequestUrl("stream");
   QUrlQuery url_query;

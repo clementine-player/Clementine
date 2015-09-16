@@ -98,6 +98,18 @@ void TrackSliderSlider::leaveEvent(QEvent* e) {
   popup_->hide();
 }
 
+void TrackSliderSlider::keyPressEvent(QKeyEvent* event) {
+  if (event->key() == Qt::Key_Left || event->key() == Qt::Key_Down) {
+    emit SeekBackward();
+    event->accept();
+  } else if (event->key() == Qt::Key_Right || event->key() == Qt::Key_Up) {
+    emit SeekForward();
+    event->accept();
+  } else {
+    QSlider::keyPressEvent(event);
+  }
+}
+
 void TrackSliderSlider::UpdateDeltaTime() {
   if (popup_->isVisible()) {
     int delta_seconds = mouse_hover_seconds_ - (value() / kMsecPerSec);

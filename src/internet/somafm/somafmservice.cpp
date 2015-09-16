@@ -264,10 +264,3 @@ SomaFMService::SomaFMService(Application* app, InternetModel* parent)
     : SomaFMServiceBase(
           app, parent, "SomaFM", QUrl("http://somafm.com/channels.xml"),
           QUrl("http://somafm.com"), QUrl(), QIcon(":providers/somafm.png")) {}
-
-RadioGFMService::RadioGFMService(Application* app, InternetModel* parent)
-    : SomaFMServiceBase(app, parent, "Radio GFM",
-                        QUrl("http://streams.radio-gfm.net/channels.xml"),
-                        QUrl("http://www.radio-gfm.net"),
-                        QUrl("http://www.radio-gfm.net/spenden"),
-                        QIcon(":providers/radiogfm.png")) {}

@@ -30,7 +30,7 @@ VkUrlHandler::VkUrlHandler(VkService* service, QObject* parent)
 
 UrlHandler::LoadResult VkUrlHandler::StartLoading(const QUrl& url) {
   QStringList args = url.path().split("/");
-  LoadResult result;
+  LoadResult result(url);
 
   if (args.size() < 2) {
     qLog(Error)
@@ -58,6 +58,6 @@ UrlHandler::LoadResult VkUrlHandler::LoadNext(const QUrl& url) {
   if (url.host() == "group") {
     return StartLoading(url);
   } else {
-    return LoadResult();
+    return LoadResult(url);
   }
 }

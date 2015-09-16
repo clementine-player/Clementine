@@ -92,7 +92,7 @@ class PlayerInterface : public QObject {
   virtual void Play() = 0;
   virtual void ShowOSD() = 0;
 
- signals:
+signals:
   void Playing();
   void Paused();
   void Stopped();
@@ -142,6 +142,8 @@ class Player : public PlayerInterface {
 
   const UrlHandler* HandlerForUrl(const QUrl& url) const;
 
+  bool PreviousWouldRestartTrack() const;
+
  public slots:
   void ReloadSettings();
 
@@ -163,6 +165,7 @@ class Player : public PlayerInterface {
   void Pause();
   void Stop(bool stop_after = false);
   void StopAfterCurrent();
+  void IntroPointReached();
   void Play();
   void ShowOSD();
   void TogglePrettyOSD();
@@ -209,6 +212,7 @@ class Player : public PlayerInterface {
 
   QDateTime last_pressed_previous_;
   PreviousBehaviour menu_previousmode_;
+  int seek_step_sec_;
 };
 
 #endif  // CORE_PLAYER_H_

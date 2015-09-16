@@ -25,6 +25,7 @@
 #include <QNetworkAccessManager>
 #include <QTextCodec>
 #include <QUrl>
+#include <QVector>
 
 #include <aifffile.h>
 #include <asffile.h>
@@ -48,6 +49,7 @@
 #include <textidentificationframe.h>
 #include <trueaudiofile.h>
 #include <tstring.h>
+#include <unsynchronizedlyricsframe.h>
 #include <vorbisfile.h>
 #include <wavfile.h>
 
@@ -105,6 +107,14 @@ const char* TagReader::kMP4_FMPS_Playcount_ID =
     "----:com.apple.iTunes:FMPS_Playcount";
 const char* TagReader::kMP4_FMPS_Score_ID =
     "----:com.apple.iTunes:FMPS_Rating_Amarok_Score";
+
+namespace {
+// Tags containing the year the album was originally released (in contrast to
+// other tags that contain the release year of the current edition)
+const char* kMP4_OriginalYear_ID = "----:com.apple.iTunes:ORIGINAL YEAR";
+const char* kASF_OriginalDate_ID = "WM/OriginalReleaseTime";
+const char* kASF_OriginalYear_ID = "WM/OriginalReleaseYear";
+}
 
 TagReader::TagReader()
     : factory_(new TagLibFileRefFactory),
@@ -189,11 +199,21 @@ void TagReader::ReadFile(const QString& filename,
         compilation =
             TStringToQString(map["TCMP"].front()->toString()).trimmed();
 
+      if (!map["TDOR"].isEmpty()) {
+        song->set_originalyear(
+            map["TDOR"].front()->toString().substr(0, 4).toInt());
+      } else if (!map["TORY"].isEmpty()) {
+        song->set_originalyear(
+            map["TORY"].front()->toString().substr(0, 4).toInt());
+      }
+
       if (!map["USLT"].isEmpty()) {
-        lyrics = TStringToQString((map["USLT"].front())->toString()).trimmed();
-        qLog(Debug) << "Read ULST lyrics " << lyrics;
-      } else if (!map["SYLT"].isEmpty())
-        lyrics = TStringToQString((map["SYLT"].front())->toString()).trimmed();
+        Decode(map["USLT"].front()->toString(), nullptr,
+               song->mutable_lyrics());
+      } else if (!map["SYLT"].isEmpty()) {
+        Decode(map["SYLT"].front()->toString(), nullptr,
+               song->mutable_lyrics());
+      }
 
       if (!map["APIC"].isEmpty()) song->set_art_automatic(kEmbeddedCover);
 
@@ -310,6 +330,15 @@ void TagReader::ReadFile(const QString& filename,
         Decode(items["\251grp"].toStringList().toString(" "), nullptr,
                song->mutable_grouping());
       }
+
+      if (items.contains(kMP4_OriginalYear_ID)) {
+        song->set_originalyear(
+            TStringToQString(
+                items[kMP4_OriginalYear_ID].toStringList().toString('\n'))
+                .left(4)
+                .toInt());
+      }
+
       Decode(mp4_tag->comment(), nullptr, song->mutable_comment());
     }
   }
@@ -348,6 +377,22 @@ void TagReader::ReadFile(const QString& filename,
         if (song->score() <= 0 && score > 0) {
           song->set_score(score);
         }
+      }
+    }
+
+    if (attributes_map.contains(kASF_OriginalDate_ID)) {
+      const TagLib::ASF::AttributeList& attributes =
+          attributes_map[kASF_OriginalDate_ID];
+      if (!attributes.isEmpty()) {
+        song->set_originalyear(
+            TStringToQString(attributes.front().toString()).left(4).toInt());
+      }
+    } else if (attributes_map.contains(kASF_OriginalYear_ID)) {
+      const TagLib::ASF::AttributeList& attributes =
+          attributes_map[kASF_OriginalYear_ID];
+      if (!attributes.isEmpty()) {
+        song->set_originalyear(
+            TStringToQString(attributes.front().toString()).left(4).toInt());
       }
     }
   }
@@ -485,6 +530,13 @@ void TagReader::ParseOggTag(const TagLib::Ogg::FieldListMap& map,
   } else if (!map["ALBUM ARTIST"].isEmpty()) {
     Decode(map["ALBUM ARTIST"].front(), codec, song->mutable_albumartist());
   }
+
+  if (!map["ORIGINALDATE"].isEmpty())
+    song->set_originalyear(
+        TStringToQString(map["ORIGINALDATE"].front()).left(4).toInt());
+  else if (!map["ORIGINALYEAR"].isEmpty())
+    song->set_originalyear(
+        TStringToQString(map["ORIGINALYEAR"].front()).toInt());
 
   if (!map["BPM"].isEmpty())
     song->set_bpm(TStringToQString(map["BPM"].front()).trimmed().toFloat());
@@ -628,7 +680,7 @@ bool TagReader::SaveFile(const QString& filename,
     SetTextFrame("TCOM", song.composer(), tag);
     SetTextFrame("TIT1", song.grouping(), tag);
     SetTextFrame("TOPE", song.performer(), tag);
-    SetTextFrame("USLT", song.lyrics(), tag);
+    SetUnsyncLyricsFrame(song.lyrics(), tag);
     // Skip TPE1 (which is the artist) here because we already set it
     SetTextFrame("TPE2", song.albumartist(), tag);
     SetTextFrame("TCMP", std::string(song.compilation() ? "1" : "0"), tag);
@@ -842,19 +894,67 @@ void TagReader::SetTextFrame(const char* id, const QString& value,
 void TagReader::SetTextFrame(const char* id, const std::string& value,
                              TagLib::ID3v2::Tag* tag) const {
   TagLib::ByteVector id_vector(id);
+  QVector<TagLib::ByteVector> frames_buffer;
 
-  // Remove the frame if it already exists
+  // Store and clear existing frames
   while (tag->frameListMap().contains(id_vector) &&
          tag->frameListMap()[id_vector].size() != 0) {
+    frames_buffer.push_back(tag->frameListMap()[id_vector].front()->render());
     tag->removeFrame(tag->frameListMap()[id_vector].front());
   }
 
-  // Create and add a new frame
-  TagLib::ID3v2::TextIdentificationFrame* frame =
-      new TagLib::ID3v2::TextIdentificationFrame(id_vector,
+  // If no frames stored create empty frame
+  if (frames_buffer.isEmpty()) {
+    TagLib::ID3v2::TextIdentificationFrame frame(id_vector,
                                                  TagLib::String::UTF8);
-  frame->setText(StdStringToTaglibString(value));
-  tag->addFrame(frame);
+    frames_buffer.push_back(frame.render());
+  }
+
+  // Update and add the frames
+  for (int lyrics_index = 0; lyrics_index < frames_buffer.size();
+       lyrics_index++) {
+    TagLib::ID3v2::TextIdentificationFrame* frame =
+        new TagLib::ID3v2::TextIdentificationFrame(
+            frames_buffer.at(lyrics_index));
+    if (lyrics_index == 0) {
+      frame->setText(StdStringToTaglibString(value));
+    }
+    // add frame takes ownership and clears the memory
+    tag->addFrame(frame);
+  }
+}
+
+void TagReader::SetUnsyncLyricsFrame(const std::string& value,
+                                     TagLib::ID3v2::Tag* tag) const {
+  TagLib::ByteVector id_vector("USLT");
+  QVector<TagLib::ByteVector> frames_buffer;
+
+  // Store and clear existing frames
+  while (tag->frameListMap().contains(id_vector) &&
+         tag->frameListMap()[id_vector].size() != 0) {
+    frames_buffer.push_back(tag->frameListMap()[id_vector].front()->render());
+    tag->removeFrame(tag->frameListMap()[id_vector].front());
+  }
+
+  // If no frames stored create empty frame
+  if (frames_buffer.isEmpty()) {
+    TagLib::ID3v2::UnsynchronizedLyricsFrame frame(TagLib::String::UTF8);
+    frame.setDescription("Clementine editor");
+    frames_buffer.push_back(frame.render());
+  }
+
+  // Update and add the frames
+  for (int lyrics_index = 0; lyrics_index < frames_buffer.size();
+       lyrics_index++) {
+    TagLib::ID3v2::UnsynchronizedLyricsFrame* frame =
+        new TagLib::ID3v2::UnsynchronizedLyricsFrame(
+            frames_buffer.at(lyrics_index));
+    if (lyrics_index == 0) {
+      frame->setText(StdStringToTaglibString(value));
+    }
+    // add frame takes ownership and clears the memory
+    tag->addFrame(frame);
+  }
 }
 
 bool TagReader::IsMediaFile(const QString& filename) const {

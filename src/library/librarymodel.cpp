@@ -222,8 +222,14 @@ void LibraryModel::SongsDiscovered(const SongList& songs) {
           case GroupBy_Year:
             key = QString::number(qMax(0, song.year()));
             break;
+          case GroupBy_OriginalYear:
+            key = QString::number(qMax(0, song.effective_originalyear()));
+            break;
           case GroupBy_YearAlbum:
             key = PrettyYearAlbum(qMax(0, song.year()), song.album());
+            break;
+          case GroupBy_OriginalYearAlbum:
+            key = PrettyYearAlbum(qMax(0, song.effective_originalyear()), song.album());
             break;
           case GroupBy_FileType:
             key = song.filetype();
@@ -314,10 +320,14 @@ QString LibraryModel::DividerKey(GroupBy type, LibraryItem* item) const {
     }
 
     case GroupBy_Year:
+    case GroupBy_OriginalYear:
       return SortTextForNumber(item->sort_text.toInt() / 10 * 10);
 
     case GroupBy_YearAlbum:
       return SortTextForNumber(item->metadata.year());
+
+    case GroupBy_OriginalYearAlbum:
+      return SortTextForNumber(item->metadata.effective_originalyear());
 
     case GroupBy_Bitrate:
       return SortTextForNumber(item->metadata.bitrate());
@@ -348,10 +358,12 @@ QString LibraryModel::DividerDisplayText(GroupBy type,
       return key.toUpper();
 
     case GroupBy_YearAlbum:
+    case GroupBy_OriginalYearAlbum:
       if (key == "0000") return tr("Unknown");
       return key.toUpper();
 
     case GroupBy_Year:
+    case GroupBy_OriginalYear:
       if (key == "0000") return tr("Unknown");
       return QString::number(key.toInt());  // To remove leading 0s
 
@@ -544,7 +556,8 @@ QVariant LibraryModel::data(const QModelIndex& index, int role) const {
         item->type == LibraryItem::Type_Container) {
       GroupBy container_type = group_by_[item->container_level];
       is_album_node = container_type == GroupBy_Album ||
-                      container_type == GroupBy_YearAlbum;
+                      container_type == GroupBy_YearAlbum ||
+                      container_type == GroupBy_OriginalYearAlbum;
     }
     if (is_album_node) {
       // It has const behaviour some of the time - that's ok right?
@@ -573,6 +586,7 @@ QVariant LibraryModel::data(const LibraryItem* item, int role) const {
           switch (container_type) {
             case GroupBy_Album:
             case GroupBy_YearAlbum:
+            case GroupBy_OriginalYearAlbum:
               return album_icon_;
             case GroupBy_Artist:
             case GroupBy_AlbumArtist:
@@ -798,8 +812,14 @@ void LibraryModel::InitQuery(GroupBy type, LibraryQuery* q) {
     case GroupBy_YearAlbum:
       q->SetColumnSpec("DISTINCT year, album, grouping");
       break;
+    case GroupBy_OriginalYearAlbum:
+      q->SetColumnSpec("DISTINCT year, originalyear, album, grouping");
+      break;
     case GroupBy_Year:
       q->SetColumnSpec("DISTINCT year");
+      break;
+    case GroupBy_OriginalYear:
+      q->SetColumnSpec("DISTINCT effective_originalyear");
       break;
     case GroupBy_Genre:
       q->SetColumnSpec("DISTINCT genre");
@@ -842,8 +862,18 @@ void LibraryModel::FilterQuery(GroupBy type, LibraryItem* item,
       q->AddWhere("album", item->metadata.album());
       q->AddWhere("grouping", item->metadata.grouping());
       break;
+    case GroupBy_OriginalYearAlbum:
+      q->AddWhere("year", item->metadata.year());
+      q->AddWhere("originalyear", item->metadata.originalyear());
+      q->AddWhere("album", item->metadata.album());
+      q->AddWhere("grouping", item->metadata.grouping());
+      break;
+
     case GroupBy_Year:
       q->AddWhere("year", item->key);
+      break;
+    case GroupBy_OriginalYear:
+      q->AddWhere("effective_originalyear", item->key);
       break;
     case GroupBy_Composer:
       q->AddWhere("composer", item->key);
@@ -904,6 +934,7 @@ LibraryItem* LibraryModel::ItemFromQuery(GroupBy type, bool signal,
                                          int container_level) {
   LibraryItem* item = InitItem(type, signal, parent, container_level);
   int year = 0;
+  int effective_originalyear = 0;
   int bitrate = 0;
   int disc = 0;
 
@@ -924,7 +955,24 @@ LibraryItem* LibraryModel::ItemFromQuery(GroupBy type, bool signal,
                         item->metadata.album();
       break;
 
+    case GroupBy_OriginalYearAlbum:
+      item->metadata.set_year(row.value(0).toInt());
+      item->metadata.set_originalyear(row.value(1).toInt());
+      item->metadata.set_album(row.value(2).toString());
+      item->metadata.set_grouping(row.value(3).toString());
+      effective_originalyear = qMax(0, item->metadata.effective_originalyear());
+      item->key = PrettyYearAlbum(effective_originalyear, item->metadata.album());
+      item->sort_text = SortTextForNumber(effective_originalyear) + item->metadata.grouping()
+                        + item->metadata.album();
+      break;
+
     case GroupBy_Year:
+      year = qMax(0, row.value(0).toInt());
+      item->key = QString::number(year);
+      item->sort_text = SortTextForNumber(year) + " ";
+      break;
+
+    case GroupBy_OriginalYear:
       year = qMax(0, row.value(0).toInt());
       item->key = QString::number(year);
       item->sort_text = SortTextForNumber(year) + " ";
@@ -976,6 +1024,8 @@ LibraryItem* LibraryModel::ItemFromSong(GroupBy type, bool signal,
                                         int container_level) {
   LibraryItem* item = InitItem(type, signal, parent, container_level);
   int year = 0;
+  int originalyear = 0;
+  int effective_originalyear = 0;
   int bitrate = 0;
 
   switch (type) {
@@ -993,8 +1043,25 @@ LibraryItem* LibraryModel::ItemFromSong(GroupBy type, bool signal,
       item->sort_text = SortTextForNumber(year) + s.grouping() + s.album();
       break;
 
+    case GroupBy_OriginalYearAlbum:
+      year = qMax(0, s.year());
+      originalyear = qMax(0, s.originalyear());
+      effective_originalyear = qMax(0, s.effective_originalyear());
+      item->metadata.set_year(year);
+      item->metadata.set_originalyear(originalyear);
+      item->metadata.set_album(s.album());
+      item->key = PrettyYearAlbum(effective_originalyear, s.album());
+      item->sort_text = SortTextForNumber(effective_originalyear) + s.grouping() + s.album();
+      break;
+
     case GroupBy_Year:
       year = qMax(0, s.year());
+      item->key = QString::number(year);
+      item->sort_text = SortTextForNumber(year) + " ";
+      break;
+
+    case GroupBy_OriginalYear:
+      year = qMax(0, s.effective_originalyear());
       item->key = QString::number(year);
       item->sort_text = SortTextForNumber(year) + " ";
       break;

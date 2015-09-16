@@ -18,12 +18,14 @@
 #ifndef CLOSURE_H
 #define CLOSURE_H
 
+#include <chrono>
 #include <functional>
 #include <memory>
 
 #include <QMetaMethod>
 #include <QObject>
 #include <QSharedPointer>
+#include <QTimer>
 
 namespace _detail {
 
@@ -188,7 +190,19 @@ _detail::ClosureBase* NewClosure(QObject* sender, const char* signal,
 }
 
 void DoAfter(QObject* receiver, const char* slot, int msec);
-void DoAfter(std::function<void()> callback, int msec);
+void DoAfter(std::function<void()> callback, std::chrono::milliseconds msec);
 void DoInAMinuteOrSo(QObject* receiver, const char* slot);
+
+template <typename R, typename P>
+void DoAfter(
+    std::function<void()> callback, std::chrono::duration<R, P> duration) {
+  QTimer* timer = new QTimer;
+  timer->setSingleShot(true);
+  NewClosure(timer, SIGNAL(timeout()), callback);
+  QObject::connect(timer, SIGNAL(timeout()), timer, SLOT(deleteLater()));
+  std::chrono::milliseconds msec =
+      std::chrono::duration_cast<std::chrono::milliseconds>(duration);
+  timer->start(msec.count());
+}
 
 #endif  // CLOSURE_H

@@ -284,6 +284,8 @@ QVariant Playlist::data(const QModelIndex& index, int role) const {
           return song.disc();
         case Column_Year:
           return song.year();
+        case Column_OriginalYear:
+          return song.effective_originalyear();
         case Column_Genre:
           return song.genre();
         case Column_AlbumArtist:
@@ -562,6 +564,7 @@ int Playlist::next_row(bool ignore_repeat_track) const {
 
     switch (playlist_sequence_->repeat_mode()) {
       case PlaylistSequence::Repeat_Off:
+      case PlaylistSequence::Repeat_Intro:
         return -1;
       case PlaylistSequence::Repeat_Track:
         next_virtual_index = current_virtual_index_;
@@ -1250,6 +1253,8 @@ bool Playlist::CompareItems(int column, Qt::SortOrder order,
       cmp(disc);
     case Column_Year:
       cmp(year);
+    case Column_OriginalYear:
+      cmp(originalyear);
     case Column_Genre:
       strcmp(genre);
     case Column_AlbumArtist:
@@ -1319,6 +1324,8 @@ QString Playlist::column_name(Column column) {
       return tr("Disc");
     case Column_Year:
       return tr("Year");
+    case Column_OriginalYear:
+      return tr("Original year");
     case Column_Genre:
       return tr("Genre");
     case Column_AlbumArtist:
@@ -1394,8 +1401,18 @@ void Playlist::sort(int column, Qt::SortOrder order) {
   if (dynamic_playlist_ && current_item_index_.isValid())
     begin += current_item_index_.row() + 1;
 
-  qStableSort(begin, new_items.end(),
-              std::bind(&Playlist::CompareItems, column, order, _1, _2));
+  if (column == Column_Album) {
+    // When sorting by album, also take into account discs and tracks.
+    qStableSort(begin, new_items.end(), std::bind(&Playlist::CompareItems,
+                                                  Column_Track, order, _1, _2));
+    qStableSort(begin, new_items.end(),
+                std::bind(&Playlist::CompareItems, Column_Disc, order, _1, _2));
+    qStableSort(begin, new_items.end(), std::bind(&Playlist::CompareItems,
+                                                  Column_Album, order, _1, _2));
+  } else {
+    qStableSort(begin, new_items.end(),
+                std::bind(&Playlist::CompareItems, column, order, _1, _2));
+  }
 
   undo_stack_->push(
       new PlaylistUndoCommands::SortItems(this, column, order, new_items));

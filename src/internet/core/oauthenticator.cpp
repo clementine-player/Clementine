@@ -21,6 +21,7 @@
 #include "internet/core/oauthenticator.h"
 
 #include <QDesktopServices>
+#include <QSslError>
 #include <QStringList>
 #include <QUrl>
 #include <QUrlQuery>
@@ -121,6 +122,7 @@ void OAuthenticator::RequestAccessToken(const QByteArray& code,
                     "application/x-www-form-urlencoded");
 
   QNetworkReply* reply = network_.post(request, post_data.toUtf8());
+  connect(reply, SIGNAL(sslErrors(QList<QSslError>)), SLOT(SslErrors(QList<QSslError>)));
   NewClosure(reply, SIGNAL(finished()), this,
              SLOT(FetchAccessTokenFinished(QNetworkReply*)), reply);
 }
@@ -195,4 +197,10 @@ void OAuthenticator::RefreshAccessTokenFinished(QNetworkReply* reply) {
   }
   SetExpiryTime(json_result["expires_in"].toInt());
   emit Finished();
+}
+
+void OAuthenticator::SslErrors(const QList<QSslError>& errors) {
+  for (const QSslError& error : errors) {
+    qLog(Debug) << error.errorString();
+  }
 }

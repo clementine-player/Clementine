@@ -176,6 +176,8 @@ class Song {
   int disc() const;
   float bpm() const;
   int year() const;
+  int originalyear() const;
+  int effective_originalyear() const;
   const QString& genre() const;
   const QString& comment() const;
   bool is_compilation() const;
@@ -255,6 +257,7 @@ class Song {
   void set_disc(int v);
   void set_bpm(float v);
   void set_year(int v);
+  void set_originalyear(int v);
   void set_genre(const QString& v);
   void set_genre_id3(int id);
   void set_comment(const QString& v);

@@ -44,6 +44,8 @@ signals:
   void SetShuffleMode(PlaylistSequence::ShuffleMode mode);
   void InsertUrls(int id, const QList<QUrl>& urls, int pos, bool play_now,
                   bool enqueue);
+  void InsertSongs(int id, const SongList& songs, int pos, bool play_now,
+                   bool enqueue);
   void RemoveSongs(int id, const QList<int>& indices);
   void SeekTo(int seconds);
   void SendLibrary(RemoteClient* client);
@@ -67,6 +69,8 @@ signals:
   void ClosePlaylist(const pb::remote::Message& msg);
   void RateSong(const pb::remote::Message& msg);
   void GlobalSearch(RemoteClient* client, const pb::remote::Message& msg);
+
+  Song CreateSongFromProtobuf(const pb::remote::SongMetadata& pb);
 };
 
 #endif  // INCOMINGDATAPARSER_H

@@ -47,6 +47,8 @@ TrackSlider::TrackSlider(QWidget* parent)
 
   connect(ui_->slider, SIGNAL(sliderMoved(int)), SIGNAL(ValueChanged(int)));
   connect(ui_->slider, SIGNAL(valueChanged(int)), SLOT(ValueMaybeChanged(int)));
+  connect(ui_->slider, SIGNAL(SeekForward()), SIGNAL(SeekForward()));
+  connect(ui_->slider, SIGNAL(SeekBackward()), SIGNAL(SeekBackward()));
   connect(ui_->remaining, SIGNAL(Clicked()), SLOT(ToggleTimeDisplay()));
 }
 
@@ -89,8 +91,12 @@ QSize TrackSlider::sizeHint() const {
 void TrackSlider::SetValue(int elapsed, int total) {
   setting_value_ =
       true;  // This is so we don't emit from QAbstractSlider::valueChanged
+
   ui_->slider->setMaximum(total);
-  ui_->slider->setValue(elapsed);
+  if (!ui_->slider->isSliderDown()) {
+    ui_->slider->setValue(elapsed);
+  }
+
   setting_value_ = false;
 
   UpdateTimes(elapsed / kMsecPerSec);
@@ -105,7 +111,8 @@ void TrackSlider::UpdateTimes(int elapsed) {
                                     elapsed));
   } else {
     // check if slider maximum value is changed before updating
-    if (slider_maximum_value_ != ui_->slider->maximum()) {
+    if (slider_maximum_value_ != ui_->slider->maximum() ||
+        !ui_->slider->isEnabled()) {
       slider_maximum_value_ = ui_->slider->maximum();
       ui_->remaining->setText(
           Utilities::PrettyTime((ui_->slider->maximum() / kMsecPerSec)));

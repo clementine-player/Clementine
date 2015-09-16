@@ -87,6 +87,7 @@ void DigitallyImportedUrlHandler::LoadPlaylistFinished(QIODevice* device) {
   // Failed to get playlist?
   if (songs.count() == 0) {
     service_->StreamError(tr("Error loading di.fm playlist"));
+    emit AsyncLoadComplete(LoadResult(last_original_url_));
     return;
   }
 

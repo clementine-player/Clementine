@@ -109,7 +109,8 @@ signals:
   void PlayItem(const QModelIndex& index);
   void PlayPause();
   void RightClicked(const QPoint& global_pos, const QModelIndex& index);
-  void SeekTrack(int gap);
+  void SeekForward();
+  void SeekBackward();
   void FocusOnFilterSignal(QKeyEvent* event);
   void BackgroundPropertyChanged();
   void ColumnAlignmentChanged(const ColumnAlignmentMap& alignment);

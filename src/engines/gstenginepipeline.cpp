@@ -69,6 +69,7 @@ GstEnginePipeline::GstEnginePipeline(GstEngine* engine)
       buffer_min_fill_(33),
       buffering_(false),
       mono_playback_(false),
+      sample_rate_(GstEngine::kAutoSampleRate),
       end_offset_nanosec_(-1),
       next_beginning_offset_nanosec_(-1),
       next_end_offset_nanosec_(-1),
@@ -77,6 +78,7 @@ GstEnginePipeline::GstEnginePipeline(GstEngine* engine)
       pipeline_is_initialised_(false),
       pipeline_is_connected_(false),
       pending_seek_nanosec_(-1),
+      last_known_position_ns_(0),
       volume_percent_(100),
       volume_modifier_(1.0),
       pipeline_(nullptr),
@@ -125,6 +127,8 @@ void GstEnginePipeline::set_buffer_min_fill(int percent) {
 void GstEnginePipeline::set_mono_playback(bool enabled) {
   mono_playback_ = enabled;
 }
+
+void GstEnginePipeline::set_sample_rate(int rate) { sample_rate_ = rate; }
 
 bool GstEnginePipeline::ReplaceDecodeBin(GstElement* new_bin) {
   if (!new_bin) return false;
@@ -386,7 +390,26 @@ bool GstEnginePipeline::Init() {
   gst_element_link(probe_queue, probe_converter);
   gst_element_link_many(audio_queue, equalizer_preamp_, equalizer_,
                         stereo_panorama_, volume_, audioscale_, convert,
-                        audiosink_, nullptr);
+                        nullptr);
+
+  // add caps for fixed sample rate and mono, but only if requested
+  if (sample_rate_ != GstEngine::kAutoSampleRate && sample_rate_ > 0) {
+    GstCaps* caps = gst_caps_new_simple("audio/x-raw", "rate", G_TYPE_INT,
+                                        sample_rate_, nullptr);
+    if (mono_playback_) {
+      gst_caps_set_simple(caps, "channels", G_TYPE_INT, 1, nullptr);
+    }
+
+    gst_element_link_filtered(convert, audiosink_, caps);
+    gst_caps_unref(caps);
+  } else if (mono_playback_) {
+    GstCaps* capsmono =
+        gst_caps_new_simple("audio/x-raw", "channels", G_TYPE_INT, 1, nullptr);
+    gst_element_link_filtered(convert, audiosink_, capsmono);
+    gst_caps_unref(capsmono);
+  } else {
+    gst_element_link(convert, audiosink_);
+  }
 
   // Add probes and handlers.
   gst_pad_add_probe(gst_element_get_static_pad(probe_converter, "src"),
@@ -622,10 +645,7 @@ QPair<QString, QString> ParseAkamaiTag(const QString& tag) {
   return qMakePair(tag, QString());
 }
 
-bool IsAkamaiTag(const QString& tag) {
-  return tag.contains("- text=\"");
-}
-
+bool IsAkamaiTag(const QString& tag) { return tag.contains("- text=\""); }
 }
 
 void GstEnginePipeline::TagMessageReceived(GstMessage* msg) {
@@ -941,7 +961,8 @@ void GstEnginePipeline::SourceSetupCallback(GstURIDecodeBin* bin,
                  nullptr);
 
 #ifdef Q_OS_DARWIN
-    g_object_set(element, "tls-database", instance->engine_->tls_database(), nullptr);
+    g_object_set(element, "tls-database", instance->engine_->tls_database(),
+                 nullptr);
     g_object_set(element, "ssl-use-system-ca-file", false, nullptr);
     g_object_set(element, "ssl-strict", TRUE, nullptr);
 #endif
@@ -976,10 +997,11 @@ void GstEnginePipeline::TransitionToNext() {
 }
 
 qint64 GstEnginePipeline::position() const {
-  gint64 value = 0;
-  gst_element_query_position(pipeline_, GST_FORMAT_TIME, &value);
+  if (pipeline_is_initialised_)
+    gst_element_query_position(pipeline_, GST_FORMAT_TIME,
+                               &last_known_position_ns_);
 
-  return value;
+  return last_known_position_ns_;
 }
 
 qint64 GstEnginePipeline::length() const {
@@ -1033,6 +1055,7 @@ bool GstEnginePipeline::Seek(qint64 nanosec) {
   }
 
   pending_seek_nanosec_ = -1;
+  last_known_position_ns_ = nanosec;
   return gst_element_seek_simple(pipeline_, GST_FORMAT_TIME,
                                  GST_SEEK_FLAG_FLUSH, nanosec);
 }

@@ -244,7 +244,8 @@ int Mpris1Player::GetCaps(Engine::State state) const {
     if (playlists->active()->next_row() != -1) {
       caps |= CAN_GO_NEXT;
     }
-    if (playlists->active()->previous_row() != -1) {
+    if (playlists->active()->previous_row() != -1 ||
+        app_->player()->PreviousWouldRestartTrack()) {
       caps |= CAN_GO_PREV;
     }
   }
