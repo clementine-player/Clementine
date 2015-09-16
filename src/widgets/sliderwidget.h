@@ -130,7 +130,7 @@ class VolumeSlider : public Slider {
   QPixmap m_pixmapInset;
   QPixmap m_pixmapGradient;
 
-  QColor WindowText_color;
+  QColor m_previous_theme_text_color;
 
   QList<QPixmap> m_handlePixmaps;
 };
