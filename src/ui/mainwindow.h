@@ -117,6 +117,21 @@ class MainWindow : public QMainWindow, public PlatformInterface {
     PlayBehaviour_Always = 3,
   };
 
+  // Don't change the values
+  enum PlaylistAddBehaviour {
+    PlaylistAddBehaviour_Play = 1,
+    PlaylistAddBehaviour_Enqueue = 2,
+    PlaylistAddBehaviour_PlayNext = 3,
+    PlaylistAddBehaviour_Nothing = 4
+  };
+
+  // Don't change the values
+  enum PlaylistPlayBehaviour {
+    PlaylistPlayBehaviour_Never = 1,
+    PlaylistPlayBehaviour_IfStopped = 2,
+    PlaylistPlayBehaviour_Always = 3,
+  };
+
   void SetHiddenInTray(bool hidden);
   void CommandlineOptionsReceived(const CommandlineOptions& options);
 
@@ -136,6 +151,8 @@ class MainWindow : public QMainWindow, public PlatformInterface {
 signals:
   // Signals that stop playing after track was toggled.
   void StopAfterToggled(bool stop);
+
+  void IntroPointReached();
 
  private slots:
   void FilePathChanged(const QString& path);
@@ -176,6 +193,7 @@ signals:
   void ChangeLibraryQueryMode(QAction* action);
 
   void PlayIndex(const QModelIndex& index);
+  void PlaylistDoubleClick(const QModelIndex& index);
   void StopAfterCurrent();
 
   void SongChanged(const Song& song);
@@ -360,6 +378,8 @@ signals:
   Engine::State saved_playback_state_;
   AddBehaviour doubleclick_addmode_;
   PlayBehaviour doubleclick_playmode_;
+  PlaylistAddBehaviour doubleclick_playlist_addmode_;
+  PlaylistPlayBehaviour doubleclick_playlist_playmode_;
   PlayBehaviour menu_playmode_;
 
   BackgroundStreams* background_streams_;

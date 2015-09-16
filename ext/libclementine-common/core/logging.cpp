@@ -285,3 +285,17 @@ QDebug CreateLoggerDebug(int line, const char *class_name) { return qCreateLogge
 #endif // QT_NO_DEBUG_OUTPUT
 
 }  // namespace logging
+
+namespace {
+
+template<typename T>
+QString print_duration(T duration, const std::string& unit) {
+  return QString("%1%2").arg(duration.count()).arg(unit.c_str());
+}
+
+}  // namespace
+
+QDebug operator<<(QDebug dbg, std::chrono::seconds secs) {
+  dbg.nospace() << print_duration(secs, "s");
+  return dbg.space();
+}

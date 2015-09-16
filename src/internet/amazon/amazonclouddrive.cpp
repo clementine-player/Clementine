@@ -17,6 +17,7 @@
 
 #include "internet/amazon/amazonclouddrive.h"
 
+#include <chrono>
 #include <cmath>
 
 #include <QtGlobal>
@@ -38,6 +39,7 @@
 #include "library/librarybackend.h"
 #include "ui/settingsdialog.h"
 
+using std::chrono::seconds;
 using std::placeholders::_1;
 
 const char* AmazonCloudDrive::kServiceName = "Amazon Cloud Drive";
@@ -199,16 +201,16 @@ void AmazonCloudDrive::MonitorReply(QNetworkReply* reply,
           reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
       if (code >= 500) {  // Retry with exponential backoff.
         int max_delay_s = std::pow(std::min(retries + 1, 8), 2);
-        int delay_s = qrand() % max_delay_s;
+        seconds delay(qrand() % max_delay_s);
         qLog(Debug) << "Request failed with code:" << code << "- retrying after"
-                    << delay_s << "seconds";
+                    << delay << "seconds";
         DoAfter([=]() {
           if (post_data.isEmpty()) {
             Get(reply->request(), done, retries + 1);
           } else {
             Post(reply->request(), post_data, done, retries + 1);
           }
-        }, delay_s * kMsecPerSec);
+        }, delay);
       } else {
         // Request failed permanently.
         done(reply);

@@ -75,6 +75,10 @@ GlobalShortcuts::GlobalShortcuts(QWidget* parent)
   AddShortcut("toggle_last_fm_scrobbling",
               tr("Enable/disable Last.fm scrobbling"),
               SIGNAL(ToggleScrobbling()));
+  AddShortcut("love_last_fm_scrobbling", tr("Love (Last.fm scrobbling)"),
+              SIGNAL(Love()));
+  AddShortcut("ban_last_fm_scrobbling", tr("Ban (Last.fm scrobbling)"),
+              SIGNAL(Ban()));
 
   AddRatingShortcut("rate_zero_star", tr("Rate the current song 0 stars"),
                     rating_signals_mapper_, 0);

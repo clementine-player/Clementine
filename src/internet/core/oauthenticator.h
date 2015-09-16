@@ -68,6 +68,7 @@ class OAuthenticator : public QObject {
   void RedirectArrived(LocalRedirectServer* server, QUrl url);
   void FetchAccessTokenFinished(QNetworkReply* reply);
   void RefreshAccessTokenFinished(QNetworkReply* reply);
+  void SslErrors(const QList<QSslError>& errors);
 
  private:
   static const char* kRemoteURL;

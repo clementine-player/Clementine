@@ -79,10 +79,8 @@ void OutgoingDataCreator::SetClients(QList<RemoteClient*>* clients) {
           SLOT(ResultsAvailable(int, SearchProvider::ResultList)),
           Qt::QueuedConnection);
 
-  connect(app_->global_search(),
-          SIGNAL(SearchFinished(int)),
-          SLOT(SearchFinished(int)),
-          Qt::QueuedConnection);
+  connect(app_->global_search(), SIGNAL(SearchFinished(int)),
+          SLOT(SearchFinished(int)), Qt::QueuedConnection);
 }
 
 void OutgoingDataCreator::CheckEnabledProviders() {
@@ -379,6 +377,11 @@ void OutgoingDataCreator::CreateSong(const Song& song, const QImage& art,
     song_metadata->set_file_size(song.filesize());
     song_metadata->set_rating(song.rating());
     song_metadata->set_url(DataCommaSizeFromQString(song.url().toString()));
+    song_metadata->set_art_automatic(
+        DataCommaSizeFromQString(song.art_automatic()));
+    song_metadata->set_art_manual(DataCommaSizeFromQString(song.art_manual()));
+    song_metadata->set_type(
+        static_cast< ::pb::remote::SongMetadata_Type>(song.filetype()));
 
     // Append coverart
     if (!art.isNull()) {
@@ -502,6 +505,9 @@ void OutgoingDataCreator::SendRepeatMode(PlaylistSequence::RepeatMode mode) {
       break;
     case PlaylistSequence::Repeat_OneByOne:
       msg.mutable_repeat()->set_repeat_mode(pb::remote::Repeat_OneByOne);
+      break;
+    case PlaylistSequence::Repeat_Intro:
+      msg.mutable_repeat()->set_repeat_mode(pb::remote::Repeat_Intro);
       break;
   }
 
@@ -670,7 +676,8 @@ void OutgoingDataCreator::DoGlobalSearch(const QString& query,
 
   // Send status message
   pb::remote::Message msg;
-  pb::remote::ResponseGlobalSearchStatus* status = msg.mutable_response_global_search_status();
+  pb::remote::ResponseGlobalSearchStatus* status =
+      msg.mutable_response_global_search_status();
 
   msg.set_type(pb::remote::GLOBAL_SEARCH_STATUS);
   status->set_id(id);
@@ -715,7 +722,8 @@ void OutgoingDataCreator::ResultsAvailable(
 
   client->SendData(&msg);
 
-  qLog(Debug) << "ResultsAvailable" << id << results.first().provider_->name() << results.size();
+  qLog(Debug) << "ResultsAvailable" << id << results.first().provider_->name()
+              << results.size();
 }
 
 void OutgoingDataCreator::SearchFinished(int id) {
@@ -725,7 +733,8 @@ void OutgoingDataCreator::SearchFinished(int id) {
 
   // Send status message
   pb::remote::Message msg;
-  pb::remote::ResponseGlobalSearchStatus* status = msg.mutable_response_global_search_status();
+  pb::remote::ResponseGlobalSearchStatus* status =
+      msg.mutable_response_global_search_status();
 
   msg.set_type(pb::remote::GLOBAL_SEARCH_STATUS);
   status->set_id(req.id_);

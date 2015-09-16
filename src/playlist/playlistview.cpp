@@ -321,6 +321,7 @@ void PlaylistView::LoadGeometry() {
     if (!header_->restoreState(state)) {
       header_->HideSection(Playlist::Column_Disc);
       header_->HideSection(Playlist::Column_Year);
+      header_->HideSection(Playlist::Column_OriginalYear);
       header_->HideSection(Playlist::Column_Genre);
       header_->HideSection(Playlist::Column_BPM);
       header_->HideSection(Playlist::Column_Bitrate);
@@ -586,10 +587,10 @@ void PlaylistView::keyPressEvent(QKeyEvent* event) {
     emit PlayPause();
     event->accept();
   } else if (event->key() == Qt::Key_Left) {
-    emit SeekTrack(-1);
+    emit SeekBackward();
     event->accept();
   } else if (event->key() == Qt::Key_Right) {
-    emit SeekTrack(1);
+    emit SeekForward();
     event->accept();
   } else if (event->modifiers() ==
                  Qt::NoModifier  // No modifier keys currently pressed...
@@ -1191,7 +1192,8 @@ ColumnAlignmentMap PlaylistView::DefaultColumnAlignment() {
                   ret[Playlist::Column_Filesize] =
                       ret[Playlist::Column_PlayCount] =
                           ret[Playlist::Column_SkipCount] =
-                              (Qt::AlignRight | Qt::AlignVCenter);
+                              ret[Playlist::Column_OriginalYear] =
+                                  (Qt::AlignRight | Qt::AlignVCenter);
   ret[Playlist::Column_Score] = (Qt::AlignCenter);
 
   return ret;

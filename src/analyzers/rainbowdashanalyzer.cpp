@@ -1,6 +1,6 @@
 /* This file is part of Clementine.
    Copyright 2014, Alibek Omarov <a1ba.omarov@gmail.com>
-   Copyright 2014, Mark Furneaux <mark@romaco.ca>
+   Copyright 2014-2015, Mark Furneaux <mark@furneaux.ca>
    Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
    Copyright 2014, David Sansome <me@davidsansome.com>
 
@@ -57,7 +57,7 @@ RainbowDashAnalyzer::RainbowDashAnalyzer(QWidget* parent)
   }
 }
 
-void RainbowDashAnalyzer::transform(Scope& s) { m_fht->spectrum(&s.front()); }
+void RainbowDashAnalyzer::transform(Scope& s) { fht_->spectrum(&s.front()); }
 
 void RainbowDashAnalyzer::timerEvent(QTimerEvent* e) {
   if (e->timerId() == timer_id_) {
@@ -74,7 +74,8 @@ void RainbowDashAnalyzer::resizeEvent(QResizeEvent* e) {
   buffer_[1] = QPixmap();
 
   available_rainbow_width_ = width() - kDashWidth + kRainbowOverlap;
-  px_per_frame_ = static_cast<float>(available_rainbow_width_) / (kHistorySize - 1) + 1;
+  px_per_frame_ =
+      static_cast<float>(available_rainbow_width_) / (kHistorySize - 1) + 1;
   x_offset_ = px_per_frame_ * (kHistorySize - 1) - available_rainbow_width_;
 }
 
@@ -111,12 +112,13 @@ void RainbowDashAnalyzer::analyze(QPainter& p, const Analyzer::Scope& s,
     QPointF* dest = polyline;
     float* source = history_;
 
-    const float top_of_Dash = static_cast<float>(height()) / 2 - static_cast<float>(kRainbowHeight) / 2;
+    const float top_of_Dash = static_cast<float>(height()) / 2 -
+                              static_cast<float>(kRainbowHeight) / 2;
     for (int band = 0; band < kRainbowBands; ++band) {
       // Calculate the Y position of this band.
-      const float y =
-          static_cast<float>(kRainbowHeight) / (kRainbowBands + 1) * (band + 0.5) +
-          top_of_Dash;
+      const float y = static_cast<float>(kRainbowHeight) / (kRainbowBands + 1) *
+                          (band + 0.5) +
+                      top_of_Dash;
 
       // Add each point in the line.
       for (int x = 0; x < kHistorySize; ++x) {

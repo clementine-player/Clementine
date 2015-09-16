@@ -668,12 +668,14 @@ void SpotifyService::EnsureMenuCreated() {
   playlist_context_menu_->addAction(GetNewShowConfigAction());
 
   song_context_menu_ = new QMenu;
+  song_context_menu_->addActions(GetPlaylistActions());
+  song_context_menu_->addSeparator();
   remove_from_playlist_ = song_context_menu_->addAction(
       IconLoader::Load("list-remove"), tr("Remove from playlist"), this,
       SLOT(RemoveCurrentFromPlaylist()));
   song_context_menu_->addAction(tr("Get a URL to share this Spotify song"),
                                 this, SLOT(GetCurrentSongUrlToShare()));
-
+  song_context_menu_->addSeparator();
   song_context_menu_->addAction(GetNewShowConfigAction());
 }
 

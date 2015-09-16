@@ -69,6 +69,24 @@ enum EngineState {
 
 // Song Metadata
 message SongMetadata {
+  enum Type {
+    UNKNOWN = 0;
+    ASF = 1;
+    FLAC = 2;
+    MP4 = 3;
+    MPC = 4;
+    MPEG = 5;
+    OGGFLAC = 6;
+    OGGSPEEX = 7;
+    OGGVORBIS = 8;
+    AIFF = 9;
+    WAV = 10;
+    TRUEAUDIO = 11;
+    CDDA = 12;
+    OGGOPUS = 13;
+    STREAM = 99;
+  }
+
   optional int32 id = 1; // unique id of the song
   optional int32 index = 2; // Index of the current row of the active playlist
   optional string title = 3;
@@ -88,6 +106,9 @@ message SongMetadata {
   optional int32 file_size = 17;
   optional float rating = 18; // 0 (0 stars) to 1 (5 stars)
   optional string url = 19;
+  optional string art_automatic = 20;
+  optional string art_manual = 21;
+  optional Type type = 22;
 }
 
 // Playlist informations
@@ -106,6 +127,7 @@ enum RepeatMode {
   Repeat_Album = 2;
   Repeat_Playlist = 3;
   Repeat_OneByOne = 4;
+  Repeat_Intro = 5;
 }
 
 // Valid Shuffle modes
@@ -217,6 +239,7 @@ message RequestInsertUrls {
   optional int32 position = 3 [default=-1];
   optional bool play_now = 4 [default=false];
   optional bool enqueue = 5 [default=false];
+  repeated SongMetadata songs = 6;
 }
 
 // Client want to change track
@@ -320,7 +343,7 @@ message ResponseGlobalSearchStatus {
 
 // The message itself
 message Message {
-  optional int32 version = 1 [default=20];
+  optional int32 version = 1 [default=21];
   optional MsgType type = 2 [default=UNKNOWN]; // What data is in the message?
 
   optional RequestConnect request_connect = 21;

@@ -21,6 +21,9 @@
 #ifndef LOGGING_H
 #define LOGGING_H
 
+#include <chrono>
+#include <string>
+
 #include <QDebug>
 
 #ifdef QT_NO_DEBUG_STREAM
@@ -83,5 +86,7 @@ void GLog(const char* domain, int level, const char* message, void* user_data);
 
 extern const char* kDefaultLogLevels;
 }
+
+QDebug operator<<(QDebug debug, std::chrono::seconds secs);
 
 #endif  // LOGGING_H

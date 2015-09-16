@@ -2,7 +2,7 @@
    Copyright 2003, Max Howell <max.howell@methylblue.com>
    Copyright 2009, 2011-2012, David Sansome <me@davidsansome.com>
    Copyright 2010, 2012, 2014, John Maguire <john.maguire@gmail.com>
-   Copyright 2014, Mark Furneaux <mark@romaco.ca>
+   Copyright 2014-2015, Mark Furneaux <mark@furneaux.ca>
    Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
@@ -33,6 +33,7 @@
 #include <QtDebug>
 
 #include "engines/enginebase.h"
+#include "core/arraysize.h"
 
 // INSTRUCTIONS Base2D
 // 1. do anything that depends on height() in init(), Base2D will call it before
@@ -45,7 +46,8 @@
 // TODO(David Sansome): make an INSTRUCTIONS file
 // can't mod scope in analyze you have to use transform
 
-// TODO(John Maguire): for 2D use setErasePixmap Qt function insetead of m_background
+// TODO(John Maguire): for 2D use setErasePixmap Qt function insetead of
+// m_background
 
 // make the linker happy only for gcc < 4.0
 #if !(__GNUC__ > 4 || (__GNUC__ == 4 && __GNUC_MINOR__ >= 0)) && \
@@ -53,20 +55,29 @@
 template class Analyzer::Base<QWidget>;
 #endif
 
+static const int sBarkBands[] = {
+    100,  200,  300,  400,  510,  630,  770,  920,  1080, 1270, 1480,  1720,
+    2000, 2320, 2700, 3150, 3700, 4400, 5300, 6400, 7700, 9500, 12000, 15500};
+
+static const int sBarkBandCount = arraysize(sBarkBands);
+
 Analyzer::Base::Base(QWidget* parent, uint scopeSize)
     : QWidget(parent),
-      m_timeout(40)  // msec
+      timeout_(40)  // msec
       ,
-      m_fht(new FHT(scopeSize)),
-      m_engine(nullptr),
-      m_lastScope(512),
-      current_chunk_(0),
+      fht_(new FHT(scopeSize)),
+      engine_(nullptr),
+      lastScope_(512),
       new_frame_(false),
-      is_playing_(false) {}
+      is_playing_(false),
+      barkband_table_(QList<uint>()),
+      prev_color_index_(0),
+      bands_(0),
+      psychedelic_enabled_(false) {}
 
-void Analyzer::Base::hideEvent(QHideEvent*) { m_timer.stop(); }
+void Analyzer::Base::hideEvent(QHideEvent*) { timer_.stop(); }
 
-void Analyzer::Base::showEvent(QShowEvent*) { m_timer.start(timeout(), this); }
+void Analyzer::Base::showEvent(QShowEvent*) { timer_.start(timeout(), this); }
 
 void Analyzer::Base::transform(Scope& scope) {
   // this is a standard transformation that should give
@@ -74,16 +85,16 @@ void Analyzer::Base::transform(Scope& scope) {
 
   // NOTE resizing here is redundant as FHT routines only calculate FHT::size()
   // values
-  // scope.resize( m_fht->size() );
+  // scope.resize( fht_->size() );
 
   float* front = static_cast<float*>(&scope.front());
 
-  float* f = new float[m_fht->size()];
-  m_fht->copy(&f[0], front);
-  m_fht->logSpectrum(front, &f[0]);
-  m_fht->scale(front, 1.0 / 20);
+  float* f = new float[fht_->size()];
+  fht_->copy(&f[0], front);
+  fht_->logSpectrum(front, &f[0]);
+  fht_->scale(front, 1.0 / 20);
 
-  scope.resize(m_fht->size() / 2);  // second half of values are rubbish
+  scope.resize(fht_->size() / 2);  // second half of values are rubbish
   delete[] f;
 }
 
@@ -91,30 +102,30 @@ void Analyzer::Base::paintEvent(QPaintEvent* e) {
   QPainter p(this);
   p.fillRect(e->rect(), palette().color(QPalette::Window));
 
-  switch (m_engine->state()) {
+  switch (engine_->state()) {
     case Engine::Playing: {
-      const Engine::Scope& thescope = m_engine->scope(m_timeout);
+      const Engine::Scope& thescope = engine_->scope(timeout_);
       int i = 0;
 
       // convert to mono here - our built in analyzers need mono, but the
       // engines provide interleaved pcm
-      for (uint x = 0; static_cast<int>(x) < m_fht->size(); ++x) {
-        m_lastScope[x] =
-            static_cast<double>(thescope[i] + thescope[i + 1]) / (2 * (1 << 15));
+      for (uint x = 0; static_cast<int>(x) < fht_->size(); ++x) {
+        lastScope_[x] = static_cast<double>(thescope[i] + thescope[i + 1]) /
+                        (2 * (1 << 15));
         i += 2;
       }
 
       is_playing_ = true;
-      transform(m_lastScope);
-      analyze(p, m_lastScope, new_frame_);
+      transform(lastScope_);
+      analyze(p, lastScope_, new_frame_);
 
-      // scope.resize( m_fht->size() );
+      // scope.resize( fht_->size() );
 
       break;
     }
     case Engine::Paused:
       is_playing_ = false;
-      analyze(p, m_lastScope, new_frame_);
+      analyze(p, lastScope_, new_frame_);
       break;
 
     default:
@@ -131,9 +142,9 @@ int Analyzer::Base::resizeExponent(int exp) {
   else if (exp > 9)
     exp = 9;
 
-  if (exp != m_fht->sizeExp()) {
-    delete m_fht;
-    m_fht = new FHT(exp);
+  if (exp != fht_->sizeExp()) {
+    delete fht_;
+    fht_ = new FHT(exp);
   }
   return exp;
 }
@@ -154,7 +165,7 @@ int Analyzer::Base::resizeForBands(int bands) {
     exp = 9;
 
   resizeExponent(exp);
-  return m_fht->size() / 2;
+  return fht_->size() / 2;
 }
 
 void Analyzer::Base::demo(QPainter& p) {
@@ -173,6 +184,67 @@ void Analyzer::Base::demo(QPainter& p) {
     analyze(p, Scope(32, 0), new_frame_);
   }
   ++t;
+}
+
+void Analyzer::Base::psychedelicModeChanged(bool enabled) {
+  psychedelic_enabled_ = enabled;
+}
+
+int Analyzer::Base::BandFrequency(int band) const {
+  return ((kSampleRate / 2) * band + kSampleRate / 4) / bands_;
+}
+
+void Analyzer::Base::updateBandSize(const int scopeSize) {
+  // prevent possible dbz in BandFrequency
+  if (scopeSize == 0) {
+    return;
+  }
+
+  bands_ = scopeSize;
+
+  barkband_table_.clear();
+  barkband_table_.reserve(bands_ + 1);
+
+  int barkband = 0;
+  for (int i = 0; i < bands_ + 1; ++i) {
+    if (barkband < sBarkBandCount - 1 &&
+        BandFrequency(i) >= sBarkBands[barkband]) {
+      barkband++;
+    }
+
+    barkband_table_.append(barkband);
+  }
+}
+
+QColor Analyzer::Base::getPsychedelicColor(const Scope& scope,
+                                           const int ampFactor,
+                                           const int bias) {
+  if (scope.size() > barkband_table_.length()) {
+    return palette().color(QPalette::Highlight);
+  }
+
+  // Calculate total magnitudes for different bark bands.
+  double bands[sBarkBandCount]{};
+
+  for (int i = 0; i < barkband_table_.size(); ++i) {
+    bands[barkband_table_[i]] += scope[i];
+  }
+
+  // Now divide the bark bands into thirds and compute their total amplitudes.
+  double rgb[3]{};
+  for (int i = 0; i < sBarkBandCount - 1; ++i) {
+    rgb[(i * 3) / sBarkBandCount] += bands[i] * bands[i];
+  }
+
+  for (int i = 0; i < 3; ++i) {
+    // bias colours for a threshold around normally amplified audio
+    rgb[i] = (int)((sqrt(rgb[i]) * ampFactor) + bias);
+    if (rgb[i] > 255) {
+      rgb[i] = 255;
+    }
+  }
+
+  return QColor::fromRgb(rgb[0], rgb[1], rgb[2]);
 }
 
 void Analyzer::Base::polishEvent() {
@@ -211,7 +283,7 @@ void Analyzer::initSin(Scope& v, const uint size) {
 
 void Analyzer::Base::timerEvent(QTimerEvent* e) {
   QWidget::timerEvent(e);
-  if (e->timerId() != m_timer.timerId()) return;
+  if (e->timerId() != timer_.timerId()) return;
 
   new_frame_ = true;
   update();

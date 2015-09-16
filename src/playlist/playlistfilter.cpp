@@ -38,6 +38,7 @@ PlaylistFilter::PlaylistFilter(QObject* parent)
   column_names_["track"] = Playlist::Column_Track;
   column_names_["disc"] = Playlist::Column_Disc;
   column_names_["year"] = Playlist::Column_Year;
+  column_names_["originalyear"] = Playlist::Column_OriginalYear;
   column_names_["genre"] = Playlist::Column_Genre;
   column_names_["score"] = Playlist::Column_Score;
   column_names_["comment"] = Playlist::Column_Comment;
@@ -48,8 +49,9 @@ PlaylistFilter::PlaylistFilter(QObject* parent)
 
   numerical_columns_ << Playlist::Column_Length << Playlist::Column_Track
                      << Playlist::Column_Disc << Playlist::Column_Year
-                     << Playlist::Column_Score << Playlist::Column_BPM
-                     << Playlist::Column_Bitrate << Playlist::Column_Rating;
+                     << Playlist::Column_OriginalYear << Playlist::Column_Score
+                     << Playlist::Column_BPM << Playlist::Column_Bitrate
+                     << Playlist::Column_Rating;
 }
 
 PlaylistFilter::~PlaylistFilter() {}

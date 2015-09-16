@@ -43,6 +43,12 @@ PlaybackSettingsPage::PlaybackSettingsPage(SettingsDialog* dialog)
   ui_->replaygain_preamp_label->setMinimumWidth(
       QFontMetrics(ui_->replaygain_preamp_label->font()).width("-WW.W dB"));
   RgPreampChanged(ui_->replaygain_preamp->value());
+
+  ui_->sample_rate->setItemData(0, GstEngine::kAutoSampleRate);
+  ui_->sample_rate->setItemData(1, 44100);
+  ui_->sample_rate->setItemData(2, 48000);
+  ui_->sample_rate->setItemData(3, 96000);
+  ui_->sample_rate->setItemData(4, 192000);
 }
 
 PlaybackSettingsPage::~PlaybackSettingsPage() { delete ui_; }
@@ -60,8 +66,8 @@ void PlaybackSettingsPage::Load() {
       components.removeLast();
     }
 
-    ui_->gst_output->addItem(
-        icon, output.description, QVariant::fromValue(output));
+    ui_->gst_output->addItem(icon, output.description,
+                             QVariant::fromValue(output));
   }
 
   QSettings s;
@@ -107,6 +113,8 @@ void PlaybackSettingsPage::Load() {
       s.value("rgcompression", true).toBool());
   ui_->buffer_duration->setValue(s.value("bufferduration", 4000).toInt());
   ui_->mono_playback->setChecked(s.value("monoplayback", false).toBool());
+  ui_->sample_rate->setCurrentIndex(ui_->sample_rate->findData(
+      s.value("samplerate", GstEngine::kAutoSampleRate).toInt()));
   ui_->buffer_min_fill->setValue(s.value("bufferminfill", 33).toInt());
   s.endGroup();
 }
@@ -130,7 +138,7 @@ void PlaybackSettingsPage::Save() {
 
   GstEngine::OutputDetails details =
       ui_->gst_output->itemData(ui_->gst_output->currentIndex())
-      .value<GstEngine::OutputDetails>();
+          .value<GstEngine::OutputDetails>();
 
   s.beginGroup(GstEngine::kSettingsGroup);
   s.setValue("sink", details.gstreamer_plugin_name);
@@ -141,6 +149,9 @@ void PlaybackSettingsPage::Save() {
   s.setValue("rgcompression", ui_->replaygain_compression->isChecked());
   s.setValue("bufferduration", ui_->buffer_duration->value());
   s.setValue("monoplayback", ui_->mono_playback->isChecked());
+  s.setValue(
+      "samplerate",
+      ui_->sample_rate->itemData(ui_->sample_rate->currentIndex()).toInt());
   s.setValue("bufferminfill", ui_->buffer_min_fill->value());
   s.endGroup();
 }
