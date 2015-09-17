@@ -203,7 +203,7 @@ Amarok::VolumeSlider::VolumeSlider(QWidget* parent, uint max)
 
   // BEGIN Calculate handle animation pixmaps for mouse-over effect
   QImage pixmapHandle(":volumeslider-handle.png");
-  QImage pixmapHandleGlow(":volumeslider-handle_glow.png");
+  QImage pixmapHandleGlow(VolumeSliderHandleGlow());
 
   float opacity = 0.0;
   const float step = 1.0 / ANIM_MAX;
@@ -365,4 +365,24 @@ QPixmap Amarok::VolumeSlider::volumePixmapDraw () const {
   painter.drawLine(6, 29, 104, 29);
   // Return QPixmap
   return pixmap;
+}
+
+QImage Amarok::VolumeSlider::VolumeSliderHandleGlow() const {
+  QImage mask(":/volumeslider-handle_glow.png");
+
+  QImage glow_image(mask.size(), QImage::Format_ARGB32_Premultiplied);
+  QPainter painter(&glow_image);
+  painter.fillRect(glow_image.rect(), QBrush(palette().color(QPalette::Highlight)));
+  
+  painter.setRenderHint(QPainter::Antialiasing);
+  painter.setRenderHint(QPainter::SmoothPixmapTransform);
+
+  painter.setCompositionMode(QPainter::CompositionMode_DestinationIn);
+  // repaint volume slider handle glow image with theme highlight color
+  painter.drawImage(0, 0, mask);
+  painter.setCompositionMode(QPainter::CompositionMode_SourceAtop);
+  // Overlay the volume slider handle image 
+  painter.drawImage(0, 0, QImage(":/volumeslider-handle.png"));
+  // Return QImage
+  return glow_image;
 }

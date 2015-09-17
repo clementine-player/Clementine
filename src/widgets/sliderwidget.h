@@ -99,6 +99,7 @@ class VolumeSlider : public Slider {
  public:
   VolumeSlider(QWidget* parent, uint max = 0);
   QPixmap volumePixmapDraw() const;
+  QImage VolumeSliderHandleGlow() const;
 
  protected:
   virtual void paintEvent(QPaintEvent*);
