@@ -176,6 +176,8 @@ void QSearchField::setText(const QString &text)
 
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
     [pimpl->nsSearchField setStringValue:fromQString(text)];
+    [pimpl->nsSearchField selectText:pimpl->nsSearchField];
+    [[pimpl->nsSearchField currentEditor] setSelectedRange:NSMakeRange([[pimpl->nsSearchField stringValue] length], 0)];
     [pool drain];
 }
 
@@ -198,12 +200,25 @@ QString QSearchField::placeholderText() const {
 
 void QSearchField::setFocus(Qt::FocusReason reason)
 {
-    Q_ASSERT(pimpl);
-    if (!pimpl)
-        return;
+/* Do nothing: we were previously using makeFirstResponder on search field, but
+ * that resulted in having the text being selected (and I didn't find any way to
+ * deselect it) which would result in the user erasing the first letter he just
+ * typed, after using setText (e.g. if the user typed a letter while having
+ * focus on the playlist, which means we call setText and give focus to the
+ * search bar).
+ * Instead now the focus will take place when calling selectText in setText.
+ * This obviously breaks the purpose of this function, but we never call only
+ * setFocus on a search box in Clementine (i.e. without a call to setText
+ * shortly after).
+ */
 
-    if ([pimpl->nsSearchField acceptsFirstResponder])
-        [[pimpl->nsSearchField window] makeFirstResponder: pimpl->nsSearchField];
+//    Q_ASSERT(pimpl);
+//    if (!pimpl)
+//        return;
+
+//    if ([pimpl->nsSearchField acceptsFirstResponder]) {
+//        [[pimpl->nsSearchField window] makeFirstResponder: pimpl->nsSearchField];
+//    }
 }
 
 void QSearchField::setFocus()
