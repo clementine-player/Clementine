@@ -85,6 +85,8 @@ class LibraryModel : public SimpleTreeModel<LibraryItem> {
     GroupBy_Grouping = 10,
     GroupBy_Bitrate = 11,
     GroupBy_Disc = 12,
+    GroupBy_OriginalYearAlbum = 13,
+    GroupBy_OriginalYear = 14,
   };
 
   struct Grouping {
@@ -164,8 +166,7 @@ class LibraryModel : public SimpleTreeModel<LibraryItem> {
   static QString PrettyYearAlbum(int year, const QString& album);
   static QString SortText(QString text);
   static QString SortTextForArtist(QString artist);
-  static QString SortTextForYear(int year);
-  static QString SortTextForBitrate(int bitrate);
+  static QString SortTextForNumber(int year);
   static QString SortTextForSong(const Song& song);
 
 signals:

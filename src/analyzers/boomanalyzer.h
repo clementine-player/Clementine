@@ -1,7 +1,7 @@
 /* This file is part of Clementine.
    Copyright 2004, Max Howell <max.howell@methylblue.com>
    Copyright 2009-2010, David Sansome <davidsansome@gmail.com>
-   Copyright 2014, Mark Furneaux <mark@romaco.ca>
+   Copyright 2014-2015, Mark Furneaux <mark@furneaux.ca>
    Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
    Copyright 2014, John Maguire <john.maguire@gmail.com>
 
@@ -27,10 +27,6 @@
 
 #include "analyzerbase.h"
 
-/**
-@author Max Howell
-*/
-
 class BoomAnalyzer : public Analyzer::Base {
   Q_OBJECT
 
@@ -39,9 +35,9 @@ class BoomAnalyzer : public Analyzer::Base {
 
   static const char* kName;
 
-  virtual void init();
   virtual void transform(Analyzer::Scope& s);
   virtual void analyze(QPainter& p, const Analyzer::Scope&, bool new_frame);
+  virtual void psychedelicModeChanged(bool);
 
  public slots:
   void changeK_barHeight(int);
@@ -49,17 +45,23 @@ class BoomAnalyzer : public Analyzer::Base {
 
  protected:
   void resizeEvent(QResizeEvent* e);
+  void paletteChange(const QPalette&);
 
-  static const uint COLUMN_WIDTH = 4;
-  static const uint BAND_COUNT = 32;
+  static const uint kColumnWidth;
+  static const uint kMaxBandCount;
+  static const uint kMinBandCount;
 
-  double K_barHeight, F_peakSpeed, F;
+  uint bands_;
+  Analyzer::Scope scope_;
+  QColor fg_;
 
-  std::vector<float> bar_height;
-  std::vector<float> peak_height;
-  std::vector<float> peak_speed;
+  double K_barHeight_, F_peakSpeed_, F_;
 
-  QPixmap barPixmap;
+  std::vector<float> bar_height_;
+  std::vector<float> peak_height_;
+  std::vector<float> peak_speed_;
+
+  QPixmap barPixmap_;
   QPixmap canvas_;
 };
 

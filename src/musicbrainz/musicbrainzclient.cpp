@@ -55,8 +55,8 @@ void MusicBrainzClient::Start(int id, const QStringList& mbid_list) {
 
     QNetworkReply* reply = network_->get(req);
     NewClosure(reply, SIGNAL(finished()), this,
-               SLOT(RequestFinished(QNetworkReply*, int, int)),
-               reply, id, request_number++);
+               SLOT(RequestFinished(QNetworkReply*, int, int)), reply, id,
+               request_number++);
     requests_.insert(id, reply);
 
     timeouts_->AddReply(reply);
@@ -99,12 +99,13 @@ void MusicBrainzClient::DiscIdRequestFinished(const QString& discid,
   ResultList ret;
   QString artist;
   QString album;
+  int year = 0;
 
   if (reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt() !=
       200) {
-    qLog(Error) << "Error:" <<
-        reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt() <<
-        "http status code received";
+    qLog(Error) << "Error:"
+                << reply->attribute(QNetworkRequest::HttpStatusCodeAttribute)
+                       .toInt() << "http status code received";
     qLog(Error) << reply->readAll();
     emit Finished(artist, album, ret);
     return;
@@ -113,6 +114,7 @@ void MusicBrainzClient::DiscIdRequestFinished(const QString& discid,
   // Parse xml result:
   // -get title
   // -get artist
+  // -get year
   // -get all the tracks' tags
   // Note: If there are multiple releases for the discid, the first
   // release is chosen.
@@ -123,6 +125,11 @@ void MusicBrainzClient::DiscIdRequestFinished(const QString& discid,
       QStringRef name = reader.name();
       if (name == "title") {
         album = reader.readElementText();
+      } else if (name == "date") {
+        QRegExp regex(kDateRegex);
+        if (regex.indexIn(reader.readElementText()) == 0) {
+          year = regex.cap(0).toInt();
+        }
       } else if (name == "artist-credit") {
         ParseArtist(&reader, &artist);
       } else if (name == "medium-list") {
@@ -151,16 +158,25 @@ void MusicBrainzClient::DiscIdRequestFinished(const QString& discid,
     }
   }
 
+  // If we parsed a year, copy it to the tracks.
+  if (year > 0) {
+    for (ResultList::iterator it = ret.begin(); it != ret.end(); ++it) {
+      it->year_ = year;
+    }
+  }
+
   emit Finished(artist, album, UniqueResults(ret, SortResults));
 }
 
-void MusicBrainzClient::RequestFinished(QNetworkReply* reply, int id, int request_number) {
+void MusicBrainzClient::RequestFinished(QNetworkReply* reply, int id,
+                                        int request_number) {
   reply->deleteLater();
 
   const int nb_removed = requests_.remove(id, reply);
   if (nb_removed != 1) {
-    qLog(Error) << "Error: unknown reply received:" << nb_removed <<
-        "requests removed, while only one was supposed to be removed";
+    qLog(Error)
+        << "Error: unknown reply received:" << nb_removed
+        << "requests removed, while only one was supposed to be removed";
   }
 
   if (reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt() ==
@@ -180,8 +196,9 @@ void MusicBrainzClient::RequestFinished(QNetworkReply* reply, int id, int reques
     }
     pending_results_[id] << PendingResults(request_number, res);
   } else {
-    qLog(Error) << "Error:" <<  reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt() <<
-        "http status code received";
+    qLog(Error) << "Error:"
+                << reply->attribute(QNetworkRequest::HttpStatusCodeAttribute)
+                       .toInt() << "http status code received";
     qLog(Error) << reply->readAll();
   }
 
@@ -361,7 +378,6 @@ MusicBrainzClient::Release MusicBrainzClient::ParseRelease(
 
 MusicBrainzClient::ResultList MusicBrainzClient::UniqueResults(
     const ResultList& results, UniqueResultsSortOption opt) {
-
   ResultList ret;
   if (opt == SortResults) {
     ret = QSet<Result>::fromList(results).toList();

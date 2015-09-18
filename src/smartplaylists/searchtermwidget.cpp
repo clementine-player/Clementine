@@ -29,6 +29,7 @@
 #include <QPropertyAnimation>
 #include <QTimer>
 #include <QtDebug>
+#include <QKeyEvent>
 
 // Exported by QtGui
 void qt_blurImage(QPainter* p, QImage& blurImage, qreal radius, bool quality,
@@ -49,6 +50,7 @@ class SearchTermWidget::Overlay : public QWidget {
  protected:
   void paintEvent(QPaintEvent*);
   void mouseReleaseEvent(QMouseEvent*);
+  void keyReleaseEvent(QKeyEvent* e);
 
  private:
   SearchTermWidget* parent_;
@@ -209,6 +211,8 @@ void SearchTermWidget::SetActive(bool active) {
   delete overlay_;
   overlay_ = nullptr;
 
+  ui_->container->setEnabled(active);
+
   if (!active) {
     overlay_ = new Overlay(this);
   }
@@ -352,6 +356,7 @@ SearchTermWidget::Overlay::Overlay(SearchTermWidget* parent)
       text_(tr("Add search term")),
       icon_(IconLoader::Load("list-add").pixmap(kIconSize)) {
   raise();
+  setFocusPolicy(Qt::TabFocus);
 }
 
 void SearchTermWidget::Overlay::SetOpacity(float opacity) {
@@ -415,6 +420,10 @@ void SearchTermWidget::Overlay::paintEvent(QPaintEvent*) {
 
 void SearchTermWidget::Overlay::mouseReleaseEvent(QMouseEvent*) {
   emit parent_->Clicked();
+}
+
+void SearchTermWidget::Overlay::keyReleaseEvent(QKeyEvent* e) {
+  if (e->key() == Qt::Key_Space) emit parent_->Clicked();
 }
 
 }  // namespace

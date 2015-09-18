@@ -55,6 +55,7 @@ class GstEnginePipeline : public QObject {
   void set_buffer_duration_nanosec(qint64 duration_nanosec);
   void set_buffer_min_fill(int percent);
   void set_mono_playback(bool enabled);
+  void set_sample_rate(int rate);
 
   // Creates the pipeline, returns false on error
   bool InitFromUrl(const QUrl& url, qint64 end_nanosec);
@@ -220,6 +221,7 @@ signals:
   bool buffering_;
 
   bool mono_playback_;
+  int sample_rate_;
 
   // The URL that is currently playing, and the URL that is to be preloaded
   // when the current track is close to finishing.
@@ -257,6 +259,13 @@ signals:
   bool pipeline_is_initialised_;
   bool pipeline_is_connected_;
   qint64 pending_seek_nanosec_;
+
+  // We can only use gst_element_query_position() when the pipeline is in
+  // PAUSED nor PLAYING state. Whenever we get a new position (e.g. after a
+  // correct call to gst_element_query_position() or after a seek), we store
+  // it here so that we can use it when using gst_element_query_position() is
+  // not possible.
+  mutable gint64 last_known_position_ns_;
 
   int volume_percent_;
   qreal volume_modifier_;

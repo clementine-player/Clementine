@@ -27,6 +27,7 @@
 #include "ui/albumcoverchoicecontroller.h"
 #include "ui/iconloader.h"
 
+#include <QDesktopWidget>
 #include <QMenu>
 #include <QMovie>
 #include <QPainter>
@@ -99,8 +100,8 @@ NowPlayingWidget::NowPlayingWidget(QWidget* parent)
   CreateModeAction(LargeSongDetailsBelow,
                    tr("Large album cover (details below)"), mode_group,
                    mode_mapper);
-  CreateModeAction(LargeNoSongDetails, tr("Large album cover (no details)"), mode_group,
-                   mode_mapper);
+  CreateModeAction(LargeNoSongDetails, tr("Large album cover (no details)"),
+                   mode_group, mode_mapper);
 
   menu_->addActions(mode_group->actions());
 
@@ -528,7 +529,8 @@ void NowPlayingWidget::SetMode(int mode) {
 
 void NowPlayingWidget::resizeEvent(QResizeEvent* e) {
   if (visible_ && e->oldSize() != e->size()) {
-    if (mode_ == LargeSongDetails || mode_ == LargeNoSongDetails || mode_ == LargeSongDetailsBelow) {
+    if (mode_ == LargeSongDetails || mode_ == LargeNoSongDetails ||
+        mode_ == LargeSongDetailsBelow) {
       UpdateHeight();
       UpdateDetailsText();
     }
@@ -562,9 +564,9 @@ void NowPlayingWidget::contextMenuEvent(QContextMenuEvent* e) {
   menu_->popup(mapToGlobal(e->pos()));
 }
 
-void NowPlayingWidget::mouseReleaseEvent(QMouseEvent*) {
+void NowPlayingWidget::mouseReleaseEvent(QMouseEvent* e) {
   // Same behaviour as right-click > Show Fullsize
-  if (!aww_ && !hypnotoad_.get()) {
+  if (e->button() == Qt::LeftButton && !aww_ && !hypnotoad_.get()) {
     ShowCover();
   }
 }
@@ -652,7 +654,10 @@ void NowPlayingWidget::SearchCoverAutomatically() {
 }
 
 void NowPlayingWidget::Bask() {
+  QDesktopWidget desktop;
+  int current_screen = desktop.screenNumber(this);
   big_hypnotoad_.reset(new FullscreenHypnotoad);
+  big_hypnotoad_->setGeometry(desktop.screenGeometry(current_screen));
   big_hypnotoad_->showFullScreen();
 }
 

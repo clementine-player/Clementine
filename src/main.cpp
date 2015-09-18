@@ -78,10 +78,6 @@
 
 #include <echonest/Config.h>
 
-#ifdef HAVE_SPOTIFY_DOWNLOADER
-#include <QtCrypto>
-#endif
-
 #ifdef Q_OS_DARWIN
 #include <sys/resource.h>
 #include <sys/sysctl.h>
@@ -398,25 +394,15 @@ int main(int argc, char* argv[]) {
   }
 #endif
 
-#ifdef HAVE_SPOTIFY_DOWNLOADER
-  QCA::Initializer qca_initializer;
-#endif
-
   // Resources
   Q_INIT_RESOURCE(data);
   Q_INIT_RESOURCE(translations);
 
-  // Grooveshark uses GoDaddy to sign its SSL certificates, which are in turn
-  // signed by a ValiCert CA.  This CA certificate isn't installed by default
-  // in Windows, it's only added by windows update, or manually browsing to a
-  // website with a certificate signed by ValiCert.  Here we explicitly add
-  // that CA to the default list used by QSslSocket, so it always works in
-  // Clementine.
-  QSslSocket::addDefaultCaCertificates(
-      QSslCertificate::fromPath(":/grooveshark-valicert-ca.pem", QSsl::Pem));
-  // Do the same for SoundCloud, whose certificate is missing on OS X.
+  // Add root CA cert for SoundCloud, whose certificate is missing on OS X.
   QSslSocket::addDefaultCaCertificates(
       QSslCertificate::fromPath(":/soundcloud-ca.pem", QSsl::Pem));
+  QSslSocket::addDefaultCaCertificates(
+      QSslCertificate::fromPath(":/Equifax_Secure_Certificate_Authority.pem", QSsl::Pem));
 
   // Has the user forced a different language?
   QString override_language = options.language();

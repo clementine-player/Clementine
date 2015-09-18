@@ -87,12 +87,12 @@ class TagReader {
   void SetFMPSStatisticsVorbisComments(
       TagLib::Ogg::XiphComment* vorbis_comments,
       const pb::tagreader::SongMetadata& song) const;
-  void SetFMPSRatingVorbisComments(TagLib::Ogg::XiphComment* vorbis_comments,
-                                   const pb::tagreader::SongMetadata& song)
-      const;
+  void SetFMPSRatingVorbisComments(
+      TagLib::Ogg::XiphComment* vorbis_comments,
+      const pb::tagreader::SongMetadata& song) const;
 
-  pb::tagreader::SongMetadata_Type GuessFileType(TagLib::FileRef* fileref)
-      const;
+  pb::tagreader::SongMetadata_Type GuessFileType(
+      TagLib::FileRef* fileref) const;
 
   void SetUserTextFrame(const QString& description, const QString& value,
                         TagLib::ID3v2::Tag* tag) const;
@@ -104,6 +104,8 @@ class TagReader {
                     TagLib::ID3v2::Tag* tag) const;
   void SetTextFrame(const char* id, const std::string& value,
                     TagLib::ID3v2::Tag* tag) const;
+  void SetUnsyncLyricsFrame(const std::string& value,
+                            TagLib::ID3v2::Tag* tag) const;
 
  private:
   static const char* kMP4_FMPS_Rating_ID;

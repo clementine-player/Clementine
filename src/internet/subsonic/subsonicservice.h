@@ -119,7 +119,7 @@ class SubsonicService : public InternetService {
 
   static const int kMaxRedirects;
 
- signals:
+signals:
   void LoginStateChanged(SubsonicService::LoginState newstate);
 
  private:
@@ -167,7 +167,8 @@ class SubsonicLibraryScanner : public QObject {
   Q_OBJECT
 
  public:
-  explicit SubsonicLibraryScanner(SubsonicService* service, QObject* parent = nullptr);
+  explicit SubsonicLibraryScanner(SubsonicService* service,
+                                  QObject* parent = nullptr);
   ~SubsonicLibraryScanner();
 
   void Scan();
@@ -176,7 +177,7 @@ class SubsonicLibraryScanner : public QObject {
   static const int kAlbumChunkSize;
   static const int kConcurrentRequests;
 
- signals:
+signals:
   void ScanFinished();
 
  private slots:
@@ -188,6 +189,7 @@ class SubsonicLibraryScanner : public QObject {
  private:
   void GetAlbumList(int offset);
   void GetAlbum(const QString& id);
+  void ParsingError(const QString& message);
 
   SubsonicService* service_;
   bool scanning_;

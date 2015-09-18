@@ -76,11 +76,13 @@ GroupByDialog::GroupByDialog(QWidget* parent)
   p_->mapping_.insert(Mapping(LibraryModel::GroupBy_FileType, 5));
   p_->mapping_.insert(Mapping(LibraryModel::GroupBy_Genre, 6));
   p_->mapping_.insert(Mapping(LibraryModel::GroupBy_Year, 7));
-  p_->mapping_.insert(Mapping(LibraryModel::GroupBy_YearAlbum, 8));
-  p_->mapping_.insert(Mapping(LibraryModel::GroupBy_Bitrate, 9));
-  p_->mapping_.insert(Mapping(LibraryModel::GroupBy_Disc, 10));
-  p_->mapping_.insert(Mapping(LibraryModel::GroupBy_Performer, 11));
-  p_->mapping_.insert(Mapping(LibraryModel::GroupBy_Grouping, 12));
+  p_->mapping_.insert(Mapping(LibraryModel::GroupBy_OriginalYear, 8));
+  p_->mapping_.insert(Mapping(LibraryModel::GroupBy_YearAlbum, 9));
+  p_->mapping_.insert(Mapping(LibraryModel::GroupBy_OriginalYearAlbum, 10));
+  p_->mapping_.insert(Mapping(LibraryModel::GroupBy_Bitrate, 11));
+  p_->mapping_.insert(Mapping(LibraryModel::GroupBy_Disc, 12));
+  p_->mapping_.insert(Mapping(LibraryModel::GroupBy_Performer, 13));
+  p_->mapping_.insert(Mapping(LibraryModel::GroupBy_Grouping, 14));
 
   connect(ui_->button_box->button(QDialogButtonBox::Reset), SIGNAL(clicked()),
           SLOT(Reset()));

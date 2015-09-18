@@ -95,6 +95,9 @@ const char* Playlist::kWriteMetadata = "write_metadata";
 const int Playlist::kUndoStackSize = 20;
 const int Playlist::kUndoItemLimit = 500;
 
+const qint64 Playlist::kMinScrobblePointNsecs = 31ll * kNsecPerSec;
+const qint64 Playlist::kMaxScrobblePointNsecs = 240ll * kNsecPerSec;
+
 Playlist::Playlist(PlaylistBackend* backend, TaskManager* task_manager,
                    LibraryBackend* library, int id, const QString& special_type,
                    bool favorite, QObject* parent)
@@ -282,6 +285,8 @@ QVariant Playlist::data(const QModelIndex& index, int role) const {
           return song.disc();
         case Column_Year:
           return song.year();
+        case Column_OriginalYear:
+          return song.effective_originalyear();
         case Column_Genre:
           return song.genre();
         case Column_AlbumArtist:
@@ -560,6 +565,7 @@ int Playlist::next_row(bool ignore_repeat_track) const {
 
     switch (playlist_sequence_->repeat_mode()) {
       case PlaylistSequence::Repeat_Off:
+      case PlaylistSequence::Repeat_Intro:
         return -1;
       case PlaylistSequence::Repeat_Track:
         next_virtual_index = current_virtual_index_;
@@ -1248,6 +1254,8 @@ bool Playlist::CompareItems(int column, Qt::SortOrder order,
       cmp(disc);
     case Column_Year:
       cmp(year);
+    case Column_OriginalYear:
+      cmp(originalyear);
     case Column_Genre:
       strcmp(genre);
     case Column_AlbumArtist:
@@ -1317,6 +1325,8 @@ QString Playlist::column_name(Column column) {
       return tr("Disc");
     case Column_Year:
       return tr("Year");
+    case Column_OriginalYear:
+      return tr("Original year");
     case Column_Genre:
       return tr("Genre");
     case Column_AlbumArtist:
@@ -1392,8 +1402,18 @@ void Playlist::sort(int column, Qt::SortOrder order) {
   if (dynamic_playlist_ && current_item_index_.isValid())
     begin += current_item_index_.row() + 1;
 
-  qStableSort(begin, new_items.end(),
-              std::bind(&Playlist::CompareItems, column, order, _1, _2));
+  if (column == Column_Album) {
+    // When sorting by album, also take into account discs and tracks.
+    qStableSort(begin, new_items.end(), std::bind(&Playlist::CompareItems,
+                                                  Column_Track, order, _1, _2));
+    qStableSort(begin, new_items.end(),
+                std::bind(&Playlist::CompareItems, Column_Disc, order, _1, _2));
+    qStableSort(begin, new_items.end(), std::bind(&Playlist::CompareItems,
+                                                  Column_Album, order, _1, _2));
+  } else {
+    qStableSort(begin, new_items.end(),
+                std::bind(&Playlist::CompareItems, column, order, _1, _2));
+  }
 
   undo_stack_->push(
       new PlaylistUndoCommands::SortItems(this, column, order, new_items));
@@ -1681,6 +1701,11 @@ void Playlist::ClearStreamMetadata() {
 }
 
 bool Playlist::stop_after_current() const {
+  PlaylistSequence::RepeatMode repeat_mode = playlist_sequence_->repeat_mode();
+  if (repeat_mode == PlaylistSequence::Repeat_OneByOne) {
+    return true;
+  }
+
   return stop_after_.isValid() && current_item_index_.isValid() &&
          stop_after_.row() == current_item_index_.row();
 }
@@ -1705,14 +1730,25 @@ Song Playlist::current_item_metadata() const {
   return current_item()->Metadata();
 }
 
-void Playlist::UpdateScrobblePoint() {
+void Playlist::UpdateScrobblePoint(qint64 seek_point_nanosec) {
   const qint64 length = current_item_metadata().length_nanosec();
 
-  if (length == 0) {
-    scrobble_point_ = 240ll * kNsecPerSec;  // 4 minutes
+  if (seek_point_nanosec == 0) {
+    if (length == 0) {
+      scrobble_point_ = kMaxScrobblePointNsecs;  // 4 minutes
+    } else {
+      scrobble_point_ =
+          qBound(kMinScrobblePointNsecs, length / 2, kMaxScrobblePointNsecs);
+    }
   } else {
-    scrobble_point_ =
-        qBound(31ll * kNsecPerSec, length / 2, 240ll * kNsecPerSec);
+    if (length == 0) {
+      // current time + 4 minutes
+      scrobble_point_ = seek_point_nanosec + kMaxScrobblePointNsecs;
+    } else {
+      scrobble_point_ = qBound(seek_point_nanosec + kMinScrobblePointNsecs,
+                               seek_point_nanosec + (length / 2),
+                               seek_point_nanosec + kMaxScrobblePointNsecs);
+    }
   }
 
   set_lastfm_status(LastFM_New);

@@ -3,6 +3,7 @@
    Copyright 2009-2010, David Sansome <davidsansome@gmail.com>
    Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
    Copyright 2014, John Maguire <john.maguire@gmail.com>
+   Copyright 2015, Mark Furneaux <mark@furneaux.ca>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -25,10 +26,7 @@
 #define ANALYZERS_SONOGRAM_H_
 
 #include "analyzerbase.h"
-
-/**
-@author Melchior FRANZ
-*/
+#include "engines/enginebase.h"
 
 class Sonogram : public Analyzer::Base {
   Q_OBJECT
@@ -43,8 +41,10 @@ class Sonogram : public Analyzer::Base {
   void transform(Analyzer::Scope&);
   void demo(QPainter& p);
   void resizeEvent(QResizeEvent*);
+  void psychedelicModeChanged(bool);
 
   QPixmap canvas_;
+  int scope_size_;
 };
 
 #endif  // ANALYZERS_SONOGRAM_H_

@@ -422,24 +422,25 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
 
   // Playlist view actions
   ui_->action_next_playlist->setShortcuts(
-      QList<QKeySequence>() << QKeySequence::fromString("Ctrl+Tab")
+      QList<QKeySequence>()
+      << QKeySequence::fromString("Ctrl+Tab")
 #ifdef Q_OS_DARWIN
-                            // On OS X "Ctrl+Tab" == Cmd + Tab but this shorcut
-                            // is already used by default for switching between
-                            // applications.
-                            // I would have preferred to use Meta+Tab (which
-                            // means Ctrl+Tab on OS X), like in Firefox or
-                            // Chrome, but this doesn't work (probably at Qt bug)
-                            // and some applications (e.g. Qt creator) uses
-                            // Alt+Tab too so I believe it's a good shorcut anyway
-                            << QKeySequence::fromString("Alt+Tab")
-#endif // Q_OS_DARWIN
-                            << QKeySequence::fromString("Ctrl+PgDown"));
+      // On OS X "Ctrl+Tab" == Cmd + Tab but this shorcut
+      // is already used by default for switching between
+      // applications.
+      // I would have preferred to use Meta+Tab (which
+      // means Ctrl+Tab on OS X), like in Firefox or
+      // Chrome, but this doesn't work (probably at Qt bug)
+      // and some applications (e.g. Qt creator) uses
+      // Alt+Tab too so I believe it's a good shorcut anyway
+      << QKeySequence::fromString("Alt+Tab")
+#endif  // Q_OS_DARWIN
+      << QKeySequence::fromString("Ctrl+PgDown"));
   ui_->action_previous_playlist->setShortcuts(
       QList<QKeySequence>() << QKeySequence::fromString("Ctrl+Shift+Tab")
 #ifdef Q_OS_DARWIN
                             << QKeySequence::fromString("Alt+Shift+Tab")
-#endif // Q_OS_DARWIN
+#endif  // Q_OS_DARWIN
                             << QKeySequence::fromString("Ctrl+PgUp"));
   // Actions for switching tabs will be global to the entire window, so adding
   // them here
@@ -493,6 +494,8 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
   connect(app_->player(), SIGNAL(Seeked(qlonglong)), SLOT(Seeked(qlonglong)));
   connect(app_->player(), SIGNAL(TrackSkipped(PlaylistItemPtr)),
           SLOT(TrackSkipped(PlaylistItemPtr)));
+  connect(this, SIGNAL(IntroPointReached()), app_->player(),
+          SLOT(IntroPointReached()));
   connect(app_->player(), SIGNAL(VolumeChanged(int)), SLOT(VolumeChanged(int)));
 
   connect(app_->player(), SIGNAL(Paused()), ui_->playlist,
@@ -526,20 +529,26 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
           SLOT(PlayIndex(QModelIndex)));
 
   connect(ui_->playlist->view(), SIGNAL(doubleClicked(QModelIndex)),
-          SLOT(PlayIndex(QModelIndex)));
+          SLOT(PlaylistDoubleClick(QModelIndex)));
   connect(ui_->playlist->view(), SIGNAL(PlayItem(QModelIndex)),
           SLOT(PlayIndex(QModelIndex)));
   connect(ui_->playlist->view(), SIGNAL(PlayPause()), app_->player(),
           SLOT(PlayPause()));
   connect(ui_->playlist->view(), SIGNAL(RightClicked(QPoint, QModelIndex)),
           SLOT(PlaylistRightClick(QPoint, QModelIndex)));
-  connect(ui_->playlist->view(), SIGNAL(SeekTrack(int)), ui_->track_slider,
-          SLOT(Seek(int)));
+  connect(ui_->playlist->view(), SIGNAL(SeekForward()), app_->player(),
+          SLOT(SeekForward()));
+  connect(ui_->playlist->view(), SIGNAL(SeekBackward()), app_->player(),
+          SLOT(SeekBackward()));
   connect(ui_->playlist->view(), SIGNAL(BackgroundPropertyChanged()),
           SLOT(RefreshStyleSheet()));
 
   connect(ui_->track_slider, SIGNAL(ValueChangedSeconds(int)), app_->player(),
           SLOT(SeekTo(int)));
+  connect(ui_->track_slider, SIGNAL(SeekForward()), app_->player(),
+          SLOT(SeekForward()));
+  connect(ui_->track_slider, SIGNAL(SeekBackward()), app_->player(),
+          SLOT(SeekBackward()));
 
   // Library connections
   connect(library_view_->view(), SIGNAL(AddToPlaylistSignal(QMimeData*)),
@@ -773,6 +782,8 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
 #ifdef HAVE_LIBLASTFM
   connect(global_shortcuts_, SIGNAL(ToggleScrobbling()), app_->scrobbler(),
           SLOT(ToggleScrobbling()));
+  connect(global_shortcuts_, SIGNAL(Love()), app_->scrobbler(), SLOT(Love()));
+  connect(global_shortcuts_, SIGNAL(Ban()), app_->scrobbler(), SLOT(Ban()));
 #endif
 
   connect(global_shortcuts_, SIGNAL(RateCurrentSong(int)),
@@ -979,6 +990,12 @@ void MainWindow::ReloadSettings() {
       AddBehaviour(s.value("doubleclick_addmode", AddBehaviour_Append).toInt());
   doubleclick_playmode_ = PlayBehaviour(
       s.value("doubleclick_playmode", PlayBehaviour_IfStopped).toInt());
+  doubleclick_playlist_addmode_ =
+      PlaylistAddBehaviour(s.value("doubleclick_playlist_addmode",
+                                   PlaylistAddBehaviour_Play).toInt());
+  doubleclick_playlist_playmode_ =
+      PlaylistPlayBehaviour(s.value("doubleclick_playlist_playmode",
+                                    PlaylistPlayBehaviour_IfStopped).toInt());
   menu_playmode_ =
       PlayBehaviour(s.value("menu_playmode", PlayBehaviour_IfStopped).toInt());
 }
@@ -1190,13 +1207,15 @@ void MainWindow::LoadPlaybackStatus() {
 
 void MainWindow::ResumePlayback() {
   qLog(Debug) << "Resuming playback";
+
+  if (saved_playback_state_ == Engine::Paused) {
+    NewClosure(app_->player(), SIGNAL(Playing()), app_->player(),
+               SLOT(PlayPause()));
+  }
+
   app_->player()->Play();
 
   app_->player()->SeekTo(saved_playback_position_);
-
-  if (saved_playback_state_ == Engine::Paused) {
-    app_->player()->Pause();
-  }
 }
 
 void MainWindow::PlayIndex(const QModelIndex& index) {
@@ -1212,6 +1231,68 @@ void MainWindow::PlayIndex(const QModelIndex& index) {
 
   app_->playlist_manager()->SetActiveToCurrent();
   app_->player()->PlayAt(row, Engine::Manual, true);
+}
+
+void MainWindow::PlaylistDoubleClick(const QModelIndex& index) {
+  if (!index.isValid()) return;
+
+  int row = index.row();
+  if (index.model() == app_->playlist_manager()->current()->proxy()) {
+    // The index was in the proxy model (might've been filtered), so we need
+    // to get the actual row in the source model.
+    row =
+        app_->playlist_manager()->current()->proxy()->mapToSource(index).row();
+  }
+
+  QModelIndexList dummyIndexList;
+
+  // the following block considers each possible combination of options
+  //   for double clicking on playlist entries
+  switch (doubleclick_playlist_addmode_) {
+    case PlaylistAddBehaviour_Play:
+      switch (doubleclick_playlist_playmode_) {
+        case PlaylistPlayBehaviour_IfStopped:
+          if (app_->player()->GetState() == Engine::Playing) {
+            break;  // don't play if already playing
+          }  // otherwise, behave the same as for "Always" (no break statement)
+
+        case PlaylistPlayBehaviour_Always:
+          app_->playlist_manager()->SetActiveToCurrent();
+          app_->player()->PlayAt(row, Engine::Manual, true);
+          break;
+
+        case PlaylistPlayBehaviour_Never:
+          // deliberately do nothing here
+          break;
+      }
+      break;
+
+    case PlaylistAddBehaviour_PlayNext:
+      app_->playlist_manager()->current()->queue()->Clear();
+    // continue as if enqueueing (no break statement)
+    case PlaylistAddBehaviour_Enqueue:
+      dummyIndexList.append(index);
+      app_->playlist_manager()->current()->queue()->ToggleTracks(
+          dummyIndexList);
+      switch (doubleclick_playlist_playmode_) {
+        case PlaylistPlayBehaviour_Always:
+        case PlaylistPlayBehaviour_IfStopped:
+          if (app_->player()->GetState() != Engine::Playing) {
+            app_->player()->PlayAt(
+                app_->playlist_manager()->current()->queue()->TakeNext(),
+                Engine::Manual, true);
+          }
+          break;
+        case PlaylistPlayBehaviour_Never:
+          // deliberately do nothing here
+          break;
+      }
+      break;
+
+    case PlaylistAddBehaviour_Nothing:
+      // deliberately do nothing here
+      break;
+  }
 }
 
 void MainWindow::VolumeWheelEvent(int delta) {
@@ -1304,8 +1385,6 @@ void MainWindow::UpdateTrackPosition() {
 
   if (length <= 0) {
     // Probably a stream that we don't know the length of
-    ui_->track_slider->SetStopped();
-    tray_icon_->SetProgress(0);
     return;
   }
 #ifdef HAVE_LIBLASTFM
@@ -1332,6 +1411,14 @@ void MainWindow::UpdateTrackPosition() {
         playlist->get_lastfm_status() != Playlist::LastFM_Seeked) {
       app_->library_backend()->IncrementPlayCountAsync(item->Metadata().id());
       playlist->set_have_incremented_playcount();
+    }
+  }
+
+  // (just after) the scrobble point is a good point to change tracks in intro
+  // mode
+  if (position >= scrobble_point + 5) {
+    if (playlist->sequence()->repeat_mode() == PlaylistSequence::Repeat_Intro) {
+      emit IntroPointReached();
     }
   }
 
@@ -2713,10 +2800,10 @@ void MainWindow::keyPressEvent(QKeyEvent* event) {
     app_->player()->PlayPause();
     event->accept();
   } else if (event->key() == Qt::Key_Left) {
-    ui_->track_slider->Seek(-1);
+    app_->player()->SeekBackward();
     event->accept();
   } else if (event->key() == Qt::Key_Right) {
-    ui_->track_slider->Seek(1);
+    app_->player()->SeekForward();
     event->accept();
   } else {
     QMainWindow::keyPressEvent(event);

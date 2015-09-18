@@ -345,7 +345,8 @@ void LastFMService::NowPlaying(const Song& song) {
     return;
   }
 #else
-// TODO(John Maguire): validity was removed from liblastfm1 but might reappear, it should have
+// TODO(John Maguire): validity was removed from liblastfm1 but might reappear,
+// it should have
 // no impact as we get a different error when actually trying to scrobble.
 #endif
 
@@ -382,6 +383,8 @@ void LastFMService::Love() {
 }
 
 void LastFMService::Ban() {
+  if (!IsAuthenticated()) ShowConfig();
+
   lastfm::MutableTrack mtrack(last_track_);
   mtrack.ban();
   last_track_ = mtrack;

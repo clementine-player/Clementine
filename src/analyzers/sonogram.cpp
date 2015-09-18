@@ -2,7 +2,7 @@
    Copyright 2004, Melchior FRANZ <mfranz@kde.org>
    Copyright 2009-2010, David Sansome <davidsansome@gmail.com>
    Copyright 2010, 2014, John Maguire <john.maguire@gmail.com>
-   Copyright 2014, Mark Furneaux <mark@romaco.ca>
+   Copyright 2014-2015, Mark Furneaux <mark@furneaux.ca>
    Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
@@ -31,7 +31,8 @@ using Analyzer::Scope;
 const char* Sonogram::kName =
     QT_TRANSLATE_NOOP("AnalyzerContainer", "Sonogram");
 
-Sonogram::Sonogram(QWidget* parent) : Analyzer::Base(parent, 9) {}
+Sonogram::Sonogram(QWidget* parent)
+    : Analyzer::Base(parent, 9), scope_size_(128) {}
 
 Sonogram::~Sonogram() {}
 
@@ -45,10 +46,16 @@ void Sonogram::resizeEvent(QResizeEvent* e) {
 
   canvas_ = QPixmap(size());
   canvas_.fill(palette().color(QPalette::Background));
+  updateBandSize(scope_size_);
+}
+
+void Sonogram::psychedelicModeChanged(bool enabled) {
+  psychedelic_enabled_ = enabled;
+  updateBandSize(scope_size_);
 }
 
 void Sonogram::analyze(QPainter& p, const Scope& s, bool new_frame) {
-  if (!new_frame) {
+  if (!new_frame || engine_->state() == Engine::Paused) {
     p.drawPixmap(0, 0, canvas_);
     return;
   }
@@ -60,20 +67,45 @@ void Sonogram::analyze(QPainter& p, const Scope& s, bool new_frame) {
   canvas_painter.drawPixmap(0, 0, canvas_, 1, 0, x, -1);
 
   Scope::const_iterator it = s.begin(), end = s.end();
-  for (int y = height() - 1; y;) {
-    if (it >= end || *it < .005)
-      c = palette().color(QPalette::Background);
-    else if (*it < .05)
-      c.setHsv(95, 255, 255 - static_cast<int>(*it * 4000.0));
-    else if (*it < 1.0)
-      c.setHsv(95 - static_cast<int>(*it * 90.0), 255, 255);
-    else
-      c = Qt::red;
+  if (scope_size_ != s.size()) {
+    scope_size_ = s.size();
+    updateBandSize(scope_size_);
+  }
 
-    canvas_painter.setPen(c);
-    canvas_painter.drawPoint(x, y--);
+  if (psychedelic_enabled_) {
+    c = getPsychedelicColor(s, 20, 100);
+    for (int y = height() - 1; y;) {
+      if (it >= end || *it < .005) {
+        c = palette().color(QPalette::Background);
+      } else if (*it < .05) {
+        c.setHsv(c.hue(), c.saturation(), 255 - static_cast<int>(*it * 4000.0));
+      } else if (*it < 1.0) {
+        c.setHsv((c.hue() + static_cast<int>(*it * 90.0)) % 255, 255, 255);
+      } else {
+        c = getPsychedelicColor(s, 10, 50);
+      }
 
-    if (it < end) ++it;
+      canvas_painter.setPen(c);
+      canvas_painter.drawPoint(x, y--);
+
+      if (it < end) ++it;
+    }
+  } else {
+    for (int y = height() - 1; y;) {
+      if (it >= end || *it < .005)
+        c = palette().color(QPalette::Background);
+      else if (*it < .05)
+        c.setHsv(95, 255, 255 - static_cast<int>(*it * 4000.0));
+      else if (*it < 1.0)
+        c.setHsv(95 - static_cast<int>(*it * 90.0), 255, 255);
+      else
+        c = Qt::red;
+
+      canvas_painter.setPen(c);
+      canvas_painter.drawPoint(x, y--);
+
+      if (it < end) ++it;
+    }
   }
 
   canvas_painter.end();
@@ -83,11 +115,11 @@ void Sonogram::analyze(QPainter& p, const Scope& s, bool new_frame) {
 
 void Sonogram::transform(Scope& scope) {
   float* front = static_cast<float*>(&scope.front());
-  m_fht->power2(front);
-  m_fht->scale(front, 1.0 / 256);
-  scope.resize(m_fht->size() / 2);
+  fht_->power2(front);
+  fht_->scale(front, 1.0 / 256);
+  scope.resize(fht_->size() / 2);
 }
 
 void Sonogram::demo(QPainter& p) {
-  analyze(p, Scope(m_fht->size(), 0), new_frame_);
+  analyze(p, Scope(fht_->size(), 0), new_frame_);
 }

@@ -24,10 +24,7 @@
 
 #include <memory>
 
-#include "bufferconsumer.h"
-#include "enginebase.h"
-#include "core/boundfuturewatcher.h"
-#include "core/timeconstants.h"
+#include <gst/gst.h>
 
 #include <QFuture>
 #include <QHash>
@@ -36,7 +33,10 @@
 #include <QStringList>
 #include <QTimerEvent>
 
-#include <gst/gst.h>
+#include "bufferconsumer.h"
+#include "enginebase.h"
+#include "core/boundfuturewatcher.h"
+#include "core/timeconstants.h"
 
 class QTimer;
 class QTimerEvent;
@@ -44,6 +44,11 @@ class QTimerEvent;
 class DeviceFinder;
 class GstEnginePipeline;
 class TaskManager;
+
+#ifdef Q_OS_DARWIN
+struct _GTlsDatabase;
+typedef struct _GTlsDatabase GTlsDatabase;
+#endif
 
 /**
  * @class GstEngine
@@ -66,6 +71,7 @@ class GstEngine : public Engine::Base, public BufferConsumer {
   };
   typedef QList<OutputDetails> OutputDetailsList;
 
+  static const int kAutoSampleRate = -1;
   static const char* kSettingsGroup;
   static const char* kAutoSink;
 
@@ -114,6 +120,10 @@ class GstEngine : public Engine::Base, public BufferConsumer {
 
   void AddBufferConsumer(BufferConsumer* consumer);
   void RemoveBufferConsumer(BufferConsumer* consumer);
+
+#ifdef Q_OS_DARWIN
+  GTlsDatabase* tls_database() const { return tls_database_; }
+#endif
 
  protected:
   void SetVolumeSW(uint percent);
@@ -206,6 +216,7 @@ class GstEngine : public Engine::Base, public BufferConsumer {
   int buffer_min_fill_;
 
   bool mono_playback_;
+  int sample_rate_;
 
   mutable bool can_decode_success_;
   mutable bool can_decode_last_;
@@ -228,6 +239,10 @@ class GstEngine : public Engine::Base, public BufferConsumer {
   int scope_chunks_;
 
   QList<DeviceFinder*> device_finders_;
+
+#ifdef Q_OS_DARWIN
+  GTlsDatabase* tls_database_;
+#endif
 };
 
 Q_DECLARE_METATYPE(GstEngine::OutputDetails)

@@ -56,6 +56,7 @@ enum MsgType {
   DOWNLOAD_TOTAL_SIZE = 53;
   GLOBAL_SEARCH_RESULT = 54;
   TRANSCODING_FILES = 55;
+  GLOBAL_SEARCH_STATUS = 56;
 }
 
 // Valid Engine states
@@ -68,6 +69,24 @@ enum EngineState {
 
 // Song Metadata
 message SongMetadata {
+  enum Type {
+    UNKNOWN = 0;
+    ASF = 1;
+    FLAC = 2;
+    MP4 = 3;
+    MPC = 4;
+    MPEG = 5;
+    OGGFLAC = 6;
+    OGGSPEEX = 7;
+    OGGVORBIS = 8;
+    AIFF = 9;
+    WAV = 10;
+    TRUEAUDIO = 11;
+    CDDA = 12;
+    OGGOPUS = 13;
+    STREAM = 99;
+  }
+
   optional int32 id = 1; // unique id of the song
   optional int32 index = 2; // Index of the current row of the active playlist
   optional string title = 3;
@@ -87,6 +106,9 @@ message SongMetadata {
   optional int32 file_size = 17;
   optional float rating = 18; // 0 (0 stars) to 1 (5 stars)
   optional string url = 19;
+  optional string art_automatic = 20;
+  optional string art_manual = 21;
+  optional Type type = 22;
 }
 
 // Playlist informations
@@ -104,6 +126,8 @@ enum RepeatMode {
   Repeat_Track = 1;
   Repeat_Album = 2;
   Repeat_Playlist = 3;
+  Repeat_OneByOne = 4;
+  Repeat_Intro = 5;
 }
 
 // Valid Shuffle modes
@@ -215,6 +239,7 @@ message RequestInsertUrls {
   optional int32 position = 3 [default=-1];
   optional bool play_now = 4 [default=false];
   optional bool enqueue = 5 [default=false];
+  repeated SongMetadata songs = 6;
 }
 
 // Client want to change track
@@ -297,6 +322,7 @@ message ResponseGlobalSearch {
   optional string query = 2;
   optional string search_provider = 3;
   repeated SongMetadata song_metadata = 4;
+  optional bytes search_provider_icon = 5;
 }
 
 message ResponseTranscoderStatus {
@@ -304,9 +330,20 @@ message ResponseTranscoderStatus {
   optional int32 total = 2;
 }
 
+enum GlobalSearchStatus {
+  GlobalSearchStarted = 1;
+  GlobalSearchFinished = 2;
+}
+
+message ResponseGlobalSearchStatus {
+  optional int32 id = 1;
+  optional string query = 2;
+  optional GlobalSearchStatus status = 3;
+}
+
 // The message itself
 message Message {
-  optional int32 version = 1 [default=19];
+  optional int32 version = 1 [default=21];
   optional MsgType type = 2 [default=UNKNOWN]; // What data is in the message?
 
   optional RequestConnect request_connect = 21;
@@ -341,4 +378,5 @@ message Message {
   optional ResponseDownloadTotalSize response_download_total_size = 36;
   optional ResponseGlobalSearch response_global_search = 38;
   optional ResponseTranscoderStatus response_transcoder_status = 39;
+  optional ResponseGlobalSearchStatus response_global_search_status = 40;
 }

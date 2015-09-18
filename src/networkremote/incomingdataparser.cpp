@@ -20,6 +20,7 @@
 #include <algorithm>
 
 #include "core/logging.h"
+#include "core/timeconstants.h"
 #include "engines/enginebase.h"
 #include "internet/core/internetmodel.h"
 #include "playlist/playlistmanager.h"
@@ -60,6 +61,9 @@ IncomingDataParser::IncomingDataParser(Application* app) : app_(app) {
   connect(this, SIGNAL(InsertUrls(int, const QList<QUrl>&, int, bool, bool)),
           app_->playlist_manager(),
           SLOT(InsertUrls(int, const QList<QUrl>&, int, bool, bool)));
+  connect(this, SIGNAL(InsertSongs(int, const SongList&, int, bool, bool)),
+          app_->playlist_manager(),
+          SLOT(InsertSongs(int, const SongList&, int, bool, bool)));
   connect(this, SIGNAL(RemoveSongs(int, const QList<int>&)),
           app_->playlist_manager(),
           SLOT(RemoveItemsWithoutUndo(int, const QList<int>&)));
@@ -235,16 +239,28 @@ void IncomingDataParser::SetShuffleMode(const pb::remote::Shuffle& shuffle) {
 void IncomingDataParser::InsertUrls(const pb::remote::Message& msg) {
   const pb::remote::RequestInsertUrls& request = msg.request_insert_urls();
 
-  // Extract urls
-  QList<QUrl> urls;
-  for (auto it = request.urls().begin(); it != request.urls().end(); ++it) {
-    std::string s = *it;
-    urls << QUrl(QStringFromStdString(s));
+  // Insert plain urls without metadata
+  if (request.urls().size() > 0) {
+    QList<QUrl> urls;
+    for (auto it = request.urls().begin(); it != request.urls().end(); ++it) {
+      std::string s = *it;
+      urls << QUrl(QStringFromStdString(s));
+    }
+
+    // Insert the urls
+    emit InsertUrls(request.playlist_id(), urls, request.position(),
+                    request.play_now(), request.enqueue());
   }
 
-  // Insert the urls
-  emit InsertUrls(request.playlist_id(), urls, request.position(),
-                  request.play_now(), request.enqueue());
+  // Add songs with metadata if present
+  if (request.songs().size() > 0) {
+    SongList songs;
+    for (int i = 0; i < request.songs().size(); i++) {
+      songs << CreateSongFromProtobuf(request.songs(i));
+    }
+    emit InsertSongs(request.playlist_id(), songs, request.position(),
+                     request.play_now(), request.enqueue());
+  }
 }
 
 void IncomingDataParser::RemoveSongs(const pb::remote::Message& msg) {
@@ -300,4 +316,27 @@ void IncomingDataParser::RateSong(const pb::remote::Message& msg) {
 void IncomingDataParser::GlobalSearch(RemoteClient *client, const pb::remote::Message &msg) {
   emit DoGlobalSearch(QStringFromStdString(msg.request_global_search().query()),
                       client);
+}
+
+Song IncomingDataParser::CreateSongFromProtobuf(const pb::remote::SongMetadata& pb){
+  Song song;
+  song.Init(QStringFromStdString(pb.title()),
+            QStringFromStdString(pb.artist()),
+            QStringFromStdString(pb.album()),
+            pb.length() * kNsecPerSec);
+
+  song.set_albumartist(QStringFromStdString(pb.albumartist()));
+  song.set_genre(QStringFromStdString(pb.genre()));
+  song.set_year(QStringFromStdString(pb.pretty_year()).toInt());
+  song.set_track(pb.track());
+  song.set_disc(pb.disc());
+  song.set_url(QUrl(QStringFromStdString(pb.url())));
+  song.set_filesize(pb.file_size());
+  song.set_rating(pb.rating());
+  song.set_basefilename(QStringFromStdString(pb.filename()));
+  song.set_art_automatic(QStringFromStdString(pb.art_automatic()));
+  song.set_art_manual(QStringFromStdString(pb.art_manual()));
+  song.set_filetype(static_cast<Song::FileType>(pb.type()));
+
+  return song;
 }

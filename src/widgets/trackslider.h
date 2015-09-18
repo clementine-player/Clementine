@@ -55,6 +55,9 @@ signals:
   void ValueChanged(int value);
   void ValueChangedSeconds(int value);
 
+  void SeekForward();
+  void SeekBackward();
+
  private slots:
   void ValueMaybeChanged(int value);
   void ToggleTimeDisplay();

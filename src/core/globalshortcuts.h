@@ -60,7 +60,7 @@ class GlobalShortcuts : public QWidget {
   void Unregister();
   void Register();
 
- signals:
+signals:
   void Play();
   void Pause();
   void PlayPause();
@@ -80,6 +80,8 @@ class GlobalShortcuts : public QWidget {
   void CycleShuffleMode();
   void CycleRepeatMode();
   void ToggleScrobbling();
+  void Love();
+  void Ban();
 
  private:
   void AddShortcut(const QString& id, const QString& name, const char* signal,

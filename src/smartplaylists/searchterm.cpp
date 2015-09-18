@@ -160,6 +160,7 @@ SearchTerm::Type SearchTerm::TypeOf(Field field) {
     case Field_Track:
     case Field_Disc:
     case Field_Year:
+    case Field_OriginalYear:
     case Field_BPM:
     case Field_Bitrate:
     case Field_Samplerate:
@@ -253,6 +254,8 @@ QString SearchTerm::FieldColumnName(Field field) {
       return "disc";
     case Field_Year:
       return "year";
+    case Field_OriginalYear:
+      return "originalyear";
     case Field_BPM:
       return "bpm";
     case Field_Bitrate:
@@ -311,6 +314,8 @@ QString SearchTerm::FieldName(Field field) {
       return Playlist::column_name(Playlist::Column_Disc);
     case Field_Year:
       return Playlist::column_name(Playlist::Column_Year);
+    case Field_OriginalYear:
+      return Playlist::column_name(Playlist::Column_OriginalYear);
     case Field_BPM:
       return Playlist::column_name(Playlist::Column_BPM);
     case Field_Bitrate:

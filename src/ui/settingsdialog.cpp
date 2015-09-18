@@ -36,7 +36,6 @@
 #include "engines/gstengine.h"
 #include "globalsearch/globalsearchsettingspage.h"
 #include "internet/digitally/digitallyimportedsettingspage.h"
-#include "internet/grooveshark/groovesharksettingspage.h"
 #include "internet/core/internetshowsettingspage.h"
 #include "internet/magnatune/magnatunesettingspage.h"
 #include "internet/soundcloud/soundcloudsettingspage.h"
@@ -167,8 +166,6 @@ SettingsDialog::SettingsDialog(Application* app, BackgroundStreams* streams,
 #ifdef HAVE_LIBLASTFM
   AddPage(Page_Lastfm, new LastFMSettingsPage(this), providers);
 #endif
-
-  AddPage(Page_Grooveshark, new GroovesharkSettingsPage(this), providers);
 
 #ifdef HAVE_GOOGLE_DRIVE
   AddPage(Page_GoogleDrive, new GoogleDriveSettingsPage(this), providers);
