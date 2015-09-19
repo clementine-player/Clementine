@@ -198,29 +198,11 @@ Amarok::VolumeSlider::VolumeSlider(QWidget* parent, uint max)
       m_pixmapInset(QPixmap(volumePixmapDraw ())) {
   setFocusPolicy(Qt::NoFocus);
 
-  // Store window text color to check theme change at paintEvent
+  // Store theme colors to check theme change at paintEvent
   m_previous_theme_text_color = palette().color(QPalette::WindowText);
+  m_previous_theme_highlight_color = palette().color(QPalette::Highlight);
 
-  // BEGIN Calculate handle animation pixmaps for mouse-over effect
-  QImage pixmapHandle(":volumeslider-handle.png");
-  QImage pixmapHandleGlow(VolumeSliderHandleGlow());
-
-  float opacity = 0.0;
-  const float step = 1.0 / ANIM_MAX;
-  QImage dst;
-  for (int i = 0; i < ANIM_MAX; ++i) {
-    dst = pixmapHandle.copy();
-
-    QPainter p(&dst);
-    p.setOpacity(opacity);
-    p.drawImage(0, 0, pixmapHandleGlow);
-    p.end();
-
-    m_handlePixmaps.append(QPixmap::fromImage(dst));
-    opacity += step;
-  }
-  // END
-
+  VolumeSliderHandle();
   generateGradient();
 
   setMinimumWidth(m_pixmapInset.width());
@@ -310,6 +292,11 @@ void Amarok::VolumeSlider::paintEvent(QPaintEvent*) {
     m_previous_theme_text_color = palette().color(QPalette::WindowText);
   }
 
+  if (m_previous_theme_highlight_color != palette().color(QPalette::Highlight)) {
+    VolumeSliderHandle();
+    m_previous_theme_highlight_color = palette().color(QPalette::Highlight);
+  }
+
   p.drawPixmap(0, 0, m_pixmapGradient, 0, 0, offset + padding, 0);
   p.drawPixmap(0, 0, m_pixmapInset);
   p.drawPixmap(offset - m_handlePixmaps[0].width() / 2 + padding, 0,
@@ -367,22 +354,40 @@ QPixmap Amarok::VolumeSlider::volumePixmapDraw () const {
   return pixmap;
 }
 
-QImage Amarok::VolumeSlider::VolumeSliderHandleGlow() const {
-  QImage mask(":/volumeslider-handle_glow.png");
+void Amarok::VolumeSlider::VolumeSliderHandle() {
+  QImage pixmapHandle(":volumeslider-handle.png");
+  QImage pixmapHandleGlow(":/volumeslider-handle_glow.png");
 
-  QImage glow_image(mask.size(), QImage::Format_ARGB32_Premultiplied);
-  QPainter painter(&glow_image);
-  painter.fillRect(glow_image.rect(), QBrush(palette().color(QPalette::Highlight)));
+  QImage pixmapHandleGlow_image(pixmapHandleGlow.size(), QImage::Format_ARGB32_Premultiplied);
+  QPainter painter(&pixmapHandleGlow_image);
   
   painter.setRenderHint(QPainter::Antialiasing);
   painter.setRenderHint(QPainter::SmoothPixmapTransform);
 
-  painter.setCompositionMode(QPainter::CompositionMode_DestinationIn);
   // repaint volume slider handle glow image with theme highlight color
-  painter.drawImage(0, 0, mask);
-  painter.setCompositionMode(QPainter::CompositionMode_SourceAtop);
+  painter.fillRect(pixmapHandleGlow_image.rect(), QBrush(palette().color(QPalette::Highlight)));
+  painter.setCompositionMode(QPainter::CompositionMode_DestinationIn);
+  painter.drawImage(0, 0, pixmapHandleGlow);
+  
   // Overlay the volume slider handle image 
-  painter.drawImage(0, 0, QImage(":/volumeslider-handle.png"));
-  // Return QImage
-  return glow_image;
+  painter.setCompositionMode(QPainter::CompositionMode_SourceAtop);
+  painter.drawImage(0, 0, pixmapHandle);
+
+  // BEGIN Calculate handle animation pixmaps for mouse-over effect
+  float opacity = 0.0;
+  const float step = 1.0 / ANIM_MAX;
+  QImage dst;
+  m_handlePixmaps.clear();
+  for (int i = 0; i < ANIM_MAX; ++i) {
+    dst = pixmapHandle.copy();
+
+    QPainter p(&dst);
+    p.setOpacity(opacity);
+    p.drawImage(0, 0, pixmapHandleGlow_image);
+    p.end();
+
+    m_handlePixmaps.append(QPixmap::fromImage(dst));
+    opacity += step;
+  }
+  // END
 }
