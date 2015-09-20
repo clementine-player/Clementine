@@ -59,14 +59,6 @@ public:
         }
     }
 
-    void escapePressed()
-    {
-        if (qSearchField) {
-            QKeyEvent* event = new QKeyEvent(QEvent::KeyPress, Qt::Key_Escape, Qt::NoModifier);
-            QApplication::postEvent(qSearchField, event);
-        }
-    }
-
     QPointer<QSearchField> qSearchField;
     NSSearchField *nsSearchField;
 };
@@ -95,8 +87,6 @@ public:
 
     if ([[[notification userInfo] objectForKey:@"NSTextMovement"] intValue] == NSReturnTextMovement)
         pimpl->returnPressed();
-    else if ([[[notification userInfo] objectForKey:@"NSTextMovement"] intValue] == NSOtherTextMovement)
-        pimpl->escapePressed();
 }
 
 @end
