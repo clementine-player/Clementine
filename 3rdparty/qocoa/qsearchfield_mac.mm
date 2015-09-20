@@ -166,8 +166,10 @@ void QSearchField::setText(const QString &text)
 
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
     [pimpl->nsSearchField setStringValue:fromQString(text)];
-    [pimpl->nsSearchField selectText:pimpl->nsSearchField];
-    [[pimpl->nsSearchField currentEditor] setSelectedRange:NSMakeRange([[pimpl->nsSearchField stringValue] length], 0)];
+    if (!text.isEmpty()) {
+        [pimpl->nsSearchField selectText:pimpl->nsSearchField];
+        [[pimpl->nsSearchField currentEditor] setSelectedRange:NSMakeRange([[pimpl->nsSearchField stringValue] length], 0)];
+    }
     [pool drain];
 }
 
