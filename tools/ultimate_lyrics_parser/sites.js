@@ -395,6 +395,18 @@ const siteDescriptors = {
 		extract: '<response>',
 		invalidIndicator: "ERROR",
 	},
+	"musixmatch.com": {
+		url: "https://www.musixmatch.com/lyrics/{Artist}/{Title}",
+		urlFormat: [
+			{punct: " _@;\\/\"\'\(\)\[\]", rep: "-" },
+			{punct: "\?", rep: "" },
+		],
+		title: "{artist} - {title} lyrics | Musixmatch",
+		charset: "utf-8",
+		extract: [['<span id="lyrics-html"','</span>']],
+		exclude: [[' data-reactid="','">']],
+		invalidIndicator: "We couldn't find that page."
+	}
 }
 
 //	--------------------------------------------------------------------------------------------------------------------------------
