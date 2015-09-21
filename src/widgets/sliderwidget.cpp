@@ -195,7 +195,7 @@ Amarok::VolumeSlider::VolumeSlider(QWidget* parent, uint max)
     : Amarok::Slider(Qt::Horizontal, parent, max),
       m_animCount(0),
       m_animTimer(new QTimer(this)),
-      m_pixmapInset(QPixmap(volumePixmapDraw ())) {
+      m_pixmapInset(QPixmap(drawVolumePixmap ())) {
   setFocusPolicy(Qt::NoFocus);
 
   // Store theme colors to check theme change at paintEvent
@@ -288,7 +288,7 @@ void Amarok::VolumeSlider::paintEvent(QPaintEvent*) {
 
   // If theme changed since last paintEvent, redraw the volume pixmap with new theme colors 
   if (m_previous_theme_text_color != palette().color(QPalette::WindowText)) {
-    m_pixmapInset = volumePixmapDraw();
+    m_pixmapInset = drawVolumePixmap();
     m_previous_theme_text_color = palette().color(QPalette::WindowText);
   }
 
@@ -332,7 +332,7 @@ void Amarok::VolumeSlider::paletteChange(const QPalette&) {
   generateGradient();
 }
 
-QPixmap Amarok::VolumeSlider::volumePixmapDraw () const {
+QPixmap Amarok::VolumeSlider::drawVolumePixmap () const {
   QPixmap pixmap(112, 36);
   pixmap.fill(Qt::transparent);
   QPainter painter(&pixmap);

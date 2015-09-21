@@ -114,7 +114,7 @@ class VolumeSlider : public Slider {
 
  private:
   void generateGradient();
-  QPixmap volumePixmapDraw() const;
+  QPixmap drawVolumePixmap() const;
   void drawVolumeSliderHandle();
 
   VolumeSlider(const VolumeSlider&);             // undefined
