@@ -814,7 +814,7 @@ msgid "Append files/URLs to the playlist"
 msgstr "پیوست پرونده/نشانی اینترنتی به لیست‌پخش"
 
 #: devices/deviceview.cpp:216 globalsearch/globalsearchview.cpp:453
-#: internet/core/internetservice.cpp:80 library/libraryview.cpp:391
+#: internet/core/internetservice.cpp:80 library/libraryview.cpp:370
 #: widgets/fileviewlist.cpp:31
 msgid "Append to current playlist"
 msgstr "پیوست به لیست‌پخش جاری"
@@ -1269,7 +1269,7 @@ msgstr "کلمنتاین نتوانست دستاوردهای این پرونده
 msgid "Clementine will find music in:"
 msgstr "پوشه‌ای که کلمنتاین در آن به دنبال آهنگ می‌گردد:"
 
-#: library/libraryview.cpp:372
+#: library/libraryview.cpp:351
 msgid "Click here to add some music"
 msgstr "برای افزودن آهنگ‌ها، اینجا را بفشارید"
 
@@ -1361,7 +1361,7 @@ msgstr "پیکربندی مگناتیون..."
 msgid "Configure Shortcuts"
 msgstr "پیکربندی میان‌برها"
 
-#: internet/spotify/spotifyservice.cpp:911
+#: internet/spotify/spotifyservice.cpp:913
 msgid "Configure Spotify..."
 msgstr "پیکربندی اسپاتیفای..."
 
@@ -1452,7 +1452,7 @@ msgstr ""
 msgid "Copy to clipboard"
 msgstr "کپی به کلیپ‌بورد"
 
-#: library/libraryview.cpp:421 internet/podcasts/podcastservice.cpp:437
+#: library/libraryview.cpp:400 internet/podcasts/podcastservice.cpp:437
 #: ui/mainwindow.cpp:641 widgets/fileviewlist.cpp:43
 msgid "Copy to device..."
 msgstr "کپی‌کردن در دستگاه..."
@@ -1701,7 +1701,7 @@ msgstr "پاک‌کردن"
 msgid "Delete downloaded data"
 msgstr "پاک‌کردن دانستنی‌های بارگیری شده"
 
-#: devices/deviceview.cpp:404 library/libraryview.cpp:657
+#: devices/deviceview.cpp:404 library/libraryview.cpp:636
 #: ui/mainwindow.cpp:2294 widgets/fileview.cpp:186
 msgid "Delete files"
 msgstr "پاک کردن پرونده‌ها"
@@ -1710,7 +1710,7 @@ msgstr "پاک کردن پرونده‌ها"
 msgid "Delete from device..."
 msgstr "پاک کردن از دستگاه..."
 
-#: library/libraryview.cpp:423 ui/mainwindow.cpp:643
+#: library/libraryview.cpp:402 ui/mainwindow.cpp:643
 #: widgets/fileviewlist.cpp:44
 msgid "Delete from disk..."
 msgstr "پاک کردن از دیسک..."
@@ -1723,7 +1723,7 @@ msgstr "پاک‌کردن داستانهای پخش‌شده"
 msgid "Delete preset"
 msgstr "پاک کردن پیش‌نشانده"
 
-#: library/libraryview.cpp:412
+#: library/libraryview.cpp:391
 msgid "Delete smart playlist"
 msgstr "پاک کردن لیست‌پخش هوشمند"
 
@@ -1876,7 +1876,7 @@ msgstr ""
 msgid "Don't repeat"
 msgstr "تکرار نکن"
 
-#: library/libraryview.cpp:441
+#: library/libraryview.cpp:420
 msgid "Don't show in various artists"
 msgstr "در هنرمندان گوناگون نشان نده"
 
@@ -2010,7 +2010,7 @@ msgstr "سبک دینامیک پویاست"
 msgid "Dynamic random mix"
 msgstr "درهم‌ریختن تصادفی دینامیک"
 
-#: library/libraryview.cpp:409
+#: library/libraryview.cpp:388
 msgid "Edit smart playlist..."
 msgstr "ویرایش لیست‌پخش هوشمند..."
 
@@ -2031,12 +2031,12 @@ msgstr "ویرایش برچسب‌ها"
 msgid "Edit track information"
 msgstr "ویرایش دانستنی‌های ترک"
 
-#: library/libraryview.cpp:428 widgets/fileviewlist.cpp:49
+#: library/libraryview.cpp:407 widgets/fileviewlist.cpp:49
 #: ../bin/src/ui_mainwindow.h:658
 msgid "Edit track information..."
 msgstr "ویرایش دانستنی‌های ترک..."
 
-#: library/libraryview.cpp:431
+#: library/libraryview.cpp:410
 msgid "Edit tracks information..."
 msgstr "ویرایش دانستنی‌های ترک‌ها..."
 
@@ -2153,7 +2153,7 @@ msgid "Equivalent to --log-levels *:3"
 msgstr "برابر است با --log-levels *:3"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:242
-#: library/libraryview.cpp:651 ui/mainwindow.cpp:1997 ui/mainwindow.cpp:2244
+#: library/libraryview.cpp:630 ui/mainwindow.cpp:1997 ui/mainwindow.cpp:2244
 #: ui/mainwindow.cpp:2392 internet/vk/vkservice.cpp:634
 msgid "Error"
 msgstr "خطا"
@@ -2542,7 +2542,7 @@ msgid "Genre"
 msgstr "ژانر"
 
 #: internet/spotify/spotifyservice.cpp:633
-#: internet/spotify/spotifyservice.cpp:674
+#: internet/spotify/spotifyservice.cpp:676
 msgid "Get a URL to share this Spotify song"
 msgstr ""
 
@@ -3413,7 +3413,7 @@ msgstr "پوشه‌ی تازه"
 msgid "New playlist"
 msgstr "لیست‌پخش تازه"
 
-#: library/libraryview.cpp:406
+#: library/libraryview.cpp:385
 msgid "New smart playlist..."
 msgstr "لیست‌پخش هوشمند تازه..."
 
@@ -3472,7 +3472,7 @@ msgstr "بدون بلوک‌های کوتاه"
 msgid "None"
 msgstr "هیچ‌کدام"
 
-#: library/libraryview.cpp:652 ui/mainwindow.cpp:2245 ui/mainwindow.cpp:2393
+#: library/libraryview.cpp:631 ui/mainwindow.cpp:2245 ui/mainwindow.cpp:2393
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "هیچ‌کدام از آهنگ‌های برگزیده مناسب کپی کردن در دستگاه نیستند"
 
@@ -3634,7 +3634,7 @@ msgid "Open in Google Drive"
 msgstr "گشوده در درایو گوگل"
 
 #: devices/deviceview.cpp:221 globalsearch/globalsearchview.cpp:461
-#: internet/core/internetservice.cpp:102 library/libraryview.cpp:396
+#: internet/core/internetservice.cpp:102 library/libraryview.cpp:375
 #: widgets/fileviewlist.cpp:35
 msgid "Open in new playlist"
 msgstr "گشودن در لیست‌پخش تازه شود"
@@ -3679,7 +3679,7 @@ msgstr "Opus"
 msgid "Organise Files"
 msgstr "سازماندهی پرونده‌ها"
 
-#: library/libraryview.cpp:417 ui/mainwindow.cpp:637
+#: library/libraryview.cpp:396 ui/mainwindow.cpp:637
 msgid "Organise files..."
 msgstr "سازماندهی پرونده‌ها..."
 
@@ -4002,7 +4002,7 @@ msgstr "مدیر به‌خط کردن"
 msgid "Queue selected tracks"
 msgstr "به‌خط کردن ترک‌های گزیده"
 
-#: globalsearch/globalsearchview.cpp:466 library/libraryview.cpp:401
+#: globalsearch/globalsearchview.cpp:466 library/libraryview.cpp:380
 #: ui/mainwindow.cpp:1675
 msgid "Queue track"
 msgstr "به‌خط کردن ترک"
@@ -4125,7 +4125,7 @@ msgstr "پاک‌کردن از آهنگ‌های من"
 msgid "Remove from bookmarks"
 msgstr ""
 
-#: internet/spotify/spotifyservice.cpp:672 ../bin/src/ui_mainwindow.h:684
+#: internet/spotify/spotifyservice.cpp:674 ../bin/src/ui_mainwindow.h:684
 msgid "Remove from playlist"
 msgstr "از لیست‌پخش پاک کن"
 
@@ -4170,7 +4170,7 @@ msgid "Repeat track"
 msgstr "تکرار ترک"
 
 #: devices/deviceview.cpp:219 globalsearch/globalsearchview.cpp:457
-#: internet/core/internetservice.cpp:91 library/libraryview.cpp:393
+#: internet/core/internetservice.cpp:91 library/libraryview.cpp:372
 #: widgets/fileviewlist.cpp:34
 msgid "Replace current playlist"
 msgstr "دوباره جانشانی لیست‌پخش جاری"
@@ -4602,7 +4602,7 @@ msgstr "نمایش اندازه‌ی کامل..."
 msgid "Show groups in global search result"
 msgstr ""
 
-#: library/libraryview.cpp:434 ui/mainwindow.cpp:646
+#: library/libraryview.cpp:413 ui/mainwindow.cpp:646
 #: widgets/fileviewlist.cpp:51
 msgid "Show in file browser..."
 msgstr "نمایش در مرورگر پرونده..."
@@ -4611,7 +4611,7 @@ msgstr "نمایش در مرورگر پرونده..."
 msgid "Show in library..."
 msgstr ""
 
-#: library/libraryview.cpp:438
+#: library/libraryview.cpp:417
 msgid "Show in various artists"
 msgstr "نمایش در هنرمندان گوناگون"
 
@@ -4808,7 +4808,7 @@ msgstr "اسپاتیفای"
 msgid "Spotify login error"
 msgstr "خطای ورود به سیستم اسپاتیفای"
 
-#: internet/spotify/spotifyservice.cpp:835
+#: internet/spotify/spotifyservice.cpp:837
 msgid "Spotify playlist's URL"
 msgstr ""
 
@@ -4820,7 +4820,7 @@ msgstr "افزونه‌ی اسپاتیفای"
 msgid "Spotify plugin not installed"
 msgstr "افزونه‌ی اسپاتیفای نصب نیست"
 
-#: internet/spotify/spotifyservice.cpp:826
+#: internet/spotify/spotifyservice.cpp:828
 msgid "Spotify song's URL"
 msgstr ""
 
@@ -4957,15 +4957,15 @@ msgstr "فرمت‌های قابل پشتیبانی"
 msgid "Synchronize statistics to files now"
 msgstr ""
 
-#: internet/spotify/spotifyservice.cpp:699
+#: internet/spotify/spotifyservice.cpp:701
 msgid "Syncing Spotify inbox"
 msgstr "همگام‌سازی صندوق ورودی اسپاتیفای"
 
-#: internet/spotify/spotifyservice.cpp:693
+#: internet/spotify/spotifyservice.cpp:695
 msgid "Syncing Spotify playlist"
 msgstr "همگام‌سازی لیست‌پخش اسپاتیفای"
 
-#: internet/spotify/spotifyservice.cpp:704
+#: internet/spotify/spotifyservice.cpp:706
 msgid "Syncing Spotify starred tracks"
 msgstr "همگام‌سازی ترک‌های ستاره‌دار اسپاتیفای"
 
@@ -5035,7 +5035,7 @@ msgid ""
 "rescan because of the new features listed below:"
 msgstr "ویرایشی زا کلمنتاین که هم‌اکنون به‌روز کردید، به خاطر ویژگیهای زیر، نیاز به بررسی کامل کتابخانه دارد:"
 
-#: library/libraryview.cpp:574
+#: library/libraryview.cpp:553
 msgid "There are other songs in this album"
 msgstr "آهنگ‌های دیگری در این آلبوم وجود دارند"
 
@@ -5071,7 +5071,7 @@ msgid ""
 "continue?"
 msgstr "این پرونده‌ها از دستگاه پاک خواهند شد، آیا مطمئنید که می‌خواهید ادامه دهید؟"
 
-#: library/libraryview.cpp:658 ui/mainwindow.cpp:2295 widgets/fileview.cpp:187
+#: library/libraryview.cpp:637 ui/mainwindow.cpp:2295 widgets/fileview.cpp:187
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -5604,7 +5604,7 @@ msgstr "فرمت آوایی مدیای ویندوز"
 msgid "Without cover:"
 msgstr ""
 
-#: library/libraryview.cpp:575
+#: library/libraryview.cpp:554
 msgid ""
 "Would you like to move the other songs in this album to Various Artists as "
 "well?"
@@ -5754,7 +5754,7 @@ msgstr "اعتبار لست‌‌اف‌ام شما نادرست بود"
 msgid "Your Magnatune credentials were incorrect"
 msgstr "اعتبار مگناتیون شما نادرست بود"
 
-#: library/libraryview.cpp:366
+#: library/libraryview.cpp:345
 msgid "Your library is empty!"
 msgstr "کتابخانه‌ی شما تهی است!"
 

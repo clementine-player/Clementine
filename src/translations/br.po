@@ -816,7 +816,7 @@ msgid "Append files/URLs to the playlist"
 msgstr "Ouzhpennañ restroù pe liammoù internet d'ar roll seniñ"
 
 #: devices/deviceview.cpp:216 globalsearch/globalsearchview.cpp:453
-#: internet/core/internetservice.cpp:80 library/libraryview.cpp:391
+#: internet/core/internetservice.cpp:80 library/libraryview.cpp:370
 #: widgets/fileviewlist.cpp:31
 msgid "Append to current playlist"
 msgstr "Ouzhpennañ d'ar roll seniñ lennet"
@@ -1271,7 +1271,7 @@ msgstr "N'eo ket bet gouest Clementine da gavout disoc'hoù evit ar restr-mañ"
 msgid "Clementine will find music in:"
 msgstr "Clementine a gavo ar sonerezh e :"
 
-#: library/libraryview.cpp:372
+#: library/libraryview.cpp:351
 msgid "Click here to add some music"
 msgstr "Klikit aze evit krouiñ ho levraoueg sonerezh"
 
@@ -1363,7 +1363,7 @@ msgstr "KefluniañMagnatune..."
 msgid "Configure Shortcuts"
 msgstr "Kefluniañ ar Berradennoù"
 
-#: internet/spotify/spotifyservice.cpp:911
+#: internet/spotify/spotifyservice.cpp:913
 msgid "Configure Spotify..."
 msgstr "Kefluniañ Spotify"
 
@@ -1454,7 +1454,7 @@ msgstr "Kopiañ an url kenrannañ er golver"
 msgid "Copy to clipboard"
 msgstr "Kopiañ d'ar golver"
 
-#: library/libraryview.cpp:421 internet/podcasts/podcastservice.cpp:437
+#: library/libraryview.cpp:400 internet/podcasts/podcastservice.cpp:437
 #: ui/mainwindow.cpp:641 widgets/fileviewlist.cpp:43
 msgid "Copy to device..."
 msgstr "Kopiañ war an drobarzhell"
@@ -1703,7 +1703,7 @@ msgstr "Diverkañ"
 msgid "Delete downloaded data"
 msgstr "Diverkañ ar roadennoù pellgarget"
 
-#: devices/deviceview.cpp:404 library/libraryview.cpp:657
+#: devices/deviceview.cpp:404 library/libraryview.cpp:636
 #: ui/mainwindow.cpp:2294 widgets/fileview.cpp:186
 msgid "Delete files"
 msgstr "Diverkañ restroù"
@@ -1712,7 +1712,7 @@ msgstr "Diverkañ restroù"
 msgid "Delete from device..."
 msgstr "Diverkañ eus an drobarzhell"
 
-#: library/libraryview.cpp:423 ui/mainwindow.cpp:643
+#: library/libraryview.cpp:402 ui/mainwindow.cpp:643
 #: widgets/fileviewlist.cpp:44
 msgid "Delete from disk..."
 msgstr "Diverkañ eus ar bladenn"
@@ -1725,7 +1725,7 @@ msgstr "Diverkañ ar pennadoù lennet"
 msgid "Delete preset"
 msgstr "Diverkañ ar ragarventennoù"
 
-#: library/libraryview.cpp:412
+#: library/libraryview.cpp:391
 msgid "Delete smart playlist"
 msgstr "Diverkañ ar roll seniñ speredek"
 
@@ -1878,7 +1878,7 @@ msgstr "Ober un adc'hwilervadur a-bezh a diverko an holl meta-roadennoù bet enr
 msgid "Don't repeat"
 msgstr "Chom hep adlenn"
 
-#: library/libraryview.cpp:441
+#: library/libraryview.cpp:420
 msgid "Don't show in various artists"
 msgstr "Chom hep diskouez el lodenn \"arzourien liesseurt\""
 
@@ -2012,7 +2012,7 @@ msgstr "Ar stumm dinamikel a zo aktivet"
 msgid "Dynamic random mix"
 msgstr "Meskaj dargouezhek dialuskel"
 
-#: library/libraryview.cpp:409
+#: library/libraryview.cpp:388
 msgid "Edit smart playlist..."
 msgstr "Kemmañ ar roll seniñ speredek..."
 
@@ -2033,12 +2033,12 @@ msgstr "Cheñch ar c'hlavioù"
 msgid "Edit track information"
 msgstr "Cheñch deskrivadur ar roud"
 
-#: library/libraryview.cpp:428 widgets/fileviewlist.cpp:49
+#: library/libraryview.cpp:407 widgets/fileviewlist.cpp:49
 #: ../bin/src/ui_mainwindow.h:658
 msgid "Edit track information..."
 msgstr "Cheñch deskrivadur ar roud..."
 
-#: library/libraryview.cpp:431
+#: library/libraryview.cpp:410
 msgid "Edit tracks information..."
 msgstr "Cheñch deskrivadur ar roudoù..."
 
@@ -2155,7 +2155,7 @@ msgid "Equivalent to --log-levels *:3"
 msgstr "Kenkoulz a --log-levels *:3"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:242
-#: library/libraryview.cpp:651 ui/mainwindow.cpp:1997 ui/mainwindow.cpp:2244
+#: library/libraryview.cpp:630 ui/mainwindow.cpp:1997 ui/mainwindow.cpp:2244
 #: ui/mainwindow.cpp:2392 internet/vk/vkservice.cpp:634
 msgid "Error"
 msgstr "Fazi"
@@ -2544,7 +2544,7 @@ msgid "Genre"
 msgstr "Doare"
 
 #: internet/spotify/spotifyservice.cpp:633
-#: internet/spotify/spotifyservice.cpp:674
+#: internet/spotify/spotifyservice.cpp:676
 msgid "Get a URL to share this Spotify song"
 msgstr "Kaout un URL evit rannañ an ton spotify mañ"
 
@@ -3415,7 +3415,7 @@ msgstr "Teuliad nevez"
 msgid "New playlist"
 msgstr "Roll seniñ nevez"
 
-#: library/libraryview.cpp:406
+#: library/libraryview.cpp:385
 msgid "New smart playlist..."
 msgstr "Roll seniñ speredek nevez..."
 
@@ -3474,7 +3474,7 @@ msgstr "Bloc'h berr ebet"
 msgid "None"
 msgstr "Hini ebet"
 
-#: library/libraryview.cpp:652 ui/mainwindow.cpp:2245 ui/mainwindow.cpp:2393
+#: library/libraryview.cpp:631 ui/mainwindow.cpp:2245 ui/mainwindow.cpp:2393
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Ton ebet eus ar reoù diuzet a oa mat evit bezañ kopiet war an drobarzhell"
 
@@ -3636,7 +3636,7 @@ msgid "Open in Google Drive"
 msgstr "Digeriñ e-barzh Google Drive"
 
 #: devices/deviceview.cpp:221 globalsearch/globalsearchview.cpp:461
-#: internet/core/internetservice.cpp:102 library/libraryview.cpp:396
+#: internet/core/internetservice.cpp:102 library/libraryview.cpp:375
 #: widgets/fileviewlist.cpp:35
 msgid "Open in new playlist"
 msgstr "Digerin en ur roll seniñ nevez"
@@ -3681,7 +3681,7 @@ msgstr "Opus"
 msgid "Organise Files"
 msgstr "Aozañ ar restroù"
 
-#: library/libraryview.cpp:417 ui/mainwindow.cpp:637
+#: library/libraryview.cpp:396 ui/mainwindow.cpp:637
 msgid "Organise files..."
 msgstr "Aozañ ar restroù..."
 
@@ -4004,7 +4004,7 @@ msgstr "Merour listenn c'hortoz"
 msgid "Queue selected tracks"
 msgstr "Lakaat ar roudoù da heul"
 
-#: globalsearch/globalsearchview.cpp:466 library/libraryview.cpp:401
+#: globalsearch/globalsearchview.cpp:466 library/libraryview.cpp:380
 #: ui/mainwindow.cpp:1675
 msgid "Queue track"
 msgstr "Lakaat ar roud da heul"
@@ -4127,7 +4127,7 @@ msgstr "Tennañ eus va sonerezh"
 msgid "Remove from bookmarks"
 msgstr "Tennañ eus va merkoù-pajenn"
 
-#: internet/spotify/spotifyservice.cpp:672 ../bin/src/ui_mainwindow.h:684
+#: internet/spotify/spotifyservice.cpp:674 ../bin/src/ui_mainwindow.h:684
 msgid "Remove from playlist"
 msgstr "Tennañ kuit eus ar roll seniñ"
 
@@ -4172,7 +4172,7 @@ msgid "Repeat track"
 msgstr "Adlenn an ton"
 
 #: devices/deviceview.cpp:219 globalsearch/globalsearchview.cpp:457
-#: internet/core/internetservice.cpp:91 library/libraryview.cpp:393
+#: internet/core/internetservice.cpp:91 library/libraryview.cpp:372
 #: widgets/fileviewlist.cpp:34
 msgid "Replace current playlist"
 msgstr "Eillec'hiañ ar roll seniñ lennet"
@@ -4604,7 +4604,7 @@ msgstr "Diskouez er ment gwirion..."
 msgid "Show groups in global search result"
 msgstr "Diskouez ar strolladoù e disoc'hoù an enklask hollek"
 
-#: library/libraryview.cpp:434 ui/mainwindow.cpp:646
+#: library/libraryview.cpp:413 ui/mainwindow.cpp:646
 #: widgets/fileviewlist.cpp:51
 msgid "Show in file browser..."
 msgstr "Diskouez er merdeer retroù"
@@ -4613,7 +4613,7 @@ msgstr "Diskouez er merdeer retroù"
 msgid "Show in library..."
 msgstr "Diskouez er sonaoueg"
 
-#: library/libraryview.cpp:438
+#: library/libraryview.cpp:417
 msgid "Show in various artists"
 msgstr "Diskouez e \"Arzourien Liesseurt\""
 
@@ -4810,7 +4810,7 @@ msgstr "Spotify"
 msgid "Spotify login error"
 msgstr "Kudenn kennaskañ gant Spotify"
 
-#: internet/spotify/spotifyservice.cpp:835
+#: internet/spotify/spotifyservice.cpp:837
 msgid "Spotify playlist's URL"
 msgstr "URL roll-seniñ Spotify"
 
@@ -4822,7 +4822,7 @@ msgstr "Enlugellad Spotify"
 msgid "Spotify plugin not installed"
 msgstr "Enlugellad Spotify n'eo ket staliet"
 
-#: internet/spotify/spotifyservice.cpp:826
+#: internet/spotify/spotifyservice.cpp:828
 msgid "Spotify song's URL"
 msgstr "URL ton Spotify"
 
@@ -4959,15 +4959,15 @@ msgstr "Mentrezhoù restr kemeret e kont"
 msgid "Synchronize statistics to files now"
 msgstr "Gourbediñ bremañ ar stadegoù er restroù"
 
-#: internet/spotify/spotifyservice.cpp:699
+#: internet/spotify/spotifyservice.cpp:701
 msgid "Syncing Spotify inbox"
 msgstr "Sinkronizadur ar boest degemer Spotify"
 
-#: internet/spotify/spotifyservice.cpp:693
+#: internet/spotify/spotifyservice.cpp:695
 msgid "Syncing Spotify playlist"
 msgstr "Sinkronizadur ar roll seniñ Spotify"
 
-#: internet/spotify/spotifyservice.cpp:704
+#: internet/spotify/spotifyservice.cpp:706
 msgid "Syncing Spotify starred tracks"
 msgstr "Sinkronizadur tonioù gwellañ Spotify"
 
@@ -5037,7 +5037,7 @@ msgid ""
 "rescan because of the new features listed below:"
 msgstr "Handelv nevez Clementine a c'houlenn ma vefe hizivaet ho sonaoueg evit kemer e kont an arc'hweladurioù a-zeu :"
 
-#: library/libraryview.cpp:574
+#: library/libraryview.cpp:553
 msgid "There are other songs in this album"
 msgstr "Tonioù all a zo en album-mañ"
 
@@ -5073,7 +5073,7 @@ msgid ""
 "continue?"
 msgstr "Ar restroù-mañ a vo diverket eus an drobarzhell, sur oc'h da gaout c'hoant kenderc'hel ?"
 
-#: library/libraryview.cpp:658 ui/mainwindow.cpp:2295 widgets/fileview.cpp:187
+#: library/libraryview.cpp:637 ui/mainwindow.cpp:2295 widgets/fileview.cpp:187
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -5606,7 +5606,7 @@ msgstr "ausio Windows Media"
 msgid "Without cover:"
 msgstr "Hep golo:"
 
-#: library/libraryview.cpp:575
+#: library/libraryview.cpp:554
 msgid ""
 "Would you like to move the other songs in this album to Various Artists as "
 "well?"
@@ -5756,7 +5756,7 @@ msgstr "Hoc'h aotreoù arveriad evit Last.fm a zo direizh."
 msgid "Your Magnatune credentials were incorrect"
 msgstr "Hoc'h aotreoù arveriad evit Magnatune a zo direizh."
 
-#: library/libraryview.cpp:366
+#: library/libraryview.cpp:345
 msgid "Your library is empty!"
 msgstr "Ho sonaoueg a zo goullo !"
 

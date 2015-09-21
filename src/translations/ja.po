@@ -817,7 +817,7 @@ msgid "Append files/URLs to the playlist"
 msgstr "ファイル・URL をプレイリストに追加する"
 
 #: devices/deviceview.cpp:216 globalsearch/globalsearchview.cpp:453
-#: internet/core/internetservice.cpp:80 library/libraryview.cpp:391
+#: internet/core/internetservice.cpp:80 library/libraryview.cpp:370
 #: widgets/fileviewlist.cpp:31
 msgid "Append to current playlist"
 msgstr "現在のプレイリストに追加する"
@@ -1272,7 +1272,7 @@ msgstr "このファイルの検索結果を見つけられませんでした。
 msgid "Clementine will find music in:"
 msgstr "Clementine は次にあるミュージックを検索します:"
 
-#: library/libraryview.cpp:372
+#: library/libraryview.cpp:351
 msgid "Click here to add some music"
 msgstr "ミュージックを追加するにはここをクリックします"
 
@@ -1364,7 +1364,7 @@ msgstr "Magnatune の設定..."
 msgid "Configure Shortcuts"
 msgstr "ショートカットの設定"
 
-#: internet/spotify/spotifyservice.cpp:911
+#: internet/spotify/spotifyservice.cpp:913
 msgid "Configure Spotify..."
 msgstr "Spotify の設定..."
 
@@ -1455,7 +1455,7 @@ msgstr "URL をクリップボードにコピーする"
 msgid "Copy to clipboard"
 msgstr "クリップボードにコピー"
 
-#: library/libraryview.cpp:421 internet/podcasts/podcastservice.cpp:437
+#: library/libraryview.cpp:400 internet/podcasts/podcastservice.cpp:437
 #: ui/mainwindow.cpp:641 widgets/fileviewlist.cpp:43
 msgid "Copy to device..."
 msgstr "デバイスへコピー..."
@@ -1704,7 +1704,7 @@ msgstr "削除"
 msgid "Delete downloaded data"
 msgstr "ダウンロード済みデータを削除"
 
-#: devices/deviceview.cpp:404 library/libraryview.cpp:657
+#: devices/deviceview.cpp:404 library/libraryview.cpp:636
 #: ui/mainwindow.cpp:2294 widgets/fileview.cpp:186
 msgid "Delete files"
 msgstr "ファイルの削除"
@@ -1713,7 +1713,7 @@ msgstr "ファイルの削除"
 msgid "Delete from device..."
 msgstr "デバイスから削除..."
 
-#: library/libraryview.cpp:423 ui/mainwindow.cpp:643
+#: library/libraryview.cpp:402 ui/mainwindow.cpp:643
 #: widgets/fileviewlist.cpp:44
 msgid "Delete from disk..."
 msgstr "ディスクから削除..."
@@ -1726,7 +1726,7 @@ msgstr "再生したエピソードの削除"
 msgid "Delete preset"
 msgstr "プリセットの削除"
 
-#: library/libraryview.cpp:412
+#: library/libraryview.cpp:391
 msgid "Delete smart playlist"
 msgstr "スマートプレイリストを削除"
 
@@ -1879,7 +1879,7 @@ msgstr "完全再スキャンを行なうと、Clementine 中に保存されて�
 msgid "Don't repeat"
 msgstr "リピートしない"
 
-#: library/libraryview.cpp:441
+#: library/libraryview.cpp:420
 msgid "Don't show in various artists"
 msgstr "さまざまなアーティストに表示しない"
 
@@ -2013,7 +2013,7 @@ msgstr "ダイナミックモードはオンです"
 msgid "Dynamic random mix"
 msgstr "ダイナミックランダムミックス"
 
-#: library/libraryview.cpp:409
+#: library/libraryview.cpp:388
 msgid "Edit smart playlist..."
 msgstr "スマートプレイリストの編集..."
 
@@ -2034,12 +2034,12 @@ msgstr "タグの編集"
 msgid "Edit track information"
 msgstr "トラック情報の編集"
 
-#: library/libraryview.cpp:428 widgets/fileviewlist.cpp:49
+#: library/libraryview.cpp:407 widgets/fileviewlist.cpp:49
 #: ../bin/src/ui_mainwindow.h:658
 msgid "Edit track information..."
 msgstr "トラック情報の編集..."
 
-#: library/libraryview.cpp:431
+#: library/libraryview.cpp:410
 msgid "Edit tracks information..."
 msgstr "トラック情報の編集..."
 
@@ -2156,7 +2156,7 @@ msgid "Equivalent to --log-levels *:3"
 msgstr "--log-levels *:3 と同じ"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:242
-#: library/libraryview.cpp:651 ui/mainwindow.cpp:1997 ui/mainwindow.cpp:2244
+#: library/libraryview.cpp:630 ui/mainwindow.cpp:1997 ui/mainwindow.cpp:2244
 #: ui/mainwindow.cpp:2392 internet/vk/vkservice.cpp:634
 msgid "Error"
 msgstr "エラー"
@@ -2545,7 +2545,7 @@ msgid "Genre"
 msgstr "ジャンル"
 
 #: internet/spotify/spotifyservice.cpp:633
-#: internet/spotify/spotifyservice.cpp:674
+#: internet/spotify/spotifyservice.cpp:676
 msgid "Get a URL to share this Spotify song"
 msgstr ""
 
@@ -3416,7 +3416,7 @@ msgstr "新しいフォルダー"
 msgid "New playlist"
 msgstr "新しいプレイリスト"
 
-#: library/libraryview.cpp:406
+#: library/libraryview.cpp:385
 msgid "New smart playlist..."
 msgstr "新しいスマートプレイリスト..."
 
@@ -3475,7 +3475,7 @@ msgstr "短いブロックなし"
 msgid "None"
 msgstr "なし"
 
-#: library/libraryview.cpp:652 ui/mainwindow.cpp:2245 ui/mainwindow.cpp:2393
+#: library/libraryview.cpp:631 ui/mainwindow.cpp:2245 ui/mainwindow.cpp:2393
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "デバイスへのコピーに適切な曲が選択されていません"
 
@@ -3637,7 +3637,7 @@ msgid "Open in Google Drive"
 msgstr "Google Drive で開く"
 
 #: devices/deviceview.cpp:221 globalsearch/globalsearchview.cpp:461
-#: internet/core/internetservice.cpp:102 library/libraryview.cpp:396
+#: internet/core/internetservice.cpp:102 library/libraryview.cpp:375
 #: widgets/fileviewlist.cpp:35
 msgid "Open in new playlist"
 msgstr "新しいプレイリストで開く"
@@ -3682,7 +3682,7 @@ msgstr "Opus"
 msgid "Organise Files"
 msgstr "ファイルの整理"
 
-#: library/libraryview.cpp:417 ui/mainwindow.cpp:637
+#: library/libraryview.cpp:396 ui/mainwindow.cpp:637
 msgid "Organise files..."
 msgstr "ファイルの整理..."
 
@@ -4005,7 +4005,7 @@ msgstr "キューマネージャー"
 msgid "Queue selected tracks"
 msgstr "選択されたトラックをキューに追加"
 
-#: globalsearch/globalsearchview.cpp:466 library/libraryview.cpp:401
+#: globalsearch/globalsearchview.cpp:466 library/libraryview.cpp:380
 #: ui/mainwindow.cpp:1675
 msgid "Queue track"
 msgstr "トラックをキューに追加"
@@ -4128,7 +4128,7 @@ msgstr "マイミュージックから削除する"
 msgid "Remove from bookmarks"
 msgstr "ブックマークから削除する"
 
-#: internet/spotify/spotifyservice.cpp:672 ../bin/src/ui_mainwindow.h:684
+#: internet/spotify/spotifyservice.cpp:674 ../bin/src/ui_mainwindow.h:684
 msgid "Remove from playlist"
 msgstr "プレイリストから削除"
 
@@ -4173,7 +4173,7 @@ msgid "Repeat track"
 msgstr "トラックをリピート"
 
 #: devices/deviceview.cpp:219 globalsearch/globalsearchview.cpp:457
-#: internet/core/internetservice.cpp:91 library/libraryview.cpp:393
+#: internet/core/internetservice.cpp:91 library/libraryview.cpp:372
 #: widgets/fileviewlist.cpp:34
 msgid "Replace current playlist"
 msgstr "現在のプレイリストを置き換える"
@@ -4605,7 +4605,7 @@ msgstr "原寸表示..."
 msgid "Show groups in global search result"
 msgstr "検索結果にグループを表示する"
 
-#: library/libraryview.cpp:434 ui/mainwindow.cpp:646
+#: library/libraryview.cpp:413 ui/mainwindow.cpp:646
 #: widgets/fileviewlist.cpp:51
 msgid "Show in file browser..."
 msgstr "ファイルブラウザーで表示..."
@@ -4614,7 +4614,7 @@ msgstr "ファイルブラウザーで表示..."
 msgid "Show in library..."
 msgstr "ライブラリーに表示..."
 
-#: library/libraryview.cpp:438
+#: library/libraryview.cpp:417
 msgid "Show in various artists"
 msgstr "さまざまなアーティストに表示"
 
@@ -4811,7 +4811,7 @@ msgstr "Spotify"
 msgid "Spotify login error"
 msgstr "Spotify ログインエラー"
 
-#: internet/spotify/spotifyservice.cpp:835
+#: internet/spotify/spotifyservice.cpp:837
 msgid "Spotify playlist's URL"
 msgstr ""
 
@@ -4823,7 +4823,7 @@ msgstr "Spotify プラグイン"
 msgid "Spotify plugin not installed"
 msgstr "Spotify プラグインはインストールされていません"
 
-#: internet/spotify/spotifyservice.cpp:826
+#: internet/spotify/spotifyservice.cpp:828
 msgid "Spotify song's URL"
 msgstr ""
 
@@ -4960,15 +4960,15 @@ msgstr "サポートされている形式"
 msgid "Synchronize statistics to files now"
 msgstr "統計情報をいますぐ同期する"
 
-#: internet/spotify/spotifyservice.cpp:699
+#: internet/spotify/spotifyservice.cpp:701
 msgid "Syncing Spotify inbox"
 msgstr "Spotify の受信箱を同期中"
 
-#: internet/spotify/spotifyservice.cpp:693
+#: internet/spotify/spotifyservice.cpp:695
 msgid "Syncing Spotify playlist"
 msgstr "Spotify のプレイリストを同期中"
 
-#: internet/spotify/spotifyservice.cpp:704
+#: internet/spotify/spotifyservice.cpp:706
 msgid "Syncing Spotify starred tracks"
 msgstr "Spotify の星付きトラックを同期中"
 
@@ -5038,7 +5038,7 @@ msgid ""
 "rescan because of the new features listed below:"
 msgstr "更新したこのバージョンの Clementine は、次の新機能によりライブラリ全体の再スキャンが必要です。"
 
-#: library/libraryview.cpp:574
+#: library/libraryview.cpp:553
 msgid "There are other songs in this album"
 msgstr "このアルバムにはほかの曲があります"
 
@@ -5074,7 +5074,7 @@ msgid ""
 "continue?"
 msgstr "これらのファイルはデバイスから削除されます。続行してもよろしいですか?"
 
-#: library/libraryview.cpp:658 ui/mainwindow.cpp:2295 widgets/fileview.cpp:187
+#: library/libraryview.cpp:637 ui/mainwindow.cpp:2295 widgets/fileview.cpp:187
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -5607,7 +5607,7 @@ msgstr "Windows Media オーディオ"
 msgid "Without cover:"
 msgstr "カバーなし:"
 
-#: library/libraryview.cpp:575
+#: library/libraryview.cpp:554
 msgid ""
 "Would you like to move the other songs in this album to Various Artists as "
 "well?"
@@ -5757,7 +5757,7 @@ msgstr "Last.fm の認証情報が間違っています"
 msgid "Your Magnatune credentials were incorrect"
 msgstr "Magnatune の認証情報が間違っています"
 
-#: library/libraryview.cpp:366
+#: library/libraryview.cpp:345
 msgid "Your library is empty!"
 msgstr "ライブラリは空です!"
 

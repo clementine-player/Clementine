@@ -821,7 +821,7 @@ msgid "Append files/URLs to the playlist"
 msgstr "재생목록에 파일/URL 추가"
 
 #: devices/deviceview.cpp:216 globalsearch/globalsearchview.cpp:453
-#: internet/core/internetservice.cpp:80 library/libraryview.cpp:391
+#: internet/core/internetservice.cpp:80 library/libraryview.cpp:370
 #: widgets/fileviewlist.cpp:31
 msgid "Append to current playlist"
 msgstr "현재 재생목록에 추가"
@@ -1276,7 +1276,7 @@ msgstr "Clementine은 이 파일의 결과를 검색할 수 없습니다"
 msgid "Clementine will find music in:"
 msgstr "Clementine이 음악을 찾을 수 있습니다."
 
-#: library/libraryview.cpp:372
+#: library/libraryview.cpp:351
 msgid "Click here to add some music"
 msgstr "음악을 추가하려면 여기를 클릭하세요"
 
@@ -1368,7 +1368,7 @@ msgstr "Magnatune 설정..."
 msgid "Configure Shortcuts"
 msgstr "단축키 설정"
 
-#: internet/spotify/spotifyservice.cpp:911
+#: internet/spotify/spotifyservice.cpp:913
 msgid "Configure Spotify..."
 msgstr "Spotify 설정..."
 
@@ -1459,7 +1459,7 @@ msgstr "공유 URL 복사"
 msgid "Copy to clipboard"
 msgstr "클립보드로 복사"
 
-#: library/libraryview.cpp:421 internet/podcasts/podcastservice.cpp:437
+#: library/libraryview.cpp:400 internet/podcasts/podcastservice.cpp:437
 #: ui/mainwindow.cpp:641 widgets/fileviewlist.cpp:43
 msgid "Copy to device..."
 msgstr "장치에 복사..."
@@ -1708,7 +1708,7 @@ msgstr "삭제"
 msgid "Delete downloaded data"
 msgstr "다운로드된 데이터 삭제"
 
-#: devices/deviceview.cpp:404 library/libraryview.cpp:657
+#: devices/deviceview.cpp:404 library/libraryview.cpp:636
 #: ui/mainwindow.cpp:2294 widgets/fileview.cpp:186
 msgid "Delete files"
 msgstr "파일 삭제"
@@ -1717,7 +1717,7 @@ msgstr "파일 삭제"
 msgid "Delete from device..."
 msgstr "장치에서 삭제..."
 
-#: library/libraryview.cpp:423 ui/mainwindow.cpp:643
+#: library/libraryview.cpp:402 ui/mainwindow.cpp:643
 #: widgets/fileviewlist.cpp:44
 msgid "Delete from disk..."
 msgstr "디스크에서 삭제..."
@@ -1730,7 +1730,7 @@ msgstr "재생된 에피소드 삭제"
 msgid "Delete preset"
 msgstr "프리셋 삭제"
 
-#: library/libraryview.cpp:412
+#: library/libraryview.cpp:391
 msgid "Delete smart playlist"
 msgstr "스마트 재생목록 지우기"
 
@@ -1883,7 +1883,7 @@ msgstr "전체 재탐색은 앨범아트, 재생회수, 별점 등 모든 정보
 msgid "Don't repeat"
 msgstr "반복하지 않기"
 
-#: library/libraryview.cpp:441
+#: library/libraryview.cpp:420
 msgid "Don't show in various artists"
 msgstr "다양한 음악가에 표시하지 않기"
 
@@ -2017,7 +2017,7 @@ msgstr "다이나믹 모드가 켜졌습니다"
 msgid "Dynamic random mix"
 msgstr "다이나믹 랜덤 믹스"
 
-#: library/libraryview.cpp:409
+#: library/libraryview.cpp:388
 msgid "Edit smart playlist..."
 msgstr "스마트 재생목록 편집..."
 
@@ -2038,12 +2038,12 @@ msgstr "태그 편집"
 msgid "Edit track information"
 msgstr "트랙 정보 편집"
 
-#: library/libraryview.cpp:428 widgets/fileviewlist.cpp:49
+#: library/libraryview.cpp:407 widgets/fileviewlist.cpp:49
 #: ../bin/src/ui_mainwindow.h:658
 msgid "Edit track information..."
 msgstr "트랙 정보 편집..."
 
-#: library/libraryview.cpp:431
+#: library/libraryview.cpp:410
 msgid "Edit tracks information..."
 msgstr "트랙 정보 편집..."
 
@@ -2160,7 +2160,7 @@ msgid "Equivalent to --log-levels *:3"
 msgstr "동등한 --log-level *:3"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:242
-#: library/libraryview.cpp:651 ui/mainwindow.cpp:1997 ui/mainwindow.cpp:2244
+#: library/libraryview.cpp:630 ui/mainwindow.cpp:1997 ui/mainwindow.cpp:2244
 #: ui/mainwindow.cpp:2392 internet/vk/vkservice.cpp:634
 msgid "Error"
 msgstr "오류"
@@ -2549,7 +2549,7 @@ msgid "Genre"
 msgstr "장르"
 
 #: internet/spotify/spotifyservice.cpp:633
-#: internet/spotify/spotifyservice.cpp:674
+#: internet/spotify/spotifyservice.cpp:676
 msgid "Get a URL to share this Spotify song"
 msgstr "이 Spotify 음악을 공유하기 위한 URL 얻기"
 
@@ -3420,7 +3420,7 @@ msgstr "새 폴더"
 msgid "New playlist"
 msgstr "새로운 재생목록"
 
-#: library/libraryview.cpp:406
+#: library/libraryview.cpp:385
 msgid "New smart playlist..."
 msgstr "새 스마트 재생목록"
 
@@ -3479,7 +3479,7 @@ msgstr "짧은 블록 "
 msgid "None"
 msgstr "없음"
 
-#: library/libraryview.cpp:652 ui/mainwindow.cpp:2245 ui/mainwindow.cpp:2393
+#: library/libraryview.cpp:631 ui/mainwindow.cpp:2245 ui/mainwindow.cpp:2393
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "선택된 음악들이 장치에 복사되기 적합하지 않음"
 
@@ -3641,7 +3641,7 @@ msgid "Open in Google Drive"
 msgstr "Google Drive에서 열기"
 
 #: devices/deviceview.cpp:221 globalsearch/globalsearchview.cpp:461
-#: internet/core/internetservice.cpp:102 library/libraryview.cpp:396
+#: internet/core/internetservice.cpp:102 library/libraryview.cpp:375
 #: widgets/fileviewlist.cpp:35
 msgid "Open in new playlist"
 msgstr "새로운 재생목록에서 열기"
@@ -3686,7 +3686,7 @@ msgstr "Opus"
 msgid "Organise Files"
 msgstr "파일 정리"
 
-#: library/libraryview.cpp:417 ui/mainwindow.cpp:637
+#: library/libraryview.cpp:396 ui/mainwindow.cpp:637
 msgid "Organise files..."
 msgstr "파일 정리..."
 
@@ -4009,7 +4009,7 @@ msgstr "대기열 관리자"
 msgid "Queue selected tracks"
 msgstr "선택한 트랙을 큐에 추가"
 
-#: globalsearch/globalsearchview.cpp:466 library/libraryview.cpp:401
+#: globalsearch/globalsearchview.cpp:466 library/libraryview.cpp:380
 #: ui/mainwindow.cpp:1675
 msgid "Queue track"
 msgstr "대기열 트랙"
@@ -4132,7 +4132,7 @@ msgstr "내 음악에서 제거"
 msgid "Remove from bookmarks"
 msgstr "북마크에서 제거"
 
-#: internet/spotify/spotifyservice.cpp:672 ../bin/src/ui_mainwindow.h:684
+#: internet/spotify/spotifyservice.cpp:674 ../bin/src/ui_mainwindow.h:684
 msgid "Remove from playlist"
 msgstr "재생목록에서 제거"
 
@@ -4177,7 +4177,7 @@ msgid "Repeat track"
 msgstr "한 곡 반복"
 
 #: devices/deviceview.cpp:219 globalsearch/globalsearchview.cpp:457
-#: internet/core/internetservice.cpp:91 library/libraryview.cpp:393
+#: internet/core/internetservice.cpp:91 library/libraryview.cpp:372
 #: widgets/fileviewlist.cpp:34
 msgid "Replace current playlist"
 msgstr "현재 재생목록 교체"
@@ -4609,7 +4609,7 @@ msgstr "전체화면 보기..."
 msgid "Show groups in global search result"
 msgstr "글로벌 검색 결과에서 그룹 보기"
 
-#: library/libraryview.cpp:434 ui/mainwindow.cpp:646
+#: library/libraryview.cpp:413 ui/mainwindow.cpp:646
 #: widgets/fileviewlist.cpp:51
 msgid "Show in file browser..."
 msgstr "파일 브라우져에서 보기..."
@@ -4618,7 +4618,7 @@ msgstr "파일 브라우져에서 보기..."
 msgid "Show in library..."
 msgstr "라이브러리에서 보기..."
 
-#: library/libraryview.cpp:438
+#: library/libraryview.cpp:417
 msgid "Show in various artists"
 msgstr "다양한 음악가에서 보기"
 
@@ -4815,7 +4815,7 @@ msgstr "Spotify"
 msgid "Spotify login error"
 msgstr "Spotify 로그인 에러"
 
-#: internet/spotify/spotifyservice.cpp:835
+#: internet/spotify/spotifyservice.cpp:837
 msgid "Spotify playlist's URL"
 msgstr "Spotify 재생목록 URL"
 
@@ -4827,7 +4827,7 @@ msgstr "Spotify 플러그인"
 msgid "Spotify plugin not installed"
 msgstr "Spotify 플러그인이 설치되지 않았습니다."
 
-#: internet/spotify/spotifyservice.cpp:826
+#: internet/spotify/spotifyservice.cpp:828
 msgid "Spotify song's URL"
 msgstr "Spotify 음악 URL"
 
@@ -4964,15 +4964,15 @@ msgstr "지원가능한 형식"
 msgid "Synchronize statistics to files now"
 msgstr "지금 파일들의 통계들을 동기화"
 
-#: internet/spotify/spotifyservice.cpp:699
+#: internet/spotify/spotifyservice.cpp:701
 msgid "Syncing Spotify inbox"
 msgstr "Spotify inbox와 동기화 중"
 
-#: internet/spotify/spotifyservice.cpp:693
+#: internet/spotify/spotifyservice.cpp:695
 msgid "Syncing Spotify playlist"
 msgstr "Spotify 재생목록 동기화중"
 
-#: internet/spotify/spotifyservice.cpp:704
+#: internet/spotify/spotifyservice.cpp:706
 msgid "Syncing Spotify starred tracks"
 msgstr "Sportify 별점 트랙 동기화 중"
 
@@ -5042,7 +5042,7 @@ msgid ""
 "rescan because of the new features listed below:"
 msgstr "아래의 새 기능이 추가되었기 때문에, 전체 라이브러리 재탐색이 필요합니다."
 
-#: library/libraryview.cpp:574
+#: library/libraryview.cpp:553
 msgid "There are other songs in this album"
 msgstr "이 앨범과 다른 음악"
 
@@ -5078,7 +5078,7 @@ msgid ""
 "continue?"
 msgstr "파일들이 장치로 부터 삭제 될 것 입니다. 계속 진행 하시겠습니까?"
 
-#: library/libraryview.cpp:658 ui/mainwindow.cpp:2295 widgets/fileview.cpp:187
+#: library/libraryview.cpp:637 ui/mainwindow.cpp:2295 widgets/fileview.cpp:187
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -5611,7 +5611,7 @@ msgstr "윈도우 미디어 오디오"
 msgid "Without cover:"
 msgstr "커버 제외:"
 
-#: library/libraryview.cpp:575
+#: library/libraryview.cpp:554
 msgid ""
 "Would you like to move the other songs in this album to Various Artists as "
 "well?"
@@ -5761,7 +5761,7 @@ msgstr "당신의 Last.fm 계정정보가 부정확 합니다."
 msgid "Your Magnatune credentials were incorrect"
 msgstr "Magnatune의 계정정보가 잘 못 되었습니다."
 
-#: library/libraryview.cpp:366
+#: library/libraryview.cpp:345
 msgid "Your library is empty!"
 msgstr "라이브러리가 비었습니다!"
 

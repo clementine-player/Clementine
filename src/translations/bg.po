@@ -818,7 +818,7 @@ msgid "Append files/URLs to the playlist"
 msgstr "Добавяне на файлове/URL адреси към списъка с песни"
 
 #: devices/deviceview.cpp:216 globalsearch/globalsearchview.cpp:453
-#: internet/core/internetservice.cpp:80 library/libraryview.cpp:391
+#: internet/core/internetservice.cpp:80 library/libraryview.cpp:370
 #: widgets/fileviewlist.cpp:31
 msgid "Append to current playlist"
 msgstr "Добавяне към текущия списък с песни"
@@ -1273,7 +1273,7 @@ msgstr "Clementine не намери резултати за този файл"
 msgid "Clementine will find music in:"
 msgstr "Clementine ще намери музика в:"
 
-#: library/libraryview.cpp:372
+#: library/libraryview.cpp:351
 msgid "Click here to add some music"
 msgstr "Цъкнете тук за да добавите музика"
 
@@ -1365,7 +1365,7 @@ msgstr "Настройване на Magnatune..."
 msgid "Configure Shortcuts"
 msgstr "Настройване на бързите клавиши"
 
-#: internet/spotify/spotifyservice.cpp:911
+#: internet/spotify/spotifyservice.cpp:913
 msgid "Configure Spotify..."
 msgstr "Настройване на Spotify..."
 
@@ -1456,7 +1456,7 @@ msgstr "Копиране на url адреса за споделяне в буф
 msgid "Copy to clipboard"
 msgstr "Копиране в буфера"
 
-#: library/libraryview.cpp:421 internet/podcasts/podcastservice.cpp:437
+#: library/libraryview.cpp:400 internet/podcasts/podcastservice.cpp:437
 #: ui/mainwindow.cpp:641 widgets/fileviewlist.cpp:43
 msgid "Copy to device..."
 msgstr "Копирай в устройство..."
@@ -1705,7 +1705,7 @@ msgstr "Изтрий"
 msgid "Delete downloaded data"
 msgstr "Изтрий свалените данни"
 
-#: devices/deviceview.cpp:404 library/libraryview.cpp:657
+#: devices/deviceview.cpp:404 library/libraryview.cpp:636
 #: ui/mainwindow.cpp:2294 widgets/fileview.cpp:186
 msgid "Delete files"
 msgstr "Изтриване на файлове"
@@ -1714,7 +1714,7 @@ msgstr "Изтриване на файлове"
 msgid "Delete from device..."
 msgstr "Изтриване от устройство"
 
-#: library/libraryview.cpp:423 ui/mainwindow.cpp:643
+#: library/libraryview.cpp:402 ui/mainwindow.cpp:643
 #: widgets/fileviewlist.cpp:44
 msgid "Delete from disk..."
 msgstr "Изтриване от диска..."
@@ -1727,7 +1727,7 @@ msgstr "Изтрий показаните епизоди"
 msgid "Delete preset"
 msgstr "Изтриване на фиксираната настройка"
 
-#: library/libraryview.cpp:412
+#: library/libraryview.cpp:391
 msgid "Delete smart playlist"
 msgstr "Изтриване на умен списък с песни"
 
@@ -1880,7 +1880,7 @@ msgstr "Пълното повторно сканиране ще загуби в�
 msgid "Don't repeat"
 msgstr "Без повторение"
 
-#: library/libraryview.cpp:441
+#: library/libraryview.cpp:420
 msgid "Don't show in various artists"
 msgstr "Да не се показва в различни изпълнители"
 
@@ -2014,7 +2014,7 @@ msgstr "Динамичния режим е включен"
 msgid "Dynamic random mix"
 msgstr "Динамичен случаен микс"
 
-#: library/libraryview.cpp:409
+#: library/libraryview.cpp:388
 msgid "Edit smart playlist..."
 msgstr "Редактиране умен списък с песни..."
 
@@ -2035,12 +2035,12 @@ msgstr "Редактиране на етикети"
 msgid "Edit track information"
 msgstr "Редактиране на информацията за песента"
 
-#: library/libraryview.cpp:428 widgets/fileviewlist.cpp:49
+#: library/libraryview.cpp:407 widgets/fileviewlist.cpp:49
 #: ../bin/src/ui_mainwindow.h:658
 msgid "Edit track information..."
 msgstr "Редактиране на информацията за песента..."
 
-#: library/libraryview.cpp:431
+#: library/libraryview.cpp:410
 msgid "Edit tracks information..."
 msgstr "Редактиране на информация за песните..."
 
@@ -2157,7 +2157,7 @@ msgid "Equivalent to --log-levels *:3"
 msgstr "Еквивалентно на --log-levels *:3"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:242
-#: library/libraryview.cpp:651 ui/mainwindow.cpp:1997 ui/mainwindow.cpp:2244
+#: library/libraryview.cpp:630 ui/mainwindow.cpp:1997 ui/mainwindow.cpp:2244
 #: ui/mainwindow.cpp:2392 internet/vk/vkservice.cpp:634
 msgid "Error"
 msgstr "Грешка"
@@ -2546,7 +2546,7 @@ msgid "Genre"
 msgstr "Жанр"
 
 #: internet/spotify/spotifyservice.cpp:633
-#: internet/spotify/spotifyservice.cpp:674
+#: internet/spotify/spotifyservice.cpp:676
 msgid "Get a URL to share this Spotify song"
 msgstr "Вземете линк за споделяне на тази песен в Spotify"
 
@@ -3417,7 +3417,7 @@ msgstr "Нова папка"
 msgid "New playlist"
 msgstr "Нов списък с песни"
 
-#: library/libraryview.cpp:406
+#: library/libraryview.cpp:385
 msgid "New smart playlist..."
 msgstr "Нов умен списък с песни..."
 
@@ -3476,7 +3476,7 @@ msgstr "No short blocks"
 msgid "None"
 msgstr "Никаква"
 
-#: library/libraryview.cpp:652 ui/mainwindow.cpp:2245 ui/mainwindow.cpp:2393
+#: library/libraryview.cpp:631 ui/mainwindow.cpp:2245 ui/mainwindow.cpp:2393
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Никоя от избраните песни бяха сподобни да бъдат копирани на устройството"
 
@@ -3638,7 +3638,7 @@ msgid "Open in Google Drive"
 msgstr "Отвори в Google Drive"
 
 #: devices/deviceview.cpp:221 globalsearch/globalsearchview.cpp:461
-#: internet/core/internetservice.cpp:102 library/libraryview.cpp:396
+#: internet/core/internetservice.cpp:102 library/libraryview.cpp:375
 #: widgets/fileviewlist.cpp:35
 msgid "Open in new playlist"
 msgstr "Отворяне в нов списък с песни"
@@ -3683,7 +3683,7 @@ msgstr "Opus"
 msgid "Organise Files"
 msgstr "Организиране на Файлове"
 
-#: library/libraryview.cpp:417 ui/mainwindow.cpp:637
+#: library/libraryview.cpp:396 ui/mainwindow.cpp:637
 msgid "Organise files..."
 msgstr "Организиране на файлове..."
 
@@ -4006,7 +4006,7 @@ msgstr "Мениджър на опашката"
 msgid "Queue selected tracks"
 msgstr "Пратете избраните песни на опашката"
 
-#: globalsearch/globalsearchview.cpp:466 library/libraryview.cpp:401
+#: globalsearch/globalsearchview.cpp:466 library/libraryview.cpp:380
 #: ui/mainwindow.cpp:1675
 msgid "Queue track"
 msgstr "Прати избрана песен на опашката"
@@ -4129,7 +4129,7 @@ msgstr "Премахни от Моята музика"
 msgid "Remove from bookmarks"
 msgstr "Премахване от отметки"
 
-#: internet/spotify/spotifyservice.cpp:672 ../bin/src/ui_mainwindow.h:684
+#: internet/spotify/spotifyservice.cpp:674 ../bin/src/ui_mainwindow.h:684
 msgid "Remove from playlist"
 msgstr "Премахване от списъка с песни"
 
@@ -4174,7 +4174,7 @@ msgid "Repeat track"
 msgstr "Повтаряне на песента"
 
 #: devices/deviceview.cpp:219 globalsearch/globalsearchview.cpp:457
-#: internet/core/internetservice.cpp:91 library/libraryview.cpp:393
+#: internet/core/internetservice.cpp:91 library/libraryview.cpp:372
 #: widgets/fileviewlist.cpp:34
 msgid "Replace current playlist"
 msgstr "Заместване на текущия списък с песни"
@@ -4606,7 +4606,7 @@ msgstr "Покажи в пълен размер..."
 msgid "Show groups in global search result"
 msgstr "Показване на групи в резултати от глобално търсене"
 
-#: library/libraryview.cpp:434 ui/mainwindow.cpp:646
+#: library/libraryview.cpp:413 ui/mainwindow.cpp:646
 #: widgets/fileviewlist.cpp:51
 msgid "Show in file browser..."
 msgstr "Покажи във файловия мениджър..."
@@ -4615,7 +4615,7 @@ msgstr "Покажи във файловия мениджър..."
 msgid "Show in library..."
 msgstr "Показване в библиотеката..."
 
-#: library/libraryview.cpp:438
+#: library/libraryview.cpp:417
 msgid "Show in various artists"
 msgstr "Показване в смесени изпълнители"
 
@@ -4812,7 +4812,7 @@ msgstr "Spotify"
 msgid "Spotify login error"
 msgstr "Грешка в вписване в Spotify"
 
-#: internet/spotify/spotifyservice.cpp:835
+#: internet/spotify/spotifyservice.cpp:837
 msgid "Spotify playlist's URL"
 msgstr "URL на плейлист в Spotify"
 
@@ -4824,7 +4824,7 @@ msgstr "Приставка за Spotify"
 msgid "Spotify plugin not installed"
 msgstr "Приставката за Spotify не е инсталирана"
 
-#: internet/spotify/spotifyservice.cpp:826
+#: internet/spotify/spotifyservice.cpp:828
 msgid "Spotify song's URL"
 msgstr "Линк към песента в Spotify"
 
@@ -4961,15 +4961,15 @@ msgstr "Поддържани формати"
 msgid "Synchronize statistics to files now"
 msgstr "Синхронизиране на статистиките към файловете сега"
 
-#: internet/spotify/spotifyservice.cpp:699
+#: internet/spotify/spotifyservice.cpp:701
 msgid "Syncing Spotify inbox"
 msgstr "Синхронизиране на входящата кутия на Spotify"
 
-#: internet/spotify/spotifyservice.cpp:693
+#: internet/spotify/spotifyservice.cpp:695
 msgid "Syncing Spotify playlist"
 msgstr "Синхронизиране на списъка с песни от Spotify"
 
-#: internet/spotify/spotifyservice.cpp:704
+#: internet/spotify/spotifyservice.cpp:706
 msgid "Syncing Spotify starred tracks"
 msgstr "Синхронизиране на оценените песни от Spotify"
 
@@ -5039,7 +5039,7 @@ msgid ""
 "rescan because of the new features listed below:"
 msgstr "Версията на Clementine, която току що обновихте изисква пълно повторно сканиране на библиотеката, заради следните нови функции:"
 
-#: library/libraryview.cpp:574
+#: library/libraryview.cpp:553
 msgid "There are other songs in this album"
 msgstr "В този албум има други песни"
 
@@ -5075,7 +5075,7 @@ msgid ""
 "continue?"
 msgstr "Тези файлове ще бъдат изтрити от устройството,сигурни ли сте че искате да продължите?"
 
-#: library/libraryview.cpp:658 ui/mainwindow.cpp:2295 widgets/fileview.cpp:187
+#: library/libraryview.cpp:637 ui/mainwindow.cpp:2295 widgets/fileview.cpp:187
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -5608,7 +5608,7 @@ msgstr "Аудио — Windows Media"
 msgid "Without cover:"
 msgstr "Без обложка:"
 
-#: library/libraryview.cpp:575
+#: library/libraryview.cpp:554
 msgid ""
 "Would you like to move the other songs in this album to Various Artists as "
 "well?"
@@ -5758,7 +5758,7 @@ msgstr "Вашите Last.fm данни са грешни"
 msgid "Your Magnatune credentials were incorrect"
 msgstr "Вашите данни за достъп за Magnatune бяха грешни"
 
-#: library/libraryview.cpp:366
+#: library/libraryview.cpp:345
 msgid "Your library is empty!"
 msgstr "Вашата библиотека е празна!"
 

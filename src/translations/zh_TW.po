@@ -813,7 +813,7 @@ msgid "Append files/URLs to the playlist"
 msgstr "附加檔案或網址到播放清單"
 
 #: devices/deviceview.cpp:216 globalsearch/globalsearchview.cpp:453
-#: internet/core/internetservice.cpp:80 library/libraryview.cpp:391
+#: internet/core/internetservice.cpp:80 library/libraryview.cpp:370
 #: widgets/fileviewlist.cpp:31
 msgid "Append to current playlist"
 msgstr "附加到目前的播放清單"
@@ -1268,7 +1268,7 @@ msgstr "Clementine 無法搜尋到任何符合此檔案的結果"
 msgid "Clementine will find music in:"
 msgstr "Clementine 將在以下位置搜尋音樂:"
 
-#: library/libraryview.cpp:372
+#: library/libraryview.cpp:351
 msgid "Click here to add some music"
 msgstr "點擊此處加入一些音樂"
 
@@ -1360,7 +1360,7 @@ msgstr "設定 Magnatune ..."
 msgid "Configure Shortcuts"
 msgstr "設定快速鍵"
 
-#: internet/spotify/spotifyservice.cpp:911
+#: internet/spotify/spotifyservice.cpp:913
 msgid "Configure Spotify..."
 msgstr "設定 Spotify..."
 
@@ -1451,7 +1451,7 @@ msgstr "複製分享連結到剪貼簿"
 msgid "Copy to clipboard"
 msgstr "複製到剪貼簿"
 
-#: library/libraryview.cpp:421 internet/podcasts/podcastservice.cpp:437
+#: library/libraryview.cpp:400 internet/podcasts/podcastservice.cpp:437
 #: ui/mainwindow.cpp:641 widgets/fileviewlist.cpp:43
 msgid "Copy to device..."
 msgstr "複製到裝置..."
@@ -1700,7 +1700,7 @@ msgstr ""
 msgid "Delete downloaded data"
 msgstr "刪除下載的資料"
 
-#: devices/deviceview.cpp:404 library/libraryview.cpp:657
+#: devices/deviceview.cpp:404 library/libraryview.cpp:636
 #: ui/mainwindow.cpp:2294 widgets/fileview.cpp:186
 msgid "Delete files"
 msgstr "刪除檔案"
@@ -1709,7 +1709,7 @@ msgstr "刪除檔案"
 msgid "Delete from device..."
 msgstr "從裝置中刪除..."
 
-#: library/libraryview.cpp:423 ui/mainwindow.cpp:643
+#: library/libraryview.cpp:402 ui/mainwindow.cpp:643
 #: widgets/fileviewlist.cpp:44
 msgid "Delete from disk..."
 msgstr "從硬碟中刪除 ..."
@@ -1722,7 +1722,7 @@ msgstr "刪除播放過的片斷內容"
 msgid "Delete preset"
 msgstr "刪除預設"
 
-#: library/libraryview.cpp:412
+#: library/libraryview.cpp:391
 msgid "Delete smart playlist"
 msgstr "刪除智慧型播放清單"
 
@@ -1875,7 +1875,7 @@ msgstr ""
 msgid "Don't repeat"
 msgstr "不要循環播放"
 
-#: library/libraryview.cpp:441
+#: library/libraryview.cpp:420
 msgid "Don't show in various artists"
 msgstr "不要顯示不同的演出者"
 
@@ -2009,7 +2009,7 @@ msgstr "動態模式開啟"
 msgid "Dynamic random mix"
 msgstr "動態隨機混合"
 
-#: library/libraryview.cpp:409
+#: library/libraryview.cpp:388
 msgid "Edit smart playlist..."
 msgstr "編輯智慧型播放清單..."
 
@@ -2030,12 +2030,12 @@ msgstr "編輯標籤"
 msgid "Edit track information"
 msgstr "編輯歌曲資訊"
 
-#: library/libraryview.cpp:428 widgets/fileviewlist.cpp:49
+#: library/libraryview.cpp:407 widgets/fileviewlist.cpp:49
 #: ../bin/src/ui_mainwindow.h:658
 msgid "Edit track information..."
 msgstr "編輯歌曲資訊..."
 
-#: library/libraryview.cpp:431
+#: library/libraryview.cpp:410
 msgid "Edit tracks information..."
 msgstr "編輯音軌資訊..."
 
@@ -2152,7 +2152,7 @@ msgid "Equivalent to --log-levels *:3"
 msgstr ""
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:242
-#: library/libraryview.cpp:651 ui/mainwindow.cpp:1997 ui/mainwindow.cpp:2244
+#: library/libraryview.cpp:630 ui/mainwindow.cpp:1997 ui/mainwindow.cpp:2244
 #: ui/mainwindow.cpp:2392 internet/vk/vkservice.cpp:634
 msgid "Error"
 msgstr "錯誤"
@@ -2541,7 +2541,7 @@ msgid "Genre"
 msgstr "風格"
 
 #: internet/spotify/spotifyservice.cpp:633
-#: internet/spotify/spotifyservice.cpp:674
+#: internet/spotify/spotifyservice.cpp:676
 msgid "Get a URL to share this Spotify song"
 msgstr ""
 
@@ -3412,7 +3412,7 @@ msgstr ""
 msgid "New playlist"
 msgstr "新增播放清單"
 
-#: library/libraryview.cpp:406
+#: library/libraryview.cpp:385
 msgid "New smart playlist..."
 msgstr "新增智慧型播放清單"
 
@@ -3471,7 +3471,7 @@ msgstr "無短區塊"
 msgid "None"
 msgstr "沒有"
 
-#: library/libraryview.cpp:652 ui/mainwindow.cpp:2245 ui/mainwindow.cpp:2393
+#: library/libraryview.cpp:631 ui/mainwindow.cpp:2245 ui/mainwindow.cpp:2393
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "所選歌曲沒有適合複製到裝置的"
 
@@ -3633,7 +3633,7 @@ msgid "Open in Google Drive"
 msgstr ""
 
 #: devices/deviceview.cpp:221 globalsearch/globalsearchview.cpp:461
-#: internet/core/internetservice.cpp:102 library/libraryview.cpp:396
+#: internet/core/internetservice.cpp:102 library/libraryview.cpp:375
 #: widgets/fileviewlist.cpp:35
 msgid "Open in new playlist"
 msgstr "開啟在新的播放清單"
@@ -3678,7 +3678,7 @@ msgstr ""
 msgid "Organise Files"
 msgstr "組織檔案"
 
-#: library/libraryview.cpp:417 ui/mainwindow.cpp:637
+#: library/libraryview.cpp:396 ui/mainwindow.cpp:637
 msgid "Organise files..."
 msgstr "組織檔案..."
 
@@ -4001,7 +4001,7 @@ msgstr "佇列管理員"
 msgid "Queue selected tracks"
 msgstr "將選取的歌曲加入佇列中"
 
-#: globalsearch/globalsearchview.cpp:466 library/libraryview.cpp:401
+#: globalsearch/globalsearchview.cpp:466 library/libraryview.cpp:380
 #: ui/mainwindow.cpp:1675
 msgid "Queue track"
 msgstr "將歌曲加入佇列中"
@@ -4124,7 +4124,7 @@ msgstr ""
 msgid "Remove from bookmarks"
 msgstr ""
 
-#: internet/spotify/spotifyservice.cpp:672 ../bin/src/ui_mainwindow.h:684
+#: internet/spotify/spotifyservice.cpp:674 ../bin/src/ui_mainwindow.h:684
 msgid "Remove from playlist"
 msgstr "從播放清單移除"
 
@@ -4169,7 +4169,7 @@ msgid "Repeat track"
 msgstr "循環播放單曲"
 
 #: devices/deviceview.cpp:219 globalsearch/globalsearchview.cpp:457
-#: internet/core/internetservice.cpp:91 library/libraryview.cpp:393
+#: internet/core/internetservice.cpp:91 library/libraryview.cpp:372
 #: widgets/fileviewlist.cpp:34
 msgid "Replace current playlist"
 msgstr "取代目前播放清單"
@@ -4601,7 +4601,7 @@ msgstr "全螢幕..."
 msgid "Show groups in global search result"
 msgstr ""
 
-#: library/libraryview.cpp:434 ui/mainwindow.cpp:646
+#: library/libraryview.cpp:413 ui/mainwindow.cpp:646
 #: widgets/fileviewlist.cpp:51
 msgid "Show in file browser..."
 msgstr "在檔案瀏覽器顯示..."
@@ -4610,7 +4610,7 @@ msgstr "在檔案瀏覽器顯示..."
 msgid "Show in library..."
 msgstr ""
 
-#: library/libraryview.cpp:438
+#: library/libraryview.cpp:417
 msgid "Show in various artists"
 msgstr "顯示各演出者"
 
@@ -4807,7 +4807,7 @@ msgstr "Spotify"
 msgid "Spotify login error"
 msgstr "Spotify 登錄錯誤"
 
-#: internet/spotify/spotifyservice.cpp:835
+#: internet/spotify/spotifyservice.cpp:837
 msgid "Spotify playlist's URL"
 msgstr ""
 
@@ -4819,7 +4819,7 @@ msgstr "Spotify 插件"
 msgid "Spotify plugin not installed"
 msgstr "Spotify 插件沒有安裝"
 
-#: internet/spotify/spotifyservice.cpp:826
+#: internet/spotify/spotifyservice.cpp:828
 msgid "Spotify song's URL"
 msgstr ""
 
@@ -4956,15 +4956,15 @@ msgstr "支持格式"
 msgid "Synchronize statistics to files now"
 msgstr ""
 
-#: internet/spotify/spotifyservice.cpp:699
+#: internet/spotify/spotifyservice.cpp:701
 msgid "Syncing Spotify inbox"
 msgstr "同步 Spotify 的收件匣"
 
-#: internet/spotify/spotifyservice.cpp:693
+#: internet/spotify/spotifyservice.cpp:695
 msgid "Syncing Spotify playlist"
 msgstr "同步 Spotify 的播放清單"
 
-#: internet/spotify/spotifyservice.cpp:704
+#: internet/spotify/spotifyservice.cpp:706
 msgid "Syncing Spotify starred tracks"
 msgstr "同步 Spotify 的星號標記曲目"
 
@@ -5034,7 +5034,7 @@ msgid ""
 "rescan because of the new features listed below:"
 msgstr "方才更新的 Clementine 因為以下新的功能，需要對音樂庫做完整的重新掃描："
 
-#: library/libraryview.cpp:574
+#: library/libraryview.cpp:553
 msgid "There are other songs in this album"
 msgstr "有其他歌曲在這張專輯中"
 
@@ -5070,7 +5070,7 @@ msgid ""
 "continue?"
 msgstr "這些檔案將從裝置上被移除，你確定你要繼續？"
 
-#: library/libraryview.cpp:658 ui/mainwindow.cpp:2295 widgets/fileview.cpp:187
+#: library/libraryview.cpp:637 ui/mainwindow.cpp:2295 widgets/fileview.cpp:187
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -5603,7 +5603,7 @@ msgstr "Windows Media 音訊"
 msgid "Without cover:"
 msgstr ""
 
-#: library/libraryview.cpp:575
+#: library/libraryview.cpp:554
 msgid ""
 "Would you like to move the other songs in this album to Various Artists as "
 "well?"
@@ -5753,7 +5753,7 @@ msgstr ""
 msgid "Your Magnatune credentials were incorrect"
 msgstr "您的 Magnatune 的憑證是不正確的"
 
-#: library/libraryview.cpp:366
+#: library/libraryview.cpp:345
 msgid "Your library is empty!"
 msgstr "您的音樂庫是空的！"
 

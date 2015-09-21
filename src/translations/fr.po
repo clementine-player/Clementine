@@ -11,6 +11,7 @@
 # Brice <bmaron@gmail.com>, 2011
 # Brice <bmaron@gmail.com>, 2011
 # Chaopale Lamecarlate <chaopale+transifex@lamecarlate.net>, 2015
+# Clément Jonglez <clement.jonglez@isae.fr>, 2015
 # djabal <djabal@eastblue.net>, 2013
 # djabal <djabal@eastblue.net>, 2013
 # Etienne G <etn2010@gmail.com>, 2013
@@ -44,8 +45,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2015-09-08 10:33+0000\n"
-"Last-Translator: Adam Tahri <gotakk@gmail.com>\n"
+"PO-Revision-Date: 2015-09-19 19:46+0000\n"
+"Last-Translator: Clément Jonglez <clement.jonglez@isae.fr>\n"
 "Language-Team: French (http://www.transifex.com/davidsansome/clementine/language/fr/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -847,7 +848,7 @@ msgid "Append files/URLs to the playlist"
 msgstr "Ajouter des fichiers/URLs à la liste de lecture"
 
 #: devices/deviceview.cpp:216 globalsearch/globalsearchview.cpp:453
-#: internet/core/internetservice.cpp:80 library/libraryview.cpp:391
+#: internet/core/internetservice.cpp:80 library/libraryview.cpp:370
 #: widgets/fileviewlist.cpp:31
 msgid "Append to current playlist"
 msgstr "Ajouter à la liste de lecture actuelle"
@@ -1142,7 +1143,7 @@ msgstr "Changer le mode aléatoire"
 
 #: ../bin/src/ui_behavioursettingspage.h:361
 msgid "Change the currently playing song"
-msgstr ""
+msgstr "Changer la piste courante"
 
 #: core/commandlineoptions.cpp:172
 msgid "Change the language"
@@ -1302,7 +1303,7 @@ msgstr "Clementine n'a pu trouver aucun résultat pour ce fichier"
 msgid "Clementine will find music in:"
 msgstr "Clementine trouvera de la musique dans :"
 
-#: library/libraryview.cpp:372
+#: library/libraryview.cpp:351
 msgid "Click here to add some music"
 msgstr "Cliquez ici pour créer votre bibliothèque musicale"
 
@@ -1394,7 +1395,7 @@ msgstr "Configurer Magnatune..."
 msgid "Configure Shortcuts"
 msgstr "Configurer les raccourcis clavier"
 
-#: internet/spotify/spotifyservice.cpp:911
+#: internet/spotify/spotifyservice.cpp:913
 msgid "Configure Spotify..."
 msgstr "Configurer Spotify…"
 
@@ -1485,7 +1486,7 @@ msgstr "Copier l'URL partagée dans le presse-papier"
 msgid "Copy to clipboard"
 msgstr "Copier dans le presse papier"
 
-#: library/libraryview.cpp:421 internet/podcasts/podcastservice.cpp:437
+#: library/libraryview.cpp:400 internet/podcasts/podcastservice.cpp:437
 #: ui/mainwindow.cpp:641 widgets/fileviewlist.cpp:43
 msgid "Copy to device..."
 msgstr "Copier sur le périphérique"
@@ -1734,7 +1735,7 @@ msgstr "Supprimer"
 msgid "Delete downloaded data"
 msgstr "Effacer les données téléchargées"
 
-#: devices/deviceview.cpp:404 library/libraryview.cpp:657
+#: devices/deviceview.cpp:404 library/libraryview.cpp:636
 #: ui/mainwindow.cpp:2294 widgets/fileview.cpp:186
 msgid "Delete files"
 msgstr "Supprimer les fichiers"
@@ -1743,7 +1744,7 @@ msgstr "Supprimer les fichiers"
 msgid "Delete from device..."
 msgstr "Supprimer du périphérique..."
 
-#: library/libraryview.cpp:423 ui/mainwindow.cpp:643
+#: library/libraryview.cpp:402 ui/mainwindow.cpp:643
 #: widgets/fileviewlist.cpp:44
 msgid "Delete from disk..."
 msgstr "Supprimer du disque..."
@@ -1756,7 +1757,7 @@ msgstr "Effacer les épisodes lus"
 msgid "Delete preset"
 msgstr "Effacer le pré-réglage"
 
-#: library/libraryview.cpp:412
+#: library/libraryview.cpp:391
 msgid "Delete smart playlist"
 msgstr "Supprimer la liste de lecture intelligente"
 
@@ -1909,7 +1910,7 @@ msgstr "Faire une nouvelle analyse complète supprimera toutes les métadonnées
 msgid "Don't repeat"
 msgstr "Ne pas répéter"
 
-#: library/libraryview.cpp:441
+#: library/libraryview.cpp:420
 msgid "Don't show in various artists"
 msgstr "Ne pas classer dans la catégorie « Compilations d'artistes »"
 
@@ -2043,7 +2044,7 @@ msgstr "Le mode dynamique est activé"
 msgid "Dynamic random mix"
 msgstr "Mix aléatoire dynamique"
 
-#: library/libraryview.cpp:409
+#: library/libraryview.cpp:388
 msgid "Edit smart playlist..."
 msgstr "Éditer la liste de lecture intelligente..."
 
@@ -2064,12 +2065,12 @@ msgstr "Modifier les tags"
 msgid "Edit track information"
 msgstr "Modifier la description de la piste"
 
-#: library/libraryview.cpp:428 widgets/fileviewlist.cpp:49
+#: library/libraryview.cpp:407 widgets/fileviewlist.cpp:49
 #: ../bin/src/ui_mainwindow.h:658
 msgid "Edit track information..."
 msgstr "Modifier la description de la piste..."
 
-#: library/libraryview.cpp:431
+#: library/libraryview.cpp:410
 msgid "Edit tracks information..."
 msgstr "Modifier la description des pistes..."
 
@@ -2186,7 +2187,7 @@ msgid "Equivalent to --log-levels *:3"
 msgstr "Equivalent à --log-levels *:3"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:242
-#: library/libraryview.cpp:651 ui/mainwindow.cpp:1997 ui/mainwindow.cpp:2244
+#: library/libraryview.cpp:630 ui/mainwindow.cpp:1997 ui/mainwindow.cpp:2244
 #: ui/mainwindow.cpp:2392 internet/vk/vkservice.cpp:634
 msgid "Error"
 msgstr "Erreur"
@@ -2575,7 +2576,7 @@ msgid "Genre"
 msgstr "Genre"
 
 #: internet/spotify/spotifyservice.cpp:633
-#: internet/spotify/spotifyservice.cpp:674
+#: internet/spotify/spotifyservice.cpp:676
 msgid "Get a URL to share this Spotify song"
 msgstr "Obtenir une URL pour partager ce morceau Spotify"
 
@@ -3446,7 +3447,7 @@ msgstr "Nouveau dossier"
 msgid "New playlist"
 msgstr "Nouvelle liste de lecture"
 
-#: library/libraryview.cpp:406
+#: library/libraryview.cpp:385
 msgid "New smart playlist..."
 msgstr "Nouvelle liste de lecture intelligente..."
 
@@ -3505,7 +3506,7 @@ msgstr "Pas de bloc court"
 msgid "None"
 msgstr "Aucun"
 
-#: library/libraryview.cpp:652 ui/mainwindow.cpp:2245 ui/mainwindow.cpp:2393
+#: library/libraryview.cpp:631 ui/mainwindow.cpp:2245 ui/mainwindow.cpp:2393
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Aucun des morceaux sélectionnés n'était valide pour la copie vers un périphérique"
 
@@ -3667,7 +3668,7 @@ msgid "Open in Google Drive"
 msgstr "Ouvrir dans Google Drive"
 
 #: devices/deviceview.cpp:221 globalsearch/globalsearchview.cpp:461
-#: internet/core/internetservice.cpp:102 library/libraryview.cpp:396
+#: internet/core/internetservice.cpp:102 library/libraryview.cpp:375
 #: widgets/fileviewlist.cpp:35
 msgid "Open in new playlist"
 msgstr "Ouvrir dans une nouvelle liste de lecture"
@@ -3712,7 +3713,7 @@ msgstr "Opus"
 msgid "Organise Files"
 msgstr "Organiser les fichiers"
 
-#: library/libraryview.cpp:417 ui/mainwindow.cpp:637
+#: library/libraryview.cpp:396 ui/mainwindow.cpp:637
 msgid "Organise files..."
 msgstr "Organisation des fichiers..."
 
@@ -4035,7 +4036,7 @@ msgstr "Gestionnaire de file d'attente"
 msgid "Queue selected tracks"
 msgstr "Mettre les pistes sélectionnées en liste d'attente"
 
-#: globalsearch/globalsearchview.cpp:466 library/libraryview.cpp:401
+#: globalsearch/globalsearchview.cpp:466 library/libraryview.cpp:380
 #: ui/mainwindow.cpp:1675
 msgid "Queue track"
 msgstr "Mettre cette piste en liste d'attente"
@@ -4158,7 +4159,7 @@ msgstr "Supprimer de ma musique"
 msgid "Remove from bookmarks"
 msgstr "Supprimer des favoris"
 
-#: internet/spotify/spotifyservice.cpp:672 ../bin/src/ui_mainwindow.h:684
+#: internet/spotify/spotifyservice.cpp:674 ../bin/src/ui_mainwindow.h:684
 msgid "Remove from playlist"
 msgstr "Supprimer de la liste de lecture"
 
@@ -4203,7 +4204,7 @@ msgid "Repeat track"
 msgstr "Répéter la piste"
 
 #: devices/deviceview.cpp:219 globalsearch/globalsearchview.cpp:457
-#: internet/core/internetservice.cpp:91 library/libraryview.cpp:393
+#: internet/core/internetservice.cpp:91 library/libraryview.cpp:372
 #: widgets/fileviewlist.cpp:34
 msgid "Replace current playlist"
 msgstr "Remplacer la liste de lecture actuelle"
@@ -4635,7 +4636,7 @@ msgstr "Afficher en taille réelle..."
 msgid "Show groups in global search result"
 msgstr "Afficher les groupes dans le résultat global de recherche"
 
-#: library/libraryview.cpp:434 ui/mainwindow.cpp:646
+#: library/libraryview.cpp:413 ui/mainwindow.cpp:646
 #: widgets/fileviewlist.cpp:51
 msgid "Show in file browser..."
 msgstr "Afficher dans le navigateur de fichiers"
@@ -4644,7 +4645,7 @@ msgstr "Afficher dans le navigateur de fichiers"
 msgid "Show in library..."
 msgstr "Afficher dans la bibliothèque..."
 
-#: library/libraryview.cpp:438
+#: library/libraryview.cpp:417
 msgid "Show in various artists"
 msgstr "Classer dans la catégorie « Compilations d'artistes »"
 
@@ -4841,7 +4842,7 @@ msgstr "Spotify"
 msgid "Spotify login error"
 msgstr "Erreur lors de la connexion à Spotify"
 
-#: internet/spotify/spotifyservice.cpp:835
+#: internet/spotify/spotifyservice.cpp:837
 msgid "Spotify playlist's URL"
 msgstr "URL de la liste de lecture Spotify"
 
@@ -4853,7 +4854,7 @@ msgstr "Module externe Spotify"
 msgid "Spotify plugin not installed"
 msgstr "Le module externe de Spotify n'est pas installé"
 
-#: internet/spotify/spotifyservice.cpp:826
+#: internet/spotify/spotifyservice.cpp:828
 msgid "Spotify song's URL"
 msgstr "URL du morceau Spotify"
 
@@ -4990,15 +4991,15 @@ msgstr "Formats supportés"
 msgid "Synchronize statistics to files now"
 msgstr "Synchroniser les statistiques vers les fichiers maintenant"
 
-#: internet/spotify/spotifyservice.cpp:699
+#: internet/spotify/spotifyservice.cpp:701
 msgid "Syncing Spotify inbox"
 msgstr "Synchronisation de la boîte de réception Spotify"
 
-#: internet/spotify/spotifyservice.cpp:693
+#: internet/spotify/spotifyservice.cpp:695
 msgid "Syncing Spotify playlist"
 msgstr "Synchronisation de la liste de lecture Spotify"
 
-#: internet/spotify/spotifyservice.cpp:704
+#: internet/spotify/spotifyservice.cpp:706
 msgid "Syncing Spotify starred tracks"
 msgstr "Synchronisation des morceaux Spotify préférés"
 
@@ -5068,7 +5069,7 @@ msgid ""
 "rescan because of the new features listed below:"
 msgstr "La nouvelle version de Clementine nécessite une mise à jour de votre bibliothèque pour supporter les nouvelles fonctionnalités suivantes :"
 
-#: library/libraryview.cpp:574
+#: library/libraryview.cpp:553
 msgid "There are other songs in this album"
 msgstr "Il y a d'autres morceaux dans cet album"
 
@@ -5104,7 +5105,7 @@ msgid ""
 "continue?"
 msgstr "Ces fichiers vont être supprimés du périphérique, êtes-vous sûr de vouloir continuer ?"
 
-#: library/libraryview.cpp:658 ui/mainwindow.cpp:2295 widgets/fileview.cpp:187
+#: library/libraryview.cpp:637 ui/mainwindow.cpp:2295 widgets/fileview.cpp:187
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -5637,7 +5638,7 @@ msgstr "audio Windows Media"
 msgid "Without cover:"
 msgstr "Sans pochette :"
 
-#: library/libraryview.cpp:575
+#: library/libraryview.cpp:554
 msgid ""
 "Would you like to move the other songs in this album to Various Artists as "
 "well?"
@@ -5787,7 +5788,7 @@ msgstr "Vos identifiants Last.fm sont incorrects"
 msgid "Your Magnatune credentials were incorrect"
 msgstr "Vos identifiants Magnatune sont incorrects"
 
-#: library/libraryview.cpp:366
+#: library/libraryview.cpp:345
 msgid "Your library is empty!"
 msgstr "Votre bibliothèque est vide !"
 

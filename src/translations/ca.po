@@ -817,7 +817,7 @@ msgid "Append files/URLs to the playlist"
 msgstr "Afegeix fitxers/URL a la llista de reproducció"
 
 #: devices/deviceview.cpp:216 globalsearch/globalsearchview.cpp:453
-#: internet/core/internetservice.cpp:80 library/libraryview.cpp:391
+#: internet/core/internetservice.cpp:80 library/libraryview.cpp:370
 #: widgets/fileviewlist.cpp:31
 msgid "Append to current playlist"
 msgstr "Afegeix a la llista de reproducció actual"
@@ -1272,7 +1272,7 @@ msgstr "El Clementine no ha trobat resultats per a aquest fitxer"
 msgid "Clementine will find music in:"
 msgstr "El Clementine trobarà música a:"
 
-#: library/libraryview.cpp:372
+#: library/libraryview.cpp:351
 msgid "Click here to add some music"
 msgstr "Feu clic aquí per afegir música"
 
@@ -1364,7 +1364,7 @@ msgstr "Configura el Magnatune…"
 msgid "Configure Shortcuts"
 msgstr "Configura les dreceres"
 
-#: internet/spotify/spotifyservice.cpp:911
+#: internet/spotify/spotifyservice.cpp:913
 msgid "Configure Spotify..."
 msgstr "Configura l’Spotify…"
 
@@ -1455,7 +1455,7 @@ msgstr "Copia l’URL per compartir en el porta-retalls"
 msgid "Copy to clipboard"
 msgstr "Copia al porta-retalls"
 
-#: library/libraryview.cpp:421 internet/podcasts/podcastservice.cpp:437
+#: library/libraryview.cpp:400 internet/podcasts/podcastservice.cpp:437
 #: ui/mainwindow.cpp:641 widgets/fileviewlist.cpp:43
 msgid "Copy to device..."
 msgstr "Copia al dispositiu…"
@@ -1704,7 +1704,7 @@ msgstr "Eliminar"
 msgid "Delete downloaded data"
 msgstr "Suprimeix les dades baixades"
 
-#: devices/deviceview.cpp:404 library/libraryview.cpp:657
+#: devices/deviceview.cpp:404 library/libraryview.cpp:636
 #: ui/mainwindow.cpp:2294 widgets/fileview.cpp:186
 msgid "Delete files"
 msgstr "Suprimeix els fitxers"
@@ -1713,7 +1713,7 @@ msgstr "Suprimeix els fitxers"
 msgid "Delete from device..."
 msgstr "Suprimeix del dispositiu…"
 
-#: library/libraryview.cpp:423 ui/mainwindow.cpp:643
+#: library/libraryview.cpp:402 ui/mainwindow.cpp:643
 #: widgets/fileviewlist.cpp:44
 msgid "Delete from disk..."
 msgstr "Suprimeix del disc…"
@@ -1726,7 +1726,7 @@ msgstr "Suprimeix els episodis escoltats"
 msgid "Delete preset"
 msgstr "Elimina la predefinició"
 
-#: library/libraryview.cpp:412
+#: library/libraryview.cpp:391
 msgid "Delete smart playlist"
 msgstr "Elimina la llista de reproducció intel·ligent"
 
@@ -1879,7 +1879,7 @@ msgstr "En fer l’anàlisi sencera es perdran les metadades desades al Clementi
 msgid "Don't repeat"
 msgstr "Sense repetició"
 
-#: library/libraryview.cpp:441
+#: library/libraryview.cpp:420
 msgid "Don't show in various artists"
 msgstr "No ho mostris a Artistes diversos"
 
@@ -2013,7 +2013,7 @@ msgstr "S’ha activat el mode dinàmic"
 msgid "Dynamic random mix"
 msgstr "Mescla dinàmica aleatòria"
 
-#: library/libraryview.cpp:409
+#: library/libraryview.cpp:388
 msgid "Edit smart playlist..."
 msgstr "Edita la llista de reproducció intel·ligent"
 
@@ -2034,12 +2034,12 @@ msgstr "Edita les etiquetes"
 msgid "Edit track information"
 msgstr "Edita la informació de la peça"
 
-#: library/libraryview.cpp:428 widgets/fileviewlist.cpp:49
+#: library/libraryview.cpp:407 widgets/fileviewlist.cpp:49
 #: ../bin/src/ui_mainwindow.h:658
 msgid "Edit track information..."
 msgstr "Edita la informació de la peça…"
 
-#: library/libraryview.cpp:431
+#: library/libraryview.cpp:410
 msgid "Edit tracks information..."
 msgstr "Edita la informació de les peces..."
 
@@ -2156,7 +2156,7 @@ msgid "Equivalent to --log-levels *:3"
 msgstr "Equivalent a --log-levels *:3"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:242
-#: library/libraryview.cpp:651 ui/mainwindow.cpp:1997 ui/mainwindow.cpp:2244
+#: library/libraryview.cpp:630 ui/mainwindow.cpp:1997 ui/mainwindow.cpp:2244
 #: ui/mainwindow.cpp:2392 internet/vk/vkservice.cpp:634
 msgid "Error"
 msgstr "Error"
@@ -2545,7 +2545,7 @@ msgid "Genre"
 msgstr "Estil"
 
 #: internet/spotify/spotifyservice.cpp:633
-#: internet/spotify/spotifyservice.cpp:674
+#: internet/spotify/spotifyservice.cpp:676
 msgid "Get a URL to share this Spotify song"
 msgstr "Obtingues l’URL per compartir aquesta cançó de l’Spotify"
 
@@ -3416,7 +3416,7 @@ msgstr "Carpeta nova"
 msgid "New playlist"
 msgstr "Llista de reproducció nova"
 
-#: library/libraryview.cpp:406
+#: library/libraryview.cpp:385
 msgid "New smart playlist..."
 msgstr "Llista de reproducció intel·ligent nova…"
 
@@ -3475,7 +3475,7 @@ msgstr "No utilitzis blocs curs"
 msgid "None"
 msgstr "Cap"
 
-#: library/libraryview.cpp:652 ui/mainwindow.cpp:2245 ui/mainwindow.cpp:2393
+#: library/libraryview.cpp:631 ui/mainwindow.cpp:2245 ui/mainwindow.cpp:2393
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Cap de les cançons seleccionades són adequades per copiar-les a un dispositiu"
 
@@ -3637,7 +3637,7 @@ msgid "Open in Google Drive"
 msgstr "Obre-ho a Google Drive"
 
 #: devices/deviceview.cpp:221 globalsearch/globalsearchview.cpp:461
-#: internet/core/internetservice.cpp:102 library/libraryview.cpp:396
+#: internet/core/internetservice.cpp:102 library/libraryview.cpp:375
 #: widgets/fileviewlist.cpp:35
 msgid "Open in new playlist"
 msgstr "Obre en una llista de reproducció nova"
@@ -3682,7 +3682,7 @@ msgstr "Opus"
 msgid "Organise Files"
 msgstr "Organitza fitxers"
 
-#: library/libraryview.cpp:417 ui/mainwindow.cpp:637
+#: library/libraryview.cpp:396 ui/mainwindow.cpp:637
 msgid "Organise files..."
 msgstr "Organitza fitxers..."
 
@@ -4005,7 +4005,7 @@ msgstr "Gestor de la cua"
 msgid "Queue selected tracks"
 msgstr "Afegeix les peces seleccionades a la cua"
 
-#: globalsearch/globalsearchview.cpp:466 library/libraryview.cpp:401
+#: globalsearch/globalsearchview.cpp:466 library/libraryview.cpp:380
 #: ui/mainwindow.cpp:1675
 msgid "Queue track"
 msgstr "Afegeix la peça a la cua"
@@ -4128,7 +4128,7 @@ msgstr "Esborra-ho de La meva música"
 msgid "Remove from bookmarks"
 msgstr "Suprimeix dels preferits"
 
-#: internet/spotify/spotifyservice.cpp:672 ../bin/src/ui_mainwindow.h:684
+#: internet/spotify/spotifyservice.cpp:674 ../bin/src/ui_mainwindow.h:684
 msgid "Remove from playlist"
 msgstr "Suprimeix de la llista de reproducció"
 
@@ -4173,7 +4173,7 @@ msgid "Repeat track"
 msgstr "Repeteix la peça"
 
 #: devices/deviceview.cpp:219 globalsearch/globalsearchview.cpp:457
-#: internet/core/internetservice.cpp:91 library/libraryview.cpp:393
+#: internet/core/internetservice.cpp:91 library/libraryview.cpp:372
 #: widgets/fileviewlist.cpp:34
 msgid "Replace current playlist"
 msgstr "Substitueix la llista de reproducció actual"
@@ -4605,7 +4605,7 @@ msgstr "Mostra a mida completa..."
 msgid "Show groups in global search result"
 msgstr "Mostra grups en els resultats de la cerca global"
 
-#: library/libraryview.cpp:434 ui/mainwindow.cpp:646
+#: library/libraryview.cpp:413 ui/mainwindow.cpp:646
 #: widgets/fileviewlist.cpp:51
 msgid "Show in file browser..."
 msgstr "Mostra al gestor de fitxers"
@@ -4614,7 +4614,7 @@ msgstr "Mostra al gestor de fitxers"
 msgid "Show in library..."
 msgstr "Mostra a la col·lecció…"
 
-#: library/libraryview.cpp:438
+#: library/libraryview.cpp:417
 msgid "Show in various artists"
 msgstr "Mostra en Artistes diversos"
 
@@ -4811,7 +4811,7 @@ msgstr "Spotify"
 msgid "Spotify login error"
 msgstr "Error en iniciar sessió a Spotify"
 
-#: internet/spotify/spotifyservice.cpp:835
+#: internet/spotify/spotifyservice.cpp:837
 msgid "Spotify playlist's URL"
 msgstr "URL de llista de l’Spotify"
 
@@ -4823,7 +4823,7 @@ msgstr "Connector d'Spotify"
 msgid "Spotify plugin not installed"
 msgstr "No s’ha instal·lat el connector de Spotify"
 
-#: internet/spotify/spotifyservice.cpp:826
+#: internet/spotify/spotifyservice.cpp:828
 msgid "Spotify song's URL"
 msgstr "URL de cançó de l’Spotify"
 
@@ -4960,15 +4960,15 @@ msgstr "Formats compatibles"
 msgid "Synchronize statistics to files now"
 msgstr "Sincronitza estadístiques als fitxers ara"
 
-#: internet/spotify/spotifyservice.cpp:699
+#: internet/spotify/spotifyservice.cpp:701
 msgid "Syncing Spotify inbox"
 msgstr "S'està sincronitzant la safata d'entrada de Spotify"
 
-#: internet/spotify/spotifyservice.cpp:693
+#: internet/spotify/spotifyservice.cpp:695
 msgid "Syncing Spotify playlist"
 msgstr "S'està sincronitzant la llista de reproducció de Spotify"
 
-#: internet/spotify/spotifyservice.cpp:704
+#: internet/spotify/spotifyservice.cpp:706
 msgid "Syncing Spotify starred tracks"
 msgstr "S’estan sincronitzant les peces destacades de l’Spotify"
 
@@ -5038,7 +5038,7 @@ msgid ""
 "rescan because of the new features listed below:"
 msgstr "La versió de Clementine a la que us acabeu d’actualitzar necessita tornar a analitzar tota la col·lecció perquè incorpora les següents funcions noves:"
 
-#: library/libraryview.cpp:574
+#: library/libraryview.cpp:553
 msgid "There are other songs in this album"
 msgstr "Hi ha altres cançons en aquest àlbum"
 
@@ -5074,7 +5074,7 @@ msgid ""
 "continue?"
 msgstr "Se suprimiran aquests fitxers del dispositiu, esteu segur que voleu continuar?"
 
-#: library/libraryview.cpp:658 ui/mainwindow.cpp:2295 widgets/fileview.cpp:187
+#: library/libraryview.cpp:637 ui/mainwindow.cpp:2295 widgets/fileview.cpp:187
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -5607,7 +5607,7 @@ msgstr "Audio Windows Media"
 msgid "Without cover:"
 msgstr "Sense caràtula:"
 
-#: library/libraryview.cpp:575
+#: library/libraryview.cpp:554
 msgid ""
 "Would you like to move the other songs in this album to Various Artists as "
 "well?"
@@ -5757,7 +5757,7 @@ msgstr "Les teves credencials de Last.fm son incorrectes"
 msgid "Your Magnatune credentials were incorrect"
 msgstr "Les vostres credencials de Magnature eren incorrectes"
 
-#: library/libraryview.cpp:366
+#: library/libraryview.cpp:345
 msgid "Your library is empty!"
 msgstr "La vostra col·lecció està buida."
 

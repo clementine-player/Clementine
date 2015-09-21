@@ -820,7 +820,7 @@ msgid "Append files/URLs to the playlist"
 msgstr "Fájlok/URL-ek hozzáadása a lejátszási listához"
 
 #: devices/deviceview.cpp:216 globalsearch/globalsearchview.cpp:453
-#: internet/core/internetservice.cpp:80 library/libraryview.cpp:391
+#: internet/core/internetservice.cpp:80 library/libraryview.cpp:370
 #: widgets/fileviewlist.cpp:31
 msgid "Append to current playlist"
 msgstr "Hozzáfűz az aktuális listához"
@@ -1275,7 +1275,7 @@ msgstr "Nincsenek találatok ehhez a fájlhoz"
 msgid "Clementine will find music in:"
 msgstr "A Clementine ezen források között fog zenéket keresni:"
 
-#: library/libraryview.cpp:372
+#: library/libraryview.cpp:351
 msgid "Click here to add some music"
 msgstr "Zene felvételéhez kattintson ide"
 
@@ -1367,7 +1367,7 @@ msgstr "Magnatune beállítása..."
 msgid "Configure Shortcuts"
 msgstr "Billentyűkombinációk beállítása"
 
-#: internet/spotify/spotifyservice.cpp:911
+#: internet/spotify/spotifyservice.cpp:913
 msgid "Configure Spotify..."
 msgstr "Spotify beállítása..."
 
@@ -1458,7 +1458,7 @@ msgstr "Megosztott URL másolása a vágólapra"
 msgid "Copy to clipboard"
 msgstr "Másolás vágólapra"
 
-#: library/libraryview.cpp:421 internet/podcasts/podcastservice.cpp:437
+#: library/libraryview.cpp:400 internet/podcasts/podcastservice.cpp:437
 #: ui/mainwindow.cpp:641 widgets/fileviewlist.cpp:43
 msgid "Copy to device..."
 msgstr "Másolás eszközre..."
@@ -1707,7 +1707,7 @@ msgstr "Törlés"
 msgid "Delete downloaded data"
 msgstr "Letöltött adatok törlése"
 
-#: devices/deviceview.cpp:404 library/libraryview.cpp:657
+#: devices/deviceview.cpp:404 library/libraryview.cpp:636
 #: ui/mainwindow.cpp:2294 widgets/fileview.cpp:186
 msgid "Delete files"
 msgstr "Fájlok törlése"
@@ -1716,7 +1716,7 @@ msgstr "Fájlok törlése"
 msgid "Delete from device..."
 msgstr "Törlés az eszközről..."
 
-#: library/libraryview.cpp:423 ui/mainwindow.cpp:643
+#: library/libraryview.cpp:402 ui/mainwindow.cpp:643
 #: widgets/fileviewlist.cpp:44
 msgid "Delete from disk..."
 msgstr "Törlés a lemezről..."
@@ -1729,7 +1729,7 @@ msgstr "Lejátszott epizódok törlése"
 msgid "Delete preset"
 msgstr "Beállítás törlése"
 
-#: library/libraryview.cpp:412
+#: library/libraryview.cpp:391
 msgid "Delete smart playlist"
 msgstr "Intelligens lejátszási lista törlése"
 
@@ -1882,7 +1882,7 @@ msgstr "A teljes újraolvasással minden metaadat (borító, lejátszási statis
 msgid "Don't repeat"
 msgstr "Ne ismételjen"
 
-#: library/libraryview.cpp:441
+#: library/libraryview.cpp:420
 msgid "Don't show in various artists"
 msgstr "Ne mutassa a különböző előadók között"
 
@@ -2016,7 +2016,7 @@ msgstr "Dinamikus mód bekapcsolva"
 msgid "Dynamic random mix"
 msgstr "Dinamikus véletlenszerű mix"
 
-#: library/libraryview.cpp:409
+#: library/libraryview.cpp:388
 msgid "Edit smart playlist..."
 msgstr "Intelligens lejátszási lista szerkesztése..."
 
@@ -2037,12 +2037,12 @@ msgstr "Címkék szerkesztése"
 msgid "Edit track information"
 msgstr "Száminformációk szerkesztése"
 
-#: library/libraryview.cpp:428 widgets/fileviewlist.cpp:49
+#: library/libraryview.cpp:407 widgets/fileviewlist.cpp:49
 #: ../bin/src/ui_mainwindow.h:658
 msgid "Edit track information..."
 msgstr "Száminformációk szerkesztése..."
 
-#: library/libraryview.cpp:431
+#: library/libraryview.cpp:410
 msgid "Edit tracks information..."
 msgstr "Száminformációk szerkesztése"
 
@@ -2159,7 +2159,7 @@ msgid "Equivalent to --log-levels *:3"
 msgstr "Megegyezik a --log-levels *:3 kapcsolóval"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:242
-#: library/libraryview.cpp:651 ui/mainwindow.cpp:1997 ui/mainwindow.cpp:2244
+#: library/libraryview.cpp:630 ui/mainwindow.cpp:1997 ui/mainwindow.cpp:2244
 #: ui/mainwindow.cpp:2392 internet/vk/vkservice.cpp:634
 msgid "Error"
 msgstr "Hiba"
@@ -2548,7 +2548,7 @@ msgid "Genre"
 msgstr "Műfaj"
 
 #: internet/spotify/spotifyservice.cpp:633
-#: internet/spotify/spotifyservice.cpp:674
+#: internet/spotify/spotifyservice.cpp:676
 msgid "Get a URL to share this Spotify song"
 msgstr "URL lekérése ezen Grooveshark szám megosztásához"
 
@@ -3419,7 +3419,7 @@ msgstr "Új mappa"
 msgid "New playlist"
 msgstr "Új lejátszási lista"
 
-#: library/libraryview.cpp:406
+#: library/libraryview.cpp:385
 msgid "New smart playlist..."
 msgstr "Új intelligens lejátszási lista..."
 
@@ -3478,7 +3478,7 @@ msgstr "Rövid blokkok nélkül"
 msgid "None"
 msgstr "Egyik sem"
 
-#: library/libraryview.cpp:652 ui/mainwindow.cpp:2245 ui/mainwindow.cpp:2393
+#: library/libraryview.cpp:631 ui/mainwindow.cpp:2245 ui/mainwindow.cpp:2393
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Egy kiválasztott szám sem alkalmas az eszközre való másoláshoz"
 
@@ -3640,7 +3640,7 @@ msgid "Open in Google Drive"
 msgstr "Google Drive megnyitása"
 
 #: devices/deviceview.cpp:221 globalsearch/globalsearchview.cpp:461
-#: internet/core/internetservice.cpp:102 library/libraryview.cpp:396
+#: internet/core/internetservice.cpp:102 library/libraryview.cpp:375
 #: widgets/fileviewlist.cpp:35
 msgid "Open in new playlist"
 msgstr "Megnyitás új lejátszási listán"
@@ -3685,7 +3685,7 @@ msgstr "Opus"
 msgid "Organise Files"
 msgstr "Fájlok rendezése"
 
-#: library/libraryview.cpp:417 ui/mainwindow.cpp:637
+#: library/libraryview.cpp:396 ui/mainwindow.cpp:637
 msgid "Organise files..."
 msgstr "Fájlok rendezése..."
 
@@ -4008,7 +4008,7 @@ msgstr "Sorkezelő"
 msgid "Queue selected tracks"
 msgstr "Sorba állítja a kiválasztott számokat"
 
-#: globalsearch/globalsearchview.cpp:466 library/libraryview.cpp:401
+#: globalsearch/globalsearchview.cpp:466 library/libraryview.cpp:380
 #: ui/mainwindow.cpp:1675
 msgid "Queue track"
 msgstr "Szám sorba állítása"
@@ -4131,7 +4131,7 @@ msgstr "Eltávolítás a Zenéimből"
 msgid "Remove from bookmarks"
 msgstr "Eltávolítás a kedvencekből"
 
-#: internet/spotify/spotifyservice.cpp:672 ../bin/src/ui_mainwindow.h:684
+#: internet/spotify/spotifyservice.cpp:674 ../bin/src/ui_mainwindow.h:684
 msgid "Remove from playlist"
 msgstr "Eltávolítás a lejátszási listáról"
 
@@ -4176,7 +4176,7 @@ msgid "Repeat track"
 msgstr "Szám ismétlése"
 
 #: devices/deviceview.cpp:219 globalsearch/globalsearchview.cpp:457
-#: internet/core/internetservice.cpp:91 library/libraryview.cpp:393
+#: internet/core/internetservice.cpp:91 library/libraryview.cpp:372
 #: widgets/fileviewlist.cpp:34
 msgid "Replace current playlist"
 msgstr "Az aktuális lista cseréje"
@@ -4608,7 +4608,7 @@ msgstr "Jelenítse meg teljes méretben..."
 msgid "Show groups in global search result"
 msgstr "Csoportok mutatása a globális keresési eredmények között"
 
-#: library/libraryview.cpp:434 ui/mainwindow.cpp:646
+#: library/libraryview.cpp:413 ui/mainwindow.cpp:646
 #: widgets/fileviewlist.cpp:51
 msgid "Show in file browser..."
 msgstr "Mutassa a fájlböngészőben..."
@@ -4617,7 +4617,7 @@ msgstr "Mutassa a fájlböngészőben..."
 msgid "Show in library..."
 msgstr "Mutasd a zenetárban"
 
-#: library/libraryview.cpp:438
+#: library/libraryview.cpp:417
 msgid "Show in various artists"
 msgstr "Jelenítse meg a különböző előadók között"
 
@@ -4814,7 +4814,7 @@ msgstr "Spotify"
 msgid "Spotify login error"
 msgstr "Hiba a Spotifyra való bejelentkezéskor"
 
-#: internet/spotify/spotifyservice.cpp:835
+#: internet/spotify/spotifyservice.cpp:837
 msgid "Spotify playlist's URL"
 msgstr "Spotify lejátszási lista URL"
 
@@ -4826,7 +4826,7 @@ msgstr "Spotify beépülő"
 msgid "Spotify plugin not installed"
 msgstr "A Spotify beépülő nincs telepítve"
 
-#: internet/spotify/spotifyservice.cpp:826
+#: internet/spotify/spotifyservice.cpp:828
 msgid "Spotify song's URL"
 msgstr "Spotify szám URL"
 
@@ -4963,15 +4963,15 @@ msgstr "Támogatott formátumok"
 msgid "Synchronize statistics to files now"
 msgstr "Statisztikák mentése a fájlokba"
 
-#: internet/spotify/spotifyservice.cpp:699
+#: internet/spotify/spotifyservice.cpp:701
 msgid "Syncing Spotify inbox"
 msgstr "Spotify üzenetek szinkronizálása"
 
-#: internet/spotify/spotifyservice.cpp:693
+#: internet/spotify/spotifyservice.cpp:695
 msgid "Syncing Spotify playlist"
 msgstr "Spotify lejátszási lista szinkronizálása"
 
-#: internet/spotify/spotifyservice.cpp:704
+#: internet/spotify/spotifyservice.cpp:706
 msgid "Syncing Spotify starred tracks"
 msgstr "Spotify csillagozott számok szinronizálása"
 
@@ -5041,7 +5041,7 @@ msgid ""
 "rescan because of the new features listed below:"
 msgstr "A Clementine most frissült verziójának szüksége van a teljes zenetár újraolvasására az alább sorolt új funkciók használatához:"
 
-#: library/libraryview.cpp:574
+#: library/libraryview.cpp:553
 msgid "There are other songs in this album"
 msgstr "Vannak más zeneszámok is ebben az albumban"
 
@@ -5077,7 +5077,7 @@ msgid ""
 "continue?"
 msgstr "Ezek a fájlok törölve lesznek az eszközről. Biztos benne, hogy folytatja?"
 
-#: library/libraryview.cpp:658 ui/mainwindow.cpp:2295 widgets/fileview.cpp:187
+#: library/libraryview.cpp:637 ui/mainwindow.cpp:2295 widgets/fileview.cpp:187
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -5610,7 +5610,7 @@ msgstr "Windows Media audio"
 msgid "Without cover:"
 msgstr "Borító nélkül:"
 
-#: library/libraryview.cpp:575
+#: library/libraryview.cpp:554
 msgid ""
 "Would you like to move the other songs in this album to Various Artists as "
 "well?"
@@ -5760,7 +5760,7 @@ msgstr "A Last.fm előfizetési adatai hibásak"
 msgid "Your Magnatune credentials were incorrect"
 msgstr "A Magnatune bejelentkezési adataid nem megfelelőek"
 
-#: library/libraryview.cpp:366
+#: library/libraryview.cpp:345
 msgid "Your library is empty!"
 msgstr "Az ön zenetára üres!"
 

@@ -813,7 +813,7 @@ msgid "Append files/URLs to the playlist"
 msgstr "Додај нумере/УРЛ токове у листу нумера"
 
 #: devices/deviceview.cpp:216 globalsearch/globalsearchview.cpp:453
-#: internet/core/internetservice.cpp:80 library/libraryview.cpp:391
+#: internet/core/internetservice.cpp:80 library/libraryview.cpp:370
 #: widgets/fileviewlist.cpp:31
 msgid "Append to current playlist"
 msgstr "Додај у текућу листу нумера"
@@ -1268,7 +1268,7 @@ msgstr "Клементина није могла да нађе резултат�
 msgid "Clementine will find music in:"
 msgstr "Клементина ће тражити музику у:"
 
-#: library/libraryview.cpp:372
+#: library/libraryview.cpp:351
 msgid "Click here to add some music"
 msgstr "Кликните овде да додате музику"
 
@@ -1360,7 +1360,7 @@ msgstr "Подеси Магнатјун..."
 msgid "Configure Shortcuts"
 msgstr "Поставке пречица"
 
-#: internet/spotify/spotifyservice.cpp:911
+#: internet/spotify/spotifyservice.cpp:913
 msgid "Configure Spotify..."
 msgstr "Подеси Спотифај..."
 
@@ -1451,7 +1451,7 @@ msgstr "Копирај УРЛ дељења на клипборд"
 msgid "Copy to clipboard"
 msgstr "Копирај на клипборд"
 
-#: library/libraryview.cpp:421 internet/podcasts/podcastservice.cpp:437
+#: library/libraryview.cpp:400 internet/podcasts/podcastservice.cpp:437
 #: ui/mainwindow.cpp:641 widgets/fileviewlist.cpp:43
 msgid "Copy to device..."
 msgstr "Копирај на уређај...."
@@ -1700,7 +1700,7 @@ msgstr "Обриши"
 msgid "Delete downloaded data"
 msgstr "Обриши преузете податке"
 
-#: devices/deviceview.cpp:404 library/libraryview.cpp:657
+#: devices/deviceview.cpp:404 library/libraryview.cpp:636
 #: ui/mainwindow.cpp:2294 widgets/fileview.cpp:186
 msgid "Delete files"
 msgstr "Брисање фајлова"
@@ -1709,7 +1709,7 @@ msgstr "Брисање фајлова"
 msgid "Delete from device..."
 msgstr "Обриши са уређаја..."
 
-#: library/libraryview.cpp:423 ui/mainwindow.cpp:643
+#: library/libraryview.cpp:402 ui/mainwindow.cpp:643
 #: widgets/fileviewlist.cpp:44
 msgid "Delete from disk..."
 msgstr "Обриши са диска..."
@@ -1722,7 +1722,7 @@ msgstr "Обриши пуштене епизоде"
 msgid "Delete preset"
 msgstr "Обриши препоставку"
 
-#: library/libraryview.cpp:412
+#: library/libraryview.cpp:391
 msgid "Delete smart playlist"
 msgstr "Обриши паметну листу"
 
@@ -1875,7 +1875,7 @@ msgstr "Поновним скенирањем ћете изгубити све �
 msgid "Don't repeat"
 msgstr "Не понављај"
 
-#: library/libraryview.cpp:441
+#: library/libraryview.cpp:420
 msgid "Don't show in various artists"
 msgstr "Не приказуј у разним извођачима"
 
@@ -2009,7 +2009,7 @@ msgstr "Динамички режим је укључен"
 msgid "Dynamic random mix"
 msgstr "Динамички насумични микс"
 
-#: library/libraryview.cpp:409
+#: library/libraryview.cpp:388
 msgid "Edit smart playlist..."
 msgstr "Уреди паметну листу..."
 
@@ -2030,12 +2030,12 @@ msgstr "Уреди ознаке"
 msgid "Edit track information"
 msgstr "Уређивање података нумере"
 
-#: library/libraryview.cpp:428 widgets/fileviewlist.cpp:49
+#: library/libraryview.cpp:407 widgets/fileviewlist.cpp:49
 #: ../bin/src/ui_mainwindow.h:658
 msgid "Edit track information..."
 msgstr "Уреди податке нумере..."
 
-#: library/libraryview.cpp:431
+#: library/libraryview.cpp:410
 msgid "Edit tracks information..."
 msgstr "Уреди податке нумера.."
 
@@ -2152,7 +2152,7 @@ msgid "Equivalent to --log-levels *:3"
 msgstr "Исто као и --log-levels *:3"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:242
-#: library/libraryview.cpp:651 ui/mainwindow.cpp:1997 ui/mainwindow.cpp:2244
+#: library/libraryview.cpp:630 ui/mainwindow.cpp:1997 ui/mainwindow.cpp:2244
 #: ui/mainwindow.cpp:2392 internet/vk/vkservice.cpp:634
 msgid "Error"
 msgstr "Грешка"
@@ -2541,7 +2541,7 @@ msgid "Genre"
 msgstr "жанр"
 
 #: internet/spotify/spotifyservice.cpp:633
-#: internet/spotify/spotifyservice.cpp:674
+#: internet/spotify/spotifyservice.cpp:676
 msgid "Get a URL to share this Spotify song"
 msgstr "Добави УРЛ за дељење ове песме са Спотифаја"
 
@@ -3412,7 +3412,7 @@ msgstr "Нова фасцикла"
 msgid "New playlist"
 msgstr "Нова листа нумера"
 
-#: library/libraryview.cpp:406
+#: library/libraryview.cpp:385
 msgid "New smart playlist..."
 msgstr "Нова паметна листа"
 
@@ -3471,7 +3471,7 @@ msgstr "без кратких блокова"
 msgid "None"
 msgstr "ништа"
 
-#: library/libraryview.cpp:652 ui/mainwindow.cpp:2245 ui/mainwindow.cpp:2393
+#: library/libraryview.cpp:631 ui/mainwindow.cpp:2245 ui/mainwindow.cpp:2393
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Ниједна од изабраних песама није погодна за копирање на уређај"
 
@@ -3633,7 +3633,7 @@ msgid "Open in Google Drive"
 msgstr "Отвори у Гугл Драјву"
 
 #: devices/deviceview.cpp:221 globalsearch/globalsearchview.cpp:461
-#: internet/core/internetservice.cpp:102 library/libraryview.cpp:396
+#: internet/core/internetservice.cpp:102 library/libraryview.cpp:375
 #: widgets/fileviewlist.cpp:35
 msgid "Open in new playlist"
 msgstr "Отвори у новој листи"
@@ -3678,7 +3678,7 @@ msgstr "Опус"
 msgid "Organise Files"
 msgstr "Организовање фајлова"
 
-#: library/libraryview.cpp:417 ui/mainwindow.cpp:637
+#: library/libraryview.cpp:396 ui/mainwindow.cpp:637
 msgid "Organise files..."
 msgstr "Организуј фајлове..."
 
@@ -4001,7 +4001,7 @@ msgstr "Менаџер редоследа"
 msgid "Queue selected tracks"
 msgstr "Стави у ред изабране нумере"
 
-#: globalsearch/globalsearchview.cpp:466 library/libraryview.cpp:401
+#: globalsearch/globalsearchview.cpp:466 library/libraryview.cpp:380
 #: ui/mainwindow.cpp:1675
 msgid "Queue track"
 msgstr "Стави нумеру у ред"
@@ -4124,7 +4124,7 @@ msgstr "Уклони из Моје музике"
 msgid "Remove from bookmarks"
 msgstr "Уклони из обележивача"
 
-#: internet/spotify/spotifyservice.cpp:672 ../bin/src/ui_mainwindow.h:684
+#: internet/spotify/spotifyservice.cpp:674 ../bin/src/ui_mainwindow.h:684
 msgid "Remove from playlist"
 msgstr "Уклони са листе нумера"
 
@@ -4169,7 +4169,7 @@ msgid "Repeat track"
 msgstr "Понављај нумеру"
 
 #: devices/deviceview.cpp:219 globalsearch/globalsearchview.cpp:457
-#: internet/core/internetservice.cpp:91 library/libraryview.cpp:393
+#: internet/core/internetservice.cpp:91 library/libraryview.cpp:372
 #: widgets/fileviewlist.cpp:34
 msgid "Replace current playlist"
 msgstr "Замени текућу листу"
@@ -4601,7 +4601,7 @@ msgstr "Пуна величина..."
 msgid "Show groups in global search result"
 msgstr "Прикажи групе у резултату опште претраге"
 
-#: library/libraryview.cpp:434 ui/mainwindow.cpp:646
+#: library/libraryview.cpp:413 ui/mainwindow.cpp:646
 #: widgets/fileviewlist.cpp:51
 msgid "Show in file browser..."
 msgstr "Прикажи у менаџеру фајлова"
@@ -4610,7 +4610,7 @@ msgstr "Прикажи у менаџеру фајлова"
 msgid "Show in library..."
 msgstr "Прикажи у библиотеци..."
 
-#: library/libraryview.cpp:438
+#: library/libraryview.cpp:417
 msgid "Show in various artists"
 msgstr "Приказуј у разним извођачима"
 
@@ -4807,7 +4807,7 @@ msgstr "Спотифај"
 msgid "Spotify login error"
 msgstr "Грешка пријављивања на Спотифај"
 
-#: internet/spotify/spotifyservice.cpp:835
+#: internet/spotify/spotifyservice.cpp:837
 msgid "Spotify playlist's URL"
 msgstr "УРЛ Спотифај листе нумера"
 
@@ -4819,7 +4819,7 @@ msgstr "Спотифај прикључак"
 msgid "Spotify plugin not installed"
 msgstr "Спотифај прикључак није инсталиран"
 
-#: internet/spotify/spotifyservice.cpp:826
+#: internet/spotify/spotifyservice.cpp:828
 msgid "Spotify song's URL"
 msgstr "УРЛ Спотифај песме"
 
@@ -4956,15 +4956,15 @@ msgstr "Подржани формати"
 msgid "Synchronize statistics to files now"
 msgstr "Синхронизуј статистике у фајлове"
 
-#: internet/spotify/spotifyservice.cpp:699
+#: internet/spotify/spotifyservice.cpp:701
 msgid "Syncing Spotify inbox"
 msgstr "Синхронизовање Спотифај сандучета"
 
-#: internet/spotify/spotifyservice.cpp:693
+#: internet/spotify/spotifyservice.cpp:695
 msgid "Syncing Spotify playlist"
 msgstr "Синхронизовање Спотифај листе нумера"
 
-#: internet/spotify/spotifyservice.cpp:704
+#: internet/spotify/spotifyservice.cpp:706
 msgid "Syncing Spotify starred tracks"
 msgstr "Синхронизовање Спотифај оцењених нумера"
 
@@ -5034,7 +5034,7 @@ msgid ""
 "rescan because of the new features listed below:"
 msgstr "Издање Клементине које сте управо надоградили захтева потпуно скенирање библиотеке због нових могућности које су излистане испод:"
 
-#: library/libraryview.cpp:574
+#: library/libraryview.cpp:553
 msgid "There are other songs in this album"
 msgstr "Има још песама у овом албуму"
 
@@ -5070,7 +5070,7 @@ msgid ""
 "continue?"
 msgstr "Ови фајлови ће бити обрисани са уређаја, желите ли заиста да наставите?"
 
-#: library/libraryview.cpp:658 ui/mainwindow.cpp:2295 widgets/fileview.cpp:187
+#: library/libraryview.cpp:637 ui/mainwindow.cpp:2295 widgets/fileview.cpp:187
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -5603,7 +5603,7 @@ msgstr "Виндоуз медија аудио"
 msgid "Without cover:"
 msgstr "Без омота:"
 
-#: library/libraryview.cpp:575
+#: library/libraryview.cpp:554
 msgid ""
 "Would you like to move the other songs in this album to Various Artists as "
 "well?"
@@ -5753,7 +5753,7 @@ msgstr "Ваши акредитиви за Ласт.фм су нетачни"
 msgid "Your Magnatune credentials were incorrect"
 msgstr "Ваши акредитиви за Магнатјун су нетачни"
 
-#: library/libraryview.cpp:366
+#: library/libraryview.cpp:345
 msgid "Your library is empty!"
 msgstr "Ваша библиотека је празна!"
 
