@@ -98,8 +98,6 @@ class VolumeSlider : public Slider {
 
  public:
   VolumeSlider(QWidget* parent, uint max = 0);
-  QPixmap volumePixmapDraw() const;
-  void VolumeSliderHandle();
 
  protected:
   virtual void paintEvent(QPaintEvent*);
@@ -116,6 +114,8 @@ class VolumeSlider : public Slider {
 
  private:
   void generateGradient();
+  QPixmap volumePixmapDraw() const;
+  void drawVolumeSliderHandle();
 
   VolumeSlider(const VolumeSlider&);             // undefined
   VolumeSlider& operator=(const VolumeSlider&);  // undefined

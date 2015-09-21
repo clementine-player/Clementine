@@ -202,7 +202,7 @@ Amarok::VolumeSlider::VolumeSlider(QWidget* parent, uint max)
   m_previous_theme_text_color = palette().color(QPalette::WindowText);
   m_previous_theme_highlight_color = palette().color(QPalette::Highlight);
 
-  VolumeSliderHandle();
+  drawVolumeSliderHandle();
   generateGradient();
 
   setMinimumWidth(m_pixmapInset.width());
@@ -293,7 +293,7 @@ void Amarok::VolumeSlider::paintEvent(QPaintEvent*) {
   }
 
   if (m_previous_theme_highlight_color != palette().color(QPalette::Highlight)) {
-    VolumeSliderHandle();
+    drawVolumeSliderHandle();
     m_previous_theme_highlight_color = palette().color(QPalette::Highlight);
   }
 
@@ -354,7 +354,7 @@ QPixmap Amarok::VolumeSlider::volumePixmapDraw () const {
   return pixmap;
 }
 
-void Amarok::VolumeSlider::VolumeSliderHandle() {
+void Amarok::VolumeSlider::drawVolumeSliderHandle() {
   QImage pixmapHandle(":volumeslider-handle.png");
   QImage pixmapHandleGlow(":/volumeslider-handle_glow.png");
 
