@@ -188,6 +188,17 @@
     </exclude>
     <invalidIndicator value="Something went wrong"/>
   </provider>
+  <provider name="musixmatch.com" title="{artist} - {title} lyrics | Musixmatch" charset="utf-8" url="https://www.musixmatch.com/lyrics/{Artist}/{Title}">
+    <urlFormat replace=" _@;\/&quot;'()[]" with="-"/>
+    <urlFormat replace="?" with=""/>
+    <extract>
+      <item begin="&lt;span id=&quot;lyrics-html&quot;" end="&lt;/span&gt;"/>
+    </extract>
+    <exclude>
+      <item begin=" data-reactid=&quot;" end="&quot;&gt;"/>
+    </exclude>
+    <invalidIndicator value="We couldn't find that page."/>
+  </provider>
   <provider name="seeklyrics.com" title="{artist} - {title} Lyrics" charset="iso-8859-1" url="http://www.seeklyrics.com/lyrics/{Artist}/{Title}.html">
     <urlFormat replace=" _@,;&amp;\/'&quot;" with="-"/>
     <urlFormat replace="." with=""/>
@@ -227,7 +238,7 @@
     <exclude>
       <item begin="&quot;id-" end="&quot;&gt;"/>
     </exclude>
-  </provider>  
+  </provider>
   <provider name="teksty.org" title="{artist} - {title} - tekst" charset="utf-8" url="http://teksty.org/{artist},{title},tekst-piosenki">
     <urlFormat replace=" _@,;&amp;\/&quot;'" with="-"/>
     <urlFormat replace="." with=""/>
