@@ -101,7 +101,9 @@ void LibraryItemDelegate::paint(QPainter* painter,
     painter->drawText(text_rect, text);
 
     // Draw the line under the item
-    QPen line_pen(opt.palette.color(QPalette::Dark));
+    QColor line_color = opt.palette.color(QPalette::Text);
+    line_color.setAlpha(100);
+    QPen line_pen(line_color);
     line_pen.setWidth(2);
 
     painter->setPen(line_pen);
