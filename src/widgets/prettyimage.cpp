@@ -179,9 +179,9 @@ void PrettyImage::contextMenuEvent(QContextMenuEvent* e) {
 
   if (!menu_) {
     menu_ = new QMenu(this);
-    menu_->addAction(IconLoader::Load("zoom-in"), tr("Show fullsize..."), this,
-                     SLOT(ShowFullsize()));
-    menu_->addAction(IconLoader::Load("document-save"),
+    menu_->addAction(IconLoader::Load("zoom-in", IconLoader::base), 
+                     tr("Show fullsize..."), this, SLOT(ShowFullsize()));
+    menu_->addAction(IconLoader::Load("document-save", IconLoader::base),
                      tr("Save image") + "...", this, SLOT(SaveAs()));
   }
 

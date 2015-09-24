@@ -23,6 +23,7 @@
 #include <QPushButton>
 
 #include "vkservice.h"
+#include "ui/iconloader.h"
 
 VkSearchDialog::VkSearchDialog(VkService* service, QWidget* parent)
     : QDialog(parent),
@@ -185,9 +186,9 @@ QTreeWidgetItem* VkSearchDialog::createItem(const MusicOwner& own) {
   QTreeWidgetItem* item = new QTreeWidgetItem(popup);
   item->setText(0, own.name());
   if (own.id() > 0) {
-    item->setIcon(0, QIcon(":vk/user.png"));
+    item->setIcon(0, IconLoader::Load("x-clementine-artist", IconLoader::base));
   } else {
-    item->setIcon(0, QIcon(":vk/group.png"));
+    item->setIcon(0, IconLoader::Load("group", IconLoader::base));
   }
   item->setData(0, Qt::UserRole, QVariant::fromValue(own));
   item->setText(1, QString::number(own.song_count()));

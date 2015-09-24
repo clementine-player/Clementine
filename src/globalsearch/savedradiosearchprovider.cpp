@@ -24,7 +24,8 @@ SavedRadioSearchProvider::SavedRadioSearchProvider(SavedRadio* service,
                                                    QObject* parent)
     : SimpleSearchProvider(app, parent), service_(service) {
   Init(tr("Your radio streams"), "savedradio",
-       IconLoader::Load("document-open-remote"), MimeDataContainsUrlsOnly);
+       IconLoader::Load("document-open-remote", IconLoader::base), 
+                        MimeDataContainsUrlsOnly);
 
   set_max_suggestion_count(3);
 

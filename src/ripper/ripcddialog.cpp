@@ -195,7 +195,7 @@ void RipCDDialog::AddDestination() {
 
 // Adds a directory to the 'destination' combo box.
 void RipCDDialog::AddDestinationDirectory(QString dir) {
-  QIcon icon = IconLoader::Load("folder");
+  QIcon icon = IconLoader::Load("folder", IconLoader::base);
   QVariant data = QVariant::fromValue(dir);
   // Do not insert duplicates.
   int duplicate_index = ui_->destination->findData(data);

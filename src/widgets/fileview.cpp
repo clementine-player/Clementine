@@ -45,10 +45,10 @@ FileView::FileView(QWidget* parent)
   ui_->setupUi(this);
 
   // Icons
-  ui_->back->setIcon(IconLoader::Load("go-previous"));
-  ui_->forward->setIcon(IconLoader::Load("go-next"));
-  ui_->home->setIcon(IconLoader::Load("go-home"));
-  ui_->up->setIcon(IconLoader::Load("go-up"));
+  ui_->back->setIcon(IconLoader::Load("go-previous", IconLoader::base));
+  ui_->forward->setIcon(IconLoader::Load("go-next", IconLoader::base));
+  ui_->home->setIcon(IconLoader::Load("go-home", IconLoader::base));
+  ui_->up->setIcon(IconLoader::Load("go-up", IconLoader::base));
 
   connect(ui_->back, SIGNAL(clicked()), undo_stack_, SLOT(undo()));
   connect(ui_->forward, SIGNAL(clicked()), undo_stack_, SLOT(redo()));

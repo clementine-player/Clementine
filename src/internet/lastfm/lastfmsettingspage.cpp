@@ -40,7 +40,7 @@ LastFMSettingsPage::LastFMSettingsPage(SettingsDialog* dialog)
   ui_->setupUi(this);
 
   // Icons
-  setWindowIcon(QIcon(":/last.fm/as.png"));
+  setWindowIcon(IconLoader::Load("lastfm", IconLoader::provider));
 
   connect(service_, SIGNAL(AuthenticationComplete(bool, QString)),
           SLOT(AuthenticationComplete(bool, QString)));

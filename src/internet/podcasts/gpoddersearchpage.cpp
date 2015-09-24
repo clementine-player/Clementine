@@ -26,6 +26,7 @@
 #include "ui_gpoddersearchpage.h"
 #include "core/closure.h"
 #include "core/network.h"
+#include "ui/iconloader.h"
 
 GPodderSearchPage::GPodderSearchPage(Application* app, QWidget* parent)
     : AddPodcastPage(app, parent),
@@ -34,6 +35,7 @@ GPodderSearchPage::GPodderSearchPage(Application* app, QWidget* parent)
       api_(new mygpo::ApiRequest(network_)) {
   ui_->setupUi(this);
   connect(ui_->search, SIGNAL(clicked()), SLOT(SearchClicked()));
+  setWindowIcon(IconLoader::Load("mygpo", IconLoader::provider));
 }
 
 GPodderSearchPage::~GPodderSearchPage() {

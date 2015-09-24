@@ -343,6 +343,9 @@ QString GetConfigPath(ConfigPath config) {
 #endif
     } break;
 
+    case Path_Icons:
+      return GetConfigPath(Path_Root) + "/customiconset";
+
     case Path_AlbumCovers:
       return GetConfigPath(Path_Root) + "/albumcovers";
 

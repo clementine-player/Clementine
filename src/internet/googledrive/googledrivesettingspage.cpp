@@ -27,6 +27,7 @@
 #include "core/application.h"
 #include "internet/core/internetmodel.h"
 #include "ui/settingsdialog.h"
+#include "ui/iconloader.h"
 
 GoogleDriveSettingsPage::GoogleDriveSettingsPage(SettingsDialog* parent)
     : SettingsPage(parent),
@@ -34,6 +35,8 @@ GoogleDriveSettingsPage::GoogleDriveSettingsPage(SettingsDialog* parent)
       service_(
           dialog()->app()->internet_model()->Service<GoogleDriveService>()) {
   ui_->setupUi(this);
+  setWindowIcon(IconLoader::Load("googledrive", IconLoader::provider));
+
   ui_->login_state->AddCredentialGroup(ui_->login_container);
 
   connect(ui_->login_button, SIGNAL(clicked()), SLOT(LoginClicked()));

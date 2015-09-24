@@ -103,12 +103,12 @@ void PlaylistListContainer::showEvent(QShowEvent* e) {
   }
   loaded_icons_ = true;
 
-  action_new_folder_->setIcon(IconLoader::Load("folder-new"));
-  action_remove_->setIcon(IconLoader::Load("edit-delete"));
-  action_save_playlist_->setIcon(IconLoader::Load("document-save"));
+  action_new_folder_->setIcon(IconLoader::Load("folder-new", IconLoader::base));
+  action_remove_->setIcon(IconLoader::Load("edit-delete", IconLoader::base));
+  action_save_playlist_->setIcon(IconLoader::Load("document-save", IconLoader::base));
 
-  model_->SetIcons(IconLoader::Load("view-media-playlist"),
-                   IconLoader::Load("folder"));
+  model_->SetIcons(IconLoader::Load("view-media-playlist", IconLoader::base),
+                   IconLoader::Load("folder", IconLoader::base));
 
   // Apply these icons to items that have already been created.
   RecursivelySetIcons(model_->invisibleRootItem());

@@ -23,6 +23,7 @@
 
 #include "tagwidget.h"
 #include "core/logging.h"
+#include "ui/iconloader.h"
 
 struct EchoNestTags::Request {
   Request(int id) : id_(id), artist_(new Echonest::Artist) {}
@@ -60,7 +61,7 @@ void EchoNestTags::RequestFinished() {
     data.id_ = "echonest/artisttags";
     data.title_ = tr("Artist tags");
     data.type_ = CollapsibleInfoPane::Data::Type_Tags;
-    data.icon_ = QIcon(":/last.fm/icon_tag.png");
+    data.icon_ = IconLoader::Load("icon_tag", IconLoader::lastfm);
 
     TagWidget* widget = new TagWidget(TagWidget::Type_Tags);
     data.contents_ = widget;

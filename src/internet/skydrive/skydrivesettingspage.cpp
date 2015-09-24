@@ -25,12 +25,15 @@
 #include "internet/skydrive/skydriveservice.h"
 #include "internet/core/internetmodel.h"
 #include "ui/settingsdialog.h"
+#include "ui/iconloader.h"
 
 SkydriveSettingsPage::SkydriveSettingsPage(SettingsDialog* parent)
     : SettingsPage(parent),
       ui_(new Ui::SkydriveSettingsPage),
       service_(dialog()->app()->internet_model()->Service<SkydriveService>()) {
   ui_->setupUi(this);
+  setWindowIcon(IconLoader::Load("skydrive", IconLoader::provider));
+
   ui_->login_state->AddCredentialGroup(ui_->login_container);
 
   connect(ui_->login_button, SIGNAL(clicked()), SLOT(LoginClicked()));

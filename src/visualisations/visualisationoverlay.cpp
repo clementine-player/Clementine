@@ -38,7 +38,7 @@ VisualisationOverlay::VisualisationOverlay(QWidget* parent)
   setAttribute(Qt::WA_TranslucentBackground);
   setMouseTracking(true);
 
-  ui_->settings->setIcon(IconLoader::Load("configure"));
+  ui_->settings->setIcon(IconLoader::Load("configure", IconLoader::base));
   connect(ui_->settings, SIGNAL(clicked()), SLOT(ShowSettingsMenu()));
 
   connect(fade_timeline_, SIGNAL(valueChanged(qreal)),

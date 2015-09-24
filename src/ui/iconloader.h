@@ -22,13 +22,21 @@
 
 class IconLoader {
  public:
+  enum IconType {
+    base = 0,
+    provider = 1,
+    lastfm = 2,
+  };
+  
   static void Init();
-  static QIcon Load(const QString& name);
+  static QIcon Load(const QString& name, const IconType& icontype);
 
  private:
   IconLoader() {}
 
   static QList<int> sizes_;
+  static QString custom_icon_path_;
+  static QList<QString> icon_sub_path_;
 };
 
 #endif  // ICONLOADER_H

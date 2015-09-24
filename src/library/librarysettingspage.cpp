@@ -45,8 +45,8 @@ LibrarySettingsPage::LibrarySettingsPage(SettingsDialog* dialog)
   ui_->list->setItemDelegate(new NativeSeparatorsDelegate(this));
 
   // Icons
-  setWindowIcon(IconLoader::Load("folder-sound"));
-  ui_->add->setIcon(IconLoader::Load("document-open-folder"));
+  setWindowIcon(IconLoader::Load("folder-sound", IconLoader::base));
+  ui_->add->setIcon(IconLoader::Load("document-open-folder", IconLoader::base));
 
   connect(ui_->add, SIGNAL(clicked()), SLOT(Add()));
   connect(ui_->remove, SIGNAL(clicked()), SLOT(Remove()));

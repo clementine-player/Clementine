@@ -107,7 +107,8 @@ MagnatuneService::MagnatuneService(Application* app, InternetModel* parent)
   app_->player()->RegisterUrlHandler(url_handler_);
   app_->global_search()->AddProvider(new LibrarySearchProvider(
       library_backend_, tr("Magnatune"), "magnatune",
-      QIcon(":/providers/magnatune.png"), true, app_, this));
+      IconLoader::Load("magnatune", IconLoader::provider), 
+      true, app_, this));
 }
 
 MagnatuneService::~MagnatuneService() { delete context_menu_; }
@@ -123,7 +124,8 @@ void MagnatuneService::ReloadSettings() {
 }
 
 QStandardItem* MagnatuneService::CreateRootItem() {
-  root_ = new QStandardItem(QIcon(":/providers/magnatune.png"), kServiceName);
+  root_ = new QStandardItem(IconLoader::Load("magnatune", IconLoader::provider), 
+                            kServiceName);
   root_->setData(true, InternetModel::Role_CanLazyLoad);
   return root_;
 }
@@ -276,19 +278,20 @@ void MagnatuneService::EnsureMenuCreated() {
   context_menu_ = new QMenu;
 
   context_menu_->addActions(GetPlaylistActions());
-  download_ = context_menu_->addAction(IconLoader::Load("download"),
+  download_ = context_menu_->addAction(IconLoader::Load("download", 
+                                       IconLoader::base),
                                        tr("Download this album"), this,
                                        SLOT(Download()));
   context_menu_->addSeparator();
-  context_menu_->addAction(IconLoader::Load("download"),
+  context_menu_->addAction(IconLoader::Load("download", IconLoader::base),
                            tr("Open %1 in browser").arg("magnatune.com"), this,
                            SLOT(Homepage()));
-  context_menu_->addAction(IconLoader::Load("view-refresh"),
+  context_menu_->addAction(IconLoader::Load("view-refresh", IconLoader::base),
                            tr("Refresh catalogue"), this,
                            SLOT(ReloadDatabase()));
   QAction* config_action = context_menu_->addAction(
-      IconLoader::Load("configure"), tr("Configure Magnatune..."), this,
-      SLOT(ShowConfig()));
+      IconLoader::Load("configure", IconLoader::base), tr("Configure Magnatune..."), 
+      this, SLOT(ShowConfig()));
 
   library_filter_ = new LibraryFilterWidget(0);
   library_filter_->SetSettingsGroup(kSettingsGroup);

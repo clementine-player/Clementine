@@ -27,6 +27,7 @@
 #include "digitallyimportedclient.h"
 #include "digitallyimportedservicebase.h"
 #include "core/closure.h"
+#include "ui/iconloader.h"
 
 DigitallyImportedSettingsPage::DigitallyImportedSettingsPage(
     SettingsDialog* dialog)
@@ -34,7 +35,7 @@ DigitallyImportedSettingsPage::DigitallyImportedSettingsPage(
       ui_(new Ui_DigitallyImportedSettingsPage),
       client_(new DigitallyImportedClient("di", this)) {
   ui_->setupUi(this);
-  setWindowIcon(QIcon(":/providers/digitallyimported-32.png"));
+  setWindowIcon(IconLoader::Load("digitallyimported", IconLoader::provider));
 
   connect(ui_->login_state, SIGNAL(LogoutClicked()), SLOT(Logout()));
   connect(ui_->login_state, SIGNAL(LoginClicked()), SLOT(Login()));

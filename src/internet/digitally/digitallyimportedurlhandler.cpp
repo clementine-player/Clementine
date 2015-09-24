@@ -26,6 +26,7 @@
 #include "core/logging.h"
 #include "core/taskmanager.h"
 #include "playlistparsers/playlistparser.h"
+#include "ui/iconloader.h"
 
 DigitallyImportedUrlHandler::DigitallyImportedUrlHandler(
     Application* app, DigitallyImportedServiceBase* service)
@@ -37,13 +38,13 @@ QString DigitallyImportedUrlHandler::scheme() const {
 
 QIcon DigitallyImportedUrlHandler::icon() const {
   if (scheme() == "di") {
-    return QIcon(":providers/digitallyimported.png");
+    return IconLoader::Load("digitallyimported", IconLoader::provider);
   } else if (scheme() == "radiotunes") {
-    return QIcon(":providers/radiotunes.png");
+    return IconLoader::Load("radiotunes", IconLoader::provider);
   } else if (scheme() == "jazzradio") {
-    return QIcon(":providers/jazzradio.png");
+    return IconLoader::Load("jazzradio", IconLoader::provider);
   } else if (scheme() == "rockradio") {
-    return QIcon(":providers/rockradio.png");
+    return IconLoader::Load("rockradio", IconLoader::provider);
   }
   return QIcon();
 }

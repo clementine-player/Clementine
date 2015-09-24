@@ -76,7 +76,8 @@ QList<QAction*> InternetService::GetPlaylistActions() {
 
 QAction* InternetService::GetAppendToPlaylistAction() {
   if (!append_to_playlist_) {
-    append_to_playlist_ = new QAction(IconLoader::Load("media-playback-start"),
+    append_to_playlist_ = new QAction(IconLoader::Load("media-playback-start", 
+                                      IconLoader::base),
                                       tr("Append to current playlist"), this);
     connect(append_to_playlist_, SIGNAL(triggered()), this,
             SLOT(AppendToPlaylist()));
@@ -87,7 +88,8 @@ QAction* InternetService::GetAppendToPlaylistAction() {
 
 QAction* InternetService::GetReplacePlaylistAction() {
   if (!replace_playlist_) {
-    replace_playlist_ = new QAction(IconLoader::Load("media-playback-start"),
+    replace_playlist_ = new QAction(IconLoader::Load("media-playback-start", 
+                                    IconLoader::base),
                                     tr("Replace current playlist"), this);
     connect(replace_playlist_, SIGNAL(triggered()), this,
             SLOT(ReplacePlaylist()));
@@ -98,7 +100,8 @@ QAction* InternetService::GetReplacePlaylistAction() {
 
 QAction* InternetService::GetOpenInNewPlaylistAction() {
   if (!open_in_new_playlist_) {
-    open_in_new_playlist_ = new QAction(IconLoader::Load("document-new"),
+    open_in_new_playlist_ = new QAction(IconLoader::Load("document-new", 
+                                        IconLoader::base),
                                         tr("Open in new playlist"), this);
     connect(open_in_new_playlist_, SIGNAL(triggered()), this,
             SLOT(OpenInNewPlaylist()));

@@ -53,7 +53,7 @@ OrganiseDialog::OrganiseDialog(TaskManager* task_manager, QWidget* parent)
   connect(ui_->button_box->button(QDialogButtonBox::Reset), SIGNAL(clicked()),
           SLOT(Reset()));
 
-  ui_->aftercopying->setItemIcon(1, IconLoader::Load("edit-delete"));
+  ui_->aftercopying->setItemIcon(1, IconLoader::Load("edit-delete", IconLoader::base));
 
   // Valid tags
   QMap<QString, QString> tags;

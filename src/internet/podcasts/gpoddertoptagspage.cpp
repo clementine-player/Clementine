@@ -24,6 +24,7 @@
 #include "gpoddertoptagsmodel.h"
 #include "core/closure.h"
 #include "core/network.h"
+#include "ui/iconloader.h"
 
 const int GPodderTopTagsPage::kMaxTagCount = 100;
 
@@ -33,7 +34,7 @@ GPodderTopTagsPage::GPodderTopTagsPage(Application* app, QWidget* parent)
       api_(new mygpo::ApiRequest(network_)),
       done_initial_load_(false) {
   setWindowTitle(tr("gpodder.net directory"));
-  setWindowIcon(QIcon(":providers/mygpo32.png"));
+  setWindowIcon(IconLoader::Load("mygpo", IconLoader::provider));
 
   SetModel(new GPodderTopTagsModel(api_, app, this));
 }

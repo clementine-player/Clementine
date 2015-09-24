@@ -99,11 +99,13 @@ void CloudFileService::ShowContextMenu(const QPoint& global_pos) {
   if (!context_menu_) {
     context_menu_.reset(new QMenu);
     context_menu_->addActions(GetPlaylistActions());
-    context_menu_->addAction(IconLoader::Load("download"), tr("Cover Manager"),
-                             this, SLOT(ShowCoverManager()));
+    context_menu_->addAction(IconLoader::Load("download", IconLoader::base), 
+                             tr("Cover Manager"), this, 
+                             SLOT(ShowCoverManager()));
     context_menu_->addSeparator();
-    context_menu_->addAction(IconLoader::Load("configure"), tr("Configure..."),
-                             this, SLOT(ShowSettingsDialog()));
+    context_menu_->addAction(IconLoader::Load("configure", IconLoader::base), 
+                             tr("Configure..."), this, 
+                             SLOT(ShowSettingsDialog()));
   }
   context_menu_->popup(global_pos);
 }

@@ -63,7 +63,7 @@ QSearchField::QSearchField(QWidget *parent) : QWidget(parent)
     connect(lineEdit, SIGNAL(textChanged(QString)),
             this, SLOT(setText(QString)));
 
-    QIcon clearIcon(IconLoader::Load("edit-clear-locationbar-ltr"));
+    QIcon clearIcon(IconLoader::Load("edit-clear-locationbar-ltr", IconLoader::base));
 
     QToolButton *clearButton = new QToolButton(this);
     clearButton->setIcon(clearIcon);

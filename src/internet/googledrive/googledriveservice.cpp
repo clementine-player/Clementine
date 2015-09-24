@@ -55,7 +55,7 @@ static const char* kServiceId = "google_drive";
 
 GoogleDriveService::GoogleDriveService(Application* app, InternetModel* parent)
     : CloudFileService(app, parent, kServiceName, kServiceId,
-                       QIcon(":/providers/googledrive.png"),
+                       IconLoader::Load("googledrive", IconLoader::provider),
                        SettingsDialog::Page_GoogleDrive),
       client_(new google_drive::Client(this)),
       open_in_drive_action_(nullptr),
@@ -213,20 +213,23 @@ void GoogleDriveService::ShowContextMenu(const QPoint& global_pos) {
     context_menu_.reset(new QMenu);
     context_menu_->addActions(GetPlaylistActions());
     open_in_drive_action_ = context_menu_->addAction(
-        QIcon(":/providers/googledrive.png"), tr("Open in Google Drive"), this,
-        SLOT(OpenWithDrive()));
+        IconLoader::Load("googledrive", IconLoader::provider), 
+        tr("Open in Google Drive"), this, SLOT(OpenWithDrive()));
     context_menu_->addSeparator();
-    update_action_ = context_menu_->addAction(IconLoader::Load("view-refresh"),
+    update_action_ = context_menu_->addAction(IconLoader::Load("view-refresh", 
+                                              IconLoader::base),
                                               tr("Check for updates"), this,
                                               SLOT(CheckForUpdates()));
     full_rescan_action_ = context_menu_->addAction(
-        IconLoader::Load("view-refresh"), tr("Do a full rescan..."), this,
-        SLOT(ConfirmFullRescan()));
+        IconLoader::Load("view-refresh", IconLoader::base), 
+        tr("Do a full rescan..."), this, SLOT(ConfirmFullRescan()));
     context_menu_->addSeparator();
-    context_menu_->addAction(IconLoader::Load("download"), tr("Cover Manager"),
-                             this, SLOT(ShowCoverManager()));
-    context_menu_->addAction(IconLoader::Load("configure"), tr("Configure..."),
-                             this, SLOT(ShowSettingsDialog()));
+    context_menu_->addAction(IconLoader::Load("download", IconLoader::base), 
+                             tr("Cover Manager"), this, 
+                             SLOT(ShowCoverManager()));
+    context_menu_->addAction(IconLoader::Load("configure", IconLoader::base), 
+                             tr("Configure..."), this, 
+                             SLOT(ShowSettingsDialog()));
   }
 
   // Only show some actions if there are real songs selected

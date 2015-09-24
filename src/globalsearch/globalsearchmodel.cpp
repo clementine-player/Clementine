@@ -18,6 +18,7 @@
 #include "globalsearch.h"
 #include "globalsearchmodel.h"
 #include "core/mimedata.h"
+#include "ui/iconloader.h"
 
 #include <QSortFilterProxyModel>
 
@@ -26,8 +27,8 @@ GlobalSearchModel::GlobalSearchModel(GlobalSearch* engine, QObject* parent)
       engine_(engine),
       proxy_(nullptr),
       use_pretty_covers_(true),
-      artist_icon_(":/icons/22x22/x-clementine-artist.png"),
-      album_icon_(":/icons/22x22/x-clementine-album.png") {
+      artist_icon_(IconLoader::Load("x-clementine-artist", IconLoader::base)),
+      album_icon_(IconLoader::Load("x-clementine-album", IconLoader::base)) {
   group_by_[0] = LibraryModel::GroupBy_Artist;
   group_by_[1] = LibraryModel::GroupBy_Album;
   group_by_[2] = LibraryModel::GroupBy_None;

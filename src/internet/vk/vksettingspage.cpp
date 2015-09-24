@@ -25,12 +25,15 @@
 #include "core/application.h"
 #include "core/logging.h"
 #include "internet/vk/vkservice.h"
+#include "ui/iconloader.h"
 
 VkSettingsPage::VkSettingsPage(SettingsDialog* parent)
     : SettingsPage(parent),
       ui_(new Ui::VkSettingsPage),
       service_(dialog()->app()->internet_model()->Service<VkService>()) {
   ui_->setupUi(this);
+  setWindowIcon(IconLoader::Load("vk", IconLoader::provider));
+
   connect(service_, SIGNAL(LoginSuccess(bool)), SLOT(LoginSuccess(bool)));
   connect(ui_->choose_path, SIGNAL(clicked()), SLOT(CacheDirBrowse()));
   connect(ui_->reset, SIGNAL(clicked()), SLOT(ResetCasheFilenames()));

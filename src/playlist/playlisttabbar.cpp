@@ -51,11 +51,11 @@ PlaylistTabBar::PlaylistTabBar(QWidget* parent)
   setUsesScrollButtons(true);
   setTabsClosable(true);
 
-  close_ = menu_->addAction(IconLoader::Load("list-remove"),
+  close_ = menu_->addAction(IconLoader::Load("list-remove", IconLoader::base),
                             tr("Close playlist"), this, SLOT(Close()));
-  rename_ = menu_->addAction(IconLoader::Load("edit-rename"),
+  rename_ = menu_->addAction(IconLoader::Load("edit-rename", IconLoader::base),
                              tr("Rename playlist..."), this, SLOT(Rename()));
-  save_ = menu_->addAction(IconLoader::Load("document-save"),
+  save_ = menu_->addAction(IconLoader::Load("document-save", IconLoader::base),
                            tr("Save playlist..."), this, SLOT(Save()));
   menu_->addSeparator();
 

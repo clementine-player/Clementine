@@ -368,52 +368,53 @@ void LibraryView::contextMenuEvent(QContextMenuEvent* e) {
   if (!context_menu_) {
     context_menu_ = new QMenu(this);
     add_to_playlist_ = context_menu_->addAction(
-        IconLoader::Load("media-playback-start"),
+        IconLoader::Load("media-playback-start", IconLoader::base),
         tr("Append to current playlist"), this, SLOT(AddToPlaylist()));
-    load_ = context_menu_->addAction(IconLoader::Load("media-playback-start"),
-                                     tr("Replace current playlist"), this,
-                                     SLOT(Load()));
+    load_ = context_menu_->addAction(
+        IconLoader::Load("media-playback-start", IconLoader::base),
+        tr("Replace current playlist"), this, SLOT(Load()));
     open_in_new_playlist_ = context_menu_->addAction(
-        IconLoader::Load("document-new"), tr("Open in new playlist"), this,
-        SLOT(OpenInNewPlaylist()));
+        IconLoader::Load("document-new", IconLoader::base), 
+        tr("Open in new playlist"), this, SLOT(OpenInNewPlaylist()));
 
     context_menu_->addSeparator();
     add_to_playlist_enqueue_ =
-        context_menu_->addAction(IconLoader::Load("go-next"), tr("Queue track"),
-                                 this, SLOT(AddToPlaylistEnqueue()));
+        context_menu_->addAction(IconLoader::Load("go-next", IconLoader::base), 
+                                 tr("Queue track"), this, 
+                                 SLOT(AddToPlaylistEnqueue()));
 
     context_menu_->addSeparator();
     new_smart_playlist_ = context_menu_->addAction(
-        IconLoader::Load("document-new"), tr("New smart playlist..."), this,
-        SLOT(NewSmartPlaylist()));
+        IconLoader::Load("document-new", IconLoader::base), 
+        tr("New smart playlist..."), this, SLOT(NewSmartPlaylist()));
     edit_smart_playlist_ = context_menu_->addAction(
-        IconLoader::Load("edit-rename"), tr("Edit smart playlist..."), this,
-        SLOT(EditSmartPlaylist()));
+        IconLoader::Load("edit-rename", IconLoader::base), 
+        tr("Edit smart playlist..."), this, SLOT(EditSmartPlaylist()));
     delete_smart_playlist_ = context_menu_->addAction(
-        IconLoader::Load("edit-delete"), tr("Delete smart playlist"), this,
-        SLOT(DeleteSmartPlaylist()));
+        IconLoader::Load("edit-delete", IconLoader::base), 
+        tr("Delete smart playlist"), this, SLOT(DeleteSmartPlaylist()));
 
     context_menu_->addSeparator();
-    organise_ = context_menu_->addAction(IconLoader::Load("edit-copy"),
+    organise_ = context_menu_->addAction(IconLoader::Load("edit-copy", IconLoader::base),
                                          tr("Organise files..."), this,
                                          SLOT(Organise()));
     copy_to_device_ = context_menu_->addAction(
-        IconLoader::Load("multimedia-player-ipod-mini-blue"),
+        IconLoader::Load("multimedia-player-ipod-mini-blue", IconLoader::base),
         tr("Copy to device..."), this, SLOT(CopyToDevice()));
-    delete_ = context_menu_->addAction(IconLoader::Load("edit-delete"),
+    delete_ = context_menu_->addAction(IconLoader::Load("edit-delete", IconLoader::base),
                                        tr("Delete from disk..."), this,
                                        SLOT(Delete()));
 
     context_menu_->addSeparator();
-    edit_track_ = context_menu_->addAction(IconLoader::Load("edit-rename"),
+    edit_track_ = context_menu_->addAction(IconLoader::Load("edit-rename", IconLoader::base),
                                            tr("Edit track information..."),
                                            this, SLOT(EditTracks()));
-    edit_tracks_ = context_menu_->addAction(IconLoader::Load("edit-rename"),
+    edit_tracks_ = context_menu_->addAction(IconLoader::Load("edit-rename", IconLoader::base),
                                             tr("Edit tracks information..."),
                                             this, SLOT(EditTracks()));
     show_in_browser_ = context_menu_->addAction(
-        IconLoader::Load("document-open-folder"), tr("Show in file browser..."),
-        this, SLOT(ShowInBrowser()));
+        IconLoader::Load("document-open-folder", IconLoader::base), 
+        tr("Show in file browser..."), this, SLOT(ShowInBrowser()));
 
     context_menu_->addSeparator();
     show_in_various_ = context_menu_->addAction(tr("Show in various artists"),

@@ -57,12 +57,12 @@ void EchoNestSimilarArtists::RequestFinished() {
     data.id_ = "echonest/similarartists";
     data.title_ = tr("Similar artists");
     data.type_ = CollapsibleInfoPane::Data::Type_Similar;
-    data.icon_ = QIcon(":/providers/echonest.png");
+    data.icon_ = IconLoader::Load("echonest", IconLoader::provider);
 
     TagWidget* widget = new TagWidget(TagWidget::Type_Artists);
     data.contents_ = widget;
 
-    widget->SetIcon(QIcon(":/icons/22x22/x-clementine-artist.png"));
+    widget->SetIcon(IconLoader::Load("x-clementine-artist", IconLoader::base));
 
     for (const Echonest::Artist& artist : artists) {
       widget->AddTag(artist.name());

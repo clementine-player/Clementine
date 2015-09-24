@@ -23,6 +23,7 @@
 #include "core/logging.h"
 #include "covers/albumcoverloader.h"
 #include "internet/soundcloud/soundcloudservice.h"
+#include "ui/iconloader.h"
 
 SoundCloudSearchProvider::SoundCloudSearchProvider(Application* app,
                                                    QObject* parent)
@@ -31,8 +32,9 @@ SoundCloudSearchProvider::SoundCloudSearchProvider(Application* app,
 void SoundCloudSearchProvider::Init(SoundCloudService* service) {
   service_ = service;
   SearchProvider::Init(
-      "SoundCloud", "soundcloud", QIcon(":providers/soundcloud.png"),
-      WantsDelayedQueries | ArtIsProbablyRemote | CanShowConfig);
+      "SoundCloud", "soundcloud", IconLoader::Load("soundcloud", 
+      IconLoader::provider), WantsDelayedQueries | ArtIsProbablyRemote | 
+      CanShowConfig);
 
   connect(service_, SIGNAL(SimpleSearchResults(int, SongList)),
           SLOT(SearchDone(int, SongList)));
