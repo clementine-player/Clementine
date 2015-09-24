@@ -23,8 +23,8 @@
 
 #include "core/tagreaderclient.h"
 
-class DropboxAuthenticator;
 class NetworkAccessManager;
+class OAuthenticator;
 class QNetworkReply;
 
 class DropboxService : public CloudFileService {
@@ -40,12 +40,12 @@ class DropboxService : public CloudFileService {
 
   QUrl GetStreamingUrlFromSongId(const QUrl& url);
 
- signals:
+signals:
   void Connected();
 
  public slots:
   void Connect();
-  void AuthenticationFinished(DropboxAuthenticator* authenticator);
+  void AuthenticationFinished(OAuthenticator* authenticator);
 
  private slots:
   void RequestFileListFinished(QNetworkReply* reply);
@@ -60,7 +60,6 @@ class DropboxService : public CloudFileService {
 
  private:
   QString access_token_;
-  QString access_token_secret_;
 
   NetworkAccessManager* network_;
 };

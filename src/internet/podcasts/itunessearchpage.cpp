@@ -28,6 +28,7 @@
 #include "podcast.h"
 #include "podcastdiscoverymodel.h"
 #include "ui_itunessearchpage.h"
+#include "ui/iconloader.h"
 
 const char* ITunesSearchPage::kUrlBase =
     "http://ax.phobos.apple.com.edgesuite.net/WebObjects/MZStoreServices.woa/"
@@ -39,6 +40,7 @@ ITunesSearchPage::ITunesSearchPage(Application* app, QWidget* parent)
       network_(new NetworkAccessManager(this)) {
   ui_->setupUi(this);
   connect(ui_->search, SIGNAL(clicked()), SLOT(SearchClicked()));
+  setWindowIcon(IconLoader::Load("itunes", IconLoader::Provider));
 }
 
 ITunesSearchPage::~ITunesSearchPage() { delete ui_; }

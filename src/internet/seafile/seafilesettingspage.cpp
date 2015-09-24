@@ -38,7 +38,7 @@ SeafileSettingsPage::SeafileSettingsPage(SettingsDialog* dialog)
       service_(InternetModel::Service<SeafileService>()) {
   ui_->setupUi(this);
 
-  setWindowIcon(QIcon(":/providers/seafile.png"));
+  setWindowIcon(IconLoader::Load("seafile", IconLoader::Provider));
 
   connect(ui_->login_button, SIGNAL(clicked()), SLOT(Login()));
   connect(ui_->login_state, SIGNAL(LogoutClicked()), SLOT(Logout()));
@@ -134,7 +134,7 @@ void SeafileSettingsPage::Login() {
 }
 
 void SeafileSettingsPage::Logout() {
-  // Forget the songs added
+  // Forget the added songs by changing the library to "none"
   service_->ChangeLibrary("none");
   service_->ForgetCredentials();
 

@@ -1088,12 +1088,10 @@ optional_source(HAVE_GOOGLE_DRIVE
 # Dropbox support
 optional_source(HAVE_DROPBOX
   SOURCES
-    internet/dropbox/dropboxauthenticator.cpp
     internet/dropbox/dropboxservice.cpp
     internet/dropbox/dropboxsettingspage.cpp
     internet/dropbox/dropboxurlhandler.cpp
   HEADERS
-    internet/dropbox/dropboxauthenticator.h
     internet/dropbox/dropboxservice.h
     internet/dropbox/dropboxsettingspage.h
     internet/dropbox/dropboxurlhandler.h

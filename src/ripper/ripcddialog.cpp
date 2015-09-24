@@ -17,7 +17,6 @@
 
 #include "ripper/ripcddialog.h"
 
-#include <cdio/cdio.h>
 #include <QCheckBox>
 #include <QFileDialog>
 #include <QFileInfo>
@@ -44,6 +43,7 @@ bool ComparePresetsByName(const TranscoderPreset& left,
 const int kCheckboxColumn = 0;
 const int kTrackNumberColumn = 1;
 const int kTrackTitleColumn = 2;
+const int kTrackDurationColumn = 3;
 }
 
 const char* RipCDDialog::kSettingsGroup = "Transcoder";
@@ -195,7 +195,7 @@ void RipCDDialog::AddDestination() {
 
 // Adds a directory to the 'destination' combo box.
 void RipCDDialog::AddDestinationDirectory(QString dir) {
-  QIcon icon = IconLoader::Load("folder");
+  QIcon icon = IconLoader::Load("folder", IconLoader::Base);
   QVariant data = QVariant::fromValue(dir);
   // Do not insert duplicates.
   int duplicate_index = ui_->destination->findData(data);
@@ -271,6 +271,10 @@ void RipCDDialog::BuildTrackListTable() {
     track_names_.append(line_edit_track_title_i);
     ui_->tableWidget->setCellWidget(i - 1, kTrackTitleColumn,
                                     line_edit_track_title_i);
+    QString track_duration =
+        Utilities::PrettyTime(ripper_->TrackDurationSecs(i));
+    ui_->tableWidget->setCellWidget(i - 1, kTrackDurationColumn,
+                                    new QLabel(track_duration));
   }
 }
 

@@ -49,9 +49,7 @@ void Amarok::Slider::wheelEvent(QWheelEvent* e) {
 
   // Position Slider (horizontal)
   int step = e->delta() * 1500 / 18;
-  int nval = QSlider::value() + step;
-  nval = qMax(nval, minimum());
-  nval = qMin(nval, maximum());
+  int nval = qBound(minimum(), QSlider::value() + step, maximum());
 
   QSlider::setValue(nval);
 
@@ -274,9 +272,8 @@ void Amarok::VolumeSlider::slideEvent(QMouseEvent* e) {
 }
 
 void Amarok::VolumeSlider::wheelEvent(QWheelEvent* e) {
-  const uint step = e->delta() / 30;
+  const uint step = e->delta() / (e->orientation() == Qt::Vertical ? 30 : -30);
   QSlider::setValue(QSlider::value() + step);
-
   emit sliderReleased(value());
 }
 

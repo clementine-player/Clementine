@@ -21,6 +21,7 @@
 #include "ui_soundcloudsettingspage.h"
 #include "core/application.h"
 #include "internet/core/internetmodel.h"
+#include "ui/iconloader.h"
 
 SoundCloudSettingsPage::SoundCloudSettingsPage(SettingsDialog* parent)
     : SettingsPage(parent),
@@ -28,6 +29,8 @@ SoundCloudSettingsPage::SoundCloudSettingsPage(SettingsDialog* parent)
       service_(
           dialog()->app()->internet_model()->Service<SoundCloudService>()) {
   ui_->setupUi(this);
+  setWindowIcon(IconLoader::Load("soundcloud", IconLoader::Provider));
+  
   ui_->login_state->AddCredentialGroup(ui_->login_container);
 
   connect(ui_->login_button, SIGNAL(clicked()), SLOT(LoginClicked()));

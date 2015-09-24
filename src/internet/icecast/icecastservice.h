@@ -61,11 +61,12 @@ class IcecastService : public InternetService {
  private slots:
   void LoadDirectory();
   void Homepage();
-  void DownloadDirectoryFinished(QNetworkReply* reply);
-  void ParseDirectoryFinished(QFuture<IcecastBackend::StationList> future);
+  void DownloadDirectoryFinished(QNetworkReply* reply, int task_id);
+  void ParseDirectoryFinished(QFuture<IcecastBackend::StationList> future,
+                              int task_id);
 
  private:
-  void RequestDirectory(const QUrl& url);
+  void RequestDirectory(const QUrl& url, int task_id);
   void EnsureMenuCreated();
   IcecastBackend::StationList ParseDirectory(QIODevice* device) const;
   IcecastBackend::Station ReadStation(QXmlStreamReader* reader) const;
@@ -77,8 +78,6 @@ class IcecastService : public InternetService {
   IcecastBackend* backend_;
   IcecastModel* model_;
   IcecastFilterWidget* filter_;
-
-  int load_directory_task_id_;
 };
 
 #endif  // INTERNET_ICECAST_ICECASTSERVICE_H_

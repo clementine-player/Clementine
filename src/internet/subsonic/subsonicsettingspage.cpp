@@ -25,13 +25,14 @@
 
 #include "core/logging.h"
 #include "internet/core/internetmodel.h"
+#include "ui/iconloader.h"
 
 SubsonicSettingsPage::SubsonicSettingsPage(SettingsDialog* dialog)
     : SettingsPage(dialog),
       ui_(new Ui_SubsonicSettingsPage),
       service_(InternetModel::Service<SubsonicService>()) {
   ui_->setupUi(this);
-  setWindowIcon(QIcon(":/providers/subsonic-32.png"));
+  setWindowIcon(IconLoader::Load("subsonic", IconLoader::Provider));
 
   connect(ui_->server, SIGNAL(editingFinished()),
           SLOT(ServerEditingFinished()));

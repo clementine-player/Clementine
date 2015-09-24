@@ -21,14 +21,16 @@
 
 #include "core/logging.h"
 #include "core/song.h"
+#include "ui/iconloader.h"
 
 VkSearchProvider::VkSearchProvider(Application* app, QObject* parent)
     : SearchProvider(app, parent), service_(NULL) {}
 
 void VkSearchProvider::Init(VkService* service) {
   service_ = service;
-  SearchProvider::Init("Vk.com", "vk.com", QIcon(":providers/vk.png"),
-                       WantsDelayedQueries | CanShowConfig);
+  SearchProvider::Init("Vk.com", "vk.com", IconLoader::Load("vk", 
+                       IconLoader::Provider), WantsDelayedQueries 
+                       | CanShowConfig);
 
   connect(service_, SIGNAL(SongSearchResult(SearchID, SongList)), this,
           SLOT(SongSearchResult(SearchID, SongList)));

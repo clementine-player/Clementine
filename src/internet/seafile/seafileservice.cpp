@@ -32,6 +32,7 @@
 #include "internet/seafile/seafileurlhandler.h"
 #include "library/librarybackend.h"
 #include "internet/core/oauthenticator.h"
+#include "ui/iconloader.h"
 
 const char* SeafileService::kServiceName = "Seafile";
 const char* SeafileService::kSettingsGroup = "Seafile";
@@ -51,7 +52,7 @@ static const int kMaxTries = 10;
 
 SeafileService::SeafileService(Application* app, InternetModel* parent)
     : CloudFileService(app, parent, kServiceName, kSettingsGroup,
-                       QIcon(":/providers/seafile.png"),
+                       IconLoader::Load("seafile", IconLoader::Provider),
                        SettingsDialog::Page_Seafile),
       indexing_task_id_(-1),
       indexing_task_max_(0),
@@ -250,7 +251,7 @@ void SeafileService::UpdateLibrariesInProgress(
 
   library_updated_ = library_to_update;
 
-  if (library_to_update == "none") {
+  if (library_to_update.isEmpty() || library_to_update == "none") {
     app_->task_manager()->SetTaskFinished(indexing_task_id_);
     indexing_task_id_ = -1;
     UpdatingLibrariesFinishedSignal();
@@ -475,6 +476,8 @@ QNetworkReply* SeafileService::PrepareFetchContentUrlForFile(
     const QString& library, const QString& filepath) {
   QUrl content_url(server_ + QString(kFileUrl).arg(library));
   content_url.addQueryItem("p", filepath);
+  // See https://github.com/haiwen/seahub/issues/677
+  content_url.addQueryItem("reuse", "1");
 
   QNetworkRequest request(content_url);
   AddAuthorizationHeader(&request);

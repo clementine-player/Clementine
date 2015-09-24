@@ -32,7 +32,7 @@ LoginStateWidget::LoginStateWidget(QWidget* parent)
   ui_->account_type->hide();
   ui_->busy->hide();
 
-  ui_->sign_out->setIcon(IconLoader::Load("list-remove"));
+  ui_->sign_out->setIcon(IconLoader::Load("list-remove", IconLoader::Base));
 
   QFont bold_font(font());
   bold_font.setBold(true);
