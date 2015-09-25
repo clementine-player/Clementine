@@ -90,6 +90,9 @@ bool DropboxSettingsPage::eventFilter(QObject* object, QEvent* event) {
 
 void DropboxSettingsPage::LogoutClicked() {
   ui_->login_state->SetLoggedIn(LoginStateWidget::LoggedOut);
+  QSettings s;
+  s.beginGroup(DropboxService::kSettingsGroup);
+  s.remove("access_token2");
 }
 
 void DropboxSettingsPage::Connected() {

@@ -171,6 +171,10 @@ void DropboxService::RequestFileListFinished(QNetworkReply* reply) {
 }
 
 void DropboxService::LongPollDelta() {
+  if (!has_credentials()) {
+    // Might have been signed out by the user.
+    return;
+  }
   QSettings s;
   s.beginGroup(kSettingsGroup);
 
