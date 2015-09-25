@@ -32,7 +32,7 @@
 #include "internet/core/localredirectserver.h"
 
 const char* OAuthenticator::kRemoteURL =
-    "https://clementine-data.appspot.com/oauth";
+    "https://clementine-data.appspot.com/skydrive";
 
 OAuthenticator::OAuthenticator(const QString& client_id,
                                const QString& client_secret,
