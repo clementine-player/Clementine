@@ -19,7 +19,7 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "icecastservice.h"
+#include "internet/icecast/icecastservice.h"
 
 #include <algorithm>
 
@@ -31,10 +31,6 @@
 #include <QRegExp>
 #include <QtConcurrentRun>
 
-#include "icecastbackend.h"
-#include "icecastfilterwidget.h"
-#include "icecastmodel.h"
-#include "internet/core/internetmodel.h"
 #include "core/application.h"
 #include "core/closure.h"
 #include "core/database.h"
@@ -43,6 +39,10 @@
 #include "core/taskmanager.h"
 #include "globalsearch/globalsearch.h"
 #include "globalsearch/icecastsearchprovider.h"
+#include "internet/core/internetmodel.h"
+#include "internet/icecast/icecastbackend.h"
+#include "internet/icecast/icecastfilterwidget.h"
+#include "internet/icecast/icecastmodel.h"
 #include "playlist/songplaylistitem.h"
 #include "ui/iconloader.h"
 
@@ -60,8 +60,7 @@ IcecastService::IcecastService(Application* app, InternetModel* parent)
       context_menu_(nullptr),
       backend_(nullptr),
       model_(nullptr),
-      filter_(new IcecastFilterWidget(0)),
-      load_directory_task_id_(0) {
+      filter_(new IcecastFilterWidget(0)) {
   backend_ = new IcecastBackend;
   backend_->moveToThread(app_->database()->thread());
   backend_->Init(app_->database());
@@ -99,30 +98,30 @@ void IcecastService::LazyPopulate(QStandardItem* item) {
 }
 
 void IcecastService::LoadDirectory() {
-  RequestDirectory(QUrl(kDirectoryUrl));
-
-  if (!load_directory_task_id_) {
-    load_directory_task_id_ =
-        app_->task_manager()->StartTask(tr("Downloading Icecast directory"));
-  }
+  int task_id =
+      app_->task_manager()->StartTask(tr("Downloading Icecast directory"));
+  RequestDirectory(QUrl(kDirectoryUrl), task_id);
 }
 
-void IcecastService::RequestDirectory(const QUrl& url) {
+void IcecastService::RequestDirectory(const QUrl& url, int task_id) {
   QNetworkRequest req = QNetworkRequest(url);
   req.setAttribute(QNetworkRequest::CacheLoadControlAttribute,
                    QNetworkRequest::AlwaysNetwork);
 
   QNetworkReply* reply = network_->get(req);
   NewClosure(reply, SIGNAL(finished()), this,
-             SLOT(DownloadDirectoryFinished(QNetworkReply*)), reply);
+             SLOT(DownloadDirectoryFinished(QNetworkReply*, int)), reply,
+             task_id);
 }
 
-void IcecastService::DownloadDirectoryFinished(QNetworkReply* reply) {
+void IcecastService::DownloadDirectoryFinished(QNetworkReply* reply,
+                                               int task_id) {
   if (reply->attribute(QNetworkRequest::RedirectionTargetAttribute).isValid()) {
     // Discard the old reply and follow the redirect
     reply->deleteLater();
     RequestDirectory(
-        reply->attribute(QNetworkRequest::RedirectionTargetAttribute).toUrl());
+        reply->attribute(QNetworkRequest::RedirectionTargetAttribute).toUrl(),
+        task_id);
     return;
   }
 
@@ -130,16 +129,18 @@ void IcecastService::DownloadDirectoryFinished(QNetworkReply* reply) {
       QtConcurrent::run(this, &IcecastService::ParseDirectory, reply);
   QFutureWatcher<void>* watcher = new QFutureWatcher<void>(this);
   watcher->setFuture(future);
-  NewClosure(watcher, SIGNAL(finished()), this,
-             SLOT(ParseDirectoryFinished(QFuture<IcecastBackend::StationList>)),
-             future);
+  NewClosure(
+      watcher, SIGNAL(finished()), this,
+      SLOT(ParseDirectoryFinished(QFuture<IcecastBackend::StationList>, int)),
+      future, task_id);
   connect(watcher, SIGNAL(finished()), watcher, SLOT(deleteLater()));
 }
 
 namespace {
 template <typename T>
 struct GenreSorter {
-  explicit GenreSorter(const QMultiHash<QString, T>& genres) : genres_(genres) {}
+  explicit GenreSorter(const QMultiHash<QString, T>& genres)
+      : genres_(genres) {}
 
   bool operator()(const QString& a, const QString& b) const {
     return genres_.count(a) > genres_.count(b);
@@ -192,7 +193,7 @@ QStringList FilterGenres(const QStringList& genres) {
 }  // namespace
 
 void IcecastService::ParseDirectoryFinished(
-    QFuture<IcecastBackend::StationList> future) {
+    QFuture<IcecastBackend::StationList> future, int task_id) {
   IcecastBackend::StationList all_stations = future.result();
   sort(all_stations.begin(), all_stations.end(),
        StationSorter<IcecastBackend::Station>());
@@ -226,12 +227,11 @@ void IcecastService::ParseDirectoryFinished(
 
   backend_->ClearAndAddStations(all_stations);
 
-  app_->task_manager()->SetTaskFinished(load_directory_task_id_);
-  load_directory_task_id_ = 0;
+  app_->task_manager()->SetTaskFinished(task_id);
 }
 
-IcecastBackend::StationList IcecastService::ParseDirectory(QIODevice* device)
-    const {
+IcecastBackend::StationList IcecastService::ParseDirectory(
+    QIODevice* device) const {
   QXmlStreamReader reader(device);
   IcecastBackend::StationList stations;
   while (!reader.atEnd()) {
@@ -245,8 +245,8 @@ IcecastBackend::StationList IcecastService::ParseDirectory(QIODevice* device)
   return stations;
 }
 
-IcecastBackend::Station IcecastService::ReadStation(QXmlStreamReader* reader)
-    const {
+IcecastBackend::Station IcecastService::ReadStation(
+    QXmlStreamReader* reader) const {
   IcecastBackend::Station station;
   while (!reader->atEnd()) {
     reader->readNext();
