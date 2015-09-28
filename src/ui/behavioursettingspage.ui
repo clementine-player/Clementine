@@ -262,11 +262,11 @@
     </widget>
    </item>
    <item>
-    <widget class="QGroupBox" name="groupBox_2CPL">
+    <widget class="QGroupBox" name="groupBox_doubleclick_playlist">
      <property name="title">
       <string>Double clicking a song in the playlist will...</string>
      </property>
-     <layout class="QHBoxLayout" name="horizontalLayout_doubleclick_playlist">
+     <layout class="QVBoxLayout" name="layout_doubleclick_playlist">
       <item>
        <widget class="QComboBox" name="doubleclick_playlist_addmode">
         <property name="currentIndex">
@@ -280,38 +280,6 @@
         <item>
          <property name="text">
           <string>Add to the queue</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Replace the queue</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Do nothing</string>
-         </property>
-        </item>
-       </widget>
-      </item>
-      <item>
-       <widget class="QComboBox" name="doubleclick_playlist_playmode">
-        <property name="currentIndex">
-         <number>1</number>
-        </property>
-        <item>
-         <property name="text">
-          <string>Never start playing</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Play if there is nothing already playing</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Always start playing</string>
          </property>
         </item>
        </widget>
