@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2015-08-17 13:03+0000\n"
+"PO-Revision-Date: 2015-09-28 10:05+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Welsh (http://www.transifex.com/davidsansome/clementine/language/cy/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -50,7 +50,7 @@ msgstr ""
 msgid " pt"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:374
+#: ../bin/src/ui_behavioursettingspage.h:359
 msgid " s"
 msgstr ""
 
@@ -402,7 +402,7 @@ msgid "About Qt..."
 msgstr ""
 
 #: playlist/playlistsaveoptionsdialog.cpp:34
-#: ../bin/src/ui_behavioursettingspage.h:378
+#: ../bin/src/ui_behavioursettingspage.h:363
 msgid "Absolute"
 msgstr ""
 
@@ -462,7 +462,7 @@ msgstr ""
 msgid "Add directory..."
 msgstr ""
 
-#: ui/mainwindow.cpp:1931
+#: ui/mainwindow.cpp:1898
 msgid "Add file"
 msgstr ""
 
@@ -482,7 +482,7 @@ msgstr ""
 msgid "Add files to transcode"
 msgstr ""
 
-#: transcoder/transcodedialog.cpp:306 ui/mainwindow.cpp:1958
+#: transcoder/transcodedialog.cpp:306 ui/mainwindow.cpp:1925
 #: ripper/ripcddialog.cpp:185
 msgid "Add folder"
 msgstr ""
@@ -599,7 +599,7 @@ msgstr ""
 msgid "Add to Spotify starred"
 msgstr ""
 
-#: ui/mainwindow.cpp:1752
+#: ui/mainwindow.cpp:1719
 msgid "Add to another playlist"
 msgstr ""
 
@@ -611,8 +611,8 @@ msgstr ""
 msgid "Add to playlist"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:350
-#: ../bin/src/ui_behavioursettingspage.h:362
+#: ../bin/src/ui_behavioursettingspage.h:343
+#: ../bin/src/ui_behavioursettingspage.h:355
 msgid "Add to the queue"
 msgstr ""
 
@@ -754,17 +754,16 @@ msgstr ""
 msgid "Alongside the originals"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:323
+#: ../bin/src/ui_behavioursettingspage.h:316
 msgid "Always hide the main window"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:322
+#: ../bin/src/ui_behavioursettingspage.h:315
 msgid "Always show the main window"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:336
-#: ../bin/src/ui_behavioursettingspage.h:356
-#: ../bin/src/ui_behavioursettingspage.h:370
+#: ../bin/src/ui_behavioursettingspage.h:329
+#: ../bin/src/ui_behavioursettingspage.h:349
 msgid "Always start playing"
 msgstr ""
 
@@ -810,12 +809,12 @@ msgid "Append files/URLs to the playlist"
 msgstr ""
 
 #: devices/deviceview.cpp:216 globalsearch/globalsearchview.cpp:453
-#: internet/core/internetservice.cpp:80 library/libraryview.cpp:370
+#: internet/core/internetservice.cpp:80 library/libraryview.cpp:372
 #: widgets/fileviewlist.cpp:31
 msgid "Append to current playlist"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:347
+#: ../bin/src/ui_behavioursettingspage.h:340
 msgid "Append to the playlist"
 msgstr ""
 
@@ -859,7 +858,7 @@ msgstr ""
 msgid "Artist's initial"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:380
+#: ../bin/src/ui_behavioursettingspage.h:365
 msgid "Ask when saving"
 msgstr ""
 
@@ -894,7 +893,7 @@ msgid "Auto"
 msgstr ""
 
 #: playlist/playlistsaveoptionsdialog.cpp:32
-#: ../bin/src/ui_behavioursettingspage.h:377
+#: ../bin/src/ui_behavioursettingspage.h:362
 msgid "Automatic"
 msgstr ""
 
@@ -967,7 +966,7 @@ msgstr ""
 msgid "Basic audio type"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:311
+#: ../bin/src/ui_behavioursettingspage.h:304
 msgid "Behavior"
 msgstr ""
 
@@ -1103,7 +1102,7 @@ msgstr ""
 msgid "Change shuffle mode"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:361
+#: ../bin/src/ui_behavioursettingspage.h:354
 msgid "Change the currently playing song"
 msgstr ""
 
@@ -1265,7 +1264,7 @@ msgstr ""
 msgid "Clementine will find music in:"
 msgstr ""
 
-#: library/libraryview.cpp:351
+#: library/libraryview.cpp:353
 msgid "Click here to add some music"
 msgstr ""
 
@@ -1448,7 +1447,7 @@ msgstr ""
 msgid "Copy to clipboard"
 msgstr ""
 
-#: library/libraryview.cpp:400 internet/podcasts/podcastservice.cpp:437
+#: library/libraryview.cpp:402 internet/podcasts/podcastservice.cpp:437
 #: ui/mainwindow.cpp:641 widgets/fileviewlist.cpp:43
 msgid "Copy to device..."
 msgstr ""
@@ -1697,8 +1696,8 @@ msgstr ""
 msgid "Delete downloaded data"
 msgstr ""
 
-#: devices/deviceview.cpp:404 library/libraryview.cpp:636
-#: ui/mainwindow.cpp:2294 widgets/fileview.cpp:186
+#: devices/deviceview.cpp:404 library/libraryview.cpp:638
+#: ui/mainwindow.cpp:2261 widgets/fileview.cpp:186
 msgid "Delete files"
 msgstr ""
 
@@ -1706,7 +1705,7 @@ msgstr ""
 msgid "Delete from device..."
 msgstr ""
 
-#: library/libraryview.cpp:402 ui/mainwindow.cpp:643
+#: library/libraryview.cpp:404 ui/mainwindow.cpp:643
 #: widgets/fileviewlist.cpp:44
 msgid "Delete from disk..."
 msgstr ""
@@ -1719,7 +1718,7 @@ msgstr ""
 msgid "Delete preset"
 msgstr ""
 
-#: library/libraryview.cpp:391
+#: library/libraryview.cpp:393
 msgid "Delete smart playlist"
 msgstr ""
 
@@ -1731,11 +1730,11 @@ msgstr ""
 msgid "Deleting files"
 msgstr ""
 
-#: ui/mainwindow.cpp:1673
+#: ui/mainwindow.cpp:1640
 msgid "Dequeue selected tracks"
 msgstr ""
 
-#: ui/mainwindow.cpp:1671
+#: ui/mainwindow.cpp:1638
 msgid "Dequeue track"
 msgstr ""
 
@@ -1857,10 +1856,6 @@ msgstr ""
 msgid "Do not overwrite"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:364
-msgid "Do nothing"
-msgstr ""
-
 #: internet/googledrive/googledriveservice.cpp:268
 msgid ""
 "Doing a full rescan will lose any metadata you've saved in Clementine such "
@@ -1872,7 +1867,7 @@ msgstr ""
 msgid "Don't repeat"
 msgstr ""
 
-#: library/libraryview.cpp:420
+#: library/libraryview.cpp:422
 msgid "Don't show in various artists"
 msgstr ""
 
@@ -1897,11 +1892,11 @@ msgstr ""
 msgid "Double click to open"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:358
+#: ../bin/src/ui_behavioursettingspage.h:351
 msgid "Double clicking a song in the playlist will..."
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:344
+#: ../bin/src/ui_behavioursettingspage.h:337
 msgid "Double clicking a song will..."
 msgstr ""
 
@@ -1962,7 +1957,7 @@ msgstr ""
 msgid "Downloading (%1%)..."
 msgstr ""
 
-#: internet/icecast/icecastservice.cpp:106
+#: internet/icecast/icecastservice.cpp:102
 msgid "Downloading Icecast directory"
 msgstr ""
 
@@ -2006,11 +2001,11 @@ msgstr ""
 msgid "Dynamic random mix"
 msgstr ""
 
-#: library/libraryview.cpp:388
+#: library/libraryview.cpp:390
 msgid "Edit smart playlist..."
 msgstr ""
 
-#: ui/mainwindow.cpp:1715
+#: ui/mainwindow.cpp:1682
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr ""
@@ -2027,12 +2022,12 @@ msgstr ""
 msgid "Edit track information"
 msgstr ""
 
-#: library/libraryview.cpp:407 widgets/fileviewlist.cpp:49
+#: library/libraryview.cpp:409 widgets/fileviewlist.cpp:49
 #: ../bin/src/ui_mainwindow.h:658
 msgid "Edit track information..."
 msgstr ""
 
-#: library/libraryview.cpp:410
+#: library/libraryview.cpp:412
 msgid "Edit tracks information..."
 msgstr ""
 
@@ -2060,7 +2055,7 @@ msgstr ""
 msgid "Enable shortcuts only when Clementine is focused"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:330
+#: ../bin/src/ui_behavioursettingspage.h:323
 msgid "Enable song metadata inline edition with click"
 msgstr ""
 
@@ -2149,8 +2144,8 @@ msgid "Equivalent to --log-levels *:3"
 msgstr ""
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:242
-#: library/libraryview.cpp:630 ui/mainwindow.cpp:1997 ui/mainwindow.cpp:2244
-#: ui/mainwindow.cpp:2392 internet/vk/vkservice.cpp:634
+#: library/libraryview.cpp:632 ui/mainwindow.cpp:1964 ui/mainwindow.cpp:2211
+#: ui/mainwindow.cpp:2359 internet/vk/vkservice.cpp:634
 msgid "Error"
 msgstr ""
 
@@ -2314,7 +2309,7 @@ msgstr ""
 msgid "Fading duration"
 msgstr ""
 
-#: ui/mainwindow.cpp:1998
+#: ui/mainwindow.cpp:1965
 msgid "Failed reading CD drive"
 msgstr ""
 
@@ -2580,7 +2575,7 @@ msgstr ""
 msgid "Got %1 covers out of %2 (%3 failed)"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:326
+#: ../bin/src/ui_behavioursettingspage.h:319
 msgid "Grey out non existent songs in my playlists"
 msgstr ""
 
@@ -2693,7 +2688,7 @@ msgstr ""
 msgid "Identifying song"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:328
+#: ../bin/src/ui_behavioursettingspage.h:321
 msgid ""
 "If activated, clicking a selected song in the playlist view will let you "
 "edit the tag value directly"
@@ -2875,7 +2870,7 @@ msgstr ""
 msgid "Jamendo database"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:341
+#: ../bin/src/ui_behavioursettingspage.h:334
 msgid "Jump to previous song right away"
 msgstr ""
 
@@ -2895,7 +2890,7 @@ msgstr ""
 msgid "Keep buttons for %1 seconds..."
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:313
+#: ../bin/src/ui_behavioursettingspage.h:306
 msgid "Keep running in the background when the window is closed"
 msgstr ""
 
@@ -2912,7 +2907,7 @@ msgstr ""
 msgid "Kuduro"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:315
+#: ../bin/src/ui_behavioursettingspage.h:308
 msgid "Language"
 msgstr ""
 
@@ -2999,7 +2994,7 @@ msgstr ""
 msgid "Library advanced grouping"
 msgstr ""
 
-#: ui/mainwindow.cpp:2516
+#: ui/mainwindow.cpp:2483
 msgid "Library rescan notice"
 msgstr ""
 
@@ -3333,7 +3328,7 @@ msgstr ""
 msgid "Move up"
 msgstr ""
 
-#: transcoder/transcodedialog.cpp:225 ui/mainwindow.cpp:1932
+#: transcoder/transcodedialog.cpp:225 ui/mainwindow.cpp:1899
 #: internet/vk/vkservice.cpp:893
 msgid "Music"
 msgstr ""
@@ -3393,9 +3388,8 @@ msgstr ""
 msgid "Never played"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:334
-#: ../bin/src/ui_behavioursettingspage.h:354
-#: ../bin/src/ui_behavioursettingspage.h:368
+#: ../bin/src/ui_behavioursettingspage.h:327
+#: ../bin/src/ui_behavioursettingspage.h:347
 msgid "Never start playing"
 msgstr ""
 
@@ -3405,11 +3399,11 @@ msgstr ""
 msgid "New folder"
 msgstr ""
 
-#: ui/mainwindow.cpp:1769 ../bin/src/ui_mainwindow.h:690
+#: ui/mainwindow.cpp:1736 ../bin/src/ui_mainwindow.h:690
 msgid "New playlist"
 msgstr ""
 
-#: library/libraryview.cpp:385
+#: library/libraryview.cpp:387
 msgid "New smart playlist..."
 msgstr ""
 
@@ -3468,7 +3462,7 @@ msgstr ""
 msgid "None"
 msgstr ""
 
-#: library/libraryview.cpp:631 ui/mainwindow.cpp:2245 ui/mainwindow.cpp:2393
+#: library/libraryview.cpp:633 ui/mainwindow.cpp:2212 ui/mainwindow.cpp:2360
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr ""
 
@@ -3630,12 +3624,12 @@ msgid "Open in Google Drive"
 msgstr ""
 
 #: devices/deviceview.cpp:221 globalsearch/globalsearchview.cpp:461
-#: internet/core/internetservice.cpp:102 library/libraryview.cpp:375
+#: internet/core/internetservice.cpp:102 library/libraryview.cpp:377
 #: widgets/fileviewlist.cpp:35
 msgid "Open in new playlist"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:349
+#: ../bin/src/ui_behavioursettingspage.h:342
 msgctxt "Refers to behavior settings in Clementine settings page."
 msgid "Open in new playlist"
 msgstr ""
@@ -3675,7 +3669,7 @@ msgstr ""
 msgid "Organise Files"
 msgstr ""
 
-#: library/libraryview.cpp:396 ui/mainwindow.cpp:637
+#: library/libraryview.cpp:398 ui/mainwindow.cpp:637
 msgid "Organise files..."
 msgstr ""
 
@@ -3751,7 +3745,7 @@ msgstr ""
 msgid "Password"
 msgstr ""
 
-#: core/globalshortcuts.cpp:50 ui/mainwindow.cpp:1061 ui/mainwindow.cpp:1582
+#: core/globalshortcuts.cpp:50 ui/mainwindow.cpp:1058 ui/mainwindow.cpp:1549
 #: ui/qtsystemtrayicon.cpp:175 wiimotedev/wiimotesettingspage.cpp:107
 msgid "Pause"
 msgstr ""
@@ -3778,8 +3772,8 @@ msgstr ""
 msgid "Plain sidebar"
 msgstr ""
 
-#: core/globalshortcuts.cpp:49 ui/mainwindow.cpp:609 ui/mainwindow.cpp:1029
-#: ui/mainwindow.cpp:1047 ui/mainwindow.cpp:1585 ui/qtsystemtrayicon.cpp:164
+#: core/globalshortcuts.cpp:49 ui/mainwindow.cpp:609 ui/mainwindow.cpp:1026
+#: ui/mainwindow.cpp:1044 ui/mainwindow.cpp:1552 ui/qtsystemtrayicon.cpp:164
 #: ui/qtsystemtrayicon.cpp:188 wiimotedev/wiimotesettingspage.cpp:100
 #: ../bin/src/ui_mainwindow.h:641
 msgid "Play"
@@ -3793,9 +3787,8 @@ msgstr ""
 msgid "Play if stopped, pause if playing"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:335
-#: ../bin/src/ui_behavioursettingspage.h:355
-#: ../bin/src/ui_behavioursettingspage.h:369
+#: ../bin/src/ui_behavioursettingspage.h:328
+#: ../bin/src/ui_behavioursettingspage.h:348
 msgid "Play if there is nothing already playing"
 msgstr ""
 
@@ -3920,7 +3913,7 @@ msgstr ""
 msgid "Press a key combination to use for %1..."
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:338
+#: ../bin/src/ui_behavioursettingspage.h:331
 msgid "Pressing \"Previous\" in player will..."
 msgstr ""
 
@@ -3994,12 +3987,12 @@ msgstr ""
 msgid "Queue Manager"
 msgstr ""
 
-#: ui/mainwindow.cpp:1677
+#: ui/mainwindow.cpp:1644
 msgid "Queue selected tracks"
 msgstr ""
 
-#: globalsearch/globalsearchview.cpp:466 library/libraryview.cpp:380
-#: ui/mainwindow.cpp:1675
+#: globalsearch/globalsearchview.cpp:466 library/libraryview.cpp:382
+#: ui/mainwindow.cpp:1642
 msgid "Queue track"
 msgstr ""
 
@@ -4080,7 +4073,7 @@ msgid "Reggae"
 msgstr ""
 
 #: playlist/playlistsaveoptionsdialog.cpp:33
-#: ../bin/src/ui_behavioursettingspage.h:379
+#: ../bin/src/ui_behavioursettingspage.h:364
 msgid "Relative"
 msgstr ""
 
@@ -4088,7 +4081,7 @@ msgstr ""
 msgid "Remember Wii remote swing"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:324
+#: ../bin/src/ui_behavioursettingspage.h:317
 msgid "Remember from last time"
 msgstr ""
 
@@ -4166,17 +4159,13 @@ msgid "Repeat track"
 msgstr ""
 
 #: devices/deviceview.cpp:219 globalsearch/globalsearchview.cpp:457
-#: internet/core/internetservice.cpp:91 library/libraryview.cpp:372
+#: internet/core/internetservice.cpp:91 library/libraryview.cpp:374
 #: widgets/fileviewlist.cpp:34
 msgid "Replace current playlist"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:348
+#: ../bin/src/ui_behavioursettingspage.h:341
 msgid "Replace the playlist"
-msgstr ""
-
-#: ../bin/src/ui_behavioursettingspage.h:363
-msgid "Replace the queue"
 msgstr ""
 
 #: ../bin/src/ui_organisedialog.h:256
@@ -4207,7 +4196,7 @@ msgstr ""
 msgid "Reset play counts"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:342
+#: ../bin/src/ui_behavioursettingspage.h:335
 msgid "Restart song, then jump to previous if pressed again"
 msgstr ""
 
@@ -4220,7 +4209,7 @@ msgstr ""
 msgid "Restrict to ASCII characters"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:325
+#: ../bin/src/ui_behavioursettingspage.h:318
 msgid "Resume playback on start"
 msgstr ""
 
@@ -4438,7 +4427,7 @@ msgstr ""
 msgid "Seek the currently playing track to an absolute position"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:372
+#: ../bin/src/ui_behavioursettingspage.h:357
 msgid "Seeking using a keyboard shortcut"
 msgstr ""
 
@@ -4498,7 +4487,7 @@ msgstr ""
 msgid "Service offline"
 msgstr ""
 
-#: ui/mainwindow.cpp:1714
+#: ui/mainwindow.cpp:1681
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr ""
@@ -4598,7 +4587,7 @@ msgstr ""
 msgid "Show groups in global search result"
 msgstr ""
 
-#: library/libraryview.cpp:413 ui/mainwindow.cpp:646
+#: library/libraryview.cpp:415 ui/mainwindow.cpp:646
 #: widgets/fileviewlist.cpp:51
 msgid "Show in file browser..."
 msgstr ""
@@ -4607,7 +4596,7 @@ msgstr ""
 msgid "Show in library..."
 msgstr ""
 
-#: library/libraryview.cpp:417
+#: library/libraryview.cpp:419
 msgid "Show in various artists"
 msgstr ""
 
@@ -4639,7 +4628,7 @@ msgstr ""
 msgid "Show the scrobble button in the main window"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:312
+#: ../bin/src/ui_behavioursettingspage.h:305
 msgid "Show tray icon"
 msgstr ""
 
@@ -4711,11 +4700,11 @@ msgstr ""
 msgid "Skip forwards in playlist"
 msgstr ""
 
-#: ui/mainwindow.cpp:1688
+#: ui/mainwindow.cpp:1655
 msgid "Skip selected tracks"
 msgstr ""
 
-#: ui/mainwindow.cpp:1686
+#: ui/mainwindow.cpp:1653
 msgid "Skip track"
 msgstr ""
 
@@ -5025,13 +5014,13 @@ msgid ""
 "license key. Visit subsonic.org for details."
 msgstr ""
 
-#: ui/mainwindow.cpp:2507
+#: ui/mainwindow.cpp:2474
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
 msgstr ""
 
-#: library/libraryview.cpp:553
+#: library/libraryview.cpp:555
 msgid "There are other songs in this album"
 msgstr ""
 
@@ -5067,7 +5056,7 @@ msgid ""
 "continue?"
 msgstr ""
 
-#: library/libraryview.cpp:637 ui/mainwindow.cpp:2295 widgets/fileview.cpp:187
+#: library/libraryview.cpp:639 ui/mainwindow.cpp:2262 widgets/fileview.cpp:187
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -5143,7 +5132,7 @@ msgstr ""
 msgid "This type of device is not supported: %1"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:373
+#: ../bin/src/ui_behavioursettingspage.h:358
 msgid "Time step"
 msgstr ""
 
@@ -5166,7 +5155,7 @@ msgstr ""
 msgid "Toggle fullscreen"
 msgstr ""
 
-#: ui/mainwindow.cpp:1679
+#: ui/mainwindow.cpp:1646
 msgid "Toggle queue status"
 msgstr ""
 
@@ -5288,11 +5277,11 @@ msgstr ""
 msgid "Unset cover"
 msgstr ""
 
-#: ui/mainwindow.cpp:1684
+#: ui/mainwindow.cpp:1651
 msgid "Unskip selected tracks"
 msgstr ""
 
-#: ui/mainwindow.cpp:1682
+#: ui/mainwindow.cpp:1649
 msgid "Unskip track"
 msgstr ""
 
@@ -5403,7 +5392,7 @@ msgstr ""
 msgid "Use temporal noise shaping"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:318
+#: ../bin/src/ui_behavioursettingspage.h:311
 msgid "Use the system default"
 msgstr ""
 
@@ -5435,7 +5424,7 @@ msgstr ""
 msgid "Username"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:331
+#: ../bin/src/ui_behavioursettingspage.h:324
 msgid "Using the menu to add a song will..."
 msgstr ""
 
@@ -5504,7 +5493,7 @@ msgstr ""
 msgid "Wall"
 msgstr ""
 
-#: playlist/playlisttabbar.cpp:192 ../bin/src/ui_behavioursettingspage.h:314
+#: playlist/playlisttabbar.cpp:192 ../bin/src/ui_behavioursettingspage.h:307
 msgid "Warn me when closing a playlist tab"
 msgstr ""
 
@@ -5520,7 +5509,7 @@ msgstr ""
 msgid "Weeks"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:321
+#: ../bin/src/ui_behavioursettingspage.h:314
 msgid "When Clementine starts"
 msgstr ""
 
@@ -5530,7 +5519,7 @@ msgid ""
 "If there are no matches then it will use the largest image in the directory."
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:376
+#: ../bin/src/ui_behavioursettingspage.h:361
 msgid "When saving a playlist, file paths should be"
 msgstr ""
 
@@ -5600,13 +5589,13 @@ msgstr ""
 msgid "Without cover:"
 msgstr ""
 
-#: library/libraryview.cpp:554
+#: library/libraryview.cpp:556
 msgid ""
 "Would you like to move the other songs in this album to Various Artists as "
 "well?"
 msgstr ""
 
-#: ui/mainwindow.cpp:2514
+#: ui/mainwindow.cpp:2481
 msgid "Would you like to run a full rescan right now?"
 msgstr ""
 
@@ -5614,7 +5603,7 @@ msgstr ""
 msgid "Write all songs statistics into songs' files"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:381
+#: ../bin/src/ui_behavioursettingspage.h:366
 msgid "Write metadata"
 msgstr ""
 
@@ -5734,7 +5723,7 @@ msgid ""
 "shortcuts in Clementine."
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:320
+#: ../bin/src/ui_behavioursettingspage.h:313
 msgid "You will need to restart Clementine if you change the language."
 msgstr ""
 
@@ -5750,7 +5739,7 @@ msgstr ""
 msgid "Your Magnatune credentials were incorrect"
 msgstr ""
 
-#: library/libraryview.cpp:345
+#: library/libraryview.cpp:347
 msgid "Your library is empty!"
 msgstr ""
 
