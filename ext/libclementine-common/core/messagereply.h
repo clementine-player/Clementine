@@ -39,7 +39,7 @@ class _MessageReplyBase : public QObject {
   // Waits for the reply to finish by waiting on a semaphore.  Never call this
   // from the MessageHandler's thread or it will block forever.
   // Returns true if the call was successful.
-  bool WaitForFinished();
+  virtual bool WaitForFinished();
 
   void Abort();
 
@@ -64,7 +64,7 @@ class MessageReply : public _MessageReplyBase {
   const MessageType& request_message() const { return request_message_; }
   const MessageType& message() const { return reply_message_; }
 
-  void SetReply(const MessageType& message);
+  virtual void SetReply(const MessageType& message);
 
  private:
   MessageType request_message_;

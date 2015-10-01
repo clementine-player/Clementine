@@ -18,7 +18,10 @@
 #ifndef TAGREADER_H
 #define TAGREADER_H
 
+#include <memory>
+
 #include <QByteArray>
+#include <QNetworkAccessManager>
 
 #include <taglib/xiphcomment.h>
 
@@ -49,7 +52,7 @@ class FileRefFactory;
  */
 class TagReader {
  public:
-  TagReader();
+  TagReader(QNetworkAccessManager* network = 0);
 
   void ReadFile(const QString& filename,
                 pb::tagreader::SongMetadata* song) const;
@@ -120,7 +123,7 @@ class TagReader {
       TagLib::ID3v2::Tag* tag);
 
   FileRefFactory* factory_;
-  QNetworkAccessManager* network_;
+  std::unique_ptr<QNetworkAccessManager> network_;
 
   const std::string kEmbeddedCover;
 };

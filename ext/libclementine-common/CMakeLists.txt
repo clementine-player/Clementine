@@ -10,6 +10,7 @@ set(SOURCES
   core/logging.cpp
   core/messagehandler.cpp
   core/messagereply.cpp
+  core/recordingnetworkaccessmanager.cpp
   core/waitforsignal.cpp
   core/workerpool.cpp
 )
@@ -18,6 +19,7 @@ set(HEADERS
   core/closure.h
   core/messagehandler.h
   core/messagereply.h
+  core/recordingnetworkaccessmanager.h
   core/workerpool.h
 )
 

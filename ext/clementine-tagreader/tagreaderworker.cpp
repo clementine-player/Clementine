@@ -24,8 +24,13 @@
 #include <QTextCodec>
 #include <QUrl>
 
+#include "core/recordingnetworkaccessmanager.h"
+
+using pb::tagreader::NetworkStatisticsResponse;
+
 TagReaderWorker::TagReaderWorker(QIODevice* socket, QObject* parent)
-    : AbstractMessageHandler<pb::tagreader::Message>(socket, parent) {}
+    : AbstractMessageHandler<pb::tagreader::Message>(socket, parent),
+      tag_reader_(new RecordingNetworkAccessManager) {}
 
 void TagReaderWorker::MessageArrived(const pb::tagreader::Message& message) {
   pb::tagreader::Message reply;
@@ -80,6 +85,8 @@ void TagReaderWorker::MessageArrived(const pb::tagreader::Message& message) {
       reply.mutable_read_cloud_file_response()->clear_metadata();
     }
 #endif
+  } else if (message.has_network_statistics_request()) {
+    ReportNetworkStatistics(reply.mutable_network_statistics_response());
   }
 
   SendReply(message, &reply);
@@ -89,4 +96,17 @@ void TagReaderWorker::DeviceClosed() {
   AbstractMessageHandler<pb::tagreader::Message>::DeviceClosed();
 
   qApp->exit();
+}
+
+void TagReaderWorker::ReportNetworkStatistics(
+    NetworkStatisticsResponse* response) const {
+  QList<RecordingNetworkAccessManager::NetworkStat*> stats =
+      RecordingNetworkAccessManager::GetNetworkStatistics();
+  for (RecordingNetworkAccessManager::NetworkStat* stat : stats) {
+    NetworkStatisticsResponse::Entry* entry = response->add_entry();
+    entry->set_url(stat->url.toStdString());
+    entry->set_operation(
+        static_cast<NetworkStatisticsResponse::Operation>(stat->operation));
+    entry->set_bytes_received(stat->bytes_received);
+  }
 }

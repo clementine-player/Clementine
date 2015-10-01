@@ -53,6 +53,7 @@ class TagReaderClient : public QObject {
   ReplyType* ReadCloudFile(const QUrl& download_url, const QString& title,
                            int size, const QString& mime_type,
                            const QString& authorisation_header);
+  ReplyType* GetNetworkStatistics();
 
   // Convenience functions that call the above functions and wait for a
   // response.  These block the calling thread with a semaphore, and must NOT
@@ -63,6 +64,7 @@ class TagReaderClient : public QObject {
   bool UpdateSongRatingBlocking(const Song& metadata);
   bool IsMediaFileBlocking(const QString& filename);
   QImage LoadEmbeddedArtBlocking(const QString& filename);
+  void GetNetworkStatisticsBlocking();
 
   // TODO(David Sansome): Make this not a singleton
   static TagReaderClient* Instance() { return sInstance; }

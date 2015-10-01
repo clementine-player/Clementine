@@ -26,10 +26,14 @@
 #include <QNetworkReply>
 
 #include "core/closure.h"
-#include "utilities.h"
+#include "core/logging.h"
+#include "core/utilities.h"
 
 QMutex ThreadSafeNetworkDiskCache::sMutex;
 QNetworkDiskCache* ThreadSafeNetworkDiskCache::sCache = nullptr;
+
+QMutex NetworkAccessManager::sMutex;
+QMap<QString, int>* NetworkAccessManager::sTrafficAnalysis = nullptr;
 
 ThreadSafeNetworkDiskCache::ThreadSafeNetworkDiskCache(QObject* parent) {
   QMutexLocker l(&sMutex);
@@ -84,7 +88,21 @@ void ThreadSafeNetworkDiskCache::clear() {
 
 NetworkAccessManager::NetworkAccessManager(QObject* parent)
     : QNetworkAccessManager(parent) {
+  StaticInit();
   setCache(new ThreadSafeNetworkDiskCache(this));
+}
+
+void NetworkAccessManager::StaticInit() {
+  QMutexLocker l(&sMutex);
+  if (sTrafficAnalysis == nullptr) {
+    sTrafficAnalysis = new QMap<QString, int>;
+  }
+}
+
+void NetworkAccessManager::PrintNetworkStatistics() {
+  for (const auto& it : sTrafficAnalysis->toStdMap()) {
+    qLog(Debug) << it.first << it.second;
+  }
 }
 
 QNetworkReply* NetworkAccessManager::createRequest(
@@ -116,7 +134,26 @@ QNetworkReply* NetworkAccessManager::createRequest(
                              QNetworkRequest::PreferCache);
   }
 
+  RecordRequest(new_request);
   return QNetworkAccessManager::createRequest(op, new_request, outgoingData);
+}
+
+void NetworkAccessManager::RecordRequest(const QNetworkRequest& request) {
+  QMutexLocker l(&sMutex);
+  if (sTrafficAnalysis == nullptr) return;
+
+  const QUrl& url = request.url();
+  const QString recorded = QString("%1://%2:%3%4")
+      .arg(url.scheme())
+      .arg(url.host())
+      .arg(url.port())
+      .arg(url.path());
+
+  if (sTrafficAnalysis->contains(recorded)) {
+    ++(*sTrafficAnalysis)[recorded];
+  } else {
+    (*sTrafficAnalysis)[recorded] = 1;
+  }
 }
 
 NetworkTimeouts::NetworkTimeouts(int timeout_msec, QObject* parent)

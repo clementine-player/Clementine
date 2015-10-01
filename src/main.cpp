@@ -16,6 +16,7 @@
 */
 
 #include <memory>
+#include <signal.h>
 
 #include <QtGlobal>
 
@@ -81,6 +82,10 @@
 #ifdef Q_OS_DARWIN
 #include <sys/resource.h>
 #include <sys/sysctl.h>
+#endif
+
+#ifdef Q_OS_LINUX
+#include "core/signalhandler.h"
 #endif
 
 #ifdef HAVE_LIBLASTFM
@@ -250,6 +255,15 @@ void ScanGIOModulePath() {
 #endif  // HAVE_GIO
 
 int main(int argc, char* argv[]) {
+#ifdef Q_OS_LINUX
+  sigset_t blocked_signals;
+  memset(&blocked_signals, 0, sizeof(blocked_signals));
+  sigemptyset(&blocked_signals);
+  sigaddset(&blocked_signals, SIGUSR1);
+  // This must be done before any other threads are spawned.
+  pthread_sigmask(SIG_BLOCK, &blocked_signals, nullptr);
+#endif
+
   if (CrashReporting::SendCrashReport(argc, argv)) {
     return 0;
   }
@@ -452,6 +466,16 @@ int main(int argc, char* argv[]) {
   // when its service is created.
   app.cover_providers()->AddProvider(new AmazonCoverProvider);
   app.cover_providers()->AddProvider(new MusicbrainzCoverProvider);
+
+#ifdef Q_OS_LINUX
+  SignalHandler signal_handler;
+  NewPermanentClosure(&signal_handler, SIGNAL(SIG_USR1()), [&app]() {
+    qLog(Debug) << "Received SIGUSR1"
+                << "thread: " << QThread::currentThread()
+                << "main thread: " << qApp->thread();
+    app.tag_reader_client()->GetNetworkStatisticsBlocking();
+  });
+#endif
 
 #ifdef Q_OS_LINUX
   // In 11.04 Ubuntu decided that the system tray should be reserved for certain

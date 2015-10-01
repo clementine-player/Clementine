@@ -54,13 +54,15 @@ class ClosureBase {
 class ObjectHelper : public QObject {
   Q_OBJECT
  public:
-  ObjectHelper(QObject* parent, const char* signal, ClosureBase* closure);
+  ObjectHelper(QObject* parent, const char* signal, ClosureBase* closure,
+               bool permanent = false);
 
  private slots:
   void Invoked();
 
  private:
   std::unique_ptr<ClosureBase> closure_;
+  bool permanent_;
   Q_DISABLE_COPY(ObjectHelper);
 };
 
@@ -139,7 +141,7 @@ class SharedClosure : public Closure<Args...> {
 class CallbackClosure : public ClosureBase {
  public:
   CallbackClosure(QObject* sender, const char* signal,
-                  std::function<void()> callback);
+                  std::function<void()> callback, bool permanent = false);
 
   virtual void Invoke();
 
@@ -167,6 +169,9 @@ _detail::ClosureBase* NewClosure(QSharedPointer<T> sender, const char* signal,
 
 _detail::ClosureBase* NewClosure(QObject* sender, const char* signal,
                                  std::function<void()> callback);
+
+_detail::ClosureBase* NewPermanentClosure(QObject* sender, const char* signal,
+                                          std::function<void()> callback);
 
 template <typename... Args>
 _detail::ClosureBase* NewClosure(QObject* sender, const char* signal,

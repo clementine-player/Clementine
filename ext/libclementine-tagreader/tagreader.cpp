@@ -116,9 +116,9 @@ const char* kASF_OriginalDate_ID = "WM/OriginalReleaseTime";
 const char* kASF_OriginalYear_ID = "WM/OriginalReleaseYear";
 }
 
-TagReader::TagReader()
+TagReader::TagReader(QNetworkAccessManager* network)
     : factory_(new TagLibFileRefFactory),
-      network_(new QNetworkAccessManager),
+      network_(network ? network : new QNetworkAccessManager),
       kEmbeddedCover("(embedded)") {}
 
 void TagReader::ReadFile(const QString& filename,
@@ -1072,7 +1072,7 @@ bool TagReader::ReadCloudFile(const QUrl& download_url, const QString& title,
   qLog(Debug) << "Loading tags from" << title;
 
   std::unique_ptr<CloudStream> stream(new CloudStream(
-      download_url, title, size, authorisation_header, network_));
+      download_url, title, size, authorisation_header, network_.get()));
   stream->Precache();
   std::unique_ptr<TagLib::File> tag;
   if (mime_type == "audio/mpeg" && title.endsWith(".mp3")) {

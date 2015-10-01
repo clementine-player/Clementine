@@ -32,6 +32,9 @@ class TagReaderWorker : public AbstractMessageHandler<pb::tagreader::Message> {
   void DeviceClosed();
 
  private:
+  void ReportNetworkStatistics(
+      pb::tagreader::NetworkStatisticsResponse* response) const;
+
   TagReader tag_reader_;
 };
 

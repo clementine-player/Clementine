@@ -118,6 +118,30 @@ message SaveSongRatingToFileResponse {
   optional bool success = 1;
 }
 
+message NetworkStatisticsRequest {
+}
+
+message NetworkStatisticsResponse {
+  // This should match QNetworkAccessManager::Operation.
+  enum Operation {
+    UNKNOWN = 0;
+    HEAD = 1;
+    GET = 2;
+    PUT = 3;
+    POST = 4;
+    DELETE = 5;
+    CUSTOM = 6;
+  }
+
+  message Entry {
+    optional string url = 1;
+    optional Operation operation = 2;
+    optional int32 bytes_sent = 3;
+    optional int32 bytes_received = 4;
+  }
+  repeated Entry entry = 1;
+}
+
 message Message {
   optional int32 id = 1;
 
@@ -135,10 +159,13 @@ message Message {
 
   optional ReadCloudFileRequest read_cloud_file_request = 10;
   optional ReadCloudFileResponse read_cloud_file_response = 11;
-  
+
   optional SaveSongStatisticsToFileRequest save_song_statistics_to_file_request = 12;
   optional SaveSongStatisticsToFileResponse save_song_statistics_to_file_response = 13;
-  
+
   optional SaveSongRatingToFileRequest save_song_rating_to_file_request = 14;
   optional SaveSongRatingToFileResponse save_song_rating_to_file_response = 15;
+
+  optional NetworkStatisticsRequest network_statistics_request = 16;
+  optional NetworkStatisticsResponse network_statistics_response = 17;
 }

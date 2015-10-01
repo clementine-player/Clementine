@@ -26,8 +26,9 @@ ClosureBase::ClosureBase(ObjectHelper* helper) : helper_(helper) {}
 ClosureBase::~ClosureBase() {}
 
 CallbackClosure::CallbackClosure(QObject* sender, const char* signal,
-                                 std::function<void()> callback)
-    : ClosureBase(new ObjectHelper(sender, signal, this)),
+                                 std::function<void()> callback,
+                                 bool permanent)
+    : ClosureBase(new ObjectHelper(sender, signal, this, permanent)),
       callback_(callback) {}
 
 void CallbackClosure::Invoke() { callback_(); }
@@ -35,15 +36,16 @@ void CallbackClosure::Invoke() { callback_(); }
 ObjectHelper* ClosureBase::helper() const { return helper_; }
 
 ObjectHelper::ObjectHelper(QObject* sender, const char* signal,
-                           ClosureBase* closure)
-    : closure_(closure) {
+                           ClosureBase* closure, bool permanent)
+    : closure_(closure),
+      permanent_(permanent) {
   connect(sender, signal, SLOT(Invoked()));
   connect(sender, SIGNAL(destroyed()), SLOT(deleteLater()));
 }
 
 void ObjectHelper::Invoked() {
   closure_->Invoke();
-  deleteLater();
+  if (!permanent_) deleteLater();
 }
 
 void Unpack(QList<QGenericArgument>*) {}
@@ -53,6 +55,11 @@ void Unpack(QList<QGenericArgument>*) {}
 _detail::ClosureBase* NewClosure(QObject* sender, const char* signal,
                                  std::function<void()> callback) {
   return new _detail::CallbackClosure(sender, signal, callback);
+}
+
+_detail::ClosureBase* NewPermanentClosure(QObject* sender, const char* signal,
+                                 std::function<void()> callback) {
+  return new _detail::CallbackClosure(sender, signal, callback, true);
 }
 
 void DoAfter(QObject* receiver, const char* slot, int msec) {

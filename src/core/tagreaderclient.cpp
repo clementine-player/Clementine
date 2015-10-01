@@ -27,6 +27,10 @@
 #include <QThread>
 #include <QUrl>
 
+#include "core/waitforsignal.h"
+
+using pb::tagreader::NetworkStatisticsResponse;
+
 const char* TagReaderClient::kWorkerExecutableName = "clementine-tagreader";
 TagReaderClient* TagReaderClient::sInstance = nullptr;
 
@@ -124,6 +128,43 @@ TagReaderReply* TagReaderClient::LoadEmbeddedArt(const QString& filename) {
   return worker_pool_->SendMessageWithReply(&message);
 }
 
+class BroadcastReply : public TagReaderReply {
+ public:
+  BroadcastReply(
+      const pb::tagreader::Message& request_message,
+      const QList<TagReaderReply*>& replies,
+      QObject* parent = nullptr)
+      : TagReaderReply(request_message, parent),
+        replies_(replies) {
+    for (TagReaderReply* reply : replies_) {
+      NewClosure(reply, SIGNAL(Finished(bool)), [=]() {
+        if (IsFinished()) {
+          int successes = std::count_if(
+            replies_.constBegin(), replies_.constEnd(),
+            std::mem_fn(&TagReaderReply::is_successful));
+          emit this->Finished(successes == replies_.count());
+        }
+      });
+    }
+  }
+
+  const QList<TagReaderReply*>& replies() const { return replies_; }
+  bool WaitForFinished() override {
+    WaitForSignal(this, SIGNAL(Finished(bool)));
+    return IsFinished();
+  }
+
+ private:
+  bool IsFinished() const {
+    int finished = std::count_if(
+        replies_.constBegin(), replies_.constEnd(),
+        std::mem_fn(&TagReaderReply::is_finished));
+    return finished == replies_.count();
+  }
+
+  QList<TagReaderReply*> replies_;
+};
+
 TagReaderReply* TagReaderClient::ReadCloudFile(
     const QUrl& download_url, const QString& title, int size,
     const QString& mime_type, const QString& authorisation_header) {
@@ -139,6 +180,45 @@ TagReaderReply* TagReaderClient::ReadCloudFile(
   req->set_authorisation_header(DataCommaSizeFromQString(authorisation_header));
 
   return worker_pool_->SendMessageWithReply(&message);
+}
+
+TagReaderReply* TagReaderClient::GetNetworkStatistics() {
+  pb::tagreader::Message message;
+  message.mutable_network_statistics_request();
+  QList<TagReaderReply*> replies =
+      worker_pool_->BroadcastMessageWithReply(&message);
+  return new BroadcastReply(message, replies);
+}
+
+void TagReaderClient::GetNetworkStatisticsBlocking() {
+  BroadcastReply* reply = static_cast<BroadcastReply*>(GetNetworkStatistics());
+  reply->WaitForFinished();
+  reply->deleteLater();
+  NetworkStatisticsResponse response;
+  for (TagReaderReply* r : reply->replies()) {
+    response.MergeFrom(r->message().network_statistics_response());
+  }
+
+  // Aggregate stats.
+  QMap<QString, int> requests_by_host;
+  QMap<QString, qint64> bytes_received_by_host;
+  for (const NetworkStatisticsResponse::Entry& entry : response.entry()) {
+    QUrl url(QStringFromStdString(entry.url()));
+    QString host = url.authority();
+    if (requests_by_host.contains(host)) {
+      ++requests_by_host[host];
+    } else {
+      requests_by_host[host] = 1;
+    }
+    if (bytes_received_by_host.contains(host)) {
+      bytes_received_by_host[host] += entry.bytes_received();
+    } else {
+      bytes_received_by_host[host] = entry.bytes_received();
+    }
+  }
+
+  qLog(Debug) << requests_by_host;
+  qLog(Debug) << bytes_received_by_host;
 }
 
 void TagReaderClient::ReadFileBlocking(const QString& filename, Song* song) {

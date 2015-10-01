@@ -21,6 +21,7 @@
 #include <QAtomicInt>
 #include <QCoreApplication>
 #include <QFile>
+#include <QList>
 #include <QLocalServer>
 #include <QLocalSocket>
 #include <QMutex>
@@ -88,6 +89,8 @@ class WorkerPool : public _WorkerPoolBase {
   // worker.  Can be called from any thread.
   ReplyType* SendMessageWithReply(MessageType* message);
 
+  QList<ReplyType*> BroadcastMessageWithReply(MessageType* message);
+
  protected:
   // These are all reimplemented slots, they are called on the WorkerPool's
   // thread.
@@ -140,6 +143,31 @@ class WorkerPool : public _WorkerPoolBase {
   // Returns the next handler, or NULL if there isn't one.  Must be called from
   // my thread.
   HandlerType* NextHandler() const;
+
+
+  class BroadcastReply : public ReplyType {
+   public:
+    BroadcastReply(
+        const MessageType& request_message,
+        QList<ReplyType*> replies, QObject* parent = nullptr)
+        : ReplyType(request_message, parent),
+          replies_(replies) {
+      for (ReplyType* reply : replies_) {
+        NewClosure(reply, SIGNAL(Finished(bool)), [&]() {
+          int finished = 0;
+          for (ReplyType* reply : replies_) {
+            finished += reply->is_finished() ? 1 : 0;
+          }
+          if (finished == replies_.count()) {
+            emit this->Finished(true);
+          }
+        });
+      }
+    }
+
+   private:
+    QList<ReplyType*> replies_;
+  };
 
  private:
   QString local_server_name_;
@@ -367,6 +395,19 @@ WorkerPool<HandlerType>::SendMessageWithReply(MessageType* message) {
   metaObject()->invokeMethod(this, "SendQueuedMessages", Qt::QueuedConnection);
 
   return reply;
+}
+
+template <typename HandlerType>
+QList<typename WorkerPool<HandlerType>::ReplyType*>
+WorkerPool<HandlerType>::BroadcastMessageWithReply(MessageType* message) {
+  QList<ReplyType*> replies;
+  for (const Worker& worker : workers_) {
+    ReplyType* reply = NewReply(message);
+    replies << reply;
+    worker.handler_->SendRequest(reply);
+    qLog(Debug) << "Sent request to worker: " << &worker;
+  }
+  return replies;
 }
 
 template <typename HandlerType>

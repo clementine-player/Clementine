@@ -21,6 +21,7 @@
 #define CORE_NETWORK_H_
 
 #include <QAbstractNetworkCache>
+#include <QMap>
 #include <QMutex>
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
@@ -55,6 +56,14 @@ class NetworkAccessManager : public QNetworkAccessManager {
  protected:
   QNetworkReply* createRequest(Operation op, const QNetworkRequest& request,
                                QIODevice* outgoingData);
+
+ private:
+  static void RecordRequest(const QNetworkRequest& request);
+  static void StaticInit();
+  static void PrintNetworkStatistics();
+
+  static QMutex sMutex;
+  static QMap<QString, int>* sTrafficAnalysis;
 };
 
 class RedirectFollower : public QObject {
