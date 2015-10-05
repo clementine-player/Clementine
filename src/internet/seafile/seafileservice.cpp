@@ -250,7 +250,7 @@ void SeafileService::UpdateLibrariesInProgress(
 
   library_updated_ = library_to_update;
 
-  if (library_to_update == "none") {
+  if (library_to_update.isEmpty() || library_to_update == "none") {
     app_->task_manager()->SetTaskFinished(indexing_task_id_);
     indexing_task_id_ = -1;
     UpdatingLibrariesFinishedSignal();
@@ -475,6 +475,8 @@ QNetworkReply* SeafileService::PrepareFetchContentUrlForFile(
     const QString& library, const QString& filepath) {
   QUrl content_url(server_ + QString(kFileUrl).arg(library));
   content_url.addQueryItem("p", filepath);
+  // See https://github.com/haiwen/seahub/issues/677
+  content_url.addQueryItem("reuse", "1");
 
   QNetworkRequest request(content_url);
   AddAuthorizationHeader(&request);
