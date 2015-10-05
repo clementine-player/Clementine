@@ -111,7 +111,6 @@ namespace {
 
 void LoadTranslation(const QString& prefix, const QString& path,
                      const QString& language) {
-
   QTranslator* t = new PoTranslator;
   if (t->load(prefix + "_" + language, path))
     QCoreApplication::installTranslator(t);
@@ -349,7 +348,8 @@ int main(int argc, char* argv[]) {
 
   a.setQuitOnLastWindowClosed(false);
   // Do this check again because another instance might have started by now
-  if (a.isRunning() && a.sendMessage(options.Serialize(), 5000)) {
+  if (a.isRunning() &&
+      a.sendMessage(QString::fromLatin1(options.Serialize()), 5000)) {
     return 0;
   }
 
@@ -390,8 +390,8 @@ int main(int argc, char* argv[]) {
   // Add root CA cert for SoundCloud, whose certificate is missing on OS X.
   QSslSocket::addDefaultCaCertificates(
       QSslCertificate::fromPath(":/soundcloud-ca.pem", QSsl::Pem));
-  QSslSocket::addDefaultCaCertificates(
-      QSslCertificate::fromPath(":/Equifax_Secure_Certificate_Authority.pem", QSsl::Pem));
+  QSslSocket::addDefaultCaCertificates(QSslCertificate::fromPath(
+      ":/Equifax_Secure_Certificate_Authority.pem", QSsl::Pem));
 
   // Has the user forced a different language?
   QString override_language = options.language();
