@@ -262,5 +262,5 @@ void SomaFMServiceBase::ReloadSettings() {
 
 SomaFMService::SomaFMService(Application* app, InternetModel* parent)
     : SomaFMServiceBase(
-          app, parent, "SomaFM", QUrl("http://somafm.com/channels.xml"),
-          QUrl("http://somafm.com"), QUrl(), QIcon(":providers/somafm.png")) {}
+          app, parent, "SomaFM", QUrl("https://somafm.com/channels.xml"),
+          QUrl("https://somafm.com"), QUrl(), QIcon(":providers/somafm.png")) {}
