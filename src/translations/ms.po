@@ -9,8 +9,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2015-08-26 16:44+0000\n"
-"Last-Translator: abuyop <abuyop@gmail.com>\n"
+"PO-Revision-Date: 2015-09-28 10:05+0000\n"
+"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Malay (http://www.transifex.com/davidsansome/clementine/language/ms/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -52,7 +52,7 @@ msgstr " ms"
 msgid " pt"
 msgstr " pt"
 
-#: ../bin/src/ui_behavioursettingspage.h:374
+#: ../bin/src/ui_behavioursettingspage.h:359
 msgid " s"
 msgstr " s"
 
@@ -404,7 +404,7 @@ msgid "About Qt..."
 msgstr "Perihal Qt..."
 
 #: playlist/playlistsaveoptionsdialog.cpp:34
-#: ../bin/src/ui_behavioursettingspage.h:378
+#: ../bin/src/ui_behavioursettingspage.h:363
 msgid "Absolute"
 msgstr "Mutlak"
 
@@ -464,7 +464,7 @@ msgstr "Tambah strim lain..."
 msgid "Add directory..."
 msgstr "Tambah direktori..."
 
-#: ui/mainwindow.cpp:1931
+#: ui/mainwindow.cpp:1898
 msgid "Add file"
 msgstr "Tambah fail"
 
@@ -484,7 +484,7 @@ msgstr "Tambah fail..."
 msgid "Add files to transcode"
 msgstr "Tambah fail-fail untuk transkod"
 
-#: transcoder/transcodedialog.cpp:306 ui/mainwindow.cpp:1958
+#: transcoder/transcodedialog.cpp:306 ui/mainwindow.cpp:1925
 #: ripper/ripcddialog.cpp:185
 msgid "Add folder"
 msgstr "Tambah folder"
@@ -601,7 +601,7 @@ msgstr "Tambah ke senarai main Spotify"
 msgid "Add to Spotify starred"
 msgstr "Tambah ke Spotify dibintangi"
 
-#: ui/mainwindow.cpp:1752
+#: ui/mainwindow.cpp:1719
 msgid "Add to another playlist"
 msgstr "Tambahkan ke senarai main lain"
 
@@ -613,8 +613,8 @@ msgstr "Tambah ke tanda buku"
 msgid "Add to playlist"
 msgstr "Tambahkan ke senarai main"
 
-#: ../bin/src/ui_behavioursettingspage.h:350
-#: ../bin/src/ui_behavioursettingspage.h:362
+#: ../bin/src/ui_behavioursettingspage.h:343
+#: ../bin/src/ui_behavioursettingspage.h:355
 msgid "Add to the queue"
 msgstr "Tambah ke dalam senarai"
 
@@ -756,17 +756,16 @@ msgstr "Benarka pengekodan mid/sisi"
 msgid "Alongside the originals"
 msgstr "Bersama-sama yang asal"
 
-#: ../bin/src/ui_behavioursettingspage.h:323
+#: ../bin/src/ui_behavioursettingspage.h:316
 msgid "Always hide the main window"
 msgstr "Sentiasa sembunyikan tetingkap utama"
 
-#: ../bin/src/ui_behavioursettingspage.h:322
+#: ../bin/src/ui_behavioursettingspage.h:315
 msgid "Always show the main window"
 msgstr "Sentiasa tunjukkan tetingkap utama"
 
-#: ../bin/src/ui_behavioursettingspage.h:336
-#: ../bin/src/ui_behavioursettingspage.h:356
-#: ../bin/src/ui_behavioursettingspage.h:370
+#: ../bin/src/ui_behavioursettingspage.h:329
+#: ../bin/src/ui_behavioursettingspage.h:349
 msgid "Always start playing"
 msgstr "Sentiasa mula bermain"
 
@@ -812,12 +811,12 @@ msgid "Append files/URLs to the playlist"
 msgstr "Tambah fail/URL ke senarai main"
 
 #: devices/deviceview.cpp:216 globalsearch/globalsearchview.cpp:453
-#: internet/core/internetservice.cpp:80 library/libraryview.cpp:370
+#: internet/core/internetservice.cpp:80 library/libraryview.cpp:372
 #: widgets/fileviewlist.cpp:31
 msgid "Append to current playlist"
 msgstr "Tambah ke senarai main semasa"
 
-#: ../bin/src/ui_behavioursettingspage.h:347
+#: ../bin/src/ui_behavioursettingspage.h:340
 msgid "Append to the playlist"
 msgstr "Tambah ke senarai main"
 
@@ -861,7 +860,7 @@ msgstr "Tag artis"
 msgid "Artist's initial"
 msgstr "Nama awal artis"
 
-#: ../bin/src/ui_behavioursettingspage.h:380
+#: ../bin/src/ui_behavioursettingspage.h:365
 msgid "Ask when saving"
 msgstr "Tanya bila menyimpan"
 
@@ -896,7 +895,7 @@ msgid "Auto"
 msgstr "Auto"
 
 #: playlist/playlistsaveoptionsdialog.cpp:32
-#: ../bin/src/ui_behavioursettingspage.h:377
+#: ../bin/src/ui_behavioursettingspage.h:362
 msgid "Automatic"
 msgstr "Automatik"
 
@@ -969,7 +968,7 @@ msgstr "Biru Asasi"
 msgid "Basic audio type"
 msgstr "Jenis audio asas"
 
-#: ../bin/src/ui_behavioursettingspage.h:311
+#: ../bin/src/ui_behavioursettingspage.h:304
 msgid "Behavior"
 msgstr "Kelakuan"
 
@@ -1105,7 +1104,7 @@ msgstr "Ubah pintasan..."
 msgid "Change shuffle mode"
 msgstr "Ubah mod kocok"
 
-#: ../bin/src/ui_behavioursettingspage.h:361
+#: ../bin/src/ui_behavioursettingspage.h:354
 msgid "Change the currently playing song"
 msgstr "Ubah lagu yang kini dimainkan"
 
@@ -1267,7 +1266,7 @@ msgstr "Clementine tidak dapat mencari keputusan untuk fail ini"
 msgid "Clementine will find music in:"
 msgstr "Clementine akan mencari muzik di dalam:"
 
-#: library/libraryview.cpp:351
+#: library/libraryview.cpp:353
 msgid "Click here to add some music"
 msgstr "Klik di sini untuk menambah muzik"
 
@@ -1450,7 +1449,7 @@ msgstr "Salin url kongsi ke papan keratan"
 msgid "Copy to clipboard"
 msgstr "Salin ke papan keratan"
 
-#: library/libraryview.cpp:400 internet/podcasts/podcastservice.cpp:437
+#: library/libraryview.cpp:402 internet/podcasts/podcastservice.cpp:437
 #: ui/mainwindow.cpp:641 widgets/fileviewlist.cpp:43
 msgid "Copy to device..."
 msgstr "Salin ke peranti..."
@@ -1699,8 +1698,8 @@ msgstr "Padam"
 msgid "Delete downloaded data"
 msgstr "Padam data dimuat turun"
 
-#: devices/deviceview.cpp:404 library/libraryview.cpp:636
-#: ui/mainwindow.cpp:2294 widgets/fileview.cpp:186
+#: devices/deviceview.cpp:404 library/libraryview.cpp:638
+#: ui/mainwindow.cpp:2261 widgets/fileview.cpp:186
 msgid "Delete files"
 msgstr "Padam fail"
 
@@ -1708,7 +1707,7 @@ msgstr "Padam fail"
 msgid "Delete from device..."
 msgstr "Padam dari peranti..."
 
-#: library/libraryview.cpp:402 ui/mainwindow.cpp:643
+#: library/libraryview.cpp:404 ui/mainwindow.cpp:643
 #: widgets/fileviewlist.cpp:44
 msgid "Delete from disk..."
 msgstr "Padam dari cakera..."
@@ -1721,7 +1720,7 @@ msgstr "Padam episod telah dimain"
 msgid "Delete preset"
 msgstr "Padam praset"
 
-#: library/libraryview.cpp:391
+#: library/libraryview.cpp:393
 msgid "Delete smart playlist"
 msgstr "Padam senarai main pintar"
 
@@ -1733,11 +1732,11 @@ msgstr "Padam fail asal"
 msgid "Deleting files"
 msgstr "Memadam fail-fail"
 
-#: ui/mainwindow.cpp:1673
+#: ui/mainwindow.cpp:1640
 msgid "Dequeue selected tracks"
 msgstr "Nyahbaris gilir trek terpilih"
 
-#: ui/mainwindow.cpp:1671
+#: ui/mainwindow.cpp:1638
 msgid "Dequeue track"
 msgstr "Nyahbaris gilir trek"
 
@@ -1859,10 +1858,6 @@ msgstr "Jangan tukar mana-mana muzik"
 msgid "Do not overwrite"
 msgstr "Jangan tulis-ganti"
 
-#: ../bin/src/ui_behavioursettingspage.h:364
-msgid "Do nothing"
-msgstr "Jangan buat apa-apa"
-
 #: internet/googledrive/googledriveservice.cpp:268
 msgid ""
 "Doing a full rescan will lose any metadata you've saved in Clementine such "
@@ -1874,7 +1869,7 @@ msgstr "Membuat imbas semula penuh akan kehilangan mana-mana data meta yang anda
 msgid "Don't repeat"
 msgstr "Jangan ulang"
 
-#: library/libraryview.cpp:420
+#: library/libraryview.cpp:422
 msgid "Don't show in various artists"
 msgstr "Jangan tunjuk dalam artis pelbagai"
 
@@ -1899,11 +1894,11 @@ msgstr "Derma"
 msgid "Double click to open"
 msgstr "Dwi klik untuk buka"
 
-#: ../bin/src/ui_behavioursettingspage.h:358
+#: ../bin/src/ui_behavioursettingspage.h:351
 msgid "Double clicking a song in the playlist will..."
 msgstr "Dwi klik satu lagu dalam senarai main akan..."
 
-#: ../bin/src/ui_behavioursettingspage.h:344
+#: ../bin/src/ui_behavioursettingspage.h:337
 msgid "Double clicking a song will..."
 msgstr "Dwi klik sesuatu lagu akan..."
 
@@ -1964,7 +1959,7 @@ msgstr "Muat Turun..."
 msgid "Downloading (%1%)..."
 msgstr "Memuat turun (%1%)..."
 
-#: internet/icecast/icecastservice.cpp:106
+#: internet/icecast/icecastservice.cpp:102
 msgid "Downloading Icecast directory"
 msgstr "Memuat turun direktori Icecast"
 
@@ -2008,11 +2003,11 @@ msgstr "Mod dinamik hidup"
 msgid "Dynamic random mix"
 msgstr "Campuran rawak dinamik"
 
-#: library/libraryview.cpp:388
+#: library/libraryview.cpp:390
 msgid "Edit smart playlist..."
 msgstr "Sunting senarai main pintar..."
 
-#: ui/mainwindow.cpp:1715
+#: ui/mainwindow.cpp:1682
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr "Sunting tag \"%1\"..."
@@ -2029,12 +2024,12 @@ msgstr "Sunting tag"
 msgid "Edit track information"
 msgstr "Sunting maklumat trek"
 
-#: library/libraryview.cpp:407 widgets/fileviewlist.cpp:49
+#: library/libraryview.cpp:409 widgets/fileviewlist.cpp:49
 #: ../bin/src/ui_mainwindow.h:658
 msgid "Edit track information..."
 msgstr "Sunting maklumat trek..."
 
-#: library/libraryview.cpp:410
+#: library/libraryview.cpp:412
 msgid "Edit tracks information..."
 msgstr "Sunting maklumat trek..."
 
@@ -2062,7 +2057,7 @@ msgstr "Benarkan penyama"
 msgid "Enable shortcuts only when Clementine is focused"
 msgstr "Benarkan pintasan hanya apabila Clementine difokus"
 
-#: ../bin/src/ui_behavioursettingspage.h:330
+#: ../bin/src/ui_behavioursettingspage.h:323
 msgid "Enable song metadata inline edition with click"
 msgstr "Benarkan data meta lagu edisi inline dengan klik"
 
@@ -2151,8 +2146,8 @@ msgid "Equivalent to --log-levels *:3"
 msgstr "Sama dengan --log-levels *:3"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:242
-#: library/libraryview.cpp:630 ui/mainwindow.cpp:1997 ui/mainwindow.cpp:2244
-#: ui/mainwindow.cpp:2392 internet/vk/vkservice.cpp:634
+#: library/libraryview.cpp:632 ui/mainwindow.cpp:1964 ui/mainwindow.cpp:2211
+#: ui/mainwindow.cpp:2359 internet/vk/vkservice.cpp:634
 msgid "Error"
 msgstr "Ralat"
 
@@ -2316,7 +2311,7 @@ msgstr "Peresapan"
 msgid "Fading duration"
 msgstr "Jangkamasa peresapan"
 
-#: ui/mainwindow.cpp:1998
+#: ui/mainwindow.cpp:1965
 msgid "Failed reading CD drive"
 msgstr "Gagal membaca pemacu CD"
 
@@ -2582,7 +2577,7 @@ msgstr "Google Drive"
 msgid "Got %1 covers out of %2 (%3 failed)"
 msgstr "Dapat %1 kulit muka dari %2 (%3 gagal)"
 
-#: ../bin/src/ui_behavioursettingspage.h:326
+#: ../bin/src/ui_behavioursettingspage.h:319
 msgid "Grey out non existent songs in my playlists"
 msgstr "Malapkan lagu yang tidak wujud dalam senarai main saya"
 
@@ -2695,7 +2690,7 @@ msgstr "Ikon di atas"
 msgid "Identifying song"
 msgstr "Mengenalpasti lagu"
 
-#: ../bin/src/ui_behavioursettingspage.h:328
+#: ../bin/src/ui_behavioursettingspage.h:321
 msgid ""
 "If activated, clicking a selected song in the playlist view will let you "
 "edit the tag value directly"
@@ -2877,7 +2872,7 @@ msgstr "Trek Terbaik Mingguan Jamendo"
 msgid "Jamendo database"
 msgstr "Pangkalan data Jamendo"
 
-#: ../bin/src/ui_behavioursettingspage.h:341
+#: ../bin/src/ui_behavioursettingspage.h:334
 msgid "Jump to previous song right away"
 msgstr "Lompat ke lagu terdahulu sekarang jua"
 
@@ -2897,7 +2892,7 @@ msgstr "Kekalkan butang dalam tempoh %1 saat..."
 msgid "Keep buttons for %1 seconds..."
 msgstr "Kekalkan butang dalam tempoh %1 saat..."
 
-#: ../bin/src/ui_behavioursettingspage.h:313
+#: ../bin/src/ui_behavioursettingspage.h:306
 msgid "Keep running in the background when the window is closed"
 msgstr "Kekal berjalan di balik tabir bila tetingkap ditutup"
 
@@ -2914,7 +2909,7 @@ msgstr "Kittens"
 msgid "Kuduro"
 msgstr "Kuduro"
 
-#: ../bin/src/ui_behavioursettingspage.h:315
+#: ../bin/src/ui_behavioursettingspage.h:308
 msgid "Language"
 msgstr "Bahasa"
 
@@ -3001,7 +2996,7 @@ msgstr "Pustaka"
 msgid "Library advanced grouping"
 msgstr "Pengelompokan lanjutan pustaka"
 
-#: ui/mainwindow.cpp:2516
+#: ui/mainwindow.cpp:2483
 msgid "Library rescan notice"
 msgstr "Notis imbas semula pustaka"
 
@@ -3335,7 +3330,7 @@ msgstr "Alih ke pustaka..."
 msgid "Move up"
 msgstr "Alih ke atas"
 
-#: transcoder/transcodedialog.cpp:225 ui/mainwindow.cpp:1932
+#: transcoder/transcodedialog.cpp:225 ui/mainwindow.cpp:1899
 #: internet/vk/vkservice.cpp:893
 msgid "Music"
 msgstr "Muzik"
@@ -3395,9 +3390,8 @@ msgstr "Tidak Sesekali"
 msgid "Never played"
 msgstr "Tidak pernah dimainkan"
 
-#: ../bin/src/ui_behavioursettingspage.h:334
-#: ../bin/src/ui_behavioursettingspage.h:354
-#: ../bin/src/ui_behavioursettingspage.h:368
+#: ../bin/src/ui_behavioursettingspage.h:327
+#: ../bin/src/ui_behavioursettingspage.h:347
 msgid "Never start playing"
 msgstr "Tidak sesekali mula dimainkan"
 
@@ -3407,11 +3401,11 @@ msgstr "Tidak sesekali mula dimainkan"
 msgid "New folder"
 msgstr "Folder baharu"
 
-#: ui/mainwindow.cpp:1769 ../bin/src/ui_mainwindow.h:690
+#: ui/mainwindow.cpp:1736 ../bin/src/ui_mainwindow.h:690
 msgid "New playlist"
 msgstr "Senarai main baharu"
 
-#: library/libraryview.cpp:385
+#: library/libraryview.cpp:387
 msgid "New smart playlist..."
 msgstr "Senarai main pintar baharu..."
 
@@ -3470,7 +3464,7 @@ msgstr "Tiada blok pendek"
 msgid "None"
 msgstr "Tiada"
 
-#: library/libraryview.cpp:631 ui/mainwindow.cpp:2245 ui/mainwindow.cpp:2393
+#: library/libraryview.cpp:633 ui/mainwindow.cpp:2212 ui/mainwindow.cpp:2360
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Tiada satupun lagu yang dipilih sesuai untuk disalin ke peranti"
 
@@ -3632,12 +3626,12 @@ msgid "Open in Google Drive"
 msgstr "Buka dalam Google Drive"
 
 #: devices/deviceview.cpp:221 globalsearch/globalsearchview.cpp:461
-#: internet/core/internetservice.cpp:102 library/libraryview.cpp:375
+#: internet/core/internetservice.cpp:102 library/libraryview.cpp:377
 #: widgets/fileviewlist.cpp:35
 msgid "Open in new playlist"
 msgstr "Buka dalam senarai main baharu"
 
-#: ../bin/src/ui_behavioursettingspage.h:349
+#: ../bin/src/ui_behavioursettingspage.h:342
 msgctxt "Refers to behavior settings in Clementine settings page."
 msgid "Open in new playlist"
 msgstr "Buka dalam senarai main baharu"
@@ -3677,7 +3671,7 @@ msgstr "Opus"
 msgid "Organise Files"
 msgstr "Aturkan Fail"
 
-#: library/libraryview.cpp:396 ui/mainwindow.cpp:637
+#: library/libraryview.cpp:398 ui/mainwindow.cpp:637
 msgid "Organise files..."
 msgstr "Urus fail..."
 
@@ -3753,7 +3747,7 @@ msgstr "Parti"
 msgid "Password"
 msgstr "Kata laluan"
 
-#: core/globalshortcuts.cpp:50 ui/mainwindow.cpp:1061 ui/mainwindow.cpp:1582
+#: core/globalshortcuts.cpp:50 ui/mainwindow.cpp:1058 ui/mainwindow.cpp:1549
 #: ui/qtsystemtrayicon.cpp:175 wiimotedev/wiimotesettingspage.cpp:107
 msgid "Pause"
 msgstr "Jeda"
@@ -3780,8 +3774,8 @@ msgstr "Piksel"
 msgid "Plain sidebar"
 msgstr "Palang sisi biasa"
 
-#: core/globalshortcuts.cpp:49 ui/mainwindow.cpp:609 ui/mainwindow.cpp:1029
-#: ui/mainwindow.cpp:1047 ui/mainwindow.cpp:1585 ui/qtsystemtrayicon.cpp:164
+#: core/globalshortcuts.cpp:49 ui/mainwindow.cpp:609 ui/mainwindow.cpp:1026
+#: ui/mainwindow.cpp:1044 ui/mainwindow.cpp:1552 ui/qtsystemtrayicon.cpp:164
 #: ui/qtsystemtrayicon.cpp:188 wiimotedev/wiimotesettingspage.cpp:100
 #: ../bin/src/ui_mainwindow.h:641
 msgid "Play"
@@ -3795,9 +3789,8 @@ msgstr "Kiraan main"
 msgid "Play if stopped, pause if playing"
 msgstr "Main sekiranya telah dihenti, jeda sekiranya dimainkan"
 
-#: ../bin/src/ui_behavioursettingspage.h:335
-#: ../bin/src/ui_behavioursettingspage.h:355
-#: ../bin/src/ui_behavioursettingspage.h:369
+#: ../bin/src/ui_behavioursettingspage.h:328
+#: ../bin/src/ui_behavioursettingspage.h:348
 msgid "Play if there is nothing already playing"
 msgstr "Main sekiranya tiada apa yang tersedia dimainkan"
 
@@ -3922,7 +3915,7 @@ msgstr "Tekan satu kekunci"
 msgid "Press a key combination to use for %1..."
 msgstr "Tekan satu gabungan kekunci untuk digunakan bagi %1..."
 
-#: ../bin/src/ui_behavioursettingspage.h:338
+#: ../bin/src/ui_behavioursettingspage.h:331
 msgid "Pressing \"Previous\" in player will..."
 msgstr "Menekan \"Terdahulu\" di pemain akan..."
 
@@ -3996,12 +3989,12 @@ msgstr "Menanya peranti..."
 msgid "Queue Manager"
 msgstr "Pengurus Baris Gilir"
 
-#: ui/mainwindow.cpp:1677
+#: ui/mainwindow.cpp:1644
 msgid "Queue selected tracks"
 msgstr "Baris gilir trek terpilih"
 
-#: globalsearch/globalsearchview.cpp:466 library/libraryview.cpp:380
-#: ui/mainwindow.cpp:1675
+#: globalsearch/globalsearchview.cpp:466 library/libraryview.cpp:382
+#: ui/mainwindow.cpp:1642
 msgid "Queue track"
 msgstr "Baris gilir trek"
 
@@ -4082,7 +4075,7 @@ msgid "Reggae"
 msgstr "Reggae"
 
 #: playlist/playlistsaveoptionsdialog.cpp:33
-#: ../bin/src/ui_behavioursettingspage.h:379
+#: ../bin/src/ui_behavioursettingspage.h:364
 msgid "Relative"
 msgstr "Relatif"
 
@@ -4090,7 +4083,7 @@ msgstr "Relatif"
 msgid "Remember Wii remote swing"
 msgstr "Ingat ayunan Wii remote"
 
-#: ../bin/src/ui_behavioursettingspage.h:324
+#: ../bin/src/ui_behavioursettingspage.h:317
 msgid "Remember from last time"
 msgstr "Ingat dari kedudukan terakhir"
 
@@ -4168,18 +4161,14 @@ msgid "Repeat track"
 msgstr "Ulang trek"
 
 #: devices/deviceview.cpp:219 globalsearch/globalsearchview.cpp:457
-#: internet/core/internetservice.cpp:91 library/libraryview.cpp:372
+#: internet/core/internetservice.cpp:91 library/libraryview.cpp:374
 #: widgets/fileviewlist.cpp:34
 msgid "Replace current playlist"
 msgstr "Ganti senarai main semasa"
 
-#: ../bin/src/ui_behavioursettingspage.h:348
+#: ../bin/src/ui_behavioursettingspage.h:341
 msgid "Replace the playlist"
 msgstr "Ganti senarai main"
-
-#: ../bin/src/ui_behavioursettingspage.h:363
-msgid "Replace the queue"
-msgstr "Ganti baris gilir"
 
 #: ../bin/src/ui_organisedialog.h:256
 msgid "Replaces spaces with underscores"
@@ -4209,7 +4198,7 @@ msgstr "Tetap semula"
 msgid "Reset play counts"
 msgstr "Tetap semula kiraan main"
 
-#: ../bin/src/ui_behavioursettingspage.h:342
+#: ../bin/src/ui_behavioursettingspage.h:335
 msgid "Restart song, then jump to previous if pressed again"
 msgstr "Memulakan semula lagu, kemudian lompat ke kedudukan terdahulu jika ditekan sekali lagi"
 
@@ -4222,7 +4211,7 @@ msgstr "Mula semula trek, atau mainkan trek sebelum ini jika dalam tempoh 8 saat
 msgid "Restrict to ASCII characters"
 msgstr "Hadkan aksara ASCII"
 
-#: ../bin/src/ui_behavioursettingspage.h:325
+#: ../bin/src/ui_behavioursettingspage.h:318
 msgid "Resume playback on start"
 msgstr "Sambung semula main balik ketika mula"
 
@@ -4440,7 +4429,7 @@ msgstr "Jangkau trek semasa dimainkan mengikut amaun relatif"
 msgid "Seek the currently playing track to an absolute position"
 msgstr "Jangkau trek semasa dimainkan ke kedudukan mutlak"
 
-#: ../bin/src/ui_behavioursettingspage.h:372
+#: ../bin/src/ui_behavioursettingspage.h:357
 msgid "Seeking using a keyboard shortcut"
 msgstr "Penjangkauan menggunakan pintasan papan kekunci"
 
@@ -4500,7 +4489,7 @@ msgstr "Perincian pelayan"
 msgid "Service offline"
 msgstr "Perkhidmatan di luar talian"
 
-#: ui/mainwindow.cpp:1714
+#: ui/mainwindow.cpp:1681
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr "Tetapkan %1 ke \"%2\"..."
@@ -4600,7 +4589,7 @@ msgstr "Tunjuk saiz penuh..."
 msgid "Show groups in global search result"
 msgstr "Tunjuk kumpulan dalam keputusan gelintar sejagat"
 
-#: library/libraryview.cpp:413 ui/mainwindow.cpp:646
+#: library/libraryview.cpp:415 ui/mainwindow.cpp:646
 #: widgets/fileviewlist.cpp:51
 msgid "Show in file browser..."
 msgstr "Tunjuk dalam pelayar fail..."
@@ -4609,7 +4598,7 @@ msgstr "Tunjuk dalam pelayar fail..."
 msgid "Show in library..."
 msgstr "Tunjuk dalam pustaka...."
 
-#: library/libraryview.cpp:417
+#: library/libraryview.cpp:419
 msgid "Show in various artists"
 msgstr "Tunjuk dalam artis pelbagai"
 
@@ -4641,7 +4630,7 @@ msgstr "Tunjuk butang \"suka\""
 msgid "Show the scrobble button in the main window"
 msgstr "Tunjuk butang scrobble dalam tetingkap utama"
 
-#: ../bin/src/ui_behavioursettingspage.h:312
+#: ../bin/src/ui_behavioursettingspage.h:305
 msgid "Show tray icon"
 msgstr "Tunjuk ikon talam"
 
@@ -4713,11 +4702,11 @@ msgstr "Kiraan langkau"
 msgid "Skip forwards in playlist"
 msgstr "Langkau maju dalam senarai main"
 
-#: ui/mainwindow.cpp:1688
+#: ui/mainwindow.cpp:1655
 msgid "Skip selected tracks"
 msgstr "Langkau trek terpilih"
 
-#: ui/mainwindow.cpp:1686
+#: ui/mainwindow.cpp:1653
 msgid "Skip track"
 msgstr "Langkau trek"
 
@@ -5027,13 +5016,13 @@ msgid ""
 "license key. Visit subsonic.org for details."
 msgstr "Tempoh percubaan pelayan Subsonic telah tamat. Sila beri derma untuk dapatkan kunci lesen. Lawati subsonic untuk perincian."
 
-#: ui/mainwindow.cpp:2507
+#: ui/mainwindow.cpp:2474
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
 msgstr "Versi Clementine yang anda telah kemaskini memerlukan imbas semula pustaka penuh kerana terdapat beberapa fitur baharu yang tersenarai di bawah:"
 
-#: library/libraryview.cpp:553
+#: library/libraryview.cpp:555
 msgid "There are other songs in this album"
 msgstr "Terdapat lagu lain di dalam album ini"
 
@@ -5069,7 +5058,7 @@ msgid ""
 "continue?"
 msgstr "Fail ini akan dipadam dari peranti, anda pasti untuk meneruskan?"
 
-#: library/libraryview.cpp:637 ui/mainwindow.cpp:2295 widgets/fileview.cpp:187
+#: library/libraryview.cpp:639 ui/mainwindow.cpp:2262 widgets/fileview.cpp:187
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -5145,7 +5134,7 @@ msgstr "Strim ini untuk pelanggan berbayar sahaja"
 msgid "This type of device is not supported: %1"
 msgstr "Peranti jenis ini tidak disokong: %1"
 
-#: ../bin/src/ui_behavioursettingspage.h:373
+#: ../bin/src/ui_behavioursettingspage.h:358
 msgid "Time step"
 msgstr "Langkah masa"
 
@@ -5168,7 +5157,7 @@ msgstr "Togol OSD Menarik"
 msgid "Toggle fullscreen"
 msgstr "Togol skrin penuh"
 
-#: ui/mainwindow.cpp:1679
+#: ui/mainwindow.cpp:1646
 msgid "Toggle queue status"
 msgstr "Togol status baris gilir"
 
@@ -5290,11 +5279,11 @@ msgstr "Ralat tidak diketahui"
 msgid "Unset cover"
 msgstr "Nyahtetap kulit muka"
 
-#: ui/mainwindow.cpp:1684
+#: ui/mainwindow.cpp:1651
 msgid "Unskip selected tracks"
 msgstr "Jangan langkau trek terpilih"
 
-#: ui/mainwindow.cpp:1682
+#: ui/mainwindow.cpp:1649
 msgid "Unskip track"
 msgstr "Jangan langkau trek"
 
@@ -5405,7 +5394,7 @@ msgstr "Guna pemberitahuan untuk laporkan status Wii Remote"
 msgid "Use temporal noise shaping"
 msgstr "Guna pembentukan hingar sementara"
 
-#: ../bin/src/ui_behavioursettingspage.h:318
+#: ../bin/src/ui_behavioursettingspage.h:311
 msgid "Use the system default"
 msgstr "Guna lalai sistem"
 
@@ -5437,7 +5426,7 @@ msgstr "Antaramuka pengguna"
 msgid "Username"
 msgstr "Nama pengguna"
 
-#: ../bin/src/ui_behavioursettingspage.h:331
+#: ../bin/src/ui_behavioursettingspage.h:324
 msgid "Using the menu to add a song will..."
 msgstr "Menggunakan menu untuk tambah lagu akan..."
 
@@ -5506,7 +5495,7 @@ msgstr "WMA"
 msgid "Wall"
 msgstr "Dinding"
 
-#: playlist/playlisttabbar.cpp:192 ../bin/src/ui_behavioursettingspage.h:314
+#: playlist/playlisttabbar.cpp:192 ../bin/src/ui_behavioursettingspage.h:307
 msgid "Warn me when closing a playlist tab"
 msgstr "Beri amaran bila menutup tab senarai main"
 
@@ -5522,7 +5511,7 @@ msgstr "Laman Sesawang"
 msgid "Weeks"
 msgstr "Minggu"
 
-#: ../bin/src/ui_behavioursettingspage.h:321
+#: ../bin/src/ui_behavioursettingspage.h:314
 msgid "When Clementine starts"
 msgstr "Bila Clementine bermula"
 
@@ -5532,7 +5521,7 @@ msgid ""
 "If there are no matches then it will use the largest image in the directory."
 msgstr "Apabila mencari hasil seni album Clementine akan terlebih dahulu mencari fail gambar yang mengandungi salah satu dari perkataan ini.  \nSekiranya tiada padanan ia akan menggunakan imej terbesar dalam direktori."
 
-#: ../bin/src/ui_behavioursettingspage.h:376
+#: ../bin/src/ui_behavioursettingspage.h:361
 msgid "When saving a playlist, file paths should be"
 msgstr "Bila menyimpan senarai main, laluan fail sepatutnya"
 
@@ -5602,13 +5591,13 @@ msgstr "Audio Windows Media"
 msgid "Without cover:"
 msgstr "Tanpa kulit muka:"
 
-#: library/libraryview.cpp:554
+#: library/libraryview.cpp:556
 msgid ""
 "Would you like to move the other songs in this album to Various Artists as "
 "well?"
 msgstr "Anda mahu alih lagu lain dalam album ini ke Artis Pelbagai juga?"
 
-#: ui/mainwindow.cpp:2514
+#: ui/mainwindow.cpp:2481
 msgid "Would you like to run a full rescan right now?"
 msgstr "Anda mahu jalankan imbas semula penuh sekarang?"
 
@@ -5616,7 +5605,7 @@ msgstr "Anda mahu jalankan imbas semula penuh sekarang?"
 msgid "Write all songs statistics into songs' files"
 msgstr "Tulis semua statistik lagu ke dalam fail lagu"
 
-#: ../bin/src/ui_behavioursettingspage.h:381
+#: ../bin/src/ui_behavioursettingspage.h:366
 msgid "Write metadata"
 msgstr "Tulis data meta"
 
@@ -5736,7 +5725,7 @@ msgid ""
 "shortcuts in Clementine."
 msgstr "Anda perlu lancar Keutamaan Sistem dan membolehkan Clementine untuk \"<span style=\"font-style:italic\">kawal komputer anda</span>\" untuk guna pintasan sejagat dalam Clementine."
 
-#: ../bin/src/ui_behavioursettingspage.h:320
+#: ../bin/src/ui_behavioursettingspage.h:313
 msgid "You will need to restart Clementine if you change the language."
 msgstr "Anda perlu mulakan semula Clementine jika anda ubah bahasa."
 
@@ -5752,7 +5741,7 @@ msgstr "Kelayakan Last.fm anda tidak betul"
 msgid "Your Magnatune credentials were incorrect"
 msgstr "Kelayakan Magnatune anda tidak betul"
 
-#: library/libraryview.cpp:345
+#: library/libraryview.cpp:347
 msgid "Your library is empty!"
 msgstr "Pustaka anda kosong!"
 

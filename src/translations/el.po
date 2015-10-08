@@ -18,7 +18,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2015-08-17 13:03+0000\n"
+"PO-Revision-Date: 2015-09-28 10:05+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Greek (http://www.transifex.com/davidsansome/clementine/language/el/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -61,7 +61,7 @@ msgstr " ms"
 msgid " pt"
 msgstr " σημ"
 
-#: ../bin/src/ui_behavioursettingspage.h:374
+#: ../bin/src/ui_behavioursettingspage.h:359
 msgid " s"
 msgstr ""
 
@@ -413,7 +413,7 @@ msgid "About Qt..."
 msgstr "Περί του Qt..."
 
 #: playlist/playlistsaveoptionsdialog.cpp:34
-#: ../bin/src/ui_behavioursettingspage.h:378
+#: ../bin/src/ui_behavioursettingspage.h:363
 msgid "Absolute"
 msgstr "Απόλυτο"
 
@@ -473,7 +473,7 @@ msgstr "Προσθήκη άλλης ροής..."
 msgid "Add directory..."
 msgstr "Προσθήκη καταλόγου..."
 
-#: ui/mainwindow.cpp:1931
+#: ui/mainwindow.cpp:1898
 msgid "Add file"
 msgstr "Προσθήκη αρχείου"
 
@@ -493,7 +493,7 @@ msgstr "Προσθήκη αρχείου..."
 msgid "Add files to transcode"
 msgstr "Προσθήκη αρχείων για επανακωδικοποίηση"
 
-#: transcoder/transcodedialog.cpp:306 ui/mainwindow.cpp:1958
+#: transcoder/transcodedialog.cpp:306 ui/mainwindow.cpp:1925
 #: ripper/ripcddialog.cpp:185
 msgid "Add folder"
 msgstr "Προσθήκη φακέλου"
@@ -610,7 +610,7 @@ msgstr "Προσθήκη στην λίστα αναπαραγωγής Spotify"
 msgid "Add to Spotify starred"
 msgstr "Προσθήκη για Spotify πρωταγωνίστησε"
 
-#: ui/mainwindow.cpp:1752
+#: ui/mainwindow.cpp:1719
 msgid "Add to another playlist"
 msgstr "Προσθήκη σε άλλη λίστα"
 
@@ -622,8 +622,8 @@ msgstr "Προσθήκη στους σελιδοδείκτες"
 msgid "Add to playlist"
 msgstr "Προσθήκη στη λίστα"
 
-#: ../bin/src/ui_behavioursettingspage.h:350
-#: ../bin/src/ui_behavioursettingspage.h:362
+#: ../bin/src/ui_behavioursettingspage.h:343
+#: ../bin/src/ui_behavioursettingspage.h:355
 msgid "Add to the queue"
 msgstr "Προσθήκη στην λίστα αναμονής"
 
@@ -765,17 +765,16 @@ msgstr "Επιτρέψτε μέση/πλάγια κωδικοποίηση"
 msgid "Alongside the originals"
 msgstr "Παράλληλα με τα πρωτότυπα"
 
-#: ../bin/src/ui_behavioursettingspage.h:323
+#: ../bin/src/ui_behavioursettingspage.h:316
 msgid "Always hide the main window"
 msgstr "Να κρύβεις πάντα το κύριο παράθυρο"
 
-#: ../bin/src/ui_behavioursettingspage.h:322
+#: ../bin/src/ui_behavioursettingspage.h:315
 msgid "Always show the main window"
 msgstr "Να εμφανίζεις πάντα το κύριο παράθυρο"
 
-#: ../bin/src/ui_behavioursettingspage.h:336
-#: ../bin/src/ui_behavioursettingspage.h:356
-#: ../bin/src/ui_behavioursettingspage.h:370
+#: ../bin/src/ui_behavioursettingspage.h:329
+#: ../bin/src/ui_behavioursettingspage.h:349
 msgid "Always start playing"
 msgstr "Έναρξη αναπαραγωγής πάντα"
 
@@ -821,12 +820,12 @@ msgid "Append files/URLs to the playlist"
 msgstr "Προσάρτηση αρχείων/URLs στην λίστα αναπαραγωγής"
 
 #: devices/deviceview.cpp:216 globalsearch/globalsearchview.cpp:453
-#: internet/core/internetservice.cpp:80 library/libraryview.cpp:370
+#: internet/core/internetservice.cpp:80 library/libraryview.cpp:372
 #: widgets/fileviewlist.cpp:31
 msgid "Append to current playlist"
 msgstr "Προσάρτηση στην τρέχουσα λίστα αναπαραγωγής"
 
-#: ../bin/src/ui_behavioursettingspage.h:347
+#: ../bin/src/ui_behavioursettingspage.h:340
 msgid "Append to the playlist"
 msgstr "Προσάρτηση στην λίστα αναπαραγωγής"
 
@@ -870,7 +869,7 @@ msgstr "Ετικέτες Καλλιτέχνη"
 msgid "Artist's initial"
 msgstr "Αρχικά του καλλιτέχνη"
 
-#: ../bin/src/ui_behavioursettingspage.h:380
+#: ../bin/src/ui_behavioursettingspage.h:365
 msgid "Ask when saving"
 msgstr "Ρωτήστε κατά την αποθήκευση"
 
@@ -905,7 +904,7 @@ msgid "Auto"
 msgstr "Αυτόματα"
 
 #: playlist/playlistsaveoptionsdialog.cpp:32
-#: ../bin/src/ui_behavioursettingspage.h:377
+#: ../bin/src/ui_behavioursettingspage.h:362
 msgid "Automatic"
 msgstr "Αυτόματα"
 
@@ -978,7 +977,7 @@ msgstr "Βασικό μπλε"
 msgid "Basic audio type"
 msgstr "Βασικός τύπος ήχου"
 
-#: ../bin/src/ui_behavioursettingspage.h:311
+#: ../bin/src/ui_behavioursettingspage.h:304
 msgid "Behavior"
 msgstr "Συμπεριφορά"
 
@@ -1114,7 +1113,7 @@ msgstr "Αλλαγή συντόμευσης..."
 msgid "Change shuffle mode"
 msgstr "Αλλάξτε μέθοδο ανάμιξης"
 
-#: ../bin/src/ui_behavioursettingspage.h:361
+#: ../bin/src/ui_behavioursettingspage.h:354
 msgid "Change the currently playing song"
 msgstr ""
 
@@ -1276,7 +1275,7 @@ msgstr "Ο Clementine δεν μπόρεσε να βρει αποτελέσματ
 msgid "Clementine will find music in:"
 msgstr "Ο Clementine θα βρει μουσική στο:"
 
-#: library/libraryview.cpp:351
+#: library/libraryview.cpp:353
 msgid "Click here to add some music"
 msgstr "Κλικ εδώ για να προσθέσετε μουσική"
 
@@ -1459,7 +1458,7 @@ msgstr "Αντιγραφή στο πρόχειρο"
 msgid "Copy to clipboard"
 msgstr "Αντιγραφή στο πρόχειρο"
 
-#: library/libraryview.cpp:400 internet/podcasts/podcastservice.cpp:437
+#: library/libraryview.cpp:402 internet/podcasts/podcastservice.cpp:437
 #: ui/mainwindow.cpp:641 widgets/fileviewlist.cpp:43
 msgid "Copy to device..."
 msgstr "Αντιγραφή στην συσκευή..."
@@ -1708,8 +1707,8 @@ msgstr "Διαγραφή"
 msgid "Delete downloaded data"
 msgstr "Διαγραφή δεδομένων που έχουν \"κατέβει\""
 
-#: devices/deviceview.cpp:404 library/libraryview.cpp:636
-#: ui/mainwindow.cpp:2294 widgets/fileview.cpp:186
+#: devices/deviceview.cpp:404 library/libraryview.cpp:638
+#: ui/mainwindow.cpp:2261 widgets/fileview.cpp:186
 msgid "Delete files"
 msgstr "Διαγραφή αρχείων"
 
@@ -1717,7 +1716,7 @@ msgstr "Διαγραφή αρχείων"
 msgid "Delete from device..."
 msgstr "Διαγραφή από την συσκευή..."
 
-#: library/libraryview.cpp:402 ui/mainwindow.cpp:643
+#: library/libraryview.cpp:404 ui/mainwindow.cpp:643
 #: widgets/fileviewlist.cpp:44
 msgid "Delete from disk..."
 msgstr "Διαγραφή από τον δίσκο..."
@@ -1730,7 +1729,7 @@ msgstr "Διαγραφή επεισοδίων που έχουν αναπαραχ
 msgid "Delete preset"
 msgstr "Διαγραφή ρύθμισης"
 
-#: library/libraryview.cpp:391
+#: library/libraryview.cpp:393
 msgid "Delete smart playlist"
 msgstr "Διαγραφή έξυπνης λίστας αναπαραγωγής"
 
@@ -1742,11 +1741,11 @@ msgstr "Διαγραφή των αρχικών αρχείων"
 msgid "Deleting files"
 msgstr "Γίνεται διαγραφή αρχείων"
 
-#: ui/mainwindow.cpp:1673
+#: ui/mainwindow.cpp:1640
 msgid "Dequeue selected tracks"
 msgstr "Αφαίρεση των επιλεγμένων κομματιών από την λίστα αναμονής"
 
-#: ui/mainwindow.cpp:1671
+#: ui/mainwindow.cpp:1638
 msgid "Dequeue track"
 msgstr "Αφαίρεση του κομματιού από την λίστα αναμονής"
 
@@ -1868,10 +1867,6 @@ msgstr "Μην μετατρέπεις την μουσική"
 msgid "Do not overwrite"
 msgstr "Να μην γίνει αντικατάσταση"
 
-#: ../bin/src/ui_behavioursettingspage.h:364
-msgid "Do nothing"
-msgstr ""
-
 #: internet/googledrive/googledriveservice.cpp:268
 msgid ""
 "Doing a full rescan will lose any metadata you've saved in Clementine such "
@@ -1883,7 +1878,7 @@ msgstr "Κάνοντας μια πλήρη επανάληψη της σάρωσ�
 msgid "Don't repeat"
 msgstr "Χωρίς επανάληψη"
 
-#: library/libraryview.cpp:420
+#: library/libraryview.cpp:422
 msgid "Don't show in various artists"
 msgstr "Αφαίρεση από τους διάφορους καλλιτέχνες"
 
@@ -1908,11 +1903,11 @@ msgstr "Δωρεά"
 msgid "Double click to open"
 msgstr "Διπλό «κλικ» για άνοιγμα"
 
-#: ../bin/src/ui_behavioursettingspage.h:358
+#: ../bin/src/ui_behavioursettingspage.h:351
 msgid "Double clicking a song in the playlist will..."
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:344
+#: ../bin/src/ui_behavioursettingspage.h:337
 msgid "Double clicking a song will..."
 msgstr "Διπλό \"κλικ\" σε ένα τραγούδι θα..."
 
@@ -1973,7 +1968,7 @@ msgstr "Λήψη..."
 msgid "Downloading (%1%)..."
 msgstr "Λήψη του (%1%)..."
 
-#: internet/icecast/icecastservice.cpp:106
+#: internet/icecast/icecastservice.cpp:102
 msgid "Downloading Icecast directory"
 msgstr "Μεταφόρτωση καταλόγου Icecast"
 
@@ -2017,11 +2012,11 @@ msgstr "Η δυναμική λειτουργία είναι ενεργή"
 msgid "Dynamic random mix"
 msgstr "Δυναμική τυχαία ανάμιξη"
 
-#: library/libraryview.cpp:388
+#: library/libraryview.cpp:390
 msgid "Edit smart playlist..."
 msgstr "Τροποποίηση έξυπνης λίστας αναπαραγωγής"
 
-#: ui/mainwindow.cpp:1715
+#: ui/mainwindow.cpp:1682
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr "Τροποποίηση ετικέτας \"%1\"..."
@@ -2038,12 +2033,12 @@ msgstr "Επεξεργασία ετικετών"
 msgid "Edit track information"
 msgstr "Τροποποίηση πληροφοριών κομματιού"
 
-#: library/libraryview.cpp:407 widgets/fileviewlist.cpp:49
+#: library/libraryview.cpp:409 widgets/fileviewlist.cpp:49
 #: ../bin/src/ui_mainwindow.h:658
 msgid "Edit track information..."
 msgstr "Τροποποίηση πληροφοριών κομματιού..."
 
-#: library/libraryview.cpp:410
+#: library/libraryview.cpp:412
 msgid "Edit tracks information..."
 msgstr "Επεξεργασία πληροφοριών των κομματιών..."
 
@@ -2071,7 +2066,7 @@ msgstr "Ενεργοποίηση του ισοσταθμιστή"
 msgid "Enable shortcuts only when Clementine is focused"
 msgstr "Ενεργοποίηση των συντομεύσεων μόνο όταν ο Clementine είναι στο προσκήνιο"
 
-#: ../bin/src/ui_behavioursettingspage.h:330
+#: ../bin/src/ui_behavioursettingspage.h:323
 msgid "Enable song metadata inline edition with click"
 msgstr "Ενεργοποίηση τραγουδιού έκδοσης ενσωματωμένων μεταδεδομένων με κλικ"
 
@@ -2160,8 +2155,8 @@ msgid "Equivalent to --log-levels *:3"
 msgstr "Ισοδύναμο με --log-levels *:3"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:242
-#: library/libraryview.cpp:630 ui/mainwindow.cpp:1997 ui/mainwindow.cpp:2244
-#: ui/mainwindow.cpp:2392 internet/vk/vkservice.cpp:634
+#: library/libraryview.cpp:632 ui/mainwindow.cpp:1964 ui/mainwindow.cpp:2211
+#: ui/mainwindow.cpp:2359 internet/vk/vkservice.cpp:634
 msgid "Error"
 msgstr "Σφάλμα"
 
@@ -2325,7 +2320,7 @@ msgstr "«Σβήσιμο»"
 msgid "Fading duration"
 msgstr "Διάρκειας «Σβησίματος»"
 
-#: ui/mainwindow.cpp:1998
+#: ui/mainwindow.cpp:1965
 msgid "Failed reading CD drive"
 msgstr "Αποτυχία ανάγνωσης της μονάδας CD"
 
@@ -2591,7 +2586,7 @@ msgstr "Google Drive"
 msgid "Got %1 covers out of %2 (%3 failed)"
 msgstr "Έγινε λήψη %1 εξώφυλλων από τα %2 (%3 απέτυχαν)"
 
-#: ../bin/src/ui_behavioursettingspage.h:326
+#: ../bin/src/ui_behavioursettingspage.h:319
 msgid "Grey out non existent songs in my playlists"
 msgstr "Σκίαση στην λίστα τραγουδιών που δεν υπάρχουν"
 
@@ -2704,7 +2699,7 @@ msgstr "Εικονίδια στην κορυφή"
 msgid "Identifying song"
 msgstr "Ταυτοποίηση τραγουδιού"
 
-#: ../bin/src/ui_behavioursettingspage.h:328
+#: ../bin/src/ui_behavioursettingspage.h:321
 msgid ""
 "If activated, clicking a selected song in the playlist view will let you "
 "edit the tag value directly"
@@ -2886,7 +2881,7 @@ msgstr "Τα κορυφαία κομμάτια Jamendo της εβδομάδας
 msgid "Jamendo database"
 msgstr "Βάση δεδομένων Jamendo"
 
-#: ../bin/src/ui_behavioursettingspage.h:341
+#: ../bin/src/ui_behavioursettingspage.h:334
 msgid "Jump to previous song right away"
 msgstr "Μετάβαση στο προηγούμενο τραγούδι αμέσως"
 
@@ -2906,7 +2901,7 @@ msgstr "Κράτημα των κουμπιών για %1 δευτερόλεπτ�
 msgid "Keep buttons for %1 seconds..."
 msgstr "Κράτημα των κουμπιών για %1 δευτερόλεπτα..."
 
-#: ../bin/src/ui_behavioursettingspage.h:313
+#: ../bin/src/ui_behavioursettingspage.h:306
 msgid "Keep running in the background when the window is closed"
 msgstr "Συνέχιση της εκτέλεσης στο παρασκήνιο όταν το παράθυρο κλείσει"
 
@@ -2923,7 +2918,7 @@ msgstr "Γατάκια"
 msgid "Kuduro"
 msgstr "Kuduro"
 
-#: ../bin/src/ui_behavioursettingspage.h:315
+#: ../bin/src/ui_behavioursettingspage.h:308
 msgid "Language"
 msgstr "Γλώσσα"
 
@@ -3010,7 +3005,7 @@ msgstr "Βιβλιοθήκη"
 msgid "Library advanced grouping"
 msgstr "Προχωρημένη ομαδοποίηση βιβλιοθήκης"
 
-#: ui/mainwindow.cpp:2516
+#: ui/mainwindow.cpp:2483
 msgid "Library rescan notice"
 msgstr "Ειδοποίηση σάρωσης βιβλιοθήκης"
 
@@ -3344,7 +3339,7 @@ msgstr "Μετακίνηση στην βιβλιοθήκη..."
 msgid "Move up"
 msgstr "Μετακίνηση πάνω"
 
-#: transcoder/transcodedialog.cpp:225 ui/mainwindow.cpp:1932
+#: transcoder/transcodedialog.cpp:225 ui/mainwindow.cpp:1899
 #: internet/vk/vkservice.cpp:893
 msgid "Music"
 msgstr "Μουσική"
@@ -3404,9 +3399,8 @@ msgstr "Ποτέ"
 msgid "Never played"
 msgstr "Ποτέ δεν έπαιξαν"
 
-#: ../bin/src/ui_behavioursettingspage.h:334
-#: ../bin/src/ui_behavioursettingspage.h:354
-#: ../bin/src/ui_behavioursettingspage.h:368
+#: ../bin/src/ui_behavioursettingspage.h:327
+#: ../bin/src/ui_behavioursettingspage.h:347
 msgid "Never start playing"
 msgstr "Ποτέ μην ξεκινά η αναπαραγωγή"
 
@@ -3416,11 +3410,11 @@ msgstr "Ποτέ μην ξεκινά η αναπαραγωγή"
 msgid "New folder"
 msgstr "Νέος φάκελος"
 
-#: ui/mainwindow.cpp:1769 ../bin/src/ui_mainwindow.h:690
+#: ui/mainwindow.cpp:1736 ../bin/src/ui_mainwindow.h:690
 msgid "New playlist"
 msgstr "Νέα λίστα"
 
-#: library/libraryview.cpp:385
+#: library/libraryview.cpp:387
 msgid "New smart playlist..."
 msgstr "Νέα έξυπνη λίστα..."
 
@@ -3479,7 +3473,7 @@ msgstr "Όχι βραχαία μπλοκς"
 msgid "None"
 msgstr "Κανένα"
 
-#: library/libraryview.cpp:631 ui/mainwindow.cpp:2245 ui/mainwindow.cpp:2393
+#: library/libraryview.cpp:633 ui/mainwindow.cpp:2212 ui/mainwindow.cpp:2360
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Κανένα από τα επιλεγμένα τραγούδια δεν ήταν κατάλληλο για αντιγραφή σε μία συσκευή"
 
@@ -3641,12 +3635,12 @@ msgid "Open in Google Drive"
 msgstr "Άνοιγμα στο Google Drive"
 
 #: devices/deviceview.cpp:221 globalsearch/globalsearchview.cpp:461
-#: internet/core/internetservice.cpp:102 library/libraryview.cpp:375
+#: internet/core/internetservice.cpp:102 library/libraryview.cpp:377
 #: widgets/fileviewlist.cpp:35
 msgid "Open in new playlist"
 msgstr "Άνοιγμα σε νέα λίστα"
 
-#: ../bin/src/ui_behavioursettingspage.h:349
+#: ../bin/src/ui_behavioursettingspage.h:342
 msgctxt "Refers to behavior settings in Clementine settings page."
 msgid "Open in new playlist"
 msgstr "Άνοιγμα σε νέα λίστα"
@@ -3686,7 +3680,7 @@ msgstr "Opus"
 msgid "Organise Files"
 msgstr "Οργάνωση Αρχείων"
 
-#: library/libraryview.cpp:396 ui/mainwindow.cpp:637
+#: library/libraryview.cpp:398 ui/mainwindow.cpp:637
 msgid "Organise files..."
 msgstr "Οργάνωση αρχείων..."
 
@@ -3762,7 +3756,7 @@ msgstr "Πάρτι"
 msgid "Password"
 msgstr "Συνθηματικό"
 
-#: core/globalshortcuts.cpp:50 ui/mainwindow.cpp:1061 ui/mainwindow.cpp:1582
+#: core/globalshortcuts.cpp:50 ui/mainwindow.cpp:1058 ui/mainwindow.cpp:1549
 #: ui/qtsystemtrayicon.cpp:175 wiimotedev/wiimotesettingspage.cpp:107
 msgid "Pause"
 msgstr "Παύση"
@@ -3789,8 +3783,8 @@ msgstr "Εικονοστοιχεία"
 msgid "Plain sidebar"
 msgstr "Απλή πλευρική μπάρα"
 
-#: core/globalshortcuts.cpp:49 ui/mainwindow.cpp:609 ui/mainwindow.cpp:1029
-#: ui/mainwindow.cpp:1047 ui/mainwindow.cpp:1585 ui/qtsystemtrayicon.cpp:164
+#: core/globalshortcuts.cpp:49 ui/mainwindow.cpp:609 ui/mainwindow.cpp:1026
+#: ui/mainwindow.cpp:1044 ui/mainwindow.cpp:1552 ui/qtsystemtrayicon.cpp:164
 #: ui/qtsystemtrayicon.cpp:188 wiimotedev/wiimotesettingspage.cpp:100
 #: ../bin/src/ui_mainwindow.h:641
 msgid "Play"
@@ -3804,9 +3798,8 @@ msgstr "Μετρητής εκτελέσεων"
 msgid "Play if stopped, pause if playing"
 msgstr "Αναπαραγωγή αν είναι σταματημένο, αλλιώς παύση"
 
-#: ../bin/src/ui_behavioursettingspage.h:335
-#: ../bin/src/ui_behavioursettingspage.h:355
-#: ../bin/src/ui_behavioursettingspage.h:369
+#: ../bin/src/ui_behavioursettingspage.h:328
+#: ../bin/src/ui_behavioursettingspage.h:348
 msgid "Play if there is nothing already playing"
 msgstr "Αναπαραγωγή εάν δεν παίζει κάτι άλλο"
 
@@ -3931,7 +3924,7 @@ msgstr "Πιέστε ένα πλήκτρο"
 msgid "Press a key combination to use for %1..."
 msgstr "Πίεσε έναν συνδυασμό πλήκτρων για χρήση στο %1..."
 
-#: ../bin/src/ui_behavioursettingspage.h:338
+#: ../bin/src/ui_behavioursettingspage.h:331
 msgid "Pressing \"Previous\" in player will..."
 msgstr "Πατώντας \"Προηγούμενο\" στο πρόγραμμα αναπαραγωγής θα..."
 
@@ -4005,12 +3998,12 @@ msgstr "Ερώτηση συσκευής..."
 msgid "Queue Manager"
 msgstr "Διαχειριστής λίστας αναμονής"
 
-#: ui/mainwindow.cpp:1677
+#: ui/mainwindow.cpp:1644
 msgid "Queue selected tracks"
 msgstr "Τοποθέτηση στη λίστας αναμονής τα επιλεγμένα κομμάτια"
 
-#: globalsearch/globalsearchview.cpp:466 library/libraryview.cpp:380
-#: ui/mainwindow.cpp:1675
+#: globalsearch/globalsearchview.cpp:466 library/libraryview.cpp:382
+#: ui/mainwindow.cpp:1642
 msgid "Queue track"
 msgstr "Τοποθέτηση στη λίστας αναμονής του κομματιού"
 
@@ -4091,7 +4084,7 @@ msgid "Reggae"
 msgstr "Reggae"
 
 #: playlist/playlistsaveoptionsdialog.cpp:33
-#: ../bin/src/ui_behavioursettingspage.h:379
+#: ../bin/src/ui_behavioursettingspage.h:364
 msgid "Relative"
 msgstr "Σχετικα"
 
@@ -4099,7 +4092,7 @@ msgstr "Σχετικα"
 msgid "Remember Wii remote swing"
 msgstr "Απομνημόνευσε την ταλάντευση του χειριστηρίου του Wii"
 
-#: ../bin/src/ui_behavioursettingspage.h:324
+#: ../bin/src/ui_behavioursettingspage.h:317
 msgid "Remember from last time"
 msgstr "Υπενθύμιση από την τελευταία φορά"
 
@@ -4177,18 +4170,14 @@ msgid "Repeat track"
 msgstr "Επανάληψη κομματιού"
 
 #: devices/deviceview.cpp:219 globalsearch/globalsearchview.cpp:457
-#: internet/core/internetservice.cpp:91 library/libraryview.cpp:372
+#: internet/core/internetservice.cpp:91 library/libraryview.cpp:374
 #: widgets/fileviewlist.cpp:34
 msgid "Replace current playlist"
 msgstr "Αντικατάσταση της τρέχουσας λίστας αναπαραγωγής"
 
-#: ../bin/src/ui_behavioursettingspage.h:348
+#: ../bin/src/ui_behavioursettingspage.h:341
 msgid "Replace the playlist"
 msgstr "Αντικατάσταση της λίστας αναπαραγωγής"
-
-#: ../bin/src/ui_behavioursettingspage.h:363
-msgid "Replace the queue"
-msgstr ""
 
 #: ../bin/src/ui_organisedialog.h:256
 msgid "Replaces spaces with underscores"
@@ -4218,7 +4207,7 @@ msgstr "Επαναφορά"
 msgid "Reset play counts"
 msgstr "Επαναφορά μετρητή εκτελέσεων"
 
-#: ../bin/src/ui_behavioursettingspage.h:342
+#: ../bin/src/ui_behavioursettingspage.h:335
 msgid "Restart song, then jump to previous if pressed again"
 msgstr "Επανεκκίνηση τραγουδιού, στη συνέχεια, μεταβαση στο προηγούμενο εάν πατήσετε ξανά"
 
@@ -4231,7 +4220,7 @@ msgstr "Επανεκκίνηση του κομμάτιου, ή αναπαραγ�
 msgid "Restrict to ASCII characters"
 msgstr "Περιορισμός σε χαρακτήρες ASCII"
 
-#: ../bin/src/ui_behavioursettingspage.h:325
+#: ../bin/src/ui_behavioursettingspage.h:318
 msgid "Resume playback on start"
 msgstr "Συνέχιση της αναπαραγωγής στην εκκίνηση"
 
@@ -4449,7 +4438,7 @@ msgstr "Άλμα στο τρέχον κομμάτι κατά ένα σχετικ
 msgid "Seek the currently playing track to an absolute position"
 msgstr "Άλμα σε σε μια καθορισμένη θέση στο τρέχον κομμάτι."
 
-#: ../bin/src/ui_behavioursettingspage.h:372
+#: ../bin/src/ui_behavioursettingspage.h:357
 msgid "Seeking using a keyboard shortcut"
 msgstr ""
 
@@ -4509,7 +4498,7 @@ msgstr "Λεπτομέρειες διακομιστή"
 msgid "Service offline"
 msgstr "Υπηρεσία εκτός σύνδεσης"
 
-#: ui/mainwindow.cpp:1714
+#: ui/mainwindow.cpp:1681
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr "Δώσε %1 στο \"%2\"..."
@@ -4609,7 +4598,7 @@ msgstr "Εμφάνισε σε πλήρες μέγεθος..."
 msgid "Show groups in global search result"
 msgstr "Εμφάνιση ομάδων με συνολικό αποτέλεσμα αναζήτησης"
 
-#: library/libraryview.cpp:413 ui/mainwindow.cpp:646
+#: library/libraryview.cpp:415 ui/mainwindow.cpp:646
 #: widgets/fileviewlist.cpp:51
 msgid "Show in file browser..."
 msgstr "Εμφάνιση στον περιηγητή αρχείων..."
@@ -4618,7 +4607,7 @@ msgstr "Εμφάνιση στον περιηγητή αρχείων..."
 msgid "Show in library..."
 msgstr "Εμφάνιση στην βιβλιοθήκη"
 
-#: library/libraryview.cpp:417
+#: library/libraryview.cpp:419
 msgid "Show in various artists"
 msgstr "Εμφάνιση στους διάφορους καλλιτέχνες"
 
@@ -4650,7 +4639,7 @@ msgstr "Εμφάνιση του κουμπιού \"αγάπη\""
 msgid "Show the scrobble button in the main window"
 msgstr "Εμφάνισε του κουμπιού scrobble στο κυρίως παράθυρο"
 
-#: ../bin/src/ui_behavioursettingspage.h:312
+#: ../bin/src/ui_behavioursettingspage.h:305
 msgid "Show tray icon"
 msgstr "Εμφάνιση εικονιδίου συστήματος"
 
@@ -4722,11 +4711,11 @@ msgstr "Μετρητής παραλήψεων"
 msgid "Skip forwards in playlist"
 msgstr "Παράλειψη προς τα μπροστά στη λίστα"
 
-#: ui/mainwindow.cpp:1688
+#: ui/mainwindow.cpp:1655
 msgid "Skip selected tracks"
 msgstr "Παράκαμψη επιλεγμένων κομματιών"
 
-#: ui/mainwindow.cpp:1686
+#: ui/mainwindow.cpp:1653
 msgid "Skip track"
 msgstr "Παράκαμψη κομματιού"
 
@@ -5036,13 +5025,13 @@ msgid ""
 "license key. Visit subsonic.org for details."
 msgstr "Η δοκιμαστική περίοδος του Subsonic τελείωσε. Παρακαλώ κάντε μια δωρεά για να λάβετε ένα κλειδί άδειας. Δείτε στο subsonic.org για λεπτομέρειες."
 
-#: ui/mainwindow.cpp:2507
+#: ui/mainwindow.cpp:2474
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
 msgstr "Η έκδοση του Clementine που μόλις ενημερώθηκε απαιτεί πλήρη επανασάρωση  της βιβλιοθήκης λόγο της παρακάτω νέας λειτουργίας:"
 
-#: library/libraryview.cpp:553
+#: library/libraryview.cpp:555
 msgid "There are other songs in this album"
 msgstr "Δεν υπάρχουν πλέον τραγούδια σε αυτό το άλμπουμ"
 
@@ -5078,7 +5067,7 @@ msgid ""
 "continue?"
 msgstr "Αυτά τα αρχεία θα διαγραφούν από την συσκευή, θέλετε σίγουρα να συνεχίσετε;"
 
-#: library/libraryview.cpp:637 ui/mainwindow.cpp:2295 widgets/fileview.cpp:187
+#: library/libraryview.cpp:639 ui/mainwindow.cpp:2262 widgets/fileview.cpp:187
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -5154,7 +5143,7 @@ msgstr "Η ροή (stream) αυτή είναι μόνο για συνδρομη�
 msgid "This type of device is not supported: %1"
 msgstr "Αυτού του τύπου η συσκευή δεν υποστηρίζετε %1"
 
-#: ../bin/src/ui_behavioursettingspage.h:373
+#: ../bin/src/ui_behavioursettingspage.h:358
 msgid "Time step"
 msgstr ""
 
@@ -5177,7 +5166,7 @@ msgstr "Εναλλαγή Όμορφου OSD"
 msgid "Toggle fullscreen"
 msgstr "Εναλλαγή πλήρης οθόνης"
 
-#: ui/mainwindow.cpp:1679
+#: ui/mainwindow.cpp:1646
 msgid "Toggle queue status"
 msgstr "Εναλλαγή της κατάστασης της λίστας αναμονής"
 
@@ -5299,11 +5288,11 @@ msgstr "Άγνωστο σφάλμα"
 msgid "Unset cover"
 msgstr "Αφαίρεση εξώφυλλου"
 
-#: ui/mainwindow.cpp:1684
+#: ui/mainwindow.cpp:1651
 msgid "Unskip selected tracks"
 msgstr "Καταργήση της παράλειψης επιλεγμένων κομματιών"
 
-#: ui/mainwindow.cpp:1682
+#: ui/mainwindow.cpp:1649
 msgid "Unskip track"
 msgstr "Καταργήση της παράλειψης τροχιάς"
 
@@ -5414,7 +5403,7 @@ msgstr "Χρήση των ειδοποιήσεων για την αναφορά 
 msgid "Use temporal noise shaping"
 msgstr "Χρήση προσωρινής διαμόρφωση θορύβου"
 
-#: ../bin/src/ui_behavioursettingspage.h:318
+#: ../bin/src/ui_behavioursettingspage.h:311
 msgid "Use the system default"
 msgstr "Χρήση προκαθορισμένου του συστήματος"
 
@@ -5446,7 +5435,7 @@ msgstr "Διασύνδεση χρήστη"
 msgid "Username"
 msgstr "Όνομα χρήστη"
 
-#: ../bin/src/ui_behavioursettingspage.h:331
+#: ../bin/src/ui_behavioursettingspage.h:324
 msgid "Using the menu to add a song will..."
 msgstr "Η χρήση του μενού για την προσθήκη ενός τραγουδιού θα..."
 
@@ -5515,7 +5504,7 @@ msgstr "WMA"
 msgid "Wall"
 msgstr "Τοίχος"
 
-#: playlist/playlisttabbar.cpp:192 ../bin/src/ui_behavioursettingspage.h:314
+#: playlist/playlisttabbar.cpp:192 ../bin/src/ui_behavioursettingspage.h:307
 msgid "Warn me when closing a playlist tab"
 msgstr "Προειδοποίηση κατά το κλείσιμο μίας λίστας αναπαραγωγής"
 
@@ -5531,7 +5520,7 @@ msgstr "Website"
 msgid "Weeks"
 msgstr "Εβδομάδες"
 
-#: ../bin/src/ui_behavioursettingspage.h:321
+#: ../bin/src/ui_behavioursettingspage.h:314
 msgid "When Clementine starts"
 msgstr "Όταν ξεκινά το Clementine"
 
@@ -5541,7 +5530,7 @@ msgid ""
 "If there are no matches then it will use the largest image in the directory."
 msgstr "Όταν ο Clementine ψάχνει για \"τέχνη του άλμπουμ\" (εικόνες κ.τ.λ.) θα ψάξει πρώτα για αρχεία εικόνων που περιέχουν μία από αυτές τις λέξεις. \nΑν δεν ταιριάζει κάποιο θα χρησιμοποιηθεί η μεγαλύτερη εικόνα που υπάρχει μέσα στον φάκελο."
 
-#: ../bin/src/ui_behavioursettingspage.h:376
+#: ../bin/src/ui_behavioursettingspage.h:361
 msgid "When saving a playlist, file paths should be"
 msgstr "Κατά την αποθήκευση μιας λίστας αναπαραγωγής, διαδρομές αρχείων θα πρέπει να είναι"
 
@@ -5611,13 +5600,13 @@ msgstr "Windows Media audio"
 msgid "Without cover:"
 msgstr "Χωρίς εξώφυλλο:"
 
-#: library/libraryview.cpp:554
+#: library/libraryview.cpp:556
 msgid ""
 "Would you like to move the other songs in this album to Various Artists as "
 "well?"
 msgstr "Θα θέλατε να μετακινήσετε και τα άλλα τραγούδια σε αυτό το άλμπουμ στο Διάφοροι Καλλιτέχνες;"
 
-#: ui/mainwindow.cpp:2514
+#: ui/mainwindow.cpp:2481
 msgid "Would you like to run a full rescan right now?"
 msgstr "Θέλετε να εκτελέσετε μία πλήρη επανασάρωση αμέσως τώρα;"
 
@@ -5625,7 +5614,7 @@ msgstr "Θέλετε να εκτελέσετε μία πλήρη επανασά�
 msgid "Write all songs statistics into songs' files"
 msgstr "Εγγραφή όλων των στατιστικών των τραγουδιών στα αρχεία τραγουδιών"
 
-#: ../bin/src/ui_behavioursettingspage.h:381
+#: ../bin/src/ui_behavioursettingspage.h:366
 msgid "Write metadata"
 msgstr "Εγγραφή μεταδεδομένων"
 
@@ -5745,7 +5734,7 @@ msgid ""
 "shortcuts in Clementine."
 msgstr "Θα πρέπει για την έναρξη System Preferences και να επιτρέψει Clementine για \"<span style =\" font-style: italic \"> τον έλεγχο του υπολογιστή σας </ span>\" για χρησιμοποιήσει την παγκόσμια συντομεύσεις σε Clementine."
 
-#: ../bin/src/ui_behavioursettingspage.h:320
+#: ../bin/src/ui_behavioursettingspage.h:313
 msgid "You will need to restart Clementine if you change the language."
 msgstr "Πρέπει να ξεκινήσετε πάλι τον Clementine αν αλλάξετε την γλώσσα."
 
@@ -5761,7 +5750,7 @@ msgstr "Τα στοιχεία σας στο Last.fm ήταν εσφαλμένα"
 msgid "Your Magnatune credentials were incorrect"
 msgstr "Τα διαπιστευτήρια σας του Magnatune δεν ήταν σωστά"
 
-#: library/libraryview.cpp:345
+#: library/libraryview.cpp:347
 msgid "Your library is empty!"
 msgstr "Η βιβλιοθήκη σας είναι άδεια!"
 

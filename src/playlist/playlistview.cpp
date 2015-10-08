@@ -112,6 +112,8 @@ PlaylistView::PlaylistView(QWidget* parent)
       read_only_settings_(true),
       upgrading_from_version_(-1),
       background_image_type_(Default),
+      blur_radius_(kDefaultBlurRadius),
+      opacity_level_(kDefaultOpacityLevel),
       previous_background_image_opacity_(0.0),
       fade_animation_(new QTimeLine(1000, this)),
       last_height_(-1),
