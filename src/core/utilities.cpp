@@ -38,7 +38,6 @@
 #include <QIODevice>
 #include <QMetaEnum>
 #include <QMouseEvent>
-#include <QProcess>
 #include <QStringList>
 #include <QTcpServer>
 #include <QtDebug>
@@ -59,6 +58,7 @@
 #include <sys/statvfs.h>
 #elif defined(Q_OS_WIN32)
 #include <windows.h>
+#include <QProcess>
 #endif
 
 #ifdef Q_OS_LINUX
@@ -76,6 +76,7 @@
 #include "CoreServices/CoreServices.h"
 #include "IOKit/ps/IOPowerSources.h"
 #include "IOKit/ps/IOPSKeys.h"
+#include <QProcess>
 #endif
 
 namespace Utilities {
@@ -410,9 +411,7 @@ void OpenInFileBrowser(const QList<QUrl>& urls) {
 #elif defined(Q_OS_WIN32)
     ShowFileInExplorer(path);
 #else
-    QStringList args;
-    args << directory;
-    QProcess::startDetached("xdg-open", args);
+    QDesktopServices::openUrl(QUrl::fromLocalFile(directory));
 #endif
   }
 }
