@@ -55,6 +55,8 @@ class Ripper : public QObject {
                            Song::FileType type);
   // Returns the number of audio tracks on the disc.
   int TracksOnDisc() const;
+  // Returns the duration of the track or 0 on error.
+  int TrackDurationSecs(int track) const;
   // Returns the number of tracks added to the rip list.
   int AddedTracks() const;
   // Clears the rip list.
