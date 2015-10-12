@@ -87,7 +87,7 @@ void DeviceProperties::ShowDevice(int row) {
 
     for (const QString& icon_name : icon_names) {
       QListWidgetItem* item = new QListWidgetItem(IconLoader::Load(icon_name, 
-                                                  IconLoader::base),
+                                                  IconLoader::Base),
                                                   QString(), ui_->icon);
       item->setData(Qt::UserRole, icon_name);
     }

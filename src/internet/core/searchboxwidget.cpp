@@ -35,13 +35,13 @@ SearchBoxWidget::SearchBoxWidget(InternetService* service)
   ui_->setupUi(this);
 
   // Icons
-  ui_->options->setIcon(IconLoader::Load("configure", IconLoader::base));
+  ui_->options->setIcon(IconLoader::Load("configure", IconLoader::Base));
 
   // Options menu
   menu_->setIcon(ui_->options->icon());
   ui_->options->setMenu(menu_);
 
-  menu_->addAction(IconLoader::Load("configure", IconLoader::base),
+  menu_->addAction(IconLoader::Load("configure", IconLoader::Base),
                    tr("Configure %1...").arg(service_->name()), service_,
                    SLOT(ShowConfig()));
 

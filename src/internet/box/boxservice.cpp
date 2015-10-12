@@ -50,7 +50,7 @@ static const char* kEvents = "https://api.box.com/2.0/events";
 
 BoxService::BoxService(Application* app, InternetModel* parent)
     : CloudFileService(app, parent, kServiceName, kSettingsGroup,
-                       IconLoader::Load("box", IconLoader::provider), 
+                       IconLoader::Load("box", IconLoader::Provider), 
                        SettingsDialog::Page_Box) {
   app->player()->RegisterUrlHandler(new BoxUrlHandler(this, this));
 }

@@ -171,7 +171,7 @@ void SongkickConcerts::CalendarRequestFinished(QNetworkReply* reply, int id) {
   data.type_ = CollapsibleInfoPane::Data::Type_Biography;
   data.id_ = QString("songkick/%1").arg(id);
   data.title_ = tr("Upcoming Concerts");
-  data.icon_ = IconLoader::Load("songkick", IconLoader::provider);
+  data.icon_ = IconLoader::Load("songkick", IconLoader::Provider);
   data.contents_ = container;
 
   emit InfoReady(id, data);

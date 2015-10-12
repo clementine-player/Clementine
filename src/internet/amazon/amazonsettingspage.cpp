@@ -29,7 +29,7 @@ AmazonSettingsPage::AmazonSettingsPage(SettingsDialog* parent)
       ui_(new Ui::AmazonSettingsPage),
       service_(dialog()->app()->internet_model()->Service<AmazonCloudDrive>()) {
   ui_->setupUi(this);
-  setWindowIcon(IconLoader::Load("amazon", IconLoader::provider));
+  setWindowIcon(IconLoader::Load("amazon", IconLoader::Provider));
 
   ui_->login_state->AddCredentialGroup(ui_->login_container);
 

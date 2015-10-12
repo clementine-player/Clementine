@@ -61,7 +61,7 @@ void EchoNestTags::RequestFinished() {
     data.id_ = "echonest/artisttags";
     data.title_ = tr("Artist tags");
     data.type_ = CollapsibleInfoPane::Data::Type_Tags;
-    data.icon_ = IconLoader::Load("icon_tag", IconLoader::lastfm);
+    data.icon_ = IconLoader::Load("icon_tag", IconLoader::Lastfm);
 
     TagWidget* widget = new TagWidget(TagWidget::Type_Tags);
     data.contents_ = widget;

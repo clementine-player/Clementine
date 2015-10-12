@@ -52,7 +52,7 @@ static const int kMaxTries = 10;
 
 SeafileService::SeafileService(Application* app, InternetModel* parent)
     : CloudFileService(app, parent, kServiceName, kSettingsGroup,
-                       IconLoader::Load("seafile", IconLoader::provider),
+                       IconLoader::Load("seafile", IconLoader::Provider),
                        SettingsDialog::Page_Seafile),
       indexing_task_id_(-1),
       indexing_task_max_(0),

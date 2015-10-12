@@ -37,14 +37,14 @@ EchoNestBiographies::EchoNestBiographies() {
   site_relevance_["lastfm"] = 60;
   site_relevance_["amazon"] = 30;
 
-  site_icons_["amazon"] = IconLoader::Load("amazon", IconLoader::provider);
-  site_icons_["aol"] = IconLoader::Load("aol", IconLoader::provider);
-  site_icons_["cdbaby"] = IconLoader::Load("cdbaby", IconLoader::provider);
-  site_icons_["lastfm"] = IconLoader::Load("as", IconLoader::lastfm);
-  site_icons_["mog"] = IconLoader::Load("mog", IconLoader::provider);
-  site_icons_["mtvmusic"] = IconLoader::Load("mtvmusic", IconLoader::provider);
-  site_icons_["myspace"] = IconLoader::Load("myspace", IconLoader::provider);
-  site_icons_["wikipedia"] = IconLoader::Load("wikipedia", IconLoader::provider);
+  site_icons_["amazon"] = IconLoader::Load("amazon", IconLoader::Provider);
+  site_icons_["aol"] = IconLoader::Load("aol", IconLoader::Provider);
+  site_icons_["cdbaby"] = IconLoader::Load("cdbaby", IconLoader::Provider);
+  site_icons_["lastfm"] = IconLoader::Load("as", IconLoader::Lastfm);
+  site_icons_["mog"] = IconLoader::Load("mog", IconLoader::Provider);
+  site_icons_["mtvmusic"] = IconLoader::Load("mtvmusic", IconLoader::Provider);
+  site_icons_["myspace"] = IconLoader::Load("myspace", IconLoader::Provider);
+  site_icons_["wikipedia"] = IconLoader::Load("wikipedia", IconLoader::Provider);
 }
 
 void EchoNestBiographies::FetchInfo(int id, const Song& metadata) {

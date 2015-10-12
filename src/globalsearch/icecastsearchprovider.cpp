@@ -22,7 +22,7 @@
 IcecastSearchProvider::IcecastSearchProvider(IcecastBackend* backend,
                                              Application* app, QObject* parent)
     : BlockingSearchProvider(app, parent), backend_(backend) {
-  Init("Icecast", "icecast", IconLoader::Load("icon_radio", IconLoader::lastfm),
+  Init("Icecast", "icecast", IconLoader::Load("icon_radio", IconLoader::Lastfm),
        DisabledByDefault);
 }
 

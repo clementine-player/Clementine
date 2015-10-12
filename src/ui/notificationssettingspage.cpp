@@ -31,7 +31,7 @@ NotificationsSettingsPage::NotificationsSettingsPage(SettingsDialog* dialog)
       ui_(new Ui_NotificationsSettingsPage),
       pretty_popup_(new OSDPretty(OSDPretty::Mode_Draggable)) {
   ui_->setupUi(this);
-  setWindowIcon(IconLoader::Load("help-hint", IconLoader::base));
+  setWindowIcon(IconLoader::Load("help-hint", IconLoader::Base));
 
   pretty_popup_->SetMessage(tr("OSD Preview"), tr("Drag to reposition"),
                             QImage(":nocover.png"));
@@ -105,8 +105,8 @@ NotificationsSettingsPage::NotificationsSettingsPage(SettingsDialog* dialog)
           SLOT(PrepareNotificationPreview()));
 
   // Icons
-  ui_->notifications_exp_chooser1->setIcon(IconLoader::Load("list-add", IconLoader::base));
-  ui_->notifications_exp_chooser2->setIcon(IconLoader::Load("list-add", IconLoader::base));
+  ui_->notifications_exp_chooser1->setIcon(IconLoader::Load("list-add", IconLoader::Base));
+  ui_->notifications_exp_chooser2->setIcon(IconLoader::Load("list-add", IconLoader::Base));
 }
 
 NotificationsSettingsPage::~NotificationsSettingsPage() {

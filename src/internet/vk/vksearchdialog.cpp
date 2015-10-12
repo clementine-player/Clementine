@@ -186,9 +186,9 @@ QTreeWidgetItem* VkSearchDialog::createItem(const MusicOwner& own) {
   QTreeWidgetItem* item = new QTreeWidgetItem(popup);
   item->setText(0, own.name());
   if (own.id() > 0) {
-    item->setIcon(0, IconLoader::Load("x-clementine-artist", IconLoader::base));
+    item->setIcon(0, IconLoader::Load("x-clementine-artist", IconLoader::Base));
   } else {
-    item->setIcon(0, IconLoader::Load("group", IconLoader::base));
+    item->setIcon(0, IconLoader::Load("group", IconLoader::Base));
   }
   item->setData(0, Qt::UserRole, QVariant::fromValue(own));
   item->setText(1, QString::number(own.song_count()));

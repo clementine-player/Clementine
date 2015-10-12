@@ -55,7 +55,7 @@ static const char* kServiceId = "google_drive";
 
 GoogleDriveService::GoogleDriveService(Application* app, InternetModel* parent)
     : CloudFileService(app, parent, kServiceName, kServiceId,
-                       IconLoader::Load("googledrive", IconLoader::provider),
+                       IconLoader::Load("googledrive", IconLoader::Provider),
                        SettingsDialog::Page_GoogleDrive),
       client_(new google_drive::Client(this)),
       open_in_drive_action_(nullptr),
@@ -213,21 +213,21 @@ void GoogleDriveService::ShowContextMenu(const QPoint& global_pos) {
     context_menu_.reset(new QMenu);
     context_menu_->addActions(GetPlaylistActions());
     open_in_drive_action_ = context_menu_->addAction(
-        IconLoader::Load("googledrive", IconLoader::provider), 
+        IconLoader::Load("googledrive", IconLoader::Provider), 
         tr("Open in Google Drive"), this, SLOT(OpenWithDrive()));
     context_menu_->addSeparator();
     update_action_ = context_menu_->addAction(IconLoader::Load("view-refresh", 
-                                              IconLoader::base),
+                                              IconLoader::Base),
                                               tr("Check for updates"), this,
                                               SLOT(CheckForUpdates()));
     full_rescan_action_ = context_menu_->addAction(
-        IconLoader::Load("view-refresh", IconLoader::base), 
+        IconLoader::Load("view-refresh", IconLoader::Base), 
         tr("Do a full rescan..."), this, SLOT(ConfirmFullRescan()));
     context_menu_->addSeparator();
-    context_menu_->addAction(IconLoader::Load("download", IconLoader::base), 
+    context_menu_->addAction(IconLoader::Load("download", IconLoader::Base), 
                              tr("Cover Manager"), this, 
                              SLOT(ShowCoverManager()));
-    context_menu_->addAction(IconLoader::Load("configure", IconLoader::base), 
+    context_menu_->addAction(IconLoader::Load("configure", IconLoader::Base), 
                              tr("Configure..."), this, 
                              SLOT(ShowSettingsDialog()));
   }

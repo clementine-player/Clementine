@@ -32,7 +32,7 @@ PodcastDiscoveryModel::PodcastDiscoveryModel(Application* app, QObject* parent)
     : QStandardItemModel(parent),
       app_(app),
       icon_loader_(new StandardItemIconLoader(app->album_cover_loader(), this)),
-      default_icon_(IconLoader::Load("podcast", IconLoader::provider)) {
+      default_icon_(IconLoader::Load("podcast", IconLoader::Provider)) {
   icon_loader_->SetModel(this);
 }
 
@@ -63,7 +63,7 @@ QStandardItem* PodcastDiscoveryModel::CreatePodcastItem(
 
 QStandardItem* PodcastDiscoveryModel::CreateFolder(const QString& name) {
   if (folder_icon_.isNull()) {
-    folder_icon_ = IconLoader::Load("folder", IconLoader::base);
+    folder_icon_ = IconLoader::Load("folder", IconLoader::Base);
   }
 
   QStandardItem* item = new QStandardItem;

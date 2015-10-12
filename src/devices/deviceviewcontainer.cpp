@@ -41,9 +41,9 @@ void DeviceViewContainer::showEvent(QShowEvent* e) {
     loaded_icons_ = true;
 
     ui_->close_frame_button->setIcon(IconLoader::Load("edit-delete", 
-                                                      IconLoader::base));
+                                                      IconLoader::Base));
     ui_->warning_icon->setPixmap(IconLoader::Load("dialog-warning", 
-                                                  IconLoader::base).pixmap(22));
+                                                  IconLoader::Base).pixmap(22));
   }
 
   QWidget::showEvent(e);

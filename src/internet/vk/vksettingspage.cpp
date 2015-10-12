@@ -32,7 +32,7 @@ VkSettingsPage::VkSettingsPage(SettingsDialog* parent)
       ui_(new Ui::VkSettingsPage),
       service_(dialog()->app()->internet_model()->Service<VkService>()) {
   ui_->setupUi(this);
-  setWindowIcon(IconLoader::Load("vk", IconLoader::provider));
+  setWindowIcon(IconLoader::Load("vk", IconLoader::Provider));
 
   connect(service_, SIGNAL(LoginSuccess(bool)), SLOT(LoginSuccess(bool)));
   connect(ui_->choose_path, SIGNAL(clicked()), SLOT(CacheDirBrowse()));

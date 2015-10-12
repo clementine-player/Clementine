@@ -63,7 +63,7 @@ static const char* kDownloadEndpoint = "%1/nodes/%2/content";
 
 AmazonCloudDrive::AmazonCloudDrive(Application* app, InternetModel* parent)
     : CloudFileService(app, parent, kServiceName, kServiceId,
-                       IconLoader::Load("amazonclouddrive", IconLoader::provider),
+                       IconLoader::Load("amazonclouddrive", IconLoader::Provider),
                        SettingsDialog::Page_AmazonCloudDrive),
       network_(new NetworkAccessManager(this)) {
   app->player()->RegisterUrlHandler(new AmazonUrlHandler(this, this));

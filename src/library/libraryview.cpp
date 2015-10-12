@@ -368,52 +368,52 @@ void LibraryView::contextMenuEvent(QContextMenuEvent* e) {
   if (!context_menu_) {
     context_menu_ = new QMenu(this);
     add_to_playlist_ = context_menu_->addAction(
-        IconLoader::Load("media-playback-start", IconLoader::base),
+        IconLoader::Load("media-playback-start", IconLoader::Base),
         tr("Append to current playlist"), this, SLOT(AddToPlaylist()));
     load_ = context_menu_->addAction(
-        IconLoader::Load("media-playback-start", IconLoader::base),
+        IconLoader::Load("media-playback-start", IconLoader::Base),
         tr("Replace current playlist"), this, SLOT(Load()));
     open_in_new_playlist_ = context_menu_->addAction(
-        IconLoader::Load("document-new", IconLoader::base), 
+        IconLoader::Load("document-new", IconLoader::Base), 
         tr("Open in new playlist"), this, SLOT(OpenInNewPlaylist()));
 
     context_menu_->addSeparator();
     add_to_playlist_enqueue_ =
-        context_menu_->addAction(IconLoader::Load("go-next", IconLoader::base), 
+        context_menu_->addAction(IconLoader::Load("go-next", IconLoader::Base), 
                                  tr("Queue track"), this, 
                                  SLOT(AddToPlaylistEnqueue()));
 
     context_menu_->addSeparator();
     new_smart_playlist_ = context_menu_->addAction(
-        IconLoader::Load("document-new", IconLoader::base), 
+        IconLoader::Load("document-new", IconLoader::Base), 
         tr("New smart playlist..."), this, SLOT(NewSmartPlaylist()));
     edit_smart_playlist_ = context_menu_->addAction(
-        IconLoader::Load("edit-rename", IconLoader::base), 
+        IconLoader::Load("edit-rename", IconLoader::Base), 
         tr("Edit smart playlist..."), this, SLOT(EditSmartPlaylist()));
     delete_smart_playlist_ = context_menu_->addAction(
-        IconLoader::Load("edit-delete", IconLoader::base), 
+        IconLoader::Load("edit-delete", IconLoader::Base), 
         tr("Delete smart playlist"), this, SLOT(DeleteSmartPlaylist()));
 
     context_menu_->addSeparator();
-    organise_ = context_menu_->addAction(IconLoader::Load("edit-copy", IconLoader::base),
+    organise_ = context_menu_->addAction(IconLoader::Load("edit-copy", IconLoader::Base),
                                          tr("Organise files..."), this,
                                          SLOT(Organise()));
     copy_to_device_ = context_menu_->addAction(
-        IconLoader::Load("multimedia-player-ipod-mini-blue", IconLoader::base),
+        IconLoader::Load("multimedia-player-ipod-mini-blue", IconLoader::Base),
         tr("Copy to device..."), this, SLOT(CopyToDevice()));
-    delete_ = context_menu_->addAction(IconLoader::Load("edit-delete", IconLoader::base),
+    delete_ = context_menu_->addAction(IconLoader::Load("edit-delete", IconLoader::Base),
                                        tr("Delete from disk..."), this,
                                        SLOT(Delete()));
 
     context_menu_->addSeparator();
-    edit_track_ = context_menu_->addAction(IconLoader::Load("edit-rename", IconLoader::base),
+    edit_track_ = context_menu_->addAction(IconLoader::Load("edit-rename", IconLoader::Base),
                                            tr("Edit track information..."),
                                            this, SLOT(EditTracks()));
-    edit_tracks_ = context_menu_->addAction(IconLoader::Load("edit-rename", IconLoader::base),
+    edit_tracks_ = context_menu_->addAction(IconLoader::Load("edit-rename", IconLoader::Base),
                                             tr("Edit tracks information..."),
                                             this, SLOT(EditTracks()));
     show_in_browser_ = context_menu_->addAction(
-        IconLoader::Load("document-open-folder", IconLoader::base), 
+        IconLoader::Load("document-open-folder", IconLoader::Base), 
         tr("Show in file browser..."), this, SLOT(ShowInBrowser()));
 
     context_menu_->addSeparator();

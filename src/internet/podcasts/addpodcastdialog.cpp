@@ -59,28 +59,28 @@ AddPodcastDialog::AddPodcastDialog(Application* app, QWidget* parent)
 
   // Create Add and Remove Podcast buttons
   add_button_ =
-      new QPushButton(IconLoader::Load("list-add", IconLoader::base), 
+      new QPushButton(IconLoader::Load("list-add", IconLoader::Base), 
                       tr("Add Podcast"), this);
   add_button_->setEnabled(false);
   connect(add_button_, SIGNAL(clicked()), SLOT(AddPodcast()));
   ui_->button_box->addButton(add_button_, QDialogButtonBox::ActionRole);
 
   remove_button_ =
-      new QPushButton(IconLoader::Load("list-remove", IconLoader::base), 
+      new QPushButton(IconLoader::Load("list-remove", IconLoader::Base), 
                                        tr("Unsubscribe"), this);
   remove_button_->setEnabled(false);
   connect(remove_button_, SIGNAL(clicked()), SLOT(RemovePodcast()));
   ui_->button_box->addButton(remove_button_, QDialogButtonBox::ActionRole);
 
   QPushButton* settings_button = new QPushButton(
-      IconLoader::Load("configure", IconLoader::base), 
+      IconLoader::Load("configure", IconLoader::Base), 
       tr("Configure podcasts..."), this);
   connect(settings_button, SIGNAL(clicked()), SLOT(OpenSettingsPage()));
   ui_->button_box->addButton(settings_button, QDialogButtonBox::ResetRole);
 
   // Create an Open OPML file button
   QPushButton* open_opml_button = new QPushButton(
-      IconLoader::Load("document-open", IconLoader::base), 
+      IconLoader::Load("document-open", IconLoader::Base), 
       tr("Open OPML file..."), this);
   connect(open_opml_button, SIGNAL(clicked()), this, SLOT(OpenOPMLFile()));
   ui_->button_box->addButton(open_opml_button, QDialogButtonBox::ResetRole);
@@ -89,7 +89,7 @@ AddPodcastDialog::AddPodcastDialog(Application* app, QWidget* parent)
   by_url_page_ = new AddPodcastByUrl(app, this);
   AddPage(by_url_page_);
   AddPage(new FixedOpmlPage(QUrl(kBbcOpmlUrl), tr("BBC Podcasts"),
-                            IconLoader::Load("bbc", IconLoader::provider), 
+                            IconLoader::Load("bbc", IconLoader::Provider), 
                             app, this));
   AddPage(new GPodderTopTagsPage(app, this));
   AddPage(new GPodderSearchPage(app, this));

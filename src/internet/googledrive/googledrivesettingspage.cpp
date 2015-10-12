@@ -35,7 +35,7 @@ GoogleDriveSettingsPage::GoogleDriveSettingsPage(SettingsDialog* parent)
       service_(
           dialog()->app()->internet_model()->Service<GoogleDriveService>()) {
   ui_->setupUi(this);
-  setWindowIcon(IconLoader::Load("googledrive", IconLoader::provider));
+  setWindowIcon(IconLoader::Load("googledrive", IconLoader::Provider));
 
   ui_->login_state->AddCredentialGroup(ui_->login_container);
 

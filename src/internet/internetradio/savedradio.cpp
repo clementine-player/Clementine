@@ -50,7 +50,7 @@ SavedRadio::~SavedRadio() { delete context_menu_; }
 
 QStandardItem* SavedRadio::CreateRootItem() {
   root_ = new QStandardItem(IconLoader::Load("document-open-remote", 
-                            IconLoader::base), tr("Your radio streams"));
+                            IconLoader::Base), tr("Your radio streams"));
   root_->setData(true, InternetModel::Role_CanLazyLoad);
   return root_;
 }
@@ -104,14 +104,14 @@ void SavedRadio::ShowContextMenu(const QPoint& global_pos) {
     context_menu_ = new QMenu;
     context_menu_->addActions(GetPlaylistActions());
     remove_action_ = context_menu_->addAction(
-        IconLoader::Load("list-remove", IconLoader::base), tr("Remove"), 
+        IconLoader::Load("list-remove", IconLoader::Base), tr("Remove"), 
         this, SLOT(Remove()));
     edit_action_ = context_menu_->addAction(IconLoader::Load("edit-rename", 
-                                            IconLoader::base), tr("Edit..."), 
+                                            IconLoader::Base), tr("Edit..."), 
                                             this, SLOT(Edit()));
     context_menu_->addSeparator();
     context_menu_->addAction(IconLoader::Load("document-open-remote", 
-                             IconLoader::base), tr("Add another stream..."), 
+                             IconLoader::Base), tr("Add another stream..."), 
                              this, SIGNAL(ShowAddStreamDialog()));
   }
 
@@ -165,7 +165,7 @@ void SavedRadio::Edit() {
 
 void SavedRadio::AddStreamToList(const Stream& stream, QStandardItem* parent) {
   QStandardItem* s =
-      new QStandardItem(IconLoader::Load("icon_radio", IconLoader::lastfm), 
+      new QStandardItem(IconLoader::Load("icon_radio", IconLoader::Lastfm), 
                                          stream.name_);
   s->setData(stream.url_, InternetModel::Role_Url);
   s->setData(InternetModel::PlayBehaviour_UseSongLoader,

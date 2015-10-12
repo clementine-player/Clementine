@@ -107,7 +107,7 @@ MagnatuneService::MagnatuneService(Application* app, InternetModel* parent)
   app_->player()->RegisterUrlHandler(url_handler_);
   app_->global_search()->AddProvider(new LibrarySearchProvider(
       library_backend_, tr("Magnatune"), "magnatune",
-      IconLoader::Load("magnatune", IconLoader::provider), 
+      IconLoader::Load("magnatune", IconLoader::Provider), 
       true, app_, this));
 }
 
@@ -124,7 +124,7 @@ void MagnatuneService::ReloadSettings() {
 }
 
 QStandardItem* MagnatuneService::CreateRootItem() {
-  root_ = new QStandardItem(IconLoader::Load("magnatune", IconLoader::provider), 
+  root_ = new QStandardItem(IconLoader::Load("magnatune", IconLoader::Provider), 
                             kServiceName);
   root_->setData(true, InternetModel::Role_CanLazyLoad);
   return root_;
@@ -279,18 +279,18 @@ void MagnatuneService::EnsureMenuCreated() {
 
   context_menu_->addActions(GetPlaylistActions());
   download_ = context_menu_->addAction(IconLoader::Load("download", 
-                                       IconLoader::base),
+                                       IconLoader::Base),
                                        tr("Download this album"), this,
                                        SLOT(Download()));
   context_menu_->addSeparator();
-  context_menu_->addAction(IconLoader::Load("download", IconLoader::base),
+  context_menu_->addAction(IconLoader::Load("download", IconLoader::Base),
                            tr("Open %1 in browser").arg("magnatune.com"), this,
                            SLOT(Homepage()));
-  context_menu_->addAction(IconLoader::Load("view-refresh", IconLoader::base),
+  context_menu_->addAction(IconLoader::Load("view-refresh", IconLoader::Base),
                            tr("Refresh catalogue"), this,
                            SLOT(ReloadDatabase()));
   QAction* config_action = context_menu_->addAction(
-      IconLoader::Load("configure", IconLoader::base), tr("Configure Magnatune..."), 
+      IconLoader::Load("configure", IconLoader::Base), tr("Configure Magnatune..."), 
       this, SLOT(ShowConfig()));
 
   library_filter_ = new LibraryFilterWidget(0);

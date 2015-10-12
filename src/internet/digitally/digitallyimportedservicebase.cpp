@@ -137,7 +137,7 @@ void DigitallyImportedServiceBase::PopulateStreams() {
 
     QStandardItem* item =
         new QStandardItem(IconLoader::Load("icon_radio", 
-                          IconLoader::lastfm), song.title());
+                          IconLoader::Lastfm), song.title());
     item->setData(channel.description_, Qt::ToolTipRole);
     item->setData(InternetModel::PlayBehaviour_SingleItem,
                   InternetModel::Role_PlayBehaviour);
@@ -173,14 +173,14 @@ void DigitallyImportedServiceBase::ShowContextMenu(const QPoint& global_pos) {
   if (!context_menu_) {
     context_menu_.reset(new QMenu);
     context_menu_->addActions(GetPlaylistActions());
-    context_menu_->addAction(IconLoader::Load("download", IconLoader::base),
+    context_menu_->addAction(IconLoader::Load("download", IconLoader::Base),
                              tr("Open %1 in browser").arg(homepage_url_.host()),
                              this, SLOT(Homepage()));
-    context_menu_->addAction(IconLoader::Load("view-refresh", IconLoader::base),
+    context_menu_->addAction(IconLoader::Load("view-refresh", IconLoader::Base),
                              tr("Refresh streams"), this,
                              SLOT(ForceRefreshStreams()));
     context_menu_->addSeparator();
-    context_menu_->addAction(IconLoader::Load("configure", IconLoader::base), 
+    context_menu_->addAction(IconLoader::Load("configure", IconLoader::Base), 
                              tr("Configure..."), this, 
                              SLOT(ShowSettingsDialog()));
   }
@@ -244,7 +244,7 @@ DigitallyImportedService::DigitallyImportedService(Application* app,
     : DigitallyImportedServiceBase("DigitallyImported", "Digitally Imported",
                                    QUrl("http://www.di.fm"),
                                    IconLoader::Load("digitallyimported", 
-                                                    IconLoader::provider),
+                                                    IconLoader::Provider),
                                    "di", app, model, true, parent) {}
 
 RadioTunesService::RadioTunesService(Application* app, InternetModel* model,
@@ -252,7 +252,7 @@ RadioTunesService::RadioTunesService(Application* app, InternetModel* model,
     : DigitallyImportedServiceBase("RadioTunes", "RadioTunes.com",
                                    QUrl("http://www.radiotunes.com/"),
                                    IconLoader::Load("radiotunes", 
-                                                    IconLoader::provider),
+                                                    IconLoader::Provider),
                                    "radiotunes", app, model, true, parent) {}
 
 JazzRadioService::JazzRadioService(Application* app, InternetModel* model,
@@ -260,7 +260,7 @@ JazzRadioService::JazzRadioService(Application* app, InternetModel* model,
     : DigitallyImportedServiceBase("JazzRadio", "JAZZRADIO.com",
                                    QUrl("http://www.jazzradio.com"),
                                    IconLoader::Load("jazzradio", 
-                                                    IconLoader::provider),
+                                                    IconLoader::Provider),
                                    "jazzradio", app, model, true, parent) {}
 
 RockRadioService::RockRadioService(Application* app, InternetModel* model,
@@ -268,5 +268,5 @@ RockRadioService::RockRadioService(Application* app, InternetModel* model,
     : DigitallyImportedServiceBase("RockRadio", "ROCKRADIO.com",
                                    QUrl("http://www.rockradio.com"),
                                    IconLoader::Load("rockradio", 
-                                                    IconLoader::provider),
+                                                    IconLoader::Provider),
                                    "rockradio", app, model, false, parent) {}

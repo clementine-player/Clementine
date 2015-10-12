@@ -32,7 +32,7 @@ BoxSettingsPage::BoxSettingsPage(SettingsDialog* parent)
       ui_(new Ui::BoxSettingsPage),
       service_(dialog()->app()->internet_model()->Service<BoxService>()) {
   ui_->setupUi(this);
-  setWindowIcon(IconLoader::Load("box", IconLoader::provider));
+  setWindowIcon(IconLoader::Load("box", IconLoader::Provider));
 
   ui_->login_state->AddCredentialGroup(ui_->login_container);
 

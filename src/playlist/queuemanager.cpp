@@ -35,10 +35,10 @@ QueueManager::QueueManager(QWidget* parent)
   ui_->list->setItemDelegate(new QueuedItemDelegate(this, 0));
 
   // Set icons on buttons
-  ui_->move_down->setIcon(IconLoader::Load("go-down", IconLoader::base));
-  ui_->move_up->setIcon(IconLoader::Load("go-up", IconLoader::base));
-  ui_->remove->setIcon(IconLoader::Load("edit-delete", IconLoader::base));
-  ui_->clear->setIcon(IconLoader::Load("edit-clear-list", IconLoader::base));
+  ui_->move_down->setIcon(IconLoader::Load("go-down", IconLoader::Base));
+  ui_->move_up->setIcon(IconLoader::Load("go-up", IconLoader::Base));
+  ui_->remove->setIcon(IconLoader::Load("edit-delete", IconLoader::Base));
+  ui_->clear->setIcon(IconLoader::Load("edit-clear-list", IconLoader::Base));
 
   // Set a standard shortcut
   ui_->remove->setShortcut(QKeySequence::Delete);

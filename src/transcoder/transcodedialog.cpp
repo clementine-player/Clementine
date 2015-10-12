@@ -311,7 +311,7 @@ void TranscodeDialog::AddDestination() {
       ui_->destination->removeItem(1);  // Remove the oldest folder item.
     }
 
-    QIcon icon = IconLoader::Load("folder", IconLoader::base);
+    QIcon icon = IconLoader::Load("folder", IconLoader::Base);
     QVariant data = QVariant::fromValue(dir);
     // Do not insert duplicates.
     int duplicate_index = ui_->destination->findData(data);

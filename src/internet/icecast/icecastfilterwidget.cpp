@@ -38,7 +38,7 @@ IcecastFilterWidget::IcecastFilterWidget(QWidget* parent)
   ui_->setupUi(this);
 
   // Icons
-  ui_->options->setIcon(IconLoader::Load("configure", IconLoader::base));
+  ui_->options->setIcon(IconLoader::Load("configure", IconLoader::Base));
 
   // Options actions
   QActionGroup* group = new QActionGroup(this);

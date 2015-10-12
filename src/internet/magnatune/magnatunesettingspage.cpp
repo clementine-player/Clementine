@@ -39,7 +39,7 @@ MagnatuneSettingsPage::MagnatuneSettingsPage(SettingsDialog* dialog)
       ui_(new Ui_MagnatuneSettingsPage),
       logged_in_(false) {
   ui_->setupUi(this);
-  setWindowIcon(IconLoader::Load("magnatune", IconLoader::provider));
+  setWindowIcon(IconLoader::Load("magnatune", IconLoader::Provider));
 
   connect(ui_->membership, SIGNAL(currentIndexChanged(int)),
           SLOT(MembershipChanged(int)));

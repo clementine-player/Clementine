@@ -136,7 +136,7 @@ JamendoService::JamendoService(Application* app, InternetModel* parent)
 
   search_provider_ = new LibrarySearchProvider(
       library_backend_, tr("Jamendo"), "jamendo",
-      IconLoader::Load("jamendo", IconLoader::provider), false, app_, this);
+      IconLoader::Load("jamendo", IconLoader::Provider), false, app_, this);
   app_->global_search()->AddProvider(search_provider_);
   connect(app_->global_search(),
           SIGNAL(ProviderToggled(const SearchProvider*, bool)),
@@ -147,7 +147,7 @@ JamendoService::~JamendoService() {}
 
 QStandardItem* JamendoService::CreateRootItem() {
   QStandardItem* item =
-      new QStandardItem(IconLoader::Load("jamendo", IconLoader::provider), 
+      new QStandardItem(IconLoader::Load("jamendo", IconLoader::Provider), 
                                          kServiceName);
   item->setData(true, InternetModel::Role_CanLazyLoad);
   return item;
@@ -425,18 +425,18 @@ void JamendoService::EnsureMenuCreated() {
   context_menu_ = new QMenu;
   context_menu_->addActions(GetPlaylistActions());
   album_info_ = context_menu_->addAction(IconLoader::Load("view-media-lyrics", 
-                                         IconLoader::base),
+                                         IconLoader::Base),
                                          tr("Album info on jamendo.com..."),
                                          this, SLOT(AlbumInfo()));
   download_album_ = context_menu_->addAction(IconLoader::Load("download", 
-                                             IconLoader::base),
+                                             IconLoader::Base),
                                              tr("Download this album..."), this,
                                              SLOT(DownloadAlbum()));
   context_menu_->addSeparator();
-  context_menu_->addAction(IconLoader::Load("download", IconLoader::base),
+  context_menu_->addAction(IconLoader::Load("download", IconLoader::Base),
                            tr("Open %1 in browser").arg("jamendo.com"), this,
                            SLOT(Homepage()));
-  context_menu_->addAction(IconLoader::Load("view-refresh", IconLoader::base),
+  context_menu_->addAction(IconLoader::Load("view-refresh", IconLoader::Base),
                            tr("Refresh catalogue"), this,
                            SLOT(DownloadDirectory()));
 

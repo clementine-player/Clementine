@@ -56,23 +56,23 @@ AlbumCoverChoiceController::AlbumCoverChoiceController(QWidget* parent)
       cover_fetcher_(nullptr),
       save_file_dialog_(nullptr),
       cover_from_url_dialog_(nullptr) {
-  cover_from_file_ = new QAction(IconLoader::Load("document-open", IconLoader::base),
+  cover_from_file_ = new QAction(IconLoader::Load("document-open", IconLoader::Base),
                                  tr("Load cover from disk..."), this);
-  cover_to_file_ = new QAction(IconLoader::Load("document-save", IconLoader::base),
+  cover_to_file_ = new QAction(IconLoader::Load("document-save", IconLoader::Base),
                                tr("Save cover to disk..."), this);
-  cover_from_url_ = new QAction(IconLoader::Load("download", IconLoader::base),
+  cover_from_url_ = new QAction(IconLoader::Load("download", IconLoader::Base),
                                 tr("Load cover from URL..."), this);
-  search_for_cover_ = new QAction(IconLoader::Load("find", IconLoader::base),
+  search_for_cover_ = new QAction(IconLoader::Load("find", IconLoader::Base),
                                   tr("Search for album covers..."), this);
   unset_cover_ =
-      new QAction(IconLoader::Load("list-remove", IconLoader::base), 
+      new QAction(IconLoader::Load("list-remove", IconLoader::Base), 
                   tr("Unset cover"), this);
   show_cover_ =
-      new QAction(IconLoader::Load("zoom-in", IconLoader::base), 
+      new QAction(IconLoader::Load("zoom-in", IconLoader::Base), 
                   tr("Show fullsize..."), this);
 
   search_cover_auto_ =
-      new QAction(IconLoader::Load("find", IconLoader::base), tr("Search automatically"), this);
+      new QAction(IconLoader::Load("find", IconLoader::Base), tr("Search automatically"), this);
   search_cover_auto_->setCheckable(true);
   search_cover_auto_->setChecked(false);
 

@@ -35,7 +35,7 @@ DigitallyImportedSettingsPage::DigitallyImportedSettingsPage(
       ui_(new Ui_DigitallyImportedSettingsPage),
       client_(new DigitallyImportedClient("di", this)) {
   ui_->setupUi(this);
-  setWindowIcon(IconLoader::Load("digitallyimported", IconLoader::provider));
+  setWindowIcon(IconLoader::Load("digitallyimported", IconLoader::Provider));
 
   connect(ui_->login_state, SIGNAL(LogoutClicked()), SLOT(Logout()));
   connect(ui_->login_state, SIGNAL(LoginClicked()), SLOT(Login()));

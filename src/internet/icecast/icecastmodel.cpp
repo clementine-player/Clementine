@@ -27,8 +27,8 @@ IcecastModel::IcecastModel(IcecastBackend* backend, QObject* parent)
     : SimpleTreeModel<IcecastItem>(new IcecastItem(this), parent),
       backend_(backend),
       sort_mode_(SortMode_GenreByPopularity),
-      genre_icon_(IconLoader::Load("icon_tag", IconLoader::lastfm)),
-      station_icon_(IconLoader::Load("icon_radio", IconLoader::lastfm)) {
+      genre_icon_(IconLoader::Load("icon_tag", IconLoader::Lastfm)),
+      station_icon_(IconLoader::Load("icon_radio", IconLoader::Lastfm)) {
   root_->lazy_loaded = true;
 }
 

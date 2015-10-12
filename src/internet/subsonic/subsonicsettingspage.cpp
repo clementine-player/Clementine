@@ -32,7 +32,7 @@ SubsonicSettingsPage::SubsonicSettingsPage(SettingsDialog* dialog)
       ui_(new Ui_SubsonicSettingsPage),
       service_(InternetModel::Service<SubsonicService>()) {
   ui_->setupUi(this);
-  setWindowIcon(IconLoader::Load("subsonic", IconLoader::provider));
+  setWindowIcon(IconLoader::Load("subsonic", IconLoader::Provider));
 
   connect(ui_->server, SIGNAL(editingFinished()),
           SLOT(ServerEditingFinished()));

@@ -39,7 +39,7 @@ static bool ComparePresetsByName(const TranscoderPreset& left,
 NetworkRemoteSettingsPage::NetworkRemoteSettingsPage(SettingsDialog* dialog)
     : SettingsPage(dialog), ui_(new Ui_NetworkRemoteSettingsPage) {
   ui_->setupUi(this);
-  setWindowIcon(IconLoader::Load("ipodtouchicon", IconLoader::base));
+  setWindowIcon(IconLoader::Load("ipodtouchicon", IconLoader::Base));
 
   connect(ui_->options, SIGNAL(clicked()), SLOT(Options()));
 

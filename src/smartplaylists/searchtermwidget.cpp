@@ -115,7 +115,7 @@ SearchTermWidget::SearchTermWidget(LibraryBackend* library, QWidget* parent)
   }
 
   // Icons on the buttons
-  ui_->remove->setIcon(IconLoader::Load("list-remove", IconLoader::base));
+  ui_->remove->setIcon(IconLoader::Load("list-remove", IconLoader::Base));
 
   // Set stylesheet
   QFile stylesheet_file(":/smartplaylistsearchterm.css");
@@ -354,7 +354,7 @@ SearchTermWidget::Overlay::Overlay(SearchTermWidget* parent)
       parent_(parent),
       opacity_(0.0),
       text_(tr("Add search term")),
-      icon_(IconLoader::Load("list-add", IconLoader::base).pixmap(kIconSize)) {
+      icon_(IconLoader::Load("list-add", IconLoader::Base).pixmap(kIconSize)) {
   raise();
   setFocusPolicy(Qt::TabFocus);
 }

@@ -41,9 +41,9 @@ PlaylistSequence::PlaylistSequence(QWidget* parent, SettingsProvider* settings)
 
   // Icons
   ui_->repeat->setIcon(
-      AddDesaturatedIcon(IconLoader::Load("media-playlist-repeat", IconLoader::base)));
+      AddDesaturatedIcon(IconLoader::Load("media-playlist-repeat", IconLoader::Base)));
   ui_->shuffle->setIcon(
-      AddDesaturatedIcon(IconLoader::Load("media-playlist-shuffle", IconLoader::base)));
+      AddDesaturatedIcon(IconLoader::Load("media-playlist-shuffle", IconLoader::Base)));
 
   settings_->set_group(kSettingsGroup);
 

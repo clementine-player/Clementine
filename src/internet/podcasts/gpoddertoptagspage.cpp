@@ -34,7 +34,7 @@ GPodderTopTagsPage::GPodderTopTagsPage(Application* app, QWidget* parent)
       api_(new mygpo::ApiRequest(network_)),
       done_initial_load_(false) {
   setWindowTitle(tr("gpodder.net directory"));
-  setWindowIcon(IconLoader::Load("mygpo", IconLoader::provider));
+  setWindowIcon(IconLoader::Load("mygpo", IconLoader::Provider));
 
   SetModel(new GPodderTopTagsModel(api_, app, this));
 }

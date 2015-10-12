@@ -29,7 +29,7 @@ SoundCloudSettingsPage::SoundCloudSettingsPage(SettingsDialog* parent)
       service_(
           dialog()->app()->internet_model()->Service<SoundCloudService>()) {
   ui_->setupUi(this);
-  setWindowIcon(IconLoader::Load("soundcloud", IconLoader::provider));
+  setWindowIcon(IconLoader::Load("soundcloud", IconLoader::Provider));
   
   ui_->login_state->AddCredentialGroup(ui_->login_container);
 

@@ -53,7 +53,7 @@ static const char* kLongPollEndpoint =
 
 DropboxService::DropboxService(Application* app, InternetModel* parent)
     : CloudFileService(app, parent, kServiceName, kServiceId,
-                       IconLoader::Load("dropbox", IconLoader::provider),
+                       IconLoader::Load("dropbox", IconLoader::Provider),
                        SettingsDialog::Page_Dropbox),
       network_(new NetworkAccessManager(this)) {
   QSettings settings;

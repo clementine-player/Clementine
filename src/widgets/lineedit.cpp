@@ -34,7 +34,7 @@ ExtendedEditor::ExtendedEditor(QWidget* widget, int extra_right_padding,
       draw_hint_(draw_hint),
       font_point_size_(widget->font().pointSizeF() - 1),
       is_rtl_(false) {
-  clear_button_->setIcon(IconLoader::Load("edit-clear-locationbar-ltr", IconLoader::base));
+  clear_button_->setIcon(IconLoader::Load("edit-clear-locationbar-ltr", IconLoader::Base));
   clear_button_->setIconSize(QSize(16, 16));
   clear_button_->setCursor(Qt::ArrowCursor);
   clear_button_->setStyleSheet("QToolButton { border: none; padding: 0px; }");

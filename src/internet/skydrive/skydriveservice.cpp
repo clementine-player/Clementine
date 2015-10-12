@@ -53,7 +53,7 @@ const char* SkydriveService::kSettingsGroup = "Skydrive";
 
 SkydriveService::SkydriveService(Application* app, InternetModel* parent)
     : CloudFileService(app, parent, kServiceName, kServiceId,
-                       IconLoader::Load("skydrive", IconLoader::provider),
+                       IconLoader::Load("skydrive", IconLoader::Provider),
                        SettingsDialog::Page_Skydrive) {
   app->player()->RegisterUrlHandler(new SkydriveUrlHandler(this, this));
 }

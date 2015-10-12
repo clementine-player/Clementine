@@ -76,7 +76,7 @@ IcecastService::~IcecastService() {}
 
 QStandardItem* IcecastService::CreateRootItem() {
   root_ = new QStandardItem(IconLoader::Load("icon_radio", 
-                            IconLoader::lastfm), kServiceName);
+                            IconLoader::Lastfm), kServiceName);
   root_->setData(true, InternetModel::Role_CanLazyLoad);
   return root_;
 }
@@ -299,10 +299,10 @@ void IcecastService::EnsureMenuCreated() {
   context_menu_ = new QMenu;
 
   context_menu_->addActions(GetPlaylistActions());
-  context_menu_->addAction(IconLoader::Load("download", IconLoader::base),
+  context_menu_->addAction(IconLoader::Load("download", IconLoader::Base),
                            tr("Open %1 in browser").arg("dir.xiph.org"), this,
                            SLOT(Homepage()));
-  context_menu_->addAction(IconLoader::Load("view-refresh", IconLoader::base),
+  context_menu_->addAction(IconLoader::Load("view-refresh", IconLoader::Base),
                            tr("Refresh station list"), this,
                            SLOT(LoadDirectory()));
 

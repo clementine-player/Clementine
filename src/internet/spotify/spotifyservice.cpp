@@ -125,7 +125,7 @@ SpotifyService::~SpotifyService() {
 }
 
 QStandardItem* SpotifyService::CreateRootItem() {
-  root_ = new QStandardItem(IconLoader::Load("spotify", IconLoader::provider), 
+  root_ = new QStandardItem(IconLoader::Load("spotify", IconLoader::Provider), 
                             kServiceName);
   root_->setData(true, InternetModel::Role_CanLazyLoad);
   return root_;
@@ -404,7 +404,7 @@ void SpotifyService::PlaylistsUpdated(const pb::spotify::Playlists& response) {
   // Create starred and inbox playlists if they're not here already
   if (!search_) {
     search_ =
-        new QStandardItem(IconLoader::Load("edit-find", IconLoader::base), 
+        new QStandardItem(IconLoader::Load("edit-find", IconLoader::Base), 
                           tr("Search results"));
     search_->setToolTip(
         tr("Start typing something on the search box above to "
@@ -421,7 +421,7 @@ void SpotifyService::PlaylistsUpdated(const pb::spotify::Playlists& response) {
     starred_->setData(true, InternetModel::Role_CanBeModified);
 
     inbox_ = new QStandardItem(IconLoader::Load("mail-message", 
-                               IconLoader::base), tr("Inbox"));
+                               IconLoader::Base), tr("Inbox"));
     inbox_->setData(Type_InboxPlaylist, InternetModel::Role_Type);
     inbox_->setData(true, InternetModel::Role_CanLazyLoad);
     inbox_->setData(InternetModel::PlayBehaviour_MultipleItems,
@@ -617,7 +617,7 @@ QList<QAction*> SpotifyService::playlistitem_actions(const Song& song) {
 
   // Create a menu with 'add to playlist' actions for each Spotify playlist
   QAction* add_to_playlists = new QAction(IconLoader::Load("list-add", 
-                                          IconLoader::base),
+                                          IconLoader::Base),
                                           tr("Add to Spotify playlists"), this);
   QMenu* playlists_menu = new QMenu();
   for (const QStandardItem* playlist_item : playlists_) {
@@ -663,7 +663,7 @@ void SpotifyService::EnsureMenuCreated() {
   playlist_context_menu_->addActions(GetPlaylistActions());
   playlist_context_menu_->addSeparator();
   playlist_sync_action_ = playlist_context_menu_->addAction(
-      IconLoader::Load("view-refresh", IconLoader::base), 
+      IconLoader::Load("view-refresh", IconLoader::Base), 
       tr("Make playlist available offline"), this, SLOT(SyncPlaylist()));
   get_url_to_share_playlist_ = playlist_context_menu_->addAction(
       tr("Get a URL to share this playlist"), this,
@@ -675,7 +675,7 @@ void SpotifyService::EnsureMenuCreated() {
   song_context_menu_->addActions(GetPlaylistActions());
   song_context_menu_->addSeparator();
   remove_from_playlist_ = song_context_menu_->addAction(
-      IconLoader::Load("list-remove", IconLoader::base), 
+      IconLoader::Load("list-remove", IconLoader::Base), 
       tr("Remove from playlist"), this,
       SLOT(RemoveCurrentFromPlaylist()));
   song_context_menu_->addAction(tr("Get a URL to share this Spotify song"),
@@ -915,7 +915,7 @@ void SpotifyService::SyncPlaylistProgress(
 
 QAction* SpotifyService::GetNewShowConfigAction() {
   QAction* action = new QAction(IconLoader::Load("configure", 
-                                IconLoader::base),
+                                IconLoader::Base),
                                 tr("Configure Spotify..."), this);
   connect(action, SIGNAL(triggered()), this, SLOT(ShowConfig()));
   return action;

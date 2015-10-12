@@ -266,7 +266,7 @@ VkService::~VkService() {}
  */
 
 QStandardItem* VkService::CreateRootItem() {
-  root_item_ = new QStandardItem(IconLoader::Load("vk", IconLoader::provider), 
+  root_item_ = new QStandardItem(IconLoader::Load("vk", IconLoader::Provider), 
                                  kServiceName);
   root_item_->setData(true, InternetModel::Role_CanLazyLoad);
   return root_item_;
@@ -305,49 +305,49 @@ void VkService::EnsureMenuCreated() {
     context_menu_->addSeparator();
 
     add_to_bookmarks_ =
-        context_menu_->addAction(IconLoader::Load("list-add", IconLoader::base), 
+        context_menu_->addAction(IconLoader::Load("list-add", IconLoader::Base), 
                                  tr("Add to bookmarks"), this, 
                                  SLOT(AddSelectedToBookmarks()));
 
     remove_from_bookmarks_ = context_menu_->addAction(
-        IconLoader::Load("list-remove", IconLoader::base), tr("Remove from bookmarks"), 
+        IconLoader::Load("list-remove", IconLoader::Base), tr("Remove from bookmarks"), 
         this, SLOT(RemoveFromBookmark()));
 
     context_menu_->addSeparator();
 
     find_this_artist_ =
-        context_menu_->addAction(IconLoader::Load("edit-find", IconLoader::base), 
+        context_menu_->addAction(IconLoader::Load("edit-find", IconLoader::Base), 
                                  tr("Find this artist"), this, 
                                  SLOT(FindThisArtist()));
 
     add_to_my_music_ =
-        context_menu_->addAction(IconLoader::Load("list-add", IconLoader::base), 
+        context_menu_->addAction(IconLoader::Load("list-add", IconLoader::Base), 
                                  tr("Add to My Music"), this, SLOT(AddToMyMusic()));
 
     remove_from_my_music_ = context_menu_->addAction(
-        IconLoader::Load("list-remove", IconLoader::base), tr("Remove from My Music"), 
+        IconLoader::Load("list-remove", IconLoader::Base), tr("Remove from My Music"), 
         this, SLOT(RemoveFromMyMusic()));
 
     add_song_to_cache_ = context_menu_->addAction(IconLoader::Load("download", 
-                                                  IconLoader::base),
+                                                  IconLoader::Base),
                                                   tr("Add song to cache"), this,
                                                   SLOT(AddSelectedToCache()));
 
     copy_share_url_ = context_menu_->addAction(
-        IconLoader::Load("link", IconLoader::base), tr("Copy share url to clipboard"), 
+        IconLoader::Load("link", IconLoader::Base), tr("Copy share url to clipboard"), 
         this, SLOT(CopyShareUrl()));
 
     find_owner_ = context_menu_->addAction(IconLoader::Load("edit-find", 
-                                           IconLoader::base),
+                                           IconLoader::Base),
                                            tr("Add user/group to bookmarks"),
                                            this, SLOT(ShowSearchDialog()));
 
     update_item_ =
-        context_menu_->addAction(IconLoader::Load("view-refresh", IconLoader::base), 
+        context_menu_->addAction(IconLoader::Load("view-refresh", IconLoader::Base), 
                                  tr("Update"), this, SLOT(UpdateItem()));
 
     context_menu_->addSeparator();
-    context_menu_->addAction(IconLoader::Load("configure", IconLoader::base),
+    context_menu_->addAction(IconLoader::Load("configure", IconLoader::Base),
                              tr("Configure Vk.com..."), this,
                              SLOT(ShowConfig()));
   }
@@ -521,7 +521,7 @@ QStandardItem* VkService::CreateAndAppendRow(QStandardItem* parent,
 
     case Type_Recommendations:
       item = new QStandardItem(IconLoader::Load("audio-headset", 
-                               IconLoader::base),
+                               IconLoader::Base),
                                tr("My Recommendations"));
       item->setData(true, InternetModel::Role_CanLazyLoad);
       item->setData(InternetModel::PlayBehaviour_MultipleItems,
@@ -531,7 +531,7 @@ QStandardItem* VkService::CreateAndAppendRow(QStandardItem* parent,
 
     case Type_Search:
       item = new QStandardItem(IconLoader::Load("edit-find", 
-                               IconLoader::base), tr("Search"));
+                               IconLoader::Base), tr("Search"));
       item->setData(InternetModel::PlayBehaviour_MultipleItems,
                     InternetModel::Role_PlayBehaviour);
       search_result_item_ = item;
@@ -767,9 +767,9 @@ void VkService::LoadBookmarks() {
 QStandardItem* VkService::AppendBookmark(const MusicOwner& owner) {
   QIcon icon;
   if (owner.id() > 0) {
-    icon = IconLoader::Load("x-clementine-artist", IconLoader::base);
+    icon = IconLoader::Load("x-clementine-artist", IconLoader::Base);
   } else {
-    icon = IconLoader::Load("group", IconLoader::base);
+    icon = IconLoader::Load("group", IconLoader::Base);
   }
   QStandardItem* item = new QStandardItem(icon, owner.name());
 
@@ -816,7 +816,7 @@ void VkService::LoadAlbums(QStandardItem* parent, const MusicOwner& owner) {
 QStandardItem* VkService::AppendAlbum(QStandardItem* parent,
                                       const Vreen::AudioAlbumItem& album) {
   QStandardItem* item =
-      new QStandardItem(IconLoader::Load("view-media-playlist", IconLoader::base), 
+      new QStandardItem(IconLoader::Load("view-media-playlist", IconLoader::Base), 
                         album.title());
 
   item->setData(QVariant::fromValue(album), Role_AlbumMetadata);
@@ -835,7 +835,7 @@ QStandardItem* VkService::AppendAlbumList(QStandardItem* parent, bool myself) {
 
   if (myself) {
     item = new QStandardItem(IconLoader::Load("x-clementine-album", 
-                             IconLoader::base), tr("My Albums"));
+                             IconLoader::Base), tr("My Albums"));
     // TODO(Ivan Leontiev): Do this better. We have incomplete MusicOwner
     // instance for logged in user.
     owner.setId(UserID());
@@ -843,7 +843,7 @@ QStandardItem* VkService::AppendAlbumList(QStandardItem* parent, bool myself) {
   } else {
     owner = parent->data(Role_MusicOwnerMetadata).value<MusicOwner>();
     item = new QStandardItem(IconLoader::Load("x-clementine-album", 
-                             IconLoader::base), tr("Albums"));
+                             IconLoader::Base), tr("Albums"));
   }
 
   item->setData(QVariant::fromValue(owner), Role_MusicOwnerMetadata);
@@ -877,7 +877,7 @@ void VkService::UpdateAlbumSongs(QStandardItem* item) {
 QStandardItem* VkService::AppendWall(QStandardItem* parent) {
   QStandardItem* item =
       new QStandardItem(IconLoader::Load("view-media-playlist", 
-                        IconLoader::base), tr("Wall"));
+                        IconLoader::Base), tr("Wall"));
   MusicOwner owner = parent->data(Role_MusicOwnerMetadata).value<MusicOwner>();
 
   item->setData(QVariant::fromValue(owner), Role_MusicOwnerMetadata);
@@ -895,7 +895,7 @@ QStandardItem* VkService::AppendMusic(QStandardItem* parent, bool myself) {
   QStandardItem* item;
 
   if (myself) {
-    item = new QStandardItem(IconLoader::Load("love", IconLoader::lastfm), 
+    item = new QStandardItem(IconLoader::Load("love", IconLoader::Lastfm), 
                              tr("My Music"));
     // TODO(Ivan Leontiev): Do this better. We have incomplete MusicOwner
     // instance for logged in user.
@@ -903,7 +903,7 @@ QStandardItem* VkService::AppendMusic(QStandardItem* parent, bool myself) {
     my_music_item_ = item;
   } else {
     item = new QStandardItem(IconLoader::Load("view-media-playlist", 
-                             IconLoader::base), tr("Music"));
+                             IconLoader::Base), tr("Music"));
     owner = parent->data(Role_MusicOwnerMetadata).value<MusicOwner>();
   }
 

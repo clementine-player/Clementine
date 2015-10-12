@@ -75,23 +75,23 @@ void LastfmTrackInfoProvider::GetPlayCounts(int id, const lastfm::XmlQuery& q) {
   data.id_ = "lastfm/playcounts";
   data.title_ = tr("Last.fm play counts");
   data.type_ = CollapsibleInfoPane::Data::Type_PlayCounts;
-  data.icon_ = IconLoader::Load("as", IconLoader::lastfm);
+  data.icon_ = IconLoader::Load("as", IconLoader::Lastfm);
 
   SongPlayStats* widget = new SongPlayStats;
   data.contents_ = widget;
 
   if (myplaycount != -1) {
     if (love)
-      widget->AddItem(IconLoader::Load("love", IconLoader::lastfm), tr("You love this track"));
-    widget->AddItem(IconLoader::Load("icon_user", IconLoader::lastfm),
+      widget->AddItem(IconLoader::Load("love", IconLoader::Lastfm), tr("You love this track"));
+    widget->AddItem(IconLoader::Load("icon_user", IconLoader::Lastfm),
                     tr("Your scrobbles: %1").arg(myplaycount));
   }
 
   if (playcount)
-    widget->AddItem(IconLoader::Load("media-playback-start", IconLoader::base),
+    widget->AddItem(IconLoader::Load("media-playback-start", IconLoader::Base),
                     tr("%L1 total plays").arg(playcount));
   if (listeners)
-    widget->AddItem(IconLoader::Load("my_neighbours", IconLoader::lastfm),
+    widget->AddItem(IconLoader::Load("my_neighbours", IconLoader::Lastfm),
                     tr("%L1 other listeners").arg(listeners));
 
   emit InfoReady(id, data);
@@ -109,7 +109,7 @@ void LastfmTrackInfoProvider::GetWiki(int id, const lastfm::XmlQuery& q) {
   data.id_ = "lastfm/songwiki";
   data.title_ = tr("Last.fm wiki");
   data.type_ = CollapsibleInfoPane::Data::Type_Biography;
-  data.icon_ = IconLoader::Load("as", IconLoader::lastfm);
+  data.icon_ = IconLoader::Load("as", IconLoader::Lastfm);
 
   SongInfoTextView* widget = new SongInfoTextView;
   data.contents_ = widget;
@@ -129,7 +129,7 @@ void LastfmTrackInfoProvider::GetTags(int id, const lastfm::XmlQuery& q) {
   data.id_ = "lastfm/songtags";
   data.title_ = tr("Last.fm tags");
   data.type_ = CollapsibleInfoPane::Data::Type_Biography;
-  data.icon_ = IconLoader::Load("icon_tag", IconLoader::lastfm);
+  data.icon_ = IconLoader::Load("icon_tag", IconLoader::Lastfm);
 
   TagWidget* widget = new TagWidget(TagWidget::Type_Tags);
   data.contents_ = widget;

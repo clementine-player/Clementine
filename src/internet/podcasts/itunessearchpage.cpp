@@ -40,7 +40,7 @@ ITunesSearchPage::ITunesSearchPage(Application* app, QWidget* parent)
       network_(new NetworkAccessManager(this)) {
   ui_->setupUi(this);
   connect(ui_->search, SIGNAL(clicked()), SLOT(SearchClicked()));
-  setWindowIcon(IconLoader::Load("itunes", IconLoader::provider));
+  setWindowIcon(IconLoader::Load("itunes", IconLoader::Provider));
 }
 
 ITunesSearchPage::~ITunesSearchPage() { delete ui_; }

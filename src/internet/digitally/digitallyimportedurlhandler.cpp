@@ -38,13 +38,13 @@ QString DigitallyImportedUrlHandler::scheme() const {
 
 QIcon DigitallyImportedUrlHandler::icon() const {
   if (scheme() == "di") {
-    return IconLoader::Load("digitallyimported", IconLoader::provider);
+    return IconLoader::Load("digitallyimported", IconLoader::Provider);
   } else if (scheme() == "radiotunes") {
-    return IconLoader::Load("radiotunes", IconLoader::provider);
+    return IconLoader::Load("radiotunes", IconLoader::Provider);
   } else if (scheme() == "jazzradio") {
-    return IconLoader::Load("jazzradio", IconLoader::provider);
+    return IconLoader::Load("jazzradio", IconLoader::Provider);
   } else if (scheme() == "rockradio") {
-    return IconLoader::Load("rockradio", IconLoader::provider);
+    return IconLoader::Load("rockradio", IconLoader::Provider);
   }
   return QIcon();
 }

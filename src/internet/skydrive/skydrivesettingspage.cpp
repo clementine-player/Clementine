@@ -32,7 +32,7 @@ SkydriveSettingsPage::SkydriveSettingsPage(SettingsDialog* parent)
       ui_(new Ui::SkydriveSettingsPage),
       service_(dialog()->app()->internet_model()->Service<SkydriveService>()) {
   ui_->setupUi(this);
-  setWindowIcon(IconLoader::Load("skydrive", IconLoader::provider));
+  setWindowIcon(IconLoader::Load("skydrive", IconLoader::Provider));
 
   ui_->login_state->AddCredentialGroup(ui_->login_container);
 

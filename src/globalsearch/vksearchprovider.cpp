@@ -29,7 +29,7 @@ VkSearchProvider::VkSearchProvider(Application* app, QObject* parent)
 void VkSearchProvider::Init(VkService* service) {
   service_ = service;
   SearchProvider::Init("Vk.com", "vk.com", IconLoader::Load("vk", 
-                       IconLoader::provider), WantsDelayedQueries 
+                       IconLoader::Provider), WantsDelayedQueries 
                        | CanShowConfig);
 
   connect(service_, SIGNAL(SongSearchResult(SearchID, SongList)), this,

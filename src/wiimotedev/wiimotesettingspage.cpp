@@ -28,7 +28,7 @@ WiimoteSettingsPage::WiimoteSettingsPage(SettingsDialog* dialog)
     : SettingsPage(dialog), ui_(new Ui_WiimoteSettingsPage) {
   ui_->setupUi(this);
   ui_->list->header()->setResizeMode(QHeaderView::ResizeToContents);
-  setWindowIcon(IconLoader::Load("wiimotedev", IconLoader::base));
+  setWindowIcon(IconLoader::Load("wiimotedev", IconLoader::Base));
 
   text_buttons_.insert(WIIMOTE_BTN_1, "Wiiremote 1");
   text_buttons_.insert(WIIMOTE_BTN_2, "Wiiremote 2");

@@ -41,7 +41,7 @@ DropboxSettingsPage::DropboxSettingsPage(SettingsDialog* parent)
       ui_(new Ui::DropboxSettingsPage),
       service_(dialog()->app()->internet_model()->Service<DropboxService>()) {
   ui_->setupUi(this);
-  setWindowIcon(IconLoader::Load("dropbox", IconLoader::provider));
+  setWindowIcon(IconLoader::Load("dropbox", IconLoader::Provider));
 
   ui_->login_state->AddCredentialGroup(ui_->login_container);
 

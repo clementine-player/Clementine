@@ -27,12 +27,12 @@
 GlobalSearchSettingsPage::GlobalSearchSettingsPage(SettingsDialog* dialog)
     : SettingsPage(dialog), ui_(new Ui::GlobalSearchSettingsPage) {
   ui_->setupUi(this);
-  setWindowIcon(IconLoader::Load("search", IconLoader::base));
+  setWindowIcon(IconLoader::Load("search", IconLoader::Base));
 
   ui_->sources->header()->setResizeMode(0, QHeaderView::Stretch);
   ui_->sources->header()->setResizeMode(1, QHeaderView::ResizeToContents);
 
-  warning_icon_ = IconLoader::Load("dialog-warning", IconLoader::base);
+  warning_icon_ = IconLoader::Load("dialog-warning", IconLoader::Base);
 
   connect(ui_->up, SIGNAL(clicked()), SLOT(MoveUp()));
   connect(ui_->down, SIGNAL(clicked()), SLOT(MoveDown()));

@@ -33,7 +33,7 @@ const int kSearchAlbumLimit = 20;
 
 SpotifySearchProvider::SpotifySearchProvider(Application* app, QObject* parent)
     : SearchProvider(app, parent), server_(nullptr), service_(nullptr) {
-  Init("Spotify", "spotify", IconLoader::Load("spotify", IconLoader::provider),
+  Init("Spotify", "spotify", IconLoader::Load("spotify", IconLoader::Provider),
        WantsDelayedQueries | WantsSerialisedArtQueries | ArtIsProbablyRemote |
            CanShowConfig | CanGiveSuggestions);
 }

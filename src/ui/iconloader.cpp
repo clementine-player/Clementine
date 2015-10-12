@@ -30,7 +30,6 @@ void IconLoader::Init() {
   sizes_.clear();
   sizes_ << 22 << 32 << 48;
   custom_icon_path_ = Utilities::GetConfigPath(Utilities::Path_Icons);
-  icon_sub_path_.clear();
   icon_sub_path_ = {"/icons", "/providers", "/last.fm"};
 }
 
@@ -45,10 +44,10 @@ QIcon IconLoader::Load(const QString& name, const IconType& icontype) {
 
   // Set the icon load location based on IConType
   switch (icontype) {
-  case base: case provider:
+  case Base: case Provider:
     break;
 
-  case lastfm: {
+  case Lastfm: {
     // lastfm icons location
     const QString custom_lastfm_icon_location = custom_icon_path_ + "/last.fm";
     if (QDir(custom_lastfm_icon_location).exists()) {

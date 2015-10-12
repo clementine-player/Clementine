@@ -35,7 +35,7 @@ AddPodcastByUrl::AddPodcastByUrl(Application* app, QWidget* parent)
       loader_(new PodcastUrlLoader(this)) {
   ui_->setupUi(this);
   connect(ui_->go, SIGNAL(clicked()), SLOT(GoClicked()));
-  setWindowIcon(IconLoader::Load("podcast", IconLoader::provider));
+  setWindowIcon(IconLoader::Load("podcast", IconLoader::Provider));
 }
 
 AddPodcastByUrl::~AddPodcastByUrl() { delete ui_; }

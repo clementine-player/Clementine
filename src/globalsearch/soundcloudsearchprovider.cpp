@@ -33,7 +33,7 @@ void SoundCloudSearchProvider::Init(SoundCloudService* service) {
   service_ = service;
   SearchProvider::Init(
       "SoundCloud", "soundcloud", IconLoader::Load("soundcloud", 
-      IconLoader::provider), WantsDelayedQueries | ArtIsProbablyRemote | 
+      IconLoader::Provider), WantsDelayedQueries | ArtIsProbablyRemote | 
       CanShowConfig);
 
   connect(service_, SIGNAL(SimpleSearchResults(int, SongList)),

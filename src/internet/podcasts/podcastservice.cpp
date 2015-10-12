@@ -128,7 +128,7 @@ bool PodcastSortProxyModel::lessThan(const QModelIndex& left,
 }
 
 QStandardItem* PodcastService::CreateRootItem() {
-  root_ = new QStandardItem(IconLoader::Load("podcast", IconLoader::provider), 
+  root_ = new QStandardItem(IconLoader::Load("podcast", IconLoader::Provider), 
                             tr("Podcasts"));
   root_->setData(true, InternetModel::Role_CanLazyLoad);
   return root_;
@@ -228,7 +228,7 @@ void PodcastService::PopulatePodcastList(QStandardItem* parent) {
           SLOT(DownloadProgressChanged(PodcastEpisode, PodcastDownload::State, int)));
 
   if (default_icon_.isNull()) {
-    default_icon_ = IconLoader::Load("podcast", IconLoader::provider);
+    default_icon_ = IconLoader::Load("podcast", IconLoader::Provider);
   }
 
   for (const Podcast& podcast : backend_->GetAllSubscriptions()) {
@@ -278,7 +278,7 @@ void PodcastService::UpdateEpisodeText(QStandardItem* item,
   // Downloaded episodes get an icon
   if (episode.downloaded()) {
     if (downloaded_icon_.isNull()) {
-      downloaded_icon_ = IconLoader::Load("document-save", IconLoader::base);
+      downloaded_icon_ = IconLoader::Load("document-save", IconLoader::Base);
     }
     icon = downloaded_icon_;
   }
@@ -287,7 +287,7 @@ void PodcastService::UpdateEpisodeText(QStandardItem* item,
   switch (state) {
     case PodcastDownload::Queued:
       if (queued_icon_.isNull()) {
-        queued_icon_ = IconLoader::Load("user-away", IconLoader::base);
+        queued_icon_ = IconLoader::Load("user-away", IconLoader::Base);
       }
       icon = queued_icon_;
       tooltip = tr("Download queued");
@@ -295,7 +295,7 @@ void PodcastService::UpdateEpisodeText(QStandardItem* item,
 
     case PodcastDownload::Downloading:
       if (downloading_icon_.isNull()) {
-        downloading_icon_ = IconLoader::Load("go-down", IconLoader::base);
+        downloading_icon_ = IconLoader::Load("go-down", IconLoader::Base);
       }
       icon = downloading_icon_;
       tooltip = tr("Downloading (%1%)...").arg(percent);
@@ -325,7 +325,7 @@ void PodcastService::UpdatePodcastText(QStandardItem* item,
   switch (state) {
     case PodcastDownload::Queued:
       if (queued_icon_.isNull()) {
-        queued_icon_ = IconLoader::Load("user-away", IconLoader::base);
+        queued_icon_ = IconLoader::Load("user-away", IconLoader::Base);
       }
       icon = queued_icon_;
       item->setIcon(icon);
@@ -334,7 +334,7 @@ void PodcastService::UpdatePodcastText(QStandardItem* item,
 
     case PodcastDownload::Downloading:
       if (downloading_icon_.isNull()) {
-        downloading_icon_ = IconLoader::Load("go-down", IconLoader::base);
+        downloading_icon_ = IconLoader::Load("go-down", IconLoader::Base);
       }
       icon = downloading_icon_;
       item->setIcon(icon);
@@ -414,9 +414,9 @@ QStandardItem* PodcastService::CreatePodcastEpisodeItem(
 void PodcastService::ShowContextMenu(const QPoint& global_pos) {
   if (!context_menu_) {
     context_menu_ = new QMenu;
-    context_menu_->addAction(IconLoader::Load("list-add", IconLoader::base), 
+    context_menu_->addAction(IconLoader::Load("list-add", IconLoader::Base), 
                              tr("Add podcast..."), this, SLOT(AddPodcast()));
-    context_menu_->addAction(IconLoader::Load("view-refresh", IconLoader::base),
+    context_menu_->addAction(IconLoader::Load("view-refresh", IconLoader::Base),
                              tr("Update all podcasts"), app_->podcast_updater(),
                              SLOT(UpdateAllPodcastsNow()));
 
@@ -425,23 +425,23 @@ void PodcastService::ShowContextMenu(const QPoint& global_pos) {
 
     context_menu_->addSeparator();
     update_selected_action_ = context_menu_->addAction(
-        IconLoader::Load("view-refresh", IconLoader::base), 
+        IconLoader::Load("view-refresh", IconLoader::Base), 
         tr("Update this podcast"), this, SLOT(UpdateSelectedPodcast()));
     download_selected_action_ =
-        context_menu_->addAction(IconLoader::Load("download", IconLoader::base), 
+        context_menu_->addAction(IconLoader::Load("download", IconLoader::Base), 
                                  "", this, SLOT(DownloadSelectedEpisode()));
     delete_downloaded_action_ = context_menu_->addAction(
-        IconLoader::Load("edit-delete", IconLoader::base), 
+        IconLoader::Load("edit-delete", IconLoader::Base), 
         tr("Delete downloaded data"), this, SLOT(DeleteDownloadedData()));
     copy_to_device_ = context_menu_->addAction(
-        IconLoader::Load("multimedia-player-ipod-mini-blue", IconLoader::base),
+        IconLoader::Load("multimedia-player-ipod-mini-blue", IconLoader::Base),
         tr("Copy to device..."), this, SLOT(CopyToDevice()));
     cancel_download_ = context_menu_->addAction(IconLoader::Load("cancel", 
-                                                IconLoader::base),
+                                                IconLoader::Base),
                                                 tr("Cancel download"), this,
                                                 SLOT(CancelDownload()));
     remove_selected_action_ = context_menu_->addAction(
-        IconLoader::Load("list-remove", IconLoader::base), tr("Unsubscribe"), 
+        IconLoader::Load("list-remove", IconLoader::Base), tr("Unsubscribe"), 
         this, SLOT(RemoveSelectedPodcast()));
 
     context_menu_->addSeparator();
@@ -451,7 +451,7 @@ void PodcastService::ShowContextMenu(const QPoint& global_pos) {
                                                     this, SLOT(SetListened()));
 
     context_menu_->addSeparator();
-    context_menu_->addAction(IconLoader::Load("configure", IconLoader::base),
+    context_menu_->addAction(IconLoader::Load("configure", IconLoader::Base),
                              tr("Configure podcasts..."), this,
                              SLOT(ShowConfig()));
 

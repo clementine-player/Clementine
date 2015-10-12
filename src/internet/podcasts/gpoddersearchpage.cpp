@@ -35,7 +35,7 @@ GPodderSearchPage::GPodderSearchPage(Application* app, QWidget* parent)
       api_(new mygpo::ApiRequest(network_)) {
   ui_->setupUi(this);
   connect(ui_->search, SIGNAL(clicked()), SLOT(SearchClicked()));
-  setWindowIcon(IconLoader::Load("mygpo", IconLoader::provider));
+  setWindowIcon(IconLoader::Load("mygpo", IconLoader::Provider));
 }
 
 GPodderSearchPage::~GPodderSearchPage() {
