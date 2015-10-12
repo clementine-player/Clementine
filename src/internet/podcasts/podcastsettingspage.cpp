@@ -32,12 +32,15 @@
 #include "library/librarymodel.h"
 #include "podcastdownloader.h"
 #include "ui/settingsdialog.h"
+#include "ui/iconloader.h"
 
 const char* PodcastSettingsPage::kSettingsGroup = "Podcasts";
 
 PodcastSettingsPage::PodcastSettingsPage(SettingsDialog* dialog)
     : SettingsPage(dialog), ui_(new Ui_PodcastSettingsPage) {
   ui_->setupUi(this);
+  setWindowIcon(IconLoader::Load("podcast", IconLoader::Provider));
+
   connect(ui_->login, SIGNAL(clicked()), SLOT(LoginClicked()));
   connect(ui_->login_state, SIGNAL(LoginClicked()), SLOT(LoginClicked()));
   connect(ui_->login_state, SIGNAL(LogoutClicked()), SLOT(LogoutClicked()));

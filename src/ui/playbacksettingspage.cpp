@@ -25,7 +25,7 @@
 PlaybackSettingsPage::PlaybackSettingsPage(SettingsDialog* dialog)
     : SettingsPage(dialog), ui_(new Ui_PlaybackSettingsPage) {
   ui_->setupUi(this);
-  setWindowIcon(IconLoader::Load("media-playback-start"));
+  setWindowIcon(IconLoader::Load("media-playback-start", IconLoader::Base));
 
   connect(ui_->fading_cross, SIGNAL(toggled(bool)),
           SLOT(FadingOptionsChanged()));
@@ -62,7 +62,7 @@ void PlaybackSettingsPage::Load() {
     QStringList components = output.icon_name.split("-");
     QIcon icon;
     while (icon.isNull() && !components.isEmpty()) {
-      icon = IconLoader::Load(components.join("-"));
+      icon = IconLoader::Load(components.join("-"), IconLoader::Base);
       components.removeLast();
     }
 

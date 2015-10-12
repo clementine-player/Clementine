@@ -25,7 +25,7 @@
 NetworkProxySettingsPage::NetworkProxySettingsPage(SettingsDialog* dialog)
     : SettingsPage(dialog), ui_(new Ui_NetworkProxySettingsPage) {
   ui_->setupUi(this);
-  setWindowIcon(IconLoader::Load("applications-internet"));
+  setWindowIcon(IconLoader::Load("applications-internet", IconLoader::Base));
 }
 
 NetworkProxySettingsPage::~NetworkProxySettingsPage() { delete ui_; }

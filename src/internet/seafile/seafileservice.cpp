@@ -32,6 +32,7 @@
 #include "internet/seafile/seafileurlhandler.h"
 #include "library/librarybackend.h"
 #include "internet/core/oauthenticator.h"
+#include "ui/iconloader.h"
 
 const char* SeafileService::kServiceName = "Seafile";
 const char* SeafileService::kSettingsGroup = "Seafile";
@@ -51,7 +52,7 @@ static const int kMaxTries = 10;
 
 SeafileService::SeafileService(Application* app, InternetModel* parent)
     : CloudFileService(app, parent, kServiceName, kSettingsGroup,
-                       QIcon(":/providers/seafile.png"),
+                       IconLoader::Load("seafile", IconLoader::Provider),
                        SettingsDialog::Page_Seafile),
       indexing_task_id_(-1),
       indexing_task_max_(0),

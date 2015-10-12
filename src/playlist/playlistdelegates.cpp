@@ -468,15 +468,15 @@ QPixmap SongSourceDelegate::LookupPixmap(const QUrl& url,
     icon = handler->icon();
   } else {
     if (url.scheme() == "spotify") {
-      icon = QIcon(":icons/22x22/spotify.png");
+      icon = IconLoader::Load("spotify", IconLoader::Provider);
     } else if (url.scheme() == "file") {
-      icon = IconLoader::Load("folder-sound");
+      icon = IconLoader::Load("folder-sound", IconLoader::Base);
     } else if (url.host() == "api.jamendo.com") {
-      icon = QIcon(":/providers/jamendo.png");
+      icon = IconLoader::Load("jamendo", IconLoader::Provider);
     } else if (url.host() == "api.soundcloud.com") {
-      icon = QIcon(":/providers/soundcloud.png");
+      icon = IconLoader::Load("soundcloud", IconLoader::Provider);
     } else if (url.scheme() == "cdda") {
-      icon = IconLoader::Load("media-optical");
+      icon = IconLoader::Load("media-optical", IconLoader::Base);
     }
   }
   pixmap = icon.pixmap(size.height());

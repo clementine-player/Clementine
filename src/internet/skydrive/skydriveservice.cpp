@@ -28,6 +28,7 @@
 #include "core/waitforsignal.h"
 #include "internet/core/oauthenticator.h"
 #include "internet/skydrive/skydriveurlhandler.h"
+#include "ui/iconloader.h"
 
 namespace {
 
@@ -52,7 +53,7 @@ const char* SkydriveService::kSettingsGroup = "Skydrive";
 
 SkydriveService::SkydriveService(Application* app, InternetModel* parent)
     : CloudFileService(app, parent, kServiceName, kServiceId,
-                       QIcon(":providers/skydrive.png"),
+                       IconLoader::Load("skydrive", IconLoader::Provider),
                        SettingsDialog::Page_Skydrive) {
   app->player()->RegisterUrlHandler(new SkydriveUrlHandler(this, this));
 }
