@@ -301,11 +301,11 @@ QByteArray CommandlineOptions::Serialize() const {
   s << *this;
   buf.close();
 
-  return buf.data();
+  return buf.data().toBase64();
 }
 
 void CommandlineOptions::Load(const QByteArray& serialized) {
-  QByteArray copy(serialized);
+  QByteArray copy = QByteArray::fromBase64(serialized);
   QBuffer buf(&copy);
   buf.open(QIODevice::ReadOnly);
 

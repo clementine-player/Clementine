@@ -2045,15 +2045,9 @@ void MainWindow::PlaylistEditFinished(const QModelIndex& index) {
   if (index == playlist_menu_index_) SelectionSetValue();
 }
 
-void MainWindow::CommandlineOptionsReceived(
-    const QString& serialized_options) {
-  if (serialized_options == "wake up!") {
-    // Old versions of Clementine sent this - just ignore it
-    return;
-  }
-
+void MainWindow::CommandlineOptionsReceived(const QString& string_options) {
   CommandlineOptions options;
-  options.Load(serialized_options.toLatin1());
+  options.Load(string_options.toLatin1());
 
   if (options.is_empty()) {
     show();
