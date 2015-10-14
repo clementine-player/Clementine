@@ -115,7 +115,7 @@ void DeviceManager::DeviceInfo::LoadIcon(const QVariantList& icons,
                                          const QString& name_hint) {
   if (icons.isEmpty()) {
     icon_name_ = "drive-removable-media-usb-pendrive";
-    icon_ = IconLoader::Load(icon_name_);
+    icon_ = IconLoader::Load(icon_name_, IconLoader::Base);
     return;
   }
 
@@ -125,7 +125,7 @@ void DeviceManager::DeviceInfo::LoadIcon(const QVariantList& icons,
       icon_ = QIcon(icon.value<QPixmap>());
       return;
     } else {
-      icon_ = IconLoader::Load(icon.toString());
+      icon_ = IconLoader::Load(icon.toString(), IconLoader::Base);
       if (!icon_.isNull()) {
         icon_name_ = icon.toString();
         return;
@@ -143,7 +143,7 @@ void DeviceManager::DeviceInfo::LoadIcon(const QVariantList& icons,
     icon_name_ = "multimedia-player-ipod-standard-monochrome";
   else
     icon_name_ = "drive-removable-media-usb-pendrive";
-  icon_ = IconLoader::Load(icon_name_);
+  icon_ = IconLoader::Load(icon_name_, IconLoader::Base);
 }
 
 const DeviceManager::DeviceInfo::Backend*
@@ -166,7 +166,7 @@ DeviceManager::DeviceInfo::BestBackend() const {
 DeviceManager::DeviceManager(Application* app, QObject* parent)
     : QAbstractListModel(parent),
       app_(app),
-      not_connected_overlay_(IconLoader::Load("edit-delete")) {
+      not_connected_overlay_(IconLoader::Load("edit-delete", IconLoader::Base)) {
   thread_pool_.setMaxThreadCount(1);
   connect(app_->task_manager(), SIGNAL(TasksChanged()), SLOT(TasksChanged()));
 

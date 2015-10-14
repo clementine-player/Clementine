@@ -15,6 +15,7 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "ui/iconloader.h"
 #include "consts.h"
 #include "shortcuts.h"
 #include "wiimotesettingspage.h"
@@ -27,7 +28,7 @@ WiimoteSettingsPage::WiimoteSettingsPage(SettingsDialog* dialog)
     : SettingsPage(dialog), ui_(new Ui_WiimoteSettingsPage) {
   ui_->setupUi(this);
   ui_->list->header()->setResizeMode(QHeaderView::ResizeToContents);
-  setWindowIcon(QIcon(":/icons/32x32/wiimotedev.png"));
+  setWindowIcon(IconLoader::Load("wiimotedev", IconLoader::Base));
 
   text_buttons_.insert(WIIMOTE_BTN_1, "Wiiremote 1");
   text_buttons_.insert(WIIMOTE_BTN_2, "Wiiremote 2");

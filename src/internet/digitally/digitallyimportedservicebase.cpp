@@ -136,7 +136,8 @@ void DigitallyImportedServiceBase::PopulateStreams() {
     SongFromChannel(channel, &song);
 
     QStandardItem* item =
-        new QStandardItem(QIcon(":/last.fm/icon_radio.png"), song.title());
+        new QStandardItem(IconLoader::Load("icon_radio", 
+                          IconLoader::Lastfm), song.title());
     item->setData(channel.description_, Qt::ToolTipRole);
     item->setData(InternetModel::PlayBehaviour_SingleItem,
                   InternetModel::Role_PlayBehaviour);
@@ -172,15 +173,16 @@ void DigitallyImportedServiceBase::ShowContextMenu(const QPoint& global_pos) {
   if (!context_menu_) {
     context_menu_.reset(new QMenu);
     context_menu_->addActions(GetPlaylistActions());
-    context_menu_->addAction(IconLoader::Load("download"),
+    context_menu_->addAction(IconLoader::Load("download", IconLoader::Base),
                              tr("Open %1 in browser").arg(homepage_url_.host()),
                              this, SLOT(Homepage()));
-    context_menu_->addAction(IconLoader::Load("view-refresh"),
+    context_menu_->addAction(IconLoader::Load("view-refresh", IconLoader::Base),
                              tr("Refresh streams"), this,
                              SLOT(ForceRefreshStreams()));
     context_menu_->addSeparator();
-    context_menu_->addAction(IconLoader::Load("configure"), tr("Configure..."),
-                             this, SLOT(ShowSettingsDialog()));
+    context_menu_->addAction(IconLoader::Load("configure", IconLoader::Base), 
+                             tr("Configure..."), this, 
+                             SLOT(ShowSettingsDialog()));
   }
 
   context_menu_->popup(global_pos);
@@ -241,26 +243,30 @@ DigitallyImportedService::DigitallyImportedService(Application* app,
                                                    QObject* parent)
     : DigitallyImportedServiceBase("DigitallyImported", "Digitally Imported",
                                    QUrl("http://www.di.fm"),
-                                   QIcon(":/providers/digitallyimported.png"),
+                                   IconLoader::Load("digitallyimported", 
+                                                    IconLoader::Provider),
                                    "di", app, model, true, parent) {}
 
 RadioTunesService::RadioTunesService(Application* app, InternetModel* model,
                                      QObject* parent)
     : DigitallyImportedServiceBase("RadioTunes", "RadioTunes.com",
                                    QUrl("http://www.radiotunes.com/"),
-                                   QIcon(":/providers/radiotunes.png"),
+                                   IconLoader::Load("radiotunes", 
+                                                    IconLoader::Provider),
                                    "radiotunes", app, model, true, parent) {}
 
 JazzRadioService::JazzRadioService(Application* app, InternetModel* model,
                                    QObject* parent)
     : DigitallyImportedServiceBase("JazzRadio", "JAZZRADIO.com",
                                    QUrl("http://www.jazzradio.com"),
-                                   QIcon(":/providers/jazzradio.png"),
+                                   IconLoader::Load("jazzradio", 
+                                                    IconLoader::Provider),
                                    "jazzradio", app, model, true, parent) {}
 
 RockRadioService::RockRadioService(Application* app, InternetModel* model,
                                    QObject* parent)
     : DigitallyImportedServiceBase("RockRadio", "ROCKRADIO.com",
                                    QUrl("http://www.rockradio.com"),
-                                   QIcon(":/providers/rockradio.png"),
+                                   IconLoader::Load("rockradio", 
+                                                    IconLoader::Provider),
                                    "rockradio", app, model, false, parent) {}

@@ -40,8 +40,10 @@ void DeviceViewContainer::showEvent(QShowEvent* e) {
   if (!loaded_icons_) {
     loaded_icons_ = true;
 
-    ui_->close_frame_button->setIcon(IconLoader::Load("edit-delete"));
-    ui_->warning_icon->setPixmap(IconLoader::Load("dialog-warning").pixmap(22));
+    ui_->close_frame_button->setIcon(IconLoader::Load("edit-delete", 
+                                                      IconLoader::Base));
+    ui_->warning_icon->setPixmap(IconLoader::Load("dialog-warning", 
+                                                  IconLoader::Base).pixmap(22));
   }
 
   QWidget::showEvent(e);

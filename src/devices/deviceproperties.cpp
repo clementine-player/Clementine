@@ -86,7 +86,8 @@ void DeviceProperties::ShowDevice(int row) {
                              << "phone-palm-pre";
 
     for (const QString& icon_name : icon_names) {
-      QListWidgetItem* item = new QListWidgetItem(IconLoader::Load(icon_name),
+      QListWidgetItem* item = new QListWidgetItem(IconLoader::Load(icon_name, 
+                                                  IconLoader::Base),
                                                   QString(), ui_->icon);
       item->setData(Qt::UserRole, icon_name);
     }

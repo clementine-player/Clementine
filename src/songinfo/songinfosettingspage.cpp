@@ -30,7 +30,7 @@
 SongInfoSettingsPage::SongInfoSettingsPage(SettingsDialog* dialog)
     : SettingsPage(dialog), ui_(new Ui_SongInfoSettingsPage) {
   ui_->setupUi(this);
-  setWindowIcon(IconLoader::Load("view-media-lyrics"));
+  setWindowIcon(IconLoader::Load("view-media-lyrics", IconLoader::Base));
 
   connect(ui_->up, SIGNAL(clicked()), SLOT(MoveUp()));
   connect(ui_->down, SIGNAL(clicked()), SLOT(MoveDown()));

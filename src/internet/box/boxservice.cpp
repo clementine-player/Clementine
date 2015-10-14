@@ -26,6 +26,7 @@
 #include "internet/box/boxurlhandler.h"
 #include "internet/core/oauthenticator.h"
 #include "library/librarybackend.h"
+#include "ui/iconloader.h"
 
 const char* BoxService::kServiceName = "Box";
 const char* BoxService::kSettingsGroup = "Box";
@@ -49,7 +50,8 @@ static const char* kEvents = "https://api.box.com/2.0/events";
 
 BoxService::BoxService(Application* app, InternetModel* parent)
     : CloudFileService(app, parent, kServiceName, kSettingsGroup,
-                       QIcon(":/providers/box.png"), SettingsDialog::Page_Box) {
+                       IconLoader::Load("box", IconLoader::Provider), 
+                       SettingsDialog::Page_Box) {
   app->player()->RegisterUrlHandler(new BoxUrlHandler(this, this));
 }
 

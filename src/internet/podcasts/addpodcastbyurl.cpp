@@ -27,6 +27,7 @@
 #include "podcasturlloader.h"
 #include "ui_addpodcastbyurl.h"
 #include "core/closure.h"
+#include "ui/iconloader.h"
 
 AddPodcastByUrl::AddPodcastByUrl(Application* app, QWidget* parent)
     : AddPodcastPage(app, parent),
@@ -34,6 +35,7 @@ AddPodcastByUrl::AddPodcastByUrl(Application* app, QWidget* parent)
       loader_(new PodcastUrlLoader(this)) {
   ui_->setupUi(this);
   connect(ui_->go, SIGNAL(clicked()), SLOT(GoClicked()));
+  setWindowIcon(IconLoader::Load("podcast", IconLoader::Provider));
 }
 
 AddPodcastByUrl::~AddPodcastByUrl() { delete ui_; }
