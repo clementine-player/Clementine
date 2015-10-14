@@ -33,6 +33,7 @@
 #include "internet/core/oauthenticator.h"
 #include "internet/dropbox/dropboxurlhandler.h"
 #include "library/librarybackend.h"
+#include "ui/iconloader.h"
 
 using Utilities::ParseRFC822DateTime;
 
@@ -52,7 +53,7 @@ static const char* kLongPollEndpoint =
 
 DropboxService::DropboxService(Application* app, InternetModel* parent)
     : CloudFileService(app, parent, kServiceName, kServiceId,
-                       QIcon(":/providers/dropbox.png"),
+                       IconLoader::Load("dropbox", IconLoader::Provider),
                        SettingsDialog::Page_Dropbox),
       network_(new NetworkAccessManager(this)) {
   QSettings settings;

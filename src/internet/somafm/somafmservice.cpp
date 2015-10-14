@@ -98,16 +98,16 @@ void SomaFMServiceBase::ShowContextMenu(const QPoint& global_pos) {
   if (!context_menu_) {
     context_menu_ = new QMenu;
     context_menu_->addActions(GetPlaylistActions());
-    context_menu_->addAction(IconLoader::Load("download"),
+    context_menu_->addAction(IconLoader::Load("download", IconLoader::Base),
                              tr("Open %1 in browser").arg(homepage_url_.host()),
                              this, SLOT(Homepage()));
 
     if (!donate_page_url_.isEmpty()) {
-      context_menu_->addAction(IconLoader::Load("download"), tr("Donate"), this,
-                               SLOT(Donate()));
+      context_menu_->addAction(IconLoader::Load("download", IconLoader::Base), 
+                               tr("Donate"), this, SLOT(Donate()));
     }
 
-    context_menu_->addAction(IconLoader::Load("view-refresh"),
+    context_menu_->addAction(IconLoader::Load("view-refresh",  IconLoader::Base),
                              tr("Refresh channels"), this,
                              SLOT(ForceRefreshStreams()));
   }
@@ -233,7 +233,8 @@ void SomaFMServiceBase::PopulateStreams() {
 
   for (const Stream& stream : streams_) {
     QStandardItem* item =
-        new QStandardItem(QIcon(":last.fm/icon_radio.png"), QString());
+        new QStandardItem(IconLoader::Load("icon_radio", IconLoader::Lastfm), 
+                          QString());
     item->setText(stream.title_);
     item->setData(QVariant::fromValue(stream.ToSong(name_)),
                   InternetModel::Role_SongMetadata);
@@ -263,4 +264,5 @@ void SomaFMServiceBase::ReloadSettings() {
 SomaFMService::SomaFMService(Application* app, InternetModel* parent)
     : SomaFMServiceBase(
           app, parent, "SomaFM", QUrl("https://somafm.com/channels.xml"),
-          QUrl("https://somafm.com"), QUrl(), QIcon(":providers/somafm.png")) {}
+          QUrl("https://somafm.com"), QUrl(), IconLoader::Load("somafm", 
+          IconLoader::Provider)) {}

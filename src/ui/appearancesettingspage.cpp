@@ -48,7 +48,7 @@ AppearanceSettingsPage::AppearanceSettingsPage(SettingsDialog* dialog)
       playlist_view_background_image_type_(PlaylistView::Default),
       initialised_moodbar_previews_(false) {
   ui_->setupUi(this);
-  setWindowIcon(IconLoader::Load("view-media-visualization"));
+  setWindowIcon(IconLoader::Load("view-media-visualization", IconLoader::Base));
 
   connect(ui_->blur_slider, SIGNAL(valueChanged(int)),
           SLOT(BlurLevelChanged(int)));

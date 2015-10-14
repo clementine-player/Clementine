@@ -22,12 +22,15 @@
 #include "internet/amazon/amazonclouddrive.h"
 #include "internet/core/internetmodel.h"
 #include "ui/settingsdialog.h"
+#include "ui/iconloader.h"
 
 AmazonSettingsPage::AmazonSettingsPage(SettingsDialog* parent)
     : SettingsPage(parent),
       ui_(new Ui::AmazonSettingsPage),
       service_(dialog()->app()->internet_model()->Service<AmazonCloudDrive>()) {
   ui_->setupUi(this);
+  setWindowIcon(IconLoader::Load("amazon", IconLoader::Provider));
+
   ui_->login_state->AddCredentialGroup(ui_->login_container);
 
   connect(ui_->login_button, SIGNAL(clicked()), SLOT(LoginClicked()));

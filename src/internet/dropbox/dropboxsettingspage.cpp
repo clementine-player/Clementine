@@ -24,6 +24,7 @@
 #include "internet/dropbox/dropboxservice.h"
 #include "internet/core/internetmodel.h"
 #include "ui/settingsdialog.h"
+#include "ui/iconloader.h"
 
 namespace {
 static const char* kOAuthEndpoint =
@@ -40,6 +41,8 @@ DropboxSettingsPage::DropboxSettingsPage(SettingsDialog* parent)
       ui_(new Ui::DropboxSettingsPage),
       service_(dialog()->app()->internet_model()->Service<DropboxService>()) {
   ui_->setupUi(this);
+  setWindowIcon(IconLoader::Load("dropbox", IconLoader::Provider));
+  
   ui_->login_state->AddCredentialGroup(ui_->login_container);
 
   connect(ui_->login_button, SIGNAL(clicked()), SLOT(LoginClicked()));

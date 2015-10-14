@@ -24,6 +24,7 @@
 #include "internet/core/internetmodel.h"
 #include "internet/spotify/spotifyserver.h"
 #include "playlist/songmimedata.h"
+#include "ui/iconloader.h"
 
 namespace {
 const int kSearchSongLimit = 5;
@@ -32,7 +33,7 @@ const int kSearchAlbumLimit = 20;
 
 SpotifySearchProvider::SpotifySearchProvider(Application* app, QObject* parent)
     : SearchProvider(app, parent), server_(nullptr), service_(nullptr) {
-  Init("Spotify", "spotify", QIcon(":icons/32x32/spotify.png"),
+  Init("Spotify", "spotify", IconLoader::Load("spotify", IconLoader::Provider),
        WantsDelayedQueries | WantsSerialisedArtQueries | ArtIsProbablyRemote |
            CanShowConfig | CanGiveSuggestions);
 }

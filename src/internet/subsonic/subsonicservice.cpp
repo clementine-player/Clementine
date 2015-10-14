@@ -105,12 +105,12 @@ SubsonicService::SubsonicService(Application* app, InternetModel* parent)
   context_menu_ = new QMenu;
   context_menu_->addActions(GetPlaylistActions());
   context_menu_->addSeparator();
-  context_menu_->addAction(IconLoader::Load("view-refresh"),
+  context_menu_->addAction(IconLoader::Load("view-refresh", IconLoader::Base),
                            tr("Refresh catalogue"), this,
                            SLOT(ReloadDatabase()));
   QAction* config_action = context_menu_->addAction(
-      IconLoader::Load("configure"), tr("Configure Subsonic..."), this,
-      SLOT(ShowConfig()));
+      IconLoader::Load("configure", IconLoader::Base), tr("Configure Subsonic..."), 
+      this, SLOT(ShowConfig()));
   context_menu_->addSeparator();
   context_menu_->addMenu(library_filter_->menu());
 
@@ -118,13 +118,14 @@ SubsonicService::SubsonicService(Application* app, InternetModel* parent)
 
   app_->global_search()->AddProvider(new LibrarySearchProvider(
       library_backend_, tr("Subsonic"), "subsonic",
-      QIcon(":/providers/subsonic.png"), true, app_, this));
+      IconLoader::Load("subsonic", IconLoader::Provider), true, app_, this));
 }
 
 SubsonicService::~SubsonicService() {}
 
 QStandardItem* SubsonicService::CreateRootItem() {
-  root_ = new QStandardItem(QIcon(":providers/subsonic.png"), kServiceName);
+  root_ = new QStandardItem(IconLoader::Load("subsonic", IconLoader::Provider), 
+                            kServiceName);
   root_->setData(true, InternetModel::Role_CanLazyLoad);
   return root_;
 }
