@@ -146,21 +146,17 @@ public:
             }
             else if (keyString == "c")  // Cmd+c
             {
-                QClipboard* clipboard = QApplication::clipboard();
-                clipboard->setText(toQString([self stringValue]));
+                [[self currentEditor] copy: nil];
                 return YES;
             }
             else if (keyString == "v")  // Cmd+v
             {
-                QClipboard* clipboard = QApplication::clipboard();
-                [self setStringValue:fromQString(clipboard->text())];
+                [[self currentEditor] paste: nil];
                 return YES;
             }
             else if (keyString == "x")  // Cmd+x
             {
-                QClipboard* clipboard = QApplication::clipboard();
-                clipboard->setText(toQString([self stringValue]));
-                [self setStringValue:@""];
+                [[self currentEditor] cut: nil];
                 return YES;
             }
         }
