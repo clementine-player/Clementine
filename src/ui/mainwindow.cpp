@@ -192,7 +192,6 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
       library_sort_model_(new QSortFilterProxyModel(this)),
       track_position_timer_(new QTimer(this)),
       track_slider_timer_(new QTimer(this)),
-      was_maximized_(false),
       saved_playback_position_(0),
       saved_playback_state_(Engine::Empty),
       doubleclick_addmode_(AddBehaviour_Append),
@@ -904,7 +903,15 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
   qLog(Debug) << "Loading settings";
   settings_.beginGroup(kSettingsGroup);
 
-  restoreGeometry(settings_.value("geometry").toByteArray());
+  // Set window Geometry if the window was closed in normal mode
+  // else set it to window maximized
+  was_maximized_ = settings_.value("maximized", false).toBool();
+  if (!was_maximized_) {
+    restoreGeometry(settings_.value("geometry").toByteArray());    
+  } else {
+    setWindowState(windowState() | Qt::WindowMaximized);
+  } 
+
   if (!ui_->splitter->restoreState(
           settings_.value("splitter_state").toByteArray())) {
     ui_->splitter->setSizes(QList<int>() << 300 << width() - 300);
@@ -1172,7 +1179,12 @@ void MainWindow::ScrobbleButtonVisibilityChanged(bool value) {
 void MainWindow::resizeEvent(QResizeEvent*) { SaveGeometry(); }
 
 void MainWindow::SaveGeometry() {
-  settings_.setValue("geometry", saveGeometry());
+  was_maximized_ = isMaximized();
+  settings_.setValue("maximized", was_maximized_);
+  // Save the geometry only when mainwindow is not in maximized state
+  if (!was_maximized_) {
+    settings_.setValue("geometry", saveGeometry());
+  }
   settings_.setValue("splitter_state", ui_->splitter->saveState());
   settings_.setValue("current_tab", ui_->tabs->current_index());
   settings_.setValue("tab_mode", ui_->tabs->mode());
@@ -1321,7 +1333,6 @@ void MainWindow::SetHiddenInTray(bool hidden) {
   // Some window managers don't remember maximized state between calls to
   // hide() and show(), so we have to remember it ourself.
   if (hidden) {
-    was_maximized_ = isMaximized();
     hide();
   } else {
     if (was_maximized_)
