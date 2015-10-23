@@ -850,12 +850,21 @@ GstPadProbeReturn GstEnginePipeline::HandoffCallback(GstPad*,
 
     if (end_time > instance->end_offset_nanosec_) {
       if (instance->has_next_valid_url()) {
-          instance->end_offset_nanosec_ = instance->next_end_offset_nanosec_;
-          instance->next_url_ = QUrl();
-          instance->next_beginning_offset_nanosec_ = 0;
-          instance->next_end_offset_nanosec_ = 0;
+        if (instance->next_url_ == instance->url_ &&
+            instance->next_beginning_offset_nanosec_ ==
+                instance->end_offset_nanosec_) {
+          // GstEngine will try to seek to the start of the new section, but
+          // we're already there so ignore it.
+          instance->ignore_next_seek_ = true;
+        } else {
+          // We have a next song but we can't cheat, so move to it normally.
           instance->ignore_next_seek_ = false;
-          emit instance->EndOfStreamReached(instance->id(), true);
+        }
+        instance->end_offset_nanosec_ = instance->next_end_offset_nanosec_;
+        instance->next_url_ = QUrl();
+        instance->next_beginning_offset_nanosec_ = 0;
+        instance->next_end_offset_nanosec_ = 0;
+        emit instance->EndOfStreamReached(instance->id(), true);
       } else {
         // There's no next song
         emit instance->EndOfStreamReached(instance->id(), false);
