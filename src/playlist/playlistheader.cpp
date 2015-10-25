@@ -21,6 +21,7 @@
 #include <QtDebug>
 #include <QContextMenuEvent>
 #include <QMenu>
+#include <QSettings>
 #include <QSignalMapper>
 
 PlaylistHeader::PlaylistHeader(Qt::Orientation orientation, PlaylistView* view,
@@ -32,6 +33,13 @@ PlaylistHeader::PlaylistHeader(Qt::Orientation orientation, PlaylistView* view,
   hide_action_ = menu_->addAction(tr("&Hide..."), this, SLOT(HideCurrent()));
   stretch_action_ = menu_->addAction(tr("&Stretch columns to fit window"), this,
                                      SLOT(ToggleStretchEnabled()));
+  rating_lock_ = menu_->addAction(tr("&Lock Rating"), this, 
+                                  SLOT(ToggleRatingEditStatus()));
+  rating_lock_->setCheckable(true);
+  QSettings s;
+  s.beginGroup("Playlist");
+  rating_lock_->setChecked(s.value("RatingLocked", false).toBool());
+  s.endGroup();
   menu_->addSeparator();
 
   QMenu* align_menu = new QMenu(tr("&Align text"), this);
@@ -71,6 +79,9 @@ void PlaylistHeader::contextMenuEvent(QContextMenuEvent* e) {
     QString title(
         model()->headerData(menu_section_, Qt::Horizontal).toString());
     hide_action_->setText(tr("&Hide %1").arg(title));
+    
+    // show rating_lock action only for ratings section
+    rating_lock_->setVisible(menu_section_ == Playlist::Column_Rating);
 
     Qt::Alignment alignment = view_->column_alignment(menu_section_);
     if (alignment & Qt::AlignLeft)
@@ -129,3 +140,7 @@ void PlaylistHeader::ToggleVisible(int section) {
 }
 
 void PlaylistHeader::enterEvent(QEvent*) { emit MouseEntered(); }
+
+void PlaylistHeader::ToggleRatingEditStatus() {
+  emit SectionRatingLockStatusChanged(rating_lock_->isChecked());
+}
