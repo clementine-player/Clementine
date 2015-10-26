@@ -26,7 +26,7 @@ class RatingPainter {
   RatingPainter();
 
   static const int kStarCount = 5;
-  static const int kStarSize = 15;
+  static const int kStarSize = 16;
   static QRect Contents(const QRect& rect);
   static double RatingForPos(const QPoint& pos, const QRect& rect);
 
