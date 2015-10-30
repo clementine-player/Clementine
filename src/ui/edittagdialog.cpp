@@ -842,32 +842,27 @@ void EditTagDialog::FetchTagSongChosen(const Song& original_song,
   const QString filename = original_song.url().toLocalFile();
 
   // Find the song with this filename
-  int id;
-  for (id = 0; id < data_.count(); ++id)
-    if (data_[id].original_.url().toLocalFile() == filename)
-      break;
-  
-  if( id == data_.count() ) {
+  auto data_it =
+      std::find_if(data_.begin(), data_.end(), [&filename](const Data& d) {
+        return d.original_.url().toLocalFile() == filename;
+      });
+  if (data_it == data_.end()) {
     qLog(Warning) << "Could not find song to filename: " << filename;
     return;
   }
-  
-  Data& data = data_[id];
-  data.current_.set_title(new_metadata.title());
-  data.current_.set_artist(new_metadata.artist());
-  data.current_.set_album(new_metadata.album());
-  data.current_.set_track(new_metadata.track());
-  data.current_.set_year(new_metadata.year());
-  
+
+  data_it->current_.set_title(new_metadata.title());
+  data_it->current_.set_artist(new_metadata.artist());
+  data_it->current_.set_album(new_metadata.album());
+  data_it->current_.set_track(new_metadata.track());
+  data_it->current_.set_year(new_metadata.year());
+
   // Is it currently selected in the UI?
-  QModelIndexList selection =
-    ui_->song_list->selectionModel()->selectedRows();
-  for( const QModelIndex& i : selection ) {
-    if ( i.row() == id ) {
-      // We need to update view
-      for (const FieldData& field : fields_)
-        InitFieldValue(field, selection);
-      break;
-    }
+  int row = data_it - data_.begin();
+  if (ui_->song_list->item(row)->isSelected()) {
+    // We need to update view
+    for (const FieldData& field : fields_)
+      InitFieldValue(field,
+                     ui_->song_list->selectionModel()->selectedIndexes());
   }
 }
