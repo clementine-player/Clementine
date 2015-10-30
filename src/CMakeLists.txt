@@ -875,6 +875,7 @@ optional_source(WIN32
   SOURCES
     engines/directsounddevicefinder.cpp
     networkremote/tinysvcmdns.cpp
+    ui/windowsscreensaver.cpp
     widgets/osd_win.cpp
   INCLUDE_DIRECTORIES
     ${CMAKE_SOURCE_DIR}/3rdparty/tinysvcmdns
