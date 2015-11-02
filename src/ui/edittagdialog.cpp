@@ -842,26 +842,27 @@ void EditTagDialog::FetchTagSongChosen(const Song& original_song,
   const QString filename = original_song.url().toLocalFile();
 
   // Find the song with this filename
-  for (int i = 0; i < data_.count(); ++i) {
-    Data* data = &data_[i];
-    if (data->original_.url().toLocalFile() != filename) continue;
+  auto data_it =
+      std::find_if(data_.begin(), data_.end(), [&filename](const Data& d) {
+        return d.original_.url().toLocalFile() == filename;
+      });
+  if (data_it == data_.end()) {
+    qLog(Warning) << "Could not find song to filename: " << filename;
+    return;
+  }
 
-    // Is it currently being displayed in the UI?
-    if (ui_->song_list->currentRow() == i) {
-      // Yes!  We can just set the fields in the UI
-      ui_->title->set_text(new_metadata.title());
-      ui_->artist->set_text(new_metadata.artist());
-      ui_->album->set_text(new_metadata.album());
-      ui_->track->setValue(new_metadata.track());
-      ui_->year->setValue(new_metadata.year());
-    } else {
-      data->current_.set_title(new_metadata.title());
-      data->current_.set_artist(new_metadata.artist());
-      data->current_.set_album(new_metadata.album());
-      data->current_.set_track(new_metadata.track());
-      data->current_.set_year(new_metadata.year());
-    }
+  data_it->current_.set_title(new_metadata.title());
+  data_it->current_.set_artist(new_metadata.artist());
+  data_it->current_.set_album(new_metadata.album());
+  data_it->current_.set_track(new_metadata.track());
+  data_it->current_.set_year(new_metadata.year());
 
-    break;
+  // Is it currently selected in the UI?
+  int row = data_it - data_.begin();
+  if (ui_->song_list->item(row)->isSelected()) {
+    // We need to update view
+    for (const FieldData& field : fields_)
+      InitFieldValue(field,
+                     ui_->song_list->selectionModel()->selectedIndexes());
   }
 }
