@@ -10,8 +10,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2015-10-20 17:55+0000\n"
-"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
+"PO-Revision-Date: 2015-10-26 16:29+0000\n"
+"Last-Translator: Mladen Pejaković <pejakm@autistici.org>\n"
 "Language-Team: Serbian (Latin) (http://www.transifex.com/davidsansome/clementine/language/sr@latin/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -169,11 +169,11 @@ msgctxt ""
 msgid "%n remaining"
 msgstr "%n preostalo"
 
-#: playlist/playlistheader.cpp:37
+#: playlist/playlistheader.cpp:45
 msgid "&Align text"
 msgstr "&Poravnaj tekst"
 
-#: playlist/playlistheader.cpp:40
+#: playlist/playlistheader.cpp:48
 msgid "&Center"
 msgstr "&centriraj"
 
@@ -189,18 +189,22 @@ msgstr "&Dodaci"
 msgid "&Help"
 msgstr "&Pomoć"
 
-#: playlist/playlistheader.cpp:73
+#: playlist/playlistheader.cpp:81
 #, qt-format
 msgid "&Hide %1"
 msgstr "&Sakrij %1"
 
-#: playlist/playlistheader.cpp:32
+#: playlist/playlistheader.cpp:33
 msgid "&Hide..."
 msgstr "&Sakrij..."
 
-#: playlist/playlistheader.cpp:39
+#: playlist/playlistheader.cpp:47
 msgid "&Left"
 msgstr "&levo"
+
+#: playlist/playlistheader.cpp:36
+msgid "&Lock Rating"
+msgstr "&Zaključaj ocenu"
 
 #: ../bin/src/ui_mainwindow.h:718
 msgid "&Music"
@@ -222,7 +226,7 @@ msgstr "&Napusti"
 msgid "&Repeat mode"
 msgstr "&Režim ponavljanja"
 
-#: playlist/playlistheader.cpp:41
+#: playlist/playlistheader.cpp:49
 msgid "&Right"
 msgstr "&desno"
 
@@ -230,7 +234,7 @@ msgstr "&desno"
 msgid "&Shuffle mode"
 msgstr "&Nasumični režim"
 
-#: playlist/playlistheader.cpp:33
+#: playlist/playlistheader.cpp:34
 msgid "&Stretch columns to fit window"
 msgstr "&Uklopi kolone u prozor"
 
@@ -5806,7 +5810,7 @@ msgstr "između"
 msgid "biggest first"
 msgstr "prvo najveće"
 
-#: playlist/playlistview.cpp:230 ui/edittagdialog.cpp:495
+#: playlist/playlistview.cpp:232 ui/edittagdialog.cpp:495
 msgid "bpm"
 msgstr "tempo"
 
@@ -5859,7 +5863,7 @@ msgstr "poslednjih"
 
 #: internet/spotify/spotifysettingspage.cpp:62
 #: internet/spotify/spotifysettingspage.cpp:63
-#: internet/spotify/spotifysettingspage.cpp:64 playlist/playlistview.cpp:234
+#: internet/spotify/spotifysettingspage.cpp:64 playlist/playlistview.cpp:236
 #: ui/edittagdialog.cpp:497
 msgid "kbps"
 msgstr "kb/s"

@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2015-10-20 17:55+0000\n"
+"PO-Revision-Date: 2015-10-26 12:15+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Burmese (http://www.transifex.com/davidsansome/clementine/language/my/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -166,11 +166,11 @@ msgctxt ""
 msgid "%n remaining"
 msgstr "%n လက်ကျန်"
 
-#: playlist/playlistheader.cpp:37
+#: playlist/playlistheader.cpp:45
 msgid "&Align text"
 msgstr "စာသားတန်းညှိ(&A)"
 
-#: playlist/playlistheader.cpp:40
+#: playlist/playlistheader.cpp:48
 msgid "&Center"
 msgstr "အလယ်(&C)"
 
@@ -186,18 +186,22 @@ msgstr "အပိုများ(&E)"
 msgid "&Help"
 msgstr "အကူအညီ(&H)"
 
-#: playlist/playlistheader.cpp:73
+#: playlist/playlistheader.cpp:81
 #, qt-format
 msgid "&Hide %1"
 msgstr "ဖုံးကွယ်(&H) %1"
 
-#: playlist/playlistheader.cpp:32
+#: playlist/playlistheader.cpp:33
 msgid "&Hide..."
 msgstr "ဖုံးကွယ်(&H)... "
 
-#: playlist/playlistheader.cpp:39
+#: playlist/playlistheader.cpp:47
 msgid "&Left"
 msgstr "ဘယ်(&L)"
+
+#: playlist/playlistheader.cpp:36
+msgid "&Lock Rating"
+msgstr ""
 
 #: ../bin/src/ui_mainwindow.h:718
 msgid "&Music"
@@ -219,7 +223,7 @@ msgstr "ထွက်(&Q)"
 msgid "&Repeat mode"
 msgstr "စနစ်ပြန်ဆို(&R)"
 
-#: playlist/playlistheader.cpp:41
+#: playlist/playlistheader.cpp:49
 msgid "&Right"
 msgstr "ညာ(&R)"
 
@@ -227,7 +231,7 @@ msgstr "ညာ(&R)"
 msgid "&Shuffle mode"
 msgstr "ကုလားဖန်ထိုးစနစ်(&S)"
 
-#: playlist/playlistheader.cpp:33
+#: playlist/playlistheader.cpp:34
 msgid "&Stretch columns to fit window"
 msgstr "ဝင်းဒိုးနဲ့အံကိုက်ကော်လံများကိုဆွဲဆန့်(&S)"
 
@@ -5803,7 +5807,7 @@ msgstr "အကြား"
 msgid "biggest first"
 msgstr "အကြီးဆုံးဦးစားပေး"
 
-#: playlist/playlistview.cpp:230 ui/edittagdialog.cpp:495
+#: playlist/playlistview.cpp:232 ui/edittagdialog.cpp:495
 msgid "bpm"
 msgstr "ဘီပီအမ်"
 
@@ -5856,7 +5860,7 @@ msgstr "နောက်ဆံုးမှာ"
 
 #: internet/spotify/spotifysettingspage.cpp:62
 #: internet/spotify/spotifysettingspage.cpp:63
-#: internet/spotify/spotifysettingspage.cpp:64 playlist/playlistview.cpp:234
+#: internet/spotify/spotifysettingspage.cpp:64 playlist/playlistview.cpp:236
 #: ui/edittagdialog.cpp:497
 msgid "kbps"
 msgstr "တစ်စက္ကန့်ကီလိုဘိုက်နှုန်း"

@@ -14,8 +14,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2015-10-20 17:55+0000\n"
-"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
+"PO-Revision-Date: 2015-10-30 18:35+0000\n"
+"Last-Translator: Adolfo Jayme Barrientos\n"
 "Language-Team: Catalan (http://www.transifex.com/davidsansome/clementine/language/ca/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -59,7 +59,7 @@ msgstr " pt"
 
 #: ../bin/src/ui_behavioursettingspage.h:359
 msgid " s"
-msgstr ""
+msgstr " s"
 
 #: ../bin/src/ui_notificationssettingspage.h:444
 #: ../bin/src/ui_visualisationselector.h:115
@@ -173,11 +173,11 @@ msgctxt ""
 msgid "%n remaining"
 msgstr "%n restants"
 
-#: playlist/playlistheader.cpp:37
+#: playlist/playlistheader.cpp:45
 msgid "&Align text"
 msgstr "&Alinea el text"
 
-#: playlist/playlistheader.cpp:40
+#: playlist/playlistheader.cpp:48
 msgid "&Center"
 msgstr "&Centre"
 
@@ -193,18 +193,22 @@ msgstr "E&xtres"
 msgid "&Help"
 msgstr "&Ajuda"
 
-#: playlist/playlistheader.cpp:73
+#: playlist/playlistheader.cpp:81
 #, qt-format
 msgid "&Hide %1"
 msgstr "&Amaga «%1»"
 
-#: playlist/playlistheader.cpp:32
+#: playlist/playlistheader.cpp:33
 msgid "&Hide..."
 msgstr "&Amaga…"
 
-#: playlist/playlistheader.cpp:39
+#: playlist/playlistheader.cpp:47
 msgid "&Left"
 msgstr "&Esquerra"
+
+#: playlist/playlistheader.cpp:36
+msgid "&Lock Rating"
+msgstr "&Bloca la valoració"
 
 #: ../bin/src/ui_mainwindow.h:718
 msgid "&Music"
@@ -226,7 +230,7 @@ msgstr "&Surt"
 msgid "&Repeat mode"
 msgstr "Mode de repetició"
 
-#: playlist/playlistheader.cpp:41
+#: playlist/playlistheader.cpp:49
 msgid "&Right"
 msgstr "&Dreta"
 
@@ -234,7 +238,7 @@ msgstr "&Dreta"
 msgid "&Shuffle mode"
 msgstr "Mode aleatori"
 
-#: playlist/playlistheader.cpp:33
+#: playlist/playlistheader.cpp:34
 msgid "&Stretch columns to fit window"
 msgstr "&Encabeix les columnes a la finestra"
 
@@ -281,7 +285,7 @@ msgstr "MP3 de 128k"
 
 #: ../bin/src/ui_playbacksettingspage.h:378
 msgid "192,000Hz"
-msgstr ""
+msgstr "192.000 Hz"
 
 #: ../bin/src/ui_appearancesettingspage.h:290
 msgid "40%"
@@ -289,11 +293,11 @@ msgstr "40 %"
 
 #: ../bin/src/ui_playbacksettingspage.h:375
 msgid "44,100Hz"
-msgstr ""
+msgstr "44.100 Hz"
 
 #: ../bin/src/ui_playbacksettingspage.h:376
 msgid "48,000Hz"
-msgstr ""
+msgstr "48.000 Hz"
 
 #: library/library.cpp:64
 msgid "50 random tracks"
@@ -301,7 +305,7 @@ msgstr "50 peces a l’atzar"
 
 #: ../bin/src/ui_playbacksettingspage.h:377
 msgid "96,000Hz"
-msgstr ""
+msgstr "96.000 Hz"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:164
 msgid "<a href=\"http://www.di.fm/premium/\">Upgrade to Premium now</a>"
@@ -1111,7 +1115,7 @@ msgstr "Canvia el mode aleatori"
 
 #: ../bin/src/ui_behavioursettingspage.h:354
 msgid "Change the currently playing song"
-msgstr ""
+msgstr "Canvia la cançó que s’està reproduint ara"
 
 #: core/commandlineoptions.cpp:172
 msgid "Change the language"
@@ -1901,7 +1905,7 @@ msgstr "Feu doble clic per obrir"
 
 #: ../bin/src/ui_behavioursettingspage.h:351
 msgid "Double clicking a song in the playlist will..."
-msgstr ""
+msgstr "En fer doble clic a una cançó de la llista…"
 
 #: ../bin/src/ui_behavioursettingspage.h:337
 msgid "Double clicking a song will..."
@@ -2819,7 +2823,7 @@ msgstr "Serveis en Internet"
 
 #: widgets/osd.cpp:321 ../bin/src/ui_playlistsequence.h:115
 msgid "Intro tracks"
-msgstr ""
+msgstr "Peces d’introducció"
 
 #: internet/lastfm/lastfmservice.cpp:240
 msgid "Invalid API key"
@@ -3692,12 +3696,12 @@ msgstr "Etiquetes originals"
 #: ../bin/src/ui_groupbydialog.h:135 ../bin/src/ui_groupbydialog.h:154
 #: ../bin/src/ui_groupbydialog.h:173
 msgid "Original year"
-msgstr ""
+msgstr "Any original"
 
 #: ../bin/src/ui_groupbydialog.h:137 ../bin/src/ui_groupbydialog.h:156
 #: ../bin/src/ui_groupbydialog.h:175
 msgid "Original year - Album"
-msgstr ""
+msgstr "Any original - àlbum"
 
 #: library/library.cpp:118
 msgid "Original year tag support"
@@ -5353,7 +5357,7 @@ msgstr "Utilitza les dreceres de teclat del Gnome"
 
 #: analyzers/analyzercontainer.cpp:94
 msgid "Use Psychedelic Colors"
-msgstr ""
+msgstr "Utilitza colors psicodèlics"
 
 #: ../bin/src/ui_playbacksettingspage.h:352
 msgid "Use Replay Gain metadata if it is available"
@@ -5810,7 +5814,7 @@ msgstr "entre"
 msgid "biggest first"
 msgstr "els més grans primer"
 
-#: playlist/playlistview.cpp:230 ui/edittagdialog.cpp:495
+#: playlist/playlistview.cpp:232 ui/edittagdialog.cpp:495
 msgid "bpm"
 msgstr "ppm"
 
@@ -5863,7 +5867,7 @@ msgstr "en el últims"
 
 #: internet/spotify/spotifysettingspage.cpp:62
 #: internet/spotify/spotifysettingspage.cpp:63
-#: internet/spotify/spotifysettingspage.cpp:64 playlist/playlistview.cpp:234
+#: internet/spotify/spotifysettingspage.cpp:64 playlist/playlistview.cpp:236
 #: ui/edittagdialog.cpp:497
 msgid "kbps"
 msgstr "kb/s"

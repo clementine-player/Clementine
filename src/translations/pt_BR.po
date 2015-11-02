@@ -19,8 +19,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2015-10-20 17:55+0000\n"
-"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
+"PO-Revision-Date: 2015-10-29 23:38+0000\n"
+"Last-Translator: carlo giusepe tadei valente sasaki <carlo.gt.valente@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/davidsansome/clementine/language/pt_BR/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -178,11 +178,11 @@ msgctxt ""
 msgid "%n remaining"
 msgstr "%n faltando"
 
-#: playlist/playlistheader.cpp:37
+#: playlist/playlistheader.cpp:45
 msgid "&Align text"
 msgstr "&Alinhar texto"
 
-#: playlist/playlistheader.cpp:40
+#: playlist/playlistheader.cpp:48
 msgid "&Center"
 msgstr "&Centro"
 
@@ -198,18 +198,22 @@ msgstr "Extras"
 msgid "&Help"
 msgstr "&Ajuda"
 
-#: playlist/playlistheader.cpp:73
+#: playlist/playlistheader.cpp:81
 #, qt-format
 msgid "&Hide %1"
 msgstr "&Ocultar %1"
 
-#: playlist/playlistheader.cpp:32
+#: playlist/playlistheader.cpp:33
 msgid "&Hide..."
 msgstr "&Ocultar..."
 
-#: playlist/playlistheader.cpp:39
+#: playlist/playlistheader.cpp:47
 msgid "&Left"
 msgstr "&Esquerda"
+
+#: playlist/playlistheader.cpp:36
+msgid "&Lock Rating"
+msgstr "Travar ava&liação"
 
 #: ../bin/src/ui_mainwindow.h:718
 msgid "&Music"
@@ -231,7 +235,7 @@ msgstr "&Sair"
 msgid "&Repeat mode"
 msgstr "&Mode de Repetição"
 
-#: playlist/playlistheader.cpp:41
+#: playlist/playlistheader.cpp:49
 msgid "&Right"
 msgstr "&Direita"
 
@@ -239,7 +243,7 @@ msgstr "&Direita"
 msgid "&Shuffle mode"
 msgstr "Modo aleatório"
 
-#: playlist/playlistheader.cpp:33
+#: playlist/playlistheader.cpp:34
 msgid "&Stretch columns to fit window"
 msgstr "&Esticar colunas para ajustar a janela"
 
@@ -448,7 +452,7 @@ msgstr "Fluxo de atividades"
 
 #: internet/podcasts/addpodcastdialog.cpp:63
 msgid "Add Podcast"
-msgstr "Adicionar Podcast"
+msgstr "Adicionar podcast"
 
 #: ../bin/src/ui_addstreamdialog.h:112
 msgid "Add Stream"
@@ -476,7 +480,7 @@ msgstr "Adicionar diretório..."
 
 #: ui/mainwindow.cpp:1915
 msgid "Add file"
-msgstr "Adicionar Arquivo"
+msgstr "Adicionar arquivo"
 
 #: ../bin/src/ui_mainwindow.h:712
 msgid "Add file to transcoder"
@@ -509,11 +513,11 @@ msgstr "Adicionar nova pasta..."
 
 #: ../bin/src/ui_addpodcastdialog.h:178
 msgid "Add podcast"
-msgstr "Adicionar Podcast"
+msgstr "Adicionar podcast"
 
 #: internet/podcasts/podcastservice.cpp:418 ../bin/src/ui_mainwindow.h:708
 msgid "Add podcast..."
-msgstr "Adicionar Podcast..."
+msgstr "Adicionar podcast..."
 
 #: smartplaylists/searchtermwidget.cpp:356
 msgid "Add search term"
@@ -613,7 +617,7 @@ msgstr "Adicionar ao Spotify com estrela"
 
 #: ui/mainwindow.cpp:1736
 msgid "Add to another playlist"
-msgstr "Adicionar à outra lista de reprodução"
+msgstr "Adicionar a outra lista de reprodução"
 
 #: internet/vk/vkservice.cpp:309
 msgid "Add to bookmarks"
@@ -5815,7 +5819,7 @@ msgstr "entre"
 msgid "biggest first"
 msgstr "maiores primeiro"
 
-#: playlist/playlistview.cpp:230 ui/edittagdialog.cpp:495
+#: playlist/playlistview.cpp:232 ui/edittagdialog.cpp:495
 msgid "bpm"
 msgstr "bpm"
 
@@ -5868,7 +5872,7 @@ msgstr "nos últimos"
 
 #: internet/spotify/spotifysettingspage.cpp:62
 #: internet/spotify/spotifysettingspage.cpp:63
-#: internet/spotify/spotifysettingspage.cpp:64 playlist/playlistview.cpp:234
+#: internet/spotify/spotifysettingspage.cpp:64 playlist/playlistview.cpp:236
 #: ui/edittagdialog.cpp:497
 msgid "kbps"
 msgstr "kbps"

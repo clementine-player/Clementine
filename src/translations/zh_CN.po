@@ -18,8 +18,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2015-10-20 17:55+0000\n"
-"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
+"PO-Revision-Date: 2015-10-30 13:05+0000\n"
+"Last-Translator: zhangmin <zm1990s@gmail.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/davidsansome/clementine/language/zh_CN/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -177,11 +177,11 @@ msgctxt ""
 msgid "%n remaining"
 msgstr "%n 剩余"
 
-#: playlist/playlistheader.cpp:37
+#: playlist/playlistheader.cpp:45
 msgid "&Align text"
 msgstr "对齐文本(&A)"
 
-#: playlist/playlistheader.cpp:40
+#: playlist/playlistheader.cpp:48
 msgid "&Center"
 msgstr "居中(&C)"
 
@@ -197,18 +197,22 @@ msgstr "附件(&E)"
 msgid "&Help"
 msgstr "帮助(&H)"
 
-#: playlist/playlistheader.cpp:73
+#: playlist/playlistheader.cpp:81
 #, qt-format
 msgid "&Hide %1"
 msgstr "隐藏 %1(&H)"
 
-#: playlist/playlistheader.cpp:32
+#: playlist/playlistheader.cpp:33
 msgid "&Hide..."
 msgstr "隐藏(&H)..."
 
-#: playlist/playlistheader.cpp:39
+#: playlist/playlistheader.cpp:47
 msgid "&Left"
 msgstr "左对齐(&L)"
+
+#: playlist/playlistheader.cpp:36
+msgid "&Lock Rating"
+msgstr "锁定评分 (&L)"
 
 #: ../bin/src/ui_mainwindow.h:718
 msgid "&Music"
@@ -230,7 +234,7 @@ msgstr "退出(&Q)"
 msgid "&Repeat mode"
 msgstr "循环模式(&R)"
 
-#: playlist/playlistheader.cpp:41
+#: playlist/playlistheader.cpp:49
 msgid "&Right"
 msgstr "右对齐(&R)"
 
@@ -238,7 +242,7 @@ msgstr "右对齐(&R)"
 msgid "&Shuffle mode"
 msgstr "随机播放模式(&S)"
 
-#: playlist/playlistheader.cpp:33
+#: playlist/playlistheader.cpp:34
 msgid "&Stretch columns to fit window"
 msgstr "拉伸栏以适应窗口(&S)"
 
@@ -5814,7 +5818,7 @@ msgstr "之间"
 msgid "biggest first"
 msgstr "体积大的优先"
 
-#: playlist/playlistview.cpp:230 ui/edittagdialog.cpp:495
+#: playlist/playlistview.cpp:232 ui/edittagdialog.cpp:495
 msgid "bpm"
 msgstr "bpm"
 
@@ -5867,7 +5871,7 @@ msgstr "最后"
 
 #: internet/spotify/spotifysettingspage.cpp:62
 #: internet/spotify/spotifysettingspage.cpp:63
-#: internet/spotify/spotifysettingspage.cpp:64 playlist/playlistview.cpp:234
+#: internet/spotify/spotifysettingspage.cpp:64 playlist/playlistview.cpp:236
 #: ui/edittagdialog.cpp:497
 msgid "kbps"
 msgstr "kbps"

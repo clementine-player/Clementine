@@ -34,8 +34,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2015-10-20 17:55+0000\n"
-"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
+"PO-Revision-Date: 2015-10-26 14:38+0000\n"
+"Last-Translator: Andrei Stepanov\n"
 "Language-Team: Russian (http://www.transifex.com/davidsansome/clementine/language/ru/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -193,11 +193,11 @@ msgctxt ""
 msgid "%n remaining"
 msgstr "%n осталось"
 
-#: playlist/playlistheader.cpp:37
+#: playlist/playlistheader.cpp:45
 msgid "&Align text"
 msgstr "Выровнять &текст"
 
-#: playlist/playlistheader.cpp:40
+#: playlist/playlistheader.cpp:48
 msgid "&Center"
 msgstr "По &центру"
 
@@ -213,18 +213,22 @@ msgstr "Дополнения"
 msgid "&Help"
 msgstr "Помощь"
 
-#: playlist/playlistheader.cpp:73
+#: playlist/playlistheader.cpp:81
 #, qt-format
 msgid "&Hide %1"
 msgstr "&Скрыть \"%1\""
 
-#: playlist/playlistheader.cpp:32
+#: playlist/playlistheader.cpp:33
 msgid "&Hide..."
 msgstr "&Скрыть…"
 
-#: playlist/playlistheader.cpp:39
+#: playlist/playlistheader.cpp:47
 msgid "&Left"
 msgstr "С&лева"
+
+#: playlist/playlistheader.cpp:36
+msgid "&Lock Rating"
+msgstr "&Заблокировать рейтинг"
 
 #: ../bin/src/ui_mainwindow.h:718
 msgid "&Music"
@@ -246,7 +250,7 @@ msgstr "&Выход"
 msgid "&Repeat mode"
 msgstr "&Режим повтора"
 
-#: playlist/playlistheader.cpp:41
+#: playlist/playlistheader.cpp:49
 msgid "&Right"
 msgstr "С&права"
 
@@ -254,7 +258,7 @@ msgstr "С&права"
 msgid "&Shuffle mode"
 msgstr "&Режим перемешивания"
 
-#: playlist/playlistheader.cpp:33
+#: playlist/playlistheader.cpp:34
 msgid "&Stretch columns to fit window"
 msgstr "&Подгонять по размеру окна"
 
@@ -5830,7 +5834,7 @@ msgstr "между"
 msgid "biggest first"
 msgstr "наибольшие сначала"
 
-#: playlist/playlistview.cpp:230 ui/edittagdialog.cpp:495
+#: playlist/playlistview.cpp:232 ui/edittagdialog.cpp:495
 msgid "bpm"
 msgstr "bpm"
 
@@ -5883,7 +5887,7 @@ msgstr "в последние"
 
 #: internet/spotify/spotifysettingspage.cpp:62
 #: internet/spotify/spotifysettingspage.cpp:63
-#: internet/spotify/spotifysettingspage.cpp:64 playlist/playlistview.cpp:234
+#: internet/spotify/spotifysettingspage.cpp:64 playlist/playlistview.cpp:236
 #: ui/edittagdialog.cpp:497
 msgid "kbps"
 msgstr "кбит/с"

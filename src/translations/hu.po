@@ -17,8 +17,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2015-10-20 17:55+0000\n"
-"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
+"PO-Revision-Date: 2015-10-27 17:13+0000\n"
+"Last-Translator: miku84\n"
 "Language-Team: Hungarian (http://www.transifex.com/davidsansome/clementine/language/hu/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -176,11 +176,11 @@ msgctxt ""
 msgid "%n remaining"
 msgstr "%n hátralévő"
 
-#: playlist/playlistheader.cpp:37
+#: playlist/playlistheader.cpp:45
 msgid "&Align text"
 msgstr "&Szöveg igazítása"
 
-#: playlist/playlistheader.cpp:40
+#: playlist/playlistheader.cpp:48
 msgid "&Center"
 msgstr "&Középre"
 
@@ -196,18 +196,22 @@ msgstr "Extrák"
 msgid "&Help"
 msgstr "&Súgó"
 
-#: playlist/playlistheader.cpp:73
+#: playlist/playlistheader.cpp:81
 #, qt-format
 msgid "&Hide %1"
 msgstr "&%1 elrejtése"
 
-#: playlist/playlistheader.cpp:32
+#: playlist/playlistheader.cpp:33
 msgid "&Hide..."
 msgstr "&Elrejtés..."
 
-#: playlist/playlistheader.cpp:39
+#: playlist/playlistheader.cpp:47
 msgid "&Left"
 msgstr "&Balra"
+
+#: playlist/playlistheader.cpp:36
+msgid "&Lock Rating"
+msgstr "&értékelés lezárása"
 
 #: ../bin/src/ui_mainwindow.h:718
 msgid "&Music"
@@ -229,7 +233,7 @@ msgstr "&Kilépés"
 msgid "&Repeat mode"
 msgstr "Ismétlési mód"
 
-#: playlist/playlistheader.cpp:41
+#: playlist/playlistheader.cpp:49
 msgid "&Right"
 msgstr "&Jobbra"
 
@@ -237,7 +241,7 @@ msgstr "&Jobbra"
 msgid "&Shuffle mode"
 msgstr "Véletlenszerű lejátszási mód"
 
-#: playlist/playlistheader.cpp:33
+#: playlist/playlistheader.cpp:34
 msgid "&Stretch columns to fit window"
 msgstr "&Oszlopszélességek igazítása az ablakhoz"
 
@@ -5813,7 +5817,7 @@ msgstr "között"
 msgid "biggest first"
 msgstr "nagyobb először"
 
-#: playlist/playlistview.cpp:230 ui/edittagdialog.cpp:495
+#: playlist/playlistview.cpp:232 ui/edittagdialog.cpp:495
 msgid "bpm"
 msgstr "bpm"
 
@@ -5866,7 +5870,7 @@ msgstr "az utóbbi"
 
 #: internet/spotify/spotifysettingspage.cpp:62
 #: internet/spotify/spotifysettingspage.cpp:63
-#: internet/spotify/spotifysettingspage.cpp:64 playlist/playlistview.cpp:234
+#: internet/spotify/spotifysettingspage.cpp:64 playlist/playlistview.cpp:236
 #: ui/edittagdialog.cpp:497
 msgid "kbps"
 msgstr "kbps"

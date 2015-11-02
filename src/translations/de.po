@@ -57,8 +57,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2015-10-20 17:55+0000\n"
-"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
+"PO-Revision-Date: 2015-10-28 21:47+0000\n"
+"Last-Translator: Ettore Atalan <atalanttore@googlemail.com>\n"
 "Language-Team: German (http://www.transifex.com/davidsansome/clementine/language/de/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -216,11 +216,11 @@ msgctxt ""
 msgid "%n remaining"
 msgstr "%n verbleibend"
 
-#: playlist/playlistheader.cpp:37
+#: playlist/playlistheader.cpp:45
 msgid "&Align text"
 msgstr "&Text ausrichten"
 
-#: playlist/playlistheader.cpp:40
+#: playlist/playlistheader.cpp:48
 msgid "&Center"
 msgstr "&Zentriert"
 
@@ -236,18 +236,22 @@ msgstr "&Extras"
 msgid "&Help"
 msgstr "&Hilfe"
 
-#: playlist/playlistheader.cpp:73
+#: playlist/playlistheader.cpp:81
 #, qt-format
 msgid "&Hide %1"
 msgstr "%1 &ausblenden"
 
-#: playlist/playlistheader.cpp:32
+#: playlist/playlistheader.cpp:33
 msgid "&Hide..."
 msgstr "&Ausblenden …"
 
-#: playlist/playlistheader.cpp:39
+#: playlist/playlistheader.cpp:47
 msgid "&Left"
 msgstr "&Links"
+
+#: playlist/playlistheader.cpp:36
+msgid "&Lock Rating"
+msgstr "Bewertung &sperren"
 
 #: ../bin/src/ui_mainwindow.h:718
 msgid "&Music"
@@ -269,7 +273,7 @@ msgstr "&Beenden"
 msgid "&Repeat mode"
 msgstr "&Wiederholung"
 
-#: playlist/playlistheader.cpp:41
+#: playlist/playlistheader.cpp:49
 msgid "&Right"
 msgstr "&Rechts"
 
@@ -277,7 +281,7 @@ msgstr "&Rechts"
 msgid "&Shuffle mode"
 msgstr "&Zufallsmodus"
 
-#: playlist/playlistheader.cpp:33
+#: playlist/playlistheader.cpp:34
 msgid "&Stretch columns to fit window"
 msgstr "&Spalten an Fenstergröße anpassen"
 
@@ -5853,7 +5857,7 @@ msgstr "zwischen"
 msgid "biggest first"
 msgstr "größte zuerst"
 
-#: playlist/playlistview.cpp:230 ui/edittagdialog.cpp:495
+#: playlist/playlistview.cpp:232 ui/edittagdialog.cpp:495
 msgid "bpm"
 msgstr "BPM"
 
@@ -5906,7 +5910,7 @@ msgstr "in den letzten"
 
 #: internet/spotify/spotifysettingspage.cpp:62
 #: internet/spotify/spotifysettingspage.cpp:63
-#: internet/spotify/spotifysettingspage.cpp:64 playlist/playlistview.cpp:234
+#: internet/spotify/spotifysettingspage.cpp:64 playlist/playlistview.cpp:236
 #: ui/edittagdialog.cpp:497
 msgid "kbps"
 msgstr "Kb/s"

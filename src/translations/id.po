@@ -28,7 +28,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2015-10-23 09:50+0000\n"
+"PO-Revision-Date: 2015-10-29 00:49+0000\n"
 "Last-Translator: wantoyo <wantoyo@yahoo.com>\n"
 "Language-Team: Indonesian (http://www.transifex.com/davidsansome/clementine/language/id/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -187,11 +187,11 @@ msgctxt ""
 msgid "%n remaining"
 msgstr "%n tersisa"
 
-#: playlist/playlistheader.cpp:37
+#: playlist/playlistheader.cpp:45
 msgid "&Align text"
 msgstr "Sej&ajarkan teks"
 
-#: playlist/playlistheader.cpp:40
+#: playlist/playlistheader.cpp:48
 msgid "&Center"
 msgstr "&Tengah"
 
@@ -207,18 +207,22 @@ msgstr "&Ekstra"
 msgid "&Help"
 msgstr "&Bantuan"
 
-#: playlist/playlistheader.cpp:73
+#: playlist/playlistheader.cpp:81
 #, qt-format
 msgid "&Hide %1"
 msgstr "&Sembunyikan %1"
 
-#: playlist/playlistheader.cpp:32
+#: playlist/playlistheader.cpp:33
 msgid "&Hide..."
 msgstr "&Sembunyikan..."
 
-#: playlist/playlistheader.cpp:39
+#: playlist/playlistheader.cpp:47
 msgid "&Left"
 msgstr "&Kiri"
+
+#: playlist/playlistheader.cpp:36
+msgid "&Lock Rating"
+msgstr "&Kunci Peringkat"
 
 #: ../bin/src/ui_mainwindow.h:718
 msgid "&Music"
@@ -240,7 +244,7 @@ msgstr "&Keluar"
 msgid "&Repeat mode"
 msgstr "Mode pe&rulangan"
 
-#: playlist/playlistheader.cpp:41
+#: playlist/playlistheader.cpp:49
 msgid "&Right"
 msgstr "&Kanan"
 
@@ -248,7 +252,7 @@ msgstr "&Kanan"
 msgid "&Shuffle mode"
 msgstr "Mode &Karau"
 
-#: playlist/playlistheader.cpp:33
+#: playlist/playlistheader.cpp:34
 msgid "&Stretch columns to fit window"
 msgstr "&Regang kolom agar pas dengan jendela"
 
@@ -850,7 +854,7 @@ msgstr "Apakah Anda yakin ingin menghapus prasetel \"%1\"?"
 
 #: ui/edittagdialog.cpp:804
 msgid "Are you sure you want to reset this song's statistics?"
-msgstr "Apakah Anda yakin ingin mengatur ulang statistik lagu ini?"
+msgstr "Apakah Anda yakin ingin mengeset-ulang statistik lagu ini?"
 
 #: library/librarysettingspage.cpp:155
 msgid ""
@@ -1536,16 +1540,16 @@ msgstr "Sampul dimuat secara otomatis dari %1"
 
 #: ui/edittagdialog.cpp:474
 msgid "Cover art manually unset"
-msgstr "Sampul tidak disetel secara manual"
+msgstr "Sampul tidak diset secara manual"
 
 #: ui/edittagdialog.cpp:484
 msgid "Cover art not set"
-msgstr "Sampul tidak disetel"
+msgstr "Sampul tidak diset"
 
 #: ui/edittagdialog.cpp:477
 #, qt-format
 msgid "Cover art set from %1"
-msgstr "Sampul disetel dari %1"
+msgstr "Sampul diset dari %1"
 
 #: covers/coversearchstatisticsdialog.cpp:59 ui/albumcoversearcher.cpp:100
 #, qt-format
@@ -3871,7 +3875,7 @@ msgstr "Pop"
 
 #: ../bin/src/ui_notificationssettingspage.h:443
 msgid "Popup duration"
-msgstr "Durasi popup"
+msgstr "Durasi sembulan"
 
 #: ../bin/src/ui_networkproxysettingspage.h:165
 #: ../bin/src/ui_networkremotesettingspage.h:224
@@ -4060,7 +4064,7 @@ msgstr "Nilai lagu saat ini 5 bintang"
 
 #: playlist/playlist.cpp:1342 ../bin/src/ui_edittagdialog.h:726
 msgid "Rating"
-msgstr "Penilaian"
+msgstr "Peringkat"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:305
 #: ui/albumcovermanager.cpp:218
@@ -4325,7 +4329,7 @@ msgstr "Simpan prasetel"
 
 #: ../bin/src/ui_librarysettingspage.h:192
 msgid "Save ratings in file tags when possible"
-msgstr "Simpan nilai di dalam berkas tag jika memungkinkan"
+msgstr "Simpan peringkat di dalam berkas tag jika memungkinkan"
 
 #: ../bin/src/ui_librarysettingspage.h:196
 msgid "Save statistics in file tags when possible"
@@ -4574,7 +4578,7 @@ msgstr "Tampilkan sebuah notifikasi ketika saya jeda pemutaran"
 
 #: ../bin/src/ui_notificationssettingspage.h:441
 msgid "Show a popup from the system tray"
-msgstr "Tampilkan popup dari baki sistem"
+msgstr "Tampilkan sembulan dari baki sistem"
 
 #: ../bin/src/ui_notificationssettingspage.h:440
 msgid "Show a pretty OSD"
@@ -4602,7 +4606,7 @@ msgstr "Tampilkan pembagi"
 
 #: ui/albumcoverchoicecontroller.cpp:72 widgets/prettyimage.cpp:183
 msgid "Show fullsize..."
-msgstr "Tampilkan ukuran penuh"
+msgstr "Tampilkan ukuran penuh..."
 
 #: ../bin/src/ui_vksettingspage.h:222
 msgid "Show groups in global search result"
@@ -5296,7 +5300,7 @@ msgstr "Galat tidak diketahui"
 
 #: ui/albumcoverchoicecontroller.cpp:69
 msgid "Unset cover"
-msgstr "Tak setel sampul"
+msgstr "Tak set sampul"
 
 #: ui/mainwindow.cpp:1668
 msgid "Unskip selected tracks"
@@ -5824,7 +5828,7 @@ msgstr "antara"
 msgid "biggest first"
 msgstr "terbesar dulu"
 
-#: playlist/playlistview.cpp:230 ui/edittagdialog.cpp:495
+#: playlist/playlistview.cpp:232 ui/edittagdialog.cpp:495
 msgid "bpm"
 msgstr "bpm"
 
@@ -5877,7 +5881,7 @@ msgstr "di yang terakhir"
 
 #: internet/spotify/spotifysettingspage.cpp:62
 #: internet/spotify/spotifysettingspage.cpp:63
-#: internet/spotify/spotifysettingspage.cpp:64 playlist/playlistview.cpp:234
+#: internet/spotify/spotifysettingspage.cpp:64 playlist/playlistview.cpp:236
 #: ui/edittagdialog.cpp:497
 msgid "kbps"
 msgstr "kbps"
