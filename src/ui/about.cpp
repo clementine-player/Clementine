@@ -52,6 +52,7 @@ About::About(QWidget* parent) : QDialog(parent) {
              << Person("Artur Rona", "artur.rona@gmail.com")
              << Person("Andreas Muttscheller", "asfa194@gmail.com")
              << Person("Mark Furneaux", "mark@furneaux.ca");
+             << Person("Devyn Collier Johnson", "DevynCJohnson@Gmail.com");
 
   qSort(authors_);
   qSort(thanks_to_);
