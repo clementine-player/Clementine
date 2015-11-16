@@ -3,6 +3,7 @@
 # This file is distributed under the same license as the Clementine package.
 # 
 # Translators:
+# Baiba Berzina <baibabeerzinnaa@gmail.com>, 2015
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2011
 # Gatis Kalniņš <>, 2014
 # Kristaps, 2012
@@ -11,8 +12,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2015-10-26 12:15+0000\n"
-"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
+"PO-Revision-Date: 2015-11-10 10:48+0000\n"
+"Last-Translator: Baiba Berzina <baibabeerzinnaa@gmail.com>\n"
 "Language-Team: Latvian (http://www.transifex.com/davidsansome/clementine/language/lv/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -26,11 +27,11 @@ msgid ""
 "You can favorite playlists by clicking the star icon next to a playlist name\n"
 "\n"
 "Favorited playlists will be saved here"
-msgstr ""
+msgstr "\n\nJūs varat saglabāt mīļākos atskaņošanas sarakstus, nospiežot uz zvaigznītes blakus saraksta nosaukumam\n\n\nMīļākie atskaņošanas saraksti tiks saglabāti šeit"
 
 #: ../bin/src/ui_podcastsettingspage.h:273
 msgid " days"
-msgstr "dienām"
+msgstr "dienas"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:129
 #: ../bin/src/ui_transcoderoptionsmp3.h:194
@@ -42,7 +43,7 @@ msgstr "dienām"
 #: ../bin/src/ui_transcoderoptionsvorbis.h:210
 #: ../bin/src/ui_transcoderoptionswma.h:79
 msgid " kbps"
-msgstr " kb/s"
+msgstr "kbps"
 
 #: ../bin/src/ui_playbacksettingspage.h:347
 #: ../bin/src/ui_playbacksettingspage.h:350
@@ -56,7 +57,7 @@ msgstr " punkti"
 
 #: ../bin/src/ui_behavioursettingspage.h:359
 msgid " s"
-msgstr ""
+msgstr "s"
 
 #: ../bin/src/ui_notificationssettingspage.h:444
 #: ../bin/src/ui_visualisationselector.h:115
@@ -85,7 +86,7 @@ msgstr "%1 dienas"
 #: core/utilities.cpp:139
 #, qt-format
 msgid "%1 days ago"
-msgstr "%1 dienas atpakaļ"
+msgstr "pirms %1 dienas"
 
 #: internet/podcasts/gpoddersync.cpp:84
 #, qt-format
@@ -95,7 +96,7 @@ msgstr ""
 #: playlistparsers/playlistparser.cpp:76
 #, qt-format
 msgid "%1 playlists (%2)"
-msgstr "%1 dziesmu listes (%2)"
+msgstr "%1 atskaņošanas saraksti (%2)"
 
 #: playlist/playlistmanager.cpp:409
 #, qt-format
@@ -130,7 +131,7 @@ msgstr "%1 dziesmas"
 #: ui/albumcovermanager.cpp:466
 #, qt-format
 msgid "%1 transferred"
-msgstr ""
+msgstr "%1 pārvietotas"
 
 #: widgets/osd.cpp:241 widgets/osd.cpp:247 widgets/osd.cpp:253
 #: widgets/osd.cpp:259 widgets/osd.cpp:265 widgets/osd.cpp:272
@@ -146,11 +147,11 @@ msgstr "%L1 citu klausītāju"
 #: songinfo/lastfmtrackinfoprovider.cpp:92
 #, qt-format
 msgid "%L1 total plays"
-msgstr ""
+msgstr "%L1 atskaņošanas reizes"
 
 #: ../bin/src/ui_notificationssettingspage.h:432
 msgid "%filename%"
-msgstr ""
+msgstr "%filename%"
 
 #: transcoder/transcodedialog.cpp:214
 #, c-format, qt-plural-format
@@ -180,7 +181,7 @@ msgstr "&Centrs"
 
 #: ../bin/src/ui_globalshortcutssettingspage.h:177
 msgid "&Custom"
-msgstr "&Izvēles"
+msgstr "&Pielāgots"
 
 #: ../bin/src/ui_mainwindow.h:721
 msgid "&Extras"
@@ -217,7 +218,7 @@ msgstr "&Nav"
 
 #: ../bin/src/ui_mainwindow.h:719
 msgid "&Playlist"
-msgstr "Dziesmu liste"
+msgstr "Atskaņošanas saraksts"
 
 #: ../bin/src/ui_mainwindow.h:647
 msgid "&Quit"
@@ -237,7 +238,7 @@ msgstr "Jaukšanas režīms"
 
 #: playlist/playlistheader.cpp:34
 msgid "&Stretch columns to fit window"
-msgstr "&mainīt stabu lielumu"
+msgstr "&izstiept kolonnas, lai pielāgotu loga izmēram"
 
 #: ../bin/src/ui_mainwindow.h:722
 msgid "&Tools"
@@ -249,7 +250,7 @@ msgstr "(dažādām dziesmām atšķiras)"
 
 #: internet/spotify/spotifyservice.cpp:468
 msgid ", by "
-msgstr ""
+msgstr ", autors"
 
 #: ui/about.cpp:84
 msgid "...and all the Amarok contributors"
@@ -282,7 +283,7 @@ msgstr "128k MP3"
 
 #: ../bin/src/ui_playbacksettingspage.h:378
 msgid "192,000Hz"
-msgstr ""
+msgstr "192,000Hz"
 
 #: ../bin/src/ui_appearancesettingspage.h:290
 msgid "40%"
@@ -350,19 +351,19 @@ msgstr "Nepieciešams Spotify Premium konts."
 
 #: ../bin/src/ui_networkremotesettingspage.h:233
 msgid "A client can connect only, if the correct code was entered."
-msgstr ""
+msgstr "Klients var pievienoties tikai, ja tiek ievadīts pareizs kods."
 
 #: smartplaylists/wizard.cpp:74
 msgid ""
 "A smart playlist is a dynamic list of songs that come from your library.  "
 "There are different types of smart playlist that offer different ways of "
 "selecting songs."
-msgstr "Smart Playlist ir aktīva dziesmu liste no jūsu bibliotēkas. Ir vairāku veidu Smart Playlist, kas piedāvā dažādus dziesmu izvēles veidus."
+msgstr "Gudrais atskaņošanas saraksts ir dinamisks dziesmu saraksts no jūsu bibliotēkas. Ir dažādi gudro atskaņošanas rakstu veidi, kas piedāvā dažādus veidus, kā izvēlēties dziesmas."
 
 #: smartplaylists/querywizardplugin.cpp:157
 msgid ""
 "A song will be included in the playlist if it matches these conditions."
-msgstr "Dziesma tiks iekļauta dziesmu listē, ja tā atbildīs šiem nosacījumiem."
+msgstr "Dziesma tiks iekļauta atskaņošanas sarakstā, ja tā atbildīs šiem nosacījumiem."
 
 #: smartplaylists/searchterm.cpp:370
 msgid "A-Z"
@@ -394,7 +395,7 @@ msgstr "Hypnotoad krupis no Futurama"
 
 #: ui/albumcovermanager.cpp:111 ui/albumcoversearcher.cpp:158
 msgid "Abort"
-msgstr ""
+msgstr "Atcelt"
 
 #: ui/about.cpp:30
 #, qt-format
@@ -472,15 +473,15 @@ msgstr "Pievienot mapi..."
 
 #: ui/mainwindow.cpp:1915
 msgid "Add file"
-msgstr "Pievienot datni"
+msgstr "Pievienot failu"
 
 #: ../bin/src/ui_mainwindow.h:712
 msgid "Add file to transcoder"
-msgstr ""
+msgstr "Pievienot failu pārkodētājam"
 
 #: ../bin/src/ui_mainwindow.h:710
 msgid "Add file(s) to transcoder"
-msgstr ""
+msgstr "Pievienot failu(s) pārkodētājam"
 
 #: ../bin/src/ui_mainwindow.h:670
 msgid "Add file..."
@@ -541,7 +542,7 @@ msgstr "Pievienot dziesmas diska birku"
 
 #: ../bin/src/ui_notificationssettingspage.h:434
 msgid "Add song filename"
-msgstr ""
+msgstr "Pievienot dziesmas faila nosaukumu"
 
 #: ../bin/src/ui_notificationssettingspage.h:412
 msgid "Add song genre tag"
@@ -561,11 +562,11 @@ msgstr ""
 
 #: ../bin/src/ui_notificationssettingspage.h:418
 msgid "Add song play count"
-msgstr ""
+msgstr "Pievienot dziesmas atskaņošanas reižu skaitu"
 
 #: ../bin/src/ui_notificationssettingspage.h:424
 msgid "Add song rating"
-msgstr ""
+msgstr "Pievienot dziesmas novērtējumu"
 
 #: ../bin/src/ui_notificationssettingspage.h:421
 msgid "Add song skip count"
@@ -577,7 +578,7 @@ msgstr "Pievienot dziesmas nosaukumu birku"
 
 #: internet/vk/vkservice.cpp:333
 msgid "Add song to cache"
-msgstr ""
+msgstr "Pievienot dziesmu kešatmiņai"
 
 #: ../bin/src/ui_notificationssettingspage.h:409
 msgid "Add song track tag"
@@ -589,7 +590,7 @@ msgstr "Pievienot dziesmas gada birku"
 
 #: ../bin/src/ui_vksettingspage.h:221
 msgid "Add songs to \"My Music\" when the \"Love\" button is clicked"
-msgstr ""
+msgstr "Pievienot dziesmas \"Manai mūzikai\", nospiežot pogu \"Patīk\""
 
 #: ../bin/src/ui_mainwindow.h:672
 msgid "Add stream..."
@@ -597,11 +598,11 @@ msgstr "Pievienot straumi..."
 
 #: internet/vk/vkservice.cpp:325
 msgid "Add to My Music"
-msgstr ""
+msgstr "Pievienot Manai Mūzikai"
 
 #: internet/spotify/spotifyservice.cpp:621
 msgid "Add to Spotify playlists"
-msgstr ""
+msgstr "Pievienot Spotify atskaņošanas sarakstiem"
 
 #: internet/spotify/spotifyservice.cpp:613
 msgid "Add to Spotify starred"
@@ -609,15 +610,15 @@ msgstr ""
 
 #: ui/mainwindow.cpp:1736
 msgid "Add to another playlist"
-msgstr "Pievienot citai dziesmu listei"
+msgstr "Pievienot citam atskaņošanas sarakstam"
 
 #: internet/vk/vkservice.cpp:309
 msgid "Add to bookmarks"
-msgstr ""
+msgstr "Pievienot grāmatzīmēm"
 
 #: ../bin/src/ui_albumcovermanager.h:217
 msgid "Add to playlist"
-msgstr "Pievienot dziesmu listei"
+msgstr "Pievienot atskaņošanas sarakstam"
 
 #: ../bin/src/ui_behavioursettingspage.h:343
 #: ../bin/src/ui_behavioursettingspage.h:355
@@ -626,7 +627,7 @@ msgstr "Pievienot rindai"
 
 #: internet/vk/vkservice.cpp:342
 msgid "Add user/group to bookmarks"
-msgstr ""
+msgstr "Pievienot lietotāju/grupu grāmatzīmēm"
 
 #: ../bin/src/ui_wiimoteshortcutgrabber.h:122
 msgid "Add wiimotedev action"
@@ -694,11 +695,11 @@ msgstr "Albuma vāks"
 
 #: internet/jamendo/jamendoservice.cpp:429
 msgid "Album info on jamendo.com..."
-msgstr "Albuma info iekš jamendo.com..."
+msgstr "Albuma info vientē jamendo.com..."
 
 #: internet/vk/vkservice.cpp:846
 msgid "Albums"
-msgstr ""
+msgstr "Albumi"
 
 #: ui/albumcovermanager.cpp:135
 msgid "Albums with covers"
@@ -710,7 +711,7 @@ msgstr "Albumi bez vāka attēla"
 
 #: ../bin/src/ui_podcastsettingspage.h:278
 msgid "All"
-msgstr ""
+msgstr "Visi"
 
 #: ui/mainwindow.cpp:161
 msgid "All Files (*)"
@@ -736,7 +737,7 @@ msgstr "Visi faili (*)"
 #: playlistparsers/playlistparser.cpp:63
 #, qt-format
 msgid "All playlists (%1)"
-msgstr "Visas dziesmu listes (%1)"
+msgstr "Visi atskaņošanas saraksti (%1)"
 
 #: ui/about.cpp:80
 msgid "All the translators"
@@ -748,7 +749,7 @@ msgstr "Visas dziesmas"
 
 #: ../bin/src/ui_networkremotesettingspage.h:242
 msgid "Allow a client to download music from this computer."
-msgstr ""
+msgstr "Atļaut klientam lejupielādēt mūziku no šī datora."
 
 #: ../bin/src/ui_networkremotesettingspage.h:244
 msgid "Allow downloads"
@@ -792,11 +793,11 @@ msgstr "Kļūda ielādējot iTunes datubāzi"
 #: ui/edittagdialog.cpp:698
 #, qt-format
 msgid "An error occurred writing metadata to '%1'"
-msgstr "Kļūda ievadot matadatus '%1'"
+msgstr "Kļūda ievadot metadatus '%1'"
 
 #: internet/subsonic/subsonicsettingspage.cpp:124
 msgid "An unspecified error occurred."
-msgstr ""
+msgstr "Notikusi nenoteikta kļūda."
 
 #: ui/about.cpp:85
 msgid "And:"
@@ -814,17 +815,17 @@ msgstr "Izskats"
 
 #: core/commandlineoptions.cpp:167
 msgid "Append files/URLs to the playlist"
-msgstr "Pievienot failus/saites dziesmu listei"
+msgstr "Pievienot failus/saites atskaņošanas sarakstam"
 
 #: devices/deviceview.cpp:218 globalsearch/globalsearchview.cpp:453
 #: internet/core/internetservice.cpp:81 library/libraryview.cpp:372
 #: widgets/fileviewlist.cpp:31
 msgid "Append to current playlist"
-msgstr "Papildināt pašreizējo dziesmu listi"
+msgstr "Papildināt pašreizējo atskaņošanas sarakstu"
 
 #: ../bin/src/ui_behavioursettingspage.h:340
 msgid "Append to the playlist"
-msgstr "Papildināt dziesmu listi"
+msgstr "Papildināt atskaņošanas sarakstu"
 
 #: ../bin/src/ui_playbacksettingspage.h:360
 msgid "Apply compression to prevent clipping"
@@ -837,7 +838,7 @@ msgstr "Vai esat pārliecināts, ka vēlaties izdzēst \"%1\"?"
 
 #: ui/edittagdialog.cpp:804
 msgid "Are you sure you want to reset this song's statistics?"
-msgstr "Vai esat pārliecināt, ka vēlaties no jauna uzsākt dziesmas statistiku?"
+msgstr "Vai esat pārliecināts, ka vēlaties no jauna uzsākt dziesmas statistiku?"
 
 #: library/librarysettingspage.cpp:155
 msgid ""
@@ -856,7 +857,7 @@ msgstr "Izpildītājs"
 
 #: ui/mainwindow.cpp:251
 msgid "Artist info"
-msgstr "Izpildītāja info"
+msgstr "Informācija par izpildītāju"
 
 #: songinfo/echonesttags.cpp:62
 msgid "Artist tags"
@@ -868,7 +869,7 @@ msgstr "Izpildītājā iciāļi"
 
 #: ../bin/src/ui_behavioursettingspage.h:365
 msgid "Ask when saving"
-msgstr ""
+msgstr "Jautāt, kad saglabāt"
 
 #: ../bin/src/ui_transcodedialog.h:221
 #: ../bin/src/ui_networkremotesettingspage.h:250
@@ -878,7 +879,7 @@ msgstr "Audio formāts"
 
 #: ../bin/src/ui_playbacksettingspage.h:361
 msgid "Audio output"
-msgstr ""
+msgstr "Audio izvade"
 
 #: internet/digitally/digitallyimportedsettingspage.cpp:84
 #: internet/magnatune/magnatunesettingspage.cpp:117
@@ -952,7 +953,7 @@ msgstr "Fona caurlaidība"
 
 #: core/database.cpp:648
 msgid "Backing up database"
-msgstr ""
+msgstr "Dublēt datubāzi"
 
 #: ../bin/src/ui_equalizer.h:172
 msgid "Balance"
@@ -972,7 +973,7 @@ msgstr "Pamata zils"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:166
 msgid "Basic audio type"
-msgstr ""
+msgstr "Parasts audio veids"
 
 #: ../bin/src/ui_behavioursettingspage.h:304
 msgid "Behavior"
@@ -1082,7 +1083,7 @@ msgstr "Atcelt"
 
 #: internet/podcasts/podcastservice.cpp:441
 msgid "Cancel download"
-msgstr ""
+msgstr "Atcelt lejupielādi"
 
 #: internet/vk/vkservice.cpp:642
 msgid ""
@@ -1112,7 +1113,7 @@ msgstr "Mainīt jaukšanas režīmu"
 
 #: ../bin/src/ui_behavioursettingspage.h:354
 msgid "Change the currently playing song"
-msgstr ""
+msgstr "Mainīt pašreiz skanošo dziesmu"
 
 #: core/commandlineoptions.cpp:172
 msgid "Change the language"
@@ -1120,7 +1121,7 @@ msgstr "Mainīt valodu"
 
 #: ../bin/src/ui_playbacksettingspage.h:381
 msgid "Changes will take place when the next song starts playing"
-msgstr ""
+msgstr "Izmaiņas sāks darboties līdz ar nākamās dziesmas sākšanos"
 
 #: ../bin/src/ui_playbacksettingspage.h:368
 msgid ""
@@ -1134,7 +1135,7 @@ msgstr "BBC podraides"
 
 #: internet/googledrive/googledriveservice.cpp:221
 msgid "Check for updates"
-msgstr ""
+msgstr "Pārbaudīt atjauninājumu"
 
 #: ui/mainwindow.cpp:747
 msgid "Check for updates..."
@@ -1146,7 +1147,7 @@ msgstr ""
 
 #: smartplaylists/wizard.cpp:84
 msgid "Choose a name for your smart playlist"
-msgstr "Izvēlieties nosaukumu gudrajai dziesmu listei"
+msgstr "Izvēlieties nosaukumu gudrajam atskaņošanas sarakstam"
 
 #: engines/gstengine.cpp:928
 msgid "Choose automatically"
@@ -1158,7 +1159,7 @@ msgstr "Izvēlēties krāsu..."
 
 #: ../bin/src/ui_notificationssettingspage.h:468
 msgid "Choose font..."
-msgstr "Izvēlēties burtrakstu..."
+msgstr "Izvēlēties fontu..."
 
 #: ../bin/src/ui_visualisationselector.h:112
 msgid "Choose from the list"
@@ -1166,7 +1167,7 @@ msgstr "Izvēlēties no saraksta"
 
 #: smartplaylists/querywizardplugin.cpp:161
 msgid "Choose how the playlist is sorted and how many songs it will contain."
-msgstr "Izvēlies, kādā veidā kārtot dziesmu listi un no cik daudz dziesmām tā sastāvēs."
+msgstr "Izvēlies, kādā veidā kārtot atskaņošanas sarakstu un no cik daudz dziesmām tas sastāvēs."
 
 #: internet/podcasts/podcastsettingspage.cpp:143
 msgid "Choose podcast download directory"
@@ -1192,11 +1193,11 @@ msgstr ""
 #: transcoder/transcodedialog.cpp:61 widgets/lineedit.cpp:41
 #: ../bin/src/ui_queuemanager.h:138
 msgid "Clear"
-msgstr "Attīrīt"
+msgstr "Notīrīt"
 
 #: ../bin/src/ui_mainwindow.h:653 ../bin/src/ui_mainwindow.h:655
 msgid "Clear playlist"
-msgstr "Attīrīt dziesmu listi"
+msgstr "Notīrīt atskaņošanas sarakstu"
 
 #: smartplaylists/searchtermwidget.cpp:345
 #: visualisations/visualisationcontainer.cpp:215
@@ -1274,7 +1275,7 @@ msgstr ""
 
 #: library/libraryview.cpp:353
 msgid "Click here to add some music"
-msgstr "Spiediet te lai pievienotu mūziku"
+msgstr "Spiediet šeit, lai pievienotu mūziku"
 
 #: playlist/playlisttabbar.cpp:298
 msgid ""
@@ -1302,7 +1303,7 @@ msgstr "Aizvērt"
 
 #: playlist/playlisttabbar.cpp:55
 msgid "Close playlist"
-msgstr "Aizvērt dziesmu listi"
+msgstr "Aizvērt atskaņošanas sarakstu"
 
 #: visualisations/visualisationcontainer.cpp:135
 msgid "Close visualization"
@@ -1314,7 +1315,7 @@ msgstr "Aizverot programmu, tiks atcelta failu lejupielāde."
 
 #: ui/albumcovermanager.cpp:219
 msgid "Closing this window will stop searching for album covers."
-msgstr "Aizverot programu, tiks apturēta albūmu vāku meklēšana."
+msgstr "Aizverot programu, tiks apturēta albumu vāku meklēšana."
 
 #: ui/equalizer.cpp:114
 msgid "Club"
@@ -1625,11 +1626,11 @@ msgstr "Pielāgots"
 
 #: ../bin/src/ui_appearancesettingspage.h:285
 msgid "Custom image:"
-msgstr ""
+msgstr "Pielāgots attēls"
 
 #: ../bin/src/ui_notificationssettingspage.h:450
 msgid "Custom message settings"
-msgstr ""
+msgstr "Pielagoti ziņu iestatījumi"
 
 #: ../bin/src/ui_notificationssettingspage.h:464
 msgid "Custom..."
@@ -1664,7 +1665,7 @@ msgstr "Dienas"
 
 #: ../bin/src/ui_globalshortcutssettingspage.h:176
 msgid "De&fault"
-msgstr "Nok&lusētais"
+msgstr "Nok&lusējums"
 
 #: core/commandlineoptions.cpp:157
 msgid "Decrease the volume by 4%"
@@ -1720,7 +1721,7 @@ msgstr "Dzēst no diska..."
 
 #: ../bin/src/ui_podcastsettingspage.h:271
 msgid "Delete played episodes"
-msgstr ""
+msgstr "Dzēst atskaņotās sērijas"
 
 #: ui/equalizer.cpp:221 ../bin/src/ui_equalizer.h:168
 msgid "Delete preset"
@@ -1728,7 +1729,7 @@ msgstr "Dzēst uzstādījumu"
 
 #: library/libraryview.cpp:395
 msgid "Delete smart playlist"
-msgstr "Dzēst Smart Playlist"
+msgstr "Dzēst gudro atskaņošanas sarakstu"
 
 #: ../bin/src/ui_organisedialog.h:245
 msgid "Delete the original files"
