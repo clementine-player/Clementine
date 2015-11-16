@@ -407,6 +407,29 @@ const siteDescriptors = {
 		exclude: [[' data-reactid="','">']],
 		invalidIndicator: "We couldn't find that page."
 	}
+	"bollywoodlyrics.com (Bollywood songs)": {
+		url: "http://www.bollywoodlyrics.com/lyric/{Title}",
+		urlFormat: [
+			{punct: " _@;\\/\"\'\(\)\[\]", rep: "-" },
+			{punct: "\?", rep: "" },
+		],
+		title: "{title} Song Lyrics - BollywoodLyrics.com",
+		charset: "utf-8",
+		extract: [['<div class="entry-content">','</div>']],
+		invalidIndicator: "Couldn't find that page."
+	}
+	"hindilyrics.net (Bollywood Songs)": {
+		url: "http://www.hindilyrics.net/lyrics/of-{Title}.html",
+		urlFormat: [
+			{punct: " _@;\\/\"\'\(\)\[\]", rep: "%20" },
+			{punct: "\?", rep: "" },
+		],
+		title: "{title} ({album})",
+		charset: "utf-8",
+		extract: [['<div class=nm>Movie</div>:','</pre>']],
+		exclude: [['<span class=','">']],
+		invalidIndicator: "Couldn't find that page."
+	}
 }
 
 //	--------------------------------------------------------------------------------------------------------------------------------

@@ -11,6 +11,14 @@
       <item begin="[" end="]"/>
     </exclude>
   </provider>
+  <provider name="bollywoodlyrics.com (Bollywood songs)" title="{title} Song Lyrics - BollywoodLyrics.com" charset="utf-8" url="http://www.bollywoodlyrics.com/lyric/{Title}">
+    <urlFormat replace=" _@;\/&quot;'()[]" with="-"/>
+    <urlFormat replace="?" with=""/>
+    <extract>
+      <item begin="&lt;div class=&quot;entry-content&quot;&gt;" end="&lt;/div&gt;"/>
+    </extract>
+    <invalidIndicator value="Couldn't find that page."/>
+  </provider>
   <provider name="darklyrics.com" title ="{ARTIST} LYRICS - &quot;{title}&quot; ({year}) album"  charset="utf-8" url="http://www.darklyrics.com/lyrics/{artist2}/{album2}.html">
     <extract>
       <item begin="&lt;h3&gt;&lt;a name=&quot;{track}&quot;&gt;{track}. {Title2}&lt;/a&gt;&lt;/h3&gt;&lt;br /&gt;" end="&lt;h3&gt;"/>
@@ -50,6 +58,17 @@
     </extract>
     <invalidIndicator value="&quot;iTotalRecords&quot;: 0"/>
     <invalidIndicator value="lyrics not available"/>
+  </provider>
+  <provider name="hindilyrics.net (Bollywood songs)" title="{title} ({album})" charset="utf-8" url="http://www.hindilyrics.net/lyrics/of-{Title}.html">
+    <urlFormat replace=" _@;\/&quot;'()[]" with="%20"/>
+    <urlFormat replace="?" with=""/>
+    <extract>
+      <item begin="&lt;div class=nm&gt;Movie&lt;/div&gt;:" end="&lt;/pre&gt;"/>
+    </extract>
+    <exclude>
+      <item begin="&lt;span class=" end="&quot;&gt;"/>
+    </exclude>
+    <invalidIndicator value="Couldn't find that page."/>
   </provider>
   <provider name="letras.mus.br" title="" charset="utf-8" url="http://letras.terra.com.br/winamp.php?musica={title}&amp;artista={artist}">
     <urlFormat replace="_@,;&amp;\/&quot;" with="_"/>
