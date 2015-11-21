@@ -77,5 +77,5 @@ void RequestHandler::addAuthData( QNetworkRequest& request )
 
 void RequestHandler::addUserAgent( QNetworkRequest &request )
 {
-    request.setRawHeader("User-Agent", Config::instance()->userAgent().toAscii() );
+    request.setRawHeader("User-Agent", Config::instance()->userAgent().toLatin1() );
 }

@@ -20,15 +20,15 @@
 * USA                                                                      *
 ***************************************************************************/
 
-#include <QVariant>
+//#include <QVariant>
 #include <QList>
 #include <QUrl>
 #include <QString>
 #include <QDateTime>
 
-#include <serializer.h>
-
 #include "JsonCreator.h"
+
+#include "qjsonwrapper/Json.h"
 
 using namespace mygpo;
 
@@ -36,31 +36,28 @@ static qulonglong c_maxlonglong = (2^64)-1;
 
 QByteArray JsonCreator::addRemoveSubsToJSON( const QList< QUrl >& add, const QList< QUrl >& remove )
 {
-    QJson::Serializer serializer;
     QVariantMap jsonData;
     QVariant addVar( urlListToQVariantList( add ) );
     QVariant removeVar( urlListToQVariantList( remove ) );
     jsonData.insert( QString( QLatin1String( "add" ) ), addVar );
     jsonData.insert( QString( QLatin1String( "remove" ) ), removeVar );
-    QByteArray jsonByteArray = serializer.serialize( QVariant( jsonData ) );
+    QByteArray jsonByteArray = QJsonWrapper::toJson( QVariant( jsonData ) );
     return jsonByteArray;
 }
 
 QByteArray JsonCreator::saveSettingsToJSON( const QMap< QString, QVariant >& set, const QList< QString >& remove )
 {
-    QJson::Serializer serializer;
     QVariantMap jsonData;
     //QVariant setVar(stringMapToQVariantMap(set));
     QVariant removeVar( stringListToQVariantList( remove ) );
     jsonData.insert( QString( QLatin1String( "set" ) ), set );
     jsonData.insert( QString( QLatin1String( "remove" ) ), removeVar );
-    QByteArray jsonByteArray = serializer.serialize( QVariant( jsonData ) );
+    QByteArray jsonByteArray = QJsonWrapper::toJson( QVariant( jsonData ) );
     return jsonByteArray;
 }
 
 QByteArray JsonCreator::episodeActionListToJSON( const QList<EpisodeActionPtr>& episodeActions )
 {
-    QJson::Serializer serializer;
     QVariantList jsonData;
 
     foreach( const EpisodeActionPtr episodeAction, episodeActions )
@@ -68,19 +65,18 @@ QByteArray JsonCreator::episodeActionListToJSON( const QList<EpisodeActionPtr>& 
         jsonData.append( episodeActionToQVariantMap( episodeAction ) );
     }
 
-    QByteArray jsonByteArray = serializer.serialize( QVariant( jsonData ) );
+    QByteArray jsonByteArray = QJsonWrapper::toJson( QVariant( jsonData ) );
     return jsonByteArray;
 }
 
 QByteArray JsonCreator::renameDeviceStringToJSON( const QString& caption, const QString& type )
 {
-    QJson::Serializer serializer;
     QVariantMap jsonData;
     QVariant captionVar( caption );
     QVariant typeVar( type );
     jsonData.insert( QString( QLatin1String( "caption" ) ), captionVar );
     jsonData.insert( QString( QLatin1String( "type" ) ), typeVar );
-    QByteArray jsonByteArray = serializer.serialize( QVariant( jsonData ) );
+    QByteArray jsonByteArray = QJsonWrapper::toJson( QVariant( jsonData ) );
     return jsonByteArray;
 
 }
@@ -130,7 +126,7 @@ QByteArray JsonCreator::deviceSynchronizationListsToJSON(const QList< QStringLis
     jsonStr.append(syncVar);
     jsonStr.append(QLatin1String(" ,\"stop-synchronize\" : "));
     jsonStr.append(stopVar);
-    jsonStr.append(QLatin1String(" }\n"));
+    jsonStr.append(QLatin1String(" }"));
     return jsonStr.toLocal8Bit();
 }
 

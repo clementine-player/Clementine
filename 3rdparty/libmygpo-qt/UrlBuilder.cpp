@@ -74,7 +74,8 @@ QString UrlBuilder::getPodcastSearchUrl( const QString& query, Format f )
 
 QString UrlBuilder::getSubscriptionsUrl( const QString& username, const QString& device, UrlBuilder::Format f)
 {
-    return s_server % QLatin1String( "/subscriptions/" ) % username % QLatin1String( "/" ) % device % getFormatExtension( f );
+    QString deviceString = device.isNull() ? QString(QLatin1String("")) : (QLatin1String( "/" ) % device);
+    return s_server % QLatin1String( "/subscriptions/" ) % username % deviceString % getFormatExtension( f );
 }
 
 QString UrlBuilder::getTopTagsUrl( uint i )

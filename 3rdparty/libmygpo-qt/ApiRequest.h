@@ -1,6 +1,6 @@
 /***************************************************************************
 * This file is part of libmygpo-qt                                         *
-* Copyright (c) 2010 - 2013 Stefan Derkits <stefan@derkits.at>             *
+* Copyright (c) 2010 - 2014 Stefan Derkits <stefan@derkits.at>             *
 * Copyright (c) 2010 - 2011 Christian Wagner <christian.wagner86@gmx.at>   *
 * Copyright (c) 2010 - 2011 Felix Winter <ixos01@gmail.com>                *
 *                                                                          *
@@ -84,7 +84,7 @@ public:
      */
     QNetworkReply* suggestionsOpml( uint count );
 
-    QNetworkReply* downloadSubscriptionsOpml( const QString& username, const QString& device );
+    QNetworkReply* downloadSubscriptionsOpml( const QString& username, const QString& device = QString() );
 
     /**
      * Returns the TXT Result for the Simple API Call "Downloading Podcast Toplists"
@@ -111,7 +111,7 @@ public:
      */
     QNetworkReply* suggestionsTxt( uint count );
 
-    QNetworkReply* downloadSubscriptionsTxt( const QString& username, const QString& device );
+    QNetworkReply* downloadSubscriptionsTxt( const QString& username, const QString& device = QString() );
 
     /**
      * Returns the TXT Result for the Simple API Call "Downloading Podcast Toplists"
@@ -153,9 +153,9 @@ public:
      *
      */
     PodcastListPtr suggestions( uint count );
-    
-    QNetworkReply* downloadSubscriptionsJson( const QString& username, const QString& device );
-    
+
+    QNetworkReply* downloadSubscriptionsJson( const QString& username, const QString& device = QString() );
+
     //ADVANCED API
 
     /**
