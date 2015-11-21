@@ -1,9 +1,12 @@
 /* This file is part of Clementine.
    Copyright 2011, Tyler Rhodes <tyler.s.rhodes@gmail.com>
    Copyright 2011-2012, 2014, David Sansome <me@davidsansome.com>
+   Copyright 2014, Alibek Omarov <a1ba.omarov@gmail.com>
    Copyright 2014, John Maguire <john.maguire@gmail.com>
    Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
-
+   Copyright 2014-2015, Mark Furneaux <mark@furneaux.ca>
+   Copyright 2015, Arun Narayanankutty <n.arun.lifescience@gmail.com>
+   
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
    the Free Software Foundation, either version 3 of the License, or
@@ -18,24 +21,33 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "nyancatanalyzer.h"
+#include "rainbowanalyzer.h"
 
 #include <cmath>
 
 #include <QTimerEvent>
-#include <QBrush>
+#include <QBrush>  
 
 #include "core/arraysize.h"
 #include "core/logging.h"
 
 using Analyzer::Scope;
 
-const char* NyanCatAnalyzer::kName = "Nyanalyzer cat";
-const float NyanCatAnalyzer::kPixelScale = 0.02f;
+const int Rainbow::RainbowAnalyzer::kHeight[] = { 21, 33 };
+const int Rainbow::RainbowAnalyzer::kWidth[] = { 34, 53 };
+const int Rainbow::RainbowAnalyzer::kFrameCount[] = { 6, 16 };
+const int Rainbow::RainbowAnalyzer::kRainbowHeight[] = { 21, 16 };
+const int Rainbow::RainbowAnalyzer::kRainbowOverlap[] = { 13, 15 };
+const int Rainbow::RainbowAnalyzer::kSleepingHeight[] = { 24, 33 };
 
-NyanCatAnalyzer::NyanCatAnalyzer(QWidget* parent)
+const char* Rainbow::NyanCatAnalyzer::kName = "Nyanalyzer Cat";
+const char* Rainbow::RainbowDashAnalyzer::kName = "Rainbow Dash";
+const float Rainbow::RainbowAnalyzer::kPixelScale = 0.02f;
+
+Rainbow::RainbowAnalyzer::RainbowType Rainbow::RainbowAnalyzer::rainbowtype;
+
+Rainbow::RainbowAnalyzer::RainbowAnalyzer(const RainbowType& rbtype, QWidget* parent)
     : Analyzer::Base(parent, 9),
-      cat_(":/nyancat.png"),
       timer_id_(startTimer(kFrameIntervalMs)),
       frame_(0),
       current_buffer_(0),
@@ -43,12 +55,15 @@ NyanCatAnalyzer::NyanCatAnalyzer(QWidget* parent)
       px_per_frame_(0),
       x_offset_(0),
       background_brush_(QColor(0x0f, 0x43, 0x73)) {
+  rainbowtype = rbtype;
+  cat_dash_[0] = QPixmap(":/nyancat.png");
+  cat_dash_[1] = QPixmap(":/rainbowdash.png");
   memset(history_, 0, sizeof(history_));
 
   for (int i = 0; i < kRainbowBands; ++i) {
     colors_[i] = QPen(QColor::fromHsv(i * 255 / kRainbowBands, 255, 255),
-                      kCatHeight / kRainbowBands, Qt::SolidLine, Qt::FlatCap,
-                      Qt::RoundJoin);
+                      kRainbowHeight[rainbowtype] / kRainbowBands, 
+                      Qt::SolidLine, Qt::FlatCap, Qt::RoundJoin);
 
     // pow constants computed so that
     // | band_scale(0) | ~= .5 and | band_scale(5) | ~= 32
@@ -57,29 +72,30 @@ NyanCatAnalyzer::NyanCatAnalyzer(QWidget* parent)
   }
 }
 
-void NyanCatAnalyzer::transform(Scope& s) { fht_->spectrum(&s.front()); }
+void Rainbow::RainbowAnalyzer::transform(Scope& s) { fht_->spectrum(&s.front()); }
 
-void NyanCatAnalyzer::timerEvent(QTimerEvent* e) {
+void Rainbow::RainbowAnalyzer::timerEvent(QTimerEvent* e) {
   if (e->timerId() == timer_id_) {
-    frame_ = (frame_ + 1) % kCatFrameCount;
+    frame_ = (frame_ + 1) % kFrameCount[rainbowtype];
   } else {
     Analyzer::Base::timerEvent(e);
   }
 }
 
-void NyanCatAnalyzer::resizeEvent(QResizeEvent* e) {
+void Rainbow::RainbowAnalyzer::resizeEvent(QResizeEvent* e) {
   // Invalidate the buffer so it's recreated from scratch in the next paint
   // event.
   buffer_[0] = QPixmap();
   buffer_[1] = QPixmap();
 
-  available_rainbow_width_ = width() - kCatWidth + kRainbowOverlap;
+  available_rainbow_width_ = width() - kWidth[rainbowtype] 
+                             + kRainbowOverlap[rainbowtype];
   px_per_frame_ =
       static_cast<float>(available_rainbow_width_) / (kHistorySize - 1) + 1;
   x_offset_ = px_per_frame_ * (kHistorySize - 1) - available_rainbow_width_;
 }
 
-void NyanCatAnalyzer::analyze(QPainter& p, const Analyzer::Scope& s,
+void Rainbow::RainbowAnalyzer::analyze(QPainter& p, const Analyzer::Scope& s,
                               bool new_frame) {
   // Discard the second half of the transform
   const int scope_size = s.size() / 2;
@@ -113,13 +129,15 @@ void NyanCatAnalyzer::analyze(QPainter& p, const Analyzer::Scope& s,
     QPointF* dest = polyline;
     float* source = history_;
 
-    const float top_of_cat =
-        static_cast<float>(height()) / 2 - static_cast<float>(kCatHeight) / 2;
+    const float top_of =
+        static_cast<float>(height()) / 2 - static_cast<float>(
+          kRainbowHeight[rainbowtype]) / 2;
     for (int band = 0; band < kRainbowBands; ++band) {
       // Calculate the Y position of this band.
       const float y =
-          static_cast<float>(kCatHeight) / (kRainbowBands + 1) * (band + 0.5) +
-          top_of_cat;
+          static_cast<float>(kRainbowHeight[rainbowtype]) / (
+            kRainbowBands + 1) * (band + 0.5) +
+          top_of;
 
       // Add each point in the line.
       for (int x = 0; x < kHistorySize; ++x) {
@@ -160,8 +178,8 @@ void NyanCatAnalyzer::analyze(QPainter& p, const Analyzer::Scope& s,
           x_offset_ + available_rainbow_width_ - px_per_frame_, 0);
       buffer_painter.fillRect(
           x_offset_ + available_rainbow_width_ - px_per_frame_, 0,
-          kCatWidth - kRainbowOverlap + px_per_frame_, height(),
-          background_brush_);
+          kWidth[rainbowtype] - kRainbowOverlap[rainbowtype] + px_per_frame_, 
+          height(), background_brush_);
 
       for (int band = kRainbowBands - 1; band >= 0; --band) {
         buffer_painter.setPen(colors_[band]);
@@ -174,12 +192,22 @@ void NyanCatAnalyzer::analyze(QPainter& p, const Analyzer::Scope& s,
   // Draw the buffer on to the widget
   p.drawPixmap(0, 0, buffer_[current_buffer_], x_offset_, 0, 0, 0);
 
-  // Draw nyan cat (he's been waiting for this for 75 lines).
-  // Nyan nyan nyan nyan.
+  // Draw rainbow analyzer (nyan cat or rainbowdash)
+  // Nyan nyan nyan nyan dash dash dash dash.
   if (!is_playing_) {
     // Ssshhh!
-    p.drawPixmap(SleepingCatDestRect(), cat_, SleepingCatSourceRect());
+    p.drawPixmap(SleepingDestRect(rainbowtype), cat_dash_[rainbowtype], 
+                 SleepingSourceRect(rainbowtype));
   } else {
-    p.drawPixmap(CatDestRect(), cat_, CatSourceRect());
+    p.drawPixmap(DestRect(rainbowtype), cat_dash_[rainbowtype], 
+                 SourceRect(rainbowtype));
   }
+}
+
+Rainbow::NyanCatAnalyzer::NyanCatAnalyzer(QWidget* parent)
+  :RainbowAnalyzer(Rainbow::RainbowAnalyzer::Nyancat, parent) {
+}
+
+Rainbow::RainbowDashAnalyzer::RainbowDashAnalyzer(QWidget* parent)
+  :RainbowAnalyzer(Rainbow::RainbowAnalyzer::Dash, parent) {
 }
