@@ -903,14 +903,13 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
   qLog(Debug) << "Loading settings";
   settings_.beginGroup(kSettingsGroup);
 
-  // Set window Geometry if the window was closed in normal mode
-  // else set it to window maximized
+  // Set last used geometry to position window on the correct monitor
+  // Set window state only if the window was last maximized
   was_maximized_ = settings_.value("maximized", false).toBool();
-  if (!was_maximized_) {
-    restoreGeometry(settings_.value("geometry").toByteArray());    
-  } else {
+  restoreGeometry(settings_.value("geometry").toByteArray());
+  if (was_maximized_) {
     setWindowState(windowState() | Qt::WindowMaximized);
-  } 
+  }
 
   if (!ui_->splitter->restoreState(
           settings_.value("splitter_state").toByteArray())) {
