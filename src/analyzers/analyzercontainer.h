@@ -99,9 +99,8 @@ template <typename T>
 void AnalyzerContainer::AddAnalyzerType() {
   int id = analyzer_types_.count();
   analyzer_types_ << &T::staticMetaObject;
-
   QAction* action =
-      context_menu_->addAction(tr(T::kName), mapper_, SLOT(map()));
+    context_menu_->addAction(tr(T::kName), mapper_, SLOT(map()));
   group_->addAction(action);
   mapper_->setMapping(action, id);
   action->setCheckable(true);
