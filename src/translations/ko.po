@@ -19,7 +19,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2015-10-26 12:15+0000\n"
+"PO-Revision-Date: 2015-11-16 15:02+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Korean (http://www.transifex.com/davidsansome/clementine/language/ko/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -478,7 +478,7 @@ msgstr "다른 스트림 추가..."
 msgid "Add directory..."
 msgstr "디렉토리 추가..."
 
-#: ui/mainwindow.cpp:1915
+#: ui/mainwindow.cpp:1914
 msgid "Add file"
 msgstr "파일 추가"
 
@@ -498,7 +498,7 @@ msgstr "파일 추가..."
 msgid "Add files to transcode"
 msgstr "변환할 파일 추가"
 
-#: transcoder/transcodedialog.cpp:306 ui/mainwindow.cpp:1942
+#: transcoder/transcodedialog.cpp:306 ui/mainwindow.cpp:1941
 #: ripper/ripcddialog.cpp:185
 msgid "Add folder"
 msgstr "폴더 추가"
@@ -615,7 +615,7 @@ msgstr "Spotify 재색목록에 추가"
 msgid "Add to Spotify starred"
 msgstr "Spotify 별점에 추가"
 
-#: ui/mainwindow.cpp:1736
+#: ui/mainwindow.cpp:1735
 msgid "Add to another playlist"
 msgstr "다른 재생목록에 추가"
 
@@ -1713,7 +1713,7 @@ msgid "Delete downloaded data"
 msgstr "다운로드된 데이터 삭제"
 
 #: devices/deviceview.cpp:408 library/libraryview.cpp:639
-#: ui/mainwindow.cpp:2278 widgets/fileview.cpp:186
+#: ui/mainwindow.cpp:2277 widgets/fileview.cpp:186
 msgid "Delete files"
 msgstr "파일 삭제"
 
@@ -1746,11 +1746,11 @@ msgstr "원본 파일 삭제"
 msgid "Deleting files"
 msgstr "파일 삭제 중"
 
-#: ui/mainwindow.cpp:1657
+#: ui/mainwindow.cpp:1656
 msgid "Dequeue selected tracks"
 msgstr "선택한 트랙을 대기열에서 해제"
 
-#: ui/mainwindow.cpp:1655
+#: ui/mainwindow.cpp:1654
 msgid "Dequeue track"
 msgstr "트랙을 대기열에서 해제"
 
@@ -2021,7 +2021,7 @@ msgstr "다이나믹 랜덤 믹스"
 msgid "Edit smart playlist..."
 msgstr "스마트 재생목록 편집..."
 
-#: ui/mainwindow.cpp:1699
+#: ui/mainwindow.cpp:1698
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr "태그 수정 \"%1\"..."
@@ -2160,8 +2160,8 @@ msgid "Equivalent to --log-levels *:3"
 msgstr "동등한 --log-level *:3"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:242
-#: library/libraryview.cpp:633 ui/mainwindow.cpp:1981 ui/mainwindow.cpp:2228
-#: ui/mainwindow.cpp:2376 internet/vk/vkservice.cpp:641
+#: library/libraryview.cpp:633 ui/mainwindow.cpp:1980 ui/mainwindow.cpp:2227
+#: ui/mainwindow.cpp:2375 internet/vk/vkservice.cpp:641
 msgid "Error"
 msgstr "오류"
 
@@ -2325,7 +2325,7 @@ msgstr "페이드 아웃"
 msgid "Fading duration"
 msgstr "페이드 아웃 시간"
 
-#: ui/mainwindow.cpp:1982
+#: ui/mainwindow.cpp:1981
 msgid "Failed reading CD drive"
 msgstr "CD 드라이브 읽기 실패"
 
@@ -3010,7 +3010,7 @@ msgstr "라이브러리 "
 msgid "Library advanced grouping"
 msgstr "향상된 그룹 "
 
-#: ui/mainwindow.cpp:2500
+#: ui/mainwindow.cpp:2499
 msgid "Library rescan notice"
 msgstr "라이브러리 재탐색 알림"
 
@@ -3344,7 +3344,7 @@ msgstr "라이브러리로 이동..."
 msgid "Move up"
 msgstr "위로 이동"
 
-#: transcoder/transcodedialog.cpp:225 ui/mainwindow.cpp:1916
+#: transcoder/transcodedialog.cpp:225 ui/mainwindow.cpp:1915
 #: internet/vk/vkservice.cpp:906
 msgid "Music"
 msgstr "음악"
@@ -3415,7 +3415,7 @@ msgstr "재생을 시작하지 않음"
 msgid "New folder"
 msgstr "새 폴더"
 
-#: ui/mainwindow.cpp:1753 ../bin/src/ui_mainwindow.h:690
+#: ui/mainwindow.cpp:1752 ../bin/src/ui_mainwindow.h:690
 msgid "New playlist"
 msgstr "새로운 재생목록"
 
@@ -3478,7 +3478,7 @@ msgstr "짧은 블록 "
 msgid "None"
 msgstr "없음"
 
-#: library/libraryview.cpp:634 ui/mainwindow.cpp:2229 ui/mainwindow.cpp:2377
+#: library/libraryview.cpp:634 ui/mainwindow.cpp:2228 ui/mainwindow.cpp:2376
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "선택된 음악들이 장치에 복사되기 적합하지 않음"
 
@@ -3490,7 +3490,7 @@ msgstr "일반"
 msgid "Normal block type"
 msgstr "일반 블록 형식"
 
-#: playlist/playlistsequence.cpp:199
+#: playlist/playlistsequence.cpp:203
 msgid "Not available while using a dynamic playlist"
 msgstr "다이나믹 재생목록을 사용 중일 때는 사용할 수 없습니다."
 
@@ -3761,7 +3761,7 @@ msgstr "파티"
 msgid "Password"
 msgstr "비밀번호"
 
-#: core/globalshortcuts.cpp:50 ui/mainwindow.cpp:1071 ui/mainwindow.cpp:1566
+#: core/globalshortcuts.cpp:50 ui/mainwindow.cpp:1070 ui/mainwindow.cpp:1565
 #: ui/qtsystemtrayicon.cpp:175 wiimotedev/wiimotesettingspage.cpp:108
 msgid "Pause"
 msgstr "일시중지"
@@ -3788,8 +3788,8 @@ msgstr "픽셀"
 msgid "Plain sidebar"
 msgstr "일반 사이드바"
 
-#: core/globalshortcuts.cpp:49 ui/mainwindow.cpp:611 ui/mainwindow.cpp:1039
-#: ui/mainwindow.cpp:1057 ui/mainwindow.cpp:1569 ui/qtsystemtrayicon.cpp:164
+#: core/globalshortcuts.cpp:49 ui/mainwindow.cpp:611 ui/mainwindow.cpp:1038
+#: ui/mainwindow.cpp:1056 ui/mainwindow.cpp:1568 ui/qtsystemtrayicon.cpp:164
 #: ui/qtsystemtrayicon.cpp:188 wiimotedev/wiimotesettingspage.cpp:101
 #: ../bin/src/ui_mainwindow.h:641
 msgid "Play"
@@ -4003,12 +4003,12 @@ msgstr "장치 질의..."
 msgid "Queue Manager"
 msgstr "대기열 관리자"
 
-#: ui/mainwindow.cpp:1661
+#: ui/mainwindow.cpp:1660
 msgid "Queue selected tracks"
 msgstr "선택한 트랙을 큐에 추가"
 
 #: globalsearch/globalsearchview.cpp:466 library/libraryview.cpp:383
-#: ui/mainwindow.cpp:1659
+#: ui/mainwindow.cpp:1658
 msgid "Queue track"
 msgstr "대기열 트랙"
 
@@ -4158,7 +4158,7 @@ msgstr "재생목록 이름 바꾸기..."
 msgid "Renumber tracks in this order..."
 msgstr "이 순서에서 트랙 번호를 다시 부여..."
 
-#: playlist/playlistsequence.cpp:203 ../bin/src/ui_playlistsequence.h:121
+#: playlist/playlistsequence.cpp:207 ../bin/src/ui_playlistsequence.h:121
 msgid "Repeat"
 msgstr "반복"
 
@@ -4444,7 +4444,7 @@ msgid "Seek the currently playing track to an absolute position"
 msgstr "현재 재생중인 트랙을 절대 위치로 탐색"
 
 #: ../bin/src/ui_behavioursettingspage.h:357
-msgid "Seeking using a keyboard shortcut"
+msgid "Seeking using a keyboard shortcut or mouse wheel"
 msgstr ""
 
 #: visualisations/visualisationselector.cpp:37 ../bin/src/ui_ripcddialog.h:309
@@ -4503,7 +4503,7 @@ msgstr "서버 자세히"
 msgid "Service offline"
 msgstr "서비스 오프라인"
 
-#: ui/mainwindow.cpp:1698
+#: ui/mainwindow.cpp:1697
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr "%1을 \"%2\"로 설정..."
@@ -4656,7 +4656,7 @@ msgstr "출처의 사용가능 여부 보기"
 msgid "Show/Hide"
 msgstr "보기/숨기기"
 
-#: playlist/playlistsequence.cpp:202 ../bin/src/ui_playlistsequence.h:124
+#: playlist/playlistsequence.cpp:206 ../bin/src/ui_playlistsequence.h:124
 msgid "Shuffle"
 msgstr "섞기"
 
@@ -4716,11 +4716,11 @@ msgstr "넘긴 회수"
 msgid "Skip forwards in playlist"
 msgstr "재생목록에서 앞으로 넘기기"
 
-#: ui/mainwindow.cpp:1672
+#: ui/mainwindow.cpp:1671
 msgid "Skip selected tracks"
 msgstr "선택된 트랙들 "
 
-#: ui/mainwindow.cpp:1670
+#: ui/mainwindow.cpp:1669
 msgid "Skip track"
 msgstr "트랙 "
 
@@ -5030,7 +5030,7 @@ msgid ""
 "license key. Visit subsonic.org for details."
 msgstr "Subsonic의 시험 기간이 끝났습니다. 라이센스 키를 얻기위한 기부를 해주세요. 자세한 사항은 subsonic.org 에서 확인하세요."
 
-#: ui/mainwindow.cpp:2491
+#: ui/mainwindow.cpp:2490
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -5072,7 +5072,7 @@ msgid ""
 "continue?"
 msgstr "파일들이 장치로 부터 삭제 될 것 입니다. 계속 진행 하시겠습니까?"
 
-#: library/libraryview.cpp:640 ui/mainwindow.cpp:2279 widgets/fileview.cpp:187
+#: library/libraryview.cpp:640 ui/mainwindow.cpp:2278 widgets/fileview.cpp:187
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -5171,7 +5171,7 @@ msgstr "예쁜 OSD 토글"
 msgid "Toggle fullscreen"
 msgstr "전체화면 토글"
 
-#: ui/mainwindow.cpp:1663
+#: ui/mainwindow.cpp:1662
 msgid "Toggle queue status"
 msgstr "대기열 상황 토글"
 
@@ -5293,11 +5293,11 @@ msgstr "알 수 없는 오류"
 msgid "Unset cover"
 msgstr "커버 해제"
 
-#: ui/mainwindow.cpp:1668
+#: ui/mainwindow.cpp:1667
 msgid "Unskip selected tracks"
 msgstr "선택된 트랙들 넘기기 "
 
-#: ui/mainwindow.cpp:1666
+#: ui/mainwindow.cpp:1665
 msgid "Unskip track"
 msgstr "트랙 넘기기 "
 
@@ -5611,7 +5611,7 @@ msgid ""
 "well?"
 msgstr ""
 
-#: ui/mainwindow.cpp:2498
+#: ui/mainwindow.cpp:2497
 msgid "Would you like to run a full rescan right now?"
 msgstr "지금 전부 다시 검색해도 좋습니까?"
 
