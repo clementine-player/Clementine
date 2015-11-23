@@ -121,7 +121,7 @@ void BarAnalyzer::psychedelicModeChanged(bool enabled) {
 }
 
 void BarAnalyzer::analyze(QPainter& p, const Scope& s, bool new_frame) {
-  if (!new_frame) {
+  if (!new_frame  || engine_->state() == Engine::Paused) {
     p.drawPixmap(0, 0, canvas_);
     return;
   }
