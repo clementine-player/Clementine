@@ -1647,7 +1647,11 @@ PlaylistItemList Playlist::RemoveItemsWithoutUndo(int row, int count) {
 
   // Reset current_virtual_index_
   if (current_row() == -1)
-    current_virtual_index_ = -1;
+    if (row - 1 > 0 && row - 1 < items_.size()) {
+      current_virtual_index_ = virtual_items_.indexOf(row - 1);
+    } else {
+      current_virtual_index_ = -1;
+    }
   else
     current_virtual_index_ = virtual_items_.indexOf(current_row());
 
