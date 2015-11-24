@@ -59,7 +59,7 @@ namespace TagLib {
       TypeDateTime  = 17, // in UTC, counting seconds since midnight, January 1, 1904; 32 or 64-bits
       TypeGenred    = 18, // a list of enumerated values
       TypeInteger   = 21, // a signed big-endian integer with length one of { 1,2,3,4,8 } bytes
-      TypeRIAAPA    = 24, // RIAA parental advisory; { -1=no, 1=yes, 0=unspecified }, 8-bit ingteger
+      TypeRIAAPA    = 24, // RIAA parental advisory; { -1=no, 1=yes, 0=unspecified }, 8-bit integer
       TypeUPC       = 25, // Universal Product Code, in text UTF-8 format (valid as an ID)
       TypeBMP       = 27, // Windows bitmap image
       TypeUndefined = 255 // undefined

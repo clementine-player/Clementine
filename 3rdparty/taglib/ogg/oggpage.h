@@ -41,7 +41,7 @@ namespace TagLib {
     /*!
      * This is an implementation of the pages that make up an Ogg stream.
      * This handles parsing pages and breaking them down into packets and handles
-     * the details of packets spanning multiple pages and pages that contiain
+     * the details of packets spanning multiple pages and pages that contain
      * multiple packets.
      *
      * In most Xiph.org formats the comments are found in the first few packets,
@@ -162,7 +162,7 @@ namespace TagLib {
 
       /*!
        * Pack \a packets into Ogg pages using the \a strategy for pagination.
-       * The page number indicater inside of the rendered packets will start
+       * The page number indicator inside of the rendered packets will start
        * with \a firstPage and be incremented for each page rendered.
        * \a containsLastPacket should be set to true if \a packets contains the
        * last page in the stream and will set the appropriate flag in the last

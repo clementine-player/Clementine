@@ -254,12 +254,49 @@ ByteVector Frame::fieldData(const ByteVector &frameData) const
   if(d->header->compression() &&
      !d->header->encryption())
   {
-    ByteVector data(frameDataLength);
-    uLongf uLongTmp = frameDataLength;
-    ::uncompress((Bytef *) data.data(),
-                 (uLongf *) &uLongTmp,
-                 (Bytef *) frameData.data() + frameDataOffset,
-                 size());
+    if(frameData.size() <= frameDataOffset) {
+      debug("Compressed frame doesn't have enough data to decode");
+      return ByteVector();
+    }
+
+    z_stream stream = {};
+
+    if(inflateInit(&stream) != Z_OK)
+      return ByteVector();
+
+    stream.avail_in = (uLongf) frameData.size() - frameDataOffset;
+    stream.next_in = (Bytef *) frameData.data() + frameDataOffset;
+
+    static const uint chunkSize = 1024;
+
+    ByteVector data;
+    ByteVector chunk(chunkSize);
+
+    do {
+      stream.avail_out = (uLongf) chunk.size();
+      stream.next_out = (Bytef *) chunk.data();
+
+      int result = inflate(&stream, Z_NO_FLUSH);
+
+      if(result == Z_STREAM_ERROR ||
+         result == Z_NEED_DICT ||
+         result == Z_DATA_ERROR ||
+         result == Z_MEM_ERROR)
+      {
+        if(result != Z_STREAM_ERROR)
+          inflateEnd(&stream);
+        debug("Error reading compressed stream");
+        return ByteVector();
+      }
+
+      data.append(stream.avail_out == 0 ? chunk : chunk.mid(0, chunk.size() - stream.avail_out));
+    } while(stream.avail_out == 0);
+
+    inflateEnd(&stream);
+
+    if(frameDataLength != data.size())
+      debug("frameDataLength does not match the data length returned by zlib");
+
     return data;
   }
   else

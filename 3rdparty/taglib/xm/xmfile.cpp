@@ -329,7 +329,7 @@ public:
   uint read(TagLib::File &file, uint limit)
   {
     uint sumcount = 0;
-    for(List<Reader*>::Iterator i = m_readers.begin();
+    for(List<Reader*>::ConstIterator i = m_readers.begin();
         limit > 0 && i != m_readers.end(); ++ i) {
       uint count = (*i)->read(file, limit);
       limit    -= count;
@@ -403,97 +403,90 @@ bool XM::File::save()
     debug("XM::File::save() - Cannot save to a read only file.");
     return false;
   }
+
   seek(17);
   writeString(d->tag.title(), 20);
-  seek(1, Current);
+
+  seek(38);
   writeString(d->tag.trackerName(), 20);
-  seek(2, Current);
+
+  seek(60);
   ulong headerSize = 0;
   if(!readU32L(headerSize))
     return false;
-  seek(2+2+2, Current);
 
+  seek(70);
   ushort patternCount = 0;
   ushort instrumentCount = 0;
   if(!readU16L(patternCount) || !readU16L(instrumentCount))
     return false;
 
-  seek(60 + headerSize);
+  long pos = 60 + headerSize; // should be offset_t in taglib2.
 
   // need to read patterns again in order to seek to the instruments:
   for(ushort i = 0; i < patternCount; ++ i) {
+    seek(pos);
     ulong patternHeaderLength = 0;
     if(!readU32L(patternHeaderLength) || patternHeaderLength < 4)
       return false;
 
+    seek(pos + 7);
     ushort dataSize = 0;
-    StructReader pattern;
-    pattern.skip(3).u16L(dataSize);
-
-    uint count = pattern.read(*this, patternHeaderLength - 4U);
-    if(count != std::min(patternHeaderLength - 4U, (ulong)pattern.size()))
+    if (!readU16L(dataSize))
       return false;
 
-    seek(patternHeaderLength - (4 + count) + dataSize, Current);
+    pos += patternHeaderLength + dataSize;
   }
 
-  StringList lines = d->tag.comment().split("\n");
+  const StringList lines = d->tag.comment().split("\n");
   uint sampleNameIndex = instrumentCount;
   for(ushort i = 0; i < instrumentCount; ++ i) {
+    seek(pos);
     ulong instrumentHeaderSize = 0;
     if(!readU32L(instrumentHeaderSize) || instrumentHeaderSize < 4)
       return false;
 
-    uint len = std::min(22UL, instrumentHeaderSize - 4U);
+    seek(pos + 4);
+    const uint len = std::min(22UL, instrumentHeaderSize - 4U);
     if(i >= lines.size())
       writeString(String::null, len);
     else
       writeString(lines[i], len);
 
-    long offset = 0;
+    ushort sampleCount = 0;
     if(instrumentHeaderSize >= 29U) {
-      ushort sampleCount = 0;
-      seek(1, Current);
+      seek(pos + 27);
       if(!readU16L(sampleCount))
         return false;
+    }
 
-      if(sampleCount > 0) {
-        ulong sampleHeaderSize = 0;
-        if(instrumentHeaderSize < 33U || !readU32L(sampleHeaderSize))
+    ulong sampleHeaderSize = 0;
+    if(sampleCount > 0) {
+      seek(pos + 29);
+      if(instrumentHeaderSize < 33U || !readU32L(sampleHeaderSize))
+        return false;
+    }
+
+    pos += instrumentHeaderSize;
+
+    for(ushort j = 0; j < sampleCount; ++ j) {
+      if(sampleHeaderSize > 4U) {
+        seek(pos);
+        ulong sampleLength = 0;
+        if(!readU32L(sampleLength))
           return false;
-        // skip unhandeled header proportion:
-        seek(instrumentHeaderSize - 33, Current);
 
-        for(ushort j = 0; j < sampleCount; ++ j) {
-          if(sampleHeaderSize > 4U) {
-            ulong sampleLength = 0;
-            if(!readU32L(sampleLength))
-              return false;
-            offset += sampleLength;
-
-            seek(std::min(sampleHeaderSize, 14UL), Current);
-            if(sampleHeaderSize > 18U) {
-              uint len = std::min(sampleHeaderSize - 18U, 22UL);
-              if(sampleNameIndex >= lines.size())
-                writeString(String::null, len);
-              else
-                writeString(lines[sampleNameIndex ++], len);
-              seek(sampleHeaderSize - (18U + len), Current);
-            }
-          }
-          else {
-            seek(sampleHeaderSize, Current);
-          }
+        if(sampleHeaderSize > 18U) {
+          seek(pos + 18);
+          const uint len = std::min(sampleHeaderSize - 18U, 22UL);
+          if(sampleNameIndex >= lines.size())
+            writeString(String::null, len);
+          else
+            writeString(lines[sampleNameIndex ++], len);
         }
       }
-      else {
-        offset = instrumentHeaderSize - 29;
-      }
+      pos += sampleHeaderSize;
     }
-    else {
-      offset = instrumentHeaderSize - (4 + len);
-    }
-    seek(offset, Current);
   }
 
   return true;

@@ -154,12 +154,12 @@ String PropertyMap::toString() const
 
 void PropertyMap::removeEmpty()
 {
-  StringList emptyKeys;
-  for(Iterator it = begin(); it != end(); ++it)
-    if(it->second.isEmpty())
-      emptyKeys.append(it->first);
-  for(StringList::Iterator emptyIt = emptyKeys.begin(); emptyIt != emptyKeys.end(); emptyIt++ )
-    erase(*emptyIt);
+  PropertyMap m;
+  for(ConstIterator it = begin(); it != end(); ++it) {
+    if(!it->second.isEmpty())
+      m.insert(it->first, it->second);
+  }
+  *this = m;
 }
 
 StringList &PropertyMap::unsupportedData()

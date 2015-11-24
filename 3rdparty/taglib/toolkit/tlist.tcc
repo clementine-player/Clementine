@@ -208,6 +208,7 @@ bool List<T>::isEmpty() const
 template <class T>
 typename List<T>::Iterator List<T>::find(const T &value)
 {
+  detach();
   return std::find(d->list.begin(), d->list.end(), value);
 }
 
@@ -265,9 +266,7 @@ template <class T>
 T &List<T>::operator[](uint i)
 {
   Iterator it = d->list.begin();
-
-  for(uint j = 0; j < i; j++)
-    ++it;
+  std::advance(it, i);
 
   return *it;
 }
@@ -276,9 +275,7 @@ template <class T>
 const T &List<T>::operator[](uint i) const
 {
   ConstIterator it = d->list.begin();
-
-  for(uint j = 0; j < i; j++)
-    ++it;
+  std::advance(it, i);
 
   return *it;
 }

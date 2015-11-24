@@ -61,11 +61,49 @@ namespace TagLib {
          */
         virtual ~Properties();
 
-        // Reimplementations.
-
+        /*!
+         * Returns the length of the file in seconds.  The length is rounded down to
+         * the nearest whole second.
+         *
+         * \note This method is just an alias of lengthInSeconds().
+         *
+         * \deprecated
+         */
         virtual int length() const;
+
+        /*!
+         * Returns the length of the file in seconds.  The length is rounded down to
+         * the nearest whole second.
+         *
+         * \see lengthInMilliseconds()
+         */
+        // BIC: make virtual
+        int lengthInSeconds() const;
+
+        /*!
+         * Returns the length of the file in milliseconds.
+         *
+         * \see lengthInSeconds()
+         */
+        // BIC: make virtual
+        int lengthInMilliseconds() const;
+
+        /*!
+         * Returns the average bit rate of the file in kb/s.
+         */
         virtual int bitrate() const;
+
+        /*!
+         * Returns the sample rate in Hz.
+         *
+         * \note Always returns 48000, because Opus can decode any stream at a
+         * sample rate of 8, 12, 16, 24, or 48 kHz,
+         */
         virtual int sampleRate() const;
+
+        /*!
+         * Returns the number of audio channels.
+         */
         virtual int channels() const;
 
         /*!
@@ -76,7 +114,7 @@ namespace TagLib {
         int inputSampleRate() const;
 
         /*!
-         * Returns the Opus version, currently "0" (as specified by the spec).
+         * Returns the Opus version, in the range 0...255.
          */
         int opusVersion() const;
 
@@ -84,7 +122,7 @@ namespace TagLib {
         Properties(const Properties &);
         Properties &operator=(const Properties &);
 
-        void read();
+        void read(File *file);
 
         class PropertiesPrivate;
         PropertiesPrivate *d;

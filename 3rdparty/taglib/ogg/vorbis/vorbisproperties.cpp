@@ -36,9 +36,7 @@ using namespace TagLib;
 class Vorbis::Properties::PropertiesPrivate
 {
 public:
-  PropertiesPrivate(File *f, ReadStyle s) :
-    file(f),
-    style(s),
+  PropertiesPrivate() :
     length(0),
     bitrate(0),
     sampleRate(0),
@@ -48,8 +46,6 @@ public:
     bitrateNominal(0),
     bitrateMinimum(0) {}
 
-  File *file;
-  ReadStyle style;
   int length;
   int bitrate;
   int sampleRate;
@@ -72,10 +68,11 @@ namespace TagLib {
 // public members
 ////////////////////////////////////////////////////////////////////////////////
 
-Vorbis::Properties::Properties(File *file, ReadStyle style) : AudioProperties(style)
+Vorbis::Properties::Properties(File *file, ReadStyle style) :
+  AudioProperties(style),
+  d(new PropertiesPrivate())
 {
-  d = new PropertiesPrivate(file, style);
-  read();
+  read(file);
 }
 
 Vorbis::Properties::~Properties()
@@ -85,12 +82,22 @@ Vorbis::Properties::~Properties()
 
 int Vorbis::Properties::length() const
 {
+  return lengthInSeconds();
+}
+
+int Vorbis::Properties::lengthInSeconds() const
+{
+  return d->length / 1000;
+}
+
+int Vorbis::Properties::lengthInMilliseconds() const
+{
   return d->length;
 }
 
 int Vorbis::Properties::bitrate() const
 {
-  return int(float(d->bitrate) / float(1000) + 0.5);
+  return d->bitrate;
 }
 
 int Vorbis::Properties::sampleRate() const
@@ -127,11 +134,15 @@ int Vorbis::Properties::bitrateMinimum() const
 // private members
 ////////////////////////////////////////////////////////////////////////////////
 
-void Vorbis::Properties::read()
+void Vorbis::Properties::read(File *file)
 {
   // Get the identification header from the Ogg implementation.
 
-  ByteVector data = d->file->packet(0);
+  const ByteVector data = file->packet(0);
+  if(data.size() < 28) {
+    debug("Vorbis::Properties::read() -- data is too short.");
+    return;
+  }
 
   uint pos = 0;
 
@@ -158,26 +169,38 @@ void Vorbis::Properties::read()
   pos += 4;
 
   d->bitrateMinimum = data.toUInt(pos, false);
-
-  // TODO: Later this should be only the "fast" mode.
-  d->bitrate = d->bitrateNominal;
+  pos += 4;
 
   // Find the length of the file.  See http://wiki.xiph.org/VorbisStreamLength/
   // for my notes on the topic.
 
-  const Ogg::PageHeader *first = d->file->firstPageHeader();
-  const Ogg::PageHeader *last = d->file->lastPageHeader();
+  const Ogg::PageHeader *first = file->firstPageHeader();
+  const Ogg::PageHeader *last  = file->lastPageHeader();
 
   if(first && last) {
-    long long start = first->absoluteGranularPosition();
-    long long end = last->absoluteGranularPosition();
+    const long long start = first->absoluteGranularPosition();
+    const long long end   = last->absoluteGranularPosition();
 
-    if(start >= 0 && end >= 0 && d->sampleRate > 0)
-      d->length = (int)((end - start) / (long long) d->sampleRate);
-    else
+    if(start >= 0 && end >= 0 && d->sampleRate > 0) {
+      const long long frameCount = end - start;
+
+      if(frameCount > 0) {
+        const double length = frameCount * 1000.0 / d->sampleRate;
+
+        d->length  = static_cast<int>(length + 0.5);
+        d->bitrate = static_cast<int>(file->length() * 8.0 / length + 0.5);
+      }
+    }
+    else {
       debug("Vorbis::Properties::read() -- Either the PCM values for the start or "
             "end of this file was incorrect or the sample rate is zero.");
+    }
   }
   else
     debug("Vorbis::Properties::read() -- Could not find valid first and last Ogg pages.");
+
+  // Alternative to the actual average bitrate.
+
+  if(d->bitrate == 0 && d->bitrateNominal > 0)
+    d->bitrate = static_cast<int>(d->bitrateNominal / 1000.0 + 0.5);
 }

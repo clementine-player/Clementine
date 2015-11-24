@@ -106,11 +106,6 @@
     bit mask & shift operations.
 ------------------------------------------------------------------------ */
 
-// Workaround for when MSVC doesn't have wchar_t as a built-in type.  
-#if defined(_MSC_VER) && !defined(_WCHAR_T_DEFINED)
-# include <wchar.h>
-#endif
-
 /* Some fundamental constants */
 #define UNI_REPLACEMENT_CHAR (UTF32)0x0000FFFD
 #define UNI_MAX_BMP (UTF32)0x0000FFFF

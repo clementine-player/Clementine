@@ -64,11 +64,13 @@ MP4::Item::Item(const Item &item) : d(item.d)
 MP4::Item &
 MP4::Item::operator=(const Item &item)
 {
-  if(d->deref()) {
-    delete d;
+  if(&item != this) {
+    if(d->deref()) {
+      delete d;
+    }
+    d = item.d;
+    d->ref();
   }
-  d = item.d;
-  d->ref();
   return *this;
 }
 

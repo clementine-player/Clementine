@@ -85,7 +85,7 @@ namespace TagLib {
     //! The main class in the ID3v1 implementation
 
     /*!
-     * This is an implementation of the ID3v1 format.  ID3v1 is both the simplist
+     * This is an implementation of the ID3v1 format.  ID3v1 is both the simplest
      * and most common of tag formats but is rather limited.  Because of its
      * pervasiveness and the way that applications have been written around the
      * fields that it provides, the generic TagLib::Tag API is a mirror of what is
@@ -154,14 +154,14 @@ namespace TagLib {
       /*!
        * Returns the genre in number.
        *
-       * /note Normally 255 indicates that this tag contains no genre.
+       * \note Normally 255 indicates that this tag contains no genre.
        */
       TagLib::uint genreNumber() const;
 
       /*!
        * Sets the genre in number to \a i.
        *
-       * /note Valid value is from 0 up to 255. Normally 255 indicates that
+       * \note Valid value is from 0 up to 255. Normally 255 indicates that
        * this tag contains no genre.
        */
       void setGenreNumber(TagLib::uint i);
