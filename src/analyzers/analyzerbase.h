@@ -32,6 +32,7 @@
 
 #include "fht.h"
 #include "engines/engine_fwd.h"
+#include "engines/enginebase.h"
 #include <QPixmap>
 #include <QBasicTimer>
 #include <QWidget>
