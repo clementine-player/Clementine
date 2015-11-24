@@ -102,11 +102,16 @@ void LibraryItemDelegate::paint(QPainter* painter,
 
     // Draw the line under the item
     QColor line_color = opt.palette.color(QPalette::Text);
-    line_color.setAlpha(100);
-    QPen line_pen(line_color);
-    line_pen.setWidth(2);
-
-    painter->setPen(line_pen);
+    QLinearGradient grad_color(opt.rect.bottomLeft(), opt.rect.bottomRight());
+    const double fade_start_end = (opt.rect.width()/3.0)/opt.rect.width();
+    line_color.setAlphaF(0.0);
+    grad_color.setColorAt(0, line_color);
+    line_color.setAlphaF(0.5);
+    grad_color.setColorAt(fade_start_end, line_color);
+    grad_color.setColorAt(1.0 - fade_start_end, line_color);
+    line_color.setAlphaF(0.0);
+    grad_color.setColorAt(1, line_color);
+    painter->setPen(QPen(grad_color, 1));
     painter->drawLine(opt.rect.bottomLeft(), opt.rect.bottomRight());
 
     painter->restore();
