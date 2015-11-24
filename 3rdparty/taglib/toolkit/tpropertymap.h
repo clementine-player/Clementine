@@ -19,8 +19,8 @@
  *   MA  02110-1301  USA                                                   *
  ***************************************************************************/
 
-#ifndef PROPERTYMAP_H_
-#define PROPERTYMAP_H_
+#ifndef TAGLIB_PROPERTYMAP_H_
+#define TAGLIB_PROPERTYMAP_H_
 
 #include "tmap.h"
 #include "tstringlist.h"
@@ -34,13 +34,13 @@ namespace TagLib {
   /*!
    * This map implements a generic representation of textual audio metadata
    * ("tags") realized as pairs of a case-insensitive key
-   * and a nonempty list of corresponding values, each value being an an arbitrary
+   * and a nonempty list of corresponding values, each value being an arbitrary
    * unicode String.
    *
    * Note that most metadata formats pose additional conditions on the tag keys. The
    * most popular ones (Vorbis, APE, ID3v2) should support all ASCII only words of
    * length between 2 and 16.
-   * 
+   *
    * This class can contain any tags, but here is a list of "well-known" tags that
    * you might want to use:
    *
@@ -81,14 +81,14 @@ namespace TagLib {
    *  - COPYRIGHT
    *  - ENCODEDBY
    *  - MOOD
-   *  - COMMENT 
+   *  - COMMENT
    *  - MEDIA
    *  - LABEL
    *  - CATALOGNUMBER
    *  - BARCODE
    *
    * MusicBrainz identifiers:
-   * 
+   *
    *  - MUSICBRAINZ_TRACKID
    *  - MUSICBRAINZ_ALBUMID
    *  - MUSICBRAINZ_RELEASEGROUPID
@@ -123,7 +123,7 @@ namespace TagLib {
 
     /*!
      * Inserts \a values under \a key in the map.  If \a key already exists,
-     * then \values will be appended to the existing StringList.
+     * then \a values will be appended to the existing StringList.
      * The returned value indicates success, i.e. whether \a key is a
      * valid key.
      */
@@ -230,4 +230,4 @@ namespace TagLib {
   };
 
 }
-#endif /* PROPERTYMAP_H_ */
+#endif /* TAGLIB_PROPERTYMAP_H_ */

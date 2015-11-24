@@ -38,7 +38,7 @@ namespace TagLib {
   //! A list of strings
 
   /*!
-   * This is a spcialization of the List class with some members convention for
+   * This is a specialization of the List class with some members convention for
    * string operations.
    */
 

@@ -47,8 +47,7 @@ ASF::Tag::Tag()
 
 ASF::Tag::~Tag()
 {
-  if(d)
-    delete d;
+  delete d;
 }
 
 String ASF::Tag::title() const
@@ -161,11 +160,24 @@ ASF::AttributeListMap& ASF::Tag::attributeListMap()
   return d->attributeListMap;
 }
 
+const ASF::AttributeListMap &ASF::Tag::attributeListMap() const
+{
+  return d->attributeListMap;
+}
+
+bool ASF::Tag::contains(const String &key) const
+{
+  return d->attributeListMap.contains(key);
+}
+
 void ASF::Tag::removeItem(const String &key)
 {
-  AttributeListMap::Iterator it = d->attributeListMap.find(key);
-  if(it != d->attributeListMap.end())
-    d->attributeListMap.erase(it);
+  d->attributeListMap.erase(key);
+}
+
+ASF::AttributeList ASF::Tag::attribute(const String &name) const
+{
+  return d->attributeListMap[name];
 }
 
 void ASF::Tag::setAttribute(const String &name, const Attribute &attribute)
@@ -173,6 +185,11 @@ void ASF::Tag::setAttribute(const String &name, const Attribute &attribute)
   AttributeList value;
   value.append(attribute);
   d->attributeListMap.insert(name, value);
+}
+
+void ASF::Tag::setAttribute(const String &name, const AttributeList &values)
+{
+  d->attributeListMap.insert(name, values);
 }
 
 void ASF::Tag::addAttribute(const String &name, const Attribute &attribute)
@@ -195,6 +212,7 @@ bool ASF::Tag::isEmpty() const
 
 static const char *keyTranslation[][2] = {
   { "WM/AlbumTitle", "ALBUM" },
+  { "WM/AlbumArtist", "ALBUMARTIST" },
   { "WM/Composer", "COMPOSER" },
   { "WM/Writer", "WRITER" },
   { "WM/Conductor", "CONDUCTOR" },

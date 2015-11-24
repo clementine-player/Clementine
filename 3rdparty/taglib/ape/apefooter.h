@@ -37,7 +37,7 @@ namespace TagLib {
 
     /*!
      * This class implements APE footers (and headers). It attempts to follow, both
-     * semantically and programatically, the structure specified in
+     * semantically and programmatically, the structure specified in
      * the APE v2.0 standard.  The API is based on the properties of APE footer and
      * headers specified there.
      */

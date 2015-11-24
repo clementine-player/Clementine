@@ -40,8 +40,12 @@ namespace
 
   bool supportsUnicode()
   {
+#ifdef UNICODE
+    return true;
+#else
     const FARPROC p = GetProcAddress(GetModuleHandleA("kernel32"), "CreateFileW");
     return (p != NULL);
+#endif
   }
 
   // Indicates whether the system supports Unicode file names.

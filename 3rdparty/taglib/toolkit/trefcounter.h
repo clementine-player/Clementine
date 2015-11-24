@@ -33,7 +33,9 @@
 #  include <libkern/OSAtomic.h>
 #  define TAGLIB_ATOMIC_MAC
 #elif defined(WIN32) || defined(_WIN32) || defined(__WIN32__) || defined(__CYGWIN__)
-#  define NOMINMAX
+#  ifndef NOMINMAX
+#    define NOMINMAX
+#  endif
 #  include <windows.h>
 #  define TAGLIB_ATOMIC_WIN
 #elif defined (__GNUC__) && (__GNUC__ * 100 + __GNUC_MINOR__ >= 401)    \

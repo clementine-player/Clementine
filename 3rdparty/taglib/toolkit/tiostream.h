@@ -45,7 +45,7 @@ namespace TagLib {
     operator const char *() const;
 
     const std::wstring &wstr() const;
-    const std::string  &str() const; 
+    const std::string  &str() const;
 
     String toString() const;
 

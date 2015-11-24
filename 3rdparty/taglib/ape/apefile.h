@@ -130,7 +130,7 @@ namespace TagLib {
 
       /*!
        * Implements the unified property interface -- import function.
-       * Creates an APEv2 tag if necessary. A pontentially existing ID3v1
+       * Creates an APEv2 tag if necessary. A potentially existing ID3v1
        * tag will be updated as well.
        */
       PropertyMap setProperties(const PropertyMap &);
@@ -146,6 +146,9 @@ namespace TagLib {
        *
        * \note According to the official Monkey's Audio SDK, an APE file
        * can only have either ID3V1 or APE tags, so a parameter is used here.
+       *
+       * \warning In the current implementation, it's dangerous to call save()
+       * repeatedly.  At worst it will corrupt the file.
        */
       virtual bool save();
 
@@ -156,8 +159,8 @@ namespace TagLib {
        * if there is no valid ID3v1 tag.  If \a create is true it will create
        * an ID3v1 tag if one does not exist and returns a valid pointer.
        *
-       * \note This may return a valid pointer regardless of whether or not the 
-       * file on disk has an ID3v1 tag.  Use hasID3v1Tag() to check if the file 
+       * \note This may return a valid pointer regardless of whether or not the
+       * file on disk has an ID3v1 tag.  Use hasID3v1Tag() to check if the file
        * on disk actually has an ID3v1 tag.
        *
        * \note The Tag <b>is still</b> owned by the MPEG::File and should not be
@@ -175,8 +178,8 @@ namespace TagLib {
        * if there is no valid APE tag.  If \a create is true it will create
        * an APE tag if one does not exist and returns a valid pointer.
        *
-       * \note This may return a valid pointer regardless of whether or not the 
-       * file on disk has an APE tag.  Use hasAPETag() to check if the file 
+       * \note This may return a valid pointer regardless of whether or not the
+       * file on disk has an APE tag.  Use hasAPETag() to check if the file
        * on disk actually has an APE tag.
        *
        * \note The Tag <b>is still</b> owned by the MPEG::File and should not be
@@ -215,10 +218,10 @@ namespace TagLib {
       File(const File &);
       File &operator=(const File &);
 
-      void read(bool readProperties, Properties::ReadStyle propertiesStyle);
-      void scan();
-      long findID3v1();
+      void read(bool readProperties);
       long findAPE();
+      long findID3v1();
+      long findID3v2();
 
       class FilePrivate;
       FilePrivate *d;

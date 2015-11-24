@@ -63,33 +63,33 @@ String Ogg::XiphComment::title() const
 {
   if(d->fieldListMap["TITLE"].isEmpty())
     return String::null;
-  return d->fieldListMap["TITLE"].front();
+  return d->fieldListMap["TITLE"].toString();
 }
 
 String Ogg::XiphComment::artist() const
 {
   if(d->fieldListMap["ARTIST"].isEmpty())
     return String::null;
-  return d->fieldListMap["ARTIST"].front();
+  return d->fieldListMap["ARTIST"].toString();
 }
 
 String Ogg::XiphComment::album() const
 {
   if(d->fieldListMap["ALBUM"].isEmpty())
     return String::null;
-  return d->fieldListMap["ALBUM"].front();
+  return d->fieldListMap["ALBUM"].toString();
 }
 
 String Ogg::XiphComment::comment() const
 {
   if(!d->fieldListMap["DESCRIPTION"].isEmpty()) {
     d->commentField = "DESCRIPTION";
-    return d->fieldListMap["DESCRIPTION"].front();
+    return d->fieldListMap["DESCRIPTION"].toString();
   }
 
   if(!d->fieldListMap["COMMENT"].isEmpty()) {
     d->commentField = "COMMENT";
-    return d->fieldListMap["COMMENT"].front();
+    return d->fieldListMap["COMMENT"].toString();
   }
 
   return String::null;
@@ -99,7 +99,7 @@ String Ogg::XiphComment::genre() const
 {
   if(d->fieldListMap["GENRE"].isEmpty())
     return String::null;
-  return d->fieldListMap["GENRE"].front();
+  return d->fieldListMap["GENRE"].toString();
 }
 
 TagLib::uint Ogg::XiphComment::year() const

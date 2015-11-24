@@ -152,12 +152,20 @@ namespace TagLib {
       virtual bool isEmpty() const;
 
       /*!
-       * Returns a reference to the item list map.  This is an AttributeListMap of
-       * all of the items in the tag.
-       *
-       * This is the most powerfull structure for accessing the items of the tag.
+       * \deprecated
        */
       AttributeListMap &attributeListMap();
+
+      /*!
+       * Returns a reference to the item list map.  This is an AttributeListMap of
+       * all of the items in the tag.
+       */
+      const AttributeListMap &attributeListMap() const;
+
+      /*!
+       * \return True if a value for \a attribute is currently set.
+       */
+      bool contains(const String &name) const;
 
       /*!
        * Removes the \a key attribute from the tag
@@ -165,10 +173,21 @@ namespace TagLib {
       void removeItem(const String &name);
 
       /*!
+       * \return The list of values for the key \a name, or an empty list if no
+       * values have been set.
+       */
+      AttributeList attribute(const String &name) const;
+
+      /*!
        * Sets the \a key attribute to the value of \a attribute. If an attribute
        * with the \a key is already present, it will be replaced.
        */
       void setAttribute(const String &name, const Attribute &attribute);
+
+      /*!
+       * Sets multiple \a values to the key \a name.
+       */
+      void setAttribute(const String &name, const AttributeList &values);
 
       /*!
        * Sets the \a key attribute to the value of \a attribute. If an attribute

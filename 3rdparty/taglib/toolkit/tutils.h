@@ -44,13 +44,22 @@
 # include <sys/endian.h>
 #endif
 
+#include <tstring.h>
+#include <cstdio>
+#include <cstdarg>
+#include <cstring>
+
 namespace TagLib
 {
   namespace Utils
   {
+
+    /*!
+     * Reverses the order of bytes in an 16-bit integer.
+     */
     inline ushort byteSwap(ushort x)
     {
-#if defined(HAVE_GCC_BYTESWAP_16)
+#if defined(HAVE_GCC_BYTESWAP)
 
       return __builtin_bswap16(x);
 
@@ -77,9 +86,12 @@ namespace TagLib
 #endif
     }
 
+    /*!
+     * Reverses the order of bytes in an 32-bit integer.
+     */
     inline uint byteSwap(uint x)
     {
-#if defined(HAVE_GCC_BYTESWAP_32)
+#if defined(HAVE_GCC_BYTESWAP)
 
       return __builtin_bswap32(x);
 
@@ -109,9 +121,12 @@ namespace TagLib
 #endif
     }
 
+    /*!
+     * Reverses the order of bytes in an 64-bit integer.
+     */
     inline ulonglong byteSwap(ulonglong x)
     {
-#if defined(HAVE_GCC_BYTESWAP_64)
+#if defined(HAVE_GCC_BYTESWAP)
 
       return __builtin_bswap64(x);
 
@@ -145,26 +160,65 @@ namespace TagLib
 #endif
     }
 
-    enum ByteOrder
+    /*!
+     * Returns a formatted string just like standard sprintf(), but makes use of
+     * safer functions such as snprintf() if available.
+     */
+    inline String formatString(const char *format, ...)
     {
-      LittleEndian,
-      BigEndian
-    };
+      // Sufficient buffer size for the current internal uses.
+      // Consider changing this value when you use this function.
 
-#ifdef SYSTEM_BYTEORDER
+      static const size_t BufferSize = 128;
 
-# if SYSTEM_BYTEORDER == 1
+      va_list args;
+      va_start(args, format);
 
-    const ByteOrder SystemByteOrder = LittleEndian; 
+      char buf[BufferSize];
+      int length;
 
-# else
+#if defined(HAVE_VSNPRINTF)
 
-    const ByteOrder SystemByteOrder = BigEndian; 
+      length = vsnprintf(buf, BufferSize, format, args);
 
-# endif
+#elif defined(HAVE_VSPRINTF_S)
+
+      length = vsprintf_s(buf, format, args);
 
 #else
 
+      // The last resort. May cause a buffer overflow.
+
+      length = vsprintf(buf, format, args);
+      if(length >= BufferSize) {
+        debug("Utils::formatString() - Buffer overflow! Returning an empty string.");
+        length = -1;
+      }
+
+#endif
+
+      va_end(args);
+
+      if(length != -1)
+        return String(buf);
+      else
+        return String::null;
+    }
+
+    /*!
+     * The types of byte order of the running system.
+     */
+    enum ByteOrder
+    {
+      //! Little endian systems.
+      LittleEndian,
+      //! Big endian systems.
+      BigEndian
+    };
+
+    /*!
+     * Returns the integer byte order of the system.
+     */
     inline ByteOrder systemByteOrder()
     {
       union {
@@ -178,10 +232,27 @@ namespace TagLib
       else
         return BigEndian;
     }
-    
-    const ByteOrder SystemByteOrder = systemByteOrder(); 
 
-#endif
+    /*!
+     * Returns the IEEE754 byte order of the system.
+     */
+    inline ByteOrder floatByteOrder()
+    {
+      union {
+        double d;
+        char   c;
+      } u;
+
+      // 1.0 is stored in memory like 0x3FF0000000000000 in canonical form.
+      // So the first byte is zero if little endian.
+
+      u.d = 1.0;
+      if(u.c == 0)
+        return LittleEndian;
+      else
+        return BigEndian;
+    }
+
   }
 }
 

@@ -71,22 +71,61 @@ namespace TagLib {
        */
       virtual ~Properties();
 
-      // Reimplementations.
-
+      /*!
+       * Returns the length of the file in seconds.  The length is rounded down to
+       * the nearest whole second.
+       *
+       * \note This method is just an alias of lengthInSeconds().
+       *
+       * \deprecated
+       */
       virtual int length() const;
+
+      /*!
+       * Returns the length of the file in seconds.  The length is rounded down to
+       * the nearest whole second.
+       *
+       * \see lengthInMilliseconds()
+       */
+      // BIC: make virtual
+      int lengthInSeconds() const;
+
+      /*!
+       * Returns the length of the file in milliseconds.
+       *
+       * \see lengthInSeconds()
+       */
+      // BIC: make virtual
+      int lengthInMilliseconds() const;
+
+      /*!
+       * Returns the average bit rate of the file in kb/s.
+       */
       virtual int bitrate() const;
 
       /*!
        * Returns the sample rate in Hz. 0 means unknown or custom.
        */
       virtual int sampleRate() const;
-      
+
+      /*!
+       * Returns the number of audio channels.
+       */
       virtual int channels() const;
 
       /*!
-       * Returns number of bits per sample.
+       * Returns the number of bits per audio sample.
        */
       int bitsPerSample() const;
+
+      /*!
+       * Returns whether or not the file is lossless encoded.
+       */
+      bool isLossless() const;
+
+      /*!
+       * Returns the total number of audio samples in file.
+       */
       uint sampleFrames() const;
 
       /*!
@@ -98,8 +137,8 @@ namespace TagLib {
       Properties(const Properties &);
       Properties &operator=(const Properties &);
 
-      void read();
-      unsigned int seekFinalIndex();
+      void read(File *file, long streamLength);
+      uint seekFinalIndex(File *file, long streamLength);
 
       class PropertiesPrivate;
       PropertiesPrivate *d;

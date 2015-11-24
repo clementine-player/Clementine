@@ -46,11 +46,12 @@ using namespace APE;
 class APE::Tag::TagPrivate
 {
 public:
-  TagPrivate() : file(0), footerLocation(-1), tagLength(0) {}
+  TagPrivate() :
+    file(0),
+    footerLocation(-1) {}
 
   TagLib::File *file;
   long footerLocation;
-  long tagLength;
 
   Footer footer;
 
@@ -61,14 +62,16 @@ public:
 // public methods
 ////////////////////////////////////////////////////////////////////////////////
 
-APE::Tag::Tag() : TagLib::Tag()
+APE::Tag::Tag() :
+  TagLib::Tag(),
+  d(new TagPrivate())
 {
-  d = new TagPrivate;
 }
 
-APE::Tag::Tag(TagLib::File *file, long footerLocation) : TagLib::Tag()
+APE::Tag::Tag(TagLib::File *file, long footerLocation) :
+  TagLib::Tag(),
+  d(new TagPrivate())
 {
-  d = new TagPrivate;
   d->file = file;
   d->footerLocation = footerLocation;
 
@@ -89,35 +92,35 @@ String APE::Tag::title() const
 {
   if(d->itemListMap["TITLE"].isEmpty())
     return String::null;
-  return d->itemListMap["TITLE"].toString();
+  return d->itemListMap["TITLE"].values().toString();
 }
 
 String APE::Tag::artist() const
 {
   if(d->itemListMap["ARTIST"].isEmpty())
     return String::null;
-  return d->itemListMap["ARTIST"].toString();
+  return d->itemListMap["ARTIST"].values().toString();
 }
 
 String APE::Tag::album() const
 {
   if(d->itemListMap["ALBUM"].isEmpty())
     return String::null;
-  return d->itemListMap["ALBUM"].toString();
+  return d->itemListMap["ALBUM"].values().toString();
 }
 
 String APE::Tag::comment() const
 {
   if(d->itemListMap["COMMENT"].isEmpty())
     return String::null;
-  return d->itemListMap["COMMENT"].toString();
+  return d->itemListMap["COMMENT"].values().toString();
 }
 
 String APE::Tag::genre() const
 {
   if(d->itemListMap["GENRE"].isEmpty())
     return String::null;
-  return d->itemListMap["GENRE"].toString();
+  return d->itemListMap["GENRE"].values().toString();
 }
 
 TagLib::uint APE::Tag::year() const
@@ -233,7 +236,7 @@ PropertyMap APE::Tag::setProperties(const PropertyMap &origProps)
       toRemove.append(remIt->first);
   }
 
-  for (StringList::Iterator removeIt = toRemove.begin(); removeIt != toRemove.end(); removeIt++)
+  for(StringList::ConstIterator removeIt = toRemove.begin(); removeIt != toRemove.end(); removeIt++)
     removeItem(*removeIt);
 
   // now sync in the "forward direction"
@@ -284,9 +287,7 @@ const APE::ItemListMap& APE::Tag::itemListMap() const
 
 void APE::Tag::removeItem(const String &key)
 {
-  Map<const String, Item>::Iterator it = d->itemListMap.find(key.upper());
-  if(it != d->itemListMap.end())
-    d->itemListMap.erase(it);
+  d->itemListMap.erase(key.upper());
 }
 
 void APE::Tag::addValue(const String &key, const String &value, bool replace)
@@ -368,9 +369,12 @@ ByteVector APE::Tag::render() const
 
 void APE::Tag::parse(const ByteVector &data)
 {
-  uint pos = 0;
-
   // 11 bytes is the minimum size for an APE item
+
+  if(data.size() < 11)
+    return;
+
+  uint pos = 0;
 
   for(uint i = 0; i < d->footer.itemCount() && pos <= data.size() - 11; i++) {
     APE::Item item;

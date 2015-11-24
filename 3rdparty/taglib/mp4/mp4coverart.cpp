@@ -54,11 +54,12 @@ MP4::CoverArt::CoverArt(const CoverArt &item) : d(item.d)
 MP4::CoverArt &
 MP4::CoverArt::operator=(const CoverArt &item)
 {
-  if(d->deref()) {
-    delete d;
+  if(&item != this) {
+    if(d->deref())
+      delete d;
+    d = item.d;
+    d->ref();
   }
-  d = item.d;
-  d->ref();
   return *this;
 }
 
