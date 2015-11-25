@@ -185,6 +185,7 @@ LibraryView::LibraryView(QWidget* parent)
   setSelectionMode(QAbstractItemView::ExtendedSelection);
 
   setStyleSheet("QTreeView::item{padding-top:1px;}");
+  setAnimated(true);
 }
 
 LibraryView::~LibraryView() {}
