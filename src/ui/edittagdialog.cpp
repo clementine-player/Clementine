@@ -44,6 +44,7 @@
 #include <QtDebug>
 
 #include <limits>
+#include <array>
 
 const char* EditTagDialog::kHintText =
     QT_TR_NOOP("(different across multiple songs)");
@@ -158,12 +159,10 @@ EditTagDialog::EditTagDialog(Application* app, QWidget* parent)
   ui_->art->setAcceptDrops(true);
 
   // Add the next/previous buttons
-  previous_button_ =
-      new QPushButton(IconLoader::Load("go-previous", IconLoader::Base), 
-                      tr("Previous"), this);
-  next_button_ = 
-      new QPushButton(IconLoader::Load("go-next", IconLoader::Base), 
-                      tr("Next"), this);
+  previous_button_ = new QPushButton(
+      IconLoader::Load("go-previous", IconLoader::Base), tr("Previous"), this);
+  next_button_ = new QPushButton(IconLoader::Load("go-next", IconLoader::Base),
+                                 tr("Next"), this);
   ui_->button_box->addButton(previous_button_, QDialogButtonBox::ResetRole);
   ui_->button_box->addButton(next_button_, QDialogButtonBox::ResetRole);
 
@@ -373,12 +372,15 @@ void EditTagDialog::InitFieldValue(const FieldData& field,
     editor->clear();
     editor->clear_hint();
     if (varies) {
+      qLog(Debug) << "set hint";
       editor->set_hint(tr(EditTagDialog::kHintText));
     } else {
+      qLog(Debug) << "Set " << field.id_ << " to "
+                  << data_[sel[0].row()].current_value(field.id_).toString();
       editor->set_text(data_[sel[0].row()].current_value(field.id_).toString());
     }
   }
-
+  if (modified) qLog(Debug) << "Bold font";
   QFont new_font(font());
   new_font.setBold(modified);
   field.label_->setFont(new_font);
@@ -851,18 +853,27 @@ void EditTagDialog::FetchTagSongChosen(const Song& original_song,
     return;
   }
 
-  data_it->current_.set_title(new_metadata.title());
-  data_it->current_.set_artist(new_metadata.artist());
-  data_it->current_.set_album(new_metadata.album());
-  data_it->current_.set_track(new_metadata.track());
-  data_it->current_.set_year(new_metadata.year());
+  // check each field which might be changed
+  for (const QString& field_id : TagFetcher::kFetchedFields) {
+    if (data_it->current_value(field_id) !=
+        Data::value(new_metadata, field_id)) {
+      // this field has changed -> update data
+      data_it->set_value(field_id, Data::value(new_metadata, field_id));
 
-  // Is it currently selected in the UI?
-  int row = data_it - data_.begin();
-  if (ui_->song_list->item(row)->isSelected()) {
-    // We need to update view
-    for (const FieldData& field : fields_)
-      InitFieldValue(field,
-                     ui_->song_list->selectionModel()->selectedIndexes());
+      // is the song selected?
+      int row = data_it - data_.begin();
+      if (ui_->song_list->item(row)->isSelected()) {
+        // -> update the view of this field
+        auto field_it = std::find_if(
+            fields_.begin(), fields_.end(),
+            [&](const FieldData& field) { return field.id_ == field_id; });
+        if (field_it == fields_.end()) {
+          qLog(Error) << "Unknown field id " << field_id;
+          continue;
+        }
+        InitFieldValue(*field_it,
+                       ui_->song_list->selectionModel()->selectedIndexes());
+      }
+    }
   }
 }

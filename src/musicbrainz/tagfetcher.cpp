@@ -27,6 +27,9 @@
 #include <QUrl>
 #include <QtConcurrentMap>
 
+const std::array<QString, 5> TagFetcher::kFetchedFields{
+    {"title", "artist", "album", "track", "year"}};
+
 TagFetcher::TagFetcher(QObject* parent)
     : QObject(parent),
       fingerprint_watcher_(nullptr),
