@@ -372,15 +372,11 @@ void EditTagDialog::InitFieldValue(const FieldData& field,
     editor->clear();
     editor->clear_hint();
     if (varies) {
-      qLog(Debug) << "set hint";
       editor->set_hint(tr(EditTagDialog::kHintText));
     } else {
-      qLog(Debug) << "Set " << field.id_ << " to "
-                  << data_[sel[0].row()].current_value(field.id_).toString();
       editor->set_text(data_[sel[0].row()].current_value(field.id_).toString());
     }
   }
-  if (modified) qLog(Debug) << "Bold font";
   QFont new_font(font());
   new_font.setBold(modified);
   field.label_->setFont(new_font);
