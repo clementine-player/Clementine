@@ -39,7 +39,11 @@ class Chromaprinter {
   // Creates a fingerprint from the song.  This method is blocking, so you want
   // to call it in another thread.  Returns an empty string if no fingerprint
   // could be created.
-  QString CreateFingerprint();
+  QString CreateFingerprint(int play_length_secs = 30,
+                            bool resample_format = true);
+  // Total length of stream in milliseconds. Known after fingerprint is created,
+  // otherwise -1.
+  qint32 GetLength() const { return length_; }
 
  private:
   GstElement* CreateElement(const QString& factory_name,
@@ -54,6 +58,7 @@ class Chromaprinter {
   GstElement* convert_element_;
 
   QBuffer buffer_;
+  qint32 length_;
 };
 
 #endif  // CHROMAPRINTER_H
