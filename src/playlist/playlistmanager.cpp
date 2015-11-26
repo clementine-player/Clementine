@@ -45,6 +45,7 @@ PlaylistManager::PlaylistManager(Application* app, QObject* parent)
       app_(app),
       playlist_backend_(nullptr),
       library_backend_(nullptr),
+      tracker_(nullptr),
       sequence_(nullptr),
       parser_(nullptr),
       playlist_container_(nullptr),
@@ -70,6 +71,11 @@ void PlaylistManager::Init(LibraryBackend* library_backend,
   sequence_ = sequence;
   parser_ = new PlaylistParser(library_backend, this);
   playlist_container_ = playlist_container;
+
+  QThread* newThread = new QThread();
+  newThread->start(QThread::IdlePriority);
+  tracker_ = new SongTracker(this);
+  tracker_->moveToThread(newThread);
 
   connect(library_backend_, SIGNAL(SongsDiscovered(SongList)),
           SLOT(SongsDiscovered(SongList)));
@@ -108,7 +114,7 @@ Playlist* PlaylistManager::AddPlaylist(int id, const QString& name,
                                        const QString& special_type,
                                        const QString& ui_path, bool favorite) {
   Playlist* ret = new Playlist(playlist_backend_, app_->task_manager(),
-                               library_backend_, id, special_type, favorite);
+                               library_backend_, tracker_, id, special_type, favorite);
   ret->set_sequence(sequence_);
   ret->set_ui_path(ui_path);
 
@@ -572,3 +578,11 @@ void PlaylistManager::SetCurrentOrOpen(int id) {
 }
 
 bool PlaylistManager::IsPlaylistOpen(int id) { return playlists_.contains(id); }
+
+void PlaylistManager::SetSongTracking(bool track) {
+  tracker_->SetEnabled(track);
+}
+
+bool PlaylistManager::IsSongTracking() {
+  return tracker_->IsEnabled();
+}

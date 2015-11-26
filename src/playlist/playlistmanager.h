@@ -157,6 +157,8 @@ class PlaylistManager : public PlaylistManagerInterface {
   void RemoveDeletedSongs();
   // Returns true if the playlist is open
   bool IsPlaylistOpen(int id);
+  // Returns true if tracking playlist songs is turned on.
+  bool IsSongTracking();
 
   // Returns a pretty automatic name for playlist created from the given list of
   // songs.
@@ -231,6 +233,8 @@ class PlaylistManager : public PlaylistManagerInterface {
   void RemoveItemsWithoutUndo(int id, const QList<int>& indices);
   // Remove the current playing song
   void RemoveCurrentSong();
+  // Set file tracking of playlist songs on/off.
+  void SetSongTracking(bool track);
 
  private slots:
   void SetActivePlaying();
@@ -261,6 +265,7 @@ class PlaylistManager : public PlaylistManagerInterface {
   Application* app_;
   PlaylistBackend* playlist_backend_;
   LibraryBackend* library_backend_;
+  SongTracker* tracker_;
   PlaylistSequence* sequence_;
   PlaylistParser* parser_;
   PlaylistContainer* playlist_container_;
