@@ -143,8 +143,8 @@ class SearchProvider : public QObject {
   // be reimplemented
   virtual bool IsLoggedIn() { return true; }
   virtual void ShowConfig() {}  // Remember to set the CanShowConfig hint
-  // Returns the Internet service in charge of this provider, or nullptr if there
-  // is none
+  // Returns the Internet service in charge of this provider, or nullptr if
+  // there is none.
   virtual InternetService* internet_service() { return nullptr; }
 
   static QImage ScaleAndPad(const QImage& image);
@@ -208,7 +208,7 @@ class BlockingSearchProvider : public SearchProvider {
   virtual ResultList Search(int id, const QString& query) = 0;
 
  private slots:
-  void BlockingSearchFinished();
+  void BlockingSearchFinished(QFuture<ResultList> future, const int id);
 };
 
 Q_DECLARE_METATYPE(SearchProvider*)
