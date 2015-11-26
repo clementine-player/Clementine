@@ -53,7 +53,6 @@
 #include "core/mac_startup.h"
 #include "core/mergedproxymodel.h"
 #include "core/mimedata.h"
-#include "core/modelfuturewatcher.h"
 #include "core/mpris_common.h"
 #include "core/network.h"
 #include "core/player.h"

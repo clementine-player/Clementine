@@ -47,7 +47,6 @@
 #include "core/application.h"
 #include "core/closure.h"
 #include "core/logging.h"
-#include "core/modelfuturewatcher.h"
 #include "core/qhash_qurl.h"
 #include "core/tagreaderclient.h"
 #include "core/timeconstants.h"
@@ -417,20 +416,13 @@ void Playlist::SongSaveComplete(TagReaderReply* reply,
                                 const QPersistentModelIndex& index) {
   if (reply->is_successful() && index.isValid()) {
     QFuture<void> future = item_at(index.row())->BackgroundReload();
-    ModelFutureWatcher<void>* watcher =
-        new ModelFutureWatcher<void>(index, this);
-    watcher->setFuture(future);
-    connect(watcher, SIGNAL(finished()), SLOT(ItemReloadComplete()));
+    NewClosure(future, this, SLOT(ItemReloadComplete(QPersistentModelIndex)),
+               index);
   }
-
   reply->deleteLater();
 }
 
-void Playlist::ItemReloadComplete() {
-  ModelFutureWatcher<void>* watcher =
-      static_cast<ModelFutureWatcher<void>*>(sender());
-  watcher->deleteLater();
-  const QPersistentModelIndex& index = watcher->index();
+void Playlist::ItemReloadComplete(const QPersistentModelIndex& index) {
   if (index.isValid()) {
     emit dataChanged(index, index);
     emit EditingFinished(index);

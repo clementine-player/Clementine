@@ -393,7 +393,7 @@ signals:
   void QueueLayoutChanged();
   void SongSaveComplete(TagReaderReply* reply,
                         const QPersistentModelIndex& index);
-  void ItemReloadComplete();
+  void ItemReloadComplete(const QPersistentModelIndex& index);
   void ItemsLoaded();
   void SongInsertVetoListenerDestroyed();
 
