@@ -250,6 +250,7 @@ set(SOURCES
   playlist/queuemanager.cpp
   playlist/songloaderinserter.cpp
   playlist/songplaylistitem.cpp
+  playlist/songtracker.cpp
 
   playlistparsers/asxparser.cpp
   playlistparsers/asxiniparser.cpp
@@ -546,6 +547,7 @@ set(HEADERS
   playlist/queuemanager.h
   playlist/songloaderinserter.h
   playlist/songmimedata.h
+  playlist/songtracker.h
 
   playlistparsers/asxparser.h
   playlistparsers/asxiniparser.h
