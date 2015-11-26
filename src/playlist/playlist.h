@@ -23,10 +23,12 @@
 
 #include "playlistitem.h"
 #include "playlistsequence.h"
+#include "songtracker.h"
 #include "core/tagreaderclient.h"
 #include "core/song.h"
 #include "smartplaylists/generator_fwd.h"
 
+class SongTracker;
 class LibraryBackend;
 class PlaylistBackend;
 class PlaylistFilter;
@@ -77,7 +79,7 @@ class Playlist : public QAbstractListModel {
 
  public:
   Playlist(PlaylistBackend* backend, TaskManager* task_manager,
-           LibraryBackend* library, int id,
+           LibraryBackend* library, SongTracker* tracker, int id,
            const QString& special_type = QString(), bool favorite = false,
            QObject* parent = nullptr);
   ~Playlist();
@@ -337,6 +339,7 @@ class Playlist : public QAbstractListModel {
   void SetStreamMetadata(const QUrl& url, const Song& song);
   void ItemChanged(PlaylistItemPtr item);
   void UpdateItems(const SongList& songs);
+  void UpdateFilenames(const FoundSongs& songs);
 
   void Clear();
   void RemoveDuplicateSongs();
@@ -427,6 +430,7 @@ signals:
   PlaylistBackend* backend_;
   TaskManager* task_manager_;
   LibraryBackend* library_;
+  SongTracker* tracker_;
   int id_;
   QString ui_path_;
   bool favorite_;

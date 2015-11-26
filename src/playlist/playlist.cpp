@@ -112,7 +112,7 @@ QString removePrefix(const QString& a, const QStringList& prefixes) {
 }  // namespace
 
 Playlist::Playlist(PlaylistBackend* backend, TaskManager* task_manager,
-                   LibraryBackend* library, int id, const QString& special_type,
+                   LibraryBackend* library, SongTracker* tracker, int id, const QString& special_type,
                    bool favorite, QObject* parent)
     : QAbstractListModel(parent),
       is_loading_(false),
@@ -121,6 +121,7 @@ Playlist::Playlist(PlaylistBackend* backend, TaskManager* task_manager,
       backend_(backend),
       task_manager_(task_manager),
       library_(library),
+      tracker_(tracker),
       id_(id),
       favorite_(favorite),
       current_is_paused_(false),
@@ -1100,6 +1101,13 @@ void Playlist::InsertItemsWithoutUndo(const PlaylistItemList& items, int pos,
   }
   endInsertRows();
 
+  // Feed to song tracker
+  SongList songs;
+  for (PlaylistItemPtr item: items) {
+    songs << item->Metadata();
+  }
+  tracker_->TrackAsync(id_, songs);
+
   if (enqueue) {
     QModelIndexList indexes;
     for (int i = start; i <= end; ++i) {
@@ -1236,6 +1244,28 @@ void Playlist::UpdateItems(const SongList& songs) {
         break;
       }
     }
+  }
+  Save();
+}
+
+void Playlist::UpdateFilenames(const FoundSongs& songs) {
+  for (int i = 0; i < items_.size(); i++) {
+    PlaylistItemPtr& item = items_[i];
+    QUrl old_filename = item->Metadata().url();
+    if (!songs.contains(old_filename))
+      continue;
+    Song song(item->Metadata());
+    song.set_url(QUrl(songs[old_filename]));
+    song.set_basefilename(QFileInfo(songs[old_filename].path()).fileName());
+    PlaylistItemPtr new_item;
+      if (song.is_library_song()) {
+        new_item = PlaylistItemPtr(new LibraryPlaylistItem(song));
+        library_items_by_id_.insertMulti(song.id(), new_item);
+      } else {
+        new_item = PlaylistItemPtr(new SongPlaylistItem(song));
+      }
+      items_[i] = new_item;
+    emit dataChanged(index(i, 0), index(i, ColumnCount - 1));
   }
   Save();
 }
@@ -1719,10 +1749,12 @@ PlaylistItemList Playlist::RemoveItemsWithoutUndo(int row, int count) {
         library_items_by_id_.remove(id, item);
       }
     }
+
+    // Remove from song tracker
+    tracker_->Untrack(id_, item->Metadata());
   }
 
   endRemoveRows();
-
   QList<int>::iterator it = virtual_items_.begin();
   int i = 0;
   while (it != virtual_items_.end()) {

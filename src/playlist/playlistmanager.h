@@ -84,8 +84,6 @@ class PlaylistManagerInterface : public QObject {
   virtual void Open(int id) = 0;
   virtual void ChangePlaylistOrder(const QList<int>& ids) = 0;
 
-  virtual void Enque(int id, int index) = 0;
-
   virtual void SongChangeRequestProcessed(const QUrl& url, bool valid) = 0;
 
   virtual void SetCurrentPlaylist(int id) = 0;
@@ -157,6 +155,8 @@ class PlaylistManager : public PlaylistManagerInterface {
   void RemoveDeletedSongs();
   // Returns true if the playlist is open
   bool IsPlaylistOpen(int id);
+  // Returns true if tracking playlist songs is turned on.
+  bool IsSongTracking();
 
   // Returns a pretty automatic name for playlist created from the given list of
   // songs.
@@ -186,15 +186,13 @@ class PlaylistManager : public PlaylistManagerInterface {
   void Load(const QString& filename);
   void Save(int id, const QString& filename, Playlist::Path path_type);
   // Display a file dialog to let user choose a file before saving the file
-  void SaveWithUI(int id, const QString& playlist_name);
+  void SaveWithUI(int id, const QString& suggested_filename);
   void Rename(int id, const QString& new_name);
   void Favorite(int id, bool favorite);
   void Delete(int id);
   bool Close(int id);
   void Open(int id);
   void ChangePlaylistOrder(const QList<int>& ids);
-
-  void Enque(int id, int index);
 
   void SetCurrentPlaylist(int id);
   void SetActivePlaylist(int id);
@@ -229,6 +227,8 @@ class PlaylistManager : public PlaylistManagerInterface {
   // Removes items with given indices from the playlist. This operation is not
   // undoable.
   void RemoveItemsWithoutUndo(int id, const QList<int>& indices);
+  // Set file tracking of playlist songs on/off.
+  void SetSongTracking(bool track);
   // Remove the current playing song
   void RemoveCurrentSong();
 
@@ -261,6 +261,7 @@ class PlaylistManager : public PlaylistManagerInterface {
   Application* app_;
   PlaylistBackend* playlist_backend_;
   LibraryBackend* library_backend_;
+  SongTracker* tracker_;
   PlaylistSequence* sequence_;
   PlaylistParser* parser_;
   PlaylistContainer* playlist_container_;
