@@ -15,18 +15,16 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "generator.h"
-#include "generatorinserter.h"
-#include "core/taskmanager.h"
-#include "playlist/playlist.h"
+#include "smartplaylists/generatorinserter.h"
 
-#include <QFutureWatcher>
 #include <QtConcurrentRun>
 
-namespace smart_playlists {
+#include "core/closure.h"
+#include "core/taskmanager.h"
+#include "playlist/playlist.h"
+#include "smartplaylists/generator.h"
 
-typedef QFuture<PlaylistItemList> Future;
-typedef QFutureWatcher<PlaylistItemList> FutureWatcher;
+namespace smart_playlists {
 
 GeneratorInserter::GeneratorInserter(TaskManager* task_manager,
                                      LibraryBackend* library, QObject* parent)
@@ -57,18 +55,13 @@ void GeneratorInserter::Load(Playlist* destination, int row, bool play_now,
 
   connect(generator.get(), SIGNAL(Error(QString)), SIGNAL(Error(QString)));
 
-  Future future = QtConcurrent::run(Generate, generator, dynamic_count);
-  FutureWatcher* watcher = new FutureWatcher(this);
-  watcher->setFuture(future);
-
-  connect(watcher, SIGNAL(finished()), SLOT(Finished()));
+  QFuture<PlaylistItemList> future =
+      QtConcurrent::run(Generate, generator, dynamic_count);
+  NewClosure(future, this, SLOT(Finished(QFuture<PlaylistItemList>)), future);
 }
 
-void GeneratorInserter::Finished() {
-  FutureWatcher* watcher = static_cast<FutureWatcher*>(sender());
-  watcher->deleteLater();
-
-  PlaylistItemList items = watcher->result();
+void GeneratorInserter::Finished(QFuture<PlaylistItemList> future) {
+  PlaylistItemList items = future.result();
 
   if (items.isEmpty()) {
     if (is_dynamic_) {

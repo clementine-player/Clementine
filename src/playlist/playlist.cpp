@@ -1457,10 +1457,6 @@ void Playlist::Save() const {
                               dynamic_playlist_);
 }
 
-namespace {
-typedef QFutureWatcher<QList<PlaylistItemPtr>> PlaylistItemFutureWatcher;
-}
-
 void Playlist::Restore() {
   if (!backend_) return;
 
@@ -1470,17 +1466,12 @@ void Playlist::Restore() {
 
   QFuture<QList<PlaylistItemPtr>> future =
       QtConcurrent::run(backend_, &PlaylistBackend::GetPlaylistItems, id_);
-  PlaylistItemFutureWatcher* watcher = new PlaylistItemFutureWatcher(this);
-  watcher->setFuture(future);
-  connect(watcher, SIGNAL(finished()), SLOT(ItemsLoaded()));
+  NewClosure(future, this, SLOT(ItemsLoaded(QFuture<PlaylistItemList>)),
+             future);
 }
 
-void Playlist::ItemsLoaded() {
-  PlaylistItemFutureWatcher* watcher =
-      static_cast<PlaylistItemFutureWatcher*>(sender());
-  watcher->deleteLater();
-
-  PlaylistItemList items = watcher->future().result();
+void Playlist::ItemsLoaded(QFuture<PlaylistItemList> future) {
+  PlaylistItemList items = future.result();
 
   // backend returns empty elements for library items which it couldn't
   // match (because they got deleted); we don't need those

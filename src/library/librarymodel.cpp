@@ -20,7 +20,6 @@
 #include <functional>
 
 #include <QFuture>
-#include <QFutureWatcher>
 #include <QIODevice>
 #include <QMetaEnum>
 #include <QNetworkCacheMetaData>
@@ -63,8 +62,6 @@ const char* LibraryModel::kSmartPlaylistsSettingsGroup =
 const int LibraryModel::kSmartPlaylistsVersion = 4;
 const int LibraryModel::kPrettyCoverSize = 32;
 const qint64 LibraryModel::kIconCacheSize = 100000000;  //~100MB
-typedef QFuture<LibraryModel::QueryResult> RootQueryFuture;
-typedef QFutureWatcher<LibraryModel::QueryResult> RootQueryWatcher;
 
 static bool IsArtistGroupBy(const LibraryModel::GroupBy by) {
   return by == LibraryModel::GroupBy_Artist ||
@@ -228,7 +225,8 @@ void LibraryModel::SongsDiscovered(const SongList& songs) {
             key = PrettyYearAlbum(qMax(0, song.year()), song.album());
             break;
           case GroupBy_OriginalYearAlbum:
-            key = PrettyYearAlbum(qMax(0, song.effective_originalyear()), song.album());
+            key = PrettyYearAlbum(qMax(0, song.effective_originalyear()),
+                                  song.album());
             break;
           case GroupBy_FileType:
             key = song.filetype();
@@ -732,18 +730,16 @@ void LibraryModel::LazyPopulate(LibraryItem* parent, bool signal) {
 }
 
 void LibraryModel::ResetAsync() {
-  RootQueryFuture future =
+  QFuture<LibraryModel::QueryResult> future =
       QtConcurrent::run(this, &LibraryModel::RunQuery, root_);
-  RootQueryWatcher* watcher = new RootQueryWatcher(this);
-  watcher->setFuture(future);
-
-  connect(watcher, SIGNAL(finished()), SLOT(ResetAsyncQueryFinished()));
+  NewClosure(future, this,
+             SLOT(ResetAsyncQueryFinished(QFuture<LibraryModel::QueryResult>)),
+             future);
 }
 
-void LibraryModel::ResetAsyncQueryFinished() {
-  RootQueryWatcher* watcher = static_cast<RootQueryWatcher*>(sender());
-  const struct QueryResult result = watcher->result();
-  watcher->deleteLater();
+void LibraryModel::ResetAsyncQueryFinished(
+    QFuture<LibraryModel::QueryResult> future) {
+  const struct QueryResult result = future.result();
 
   BeginReset();
   root_->lazy_loaded = true;
@@ -960,9 +956,10 @@ LibraryItem* LibraryModel::ItemFromQuery(GroupBy type, bool signal,
       item->metadata.set_album(row.value(2).toString());
       item->metadata.set_grouping(row.value(3).toString());
       effective_originalyear = qMax(0, item->metadata.effective_originalyear());
-      item->key = PrettyYearAlbum(effective_originalyear, item->metadata.album());
-      item->sort_text = SortTextForNumber(effective_originalyear) + item->metadata.grouping()
-                        + item->metadata.album();
+      item->key =
+          PrettyYearAlbum(effective_originalyear, item->metadata.album());
+      item->sort_text = SortTextForNumber(effective_originalyear) +
+                        item->metadata.grouping() + item->metadata.album();
       break;
 
     case GroupBy_Year:
@@ -1050,7 +1047,8 @@ LibraryItem* LibraryModel::ItemFromSong(GroupBy type, bool signal,
       item->metadata.set_originalyear(originalyear);
       item->metadata.set_album(s.album());
       item->key = PrettyYearAlbum(effective_originalyear, s.album());
-      item->sort_text = SortTextForNumber(effective_originalyear) + s.grouping() + s.album();
+      item->sort_text =
+          SortTextForNumber(effective_originalyear) + s.grouping() + s.album();
       break;
 
     case GroupBy_Year:

@@ -64,8 +64,26 @@ signals:
   void showEvent(QShowEvent*);
   void hideEvent(QHideEvent*);
 
+ private:
+  struct Data {
+    Data(const Song& song = Song()) : original_(song), current_(song) {}
+
+    static QVariant value(const Song& song, const QString& id);
+    QVariant original_value(const QString& id) const {
+      return value(original_, id);
+    }
+    QVariant current_value(const QString& id) const {
+      return value(current_, id);
+    }
+
+    void set_value(const QString& id, const QVariant& value);
+
+    Song original_;
+    Song current_;
+  };
+
  private slots:
-  void SetSongsFinished();
+  void SetSongsFinished(QFuture<QList<EditTagDialog::Data>> future);
   void AcceptFinished();
 
   void SelectionChanged();
@@ -90,23 +108,6 @@ signals:
   void NextSong();
 
  private:
-  struct Data {
-    Data(const Song& song = Song()) : original_(song), current_(song) {}
-
-    static QVariant value(const Song& song, const QString& id);
-    QVariant original_value(const QString& id) const {
-      return value(original_, id);
-    }
-    QVariant current_value(const QString& id) const {
-      return value(current_, id);
-    }
-
-    void set_value(const QString& id, const QVariant& value);
-
-    Song original_;
-    Song current_;
-  };
-
   struct FieldData {
     FieldData(QLabel* label = nullptr, QWidget* editor = nullptr,
               const QString& id = QString())

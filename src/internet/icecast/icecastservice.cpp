@@ -24,7 +24,6 @@
 #include <algorithm>
 
 #include <QDesktopServices>
-#include <QFutureWatcher>
 #include <QMenu>
 #include <QMultiHash>
 #include <QNetworkReply>
@@ -75,8 +74,8 @@ IcecastService::IcecastService(Application* app, InternetModel* parent)
 IcecastService::~IcecastService() {}
 
 QStandardItem* IcecastService::CreateRootItem() {
-  root_ = new QStandardItem(IconLoader::Load("icon_radio", 
-                            IconLoader::Lastfm), kServiceName);
+  root_ = new QStandardItem(IconLoader::Load("icon_radio", IconLoader::Lastfm),
+                            kServiceName);
   root_->setData(true, InternetModel::Role_CanLazyLoad);
   return root_;
 }
@@ -128,13 +127,9 @@ void IcecastService::DownloadDirectoryFinished(QNetworkReply* reply,
 
   QFuture<IcecastBackend::StationList> future =
       QtConcurrent::run(this, &IcecastService::ParseDirectory, reply);
-  QFutureWatcher<void>* watcher = new QFutureWatcher<void>(this);
-  watcher->setFuture(future);
-  NewClosure(
-      watcher, SIGNAL(finished()), this,
-      SLOT(ParseDirectoryFinished(QFuture<IcecastBackend::StationList>, int)),
-      future, task_id);
-  connect(watcher, SIGNAL(finished()), watcher, SLOT(deleteLater()));
+  NewClosure(future, this, SLOT(ParseDirectoryFinished(
+                               QFuture<IcecastBackend::StationList>, int)),
+             future, task_id);
 }
 
 namespace {

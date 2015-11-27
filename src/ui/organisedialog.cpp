@@ -22,7 +22,6 @@
 
 #include <QDir>
 #include <QFileInfo>
-#include <QFutureWatcher>
 #include <QHash>
 #include <QMenu>
 #include <QPushButton>
@@ -53,7 +52,8 @@ OrganiseDialog::OrganiseDialog(TaskManager* task_manager, QWidget* parent)
   connect(ui_->button_box->button(QDialogButtonBox::Reset), SIGNAL(clicked()),
           SLOT(Reset()));
 
-  ui_->aftercopying->setItemIcon(1, IconLoader::Load("edit-delete", IconLoader::Base));
+  ui_->aftercopying->setItemIcon(
+      1, IconLoader::Load("edit-delete", IconLoader::Base));
 
   // Valid tags
   QMap<QString, QString> tags;
@@ -155,12 +155,7 @@ bool OrganiseDialog::SetUrls(const QList<QUrl>& urls) {
 bool OrganiseDialog::SetFilenames(const QStringList& filenames) {
   songs_future_ =
       QtConcurrent::run(this, &OrganiseDialog::LoadSongsBlocking, filenames);
-  QFutureWatcher<SongList>* watcher = new QFutureWatcher<SongList>(this);
-  watcher->setFuture(songs_future_);
-  NewClosure(watcher, SIGNAL(finished()), [=]() {
-    SetSongs(songs_future_.result());
-    watcher->deleteLater();
-  });
+  NewClosure(songs_future_, [=]() { SetSongs(songs_future_.result()); });
 
   SetLoadingSongs(true);
   return true;

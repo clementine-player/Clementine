@@ -15,26 +15,14 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "albumcovermanager.h"
-#include "edittagdialog.h"
-#include "trackselectiondialog.h"
+#include "ui/edittagdialog.h"
 #include "ui_edittagdialog.h"
-#include "core/application.h"
-#include "core/logging.h"
-#include "core/tagreaderclient.h"
-#include "core/utilities.h"
-#include "covers/albumcoverloader.h"
-#include "covers/coverproviders.h"
-#include "library/library.h"
-#include "library/librarybackend.h"
-#include "playlist/playlistdelegates.h"
-#include "ui/albumcoverchoicecontroller.h"
-#include "ui/coverfromurldialog.h"
+
+#include <limits>
 
 #include <QDateTime>
 #include <QDir>
 #include <QFuture>
-#include <QFutureWatcher>
 #include <QLabel>
 #include <QMenu>
 #include <QMessageBox>
@@ -43,7 +31,19 @@
 #include <QtConcurrentRun>
 #include <QtDebug>
 
-#include <limits>
+#include "core/application.h"
+#include "core/logging.h"
+#include "core/tagreaderclient.h"
+#include "core/utilities.h"
+#include "covers/albumcoverloader.h"
+#include "covers/coverproviders.h"
+#include "library/librarybackend.h"
+#include "library/library.h"
+#include "playlist/playlistdelegates.h"
+#include "ui/albumcoverchoicecontroller.h"
+#include "ui/albumcovermanager.h"
+#include "ui/coverfromurldialog.h"
+#include "ui/trackselectiondialog.h"
 
 const char* EditTagDialog::kHintText =
     QT_TR_NOOP("(different across multiple songs)");
@@ -158,12 +158,10 @@ EditTagDialog::EditTagDialog(Application* app, QWidget* parent)
   ui_->art->setAcceptDrops(true);
 
   // Add the next/previous buttons
-  previous_button_ =
-      new QPushButton(IconLoader::Load("go-previous", IconLoader::Base), 
-                      tr("Previous"), this);
-  next_button_ = 
-      new QPushButton(IconLoader::Load("go-next", IconLoader::Base), 
-                      tr("Next"), this);
+  previous_button_ = new QPushButton(
+      IconLoader::Load("go-previous", IconLoader::Base), tr("Previous"), this);
+  next_button_ = new QPushButton(IconLoader::Load("go-next", IconLoader::Base),
+                                 tr("Next"), this);
   ui_->button_box->addButton(previous_button_, QDialogButtonBox::ResetRole);
   ui_->button_box->addButton(next_button_, QDialogButtonBox::ResetRole);
 
@@ -251,20 +249,15 @@ void EditTagDialog::SetSongs(const SongList& s, const PlaylistItemList& items) {
   // Reload tags in the background
   QFuture<QList<Data>> future =
       QtConcurrent::run(this, &EditTagDialog::LoadData, s);
-  QFutureWatcher<QList<Data>>* watcher = new QFutureWatcher<QList<Data>>(this);
-  watcher->setFuture(future);
-  connect(watcher, SIGNAL(finished()), SLOT(SetSongsFinished()));
+  NewClosure(future, this,
+             SLOT(SetSongsFinished(QFuture<QList<EditTagDialog::Data>>)),
+             future);
 }
 
-void EditTagDialog::SetSongsFinished() {
-  QFutureWatcher<QList<Data>>* watcher =
-      dynamic_cast<QFutureWatcher<QList<Data>>*>(sender());
-  if (!watcher) return;
-  watcher->deleteLater();
-
+void EditTagDialog::SetSongsFinished(QFuture<QList<Data>> future) {
   if (!SetLoading(QString())) return;
 
-  data_ = watcher->result();
+  data_ = future.result();
   if (data_.count() == 0) {
     // If there were no valid songs, disable everything
     ui_->song_list->setEnabled(false);
@@ -708,16 +701,10 @@ void EditTagDialog::accept() {
   // Save tags in the background
   QFuture<void> future =
       QtConcurrent::run(this, &EditTagDialog::SaveData, data_);
-  QFutureWatcher<void>* watcher = new QFutureWatcher<void>(this);
-  watcher->setFuture(future);
-  connect(watcher, SIGNAL(finished()), SLOT(AcceptFinished()));
+  NewClosure(future, this, SLOT(AcceptFinished()));
 }
 
 void EditTagDialog::AcceptFinished() {
-  QFutureWatcher<void>* watcher = dynamic_cast<QFutureWatcher<void>*>(sender());
-  if (!watcher) return;
-  watcher->deleteLater();
-
   if (!SetLoading(QString())) return;
 
   QDialog::accept();

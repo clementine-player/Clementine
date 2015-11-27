@@ -20,7 +20,6 @@
 #include <functional>
 #include <memory>
 
-#include <QFutureWatcher>
 #include <QScrollBar>
 #include <QtConcurrentRun>
 
@@ -86,9 +85,8 @@ void DeviceProperties::ShowDevice(int row) {
                              << "phone-palm-pre";
 
     for (const QString& icon_name : icon_names) {
-      QListWidgetItem* item = new QListWidgetItem(IconLoader::Load(icon_name, 
-                                                  IconLoader::Base),
-                                                  QString(), ui_->icon);
+      QListWidgetItem* item = new QListWidgetItem(
+          IconLoader::Load(icon_name, IconLoader::Base), QString(), ui_->icon);
       item->setData(Qt::UserRole, icon_name);
     }
 
@@ -226,10 +224,8 @@ void DeviceProperties::UpdateFormats() {
 
     QFuture<bool> future = QtConcurrent::run(std::bind(
         &ConnectedDevice::GetSupportedFiletypes, device, &supported_formats_));
-    QFutureWatcher<bool>* watcher = new QFutureWatcher<bool>(this);
-    watcher->setFuture(future);
-
-    connect(watcher, SIGNAL(finished()), SLOT(UpdateFormatsFinished()));
+    NewClosure(future, this, SLOT(UpdateFormatsFinished(QFuture<bool>)),
+               future);
 
     ui_->formats_stack->setCurrentWidget(ui_->formats_page_loading);
     updating_formats_ = true;
@@ -265,12 +261,10 @@ void DeviceProperties::accept() {
 
 void DeviceProperties::OpenDevice() { manager_->Connect(index_.row()); }
 
-void DeviceProperties::UpdateFormatsFinished() {
-  QFutureWatcher<bool>* watcher = static_cast<QFutureWatcher<bool>*>(sender());
-  watcher->deleteLater();
+void DeviceProperties::UpdateFormatsFinished(QFuture<bool> future) {
   updating_formats_ = false;
 
-  if (!watcher->future().result()) {
+  if (!future.result()) {
     supported_formats_.clear();
   }
 

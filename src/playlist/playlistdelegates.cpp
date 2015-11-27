@@ -20,7 +20,6 @@
 #include <QDateTime>
 #include <QDir>
 #include <QFuture>
-#include <QFutureWatcher>
 #include <QHeaderView>
 #include <QHelpEvent>
 #include <QLinearGradient>
@@ -400,19 +399,12 @@ TagCompleter::TagCompleter(LibraryBackend* backend, Playlist::Column column,
     : QCompleter(editor), editor_(editor) {
   QFuture<TagCompletionModel*> future =
       QtConcurrent::run(&InitCompletionModel, backend, column);
-  QFutureWatcher<TagCompletionModel*>* watcher =
-      new QFutureWatcher<TagCompletionModel*>(this);
-  watcher->setFuture(future);
-
-  connect(watcher, SIGNAL(finished()), SLOT(ModelReady()));
+  NewClosure(future, this, SLOT(ModelReady(QFuture<TagCompletionModel*>)),
+             future);
 }
 
-void TagCompleter::ModelReady() {
-  QFutureWatcher<TagCompletionModel*>* watcher =
-      dynamic_cast<QFutureWatcher<TagCompletionModel*>*>(sender());
-  if (!watcher) return;
-
-  TagCompletionModel* model = watcher->result();
+void TagCompleter::ModelReady(QFuture<TagCompletionModel*> future) {
+  TagCompletionModel* model = future.result();
   setModel(model);
   setCaseSensitivity(Qt::CaseInsensitive);
   editor_->setCompleter(this);
@@ -421,7 +413,6 @@ void TagCompleter::ModelReady() {
 QWidget* TagCompletionItemDelegate::createEditor(QWidget* parent,
                                                  const QStyleOptionViewItem&,
                                                  const QModelIndex&) const {
-
   QLineEdit* editor = new QLineEdit(parent);
   new TagCompleter(backend_, column_, editor);
 

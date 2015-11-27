@@ -200,6 +200,15 @@ _detail::ClosureBase* NewClosure(QFuture<T> future, QObject* receiver,
   return NewClosure(watcher, SIGNAL(finished()), receiver, slot, args...);
 }
 
+template <typename T, typename F, typename... Args>
+_detail::ClosureBase* NewClosure(QFuture<T> future, const F& callback,
+                                 const Args&... args) {
+  QFutureWatcher<T>* watcher = new QFutureWatcher<T>;
+  watcher->setFuture(future);
+  QObject::connect(watcher, SIGNAL(finished()), watcher, SLOT(deleteLater()));
+  return NewClosure(watcher, SIGNAL(finished()), callback, args...);
+}
+
 void DoAfter(QObject* receiver, const char* slot, int msec);
 void DoAfter(std::function<void()> callback, std::chrono::milliseconds msec);
 void DoInAMinuteOrSo(QObject* receiver, const char* slot);

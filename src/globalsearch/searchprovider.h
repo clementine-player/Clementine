@@ -18,6 +18,7 @@
 #ifndef SEARCHPROVIDER_H
 #define SEARCHPROVIDER_H
 
+#include <QFuture>
 #include <QIcon>
 #include <QMetaType>
 #include <QObject>

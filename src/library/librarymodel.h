@@ -195,7 +195,7 @@ signals:
   void TotalSongCountUpdatedSlot(int count);
 
   // Called after ResetAsync
-  void ResetAsyncQueryFinished();
+  void ResetAsyncQueryFinished(QFuture<LibraryModel::QueryResult> future);
 
   void AlbumArtLoaded(quint64 id, const QImage& image);
 

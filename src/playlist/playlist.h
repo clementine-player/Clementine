@@ -394,7 +394,7 @@ signals:
   void SongSaveComplete(TagReaderReply* reply,
                         const QPersistentModelIndex& index);
   void ItemReloadComplete(const QPersistentModelIndex& index);
-  void ItemsLoaded();
+  void ItemsLoaded(QFuture<PlaylistItemList> future);
   void SongInsertVetoListenerDestroyed();
 
  private:
