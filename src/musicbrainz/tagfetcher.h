@@ -24,6 +24,8 @@
 #include <QFutureWatcher>
 #include <QObject>
 
+#include <array>
+
 class AcoustidClient;
 
 class TagFetcher : public QObject {
@@ -33,6 +35,7 @@ class TagFetcher : public QObject {
   // MusicBrainzClient.
 
  public:
+  static const std::array<QString, 5> kFetchedFields;
   TagFetcher(QObject* parent = nullptr);
 
   void StartFetch(const SongList& songs);
