@@ -455,7 +455,7 @@ bool GstEngine::Play(quint64 offset_nanosec) {
 
   QFuture<GstStateChangeReturn> future =
       current_pipeline_->SetState(GST_STATE_PLAYING);
-  NewClosure(future, this, SLOT(PlayDone()), offset_nanosec,
+  NewClosure(future, this, SLOT(PlayDone(QFuture<GstStateChangeReturn>, quint64, int)), offset_nanosec,
              current_pipeline_->id());
 
   if (is_fading_out_to_pause_) {
@@ -848,7 +848,7 @@ int GstEngine::AddBackgroundStream(shared_ptr<GstEnginePipeline> pipeline) {
   background_streams_[stream_id] = pipeline;
 
   QFuture<GstStateChangeReturn> future = pipeline->SetState(GST_STATE_PLAYING);
-  NewClosure(future, this, SLOT(BackgroundStreamPlayDone()), stream_id);
+  NewClosure(future, this, SLOT(BackgroundStreamPlayDone(QFuture<GstStateChangeReturn>, int)), stream_id);
   return stream_id;
 }
 

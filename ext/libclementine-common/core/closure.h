@@ -47,7 +47,7 @@ class ClosureBase {
   ObjectHelper* helper_;
 
  private:
-  Q_DISABLE_COPY(ClosureBase);
+  Q_DISABLE_COPY(ClosureBase)
 };
 
 // QObject helper as templated QObjects do not work.
@@ -63,7 +63,7 @@ class ObjectHelper : public QObject {
 
  private:
   std::unique_ptr<ClosureBase> closure_;
-  Q_DISABLE_COPY(ObjectHelper);
+  Q_DISABLE_COPY(ObjectHelper)
 };
 
 // Helpers for unpacking a variadic template list.
