@@ -31,7 +31,6 @@ class SubsonicDynamicPlaylist : public smart_playlists::Generator {
   friend QDataStream& operator>>(QDataStream& s, SubsonicDynamicPlaylist& p);
 
  public:
-
   // things that subsonic can return to us, persisted so only add at end
   enum QueryStat {
     QueryStat_Newest = 0,
@@ -39,7 +38,7 @@ class SubsonicDynamicPlaylist : public smart_playlists::Generator {
     QueryStat_Frequent = 2,
     QueryStat_Recent = 3,
     QueryStat_Starred = 4,
-    QueryStat_Random =5,
+    QueryStat_Random = 5,
   };
 
   SubsonicDynamicPlaylist();
@@ -56,10 +55,34 @@ class SubsonicDynamicPlaylist : public smart_playlists::Generator {
   bool is_dynamic() const { return true; }
   PlaylistItemList GenerateMore(int count);
 
+  static const int kMaxCount;
+  static const int kDefaultCount;
+  static const int kDefaultOffset;
+
  private:
-  void GetAlbum(SubsonicService* service, PlaylistItemList& list, QString id, QNetworkAccessManager& network, const bool usesslv3);
+  void GetAlbum(SubsonicService* service, PlaylistItemList& list, QString id,
+                QNetworkAccessManager& network, const bool usesslv3);
   // need our own one since we run in a different thread from service
-  QNetworkReply* Send(QNetworkAccessManager& network, const QUrl& url, const bool usesslv3);
+  QNetworkReply* Send(QNetworkAccessManager& network, const QUrl& url,
+                      const bool usesslv3);
+  QString GetTypeString() const {
+    switch (stat_) {
+      case QueryStat::QueryStat_Newest:
+        return "newest";
+      case QueryStat::QueryStat_Highest:
+        return "highest";
+      case QueryStat::QueryStat_Frequent:
+        return "frequent";
+      case QueryStat::QueryStat_Recent:
+        return "recent";
+      case QueryStat::QueryStat_Starred:
+        return "starred";
+      case QueryStat::QueryStat_Random:
+        return "random";
+      default:
+        return "newest";
+    }
+  }
 
  private:
   QueryStat stat_;
@@ -67,9 +90,7 @@ class SubsonicDynamicPlaylist : public smart_playlists::Generator {
   SubsonicService* service_;
 };
 
-#include "subsonicservice.h"
-
 QDataStream& operator<<(QDataStream& s, const SubsonicDynamicPlaylist& p);
 QDataStream& operator>>(QDataStream& s, SubsonicDynamicPlaylist& p);
 
-#endif // INTERNET_SUBSONIC_SUBSONICDYNAMICPLAYLIST_H_
+#endif  // INTERNET_SUBSONIC_SUBSONICDYNAMICPLAYLIST_H_

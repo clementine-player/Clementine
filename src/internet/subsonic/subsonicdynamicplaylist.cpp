@@ -16,6 +16,7 @@
 */
 
 #include "subsonicdynamicplaylist.h"
+#include "subsonicservice.h"
 
 #include <QEventLoop>
 #include <QFileInfo>
@@ -29,14 +30,19 @@
 #include "core/timeconstants.h"
 #include "internet/core/internetplaylistitem.h"
 
+#include <boost/scope_exit.hpp>
+
+// 500 limit per subsonic api
+const int SubsonicDynamicPlaylist::kMaxCount = 500;
+const int SubsonicDynamicPlaylist::kDefaultCount = 10;
+const int SubsonicDynamicPlaylist::kDefaultOffset = 0;
+
 SubsonicDynamicPlaylist::SubsonicDynamicPlaylist()
-  : stat_(QueryStat_Newest),
-    offset_(0) {}
+    : stat_(QueryStat_Newest), offset_(0) {}
 
 SubsonicDynamicPlaylist::SubsonicDynamicPlaylist(const QString& name,
                                                  QueryStat stat)
-  : stat_(stat),
-    offset_(0) {
+    : stat_(stat), offset_(0) {
   set_name(name);
 }
 
@@ -45,9 +51,7 @@ void SubsonicDynamicPlaylist::Load(const QByteArray& data) {
   s >> *this;
 }
 
-void SubsonicDynamicPlaylist::Load(QueryStat stat) {
-  stat_ = stat;
-}
+void SubsonicDynamicPlaylist::Load(QueryStat stat) { stat_ = stat; }
 
 QByteArray SubsonicDynamicPlaylist::Save() const {
   QByteArray ret;
@@ -57,7 +61,9 @@ QByteArray SubsonicDynamicPlaylist::Save() const {
 }
 
 // copied from SubsonicService
-QNetworkReply* SubsonicDynamicPlaylist::Send(QNetworkAccessManager& network, const QUrl& url, const bool usesslv3) {
+QNetworkReply* SubsonicDynamicPlaylist::Send(QNetworkAccessManager& network,
+                                             const QUrl& url,
+                                             const bool usesslv3) {
   QNetworkRequest request(url);
   // Don't try and check the authenticity of the SSL certificate - it'll almost
   // certainly be self-signed.
@@ -71,47 +77,38 @@ QNetworkReply* SubsonicDynamicPlaylist::Send(QNetworkAccessManager& network, con
   return reply;
 }
 
-PlaylistItemList SubsonicDynamicPlaylist::Generate() { return GenerateMore(10); }
+PlaylistItemList SubsonicDynamicPlaylist::Generate() {
+  return GenerateMore(10);
+}
 
 PlaylistItemList SubsonicDynamicPlaylist::GenerateMore(int count) {
   SubsonicService* service = InternetModel::Service<SubsonicService>();
-  int task_id = service->app_->task_manager()->StartTask(tr("Fetching Playlist Items"));
+  const int task_id =
+      service->app_->task_manager()->StartTask(tr("Fetching Playlist Items"));
+
+  BOOST_SCOPE_EXIT((service)(task_id)) {
+    // stop task when we're done
+    service->app_->task_manager()->SetTaskFinished(task_id);
+  }
+  BOOST_SCOPE_EXIT_END
+
   QUrl url = service->BuildRequestUrl("GetAlbumList");
   QNetworkAccessManager network;
 
-  switch (stat_) {
-    case QueryStat::QueryStat_Newest:
-      url.addQueryItem("type","newest");
-      break;
-    case QueryStat::QueryStat_Highest:
-      url.addQueryItem("type","highest");
-      break;
-    case QueryStat::QueryStat_Frequent:
-      url.addQueryItem("type","frequent");
-      break;
-    case QueryStat::QueryStat_Recent:
-      url.addQueryItem("type","recent");
-      break;
-  case QueryStat::QueryStat_Starred:
-      url.addQueryItem("type","starred");
-      break;
-    case QueryStat::QueryStat_Random:
-      url.addQueryItem("type","random");
-      break;
+  url.addQueryItem("type", GetTypeString());
+
+  if (count > kMaxCount) count = kMaxCount;
+  if (count != kDefaultCount) {
+    url.addQueryItem("size", QString::number(count));
   }
 
-  if (count > 500) count = 500;  // 500 limit per subsonic api
-  if (count != 10) { // 10 is default
-    url.addQueryItem("size",QString::number(count));
-  }
-
-  if (offset_ != 0) { // 0 is default
-    url.addQueryItem("offset",QString::number(offset_));
+  if (offset_ != kDefaultOffset) {
+    url.addQueryItem("offset", QString::number(offset_));
   }
 
   PlaylistItemList items;
 
-  QNetworkReply* reply = Send(network,url,service->usesslv3_);
+  QNetworkReply* reply = Send(network, url, service->usesslv3_);
 
   // wait for reply
   {
@@ -120,70 +117,74 @@ PlaylistItemList SubsonicDynamicPlaylist::GenerateMore(int count) {
     loop.exec();
   }
 
+  reply->deleteLater();
+
   if (reply->error() != QNetworkReply::NoError) {
-    qLog(Warning) << "HTTP error returned from Subsonic:" << reply->errorString()
-                  << ", url:" << url.toString();
-    service->app_->task_manager()->SetTaskFinished(task_id);
-    return items; // empty
+    qLog(Warning) << "HTTP error returned from Subsonic:"
+                  << reply->errorString() << ", url:" << url.toString();
+    return items;  // empty
   }
 
-  reply->deleteLater();
   QXmlStreamReader reader(reply);
   reader.readNextStartElement();
   if (reader.name() != "subsonic-response") {
     qLog(Warning) << "Not a subsonic-response, aboring playlist fetch";
-    service->app_->task_manager()->SetTaskFinished(task_id);
     return items;
   }
 
   if (reader.attributes().value("status") != "ok") {
     reader.readNextStartElement();
     int error = reader.attributes().value("code").toString().toInt();
-    qLog(Warning) << "An error occured fetching data.  Code: "<<error<<" Message: "<<reader.attributes().value("message").toString();
+    qLog(Warning) << "An error occured fetching data.  Code: " << error
+                  << " Message: "
+                  << reader.attributes().value("message").toString();
   }
 
   reader.readNextStartElement();
   if (reader.name() != "albumList") {
     qLog(Warning) << "albumList tag expected.  Aboring playlist fetch";
-    service->app_->task_manager()->SetTaskFinished(task_id);
     return items;
   }
 
   while (reader.readNextStartElement()) {
     if (reader.name() != "album") {
       qLog(Warning) << "album tag expected. Aboring playlist fetch";
-      service->app_->task_manager()->SetTaskFinished(task_id);
       return items;
     }
 
-    qLog(Debug) << "Getting album: "<<reader.attributes().value("album").toString();
-    GetAlbum(service,items,reader.attributes().value("id").toString(),network,service->usesslv3_);
-
+    qLog(Debug) << "Getting album: "
+                << reader.attributes().value("album").toString();
+    GetAlbum(service, items, reader.attributes().value("id").toString(),
+             network, service->usesslv3_);
     reader.skipCurrentElement();
   }
-  offset_+=count;
-  service->app_->task_manager()->SetTaskFinished(task_id);
+  offset_ += count;
   return items;
 }
 
-void SubsonicDynamicPlaylist::GetAlbum(SubsonicService* service, PlaylistItemList& list, QString id, QNetworkAccessManager& network, const bool usesslv3) {
+void SubsonicDynamicPlaylist::GetAlbum(SubsonicService* service,
+                                       PlaylistItemList& list, QString id,
+                                       QNetworkAccessManager& network,
+                                       const bool usesslv3) {
   QUrl url = service->BuildRequestUrl("getAlbum");
   url.addQueryItem("id", id);
   QNetworkReply* reply = Send(network, url, usesslv3);
 
-  { // wait for reply
+  {  // wait for reply
     QEventLoop loop;
     connect(reply, SIGNAL(finished()), &loop, SLOT(quit()));
     loop.exec();
   }
 
+  reply->deleteLater();
+
   if (reply->error() != QNetworkReply::NoError) {
-    qLog(Warning) << "HTTP error returned from Subsonic:" << reply->errorString()
-                  << ", url:" << url.toString();
+    qLog(Warning) << "HTTP error returned from Subsonic:"
+                  << reply->errorString() << ", url:" << url.toString();
     return;
   }
 
-    QXmlStreamReader reader(reply);
+  QXmlStreamReader reader(reply);
   reader.readNextStartElement();
 
   if (reader.name() != "subsonic-response") {
@@ -236,9 +237,8 @@ void SubsonicDynamicPlaylist::GetAlbum(SubsonicService* service, PlaylistItemLis
     song.set_mtime(0);
     song.set_ctime(0);
 
-
     list << std::shared_ptr<PlaylistItem>(
-      new InternetPlaylistItem(service,song));
+        new InternetPlaylistItem(service, song));
 
     reader.skipCurrentElement();
   }
@@ -255,5 +255,3 @@ QDataStream& operator>>(QDataStream& s, SubsonicDynamicPlaylist& p) {
   p.stat_ = SubsonicDynamicPlaylist::QueryStat(stat);
   return s;
 }
-
-
