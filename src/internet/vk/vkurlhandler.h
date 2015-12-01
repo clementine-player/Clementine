@@ -20,6 +20,8 @@
 #define INTERNET_VK_VKURLHANDLER_H_
 
 #include "core/urlhandler.h"
+#include "ui/iconloader.h"
+
 #include <QFile>
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
@@ -32,7 +34,7 @@ class VkUrlHandler : public UrlHandler {
  public:
   VkUrlHandler(VkService* service, QObject* parent);
   QString scheme() const { return "vk"; }
-  QIcon icon() const { return QIcon(":providers/vk.png"); }
+  QIcon icon() const { return IconLoader::Load("vk", IconLoader::Provider); }
   LoadResult StartLoading(const QUrl& url);
   void TrackSkipped();
   LoadResult LoadNext(const QUrl& url);

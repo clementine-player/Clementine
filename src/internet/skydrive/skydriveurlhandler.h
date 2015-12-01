@@ -20,6 +20,7 @@
 #define INTERNET_SKYDRIVE_SKYDRIVEURLHANDLER_H_
 
 #include "core/urlhandler.h"
+#include "ui/iconloader.h"
 
 class SkydriveService;
 
@@ -30,7 +31,7 @@ class SkydriveUrlHandler : public UrlHandler {
   explicit SkydriveUrlHandler(SkydriveService* service, QObject* parent = nullptr);
 
   QString scheme() const { return "skydrive"; }
-  QIcon icon() const { return QIcon(":providers/skydrive.png"); }
+  QIcon icon() const { return IconLoader::Load("skydrive", IconLoader::Provider); }
   LoadResult StartLoading(const QUrl& url);
 
  private:

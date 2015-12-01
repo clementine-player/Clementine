@@ -326,6 +326,7 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
   ui_->action_hypnotoad->setIcon(IconLoader::Load("hypnotoad", IconLoader::Base));
   ui_->action_kittens->setIcon(IconLoader::Load("kittens", IconLoader::Base));
   ui_->action_enterprise->setIcon(IconLoader::Load("enterprise", IconLoader::Base));
+  ui_->action_love->setIcon(IconLoader::Load("love", IconLoader::Lastfm));
 
   // File view connections
   connect(file_view_, SIGNAL(AddToPlaylist(QMimeData*)),

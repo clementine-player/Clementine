@@ -20,6 +20,7 @@
 #define INTERNET_DROPBOX_DROPBOXURLHANDLER_H_
 
 #include "core/urlhandler.h"
+#include "ui/iconloader.h"
 
 class DropboxService;
 
@@ -29,7 +30,7 @@ class DropboxUrlHandler : public UrlHandler {
   explicit DropboxUrlHandler(DropboxService* service, QObject* parent = nullptr);
 
   QString scheme() const { return "dropbox"; }
-  QIcon icon() const { return QIcon(":providers/dropbox.png"); }
+  QIcon icon() const { return IconLoader::Load("dropbox", IconLoader::Provider); }
   LoadResult StartLoading(const QUrl& url);
 
  private:
