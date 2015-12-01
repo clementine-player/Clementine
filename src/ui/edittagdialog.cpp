@@ -43,6 +43,7 @@
 #include "ui/albumcoverchoicecontroller.h"
 #include "ui/albumcovermanager.h"
 #include "ui/coverfromurldialog.h"
+#include "ui/iconloader.h"
 #include "ui/trackselectiondialog.h"
 
 const char* EditTagDialog::kHintText =
@@ -81,6 +82,9 @@ EditTagDialog::EditTagDialog(Application* app, QWidget* parent)
   ui_->setupUi(this);
   ui_->splitter->setSizes(QList<int>() << 200 << width() - 200);
   ui_->loading_label->hide();
+
+  ui_->fetch_tag->setIcon(IconLoader::Load("musicbrainz", 
+                          IconLoader::Provider));
 
   // An editable field is one that has a label as a buddy.  The label is
   // important because it gets turned bold when the field is changed.

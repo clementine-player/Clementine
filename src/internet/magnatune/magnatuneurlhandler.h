@@ -21,6 +21,7 @@
 #define INTERNET_MAGNATUNE_MAGNATUNEURLHANDLER_H_
 
 #include "core/urlhandler.h"
+#include "ui/iconloader.h"
 
 class MagnatuneService;
 
@@ -29,7 +30,7 @@ class MagnatuneUrlHandler : public UrlHandler {
   MagnatuneUrlHandler(MagnatuneService* service, QObject* parent);
 
   QString scheme() const { return "magnatune"; }
-  QIcon icon() const { return QIcon(":providers/magnatune.png"); }
+  QIcon icon() const { return IconLoader::Load("magnatune", IconLoader::Provider); }
   LoadResult StartLoading(const QUrl& url);
 
  private:

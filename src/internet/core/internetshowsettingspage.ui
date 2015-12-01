@@ -13,10 +13,6 @@
   <property name="windowTitle">
    <string comment="Global search settings dialog title.">Internet services</string>
   </property>
-  <property name="windowIcon">
-   <iconset resource="../../data/data.qrc">
-    <normaloff>:/icons/32x32/internet-services.png</normaloff>:/icons/32x32/internet-services.png</iconset>
-  </property>
   <layout class="QVBoxLayout" name="verticalLayout_4">
    <item>
     <widget class="QGroupBox" name="sources_group">
@@ -75,8 +71,5 @@
  <tabstops>
   <tabstop>sources</tabstop>
  </tabstops>
- <resources>
-  <include location="../../data/data.qrc"/>
- </resources>
  <connections/>
 </ui>

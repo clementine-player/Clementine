@@ -21,6 +21,7 @@
 #define INTERNET_SUBSONIC_SUBSONICURLHANDLER_H_
 
 #include "core/urlhandler.h"
+#include "ui/iconloader.h"
 
 class SubsonicService;
 
@@ -31,7 +32,7 @@ class SubsonicUrlHandler : public UrlHandler {
   SubsonicUrlHandler(SubsonicService* service, QObject* parent);
 
   QString scheme() const { return "subsonic"; }
-  QIcon icon() const { return QIcon(":providers/subsonic-32.png"); }
+  QIcon icon() const { return IconLoader::Load("subsonic", IconLoader::Provider); }
   LoadResult StartLoading(const QUrl& url);
   // LoadResult LoadNext(const QUrl& url);
 

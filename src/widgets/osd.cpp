@@ -21,6 +21,7 @@
 #include "covers/currentartloader.h"
 #include "osd.h"
 #include "osdpretty.h"
+#include "ui/iconloader.h"
 #include "ui/systemtrayicon.h"
 
 #ifdef HAVE_DBUS
@@ -194,7 +195,8 @@ void OSD::MagnatuneDownloadFinished(const QStringList& albums) {
     message = tr("%1 albums").arg(albums.count());
 
   ShowMessage(tr("Magnatune download finished"), message, QString(),
-              QImage(":/providers/magnatune.png"));
+              QImage(IconLoader::Load("magnatune", 
+                     IconLoader::Provider).pixmap(16).toImage()));
 }
 
 void OSD::ShowMessage(const QString& summary, const QString& message,

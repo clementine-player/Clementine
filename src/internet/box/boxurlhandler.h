@@ -20,6 +20,7 @@
 #define INTERNET_BOX_BOXURLHANDLER_H_
 
 #include "core/urlhandler.h"
+#include "ui/iconloader.h"
 
 class BoxService;
 
@@ -30,7 +31,7 @@ class BoxUrlHandler : public UrlHandler {
   explicit BoxUrlHandler(BoxService* service, QObject* parent = nullptr);
 
   QString scheme() const { return "box"; }
-  QIcon icon() const { return QIcon(":/providers/box.png"); }
+  QIcon icon() const { return IconLoader::Load("box", IconLoader::Provider); }
   LoadResult StartLoading(const QUrl& url);
 
  private:
