@@ -28,6 +28,7 @@
 #include "core/network.h"
 #include "core/taskmanager.h"
 #include "core/timeconstants.h"
+#include "core/waitforsignal.h"
 #include "internet/core/internetplaylistitem.h"
 
 #include <boost/scope_exit.hpp>
@@ -109,13 +110,7 @@ PlaylistItemList SubsonicDynamicPlaylist::GenerateMore(int count) {
   PlaylistItemList items;
 
   QNetworkReply* reply = Send(network, url, service->usesslv3_);
-
-  // wait for reply
-  {
-    QEventLoop loop;
-    connect(reply, SIGNAL(finished()), &loop, SLOT(quit()));
-    loop.exec();
-  }
+  WaitForSignal(reply, SIGNAL(finished()));
 
   reply->deleteLater();
 
@@ -169,13 +164,7 @@ void SubsonicDynamicPlaylist::GetAlbum(SubsonicService* service,
   QUrl url = service->BuildRequestUrl("getAlbum");
   url.addQueryItem("id", id);
   QNetworkReply* reply = Send(network, url, usesslv3);
-
-  {  // wait for reply
-    QEventLoop loop;
-    connect(reply, SIGNAL(finished()), &loop, SLOT(quit()));
-    loop.exec();
-  }
-
+  WaitForSignal(reply, SIGNAL(finished()));
   reply->deleteLater();
 
   if (reply->error() != QNetworkReply::NoError) {
