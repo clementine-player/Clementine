@@ -39,11 +39,11 @@ const int SubsonicDynamicPlaylist::kDefaultCount = 10;
 const int SubsonicDynamicPlaylist::kDefaultOffset = 0;
 
 SubsonicDynamicPlaylist::SubsonicDynamicPlaylist()
-    : stat_(QueryStat_Newest), offset_(0) {}
+  : stat_(QueryStat_Newest), offset_(kDefaultOffset) {}
 
 SubsonicDynamicPlaylist::SubsonicDynamicPlaylist(const QString& name,
                                                  QueryStat stat)
-    : stat_(stat), offset_(0) {
+    : stat_(stat), offset_(kDefaultOffset) {
   set_name(name);
 }
 
@@ -79,7 +79,7 @@ QNetworkReply* SubsonicDynamicPlaylist::Send(QNetworkAccessManager& network,
 }
 
 PlaylistItemList SubsonicDynamicPlaylist::Generate() {
-  return GenerateMore(10);
+  return GenerateMore(kDefaultCount);
 }
 
 PlaylistItemList SubsonicDynamicPlaylist::GenerateMore(int count) {
@@ -96,16 +96,11 @@ PlaylistItemList SubsonicDynamicPlaylist::GenerateMore(int count) {
   QUrl url = service->BuildRequestUrl("GetAlbumList");
   QNetworkAccessManager network;
 
-  url.addQueryItem("type", GetTypeString());
-
   if (count > kMaxCount) count = kMaxCount;
-  if (count != kDefaultCount) {
-    url.addQueryItem("size", QString::number(count));
-  }
 
-  if (offset_ != kDefaultOffset) {
-    url.addQueryItem("offset", QString::number(offset_));
-  }
+  url.addQueryItem("type", GetTypeString());
+  url.addQueryItem("size", QString::number(count));
+  url.addQueryItem("offset", QString::number(offset_));
 
   PlaylistItemList items;
 
