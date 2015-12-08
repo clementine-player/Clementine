@@ -87,6 +87,7 @@ class SubsonicService : public InternetService {
   typedef QMap<QString, QString> RequestOptions;
 
   bool IsConfigured() const;
+  bool IsAmpache() const;
 
   QStandardItem* CreateRootItem();
   void LazyPopulate(QStandardItem* item);
@@ -155,6 +156,7 @@ signals:
   LoginState login_state_;
   QString working_server_;  // The actual server, possibly post-redirect
   int redirect_count_;
+  bool is_ampache_;
 
  private slots:
   void UpdateTotalSongCount(int count);
