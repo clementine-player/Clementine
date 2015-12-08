@@ -197,6 +197,7 @@ set(SOURCES
   internet/subsonic/subsonicservice.cpp
   internet/subsonic/subsonicsettingspage.cpp
   internet/subsonic/subsonicurlhandler.cpp
+  internet/subsonic/subsonicdynamicplaylist.cpp
 
   library/groupbydialog.cpp
   library/library.cpp
@@ -499,6 +500,7 @@ set(HEADERS
   internet/subsonic/subsonicservice.h
   internet/subsonic/subsonicsettingspage.h
   internet/subsonic/subsonicurlhandler.h
+  internet/subsonic/subsonicdynamicplaylist.h
 
   library/groupbydialog.h
   library/library.h

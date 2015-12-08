@@ -26,6 +26,7 @@
 
 #include "internet/core/internetmodel.h"
 #include "internet/core/internetservice.h"
+#include "internet/subsonic/subsonicdynamicplaylist.h"
 
 class QNetworkAccessManager;
 class QNetworkReply;
@@ -108,6 +109,8 @@ class SubsonicService : public InternetService {
   // Convenience function to reduce QNetworkRequest/QSslConfiguration
   // boilerplate.
   QNetworkReply* Send(const QUrl& url);
+
+  friend PlaylistItemList SubsonicDynamicPlaylist::GenerateMore(int);
 
   static const char* kServiceName;
   static const char* kSettingsGroup;
