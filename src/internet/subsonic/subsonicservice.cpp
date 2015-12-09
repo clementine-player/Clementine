@@ -74,7 +74,8 @@ SubsonicService::SubsonicService(Application* app, InternetModel* parent)
       library_sort_model_(new QSortFilterProxyModel(this)),
       total_song_count_(0),
       login_state_(LoginState_OtherError),
-      redirect_count_(0) {
+      redirect_count_(0),
+      is_ampache_(false) {
   app_->player()->RegisterUrlHandler(url_handler_);
 
   connect(scanner_, SIGNAL(ScanFinished()), SLOT(ReloadDatabaseFinished()));
@@ -203,6 +204,8 @@ bool SubsonicService::IsConfigured() const {
          !password_.isEmpty();
 }
 
+bool SubsonicService::IsAmpache() const { return is_ampache_; }
+
 void SubsonicService::Login() {
   // Recreate fresh network state, otherwise old HTTPS settings seem to get
   // reused
@@ -324,6 +327,7 @@ void SubsonicService::OnPingFinished(QNetworkReply* reply) {
   } else {
     QXmlStreamReader reader(reply);
     reader.readNextStartElement();
+    is_ampache_ = (reader.attributes().value("type") == "ampache");
     QStringRef status = reader.attributes().value("status");
     int http_status_code =
         reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
@@ -540,6 +544,12 @@ void SubsonicLibraryScanner::OnGetAlbumFinished(QNetworkReply* reply) {
     song.set_directory_id(0);
     song.set_mtime(0);
     song.set_ctime(0);
+
+    if (reader.attributes().hasAttribute("playCount")) {
+      song.set_playcount(
+          reader.attributes().value("playCount").toString().toInt());
+    }
+
     songs_ << song;
     reader.skipCurrentElement();
   }
@@ -569,6 +579,9 @@ void SubsonicLibraryScanner::GetAlbumList(int offset) {
 void SubsonicLibraryScanner::GetAlbum(const QString& id) {
   QUrl url = service_->BuildRequestUrl("getAlbum");
   url.addQueryItem("id", id);
+  if (service_->IsAmpache()) {
+    url.addQueryItem("ampache", "1");
+  }
   QNetworkReply* reply = service_->Send(url);
   NewClosure(reply, SIGNAL(finished()), this,
              SLOT(OnGetAlbumFinished(QNetworkReply*)), reply);

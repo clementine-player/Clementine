@@ -158,6 +158,9 @@ void SubsonicDynamicPlaylist::GetAlbum(SubsonicService* service,
                                        const bool usesslv3) {
   QUrl url = service->BuildRequestUrl("getAlbum");
   url.addQueryItem("id", id);
+  if (service->IsAmpache()) {
+    url.addQueryItem("ampache", "1");
+  }
   QNetworkReply* reply = Send(network, url, usesslv3);
   WaitForSignal(reply, SIGNAL(finished()));
   reply->deleteLater();
@@ -220,6 +223,11 @@ void SubsonicDynamicPlaylist::GetAlbum(SubsonicService* service,
     song.set_directory_id(0);
     song.set_mtime(0);
     song.set_ctime(0);
+
+    if (reader.attributes().hasAttribute("playCount")) {
+      song.set_playcount(
+          reader.attributes().value("playCount").toString().toInt());
+    }
 
     list << std::shared_ptr<PlaylistItem>(
         new InternetPlaylistItem(service, song));
