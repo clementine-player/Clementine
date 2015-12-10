@@ -1,5 +1,6 @@
 /* This file is part of Clementine.
    Copyright 2010, David Sansome <me@davidsansome.com>
+   Copyright 2015, Arun Narayanankutty <n.arun.lifescience@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -15,20 +16,43 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "macscreensaver.h"
+#include "macidlehandler.h"
 
 #include <IOKit/pwr_mgt/IOPMLib.h>
 
 #include <QtDebug>
 
+#include "core/logging.h"
 #include "core/utilities.h"
 
-MacScreensaver::MacScreensaver() : assertion_id_(0) {}
+bool MacIdleHandler::is_inhibit_;
 
-void MacScreensaver::Inhibit() {
-  IOPMAssertionCreateWithName(
-      kIOPMAssertPreventUserIdleDisplaySleep, kIOPMAssertionLevelOn,
-      CFSTR("Showing full-screen Clementine visualisations"), &assertion_id_);
+MacIdleHandler::MacIdleHandler() : assertion_id_(0) {
+   is_inhibit_ = false;
 }
 
-void MacScreensaver::Uninhibit() { IOPMAssertionRelease(assertion_id_); }
+void MacIdleHandler::Inhibit(const char* reason) {
+  IOReturn reply = IOPMAssertionCreateWithName(
+      kIOPMAssertPreventUserIdleDisplaySleep, kIOPMAssertionLevelOn,
+      CFSTR(reason), &assertion_id_);
+
+  if (reply == kIOReturnSuccess) {
+    is_inhibit_ = true;
+  } else {
+    qLog(Warning) << "Failed to inhibit screensaver/suspend";
+  }
+}
+
+void MacIdleHandler::Uninhibit() {
+  IOReturn reply = IOPMAssertionRelease(assertion_id_);
+
+  if (reply == kIOReturnSuccess) {
+    is_inhibit_ = false;
+  } else {
+    qLog(Warning) << "Failed to uninhibit screensaver/suspend";
+  }
+}
+
+bool WindowsIdleHandler::Isinhibited() {
+  return is_inhibit_;
+}

@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>596</width>
-    <height>667</height>
+    <height>684</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -25,7 +25,7 @@
     </widget>
    </item>
    <item>
-    <widget class="QGroupBox" name="groupBox">
+    <widget class="QGroupBox" name="fading_groupBox">
      <property name="title">
       <string>Fading</string>
      </property>
@@ -70,7 +70,16 @@
       <item>
        <widget class="QWidget" name="fading_options" native="true">
         <layout class="QHBoxLayout" name="horizontalLayout">
-         <property name="margin">
+         <property name="leftMargin">
+          <number>0</number>
+         </property>
+         <property name="topMargin">
+          <number>0</number>
+         </property>
+         <property name="rightMargin">
+          <number>0</number>
+         </property>
+         <property name="bottomMargin">
           <number>0</number>
          </property>
          <item>
@@ -169,6 +178,22 @@
     </widget>
    </item>
    <item>
+    <widget class="QGroupBox" name="power_management_groupBox">
+     <property name="title">
+      <string>System Power Management Options</string>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_4">
+      <item>
+       <widget class="QCheckBox" name="inhibit_suspend_while_playing">
+        <property name="text">
+         <string>Inhibit suspend while playing</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
     <widget class="QGroupBox" name="replaygain_group">
      <property name="title">
       <string>Replay Gain</string>
@@ -187,7 +212,16 @@
          <bool>false</bool>
         </property>
         <layout class="QFormLayout" name="formLayout_4">
-         <property name="margin">
+         <property name="leftMargin">
+          <number>0</number>
+         </property>
+         <property name="topMargin">
+          <number>0</number>
+         </property>
+         <property name="rightMargin">
+          <number>0</number>
+         </property>
+         <property name="bottomMargin">
           <number>0</number>
          </property>
          <item row="0" column="0">

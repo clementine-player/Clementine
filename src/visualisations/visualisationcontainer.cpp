@@ -22,7 +22,7 @@
 #include "visualisationselector.h"
 #include "engines/gstengine.h"
 #include "ui/iconloader.h"
-#include "ui/screensaver.h"
+#include "ui/idlehandler.h"
 
 #include <QGLWidget>
 #include <QGraphicsProxyWidget>
@@ -265,9 +265,9 @@ void VisualisationContainer::keyReleaseEvent(QKeyEvent* event) {
 void VisualisationContainer::ToggleFullscreen() {
   setWindowState(windowState() ^ Qt::WindowFullScreen);
 
-  Screensaver* screensaver = Screensaver::GetScreensaver();
+  IdleHandler* screensaver = IdleHandler::GetScreensaver();
   if (screensaver)
-    isFullScreen() ? screensaver->Inhibit() : screensaver->Uninhibit();
+    isFullScreen() ? screensaver->Inhibit("Visualisation") : screensaver->Uninhibit();
 }
 
 void VisualisationContainer::SetFps(int fps) {
