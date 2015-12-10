@@ -32,7 +32,7 @@ class WindowsIdleHandler : public IdleHandler {
 
  private:
   EXECUTION_STATE previous_state_;
-  static bool is_inhibit_;
+  bool is_inhibit_;
 };
 
 #endif  // WINDOWSIDLEHANDLER_H

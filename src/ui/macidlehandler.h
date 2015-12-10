@@ -33,7 +33,7 @@ class MacIdleHandler : public IdleHandler {
 
  private:
   IOPMAssertionID assertion_id_;
-  static bool is_inhibit_;
+  bool is_inhibit_;
 };
 
 #endif  // MACIDLEHANDLER_H

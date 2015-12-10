@@ -197,7 +197,7 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
       doubleclick_playmode_(PlayBehaviour_IfStopped),
       menu_playmode_(PlayBehaviour_IfStopped),
       idlehandler_(IdleHandler::GetSuspend()),
-      is_suspend_inhibited(false) {
+      is_suspend_inhibited_(false) {
   qLog(Debug) << "Starting";
 
   connect(app, SIGNAL(ErrorAdded(QString)), SLOT(ShowErrorDialog(QString)));
@@ -977,6 +977,12 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
       new WiimotedevShortcuts(osd_, this, app_->player()));
 #endif
 
+  settings_.endGroup();
+
+  settings_.beginGroup(Engine::Base::kSettingsGroup);
+  inhibit_suspend_while_playing_status_ =
+      settings_.value("InhibitSuspendWhilePlaying", false).toBool();
+
   CheckFullRescanRevisions();
 
   LoadPlaybackStatus();
@@ -1009,11 +1015,6 @@ void MainWindow::ReloadSettings() {
                                    PlaylistAddBehaviour_Play).toInt());
   menu_playmode_ =
       PlayBehaviour(s.value("menu_playmode", PlayBehaviour_IfStopped).toInt());
-  s.endGroup();
-
-  s.beginGroup(Engine::Base::kSettingsGroup);
-  inhibit_suspend_while_playing_status_ =
-      s.value("InhibitSuspendWhilePlaying", false).toBool();
 }
 
 void MainWindow::ReloadAllSettings() {
@@ -2427,10 +2428,10 @@ void MainWindow::EnsureSettingsDialogCreated() {
           SLOT(SetWiimotedevInterfaceActived(bool)));
 #endif
 
-  // Handle Suspend ststus
+  // Handle suspend status
   connect(settings_dialog_.get(),
         SIGNAL(InhibitSuspendWhilePlaying(bool)),
-        SLOT(HandleInhibitSuspendWhilePlaying(bool)));
+        SLOT(InhibitSuspendWhilePlaying(bool)));
 
   // Allows custom notification preview
   connect(settings_dialog_.get(),
@@ -2808,15 +2809,20 @@ void MainWindow::keyPressEvent(QKeyEvent* event) {
   }
 }
 
+void MainWindow::InhibitSuspendWhilePlaying(bool status) {
+  inhibit_suspend_while_playing_status_ = status;
+  HandleInhibitSuspendWhilePlaying(status);
+}
+
 void MainWindow::HandleInhibitSuspendWhilePlaying(bool status) {
   if (idlehandler_) {
     if (inhibit_suspend_while_playing_status_ && 
-        !is_suspend_inhibited && status) {
+        !is_suspend_inhibited_ && status) {
       idlehandler_->Inhibit("Clementine is playing");
-      is_suspend_inhibited = idlehandler_->Isinhibited();
-    } else if (is_suspend_inhibited && !status){
+      is_suspend_inhibited_ = idlehandler_->Isinhibited();
+    } else if (is_suspend_inhibited_ && !status){
       idlehandler_->Uninhibit();
-      is_suspend_inhibited = idlehandler_->Isinhibited();
+      is_suspend_inhibited_ = idlehandler_->Isinhibited();
     }
   } 
 }

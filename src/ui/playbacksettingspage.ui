@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>596</width>
-    <height>684</height>
+    <height>754</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -70,16 +70,7 @@
       <item>
        <widget class="QWidget" name="fading_options" native="true">
         <layout class="QHBoxLayout" name="horizontalLayout">
-         <property name="leftMargin">
-          <number>0</number>
-         </property>
-         <property name="topMargin">
-          <number>0</number>
-         </property>
-         <property name="rightMargin">
-          <number>0</number>
-         </property>
-         <property name="bottomMargin">
+         <property name="margin">
           <number>0</number>
          </property>
          <item>
@@ -185,8 +176,11 @@
      <layout class="QVBoxLayout" name="verticalLayout_4">
       <item>
        <widget class="QCheckBox" name="inhibit_suspend_while_playing">
+        <property name="toolTip">
+         <string>If enabled, Clementine will prevent the system from automatically suspending if it is playing a track</string>
+        </property>
         <property name="text">
-         <string>Inhibit suspend while playing</string>
+         <string>Inhibit automatic suspend if playing</string>
         </property>
        </widget>
       </item>
@@ -212,16 +206,7 @@
          <bool>false</bool>
         </property>
         <layout class="QFormLayout" name="formLayout_4">
-         <property name="leftMargin">
-          <number>0</number>
-         </property>
-         <property name="topMargin">
-          <number>0</number>
-         </property>
-         <property name="rightMargin">
-          <number>0</number>
-         </property>
-         <property name="bottomMargin">
+         <property name="margin">
           <number>0</number>
          </property>
          <item row="0" column="0">

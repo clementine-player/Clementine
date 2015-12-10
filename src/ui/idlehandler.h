@@ -23,22 +23,6 @@ class IdleHandler {
  public:
   virtual ~IdleHandler() {}
 
-  static const char* kGnomeScreensaverService;
-  static const char* kGnomeScreensaverPath;
-  static const char* kGnomeScreensaverInterface;
-
-  static const char* kGnomePowermanagerService;
-  static const char* kGnomePowermanagerPath;
-  static const char* kGnomePowermanagerInterface;
-
-  static const char* kFreedesktopScreensaverService;
-  static const char* kFreedesktopScreensaverPath;
-  static const char* kFreedesktopScreensaverInterface;
-
-  static const char* kFreedesktopPowermanagerService;
-  static const char* kFreedesktopPowermanagerPath;
-  static const char* kFreedesktopPowermanagerInterface;
-
   virtual void Inhibit(const char* reason) = 0;
   virtual void Uninhibit() = 0;
   virtual bool Isinhibited() = 0; 

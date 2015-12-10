@@ -25,11 +25,8 @@
 #include "core/logging.h"
 #include "core/utilities.h"
 
-bool MacIdleHandler::is_inhibit_;
-
-MacIdleHandler::MacIdleHandler() : assertion_id_(0) {
-   is_inhibit_ = false;
-}
+MacIdleHandler::MacIdleHandler() : assertion_id_(0), 
+                                   is_inhibit_(false) {}
 
 void MacIdleHandler::Inhibit(const char* reason) {
   IOReturn reply = IOPMAssertionCreateWithName(
@@ -53,6 +50,6 @@ void MacIdleHandler::Uninhibit() {
   }
 }
 
-bool WindowsIdleHandler::Isinhibited() {
+bool MacIdleHandler::Isinhibited() {
   return is_inhibit_;
 }

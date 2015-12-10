@@ -22,11 +22,8 @@
 
 // TODO: use PowerCreateRequest on Win7+
 
-bool WindowsIdleHandler::is_inhibit_;
-
-WindowsIdleHandler::WindowsIdleHandler() : previous_state_(0) {
-  is_inhibit_ = false;
-}
+WindowsIdleHandler::WindowsIdleHandler() : previous_state_(0), 
+                                           is_inhibit_(false) {}
 
 void WindowsIdleHandler::Inhibit(const char*) {
   switch (IdleHandler::inbtr_) {
