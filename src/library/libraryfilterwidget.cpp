@@ -118,6 +118,22 @@ LibraryFilterWidget::LibraryFilterWidget(QWidget* parent)
 
 LibraryFilterWidget::~LibraryFilterWidget() { delete ui_; }
 
+void LibraryFilterWidget::UpdateGroupByActions() {
+  if (group_by_group_) {
+    disconnect(group_by_group_,0,0,0);
+    delete group_by_group_;
+  }
+
+  group_by_group_ = CreateGroupByActions(this);
+  group_by_menu_->clear();
+  group_by_menu_->addActions(group_by_group_->actions());
+  connect(group_by_group_, SIGNAL(triggered(QAction*)),
+          SLOT(GroupByClicked(QAction*)));
+  if (model_) {
+    CheckCurrentGrouping(model_->GetGroupBy());
+  }
+}
+
 QActionGroup* LibraryFilterWidget::CreateGroupByActions(QObject* parent) {
   QActionGroup* ret = new QActionGroup(parent);
   ret->addAction(CreateGroupByAction(
@@ -188,6 +204,7 @@ void LibraryFilterWidget::SaveGroupBy() {
       QInputDialog::getText(this, tr("Grouping Name"), tr("Grouping name:"));
   if (!text.isEmpty() && model_) {
     model_->SaveGrouping(text);
+    UpdateGroupByActions();
   }
 }
 
@@ -253,6 +270,10 @@ void LibraryFilterWidget::GroupingChanged(const LibraryModel::Grouping& g) {
   }
 
   // Now make sure the correct action is checked
+  CheckCurrentGrouping(g);
+}
+
+void LibraryFilterWidget::CheckCurrentGrouping(const LibraryModel::Grouping& g) {
   for (QAction* action : group_by_group_->actions()) {
     if (action->property("group_by").isNull()) continue;
 

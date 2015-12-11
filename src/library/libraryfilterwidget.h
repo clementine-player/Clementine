@@ -51,6 +51,7 @@ class LibraryFilterWidget : public QWidget {
 
   static QActionGroup* CreateGroupByActions(QObject* parent);
 
+  void UpdateGroupByActions();
   void SetFilterHint(const QString& hint);
   void SetApplyFilterToLibrary(bool filter_applies_to_model) {
     filter_applies_to_model_ = filter_applies_to_model;
@@ -92,6 +93,7 @@ signals:
  private:
   static QAction* CreateGroupByAction(const QString& text, QObject* parent,
                                       const LibraryModel::Grouping& grouping);
+  void CheckCurrentGrouping(const LibraryModel::Grouping& g);
 
  private:
   Ui_LibraryFilterWidget* ui_;

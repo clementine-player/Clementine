@@ -183,6 +183,7 @@ signals:
   void SetFilterQueryMode(QueryOptions::QueryMode query_mode);
 
   void SetGroupBy(const LibraryModel::Grouping& g);
+  const LibraryModel::Grouping& GetGroupBy() const { return group_by_; }
   void Init(bool async = true);
   void Reset();
   void ResetAsync();
