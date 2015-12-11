@@ -146,6 +146,10 @@ class CouldNotFindGioModuleError(Error):
   pass
 
 
+class CouldNotParseFrameworkNameError(Error):
+  pass
+
+
 
 if len(sys.argv) < 2:
   print 'Usage: %s <bundle.app>' % sys.argv[0]
@@ -163,8 +167,8 @@ commands.append(['mkdir', '-p', resources_dir])
 plugins_dir = os.path.join(bundle_dir, 'Contents', 'PlugIns')
 binary = os.path.join(bundle_dir, 'Contents', 'MacOS', bundle_name)
 
-fixed_libraries = []
-fixed_frameworks = []
+fixed_libraries = set()
+fixed_frameworks = set()
 
 def GetBrokenLibraries(binary):
   output = subprocess.Popen(['otool', '-L', binary], stdout=subprocess.PIPE).communicate()[0]
@@ -221,10 +225,10 @@ def FixAllLibraries(broken_libs):
     FixLibrary(lib)
 
 def FixFramework(path):
-  if path in fixed_libraries:
+  if path in fixed_frameworks:
     return
   else:
-    fixed_libraries.append(path)
+    fixed_frameworks.add(path)
   abs_path = FindFramework(path)
   broken_libs = GetBrokenLibraries(abs_path)
   FixAllLibraries(broken_libs)
@@ -241,7 +245,7 @@ def FixLibrary(path):
   if path in fixed_libraries or FindSystemLibrary(os.path.basename(path)) is not None:
     return
   else:
-    fixed_libraries.append(path)
+    fixed_libraries.add(path)
   abs_path = FindLibrary(path)
   broken_libs = GetBrokenLibraries(abs_path)
   FixAllLibraries(broken_libs)
@@ -287,24 +291,60 @@ def CopyPlugin(path, subdir):
   LOGGER.info("Copying plugin '%s'", path)
   return new_path
 
-def CopyFramework(path):
-  parts = path.split(os.sep)
-  for i, part in enumerate(parts):
-    if re.match(r'\w+\.framework', part):
-      full_path = os.path.join(frameworks_dir, *parts[i:-1])
-      break
-  args = ['mkdir', '-p', full_path]
-  commands.append(args)
-  args = ['ditto', '--arch=x86_64', path, full_path]
-  commands.append(args)
+def CopyFramework(src_binary):
+  while os.path.islink(src_binary):
+    src_binary = os.path.realpath(src_binary)
+    
+  m = re.match(r'(.*/([^/]+)\.framework)/Versions/([^/]+)/.*', src_binary)
+  if not m:
+    raise CouldNotParseFrameworkNameError(src_binary)
 
-  menu_nib = os.path.join(os.path.split(path)[0], 'Resources', 'qt_menu.nib')
+  src_base = m.group(1)
+  name = m.group(2)
+  version = m.group(3)
+
+  LOGGER.info("Copying framework %s version %s", name, version)
+
+  dest_base = os.path.join(frameworks_dir, '%s.framework' % name)
+  dest_dir = os.path.join(dest_base, 'Versions', version)
+  dest_binary = os.path.join(dest_dir, name)
+
+  commands.append(['mkdir', '-p', dest_dir])
+  commands.append(['ditto', '--arch=x86_64', src_binary, dest_binary])
+
+  # Copy special files from various places:
+  #   QtCore has Resources/qt_menu.nib (copy to app's Resources)
+  #   Sparkle has Resources/*
+  #   Qt* have Resources/Info.plist
+  resources_src = os.path.join(src_base, 'Resources')
+  menu_nib = os.path.join(resources_src, 'qt_menu.nib')
   if os.path.exists(menu_nib):
-    args = ['cp', '-r', menu_nib, resources_dir]
-    commands.append(args)
+    LOGGER.info("Copying qt_menu.nib '%s'", menu_nib)
+    commands.append(['cp', '-r', menu_nib, resources_dir])
+  elif os.path.exists(resources_src):
+    LOGGER.info("Copying resources dir '%s'", resources_src)
+    commands.append(['cp', '-r', resources_src, dest_dir])
 
-  LOGGER.info("Copying framework '%s'", path)
-  return os.path.join(full_path, parts[-1])
+  info_plist = os.path.join(src_base, 'Contents', 'Info.plist')
+  if os.path.exists(info_plist):
+    LOGGER.info("Copying special file '%s'", info_plist)
+    resources_dest = os.path.join(dest_dir, 'Resources')
+    commands.append(['mkdir', resources_dest])
+    commands.append(['cp', '-r', info_plist, resources_dest])
+
+  # Create symlinks in the Framework to make it look like
+  # https://developer.apple.com/library/mac/documentation/MacOSX/Conceptual/BPFrameworks/Concepts/FrameworkAnatomy.html
+  commands.append(['ln', '-sf',
+      'Versions/Current/%s' % name,
+      os.path.join(dest_base, name)])
+  commands.append(['ln', '-sf',
+      'Versions/Current/Resources',
+      os.path.join(dest_base, 'Resources')])
+  commands.append(['ln', '-sf',
+      version,
+      os.path.join(dest_base, 'Versions/Current')])
+
+  return dest_binary
 
 def FixId(path, library_name):
   id = '@executable_path/../Frameworks/%s' % library_name
