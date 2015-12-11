@@ -84,6 +84,7 @@ signals:
  private slots:
   void GroupingChanged(const LibraryModel::Grouping& g);
   void GroupByClicked(QAction* action);
+  void SaveGroupBy();
 
   void FilterTextChanged(const QString& text);
   void FilterDelayTimeout();

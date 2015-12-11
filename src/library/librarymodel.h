@@ -55,6 +55,7 @@ class LibraryModel : public SimpleTreeModel<LibraryItem> {
   static const char* kSmartPlaylistsMimeType;
   static const char* kSmartPlaylistsSettingsGroup;
   static const char* kSmartPlaylistsArray;
+  static const char* kSavedGroupingsSettingsGroup;
   static const int kSmartPlaylistsVersion;
   static const int kPrettyCoverSize;
   static const qint64 kIconCacheSize;
@@ -160,6 +161,9 @@ class LibraryModel : public SimpleTreeModel<LibraryItem> {
 
   // Whether or not to show letters heading in the library view
   void set_show_dividers(bool show_dividers);
+
+  // Save the current grouping
+  void SaveGrouping(QString name);
 
   // Utility functions for manipulating text
   static QString TextOrUnknown(const QString& text);
@@ -299,5 +303,8 @@ signals:
 };
 
 Q_DECLARE_METATYPE(LibraryModel::Grouping);
+
+QDataStream& operator<<(QDataStream& s, const LibraryModel::Grouping& g);
+QDataStream& operator>>(QDataStream& s, LibraryModel::Grouping& g);
 
 #endif  // LIBRARYMODEL_H
