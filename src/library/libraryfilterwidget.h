@@ -23,6 +23,7 @@
 #include <QWidget>
 
 #include "librarymodel.h"
+#include "savedgroupingmanager.h"
 
 class GroupByDialog;
 class SettingsDialog;
@@ -86,6 +87,7 @@ signals:
   void GroupingChanged(const LibraryModel::Grouping& g);
   void GroupByClicked(QAction* action);
   void SaveGroupBy();
+  void ShowGroupingManager();
 
   void FilterTextChanged(const QString& text);
   void FilterDelayTimeout();
@@ -100,6 +102,7 @@ signals:
   LibraryModel* model_;
 
   std::unique_ptr<GroupByDialog> group_by_dialog_;
+  std::unique_ptr<SavedGroupingManager> groupings_manager_;
   SettingsDialog* settings_dialog_;
 
   QMenu* filter_age_menu_;
