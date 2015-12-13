@@ -38,6 +38,7 @@ add_library(libclementine-tagreader STATIC
 )
 
 target_link_libraries(libclementine-tagreader
+  ${PROTOBUF_LIBRARY}
   libclementine-common
 )
 

@@ -32,7 +32,6 @@
 #include <QPaintEvent>
 #include <QtDebug>
 
-#include "engines/enginebase.h"
 #include "core/arraysize.h"
 
 // INSTRUCTIONS Base2D

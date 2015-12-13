@@ -22,6 +22,8 @@
 #include <functional>
 #include <memory>
 
+#include <QFuture>
+#include <QFutureWatcher>
 #include <QMetaMethod>
 #include <QObject>
 #include <QSharedPointer>
@@ -45,7 +47,7 @@ class ClosureBase {
   ObjectHelper* helper_;
 
  private:
-  Q_DISABLE_COPY(ClosureBase);
+  Q_DISABLE_COPY(ClosureBase)
 };
 
 // QObject helper as templated QObjects do not work.
@@ -61,7 +63,7 @@ class ObjectHelper : public QObject {
 
  private:
   std::unique_ptr<ClosureBase> closure_;
-  Q_DISABLE_COPY(ObjectHelper);
+  Q_DISABLE_COPY(ObjectHelper)
 };
 
 // Helpers for unpacking a variadic template list.
@@ -189,13 +191,31 @@ _detail::ClosureBase* NewClosure(QObject* sender, const char* signal,
   return NewClosure(sender, signal, std::bind(callback, receiver, args...));
 }
 
+template <typename T, typename... Args>
+_detail::ClosureBase* NewClosure(QFuture<T> future, QObject* receiver,
+                                 const char* slot, const Args&... args) {
+  QFutureWatcher<T>* watcher = new QFutureWatcher<T>;
+  watcher->setFuture(future);
+  QObject::connect(watcher, SIGNAL(finished()), watcher, SLOT(deleteLater()));
+  return NewClosure(watcher, SIGNAL(finished()), receiver, slot, args...);
+}
+
+template <typename T, typename F, typename... Args>
+_detail::ClosureBase* NewClosure(QFuture<T> future, const F& callback,
+                                 const Args&... args) {
+  QFutureWatcher<T>* watcher = new QFutureWatcher<T>;
+  watcher->setFuture(future);
+  QObject::connect(watcher, SIGNAL(finished()), watcher, SLOT(deleteLater()));
+  return NewClosure(watcher, SIGNAL(finished()), callback, args...);
+}
+
 void DoAfter(QObject* receiver, const char* slot, int msec);
 void DoAfter(std::function<void()> callback, std::chrono::milliseconds msec);
 void DoInAMinuteOrSo(QObject* receiver, const char* slot);
 
 template <typename R, typename P>
-void DoAfter(
-    std::function<void()> callback, std::chrono::duration<R, P> duration) {
+void DoAfter(std::function<void()> callback,
+             std::chrono::duration<R, P> duration) {
   QTimer* timer = new QTimer;
   timer->setSingleShot(true);
   NewClosure(timer, SIGNAL(timeout()), callback);

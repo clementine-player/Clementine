@@ -55,7 +55,7 @@ LibraryFilterWidget::LibraryFilterWidget(QWidget* parent)
   filter_delay_->setSingleShot(true);
 
   // Icons
-  ui_->options->setIcon(IconLoader::Load("configure"));
+  ui_->options->setIcon(IconLoader::Load("configure", IconLoader::Base));
 
   // Filter by age
   QActionGroup* filter_age_group = new QActionGroup(this);

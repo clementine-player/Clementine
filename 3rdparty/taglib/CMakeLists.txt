@@ -1,8 +1,8 @@
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-delete-non-virtual-dtor")
 
-set(TAGLIB_SOVERSION_CURRENT  13)
-set(TAGLIB_SOVERSION_REVISION 0)
-set(TAGLIB_SOVERSION_AGE      12)
+set(TAGLIB_SOVERSION_CURRENT  16)
+set(TAGLIB_SOVERSION_REVISION 1)
+set(TAGLIB_SOVERSION_AGE      15)
 math(EXPR TAGLIB_SOVERSION_MAJOR "${TAGLIB_SOVERSION_CURRENT} - ${TAGLIB_SOVERSION_AGE}")
 math(EXPR TAGLIB_SOVERSION_MINOR "${TAGLIB_SOVERSION_AGE}")
 math(EXPR TAGLIB_SOVERSION_PATCH "${TAGLIB_SOVERSION_REVISION}")
@@ -48,6 +48,8 @@ include_directories(
 
 if(ZLIB_FOUND)
   include_directories(${ZLIB_INCLUDE_DIR})
+elseif(HAVE_ZLIB_SOURCE)
+  include_directories(${ZLIB_SOURCE})
 endif()
 
 set(tag_HDRS
@@ -87,16 +89,20 @@ set(tag_HDRS
   mpeg/id3v2/id3v2tag.h
   mpeg/id3v2/frames/attachedpictureframe.h
   mpeg/id3v2/frames/commentsframe.h
+  mpeg/id3v2/frames/eventtimingcodesframe.h
   mpeg/id3v2/frames/generalencapsulatedobjectframe.h
   mpeg/id3v2/frames/ownershipframe.h
   mpeg/id3v2/frames/popularimeterframe.h
   mpeg/id3v2/frames/privateframe.h
   mpeg/id3v2/frames/relativevolumeframe.h
+  mpeg/id3v2/frames/synchronizedlyricsframe.h
   mpeg/id3v2/frames/textidentificationframe.h
   mpeg/id3v2/frames/uniquefileidentifierframe.h
   mpeg/id3v2/frames/unknownframe.h
   mpeg/id3v2/frames/unsynchronizedlyricsframe.h
   mpeg/id3v2/frames/urllinkframe.h
+  mpeg/id3v2/frames/chapterframe.h
+  mpeg/id3v2/frames/tableofcontentsframe.h
   ogg/oggfile.h
   ogg/oggpage.h
   ogg/oggpageheader.h
@@ -177,16 +183,20 @@ set(id3v2_SRCS
 set(frames_SRCS
   mpeg/id3v2/frames/attachedpictureframe.cpp
   mpeg/id3v2/frames/commentsframe.cpp
+  mpeg/id3v2/frames/eventtimingcodesframe.cpp
   mpeg/id3v2/frames/generalencapsulatedobjectframe.cpp
   mpeg/id3v2/frames/ownershipframe.cpp
   mpeg/id3v2/frames/popularimeterframe.cpp
   mpeg/id3v2/frames/privateframe.cpp
   mpeg/id3v2/frames/relativevolumeframe.cpp
+  mpeg/id3v2/frames/synchronizedlyricsframe.cpp
   mpeg/id3v2/frames/textidentificationframe.cpp
   mpeg/id3v2/frames/uniquefileidentifierframe.cpp
   mpeg/id3v2/frames/unknownframe.cpp
   mpeg/id3v2/frames/unsynchronizedlyricsframe.cpp
   mpeg/id3v2/frames/urllinkframe.cpp
+  mpeg/id3v2/frames/chapterframe.cpp
+  mpeg/id3v2/frames/tableofcontentsframe.cpp
 )
 
 set(ogg_SRCS
@@ -313,14 +323,31 @@ set(toolkit_SRCS
   toolkit/tpropertymap.cpp
   toolkit/trefcounter.cpp
   toolkit/tdebuglistener.cpp
-  toolkit/unicode.cpp
 )
+
+if(NOT WIN32)
+  set(unicode_SRCS
+    toolkit/unicode.cpp
+  )
+endif()
+
+if(HAVE_ZLIB_SOURCE)
+  set(zlib_SRCS
+    ${ZLIB_SOURCE}/adler32.c
+    ${ZLIB_SOURCE}/crc32.c
+    ${ZLIB_SOURCE}/inffast.c
+    ${ZLIB_SOURCE}/inflate.c
+    ${ZLIB_SOURCE}/inftrees.c
+    ${ZLIB_SOURCE}/zutil.c
+  )
+endif()
 
 set(tag_LIB_SRCS
   ${mpeg_SRCS} ${id3v1_SRCS} ${id3v2_SRCS} ${frames_SRCS} ${ogg_SRCS}
   ${vorbis_SRCS} ${oggflacs_SRCS} ${mpc_SRCS} ${ape_SRCS} ${toolkit_SRCS} ${flacs_SRCS}
   ${wavpack_SRCS} ${speex_SRCS} ${trueaudio_SRCS} ${riff_SRCS} ${aiff_SRCS} ${wav_SRCS}
   ${asf_SRCS} ${mp4_SRCS} ${mod_SRCS} ${s3m_SRCS} ${it_SRCS} ${xm_SRCS} ${opus_SRCS}
+  ${unicode_SRCS} ${zlib_SRCS}
   tag.cpp
   tagunion.cpp
   fileref.cpp
@@ -345,6 +372,7 @@ foreach(header ${tag_HDRS})
   configure_file(
     "${header}"
     "${CMAKE_CURRENT_BINARY_DIR}/headers/taglib/${header_name}"
-    COPY_ONLY
+    COPYONLY
   )
 endforeach()
+

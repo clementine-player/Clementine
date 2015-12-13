@@ -46,6 +46,7 @@ target_link_libraries(clementine-spotifyblob
   ${QT_QTNETWORK_LIBRARY}
   ${GSTREAMER_BASE_LIBRARIES}
   ${GSTREAMER_APP_LIBRARIES}
+  ${PROTOBUF_STATIC_LIBRARY}
   clementine-spotifyblob-messages
   libclementine-common
 )

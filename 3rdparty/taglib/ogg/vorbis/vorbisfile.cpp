@@ -63,20 +63,20 @@ namespace TagLib {
 // public members
 ////////////////////////////////////////////////////////////////////////////////
 
-Vorbis::File::File(FileName file, bool readProperties,
-                   Properties::ReadStyle propertiesStyle) : Ogg::File(file)
+Vorbis::File::File(FileName file, bool readProperties, Properties::ReadStyle) :
+  Ogg::File(file),
+  d(new FilePrivate())
 {
-  d = new FilePrivate;
   if(isOpen())
-    read(readProperties, propertiesStyle);
+    read(readProperties);
 }
 
-Vorbis::File::File(IOStream *stream, bool readProperties,
-                   Properties::ReadStyle propertiesStyle) : Ogg::File(stream)
+Vorbis::File::File(IOStream *stream, bool readProperties, Properties::ReadStyle) :
+  Ogg::File(stream),
+  d(new FilePrivate())
 {
-  d = new FilePrivate;
   if(isOpen())
-    read(readProperties, propertiesStyle);
+    read(readProperties);
 }
 
 Vorbis::File::~File()
@@ -121,7 +121,7 @@ bool Vorbis::File::save()
 // private members
 ////////////////////////////////////////////////////////////////////////////////
 
-void Vorbis::File::read(bool readProperties, Properties::ReadStyle propertiesStyle)
+void Vorbis::File::read(bool readProperties)
 {
   ByteVector commentHeaderData = packet(1);
 
@@ -134,5 +134,5 @@ void Vorbis::File::read(bool readProperties, Properties::ReadStyle propertiesSty
   d->comment = new Ogg::XiphComment(commentHeaderData.mid(7));
 
   if(readProperties)
-    d->properties = new Properties(this, propertiesStyle);
+    d->properties = new Properties(this);
 }

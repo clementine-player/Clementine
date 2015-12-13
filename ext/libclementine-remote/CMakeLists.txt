@@ -11,6 +11,7 @@ add_library(libclementine-remote STATIC
 )
 
 target_link_libraries(libclementine-remote
+  ${PROTOBUF_LIBRARY}
   libclementine-common
 )
 

@@ -543,10 +543,6 @@
    <property name="enabled">
     <bool>false</bool>
    </property>
-   <property name="icon">
-    <iconset resource="../../data/data.qrc">
-     <normaloff>:/last.fm/love.png</normaloff>:/last.fm/love.png</iconset>
-   </property>
    <property name="text">
     <string>Love</string>
    </property>
@@ -802,7 +798,7 @@
   </action>
   <action name="action_auto_complete_tags">
    <property name="icon">
-    <iconset resource="../../data/data.qrc">
+    <iconset>
      <normaloff>:/providers/musicbrainz.png</normaloff>:/providers/musicbrainz.png</iconset>
    </property>
    <property name="text">
@@ -819,7 +815,7 @@
   </action>
   <action name="action_add_podcast">
    <property name="icon">
-    <iconset resource="../../data/data.qrc">
+    <iconset>
      <normaloff>:/providers/podcast16.png</normaloff>:/providers/podcast16.png</iconset>
    </property>
    <property name="text">

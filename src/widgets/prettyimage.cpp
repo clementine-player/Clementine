@@ -16,7 +16,6 @@
 */
 
 #include "prettyimage.h"
-#include "ui/iconloader.h"
 
 #include <QApplication>
 #include <QContextMenuEvent>
@@ -24,7 +23,6 @@
 #include <QDir>
 #include <QFileDialog>
 #include <QFuture>
-#include <QFutureWatcher>
 #include <QLabel>
 #include <QMenu>
 #include <QNetworkAccessManager>
@@ -33,6 +31,9 @@
 #include <QScrollArea>
 #include <QSettings>
 #include <QtConcurrentRun>
+
+#include "core/closure.h"
+#include "ui/iconloader.h"
 
 const int PrettyImage::kTotalHeight = 200;
 const int PrettyImage::kReflectionHeight = 40;
@@ -60,8 +61,9 @@ void PrettyImage::LazyLoad() {
 
   // Start fetching the image
   QNetworkReply* reply = network_->get(QNetworkRequest(url_));
-  connect(reply, SIGNAL(finished()), SLOT(ImageFetched()));
   state_ = State_Fetching;
+  NewClosure(reply, SIGNAL(finished()), this,
+             SLOT(ImageFetched(QNetworkReply*)), reply);
 }
 
 QSize PrettyImage::image_size() const {
@@ -76,8 +78,7 @@ QSize PrettyImage::sizeHint() const {
   return QSize(image_size().width(), kTotalHeight);
 }
 
-void PrettyImage::ImageFetched() {
-  QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
+void PrettyImage::ImageFetched(QNetworkReply* reply) {
   reply->deleteLater();
 
   QImage image = QImage::fromData(reply->readAll());
@@ -90,20 +91,12 @@ void PrettyImage::ImageFetched() {
     QFuture<QImage> future =
         QtConcurrent::run(image_, &QImage::scaled, image_size(),
                           Qt::KeepAspectRatio, Qt::SmoothTransformation);
-
-    QFutureWatcher<QImage>* watcher = new QFutureWatcher<QImage>(this);
-    watcher->setFuture(future);
-    connect(watcher, SIGNAL(finished()), SLOT(ImageScaled()));
+    NewClosure(future, this, SLOT(ImageScaled(QFuture<QImage>)), future);
   }
 }
 
-void PrettyImage::ImageScaled() {
-  QFutureWatcher<QImage>* watcher =
-      reinterpret_cast<QFutureWatcher<QImage>*>(sender());
-  if (!watcher) return;
-  watcher->deleteLater();
-
-  thumbnail_ = QPixmap::fromImage(watcher->result());
+void PrettyImage::ImageScaled(QFuture<QImage> future) {
+  thumbnail_ = QPixmap::fromImage(future.result());
   state_ = State_Finished;
 
   updateGeometry();
@@ -179,9 +172,9 @@ void PrettyImage::contextMenuEvent(QContextMenuEvent* e) {
 
   if (!menu_) {
     menu_ = new QMenu(this);
-    menu_->addAction(IconLoader::Load("zoom-in"), tr("Show fullsize..."), this,
-                     SLOT(ShowFullsize()));
-    menu_->addAction(IconLoader::Load("document-save"),
+    menu_->addAction(IconLoader::Load("zoom-in", IconLoader::Base),
+                     tr("Show fullsize..."), this, SLOT(ShowFullsize()));
+    menu_->addAction(IconLoader::Load("document-save", IconLoader::Base),
                      tr("Save image") + "...", this, SLOT(SaveAs()));
   }
 

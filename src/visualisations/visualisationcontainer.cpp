@@ -98,8 +98,8 @@ void VisualisationContainer::Init() {
   selector_->SetVisualisation(vis_);
 
   // Settings menu
-  menu_->addAction(IconLoader::Load("view-fullscreen"), tr("Toggle fullscreen"),
-                   this, SLOT(ToggleFullscreen()));
+  menu_->addAction(IconLoader::Load("view-fullscreen", IconLoader::Base), 
+                   tr("Toggle fullscreen"), this, SLOT(ToggleFullscreen()));
 
   QMenu* fps_menu = menu_->addMenu(tr("Framerate"));
   QSignalMapper* fps_mapper = new QSignalMapper(this);
@@ -131,7 +131,7 @@ void VisualisationContainer::Init() {
   menu_->addAction(tr("Select visualizations..."), selector_, SLOT(show()));
 
   menu_->addSeparator();
-  menu_->addAction(IconLoader::Load("application-exit"),
+  menu_->addAction(IconLoader::Load("application-exit", IconLoader::Base),
                    tr("Close visualization"), this, SLOT(hide()));
 }
 

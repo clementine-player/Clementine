@@ -29,8 +29,8 @@
 #include "taglib_config.h"
 
 #define TAGLIB_MAJOR_VERSION 1
-#define TAGLIB_MINOR_VERSION 9
-#define TAGLIB_PATCH_VERSION 1
+#define TAGLIB_MINOR_VERSION 10
+#define TAGLIB_PATCH_VERSION 0
 
 #if defined(__GNUC__) && (__GNUC__ > 4 || (__GNUC__ == 4 && __GNUC_MINOR__ > 1))
 #define TAGLIB_IGNORE_MISSING_DESTRUCTOR _Pragma("GCC diagnostic ignored \"-Wnon-virtual-dtor\"")
@@ -94,7 +94,7 @@ namespace TagLib {
  * - Full support for unicode and internationalized tags.
  * - Dual <a href="http://www.mozilla.org/MPL/MPL-1.1.html">MPL</a> and
  *   <a href="http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html">LGPL</a> licenses.
- * - No external toolkit dependancies.
+ * - No external toolkit dependencies.
  *
  * \section why Why TagLib?
  *

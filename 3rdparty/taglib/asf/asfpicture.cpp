@@ -25,10 +25,12 @@
 
 #include <taglib.h>
 #include <tdebug.h>
-#include "trefcounter.h"
+#include <trefcounter.h>
+
 #include "asfattribute.h"
 #include "asffile.h"
 #include "asfpicture.h"
+#include "asfutils.h"
 
 using namespace TagLib;
 
@@ -134,8 +136,8 @@ ByteVector ASF::Picture::render() const
   return
     ByteVector((char)d->type) +
     ByteVector::fromUInt(d->picture.size(), false) +
-    ASF::File::renderString(d->mimeType) +
-    ASF::File::renderString(d->description) +
+    renderString(d->mimeType) +
+    renderString(d->description) +
     d->picture;
 }
 

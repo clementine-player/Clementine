@@ -113,6 +113,8 @@ PlaylistView::PlaylistView(QWidget* parent)
       read_only_settings_(true),
       upgrading_from_version_(-1),
       background_image_type_(Default),
+      blur_radius_(kDefaultBlurRadius),
+      opacity_level_(kDefaultOpacityLevel),
       previous_background_image_opacity_(0.0),
       fade_animation_(new QTimeLine(1000, this)),
       last_height_(-1),
@@ -143,6 +145,8 @@ PlaylistView::PlaylistView(QWidget* parent)
           SLOT(SaveGeometry()));
   connect(header_, SIGNAL(SectionVisibilityChanged(int, bool)),
           SLOT(SaveGeometry()));
+  connect(header_, SIGNAL(SectionRatingLockStatusChanged(bool)),
+          SLOT(SetRatingLockStatus(bool)));
   connect(header_, SIGNAL(sectionResized(int, int, int)),
           SLOT(InvalidateCachedCurrentPixmap()));
   connect(header_, SIGNAL(sectionMoved(int, int, int)),
@@ -269,6 +273,7 @@ void PlaylistView::SetPlaylist(Playlist* playlist) {
 
   playlist_ = playlist;
   LoadGeometry();
+  LoadRatingLockStatus();
   ReloadSettings();
   DynamicModeChanged(playlist->is_dynamic());
   setFocus();
@@ -385,6 +390,12 @@ void PlaylistView::LoadGeometry() {
   }
 }
 
+void PlaylistView::LoadRatingLockStatus() {
+  QSettings s;
+  s.beginGroup(Playlist::kSettingsGroup);
+  ratings_locked_ = s.value("RatingLocked", false).toBool();
+}
+
 void PlaylistView::SaveGeometry() {
   if (read_only_settings_) return;
 
@@ -392,6 +403,15 @@ void PlaylistView::SaveGeometry() {
   settings.beginGroup(Playlist::kSettingsGroup);
   settings.setValue("state", header_->SaveState());
   settings.setValue("state_version", kStateVersion);
+}
+
+void PlaylistView::SetRatingLockStatus(bool state) {
+  if (read_only_settings_) return;
+
+  ratings_locked_ = state;
+  QSettings s;
+  s.beginGroup(Playlist::kSettingsGroup);
+  s.setValue("RatingLocked", state);
 }
 
 void PlaylistView::ReloadBarPixmaps() {
@@ -713,11 +733,14 @@ void PlaylistView::closeEditor(QWidget* editor,
 }
 
 void PlaylistView::mouseMoveEvent(QMouseEvent* event) {
-  QModelIndex index = indexAt(event->pos());
-  if (index.isValid() && index.data(Playlist::Role_CanSetRating).toBool()) {
-    RatingHoverIn(index, event->pos());
-  } else if (rating_delegate_->is_mouse_over()) {
-    RatingHoverOut();
+  // Check wheather rating section is locked by user or not
+  if (!ratings_locked_) {
+    QModelIndex index = indexAt(event->pos());
+    if (index.isValid() && index.data(Playlist::Role_CanSetRating).toBool()) {
+      RatingHoverIn(index, event->pos());
+    } else if (rating_delegate_->is_mouse_over()) {
+      RatingHoverOut();
+    }
   }
   if (!drag_over_) {
     QTreeView::mouseMoveEvent(event);
@@ -725,7 +748,7 @@ void PlaylistView::mouseMoveEvent(QMouseEvent* event) {
 }
 
 void PlaylistView::leaveEvent(QEvent* e) {
-  if (rating_delegate_->is_mouse_over()) {
+  if (rating_delegate_->is_mouse_over() && !ratings_locked_) {
     RatingHoverOut();
   }
   QTreeView::leaveEvent(e);
@@ -783,13 +806,13 @@ void PlaylistView::mousePressEvent(QMouseEvent* event) {
 
   QModelIndex index = indexAt(event->pos());
   if (event->button() == Qt::LeftButton && index.isValid() &&
-      index.data(Playlist::Role_CanSetRating).toBool()) {
+      index.data(Playlist::Role_CanSetRating).toBool() && !ratings_locked_) {
     // Calculate which star was clicked
     double new_rating =
         RatingPainter::RatingForPos(event->pos(), visualRect(index));
 
     if (selectedIndexes().contains(index)) {
-      // Update all the selected items
+      // Update all the selected item ratings
       QModelIndexList src_index_list;
       for (const QModelIndex& index : selectedIndexes()) {
         if (index.data(Playlist::Role_CanSetRating).toBool()) {
@@ -799,7 +822,7 @@ void PlaylistView::mousePressEvent(QMouseEvent* event) {
       }
       playlist_->RateSongs(src_index_list, new_rating);
     } else {
-      // Update only this item
+      // Update only this item rating
       playlist_->RateSong(playlist_->proxy()->mapToSource(index), new_rating);
     }
   } else {

@@ -234,7 +234,7 @@ namespace TagLib {
      * This description identifies the frame and must be unique.
      */
 
-    //! An ID3v2 custom text identification frame implementationx
+    //! An ID3v2 custom text identification frame implementation
 
     class TAGLIB_EXPORT UserTextIdentificationFrame : public TextIdentificationFrame
     {

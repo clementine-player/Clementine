@@ -106,13 +106,21 @@ namespace TagLib {
          */
         virtual Properties *audioProperties() const;
 
+        /*!
+         * Save the file.
+         *
+         * This returns true if the save was successful.
+         *
+         * \warning In the current implementation, it's dangerous to call save()
+         * repeatedly.  It leads to a segfault.
+         */
         virtual bool save();
 
       private:
         File(const File &);
         File &operator=(const File &);
 
-        void read(bool readProperties, Properties::ReadStyle propertiesStyle);
+        void read(bool readProperties);
 
         class FilePrivate;
         FilePrivate *d;

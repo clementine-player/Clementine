@@ -63,8 +63,7 @@ set(SOURCES
   analyzers/baranalyzer.cpp
   analyzers/blockanalyzer.cpp
   analyzers/boomanalyzer.cpp
-  analyzers/nyancatanalyzer.cpp
-  analyzers/rainbowdashanalyzer.cpp
+  analyzers/rainbowanalyzer.cpp
   analyzers/sonogram.cpp
   analyzers/turbine.cpp
   analyzers/fht.cpp
@@ -192,6 +191,7 @@ set(SOURCES
   internet/subsonic/subsonicservice.cpp
   internet/subsonic/subsonicsettingspage.cpp
   internet/subsonic/subsonicurlhandler.cpp
+  internet/subsonic/subsonicdynamicplaylist.cpp
 
   library/groupbydialog.cpp
   library/library.cpp
@@ -396,8 +396,7 @@ set(HEADERS
   analyzers/baranalyzer.h
   analyzers/blockanalyzer.h
   analyzers/boomanalyzer.h
-  analyzers/nyancatanalyzer.h
-  analyzers/rainbowdashanalyzer.h
+  analyzers/rainbowanalyzer.h
   analyzers/sonogram.h
   analyzers/turbine.h
 
@@ -495,6 +494,7 @@ set(HEADERS
   internet/subsonic/subsonicservice.h
   internet/subsonic/subsonicsettingspage.h
   internet/subsonic/subsonicurlhandler.h
+  internet/subsonic/subsonicdynamicplaylist.h
 
   library/groupbydialog.h
   library/library.h
@@ -869,6 +869,7 @@ optional_source(WIN32
   SOURCES
     engines/directsounddevicefinder.cpp
     networkremote/tinysvcmdns.cpp
+    ui/windowsscreensaver.cpp
     widgets/osd_win.cpp
   INCLUDE_DIRECTORIES
     ${CMAKE_SOURCE_DIR}/3rdparty/tinysvcmdns
@@ -1082,12 +1083,10 @@ optional_source(HAVE_GOOGLE_DRIVE
 # Dropbox support
 optional_source(HAVE_DROPBOX
   SOURCES
-    internet/dropbox/dropboxauthenticator.cpp
     internet/dropbox/dropboxservice.cpp
     internet/dropbox/dropboxsettingspage.cpp
     internet/dropbox/dropboxurlhandler.cpp
   HEADERS
-    internet/dropbox/dropboxauthenticator.h
     internet/dropbox/dropboxservice.h
     internet/dropbox/dropboxsettingspage.h
     internet/dropbox/dropboxurlhandler.h
@@ -1408,28 +1407,6 @@ if (APPLE)
   install(DIRECTORY "${QT_QTGUI_LIBRARY_RELEASE}/Versions/Current/Resources/"
     DESTINATION "${CMAKE_BINARY_DIR}/clementine.app/Contents/Resources")
 
-  if (HAVE_SPARKLE)
-    install(DIRECTORY "${SPARKLE}/Versions/Current/Resources"
-      DESTINATION "${CMAKE_BINARY_DIR}/clementine.app/Contents/Frameworks/Sparkle.framework")
-  endif (HAVE_SPARKLE)
-
-  foreach (plist_destination Versions/4/Resources Resources)
-    install(FILES "${QT_QTCORE_LIBRARY_RELEASE}/Contents/Info.plist"
-      DESTINATION "${CMAKE_BINARY_DIR}/clementine.app/Contents/Frameworks/QtCore.framework/${plist_destination}")
-    install(FILES "${QT_QTGUI_LIBRARY_RELEASE}/Contents/Info.plist"
-      DESTINATION "${CMAKE_BINARY_DIR}/clementine.app/Contents/Frameworks/QtGui.framework/${plist_destination}")
-    install(FILES "${QT_QTNETWORK_LIBRARY_RELEASE}/Contents/Info.plist"
-      DESTINATION "${CMAKE_BINARY_DIR}/clementine.app/Contents/Frameworks/QtNetwork.framework/${plist_destination}")
-    install(FILES "${QT_QTOPENGL_LIBRARY_RELEASE}/Contents/Info.plist"
-      DESTINATION "${CMAKE_BINARY_DIR}/clementine.app/Contents/Frameworks/QtOpenGL.framework/${plist_destination}")
-    install(FILES "${QT_QTSQL_LIBRARY_RELEASE}/Contents/Info.plist"
-      DESTINATION "${CMAKE_BINARY_DIR}/clementine.app/Contents/Frameworks/QtSql.framework/${plist_destination}")
-    install(FILES "${QT_QTSVG_LIBRARY_RELEASE}/Contents/Info.plist"
-      DESTINATION "${CMAKE_BINARY_DIR}/clementine.app/Contents/Frameworks/QtSvg.framework/${plist_destination}")
-    install(FILES "${QT_QTXML_LIBRARY_RELEASE}/Contents/Info.plist"
-      DESTINATION "${CMAKE_BINARY_DIR}/clementine.app/Contents/Frameworks/QtXml.framework/${plist_destination}")
-  endforeach()
-
   if (HAVE_BREAKPAD)
     install(DIRECTORY
         ${CMAKE_CURRENT_SOURCE_DIR}/../3rdparty/google-breakpad/client/mac/build/Release/Breakpad.framework
@@ -1472,7 +1449,7 @@ if (APPLE)
 
   add_custom_command(
     OUTPUT ${PROJECT_BINARY_DIR}/clementine-${CLEMENTINE_VERSION_SPARKLE}.dmg
-    ${CMAKE_COMMAND} -E remove -f ${PROJECT_BINARY_DIR}/clementine-${CLEMENTINE_VERSION_SPARKLE}.dmg
+    COMMAND ${CMAKE_COMMAND} -E remove -f ${PROJECT_BINARY_DIR}/clementine-${CLEMENTINE_VERSION_SPARKLE}.dmg
     COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/../dist/create-dmg.sh ${PROJECT_BINARY_DIR}/clementine.app
     COMMAND ${CMAKE_COMMAND} -E rename
       ${PROJECT_BINARY_DIR}/clementine.dmg

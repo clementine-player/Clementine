@@ -158,7 +158,7 @@ PropertyMap Mod::Tag::setProperties(const PropertyMap &origProps)
 
   // for each tag that has been set above, remove the first entry in the corresponding
   // value list. The others will be returned as unsupported by this format.
-  for(StringList::Iterator it = oneValueSet.begin(); it != oneValueSet.end(); ++it) {
+  for(StringList::ConstIterator it = oneValueSet.begin(); it != oneValueSet.end(); ++it) {
     if(properties[*it].size() == 1)
       properties.erase(*it);
     else

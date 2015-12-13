@@ -33,53 +33,50 @@
 #include "wavpackproperties.h"
 #include "wavpackfile.h"
 
+// Implementation of this class is based on the information at:
+// http://www.wavpack.com/file_format.txt
+
 using namespace TagLib;
 
 class WavPack::Properties::PropertiesPrivate
 {
 public:
-  PropertiesPrivate(const ByteVector &d, long length, ReadStyle s) :
-    data(d),
-    streamLength(length),
-    style(s),
+  PropertiesPrivate() :
     length(0),
     bitrate(0),
     sampleRate(0),
     channels(0),
     version(0),
     bitsPerSample(0),
-    sampleFrames(0),
-    file(0) {}
+    lossless(false),
+    sampleFrames(0) {}
 
-  ByteVector data;
-  long streamLength;
-  ReadStyle style;
   int length;
   int bitrate;
   int sampleRate;
   int channels;
   int version;
   int bitsPerSample;
+  bool lossless;
   uint sampleFrames;
-  File *file;
 };
 
 ////////////////////////////////////////////////////////////////////////////////
 // public members
 ////////////////////////////////////////////////////////////////////////////////
 
-WavPack::Properties::Properties(const ByteVector &data, long streamLength, ReadStyle style) : AudioProperties(style)
+WavPack::Properties::Properties(const ByteVector &, long, ReadStyle style) :
+  AudioProperties(style),
+  d(new PropertiesPrivate())
 {
-  d = new PropertiesPrivate(data, streamLength, style);
-  read();
+  debug("WavPack::Properties::Properties() -- This constructor is no longer used.");
 }
 
-WavPack::Properties::Properties(File *file, long streamLength, ReadStyle style) : AudioProperties(style)
+WavPack::Properties::Properties(File *file, long streamLength, ReadStyle style) :
+  AudioProperties(style),
+  d(new PropertiesPrivate())
 {
-  ByteVector data = file->readBlock(32);
-  d = new PropertiesPrivate(data, streamLength, style);
-  d->file = file;
-  read();
+  read(file, streamLength);
 }
 
 WavPack::Properties::~Properties()
@@ -88,6 +85,16 @@ WavPack::Properties::~Properties()
 }
 
 int WavPack::Properties::length() const
+{
+  return lengthInSeconds();
+}
+
+int WavPack::Properties::lengthInSeconds() const
+{
+  return d->length / 1000;
+}
+
+int WavPack::Properties::lengthInMilliseconds() const
 {
   return d->length;
 }
@@ -117,6 +124,11 @@ int WavPack::Properties::bitsPerSample() const
   return d->bitsPerSample;
 }
 
+bool WavPack::Properties::isLossless() const
+{
+  return d->lossless;
+}
+
 TagLib::uint WavPack::Properties::sampleFrames() const
 {
   return d->sampleFrames;
@@ -126,12 +138,16 @@ TagLib::uint WavPack::Properties::sampleFrames() const
 // private members
 ////////////////////////////////////////////////////////////////////////////////
 
-static const unsigned int sample_rates[] = { 
-   6000,  8000,  9600, 11025, 12000, 16000,  22050, 24000, 
-  32000, 44100, 48000, 64000, 88200, 96000, 192000,     0 };
+namespace
+{
+  const unsigned int sample_rates[] = {
+     6000,  8000,  9600, 11025, 12000, 16000,  22050, 24000,
+    32000, 44100, 48000, 64000, 88200, 96000, 192000,     0 };
+}
 
 #define BYTES_STORED    3
 #define MONO_FLAG       4
+#define LOSSLESS_FLAG   8
 
 #define SHIFT_LSB       13
 #define SHIFT_MASK      (0x1fL << SHIFT_LSB)
@@ -144,60 +160,77 @@ static const unsigned int sample_rates[] = {
 
 #define FINAL_BLOCK     0x1000
 
-void WavPack::Properties::read()
+void WavPack::Properties::read(File *file, long streamLength)
 {
-  if(!d->data.startsWith("wvpk"))
-    return;
+  long offset = 0;
 
-  d->version = d->data.toShort(8, false);
-  if(d->version < MIN_STREAM_VERS || d->version > MAX_STREAM_VERS)
-    return;
+  while(true) {
+    file->seek(offset);
+    const ByteVector data = file->readBlock(32);
 
-  const unsigned int flags = d->data.toUInt(24, false);
-  d->bitsPerSample = ((flags & BYTES_STORED) + 1) * 8 -
-    ((flags & SHIFT_MASK) >> SHIFT_LSB);
-  d->sampleRate = sample_rates[(flags & SRATE_MASK) >> SRATE_LSB];
-  d->channels = (flags & MONO_FLAG) ? 1 : 2;
-
-  unsigned int samples = d->data.toUInt(12, false);
-  if(samples == ~0u) {
-    if(d->file && d->style != Fast) {
-      samples = seekFinalIndex();
+    if(data.size() < 32) {
+      debug("WavPack::Properties::read() -- data is too short.");
+      break;
     }
-    else {
-      samples = 0;
+
+    if(!data.startsWith("wvpk")) {
+      debug("WavPack::Properties::read() -- Block header not found.");
+      break;
     }
-  }
-  d->length = d->sampleRate > 0 ? (samples + (d->sampleRate / 2)) / d->sampleRate : 0;
-  d->sampleFrames = samples;
 
-  d->bitrate = d->length > 0 ? ((d->streamLength * 8L) / d->length) / 1000 : 0;
-}
+    const uint flags = data.toUInt(24, false);
 
-unsigned int WavPack::Properties::seekFinalIndex()
-{
-  ByteVector blockID("wvpk", 4);
+    if(offset == 0) {
+      d->version = data.toShort(8, false);
+      if(d->version < MIN_STREAM_VERS || d->version > MAX_STREAM_VERS)
+        break;
 
-  long offset = d->streamLength;
-  while(offset > 0) {
-    offset = d->file->rfind(blockID, offset);
-    if(offset == -1)
-      return 0;
-    d->file->seek(offset);
-    ByteVector data = d->file->readBlock(32);
-    if(data.size() != 32)
-      return 0;
-    const int version = data.toShort(8, false);
-    if(version < MIN_STREAM_VERS || version > MAX_STREAM_VERS)
-      continue;
-    const unsigned int flags = data.toUInt(24, false);
-    if(!(flags & FINAL_BLOCK))
-      return 0;
-    const unsigned int blockIndex   = data.toUInt(16, false);
-    const unsigned int blockSamples = data.toUInt(20, false);
-    return blockIndex + blockSamples;
+      d->bitsPerSample = ((flags & BYTES_STORED) + 1) * 8 - ((flags & SHIFT_MASK) >> SHIFT_LSB);
+      d->sampleRate    = sample_rates[(flags & SRATE_MASK) >> SRATE_LSB];
+      d->lossless      = !(flags & LOSSLESS_FLAG);
+      d->sampleFrames  = data.toUInt(12, false);
+    }
+
+    d->channels += (flags & MONO_FLAG) ? 1 : 2;
+
+    if(flags & FINAL_BLOCK)
+      break;
+
+    const uint blockSize = data.toUInt(4, false);
+    offset += blockSize + 8;
   }
 
-  return 0;
+  if(d->sampleFrames == ~0u)
+    d->sampleFrames = seekFinalIndex(file, streamLength);
+
+  if(d->sampleFrames > 0 && d->sampleRate > 0) {
+    const double length = d->sampleFrames * 1000.0 / d->sampleRate;
+    d->length  = static_cast<int>(length + 0.5);
+    d->bitrate = static_cast<int>(streamLength * 8.0 / length + 0.5);
+  }
 }
 
+TagLib::uint WavPack::Properties::seekFinalIndex(File *file, long streamLength)
+{
+  const long offset = file->rfind("wvpk", streamLength);
+  if(offset == -1)
+    return 0;
+
+  file->seek(offset);
+  const ByteVector data = file->readBlock(32);
+  if(data.size() < 32)
+    return 0;
+
+  const int version = data.toShort(8, false);
+  if(version < MIN_STREAM_VERS || version > MAX_STREAM_VERS)
+    return 0;
+
+  const uint flags = data.toUInt(24, false);
+  if(!(flags & FINAL_BLOCK))
+    return 0;
+
+  const uint blockIndex   = data.toUInt(16, false);
+  const uint blockSamples = data.toUInt(20, false);
+
+  return blockIndex + blockSamples;
+}

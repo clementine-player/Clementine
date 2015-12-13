@@ -29,7 +29,7 @@ using namespace mygpo;
 
 Config* Config::s_instance = 0;
 
-ConfigPrivate::ConfigPrivate( Config* qq ) : q( qq ), m_mygpoBaseUrl( QUrl( QLatin1String( "http://gpodder.net" ) ) ), m_userAgentPrefix( QString() )
+ConfigPrivate::ConfigPrivate( Config* qq ) : q( qq ), m_mygpoBaseUrl( QUrl( QLatin1String( "https://gpodder.net" ) ) ), m_userAgentPrefix( QString() )
 {
 
 }

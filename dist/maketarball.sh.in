@@ -7,16 +7,17 @@ root=$(cd "${0%/*}/.." && echo $PWD/${0##*/})
 root=`dirname "$root"`
 rootnoslash=`echo $root | sed "s/^\///"`
 
-echo "Creating $name-$version.tar.gz..."
+echo "Creating $name-$version.tar.xz..."
 
-tar -czf $name-$version.tar.gz "$root" \
+tar -cJf $name-$version.tar.xz "$root" \
     --transform "s,^$rootnoslash,$name-$version," \
     --exclude-vcs \
     --exclude "$root/bin/*" \
     --exclude "$root/debian" \
     --exclude "$root/dist/*.tar.gz" \
+    --exclude "$root/dist/*.tar.xz" \
     --exclude "$root/CMakeLists.txt.user"
 
-echo "Also creating ${name}_${version}~${deb_dist}.orig.tar.gz..."
-cp "$name-$version.tar.gz" "${name}_${version}~${deb_dist}.orig.tar.gz"
+echo "Also creating ${name}_${version}~${deb_dist}.orig.tar.xz..."
+cp "$name-$version.tar.xz" "${name}_${version}~${deb_dist}.orig.tar.xz"
 

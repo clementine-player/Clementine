@@ -153,7 +153,7 @@ namespace TagLib {
 
       /*!
        * Returns the value as a single string.  In case of multiple strings,
-       * the first is returned.  If the data type is not \a Text, always returns 
+       * the first is returned.  If the data type is not \a Text, always returns
        * an empty String.
        */
       String toString() const;
@@ -164,7 +164,7 @@ namespace TagLib {
 #endif
 
       /*!
-       * Returns the list of text values.  If the data type is not \a Text, always 
+       * Returns the list of text values.  If the data type is not \a Text, always
        * returns an empty StringList.
        */
       StringList values() const;

@@ -49,9 +49,7 @@ void Amarok::Slider::wheelEvent(QWheelEvent* e) {
 
   // Position Slider (horizontal)
   int step = e->delta() * 1500 / 18;
-  int nval = QSlider::value() + step;
-  nval = qMax(nval, minimum());
-  nval = qMin(nval, maximum());
+  int nval = qBound(minimum(), QSlider::value() + step, maximum());
 
   QSlider::setValue(nval);
 
@@ -195,32 +193,14 @@ Amarok::VolumeSlider::VolumeSlider(QWidget* parent, uint max)
     : Amarok::Slider(Qt::Horizontal, parent, max),
       m_animCount(0),
       m_animTimer(new QTimer(this)),
-      m_pixmapInset(QPixmap(volumePixmapDraw ())) {
+      m_pixmapInset(QPixmap(drawVolumePixmap ())) {
   setFocusPolicy(Qt::NoFocus);
 
-  // Store window text color to check theme change at paintEvent
+  // Store theme colors to check theme change at paintEvent
   m_previous_theme_text_color = palette().color(QPalette::WindowText);
+  m_previous_theme_highlight_color = palette().color(QPalette::Highlight);
 
-  // BEGIN Calculate handle animation pixmaps for mouse-over effect
-  QImage pixmapHandle(":volumeslider-handle.png");
-  QImage pixmapHandleGlow(":volumeslider-handle_glow.png");
-
-  float opacity = 0.0;
-  const float step = 1.0 / ANIM_MAX;
-  QImage dst;
-  for (int i = 0; i < ANIM_MAX; ++i) {
-    dst = pixmapHandle.copy();
-
-    QPainter p(&dst);
-    p.setOpacity(opacity);
-    p.drawImage(0, 0, pixmapHandleGlow);
-    p.end();
-
-    m_handlePixmaps.append(QPixmap::fromImage(dst));
-    opacity += step;
-  }
-  // END
-
+  drawVolumeSliderHandle();
   generateGradient();
 
   setMinimumWidth(m_pixmapInset.width());
@@ -292,9 +272,8 @@ void Amarok::VolumeSlider::slideEvent(QMouseEvent* e) {
 }
 
 void Amarok::VolumeSlider::wheelEvent(QWheelEvent* e) {
-  const uint step = e->delta() / 30;
+  const uint step = e->delta() / (e->orientation() == Qt::Vertical ? 30 : -30);
   QSlider::setValue(QSlider::value() + step);
-
   emit sliderReleased(value());
 }
 
@@ -306,8 +285,13 @@ void Amarok::VolumeSlider::paintEvent(QPaintEvent*) {
 
   // If theme changed since last paintEvent, redraw the volume pixmap with new theme colors 
   if (m_previous_theme_text_color != palette().color(QPalette::WindowText)) {
-    m_pixmapInset = volumePixmapDraw();
+    m_pixmapInset = drawVolumePixmap();
     m_previous_theme_text_color = palette().color(QPalette::WindowText);
+  }
+
+  if (m_previous_theme_highlight_color != palette().color(QPalette::Highlight)) {
+    drawVolumeSliderHandle();
+    m_previous_theme_highlight_color = palette().color(QPalette::Highlight);
   }
 
   p.drawPixmap(0, 0, m_pixmapGradient, 0, 0, offset + padding, 0);
@@ -345,7 +329,7 @@ void Amarok::VolumeSlider::paletteChange(const QPalette&) {
   generateGradient();
 }
 
-QPixmap Amarok::VolumeSlider::volumePixmapDraw () const {
+QPixmap Amarok::VolumeSlider::drawVolumePixmap () const {
   QPixmap pixmap(112, 36);
   pixmap.fill(Qt::transparent);
   QPainter painter(&pixmap);
@@ -365,4 +349,42 @@ QPixmap Amarok::VolumeSlider::volumePixmapDraw () const {
   painter.drawLine(6, 29, 104, 29);
   // Return QPixmap
   return pixmap;
+}
+
+void Amarok::VolumeSlider::drawVolumeSliderHandle() {
+  QImage pixmapHandle(":volumeslider-handle.png");
+  QImage pixmapHandleGlow(":/volumeslider-handle_glow.png");
+
+  QImage pixmapHandleGlow_image(pixmapHandleGlow.size(), QImage::Format_ARGB32_Premultiplied);
+  QPainter painter(&pixmapHandleGlow_image);
+  
+  painter.setRenderHint(QPainter::Antialiasing);
+  painter.setRenderHint(QPainter::SmoothPixmapTransform);
+
+  // repaint volume slider handle glow image with theme highlight color
+  painter.fillRect(pixmapHandleGlow_image.rect(), QBrush(palette().color(QPalette::Highlight)));
+  painter.setCompositionMode(QPainter::CompositionMode_DestinationIn);
+  painter.drawImage(0, 0, pixmapHandleGlow);
+  
+  // Overlay the volume slider handle image 
+  painter.setCompositionMode(QPainter::CompositionMode_SourceAtop);
+  painter.drawImage(0, 0, pixmapHandle);
+
+  // BEGIN Calculate handle animation pixmaps for mouse-over effect
+  float opacity = 0.0;
+  const float step = 1.0 / ANIM_MAX;
+  QImage dst;
+  m_handlePixmaps.clear();
+  for (int i = 0; i < ANIM_MAX; ++i) {
+    dst = pixmapHandle.copy();
+
+    QPainter p(&dst);
+    p.setOpacity(opacity);
+    p.drawImage(0, 0, pixmapHandleGlow_image);
+    p.end();
+
+    m_handlePixmaps.append(QPixmap::fromImage(dst));
+    opacity += step;
+  }
+  // END
 }

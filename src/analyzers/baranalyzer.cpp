@@ -121,7 +121,7 @@ void BarAnalyzer::psychedelicModeChanged(bool enabled) {
 }
 
 void BarAnalyzer::analyze(QPainter& p, const Scope& s, bool new_frame) {
-  if (!new_frame) {
+  if (!new_frame  || engine_->state() == Engine::Paused) {
     p.drawPixmap(0, 0, canvas_);
     return;
   }
@@ -187,7 +187,7 @@ void BarAnalyzer::analyze(QPainter& p, const Scope& s, bool new_frame) {
             gradient(), y2 * kColumnWidth, height() - y2, kColumnWidth, y2,
        Qt::CopyROP );*/
 
-    roofMem_[i].push_back(height() - roofVector_[i] - 2);
+    roofMem_[i].emplace_back(height() - roofVector_[i] - 2);
 
     // set roof parameters for the NEXT draw
     if (roofVelocityVector_[i] != 0) {

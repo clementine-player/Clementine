@@ -18,6 +18,7 @@
 #ifndef PRETTYIMAGE_H
 #define PRETTYIMAGE_H
 
+#include <QFuture>
 #include <QUrl>
 #include <QWidget>
 
@@ -56,8 +57,8 @@ signals:
   void paintEvent(QPaintEvent*);
 
  private slots:
-  void ImageFetched();
-  void ImageScaled();
+  void ImageFetched(QNetworkReply* reply);
+  void ImageScaled(QFuture<QImage> future);
 
  private:
   enum State {

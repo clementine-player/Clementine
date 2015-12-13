@@ -33,7 +33,6 @@ add_library(libclementine-common STATIC
 )
 
 target_link_libraries(libclementine-common
-  ${PROTOBUF_LIBRARY}
   ${TAGLIB_LIBRARIES}
   ${CMAKE_THREAD_LIBS_INIT}
 )

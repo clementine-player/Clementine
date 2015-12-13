@@ -21,6 +21,7 @@
 #define INTERNET_LASTFM_LASTFMURLHANDLER_H_
 
 #include "core/urlhandler.h"
+#include "ui/iconloader.h"
 
 class LastFMService;
 
@@ -31,7 +32,7 @@ class LastFMUrlHandler : public UrlHandler {
   LastFMUrlHandler(LastFMService* service, QObject* parent);
 
   QString scheme() const { return "lastfm"; }
-  QIcon icon() const { return QIcon(":last.fm/as.png"); }
+  QIcon icon() const { return IconLoader::Load("as", IconLoader::Lastfm); }
   LoadResult StartLoading(const QUrl& url);
   LoadResult LoadNext(const QUrl& url);
 

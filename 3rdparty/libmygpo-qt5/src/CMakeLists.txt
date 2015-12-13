@@ -1,3 +1,9 @@
+# Extra bits for Clementine.
+set( MYGPO_QT_VERSION_MAJOR "1" )
+set( MYGPO_QT_VERSION_MINOR "0" )
+set( MYGPO_QT_VERSION_PATCH "9" )
+configure_file( Version.h.in ${CMAKE_CURRENT_BINARY_DIR}/Version.h )
+include_directories("${QJSON_INCLUDEDIR}/qjson")
 
 include_directories( ${QJSON_INCLUDE_DIR} ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR} )
 

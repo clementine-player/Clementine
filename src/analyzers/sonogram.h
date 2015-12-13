@@ -26,7 +26,6 @@
 #define ANALYZERS_SONOGRAM_H_
 
 #include "analyzerbase.h"
-#include "engines/enginebase.h"
 
 class Sonogram : public Analyzer::Base {
   Q_OBJECT

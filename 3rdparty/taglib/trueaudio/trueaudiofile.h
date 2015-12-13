@@ -79,7 +79,7 @@ namespace TagLib {
       };
 
       /*!
-       * Constructs a TrueAudio file from \a file.  If \a readProperties is true 
+       * Constructs a TrueAudio file from \a file.  If \a readProperties is true
        * the file's audio properties will also be read.
        *
        * \note In the current implementation, \a propertiesStyle is ignored.
@@ -88,7 +88,7 @@ namespace TagLib {
            Properties::ReadStyle propertiesStyle = Properties::Average);
 
       /*!
-       * Constructs a TrueAudio file from \a file.  If \a readProperties is true 
+       * Constructs a TrueAudio file from \a file.  If \a readProperties is true
        * the file's audio properties will also be read.
        *
        * If this file contains and ID3v2 tag the frames will be created using
@@ -113,7 +113,7 @@ namespace TagLib {
            Properties::ReadStyle propertiesStyle = Properties::Average);
 
       /*!
-       * Constructs a TrueAudio file from \a stream.  If \a readProperties is true 
+       * Constructs a TrueAudio file from \a stream.  If \a readProperties is true
        * the file's audio properties will also be read.
        *
        * \note TagLib will *not* take ownership of the stream, the caller is
@@ -164,6 +164,7 @@ namespace TagLib {
        * Set the ID3v2::FrameFactory to something other than the default.
        *
        * \see ID3v2FrameFactory
+       * \deprecated This value should be passed in via the constructor
        */
       void setID3v2FrameFactory(const ID3v2::FrameFactory *factory);
 
@@ -179,8 +180,8 @@ namespace TagLib {
        * if there is no valid ID3v1 tag.  If \a create is true it will create
        * an ID3v1 tag if one does not exist and returns a valid pointer.
        *
-       * \note This may return a valid pointer regardless of whether or not the 
-       * file on disk has an ID3v1 tag.  Use hasID3v1Tag() to check if the file 
+       * \note This may return a valid pointer regardless of whether or not the
+       * file on disk has an ID3v1 tag.  Use hasID3v1Tag() to check if the file
        * on disk actually has an ID3v1 tag.
        *
        * \note The Tag <b>is still</b> owned by the MPEG::File and should not be
@@ -198,8 +199,8 @@ namespace TagLib {
        * if there is no valid ID3v2 tag.  If \a create is true it will create
        * an ID3v2 tag if one does not exist and returns a valid pointer.
        *
-       * \note This may return a valid pointer regardless of whether or not the 
-       * file on disk has an ID3v2 tag.  Use hasID3v2Tag() to check if the file 
+       * \note This may return a valid pointer regardless of whether or not the
+       * file on disk has an ID3v2 tag.  Use hasID3v2Tag() to check if the file
        * on disk actually has an ID3v2 tag.
        *
        * \note The Tag <b>is still</b> owned by the MPEG::File and should not be
@@ -219,7 +220,7 @@ namespace TagLib {
        * \note In order to make the removal permanent save() still needs to be called
        */
       void strip(int tags = AllTags);
-      
+
       /*!
        * Returns whether or not the file on disk actually has an ID3v1 tag.
        *
@@ -233,13 +234,12 @@ namespace TagLib {
        * \see ID3v2Tag()
        */
       bool hasID3v2Tag() const;
-    
+
     private:
       File(const File &);
       File &operator=(const File &);
 
-      void read(bool readProperties, Properties::ReadStyle propertiesStyle);
-      void scan();
+      void read(bool readProperties);
       long findID3v1();
       long findID3v2();
 

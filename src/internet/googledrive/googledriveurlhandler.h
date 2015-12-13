@@ -20,6 +20,7 @@
 #define INTERNET_GOOGLEDRIVE_GOOGLEDRIVEURLHANDLER_H_
 
 #include "core/urlhandler.h"
+#include "ui/iconloader.h"
 
 class GoogleDriveService;
 
@@ -30,7 +31,7 @@ class GoogleDriveUrlHandler : public UrlHandler {
   explicit GoogleDriveUrlHandler(GoogleDriveService* service, QObject* parent = nullptr);
 
   QString scheme() const { return "googledrive"; }
-  QIcon icon() const { return QIcon(":providers/googledrive.png"); }
+  QIcon icon() const { return IconLoader::Load("googledrive", IconLoader::Provider); }
   LoadResult StartLoading(const QUrl& url);
 
  private:
