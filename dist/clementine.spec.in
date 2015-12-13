@@ -6,7 +6,7 @@ Summary:        A music player and library organiser
 Group:          Applications/Multimedia
 License:        GPLv3
 URL:            http://www.clementine-player.org/
-Source0:        %{name}-@CLEMENTINE_VERSION_SPARKLE@.tar.gz
+Source0:        %{name}-@CLEMENTINE_VERSION_SPARKLE@.tar.xz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires:  desktop-file-utils liblastfm-devel taglib-devel gettext
