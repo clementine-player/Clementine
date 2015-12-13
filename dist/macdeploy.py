@@ -334,13 +334,13 @@ def CopyFramework(src_binary):
 
   # Create symlinks in the Framework to make it look like
   # https://developer.apple.com/library/mac/documentation/MacOSX/Conceptual/BPFrameworks/Concepts/FrameworkAnatomy.html
-  commands.append(['ln', '-sf',
+  commands.append(['ln', '-sfh',
       'Versions/Current/%s' % name,
       os.path.join(dest_base, name)])
-  commands.append(['ln', '-sf',
+  commands.append(['ln', '-sfh',
       'Versions/Current/Resources',
       os.path.join(dest_base, 'Resources')])
-  commands.append(['ln', '-sf',
+  commands.append(['ln', '-sfh',
       version,
       os.path.join(dest_base, 'Versions/Current')])
 
