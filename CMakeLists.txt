@@ -56,6 +56,8 @@ find_package(PkgConfig REQUIRED)
 find_package(Protobuf REQUIRED)
 find_package(FFTW3)
 
+find_library(PROTOBUF_STATIC_LIBRARY libprotobuf.a libprotobuf)
+
 pkg_check_modules(CDIO libcdio)
 pkg_check_modules(CHROMAPRINT REQUIRED libchromaprint)
 pkg_search_module(CRYPTOPP cryptopp libcrypto++)
