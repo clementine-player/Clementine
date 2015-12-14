@@ -16,7 +16,7 @@ BASE=`pwd`
 DIRECTORY=clementine
 
 # Cleanup any old stuff
-rm -rfv $BASE/$DIRECTORY $BASE/*.diff.gz $BASE/*.tar.gz $BASE/*.dsc $BASE/*_source.changes
+rm -rfv $BASE/$DIRECTORY $BASE/*.diff.*z $BASE/*.tar.*z $BASE/*.dsc $BASE/*_source.changes
 
 # Checkout
 git clone $REPO $DIRECTORY
@@ -32,8 +32,8 @@ rm -rfv $BASE/$DIRECTORY/bin/*
 # Create the tarball
 cd $BASE/$DIRECTORY/dist
 ./maketarball.sh
-mv -v $BASE/$DIRECTORY/dist/*.orig.tar.gz $BASE/
-rm -v $BASE/$DIRECTORY/dist/*.tar.gz
+mv -v $BASE/$DIRECTORY/dist/*.orig.tar.xz $BASE/
+rm -v $BASE/$DIRECTORY/dist/*.tar.*z
 rm -vrf $BASE/$DIRECTORY/.git
 
 # Build the deb

@@ -94,10 +94,18 @@ namespace TagLib {
       Frame *createFrame(const ByteVector &data, Header *tagHeader) const;
 
       /*!
+       * After a tag has been read, this tries to rebuild some of them
+       * information, most notably the recording date, from frames that
+       * have been deprecated and can't be upgraded directly.
+       */
+      // BIC: Make virtual
+      void rebuildAggregateFrames(ID3v2::Tag *tag) const;
+
+      /*!
        * Returns the default text encoding for text frames.  If setTextEncoding()
        * has not been explicitly called this will only be used for new text
        * frames.  However, if this value has been set explicitly all frames will be
-       * converted to this type (unless it's explitly set differently for the
+       * converted to this type (unless it's explicitly set differently for the
        * individual frame) when being rendered.
        *
        * \see setDefaultTextEncoding()

@@ -60,13 +60,13 @@ namespace TagLib {
     //! An abstraction for the ISO-8859-1 string to data encoding in ID3v2 tags.
 
     /*!
-     * ID3v2 tag can store strings in ISO-8859-1 (Latin1), and TagLib only 
-     * supports genuine ISO-8859-1 by default.  However, in practice, non 
-     * ISO-8859-1 encodings are often used instead of ISO-8859-1, such as 
+     * ID3v2 tag can store strings in ISO-8859-1 (Latin1), and TagLib only
+     * supports genuine ISO-8859-1 by default.  However, in practice, non
+     * ISO-8859-1 encodings are often used instead of ISO-8859-1, such as
      * Windows-1252 for western languages, Shift_JIS for Japanese and so on.
      *
      * Here is an option to read such tags by subclassing this class,
-     * reimplementing parse() and setting your reimplementation as the default 
+     * reimplementing parse() and setting your reimplementation as the default
      * with ID3v2::Tag::setStringHandler().
      *
      * \note Writing non-ISO-8859-1 tags is not implemented intentionally.
@@ -98,7 +98,7 @@ namespace TagLib {
      * split into data components.
      *
      * ID3v2 tags have several parts, TagLib attempts to provide an interface
-     * for them all.  header(), footer() and extendedHeader() corespond to those
+     * for them all.  header(), footer() and extendedHeader() correspond to those
      * data structures in the ID3v2 standard and the APIs for the classes that
      * they return attempt to reflect this.
      *
@@ -115,7 +115,7 @@ namespace TagLib {
      * class.
      *
      * read() and parse() pass binary data to the other ID3v2 class structures,
-     * they do not handle parsing of flags or fields, for instace.  Those are
+     * they do not handle parsing of flags or fields, for instance.  Those are
      * handled by similar functions within those classes.
      *
      * \note All pointers to data structures within the tag will become invalid
@@ -126,7 +126,7 @@ namespace TagLib {
      * rather long, but if you're planning on messing with this class and others
      * that deal with the details of ID3v2 (rather than the nice, safe, abstract
      * TagLib::Tag and friends), it's worth your time to familiarize yourself
-     * with said spec (which is distrubuted with the TagLib sources).  TagLib
+     * with said spec (which is distributed with the TagLib sources).  TagLib
      * tries to do most of the work, but with a little luck, you can still
      * convince it to generate invalid ID3v2 tags.  The APIs for ID3v2 assume a
      * working knowledge of ID3v2 structure.  You're been warned.
@@ -150,7 +150,7 @@ namespace TagLib {
        * \note You should be able to ignore the \a factory parameter in almost
        * all situations.  You would want to specify your own FrameFactory
        * subclass in the case that you are extending TagLib to support additional
-       * frame types, which would be incorperated into your factory.
+       * frame types, which would be incorporated into your factory.
        *
        * \see FrameFactory
        */
@@ -353,9 +353,9 @@ namespace TagLib {
        */
       // BIC: combine with the above method
       ByteVector render(int version) const;
-      
+
       /*!
-       * Gets the current string handler that decides how the "Latin-1" data 
+       * Gets the current string handler that decides how the "Latin-1" data
        * will be converted to and from binary data.
        *
        * \see Latin1StringHandler
@@ -369,7 +369,7 @@ namespace TagLib {
        * released and default ISO-8859-1 handler is restored.
        *
        * \note The caller is responsible for deleting the previous handler
-       * as needed after it is released. 
+       * as needed after it is released.
        *
        * \see Latin1StringHandler
        */

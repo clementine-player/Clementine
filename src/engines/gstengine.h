@@ -35,7 +35,6 @@
 
 #include "bufferconsumer.h"
 #include "enginebase.h"
-#include "core/boundfuturewatcher.h"
 #include "core/timeconstants.h"
 
 class QTimer;
@@ -139,18 +138,14 @@ class GstEngine : public Engine::Base, public BufferConsumer {
   void FadeoutPauseFinished();
   void SeekNow();
   void BackgroundStreamFinished();
-  void BackgroundStreamPlayDone();
-  void PlayDone();
+  void BackgroundStreamPlayDone(QFuture<GstStateChangeReturn>, int);
+  void PlayDone(QFuture<GstStateChangeReturn> future, const quint64, const int);
 
   void BufferingStarted();
   void BufferingProgress(int percent);
   void BufferingFinished();
 
  private:
-  typedef QPair<quint64, int> PlayFutureWatcherArg;
-  typedef BoundFutureWatcher<GstStateChangeReturn, PlayFutureWatcherArg>
-      PlayFutureWatcher;
-
   struct PluginDetails {
     QString name;
     QString description;

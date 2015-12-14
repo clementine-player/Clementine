@@ -8,10 +8,11 @@
 # Lê Trường An <truongan@linuxmail.org>, 2011, 2012
 # Lê Trường An <truongan@linuxmail.org>, 2011-2013
 # Lê Trường An <truongan@linuxmail.org>, 2011
+# Phạm Nguyễn Hoàng <hoang19962008@yahoo.com.vn>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2015-08-17 13:03+0000\n"
+"PO-Revision-Date: 2015-11-16 15:02+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Vietnamese (http://www.transifex.com/davidsansome/clementine/language/vi/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -54,9 +55,9 @@ msgstr " mili giây"
 msgid " pt"
 msgstr " điểm"
 
-#: ../bin/src/ui_behavioursettingspage.h:374
+#: ../bin/src/ui_behavioursettingspage.h:359
 msgid " s"
-msgstr ""
+msgstr "s"
 
 #: ../bin/src/ui_notificationssettingspage.h:444
 #: ../bin/src/ui_visualisationselector.h:115
@@ -70,19 +71,19 @@ msgstr " bài hát"
 #: internet/vk/vkservice.cpp:149
 #, qt-format
 msgid "%1 (%2 songs)"
-msgstr ""
+msgstr "%1 (%2 bài hát)"
 
 #: widgets/osd.cpp:194
 #, qt-format
 msgid "%1 albums"
 msgstr "%1 album"
 
-#: core/utilities.cpp:119
+#: core/utilities.cpp:120
 #, qt-format
 msgid "%1 days"
 msgstr "%1 ngày"
 
-#: core/utilities.cpp:138
+#: core/utilities.cpp:139
 #, qt-format
 msgid "%1 days ago"
 msgstr "%1 ngày trước"
@@ -115,12 +116,12 @@ msgstr "%1 bài hát"
 #: smartplaylists/searchpreview.cpp:132
 #, qt-format
 msgid "%1 songs found"
-msgstr "%1 bài hát được tìm thấy"
+msgstr "Đã tìm thấy %1 bài hát"
 
 #: smartplaylists/searchpreview.cpp:128
 #, qt-format
 msgid "%1 songs found (showing %2)"
-msgstr "%1 bài hát được tìm thấy (đang hiện %2)"
+msgstr "Đã tìm thấy %1 bài hát (đang hiện %2)"
 
 #: playlist/playlistmanager.cpp:415
 #, qt-format
@@ -170,11 +171,11 @@ msgctxt ""
 msgid "%n remaining"
 msgstr "Còn lại %n"
 
-#: playlist/playlistheader.cpp:37
+#: playlist/playlistheader.cpp:45
 msgid "&Align text"
 msgstr "&Căn chỉnh"
 
-#: playlist/playlistheader.cpp:40
+#: playlist/playlistheader.cpp:48
 msgid "&Center"
 msgstr "&Giữa"
 
@@ -190,18 +191,22 @@ msgstr "&Hiệu ứng"
 msgid "&Help"
 msgstr "Trợ &giúp"
 
-#: playlist/playlistheader.cpp:73
+#: playlist/playlistheader.cpp:81
 #, qt-format
 msgid "&Hide %1"
 msgstr "Ẩ&n %1"
 
-#: playlist/playlistheader.cpp:32
+#: playlist/playlistheader.cpp:33
 msgid "&Hide..."
 msgstr "Ẩ&n..."
 
-#: playlist/playlistheader.cpp:39
+#: playlist/playlistheader.cpp:47
 msgid "&Left"
 msgstr "T&rái"
+
+#: playlist/playlistheader.cpp:36
+msgid "&Lock Rating"
+msgstr ""
 
 #: ../bin/src/ui_mainwindow.h:718
 msgid "&Music"
@@ -223,7 +228,7 @@ msgstr "T&hoát"
 msgid "&Repeat mode"
 msgstr "&Chế độ lặp lại"
 
-#: playlist/playlistheader.cpp:41
+#: playlist/playlistheader.cpp:49
 msgid "&Right"
 msgstr "&Phải"
 
@@ -231,7 +236,7 @@ msgstr "&Phải"
 msgid "&Shuffle mode"
 msgstr "Chế độ phát n&gẫu nhiên"
 
-#: playlist/playlistheader.cpp:33
+#: playlist/playlistheader.cpp:34
 msgid "&Stretch columns to fit window"
 msgstr "Căng các cột ra cho &vừa với cửa sổ"
 
@@ -243,9 +248,9 @@ msgstr "&Công cụ"
 msgid "(different across multiple songs)"
 msgstr "(mỗi bài mỗi khác)"
 
-#: internet/spotify/spotifyservice.cpp:465
+#: internet/spotify/spotifyservice.cpp:468
 msgid ", by "
-msgstr ""
+msgstr ", bởi"
 
 #: ui/about.cpp:84
 msgid "...and all the Amarok contributors"
@@ -263,7 +268,7 @@ msgstr "0:00:00"
 msgid "0px"
 msgstr "0 điểm ảnh"
 
-#: core/utilities.cpp:119
+#: core/utilities.cpp:120
 msgid "1 day"
 msgstr "1 ngày"
 
@@ -278,7 +283,7 @@ msgstr "128k MP3"
 
 #: ../bin/src/ui_playbacksettingspage.h:378
 msgid "192,000Hz"
-msgstr ""
+msgstr "192 000 Hz"
 
 #: ../bin/src/ui_appearancesettingspage.h:290
 msgid "40%"
@@ -286,11 +291,11 @@ msgstr "40%"
 
 #: ../bin/src/ui_playbacksettingspage.h:375
 msgid "44,100Hz"
-msgstr ""
+msgstr "44 100 Hz"
 
 #: ../bin/src/ui_playbacksettingspage.h:376
 msgid "48,000Hz"
-msgstr ""
+msgstr "48 000 Hz"
 
 #: library/library.cpp:64
 msgid "50 random tracks"
@@ -298,7 +303,7 @@ msgstr "50 bài ngẫu nhiên"
 
 #: ../bin/src/ui_playbacksettingspage.h:377
 msgid "96,000Hz"
-msgstr ""
+msgstr "96 000 Hz"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:164
 msgid "<a href=\"http://www.di.fm/premium/\">Upgrade to Premium now</a>"
@@ -312,7 +317,7 @@ msgid ""
 "directly into the file each time they changed.</p><p>Please note it might "
 "not work for every format and, as there is no standard for doing so, other "
 "music players might not be able to read them.</p></body></html>"
-msgstr ""
+msgstr "<html><head/><body><p>Nếu không chọn, Clementine sẽ lưu đánh giá của bạn và các thông tin thống kê khác trong cơ sở dữ liệu riêng để không thay đổi tập tin nhạc của bạn.</p><p>Nếu được chọn, Clementine sẽ lưu thông tin thống kê cả trong cơ sở dữ liệu và trực tiếp vào tập tin khi có thay đổi.</p><p>Lưu ý rằng chỉ có một số định dạng tập tin được hỗ trợ và vì không có chuẩn chung nên các trình nghe nhạc khác có thể không đọc đựoc những dữ liệu này.</p></body></html>"
 
 #: ../bin/src/ui_libraryfilterwidget.h:96
 #, qt-format
@@ -331,7 +336,7 @@ msgid ""
 "files tags for all your library's songs.</p><p>This is not needed if the "
 "&quot;Save ratings and statistics in file tags&quot; option has always been "
 "activated.</p></body></html>"
-msgstr ""
+msgstr "<html><head/><body><p>Sẽ lưu đánh giá và thông tin về bài hát trực tiếp vào các tập tin trong thư viện nhạc của bạn.</p><p>Không cần phải chọn nếu tùy chọn &quot;Lưu đánh giá vào tập tin khi có thể&quot; đã luôn được bật.</p></body></html>"
 
 #: ../bin/src/ui_organisedialog.h:250
 msgid ""
@@ -406,7 +411,7 @@ msgid "About Qt..."
 msgstr "Giới thiệu Qt..."
 
 #: playlist/playlistsaveoptionsdialog.cpp:34
-#: ../bin/src/ui_behavioursettingspage.h:378
+#: ../bin/src/ui_behavioursettingspage.h:363
 msgid "Absolute"
 msgstr ""
 
@@ -430,15 +435,15 @@ msgctxt "Category label"
 msgid "Action"
 msgstr ""
 
-#: wiimotedev/wiimotesettingspage.cpp:96
+#: wiimotedev/wiimotesettingspage.cpp:97
 msgid "Active/deactive Wiiremote"
 msgstr "Kích hoạt/vô hiệu tay cầm Wii"
 
-#: internet/soundcloud/soundcloudservice.cpp:125
+#: internet/soundcloud/soundcloudservice.cpp:127
 msgid "Activities stream"
 msgstr ""
 
-#: internet/podcasts/addpodcastdialog.cpp:62
+#: internet/podcasts/addpodcastdialog.cpp:63
 msgid "Add Podcast"
 msgstr "Thêm Podcast"
 
@@ -458,7 +463,7 @@ msgstr "Thêm hành động"
 msgid "Add all tracks from a directory and all its subdirectories"
 msgstr ""
 
-#: internet/internetradio/savedradio.cpp:112
+#: internet/internetradio/savedradio.cpp:114
 msgid "Add another stream..."
 msgstr "Thêm luồng dữ liệu khác..."
 
@@ -466,7 +471,7 @@ msgstr "Thêm luồng dữ liệu khác..."
 msgid "Add directory..."
 msgstr "Thêm thư mục..."
 
-#: ui/mainwindow.cpp:1931
+#: ui/mainwindow.cpp:1914
 msgid "Add file"
 msgstr "Thêm tập tin"
 
@@ -486,7 +491,7 @@ msgstr "Thêm tập tin..."
 msgid "Add files to transcode"
 msgstr "Thêm các tập tin để chuyển mã"
 
-#: transcoder/transcodedialog.cpp:306 ui/mainwindow.cpp:1958
+#: transcoder/transcodedialog.cpp:306 ui/mainwindow.cpp:1941
 #: ripper/ripcddialog.cpp:185
 msgid "Add folder"
 msgstr "Thêm thư mục"
@@ -503,7 +508,7 @@ msgstr "Thêm thư mục mới..."
 msgid "Add podcast"
 msgstr "Thêm podcast"
 
-#: internet/podcasts/podcastservice.cpp:416 ../bin/src/ui_mainwindow.h:708
+#: internet/podcasts/podcastservice.cpp:418 ../bin/src/ui_mainwindow.h:708
 msgid "Add podcast..."
 msgstr "Thêm podcast..."
 
@@ -571,7 +576,7 @@ msgstr "Thêm bỏ qua đếm bài hát"
 msgid "Add song title tag"
 msgstr "Thêm thẻ tựa đề bài hát"
 
-#: internet/vk/vkservice.cpp:329
+#: internet/vk/vkservice.cpp:333
 msgid "Add song to cache"
 msgstr ""
 
@@ -585,42 +590,42 @@ msgstr "Thêm thẻ năm của bài hát"
 
 #: ../bin/src/ui_vksettingspage.h:221
 msgid "Add songs to \"My Music\" when the \"Love\" button is clicked"
-msgstr ""
+msgstr "Thêm bài hát vào \"Nhạc của tôi\" khi nhấn nút \"Thích\""
 
 #: ../bin/src/ui_mainwindow.h:672
 msgid "Add stream..."
 msgstr "Thêm luồng dữ liệu..."
 
-#: internet/vk/vkservice.cpp:321
+#: internet/vk/vkservice.cpp:325
 msgid "Add to My Music"
-msgstr ""
+msgstr "Thêm vào Nhạc của tôi"
 
-#: internet/spotify/spotifyservice.cpp:617
+#: internet/spotify/spotifyservice.cpp:621
 msgid "Add to Spotify playlists"
-msgstr ""
+msgstr "Thêm vào danh sách Spotify"
 
-#: internet/spotify/spotifyservice.cpp:610
+#: internet/spotify/spotifyservice.cpp:613
 msgid "Add to Spotify starred"
-msgstr ""
+msgstr "Thêm vào Spotify và đánh dấu sao"
 
-#: ui/mainwindow.cpp:1752
+#: ui/mainwindow.cpp:1735
 msgid "Add to another playlist"
 msgstr "Thêm vào danh sách khác"
 
-#: internet/vk/vkservice.cpp:307
+#: internet/vk/vkservice.cpp:309
 msgid "Add to bookmarks"
-msgstr ""
+msgstr "Thêm vào đánh dấu"
 
 #: ../bin/src/ui_albumcovermanager.h:217
 msgid "Add to playlist"
 msgstr "Thêm vào danh sách"
 
-#: ../bin/src/ui_behavioursettingspage.h:350
-#: ../bin/src/ui_behavioursettingspage.h:362
+#: ../bin/src/ui_behavioursettingspage.h:343
+#: ../bin/src/ui_behavioursettingspage.h:355
 msgid "Add to the queue"
 msgstr "Thêm vào danh sách đợi"
 
-#: internet/vk/vkservice.cpp:337
+#: internet/vk/vkservice.cpp:342
 msgid "Add user/group to bookmarks"
 msgstr ""
 
@@ -688,13 +693,13 @@ msgstr "Nghệ sĩ của Album"
 msgid "Album cover"
 msgstr "Ảnh bìa"
 
-#: internet/jamendo/jamendoservice.cpp:427
+#: internet/jamendo/jamendoservice.cpp:429
 msgid "Album info on jamendo.com..."
 msgstr "Thông tin của album trên jamendo.com..."
 
-#: internet/vk/vkservice.cpp:836
+#: internet/vk/vkservice.cpp:846
 msgid "Albums"
-msgstr ""
+msgstr "Album"
 
 #: ui/albumcovermanager.cpp:135
 msgid "Albums with covers"
@@ -706,7 +711,7 @@ msgstr "Album không có ảnh bìa"
 
 #: ../bin/src/ui_podcastsettingspage.h:278
 msgid "All"
-msgstr ""
+msgstr "Tất cả"
 
 #: ui/mainwindow.cpp:161
 msgid "All Files (*)"
@@ -758,17 +763,16 @@ msgstr "Cho phép mã hóa song song"
 msgid "Alongside the originals"
 msgstr "Thư mục chứa tập tin gốc"
 
-#: ../bin/src/ui_behavioursettingspage.h:323
+#: ../bin/src/ui_behavioursettingspage.h:316
 msgid "Always hide the main window"
 msgstr "Luôn ẩn cửa sổ chính"
 
-#: ../bin/src/ui_behavioursettingspage.h:322
+#: ../bin/src/ui_behavioursettingspage.h:315
 msgid "Always show the main window"
 msgstr "Luôn hiện cửa sổ chính"
 
-#: ../bin/src/ui_behavioursettingspage.h:336
-#: ../bin/src/ui_behavioursettingspage.h:356
-#: ../bin/src/ui_behavioursettingspage.h:370
+#: ../bin/src/ui_behavioursettingspage.h:329
+#: ../bin/src/ui_behavioursettingspage.h:349
 msgid "Always start playing"
 msgstr "Bắt đầu phát nhạc"
 
@@ -786,12 +790,12 @@ msgstr "Cần có một phần mở rộng để sử dụng Spotify trong Cleme
 msgid "An error occurred loading the iTunes database"
 msgstr "Có lỗi khi nạp cơ sở dữ liệu iTunes"
 
-#: ui/edittagdialog.cpp:695
+#: ui/edittagdialog.cpp:698
 #, qt-format
 msgid "An error occurred writing metadata to '%1'"
 msgstr "Có lỗi khi ghi thông tin vào '%1'"
 
-#: internet/subsonic/subsonicsettingspage.cpp:123
+#: internet/subsonic/subsonicsettingspage.cpp:124
 msgid "An unspecified error occurred."
 msgstr "Lỗi không xác định."
 
@@ -813,13 +817,13 @@ msgstr "Giao diện"
 msgid "Append files/URLs to the playlist"
 msgstr "Thêm tập tin/URLs vào danh sách"
 
-#: devices/deviceview.cpp:216 globalsearch/globalsearchview.cpp:453
-#: internet/core/internetservice.cpp:80 library/libraryview.cpp:391
+#: devices/deviceview.cpp:218 globalsearch/globalsearchview.cpp:453
+#: internet/core/internetservice.cpp:81 library/libraryview.cpp:372
 #: widgets/fileviewlist.cpp:31
 msgid "Append to current playlist"
 msgstr "Thêm vào danh sách hiện tại"
 
-#: ../bin/src/ui_behavioursettingspage.h:347
+#: ../bin/src/ui_behavioursettingspage.h:340
 msgid "Append to the playlist"
 msgstr "Thêm vào danh sách"
 
@@ -832,7 +836,7 @@ msgstr "Nén để chặn việc ngắt đoạn"
 msgid "Are you sure you want to delete the \"%1\" preset?"
 msgstr "Bạn có chắc sẽ xóa thiết lập \"%1\"?"
 
-#: ui/edittagdialog.cpp:801
+#: ui/edittagdialog.cpp:804
 msgid "Are you sure you want to reset this song's statistics?"
 msgstr "Bạn có chắc muốn thiết đặt lại bộ đếm của bài hát này?"
 
@@ -840,7 +844,7 @@ msgstr "Bạn có chắc muốn thiết đặt lại bộ đếm của bài hát
 msgid ""
 "Are you sure you want to write song's statistics into song's file for all "
 "the songs of your library?"
-msgstr ""
+msgstr "Bạn có muốn ghi thông tin thống kê về tất cả các bài hát trong thư viện vào tập tin nhạc hay không?"
 
 #: playlist/playlist.cpp:1317 ui/organisedialog.cpp:62
 #: ui/qtsystemtrayicon.cpp:234 ../bin/src/ui_groupbydialog.h:129
@@ -855,7 +859,7 @@ msgstr "Nghệ sĩ"
 msgid "Artist info"
 msgstr "Nghệ sĩ"
 
-#: songinfo/echonesttags.cpp:61
+#: songinfo/echonesttags.cpp:62
 msgid "Artist tags"
 msgstr "Thẻ nghệ sĩ"
 
@@ -863,9 +867,9 @@ msgstr "Thẻ nghệ sĩ"
 msgid "Artist's initial"
 msgstr "Tên viết tắt của nghệ sĩ"
 
-#: ../bin/src/ui_behavioursettingspage.h:380
+#: ../bin/src/ui_behavioursettingspage.h:365
 msgid "Ask when saving"
-msgstr ""
+msgstr "Hỏi khi lưu"
 
 #: ../bin/src/ui_transcodedialog.h:221
 #: ../bin/src/ui_networkremotesettingspage.h:250
@@ -875,10 +879,10 @@ msgstr "Định dạng"
 
 #: ../bin/src/ui_playbacksettingspage.h:361
 msgid "Audio output"
-msgstr ""
+msgstr "Ngõ ra âm thanh"
 
-#: internet/digitally/digitallyimportedsettingspage.cpp:83
-#: internet/magnatune/magnatunesettingspage.cpp:116
+#: internet/digitally/digitallyimportedsettingspage.cpp:84
+#: internet/magnatune/magnatunesettingspage.cpp:117
 #: internet/lastfm/lastfmservice.cpp:228
 #: internet/lastfm/lastfmsettingspage.cpp:84
 msgid "Authentication failed"
@@ -898,9 +902,9 @@ msgid "Auto"
 msgstr "Tự động"
 
 #: playlist/playlistsaveoptionsdialog.cpp:32
-#: ../bin/src/ui_behavioursettingspage.h:377
+#: ../bin/src/ui_behavioursettingspage.h:362
 msgid "Automatic"
-msgstr ""
+msgstr "Tự động"
 
 #: ../bin/src/ui_librarysettingspage.h:189
 msgid "Automatic updating"
@@ -922,7 +926,7 @@ msgstr "Bitrate trung bình"
 msgid "Average image size"
 msgstr "Kích thước ảnh trung bình"
 
-#: internet/podcasts/addpodcastdialog.cpp:87
+#: internet/podcasts/addpodcastdialog.cpp:91
 msgid "BBC Podcasts"
 msgstr "Podcast BBC"
 
@@ -953,11 +957,11 @@ msgstr "Đang sao lưu cơ sở dữ liệu"
 
 #: ../bin/src/ui_equalizer.h:172
 msgid "Balance"
-msgstr ""
+msgstr "Cân bằng"
 
 #: core/globalshortcuts.cpp:80
 msgid "Ban (Last.fm scrobbling)"
-msgstr ""
+msgstr "Cấm (Last.fm)"
 
 #: analyzers/baranalyzer.cpp:34
 msgid "Bar analyzer"
@@ -971,7 +975,7 @@ msgstr "Xanh dương"
 msgid "Basic audio type"
 msgstr "Âm bình thường"
 
-#: ../bin/src/ui_behavioursettingspage.h:311
+#: ../bin/src/ui_behavioursettingspage.h:304
 msgid "Behavior"
 msgstr "Hành động"
 
@@ -979,7 +983,7 @@ msgstr "Hành động"
 msgid "Best"
 msgstr "Tốt nhất"
 
-#: songinfo/echonestbiographies.cpp:84
+#: songinfo/echonestbiographies.cpp:85
 #, qt-format
 msgid "Biography from %1"
 msgstr "Thông tin từ %1"
@@ -1000,7 +1004,7 @@ msgstr "Bitrate"
 #: ui/organisedialog.cpp:77
 msgctxt "Refers to bitrate in file organise dialog."
 msgid "Bitrate"
-msgstr ""
+msgstr "Bitrate"
 
 #: analyzers/blockanalyzer.cpp:44
 msgid "Block analyzer"
@@ -1012,7 +1016,7 @@ msgstr "Kiểu khối"
 
 #: ../bin/src/ui_appearancesettingspage.h:287
 msgid "Blur amount"
-msgstr ""
+msgstr "Độ mờ"
 
 #: ../bin/src/ui_notificationssettingspage.h:455
 msgid "Body"
@@ -1034,15 +1038,15 @@ msgstr "Duyệt tìm..."
 
 #: ../bin/src/ui_playbacksettingspage.h:363
 msgid "Buffer duration"
-msgstr ""
+msgstr "Thời gian đệm"
 
 #: engines/gstengine.cpp:907
 msgid "Buffering"
 msgstr "Đang tạo bộ đệm"
 
-#: internet/seafile/seafileservice.cpp:226
+#: internet/seafile/seafileservice.cpp:227
 msgid "Building Seafile index..."
-msgstr ""
+msgstr "Đang tạo chỉ mục Seafile..."
 
 #: ../bin/src/ui_globalsearchview.h:210
 msgid "But these sources are disabled:"
@@ -1062,7 +1066,7 @@ msgstr "Hỗ trợ danh sách CUE"
 
 #: ../bin/src/ui_vksettingspage.h:226
 msgid "Cache path:"
-msgstr ""
+msgstr "Đường dẫn bộ nhớ đệm:"
 
 #: ../bin/src/ui_vksettingspage.h:224
 msgid "Caching"
@@ -1077,15 +1081,15 @@ msgstr ""
 msgid "Cancel"
 msgstr "Hủy bỏ"
 
-#: internet/podcasts/podcastservice.cpp:439
+#: internet/podcasts/podcastservice.cpp:441
 msgid "Cancel download"
-msgstr ""
+msgstr "Hủy tải về"
 
-#: internet/vk/vkservice.cpp:635
+#: internet/vk/vkservice.cpp:642
 msgid ""
 "Captcha is needed.\n"
 "Try to login into Vk.com with your browser,to fix this problem."
-msgstr ""
+msgstr "Cần phải gõ Captcha.\nHãy đăng nhập vào Vk.com bằng trình duyệt của bạn để sửa lỗi này."
 
 #: ../bin/src/ui_edittagdialog.h:715
 msgid "Change cover art"
@@ -1107,9 +1111,9 @@ msgstr "Đổi phím tắt..."
 msgid "Change shuffle mode"
 msgstr "Thay đổi chế độ phát ngẫu nhiên"
 
-#: ../bin/src/ui_behavioursettingspage.h:361
+#: ../bin/src/ui_behavioursettingspage.h:354
 msgid "Change the currently playing song"
-msgstr ""
+msgstr "Đổi bài đang phát"
 
 #: core/commandlineoptions.cpp:172
 msgid "Change the language"
@@ -1117,7 +1121,7 @@ msgstr "Đổi ngôn ngữ"
 
 #: ../bin/src/ui_playbacksettingspage.h:381
 msgid "Changes will take place when the next song starts playing"
-msgstr ""
+msgstr "Thay đổi sẽ có hiệu lực khi phát bài tiếp theo"
 
 #: ../bin/src/ui_playbacksettingspage.h:368
 msgid ""
@@ -1129,17 +1133,17 @@ msgstr "Thay đổi tùy chỉnh phát đơn kênh sẽ ảnh hưởng đến b�
 msgid "Check for new episodes"
 msgstr "Kiểm tra tập mới"
 
-#: internet/googledrive/googledriveservice.cpp:220
+#: internet/googledrive/googledriveservice.cpp:221
 msgid "Check for updates"
-msgstr ""
+msgstr "Kiểm tra cập nhật"
 
-#: ui/mainwindow.cpp:742
+#: ui/mainwindow.cpp:747
 msgid "Check for updates..."
 msgstr "Kiểm tra cập nhật..."
 
-#: internet/vk/vksettingspage.cpp:98
+#: internet/vk/vksettingspage.cpp:101
 msgid "Choose Vk.com cache directory"
-msgstr ""
+msgstr "Chọn thư mục bộ nhớ đệm của Vk.com"
 
 #: smartplaylists/wizard.cpp:84
 msgid "Choose a name for your smart playlist"
@@ -1165,13 +1169,13 @@ msgstr "Chọn từ danh sách"
 msgid "Choose how the playlist is sorted and how many songs it will contain."
 msgstr "Chọn cách sắp xếp của danh sách nhạc và số bài hát trong đó."
 
-#: internet/podcasts/podcastsettingspage.cpp:140
+#: internet/podcasts/podcastsettingspage.cpp:143
 msgid "Choose podcast download directory"
 msgstr "Chọn thư mục lưu podcast tải về"
 
 #: ../bin/src/ui_internetshowsettingspage.h:88
 msgid "Choose the internet services you want to show."
-msgstr ""
+msgstr "Chọn các dịch vụ Internet được hiển thị."
 
 #: ../bin/src/ui_songinfosettingspage.h:159
 msgid ""
@@ -1222,7 +1226,7 @@ msgstr "Clementine có thể tự động chuyển đổi định dạng nhạc 
 
 #: ../bin/src/ui_amazonsettingspage.h:103
 msgid "Clementine can play music that you have uploaded to Amazon Cloud Drive"
-msgstr ""
+msgstr "Clementine có thể phát nhạc đã tải lên Amazon Cloud Drive"
 
 #: ../bin/src/ui_boxsettingspage.h:103
 msgid "Clementine can play music that you have uploaded to Box"
@@ -1238,7 +1242,7 @@ msgstr "Clementine có thể phát nhạc trong tài khoản Google Drive"
 
 #: ../bin/src/ui_skydrivesettingspage.h:103
 msgid "Clementine can play music that you have uploaded to OneDrive"
-msgstr ""
+msgstr "Clementine có thể phát nhạc đã tải lên OneDrive"
 
 #: ../bin/src/ui_notificationssettingspage.h:436
 msgid "Clementine can show a message when the track changes."
@@ -1269,7 +1273,7 @@ msgstr "Clementine không tìm thấy kết quả cho tập tin này"
 msgid "Clementine will find music in:"
 msgstr "Clementine sẽ tìm nhạc trong:"
 
-#: library/libraryview.cpp:372
+#: library/libraryview.cpp:353
 msgid "Click here to add some music"
 msgstr "Nhấp vào đây để thêm nhạc"
 
@@ -1277,7 +1281,7 @@ msgstr "Nhấp vào đây để thêm nhạc"
 msgid ""
 "Click here to favorite this playlist so it will be saved and remain "
 "accessible through the \"Playlists\" panel on the left side bar"
-msgstr ""
+msgstr "Nhấn vào đây để thêm danh sách vào mục ưa thích. Nó sẽ được lưu lại trong phần \"Danh sách\" ở thanh bên trái."
 
 #: ../bin/src/ui_trackslider.h:71
 msgid "Click to toggle between remaining time and total time"
@@ -1353,7 +1357,7 @@ msgstr "Soạn nhạc"
 msgid "Configure %1..."
 msgstr "Cấu hình %1..."
 
-#: internet/magnatune/magnatuneservice.cpp:290
+#: internet/magnatune/magnatuneservice.cpp:293
 msgid "Configure Magnatune..."
 msgstr "Cấu hình Magnatune..."
 
@@ -1361,7 +1365,7 @@ msgstr "Cấu hình Magnatune..."
 msgid "Configure Shortcuts"
 msgstr "Phím tắt"
 
-#: internet/spotify/spotifyservice.cpp:911
+#: internet/spotify/spotifyservice.cpp:919
 msgid "Configure Spotify..."
 msgstr "Cấu hình Spotify..."
 
@@ -1369,7 +1373,7 @@ msgstr "Cấu hình Spotify..."
 msgid "Configure Subsonic..."
 msgstr "Cấu hình Subsonic..."
 
-#: internet/vk/vkservice.cpp:346
+#: internet/vk/vkservice.cpp:351
 msgid "Configure Vk.com..."
 msgstr ""
 
@@ -1377,18 +1381,18 @@ msgstr ""
 msgid "Configure global search..."
 msgstr "Cấu hình tìm kiếm chung..."
 
-#: ui/mainwindow.cpp:592
+#: ui/mainwindow.cpp:594
 msgid "Configure library..."
 msgstr "Cấu hình thư viện..."
 
-#: internet/podcasts/addpodcastdialog.cpp:74
-#: internet/podcasts/podcastservice.cpp:453
+#: internet/podcasts/addpodcastdialog.cpp:77
+#: internet/podcasts/podcastservice.cpp:455
 msgid "Configure podcasts..."
 msgstr "Cấu hình podcast..."
 
-#: internet/core/cloudfileservice.cpp:105
-#: internet/digitally/digitallyimportedservicebase.cpp:182
-#: internet/googledrive/googledriveservice.cpp:228
+#: internet/core/cloudfileservice.cpp:107
+#: internet/digitally/digitallyimportedservicebase.cpp:184
+#: internet/googledrive/googledriveservice.cpp:231
 #: ../bin/src/ui_globalsearchsettingspage.h:149
 msgid "Configure..."
 msgstr "Cấu hình..."
@@ -1401,22 +1405,22 @@ msgstr "Kết nối tay cầm Wii sử dụng thao tác kích hoạt/vô hiệu"
 msgid "Connect device"
 msgstr "Kết nối thiết bị"
 
-#: internet/spotify/spotifyservice.cpp:295
+#: internet/spotify/spotifyservice.cpp:296
 msgid "Connecting to Spotify"
 msgstr "Kết nối đến Spotify"
 
-#: internet/subsonic/subsonicsettingspage.cpp:128
+#: internet/subsonic/subsonicsettingspage.cpp:129
 msgid ""
 "Connection refused by server, check server URL. Example: "
 "http://localhost:4040/"
 msgstr "Kết nối bị máy chủ từ chối, kiểm tra URL máy chủ. Ví dụ: http://localhost:4040/"
 
-#: internet/subsonic/subsonicsettingspage.cpp:140
+#: internet/subsonic/subsonicsettingspage.cpp:141
 msgid ""
 "Connection timed out, check server URL. Example: http://localhost:4040/"
 msgstr "Hết thời gian kết nối, kiểm tra URL máy chủ. Ví dụ: http://localhost:4040/"
 
-#: internet/vk/vkservice.cpp:1113
+#: internet/vk/vkservice.cpp:1126
 msgid "Connection trouble or audio is disabled by owner"
 msgstr ""
 
@@ -1444,7 +1448,7 @@ msgstr ""
 msgid "Convert lossless files"
 msgstr ""
 
-#: internet/vk/vkservice.cpp:333
+#: internet/vk/vkservice.cpp:337
 msgid "Copy share url to clipboard"
 msgstr ""
 
@@ -1452,13 +1456,13 @@ msgstr ""
 msgid "Copy to clipboard"
 msgstr "Chép vào bộ đệm"
 
-#: library/libraryview.cpp:421 internet/podcasts/podcastservice.cpp:437
-#: ui/mainwindow.cpp:641 widgets/fileviewlist.cpp:43
+#: library/libraryview.cpp:403 internet/podcasts/podcastservice.cpp:438
+#: ui/mainwindow.cpp:644 widgets/fileviewlist.cpp:44
 msgid "Copy to device..."
 msgstr "Chép vào thiết bị..."
 
-#: devices/deviceview.cpp:225 ui/mainwindow.cpp:631
-#: widgets/fileviewlist.cpp:38
+#: devices/deviceview.cpp:228 ui/mainwindow.cpp:634
+#: widgets/fileviewlist.cpp:40
 msgid "Copy to library..."
 msgstr "Chép vào thư viện..."
 
@@ -1466,7 +1470,7 @@ msgstr "Chép vào thư viện..."
 msgid "Copyright"
 msgstr "Bản quyền"
 
-#: internet/subsonic/subsonicsettingspage.cpp:96
+#: internet/subsonic/subsonicsettingspage.cpp:97
 msgid ""
 "Could not connect to Subsonic, check server URL. Example: "
 "http://localhost:4040/"
@@ -1481,7 +1485,7 @@ msgstr "Không thể tạo phần tử GStreamer \"%1\" - hãy chắc chắn là
 
 #: playlist/playlistmanager.cpp:167
 msgid "Couldn't create playlist"
-msgstr ""
+msgstr "Không thể tạo danh sách"
 
 #: transcoder/transcoder.cpp:425
 #, qt-format
@@ -1502,31 +1506,31 @@ msgstr "Không tim thấy bộ mã hóa cho %1, hãy chắc chắn là bạn đ�
 msgid "Couldn't open output file %1"
 msgstr "Không thể mở tập tin %1"
 
-#: internet/core/cloudfileservice.cpp:102
-#: internet/googledrive/googledriveservice.cpp:226
+#: internet/core/cloudfileservice.cpp:103
+#: internet/googledrive/googledriveservice.cpp:228
 #: ../bin/src/ui_albumcovermanager.h:214
 #: ../bin/src/ui_albumcoversearcher.h:104 ../bin/src/ui_mainwindow.h:676
 msgid "Cover Manager"
 msgstr "Quản lí ảnh bìa"
 
-#: ui/edittagdialog.cpp:476
+#: ui/edittagdialog.cpp:479
 msgid "Cover art from embedded image"
 msgstr "Ảnh bìa từ ảnh nhúng"
 
-#: ui/edittagdialog.cpp:479
+#: ui/edittagdialog.cpp:482
 #, qt-format
 msgid "Cover art loaded automatically from %1"
 msgstr "Ảnh bìa được nạp tự động từ %1"
 
-#: ui/edittagdialog.cpp:471
+#: ui/edittagdialog.cpp:474
 msgid "Cover art manually unset"
 msgstr "Bỏ thiết đặt ảnh bìa một cách thủ công"
 
-#: ui/edittagdialog.cpp:481
+#: ui/edittagdialog.cpp:484
 msgid "Cover art not set"
 msgstr "Chưa có ảnh bìa"
 
-#: ui/edittagdialog.cpp:474
+#: ui/edittagdialog.cpp:477
 #, qt-format
 msgid "Cover art set from %1"
 msgstr "Ảnh bìa được thiết lập từ %1"
@@ -1671,7 +1675,7 @@ msgstr "Giảm 4% âm lượng"
 msgid "Decrease the volume by <value> percent"
 msgstr "Giảm <value>  phần trăm âm lượng"
 
-#: core/globalshortcuts.cpp:62 wiimotedev/wiimotesettingspage.cpp:105
+#: core/globalshortcuts.cpp:62 wiimotedev/wiimotesettingspage.cpp:106
 msgid "Decrease volume"
 msgstr "Giảm âm lượng"
 
@@ -1697,21 +1701,21 @@ msgstr "Độ trễ giữa các hiệu ứng hình ảnh ảo"
 msgid "Delete"
 msgstr "Xóa"
 
-#: internet/podcasts/podcastservice.cpp:433
+#: internet/podcasts/podcastservice.cpp:435
 msgid "Delete downloaded data"
 msgstr "Xóa dữ liệu đã tải về"
 
-#: devices/deviceview.cpp:404 library/libraryview.cpp:657
-#: ui/mainwindow.cpp:2294 widgets/fileview.cpp:186
+#: devices/deviceview.cpp:408 library/libraryview.cpp:639
+#: ui/mainwindow.cpp:2277 widgets/fileview.cpp:186
 msgid "Delete files"
 msgstr "Xóa các tập tin"
 
-#: devices/deviceview.cpp:228
+#: devices/deviceview.cpp:232
 msgid "Delete from device..."
 msgstr "Xóa khỏi thiết bị..."
 
-#: library/libraryview.cpp:423 ui/mainwindow.cpp:643
-#: widgets/fileviewlist.cpp:44
+#: library/libraryview.cpp:405 ui/mainwindow.cpp:647
+#: widgets/fileviewlist.cpp:47
 msgid "Delete from disk..."
 msgstr "Xóa khỏi ổ cứng..."
 
@@ -1723,7 +1727,7 @@ msgstr "Xóa tập đã phát"
 msgid "Delete preset"
 msgstr "Xoá thiết lập"
 
-#: library/libraryview.cpp:412
+#: library/libraryview.cpp:395
 msgid "Delete smart playlist"
 msgstr "Xóa danh sách thông minh"
 
@@ -1735,11 +1739,11 @@ msgstr "Xóa tập tin gốc"
 msgid "Deleting files"
 msgstr "Đang xóa các tập tin"
 
-#: ui/mainwindow.cpp:1673
+#: ui/mainwindow.cpp:1656
 msgid "Dequeue selected tracks"
 msgstr "Loại các bài đã chọn khỏi danh sách chờ"
 
-#: ui/mainwindow.cpp:1671
+#: ui/mainwindow.cpp:1654
 msgid "Dequeue track"
 msgstr "Loại bài hát khỏi d.sách chờ"
 
@@ -1764,7 +1768,7 @@ msgstr "Thuộc tính của thiết bị"
 msgid "Device name"
 msgstr "Tên thiết bị"
 
-#: devices/deviceview.cpp:210
+#: devices/deviceview.cpp:212
 msgid "Device properties..."
 msgstr "Thuộc tính của thiết bị..."
 
@@ -1774,7 +1778,7 @@ msgstr "Thiết bị"
 
 #: ../bin/src/ui_ripcddialog.h:299 ../bin/src/ui_vksearchdialog.h:60
 msgid "Dialog"
-msgstr ""
+msgstr "Hộp thoại"
 
 #: widgets/didyoumean.cpp:55
 msgid "Did you mean"
@@ -1812,12 +1816,12 @@ msgstr "Tắt khởi tạo thanh trạng thái"
 #: ../bin/src/ui_notificationssettingspage.h:438
 msgctxt "Refers to a disabled notification type in Notification settings."
 msgid "Disabled"
-msgstr ""
+msgstr "Tắt"
 
 #: globalsearch/searchproviderstatuswidget.cpp:46
 msgctxt "Refers to search provider's status."
 msgid "Disabled"
-msgstr ""
+msgstr "Tắt"
 
 #: playlist/playlist.cpp:1325 ui/organisedialog.cpp:70
 #: ../bin/src/ui_groupbydialog.h:139 ../bin/src/ui_groupbydialog.h:158
@@ -1844,14 +1848,14 @@ msgstr "Hiện hộp thông báo trên màn hình"
 msgid "Do a full library rescan"
 msgstr "Quét toàn bộ thư viện"
 
-#: internet/googledrive/googledriveservice.cpp:267
-#: internet/googledrive/googledriveservice.cpp:273
+#: internet/googledrive/googledriveservice.cpp:270
+#: internet/googledrive/googledriveservice.cpp:276
 msgid "Do a full rescan"
-msgstr ""
+msgstr "Quét lại toàn bộ"
 
-#: internet/googledrive/googledriveservice.cpp:223
+#: internet/googledrive/googledriveservice.cpp:225
 msgid "Do a full rescan..."
-msgstr ""
+msgstr "Quét lại toàn bộ..."
 
 #: ../bin/src/ui_deviceproperties.h:376
 msgid "Do not convert any music"
@@ -1861,28 +1865,24 @@ msgstr "Không chuyển đổi bất kì bản nhạc nào"
 msgid "Do not overwrite"
 msgstr "Không ghi đè"
 
-#: ../bin/src/ui_behavioursettingspage.h:364
-msgid "Do nothing"
-msgstr ""
-
-#: internet/googledrive/googledriveservice.cpp:268
+#: internet/googledrive/googledriveservice.cpp:271
 msgid ""
 "Doing a full rescan will lose any metadata you've saved in Clementine such "
 "as cover art, play counts and ratings.  Clementine will rescan all your "
 "music in Google Drive which may take some time."
-msgstr ""
+msgstr "Quét lại sẽ làm mất các dữ liệu lưu trong Clementine như ảnh bìa, số lần nghe và đánh giá. Clementine sẽ quét lại toàn bộ nhạc của bạn trên Google Drive nên sẽ có thể mất một lúc."
 
 #: widgets/osd.cpp:306 ../bin/src/ui_playlistsequence.h:110
 msgid "Don't repeat"
 msgstr "Không lặp lại"
 
-#: library/libraryview.cpp:441
+#: library/libraryview.cpp:423
 msgid "Don't show in various artists"
 msgstr "Không hiện trong mục nhiều nghệ sĩ"
 
 #: ../bin/src/ui_podcastsettingspage.h:277
 msgid "Don't show listened episodes"
-msgstr ""
+msgstr "Không hiện các tập đã nghe"
 
 #: widgets/osd.cpp:285 ../bin/src/ui_playlistsequence.h:116
 msgid "Don't shuffle"
@@ -1893,7 +1893,7 @@ msgstr "Không phát ngẫu nhiên"
 msgid "Don't stop!"
 msgstr "Không dừng lại!"
 
-#: internet/somafm/somafmservice.cpp:106
+#: internet/somafm/somafmservice.cpp:107
 msgid "Donate"
 msgstr "Quyên góp"
 
@@ -1901,15 +1901,15 @@ msgstr "Quyên góp"
 msgid "Double click to open"
 msgstr "Nhấn đúp chuột để mở"
 
-#: ../bin/src/ui_behavioursettingspage.h:358
+#: ../bin/src/ui_behavioursettingspage.h:351
 msgid "Double clicking a song in the playlist will..."
-msgstr ""
+msgstr "Nhấn đúp chuột vào bài hát trong danh sách sẽ..."
 
-#: ../bin/src/ui_behavioursettingspage.h:344
+#: ../bin/src/ui_behavioursettingspage.h:337
 msgid "Double clicking a song will..."
 msgstr "Nhấn đúp chuột vào một bài hát sẽ..."
 
-#: internet/podcasts/podcastservice.cpp:529
+#: internet/podcasts/podcastservice.cpp:531
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "Download %n episodes"
@@ -1931,28 +1931,28 @@ msgstr "Tải với tư cách thành viên"
 msgid "Download new episodes automatically"
 msgstr "Tự động tải về các tập mới"
 
-#: internet/podcasts/podcastservice.cpp:292
-#: internet/podcasts/podcastservice.cpp:331
+#: internet/podcasts/podcastservice.cpp:293
+#: internet/podcasts/podcastservice.cpp:332
 msgid "Download queued"
 msgstr "Đợi tải về"
 
 #: ../bin/src/ui_networkremotesettingspage.h:245
 msgid "Download settings"
-msgstr ""
+msgstr "Cài đặt tải về"
 
 #: ../bin/src/ui_networkremotesettingspage.h:252
 msgid "Download the Android app"
-msgstr ""
+msgstr "Tải ứng dụng Android"
 
-#: internet/magnatune/magnatuneservice.cpp:280
+#: internet/magnatune/magnatuneservice.cpp:283
 msgid "Download this album"
 msgstr "Tải album này"
 
-#: internet/jamendo/jamendoservice.cpp:430
+#: internet/jamendo/jamendoservice.cpp:433
 msgid "Download this album..."
 msgstr "Tải album này..."
 
-#: internet/podcasts/podcastservice.cpp:531
+#: internet/podcasts/podcastservice.cpp:533
 msgid "Download this episode"
 msgstr "Tải tập này"
 
@@ -1960,21 +1960,21 @@ msgstr "Tải tập này"
 msgid "Download..."
 msgstr "Tải về..."
 
-#: internet/podcasts/podcastservice.cpp:300
-#: internet/podcasts/podcastservice.cpp:340
+#: internet/podcasts/podcastservice.cpp:301
+#: internet/podcasts/podcastservice.cpp:341
 #, qt-format
 msgid "Downloading (%1%)..."
 msgstr "Đang tải (%1%)..."
 
-#: internet/icecast/icecastservice.cpp:106
+#: internet/icecast/icecastservice.cpp:103
 msgid "Downloading Icecast directory"
 msgstr "Đang tải thư mục Icecast"
 
-#: internet/jamendo/jamendoservice.cpp:200
+#: internet/jamendo/jamendoservice.cpp:201
 msgid "Downloading Jamendo catalogue"
 msgstr "Đang tải mục lục Jamendo"
 
-#: internet/magnatune/magnatuneservice.cpp:160
+#: internet/magnatune/magnatuneservice.cpp:162
 msgid "Downloading Magnatune catalogue"
 msgstr "Đang tải mục lục Magnatune"
 
@@ -1996,11 +1996,11 @@ msgstr "Dropbox"
 
 #: ui/equalizer.cpp:119
 msgid "Dubstep"
-msgstr ""
+msgstr "Dubstep"
 
 #: ../bin/src/ui_ripcddialog.h:308
 msgid "Duration"
-msgstr ""
+msgstr "Thời lượng"
 
 #: ../bin/src/ui_dynamicplaylistcontrols.h:108
 msgid "Dynamic mode is on"
@@ -2010,14 +2010,14 @@ msgstr "Chế độ năng động đã bật"
 msgid "Dynamic random mix"
 msgstr "Hòa trộn âm thanh động ngẫu nhiên"
 
-#: library/libraryview.cpp:409
+#: library/libraryview.cpp:392
 msgid "Edit smart playlist..."
 msgstr "Cập nhật danh sách thông minh..."
 
-#: ui/mainwindow.cpp:1715
+#: ui/mainwindow.cpp:1698
 #, qt-format
 msgid "Edit tag \"%1\"..."
-msgstr ""
+msgstr "Sửa \"%1\"..."
 
 #: ../bin/src/ui_mainwindow.h:662
 msgid "Edit tag..."
@@ -2031,22 +2031,22 @@ msgstr "Sửa thông tin"
 msgid "Edit track information"
 msgstr "Sửa thông tin bài hát"
 
-#: library/libraryview.cpp:428 widgets/fileviewlist.cpp:49
+#: library/libraryview.cpp:410 widgets/fileviewlist.cpp:51
 #: ../bin/src/ui_mainwindow.h:658
 msgid "Edit track information..."
 msgstr "Sửa thông tin bài hát..."
 
-#: library/libraryview.cpp:431
+#: library/libraryview.cpp:413
 msgid "Edit tracks information..."
 msgstr "Sửa thông tin bài hát..."
 
-#: internet/internetradio/savedradio.cpp:109
+#: internet/internetradio/savedradio.cpp:110
 msgid "Edit..."
 msgstr "Cập nhật..."
 
 #: ../bin/src/ui_seafilesettingspage.h:171
 msgid "Email"
-msgstr ""
+msgstr "Email"
 
 #: ../bin/src/ui_wiimotesettingspage.h:182
 msgid "Enable Wii Remote support"
@@ -2064,9 +2064,9 @@ msgstr "Bật bộ cân chỉnh âm"
 msgid "Enable shortcuts only when Clementine is focused"
 msgstr "Bật các phím tắt chỉ khi cửa sổ Clementine đang được chọn"
 
-#: ../bin/src/ui_behavioursettingspage.h:330
+#: ../bin/src/ui_behavioursettingspage.h:323
 msgid "Enable song metadata inline edition with click"
-msgstr ""
+msgstr "Bật sửa thông tin nhạc ngay trong danh sách"
 
 #: ../bin/src/ui_globalsearchsettingspage.h:146
 msgid ""
@@ -2100,7 +2100,7 @@ msgstr "Nhập một địa chỉ để tải ảnh bìa từ internet:"
 
 #: ../bin/src/ui_albumcoverexport.h:204
 msgid "Enter a filename for exported covers (no extension):"
-msgstr ""
+msgstr "Nhập tên tập tin cho các ảnh bìa đã xuất (không có đuôi):"
 
 #: playlist/playlisttabbar.cpp:147
 msgid "Enter a new name for this playlist"
@@ -2153,8 +2153,8 @@ msgid "Equivalent to --log-levels *:3"
 msgstr "Tương đương với --log-levels *:3"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:242
-#: library/libraryview.cpp:651 ui/mainwindow.cpp:1997 ui/mainwindow.cpp:2244
-#: ui/mainwindow.cpp:2392 internet/vk/vkservice.cpp:634
+#: library/libraryview.cpp:633 ui/mainwindow.cpp:1980 ui/mainwindow.cpp:2227
+#: ui/mainwindow.cpp:2375 internet/vk/vkservice.cpp:641
 msgid "Error"
 msgstr "Lỗi"
 
@@ -2183,8 +2183,8 @@ msgstr "Lỗi khi tải phần hỗ trợ Spotify"
 msgid "Error loading %1"
 msgstr "Lỗi nạp %1"
 
-#: internet/digitally/digitallyimportedservicebase.cpp:200
-#: internet/digitally/digitallyimportedurlhandler.cpp:89
+#: internet/digitally/digitallyimportedservicebase.cpp:202
+#: internet/digitally/digitallyimportedurlhandler.cpp:90
 msgid "Error loading di.fm playlist"
 msgstr "Lỗi khi nạp danh sách di.fm"
 
@@ -2235,7 +2235,7 @@ msgstr "Ngoại trừ giữa các bài hát trong album tương tự hoặc tron
 
 #: ../bin/src/ui_albumcoverexport.h:207
 msgid "Existing covers"
-msgstr ""
+msgstr "Ảnh bìa có sẵn"
 
 #: ../bin/src/ui_dynamicplaylistcontrols.h:110
 msgid "Expand"
@@ -2256,11 +2256,11 @@ msgstr "Xuất ảnh bìa"
 
 #: ../bin/src/ui_albumcoverexport.h:205
 msgid "Export downloaded covers"
-msgstr ""
+msgstr "Xuất các ảnh bìa đã tải"
 
 #: ../bin/src/ui_albumcoverexport.h:206
 msgid "Export embedded covers"
-msgstr ""
+msgstr "Xuất các ảnh bìa trong tập tin"
 
 #: ui/albumcovermanager.cpp:785 ui/albumcovermanager.cpp:809
 msgid "Export finished"
@@ -2269,7 +2269,7 @@ msgstr "Đã xuất xong"
 #: ui/albumcovermanager.cpp:794
 #, qt-format
 msgid "Exported %1 covers out of %2 (%3 skipped)"
-msgstr ""
+msgstr "Đã xuất %1 trên %2 ảnh bìa (đã bỏ qua %3)"
 
 #: ../bin/src/ui_mainwindow.h:667
 msgid "F1"
@@ -2303,7 +2303,7 @@ msgstr "FLAC"
 
 #: ../bin/src/ui_playbacksettingspage.h:348
 msgid "Fade out on pause / fade in on resume"
-msgstr ""
+msgstr "Giảm tiếng khi dừng / tăng tiếng khi tiếp tục"
 
 #: ../bin/src/ui_playbacksettingspage.h:342
 msgid "Fade out when stopping a track"
@@ -2318,23 +2318,23 @@ msgstr "Giảm dần âm lượng"
 msgid "Fading duration"
 msgstr "Thời gian giảm dần âm lượng"
 
-#: ui/mainwindow.cpp:1998
+#: ui/mainwindow.cpp:1981
 msgid "Failed reading CD drive"
-msgstr ""
+msgstr "Không đọc được ổ đĩa CD"
 
-#: internet/podcasts/gpoddertoptagspage.cpp:72
+#: internet/podcasts/gpoddertoptagspage.cpp:73
 msgid "Failed to fetch directory"
 msgstr "Lỗi tải thư mục"
 
-#: internet/podcasts/gpoddersearchpage.cpp:75
+#: internet/podcasts/gpoddersearchpage.cpp:77
 #: internet/podcasts/gpoddertoptagsmodel.cpp:103
-#: internet/podcasts/itunessearchpage.cpp:65
-#: internet/podcasts/itunessearchpage.cpp:76
-#: internet/podcasts/itunessearchpage.cpp:83
+#: internet/podcasts/itunessearchpage.cpp:67
+#: internet/podcasts/itunessearchpage.cpp:78
+#: internet/podcasts/itunessearchpage.cpp:85
 msgid "Failed to fetch podcasts"
 msgstr "Lỗi lấy podcast"
 
-#: internet/podcasts/addpodcastbyurl.cpp:69
+#: internet/podcasts/addpodcastbyurl.cpp:71
 #: internet/podcasts/fixedopmlpage.cpp:55
 msgid "Failed to load podcast"
 msgstr "Lỗi nạp podcast"
@@ -2364,7 +2364,7 @@ msgstr "Tự động tải"
 msgid "Fetch completed"
 msgstr "Đã tải xong"
 
-#: internet/subsonic/subsonicservice.cpp:250
+#: internet/subsonic/subsonicservice.cpp:251
 msgid "Fetching Subsonic library"
 msgstr "Đang tải thư viện Subsonic"
 
@@ -2374,7 +2374,7 @@ msgstr "Lỗi khi tải ảnh bìa"
 
 #: ../bin/src/ui_ripcddialog.h:319
 msgid "File Format"
-msgstr ""
+msgstr "Định dạng tập tin"
 
 #: ui/organisedialog.cpp:79
 msgid "File extension"
@@ -2394,11 +2394,11 @@ msgstr "Tên tập tin (không có đường dẫn)"
 
 #: ../bin/src/ui_vksettingspage.h:227
 msgid "File name pattern:"
-msgstr ""
+msgstr "Quy tắc đặt tên tập tin:"
 
 #: ../bin/src/ui_playlistsaveoptionsdialog.h:95
 msgid "File paths"
-msgstr ""
+msgstr "Đường dẫn tập tin"
 
 #: playlist/playlist.cpp:1363 ../bin/src/ui_edittagdialog.h:725
 msgid "File size"
@@ -2426,9 +2426,9 @@ msgstr "Tập tin để chuyển mã"
 msgid "Find songs in your library that match the criteria you specify."
 msgstr "Tìm bài hát trong thư viện của bạn phù hợp với tiêu chuẩn mà bạn chỉ định."
 
-#: internet/vk/vkservice.cpp:317
+#: internet/vk/vkservice.cpp:320
 msgid "Find this artist"
-msgstr ""
+msgstr "Tìm nghệ sĩ này"
 
 #: musicbrainz/tagfetcher.cpp:58
 msgid "Fingerprinting song"
@@ -2444,7 +2444,7 @@ msgstr "Mức độ đầu"
 
 #: widgets/nowplayingwidget.cpp:108
 msgid "Fit cover to width"
-msgstr ""
+msgstr "Hiện ảnh bìa vừa chiều rộng"
 
 #: core/song.cpp:406 transcoder/transcoder.cpp:233
 msgid "Flac"
@@ -2462,12 +2462,12 @@ msgstr "Vì lí do giấy phép nên Spotify được hỗ trợ thông qua mộ
 msgid "Force mono encoding"
 msgstr "Buộc mã hóa đơn kênh"
 
-#: devices/deviceview.cpp:207 devices/deviceview.cpp:330
-#: devices/deviceview.cpp:335
+#: devices/deviceview.cpp:208 devices/deviceview.cpp:334
+#: devices/deviceview.cpp:339
 msgid "Forget device"
 msgstr "Quên thiết bị"
 
-#: devices/deviceview.cpp:331
+#: devices/deviceview.cpp:335
 msgid ""
 "Forgetting a device will remove it from this list and Clementine will have "
 "to rescan all the songs again next time you connect it."
@@ -2541,14 +2541,14 @@ msgstr "Thiết lập chung"
 msgid "Genre"
 msgstr "Thể loại"
 
-#: internet/spotify/spotifyservice.cpp:633
-#: internet/spotify/spotifyservice.cpp:674
+#: internet/spotify/spotifyservice.cpp:637
+#: internet/spotify/spotifyservice.cpp:681
 msgid "Get a URL to share this Spotify song"
-msgstr ""
+msgstr "Lấy URL để chia sẻ bài này"
 
-#: internet/spotify/spotifyservice.cpp:665
+#: internet/spotify/spotifyservice.cpp:669
 msgid "Get a URL to share this playlist"
-msgstr ""
+msgstr "Lấy URL để chia sẻ danh sách này"
 
 #: internet/somafm/somafmservice.cpp:120
 msgid "Getting channels"
@@ -2584,7 +2584,7 @@ msgstr "Google Drive"
 msgid "Got %1 covers out of %2 (%3 failed)"
 msgstr "Đã tải %1 ảnh bìa trong số %2 (thất bại %3)"
 
-#: ../bin/src/ui_behavioursettingspage.h:326
+#: ../bin/src/ui_behavioursettingspage.h:319
 msgid "Grey out non existent songs in my playlists"
 msgstr "Loại bỏ những bài hát không tồn tại khỏi các danh sách"
 
@@ -2630,7 +2630,7 @@ msgstr "Nhóm"
 msgid "HTML page did not contain any RSS feeds"
 msgstr "Trang HTML không chứa nguồn tin RSS"
 
-#: internet/subsonic/subsonicsettingspage.cpp:162
+#: internet/subsonic/subsonicsettingspage.cpp:163
 msgid ""
 "HTTP 3xx status code received without URL, verify server configuration."
 msgstr ""
@@ -2667,9 +2667,9 @@ msgstr "Cao (1024x1024)"
 
 #: ui/equalizer.cpp:128
 msgid "HipHop"
-msgstr ""
+msgstr "Hip hop"
 
-#: internet/subsonic/subsonicsettingspage.cpp:134
+#: internet/subsonic/subsonicsettingspage.cpp:135
 msgid "Host not found, check server URL. Example: http://localhost:4040/"
 msgstr "Không tìm thấy máy chủ, kiểm tra lại URL. Ví dụ: http://localhost:4040/"
 
@@ -2697,11 +2697,11 @@ msgstr "Biểu tượng trên cùng"
 msgid "Identifying song"
 msgstr "Đang nhận diện bài hát"
 
-#: ../bin/src/ui_behavioursettingspage.h:328
+#: ../bin/src/ui_behavioursettingspage.h:321
 msgid ""
 "If activated, clicking a selected song in the playlist view will let you "
 "edit the tag value directly"
-msgstr ""
+msgstr "Nếu bật, bạn có thể sửa thông tin bài hát trực tiếp bằng cách nhấn vào bài đã chọn trong danh sách"
 
 #: devices/devicemanager.cpp:566 devices/devicemanager.cpp:577
 msgid ""
@@ -2727,14 +2727,14 @@ msgstr "Hình ảnh (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 
 #: ../bin/src/ui_transcodedialog.h:219
 msgid "Import..."
-msgstr ""
+msgstr "Nhập..."
 
-#: core/utilities.cpp:150
+#: core/utilities.cpp:151
 #, qt-format
 msgid "In %1 days"
 msgstr "Trong %1 ngày"
 
-#: core/utilities.cpp:153
+#: core/utilities.cpp:154
 #, qt-format
 msgid "In %1 weeks"
 msgstr "Trong %1 tuần"
@@ -2745,7 +2745,7 @@ msgid ""
 "time a song finishes."
 msgstr "Trong chế độ năng động, các bài hát mới sẽ được chọn và thêm vào danh sách mỗi khi một bài hát được phát xong."
 
-#: internet/spotify/spotifyservice.cpp:421
+#: internet/spotify/spotifyservice.cpp:424
 msgid "Inbox"
 msgstr "Hộp thư đến"
 
@@ -2757,15 +2757,15 @@ msgstr "Kèm theo ảnh bìa trong thông báo"
 msgid "Include all songs"
 msgstr "Bao gồm tất cả bài hát"
 
-#: internet/subsonic/subsonicsettingspage.cpp:106
+#: internet/subsonic/subsonicsettingspage.cpp:107
 msgid "Incompatible Subsonic REST protocol version. Client must upgrade."
 msgstr ""
 
-#: internet/subsonic/subsonicsettingspage.cpp:111
+#: internet/subsonic/subsonicsettingspage.cpp:112
 msgid "Incompatible Subsonic REST protocol version. Server must upgrade."
 msgstr ""
 
-#: internet/subsonic/subsonicsettingspage.cpp:152
+#: internet/subsonic/subsonicsettingspage.cpp:153
 msgid "Incomplete configuration, please ensure all fields are populated."
 msgstr "Chưa cấu hình xong, hãy điền vào tất cả các trường."
 
@@ -2777,16 +2777,16 @@ msgstr "Tăng 4% âm lượng"
 msgid "Increase the volume by <value> percent"
 msgstr "Tăng <value>  phần trăm âm lượng"
 
-#: core/globalshortcuts.cpp:61 wiimotedev/wiimotesettingspage.cpp:103
+#: core/globalshortcuts.cpp:61 wiimotedev/wiimotesettingspage.cpp:104
 msgid "Increase volume"
 msgstr "Tăng âm lượng"
 
-#: internet/core/cloudfileservice.cpp:152
+#: internet/core/cloudfileservice.cpp:154
 #, qt-format
 msgid "Indexing %1"
 msgstr "Đang đánh chỉ mục %1"
 
-#: wiimotedev/wiimotesettingspage.cpp:132 ../bin/src/ui_deviceproperties.h:372
+#: wiimotedev/wiimotesettingspage.cpp:133 ../bin/src/ui_deviceproperties.h:372
 msgid "Information"
 msgstr "Thông tin"
 
@@ -2821,7 +2821,7 @@ msgstr ""
 
 #: widgets/osd.cpp:321 ../bin/src/ui_playlistsequence.h:115
 msgid "Intro tracks"
-msgstr ""
+msgstr "Giới thiệu bài hát"
 
 #: internet/lastfm/lastfmservice.cpp:240
 msgid "Invalid API key"
@@ -2853,7 +2853,7 @@ msgstr "Khoá phiên chạy không hợp lệ"
 
 #: ../bin/src/ui_ripcddialog.h:311
 msgid "Invert Selection"
-msgstr ""
+msgstr "Đảo ngược lựa chọn"
 
 #: internet/jamendo/jamendoservice.cpp:138
 msgid "Jamendo"
@@ -2875,13 +2875,13 @@ msgstr "Những bài hát đầu bảng trong tháng trên Jamendo"
 msgid "Jamendo Top Tracks of the Week"
 msgstr "Những bài hát đầu bảng trong tuần trên Jamendo"
 
-#: internet/jamendo/jamendoservice.cpp:180
+#: internet/jamendo/jamendoservice.cpp:181
 msgid "Jamendo database"
 msgstr "Cơ sở dữ liệu Jamendo"
 
-#: ../bin/src/ui_behavioursettingspage.h:341
+#: ../bin/src/ui_behavioursettingspage.h:334
 msgid "Jump to previous song right away"
-msgstr ""
+msgstr "Nhảy ngay tới bài trước"
 
 #: ../bin/src/ui_mainwindow.h:688
 msgid "Jump to the currently playing track"
@@ -2899,7 +2899,7 @@ msgstr "Giữ nút trong %1 giây..."
 msgid "Keep buttons for %1 seconds..."
 msgstr "Giữ nút trong %1 giây..."
 
-#: ../bin/src/ui_behavioursettingspage.h:313
+#: ../bin/src/ui_behavioursettingspage.h:306
 msgid "Keep running in the background when the window is closed"
 msgstr "Chạy nền khi đã đóng cửa sổ chính"
 
@@ -2910,13 +2910,13 @@ msgstr "Giữ nguyên tập tin gốc"
 #: ../bin/src/ui_mainwindow.h:680
 msgctxt "Label for buton to enable/disable kittens in the now playing widget"
 msgid "Kittens"
-msgstr ""
+msgstr "Mèo con"
 
 #: ui/equalizer.cpp:131
 msgid "Kuduro"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:315
+#: ../bin/src/ui_behavioursettingspage.h:308
 msgid "Language"
 msgstr "Ngôn ngữ"
 
@@ -2934,11 +2934,11 @@ msgstr "Ảnh bìa lớn"
 
 #: widgets/nowplayingwidget.cpp:101
 msgid "Large album cover (details below)"
-msgstr ""
+msgstr "Ảnh lớn (hiện thông tin phía dưới)"
 
 #: widgets/nowplayingwidget.cpp:103
 msgid "Large album cover (no details)"
-msgstr ""
+msgstr "Ảnh lớn (không có thông tin)"
 
 #: widgets/fancytabwidget.cpp:662
 msgid "Large sidebar"
@@ -2951,7 +2951,7 @@ msgstr "Lần phát cuối"
 #: playlist/playlist.cpp:1348 ../bin/src/ui_edittagdialog.h:722
 msgctxt "A playlist's tag."
 msgid "Last played"
-msgstr ""
+msgstr "Lần phát cuối"
 
 #: ../bin/src/ui_lastfmsettingspage.h:149
 msgid "Last.fm"
@@ -2994,7 +2994,7 @@ msgstr "Trái"
 msgid "Length"
 msgstr "Thời lượng"
 
-#: ui/mainwindow.cpp:225 ui/mainwindow.cpp:238
+#: ui/mainwindow.cpp:224 ui/mainwindow.cpp:237
 #: ../bin/src/ui_seafilesettingspage.h:177
 msgid "Library"
 msgstr "Thư viện"
@@ -3003,7 +3003,7 @@ msgstr "Thư viện"
 msgid "Library advanced grouping"
 msgstr "Nhóm thư viện nâng cao"
 
-#: ui/mainwindow.cpp:2516
+#: ui/mainwindow.cpp:2499
 msgid "Library rescan notice"
 msgstr "Chú ý quét lại thư viện"
 
@@ -3031,7 +3031,7 @@ msgstr "Nạp ảnh bìa từ URL"
 msgid "Load cover from URL..."
 msgstr "Nạp ảnh bìa từ URL..."
 
-#: ui/albumcoverchoicecontroller.cpp:104
+#: ui/albumcoverchoicecontroller.cpp:106
 msgid "Load cover from disk"
 msgstr "Nạp ảnh bìa từ đĩa"
 
@@ -3063,12 +3063,12 @@ msgstr "Đang nạp danh sách thông minh"
 msgid "Loading songs"
 msgstr "Đang nạp bài hát"
 
-#: internet/digitally/digitallyimportedurlhandler.cpp:67
+#: internet/digitally/digitallyimportedurlhandler.cpp:68
 #: internet/somafm/somafmurlhandler.cpp:53
 msgid "Loading stream"
 msgstr "Đang nạp luồng dữ liệu"
 
-#: playlist/songloaderinserter.cpp:129 ui/edittagdialog.cpp:242
+#: playlist/songloaderinserter.cpp:129 ui/edittagdialog.cpp:245
 msgid "Loading tracks"
 msgstr "Đang nạp bài hát"
 
@@ -3078,8 +3078,8 @@ msgstr "Đang nạp thông tin bài hát"
 
 #: library/librarymodel.cpp:152
 #: internet/podcasts/podcastdiscoverymodel.cpp:105 widgets/prettyimage.cpp:168
-#: widgets/widgetfadehelper.cpp:96 internet/vk/vkservice.cpp:508
-#: internet/vk/vksettingspage.cpp:122 ../bin/src/ui_addpodcastdialog.h:179
+#: widgets/widgetfadehelper.cpp:96 internet/vk/vkservice.cpp:513
+#: internet/vk/vksettingspage.cpp:125 ../bin/src/ui_addpodcastdialog.h:179
 #: ../bin/src/ui_searchpreview.h:105 ../bin/src/ui_organisedialog.h:261
 msgid "Loading..."
 msgstr "Đang nạp..."
@@ -3088,7 +3088,7 @@ msgstr "Đang nạp..."
 msgid "Loads files/URLs, replacing current playlist"
 msgstr "Mở tập tin/URL, thay thế danh sách hiện tại"
 
-#: internet/vk/vksettingspage.cpp:111
+#: internet/vk/vksettingspage.cpp:114
 #: ../bin/src/ui_digitallyimportedsettingspage.h:162
 #: ../bin/src/ui_magnatunesettingspage.h:163
 #: ../bin/src/ui_soundcloudsettingspage.h:105
@@ -3104,13 +3104,13 @@ msgstr "Mở tập tin/URL, thay thế danh sách hiện tại"
 msgid "Login"
 msgstr "Đăng nhập"
 
-#: internet/podcasts/podcastsettingspage.cpp:127
+#: internet/podcasts/podcastsettingspage.cpp:130
 msgid "Login failed"
 msgstr "Đăng nhập thất bại"
 
-#: internet/vk/vksettingspage.cpp:121
+#: internet/vk/vksettingspage.cpp:124
 msgid "Logout"
-msgstr ""
+msgstr "Đăng xuất"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:136
 msgid "Long term prediction profile (LTP)"
@@ -3122,7 +3122,7 @@ msgstr "Yêu thích"
 
 #: core/globalshortcuts.cpp:78
 msgid "Love (Last.fm scrobbling)"
-msgstr ""
+msgstr "Thích (Last.fm)"
 
 #: analyzers/analyzercontainer.cpp:68
 #: visualisations/visualisationcontainer.cpp:107
@@ -3150,11 +3150,11 @@ msgstr "Lời bài hát từ %1"
 
 #: songinfo/taglyricsinfoprovider.cpp:29
 msgid "Lyrics from the ID3v2 tag"
-msgstr ""
+msgstr "Lời bài hát từ thẻ ID3v2"
 
 #: transcoder/transcoder.cpp:235
 msgid "M4A AAC"
-msgstr ""
+msgstr "M4A AAC"
 
 #: core/song.cpp:412 transcoder/transcoder.cpp:238
 #: ../bin/src/ui_transcodersettingspage.h:174
@@ -3203,7 +3203,7 @@ msgctxt "Label for button to enable/disable Enterprise background sound."
 msgid "Make it so!"
 msgstr ""
 
-#: internet/spotify/spotifyservice.cpp:662
+#: internet/spotify/spotifyservice.cpp:667
 msgid "Make playlist available offline"
 msgstr "Danh sách sẵn sàng ngoại tuyến"
 
@@ -3220,15 +3220,15 @@ msgstr "Cấu hình proxy thủ công"
 msgid "Manually"
 msgstr "Thủ công"
 
-#: devices/deviceproperties.cpp:156
+#: devices/deviceproperties.cpp:157
 msgid "Manufacturer"
 msgstr "Nhà sản xuất"
 
-#: internet/podcasts/podcastservice.cpp:448 ../bin/src/ui_organisedialog.h:259
+#: internet/podcasts/podcastservice.cpp:450 ../bin/src/ui_organisedialog.h:259
 msgid "Mark as listened"
 msgstr "Đánh dấu là đã nghe"
 
-#: internet/podcasts/podcastservice.cpp:447
+#: internet/podcasts/podcastservice.cpp:449
 msgid "Mark as new"
 msgstr "Đánh dấu mới"
 
@@ -3242,7 +3242,7 @@ msgstr "Một hay nhiều điều kiện khớp (OR)"
 
 #: ../bin/src/ui_vksettingspage.h:220
 msgid "Max global search results"
-msgstr ""
+msgstr "Số lượng kết quả tìm kiếm tối đa"
 
 #: ../bin/src/ui_transcoderoptionsvorbis.h:208
 msgid "Maximum bitrate"
@@ -3278,7 +3278,7 @@ msgstr ""
 msgid "Missing projectM presets"
 msgstr "Thiếu thiết đặt projectM"
 
-#: devices/deviceproperties.cpp:155
+#: devices/deviceproperties.cpp:156
 msgid "Model"
 msgstr "Model"
 
@@ -3307,7 +3307,7 @@ msgstr "Kiểu thanh sắc thái"
 msgid "Moodbars"
 msgstr "Thanh sắc thái"
 
-#: internet/vk/vkservice.cpp:512
+#: internet/vk/vkservice.cpp:517
 msgid "More"
 msgstr ""
 
@@ -3328,7 +3328,7 @@ msgstr "Các điểm gắn"
 msgid "Move down"
 msgstr "Chuyển xuống"
 
-#: ui/mainwindow.cpp:634 widgets/fileviewlist.cpp:40
+#: ui/mainwindow.cpp:637 widgets/fileviewlist.cpp:42
 msgid "Move to library..."
 msgstr "Dời vào thư viện..."
 
@@ -3337,8 +3337,8 @@ msgstr "Dời vào thư viện..."
 msgid "Move up"
 msgstr "Chuyển lên"
 
-#: transcoder/transcodedialog.cpp:225 ui/mainwindow.cpp:1932
-#: internet/vk/vkservice.cpp:893
+#: transcoder/transcodedialog.cpp:225 ui/mainwindow.cpp:1915
+#: internet/vk/vkservice.cpp:906
 msgid "Music"
 msgstr "Nhạc"
 
@@ -3346,20 +3346,20 @@ msgstr "Nhạc"
 msgid "Music Library"
 msgstr "Thư viện nhạc"
 
-#: core/globalshortcuts.cpp:63 wiimotedev/wiimotesettingspage.cpp:106
+#: core/globalshortcuts.cpp:63 wiimotedev/wiimotesettingspage.cpp:107
 #: ../bin/src/ui_mainwindow.h:702
 msgid "Mute"
 msgstr "Tắt âm"
 
-#: internet/vk/vkservice.cpp:829
+#: internet/vk/vkservice.cpp:838
 msgid "My Albums"
-msgstr ""
+msgstr "Album của tôi"
 
-#: internet/vk/vkservice.cpp:887
+#: internet/vk/vkservice.cpp:899
 msgid "My Music"
 msgstr "Nhạc của tôi"
 
-#: internet/vk/vkservice.cpp:519
+#: internet/vk/vkservice.cpp:525
 msgid "My Recommendations"
 msgstr "Bài nên nghe"
 
@@ -3371,7 +3371,7 @@ msgstr "Hành động"
 #: ../bin/src/ui_magnatunedownloaddialog.h:134
 msgctxt "Category label"
 msgid "Name"
-msgstr ""
+msgstr "Tên"
 
 #: ../bin/src/ui_organisedialog.h:248
 msgid "Naming options"
@@ -3389,7 +3389,7 @@ msgstr "Proxy"
 msgid "Network Remote"
 msgstr "Điều khiển qua mạng"
 
-#: playlist/playlistdelegates.cpp:296 ui/edittagdialog.cpp:523
+#: playlist/playlistdelegates.cpp:296 ui/edittagdialog.cpp:526
 msgid "Never"
 msgstr "Chưa bao giờ"
 
@@ -3397,9 +3397,8 @@ msgstr "Chưa bao giờ"
 msgid "Never played"
 msgstr "Chưa bao giờ phát"
 
-#: ../bin/src/ui_behavioursettingspage.h:334
-#: ../bin/src/ui_behavioursettingspage.h:354
-#: ../bin/src/ui_behavioursettingspage.h:368
+#: ../bin/src/ui_behavioursettingspage.h:327
+#: ../bin/src/ui_behavioursettingspage.h:347
 msgid "Never start playing"
 msgstr "Không phát nhạc"
 
@@ -3409,11 +3408,11 @@ msgstr "Không phát nhạc"
 msgid "New folder"
 msgstr "Thư mục mới"
 
-#: ui/mainwindow.cpp:1769 ../bin/src/ui_mainwindow.h:690
+#: ui/mainwindow.cpp:1752 ../bin/src/ui_mainwindow.h:690
 msgid "New playlist"
 msgstr "Tạo danh sách mới"
 
-#: library/libraryview.cpp:406
+#: library/libraryview.cpp:389
 msgid "New smart playlist..."
 msgstr "Tạo danh sách thông minh..."
 
@@ -3429,16 +3428,16 @@ msgstr "Những bài hát mới sẽ được tự động thêm vào."
 msgid "Newest tracks"
 msgstr "Những bài mới nhất"
 
-#: ui/edittagdialog.cpp:163 ui/trackselectiondialog.cpp:48
+#: ui/edittagdialog.cpp:166 ui/trackselectiondialog.cpp:50
 msgid "Next"
 msgstr "Tiếp theo"
 
-#: core/globalshortcuts.cpp:57 wiimotedev/wiimotesettingspage.cpp:97
+#: core/globalshortcuts.cpp:57 wiimotedev/wiimotesettingspage.cpp:98
 #: ../bin/src/ui_mainwindow.h:645
 msgid "Next track"
 msgstr "Phát bài tiếp theo"
 
-#: core/utilities.cpp:151
+#: core/utilities.cpp:152
 msgid "Next week"
 msgstr "Tuần sau"
 
@@ -3472,7 +3471,7 @@ msgstr "Các khối ngắn"
 msgid "None"
 msgstr "Không"
 
-#: library/libraryview.cpp:652 ui/mainwindow.cpp:2245 ui/mainwindow.cpp:2393
+#: library/libraryview.cpp:634 ui/mainwindow.cpp:2228 ui/mainwindow.cpp:2376
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Không bài hát nào phù hợp để chép qua thiết bị"
 
@@ -3484,7 +3483,7 @@ msgstr "Bình thường"
 msgid "Normal block type"
 msgstr "Kiểu khối bình thường"
 
-#: playlist/playlistsequence.cpp:199
+#: playlist/playlistsequence.cpp:203
 msgid "Not available while using a dynamic playlist"
 msgstr "Không khả thi khi dùng danh sách năng động"
 
@@ -3512,7 +3511,7 @@ msgstr "Chưa đủ những người lân cận"
 msgid "Not installed"
 msgstr "Chưa cài đặt"
 
-#: globalsearch/globalsearchsettingspage.cpp:119
+#: globalsearch/globalsearchsettingspage.cpp:120
 #: globalsearch/searchproviderstatuswidget.cpp:47
 msgid "Not logged in"
 msgstr "Chưa đăng nhập"
@@ -3521,9 +3520,9 @@ msgstr "Chưa đăng nhập"
 msgid "Not mounted - double click to mount"
 msgstr "Chưa gắn kết - nhấp đúp chuột để gắn kết"
 
-#: internet/vk/vksearchdialog.cpp:93
+#: internet/vk/vksearchdialog.cpp:94
 msgid "Nothing found"
-msgstr ""
+msgstr "Không tìm được gì"
 
 #: ../bin/src/ui_notificationssettingspage.h:437
 msgid "Notification type"
@@ -3539,7 +3538,7 @@ msgstr "Đang phát"
 
 #: ../bin/src/ui_podcastsettingspage.h:279
 msgid "Number of episodes to show"
-msgstr ""
+msgstr "Số tập được hiển thị"
 
 #: ui/notificationssettingspage.cpp:36
 msgid "OSD Preview"
@@ -3547,7 +3546,7 @@ msgstr "Xem trước hộp thông báo"
 
 #: widgets/osd.cpp:173
 msgid "Off"
-msgstr ""
+msgstr "Tắt"
 
 #: core/song.cpp:414 transcoder/transcoder.cpp:244
 msgid "Ogg Flac"
@@ -3569,11 +3568,11 @@ msgstr "Ogg Vorbis"
 
 #: widgets/osd.cpp:173
 msgid "On"
-msgstr ""
+msgstr "Bật"
 
 #: ../bin/src/ui_skydrivesettingspage.h:102
 msgid "OneDrive"
-msgstr ""
+msgstr "OneDrive"
 
 #: ../bin/src/ui_networkremotesettingspage.h:226
 msgid ""
@@ -3585,7 +3584,7 @@ msgstr "Chỉ chấp nhận kết nối từ máy khách có ip trong các kho�
 
 #: ../bin/src/ui_networkremotesettingspage.h:231
 msgid "Only allow connections from the local network"
-msgstr ""
+msgstr "Chỉ cho kết nối trong mạng nội bộ"
 
 #: ../bin/src/ui_querysortpage.h:142
 msgid "Only show the first"
@@ -3595,12 +3594,12 @@ msgstr "Hiện số bài hát đầu tiên"
 msgid "Opacity"
 msgstr "Độ mờ"
 
-#: internet/digitally/digitallyimportedservicebase.cpp:176
-#: internet/icecast/icecastservice.cpp:302
-#: internet/jamendo/jamendoservice.cpp:434
-#: internet/magnatune/magnatuneservice.cpp:284
+#: internet/digitally/digitallyimportedservicebase.cpp:177
+#: internet/icecast/icecastservice.cpp:303
+#: internet/jamendo/jamendoservice.cpp:437
+#: internet/magnatune/magnatuneservice.cpp:287
 #: internet/somafm/somafmservice.cpp:102
-#: internet/soundcloud/soundcloudservice.cpp:351
+#: internet/soundcloud/soundcloudservice.cpp:353
 #, qt-format
 msgid "Open %1 in browser"
 msgstr "Mở %1 bằng trình duyệt"
@@ -3609,17 +3608,17 @@ msgstr "Mở %1 bằng trình duyệt"
 msgid "Open &audio CD..."
 msgstr "Mở đĩa &CD..."
 
-#: internet/podcasts/addpodcastdialog.cpp:238
+#: internet/podcasts/addpodcastdialog.cpp:243
 msgid "Open OPML file"
 msgstr "Mở tập tin OPML"
 
-#: internet/podcasts/addpodcastdialog.cpp:80
+#: internet/podcasts/addpodcastdialog.cpp:84
 msgid "Open OPML file..."
 msgstr "Mở tập tin OPML..."
 
 #: transcoder/transcodedialog.cpp:240
 msgid "Open a directory to import music from"
-msgstr ""
+msgstr "Mở một thư mục để thêm nhạc"
 
 #: ../bin/src/ui_deviceproperties.h:381
 msgid "Open device"
@@ -3629,24 +3628,24 @@ msgstr "Mở thiết bị"
 msgid "Open file..."
 msgstr "Mở tập tin..."
 
-#: internet/googledrive/googledriveservice.cpp:216
+#: internet/googledrive/googledriveservice.cpp:217
 msgid "Open in Google Drive"
 msgstr "Mở trong Google Drive"
 
-#: devices/deviceview.cpp:221 globalsearch/globalsearchview.cpp:461
-#: internet/core/internetservice.cpp:102 library/libraryview.cpp:396
-#: widgets/fileviewlist.cpp:35
+#: devices/deviceview.cpp:224 globalsearch/globalsearchview.cpp:461
+#: internet/core/internetservice.cpp:105 library/libraryview.cpp:378
+#: widgets/fileviewlist.cpp:36
 msgid "Open in new playlist"
 msgstr "Mở trong danh sách mới"
 
-#: ../bin/src/ui_behavioursettingspage.h:349
+#: ../bin/src/ui_behavioursettingspage.h:342
 msgctxt "Refers to behavior settings in Clementine settings page."
 msgid "Open in new playlist"
-msgstr ""
+msgstr "Mở trong danh sách mới"
 
-#: songinfo/echonestbiographies.cpp:101
+#: songinfo/echonestbiographies.cpp:102
 msgid "Open in your browser"
-msgstr ""
+msgstr "Mở bằng trình duyệt"
 
 #: ../bin/src/ui_globalshortcutssettingspage.h:168
 #: ../bin/src/ui_globalshortcutssettingspage.h:170
@@ -3679,7 +3678,7 @@ msgstr "Opus"
 msgid "Organise Files"
 msgstr "Sao chép tập tin"
 
-#: library/libraryview.cpp:417 ui/mainwindow.cpp:637
+#: library/libraryview.cpp:399 ui/mainwindow.cpp:640
 msgid "Organise files..."
 msgstr "Sao chép tập tin..."
 
@@ -3687,7 +3686,7 @@ msgstr "Sao chép tập tin..."
 msgid "Organising files"
 msgstr "Tổ chức tập tin"
 
-#: ui/trackselectiondialog.cpp:162
+#: ui/trackselectiondialog.cpp:164
 msgid "Original tags"
 msgstr "Thẻ gốc"
 
@@ -3695,16 +3694,16 @@ msgstr "Thẻ gốc"
 #: ../bin/src/ui_groupbydialog.h:135 ../bin/src/ui_groupbydialog.h:154
 #: ../bin/src/ui_groupbydialog.h:173
 msgid "Original year"
-msgstr ""
+msgstr "Năm gốc"
 
 #: ../bin/src/ui_groupbydialog.h:137 ../bin/src/ui_groupbydialog.h:156
 #: ../bin/src/ui_groupbydialog.h:175
 msgid "Original year - Album"
-msgstr ""
+msgstr "Năm gốc - Album"
 
 #: library/library.cpp:118
 msgid "Original year tag support"
-msgstr ""
+msgstr "Hỗ trợ thẻ thông tin về năm gốc"
 
 #: core/commandlineoptions.cpp:170
 msgid "Other options"
@@ -3712,7 +3711,7 @@ msgstr "Các tuỳ chọn khác"
 
 #: ../bin/src/ui_albumcoverexport.h:203
 msgid "Output"
-msgstr ""
+msgstr "Ngõ ra"
 
 #: ../bin/src/ui_playbacksettingspage.h:362
 msgid "Output device"
@@ -3724,7 +3723,7 @@ msgstr "Tùy chọn xuất"
 
 #: ../bin/src/ui_albumcoverexport.h:209
 msgid "Overwrite all"
-msgstr ""
+msgstr "Ghi đè tất cả"
 
 #: ../bin/src/ui_organisedialog.h:258
 msgid "Overwrite existing files"
@@ -3732,13 +3731,13 @@ msgstr "Ghi đè tập tin đã tồn tại"
 
 #: ../bin/src/ui_albumcoverexport.h:210
 msgid "Overwrite smaller ones only"
-msgstr ""
+msgstr "Chỉ ghi đè ảnh nhỏ hơn"
 
 #: ../bin/src/ui_podcastinfowidget.h:194
 msgid "Owner"
 msgstr "Sở hữu"
 
-#: internet/jamendo/jamendoservice.cpp:228
+#: internet/jamendo/jamendoservice.cpp:229
 msgid "Parsing Jamendo catalogue"
 msgstr "Đang phân tích mục lục Jamendo"
 
@@ -3755,8 +3754,8 @@ msgstr "Party"
 msgid "Password"
 msgstr "Mật khẩu"
 
-#: core/globalshortcuts.cpp:50 ui/mainwindow.cpp:1061 ui/mainwindow.cpp:1582
-#: ui/qtsystemtrayicon.cpp:175 wiimotedev/wiimotesettingspage.cpp:107
+#: core/globalshortcuts.cpp:50 ui/mainwindow.cpp:1070 ui/mainwindow.cpp:1565
+#: ui/qtsystemtrayicon.cpp:175 wiimotedev/wiimotesettingspage.cpp:108
 msgid "Pause"
 msgstr "Tạm dừng"
 
@@ -3772,7 +3771,7 @@ msgstr "Đã tạm dừng"
 #: ../bin/src/ui_groupbydialog.h:140 ../bin/src/ui_groupbydialog.h:159
 #: ../bin/src/ui_groupbydialog.h:178 ../bin/src/ui_edittagdialog.h:741
 msgid "Performer"
-msgstr ""
+msgstr "Biểu diễn"
 
 #: ../bin/src/ui_albumcoverexport.h:214
 msgid "Pixel"
@@ -3782,9 +3781,9 @@ msgstr "Điểm ảnh"
 msgid "Plain sidebar"
 msgstr "Thanh bên đơn giản"
 
-#: core/globalshortcuts.cpp:49 ui/mainwindow.cpp:609 ui/mainwindow.cpp:1029
-#: ui/mainwindow.cpp:1047 ui/mainwindow.cpp:1585 ui/qtsystemtrayicon.cpp:164
-#: ui/qtsystemtrayicon.cpp:188 wiimotedev/wiimotesettingspage.cpp:100
+#: core/globalshortcuts.cpp:49 ui/mainwindow.cpp:611 ui/mainwindow.cpp:1038
+#: ui/mainwindow.cpp:1056 ui/mainwindow.cpp:1568 ui/qtsystemtrayicon.cpp:164
+#: ui/qtsystemtrayicon.cpp:188 wiimotedev/wiimotesettingspage.cpp:101
 #: ../bin/src/ui_mainwindow.h:641
 msgid "Play"
 msgstr "Phát"
@@ -3797,9 +3796,8 @@ msgstr "Số lần phát"
 msgid "Play if stopped, pause if playing"
 msgstr "Phát nếu như đang dừng, tạm dừng nếu như đang phát"
 
-#: ../bin/src/ui_behavioursettingspage.h:335
-#: ../bin/src/ui_behavioursettingspage.h:355
-#: ../bin/src/ui_behavioursettingspage.h:369
+#: ../bin/src/ui_behavioursettingspage.h:328
+#: ../bin/src/ui_behavioursettingspage.h:348
 msgid "Play if there is nothing already playing"
 msgstr "Phát nhạc nếu không có bài khác đang phát"
 
@@ -3807,7 +3805,7 @@ msgstr "Phát nhạc nếu không có bài khác đang phát"
 msgid "Play the <n>th track in the playlist"
 msgstr "Phát bài hát thứ <n> trong danh sách"
 
-#: core/globalshortcuts.cpp:51 wiimotedev/wiimotesettingspage.cpp:109
+#: core/globalshortcuts.cpp:51 wiimotedev/wiimotesettingspage.cpp:110
 msgid "Play/Pause"
 msgstr "Phát/Tạm dừng"
 
@@ -3838,7 +3836,7 @@ msgstr "Tùy chọn danh sách"
 msgid "Playlist type"
 msgstr "Loại danh sách"
 
-#: internet/soundcloud/soundcloudservice.cpp:130 ui/mainwindow.cpp:241
+#: internet/soundcloud/soundcloudservice.cpp:132 ui/mainwindow.cpp:241
 msgid "Playlists"
 msgstr "Danh sách"
 
@@ -3850,7 +3848,7 @@ msgstr "Hãy đóng trình duyệt và trở lại Clementine."
 msgid "Plugin status:"
 msgstr "Trạng thái phần mở rộng:"
 
-#: internet/podcasts/podcastservice.cpp:131
+#: internet/podcasts/podcastservice.cpp:132
 #: ../bin/src/ui_podcastsettingspage.h:253
 msgid "Podcasts"
 msgstr "Podcast"
@@ -3874,7 +3872,7 @@ msgstr "Pre-amp"
 
 #: ../bin/src/ui_seafilesettingspage.h:176
 msgid "Preference"
-msgstr ""
+msgstr "Tùy chỉnh"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:165
 #: ../bin/src/ui_magnatunesettingspage.h:165
@@ -3924,9 +3922,9 @@ msgstr "Ấn một phím"
 msgid "Press a key combination to use for %1..."
 msgstr "Bấm tổ hợp phím để %1..."
 
-#: ../bin/src/ui_behavioursettingspage.h:338
+#: ../bin/src/ui_behavioursettingspage.h:331
 msgid "Pressing \"Previous\" in player will..."
-msgstr ""
+msgstr "Ấn \"Trước\" trong chương trình sẽ..."
 
 #: ../bin/src/ui_notificationssettingspage.h:457
 msgid "Pretty OSD options"
@@ -3938,11 +3936,11 @@ msgstr "Tùy chọn hộp thông báo"
 msgid "Preview"
 msgstr "Xem trước"
 
-#: ui/edittagdialog.cpp:162 ui/trackselectiondialog.cpp:47
+#: ui/edittagdialog.cpp:163 ui/trackselectiondialog.cpp:48
 msgid "Previous"
 msgstr "Trước"
 
-#: core/globalshortcuts.cpp:59 wiimotedev/wiimotesettingspage.cpp:99
+#: core/globalshortcuts.cpp:59 wiimotedev/wiimotesettingspage.cpp:100
 #: ../bin/src/ui_mainwindow.h:639
 msgid "Previous track"
 msgstr "Phát bài trước"
@@ -3962,13 +3960,13 @@ msgstr "Tiến độ"
 #: ../bin/src/ui_magnatunedownloaddialog.h:133
 msgctxt "Category label"
 msgid "Progress"
-msgstr ""
+msgstr "Tiến độ"
 
 #: ui/equalizer.cpp:144
 msgid "Psychedelic"
 msgstr ""
 
-#: wiimotedev/wiimotesettingspage.cpp:239
+#: wiimotedev/wiimotesettingspage.cpp:240
 #: ../bin/src/ui_wiimoteshortcutgrabber.h:124
 msgid "Push Wiiremote button"
 msgstr "Ấn vào nút tay cầm Wii"
@@ -3983,12 +3981,12 @@ msgstr "Sắp xếp ngẫu nhiên các bài hát"
 #: ../bin/src/ui_transcoderoptionsvorbis.h:201
 msgctxt "Sound quality"
 msgid "Quality"
-msgstr ""
+msgstr "Chất lượng"
 
 #: visualisations/visualisationcontainer.cpp:118
 msgctxt "Visualisation quality"
 msgid "Quality"
-msgstr ""
+msgstr "Chất lượng"
 
 #: ../bin/src/ui_deviceproperties.h:382
 msgid "Querying device..."
@@ -3998,12 +3996,12 @@ msgstr "Truy vấn thiết bị..."
 msgid "Queue Manager"
 msgstr "Quản lý danh sách chờ"
 
-#: ui/mainwindow.cpp:1677
+#: ui/mainwindow.cpp:1660
 msgid "Queue selected tracks"
 msgstr "Chờ phát những bài đã chọn"
 
-#: globalsearch/globalsearchview.cpp:466 library/libraryview.cpp:401
-#: ui/mainwindow.cpp:1675
+#: globalsearch/globalsearchview.cpp:466 library/libraryview.cpp:383
+#: ui/mainwindow.cpp:1658
 msgid "Queue track"
 msgstr "Chờ phát sau"
 
@@ -4018,7 +4016,7 @@ msgstr "Rain"
 #: ../bin/src/ui_mainwindow.h:677
 msgctxt "Label for button to enable/disable rain background sound."
 msgid "Rain"
-msgstr ""
+msgstr "Mưa"
 
 #: ../bin/src/ui_visualisationselector.h:111
 msgid "Random visualization"
@@ -4057,12 +4055,12 @@ msgstr "Đánh giá"
 msgid "Really cancel?"
 msgstr "Thực sự hủy bỏ?"
 
-#: internet/subsonic/subsonicsettingspage.cpp:157
+#: internet/subsonic/subsonicsettingspage.cpp:158
 msgid "Redirect limit exceeded, verify server configuration."
-msgstr ""
+msgstr "Đã vượt số lượng chuyển hướng, hãy kiểm tra cấu hình máy chủ."
 
-#: internet/jamendo/jamendoservice.cpp:437
-#: internet/magnatune/magnatuneservice.cpp:287
+#: internet/jamendo/jamendoservice.cpp:440
+#: internet/magnatune/magnatuneservice.cpp:290
 #: internet/subsonic/subsonicservice.cpp:109
 msgid "Refresh catalogue"
 msgstr "Cập nhật mục lục"
@@ -4071,11 +4069,11 @@ msgstr "Cập nhật mục lục"
 msgid "Refresh channels"
 msgstr "Cập nhật kênh"
 
-#: internet/icecast/icecastservice.cpp:305
+#: internet/icecast/icecastservice.cpp:306
 msgid "Refresh station list"
 msgstr "Cập nhật danh sách đài"
 
-#: internet/digitally/digitallyimportedservicebase.cpp:179
+#: internet/digitally/digitallyimportedservicebase.cpp:180
 msgid "Refresh streams"
 msgstr "Cập nhật các luồng"
 
@@ -4084,21 +4082,21 @@ msgid "Reggae"
 msgstr "Reggae"
 
 #: playlist/playlistsaveoptionsdialog.cpp:33
-#: ../bin/src/ui_behavioursettingspage.h:379
+#: ../bin/src/ui_behavioursettingspage.h:364
 msgid "Relative"
-msgstr ""
+msgstr "Đường dẫn tương đối"
 
 #: ../bin/src/ui_wiimoteshortcutgrabber.h:125
 msgid "Remember Wii remote swing"
 msgstr "Ghi nhớ dao động của tay cầm Wii"
 
-#: ../bin/src/ui_behavioursettingspage.h:324
+#: ../bin/src/ui_behavioursettingspage.h:317
 msgid "Remember from last time"
 msgstr "Nhớ từ lần trước"
 
 #: ../bin/src/ui_playlistsaveoptionsdialog.h:99
 msgid "Remember my choice"
-msgstr ""
+msgstr "Nhớ lựa chọn của tôi"
 
 #: internet/internetradio/savedradio.cpp:107 ../bin/src/ui_queuemanager.h:134
 #: ../bin/src/ui_transcodedialog.h:215
@@ -4117,21 +4115,21 @@ msgstr "Loại bỏ mục trùng nhau khỏi d.sách"
 msgid "Remove folder"
 msgstr "Loại bỏ thư mục"
 
-#: internet/vk/vkservice.cpp:325
+#: internet/vk/vkservice.cpp:328
 msgid "Remove from My Music"
 msgstr "Loại bỏ khỏi Nhạc của tôi"
 
-#: internet/vk/vkservice.cpp:311
+#: internet/vk/vkservice.cpp:313
 msgid "Remove from bookmarks"
-msgstr ""
+msgstr "Xoá đánh dấu"
 
-#: internet/spotify/spotifyservice.cpp:672 ../bin/src/ui_mainwindow.h:684
+#: internet/spotify/spotifyservice.cpp:679 ../bin/src/ui_mainwindow.h:684
 msgid "Remove from playlist"
 msgstr "Loại bỏ khỏi danh sách"
 
 #: playlist/playlisttabbar.cpp:183
 msgid "Remove playlist"
-msgstr ""
+msgstr "Loại bỏ danh sách"
 
 #: playlist/playlistlistcontainer.cpp:317
 msgid "Remove playlists"
@@ -4139,7 +4137,7 @@ msgstr "Loại bỏ danh sách"
 
 #: ../bin/src/ui_mainwindow.h:716
 msgid "Remove unavailable tracks from playlist"
-msgstr ""
+msgstr "Xoá các bài không phát được khỏi danh sách"
 
 #: playlist/playlisttabbar.cpp:146
 msgid "Rename playlist"
@@ -4153,7 +4151,7 @@ msgstr "Đổi tên danh sách..."
 msgid "Renumber tracks in this order..."
 msgstr "Đánh số lại các bài hát theo thứ tự này..."
 
-#: playlist/playlistsequence.cpp:203 ../bin/src/ui_playlistsequence.h:121
+#: playlist/playlistsequence.cpp:207 ../bin/src/ui_playlistsequence.h:121
 msgid "Repeat"
 msgstr "Lặp lại"
 
@@ -4169,19 +4167,15 @@ msgstr "Lặp lại danh sách"
 msgid "Repeat track"
 msgstr "Lặp lại bài hát"
 
-#: devices/deviceview.cpp:219 globalsearch/globalsearchview.cpp:457
-#: internet/core/internetservice.cpp:91 library/libraryview.cpp:393
+#: devices/deviceview.cpp:221 globalsearch/globalsearchview.cpp:457
+#: internet/core/internetservice.cpp:93 library/libraryview.cpp:375
 #: widgets/fileviewlist.cpp:34
 msgid "Replace current playlist"
 msgstr "Thay thế danh sách hiện tại"
 
-#: ../bin/src/ui_behavioursettingspage.h:348
+#: ../bin/src/ui_behavioursettingspage.h:341
 msgid "Replace the playlist"
 msgstr "Thay thế danh sách"
-
-#: ../bin/src/ui_behavioursettingspage.h:363
-msgid "Replace the queue"
-msgstr ""
 
 #: ../bin/src/ui_organisedialog.h:256
 msgid "Replaces spaces with underscores"
@@ -4193,7 +4187,7 @@ msgstr "Tăng thêm âm lượng"
 
 #: ../bin/src/ui_playbacksettingspage.h:353
 msgid "Replay Gain mode"
-msgstr ""
+msgstr "Chế độ Replay Gain"
 
 #: ../bin/src/ui_dynamicplaylistcontrols.h:111
 msgid "Repopulate"
@@ -4201,30 +4195,30 @@ msgstr "Phục hồi số lượng"
 
 #: ../bin/src/ui_networkremotesettingspage.h:235
 msgid "Require authentication code"
-msgstr ""
+msgstr "Cần có mã xác thực"
 
 #: widgets/lineedit.cpp:52 ../bin/src/ui_vksettingspage.h:228
 msgid "Reset"
 msgstr "Thiết lập lại"
 
-#: ui/edittagdialog.cpp:800 ../bin/src/ui_edittagdialog.h:716
+#: ui/edittagdialog.cpp:803 ../bin/src/ui_edittagdialog.h:716
 msgid "Reset play counts"
 msgstr "Thiết lập lại bộ đếm số lần phát"
 
-#: ../bin/src/ui_behavioursettingspage.h:342
+#: ../bin/src/ui_behavioursettingspage.h:335
 msgid "Restart song, then jump to previous if pressed again"
-msgstr ""
+msgstr "Nghe lại bài hát, lùi lại bài trước nếu nhấn tiếp"
 
 #: core/commandlineoptions.cpp:164
 msgid ""
 "Restart the track, or play the previous track if within 8 seconds of start."
-msgstr ""
+msgstr "Nghe lại bài hát, nếu bài đang nghe chưa được 8 giây thì phát bài trước đó."
 
 #: ../bin/src/ui_organisedialog.h:257
 msgid "Restrict to ASCII characters"
 msgstr "Phải dùng kí tự mã ASCII"
 
-#: ../bin/src/ui_behavioursettingspage.h:325
+#: ../bin/src/ui_behavioursettingspage.h:318
 msgid "Resume playback on start"
 msgstr "Tiếp tục phát nhạc khi khởi động"
 
@@ -4260,13 +4254,13 @@ msgstr "Chạy"
 msgid "SOCKS proxy"
 msgstr "SOCKS proxy"
 
-#: internet/subsonic/subsonicsettingspage.cpp:146
+#: internet/subsonic/subsonicsettingspage.cpp:147
 msgid ""
 "SSL handshake error, verify server configuration. SSLv3 option below may "
 "workaround some issues."
 msgstr ""
 
-#: devices/deviceview.cpp:203
+#: devices/deviceview.cpp:204
 msgid "Safely remove device"
 msgstr "Tháo gỡ thiết bị an toàn"
 
@@ -4287,7 +4281,7 @@ msgstr "Tần số âm thanh"
 msgid "Save .mood files in your music library"
 msgstr "Lưu tập tin .mood trong thư viện nhạc"
 
-#: ui/albumcoverchoicecontroller.cpp:127
+#: ui/albumcoverchoicecontroller.cpp:129
 msgid "Save album cover"
 msgstr "Lưu ảnh bìa album"
 
@@ -4333,7 +4327,7 @@ msgstr "Lưu luồng dữ liệu này trong thẻ Internet"
 msgid "Saving songs statistics into songs files"
 msgstr ""
 
-#: ui/edittagdialog.cpp:703 ui/trackselectiondialog.cpp:254
+#: ui/edittagdialog.cpp:706 ui/trackselectiondialog.cpp:256
 msgid "Saving tracks"
 msgstr "Đang lưu các bài hát"
 
@@ -4358,25 +4352,25 @@ msgid "Seafile"
 msgstr ""
 
 #: ui/albumcoversearcher.cpp:165 ui/albumcoversearcher.cpp:182
-#: internet/vk/vkservice.cpp:527 ../bin/src/ui_gpoddersearchpage.h:77
+#: internet/vk/vkservice.cpp:534 ../bin/src/ui_gpoddersearchpage.h:77
 #: ../bin/src/ui_itunessearchpage.h:77 ../bin/src/ui_albumcoversearcher.h:113
 msgid "Search"
 msgstr "Tìm kiếm"
 
-#: ui/mainwindow.cpp:236 ../bin/src/ui_globalsearchsettingspage.h:144
+#: ui/mainwindow.cpp:235 ../bin/src/ui_globalsearchsettingspage.h:144
 msgctxt "Global search settings dialog title."
 msgid "Search"
-msgstr ""
+msgstr "Tìm kiếm"
 
 #: ../bin/src/ui_icecastfilterwidget.h:77
 msgid "Search Icecast stations"
 msgstr "Tìm trên Icecast"
 
-#: internet/jamendo/jamendoservice.cpp:444
+#: internet/jamendo/jamendoservice.cpp:447
 msgid "Search Jamendo"
 msgstr "Tìm trên Jamendo"
 
-#: internet/magnatune/magnatuneservice.cpp:296
+#: internet/magnatune/magnatuneservice.cpp:299
 msgid "Search Magnatune"
 msgstr "Tìm trên Magnatune"
 
@@ -4384,9 +4378,9 @@ msgstr "Tìm trên Magnatune"
 msgid "Search Subsonic"
 msgstr "Tìm trên Subsonic"
 
-#: ui/albumcoverchoicecontroller.cpp:73
+#: ui/albumcoverchoicecontroller.cpp:75
 msgid "Search automatically"
-msgstr ""
+msgstr "Tìm kiếm tự động"
 
 #: ui/albumcoverchoicecontroller.cpp:66
 msgid "Search for album covers..."
@@ -4412,8 +4406,8 @@ msgstr "Chế độ tìm kiếm"
 msgid "Search options"
 msgstr "Tùy chỉnh tìm kiếm"
 
-#: internet/soundcloud/soundcloudservice.cpp:116
-#: internet/spotify/spotifyservice.cpp:406
+#: internet/soundcloud/soundcloudservice.cpp:118
+#: internet/spotify/spotifyservice.cpp:408
 msgid "Search results"
 msgstr "Kết quả tìm kiếm"
 
@@ -4426,11 +4420,11 @@ msgstr "Điều kiện tìm kiếm"
 msgid "Second level"
 msgstr "Mức độ hai"
 
-#: core/globalshortcuts.cpp:65 wiimotedev/wiimotesettingspage.cpp:111
+#: core/globalshortcuts.cpp:65 wiimotedev/wiimotesettingspage.cpp:112
 msgid "Seek backward"
 msgstr "Lùi về sau"
 
-#: core/globalshortcuts.cpp:64 wiimotedev/wiimotesettingspage.cpp:113
+#: core/globalshortcuts.cpp:64 wiimotedev/wiimotesettingspage.cpp:114
 msgid "Seek forward"
 msgstr "Tiến về trước"
 
@@ -4442,8 +4436,8 @@ msgstr "Tua đến khoảng tương đối trong bài đang phát"
 msgid "Seek the currently playing track to an absolute position"
 msgstr "Tua đến vị trí chính xác trong bài đang phát"
 
-#: ../bin/src/ui_behavioursettingspage.h:372
-msgid "Seeking using a keyboard shortcut"
+#: ../bin/src/ui_behavioursettingspage.h:357
+msgid "Seeking using a keyboard shortcut or mouse wheel"
 msgstr ""
 
 #: visualisations/visualisationselector.cpp:37 ../bin/src/ui_ripcddialog.h:309
@@ -4480,7 +4474,7 @@ msgstr "Chọn hiệu ứng hình ảnh ảo..."
 
 #: ../bin/src/ui_transcodedialog.h:228 ../bin/src/ui_ripcddialog.h:318
 msgid "Select..."
-msgstr ""
+msgstr "Chọn..."
 
 #: devices/devicekitlister.cpp:126
 msgid "Serial number"
@@ -4488,7 +4482,7 @@ msgstr "Số sê-ri"
 
 #: ../bin/src/ui_seafilesettingspage.h:173
 msgid "Server"
-msgstr ""
+msgstr "Máy chủ"
 
 #: ../bin/src/ui_subsonicsettingspage.h:125
 msgid "Server URL"
@@ -4502,7 +4496,7 @@ msgstr "Chi tiết máy chủ"
 msgid "Service offline"
 msgstr "Dịch vụ ngoại tuyến"
 
-#: ui/mainwindow.cpp:1714
+#: ui/mainwindow.cpp:1697
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr "Thiết lập %1 sang \"%2\"..."
@@ -4517,7 +4511,7 @@ msgstr "Đặt giá trị cho tất cả những bài được chọn..."
 
 #: ../bin/src/ui_networkremotesettingspage.h:223
 msgid "Settings"
-msgstr ""
+msgstr "Thiết lập"
 
 #: ../bin/src/ui_globalshortcutssettingspage.h:172
 msgid "Shortcut"
@@ -4529,7 +4523,7 @@ msgstr "Phím tắt"
 msgid "Shortcut for %1"
 msgstr "Phím tắt để %1"
 
-#: wiimotedev/wiimotesettingspage.cpp:133
+#: wiimotedev/wiimotesettingspage.cpp:134
 #, qt-format
 msgid "Shortcut for %1 already exists"
 msgstr "Đã có phím tắt để %1"
@@ -4538,7 +4532,7 @@ msgstr "Đã có phím tắt để %1"
 msgid "Show"
 msgstr "Hiển thị"
 
-#: core/globalshortcuts.cpp:67 wiimotedev/wiimotesettingspage.cpp:115
+#: core/globalshortcuts.cpp:67 wiimotedev/wiimotesettingspage.cpp:116
 msgid "Show OSD"
 msgstr "Hiện hộp thông báo"
 
@@ -4564,7 +4558,7 @@ msgstr "Hiện thông báo khi thay đổi âm lượng"
 
 #: ../bin/src/ui_notificationssettingspage.h:448
 msgid "Show a notification when I pause playback"
-msgstr ""
+msgstr "Hiện thông báo khi dừng nhạc"
 
 #: ../bin/src/ui_notificationssettingspage.h:441
 msgid "Show a popup from the system tray"
@@ -4578,7 +4572,7 @@ msgstr "Tùy chỉnh thông báo"
 msgid "Show above status bar"
 msgstr "Hiện phía trên thanh trạng thái"
 
-#: ui/mainwindow.cpp:577
+#: ui/mainwindow.cpp:578
 msgid "Show all songs"
 msgstr "Hiện tất cả bài hát"
 
@@ -4594,7 +4588,7 @@ msgstr "Hiện ảnh bìa trong thư viện"
 msgid "Show dividers"
 msgstr "Hiện đường phân cách"
 
-#: ui/albumcoverchoicecontroller.cpp:70 widgets/prettyimage.cpp:182
+#: ui/albumcoverchoicecontroller.cpp:72 widgets/prettyimage.cpp:183
 msgid "Show fullsize..."
 msgstr "Hiện với kích thước gốc..."
 
@@ -4602,16 +4596,16 @@ msgstr "Hiện với kích thước gốc..."
 msgid "Show groups in global search result"
 msgstr ""
 
-#: library/libraryview.cpp:434 ui/mainwindow.cpp:646
-#: widgets/fileviewlist.cpp:51
+#: library/libraryview.cpp:417 ui/mainwindow.cpp:651
+#: widgets/fileviewlist.cpp:53
 msgid "Show in file browser..."
 msgstr "Mở thư mục lưu..."
 
-#: ui/mainwindow.cpp:649
+#: ui/mainwindow.cpp:655
 msgid "Show in library..."
-msgstr ""
+msgstr "Hiện trong thư viện..."
 
-#: library/libraryview.cpp:438
+#: library/libraryview.cpp:420
 msgid "Show in various artists"
 msgstr "Hiện trong mục nhiều nghệ sĩ"
 
@@ -4619,17 +4613,17 @@ msgstr "Hiện trong mục nhiều nghệ sĩ"
 msgid "Show moodbar"
 msgstr "Hiện thanh sắc thái"
 
-#: ui/mainwindow.cpp:579
+#: ui/mainwindow.cpp:580
 msgid "Show only duplicates"
 msgstr "Chỉ hiện những mục bị trùng"
 
-#: ui/mainwindow.cpp:581
+#: ui/mainwindow.cpp:582
 msgid "Show only untagged"
 msgstr "Chỉ hiện những mục không được gán thẻ"
 
 #: ../bin/src/ui_vksettingspage.h:223
 msgid "Show playing song on your page"
-msgstr ""
+msgstr "Hiện bài đang nghe trên trang của bạn"
 
 #: ../bin/src/ui_globalsearchsettingspage.h:152
 msgid "Show search suggestions"
@@ -4637,13 +4631,13 @@ msgstr "Hiện đề nghị tìm kiếm"
 
 #: ../bin/src/ui_lastfmsettingspage.h:156
 msgid "Show the \"love\" button"
-msgstr ""
+msgstr "Hiện nút \"thích\""
 
 #: ../bin/src/ui_lastfmsettingspage.h:157
 msgid "Show the scrobble button in the main window"
 msgstr "Hiện nút chuyển thông tin trong cửa sổ chính"
 
-#: ../bin/src/ui_behavioursettingspage.h:312
+#: ../bin/src/ui_behavioursettingspage.h:305
 msgid "Show tray icon"
 msgstr "Hiện biểu tượng dưới khay hệ thống"
 
@@ -4655,7 +4649,7 @@ msgstr "Hiện những nguồn đã được bật và tắt"
 msgid "Show/Hide"
 msgstr "Hiện/Ẩn"
 
-#: playlist/playlistsequence.cpp:202 ../bin/src/ui_playlistsequence.h:124
+#: playlist/playlistsequence.cpp:206 ../bin/src/ui_playlistsequence.h:124
 msgid "Shuffle"
 msgstr "Phát ngẫu nhiên"
 
@@ -4715,13 +4709,13 @@ msgstr "Không đếm"
 msgid "Skip forwards in playlist"
 msgstr "Không cho chuyển bài trong danh sách"
 
-#: ui/mainwindow.cpp:1688
+#: ui/mainwindow.cpp:1671
 msgid "Skip selected tracks"
-msgstr ""
+msgstr "Bỏ qua các bài đã chọn"
 
-#: ui/mainwindow.cpp:1686
+#: ui/mainwindow.cpp:1669
 msgid "Skip track"
-msgstr ""
+msgstr "Bỏ qua bài hát"
 
 #: widgets/nowplayingwidget.cpp:96
 msgid "Small album cover"
@@ -4785,7 +4779,7 @@ msgstr "Sắp xếp"
 
 #: ../bin/src/ui_soundcloudsettingspage.h:103
 msgid "SoundCloud"
-msgstr ""
+msgstr "SoundCloud"
 
 #: playlist/playlist.cpp:1374
 msgid "Source"
@@ -4804,13 +4798,13 @@ msgstr "Speex"
 msgid "Spotify"
 msgstr "Spotify"
 
-#: internet/spotify/spotifyservice.cpp:219
+#: internet/spotify/spotifyservice.cpp:220
 msgid "Spotify login error"
 msgstr "Lỗi đăng nhập Spotify"
 
-#: internet/spotify/spotifyservice.cpp:835
+#: internet/spotify/spotifyservice.cpp:842
 msgid "Spotify playlist's URL"
-msgstr ""
+msgstr "URL của danh sách Spotify"
 
 #: ../bin/src/ui_spotifysettingspage.h:211
 msgid "Spotify plugin"
@@ -4820,15 +4814,15 @@ msgstr "Phần hỗ trợ Spotify"
 msgid "Spotify plugin not installed"
 msgstr "Phần hỗ trợ Spotify chưa được cài đặt"
 
-#: internet/spotify/spotifyservice.cpp:826
+#: internet/spotify/spotifyservice.cpp:833
 msgid "Spotify song's URL"
-msgstr ""
+msgstr "URL của bài hát trên Spotify"
 
 #: ../bin/src/ui_transcoderoptionsmp3.h:200
 msgid "Standard"
 msgstr "Chuẩn"
 
-#: internet/spotify/spotifyservice.cpp:414
+#: internet/spotify/spotifyservice.cpp:416
 msgid "Starred"
 msgstr "Đã đánh giá"
 
@@ -4844,8 +4838,8 @@ msgstr "Bắt đầu danh sách đang phát"
 msgid "Start transcoding"
 msgstr "Bắt đầu chuyển mã"
 
-#: internet/soundcloud/soundcloudservice.cpp:118
-#: internet/spotify/spotifyservice.cpp:408
+#: internet/soundcloud/soundcloudservice.cpp:120
+#: internet/spotify/spotifyservice.cpp:410
 msgid ""
 "Start typing something on the search box above to fill this search results "
 "list"
@@ -4860,24 +4854,24 @@ msgstr "Bắt đầu %1"
 msgid "Starting..."
 msgstr "Đang bắt đầu..."
 
-#: core/globalshortcuts.cpp:53 wiimotedev/wiimotesettingspage.cpp:101
+#: core/globalshortcuts.cpp:53 wiimotedev/wiimotesettingspage.cpp:102
 #: ../bin/src/ui_mainwindow.h:643
 msgid "Stop"
 msgstr "Dừng"
 
-#: wiimotedev/wiimotesettingspage.cpp:114
+#: wiimotedev/wiimotesettingspage.cpp:115
 msgid "Stop after"
 msgstr "Dừng lại sau khi"
 
 #: ../bin/src/ui_playlistsequence.h:114
 msgid "Stop after each track"
-msgstr ""
+msgstr "Dừng lại sau mỗi bài"
 
 #: widgets/osd.cpp:318
 msgid "Stop after every track"
-msgstr ""
+msgstr "Dừng lại sau mỗi bài"
 
-#: ui/mainwindow.cpp:612 ../bin/src/ui_mainwindow.h:649
+#: ui/mainwindow.cpp:615 ../bin/src/ui_mainwindow.h:649
 msgid "Stop after this track"
 msgstr "Dừng sau khi phát xong bài này"
 
@@ -4892,7 +4886,7 @@ msgstr "Dừng khi phát xong bài hiện tại"
 #: widgets/osd.cpp:173
 #, qt-format
 msgid "Stop playing after track: %1"
-msgstr ""
+msgstr "Dừng lại sau bài: %1"
 
 #: widgets/osd.cpp:167
 msgid "Stopped"
@@ -4902,7 +4896,7 @@ msgstr "Đã dừng"
 msgid "Stream"
 msgstr "Truyền tải"
 
-#: internet/subsonic/subsonicsettingspage.cpp:50
+#: internet/subsonic/subsonicsettingspage.cpp:51
 msgid ""
 "Streaming from a Subsonic server requires a valid server license after the "
 "30-day trial period."
@@ -4930,7 +4924,7 @@ msgstr "Thành công!"
 msgid "Successfully written %1"
 msgstr "Đã ghi vào %1"
 
-#: ui/trackselectiondialog.cpp:166
+#: ui/trackselectiondialog.cpp:168
 msgid "Suggested tags"
 msgstr "Thẻ được đề nghị"
 
@@ -4957,15 +4951,15 @@ msgstr "Các định dạng được hỗ trợ"
 msgid "Synchronize statistics to files now"
 msgstr "Đồng bộ thống kê vào tập tin ngay"
 
-#: internet/spotify/spotifyservice.cpp:699
+#: internet/spotify/spotifyservice.cpp:706
 msgid "Syncing Spotify inbox"
 msgstr "Đang đồng bộ hộp thư đến Spotify"
 
-#: internet/spotify/spotifyservice.cpp:693
+#: internet/spotify/spotifyservice.cpp:700
 msgid "Syncing Spotify playlist"
 msgstr "Đang đồng bộ danh sách Spotify"
 
-#: internet/spotify/spotifyservice.cpp:704
+#: internet/spotify/spotifyservice.cpp:711
 msgid "Syncing Spotify starred tracks"
 msgstr "Đang đồng bộ các bài hát được đánh dấu sao của Spotify"
 
@@ -5023,25 +5017,25 @@ msgstr "Trang bạn đã yêu cầu không tồn tại!"
 msgid "The site you requested is not an image!"
 msgstr "Trang bạn đã yêu cầu không phải là một tấm ảnh!"
 
-#: internet/subsonic/subsonicsettingspage.cpp:116
+#: internet/subsonic/subsonicsettingspage.cpp:117
 msgid ""
 "The trial period for the Subsonic server is over. Please donate to get a "
 "license key. Visit subsonic.org for details."
 msgstr "Thời hạn dùng thử Subsonic đã hết. Hãy nộp phí để nhận giấy phép. Xem thêm chi tiết tại subsonic.org"
 
-#: ui/mainwindow.cpp:2507
+#: ui/mainwindow.cpp:2490
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
 msgstr "Phiên bản Clementine bạn vừa cập nhật yêu cầu quét thư viện bởi các tính năng mới được liệt kê bên dưới:"
 
-#: library/libraryview.cpp:574
+#: library/libraryview.cpp:556
 msgid "There are other songs in this album"
 msgstr "Có bài khác trong album này"
 
-#: internet/podcasts/gpoddersearchpage.cpp:76
+#: internet/podcasts/gpoddersearchpage.cpp:78
 #: internet/podcasts/gpoddertoptagsmodel.cpp:104
-#: internet/podcasts/gpoddertoptagspage.cpp:73
+#: internet/podcasts/gpoddertoptagspage.cpp:74
 msgid "There was a problem communicating with gpodder.net"
 msgstr "Có một vấn đề khi giao tiếp với gpodder.net"
 
@@ -5049,7 +5043,7 @@ msgstr "Có một vấn đề khi giao tiếp với gpodder.net"
 msgid "There was a problem fetching the metadata from Magnatune"
 msgstr "Có vấn đề khi lấy thông tin từ Magnatune"
 
-#: internet/podcasts/itunessearchpage.cpp:77
+#: internet/podcasts/itunessearchpage.cpp:79
 msgid "There was a problem parsing the response from the iTunes Store"
 msgstr "Có vấn đề khi phân tích phản hồi từ iTunes Store"
 
@@ -5065,17 +5059,17 @@ msgid ""
 "deleted:"
 msgstr "Có vấn đề khi xóa một số bài hát. Không thể xóa các tập tin sau đây:"
 
-#: devices/deviceview.cpp:405
+#: devices/deviceview.cpp:409
 msgid ""
 "These files will be deleted from the device, are you sure you want to "
 "continue?"
 msgstr "Các tập tin này sẽ bị xóa khỏi thiết bị, bạn có muốn tiếp tục?"
 
-#: library/libraryview.cpp:658 ui/mainwindow.cpp:2295 widgets/fileview.cpp:187
+#: library/libraryview.cpp:640 ui/mainwindow.cpp:2278 widgets/fileview.cpp:187
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
-msgstr ""
+msgstr "Những tập tin này sẽ bị xóa khỏi đĩa cứng vĩnh viễn, bạn có chắc chắn muốn tiếp tục không?"
 
 #: ../bin/src/ui_librarysettingspage.h:186
 msgid "These folders will be scanned for music to make up your library"
@@ -5091,7 +5085,7 @@ msgstr "Các thiết lập này được sử dụng trong hộp thoại \"Chuy�
 msgid "Third level"
 msgstr "Mức độ ba"
 
-#: internet/jamendo/jamendoservice.cpp:181
+#: internet/jamendo/jamendoservice.cpp:182
 msgid ""
 "This action will create a database which could be as big as 150 MB.\n"
 "Do you want to continue anyway?"
@@ -5103,7 +5097,7 @@ msgstr "Album này không có trong định dạng yêu cầu"
 
 #: ../bin/src/ui_playlistsaveoptionsdialog.h:97
 msgid "This can be changed later through the preferences"
-msgstr ""
+msgstr "Có thể thay đổi sau trong mục Tùy chỉnh"
 
 #: ../bin/src/ui_deviceproperties.h:380
 msgid ""
@@ -5147,7 +5141,7 @@ msgstr "Luồng này chỉ dành cho người trả phí"
 msgid "This type of device is not supported: %1"
 msgstr "Loại thiết bị này không được hỗ trợ: %1"
 
-#: ../bin/src/ui_behavioursettingspage.h:373
+#: ../bin/src/ui_behavioursettingspage.h:358
 msgid "Time step"
 msgstr ""
 
@@ -5158,7 +5152,7 @@ msgstr ""
 msgid "Title"
 msgstr "Tựa đề"
 
-#: core/utilities.cpp:136 core/utilities.cpp:148
+#: core/utilities.cpp:137 core/utilities.cpp:149
 msgid "Today"
 msgstr "Hôm nay"
 
@@ -5166,11 +5160,11 @@ msgstr "Hôm nay"
 msgid "Toggle Pretty OSD"
 msgstr "Bật/Tắt hộp thông báo"
 
-#: visualisations/visualisationcontainer.cpp:101
+#: visualisations/visualisationcontainer.cpp:102
 msgid "Toggle fullscreen"
 msgstr "Tắt/Bật toàn màn hình"
 
-#: ui/mainwindow.cpp:1679
+#: ui/mainwindow.cpp:1662
 msgid "Toggle queue status"
 msgstr "Tắt/Bật trạng thái chờ"
 
@@ -5182,7 +5176,7 @@ msgstr "Bật/Tắt Chuyển thông tin bài hát"
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "Bật/Tắt hiển thị của hộp thông báo"
 
-#: core/utilities.cpp:149
+#: core/utilities.cpp:150
 msgid "Tomorrow"
 msgstr "Ngày mai"
 
@@ -5190,7 +5184,7 @@ msgstr "Ngày mai"
 msgid "Too many redirects"
 msgstr "Quá nhiều chuyển hướng"
 
-#: internet/spotify/spotifyservice.cpp:427
+#: internet/spotify/spotifyservice.cpp:430
 msgid "Top tracks"
 msgstr "Những bài đứng đầu"
 
@@ -5212,9 +5206,9 @@ msgstr "Số lần gửi yêu cầu"
 msgid "Track"
 msgstr "Bài hát"
 
-#: internet/soundcloud/soundcloudservice.cpp:133
+#: internet/soundcloud/soundcloudservice.cpp:135
 msgid "Tracks"
-msgstr ""
+msgstr "Bài hát"
 
 #: ../bin/src/ui_transcodedialog.h:209 ../bin/src/ui_mainwindow.h:686
 msgid "Transcode Music"
@@ -5264,7 +5258,7 @@ msgstr "Băng siêu rộng (UWB)"
 #: internet/seafile/seafilesettingspage.cpp:131
 #: internet/seafile/seafilesettingspage.cpp:132
 msgid "Unable to connect"
-msgstr ""
+msgstr "Không kết nối được"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:149
 #, qt-format
@@ -5274,8 +5268,8 @@ msgstr "Không thể tải về %1 (%2)"
 #: core/song.cpp:435 library/librarymodel.cpp:361 library/librarymodel.cpp:366
 #: library/librarymodel.cpp:370 library/librarymodel.cpp:1143
 #: playlist/playlistdelegates.cpp:306 playlist/playlistmanager.cpp:508
-#: playlist/playlistmanager.cpp:509 ui/albumcoverchoicecontroller.cpp:124
-#: ui/edittagdialog.cpp:455 ui/edittagdialog.cpp:499
+#: playlist/playlistmanager.cpp:509 ui/albumcoverchoicecontroller.cpp:126
+#: ui/edittagdialog.cpp:458 ui/edittagdialog.cpp:502
 msgid "Unknown"
 msgstr "Chưa xác định"
 
@@ -5288,32 +5282,32 @@ msgstr "Không hiểu nội dung"
 msgid "Unknown error"
 msgstr "Lỗi không xác định"
 
-#: ui/albumcoverchoicecontroller.cpp:68
+#: ui/albumcoverchoicecontroller.cpp:69
 msgid "Unset cover"
 msgstr "Bỏ thiết đặt ảnh bìa"
 
-#: ui/mainwindow.cpp:1684
+#: ui/mainwindow.cpp:1667
 msgid "Unskip selected tracks"
-msgstr ""
+msgstr "Hủy việc bỏ qua các bài đã chọn"
 
-#: ui/mainwindow.cpp:1682
+#: ui/mainwindow.cpp:1665
 msgid "Unskip track"
-msgstr ""
+msgstr "Hủy bỏ qua bài hát"
 
-#: internet/podcasts/addpodcastdialog.cpp:68
-#: internet/podcasts/podcastservice.cpp:442
+#: internet/podcasts/addpodcastdialog.cpp:70
+#: internet/podcasts/podcastservice.cpp:444
 msgid "Unsubscribe"
 msgstr "Hủy đăng kí"
 
-#: songinfo/songkickconcerts.cpp:172
+#: songinfo/songkickconcerts.cpp:173
 msgid "Upcoming Concerts"
 msgstr "Các buổi hòa nhạc sắp diễn ra"
 
-#: internet/vk/vkservice.cpp:341
+#: internet/vk/vkservice.cpp:347
 msgid "Update"
-msgstr ""
+msgstr "Cập nhật"
 
-#: internet/podcasts/podcastservice.cpp:419
+#: internet/podcasts/podcastservice.cpp:420
 msgid "Update all podcasts"
 msgstr "Cập nhật tất cả podcast"
 
@@ -5325,7 +5319,7 @@ msgstr "Cập nhập thư mục thư viện đã thay đổi"
 msgid "Update the library when Clementine starts"
 msgstr "Cập nhật thư viện khi Clementine khởi động"
 
-#: internet/podcasts/podcastservice.cpp:427
+#: internet/podcasts/podcastservice.cpp:429
 msgid "Update this podcast"
 msgstr "Cập nhật podcast này"
 
@@ -5407,7 +5401,7 @@ msgstr "Dùng thông báo để cập nhật trạng thái của tay cầm Wii"
 msgid "Use temporal noise shaping"
 msgstr "Tạo tiếng ồn tạm thời"
 
-#: ../bin/src/ui_behavioursettingspage.h:318
+#: ../bin/src/ui_behavioursettingspage.h:311
 msgid "Use the system default"
 msgstr "Mặc định của hệ thống"
 
@@ -5439,7 +5433,7 @@ msgstr "Giao diện người dùng"
 msgid "Username"
 msgstr "Tên người dùng"
 
-#: ../bin/src/ui_behavioursettingspage.h:331
+#: ../bin/src/ui_behavioursettingspage.h:324
 msgid "Using the menu to add a song will..."
 msgstr "Sử dụng trình đơn để thêm một bài hát sẽ..."
 
@@ -5452,7 +5446,7 @@ msgstr "VBR MP3"
 msgid "Variable bit rate"
 msgstr "Bit rate thay đổi"
 
-#: globalsearch/globalsearchmodel.cpp:106 library/librarymodel.cpp:287
+#: globalsearch/globalsearchmodel.cpp:107 library/librarymodel.cpp:287
 #: playlist/playlistmanager.cpp:520 ui/albumcovermanager.cpp:270
 msgid "Various artists"
 msgstr "Nhiều nghệ sỹ"
@@ -5504,13 +5498,13 @@ msgstr "WAV"
 msgid "WMA"
 msgstr "WMA"
 
-#: internet/vk/vkservice.cpp:869
+#: internet/vk/vkservice.cpp:880
 msgid "Wall"
 msgstr ""
 
-#: playlist/playlisttabbar.cpp:192 ../bin/src/ui_behavioursettingspage.h:314
+#: playlist/playlisttabbar.cpp:192 ../bin/src/ui_behavioursettingspage.h:307
 msgid "Warn me when closing a playlist tab"
-msgstr ""
+msgstr "Nhắc nhở tôi khi đóng một thẻ danh sách"
 
 #: core/song.cpp:424 transcoder/transcoder.cpp:256
 msgid "Wav"
@@ -5524,7 +5518,7 @@ msgstr "Trang web"
 msgid "Weeks"
 msgstr "Tuần"
 
-#: ../bin/src/ui_behavioursettingspage.h:321
+#: ../bin/src/ui_behavioursettingspage.h:314
 msgid "When Clementine starts"
 msgstr "Khi Clementine khởi động"
 
@@ -5534,9 +5528,9 @@ msgid ""
 "If there are no matches then it will use the largest image in the directory."
 msgstr "Khi tìm ảnh bìa album Clementine sẽ tìm các tập tin ảnh chứa một trong các từ này trước.\nNếu không có kết quả nào trùng khớp thì sẽ sử dụng bức ảnh lớn nhất trong thư mục."
 
-#: ../bin/src/ui_behavioursettingspage.h:376
+#: ../bin/src/ui_behavioursettingspage.h:361
 msgid "When saving a playlist, file paths should be"
-msgstr ""
+msgstr "Khi lưu danh sách, thư mục lưu là"
 
 #: ../bin/src/ui_globalsearchsettingspage.h:150
 msgid "When the list is empty..."
@@ -5604,13 +5598,13 @@ msgstr "Âm thanh Windows Media"
 msgid "Without cover:"
 msgstr "Không có ảnh bìa:"
 
-#: library/libraryview.cpp:575
+#: library/libraryview.cpp:557
 msgid ""
 "Would you like to move the other songs in this album to Various Artists as "
 "well?"
 msgstr "Bạn có muốn chuyển những bài khác trong album này vào mục nhiều nghệ sĩ không?"
 
-#: ui/mainwindow.cpp:2514
+#: ui/mainwindow.cpp:2497
 msgid "Would you like to run a full rescan right now?"
 msgstr "Bạn muốn quét lại toàn bộ ngay bây giờ?"
 
@@ -5618,11 +5612,11 @@ msgstr "Bạn muốn quét lại toàn bộ ngay bây giờ?"
 msgid "Write all songs statistics into songs' files"
 msgstr "Ghi tất cả thống kê của các bài hát vào các tập tin"
 
-#: ../bin/src/ui_behavioursettingspage.h:381
+#: ../bin/src/ui_behavioursettingspage.h:366
 msgid "Write metadata"
-msgstr ""
+msgstr "Ghi thông tin"
 
-#: internet/subsonic/subsonicsettingspage.cpp:101
+#: internet/subsonic/subsonicsettingspage.cpp:102
 msgid "Wrong username or password."
 msgstr "Sai tên người dùng hoặc mật khẩu."
 
@@ -5642,7 +5636,7 @@ msgstr "Năm - Album"
 msgid "Years"
 msgstr "Năm"
 
-#: core/utilities.cpp:137
+#: core/utilities.cpp:138
 msgid "Yesterday"
 msgstr "Hôm qua"
 
@@ -5660,7 +5654,7 @@ msgstr "Bạn có chắc muốn loại bỏ %1 danh sách từ yêu thích?"
 msgid ""
 "You are about to remove a playlist which is not part of your favorite playlists: the playlist will be deleted (this action cannot be undone). \n"
 "Are you sure you want to continue?"
-msgstr ""
+msgstr "Bạn sắp loại bỏ một danh sách không nằm trong mục yêu thích: danh sách này sẽ bị xóa (không thể khôi phục được).\nBạn có chắc chắn muốn tiếp tục không?"
 
 #: ../bin/src/ui_loginstatewidget.h:171
 msgid "You are not signed in."
@@ -5679,13 +5673,13 @@ msgstr "Bạn đã đăng nhập."
 msgid "You can change the way the songs in the library are organised."
 msgstr "Bạn có thể thay đổi cách tổ chức các bài hát trong thư viện."
 
-#: internet/digitally/digitallyimportedsettingspage.cpp:48
+#: internet/digitally/digitallyimportedsettingspage.cpp:49
 msgid ""
 "You can listen for free without an account, but Premium members can listen "
 "to higher quality streams without advertisements."
 msgstr "Bạn có thể nghe nhạc miễn phí không cần tài khoản, nhưng nếu dùng tài khoản cao cấp, chất lượng nhạc sẽ cao hơn và không có quảng cáo."
 
-#: internet/magnatune/magnatunesettingspage.cpp:58
+#: internet/magnatune/magnatunesettingspage.cpp:59
 msgid ""
 "You can listen to Magnatune songs for free without an account.  Purchasing a"
 " membership removes the messages at the end of each track."
@@ -5717,7 +5711,7 @@ msgid ""
 "stream."
 msgstr ""
 
-#: internet/spotify/spotifyservice.cpp:204
+#: internet/spotify/spotifyservice.cpp:205
 msgid ""
 "You have been logged out of Spotify, please re-enter your password in the "
 "Settings dialog."
@@ -5738,7 +5732,7 @@ msgid ""
 "shortcuts in Clementine."
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:320
+#: ../bin/src/ui_behavioursettingspage.h:313
 msgid "You will need to restart Clementine if you change the language."
 msgstr "Bạn cần khởi động lại Clementine khi thay đổi ngôn ngữ."
 
@@ -5750,11 +5744,11 @@ msgstr "Địa chỉ IP của bạn:"
 msgid "Your Last.fm credentials were incorrect"
 msgstr "Thông tin tài khoản Last.fm không đúng"
 
-#: internet/magnatune/magnatunesettingspage.cpp:117
+#: internet/magnatune/magnatunesettingspage.cpp:118
 msgid "Your Magnatune credentials were incorrect"
 msgstr "Thông tin tài khoản Magnatune không đúng"
 
-#: library/libraryview.cpp:366
+#: library/libraryview.cpp:347
 msgid "Your library is empty!"
 msgstr "Thư viện của bạn chưa có gì!"
 
@@ -5818,7 +5812,7 @@ msgstr "giữa"
 msgid "biggest first"
 msgstr "lớn nhất trước"
 
-#: playlist/playlistview.cpp:228 ui/edittagdialog.cpp:492
+#: playlist/playlistview.cpp:232 ui/edittagdialog.cpp:495
 msgid "bpm"
 msgstr "bpm"
 
@@ -5853,7 +5847,7 @@ msgstr "bằng"
 msgid "gpodder.net"
 msgstr "gpodder.net"
 
-#: internet/podcasts/gpoddertoptagspage.cpp:35
+#: internet/podcasts/gpoddertoptagspage.cpp:36
 msgid "gpodder.net directory"
 msgstr "Thư mục gpodder.net"
 
@@ -5863,7 +5857,7 @@ msgstr "lớn hơn"
 
 #: ../bin/src/ui_deviceviewcontainer.h:98
 msgid "iPods and USB devices currently don't work on Windows.  Sorry!"
-msgstr ""
+msgstr "iPod và các thiết bị USB hiện không hoạt động trên Windows. Rất xin lỗi!"
 
 #: smartplaylists/searchterm.cpp:213
 msgid "in the last"
@@ -5871,8 +5865,8 @@ msgstr "cuối"
 
 #: internet/spotify/spotifysettingspage.cpp:62
 #: internet/spotify/spotifysettingspage.cpp:63
-#: internet/spotify/spotifysettingspage.cpp:64 playlist/playlistview.cpp:232
-#: ui/edittagdialog.cpp:494
+#: internet/spotify/spotifysettingspage.cpp:64 playlist/playlistview.cpp:236
+#: ui/edittagdialog.cpp:497
 msgid "kbps"
 msgstr "kbps"
 
@@ -5920,7 +5914,7 @@ msgstr "tùy chọn"
 
 #: ../bin/src/ui_networkremotesettingspage.h:253
 msgid "or scan the QR code!"
-msgstr ""
+msgstr "hoặc quét mã QR!"
 
 #: widgets/didyoumean.cpp:56
 msgid "press enter"

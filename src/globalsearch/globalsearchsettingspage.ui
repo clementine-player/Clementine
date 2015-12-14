@@ -13,10 +13,6 @@
   <property name="windowTitle">
    <string comment="Global search settings dialog title.">Search</string>
   </property>
-  <property name="windowIcon">
-   <iconset resource="../../data/data.qrc">
-    <normaloff>:/icons/32x32/search.png</normaloff>:/icons/32x32/search.png</iconset>
-  </property>
   <layout class="QVBoxLayout" name="verticalLayout_4">
    <item>
     <widget class="QGroupBox" name="sources_group">
@@ -141,8 +137,5 @@
   <tabstop>show_providers</tabstop>
   <tabstop>show_suggestions</tabstop>
  </tabstops>
- <resources>
-  <include location="../../data/data.qrc"/>
- </resources>
  <connections/>
 </ui>

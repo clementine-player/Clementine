@@ -39,6 +39,7 @@
 #include "core/logging.h"
 #include "core/network.h"
 #include "core/utilities.h"
+#include "ui/iconloader.h"
 #include "widgets/progressitemdelegate.h"
 
 MagnatuneDownloadDialog::MagnatuneDownloadDialog(MagnatuneService* service,
@@ -50,6 +51,9 @@ MagnatuneDownloadDialog::MagnatuneDownloadDialog(MagnatuneService* service,
       current_reply_(nullptr),
       next_row_(0) {
   ui_->setupUi(this);
+
+  setWindowIcon(IconLoader::Load("magnatune", IconLoader::Provider));
+
   ui_->albums->header()->setSectionResizeMode(QHeaderView::ResizeToContents);
   ui_->albums->header()->setSectionResizeMode(1, QHeaderView::Fixed);
   ui_->albums->header()->resizeSection(1, 150);

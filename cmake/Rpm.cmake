@@ -6,7 +6,7 @@ set(RPM_ARCH x86_64 CACHE STRING "Architecture of the rpm file")
 
 add_custom_target(rpm
   COMMAND ${CMAKE_SOURCE_DIR}/dist/maketarball.sh
-  COMMAND ${CMAKE_COMMAND} -E copy clementine-${CLEMENTINE_VERSION_SPARKLE}.tar.gz ${RPMBUILD_DIR}/SOURCES/
+  COMMAND ${CMAKE_COMMAND} -E copy clementine-${CLEMENTINE_VERSION_SPARKLE}.tar.xz ${RPMBUILD_DIR}/SOURCES/
   COMMAND rpmbuild -bs ${CMAKE_SOURCE_DIR}/dist/clementine.spec
   COMMAND ${MOCK_COMMAND}
       --verbose

@@ -49,29 +49,112 @@ namespace TagLib {
         /*!
          * Create an instance of AIFF::Properties with the data read from the
          * ByteVector \a data.
+         *
+         * \deprecated
          */
         Properties(const ByteVector &data, ReadStyle style);
+
+        /*!
+         * Create an instance of AIFF::Properties with the data read from the
+         * AIFF::File \a file.
+         */
+        Properties(File *file, ReadStyle style);
 
         /*!
          * Destroys this AIFF::Properties instance.
          */
         virtual ~Properties();
 
-        // Reimplementations.
-
+        /*!
+         * Returns the length of the file in seconds.  The length is rounded down to
+         * the nearest whole second.
+         *
+         * \note This method is just an alias of lengthInSeconds().
+         *
+         * \deprecated
+         */
         virtual int length() const;
+
+        /*!
+         * Returns the length of the file in seconds.  The length is rounded down to
+         * the nearest whole second.
+         *
+         * \see lengthInMilliseconds()
+         */
+        // BIC: make virtual
+        int lengthInSeconds() const;
+
+        /*!
+         * Returns the length of the file in milliseconds.
+         *
+         * \see lengthInSeconds()
+         */
+        // BIC: make virtual
+        int lengthInMilliseconds() const;
+
+        /*!
+         * Returns the average bit rate of the file in kb/s.
+         */
         virtual int bitrate() const;
+
+        /*!
+         * Returns the sample rate in Hz.
+         */
         virtual int sampleRate() const;
+
+        /*!
+         * Returns the number of audio channels.
+         */
         virtual int channels() const;
 
+        /*!
+         * Returns the number of bits per audio sample.
+         */
+        int bitsPerSample() const;
+
+        /*!
+         * Returns the number of bits per audio sample.
+         *
+         * \note This method is just an alias of bitsPerSample().
+         *
+         * \deprecated
+         */
         int sampleWidth() const;
+
+        /*!
+         * Returns the number of sample frames
+         */
         uint sampleFrames() const;
+
+        /*!
+         * Returns true if the file is in AIFF-C format, false if AIFF format.
+         */
+        bool isAiffC() const;
+
+        /*!
+         * Returns the compression type of the AIFF-C file.  For example, "NONE" for
+         * not compressed, "ACE2" for ACE 2-to-1.
+         *
+         * If the file is in AIFF format, always returns an empty vector.
+         *
+         * \see isAiffC()
+         */
+        ByteVector compressionType() const;
+
+        /*!
+         * Returns the concrete compression name of the AIFF-C file.
+         *
+         * If the file is in AIFF format, always returns an empty string.
+         *
+         * \see isAiffC()
+         */
+        String compressionName() const;
 
       private:
         Properties(const Properties &);
         Properties &operator=(const Properties &);
 
-        void read(const ByteVector &data);
+        void read(File *file);
 
         class PropertiesPrivate;
         PropertiesPrivate *d;

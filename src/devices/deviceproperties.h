@@ -19,6 +19,7 @@
 #define DEVICEPROPERTIES_H
 
 #include <QDialog>
+#include <QFuture>
 #include <QPersistentModelIndex>
 
 #include "core/song.h"
@@ -47,7 +48,7 @@ class DeviceProperties : public QDialog {
  private slots:
   void ModelChanged();
   void OpenDevice();
-  void UpdateFormatsFinished();
+  void UpdateFormatsFinished(QFuture<bool> future);
 
  private:
   Ui_DeviceProperties* ui_;

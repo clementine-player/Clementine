@@ -47,7 +47,6 @@
 #include "core/application.h"
 #include "core/closure.h"
 #include "core/logging.h"
-#include "core/modelfuturewatcher.h"
 #include "core/tagreaderclient.h"
 #include "core/timeconstants.h"
 #include "internet/jamendo/jamendoplaylistitem.h"
@@ -416,20 +415,13 @@ void Playlist::SongSaveComplete(TagReaderReply* reply,
                                 const QPersistentModelIndex& index) {
   if (reply->is_successful() && index.isValid()) {
     QFuture<void> future = item_at(index.row())->BackgroundReload();
-    ModelFutureWatcher<void>* watcher =
-        new ModelFutureWatcher<void>(index, this);
-    watcher->setFuture(future);
-    connect(watcher, SIGNAL(finished()), SLOT(ItemReloadComplete()));
+    NewClosure(future, this, SLOT(ItemReloadComplete(QPersistentModelIndex)),
+               index);
   }
-
   reply->deleteLater();
 }
 
-void Playlist::ItemReloadComplete() {
-  ModelFutureWatcher<void>* watcher =
-      static_cast<ModelFutureWatcher<void>*>(sender());
-  watcher->deleteLater();
-  const QPersistentModelIndex& index = watcher->index();
+void Playlist::ItemReloadComplete(const QPersistentModelIndex& index) {
   if (index.isValid()) {
     emit dataChanged(index, index);
     emit EditingFinished(index);
@@ -1464,10 +1456,6 @@ void Playlist::Save() const {
                               dynamic_playlist_);
 }
 
-namespace {
-typedef QFutureWatcher<QList<PlaylistItemPtr>> PlaylistItemFutureWatcher;
-}
-
 void Playlist::Restore() {
   if (!backend_) return;
 
@@ -1477,17 +1465,12 @@ void Playlist::Restore() {
 
   QFuture<QList<PlaylistItemPtr>> future =
       QtConcurrent::run(backend_, &PlaylistBackend::GetPlaylistItems, id_);
-  PlaylistItemFutureWatcher* watcher = new PlaylistItemFutureWatcher(this);
-  watcher->setFuture(future);
-  connect(watcher, SIGNAL(finished()), SLOT(ItemsLoaded()));
+  NewClosure(future, this, SLOT(ItemsLoaded(QFuture<PlaylistItemList>)),
+             future);
 }
 
-void Playlist::ItemsLoaded() {
-  PlaylistItemFutureWatcher* watcher =
-      static_cast<PlaylistItemFutureWatcher*>(sender());
-  watcher->deleteLater();
-
-  PlaylistItemList items = watcher->future().result();
+void Playlist::ItemsLoaded(QFuture<PlaylistItemList> future) {
+  PlaylistItemList items = future.result();
 
   // backend returns empty elements for library items which it couldn't
   // match (because they got deleted); we don't need those
@@ -1646,7 +1629,11 @@ PlaylistItemList Playlist::RemoveItemsWithoutUndo(int row, int count) {
 
   // Reset current_virtual_index_
   if (current_row() == -1)
-    current_virtual_index_ = -1;
+    if (row - 1 > 0 && row - 1 < items_.size()) {
+      current_virtual_index_ = virtual_items_.indexOf(row - 1);
+    } else {
+      current_virtual_index_ = -1;
+    }
   else
     current_virtual_index_ = virtual_items_.indexOf(current_row());
 

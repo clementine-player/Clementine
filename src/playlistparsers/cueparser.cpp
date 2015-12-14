@@ -42,6 +42,7 @@ const char* CueParser::kAudioTrackType = "audio";
 const char* CueParser::kRem = "rem";
 const char* CueParser::kGenre = "genre";
 const char* CueParser::kDate = "date";
+const char* CueParser::kDisc = "discnumber";
 
 CueParser::CueParser(LibraryBackendInterface* library, QObject* parent)
     : ParserBase(library, parent) {}
@@ -70,6 +71,7 @@ SongList CueParser::Load(QIODevice* device, const QString& playlist_path,
     QString file_type;
     QString genre;
     QString date;
+    QString disc;
 
     // -- FILE section
     do {
@@ -118,8 +120,12 @@ SongList CueParser::Load(QIODevice* device, const QString& playlist_path,
           // REM DATE
         } else if (line_value.toLower() == kDate) {
           date = splitted[2];
+        
+          // REM DISC
+        } else if (line_value.toLower() == kDisc) {
+          disc = splitted[2];
         }
-
+        
         // end of the header -> go into the track mode
       } else if (line_name == kTrack) {
         files++;
@@ -169,7 +175,7 @@ SongList CueParser::Load(QIODevice* device, const QString& playlist_path,
             (track_type.isEmpty() || track_type == kAudioTrackType)) {
           entries.append(CueEntry(file, index, title, artist, album_artist,
                                   album, composer, album_composer, genre,
-                                  date));
+                                  date, disc));
         }
 
         // clear the state
@@ -210,7 +216,7 @@ SongList CueParser::Load(QIODevice* device, const QString& playlist_path,
     if (valid_file && !index.isEmpty() &&
         (track_type.isEmpty() || track_type == kAudioTrackType)) {
       entries.append(CueEntry(file, index, title, artist, album_artist, album,
-                              composer, album_composer, genre, date));
+                              composer, album_composer, genre, date, disc));
     }
   }
 
@@ -291,7 +297,8 @@ bool CueParser::UpdateSong(const CueEntry& entry, const QString& next_index,
   song->set_composer(entry.PrettyComposer());
   song->set_genre(entry.genre);
   song->set_year(entry.date.toInt());
-
+  song->set_disc(entry.disc.toInt());
+  
   return true;
 }
 
@@ -316,7 +323,8 @@ bool CueParser::UpdateLastSong(const CueEntry& entry, Song* song) const {
   song->set_genre(entry.genre);
   song->set_year(entry.date.toInt());
   song->set_composer(entry.PrettyComposer());
-
+  song->set_disc(entry.disc.toInt());
+  
   // we don't do anything with the end here because it's already set to
   // the end of the media file (if it exists)
   song->set_beginning_nanosec(beginning);

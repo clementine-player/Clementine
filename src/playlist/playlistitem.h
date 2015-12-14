@@ -20,6 +20,7 @@
 
 #include <memory>
 
+#include <QFuture>
 #include <QMap>
 #include <QMetaType>
 #include <QStandardItem>
@@ -97,7 +98,10 @@ class PlaylistItem : public std::enable_shared_from_this<PlaylistItem> {
  protected:
   bool should_skip_;
 
-  enum DatabaseColumn { Column_LibraryId, Column_InternetService, };
+  enum DatabaseColumn {
+    Column_LibraryId,
+    Column_InternetService,
+  };
 
   virtual QVariant DatabaseValue(DatabaseColumn) const {
     return QVariant(QVariant::String);

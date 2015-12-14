@@ -49,7 +49,7 @@ namespace TagLib {
 
     /*!
      * Returns the name of the genre at \a index in the ID3v1 genre list.  If
-     * \a index is out of range -- less than zero or greater than 146 -- a null
+     * \a index is out of range -- less than zero or greater than 191 -- a null
      * string will be returned.
      */
     String TAGLIB_EXPORT genre(int index);

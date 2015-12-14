@@ -32,9 +32,10 @@
 #include "core/player.h"
 #include "core/utilities.h"
 #include "core/waitforsignal.h"
-#include "internet/dropbox/dropboxauthenticator.h"
+#include "internet/core/oauthenticator.h"
 #include "internet/dropbox/dropboxurlhandler.h"
 #include "library/librarybackend.h"
+#include "ui/iconloader.h"
 
 using Utilities::ParseRFC822DateTime;
 
@@ -54,13 +55,13 @@ static const char* kLongPollEndpoint =
 
 DropboxService::DropboxService(Application* app, InternetModel* parent)
     : CloudFileService(app, parent, kServiceName, kServiceId,
-                       QIcon(":/providers/dropbox.png"),
+                       IconLoader::Load("dropbox", IconLoader::Provider),
                        SettingsDialog::Page_Dropbox),
       network_(new NetworkAccessManager(this)) {
   QSettings settings;
   settings.beginGroup(kSettingsGroup);
-  access_token_ = settings.value("access_token").toString();
-  access_token_secret_ = settings.value("access_token_secret").toString();
+  // OAuth2 version of dropbox auth token.
+  access_token_ = settings.value("access_token2").toString();
   app->player()->RegisterUrlHandler(new DropboxUrlHandler(this, this));
 }
 
@@ -76,19 +77,14 @@ void DropboxService::Connect() {
   }
 }
 
-void DropboxService::AuthenticationFinished(
-    DropboxAuthenticator* authenticator) {
+void DropboxService::AuthenticationFinished(OAuthenticator* authenticator) {
   authenticator->deleteLater();
 
   access_token_ = authenticator->access_token();
-  access_token_secret_ = authenticator->access_token_secret();
 
   QSettings settings;
   settings.beginGroup(kSettingsGroup);
-
-  settings.setValue("access_token", access_token_);
-  settings.setValue("access_token_secret", access_token_secret_);
-  settings.setValue("name", authenticator->name());
+  settings.setValue("access_token2", access_token_);
 
   emit Connected();
 
@@ -96,8 +92,7 @@ void DropboxService::AuthenticationFinished(
 }
 
 QByteArray DropboxService::GenerateAuthorisationHeader() {
-  return DropboxAuthenticator::GenerateAuthorisationHeader(
-      access_token_, access_token_secret_);
+  return QString("Bearer %1").arg(access_token_).toUtf8();
 }
 
 void DropboxService::RequestFileList() {
@@ -182,6 +177,10 @@ void DropboxService::RequestFileListFinished(QNetworkReply* reply) {
 }
 
 void DropboxService::LongPollDelta() {
+  if (!has_credentials()) {
+    // Might have been signed out by the user.
+    return;
+  }
   QSettings s;
   s.beginGroup(kSettingsGroup);
 

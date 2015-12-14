@@ -36,7 +36,7 @@ namespace TagLib {
     //! An implementation of ID3v2 "popularimeter"
 
     /*!
-     * This implements the ID3v2 popularimeter (POPM frame).  It concists of
+     * This implements the ID3v2 popularimeter (POPM frame).  It consists of
      * an email, a rating and an optional counter.
      */
 

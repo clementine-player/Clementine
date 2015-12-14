@@ -28,7 +28,7 @@ BackgroundStreamsSettingsPage::BackgroundStreamsSettingsPage(
     SettingsDialog* dialog)
     : SettingsPage(dialog), ui_(new Ui_BackgroundStreamsSettingsPage) {
   ui_->setupUi(this);
-  setWindowIcon(QIcon(":/icons/32x32/weather-showers-scattered.png"));
+  setWindowIcon(IconLoader::Load("weather-showers-scattered", IconLoader::Base));
 
   for (const QString& name : dialog->background_streams()->streams()) {
     AddStream(name);
@@ -47,15 +47,19 @@ void BackgroundStreamsSettingsPage::AddStream(const QString& name) {
   BackgroundStreams* streams = dialog()->background_streams();
 
   QGroupBox* box = new QGroupBox(tr(name.toUtf8()));
+  QLabel *label = new QLabel(box);
   QSlider* slider = new QSlider(Qt::Horizontal, box);
   QCheckBox* check = new QCheckBox(box);
   QHBoxLayout* hbox_layout = new QHBoxLayout(box);
+  hbox_layout->addWidget(label);
   hbox_layout->addWidget(slider);
   hbox_layout->addWidget(check);
 
   QVBoxLayout* streams_layout = qobject_cast<QVBoxLayout*>(layout());
   streams_layout->insertWidget(streams_layout->count() - 1, box);
 
+  label->setPixmap(QPixmap(IconLoader::Load("audio-volume-medium", 
+                           IconLoader::Base).pixmap(32)));
   slider->setProperty("stream_name", name);
   check->setProperty("stream_name", name);
 

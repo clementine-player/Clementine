@@ -159,7 +159,7 @@ class TagCompleter : public QCompleter {
                QLineEdit* editor);
 
  private slots:
-  void ModelReady();
+  void ModelReady(QFuture<TagCompletionModel*> future);
 
  private:
   QLineEdit* editor_;
@@ -169,7 +169,7 @@ class TagCompletionItemDelegate : public PlaylistDelegateBase {
  public:
   TagCompletionItemDelegate(QObject* parent, LibraryBackend* backend,
                             Playlist::Column column)
-      : PlaylistDelegateBase(parent), backend_(backend), column_(column) {};
+      : PlaylistDelegateBase(parent), backend_(backend), column_(column){};
 
   QWidget* createEditor(QWidget* parent, const QStyleOptionViewItem& option,
                         const QModelIndex& index) const;

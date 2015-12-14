@@ -20,16 +20,12 @@
 
 #include <memory>
 
-#include <QFutureWatcher>
 #include <QtConcurrentRun>
 
 #include "querygenerator.h"
 #include "playlist/playlist.h"
 
 namespace smart_playlists {
-
-typedef QFuture<PlaylistItemList> Future;
-typedef QFutureWatcher<PlaylistItemList> FutureWatcher;
 
 SearchPreview::SearchPreview(QWidget* parent)
     : QWidget(parent), ui_(new Ui_SmartPlaylistSearchPreview), model_(nullptr) {
@@ -95,17 +91,12 @@ void SearchPreview::RunSearch(const Search& search) {
 
   ui_->busy_container->show();
   ui_->count_label->hide();
-  Future future = QtConcurrent::run(DoRunSearch, generator_);
-
-  FutureWatcher* watcher = new FutureWatcher(this);
-  watcher->setFuture(future);
-  connect(watcher, SIGNAL(finished()), SLOT(SearchFinished()));
+  QFuture<PlaylistItemList> future = QtConcurrent::run(DoRunSearch, generator_);
+  NewClosure(future, this, SLOT(SearchFinished(QFuture<PlaylistItemList>)),
+             future);
 }
 
-void SearchPreview::SearchFinished() {
-  FutureWatcher* watcher = static_cast<FutureWatcher*>(sender());
-  watcher->deleteLater();
-
+void SearchPreview::SearchFinished(QFuture<PlaylistItemList> future) {
   last_search_ =
       std::dynamic_pointer_cast<QueryGenerator>(generator_)->search();
   generator_.reset();
@@ -118,7 +109,7 @@ void SearchPreview::SearchFinished() {
     return;
   }
 
-  PlaylistItemList all_items = watcher->result();
+  PlaylistItemList all_items = future.result();
   PlaylistItemList displayed_items = all_items.mid(0, Generator::kDefaultLimit);
 
   model_->Clear();

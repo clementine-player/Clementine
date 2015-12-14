@@ -21,12 +21,14 @@
 #include "icecastbackend.h"
 #include "icecastmodel.h"
 #include "playlist/songmimedata.h"
+#include "ui/iconloader.h"
+
 IcecastModel::IcecastModel(IcecastBackend* backend, QObject* parent)
     : SimpleTreeModel<IcecastItem>(new IcecastItem(this), parent),
       backend_(backend),
       sort_mode_(SortMode_GenreByPopularity),
-      genre_icon_(":last.fm/icon_tag.png"),
-      station_icon_(":last.fm/icon_radio.png") {
+      genre_icon_(IconLoader::Load("icon_tag", IconLoader::Lastfm)),
+      station_icon_(IconLoader::Load("icon_radio", IconLoader::Lastfm)) {
   root_->lazy_loaded = true;
 }
 

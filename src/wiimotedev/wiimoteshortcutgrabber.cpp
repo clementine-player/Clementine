@@ -18,6 +18,7 @@
 #include "consts.h"
 #include "wiimoteshortcutgrabber.h"
 #include "ui_wiimoteshortcutgrabber.h"
+#include "ui/iconloader.h"
 
 WiimoteShortcutGrabber::WiimoteShortcutGrabber(quint32 action, quint32 device,
                                                WiimoteSettingsPage* parent)
@@ -30,6 +31,8 @@ WiimoteShortcutGrabber::WiimoteShortcutGrabber(quint32 action, quint32 device,
       remember_wiimote_shifts_(0),
       remember_nunchuk_shifts_(0) {
   ui_->setupUi(this);
+
+  setWindowIcon(IconLoader::Load("wiimotedev", IconLoader::Base));
 
   if (QDBusConnection::systemBus().isConnected()) {
     wiimotedev_iface_.reset(new OrgWiimotedevDeviceEventsInterface(

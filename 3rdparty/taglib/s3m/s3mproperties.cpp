@@ -73,6 +73,16 @@ int S3M::Properties::length() const
   return 0;
 }
 
+int S3M::Properties::lengthInSeconds() const
+{
+  return 0;
+}
+
+int S3M::Properties::lengthInMilliseconds() const
+{
+  return 0;
+}
+
 int S3M::Properties::bitrate() const
 {
   return 0;

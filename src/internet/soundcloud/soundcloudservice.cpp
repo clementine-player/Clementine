@@ -94,7 +94,8 @@ SoundCloudService::SoundCloudService(Application* app, InternetModel* parent)
 SoundCloudService::~SoundCloudService() {}
 
 QStandardItem* SoundCloudService::CreateRootItem() {
-  root_ = new QStandardItem(QIcon(":providers/soundcloud.png"), kServiceName);
+  root_ = new QStandardItem(IconLoader::Load("soundcloud", 
+                            IconLoader::Provider), kServiceName);
   root_->setData(true, InternetModel::Role_CanLazyLoad);
   root_->setData(InternetModel::PlayBehaviour_DoubleClickAction,
                  InternetModel::Role_PlayBehaviour);
@@ -115,7 +116,8 @@ void SoundCloudService::LazyPopulate(QStandardItem* item) {
 void SoundCloudService::EnsureItemsCreated() {
   if (!search_) {
     search_ =
-        new QStandardItem(IconLoader::Load("edit-find"), tr("Search results"));
+        new QStandardItem(IconLoader::Load("edit-find", IconLoader::Base), 
+                          tr("Search results"));
     search_->setToolTip(
         tr("Start typing something on the search box above to "
            "fill this search results list"));
@@ -349,7 +351,7 @@ void SoundCloudService::EnsureMenuCreated() {
     context_menu_ = new QMenu;
     context_menu_->addActions(GetPlaylistActions());
     context_menu_->addSeparator();
-    context_menu_->addAction(IconLoader::Load("download"),
+    context_menu_->addAction(IconLoader::Load("download", IconLoader::Base),
                              tr("Open %1 in browser").arg("soundcloud.com"),
                              this, SLOT(Homepage()));
   }

@@ -26,6 +26,7 @@
 
 #include "internet/core/internetmodel.h"
 #include "internet/core/internetservice.h"
+#include "internet/subsonic/subsonicdynamicplaylist.h"
 
 class QNetworkAccessManager;
 class QNetworkReply;
@@ -86,6 +87,7 @@ class SubsonicService : public InternetService {
   typedef QMap<QString, QString> RequestOptions;
 
   bool IsConfigured() const;
+  bool IsAmpache() const;
 
   QStandardItem* CreateRootItem();
   void LazyPopulate(QStandardItem* item);
@@ -108,6 +110,8 @@ class SubsonicService : public InternetService {
   // Convenience function to reduce QNetworkRequest/QSslConfiguration
   // boilerplate.
   QNetworkReply* Send(const QUrl& url);
+
+  friend PlaylistItemList SubsonicDynamicPlaylist::GenerateMore(int);
 
   static const char* kServiceName;
   static const char* kSettingsGroup;
@@ -152,6 +156,7 @@ signals:
   LoginState login_state_;
   QString working_server_;  // The actual server, possibly post-redirect
   int redirect_count_;
+  bool is_ampache_;
 
  private slots:
   void UpdateTotalSongCount(int count);

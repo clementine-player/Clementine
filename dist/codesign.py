@@ -6,13 +6,15 @@ import re
 import subprocess
 import sys
 
-def SignPath(path, developer_id):
+def SignPath(path, developer_id, deep=True):
   args = [
     'codesign',
     '--preserve-metadata=identifier,entitlements,resource-rules,requirements',
     '-s', developer_id,
     '-fv', path
   ]
+  if deep:
+    args.append('--deep')
   subprocess.check_call(args)
 
 def main():
@@ -34,7 +36,13 @@ def main():
       elif re.match(r'(clementine-spotifyblob|clementine-tagreader|gst-plugin-scanner)', file):
         SignPath(os.path.join(root, file), developer_id)
 
-  SignPath(app_bundle, developer_id)
+  SignPath(app_bundle, developer_id, deep=False)
+
+  # Verify the signatures are valid.
+  subprocess.check_call([
+      'codesign', '--verify', '--verbose=4', app_bundle])
+  subprocess.check_call([
+      'spctl', '--assess', '--verbose=4', app_bundle])
 
 
 if __name__ == '__main__':

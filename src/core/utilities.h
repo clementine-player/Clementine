@@ -124,6 +124,7 @@ QString FiddleFileExtension(const QString& filename,
 
 enum ConfigPath {
   Path_Root,
+  Path_Icons,
   Path_AlbumCovers,
   Path_NetworkCache,
   Path_GstreamerRegistry,

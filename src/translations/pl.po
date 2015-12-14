@@ -19,7 +19,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2015-08-17 13:03+0000\n"
+"PO-Revision-Date: 2015-11-16 15:02+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Polish (http://www.transifex.com/davidsansome/clementine/language/pl/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -62,7 +62,7 @@ msgstr " ms"
 msgid " pt"
 msgstr " pkt"
 
-#: ../bin/src/ui_behavioursettingspage.h:374
+#: ../bin/src/ui_behavioursettingspage.h:359
 msgid " s"
 msgstr ""
 
@@ -85,12 +85,12 @@ msgstr "%1 (%2 utworów)"
 msgid "%1 albums"
 msgstr "%1 albumów"
 
-#: core/utilities.cpp:119
+#: core/utilities.cpp:120
 #, qt-format
 msgid "%1 days"
 msgstr "%1 dni"
 
-#: core/utilities.cpp:138
+#: core/utilities.cpp:139
 #, qt-format
 msgid "%1 days ago"
 msgstr "%1 dni temu"
@@ -178,11 +178,11 @@ msgctxt ""
 msgid "%n remaining"
 msgstr "pozostało %n"
 
-#: playlist/playlistheader.cpp:37
+#: playlist/playlistheader.cpp:45
 msgid "&Align text"
 msgstr "Wyrówn&anie tekstu"
 
-#: playlist/playlistheader.cpp:40
+#: playlist/playlistheader.cpp:48
 msgid "&Center"
 msgstr "Wyśrodkowanie"
 
@@ -198,18 +198,22 @@ msgstr "Dodatki"
 msgid "&Help"
 msgstr "Pomoc"
 
-#: playlist/playlistheader.cpp:73
+#: playlist/playlistheader.cpp:81
 #, qt-format
 msgid "&Hide %1"
 msgstr "Ukryj %1"
 
-#: playlist/playlistheader.cpp:32
+#: playlist/playlistheader.cpp:33
 msgid "&Hide..."
 msgstr "Ukryj..."
 
-#: playlist/playlistheader.cpp:39
+#: playlist/playlistheader.cpp:47
 msgid "&Left"
 msgstr "Do &lewej"
+
+#: playlist/playlistheader.cpp:36
+msgid "&Lock Rating"
+msgstr ""
 
 #: ../bin/src/ui_mainwindow.h:718
 msgid "&Music"
@@ -231,7 +235,7 @@ msgstr "&Zakończ"
 msgid "&Repeat mode"
 msgstr "Tryb powtarzania"
 
-#: playlist/playlistheader.cpp:41
+#: playlist/playlistheader.cpp:49
 msgid "&Right"
 msgstr "Do p&rawej"
 
@@ -239,7 +243,7 @@ msgstr "Do p&rawej"
 msgid "&Shuffle mode"
 msgstr "Tryb losowy"
 
-#: playlist/playlistheader.cpp:33
+#: playlist/playlistheader.cpp:34
 msgid "&Stretch columns to fit window"
 msgstr "&Rozciągaj kolumny, aby dopasować do okna"
 
@@ -251,7 +255,7 @@ msgstr "Narzędzia"
 msgid "(different across multiple songs)"
 msgstr "(w zależności od utworu)"
 
-#: internet/spotify/spotifyservice.cpp:465
+#: internet/spotify/spotifyservice.cpp:468
 msgid ", by "
 msgstr ""
 
@@ -271,7 +275,7 @@ msgstr "0:00:00"
 msgid "0px"
 msgstr "0px"
 
-#: core/utilities.cpp:119
+#: core/utilities.cpp:120
 msgid "1 day"
 msgstr "1 dzień"
 
@@ -414,7 +418,7 @@ msgid "About Qt..."
 msgstr "O Qt..."
 
 #: playlist/playlistsaveoptionsdialog.cpp:34
-#: ../bin/src/ui_behavioursettingspage.h:378
+#: ../bin/src/ui_behavioursettingspage.h:363
 msgid "Absolute"
 msgstr ""
 
@@ -438,15 +442,15 @@ msgctxt "Category label"
 msgid "Action"
 msgstr "Akcja"
 
-#: wiimotedev/wiimotesettingspage.cpp:96
+#: wiimotedev/wiimotesettingspage.cpp:97
 msgid "Active/deactive Wiiremote"
 msgstr "Aktywuj/deaktywuj Wiiremote'a"
 
-#: internet/soundcloud/soundcloudservice.cpp:125
+#: internet/soundcloud/soundcloudservice.cpp:127
 msgid "Activities stream"
 msgstr "Strumień aktywności"
 
-#: internet/podcasts/addpodcastdialog.cpp:62
+#: internet/podcasts/addpodcastdialog.cpp:63
 msgid "Add Podcast"
 msgstr "Dodaj podcast"
 
@@ -466,7 +470,7 @@ msgstr "Dodaj akcję"
 msgid "Add all tracks from a directory and all its subdirectories"
 msgstr "Dodaj wszystkie utwory z podanego katalogu i wszystkich jego sub-katalogów."
 
-#: internet/internetradio/savedradio.cpp:112
+#: internet/internetradio/savedradio.cpp:114
 msgid "Add another stream..."
 msgstr "Dodaj następny strumień..."
 
@@ -474,7 +478,7 @@ msgstr "Dodaj następny strumień..."
 msgid "Add directory..."
 msgstr "Dodaj katalog..."
 
-#: ui/mainwindow.cpp:1931
+#: ui/mainwindow.cpp:1914
 msgid "Add file"
 msgstr "Dodaj plik"
 
@@ -494,7 +498,7 @@ msgstr "Dodaj plik..."
 msgid "Add files to transcode"
 msgstr "Dodaj pliki to transkodowania"
 
-#: transcoder/transcodedialog.cpp:306 ui/mainwindow.cpp:1958
+#: transcoder/transcodedialog.cpp:306 ui/mainwindow.cpp:1941
 #: ripper/ripcddialog.cpp:185
 msgid "Add folder"
 msgstr "Dodaj katalog"
@@ -511,7 +515,7 @@ msgstr "Dodaj nowy katalog..."
 msgid "Add podcast"
 msgstr "Dodaj podcast"
 
-#: internet/podcasts/podcastservice.cpp:416 ../bin/src/ui_mainwindow.h:708
+#: internet/podcasts/podcastservice.cpp:418 ../bin/src/ui_mainwindow.h:708
 msgid "Add podcast..."
 msgstr "Dodaj podcast..."
 
@@ -579,7 +583,7 @@ msgstr "Dodaj licznik pominięć"
 msgid "Add song title tag"
 msgstr "Dodaj tag tytułu"
 
-#: internet/vk/vkservice.cpp:329
+#: internet/vk/vkservice.cpp:333
 msgid "Add song to cache"
 msgstr "Dodaj utwór do cache"
 
@@ -599,23 +603,23 @@ msgstr "Dodaj utwory do \"Mojej Muzyki\" przyciskiem \"Dodaj do Ulubionych\""
 msgid "Add stream..."
 msgstr "Dodaj strumień..."
 
-#: internet/vk/vkservice.cpp:321
+#: internet/vk/vkservice.cpp:325
 msgid "Add to My Music"
 msgstr "Dodaj do Mojej Muzyki"
 
-#: internet/spotify/spotifyservice.cpp:617
+#: internet/spotify/spotifyservice.cpp:621
 msgid "Add to Spotify playlists"
 msgstr "Dodaj do list odtwarzania Spotify"
 
-#: internet/spotify/spotifyservice.cpp:610
+#: internet/spotify/spotifyservice.cpp:613
 msgid "Add to Spotify starred"
 msgstr "Dodaj do śledzonych w Spotify"
 
-#: ui/mainwindow.cpp:1752
+#: ui/mainwindow.cpp:1735
 msgid "Add to another playlist"
 msgstr "Dodaj do innej listy odtwarzania"
 
-#: internet/vk/vkservice.cpp:307
+#: internet/vk/vkservice.cpp:309
 msgid "Add to bookmarks"
 msgstr "Dodaj do zakładek"
 
@@ -623,12 +627,12 @@ msgstr "Dodaj do zakładek"
 msgid "Add to playlist"
 msgstr "Dodaj do listy odtwarzania"
 
-#: ../bin/src/ui_behavioursettingspage.h:350
-#: ../bin/src/ui_behavioursettingspage.h:362
+#: ../bin/src/ui_behavioursettingspage.h:343
+#: ../bin/src/ui_behavioursettingspage.h:355
 msgid "Add to the queue"
 msgstr "Kolejkuj ścieżkę"
 
-#: internet/vk/vkservice.cpp:337
+#: internet/vk/vkservice.cpp:342
 msgid "Add user/group to bookmarks"
 msgstr "Dodaj użytkownika/grupę do zakładek"
 
@@ -696,11 +700,11 @@ msgstr "Wykonawca albumu"
 msgid "Album cover"
 msgstr "Okładka albumu"
 
-#: internet/jamendo/jamendoservice.cpp:427
+#: internet/jamendo/jamendoservice.cpp:429
 msgid "Album info on jamendo.com..."
 msgstr "Informacje o albumie na jamendo.com..."
 
-#: internet/vk/vkservice.cpp:836
+#: internet/vk/vkservice.cpp:846
 msgid "Albums"
 msgstr "Albumy"
 
@@ -766,17 +770,16 @@ msgstr "Pozwól na kodowanie mid/side"
 msgid "Alongside the originals"
 msgstr "Wraz z oryginałami"
 
-#: ../bin/src/ui_behavioursettingspage.h:323
+#: ../bin/src/ui_behavioursettingspage.h:316
 msgid "Always hide the main window"
 msgstr "Zawsze ukrywaj główne okno"
 
-#: ../bin/src/ui_behavioursettingspage.h:322
+#: ../bin/src/ui_behavioursettingspage.h:315
 msgid "Always show the main window"
 msgstr "Zawsze wyświetlaj główne okno"
 
-#: ../bin/src/ui_behavioursettingspage.h:336
-#: ../bin/src/ui_behavioursettingspage.h:356
-#: ../bin/src/ui_behavioursettingspage.h:370
+#: ../bin/src/ui_behavioursettingspage.h:329
+#: ../bin/src/ui_behavioursettingspage.h:349
 msgid "Always start playing"
 msgstr "Odtwarzaj automatycznie"
 
@@ -794,12 +797,12 @@ msgstr "Aby korzystać ze Spotify przy użyciu Clementine, wymagany jest dodatko
 msgid "An error occurred loading the iTunes database"
 msgstr "Wystąpił błąd podczas ładowania bazy danych iTunes"
 
-#: ui/edittagdialog.cpp:695
+#: ui/edittagdialog.cpp:698
 #, qt-format
 msgid "An error occurred writing metadata to '%1'"
 msgstr "Wystąpił błąd podczas zapisu metadanych do '%1'"
 
-#: internet/subsonic/subsonicsettingspage.cpp:123
+#: internet/subsonic/subsonicsettingspage.cpp:124
 msgid "An unspecified error occurred."
 msgstr "Wystąpił niespodziewany błąd"
 
@@ -821,13 +824,13 @@ msgstr "Wygląd"
 msgid "Append files/URLs to the playlist"
 msgstr "Dodaj pliki/adresy URL do listy odtwarzania"
 
-#: devices/deviceview.cpp:216 globalsearch/globalsearchview.cpp:453
-#: internet/core/internetservice.cpp:80 library/libraryview.cpp:391
+#: devices/deviceview.cpp:218 globalsearch/globalsearchview.cpp:453
+#: internet/core/internetservice.cpp:81 library/libraryview.cpp:372
 #: widgets/fileviewlist.cpp:31
 msgid "Append to current playlist"
 msgstr "Dołącz do aktualnej listy odtwarzania"
 
-#: ../bin/src/ui_behavioursettingspage.h:347
+#: ../bin/src/ui_behavioursettingspage.h:340
 msgid "Append to the playlist"
 msgstr "Dołącz do listy odtwarzania"
 
@@ -840,7 +843,7 @@ msgstr "Skompresuj, aby zapobiec przesterowaniu"
 msgid "Are you sure you want to delete the \"%1\" preset?"
 msgstr "Na pewno chcesz usunąć ustawienie \"%1\"?"
 
-#: ui/edittagdialog.cpp:801
+#: ui/edittagdialog.cpp:804
 msgid "Are you sure you want to reset this song's statistics?"
 msgstr "Na pewno wyzerować statystyki tego utworu?"
 
@@ -863,7 +866,7 @@ msgstr "Wykonawca"
 msgid "Artist info"
 msgstr "O artyście"
 
-#: songinfo/echonesttags.cpp:61
+#: songinfo/echonesttags.cpp:62
 msgid "Artist tags"
 msgstr "Tagi wykonawcy"
 
@@ -871,7 +874,7 @@ msgstr "Tagi wykonawcy"
 msgid "Artist's initial"
 msgstr "Inicjały wykonawcy"
 
-#: ../bin/src/ui_behavioursettingspage.h:380
+#: ../bin/src/ui_behavioursettingspage.h:365
 msgid "Ask when saving"
 msgstr "Zapytaj przy zapisywaniu"
 
@@ -885,8 +888,8 @@ msgstr "Format audio"
 msgid "Audio output"
 msgstr "Wyjście audio"
 
-#: internet/digitally/digitallyimportedsettingspage.cpp:83
-#: internet/magnatune/magnatunesettingspage.cpp:116
+#: internet/digitally/digitallyimportedsettingspage.cpp:84
+#: internet/magnatune/magnatunesettingspage.cpp:117
 #: internet/lastfm/lastfmservice.cpp:228
 #: internet/lastfm/lastfmsettingspage.cpp:84
 msgid "Authentication failed"
@@ -906,7 +909,7 @@ msgid "Auto"
 msgstr "Automatycznie"
 
 #: playlist/playlistsaveoptionsdialog.cpp:32
-#: ../bin/src/ui_behavioursettingspage.h:377
+#: ../bin/src/ui_behavioursettingspage.h:362
 msgid "Automatic"
 msgstr "Automatyczne"
 
@@ -930,7 +933,7 @@ msgstr "Średnia szybkość transmisji"
 msgid "Average image size"
 msgstr "Przeciętny rozmiar grafiki"
 
-#: internet/podcasts/addpodcastdialog.cpp:87
+#: internet/podcasts/addpodcastdialog.cpp:91
 msgid "BBC Podcasts"
 msgstr "Podcasty BBC"
 
@@ -979,7 +982,7 @@ msgstr "Prosty niebieski"
 msgid "Basic audio type"
 msgstr "Podstawowy typ audio"
 
-#: ../bin/src/ui_behavioursettingspage.h:311
+#: ../bin/src/ui_behavioursettingspage.h:304
 msgid "Behavior"
 msgstr "Tryb"
 
@@ -987,7 +990,7 @@ msgstr "Tryb"
 msgid "Best"
 msgstr "Najlepsza"
 
-#: songinfo/echonestbiographies.cpp:84
+#: songinfo/echonestbiographies.cpp:85
 #, qt-format
 msgid "Biography from %1"
 msgstr "Biografia z %1"
@@ -1048,7 +1051,7 @@ msgstr "Długość bufora"
 msgid "Buffering"
 msgstr "Buforowanie"
 
-#: internet/seafile/seafileservice.cpp:226
+#: internet/seafile/seafileservice.cpp:227
 msgid "Building Seafile index..."
 msgstr "Zbuduj indeks Seafile"
 
@@ -1085,11 +1088,11 @@ msgstr ""
 msgid "Cancel"
 msgstr "Anuluj"
 
-#: internet/podcasts/podcastservice.cpp:439
+#: internet/podcasts/podcastservice.cpp:441
 msgid "Cancel download"
 msgstr "Anuluj pobieranie"
 
-#: internet/vk/vkservice.cpp:635
+#: internet/vk/vkservice.cpp:642
 msgid ""
 "Captcha is needed.\n"
 "Try to login into Vk.com with your browser,to fix this problem."
@@ -1115,7 +1118,7 @@ msgstr "Zmień skrót..."
 msgid "Change shuffle mode"
 msgstr "Zmień tryb losowania utworów"
 
-#: ../bin/src/ui_behavioursettingspage.h:361
+#: ../bin/src/ui_behavioursettingspage.h:354
 msgid "Change the currently playing song"
 msgstr ""
 
@@ -1137,15 +1140,15 @@ msgstr "Zmiana trybu odtwarzania na tryb mono nastąpi dopiero od następnej odt
 msgid "Check for new episodes"
 msgstr "Sprawdzaj, czy są nowe audycje"
 
-#: internet/googledrive/googledriveservice.cpp:220
+#: internet/googledrive/googledriveservice.cpp:221
 msgid "Check for updates"
 msgstr "Sprawdź aktualizacje"
 
-#: ui/mainwindow.cpp:742
+#: ui/mainwindow.cpp:747
 msgid "Check for updates..."
 msgstr "Sprawdź aktualizacje..."
 
-#: internet/vk/vksettingspage.cpp:98
+#: internet/vk/vksettingspage.cpp:101
 msgid "Choose Vk.com cache directory"
 msgstr ""
 
@@ -1173,7 +1176,7 @@ msgstr "Wybierz z listy"
 msgid "Choose how the playlist is sorted and how many songs it will contain."
 msgstr "Wybierz w jaki sposób jest sortowana lista odtwarzania i ile ścieżek będzie zawierać"
 
-#: internet/podcasts/podcastsettingspage.cpp:140
+#: internet/podcasts/podcastsettingspage.cpp:143
 msgid "Choose podcast download directory"
 msgstr "Wybierz folder pobierania dla podcastów"
 
@@ -1277,7 +1280,7 @@ msgstr "Clementine nie znalazł wyników dla tego pliku"
 msgid "Clementine will find music in:"
 msgstr "Clementine wyszuka muzykę w następujących miejscach:"
 
-#: library/libraryview.cpp:372
+#: library/libraryview.cpp:353
 msgid "Click here to add some music"
 msgstr "Kliknij, aby dodać jakąś muzykę"
 
@@ -1361,7 +1364,7 @@ msgstr "Kompozytor"
 msgid "Configure %1..."
 msgstr "Konfiguruj %1..."
 
-#: internet/magnatune/magnatuneservice.cpp:290
+#: internet/magnatune/magnatuneservice.cpp:293
 msgid "Configure Magnatune..."
 msgstr "Konfiguracja Magnatune..."
 
@@ -1369,7 +1372,7 @@ msgstr "Konfiguracja Magnatune..."
 msgid "Configure Shortcuts"
 msgstr "Konfiguracja skrótów klawiszowych"
 
-#: internet/spotify/spotifyservice.cpp:911
+#: internet/spotify/spotifyservice.cpp:919
 msgid "Configure Spotify..."
 msgstr "Konfiguracja Spotify..."
 
@@ -1377,7 +1380,7 @@ msgstr "Konfiguracja Spotify..."
 msgid "Configure Subsonic..."
 msgstr "Skonfiguruj Subsonic..."
 
-#: internet/vk/vkservice.cpp:346
+#: internet/vk/vkservice.cpp:351
 msgid "Configure Vk.com..."
 msgstr "Konfiguruj Vk.com..."
 
@@ -1385,18 +1388,18 @@ msgstr "Konfiguruj Vk.com..."
 msgid "Configure global search..."
 msgstr "Skonfiguruj globalne wyszukiwanie..."
 
-#: ui/mainwindow.cpp:592
+#: ui/mainwindow.cpp:594
 msgid "Configure library..."
 msgstr "Konfiguruj bibliotekę..."
 
-#: internet/podcasts/addpodcastdialog.cpp:74
-#: internet/podcasts/podcastservice.cpp:453
+#: internet/podcasts/addpodcastdialog.cpp:77
+#: internet/podcasts/podcastservice.cpp:455
 msgid "Configure podcasts..."
 msgstr "Konfiguruj podcasty..."
 
-#: internet/core/cloudfileservice.cpp:105
-#: internet/digitally/digitallyimportedservicebase.cpp:182
-#: internet/googledrive/googledriveservice.cpp:228
+#: internet/core/cloudfileservice.cpp:107
+#: internet/digitally/digitallyimportedservicebase.cpp:184
+#: internet/googledrive/googledriveservice.cpp:231
 #: ../bin/src/ui_globalsearchsettingspage.h:149
 msgid "Configure..."
 msgstr "Konfiguruj..."
@@ -1409,22 +1412,22 @@ msgstr "Podłącz urządzenia Wii Remote używając akcji aktywuj/deaktywuj"
 msgid "Connect device"
 msgstr "Podłącz urządzenie"
 
-#: internet/spotify/spotifyservice.cpp:295
+#: internet/spotify/spotifyservice.cpp:296
 msgid "Connecting to Spotify"
 msgstr "Połącz z Spotify"
 
-#: internet/subsonic/subsonicsettingspage.cpp:128
+#: internet/subsonic/subsonicsettingspage.cpp:129
 msgid ""
 "Connection refused by server, check server URL. Example: "
 "http://localhost:4040/"
 msgstr "Serwer odmówił połączenia, sprawdź URL serwera. Przykład: http://localhost:4040/"
 
-#: internet/subsonic/subsonicsettingspage.cpp:140
+#: internet/subsonic/subsonicsettingspage.cpp:141
 msgid ""
 "Connection timed out, check server URL. Example: http://localhost:4040/"
 msgstr "Przekroczono limit czasu, sprawdź URL serwera. Przykład: http://localhost:4040/"
 
-#: internet/vk/vkservice.cpp:1113
+#: internet/vk/vkservice.cpp:1126
 msgid "Connection trouble or audio is disabled by owner"
 msgstr ""
 
@@ -1452,7 +1455,7 @@ msgstr ""
 msgid "Convert lossless files"
 msgstr "Konwertuj pliki bezstratne"
 
-#: internet/vk/vkservice.cpp:333
+#: internet/vk/vkservice.cpp:337
 msgid "Copy share url to clipboard"
 msgstr "Kopiuj współdzielony url do schowka"
 
@@ -1460,13 +1463,13 @@ msgstr "Kopiuj współdzielony url do schowka"
 msgid "Copy to clipboard"
 msgstr "Kopiuj do schowka"
 
-#: library/libraryview.cpp:421 internet/podcasts/podcastservice.cpp:437
-#: ui/mainwindow.cpp:641 widgets/fileviewlist.cpp:43
+#: library/libraryview.cpp:403 internet/podcasts/podcastservice.cpp:438
+#: ui/mainwindow.cpp:644 widgets/fileviewlist.cpp:44
 msgid "Copy to device..."
 msgstr "Skopiuj na urządzenie..."
 
-#: devices/deviceview.cpp:225 ui/mainwindow.cpp:631
-#: widgets/fileviewlist.cpp:38
+#: devices/deviceview.cpp:228 ui/mainwindow.cpp:634
+#: widgets/fileviewlist.cpp:40
 msgid "Copy to library..."
 msgstr "Skopiuj do biblioteki..."
 
@@ -1474,7 +1477,7 @@ msgstr "Skopiuj do biblioteki..."
 msgid "Copyright"
 msgstr "Prawa autorskie"
 
-#: internet/subsonic/subsonicsettingspage.cpp:96
+#: internet/subsonic/subsonicsettingspage.cpp:97
 msgid ""
 "Could not connect to Subsonic, check server URL. Example: "
 "http://localhost:4040/"
@@ -1510,31 +1513,31 @@ msgstr "Nie można odnaleźć enkodera dla %1. Sprawdź czy posiadasz zainstalow
 msgid "Couldn't open output file %1"
 msgstr "Nie można otworzyć pliku %1"
 
-#: internet/core/cloudfileservice.cpp:102
-#: internet/googledrive/googledriveservice.cpp:226
+#: internet/core/cloudfileservice.cpp:103
+#: internet/googledrive/googledriveservice.cpp:228
 #: ../bin/src/ui_albumcovermanager.h:214
 #: ../bin/src/ui_albumcoversearcher.h:104 ../bin/src/ui_mainwindow.h:676
 msgid "Cover Manager"
 msgstr "Menedżer okładek"
 
-#: ui/edittagdialog.cpp:476
+#: ui/edittagdialog.cpp:479
 msgid "Cover art from embedded image"
 msgstr "Okładka z osadzonego obrazu"
 
-#: ui/edittagdialog.cpp:479
+#: ui/edittagdialog.cpp:482
 #, qt-format
 msgid "Cover art loaded automatically from %1"
 msgstr "Okładka wczytana automatycznie z %1"
 
-#: ui/edittagdialog.cpp:471
+#: ui/edittagdialog.cpp:474
 msgid "Cover art manually unset"
 msgstr "Okładka ręcznie wyłączona"
 
-#: ui/edittagdialog.cpp:481
+#: ui/edittagdialog.cpp:484
 msgid "Cover art not set"
 msgstr "Brak okładki"
 
-#: ui/edittagdialog.cpp:474
+#: ui/edittagdialog.cpp:477
 #, qt-format
 msgid "Cover art set from %1"
 msgstr "Źródło okładki: %1"
@@ -1679,7 +1682,7 @@ msgstr "Zmniejsz głośność o 4%"
 msgid "Decrease the volume by <value> percent"
 msgstr "Zmniejsz głośność o <value> procentów"
 
-#: core/globalshortcuts.cpp:62 wiimotedev/wiimotesettingspage.cpp:105
+#: core/globalshortcuts.cpp:62 wiimotedev/wiimotesettingspage.cpp:106
 msgid "Decrease volume"
 msgstr "Zmniejsz głośność"
 
@@ -1705,21 +1708,21 @@ msgstr "Opóźnienie pomiędzy wizualizacjami"
 msgid "Delete"
 msgstr "Usuń"
 
-#: internet/podcasts/podcastservice.cpp:433
+#: internet/podcasts/podcastservice.cpp:435
 msgid "Delete downloaded data"
 msgstr "Usuń pobrane dane"
 
-#: devices/deviceview.cpp:404 library/libraryview.cpp:657
-#: ui/mainwindow.cpp:2294 widgets/fileview.cpp:186
+#: devices/deviceview.cpp:408 library/libraryview.cpp:639
+#: ui/mainwindow.cpp:2277 widgets/fileview.cpp:186
 msgid "Delete files"
 msgstr "Usuń pliki"
 
-#: devices/deviceview.cpp:228
+#: devices/deviceview.cpp:232
 msgid "Delete from device..."
 msgstr "Usuń z urządzenia..."
 
-#: library/libraryview.cpp:423 ui/mainwindow.cpp:643
-#: widgets/fileviewlist.cpp:44
+#: library/libraryview.cpp:405 ui/mainwindow.cpp:647
+#: widgets/fileviewlist.cpp:47
 msgid "Delete from disk..."
 msgstr "Usuń z dysku..."
 
@@ -1731,7 +1734,7 @@ msgstr "Usuń odtworzone odcinki"
 msgid "Delete preset"
 msgstr "Usuń ustawienie korektora"
 
-#: library/libraryview.cpp:412
+#: library/libraryview.cpp:395
 msgid "Delete smart playlist"
 msgstr "Usuń inteligentną listę odtwarzania"
 
@@ -1743,11 +1746,11 @@ msgstr "Usuń oryginalne pliki"
 msgid "Deleting files"
 msgstr "Usuwanie plików"
 
-#: ui/mainwindow.cpp:1673
+#: ui/mainwindow.cpp:1656
 msgid "Dequeue selected tracks"
 msgstr "Usuń ścieżki z kolejki odtwarzania"
 
-#: ui/mainwindow.cpp:1671
+#: ui/mainwindow.cpp:1654
 msgid "Dequeue track"
 msgstr "Usuń ścieżkę z kolejki odtwarzania"
 
@@ -1772,7 +1775,7 @@ msgstr "Ustawienia urządzenia"
 msgid "Device name"
 msgstr "Nazwa urządzenia"
 
-#: devices/deviceview.cpp:210
+#: devices/deviceview.cpp:212
 msgid "Device properties..."
 msgstr "Ustawienia urządzenia..."
 
@@ -1852,12 +1855,12 @@ msgstr "Pokaż menu ekranowe"
 msgid "Do a full library rescan"
 msgstr "Przeskanuj całą bibliotekę od nowa"
 
-#: internet/googledrive/googledriveservice.cpp:267
-#: internet/googledrive/googledriveservice.cpp:273
+#: internet/googledrive/googledriveservice.cpp:270
+#: internet/googledrive/googledriveservice.cpp:276
 msgid "Do a full rescan"
 msgstr "Dokonaj pełnego przeskanowania"
 
-#: internet/googledrive/googledriveservice.cpp:223
+#: internet/googledrive/googledriveservice.cpp:225
 msgid "Do a full rescan..."
 msgstr "Dokonaj pełnego przeskanowania..."
 
@@ -1869,11 +1872,7 @@ msgstr "Nie konwertuj"
 msgid "Do not overwrite"
 msgstr "Nie nadpisuj"
 
-#: ../bin/src/ui_behavioursettingspage.h:364
-msgid "Do nothing"
-msgstr ""
-
-#: internet/googledrive/googledriveservice.cpp:268
+#: internet/googledrive/googledriveservice.cpp:271
 msgid ""
 "Doing a full rescan will lose any metadata you've saved in Clementine such "
 "as cover art, play counts and ratings.  Clementine will rescan all your "
@@ -1884,7 +1883,7 @@ msgstr "Wykonanie pełnego przeskanowania spowoduje utratę wszelkich zapisanych
 msgid "Don't repeat"
 msgstr "Nie powtarzaj"
 
-#: library/libraryview.cpp:441
+#: library/libraryview.cpp:423
 msgid "Don't show in various artists"
 msgstr "Nie pokazuj w różni wykonawcy"
 
@@ -1901,7 +1900,7 @@ msgstr "Nie losuj"
 msgid "Don't stop!"
 msgstr "Nie zatrzymuj!"
 
-#: internet/somafm/somafmservice.cpp:106
+#: internet/somafm/somafmservice.cpp:107
 msgid "Donate"
 msgstr "Wpłać darowiznę"
 
@@ -1909,15 +1908,15 @@ msgstr "Wpłać darowiznę"
 msgid "Double click to open"
 msgstr "Kliknij podwójnie, by otworzyć"
 
-#: ../bin/src/ui_behavioursettingspage.h:358
+#: ../bin/src/ui_behavioursettingspage.h:351
 msgid "Double clicking a song in the playlist will..."
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:344
+#: ../bin/src/ui_behavioursettingspage.h:337
 msgid "Double clicking a song will..."
 msgstr "Podwójne kliknięcie utworu spowoduje..."
 
-#: internet/podcasts/podcastservice.cpp:529
+#: internet/podcasts/podcastservice.cpp:531
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "Download %n episodes"
@@ -1939,8 +1938,8 @@ msgstr "Pobierz członkostwo"
 msgid "Download new episodes automatically"
 msgstr "Pobierz nowe odcinki automatycznie"
 
-#: internet/podcasts/podcastservice.cpp:292
-#: internet/podcasts/podcastservice.cpp:331
+#: internet/podcasts/podcastservice.cpp:293
+#: internet/podcasts/podcastservice.cpp:332
 msgid "Download queued"
 msgstr "Pobieranie w kolejce"
 
@@ -1952,15 +1951,15 @@ msgstr "Pobierz ustawienia"
 msgid "Download the Android app"
 msgstr "Pobierz aplikację na Androida"
 
-#: internet/magnatune/magnatuneservice.cpp:280
+#: internet/magnatune/magnatuneservice.cpp:283
 msgid "Download this album"
 msgstr "Pobierz ten album"
 
-#: internet/jamendo/jamendoservice.cpp:430
+#: internet/jamendo/jamendoservice.cpp:433
 msgid "Download this album..."
 msgstr "Pobierz ten album..."
 
-#: internet/podcasts/podcastservice.cpp:531
+#: internet/podcasts/podcastservice.cpp:533
 msgid "Download this episode"
 msgstr "Pobierz ten odcinek"
 
@@ -1968,21 +1967,21 @@ msgstr "Pobierz ten odcinek"
 msgid "Download..."
 msgstr "Pobierz..."
 
-#: internet/podcasts/podcastservice.cpp:300
-#: internet/podcasts/podcastservice.cpp:340
+#: internet/podcasts/podcastservice.cpp:301
+#: internet/podcasts/podcastservice.cpp:341
 #, qt-format
 msgid "Downloading (%1%)..."
 msgstr "Pobieranie (%1%)..."
 
-#: internet/icecast/icecastservice.cpp:106
+#: internet/icecast/icecastservice.cpp:103
 msgid "Downloading Icecast directory"
 msgstr "Pobieranie katalogu Icecast"
 
-#: internet/jamendo/jamendoservice.cpp:200
+#: internet/jamendo/jamendoservice.cpp:201
 msgid "Downloading Jamendo catalogue"
 msgstr "Pobieranie katalogu Jamendo"
 
-#: internet/magnatune/magnatuneservice.cpp:160
+#: internet/magnatune/magnatuneservice.cpp:162
 msgid "Downloading Magnatune catalogue"
 msgstr "Pobieranie katalogu Magnatune"
 
@@ -2018,11 +2017,11 @@ msgstr "Tryb dynamiczny włączony"
 msgid "Dynamic random mix"
 msgstr "Dynamiczny, losowy miks"
 
-#: library/libraryview.cpp:409
+#: library/libraryview.cpp:392
 msgid "Edit smart playlist..."
 msgstr "Edytuj inteligentną listę odtwarzania..."
 
-#: ui/mainwindow.cpp:1715
+#: ui/mainwindow.cpp:1698
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr "Edytuj tag \"%1\"..."
@@ -2039,16 +2038,16 @@ msgstr "Edytuj znaczniki"
 msgid "Edit track information"
 msgstr "Edytuj informacje o utworze"
 
-#: library/libraryview.cpp:428 widgets/fileviewlist.cpp:49
+#: library/libraryview.cpp:410 widgets/fileviewlist.cpp:51
 #: ../bin/src/ui_mainwindow.h:658
 msgid "Edit track information..."
 msgstr "Edytuj informacje o utworze..."
 
-#: library/libraryview.cpp:431
+#: library/libraryview.cpp:413
 msgid "Edit tracks information..."
 msgstr "Edytuj informacje o utworach..."
 
-#: internet/internetradio/savedradio.cpp:109
+#: internet/internetradio/savedradio.cpp:110
 msgid "Edit..."
 msgstr "Edytuj..."
 
@@ -2072,7 +2071,7 @@ msgstr "Włącz korektor dźwięku"
 msgid "Enable shortcuts only when Clementine is focused"
 msgstr "Włącz skróty tylko, gdy Clementine jest aktywny"
 
-#: ../bin/src/ui_behavioursettingspage.h:330
+#: ../bin/src/ui_behavioursettingspage.h:323
 msgid "Enable song metadata inline edition with click"
 msgstr ""
 
@@ -2161,8 +2160,8 @@ msgid "Equivalent to --log-levels *:3"
 msgstr "Rownoważny --log-levels *:3"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:242
-#: library/libraryview.cpp:651 ui/mainwindow.cpp:1997 ui/mainwindow.cpp:2244
-#: ui/mainwindow.cpp:2392 internet/vk/vkservice.cpp:634
+#: library/libraryview.cpp:633 ui/mainwindow.cpp:1980 ui/mainwindow.cpp:2227
+#: ui/mainwindow.cpp:2375 internet/vk/vkservice.cpp:641
 msgid "Error"
 msgstr "Błąd"
 
@@ -2191,8 +2190,8 @@ msgstr "Plugin Spotify - nieudane pobieranie"
 msgid "Error loading %1"
 msgstr "Błąd wczytywania %1"
 
-#: internet/digitally/digitallyimportedservicebase.cpp:200
-#: internet/digitally/digitallyimportedurlhandler.cpp:89
+#: internet/digitally/digitallyimportedservicebase.cpp:202
+#: internet/digitally/digitallyimportedurlhandler.cpp:90
 msgid "Error loading di.fm playlist"
 msgstr "Problem podczas ładowania listy odtwarzania di.fm"
 
@@ -2326,23 +2325,23 @@ msgstr "Przejście"
 msgid "Fading duration"
 msgstr "Czas przejścia"
 
-#: ui/mainwindow.cpp:1998
+#: ui/mainwindow.cpp:1981
 msgid "Failed reading CD drive"
 msgstr "Błąd odczytywania napędu CD"
 
-#: internet/podcasts/gpoddertoptagspage.cpp:72
+#: internet/podcasts/gpoddertoptagspage.cpp:73
 msgid "Failed to fetch directory"
 msgstr "Nie udało się pobrać katalogu"
 
-#: internet/podcasts/gpoddersearchpage.cpp:75
+#: internet/podcasts/gpoddersearchpage.cpp:77
 #: internet/podcasts/gpoddertoptagsmodel.cpp:103
-#: internet/podcasts/itunessearchpage.cpp:65
-#: internet/podcasts/itunessearchpage.cpp:76
-#: internet/podcasts/itunessearchpage.cpp:83
+#: internet/podcasts/itunessearchpage.cpp:67
+#: internet/podcasts/itunessearchpage.cpp:78
+#: internet/podcasts/itunessearchpage.cpp:85
 msgid "Failed to fetch podcasts"
 msgstr "Nie udało się pobrać podcastów"
 
-#: internet/podcasts/addpodcastbyurl.cpp:69
+#: internet/podcasts/addpodcastbyurl.cpp:71
 #: internet/podcasts/fixedopmlpage.cpp:55
 msgid "Failed to load podcast"
 msgstr "Nie udało się załadować podcastów"
@@ -2372,7 +2371,7 @@ msgstr "Pobierz automatycznie"
 msgid "Fetch completed"
 msgstr "Pobieranie ukończone"
 
-#: internet/subsonic/subsonicservice.cpp:250
+#: internet/subsonic/subsonicservice.cpp:251
 msgid "Fetching Subsonic library"
 msgstr "Pobieranie bibliotek Subsonic"
 
@@ -2434,7 +2433,7 @@ msgstr "Pliki do transkodowania"
 msgid "Find songs in your library that match the criteria you specify."
 msgstr "Znajdź ścieżki w swojej bibliotece, które odpowiadają podanym kryteriom."
 
-#: internet/vk/vkservice.cpp:317
+#: internet/vk/vkservice.cpp:320
 msgid "Find this artist"
 msgstr "Znajdź tego artystę"
 
@@ -2470,12 +2469,12 @@ msgstr "Ze względów licencyjnych Spotify obsługiwany jest przez oddzielny plu
 msgid "Force mono encoding"
 msgstr "Wymuś kodowanie mono"
 
-#: devices/deviceview.cpp:207 devices/deviceview.cpp:330
-#: devices/deviceview.cpp:335
+#: devices/deviceview.cpp:208 devices/deviceview.cpp:334
+#: devices/deviceview.cpp:339
 msgid "Forget device"
 msgstr "Zapomnij o urządzeniu"
 
-#: devices/deviceview.cpp:331
+#: devices/deviceview.cpp:335
 msgid ""
 "Forgetting a device will remove it from this list and Clementine will have "
 "to rescan all the songs again next time you connect it."
@@ -2549,12 +2548,12 @@ msgstr "Podstawowe ustawienia"
 msgid "Genre"
 msgstr "Gatunek"
 
-#: internet/spotify/spotifyservice.cpp:633
-#: internet/spotify/spotifyservice.cpp:674
+#: internet/spotify/spotifyservice.cpp:637
+#: internet/spotify/spotifyservice.cpp:681
 msgid "Get a URL to share this Spotify song"
 msgstr ""
 
-#: internet/spotify/spotifyservice.cpp:665
+#: internet/spotify/spotifyservice.cpp:669
 msgid "Get a URL to share this playlist"
 msgstr ""
 
@@ -2592,7 +2591,7 @@ msgstr "Dysk Google"
 msgid "Got %1 covers out of %2 (%3 failed)"
 msgstr "Uzyskano %1 okładek z %2 (%3 nieudane)"
 
-#: ../bin/src/ui_behavioursettingspage.h:326
+#: ../bin/src/ui_behavioursettingspage.h:319
 msgid "Grey out non existent songs in my playlists"
 msgstr "Usunięte utwory zostaną wyszarzone w listach odtwarzania"
 
@@ -2638,7 +2637,7 @@ msgstr "Grupowanie"
 msgid "HTML page did not contain any RSS feeds"
 msgstr "Strona HTML nie zawiera żadnego kanału RSS"
 
-#: internet/subsonic/subsonicsettingspage.cpp:162
+#: internet/subsonic/subsonicsettingspage.cpp:163
 msgid ""
 "HTTP 3xx status code received without URL, verify server configuration."
 msgstr "Otrzymano kod statusu HTTP 3xx bez adresu URL, sprawdź konfigurację serwera"
@@ -2677,7 +2676,7 @@ msgstr "Wysoka (1024x1024)"
 msgid "HipHop"
 msgstr ""
 
-#: internet/subsonic/subsonicsettingspage.cpp:134
+#: internet/subsonic/subsonicsettingspage.cpp:135
 msgid "Host not found, check server URL. Example: http://localhost:4040/"
 msgstr "Host nie został znaleziony, sprawdź URL serwera. Przykład: http://localhost:4040/"
 
@@ -2705,7 +2704,7 @@ msgstr "Ikony na górze"
 msgid "Identifying song"
 msgstr "Identyfikowanie utworu"
 
-#: ../bin/src/ui_behavioursettingspage.h:328
+#: ../bin/src/ui_behavioursettingspage.h:321
 msgid ""
 "If activated, clicking a selected song in the playlist view will let you "
 "edit the tag value directly"
@@ -2737,12 +2736,12 @@ msgstr "Obrazy (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 msgid "Import..."
 msgstr ""
 
-#: core/utilities.cpp:150
+#: core/utilities.cpp:151
 #, qt-format
 msgid "In %1 days"
 msgstr "W ciągu następnych %1 dni"
 
-#: core/utilities.cpp:153
+#: core/utilities.cpp:154
 #, qt-format
 msgid "In %1 weeks"
 msgstr "W ciągu następnych %1 tygodni"
@@ -2753,7 +2752,7 @@ msgid ""
 "time a song finishes."
 msgstr "W trybie dynamicznym nowe utwory będą wybierane i dodawane do playlisty za każdym razem gdy skończy się odtwarzanie bieżącego utworu."
 
-#: internet/spotify/spotifyservice.cpp:421
+#: internet/spotify/spotifyservice.cpp:424
 msgid "Inbox"
 msgstr "Skrzynka odbiorcza"
 
@@ -2765,15 +2764,15 @@ msgstr "Dołącz okładkę albumu"
 msgid "Include all songs"
 msgstr "Dołączaj wszystkie utwory"
 
-#: internet/subsonic/subsonicsettingspage.cpp:106
+#: internet/subsonic/subsonicsettingspage.cpp:107
 msgid "Incompatible Subsonic REST protocol version. Client must upgrade."
 msgstr "Niekompatybilna wersja protokołu Subsonic REST. Klient musi zostać zaktualizowany."
 
-#: internet/subsonic/subsonicsettingspage.cpp:111
+#: internet/subsonic/subsonicsettingspage.cpp:112
 msgid "Incompatible Subsonic REST protocol version. Server must upgrade."
 msgstr "Niekompatybilna wersja protokołu Subsonic REST. Serwer musi zostać zaktualizowany."
 
-#: internet/subsonic/subsonicsettingspage.cpp:152
+#: internet/subsonic/subsonicsettingspage.cpp:153
 msgid "Incomplete configuration, please ensure all fields are populated."
 msgstr "Niekompletna konfiguracja, upewnij się, że wszystkie pola zostały wypełnione."
 
@@ -2785,16 +2784,16 @@ msgstr "Zwiększ głośność o 4%"
 msgid "Increase the volume by <value> percent"
 msgstr "Zwiększ głośność o <value> procentów"
 
-#: core/globalshortcuts.cpp:61 wiimotedev/wiimotesettingspage.cpp:103
+#: core/globalshortcuts.cpp:61 wiimotedev/wiimotesettingspage.cpp:104
 msgid "Increase volume"
 msgstr "Zwiększ głośność"
 
-#: internet/core/cloudfileservice.cpp:152
+#: internet/core/cloudfileservice.cpp:154
 #, qt-format
 msgid "Indexing %1"
 msgstr "Indeksowanie %1"
 
-#: wiimotedev/wiimotesettingspage.cpp:132 ../bin/src/ui_deviceproperties.h:372
+#: wiimotedev/wiimotesettingspage.cpp:133 ../bin/src/ui_deviceproperties.h:372
 msgid "Information"
 msgstr "Informacja"
 
@@ -2883,11 +2882,11 @@ msgstr "Najlepsze ścieżki tego miesiąca na Jamendo"
 msgid "Jamendo Top Tracks of the Week"
 msgstr "Najlepsze ścieżki tego tygodnia na Jamendo"
 
-#: internet/jamendo/jamendoservice.cpp:180
+#: internet/jamendo/jamendoservice.cpp:181
 msgid "Jamendo database"
 msgstr "Baza danych Jamendo"
 
-#: ../bin/src/ui_behavioursettingspage.h:341
+#: ../bin/src/ui_behavioursettingspage.h:334
 msgid "Jump to previous song right away"
 msgstr ""
 
@@ -2907,7 +2906,7 @@ msgstr "Przytrzymaj klawisze przez %1 sekundę..."
 msgid "Keep buttons for %1 seconds..."
 msgstr "Przytrzymaj klawisze przez %1 sekundy..."
 
-#: ../bin/src/ui_behavioursettingspage.h:313
+#: ../bin/src/ui_behavioursettingspage.h:306
 msgid "Keep running in the background when the window is closed"
 msgstr "Pozostań w tle po zamknięciu okna"
 
@@ -2924,7 +2923,7 @@ msgstr "Kotki"
 msgid "Kuduro"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:315
+#: ../bin/src/ui_behavioursettingspage.h:308
 msgid "Language"
 msgstr "Język"
 
@@ -3002,7 +3001,7 @@ msgstr "Lewy"
 msgid "Length"
 msgstr "Długość"
 
-#: ui/mainwindow.cpp:225 ui/mainwindow.cpp:238
+#: ui/mainwindow.cpp:224 ui/mainwindow.cpp:237
 #: ../bin/src/ui_seafilesettingspage.h:177
 msgid "Library"
 msgstr "Biblioteka"
@@ -3011,7 +3010,7 @@ msgstr "Biblioteka"
 msgid "Library advanced grouping"
 msgstr "Zaawansowanie grupowanie biblioteki"
 
-#: ui/mainwindow.cpp:2516
+#: ui/mainwindow.cpp:2499
 msgid "Library rescan notice"
 msgstr "Konieczność odświeżenia biblioteki"
 
@@ -3039,7 +3038,7 @@ msgstr "Wczytaj okładkę z adresu URL"
 msgid "Load cover from URL..."
 msgstr "Wczytaj okładkę z adresu URL..."
 
-#: ui/albumcoverchoicecontroller.cpp:104
+#: ui/albumcoverchoicecontroller.cpp:106
 msgid "Load cover from disk"
 msgstr "Wczytaj okładkę z dysku"
 
@@ -3071,12 +3070,12 @@ msgstr "Wczytywanie inteligentnej listy odtwarzania"
 msgid "Loading songs"
 msgstr "Wczytywanie utworów"
 
-#: internet/digitally/digitallyimportedurlhandler.cpp:67
+#: internet/digitally/digitallyimportedurlhandler.cpp:68
 #: internet/somafm/somafmurlhandler.cpp:53
 msgid "Loading stream"
 msgstr "Wczytywanie strumienia"
 
-#: playlist/songloaderinserter.cpp:129 ui/edittagdialog.cpp:242
+#: playlist/songloaderinserter.cpp:129 ui/edittagdialog.cpp:245
 msgid "Loading tracks"
 msgstr "Wczytywanie ścieżek"
 
@@ -3086,8 +3085,8 @@ msgstr "Wczytywanie informacji o utworze"
 
 #: library/librarymodel.cpp:152
 #: internet/podcasts/podcastdiscoverymodel.cpp:105 widgets/prettyimage.cpp:168
-#: widgets/widgetfadehelper.cpp:96 internet/vk/vkservice.cpp:508
-#: internet/vk/vksettingspage.cpp:122 ../bin/src/ui_addpodcastdialog.h:179
+#: widgets/widgetfadehelper.cpp:96 internet/vk/vkservice.cpp:513
+#: internet/vk/vksettingspage.cpp:125 ../bin/src/ui_addpodcastdialog.h:179
 #: ../bin/src/ui_searchpreview.h:105 ../bin/src/ui_organisedialog.h:261
 msgid "Loading..."
 msgstr "Wczytywanie..."
@@ -3096,7 +3095,7 @@ msgstr "Wczytywanie..."
 msgid "Loads files/URLs, replacing current playlist"
 msgstr "Wczytuje pliki/adresy URL, zastępując obecną listę odtwarzania"
 
-#: internet/vk/vksettingspage.cpp:111
+#: internet/vk/vksettingspage.cpp:114
 #: ../bin/src/ui_digitallyimportedsettingspage.h:162
 #: ../bin/src/ui_magnatunesettingspage.h:163
 #: ../bin/src/ui_soundcloudsettingspage.h:105
@@ -3112,11 +3111,11 @@ msgstr "Wczytuje pliki/adresy URL, zastępując obecną listę odtwarzania"
 msgid "Login"
 msgstr "Zaloguj się"
 
-#: internet/podcasts/podcastsettingspage.cpp:127
+#: internet/podcasts/podcastsettingspage.cpp:130
 msgid "Login failed"
 msgstr "Logowanie nieudane"
 
-#: internet/vk/vksettingspage.cpp:121
+#: internet/vk/vksettingspage.cpp:124
 msgid "Logout"
 msgstr "Wyloguj"
 
@@ -3211,7 +3210,7 @@ msgctxt "Label for button to enable/disable Enterprise background sound."
 msgid "Make it so!"
 msgstr "Zrób tak!"
 
-#: internet/spotify/spotifyservice.cpp:662
+#: internet/spotify/spotifyservice.cpp:667
 msgid "Make playlist available offline"
 msgstr "Uczyń playlistę dostępną offline"
 
@@ -3228,15 +3227,15 @@ msgstr "Ręczna konfiguracja pośrednika (proxy)"
 msgid "Manually"
 msgstr "Ręcznie"
 
-#: devices/deviceproperties.cpp:156
+#: devices/deviceproperties.cpp:157
 msgid "Manufacturer"
 msgstr "Wytwórca"
 
-#: internet/podcasts/podcastservice.cpp:448 ../bin/src/ui_organisedialog.h:259
+#: internet/podcasts/podcastservice.cpp:450 ../bin/src/ui_organisedialog.h:259
 msgid "Mark as listened"
 msgstr "Oznacz jako przesłuchany"
 
-#: internet/podcasts/podcastservice.cpp:447
+#: internet/podcasts/podcastservice.cpp:449
 msgid "Mark as new"
 msgstr "Oznacz jako nowy"
 
@@ -3286,7 +3285,7 @@ msgstr ""
 msgid "Missing projectM presets"
 msgstr "Brak ustawień projectM"
 
-#: devices/deviceproperties.cpp:155
+#: devices/deviceproperties.cpp:156
 msgid "Model"
 msgstr "Model"
 
@@ -3315,7 +3314,7 @@ msgstr "Styl paska humoru"
 msgid "Moodbars"
 msgstr "Paski humoru"
 
-#: internet/vk/vkservice.cpp:512
+#: internet/vk/vkservice.cpp:517
 msgid "More"
 msgstr "Więcej"
 
@@ -3336,7 +3335,7 @@ msgstr "Punkty montowania"
 msgid "Move down"
 msgstr "Przesuń w dół"
 
-#: ui/mainwindow.cpp:634 widgets/fileviewlist.cpp:40
+#: ui/mainwindow.cpp:637 widgets/fileviewlist.cpp:42
 msgid "Move to library..."
 msgstr "Przenieś do biblioteki..."
 
@@ -3345,8 +3344,8 @@ msgstr "Przenieś do biblioteki..."
 msgid "Move up"
 msgstr "Przesuń w górę"
 
-#: transcoder/transcodedialog.cpp:225 ui/mainwindow.cpp:1932
-#: internet/vk/vkservice.cpp:893
+#: transcoder/transcodedialog.cpp:225 ui/mainwindow.cpp:1915
+#: internet/vk/vkservice.cpp:906
 msgid "Music"
 msgstr "Muzyka"
 
@@ -3354,20 +3353,20 @@ msgstr "Muzyka"
 msgid "Music Library"
 msgstr "Biblioteka muzyki"
 
-#: core/globalshortcuts.cpp:63 wiimotedev/wiimotesettingspage.cpp:106
+#: core/globalshortcuts.cpp:63 wiimotedev/wiimotesettingspage.cpp:107
 #: ../bin/src/ui_mainwindow.h:702
 msgid "Mute"
 msgstr "Wycisz"
 
-#: internet/vk/vkservice.cpp:829
+#: internet/vk/vkservice.cpp:838
 msgid "My Albums"
 msgstr ""
 
-#: internet/vk/vkservice.cpp:887
+#: internet/vk/vkservice.cpp:899
 msgid "My Music"
 msgstr "Moja Muzyka"
 
-#: internet/vk/vkservice.cpp:519
+#: internet/vk/vkservice.cpp:525
 msgid "My Recommendations"
 msgstr "Moje rekomendacje"
 
@@ -3397,7 +3396,7 @@ msgstr "Pośrednik sieciowy (proxy)"
 msgid "Network Remote"
 msgstr "Zdalne sterowanie przez sieć"
 
-#: playlist/playlistdelegates.cpp:296 ui/edittagdialog.cpp:523
+#: playlist/playlistdelegates.cpp:296 ui/edittagdialog.cpp:526
 msgid "Never"
 msgstr "Nigdy"
 
@@ -3405,9 +3404,8 @@ msgstr "Nigdy"
 msgid "Never played"
 msgstr "Jeszcze nie odtwarzane"
 
-#: ../bin/src/ui_behavioursettingspage.h:334
-#: ../bin/src/ui_behavioursettingspage.h:354
-#: ../bin/src/ui_behavioursettingspage.h:368
+#: ../bin/src/ui_behavioursettingspage.h:327
+#: ../bin/src/ui_behavioursettingspage.h:347
 msgid "Never start playing"
 msgstr "Nie odtwarzaj automatycznie"
 
@@ -3417,11 +3415,11 @@ msgstr "Nie odtwarzaj automatycznie"
 msgid "New folder"
 msgstr "Nowy folder"
 
-#: ui/mainwindow.cpp:1769 ../bin/src/ui_mainwindow.h:690
+#: ui/mainwindow.cpp:1752 ../bin/src/ui_mainwindow.h:690
 msgid "New playlist"
 msgstr "Nowa lista odtwarzania"
 
-#: library/libraryview.cpp:406
+#: library/libraryview.cpp:389
 msgid "New smart playlist..."
 msgstr "Nowa inteligentna lista odtwarzania..."
 
@@ -3437,16 +3435,16 @@ msgstr "Nowe ścieżki będą automatycznie dodane."
 msgid "Newest tracks"
 msgstr "Najnowsze ścieżki"
 
-#: ui/edittagdialog.cpp:163 ui/trackselectiondialog.cpp:48
+#: ui/edittagdialog.cpp:166 ui/trackselectiondialog.cpp:50
 msgid "Next"
 msgstr "Dalej"
 
-#: core/globalshortcuts.cpp:57 wiimotedev/wiimotesettingspage.cpp:97
+#: core/globalshortcuts.cpp:57 wiimotedev/wiimotesettingspage.cpp:98
 #: ../bin/src/ui_mainwindow.h:645
 msgid "Next track"
 msgstr "Następny utwór"
 
-#: core/utilities.cpp:151
+#: core/utilities.cpp:152
 msgid "Next week"
 msgstr "W następnym tygodniu"
 
@@ -3480,7 +3478,7 @@ msgstr "Bez krótkich bloków"
 msgid "None"
 msgstr "Brak"
 
-#: library/libraryview.cpp:652 ui/mainwindow.cpp:2245 ui/mainwindow.cpp:2393
+#: library/libraryview.cpp:634 ui/mainwindow.cpp:2228 ui/mainwindow.cpp:2376
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Żaden z zaznaczonych utworów nie był odpowiedni do skopiowania na urządzenie"
 
@@ -3492,7 +3490,7 @@ msgstr "Neutralny"
 msgid "Normal block type"
 msgstr "Zwykły typ bloku"
 
-#: playlist/playlistsequence.cpp:199
+#: playlist/playlistsequence.cpp:203
 msgid "Not available while using a dynamic playlist"
 msgstr "Niedostępne podczas używania inteligentnej listy odtwarzania"
 
@@ -3520,7 +3518,7 @@ msgstr "Za mało sąsiadów"
 msgid "Not installed"
 msgstr "Nie zainstalowano"
 
-#: globalsearch/globalsearchsettingspage.cpp:119
+#: globalsearch/globalsearchsettingspage.cpp:120
 #: globalsearch/searchproviderstatuswidget.cpp:47
 msgid "Not logged in"
 msgstr "Niezalogowany"
@@ -3529,7 +3527,7 @@ msgstr "Niezalogowany"
 msgid "Not mounted - double click to mount"
 msgstr "Nie zamontowano - kliknij dwukrotnie, aby zamontować"
 
-#: internet/vk/vksearchdialog.cpp:93
+#: internet/vk/vksearchdialog.cpp:94
 msgid "Nothing found"
 msgstr "Nic nie znaleziono"
 
@@ -3603,12 +3601,12 @@ msgstr "Pokaż tylko pierwsze"
 msgid "Opacity"
 msgstr "Krycie"
 
-#: internet/digitally/digitallyimportedservicebase.cpp:176
-#: internet/icecast/icecastservice.cpp:302
-#: internet/jamendo/jamendoservice.cpp:434
-#: internet/magnatune/magnatuneservice.cpp:284
+#: internet/digitally/digitallyimportedservicebase.cpp:177
+#: internet/icecast/icecastservice.cpp:303
+#: internet/jamendo/jamendoservice.cpp:437
+#: internet/magnatune/magnatuneservice.cpp:287
 #: internet/somafm/somafmservice.cpp:102
-#: internet/soundcloud/soundcloudservice.cpp:351
+#: internet/soundcloud/soundcloudservice.cpp:353
 #, qt-format
 msgid "Open %1 in browser"
 msgstr "Otwórz %1 w przeglądarce"
@@ -3617,11 +3615,11 @@ msgstr "Otwórz %1 w przeglądarce"
 msgid "Open &audio CD..."
 msgstr "Otwórz audio CD"
 
-#: internet/podcasts/addpodcastdialog.cpp:238
+#: internet/podcasts/addpodcastdialog.cpp:243
 msgid "Open OPML file"
 msgstr "Otwórz plik OPML"
 
-#: internet/podcasts/addpodcastdialog.cpp:80
+#: internet/podcasts/addpodcastdialog.cpp:84
 msgid "Open OPML file..."
 msgstr "Otwórz plik OPML..."
 
@@ -3637,22 +3635,22 @@ msgstr "Otwórz urządzenie"
 msgid "Open file..."
 msgstr "Otwórz plik..."
 
-#: internet/googledrive/googledriveservice.cpp:216
+#: internet/googledrive/googledriveservice.cpp:217
 msgid "Open in Google Drive"
 msgstr "Otwórz w Dysku Google"
 
-#: devices/deviceview.cpp:221 globalsearch/globalsearchview.cpp:461
-#: internet/core/internetservice.cpp:102 library/libraryview.cpp:396
-#: widgets/fileviewlist.cpp:35
+#: devices/deviceview.cpp:224 globalsearch/globalsearchview.cpp:461
+#: internet/core/internetservice.cpp:105 library/libraryview.cpp:378
+#: widgets/fileviewlist.cpp:36
 msgid "Open in new playlist"
 msgstr "Otwórz w nowej liście odtwarzania"
 
-#: ../bin/src/ui_behavioursettingspage.h:349
+#: ../bin/src/ui_behavioursettingspage.h:342
 msgctxt "Refers to behavior settings in Clementine settings page."
 msgid "Open in new playlist"
 msgstr "Otwórz w nowej liście odtwarzania"
 
-#: songinfo/echonestbiographies.cpp:101
+#: songinfo/echonestbiographies.cpp:102
 msgid "Open in your browser"
 msgstr "Otwórz w przeglądarce"
 
@@ -3687,7 +3685,7 @@ msgstr "Opus"
 msgid "Organise Files"
 msgstr "Uporządkuj pliki"
 
-#: library/libraryview.cpp:417 ui/mainwindow.cpp:637
+#: library/libraryview.cpp:399 ui/mainwindow.cpp:640
 msgid "Organise files..."
 msgstr "Uporządkuj pliki..."
 
@@ -3695,7 +3693,7 @@ msgstr "Uporządkuj pliki..."
 msgid "Organising files"
 msgstr "Porządkowanie plików"
 
-#: ui/trackselectiondialog.cpp:162
+#: ui/trackselectiondialog.cpp:164
 msgid "Original tags"
 msgstr "Aktualne znaczniki"
 
@@ -3746,7 +3744,7 @@ msgstr "Nadpisz tylko mniejsze"
 msgid "Owner"
 msgstr "Właściciel"
 
-#: internet/jamendo/jamendoservice.cpp:228
+#: internet/jamendo/jamendoservice.cpp:229
 msgid "Parsing Jamendo catalogue"
 msgstr "Parsowanie katalogu Jamendo"
 
@@ -3763,8 +3761,8 @@ msgstr "Impreza"
 msgid "Password"
 msgstr "Hasło"
 
-#: core/globalshortcuts.cpp:50 ui/mainwindow.cpp:1061 ui/mainwindow.cpp:1582
-#: ui/qtsystemtrayicon.cpp:175 wiimotedev/wiimotesettingspage.cpp:107
+#: core/globalshortcuts.cpp:50 ui/mainwindow.cpp:1070 ui/mainwindow.cpp:1565
+#: ui/qtsystemtrayicon.cpp:175 wiimotedev/wiimotesettingspage.cpp:108
 msgid "Pause"
 msgstr "Pauza"
 
@@ -3790,9 +3788,9 @@ msgstr "Piksel"
 msgid "Plain sidebar"
 msgstr "Zwykły pasek boczny"
 
-#: core/globalshortcuts.cpp:49 ui/mainwindow.cpp:609 ui/mainwindow.cpp:1029
-#: ui/mainwindow.cpp:1047 ui/mainwindow.cpp:1585 ui/qtsystemtrayicon.cpp:164
-#: ui/qtsystemtrayicon.cpp:188 wiimotedev/wiimotesettingspage.cpp:100
+#: core/globalshortcuts.cpp:49 ui/mainwindow.cpp:611 ui/mainwindow.cpp:1038
+#: ui/mainwindow.cpp:1056 ui/mainwindow.cpp:1568 ui/qtsystemtrayicon.cpp:164
+#: ui/qtsystemtrayicon.cpp:188 wiimotedev/wiimotesettingspage.cpp:101
 #: ../bin/src/ui_mainwindow.h:641
 msgid "Play"
 msgstr "Odtwarzaj"
@@ -3805,9 +3803,8 @@ msgstr "Ilość odtworzeń"
 msgid "Play if stopped, pause if playing"
 msgstr "Odtwarzaj, gdy zatrzymane; zatrzymaj, gdy odtwarzane"
 
-#: ../bin/src/ui_behavioursettingspage.h:335
-#: ../bin/src/ui_behavioursettingspage.h:355
-#: ../bin/src/ui_behavioursettingspage.h:369
+#: ../bin/src/ui_behavioursettingspage.h:328
+#: ../bin/src/ui_behavioursettingspage.h:348
 msgid "Play if there is nothing already playing"
 msgstr "Odtwarzaj jeśli nic nie jest aktualnie odtwarzane"
 
@@ -3815,7 +3812,7 @@ msgstr "Odtwarzaj jeśli nic nie jest aktualnie odtwarzane"
 msgid "Play the <n>th track in the playlist"
 msgstr "Odtwórz <n> ścieżkę na liście odtwarzania"
 
-#: core/globalshortcuts.cpp:51 wiimotedev/wiimotesettingspage.cpp:109
+#: core/globalshortcuts.cpp:51 wiimotedev/wiimotesettingspage.cpp:110
 msgid "Play/Pause"
 msgstr "Odtwarzaj/wstrzymaj"
 
@@ -3846,7 +3843,7 @@ msgstr "Opcje listy odtwarzania"
 msgid "Playlist type"
 msgstr "Typ listy odtwarzania"
 
-#: internet/soundcloud/soundcloudservice.cpp:130 ui/mainwindow.cpp:241
+#: internet/soundcloud/soundcloudservice.cpp:132 ui/mainwindow.cpp:241
 msgid "Playlists"
 msgstr "Listy odtwarzania"
 
@@ -3858,7 +3855,7 @@ msgstr "Aby kontynuować pracę z Clementine należy zamknąć przeglądarkę"
 msgid "Plugin status:"
 msgstr "Stan wtyczki:"
 
-#: internet/podcasts/podcastservice.cpp:131
+#: internet/podcasts/podcastservice.cpp:132
 #: ../bin/src/ui_podcastsettingspage.h:253
 msgid "Podcasts"
 msgstr "Podcasty"
@@ -3932,7 +3929,7 @@ msgstr "Naciśnij klawisz"
 msgid "Press a key combination to use for %1..."
 msgstr "Naciśnij kombinację klawiszy dla %1"
 
-#: ../bin/src/ui_behavioursettingspage.h:338
+#: ../bin/src/ui_behavioursettingspage.h:331
 msgid "Pressing \"Previous\" in player will..."
 msgstr ""
 
@@ -3946,11 +3943,11 @@ msgstr "Opcje ładnego OSD (menu ekranowego)"
 msgid "Preview"
 msgstr "Podgląd"
 
-#: ui/edittagdialog.cpp:162 ui/trackselectiondialog.cpp:47
+#: ui/edittagdialog.cpp:163 ui/trackselectiondialog.cpp:48
 msgid "Previous"
 msgstr "Wstecz"
 
-#: core/globalshortcuts.cpp:59 wiimotedev/wiimotesettingspage.cpp:99
+#: core/globalshortcuts.cpp:59 wiimotedev/wiimotesettingspage.cpp:100
 #: ../bin/src/ui_mainwindow.h:639
 msgid "Previous track"
 msgstr "Poprzedni utwór"
@@ -3976,7 +3973,7 @@ msgstr "Postęp"
 msgid "Psychedelic"
 msgstr "Psychodeliczna"
 
-#: wiimotedev/wiimotesettingspage.cpp:239
+#: wiimotedev/wiimotesettingspage.cpp:240
 #: ../bin/src/ui_wiimoteshortcutgrabber.h:124
 msgid "Push Wiiremote button"
 msgstr "Naciśnij przycisk na pilocie"
@@ -4006,12 +4003,12 @@ msgstr "Odpytywanie urządzenia..."
 msgid "Queue Manager"
 msgstr "Menedżer kolejki odtwarzania"
 
-#: ui/mainwindow.cpp:1677
+#: ui/mainwindow.cpp:1660
 msgid "Queue selected tracks"
 msgstr "Kolejkuj wybrane ścieżki"
 
-#: globalsearch/globalsearchview.cpp:466 library/libraryview.cpp:401
-#: ui/mainwindow.cpp:1675
+#: globalsearch/globalsearchview.cpp:466 library/libraryview.cpp:383
+#: ui/mainwindow.cpp:1658
 msgid "Queue track"
 msgstr "Kolejkuj ścieżkę"
 
@@ -4065,12 +4062,12 @@ msgstr "Ocena"
 msgid "Really cancel?"
 msgstr "Na pewno anulować?"
 
-#: internet/subsonic/subsonicsettingspage.cpp:157
+#: internet/subsonic/subsonicsettingspage.cpp:158
 msgid "Redirect limit exceeded, verify server configuration."
 msgstr "Przekroczono limit przekierowań, sprawdź konfigurację serwera"
 
-#: internet/jamendo/jamendoservice.cpp:437
-#: internet/magnatune/magnatuneservice.cpp:287
+#: internet/jamendo/jamendoservice.cpp:440
+#: internet/magnatune/magnatuneservice.cpp:290
 #: internet/subsonic/subsonicservice.cpp:109
 msgid "Refresh catalogue"
 msgstr "Odśwież katalog"
@@ -4079,11 +4076,11 @@ msgstr "Odśwież katalog"
 msgid "Refresh channels"
 msgstr "Odśwież kanały"
 
-#: internet/icecast/icecastservice.cpp:305
+#: internet/icecast/icecastservice.cpp:306
 msgid "Refresh station list"
 msgstr "Odśwież listę stacji"
 
-#: internet/digitally/digitallyimportedservicebase.cpp:179
+#: internet/digitally/digitallyimportedservicebase.cpp:180
 msgid "Refresh streams"
 msgstr "Odśwież strumienie"
 
@@ -4092,7 +4089,7 @@ msgid "Reggae"
 msgstr "Reggae"
 
 #: playlist/playlistsaveoptionsdialog.cpp:33
-#: ../bin/src/ui_behavioursettingspage.h:379
+#: ../bin/src/ui_behavioursettingspage.h:364
 msgid "Relative"
 msgstr ""
 
@@ -4100,7 +4097,7 @@ msgstr ""
 msgid "Remember Wii remote swing"
 msgstr "Pamiętaj ruchy pilota"
 
-#: ../bin/src/ui_behavioursettingspage.h:324
+#: ../bin/src/ui_behavioursettingspage.h:317
 msgid "Remember from last time"
 msgstr "Zapamiętaj z ostatniego razu"
 
@@ -4125,15 +4122,15 @@ msgstr "Usuń duplikaty z playlisty"
 msgid "Remove folder"
 msgstr "Usuń katalog"
 
-#: internet/vk/vkservice.cpp:325
+#: internet/vk/vkservice.cpp:328
 msgid "Remove from My Music"
 msgstr "Usuń z Mojej Muzyki"
 
-#: internet/vk/vkservice.cpp:311
+#: internet/vk/vkservice.cpp:313
 msgid "Remove from bookmarks"
 msgstr "Usuń z zakładek"
 
-#: internet/spotify/spotifyservice.cpp:672 ../bin/src/ui_mainwindow.h:684
+#: internet/spotify/spotifyservice.cpp:679 ../bin/src/ui_mainwindow.h:684
 msgid "Remove from playlist"
 msgstr "Usuń z listy odtwarzania"
 
@@ -4161,7 +4158,7 @@ msgstr "Zmień nazwę listy odtwarzania..."
 msgid "Renumber tracks in this order..."
 msgstr "Ponumeruj utwory według tej kolejności..."
 
-#: playlist/playlistsequence.cpp:203 ../bin/src/ui_playlistsequence.h:121
+#: playlist/playlistsequence.cpp:207 ../bin/src/ui_playlistsequence.h:121
 msgid "Repeat"
 msgstr "Powtarzaj"
 
@@ -4177,19 +4174,15 @@ msgstr "Powtarzaj listę odtwarzania"
 msgid "Repeat track"
 msgstr "Powtarzaj utwór"
 
-#: devices/deviceview.cpp:219 globalsearch/globalsearchview.cpp:457
-#: internet/core/internetservice.cpp:91 library/libraryview.cpp:393
+#: devices/deviceview.cpp:221 globalsearch/globalsearchview.cpp:457
+#: internet/core/internetservice.cpp:93 library/libraryview.cpp:375
 #: widgets/fileviewlist.cpp:34
 msgid "Replace current playlist"
 msgstr "Zastąp aktualną listę odtwarzania"
 
-#: ../bin/src/ui_behavioursettingspage.h:348
+#: ../bin/src/ui_behavioursettingspage.h:341
 msgid "Replace the playlist"
 msgstr "Zastąp listę odtwarzania"
-
-#: ../bin/src/ui_behavioursettingspage.h:363
-msgid "Replace the queue"
-msgstr ""
 
 #: ../bin/src/ui_organisedialog.h:256
 msgid "Replaces spaces with underscores"
@@ -4215,11 +4208,11 @@ msgstr "Wymagaj kodu uwierzytelniającego"
 msgid "Reset"
 msgstr "Resetuj"
 
-#: ui/edittagdialog.cpp:800 ../bin/src/ui_edittagdialog.h:716
+#: ui/edittagdialog.cpp:803 ../bin/src/ui_edittagdialog.h:716
 msgid "Reset play counts"
 msgstr "Wyzeruj licznik odtworzeń"
 
-#: ../bin/src/ui_behavioursettingspage.h:342
+#: ../bin/src/ui_behavioursettingspage.h:335
 msgid "Restart song, then jump to previous if pressed again"
 msgstr ""
 
@@ -4232,7 +4225,7 @@ msgstr "Odtwarzaj od początku lub odtwórz poprzedni utwór jeżeli nie minęł
 msgid "Restrict to ASCII characters"
 msgstr "Ogranicz do znaków ASCII"
 
-#: ../bin/src/ui_behavioursettingspage.h:325
+#: ../bin/src/ui_behavioursettingspage.h:318
 msgid "Resume playback on start"
 msgstr "Wznów odtwarzanie przy uruchamianiu programu"
 
@@ -4268,13 +4261,13 @@ msgstr "Uruchom"
 msgid "SOCKS proxy"
 msgstr "Pośrednik (proxy) SOCKS"
 
-#: internet/subsonic/subsonicsettingspage.cpp:146
+#: internet/subsonic/subsonicsettingspage.cpp:147
 msgid ""
 "SSL handshake error, verify server configuration. SSLv3 option below may "
 "workaround some issues."
 msgstr "Błąd powitania SSL, sprawdź konfigurację serwera. Włączenie SSLv3 poniżej może pomóc w obejściu tego problemu"
 
-#: devices/deviceview.cpp:203
+#: devices/deviceview.cpp:204
 msgid "Safely remove device"
 msgstr "Bezpiecznie usuń urządzenie"
 
@@ -4295,7 +4288,7 @@ msgstr "Próbkowanie"
 msgid "Save .mood files in your music library"
 msgstr "Zapisz pliki .mood w swojej bibliotece"
 
-#: ui/albumcoverchoicecontroller.cpp:127
+#: ui/albumcoverchoicecontroller.cpp:129
 msgid "Save album cover"
 msgstr "Zapisz okładkę albumu"
 
@@ -4341,7 +4334,7 @@ msgstr "Zapisz ten strumień w zakładce Internet"
 msgid "Saving songs statistics into songs files"
 msgstr "Zapisywanie statystyk do plików"
 
-#: ui/edittagdialog.cpp:703 ui/trackselectiondialog.cpp:254
+#: ui/edittagdialog.cpp:706 ui/trackselectiondialog.cpp:256
 msgid "Saving tracks"
 msgstr "Zapisywanie utworów"
 
@@ -4366,12 +4359,12 @@ msgid "Seafile"
 msgstr ""
 
 #: ui/albumcoversearcher.cpp:165 ui/albumcoversearcher.cpp:182
-#: internet/vk/vkservice.cpp:527 ../bin/src/ui_gpoddersearchpage.h:77
+#: internet/vk/vkservice.cpp:534 ../bin/src/ui_gpoddersearchpage.h:77
 #: ../bin/src/ui_itunessearchpage.h:77 ../bin/src/ui_albumcoversearcher.h:113
 msgid "Search"
 msgstr "Szukaj"
 
-#: ui/mainwindow.cpp:236 ../bin/src/ui_globalsearchsettingspage.h:144
+#: ui/mainwindow.cpp:235 ../bin/src/ui_globalsearchsettingspage.h:144
 msgctxt "Global search settings dialog title."
 msgid "Search"
 msgstr "Szukaj"
@@ -4380,11 +4373,11 @@ msgstr "Szukaj"
 msgid "Search Icecast stations"
 msgstr "Przeszukaj stacje Icecast"
 
-#: internet/jamendo/jamendoservice.cpp:444
+#: internet/jamendo/jamendoservice.cpp:447
 msgid "Search Jamendo"
 msgstr "Przeszukaj Jamendo"
 
-#: internet/magnatune/magnatuneservice.cpp:296
+#: internet/magnatune/magnatuneservice.cpp:299
 msgid "Search Magnatune"
 msgstr "Przeszukaj Magnatune"
 
@@ -4392,7 +4385,7 @@ msgstr "Przeszukaj Magnatune"
 msgid "Search Subsonic"
 msgstr "Przeszukaj Subsonic"
 
-#: ui/albumcoverchoicecontroller.cpp:73
+#: ui/albumcoverchoicecontroller.cpp:75
 msgid "Search automatically"
 msgstr "Wyszukaj automatycznie"
 
@@ -4420,8 +4413,8 @@ msgstr "Tryb wyszukiwania"
 msgid "Search options"
 msgstr "Opcje wyszukiwania"
 
-#: internet/soundcloud/soundcloudservice.cpp:116
-#: internet/spotify/spotifyservice.cpp:406
+#: internet/soundcloud/soundcloudservice.cpp:118
+#: internet/spotify/spotifyservice.cpp:408
 msgid "Search results"
 msgstr "Wyniki wyszukiwania"
 
@@ -4434,11 +4427,11 @@ msgstr "Kryteria wyszukiwania"
 msgid "Second level"
 msgstr "Drugi poziom"
 
-#: core/globalshortcuts.cpp:65 wiimotedev/wiimotesettingspage.cpp:111
+#: core/globalshortcuts.cpp:65 wiimotedev/wiimotesettingspage.cpp:112
 msgid "Seek backward"
 msgstr "Przewiń wstecz"
 
-#: core/globalshortcuts.cpp:64 wiimotedev/wiimotesettingspage.cpp:113
+#: core/globalshortcuts.cpp:64 wiimotedev/wiimotesettingspage.cpp:114
 msgid "Seek forward"
 msgstr "Przewiń w przód"
 
@@ -4450,8 +4443,8 @@ msgstr "Przesuń obecnie odtwarzaną ścieżkę o względną wartość"
 msgid "Seek the currently playing track to an absolute position"
 msgstr "Przesuń obecnie odtwarzaną ścieżkę do określonej pozycji"
 
-#: ../bin/src/ui_behavioursettingspage.h:372
-msgid "Seeking using a keyboard shortcut"
+#: ../bin/src/ui_behavioursettingspage.h:357
+msgid "Seeking using a keyboard shortcut or mouse wheel"
 msgstr ""
 
 #: visualisations/visualisationselector.cpp:37 ../bin/src/ui_ripcddialog.h:309
@@ -4510,7 +4503,7 @@ msgstr "Szczegóły serwera"
 msgid "Service offline"
 msgstr "Usługa niedostępna"
 
-#: ui/mainwindow.cpp:1714
+#: ui/mainwindow.cpp:1697
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr "Ustaw %1 na \"%2\"..."
@@ -4537,7 +4530,7 @@ msgstr "Skrót"
 msgid "Shortcut for %1"
 msgstr "Skrót dla %1"
 
-#: wiimotedev/wiimotesettingspage.cpp:133
+#: wiimotedev/wiimotesettingspage.cpp:134
 #, qt-format
 msgid "Shortcut for %1 already exists"
 msgstr "Skrót dla %1 już istnieje"
@@ -4546,7 +4539,7 @@ msgstr "Skrót dla %1 już istnieje"
 msgid "Show"
 msgstr "Pokaż"
 
-#: core/globalshortcuts.cpp:67 wiimotedev/wiimotesettingspage.cpp:115
+#: core/globalshortcuts.cpp:67 wiimotedev/wiimotesettingspage.cpp:116
 msgid "Show OSD"
 msgstr "Pokaż OSD"
 
@@ -4586,7 +4579,7 @@ msgstr "Pokazuj ładne OSD (menu ekranowe)"
 msgid "Show above status bar"
 msgstr "Pokaż ponad paskiem stanu"
 
-#: ui/mainwindow.cpp:577
+#: ui/mainwindow.cpp:578
 msgid "Show all songs"
 msgstr "Pokaż wszystkie utwory"
 
@@ -4602,7 +4595,7 @@ msgstr "Pokazuj okładki w bibliotece"
 msgid "Show dividers"
 msgstr "Pokaż separatory"
 
-#: ui/albumcoverchoicecontroller.cpp:70 widgets/prettyimage.cpp:182
+#: ui/albumcoverchoicecontroller.cpp:72 widgets/prettyimage.cpp:183
 msgid "Show fullsize..."
 msgstr "Pokaż w pełnej wielkości..."
 
@@ -4610,16 +4603,16 @@ msgstr "Pokaż w pełnej wielkości..."
 msgid "Show groups in global search result"
 msgstr "Pokaż grup w globalnych wynikach wyszukiwania"
 
-#: library/libraryview.cpp:434 ui/mainwindow.cpp:646
-#: widgets/fileviewlist.cpp:51
+#: library/libraryview.cpp:417 ui/mainwindow.cpp:651
+#: widgets/fileviewlist.cpp:53
 msgid "Show in file browser..."
 msgstr "Pokaż w menadżerze plików..."
 
-#: ui/mainwindow.cpp:649
+#: ui/mainwindow.cpp:655
 msgid "Show in library..."
 msgstr "Pokaż w bibliotece..."
 
-#: library/libraryview.cpp:438
+#: library/libraryview.cpp:420
 msgid "Show in various artists"
 msgstr "Pokaż w różni wykonawcy"
 
@@ -4627,11 +4620,11 @@ msgstr "Pokaż w różni wykonawcy"
 msgid "Show moodbar"
 msgstr "Pokaż pasek humoru"
 
-#: ui/mainwindow.cpp:579
+#: ui/mainwindow.cpp:580
 msgid "Show only duplicates"
 msgstr "Pokaż tylko duplikaty"
 
-#: ui/mainwindow.cpp:581
+#: ui/mainwindow.cpp:582
 msgid "Show only untagged"
 msgstr "Pokaż tylko nieoznaczone"
 
@@ -4651,7 +4644,7 @@ msgstr "Pokaż przycisk \"Dodaj do ulubionych\""
 msgid "Show the scrobble button in the main window"
 msgstr "Pokaż przycisk scrobblingu w głównym oknie"
 
-#: ../bin/src/ui_behavioursettingspage.h:312
+#: ../bin/src/ui_behavioursettingspage.h:305
 msgid "Show tray icon"
 msgstr "Pokaż ikonkę w tacce systemowej"
 
@@ -4663,7 +4656,7 @@ msgstr "Wyświetl listę włączonych i wyłączonych źródeł"
 msgid "Show/Hide"
 msgstr "Pokaż/Ukryj"
 
-#: playlist/playlistsequence.cpp:202 ../bin/src/ui_playlistsequence.h:124
+#: playlist/playlistsequence.cpp:206 ../bin/src/ui_playlistsequence.h:124
 msgid "Shuffle"
 msgstr "Losuj"
 
@@ -4723,11 +4716,11 @@ msgstr "Ilość przeskoczeń utworu"
 msgid "Skip forwards in playlist"
 msgstr "Przeskocz w przód w liście odtwarzania"
 
-#: ui/mainwindow.cpp:1688
+#: ui/mainwindow.cpp:1671
 msgid "Skip selected tracks"
 msgstr "Pomiń wybrane ścieżki"
 
-#: ui/mainwindow.cpp:1686
+#: ui/mainwindow.cpp:1669
 msgid "Skip track"
 msgstr "Pomiń ścieżkę"
 
@@ -4812,11 +4805,11 @@ msgstr "Speex"
 msgid "Spotify"
 msgstr "Spotify"
 
-#: internet/spotify/spotifyservice.cpp:219
+#: internet/spotify/spotifyservice.cpp:220
 msgid "Spotify login error"
 msgstr "Nieudane logowanie do Spotify"
 
-#: internet/spotify/spotifyservice.cpp:835
+#: internet/spotify/spotifyservice.cpp:842
 msgid "Spotify playlist's URL"
 msgstr ""
 
@@ -4828,7 +4821,7 @@ msgstr "Wtyczka Spotify"
 msgid "Spotify plugin not installed"
 msgstr "Nie zainstalowano pluginu Spotify"
 
-#: internet/spotify/spotifyservice.cpp:826
+#: internet/spotify/spotifyservice.cpp:833
 msgid "Spotify song's URL"
 msgstr ""
 
@@ -4836,7 +4829,7 @@ msgstr ""
 msgid "Standard"
 msgstr "Standardowy"
 
-#: internet/spotify/spotifyservice.cpp:414
+#: internet/spotify/spotifyservice.cpp:416
 msgid "Starred"
 msgstr "Oznaczone gwiazdką"
 
@@ -4852,8 +4845,8 @@ msgstr "Rozpocznij aktualnie odtwarzaną listę"
 msgid "Start transcoding"
 msgstr "Rozpocznij transkodowanie"
 
-#: internet/soundcloud/soundcloudservice.cpp:118
-#: internet/spotify/spotifyservice.cpp:408
+#: internet/soundcloud/soundcloudservice.cpp:120
+#: internet/spotify/spotifyservice.cpp:410
 msgid ""
 "Start typing something on the search box above to fill this search results "
 "list"
@@ -4868,12 +4861,12 @@ msgstr "Uruchamianie %1"
 msgid "Starting..."
 msgstr "Uruchamianie..."
 
-#: core/globalshortcuts.cpp:53 wiimotedev/wiimotesettingspage.cpp:101
+#: core/globalshortcuts.cpp:53 wiimotedev/wiimotesettingspage.cpp:102
 #: ../bin/src/ui_mainwindow.h:643
 msgid "Stop"
 msgstr "Zatrzymaj"
 
-#: wiimotedev/wiimotesettingspage.cpp:114
+#: wiimotedev/wiimotesettingspage.cpp:115
 msgid "Stop after"
 msgstr "Zatrzymaj po"
 
@@ -4885,7 +4878,7 @@ msgstr ""
 msgid "Stop after every track"
 msgstr ""
 
-#: ui/mainwindow.cpp:612 ../bin/src/ui_mainwindow.h:649
+#: ui/mainwindow.cpp:615 ../bin/src/ui_mainwindow.h:649
 msgid "Stop after this track"
 msgstr "Zatrzymaj po tym utworze"
 
@@ -4910,7 +4903,7 @@ msgstr "Zatrzymano"
 msgid "Stream"
 msgstr "Strumień"
 
-#: internet/subsonic/subsonicsettingspage.cpp:50
+#: internet/subsonic/subsonicsettingspage.cpp:51
 msgid ""
 "Streaming from a Subsonic server requires a valid server license after the "
 "30-day trial period."
@@ -4938,7 +4931,7 @@ msgstr "Suckes!"
 msgid "Successfully written %1"
 msgstr "Pomyślnie zapisano %1"
 
-#: ui/trackselectiondialog.cpp:166
+#: ui/trackselectiondialog.cpp:168
 msgid "Suggested tags"
 msgstr "Sugerowane znaczniki"
 
@@ -4965,15 +4958,15 @@ msgstr "Obsługiwane formaty"
 msgid "Synchronize statistics to files now"
 msgstr "Zsynchronizuj statystyki z plikami"
 
-#: internet/spotify/spotifyservice.cpp:699
+#: internet/spotify/spotifyservice.cpp:706
 msgid "Syncing Spotify inbox"
 msgstr "Synchronizowanie skrzynki Spotify"
 
-#: internet/spotify/spotifyservice.cpp:693
+#: internet/spotify/spotifyservice.cpp:700
 msgid "Syncing Spotify playlist"
 msgstr "Synchronizowanie playlisty Spotify"
 
-#: internet/spotify/spotifyservice.cpp:704
+#: internet/spotify/spotifyservice.cpp:711
 msgid "Syncing Spotify starred tracks"
 msgstr "Synchronizowanie utworów oznaczonych gwiazdką na Spotify"
 
@@ -5031,25 +5024,25 @@ msgstr "Wybrany serwis nie istnieje!"
 msgid "The site you requested is not an image!"
 msgstr "Wybrany adres nie jest obrazem!"
 
-#: internet/subsonic/subsonicsettingspage.cpp:116
+#: internet/subsonic/subsonicsettingspage.cpp:117
 msgid ""
 "The trial period for the Subsonic server is over. Please donate to get a "
 "license key. Visit subsonic.org for details."
 msgstr "Okres próbny dla serwera Subsonic wygasł. Zapłać, aby otrzymać klucz licencyjny. Szczegóły na subsonic.org."
 
-#: ui/mainwindow.cpp:2507
+#: ui/mainwindow.cpp:2490
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
 msgstr "Wersja do której właśnie zaktualizowano odtwarzacz Clementine wymaga odświeżenia całej biblioteki. Wynika to z wprowadzenia następujących zmian:"
 
-#: library/libraryview.cpp:574
+#: library/libraryview.cpp:556
 msgid "There are other songs in this album"
 msgstr "Na tym albumie są inne utwory"
 
-#: internet/podcasts/gpoddersearchpage.cpp:76
+#: internet/podcasts/gpoddersearchpage.cpp:78
 #: internet/podcasts/gpoddertoptagsmodel.cpp:104
-#: internet/podcasts/gpoddertoptagspage.cpp:73
+#: internet/podcasts/gpoddertoptagspage.cpp:74
 msgid "There was a problem communicating with gpodder.net"
 msgstr "Wystąpił problem z komunikacją z serwisem gpodder.net"
 
@@ -5057,7 +5050,7 @@ msgstr "Wystąpił problem z komunikacją z serwisem gpodder.net"
 msgid "There was a problem fetching the metadata from Magnatune"
 msgstr "Wystąpił problem podczas pobierania metadanych z Magnatune"
 
-#: internet/podcasts/itunessearchpage.cpp:77
+#: internet/podcasts/itunessearchpage.cpp:79
 msgid "There was a problem parsing the response from the iTunes Store"
 msgstr "Wystąpił problem podczas parsowania odpowiedzi z iTunes Store"
 
@@ -5073,13 +5066,13 @@ msgid ""
 "deleted:"
 msgstr "Wystąpiły problemy podczas kasowania utworów. Nie można było skasować następujących plików:"
 
-#: devices/deviceview.cpp:405
+#: devices/deviceview.cpp:409
 msgid ""
 "These files will be deleted from the device, are you sure you want to "
 "continue?"
 msgstr "Te pliki zostaną usunięte z urządzenia. Na pewno chcesz kontynuować?"
 
-#: library/libraryview.cpp:658 ui/mainwindow.cpp:2295 widgets/fileview.cpp:187
+#: library/libraryview.cpp:640 ui/mainwindow.cpp:2278 widgets/fileview.cpp:187
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -5099,7 +5092,7 @@ msgstr "Te ustawienia są używane w \"Transkodowaniu muzyki\" oraz podczas konw
 msgid "Third level"
 msgstr "Trzeci poziom"
 
-#: internet/jamendo/jamendoservice.cpp:181
+#: internet/jamendo/jamendoservice.cpp:182
 msgid ""
 "This action will create a database which could be as big as 150 MB.\n"
 "Do you want to continue anyway?"
@@ -5155,7 +5148,7 @@ msgstr "Strumień wyłącznie dla płacących subskrybentów"
 msgid "This type of device is not supported: %1"
 msgstr "Ten typ urządzenia nie jest obsługiwany: %1"
 
-#: ../bin/src/ui_behavioursettingspage.h:373
+#: ../bin/src/ui_behavioursettingspage.h:358
 msgid "Time step"
 msgstr ""
 
@@ -5166,7 +5159,7 @@ msgstr ""
 msgid "Title"
 msgstr "Nazwa"
 
-#: core/utilities.cpp:136 core/utilities.cpp:148
+#: core/utilities.cpp:137 core/utilities.cpp:149
 msgid "Today"
 msgstr "Dzisiaj"
 
@@ -5174,11 +5167,11 @@ msgstr "Dzisiaj"
 msgid "Toggle Pretty OSD"
 msgstr "Przełącz ładne OSD"
 
-#: visualisations/visualisationcontainer.cpp:101
+#: visualisations/visualisationcontainer.cpp:102
 msgid "Toggle fullscreen"
 msgstr "Przełącz tryb pełnoekranowy"
 
-#: ui/mainwindow.cpp:1679
+#: ui/mainwindow.cpp:1662
 msgid "Toggle queue status"
 msgstr "Przełącz stan kolejki"
 
@@ -5190,7 +5183,7 @@ msgstr "Włącz scroblowanie"
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "Przełącz wyświetlanie ładnego menu ekranowego"
 
-#: core/utilities.cpp:149
+#: core/utilities.cpp:150
 msgid "Tomorrow"
 msgstr "Jutro"
 
@@ -5198,7 +5191,7 @@ msgstr "Jutro"
 msgid "Too many redirects"
 msgstr "Zbyt wiele przekierowań"
 
-#: internet/spotify/spotifyservice.cpp:427
+#: internet/spotify/spotifyservice.cpp:430
 msgid "Top tracks"
 msgstr "Top utworów"
 
@@ -5220,7 +5213,7 @@ msgstr "Całkowita ilość zapytań sieciowych"
 msgid "Track"
 msgstr "Utwór"
 
-#: internet/soundcloud/soundcloudservice.cpp:133
+#: internet/soundcloud/soundcloudservice.cpp:135
 msgid "Tracks"
 msgstr "Ścieżki"
 
@@ -5282,8 +5275,8 @@ msgstr "Nie udało się pobrać %1 (%2)"
 #: core/song.cpp:435 library/librarymodel.cpp:361 library/librarymodel.cpp:366
 #: library/librarymodel.cpp:370 library/librarymodel.cpp:1143
 #: playlist/playlistdelegates.cpp:306 playlist/playlistmanager.cpp:508
-#: playlist/playlistmanager.cpp:509 ui/albumcoverchoicecontroller.cpp:124
-#: ui/edittagdialog.cpp:455 ui/edittagdialog.cpp:499
+#: playlist/playlistmanager.cpp:509 ui/albumcoverchoicecontroller.cpp:126
+#: ui/edittagdialog.cpp:458 ui/edittagdialog.cpp:502
 msgid "Unknown"
 msgstr "nieznany"
 
@@ -5296,32 +5289,32 @@ msgstr "Nieznany content-type"
 msgid "Unknown error"
 msgstr "Nieznany błąd"
 
-#: ui/albumcoverchoicecontroller.cpp:68
+#: ui/albumcoverchoicecontroller.cpp:69
 msgid "Unset cover"
 msgstr "Usuń okładkę"
 
-#: ui/mainwindow.cpp:1684
+#: ui/mainwindow.cpp:1667
 msgid "Unskip selected tracks"
 msgstr "Nie pomijaj wybranych ścieżek"
 
-#: ui/mainwindow.cpp:1682
+#: ui/mainwindow.cpp:1665
 msgid "Unskip track"
 msgstr "Nie pomijaj ścieżki"
 
-#: internet/podcasts/addpodcastdialog.cpp:68
-#: internet/podcasts/podcastservice.cpp:442
+#: internet/podcasts/addpodcastdialog.cpp:70
+#: internet/podcasts/podcastservice.cpp:444
 msgid "Unsubscribe"
 msgstr "Anuluj subskrypcję"
 
-#: songinfo/songkickconcerts.cpp:172
+#: songinfo/songkickconcerts.cpp:173
 msgid "Upcoming Concerts"
 msgstr "Nadchodzące koncerty"
 
-#: internet/vk/vkservice.cpp:341
+#: internet/vk/vkservice.cpp:347
 msgid "Update"
 msgstr "Zaktualizuj"
 
-#: internet/podcasts/podcastservice.cpp:419
+#: internet/podcasts/podcastservice.cpp:420
 msgid "Update all podcasts"
 msgstr "Uaktualnij wszystkie podcasty"
 
@@ -5333,7 +5326,7 @@ msgstr "Odśwież zmienione katalogi biblioteki"
 msgid "Update the library when Clementine starts"
 msgstr "Odświeżaj bibliotekę przy uruchomieniu Clementine"
 
-#: internet/podcasts/podcastservice.cpp:427
+#: internet/podcasts/podcastservice.cpp:429
 msgid "Update this podcast"
 msgstr "Uaktualnij ten podcast"
 
@@ -5415,7 +5408,7 @@ msgstr "Używaj powiadomień do raportowania statusów urządzenia Wii Remote"
 msgid "Use temporal noise shaping"
 msgstr "Użyj chwilowego kształtowania szumu"
 
-#: ../bin/src/ui_behavioursettingspage.h:318
+#: ../bin/src/ui_behavioursettingspage.h:311
 msgid "Use the system default"
 msgstr "Użyj domyślnych ustawień systemowych"
 
@@ -5447,7 +5440,7 @@ msgstr "Interfejs użytkownika"
 msgid "Username"
 msgstr "Użytkownik"
 
-#: ../bin/src/ui_behavioursettingspage.h:331
+#: ../bin/src/ui_behavioursettingspage.h:324
 msgid "Using the menu to add a song will..."
 msgstr "Dodanie utworu z menu kontekstowego powoduje..."
 
@@ -5460,7 +5453,7 @@ msgstr "VBR MP3"
 msgid "Variable bit rate"
 msgstr "Zmienny bitrate"
 
-#: globalsearch/globalsearchmodel.cpp:106 library/librarymodel.cpp:287
+#: globalsearch/globalsearchmodel.cpp:107 library/librarymodel.cpp:287
 #: playlist/playlistmanager.cpp:520 ui/albumcovermanager.cpp:270
 msgid "Various artists"
 msgstr "Różni wykonawcy"
@@ -5512,11 +5505,11 @@ msgstr "WAV"
 msgid "WMA"
 msgstr "WMA"
 
-#: internet/vk/vkservice.cpp:869
+#: internet/vk/vkservice.cpp:880
 msgid "Wall"
 msgstr ""
 
-#: playlist/playlisttabbar.cpp:192 ../bin/src/ui_behavioursettingspage.h:314
+#: playlist/playlisttabbar.cpp:192 ../bin/src/ui_behavioursettingspage.h:307
 msgid "Warn me when closing a playlist tab"
 msgstr "Ostrzeż mnie kiedy zamknę zakładkę listy odtwarzania"
 
@@ -5532,7 +5525,7 @@ msgstr "Strona internetowa"
 msgid "Weeks"
 msgstr "Tygodni"
 
-#: ../bin/src/ui_behavioursettingspage.h:321
+#: ../bin/src/ui_behavioursettingspage.h:314
 msgid "When Clementine starts"
 msgstr "Podczas startu Clementine"
 
@@ -5542,7 +5535,7 @@ msgid ""
 "If there are no matches then it will use the largest image in the directory."
 msgstr "Szukając okładki, Clementine w pierwszej kolejności przeszuka pliki obrazów zawierające któreś z podanych słów.\nW przypadku braku takich plików użyty zostanie największy obraz z danego katalogu."
 
-#: ../bin/src/ui_behavioursettingspage.h:376
+#: ../bin/src/ui_behavioursettingspage.h:361
 msgid "When saving a playlist, file paths should be"
 msgstr ""
 
@@ -5612,13 +5605,13 @@ msgstr "Windows Media audio"
 msgid "Without cover:"
 msgstr "Bez okładek:"
 
-#: library/libraryview.cpp:575
+#: library/libraryview.cpp:557
 msgid ""
 "Would you like to move the other songs in this album to Various Artists as "
 "well?"
 msgstr "Czy chciałbyś przenieść także inny piosenki z tego albumu do Różnych wykonawców?"
 
-#: ui/mainwindow.cpp:2514
+#: ui/mainwindow.cpp:2497
 msgid "Would you like to run a full rescan right now?"
 msgstr "Czy chcesz teraz rozpocząć odświeżanie biblioteki?"
 
@@ -5626,11 +5619,11 @@ msgstr "Czy chcesz teraz rozpocząć odświeżanie biblioteki?"
 msgid "Write all songs statistics into songs' files"
 msgstr "Zapisz wszystkie statystyki w plikach muzycznych"
 
-#: ../bin/src/ui_behavioursettingspage.h:381
+#: ../bin/src/ui_behavioursettingspage.h:366
 msgid "Write metadata"
 msgstr ""
 
-#: internet/subsonic/subsonicsettingspage.cpp:101
+#: internet/subsonic/subsonicsettingspage.cpp:102
 msgid "Wrong username or password."
 msgstr "Zły login lub hasło."
 
@@ -5650,7 +5643,7 @@ msgstr "Rok - Album"
 msgid "Years"
 msgstr "Lat"
 
-#: core/utilities.cpp:137
+#: core/utilities.cpp:138
 msgid "Yesterday"
 msgstr "Wczoraj"
 
@@ -5687,13 +5680,13 @@ msgstr "Jesteś zalogowany/a"
 msgid "You can change the way the songs in the library are organised."
 msgstr "Możesz zmienić sposób w jaki prezentowane są utwory w bibliotece."
 
-#: internet/digitally/digitallyimportedsettingspage.cpp:48
+#: internet/digitally/digitallyimportedsettingspage.cpp:49
 msgid ""
 "You can listen for free without an account, but Premium members can listen "
 "to higher quality streams without advertisements."
 msgstr "Możesz słuchać muzyki za darmo bez posiadania konta, lecz uzytkownicy premium mogą słuchać lepszej jakości muzykę bez reklam."
 
-#: internet/magnatune/magnatunesettingspage.cpp:58
+#: internet/magnatune/magnatunesettingspage.cpp:59
 msgid ""
 "You can listen to Magnatune songs for free without an account.  Purchasing a"
 " membership removes the messages at the end of each track."
@@ -5725,7 +5718,7 @@ msgid ""
 "stream."
 msgstr "Nie musisz się logować, aby przeglądać i słuchać muzyki w SoundCloud. Natomiast musisz się zalogować, jeżeli chcesz uzyskać dostęp do swoich playlist i swojego strumienia."
 
-#: internet/spotify/spotifyservice.cpp:204
+#: internet/spotify/spotifyservice.cpp:205
 msgid ""
 "You have been logged out of Spotify, please re-enter your password in the "
 "Settings dialog."
@@ -5746,7 +5739,7 @@ msgid ""
 "shortcuts in Clementine."
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:320
+#: ../bin/src/ui_behavioursettingspage.h:313
 msgid "You will need to restart Clementine if you change the language."
 msgstr "Jeśli zmieniałeś ustawienia językowe, będziesz musiał zrestartować Clementine."
 
@@ -5758,11 +5751,11 @@ msgstr "Twój adres IP:"
 msgid "Your Last.fm credentials were incorrect"
 msgstr "Niepoprawne dane konta last.fm"
 
-#: internet/magnatune/magnatunesettingspage.cpp:117
+#: internet/magnatune/magnatunesettingspage.cpp:118
 msgid "Your Magnatune credentials were incorrect"
 msgstr "Niepoprawne dane konta Magnatune"
 
-#: library/libraryview.cpp:366
+#: library/libraryview.cpp:347
 msgid "Your library is empty!"
 msgstr "Biblioteka jest pusta!"
 
@@ -5826,7 +5819,7 @@ msgstr "pomiędzy"
 msgid "biggest first"
 msgstr "najpierw największe"
 
-#: playlist/playlistview.cpp:228 ui/edittagdialog.cpp:492
+#: playlist/playlistview.cpp:232 ui/edittagdialog.cpp:495
 msgid "bpm"
 msgstr "uderzeń na minutę"
 
@@ -5861,7 +5854,7 @@ msgstr "jest równy"
 msgid "gpodder.net"
 msgstr "gpodder.net"
 
-#: internet/podcasts/gpoddertoptagspage.cpp:35
+#: internet/podcasts/gpoddertoptagspage.cpp:36
 msgid "gpodder.net directory"
 msgstr "katalog gpodder.net"
 
@@ -5879,8 +5872,8 @@ msgstr "w ostatnich"
 
 #: internet/spotify/spotifysettingspage.cpp:62
 #: internet/spotify/spotifysettingspage.cpp:63
-#: internet/spotify/spotifysettingspage.cpp:64 playlist/playlistview.cpp:232
-#: ui/edittagdialog.cpp:494
+#: internet/spotify/spotifysettingspage.cpp:64 playlist/playlistview.cpp:236
+#: ui/edittagdialog.cpp:497
 msgid "kbps"
 msgstr "kbps"
 

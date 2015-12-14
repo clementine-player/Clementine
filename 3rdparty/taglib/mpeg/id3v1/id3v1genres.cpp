@@ -30,7 +30,7 @@ using namespace TagLib;
 namespace TagLib {
   namespace ID3v1 {
 
-    static const int genresSize = 148;
+    static const int genresSize = 192;
     static const String genres[] = {
       "Blues",
       "Classic Rock",
@@ -179,7 +179,51 @@ namespace TagLib {
       "Thrash Metal",
       "Anime",
       "Jpop",
-      "Synthpop"
+      "Synthpop",
+      "Abstract",
+      "Art Rock",
+      "Baroque",
+      "Bhangra",
+      "Big Beat",
+      "Breakbeat",
+      "Chillout",
+      "Downtempo",
+      "Dub",
+      "EBM",
+      "Eclectic",
+      "Electro",
+      "Electroclash",
+      "Emo",
+      "Experimental",
+      "Garage",
+      "Global",
+      "IDM",
+      "Illbient",
+      "Industro-Goth",
+      "Jam Band",
+      "Krautrock",
+      "Leftfield",
+      "Lounge",
+      "Math Rock",
+      "New Romantic",
+      "Nu-Breakz",
+      "Post-Punk",
+      "Post-Rock",
+      "Psytrance",
+      "Shoegaze",
+      "Space Rock",
+      "Trop Rock",
+      "World Music",
+      "Neoclassical",
+      "Audiobook",
+      "Audio Theatre",
+      "Neue Deutsche Welle",
+      "Podcast",
+      "Indie Rock",
+      "G-Funk",
+      "Dubstep",
+      "Garage Rock",
+      "Psybient"
     };
   }
 }

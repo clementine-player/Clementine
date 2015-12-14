@@ -72,7 +72,7 @@ namespace TagLib {
 
     /*!
      * Destroys this List instance.  If auto deletion is enabled and this list
-     * contains a pointer type all of the memebers are also deleted.
+     * contains a pointer type all of the members are also deleted.
      */
     virtual ~List();
 

@@ -38,6 +38,7 @@
 #include "internet/amazon/amazonurlhandler.h"
 #include "library/librarybackend.h"
 #include "ui/settingsdialog.h"
+#include "ui/iconloader.h"
 
 using std::chrono::seconds;
 using std::placeholders::_1;
@@ -63,7 +64,7 @@ static const char* kDownloadEndpoint = "%1/nodes/%2/content";
 
 AmazonCloudDrive::AmazonCloudDrive(Application* app, InternetModel* parent)
     : CloudFileService(app, parent, kServiceName, kServiceId,
-                       QIcon(":/providers/amazonclouddrive.png"),
+                       IconLoader::Load("amazonclouddrive", IconLoader::Provider),
                        SettingsDialog::Page_AmazonCloudDrive),
       network_(new NetworkAccessManager(this)) {
   app->player()->RegisterUrlHandler(new AmazonUrlHandler(this, this));

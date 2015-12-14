@@ -97,7 +97,7 @@ namespace TagLib {
        * Sets the title to \a title.  If \a title is String::null then this
        * value will be cleared.
        *
-       * The length limits per file type are (1 characetr = 1 byte):
+       * The length limits per file type are (1 character = 1 byte):
        * Mod 20 characters, S3M 27 characters, IT 25 characters and XM 20
        * characters.
        */
@@ -126,7 +126,7 @@ namespace TagLib {
        * an thus the line length in comments are limited. Too big comments
        * will be truncated.
        *
-       * The line length limits per file type are (1 characetr = 1 byte):
+       * The line length limits per file type are (1 character = 1 byte):
        * Mod 22 characters, S3M 27 characters, IT 25 characters and XM 22
        * characters.
        */
@@ -169,7 +169,7 @@ namespace TagLib {
        * Implements the unified property interface -- import function.
        * Because of the limitations of the module file tag, any tags besides
        * COMMENT, TITLE and, if it is an XM file, TRACKERNAME, will be
-       * returened. Additionally, if the map contains tags with multiple values,
+       * returned. Additionally, if the map contains tags with multiple values,
        * all but the first will be contained in the returned map of unsupported
        * properties.
        */

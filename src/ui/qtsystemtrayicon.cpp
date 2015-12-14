@@ -37,8 +37,8 @@ QtSystemTrayIcon::QtSystemTrayIcon(QObject* parent)
       action_stop_after_this_track_(nullptr),
       action_mute_(nullptr),
       action_love_(nullptr) {
-  QIcon theme_icon = IconLoader::Load("clementine-panel");
-  QIcon theme_icon_grey = IconLoader::Load("clementine-panel-grey");
+  QIcon theme_icon = IconLoader::Load("clementine-panel", IconLoader::Base);
+  QIcon theme_icon_grey = IconLoader::Load("clementine-panel-grey", IconLoader::Base);
 
   if (theme_icon.isNull() || theme_icon_grey.isNull()) {
     // Load the default icon
@@ -160,7 +160,7 @@ void QtSystemTrayIcon::SetPaused() {
 
   action_stop_->setEnabled(true);
   action_stop_after_this_track_->setEnabled(true);
-  action_play_pause_->setIcon(IconLoader::Load("media-playback-start"));
+  action_play_pause_->setIcon(IconLoader::Load("media-playback-start", IconLoader::Base));
   action_play_pause_->setText(tr("Play"));
 
   action_play_pause_->setEnabled(true);
@@ -171,7 +171,7 @@ void QtSystemTrayIcon::SetPlaying(bool enable_play_pause, bool enable_love) {
 
   action_stop_->setEnabled(true);
   action_stop_after_this_track_->setEnabled(true);
-  action_play_pause_->setIcon(IconLoader::Load("media-playback-pause"));
+  action_play_pause_->setIcon(IconLoader::Load("media-playback-pause", IconLoader::Base));
   action_play_pause_->setText(tr("Pause"));
   action_play_pause_->setEnabled(enable_play_pause);
 #ifdef HAVE_LIBLASTFM
@@ -184,7 +184,7 @@ void QtSystemTrayIcon::SetStopped() {
 
   action_stop_->setEnabled(false);
   action_stop_after_this_track_->setEnabled(false);
-  action_play_pause_->setIcon(IconLoader::Load("media-playback-start"));
+  action_play_pause_->setIcon(IconLoader::Load("media-playback-start", IconLoader::Base));
   action_play_pause_->setText(tr("Play"));
 
   action_play_pause_->setEnabled(true);

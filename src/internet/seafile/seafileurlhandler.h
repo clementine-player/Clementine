@@ -20,6 +20,7 @@
 #define INTERNET_SEAFILE_SEAFILEURLHANDLER_H_
 
 #include "core/urlhandler.h"
+#include "ui/iconloader.h"
 
 class SeafileService;
 
@@ -29,7 +30,7 @@ class SeafileUrlHandler : public UrlHandler {
   explicit SeafileUrlHandler(SeafileService* service, QObject* parent = nullptr);
 
   QString scheme() const { return "seafile"; }
-  QIcon icon() const { return QIcon(":/providers/seafile.png"); }
+  QIcon icon() const { return IconLoader::Load("seafile", IconLoader::Provider); }
   LoadResult StartLoading(const QUrl& url);
 
  private:

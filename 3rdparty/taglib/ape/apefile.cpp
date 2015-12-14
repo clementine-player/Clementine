@@ -36,6 +36,7 @@
 #include <tdebug.h>
 #include <tagunion.h>
 #include <id3v1tag.h>
+#include <id3v2header.h>
 #include <tpropertymap.h>
 
 #include "apefile.h"
@@ -57,12 +58,17 @@ public:
     APELocation(-1),
     APESize(0),
     ID3v1Location(-1),
+    ID3v2Header(0),
+    ID3v2Location(-1),
+    ID3v2Size(0),
     properties(0),
     hasAPE(false),
-    hasID3v1(false) {}
+    hasID3v1(false),
+    hasID3v2(false) {}
 
   ~FilePrivate()
   {
+    delete ID3v2Header;
     delete properties;
   }
 
@@ -70,6 +76,10 @@ public:
   uint APESize;
 
   long ID3v1Location;
+
+  ID3v2::Header *ID3v2Header;
+  long ID3v2Location;
+  uint ID3v2Size;
 
   TagUnion tag;
 
@@ -80,26 +90,27 @@ public:
 
   bool hasAPE;
   bool hasID3v1;
+  bool hasID3v2;
 };
 
 ////////////////////////////////////////////////////////////////////////////////
 // public members
 ////////////////////////////////////////////////////////////////////////////////
 
-APE::File::File(FileName file, bool readProperties,
-                Properties::ReadStyle propertiesStyle) : TagLib::File(file)
+APE::File::File(FileName file, bool readProperties, Properties::ReadStyle) :
+  TagLib::File(file),
+  d(new FilePrivate())
 {
-  d = new FilePrivate;
   if(isOpen())
-    read(readProperties, propertiesStyle);
+    read(readProperties);
 }
 
-APE::File::File(IOStream *stream, bool readProperties,
-                Properties::ReadStyle propertiesStyle) : TagLib::File(stream)
+APE::File::File(IOStream *stream, bool readProperties, Properties::ReadStyle) :
+  TagLib::File(stream),
+  d(new FilePrivate())
 {
-  d = new FilePrivate;
   if(isOpen())
-    read(readProperties, propertiesStyle);
+    read(readProperties);
 }
 
 APE::File::~File()
@@ -249,8 +260,19 @@ bool APE::File::hasID3v1Tag() const
 // private members
 ////////////////////////////////////////////////////////////////////////////////
 
-void APE::File::read(bool readProperties, Properties::ReadStyle /* propertiesStyle */)
+void APE::File::read(bool readProperties)
 {
+  // Look for an ID3v2 tag
+
+  d->ID3v2Location = findID3v2();
+
+  if(d->ID3v2Location >= 0) {
+    seek(d->ID3v2Location);
+    d->ID3v2Header = new ID3v2::Header(readBlock(ID3v2::Header::size()));
+    d->ID3v2Size = d->ID3v2Header->completeTagSize();
+    d->hasID3v2 = true;
+  }
+
   // Look for an ID3v1 tag
 
   d->ID3v1Location = findID3v1();
@@ -277,7 +299,25 @@ void APE::File::read(bool readProperties, Properties::ReadStyle /* propertiesSty
   // Look for APE audio properties
 
   if(readProperties) {
-    d->properties = new Properties(this);
+
+    long streamLength;
+
+    if(d->hasAPE)
+      streamLength = d->APELocation;
+    else if(d->hasID3v1)
+      streamLength = d->ID3v1Location;
+    else
+      streamLength = length();
+
+    if(d->hasID3v2) {
+      seek(d->ID3v2Location + d->ID3v2Size);
+      streamLength -= (d->ID3v2Location + d->ID3v2Size);
+    }
+    else {
+      seek(0);
+    }
+
+    d->properties = new Properties(this, streamLength);
   }
 }
 
@@ -309,6 +349,19 @@ long APE::File::findID3v1()
 
   if(readBlock(3) == ID3v1::Tag::fileIdentifier())
     return p;
+
+  return -1;
+}
+
+long APE::File::findID3v2()
+{
+  if(!isValid())
+    return -1;
+
+  seek(0);
+
+  if(readBlock(3) == ID3v2::Header::fileIdentifier())
+    return 0;
 
   return -1;
 }

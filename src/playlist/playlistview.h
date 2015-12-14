@@ -142,7 +142,9 @@ signals:
 
  private slots:
   void LoadGeometry();
+  void LoadRatingLockStatus();
   void SaveGeometry();
+  void SetRatingLockStatus(bool state);
   void GlowIntensityChanged();
   void InhibitAutoscrollTimeout();
   void MaybeAutoscroll();
@@ -243,6 +245,8 @@ signals:
   QPixmap cached_tree_;
   int drop_indicator_row_;
   bool drag_over_;
+
+  bool ratings_locked_; // To store Ratings section lock status
 
   DynamicPlaylistControls* dynamic_controls_;
 

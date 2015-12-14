@@ -15,25 +15,24 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "config.h"
-#include "songinfoprovider.h"
-#include "songinfoview.h"
-#include "taglyricsinfoprovider.h"
-#include "ultimatelyricsprovider.h"
-#include "ultimatelyricsreader.h"
-
-#ifdef HAVE_LIBLASTFM
-#include "lastfmtrackinfoprovider.h"
-#endif
+#include "songinfo/songinfoview.h"
 
 #include <QFuture>
-#include <QFutureWatcher>
 #include <QSettings>
 #include <QtConcurrentRun>
 
-const char* SongInfoView::kSettingsGroup = "SongInfo";
+#include "config.h"
+#include "core/closure.h"
+#include "songinfo/songinfoprovider.h"
+#include "songinfo/taglyricsinfoprovider.h"
+#include "songinfo/ultimatelyricsprovider.h"
+#include "songinfo/ultimatelyricsreader.h"
 
-typedef QList<SongInfoProvider*> ProviderList;
+#ifdef HAVE_LIBLASTFM
+#include "songinfo/lastfmtrackinfoprovider.h"
+#endif
+
+const char* SongInfoView::kSettingsGroup = "SongInfo";
 
 SongInfoView::SongInfoView(QWidget* parent)
     : SongInfoBase(parent), ultimate_reader_(new UltimateLyricsReader(this)) {
@@ -41,10 +40,8 @@ SongInfoView::SongInfoView(QWidget* parent)
   QFuture<ProviderList> future =
       QtConcurrent::run(ultimate_reader_.get(), &UltimateLyricsReader::Parse,
                         QString(":lyrics/ultimate_providers.xml"));
-  QFutureWatcher<ProviderList>* watcher =
-      new QFutureWatcher<ProviderList>(this);
-  watcher->setFuture(future);
-  connect(watcher, SIGNAL(finished()), SLOT(UltimateLyricsParsed()));
+  NewClosure(future, this, SLOT(UltimateLyricsParsed(QFuture<ProviderList>)),
+             future);
 
 #ifdef HAVE_LIBLASTFM
   fetcher_->AddProvider(new LastfmTrackInfoProvider);
@@ -54,15 +51,11 @@ SongInfoView::SongInfoView(QWidget* parent)
 
 SongInfoView::~SongInfoView() {}
 
-void SongInfoView::UltimateLyricsParsed() {
-  QFutureWatcher<ProviderList>* watcher =
-      static_cast<QFutureWatcher<ProviderList>*>(sender());
-
-  for (SongInfoProvider* provider : watcher->result()) {
+void SongInfoView::UltimateLyricsParsed(QFuture<ProviderList> future) {
+  for (SongInfoProvider* provider : future.result()) {
     fetcher_->AddProvider(provider);
   }
 
-  watcher->deleteLater();
   ultimate_reader_.reset();
 
   ReloadSettings();

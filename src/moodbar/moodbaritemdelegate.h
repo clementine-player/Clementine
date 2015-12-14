@@ -21,8 +21,8 @@
 #include "moodbarrenderer.h"
 
 #include <QCache>
+#include <QFuture>
 #include <QItemDelegate>
-#include <QFutureWatcher>
 #include <QUrl>
 
 class Application;
@@ -45,8 +45,8 @@ class MoodbarItemDelegate : public QItemDelegate {
   void ReloadSettings();
 
   void DataLoaded(const QUrl& url, MoodbarPipeline* pipeline);
-  void ColorsLoaded(const QUrl& url, QFutureWatcher<ColorVector>* watcher);
-  void ImageLoaded(const QUrl& url, QFutureWatcher<QImage>* watcher);
+  void ColorsLoaded(const QUrl& url, QFuture<ColorVector> future);
+  void ImageLoaded(const QUrl& url, QFuture<QImage> future);
 
  private:
   struct Data {

@@ -31,6 +31,7 @@
 #include "magnatuneservice.h"
 #include "internet/core/internetmodel.h"
 #include "ui_magnatunesettingspage.h"
+#include "ui/iconloader.h"
 
 MagnatuneSettingsPage::MagnatuneSettingsPage(SettingsDialog* dialog)
     : SettingsPage(dialog),
@@ -38,7 +39,7 @@ MagnatuneSettingsPage::MagnatuneSettingsPage(SettingsDialog* dialog)
       ui_(new Ui_MagnatuneSettingsPage),
       logged_in_(false) {
   ui_->setupUi(this);
-  setWindowIcon(QIcon(":/providers/magnatune.png"));
+  setWindowIcon(IconLoader::Load("magnatune", IconLoader::Provider));
 
   connect(ui_->membership, SIGNAL(currentIndexChanged(int)),
           SLOT(MembershipChanged(int)));

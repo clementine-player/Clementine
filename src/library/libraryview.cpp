@@ -62,8 +62,6 @@ void LibraryItemDelegate::paint(QPainter* painter,
     QString text(index.data().toString());
 
     painter->save();
-    painter->setRenderHint(QPainter::Antialiasing);
-    painter->setRenderHint(QPainter::HighQualityAntialiasing);
 
     QRect text_rect(opt.rect);
 
@@ -91,42 +89,30 @@ void LibraryItemDelegate::paint(QPainter* painter,
 
       painter->drawPixmap(icon_rect, pixmap);
     } else {
-      text_rect.setLeft(text_rect.right() - (text_rect.height() + 10));
-      text_rect.setWidth(text_rect.height());
-    }
-
-    QRect highlight_rect;
-    QFont norm_font(opt.font);
-    QColor highlight_color(opt.palette.color(QPalette::Text));
-    highlight_color.setAlpha(200);
-    QBrush brush(highlight_color, Qt::SolidPattern);
-    painter->setPen(QColor(0, 0, 0, 0));
-    painter->setBrush(brush);
-    
-    // Draw text highlight fill
-    if (text.length() == 1) {
-      highlight_rect = text_rect;
-      highlight_rect.setWidth(text_rect.width() - 1);
-      highlight_rect.setHeight(text_rect.height() - 1);
-      highlight_rect.setLeft(text_rect.left() + 1);
-      highlight_rect.setTop(text_rect.top() + 1);
-      painter->drawEllipse(highlight_rect);
-    } else {
-      QFontMetrics fm(norm_font);
-      text_rect.setLeft(text_rect.right() - (fm.width(text) + 22));
-      text_rect.setWidth(fm.width(text) + 12);
-      highlight_rect = text_rect;
-      highlight_rect.setWidth(text_rect.width() - 1);
-      highlight_rect.setHeight(text_rect.height() - 1);
-      highlight_rect.setLeft(text_rect.left() + 1);
-      highlight_rect.setTop(text_rect.top() + 1);
-      painter->fillRect(highlight_rect, brush);
+      text_rect.setLeft(text_rect.left() + 30);
     }
 
     // Draw the text
-    painter->setPen(opt.palette.color(QPalette::Window));
-    painter->setFont(norm_font);
-    painter->drawText(text_rect, text, Qt::AlignVCenter | Qt::AlignHCenter);
+    QFont bold_font(opt.font);
+    bold_font.setBold(true);
+
+    painter->setPen(opt.palette.color(QPalette::Text));
+    painter->setFont(bold_font);
+    painter->drawText(text_rect, text);
+
+    // Draw the line under the item
+    QColor line_color = opt.palette.color(QPalette::Text);
+    QLinearGradient grad_color(opt.rect.bottomLeft(), opt.rect.bottomRight());
+    const double fade_start_end = (opt.rect.width()/3.0)/opt.rect.width();
+    line_color.setAlphaF(0.0);
+    grad_color.setColorAt(0, line_color);
+    line_color.setAlphaF(0.5);
+    grad_color.setColorAt(fade_start_end, line_color);
+    grad_color.setColorAt(1.0 - fade_start_end, line_color);
+    line_color.setAlphaF(0.0);
+    grad_color.setColorAt(1, line_color);
+    painter->setPen(QPen(grad_color, 1));
+    painter->drawLine(opt.rect.bottomLeft(), opt.rect.bottomRight());
 
     painter->restore();
   } else {
@@ -199,6 +185,7 @@ LibraryView::LibraryView(QWidget* parent)
   setSelectionMode(QAbstractItemView::ExtendedSelection);
 
   setStyleSheet("QTreeView::item{padding-top:1px;}");
+  setAnimated(true);
 }
 
 LibraryView::~LibraryView() {}
@@ -387,52 +374,53 @@ void LibraryView::contextMenuEvent(QContextMenuEvent* e) {
   if (!context_menu_) {
     context_menu_ = new QMenu(this);
     add_to_playlist_ = context_menu_->addAction(
-        IconLoader::Load("media-playback-start"),
+        IconLoader::Load("media-playback-start", IconLoader::Base),
         tr("Append to current playlist"), this, SLOT(AddToPlaylist()));
-    load_ = context_menu_->addAction(IconLoader::Load("media-playback-start"),
-                                     tr("Replace current playlist"), this,
-                                     SLOT(Load()));
+    load_ = context_menu_->addAction(
+        IconLoader::Load("media-playback-start", IconLoader::Base),
+        tr("Replace current playlist"), this, SLOT(Load()));
     open_in_new_playlist_ = context_menu_->addAction(
-        IconLoader::Load("document-new"), tr("Open in new playlist"), this,
-        SLOT(OpenInNewPlaylist()));
+        IconLoader::Load("document-new", IconLoader::Base), 
+        tr("Open in new playlist"), this, SLOT(OpenInNewPlaylist()));
 
     context_menu_->addSeparator();
     add_to_playlist_enqueue_ =
-        context_menu_->addAction(IconLoader::Load("go-next"), tr("Queue track"),
-                                 this, SLOT(AddToPlaylistEnqueue()));
+        context_menu_->addAction(IconLoader::Load("go-next", IconLoader::Base), 
+                                 tr("Queue track"), this, 
+                                 SLOT(AddToPlaylistEnqueue()));
 
     context_menu_->addSeparator();
     new_smart_playlist_ = context_menu_->addAction(
-        IconLoader::Load("document-new"), tr("New smart playlist..."), this,
-        SLOT(NewSmartPlaylist()));
+        IconLoader::Load("document-new", IconLoader::Base), 
+        tr("New smart playlist..."), this, SLOT(NewSmartPlaylist()));
     edit_smart_playlist_ = context_menu_->addAction(
-        IconLoader::Load("edit-rename"), tr("Edit smart playlist..."), this,
-        SLOT(EditSmartPlaylist()));
+        IconLoader::Load("edit-rename", IconLoader::Base), 
+        tr("Edit smart playlist..."), this, SLOT(EditSmartPlaylist()));
     delete_smart_playlist_ = context_menu_->addAction(
-        IconLoader::Load("edit-delete"), tr("Delete smart playlist"), this,
-        SLOT(DeleteSmartPlaylist()));
+        IconLoader::Load("edit-delete", IconLoader::Base), 
+        tr("Delete smart playlist"), this, SLOT(DeleteSmartPlaylist()));
 
     context_menu_->addSeparator();
-    organise_ = context_menu_->addAction(IconLoader::Load("edit-copy"),
+    organise_ = context_menu_->addAction(IconLoader::Load("edit-copy", IconLoader::Base),
                                          tr("Organise files..."), this,
                                          SLOT(Organise()));
     copy_to_device_ = context_menu_->addAction(
-        IconLoader::Load("multimedia-player-ipod-mini-blue"),
+        IconLoader::Load("multimedia-player-ipod-mini-blue", IconLoader::Base),
         tr("Copy to device..."), this, SLOT(CopyToDevice()));
-    delete_ = context_menu_->addAction(IconLoader::Load("edit-delete"),
+    delete_ = context_menu_->addAction(IconLoader::Load("edit-delete", IconLoader::Base),
                                        tr("Delete from disk..."), this,
                                        SLOT(Delete()));
 
     context_menu_->addSeparator();
-    edit_track_ = context_menu_->addAction(IconLoader::Load("edit-rename"),
+    edit_track_ = context_menu_->addAction(IconLoader::Load("edit-rename", IconLoader::Base),
                                            tr("Edit track information..."),
                                            this, SLOT(EditTracks()));
-    edit_tracks_ = context_menu_->addAction(IconLoader::Load("edit-rename"),
+    edit_tracks_ = context_menu_->addAction(IconLoader::Load("edit-rename", IconLoader::Base),
                                             tr("Edit tracks information..."),
                                             this, SLOT(EditTracks()));
     show_in_browser_ = context_menu_->addAction(
-        IconLoader::Load("document-open-folder"), tr("Show in file browser..."),
-        this, SLOT(ShowInBrowser()));
+        IconLoader::Load("document-open-folder", IconLoader::Base), 
+        tr("Show in file browser..."), this, SLOT(ShowInBrowser()));
 
     context_menu_->addSeparator();
     show_in_various_ = context_menu_->addAction(tr("Show in various artists"),

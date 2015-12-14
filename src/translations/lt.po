@@ -12,8 +12,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2015-08-17 13:03+0000\n"
-"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
+"PO-Revision-Date: 2015-11-21 19:16+0000\n"
+"Last-Translator: Moo\n"
 "Language-Team: Lithuanian (http://www.transifex.com/davidsansome/clementine/language/lt/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -55,7 +55,7 @@ msgstr " ms"
 msgid " pt"
 msgstr " pt"
 
-#: ../bin/src/ui_behavioursettingspage.h:374
+#: ../bin/src/ui_behavioursettingspage.h:359
 msgid " s"
 msgstr " s"
 
@@ -78,12 +78,12 @@ msgstr "%1 (%2 dainos)"
 msgid "%1 albums"
 msgstr "%1 albumų"
 
-#: core/utilities.cpp:119
+#: core/utilities.cpp:120
 #, qt-format
 msgid "%1 days"
 msgstr "%1 dienų"
 
-#: core/utilities.cpp:138
+#: core/utilities.cpp:139
 #, qt-format
 msgid "%1 days ago"
 msgstr "prieš %1 dienų"
@@ -171,11 +171,11 @@ msgctxt ""
 msgid "%n remaining"
 msgstr "%n pervadinama"
 
-#: playlist/playlistheader.cpp:37
+#: playlist/playlistheader.cpp:45
 msgid "&Align text"
 msgstr "&Lygiuoti tekstą"
 
-#: playlist/playlistheader.cpp:40
+#: playlist/playlistheader.cpp:48
 msgid "&Center"
 msgstr "&Centras"
 
@@ -191,18 +191,22 @@ msgstr "P&apildomai"
 msgid "&Help"
 msgstr "&Pagalba"
 
-#: playlist/playlistheader.cpp:73
+#: playlist/playlistheader.cpp:81
 #, qt-format
 msgid "&Hide %1"
 msgstr "&Slėpti %1"
 
-#: playlist/playlistheader.cpp:32
+#: playlist/playlistheader.cpp:33
 msgid "&Hide..."
 msgstr "&Paslėpti..."
 
-#: playlist/playlistheader.cpp:39
+#: playlist/playlistheader.cpp:47
 msgid "&Left"
 msgstr "&Kairė"
+
+#: playlist/playlistheader.cpp:36
+msgid "&Lock Rating"
+msgstr ""
 
 #: ../bin/src/ui_mainwindow.h:718
 msgid "&Music"
@@ -224,7 +228,7 @@ msgstr "&Baigti"
 msgid "&Repeat mode"
 msgstr "Kartojimo režimas"
 
-#: playlist/playlistheader.cpp:41
+#: playlist/playlistheader.cpp:49
 msgid "&Right"
 msgstr "&Dešinė"
 
@@ -232,7 +236,7 @@ msgstr "&Dešinė"
 msgid "&Shuffle mode"
 msgstr "Maišymo veiksena"
 
-#: playlist/playlistheader.cpp:33
+#: playlist/playlistheader.cpp:34
 msgid "&Stretch columns to fit window"
 msgstr "&Ištempti stulpelius, kad užpildytų langą"
 
@@ -244,7 +248,7 @@ msgstr "Įrankiai"
 msgid "(different across multiple songs)"
 msgstr "(skirtinga daugelyje dainų)"
 
-#: internet/spotify/spotifyservice.cpp:465
+#: internet/spotify/spotifyservice.cpp:468
 msgid ", by "
 msgstr ", pagal "
 
@@ -264,7 +268,7 @@ msgstr "0:00:00"
 msgid "0px"
 msgstr "0px"
 
-#: core/utilities.cpp:119
+#: core/utilities.cpp:120
 msgid "1 day"
 msgstr "1 diena"
 
@@ -407,7 +411,7 @@ msgid "About Qt..."
 msgstr "Apie Qt..."
 
 #: playlist/playlistsaveoptionsdialog.cpp:34
-#: ../bin/src/ui_behavioursettingspage.h:378
+#: ../bin/src/ui_behavioursettingspage.h:363
 msgid "Absolute"
 msgstr "Absoliutūs"
 
@@ -431,15 +435,15 @@ msgctxt "Category label"
 msgid "Action"
 msgstr "Veiksmas"
 
-#: wiimotedev/wiimotesettingspage.cpp:96
+#: wiimotedev/wiimotesettingspage.cpp:97
 msgid "Active/deactive Wiiremote"
 msgstr "Aktyvuoti/Deaktyvuoti Wii pultą"
 
-#: internet/soundcloud/soundcloudservice.cpp:125
+#: internet/soundcloud/soundcloudservice.cpp:127
 msgid "Activities stream"
 msgstr "Aktyvumo srautas"
 
-#: internet/podcasts/addpodcastdialog.cpp:62
+#: internet/podcasts/addpodcastdialog.cpp:63
 msgid "Add Podcast"
 msgstr "Pridėti srautą"
 
@@ -459,7 +463,7 @@ msgstr "Pridėti veiksmą"
 msgid "Add all tracks from a directory and all its subdirectories"
 msgstr "Pridėti visus takelius iš katalogo ir visų jo vidinių katalogų"
 
-#: internet/internetradio/savedradio.cpp:112
+#: internet/internetradio/savedradio.cpp:114
 msgid "Add another stream..."
 msgstr "Pridėti kitą srautą..."
 
@@ -467,7 +471,7 @@ msgstr "Pridėti kitą srautą..."
 msgid "Add directory..."
 msgstr "Pridėti nuorodą..."
 
-#: ui/mainwindow.cpp:1931
+#: ui/mainwindow.cpp:1914
 msgid "Add file"
 msgstr "Pridėti  failą"
 
@@ -487,7 +491,7 @@ msgstr "Pridėti failą..."
 msgid "Add files to transcode"
 msgstr "Pridėti failus perkodavimui"
 
-#: transcoder/transcodedialog.cpp:306 ui/mainwindow.cpp:1958
+#: transcoder/transcodedialog.cpp:306 ui/mainwindow.cpp:1941
 #: ripper/ripcddialog.cpp:185
 msgid "Add folder"
 msgstr "Pridėti aplankalą"
@@ -504,7 +508,7 @@ msgstr "Pridėti naują aplankalą..."
 msgid "Add podcast"
 msgstr "Pridėti srautą"
 
-#: internet/podcasts/podcastservice.cpp:416 ../bin/src/ui_mainwindow.h:708
+#: internet/podcasts/podcastservice.cpp:418 ../bin/src/ui_mainwindow.h:708
 msgid "Add podcast..."
 msgstr "Pridėti srautą..."
 
@@ -572,7 +576,7 @@ msgstr "Nustatyti kūrinio prametimų skaičių"
 msgid "Add song title tag"
 msgstr "Pridėti žymę kūrinio pavadinimui"
 
-#: internet/vk/vkservice.cpp:329
+#: internet/vk/vkservice.cpp:333
 msgid "Add song to cache"
 msgstr "Pridėti dainą į talpyklą"
 
@@ -586,29 +590,29 @@ msgstr "Pridėti žymę kūrionio metams"
 
 #: ../bin/src/ui_vksettingspage.h:221
 msgid "Add songs to \"My Music\" when the \"Love\" button is clicked"
-msgstr "Pridėti dainas į Mano Muziką, kai paspaudžiamas mygtukas \"Myliu\""
+msgstr "Pridėti dainas į Mano Muziką, kai paspaudžiamas mygtukas \"Patinka\""
 
 #: ../bin/src/ui_mainwindow.h:672
 msgid "Add stream..."
 msgstr "Pridėti srautą..."
 
-#: internet/vk/vkservice.cpp:321
+#: internet/vk/vkservice.cpp:325
 msgid "Add to My Music"
 msgstr "Pridėti į Mano Muziką"
 
-#: internet/spotify/spotifyservice.cpp:617
+#: internet/spotify/spotifyservice.cpp:621
 msgid "Add to Spotify playlists"
 msgstr "Pridėti į Spotify grojaraščius"
 
-#: internet/spotify/spotifyservice.cpp:610
+#: internet/spotify/spotifyservice.cpp:613
 msgid "Add to Spotify starred"
 msgstr "Pridėti į Spotify pažymėtus"
 
-#: ui/mainwindow.cpp:1752
+#: ui/mainwindow.cpp:1735
 msgid "Add to another playlist"
 msgstr "Pridėti prie kito grojaraščio"
 
-#: internet/vk/vkservice.cpp:307
+#: internet/vk/vkservice.cpp:309
 msgid "Add to bookmarks"
 msgstr "Pridėti į adresyną"
 
@@ -616,12 +620,12 @@ msgstr "Pridėti į adresyną"
 msgid "Add to playlist"
 msgstr "Įdėti į grojaraštį"
 
-#: ../bin/src/ui_behavioursettingspage.h:350
-#: ../bin/src/ui_behavioursettingspage.h:362
+#: ../bin/src/ui_behavioursettingspage.h:343
+#: ../bin/src/ui_behavioursettingspage.h:355
 msgid "Add to the queue"
 msgstr "Įdėti į eilę"
 
-#: internet/vk/vkservice.cpp:337
+#: internet/vk/vkservice.cpp:342
 msgid "Add user/group to bookmarks"
 msgstr "Pridėti vartotoją/grupę į adresyną"
 
@@ -689,11 +693,11 @@ msgstr "Albumo atlikėjas"
 msgid "Album cover"
 msgstr "Albumo viršelis"
 
-#: internet/jamendo/jamendoservice.cpp:427
+#: internet/jamendo/jamendoservice.cpp:429
 msgid "Album info on jamendo.com..."
 msgstr "Albumo info iš jamendo.com..."
 
-#: internet/vk/vkservice.cpp:836
+#: internet/vk/vkservice.cpp:846
 msgid "Albums"
 msgstr "Albumai"
 
@@ -759,17 +763,16 @@ msgstr "Įgalinti vidurinį/šoninį kodavimą"
 msgid "Alongside the originals"
 msgstr "Kartu su originalais"
 
-#: ../bin/src/ui_behavioursettingspage.h:323
+#: ../bin/src/ui_behavioursettingspage.h:316
 msgid "Always hide the main window"
 msgstr "Visada slėpti pagrindinį langą"
 
-#: ../bin/src/ui_behavioursettingspage.h:322
+#: ../bin/src/ui_behavioursettingspage.h:315
 msgid "Always show the main window"
 msgstr "Visada rodyti pagrindinį langą"
 
-#: ../bin/src/ui_behavioursettingspage.h:336
-#: ../bin/src/ui_behavioursettingspage.h:356
-#: ../bin/src/ui_behavioursettingspage.h:370
+#: ../bin/src/ui_behavioursettingspage.h:329
+#: ../bin/src/ui_behavioursettingspage.h:349
 msgid "Always start playing"
 msgstr "Visada pradėti grojant"
 
@@ -787,12 +790,12 @@ msgstr "Kad naudotumėte Spotify Clementine grotuve, jums reikia papildomo išpl
 msgid "An error occurred loading the iTunes database"
 msgstr "Iškilo klaida įkeliant iTunes duomenų bazę"
 
-#: ui/edittagdialog.cpp:695
+#: ui/edittagdialog.cpp:698
 #, qt-format
 msgid "An error occurred writing metadata to '%1'"
 msgstr "Klaida rašant meta duomenis į '%1'"
 
-#: internet/subsonic/subsonicsettingspage.cpp:123
+#: internet/subsonic/subsonicsettingspage.cpp:124
 msgid "An unspecified error occurred."
 msgstr "Įvyko nežinoma klaida."
 
@@ -814,13 +817,13 @@ msgstr "Išvaizda"
 msgid "Append files/URLs to the playlist"
 msgstr "Įterpti failus/URL į grojaraštį"
 
-#: devices/deviceview.cpp:216 globalsearch/globalsearchview.cpp:453
-#: internet/core/internetservice.cpp:80 library/libraryview.cpp:391
+#: devices/deviceview.cpp:218 globalsearch/globalsearchview.cpp:453
+#: internet/core/internetservice.cpp:81 library/libraryview.cpp:372
 #: widgets/fileviewlist.cpp:31
 msgid "Append to current playlist"
 msgstr "Įterpti į esamą grojaraštį"
 
-#: ../bin/src/ui_behavioursettingspage.h:347
+#: ../bin/src/ui_behavioursettingspage.h:340
 msgid "Append to the playlist"
 msgstr "Įterpti į grojaraštį"
 
@@ -833,7 +836,7 @@ msgstr "Pritaikyti suspaudimą, kad išvengti nukirtimų"
 msgid "Are you sure you want to delete the \"%1\" preset?"
 msgstr "Ar tikrai norite ištrinti \"%1\" šabloną?"
 
-#: ui/edittagdialog.cpp:801
+#: ui/edittagdialog.cpp:804
 msgid "Are you sure you want to reset this song's statistics?"
 msgstr "Ar tikrai norite atstatyti šios dainos statistiką?"
 
@@ -856,7 +859,7 @@ msgstr "Atlikėjas"
 msgid "Artist info"
 msgstr "Atlikėjo info"
 
-#: songinfo/echonesttags.cpp:61
+#: songinfo/echonesttags.cpp:62
 msgid "Artist tags"
 msgstr "Atlikėjo žymės"
 
@@ -864,7 +867,7 @@ msgstr "Atlikėjo žymės"
 msgid "Artist's initial"
 msgstr "Atlikėjo inicialai"
 
-#: ../bin/src/ui_behavioursettingspage.h:380
+#: ../bin/src/ui_behavioursettingspage.h:365
 msgid "Ask when saving"
 msgstr "Klausti išsaugant"
 
@@ -878,8 +881,8 @@ msgstr "Audio formatas"
 msgid "Audio output"
 msgstr "Audio išvestis"
 
-#: internet/digitally/digitallyimportedsettingspage.cpp:83
-#: internet/magnatune/magnatunesettingspage.cpp:116
+#: internet/digitally/digitallyimportedsettingspage.cpp:84
+#: internet/magnatune/magnatunesettingspage.cpp:117
 #: internet/lastfm/lastfmservice.cpp:228
 #: internet/lastfm/lastfmsettingspage.cpp:84
 msgid "Authentication failed"
@@ -899,7 +902,7 @@ msgid "Auto"
 msgstr "Automatiškai"
 
 #: playlist/playlistsaveoptionsdialog.cpp:32
-#: ../bin/src/ui_behavioursettingspage.h:377
+#: ../bin/src/ui_behavioursettingspage.h:362
 msgid "Automatic"
 msgstr "Automatiniai"
 
@@ -923,7 +926,7 @@ msgstr "Vidutinis bitų dažnis"
 msgid "Average image size"
 msgstr "Vidutinis paveikslo dydis"
 
-#: internet/podcasts/addpodcastdialog.cpp:87
+#: internet/podcasts/addpodcastdialog.cpp:91
 msgid "BBC Podcasts"
 msgstr "BBC srautas"
 
@@ -972,7 +975,7 @@ msgstr "Įprasta mėlyna"
 msgid "Basic audio type"
 msgstr "Paprastas audio tipas"
 
-#: ../bin/src/ui_behavioursettingspage.h:311
+#: ../bin/src/ui_behavioursettingspage.h:304
 msgid "Behavior"
 msgstr "Elgsena"
 
@@ -980,7 +983,7 @@ msgstr "Elgsena"
 msgid "Best"
 msgstr "Geriausias"
 
-#: songinfo/echonestbiographies.cpp:84
+#: songinfo/echonestbiographies.cpp:85
 #, qt-format
 msgid "Biography from %1"
 msgstr "Biografija iš %1"
@@ -1041,7 +1044,7 @@ msgstr "Buferio trukmė"
 msgid "Buffering"
 msgstr "Kaupiamas buferis"
 
-#: internet/seafile/seafileservice.cpp:226
+#: internet/seafile/seafileservice.cpp:227
 msgid "Building Seafile index..."
 msgstr "Kuriamas Seafile indeksas..."
 
@@ -1078,11 +1081,11 @@ msgstr "Talpinama %1"
 msgid "Cancel"
 msgstr "Atšaukti"
 
-#: internet/podcasts/podcastservice.cpp:439
+#: internet/podcasts/podcastservice.cpp:441
 msgid "Cancel download"
 msgstr "Atšaukti atsiuntimą"
 
-#: internet/vk/vkservice.cpp:635
+#: internet/vk/vkservice.cpp:642
 msgid ""
 "Captcha is needed.\n"
 "Try to login into Vk.com with your browser,to fix this problem."
@@ -1108,7 +1111,7 @@ msgstr "Keisti greituką..."
 msgid "Change shuffle mode"
 msgstr "Keisti maišymo režimą"
 
-#: ../bin/src/ui_behavioursettingspage.h:361
+#: ../bin/src/ui_behavioursettingspage.h:354
 msgid "Change the currently playing song"
 msgstr ""
 
@@ -1130,15 +1133,15 @@ msgstr "Mono perklausos nustatymų keitimas suveiks kitoms grojamoms dainoms."
 msgid "Check for new episodes"
 msgstr "Tikrinti, ar nėra naujų epizodų"
 
-#: internet/googledrive/googledriveservice.cpp:220
+#: internet/googledrive/googledriveservice.cpp:221
 msgid "Check for updates"
 msgstr "Tikrinti ar yra atnaujinimų"
 
-#: ui/mainwindow.cpp:742
+#: ui/mainwindow.cpp:747
 msgid "Check for updates..."
 msgstr "Atnaujinimų tikrinimas..."
 
-#: internet/vk/vksettingspage.cpp:98
+#: internet/vk/vksettingspage.cpp:101
 msgid "Choose Vk.com cache directory"
 msgstr "Pasirinkite Vk.com talpyklos katalogą"
 
@@ -1166,7 +1169,7 @@ msgstr "Parinkti iš sąrašo"
 msgid "Choose how the playlist is sorted and how many songs it will contain."
 msgstr "Pasirinkite kaip grojaraštis bus rikiuojamas ir kiek dainų turės"
 
-#: internet/podcasts/podcastsettingspage.cpp:140
+#: internet/podcasts/podcastsettingspage.cpp:143
 msgid "Choose podcast download directory"
 msgstr "Pasirinkite srauto siutimo vietą"
 
@@ -1270,7 +1273,7 @@ msgstr "„Clementine“ nepavyko rasti rezultatų šiam failui"
 msgid "Clementine will find music in:"
 msgstr "Clementine ras muziką:"
 
-#: library/libraryview.cpp:372
+#: library/libraryview.cpp:353
 msgid "Click here to add some music"
 msgstr "Paspauskite čia, kad pridėti muziką"
 
@@ -1354,7 +1357,7 @@ msgstr "Kompozitorius"
 msgid "Configure %1..."
 msgstr "Konfigūruoti %1..."
 
-#: internet/magnatune/magnatuneservice.cpp:290
+#: internet/magnatune/magnatuneservice.cpp:293
 msgid "Configure Magnatune..."
 msgstr "Konfigūruoti „Magnatune“..."
 
@@ -1362,7 +1365,7 @@ msgstr "Konfigūruoti „Magnatune“..."
 msgid "Configure Shortcuts"
 msgstr "Konfigūruoti sparčiuosius klavišus"
 
-#: internet/spotify/spotifyservice.cpp:911
+#: internet/spotify/spotifyservice.cpp:919
 msgid "Configure Spotify..."
 msgstr "Konfigūruoti Spotify..."
 
@@ -1370,7 +1373,7 @@ msgstr "Konfigūruoti Spotify..."
 msgid "Configure Subsonic..."
 msgstr "Konfigūruoti subsonix"
 
-#: internet/vk/vkservice.cpp:346
+#: internet/vk/vkservice.cpp:351
 msgid "Configure Vk.com..."
 msgstr "Konfigūruoti Vk.com..."
 
@@ -1378,18 +1381,18 @@ msgstr "Konfigūruoti Vk.com..."
 msgid "Configure global search..."
 msgstr "Nustatyti visuotinę paiešką..."
 
-#: ui/mainwindow.cpp:592
+#: ui/mainwindow.cpp:594
 msgid "Configure library..."
 msgstr "Konfigūruoti fonoteką..."
 
-#: internet/podcasts/addpodcastdialog.cpp:74
-#: internet/podcasts/podcastservice.cpp:453
+#: internet/podcasts/addpodcastdialog.cpp:77
+#: internet/podcasts/podcastservice.cpp:455
 msgid "Configure podcasts..."
 msgstr "Konfigūruojamas srautas... "
 
-#: internet/core/cloudfileservice.cpp:105
-#: internet/digitally/digitallyimportedservicebase.cpp:182
-#: internet/googledrive/googledriveservice.cpp:228
+#: internet/core/cloudfileservice.cpp:107
+#: internet/digitally/digitallyimportedservicebase.cpp:184
+#: internet/googledrive/googledriveservice.cpp:231
 #: ../bin/src/ui_globalsearchsettingspage.h:149
 msgid "Configure..."
 msgstr "Konfigūruoti..."
@@ -1402,22 +1405,22 @@ msgstr "Prijungti Wii pultą naudojant aktyvuoti/deaktyvuoti veiksmą"
 msgid "Connect device"
 msgstr "Prijungti įrenginį"
 
-#: internet/spotify/spotifyservice.cpp:295
+#: internet/spotify/spotifyservice.cpp:296
 msgid "Connecting to Spotify"
 msgstr "Jungiamasi prie Spotify"
 
-#: internet/subsonic/subsonicsettingspage.cpp:128
+#: internet/subsonic/subsonicsettingspage.cpp:129
 msgid ""
 "Connection refused by server, check server URL. Example: "
 "http://localhost:4040/"
 msgstr "Ryšį serveris atmetė, patikrinkite serverio URL. Pvz.: http://localhost:4040/"
 
-#: internet/subsonic/subsonicsettingspage.cpp:140
+#: internet/subsonic/subsonicsettingspage.cpp:141
 msgid ""
 "Connection timed out, check server URL. Example: http://localhost:4040/"
 msgstr "Baigėsi prisijungimo laikas, patikrinkite serverio URL. Pavyzdys: http://localhost:4040/"
 
-#: internet/vk/vkservice.cpp:1113
+#: internet/vk/vkservice.cpp:1126
 msgid "Connection trouble or audio is disabled by owner"
 msgstr "Ryšio problemos arba savininkas išjungė garso įrašą"
 
@@ -1445,7 +1448,7 @@ msgstr "Konvertuoti nenuostolingus garso įrašų failus prieš išsiunčiant ju
 msgid "Convert lossless files"
 msgstr "Konvertuoti nenuostolingus failus"
 
-#: internet/vk/vkservice.cpp:333
+#: internet/vk/vkservice.cpp:337
 msgid "Copy share url to clipboard"
 msgstr "Kopijuoti dalinimosi url į iškarpinę"
 
@@ -1453,13 +1456,13 @@ msgstr "Kopijuoti dalinimosi url į iškarpinę"
 msgid "Copy to clipboard"
 msgstr "Kopijuoti į atmintinę"
 
-#: library/libraryview.cpp:421 internet/podcasts/podcastservice.cpp:437
-#: ui/mainwindow.cpp:641 widgets/fileviewlist.cpp:43
+#: library/libraryview.cpp:403 internet/podcasts/podcastservice.cpp:438
+#: ui/mainwindow.cpp:644 widgets/fileviewlist.cpp:44
 msgid "Copy to device..."
 msgstr "Kopijuoti į įrenginį..."
 
-#: devices/deviceview.cpp:225 ui/mainwindow.cpp:631
-#: widgets/fileviewlist.cpp:38
+#: devices/deviceview.cpp:228 ui/mainwindow.cpp:634
+#: widgets/fileviewlist.cpp:40
 msgid "Copy to library..."
 msgstr "Kopijuoti į fonoteką..."
 
@@ -1467,7 +1470,7 @@ msgstr "Kopijuoti į fonoteką..."
 msgid "Copyright"
 msgstr "Teisės"
 
-#: internet/subsonic/subsonicsettingspage.cpp:96
+#: internet/subsonic/subsonicsettingspage.cpp:97
 msgid ""
 "Could not connect to Subsonic, check server URL. Example: "
 "http://localhost:4040/"
@@ -1503,31 +1506,31 @@ msgstr "Nepavyko rasti koduotuvo %1, įsitikinkite ar įdiegti visi reikalingi �
 msgid "Couldn't open output file %1"
 msgstr "Nepavyko atverti išvesties failo %1"
 
-#: internet/core/cloudfileservice.cpp:102
-#: internet/googledrive/googledriveservice.cpp:226
+#: internet/core/cloudfileservice.cpp:103
+#: internet/googledrive/googledriveservice.cpp:228
 #: ../bin/src/ui_albumcovermanager.h:214
 #: ../bin/src/ui_albumcoversearcher.h:104 ../bin/src/ui_mainwindow.h:676
 msgid "Cover Manager"
 msgstr "Viršelių tvarkytuvė"
 
-#: ui/edittagdialog.cpp:476
+#: ui/edittagdialog.cpp:479
 msgid "Cover art from embedded image"
 msgstr "Viršelio paveikslėlis iš įdėtos nuotraukos"
 
-#: ui/edittagdialog.cpp:479
+#: ui/edittagdialog.cpp:482
 #, qt-format
 msgid "Cover art loaded automatically from %1"
 msgstr "Viršelio paveikslėlis įkeltas automatiškai iš %1"
 
-#: ui/edittagdialog.cpp:471
+#: ui/edittagdialog.cpp:474
 msgid "Cover art manually unset"
 msgstr "Viršelio paveikslėlis savarankiškai pašalintas"
 
-#: ui/edittagdialog.cpp:481
+#: ui/edittagdialog.cpp:484
 msgid "Cover art not set"
 msgstr "Viršelio paveikslėlis nenustatytas"
 
-#: ui/edittagdialog.cpp:474
+#: ui/edittagdialog.cpp:477
 #, qt-format
 msgid "Cover art set from %1"
 msgstr "Viršelio paveikslėlis nustatytas iš %1"
@@ -1672,7 +1675,7 @@ msgstr "Sumažinti garsą per 4%"
 msgid "Decrease the volume by <value> percent"
 msgstr "Patildyti <value> procentais"
 
-#: core/globalshortcuts.cpp:62 wiimotedev/wiimotesettingspage.cpp:105
+#: core/globalshortcuts.cpp:62 wiimotedev/wiimotesettingspage.cpp:106
 msgid "Decrease volume"
 msgstr "Sumažinti garsą"
 
@@ -1698,21 +1701,21 @@ msgstr "Delsa tarp vizualizacijų"
 msgid "Delete"
 msgstr "Trinti"
 
-#: internet/podcasts/podcastservice.cpp:433
+#: internet/podcasts/podcastservice.cpp:435
 msgid "Delete downloaded data"
 msgstr "Naikinti atsiųstus duomenis"
 
-#: devices/deviceview.cpp:404 library/libraryview.cpp:657
-#: ui/mainwindow.cpp:2294 widgets/fileview.cpp:186
+#: devices/deviceview.cpp:408 library/libraryview.cpp:639
+#: ui/mainwindow.cpp:2277 widgets/fileview.cpp:186
 msgid "Delete files"
 msgstr "Ištrinti failus"
 
-#: devices/deviceview.cpp:228
+#: devices/deviceview.cpp:232
 msgid "Delete from device..."
 msgstr "Ištrinti iš įrenginio..."
 
-#: library/libraryview.cpp:423 ui/mainwindow.cpp:643
-#: widgets/fileviewlist.cpp:44
+#: library/libraryview.cpp:405 ui/mainwindow.cpp:647
+#: widgets/fileviewlist.cpp:47
 msgid "Delete from disk..."
 msgstr "Ištrinti iš disko..."
 
@@ -1724,7 +1727,7 @@ msgstr "Ištrinti atliktus epizodus"
 msgid "Delete preset"
 msgstr "Ištrinti šabloną"
 
-#: library/libraryview.cpp:412
+#: library/libraryview.cpp:395
 msgid "Delete smart playlist"
 msgstr "Ištrinti išmanųjį grojaraštį"
 
@@ -1736,11 +1739,11 @@ msgstr "Ištrinti originalius failus"
 msgid "Deleting files"
 msgstr "Trinami failai"
 
-#: ui/mainwindow.cpp:1673
+#: ui/mainwindow.cpp:1656
 msgid "Dequeue selected tracks"
 msgstr "Iš eilės pažymėtus takelius"
 
-#: ui/mainwindow.cpp:1671
+#: ui/mainwindow.cpp:1654
 msgid "Dequeue track"
 msgstr "Iš eilės takelį"
 
@@ -1765,7 +1768,7 @@ msgstr "Įrenginio savybės"
 msgid "Device name"
 msgstr "Įrenginio pavadinimas"
 
-#: devices/deviceview.cpp:210
+#: devices/deviceview.cpp:212
 msgid "Device properties..."
 msgstr "Įrenginio savybės..."
 
@@ -1845,12 +1848,12 @@ msgstr "Rodyti OSD"
 msgid "Do a full library rescan"
 msgstr "Pilnai perskenuoti fonoteką"
 
-#: internet/googledrive/googledriveservice.cpp:267
-#: internet/googledrive/googledriveservice.cpp:273
+#: internet/googledrive/googledriveservice.cpp:270
+#: internet/googledrive/googledriveservice.cpp:276
 msgid "Do a full rescan"
 msgstr "Atlikti pilną perskenavimą"
 
-#: internet/googledrive/googledriveservice.cpp:223
+#: internet/googledrive/googledriveservice.cpp:225
 msgid "Do a full rescan..."
 msgstr "Atlikti pilną perskenavimą..."
 
@@ -1862,11 +1865,7 @@ msgstr "Nekonvertuoti jokios muzikos"
 msgid "Do not overwrite"
 msgstr "Ne perrašyti"
 
-#: ../bin/src/ui_behavioursettingspage.h:364
-msgid "Do nothing"
-msgstr ""
-
-#: internet/googledrive/googledriveservice.cpp:268
+#: internet/googledrive/googledriveservice.cpp:271
 msgid ""
 "Doing a full rescan will lose any metadata you've saved in Clementine such "
 "as cover art, play counts and ratings.  Clementine will rescan all your "
@@ -1877,7 +1876,7 @@ msgstr "Atlikę pilną perskenavimą, prarasite visus meta duomenis, kuriuos iš
 msgid "Don't repeat"
 msgstr "Nekartoti"
 
-#: library/libraryview.cpp:441
+#: library/libraryview.cpp:423
 msgid "Don't show in various artists"
 msgstr "Nerodyti įvairiuose atlikėjuose"
 
@@ -1894,7 +1893,7 @@ msgstr "Nemaišyti"
 msgid "Don't stop!"
 msgstr "Nesustoti!"
 
-#: internet/somafm/somafmservice.cpp:106
+#: internet/somafm/somafmservice.cpp:107
 msgid "Donate"
 msgstr "Paremti pinigais"
 
@@ -1902,15 +1901,15 @@ msgstr "Paremti pinigais"
 msgid "Double click to open"
 msgstr "Du kart spustelėkite norėdami atverti"
 
-#: ../bin/src/ui_behavioursettingspage.h:358
+#: ../bin/src/ui_behavioursettingspage.h:351
 msgid "Double clicking a song in the playlist will..."
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:344
+#: ../bin/src/ui_behavioursettingspage.h:337
 msgid "Double clicking a song will..."
 msgstr "Du kartus spūstelėjus dainą..."
 
-#: internet/podcasts/podcastservice.cpp:529
+#: internet/podcasts/podcastservice.cpp:531
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "Download %n episodes"
@@ -1932,8 +1931,8 @@ msgstr "Atsiųsti narystę"
 msgid "Download new episodes automatically"
 msgstr "Atsisiųsti naujus epizodus automatiškai"
 
-#: internet/podcasts/podcastservice.cpp:292
-#: internet/podcasts/podcastservice.cpp:331
+#: internet/podcasts/podcastservice.cpp:293
+#: internet/podcasts/podcastservice.cpp:332
 msgid "Download queued"
 msgstr "Atsiuntimas eilėje"
 
@@ -1945,15 +1944,15 @@ msgstr "Atsisiųsti nustatymus"
 msgid "Download the Android app"
 msgstr "Atsisiųsti Android programą"
 
-#: internet/magnatune/magnatuneservice.cpp:280
+#: internet/magnatune/magnatuneservice.cpp:283
 msgid "Download this album"
 msgstr "Atsisiųsti šį albumą"
 
-#: internet/jamendo/jamendoservice.cpp:430
+#: internet/jamendo/jamendoservice.cpp:433
 msgid "Download this album..."
 msgstr "Atsisiunčiamas šis albumas"
 
-#: internet/podcasts/podcastservice.cpp:531
+#: internet/podcasts/podcastservice.cpp:533
 msgid "Download this episode"
 msgstr "Atsiųsti šį epizodą"
 
@@ -1961,21 +1960,21 @@ msgstr "Atsiųsti šį epizodą"
 msgid "Download..."
 msgstr "Atsisiųsti..."
 
-#: internet/podcasts/podcastservice.cpp:300
-#: internet/podcasts/podcastservice.cpp:340
+#: internet/podcasts/podcastservice.cpp:301
+#: internet/podcasts/podcastservice.cpp:341
 #, qt-format
 msgid "Downloading (%1%)..."
 msgstr "Atsiunčiama (%1%)..."
 
-#: internet/icecast/icecastservice.cpp:106
+#: internet/icecast/icecastservice.cpp:103
 msgid "Downloading Icecast directory"
 msgstr "Atsiunčiamas Icecast aplankas"
 
-#: internet/jamendo/jamendoservice.cpp:200
+#: internet/jamendo/jamendoservice.cpp:201
 msgid "Downloading Jamendo catalogue"
 msgstr "Atsiunčiamas Jamendo katalogas"
 
-#: internet/magnatune/magnatuneservice.cpp:160
+#: internet/magnatune/magnatuneservice.cpp:162
 msgid "Downloading Magnatune catalogue"
 msgstr "Atsiunčiamas  Magnatune katalogas"
 
@@ -2011,11 +2010,11 @@ msgstr "Dinaminė veiksena yra įjungta"
 msgid "Dynamic random mix"
 msgstr "Dinaminis atsitiktinis maišymas"
 
-#: library/libraryview.cpp:409
+#: library/libraryview.cpp:392
 msgid "Edit smart playlist..."
 msgstr "Taisyti išmanųjį grojaraštį..."
 
-#: ui/mainwindow.cpp:1715
+#: ui/mainwindow.cpp:1698
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr "Redaguoti žymę \"%1\"..."
@@ -2032,16 +2031,16 @@ msgstr "Taisyti žymes"
 msgid "Edit track information"
 msgstr "Taisyti takelio informaciją"
 
-#: library/libraryview.cpp:428 widgets/fileviewlist.cpp:49
+#: library/libraryview.cpp:410 widgets/fileviewlist.cpp:51
 #: ../bin/src/ui_mainwindow.h:658
 msgid "Edit track information..."
 msgstr "Taisyti takelio informaciją..."
 
-#: library/libraryview.cpp:431
+#: library/libraryview.cpp:413
 msgid "Edit tracks information..."
 msgstr "Taisyti takelių informaciją..."
 
-#: internet/internetradio/savedradio.cpp:109
+#: internet/internetradio/savedradio.cpp:110
 msgid "Edit..."
 msgstr "Keisti..."
 
@@ -2065,7 +2064,7 @@ msgstr "Įjungti glodintuvą"
 msgid "Enable shortcuts only when Clementine is focused"
 msgstr "Įgalinti kombinacijas tik tada kai Clementine yra aktyvus"
 
-#: ../bin/src/ui_behavioursettingspage.h:330
+#: ../bin/src/ui_behavioursettingspage.h:323
 msgid "Enable song metadata inline edition with click"
 msgstr "Spustelėjimu įjungti tiesioginį dainos meta duomenų redagavimą"
 
@@ -2154,8 +2153,8 @@ msgid "Equivalent to --log-levels *:3"
 msgstr "Tai atitinka --log-levels *:3"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:242
-#: library/libraryview.cpp:651 ui/mainwindow.cpp:1997 ui/mainwindow.cpp:2244
-#: ui/mainwindow.cpp:2392 internet/vk/vkservice.cpp:634
+#: library/libraryview.cpp:633 ui/mainwindow.cpp:1980 ui/mainwindow.cpp:2227
+#: ui/mainwindow.cpp:2375 internet/vk/vkservice.cpp:641
 msgid "Error"
 msgstr "Klaida"
 
@@ -2184,8 +2183,8 @@ msgstr "Klaida siunčiant Spotify plėtinį"
 msgid "Error loading %1"
 msgstr "Klaida įkeliant %1"
 
-#: internet/digitally/digitallyimportedservicebase.cpp:200
-#: internet/digitally/digitallyimportedurlhandler.cpp:89
+#: internet/digitally/digitallyimportedservicebase.cpp:202
+#: internet/digitally/digitallyimportedurlhandler.cpp:90
 msgid "Error loading di.fm playlist"
 msgstr "Klaida įkeliant di.fm grojaraštį"
 
@@ -2319,23 +2318,23 @@ msgstr "Pradingimas"
 msgid "Fading duration"
 msgstr "Suliejimo trukmė"
 
-#: ui/mainwindow.cpp:1998
+#: ui/mainwindow.cpp:1981
 msgid "Failed reading CD drive"
 msgstr "Nepavyko perskaityti CD disko"
 
-#: internet/podcasts/gpoddertoptagspage.cpp:72
+#: internet/podcasts/gpoddertoptagspage.cpp:73
 msgid "Failed to fetch directory"
 msgstr "Nepavyko atsiųsti direktorijos"
 
-#: internet/podcasts/gpoddersearchpage.cpp:75
+#: internet/podcasts/gpoddersearchpage.cpp:77
 #: internet/podcasts/gpoddertoptagsmodel.cpp:103
-#: internet/podcasts/itunessearchpage.cpp:65
-#: internet/podcasts/itunessearchpage.cpp:76
-#: internet/podcasts/itunessearchpage.cpp:83
+#: internet/podcasts/itunessearchpage.cpp:67
+#: internet/podcasts/itunessearchpage.cpp:78
+#: internet/podcasts/itunessearchpage.cpp:85
 msgid "Failed to fetch podcasts"
 msgstr "Nepavyko atsiųsti garso prenumeratos"
 
-#: internet/podcasts/addpodcastbyurl.cpp:69
+#: internet/podcasts/addpodcastbyurl.cpp:71
 #: internet/podcasts/fixedopmlpage.cpp:55
 msgid "Failed to load podcast"
 msgstr "Nepavyko įkelti garso prenumeratos"
@@ -2365,7 +2364,7 @@ msgstr "Gauti automatiškai"
 msgid "Fetch completed"
 msgstr "Parsiuntimas baigtas"
 
-#: internet/subsonic/subsonicservice.cpp:250
+#: internet/subsonic/subsonicservice.cpp:251
 msgid "Fetching Subsonic library"
 msgstr "Gaunama Subsonic biblioteka"
 
@@ -2427,7 +2426,7 @@ msgstr "Failai perkodavimui"
 msgid "Find songs in your library that match the criteria you specify."
 msgstr "Rasti fonotekoje dainas, kurios atitinka jūsų nurodytus kriterijus."
 
-#: internet/vk/vkservice.cpp:317
+#: internet/vk/vkservice.cpp:320
 msgid "Find this artist"
 msgstr "Rasti šį atlikėją"
 
@@ -2463,12 +2462,12 @@ msgstr "Dėl licencijavimo priežasčių Spotify palaikymas yra įjungiamas per 
 msgid "Force mono encoding"
 msgstr "Įjungti tik mono kodavimą"
 
-#: devices/deviceview.cpp:207 devices/deviceview.cpp:330
-#: devices/deviceview.cpp:335
+#: devices/deviceview.cpp:208 devices/deviceview.cpp:334
+#: devices/deviceview.cpp:339
 msgid "Forget device"
 msgstr "Pamiršti įrenginį"
 
-#: devices/deviceview.cpp:331
+#: devices/deviceview.cpp:335
 msgid ""
 "Forgetting a device will remove it from this list and Clementine will have "
 "to rescan all the songs again next time you connect it."
@@ -2542,12 +2541,12 @@ msgstr "Pagrindiniai nustatymai"
 msgid "Genre"
 msgstr "Žanras"
 
-#: internet/spotify/spotifyservice.cpp:633
-#: internet/spotify/spotifyservice.cpp:674
+#: internet/spotify/spotifyservice.cpp:637
+#: internet/spotify/spotifyservice.cpp:681
 msgid "Get a URL to share this Spotify song"
 msgstr "Gauti URL, kad dalintis šia Spotify daina"
 
-#: internet/spotify/spotifyservice.cpp:665
+#: internet/spotify/spotifyservice.cpp:669
 msgid "Get a URL to share this playlist"
 msgstr "Gauti URL, kad dalintis šiuo grojaraščiu"
 
@@ -2585,7 +2584,7 @@ msgstr "Google diskas"
 msgid "Got %1 covers out of %2 (%3 failed)"
 msgstr "VaizdasGauta %1 viršelių iš %2 (%3 nepavyko)"
 
-#: ../bin/src/ui_behavioursettingspage.h:326
+#: ../bin/src/ui_behavioursettingspage.h:319
 msgid "Grey out non existent songs in my playlists"
 msgstr "Pažymėti pilkai neegzistuojančias dainas mano grojaraštyje"
 
@@ -2631,7 +2630,7 @@ msgstr "Grupavimas"
 msgid "HTML page did not contain any RSS feeds"
 msgstr "HTML puslapis neturėjo jokio RSS srauto"
 
-#: internet/subsonic/subsonicsettingspage.cpp:162
+#: internet/subsonic/subsonicsettingspage.cpp:163
 msgid ""
 "HTTP 3xx status code received without URL, verify server configuration."
 msgstr "HTTP 3xx būsenos kodas gautas be URL, patikrinkite serverio konfigūraciją."
@@ -2670,7 +2669,7 @@ msgstr "Aukšta (1024x1024)"
 msgid "HipHop"
 msgstr "HipHop"
 
-#: internet/subsonic/subsonicsettingspage.cpp:134
+#: internet/subsonic/subsonicsettingspage.cpp:135
 msgid "Host not found, check server URL. Example: http://localhost:4040/"
 msgstr "Mazgas nerastas, patikrinkite serverio URL. Pavyzdys: http://localhost:4040/"
 
@@ -2698,7 +2697,7 @@ msgstr "Piktogramos viršuje"
 msgid "Identifying song"
 msgstr "Nustatoma daina"
 
-#: ../bin/src/ui_behavioursettingspage.h:328
+#: ../bin/src/ui_behavioursettingspage.h:321
 msgid ""
 "If activated, clicking a selected song in the playlist view will let you "
 "edit the tag value directly"
@@ -2730,12 +2729,12 @@ msgstr "Paveikslai (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 msgid "Import..."
 msgstr "Importuoti..."
 
-#: core/utilities.cpp:150
+#: core/utilities.cpp:151
 #, qt-format
 msgid "In %1 days"
 msgstr "Po %1 d."
 
-#: core/utilities.cpp:153
+#: core/utilities.cpp:154
 #, qt-format
 msgid "In %1 weeks"
 msgstr "Po %1 sav."
@@ -2746,7 +2745,7 @@ msgid ""
 "time a song finishes."
 msgstr "Dinamiškame režime nauji kūriniais bus parinkti ir pridėti į grojaraštį kaskart, kai dabar grojamas kūrinys baigsis."
 
-#: internet/spotify/spotifyservice.cpp:421
+#: internet/spotify/spotifyservice.cpp:424
 msgid "Inbox"
 msgstr "Gautieji"
 
@@ -2758,15 +2757,15 @@ msgstr "Rodyti albumo paveikslus pranešime"
 msgid "Include all songs"
 msgstr "Įtraukti visas dainas"
 
-#: internet/subsonic/subsonicsettingspage.cpp:106
+#: internet/subsonic/subsonicsettingspage.cpp:107
 msgid "Incompatible Subsonic REST protocol version. Client must upgrade."
 msgstr "Nesuderinama Subsonic REST protokolo versija. Reikia atnaujinti klientą."
 
-#: internet/subsonic/subsonicsettingspage.cpp:111
+#: internet/subsonic/subsonicsettingspage.cpp:112
 msgid "Incompatible Subsonic REST protocol version. Server must upgrade."
 msgstr "Nesuderinama Subsonic REST protokolo versija. Serveris turi atsinaujinti."
 
-#: internet/subsonic/subsonicsettingspage.cpp:152
+#: internet/subsonic/subsonicsettingspage.cpp:153
 msgid "Incomplete configuration, please ensure all fields are populated."
 msgstr "Nepilna konfigūracija, įsitikinkite kad visi laukai užpildyti."
 
@@ -2778,16 +2777,16 @@ msgstr "Pagarsinti 4%"
 msgid "Increase the volume by <value> percent"
 msgstr "Pagarsinti <value> procentais"
 
-#: core/globalshortcuts.cpp:61 wiimotedev/wiimotesettingspage.cpp:103
+#: core/globalshortcuts.cpp:61 wiimotedev/wiimotesettingspage.cpp:104
 msgid "Increase volume"
 msgstr "Pagarsinti"
 
-#: internet/core/cloudfileservice.cpp:152
+#: internet/core/cloudfileservice.cpp:154
 #, qt-format
 msgid "Indexing %1"
 msgstr "Indeksuojama %1"
 
-#: wiimotedev/wiimotesettingspage.cpp:132 ../bin/src/ui_deviceproperties.h:372
+#: wiimotedev/wiimotesettingspage.cpp:133 ../bin/src/ui_deviceproperties.h:372
 msgid "Information"
 msgstr "Informacija"
 
@@ -2876,11 +2875,11 @@ msgstr "Jamendo mėnesio Top takeliai"
 msgid "Jamendo Top Tracks of the Week"
 msgstr "Jamendo savaitės Top takelia"
 
-#: internet/jamendo/jamendoservice.cpp:180
+#: internet/jamendo/jamendoservice.cpp:181
 msgid "Jamendo database"
 msgstr "Jamendo duomenų bazė"
 
-#: ../bin/src/ui_behavioursettingspage.h:341
+#: ../bin/src/ui_behavioursettingspage.h:334
 msgid "Jump to previous song right away"
 msgstr "Iš karto perjungiama į ankstesnį takelį"
 
@@ -2900,7 +2899,7 @@ msgstr "Laikykite mygtukus %1 sek."
 msgid "Keep buttons for %1 seconds..."
 msgstr "Laikyti mygtukus %1 sekundžių..."
 
-#: ../bin/src/ui_behavioursettingspage.h:313
+#: ../bin/src/ui_behavioursettingspage.h:306
 msgid "Keep running in the background when the window is closed"
 msgstr "Veikti fone kai langas uždaromas"
 
@@ -2917,7 +2916,7 @@ msgstr "Kačiukai"
 msgid "Kuduro"
 msgstr "Kuduro"
 
-#: ../bin/src/ui_behavioursettingspage.h:315
+#: ../bin/src/ui_behavioursettingspage.h:308
 msgid "Language"
 msgstr "Kalba"
 
@@ -2995,7 +2994,7 @@ msgstr "Kairė"
 msgid "Length"
 msgstr "Trukmė"
 
-#: ui/mainwindow.cpp:225 ui/mainwindow.cpp:238
+#: ui/mainwindow.cpp:224 ui/mainwindow.cpp:237
 #: ../bin/src/ui_seafilesettingspage.h:177
 msgid "Library"
 msgstr "Fonoteka"
@@ -3004,7 +3003,7 @@ msgstr "Fonoteka"
 msgid "Library advanced grouping"
 msgstr "Sudėtingesnis fonotekos grupavimas"
 
-#: ui/mainwindow.cpp:2516
+#: ui/mainwindow.cpp:2499
 msgid "Library rescan notice"
 msgstr "Fonotekos perskenavimo žinutė"
 
@@ -3032,7 +3031,7 @@ msgstr "Įkelti viršelį iš URL"
 msgid "Load cover from URL..."
 msgstr "Įkelti viršelį iš URL..."
 
-#: ui/albumcoverchoicecontroller.cpp:104
+#: ui/albumcoverchoicecontroller.cpp:106
 msgid "Load cover from disk"
 msgstr "Įkelti viršelį iš disko"
 
@@ -3064,12 +3063,12 @@ msgstr "Įkeliamas išmanusis grojaraštis"
 msgid "Loading songs"
 msgstr "Keliamos dainos"
 
-#: internet/digitally/digitallyimportedurlhandler.cpp:67
+#: internet/digitally/digitallyimportedurlhandler.cpp:68
 #: internet/somafm/somafmurlhandler.cpp:53
 msgid "Loading stream"
 msgstr "Įkeliamas srautas"
 
-#: playlist/songloaderinserter.cpp:129 ui/edittagdialog.cpp:242
+#: playlist/songloaderinserter.cpp:129 ui/edittagdialog.cpp:245
 msgid "Loading tracks"
 msgstr "Įkeliami takeliai"
 
@@ -3079,8 +3078,8 @@ msgstr "Užkraunama kūrinio informacija"
 
 #: library/librarymodel.cpp:152
 #: internet/podcasts/podcastdiscoverymodel.cpp:105 widgets/prettyimage.cpp:168
-#: widgets/widgetfadehelper.cpp:96 internet/vk/vkservice.cpp:508
-#: internet/vk/vksettingspage.cpp:122 ../bin/src/ui_addpodcastdialog.h:179
+#: widgets/widgetfadehelper.cpp:96 internet/vk/vkservice.cpp:513
+#: internet/vk/vksettingspage.cpp:125 ../bin/src/ui_addpodcastdialog.h:179
 #: ../bin/src/ui_searchpreview.h:105 ../bin/src/ui_organisedialog.h:261
 msgid "Loading..."
 msgstr "Įkeliama..."
@@ -3089,7 +3088,7 @@ msgstr "Įkeliama..."
 msgid "Loads files/URLs, replacing current playlist"
 msgstr "Įkelia failus/URL, pakeičiant esamą sąrašą"
 
-#: internet/vk/vksettingspage.cpp:111
+#: internet/vk/vksettingspage.cpp:114
 #: ../bin/src/ui_digitallyimportedsettingspage.h:162
 #: ../bin/src/ui_magnatunesettingspage.h:163
 #: ../bin/src/ui_soundcloudsettingspage.h:105
@@ -3105,11 +3104,11 @@ msgstr "Įkelia failus/URL, pakeičiant esamą sąrašą"
 msgid "Login"
 msgstr "Prisijungti"
 
-#: internet/podcasts/podcastsettingspage.cpp:127
+#: internet/podcasts/podcastsettingspage.cpp:130
 msgid "Login failed"
 msgstr "Prisijungimas nepavyko"
 
-#: internet/vk/vksettingspage.cpp:121
+#: internet/vk/vksettingspage.cpp:124
 msgid "Logout"
 msgstr "Atsijungti"
 
@@ -3119,7 +3118,7 @@ msgstr "Ilgalaikio nuspėjimo profilis (LTP)"
 
 #: ../bin/src/ui_mainwindow.h:651
 msgid "Love"
-msgstr "Myliu"
+msgstr "Patinka"
 
 #: core/globalshortcuts.cpp:78
 msgid "Love (Last.fm scrobbling)"
@@ -3204,7 +3203,7 @@ msgctxt "Label for button to enable/disable Enterprise background sound."
 msgid "Make it so!"
 msgstr "Padaryti tai taip!"
 
-#: internet/spotify/spotifyservice.cpp:662
+#: internet/spotify/spotifyservice.cpp:667
 msgid "Make playlist available offline"
 msgstr "Padaryti šį grojaraštį prieinamą atsijungus"
 
@@ -3221,15 +3220,15 @@ msgstr "Rankinis tarpinės stoties konfigūravimas"
 msgid "Manually"
 msgstr "Rankiniu būdu"
 
-#: devices/deviceproperties.cpp:156
+#: devices/deviceproperties.cpp:157
 msgid "Manufacturer"
 msgstr "Gamintojas"
 
-#: internet/podcasts/podcastservice.cpp:448 ../bin/src/ui_organisedialog.h:259
+#: internet/podcasts/podcastservice.cpp:450 ../bin/src/ui_organisedialog.h:259
 msgid "Mark as listened"
 msgstr "Pažymėti kaip klausytą"
 
-#: internet/podcasts/podcastservice.cpp:447
+#: internet/podcasts/podcastservice.cpp:449
 msgid "Mark as new"
 msgstr "Pažymėti kaip naują"
 
@@ -3279,7 +3278,7 @@ msgstr "Minimalus buferio užpildas"
 msgid "Missing projectM presets"
 msgstr "Trūksta projectM šablonų"
 
-#: devices/deviceproperties.cpp:155
+#: devices/deviceproperties.cpp:156
 msgid "Model"
 msgstr "Modelis"
 
@@ -3308,7 +3307,7 @@ msgstr "Nuotaikos juostos stilius"
 msgid "Moodbars"
 msgstr "Nuotaikos juostos"
 
-#: internet/vk/vkservice.cpp:512
+#: internet/vk/vkservice.cpp:517
 msgid "More"
 msgstr "Daugiau"
 
@@ -3329,7 +3328,7 @@ msgstr "Prijungimo vietos"
 msgid "Move down"
 msgstr "Perkelti žemyn"
 
-#: ui/mainwindow.cpp:634 widgets/fileviewlist.cpp:40
+#: ui/mainwindow.cpp:637 widgets/fileviewlist.cpp:42
 msgid "Move to library..."
 msgstr "Perkelti į fonoteką"
 
@@ -3338,8 +3337,8 @@ msgstr "Perkelti į fonoteką"
 msgid "Move up"
 msgstr "Perkelti aukštyn"
 
-#: transcoder/transcodedialog.cpp:225 ui/mainwindow.cpp:1932
-#: internet/vk/vkservice.cpp:893
+#: transcoder/transcodedialog.cpp:225 ui/mainwindow.cpp:1915
+#: internet/vk/vkservice.cpp:906
 msgid "Music"
 msgstr "Muzika"
 
@@ -3347,20 +3346,20 @@ msgstr "Muzika"
 msgid "Music Library"
 msgstr "Fonoteka"
 
-#: core/globalshortcuts.cpp:63 wiimotedev/wiimotesettingspage.cpp:106
+#: core/globalshortcuts.cpp:63 wiimotedev/wiimotesettingspage.cpp:107
 #: ../bin/src/ui_mainwindow.h:702
 msgid "Mute"
 msgstr "Nutildyti"
 
-#: internet/vk/vkservice.cpp:829
+#: internet/vk/vkservice.cpp:838
 msgid "My Albums"
 msgstr "Mano Albumai"
 
-#: internet/vk/vkservice.cpp:887
+#: internet/vk/vkservice.cpp:899
 msgid "My Music"
 msgstr "Mano muzika"
 
-#: internet/vk/vkservice.cpp:519
+#: internet/vk/vkservice.cpp:525
 msgid "My Recommendations"
 msgstr "Mano rekomendacijos"
 
@@ -3390,7 +3389,7 @@ msgstr "Tinklo įgaliotasis serveris"
 msgid "Network Remote"
 msgstr "Nutolęs tinklas"
 
-#: playlist/playlistdelegates.cpp:296 ui/edittagdialog.cpp:523
+#: playlist/playlistdelegates.cpp:296 ui/edittagdialog.cpp:526
 msgid "Never"
 msgstr "Naujesni"
 
@@ -3398,9 +3397,8 @@ msgstr "Naujesni"
 msgid "Never played"
 msgstr "Niekada negrota"
 
-#: ../bin/src/ui_behavioursettingspage.h:334
-#: ../bin/src/ui_behavioursettingspage.h:354
-#: ../bin/src/ui_behavioursettingspage.h:368
+#: ../bin/src/ui_behavioursettingspage.h:327
+#: ../bin/src/ui_behavioursettingspage.h:347
 msgid "Never start playing"
 msgstr "Niekada nepradėti groti"
 
@@ -3410,11 +3408,11 @@ msgstr "Niekada nepradėti groti"
 msgid "New folder"
 msgstr "Naujas aplankas"
 
-#: ui/mainwindow.cpp:1769 ../bin/src/ui_mainwindow.h:690
+#: ui/mainwindow.cpp:1752 ../bin/src/ui_mainwindow.h:690
 msgid "New playlist"
 msgstr "Naujas grojaraštis"
 
-#: library/libraryview.cpp:406
+#: library/libraryview.cpp:389
 msgid "New smart playlist..."
 msgstr "Naujas išmanusis grojaraštis..."
 
@@ -3430,16 +3428,16 @@ msgstr "Nauji takeliai bus pridėti automatiškai."
 msgid "Newest tracks"
 msgstr "Naujausi takeliai"
 
-#: ui/edittagdialog.cpp:163 ui/trackselectiondialog.cpp:48
+#: ui/edittagdialog.cpp:166 ui/trackselectiondialog.cpp:50
 msgid "Next"
 msgstr "Toliau"
 
-#: core/globalshortcuts.cpp:57 wiimotedev/wiimotesettingspage.cpp:97
+#: core/globalshortcuts.cpp:57 wiimotedev/wiimotesettingspage.cpp:98
 #: ../bin/src/ui_mainwindow.h:645
 msgid "Next track"
 msgstr "Kitas takelis"
 
-#: core/utilities.cpp:151
+#: core/utilities.cpp:152
 msgid "Next week"
 msgstr "Kitą savaitę"
 
@@ -3473,7 +3471,7 @@ msgstr "Jokių trumpų blokų"
 msgid "None"
 msgstr "Nėra"
 
-#: library/libraryview.cpp:652 ui/mainwindow.cpp:2245 ui/mainwindow.cpp:2393
+#: library/libraryview.cpp:634 ui/mainwindow.cpp:2228 ui/mainwindow.cpp:2376
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Nei viena iš pažymėtų dainų netinka kopijavimui į įrenginį"
 
@@ -3485,7 +3483,7 @@ msgstr "Normalus"
 msgid "Normal block type"
 msgstr "Normalus bloko tipas"
 
-#: playlist/playlistsequence.cpp:199
+#: playlist/playlistsequence.cpp:203
 msgid "Not available while using a dynamic playlist"
 msgstr "Negalimas naudojant dinaminį grojaraštį"
 
@@ -3513,7 +3511,7 @@ msgstr "Nepakanka kaimynų"
 msgid "Not installed"
 msgstr "Neįdiegta"
 
-#: globalsearch/globalsearchsettingspage.cpp:119
+#: globalsearch/globalsearchsettingspage.cpp:120
 #: globalsearch/searchproviderstatuswidget.cpp:47
 msgid "Not logged in"
 msgstr "Neprisijungęs"
@@ -3522,7 +3520,7 @@ msgstr "Neprisijungęs"
 msgid "Not mounted - double click to mount"
 msgstr "Neprijungtas - du kartus spragtelėkite, kad prijungti"
 
-#: internet/vk/vksearchdialog.cpp:93
+#: internet/vk/vksearchdialog.cpp:94
 msgid "Nothing found"
 msgstr "Nieko nerasta"
 
@@ -3596,12 +3594,12 @@ msgstr "Rodyti tik pirmą"
 msgid "Opacity"
 msgstr "Permatomumas"
 
-#: internet/digitally/digitallyimportedservicebase.cpp:176
-#: internet/icecast/icecastservice.cpp:302
-#: internet/jamendo/jamendoservice.cpp:434
-#: internet/magnatune/magnatuneservice.cpp:284
+#: internet/digitally/digitallyimportedservicebase.cpp:177
+#: internet/icecast/icecastservice.cpp:303
+#: internet/jamendo/jamendoservice.cpp:437
+#: internet/magnatune/magnatuneservice.cpp:287
 #: internet/somafm/somafmservice.cpp:102
-#: internet/soundcloud/soundcloudservice.cpp:351
+#: internet/soundcloud/soundcloudservice.cpp:353
 #, qt-format
 msgid "Open %1 in browser"
 msgstr "Atverti %1 naršyklėje"
@@ -3610,11 +3608,11 @@ msgstr "Atverti %1 naršyklėje"
 msgid "Open &audio CD..."
 msgstr "Atverti &audio CD..."
 
-#: internet/podcasts/addpodcastdialog.cpp:238
+#: internet/podcasts/addpodcastdialog.cpp:243
 msgid "Open OPML file"
 msgstr "Atverti OPML failą"
 
-#: internet/podcasts/addpodcastdialog.cpp:80
+#: internet/podcasts/addpodcastdialog.cpp:84
 msgid "Open OPML file..."
 msgstr "Atverti OPML failą..."
 
@@ -3630,22 +3628,22 @@ msgstr "Atverti įrenginį"
 msgid "Open file..."
 msgstr "Atverti failą..."
 
-#: internet/googledrive/googledriveservice.cpp:216
+#: internet/googledrive/googledriveservice.cpp:217
 msgid "Open in Google Drive"
 msgstr "Atverti Google diske"
 
-#: devices/deviceview.cpp:221 globalsearch/globalsearchview.cpp:461
-#: internet/core/internetservice.cpp:102 library/libraryview.cpp:396
-#: widgets/fileviewlist.cpp:35
+#: devices/deviceview.cpp:224 globalsearch/globalsearchview.cpp:461
+#: internet/core/internetservice.cpp:105 library/libraryview.cpp:378
+#: widgets/fileviewlist.cpp:36
 msgid "Open in new playlist"
 msgstr "Atverti naujame grojaraštyje"
 
-#: ../bin/src/ui_behavioursettingspage.h:349
+#: ../bin/src/ui_behavioursettingspage.h:342
 msgctxt "Refers to behavior settings in Clementine settings page."
 msgid "Open in new playlist"
 msgstr "Atidaryti naujame grojaraštyje"
 
-#: songinfo/echonestbiographies.cpp:101
+#: songinfo/echonestbiographies.cpp:102
 msgid "Open in your browser"
 msgstr "Atidaryti naršyklėje"
 
@@ -3680,7 +3678,7 @@ msgstr "Opus"
 msgid "Organise Files"
 msgstr "Tvarkyti failus"
 
-#: library/libraryview.cpp:417 ui/mainwindow.cpp:637
+#: library/libraryview.cpp:399 ui/mainwindow.cpp:640
 msgid "Organise files..."
 msgstr "Tvarkyti failus..."
 
@@ -3688,7 +3686,7 @@ msgstr "Tvarkyti failus..."
 msgid "Organising files"
 msgstr "Tvarkomi failai"
 
-#: ui/trackselectiondialog.cpp:162
+#: ui/trackselectiondialog.cpp:164
 msgid "Original tags"
 msgstr "Originalios žymės"
 
@@ -3739,7 +3737,7 @@ msgstr "Perrašyti tik mažesnius"
 msgid "Owner"
 msgstr "Savininkas"
 
-#: internet/jamendo/jamendoservice.cpp:228
+#: internet/jamendo/jamendoservice.cpp:229
 msgid "Parsing Jamendo catalogue"
 msgstr "Apdorojamas Jamendo katalogas"
 
@@ -3756,8 +3754,8 @@ msgstr "Vakarėlis"
 msgid "Password"
 msgstr "Slaptažodis"
 
-#: core/globalshortcuts.cpp:50 ui/mainwindow.cpp:1061 ui/mainwindow.cpp:1582
-#: ui/qtsystemtrayicon.cpp:175 wiimotedev/wiimotesettingspage.cpp:107
+#: core/globalshortcuts.cpp:50 ui/mainwindow.cpp:1070 ui/mainwindow.cpp:1565
+#: ui/qtsystemtrayicon.cpp:175 wiimotedev/wiimotesettingspage.cpp:108
 msgid "Pause"
 msgstr "Pristabdyti"
 
@@ -3783,9 +3781,9 @@ msgstr "Pikselis"
 msgid "Plain sidebar"
 msgstr "Paprasta juosta"
 
-#: core/globalshortcuts.cpp:49 ui/mainwindow.cpp:609 ui/mainwindow.cpp:1029
-#: ui/mainwindow.cpp:1047 ui/mainwindow.cpp:1585 ui/qtsystemtrayicon.cpp:164
-#: ui/qtsystemtrayicon.cpp:188 wiimotedev/wiimotesettingspage.cpp:100
+#: core/globalshortcuts.cpp:49 ui/mainwindow.cpp:611 ui/mainwindow.cpp:1038
+#: ui/mainwindow.cpp:1056 ui/mainwindow.cpp:1568 ui/qtsystemtrayicon.cpp:164
+#: ui/qtsystemtrayicon.cpp:188 wiimotedev/wiimotesettingspage.cpp:101
 #: ../bin/src/ui_mainwindow.h:641
 msgid "Play"
 msgstr "Groti"
@@ -3798,9 +3796,8 @@ msgstr "Grojimo skaitiklis"
 msgid "Play if stopped, pause if playing"
 msgstr "Groti jei sustabdyta, Pristabdyti jei grojama"
 
-#: ../bin/src/ui_behavioursettingspage.h:335
-#: ../bin/src/ui_behavioursettingspage.h:355
-#: ../bin/src/ui_behavioursettingspage.h:369
+#: ../bin/src/ui_behavioursettingspage.h:328
+#: ../bin/src/ui_behavioursettingspage.h:348
 msgid "Play if there is nothing already playing"
 msgstr "Groti jei jau kas nors negroja"
 
@@ -3808,7 +3805,7 @@ msgstr "Groti jei jau kas nors negroja"
 msgid "Play the <n>th track in the playlist"
 msgstr "Groti <n> takelį grojaraštyje"
 
-#: core/globalshortcuts.cpp:51 wiimotedev/wiimotesettingspage.cpp:109
+#: core/globalshortcuts.cpp:51 wiimotedev/wiimotesettingspage.cpp:110
 msgid "Play/Pause"
 msgstr "Groti/Pristabdyti"
 
@@ -3839,7 +3836,7 @@ msgstr "Grojaraščio parinktys"
 msgid "Playlist type"
 msgstr "Grojaraščio tipas"
 
-#: internet/soundcloud/soundcloudservice.cpp:130 ui/mainwindow.cpp:241
+#: internet/soundcloud/soundcloudservice.cpp:132 ui/mainwindow.cpp:241
 msgid "Playlists"
 msgstr "Grojaraščiai"
 
@@ -3851,7 +3848,7 @@ msgstr "Prašome uždaryti Jūsų naršyklę, kad grįžti į Clementine."
 msgid "Plugin status:"
 msgstr "Plėtinio būklė:"
 
-#: internet/podcasts/podcastservice.cpp:131
+#: internet/podcasts/podcastservice.cpp:132
 #: ../bin/src/ui_podcastsettingspage.h:253
 msgid "Podcasts"
 msgstr "Podcast"
@@ -3925,7 +3922,7 @@ msgstr "Paspauskite klavišą"
 msgid "Press a key combination to use for %1..."
 msgstr "Spauskite mygtukų kombinaciją panaudojimui  %1..."
 
-#: ../bin/src/ui_behavioursettingspage.h:338
+#: ../bin/src/ui_behavioursettingspage.h:331
 msgid "Pressing \"Previous\" in player will..."
 msgstr "Spaudžiant grotuve mygtuką \"Ankstesnis Takelis\" bus..."
 
@@ -3939,11 +3936,11 @@ msgstr "Gražus OSD"
 msgid "Preview"
 msgstr "Peržiūra"
 
-#: ui/edittagdialog.cpp:162 ui/trackselectiondialog.cpp:47
+#: ui/edittagdialog.cpp:163 ui/trackselectiondialog.cpp:48
 msgid "Previous"
 msgstr "Atgal"
 
-#: core/globalshortcuts.cpp:59 wiimotedev/wiimotesettingspage.cpp:99
+#: core/globalshortcuts.cpp:59 wiimotedev/wiimotesettingspage.cpp:100
 #: ../bin/src/ui_mainwindow.h:639
 msgid "Previous track"
 msgstr "Ankstesnis takelis"
@@ -3969,7 +3966,7 @@ msgstr "Eiga"
 msgid "Psychedelic"
 msgstr "Psichodelinis"
 
-#: wiimotedev/wiimotesettingspage.cpp:239
+#: wiimotedev/wiimotesettingspage.cpp:240
 #: ../bin/src/ui_wiimoteshortcutgrabber.h:124
 msgid "Push Wiiremote button"
 msgstr "Spauskite Wii pulto mygtuką"
@@ -3999,12 +3996,12 @@ msgstr "Pateikiama užklausa įrenginiui..."
 msgid "Queue Manager"
 msgstr "Eilės tvarkytuvė"
 
-#: ui/mainwindow.cpp:1677
+#: ui/mainwindow.cpp:1660
 msgid "Queue selected tracks"
 msgstr "į eilę pažymėtus takelius"
 
-#: globalsearch/globalsearchview.cpp:466 library/libraryview.cpp:401
-#: ui/mainwindow.cpp:1675
+#: globalsearch/globalsearchview.cpp:466 library/libraryview.cpp:383
+#: ui/mainwindow.cpp:1658
 msgid "Queue track"
 msgstr "į eilę takelį"
 
@@ -4058,12 +4055,12 @@ msgstr "Įvertinimas"
 msgid "Really cancel?"
 msgstr "Tikrai atšaukti?"
 
-#: internet/subsonic/subsonicsettingspage.cpp:157
+#: internet/subsonic/subsonicsettingspage.cpp:158
 msgid "Redirect limit exceeded, verify server configuration."
 msgstr "Pasiekta nukreipimo riba, patikrinkite serverio konfigūraciją."
 
-#: internet/jamendo/jamendoservice.cpp:437
-#: internet/magnatune/magnatuneservice.cpp:287
+#: internet/jamendo/jamendoservice.cpp:440
+#: internet/magnatune/magnatuneservice.cpp:290
 #: internet/subsonic/subsonicservice.cpp:109
 msgid "Refresh catalogue"
 msgstr "Atnaujinti katalogus"
@@ -4072,11 +4069,11 @@ msgstr "Atnaujinti katalogus"
 msgid "Refresh channels"
 msgstr "Atnaujinti kanalus"
 
-#: internet/icecast/icecastservice.cpp:305
+#: internet/icecast/icecastservice.cpp:306
 msgid "Refresh station list"
 msgstr "Atnaujinti stočių sąrašą"
 
-#: internet/digitally/digitallyimportedservicebase.cpp:179
+#: internet/digitally/digitallyimportedservicebase.cpp:180
 msgid "Refresh streams"
 msgstr "Atnaujinti srautus"
 
@@ -4085,7 +4082,7 @@ msgid "Reggae"
 msgstr "Regis"
 
 #: playlist/playlistsaveoptionsdialog.cpp:33
-#: ../bin/src/ui_behavioursettingspage.h:379
+#: ../bin/src/ui_behavioursettingspage.h:364
 msgid "Relative"
 msgstr "Susijęs"
 
@@ -4093,7 +4090,7 @@ msgstr "Susijęs"
 msgid "Remember Wii remote swing"
 msgstr "Prisiminti Wii pulto pasukimą"
 
-#: ../bin/src/ui_behavioursettingspage.h:324
+#: ../bin/src/ui_behavioursettingspage.h:317
 msgid "Remember from last time"
 msgstr "Prisiminti paskutinio karto būseną"
 
@@ -4118,15 +4115,15 @@ msgstr "Pašalinti dublikatus iš grojaraščio"
 msgid "Remove folder"
 msgstr "Pašalinti aplanką"
 
-#: internet/vk/vkservice.cpp:325
+#: internet/vk/vkservice.cpp:328
 msgid "Remove from My Music"
 msgstr "Pašalinti iš Mano muzika"
 
-#: internet/vk/vkservice.cpp:311
+#: internet/vk/vkservice.cpp:313
 msgid "Remove from bookmarks"
 msgstr "Pašalinti iš adresyno"
 
-#: internet/spotify/spotifyservice.cpp:672 ../bin/src/ui_mainwindow.h:684
+#: internet/spotify/spotifyservice.cpp:679 ../bin/src/ui_mainwindow.h:684
 msgid "Remove from playlist"
 msgstr "Ištrinti iš grojaraščio"
 
@@ -4154,7 +4151,7 @@ msgstr "Pervadinti grojaraštį..."
 msgid "Renumber tracks in this order..."
 msgstr "Pernumeruoti takelius šia tvarka..."
 
-#: playlist/playlistsequence.cpp:203 ../bin/src/ui_playlistsequence.h:121
+#: playlist/playlistsequence.cpp:207 ../bin/src/ui_playlistsequence.h:121
 msgid "Repeat"
 msgstr "Kartoti"
 
@@ -4170,19 +4167,15 @@ msgstr "Kartoti grojaraštį"
 msgid "Repeat track"
 msgstr "Kartoti takelį"
 
-#: devices/deviceview.cpp:219 globalsearch/globalsearchview.cpp:457
-#: internet/core/internetservice.cpp:91 library/libraryview.cpp:393
+#: devices/deviceview.cpp:221 globalsearch/globalsearchview.cpp:457
+#: internet/core/internetservice.cpp:93 library/libraryview.cpp:375
 #: widgets/fileviewlist.cpp:34
 msgid "Replace current playlist"
 msgstr "Pakeisti esamą griojaraštį"
 
-#: ../bin/src/ui_behavioursettingspage.h:348
+#: ../bin/src/ui_behavioursettingspage.h:341
 msgid "Replace the playlist"
 msgstr "Pakeisti grojaraštį"
-
-#: ../bin/src/ui_behavioursettingspage.h:363
-msgid "Replace the queue"
-msgstr ""
 
 #: ../bin/src/ui_organisedialog.h:256
 msgid "Replaces spaces with underscores"
@@ -4208,11 +4201,11 @@ msgstr "Reikalauti atpažinimo kodo"
 msgid "Reset"
 msgstr "Atstatyti"
 
-#: ui/edittagdialog.cpp:800 ../bin/src/ui_edittagdialog.h:716
+#: ui/edittagdialog.cpp:803 ../bin/src/ui_edittagdialog.h:716
 msgid "Reset play counts"
 msgstr "Atstatyti perklausų skaičių"
 
-#: ../bin/src/ui_behavioursettingspage.h:342
+#: ../bin/src/ui_behavioursettingspage.h:335
 msgid "Restart song, then jump to previous if pressed again"
 msgstr "Iš naujo grojama daina, o jei nuspaudžiama dar kartą, perjungiama į ankstesnį takelį"
 
@@ -4225,7 +4218,7 @@ msgstr "Paleisti takelį, arba groti ankstesnį per 8 sekundes po paleidimo."
 msgid "Restrict to ASCII characters"
 msgstr "Naudoti tik SCII simbolius"
 
-#: ../bin/src/ui_behavioursettingspage.h:325
+#: ../bin/src/ui_behavioursettingspage.h:318
 msgid "Resume playback on start"
 msgstr "Paleidžiant pratęsti atkūrimą"
 
@@ -4261,13 +4254,13 @@ msgstr "Vykdyti"
 msgid "SOCKS proxy"
 msgstr "SOCKS įgaliotasis serveris"
 
-#: internet/subsonic/subsonicsettingspage.cpp:146
+#: internet/subsonic/subsonicsettingspage.cpp:147
 msgid ""
 "SSL handshake error, verify server configuration. SSLv3 option below may "
 "workaround some issues."
 msgstr "SSL komunikacijos klaida, patikrinkite serverio konfigūraciją. SSLv3 nustatymas žemiau gali padėti išspręsti kai kurias problemas."
 
-#: devices/deviceview.cpp:203
+#: devices/deviceview.cpp:204
 msgid "Safely remove device"
 msgstr "Saugiai pašalinti įrenginį"
 
@@ -4288,7 +4281,7 @@ msgstr "Išrankosdažnis"
 msgid "Save .mood files in your music library"
 msgstr "Saugoti .mood failus Jūsų fonotekoje"
 
-#: ui/albumcoverchoicecontroller.cpp:127
+#: ui/albumcoverchoicecontroller.cpp:129
 msgid "Save album cover"
 msgstr "Išsaugoti albumo viršelį"
 
@@ -4334,7 +4327,7 @@ msgstr "Išsaugoti šį srautą interneto kortelėje"
 msgid "Saving songs statistics into songs files"
 msgstr "Dainų statistika saugoma dainų failuose"
 
-#: ui/edittagdialog.cpp:703 ui/trackselectiondialog.cpp:254
+#: ui/edittagdialog.cpp:706 ui/trackselectiondialog.cpp:256
 msgid "Saving tracks"
 msgstr "Išsaugomi takeliai"
 
@@ -4359,12 +4352,12 @@ msgid "Seafile"
 msgstr "Seafile"
 
 #: ui/albumcoversearcher.cpp:165 ui/albumcoversearcher.cpp:182
-#: internet/vk/vkservice.cpp:527 ../bin/src/ui_gpoddersearchpage.h:77
+#: internet/vk/vkservice.cpp:534 ../bin/src/ui_gpoddersearchpage.h:77
 #: ../bin/src/ui_itunessearchpage.h:77 ../bin/src/ui_albumcoversearcher.h:113
 msgid "Search"
 msgstr "Ieškoti"
 
-#: ui/mainwindow.cpp:236 ../bin/src/ui_globalsearchsettingspage.h:144
+#: ui/mainwindow.cpp:235 ../bin/src/ui_globalsearchsettingspage.h:144
 msgctxt "Global search settings dialog title."
 msgid "Search"
 msgstr "Paieška"
@@ -4373,11 +4366,11 @@ msgstr "Paieška"
 msgid "Search Icecast stations"
 msgstr "Ieškoti Icecast stočių"
 
-#: internet/jamendo/jamendoservice.cpp:444
+#: internet/jamendo/jamendoservice.cpp:447
 msgid "Search Jamendo"
 msgstr "Ieškoti Jamendo"
 
-#: internet/magnatune/magnatuneservice.cpp:296
+#: internet/magnatune/magnatuneservice.cpp:299
 msgid "Search Magnatune"
 msgstr "Ieškoti Magnatune"
 
@@ -4385,7 +4378,7 @@ msgstr "Ieškoti Magnatune"
 msgid "Search Subsonic"
 msgstr "Ieškoti subsonic"
 
-#: ui/albumcoverchoicecontroller.cpp:73
+#: ui/albumcoverchoicecontroller.cpp:75
 msgid "Search automatically"
 msgstr "Ieškoti automatiškai"
 
@@ -4413,8 +4406,8 @@ msgstr "Paieškos veiksena"
 msgid "Search options"
 msgstr "Paieškos parinktys"
 
-#: internet/soundcloud/soundcloudservice.cpp:116
-#: internet/spotify/spotifyservice.cpp:406
+#: internet/soundcloud/soundcloudservice.cpp:118
+#: internet/spotify/spotifyservice.cpp:408
 msgid "Search results"
 msgstr "Paieškos rezultatai"
 
@@ -4427,11 +4420,11 @@ msgstr "Paieškos terminai"
 msgid "Second level"
 msgstr "Antras lygis"
 
-#: core/globalshortcuts.cpp:65 wiimotedev/wiimotesettingspage.cpp:111
+#: core/globalshortcuts.cpp:65 wiimotedev/wiimotesettingspage.cpp:112
 msgid "Seek backward"
 msgstr "Sukti atgal"
 
-#: core/globalshortcuts.cpp:64 wiimotedev/wiimotesettingspage.cpp:113
+#: core/globalshortcuts.cpp:64 wiimotedev/wiimotesettingspage.cpp:114
 msgid "Seek forward"
 msgstr "Sukti į priekį"
 
@@ -4443,8 +4436,8 @@ msgstr "Rasti dabar grojamą takelį pagal santykinį kiekį"
 msgid "Seek the currently playing track to an absolute position"
 msgstr "Rasti dabar grojamą takelį į absoliučiąją poziciją"
 
-#: ../bin/src/ui_behavioursettingspage.h:372
-msgid "Seeking using a keyboard shortcut"
+#: ../bin/src/ui_behavioursettingspage.h:357
+msgid "Seeking using a keyboard shortcut or mouse wheel"
 msgstr ""
 
 #: visualisations/visualisationselector.cpp:37 ../bin/src/ui_ripcddialog.h:309
@@ -4503,7 +4496,7 @@ msgstr "Serverio detalės"
 msgid "Service offline"
 msgstr "Servisas nepasiekiamas"
 
-#: ui/mainwindow.cpp:1714
+#: ui/mainwindow.cpp:1697
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr "Nustatyti %1 į \"%2\"..."
@@ -4530,7 +4523,7 @@ msgstr "Kombinacija"
 msgid "Shortcut for %1"
 msgstr "Kombinacija veiksmui: %1"
 
-#: wiimotedev/wiimotesettingspage.cpp:133
+#: wiimotedev/wiimotesettingspage.cpp:134
 #, qt-format
 msgid "Shortcut for %1 already exists"
 msgstr "Kombinacija veiksmui %1 jau egzistuoja"
@@ -4539,7 +4532,7 @@ msgstr "Kombinacija veiksmui %1 jau egzistuoja"
 msgid "Show"
 msgstr "Rodyti"
 
-#: core/globalshortcuts.cpp:67 wiimotedev/wiimotesettingspage.cpp:115
+#: core/globalshortcuts.cpp:67 wiimotedev/wiimotesettingspage.cpp:116
 msgid "Show OSD"
 msgstr "Rodyti OSD"
 
@@ -4579,7 +4572,7 @@ msgstr "Rodyti gražų OSD"
 msgid "Show above status bar"
 msgstr "Rodyti virš būsenos juostos"
 
-#: ui/mainwindow.cpp:577
+#: ui/mainwindow.cpp:578
 msgid "Show all songs"
 msgstr "Rodyti visas dainas"
 
@@ -4595,7 +4588,7 @@ msgstr "Rodyti albumo viršelius fonotekoje"
 msgid "Show dividers"
 msgstr "Rodyti skirtukus"
 
-#: ui/albumcoverchoicecontroller.cpp:70 widgets/prettyimage.cpp:182
+#: ui/albumcoverchoicecontroller.cpp:72 widgets/prettyimage.cpp:183
 msgid "Show fullsize..."
 msgstr "Rodyti viso dydžio..."
 
@@ -4603,16 +4596,16 @@ msgstr "Rodyti viso dydžio..."
 msgid "Show groups in global search result"
 msgstr "Rodyti grupes visuotinės paieškos rezultatuose"
 
-#: library/libraryview.cpp:434 ui/mainwindow.cpp:646
-#: widgets/fileviewlist.cpp:51
+#: library/libraryview.cpp:417 ui/mainwindow.cpp:651
+#: widgets/fileviewlist.cpp:53
 msgid "Show in file browser..."
 msgstr "Rodyti failų naršyklėje..."
 
-#: ui/mainwindow.cpp:649
+#: ui/mainwindow.cpp:655
 msgid "Show in library..."
 msgstr "Rodyti fonotekoje..."
 
-#: library/libraryview.cpp:438
+#: library/libraryview.cpp:420
 msgid "Show in various artists"
 msgstr "Rodyti įvairiuose atlikėjuose"
 
@@ -4620,11 +4613,11 @@ msgstr "Rodyti įvairiuose atlikėjuose"
 msgid "Show moodbar"
 msgstr "Rodyti nuotaikos juostą"
 
-#: ui/mainwindow.cpp:579
+#: ui/mainwindow.cpp:580
 msgid "Show only duplicates"
 msgstr "Rodyti tik duplikatus"
 
-#: ui/mainwindow.cpp:581
+#: ui/mainwindow.cpp:582
 msgid "Show only untagged"
 msgstr "Rodyti tik be žymių"
 
@@ -4638,13 +4631,13 @@ msgstr "Rodyti paieškos pasiūlymus"
 
 #: ../bin/src/ui_lastfmsettingspage.h:156
 msgid "Show the \"love\" button"
-msgstr "Rodyti mygtuką \"myliu\""
+msgstr "Rodyti mygtuką \"patinka\""
 
 #: ../bin/src/ui_lastfmsettingspage.h:157
 msgid "Show the scrobble button in the main window"
 msgstr "Rodyti „scrobble“ mygtuką pagrindiniame lange"
 
-#: ../bin/src/ui_behavioursettingspage.h:312
+#: ../bin/src/ui_behavioursettingspage.h:305
 msgid "Show tray icon"
 msgstr "Rodyti piktogramą sistemos dėkle"
 
@@ -4656,7 +4649,7 @@ msgstr "Rodyti kurie šaltiniai yra įjungti ar išjungti"
 msgid "Show/Hide"
 msgstr "Rodyti/Slėpti"
 
-#: playlist/playlistsequence.cpp:202 ../bin/src/ui_playlistsequence.h:124
+#: playlist/playlistsequence.cpp:206 ../bin/src/ui_playlistsequence.h:124
 msgid "Shuffle"
 msgstr "Maišyti"
 
@@ -4716,11 +4709,11 @@ msgstr "Praleisti skaičiavimą"
 msgid "Skip forwards in playlist"
 msgstr "Kitas grojaraščio kūrinys"
 
-#: ui/mainwindow.cpp:1688
+#: ui/mainwindow.cpp:1671
 msgid "Skip selected tracks"
 msgstr "Praleisti pasirinktus takelius"
 
-#: ui/mainwindow.cpp:1686
+#: ui/mainwindow.cpp:1669
 msgid "Skip track"
 msgstr "Praleisti takelį"
 
@@ -4805,11 +4798,11 @@ msgstr "Speex"
 msgid "Spotify"
 msgstr "Spotify"
 
-#: internet/spotify/spotifyservice.cpp:219
+#: internet/spotify/spotifyservice.cpp:220
 msgid "Spotify login error"
 msgstr "Spotify prisijungimo klaida"
 
-#: internet/spotify/spotifyservice.cpp:835
+#: internet/spotify/spotifyservice.cpp:842
 msgid "Spotify playlist's URL"
 msgstr "Spotify grojaraščio URL"
 
@@ -4821,7 +4814,7 @@ msgstr "Spotify plėtinys"
 msgid "Spotify plugin not installed"
 msgstr "Spotify plėtinys neįdiegtas"
 
-#: internet/spotify/spotifyservice.cpp:826
+#: internet/spotify/spotifyservice.cpp:833
 msgid "Spotify song's URL"
 msgstr "Spotify dainos URL"
 
@@ -4829,7 +4822,7 @@ msgstr "Spotify dainos URL"
 msgid "Standard"
 msgstr "Standartinis"
 
-#: internet/spotify/spotifyservice.cpp:414
+#: internet/spotify/spotifyservice.cpp:416
 msgid "Starred"
 msgstr "Su žvaigždute"
 
@@ -4845,8 +4838,8 @@ msgstr "Pradėti grajaraštį nuo dabar grojančio"
 msgid "Start transcoding"
 msgstr "Perkoduoti"
 
-#: internet/soundcloud/soundcloudservice.cpp:118
-#: internet/spotify/spotifyservice.cpp:408
+#: internet/soundcloud/soundcloudservice.cpp:120
+#: internet/spotify/spotifyservice.cpp:410
 msgid ""
 "Start typing something on the search box above to fill this search results "
 "list"
@@ -4861,12 +4854,12 @@ msgstr "Paleidžiama %1"
 msgid "Starting..."
 msgstr "Pradedama..."
 
-#: core/globalshortcuts.cpp:53 wiimotedev/wiimotesettingspage.cpp:101
+#: core/globalshortcuts.cpp:53 wiimotedev/wiimotesettingspage.cpp:102
 #: ../bin/src/ui_mainwindow.h:643
 msgid "Stop"
 msgstr "Stabdyti"
 
-#: wiimotedev/wiimotesettingspage.cpp:114
+#: wiimotedev/wiimotesettingspage.cpp:115
 msgid "Stop after"
 msgstr "Stabdyti po"
 
@@ -4878,7 +4871,7 @@ msgstr "Stabdyti po kiekvieno takelio"
 msgid "Stop after every track"
 msgstr "Stabdyti po kiekvieno takelio"
 
-#: ui/mainwindow.cpp:612 ../bin/src/ui_mainwindow.h:649
+#: ui/mainwindow.cpp:615 ../bin/src/ui_mainwindow.h:649
 msgid "Stop after this track"
 msgstr "Sustabdyti po šio takelio"
 
@@ -4903,7 +4896,7 @@ msgstr "Sustabdyta"
 msgid "Stream"
 msgstr "Srautas"
 
-#: internet/subsonic/subsonicsettingspage.cpp:50
+#: internet/subsonic/subsonicsettingspage.cpp:51
 msgid ""
 "Streaming from a Subsonic server requires a valid server license after the "
 "30-day trial period."
@@ -4931,7 +4924,7 @@ msgstr "Pavyko!"
 msgid "Successfully written %1"
 msgstr "Sėkmingai įrašyta %1"
 
-#: ui/trackselectiondialog.cpp:166
+#: ui/trackselectiondialog.cpp:168
 msgid "Suggested tags"
 msgstr "Siūlomos žymės"
 
@@ -4958,15 +4951,15 @@ msgstr "Palaikomi formatai"
 msgid "Synchronize statistics to files now"
 msgstr "Sinchronizuoti statistiką į failus dabar"
 
-#: internet/spotify/spotifyservice.cpp:699
+#: internet/spotify/spotifyservice.cpp:706
 msgid "Syncing Spotify inbox"
 msgstr "Atnaujinama Spotify dėžutė"
 
-#: internet/spotify/spotifyservice.cpp:693
+#: internet/spotify/spotifyservice.cpp:700
 msgid "Syncing Spotify playlist"
 msgstr "Atnaujinama Spotify grojaraštis"
 
-#: internet/spotify/spotifyservice.cpp:704
+#: internet/spotify/spotifyservice.cpp:711
 msgid "Syncing Spotify starred tracks"
 msgstr "Atnaujinama Spotify pažymėti kūriniai"
 
@@ -5024,25 +5017,25 @@ msgstr "Puslapis, kurio prašėte neegzistuoja"
 msgid "The site you requested is not an image!"
 msgstr "Puslapis, kurio prašėte nėra paveikslas"
 
-#: internet/subsonic/subsonicsettingspage.cpp:116
+#: internet/subsonic/subsonicsettingspage.cpp:117
 msgid ""
 "The trial period for the Subsonic server is over. Please donate to get a "
 "license key. Visit subsonic.org for details."
 msgstr "Bandomasis subsonic laikotarpis baigėsi. Paaukokite ir gaukite licenciją. Norėdami sužinoti daugiau aplankykite subsonic.org."
 
-#: ui/mainwindow.cpp:2507
+#: ui/mainwindow.cpp:2490
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
 msgstr "Clementine versija, į kurią atsinaujinote reikalauja pilno fonotekos perskenavimo dėl savybių išdėstytų žemiau:"
 
-#: library/libraryview.cpp:574
+#: library/libraryview.cpp:556
 msgid "There are other songs in this album"
 msgstr "Čia yra kitų dainų iš šio albumo"
 
-#: internet/podcasts/gpoddersearchpage.cpp:76
+#: internet/podcasts/gpoddersearchpage.cpp:78
 #: internet/podcasts/gpoddertoptagsmodel.cpp:104
-#: internet/podcasts/gpoddertoptagspage.cpp:73
+#: internet/podcasts/gpoddertoptagspage.cpp:74
 msgid "There was a problem communicating with gpodder.net"
 msgstr "Problema jungiantis su gpodder.net"
 
@@ -5050,7 +5043,7 @@ msgstr "Problema jungiantis su gpodder.net"
 msgid "There was a problem fetching the metadata from Magnatune"
 msgstr "Įvyko klaida gaunant meta duomenis iš Magnatune"
 
-#: internet/podcasts/itunessearchpage.cpp:77
+#: internet/podcasts/itunessearchpage.cpp:79
 msgid "There was a problem parsing the response from the iTunes Store"
 msgstr "Problema apdorojant iTunes parduotuvės atsakymą"
 
@@ -5066,13 +5059,13 @@ msgid ""
 "deleted:"
 msgstr "Iškilo problemų trinant dainas. Šie failai negalėjo būti ištrinti:"
 
-#: devices/deviceview.cpp:405
+#: devices/deviceview.cpp:409
 msgid ""
 "These files will be deleted from the device, are you sure you want to "
 "continue?"
 msgstr "Šie failai bus ištrinti iš įrenginio, ar tikrai norite tęsti?"
 
-#: library/libraryview.cpp:658 ui/mainwindow.cpp:2295 widgets/fileview.cpp:187
+#: library/libraryview.cpp:640 ui/mainwindow.cpp:2278 widgets/fileview.cpp:187
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -5092,7 +5085,7 @@ msgstr "Šie nustatymai yra naudojami \"Muzikos perkodavimas\" lange, o taip pat
 msgid "Third level"
 msgstr "Trečias lygis"
 
-#: internet/jamendo/jamendoservice.cpp:181
+#: internet/jamendo/jamendoservice.cpp:182
 msgid ""
 "This action will create a database which could be as big as 150 MB.\n"
 "Do you want to continue anyway?"
@@ -5148,7 +5141,7 @@ msgstr "Šis srautas yra tik apmokamiems prenumeratoriams"
 msgid "This type of device is not supported: %1"
 msgstr "Šio tipo įrenginys yra nepalaikomas: %1"
 
-#: ../bin/src/ui_behavioursettingspage.h:373
+#: ../bin/src/ui_behavioursettingspage.h:358
 msgid "Time step"
 msgstr ""
 
@@ -5159,7 +5152,7 @@ msgstr ""
 msgid "Title"
 msgstr "Pavadinimas"
 
-#: core/utilities.cpp:136 core/utilities.cpp:148
+#: core/utilities.cpp:137 core/utilities.cpp:149
 msgid "Today"
 msgstr "Šiandien"
 
@@ -5167,11 +5160,11 @@ msgstr "Šiandien"
 msgid "Toggle Pretty OSD"
 msgstr "Išjungti gražųjį OSD"
 
-#: visualisations/visualisationcontainer.cpp:101
+#: visualisations/visualisationcontainer.cpp:102
 msgid "Toggle fullscreen"
 msgstr "Visame ekrane"
 
-#: ui/mainwindow.cpp:1679
+#: ui/mainwindow.cpp:1662
 msgid "Toggle queue status"
 msgstr "Perjungti eilės statusą"
 
@@ -5183,7 +5176,7 @@ msgstr "Perjungti „scrobbling“ būseną"
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "Keisti ekrano pranešimų (OSD) matomumą"
 
-#: core/utilities.cpp:149
+#: core/utilities.cpp:150
 msgid "Tomorrow"
 msgstr "Rytoj"
 
@@ -5191,7 +5184,7 @@ msgstr "Rytoj"
 msgid "Too many redirects"
 msgstr "Per daug peradresavimų."
 
-#: internet/spotify/spotifyservice.cpp:427
+#: internet/spotify/spotifyservice.cpp:430
 msgid "Top tracks"
 msgstr "Top takeliai"
 
@@ -5213,7 +5206,7 @@ msgstr "Viso tinklo užklausų padaryta"
 msgid "Track"
 msgstr "Takelis"
 
-#: internet/soundcloud/soundcloudservice.cpp:133
+#: internet/soundcloud/soundcloudservice.cpp:135
 msgid "Tracks"
 msgstr "Takeliai"
 
@@ -5275,8 +5268,8 @@ msgstr "Nepavyko atsiųsti %1 (%2)"
 #: core/song.cpp:435 library/librarymodel.cpp:361 library/librarymodel.cpp:366
 #: library/librarymodel.cpp:370 library/librarymodel.cpp:1143
 #: playlist/playlistdelegates.cpp:306 playlist/playlistmanager.cpp:508
-#: playlist/playlistmanager.cpp:509 ui/albumcoverchoicecontroller.cpp:124
-#: ui/edittagdialog.cpp:455 ui/edittagdialog.cpp:499
+#: playlist/playlistmanager.cpp:509 ui/albumcoverchoicecontroller.cpp:126
+#: ui/edittagdialog.cpp:458 ui/edittagdialog.cpp:502
 msgid "Unknown"
 msgstr "Nežinomas"
 
@@ -5289,32 +5282,32 @@ msgstr "Nežinomas turinio tipas"
 msgid "Unknown error"
 msgstr "Nežinoma klaida"
 
-#: ui/albumcoverchoicecontroller.cpp:68
+#: ui/albumcoverchoicecontroller.cpp:69
 msgid "Unset cover"
 msgstr "Pašalinti viršelį"
 
-#: ui/mainwindow.cpp:1684
+#: ui/mainwindow.cpp:1667
 msgid "Unskip selected tracks"
 msgstr "Nepraleisti pasirinktų takelių"
 
-#: ui/mainwindow.cpp:1682
+#: ui/mainwindow.cpp:1665
 msgid "Unskip track"
 msgstr "Nepraleisti takelio"
 
-#: internet/podcasts/addpodcastdialog.cpp:68
-#: internet/podcasts/podcastservice.cpp:442
+#: internet/podcasts/addpodcastdialog.cpp:70
+#: internet/podcasts/podcastservice.cpp:444
 msgid "Unsubscribe"
 msgstr "Nebeprenumeruoti"
 
-#: songinfo/songkickconcerts.cpp:172
+#: songinfo/songkickconcerts.cpp:173
 msgid "Upcoming Concerts"
 msgstr "Artėjantys koncertai"
 
-#: internet/vk/vkservice.cpp:341
+#: internet/vk/vkservice.cpp:347
 msgid "Update"
 msgstr "Atnaujinti"
 
-#: internet/podcasts/podcastservice.cpp:419
+#: internet/podcasts/podcastservice.cpp:420
 msgid "Update all podcasts"
 msgstr "Atnaujinti visas garso prenumeratas"
 
@@ -5326,7 +5319,7 @@ msgstr "Atnaujinti pakeistus fonotekos katalogus"
 msgid "Update the library when Clementine starts"
 msgstr "Atnaujinti fonoteką paleidžiant Clementine"
 
-#: internet/podcasts/podcastservice.cpp:427
+#: internet/podcasts/podcastservice.cpp:429
 msgid "Update this podcast"
 msgstr "Atnaujinti šią garso prenumeratą"
 
@@ -5408,7 +5401,7 @@ msgstr "Naudoti pranešimus Wii pulto būsenos rodymui"
 msgid "Use temporal noise shaping"
 msgstr "Naudoti laikinąjį triukšmų formavimą"
 
-#: ../bin/src/ui_behavioursettingspage.h:318
+#: ../bin/src/ui_behavioursettingspage.h:311
 msgid "Use the system default"
 msgstr "Naudoti sistemos numatytus"
 
@@ -5440,7 +5433,7 @@ msgstr "Naudotojo sąsaja"
 msgid "Username"
 msgstr "Naudotojo vardas"
 
-#: ../bin/src/ui_behavioursettingspage.h:331
+#: ../bin/src/ui_behavioursettingspage.h:324
 msgid "Using the menu to add a song will..."
 msgstr "Naudojant meniu pridėti dainai..."
 
@@ -5453,7 +5446,7 @@ msgstr "VBR MP3"
 msgid "Variable bit rate"
 msgstr "Kintamas bitrate"
 
-#: globalsearch/globalsearchmodel.cpp:106 library/librarymodel.cpp:287
+#: globalsearch/globalsearchmodel.cpp:107 library/librarymodel.cpp:287
 #: playlist/playlistmanager.cpp:520 ui/albumcovermanager.cpp:270
 msgid "Various artists"
 msgstr "Įvairūs atlikėjai"
@@ -5505,11 +5498,11 @@ msgstr "WAV"
 msgid "WMA"
 msgstr "WMA"
 
-#: internet/vk/vkservice.cpp:869
+#: internet/vk/vkservice.cpp:880
 msgid "Wall"
 msgstr "Siena"
 
-#: playlist/playlisttabbar.cpp:192 ../bin/src/ui_behavioursettingspage.h:314
+#: playlist/playlisttabbar.cpp:192 ../bin/src/ui_behavioursettingspage.h:307
 msgid "Warn me when closing a playlist tab"
 msgstr "Perspėti mane, kai uždaroma grojaraščio kortelė."
 
@@ -5525,7 +5518,7 @@ msgstr "Svetainė"
 msgid "Weeks"
 msgstr "Savaitės"
 
-#: ../bin/src/ui_behavioursettingspage.h:321
+#: ../bin/src/ui_behavioursettingspage.h:314
 msgid "When Clementine starts"
 msgstr "Kai  Clementine paleidžiamas"
 
@@ -5535,7 +5528,7 @@ msgid ""
 "If there are no matches then it will use the largest image in the directory."
 msgstr "Ieškant albumo viršelių Clementine pirmiausia ieško paveikslėlių failų, kuriuose yra vienas iš šių žodžių.\nJei nėra atitikmens tada bus naudojamas didžiausias paveikslas kataloge."
 
-#: ../bin/src/ui_behavioursettingspage.h:376
+#: ../bin/src/ui_behavioursettingspage.h:361
 msgid "When saving a playlist, file paths should be"
 msgstr "Išsaugant grojaraštį, failų keliai turėtų būti"
 
@@ -5605,13 +5598,13 @@ msgstr "Windows Media Audio"
 msgid "Without cover:"
 msgstr "Be viršelių:"
 
-#: library/libraryview.cpp:575
+#: library/libraryview.cpp:557
 msgid ""
 "Would you like to move the other songs in this album to Various Artists as "
 "well?"
 msgstr "Ar norėtumėte perkelti kitas dainas į šio atlikėjo albumą?"
 
-#: ui/mainwindow.cpp:2514
+#: ui/mainwindow.cpp:2497
 msgid "Would you like to run a full rescan right now?"
 msgstr "Ar norite paleisti pilną perskenavimą dabar?"
 
@@ -5619,11 +5612,11 @@ msgstr "Ar norite paleisti pilną perskenavimą dabar?"
 msgid "Write all songs statistics into songs' files"
 msgstr "Rašyti visą dainų statistiką į dainų failus"
 
-#: ../bin/src/ui_behavioursettingspage.h:381
+#: ../bin/src/ui_behavioursettingspage.h:366
 msgid "Write metadata"
 msgstr "Įrašyti meta duomenis"
 
-#: internet/subsonic/subsonicsettingspage.cpp:101
+#: internet/subsonic/subsonicsettingspage.cpp:102
 msgid "Wrong username or password."
 msgstr "Netinkamas naudotojo vardas ar slaptažodis."
 
@@ -5643,7 +5636,7 @@ msgstr "Metai - Albumas"
 msgid "Years"
 msgstr "Metai"
 
-#: core/utilities.cpp:137
+#: core/utilities.cpp:138
 msgid "Yesterday"
 msgstr "Vakar"
 
@@ -5680,13 +5673,13 @@ msgstr "Jūs esate prisijungęs."
 msgid "You can change the way the songs in the library are organised."
 msgstr "Galite nustatyti kaip organizuoti dainas fonotekoje"
 
-#: internet/digitally/digitallyimportedsettingspage.cpp:48
+#: internet/digitally/digitallyimportedsettingspage.cpp:49
 msgid ""
 "You can listen for free without an account, but Premium members can listen "
 "to higher quality streams without advertisements."
 msgstr "Jūs galite klausytis nemokamai be paskyros, bet Premium nariai gali klausyti aukštesnės kokybės srautų be reklamų."
 
-#: internet/magnatune/magnatunesettingspage.cpp:58
+#: internet/magnatune/magnatunesettingspage.cpp:59
 msgid ""
 "You can listen to Magnatune songs for free without an account.  Purchasing a"
 " membership removes the messages at the end of each track."
@@ -5718,7 +5711,7 @@ msgid ""
 "stream."
 msgstr "Jums nebūtina prisijungti, norint ieškoti ir klausytis muzikos sistemoje SoundCloud. Tačiau, norėdami pasiekti savo grojaraščius ir savo srautą, privalote prisijungti."
 
-#: internet/spotify/spotifyservice.cpp:204
+#: internet/spotify/spotifyservice.cpp:205
 msgid ""
 "You have been logged out of Spotify, please re-enter your password in the "
 "Settings dialog."
@@ -5730,7 +5723,7 @@ msgstr "Jūs atsijungėte iš Spotify, prašome įvesti savo slaptažodį dar ka
 
 #: songinfo/lastfmtrackinfoprovider.cpp:85
 msgid "You love this track"
-msgstr "Jūs mylite šį takelį"
+msgstr "Jums patinka šis takelis"
 
 #: ../bin/src/ui_globalshortcutssettingspage.h:169
 msgid ""
@@ -5739,7 +5732,7 @@ msgid ""
 "shortcuts in Clementine."
 msgstr "Norėdami visuotinai naudoti Clementine sparčiuosius klavišus, privalote paleisti Sistemos Nuostatas ir leisti Clementine \"<span style=\"font-style:italic\">valdyti jūsų kompiuterį</span>\"."
 
-#: ../bin/src/ui_behavioursettingspage.h:320
+#: ../bin/src/ui_behavioursettingspage.h:313
 msgid "You will need to restart Clementine if you change the language."
 msgstr "Reikės paleisti iš naujo Clementine, kad pasikeistų kalba."
 
@@ -5751,11 +5744,11 @@ msgstr "Jūsų IP adresas:"
 msgid "Your Last.fm credentials were incorrect"
 msgstr "Jūsų Last.fm duomenys buvo neteisingi"
 
-#: internet/magnatune/magnatunesettingspage.cpp:117
+#: internet/magnatune/magnatunesettingspage.cpp:118
 msgid "Your Magnatune credentials were incorrect"
 msgstr "Jūsų Magnatune prisijungimo duomenys buvo neteisingi"
 
-#: library/libraryview.cpp:366
+#: library/libraryview.cpp:347
 msgid "Your library is empty!"
 msgstr "Jūsų fonoteka yra tuščia!"
 
@@ -5819,7 +5812,7 @@ msgstr "tarp"
 msgid "biggest first"
 msgstr "Didžiausi pirmiausia"
 
-#: playlist/playlistview.cpp:228 ui/edittagdialog.cpp:492
+#: playlist/playlistview.cpp:232 ui/edittagdialog.cpp:495
 msgid "bpm"
 msgstr "dpm"
 
@@ -5854,7 +5847,7 @@ msgstr "lygus"
 msgid "gpodder.net"
 msgstr "gpodder.net"
 
-#: internet/podcasts/gpoddertoptagspage.cpp:35
+#: internet/podcasts/gpoddertoptagspage.cpp:36
 msgid "gpodder.net directory"
 msgstr "gpodder.net direktorija"
 
@@ -5872,8 +5865,8 @@ msgstr "per paskutines"
 
 #: internet/spotify/spotifysettingspage.cpp:62
 #: internet/spotify/spotifysettingspage.cpp:63
-#: internet/spotify/spotifysettingspage.cpp:64 playlist/playlistview.cpp:232
-#: ui/edittagdialog.cpp:494
+#: internet/spotify/spotifysettingspage.cpp:64 playlist/playlistview.cpp:236
+#: ui/edittagdialog.cpp:497
 msgid "kbps"
 msgstr "kbps"
 

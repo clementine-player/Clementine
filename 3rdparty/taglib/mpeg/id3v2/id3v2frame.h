@@ -165,7 +165,7 @@ namespace TagLib {
        * All other processing of \a data should be handled in a subclass.
        *
        * \note This need not contain anything more than a frame ID, but
-       * \e must constain at least that.
+       * \e must contain at least that.
        */
       explicit Frame(const ByteVector &data);
 
@@ -218,9 +218,9 @@ namespace TagLib {
       ByteVector fieldData(const ByteVector &frameData) const;
 
       /*!
-       * Reads a String of type \a encodiong from the ByteVector \a data.  If \a
+       * Reads a String of type \a encoding from the ByteVector \a data.  If \a
        * position is passed in it is used both as the starting point and is
-       * updated to replect the position just after the string that has been read.
+       * updated to return the position just after the string that has been read.
        * This is useful for reading strings sequentially.
        */
       String readStringField(const ByteVector &data, String::Type encoding,
@@ -460,7 +460,7 @@ namespace TagLib {
       bool readOnly() const;
 
       /*!
-       * Returns true if the flag for the grouping identifity is set.
+       * Returns true if the flag for the grouping identity is set.
        *
        * \note This flag is currently ignored internally in TagLib.
        */

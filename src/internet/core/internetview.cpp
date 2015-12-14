@@ -32,6 +32,7 @@ InternetView::InternetView(QWidget* parent) : AutoExpandingTreeView(parent) {
   SetExpandOnReset(false);
   setAttribute(Qt::WA_MacShowFocusRect, false);
   setSelectionMode(QAbstractItemView::ExtendedSelection);
+  setAnimated(true);
 }
 
 void InternetView::contextMenuEvent(QContextMenuEvent* e) {
