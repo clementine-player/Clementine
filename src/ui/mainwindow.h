@@ -248,7 +248,6 @@ signals:
   void ShowAboutDialog();
   void ShowTranscodeDialog();
   void ShowErrorDialog(const QString& message);
-  void ShowQueueManager();
   void ShowVisualisations();
   void EnsureSettingsDialogCreated();
   void EnsureEditTagDialogCreated();
@@ -314,6 +313,7 @@ signals:
   DeviceView* device_view_;
   SongInfoView* song_info_view_;
   ArtistInfoView* artist_info_view_;
+  QueueManager* queue_manager_;
 
   std::unique_ptr<SettingsDialog> settings_dialog_;
   std::unique_ptr<AddStreamDialog> add_stream_dialog_;
@@ -322,7 +322,6 @@ signals:
   std::unique_ptr<TranscodeDialog> transcode_dialog_;
   std::unique_ptr<ErrorDialog> error_dialog_;
   std::unique_ptr<OrganiseDialog> organise_dialog_;
-  std::unique_ptr<QueueManager> queue_manager_;
 
   std::unique_ptr<TagFetcher> tag_fetcher_;
   std::unique_ptr<TrackSelectionDialog> track_selection_dialog_;

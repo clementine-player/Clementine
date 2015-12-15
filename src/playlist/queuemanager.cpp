@@ -27,7 +27,7 @@
 #include <QShortcut>
 
 QueueManager::QueueManager(QWidget* parent)
-    : QDialog(parent),
+    : QWidget(parent),
       ui_(new Ui_QueueManager),
       playlists_(nullptr),
       current_playlist_(nullptr) {
@@ -48,9 +48,6 @@ QueueManager::QueueManager(QWidget* parent)
   connect(ui_->move_up, SIGNAL(clicked()), SLOT(MoveUp()));
   connect(ui_->remove, SIGNAL(clicked()), SLOT(Remove()));
   connect(ui_->clear, SIGNAL(clicked()), SLOT(Clear()));
-
-  QShortcut* close = new QShortcut(QKeySequence::Close, this);
-  connect(close, SIGNAL(activated()), SLOT(close()));
 }
 
 QueueManager::~QueueManager() { delete ui_; }
