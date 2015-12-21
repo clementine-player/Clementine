@@ -512,7 +512,6 @@ void Song::InitFromProtobuf(const pb::tagreader::SongMetadata& pb) {
   d->genre_ = QStringFromStdString(pb.genre());
   d->comment_ = QStringFromStdString(pb.comment());
   d->compilation_ = pb.compilation();
-  d->playcount_ = pb.playcount();
   d->skipcount_ = pb.skipcount();
   d->lastplayed_ = pb.lastplayed();
   d->score_ = pb.score();
@@ -534,6 +533,10 @@ void Song::InitFromProtobuf(const pb::tagreader::SongMetadata& pb) {
 
   if (pb.has_rating()) {
     d->rating_ = pb.rating();
+  }
+
+  if (pb.has_playcount()) {
+    d->playcount_ = pb.playcount();
   }
 
   InitArtManual();
