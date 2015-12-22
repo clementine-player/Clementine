@@ -20,7 +20,10 @@
 
 #include "generator_fwd.h"
 
+#include <QFuture>
 #include <QObject>
+
+#include "playlist/playlist.h"
 
 class LibraryBackend;
 class Playlist;
@@ -45,7 +48,7 @@ signals:
   void PlayRequested(const QModelIndex& index);
 
  private slots:
-  void Finished();
+  void Finished(QFuture<PlaylistItemList> future);
 
  private:
   TaskManager* task_manager_;

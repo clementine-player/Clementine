@@ -140,7 +140,7 @@ namespace TagLib {
       bool isOriginal() const;
 
       /*!
-       * Returns the frame length.
+       * Returns the frame length in bytes.
        */
       int frameLength() const;
 

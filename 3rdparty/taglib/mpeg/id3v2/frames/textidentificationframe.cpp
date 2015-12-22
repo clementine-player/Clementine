@@ -211,12 +211,12 @@ void TextIdentificationFrame::parseFields(const ByteVector &data)
   // append those split values to the list and make sure that the new string's
   // type is the same specified for this frame
 
-  for(ByteVectorList::Iterator it = l.begin(); it != l.end(); it++) {
+  for(ByteVectorList::ConstIterator it = l.begin(); it != l.end(); it++) {
     if(!(*it).isEmpty()) {
       if(d->textEncoding == String::Latin1)
         d->fieldList.append(Tag::latin1StringHandler()->parse(*it));
       else
-        d->fieldList.append(String(*it, d->textEncoding));    
+        d->fieldList.append(String(*it, d->textEncoding));
     }
   }
 }
@@ -394,7 +394,7 @@ UserTextIdentificationFrame *UserTextIdentificationFrame::find(
   ID3v2::Tag *tag, const String &description) // static
 {
   FrameList l = tag->frameList("TXXX");
-  for(FrameList::Iterator it = l.begin(); it != l.end(); ++it) {
+  for(FrameList::ConstIterator it = l.begin(); it != l.end(); ++it) {
     UserTextIdentificationFrame *f = dynamic_cast<UserTextIdentificationFrame *>(*it);
     if(f && f->description() == description)
       return f;

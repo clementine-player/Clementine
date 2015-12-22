@@ -86,8 +86,10 @@ APE::Item::~Item()
 
 Item &APE::Item::operator=(const Item &item)
 {
-  delete d;
-  d = new ItemPrivate(*item.d);
+  if(&item != this) {
+    delete d;
+    d = new ItemPrivate(*item.d);
+  }
   return *this;
 }
 

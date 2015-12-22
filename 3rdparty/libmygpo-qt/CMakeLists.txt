@@ -1,7 +1,7 @@
 # Extra bits for Clementine.
 set( MYGPO_QT_VERSION_MAJOR "1" )
 set( MYGPO_QT_VERSION_MINOR "0" )
-set( MYGPO_QT_VERSION_PATCH "7" )
+set( MYGPO_QT_VERSION_PATCH "9" )
 configure_file( Version.h.in ${CMAKE_CURRENT_BINARY_DIR}/Version.h )
 include_directories("${QJSON_INCLUDEDIR}/qjson")
 
@@ -27,6 +27,7 @@ set ( LIBMYGPO_QT_SRC
         DeviceUpdates.cpp
         DeviceList.cpp
         Device.cpp
+        qjsonwrapper/Json.cpp
 )
 
 set ( LIBMYGPO_QT_MOC_H

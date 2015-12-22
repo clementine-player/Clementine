@@ -33,7 +33,6 @@
 #include <QFileDialog>
 #include <QFileInfo>
 #include <QFuture>
-#include <QFutureWatcher>
 #include <QMessageBox>
 #include <QtConcurrentRun>
 #include <QtDebug>
@@ -118,7 +117,7 @@ Playlist* PlaylistManager::AddPlaylist(int id, const QString& name,
   connect(ret, SIGNAL(PlaylistChanged()), SLOT(UpdateSummaryText()));
   connect(ret, SIGNAL(EditingFinished(QModelIndex)),
           SIGNAL(EditingFinished(QModelIndex)));
-  connect(ret, SIGNAL(LoadTracksError(QString)), SIGNAL(Error(QString)));
+  connect(ret, SIGNAL(Error(QString)), SIGNAL(Error(QString)));
   connect(ret, SIGNAL(PlayRequested(QModelIndex)),
           SIGNAL(PlayRequested(QModelIndex)));
   connect(playlist_container_->view(),
@@ -185,21 +184,16 @@ void PlaylistManager::Save(int id, const QString& filename,
     // from the left side bar and the playlist isn't loaded.
     QFuture<QList<Song>> future = QtConcurrent::run(
         playlist_backend_, &PlaylistBackend::GetPlaylistSongs, id);
-    QFutureWatcher<SongList>* watcher = new QFutureWatcher<SongList>(this);
-    watcher->setFuture(future);
-
-    NewClosure(watcher, SIGNAL(finished()), this,
-               SLOT(ItemsLoadedForSavePlaylist(QFutureWatcher<SongList>*,
-                                               QString, Playlist::Path)),
-               watcher, filename);
+    NewClosure(future, this, SLOT(ItemsLoadedForSavePlaylist(
+                                 QFuture<SongList>, QString, Playlist::Path)),
+               future, filename, path_type);
   }
 }
 
-void PlaylistManager::ItemsLoadedForSavePlaylist(
-    QFutureWatcher<SongList>* watcher, const QString& filename,
-    Playlist::Path path_type) {
-  SongList song_list = watcher->future().result();
-  parser_->Save(song_list, filename, path_type);
+void PlaylistManager::ItemsLoadedForSavePlaylist(QFuture<SongList> future,
+                                                 const QString& filename,
+                                                 Playlist::Path path_type) {
+  parser_->Save(future.result(), filename, path_type);
 }
 
 void PlaylistManager::SaveWithUI(int id, const QString& suggested_filename) {
@@ -471,7 +465,7 @@ void PlaylistManager::InsertUrls(int id, const QList<QUrl>& urls, int pos,
 }
 
 void PlaylistManager::InsertSongs(int id, const SongList& songs, int pos,
-                                 bool play_now, bool enqueue) {
+                                  bool play_now, bool enqueue) {
   Q_ASSERT(playlists_.contains(id));
 
   playlists_[id].p->InsertSongs(songs, pos, play_now, enqueue);

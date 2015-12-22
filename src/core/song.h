@@ -29,7 +29,6 @@
 #ifndef CORE_SONG_H_
 #define CORE_SONG_H_
 
-#include <QFuture>
 #include <QImage>
 #include <QMetaType>
 #include <QSharedDataPointer>

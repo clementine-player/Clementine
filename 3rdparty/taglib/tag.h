@@ -48,7 +48,7 @@ namespace TagLib {
   public:
 
     /*!
-     * Detroys this Tag instance.
+     * Destroys this Tag instance.
      */
     virtual ~Tag();
 

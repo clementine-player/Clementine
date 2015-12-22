@@ -28,7 +28,7 @@
 
 namespace TagLib {
   namespace XM {
-    class Properties : public AudioProperties {
+    class TAGLIB_EXPORT Properties : public AudioProperties {
       friend class File;
     public:
       /*! Flag bits. */
@@ -39,10 +39,12 @@ namespace TagLib {
       Properties(AudioProperties::ReadStyle propertiesStyle);
       virtual ~Properties();
 
-      int length()     const;
-      int bitrate()    const;
-      int sampleRate() const;
-      int channels()   const;
+      int length()               const;
+      int lengthInSeconds()      const;
+      int lengthInMilliseconds() const;
+      int bitrate()              const;
+      int sampleRate()           const;
+      int channels()             const;
 
       ushort lengthInPatterns() const;
       ushort version()          const;

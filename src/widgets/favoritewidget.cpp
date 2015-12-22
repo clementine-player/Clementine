@@ -22,18 +22,18 @@
 #include <QSize>
 #include <QStyle>
 #include <QStylePainter>
+#include <QFontMetrics>
 
 #include "core/logging.h"
 
-const int FavoriteWidget::kStarSize = 15;
+const int FavoriteWidget::kStarSize = 16;
 
 FavoriteWidget::FavoriteWidget(int tab_index, bool favorite, QWidget* parent)
     : QWidget(parent),
       tab_index_(tab_index),
       favorite_(favorite),
       on_(":/star-on.png"),
-      off_(":/star-off.png"),
-      rect_(0, 0, kStarSize, kStarSize) {}
+      off_(":/star-off.png") {}
 
 void FavoriteWidget::SetFavorite(bool favorite) {
   if (favorite_ != favorite) {
@@ -53,10 +53,17 @@ void FavoriteWidget::paintEvent(QPaintEvent* e) {
   QStylePainter p(this);
 
   if (favorite_) {
-    p.drawPixmap(rect_, on_);
+    p.drawItemPixmap(rect_, Qt::AlignVCenter, on_);
   } else {
-    p.drawPixmap(rect_, off_);
+    p.drawItemPixmap(rect_, Qt::AlignVCenter, off_);
   }
+}
+
+void FavoriteWidget::resizeEvent(QResizeEvent* e) {
+  // ignore text descent when vertically centering
+  QFontMetrics fontMetrics = QFontMetrics(this->font());
+  rect_ = this->rect();
+  rect_.setBottom(rect_.bottom() - fontMetrics.descent());
 }
 
 void FavoriteWidget::mouseReleaseEvent(QMouseEvent* e) {

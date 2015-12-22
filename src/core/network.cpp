@@ -31,7 +31,8 @@
 QMutex ThreadSafeNetworkDiskCache::sMutex;
 QNetworkDiskCache* ThreadSafeNetworkDiskCache::sCache = nullptr;
 
-ThreadSafeNetworkDiskCache::ThreadSafeNetworkDiskCache(QObject* parent) {
+ThreadSafeNetworkDiskCache::ThreadSafeNetworkDiskCache(QObject* parent)
+    : QAbstractNetworkCache(parent) {
   QMutexLocker l(&sMutex);
   if (!sCache) {
     sCache = new QNetworkDiskCache;
@@ -120,7 +121,7 @@ QNetworkReply* NetworkAccessManager::createRequest(
 }
 
 NetworkTimeouts::NetworkTimeouts(int timeout_msec, QObject* parent)
-    : timeout_msec_(timeout_msec) {}
+    : QObject(parent), timeout_msec_(timeout_msec) {}
 
 void NetworkTimeouts::AddReply(QNetworkReply* reply) {
   if (timers_.contains(reply)) return;

@@ -28,6 +28,7 @@
 #include "core/closure.h"
 #include "core/logging.h"
 #include "songkickconcertwidget.h"
+#include "ui/iconloader.h"
 
 const char* SongkickConcerts::kSongkickArtistBucket = "id:songkick";
 const char* SongkickConcerts::kSongkickArtistCalendarUrl =
@@ -170,7 +171,7 @@ void SongkickConcerts::CalendarRequestFinished(QNetworkReply* reply, int id) {
   data.type_ = CollapsibleInfoPane::Data::Type_Biography;
   data.id_ = QString("songkick/%1").arg(id);
   data.title_ = tr("Upcoming Concerts");
-  data.icon_ = QIcon(":providers/songkick.png");
+  data.icon_ = IconLoader::Load("songkick", IconLoader::Provider);
   data.contents_ = container;
 
   emit InfoReady(id, data);

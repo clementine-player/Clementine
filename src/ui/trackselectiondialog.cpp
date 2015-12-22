@@ -15,19 +15,19 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "iconloader.h"
-#include "trackselectiondialog.h"
+#include "ui/trackselectiondialog.h"
 #include "ui_trackselectiondialog.h"
-#include "core/tagreaderclient.h"
 
 #include <QFileInfo>
-#include <QFutureWatcher>
 #include <QPushButton>
 #include <QShortcut>
 #include <QTreeWidget>
 #include <QUrl>
 #include <QtConcurrentRun>
 #include <QtDebug>
+
+#include "core/tagreaderclient.h"
+#include "ui/iconloader.h"
 
 TrackSelectionDialog::TrackSelectionDialog(QWidget* parent)
     : QDialog(parent), ui_(new Ui_TrackSelectionDialog), save_on_close_(false) {
@@ -43,9 +43,10 @@ TrackSelectionDialog::TrackSelectionDialog(QWidget* parent)
   SetLoading(QString());
 
   // Add the next/previous buttons
-  previous_button_ =
-      new QPushButton(IconLoader::Load("go-previous"), tr("Previous"), this);
-  next_button_ = new QPushButton(IconLoader::Load("go-next"), tr("Next"), this);
+  previous_button_ = new QPushButton(
+      IconLoader::Load("go-previous", IconLoader::Base), tr("Previous"), this);
+  next_button_ = new QPushButton(IconLoader::Load("go-next", IconLoader::Base),
+                                 tr("Next"), this);
   ui_->button_box->addButton(previous_button_, QDialogButtonBox::ResetRole);
   ui_->button_box->addButton(next_button_, QDialogButtonBox::ResetRole);
 
@@ -243,8 +244,8 @@ void TrackSelectionDialog::SaveData(const QList<Data>& data) {
 
     if (!TagReaderClient::Instance()->SaveFileBlocking(copy.url().toLocalFile(),
                                                        copy)) {
-      qLog(Warning) << "Failed to write new auto-tags to"
-                    << copy.url().toLocalFile();
+      emit Error(tr("Failed to write new auto-tags to '%1'")
+                     .arg(copy.url().toLocalFile()));
     }
   }
 }
@@ -255,11 +256,8 @@ void TrackSelectionDialog::accept() {
 
     // Save tags in the background
     QFuture<void> future =
-        QtConcurrent::run(&TrackSelectionDialog::SaveData, data_);
-    QFutureWatcher<void>* watcher = new QFutureWatcher<void>(this);
-    watcher->setFuture(future);
-    connect(watcher, SIGNAL(finished()), SLOT(AcceptFinished()));
-
+        QtConcurrent::run(this, &TrackSelectionDialog::SaveData, data_);
+    NewClosure(future, this, SLOT(AcceptFinished()));
     return;
   }
 
@@ -276,10 +274,6 @@ void TrackSelectionDialog::accept() {
 }
 
 void TrackSelectionDialog::AcceptFinished() {
-  QFutureWatcher<void>* watcher = dynamic_cast<QFutureWatcher<void>*>(sender());
-  if (!watcher) return;
-  watcher->deleteLater();
-
   SetLoading(QString());
   QDialog::accept();
 }

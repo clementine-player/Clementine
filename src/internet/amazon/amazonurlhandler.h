@@ -19,6 +19,7 @@
 #define INTERNET_AMAZON_AMAZONURLHANDLER_H_
 
 #include "core/urlhandler.h"
+#include "ui/iconloader.h"
 
 class AmazonCloudDrive;
 
@@ -29,7 +30,7 @@ class AmazonUrlHandler : public UrlHandler {
       AmazonCloudDrive* service, QObject* parent = nullptr);
 
   QString scheme() const { return "amazonclouddrive"; }
-  QIcon icon() const { return QIcon(":providers/amazonclouddrive.png"); }
+  QIcon icon() const { return IconLoader::Load("amazonclouddrive", IconLoader::Provider); }
   LoadResult StartLoading(const QUrl& url);
 
  private:

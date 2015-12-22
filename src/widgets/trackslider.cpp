@@ -111,7 +111,8 @@ void TrackSlider::UpdateTimes(int elapsed) {
                                     elapsed));
   } else {
     // check if slider maximum value is changed before updating
-    if (slider_maximum_value_ != ui_->slider->maximum()) {
+    if (slider_maximum_value_ != ui_->slider->maximum() ||
+        !ui_->slider->isEnabled()) {
       slider_maximum_value_ = ui_->slider->maximum();
       ui_->remaining->setText(
           Utilities::PrettyTime((ui_->slider->maximum() / kMsecPerSec)));

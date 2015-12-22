@@ -49,8 +49,9 @@ class SongInfoView : public SongInfoBase {
  private:
   SongInfoProvider* ProviderByName(const QString& name) const;
 
+  typedef QList<SongInfoProvider*> ProviderList;
  private slots:
-  void UltimateLyricsParsed();
+  void UltimateLyricsParsed(QFuture<ProviderList> future);
 
  private:
   std::unique_ptr<UltimateLyricsReader> ultimate_reader_;

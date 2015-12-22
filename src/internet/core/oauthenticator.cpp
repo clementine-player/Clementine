@@ -67,7 +67,9 @@ void OAuthenticator::StartAuthorisation(const QString& oauth_endpoint,
   }
 
   url.addQueryItem("redirect_uri", redirect_url.toString());
-  url.addQueryItem("scope", scope);
+  if (!scope.isEmpty()) {  // Empty scope is valid for Dropbox.
+    url.addQueryItem("scope", scope);
+  }
 
   NewClosure(server, SIGNAL(Finished()), this, &OAuthenticator::RedirectArrived,
              server, redirect_url);
@@ -115,7 +117,8 @@ void OAuthenticator::RequestAccessToken(const QByteArray& code,
                     "application/x-www-form-urlencoded");
 
   QNetworkReply* reply = network_.post(request, post_data.toUtf8());
-  connect(reply, SIGNAL(sslErrors(QList<QSslError>)), SLOT(SslErrors(QList<QSslError>)));
+  connect(reply, SIGNAL(sslErrors(QList<QSslError>)),
+          SLOT(SslErrors(QList<QSslError>)));
   NewClosure(reply, SIGNAL(finished()), this,
              SLOT(FetchAccessTokenFinished(QNetworkReply*)), reply);
 }

@@ -1,7 +1,7 @@
 Next release:
   Major features:
     * Vk.com support
-    * Seafile support
+    * Seafile support (server >= 4.4.1)
     * Amazon Cloud Drive support
     * Add Ampache compatibility (through Subsonic service)
     * Add new analyzer "Rainbow Dash"
@@ -69,6 +69,22 @@ Next release:
     * Add support for "original year" tags
     * Send album artist to Last.fm with liblastfm >= 1.0.0
     * Add sample rate selection
+    * Add option to change the time step when seeking using the keyboard
+    * Playlist sort by album considers disc and track numbers
+    * Add options for double clicking song in the playlist
+    * Add Tekstowo.pl lyric translation provider
+    * Add playlist actions to Spotify songs
+    * Volume slider handle glow effect using system theme
+    * Add Musixmatch lyric provider
+    * Library view sort line themable
+    * Show track durations in the CD ripper dialog
+    * Add ability to read REM DISC tag from Cue sheet
+    * Add ability to lock/unlock rating edit status
+    * Add the support of trackNum elements in XSPF
+    * Add support for inhibiting the screensaver on windows
+    * Add bollywoodlyrics.com lyric provider
+    * Add hindilyrics.net lyric provider
+    * Add "Smart Playlists" for Subsonic
 
   Bugfixes:
     * Fix crash when click on a SoundCloud entry in internet tab
@@ -131,11 +147,20 @@ Next release:
     * Fix song continuously rewinding when seeking using keyboard arrow keys
     * Fix OSD re-posistioning which doesn't work on multiple monitors
     * Fix Sonogram state while paused
+    * Fix crash when changing 'group by' while album covers are still loading
+    * Fix loss of valid data from an mp3 file when using the metadata editor
+    * Fix track slider twitching
+    * Fix Di.fm stations stuck when try to play them without internet
+    * Make mood files hidden in NTFS
+    * Fix time labels blinking when playing streams without known duration
+    * Fix tag fetcher which applies incorrect tags for songs without any results
+    * Fix Clementine getting stuck when transitioning from a local track to a Spotify track with crossfade disabled
 
   Removed features:
     * Remove Ubuntu One support
     * Remove Discogs support
     * Remove GrooveShark support
+    * Remove Radio GFM support
 
   Build system changes:
     * Update to gstreamer 1.0
@@ -155,6 +180,7 @@ Next release:
     * (GNU/Linux) Add a 128x128 version of the Clementine icon
     * (OSX) Use a GTlsDatabase for gstreamer SSL
     * Use libcrypto++ instead of QCA
+    * Update TagLib to 1.10.0
 
 
 

@@ -599,8 +599,8 @@ bool Database::IntegrityCheck(QSqlDatabase db) {
       if (!error_reported) {
         app_->AddError(
             tr("Database corruption detected. Please read "
-               "https://code.google.com/p/clementine-player/wiki/"
-               "DatabaseCorruption "
+               "https://github.com/clementine-player/Clementine/wiki/"
+               "Database-Corruption "
                "for instructions on how to recover your database"));
       }
       app_->AddError("Database: " + message);

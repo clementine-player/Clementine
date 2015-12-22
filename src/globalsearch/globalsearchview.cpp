@@ -62,8 +62,8 @@ GlobalSearchView::GlobalSearchView(Application* app, QWidget* parent)
       current_proxy_(front_proxy_),
       swap_models_timer_(new QTimer(this)),
       update_suggestions_timer_(new QTimer(this)),
-      search_icon_(IconLoader::Load("search")),
-      warning_icon_(IconLoader::Load("dialog-warning")),
+      search_icon_(IconLoader::Load("search", IconLoader::Base)),
+      warning_icon_(IconLoader::Load("dialog-warning", IconLoader::Base)),
       show_providers_(true),
       show_suggestions_(true) {
   ui_->setupUi(this);
@@ -74,7 +74,7 @@ GlobalSearchView::GlobalSearchView(Application* app, QWidget* parent)
   ui_->search->installEventFilter(this);
   ui_->results_stack->installEventFilter(this);
 
-  ui_->settings->setIcon(IconLoader::Load("configure"));
+  ui_->settings->setIcon(IconLoader::Load("configure", IconLoader::Base));
 
   // Must be a queued connection to ensure the GlobalSearch handles it first.
   connect(app_, SIGNAL(SettingsChanged()), SLOT(ReloadSettings()),
@@ -101,12 +101,12 @@ GlobalSearchView::GlobalSearchView(Application* app, QWidget* parent)
   disabled_layout->setContentsMargins(16, 0, 16, 32);
   suggestions_layout->setContentsMargins(16, 0, 16, 6);
 
-  // Set the colour of the help text to the disabled text colour
+  // Set the colour of the help text to the disabled window text colour
   QPalette help_palette = ui_->help_text->palette();
   const QColor help_color =
-      help_palette.color(QPalette::Disabled, QPalette::Text);
-  help_palette.setColor(QPalette::Normal, QPalette::Text, help_color);
-  help_palette.setColor(QPalette::Inactive, QPalette::Text, help_color);
+      help_palette.color(QPalette::Disabled, QPalette::WindowText);
+  help_palette.setColor(QPalette::Normal, QPalette::WindowText, help_color);
+  help_palette.setColor(QPalette::Inactive, QPalette::WindowText, help_color);
   ui_->help_text->setPalette(help_palette);
 
   // Create suggestion widgets
@@ -145,7 +145,7 @@ GlobalSearchView::GlobalSearchView(Application* app, QWidget* parent)
   QMenu* settings_menu = new QMenu(this);
   settings_menu->addActions(group_by_actions_->actions());
   settings_menu->addSeparator();
-  settings_menu->addAction(IconLoader::Load("configure"),
+  settings_menu->addAction(IconLoader::Load("configure", IconLoader::Base),
                            tr("Configure global search..."), this,
                            SLOT(OpenSettingsDialog()));
   ui_->settings->setMenu(settings_menu);
@@ -449,27 +449,27 @@ bool GlobalSearchView::ResultsContextMenuEvent(QContextMenuEvent* event) {
   if (!context_menu_) {
     context_menu_ = new QMenu(this);
     context_actions_ << context_menu_->addAction(
-                            IconLoader::Load("media-playback-start"),
+                            IconLoader::Load("media-playback-start", IconLoader::Base),
                             tr("Append to current playlist"), this,
                             SLOT(AddSelectedToPlaylist()));
     context_actions_ << context_menu_->addAction(
-                            IconLoader::Load("media-playback-start"),
+                            IconLoader::Load("media-playback-start", IconLoader::Base),
                             tr("Replace current playlist"), this,
                             SLOT(LoadSelected()));
     context_actions_ << context_menu_->addAction(
-                            IconLoader::Load("document-new"),
+                            IconLoader::Load("document-new", IconLoader::Base),
                             tr("Open in new playlist"), this,
                             SLOT(OpenSelectedInNewPlaylist()));
 
     context_menu_->addSeparator();
     context_actions_ << context_menu_->addAction(
-                            IconLoader::Load("go-next"), tr("Queue track"),
+                            IconLoader::Load("go-next", IconLoader::Base), tr("Queue track"),
                             this, SLOT(AddSelectedToPlaylistEnqueue()));
 
     context_menu_->addSeparator();
     context_menu_->addMenu(tr("Group by"))
         ->addActions(group_by_actions_->actions());
-    context_menu_->addAction(IconLoader::Load("configure"),
+    context_menu_->addAction(IconLoader::Load("configure", IconLoader::Base),
                              tr("Configure global search..."), this,
                              SLOT(OpenSettingsDialog()));
   }

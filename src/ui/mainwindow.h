@@ -117,6 +117,12 @@ class MainWindow : public QMainWindow, public PlatformInterface {
     PlayBehaviour_Always = 3,
   };
 
+  // Don't change the values
+  enum PlaylistAddBehaviour {
+    PlaylistAddBehaviour_Play = 1,
+    PlaylistAddBehaviour_Enqueue = 2,
+  };
+
   void SetHiddenInTray(bool hidden);
   void CommandlineOptionsReceived(const CommandlineOptions& options);
 
@@ -178,6 +184,7 @@ signals:
   void ChangeLibraryQueryMode(QAction* action);
 
   void PlayIndex(const QModelIndex& index);
+  void PlaylistDoubleClick(const QModelIndex& index);
   void StopAfterCurrent();
 
   void SongChanged(const Song& song);
@@ -362,6 +369,7 @@ signals:
   Engine::State saved_playback_state_;
   AddBehaviour doubleclick_addmode_;
   PlayBehaviour doubleclick_playmode_;
+  PlaylistAddBehaviour doubleclick_playlist_addmode_;
   PlayBehaviour menu_playmode_;
 
   BackgroundStreams* background_streams_;

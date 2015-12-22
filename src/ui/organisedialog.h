@@ -21,6 +21,7 @@
 #include <memory>
 
 #include <QDialog>
+#include <QFuture>
 #include <QMap>
 #include <QUrl>
 
@@ -60,7 +61,7 @@ class OrganiseDialog : public QDialog {
 
   void SetCopy(bool copy);
 
- signals:
+signals:
   void FileCopied(int);
 
  public slots:

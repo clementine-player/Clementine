@@ -26,7 +26,7 @@
 LibraryDirectoryModel::LibraryDirectoryModel(LibraryBackend* backend,
                                              QObject* parent)
     : QStandardItemModel(parent),
-      dir_icon_(IconLoader::Load("document-open-folder")),
+      dir_icon_(IconLoader::Load("document-open-folder", IconLoader::Base)),
       backend_(backend) {
   connect(backend_, SIGNAL(DirectoryDiscovered(Directory, SubdirectoryList)),
           SLOT(DirectoryDiscovered(Directory)));

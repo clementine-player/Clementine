@@ -54,7 +54,7 @@ namespace TagLib {
        * \a propertiesStyle are ignored.  The audio properties are always
        * read.
        */
-      File(FileName file, bool readProperties = true, 
+      File(FileName file, bool readProperties = true,
            Properties::ReadStyle propertiesStyle = Properties::Average);
 
       /*!
@@ -67,7 +67,7 @@ namespace TagLib {
        * \note TagLib will *not* take ownership of the stream, the caller is
        * responsible for deleting it after the File object.
        */
-      File(IOStream *stream, bool readProperties = true, 
+      File(IOStream *stream, bool readProperties = true,
            Properties::ReadStyle propertiesStyle = Properties::Average);
 
       /*!
@@ -112,30 +112,14 @@ namespace TagLib {
        * Save the file.
        *
        * This returns true if the save was successful.
+       *
+       * \warning In the current implementation, it's dangerous to call save()
+       * repeatedly.  At worst it will corrupt the file.
        */
       virtual bool save();
 
     private:
-      int readBYTE(bool *ok = 0);
-      int readWORD(bool *ok = 0);
-      unsigned int readDWORD(bool *ok = 0);
-      long long readQWORD(bool *ok = 0);
-      static ByteVector renderString(const String &str, bool includeLength = false);
-      String readString(int len);
-      void read(bool readProperties, Properties::ReadStyle propertiesStyle);
-
-      friend class Attribute;
-      friend class Picture;
-
-      class BaseObject;
-      class UnknownObject;
-      class FilePropertiesObject;
-      class StreamPropertiesObject;
-      class ContentDescriptionObject;
-      class ExtendedContentDescriptionObject;
-      class HeaderExtensionObject;
-      class MetadataObject;
-      class MetadataLibraryObject;
+      void read();
 
       class FilePrivate;
       FilePrivate *d;

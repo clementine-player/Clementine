@@ -43,8 +43,11 @@
 #include "globalsearch/librarysearchprovider.h"
 #include "internet/core/internetmodel.h"
 #include "internet/subsonic/subsonicurlhandler.h"
+#include "internet/subsonic/subsonicdynamicplaylist.h"
 #include "library/librarybackend.h"
 #include "library/libraryfilterwidget.h"
+#include "smartplaylists/generator.h"
+#include "smartplaylists/querygenerator.h"
 #include "ui/iconloader.h"
 
 const char* SubsonicService::kServiceName = "Subsonic";
@@ -71,7 +74,8 @@ SubsonicService::SubsonicService(Application* app, InternetModel* parent)
       library_sort_model_(new QSortFilterProxyModel(this)),
       total_song_count_(0),
       login_state_(LoginState_OtherError),
-      redirect_count_(0) {
+      redirect_count_(0),
+      is_ampache_(false) {
   app_->player()->RegisterUrlHandler(url_handler_);
 
   connect(scanner_, SIGNAL(ScanFinished()), SLOT(ReloadDatabaseFinished()));
@@ -83,9 +87,34 @@ SubsonicService::SubsonicService(Application* app, InternetModel* parent)
   connect(library_backend_, SIGNAL(TotalSongCountUpdated(int)),
           SLOT(UpdateTotalSongCount(int)));
 
+  using smart_playlists::Generator;
+  using smart_playlists::GeneratorPtr;
+
   library_model_ = new LibraryModel(library_backend_, app_, this);
   library_model_->set_show_various_artists(false);
-  library_model_->set_show_smart_playlists(false);
+  library_model_->set_show_smart_playlists(true);
+  library_model_->set_default_smart_playlists(
+    LibraryModel::DefaultGenerators()
+    << (LibraryModel::GeneratorList()
+        << GeneratorPtr(new SubsonicDynamicPlaylist(
+                          tr("Newest"),
+                          SubsonicDynamicPlaylist::QueryStat_Newest))
+        << GeneratorPtr(new SubsonicDynamicPlaylist(
+                          tr("Random"),
+                          SubsonicDynamicPlaylist::QueryStat_Random))
+        << GeneratorPtr(new SubsonicDynamicPlaylist(
+                          tr("Frequently Played"),
+                          SubsonicDynamicPlaylist::QueryStat_Frequent))
+        << GeneratorPtr(new SubsonicDynamicPlaylist(
+                          tr("Top Rated"),
+                          SubsonicDynamicPlaylist::QueryStat_Highest))
+        << GeneratorPtr(new SubsonicDynamicPlaylist(
+                          tr("Recently Played"),
+                          SubsonicDynamicPlaylist::QueryStat_Recent))
+        << GeneratorPtr(new SubsonicDynamicPlaylist(
+                          tr("Starred"),
+                          SubsonicDynamicPlaylist::QueryStat_Starred))
+      ));
 
   library_filter_ = new LibraryFilterWidget(0);
   library_filter_->SetSettingsGroup(kSettingsGroup);
@@ -105,12 +134,12 @@ SubsonicService::SubsonicService(Application* app, InternetModel* parent)
   context_menu_ = new QMenu;
   context_menu_->addActions(GetPlaylistActions());
   context_menu_->addSeparator();
-  context_menu_->addAction(IconLoader::Load("view-refresh"),
+  context_menu_->addAction(IconLoader::Load("view-refresh", IconLoader::Base),
                            tr("Refresh catalogue"), this,
                            SLOT(ReloadDatabase()));
   QAction* config_action = context_menu_->addAction(
-      IconLoader::Load("configure"), tr("Configure Subsonic..."), this,
-      SLOT(ShowConfig()));
+      IconLoader::Load("configure", IconLoader::Base), tr("Configure Subsonic..."), 
+      this, SLOT(ShowConfig()));
   context_menu_->addSeparator();
   context_menu_->addMenu(library_filter_->menu());
 
@@ -118,13 +147,14 @@ SubsonicService::SubsonicService(Application* app, InternetModel* parent)
 
   app_->global_search()->AddProvider(new LibrarySearchProvider(
       library_backend_, tr("Subsonic"), "subsonic",
-      QIcon(":/providers/subsonic.png"), true, app_, this));
+      IconLoader::Load("subsonic", IconLoader::Provider), true, app_, this));
 }
 
 SubsonicService::~SubsonicService() {}
 
 QStandardItem* SubsonicService::CreateRootItem() {
-  root_ = new QStandardItem(QIcon(":providers/subsonic.png"), kServiceName);
+  root_ = new QStandardItem(IconLoader::Load("subsonic", IconLoader::Provider), 
+                            kServiceName);
   root_->setData(true, InternetModel::Role_CanLazyLoad);
   return root_;
 }
@@ -173,6 +203,8 @@ bool SubsonicService::IsConfigured() const {
   return !configured_server_.isEmpty() && !username_.isEmpty() &&
          !password_.isEmpty();
 }
+
+bool SubsonicService::IsAmpache() const { return is_ampache_; }
 
 void SubsonicService::Login() {
   // Recreate fresh network state, otherwise old HTTPS settings seem to get
@@ -295,6 +327,7 @@ void SubsonicService::OnPingFinished(QNetworkReply* reply) {
   } else {
     QXmlStreamReader reader(reply);
     reader.readNextStartElement();
+    is_ampache_ = (reader.attributes().value("type") == "ampache");
     QStringRef status = reader.attributes().value("status");
     int http_status_code =
         reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
@@ -511,6 +544,12 @@ void SubsonicLibraryScanner::OnGetAlbumFinished(QNetworkReply* reply) {
     song.set_directory_id(0);
     song.set_mtime(0);
     song.set_ctime(0);
+
+    if (reader.attributes().hasAttribute("playCount")) {
+      song.set_playcount(
+          reader.attributes().value("playCount").toString().toInt());
+    }
+
     songs_ << song;
     reader.skipCurrentElement();
   }
@@ -540,6 +579,9 @@ void SubsonicLibraryScanner::GetAlbumList(int offset) {
 void SubsonicLibraryScanner::GetAlbum(const QString& id) {
   QUrl url = service_->BuildRequestUrl("getAlbum");
   url.addQueryItem("id", id);
+  if (service_->IsAmpache()) {
+    url.addQueryItem("ampache", "1");
+  }
   QNetworkReply* reply = service_->Send(url);
   NewClosure(reply, SIGNAL(finished()), this,
              SLOT(OnGetAlbumFinished(QNetworkReply*)), reply);

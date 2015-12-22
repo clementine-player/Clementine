@@ -27,20 +27,18 @@
 
 using ::testing::HasSubstr;
 
-class XSPFParserTest : public ::testing::Test {
-
-};
+class XSPFParserTest : public ::testing::Test {};
 
 TEST_F(XSPFParserTest, ParsesOneTrackFromXML) {
   QByteArray data =
       "<playlist><trackList><track>"
-        "<location>http://example.com/foo.mp3</location>"
-        "<title>Foo</title>"
-        "<creator>Bar</creator>"
-        "<album>Baz</album>"
-        "<duration>60000</duration>"
-        "<image>http://example.com/albumcover.jpg</image>"
-        "<info>http://example.com</info>"
+      "<location>http://example.com/foo.mp3</location>"
+      "<title>Foo</title>"
+      "<creator>Bar</creator>"
+      "<album>Baz</album>"
+      "<duration>60000</duration>"
+      "<image>http://example.com/albumcover.jpg</image>"
+      "<info>http://example.com</info>"
       "</track></trackList></playlist>";
   QBuffer buffer(&data);
   buffer.open(QIODevice::ReadOnly);
@@ -59,12 +57,12 @@ TEST_F(XSPFParserTest, ParsesOneTrackFromXML) {
 TEST_F(XSPFParserTest, ParsesMoreThanOneTrackFromXML) {
   QByteArray data =
       "<playlist><trackList>"
-        "<track>"
-          "<location>http://example.com/foo.mp3</location>"
-        "</track>"
-        "<track>"
-          "<location>http://example.com/bar.mp3</location>"
-        "</track>"
+      "<track>"
+      "<location>http://example.com/foo.mp3</location>"
+      "</track>"
+      "<track>"
+      "<location>http://example.com/bar.mp3</location>"
+      "</track>"
       "</trackList></playlist>";
   QBuffer buffer(&data);
   buffer.open(QIODevice::ReadOnly);
@@ -80,13 +78,13 @@ TEST_F(XSPFParserTest, ParsesMoreThanOneTrackFromXML) {
 TEST_F(XSPFParserTest, IgnoresInvalidLength) {
   QByteArray data =
       "<playlist><trackList><track>"
-        "<location>http://example.com/foo.mp3</location>"
-        "<title>Foo</title>"
-        "<creator>Bar</creator>"
-        "<album>Baz</album>"
-        "<duration>60000qwerty</duration>"
-        "<image>http://example.com/albumcover.jpg</image>"
-        "<info>http://example.com</info>"
+      "<location>http://example.com/foo.mp3</location>"
+      "<title>Foo</title>"
+      "<creator>Bar</creator>"
+      "<album>Baz</album>"
+      "<duration>60000qwerty</duration>"
+      "<image>http://example.com/albumcover.jpg</image>"
+      "<info>http://example.com</info>"
       "</track></trackList></playlist>";
   QBuffer buffer(&data);
   buffer.open(QIODevice::ReadOnly);
@@ -94,6 +92,25 @@ TEST_F(XSPFParserTest, IgnoresInvalidLength) {
   SongList songs = parser.Load(&buffer);
   ASSERT_EQ(1, songs.length());
   EXPECT_EQ(-1, songs[0].length_nanosec());
+}
+
+TEST_F(XSPFParserTest, ParsesTrackNum) {
+  QByteArray data =
+      "<playlist><trackList><track>"
+      "<location>http://example.com/foo.mp3</location>"
+      "<title>Foo</title>"
+      "<creator>Bar</creator>"
+      "<album>Baz</album>"
+      "<image>http://example.com/albumcover.jpg</image>"
+      "<info>http://example.com</info>"
+      "<trackNum>42</trackNum>"
+      "</track></trackList></playlist>";
+  QBuffer buffer(&data);
+  buffer.open(QIODevice::ReadOnly);
+  XSPFParser parser(nullptr);
+  SongList songs = parser.Load(&buffer);
+  ASSERT_EQ(1, songs.length());
+  EXPECT_EQ(42, songs[0].track());
 }
 
 TEST_F(XSPFParserTest, SavesSong) {
@@ -111,7 +128,8 @@ TEST_F(XSPFParserTest, SavesSong) {
   songs << one;
 
   parser.Save(songs, &buffer);
-  EXPECT_THAT(data.constData(), HasSubstr("<location>http://www.example.com/foo.mp3</location>"));
+  EXPECT_THAT(data.constData(),
+              HasSubstr("<location>http://www.example.com/foo.mp3</location>"));
   EXPECT_THAT(data.constData(), HasSubstr("<duration>123000</duration>"));
   EXPECT_THAT(data.constData(), HasSubstr("<title>foo</title>"));
   EXPECT_THAT(data.constData(), HasSubstr("<creator>bar</creator>"));
@@ -128,13 +146,14 @@ TEST_F(XSPFParserTest, SavesLocalFile) {
   one.set_title("foo");
   one.set_length_nanosec(123 * kNsecPerSec);
   one.set_artist("bar");
+  one.set_track(42);
   SongList songs;
   songs << one;
 
   parser.Save(songs, &buffer);
-  EXPECT_THAT(data.constData(), HasSubstr("<location>file:///bar/foo.mp3</location>"));
+  EXPECT_THAT(data.constData(), HasSubstr("<location>/bar/foo.mp3</location>"));
   EXPECT_THAT(data.constData(), HasSubstr("<duration>123000</duration>"));
   EXPECT_THAT(data.constData(), HasSubstr("<title>foo</title>"));
   EXPECT_THAT(data.constData(), HasSubstr("<creator>bar</creator>"));
+  EXPECT_THAT(data.constData(), HasSubstr("<trackNum>42</trackNum>"));
 }
-

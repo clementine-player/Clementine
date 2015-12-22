@@ -30,6 +30,10 @@
 #include "macscreensaver.h"
 #endif
 
+#ifdef Q_OS_WIN32
+#include "windowsscreensaver.h"
+#endif
+
 #include <QtDebug>
 
 const char* Screensaver::kGnomeService = "org.gnome.ScreenSaver";
@@ -54,6 +58,8 @@ Screensaver* Screensaver::GetScreensaver() {
     }
 #elif defined(Q_OS_DARWIN)
     screensaver_ = new MacScreensaver();
+#elif defined(Q_OS_WIN32)
+    screensaver_ = new WindowsScreensaver();
 #endif
   }
   return screensaver_;

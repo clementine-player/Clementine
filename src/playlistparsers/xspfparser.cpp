@@ -53,6 +53,7 @@ SongList XSPFParser::Load(QIODevice* device, const QString& playlist_path,
 Song XSPFParser::ParseTrack(QXmlStreamReader* reader, const QDir& dir) const {
   QString title, artist, album, location;
   qint64 nanosec = -1;
+  int track_num = -1;
 
   while (!reader->atEnd()) {
     QXmlStreamReader::TokenType type = reader->readNext();
@@ -73,6 +74,13 @@ Song XSPFParser::ParseTrack(QXmlStreamReader* reader, const QDir& dir) const {
           nanosec = duration.toInt(&ok) * kNsecPerMsec;
           if (!ok) {
             nanosec = -1;
+          }
+        } else if (name == "trackNum") {
+          const QString track_num_str = reader->readElementText();
+          bool ok = false;
+          track_num = track_num_str.toInt(&ok);
+          if (!ok || track_num < 1) {
+            track_num = -1;
           }
         } else if (name == "image") {
           // TODO: Fetch album covers.
@@ -99,6 +107,7 @@ return_song:
   song.set_artist(artist);
   song.set_album(album);
   song.set_length_nanosec(nanosec);
+  song.set_track(track_num);
   return song;
 }
 
@@ -120,8 +129,7 @@ void XSPFParser::Save(const SongList& songs, QIODevice* device, const QDir& dir,
 
   StreamElement tracklist("trackList", &writer);
   for (const Song& song : songs) {
-    QString filename_or_url =
-        URLOrFilename(song.url(), dir, path_type);
+    QString filename_or_url = URLOrFilename(song.url(), dir, path_type);
 
     StreamElement track("track", &writer);
     writer.writeTextElement("location", filename_or_url);
@@ -137,6 +145,9 @@ void XSPFParser::Save(const SongList& songs, QIODevice* device, const QDir& dir,
       if (song.length_nanosec() != -1) {
         writer.writeTextElement(
             "duration", QString::number(song.length_nanosec() / kNsecPerMsec));
+      }
+      if (song.track() > 0) {
+        writer.writeTextElement("trackNum", QString::number(song.track()));
       }
 
       QString art = song.art_manual().isEmpty() ? song.art_automatic()

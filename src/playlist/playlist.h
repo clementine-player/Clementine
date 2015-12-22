@@ -348,7 +348,7 @@ signals:
   void PlaylistChanged();
   void DynamicModeChanged(bool dynamic);
 
-  void LoadTracksError(const QString& message);
+  void Error(const QString& message);
 
   // Signals that the queue has changed, meaning that the remaining queued
   // items should update their position.
@@ -393,8 +393,8 @@ signals:
   void QueueLayoutChanged();
   void SongSaveComplete(TagReaderReply* reply,
                         const QPersistentModelIndex& index);
-  void ItemReloadComplete();
-  void ItemsLoaded();
+  void ItemReloadComplete(const QPersistentModelIndex& index);
+  void ItemsLoaded(QFuture<PlaylistItemList> future);
   void SongInsertVetoListenerDestroyed();
 
  private:

@@ -3,8 +3,8 @@
    Copyright 2010, 2014, John Maguire <john.maguire@gmail.com>
    Copyright 2011-2012, Arnaud Bienner <arnaud.bienner@gmail.com>
    Copyright 2013, Vasily Fomin <vasili.fomin@gmail.com>
-   Copyright 2014-2015, Mark Furneaux <mark@furneaux.ca>
    Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
+   Copyright 2014-2015, Mark Furneaux <mark@furneaux.ca>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -24,14 +24,13 @@
 #include "baranalyzer.h"
 #include "blockanalyzer.h"
 #include "boomanalyzer.h"
-#include "nyancatanalyzer.h"
-#include "rainbowdashanalyzer.h"
 #include "sonogram.h"
+#include "rainbowanalyzer.h"
 #include "turbine.h"
 #include "core/logging.h"
 
-#include <QMouseEvent>
 #include <QHBoxLayout>
+#include <QMouseEvent>
 #include <QSettings>
 #include <QTimer>
 #include <QtDebug>
@@ -80,8 +79,8 @@ AnalyzerContainer::AnalyzerContainer(QWidget* parent)
   AddAnalyzerType<BoomAnalyzer>();
   AddAnalyzerType<Sonogram>();
   AddAnalyzerType<TurbineAnalyzer>();
-  AddAnalyzerType<NyanCatAnalyzer>();
-  AddAnalyzerType<RainbowDashAnalyzer>();
+  AddAnalyzerType<Rainbow::NyanCatAnalyzer>();
+  AddAnalyzerType<Rainbow::RainbowDashAnalyzer>();
 
   connect(mapper_, SIGNAL(mapped(int)), SLOT(ChangeAnalyzer(int)));
   disable_action_ = context_menu_->addAction(tr("No analyzer"), this,
@@ -153,12 +152,15 @@ void AnalyzerContainer::DisableAnalyzer() {
 
 void AnalyzerContainer::TogglePsychedelicColors() {
   psychedelic_colors_on_ = !psychedelic_colors_on_;
-  current_analyzer_->psychedelicModeChanged(psychedelic_colors_on_);
+  if (current_analyzer_) {
+    current_analyzer_->psychedelicModeChanged(psychedelic_colors_on_);
+  }
   SavePsychedelic();
 }
 
 void AnalyzerContainer::ChangeAnalyzer(int id) {
-  QObject* instance = analyzer_types_[id]->newInstance(Q_ARG(QWidget*, this));
+  QObject* instance =
+      analyzer_types_[id]->newInstance(Q_ARG(QWidget*, this));
 
   if (!instance) {
     qLog(Warning) << "Couldn't intialise a new"
@@ -227,8 +229,8 @@ void AnalyzerContainer::Load() {
 }
 
 void AnalyzerContainer::SaveFramerate(int framerate) {
-  // For now, framerate is common for all analyzers. Maybe each analyzer should
-  // have its own framerate?
+  // For now, framerate is common for all analyzers. 
+  // Maybe each analyzer should have its own framerate?
   current_framerate_ = framerate;
   QSettings s;
   s.beginGroup(kSettingsGroup);
@@ -259,3 +261,4 @@ void AnalyzerContainer::AddFramerate(const QString& name, int framerate) {
   framerate_list_ << framerate;
   action->setCheckable(true);
 }
+

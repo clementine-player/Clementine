@@ -114,6 +114,8 @@ class VolumeSlider : public Slider {
 
  private:
   void generateGradient();
+  QPixmap drawVolumePixmap() const;
+  void drawVolumeSliderHandle();
 
   VolumeSlider(const VolumeSlider&);             // undefined
   VolumeSlider& operator=(const VolumeSlider&);  // undefined
@@ -128,6 +130,9 @@ class VolumeSlider : public Slider {
 
   QPixmap m_pixmapInset;
   QPixmap m_pixmapGradient;
+
+  QColor m_previous_theme_text_color;
+  QColor m_previous_theme_highlight_color;
 
   QList<QPixmap> m_handlePixmaps;
 };

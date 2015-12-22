@@ -15,26 +15,14 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "albumcovermanager.h"
-#include "edittagdialog.h"
-#include "trackselectiondialog.h"
+#include "ui/edittagdialog.h"
 #include "ui_edittagdialog.h"
-#include "core/application.h"
-#include "core/logging.h"
-#include "core/tagreaderclient.h"
-#include "core/utilities.h"
-#include "covers/albumcoverloader.h"
-#include "covers/coverproviders.h"
-#include "library/library.h"
-#include "library/librarybackend.h"
-#include "playlist/playlistdelegates.h"
-#include "ui/albumcoverchoicecontroller.h"
-#include "ui/coverfromurldialog.h"
+
+#include <limits>
 
 #include <QDateTime>
 #include <QDir>
 #include <QFuture>
-#include <QFutureWatcher>
 #include <QLabel>
 #include <QMenu>
 #include <QMessageBox>
@@ -43,7 +31,20 @@
 #include <QtConcurrentRun>
 #include <QtDebug>
 
-#include <limits>
+#include "core/application.h"
+#include "core/logging.h"
+#include "core/tagreaderclient.h"
+#include "core/utilities.h"
+#include "covers/albumcoverloader.h"
+#include "covers/coverproviders.h"
+#include "library/librarybackend.h"
+#include "library/library.h"
+#include "playlist/playlistdelegates.h"
+#include "ui/albumcoverchoicecontroller.h"
+#include "ui/albumcovermanager.h"
+#include "ui/coverfromurldialog.h"
+#include "ui/iconloader.h"
+#include "ui/trackselectiondialog.h"
 
 const char* EditTagDialog::kHintText =
     QT_TR_NOOP("(different across multiple songs)");
@@ -81,6 +82,9 @@ EditTagDialog::EditTagDialog(Application* app, QWidget* parent)
   ui_->setupUi(this);
   ui_->splitter->setSizes(QList<int>() << 200 << width() - 200);
   ui_->loading_label->hide();
+
+  ui_->fetch_tag->setIcon(IconLoader::Load("musicbrainz", 
+                          IconLoader::Provider));
 
   // An editable field is one that has a label as a buddy.  The label is
   // important because it gets turned bold when the field is changed.
@@ -158,9 +162,10 @@ EditTagDialog::EditTagDialog(Application* app, QWidget* parent)
   ui_->art->setAcceptDrops(true);
 
   // Add the next/previous buttons
-  previous_button_ =
-      new QPushButton(IconLoader::Load("go-previous"), tr("Previous"), this);
-  next_button_ = new QPushButton(IconLoader::Load("go-next"), tr("Next"), this);
+  previous_button_ = new QPushButton(
+      IconLoader::Load("go-previous", IconLoader::Base), tr("Previous"), this);
+  next_button_ = new QPushButton(IconLoader::Load("go-next", IconLoader::Base),
+                                 tr("Next"), this);
   ui_->button_box->addButton(previous_button_, QDialogButtonBox::ResetRole);
   ui_->button_box->addButton(next_button_, QDialogButtonBox::ResetRole);
 
@@ -248,20 +253,15 @@ void EditTagDialog::SetSongs(const SongList& s, const PlaylistItemList& items) {
   // Reload tags in the background
   QFuture<QList<Data>> future =
       QtConcurrent::run(this, &EditTagDialog::LoadData, s);
-  QFutureWatcher<QList<Data>>* watcher = new QFutureWatcher<QList<Data>>(this);
-  watcher->setFuture(future);
-  connect(watcher, SIGNAL(finished()), SLOT(SetSongsFinished()));
+  NewClosure(future, this,
+             SLOT(SetSongsFinished(QFuture<QList<EditTagDialog::Data>>)),
+             future);
 }
 
-void EditTagDialog::SetSongsFinished() {
-  QFutureWatcher<QList<Data>>* watcher =
-      dynamic_cast<QFutureWatcher<QList<Data>>*>(sender());
-  if (!watcher) return;
-  watcher->deleteLater();
-
+void EditTagDialog::SetSongsFinished(QFuture<QList<Data>> future) {
   if (!SetLoading(QString())) return;
 
-  data_ = watcher->result();
+  data_ = future.result();
   if (data_.count() == 0) {
     // If there were no valid songs, disable everything
     ui_->song_list->setEnabled(false);
@@ -705,16 +705,10 @@ void EditTagDialog::accept() {
   // Save tags in the background
   QFuture<void> future =
       QtConcurrent::run(this, &EditTagDialog::SaveData, data_);
-  QFutureWatcher<void>* watcher = new QFutureWatcher<void>(this);
-  watcher->setFuture(future);
-  connect(watcher, SIGNAL(finished()), SLOT(AcceptFinished()));
+  NewClosure(future, this, SLOT(AcceptFinished()));
 }
 
 void EditTagDialog::AcceptFinished() {
-  QFutureWatcher<void>* watcher = dynamic_cast<QFutureWatcher<void>*>(sender());
-  if (!watcher) return;
-  watcher->deleteLater();
-
   if (!SetLoading(QString())) return;
 
   QDialog::accept();
@@ -839,26 +833,27 @@ void EditTagDialog::FetchTagSongChosen(const Song& original_song,
   const QString filename = original_song.url().toLocalFile();
 
   // Find the song with this filename
-  for (int i = 0; i < data_.count(); ++i) {
-    Data* data = &data_[i];
-    if (data->original_.url().toLocalFile() != filename) continue;
+  auto data_it =
+      std::find_if(data_.begin(), data_.end(), [&filename](const Data& d) {
+        return d.original_.url().toLocalFile() == filename;
+      });
+  if (data_it == data_.end()) {
+    qLog(Warning) << "Could not find song to filename: " << filename;
+    return;
+  }
 
-    // Is it currently being displayed in the UI?
-    if (ui_->song_list->currentRow() == i) {
-      // Yes!  We can just set the fields in the UI
-      ui_->title->set_text(new_metadata.title());
-      ui_->artist->set_text(new_metadata.artist());
-      ui_->album->set_text(new_metadata.album());
-      ui_->track->setValue(new_metadata.track());
-      ui_->year->setValue(new_metadata.year());
-    } else {
-      data->current_.set_title(new_metadata.title());
-      data->current_.set_artist(new_metadata.artist());
-      data->current_.set_album(new_metadata.album());
-      data->current_.set_track(new_metadata.track());
-      data->current_.set_year(new_metadata.year());
-    }
+  data_it->current_.set_title(new_metadata.title());
+  data_it->current_.set_artist(new_metadata.artist());
+  data_it->current_.set_album(new_metadata.album());
+  data_it->current_.set_track(new_metadata.track());
+  data_it->current_.set_year(new_metadata.year());
 
-    break;
+  // Is it currently selected in the UI?
+  int row = data_it - data_.begin();
+  if (ui_->song_list->item(row)->isSelected()) {
+    // We need to update view
+    for (const FieldData& field : fields_)
+      InitFieldValue(field,
+                     ui_->song_list->selectionModel()->selectedIndexes());
   }
 }

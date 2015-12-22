@@ -13,10 +13,6 @@
   <property name="windowTitle">
    <string>Search iTunes</string>
   </property>
-  <property name="windowIcon">
-   <iconset resource="../../data/data.qrc">
-    <normaloff>:/providers/itunes.png</normaloff>:/providers/itunes.png</iconset>
-  </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <property name="margin">
     <number>0</number>
@@ -44,9 +40,6 @@
    </item>
   </layout>
  </widget>
- <resources>
-  <include location="../../data/data.qrc"/>
- </resources>
  <connections>
   <connection>
    <sender>query</sender>

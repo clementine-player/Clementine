@@ -22,7 +22,7 @@
 
 #include "Settings_p.h"
 
-#include <parser.h>
+#include "qjsonwrapper/Json.h"
 
 using namespace mygpo;
 
@@ -49,9 +49,8 @@ bool SettingsPrivate::parse( const QVariant& data )
 
 bool SettingsPrivate::parse( const QByteArray& data )
 {
-    QJson::Parser parser;
     bool ok;
-    QVariant variant = parser.parse( data, &ok );
+    QVariant variant = QJsonWrapper::parseJson( data, &ok );
     if( ok )
     {
         ok = ( parse( variant ) );
@@ -63,7 +62,6 @@ void SettingsPrivate::parseData()
 {
     if( m_reply->error() == QNetworkReply::NoError )
     {
-        QJson::Parser parser;
         if( parse( m_reply->readAll() ) )
         {
             emit q->finished();

@@ -109,11 +109,6 @@ class SomaFMService : public SomaFMServiceBase {
   SomaFMService(Application* app, InternetModel* parent);
 };
 
-class RadioGFMService : public SomaFMServiceBase {
- public:
-  RadioGFMService(Application* app, InternetModel* parent);
-};
-
 QDataStream& operator<<(QDataStream& out, const SomaFMService::Stream& stream);
 QDataStream& operator>>(QDataStream& in, SomaFMService::Stream& stream);
 Q_DECLARE_METATYPE(SomaFMService::Stream)

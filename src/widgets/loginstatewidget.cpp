@@ -32,7 +32,13 @@ LoginStateWidget::LoginStateWidget(QWidget* parent)
   ui_->account_type->hide();
   ui_->busy->hide();
 
-  ui_->sign_out->setIcon(IconLoader::Load("list-remove"));
+  ui_->sign_out->setIcon(IconLoader::Load("list-remove", IconLoader::Base));
+  ui_->signed_in_icon_label->setPixmap(IconLoader::Load("dialog-ok-apply",
+                                      IconLoader::Base).pixmap(22));
+  ui_->expires_icon_label->setPixmap(IconLoader::Load("user-away",
+                                    IconLoader::Base).pixmap(22));
+  ui_->account_type_icon_label->setPixmap(IconLoader::Load("dialog-warning",
+                                    IconLoader::Base).pixmap(22));
 
   QFont bold_font(font());
   bold_font.setBold(true);

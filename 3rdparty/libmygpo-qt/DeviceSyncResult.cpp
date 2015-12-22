@@ -20,7 +20,7 @@
 
 #include "DeviceSyncResult_p.h"
 
-#include <parser.h>
+#include "qjsonwrapper/Json.h"
 
 using namespace mygpo;
 
@@ -85,9 +85,8 @@ bool DeviceSyncResultPrivate::parse( const QVariant& data )
 
 bool DeviceSyncResultPrivate::parse( const QByteArray& data )
 {
-    QJson::Parser parser;
     bool ok;
-    QVariant variant = parser.parse( data, &ok );
+    QVariant variant = QJsonWrapper::parseJson( data, &ok );
     if( ok )
     {
         ok = ( parse( variant ) );
@@ -108,7 +107,7 @@ void DeviceSyncResultPrivate::parseData()
             emit q->parseError();
         }
     }
-    m_reply->deleteLater();   
+    m_reply->deleteLater();
 }
 
 void DeviceSyncResultPrivate::error( QNetworkReply::NetworkError error )

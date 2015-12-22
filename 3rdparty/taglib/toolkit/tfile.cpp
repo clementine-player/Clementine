@@ -66,15 +66,6 @@
 
 using namespace TagLib;
 
-namespace
-{
-#ifdef _WIN32
-  const TagLib::uint BufferSize = 8192;
-#else
-  const TagLib::uint BufferSize = 1024;
-#endif
-}
-
 class File::FilePrivate
 {
 public:
@@ -278,7 +269,7 @@ long File::find(const ByteVector &pattern, long fromOffset, const ByteVector &be
   // (2) The search pattern is wholly contained within the current buffer.
   //
   // (3) The current buffer ends with a partial match of the pattern.  We will
-  // note this for use in the next itteration, where we will check for the rest
+  // note this for use in the next iteration, where we will check for the rest
   // of the pattern.
   //
   // All three of these are done in two steps.  First we check for the pattern
@@ -363,25 +354,34 @@ long File::rfind(const ByteVector &pattern, long fromOffset, const ByteVector &b
 
   // Start the search at the offset.
 
-  long bufferOffset;
-  if(fromOffset == 0) {
-    seek(-1 * int(bufferSize()), End);
-    bufferOffset = tell();
-  }
-  else {
-    seek(fromOffset + -1 * int(bufferSize()), Beginning);
-    bufferOffset = tell();
-  }
+  if(fromOffset == 0)
+    fromOffset = length();
+
+  long bufferLength = bufferSize();
+  long bufferOffset = fromOffset + pattern.size();
 
   // See the notes in find() for an explanation of this algorithm.
 
-  for(buffer = readBlock(bufferSize()); buffer.size() > 0; buffer = readBlock(bufferSize())) {
+  while(true) {
+
+    if(bufferOffset > bufferLength) {
+      bufferOffset -= bufferLength;
+    }
+    else {
+      bufferLength = bufferOffset;
+      bufferOffset = 0;
+    }
+    seek(bufferOffset);
+
+    buffer = readBlock(bufferLength);
+    if(buffer.isEmpty())
+      break;
 
     // TODO: (1) previous partial match
 
     // (2) pattern contained in current buffer
 
-    long location = buffer.rfind(pattern);
+    const long location = buffer.rfind(pattern);
     if(location >= 0) {
       seek(originalPosition);
       return bufferOffset + location;
@@ -393,9 +393,6 @@ long File::rfind(const ByteVector &pattern, long fromOffset, const ByteVector &b
     }
 
     // TODO: (3) partial match
-
-    bufferOffset -= bufferSize();
-    seek(bufferOffset);
   }
 
   // Since we hit the end of the file, reset the status before continuing.
@@ -493,7 +490,7 @@ bool File::isWritable(const char *file)
 
 TagLib::uint File::bufferSize()
 {
-  return BufferSize;
+  return 1024;
 }
 
 void File::setValid(bool valid)

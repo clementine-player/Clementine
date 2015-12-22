@@ -354,7 +354,7 @@ void Ogg::File::writePageGroup(const List<int> &thePageGroup)
 
     // create a gap for the new pages
     int numberOfNewPages = pages.back()->header()->pageSequenceNumber() - pageGroup.back();
-    List<Page *>::Iterator pageIter = d->pages.begin();
+    List<Page *>::ConstIterator pageIter = d->pages.begin();
     for(int i = 0; i < pageGroup.back(); i++) {
       if(pageIter != d->pages.end()) {
         ++pageIter;

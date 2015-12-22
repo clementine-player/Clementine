@@ -103,7 +103,7 @@ PropertyMap Ogg::FLAC::File::properties() const
 PropertyMap Ogg::FLAC::File::setProperties(const PropertyMap &properties)
 {
   return d->comment->setProperties(properties);
-}  
+}
 
 Properties *Ogg::FLAC::File::audioProperties() const
 {
@@ -211,29 +211,30 @@ void Ogg::FLAC::File::scan()
   long overhead = 0;
 
   ByteVector metadataHeader = packet(ipacket);
-  if(metadataHeader.isNull())
+  if(metadataHeader.isEmpty())
     return;
 
-  ByteVector header;
-
-  if (!metadataHeader.startsWith("fLaC"))  {
+  if(!metadataHeader.startsWith("fLaC"))  {
     // FLAC 1.1.2+
-    if (metadataHeader.mid(1,4) != "FLAC") return;
+    if(metadataHeader.mid(1, 4) != "FLAC")
+      return;
 
-    if (metadataHeader[5] != 1) return; // not version 1
+    if(metadataHeader[5] != 1)
+      return; // not version 1
 
     metadataHeader = metadataHeader.mid(13);
   }
   else {
     // FLAC 1.1.0 & 1.1.1
     metadataHeader = packet(++ipacket);
-
-    if(metadataHeader.isNull())
-      return;
-
   }
 
-  header = metadataHeader.mid(0,4);
+  ByteVector header = metadataHeader.mid(0, 4);
+  if(header.size() != 4) {
+    debug("Ogg::FLAC::File::scan() -- Invalid Ogg/FLAC metadata header");
+    return;
+  }
+
   // Header format (from spec):
   // <1> Last-metadata-block flag
   // <7> BLOCK_TYPE
@@ -262,11 +263,12 @@ void Ogg::FLAC::File::scan()
 
   while(!lastBlock) {
     metadataHeader = packet(++ipacket);
-
-    if(metadataHeader.isNull())
-      return;
-
     header = metadataHeader.mid(0, 4);
+    if(header.size() != 4) {
+      debug("Ogg::FLAC::File::scan() -- Invalid Ogg/FLAC metadata header");
+      return;
+    }
+
     blockType = header[0] & 0x7f;
     lastBlock = (header[0] & 0x80) != 0;
     length = header.toUInt(1, 3, true);

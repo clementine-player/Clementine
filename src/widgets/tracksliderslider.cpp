@@ -24,6 +24,7 @@
 #include <QStyle>
 #include <QStyleOptionSlider>
 #include <QtDebug>
+#include <QWheelEvent>
 
 TrackSliderSlider::TrackSliderSlider(QWidget* parent)
     : QSlider(parent),
@@ -84,6 +85,15 @@ void TrackSliderSlider::mouseMoveEvent(QMouseEvent* e) {
   UpdateDeltaTime();
   popup_->SetPopupPosition(
       mapTo(window(), QPoint(e->x(), rect().center().y())));
+}
+
+void TrackSliderSlider::wheelEvent(QWheelEvent *e) {
+  if (e->delta() < 0) {
+    emit SeekBackward();
+  } else {
+    emit SeekForward();
+  }
+  e->accept();
 }
 
 void TrackSliderSlider::enterEvent(QEvent* e) {

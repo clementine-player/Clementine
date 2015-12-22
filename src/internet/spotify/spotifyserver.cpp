@@ -260,15 +260,6 @@ void SpotifyServer::RemoveSongsFromPlaylist(
   SendOrQueueMessage(message);
 }
 
-void SpotifyServer::StartPlaybackLater(const QString& uri, quint16 port) {
-  QTimer* timer = new QTimer(this);
-  connect(timer, SIGNAL(timeout()), timer, SLOT(deleteLater()));
-
-  timer->start(100);  // lol
-  NewClosure(timer, SIGNAL(timeout()), this,
-             SLOT(StartPlayback(QString, quint16)), uri, port);
-}
-
 void SpotifyServer::StartPlayback(const QString& uri, quint16 port) {
   pb::spotify::Message message;
   pb::spotify::PlaybackRequest* req = message.mutable_playback_request();

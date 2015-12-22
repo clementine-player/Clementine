@@ -205,8 +205,8 @@ namespace TagLib
       /* THIS IS PRIVATE, DON'T TOUCH IT! */
       void parse(const ByteVector& );
       static Picture fromInvalid();
-      friend class Attribute;
 #endif
+
       private:
         class PicturePrivate;
         PicturePrivate *d;

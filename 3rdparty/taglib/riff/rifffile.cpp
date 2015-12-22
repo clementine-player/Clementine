@@ -127,15 +127,7 @@ ByteVector RIFF::File::chunkData(uint i)
   if(i >= chunkCount())
     return ByteVector::null;
 
-  // Offset for the first subchunk's data
-
-  long begin = 12 + 8;
-
-  for(uint it = 0; it < i; it++)
-    begin += 8 + d->chunks[it].size + d->chunks[it].padding;
-
-  seek(begin);
-
+  seek(d->chunks[i].offset);
   return readBlock(d->chunks[i].size);
 }
 
@@ -219,22 +211,24 @@ void RIFF::File::removeChunk(uint i)
 {
   if(i >= d->chunks.size())
     return;
-  
-  removeBlock(d->chunks[i].offset - 8, d->chunks[i].size + 8);
-  d->chunks.erase(d->chunks.begin() + i);
+
+  std::vector<Chunk>::iterator it = d->chunks.begin();
+  std::advance(it, i);
+
+  const uint removeSize = it->size + it->padding + 8;
+  removeBlock(it->offset - 8, removeSize);
+  it = d->chunks.erase(it);
+
+  for(; it != d->chunks.end(); ++it)
+    it->offset -= removeSize;
 }
 
 void RIFF::File::removeChunk(const ByteVector &name)
 {
-  std::vector<Chunk> newChunks;
-  for(size_t i = 0; i < d->chunks.size(); ++i) {
+  for(int i = d->chunks.size() - 1; i >= 0; --i) {
     if(d->chunks[i].name == name)
-      removeBlock(d->chunks[i].offset - 8, d->chunks[i].size + 8);
-    else
-      newChunks.push_back(d->chunks[i]);
+      removeChunk(i);
   }
-
-  d->chunks.swap(newChunks);
 }
 
 ////////////////////////////////////////////////////////////////////////////////

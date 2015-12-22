@@ -20,10 +20,10 @@
 * USA                                                                      *
 ***************************************************************************/
 
-#include <parser.h>
-
 #include "AddRemoveResult.h"
 #include "AddRemoveResult_p.h"
+
+#include "qjsonwrapper/Json.h"
 
 using namespace mygpo;
 
@@ -64,7 +64,6 @@ QList< QPair< QUrl, QUrl > > AddRemoveResultPrivate::updateUrlsList() const
 
 bool AddRemoveResultPrivate::parse( const QVariant& data )
 {
-    QJson::Parser parser;
     if( !data.canConvert( QVariant::Map ) )
         return false;
     QVariantMap resultMap = data.toMap();
@@ -78,9 +77,8 @@ bool AddRemoveResultPrivate::parse( const QVariant& data )
 
 bool AddRemoveResultPrivate::parse( const QByteArray& data )
 {
-    QJson::Parser parser;
     bool ok;
-    QVariant variant = parser.parse( data, &ok );
+    QVariant variant = QJsonWrapper::parseJson( data, &ok );
     if( ok )
     {
         ok = ( parse( variant ) );

@@ -24,7 +24,6 @@
 #include "jamendoservice.h"
 
 #include <QDesktopServices>
-#include <QFutureWatcher>
 #include <QMenu>
 #include <QMessageBox>
 #include <QNetworkReply>
@@ -136,7 +135,7 @@ JamendoService::JamendoService(Application* app, InternetModel* parent)
 
   search_provider_ = new LibrarySearchProvider(
       library_backend_, tr("Jamendo"), "jamendo",
-      QIcon(":/providers/jamendo.png"), false, app_, this);
+      IconLoader::Load("jamendo", IconLoader::Provider), false, app_, this);
   app_->global_search()->AddProvider(search_provider_);
   connect(app_->global_search(),
           SIGNAL(ProviderToggled(const SearchProvider*, bool)),
@@ -146,8 +145,8 @@ JamendoService::JamendoService(Application* app, InternetModel* parent)
 JamendoService::~JamendoService() {}
 
 QStandardItem* JamendoService::CreateRootItem() {
-  QStandardItem* item =
-      new QStandardItem(QIcon(":providers/jamendo.png"), kServiceName);
+  QStandardItem* item = new QStandardItem(
+      IconLoader::Load("jamendo", IconLoader::Provider), kServiceName);
   item->setData(true, InternetModel::Role_CanLazyLoad);
   return item;
 }
@@ -204,8 +203,7 @@ void JamendoService::DownloadDirectory() {
 void JamendoService::DownloadDirectoryProgress(qint64 received, qint64 total) {
   float progress = static_cast<float>(received) / total;
   app_->task_manager()->SetTaskProgress(load_database_task_id_,
-                                        static_cast<int>(progress * 100),
-                                        100);
+                                        static_cast<int>(progress * 100), 100);
 }
 
 void JamendoService::DownloadDirectoryFinished() {
@@ -229,9 +227,7 @@ void JamendoService::DownloadDirectoryFinished() {
 
   QFuture<void> future =
       QtConcurrent::run(this, &JamendoService::ParseDirectory, gzip);
-  QFutureWatcher<void>* watcher = new QFutureWatcher<void>();
-  watcher->setFuture(future);
-  connect(watcher, SIGNAL(finished()), SLOT(ParseDirectoryFinished()));
+  NewClosure(future, this, SLOT(ParseDirectoryFinished()));
 }
 
 void JamendoService::ParseDirectory(QIODevice* device) const {
@@ -407,9 +403,6 @@ Song JamendoService::ReadTrack(const QString& artist, const QString& album,
 }
 
 void JamendoService::ParseDirectoryFinished() {
-  QFutureWatcher<void>* watcher = static_cast<QFutureWatcher<void>*>(sender());
-  delete watcher;
-
   // show smart playlists
   library_model_->set_show_smart_playlists(true);
   library_model_->Reset();
@@ -423,17 +416,17 @@ void JamendoService::EnsureMenuCreated() {
 
   context_menu_ = new QMenu;
   context_menu_->addActions(GetPlaylistActions());
-  album_info_ = context_menu_->addAction(IconLoader::Load("view-media-lyrics"),
-                                         tr("Album info on jamendo.com..."),
-                                         this, SLOT(AlbumInfo()));
-  download_album_ = context_menu_->addAction(IconLoader::Load("download"),
-                                             tr("Download this album..."), this,
-                                             SLOT(DownloadAlbum()));
+  album_info_ = context_menu_->addAction(
+      IconLoader::Load("view-media-lyrics", IconLoader::Base),
+      tr("Album info on jamendo.com..."), this, SLOT(AlbumInfo()));
+  download_album_ = context_menu_->addAction(
+      IconLoader::Load("download", IconLoader::Base),
+      tr("Download this album..."), this, SLOT(DownloadAlbum()));
   context_menu_->addSeparator();
-  context_menu_->addAction(IconLoader::Load("download"),
+  context_menu_->addAction(IconLoader::Load("download", IconLoader::Base),
                            tr("Open %1 in browser").arg("jamendo.com"), this,
                            SLOT(Homepage()));
-  context_menu_->addAction(IconLoader::Load("view-refresh"),
+  context_menu_->addAction(IconLoader::Load("view-refresh", IconLoader::Base),
                            tr("Refresh catalogue"), this,
                            SLOT(DownloadDirectory()));
 

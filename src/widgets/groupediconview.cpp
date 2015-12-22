@@ -84,14 +84,19 @@ void GroupedIconView::DrawHeader(QPainter* painter, const QRect& rect,
   painter->drawText(text_rect, text);
 
   // Draw a line underneath
-  const QPoint start(rect.left(), text_rect.bottom() + kBarMarginTop);
-  const QPoint end(rect.right(), start.y());
-
-  painter->setRenderHint(QPainter::Antialiasing, true);
-  painter->setPen(QPen(palette.color(QPalette::Disabled, QPalette::Text),
-                       kBarThickness, Qt::SolidLine, Qt::RoundCap));
-  painter->setOpacity(0.5);
-  painter->drawLine(start, end);
+  QColor line_color = palette.color(QPalette::Text);
+  QLinearGradient grad_color(text_rect.bottomLeft(), text_rect.bottomRight());
+  const double fade_start_end = (text_rect.width()/3.0)/text_rect.width();
+  line_color.setAlphaF(0.0);
+  grad_color.setColorAt(0, line_color);
+  line_color.setAlphaF(0.5);
+  grad_color.setColorAt(fade_start_end, line_color);
+  grad_color.setColorAt(1.0 - fade_start_end, line_color);
+  line_color.setAlphaF(0.0);
+  grad_color.setColorAt(1, line_color);
+  painter->setPen(QPen(grad_color, 1));
+  painter->drawLine(text_rect.left(), text_rect.bottom() + kBarMarginTop,
+                    text_rect.right(), text_rect.bottom() + kBarMarginTop);
 
   painter->restore();
 }

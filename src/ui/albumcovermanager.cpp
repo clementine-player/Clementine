@@ -66,8 +66,8 @@ AlbumCoverManager::AlbumCoverManager(Application* app,
       cover_searcher_(nullptr),
       cover_export_(nullptr),
       cover_exporter_(new AlbumCoverExporter(this)),
-      artist_icon_(IconLoader::Load("x-clementine-artist")),
-      all_artists_icon_(IconLoader::Load("x-clementine-album")),
+      artist_icon_(IconLoader::Load("x-clementine-artist", IconLoader::Base)),
+      all_artists_icon_(IconLoader::Load("x-clementine-album", IconLoader::Base)),
       context_menu_(new QMenu(this)),
       progress_bar_(new QProgressBar(this)),
       abort_progress_(new QPushButton(this)),
@@ -77,13 +77,13 @@ AlbumCoverManager::AlbumCoverManager(Application* app,
   ui_->albums->set_cover_manager(this);
 
   // Icons
-  ui_->action_fetch->setIcon(IconLoader::Load("download"));
-  ui_->export_covers->setIcon(IconLoader::Load("document-save"));
-  ui_->view->setIcon(IconLoader::Load("view-choose"));
-  ui_->fetch->setIcon(IconLoader::Load("download"));
+  ui_->action_fetch->setIcon(IconLoader::Load("download", IconLoader::Base));
+  ui_->export_covers->setIcon(IconLoader::Load("document-save", IconLoader::Base));
+  ui_->view->setIcon(IconLoader::Load("view-choose", IconLoader::Base));
+  ui_->fetch->setIcon(IconLoader::Load("download", IconLoader::Base));
   ui_->action_add_to_playlist->setIcon(
-      IconLoader::Load("media-playback-start"));
-  ui_->action_load->setIcon(IconLoader::Load("media-playback-start"));
+      IconLoader::Load("media-playback-start", IconLoader::Base));
+  ui_->action_load->setIcon(IconLoader::Load("media-playback-start", IconLoader::Base));
 
   album_cover_choice_controller_->SetApplication(app_);
 

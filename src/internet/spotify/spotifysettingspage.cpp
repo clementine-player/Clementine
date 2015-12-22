@@ -41,7 +41,7 @@ SpotifySettingsPage::SpotifySettingsPage(SettingsDialog* dialog)
       validated_(false) {
   ui_->setupUi(this);
 
-  setWindowIcon(QIcon(":/icons/48x48/spotify.png"));
+  setWindowIcon(IconLoader::Load("spotify", IconLoader::Provider));
 
   QFont bold_font(font());
   bold_font.setBold(true);

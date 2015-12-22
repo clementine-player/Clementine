@@ -20,16 +20,29 @@
 #include "ui_dropboxsettingspage.h"
 
 #include "core/application.h"
-#include "internet/dropbox/dropboxauthenticator.h"
+#include "internet/core/oauthenticator.h"
 #include "internet/dropbox/dropboxservice.h"
 #include "internet/core/internetmodel.h"
 #include "ui/settingsdialog.h"
+#include "ui/iconloader.h"
+
+namespace {
+static const char* kOAuthEndpoint =
+    "https://www.dropbox.com/1/oauth2/authorize";
+static const char* kOAuthClientId = "qh6ca27eclt9p2k";
+static const char* kOAuthClientSecret = "pg7y68h5efap8r6";
+static const char* kOAuthTokenEndpoint =
+    "https://api.dropboxapi.com/1/oauth2/token";
+static const char* kOAuthScope = "";
+}
 
 DropboxSettingsPage::DropboxSettingsPage(SettingsDialog* parent)
     : SettingsPage(parent),
       ui_(new Ui::DropboxSettingsPage),
       service_(dialog()->app()->internet_model()->Service<DropboxService>()) {
   ui_->setupUi(this);
+  setWindowIcon(IconLoader::Load("dropbox", IconLoader::Provider));
+  
   ui_->login_state->AddCredentialGroup(ui_->login_container);
 
   connect(ui_->login_button, SIGNAL(clicked()), SLOT(LoginClicked()));
@@ -44,10 +57,10 @@ void DropboxSettingsPage::Load() {
   QSettings s;
   s.beginGroup(DropboxService::kSettingsGroup);
 
-  const QString name = s.value("name").toString();
+  const QString access_token = s.value("access_token2").toString();
 
-  if (!name.isEmpty()) {
-    ui_->login_state->SetLoggedIn(LoginStateWidget::LoggedIn, name);
+  if (!access_token.isEmpty()) {
+    ui_->login_state->SetLoggedIn(LoginStateWidget::LoggedIn);
   }
 }
 
@@ -57,13 +70,14 @@ void DropboxSettingsPage::Save() {
 }
 
 void DropboxSettingsPage::LoginClicked() {
-  DropboxAuthenticator* authenticator = new DropboxAuthenticator;
-  NewClosure(authenticator, SIGNAL(Finished()), this,
-             SLOT(Connected(DropboxAuthenticator*)), authenticator);
+  OAuthenticator* authenticator =
+      new OAuthenticator(kOAuthClientId, kOAuthClientSecret,
+                         OAuthenticator::RedirectStyle::REMOTE_WITH_STATE);
+  connect(authenticator, SIGNAL(Finished()), SLOT(Connected()));
   NewClosure(authenticator, SIGNAL(Finished()), service_,
-             SLOT(AuthenticationFinished(DropboxAuthenticator*)),
-             authenticator);
-  authenticator->StartAuthorisation();
+             SLOT(AuthenticationFinished(OAuthenticator*)), authenticator);
+  authenticator->StartAuthorisation(kOAuthEndpoint, kOAuthTokenEndpoint,
+                                    kOAuthScope);
 
   ui_->login_button->setEnabled(false);
 }
@@ -79,9 +93,11 @@ bool DropboxSettingsPage::eventFilter(QObject* object, QEvent* event) {
 
 void DropboxSettingsPage::LogoutClicked() {
   ui_->login_state->SetLoggedIn(LoginStateWidget::LoggedOut);
+  QSettings s;
+  s.beginGroup(DropboxService::kSettingsGroup);
+  s.remove("access_token2");
 }
 
-void DropboxSettingsPage::Connected(DropboxAuthenticator* authenticator) {
-  ui_->login_state->SetLoggedIn(LoginStateWidget::LoggedIn,
-                                authenticator->name());
+void DropboxSettingsPage::Connected() {
+  ui_->login_state->SetLoggedIn(LoginStateWidget::LoggedIn);
 }

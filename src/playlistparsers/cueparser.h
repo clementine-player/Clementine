@@ -42,7 +42,8 @@ class CueParser : public ParserBase {
   static const char* kRem;
   static const char* kGenre;
   static const char* kDate;
-
+  static const char* kDisc;
+  
   CueParser(LibraryBackendInterface* library, QObject* parent = nullptr);
 
   QString name() const { return "CUE"; }
@@ -73,6 +74,7 @@ class CueParser : public ParserBase {
 
     QString genre;
     QString date;
+    QString disc;
 
     QString PrettyArtist() const {
       return artist.isEmpty() ? album_artist : artist;
@@ -83,7 +85,7 @@ class CueParser : public ParserBase {
 
     CueEntry(QString& file, QString& index, QString& title, QString& artist,
              QString& album_artist, QString& album, QString& composer,
-             QString& album_composer, QString& genre, QString& date) {
+             QString& album_composer, QString& genre, QString& date, QString& disc) {
       this->file = file;
       this->index = index;
       this->title = title;
@@ -94,6 +96,7 @@ class CueParser : public ParserBase {
       this->album_composer = album_composer;
       this->genre = genre;
       this->date = date;
+      this->disc = disc;
     }
   };
 

@@ -247,13 +247,6 @@ void MoodbarProxyStyle::EnsureMoodbarRendered(const QStyleOptionSlider* opt) {
   }
 }
 
-int MoodbarProxyStyle::GetExtraSpace(const QStyleOptionComplex* opt) const {
-  int space_available = slider_->style()->pixelMetric(
-      QStyle::PM_SliderSpaceAvailable, opt, slider_);
-  int w = slider_->width();
-  return w - space_available;
-}
-
 QRect MoodbarProxyStyle::subControlRect(ComplexControl cc,
                                         const QStyleOptionComplex* opt,
                                         SubControl sc,
@@ -270,28 +263,17 @@ QRect MoodbarProxyStyle::subControlRect(ComplexControl cc,
     case MoodbarOn:
     case FadingToOn:
       switch (sc) {
-        case SC_SliderGroove: {
-          int margin_leftright = GetExtraSpace(opt) / 2;
-          return opt->rect.adjusted(margin_leftright, kMarginSize,
-                                    -margin_leftright, -kMarginSize);
-        }
+        case SC_SliderGroove:
+          return opt->rect.adjusted(kMarginSize, kMarginSize, -kMarginSize,
+                                    -kMarginSize);
+
         case SC_SliderHandle: {
           const QStyleOptionSlider* slider_opt =
               qstyleoption_cast<const QStyleOptionSlider*>(opt);
 
-          int space_available = slider_->style()->pixelMetric(
-              QStyle::PM_SliderSpaceAvailable, opt, slider_);
-          int w = slider_->width();
-          int margin = (w - space_available) / 2;
-          int x = 0;
-
-          if (slider_opt->maximum != slider_opt->minimum) {
-            x = (slider_opt->sliderValue - slider_opt->minimum) *
-                (space_available - kArrowWidth) /
-                (slider_opt->maximum - slider_opt->minimum);
-          }
-
-          x += margin;
+          const int x = (slider_opt->sliderValue - slider_opt->minimum) *
+                        (opt->rect.width() - kArrowWidth) /
+                        (slider_opt->maximum - slider_opt->minimum);
 
           return QRect(QPoint(opt->rect.left() + x, opt->rect.top()),
                        QSize(kArrowWidth, kArrowHeight));
@@ -330,14 +312,9 @@ QPixmap MoodbarProxyStyle::MoodbarPixmap(const ColorVector& colors,
                                          const QSize& size,
                                          const QPalette& palette,
                                          const QStyleOptionSlider* opt) {
-  int margin_leftright = GetExtraSpace(opt);
-  const QRect rect(QPoint(0, 0), size);
+  QRect rect(QPoint(0, 0), size);
   QRect border_rect(rect);
-  // I would expect we need to adjust by margin_lr/2, so the extra space is
-  // distributed on both side, but if we do so, the margin is too small, and I'm
-  // not sure why...
-  border_rect.adjust(margin_leftright, kMarginSize, -margin_leftright,
-                     -kMarginSize);
+  border_rect.adjust(kMarginSize, kMarginSize, -kMarginSize, -kMarginSize);
 
   QRect inner_rect(border_rect);
   inner_rect.adjust(kBorderSize, kBorderSize, -kBorderSize, -kBorderSize);
@@ -356,14 +333,8 @@ QPixmap MoodbarProxyStyle::MoodbarPixmap(const ColorVector& colors,
   // Draw the outer bit
   p.setPen(QPen(palette.brush(QPalette::Active, QPalette::Background),
                 kMarginSize, Qt::SolidLine, Qt::FlatCap, Qt::MiterJoin));
-  // First: a rectangle around the slider
+
   p.drawRect(rect.adjusted(1, 1, -2, -2));
-  // Then, thicker border on left and right, because of the margins.
-  p.setPen(QPen(palette.brush(QPalette::Active, QPalette::Background),
-                margin_leftright * 2 - kBorderSize, Qt::SolidLine, Qt::FlatCap,
-                Qt::MiterJoin));
-  p.drawLine(rect.topLeft(), rect.bottomLeft());
-  p.drawLine(rect.topRight(), rect.bottomRight());
 
   p.end();
 

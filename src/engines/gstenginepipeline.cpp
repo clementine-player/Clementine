@@ -174,8 +174,12 @@ bool GstEnginePipeline::ReplaceDecodeBin(const QUrl& url) {
     gst_object_unref(GST_OBJECT(pad));
 
     // Tell spotify to start sending data to us.
-    InternetModel::Service<SpotifyService>()->server()->StartPlaybackLater(
-        url.toString(), port);
+    SpotifyServer* spotify_server = InternetModel::Service<SpotifyService>()->server();
+    // Need to schedule this in the spotify server's thread
+    QMetaObject::invokeMethod(spotify_server, "StartPlayback",
+                              Qt::QueuedConnection,
+                              Q_ARG(QString, url.toString()),
+                              Q_ARG(quint16, port));
   } else {
     new_bin = engine_->CreateElement("uridecodebin");
     g_object_set(G_OBJECT(new_bin), "uri", url.toEncoded().constData(),
@@ -920,7 +924,14 @@ void GstEnginePipeline::SourceDrainedCallback(GstURIDecodeBin* bin,
                                               gpointer self) {
   GstEnginePipeline* instance = reinterpret_cast<GstEnginePipeline*>(self);
 
-  if (instance->has_next_valid_url()) {
+  if (instance->has_next_valid_url() &&
+      // I'm not sure why, but calling this when previous track is a local song
+      // and the next track is a Spotify song is buggy: the Spotify song will
+      // not start or with some offset. So just do nothing here: when the song
+      // finished, EndOfStreamReached/TrackEnded will be emitted anyway so
+      // NextItem will be called.
+      !(instance->url_.scheme() != "spotify" &&
+        instance->next_url_.scheme() == "spotify")) {
     instance->TransitionToNext();
   }
 }

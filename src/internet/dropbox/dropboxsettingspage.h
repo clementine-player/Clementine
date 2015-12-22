@@ -24,7 +24,6 @@
 #include <QModelIndex>
 #include <QWidget>
 
-class DropboxAuthenticator;
 class DropboxService;
 class Ui_DropboxSettingsPage;
 
@@ -39,12 +38,12 @@ class DropboxSettingsPage : public SettingsPage {
   void Save();
 
   // QObject
-  bool eventFilter(QObject* object, QEvent* event);
+  bool eventFilter(QObject* object, QEvent* event) override;
 
  private slots:
   void LoginClicked();
   void LogoutClicked();
-  void Connected(DropboxAuthenticator* authenticator);
+  void Connected();
 
  private:
   Ui_DropboxSettingsPage* ui_;

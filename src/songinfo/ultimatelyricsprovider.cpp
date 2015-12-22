@@ -223,7 +223,7 @@ QString UltimateLyricsProvider::Extract(const QString& source,
   int end_idx = source.indexOf(end, begin_idx);
   if (end_idx == -1) return QString();
 
-  return source.mid(begin_idx, end_idx - begin_idx - 1);
+  return source.mid(begin_idx, end_idx - begin_idx);
 }
 
 void UltimateLyricsProvider::ApplyExcludeRule(const Rule& rule,

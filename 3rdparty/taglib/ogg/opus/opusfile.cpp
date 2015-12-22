@@ -27,8 +27,6 @@
  *   http://www.mozilla.org/MPL/                                           *
  ***************************************************************************/
 
-#include <bitset>
-
 #include <tstring.h>
 #include <tdebug.h>
 #include <tpropertymap.h>
@@ -59,20 +57,20 @@ public:
 // public members
 ////////////////////////////////////////////////////////////////////////////////
 
-Opus::File::File(FileName file, bool readProperties, Properties::ReadStyle propertiesStyle) :
+Opus::File::File(FileName file, bool readProperties, Properties::ReadStyle) :
   Ogg::File(file),
   d(new FilePrivate())
 {
   if(isOpen())
-    read(readProperties, propertiesStyle);
+    read(readProperties);
 }
 
-Opus::File::File(IOStream *stream, bool readProperties, Properties::ReadStyle propertiesStyle) :
+Opus::File::File(IOStream *stream, bool readProperties, Properties::ReadStyle) :
   Ogg::File(stream),
   d(new FilePrivate())
 {
   if(isOpen())
-    read(readProperties, propertiesStyle);
+    read(readProperties);
 }
 
 Opus::File::~File()
@@ -114,7 +112,7 @@ bool Opus::File::save()
 // private members
 ////////////////////////////////////////////////////////////////////////////////
 
-void Opus::File::read(bool readProperties, Properties::ReadStyle propertiesStyle)
+void Opus::File::read(bool readProperties)
 {
   ByteVector opusHeaderData = packet(0);
 
@@ -135,5 +133,5 @@ void Opus::File::read(bool readProperties, Properties::ReadStyle propertiesStyle
   d->comment = new Ogg::XiphComment(commentHeaderData.mid(8));
 
   if(readProperties)
-    d->properties = new Properties(this, propertiesStyle);
+    d->properties = new Properties(this);
 }

@@ -22,7 +22,7 @@
 TranscoderSettingsPage::TranscoderSettingsPage(SettingsDialog* dialog)
     : SettingsPage(dialog), ui_(new Ui_TranscoderSettingsPage) {
   ui_->setupUi(this);
-  setWindowIcon(IconLoader::Load("tools-wizard"));
+  setWindowIcon(IconLoader::Load("tools-wizard", IconLoader::Base));
 }
 
 TranscoderSettingsPage::~TranscoderSettingsPage() { delete ui_; }

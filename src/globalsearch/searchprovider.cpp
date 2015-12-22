@@ -16,13 +16,14 @@
 */
 
 #include "searchprovider.h"
-#include "core/boundfuturewatcher.h"
-#include "internet/core/internetsongmimedata.h"
-#include "playlist/songmimedata.h"
 
 #include <QPainter>
 #include <QUrl>
 #include <QtConcurrentRun>
+
+#include "core/closure.h"
+#include "internet/core/internetsongmimedata.h"
+#include "playlist/songmimedata.h"
 
 const int SearchProvider::kArtHeight = 32;
 
@@ -80,22 +81,15 @@ BlockingSearchProvider::BlockingSearchProvider(Application* app,
 void BlockingSearchProvider::SearchAsync(int id, const QString& query) {
   QFuture<ResultList> future =
       QtConcurrent::run(this, &BlockingSearchProvider::Search, id, query);
-
-  BoundFutureWatcher<ResultList, int>* watcher =
-      new BoundFutureWatcher<ResultList, int>(id);
-  watcher->setFuture(future);
-  connect(watcher, SIGNAL(finished()), SLOT(BlockingSearchFinished()));
+  NewClosure(future, this,
+             SLOT(BlockingSearchFinished(QFuture<ResultList>, int)), future,
+             id);
 }
 
-void BlockingSearchProvider::BlockingSearchFinished() {
-  BoundFutureWatcher<ResultList, int>* watcher =
-      static_cast<BoundFutureWatcher<ResultList, int>*>(sender());
-
-  const int id = watcher->data();
-  emit ResultsAvailable(id, watcher->result());
+void BlockingSearchProvider::BlockingSearchFinished(QFuture<ResultList> future,
+                                                    const int id) {
+  emit ResultsAvailable(id, future.result());
   emit SearchFinished(id);
-
-  watcher->deleteLater();
 }
 
 QImage SearchProvider::ScaleAndPad(const QImage& image) {

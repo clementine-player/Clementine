@@ -262,9 +262,35 @@
     </widget>
    </item>
    <item>
+    <widget class="QGroupBox" name="groupBox_doubleclick_playlist">
+     <property name="title">
+      <string>Double clicking a song in the playlist will...</string>
+     </property>
+     <layout class="QVBoxLayout" name="layout_doubleclick_playlist">
+      <item>
+       <widget class="QComboBox" name="doubleclick_playlist_addmode">
+        <property name="currentIndex">
+         <number>0</number>
+        </property>
+        <item>
+         <property name="text">
+          <string>Change the currently playing song</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Add to the queue</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
     <widget class="QGroupBox" name="groupBox_seekstep">
      <property name="title">
-      <string>Seeking using a keyboard shortcut</string>
+      <string>Seeking using a keyboard shortcut or mouse wheel</string>
      </property>
      <layout class="QHBoxLayout" name="horizontalLayout_7">
       <item>

@@ -101,10 +101,17 @@ void LibraryItemDelegate::paint(QPainter* painter,
     painter->drawText(text_rect, text);
 
     // Draw the line under the item
-    QPen line_pen(opt.palette.color(QPalette::Dark));
-    line_pen.setWidth(2);
-
-    painter->setPen(line_pen);
+    QColor line_color = opt.palette.color(QPalette::Text);
+    QLinearGradient grad_color(opt.rect.bottomLeft(), opt.rect.bottomRight());
+    const double fade_start_end = (opt.rect.width()/3.0)/opt.rect.width();
+    line_color.setAlphaF(0.0);
+    grad_color.setColorAt(0, line_color);
+    line_color.setAlphaF(0.5);
+    grad_color.setColorAt(fade_start_end, line_color);
+    grad_color.setColorAt(1.0 - fade_start_end, line_color);
+    line_color.setAlphaF(0.0);
+    grad_color.setColorAt(1, line_color);
+    painter->setPen(QPen(grad_color, 1));
     painter->drawLine(opt.rect.bottomLeft(), opt.rect.bottomRight());
 
     painter->restore();
@@ -178,6 +185,7 @@ LibraryView::LibraryView(QWidget* parent)
   setSelectionMode(QAbstractItemView::ExtendedSelection);
 
   setStyleSheet("QTreeView::item{padding-top:1px;}");
+  setAnimated(true);
 }
 
 LibraryView::~LibraryView() {}
@@ -366,52 +374,53 @@ void LibraryView::contextMenuEvent(QContextMenuEvent* e) {
   if (!context_menu_) {
     context_menu_ = new QMenu(this);
     add_to_playlist_ = context_menu_->addAction(
-        IconLoader::Load("media-playback-start"),
+        IconLoader::Load("media-playback-start", IconLoader::Base),
         tr("Append to current playlist"), this, SLOT(AddToPlaylist()));
-    load_ = context_menu_->addAction(IconLoader::Load("media-playback-start"),
-                                     tr("Replace current playlist"), this,
-                                     SLOT(Load()));
+    load_ = context_menu_->addAction(
+        IconLoader::Load("media-playback-start", IconLoader::Base),
+        tr("Replace current playlist"), this, SLOT(Load()));
     open_in_new_playlist_ = context_menu_->addAction(
-        IconLoader::Load("document-new"), tr("Open in new playlist"), this,
-        SLOT(OpenInNewPlaylist()));
+        IconLoader::Load("document-new", IconLoader::Base), 
+        tr("Open in new playlist"), this, SLOT(OpenInNewPlaylist()));
 
     context_menu_->addSeparator();
     add_to_playlist_enqueue_ =
-        context_menu_->addAction(IconLoader::Load("go-next"), tr("Queue track"),
-                                 this, SLOT(AddToPlaylistEnqueue()));
+        context_menu_->addAction(IconLoader::Load("go-next", IconLoader::Base), 
+                                 tr("Queue track"), this, 
+                                 SLOT(AddToPlaylistEnqueue()));
 
     context_menu_->addSeparator();
     new_smart_playlist_ = context_menu_->addAction(
-        IconLoader::Load("document-new"), tr("New smart playlist..."), this,
-        SLOT(NewSmartPlaylist()));
+        IconLoader::Load("document-new", IconLoader::Base), 
+        tr("New smart playlist..."), this, SLOT(NewSmartPlaylist()));
     edit_smart_playlist_ = context_menu_->addAction(
-        IconLoader::Load("edit-rename"), tr("Edit smart playlist..."), this,
-        SLOT(EditSmartPlaylist()));
+        IconLoader::Load("edit-rename", IconLoader::Base), 
+        tr("Edit smart playlist..."), this, SLOT(EditSmartPlaylist()));
     delete_smart_playlist_ = context_menu_->addAction(
-        IconLoader::Load("edit-delete"), tr("Delete smart playlist"), this,
-        SLOT(DeleteSmartPlaylist()));
+        IconLoader::Load("edit-delete", IconLoader::Base), 
+        tr("Delete smart playlist"), this, SLOT(DeleteSmartPlaylist()));
 
     context_menu_->addSeparator();
-    organise_ = context_menu_->addAction(IconLoader::Load("edit-copy"),
+    organise_ = context_menu_->addAction(IconLoader::Load("edit-copy", IconLoader::Base),
                                          tr("Organise files..."), this,
                                          SLOT(Organise()));
     copy_to_device_ = context_menu_->addAction(
-        IconLoader::Load("multimedia-player-ipod-mini-blue"),
+        IconLoader::Load("multimedia-player-ipod-mini-blue", IconLoader::Base),
         tr("Copy to device..."), this, SLOT(CopyToDevice()));
-    delete_ = context_menu_->addAction(IconLoader::Load("edit-delete"),
+    delete_ = context_menu_->addAction(IconLoader::Load("edit-delete", IconLoader::Base),
                                        tr("Delete from disk..."), this,
                                        SLOT(Delete()));
 
     context_menu_->addSeparator();
-    edit_track_ = context_menu_->addAction(IconLoader::Load("edit-rename"),
+    edit_track_ = context_menu_->addAction(IconLoader::Load("edit-rename", IconLoader::Base),
                                            tr("Edit track information..."),
                                            this, SLOT(EditTracks()));
-    edit_tracks_ = context_menu_->addAction(IconLoader::Load("edit-rename"),
+    edit_tracks_ = context_menu_->addAction(IconLoader::Load("edit-rename", IconLoader::Base),
                                             tr("Edit tracks information..."),
                                             this, SLOT(EditTracks()));
     show_in_browser_ = context_menu_->addAction(
-        IconLoader::Load("document-open-folder"), tr("Show in file browser..."),
-        this, SLOT(ShowInBrowser()));
+        IconLoader::Load("document-open-folder", IconLoader::Base), 
+        tr("Show in file browser..."), this, SLOT(ShowInBrowser()));
 
     context_menu_->addSeparator();
     show_in_various_ = context_menu_->addAction(tr("Show in various artists"),

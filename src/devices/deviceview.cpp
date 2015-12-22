@@ -199,32 +199,36 @@ void DeviceView::contextMenuEvent(QContextMenuEvent* e) {
     library_menu_ = new QMenu(this);
 
     // Device menu
-    eject_action_ = device_menu_->addAction(IconLoader::Load("media-eject"),
+    eject_action_ = device_menu_->addAction(IconLoader::Load("media-eject", 
+                                            IconLoader::Base),
                                             tr("Safely remove device"), this,
                                             SLOT(Unmount()));
     forget_action_ =
-        device_menu_->addAction(IconLoader::Load("list-remove"),
+        device_menu_->addAction(IconLoader::Load("list-remove", IconLoader::Base),
                                 tr("Forget device"), this, SLOT(Forget()));
     device_menu_->addSeparator();
-    properties_action_ = device_menu_->addAction(IconLoader::Load("configure"),
+    properties_action_ = device_menu_->addAction(IconLoader::Load("configure", 
+                                                 IconLoader::Base),
                                                  tr("Device properties..."),
                                                  this, SLOT(Properties()));
 
     // Library menu
     add_to_playlist_action_ = library_menu_->addAction(
-        IconLoader::Load("media-playback-start"),
+        IconLoader::Load("media-playback-start", IconLoader::Base),
         tr("Append to current playlist"), this, SLOT(AddToPlaylist()));
     load_action_ = library_menu_->addAction(
-        IconLoader::Load("media-playback-start"),
+        IconLoader::Load("media-playback-start", IconLoader::Base),
         tr("Replace current playlist"), this, SLOT(Load()));
     open_in_new_playlist_ = library_menu_->addAction(
-        IconLoader::Load("document-new"), tr("Open in new playlist"), this,
-        SLOT(OpenInNewPlaylist()));
+        IconLoader::Load("document-new", IconLoader::Base), 
+        tr("Open in new playlist"), this, SLOT(OpenInNewPlaylist()));
     library_menu_->addSeparator();
-    organise_action_ = library_menu_->addAction(IconLoader::Load("edit-copy"),
+    organise_action_ = library_menu_->addAction(IconLoader::Load("edit-copy", 
+                                                IconLoader::Base),
                                                 tr("Copy to library..."), this,
                                                 SLOT(Organise()));
-    delete_action_ = library_menu_->addAction(IconLoader::Load("edit-delete"),
+    delete_action_ = library_menu_->addAction(IconLoader::Load("edit-delete", 
+                                              IconLoader::Base),
                                               tr("Delete from device..."), this,
                                               SLOT(Delete()));
   }
