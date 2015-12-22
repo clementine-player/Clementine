@@ -34,7 +34,7 @@ void DBusIdleHandler::Inhibit(const char* reason) {
   QDBusInterface iface(service_, path_,
                        interface_, QDBusConnection::sessionBus());
   QDBusReply<quint32> reply;
-  if (service_ == "org.gnome.SessionManager") {
+  if (service_ == IdleHandler::kGnomePowermanagerService) {
     reply =
         iface.call("Inhibit", QCoreApplication::applicationName(), 
                      quint32(0), QObject::tr(reason),
@@ -57,7 +57,7 @@ void DBusIdleHandler::Inhibit(const char* reason) {
 void DBusIdleHandler::Uninhibit() {
   QDBusInterface iface(service_, path_,
                        interface_, QDBusConnection::sessionBus());
-  if (service_ == "org.gnome.SessionManager") {
+  if (service_ == IdleHandler::kGnomePowermanagerService) {
     iface.call("Uninhibit", cookie_);
   } else {
     iface.call("UnInhibit", cookie_);
@@ -68,7 +68,7 @@ bool DBusIdleHandler::Isinhibited() {
   QDBusInterface iface(service_, path_,
                        interface_, QDBusConnection::sessionBus());
   QDBusReply<bool> reply;
-  if (service_ == "org.gnome.SessionManager") {
+  if (service_ == IdleHandler::kGnomePowermanagerService) {
     reply = iface.call("IsInhibited", quint32(Inhibit_Suspend));
   } else {
     reply = iface.call("HasInhibit");

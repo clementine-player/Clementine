@@ -37,6 +37,11 @@ class IdleHandler {
   };
   static Inhibitor inbtr_;
 
+  static const char* kGnomeScreensaverService;
+  static const char* kFreedesktopScreensaverService;
+  static const char* kGnomePowermanagerService;
+  static const char* kFreedesktopPowermanagerService;
+
  private:
   static IdleHandler* screensaver_;
   static IdleHandler* suspend_;

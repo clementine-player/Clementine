@@ -20,8 +20,6 @@
 #include "idlehandler.h"
 #include "core/logging.h"
 
-#include "dbusidlehandler.cc"
-
 #include <QtGlobal>
 
 #ifdef HAVE_DBUS
@@ -37,6 +35,42 @@
 #ifdef Q_OS_WIN32
 #include "windowsidlehandler.h"
 #endif
+
+// Services
+const char* IdleHandler::kGnomeScreensaverService
+    = "org.gnome.ScreenSaver";
+const char* IdleHandler::kFreedesktopScreensaverService
+    = "org.freedesktop.ScreenSaver";
+const char* IdleHandler::kGnomePowermanagerService
+    = "org.gnome.SessionManager";
+const char* IdleHandler::kFreedesktopPowermanagerService
+    = "org.freedesktop.PowerManagement";
+
+namespace {
+  // Gnome Screensaver
+  const char* kGnomeScreensaverPath
+      = "/";
+  const char* kGnomeScreensaverInterface
+      = "org.gnome.ScreenSaver";
+  
+  // Freedesktop screensaver
+  const char* kFreedesktopScreensaverPath
+      = "/ScreenSaver";
+  const char* kFreedesktopScreensaverInterface
+      = "org.freedesktop.ScreenSaver";
+
+  // Gnome powermanager
+  const char* kGnomePowermanagerPath
+      = "/org/gnome/SessionManager";
+  const char* kGnomePowermanagerInterface
+      = "org.gnome.SessionManager";
+
+  // Freedesktop powermanager
+  const char* kFreedesktopPowermanagerPath
+      = "/org/freedesktop/PowerManagement/Inhibit";
+  const char* kFreedesktopPowermanagerInterface
+      = "org.freedesktop.PowerManagement.Inhibit";
+}
 
 IdleHandler* IdleHandler::screensaver_ = 0;
 IdleHandler* IdleHandler::suspend_ = 0;
