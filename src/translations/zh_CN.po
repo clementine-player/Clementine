@@ -19,7 +19,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2015-12-22 21:58+0000\n"
+"PO-Revision-Date: 2015-12-31 02:49+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/davidsansome/clementine/language/zh_CN/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -466,7 +466,7 @@ msgstr "如果支持此通知类型，则添加一个新行"
 msgid "Add action"
 msgstr "添加动作"
 
-#: ../bin/src/ui_transcodedialog.h:217
+#: ../bin/src/ui_transcodedialog.h:220
 msgid "Add all tracks from a directory and all its subdirectories"
 msgstr "添加目录及其子目录的所有曲目"
 
@@ -474,7 +474,7 @@ msgstr "添加目录及其子目录的所有曲目"
 msgid "Add another stream..."
 msgstr "添加其他流媒体..."
 
-#: library/librarysettingspage.cpp:67
+#: library/librarysettingspage.cpp:67 ../bin/src/ui_transcodedialog.h:222
 msgid "Add directory..."
 msgstr "添加目录..."
 
@@ -490,7 +490,7 @@ msgstr "添加文件至转码器"
 msgid "Add file(s) to transcoder"
 msgstr "添加文件至转码器"
 
-#: ../bin/src/ui_mainwindow.h:676
+#: ../bin/src/ui_transcodedialog.h:218 ../bin/src/ui_mainwindow.h:676
 msgid "Add file..."
 msgstr "添加文件..."
 
@@ -640,10 +640,6 @@ msgstr "添加用户/组到书签"
 msgid "Add wiimotedev action"
 msgstr "添加 Wii 遥控器设备动作"
 
-#: ../bin/src/ui_transcodedialog.h:214
-msgid "Add..."
-msgstr "添加..."
-
 #: ../bin/src/ui_libraryfilterwidget.h:94
 msgid "Added this month"
 msgstr "本月加入"
@@ -766,7 +762,7 @@ msgstr "允许下载"
 msgid "Allow mid/side encoding"
 msgstr "允许 M/S 编码 (和差编码)"
 
-#: ../bin/src/ui_transcodedialog.h:226
+#: ../bin/src/ui_transcodedialog.h:230
 msgid "Alongside the originals"
 msgstr "原始歌曲同一目录下"
 
@@ -878,7 +874,7 @@ msgstr "歌手名字的首字母"
 msgid "Ask when saving"
 msgstr "保存时提示"
 
-#: ../bin/src/ui_transcodedialog.h:221
+#: ../bin/src/ui_transcodedialog.h:225
 #: ../bin/src/ui_networkremotesettingspage.h:250
 #: ../bin/src/ui_ripcddialog.h:322
 msgid "Audio format"
@@ -1694,12 +1690,12 @@ msgstr "移除选定曲目"
 msgid "Dequeue track"
 msgstr "移除曲目"
 
-#: ../bin/src/ui_transcodedialog.h:223 ../bin/src/ui_organisedialog.h:240
+#: ../bin/src/ui_transcodedialog.h:227 ../bin/src/ui_organisedialog.h:240
 #: ../bin/src/ui_ripcddialog.h:320
 msgid "Destination"
 msgstr "目标"
 
-#: ../bin/src/ui_transcodedialog.h:230
+#: ../bin/src/ui_transcodedialog.h:234
 msgid "Details..."
 msgstr "详情..."
 
@@ -1748,7 +1744,7 @@ msgid "Direct internet connection"
 msgstr "直接连接到互联网"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:141
-#: ../bin/src/ui_transcodedialog.h:212
+#: ../bin/src/ui_transcodedialog.h:216
 msgid "Directory"
 msgstr "目录"
 
@@ -2342,7 +2338,7 @@ msgstr "文件大小"
 msgid "File type"
 msgstr "文件类型"
 
-#: ../bin/src/ui_transcodedialog.h:213
+#: ../bin/src/ui_transcodedialog.h:217
 msgid "Filename"
 msgstr "文件名"
 
@@ -2350,7 +2346,7 @@ msgstr "文件名"
 msgid "Files"
 msgstr "文件"
 
-#: ../bin/src/ui_transcodedialog.h:210
+#: ../bin/src/ui_transcodedialog.h:214
 msgid "Files to transcode"
 msgstr "要转换的文件"
 
@@ -2660,10 +2656,6 @@ msgstr "图像 (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm)"
 #: ui/albumcoverchoicecontroller.cpp:46
 msgid "Images (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 msgstr "图像 (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
-
-#: ../bin/src/ui_transcodedialog.h:219
-msgid "Import..."
-msgstr "导入..."
 
 #: core/utilities.cpp:151
 #, qt-format
@@ -3604,7 +3596,7 @@ msgstr "为位速率优化"
 msgid "Optimize for quality"
 msgstr "为质量优化"
 
-#: ../bin/src/ui_transcodedialog.h:222
+#: ../bin/src/ui_transcodedialog.h:226
 #: ../bin/src/ui_networkremotesettingspage.h:251
 #: ../bin/src/ui_ripcddialog.h:321
 msgid "Options..."
@@ -3657,7 +3649,7 @@ msgstr "输出"
 msgid "Output device"
 msgstr "输出设备"
 
-#: ../bin/src/ui_transcodedialog.h:220 ../bin/src/ui_ripcddialog.h:317
+#: ../bin/src/ui_transcodedialog.h:224 ../bin/src/ui_ripcddialog.h:317
 msgid "Output options"
 msgstr "输出选项"
 
@@ -3893,7 +3885,7 @@ msgstr "输出版本信息"
 msgid "Profile"
 msgstr "档案"
 
-#: ../bin/src/ui_transcodedialog.h:229 ../bin/src/ui_ripcddialog.h:323
+#: ../bin/src/ui_transcodedialog.h:233 ../bin/src/ui_ripcddialog.h:323
 msgid "Progress"
 msgstr "进度"
 
@@ -4047,7 +4039,7 @@ msgid "Remember my choice"
 msgstr "记住我的选择"
 
 #: internet/internetradio/savedradio.cpp:107 ../bin/src/ui_queuemanager.h:134
-#: ../bin/src/ui_transcodedialog.h:215
+#: ../bin/src/ui_transcodedialog.h:223
 msgid "Remove"
 msgstr "删除"
 
@@ -4420,7 +4412,7 @@ msgstr "选择视觉效果"
 msgid "Select visualizations..."
 msgstr "选择视觉效果..."
 
-#: ../bin/src/ui_transcodedialog.h:228 ../bin/src/ui_ripcddialog.h:318
+#: ../bin/src/ui_transcodedialog.h:232 ../bin/src/ui_ripcddialog.h:318
 msgid "Select..."
 msgstr "选择……"
 
@@ -5163,7 +5155,7 @@ msgstr "曲目"
 msgid "Tracks"
 msgstr "曲目"
 
-#: ../bin/src/ui_transcodedialog.h:209 ../bin/src/ui_mainwindow.h:690
+#: ../bin/src/ui_transcodedialog.h:213 ../bin/src/ui_mainwindow.h:690
 msgid "Transcode Music"
 msgstr "音乐转码"
 

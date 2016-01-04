@@ -19,7 +19,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2015-12-22 21:58+0000\n"
+"PO-Revision-Date: 2015-12-31 02:49+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Korean (http://www.transifex.com/davidsansome/clementine/language/ko/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -466,7 +466,7 @@ msgstr "알림 형식이 지원한다면 새로운 줄 추가"
 msgid "Add action"
 msgstr "동작 추가"
 
-#: ../bin/src/ui_transcodedialog.h:217
+#: ../bin/src/ui_transcodedialog.h:220
 msgid "Add all tracks from a directory and all its subdirectories"
 msgstr "디렉토리와 모든 하위 디렉토리의 모든 트랙을 추가합니다"
 
@@ -474,7 +474,7 @@ msgstr "디렉토리와 모든 하위 디렉토리의 모든 트랙을 추가합
 msgid "Add another stream..."
 msgstr "다른 스트림 추가..."
 
-#: library/librarysettingspage.cpp:67
+#: library/librarysettingspage.cpp:67 ../bin/src/ui_transcodedialog.h:222
 msgid "Add directory..."
 msgstr "디렉토리 추가..."
 
@@ -490,7 +490,7 @@ msgstr "transcoder에 파일 추가"
 msgid "Add file(s) to transcoder"
 msgstr "transcoder 파일(들) 추가"
 
-#: ../bin/src/ui_mainwindow.h:676
+#: ../bin/src/ui_transcodedialog.h:218 ../bin/src/ui_mainwindow.h:676
 msgid "Add file..."
 msgstr "파일 추가..."
 
@@ -640,10 +640,6 @@ msgstr "북마크에 사용자/그룹 추가"
 msgid "Add wiimotedev action"
 msgstr "Wii 리모컨 동작 추가"
 
-#: ../bin/src/ui_transcodedialog.h:214
-msgid "Add..."
-msgstr "추가..."
-
 #: ../bin/src/ui_libraryfilterwidget.h:94
 msgid "Added this month"
 msgstr "이번 달에 추가됨"
@@ -766,7 +762,7 @@ msgstr "다운로드 허용"
 msgid "Allow mid/side encoding"
 msgstr "미드/사이드 인코딩 적용"
 
-#: ../bin/src/ui_transcodedialog.h:226
+#: ../bin/src/ui_transcodedialog.h:230
 msgid "Alongside the originals"
 msgstr "원본과 함께"
 
@@ -878,7 +874,7 @@ msgstr "음악가 이니셜"
 msgid "Ask when saving"
 msgstr "저장할 때 묻기"
 
-#: ../bin/src/ui_transcodedialog.h:221
+#: ../bin/src/ui_transcodedialog.h:225
 #: ../bin/src/ui_networkremotesettingspage.h:250
 #: ../bin/src/ui_ripcddialog.h:322
 msgid "Audio format"
@@ -1694,12 +1690,12 @@ msgstr "선택한 트랙을 대기열에서 해제"
 msgid "Dequeue track"
 msgstr "트랙을 대기열에서 해제"
 
-#: ../bin/src/ui_transcodedialog.h:223 ../bin/src/ui_organisedialog.h:240
+#: ../bin/src/ui_transcodedialog.h:227 ../bin/src/ui_organisedialog.h:240
 #: ../bin/src/ui_ripcddialog.h:320
 msgid "Destination"
 msgstr "대상"
 
-#: ../bin/src/ui_transcodedialog.h:230
+#: ../bin/src/ui_transcodedialog.h:234
 msgid "Details..."
 msgstr "세부 내용..."
 
@@ -1748,7 +1744,7 @@ msgid "Direct internet connection"
 msgstr "직접 인터넷 연결"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:141
-#: ../bin/src/ui_transcodedialog.h:212
+#: ../bin/src/ui_transcodedialog.h:216
 msgid "Directory"
 msgstr "디렉토리"
 
@@ -2342,7 +2338,7 @@ msgstr "파일 크기"
 msgid "File type"
 msgstr "파일 형태"
 
-#: ../bin/src/ui_transcodedialog.h:213
+#: ../bin/src/ui_transcodedialog.h:217
 msgid "Filename"
 msgstr "파일 "
 
@@ -2350,7 +2346,7 @@ msgstr "파일 "
 msgid "Files"
 msgstr "파일"
 
-#: ../bin/src/ui_transcodedialog.h:210
+#: ../bin/src/ui_transcodedialog.h:214
 msgid "Files to transcode"
 msgstr "변환할 파일들"
 
@@ -2660,10 +2656,6 @@ msgstr "그림 (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm)"
 #: ui/albumcoverchoicecontroller.cpp:46
 msgid "Images (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 msgstr "Images (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
-
-#: ../bin/src/ui_transcodedialog.h:219
-msgid "Import..."
-msgstr "가져오기..."
 
 #: core/utilities.cpp:151
 #, qt-format
@@ -3604,7 +3596,7 @@ msgstr "비트 전송률 최적화"
 msgid "Optimize for quality"
 msgstr "음질 최적화"
 
-#: ../bin/src/ui_transcodedialog.h:222
+#: ../bin/src/ui_transcodedialog.h:226
 #: ../bin/src/ui_networkremotesettingspage.h:251
 #: ../bin/src/ui_ripcddialog.h:321
 msgid "Options..."
@@ -3657,7 +3649,7 @@ msgstr "출력"
 msgid "Output device"
 msgstr "출력 장치"
 
-#: ../bin/src/ui_transcodedialog.h:220 ../bin/src/ui_ripcddialog.h:317
+#: ../bin/src/ui_transcodedialog.h:224 ../bin/src/ui_ripcddialog.h:317
 msgid "Output options"
 msgstr "저장 옵션"
 
@@ -3893,7 +3885,7 @@ msgstr "출력 버전 정보"
 msgid "Profile"
 msgstr "프로필"
 
-#: ../bin/src/ui_transcodedialog.h:229 ../bin/src/ui_ripcddialog.h:323
+#: ../bin/src/ui_transcodedialog.h:233 ../bin/src/ui_ripcddialog.h:323
 msgid "Progress"
 msgstr "진행"
 
@@ -3960,7 +3952,7 @@ msgstr "빗소리"
 
 #: internet/subsonic/subsonicservice.cpp:103
 msgid "Random"
-msgstr ""
+msgstr "무작위"
 
 #: ../bin/src/ui_visualisationselector.h:111
 msgid "Random visualization"
@@ -4001,7 +3993,7 @@ msgstr "정말 취소 하시겠습니까?"
 
 #: internet/subsonic/subsonicservice.cpp:112
 msgid "Recently Played"
-msgstr ""
+msgstr "최근 재생됨"
 
 #: internet/subsonic/subsonicsettingspage.cpp:158
 msgid "Redirect limit exceeded, verify server configuration."
@@ -4047,7 +4039,7 @@ msgid "Remember my choice"
 msgstr "나의 선택을 기억"
 
 #: internet/internetradio/savedradio.cpp:107 ../bin/src/ui_queuemanager.h:134
-#: ../bin/src/ui_transcodedialog.h:215
+#: ../bin/src/ui_transcodedialog.h:223
 msgid "Remove"
 msgstr "제거"
 
@@ -4420,7 +4412,7 @@ msgstr "시각화 선택"
 msgid "Select visualizations..."
 msgstr "시각화 선택..."
 
-#: ../bin/src/ui_transcodedialog.h:228 ../bin/src/ui_ripcddialog.h:318
+#: ../bin/src/ui_transcodedialog.h:232 ../bin/src/ui_ripcddialog.h:318
 msgid "Select..."
 msgstr "선택..."
 
@@ -5092,7 +5084,7 @@ msgstr "이 장치의 형태는 지원되지 않습니다: %1"
 
 #: ../bin/src/ui_behavioursettingspage.h:358
 msgid "Time step"
-msgstr ""
+msgstr "시간 간격"
 
 #: playlist/playlist.cpp:1313 ui/organisedialog.cpp:60
 #: ui/qtsystemtrayicon.cpp:232 ../bin/src/ui_about.h:141
@@ -5135,7 +5127,7 @@ msgstr "너무 많은 리다이렉트"
 
 #: internet/subsonic/subsonicservice.cpp:109
 msgid "Top Rated"
-msgstr ""
+msgstr "상위 순위"
 
 #: internet/spotify/spotifyservice.cpp:430
 msgid "Top tracks"
@@ -5163,7 +5155,7 @@ msgstr "트랙"
 msgid "Tracks"
 msgstr "트랙"
 
-#: ../bin/src/ui_transcodedialog.h:209 ../bin/src/ui_mainwindow.h:690
+#: ../bin/src/ui_transcodedialog.h:213 ../bin/src/ui_mainwindow.h:690
 msgid "Transcode Music"
 msgstr "음악 변환"
 

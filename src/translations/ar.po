@@ -15,7 +15,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2015-12-22 21:58+0000\n"
+"PO-Revision-Date: 2015-12-31 02:49+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Arabic (http://www.transifex.com/davidsansome/clementine/language/ar/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -462,7 +462,7 @@ msgstr "إضافة سطر جديد إن كان مدعوم من قبل نوعية
 msgid "Add action"
 msgstr "إضافة عمل"
 
-#: ../bin/src/ui_transcodedialog.h:217
+#: ../bin/src/ui_transcodedialog.h:220
 msgid "Add all tracks from a directory and all its subdirectories"
 msgstr ""
 
@@ -470,7 +470,7 @@ msgstr ""
 msgid "Add another stream..."
 msgstr "إضافة Stream أخر"
 
-#: library/librarysettingspage.cpp:67
+#: library/librarysettingspage.cpp:67 ../bin/src/ui_transcodedialog.h:222
 msgid "Add directory..."
 msgstr "أضف مجلد..."
 
@@ -486,7 +486,7 @@ msgstr "أضف ملفا للتحويل"
 msgid "Add file(s) to transcoder"
 msgstr "أضف ملف(s) للتحويل"
 
-#: ../bin/src/ui_mainwindow.h:676
+#: ../bin/src/ui_transcodedialog.h:218 ../bin/src/ui_mainwindow.h:676
 msgid "Add file..."
 msgstr "أضافة ملف..."
 
@@ -636,10 +636,6 @@ msgstr "أضف مستخدما\\مجموعة إلى الإشارات المرجع
 msgid "Add wiimotedev action"
 msgstr "أضف عملية wiimotedev"
 
-#: ../bin/src/ui_transcodedialog.h:214
-msgid "Add..."
-msgstr "أضف..."
-
 #: ../bin/src/ui_libraryfilterwidget.h:94
 msgid "Added this month"
 msgstr "أُضيفَ هذا الشهر"
@@ -762,7 +758,7 @@ msgstr "اسمح بالتحميل"
 msgid "Allow mid/side encoding"
 msgstr "اسمح بترميز mid/side"
 
-#: ../bin/src/ui_transcodedialog.h:226
+#: ../bin/src/ui_transcodedialog.h:230
 msgid "Alongside the originals"
 msgstr "بجانب الأصلية"
 
@@ -874,7 +870,7 @@ msgstr "بداية الفنان"
 msgid "Ask when saving"
 msgstr ""
 
-#: ../bin/src/ui_transcodedialog.h:221
+#: ../bin/src/ui_transcodedialog.h:225
 #: ../bin/src/ui_networkremotesettingspage.h:250
 #: ../bin/src/ui_ripcddialog.h:322
 msgid "Audio format"
@@ -1690,12 +1686,12 @@ msgstr "أزل المختارة من لائحة الانتظار"
 msgid "Dequeue track"
 msgstr "أزل المقطع من لائحة الانتظار"
 
-#: ../bin/src/ui_transcodedialog.h:223 ../bin/src/ui_organisedialog.h:240
+#: ../bin/src/ui_transcodedialog.h:227 ../bin/src/ui_organisedialog.h:240
 #: ../bin/src/ui_ripcddialog.h:320
 msgid "Destination"
 msgstr "الوجهة"
 
-#: ../bin/src/ui_transcodedialog.h:230
+#: ../bin/src/ui_transcodedialog.h:234
 msgid "Details..."
 msgstr "التفاصيل..."
 
@@ -1744,7 +1740,7 @@ msgid "Direct internet connection"
 msgstr "اتصال انترنت مباشر"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:141
-#: ../bin/src/ui_transcodedialog.h:212
+#: ../bin/src/ui_transcodedialog.h:216
 msgid "Directory"
 msgstr "مجلد"
 
@@ -2338,7 +2334,7 @@ msgstr "حجم الملف"
 msgid "File type"
 msgstr "نوع الملف"
 
-#: ../bin/src/ui_transcodedialog.h:213
+#: ../bin/src/ui_transcodedialog.h:217
 msgid "Filename"
 msgstr "اسم الملف"
 
@@ -2346,7 +2342,7 @@ msgstr "اسم الملف"
 msgid "Files"
 msgstr "الملفات"
 
-#: ../bin/src/ui_transcodedialog.h:210
+#: ../bin/src/ui_transcodedialog.h:214
 msgid "Files to transcode"
 msgstr "الملفات التي ستحول"
 
@@ -2656,10 +2652,6 @@ msgstr "الصور  (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xb
 #: ui/albumcoverchoicecontroller.cpp:46
 msgid "Images (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 msgstr "الصور (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
-
-#: ../bin/src/ui_transcodedialog.h:219
-msgid "Import..."
-msgstr ""
 
 #: core/utilities.cpp:151
 #, qt-format
@@ -3600,7 +3592,7 @@ msgstr "تحسين لصبيب أفضل"
 msgid "Optimize for quality"
 msgstr "تحسين لجودة أفضل"
 
-#: ../bin/src/ui_transcodedialog.h:222
+#: ../bin/src/ui_transcodedialog.h:226
 #: ../bin/src/ui_networkremotesettingspage.h:251
 #: ../bin/src/ui_ripcddialog.h:321
 msgid "Options..."
@@ -3653,7 +3645,7 @@ msgstr "مخرج"
 msgid "Output device"
 msgstr "جهاز الإخراج"
 
-#: ../bin/src/ui_transcodedialog.h:220 ../bin/src/ui_ripcddialog.h:317
+#: ../bin/src/ui_transcodedialog.h:224 ../bin/src/ui_ripcddialog.h:317
 msgid "Output options"
 msgstr "خيارات المخرج"
 
@@ -3889,7 +3881,7 @@ msgstr "اطبع معلومات النسخة"
 msgid "Profile"
 msgstr "ملف التعريف"
 
-#: ../bin/src/ui_transcodedialog.h:229 ../bin/src/ui_ripcddialog.h:323
+#: ../bin/src/ui_transcodedialog.h:233 ../bin/src/ui_ripcddialog.h:323
 msgid "Progress"
 msgstr "التقدم"
 
@@ -4043,7 +4035,7 @@ msgid "Remember my choice"
 msgstr ""
 
 #: internet/internetradio/savedradio.cpp:107 ../bin/src/ui_queuemanager.h:134
-#: ../bin/src/ui_transcodedialog.h:215
+#: ../bin/src/ui_transcodedialog.h:223
 msgid "Remove"
 msgstr "احذف"
 
@@ -4416,7 +4408,7 @@ msgstr "اختر التأثيرات المرئية"
 msgid "Select visualizations..."
 msgstr "اختر التأثيرات المرئية..."
 
-#: ../bin/src/ui_transcodedialog.h:228 ../bin/src/ui_ripcddialog.h:318
+#: ../bin/src/ui_transcodedialog.h:232 ../bin/src/ui_ripcddialog.h:318
 msgid "Select..."
 msgstr "اختر..."
 
@@ -5159,7 +5151,7 @@ msgstr "المقطوعة"
 msgid "Tracks"
 msgstr "المسارات"
 
-#: ../bin/src/ui_transcodedialog.h:209 ../bin/src/ui_mainwindow.h:690
+#: ../bin/src/ui_transcodedialog.h:213 ../bin/src/ui_mainwindow.h:690
 msgid "Transcode Music"
 msgstr "تحويل الصوتيات"
 

@@ -12,8 +12,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2015-12-23 22:18+0000\n"
-"Last-Translator: Moo\n"
+"PO-Revision-Date: 2015-12-31 02:49+0000\n"
+"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Lithuanian (http://www.transifex.com/davidsansome/clementine/language/lt/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -459,7 +459,7 @@ msgstr "Jeigu pranešimo tipas palaiko, tai pridedama nauja eilutė"
 msgid "Add action"
 msgstr "Pridėti veiksmą"
 
-#: ../bin/src/ui_transcodedialog.h:217
+#: ../bin/src/ui_transcodedialog.h:220
 msgid "Add all tracks from a directory and all its subdirectories"
 msgstr "Pridėti visus takelius iš katalogo ir visų jo vidinių katalogų"
 
@@ -467,7 +467,7 @@ msgstr "Pridėti visus takelius iš katalogo ir visų jo vidinių katalogų"
 msgid "Add another stream..."
 msgstr "Pridėti kitą srautą..."
 
-#: library/librarysettingspage.cpp:67
+#: library/librarysettingspage.cpp:67 ../bin/src/ui_transcodedialog.h:222
 msgid "Add directory..."
 msgstr "Pridėti nuorodą..."
 
@@ -483,7 +483,7 @@ msgstr "Pridėti failą perkodavimui"
 msgid "Add file(s) to transcoder"
 msgstr "Pridėti failus perkodavimui"
 
-#: ../bin/src/ui_mainwindow.h:676
+#: ../bin/src/ui_transcodedialog.h:218 ../bin/src/ui_mainwindow.h:676
 msgid "Add file..."
 msgstr "Pridėti failą..."
 
@@ -633,10 +633,6 @@ msgstr "Pridėti vartotoją/grupę į adresyną"
 msgid "Add wiimotedev action"
 msgstr "Pridėti Wii pulto veiksmą"
 
-#: ../bin/src/ui_transcodedialog.h:214
-msgid "Add..."
-msgstr "Pridėti..."
-
 #: ../bin/src/ui_libraryfilterwidget.h:94
 msgid "Added this month"
 msgstr "Pridėta šį mėnesį"
@@ -759,7 +755,7 @@ msgstr "Leisti atsiuntimus"
 msgid "Allow mid/side encoding"
 msgstr "Įgalinti vidurinį/šoninį kodavimą"
 
-#: ../bin/src/ui_transcodedialog.h:226
+#: ../bin/src/ui_transcodedialog.h:230
 msgid "Alongside the originals"
 msgstr "Kartu su originalais"
 
@@ -871,7 +867,7 @@ msgstr "Atlikėjo inicialai"
 msgid "Ask when saving"
 msgstr "Klausti išsaugant"
 
-#: ../bin/src/ui_transcodedialog.h:221
+#: ../bin/src/ui_transcodedialog.h:225
 #: ../bin/src/ui_networkremotesettingspage.h:250
 #: ../bin/src/ui_ripcddialog.h:322
 msgid "Audio format"
@@ -1687,12 +1683,12 @@ msgstr "Iš eilės pažymėtus takelius"
 msgid "Dequeue track"
 msgstr "Iš eilės takelį"
 
-#: ../bin/src/ui_transcodedialog.h:223 ../bin/src/ui_organisedialog.h:240
+#: ../bin/src/ui_transcodedialog.h:227 ../bin/src/ui_organisedialog.h:240
 #: ../bin/src/ui_ripcddialog.h:320
 msgid "Destination"
 msgstr "Kopijuoti į aplanką"
 
-#: ../bin/src/ui_transcodedialog.h:230
+#: ../bin/src/ui_transcodedialog.h:234
 msgid "Details..."
 msgstr "Detalės..."
 
@@ -1741,7 +1737,7 @@ msgid "Direct internet connection"
 msgstr "Tiesioginis interneto ryšys"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:141
-#: ../bin/src/ui_transcodedialog.h:212
+#: ../bin/src/ui_transcodedialog.h:216
 msgid "Directory"
 msgstr "Aplankas"
 
@@ -2335,7 +2331,7 @@ msgstr "Failo dydis"
 msgid "File type"
 msgstr "Failo tipas"
 
-#: ../bin/src/ui_transcodedialog.h:213
+#: ../bin/src/ui_transcodedialog.h:217
 msgid "Filename"
 msgstr "Failopavadinimas"
 
@@ -2343,7 +2339,7 @@ msgstr "Failopavadinimas"
 msgid "Files"
 msgstr "Failai"
 
-#: ../bin/src/ui_transcodedialog.h:210
+#: ../bin/src/ui_transcodedialog.h:214
 msgid "Files to transcode"
 msgstr "Failai perkodavimui"
 
@@ -2653,10 +2649,6 @@ msgstr "Paveikslai (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm
 #: ui/albumcoverchoicecontroller.cpp:46
 msgid "Images (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 msgstr "Paveikslai (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
-
-#: ../bin/src/ui_transcodedialog.h:219
-msgid "Import..."
-msgstr "Importuoti..."
 
 #: core/utilities.cpp:151
 #, qt-format
@@ -3597,7 +3589,7 @@ msgstr "Optimizuoti pralaidumui"
 msgid "Optimize for quality"
 msgstr "Optimizuoti kokybei"
 
-#: ../bin/src/ui_transcodedialog.h:222
+#: ../bin/src/ui_transcodedialog.h:226
 #: ../bin/src/ui_networkremotesettingspage.h:251
 #: ../bin/src/ui_ripcddialog.h:321
 msgid "Options..."
@@ -3650,7 +3642,7 @@ msgstr "Išvestis"
 msgid "Output device"
 msgstr "Išvesties įrenginys"
 
-#: ../bin/src/ui_transcodedialog.h:220 ../bin/src/ui_ripcddialog.h:317
+#: ../bin/src/ui_transcodedialog.h:224 ../bin/src/ui_ripcddialog.h:317
 msgid "Output options"
 msgstr "Išvesties parinktys"
 
@@ -3886,7 +3878,7 @@ msgstr "Išvesti versijos informaciją"
 msgid "Profile"
 msgstr "Profilis"
 
-#: ../bin/src/ui_transcodedialog.h:229 ../bin/src/ui_ripcddialog.h:323
+#: ../bin/src/ui_transcodedialog.h:233 ../bin/src/ui_ripcddialog.h:323
 msgid "Progress"
 msgstr "Progresas"
 
@@ -4040,7 +4032,7 @@ msgid "Remember my choice"
 msgstr "Įsiminti mano pasirinkimą"
 
 #: internet/internetradio/savedradio.cpp:107 ../bin/src/ui_queuemanager.h:134
-#: ../bin/src/ui_transcodedialog.h:215
+#: ../bin/src/ui_transcodedialog.h:223
 msgid "Remove"
 msgstr "Pašalinti"
 
@@ -4413,7 +4405,7 @@ msgstr "Pasirinkti vaizdinius"
 msgid "Select visualizations..."
 msgstr "Parinkti vaizdinius"
 
-#: ../bin/src/ui_transcodedialog.h:228 ../bin/src/ui_ripcddialog.h:318
+#: ../bin/src/ui_transcodedialog.h:232 ../bin/src/ui_ripcddialog.h:318
 msgid "Select..."
 msgstr "Pasirinkti..."
 
@@ -5156,7 +5148,7 @@ msgstr "Takelis"
 msgid "Tracks"
 msgstr "Takeliai"
 
-#: ../bin/src/ui_transcodedialog.h:209 ../bin/src/ui_mainwindow.h:690
+#: ../bin/src/ui_transcodedialog.h:213 ../bin/src/ui_mainwindow.h:690
 msgid "Transcode Music"
 msgstr "Perkoduoti muziką"
 

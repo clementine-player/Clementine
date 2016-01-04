@@ -12,7 +12,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2015-12-22 21:58+0000\n"
+"PO-Revision-Date: 2015-12-31 02:49+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Vietnamese (http://www.transifex.com/davidsansome/clementine/language/vi/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -459,7 +459,7 @@ msgstr "Thêm một dòng mới nếu được hỗ trợ từ kiểu thông bá
 msgid "Add action"
 msgstr "Thêm hành động"
 
-#: ../bin/src/ui_transcodedialog.h:217
+#: ../bin/src/ui_transcodedialog.h:220
 msgid "Add all tracks from a directory and all its subdirectories"
 msgstr ""
 
@@ -467,7 +467,7 @@ msgstr ""
 msgid "Add another stream..."
 msgstr "Thêm luồng dữ liệu khác..."
 
-#: library/librarysettingspage.cpp:67
+#: library/librarysettingspage.cpp:67 ../bin/src/ui_transcodedialog.h:222
 msgid "Add directory..."
 msgstr "Thêm thư mục..."
 
@@ -483,7 +483,7 @@ msgstr "Thêm tập tin vào bộ chuyển mã"
 msgid "Add file(s) to transcoder"
 msgstr "Thêm (các) tập tin vào bộ chuyển mã"
 
-#: ../bin/src/ui_mainwindow.h:676
+#: ../bin/src/ui_transcodedialog.h:218 ../bin/src/ui_mainwindow.h:676
 msgid "Add file..."
 msgstr "Thêm tập tin..."
 
@@ -633,10 +633,6 @@ msgstr ""
 msgid "Add wiimotedev action"
 msgstr "Thêm hoạt động tay cầm wii"
 
-#: ../bin/src/ui_transcodedialog.h:214
-msgid "Add..."
-msgstr "Thêm..."
-
 #: ../bin/src/ui_libraryfilterwidget.h:94
 msgid "Added this month"
 msgstr "Đã thêm vào trong tháng này"
@@ -759,7 +755,7 @@ msgstr "Cho phép tải về"
 msgid "Allow mid/side encoding"
 msgstr "Cho phép mã hóa song song"
 
-#: ../bin/src/ui_transcodedialog.h:226
+#: ../bin/src/ui_transcodedialog.h:230
 msgid "Alongside the originals"
 msgstr "Thư mục chứa tập tin gốc"
 
@@ -871,7 +867,7 @@ msgstr "Tên viết tắt của nghệ sĩ"
 msgid "Ask when saving"
 msgstr "Hỏi khi lưu"
 
-#: ../bin/src/ui_transcodedialog.h:221
+#: ../bin/src/ui_transcodedialog.h:225
 #: ../bin/src/ui_networkremotesettingspage.h:250
 #: ../bin/src/ui_ripcddialog.h:322
 msgid "Audio format"
@@ -1687,12 +1683,12 @@ msgstr "Loại các bài đã chọn khỏi danh sách chờ"
 msgid "Dequeue track"
 msgstr "Loại bài hát khỏi d.sách chờ"
 
-#: ../bin/src/ui_transcodedialog.h:223 ../bin/src/ui_organisedialog.h:240
+#: ../bin/src/ui_transcodedialog.h:227 ../bin/src/ui_organisedialog.h:240
 #: ../bin/src/ui_ripcddialog.h:320
 msgid "Destination"
 msgstr "Xuất ra"
 
-#: ../bin/src/ui_transcodedialog.h:230
+#: ../bin/src/ui_transcodedialog.h:234
 msgid "Details..."
 msgstr "Chi tiết..."
 
@@ -1741,7 +1737,7 @@ msgid "Direct internet connection"
 msgstr "Nối mạng trực tiếp"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:141
-#: ../bin/src/ui_transcodedialog.h:212
+#: ../bin/src/ui_transcodedialog.h:216
 msgid "Directory"
 msgstr "Thư mục"
 
@@ -2335,7 +2331,7 @@ msgstr "Dung lượng"
 msgid "File type"
 msgstr "Loại tập tin"
 
-#: ../bin/src/ui_transcodedialog.h:213
+#: ../bin/src/ui_transcodedialog.h:217
 msgid "Filename"
 msgstr "Tên tập tin"
 
@@ -2343,7 +2339,7 @@ msgstr "Tên tập tin"
 msgid "Files"
 msgstr "Tập tin"
 
-#: ../bin/src/ui_transcodedialog.h:210
+#: ../bin/src/ui_transcodedialog.h:214
 msgid "Files to transcode"
 msgstr "Tập tin để chuyển mã"
 
@@ -2653,10 +2649,6 @@ msgstr "Hình ảnh (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xb
 #: ui/albumcoverchoicecontroller.cpp:46
 msgid "Images (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 msgstr "Hình ảnh (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
-
-#: ../bin/src/ui_transcodedialog.h:219
-msgid "Import..."
-msgstr "Nhập..."
 
 #: core/utilities.cpp:151
 #, qt-format
@@ -3597,7 +3589,7 @@ msgstr "Tối ưu cho bitrate"
 msgid "Optimize for quality"
 msgstr "Tối ưu cho chất lượng"
 
-#: ../bin/src/ui_transcodedialog.h:222
+#: ../bin/src/ui_transcodedialog.h:226
 #: ../bin/src/ui_networkremotesettingspage.h:251
 #: ../bin/src/ui_ripcddialog.h:321
 msgid "Options..."
@@ -3650,7 +3642,7 @@ msgstr "Ngõ ra"
 msgid "Output device"
 msgstr "Thiết bị xuất"
 
-#: ../bin/src/ui_transcodedialog.h:220 ../bin/src/ui_ripcddialog.h:317
+#: ../bin/src/ui_transcodedialog.h:224 ../bin/src/ui_ripcddialog.h:317
 msgid "Output options"
 msgstr "Tùy chọn xuất"
 
@@ -3886,7 +3878,7 @@ msgstr "Hiển thị thông tin phiên bản"
 msgid "Profile"
 msgstr "Hồ sơ"
 
-#: ../bin/src/ui_transcodedialog.h:229 ../bin/src/ui_ripcddialog.h:323
+#: ../bin/src/ui_transcodedialog.h:233 ../bin/src/ui_ripcddialog.h:323
 msgid "Progress"
 msgstr "Tiến độ"
 
@@ -4040,7 +4032,7 @@ msgid "Remember my choice"
 msgstr "Nhớ lựa chọn của tôi"
 
 #: internet/internetradio/savedradio.cpp:107 ../bin/src/ui_queuemanager.h:134
-#: ../bin/src/ui_transcodedialog.h:215
+#: ../bin/src/ui_transcodedialog.h:223
 msgid "Remove"
 msgstr "Loại bỏ"
 
@@ -4413,7 +4405,7 @@ msgstr "Chọn hiệu ứng hình ảnh ảo"
 msgid "Select visualizations..."
 msgstr "Chọn hiệu ứng hình ảnh ảo..."
 
-#: ../bin/src/ui_transcodedialog.h:228 ../bin/src/ui_ripcddialog.h:318
+#: ../bin/src/ui_transcodedialog.h:232 ../bin/src/ui_ripcddialog.h:318
 msgid "Select..."
 msgstr "Chọn..."
 
@@ -5156,7 +5148,7 @@ msgstr "Bài hát"
 msgid "Tracks"
 msgstr "Bài hát"
 
-#: ../bin/src/ui_transcodedialog.h:209 ../bin/src/ui_mainwindow.h:690
+#: ../bin/src/ui_transcodedialog.h:213 ../bin/src/ui_mainwindow.h:690
 msgid "Transcode Music"
 msgstr "Chuyển mã nhạc"
 

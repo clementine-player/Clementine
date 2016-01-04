@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2015-12-22 21:58+0000\n"
+"PO-Revision-Date: 2015-12-31 02:49+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Malay (http://www.transifex.com/davidsansome/clementine/language/ms/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -456,7 +456,7 @@ msgstr "Tambah baris baru jika disokong oleh jenis pemberitahuan"
 msgid "Add action"
 msgstr "Tambah tindakan"
 
-#: ../bin/src/ui_transcodedialog.h:217
+#: ../bin/src/ui_transcodedialog.h:220
 msgid "Add all tracks from a directory and all its subdirectories"
 msgstr "Tambah semua trek dari direktori dan semua subdirektorinya"
 
@@ -464,7 +464,7 @@ msgstr "Tambah semua trek dari direktori dan semua subdirektorinya"
 msgid "Add another stream..."
 msgstr "Tambah strim lain..."
 
-#: library/librarysettingspage.cpp:67
+#: library/librarysettingspage.cpp:67 ../bin/src/ui_transcodedialog.h:222
 msgid "Add directory..."
 msgstr "Tambah direktori..."
 
@@ -480,7 +480,7 @@ msgstr "Tambah fail ke transkoder"
 msgid "Add file(s) to transcoder"
 msgstr "Tambah fail ke transkoder"
 
-#: ../bin/src/ui_mainwindow.h:676
+#: ../bin/src/ui_transcodedialog.h:218 ../bin/src/ui_mainwindow.h:676
 msgid "Add file..."
 msgstr "Tambah fail..."
 
@@ -630,10 +630,6 @@ msgstr "Tambah pengguna/kumpulan ke tanda buku"
 msgid "Add wiimotedev action"
 msgstr "Tambahkan tindakan wiimotedev"
 
-#: ../bin/src/ui_transcodedialog.h:214
-msgid "Add..."
-msgstr "Tambah..."
-
 #: ../bin/src/ui_libraryfilterwidget.h:94
 msgid "Added this month"
 msgstr "Ditambah pada bulan ini"
@@ -756,7 +752,7 @@ msgstr "Benarkan muat turun"
 msgid "Allow mid/side encoding"
 msgstr "Benarka pengekodan mid/sisi"
 
-#: ../bin/src/ui_transcodedialog.h:226
+#: ../bin/src/ui_transcodedialog.h:230
 msgid "Alongside the originals"
 msgstr "Bersama-sama yang asal"
 
@@ -868,7 +864,7 @@ msgstr "Nama awal artis"
 msgid "Ask when saving"
 msgstr "Tanya bila menyimpan"
 
-#: ../bin/src/ui_transcodedialog.h:221
+#: ../bin/src/ui_transcodedialog.h:225
 #: ../bin/src/ui_networkremotesettingspage.h:250
 #: ../bin/src/ui_ripcddialog.h:322
 msgid "Audio format"
@@ -1684,12 +1680,12 @@ msgstr "Nyahbaris gilir trek terpilih"
 msgid "Dequeue track"
 msgstr "Nyahbaris gilir trek"
 
-#: ../bin/src/ui_transcodedialog.h:223 ../bin/src/ui_organisedialog.h:240
+#: ../bin/src/ui_transcodedialog.h:227 ../bin/src/ui_organisedialog.h:240
 #: ../bin/src/ui_ripcddialog.h:320
 msgid "Destination"
 msgstr "Destinasi"
 
-#: ../bin/src/ui_transcodedialog.h:230
+#: ../bin/src/ui_transcodedialog.h:234
 msgid "Details..."
 msgstr "Perincian..."
 
@@ -1738,7 +1734,7 @@ msgid "Direct internet connection"
 msgstr "Sambungan internet terus"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:141
-#: ../bin/src/ui_transcodedialog.h:212
+#: ../bin/src/ui_transcodedialog.h:216
 msgid "Directory"
 msgstr "Direktori"
 
@@ -2332,7 +2328,7 @@ msgstr "Saiz fail"
 msgid "File type"
 msgstr "Jenis fail"
 
-#: ../bin/src/ui_transcodedialog.h:213
+#: ../bin/src/ui_transcodedialog.h:217
 msgid "Filename"
 msgstr "Namafail"
 
@@ -2340,7 +2336,7 @@ msgstr "Namafail"
 msgid "Files"
 msgstr "Fail"
 
-#: ../bin/src/ui_transcodedialog.h:210
+#: ../bin/src/ui_transcodedialog.h:214
 msgid "Files to transcode"
 msgstr "Fail untuk ditranskod"
 
@@ -2650,10 +2646,6 @@ msgstr "Imej (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm)"
 #: ui/albumcoverchoicecontroller.cpp:46
 msgid "Images (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 msgstr "Imej (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
-
-#: ../bin/src/ui_transcodedialog.h:219
-msgid "Import..."
-msgstr "Import..."
 
 #: core/utilities.cpp:151
 #, qt-format
@@ -3594,7 +3586,7 @@ msgstr "Optimumkan untuk kadar bit"
 msgid "Optimize for quality"
 msgstr "Optimumkan untuk kualiti"
 
-#: ../bin/src/ui_transcodedialog.h:222
+#: ../bin/src/ui_transcodedialog.h:226
 #: ../bin/src/ui_networkremotesettingspage.h:251
 #: ../bin/src/ui_ripcddialog.h:321
 msgid "Options..."
@@ -3647,7 +3639,7 @@ msgstr "Output"
 msgid "Output device"
 msgstr "Peranti output"
 
-#: ../bin/src/ui_transcodedialog.h:220 ../bin/src/ui_ripcddialog.h:317
+#: ../bin/src/ui_transcodedialog.h:224 ../bin/src/ui_ripcddialog.h:317
 msgid "Output options"
 msgstr "Pilihan output"
 
@@ -3883,7 +3875,7 @@ msgstr "Cetak maklumat versi"
 msgid "Profile"
 msgstr "Profil"
 
-#: ../bin/src/ui_transcodedialog.h:229 ../bin/src/ui_ripcddialog.h:323
+#: ../bin/src/ui_transcodedialog.h:233 ../bin/src/ui_ripcddialog.h:323
 msgid "Progress"
 msgstr "Kemajuan"
 
@@ -4037,7 +4029,7 @@ msgid "Remember my choice"
 msgstr "Ingat pilihan saya"
 
 #: internet/internetradio/savedradio.cpp:107 ../bin/src/ui_queuemanager.h:134
-#: ../bin/src/ui_transcodedialog.h:215
+#: ../bin/src/ui_transcodedialog.h:223
 msgid "Remove"
 msgstr "Buang"
 
@@ -4410,7 +4402,7 @@ msgstr "Pilih pengvisualan"
 msgid "Select visualizations..."
 msgstr "Pilih pengvisualan..."
 
-#: ../bin/src/ui_transcodedialog.h:228 ../bin/src/ui_ripcddialog.h:318
+#: ../bin/src/ui_transcodedialog.h:232 ../bin/src/ui_ripcddialog.h:318
 msgid "Select..."
 msgstr "Pilih..."
 
@@ -5153,7 +5145,7 @@ msgstr "Trek"
 msgid "Tracks"
 msgstr "Trek"
 
-#: ../bin/src/ui_transcodedialog.h:209 ../bin/src/ui_mainwindow.h:690
+#: ../bin/src/ui_transcodedialog.h:213 ../bin/src/ui_mainwindow.h:690
 msgid "Transcode Music"
 msgstr "Transkod Muzik"
 
