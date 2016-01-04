@@ -127,6 +127,7 @@ signals:
 
   void InitFieldValue(const FieldData& field, const QModelIndexList& sel);
   void UpdateFieldValue(const FieldData& field, const QModelIndexList& sel);
+  void UpdateModifiedField(const FieldData& field, const QModelIndexList& sel);
   void ResetFieldValue(const FieldData& field, const QModelIndexList& sel);
 
   void UpdateSummaryTab(const Song& song);

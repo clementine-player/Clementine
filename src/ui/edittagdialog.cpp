@@ -365,7 +365,6 @@ bool EditTagDialog::IsValueModified(const QModelIndexList& sel,
 void EditTagDialog::InitFieldValue(const FieldData& field,
                                    const QModelIndexList& sel) {
   const bool varies = DoesValueVary(sel, field.id_);
-  const bool modified = IsValueModified(sel, field.id_);
 
   if (ExtendedEditor* editor = dynamic_cast<ExtendedEditor*>(field.editor_)) {
     editor->clear();
@@ -377,10 +376,7 @@ void EditTagDialog::InitFieldValue(const FieldData& field,
     }
   }
 
-  QFont new_font(font());
-  new_font.setBold(modified);
-  field.label_->setFont(new_font);
-  field.editor_->setFont(new_font);
+  UpdateModifiedField(field, sel);
 }
 
 void EditTagDialog::UpdateFieldValue(const FieldData& field,
@@ -401,9 +397,13 @@ void EditTagDialog::UpdateFieldValue(const FieldData& field,
     data_[i.row()].set_value(field.id_, value);
   }
 
-  // Update the boldness
+  UpdateModifiedField(field, sel);
+}
+
+void EditTagDialog::UpdateModifiedField(const FieldData& field, const QModelIndexList& sel) {
   const bool modified = IsValueModified(sel, field.id_);
 
+  // Update the boldness
   QFont new_font(font());
   new_font.setBold(modified);
   field.label_->setFont(new_font);
@@ -855,12 +855,12 @@ void EditTagDialog::FetchTagSongChosen(const Song& original_song,
   // Is it currently being displayed in the UI?
   if (ui_->song_list->currentRow() == id) {
     // Yes! Additionally update UI
+    const QModelIndexList sel =
+      ui_->song_list->selectionModel()->selectedIndexes();
     ignore_edits_ = true;
-    ui_->title->set_text(new_metadata.title());
-    ui_->artist->set_text(new_metadata.artist());
-    ui_->album->set_text(new_metadata.album());
-    ui_->track->setValue(new_metadata.track());
-    ui_->year->setValue(new_metadata.year());
+    for (const FieldData& field : fields_) {
+      InitFieldValue(field, sel);
+    }
     ignore_edits_ = false;
   }
 }
