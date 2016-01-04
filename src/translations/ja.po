@@ -14,7 +14,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2015-12-22 21:58+0000\n"
+"PO-Revision-Date: 2015-12-31 02:49+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Japanese (http://www.transifex.com/davidsansome/clementine/language/ja/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -461,7 +461,7 @@ msgstr "改行を追加 (通知形式が対応している場合)"
 msgid "Add action"
 msgstr "アクションの追加"
 
-#: ../bin/src/ui_transcodedialog.h:217
+#: ../bin/src/ui_transcodedialog.h:220
 msgid "Add all tracks from a directory and all its subdirectories"
 msgstr ""
 
@@ -469,7 +469,7 @@ msgstr ""
 msgid "Add another stream..."
 msgstr "別のストリームを追加..."
 
-#: library/librarysettingspage.cpp:67
+#: library/librarysettingspage.cpp:67 ../bin/src/ui_transcodedialog.h:222
 msgid "Add directory..."
 msgstr "ディレクトリを追加..."
 
@@ -485,7 +485,7 @@ msgstr "ファイルをトランスコーダーに追加する"
 msgid "Add file(s) to transcoder"
 msgstr "ファイルをトランスコーダーに追加する"
 
-#: ../bin/src/ui_mainwindow.h:676
+#: ../bin/src/ui_transcodedialog.h:218 ../bin/src/ui_mainwindow.h:676
 msgid "Add file..."
 msgstr "ファイルを追加..."
 
@@ -635,10 +635,6 @@ msgstr "ユーザー/グループをブックマークに追加する"
 msgid "Add wiimotedev action"
 msgstr "Wii リモコンデバイスのアクションの追加"
 
-#: ../bin/src/ui_transcodedialog.h:214
-msgid "Add..."
-msgstr "追加..."
-
 #: ../bin/src/ui_libraryfilterwidget.h:94
 msgid "Added this month"
 msgstr "今月追加されたもの"
@@ -761,7 +757,7 @@ msgstr "ダウンロードを許可する"
 msgid "Allow mid/side encoding"
 msgstr "M/S エンコードを許可"
 
-#: ../bin/src/ui_transcodedialog.h:226
+#: ../bin/src/ui_transcodedialog.h:230
 msgid "Alongside the originals"
 msgstr "元と同じ"
 
@@ -873,7 +869,7 @@ msgstr "アーティストの頭文字"
 msgid "Ask when saving"
 msgstr "保存時に尋ねる"
 
-#: ../bin/src/ui_transcodedialog.h:221
+#: ../bin/src/ui_transcodedialog.h:225
 #: ../bin/src/ui_networkremotesettingspage.h:250
 #: ../bin/src/ui_ripcddialog.h:322
 msgid "Audio format"
@@ -1689,12 +1685,12 @@ msgstr "選択されたトラックをキューから削除する"
 msgid "Dequeue track"
 msgstr "トラックをキューから削除"
 
-#: ../bin/src/ui_transcodedialog.h:223 ../bin/src/ui_organisedialog.h:240
+#: ../bin/src/ui_transcodedialog.h:227 ../bin/src/ui_organisedialog.h:240
 #: ../bin/src/ui_ripcddialog.h:320
 msgid "Destination"
 msgstr "フォルダー"
 
-#: ../bin/src/ui_transcodedialog.h:230
+#: ../bin/src/ui_transcodedialog.h:234
 msgid "Details..."
 msgstr "詳細..."
 
@@ -1743,7 +1739,7 @@ msgid "Direct internet connection"
 msgstr "インターネットに直接接続する"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:141
-#: ../bin/src/ui_transcodedialog.h:212
+#: ../bin/src/ui_transcodedialog.h:216
 msgid "Directory"
 msgstr "ディレクトリ"
 
@@ -2337,7 +2333,7 @@ msgstr "ファイルサイズ"
 msgid "File type"
 msgstr "ファイルの種類"
 
-#: ../bin/src/ui_transcodedialog.h:213
+#: ../bin/src/ui_transcodedialog.h:217
 msgid "Filename"
 msgstr "ファイル名"
 
@@ -2345,7 +2341,7 @@ msgstr "ファイル名"
 msgid "Files"
 msgstr "ファイル"
 
-#: ../bin/src/ui_transcodedialog.h:210
+#: ../bin/src/ui_transcodedialog.h:214
 msgid "Files to transcode"
 msgstr "トランスコードするファイル"
 
@@ -2655,10 +2651,6 @@ msgstr "画像 (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm)"
 #: ui/albumcoverchoicecontroller.cpp:46
 msgid "Images (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 msgstr "画像 (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
-
-#: ../bin/src/ui_transcodedialog.h:219
-msgid "Import..."
-msgstr "インポート..."
 
 #: core/utilities.cpp:151
 #, qt-format
@@ -3599,7 +3591,7 @@ msgstr "ビットレートを最適化"
 msgid "Optimize for quality"
 msgstr "品質を最適化"
 
-#: ../bin/src/ui_transcodedialog.h:222
+#: ../bin/src/ui_transcodedialog.h:226
 #: ../bin/src/ui_networkremotesettingspage.h:251
 #: ../bin/src/ui_ripcddialog.h:321
 msgid "Options..."
@@ -3652,7 +3644,7 @@ msgstr "出力"
 msgid "Output device"
 msgstr "出力デバイス"
 
-#: ../bin/src/ui_transcodedialog.h:220 ../bin/src/ui_ripcddialog.h:317
+#: ../bin/src/ui_transcodedialog.h:224 ../bin/src/ui_ripcddialog.h:317
 msgid "Output options"
 msgstr "出力のオプション"
 
@@ -3888,7 +3880,7 @@ msgstr "バージョン情報を出力"
 msgid "Profile"
 msgstr "プロファイル"
 
-#: ../bin/src/ui_transcodedialog.h:229 ../bin/src/ui_ripcddialog.h:323
+#: ../bin/src/ui_transcodedialog.h:233 ../bin/src/ui_ripcddialog.h:323
 msgid "Progress"
 msgstr "進行状況"
 
@@ -4042,7 +4034,7 @@ msgid "Remember my choice"
 msgstr ""
 
 #: internet/internetradio/savedradio.cpp:107 ../bin/src/ui_queuemanager.h:134
-#: ../bin/src/ui_transcodedialog.h:215
+#: ../bin/src/ui_transcodedialog.h:223
 msgid "Remove"
 msgstr "削除"
 
@@ -4415,7 +4407,7 @@ msgstr "ビジュアライゼーションの選択"
 msgid "Select visualizations..."
 msgstr "ビジュアライゼーションの選択..."
 
-#: ../bin/src/ui_transcodedialog.h:228 ../bin/src/ui_ripcddialog.h:318
+#: ../bin/src/ui_transcodedialog.h:232 ../bin/src/ui_ripcddialog.h:318
 msgid "Select..."
 msgstr "選択..."
 
@@ -5158,7 +5150,7 @@ msgstr "トラック"
 msgid "Tracks"
 msgstr "トラック"
 
-#: ../bin/src/ui_transcodedialog.h:209 ../bin/src/ui_mainwindow.h:690
+#: ../bin/src/ui_transcodedialog.h:213 ../bin/src/ui_mainwindow.h:690
 msgid "Transcode Music"
 msgstr "ミュージックのトランスコード"
 

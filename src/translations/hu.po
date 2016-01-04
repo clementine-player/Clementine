@@ -17,7 +17,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2015-12-22 21:58+0000\n"
+"PO-Revision-Date: 2015-12-31 02:49+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Hungarian (http://www.transifex.com/davidsansome/clementine/language/hu/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -464,7 +464,7 @@ msgstr "Sortörés hozzáadása ha az értesítés támogatja"
 msgid "Add action"
 msgstr "Esemény felvétele"
 
-#: ../bin/src/ui_transcodedialog.h:217
+#: ../bin/src/ui_transcodedialog.h:220
 msgid "Add all tracks from a directory and all its subdirectories"
 msgstr "Minden szám hozzáadása a mappából és almappáiból"
 
@@ -472,7 +472,7 @@ msgstr "Minden szám hozzáadása a mappából és almappáiból"
 msgid "Add another stream..."
 msgstr "Új adatfolyam hozzáadása"
 
-#: library/librarysettingspage.cpp:67
+#: library/librarysettingspage.cpp:67 ../bin/src/ui_transcodedialog.h:222
 msgid "Add directory..."
 msgstr "Mappa hozzáadása"
 
@@ -488,7 +488,7 @@ msgstr "Fájl hozzáadása az átkódoláshoz"
 msgid "Add file(s) to transcoder"
 msgstr "Fájl(ok) hozzáadása az átkódoláshoz"
 
-#: ../bin/src/ui_mainwindow.h:676
+#: ../bin/src/ui_transcodedialog.h:218 ../bin/src/ui_mainwindow.h:676
 msgid "Add file..."
 msgstr "Fájl hozzáadása"
 
@@ -638,10 +638,6 @@ msgstr "Felhasználó/ csoport hozzáadása a könyvjelzőkhöz"
 msgid "Add wiimotedev action"
 msgstr "Wiimotedev esemény hozzáadása"
 
-#: ../bin/src/ui_transcodedialog.h:214
-msgid "Add..."
-msgstr "Hozzáadás.."
-
 #: ../bin/src/ui_libraryfilterwidget.h:94
 msgid "Added this month"
 msgstr "Hozzáadva ebben a hónapban"
@@ -764,7 +760,7 @@ msgstr "Letöltések engedélyezése"
 msgid "Allow mid/side encoding"
 msgstr "Mid/side kódolás engedélyezése"
 
-#: ../bin/src/ui_transcodedialog.h:226
+#: ../bin/src/ui_transcodedialog.h:230
 msgid "Alongside the originals"
 msgstr "Az eredetiek mellett"
 
@@ -876,7 +872,7 @@ msgstr "Előadó kezdése"
 msgid "Ask when saving"
 msgstr "Mentéskor rákérdez"
 
-#: ../bin/src/ui_transcodedialog.h:221
+#: ../bin/src/ui_transcodedialog.h:225
 #: ../bin/src/ui_networkremotesettingspage.h:250
 #: ../bin/src/ui_ripcddialog.h:322
 msgid "Audio format"
@@ -1692,12 +1688,12 @@ msgstr "Kiválasztott számok törlése a sorból"
 msgid "Dequeue track"
 msgstr "Szám törlése a sorból"
 
-#: ../bin/src/ui_transcodedialog.h:223 ../bin/src/ui_organisedialog.h:240
+#: ../bin/src/ui_transcodedialog.h:227 ../bin/src/ui_organisedialog.h:240
 #: ../bin/src/ui_ripcddialog.h:320
 msgid "Destination"
 msgstr "Cél"
 
-#: ../bin/src/ui_transcodedialog.h:230
+#: ../bin/src/ui_transcodedialog.h:234
 msgid "Details..."
 msgstr "Részletek…"
 
@@ -1746,7 +1742,7 @@ msgid "Direct internet connection"
 msgstr "Közvetlen internetkapcsolat"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:141
-#: ../bin/src/ui_transcodedialog.h:212
+#: ../bin/src/ui_transcodedialog.h:216
 msgid "Directory"
 msgstr "Mappa"
 
@@ -2340,7 +2336,7 @@ msgstr "Fájlméret"
 msgid "File type"
 msgstr "Fájltípus"
 
-#: ../bin/src/ui_transcodedialog.h:213
+#: ../bin/src/ui_transcodedialog.h:217
 msgid "Filename"
 msgstr "Fájlnév"
 
@@ -2348,7 +2344,7 @@ msgstr "Fájlnév"
 msgid "Files"
 msgstr "Fájlok"
 
-#: ../bin/src/ui_transcodedialog.h:210
+#: ../bin/src/ui_transcodedialog.h:214
 msgid "Files to transcode"
 msgstr "Átkódolandó fájlok"
 
@@ -2658,10 +2654,6 @@ msgstr "Képek (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm)"
 #: ui/albumcoverchoicecontroller.cpp:46
 msgid "Images (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 msgstr "Képek (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
-
-#: ../bin/src/ui_transcodedialog.h:219
-msgid "Import..."
-msgstr "Importálás..."
 
 #: core/utilities.cpp:151
 #, qt-format
@@ -3602,7 +3594,7 @@ msgstr "Optimalizálás bitrátára"
 msgid "Optimize for quality"
 msgstr "Optimalizálás minőségre"
 
-#: ../bin/src/ui_transcodedialog.h:222
+#: ../bin/src/ui_transcodedialog.h:226
 #: ../bin/src/ui_networkremotesettingspage.h:251
 #: ../bin/src/ui_ripcddialog.h:321
 msgid "Options..."
@@ -3655,7 +3647,7 @@ msgstr "Kimenet"
 msgid "Output device"
 msgstr "Kimeneti eszköz"
 
-#: ../bin/src/ui_transcodedialog.h:220 ../bin/src/ui_ripcddialog.h:317
+#: ../bin/src/ui_transcodedialog.h:224 ../bin/src/ui_ripcddialog.h:317
 msgid "Output options"
 msgstr "Kimenet beállításai"
 
@@ -3891,7 +3883,7 @@ msgstr "Verzió információ mutatása..."
 msgid "Profile"
 msgstr "Profil"
 
-#: ../bin/src/ui_transcodedialog.h:229 ../bin/src/ui_ripcddialog.h:323
+#: ../bin/src/ui_transcodedialog.h:233 ../bin/src/ui_ripcddialog.h:323
 msgid "Progress"
 msgstr "Folyamat"
 
@@ -4045,7 +4037,7 @@ msgid "Remember my choice"
 msgstr "Választás megjegyzése"
 
 #: internet/internetradio/savedradio.cpp:107 ../bin/src/ui_queuemanager.h:134
-#: ../bin/src/ui_transcodedialog.h:215
+#: ../bin/src/ui_transcodedialog.h:223
 msgid "Remove"
 msgstr "Eltávolítás"
 
@@ -4418,7 +4410,7 @@ msgstr "Megjelenítések kiválasztása"
 msgid "Select visualizations..."
 msgstr "Megjelenítések kiválasztása..."
 
-#: ../bin/src/ui_transcodedialog.h:228 ../bin/src/ui_ripcddialog.h:318
+#: ../bin/src/ui_transcodedialog.h:232 ../bin/src/ui_ripcddialog.h:318
 msgid "Select..."
 msgstr "Kiválaszt..."
 
@@ -5161,7 +5153,7 @@ msgstr "Szám"
 msgid "Tracks"
 msgstr "Számok"
 
-#: ../bin/src/ui_transcodedialog.h:209 ../bin/src/ui_mainwindow.h:690
+#: ../bin/src/ui_transcodedialog.h:213 ../bin/src/ui_mainwindow.h:690
 msgid "Transcode Music"
 msgstr "Zene átkódolása"
 

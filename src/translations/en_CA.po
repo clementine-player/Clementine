@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2015-12-22 21:58+0000\n"
+"PO-Revision-Date: 2015-12-31 02:49+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: English (Canada) (http://www.transifex.com/davidsansome/clementine/language/en_CA/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -456,7 +456,7 @@ msgstr "Add a new line if supported by the notification type"
 msgid "Add action"
 msgstr "Add action"
 
-#: ../bin/src/ui_transcodedialog.h:217
+#: ../bin/src/ui_transcodedialog.h:220
 msgid "Add all tracks from a directory and all its subdirectories"
 msgstr "Add all tracks from a directory and all its subdirectories"
 
@@ -464,7 +464,7 @@ msgstr "Add all tracks from a directory and all its subdirectories"
 msgid "Add another stream..."
 msgstr "Add another stream..."
 
-#: library/librarysettingspage.cpp:67
+#: library/librarysettingspage.cpp:67 ../bin/src/ui_transcodedialog.h:222
 msgid "Add directory..."
 msgstr "Add directory..."
 
@@ -480,7 +480,7 @@ msgstr "Add file to transcoder"
 msgid "Add file(s) to transcoder"
 msgstr "Add file(s) to transcoder"
 
-#: ../bin/src/ui_mainwindow.h:676
+#: ../bin/src/ui_transcodedialog.h:218 ../bin/src/ui_mainwindow.h:676
 msgid "Add file..."
 msgstr "Add file..."
 
@@ -630,10 +630,6 @@ msgstr "Add user/group to bookmarks"
 msgid "Add wiimotedev action"
 msgstr "Add wiimotedev action"
 
-#: ../bin/src/ui_transcodedialog.h:214
-msgid "Add..."
-msgstr "Add..."
-
 #: ../bin/src/ui_libraryfilterwidget.h:94
 msgid "Added this month"
 msgstr "Added this month"
@@ -756,7 +752,7 @@ msgstr "Allow downloads"
 msgid "Allow mid/side encoding"
 msgstr "Allow mid/side encoding"
 
-#: ../bin/src/ui_transcodedialog.h:226
+#: ../bin/src/ui_transcodedialog.h:230
 msgid "Alongside the originals"
 msgstr "Alongside the originals"
 
@@ -868,7 +864,7 @@ msgstr "Artist's initial"
 msgid "Ask when saving"
 msgstr "Ask when saving"
 
-#: ../bin/src/ui_transcodedialog.h:221
+#: ../bin/src/ui_transcodedialog.h:225
 #: ../bin/src/ui_networkremotesettingspage.h:250
 #: ../bin/src/ui_ripcddialog.h:322
 msgid "Audio format"
@@ -1684,12 +1680,12 @@ msgstr ""
 msgid "Dequeue track"
 msgstr ""
 
-#: ../bin/src/ui_transcodedialog.h:223 ../bin/src/ui_organisedialog.h:240
+#: ../bin/src/ui_transcodedialog.h:227 ../bin/src/ui_organisedialog.h:240
 #: ../bin/src/ui_ripcddialog.h:320
 msgid "Destination"
 msgstr "Destination"
 
-#: ../bin/src/ui_transcodedialog.h:230
+#: ../bin/src/ui_transcodedialog.h:234
 msgid "Details..."
 msgstr "Details..."
 
@@ -1738,7 +1734,7 @@ msgid "Direct internet connection"
 msgstr ""
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:141
-#: ../bin/src/ui_transcodedialog.h:212
+#: ../bin/src/ui_transcodedialog.h:216
 msgid "Directory"
 msgstr "Directory"
 
@@ -2332,7 +2328,7 @@ msgstr "File size"
 msgid "File type"
 msgstr "File type"
 
-#: ../bin/src/ui_transcodedialog.h:213
+#: ../bin/src/ui_transcodedialog.h:217
 msgid "Filename"
 msgstr "Filename"
 
@@ -2340,7 +2336,7 @@ msgstr "Filename"
 msgid "Files"
 msgstr "Files"
 
-#: ../bin/src/ui_transcodedialog.h:210
+#: ../bin/src/ui_transcodedialog.h:214
 msgid "Files to transcode"
 msgstr "Files to transcode"
 
@@ -2649,10 +2645,6 @@ msgstr ""
 
 #: ui/albumcoverchoicecontroller.cpp:46
 msgid "Images (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
-msgstr ""
-
-#: ../bin/src/ui_transcodedialog.h:219
-msgid "Import..."
 msgstr ""
 
 #: core/utilities.cpp:151
@@ -3594,7 +3586,7 @@ msgstr ""
 msgid "Optimize for quality"
 msgstr ""
 
-#: ../bin/src/ui_transcodedialog.h:222
+#: ../bin/src/ui_transcodedialog.h:226
 #: ../bin/src/ui_networkremotesettingspage.h:251
 #: ../bin/src/ui_ripcddialog.h:321
 msgid "Options..."
@@ -3647,7 +3639,7 @@ msgstr ""
 msgid "Output device"
 msgstr ""
 
-#: ../bin/src/ui_transcodedialog.h:220 ../bin/src/ui_ripcddialog.h:317
+#: ../bin/src/ui_transcodedialog.h:224 ../bin/src/ui_ripcddialog.h:317
 msgid "Output options"
 msgstr "Output options"
 
@@ -3883,7 +3875,7 @@ msgstr ""
 msgid "Profile"
 msgstr ""
 
-#: ../bin/src/ui_transcodedialog.h:229 ../bin/src/ui_ripcddialog.h:323
+#: ../bin/src/ui_transcodedialog.h:233 ../bin/src/ui_ripcddialog.h:323
 msgid "Progress"
 msgstr "Progress"
 
@@ -4037,7 +4029,7 @@ msgid "Remember my choice"
 msgstr ""
 
 #: internet/internetradio/savedradio.cpp:107 ../bin/src/ui_queuemanager.h:134
-#: ../bin/src/ui_transcodedialog.h:215
+#: ../bin/src/ui_transcodedialog.h:223
 msgid "Remove"
 msgstr "Remove"
 
@@ -4410,7 +4402,7 @@ msgstr "Select visualisations"
 msgid "Select visualizations..."
 msgstr "Select visualisations..."
 
-#: ../bin/src/ui_transcodedialog.h:228 ../bin/src/ui_ripcddialog.h:318
+#: ../bin/src/ui_transcodedialog.h:232 ../bin/src/ui_ripcddialog.h:318
 msgid "Select..."
 msgstr ""
 
@@ -5153,7 +5145,7 @@ msgstr "Track"
 msgid "Tracks"
 msgstr ""
 
-#: ../bin/src/ui_transcodedialog.h:209 ../bin/src/ui_mainwindow.h:690
+#: ../bin/src/ui_transcodedialog.h:213 ../bin/src/ui_mainwindow.h:690
 msgid "Transcode Music"
 msgstr "Transcode Music"
 

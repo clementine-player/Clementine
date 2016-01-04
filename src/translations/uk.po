@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2015-12-22 21:58+0000\n"
+"PO-Revision-Date: 2015-12-31 02:49+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Ukrainian (http://www.transifex.com/davidsansome/clementine/language/uk/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -456,7 +456,7 @@ msgstr "Додати новий рядок, якщо підтримується 
 msgid "Add action"
 msgstr "Додати дію"
 
-#: ../bin/src/ui_transcodedialog.h:217
+#: ../bin/src/ui_transcodedialog.h:220
 msgid "Add all tracks from a directory and all its subdirectories"
 msgstr "Додати усі композиції з каталогу та усіх його підкаталогів"
 
@@ -464,7 +464,7 @@ msgstr "Додати усі композиції з каталогу та усі
 msgid "Add another stream..."
 msgstr "Додати інший потік…"
 
-#: library/librarysettingspage.cpp:67
+#: library/librarysettingspage.cpp:67 ../bin/src/ui_transcodedialog.h:222
 msgid "Add directory..."
 msgstr "Додати теку…"
 
@@ -480,7 +480,7 @@ msgstr "Додати файл для перекодування"
 msgid "Add file(s) to transcoder"
 msgstr "Додати файли для перекодування"
 
-#: ../bin/src/ui_mainwindow.h:676
+#: ../bin/src/ui_transcodedialog.h:218 ../bin/src/ui_mainwindow.h:676
 msgid "Add file..."
 msgstr "Додати файл…"
 
@@ -630,10 +630,6 @@ msgstr "Додати користувача/групу до закладок"
 msgid "Add wiimotedev action"
 msgstr "Додати дію wiimotedev"
 
-#: ../bin/src/ui_transcodedialog.h:214
-msgid "Add..."
-msgstr "Додати…"
-
 #: ../bin/src/ui_libraryfilterwidget.h:94
 msgid "Added this month"
 msgstr "Додано у цьому місяці"
@@ -756,7 +752,7 @@ msgstr "Дозволити отримання"
 msgid "Allow mid/side encoding"
 msgstr "Дозволити mid/side кодування"
 
-#: ../bin/src/ui_transcodedialog.h:226
+#: ../bin/src/ui_transcodedialog.h:230
 msgid "Alongside the originals"
 msgstr "Разом з оригіналами"
 
@@ -868,7 +864,7 @@ msgstr "Ініціали виконавця"
 msgid "Ask when saving"
 msgstr "Питати під час збереження"
 
-#: ../bin/src/ui_transcodedialog.h:221
+#: ../bin/src/ui_transcodedialog.h:225
 #: ../bin/src/ui_networkremotesettingspage.h:250
 #: ../bin/src/ui_ripcddialog.h:322
 msgid "Audio format"
@@ -1684,12 +1680,12 @@ msgstr "Вилучити з черги вибрані доріжки"
 msgid "Dequeue track"
 msgstr "Вилучити з черги доріжки"
 
-#: ../bin/src/ui_transcodedialog.h:223 ../bin/src/ui_organisedialog.h:240
+#: ../bin/src/ui_transcodedialog.h:227 ../bin/src/ui_organisedialog.h:240
 #: ../bin/src/ui_ripcddialog.h:320
 msgid "Destination"
 msgstr "Призначення"
 
-#: ../bin/src/ui_transcodedialog.h:230
+#: ../bin/src/ui_transcodedialog.h:234
 msgid "Details..."
 msgstr "Детальніше…"
 
@@ -1738,7 +1734,7 @@ msgid "Direct internet connection"
 msgstr "Пряме з'єднання з Інтернет"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:141
-#: ../bin/src/ui_transcodedialog.h:212
+#: ../bin/src/ui_transcodedialog.h:216
 msgid "Directory"
 msgstr "Тека"
 
@@ -2332,7 +2328,7 @@ msgstr "Розмір файлу"
 msgid "File type"
 msgstr "Тип файлу"
 
-#: ../bin/src/ui_transcodedialog.h:213
+#: ../bin/src/ui_transcodedialog.h:217
 msgid "Filename"
 msgstr "Назва файлу"
 
@@ -2340,7 +2336,7 @@ msgstr "Назва файлу"
 msgid "Files"
 msgstr "Файли"
 
-#: ../bin/src/ui_transcodedialog.h:210
+#: ../bin/src/ui_transcodedialog.h:214
 msgid "Files to transcode"
 msgstr "Файли для перекодування"
 
@@ -2650,10 +2646,6 @@ msgstr "Зображення (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *
 #: ui/albumcoverchoicecontroller.cpp:46
 msgid "Images (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 msgstr "Зображення (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
-
-#: ../bin/src/ui_transcodedialog.h:219
-msgid "Import..."
-msgstr "Імпортувати…"
 
 #: core/utilities.cpp:151
 #, qt-format
@@ -3594,7 +3586,7 @@ msgstr "Оптимізувати для бітової швидкості"
 msgid "Optimize for quality"
 msgstr "Оптимізувати для якості"
 
-#: ../bin/src/ui_transcodedialog.h:222
+#: ../bin/src/ui_transcodedialog.h:226
 #: ../bin/src/ui_networkremotesettingspage.h:251
 #: ../bin/src/ui_ripcddialog.h:321
 msgid "Options..."
@@ -3647,7 +3639,7 @@ msgstr "Результат"
 msgid "Output device"
 msgstr "Пристрій відтворення"
 
-#: ../bin/src/ui_transcodedialog.h:220 ../bin/src/ui_ripcddialog.h:317
+#: ../bin/src/ui_transcodedialog.h:224 ../bin/src/ui_ripcddialog.h:317
 msgid "Output options"
 msgstr "Налаштування виведення"
 
@@ -3883,7 +3875,7 @@ msgstr "Відобразити дані про версію"
 msgid "Profile"
 msgstr "Профіль"
 
-#: ../bin/src/ui_transcodedialog.h:229 ../bin/src/ui_ripcddialog.h:323
+#: ../bin/src/ui_transcodedialog.h:233 ../bin/src/ui_ripcddialog.h:323
 msgid "Progress"
 msgstr "Поступ"
 
@@ -4037,7 +4029,7 @@ msgid "Remember my choice"
 msgstr "Запам’ятати вибір"
 
 #: internet/internetradio/savedradio.cpp:107 ../bin/src/ui_queuemanager.h:134
-#: ../bin/src/ui_transcodedialog.h:215
+#: ../bin/src/ui_transcodedialog.h:223
 msgid "Remove"
 msgstr "Вилучити"
 
@@ -4410,7 +4402,7 @@ msgstr "Вибрати візуалізації"
 msgid "Select visualizations..."
 msgstr "Вибрати візуалізації…"
 
-#: ../bin/src/ui_transcodedialog.h:228 ../bin/src/ui_ripcddialog.h:318
+#: ../bin/src/ui_transcodedialog.h:232 ../bin/src/ui_ripcddialog.h:318
 msgid "Select..."
 msgstr "Вибрати…"
 
@@ -5153,7 +5145,7 @@ msgstr "Доріжка"
 msgid "Tracks"
 msgstr "Композиції"
 
-#: ../bin/src/ui_transcodedialog.h:209 ../bin/src/ui_mainwindow.h:690
+#: ../bin/src/ui_transcodedialog.h:213 ../bin/src/ui_mainwindow.h:690
 msgid "Transcode Music"
 msgstr "Перекодування музики"
 

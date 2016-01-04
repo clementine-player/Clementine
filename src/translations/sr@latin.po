@@ -10,8 +10,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2015-12-24 18:55+0000\n"
-"Last-Translator: Mladen Pejaković <pejakm@autistici.org>\n"
+"PO-Revision-Date: 2015-12-31 02:49+0000\n"
+"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Serbian (Latin) (http://www.transifex.com/davidsansome/clementine/language/sr@latin/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -457,7 +457,7 @@ msgstr "Dodaj novu liniju ako je podržano tipom obaveštenja"
 msgid "Add action"
 msgstr "Dodaj radnju"
 
-#: ../bin/src/ui_transcodedialog.h:217
+#: ../bin/src/ui_transcodedialog.h:220
 msgid "Add all tracks from a directory and all its subdirectories"
 msgstr "Dodaj sve numere iz fascikle i svih njenih podfascikli"
 
@@ -465,7 +465,7 @@ msgstr "Dodaj sve numere iz fascikle i svih njenih podfascikli"
 msgid "Add another stream..."
 msgstr "Dodaj drugi tok..."
 
-#: library/librarysettingspage.cpp:67
+#: library/librarysettingspage.cpp:67 ../bin/src/ui_transcodedialog.h:222
 msgid "Add directory..."
 msgstr "Dodaj fasciklu..."
 
@@ -481,7 +481,7 @@ msgstr "Dodaj fajl u prekoder"
 msgid "Add file(s) to transcoder"
 msgstr "Dodaj fajlo(ove) u prekoder"
 
-#: ../bin/src/ui_mainwindow.h:676
+#: ../bin/src/ui_transcodedialog.h:218 ../bin/src/ui_mainwindow.h:676
 msgid "Add file..."
 msgstr "Dodaj fajl..."
 
@@ -631,10 +631,6 @@ msgstr "Dodaj korisnika/grupu u obeleživače"
 msgid "Add wiimotedev action"
 msgstr "Dodaj wiimotedev radnju"
 
-#: ../bin/src/ui_transcodedialog.h:214
-msgid "Add..."
-msgstr "Dodaj..."
-
 #: ../bin/src/ui_libraryfilterwidget.h:94
 msgid "Added this month"
 msgstr "dodato ovog meseca"
@@ -757,7 +753,7 @@ msgstr "Dozvoli preuzimanja"
 msgid "Allow mid/side encoding"
 msgstr "Dozvoli „mid/side“ kodiranje"
 
-#: ../bin/src/ui_transcodedialog.h:226
+#: ../bin/src/ui_transcodedialog.h:230
 msgid "Alongside the originals"
 msgstr "pored originala"
 
@@ -869,7 +865,7 @@ msgstr "inicijali izvođača"
 msgid "Ask when saving"
 msgstr "Pitaj prilikom upisa"
 
-#: ../bin/src/ui_transcodedialog.h:221
+#: ../bin/src/ui_transcodedialog.h:225
 #: ../bin/src/ui_networkremotesettingspage.h:250
 #: ../bin/src/ui_ripcddialog.h:322
 msgid "Audio format"
@@ -1685,12 +1681,12 @@ msgstr "Izbaci izabrane numere iz reda"
 msgid "Dequeue track"
 msgstr "Izbaci numeru iz reda"
 
-#: ../bin/src/ui_transcodedialog.h:223 ../bin/src/ui_organisedialog.h:240
+#: ../bin/src/ui_transcodedialog.h:227 ../bin/src/ui_organisedialog.h:240
 #: ../bin/src/ui_ripcddialog.h:320
 msgid "Destination"
 msgstr "Odredište"
 
-#: ../bin/src/ui_transcodedialog.h:230
+#: ../bin/src/ui_transcodedialog.h:234
 msgid "Details..."
 msgstr "Detalji..."
 
@@ -1739,7 +1735,7 @@ msgid "Direct internet connection"
 msgstr "Direktna internet veza"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:141
-#: ../bin/src/ui_transcodedialog.h:212
+#: ../bin/src/ui_transcodedialog.h:216
 msgid "Directory"
 msgstr "fascikla"
 
@@ -2333,7 +2329,7 @@ msgstr "veličina fajla"
 msgid "File type"
 msgstr "tip fajla"
 
-#: ../bin/src/ui_transcodedialog.h:213
+#: ../bin/src/ui_transcodedialog.h:217
 msgid "Filename"
 msgstr "ime fajla"
 
@@ -2341,7 +2337,7 @@ msgstr "ime fajla"
 msgid "Files"
 msgstr "Fajlovi"
 
-#: ../bin/src/ui_transcodedialog.h:210
+#: ../bin/src/ui_transcodedialog.h:214
 msgid "Files to transcode"
 msgstr "Fajlovi za prekodiranje"
 
@@ -2651,10 +2647,6 @@ msgstr "Slike (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm)"
 #: ui/albumcoverchoicecontroller.cpp:46
 msgid "Images (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 msgstr "Slike (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
-
-#: ../bin/src/ui_transcodedialog.h:219
-msgid "Import..."
-msgstr "Uvezi..."
 
 #: core/utilities.cpp:151
 #, qt-format
@@ -3595,7 +3587,7 @@ msgstr "Optimizuj bitski protok"
 msgid "Optimize for quality"
 msgstr "Optimizuj kvalitet"
 
-#: ../bin/src/ui_transcodedialog.h:222
+#: ../bin/src/ui_transcodedialog.h:226
 #: ../bin/src/ui_networkremotesettingspage.h:251
 #: ../bin/src/ui_ripcddialog.h:321
 msgid "Options..."
@@ -3648,7 +3640,7 @@ msgstr "Izlaz"
 msgid "Output device"
 msgstr "Uređaj izlaza"
 
-#: ../bin/src/ui_transcodedialog.h:220 ../bin/src/ui_ripcddialog.h:317
+#: ../bin/src/ui_transcodedialog.h:224 ../bin/src/ui_ripcddialog.h:317
 msgid "Output options"
 msgstr "Opcije izlaza"
 
@@ -3884,7 +3876,7 @@ msgstr "Prikaži podatke o izdanju"
 msgid "Profile"
 msgstr "Profil"
 
-#: ../bin/src/ui_transcodedialog.h:229 ../bin/src/ui_ripcddialog.h:323
+#: ../bin/src/ui_transcodedialog.h:233 ../bin/src/ui_ripcddialog.h:323
 msgid "Progress"
 msgstr "Napredak"
 
@@ -4038,7 +4030,7 @@ msgid "Remember my choice"
 msgstr "Upamti moj izbor"
 
 #: internet/internetradio/savedradio.cpp:107 ../bin/src/ui_queuemanager.h:134
-#: ../bin/src/ui_transcodedialog.h:215
+#: ../bin/src/ui_transcodedialog.h:223
 msgid "Remove"
 msgstr "Ukloni"
 
@@ -4411,7 +4403,7 @@ msgstr "Izbor vizuelizacija"
 msgid "Select visualizations..."
 msgstr "Izaberi vizuelizacije..."
 
-#: ../bin/src/ui_transcodedialog.h:228 ../bin/src/ui_ripcddialog.h:318
+#: ../bin/src/ui_transcodedialog.h:232 ../bin/src/ui_ripcddialog.h:318
 msgid "Select..."
 msgstr "Izaberi..."
 
@@ -5154,7 +5146,7 @@ msgstr "numera"
 msgid "Tracks"
 msgstr "Numere"
 
-#: ../bin/src/ui_transcodedialog.h:209 ../bin/src/ui_mainwindow.h:690
+#: ../bin/src/ui_transcodedialog.h:213 ../bin/src/ui_mainwindow.h:690
 msgid "Transcode Music"
 msgstr "Prekodiranje muzike"
 

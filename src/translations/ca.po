@@ -5,7 +5,7 @@
 # Translators:
 # Adolfo Jayme Barrientos, 2014-2015
 # Adolfo Jayme Barrientos, 2012-2013
-# Adolfo Jayme Barrientos, 2015
+# Adolfo Jayme Barrientos, 2015-2016
 # Adolfo Jayme Barrientos, 2013
 # Adolfo Jayme Barrientos, 2014
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
@@ -14,8 +14,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2015-12-22 21:58+0000\n"
-"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
+"PO-Revision-Date: 2016-01-03 02:23+0000\n"
+"Last-Translator: Adolfo Jayme Barrientos\n"
 "Language-Team: Catalan (http://www.transifex.com/davidsansome/clementine/language/ca/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -461,7 +461,7 @@ msgstr "Afegeix una línia nova si és compatible amb el tipus de notificació"
 msgid "Add action"
 msgstr "Afegeix una acció"
 
-#: ../bin/src/ui_transcodedialog.h:217
+#: ../bin/src/ui_transcodedialog.h:220
 msgid "Add all tracks from a directory and all its subdirectories"
 msgstr "Afegeix totes les peces des d’una carpeta y las seves subcarpetes"
 
@@ -469,7 +469,7 @@ msgstr "Afegeix totes les peces des d’una carpeta y las seves subcarpetes"
 msgid "Add another stream..."
 msgstr "Afegeix un altre flux…"
 
-#: library/librarysettingspage.cpp:67
+#: library/librarysettingspage.cpp:67 ../bin/src/ui_transcodedialog.h:222
 msgid "Add directory..."
 msgstr "Afegeix un directori…"
 
@@ -485,7 +485,7 @@ msgstr "Afegeix un fitxer al convertidor"
 msgid "Add file(s) to transcoder"
 msgstr "Afegeix fitxer(s) al convertidor"
 
-#: ../bin/src/ui_mainwindow.h:676
+#: ../bin/src/ui_transcodedialog.h:218 ../bin/src/ui_mainwindow.h:676
 msgid "Add file..."
 msgstr "Afegeix un fitxer…"
 
@@ -635,10 +635,6 @@ msgstr "Afegeix l’usuari/grup als preferits"
 msgid "Add wiimotedev action"
 msgstr "Afegeix una acció del Wiimotedev"
 
-#: ../bin/src/ui_transcodedialog.h:214
-msgid "Add..."
-msgstr "Afegeix…"
-
 #: ../bin/src/ui_libraryfilterwidget.h:94
 msgid "Added this month"
 msgstr "Afegides aquest mes"
@@ -761,7 +757,7 @@ msgstr "Permet les baixades"
 msgid "Allow mid/side encoding"
 msgstr "Permet la codificació centre/costats"
 
-#: ../bin/src/ui_transcodedialog.h:226
+#: ../bin/src/ui_transcodedialog.h:230
 msgid "Alongside the originals"
 msgstr "Al costat dels originals"
 
@@ -873,7 +869,7 @@ msgstr "Inicials de l’artista"
 msgid "Ask when saving"
 msgstr "Pregunta-m’ho en desar"
 
-#: ../bin/src/ui_transcodedialog.h:221
+#: ../bin/src/ui_transcodedialog.h:225
 #: ../bin/src/ui_networkremotesettingspage.h:250
 #: ../bin/src/ui_ripcddialog.h:322
 msgid "Audio format"
@@ -963,7 +959,7 @@ msgstr "Balanç"
 
 #: core/globalshortcuts.cpp:80
 msgid "Ban (Last.fm scrobbling)"
-msgstr ""
+msgstr "Veta-la (registre al Last.fm)"
 
 #: analyzers/baranalyzer.cpp:34
 msgid "Bar analyzer"
@@ -1123,7 +1119,7 @@ msgstr "Canvia l’idioma"
 
 #: ../bin/src/ui_playbacksettingspage.h:381
 msgid "Changes will take place when the next song starts playing"
-msgstr ""
+msgstr "Els canvis surtiran efecte en reproduir-se la propera cançó"
 
 #: ../bin/src/ui_playbacksettingspage.h:368
 msgid ""
@@ -1591,7 +1587,7 @@ msgid ""
 "Database corruption detected. Please read https://github.com/clementine-"
 "player/Clementine/wiki/Database-Corruption for instructions on how to "
 "recover your database"
-msgstr ""
+msgstr "S’ha detectat un dany en la base de dades. Consulteu https://github.com/clementine-player/Clementine/wiki/Database-Corruption per obtenir instruccions de recuperació"
 
 #: playlist/playlist.cpp:1367 ../bin/src/ui_edittagdialog.h:727
 msgid "Date created"
@@ -1689,12 +1685,12 @@ msgstr "Treu de la cua les peces seleccionades"
 msgid "Dequeue track"
 msgstr "Treu de la cua la peça"
 
-#: ../bin/src/ui_transcodedialog.h:223 ../bin/src/ui_organisedialog.h:240
+#: ../bin/src/ui_transcodedialog.h:227 ../bin/src/ui_organisedialog.h:240
 #: ../bin/src/ui_ripcddialog.h:320
 msgid "Destination"
 msgstr "Destí"
 
-#: ../bin/src/ui_transcodedialog.h:230
+#: ../bin/src/ui_transcodedialog.h:234
 msgid "Details..."
 msgstr "Detalls…"
 
@@ -1743,7 +1739,7 @@ msgid "Direct internet connection"
 msgstr "Connexió directa a Internet"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:141
-#: ../bin/src/ui_transcodedialog.h:212
+#: ../bin/src/ui_transcodedialog.h:216
 msgid "Directory"
 msgstr "Directori"
 
@@ -2264,7 +2260,7 @@ msgstr "No s’ha pogut analitzar el codi XML d’aquest canal RSS"
 #: ui/trackselectiondialog.cpp:247
 #, qt-format
 msgid "Failed to write new auto-tags to '%1'"
-msgstr ""
+msgstr "No s’han pogut escriure les etiquetes automàtiques noves a «%1»"
 
 #: ../bin/src/ui_transcoderoptionsflac.h:81
 #: ../bin/src/ui_transcoderoptionsmp3.h:199
@@ -2289,7 +2285,7 @@ msgstr "S'han acabat d'obtenir les dades"
 
 #: internet/subsonic/subsonicdynamicplaylist.cpp:88
 msgid "Fetching Playlist Items"
-msgstr ""
+msgstr "S’estan cercant els elements de la llista de reproducció"
 
 #: internet/subsonic/subsonicservice.cpp:282
 msgid "Fetching Subsonic library"
@@ -2337,7 +2333,7 @@ msgstr "Mida del fitxer"
 msgid "File type"
 msgstr "Tipus de fitxer"
 
-#: ../bin/src/ui_transcodedialog.h:213
+#: ../bin/src/ui_transcodedialog.h:217
 msgid "Filename"
 msgstr "Nom de fitxer"
 
@@ -2345,7 +2341,7 @@ msgstr "Nom de fitxer"
 msgid "Files"
 msgstr "Fitxers"
 
-#: ../bin/src/ui_transcodedialog.h:210
+#: ../bin/src/ui_transcodedialog.h:214
 msgid "Files to transcode"
 msgstr "Fitxers per convertir"
 
@@ -2439,7 +2435,7 @@ msgstr "Trames per espai de memòria intermèdia"
 
 #: internet/subsonic/subsonicservice.cpp:106
 msgid "Frequently Played"
-msgstr ""
+msgstr "Reproduïdes freqüentment"
 
 #: moodbar/moodbarrenderer.cpp:173
 msgid "Frozen"
@@ -2568,7 +2564,7 @@ msgstr "S’ha rebut el codi d’estat d’HTTP 3xx sense un URL, comproveu la c
 
 #: ../bin/src/ui_networkproxysettingspage.h:162
 msgid "HTTP proxy"
-msgstr "Proxy HTTP"
+msgstr "Servidor intermediari per a l’HTTP"
 
 #: moodbar/moodbarrenderer.cpp:175
 msgid "Happy"
@@ -2655,10 +2651,6 @@ msgstr "Imatges (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm)"
 #: ui/albumcoverchoicecontroller.cpp:46
 msgid "Images (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 msgstr "Imatges (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
-
-#: ../bin/src/ui_transcodedialog.h:219
-msgid "Import..."
-msgstr "Importa…"
 
 #: core/utilities.cpp:151
 #, qt-format
@@ -3053,7 +3045,7 @@ msgstr "M’encanta"
 
 #: core/globalshortcuts.cpp:78
 msgid "Love (Last.fm scrobbling)"
-msgstr ""
+msgstr "Marca-la com a preferida (registre al Last.fm)"
 
 #: analyzers/analyzercontainer.cpp:67
 #: visualisations/visualisationcontainer.cpp:107
@@ -3357,7 +3349,7 @@ msgstr "Les peces noves s’afegiran automàticament."
 
 #: internet/subsonic/subsonicservice.cpp:100
 msgid "Newest"
-msgstr ""
+msgstr "Més recents"
 
 #: library/library.cpp:92
 msgid "Newest tracks"
@@ -3599,7 +3591,7 @@ msgstr "Optimitza la taxa de bits"
 msgid "Optimize for quality"
 msgstr "Optimitza la qualitat"
 
-#: ../bin/src/ui_transcodedialog.h:222
+#: ../bin/src/ui_transcodedialog.h:226
 #: ../bin/src/ui_networkremotesettingspage.h:251
 #: ../bin/src/ui_ripcddialog.h:321
 msgid "Options..."
@@ -3638,7 +3630,7 @@ msgstr "Any original - àlbum"
 
 #: library/library.cpp:118
 msgid "Original year tag support"
-msgstr ""
+msgstr "Compatibilitat amb l’etiqueta d’any original"
 
 #: core/commandlineoptions.cpp:170
 msgid "Other options"
@@ -3652,7 +3644,7 @@ msgstr "Sortida"
 msgid "Output device"
 msgstr "Perifèric de sortida"
 
-#: ../bin/src/ui_transcodedialog.h:220 ../bin/src/ui_ripcddialog.h:317
+#: ../bin/src/ui_transcodedialog.h:224 ../bin/src/ui_ripcddialog.h:317
 msgid "Output options"
 msgstr "Opcions de sortida"
 
@@ -3888,7 +3880,7 @@ msgstr "Mostra la informació de la versió"
 msgid "Profile"
 msgstr "Perfil"
 
-#: ../bin/src/ui_transcodedialog.h:229 ../bin/src/ui_ripcddialog.h:323
+#: ../bin/src/ui_transcodedialog.h:233 ../bin/src/ui_ripcddialog.h:323
 msgid "Progress"
 msgstr "Progrés"
 
@@ -3955,7 +3947,7 @@ msgstr "Pluja"
 
 #: internet/subsonic/subsonicservice.cpp:103
 msgid "Random"
-msgstr ""
+msgstr "A l’atzar"
 
 #: ../bin/src/ui_visualisationselector.h:111
 msgid "Random visualization"
@@ -3996,7 +3988,7 @@ msgstr "Realment voleu cancel·lar?"
 
 #: internet/subsonic/subsonicservice.cpp:112
 msgid "Recently Played"
-msgstr ""
+msgstr "Reproduïdes recentment"
 
 #: internet/subsonic/subsonicsettingspage.cpp:158
 msgid "Redirect limit exceeded, verify server configuration."
@@ -4042,7 +4034,7 @@ msgid "Remember my choice"
 msgstr "Recorda la meva elecció"
 
 #: internet/internetradio/savedradio.cpp:107 ../bin/src/ui_queuemanager.h:134
-#: ../bin/src/ui_transcodedialog.h:215
+#: ../bin/src/ui_transcodedialog.h:223
 msgid "Remove"
 msgstr "Suprimeix"
 
@@ -4195,7 +4187,7 @@ msgstr "Executa"
 
 #: ../bin/src/ui_networkproxysettingspage.h:163
 msgid "SOCKS proxy"
-msgstr "Proxy SOCKS"
+msgstr "Servidor intermediari per al SOCKS"
 
 #: internet/subsonic/subsonicsettingspage.cpp:147
 msgid ""
@@ -4415,7 +4407,7 @@ msgstr "Seleccioneu visualitzacions"
 msgid "Select visualizations..."
 msgstr "Seleccioneu visualitzacions..."
 
-#: ../bin/src/ui_transcodedialog.h:228 ../bin/src/ui_ripcddialog.h:318
+#: ../bin/src/ui_transcodedialog.h:232 ../bin/src/ui_ripcddialog.h:318
 msgid "Select..."
 msgstr "Navega…"
 
@@ -4809,11 +4801,11 @@ msgstr "Atura desprès"
 
 #: ../bin/src/ui_playlistsequence.h:114
 msgid "Stop after each track"
-msgstr ""
+msgstr "Atura després de cada peça"
 
 #: widgets/osd.cpp:320
 msgid "Stop after every track"
-msgstr ""
+msgstr "Atura després de cada peça"
 
 #: ui/mainwindow.cpp:652 ../bin/src/ui_mainwindow.h:663
 msgid "Stop after this track"
@@ -5087,7 +5079,7 @@ msgstr "Aquest tipus de dispositiu no és compatible: %1"
 
 #: ../bin/src/ui_behavioursettingspage.h:358
 msgid "Time step"
-msgstr ""
+msgstr "Salt en el temps"
 
 #: playlist/playlist.cpp:1313 ui/organisedialog.cpp:60
 #: ui/qtsystemtrayicon.cpp:232 ../bin/src/ui_about.h:141
@@ -5130,7 +5122,7 @@ msgstr "Massa redireccions"
 
 #: internet/subsonic/subsonicservice.cpp:109
 msgid "Top Rated"
-msgstr ""
+msgstr "Les millor valorades"
 
 #: internet/spotify/spotifyservice.cpp:430
 msgid "Top tracks"
@@ -5158,7 +5150,7 @@ msgstr "Peça"
 msgid "Tracks"
 msgstr "Peces"
 
-#: ../bin/src/ui_transcodedialog.h:209 ../bin/src/ui_mainwindow.h:690
+#: ../bin/src/ui_transcodedialog.h:213 ../bin/src/ui_mainwindow.h:690
 msgid "Transcode Music"
 msgstr "Converteix música"
 

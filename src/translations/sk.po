@@ -12,7 +12,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2015-12-22 21:58+0000\n"
+"PO-Revision-Date: 2015-12-31 02:49+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Slovak (http://www.transifex.com/davidsansome/clementine/language/sk/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -459,7 +459,7 @@ msgstr "Pridať nový riadok, ak je to podporované typom upozornení"
 msgid "Add action"
 msgstr "Pridať činnosť"
 
-#: ../bin/src/ui_transcodedialog.h:217
+#: ../bin/src/ui_transcodedialog.h:220
 msgid "Add all tracks from a directory and all its subdirectories"
 msgstr "Pridať všetky skladby z priečinka a všetkých jeho podpriečinkov"
 
@@ -467,7 +467,7 @@ msgstr "Pridať všetky skladby z priečinka a všetkých jeho podpriečinkov"
 msgid "Add another stream..."
 msgstr "Pridať ďalší stream..."
 
-#: library/librarysettingspage.cpp:67
+#: library/librarysettingspage.cpp:67 ../bin/src/ui_transcodedialog.h:222
 msgid "Add directory..."
 msgstr "Pridať priečinok..."
 
@@ -483,7 +483,7 @@ msgstr "Pridať súbor na prekódovanie"
 msgid "Add file(s) to transcoder"
 msgstr "Pridať súbor(y) na prekódovanie"
 
-#: ../bin/src/ui_mainwindow.h:676
+#: ../bin/src/ui_transcodedialog.h:218 ../bin/src/ui_mainwindow.h:676
 msgid "Add file..."
 msgstr "Pridať súbor..."
 
@@ -633,10 +633,6 @@ msgstr "Pridať používateľa/skupinu do záložiek"
 msgid "Add wiimotedev action"
 msgstr "Pridať wiimotedev činnosť"
 
-#: ../bin/src/ui_transcodedialog.h:214
-msgid "Add..."
-msgstr "Pridať..."
-
 #: ../bin/src/ui_libraryfilterwidget.h:94
 msgid "Added this month"
 msgstr "Pridané tento mesiac"
@@ -759,7 +755,7 @@ msgstr "Povoliť sťahovania"
 msgid "Allow mid/side encoding"
 msgstr "Povoliť stred/kraj enkódovanie"
 
-#: ../bin/src/ui_transcodedialog.h:226
+#: ../bin/src/ui_transcodedialog.h:230
 msgid "Alongside the originals"
 msgstr "Po boku originálov"
 
@@ -871,7 +867,7 @@ msgstr "Iniciálky interpréta"
 msgid "Ask when saving"
 msgstr "Opýtať sa pri ukladaní"
 
-#: ../bin/src/ui_transcodedialog.h:221
+#: ../bin/src/ui_transcodedialog.h:225
 #: ../bin/src/ui_networkremotesettingspage.h:250
 #: ../bin/src/ui_ripcddialog.h:322
 msgid "Audio format"
@@ -1687,12 +1683,12 @@ msgstr "Vybrať z radu vybrané skladby"
 msgid "Dequeue track"
 msgstr "Vybrať z radu skladbu"
 
-#: ../bin/src/ui_transcodedialog.h:223 ../bin/src/ui_organisedialog.h:240
+#: ../bin/src/ui_transcodedialog.h:227 ../bin/src/ui_organisedialog.h:240
 #: ../bin/src/ui_ripcddialog.h:320
 msgid "Destination"
 msgstr "Cieľ"
 
-#: ../bin/src/ui_transcodedialog.h:230
+#: ../bin/src/ui_transcodedialog.h:234
 msgid "Details..."
 msgstr "Podrobnosti..."
 
@@ -1741,7 +1737,7 @@ msgid "Direct internet connection"
 msgstr "Priame pripojenie na internet"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:141
-#: ../bin/src/ui_transcodedialog.h:212
+#: ../bin/src/ui_transcodedialog.h:216
 msgid "Directory"
 msgstr "Priečinok"
 
@@ -2335,7 +2331,7 @@ msgstr "Veľkosť súboru"
 msgid "File type"
 msgstr "Typ súboru"
 
-#: ../bin/src/ui_transcodedialog.h:213
+#: ../bin/src/ui_transcodedialog.h:217
 msgid "Filename"
 msgstr "Názov súboru"
 
@@ -2343,7 +2339,7 @@ msgstr "Názov súboru"
 msgid "Files"
 msgstr "Súbory"
 
-#: ../bin/src/ui_transcodedialog.h:210
+#: ../bin/src/ui_transcodedialog.h:214
 msgid "Files to transcode"
 msgstr "Súbory na transkódovanie"
 
@@ -2653,10 +2649,6 @@ msgstr "Obrázky (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm)"
 #: ui/albumcoverchoicecontroller.cpp:46
 msgid "Images (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 msgstr "Obrázky (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
-
-#: ../bin/src/ui_transcodedialog.h:219
-msgid "Import..."
-msgstr "Importovať..."
 
 #: core/utilities.cpp:151
 #, qt-format
@@ -3597,7 +3589,7 @@ msgstr "Optimalizovať na dátový tok"
 msgid "Optimize for quality"
 msgstr "Optimalizovať na kvalitu"
 
-#: ../bin/src/ui_transcodedialog.h:222
+#: ../bin/src/ui_transcodedialog.h:226
 #: ../bin/src/ui_networkremotesettingspage.h:251
 #: ../bin/src/ui_ripcddialog.h:321
 msgid "Options..."
@@ -3650,7 +3642,7 @@ msgstr "Výstup"
 msgid "Output device"
 msgstr "Výstupné zariadenie"
 
-#: ../bin/src/ui_transcodedialog.h:220 ../bin/src/ui_ripcddialog.h:317
+#: ../bin/src/ui_transcodedialog.h:224 ../bin/src/ui_ripcddialog.h:317
 msgid "Output options"
 msgstr "Možnosti výstupu"
 
@@ -3886,7 +3878,7 @@ msgstr "Vypísať informáciu o verzii"
 msgid "Profile"
 msgstr "Profil"
 
-#: ../bin/src/ui_transcodedialog.h:229 ../bin/src/ui_ripcddialog.h:323
+#: ../bin/src/ui_transcodedialog.h:233 ../bin/src/ui_ripcddialog.h:323
 msgid "Progress"
 msgstr "Priebeh"
 
@@ -4040,7 +4032,7 @@ msgid "Remember my choice"
 msgstr "Pamätať môj výber"
 
 #: internet/internetradio/savedradio.cpp:107 ../bin/src/ui_queuemanager.h:134
-#: ../bin/src/ui_transcodedialog.h:215
+#: ../bin/src/ui_transcodedialog.h:223
 msgid "Remove"
 msgstr "Odstrániť"
 
@@ -4413,7 +4405,7 @@ msgstr "Vybrať vizualizácie"
 msgid "Select visualizations..."
 msgstr "Vybrať vizualizácie..."
 
-#: ../bin/src/ui_transcodedialog.h:228 ../bin/src/ui_ripcddialog.h:318
+#: ../bin/src/ui_transcodedialog.h:232 ../bin/src/ui_ripcddialog.h:318
 msgid "Select..."
 msgstr "Vybrať..."
 
@@ -5156,7 +5148,7 @@ msgstr "Č."
 msgid "Tracks"
 msgstr "Skladby"
 
-#: ../bin/src/ui_transcodedialog.h:209 ../bin/src/ui_mainwindow.h:690
+#: ../bin/src/ui_transcodedialog.h:213 ../bin/src/ui_mainwindow.h:690
 msgid "Transcode Music"
 msgstr "Transkódovať hudbu"
 

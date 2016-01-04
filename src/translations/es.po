@@ -6,7 +6,7 @@
 # Coroccotta <adiazubierna@gmail.com>, 2012
 # Adolfo Jayme Barrientos, 2014
 # Adolfo Jayme Barrientos, 2012-2013
-# Adolfo Jayme Barrientos, 2015
+# Adolfo Jayme Barrientos, 2015-2016
 # Adolfo Jayme Barrientos, 2013
 # Adolfo Jayme Barrientos, 2014
 # Adrián José Prado Castro <adrian.prado@gmail.com>, 2013
@@ -35,8 +35,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2015-12-22 21:58+0000\n"
-"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
+"PO-Revision-Date: 2016-01-03 11:34+0000\n"
+"Last-Translator: Adolfo Jayme Barrientos\n"
 "Language-Team: Spanish (http://www.transifex.com/davidsansome/clementine/language/es/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -482,7 +482,7 @@ msgstr "Añadir una línea nueva si la permite el tipo de notificación"
 msgid "Add action"
 msgstr "Añadir una acción"
 
-#: ../bin/src/ui_transcodedialog.h:217
+#: ../bin/src/ui_transcodedialog.h:220
 msgid "Add all tracks from a directory and all its subdirectories"
 msgstr "Añada todas las canciones de una carpeta y todas sus carpetas"
 
@@ -490,7 +490,7 @@ msgstr "Añada todas las canciones de una carpeta y todas sus carpetas"
 msgid "Add another stream..."
 msgstr "Añadir otra transmisión…"
 
-#: library/librarysettingspage.cpp:67
+#: library/librarysettingspage.cpp:67 ../bin/src/ui_transcodedialog.h:222
 msgid "Add directory..."
 msgstr "Añadir una carpeta…"
 
@@ -506,7 +506,7 @@ msgstr "Añadir un archivo al convertidor"
 msgid "Add file(s) to transcoder"
 msgstr "Añadir archivo(s) al convertidor"
 
-#: ../bin/src/ui_mainwindow.h:676
+#: ../bin/src/ui_transcodedialog.h:218 ../bin/src/ui_mainwindow.h:676
 msgid "Add file..."
 msgstr "Añadir un archivo…"
 
@@ -656,10 +656,6 @@ msgstr "Añadir usuario/grupo a marcadores"
 msgid "Add wiimotedev action"
 msgstr "Añadir acción de wiimotedev"
 
-#: ../bin/src/ui_transcodedialog.h:214
-msgid "Add..."
-msgstr "Añadir…"
-
 #: ../bin/src/ui_libraryfilterwidget.h:94
 msgid "Added this month"
 msgstr "Añadidas este mes"
@@ -782,7 +778,7 @@ msgstr "Permitir descargas"
 msgid "Allow mid/side encoding"
 msgstr "Permitir codificación mid/side"
 
-#: ../bin/src/ui_transcodedialog.h:226
+#: ../bin/src/ui_transcodedialog.h:230
 msgid "Alongside the originals"
 msgstr "Junto a los originales"
 
@@ -894,7 +890,7 @@ msgstr "Iniciales del artista"
 msgid "Ask when saving"
 msgstr "Preguntar al guardar"
 
-#: ../bin/src/ui_transcodedialog.h:221
+#: ../bin/src/ui_transcodedialog.h:225
 #: ../bin/src/ui_networkremotesettingspage.h:250
 #: ../bin/src/ui_ripcddialog.h:322
 msgid "Audio format"
@@ -1220,7 +1216,7 @@ msgstr "Vaciar"
 
 #: ../bin/src/ui_mainwindow.h:665 ../bin/src/ui_mainwindow.h:667
 msgid "Clear playlist"
-msgstr "Vaciar la lista de reproducción"
+msgstr "Vaciar lista de reproducción"
 
 #: smartplaylists/searchtermwidget.cpp:345
 #: visualisations/visualisationcontainer.cpp:215
@@ -1318,7 +1314,7 @@ msgstr "Pulse para cambiar entre tiempo restante y tiempo total"
 msgid ""
 "Clicking the Login button will open a web browser.  You should return to "
 "Clementine after you have logged in."
-msgstr "Al pulsar Iniciar sesión se abrirá un navegador web.  Una vez que inicie sesión, regrese a Clementine."
+msgstr "Al pulsar en «Acceder» se abrirá un navegador web.  Una vez que inicie sesión, regrese a Clementine."
 
 #: widgets/didyoumean.cpp:37
 msgid "Close"
@@ -1612,7 +1608,7 @@ msgid ""
 "Database corruption detected. Please read https://github.com/clementine-"
 "player/Clementine/wiki/Database-Corruption for instructions on how to "
 "recover your database"
-msgstr ""
+msgstr "Se detectó un daño en la base de datos. Consulte https://github.com/clementine-player/Clementine/wiki/Database-Corruption para obtener instrucciones de recuperación"
 
 #: playlist/playlist.cpp:1367 ../bin/src/ui_edittagdialog.h:727
 msgid "Date created"
@@ -1710,12 +1706,12 @@ msgstr "Quitar las pistas seleccionadas de la cola"
 msgid "Dequeue track"
 msgstr "Quitar la pista de la cola"
 
-#: ../bin/src/ui_transcodedialog.h:223 ../bin/src/ui_organisedialog.h:240
+#: ../bin/src/ui_transcodedialog.h:227 ../bin/src/ui_organisedialog.h:240
 #: ../bin/src/ui_ripcddialog.h:320
 msgid "Destination"
 msgstr "Destino"
 
-#: ../bin/src/ui_transcodedialog.h:230
+#: ../bin/src/ui_transcodedialog.h:234
 msgid "Details..."
 msgstr "Detalles…"
 
@@ -1764,7 +1760,7 @@ msgid "Direct internet connection"
 msgstr "Conexión directa a Internet"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:141
-#: ../bin/src/ui_transcodedialog.h:212
+#: ../bin/src/ui_transcodedialog.h:216
 msgid "Directory"
 msgstr "Directorio"
 
@@ -2285,7 +2281,7 @@ msgstr "No se pudo analizar el XML de este canal RSS"
 #: ui/trackselectiondialog.cpp:247
 #, qt-format
 msgid "Failed to write new auto-tags to '%1'"
-msgstr ""
+msgstr "No se pudieron escribir las etiquetas automáticas nuevas en «%1»"
 
 #: ../bin/src/ui_transcoderoptionsflac.h:81
 #: ../bin/src/ui_transcoderoptionsmp3.h:199
@@ -2310,7 +2306,7 @@ msgstr "Descarga completada"
 
 #: internet/subsonic/subsonicdynamicplaylist.cpp:88
 msgid "Fetching Playlist Items"
-msgstr ""
+msgstr "Buscando elementos de la lista de reproducción"
 
 #: internet/subsonic/subsonicservice.cpp:282
 msgid "Fetching Subsonic library"
@@ -2358,7 +2354,7 @@ msgstr "Tamaño del archivo"
 msgid "File type"
 msgstr "Tipo de archivo"
 
-#: ../bin/src/ui_transcodedialog.h:213
+#: ../bin/src/ui_transcodedialog.h:217
 msgid "Filename"
 msgstr "Nombre del archivo"
 
@@ -2366,7 +2362,7 @@ msgstr "Nombre del archivo"
 msgid "Files"
 msgstr "Archivos"
 
-#: ../bin/src/ui_transcodedialog.h:210
+#: ../bin/src/ui_transcodedialog.h:214
 msgid "Files to transcode"
 msgstr "Archivos para convertir"
 
@@ -2460,7 +2456,7 @@ msgstr "Cuadros por búfer"
 
 #: internet/subsonic/subsonicservice.cpp:106
 msgid "Frequently Played"
-msgstr ""
+msgstr "Reproducidas frecuentemente"
 
 #: moodbar/moodbarrenderer.cpp:173
 msgid "Frozen"
@@ -2589,7 +2585,7 @@ msgstr "Se recibió el código de estado de HTTP 3xx sin un URL. Compruebe la co
 
 #: ../bin/src/ui_networkproxysettingspage.h:162
 msgid "HTTP proxy"
-msgstr "Proxy HTTP"
+msgstr "«Proxy» de HTTP"
 
 #: moodbar/moodbarrenderer.cpp:175
 msgid "Happy"
@@ -2676,10 +2672,6 @@ msgstr "Imágenes (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm)
 #: ui/albumcoverchoicecontroller.cpp:46
 msgid "Images (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 msgstr "Imágenes (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
-
-#: ../bin/src/ui_transcodedialog.h:219
-msgid "Import..."
-msgstr "Importar…"
 
 #: core/utilities.cpp:151
 #, qt-format
@@ -3157,7 +3149,7 @@ msgstr "Así sea"
 
 #: internet/spotify/spotifyservice.cpp:667
 msgid "Make playlist available offline"
-msgstr "Hacer disponible la lista de reproducción sin conexión"
+msgstr "Hacer que la lista esté disponible sin conexión"
 
 #: internet/lastfm/lastfmservice.cpp:259
 msgid "Malformed response"
@@ -3165,7 +3157,7 @@ msgstr "Respuesta con formato incorrecto"
 
 #: ../bin/src/ui_networkproxysettingspage.h:159
 msgid "Manual proxy configuration"
-msgstr "Configuración manual del proxy"
+msgstr "Configuración manual del «proxy»"
 
 #: ../bin/src/ui_podcastsettingspage.h:255
 #: ../bin/src/ui_podcastsettingspage.h:269
@@ -3335,7 +3327,7 @@ msgstr "Banda estrecha (NB)"
 
 #: ../bin/src/ui_networkproxysettingspage.h:156
 msgid "Network Proxy"
-msgstr "Proxy de la red"
+msgstr "«Proxy» de la red"
 
 #: ../bin/src/ui_networkremotesettingspage.h:221
 msgid "Network Remote"
@@ -3378,7 +3370,7 @@ msgstr "Las pistas nuevas se añadirán automáticamente."
 
 #: internet/subsonic/subsonicservice.cpp:100
 msgid "Newest"
-msgstr ""
+msgstr "Más recientes"
 
 #: library/library.cpp:92
 msgid "Newest tracks"
@@ -3470,7 +3462,7 @@ msgstr "No instalado"
 #: globalsearch/globalsearchsettingspage.cpp:120
 #: globalsearch/searchproviderstatuswidget.cpp:47
 msgid "Not logged in"
-msgstr "No inició sesión"
+msgstr "No accedió"
 
 #: devices/deviceview.cpp:113
 msgid "Not mounted - double click to mount"
@@ -3620,7 +3612,7 @@ msgstr "Optimizar para tasa de bits"
 msgid "Optimize for quality"
 msgstr "Optimizar para calidad"
 
-#: ../bin/src/ui_transcodedialog.h:222
+#: ../bin/src/ui_transcodedialog.h:226
 #: ../bin/src/ui_networkremotesettingspage.h:251
 #: ../bin/src/ui_ripcddialog.h:321
 msgid "Options..."
@@ -3673,7 +3665,7 @@ msgstr "Salida"
 msgid "Output device"
 msgstr "Dispositivo de salida"
 
-#: ../bin/src/ui_transcodedialog.h:220 ../bin/src/ui_ripcddialog.h:317
+#: ../bin/src/ui_transcodedialog.h:224 ../bin/src/ui_ripcddialog.h:317
 msgid "Output options"
 msgstr "Opciones de salida"
 
@@ -3909,7 +3901,7 @@ msgstr "Mostrar información de versión"
 msgid "Profile"
 msgstr "Perfil"
 
-#: ../bin/src/ui_transcodedialog.h:229 ../bin/src/ui_ripcddialog.h:323
+#: ../bin/src/ui_transcodedialog.h:233 ../bin/src/ui_ripcddialog.h:323
 msgid "Progress"
 msgstr "Progreso"
 
@@ -3976,7 +3968,7 @@ msgstr "Lluvia"
 
 #: internet/subsonic/subsonicservice.cpp:103
 msgid "Random"
-msgstr ""
+msgstr "Al azar"
 
 #: ../bin/src/ui_visualisationselector.h:111
 msgid "Random visualization"
@@ -4017,7 +4009,7 @@ msgstr "¿Realmente quiere cancelar?"
 
 #: internet/subsonic/subsonicservice.cpp:112
 msgid "Recently Played"
-msgstr ""
+msgstr "Reproducidas recientemente"
 
 #: internet/subsonic/subsonicsettingspage.cpp:158
 msgid "Redirect limit exceeded, verify server configuration."
@@ -4063,7 +4055,7 @@ msgid "Remember my choice"
 msgstr "Recordar mi elección"
 
 #: internet/internetradio/savedradio.cpp:107 ../bin/src/ui_queuemanager.h:134
-#: ../bin/src/ui_transcodedialog.h:215
+#: ../bin/src/ui_transcodedialog.h:223
 msgid "Remove"
 msgstr "Quitar"
 
@@ -4216,7 +4208,7 @@ msgstr "Ejecutar"
 
 #: ../bin/src/ui_networkproxysettingspage.h:163
 msgid "SOCKS proxy"
-msgstr "Proxy para SOCKS"
+msgstr "«Proxy» de SOCKS"
 
 #: internet/subsonic/subsonicsettingspage.cpp:147
 msgid ""
@@ -4436,7 +4428,7 @@ msgstr "Elegir visualizaciones"
 msgid "Select visualizations..."
 msgstr "Elegir visualizaciones…"
 
-#: ../bin/src/ui_transcodedialog.h:228 ../bin/src/ui_ripcddialog.h:318
+#: ../bin/src/ui_transcodedialog.h:232 ../bin/src/ui_ripcddialog.h:318
 msgid "Select..."
 msgstr "Seleccionar..."
 
@@ -5151,7 +5143,7 @@ msgstr "Demasiadas redirecciones"
 
 #: internet/subsonic/subsonicservice.cpp:109
 msgid "Top Rated"
-msgstr ""
+msgstr "Mejor valoradas"
 
 #: internet/spotify/spotifyservice.cpp:430
 msgid "Top tracks"
@@ -5179,7 +5171,7 @@ msgstr "Pista"
 msgid "Tracks"
 msgstr "Pistas"
 
-#: ../bin/src/ui_transcodedialog.h:209 ../bin/src/ui_mainwindow.h:690
+#: ../bin/src/ui_transcodedialog.h:213 ../bin/src/ui_mainwindow.h:690
 msgid "Transcode Music"
 msgstr "Convertir música"
 
@@ -5380,7 +5372,7 @@ msgstr "Utilizar el conjunto de colores del sistema"
 
 #: ../bin/src/ui_networkproxysettingspage.h:157
 msgid "Use the system proxy settings"
-msgstr "Utilizar la configuración de proxy del sistema"
+msgstr "Utilizar la configuración de «proxy» del sistema"
 
 #: ../bin/src/ui_spotifysettingspage.h:217
 msgid "Use volume normalisation"
@@ -5507,7 +5499,7 @@ msgstr "Cuando la lista esté vacía…"
 
 #: ../bin/src/ui_globalsearchview.h:211
 msgid "Why not try..."
-msgstr "Por qué no intenta…"
+msgstr "¿Por qué no prueba con…?:"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:228
 msgid "Wide band (WB)"
@@ -5678,13 +5670,13 @@ msgid ""
 "You don't need to be logged in to search and to listen to music on "
 "SoundCloud. However, you need to login to access your playlists and your "
 "stream."
-msgstr "No es necesario iniciar sesión para buscar y escuchar música de SoundCloud. Sin embargo, debe iniciar sesión para acceder a sus listas de reproducción y actualizaciones."
+msgstr "No es necesario iniciar sesión para buscar y escuchar música de SoundCloud. Sin embargo, debe hacerlo para acceder a sus listas de reproducción y actualizaciones."
 
 #: internet/spotify/spotifyservice.cpp:205
 msgid ""
 "You have been logged out of Spotify, please re-enter your password in the "
 "Settings dialog."
-msgstr "Ha cerrado la sesión de Spotify. Vuelva a escribir su contraseña en el diálogo de Configuración."
+msgstr "Ha cerrado la sesión de Spotify. Vuelva a escribir su contraseña en la ventana de Configuración."
 
 #: internet/spotify/spotifysettingspage.cpp:160
 msgid "You have been logged out of Spotify, please re-enter your password."

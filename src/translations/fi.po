@@ -12,7 +12,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2015-12-23 07:50+0000\n"
+"PO-Revision-Date: 2015-12-31 06:25+0000\n"
 "Last-Translator: Jiri Grönroos <jiri.gronroos@iki.fi>\n"
 "Language-Team: Finnish (http://www.transifex.com/davidsansome/clementine/language/fi/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -459,7 +459,7 @@ msgstr "Lisää uusi rivi, jos ilmoitustyyppi sen sallii"
 msgid "Add action"
 msgstr "Lisää toiminto"
 
-#: ../bin/src/ui_transcodedialog.h:217
+#: ../bin/src/ui_transcodedialog.h:220
 msgid "Add all tracks from a directory and all its subdirectories"
 msgstr "Lisää kaikki kappaleet kansiosta ja sen alakansioista"
 
@@ -467,7 +467,7 @@ msgstr "Lisää kaikki kappaleet kansiosta ja sen alakansioista"
 msgid "Add another stream..."
 msgstr "Lisää toinen suoratoisto..."
 
-#: library/librarysettingspage.cpp:67
+#: library/librarysettingspage.cpp:67 ../bin/src/ui_transcodedialog.h:222
 msgid "Add directory..."
 msgstr "Lisää kansio..."
 
@@ -483,7 +483,7 @@ msgstr "Lisää tiedosto muuntajaan"
 msgid "Add file(s) to transcoder"
 msgstr "Lisää tiedosto(ja) muuntajaan"
 
-#: ../bin/src/ui_mainwindow.h:676
+#: ../bin/src/ui_transcodedialog.h:218 ../bin/src/ui_mainwindow.h:676
 msgid "Add file..."
 msgstr "Lisää tiedosto..."
 
@@ -633,10 +633,6 @@ msgstr "Lisää käyttäjä/ryhmä kirjanmerkkeihin"
 msgid "Add wiimotedev action"
 msgstr "Lisää wiimotedev-toiminto"
 
-#: ../bin/src/ui_transcodedialog.h:214
-msgid "Add..."
-msgstr "Lisää..."
-
 #: ../bin/src/ui_libraryfilterwidget.h:94
 msgid "Added this month"
 msgstr "Lisätty tässä kuussa"
@@ -759,7 +755,7 @@ msgstr "Salli lataukset"
 msgid "Allow mid/side encoding"
 msgstr ""
 
-#: ../bin/src/ui_transcodedialog.h:226
+#: ../bin/src/ui_transcodedialog.h:230
 msgid "Alongside the originals"
 msgstr "Yhteen alkuperäisten kanssa"
 
@@ -871,7 +867,7 @@ msgstr "Esittäjän nimen ensimmäinen kirjain"
 msgid "Ask when saving"
 msgstr "Kysy tallennettaessa"
 
-#: ../bin/src/ui_transcodedialog.h:221
+#: ../bin/src/ui_transcodedialog.h:225
 #: ../bin/src/ui_networkremotesettingspage.h:250
 #: ../bin/src/ui_ripcddialog.h:322
 msgid "Audio format"
@@ -1687,12 +1683,12 @@ msgstr "Poista valitut kappaleet jonosta"
 msgid "Dequeue track"
 msgstr "Poista kappale jonosta"
 
-#: ../bin/src/ui_transcodedialog.h:223 ../bin/src/ui_organisedialog.h:240
+#: ../bin/src/ui_transcodedialog.h:227 ../bin/src/ui_organisedialog.h:240
 #: ../bin/src/ui_ripcddialog.h:320
 msgid "Destination"
 msgstr "Kohde"
 
-#: ../bin/src/ui_transcodedialog.h:230
+#: ../bin/src/ui_transcodedialog.h:234
 msgid "Details..."
 msgstr "Tiedot..."
 
@@ -1741,7 +1737,7 @@ msgid "Direct internet connection"
 msgstr "Suora internetyhteys"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:141
-#: ../bin/src/ui_transcodedialog.h:212
+#: ../bin/src/ui_transcodedialog.h:216
 msgid "Directory"
 msgstr "Kansio"
 
@@ -2335,7 +2331,7 @@ msgstr "Tiedostokoko"
 msgid "File type"
 msgstr "Tiedostotyyppi"
 
-#: ../bin/src/ui_transcodedialog.h:213
+#: ../bin/src/ui_transcodedialog.h:217
 msgid "Filename"
 msgstr "Tiedostonimi"
 
@@ -2343,7 +2339,7 @@ msgstr "Tiedostonimi"
 msgid "Files"
 msgstr "Tiedostot"
 
-#: ../bin/src/ui_transcodedialog.h:210
+#: ../bin/src/ui_transcodedialog.h:214
 msgid "Files to transcode"
 msgstr "Muunnettavat tiedostot"
 
@@ -2654,10 +2650,6 @@ msgstr "Kuvat (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm)"
 msgid "Images (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 msgstr "Kuvat (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 
-#: ../bin/src/ui_transcodedialog.h:219
-msgid "Import..."
-msgstr "Tuo..."
-
 #: core/utilities.cpp:151
 #, qt-format
 msgid "In %1 days"
@@ -2750,7 +2742,7 @@ msgstr "Verkkopalvelut"
 
 #: widgets/osd.cpp:323 ../bin/src/ui_playlistsequence.h:115
 msgid "Intro tracks"
-msgstr ""
+msgstr "Intro-kappaleet"
 
 #: internet/lastfm/lastfmservice.cpp:240
 msgid "Invalid API key"
@@ -3597,7 +3589,7 @@ msgstr "Optimoi bittinopeuteen"
 msgid "Optimize for quality"
 msgstr "Optimoi laatuun"
 
-#: ../bin/src/ui_transcodedialog.h:222
+#: ../bin/src/ui_transcodedialog.h:226
 #: ../bin/src/ui_networkremotesettingspage.h:251
 #: ../bin/src/ui_ripcddialog.h:321
 msgid "Options..."
@@ -3650,7 +3642,7 @@ msgstr "Ulostulo"
 msgid "Output device"
 msgstr "Äänentoistolaite"
 
-#: ../bin/src/ui_transcodedialog.h:220 ../bin/src/ui_ripcddialog.h:317
+#: ../bin/src/ui_transcodedialog.h:224 ../bin/src/ui_ripcddialog.h:317
 msgid "Output options"
 msgstr "Muunnoksen asetukset"
 
@@ -3886,7 +3878,7 @@ msgstr "Tulosta versiotiedot"
 msgid "Profile"
 msgstr "Profiili"
 
-#: ../bin/src/ui_transcodedialog.h:229 ../bin/src/ui_ripcddialog.h:323
+#: ../bin/src/ui_transcodedialog.h:233 ../bin/src/ui_ripcddialog.h:323
 msgid "Progress"
 msgstr "Edistyminen"
 
@@ -4040,7 +4032,7 @@ msgid "Remember my choice"
 msgstr "Muista valintani"
 
 #: internet/internetradio/savedradio.cpp:107 ../bin/src/ui_queuemanager.h:134
-#: ../bin/src/ui_transcodedialog.h:215
+#: ../bin/src/ui_transcodedialog.h:223
 msgid "Remove"
 msgstr "Poista"
 
@@ -4413,7 +4405,7 @@ msgstr "Valitse visualisoinnit"
 msgid "Select visualizations..."
 msgstr "Valitse visualisoinnit..."
 
-#: ../bin/src/ui_transcodedialog.h:228 ../bin/src/ui_ripcddialog.h:318
+#: ../bin/src/ui_transcodedialog.h:232 ../bin/src/ui_ripcddialog.h:318
 msgid "Select..."
 msgstr "Valitse..."
 
@@ -5156,7 +5148,7 @@ msgstr "Kappale"
 msgid "Tracks"
 msgstr "Kappaleet"
 
-#: ../bin/src/ui_transcodedialog.h:209 ../bin/src/ui_mainwindow.h:690
+#: ../bin/src/ui_transcodedialog.h:213 ../bin/src/ui_mainwindow.h:690
 msgid "Transcode Music"
 msgstr "Muunna eri muotoon"
 

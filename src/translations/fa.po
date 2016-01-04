@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2015-12-22 21:58+0000\n"
+"PO-Revision-Date: 2015-12-31 02:49+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Persian (http://www.transifex.com/davidsansome/clementine/language/fa/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -458,7 +458,7 @@ msgstr "افزودن خط نو اگر توسط آگاه‌ساز پشتیبان�
 msgid "Add action"
 msgstr "افزودن کنش"
 
-#: ../bin/src/ui_transcodedialog.h:217
+#: ../bin/src/ui_transcodedialog.h:220
 msgid "Add all tracks from a directory and all its subdirectories"
 msgstr ""
 
@@ -466,7 +466,7 @@ msgstr ""
 msgid "Add another stream..."
 msgstr "افزودن جریان دیگر..."
 
-#: library/librarysettingspage.cpp:67
+#: library/librarysettingspage.cpp:67 ../bin/src/ui_transcodedialog.h:222
 msgid "Add directory..."
 msgstr "افزودن پوشه..."
 
@@ -482,7 +482,7 @@ msgstr ""
 msgid "Add file(s) to transcoder"
 msgstr ""
 
-#: ../bin/src/ui_mainwindow.h:676
+#: ../bin/src/ui_transcodedialog.h:218 ../bin/src/ui_mainwindow.h:676
 msgid "Add file..."
 msgstr "افزودن پرونده..."
 
@@ -632,10 +632,6 @@ msgstr ""
 msgid "Add wiimotedev action"
 msgstr "افزودن کنش ویموتدو"
 
-#: ../bin/src/ui_transcodedialog.h:214
-msgid "Add..."
-msgstr "افزودن..."
-
 #: ../bin/src/ui_libraryfilterwidget.h:94
 msgid "Added this month"
 msgstr "افزوده شده در ماه جاری"
@@ -758,7 +754,7 @@ msgstr ""
 msgid "Allow mid/side encoding"
 msgstr "کدگذاری میانه/کنار"
 
-#: ../bin/src/ui_transcodedialog.h:226
+#: ../bin/src/ui_transcodedialog.h:230
 msgid "Alongside the originals"
 msgstr "در کنار اصلی‌ها"
 
@@ -870,7 +866,7 @@ msgstr "حرف اول هنرمند"
 msgid "Ask when saving"
 msgstr ""
 
-#: ../bin/src/ui_transcodedialog.h:221
+#: ../bin/src/ui_transcodedialog.h:225
 #: ../bin/src/ui_networkremotesettingspage.h:250
 #: ../bin/src/ui_ripcddialog.h:322
 msgid "Audio format"
@@ -1686,12 +1682,12 @@ msgstr "صف‌بندی دوباره‌ی ترک‌های برگزیده"
 msgid "Dequeue track"
 msgstr "صف‌بندی دوباره‌ی ترک"
 
-#: ../bin/src/ui_transcodedialog.h:223 ../bin/src/ui_organisedialog.h:240
+#: ../bin/src/ui_transcodedialog.h:227 ../bin/src/ui_organisedialog.h:240
 #: ../bin/src/ui_ripcddialog.h:320
 msgid "Destination"
 msgstr "مقصد"
 
-#: ../bin/src/ui_transcodedialog.h:230
+#: ../bin/src/ui_transcodedialog.h:234
 msgid "Details..."
 msgstr "جزئیات..."
 
@@ -1740,7 +1736,7 @@ msgid "Direct internet connection"
 msgstr "ارتباط مستقیم اینترنت"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:141
-#: ../bin/src/ui_transcodedialog.h:212
+#: ../bin/src/ui_transcodedialog.h:216
 msgid "Directory"
 msgstr "فهرست راهنما"
 
@@ -2334,7 +2330,7 @@ msgstr "اندازه پرونده"
 msgid "File type"
 msgstr "گونه‌ی پرونده"
 
-#: ../bin/src/ui_transcodedialog.h:213
+#: ../bin/src/ui_transcodedialog.h:217
 msgid "Filename"
 msgstr "نام‌پرونده"
 
@@ -2342,7 +2338,7 @@ msgstr "نام‌پرونده"
 msgid "Files"
 msgstr "پرونده‌ها"
 
-#: ../bin/src/ui_transcodedialog.h:210
+#: ../bin/src/ui_transcodedialog.h:214
 msgid "Files to transcode"
 msgstr "پرونده‌های برای تراکد"
 
@@ -2652,10 +2648,6 @@ msgstr "تصاویر (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.x
 #: ui/albumcoverchoicecontroller.cpp:46
 msgid "Images (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 msgstr "تصاویر (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
-
-#: ../bin/src/ui_transcodedialog.h:219
-msgid "Import..."
-msgstr ""
 
 #: core/utilities.cpp:151
 #, qt-format
@@ -3596,7 +3588,7 @@ msgstr "بهینه‌سازی ضرباهنگ"
 msgid "Optimize for quality"
 msgstr "بهینه‌سازی کیفیت"
 
-#: ../bin/src/ui_transcodedialog.h:222
+#: ../bin/src/ui_transcodedialog.h:226
 #: ../bin/src/ui_networkremotesettingspage.h:251
 #: ../bin/src/ui_ripcddialog.h:321
 msgid "Options..."
@@ -3649,7 +3641,7 @@ msgstr ""
 msgid "Output device"
 msgstr ""
 
-#: ../bin/src/ui_transcodedialog.h:220 ../bin/src/ui_ripcddialog.h:317
+#: ../bin/src/ui_transcodedialog.h:224 ../bin/src/ui_ripcddialog.h:317
 msgid "Output options"
 msgstr "گزینه‌های بروندادی"
 
@@ -3885,7 +3877,7 @@ msgstr "اطلاعات ویرایش را چاپ کن"
 msgid "Profile"
 msgstr "نمایه"
 
-#: ../bin/src/ui_transcodedialog.h:229 ../bin/src/ui_ripcddialog.h:323
+#: ../bin/src/ui_transcodedialog.h:233 ../bin/src/ui_ripcddialog.h:323
 msgid "Progress"
 msgstr "پیشرفت"
 
@@ -4039,7 +4031,7 @@ msgid "Remember my choice"
 msgstr ""
 
 #: internet/internetradio/savedradio.cpp:107 ../bin/src/ui_queuemanager.h:134
-#: ../bin/src/ui_transcodedialog.h:215
+#: ../bin/src/ui_transcodedialog.h:223
 msgid "Remove"
 msgstr "پاک کردن"
 
@@ -4412,7 +4404,7 @@ msgstr "گزینش فرتورسازها"
 msgid "Select visualizations..."
 msgstr "گزینش فرتورسازها..."
 
-#: ../bin/src/ui_transcodedialog.h:228 ../bin/src/ui_ripcddialog.h:318
+#: ../bin/src/ui_transcodedialog.h:232 ../bin/src/ui_ripcddialog.h:318
 msgid "Select..."
 msgstr ""
 
@@ -5155,7 +5147,7 @@ msgstr "ترک"
 msgid "Tracks"
 msgstr ""
 
-#: ../bin/src/ui_transcodedialog.h:209 ../bin/src/ui_mainwindow.h:690
+#: ../bin/src/ui_transcodedialog.h:213 ../bin/src/ui_mainwindow.h:690
 msgid "Transcode Music"
 msgstr "آهنگ‌های تراکد"
 
