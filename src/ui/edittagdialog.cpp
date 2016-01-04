@@ -99,7 +99,8 @@ EditTagDialog::EditTagDialog(Application* app, QWidget* parent)
         connect(widget, SIGNAL(Reset()), SLOT(ResetField()));
       }
 
-      // Connect the edited signal
+      // Connect the changed signal (emitted when value is changed
+      // programmatically or non-programmatically)
       if (qobject_cast<QLineEdit*>(widget)) {
         connect(widget, SIGNAL(textChanged(QString)), SLOT(FieldValueEdited()));
       } else if (qobject_cast<QPlainTextEdit*>(widget)) {
@@ -833,27 +834,33 @@ void EditTagDialog::FetchTagSongChosen(const Song& original_song,
   const QString filename = original_song.url().toLocalFile();
 
   // Find the song with this filename
-  auto data_it =
-      std::find_if(data_.begin(), data_.end(), [&filename](const Data& d) {
-        return d.original_.url().toLocalFile() == filename;
-      });
-  if (data_it == data_.end()) {
-    qLog(Warning) << "Could not find song to filename: " << filename;
-    return;
+  int id;
+  for (id = 0; id < data_.count(); ++id) {
+    if (data_[id].original_.url().toLocalFile() == filename)
+      break;
   }
 
-  data_it->current_.set_title(new_metadata.title());
-  data_it->current_.set_artist(new_metadata.artist());
-  data_it->current_.set_album(new_metadata.album());
-  data_it->current_.set_track(new_metadata.track());
-  data_it->current_.set_year(new_metadata.year());
+  if(id == data_.count()) {
+    qLog(Warning) << "Could not find song for filename: " << filename;
+      return;
+  }
 
-  // Is it currently selected in the UI?
-  int row = data_it - data_.begin();
-  if (ui_->song_list->item(row)->isSelected()) {
-    // We need to update view
-    for (const FieldData& field : fields_)
-      InitFieldValue(field,
-                     ui_->song_list->selectionModel()->selectedIndexes());
+  // Update song data
+  data_[id].current_.set_title(new_metadata.title());
+  data_[id].current_.set_artist(new_metadata.artist());
+  data_[id].current_.set_album(new_metadata.album());
+  data_[id].current_.set_track(new_metadata.track());
+  data_[id].current_.set_year(new_metadata.year());
+
+  // Is it currently being displayed in the UI?
+  if (ui_->song_list->currentRow() == id) {
+    // Yes! Additionally update UI
+    ignore_edits_ = true;
+    ui_->title->set_text(new_metadata.title());
+    ui_->artist->set_text(new_metadata.artist());
+    ui_->album->set_text(new_metadata.album());
+    ui_->track->setValue(new_metadata.track());
+    ui_->year->setValue(new_metadata.year());
+    ignore_edits_ = false;
   }
 }
