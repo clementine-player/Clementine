@@ -74,6 +74,7 @@ SoundCloudService::SoundCloudService(Application* app, InternetModel* parent)
       user_activities_(nullptr),
       network_(new NetworkAccessManager(this)),
       context_menu_(nullptr),
+      song_context_menu_(nullptr),
       search_box_(new SearchBoxWidget(this)),
       search_delay_(new QTimer(this)),
       next_pending_search_id_(0) {
@@ -457,8 +458,6 @@ void SoundCloudService::PlaylistRetrieved(QNetworkReply* reply,
 
 void SoundCloudService::GetSelectedSongUrl() const {
   QString url = selected_song_url_.toEncoded();
-  // URLs we use can be opened with Spotify application, but I believe it's
-  // better to give website links instead.
   url.remove(QRegExp("\\/stream(.*)$"));
   url.prepend("https://w.soundcloud.com/player/?url=");
   InternetService::ShowUrlBox(tr("SoundCloud track's URL"), url);
