@@ -352,9 +352,16 @@ void SoundCloudService::EnsureMenuCreated() {
     context_menu_->addAction(IconLoader::Load("download", IconLoader::Base),
                              tr("Open %1 in browser").arg("soundcloud.com"),
                              this, SLOT(Homepage()));
-    context_menu_->addAction(IconLoader::Load("edit-copy", IconLoader::Base),
-                             tr("Copy track URL to clipboard"),
-                             this, SLOT(GetSelectedSongUrl()));
+
+    song_context_menu_ = new QMenu;
+    song_context_menu_->addActions(GetPlaylistActions());
+    song_context_menu_->addSeparator();
+    song_context_menu_->addAction(IconLoader::Load("download", IconLoader::Base),
+                                  tr("Open %1 in browser").arg("soundcloud.com"),
+                                  this, SLOT(Homepage()));
+    song_context_menu_->addAction(IconLoader::Load("edit-copy", IconLoader::Base),
+                                  tr("Copy track URL to clipboard"),
+                                  this, SLOT(GetSelectedSongUrl()));
   }
 }
 
@@ -364,8 +371,11 @@ void SoundCloudService::ShowContextMenu(const QPoint& global_pos) {
 
   if (item) {
     int type = item->data(InternetModel::Role_Type).toInt();
-    if (type == InternetModel::Type_Track)
+    if (type == InternetModel::Type_Track) {
       selected_song_url_ = item->data(InternetModel::Role_Url).toUrl();
+      song_context_menu_->popup(global_pos);
+      return;
+    }
   }
 
   context_menu_->popup(global_pos);
