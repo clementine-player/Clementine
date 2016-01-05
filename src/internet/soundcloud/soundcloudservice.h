@@ -68,6 +68,7 @@ class SoundCloudService : public InternetService {
   void UserActivitiesRetrieved(QNetworkReply* reply);
   void UserPlaylistsRetrieved(QNetworkReply* reply);
   void PlaylistRetrieved(QNetworkReply* reply, int request_id);
+  void GetSelectedSongUrl() const;
   void Search(const QString& text, bool now = false);
   void DoSearch();
   void SearchFinished(QNetworkReply* reply, int task);

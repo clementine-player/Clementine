@@ -352,11 +352,21 @@ void SoundCloudService::EnsureMenuCreated() {
     context_menu_->addAction(IconLoader::Load("download", IconLoader::Base),
                              tr("Open %1 in browser").arg("soundcloud.com"),
                              this, SLOT(Homepage()));
+    context_menu_->addAction(IconLoader::Load("edit-copy", IconLoader::Base),
+                             tr("Copy track URL to clipboard"),
+                             this, SLOT(GetSelectedSongUrl()));
   }
 }
 
 void SoundCloudService::ShowContextMenu(const QPoint& global_pos) {
   EnsureMenuCreated();
+  QStandardItem* item = model()->itemFromIndex(model()->current_index());
+
+  if (item) {
+    int type = item->data(InternetModel::Role_Type).toInt();
+    if (type == InternetModel::Type_Track)
+      selected_song_url_ = item->data(InternetModel::Role_Url).toUrl();
+  }
 
   context_menu_->popup(global_pos);
 }
@@ -433,6 +443,15 @@ void SoundCloudService::PlaylistRetrieved(QNetworkReply* reply,
     QStandardItem* child = CreateSongItem(song);
     playlist_info.item_->appendRow(child);
   }
+}
+
+void SoundCloudService::GetSelectedSongUrl() const {
+  QString url = selected_song_url_.toEncoded();
+  // URLs we use can be opened with Spotify application, but I believe it's
+  // better to give website links instead.
+  url.remove(QRegExp("\\/stream(.*)$"));
+  url.prepend("https://w.soundcloud.com/player/?url=");
+  InternetService::ShowUrlBox(tr("SoundCloud track's URL"), url);
 }
 
 QList<QStandardItem*> SoundCloudService::ExtractActivities(const QVariant& result) {
