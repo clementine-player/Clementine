@@ -2,6 +2,7 @@
    Copyright 2010-2013, David Sansome <me@davidsansome.com>
    Copyright 2010, 2014, John Maguire <john.maguire@gmail.com>
    Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
+   Copyright 2016, David Ó Laıġeanáın <david.lynam@redbrick.dcu.ie>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -24,6 +25,7 @@
 
 #include "internet/core/internetservice.h"
 #include "core/cachedlist.h"
+#include "core/logging.h"
 
 class SomaFMUrlHandler;
 
@@ -61,6 +63,7 @@ class SomaFMServiceBase : public InternetService {
 
   QStandardItem* CreateRootItem();
   void LazyPopulate(QStandardItem* item);
+  void EnsureMenuCreated();
   void ShowContextMenu(const QPoint& global_pos);
 
   PlaylistItem::Options playlistitem_options() const;
@@ -78,6 +81,7 @@ class SomaFMServiceBase : public InternetService {
   void ForceRefreshStreams();
   void RefreshStreams();
   void RefreshStreamsFinished(QNetworkReply* reply, int task_id);
+  void GetSelectedChannelUrl() const;
 
   void Homepage();
   void Donate();
@@ -92,6 +96,7 @@ class SomaFMServiceBase : public InternetService {
 
   QStandardItem* root_;
   QMenu* context_menu_;
+  QMenu* channel_context_menu_;
 
   QNetworkAccessManager* network_;
 
