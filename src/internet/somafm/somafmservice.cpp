@@ -140,6 +140,7 @@ void SomaFMServiceBase::ShowContextMenu(const QPoint& global_pos) {
   if (item) {
     int type = item->data(InternetModel::Role_Type).toInt();
 
+    // SomaFM streams have a Role_Type of 0.
     if (type == 0) {
       selected_song_url_ = item->data(InternetModel::Role_Url).toUrl();
       qLog(Debug) << "Selected channel URL: " << item->data(InternetModel::Role_Url).toString();
