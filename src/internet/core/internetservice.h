@@ -5,6 +5,7 @@
    Copyright 2011, Tyler Rhodes <tyler.s.rhodes@gmail.com>
    Copyright 2011, Paweł Bara <keirangtp@gmail.com>
    Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
+   Copyright 2016, David Ó Laıġeanáın <david.lynam@redbrick.dcu.ie>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
