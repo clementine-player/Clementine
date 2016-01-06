@@ -32,7 +32,7 @@ const quint32 SongSender::kFileChunkSize = 100000;  // in Bytes
 SongSender::SongSender(Application* app, RemoteClient* client)
     : app_(app),
       client_(client),
-      transcoder_(new Transcoder(this)) {
+      transcoder_(new Transcoder(this, NetworkRemote::kTranscoderSettingPostfix)) {
   QSettings s;
   s.beginGroup(NetworkRemote::kSettingsGroup);
 
