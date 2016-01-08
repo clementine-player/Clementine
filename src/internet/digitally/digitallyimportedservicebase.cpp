@@ -226,12 +226,31 @@ void DigitallyImportedServiceBase::ShowContextMenu(const QPoint& global_pos) {
 
 void DigitallyImportedServiceBase::GetSelectedChannelUrl() const {
   QString url = selected_song_url_.toEncoded();
-  QString new_url = "http://www.di.fm";
+  QString new_url = homepage_url().toString();
+  QString box_title;
 
-  url.remove(0, 4);
+  // Get the raw name of the stream with preceding slash.
+  url.remove(QRegExp("[a-z]*:/"));
+
+  // Trim slash from end of service base URL.
+  new_url.remove(QRegExp("/$"));
+
+  // Concatenate them together to get the final, browser-ready URL.
   new_url.append(url);
-  qLog(Debug) << "Processed Digitally Imported channel URL: " << new_url;
-  InternetService::ShowUrlBox(tr("Digitally Imported channel's URL"), new_url);
+
+  qLog(Debug) << "Processed " << name() << " channel URL: " << new_url;
+
+  // Use literals for translation of the box title.
+  if (name() == "Digitally Imported")
+    box_title = tr("Digitally Imported channel's URL");
+  else if (name() == "RadioTunes")
+    box_title = tr("RadioTunes channel's URL");
+  else if (name() == "RockRadio")
+    box_title = tr("RockRadio channel's URL");
+  else if (name() == "JazzRadio")
+    box_title = tr("JazzRadio channel's URL");
+
+  InternetService::ShowUrlBox(box_title, new_url);
 }
 
 bool DigitallyImportedServiceBase::is_premium_account() const {
