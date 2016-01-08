@@ -5,6 +5,7 @@
    Copyright 2012, Arnaud Bienner <arnaud.bienner@gmail.com>
    Copyright 2014, John Maguire <john.maguire@gmail.com>
    Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
+   Copyright 2016, David Ó Laıġeanáın <david.lynam@redbrick.dcu.ie>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by

@@ -4,6 +4,7 @@
    Copyright 2011, Tyler Rhodes <tyler.s.rhodes@gmail.com>
    Copyright 2011, Paweł Bara <keirangtp@gmail.com>
    Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
+   Copyright 2016, David Ó Laıġeanáın <david.lynam@redbrick.dcu.ie>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -57,6 +58,7 @@ IcecastService::IcecastService(Application* app, InternetModel* parent)
     : InternetService(kServiceName, app, parent, parent),
       network_(new NetworkAccessManager(this)),
       context_menu_(nullptr),
+      channel_context_menu_(nullptr),
       backend_(nullptr),
       model_(nullptr),
       filter_(new IcecastFilterWidget(0)) {
@@ -282,9 +284,14 @@ void IcecastService::ShowContextMenu(const QPoint& global_pos) {
                         model()->current_index().model() == model_ &&
                         model_->GetSong(model()->current_index()).is_valid();
 
+  if (can_play)
+    selected_playable_item_url_ = model_->GetSong(model()->current_index()).url();
+
   GetAppendToPlaylistAction()->setEnabled(can_play);
   GetReplacePlaylistAction()->setEnabled(can_play);
   GetOpenInNewPlaylistAction()->setEnabled(can_play);
+  GetCopySelectedPlayableItemURLAction()->setEnabled(can_play);
+
   context_menu_->popup(global_pos);
 }
 
@@ -300,7 +307,7 @@ void IcecastService::EnsureMenuCreated() {
   context_menu_->addAction(IconLoader::Load("view-refresh", IconLoader::Base),
                            tr("Refresh station list"), this,
                            SLOT(LoadDirectory()));
-
+  context_menu_->addAction(GetCopySelectedPlayableItemURLAction());
   context_menu_->addSeparator();
   context_menu_->addMenu(filter_->menu());
 }
