@@ -579,19 +579,21 @@ void VkService::ChangeConnectionState(Vreen::Client::State state) {
   switch (state) {
     case Vreen::Client::StateOnline:
       emit LoginSuccess(true);
-      UpdateRoot();
       break;
 
     case Vreen::Client::StateInvalid:
     case Vreen::Client::StateOffline:
       emit LoginSuccess(false);
-      UpdateRoot();
       break;
     case Vreen::Client::StateConnecting:
-      break;
+      return;
     default:
       qLog(Error) << "Wrong connection state " << state;
-      break;
+      return;
+  }
+
+  if (!root_item_->data(InternetModel::Role_CanLazyLoad).toBool()) {
+    UpdateRoot();
   }
 }
 
