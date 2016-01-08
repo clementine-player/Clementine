@@ -30,7 +30,6 @@
 #include "engines/engine_fwd.h"
 #include "library/librarymodel.h"
 #include "playlist/playlistitem.h"
-#include "ui/idlehandler.h"
 #include "ui/settingsdialog.h"
 
 class About;
@@ -65,7 +64,6 @@ class PlaylistBackend;
 class PlaylistListContainer;
 class PlaylistManager;
 class QueueManager;
-class IdleHandler;
 class InternetItem;
 class InternetModel;
 class InternetViewContainer;
@@ -280,9 +278,6 @@ signals:
 
   void ShowConsole();
 
-  void InhibitSuspendWhilePlaying(bool status);
-  void HandleInhibitSuspendWhilePlaying(bool status);
-
  private:
   void ConnectInfoView(SongInfoBase* view);
 
@@ -378,9 +373,6 @@ signals:
   PlayBehaviour menu_playmode_;
 
   BackgroundStreams* background_streams_;
-  IdleHandler* idlehandler_;
-  bool inhibit_suspend_while_playing_status_;
-  bool is_suspend_inhibited_;
 };
 
 #endif  // MAINWINDOW_H

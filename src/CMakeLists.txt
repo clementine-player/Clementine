@@ -344,7 +344,6 @@ set(SOURCES
   ui/globalshortcutgrabber.cpp
   ui/globalshortcutssettingspage.cpp
   ui/iconloader.cpp
-  ui/idlehandler.cpp
   ui/mainwindow.cpp
   ui/networkproxysettingspage.cpp
   ui/networkremotesettingspage.cpp
@@ -353,6 +352,7 @@ set(SOURCES
   ui/organiseerrordialog.cpp
   ui/playbacksettingspage.cpp
   ui/qtsystemtrayicon.cpp
+  ui/screensaver.cpp
   ui/settingsdialog.cpp
   ui/settingspage.cpp
   ui/standarditemiconloader.cpp
@@ -863,7 +863,7 @@ optional_source(APPLE
     engines/osxdevicefinder.cpp
     networkremote/bonjour.mm
     ui/globalshortcutgrabber.mm
-    ui/macidlehandler.cpp
+    ui/macscreensaver.cpp
     ui/macsystemtrayicon.mm
     widgets/osd_mac.mm
   HEADERS
@@ -878,7 +878,7 @@ optional_source(WIN32
   SOURCES
     engines/directsounddevicefinder.cpp
     networkremote/tinysvcmdns.cpp
-    ui/windowsidlehandler.cpp
+    ui/windowsscreensaver.cpp
     widgets/osd_win.cpp
   INCLUDE_DIRECTORIES
     ${CMAKE_SOURCE_DIR}/3rdparty/tinysvcmdns
@@ -984,7 +984,7 @@ optional_source(HAVE_DBUS
     core/mpris1.cpp
     core/mpris2.cpp
     networkremote/avahi.cpp
-    ui/dbusidlehandler.cpp
+    ui/dbusscreensaver.cpp
   HEADERS
     core/mpris.h
     core/mpris1.h

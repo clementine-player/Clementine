@@ -245,8 +245,6 @@ void SettingsDialog::AddPage(Page id, SettingsPage* page,
           SIGNAL(NotificationPreview(OSD::Behaviour, QString, QString)));
   connect(page, SIGNAL(SetWiimotedevInterfaceActived(bool)),
           SIGNAL(SetWiimotedevInterfaceActived(bool)));
-  connect(page, SIGNAL(InhibitSuspendWhilePlaying(bool)),
-          SIGNAL(InhibitSuspendWhilePlaying(bool)));
 
   // Create the list item
   QTreeWidgetItem* item = new QTreeWidgetItem;

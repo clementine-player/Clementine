@@ -45,7 +45,6 @@ class SettingsPage : public QWidget {
 signals:
   void NotificationPreview(OSD::Behaviour, QString, QString);
   void SetWiimotedevInterfaceActived(bool);
-  void InhibitSuspendWhilePlaying(bool);
 
  private:
   SettingsDialog* dialog_;
