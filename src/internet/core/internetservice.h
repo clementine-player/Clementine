@@ -98,6 +98,7 @@ class InternetService : public QObject {
   void AppendToPlaylist();
   void ReplacePlaylist();
   void OpenInNewPlaylist();
+  virtual void CopySelectedPlayableItemURL() const;
 
  protected:
   // Returns all the playlist insertion related QActions (see below).
@@ -109,6 +110,8 @@ class InternetService : public QObject {
   QAction* GetReplacePlaylistAction();
   // Returns the 'open in new playlist' QAction.
   QAction* GetOpenInNewPlaylistAction();
+  // Return the 'copy selected song' QAction.
+  QAction* GetCopySelectedPlayableItemURLAction();
 
   // Describes how songs should be added to playlist.
   enum AddMode {
@@ -131,6 +134,7 @@ class InternetService : public QObject {
 
  protected:
   Application* app_;
+  QUrl selected_playable_item_url_;
   QUrl selected_song_url_;
 
 
@@ -141,6 +145,7 @@ class InternetService : public QObject {
   QAction* append_to_playlist_;
   QAction* replace_playlist_;
   QAction* open_in_new_playlist_;
+  QAction* copy_selected_playable_item_url_;
   QAction* separator_;
 };
 

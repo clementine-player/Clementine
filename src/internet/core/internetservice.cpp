@@ -45,6 +45,7 @@ InternetService::InternetService(const QString& name, Application* app,
       append_to_playlist_(nullptr),
       replace_playlist_(nullptr),
       open_in_new_playlist_(nullptr),
+      copy_selected_playable_item_url_(nullptr),
       separator_(nullptr) {}
 
 void InternetService::ShowUrlBox(const QString& title, const QString& url) {
@@ -110,6 +111,18 @@ QAction* InternetService::GetOpenInNewPlaylistAction() {
   return open_in_new_playlist_;
 }
 
+QAction* InternetService::GetCopySelectedPlayableItemURLAction() {
+  if (!copy_selected_playable_item_url_) {
+    copy_selected_playable_item_url_ = new QAction(IconLoader::Load("edit-copy",
+                                                   IconLoader::Base),
+                                                   tr("Copy URL to clipboard"), this);
+    connect(copy_selected_playable_item_url_, SIGNAL(triggered()), this,
+            SLOT(CopySelectedPlayableItemURL()));
+  }
+
+  return copy_selected_playable_item_url_;
+}
+
 void InternetService::AddItemToPlaylist(const QModelIndex& index,
                                         AddMode add_mode) {
   AddItemsToPlaylist(QModelIndexList() << index, add_mode);
@@ -136,6 +149,15 @@ void InternetService::ReplacePlaylist() {
 
 void InternetService::OpenInNewPlaylist() {
   AddItemsToPlaylist(model()->selected_indexes(), AddMode_OpenInNew);
+}
+
+void InternetService::CopySelectedPlayableItemURL() const {
+  if (selected_playable_item_url_.isEmpty()) return;
+
+  QString url = selected_playable_item_url_.toEncoded();
+
+  qLog(Debug) << "Playable item URL: " << url;
+  ShowUrlBox(tr("Copy URL"), url);
 }
 
 QStandardItem* InternetService::CreateSongItem(const Song& song) {
