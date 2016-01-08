@@ -119,7 +119,6 @@ class SettingsDialog : public QDialog {
 signals:
   void NotificationPreview(OSD::Behaviour, QString, QString);
   void SetWiimotedevInterfaceActived(bool);
-  void InhibitSuspendWhilePlaying(bool);
 
  private slots:
   void CurrentItemChanged(QTreeWidgetItem* item);

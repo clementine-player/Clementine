@@ -1,6 +1,5 @@
 /* This file is part of Clementine.
    Copyright 2010, David Sansome <me@davidsansome.com>
-   Copyright 2015, Arun Narayanankutty <n.arun.lifescience@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -16,33 +15,22 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef DBUSIDLEHANDLER_H
-#define DBUSIDLEHANDLER_H
+#ifndef MACSCREENSAVER_H
+#define MACSCREENSAVER_H
 
-#include "idlehandler.h"
+#include "screensaver.h"
 
-#include <QString>
+#include <IOKit/pwr_mgt/IOPMLib.h>
 
-class DBusIdleHandler : public IdleHandler {
+class MacScreensaver : public Screensaver {
  public:
-  DBusIdleHandler(const QString& service, const QString& path,
-                  const QString& interface);
+  MacScreensaver();
 
-  void Inhibit(const char* reason) override;
-  void Uninhibit() override;
-  bool Isinhibited() override;
+  void Inhibit();
+  void Uninhibit();
 
  private:
-  enum GnomeIdleHandlerFlags {
-    Inhibit_Suspend = 4,
-    Inhibit_Mark_Idle = 8
-  };
-
-  QString service_;
-  QString path_;
-  QString interface_;
-
-  quint32 cookie_;
+  IOPMAssertionID assertion_id_;
 };
 
-#endif  // DBUSIDLEHANDLER_H
+#endif
