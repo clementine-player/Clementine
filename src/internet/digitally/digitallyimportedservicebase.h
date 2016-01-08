@@ -2,6 +2,7 @@
    Copyright 2011-2012, David Sansome <me@davidsansome.com>
    Copyright 2012, 2014, John Maguire <john.maguire@gmail.com>
    Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
+   Copyright 2016, David Ó Laıġeanáın <david.lynam@redbrick.dcu.ie>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -48,6 +49,7 @@ class DigitallyImportedServiceBase : public InternetService {
 
   QStandardItem* CreateRootItem();
   void LazyPopulate(QStandardItem* parent);
+  void EnsureMenuCreated();
   void ShowContextMenu(const QPoint& global_pos);
 
   void ReloadSettings();
@@ -76,6 +78,7 @@ signals:
   void ForceRefreshStreams();
   void RefreshStreams();
   void RefreshStreamsFinished(QNetworkReply* reply, int task_id);
+  void GetSelectedChannelUrl() const;
 
  private:
   void PopulateStreams();
@@ -104,6 +107,7 @@ signals:
   QStandardItem* root_;
 
   std::unique_ptr<QMenu> context_menu_;
+  std::unique_ptr<QMenu> channel_context_menu_;
   QStandardItem* context_item_;
 
   CachedList<DigitallyImportedClient::Channel> saved_channels_;

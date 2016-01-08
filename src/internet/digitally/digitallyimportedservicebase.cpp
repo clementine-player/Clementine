@@ -3,6 +3,7 @@
    Copyright 2011-2012, 2014, John Maguire <john.maguire@gmail.com>
    Copyright 2014, Arnaud Bienner <arnaud.bienner@gmail.com>
    Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
+   Copyright 2016, David Ó Laıġeanáın <david.lynam@redbrick.dcu.ie>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -142,6 +143,7 @@ void DigitallyImportedServiceBase::PopulateStreams() {
     item->setData(InternetModel::PlayBehaviour_SingleItem,
                   InternetModel::Role_PlayBehaviour);
     item->setData(QVariant::fromValue(song), InternetModel::Role_SongMetadata);
+    item->setData(song.url(), InternetModel::Role_Url);
     root_->appendRow(item);
   }
 }
@@ -169,7 +171,7 @@ void DigitallyImportedServiceBase::ReloadSettings() {
   saved_channels_.Load();
 }
 
-void DigitallyImportedServiceBase::ShowContextMenu(const QPoint& global_pos) {
+void DigitallyImportedServiceBase::EnsureMenuCreated() {
   if (!context_menu_) {
     context_menu_.reset(new QMenu);
     context_menu_->addActions(GetPlaylistActions());
@@ -180,12 +182,56 @@ void DigitallyImportedServiceBase::ShowContextMenu(const QPoint& global_pos) {
                              tr("Refresh streams"), this,
                              SLOT(ForceRefreshStreams()));
     context_menu_->addSeparator();
-    context_menu_->addAction(IconLoader::Load("configure", IconLoader::Base), 
-                             tr("Configure..."), this, 
+    context_menu_->addAction(IconLoader::Load("configure", IconLoader::Base),
+                             tr("Configure..."), this,
                              SLOT(ShowSettingsDialog()));
+
+    channel_context_menu_.reset(new QMenu);
+    channel_context_menu_->addActions(GetPlaylistActions());
+    channel_context_menu_->addAction(IconLoader::Load("download", IconLoader::Base),
+                             tr("Open %1 in browser").arg(homepage_url_.host()),
+                             this, SLOT(Homepage()));
+    channel_context_menu_->addAction(IconLoader::Load("view-refresh", IconLoader::Base),
+                             tr("Refresh streams"), this,
+                             SLOT(ForceRefreshStreams()));
+    channel_context_menu_->addSeparator();
+    channel_context_menu_->addAction(IconLoader::Load("configure", IconLoader::Base),
+                             tr("Configure..."), this,
+                             SLOT(ShowSettingsDialog()));
+    channel_context_menu_->addAction(IconLoader::Load("edit-copy", IconLoader::Base),
+                                     tr("Copy channel URL to clipboard"),
+                                     this, SLOT(GetSelectedChannelUrl()));
+  }
+}
+
+void DigitallyImportedServiceBase::ShowContextMenu(const QPoint& global_pos) {
+  EnsureMenuCreated();
+  QStandardItem* item = model()->itemFromIndex(model()->current_index());
+
+  if (item) {
+    int type = item->data(InternetModel::Role_Type).toInt();
+
+    // Digitally Imported streams have a Role_Type of 0.
+    if (type == 0) {
+      selected_song_url_ = item->data(InternetModel::Role_Url).toUrl();
+      qLog(Debug) << "Selected channel URL: " << item->data(InternetModel::Role_Url).toString();
+
+      channel_context_menu_->popup(global_pos);
+      return;
+    }
   }
 
   context_menu_->popup(global_pos);
+}
+
+void DigitallyImportedServiceBase::GetSelectedChannelUrl() const {
+  QString url = selected_song_url_.toEncoded();
+  QString new_url = "http://www.di.fm";
+
+  url.remove(0, 4);
+  new_url.append(url);
+  qLog(Debug) << "Processed Digitally Imported channel URL: " << new_url;
+  InternetService::ShowUrlBox(tr("Digitally Imported channel's URL"), new_url);
 }
 
 bool DigitallyImportedServiceBase::is_premium_account() const {
