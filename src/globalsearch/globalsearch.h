@@ -62,9 +62,11 @@ class GlobalSearch : public QObject {
   bool is_provider_usable(SearchProvider* provider) const;
 
  public slots:
+
   void ReloadSettings();
 
 signals:
+  void SearchAsyncSig(int id, const QString& query);
   void ResultsAvailable(int id, const SearchProvider::ResultList& results);
   void ProviderSearchFinished(int id, const SearchProvider* provider);
   void SearchFinished(int id);
@@ -79,6 +81,7 @@ signals:
   void timerEvent(QTimerEvent* e);
 
  private slots:
+  void DoSearchAsync(int id, const QString& query);
   void ResultsAvailableSlot(int id, SearchProvider::ResultList results);
   void SearchFinishedSlot(int id);
 
