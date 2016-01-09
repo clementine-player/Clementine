@@ -45,9 +45,7 @@ DigitallyImportedSettingsPage::DigitallyImportedSettingsPage(
   ui_->login_state->AddCredentialField(ui_->password);
   ui_->login_state->AddCredentialGroup(ui_->credential_group);
 
-  ui_->login_state->SetAccountTypeText(
-      tr("You can listen for free without an account, but Premium members can "
-         "listen to higher quality streams without advertisements."));
+  ui_->login_state->SetAccountTypeText(tr("A premium account is required"));
   ui_->login_state->SetAccountTypeVisible(true);
 }
 
