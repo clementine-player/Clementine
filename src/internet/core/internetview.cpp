@@ -47,11 +47,6 @@ void InternetView::contextMenuEvent(QContextMenuEvent* e) {
                                   e->globalPos());
 }
 
-void InternetView::currentChanged(const QModelIndex& current,
-                                  const QModelIndex&) {
-  emit CurrentIndexChanged(current);
-}
-
 void InternetView::setModel(QAbstractItemModel* model) {
   AutoExpandingTreeView::setModel(model);
 
