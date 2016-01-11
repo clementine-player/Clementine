@@ -33,11 +33,7 @@ class InternetView : public AutoExpandingTreeView {
   void contextMenuEvent(QContextMenuEvent* e);
 
   // QTreeView
-  void currentChanged(const QModelIndex& current, const QModelIndex& previous);
   void setModel(QAbstractItemModel* model);
-
- signals:
-  void CurrentIndexChanged(const QModelIndex& index);
 };
 
 #endif  // INTERNET_CORE_INTERNETVIEW_H_
