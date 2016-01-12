@@ -1,5 +1,6 @@
 /* This file is part of Clementine.
-   Copyright 2015, John Maguire <john.maguire@gmail.com>
+   Copyright 2010, David Sansome <me@davidsansome.com>
+   Copyright 2015 - 2016, Arun Narayanankutty <n.arun.lifescience@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -15,16 +16,24 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "windowsscreensaver.h"
+#ifndef MACIDLEHANDLER_H
+#define MACIDLEHANDLER_H
 
-WindowsScreensaver::WindowsScreensaver() : previous_state_(0) {}
+#include "idlehandler.h"
 
-void WindowsScreensaver::Inhibit() {
-  // TODO: use PowerCreateRequest on Win7+
-  previous_state_ =
-      SetThreadExecutionState(ES_CONTINUOUS | ES_DISPLAY_REQUIRED);
-}
+#include <IOKit/pwr_mgt/IOPMLib.h>
 
-void WindowsScreensaver::Uninhibit() {
-  SetThreadExecutionState(ES_CONTINUOUS | previous_state_);
-}
+class MacIdleHandler : public IdleHandler {
+ public:
+  MacIdleHandler();
+
+  void Inhibit(const char* reason) override;
+  void Uninhibit() override;
+  bool Isinhibited() override;
+
+ private:
+  IOPMAssertionID assertion_id_;
+  bool is_inhibit_;
+};
+
+#endif  // MACIDLEHANDLER_H
