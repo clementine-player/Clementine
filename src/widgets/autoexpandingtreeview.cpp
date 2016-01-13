@@ -128,6 +128,18 @@ void AutoExpandingTreeView::keyPressEvent(QKeyEvent* e) {
       emit FocusOnFilterSignal(e);
       e->accept();
       break;
+
+    case Qt::Key_Left:
+      QModelIndex index = currentIndex();
+
+      // Set focus on the root of the current branch
+      if (index.isValid() && index.parent() != rootIndex() &&
+          (!isExpanded(index) || model()->rowCount(index) == 0)) {
+        setCurrentIndex(index.parent());
+        setFocus();
+        e->accept();
+      }
+      break;
   }
 
   QTreeView::keyPressEvent(e);
