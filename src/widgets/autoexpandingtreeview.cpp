@@ -129,10 +129,12 @@ void AutoExpandingTreeView::mouseDoubleClickEvent(QMouseEvent* event) {
 }
 
 void AutoExpandingTreeView::keyPressEvent(QKeyEvent* e) {
+  QModelIndex index = currentIndex();
+
   switch (e->key()) {
     case Qt::Key_Enter:
     case Qt::Key_Return:
-      if (currentIndex().isValid()) emit doubleClicked(currentIndex());
+      if (index.isValid()) emit doubleClicked(index);
       e->accept();
       break;
 
@@ -140,6 +142,16 @@ void AutoExpandingTreeView::keyPressEvent(QKeyEvent* e) {
     case Qt::Key_Escape:
       emit FocusOnFilterSignal(e);
       e->accept();
+      break;
+
+    case Qt::Key_Left:
+      // Set focus on the root of the current branch
+      if (index.isValid() && index.parent() != rootIndex() &&
+          (!isExpanded(index) || model()->rowCount(index) == 0)) {
+        setCurrentIndex(index.parent());
+        setFocus();
+        e->accept();
+      }
       break;
   }
 
