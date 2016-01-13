@@ -48,6 +48,7 @@ signals:
   // QWidget
   void mousePressEvent(QMouseEvent* event);
   void keyPressEvent(QKeyEvent* event);
+  void mouseDoubleClickEvent(QMouseEvent* event);
 
   virtual bool CanRecursivelyExpand(const QModelIndex& index) const {
     return true;
@@ -56,7 +57,6 @@ signals:
  private slots:
   void ItemExpanded(const QModelIndex& index);
   void ItemClicked(const QModelIndex& index);
-  void ItemDoubleClicked(const QModelIndex& index);
 
  private:
   bool RecursivelyExpand(const QModelIndex& index, int* count);

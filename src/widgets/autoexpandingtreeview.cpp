@@ -33,8 +33,6 @@ AutoExpandingTreeView::AutoExpandingTreeView(QWidget* parent)
 
   connect(this, SIGNAL(expanded(QModelIndex)), SLOT(ItemExpanded(QModelIndex)));
   connect(this, SIGNAL(clicked(QModelIndex)), SLOT(ItemClicked(QModelIndex)));
-  connect(this, SIGNAL(doubleClicked(QModelIndex)),
-          SLOT(ItemDoubleClicked(QModelIndex)));
 }
 
 void AutoExpandingTreeView::reset() {
@@ -84,7 +82,10 @@ void AutoExpandingTreeView::ItemClicked(const QModelIndex& index) {
   setExpanded(index, !isExpanded(index));
 }
 
-void AutoExpandingTreeView::ItemDoubleClicked(const QModelIndex& index) {
+void AutoExpandingTreeView::mouseDoubleClickEvent(QMouseEvent* event) {
+  QTreeView::mouseDoubleClickEvent(event);
+
+  QModelIndex index = indexAt(event->pos());
   ignore_next_click_ = true;
 
   if (add_on_double_click_) {
