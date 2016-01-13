@@ -30,6 +30,7 @@ AutoExpandingTreeView::AutoExpandingTreeView(QWidget* parent)
       add_on_double_click_(true),
       ignore_next_click_(false) {
   setExpandsOnDoubleClick(false);
+  setAnimated(true);
 
   connect(this, SIGNAL(expanded(QModelIndex)), SLOT(ItemExpanded(QModelIndex)));
   connect(this, SIGNAL(clicked(QModelIndex)), SLOT(ItemClicked(QModelIndex)));
