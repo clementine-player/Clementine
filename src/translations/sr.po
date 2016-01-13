@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2015-12-31 02:49+0000\n"
+"PO-Revision-Date: 2016-01-11 15:35+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Serbian (http://www.transifex.com/davidsansome/clementine/language/sr/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -317,7 +317,7 @@ msgid ""
 "music players might not be able to read them.</p></body></html>"
 msgstr "<html><head/><body><p>Ако није штиклирано Клементина ће уписивати ваше оцене и и осталу статистику само у одвојеној бази података и неће мењати ваше фајлове.</p><p>Ако је штиклирано, уписиваће статистику и у бази података и директно у фајл при свакој измени.</p><p>Имајте на уму да ово можда неће радити за сваки формат фајла и, како нема стандарда за то, остали музички плејери можда неће умети да то прочитају.</p></body></html>"
 
-#: ../bin/src/ui_libraryfilterwidget.h:96
+#: ../bin/src/ui_libraryfilterwidget.h:104
 #, qt-format
 msgid ""
 "<html><head/><body><p>Prefix a word with a field name to limit the search to"
@@ -350,6 +350,11 @@ msgstr "Потребан је Спотифај Премијум налог"
 #: ../bin/src/ui_networkremotesettingspage.h:233
 msgid "A client can connect only, if the correct code was entered."
 msgstr "Клијент може да се повеже само ако је унесен исправан кôд."
+
+#: internet/digitally/digitallyimportedsettingspage.cpp:48
+#: internet/digitally/digitallyimportedurlhandler.cpp:60
+msgid "A premium account is required"
+msgstr ""
 
 #: smartplaylists/wizard.cpp:74
 msgid ""
@@ -631,28 +636,28 @@ msgstr "Додај корисника/групу у обележиваче"
 msgid "Add wiimotedev action"
 msgstr "Додај wiimotedev радњу"
 
-#: ../bin/src/ui_libraryfilterwidget.h:94
+#: ../bin/src/ui_libraryfilterwidget.h:100
 msgid "Added this month"
 msgstr "додато овог месеца"
 
-#: ../bin/src/ui_libraryfilterwidget.h:88
+#: ../bin/src/ui_libraryfilterwidget.h:94
 msgid "Added this week"
 msgstr "додато ове седмице"
 
-#: ../bin/src/ui_libraryfilterwidget.h:93
+#: ../bin/src/ui_libraryfilterwidget.h:99
 msgid "Added this year"
 msgstr "додато ове године"
 
-#: ../bin/src/ui_libraryfilterwidget.h:87
+#: ../bin/src/ui_libraryfilterwidget.h:93
 msgid "Added today"
 msgstr "додато данас"
 
-#: ../bin/src/ui_libraryfilterwidget.h:89
-#: ../bin/src/ui_libraryfilterwidget.h:91
+#: ../bin/src/ui_libraryfilterwidget.h:95
+#: ../bin/src/ui_libraryfilterwidget.h:97
 msgid "Added within three months"
 msgstr "додато у последња три месеца"
 
-#: library/libraryfilterwidget.cpp:142
+#: library/libraryfilterwidget.cpp:186
 msgid "Advanced grouping..."
 msgstr "Напредно груписање..."
 
@@ -664,10 +669,10 @@ msgstr "након "
 msgid "After copying..."
 msgstr "Након копирања:"
 
-#: playlist/playlist.cpp:1317 ui/organisedialog.cpp:61
-#: ui/qtsystemtrayicon.cpp:236 ../bin/src/ui_groupbydialog.h:128
-#: ../bin/src/ui_groupbydialog.h:147 ../bin/src/ui_groupbydialog.h:166
-#: ../bin/src/ui_albumcoversearcher.h:110
+#: library/savedgroupingmanager.cpp:65 playlist/playlist.cpp:1317
+#: ui/organisedialog.cpp:61 ui/qtsystemtrayicon.cpp:236
+#: ../bin/src/ui_groupbydialog.h:128 ../bin/src/ui_groupbydialog.h:147
+#: ../bin/src/ui_groupbydialog.h:166 ../bin/src/ui_albumcoversearcher.h:110
 #: ../bin/src/ui_albumcoversearcher.h:112 ../bin/src/ui_edittagdialog.h:734
 #: ../bin/src/ui_trackselectiondialog.h:208 ../bin/src/ui_ripcddialog.h:314
 msgid "Album"
@@ -677,9 +682,10 @@ msgstr "албум"
 msgid "Album (ideal loudness for all tracks)"
 msgstr "албум (идеална јачина за све песме)"
 
-#: playlist/playlist.cpp:1331 ui/organisedialog.cpp:64
-#: ../bin/src/ui_groupbydialog.h:130 ../bin/src/ui_groupbydialog.h:149
-#: ../bin/src/ui_groupbydialog.h:168 ../bin/src/ui_edittagdialog.h:736
+#: library/savedgroupingmanager.cpp:80 playlist/playlist.cpp:1331
+#: ui/organisedialog.cpp:64 ../bin/src/ui_groupbydialog.h:130
+#: ../bin/src/ui_groupbydialog.h:149 ../bin/src/ui_groupbydialog.h:168
+#: ../bin/src/ui_edittagdialog.h:736
 msgid "Album artist"
 msgstr "извођач албума"
 
@@ -691,7 +697,7 @@ msgstr "Омот албума"
 msgid "Album info on jamendo.com..."
 msgstr "Подаци албума са Џаменда..."
 
-#: internet/vk/vkservice.cpp:846
+#: internet/vk/vkservice.cpp:848
 msgid "Albums"
 msgstr "Албуми"
 
@@ -840,10 +846,10 @@ msgid ""
 "the songs of your library?"
 msgstr "Желите ли заиста да упишете статистику песме у фајл песме за све песме из ваше библиотеке?"
 
-#: playlist/playlist.cpp:1315 ui/organisedialog.cpp:62
-#: ui/qtsystemtrayicon.cpp:234 ../bin/src/ui_groupbydialog.h:129
-#: ../bin/src/ui_groupbydialog.h:148 ../bin/src/ui_groupbydialog.h:167
-#: ../bin/src/ui_albumcoversearcher.h:106
+#: library/savedgroupingmanager.cpp:62 playlist/playlist.cpp:1315
+#: ui/organisedialog.cpp:62 ui/qtsystemtrayicon.cpp:234
+#: ../bin/src/ui_groupbydialog.h:129 ../bin/src/ui_groupbydialog.h:148
+#: ../bin/src/ui_groupbydialog.h:167 ../bin/src/ui_albumcoversearcher.h:106
 #: ../bin/src/ui_albumcoversearcher.h:108 ../bin/src/ui_edittagdialog.h:732
 #: ../bin/src/ui_trackselectiondialog.h:209 ../bin/src/ui_ripcddialog.h:315
 msgid "Artist"
@@ -875,7 +881,7 @@ msgstr "Формат звука"
 msgid "Audio output"
 msgstr "Излаз звука"
 
-#: internet/digitally/digitallyimportedsettingspage.cpp:84
+#: internet/digitally/digitallyimportedsettingspage.cpp:82
 #: internet/magnatune/magnatunesettingspage.cpp:117
 #: internet/lastfm/lastfmservice.cpp:228
 #: internet/lastfm/lastfmsettingspage.cpp:84
@@ -986,8 +992,9 @@ msgstr "Биографија са %1"
 msgid "Bit rate"
 msgstr "битски проток"
 
-#: ../bin/src/ui_groupbydialog.h:138 ../bin/src/ui_groupbydialog.h:157
-#: ../bin/src/ui_groupbydialog.h:176 ../bin/src/ui_transcoderoptionsaac.h:128
+#: library/savedgroupingmanager.cpp:92 ../bin/src/ui_groupbydialog.h:138
+#: ../bin/src/ui_groupbydialog.h:157 ../bin/src/ui_groupbydialog.h:176
+#: ../bin/src/ui_transcoderoptionsaac.h:128
 #: ../bin/src/ui_transcoderoptionsmp3.h:193
 #: ../bin/src/ui_transcoderoptionsopus.h:79
 #: ../bin/src/ui_transcoderoptionsspeex.h:217
@@ -1079,7 +1086,7 @@ msgstr "Одустани"
 msgid "Cancel download"
 msgstr "Прекини преузимање"
 
-#: internet/vk/vkservice.cpp:642
+#: internet/vk/vkservice.cpp:644
 msgid ""
 "Captcha is needed.\n"
 "Try to login into Vk.com with your browser,to fix this problem."
@@ -1340,9 +1347,10 @@ msgstr "Попуни ознаке аутоматски"
 msgid "Complete tags automatically..."
 msgstr "Попуни ознаке аутоматски..."
 
-#: playlist/playlist.cpp:1333 ui/organisedialog.cpp:65
-#: ../bin/src/ui_groupbydialog.h:131 ../bin/src/ui_groupbydialog.h:150
-#: ../bin/src/ui_groupbydialog.h:169 ../bin/src/ui_edittagdialog.h:737
+#: library/savedgroupingmanager.cpp:74 playlist/playlist.cpp:1333
+#: ui/organisedialog.cpp:65 ../bin/src/ui_groupbydialog.h:131
+#: ../bin/src/ui_groupbydialog.h:150 ../bin/src/ui_groupbydialog.h:169
+#: ../bin/src/ui_edittagdialog.h:737
 msgid "Composer"
 msgstr "композитор"
 
@@ -1385,7 +1393,7 @@ msgid "Configure podcasts..."
 msgstr "Подеси подкасте..."
 
 #: internet/core/cloudfileservice.cpp:107
-#: internet/digitally/digitallyimportedservicebase.cpp:184
+#: internet/digitally/digitallyimportedservicebase.cpp:177
 #: internet/googledrive/googledriveservice.cpp:231
 #: ../bin/src/ui_globalsearchsettingspage.h:146
 msgid "Configure..."
@@ -1414,7 +1422,7 @@ msgid ""
 "Connection timed out, check server URL. Example: http://localhost:4040/"
 msgstr "Прековреме истекло, проверите УРЛ сервера. Пример: http://localhost:4040/"
 
-#: internet/vk/vkservice.cpp:1126
+#: internet/vk/vkservice.cpp:1128
 msgid "Connection trouble or audio is disabled by owner"
 msgstr "Проблем са повезивањем или је власник онемогућио звук"
 
@@ -1550,7 +1558,7 @@ msgstr "Ctrl+Down"
 msgid "Ctrl+K"
 msgstr "Ctrl+K"
 
-#: ../bin/src/ui_queuemanager.h:128
+#: ../bin/src/ui_savedgroupingmanager.h:105 ../bin/src/ui_queuemanager.h:128
 msgid "Ctrl+Up"
 msgstr "Ctrl+Up"
 
@@ -1757,10 +1765,10 @@ msgctxt "Refers to search provider's status."
 msgid "Disabled"
 msgstr "Онемогућен"
 
-#: playlist/playlist.cpp:1323 ui/organisedialog.cpp:70
-#: ../bin/src/ui_groupbydialog.h:139 ../bin/src/ui_groupbydialog.h:158
-#: ../bin/src/ui_groupbydialog.h:177 ../bin/src/ui_edittagdialog.h:733
-#: ../bin/src/ui_ripcddialog.h:313
+#: library/savedgroupingmanager.cpp:95 playlist/playlist.cpp:1323
+#: ui/organisedialog.cpp:70 ../bin/src/ui_groupbydialog.h:139
+#: ../bin/src/ui_groupbydialog.h:158 ../bin/src/ui_groupbydialog.h:177
+#: ../bin/src/ui_edittagdialog.h:733 ../bin/src/ui_ripcddialog.h:313
 msgid "Disc"
 msgstr "диск"
 
@@ -1769,7 +1777,7 @@ msgid "Discontinuous transmission"
 msgstr "Испрекидан пренос"
 
 #: internet/icecast/icecastfilterwidget.cpp:36
-#: internet/core/searchboxwidget.cpp:34 library/libraryfilterwidget.cpp:104
+#: internet/core/searchboxwidget.cpp:34 library/libraryfilterwidget.cpp:109
 #: ../bin/src/ui_librarysettingspage.h:206
 msgid "Display options"
 msgstr "Опције приказа"
@@ -2053,7 +2061,7 @@ msgstr "Унесите појам за тражење испод да бисте
 msgid "Enter search terms below to find podcasts on gpodder.net"
 msgstr "Унесите појам за тражење испод да бисте нашли подкасте на gpodder.net"
 
-#: ../bin/src/ui_libraryfilterwidget.h:98
+#: ../bin/src/ui_libraryfilterwidget.h:106
 #: ../bin/src/ui_albumcovermanager.h:218
 msgid "Enter search terms here"
 msgstr "Унесите појам за тражење овде"
@@ -2070,7 +2078,7 @@ msgstr "Унесите име фасцикле"
 msgid "Enter this IP in the App to connect to Clementine."
 msgstr "Унесите овај ИП у апликацију да бисте је повезали са Клементином."
 
-#: ../bin/src/ui_libraryfilterwidget.h:86
+#: ../bin/src/ui_libraryfilterwidget.h:92
 msgid "Entire collection"
 msgstr "читаву колекцију"
 
@@ -2088,7 +2096,7 @@ msgstr "Исто као и --log-levels *:3"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:246
 #: library/libraryview.cpp:639 ui/mainwindow.cpp:2020 ui/mainwindow.cpp:2267
-#: ui/mainwindow.cpp:2415 internet/vk/vkservice.cpp:641
+#: ui/mainwindow.cpp:2415 internet/vk/vkservice.cpp:643
 msgid "Error"
 msgstr "Грешка"
 
@@ -2117,8 +2125,8 @@ msgstr "Грешка преузимања Спотифај прикључка"
 msgid "Error loading %1"
 msgstr "Грешка учитавања %1"
 
-#: internet/digitally/digitallyimportedservicebase.cpp:202
-#: internet/digitally/digitallyimportedurlhandler.cpp:90
+#: internet/digitally/digitallyimportedservicebase.cpp:195
+#: internet/digitally/digitallyimportedurlhandler.cpp:96
 msgid "Error loading di.fm playlist"
 msgstr "Грешка учитавања di.fm листе нумера"
 
@@ -2323,9 +2331,9 @@ msgstr "Путање фајлова"
 msgid "File size"
 msgstr "величина фајла"
 
-#: playlist/playlist.cpp:1363 ../bin/src/ui_groupbydialog.h:132
-#: ../bin/src/ui_groupbydialog.h:151 ../bin/src/ui_groupbydialog.h:170
-#: ../bin/src/ui_edittagdialog.h:724
+#: library/savedgroupingmanager.cpp:83 playlist/playlist.cpp:1363
+#: ../bin/src/ui_groupbydialog.h:132 ../bin/src/ui_groupbydialog.h:151
+#: ../bin/src/ui_groupbydialog.h:170 ../bin/src/ui_edittagdialog.h:724
 msgid "File type"
 msgstr "тип фајла"
 
@@ -2357,7 +2365,7 @@ msgstr "Идентификујем песму"
 msgid "Finish"
 msgstr "Заврши"
 
-#: ../bin/src/ui_groupbydialog.h:124
+#: library/savedgroupingmanager.cpp:36 ../bin/src/ui_groupbydialog.h:124
 msgid "First level"
 msgstr "Први ниво"
 
@@ -2396,7 +2404,7 @@ msgstr "Заборављањем уређаја уклонићете га са �
 #: ../bin/src/ui_searchproviderstatuswidget.h:93
 #: ../bin/src/ui_suggestionwidget.h:69 ../bin/src/ui_icecastfilterwidget.h:73
 #: ../bin/src/ui_internetviewcontainer.h:70 ../bin/src/ui_searchboxwidget.h:61
-#: ../bin/src/ui_libraryfilterwidget.h:85
+#: ../bin/src/ui_libraryfilterwidget.h:91
 #: ../bin/src/ui_libraryviewcontainer.h:58
 #: ../bin/src/ui_playlistcontainer.h:142
 #: ../bin/src/ui_playlistlistcontainer.h:125
@@ -2457,10 +2465,10 @@ msgstr "Опште"
 msgid "General settings"
 msgstr "Опште поставке"
 
-#: playlist/playlist.cpp:1329 ui/organisedialog.cpp:74
-#: ../bin/src/ui_groupbydialog.h:133 ../bin/src/ui_groupbydialog.h:152
-#: ../bin/src/ui_groupbydialog.h:171 ../bin/src/ui_edittagdialog.h:740
-#: ../bin/src/ui_ripcddialog.h:316
+#: library/savedgroupingmanager.cpp:77 playlist/playlist.cpp:1329
+#: ui/organisedialog.cpp:74 ../bin/src/ui_groupbydialog.h:133
+#: ../bin/src/ui_groupbydialog.h:152 ../bin/src/ui_groupbydialog.h:171
+#: ../bin/src/ui_edittagdialog.h:740 ../bin/src/ui_ripcddialog.h:316
 msgid "Genre"
 msgstr "жанр"
 
@@ -2477,7 +2485,7 @@ msgstr "Добави УРЛ за дељење ове листе нумера"
 msgid "Getting channels"
 msgstr "Добављам канале"
 
-#: internet/digitally/digitallyimportedservicebase.cpp:105
+#: internet/digitally/digitallyimportedservicebase.cpp:100
 msgid "Getting streams"
 msgstr "Добављам токове"
 
@@ -2515,39 +2523,48 @@ msgstr "Посиви непостојеће песме у листи нумер�
 msgid "Group Library by..."
 msgstr "Груписање библиотеке"
 
-#: globalsearch/globalsearchview.cpp:470 library/libraryfilterwidget.cpp:97
+#: globalsearch/globalsearchview.cpp:470 library/libraryfilterwidget.cpp:98
 msgid "Group by"
 msgstr "Груписање"
 
-#: library/libraryfilterwidget.cpp:131
+#: library/libraryfilterwidget.cpp:154
 msgid "Group by Album"
 msgstr "албум"
 
-#: library/libraryfilterwidget.cpp:120
+#: library/libraryfilterwidget.cpp:143
 msgid "Group by Artist"
 msgstr "извођач"
 
-#: library/libraryfilterwidget.cpp:123
+#: library/libraryfilterwidget.cpp:146
 msgid "Group by Artist/Album"
 msgstr "извођач/албум"
 
-#: library/libraryfilterwidget.cpp:127
+#: library/libraryfilterwidget.cpp:150
 msgid "Group by Artist/Year - Album"
 msgstr "извођач/година — албум"
 
-#: library/libraryfilterwidget.cpp:134
+#: library/libraryfilterwidget.cpp:157
 msgid "Group by Genre/Album"
 msgstr "жанр/албум"
 
-#: library/libraryfilterwidget.cpp:138
+#: library/libraryfilterwidget.cpp:161
 msgid "Group by Genre/Artist/Album"
 msgstr "жанр/извођач/албум"
 
-#: playlist/playlist.cpp:1337 ui/organisedialog.cpp:67
-#: ../bin/src/ui_groupbydialog.h:141 ../bin/src/ui_groupbydialog.h:160
-#: ../bin/src/ui_groupbydialog.h:179 ../bin/src/ui_edittagdialog.h:739
+#: library/savedgroupingmanager.cpp:89 playlist/playlist.cpp:1337
+#: ui/organisedialog.cpp:67 ../bin/src/ui_groupbydialog.h:141
+#: ../bin/src/ui_groupbydialog.h:160 ../bin/src/ui_groupbydialog.h:179
+#: ../bin/src/ui_edittagdialog.h:739
 msgid "Grouping"
 msgstr "груписање"
+
+#: library/libraryfilterwidget.cpp:207
+msgid "Grouping Name"
+msgstr ""
+
+#: library/libraryfilterwidget.cpp:207
+msgid "Grouping name:"
+msgstr ""
 
 #: internet/podcasts/podcasturlloader.cpp:206
 msgid "HTML page did not contain any RSS feeds"
@@ -2978,11 +2995,11 @@ msgstr "Учитавам Ајподову базу података"
 msgid "Loading smart playlist"
 msgstr "Учитавам паметну листу"
 
-#: library/librarymodel.cpp:154
+#: library/librarymodel.cpp:167
 msgid "Loading songs"
 msgstr "Учитавам песме"
 
-#: internet/digitally/digitallyimportedurlhandler.cpp:68
+#: internet/digitally/digitallyimportedurlhandler.cpp:74
 #: internet/somafm/somafmurlhandler.cpp:53
 msgid "Loading stream"
 msgstr "Учитавам ток"
@@ -2995,7 +3012,7 @@ msgstr "Учитавам нумере"
 msgid "Loading tracks info"
 msgstr "Учитавам податке о нумерама"
 
-#: library/librarymodel.cpp:149
+#: library/librarymodel.cpp:162
 #: internet/podcasts/podcastdiscoverymodel.cpp:105 widgets/prettyimage.cpp:161
 #: widgets/widgetfadehelper.cpp:96 internet/vk/vkservice.cpp:513
 #: internet/vk/vksettingspage.cpp:125 ../bin/src/ui_addpodcastdialog.h:179
@@ -3130,6 +3147,10 @@ msgstr "Направи листу доступну ван мреже"
 msgid "Malformed response"
 msgstr "Лош одговор"
 
+#: ../bin/src/ui_libraryfilterwidget.h:102
+msgid "Manage saved groupings"
+msgstr ""
+
 #: ../bin/src/ui_networkproxysettingspage.h:159
 msgid "Manual proxy configuration"
 msgstr "Ручно подешавање проксија"
@@ -3257,7 +3278,7 @@ msgid "Move up"
 msgstr "Помери горе"
 
 #: transcoder/transcodedialog.cpp:225 ui/mainwindow.cpp:1955
-#: internet/vk/vkservice.cpp:906
+#: internet/vk/vkservice.cpp:908
 msgid "Music"
 msgstr "Музика"
 
@@ -3270,11 +3291,11 @@ msgstr "Музичка библиотека"
 msgid "Mute"
 msgstr "Утишај"
 
-#: internet/vk/vkservice.cpp:838
+#: internet/vk/vkservice.cpp:840
 msgid "My Albums"
 msgstr "Моји албуми"
 
-#: internet/vk/vkservice.cpp:899
+#: internet/vk/vkservice.cpp:901
 msgid "My Music"
 msgstr "Моја музика"
 
@@ -3282,8 +3303,8 @@ msgstr "Моја музика"
 msgid "My Recommendations"
 msgstr "Моје препоруке"
 
-#: ui/equalizer.cpp:205 ../bin/src/ui_deviceproperties.h:368
-#: ../bin/src/ui_wizardfinishpage.h:83
+#: library/savedgroupingmanager.cpp:35 ui/equalizer.cpp:205
+#: ../bin/src/ui_deviceproperties.h:368 ../bin/src/ui_wizardfinishpage.h:83
 msgid "Name"
 msgstr "Име"
 
@@ -3389,8 +3410,8 @@ msgstr "Нема поклапања.  Очистите поље претраге
 msgid "No short blocks"
 msgstr "без кратких блокова"
 
-#: ../bin/src/ui_groupbydialog.h:127 ../bin/src/ui_groupbydialog.h:146
-#: ../bin/src/ui_groupbydialog.h:165
+#: library/savedgroupingmanager.cpp:59 ../bin/src/ui_groupbydialog.h:127
+#: ../bin/src/ui_groupbydialog.h:146 ../bin/src/ui_groupbydialog.h:165
 msgid "None"
 msgstr "ништа"
 
@@ -3517,7 +3538,7 @@ msgstr "Прикажи само почетних"
 msgid "Opacity"
 msgstr "Прозирност"
 
-#: internet/digitally/digitallyimportedservicebase.cpp:177
+#: internet/digitally/digitallyimportedservicebase.cpp:170
 #: internet/icecast/icecastservice.cpp:298
 #: internet/jamendo/jamendoservice.cpp:427
 #: internet/magnatune/magnatuneservice.cpp:287
@@ -3613,14 +3634,14 @@ msgstr "Организујем фајлове"
 msgid "Original tags"
 msgstr "Почетне ознаке"
 
-#: playlist/playlist.cpp:1327 ui/organisedialog.cpp:73
-#: ../bin/src/ui_groupbydialog.h:135 ../bin/src/ui_groupbydialog.h:154
-#: ../bin/src/ui_groupbydialog.h:173
+#: library/savedgroupingmanager.cpp:101 playlist/playlist.cpp:1327
+#: ui/organisedialog.cpp:73 ../bin/src/ui_groupbydialog.h:135
+#: ../bin/src/ui_groupbydialog.h:154 ../bin/src/ui_groupbydialog.h:173
 msgid "Original year"
 msgstr "изворна година"
 
-#: ../bin/src/ui_groupbydialog.h:137 ../bin/src/ui_groupbydialog.h:156
-#: ../bin/src/ui_groupbydialog.h:175
+#: library/savedgroupingmanager.cpp:98 ../bin/src/ui_groupbydialog.h:137
+#: ../bin/src/ui_groupbydialog.h:156 ../bin/src/ui_groupbydialog.h:175
 msgid "Original year - Album"
 msgstr "изворна година — албум"
 
@@ -3690,9 +3711,10 @@ msgstr "Паузирај пуштање"
 msgid "Paused"
 msgstr "Паузирано"
 
-#: playlist/playlist.cpp:1335 ui/organisedialog.cpp:66
-#: ../bin/src/ui_groupbydialog.h:140 ../bin/src/ui_groupbydialog.h:159
-#: ../bin/src/ui_groupbydialog.h:178 ../bin/src/ui_edittagdialog.h:738
+#: library/savedgroupingmanager.cpp:86 playlist/playlist.cpp:1335
+#: ui/organisedialog.cpp:66 ../bin/src/ui_groupbydialog.h:140
+#: ../bin/src/ui_groupbydialog.h:159 ../bin/src/ui_groupbydialog.h:178
+#: ../bin/src/ui_edittagdialog.h:738
 msgid "Performer"
 msgstr "извођач"
 
@@ -4004,7 +4026,7 @@ msgstr "Освежи канале"
 msgid "Refresh station list"
 msgstr "Освежи списак станица"
 
-#: internet/digitally/digitallyimportedservicebase.cpp:180
+#: internet/digitally/digitallyimportedservicebase.cpp:173
 msgid "Refresh streams"
 msgstr "Освежи токове"
 
@@ -4029,7 +4051,8 @@ msgstr "Сети се од прошлог пута"
 msgid "Remember my choice"
 msgstr "Упамти мој избор"
 
-#: internet/internetradio/savedradio.cpp:107 ../bin/src/ui_queuemanager.h:134
+#: internet/internetradio/savedradio.cpp:107
+#: ../bin/src/ui_savedgroupingmanager.h:103 ../bin/src/ui_queuemanager.h:134
 #: ../bin/src/ui_transcodedialog.h:223
 msgid "Remove"
 msgstr "Уклони"
@@ -4220,6 +4243,10 @@ msgstr "Уписивање омота албума"
 msgid "Save cover to disk..."
 msgstr "Сачувај омот на диск..."
 
+#: ../bin/src/ui_libraryfilterwidget.h:101
+msgid "Save current grouping"
+msgstr ""
+
 #: widgets/prettyimage.cpp:178 widgets/prettyimage.cpp:223
 msgid "Save image"
 msgstr "Сачувај слику"
@@ -4253,6 +4280,10 @@ msgstr "Упиши статистику песме у ознаке кад је �
 #: ../bin/src/ui_addstreamdialog.h:114
 msgid "Save this stream in the Internet tab"
 msgstr "Сачувај овај ток у интернет језичку"
+
+#: ../bin/src/ui_savedgroupingmanager.h:101
+msgid "Saved Grouping Manager"
+msgstr ""
 
 #: library/library.cpp:194
 msgid "Saving songs statistics into songs files"
@@ -4346,6 +4377,10 @@ msgstr "Резултати претраге"
 #: ../bin/src/ui_querysearchpage.h:119
 msgid "Search terms"
 msgstr "Појмови за претрагу"
+
+#: library/savedgroupingmanager.cpp:37
+msgid "Second Level"
+msgstr ""
 
 #: ../bin/src/ui_groupbydialog.h:143
 msgid "Second level"
@@ -4459,7 +4494,7 @@ msgstr "Пречица за %1"
 msgid "Shortcut for %1 already exists"
 msgstr "Пречица за %1 већ постоји"
 
-#: library/libraryfilterwidget.cpp:69
+#: library/libraryfilterwidget.cpp:70
 msgid "Show"
 msgstr "Прикажи"
 
@@ -4660,7 +4695,7 @@ msgstr "Уска трака"
 msgid "Smart playlist"
 msgstr "Паметна листа"
 
-#: library/librarymodel.cpp:1349
+#: library/librarymodel.cpp:1362
 msgid "Smart playlists"
 msgstr "Паметне листе"
 
@@ -5013,6 +5048,10 @@ msgid ""
 "converting music before copying it to a device."
 msgstr "Ове поставке се користе у дијалогу „Прекодирање музике“, и приликом кодирања музике пре копирања на уређај."
 
+#: library/savedgroupingmanager.cpp:38
+msgid "Third Level"
+msgstr ""
+
 #: ../bin/src/ui_groupbydialog.h:162
 msgid "Third level"
 msgstr "Трећи ниво"
@@ -5201,11 +5240,12 @@ msgstr "Не могу да се повежем"
 msgid "Unable to download %1 (%2)"
 msgstr "Не могу да преузмем %1 (%2)"
 
-#: core/song.cpp:435 library/librarymodel.cpp:359 library/librarymodel.cpp:364
-#: library/librarymodel.cpp:368 library/librarymodel.cpp:1141
-#: playlist/playlistdelegates.cpp:305 playlist/playlistmanager.cpp:502
-#: playlist/playlistmanager.cpp:503 ui/albumcoverchoicecontroller.cpp:126
-#: ui/edittagdialog.cpp:455 ui/edittagdialog.cpp:499
+#: core/song.cpp:435 library/librarymodel.cpp:372 library/librarymodel.cpp:377
+#: library/librarymodel.cpp:381 library/librarymodel.cpp:1154
+#: library/savedgroupingmanager.cpp:103 playlist/playlistdelegates.cpp:305
+#: playlist/playlistmanager.cpp:502 playlist/playlistmanager.cpp:503
+#: ui/albumcoverchoicecontroller.cpp:126 ui/edittagdialog.cpp:455
+#: ui/edittagdialog.cpp:499
 msgid "Unknown"
 msgstr "Непознато"
 
@@ -5382,7 +5422,7 @@ msgstr "ВБР МП3"
 msgid "Variable bit rate"
 msgstr "Промењив битски проток"
 
-#: globalsearch/globalsearchmodel.cpp:107 library/librarymodel.cpp:285
+#: globalsearch/globalsearchmodel.cpp:107 library/librarymodel.cpp:298
 #: playlist/playlistmanager.cpp:514 ui/albumcovermanager.cpp:270
 msgid "Various artists"
 msgstr "Разни извођачи"
@@ -5434,7 +5474,7 @@ msgstr "ВАВ"
 msgid "WMA"
 msgstr "ВМА"
 
-#: internet/vk/vkservice.cpp:880
+#: internet/vk/vkservice.cpp:882
 msgid "Wall"
 msgstr "Зид"
 
@@ -5556,15 +5596,16 @@ msgstr "Уписуј метаподатке"
 msgid "Wrong username or password."
 msgstr "Погрешно корисничко име или лозинка."
 
-#: playlist/playlist.cpp:1325 ui/organisedialog.cpp:72
-#: ../bin/src/ui_groupbydialog.h:134 ../bin/src/ui_groupbydialog.h:153
-#: ../bin/src/ui_groupbydialog.h:172 ../bin/src/ui_edittagdialog.h:735
-#: ../bin/src/ui_trackselectiondialog.h:211 ../bin/src/ui_ripcddialog.h:312
+#: library/savedgroupingmanager.cpp:71 playlist/playlist.cpp:1325
+#: ui/organisedialog.cpp:72 ../bin/src/ui_groupbydialog.h:134
+#: ../bin/src/ui_groupbydialog.h:153 ../bin/src/ui_groupbydialog.h:172
+#: ../bin/src/ui_edittagdialog.h:735 ../bin/src/ui_trackselectiondialog.h:211
+#: ../bin/src/ui_ripcddialog.h:312
 msgid "Year"
 msgstr "година"
 
-#: ../bin/src/ui_groupbydialog.h:136 ../bin/src/ui_groupbydialog.h:155
-#: ../bin/src/ui_groupbydialog.h:174
+#: library/savedgroupingmanager.cpp:68 ../bin/src/ui_groupbydialog.h:136
+#: ../bin/src/ui_groupbydialog.h:155 ../bin/src/ui_groupbydialog.h:174
 msgid "Year - Album"
 msgstr "година — албум"
 
@@ -5608,12 +5649,6 @@ msgstr "Пријављени сте."
 #: ../bin/src/ui_groupbydialog.h:122
 msgid "You can change the way the songs in the library are organised."
 msgstr "Можете изменити начин организивања песама у библиотеци."
-
-#: internet/digitally/digitallyimportedsettingspage.cpp:49
-msgid ""
-"You can listen for free without an account, but Premium members can listen "
-"to higher quality streams without advertisements."
-msgstr "Можете да слушате бесплатно без налога, али само премијум корисници могу да слушају токове високог квалитета без реклама."
 
 #: internet/magnatune/magnatunesettingspage.cpp:59
 msgid ""

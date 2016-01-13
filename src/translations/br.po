@@ -13,7 +13,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2015-12-31 02:49+0000\n"
+"PO-Revision-Date: 2016-01-11 15:35+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Breton (http://www.transifex.com/davidsansome/clementine/language/br/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -320,7 +320,7 @@ msgid ""
 "music players might not be able to read them.</p></body></html>"
 msgstr "<html><head/><body><p>Ma n'eo ket diuzet, Clementine a glasko enrollañ ho notennoù hag ho stadegoù all en un diaz roadennoù disheñvel hep cheñch ho restroù.</p><p>Ma 'z eo diuzet, enrollañ a raio ho stadegoù en diaz roadennoù hag er restroù bep tro ma vo cheñchet.</p><p>N'ez a ket en-dro evit pep mentrezh ha dre ma n'eus reolenn ebet evit en ober, posupl eo ne vefe ket gouest d'al lennerien sonerezh all lenn ar restroù ken.</p></body></html>"
 
-#: ../bin/src/ui_libraryfilterwidget.h:96
+#: ../bin/src/ui_libraryfilterwidget.h:104
 #, qt-format
 msgid ""
 "<html><head/><body><p>Prefix a word with a field name to limit the search to"
@@ -353,6 +353,11 @@ msgstr "Ret eo deoc'h kaout ur kont Spotify Premium."
 #: ../bin/src/ui_networkremotesettingspage.h:233
 msgid "A client can connect only, if the correct code was entered."
 msgstr "Un arval ne c'hell kennaskañ nemet m'eo bet lakaet ar c'hod mat."
+
+#: internet/digitally/digitallyimportedsettingspage.cpp:48
+#: internet/digitally/digitallyimportedurlhandler.cpp:60
+msgid "A premium account is required"
+msgstr ""
 
 #: smartplaylists/wizard.cpp:74
 msgid ""
@@ -634,28 +639,28 @@ msgstr "Ouzhpennañ an implijer/strollad d'ar merkoù-pajenn"
 msgid "Add wiimotedev action"
 msgstr "Ouzhpennañ oberadennoù wiimotedev"
 
-#: ../bin/src/ui_libraryfilterwidget.h:94
+#: ../bin/src/ui_libraryfilterwidget.h:100
 msgid "Added this month"
 msgstr "Ouzhpennet ar miz-mañ"
 
-#: ../bin/src/ui_libraryfilterwidget.h:88
+#: ../bin/src/ui_libraryfilterwidget.h:94
 msgid "Added this week"
 msgstr "Ouehpennet ar sizhun-mañ"
 
-#: ../bin/src/ui_libraryfilterwidget.h:93
+#: ../bin/src/ui_libraryfilterwidget.h:99
 msgid "Added this year"
 msgstr "Ouzhpennet ar bloaz-mañ"
 
-#: ../bin/src/ui_libraryfilterwidget.h:87
+#: ../bin/src/ui_libraryfilterwidget.h:93
 msgid "Added today"
 msgstr "Ouzhpennet hiziv"
 
-#: ../bin/src/ui_libraryfilterwidget.h:89
-#: ../bin/src/ui_libraryfilterwidget.h:91
+#: ../bin/src/ui_libraryfilterwidget.h:95
+#: ../bin/src/ui_libraryfilterwidget.h:97
 msgid "Added within three months"
 msgstr "Ouzhpennet e-kerzh an tri miz diwezhañ"
 
-#: library/libraryfilterwidget.cpp:142
+#: library/libraryfilterwidget.cpp:186
 msgid "Advanced grouping..."
 msgstr "Strolladur kemplez..."
 
@@ -667,10 +672,10 @@ msgstr "Goude "
 msgid "After copying..."
 msgstr "Goude an eiladur..."
 
-#: playlist/playlist.cpp:1317 ui/organisedialog.cpp:61
-#: ui/qtsystemtrayicon.cpp:236 ../bin/src/ui_groupbydialog.h:128
-#: ../bin/src/ui_groupbydialog.h:147 ../bin/src/ui_groupbydialog.h:166
-#: ../bin/src/ui_albumcoversearcher.h:110
+#: library/savedgroupingmanager.cpp:65 playlist/playlist.cpp:1317
+#: ui/organisedialog.cpp:61 ui/qtsystemtrayicon.cpp:236
+#: ../bin/src/ui_groupbydialog.h:128 ../bin/src/ui_groupbydialog.h:147
+#: ../bin/src/ui_groupbydialog.h:166 ../bin/src/ui_albumcoversearcher.h:110
 #: ../bin/src/ui_albumcoversearcher.h:112 ../bin/src/ui_edittagdialog.h:734
 #: ../bin/src/ui_trackselectiondialog.h:208 ../bin/src/ui_ripcddialog.h:314
 msgid "Album"
@@ -680,9 +685,10 @@ msgstr "Albom"
 msgid "Album (ideal loudness for all tracks)"
 msgstr "Albom (Ampled peurvat evit an holl roud)"
 
-#: playlist/playlist.cpp:1331 ui/organisedialog.cpp:64
-#: ../bin/src/ui_groupbydialog.h:130 ../bin/src/ui_groupbydialog.h:149
-#: ../bin/src/ui_groupbydialog.h:168 ../bin/src/ui_edittagdialog.h:736
+#: library/savedgroupingmanager.cpp:80 playlist/playlist.cpp:1331
+#: ui/organisedialog.cpp:64 ../bin/src/ui_groupbydialog.h:130
+#: ../bin/src/ui_groupbydialog.h:149 ../bin/src/ui_groupbydialog.h:168
+#: ../bin/src/ui_edittagdialog.h:736
 msgid "Album artist"
 msgstr "Arzour an albom"
 
@@ -694,7 +700,7 @@ msgstr "Golo Albom"
 msgid "Album info on jamendo.com..."
 msgstr "Titouroù an albom war jamendo.com..."
 
-#: internet/vk/vkservice.cpp:846
+#: internet/vk/vkservice.cpp:848
 msgid "Albums"
 msgstr "Albomoù"
 
@@ -843,10 +849,10 @@ msgid ""
 "the songs of your library?"
 msgstr "Ha sur oc'h da gaout c'hoant enrollañ an stadegoù an ton e-barzh restr an ton evit kement ton en ho sonaoueg ?"
 
-#: playlist/playlist.cpp:1315 ui/organisedialog.cpp:62
-#: ui/qtsystemtrayicon.cpp:234 ../bin/src/ui_groupbydialog.h:129
-#: ../bin/src/ui_groupbydialog.h:148 ../bin/src/ui_groupbydialog.h:167
-#: ../bin/src/ui_albumcoversearcher.h:106
+#: library/savedgroupingmanager.cpp:62 playlist/playlist.cpp:1315
+#: ui/organisedialog.cpp:62 ui/qtsystemtrayicon.cpp:234
+#: ../bin/src/ui_groupbydialog.h:129 ../bin/src/ui_groupbydialog.h:148
+#: ../bin/src/ui_groupbydialog.h:167 ../bin/src/ui_albumcoversearcher.h:106
 #: ../bin/src/ui_albumcoversearcher.h:108 ../bin/src/ui_edittagdialog.h:732
 #: ../bin/src/ui_trackselectiondialog.h:209 ../bin/src/ui_ripcddialog.h:315
 msgid "Artist"
@@ -878,7 +884,7 @@ msgstr "Mentrezh Aodio"
 msgid "Audio output"
 msgstr "Ezkas son"
 
-#: internet/digitally/digitallyimportedsettingspage.cpp:84
+#: internet/digitally/digitallyimportedsettingspage.cpp:82
 #: internet/magnatune/magnatunesettingspage.cpp:117
 #: internet/lastfm/lastfmservice.cpp:228
 #: internet/lastfm/lastfmsettingspage.cpp:84
@@ -989,8 +995,9 @@ msgstr "Buhezskrid %1"
 msgid "Bit rate"
 msgstr "Fonnder"
 
-#: ../bin/src/ui_groupbydialog.h:138 ../bin/src/ui_groupbydialog.h:157
-#: ../bin/src/ui_groupbydialog.h:176 ../bin/src/ui_transcoderoptionsaac.h:128
+#: library/savedgroupingmanager.cpp:92 ../bin/src/ui_groupbydialog.h:138
+#: ../bin/src/ui_groupbydialog.h:157 ../bin/src/ui_groupbydialog.h:176
+#: ../bin/src/ui_transcoderoptionsaac.h:128
 #: ../bin/src/ui_transcoderoptionsmp3.h:193
 #: ../bin/src/ui_transcoderoptionsopus.h:79
 #: ../bin/src/ui_transcoderoptionsspeex.h:217
@@ -1082,7 +1089,7 @@ msgstr "Nullañ"
 msgid "Cancel download"
 msgstr "Nullañ ar pellgargadur"
 
-#: internet/vk/vkservice.cpp:642
+#: internet/vk/vkservice.cpp:644
 msgid ""
 "Captcha is needed.\n"
 "Try to login into Vk.com with your browser,to fix this problem."
@@ -1343,9 +1350,10 @@ msgstr "Leuniañ ar c'hlavioù ent emgefreek"
 msgid "Complete tags automatically..."
 msgstr "Leuniañ ar c'hlavioù ent emgefreek..."
 
-#: playlist/playlist.cpp:1333 ui/organisedialog.cpp:65
-#: ../bin/src/ui_groupbydialog.h:131 ../bin/src/ui_groupbydialog.h:150
-#: ../bin/src/ui_groupbydialog.h:169 ../bin/src/ui_edittagdialog.h:737
+#: library/savedgroupingmanager.cpp:74 playlist/playlist.cpp:1333
+#: ui/organisedialog.cpp:65 ../bin/src/ui_groupbydialog.h:131
+#: ../bin/src/ui_groupbydialog.h:150 ../bin/src/ui_groupbydialog.h:169
+#: ../bin/src/ui_edittagdialog.h:737
 msgid "Composer"
 msgstr "Aozer"
 
@@ -1388,7 +1396,7 @@ msgid "Configure podcasts..."
 msgstr "Kefluniañ ar podkastoù"
 
 #: internet/core/cloudfileservice.cpp:107
-#: internet/digitally/digitallyimportedservicebase.cpp:184
+#: internet/digitally/digitallyimportedservicebase.cpp:177
 #: internet/googledrive/googledriveservice.cpp:231
 #: ../bin/src/ui_globalsearchsettingspage.h:146
 msgid "Configure..."
@@ -1417,7 +1425,7 @@ msgid ""
 "Connection timed out, check server URL. Example: http://localhost:4040/"
 msgstr "Ar c'hennask a lak re a amzer, gwiriekait URL ar servijer. Da skouer : http://localhost:4040/"
 
-#: internet/vk/vkservice.cpp:1126
+#: internet/vk/vkservice.cpp:1128
 msgid "Connection trouble or audio is disabled by owner"
 msgstr "Kudennoù kennaskañ pe diweredekaet eo bet ar son gant an implijer"
 
@@ -1553,7 +1561,7 @@ msgstr "Ctrl+Down"
 msgid "Ctrl+K"
 msgstr "Ctrl+K"
 
-#: ../bin/src/ui_queuemanager.h:128
+#: ../bin/src/ui_savedgroupingmanager.h:105 ../bin/src/ui_queuemanager.h:128
 msgid "Ctrl+Up"
 msgstr "Ctrl+Up"
 
@@ -1760,10 +1768,10 @@ msgctxt "Refers to search provider's status."
 msgid "Disabled"
 msgstr "Diwederakaet"
 
-#: playlist/playlist.cpp:1323 ui/organisedialog.cpp:70
-#: ../bin/src/ui_groupbydialog.h:139 ../bin/src/ui_groupbydialog.h:158
-#: ../bin/src/ui_groupbydialog.h:177 ../bin/src/ui_edittagdialog.h:733
-#: ../bin/src/ui_ripcddialog.h:313
+#: library/savedgroupingmanager.cpp:95 playlist/playlist.cpp:1323
+#: ui/organisedialog.cpp:70 ../bin/src/ui_groupbydialog.h:139
+#: ../bin/src/ui_groupbydialog.h:158 ../bin/src/ui_groupbydialog.h:177
+#: ../bin/src/ui_edittagdialog.h:733 ../bin/src/ui_ripcddialog.h:313
 msgid "Disc"
 msgstr "Pladenn"
 
@@ -1772,7 +1780,7 @@ msgid "Discontinuous transmission"
 msgstr "Treuzkas digendalc'hus"
 
 #: internet/icecast/icecastfilterwidget.cpp:36
-#: internet/core/searchboxwidget.cpp:34 library/libraryfilterwidget.cpp:104
+#: internet/core/searchboxwidget.cpp:34 library/libraryfilterwidget.cpp:109
 #: ../bin/src/ui_librarysettingspage.h:206
 msgid "Display options"
 msgstr "Dibarzhioù ar skrammañ"
@@ -2056,7 +2064,7 @@ msgstr "Lakait gerioù enklask dindan evit kavout podkastoù war an iTunes Store
 msgid "Enter search terms below to find podcasts on gpodder.net"
 msgstr "Lakait gerioù enklask dindan evit kavout podkastoù war gpodder.net"
 
-#: ../bin/src/ui_libraryfilterwidget.h:98
+#: ../bin/src/ui_libraryfilterwidget.h:106
 #: ../bin/src/ui_albumcovermanager.h:218
 msgid "Enter search terms here"
 msgstr "Lakait amañ gerioù ho enklask"
@@ -2073,7 +2081,7 @@ msgstr "Skrivit anv an teuliad"
 msgid "Enter this IP in the App to connect to Clementine."
 msgstr "Lakait an IP-mañ er poellad evit kennaskañ da Clementine"
 
-#: ../bin/src/ui_libraryfilterwidget.h:86
+#: ../bin/src/ui_libraryfilterwidget.h:92
 msgid "Entire collection"
 msgstr "Dastumadeg hollek"
 
@@ -2091,7 +2099,7 @@ msgstr "Kenkoulz a --log-levels *:3"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:246
 #: library/libraryview.cpp:639 ui/mainwindow.cpp:2020 ui/mainwindow.cpp:2267
-#: ui/mainwindow.cpp:2415 internet/vk/vkservice.cpp:641
+#: ui/mainwindow.cpp:2415 internet/vk/vkservice.cpp:643
 msgid "Error"
 msgstr "Fazi"
 
@@ -2120,8 +2128,8 @@ msgstr "Ur gudenn a zo savet o pellgargañ enlugellad Spotify"
 msgid "Error loading %1"
 msgstr "Ur gudenn a zo savet e-pad kargadur %1"
 
-#: internet/digitally/digitallyimportedservicebase.cpp:202
-#: internet/digitally/digitallyimportedurlhandler.cpp:90
+#: internet/digitally/digitallyimportedservicebase.cpp:195
+#: internet/digitally/digitallyimportedurlhandler.cpp:96
 msgid "Error loading di.fm playlist"
 msgstr "Kudenn o kargañ roll seniñ di.fm"
 
@@ -2326,9 +2334,9 @@ msgstr "Treugoù ar restr"
 msgid "File size"
 msgstr "Ment ar restr"
 
-#: playlist/playlist.cpp:1363 ../bin/src/ui_groupbydialog.h:132
-#: ../bin/src/ui_groupbydialog.h:151 ../bin/src/ui_groupbydialog.h:170
-#: ../bin/src/ui_edittagdialog.h:724
+#: library/savedgroupingmanager.cpp:83 playlist/playlist.cpp:1363
+#: ../bin/src/ui_groupbydialog.h:132 ../bin/src/ui_groupbydialog.h:151
+#: ../bin/src/ui_groupbydialog.h:170 ../bin/src/ui_edittagdialog.h:724
 msgid "File type"
 msgstr "Stumm ar restr"
 
@@ -2360,7 +2368,7 @@ msgstr "O genel ar roud audio"
 msgid "Finish"
 msgstr "Echuiñ"
 
-#: ../bin/src/ui_groupbydialog.h:124
+#: library/savedgroupingmanager.cpp:36 ../bin/src/ui_groupbydialog.h:124
 msgid "First level"
 msgstr "Live kentañ"
 
@@ -2399,7 +2407,7 @@ msgstr "Disoñjal un drobarzhell a denn anezhi eus al listenn-mañ ha rediet e v
 #: ../bin/src/ui_searchproviderstatuswidget.h:93
 #: ../bin/src/ui_suggestionwidget.h:69 ../bin/src/ui_icecastfilterwidget.h:73
 #: ../bin/src/ui_internetviewcontainer.h:70 ../bin/src/ui_searchboxwidget.h:61
-#: ../bin/src/ui_libraryfilterwidget.h:85
+#: ../bin/src/ui_libraryfilterwidget.h:91
 #: ../bin/src/ui_libraryviewcontainer.h:58
 #: ../bin/src/ui_playlistcontainer.h:142
 #: ../bin/src/ui_playlistlistcontainer.h:125
@@ -2460,10 +2468,10 @@ msgstr "Hollek"
 msgid "General settings"
 msgstr "Arventennoù hollek"
 
-#: playlist/playlist.cpp:1329 ui/organisedialog.cpp:74
-#: ../bin/src/ui_groupbydialog.h:133 ../bin/src/ui_groupbydialog.h:152
-#: ../bin/src/ui_groupbydialog.h:171 ../bin/src/ui_edittagdialog.h:740
-#: ../bin/src/ui_ripcddialog.h:316
+#: library/savedgroupingmanager.cpp:77 playlist/playlist.cpp:1329
+#: ui/organisedialog.cpp:74 ../bin/src/ui_groupbydialog.h:133
+#: ../bin/src/ui_groupbydialog.h:152 ../bin/src/ui_groupbydialog.h:171
+#: ../bin/src/ui_edittagdialog.h:740 ../bin/src/ui_ripcddialog.h:316
 msgid "Genre"
 msgstr "Doare"
 
@@ -2480,7 +2488,7 @@ msgstr "Kaout un URL evit rannañ ar roll-seniñ mañ"
 msgid "Getting channels"
 msgstr "O taspugn ar c'hanolioù"
 
-#: internet/digitally/digitallyimportedservicebase.cpp:105
+#: internet/digitally/digitallyimportedservicebase.cpp:100
 msgid "Getting streams"
 msgstr "O tegemer al lanvioù"
 
@@ -2518,39 +2526,48 @@ msgstr "Grisaat an tonioù n'int ket mui em roll seniñ"
 msgid "Group Library by..."
 msgstr "Strollañ al sonaoueg dre..."
 
-#: globalsearch/globalsearchview.cpp:470 library/libraryfilterwidget.cpp:97
+#: globalsearch/globalsearchview.cpp:470 library/libraryfilterwidget.cpp:98
 msgid "Group by"
 msgstr "Strollad dre"
 
-#: library/libraryfilterwidget.cpp:131
+#: library/libraryfilterwidget.cpp:154
 msgid "Group by Album"
 msgstr "Strollañ dre Albom"
 
-#: library/libraryfilterwidget.cpp:120
+#: library/libraryfilterwidget.cpp:143
 msgid "Group by Artist"
 msgstr "Strollañ dre Arzour"
 
-#: library/libraryfilterwidget.cpp:123
+#: library/libraryfilterwidget.cpp:146
 msgid "Group by Artist/Album"
 msgstr "Strollañ dre Arzour/Albom"
 
-#: library/libraryfilterwidget.cpp:127
+#: library/libraryfilterwidget.cpp:150
 msgid "Group by Artist/Year - Album"
 msgstr "Strollañ dre Arzour/Bloaz - Albom"
 
-#: library/libraryfilterwidget.cpp:134
+#: library/libraryfilterwidget.cpp:157
 msgid "Group by Genre/Album"
 msgstr "Strollañ dre Zoare/Albom"
 
-#: library/libraryfilterwidget.cpp:138
+#: library/libraryfilterwidget.cpp:161
 msgid "Group by Genre/Artist/Album"
 msgstr "Strollañ dre Zoare/Arzour/Albom"
 
-#: playlist/playlist.cpp:1337 ui/organisedialog.cpp:67
-#: ../bin/src/ui_groupbydialog.h:141 ../bin/src/ui_groupbydialog.h:160
-#: ../bin/src/ui_groupbydialog.h:179 ../bin/src/ui_edittagdialog.h:739
+#: library/savedgroupingmanager.cpp:89 playlist/playlist.cpp:1337
+#: ui/organisedialog.cpp:67 ../bin/src/ui_groupbydialog.h:141
+#: ../bin/src/ui_groupbydialog.h:160 ../bin/src/ui_groupbydialog.h:179
+#: ../bin/src/ui_edittagdialog.h:739
 msgid "Grouping"
 msgstr "Strolladenn"
+
+#: library/libraryfilterwidget.cpp:207
+msgid "Grouping Name"
+msgstr ""
+
+#: library/libraryfilterwidget.cpp:207
+msgid "Grouping name:"
+msgstr ""
 
 #: internet/podcasts/podcasturlloader.cpp:206
 msgid "HTML page did not contain any RSS feeds"
@@ -2981,11 +2998,11 @@ msgstr "O kargañ stlennvon iPod"
 msgid "Loading smart playlist"
 msgstr "Kargañ ar roll seniñ speredek"
 
-#: library/librarymodel.cpp:154
+#: library/librarymodel.cpp:167
 msgid "Loading songs"
 msgstr "O kargañ tonioù"
 
-#: internet/digitally/digitallyimportedurlhandler.cpp:68
+#: internet/digitally/digitallyimportedurlhandler.cpp:74
 #: internet/somafm/somafmurlhandler.cpp:53
 msgid "Loading stream"
 msgstr "O kargañ al lanv"
@@ -2998,7 +3015,7 @@ msgstr "O kargan roudoù"
 msgid "Loading tracks info"
 msgstr "O kargañ titouroù ar roud"
 
-#: library/librarymodel.cpp:149
+#: library/librarymodel.cpp:162
 #: internet/podcasts/podcastdiscoverymodel.cpp:105 widgets/prettyimage.cpp:161
 #: widgets/widgetfadehelper.cpp:96 internet/vk/vkservice.cpp:513
 #: internet/vk/vksettingspage.cpp:125 ../bin/src/ui_addpodcastdialog.h:179
@@ -3133,6 +3150,10 @@ msgstr "Lakaat ar roll seniñ da vezañ lennus ezlinenn"
 msgid "Malformed response"
 msgstr "Respont furmed fall"
 
+#: ../bin/src/ui_libraryfilterwidget.h:102
+msgid "Manage saved groupings"
+msgstr ""
+
 #: ../bin/src/ui_networkproxysettingspage.h:159
 msgid "Manual proxy configuration"
 msgstr "Kefluniadur dornel ar proksi"
@@ -3260,7 +3281,7 @@ msgid "Move up"
 msgstr "A-us"
 
 #: transcoder/transcodedialog.cpp:225 ui/mainwindow.cpp:1955
-#: internet/vk/vkservice.cpp:906
+#: internet/vk/vkservice.cpp:908
 msgid "Music"
 msgstr "Sonerezh"
 
@@ -3273,11 +3294,11 @@ msgstr "Sonaoueg"
 msgid "Mute"
 msgstr "Mut"
 
-#: internet/vk/vkservice.cpp:838
+#: internet/vk/vkservice.cpp:840
 msgid "My Albums"
 msgstr "Va albomoù"
 
-#: internet/vk/vkservice.cpp:899
+#: internet/vk/vkservice.cpp:901
 msgid "My Music"
 msgstr "Ma Sonerezh"
 
@@ -3285,8 +3306,8 @@ msgstr "Ma Sonerezh"
 msgid "My Recommendations"
 msgstr "Ma erbedadennoù"
 
-#: ui/equalizer.cpp:205 ../bin/src/ui_deviceproperties.h:368
-#: ../bin/src/ui_wizardfinishpage.h:83
+#: library/savedgroupingmanager.cpp:35 ui/equalizer.cpp:205
+#: ../bin/src/ui_deviceproperties.h:368 ../bin/src/ui_wizardfinishpage.h:83
 msgid "Name"
 msgstr "Anv"
 
@@ -3392,8 +3413,8 @@ msgstr "N'eo bet kavet netra. Diverkañ ar boest enklask evit diskouez ar roll s
 msgid "No short blocks"
 msgstr "Bloc'h berr ebet"
 
-#: ../bin/src/ui_groupbydialog.h:127 ../bin/src/ui_groupbydialog.h:146
-#: ../bin/src/ui_groupbydialog.h:165
+#: library/savedgroupingmanager.cpp:59 ../bin/src/ui_groupbydialog.h:127
+#: ../bin/src/ui_groupbydialog.h:146 ../bin/src/ui_groupbydialog.h:165
 msgid "None"
 msgstr "Hini ebet"
 
@@ -3520,7 +3541,7 @@ msgstr "Diskouez an hini kentañ nemetken"
 msgid "Opacity"
 msgstr "Demerez"
 
-#: internet/digitally/digitallyimportedservicebase.cpp:177
+#: internet/digitally/digitallyimportedservicebase.cpp:170
 #: internet/icecast/icecastservice.cpp:298
 #: internet/jamendo/jamendoservice.cpp:427
 #: internet/magnatune/magnatuneservice.cpp:287
@@ -3616,14 +3637,14 @@ msgstr "Oc'h aozañ ar restroù"
 msgid "Original tags"
 msgstr "Klavioù orin"
 
-#: playlist/playlist.cpp:1327 ui/organisedialog.cpp:73
-#: ../bin/src/ui_groupbydialog.h:135 ../bin/src/ui_groupbydialog.h:154
-#: ../bin/src/ui_groupbydialog.h:173
+#: library/savedgroupingmanager.cpp:101 playlist/playlist.cpp:1327
+#: ui/organisedialog.cpp:73 ../bin/src/ui_groupbydialog.h:135
+#: ../bin/src/ui_groupbydialog.h:154 ../bin/src/ui_groupbydialog.h:173
 msgid "Original year"
 msgstr "Bloavezh orin"
 
-#: ../bin/src/ui_groupbydialog.h:137 ../bin/src/ui_groupbydialog.h:156
-#: ../bin/src/ui_groupbydialog.h:175
+#: library/savedgroupingmanager.cpp:98 ../bin/src/ui_groupbydialog.h:137
+#: ../bin/src/ui_groupbydialog.h:156 ../bin/src/ui_groupbydialog.h:175
 msgid "Original year - Album"
 msgstr "Bloavezh orin - albom"
 
@@ -3693,9 +3714,10 @@ msgstr "Ehan al lenn"
 msgid "Paused"
 msgstr "Ehanet"
 
-#: playlist/playlist.cpp:1335 ui/organisedialog.cpp:66
-#: ../bin/src/ui_groupbydialog.h:140 ../bin/src/ui_groupbydialog.h:159
-#: ../bin/src/ui_groupbydialog.h:178 ../bin/src/ui_edittagdialog.h:738
+#: library/savedgroupingmanager.cpp:86 playlist/playlist.cpp:1335
+#: ui/organisedialog.cpp:66 ../bin/src/ui_groupbydialog.h:140
+#: ../bin/src/ui_groupbydialog.h:159 ../bin/src/ui_groupbydialog.h:178
+#: ../bin/src/ui_edittagdialog.h:738
 msgid "Performer"
 msgstr "Soner"
 
@@ -4007,7 +4029,7 @@ msgstr "Hizivaat ar c'hanolioù"
 msgid "Refresh station list"
 msgstr "Hizivat listenn ar savlec'hioù"
 
-#: internet/digitally/digitallyimportedservicebase.cpp:180
+#: internet/digitally/digitallyimportedservicebase.cpp:173
 msgid "Refresh streams"
 msgstr "Hizivaat al lanvioù"
 
@@ -4032,7 +4054,8 @@ msgstr "Kaout soñj eus ar wech diwezhañ"
 msgid "Remember my choice"
 msgstr "Kaout soñj eus va dibab"
 
-#: internet/internetradio/savedradio.cpp:107 ../bin/src/ui_queuemanager.h:134
+#: internet/internetradio/savedradio.cpp:107
+#: ../bin/src/ui_savedgroupingmanager.h:103 ../bin/src/ui_queuemanager.h:134
 #: ../bin/src/ui_transcodedialog.h:223
 msgid "Remove"
 msgstr "Tennañ"
@@ -4223,6 +4246,10 @@ msgstr "Enrollañ golo an albom"
 msgid "Save cover to disk..."
 msgstr "Enrollan ar golo war ar bladenn..."
 
+#: ../bin/src/ui_libraryfilterwidget.h:101
+msgid "Save current grouping"
+msgstr ""
+
 #: widgets/prettyimage.cpp:178 widgets/prettyimage.cpp:223
 msgid "Save image"
 msgstr "Enrollañ ar skeudenn"
@@ -4256,6 +4283,10 @@ msgstr "Enrollañ ar stadegoù e klav ar restr pa 'z eo posupl"
 #: ../bin/src/ui_addstreamdialog.h:114
 msgid "Save this stream in the Internet tab"
 msgstr "Enrollañ al lanv-mañ en ivinell internet"
+
+#: ../bin/src/ui_savedgroupingmanager.h:101
+msgid "Saved Grouping Manager"
+msgstr ""
 
 #: library/library.cpp:194
 msgid "Saving songs statistics into songs files"
@@ -4349,6 +4380,10 @@ msgstr "Disoc'hoù an enklask"
 #: ../bin/src/ui_querysearchpage.h:119
 msgid "Search terms"
 msgstr "Gerioù enklask"
+
+#: library/savedgroupingmanager.cpp:37
+msgid "Second Level"
+msgstr ""
 
 #: ../bin/src/ui_groupbydialog.h:143
 msgid "Second level"
@@ -4462,7 +4497,7 @@ msgstr "Berradenn evit %1"
 msgid "Shortcut for %1 already exists"
 msgstr "Berradenn evit %1 a zo dija anezhañ"
 
-#: library/libraryfilterwidget.cpp:69
+#: library/libraryfilterwidget.cpp:70
 msgid "Show"
 msgstr "Diskouez"
 
@@ -4663,7 +4698,7 @@ msgstr "Barenn gostez bihan"
 msgid "Smart playlist"
 msgstr "Roll seniñ speredek"
 
-#: library/librarymodel.cpp:1349
+#: library/librarymodel.cpp:1362
 msgid "Smart playlists"
 msgstr "Rolloù seniñ speredek"
 
@@ -5016,6 +5051,10 @@ msgid ""
 "converting music before copying it to a device."
 msgstr "An arventennoù-se a zo implijet e \"Transkodañ ar sonerezh\", ha pa vez treuzkemmet sonerezh a-raok lakaat anezhi war un drobarzhell."
 
+#: library/savedgroupingmanager.cpp:38
+msgid "Third Level"
+msgstr ""
+
 #: ../bin/src/ui_groupbydialog.h:162
 msgid "Third level"
 msgstr "Trede live"
@@ -5204,11 +5243,12 @@ msgstr "Dibosupl kennaskañ"
 msgid "Unable to download %1 (%2)"
 msgstr "N'eus ket tu pellgargañ %1 (%2)"
 
-#: core/song.cpp:435 library/librarymodel.cpp:359 library/librarymodel.cpp:364
-#: library/librarymodel.cpp:368 library/librarymodel.cpp:1141
-#: playlist/playlistdelegates.cpp:305 playlist/playlistmanager.cpp:502
-#: playlist/playlistmanager.cpp:503 ui/albumcoverchoicecontroller.cpp:126
-#: ui/edittagdialog.cpp:455 ui/edittagdialog.cpp:499
+#: core/song.cpp:435 library/librarymodel.cpp:372 library/librarymodel.cpp:377
+#: library/librarymodel.cpp:381 library/librarymodel.cpp:1154
+#: library/savedgroupingmanager.cpp:103 playlist/playlistdelegates.cpp:305
+#: playlist/playlistmanager.cpp:502 playlist/playlistmanager.cpp:503
+#: ui/albumcoverchoicecontroller.cpp:126 ui/edittagdialog.cpp:455
+#: ui/edittagdialog.cpp:499
 msgid "Unknown"
 msgstr "Dianav"
 
@@ -5385,7 +5425,7 @@ msgstr "VBR MP3"
 msgid "Variable bit rate"
 msgstr "Fonnder kemmus"
 
-#: globalsearch/globalsearchmodel.cpp:107 library/librarymodel.cpp:285
+#: globalsearch/globalsearchmodel.cpp:107 library/librarymodel.cpp:298
 #: playlist/playlistmanager.cpp:514 ui/albumcovermanager.cpp:270
 msgid "Various artists"
 msgstr "Arzourien Liesseurt"
@@ -5437,7 +5477,7 @@ msgstr "WAV"
 msgid "WMA"
 msgstr "WMA"
 
-#: internet/vk/vkservice.cpp:880
+#: internet/vk/vkservice.cpp:882
 msgid "Wall"
 msgstr "Moger"
 
@@ -5559,15 +5599,16 @@ msgstr "Skrivañ ar meta-roadennoù"
 msgid "Wrong username or password."
 msgstr "Anv-implijer pe ger-tremen fall."
 
-#: playlist/playlist.cpp:1325 ui/organisedialog.cpp:72
-#: ../bin/src/ui_groupbydialog.h:134 ../bin/src/ui_groupbydialog.h:153
-#: ../bin/src/ui_groupbydialog.h:172 ../bin/src/ui_edittagdialog.h:735
-#: ../bin/src/ui_trackselectiondialog.h:211 ../bin/src/ui_ripcddialog.h:312
+#: library/savedgroupingmanager.cpp:71 playlist/playlist.cpp:1325
+#: ui/organisedialog.cpp:72 ../bin/src/ui_groupbydialog.h:134
+#: ../bin/src/ui_groupbydialog.h:153 ../bin/src/ui_groupbydialog.h:172
+#: ../bin/src/ui_edittagdialog.h:735 ../bin/src/ui_trackselectiondialog.h:211
+#: ../bin/src/ui_ripcddialog.h:312
 msgid "Year"
 msgstr "Bloaz"
 
-#: ../bin/src/ui_groupbydialog.h:136 ../bin/src/ui_groupbydialog.h:155
-#: ../bin/src/ui_groupbydialog.h:174
+#: library/savedgroupingmanager.cpp:68 ../bin/src/ui_groupbydialog.h:136
+#: ../bin/src/ui_groupbydialog.h:155 ../bin/src/ui_groupbydialog.h:174
 msgid "Year - Album"
 msgstr "Bloaz - Albom"
 
@@ -5611,12 +5652,6 @@ msgstr "Kennasket oc'h."
 #: ../bin/src/ui_groupbydialog.h:122
 msgid "You can change the way the songs in the library are organised."
 msgstr "Tu zo deoc'h kemman an doare ma vo renket an tonioù er sonaoueg."
-
-#: internet/digitally/digitallyimportedsettingspage.cpp:49
-msgid ""
-"You can listen for free without an account, but Premium members can listen "
-"to higher quality streams without advertisements."
-msgstr "Tu zo deoc'h selaou digoust hep kont, met an izili Premium a c'hell selaou gant ur berzhded uheloc'h hag hep bruderezh."
 
 #: internet/magnatune/magnatunesettingspage.cpp:59
 msgid ""
