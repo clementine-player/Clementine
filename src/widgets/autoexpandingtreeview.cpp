@@ -113,6 +113,20 @@ void AutoExpandingTreeView::mousePressEvent(QMouseEvent* event) {
   }
 }
 
+void AutoExpandingTreeView::mouseDoubleClickEvent(QMouseEvent* event) {
+  State p_state = state();
+  QModelIndex index = indexAt(event->pos());
+
+  QTreeView::mouseDoubleClickEvent(event);
+
+  // If the p_state was the "AnimatingState", then the base class's
+  // "mouseDoubleClickEvent" method just did nothing, hence the
+  // "doubleClicked" signal is not emitted. So let's do it ourselves.
+  if (index.isValid() && p_state == AnimatingState) {
+    emit doubleClicked(index);
+  }
+}
+
 void AutoExpandingTreeView::keyPressEvent(QKeyEvent* e) {
   switch (e->key()) {
     case Qt::Key_Enter:
