@@ -30,11 +30,10 @@ AutoExpandingTreeView::AutoExpandingTreeView(QWidget* parent)
       add_on_double_click_(true),
       ignore_next_click_(false) {
   setExpandsOnDoubleClick(false);
+  setAnimated(true);
 
   connect(this, SIGNAL(expanded(QModelIndex)), SLOT(ItemExpanded(QModelIndex)));
   connect(this, SIGNAL(clicked(QModelIndex)), SLOT(ItemClicked(QModelIndex)));
-  connect(this, SIGNAL(doubleClicked(QModelIndex)),
-          SLOT(ItemDoubleClicked(QModelIndex)));
 }
 
 void AutoExpandingTreeView::reset() {
@@ -96,6 +95,13 @@ void AutoExpandingTreeView::ItemDoubleClicked(const QModelIndex& index) {
   }
 }
 
+void AutoExpandingTreeView::mouseDoubleClickEvent(QMouseEvent* event) {
+  QTreeView::mouseDoubleClickEvent(event);
+
+  ItemDoubleClicked(indexAt(event->pos()));
+}
+
+
 void AutoExpandingTreeView::mousePressEvent(QMouseEvent* event) {
   if (event->modifiers() != Qt::NoModifier) {
     ignore_next_click_ = true;
@@ -117,7 +123,7 @@ void AutoExpandingTreeView::keyPressEvent(QKeyEvent* e) {
   switch (e->key()) {
     case Qt::Key_Enter:
     case Qt::Key_Return:
-      if (currentIndex().isValid()) emit doubleClicked(currentIndex());
+      if (currentIndex().isValid()) ItemDoubleClicked(currentIndex());
       e->accept();
       break;
 
@@ -125,6 +131,18 @@ void AutoExpandingTreeView::keyPressEvent(QKeyEvent* e) {
     case Qt::Key_Escape:
       emit FocusOnFilterSignal(e);
       e->accept();
+      break;
+
+    case Qt::Key_Left:
+      QModelIndex index = currentIndex();
+
+      // Set focus on the root of the current branch
+      if (index.isValid() && index.parent() != rootIndex() &&
+          (!isExpanded(index) || model()->rowCount(index) == 0)) {
+        setCurrentIndex(index.parent());
+        setFocus();
+        e->accept();
+      }
       break;
   }
 
