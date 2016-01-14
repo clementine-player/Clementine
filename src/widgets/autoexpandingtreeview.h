@@ -57,6 +57,7 @@ signals:
  private slots:
   void ItemExpanded(const QModelIndex& index);
   void ItemClicked(const QModelIndex& index);
+  void ItemDoubleClicked(const QModelIndex& index);
 
  private:
   bool RecursivelyExpand(const QModelIndex& index, int* count);
