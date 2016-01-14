@@ -413,7 +413,8 @@ void SpotifyService::PlaylistsUpdated(const pb::spotify::Playlists& response) {
     search_->setData(InternetModel::PlayBehaviour_MultipleItems,
                      InternetModel::Role_PlayBehaviour);
 
-    starred_ = new QStandardItem(QIcon(":/star-on.png"), tr("Starred"));
+    starred_ = new QStandardItem(IconLoader::Load("star-on", IconLoader::Other),
+                                 tr("Starred"));
     starred_->setData(Type_StarredPlaylist, InternetModel::Role_Type);
     starred_->setData(true, InternetModel::Role_CanLazyLoad);
     starred_->setData(InternetModel::PlayBehaviour_MultipleItems,
@@ -610,7 +611,8 @@ QList<QAction*> SpotifyService::playlistitem_actions(const Song& song) {
   }
 
   QAction* add_to_starred =
-      new QAction(QIcon(":/star-on.png"), tr("Add to Spotify starred"), this);
+      new QAction(IconLoader::Load("star-on", IconLoader::Other),
+                  tr("Add to Spotify starred"), this);
   connect(add_to_starred, SIGNAL(triggered()),
           SLOT(AddCurrentSongToStarredPlaylist()));
   playlistitem_actions_.append(add_to_starred);

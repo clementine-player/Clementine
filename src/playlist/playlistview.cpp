@@ -26,6 +26,7 @@
 #include "core/player.h"
 #include "covers/currentartloader.h"
 #include "ui/qt_blurimage.h"
+#include "ui/iconloader.h"
 
 #include <QCleanlooksStyle>
 #include <QClipboard>
@@ -127,8 +128,10 @@ PlaylistView::PlaylistView(QWidget* parent)
       inhibit_autoscroll_(false),
       currently_autoscrolling_(false),
       row_height_(-1),
-      currenttrack_play_(":currenttrack_play.png"),
-      currenttrack_pause_(":currenttrack_pause.png"),
+      currenttrack_play_(IconLoader::Load("currenttrack_play",
+                                          IconLoader::Other).pixmap(16)),
+      currenttrack_pause_(IconLoader::Load("currenttrack_pause",
+                                           IconLoader::Other).pixmap(16)),
       cached_current_row_row_(-1),
       drop_indicator_row_(-1),
       drag_over_(false),

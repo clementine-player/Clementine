@@ -173,7 +173,8 @@ LibraryView::LibraryView(QWidget* parent)
       app_(nullptr),
       filter_(nullptr),
       total_song_count_(-1),
-      nomusic_(":nomusic.png"),
+      nomusic_(IconLoader::Load("nocover",
+               IconLoader::Other).pixmap(300)),
       context_menu_(nullptr),
       is_in_keyboard_search_(false) {
   setItemDelegate(new LibraryItemDelegate(this));

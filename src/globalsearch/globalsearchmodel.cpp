@@ -33,8 +33,9 @@ GlobalSearchModel::GlobalSearchModel(GlobalSearch* engine, QObject* parent)
   group_by_[1] = LibraryModel::GroupBy_Album;
   group_by_[2] = LibraryModel::GroupBy_None;
 
-  no_cover_icon_ = QPixmap(":nocover.png").scaled(
-      LibraryModel::kPrettyCoverSize, LibraryModel::kPrettyCoverSize,
+  no_cover_icon_ = QPixmap(IconLoader::Load("nocover", IconLoader::Other)
+      .pixmap(300)).scaled(LibraryModel::kPrettyCoverSize, 
+      LibraryModel::kPrettyCoverSize,
       Qt::KeepAspectRatio, Qt::SmoothTransformation);
 }
 

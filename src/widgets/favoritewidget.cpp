@@ -25,6 +25,7 @@
 #include <QFontMetrics>
 
 #include "core/logging.h"
+#include "ui/iconloader.h"
 
 const int FavoriteWidget::kStarSize = 16;
 
@@ -32,8 +33,8 @@ FavoriteWidget::FavoriteWidget(int tab_index, bool favorite, QWidget* parent)
     : QWidget(parent),
       tab_index_(tab_index),
       favorite_(favorite),
-      on_(":/star-on.png"),
-      off_(":/star-off.png") {}
+      on_(IconLoader::Load("star-on", IconLoader::Other).pixmap(16)),
+      off_(IconLoader::Load("star-off", IconLoader::Other).pixmap(16)) {}
 
 void FavoriteWidget::SetFavorite(bool favorite) {
   if (favorite_ != favorite) {

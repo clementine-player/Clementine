@@ -224,11 +224,11 @@ void PlaylistContainer::SetViewModel(Playlist* playlist) {
 }
 
 void PlaylistContainer::ActivePlaying() {
-  UpdateActiveIcon(QIcon(":tiny-start.png"));
+  UpdateActiveIcon(IconLoader::Load("tiny-start", IconLoader::Other));
 }
 
 void PlaylistContainer::ActivePaused() {
-  UpdateActiveIcon(QIcon(":tiny-pause.png"));
+  UpdateActiveIcon(IconLoader::Load("tiny-pause", IconLoader::Other));
 }
 
 void PlaylistContainer::ActiveStopped() { UpdateActiveIcon(QIcon()); }

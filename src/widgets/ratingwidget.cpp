@@ -22,13 +22,15 @@
 #include <QStylePainter>
 #include <QtDebug>
 
+#include "ui/iconloader.h"
+
 const int RatingPainter::kStarCount;
 const int RatingPainter::kStarSize;
 
 RatingPainter::RatingPainter() {
   // Load the base pixmaps
-  QPixmap on(":/star-on.png");
-  QPixmap off(":/star-off.png");
+  QPixmap on(IconLoader::Load("star-on", IconLoader::Other).pixmap(16));
+  QPixmap off(IconLoader::Load("star-off", IconLoader::Other).pixmap(16));
 
   // Generate the 10 states, better to do it now than on the fly
   for (int i = 0; i < kStarCount * 2 + 1; ++i) {

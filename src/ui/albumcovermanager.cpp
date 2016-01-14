@@ -34,6 +34,7 @@
 #include "widgets/forcescrollperpixel.h"
 #include "ui/albumcoverchoicecontroller.h"
 #include "ui/albumcoverexport.h"
+#include "ui/iconloader.h"
 
 #include <QActionGroup>
 #include <QPushButton>
@@ -88,7 +89,8 @@ AlbumCoverManager::AlbumCoverManager(Application* app,
   album_cover_choice_controller_->SetApplication(app_);
 
   // Get a square version of nocover.png
-  QImage nocover(":/nocover.png");
+  QImage nocover(IconLoader::Load("nocover", IconLoader::Other).pixmap(300)
+                 .toImage());
   nocover =
       nocover.scaled(120, 120, Qt::KeepAspectRatio, Qt::SmoothTransformation);
   QImage square_nocover(120, 120, QImage::Format_ARGB32);
@@ -599,7 +601,8 @@ void AlbumCoverManager::SaveCoverToFile() {
 
   // load the image from disk
   if (song.has_manually_unset_cover()) {
-    image = QImage(":/nocover.png");
+    image = IconLoader::Load("nocover", IconLoader::Other).pixmap(300)
+                   .toImage();
   } else {
     if (!song.art_manual().isEmpty() && QFile::exists(song.art_manual())) {
       image = QImage(song.art_manual());
@@ -607,7 +610,8 @@ void AlbumCoverManager::SaveCoverToFile() {
                QFile::exists(song.art_automatic())) {
       image = QImage(song.art_automatic());
     } else {
-      image = QImage(":/nocover.png");
+      image = IconLoader::Load("nocover", IconLoader::Other).pixmap(300)
+                     .toImage();
     }
   }
 
