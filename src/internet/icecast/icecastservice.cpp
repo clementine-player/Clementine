@@ -58,7 +58,6 @@ IcecastService::IcecastService(Application* app, InternetModel* parent)
     : InternetService(kServiceName, app, parent, parent),
       network_(new NetworkAccessManager(this)),
       context_menu_(nullptr),
-      channel_context_menu_(nullptr),
       backend_(nullptr),
       model_(nullptr),
       filter_(new IcecastFilterWidget(0)) {
