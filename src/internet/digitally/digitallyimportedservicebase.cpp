@@ -185,22 +185,7 @@ void DigitallyImportedServiceBase::EnsureMenuCreated() {
     context_menu_->addAction(IconLoader::Load("configure", IconLoader::Base),
                              tr("Configure..."), this,
                              SLOT(ShowSettingsDialog()));
-
-    channel_context_menu_.reset(new QMenu);
-    channel_context_menu_->addActions(GetPlaylistActions());
-    channel_context_menu_->addAction(IconLoader::Load("download", IconLoader::Base),
-                             tr("Open %1 in browser").arg(homepage_url_.host()),
-                             this, SLOT(Homepage()));
-    channel_context_menu_->addAction(IconLoader::Load("view-refresh", IconLoader::Base),
-                             tr("Refresh streams"), this,
-                             SLOT(ForceRefreshStreams()));
-    channel_context_menu_->addSeparator();
-    channel_context_menu_->addAction(IconLoader::Load("configure", IconLoader::Base),
-                             tr("Configure..."), this,
-                             SLOT(ShowSettingsDialog()));
-    channel_context_menu_->addAction(IconLoader::Load("edit-copy", IconLoader::Base),
-                                     tr("Copy channel URL to clipboard"),
-                                     this, SLOT(GetSelectedChannelUrl()));
+    context_menu_->addAction(GetCopySelectedPlayableItemURLAction());
   }
 }
 
@@ -213,21 +198,31 @@ void DigitallyImportedServiceBase::ShowContextMenu(const QPoint& global_pos) {
 
     // Digitally Imported streams have a Role_Type of 0.
     if (type == 0) {
-      selected_song_url_ = item->data(InternetModel::Role_Url).toUrl();
+      selected_playable_item_url_ = item->data(InternetModel::Role_Url).toUrl();
       qLog(Debug) << "Selected channel URL: " << item->data(InternetModel::Role_Url).toString();
 
-      channel_context_menu_->popup(global_pos);
-      return;
+      GetAppendToPlaylistAction()->setEnabled(true);
+      GetReplacePlaylistAction()->setEnabled(true);
+      GetOpenInNewPlaylistAction()->setEnabled(true);
+      GetCopySelectedPlayableItemURLAction()->setEnabled(true);
+    }
+    else
+    {
+      GetAppendToPlaylistAction()->setEnabled(false);
+      GetReplacePlaylistAction()->setEnabled(false);
+      GetOpenInNewPlaylistAction()->setEnabled(false);
+      GetCopySelectedPlayableItemURLAction()->setEnabled(false);
     }
   }
 
   context_menu_->popup(global_pos);
 }
 
-void DigitallyImportedServiceBase::GetSelectedChannelUrl() const {
-  QString url = selected_song_url_.toEncoded();
+void DigitallyImportedServiceBase::CopySelectedPlayableItemURL() const {
+  if (selected_playable_item_url_.isEmpty()) return;
+
+  QString url = selected_playable_item_url_.toEncoded();
   QString new_url = homepage_url().toString();
-  QString box_title;
 
   // Get the raw name of the stream with preceding slash.
   url.remove(QRegExp("[a-z]*:/"));
@@ -240,17 +235,7 @@ void DigitallyImportedServiceBase::GetSelectedChannelUrl() const {
 
   qLog(Debug) << "Processed " << name() << " channel URL: " << new_url;
 
-  // Use literals for translation of the box title.
-  if (name() == "Digitally Imported")
-    box_title = tr("Digitally Imported channel's URL");
-  else if (name() == "RadioTunes")
-    box_title = tr("RadioTunes channel's URL");
-  else if (name() == "RockRadio")
-    box_title = tr("RockRadio channel's URL");
-  else if (name() == "JazzRadio")
-    box_title = tr("JazzRadio channel's URL");
-
-  InternetService::ShowUrlBox(box_title, new_url);
+  DigitallyImportedServiceBase::ShowUrlBox("Copy URL", new_url);
 }
 
 bool DigitallyImportedServiceBase::is_premium_account() const {

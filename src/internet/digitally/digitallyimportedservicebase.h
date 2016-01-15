@@ -78,7 +78,7 @@ signals:
   void ForceRefreshStreams();
   void RefreshStreams();
   void RefreshStreamsFinished(QNetworkReply* reply, int task_id);
-  void GetSelectedChannelUrl() const;
+  void CopySelectedPlayableItemURL() const;
 
  private:
   void PopulateStreams();
@@ -107,7 +107,6 @@ signals:
   QStandardItem* root_;
 
   std::unique_ptr<QMenu> context_menu_;
-  std::unique_ptr<QMenu> channel_context_menu_;
   QStandardItem* context_item_;
 
   CachedList<DigitallyImportedClient::Channel> saved_channels_;
