@@ -98,7 +98,6 @@ class InternetService : public QObject {
   void AppendToPlaylist();
   void ReplacePlaylist();
   void OpenInNewPlaylist();
-  virtual void CopySelectedPlayableItemURL() const;
 
  protected:
   // Returns all the playlist insertion related QActions (see below).
@@ -127,6 +126,9 @@ class InternetService : public QObject {
   void AddItemToPlaylist(const QModelIndex& index, AddMode add_mode);
   // Adds the 'indexes' elements to playlist using the 'add_mode' mode.
   void AddItemsToPlaylist(const QModelIndexList& indexes, AddMode add_mode);
+
+  // Copy the URL for the currently playing item.
+  virtual void CopySelectedPlayableItemURL() const;
 
   // Convenient function for creating a item representing a song.
   // Set some common properties (type=track, url, etc.)
