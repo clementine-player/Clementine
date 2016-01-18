@@ -9,6 +9,7 @@
 # xaojan <cxiaojian@gmail.com>, 2012
 # davidsansome <me@davidsansome.com>, 2010,2014
 # mabier <ma_120420@msn.com>, 2014
+# Tong Hui <tonghuix@gmail.com>, 2016
 # walking <waling@mail.i2p>, 2013
 # xaojan <cxiaojian@gmail.com>, 2012
 # Xinkai Chen <yeled.nova@gmail.com>, 2012
@@ -19,8 +20,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2016-01-11 15:35+0000\n"
-"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
+"PO-Revision-Date: 2016-01-18 09:35+0000\n"
+"Last-Translator: Tong Hui <tonghuix@gmail.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/davidsansome/clementine/language/zh_CN/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -363,7 +364,7 @@ msgstr "只有在输入正确代码后，客户端才能连接。"
 #: internet/digitally/digitallyimportedsettingspage.cpp:48
 #: internet/digitally/digitallyimportedurlhandler.cpp:60
 msgid "A premium account is required"
-msgstr ""
+msgstr "需要高级账号"
 
 #: smartplaylists/wizard.cpp:74
 msgid ""
@@ -1376,6 +1377,10 @@ msgstr "配置 Magnatune..."
 msgid "Configure Shortcuts"
 msgstr "配置快捷键"
 
+#: internet/soundcloud/soundcloudservice.cpp:357
+msgid "Configure SoundCloud..."
+msgstr "配置 SoundCloud..."
+
 #: internet/spotify/spotifyservice.cpp:919
 msgid "Configure Spotify..."
 msgstr "配置Spotify..."
@@ -1402,7 +1407,7 @@ msgid "Configure podcasts..."
 msgstr "正在设置播客..."
 
 #: internet/core/cloudfileservice.cpp:107
-#: internet/digitally/digitallyimportedservicebase.cpp:177
+#: internet/digitally/digitallyimportedservicebase.cpp:182
 #: internet/googledrive/googledriveservice.cpp:231
 #: ../bin/src/ui_globalsearchsettingspage.h:146
 msgid "Configure..."
@@ -1600,7 +1605,7 @@ msgid ""
 "Database corruption detected. Please read https://github.com/clementine-"
 "player/Clementine/wiki/Database-Corruption for instructions on how to "
 "recover your database"
-msgstr ""
+msgstr "检测到数据库损坏。恢复数据库的方法请参考 https://github.com/clementine-player/Clementine/wiki/Database-Corruption "
 
 #: playlist/playlist.cpp:1367 ../bin/src/ui_edittagdialog.h:727
 msgid "Date created"
@@ -2134,7 +2139,7 @@ msgstr "下载Spotify插件出错"
 msgid "Error loading %1"
 msgstr "载入 %1 出错"
 
-#: internet/digitally/digitallyimportedservicebase.cpp:195
+#: internet/digitally/digitallyimportedservicebase.cpp:200
 #: internet/digitally/digitallyimportedurlhandler.cpp:96
 msgid "Error loading di.fm playlist"
 msgstr "读取di.fm播放列表错误"
@@ -2273,7 +2278,7 @@ msgstr "无法解析此 RSS 种子的XML"
 #: ui/trackselectiondialog.cpp:247
 #, qt-format
 msgid "Failed to write new auto-tags to '%1'"
-msgstr ""
+msgstr "写入新自动标签 ‘%1’ 失败"
 
 #: ../bin/src/ui_transcoderoptionsflac.h:81
 #: ../bin/src/ui_transcoderoptionsmp3.h:199
@@ -2298,7 +2303,7 @@ msgstr "读取完毕"
 
 #: internet/subsonic/subsonicdynamicplaylist.cpp:88
 msgid "Fetching Playlist Items"
-msgstr ""
+msgstr "正在获取播放列表项"
 
 #: internet/subsonic/subsonicservice.cpp:282
 msgid "Fetching Subsonic library"
@@ -2448,7 +2453,7 @@ msgstr "每次缓冲帧数"
 
 #: internet/subsonic/subsonicservice.cpp:106
 msgid "Frequently Played"
-msgstr ""
+msgstr "最常播放"
 
 #: moodbar/moodbarrenderer.cpp:173
 msgid "Frozen"
@@ -2569,11 +2574,11 @@ msgstr "分组"
 
 #: library/libraryfilterwidget.cpp:207
 msgid "Grouping Name"
-msgstr ""
+msgstr "分组名称"
 
 #: library/libraryfilterwidget.cpp:207
 msgid "Grouping name:"
-msgstr ""
+msgstr "分组名称:"
 
 #: internet/podcasts/podcasturlloader.cpp:206
 msgid "HTML page did not contain any RSS feeds"
@@ -3158,7 +3163,7 @@ msgstr "无效的响应"
 
 #: ../bin/src/ui_libraryfilterwidget.h:102
 msgid "Manage saved groupings"
-msgstr ""
+msgstr "管理已保存的分组"
 
 #: ../bin/src/ui_networkproxysettingspage.h:159
 msgid "Manual proxy configuration"
@@ -3375,7 +3380,7 @@ msgstr "新曲目会被自动添加。"
 
 #: internet/subsonic/subsonicservice.cpp:100
 msgid "Newest"
-msgstr ""
+msgstr "最新"
 
 #: library/library.cpp:92
 msgid "Newest tracks"
@@ -3547,7 +3552,7 @@ msgstr "只显示第一个"
 msgid "Opacity"
 msgstr "不透明度"
 
-#: internet/digitally/digitallyimportedservicebase.cpp:170
+#: internet/digitally/digitallyimportedservicebase.cpp:175
 #: internet/icecast/icecastservice.cpp:298
 #: internet/jamendo/jamendoservice.cpp:427
 #: internet/magnatune/magnatuneservice.cpp:287
@@ -3974,7 +3979,7 @@ msgstr "雨"
 
 #: internet/subsonic/subsonicservice.cpp:103
 msgid "Random"
-msgstr ""
+msgstr "随机"
 
 #: ../bin/src/ui_visualisationselector.h:111
 msgid "Random visualization"
@@ -4015,7 +4020,7 @@ msgstr "确实取消？"
 
 #: internet/subsonic/subsonicservice.cpp:112
 msgid "Recently Played"
-msgstr ""
+msgstr "最近播放"
 
 #: internet/subsonic/subsonicsettingspage.cpp:158
 msgid "Redirect limit exceeded, verify server configuration."
@@ -4035,7 +4040,7 @@ msgstr "刷新频道"
 msgid "Refresh station list"
 msgstr "刷新电台列表"
 
-#: internet/digitally/digitallyimportedservicebase.cpp:173
+#: internet/digitally/digitallyimportedservicebase.cpp:178
 msgid "Refresh streams"
 msgstr "刷新流"
 
@@ -4254,7 +4259,7 @@ msgstr "保存封面至硬盘..."
 
 #: ../bin/src/ui_libraryfilterwidget.h:101
 msgid "Save current grouping"
-msgstr ""
+msgstr "保存当前分组"
 
 #: widgets/prettyimage.cpp:178 widgets/prettyimage.cpp:223
 msgid "Save image"
@@ -4292,7 +4297,7 @@ msgstr "在网络标签中收藏此媒体流"
 
 #: ../bin/src/ui_savedgroupingmanager.h:101
 msgid "Saved Grouping Manager"
-msgstr ""
+msgstr "已保存的分组管理器"
 
 #: library/library.cpp:194
 msgid "Saving songs statistics into songs files"
@@ -4389,7 +4394,7 @@ msgstr "搜索条目"
 
 #: library/savedgroupingmanager.cpp:37
 msgid "Second Level"
-msgstr ""
+msgstr "第二等级"
 
 #: ../bin/src/ui_groupbydialog.h:143
 msgid "Second level"
@@ -5059,7 +5064,7 @@ msgstr "这些设置将用于“音乐转码”对话框，及向设备中复制
 
 #: library/savedgroupingmanager.cpp:38
 msgid "Third Level"
-msgstr ""
+msgstr "第三等级"
 
 #: ../bin/src/ui_groupbydialog.h:162
 msgid "Third level"
@@ -5166,7 +5171,7 @@ msgstr "太多的重定向"
 
 #: internet/subsonic/subsonicservice.cpp:109
 msgid "Top Rated"
-msgstr ""
+msgstr "最佳"
 
 #: internet/spotify/spotifyservice.cpp:430
 msgid "Top tracks"

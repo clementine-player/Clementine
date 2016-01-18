@@ -12,8 +12,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2016-01-11 15:35+0000\n"
-"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
+"PO-Revision-Date: 2016-01-14 07:59+0000\n"
+"Last-Translator: Jiri Grönroos <jiri.gronroos@iki.fi>\n"
 "Language-Team: Finnish (http://www.transifex.com/davidsansome/clementine/language/fi/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -356,7 +356,7 @@ msgstr "Asiakas voi yhdistää vain oikealla koodilla."
 #: internet/digitally/digitallyimportedsettingspage.cpp:48
 #: internet/digitally/digitallyimportedurlhandler.cpp:60
 msgid "A premium account is required"
-msgstr ""
+msgstr "Premium-tili vaaditaan"
 
 #: smartplaylists/wizard.cpp:74
 msgid ""
@@ -1369,6 +1369,10 @@ msgstr "Magnatune-asetukset..."
 msgid "Configure Shortcuts"
 msgstr "Pikanäppäinten asetukset"
 
+#: internet/soundcloud/soundcloudservice.cpp:357
+msgid "Configure SoundCloud..."
+msgstr "Määritä SoundCloudin asetukset..."
+
 #: internet/spotify/spotifyservice.cpp:919
 msgid "Configure Spotify..."
 msgstr "Muokkaa Spotifya..."
@@ -1395,7 +1399,7 @@ msgid "Configure podcasts..."
 msgstr "Muokkaa podcasteja..."
 
 #: internet/core/cloudfileservice.cpp:107
-#: internet/digitally/digitallyimportedservicebase.cpp:177
+#: internet/digitally/digitallyimportedservicebase.cpp:182
 #: internet/googledrive/googledriveservice.cpp:231
 #: ../bin/src/ui_globalsearchsettingspage.h:146
 msgid "Configure..."
@@ -2127,7 +2131,7 @@ msgstr "Virhe ladatessa Spotify-liitännäistä"
 msgid "Error loading %1"
 msgstr "Virhe ladattaessa %1"
 
-#: internet/digitally/digitallyimportedservicebase.cpp:195
+#: internet/digitally/digitallyimportedservicebase.cpp:200
 #: internet/digitally/digitallyimportedurlhandler.cpp:96
 msgid "Error loading di.fm playlist"
 msgstr "Virhe ladattaessa di.fm soittolistaa"
@@ -3540,7 +3544,7 @@ msgstr "Näytä vain ensimmäinen"
 msgid "Opacity"
 msgstr "Läpinäkyvyys"
 
-#: internet/digitally/digitallyimportedservicebase.cpp:170
+#: internet/digitally/digitallyimportedservicebase.cpp:175
 #: internet/icecast/icecastservice.cpp:298
 #: internet/jamendo/jamendoservice.cpp:427
 #: internet/magnatune/magnatuneservice.cpp:287
@@ -4028,7 +4032,7 @@ msgstr "Päivitä kanavat"
 msgid "Refresh station list"
 msgstr "Päivitä asemalista"
 
-#: internet/digitally/digitallyimportedservicebase.cpp:173
+#: internet/digitally/digitallyimportedservicebase.cpp:178
 msgid "Refresh streams"
 msgstr "Päivitä suoratoistokanavat"
 
@@ -5052,7 +5056,7 @@ msgstr "Nämä asetukset ovat käytössä \"Muunna eri muotoon\"-ikkunassa, ja m
 
 #: library/savedgroupingmanager.cpp:38
 msgid "Third Level"
-msgstr ""
+msgstr "Kolmas taso"
 
 #: ../bin/src/ui_groupbydialog.h:162
 msgid "Third level"

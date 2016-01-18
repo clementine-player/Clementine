@@ -8,13 +8,13 @@
 # Gwenn M <tornoz@laposte.net>, 2013
 # Gwenn M <tornoz@laposte.net>, 2011-2012
 # Gwenn M <tornoz@laposte.net>, 2015
-# Gwenn M <tornoz@laposte.net>, 2015
+# Gwenn M <tornoz@laposte.net>, 2015-2016
 # Gwenn M <tornoz@laposte.net>, 2014-2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2016-01-11 15:35+0000\n"
-"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
+"PO-Revision-Date: 2016-01-17 16:06+0000\n"
+"Last-Translator: Gwenn M <tornoz@laposte.net>\n"
 "Language-Team: Breton (http://www.transifex.com/davidsansome/clementine/language/br/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -207,7 +207,7 @@ msgstr "&Kleiz"
 
 #: playlist/playlistheader.cpp:36
 msgid "&Lock Rating"
-msgstr ""
+msgstr "Notenn &prennañ"
 
 #: ../bin/src/ui_mainwindow.h:715
 msgid "&Music"
@@ -357,7 +357,7 @@ msgstr "Un arval ne c'hell kennaskañ nemet m'eo bet lakaet ar c'hod mat."
 #: internet/digitally/digitallyimportedsettingspage.cpp:48
 #: internet/digitally/digitallyimportedurlhandler.cpp:60
 msgid "A premium account is required"
-msgstr ""
+msgstr "Ur gont premium a zo azgoulennet"
 
 #: smartplaylists/wizard.cpp:74
 msgid ""
@@ -1370,6 +1370,10 @@ msgstr "KefluniañMagnatune..."
 msgid "Configure Shortcuts"
 msgstr "Kefluniañ ar Berradennoù"
 
+#: internet/soundcloud/soundcloudservice.cpp:357
+msgid "Configure SoundCloud..."
+msgstr "Kefluniañ SoundCloud..."
+
 #: internet/spotify/spotifyservice.cpp:919
 msgid "Configure Spotify..."
 msgstr "Kefluniañ Spotify"
@@ -1396,7 +1400,7 @@ msgid "Configure podcasts..."
 msgstr "Kefluniañ ar podkastoù"
 
 #: internet/core/cloudfileservice.cpp:107
-#: internet/digitally/digitallyimportedservicebase.cpp:177
+#: internet/digitally/digitallyimportedservicebase.cpp:182
 #: internet/googledrive/googledriveservice.cpp:231
 #: ../bin/src/ui_globalsearchsettingspage.h:146
 msgid "Configure..."
@@ -1594,7 +1598,7 @@ msgid ""
 "Database corruption detected. Please read https://github.com/clementine-"
 "player/Clementine/wiki/Database-Corruption for instructions on how to "
 "recover your database"
-msgstr ""
+msgstr "Stlennvon kontronet dinoet. Lennit https://github.com/clementine-player/Clementine/wiki/Database-Corruption evit kaout titouroù a-benn atoriñ ho stlennvon"
 
 #: playlist/playlist.cpp:1367 ../bin/src/ui_edittagdialog.h:727
 msgid "Date created"
@@ -2128,7 +2132,7 @@ msgstr "Ur gudenn a zo savet o pellgargañ enlugellad Spotify"
 msgid "Error loading %1"
 msgstr "Ur gudenn a zo savet e-pad kargadur %1"
 
-#: internet/digitally/digitallyimportedservicebase.cpp:195
+#: internet/digitally/digitallyimportedservicebase.cpp:200
 #: internet/digitally/digitallyimportedurlhandler.cpp:96
 msgid "Error loading di.fm playlist"
 msgstr "Kudenn o kargañ roll seniñ di.fm"
@@ -2267,7 +2271,7 @@ msgstr "C'hwitet eo bet o lenn al lanv RSS"
 #: ui/trackselectiondialog.cpp:247
 #, qt-format
 msgid "Failed to write new auto-tags to '%1'"
-msgstr ""
+msgstr "C'hwitadenn war skrivañ klavioù emgefreek nevez da '%1'"
 
 #: ../bin/src/ui_transcoderoptionsflac.h:81
 #: ../bin/src/ui_transcoderoptionsmp3.h:199
@@ -2292,7 +2296,7 @@ msgstr "Pellgargadur echu"
 
 #: internet/subsonic/subsonicdynamicplaylist.cpp:88
 msgid "Fetching Playlist Items"
-msgstr ""
+msgstr "O kerc'hat elfennoù ar roll seniñ"
 
 #: internet/subsonic/subsonicservice.cpp:282
 msgid "Fetching Subsonic library"
@@ -2442,7 +2446,7 @@ msgstr "Skeudennoù dre buffer"
 
 #: internet/subsonic/subsonicservice.cpp:106
 msgid "Frequently Played"
-msgstr ""
+msgstr "Sonet alies"
 
 #: moodbar/moodbarrenderer.cpp:173
 msgid "Frozen"
@@ -2563,11 +2567,11 @@ msgstr "Strolladenn"
 
 #: library/libraryfilterwidget.cpp:207
 msgid "Grouping Name"
-msgstr ""
+msgstr "Anv strolladiñ"
 
 #: library/libraryfilterwidget.cpp:207
 msgid "Grouping name:"
-msgstr ""
+msgstr "Anv strolladiñ :"
 
 #: internet/podcasts/podcasturlloader.cpp:206
 msgid "HTML page did not contain any RSS feeds"
@@ -3152,7 +3156,7 @@ msgstr "Respont furmed fall"
 
 #: ../bin/src/ui_libraryfilterwidget.h:102
 msgid "Manage saved groupings"
-msgstr ""
+msgstr "Merañ ar strolladoù enrollet"
 
 #: ../bin/src/ui_networkproxysettingspage.h:159
 msgid "Manual proxy configuration"
@@ -3369,7 +3373,7 @@ msgstr "Ar roudoù nevez a vo ouzhpennet ent emgefreek."
 
 #: internet/subsonic/subsonicservice.cpp:100
 msgid "Newest"
-msgstr ""
+msgstr "Nevesañ"
 
 #: library/library.cpp:92
 msgid "Newest tracks"
@@ -3541,7 +3545,7 @@ msgstr "Diskouez an hini kentañ nemetken"
 msgid "Opacity"
 msgstr "Demerez"
 
-#: internet/digitally/digitallyimportedservicebase.cpp:170
+#: internet/digitally/digitallyimportedservicebase.cpp:175
 #: internet/icecast/icecastservice.cpp:298
 #: internet/jamendo/jamendoservice.cpp:427
 #: internet/magnatune/magnatuneservice.cpp:287
@@ -3968,7 +3972,7 @@ msgstr "Glav"
 
 #: internet/subsonic/subsonicservice.cpp:103
 msgid "Random"
-msgstr ""
+msgstr "Dargouezhek"
 
 #: ../bin/src/ui_visualisationselector.h:111
 msgid "Random visualization"
@@ -4009,7 +4013,7 @@ msgstr "Sur oc'h da gaout c'hoant da nullañ"
 
 #: internet/subsonic/subsonicservice.cpp:112
 msgid "Recently Played"
-msgstr ""
+msgstr "Sonet nevez 'zo"
 
 #: internet/subsonic/subsonicsettingspage.cpp:158
 msgid "Redirect limit exceeded, verify server configuration."
@@ -4029,7 +4033,7 @@ msgstr "Hizivaat ar c'hanolioù"
 msgid "Refresh station list"
 msgstr "Hizivat listenn ar savlec'hioù"
 
-#: internet/digitally/digitallyimportedservicebase.cpp:173
+#: internet/digitally/digitallyimportedservicebase.cpp:178
 msgid "Refresh streams"
 msgstr "Hizivaat al lanvioù"
 
@@ -4248,7 +4252,7 @@ msgstr "Enrollan ar golo war ar bladenn..."
 
 #: ../bin/src/ui_libraryfilterwidget.h:101
 msgid "Save current grouping"
-msgstr ""
+msgstr "Enrollañ ar strollad bremanel"
 
 #: widgets/prettyimage.cpp:178 widgets/prettyimage.cpp:223
 msgid "Save image"
@@ -4286,7 +4290,7 @@ msgstr "Enrollañ al lanv-mañ en ivinell internet"
 
 #: ../bin/src/ui_savedgroupingmanager.h:101
 msgid "Saved Grouping Manager"
-msgstr ""
+msgstr "Merour strolladoù enrollet"
 
 #: library/library.cpp:194
 msgid "Saving songs statistics into songs files"
@@ -4383,7 +4387,7 @@ msgstr "Gerioù enklask"
 
 #: library/savedgroupingmanager.cpp:37
 msgid "Second Level"
-msgstr ""
+msgstr "Eil live"
 
 #: ../bin/src/ui_groupbydialog.h:143
 msgid "Second level"
@@ -4407,7 +4411,7 @@ msgstr "Klask ar roud lennet gant ul lec'hiadur absolud"
 
 #: ../bin/src/ui_behavioursettingspage.h:357
 msgid "Seeking using a keyboard shortcut or mouse wheel"
-msgstr ""
+msgstr "Klask gant berradennoù klavier pe rod al logodenn"
 
 #: visualisations/visualisationselector.cpp:37 ../bin/src/ui_ripcddialog.h:309
 msgid "Select All"
@@ -5053,7 +5057,7 @@ msgstr "An arventennoù-se a zo implijet e \"Transkodañ ar sonerezh\", ha pa ve
 
 #: library/savedgroupingmanager.cpp:38
 msgid "Third Level"
-msgstr ""
+msgstr "Trede live"
 
 #: ../bin/src/ui_groupbydialog.h:162
 msgid "Third level"
@@ -5160,7 +5164,7 @@ msgstr "Bet adkaset re a wech "
 
 #: internet/subsonic/subsonicservice.cpp:109
 msgid "Top Rated"
-msgstr ""
+msgstr "Notennet ar gwellañ"
 
 #: internet/spotify/spotifyservice.cpp:430
 msgid "Top tracks"

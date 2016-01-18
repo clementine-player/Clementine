@@ -12,8 +12,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2016-01-13 11:27+0000\n"
-"Last-Translator: Uģis <ugga@inbox.lv>\n"
+"PO-Revision-Date: 2016-01-13 23:28+0000\n"
+"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Latvian (http://www.transifex.com/davidsansome/clementine/language/lv/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -71,7 +71,7 @@ msgstr " dziesmas"
 #: internet/vk/vkservice.cpp:149
 #, qt-format
 msgid "%1 (%2 songs)"
-msgstr ""
+msgstr "%1 (%2 dziesmas)"
 
 #: widgets/osd.cpp:195
 #, qt-format
@@ -963,7 +963,7 @@ msgstr "Balanss"
 
 #: core/globalshortcuts.cpp:80
 msgid "Ban (Last.fm scrobbling)"
-msgstr ""
+msgstr "Bloķēt (Last.fm skroblēšanu)"
 
 #: analyzers/baranalyzer.cpp:34
 msgid "Bar analyzer"
@@ -1007,7 +1007,7 @@ msgstr "Bitreits"
 #: ui/organisedialog.cpp:77
 msgctxt "Refers to bitrate in file organise dialog."
 msgid "Bitrate"
-msgstr ""
+msgstr "Bitreits"
 
 #: analyzers/blockanalyzer.cpp:44
 msgid "Block analyzer"
@@ -1146,7 +1146,7 @@ msgstr "Pārbaudīt atjauninājumus..."
 
 #: internet/vk/vksettingspage.cpp:101
 msgid "Choose Vk.com cache directory"
-msgstr ""
+msgstr "Izvēlies Vk.com keša direktoriju"
 
 #: smartplaylists/wizard.cpp:84
 msgid "Choose a name for your smart playlist"
@@ -1369,6 +1369,10 @@ msgstr "Konfigurēt Magnatune"
 msgid "Configure Shortcuts"
 msgstr "Konfigurēt īsceļus"
 
+#: internet/soundcloud/soundcloudservice.cpp:357
+msgid "Configure SoundCloud..."
+msgstr ""
+
 #: internet/spotify/spotifyservice.cpp:919
 msgid "Configure Spotify..."
 msgstr "Konfigurēt Spotify..."
@@ -1395,7 +1399,7 @@ msgid "Configure podcasts..."
 msgstr "Konfigurēt podraides..."
 
 #: internet/core/cloudfileservice.cpp:107
-#: internet/digitally/digitallyimportedservicebase.cpp:177
+#: internet/digitally/digitallyimportedservicebase.cpp:182
 #: internet/googledrive/googledriveservice.cpp:231
 #: ../bin/src/ui_globalsearchsettingspage.h:146
 msgid "Configure..."
@@ -1542,7 +1546,7 @@ msgstr "Vāka attēls uzstādīts no %1"
 #: covers/coversearchstatisticsdialog.cpp:59 ui/albumcoversearcher.cpp:100
 #, qt-format
 msgid "Covers from %1"
-msgstr ""
+msgstr "Vāciņi no %1"
 
 #: ../bin/src/ui_playbacksettingspage.h:344
 msgid "Cross-fade when changing tracks automatically"
@@ -1760,12 +1764,12 @@ msgstr ""
 #: ../bin/src/ui_notificationssettingspage.h:438
 msgctxt "Refers to a disabled notification type in Notification settings."
 msgid "Disabled"
-msgstr ""
+msgstr "Atslēgts"
 
 #: globalsearch/searchproviderstatuswidget.cpp:46
 msgctxt "Refers to search provider's status."
 msgid "Disabled"
-msgstr ""
+msgstr "Atslēgts"
 
 #: library/savedgroupingmanager.cpp:95 playlist/playlist.cpp:1323
 #: ui/organisedialog.cpp:70 ../bin/src/ui_groupbydialog.h:139
@@ -1795,11 +1799,11 @@ msgstr "Veikt pilnu bibliotēkas skenēšanu"
 #: internet/googledrive/googledriveservice.cpp:270
 #: internet/googledrive/googledriveservice.cpp:276
 msgid "Do a full rescan"
-msgstr ""
+msgstr "Veikt pilnu atkārtotu skenēšanu"
 
 #: internet/googledrive/googledriveservice.cpp:225
 msgid "Do a full rescan..."
-msgstr ""
+msgstr "Veikt pilnu atkārtotu skenēšanu..."
 
 #: ../bin/src/ui_deviceproperties.h:376
 msgid "Do not convert any music"
@@ -1807,7 +1811,7 @@ msgstr "Nekonvertēt mūziku"
 
 #: ../bin/src/ui_albumcoverexport.h:208
 msgid "Do not overwrite"
-msgstr ""
+msgstr "Nepārrakstīt"
 
 #: internet/googledrive/googledriveservice.cpp:271
 msgid ""
@@ -1878,7 +1882,7 @@ msgstr "Automātiski lejuplādēt jaunās sērijas"
 #: internet/podcasts/podcastservice.cpp:293
 #: internet/podcasts/podcastservice.cpp:332
 msgid "Download queued"
-msgstr ""
+msgstr "Lejupielāde ierindota"
 
 #: ../bin/src/ui_networkremotesettingspage.h:245
 msgid "Download settings"
@@ -1961,7 +1965,7 @@ msgstr "Rediģēt gudro dziesmu listi..."
 #: ui/mainwindow.cpp:1738
 #, qt-format
 msgid "Edit tag \"%1\"..."
-msgstr ""
+msgstr "Rediģēt birku \"%1\"..."
 
 #: ../bin/src/ui_mainwindow.h:672
 msgid "Edit tag..."
@@ -1990,7 +1994,7 @@ msgstr "Rediģēt..."
 
 #: ../bin/src/ui_seafilesettingspage.h:171
 msgid "Email"
-msgstr ""
+msgstr "Epasts"
 
 #: ../bin/src/ui_wiimotesettingspage.h:173
 msgid "Enable Wii Remote support"
@@ -2104,7 +2108,7 @@ msgstr "Kļūda"
 
 #: ripper/ripcddialog.cpp:135
 msgid "Error Ripping CD"
-msgstr ""
+msgstr "Kļūda ripojot CD"
 
 #: devices/mtploader.cpp:56
 msgid "Error connecting MTP device"
@@ -2127,7 +2131,7 @@ msgstr "Kļūda lejupielādējot Spotify spraudni"
 msgid "Error loading %1"
 msgstr "Kļūda ielādējot %1"
 
-#: internet/digitally/digitallyimportedservicebase.cpp:195
+#: internet/digitally/digitallyimportedservicebase.cpp:200
 #: internet/digitally/digitallyimportedurlhandler.cpp:96
 msgid "Error loading di.fm playlist"
 msgstr "Kļūda ielādējot di.fm atskaņošanas sarakstu"
@@ -2192,15 +2196,15 @@ msgstr ""
 
 #: ../bin/src/ui_albumcovermanager.h:225
 msgid "Export Covers"
-msgstr ""
+msgstr "Eksportēt Vāciņus"
 
 #: ../bin/src/ui_albumcoverexport.h:202
 msgid "Export covers"
-msgstr ""
+msgstr "Eksportēt vāciņus"
 
 #: ../bin/src/ui_albumcoverexport.h:205
 msgid "Export downloaded covers"
-msgstr ""
+msgstr "Eksportēt lejupielādētos vāciņus"
 
 #: ../bin/src/ui_albumcoverexport.h:206
 msgid "Export embedded covers"
@@ -2357,7 +2361,7 @@ msgstr "Meklējiet savā bibliotēkā dziesmas, kas atbilst jūsu meklēšanas k
 
 #: internet/vk/vkservice.cpp:320
 msgid "Find this artist"
-msgstr ""
+msgstr "Meklēt šo mākslinieku"
 
 #: musicbrainz/tagfetcher.cpp:58
 msgid "Fingerprinting song"
@@ -2441,7 +2445,7 @@ msgstr "Kadri buferī"
 
 #: internet/subsonic/subsonicservice.cpp:106
 msgid "Frequently Played"
-msgstr ""
+msgstr "Bieži Atskaņots"
 
 #: moodbar/moodbarrenderer.cpp:173
 msgid "Frozen"
@@ -2670,7 +2674,7 @@ msgstr "Attēli (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 #: core/utilities.cpp:151
 #, qt-format
 msgid "In %1 days"
-msgstr ""
+msgstr "%1 dienās"
 
 #: core/utilities.cpp:154
 #, qt-format
@@ -2848,7 +2852,7 @@ msgstr "Atstāt oriģinālos failus"
 #: ../bin/src/ui_mainwindow.h:684
 msgctxt "Label for buton to enable/disable kittens in the now playing widget"
 msgid "Kittens"
-msgstr ""
+msgstr "Kaķīši"
 
 #: ui/equalizer.cpp:131
 msgid "Kuduro"
@@ -2889,7 +2893,7 @@ msgstr "Pēdējo reizi atskaņots"
 #: playlist/playlist.cpp:1346 ../bin/src/ui_edittagdialog.h:719
 msgctxt "A playlist's tag."
 msgid "Last played"
-msgstr ""
+msgstr "Pēdējo reizi atskaņots"
 
 #: ../bin/src/ui_lastfmsettingspage.h:149
 msgid "Last.fm"
@@ -3282,7 +3286,7 @@ msgstr "Pārvietot uz augšu"
 #: transcoder/transcodedialog.cpp:225 ui/mainwindow.cpp:1955
 #: internet/vk/vkservice.cpp:908
 msgid "Music"
-msgstr ""
+msgstr "Mūzika"
 
 #: ../bin/src/ui_librarysettingspage.h:185
 msgid "Music Library"
@@ -3295,7 +3299,7 @@ msgstr "Klusums"
 
 #: internet/vk/vkservice.cpp:840
 msgid "My Albums"
-msgstr ""
+msgstr "Mani Albumi"
 
 #: internet/vk/vkservice.cpp:901
 msgid "My Music"
@@ -3368,7 +3372,7 @@ msgstr "Jaunas dziesmas tiks pievienotas automātiski"
 
 #: internet/subsonic/subsonicservice.cpp:100
 msgid "Newest"
-msgstr ""
+msgstr "Jaunākie"
 
 #: library/library.cpp:92
 msgid "Newest tracks"
@@ -3518,7 +3522,7 @@ msgstr ""
 
 #: ../bin/src/ui_skydrivesettingspage.h:99
 msgid "OneDrive"
-msgstr ""
+msgstr "OneDrive"
 
 #: ../bin/src/ui_networkremotesettingspage.h:226
 msgid ""
@@ -3540,7 +3544,7 @@ msgstr "Rādīt tikai pirmo"
 msgid "Opacity"
 msgstr ""
 
-#: internet/digitally/digitallyimportedservicebase.cpp:170
+#: internet/digitally/digitallyimportedservicebase.cpp:175
 #: internet/icecast/icecastservice.cpp:298
 #: internet/jamendo/jamendoservice.cpp:427
 #: internet/magnatune/magnatuneservice.cpp:287
@@ -3576,7 +3580,7 @@ msgstr "Atvērt datni..."
 
 #: internet/googledrive/googledriveservice.cpp:217
 msgid "Open in Google Drive"
-msgstr ""
+msgstr "Atvērt ar Google Drive"
 
 #: devices/deviceview.cpp:224 globalsearch/globalsearchview.cpp:461
 #: internet/core/internetservice.cpp:105 library/libraryview.cpp:384
@@ -3722,7 +3726,7 @@ msgstr ""
 
 #: ../bin/src/ui_albumcoverexport.h:214
 msgid "Pixel"
-msgstr ""
+msgstr "Pikselis"
 
 #: widgets/fancytabwidget.cpp:664
 msgid "Plain sidebar"
@@ -3907,7 +3911,7 @@ msgstr "Virzība"
 #: ../bin/src/ui_magnatunedownloaddialog.h:130
 msgctxt "Category label"
 msgid "Progress"
-msgstr ""
+msgstr "Progress"
 
 #: ui/equalizer.cpp:144
 msgid "Psychedelic"
@@ -3928,12 +3932,12 @@ msgstr "Sakārtot dziesmas nejaušā secībā"
 #: ../bin/src/ui_transcoderoptionsvorbis.h:201
 msgctxt "Sound quality"
 msgid "Quality"
-msgstr ""
+msgstr "Kvalitāte"
 
 #: visualisations/visualisationcontainer.cpp:118
 msgctxt "Visualisation quality"
 msgid "Quality"
-msgstr ""
+msgstr "Kvalitāte"
 
 #: ../bin/src/ui_deviceproperties.h:382
 msgid "Querying device..."
@@ -3963,7 +3967,7 @@ msgstr "Lietus"
 #: ../bin/src/ui_mainwindow.h:681
 msgctxt "Label for button to enable/disable rain background sound."
 msgid "Rain"
-msgstr ""
+msgstr "Lietus"
 
 #: internet/subsonic/subsonicservice.cpp:103
 msgid "Random"
@@ -4028,7 +4032,7 @@ msgstr "Atjaunot kanālus"
 msgid "Refresh station list"
 msgstr "Atjaunot staciu sarakstu"
 
-#: internet/digitally/digitallyimportedservicebase.cpp:173
+#: internet/digitally/digitallyimportedservicebase.cpp:178
 msgid "Refresh streams"
 msgstr ""
 
@@ -4051,7 +4055,7 @@ msgstr "Atcerēties no pēdējās reizes"
 
 #: ../bin/src/ui_playlistsaveoptionsdialog.h:99
 msgid "Remember my choice"
-msgstr ""
+msgstr "Atcerēties manu izvēli"
 
 #: internet/internetradio/savedradio.cpp:107
 #: ../bin/src/ui_savedgroupingmanager.h:103 ../bin/src/ui_queuemanager.h:134
@@ -4192,11 +4196,11 @@ msgstr ""
 
 #: ripper/ripcddialog.cpp:95
 msgid "Rip CD"
-msgstr ""
+msgstr "Noripot CD"
 
 #: ../bin/src/ui_mainwindow.h:712
 msgid "Rip audio CD"
-msgstr ""
+msgstr "Noripot audio CD"
 
 #: ui/equalizer.cpp:148
 msgid "Rock"
@@ -4256,12 +4260,12 @@ msgstr "Salgabāt bildi"
 #: playlist/playlistlistcontainer.cpp:72
 msgctxt "Save playlist menu action."
 msgid "Save playlist"
-msgstr ""
+msgstr "Saglabāt dziesmu listi"
 
 #: playlist/playlistmanager.cpp:225
 msgctxt "Title of the playlist save dialog."
 msgid "Save playlist"
-msgstr ""
+msgstr "Saglabāt dziesmu listi"
 
 #: playlist/playlisttabbar.cpp:59 ../bin/src/ui_mainwindow.h:694
 msgid "Save playlist..."
@@ -4324,7 +4328,7 @@ msgstr "Meklēt"
 #: ui/mainwindow.cpp:235 ../bin/src/ui_globalsearchsettingspage.h:141
 msgctxt "Global search settings dialog title."
 msgid "Search"
-msgstr ""
+msgstr "Meklēt"
 
 #: ../bin/src/ui_icecastfilterwidget.h:77
 msgid "Search Icecast stations"
@@ -4450,7 +4454,7 @@ msgstr "Sērijas numurs"
 
 #: ../bin/src/ui_seafilesettingspage.h:173
 msgid "Server"
-msgstr ""
+msgstr "Serveris"
 
 #: ../bin/src/ui_subsonicsettingspage.h:125
 msgid "Server URL"
@@ -4571,7 +4575,7 @@ msgstr "Rādīt failu pārlūkā..."
 
 #: ui/mainwindow.cpp:688
 msgid "Show in library..."
-msgstr ""
+msgstr "Rādīt bibliotēkā..."
 
 #: library/libraryview.cpp:426
 msgid "Show in various artists"
@@ -4599,7 +4603,7 @@ msgstr ""
 
 #: ../bin/src/ui_lastfmsettingspage.h:156
 msgid "Show the \"love\" button"
-msgstr ""
+msgstr "Rādīt \"patīk\" pogu"
 
 #: ../bin/src/ui_lastfmsettingspage.h:157
 msgid "Show the scrobble button in the main window"
@@ -4623,7 +4627,7 @@ msgstr "Jaukt"
 
 #: widgets/osd.cpp:296 ../bin/src/ui_playlistsequence.h:119
 msgid "Shuffle albums"
-msgstr ""
+msgstr "Jaukt albumus"
 
 #: widgets/osd.cpp:290 ../bin/src/ui_playlistsequence.h:118
 msgid "Shuffle all"
@@ -4639,7 +4643,7 @@ msgstr ""
 
 #: ../bin/src/ui_podcastsettingspage.h:280
 msgid "Sign in"
-msgstr ""
+msgstr "Pieslēgties"
 
 #: ../bin/src/ui_loginstatewidget.h:169
 msgid "Sign out"
@@ -4647,7 +4651,7 @@ msgstr "Atslēgties"
 
 #: ../bin/src/ui_loginstatewidget.h:171
 msgid "Signing in..."
-msgstr ""
+msgstr "Pieslēdzos..."
 
 #: songinfo/echonestsimilarartists.cpp:58
 msgid "Similar artists"
@@ -4747,7 +4751,7 @@ msgstr "Kārtošana"
 
 #: ../bin/src/ui_soundcloudsettingspage.h:100
 msgid "SoundCloud"
-msgstr ""
+msgstr "SoundCloud"
 
 #: playlist/playlist.cpp:1372
 msgid "Source"
@@ -4797,7 +4801,7 @@ msgstr "Novērtēts ar zvaigzni"
 
 #: ripper/ripcddialog.cpp:69
 msgid "Start ripping"
-msgstr ""
+msgstr "Sākt ripošanu"
 
 #: core/commandlineoptions.cpp:150
 msgid "Start the playlist currently playing"
@@ -4834,11 +4838,11 @@ msgstr "Apturēt pēc"
 
 #: ../bin/src/ui_playlistsequence.h:114
 msgid "Stop after each track"
-msgstr ""
+msgstr "Apstāties pēc katras dziesmas"
 
 #: widgets/osd.cpp:320
 msgid "Stop after every track"
-msgstr ""
+msgstr "Apstāties pēc katras dziesmas"
 
 #: ui/mainwindow.cpp:652 ../bin/src/ui_mainwindow.h:663
 msgid "Stop after this track"
@@ -4954,7 +4958,7 @@ msgstr "Tehno"
 
 #: ../bin/src/ui_notificationssettingspage.h:466
 msgid "Text options"
-msgstr ""
+msgstr "Teksta opcijas"
 
 #: ui/about.cpp:74
 msgid "Thanks to"
@@ -5052,7 +5056,7 @@ msgstr "\"Sie uzstādījumi tiek izmantoti iekš \"Kodēt Mūziku\" dialoga un t
 
 #: library/savedgroupingmanager.cpp:38
 msgid "Third Level"
-msgstr ""
+msgstr "Trešais līmenis"
 
 #: ../bin/src/ui_groupbydialog.h:162
 msgid "Third level"
@@ -5159,7 +5163,7 @@ msgstr "Par daudz pāradresāciju"
 
 #: internet/subsonic/subsonicservice.cpp:109
 msgid "Top Rated"
-msgstr ""
+msgstr "Vislabāk vērtētie"
 
 #: internet/spotify/spotifyservice.cpp:430
 msgid "Top tracks"
@@ -5185,7 +5189,7 @@ msgstr "Dziesma"
 
 #: internet/soundcloud/soundcloudservice.cpp:135
 msgid "Tracks"
-msgstr ""
+msgstr "Dziesmas"
 
 #: ../bin/src/ui_transcodedialog.h:213 ../bin/src/ui_mainwindow.h:690
 msgid "Transcode Music"
@@ -5235,7 +5239,7 @@ msgstr "Ultra plata josla (UWB)"
 #: internet/seafile/seafilesettingspage.cpp:131
 #: internet/seafile/seafilesettingspage.cpp:132
 msgid "Unable to connect"
-msgstr ""
+msgstr "Nevaru pieslēgties"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:153
 #, qt-format
@@ -5283,7 +5287,7 @@ msgstr "Tuvākie koncerti"
 
 #: internet/vk/vkservice.cpp:347
 msgid "Update"
-msgstr ""
+msgstr "Atjaunot"
 
 #: internet/podcasts/podcastservice.cpp:420
 msgid "Update all podcasts"
@@ -5303,7 +5307,7 @@ msgstr "Atjaunot šo podraidi"
 
 #: ../bin/src/ui_podcastsettingspage.h:251
 msgid "Updating"
-msgstr ""
+msgstr "Atjaunoju"
 
 #: library/librarywatcher.cpp:92
 #, qt-format
@@ -5452,7 +5456,7 @@ msgstr "Vizualizāciju Iestatījumi"
 
 #: ../bin/src/ui_vksettingspage.h:212
 msgid "Vk.com"
-msgstr ""
+msgstr "Vk.com"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:232
 msgid "Voice activity detection"
@@ -5478,7 +5482,7 @@ msgstr "WMA"
 
 #: internet/vk/vkservice.cpp:882
 msgid "Wall"
-msgstr ""
+msgstr "Siena"
 
 #: playlist/playlisttabbar.cpp:192 ../bin/src/ui_behavioursettingspage.h:307
 msgid "Warn me when closing a playlist tab"
@@ -5562,7 +5566,7 @@ msgstr "Windows Media 128k"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:171
 msgid "Windows Media 40k"
-msgstr ""
+msgstr "Windows Media 40k"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:179
 msgid "Windows Media 64k"
@@ -5574,7 +5578,7 @@ msgstr "Windows Media audio"
 
 #: ../bin/src/ui_albumcovermanager.h:221
 msgid "Without cover:"
-msgstr ""
+msgstr "Bez vāciņa:"
 
 #: library/libraryview.cpp:563
 msgid ""
@@ -5596,7 +5600,7 @@ msgstr ""
 
 #: internet/subsonic/subsonicsettingspage.cpp:102
 msgid "Wrong username or password."
-msgstr ""
+msgstr "Nepareizs lietotājvārds vai parole"
 
 #: library/savedgroupingmanager.cpp:71 playlist/playlist.cpp:1325
 #: ui/organisedialog.cpp:72 ../bin/src/ui_groupbydialog.h:134
@@ -5822,7 +5826,7 @@ msgstr "gpodder.net"
 
 #: internet/podcasts/gpoddertoptagspage.cpp:36
 msgid "gpodder.net directory"
-msgstr ""
+msgstr "gpodder.net direktorija"
 
 #: smartplaylists/searchterm.cpp:233
 msgid "greater than"
@@ -5830,7 +5834,7 @@ msgstr "lielāks par"
 
 #: ../bin/src/ui_deviceviewcontainer.h:98
 msgid "iPods and USB devices currently don't work on Windows.  Sorry!"
-msgstr ""
+msgstr "iPod un USB iekārtas šobrīd nedarbojas iekš Windows. Atvainojiet!"
 
 #: smartplaylists/searchterm.cpp:213
 msgid "in the last"
@@ -5855,7 +5859,7 @@ msgstr "garākais vispirms"
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "move %n songs"
-msgstr ""
+msgstr "pārvietot %n dziesmas"
 
 #: smartplaylists/searchterm.cpp:373
 msgid "newest first"
