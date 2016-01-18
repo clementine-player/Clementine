@@ -15,12 +15,13 @@
 # pieorpaj <pie.or.paj@gmail.com>, 2013
 # pieorpaj <pie.or.paj@gmail.com>, 2012
 # Robin Poulsen <robin@karoko.se>, 2011
+# Staffan, 2016
 # elfa <thomas.elfstrom@gmail.com>, 2013
 # Hoven1 <thomas.hofverberg@tavelsjo.se>, 2012
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2016-01-11 15:35+0000\n"
+"PO-Revision-Date: 2016-01-13 23:28+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Swedish (http://www.transifex.com/davidsansome/clementine/language/sv/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -364,7 +365,7 @@ msgstr "Fjärrkontrollen kan endast ansluta om rätt kod anges."
 #: internet/digitally/digitallyimportedsettingspage.cpp:48
 #: internet/digitally/digitallyimportedurlhandler.cpp:60
 msgid "A premium account is required"
-msgstr ""
+msgstr "Kräver ett premium-konto"
 
 #: smartplaylists/wizard.cpp:74
 msgid ""
@@ -1377,6 +1378,10 @@ msgstr "Konfigurera Magnatune..."
 msgid "Configure Shortcuts"
 msgstr "Konfigurera snabbtangenter"
 
+#: internet/soundcloud/soundcloudservice.cpp:357
+msgid "Configure SoundCloud..."
+msgstr ""
+
 #: internet/spotify/spotifyservice.cpp:919
 msgid "Configure Spotify..."
 msgstr "Anpassa Spotify..."
@@ -1403,7 +1408,7 @@ msgid "Configure podcasts..."
 msgstr "Konfigurera podcasts..."
 
 #: internet/core/cloudfileservice.cpp:107
-#: internet/digitally/digitallyimportedservicebase.cpp:177
+#: internet/digitally/digitallyimportedservicebase.cpp:182
 #: internet/googledrive/googledriveservice.cpp:231
 #: ../bin/src/ui_globalsearchsettingspage.h:146
 msgid "Configure..."
@@ -1601,7 +1606,7 @@ msgid ""
 "Database corruption detected. Please read https://github.com/clementine-"
 "player/Clementine/wiki/Database-Corruption for instructions on how to "
 "recover your database"
-msgstr ""
+msgstr "Databas-korruption upptäckt. Läs https://github.com/clementine-player/Clementine/wiki/Database-Corruption för instruktioner om hur du återställer din databas"
 
 #: playlist/playlist.cpp:1367 ../bin/src/ui_edittagdialog.h:727
 msgid "Date created"
@@ -2135,7 +2140,7 @@ msgstr "Fel vid hämtning av Spotify-insticket"
 msgid "Error loading %1"
 msgstr "Fel vid insläsning av %1"
 
-#: internet/digitally/digitallyimportedservicebase.cpp:195
+#: internet/digitally/digitallyimportedservicebase.cpp:200
 #: internet/digitally/digitallyimportedurlhandler.cpp:96
 msgid "Error loading di.fm playlist"
 msgstr "Fel vid laddning av di.fm spellista"
@@ -2274,7 +2279,7 @@ msgstr "Misslyckades att tolka XML för denna RSS-flöde"
 #: ui/trackselectiondialog.cpp:247
 #, qt-format
 msgid "Failed to write new auto-tags to '%1'"
-msgstr ""
+msgstr "Misslyckades skriva auto-taggar till '%1'"
 
 #: ../bin/src/ui_transcoderoptionsflac.h:81
 #: ../bin/src/ui_transcoderoptionsmp3.h:199
@@ -2449,7 +2454,7 @@ msgstr "Ramar per buffert"
 
 #: internet/subsonic/subsonicservice.cpp:106
 msgid "Frequently Played"
-msgstr ""
+msgstr "Vanligen spelat"
 
 #: moodbar/moodbarrenderer.cpp:173
 msgid "Frozen"
@@ -2570,11 +2575,11 @@ msgstr "Gruppera"
 
 #: library/libraryfilterwidget.cpp:207
 msgid "Grouping Name"
-msgstr ""
+msgstr "Grupperingsnamn"
 
 #: library/libraryfilterwidget.cpp:207
 msgid "Grouping name:"
-msgstr ""
+msgstr "Grupperingsnamn:"
 
 #: internet/podcasts/podcasturlloader.cpp:206
 msgid "HTML page did not contain any RSS feeds"
@@ -3159,7 +3164,7 @@ msgstr "Felformaterat svar"
 
 #: ../bin/src/ui_libraryfilterwidget.h:102
 msgid "Manage saved groupings"
-msgstr ""
+msgstr "Hantera sparade grupperingar"
 
 #: ../bin/src/ui_networkproxysettingspage.h:159
 msgid "Manual proxy configuration"
@@ -3376,7 +3381,7 @@ msgstr "Nya spår läggs till automatiskt."
 
 #: internet/subsonic/subsonicservice.cpp:100
 msgid "Newest"
-msgstr ""
+msgstr "Nyaste"
 
 #: library/library.cpp:92
 msgid "Newest tracks"
@@ -3548,7 +3553,7 @@ msgstr "Visa endast de första"
 msgid "Opacity"
 msgstr "Opacitet"
 
-#: internet/digitally/digitallyimportedservicebase.cpp:170
+#: internet/digitally/digitallyimportedservicebase.cpp:175
 #: internet/icecast/icecastservice.cpp:298
 #: internet/jamendo/jamendoservice.cpp:427
 #: internet/magnatune/magnatuneservice.cpp:287
@@ -3975,7 +3980,7 @@ msgstr "Regn"
 
 #: internet/subsonic/subsonicservice.cpp:103
 msgid "Random"
-msgstr ""
+msgstr "Slumpvist"
 
 #: ../bin/src/ui_visualisationselector.h:111
 msgid "Random visualization"
@@ -4016,7 +4021,7 @@ msgstr "Verkligen avbryta?"
 
 #: internet/subsonic/subsonicservice.cpp:112
 msgid "Recently Played"
-msgstr ""
+msgstr "Nyligen spelat"
 
 #: internet/subsonic/subsonicsettingspage.cpp:158
 msgid "Redirect limit exceeded, verify server configuration."
@@ -4036,7 +4041,7 @@ msgstr "Uppdatera kanaler"
 msgid "Refresh station list"
 msgstr "Uppdatera kanallistan"
 
-#: internet/digitally/digitallyimportedservicebase.cpp:173
+#: internet/digitally/digitallyimportedservicebase.cpp:178
 msgid "Refresh streams"
 msgstr "Uppdatera strömmar"
 
@@ -4255,7 +4260,7 @@ msgstr "Spara omslag till disk..."
 
 #: ../bin/src/ui_libraryfilterwidget.h:101
 msgid "Save current grouping"
-msgstr ""
+msgstr "Spara aktuell gruppering"
 
 #: widgets/prettyimage.cpp:178 widgets/prettyimage.cpp:223
 msgid "Save image"
@@ -4390,7 +4395,7 @@ msgstr "Söktermer"
 
 #: library/savedgroupingmanager.cpp:37
 msgid "Second Level"
-msgstr ""
+msgstr "Andra nivån"
 
 #: ../bin/src/ui_groupbydialog.h:143
 msgid "Second level"
@@ -5060,7 +5065,7 @@ msgstr "Dessa inställningar används i dialogrutan \"Omkoda musik\", och vid ko
 
 #: library/savedgroupingmanager.cpp:38
 msgid "Third Level"
-msgstr ""
+msgstr "Tredje nivån"
 
 #: ../bin/src/ui_groupbydialog.h:162
 msgid "Third level"
@@ -5167,7 +5172,7 @@ msgstr "För många omdirigeringar"
 
 #: internet/subsonic/subsonicservice.cpp:109
 msgid "Top Rated"
-msgstr ""
+msgstr "Toppbetyg"
 
 #: internet/spotify/spotifyservice.cpp:430
 msgid "Top tracks"

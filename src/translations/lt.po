@@ -6,14 +6,14 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # Kiprianas Spiridonovas <k.spiridonovas@gmail.com>, 2012
 # Liudas Ališauskas <liudas.alisauskas@gmail.com>, 2012-2014
-# Moo, 2014-2015
+# Moo, 2014-2016
 # pencininkas4 <pencininkas4@gmail.com>, 2012
 # pencininkas4 <pencininkas4@gmail.com>, 2012
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2016-01-11 15:35+0000\n"
-"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
+"PO-Revision-Date: 2016-01-14 14:13+0000\n"
+"Last-Translator: Moo\n"
 "Language-Team: Lithuanian (http://www.transifex.com/davidsansome/clementine/language/lt/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -356,7 +356,7 @@ msgstr "Klientas gali prisijungti tik tada jei įvestas teisingas kodas."
 #: internet/digitally/digitallyimportedsettingspage.cpp:48
 #: internet/digitally/digitallyimportedurlhandler.cpp:60
 msgid "A premium account is required"
-msgstr ""
+msgstr "Reikalinga mokama paskyra"
 
 #: smartplaylists/wizard.cpp:74
 msgid ""
@@ -1116,7 +1116,7 @@ msgstr "Keisti maišymo režimą"
 
 #: ../bin/src/ui_behavioursettingspage.h:354
 msgid "Change the currently playing song"
-msgstr ""
+msgstr "Keisti esamu metu grojamą dainą"
 
 #: core/commandlineoptions.cpp:172
 msgid "Change the language"
@@ -1369,6 +1369,10 @@ msgstr "Konfigūruoti „Magnatune“..."
 msgid "Configure Shortcuts"
 msgstr "Konfigūruoti sparčiuosius klavišus"
 
+#: internet/soundcloud/soundcloudservice.cpp:357
+msgid "Configure SoundCloud..."
+msgstr "Konfigūruoti SoundCloud..."
+
 #: internet/spotify/spotifyservice.cpp:919
 msgid "Configure Spotify..."
 msgstr "Konfigūruoti Spotify..."
@@ -1395,7 +1399,7 @@ msgid "Configure podcasts..."
 msgstr "Konfigūruojamas srautas... "
 
 #: internet/core/cloudfileservice.cpp:107
-#: internet/digitally/digitallyimportedservicebase.cpp:177
+#: internet/digitally/digitallyimportedservicebase.cpp:182
 #: internet/googledrive/googledriveservice.cpp:231
 #: ../bin/src/ui_globalsearchsettingspage.h:146
 msgid "Configure..."
@@ -1847,7 +1851,7 @@ msgstr "Du kart spustelėkite norėdami atverti"
 
 #: ../bin/src/ui_behavioursettingspage.h:351
 msgid "Double clicking a song in the playlist will..."
-msgstr ""
+msgstr "Du kartus spustelėjus dainą grojaraštyje..."
 
 #: ../bin/src/ui_behavioursettingspage.h:337
 msgid "Double clicking a song will..."
@@ -2127,7 +2131,7 @@ msgstr "Klaida siunčiant Spotify plėtinį"
 msgid "Error loading %1"
 msgstr "Klaida įkeliant %1"
 
-#: internet/digitally/digitallyimportedservicebase.cpp:195
+#: internet/digitally/digitallyimportedservicebase.cpp:200
 #: internet/digitally/digitallyimportedurlhandler.cpp:96
 msgid "Error loading di.fm playlist"
 msgstr "Klaida įkeliant di.fm grojaraštį"
@@ -3540,7 +3544,7 @@ msgstr "Rodyti tik pirmą"
 msgid "Opacity"
 msgstr "Permatomumas"
 
-#: internet/digitally/digitallyimportedservicebase.cpp:170
+#: internet/digitally/digitallyimportedservicebase.cpp:175
 #: internet/icecast/icecastservice.cpp:298
 #: internet/jamendo/jamendoservice.cpp:427
 #: internet/magnatune/magnatuneservice.cpp:287
@@ -4028,7 +4032,7 @@ msgstr "Atnaujinti kanalus"
 msgid "Refresh station list"
 msgstr "Atnaujinti stočių sąrašą"
 
-#: internet/digitally/digitallyimportedservicebase.cpp:173
+#: internet/digitally/digitallyimportedservicebase.cpp:178
 msgid "Refresh streams"
 msgstr "Atnaujinti srautus"
 
@@ -4406,7 +4410,7 @@ msgstr "Rasti dabar grojamą takelį į absoliučiąją poziciją"
 
 #: ../bin/src/ui_behavioursettingspage.h:357
 msgid "Seeking using a keyboard shortcut or mouse wheel"
-msgstr ""
+msgstr "Persukimas, naudojant klaviatūros sparčiuosius klavišus ar pelės ratuką"
 
 #: visualisations/visualisationselector.cpp:37 ../bin/src/ui_ripcddialog.h:309
 msgid "Select All"
@@ -5116,7 +5120,7 @@ msgstr "Šio tipo įrenginys yra nepalaikomas: %1"
 
 #: ../bin/src/ui_behavioursettingspage.h:358
 msgid "Time step"
-msgstr ""
+msgstr "Žingsnio trukmė"
 
 #: playlist/playlist.cpp:1313 ui/organisedialog.cpp:60
 #: ui/qtsystemtrayicon.cpp:232 ../bin/src/ui_about.h:141

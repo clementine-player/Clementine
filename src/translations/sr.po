@@ -6,12 +6,12 @@
 # Mladen Pejaković <pejakm@autistici.org>, 2014
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # Jovana Savic <joa.uniq@gmail.com>, 2012
-# Mladen Pejaković <pejakm@autistici.org>, 2014-2015
+# Mladen Pejaković <pejakm@autistici.org>, 2014-2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2016-01-11 15:35+0000\n"
-"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
+"PO-Revision-Date: 2016-01-15 16:44+0000\n"
+"Last-Translator: Mladen Pejaković <pejakm@autistici.org>\n"
 "Language-Team: Serbian (http://www.transifex.com/davidsansome/clementine/language/sr/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -354,7 +354,7 @@ msgstr "Клијент може да се повеже само ако је ун
 #: internet/digitally/digitallyimportedsettingspage.cpp:48
 #: internet/digitally/digitallyimportedurlhandler.cpp:60
 msgid "A premium account is required"
-msgstr ""
+msgstr "Потребан је премијум налог"
 
 #: smartplaylists/wizard.cpp:74
 msgid ""
@@ -1367,6 +1367,10 @@ msgstr "Подеси Магнатјун..."
 msgid "Configure Shortcuts"
 msgstr "Поставке пречица"
 
+#: internet/soundcloud/soundcloudservice.cpp:357
+msgid "Configure SoundCloud..."
+msgstr "Подеси Саундклауд..."
+
 #: internet/spotify/spotifyservice.cpp:919
 msgid "Configure Spotify..."
 msgstr "Подеси Спотифај..."
@@ -1393,7 +1397,7 @@ msgid "Configure podcasts..."
 msgstr "Подеси подкасте..."
 
 #: internet/core/cloudfileservice.cpp:107
-#: internet/digitally/digitallyimportedservicebase.cpp:177
+#: internet/digitally/digitallyimportedservicebase.cpp:182
 #: internet/googledrive/googledriveservice.cpp:231
 #: ../bin/src/ui_globalsearchsettingspage.h:146
 msgid "Configure..."
@@ -2125,7 +2129,7 @@ msgstr "Грешка преузимања Спотифај прикључка"
 msgid "Error loading %1"
 msgstr "Грешка учитавања %1"
 
-#: internet/digitally/digitallyimportedservicebase.cpp:195
+#: internet/digitally/digitallyimportedservicebase.cpp:200
 #: internet/digitally/digitallyimportedurlhandler.cpp:96
 msgid "Error loading di.fm playlist"
 msgstr "Грешка учитавања di.fm листе нумера"
@@ -2560,11 +2564,11 @@ msgstr "груписање"
 
 #: library/libraryfilterwidget.cpp:207
 msgid "Grouping Name"
-msgstr ""
+msgstr "Назив груписања"
 
 #: library/libraryfilterwidget.cpp:207
 msgid "Grouping name:"
-msgstr ""
+msgstr "Назив груписања:"
 
 #: internet/podcasts/podcasturlloader.cpp:206
 msgid "HTML page did not contain any RSS feeds"
@@ -3149,7 +3153,7 @@ msgstr "Лош одговор"
 
 #: ../bin/src/ui_libraryfilterwidget.h:102
 msgid "Manage saved groupings"
-msgstr ""
+msgstr "Управљај сачуваним груписањима"
 
 #: ../bin/src/ui_networkproxysettingspage.h:159
 msgid "Manual proxy configuration"
@@ -3538,7 +3542,7 @@ msgstr "Прикажи само почетних"
 msgid "Opacity"
 msgstr "Прозирност"
 
-#: internet/digitally/digitallyimportedservicebase.cpp:170
+#: internet/digitally/digitallyimportedservicebase.cpp:175
 #: internet/icecast/icecastservice.cpp:298
 #: internet/jamendo/jamendoservice.cpp:427
 #: internet/magnatune/magnatuneservice.cpp:287
@@ -4026,7 +4030,7 @@ msgstr "Освежи канале"
 msgid "Refresh station list"
 msgstr "Освежи списак станица"
 
-#: internet/digitally/digitallyimportedservicebase.cpp:173
+#: internet/digitally/digitallyimportedservicebase.cpp:178
 msgid "Refresh streams"
 msgstr "Освежи токове"
 
@@ -4245,7 +4249,7 @@ msgstr "Сачувај омот на диск..."
 
 #: ../bin/src/ui_libraryfilterwidget.h:101
 msgid "Save current grouping"
-msgstr ""
+msgstr "Сачувај тренутно груписање"
 
 #: widgets/prettyimage.cpp:178 widgets/prettyimage.cpp:223
 msgid "Save image"
@@ -4283,7 +4287,7 @@ msgstr "Сачувај овај ток у интернет језичку"
 
 #: ../bin/src/ui_savedgroupingmanager.h:101
 msgid "Saved Grouping Manager"
-msgstr ""
+msgstr "Менаџер сачуваних груписања"
 
 #: library/library.cpp:194
 msgid "Saving songs statistics into songs files"
@@ -4380,7 +4384,7 @@ msgstr "Појмови за претрагу"
 
 #: library/savedgroupingmanager.cpp:37
 msgid "Second Level"
-msgstr ""
+msgstr "Други ниво"
 
 #: ../bin/src/ui_groupbydialog.h:143
 msgid "Second level"
@@ -5050,7 +5054,7 @@ msgstr "Ове поставке се користе у дијалогу „Пр�
 
 #: library/savedgroupingmanager.cpp:38
 msgid "Third Level"
-msgstr ""
+msgstr "Трећи ниво"
 
 #: ../bin/src/ui_groupbydialog.h:162
 msgid "Third level"
