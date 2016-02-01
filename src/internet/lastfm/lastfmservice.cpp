@@ -82,6 +82,8 @@ LastFMService::LastFMService(Application* app, QObject* parent)
       scrobbling_enabled_(false),
       connection_problems_(false),
       app_(app) {
+  lastfm::ws::setScheme(lastfm::ws::Https);
+
   ReloadSettings();
 
   // we emit the signal the first time to be sure the buttons are in the right
@@ -132,8 +134,7 @@ void LastFMService::Authenticate(const QString& username,
   QMap<QString, QString> params;
   params["method"] = "auth.getMobileSession";
   params["username"] = username;
-  params["authToken"] =
-      lastfm::md5((username + lastfm::md5(password.toUtf8())).toUtf8());
+  params["password"] = password;
 
   QNetworkReply* reply = lastfm::ws::post(params);
   NewClosure(reply, SIGNAL(finished()), this,
