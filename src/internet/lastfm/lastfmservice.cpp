@@ -74,6 +74,7 @@ const char* LastFMService::kSettingsGroup = "Last.fm";
 const char* LastFMService::kAudioscrobblerClientId = "tng";
 const char* LastFMService::kApiKey = "75d20fb472be99275392aefa2760ea09";
 const char* LastFMService::kSecret = "d3072b60ae626be12be69448f5c46e70";
+const char* LastFMService::kAuthLoginUrl = "http://www.last.fm/api/auth/?api_key=%1&token=%2";
 
 LastFMService::LastFMService(Application* app, QObject* parent)
     : Scrobbler(parent),
@@ -82,6 +83,8 @@ LastFMService::LastFMService(Application* app, QObject* parent)
       scrobbling_enabled_(false),
       connection_problems_(false),
       app_(app) {
+  lastfm::ws::setScheme(lastfm::ws::Https);
+
   ReloadSettings();
 
   // we emit the signal the first time to be sure the buttons are in the right
@@ -127,29 +130,37 @@ bool LastFMService::IsSubscriber() const {
   return settings.value("Subscriber", false).toBool();
 }
 
-void LastFMService::Authenticate(const QString& username,
-                                 const QString& password) {
+void LastFMService::GetToken() {
   QMap<QString, QString> params;
-  params["method"] = "auth.getMobileSession";
-  params["username"] = username;
-  params["authToken"] =
-      lastfm::md5((username + lastfm::md5(password.toUtf8())).toUtf8());
+  params["method"] = "auth.getToken";
+  QNetworkReply* reply = lastfm::ws::post(params);
+  NewClosure(reply, SIGNAL(finished()), this,
+             SLOT(GetTokenReplyFinished(QNetworkReply*)), reply);
+}
+
+void LastFMService::GetTokenReplyFinished(QNetworkReply* reply) {
+  reply->deleteLater();
+
+  // Parse the reply
+  lastfm::XmlQuery lfm(lastfm::compat::EmptyXmlQuery());
+  if (lastfm::compat::ParseQuery(reply->readAll(), &lfm)) {
+    QString token = lfm["token"].text();
+
+    emit TokenReceived(true, token);
+  } else {
+    emit TokenReceived(false, lfm["error"].text().trimmed());
+  }
+}
+
+void LastFMService::Authenticate(const QString& token) {
+  QMap<QString, QString> params;
+  params["method"] = "auth.getSession";
+  params["token"] = token;
 
   QNetworkReply* reply = lastfm::ws::post(params);
   NewClosure(reply, SIGNAL(finished()), this,
              SLOT(AuthenticateReplyFinished(QNetworkReply*)), reply);
   // If we need more detailed error reporting, handle error(NetworkError) signal
-}
-
-void LastFMService::SignOut() {
-  lastfm::ws::Username.clear();
-  lastfm::ws::SessionKey.clear();
-
-  QSettings settings;
-  settings.beginGroup(kSettingsGroup);
-
-  settings.setValue("Username", QString());
-  settings.setValue("Session", QString());
 }
 
 void LastFMService::AuthenticateReplyFinished(QNetworkReply* reply) {
@@ -179,6 +190,17 @@ void LastFMService::AuthenticateReplyFinished(QNetworkReply* reply) {
   scrobbler_ = nullptr;
 
   emit AuthenticationComplete(true, QString());
+}
+
+void LastFMService::SignOut() {
+  lastfm::ws::Username.clear();
+  lastfm::ws::SessionKey.clear();
+
+  QSettings settings;
+  settings.beginGroup(kSettingsGroup);
+
+  settings.setValue("Username", QString());
+  settings.setValue("Session", QString());
 }
 
 void LastFMService::UpdateSubscriberStatus() {
