@@ -79,7 +79,6 @@ const char* LastFMService::kAuthLoginUrl =
 
 LastFMService::LastFMService(Application* app, QObject* parent)
     : Scrobbler(parent),
-      scrobbler_(nullptr),
       already_scrobbled_(false),
       scrobbling_enabled_(false),
       connection_problems_(false),
@@ -187,8 +186,7 @@ void LastFMService::AuthenticateReplyFinished(QNetworkReply* reply) {
   }
 
   // Invalidate the scrobbler - it will get recreated later
-  delete scrobbler_;
-  scrobbler_ = nullptr;
+  scrobbler_.reset(nullptr);
 
   emit AuthenticationComplete(true, QString());
 }
@@ -291,16 +289,16 @@ bool LastFMService::InitScrobbler() {
   if (!IsAuthenticated() || !IsScrobblingEnabled()) return false;
 
   if (!scrobbler_)
-    scrobbler_ = new lastfm::Audioscrobbler(kAudioscrobblerClientId);
+    scrobbler_.reset(new lastfm::Audioscrobbler(kAudioscrobblerClientId));
 
 // reemit the signal since the sender is private
 #ifdef HAVE_LIBLASTFM1
-  connect(scrobbler_, SIGNAL(scrobblesSubmitted(QList<lastfm::Track>)),
+  connect(scrobbler_.get(), SIGNAL(scrobblesSubmitted(QList<lastfm::Track>)),
           SIGNAL(ScrobbleSubmitted()));
-  connect(scrobbler_, SIGNAL(nowPlayingError(int, QString)),
+  connect(scrobbler_.get(), SIGNAL(nowPlayingError(int, QString)),
           SIGNAL(ScrobbleError(int)));
 #else
-  connect(scrobbler_, SIGNAL(status(int)), SLOT(ScrobblerStatus(int)));
+  connect(scrobbler_.get(), SIGNAL(status(int)), SLOT(ScrobblerStatus(int)));
 #endif
   return true;
 }
