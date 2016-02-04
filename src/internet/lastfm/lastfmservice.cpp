@@ -74,7 +74,8 @@ const char* LastFMService::kSettingsGroup = "Last.fm";
 const char* LastFMService::kAudioscrobblerClientId = "tng";
 const char* LastFMService::kApiKey = "75d20fb472be99275392aefa2760ea09";
 const char* LastFMService::kSecret = "d3072b60ae626be12be69448f5c46e70";
-const char* LastFMService::kAuthLoginUrl = "http://www.last.fm/api/auth/?api_key=%1&token=%2";
+const char* LastFMService::kAuthLoginUrl =
+    "https://www.last.fm/api/auth/?api_key=%1&token=%2";
 
 LastFMService::LastFMService(Application* app, QObject* parent)
     : Scrobbler(parent),
