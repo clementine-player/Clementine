@@ -82,7 +82,7 @@ class LastFMService : public Scrobbler {
   void ShowConfig();
   void ToggleScrobbling();
 
- signals:
+signals:
   void TokenReceived(bool success, const QString& token);
   void AuthenticationComplete(bool success, const QString& error_message);
   void ScrobblingEnabledChanged(bool value);
@@ -111,7 +111,7 @@ class LastFMService : public Scrobbler {
   static QUrl FixupUrl(const QUrl& url);
 
  private:
-  lastfm::Audioscrobbler* scrobbler_;
+  std::unique_ptr<lastfm::Audioscrobbler> scrobbler_;
   lastfm::Track last_track_;
   lastfm::Track next_metadata_;
   bool already_scrobbled_;
