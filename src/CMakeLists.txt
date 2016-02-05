@@ -153,6 +153,7 @@ set(SOURCES
   globalsearch/searchproviderstatuswidget.cpp
   globalsearch/simplesearchprovider.cpp
   globalsearch/somafmsearchprovider.cpp
+  globalsearch/intergalacticfmsearchprovider.cpp
   globalsearch/soundcloudsearchprovider.cpp
   globalsearch/spotifysearchprovider.cpp
   globalsearch/suggestionwidget.cpp
@@ -189,6 +190,8 @@ set(SOURCES
   internet/core/searchboxwidget.cpp
   internet/somafm/somafmservice.cpp
   internet/somafm/somafmurlhandler.cpp
+  internet/intergalacticfm/intergalacticfmservice.cpp
+  internet/intergalacticfm/intergalacticfmurlhandler.cpp
   internet/soundcloud/soundcloudservice.cpp
   internet/soundcloud/soundcloudsettingspage.cpp
   internet/spotify/spotifyserver.cpp
