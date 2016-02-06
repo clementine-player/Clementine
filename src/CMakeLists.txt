@@ -496,6 +496,8 @@ set(HEADERS
   internet/core/searchboxwidget.h
   internet/somafm/somafmservice.h
   internet/somafm/somafmurlhandler.h
+  internet/intergalacticfm/intergalacticfmservice.h
+  internet/intergalacticfm/intergalacticfmurlhandler.h
   internet/soundcloud/soundcloudservice.h
   internet/soundcloud/soundcloudsettingspage.h
   internet/spotify/spotifyserver.h
