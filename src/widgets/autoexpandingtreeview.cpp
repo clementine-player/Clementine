@@ -30,6 +30,7 @@ AutoExpandingTreeView::AutoExpandingTreeView(QWidget* parent)
       add_on_double_click_(true),
       ignore_next_click_(false) {
   setExpandsOnDoubleClick(false);
+  setAnimated(true);
 
   connect(this, SIGNAL(expanded(QModelIndex)), SLOT(ItemExpanded(QModelIndex)));
   connect(this, SIGNAL(clicked(QModelIndex)), SLOT(ItemClicked(QModelIndex)));
@@ -113,11 +114,27 @@ void AutoExpandingTreeView::mousePressEvent(QMouseEvent* event) {
   }
 }
 
+void AutoExpandingTreeView::mouseDoubleClickEvent(QMouseEvent* event) {
+  State p_state = state();
+  QModelIndex index = indexAt(event->pos());
+
+  QTreeView::mouseDoubleClickEvent(event);
+
+  // If the p_state was the "AnimatingState", then the base class's
+  // "mouseDoubleClickEvent" method just did nothing, hence the
+  // "doubleClicked" signal is not emitted. So let's do it ourselves.
+  if (index.isValid() && p_state == AnimatingState) {
+    emit doubleClicked(index);
+  }
+}
+
 void AutoExpandingTreeView::keyPressEvent(QKeyEvent* e) {
+  QModelIndex index = currentIndex();
+
   switch (e->key()) {
     case Qt::Key_Enter:
     case Qt::Key_Return:
-      if (currentIndex().isValid()) emit doubleClicked(currentIndex());
+      if (index.isValid()) emit doubleClicked(index);
       e->accept();
       break;
 
@@ -125,6 +142,16 @@ void AutoExpandingTreeView::keyPressEvent(QKeyEvent* e) {
     case Qt::Key_Escape:
       emit FocusOnFilterSignal(e);
       e->accept();
+      break;
+
+    case Qt::Key_Left:
+      // Set focus on the root of the current branch
+      if (index.isValid() && index.parent() != rootIndex() &&
+          (!isExpanded(index) || model()->rowCount(index) == 0)) {
+        setCurrentIndex(index.parent());
+        setFocus();
+        e->accept();
+      }
       break;
   }
 
