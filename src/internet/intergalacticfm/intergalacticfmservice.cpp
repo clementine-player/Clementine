@@ -157,6 +157,7 @@ void IntergalacticFMServiceBase::RefreshStreamsFinished(QNetworkReply* reply,
 
 void IntergalacticFMServiceBase::ReadChannel(QXmlStreamReader& reader, StreamList* ret) {
   Stream stream;
+  bool found = false;
 
   while (!reader.atEnd()) {
     switch (reader.readNext()) {
@@ -172,6 +173,14 @@ void IntergalacticFMServiceBase::ReadChannel(QXmlStreamReader& reader, StreamLis
         } else if (reader.name() == "dj") {
           stream.dj_ = reader.readElementText();
         } else if (reader.name() == "fastpls" &&
+                   reader.attributes().value("format") == "mp3") {
+          QUrl url(reader.readElementText());
+          url.setScheme(url_handler_->scheme());
+
+          stream.url_ = url;
+          found = true;
+        } else if (found == false &&
+                   reader.name() == "highestpls" &&
                    reader.attributes().value("format") == "mp3") {
           QUrl url(reader.readElementText());
           url.setScheme(url_handler_->scheme());
