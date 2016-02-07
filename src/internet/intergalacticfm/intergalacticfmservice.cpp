@@ -263,6 +263,6 @@ void IntergalacticFMServiceBase::ReloadSettings() {
 
 IntergalacticFMService::IntergalacticFMService(Application* app, InternetModel* parent)
     : IntergalacticFMServiceBase(
-          app, parent, "IntergalacticFM", QUrl("https://intergalacticfm.com/channels.xml"),
+          app, parent, "Intergalactic FM", QUrl("https://intergalacticfm.com/channels.xml"),
           QUrl("https://intergalacticfm.com"), QUrl(), IconLoader::Load("intergalacticfm", 
           IconLoader::Provider)) {}
