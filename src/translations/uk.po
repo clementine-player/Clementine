@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2016-01-14 07:32+0000\n"
+"PO-Revision-Date: 2016-02-03 16:23+0000\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian (http://www.transifex.com/davidsansome/clementine/language/uk/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -418,8 +418,7 @@ msgid "Absolute"
 msgstr "Абсолютними"
 
 #: ../bin/src/ui_magnatunesettingspage.h:154
-#: ../bin/src/ui_spotifysettingspage.h:207
-#: ../bin/src/ui_lastfmsettingspage.h:150 ../bin/src/ui_vksettingspage.h:213
+#: ../bin/src/ui_spotifysettingspage.h:207 ../bin/src/ui_vksettingspage.h:213
 #: ../bin/src/ui_seafilesettingspage.h:168
 msgid "Account details"
 msgstr "Параметри облікового запису"
@@ -817,7 +816,7 @@ msgid "Append files/URLs to the playlist"
 msgstr "Додати файли/адреси до списку відтворення"
 
 #: devices/deviceview.cpp:218 globalsearch/globalsearchview.cpp:453
-#: internet/core/internetservice.cpp:81 library/libraryview.cpp:378
+#: internet/core/internetservice.cpp:81 library/libraryview.cpp:377
 #: widgets/fileviewlist.cpp:31
 msgid "Append to current playlist"
 msgstr "Додати до списку відтворення"
@@ -882,8 +881,8 @@ msgstr "Виведення звуку"
 
 #: internet/digitally/digitallyimportedsettingspage.cpp:82
 #: internet/magnatune/magnatunesettingspage.cpp:117
-#: internet/lastfm/lastfmservice.cpp:228
-#: internet/lastfm/lastfmsettingspage.cpp:84
+#: internet/lastfm/lastfmservice.cpp:247
+#: internet/lastfm/lastfmsettingspage.cpp:97
 msgid "Authentication failed"
 msgstr "Помилка автентификації"
 
@@ -1273,7 +1272,11 @@ msgstr "Clementine не зміг здобути результатів для ц
 msgid "Clementine will find music in:"
 msgstr "Clementine шукатиме музику у:"
 
-#: library/libraryview.cpp:359
+#: internet/lastfm/lastfmsettingspage.cpp:78
+msgid "Click Ok once you authenticated Clementine in your last.fm account."
+msgstr "Натисніть «Гаразд», щойно Clementine буде уповноважено на вашому обліковому записі last.fm."
+
+#: library/libraryview.cpp:358
 msgid "Click here to add some music"
 msgstr "Клацніть тут, щоб додати музику"
 
@@ -1288,6 +1291,7 @@ msgid "Click to toggle between remaining time and total time"
 msgstr "Клацніть аби перемкнутися між часом, що залишився, та загальним"
 
 #: ../bin/src/ui_soundcloudsettingspage.h:103
+#: ../bin/src/ui_lastfmsettingspage.h:133
 #: ../bin/src/ui_googledrivesettingspage.h:102
 #: ../bin/src/ui_dropboxsettingspage.h:102
 #: ../bin/src/ui_skydrivesettingspage.h:102
@@ -1461,7 +1465,7 @@ msgstr "Копіювати адресу оприлюднення до буфер
 msgid "Copy to clipboard"
 msgstr "Копіювати до буфера"
 
-#: library/libraryview.cpp:409 internet/podcasts/podcastservice.cpp:438
+#: library/libraryview.cpp:408 internet/podcasts/podcastservice.cpp:438
 #: ui/mainwindow.cpp:680 widgets/fileviewlist.cpp:44
 msgid "Copy to device..."
 msgstr "Копіювати до пристрою…"
@@ -1650,7 +1654,7 @@ msgstr "Вилучити"
 msgid "Delete downloaded data"
 msgstr "Видалити завантажені дані"
 
-#: devices/deviceview.cpp:408 library/libraryview.cpp:645
+#: devices/deviceview.cpp:408 library/libraryview.cpp:644
 #: ui/mainwindow.cpp:2317 widgets/fileview.cpp:186
 msgid "Delete files"
 msgstr "Вилучити файли"
@@ -1659,7 +1663,7 @@ msgstr "Вилучити файли"
 msgid "Delete from device..."
 msgstr "Вилучити з пристрою…"
 
-#: library/libraryview.cpp:411 ui/mainwindow.cpp:683
+#: library/libraryview.cpp:410 ui/mainwindow.cpp:683
 #: widgets/fileviewlist.cpp:47
 msgid "Delete from disk..."
 msgstr "Вилучити з диска…"
@@ -1672,7 +1676,7 @@ msgstr "Видалити відтворені випуски"
 msgid "Delete preset"
 msgstr "Скинути налаштування"
 
-#: library/libraryview.cpp:401
+#: library/libraryview.cpp:400
 msgid "Delete smart playlist"
 msgstr "Видалити розумний список відтворення"
 
@@ -1821,7 +1825,7 @@ msgstr "Повторне виконання повного сканування 
 msgid "Don't repeat"
 msgstr "Не повторювати"
 
-#: library/libraryview.cpp:429
+#: library/libraryview.cpp:428
 msgid "Don't show in various artists"
 msgstr "Не показувати в «різних виконавцях»"
 
@@ -1955,7 +1959,7 @@ msgstr "Динамічний режим увімкнено"
 msgid "Dynamic random mix"
 msgstr "Динамічний випадковий мікс"
 
-#: library/libraryview.cpp:398
+#: library/libraryview.cpp:397
 msgid "Edit smart playlist..."
 msgstr "Редагувати розумний список відтворення…"
 
@@ -1976,12 +1980,12 @@ msgstr "Редагувати мітки"
 msgid "Edit track information"
 msgstr "Редагувати дані доріжки"
 
-#: library/libraryview.cpp:416 widgets/fileviewlist.cpp:51
+#: library/libraryview.cpp:415 widgets/fileviewlist.cpp:51
 #: ../bin/src/ui_mainwindow.h:669
 msgid "Edit track information..."
 msgstr "Редагувати дані про доріжку…"
 
-#: library/libraryview.cpp:419
+#: library/libraryview.cpp:418
 msgid "Edit tracks information..."
 msgstr "Редагувати дані про доріжки…"
 
@@ -2098,7 +2102,7 @@ msgid "Equivalent to --log-levels *:3"
 msgstr "Відповідає --log-levels *:3"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:246
-#: library/libraryview.cpp:639 ui/mainwindow.cpp:2020 ui/mainwindow.cpp:2267
+#: library/libraryview.cpp:638 ui/mainwindow.cpp:2020 ui/mainwindow.cpp:2267
 #: ui/mainwindow.cpp:2415 internet/vk/vkservice.cpp:643
 msgid "Error"
 msgstr "Помилка"
@@ -2762,31 +2766,31 @@ msgstr "Інтернет-служби"
 msgid "Intro tracks"
 msgstr "Вступні композиції"
 
-#: internet/lastfm/lastfmservice.cpp:240
+#: internet/lastfm/lastfmservice.cpp:259
 msgid "Invalid API key"
 msgstr "Неправильний ключ API"
 
-#: internet/lastfm/lastfmservice.cpp:230
+#: internet/lastfm/lastfmservice.cpp:249
 msgid "Invalid format"
 msgstr "Не чинний формат"
 
-#: internet/lastfm/lastfmservice.cpp:226
+#: internet/lastfm/lastfmservice.cpp:245
 msgid "Invalid method"
 msgstr "Неправильний метод"
 
-#: internet/lastfm/lastfmservice.cpp:232
+#: internet/lastfm/lastfmservice.cpp:251
 msgid "Invalid parameters"
 msgstr "Неправильні параметри"
 
-#: internet/lastfm/lastfmservice.cpp:234
+#: internet/lastfm/lastfmservice.cpp:253
 msgid "Invalid resource specified"
 msgstr "Неправильно вказане джерело"
 
-#: internet/lastfm/lastfmservice.cpp:224
+#: internet/lastfm/lastfmservice.cpp:243
 msgid "Invalid service"
 msgstr "Нечинна служба"
 
-#: internet/lastfm/lastfmservice.cpp:238
+#: internet/lastfm/lastfmservice.cpp:257
 msgid "Invalid session key"
 msgstr "Неправильний ключ сеансу"
 
@@ -2892,17 +2896,21 @@ msgctxt "A playlist's tag."
 msgid "Last played"
 msgstr "Останні відтворені"
 
-#: ../bin/src/ui_lastfmsettingspage.h:149
+#: ../bin/src/ui_lastfmsettingspage.h:131
 msgid "Last.fm"
 msgstr "Last.fm"
 
-#: internet/lastfm/lastfmservice.cpp:247
+#: internet/lastfm/lastfmsettingspage.cpp:77
+msgid "Last.fm authentication"
+msgstr "Уповноваження на last.fm"
+
+#: internet/lastfm/lastfmsettingspage.cpp:70
+msgid "Last.fm authentication failed"
+msgstr "Помилка розпізнавання на last.fm"
+
+#: internet/lastfm/lastfmservice.cpp:266
 msgid "Last.fm is currently busy, please try again in a few minutes"
 msgstr "На цей час Last.fm зайнятий, спробуйте через кілька хвилин"
-
-#: ../bin/src/ui_lastfmsettingspage.h:153
-msgid "Last.fm password"
-msgstr "Пароль Last.fm"
 
 #: songinfo/lastfmtrackinfoprovider.cpp:76
 msgid "Last.fm play counts"
@@ -2911,10 +2919,6 @@ msgstr "Статистика Last.fm"
 #: songinfo/lastfmtrackinfoprovider.cpp:130
 msgid "Last.fm tags"
 msgstr "Мітки Last.fm"
-
-#: ../bin/src/ui_lastfmsettingspage.h:151
-msgid "Last.fm username"
-msgstr "Користувач Last.fm"
 
 #: songinfo/lastfmtrackinfoprovider.cpp:110
 msgid "Last.fm wiki"
@@ -3033,7 +3037,7 @@ msgstr "Завантажити файли/адреси, замінюючи по�
 #: ../bin/src/ui_soundcloudsettingspage.h:102
 #: ../bin/src/ui_spotifysettingspage.h:210
 #: ../bin/src/ui_subsonicsettingspage.h:129
-#: ../bin/src/ui_lastfmsettingspage.h:152
+#: ../bin/src/ui_lastfmsettingspage.h:132
 #: ../bin/src/ui_googledrivesettingspage.h:101
 #: ../bin/src/ui_dropboxsettingspage.h:101
 #: ../bin/src/ui_skydrivesettingspage.h:101
@@ -3146,7 +3150,7 @@ msgstr "Гаразд!"
 msgid "Make playlist available offline"
 msgstr "Зробити список відтворення доступним онлайн"
 
-#: internet/lastfm/lastfmservice.cpp:259
+#: internet/lastfm/lastfmservice.cpp:278
 msgid "Malformed response"
 msgstr "Спотворений відгук"
 
@@ -3355,7 +3359,7 @@ msgstr "Нова тека"
 msgid "New playlist"
 msgstr "Новий список відтворення"
 
-#: library/libraryview.cpp:395
+#: library/libraryview.cpp:394
 msgid "New smart playlist..."
 msgstr "Новий «розумний» список відтворення"
 
@@ -3418,7 +3422,7 @@ msgstr "Без коротких блоків"
 msgid "None"
 msgstr "Немає"
 
-#: library/libraryview.cpp:640 ui/mainwindow.cpp:2268 ui/mainwindow.cpp:2416
+#: library/libraryview.cpp:639 ui/mainwindow.cpp:2268 ui/mainwindow.cpp:2416
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Жодна з вибраних композицій не придатна для копіювання на пристрій"
 
@@ -3438,19 +3442,19 @@ msgstr "Недоступно при використанні динамічни�
 msgid "Not connected"
 msgstr "Не з’єднано"
 
-#: internet/lastfm/lastfmservice.cpp:250
+#: internet/lastfm/lastfmservice.cpp:269
 msgid "Not enough content"
 msgstr "Не достатньо вмісту"
 
-#: internet/lastfm/lastfmservice.cpp:254
+#: internet/lastfm/lastfmservice.cpp:273
 msgid "Not enough fans"
 msgstr "Недостатньо фанів"
 
-#: internet/lastfm/lastfmservice.cpp:252
+#: internet/lastfm/lastfmservice.cpp:271
 msgid "Not enough members"
 msgstr "Не достатньо учасників"
 
-#: internet/lastfm/lastfmservice.cpp:256
+#: internet/lastfm/lastfmservice.cpp:275
 msgid "Not enough neighbors"
 msgstr "Недостатньо сусідів"
 
@@ -3580,7 +3584,7 @@ msgid "Open in Google Drive"
 msgstr "Відкрити у Google Drive"
 
 #: devices/deviceview.cpp:224 globalsearch/globalsearchview.cpp:461
-#: internet/core/internetservice.cpp:105 library/libraryview.cpp:384
+#: internet/core/internetservice.cpp:105 library/libraryview.cpp:383
 #: widgets/fileviewlist.cpp:36
 msgid "Open in new playlist"
 msgstr "Відкрити у новому списку відтворення"
@@ -3599,7 +3603,7 @@ msgstr "Відкрити у вашому переглядачі"
 msgid "Open..."
 msgstr "Відкрити…"
 
-#: internet/lastfm/lastfmservice.cpp:236
+#: internet/lastfm/lastfmservice.cpp:255
 msgid "Operation failed"
 msgstr "Помилка виконання операції"
 
@@ -3625,7 +3629,7 @@ msgstr "Opus"
 msgid "Organise Files"
 msgstr "Упорядкування файлів"
 
-#: library/libraryview.cpp:405 ui/mainwindow.cpp:676
+#: library/libraryview.cpp:404 ui/mainwindow.cpp:676
 msgid "Organise files..."
 msgstr "Упорядкування файлів…"
 
@@ -3825,7 +3829,7 @@ msgstr "Пріоритет"
 #: ../bin/src/ui_digitallyimportedsettingspage.h:165
 #: ../bin/src/ui_magnatunesettingspage.h:165
 #: ../bin/src/ui_spotifysettingspage.h:215 ../bin/src/ui_settingsdialog.h:115
-#: ../bin/src/ui_lastfmsettingspage.h:154 ../bin/src/ui_vksettingspage.h:216
+#: ../bin/src/ui_lastfmsettingspage.h:134 ../bin/src/ui_vksettingspage.h:216
 msgid "Preferences"
 msgstr "Параметри"
 
@@ -3948,7 +3952,7 @@ msgstr "Керування чергою"
 msgid "Queue selected tracks"
 msgstr "Поставити в чергу вибрані доріжки"
 
-#: globalsearch/globalsearchview.cpp:466 library/libraryview.cpp:389
+#: globalsearch/globalsearchview.cpp:466 library/libraryview.cpp:388
 #: ui/mainwindow.cpp:1698
 msgid "Queue track"
 msgstr "Поставити в чергу доріжки"
@@ -4125,7 +4129,7 @@ msgid "Repeat track"
 msgstr "Повторювати композицію"
 
 #: devices/deviceview.cpp:221 globalsearch/globalsearchview.cpp:457
-#: internet/core/internetservice.cpp:93 library/libraryview.cpp:381
+#: internet/core/internetservice.cpp:93 library/libraryview.cpp:380
 #: widgets/fileviewlist.cpp:34
 msgid "Replace current playlist"
 msgstr "Замінити список відтворення"
@@ -4308,7 +4312,7 @@ msgstr "Масштабований розмір"
 msgid "Score"
 msgstr "Рахунок"
 
-#: ../bin/src/ui_lastfmsettingspage.h:155
+#: ../bin/src/ui_lastfmsettingspage.h:135
 msgid "Scrobble tracks that I listen to"
 msgstr "Скробблити доріжки, які я слухаю"
 
@@ -4461,7 +4465,7 @@ msgstr "Адреса сервера"
 msgid "Server details"
 msgstr "Параметри сервера"
 
-#: internet/lastfm/lastfmservice.cpp:242
+#: internet/lastfm/lastfmservice.cpp:261
 msgid "Service offline"
 msgstr "Служба вимкнена"
 
@@ -4565,7 +4569,7 @@ msgstr "Показати на повний розмір…"
 msgid "Show groups in global search result"
 msgstr "Показувати групи у результатах загального пошуку"
 
-#: library/libraryview.cpp:423 ui/mainwindow.cpp:686
+#: library/libraryview.cpp:422 ui/mainwindow.cpp:686
 #: widgets/fileviewlist.cpp:53
 msgid "Show in file browser..."
 msgstr "Показати в оглядачі файлів…"
@@ -4574,7 +4578,7 @@ msgstr "Показати в оглядачі файлів…"
 msgid "Show in library..."
 msgstr "Показати у фонотеці…"
 
-#: library/libraryview.cpp:426
+#: library/libraryview.cpp:425
 msgid "Show in various artists"
 msgstr "Показувати в різних виконавцях"
 
@@ -4598,11 +4602,11 @@ msgstr "Показувати відтворювану композицію на 
 msgid "Show search suggestions"
 msgstr "Показувати пропозиції щодо пошуку"
 
-#: ../bin/src/ui_lastfmsettingspage.h:156
+#: ../bin/src/ui_lastfmsettingspage.h:136
 msgid "Show the \"love\" button"
 msgstr "Показувати кнопку «love»"
 
-#: ../bin/src/ui_lastfmsettingspage.h:157
+#: ../bin/src/ui_lastfmsettingspage.h:137
 msgid "Show the scrobble button in the main window"
 msgstr "Показувати кнопку скроблінга в головному вікні"
 
@@ -4999,7 +5003,7 @@ msgid ""
 "rescan because of the new features listed below:"
 msgstr "Версія Clementine, яку ви щойно встановили, вимагає повного сканування фонотеки задля використання наступних нових можливостей:"
 
-#: library/libraryview.cpp:562
+#: library/libraryview.cpp:561
 msgid "There are other songs in this album"
 msgstr "У цьому альбомі є інші композиції"
 
@@ -5035,7 +5039,7 @@ msgid ""
 "continue?"
 msgstr "Ці файли будуть вилучені з пристрою. Ви впевнені? Вилучити їх?"
 
-#: library/libraryview.cpp:646 ui/mainwindow.cpp:2318 widgets/fileview.cpp:187
+#: library/libraryview.cpp:645 ui/mainwindow.cpp:2318 widgets/fileview.cpp:187
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -5106,7 +5110,7 @@ msgstr "Під час першого під’єднання пристрою, C
 msgid "This option can be changed in the \"Behavior\" preferences"
 msgstr "Значення цього параметра можна змінити на сторінці «Поведінка» налаштувань програми."
 
-#: internet/lastfm/lastfmservice.cpp:244
+#: internet/lastfm/lastfmservice.cpp:263
 msgid "This stream is for paid subscribers only"
 msgstr "Цей потік лише для платних передплатників"
 
@@ -5257,7 +5261,7 @@ msgid "Unknown content-type"
 msgstr "Невідомий content-type"
 
 #: internet/digitally/digitallyimportedclient.cpp:74
-#: internet/lastfm/lastfmservice.cpp:263
+#: internet/lastfm/lastfmservice.cpp:282
 msgid "Unknown error"
 msgstr "Невідома помилка"
 
@@ -5324,7 +5328,7 @@ msgstr "Оновлення фонотеки"
 msgid "Usage"
 msgstr "Використання"
 
-#: ../bin/src/ui_lastfmsettingspage.h:158
+#: ../bin/src/ui_lastfmsettingspage.h:138
 msgid "Use Album Artist tag when available"
 msgstr "Використовувати мітку виконавця альбому, якщо є"
 
@@ -5577,7 +5581,7 @@ msgstr "Windows Media audio"
 msgid "Without cover:"
 msgstr "Без обкладинки:"
 
-#: library/libraryview.cpp:563
+#: library/libraryview.cpp:562
 msgid ""
 "Would you like to move the other songs in this album to Various Artists as "
 "well?"
@@ -5714,7 +5718,7 @@ msgstr "Потрібно перезапустити Clementine, щоб змін�
 msgid "Your IP address:"
 msgstr "Ваша IP-адреса:"
 
-#: internet/lastfm/lastfmsettingspage.cpp:80
+#: internet/lastfm/lastfmsettingspage.cpp:93
 msgid "Your Last.fm credentials were incorrect"
 msgstr "Ваші облікові дані Last.fm неправильні"
 
@@ -5722,7 +5726,7 @@ msgstr "Ваші облікові дані Last.fm неправильні"
 msgid "Your Magnatune credentials were incorrect"
 msgstr "Введені дані облікового запису Magnatune некоректні"
 
-#: library/libraryview.cpp:353
+#: library/libraryview.cpp:352
 msgid "Your library is empty!"
 msgstr "Ваша фонотека порожня!"
 

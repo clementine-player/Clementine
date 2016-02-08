@@ -15,7 +15,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2016-01-13 23:28+0000\n"
+"PO-Revision-Date: 2016-02-03 14:58+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Arabic (http://www.transifex.com/davidsansome/clementine/language/ar/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -424,8 +424,7 @@ msgid "Absolute"
 msgstr ""
 
 #: ../bin/src/ui_magnatunesettingspage.h:154
-#: ../bin/src/ui_spotifysettingspage.h:207
-#: ../bin/src/ui_lastfmsettingspage.h:150 ../bin/src/ui_vksettingspage.h:213
+#: ../bin/src/ui_spotifysettingspage.h:207 ../bin/src/ui_vksettingspage.h:213
 #: ../bin/src/ui_seafilesettingspage.h:168
 msgid "Account details"
 msgstr "معلومات الحساب"
@@ -823,7 +822,7 @@ msgid "Append files/URLs to the playlist"
 msgstr "أضف الملفات/العناوين إلى قائمة التشغيل"
 
 #: devices/deviceview.cpp:218 globalsearch/globalsearchview.cpp:453
-#: internet/core/internetservice.cpp:81 library/libraryview.cpp:378
+#: internet/core/internetservice.cpp:81 library/libraryview.cpp:377
 #: widgets/fileviewlist.cpp:31
 msgid "Append to current playlist"
 msgstr "أضف إلى قائمة التشغيل الحالية"
@@ -888,8 +887,8 @@ msgstr "مخرج الصوت"
 
 #: internet/digitally/digitallyimportedsettingspage.cpp:82
 #: internet/magnatune/magnatunesettingspage.cpp:117
-#: internet/lastfm/lastfmservice.cpp:228
-#: internet/lastfm/lastfmsettingspage.cpp:84
+#: internet/lastfm/lastfmservice.cpp:247
+#: internet/lastfm/lastfmsettingspage.cpp:97
 msgid "Authentication failed"
 msgstr "فشلت عملية التحقق"
 
@@ -1279,7 +1278,11 @@ msgstr "تعذر على كلمنتاين إيجاد نتائج لهذا المل
 msgid "Clementine will find music in:"
 msgstr "سيبحث كلمنتاين عن المقاطع في:"
 
-#: library/libraryview.cpp:359
+#: internet/lastfm/lastfmsettingspage.cpp:78
+msgid "Click Ok once you authenticated Clementine in your last.fm account."
+msgstr ""
+
+#: library/libraryview.cpp:358
 msgid "Click here to add some music"
 msgstr "اضغط هنا لإضافة بعض الموسيقى"
 
@@ -1294,6 +1297,7 @@ msgid "Click to toggle between remaining time and total time"
 msgstr "اضغط للتبديل بين الوقت المتبقي والوقت الكلي."
 
 #: ../bin/src/ui_soundcloudsettingspage.h:103
+#: ../bin/src/ui_lastfmsettingspage.h:133
 #: ../bin/src/ui_googledrivesettingspage.h:102
 #: ../bin/src/ui_dropboxsettingspage.h:102
 #: ../bin/src/ui_skydrivesettingspage.h:102
@@ -1467,7 +1471,7 @@ msgstr "انسخ الرابط إلى الحافظة"
 msgid "Copy to clipboard"
 msgstr "نسخ إلى المكتبة..."
 
-#: library/libraryview.cpp:409 internet/podcasts/podcastservice.cpp:438
+#: library/libraryview.cpp:408 internet/podcasts/podcastservice.cpp:438
 #: ui/mainwindow.cpp:680 widgets/fileviewlist.cpp:44
 msgid "Copy to device..."
 msgstr "نسخ إلى جهاز..."
@@ -1656,7 +1660,7 @@ msgstr "احذف"
 msgid "Delete downloaded data"
 msgstr "حذف البيانات المحملة"
 
-#: devices/deviceview.cpp:408 library/libraryview.cpp:645
+#: devices/deviceview.cpp:408 library/libraryview.cpp:644
 #: ui/mainwindow.cpp:2317 widgets/fileview.cpp:186
 msgid "Delete files"
 msgstr "احذف الملفات"
@@ -1665,7 +1669,7 @@ msgstr "احذف الملفات"
 msgid "Delete from device..."
 msgstr "احذف من الجهاز"
 
-#: library/libraryview.cpp:411 ui/mainwindow.cpp:683
+#: library/libraryview.cpp:410 ui/mainwindow.cpp:683
 #: widgets/fileviewlist.cpp:47
 msgid "Delete from disk..."
 msgstr "احذف من القرص..."
@@ -1678,7 +1682,7 @@ msgstr "حذف الحلقات المشغلة"
 msgid "Delete preset"
 msgstr "احذف ملف الإعدادات"
 
-#: library/libraryview.cpp:401
+#: library/libraryview.cpp:400
 msgid "Delete smart playlist"
 msgstr "احذف لائحة التشغيل الذكية"
 
@@ -1827,7 +1831,7 @@ msgstr ""
 msgid "Don't repeat"
 msgstr "لا تكرر"
 
-#: library/libraryview.cpp:429
+#: library/libraryview.cpp:428
 msgid "Don't show in various artists"
 msgstr "لا تظهره في فئة فنانون متنوعون"
 
@@ -1961,7 +1965,7 @@ msgstr "النمط النشيط مفعل"
 msgid "Dynamic random mix"
 msgstr "مزج عشوائي تلقائيا"
 
-#: library/libraryview.cpp:398
+#: library/libraryview.cpp:397
 msgid "Edit smart playlist..."
 msgstr "حرر قائمة التشغيل الذكية"
 
@@ -1982,12 +1986,12 @@ msgstr "حرر الوسوم"
 msgid "Edit track information"
 msgstr "تعديل معلومات المقطع"
 
-#: library/libraryview.cpp:416 widgets/fileviewlist.cpp:51
+#: library/libraryview.cpp:415 widgets/fileviewlist.cpp:51
 #: ../bin/src/ui_mainwindow.h:669
 msgid "Edit track information..."
 msgstr "تعديل معلومات المقطع..."
 
-#: library/libraryview.cpp:419
+#: library/libraryview.cpp:418
 msgid "Edit tracks information..."
 msgstr "تعديل معلومات المقاطع..."
 
@@ -2104,7 +2108,7 @@ msgid "Equivalent to --log-levels *:3"
 msgstr "يكافئ --log-levels *:3"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:246
-#: library/libraryview.cpp:639 ui/mainwindow.cpp:2020 ui/mainwindow.cpp:2267
+#: library/libraryview.cpp:638 ui/mainwindow.cpp:2020 ui/mainwindow.cpp:2267
 #: ui/mainwindow.cpp:2415 internet/vk/vkservice.cpp:643
 msgid "Error"
 msgstr "خطأ"
@@ -2768,31 +2772,31 @@ msgstr ""
 msgid "Intro tracks"
 msgstr ""
 
-#: internet/lastfm/lastfmservice.cpp:240
+#: internet/lastfm/lastfmservice.cpp:259
 msgid "Invalid API key"
 msgstr "مفتاح API غير صالح"
 
-#: internet/lastfm/lastfmservice.cpp:230
+#: internet/lastfm/lastfmservice.cpp:249
 msgid "Invalid format"
 msgstr "صيغة غير متاحة"
 
-#: internet/lastfm/lastfmservice.cpp:226
+#: internet/lastfm/lastfmservice.cpp:245
 msgid "Invalid method"
 msgstr "طريقة غير متاحة"
 
-#: internet/lastfm/lastfmservice.cpp:232
+#: internet/lastfm/lastfmservice.cpp:251
 msgid "Invalid parameters"
 msgstr "إعدادات غير صالحة"
 
-#: internet/lastfm/lastfmservice.cpp:234
+#: internet/lastfm/lastfmservice.cpp:253
 msgid "Invalid resource specified"
 msgstr "تم تعيين مصدر غير صالح"
 
-#: internet/lastfm/lastfmservice.cpp:224
+#: internet/lastfm/lastfmservice.cpp:243
 msgid "Invalid service"
 msgstr "خدمة غير متاحة"
 
-#: internet/lastfm/lastfmservice.cpp:238
+#: internet/lastfm/lastfmservice.cpp:257
 msgid "Invalid session key"
 msgstr "مفتاح جلسة غير صالح"
 
@@ -2898,17 +2902,21 @@ msgctxt "A playlist's tag."
 msgid "Last played"
 msgstr "آخر تشغيل"
 
-#: ../bin/src/ui_lastfmsettingspage.h:149
+#: ../bin/src/ui_lastfmsettingspage.h:131
 msgid "Last.fm"
 msgstr "Last.fm"
 
-#: internet/lastfm/lastfmservice.cpp:247
+#: internet/lastfm/lastfmsettingspage.cpp:77
+msgid "Last.fm authentication"
+msgstr ""
+
+#: internet/lastfm/lastfmsettingspage.cpp:70
+msgid "Last.fm authentication failed"
+msgstr ""
+
+#: internet/lastfm/lastfmservice.cpp:266
 msgid "Last.fm is currently busy, please try again in a few minutes"
 msgstr "Last.fm مشغول حاليا، الرجاء إعادة المحاولة بعد دقائق."
-
-#: ../bin/src/ui_lastfmsettingspage.h:153
-msgid "Last.fm password"
-msgstr "كلمة السر"
 
 #: songinfo/lastfmtrackinfoprovider.cpp:76
 msgid "Last.fm play counts"
@@ -2917,10 +2925,6 @@ msgstr "مرات تشغيل Last.fm"
 #: songinfo/lastfmtrackinfoprovider.cpp:130
 msgid "Last.fm tags"
 msgstr "وسوم Last.fm"
-
-#: ../bin/src/ui_lastfmsettingspage.h:151
-msgid "Last.fm username"
-msgstr "اسم المستخدم"
 
 #: songinfo/lastfmtrackinfoprovider.cpp:110
 msgid "Last.fm wiki"
@@ -3039,7 +3043,7 @@ msgstr "تحميل ملفات/روابط، استبدال قائمة التشغ�
 #: ../bin/src/ui_soundcloudsettingspage.h:102
 #: ../bin/src/ui_spotifysettingspage.h:210
 #: ../bin/src/ui_subsonicsettingspage.h:129
-#: ../bin/src/ui_lastfmsettingspage.h:152
+#: ../bin/src/ui_lastfmsettingspage.h:132
 #: ../bin/src/ui_googledrivesettingspage.h:101
 #: ../bin/src/ui_dropboxsettingspage.h:101
 #: ../bin/src/ui_skydrivesettingspage.h:101
@@ -3152,7 +3156,7 @@ msgstr "اجعلها كذلك!"
 msgid "Make playlist available offline"
 msgstr "اجعل قائمة التشغيل متاحة دون اتصال"
 
-#: internet/lastfm/lastfmservice.cpp:259
+#: internet/lastfm/lastfmservice.cpp:278
 msgid "Malformed response"
 msgstr "إجابة غير صالحة"
 
@@ -3361,7 +3365,7 @@ msgstr "مجلد جديد"
 msgid "New playlist"
 msgstr "قائمة تشغيل جديدة"
 
-#: library/libraryview.cpp:395
+#: library/libraryview.cpp:394
 msgid "New smart playlist..."
 msgstr "قائمة تشغيل ذكية جديدة"
 
@@ -3424,7 +3428,7 @@ msgstr "بدون أجزاء قصيرة"
 msgid "None"
 msgstr "لا شيء"
 
-#: library/libraryview.cpp:640 ui/mainwindow.cpp:2268 ui/mainwindow.cpp:2416
+#: library/libraryview.cpp:639 ui/mainwindow.cpp:2268 ui/mainwindow.cpp:2416
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "لا مقطع من المقاطع المختارة مناسب لنسخه لجهاز."
 
@@ -3444,19 +3448,19 @@ msgstr "غير متاح عند استعمال قائمة تشغيل دينامي
 msgid "Not connected"
 msgstr "غير متصل"
 
-#: internet/lastfm/lastfmservice.cpp:250
+#: internet/lastfm/lastfmservice.cpp:269
 msgid "Not enough content"
 msgstr "لا يوجد محتوى كافي"
 
-#: internet/lastfm/lastfmservice.cpp:254
+#: internet/lastfm/lastfmservice.cpp:273
 msgid "Not enough fans"
 msgstr "عدد المعجبين غير كافٍ"
 
-#: internet/lastfm/lastfmservice.cpp:252
+#: internet/lastfm/lastfmservice.cpp:271
 msgid "Not enough members"
 msgstr "عدد الأعضاء غير كافٍ"
 
-#: internet/lastfm/lastfmservice.cpp:256
+#: internet/lastfm/lastfmservice.cpp:275
 msgid "Not enough neighbors"
 msgstr "عدد الجيران غير كافٍ"
 
@@ -3586,7 +3590,7 @@ msgid "Open in Google Drive"
 msgstr "فتح في Google Drive"
 
 #: devices/deviceview.cpp:224 globalsearch/globalsearchview.cpp:461
-#: internet/core/internetservice.cpp:105 library/libraryview.cpp:384
+#: internet/core/internetservice.cpp:105 library/libraryview.cpp:383
 #: widgets/fileviewlist.cpp:36
 msgid "Open in new playlist"
 msgstr "فتح في قائمة تشغيل جديدة"
@@ -3605,7 +3609,7 @@ msgstr "افتح في المتصفح"
 msgid "Open..."
 msgstr "فتح..."
 
-#: internet/lastfm/lastfmservice.cpp:236
+#: internet/lastfm/lastfmservice.cpp:255
 msgid "Operation failed"
 msgstr "فشلت العملية"
 
@@ -3631,7 +3635,7 @@ msgstr "Opus"
 msgid "Organise Files"
 msgstr "ترتيب الملفات"
 
-#: library/libraryview.cpp:405 ui/mainwindow.cpp:676
+#: library/libraryview.cpp:404 ui/mainwindow.cpp:676
 msgid "Organise files..."
 msgstr "ترتيب الملفات..."
 
@@ -3831,7 +3835,7 @@ msgstr ""
 #: ../bin/src/ui_digitallyimportedsettingspage.h:165
 #: ../bin/src/ui_magnatunesettingspage.h:165
 #: ../bin/src/ui_spotifysettingspage.h:215 ../bin/src/ui_settingsdialog.h:115
-#: ../bin/src/ui_lastfmsettingspage.h:154 ../bin/src/ui_vksettingspage.h:216
+#: ../bin/src/ui_lastfmsettingspage.h:134 ../bin/src/ui_vksettingspage.h:216
 msgid "Preferences"
 msgstr "التفضيلات"
 
@@ -3954,7 +3958,7 @@ msgstr "مدير لائحة الانتظار"
 msgid "Queue selected tracks"
 msgstr "أضف المختارة للائحة الانتظار"
 
-#: globalsearch/globalsearchview.cpp:466 library/libraryview.cpp:389
+#: globalsearch/globalsearchview.cpp:466 library/libraryview.cpp:388
 #: ui/mainwindow.cpp:1698
 msgid "Queue track"
 msgstr "أضف للائحة الانتظار"
@@ -4131,7 +4135,7 @@ msgid "Repeat track"
 msgstr "كرر المقطع"
 
 #: devices/deviceview.cpp:221 globalsearch/globalsearchview.cpp:457
-#: internet/core/internetservice.cpp:93 library/libraryview.cpp:381
+#: internet/core/internetservice.cpp:93 library/libraryview.cpp:380
 #: widgets/fileviewlist.cpp:34
 msgid "Replace current playlist"
 msgstr "استبدل قائمة التشغيل الحالية"
@@ -4314,7 +4318,7 @@ msgstr "غيّر الحجم"
 msgid "Score"
 msgstr "النتيجة"
 
-#: ../bin/src/ui_lastfmsettingspage.h:155
+#: ../bin/src/ui_lastfmsettingspage.h:135
 msgid "Scrobble tracks that I listen to"
 msgstr "أرسل معلومات المقاطع التي استمع إليها"
 
@@ -4467,7 +4471,7 @@ msgstr "عنوان الخادم"
 msgid "Server details"
 msgstr "معلومات الخادم"
 
-#: internet/lastfm/lastfmservice.cpp:242
+#: internet/lastfm/lastfmservice.cpp:261
 msgid "Service offline"
 msgstr "خدمة غير متصلة"
 
@@ -4571,7 +4575,7 @@ msgstr "أظهر الحجم الأصلي..."
 msgid "Show groups in global search result"
 msgstr "أظهر المجموعات في نتائج البحث الشامل"
 
-#: library/libraryview.cpp:423 ui/mainwindow.cpp:686
+#: library/libraryview.cpp:422 ui/mainwindow.cpp:686
 #: widgets/fileviewlist.cpp:53
 msgid "Show in file browser..."
 msgstr "أظهر في متصفح الملفات..."
@@ -4580,7 +4584,7 @@ msgstr "أظهر في متصفح الملفات..."
 msgid "Show in library..."
 msgstr "أظهر في المكتبة..."
 
-#: library/libraryview.cpp:426
+#: library/libraryview.cpp:425
 msgid "Show in various artists"
 msgstr "أظهر في فنانين متنوعين"
 
@@ -4604,11 +4608,11 @@ msgstr ""
 msgid "Show search suggestions"
 msgstr "أظهر اقتراحات البحث"
 
-#: ../bin/src/ui_lastfmsettingspage.h:156
+#: ../bin/src/ui_lastfmsettingspage.h:136
 msgid "Show the \"love\" button"
 msgstr "أظهر زر \"حب\""
 
-#: ../bin/src/ui_lastfmsettingspage.h:157
+#: ../bin/src/ui_lastfmsettingspage.h:137
 msgid "Show the scrobble button in the main window"
 msgstr "أظهر زر نقل معلومات الاستماع في النافذة الرئيسية"
 
@@ -5005,7 +5009,7 @@ msgid ""
 "rescan because of the new features listed below:"
 msgstr "إصدار كلمنتاين الذي حدثت إليه يتطلب القيام بفحص شامل للمكتبة من جديد لدعم ميزات الإصدار الجديدة المذكورة أسفله:"
 
-#: library/libraryview.cpp:562
+#: library/libraryview.cpp:561
 msgid "There are other songs in this album"
 msgstr "هناك مقاطع أخرى في هذا الألبوم"
 
@@ -5041,7 +5045,7 @@ msgid ""
 "continue?"
 msgstr "سيتم حذف هذه الملفات من الجهاز. هل أنت متأكد من رغبتك بالاستمرار؟"
 
-#: library/libraryview.cpp:646 ui/mainwindow.cpp:2318 widgets/fileview.cpp:187
+#: library/libraryview.cpp:645 ui/mainwindow.cpp:2318 widgets/fileview.cpp:187
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -5112,7 +5116,7 @@ msgstr "هذه أول مرة تقوم بوصل هذا الجهاز. سيعمل �
 msgid "This option can be changed in the \"Behavior\" preferences"
 msgstr "يمكن تغيير هذه الخاصية من إعدادات \"السلوك\""
 
-#: internet/lastfm/lastfmservice.cpp:244
+#: internet/lastfm/lastfmservice.cpp:263
 msgid "This stream is for paid subscribers only"
 msgstr "هذا التيار للاشتراكات المدفوعة فقط"
 
@@ -5263,7 +5267,7 @@ msgid "Unknown content-type"
 msgstr "نوع محتوى غير معروف"
 
 #: internet/digitally/digitallyimportedclient.cpp:74
-#: internet/lastfm/lastfmservice.cpp:263
+#: internet/lastfm/lastfmservice.cpp:282
 msgid "Unknown error"
 msgstr "خطأ مجهول"
 
@@ -5330,7 +5334,7 @@ msgstr "تحديث المكتبة"
 msgid "Usage"
 msgstr "الإستخدام"
 
-#: ../bin/src/ui_lastfmsettingspage.h:158
+#: ../bin/src/ui_lastfmsettingspage.h:138
 msgid "Use Album Artist tag when available"
 msgstr "استخدم وسم فنان الألبوم إن كان متوفرا"
 
@@ -5583,7 +5587,7 @@ msgstr "Windows Media audio"
 msgid "Without cover:"
 msgstr "بدون أغلفة:"
 
-#: library/libraryview.cpp:563
+#: library/libraryview.cpp:562
 msgid ""
 "Would you like to move the other songs in this album to Various Artists as "
 "well?"
@@ -5720,7 +5724,7 @@ msgstr "سيتوجب عليك إعادة تشغيل كلمنتاين إذا غي
 msgid "Your IP address:"
 msgstr "عنوان الايبي الخاص بك هو:"
 
-#: internet/lastfm/lastfmsettingspage.cpp:80
+#: internet/lastfm/lastfmsettingspage.cpp:93
 msgid "Your Last.fm credentials were incorrect"
 msgstr "بيانات التعريف الخاصة بحسابك على Last.fm خاطئة"
 
@@ -5728,7 +5732,7 @@ msgstr "بيانات التعريف الخاصة بحسابك على Last.fm خ�
 msgid "Your Magnatune credentials were incorrect"
 msgstr "بيانات التعريف الخاصة بحسابك على Magnatune خاطئة"
 
-#: library/libraryview.cpp:353
+#: library/libraryview.cpp:352
 msgid "Your library is empty!"
 msgstr "مكتبتك فارغة!"
 

@@ -19,7 +19,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2016-01-13 23:28+0000\n"
+"PO-Revision-Date: 2016-02-03 14:58+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Korean (http://www.transifex.com/davidsansome/clementine/language/ko/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -428,8 +428,7 @@ msgid "Absolute"
 msgstr "절대경로"
 
 #: ../bin/src/ui_magnatunesettingspage.h:154
-#: ../bin/src/ui_spotifysettingspage.h:207
-#: ../bin/src/ui_lastfmsettingspage.h:150 ../bin/src/ui_vksettingspage.h:213
+#: ../bin/src/ui_spotifysettingspage.h:207 ../bin/src/ui_vksettingspage.h:213
 #: ../bin/src/ui_seafilesettingspage.h:168
 msgid "Account details"
 msgstr "계정 정보"
@@ -827,7 +826,7 @@ msgid "Append files/URLs to the playlist"
 msgstr "재생목록에 파일/URL 추가"
 
 #: devices/deviceview.cpp:218 globalsearch/globalsearchview.cpp:453
-#: internet/core/internetservice.cpp:81 library/libraryview.cpp:378
+#: internet/core/internetservice.cpp:81 library/libraryview.cpp:377
 #: widgets/fileviewlist.cpp:31
 msgid "Append to current playlist"
 msgstr "현재 재생목록에 추가"
@@ -892,8 +891,8 @@ msgstr "오디오 출력"
 
 #: internet/digitally/digitallyimportedsettingspage.cpp:82
 #: internet/magnatune/magnatunesettingspage.cpp:117
-#: internet/lastfm/lastfmservice.cpp:228
-#: internet/lastfm/lastfmsettingspage.cpp:84
+#: internet/lastfm/lastfmservice.cpp:247
+#: internet/lastfm/lastfmsettingspage.cpp:97
 msgid "Authentication failed"
 msgstr "인증 실패"
 
@@ -1283,7 +1282,11 @@ msgstr "Clementine은 이 파일의 결과를 검색할 수 없습니다"
 msgid "Clementine will find music in:"
 msgstr "Clementine이 음악을 찾을 수 있습니다."
 
-#: library/libraryview.cpp:359
+#: internet/lastfm/lastfmsettingspage.cpp:78
+msgid "Click Ok once you authenticated Clementine in your last.fm account."
+msgstr ""
+
+#: library/libraryview.cpp:358
 msgid "Click here to add some music"
 msgstr "음악을 추가하려면 여기를 클릭하세요"
 
@@ -1298,6 +1301,7 @@ msgid "Click to toggle between remaining time and total time"
 msgstr "남은 시간과 전체 시간을 바꾸려면 클릭하세요"
 
 #: ../bin/src/ui_soundcloudsettingspage.h:103
+#: ../bin/src/ui_lastfmsettingspage.h:133
 #: ../bin/src/ui_googledrivesettingspage.h:102
 #: ../bin/src/ui_dropboxsettingspage.h:102
 #: ../bin/src/ui_skydrivesettingspage.h:102
@@ -1471,7 +1475,7 @@ msgstr "공유 URL 복사"
 msgid "Copy to clipboard"
 msgstr "클립보드로 복사"
 
-#: library/libraryview.cpp:409 internet/podcasts/podcastservice.cpp:438
+#: library/libraryview.cpp:408 internet/podcasts/podcastservice.cpp:438
 #: ui/mainwindow.cpp:680 widgets/fileviewlist.cpp:44
 msgid "Copy to device..."
 msgstr "장치에 복사..."
@@ -1660,7 +1664,7 @@ msgstr "삭제"
 msgid "Delete downloaded data"
 msgstr "다운로드된 데이터 삭제"
 
-#: devices/deviceview.cpp:408 library/libraryview.cpp:645
+#: devices/deviceview.cpp:408 library/libraryview.cpp:644
 #: ui/mainwindow.cpp:2317 widgets/fileview.cpp:186
 msgid "Delete files"
 msgstr "파일 삭제"
@@ -1669,7 +1673,7 @@ msgstr "파일 삭제"
 msgid "Delete from device..."
 msgstr "장치에서 삭제..."
 
-#: library/libraryview.cpp:411 ui/mainwindow.cpp:683
+#: library/libraryview.cpp:410 ui/mainwindow.cpp:683
 #: widgets/fileviewlist.cpp:47
 msgid "Delete from disk..."
 msgstr "디스크에서 삭제..."
@@ -1682,7 +1686,7 @@ msgstr "재생된 에피소드 삭제"
 msgid "Delete preset"
 msgstr "프리셋 삭제"
 
-#: library/libraryview.cpp:401
+#: library/libraryview.cpp:400
 msgid "Delete smart playlist"
 msgstr "스마트 재생목록 지우기"
 
@@ -1831,7 +1835,7 @@ msgstr "전체 재탐색은 앨범아트, 재생회수, 별점 등 모든 정보
 msgid "Don't repeat"
 msgstr "반복하지 않기"
 
-#: library/libraryview.cpp:429
+#: library/libraryview.cpp:428
 msgid "Don't show in various artists"
 msgstr "다양한 음악가에 표시하지 않기"
 
@@ -1965,7 +1969,7 @@ msgstr "다이나믹 모드가 켜졌습니다"
 msgid "Dynamic random mix"
 msgstr "다이나믹 랜덤 믹스"
 
-#: library/libraryview.cpp:398
+#: library/libraryview.cpp:397
 msgid "Edit smart playlist..."
 msgstr "스마트 재생목록 편집..."
 
@@ -1986,12 +1990,12 @@ msgstr "태그 편집"
 msgid "Edit track information"
 msgstr "트랙 정보 편집"
 
-#: library/libraryview.cpp:416 widgets/fileviewlist.cpp:51
+#: library/libraryview.cpp:415 widgets/fileviewlist.cpp:51
 #: ../bin/src/ui_mainwindow.h:669
 msgid "Edit track information..."
 msgstr "트랙 정보 편집..."
 
-#: library/libraryview.cpp:419
+#: library/libraryview.cpp:418
 msgid "Edit tracks information..."
 msgstr "트랙 정보 편집..."
 
@@ -2108,7 +2112,7 @@ msgid "Equivalent to --log-levels *:3"
 msgstr "동등한 --log-level *:3"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:246
-#: library/libraryview.cpp:639 ui/mainwindow.cpp:2020 ui/mainwindow.cpp:2267
+#: library/libraryview.cpp:638 ui/mainwindow.cpp:2020 ui/mainwindow.cpp:2267
 #: ui/mainwindow.cpp:2415 internet/vk/vkservice.cpp:643
 msgid "Error"
 msgstr "오류"
@@ -2772,31 +2776,31 @@ msgstr "인터넷 서비스"
 msgid "Intro tracks"
 msgstr ""
 
-#: internet/lastfm/lastfmservice.cpp:240
+#: internet/lastfm/lastfmservice.cpp:259
 msgid "Invalid API key"
 msgstr "잘못된 API "
 
-#: internet/lastfm/lastfmservice.cpp:230
+#: internet/lastfm/lastfmservice.cpp:249
 msgid "Invalid format"
 msgstr "잘못된 형식"
 
-#: internet/lastfm/lastfmservice.cpp:226
+#: internet/lastfm/lastfmservice.cpp:245
 msgid "Invalid method"
 msgstr "잘못된 방법"
 
-#: internet/lastfm/lastfmservice.cpp:232
+#: internet/lastfm/lastfmservice.cpp:251
 msgid "Invalid parameters"
 msgstr "잘못된 매개변수"
 
-#: internet/lastfm/lastfmservice.cpp:234
+#: internet/lastfm/lastfmservice.cpp:253
 msgid "Invalid resource specified"
 msgstr "잘못된 리소스가 지정되었습니다."
 
-#: internet/lastfm/lastfmservice.cpp:224
+#: internet/lastfm/lastfmservice.cpp:243
 msgid "Invalid service"
 msgstr "잘못된 서비스"
 
-#: internet/lastfm/lastfmservice.cpp:238
+#: internet/lastfm/lastfmservice.cpp:257
 msgid "Invalid session key"
 msgstr "잘못된 세션 키"
 
@@ -2902,17 +2906,21 @@ msgctxt "A playlist's tag."
 msgid "Last played"
 msgstr "마지막으로 재생됨"
 
-#: ../bin/src/ui_lastfmsettingspage.h:149
+#: ../bin/src/ui_lastfmsettingspage.h:131
 msgid "Last.fm"
 msgstr "Last.fm"
 
-#: internet/lastfm/lastfmservice.cpp:247
+#: internet/lastfm/lastfmsettingspage.cpp:77
+msgid "Last.fm authentication"
+msgstr ""
+
+#: internet/lastfm/lastfmsettingspage.cpp:70
+msgid "Last.fm authentication failed"
+msgstr ""
+
+#: internet/lastfm/lastfmservice.cpp:266
 msgid "Last.fm is currently busy, please try again in a few minutes"
 msgstr "Last.fm 이 현재 바쁩니다. 잠시 후 다시 시도해 주세요."
-
-#: ../bin/src/ui_lastfmsettingspage.h:153
-msgid "Last.fm password"
-msgstr "Last.fm 비밀번호"
 
 #: songinfo/lastfmtrackinfoprovider.cpp:76
 msgid "Last.fm play counts"
@@ -2921,10 +2929,6 @@ msgstr "Last.fm 재생 횟수"
 #: songinfo/lastfmtrackinfoprovider.cpp:130
 msgid "Last.fm tags"
 msgstr "Last.fm 태그"
-
-#: ../bin/src/ui_lastfmsettingspage.h:151
-msgid "Last.fm username"
-msgstr "Last.fm 사용자명"
 
 #: songinfo/lastfmtrackinfoprovider.cpp:110
 msgid "Last.fm wiki"
@@ -3043,7 +3047,7 @@ msgstr "현재 재생목록을 교체할 파일/URL 불러오기"
 #: ../bin/src/ui_soundcloudsettingspage.h:102
 #: ../bin/src/ui_spotifysettingspage.h:210
 #: ../bin/src/ui_subsonicsettingspage.h:129
-#: ../bin/src/ui_lastfmsettingspage.h:152
+#: ../bin/src/ui_lastfmsettingspage.h:132
 #: ../bin/src/ui_googledrivesettingspage.h:101
 #: ../bin/src/ui_dropboxsettingspage.h:101
 #: ../bin/src/ui_skydrivesettingspage.h:101
@@ -3156,7 +3160,7 @@ msgstr "Make it so!"
 msgid "Make playlist available offline"
 msgstr "재생목록을 오프라인에서 재생 가능하도록 설정"
 
-#: internet/lastfm/lastfmservice.cpp:259
+#: internet/lastfm/lastfmservice.cpp:278
 msgid "Malformed response"
 msgstr "잘못된 응답"
 
@@ -3365,7 +3369,7 @@ msgstr "새 폴더"
 msgid "New playlist"
 msgstr "새로운 재생목록"
 
-#: library/libraryview.cpp:395
+#: library/libraryview.cpp:394
 msgid "New smart playlist..."
 msgstr "새 스마트 재생목록"
 
@@ -3428,7 +3432,7 @@ msgstr "짧은 블록 "
 msgid "None"
 msgstr "없음"
 
-#: library/libraryview.cpp:640 ui/mainwindow.cpp:2268 ui/mainwindow.cpp:2416
+#: library/libraryview.cpp:639 ui/mainwindow.cpp:2268 ui/mainwindow.cpp:2416
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "선택된 음악들이 장치에 복사되기 적합하지 않음"
 
@@ -3448,19 +3452,19 @@ msgstr "다이나믹 재생목록을 사용 중일 때는 사용할 수 없습�
 msgid "Not connected"
 msgstr "연결되지 않음"
 
-#: internet/lastfm/lastfmservice.cpp:250
+#: internet/lastfm/lastfmservice.cpp:269
 msgid "Not enough content"
 msgstr "내용이 충분하지 않습니다."
 
-#: internet/lastfm/lastfmservice.cpp:254
+#: internet/lastfm/lastfmservice.cpp:273
 msgid "Not enough fans"
 msgstr "팬이 충분하지 않습니다."
 
-#: internet/lastfm/lastfmservice.cpp:252
+#: internet/lastfm/lastfmservice.cpp:271
 msgid "Not enough members"
 msgstr "회원이 충분하지 않습니다."
 
-#: internet/lastfm/lastfmservice.cpp:256
+#: internet/lastfm/lastfmservice.cpp:275
 msgid "Not enough neighbors"
 msgstr "이웃이 충분하지 않습니다."
 
@@ -3590,7 +3594,7 @@ msgid "Open in Google Drive"
 msgstr "Google Drive에서 열기"
 
 #: devices/deviceview.cpp:224 globalsearch/globalsearchview.cpp:461
-#: internet/core/internetservice.cpp:105 library/libraryview.cpp:384
+#: internet/core/internetservice.cpp:105 library/libraryview.cpp:383
 #: widgets/fileviewlist.cpp:36
 msgid "Open in new playlist"
 msgstr "새로운 재생목록에서 열기"
@@ -3609,7 +3613,7 @@ msgstr "브라우저에서 열기"
 msgid "Open..."
 msgstr "열기..."
 
-#: internet/lastfm/lastfmservice.cpp:236
+#: internet/lastfm/lastfmservice.cpp:255
 msgid "Operation failed"
 msgstr "작업이 실패됨"
 
@@ -3635,7 +3639,7 @@ msgstr "Opus"
 msgid "Organise Files"
 msgstr "파일 정리"
 
-#: library/libraryview.cpp:405 ui/mainwindow.cpp:676
+#: library/libraryview.cpp:404 ui/mainwindow.cpp:676
 msgid "Organise files..."
 msgstr "파일 정리..."
 
@@ -3835,7 +3839,7 @@ msgstr "설정"
 #: ../bin/src/ui_digitallyimportedsettingspage.h:165
 #: ../bin/src/ui_magnatunesettingspage.h:165
 #: ../bin/src/ui_spotifysettingspage.h:215 ../bin/src/ui_settingsdialog.h:115
-#: ../bin/src/ui_lastfmsettingspage.h:154 ../bin/src/ui_vksettingspage.h:216
+#: ../bin/src/ui_lastfmsettingspage.h:134 ../bin/src/ui_vksettingspage.h:216
 msgid "Preferences"
 msgstr "환경설정"
 
@@ -3958,7 +3962,7 @@ msgstr "대기열 관리자"
 msgid "Queue selected tracks"
 msgstr "선택한 트랙을 큐에 추가"
 
-#: globalsearch/globalsearchview.cpp:466 library/libraryview.cpp:389
+#: globalsearch/globalsearchview.cpp:466 library/libraryview.cpp:388
 #: ui/mainwindow.cpp:1698
 msgid "Queue track"
 msgstr "대기열 트랙"
@@ -4135,7 +4139,7 @@ msgid "Repeat track"
 msgstr "한 곡 반복"
 
 #: devices/deviceview.cpp:221 globalsearch/globalsearchview.cpp:457
-#: internet/core/internetservice.cpp:93 library/libraryview.cpp:381
+#: internet/core/internetservice.cpp:93 library/libraryview.cpp:380
 #: widgets/fileviewlist.cpp:34
 msgid "Replace current playlist"
 msgstr "현재 재생목록 교체"
@@ -4318,7 +4322,7 @@ msgstr "축척 크기"
 msgid "Score"
 msgstr "점수"
 
-#: ../bin/src/ui_lastfmsettingspage.h:155
+#: ../bin/src/ui_lastfmsettingspage.h:135
 msgid "Scrobble tracks that I listen to"
 msgstr "내가 들은 청취 기록 트랙"
 
@@ -4471,7 +4475,7 @@ msgstr "서버 URL"
 msgid "Server details"
 msgstr "서버 자세히"
 
-#: internet/lastfm/lastfmservice.cpp:242
+#: internet/lastfm/lastfmservice.cpp:261
 msgid "Service offline"
 msgstr "서비스 오프라인"
 
@@ -4575,7 +4579,7 @@ msgstr "전체화면 보기..."
 msgid "Show groups in global search result"
 msgstr "글로벌 검색 결과에서 그룹 보기"
 
-#: library/libraryview.cpp:423 ui/mainwindow.cpp:686
+#: library/libraryview.cpp:422 ui/mainwindow.cpp:686
 #: widgets/fileviewlist.cpp:53
 msgid "Show in file browser..."
 msgstr "파일 브라우져에서 보기..."
@@ -4584,7 +4588,7 @@ msgstr "파일 브라우져에서 보기..."
 msgid "Show in library..."
 msgstr "라이브러리에서 보기..."
 
-#: library/libraryview.cpp:426
+#: library/libraryview.cpp:425
 msgid "Show in various artists"
 msgstr "다양한 음악가에서 보기"
 
@@ -4608,11 +4612,11 @@ msgstr ""
 msgid "Show search suggestions"
 msgstr "검색 제안 표시"
 
-#: ../bin/src/ui_lastfmsettingspage.h:156
+#: ../bin/src/ui_lastfmsettingspage.h:136
 msgid "Show the \"love\" button"
 msgstr "\"좋아요\" 버튼 보기"
 
-#: ../bin/src/ui_lastfmsettingspage.h:157
+#: ../bin/src/ui_lastfmsettingspage.h:137
 msgid "Show the scrobble button in the main window"
 msgstr "메인 창에서 청취기록 버튼 보이기"
 
@@ -5009,7 +5013,7 @@ msgid ""
 "rescan because of the new features listed below:"
 msgstr "아래의 새 기능이 추가되었기 때문에, 전체 라이브러리 재탐색이 필요합니다."
 
-#: library/libraryview.cpp:562
+#: library/libraryview.cpp:561
 msgid "There are other songs in this album"
 msgstr "이 앨범과 다른 음악"
 
@@ -5045,7 +5049,7 @@ msgid ""
 "continue?"
 msgstr "파일들이 장치로 부터 삭제 될 것 입니다. 계속 진행 하시겠습니까?"
 
-#: library/libraryview.cpp:646 ui/mainwindow.cpp:2318 widgets/fileview.cpp:187
+#: library/libraryview.cpp:645 ui/mainwindow.cpp:2318 widgets/fileview.cpp:187
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -5116,7 +5120,7 @@ msgstr "이 장치는 처음 연결 되었습니다. Clementine은 지금 장치
 msgid "This option can be changed in the \"Behavior\" preferences"
 msgstr "이 옵션은 환경설정의 \"행동\" 에서 변경할 수 있습니다."
 
-#: internet/lastfm/lastfmservice.cpp:244
+#: internet/lastfm/lastfmservice.cpp:263
 msgid "This stream is for paid subscribers only"
 msgstr "이 스트림은 유료 subscribers만 사용할 수 있습니다"
 
@@ -5267,7 +5271,7 @@ msgid "Unknown content-type"
 msgstr "알 수 없는 content-type"
 
 #: internet/digitally/digitallyimportedclient.cpp:74
-#: internet/lastfm/lastfmservice.cpp:263
+#: internet/lastfm/lastfmservice.cpp:282
 msgid "Unknown error"
 msgstr "알 수 없는 오류"
 
@@ -5334,7 +5338,7 @@ msgstr "라이브러리 업데이트 중"
 msgid "Usage"
 msgstr "사용"
 
-#: ../bin/src/ui_lastfmsettingspage.h:158
+#: ../bin/src/ui_lastfmsettingspage.h:138
 msgid "Use Album Artist tag when available"
 msgstr "가능 하면 앨범 아티스트 태그 사용"
 
@@ -5587,7 +5591,7 @@ msgstr "윈도우 미디어 오디오"
 msgid "Without cover:"
 msgstr "커버 제외:"
 
-#: library/libraryview.cpp:563
+#: library/libraryview.cpp:562
 msgid ""
 "Would you like to move the other songs in this album to Various Artists as "
 "well?"
@@ -5724,7 +5728,7 @@ msgstr "언어를 변경을 하였다면 Clementine을 재시작 해야합니다
 msgid "Your IP address:"
 msgstr "당신의 IP 주소:"
 
-#: internet/lastfm/lastfmsettingspage.cpp:80
+#: internet/lastfm/lastfmsettingspage.cpp:93
 msgid "Your Last.fm credentials were incorrect"
 msgstr "당신의 Last.fm 계정정보가 부정확 합니다."
 
@@ -5732,7 +5736,7 @@ msgstr "당신의 Last.fm 계정정보가 부정확 합니다."
 msgid "Your Magnatune credentials were incorrect"
 msgstr "Magnatune의 계정정보가 잘 못 되었습니다."
 
-#: library/libraryview.cpp:353
+#: library/libraryview.cpp:352
 msgid "Your library is empty!"
 msgstr "라이브러리가 비었습니다!"
 

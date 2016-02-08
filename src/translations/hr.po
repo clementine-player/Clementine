@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2016-01-15 19:18+0000\n"
+"PO-Revision-Date: 2016-02-04 23:33+0000\n"
 "Last-Translator: gogo <trebelnik2@gmail.com>\n"
 "Language-Team: Croatian (http://www.transifex.com/davidsansome/clementine/language/hr/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -420,8 +420,7 @@ msgid "Absolute"
 msgstr "Apsolutne"
 
 #: ../bin/src/ui_magnatunesettingspage.h:154
-#: ../bin/src/ui_spotifysettingspage.h:207
-#: ../bin/src/ui_lastfmsettingspage.h:150 ../bin/src/ui_vksettingspage.h:213
+#: ../bin/src/ui_spotifysettingspage.h:207 ../bin/src/ui_vksettingspage.h:213
 #: ../bin/src/ui_seafilesettingspage.h:168
 msgid "Account details"
 msgstr "Pojedinosti računa"
@@ -819,7 +818,7 @@ msgid "Append files/URLs to the playlist"
 msgstr "Dodajte datoteku/URL u popis izvođenja"
 
 #: devices/deviceview.cpp:218 globalsearch/globalsearchview.cpp:453
-#: internet/core/internetservice.cpp:81 library/libraryview.cpp:378
+#: internet/core/internetservice.cpp:81 library/libraryview.cpp:377
 #: widgets/fileviewlist.cpp:31
 msgid "Append to current playlist"
 msgstr "Dodajte na trenutni popis izvođenja"
@@ -884,8 +883,8 @@ msgstr "Zvučni izlaz"
 
 #: internet/digitally/digitallyimportedsettingspage.cpp:82
 #: internet/magnatune/magnatunesettingspage.cpp:117
-#: internet/lastfm/lastfmservice.cpp:228
-#: internet/lastfm/lastfmsettingspage.cpp:84
+#: internet/lastfm/lastfmservice.cpp:247
+#: internet/lastfm/lastfmsettingspage.cpp:97
 msgid "Authentication failed"
 msgstr "Provjera autentičnosti nije uspjela"
 
@@ -1275,7 +1274,11 @@ msgstr "Clementine nije pronašao rezultate za ovu datoteku"
 msgid "Clementine will find music in:"
 msgstr "Clementine će potražiti glazbu u:"
 
-#: library/libraryview.cpp:359
+#: internet/lastfm/lastfmsettingspage.cpp:78
+msgid "Click Ok once you authenticated Clementine in your last.fm account."
+msgstr "Kliknite na 'U redu' jednom kada ste ovjerili Clementine na vašem last.fm računu."
+
+#: library/libraryview.cpp:358
 msgid "Click here to add some music"
 msgstr "Kliknite ovdje kako biste dodali glazbu!"
 
@@ -1290,6 +1293,7 @@ msgid "Click to toggle between remaining time and total time"
 msgstr "Kliknite za odabir između preostalog vremena reprodukcije i ukupnog vremena reprodukcije"
 
 #: ../bin/src/ui_soundcloudsettingspage.h:103
+#: ../bin/src/ui_lastfmsettingspage.h:133
 #: ../bin/src/ui_googledrivesettingspage.h:102
 #: ../bin/src/ui_dropboxsettingspage.h:102
 #: ../bin/src/ui_skydrivesettingspage.h:102
@@ -1463,7 +1467,7 @@ msgstr "Kopiraj dijeljeni URL u međuspremnik"
 msgid "Copy to clipboard"
 msgstr "Kopiraj u međuspremnik"
 
-#: library/libraryview.cpp:409 internet/podcasts/podcastservice.cpp:438
+#: library/libraryview.cpp:408 internet/podcasts/podcastservice.cpp:438
 #: ui/mainwindow.cpp:680 widgets/fileviewlist.cpp:44
 msgid "Copy to device..."
 msgstr "Kopirajte na uređaj..."
@@ -1652,7 +1656,7 @@ msgstr "Izbriši"
 msgid "Delete downloaded data"
 msgstr "Obriši preuzete podatke"
 
-#: devices/deviceview.cpp:408 library/libraryview.cpp:645
+#: devices/deviceview.cpp:408 library/libraryview.cpp:644
 #: ui/mainwindow.cpp:2317 widgets/fileview.cpp:186
 msgid "Delete files"
 msgstr "Izbrišite datoteku"
@@ -1661,7 +1665,7 @@ msgstr "Izbrišite datoteku"
 msgid "Delete from device..."
 msgstr "Izbrišite s uređaja..."
 
-#: library/libraryview.cpp:411 ui/mainwindow.cpp:683
+#: library/libraryview.cpp:410 ui/mainwindow.cpp:683
 #: widgets/fileviewlist.cpp:47
 msgid "Delete from disk..."
 msgstr "Izbrišite s diska..."
@@ -1674,7 +1678,7 @@ msgstr "Obriši reproducirane nastavke"
 msgid "Delete preset"
 msgstr "Izbrišite predložak"
 
-#: library/libraryview.cpp:401
+#: library/libraryview.cpp:400
 msgid "Delete smart playlist"
 msgstr "Izbrišite pametni popis izvođenja"
 
@@ -1823,7 +1827,7 @@ msgstr "Pokretanjem potpunog ponovnog pretraživanja izgubit ćete sve meta poda
 msgid "Don't repeat"
 msgstr "Ne ponavljaj"
 
-#: library/libraryview.cpp:429
+#: library/libraryview.cpp:428
 msgid "Don't show in various artists"
 msgstr "Ne prikazuj u različitim izvođačima"
 
@@ -1957,7 +1961,7 @@ msgstr "Dinamičan način je uključen"
 msgid "Dynamic random mix"
 msgstr "Dinamičan naizmjeničan mix"
 
-#: library/libraryview.cpp:398
+#: library/libraryview.cpp:397
 msgid "Edit smart playlist..."
 msgstr "Uredite pametni popis izvođenja..."
 
@@ -1978,12 +1982,12 @@ msgstr "Uredite oznake"
 msgid "Edit track information"
 msgstr "Uredite informacije o pjesmi"
 
-#: library/libraryview.cpp:416 widgets/fileviewlist.cpp:51
+#: library/libraryview.cpp:415 widgets/fileviewlist.cpp:51
 #: ../bin/src/ui_mainwindow.h:669
 msgid "Edit track information..."
 msgstr "Uredite informacije o pjesmi..."
 
-#: library/libraryview.cpp:419
+#: library/libraryview.cpp:418
 msgid "Edit tracks information..."
 msgstr "Uredite informacije pjesama..."
 
@@ -2100,7 +2104,7 @@ msgid "Equivalent to --log-levels *:3"
 msgstr "Odgovara --log-levels *: 3"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:246
-#: library/libraryview.cpp:639 ui/mainwindow.cpp:2020 ui/mainwindow.cpp:2267
+#: library/libraryview.cpp:638 ui/mainwindow.cpp:2020 ui/mainwindow.cpp:2267
 #: ui/mainwindow.cpp:2415 internet/vk/vkservice.cpp:643
 msgid "Error"
 msgstr "Greška"
@@ -2764,31 +2768,31 @@ msgstr "Internet usluge"
 msgid "Intro tracks"
 msgstr "Uvodne pjesme"
 
-#: internet/lastfm/lastfmservice.cpp:240
+#: internet/lastfm/lastfmservice.cpp:259
 msgid "Invalid API key"
 msgstr "Neispravan API ključ"
 
-#: internet/lastfm/lastfmservice.cpp:230
+#: internet/lastfm/lastfmservice.cpp:249
 msgid "Invalid format"
 msgstr "Neispravan format"
 
-#: internet/lastfm/lastfmservice.cpp:226
+#: internet/lastfm/lastfmservice.cpp:245
 msgid "Invalid method"
 msgstr "Neispravna metoda"
 
-#: internet/lastfm/lastfmservice.cpp:232
+#: internet/lastfm/lastfmservice.cpp:251
 msgid "Invalid parameters"
 msgstr "Neispravni parametri"
 
-#: internet/lastfm/lastfmservice.cpp:234
+#: internet/lastfm/lastfmservice.cpp:253
 msgid "Invalid resource specified"
 msgstr "Neispravan izvor naveden"
 
-#: internet/lastfm/lastfmservice.cpp:224
+#: internet/lastfm/lastfmservice.cpp:243
 msgid "Invalid service"
 msgstr "Neispravna usluga"
 
-#: internet/lastfm/lastfmservice.cpp:238
+#: internet/lastfm/lastfmservice.cpp:257
 msgid "Invalid session key"
 msgstr "Neispravan ključ sesije"
 
@@ -2894,17 +2898,21 @@ msgctxt "A playlist's tag."
 msgid "Last played"
 msgstr "Zadnje reproducirano"
 
-#: ../bin/src/ui_lastfmsettingspage.h:149
+#: ../bin/src/ui_lastfmsettingspage.h:131
 msgid "Last.fm"
 msgstr "Last.fm"
 
-#: internet/lastfm/lastfmservice.cpp:247
+#: internet/lastfm/lastfmsettingspage.cpp:77
+msgid "Last.fm authentication"
+msgstr "Last.fm ovjera"
+
+#: internet/lastfm/lastfmsettingspage.cpp:70
+msgid "Last.fm authentication failed"
+msgstr "Last.fm ovjera nije uspjela"
+
+#: internet/lastfm/lastfmservice.cpp:266
 msgid "Last.fm is currently busy, please try again in a few minutes"
 msgstr "Last.fm je trenutno zauzet, pokušajte ponovno za nekoliko minuta"
-
-#: ../bin/src/ui_lastfmsettingspage.h:153
-msgid "Last.fm password"
-msgstr "Last.fm lozinka"
 
 #: songinfo/lastfmtrackinfoprovider.cpp:76
 msgid "Last.fm play counts"
@@ -2913,10 +2921,6 @@ msgstr "Last.fm broj izvođenja"
 #: songinfo/lastfmtrackinfoprovider.cpp:130
 msgid "Last.fm tags"
 msgstr "Last.fm preporuke"
-
-#: ../bin/src/ui_lastfmsettingspage.h:151
-msgid "Last.fm username"
-msgstr "Last.fm korisničko ime"
 
 #: songinfo/lastfmtrackinfoprovider.cpp:110
 msgid "Last.fm wiki"
@@ -3035,7 +3039,7 @@ msgstr "Učitaj Datoteke/URL, zamijeni trenutni popis izvođenja"
 #: ../bin/src/ui_soundcloudsettingspage.h:102
 #: ../bin/src/ui_spotifysettingspage.h:210
 #: ../bin/src/ui_subsonicsettingspage.h:129
-#: ../bin/src/ui_lastfmsettingspage.h:152
+#: ../bin/src/ui_lastfmsettingspage.h:132
 #: ../bin/src/ui_googledrivesettingspage.h:101
 #: ../bin/src/ui_dropboxsettingspage.h:101
 #: ../bin/src/ui_skydrivesettingspage.h:101
@@ -3148,7 +3152,7 @@ msgstr "Učinite tako!"
 msgid "Make playlist available offline"
 msgstr "Učini popis izvođenja dostupnim kada je veza prekinuta"
 
-#: internet/lastfm/lastfmservice.cpp:259
+#: internet/lastfm/lastfmservice.cpp:278
 msgid "Malformed response"
 msgstr "Neispravan odgovor"
 
@@ -3357,7 +3361,7 @@ msgstr "Nova mapa"
 msgid "New playlist"
 msgstr "Novi popis izvođenja"
 
-#: library/libraryview.cpp:395
+#: library/libraryview.cpp:394
 msgid "New smart playlist..."
 msgstr "Novi pametni popis izvođenja"
 
@@ -3420,7 +3424,7 @@ msgstr "Bez kratkih blokova"
 msgid "None"
 msgstr "Ništa"
 
-#: library/libraryview.cpp:640 ui/mainwindow.cpp:2268 ui/mainwindow.cpp:2416
+#: library/libraryview.cpp:639 ui/mainwindow.cpp:2268 ui/mainwindow.cpp:2416
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Nijedna od odabranih pjesama nije prikladna za kopiranje na uređaj"
 
@@ -3440,19 +3444,19 @@ msgstr "Nije dostupno tijekom korištenja dinamičkog popis izvođenja"
 msgid "Not connected"
 msgstr "Nije spojeno"
 
-#: internet/lastfm/lastfmservice.cpp:250
+#: internet/lastfm/lastfmservice.cpp:269
 msgid "Not enough content"
 msgstr "Nema dovoljno sadržaja"
 
-#: internet/lastfm/lastfmservice.cpp:254
+#: internet/lastfm/lastfmservice.cpp:273
 msgid "Not enough fans"
 msgstr "Nema dovoljno obožavatelja"
 
-#: internet/lastfm/lastfmservice.cpp:252
+#: internet/lastfm/lastfmservice.cpp:271
 msgid "Not enough members"
 msgstr "Nema dovoljno članova"
 
-#: internet/lastfm/lastfmservice.cpp:256
+#: internet/lastfm/lastfmservice.cpp:275
 msgid "Not enough neighbors"
 msgstr "Nema dovoljno susjeda"
 
@@ -3582,7 +3586,7 @@ msgid "Open in Google Drive"
 msgstr "Otvori u Google Disku"
 
 #: devices/deviceview.cpp:224 globalsearch/globalsearchview.cpp:461
-#: internet/core/internetservice.cpp:105 library/libraryview.cpp:384
+#: internet/core/internetservice.cpp:105 library/libraryview.cpp:383
 #: widgets/fileviewlist.cpp:36
 msgid "Open in new playlist"
 msgstr "Otvorite u novom popisu izvođenja"
@@ -3601,7 +3605,7 @@ msgstr "Otvori u svojem pregledniku"
 msgid "Open..."
 msgstr "Otvorite..."
 
-#: internet/lastfm/lastfmservice.cpp:236
+#: internet/lastfm/lastfmservice.cpp:255
 msgid "Operation failed"
 msgstr "Radnja nije izvršena"
 
@@ -3627,7 +3631,7 @@ msgstr "Opus"
 msgid "Organise Files"
 msgstr "Organizirajte datoteke"
 
-#: library/libraryview.cpp:405 ui/mainwindow.cpp:676
+#: library/libraryview.cpp:404 ui/mainwindow.cpp:676
 msgid "Organise files..."
 msgstr "Organizirajte datoteke..."
 
@@ -3827,7 +3831,7 @@ msgstr "Osobitost"
 #: ../bin/src/ui_digitallyimportedsettingspage.h:165
 #: ../bin/src/ui_magnatunesettingspage.h:165
 #: ../bin/src/ui_spotifysettingspage.h:215 ../bin/src/ui_settingsdialog.h:115
-#: ../bin/src/ui_lastfmsettingspage.h:154 ../bin/src/ui_vksettingspage.h:216
+#: ../bin/src/ui_lastfmsettingspage.h:134 ../bin/src/ui_vksettingspage.h:216
 msgid "Preferences"
 msgstr "Mogućnosti"
 
@@ -3950,7 +3954,7 @@ msgstr "Upravljanje odabranim pjesmama za reprodukciju"
 msgid "Queue selected tracks"
 msgstr "Odaberite označenu pjesmu za reprodukciju"
 
-#: globalsearch/globalsearchview.cpp:466 library/libraryview.cpp:389
+#: globalsearch/globalsearchview.cpp:466 library/libraryview.cpp:388
 #: ui/mainwindow.cpp:1698
 msgid "Queue track"
 msgstr "Odaberite pjesmu za reprodukciju"
@@ -4127,7 +4131,7 @@ msgid "Repeat track"
 msgstr "Ponovi pjesmu"
 
 #: devices/deviceview.cpp:221 globalsearch/globalsearchview.cpp:457
-#: internet/core/internetservice.cpp:93 library/libraryview.cpp:381
+#: internet/core/internetservice.cpp:93 library/libraryview.cpp:380
 #: widgets/fileviewlist.cpp:34
 msgid "Replace current playlist"
 msgstr "Zamijenite trenutni popis izvođenja"
@@ -4310,7 +4314,7 @@ msgstr "Promijeni veličinu"
 msgid "Score"
 msgstr "Pogodci"
 
-#: ../bin/src/ui_lastfmsettingspage.h:155
+#: ../bin/src/ui_lastfmsettingspage.h:135
 msgid "Scrobble tracks that I listen to"
 msgstr "Scrobblaj pjesmu koju slušam"
 
@@ -4463,7 +4467,7 @@ msgstr "URL poslužitelja"
 msgid "Server details"
 msgstr "Pojedinosti poslužitelja"
 
-#: internet/lastfm/lastfmservice.cpp:242
+#: internet/lastfm/lastfmservice.cpp:261
 msgid "Service offline"
 msgstr "Usluga nedostupna"
 
@@ -4567,7 +4571,7 @@ msgstr "Prikaži u punoj veličini..."
 msgid "Show groups in global search result"
 msgstr "Prikaži grupe u rezultatima globalne pretrage"
 
-#: library/libraryview.cpp:423 ui/mainwindow.cpp:686
+#: library/libraryview.cpp:422 ui/mainwindow.cpp:686
 #: widgets/fileviewlist.cpp:53
 msgid "Show in file browser..."
 msgstr "Prikaži u pregledniku datoteka..."
@@ -4576,7 +4580,7 @@ msgstr "Prikaži u pregledniku datoteka..."
 msgid "Show in library..."
 msgstr "Prikaži u fonoteci..."
 
-#: library/libraryview.cpp:426
+#: library/libraryview.cpp:425
 msgid "Show in various artists"
 msgstr "Prikaži u različitim izvođačima"
 
@@ -4600,11 +4604,11 @@ msgstr "Prikaži pjesmu koja se reproducira na svojoj stranici"
 msgid "Show search suggestions"
 msgstr "Prikaži prijedloge pretraživanja"
 
-#: ../bin/src/ui_lastfmsettingspage.h:156
+#: ../bin/src/ui_lastfmsettingspage.h:136
 msgid "Show the \"love\" button"
 msgstr "Prikaži \"Sviđa mi se\" tipku"
 
-#: ../bin/src/ui_lastfmsettingspage.h:157
+#: ../bin/src/ui_lastfmsettingspage.h:137
 msgid "Show the scrobble button in the main window"
 msgstr "Prikaži tipku scrobblanja u glavnom prozoru"
 
@@ -5001,7 +5005,7 @@ msgid ""
 "rescan because of the new features listed below:"
 msgstr "Inačica Clementinea koju ste upravo ažurirali zahtjeva ponovnu pretragu cijele fonoteke zbog novih mogućnosti navedenih ispod:"
 
-#: library/libraryview.cpp:562
+#: library/libraryview.cpp:561
 msgid "There are other songs in this album"
 msgstr "Postoje i druge pjesme u ovom albumu"
 
@@ -5037,7 +5041,7 @@ msgid ""
 "continue?"
 msgstr "Ove datoteke bit će obrisane sa uređaja, sigurno želite nastaviti?"
 
-#: library/libraryview.cpp:646 ui/mainwindow.cpp:2318 widgets/fileview.cpp:187
+#: library/libraryview.cpp:645 ui/mainwindow.cpp:2318 widgets/fileview.cpp:187
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -5108,7 +5112,7 @@ msgstr "Ovo je prvi put da ste spojeni na ovaj uređaj. Clementine će sada pret
 msgid "This option can be changed in the \"Behavior\" preferences"
 msgstr "Ova mogućnost se može promijeniti u \"Ponašanje\" osobitostima"
 
-#: internet/lastfm/lastfmservice.cpp:244
+#: internet/lastfm/lastfmservice.cpp:263
 msgid "This stream is for paid subscribers only"
 msgstr "Ovaj stream je samo za pretplaćene korisnike"
 
@@ -5259,7 +5263,7 @@ msgid "Unknown content-type"
 msgstr "Nepoznata vrsta sadržaja"
 
 #: internet/digitally/digitallyimportedclient.cpp:74
-#: internet/lastfm/lastfmservice.cpp:263
+#: internet/lastfm/lastfmservice.cpp:282
 msgid "Unknown error"
 msgstr "Nepoznata greška"
 
@@ -5326,7 +5330,7 @@ msgstr "Ažuriranje fonoteke"
 msgid "Usage"
 msgstr "Upotreba"
 
-#: ../bin/src/ui_lastfmsettingspage.h:158
+#: ../bin/src/ui_lastfmsettingspage.h:138
 msgid "Use Album Artist tag when available"
 msgstr "Koristi oznaku izvođača albuma kada je dostupna"
 
@@ -5579,7 +5583,7 @@ msgstr "Windows Media audio"
 msgid "Without cover:"
 msgstr "Bez omota:"
 
-#: library/libraryview.cpp:563
+#: library/libraryview.cpp:562
 msgid ""
 "Would you like to move the other songs in this album to Various Artists as "
 "well?"
@@ -5716,7 +5720,7 @@ msgstr "Morate ponovno pokrenuti Clementine ako mijenjate jezik."
 msgid "Your IP address:"
 msgstr "Vaša IP adresa:"
 
-#: internet/lastfm/lastfmsettingspage.cpp:80
+#: internet/lastfm/lastfmsettingspage.cpp:93
 msgid "Your Last.fm credentials were incorrect"
 msgstr "Vaši Last.fm pristupni podaci su neispravni"
 
@@ -5724,7 +5728,7 @@ msgstr "Vaši Last.fm pristupni podaci su neispravni"
 msgid "Your Magnatune credentials were incorrect"
 msgstr "Vaši Magnatune pristupni podaci su neispravni"
 
-#: library/libraryview.cpp:353
+#: library/libraryview.cpp:352
 msgid "Your library is empty!"
 msgstr "Vaša fonoteka je prazna!"
 

@@ -20,7 +20,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2016-01-18 09:35+0000\n"
+"PO-Revision-Date: 2016-02-04 00:01+0000\n"
 "Last-Translator: Tong Hui <tonghuix@gmail.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/davidsansome/clementine/language/zh_CN/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -429,8 +429,7 @@ msgid "Absolute"
 msgstr "绝对"
 
 #: ../bin/src/ui_magnatunesettingspage.h:154
-#: ../bin/src/ui_spotifysettingspage.h:207
-#: ../bin/src/ui_lastfmsettingspage.h:150 ../bin/src/ui_vksettingspage.h:213
+#: ../bin/src/ui_spotifysettingspage.h:207 ../bin/src/ui_vksettingspage.h:213
 #: ../bin/src/ui_seafilesettingspage.h:168
 msgid "Account details"
 msgstr "帐号详情"
@@ -828,7 +827,7 @@ msgid "Append files/URLs to the playlist"
 msgstr "添加文件/URL 到播放列表"
 
 #: devices/deviceview.cpp:218 globalsearch/globalsearchview.cpp:453
-#: internet/core/internetservice.cpp:81 library/libraryview.cpp:378
+#: internet/core/internetservice.cpp:81 library/libraryview.cpp:377
 #: widgets/fileviewlist.cpp:31
 msgid "Append to current playlist"
 msgstr "追加至当前播放列表"
@@ -893,8 +892,8 @@ msgstr "音频输出"
 
 #: internet/digitally/digitallyimportedsettingspage.cpp:82
 #: internet/magnatune/magnatunesettingspage.cpp:117
-#: internet/lastfm/lastfmservice.cpp:228
-#: internet/lastfm/lastfmsettingspage.cpp:84
+#: internet/lastfm/lastfmservice.cpp:247
+#: internet/lastfm/lastfmsettingspage.cpp:97
 msgid "Authentication failed"
 msgstr "认证失败"
 
@@ -1284,7 +1283,11 @@ msgstr "Clementine 无法为此文件查找结果"
 msgid "Clementine will find music in:"
 msgstr "Clementine 将在这些地方搜索音乐："
 
-#: library/libraryview.cpp:359
+#: internet/lastfm/lastfmsettingspage.cpp:78
+msgid "Click Ok once you authenticated Clementine in your last.fm account."
+msgstr "当 Clementine 与你的 last.fm 账户完成认证以后按确认键。"
+
+#: library/libraryview.cpp:358
 msgid "Click here to add some music"
 msgstr "点击此处添加一些音乐"
 
@@ -1299,6 +1302,7 @@ msgid "Click to toggle between remaining time and total time"
 msgstr "单击切换剩余时间和总计时间模式"
 
 #: ../bin/src/ui_soundcloudsettingspage.h:103
+#: ../bin/src/ui_lastfmsettingspage.h:133
 #: ../bin/src/ui_googledrivesettingspage.h:102
 #: ../bin/src/ui_dropboxsettingspage.h:102
 #: ../bin/src/ui_skydrivesettingspage.h:102
@@ -1472,7 +1476,7 @@ msgstr "复制分享链接"
 msgid "Copy to clipboard"
 msgstr "复制到剪切板"
 
-#: library/libraryview.cpp:409 internet/podcasts/podcastservice.cpp:438
+#: library/libraryview.cpp:408 internet/podcasts/podcastservice.cpp:438
 #: ui/mainwindow.cpp:680 widgets/fileviewlist.cpp:44
 msgid "Copy to device..."
 msgstr "复制到设备..."
@@ -1661,7 +1665,7 @@ msgstr "删除"
 msgid "Delete downloaded data"
 msgstr "删除已下载的数据"
 
-#: devices/deviceview.cpp:408 library/libraryview.cpp:645
+#: devices/deviceview.cpp:408 library/libraryview.cpp:644
 #: ui/mainwindow.cpp:2317 widgets/fileview.cpp:186
 msgid "Delete files"
 msgstr "删除文件"
@@ -1670,7 +1674,7 @@ msgstr "删除文件"
 msgid "Delete from device..."
 msgstr "从设备删除..."
 
-#: library/libraryview.cpp:411 ui/mainwindow.cpp:683
+#: library/libraryview.cpp:410 ui/mainwindow.cpp:683
 #: widgets/fileviewlist.cpp:47
 msgid "Delete from disk..."
 msgstr "从硬盘删除..."
@@ -1683,7 +1687,7 @@ msgstr "删除收听过的节目"
 msgid "Delete preset"
 msgstr "删除预设"
 
-#: library/libraryview.cpp:401
+#: library/libraryview.cpp:400
 msgid "Delete smart playlist"
 msgstr "删除智能播放列表"
 
@@ -1832,7 +1836,7 @@ msgstr "执行完整扫描会丢失所有 Clementine 中的元数据，例如封
 msgid "Don't repeat"
 msgstr "不循环播放"
 
-#: library/libraryview.cpp:429
+#: library/libraryview.cpp:428
 msgid "Don't show in various artists"
 msgstr "不在群星中显示"
 
@@ -1966,7 +1970,7 @@ msgstr "已打开动态模式"
 msgid "Dynamic random mix"
 msgstr "动态随机混音"
 
-#: library/libraryview.cpp:398
+#: library/libraryview.cpp:397
 msgid "Edit smart playlist..."
 msgstr "编辑智能播放列表..."
 
@@ -1987,12 +1991,12 @@ msgstr "编辑标签"
 msgid "Edit track information"
 msgstr "编辑曲目信息"
 
-#: library/libraryview.cpp:416 widgets/fileviewlist.cpp:51
+#: library/libraryview.cpp:415 widgets/fileviewlist.cpp:51
 #: ../bin/src/ui_mainwindow.h:669
 msgid "Edit track information..."
 msgstr "编辑曲目信息..."
 
-#: library/libraryview.cpp:419
+#: library/libraryview.cpp:418
 msgid "Edit tracks information..."
 msgstr "编辑曲目信息..."
 
@@ -2109,7 +2113,7 @@ msgid "Equivalent to --log-levels *:3"
 msgstr "相当于 --log-levels *:3"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:246
-#: library/libraryview.cpp:639 ui/mainwindow.cpp:2020 ui/mainwindow.cpp:2267
+#: library/libraryview.cpp:638 ui/mainwindow.cpp:2020 ui/mainwindow.cpp:2267
 #: ui/mainwindow.cpp:2415 internet/vk/vkservice.cpp:643
 msgid "Error"
 msgstr "错误"
@@ -2773,31 +2777,31 @@ msgstr "网络服务"
 msgid "Intro tracks"
 msgstr "代表曲目"
 
-#: internet/lastfm/lastfmservice.cpp:240
+#: internet/lastfm/lastfmservice.cpp:259
 msgid "Invalid API key"
 msgstr "无效的 API 密钥"
 
-#: internet/lastfm/lastfmservice.cpp:230
+#: internet/lastfm/lastfmservice.cpp:249
 msgid "Invalid format"
 msgstr "无效格式"
 
-#: internet/lastfm/lastfmservice.cpp:226
+#: internet/lastfm/lastfmservice.cpp:245
 msgid "Invalid method"
 msgstr "无效方式"
 
-#: internet/lastfm/lastfmservice.cpp:232
+#: internet/lastfm/lastfmservice.cpp:251
 msgid "Invalid parameters"
 msgstr "无效参数"
 
-#: internet/lastfm/lastfmservice.cpp:234
+#: internet/lastfm/lastfmservice.cpp:253
 msgid "Invalid resource specified"
 msgstr "指定的资源无效"
 
-#: internet/lastfm/lastfmservice.cpp:224
+#: internet/lastfm/lastfmservice.cpp:243
 msgid "Invalid service"
 msgstr "服务无效"
 
-#: internet/lastfm/lastfmservice.cpp:238
+#: internet/lastfm/lastfmservice.cpp:257
 msgid "Invalid session key"
 msgstr "会话钥匙无效"
 
@@ -2903,17 +2907,21 @@ msgctxt "A playlist's tag."
 msgid "Last played"
 msgstr "上次播放的"
 
-#: ../bin/src/ui_lastfmsettingspage.h:149
+#: ../bin/src/ui_lastfmsettingspage.h:131
 msgid "Last.fm"
 msgstr "Last.fm"
 
-#: internet/lastfm/lastfmservice.cpp:247
+#: internet/lastfm/lastfmsettingspage.cpp:77
+msgid "Last.fm authentication"
+msgstr "Last.fm 认证"
+
+#: internet/lastfm/lastfmsettingspage.cpp:70
+msgid "Last.fm authentication failed"
+msgstr "Last.fm 认证失败"
+
+#: internet/lastfm/lastfmservice.cpp:266
 msgid "Last.fm is currently busy, please try again in a few minutes"
 msgstr "Last.fm 正忙，请及分钟后再试"
-
-#: ../bin/src/ui_lastfmsettingspage.h:153
-msgid "Last.fm password"
-msgstr "Last.fm 密码"
 
 #: songinfo/lastfmtrackinfoprovider.cpp:76
 msgid "Last.fm play counts"
@@ -2922,10 +2930,6 @@ msgstr "Last.fm 播放计数"
 #: songinfo/lastfmtrackinfoprovider.cpp:130
 msgid "Last.fm tags"
 msgstr "Last.fm 标签"
-
-#: ../bin/src/ui_lastfmsettingspage.h:151
-msgid "Last.fm username"
-msgstr "Last.fm 用户名"
 
 #: songinfo/lastfmtrackinfoprovider.cpp:110
 msgid "Last.fm wiki"
@@ -3044,7 +3048,7 @@ msgstr "载入文件或URL，替换当前播放列表"
 #: ../bin/src/ui_soundcloudsettingspage.h:102
 #: ../bin/src/ui_spotifysettingspage.h:210
 #: ../bin/src/ui_subsonicsettingspage.h:129
-#: ../bin/src/ui_lastfmsettingspage.h:152
+#: ../bin/src/ui_lastfmsettingspage.h:132
 #: ../bin/src/ui_googledrivesettingspage.h:101
 #: ../bin/src/ui_dropboxsettingspage.h:101
 #: ../bin/src/ui_skydrivesettingspage.h:101
@@ -3157,7 +3161,7 @@ msgstr "努力去实现它！"
 msgid "Make playlist available offline"
 msgstr "播放列表离线可用"
 
-#: internet/lastfm/lastfmservice.cpp:259
+#: internet/lastfm/lastfmservice.cpp:278
 msgid "Malformed response"
 msgstr "无效的响应"
 
@@ -3366,7 +3370,7 @@ msgstr "创建新文件夹"
 msgid "New playlist"
 msgstr "新建播放列表"
 
-#: library/libraryview.cpp:395
+#: library/libraryview.cpp:394
 msgid "New smart playlist..."
 msgstr "新建智能播放列表..."
 
@@ -3429,7 +3433,7 @@ msgstr "无短块"
 msgid "None"
 msgstr "无"
 
-#: library/libraryview.cpp:640 ui/mainwindow.cpp:2268 ui/mainwindow.cpp:2416
+#: library/libraryview.cpp:639 ui/mainwindow.cpp:2268 ui/mainwindow.cpp:2416
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "已选择的曲目均不适合复制到设备"
 
@@ -3449,19 +3453,19 @@ msgstr "使用动态播放列表时不可用"
 msgid "Not connected"
 msgstr "未连接"
 
-#: internet/lastfm/lastfmservice.cpp:250
+#: internet/lastfm/lastfmservice.cpp:269
 msgid "Not enough content"
 msgstr "内容不足"
 
-#: internet/lastfm/lastfmservice.cpp:254
+#: internet/lastfm/lastfmservice.cpp:273
 msgid "Not enough fans"
 msgstr "歌迷不足"
 
-#: internet/lastfm/lastfmservice.cpp:252
+#: internet/lastfm/lastfmservice.cpp:271
 msgid "Not enough members"
 msgstr "会员不足"
 
-#: internet/lastfm/lastfmservice.cpp:256
+#: internet/lastfm/lastfmservice.cpp:275
 msgid "Not enough neighbors"
 msgstr "邻居不足"
 
@@ -3591,7 +3595,7 @@ msgid "Open in Google Drive"
 msgstr "打开 Google 云存储"
 
 #: devices/deviceview.cpp:224 globalsearch/globalsearchview.cpp:461
-#: internet/core/internetservice.cpp:105 library/libraryview.cpp:384
+#: internet/core/internetservice.cpp:105 library/libraryview.cpp:383
 #: widgets/fileviewlist.cpp:36
 msgid "Open in new playlist"
 msgstr "在新播放列表中打开"
@@ -3610,7 +3614,7 @@ msgstr "在浏览器中打开"
 msgid "Open..."
 msgstr "打开..."
 
-#: internet/lastfm/lastfmservice.cpp:236
+#: internet/lastfm/lastfmservice.cpp:255
 msgid "Operation failed"
 msgstr "操作失败"
 
@@ -3636,7 +3640,7 @@ msgstr "Opus"
 msgid "Organise Files"
 msgstr "组织文件"
 
-#: library/libraryview.cpp:405 ui/mainwindow.cpp:676
+#: library/libraryview.cpp:404 ui/mainwindow.cpp:676
 msgid "Organise files..."
 msgstr "组织文件..."
 
@@ -3836,7 +3840,7 @@ msgstr "首选项"
 #: ../bin/src/ui_digitallyimportedsettingspage.h:165
 #: ../bin/src/ui_magnatunesettingspage.h:165
 #: ../bin/src/ui_spotifysettingspage.h:215 ../bin/src/ui_settingsdialog.h:115
-#: ../bin/src/ui_lastfmsettingspage.h:154 ../bin/src/ui_vksettingspage.h:216
+#: ../bin/src/ui_lastfmsettingspage.h:134 ../bin/src/ui_vksettingspage.h:216
 msgid "Preferences"
 msgstr "首选项"
 
@@ -3959,7 +3963,7 @@ msgstr "队列管理器"
 msgid "Queue selected tracks"
 msgstr "将选定曲目加入队列"
 
-#: globalsearch/globalsearchview.cpp:466 library/libraryview.cpp:389
+#: globalsearch/globalsearchview.cpp:466 library/libraryview.cpp:388
 #: ui/mainwindow.cpp:1698
 msgid "Queue track"
 msgstr "加入队列"
@@ -4136,7 +4140,7 @@ msgid "Repeat track"
 msgstr "单曲循环"
 
 #: devices/deviceview.cpp:221 globalsearch/globalsearchview.cpp:457
-#: internet/core/internetservice.cpp:93 library/libraryview.cpp:381
+#: internet/core/internetservice.cpp:93 library/libraryview.cpp:380
 #: widgets/fileviewlist.cpp:34
 msgid "Replace current playlist"
 msgstr "移除当前播放列表"
@@ -4319,7 +4323,7 @@ msgstr "缩放"
 msgid "Score"
 msgstr "得分"
 
-#: ../bin/src/ui_lastfmsettingspage.h:155
+#: ../bin/src/ui_lastfmsettingspage.h:135
 msgid "Scrobble tracks that I listen to"
 msgstr "提交正在收听的音乐"
 
@@ -4472,7 +4476,7 @@ msgstr "服务器 URL"
 msgid "Server details"
 msgstr "服务器详情"
 
-#: internet/lastfm/lastfmservice.cpp:242
+#: internet/lastfm/lastfmservice.cpp:261
 msgid "Service offline"
 msgstr "服务离线"
 
@@ -4576,7 +4580,7 @@ msgstr "显示完整尺寸..."
 msgid "Show groups in global search result"
 msgstr "在全局搜索结果中显示分组"
 
-#: library/libraryview.cpp:423 ui/mainwindow.cpp:686
+#: library/libraryview.cpp:422 ui/mainwindow.cpp:686
 #: widgets/fileviewlist.cpp:53
 msgid "Show in file browser..."
 msgstr "在文件管理器中打开..."
@@ -4585,7 +4589,7 @@ msgstr "在文件管理器中打开..."
 msgid "Show in library..."
 msgstr "在媒体库中显示"
 
-#: library/libraryview.cpp:426
+#: library/libraryview.cpp:425
 msgid "Show in various artists"
 msgstr "在群星中显示"
 
@@ -4609,11 +4613,11 @@ msgstr "在您的主页显示正在播放的歌曲"
 msgid "Show search suggestions"
 msgstr "显示搜索建议"
 
-#: ../bin/src/ui_lastfmsettingspage.h:156
+#: ../bin/src/ui_lastfmsettingspage.h:136
 msgid "Show the \"love\" button"
 msgstr "显示\"喜欢\"按钮"
 
-#: ../bin/src/ui_lastfmsettingspage.h:157
+#: ../bin/src/ui_lastfmsettingspage.h:137
 msgid "Show the scrobble button in the main window"
 msgstr "在主窗体中显示提交按钮"
 
@@ -5010,7 +5014,7 @@ msgid ""
 "rescan because of the new features listed below:"
 msgstr "已更新Clementine，由于添加了如下特性，您需要更新您的收藏："
 
-#: library/libraryview.cpp:562
+#: library/libraryview.cpp:561
 msgid "There are other songs in this album"
 msgstr "此专辑中还有其它歌曲"
 
@@ -5046,7 +5050,7 @@ msgid ""
 "continue?"
 msgstr "将从设备中删除这些文件.确定删除吗?"
 
-#: library/libraryview.cpp:646 ui/mainwindow.cpp:2318 widgets/fileview.cpp:187
+#: library/libraryview.cpp:645 ui/mainwindow.cpp:2318 widgets/fileview.cpp:187
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -5117,7 +5121,7 @@ msgstr "这是您第一次连接该设备。Clementine 将扫描设备上的音�
 msgid "This option can be changed in the \"Behavior\" preferences"
 msgstr "这些选项可以在“行为”设置中修改"
 
-#: internet/lastfm/lastfmservice.cpp:244
+#: internet/lastfm/lastfmservice.cpp:263
 msgid "This stream is for paid subscribers only"
 msgstr "该流媒体只有付费用户才能收听"
 
@@ -5268,7 +5272,7 @@ msgid "Unknown content-type"
 msgstr "未知的content-type"
 
 #: internet/digitally/digitallyimportedclient.cpp:74
-#: internet/lastfm/lastfmservice.cpp:263
+#: internet/lastfm/lastfmservice.cpp:282
 msgid "Unknown error"
 msgstr "未知错误"
 
@@ -5335,7 +5339,7 @@ msgstr "正在更新媒体库"
 msgid "Usage"
 msgstr "用法"
 
-#: ../bin/src/ui_lastfmsettingspage.h:158
+#: ../bin/src/ui_lastfmsettingspage.h:138
 msgid "Use Album Artist tag when available"
 msgstr "使用专辑艺术家标记(如果可用)"
 
@@ -5588,7 +5592,7 @@ msgstr "Windows Media 音频"
 msgid "Without cover:"
 msgstr "无封面:"
 
-#: library/libraryview.cpp:563
+#: library/libraryview.cpp:562
 msgid ""
 "Would you like to move the other songs in this album to Various Artists as "
 "well?"
@@ -5725,7 +5729,7 @@ msgstr "如果更改语言，您需要重启 Clementine 使设置生效。"
 msgid "Your IP address:"
 msgstr "您的 IP 地址:"
 
-#: internet/lastfm/lastfmsettingspage.cpp:80
+#: internet/lastfm/lastfmsettingspage.cpp:93
 msgid "Your Last.fm credentials were incorrect"
 msgstr "你的Last.fm帐号信息有误"
 
@@ -5733,7 +5737,7 @@ msgstr "你的Last.fm帐号信息有误"
 msgid "Your Magnatune credentials were incorrect"
 msgstr "你的Magnatune帐号信息有误"
 
-#: library/libraryview.cpp:353
+#: library/libraryview.cpp:352
 msgid "Your library is empty!"
 msgstr "您的媒体库是空的！"
 

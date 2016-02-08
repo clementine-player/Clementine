@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2016-01-13 23:28+0000\n"
+"PO-Revision-Date: 2016-02-03 14:58+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Malay (http://www.transifex.com/davidsansome/clementine/language/ms/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -418,8 +418,7 @@ msgid "Absolute"
 msgstr "Mutlak"
 
 #: ../bin/src/ui_magnatunesettingspage.h:154
-#: ../bin/src/ui_spotifysettingspage.h:207
-#: ../bin/src/ui_lastfmsettingspage.h:150 ../bin/src/ui_vksettingspage.h:213
+#: ../bin/src/ui_spotifysettingspage.h:207 ../bin/src/ui_vksettingspage.h:213
 #: ../bin/src/ui_seafilesettingspage.h:168
 msgid "Account details"
 msgstr "Butir-butir akaun"
@@ -817,7 +816,7 @@ msgid "Append files/URLs to the playlist"
 msgstr "Tambah fail/URL ke senarai main"
 
 #: devices/deviceview.cpp:218 globalsearch/globalsearchview.cpp:453
-#: internet/core/internetservice.cpp:81 library/libraryview.cpp:378
+#: internet/core/internetservice.cpp:81 library/libraryview.cpp:377
 #: widgets/fileviewlist.cpp:31
 msgid "Append to current playlist"
 msgstr "Tambah ke senarai main semasa"
@@ -882,8 +881,8 @@ msgstr "Output audio"
 
 #: internet/digitally/digitallyimportedsettingspage.cpp:82
 #: internet/magnatune/magnatunesettingspage.cpp:117
-#: internet/lastfm/lastfmservice.cpp:228
-#: internet/lastfm/lastfmsettingspage.cpp:84
+#: internet/lastfm/lastfmservice.cpp:247
+#: internet/lastfm/lastfmsettingspage.cpp:97
 msgid "Authentication failed"
 msgstr "Pengesahan gagal"
 
@@ -1273,7 +1272,11 @@ msgstr "Clementine tidak dapat mencari keputusan untuk fail ini"
 msgid "Clementine will find music in:"
 msgstr "Clementine akan mencari muzik di dalam:"
 
-#: library/libraryview.cpp:359
+#: internet/lastfm/lastfmsettingspage.cpp:78
+msgid "Click Ok once you authenticated Clementine in your last.fm account."
+msgstr ""
+
+#: library/libraryview.cpp:358
 msgid "Click here to add some music"
 msgstr "Klik di sini untuk menambah muzik"
 
@@ -1288,6 +1291,7 @@ msgid "Click to toggle between remaining time and total time"
 msgstr "Klik untuk togol diantara masa berbaki dengan jumlah masa"
 
 #: ../bin/src/ui_soundcloudsettingspage.h:103
+#: ../bin/src/ui_lastfmsettingspage.h:133
 #: ../bin/src/ui_googledrivesettingspage.h:102
 #: ../bin/src/ui_dropboxsettingspage.h:102
 #: ../bin/src/ui_skydrivesettingspage.h:102
@@ -1461,7 +1465,7 @@ msgstr "Salin url kongsi ke papan keratan"
 msgid "Copy to clipboard"
 msgstr "Salin ke papan keratan"
 
-#: library/libraryview.cpp:409 internet/podcasts/podcastservice.cpp:438
+#: library/libraryview.cpp:408 internet/podcasts/podcastservice.cpp:438
 #: ui/mainwindow.cpp:680 widgets/fileviewlist.cpp:44
 msgid "Copy to device..."
 msgstr "Salin ke peranti..."
@@ -1650,7 +1654,7 @@ msgstr "Padam"
 msgid "Delete downloaded data"
 msgstr "Padam data dimuat turun"
 
-#: devices/deviceview.cpp:408 library/libraryview.cpp:645
+#: devices/deviceview.cpp:408 library/libraryview.cpp:644
 #: ui/mainwindow.cpp:2317 widgets/fileview.cpp:186
 msgid "Delete files"
 msgstr "Padam fail"
@@ -1659,7 +1663,7 @@ msgstr "Padam fail"
 msgid "Delete from device..."
 msgstr "Padam dari peranti..."
 
-#: library/libraryview.cpp:411 ui/mainwindow.cpp:683
+#: library/libraryview.cpp:410 ui/mainwindow.cpp:683
 #: widgets/fileviewlist.cpp:47
 msgid "Delete from disk..."
 msgstr "Padam dari cakera..."
@@ -1672,7 +1676,7 @@ msgstr "Padam episod telah dimain"
 msgid "Delete preset"
 msgstr "Padam praset"
 
-#: library/libraryview.cpp:401
+#: library/libraryview.cpp:400
 msgid "Delete smart playlist"
 msgstr "Padam senarai main pintar"
 
@@ -1821,7 +1825,7 @@ msgstr "Membuat imbas semula penuh akan kehilangan mana-mana data meta yang anda
 msgid "Don't repeat"
 msgstr "Jangan ulang"
 
-#: library/libraryview.cpp:429
+#: library/libraryview.cpp:428
 msgid "Don't show in various artists"
 msgstr "Jangan tunjuk dalam artis pelbagai"
 
@@ -1955,7 +1959,7 @@ msgstr "Mod dinamik hidup"
 msgid "Dynamic random mix"
 msgstr "Campuran rawak dinamik"
 
-#: library/libraryview.cpp:398
+#: library/libraryview.cpp:397
 msgid "Edit smart playlist..."
 msgstr "Sunting senarai main pintar..."
 
@@ -1976,12 +1980,12 @@ msgstr "Sunting tag"
 msgid "Edit track information"
 msgstr "Sunting maklumat trek"
 
-#: library/libraryview.cpp:416 widgets/fileviewlist.cpp:51
+#: library/libraryview.cpp:415 widgets/fileviewlist.cpp:51
 #: ../bin/src/ui_mainwindow.h:669
 msgid "Edit track information..."
 msgstr "Sunting maklumat trek..."
 
-#: library/libraryview.cpp:419
+#: library/libraryview.cpp:418
 msgid "Edit tracks information..."
 msgstr "Sunting maklumat trek..."
 
@@ -2098,7 +2102,7 @@ msgid "Equivalent to --log-levels *:3"
 msgstr "Sama dengan --log-levels *:3"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:246
-#: library/libraryview.cpp:639 ui/mainwindow.cpp:2020 ui/mainwindow.cpp:2267
+#: library/libraryview.cpp:638 ui/mainwindow.cpp:2020 ui/mainwindow.cpp:2267
 #: ui/mainwindow.cpp:2415 internet/vk/vkservice.cpp:643
 msgid "Error"
 msgstr "Ralat"
@@ -2762,31 +2766,31 @@ msgstr "Perkhidmatan Internet"
 msgid "Intro tracks"
 msgstr "Trek pengenalan"
 
-#: internet/lastfm/lastfmservice.cpp:240
+#: internet/lastfm/lastfmservice.cpp:259
 msgid "Invalid API key"
 msgstr "Kunci API tidak sah"
 
-#: internet/lastfm/lastfmservice.cpp:230
+#: internet/lastfm/lastfmservice.cpp:249
 msgid "Invalid format"
 msgstr "Format tidak sah"
 
-#: internet/lastfm/lastfmservice.cpp:226
+#: internet/lastfm/lastfmservice.cpp:245
 msgid "Invalid method"
 msgstr "Kaedah tidak sah"
 
-#: internet/lastfm/lastfmservice.cpp:232
+#: internet/lastfm/lastfmservice.cpp:251
 msgid "Invalid parameters"
 msgstr "Parameter tidak sah"
 
-#: internet/lastfm/lastfmservice.cpp:234
+#: internet/lastfm/lastfmservice.cpp:253
 msgid "Invalid resource specified"
 msgstr "Sumber dinyatakan tidak sah"
 
-#: internet/lastfm/lastfmservice.cpp:224
+#: internet/lastfm/lastfmservice.cpp:243
 msgid "Invalid service"
 msgstr "Perkhidmatan tidak sah"
 
-#: internet/lastfm/lastfmservice.cpp:238
+#: internet/lastfm/lastfmservice.cpp:257
 msgid "Invalid session key"
 msgstr "Kunci sesi tidak sah"
 
@@ -2892,17 +2896,21 @@ msgctxt "A playlist's tag."
 msgid "Last played"
 msgstr "Terakhir dimainkan"
 
-#: ../bin/src/ui_lastfmsettingspage.h:149
+#: ../bin/src/ui_lastfmsettingspage.h:131
 msgid "Last.fm"
 msgstr "Last.fm"
 
-#: internet/lastfm/lastfmservice.cpp:247
+#: internet/lastfm/lastfmsettingspage.cpp:77
+msgid "Last.fm authentication"
+msgstr ""
+
+#: internet/lastfm/lastfmsettingspage.cpp:70
+msgid "Last.fm authentication failed"
+msgstr ""
+
+#: internet/lastfm/lastfmservice.cpp:266
 msgid "Last.fm is currently busy, please try again in a few minutes"
 msgstr "Last.fm sedang sibuk, sila cuba lagi setelah beberapa minit"
-
-#: ../bin/src/ui_lastfmsettingspage.h:153
-msgid "Last.fm password"
-msgstr "Kata laluan Last.fm"
 
 #: songinfo/lastfmtrackinfoprovider.cpp:76
 msgid "Last.fm play counts"
@@ -2911,10 +2919,6 @@ msgstr "Kiraan main Last.fm"
 #: songinfo/lastfmtrackinfoprovider.cpp:130
 msgid "Last.fm tags"
 msgstr "Tag Last.fm"
-
-#: ../bin/src/ui_lastfmsettingspage.h:151
-msgid "Last.fm username"
-msgstr "Kata laluan Last.fm"
 
 #: songinfo/lastfmtrackinfoprovider.cpp:110
 msgid "Last.fm wiki"
@@ -3033,7 +3037,7 @@ msgstr "Memuat fail/URL, menggantikan senarai main semasa"
 #: ../bin/src/ui_soundcloudsettingspage.h:102
 #: ../bin/src/ui_spotifysettingspage.h:210
 #: ../bin/src/ui_subsonicsettingspage.h:129
-#: ../bin/src/ui_lastfmsettingspage.h:152
+#: ../bin/src/ui_lastfmsettingspage.h:132
 #: ../bin/src/ui_googledrivesettingspage.h:101
 #: ../bin/src/ui_dropboxsettingspage.h:101
 #: ../bin/src/ui_skydrivesettingspage.h:101
@@ -3146,7 +3150,7 @@ msgstr "Make it so!"
 msgid "Make playlist available offline"
 msgstr "Buatkan senarai main tersedia di luar talian"
 
-#: internet/lastfm/lastfmservice.cpp:259
+#: internet/lastfm/lastfmservice.cpp:278
 msgid "Malformed response"
 msgstr "Respon cacat"
 
@@ -3355,7 +3359,7 @@ msgstr "Folder baharu"
 msgid "New playlist"
 msgstr "Senarai main baharu"
 
-#: library/libraryview.cpp:395
+#: library/libraryview.cpp:394
 msgid "New smart playlist..."
 msgstr "Senarai main pintar baharu..."
 
@@ -3418,7 +3422,7 @@ msgstr "Tiada blok pendek"
 msgid "None"
 msgstr "Tiada"
 
-#: library/libraryview.cpp:640 ui/mainwindow.cpp:2268 ui/mainwindow.cpp:2416
+#: library/libraryview.cpp:639 ui/mainwindow.cpp:2268 ui/mainwindow.cpp:2416
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Tiada satupun lagu yang dipilih sesuai untuk disalin ke peranti"
 
@@ -3438,19 +3442,19 @@ msgstr "Tidak tersedia bila menggunakan senarai main dinamik"
 msgid "Not connected"
 msgstr "Tidak disambung"
 
-#: internet/lastfm/lastfmservice.cpp:250
+#: internet/lastfm/lastfmservice.cpp:269
 msgid "Not enough content"
 msgstr "Tidak cukup kandungan"
 
-#: internet/lastfm/lastfmservice.cpp:254
+#: internet/lastfm/lastfmservice.cpp:273
 msgid "Not enough fans"
 msgstr "Tidak cukup peminat"
 
-#: internet/lastfm/lastfmservice.cpp:252
+#: internet/lastfm/lastfmservice.cpp:271
 msgid "Not enough members"
 msgstr "Tidak cukup ahli"
 
-#: internet/lastfm/lastfmservice.cpp:256
+#: internet/lastfm/lastfmservice.cpp:275
 msgid "Not enough neighbors"
 msgstr "Kejiranan tidak mencukupi"
 
@@ -3580,7 +3584,7 @@ msgid "Open in Google Drive"
 msgstr "Buka dalam Google Drive"
 
 #: devices/deviceview.cpp:224 globalsearch/globalsearchview.cpp:461
-#: internet/core/internetservice.cpp:105 library/libraryview.cpp:384
+#: internet/core/internetservice.cpp:105 library/libraryview.cpp:383
 #: widgets/fileviewlist.cpp:36
 msgid "Open in new playlist"
 msgstr "Buka dalam senarai main baharu"
@@ -3599,7 +3603,7 @@ msgstr "Buka dalam pelayar anda"
 msgid "Open..."
 msgstr "Buka..."
 
-#: internet/lastfm/lastfmservice.cpp:236
+#: internet/lastfm/lastfmservice.cpp:255
 msgid "Operation failed"
 msgstr "Operasi gagal"
 
@@ -3625,7 +3629,7 @@ msgstr "Opus"
 msgid "Organise Files"
 msgstr "Aturkan Fail"
 
-#: library/libraryview.cpp:405 ui/mainwindow.cpp:676
+#: library/libraryview.cpp:404 ui/mainwindow.cpp:676
 msgid "Organise files..."
 msgstr "Urus fail..."
 
@@ -3825,7 +3829,7 @@ msgstr "Keutamaan"
 #: ../bin/src/ui_digitallyimportedsettingspage.h:165
 #: ../bin/src/ui_magnatunesettingspage.h:165
 #: ../bin/src/ui_spotifysettingspage.h:215 ../bin/src/ui_settingsdialog.h:115
-#: ../bin/src/ui_lastfmsettingspage.h:154 ../bin/src/ui_vksettingspage.h:216
+#: ../bin/src/ui_lastfmsettingspage.h:134 ../bin/src/ui_vksettingspage.h:216
 msgid "Preferences"
 msgstr "Keutamaan"
 
@@ -3948,7 +3952,7 @@ msgstr "Pengurus Baris Gilir"
 msgid "Queue selected tracks"
 msgstr "Baris gilir trek terpilih"
 
-#: globalsearch/globalsearchview.cpp:466 library/libraryview.cpp:389
+#: globalsearch/globalsearchview.cpp:466 library/libraryview.cpp:388
 #: ui/mainwindow.cpp:1698
 msgid "Queue track"
 msgstr "Baris gilir trek"
@@ -4125,7 +4129,7 @@ msgid "Repeat track"
 msgstr "Ulang trek"
 
 #: devices/deviceview.cpp:221 globalsearch/globalsearchview.cpp:457
-#: internet/core/internetservice.cpp:93 library/libraryview.cpp:381
+#: internet/core/internetservice.cpp:93 library/libraryview.cpp:380
 #: widgets/fileviewlist.cpp:34
 msgid "Replace current playlist"
 msgstr "Ganti senarai main semasa"
@@ -4308,7 +4312,7 @@ msgstr "Saiz skala"
 msgid "Score"
 msgstr "Skor"
 
-#: ../bin/src/ui_lastfmsettingspage.h:155
+#: ../bin/src/ui_lastfmsettingspage.h:135
 msgid "Scrobble tracks that I listen to"
 msgstr "Scrobble trek yang saya dengari"
 
@@ -4461,7 +4465,7 @@ msgstr "URL pelayan"
 msgid "Server details"
 msgstr "Perincian pelayan"
 
-#: internet/lastfm/lastfmservice.cpp:242
+#: internet/lastfm/lastfmservice.cpp:261
 msgid "Service offline"
 msgstr "Perkhidmatan di luar talian"
 
@@ -4565,7 +4569,7 @@ msgstr "Tunjuk saiz penuh..."
 msgid "Show groups in global search result"
 msgstr "Tunjuk kumpulan dalam keputusan gelintar sejagat"
 
-#: library/libraryview.cpp:423 ui/mainwindow.cpp:686
+#: library/libraryview.cpp:422 ui/mainwindow.cpp:686
 #: widgets/fileviewlist.cpp:53
 msgid "Show in file browser..."
 msgstr "Tunjuk dalam pelayar fail..."
@@ -4574,7 +4578,7 @@ msgstr "Tunjuk dalam pelayar fail..."
 msgid "Show in library..."
 msgstr "Tunjuk dalam pustaka...."
 
-#: library/libraryview.cpp:426
+#: library/libraryview.cpp:425
 msgid "Show in various artists"
 msgstr "Tunjuk dalam artis pelbagai"
 
@@ -4598,11 +4602,11 @@ msgstr "Tunjuk lagu dimainkan dalam halaman anda"
 msgid "Show search suggestions"
 msgstr "Tunjuk cadangan gelintar"
 
-#: ../bin/src/ui_lastfmsettingspage.h:156
+#: ../bin/src/ui_lastfmsettingspage.h:136
 msgid "Show the \"love\" button"
 msgstr "Tunjuk butang \"suka\""
 
-#: ../bin/src/ui_lastfmsettingspage.h:157
+#: ../bin/src/ui_lastfmsettingspage.h:137
 msgid "Show the scrobble button in the main window"
 msgstr "Tunjuk butang scrobble dalam tetingkap utama"
 
@@ -4999,7 +5003,7 @@ msgid ""
 "rescan because of the new features listed below:"
 msgstr "Versi Clementine yang anda telah kemaskini memerlukan imbas semula pustaka penuh kerana terdapat beberapa fitur baharu yang tersenarai di bawah:"
 
-#: library/libraryview.cpp:562
+#: library/libraryview.cpp:561
 msgid "There are other songs in this album"
 msgstr "Terdapat lagu lain di dalam album ini"
 
@@ -5035,7 +5039,7 @@ msgid ""
 "continue?"
 msgstr "Fail ini akan dipadam dari peranti, anda pasti untuk meneruskan?"
 
-#: library/libraryview.cpp:646 ui/mainwindow.cpp:2318 widgets/fileview.cpp:187
+#: library/libraryview.cpp:645 ui/mainwindow.cpp:2318 widgets/fileview.cpp:187
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -5106,7 +5110,7 @@ msgstr "Ini kali pertama anda menyambung ke peranti ini. Sekarang Clementine aka
 msgid "This option can be changed in the \"Behavior\" preferences"
 msgstr "Pilihan ini boleh diubah dalam keutamaan \"Kelakuan\""
 
-#: internet/lastfm/lastfmservice.cpp:244
+#: internet/lastfm/lastfmservice.cpp:263
 msgid "This stream is for paid subscribers only"
 msgstr "Strim ini untuk pelanggan berbayar sahaja"
 
@@ -5257,7 +5261,7 @@ msgid "Unknown content-type"
 msgstr "Jenis-kandungan tidak diketahui"
 
 #: internet/digitally/digitallyimportedclient.cpp:74
-#: internet/lastfm/lastfmservice.cpp:263
+#: internet/lastfm/lastfmservice.cpp:282
 msgid "Unknown error"
 msgstr "Ralat tidak diketahui"
 
@@ -5324,7 +5328,7 @@ msgstr "Mengemaskini pustaka"
 msgid "Usage"
 msgstr "Penggunaan"
 
-#: ../bin/src/ui_lastfmsettingspage.h:158
+#: ../bin/src/ui_lastfmsettingspage.h:138
 msgid "Use Album Artist tag when available"
 msgstr "Guna tag Artis Album bila tersedia"
 
@@ -5577,7 +5581,7 @@ msgstr "Audio Windows Media"
 msgid "Without cover:"
 msgstr "Tanpa kulit muka:"
 
-#: library/libraryview.cpp:563
+#: library/libraryview.cpp:562
 msgid ""
 "Would you like to move the other songs in this album to Various Artists as "
 "well?"
@@ -5714,7 +5718,7 @@ msgstr "Anda perlu mulakan semula Clementine jika anda ubah bahasa."
 msgid "Your IP address:"
 msgstr "Alamat IP anda:"
 
-#: internet/lastfm/lastfmsettingspage.cpp:80
+#: internet/lastfm/lastfmsettingspage.cpp:93
 msgid "Your Last.fm credentials were incorrect"
 msgstr "Kelayakan Last.fm anda tidak betul"
 
@@ -5722,7 +5726,7 @@ msgstr "Kelayakan Last.fm anda tidak betul"
 msgid "Your Magnatune credentials were incorrect"
 msgstr "Kelayakan Magnatune anda tidak betul"
 
-#: library/libraryview.cpp:353
+#: library/libraryview.cpp:352
 msgid "Your library is empty!"
 msgstr "Pustaka anda kosong!"
 
