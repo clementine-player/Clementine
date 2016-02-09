@@ -83,6 +83,8 @@ LastFMService::LastFMService(Application* app, QObject* parent)
       scrobbling_enabled_(false),
       connection_problems_(false),
       app_(app) {
+  lastfm::ws::setScheme(lastfm::ws::Https);
+
   ReloadSettings();
 
   // we emit the signal the first time to be sure the buttons are in the right
