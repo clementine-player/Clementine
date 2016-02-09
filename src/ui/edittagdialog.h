@@ -133,6 +133,8 @@ signals:
   void UpdateSummaryTab(const Song& song);
   void UpdateStatisticsTab(const Song& song);
 
+  void UpdateUI(const QModelIndexList& sel);
+
   bool SetLoading(const QString& message);
   void SetSongListVisibility(bool visible);
 

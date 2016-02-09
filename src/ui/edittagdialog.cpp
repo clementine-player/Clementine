@@ -428,11 +428,7 @@ void EditTagDialog::SelectionChanged() {
   if (sel.isEmpty()) return;
 
   // Set the editable fields
-  ignore_edits_ = true;
-  for (const FieldData& field : fields_) {
-    InitFieldValue(field, sel);
-  }
-  ignore_edits_ = false;
+  UpdateUI(sel);
 
   // If we're editing multiple songs then we have to disable certain tabs
   const bool multiple = sel.count() > 1;
@@ -444,6 +440,14 @@ void EditTagDialog::SelectionChanged() {
     UpdateSummaryTab(song);
     UpdateStatisticsTab(song);
   }
+}
+
+void EditTagDialog::UpdateUI(const QModelIndexList& sel){
+  ignore_edits_ = true;
+  for (const FieldData& field : fields_) {
+    InitFieldValue(field, sel);
+  }
+  ignore_edits_ = false;
 }
 
 static void SetText(QLabel* label, int value, const QString& suffix,
@@ -857,10 +861,6 @@ void EditTagDialog::FetchTagSongChosen(const Song& original_song,
     // Yes! Additionally update UI
     const QModelIndexList sel =
       ui_->song_list->selectionModel()->selectedIndexes();
-    ignore_edits_ = true;
-    for (const FieldData& field : fields_) {
-      InitFieldValue(field, sel);
-    }
-    ignore_edits_ = false;
+    UpdateUI(sel);
   }
 }
