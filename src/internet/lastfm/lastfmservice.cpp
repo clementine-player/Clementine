@@ -83,7 +83,9 @@ LastFMService::LastFMService(Application* app, QObject* parent)
       scrobbling_enabled_(false),
       connection_problems_(false),
       app_(app) {
+#ifdef HAVE_LIBLASTFM1
   lastfm::ws::setScheme(lastfm::ws::Https);
+#endif
 
   ReloadSettings();
 
