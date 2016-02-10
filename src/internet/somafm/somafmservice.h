@@ -81,7 +81,7 @@ class SomaFMServiceBase : public InternetService {
   void ForceRefreshStreams();
   void RefreshStreams();
   void RefreshStreamsFinished(QNetworkReply* reply, int task_id);
-  void GetSelectedChannelUrl() const;
+  void CopySelectedPlayableItemURL() const;
 
   void Homepage();
   void Donate();

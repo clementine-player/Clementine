@@ -62,7 +62,6 @@ SomaFMServiceBase::SomaFMServiceBase(Application* app, InternetModel* parent,
       url_handler_(new SomaFMUrlHandler(app, this, this)),
       root_(nullptr),
       context_menu_(nullptr),
-      channel_context_menu_(nullptr),
       network_(new NetworkAccessManager(this)),
       streams_(name, "streams", kStreamsCacheDurationSecs),
       name_(name),
@@ -107,26 +106,14 @@ void SomaFMServiceBase::EnsureMenuCreated() {
     context_menu_->addAction(IconLoader::Load("view-refresh",  IconLoader::Base),
                              tr("Refresh channels"), this,
                              SLOT(ForceRefreshStreams()));
-
-    channel_context_menu_ = new QMenu;
-    channel_context_menu_->addActions(GetPlaylistActions());
-    channel_context_menu_->addAction(IconLoader::Load("download", IconLoader::Base),
-                                     tr("Open %1 in browser").arg(homepage_url_.host()),
-                                     this, SLOT(Homepage()));
-
-    channel_context_menu_->addAction(IconLoader::Load("view-refresh",  IconLoader::Base),
-                                     tr("Refresh channels"), this,
-                                     SLOT(ForceRefreshStreams()));
-
-    channel_context_menu_->addAction(IconLoader::Load("edit-copy", IconLoader::Base),
-                                     tr("Copy channel URL to clipboard"),
-                                     this, SLOT(GetSelectedChannelUrl()));
+    context_menu_->addAction(GetCopySelectedPlayableItemURLAction());
 
     if (!donate_page_url_.isEmpty()) {
       context_menu_->addAction(IconLoader::Load("download", IconLoader::Base),
                                tr("Donate"), this, SLOT(Donate()));
 
-      channel_context_menu_->addAction(IconLoader::Load("download", IconLoader::Base),
+      context_menu_->addSeparator();
+      context_menu_->addAction(IconLoader::Load("download", IconLoader::Base),
                                                         tr("Donate"), this, SLOT(Donate()));
     }
 
@@ -137,29 +124,34 @@ void SomaFMServiceBase::ShowContextMenu(const QPoint& global_pos) {
   EnsureMenuCreated();
   QStandardItem* item = model()->itemFromIndex(model()->current_index());
 
+  bool can_play = false;
+
   if (item) {
     int type = item->data(InternetModel::Role_Type).toInt();
 
     // SomaFM streams have a Role_Type of 0.
     if (type == 0) {
-      selected_song_url_ = item->data(InternetModel::Role_Url).toUrl();
-      qLog(Debug) << "Selected channel URL: " << item->data(InternetModel::Role_Url).toString();
-
-      channel_context_menu_->popup(global_pos);
-      return;
+      can_play = true;
+      selected_playable_item_url_ = item->data(InternetModel::Role_Url).toUrl();
     }
   }
+
+  GetAppendToPlaylistAction()->setEnabled(can_play);
+  GetReplacePlaylistAction()->setEnabled(can_play);
+  GetOpenInNewPlaylistAction()->setEnabled(can_play);
+  GetCopySelectedPlayableItemURLAction()->setEnabled(can_play);
 
   context_menu_->popup(global_pos);
 }
 
-void SomaFMServiceBase::GetSelectedChannelUrl() const {
-  QString url = selected_song_url_.toEncoded();
+void SomaFMServiceBase::CopySelectedPlayableItemURL() const {
+  QString url = selected_playable_item_url_.toEncoded();
   QString new_url = "https://somafm.com/player/#/now-playing/";
 
   url.remove(QRegExp("^(.*)\\.com\\/"));
   url.remove(QRegExp("\\.pls$"));
   new_url.append(url);
+
   qLog(Debug) << "Processed SomaFM channel URL: " << new_url;
   InternetService::ShowUrlBox(tr("SomaFM channel's URL"), new_url);
 }
