@@ -21,9 +21,25 @@
 EqualizerSlider::EqualizerSlider(const QString& label, QWidget* parent)
     : QWidget(parent), ui_(new Ui_EqualizerSlider) {
   ui_->setupUi(this);
-  ui_->label->setText(label);
+  ui_->band->setText(label);  // Band [Hz]
 
-  connect(ui_->slider, SIGNAL(valueChanged(int)), SIGNAL(ValueChanged(int)));
+  QFontMetrics fm = ui_->gain->fontMetrics();
+  int longestLabelWidth = fm.width(tr("%1 dB").arg(-99.99));
+  ui_->gain->setMinimumWidth(longestLabelWidth);
+  ui_->gain->setText(tr("%1 dB").arg(0));  // Gain [dB]
+
+  ui_->slider->setValue(0);
+
+  connect(ui_->slider, SIGNAL(valueChanged(int)), this,
+          SLOT(onValueChanged(int)));
+}
+
+void EqualizerSlider::onValueChanged(int value) {
+  // Converting % to dB as per GstEnginePipeline::UpdateEqualizer():
+  float gain = (value < 0) ? value * 0.24 : value * 0.12;
+
+  ui_->gain->setText(tr("%1 dB").arg(gain));  // Gain [dB]
+  emit ValueChanged(value);
 }
 
 EqualizerSlider::~EqualizerSlider() { delete ui_; }
