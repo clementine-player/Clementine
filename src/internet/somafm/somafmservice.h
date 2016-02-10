@@ -96,7 +96,6 @@ class SomaFMServiceBase : public InternetService {
 
   QStandardItem* root_;
   QMenu* context_menu_;
-  QMenu* channel_context_menu_;
 
   QNetworkAccessManager* network_;
 

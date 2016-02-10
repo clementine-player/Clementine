@@ -118,7 +118,6 @@ class SoundCloudService : public InternetService {
   NetworkAccessManager* network_;
 
   QMenu* context_menu_;
-  QMenu* song_context_menu_;
   SearchBoxWidget* search_box_;
   QTimer* search_delay_;
   QString pending_search_;
