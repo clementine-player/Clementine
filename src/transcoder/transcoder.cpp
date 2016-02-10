@@ -82,10 +82,10 @@ GstElement* Transcoder::CreateElementForMimeType(const QString& element_type,
                                                  GstElement* bin) {
   if (mime_type.isEmpty()) return nullptr;
 
-  // HACK: Force ffmux_mp4 because it doesn't set any useful src caps
+  // HACK: Force mp4mux because it doesn't set any useful src caps
   if (mime_type == "audio/mp4") {
-    LogLine(QString("Using '%1' (rank %2)").arg("ffmux_mp4").arg(-1));
-    return CreateElement("ffmux_mp4", bin);
+    LogLine(QString("Using '%1' (rank %2)").arg("mp4mux").arg(-1));
+    return CreateElement("mp4mux", bin);
   }
 
   // Keep track of all the suitable elements we find and figure out which

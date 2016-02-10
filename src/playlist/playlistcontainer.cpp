@@ -67,7 +67,10 @@ PlaylistContainer::PlaylistContainer(QWidget* parent)
   no_matches_palette.setColor(QPalette::Inactive, QPalette::WindowText,
                               no_matches_color);
   no_matches_label_->setPalette(no_matches_palette);
-
+  
+  // Remove QFrame border
+  ui_->toolbar->setStyleSheet("QFrame { border: 0px; }");
+  
   // Make it bold
   QFont no_matches_font = no_matches_label_->font();
   no_matches_font.setBold(true);

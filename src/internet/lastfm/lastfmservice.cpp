@@ -74,14 +74,19 @@ const char* LastFMService::kSettingsGroup = "Last.fm";
 const char* LastFMService::kAudioscrobblerClientId = "tng";
 const char* LastFMService::kApiKey = "75d20fb472be99275392aefa2760ea09";
 const char* LastFMService::kSecret = "d3072b60ae626be12be69448f5c46e70";
+const char* LastFMService::kAuthLoginUrl =
+    "https://www.last.fm/api/auth/?api_key=%1&token=%2";
 
 LastFMService::LastFMService(Application* app, QObject* parent)
     : Scrobbler(parent),
-      scrobbler_(nullptr),
       already_scrobbled_(false),
       scrobbling_enabled_(false),
       connection_problems_(false),
       app_(app) {
+#ifdef HAVE_LIBLASTFM1
+  lastfm::ws::setScheme(lastfm::ws::Https);
+#endif
+
   ReloadSettings();
 
   // we emit the signal the first time to be sure the buttons are in the right
@@ -127,29 +132,37 @@ bool LastFMService::IsSubscriber() const {
   return settings.value("Subscriber", false).toBool();
 }
 
-void LastFMService::Authenticate(const QString& username,
-                                 const QString& password) {
+void LastFMService::GetToken() {
   QMap<QString, QString> params;
-  params["method"] = "auth.getMobileSession";
-  params["username"] = username;
-  params["authToken"] =
-      lastfm::md5((username + lastfm::md5(password.toUtf8())).toUtf8());
+  params["method"] = "auth.getToken";
+  QNetworkReply* reply = lastfm::ws::post(params);
+  NewClosure(reply, SIGNAL(finished()), this,
+             SLOT(GetTokenReplyFinished(QNetworkReply*)), reply);
+}
+
+void LastFMService::GetTokenReplyFinished(QNetworkReply* reply) {
+  reply->deleteLater();
+
+  // Parse the reply
+  lastfm::XmlQuery lfm(lastfm::compat::EmptyXmlQuery());
+  if (lastfm::compat::ParseQuery(reply->readAll(), &lfm)) {
+    QString token = lfm["token"].text();
+
+    emit TokenReceived(true, token);
+  } else {
+    emit TokenReceived(false, lfm["error"].text().trimmed());
+  }
+}
+
+void LastFMService::Authenticate(const QString& token) {
+  QMap<QString, QString> params;
+  params["method"] = "auth.getSession";
+  params["token"] = token;
 
   QNetworkReply* reply = lastfm::ws::post(params);
   NewClosure(reply, SIGNAL(finished()), this,
              SLOT(AuthenticateReplyFinished(QNetworkReply*)), reply);
   // If we need more detailed error reporting, handle error(NetworkError) signal
-}
-
-void LastFMService::SignOut() {
-  lastfm::ws::Username.clear();
-  lastfm::ws::SessionKey.clear();
-
-  QSettings settings;
-  settings.beginGroup(kSettingsGroup);
-
-  settings.setValue("Username", QString());
-  settings.setValue("Session", QString());
 }
 
 void LastFMService::AuthenticateReplyFinished(QNetworkReply* reply) {
@@ -175,10 +188,20 @@ void LastFMService::AuthenticateReplyFinished(QNetworkReply* reply) {
   }
 
   // Invalidate the scrobbler - it will get recreated later
-  delete scrobbler_;
-  scrobbler_ = nullptr;
+  scrobbler_.reset(nullptr);
 
   emit AuthenticationComplete(true, QString());
+}
+
+void LastFMService::SignOut() {
+  lastfm::ws::Username.clear();
+  lastfm::ws::SessionKey.clear();
+
+  QSettings settings;
+  settings.beginGroup(kSettingsGroup);
+
+  settings.setValue("Username", QString());
+  settings.setValue("Session", QString());
 }
 
 void LastFMService::UpdateSubscriberStatus() {
@@ -268,16 +291,16 @@ bool LastFMService::InitScrobbler() {
   if (!IsAuthenticated() || !IsScrobblingEnabled()) return false;
 
   if (!scrobbler_)
-    scrobbler_ = new lastfm::Audioscrobbler(kAudioscrobblerClientId);
+    scrobbler_.reset(new lastfm::Audioscrobbler(kAudioscrobblerClientId));
 
 // reemit the signal since the sender is private
 #ifdef HAVE_LIBLASTFM1
-  connect(scrobbler_, SIGNAL(scrobblesSubmitted(QList<lastfm::Track>)),
+  connect(scrobbler_.get(), SIGNAL(scrobblesSubmitted(QList<lastfm::Track>)),
           SIGNAL(ScrobbleSubmitted()));
-  connect(scrobbler_, SIGNAL(nowPlayingError(int, QString)),
+  connect(scrobbler_.get(), SIGNAL(nowPlayingError(int, QString)),
           SIGNAL(ScrobbleError(int)));
 #else
-  connect(scrobbler_, SIGNAL(status(int)), SLOT(ScrobblerStatus(int)));
+  connect(scrobbler_.get(), SIGNAL(status(int)), SLOT(ScrobblerStatus(int)));
 #endif
   return true;
 }

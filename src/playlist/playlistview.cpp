@@ -496,6 +496,9 @@ void PlaylistView::drawRow(QPainter* painter,
                         is_paused ? currenttrack_pause_ : currenttrack_play_);
 
     // Set the font
+    opt.palette.setColor(QPalette::Inactive, QPalette::HighlightedText,
+                         QApplication::palette().color(
+                             QPalette::Active, QPalette::HighlightedText));
     opt.palette.setColor(QPalette::Text, QApplication::palette().color(
                                              QPalette::HighlightedText));
     opt.palette.setColor(QPalette::Highlight, Qt::transparent);

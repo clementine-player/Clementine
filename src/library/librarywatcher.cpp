@@ -491,8 +491,9 @@ SongList LibraryWatcher::ScanNewFile(const QString& file, const QString& path,
     // Ignore FILEs pointing to other media files. Also, watch out for incorrect
     // media files. Playlist parser for CUEs considers every entry in sheet
     // valid and we don't want invalid media getting into library!
+    QString file_nfd = file.normalized(QString::NormalizationForm_D);
     for (const Song& cue_song : cue_parser_->Load(&cue, matching_cue, path)) {
-      if (cue_song.url().toLocalFile() == file) {
+      if (cue_song.url().toLocalFile().normalized(QString::NormalizationForm_D) == file_nfd) {
         if (TagReaderClient::Instance()->IsMediaFileBlocking(file)) {
           song_list << cue_song;
         }

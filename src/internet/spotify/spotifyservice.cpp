@@ -63,7 +63,7 @@ Q_DECLARE_METATYPE(QStandardItem*);
 const char* SpotifyService::kServiceName = "Spotify";
 const char* SpotifyService::kSettingsGroup = "Spotify";
 const char* SpotifyService::kBlobDownloadUrl =
-    "http://spotify.clementine-player.org/";
+    "https://spotify.clementine-player.org/";
 const int SpotifyService::kSearchDelayMsec = 400;
 
 SpotifyService::SpotifyService(Application* app, InternetModel* parent)
