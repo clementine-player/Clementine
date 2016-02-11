@@ -21,29 +21,6 @@
 */
 
 #include "application.h"
-#include "appearance.h"
-#include "config.h"
-#include "database.h"
-#include "player.h"
-#include "tagreaderclient.h"
-#include "taskmanager.h"
-#include "covers/albumcoverloader.h"
-#include "covers/coverproviders.h"
-#include "covers/currentartloader.h"
-#include "devices/devicemanager.h"
-#include "internet/core/internetmodel.h"
-#include "globalsearch/globalsearch.h"
-#include "library/library.h"
-#include "library/librarybackend.h"
-#include "networkremote/networkremote.h"
-#include "networkremote/networkremotehelper.h"
-#include "playlist/playlistbackend.h"
-#include "playlist/playlistmanager.h"
-#include "internet/podcasts/gpoddersync.h"
-#include "internet/podcasts/podcastbackend.h"
-#include "internet/podcasts/podcastdeleter.h"
-#include "internet/podcasts/podcastdownloader.h"
-#include "internet/podcasts/podcastupdater.h"
 
 #ifdef HAVE_LIBLASTFM
 #include "internet/lastfm/lastfmservice.h"
@@ -58,95 +35,96 @@ bool Application::kIsPortable = false;
 
 Application::Application(QObject* parent)
     : QObject(parent),
-      tag_reader_client_(nullptr),
-      database_(nullptr),
-      album_cover_loader_(nullptr),
-      playlist_backend_(nullptr),
-      podcast_backend_(nullptr),
-      appearance_(nullptr),
-      cover_providers_(nullptr),
-      task_manager_(nullptr),
-      player_(nullptr),
-      playlist_manager_(nullptr),
-      current_art_loader_(nullptr),
-      global_search_(nullptr),
-      internet_model_(nullptr),
-      library_(nullptr),
-      device_manager_(nullptr),
-      podcast_updater_(nullptr),
-      podcast_deleter_(nullptr),
-      podcast_downloader_(nullptr),
-      gpodder_sync_(nullptr),
-      moodbar_loader_(nullptr),
-      moodbar_controller_(nullptr),
-      network_remote_(nullptr),
-      network_remote_helper_(nullptr),
-      scrobbler_(nullptr) {
-  tag_reader_client_ = new TagReaderClient(this);
-  MoveToNewThread(tag_reader_client_);
-  tag_reader_client_->Start();
-
-  database_ = new Database(this, this);
-  MoveToNewThread(database_);
-
-  album_cover_loader_ = new AlbumCoverLoader(this);
-  MoveToNewThread(album_cover_loader_);
-
-  playlist_backend_ = new PlaylistBackend(this, this);
-  MoveToThread(playlist_backend_, database_->thread());
-
-  podcast_backend_ = new PodcastBackend(this, this);
-  MoveToThread(podcast_backend_, database_->thread());
-
-  appearance_ = new Appearance(this);
-  cover_providers_ = new CoverProviders(this);
-  task_manager_ = new TaskManager(this);
-  player_ = new Player(this, this);
-  playlist_manager_ = new PlaylistManager(this, this);
-  current_art_loader_ = new CurrentArtLoader(this, this);
-  global_search_ = new GlobalSearch(this, this);
-  internet_model_ = new InternetModel(this, this);
-  library_ = new Library(this, this);
-  device_manager_ = new DeviceManager(this, this);
-  podcast_updater_ = new PodcastUpdater(this, this);
-
-  podcast_deleter_ = new PodcastDeleter(this, this);
-  MoveToNewThread(podcast_deleter_);
-
-  podcast_downloader_ = new PodcastDownloader(this, this);
-  gpodder_sync_ = new GPodderSync(this, this);
-
+      tag_reader_client_([&](){
+        TagReaderClient* client = new TagReaderClient(this);
+        MoveToNewThread(client);
+        client->Start();
+        return client;
+      }),
+      database_([&]() {
+        Database* db = new Database(this, this);
+        MoveToNewThread(db);
+        DoInAMinuteOrSo(db, SLOT(DoBackup()));
+        return db;
+      }),
+      album_cover_loader_([&]() {
+        AlbumCoverLoader* loader = new AlbumCoverLoader(this);
+        MoveToNewThread(loader);
+        return loader;
+      }),
+      playlist_backend_([&]() {
+        PlaylistBackend* backend = new PlaylistBackend(this, this);
+        MoveToThread(backend, database_->thread());
+        return backend;
+      }),
+      podcast_backend_([&]() {
+        PodcastBackend* backend = new PodcastBackend(this, this);
+        MoveToThread(backend, database_->thread());
+        return backend;
+      }),
+      appearance_([=]() { return new Appearance(this); }),
+      cover_providers_([=]() { return new CoverProviders(this); }),
+      task_manager_([=]() { return new TaskManager(this); }),
+      player_([=]() { return new Player(this, this); }),
+      playlist_manager_([=]() { return new PlaylistManager(this); }),
+      current_art_loader_([=]() { return new CurrentArtLoader(this, this); }),
+      global_search_([=]() { return new GlobalSearch(this, this); }),
+      internet_model_([=]() { return new InternetModel(this, this); }),
+      library_([=]() { return new Library(this, this); }),
+      device_manager_([=]() { return new DeviceManager(this, this); }),
+      podcast_updater_([=]() { return new PodcastUpdater(this, this); }),
+      podcast_deleter_([=]() {
+        PodcastDeleter* deleter = new PodcastDeleter(this, this);
+        MoveToNewThread(deleter);
+        return deleter;
+      }),
+      podcast_downloader_([=]() {
+        return new PodcastDownloader(this, this);
+      }),
+      gpodder_sync_([=]() { return new GPodderSync(this, this); }),
+      moodbar_loader_([=]() {
 #ifdef HAVE_MOODBAR
-  moodbar_loader_ = new MoodbarLoader(this, this);
-  moodbar_controller_ = new MoodbarController(this, this);
+        return new MoodbarLoader(this, this);
+#else
+        return nullptr;
 #endif
-
-  // Network Remote
-  network_remote_ = new NetworkRemote(this);
-  MoveToNewThread(network_remote_);
-
-  // This must be before libraray_->Init();
+      }),
+      moodbar_controller_([=]() {
+#ifdef HAVE_MOODBAR
+        return new MoodbarController(this, this);
+#else
+        return nullptr;
+#endif
+      }),
+      network_remote_([=]() {
+        NetworkRemote* remote = new NetworkRemote(this);
+        MoveToNewThread(remote);
+        return remote;
+      }),
+      network_remote_helper_([=]() {
+        return new NetworkRemoteHelper(this);
+      }),
+      scrobbler_([=]() {
+#ifdef HAVE_LIBLASTFM
+        return new LastFMService(this, this);
+#else
+        return nullptr;
+#endif
+      }) {
+  // This must be before library_->Init();
   // In the constructor the helper waits for the signal
   // PlaylistManagerInitialized
   // to start the remote. Without the playlist manager clementine can
   // crash when a client connects before the manager is initialized!
-  network_remote_helper_ = new NetworkRemoteHelper(this);
-
-#ifdef HAVE_LIBLASTFM
-  scrobbler_ = new LastFMService(this, this);
-#endif  // HAVE_LIBLASTFM
-
+  network_remote_helper_.get();
   library_->Init();
-
-  DoInAMinuteOrSo(database_, SLOT(DoBackup()));
 }
 
 Application::~Application() {
   // It's important that the device manager is deleted before the database.
   // Deleting the database deletes all objects that have been created in its
   // thread, including some device library backends.
-  delete device_manager_;
-  device_manager_ = nullptr;
+  device_manager_.reset();
 
   for (QObject* object : objects_in_threads_) {
     object->deleteLater();

@@ -25,6 +25,8 @@
 #include <execinfo.h>
 #endif
 
+#include <iostream>
+
 #include <QCoreApplication>
 #include <QDateTime>
 #include <QStringList>
@@ -202,10 +204,11 @@ QDebug CreateLogger(Level level, const QString& class_name, int line) {
   }
 
   QDebug ret(type);
-  ret.nospace() << kMessageHandlerMagic << QDateTime::currentDateTime()
-                                               .toString("hh:mm:ss.zzz")
-                                               .toAscii()
-                                               .constData() << level_name
+  ret.nospace() << kMessageHandlerMagic
+                << QDateTime::currentDateTime()
+                       .toString("hh:mm:ss.zzz")
+                       .toAscii()
+                       .constData() << level_name
                 << function_line.leftJustified(32).toAscii().constData();
 
   return ret.space();
@@ -257,7 +260,8 @@ void DumpStackTrace() {
       backtrace_symbols(reinterpret_cast<void**>(&callstack), callstack_size);
   // Start from 1 to skip ourself.
   for (int i = 1; i < callstack_size; ++i) {
-    qLog(Debug) << DemangleSymbol(QString::fromAscii(symbols[i]));
+    std::cerr << DemangleSymbol(QString::fromAscii(symbols[i])).toStdString()
+              << std::endl;
   }
   free(symbols);
 #else
@@ -269,7 +273,7 @@ void DumpStackTrace() {
 
 namespace {
 
-template<typename T>
+template <typename T>
 QString print_duration(T duration, const std::string& unit) {
   return QString("%1%2").arg(duration.count()).arg(unit.c_str());
 }

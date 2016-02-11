@@ -15,18 +15,23 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "iconloader.h"
 #include "networkremotesettingspage.h"
 #include "ui_networkremotesettingspage.h"
+
+#include <QDesktopServices>
+#include <QFile>
+#include <QHostInfo>
+#include <QNetworkInterface>
+#include <QSettings>
+#include <QUrl>
+
+#include "core/application.h"
 #include "networkremote/networkremote.h"
 #include "networkremote/networkremotehelper.h"
 #include "transcoder/transcoder.h"
 #include "transcoder/transcoderoptionsdialog.h"
-
-#include <QDesktopServices>
-#include <QSettings>
-#include <QHostInfo>
-#include <QNetworkInterface>
+#include "ui/iconloader.h"
+#include "ui/settingsdialog.h"
 
 const char* NetworkRemoteSettingsPage::kPlayStoreUrl =
     "https://play.google.com/store/apps/details?id=de.qspool.clementineremote";
@@ -83,10 +88,12 @@ void NetworkRemoteSettingsPage::Load() {
   ui_->auth_code->setValue(s.value("auth_code", qrand() % 100000).toInt());
 
   ui_->allow_downloads->setChecked(s.value("allow_downloads", false).toBool());
-  ui_->convert_lossless->setChecked(s.value("convert_lossless", false).toBool());
+  ui_->convert_lossless->setChecked(
+      s.value("convert_lossless", false).toBool());
 
   // Load settings
-  QString last_output_format = s.value("last_output_format", "audio/x-vorbis").toString();
+  QString last_output_format =
+      s.value("last_output_format", "audio/x-vorbis").toString();
   for (int i = 0; i < ui_->format->count(); ++i) {
     if (last_output_format ==
         ui_->format->itemData(i).value<TranscoderPreset>().codec_mimetype_) {

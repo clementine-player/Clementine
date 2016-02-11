@@ -464,7 +464,7 @@ void SoundCloudService::CopySelectedPlayableItemURL() const {
   url.remove(QRegExp("\\/stream(.*)$"));
   url.prepend(new_url);
 
-  qLog(Debug) << "Processed SoundCloud track URL: " << new_url;
+  qLog(Debug) << "Processed SoundCloud track URL: " << url;
   InternetService::ShowUrlBox(tr("SoundCloud track's URL"), url);
 }
 
