@@ -42,19 +42,26 @@ InternetService::InternetService(const QString& name, Application* app,
       app_(app),
       model_(model),
       name_(name),
-      append_to_playlist_([]() {
-        return new QAction(
+      append_to_playlist_([&]() {
+        QAction* action = new QAction(
             IconLoader::Load("media-playback-start", IconLoader::Base),
             tr("Append to current playlist"), nullptr);
+        connect(action, SIGNAL(triggered()), this, SLOT(AppendToPlaylist()));
+        return action;
       }),
-      replace_playlist_([]() {
-        return new QAction(
+      replace_playlist_([&]() {
+        QAction* action = new QAction(
             IconLoader::Load("media-playback-start", IconLoader::Base),
             tr("Replace current playlist"), nullptr);
+        connect(action, SIGNAL(triggered()), this, SLOT(ReplacePlaylist()));
+        return action;
       }),
-      open_in_new_playlist_([]() {
-        return new QAction(IconLoader::Load("document-new", IconLoader::Base),
-                           tr("Open in new playlist"), nullptr);
+      open_in_new_playlist_([&]() {
+        QAction* action =
+            new QAction(IconLoader::Load("document-new", IconLoader::Base),
+                        tr("Open in new playlist"), nullptr);
+        connect(action, SIGNAL(triggered()), this, SLOT(OpenInNewPlaylist()));
+        return action;
       }),
       separator_([]() {
         QAction* action = new QAction(nullptr);
@@ -85,20 +92,14 @@ QList<QAction*> InternetService::GetPlaylistActions() {
 }
 
 QAction* InternetService::GetAppendToPlaylistAction() {
-  connect(append_to_playlist_.get(), SIGNAL(triggered()), this,
-          SLOT(AppendToPlaylist()));
   return append_to_playlist_.get();
 }
 
 QAction* InternetService::GetReplacePlaylistAction() {
-  connect(replace_playlist_.get(), SIGNAL(triggered()), this,
-          SLOT(ReplacePlaylist()));
   return replace_playlist_.get();
 }
 
 QAction* InternetService::GetOpenInNewPlaylistAction() {
-  connect(open_in_new_playlist_.get(), SIGNAL(triggered()), this,
-          SLOT(OpenInNewPlaylist()));
   return open_in_new_playlist_.get();
 }
 
