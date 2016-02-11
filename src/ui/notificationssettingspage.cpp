@@ -34,9 +34,10 @@ NotificationsSettingsPage::NotificationsSettingsPage(SettingsDialog* dialog)
   ui_->setupUi(this);
   setWindowIcon(IconLoader::Load("help-hint", IconLoader::Base));
 
+  QIcon nocover = IconLoader::Load("nocover", IconLoader::Other);
   pretty_popup_->SetMessage(tr("OSD Preview"), tr("Drag to reposition"),
-                            IconLoader::Load("nocover", IconLoader::Other)
-                            .pixmap(300).toImage());
+                            nocover.pixmap(nocover.availableSizes().last())
+                                   .toImage());
 
   ui_->notifications_bg_preset->setItemData(0, QColor(OSDPretty::kPresetBlue),
                                             Qt::DecorationRole);

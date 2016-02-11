@@ -32,9 +32,12 @@ const int FavoriteWidget::kStarSize = 16;
 FavoriteWidget::FavoriteWidget(int tab_index, bool favorite, QWidget* parent)
     : QWidget(parent),
       tab_index_(tab_index),
-      favorite_(favorite),
-      on_(IconLoader::Load("star-on", IconLoader::Other).pixmap(16)),
-      off_(IconLoader::Load("star-off", IconLoader::Other).pixmap(16)) {}
+      favorite_(favorite) {
+  QIcon star_on = IconLoader::Load("star-on", IconLoader::Other);
+  on_ = star_on.pixmap(star_on.availableSizes().last());
+  QIcon star_off = IconLoader::Load("star-off", IconLoader::Other);
+  off_ = star_off.pixmap(star_off.availableSizes().last());
+}
 
 void FavoriteWidget::SetFavorite(bool favorite) {
   if (favorite_ != favorite) {

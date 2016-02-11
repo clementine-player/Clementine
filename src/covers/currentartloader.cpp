@@ -35,9 +35,9 @@ CurrentArtLoader::CurrentArtLoader(Application* app, QObject* parent)
       id_(0) {
   options_.scale_output_image_ = false;
   options_.pad_output_image_ = false;
-  options_.default_output_image_ = IconLoader::Load("nocover",
-                                                    IconLoader::Other)
-                                                    .pixmap(300).toImage();
+  QIcon nocover = IconLoader::Load("nocover", IconLoader::Other);
+  options_.default_output_image_ = nocover.pixmap(nocover.availableSizes()
+                                                         .last()).toImage();
 
   connect(app_->album_cover_loader(), SIGNAL(ImageLoaded(quint64, QImage)),
           SLOT(TempArtLoaded(quint64, QImage)));

@@ -29,8 +29,10 @@ const int RatingPainter::kStarSize;
 
 RatingPainter::RatingPainter() {
   // Load the base pixmaps
-  QPixmap on(IconLoader::Load("star-on", IconLoader::Other).pixmap(16));
-  QPixmap off(IconLoader::Load("star-off", IconLoader::Other).pixmap(16));
+  QIcon star_on = IconLoader::Load("star-on", IconLoader::Other);
+  QPixmap on(star_on.pixmap(star_on.availableSizes().last()));
+  QIcon star_off = IconLoader::Load("star-off", IconLoader::Other);
+  QPixmap off(star_off.pixmap(star_off.availableSizes().last()));
 
   // Generate the 10 states, better to do it now than on the fly
   for (int i = 0; i < kStarCount * 2 + 1; ++i) {
