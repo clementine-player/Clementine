@@ -19,7 +19,6 @@
 #define EQUALISERSLIDER_H
 
 #include <QWidget>
-#include <QFontMetrics>
 
 class Ui_EqualizerSlider;
 
