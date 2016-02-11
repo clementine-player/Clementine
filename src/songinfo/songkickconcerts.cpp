@@ -22,6 +22,7 @@
 #include <QXmlStreamWriter>
 
 #include <echonest/Artist.h>
+#include <echonest/TypeInformation.h>
 
 #include <qjson/parser.h>
 
@@ -30,7 +31,7 @@
 #include "songkickconcertwidget.h"
 #include "ui/iconloader.h"
 
-const char* SongkickConcerts::kSongkickArtistBucket = "id:songkick";
+const char* SongkickConcerts::kSongkickArtistBucket = "songkick";
 const char* SongkickConcerts::kSongkickArtistCalendarUrl =
     "https://api.songkick.com/api/3.0/artists/%1/calendar.json?"
     "per_page=5&"
@@ -49,10 +50,11 @@ void SongkickConcerts::FetchInfo(int id, const Song& metadata) {
   Echonest::Artist::SearchParams params;
   params.push_back(
       qMakePair(Echonest::Artist::Name, QVariant(metadata.artist())));
-  params.push_back(
-      qMakePair(Echonest::Artist::IdSpace, QVariant(kSongkickArtistBucket)));
   qLog(Debug) << "Params:" << params;
-  QNetworkReply* reply = Echonest::Artist::search(params);
+  QNetworkReply* reply = Echonest::Artist::search(
+      params,
+      Echonest::ArtistInformation(Echonest::ArtistInformation::NoInformation,
+                                  QStringList() << kSongkickArtistBucket));
   qLog(Debug) << reply->request().url();
   NewClosure(reply, SIGNAL(finished()), this,
              SLOT(ArtistSearchFinished(QNetworkReply*, int)), reply, id);
@@ -92,8 +94,7 @@ void SongkickConcerts::ArtistSearchFinished(QNetworkReply* reply, int id) {
     }
 
     FetchSongkickCalendar(split[2], id);
-  }
-  catch (Echonest::ParseError& e) {
+  } catch (Echonest::ParseError& e) {
     qLog(Error) << "Error parsing echonest reply:" << e.errorType() << e.what();
     emit Finished(id);
   }
