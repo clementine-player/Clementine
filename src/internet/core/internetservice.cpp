@@ -58,15 +58,18 @@ InternetService::InternetService(const QString& name, Application* app,
         return action;
       }),
       open_in_new_playlist_([&]() {
-        QAction* action =
-            new QAction(IconLoader::Load("document-new", IconLoader::Base),
-                        tr("Open in new playlist"), nullptr);
+        QAction* action = new QAction(
+            IconLoader::Load("document-new", IconLoader::Base),
+            tr("Open in new playlist"), nullptr);
         connect(action, SIGNAL(triggered()), this, SLOT(OpenInNewPlaylist()));
         return action;
       }),
-      copy_selected_playable_item_url_([]() {
-        return new QAction(IconLoader::Load("edit-copy", IconLoader::Base),
-                           tr("Copy URL to clipboard"), nullptr);
+      copy_selected_playable_item_url_([&]() {
+        QAction* action = new QAction(
+            IconLoader::Load("edit-copy", IconLoader::Base),
+            tr("Copy URL to clipboard"), nullptr);
+        connect(action, SIGNAL(triggered()), this, SLOT(CopySelectedPlayableItemURL()));
+        return action;
       }),
       separator_([]() {
         QAction* action = new QAction(nullptr);
@@ -109,8 +112,6 @@ QAction* InternetService::GetOpenInNewPlaylistAction() {
 }
 
 QAction* InternetService::GetCopySelectedPlayableItemURLAction() {
-  connect(copy_selected_playable_item_url_.get(), SIGNAL(triggered()), this,
-          SLOT(CopySelectedPlayableItemURL()));
   return copy_selected_playable_item_url_.get();
 }
 
