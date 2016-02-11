@@ -18,6 +18,8 @@
 #include "equalizerslider.h"
 #include "ui_equalizerslider.h"
 
+#include <QFontMetrics>
+
 EqualizerSlider::EqualizerSlider(const QString& label, QWidget* parent)
     : QWidget(parent), ui_(new Ui_EqualizerSlider) {
   ui_->setupUi(this);
