@@ -102,7 +102,8 @@ EditTagDialog::EditTagDialog(Application* app, QWidget* parent)
         connect(widget, SIGNAL(Reset()), SLOT(ResetField()));
       }
 
-      // Connect the edited signal
+      // Connect the changed signal (emitted when value is changed
+      // programmatically or non-programmatically)
       if (qobject_cast<QLineEdit*>(widget)) {
         connect(widget, SIGNAL(textChanged(QString)), SLOT(FieldValueEdited()));
       } else if (qobject_cast<QPlainTextEdit*>(widget)) {
@@ -367,7 +368,6 @@ bool EditTagDialog::IsValueModified(const QModelIndexList& sel,
 void EditTagDialog::InitFieldValue(const FieldData& field,
                                    const QModelIndexList& sel) {
   const bool varies = DoesValueVary(sel, field.id_);
-  const bool modified = IsValueModified(sel, field.id_);
 
   if (ExtendedEditor* editor = dynamic_cast<ExtendedEditor*>(field.editor_)) {
     editor->clear();
@@ -379,10 +379,7 @@ void EditTagDialog::InitFieldValue(const FieldData& field,
     }
   }
 
-  QFont new_font(font());
-  new_font.setBold(modified);
-  field.label_->setFont(new_font);
-  field.editor_->setFont(new_font);
+  UpdateModifiedField(field, sel);
 }
 
 void EditTagDialog::UpdateFieldValue(const FieldData& field,
@@ -403,9 +400,13 @@ void EditTagDialog::UpdateFieldValue(const FieldData& field,
     data_[i.row()].set_value(field.id_, value);
   }
 
-  // Update the boldness
+  UpdateModifiedField(field, sel);
+}
+
+void EditTagDialog::UpdateModifiedField(const FieldData& field, const QModelIndexList& sel) {
   const bool modified = IsValueModified(sel, field.id_);
 
+  // Update the boldness
   QFont new_font(font());
   new_font.setBold(modified);
   field.label_->setFont(new_font);
@@ -430,11 +431,7 @@ void EditTagDialog::SelectionChanged() {
   if (sel.isEmpty()) return;
 
   // Set the editable fields
-  ignore_edits_ = true;
-  for (const FieldData& field : fields_) {
-    InitFieldValue(field, sel);
-  }
-  ignore_edits_ = false;
+  UpdateUI(sel);
 
   // If we're editing multiple songs then we have to disable certain tabs
   const bool multiple = sel.count() > 1;
@@ -446,6 +443,14 @@ void EditTagDialog::SelectionChanged() {
     UpdateSummaryTab(song);
     UpdateStatisticsTab(song);
   }
+}
+
+void EditTagDialog::UpdateUI(const QModelIndexList& sel){
+  ignore_edits_ = true;
+  for (const FieldData& field : fields_) {
+    InitFieldValue(field, sel);
+  }
+  ignore_edits_ = false;
 }
 
 static void SetText(QLabel* label, int value, const QString& suffix,
@@ -845,18 +850,18 @@ void EditTagDialog::FetchTagSongChosen(const Song& original_song,
     return;
   }
 
+  // Update song data
   data_it->current_.set_title(new_metadata.title());
   data_it->current_.set_artist(new_metadata.artist());
   data_it->current_.set_album(new_metadata.album());
   data_it->current_.set_track(new_metadata.track());
   data_it->current_.set_year(new_metadata.year());
 
-  // Is it currently selected in the UI?
-  int row = data_it - data_.begin();
-  if (ui_->song_list->item(row)->isSelected()) {
-    // We need to update view
-    for (const FieldData& field : fields_)
-      InitFieldValue(field,
-                     ui_->song_list->selectionModel()->selectedIndexes());
+  // Is it currently being displayed in the UI?
+  if (ui_->song_list->currentRow() == std::distance(data_.begin(), data_it)) {
+    // Yes! Additionally update UI
+    const QModelIndexList sel =
+        ui_->song_list->selectionModel()->selectedIndexes();
+    UpdateUI(sel);
   }
 }
