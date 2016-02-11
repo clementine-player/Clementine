@@ -126,10 +126,6 @@ Application::~Application() {
   // thread, including some device library backends.
   device_manager_.reset();
 
-  for (QObject* object : objects_in_threads_) {
-    object->deleteLater();
-  }
-
   for (QThread* thread : threads_) {
     thread->quit();
   }
@@ -151,7 +147,6 @@ void Application::MoveToNewThread(QObject* object) {
 void Application::MoveToThread(QObject* object, QThread* thread) {
   object->setParent(nullptr);
   object->moveToThread(thread);
-  objects_in_threads_ << object;
 }
 
 void Application::AddError(const QString& message) { emit ErrorAdded(message); }

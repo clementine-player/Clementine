@@ -149,7 +149,6 @@ signals:
   Lazy<NetworkRemoteHelper> network_remote_helper_;
   Lazy<Scrobbler> scrobbler_;
 
-  QList<QObject*> objects_in_threads_;
   QList<QThread*> threads_;
 };
 
