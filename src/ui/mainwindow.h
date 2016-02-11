@@ -67,7 +67,6 @@ class QueueManager;
 class InternetItem;
 class InternetModel;
 class InternetViewContainer;
-class Remote;
 class RipCDDialog;
 class Song;
 class SongInfoBase;
@@ -300,7 +299,6 @@ signals:
   std::unique_ptr<About> about_dialog_;
 
   GlobalShortcuts* global_shortcuts_;
-  Remote* remote_;
 
   GlobalSearchView* global_search_view_;
   LibraryViewContainer* library_view_;
