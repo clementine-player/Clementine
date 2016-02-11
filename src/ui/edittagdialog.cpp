@@ -838,29 +838,27 @@ void EditTagDialog::FetchTagSongChosen(const Song& original_song,
   const QString filename = original_song.url().toLocalFile();
 
   // Find the song with this filename
-  int id;
-  for (id = 0; id < data_.count(); ++id) {
-    if (data_[id].original_.url().toLocalFile() == filename)
-      break;
-  }
-
-  if(id == data_.count()) {
-    qLog(Warning) << "Could not find song for filename: " << filename;
-      return;
+  auto data_it =
+      std::find_if(data_.begin(), data_.end(), [&filename](const Data& d) {
+        return d.original_.url().toLocalFile() == filename;
+      });
+  if (data_it == data_.end()) {
+    qLog(Warning) << "Could not find song to filename: " << filename;
+    return;
   }
 
   // Update song data
-  data_[id].current_.set_title(new_metadata.title());
-  data_[id].current_.set_artist(new_metadata.artist());
-  data_[id].current_.set_album(new_metadata.album());
-  data_[id].current_.set_track(new_metadata.track());
-  data_[id].current_.set_year(new_metadata.year());
+  data_it->current_.set_title(new_metadata.title());
+  data_it->current_.set_artist(new_metadata.artist());
+  data_it->current_.set_album(new_metadata.album());
+  data_it->current_.set_track(new_metadata.track());
+  data_it->current_.set_year(new_metadata.year());
 
   // Is it currently being displayed in the UI?
-  if (ui_->song_list->currentRow() == id) {
+  if (ui_->song_list->currentRow() == std::distance(data_.begin(), data_it)) {
     // Yes! Additionally update UI
     const QModelIndexList sel =
-      ui_->song_list->selectionModel()->selectedIndexes();
+        ui_->song_list->selectionModel()->selectedIndexes();
     UpdateUI(sel);
   }
 }
