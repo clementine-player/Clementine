@@ -42,10 +42,25 @@ InternetService::InternetService(const QString& name, Application* app,
       app_(app),
       model_(model),
       name_(name),
-      append_to_playlist_(nullptr),
-      replace_playlist_(nullptr),
-      open_in_new_playlist_(nullptr),
-      separator_(nullptr) {}
+      append_to_playlist_([]() {
+        return new QAction(
+            IconLoader::Load("media-playback-start", IconLoader::Base),
+            tr("Append to current playlist"), nullptr);
+      }),
+      replace_playlist_([]() {
+        return new QAction(
+            IconLoader::Load("media-playback-start", IconLoader::Base),
+            tr("Replace current playlist"), nullptr);
+      }),
+      open_in_new_playlist_([]() {
+        return new QAction(IconLoader::Load("document-new", IconLoader::Base),
+                           tr("Open in new playlist"), nullptr);
+      }),
+      separator_([]() {
+        QAction* action = new QAction(nullptr);
+        action->setSeparator(true);
+        return action;
+      }) {}
 
 void InternetService::ShowUrlBox(const QString& title, const QString& url) {
   QMessageBox url_box;
@@ -64,50 +79,27 @@ void InternetService::ShowUrlBox(const QString& title, const QString& url) {
 }
 
 QList<QAction*> InternetService::GetPlaylistActions() {
-  if (!separator_) {
-    separator_ = new QAction(this);
-    separator_->setSeparator(true);
-  }
-
   return QList<QAction*>() << GetAppendToPlaylistAction()
                            << GetReplacePlaylistAction()
-                           << GetOpenInNewPlaylistAction() << separator_;
+                           << GetOpenInNewPlaylistAction() << separator_.get();
 }
 
 QAction* InternetService::GetAppendToPlaylistAction() {
-  if (!append_to_playlist_) {
-    append_to_playlist_ = new QAction(IconLoader::Load("media-playback-start", 
-                                      IconLoader::Base),
-                                      tr("Append to current playlist"), this);
-    connect(append_to_playlist_, SIGNAL(triggered()), this,
-            SLOT(AppendToPlaylist()));
-  }
-
-  return append_to_playlist_;
+  connect(append_to_playlist_.get(), SIGNAL(triggered()), this,
+          SLOT(AppendToPlaylist()));
+  return append_to_playlist_.get();
 }
 
 QAction* InternetService::GetReplacePlaylistAction() {
-  if (!replace_playlist_) {
-    replace_playlist_ = new QAction(IconLoader::Load("media-playback-start", 
-                                    IconLoader::Base),
-                                    tr("Replace current playlist"), this);
-    connect(replace_playlist_, SIGNAL(triggered()), this,
-            SLOT(ReplacePlaylist()));
-  }
-
-  return replace_playlist_;
+  connect(replace_playlist_.get(), SIGNAL(triggered()), this,
+          SLOT(ReplacePlaylist()));
+  return replace_playlist_.get();
 }
 
 QAction* InternetService::GetOpenInNewPlaylistAction() {
-  if (!open_in_new_playlist_) {
-    open_in_new_playlist_ = new QAction(IconLoader::Load("document-new", 
-                                        IconLoader::Base),
-                                        tr("Open in new playlist"), this);
-    connect(open_in_new_playlist_, SIGNAL(triggered()), this,
-            SLOT(OpenInNewPlaylist()));
-  }
-
-  return open_in_new_playlist_;
+  connect(open_in_new_playlist_.get(), SIGNAL(triggered()), this,
+          SLOT(OpenInNewPlaylist()));
+  return open_in_new_playlist_.get();
 }
 
 void InternetService::AddItemToPlaylist(const QModelIndex& index,
