@@ -118,6 +118,9 @@ Application::Application(QObject* parent)
   // crash when a client connects before the manager is initialized!
   network_remote_helper_.get();
   library_->Init();
+
+  // TODO(John Maguire): Make this not a weird singleton.
+  tag_reader_client_.get();
 }
 
 Application::~Application() {
