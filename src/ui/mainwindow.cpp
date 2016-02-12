@@ -172,6 +172,7 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
       app_(app),
       tray_icon_(tray_icon),
       osd_(osd),
+      edit_tag_dialog_(std::bind(&MainWindow::CreateEditTagDialog, this)),
       global_shortcuts_(new GlobalShortcuts(this)),
       global_search_view_(new GlobalSearchView(app_, this)),
       library_view_(new LibraryViewContainer(this)),
@@ -182,11 +183,11 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
       device_view_(device_view_container_->view()),
       song_info_view_(new SongInfoView(this)),
       artist_info_view_(new ArtistInfoView(this)),
+      settings_dialog_(std::bind(&MainWindow::CreateSettingsDialog, this)),
       equalizer_(new Equalizer),
       organise_dialog_([=]() {
         OrganiseDialog* dialog = new OrganiseDialog(app->task_manager());
-        dialog->SetDestinationModel(
-            app->library()->model()->directory_model());
+        dialog->SetDestinationModel(app->library()->model()->directory_model());
         return dialog;
       }),
       playlist_menu_(new QMenu(this)),
@@ -1833,7 +1834,6 @@ void MainWindow::EditTracks() {
     }
   }
 
-  EnsureEditTagDialogCreated();
   edit_tag_dialog_->SetSongs(songs, items);
   edit_tag_dialog_->show();
 }
@@ -2218,7 +2218,6 @@ void MainWindow::AddFilesToTranscoder() {
 }
 
 void MainWindow::ShowLibraryConfig() {
-  EnsureSettingsDialogCreated();
   settings_dialog_->OpenAtPage(SettingsDialog::Page_Library);
 }
 
@@ -2271,8 +2270,6 @@ void MainWindow::CopyFilesToDevice(const QList<QUrl>& urls) {
 }
 
 void MainWindow::EditFileTags(const QList<QUrl>& urls) {
-  EnsureEditTagDialogCreated();
-
   SongList songs;
   for (const QUrl& url : urls) {
     Song song;
@@ -2441,47 +2438,40 @@ void MainWindow::ShowCoverManager() {
   cover_manager_->show();
 }
 
-void MainWindow::EnsureSettingsDialogCreated() {
-  if (settings_dialog_) return;
-
-  settings_dialog_.reset(new SettingsDialog(app_, background_streams_));
-  settings_dialog_->SetGlobalShortcutManager(global_shortcuts_);
-  settings_dialog_->SetSongInfoView(song_info_view_);
+SettingsDialog* MainWindow::CreateSettingsDialog() {
+  SettingsDialog* settings_dialog =
+      new SettingsDialog(app_, background_streams_);
+  settings_dialog->SetGlobalShortcutManager(global_shortcuts_);
+  settings_dialog->SetSongInfoView(song_info_view_);
 
   // Settings
-  connect(settings_dialog_.get(), SIGNAL(accepted()),
-          SLOT(ReloadAllSettings()));
+  connect(settings_dialog, SIGNAL(accepted()), SLOT(ReloadAllSettings()));
 
 #ifdef HAVE_WIIMOTEDEV
-  connect(settings_dialog_.get(), SIGNAL(SetWiimotedevInterfaceActived(bool)),
+  connect(settings_dialog, SIGNAL(SetWiimotedevInterfaceActived(bool)),
           wiimotedev_shortcuts_.get(),
           SLOT(SetWiimotedevInterfaceActived(bool)));
 #endif
 
   // Allows custom notification preview
-  connect(settings_dialog_.get(),
+  connect(settings_dialog,
           SIGNAL(NotificationPreview(OSD::Behaviour, QString, QString)),
           SLOT(HandleNotificationPreview(OSD::Behaviour, QString, QString)));
+  return settings_dialog;
 }
 
-void MainWindow::OpenSettingsDialog() {
-  EnsureSettingsDialogCreated();
-  settings_dialog_->show();
-}
+void MainWindow::OpenSettingsDialog() { settings_dialog_->show(); }
 
 void MainWindow::OpenSettingsDialogAtPage(SettingsDialog::Page page) {
-  EnsureSettingsDialogCreated();
   settings_dialog_->OpenAtPage(page);
 }
 
-void MainWindow::EnsureEditTagDialogCreated() {
-  if (edit_tag_dialog_) return;
-
-  edit_tag_dialog_.reset(new EditTagDialog(app_));
-  connect(edit_tag_dialog_.get(), SIGNAL(accepted()),
-          SLOT(EditTagDialogAccepted()));
-  connect(edit_tag_dialog_.get(), SIGNAL(Error(QString)),
+EditTagDialog* MainWindow::CreateEditTagDialog() {
+  EditTagDialog* edit_tag_dialog = new EditTagDialog(app_);
+  connect(edit_tag_dialog, SIGNAL(accepted()), SLOT(EditTagDialogAccepted()));
+  connect(edit_tag_dialog, SIGNAL(Error(QString)),
           SLOT(ShowErrorDialog(QString)));
+  return edit_tag_dialog;
 }
 
 void MainWindow::ShowAboutDialog() {

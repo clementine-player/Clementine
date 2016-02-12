@@ -250,8 +250,8 @@ signals:
   void ShowErrorDialog(const QString& message);
   void ShowQueueManager();
   void ShowVisualisations();
-  void EnsureSettingsDialogCreated();
-  void EnsureEditTagDialogCreated();
+  SettingsDialog* CreateSettingsDialog();
+  EditTagDialog* CreateEditTagDialog();
   void OpenSettingsDialog();
   void OpenSettingsDialogAtPage(SettingsDialog::Page page);
   void ShowSongInfoConfig();
@@ -296,7 +296,7 @@ signals:
   Application* app_;
   SystemTrayIcon* tray_icon_;
   OSD* osd_;
-  std::unique_ptr<EditTagDialog> edit_tag_dialog_;
+  Lazy<EditTagDialog> edit_tag_dialog_;
   std::unique_ptr<About> about_dialog_;
 
   GlobalShortcuts* global_shortcuts_;
@@ -314,7 +314,7 @@ signals:
   SongInfoView* song_info_view_;
   ArtistInfoView* artist_info_view_;
 
-  std::unique_ptr<SettingsDialog> settings_dialog_;
+  Lazy<SettingsDialog> settings_dialog_;
   std::unique_ptr<AddStreamDialog> add_stream_dialog_;
   std::unique_ptr<AlbumCoverManager> cover_manager_;
   std::unique_ptr<Equalizer> equalizer_;
