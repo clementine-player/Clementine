@@ -25,11 +25,13 @@
 #include <QSystemTrayIcon>
 
 #include "config.h"
+#include "core/lazy.h"
 #include "core/mac_startup.h"
 #include "core/tagreaderclient.h"
 #include "engines/engine_fwd.h"
 #include "library/librarymodel.h"
 #include "playlist/playlistitem.h"
+#include "ui/organisedialog.h"
 #include "ui/settingsdialog.h"
 
 class About;
@@ -57,7 +59,6 @@ class Library;
 class LibraryViewContainer;
 class MimeData;
 class MultiLoadingIndicator;
-class OrganiseDialog;
 class OSD;
 class Player;
 class PlaylistBackend;
@@ -319,7 +320,7 @@ signals:
   std::unique_ptr<Equalizer> equalizer_;
   std::unique_ptr<TranscodeDialog> transcode_dialog_;
   std::unique_ptr<ErrorDialog> error_dialog_;
-  std::unique_ptr<OrganiseDialog> organise_dialog_;
+  Lazy<OrganiseDialog> organise_dialog_;
   std::unique_ptr<QueueManager> queue_manager_;
 
   std::unique_ptr<TagFetcher> tag_fetcher_;

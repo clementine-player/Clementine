@@ -183,7 +183,12 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
       song_info_view_(new SongInfoView(this)),
       artist_info_view_(new ArtistInfoView(this)),
       equalizer_(new Equalizer),
-      organise_dialog_(new OrganiseDialog(app_->task_manager())),
+      organise_dialog_([=]() {
+        OrganiseDialog* dialog = new OrganiseDialog(app->task_manager());
+        dialog->SetDestinationModel(
+            app->library()->model()->directory_model());
+        return dialog;
+      }),
       playlist_menu_(new QMenu(this)),
       playlist_add_to_another_(nullptr),
       playlistitem_actions_separator_(nullptr),
@@ -292,9 +297,6 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
   internet_view_->SetApplication(app_);
   device_view_->SetApplication(app_);
   playlist_list_->SetApplication(app_);
-
-  organise_dialog_->SetDestinationModel(
-      app_->library()->model()->directory_model());
 
   // Icons
   qLog(Debug) << "Creating UI";
