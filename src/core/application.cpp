@@ -22,7 +22,11 @@
 
 #include "application.h"
 
+#include "covers/amazoncoverprovider.h"
+#include "covers/musicbrainzcoverprovider.h"
+
 #ifdef HAVE_LIBLASTFM
+#include "covers/lastfmcoverprovider.h"
 #include "internet/lastfm/lastfmservice.h"
 #endif  // HAVE_LIBLASTFM
 
@@ -63,7 +67,16 @@ Application::Application(QObject* parent)
         return backend;
       }),
       appearance_([=]() { return new Appearance(this); }),
-      cover_providers_([=]() { return new CoverProviders(this); }),
+      cover_providers_([=]() {
+        CoverProviders* cover_providers = new CoverProviders(this);
+        // Initialize the repository of cover providers.
+        cover_providers->AddProvider(new AmazonCoverProvider);
+        cover_providers->AddProvider(new MusicbrainzCoverProvider);
+        #ifdef HAVE_LIBLASTFM
+          cover_providers->AddProvider(new LastFmCoverProvider(this));
+        #endif
+        return cover_providers;
+      }),
       task_manager_([=]() { return new TaskManager(this); }),
       player_([=]() { return new Player(this, this); }),
       playlist_manager_([=]() { return new PlaylistManager(this); }),

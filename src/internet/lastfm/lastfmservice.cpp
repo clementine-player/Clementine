@@ -92,8 +92,6 @@ LastFMService::LastFMService(Application* app, QObject* parent)
   // we emit the signal the first time to be sure the buttons are in the right
   // state
   emit ScrobblingEnabledChanged(scrobbling_enabled_);
-
-  app_->cover_providers()->AddProvider(new LastFmCoverProvider(this));
 }
 
 LastFMService::~LastFMService() {}
