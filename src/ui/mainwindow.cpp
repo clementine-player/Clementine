@@ -194,7 +194,9 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
       saved_playback_state_(Engine::Empty),
       doubleclick_addmode_(AddBehaviour_Append),
       doubleclick_playmode_(PlayBehaviour_IfStopped),
-      menu_playmode_(PlayBehaviour_IfStopped) {
+      menu_playmode_(PlayBehaviour_IfStopped),
+      idlehandler_(IdleHandler::GetSuspend()),
+      is_suspend_inhibited_(false) {
   qLog(Debug) << "Starting";
 
   connect(app, SIGNAL(ErrorAdded(QString)), SLOT(ShowErrorDialog(QString)));
@@ -1008,6 +1010,12 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
       new WiimotedevShortcuts(osd_, this, app_->player()));
 #endif
 
+  settings_.endGroup();
+
+  settings_.beginGroup(Engine::Base::kSettingsGroup);
+  inhibit_suspend_while_playing_status_ =
+      settings_.value("InhibitSuspendWhilePlaying", false).toBool();
+
   CheckFullRescanRevisions();
 
   LoadPlaybackStatus();
@@ -1081,6 +1089,7 @@ void MainWindow::MediaStopped() {
   ui_->track_slider->SetStopped();
   tray_icon_->SetProgress(0);
   tray_icon_->SetStopped();
+  HandleInhibitSuspendWhilePlaying(false);
 }
 
 void MainWindow::MediaPaused() {
@@ -1096,6 +1105,7 @@ void MainWindow::MediaPaused() {
   track_slider_timer_->stop();
 
   tray_icon_->SetPaused();
+  HandleInhibitSuspendWhilePlaying(false);
 }
 
 void MainWindow::MediaPlaying() {
@@ -1125,6 +1135,7 @@ void MainWindow::MediaPlaying() {
   track_position_timer_->start();
   track_slider_timer_->start();
   UpdateTrackPosition();
+  HandleInhibitSuspendWhilePlaying(true);
 }
 
 void MainWindow::VolumeChanged(int volume) {
@@ -2456,6 +2467,11 @@ void MainWindow::EnsureSettingsDialogCreated() {
           SLOT(SetWiimotedevInterfaceActived(bool)));
 #endif
 
+  // Handle suspend status
+  connect(settings_dialog_.get(),
+        SIGNAL(InhibitSuspendWhilePlaying(bool)),
+        SLOT(InhibitSuspendWhilePlaying(bool)));
+
   // Allows custom notification preview
   connect(settings_dialog_.get(),
           SIGNAL(NotificationPreview(OSD::Behaviour, QString, QString)),
@@ -2836,4 +2852,22 @@ void MainWindow::keyPressEvent(QKeyEvent* event) {
   } else {
     QMainWindow::keyPressEvent(event);
   }
+}
+
+void MainWindow::InhibitSuspendWhilePlaying(bool status) {
+  inhibit_suspend_while_playing_status_ = status;
+  HandleInhibitSuspendWhilePlaying(status);
+}
+
+void MainWindow::HandleInhibitSuspendWhilePlaying(bool status) {
+  if (idlehandler_) {
+    if (inhibit_suspend_while_playing_status_ && 
+        !is_suspend_inhibited_ && status) {
+      idlehandler_->Inhibit("Clementine is playing");
+      is_suspend_inhibited_ = idlehandler_->Isinhibited();
+    } else if (is_suspend_inhibited_ && !status){
+      idlehandler_->Uninhibit();
+      is_suspend_inhibited_ = idlehandler_->Isinhibited();
+    }
+  } 
 }

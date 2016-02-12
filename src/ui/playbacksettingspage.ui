@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>596</width>
-    <height>667</height>
+    <height>754</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -25,7 +25,7 @@
     </widget>
    </item>
    <item>
-    <widget class="QGroupBox" name="groupBox">
+    <widget class="QGroupBox" name="fading_groupBox">
      <property name="title">
       <string>Fading</string>
      </property>
@@ -164,6 +164,25 @@
          </spacer>
         </item>
        </layout>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="power_management_groupBox">
+     <property name="title">
+      <string>System Power Management Options</string>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_4">
+      <item>
+       <widget class="QCheckBox" name="inhibit_suspend_while_playing">
+        <property name="toolTip">
+         <string>If enabled, Clementine will prevent the system from automatically suspending if it is playing a track</string>
+        </property>
+        <property name="text">
+         <string>Inhibit automatic suspend if playing</string>
+        </property>
+       </widget>
       </item>
      </layout>
     </widget>

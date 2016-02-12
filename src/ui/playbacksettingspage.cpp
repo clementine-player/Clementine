@@ -87,6 +87,8 @@ void PlaybackSettingsPage::Load() {
       s.value("FadeoutPauseEnabled", false).toBool());
   ui_->fading_pause_duration->setValue(
       s.value("FadeoutPauseDuration", 250).toInt());
+  ui_->inhibit_suspend_while_playing->setChecked(
+      s.value("InhibitSuspendWhilePlaying", false).toBool());
   s.endGroup();
 
   s.beginGroup(GstEngine::kSettingsGroup);
@@ -134,6 +136,8 @@ void PlaybackSettingsPage::Save() {
   s.setValue("NoCrossfadeSameAlbum", ui_->fading_samealbum->isChecked());
   s.setValue("FadeoutPauseEnabled", ui_->fadeout_pause->isChecked());
   s.setValue("FadeoutPauseDuration", ui_->fading_pause_duration->value());
+  s.setValue("InhibitSuspendWhilePlaying",
+             ui_->inhibit_suspend_while_playing->isChecked());
   s.endGroup();
 
   GstEngine::OutputDetails details =
@@ -154,6 +158,10 @@ void PlaybackSettingsPage::Save() {
       ui_->sample_rate->itemData(ui_->sample_rate->currentIndex()).toInt());
   s.setValue("bufferminfill", ui_->buffer_min_fill->value());
   s.endGroup();
+
+  //Emit inhibit suspend while playing signal 
+  emit InhibitSuspendWhilePlaying(
+      ui_->inhibit_suspend_while_playing->isChecked());
 }
 
 void PlaybackSettingsPage::RgPreampChanged(int value) {
