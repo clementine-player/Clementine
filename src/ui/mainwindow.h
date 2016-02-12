@@ -297,7 +297,7 @@ signals:
   SystemTrayIcon* tray_icon_;
   OSD* osd_;
   Lazy<EditTagDialog> edit_tag_dialog_;
-  std::unique_ptr<About> about_dialog_;
+  Lazy<About> about_dialog_;
 
   GlobalShortcuts* global_shortcuts_;
 
@@ -318,8 +318,8 @@ signals:
   std::unique_ptr<AddStreamDialog> add_stream_dialog_;
   std::unique_ptr<AlbumCoverManager> cover_manager_;
   std::unique_ptr<Equalizer> equalizer_;
-  std::unique_ptr<TranscodeDialog> transcode_dialog_;
-  std::unique_ptr<ErrorDialog> error_dialog_;
+  Lazy<TranscodeDialog> transcode_dialog_;
+  Lazy<ErrorDialog> error_dialog_;
   Lazy<OrganiseDialog> organise_dialog_;
   std::unique_ptr<QueueManager> queue_manager_;
 

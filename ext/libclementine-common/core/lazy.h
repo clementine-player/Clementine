@@ -29,6 +29,9 @@ class Lazy {
  public:
   explicit Lazy(std::function<T*()> init) : init_(init) {}
 
+  // Convenience constructor that will lazily default construct the object.
+  Lazy() : init_([]() { return new T; }) {}
+
   T* get() const {
     CheckInitialised();
     return ptr_.get();

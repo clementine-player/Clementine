@@ -2196,10 +2196,6 @@ void MainWindow::PlaylistUndoRedoChanged(QAction* undo, QAction* redo) {
 }
 
 void MainWindow::AddFilesToTranscoder() {
-  if (!transcode_dialog_) {
-    transcode_dialog_.reset(new TranscodeDialog);
-  }
-
   QStringList filenames;
 
   for (const QModelIndex& index :
@@ -2475,24 +2471,14 @@ EditTagDialog* MainWindow::CreateEditTagDialog() {
 }
 
 void MainWindow::ShowAboutDialog() {
-  if (!about_dialog_) {
-    about_dialog_.reset(new About);
-  }
-
   about_dialog_->show();
 }
 
 void MainWindow::ShowTranscodeDialog() {
-  if (!transcode_dialog_) {
-    transcode_dialog_.reset(new TranscodeDialog);
-  }
   transcode_dialog_->show();
 }
 
 void MainWindow::ShowErrorDialog(const QString& message) {
-  if (!error_dialog_) {
-    error_dialog_.reset(new ErrorDialog);
-  }
   error_dialog_->ShowMessage(message);
 }
 
