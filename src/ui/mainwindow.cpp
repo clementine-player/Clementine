@@ -184,11 +184,34 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
       song_info_view_(new SongInfoView(this)),
       artist_info_view_(new ArtistInfoView(this)),
       settings_dialog_(std::bind(&MainWindow::CreateSettingsDialog, this)),
+      add_stream_dialog_([=]() {
+        AddStreamDialog* add_stream_dialog = new AddStreamDialog;
+        connect(add_stream_dialog, SIGNAL(accepted()), this,
+                SLOT(AddStreamAccepted()));
+        add_stream_dialog->set_add_on_accept(
+            InternetModel::Service<SavedRadio>());
+        return add_stream_dialog;
+      }),
+      cover_manager_([=]() {
+        AlbumCoverManager* cover_manager =
+            new AlbumCoverManager(app, app->library_backend());
+        cover_manager->Init();
+
+        // Cover manager connections
+        connect(cover_manager, SIGNAL(AddToPlaylist(QMimeData*)), this,
+                SLOT(AddToPlaylist(QMimeData*)));
+        return cover_manager;
+      }),
       equalizer_(new Equalizer),
       organise_dialog_([=]() {
         OrganiseDialog* dialog = new OrganiseDialog(app->task_manager());
         dialog->SetDestinationModel(app->library()->model()->directory_model());
         return dialog;
+      }),
+      queue_manager_([=]() {
+        QueueManager* manager = new QueueManager;
+        manager->SetPlaylistManager(app->playlist_manager());
+        return manager;
       }),
       playlist_menu_(new QMenu(this)),
       playlist_add_to_another_(nullptr),
@@ -1992,17 +2015,7 @@ void MainWindow::AddFolder() {
   AddToPlaylist(data);
 }
 
-void MainWindow::AddStream() {
-  if (!add_stream_dialog_) {
-    add_stream_dialog_.reset(new AddStreamDialog);
-    connect(add_stream_dialog_.get(), SIGNAL(accepted()),
-            SLOT(AddStreamAccepted()));
-
-    add_stream_dialog_->set_add_on_accept(InternetModel::Service<SavedRadio>());
-  }
-
-  add_stream_dialog_->show();
-}
+void MainWindow::AddStream() { add_stream_dialog_->show(); }
 
 void MainWindow::AddStreamAccepted() {
   MimeData* data = new MimeData;
@@ -2421,18 +2434,7 @@ void MainWindow::ChangeLibraryQueryMode(QAction* action) {
   }
 }
 
-void MainWindow::ShowCoverManager() {
-  if (!cover_manager_) {
-    cover_manager_.reset(new AlbumCoverManager(app_, app_->library_backend()));
-    cover_manager_->Init();
-
-    // Cover manager connections
-    connect(cover_manager_.get(), SIGNAL(AddToPlaylist(QMimeData*)),
-            SLOT(AddToPlaylist(QMimeData*)));
-  }
-
-  cover_manager_->show();
-}
+void MainWindow::ShowCoverManager() { cover_manager_->show(); }
 
 SettingsDialog* MainWindow::CreateSettingsDialog() {
   SettingsDialog* settings_dialog =
@@ -2470,13 +2472,9 @@ EditTagDialog* MainWindow::CreateEditTagDialog() {
   return edit_tag_dialog;
 }
 
-void MainWindow::ShowAboutDialog() {
-  about_dialog_->show();
-}
+void MainWindow::ShowAboutDialog() { about_dialog_->show(); }
 
-void MainWindow::ShowTranscodeDialog() {
-  transcode_dialog_->show();
-}
+void MainWindow::ShowTranscodeDialog() { transcode_dialog_->show(); }
 
 void MainWindow::ShowErrorDialog(const QString& message) {
   error_dialog_->ShowMessage(message);
@@ -2521,13 +2519,7 @@ void MainWindow::CheckFullRescanRevisions() {
   }
 }
 
-void MainWindow::ShowQueueManager() {
-  if (!queue_manager_) {
-    queue_manager_.reset(new QueueManager);
-    queue_manager_->SetPlaylistManager(app_->playlist_manager());
-  }
-  queue_manager_->show();
-}
+void MainWindow::ShowQueueManager() { queue_manager_->show(); }
 
 void MainWindow::ShowVisualisations() {
 #ifdef ENABLE_VISUALISATIONS

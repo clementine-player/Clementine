@@ -315,13 +315,13 @@ signals:
   ArtistInfoView* artist_info_view_;
 
   Lazy<SettingsDialog> settings_dialog_;
-  std::unique_ptr<AddStreamDialog> add_stream_dialog_;
-  std::unique_ptr<AlbumCoverManager> cover_manager_;
+  Lazy<AddStreamDialog> add_stream_dialog_;
+  Lazy<AlbumCoverManager> cover_manager_;
   std::unique_ptr<Equalizer> equalizer_;
   Lazy<TranscodeDialog> transcode_dialog_;
   Lazy<ErrorDialog> error_dialog_;
   Lazy<OrganiseDialog> organise_dialog_;
-  std::unique_ptr<QueueManager> queue_manager_;
+  Lazy<QueueManager> queue_manager_;
 
   std::unique_ptr<TagFetcher> tag_fetcher_;
   std::unique_ptr<TrackSelectionDialog> track_selection_dialog_;
