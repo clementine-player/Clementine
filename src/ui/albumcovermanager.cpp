@@ -34,6 +34,7 @@
 #include "widgets/forcescrollperpixel.h"
 #include "ui/albumcoverchoicecontroller.h"
 #include "ui/albumcoverexport.h"
+#include "ui/iconloader.h"
 
 #include <QActionGroup>
 #include <QPushButton>
@@ -88,7 +89,10 @@ AlbumCoverManager::AlbumCoverManager(Application* app,
   album_cover_choice_controller_->SetApplication(app_);
 
   // Get a square version of nocover.png
-  QImage nocover(":/nocover.png");
+  no_cover_icon_ = IconLoader::Load("nocover", IconLoader::Other);
+  no_cover_image_ = no_cover_icon_.pixmap(no_cover_icon_.availableSizes()
+                                                        .last()).toImage();
+  QImage nocover(no_cover_image_);
   nocover =
       nocover.scaled(120, 120, Qt::KeepAspectRatio, Qt::SmoothTransformation);
   QImage square_nocover(120, 120, QImage::Format_ARGB32);
@@ -98,7 +102,6 @@ AlbumCoverManager::AlbumCoverManager(Application* app,
   p.drawImage((120 - nocover.width()) / 2, (120 - nocover.height()) / 2,
               nocover);
   p.end();
-  no_cover_icon_ = QPixmap::fromImage(square_nocover);
 
   cover_searcher_ = new AlbumCoverSearcher(no_cover_icon_, app_, this);
   cover_export_ = new AlbumCoverExport(this);
@@ -599,7 +602,7 @@ void AlbumCoverManager::SaveCoverToFile() {
 
   // load the image from disk
   if (song.has_manually_unset_cover()) {
-    image = QImage(":/nocover.png");
+    image = no_cover_image_;
   } else {
     if (!song.art_manual().isEmpty() && QFile::exists(song.art_manual())) {
       image = QImage(song.art_manual());
@@ -607,7 +610,7 @@ void AlbumCoverManager::SaveCoverToFile() {
                QFile::exists(song.art_automatic())) {
       image = QImage(song.art_automatic());
     } else {
-      image = QImage(":/nocover.png");
+      image = no_cover_image_;
     }
   }
 

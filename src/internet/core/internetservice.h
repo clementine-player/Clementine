@@ -23,10 +23,12 @@
 #ifndef INTERNET_CORE_INTERNETSERVICE_H_
 #define INTERNET_CORE_INTERNETSERVICE_H_
 
+#include <QAction>
 #include <QObject>
 #include <QList>
 #include <QUrl>
 
+#include "core/lazy.h"
 #include "core/song.h"
 #include "playlist/playlistitem.h"
 #include "smartplaylists/generator.h"
@@ -83,7 +85,7 @@ class InternetService : public QObject {
 
   virtual QString Icon() { return QString(); }
 
- signals:
+signals:
   void StreamError(const QString& message);
   void StreamMetadataFound(const QUrl& original_url, const Song& song);
 
@@ -135,10 +137,10 @@ class InternetService : public QObject {
   InternetModel* model_;
   QString name_;
 
-  QAction* append_to_playlist_;
-  QAction* replace_playlist_;
-  QAction* open_in_new_playlist_;
-  QAction* separator_;
+  Lazy<QAction> append_to_playlist_;
+  Lazy<QAction> replace_playlist_;
+  Lazy<QAction> open_in_new_playlist_;
+  Lazy<QAction> separator_;
 };
 
 Q_DECLARE_METATYPE(InternetService*);

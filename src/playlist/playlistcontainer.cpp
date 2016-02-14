@@ -67,7 +67,10 @@ PlaylistContainer::PlaylistContainer(QWidget* parent)
   no_matches_palette.setColor(QPalette::Inactive, QPalette::WindowText,
                               no_matches_color);
   no_matches_label_->setPalette(no_matches_palette);
-
+  
+  // Remove QFrame border
+  ui_->toolbar->setStyleSheet("QFrame { border: 0px; }");
+  
   // Make it bold
   QFont no_matches_font = no_matches_label_->font();
   no_matches_font.setBold(true);
@@ -224,11 +227,11 @@ void PlaylistContainer::SetViewModel(Playlist* playlist) {
 }
 
 void PlaylistContainer::ActivePlaying() {
-  UpdateActiveIcon(QIcon(":tiny-start.png"));
+  UpdateActiveIcon(IconLoader::Load("tiny-start", IconLoader::Other));
 }
 
 void PlaylistContainer::ActivePaused() {
-  UpdateActiveIcon(QIcon(":tiny-pause.png"));
+  UpdateActiveIcon(IconLoader::Load("tiny-pause", IconLoader::Other));
 }
 
 void PlaylistContainer::ActiveStopped() { UpdateActiveIcon(QIcon()); }

@@ -26,6 +26,7 @@
 #include "core/player.h"
 #include "covers/currentartloader.h"
 #include "ui/qt_blurimage.h"
+#include "ui/iconloader.h"
 
 #include <QCleanlooksStyle>
 #include <QClipboard>
@@ -127,8 +128,6 @@ PlaylistView::PlaylistView(QWidget* parent)
       inhibit_autoscroll_(false),
       currently_autoscrolling_(false),
       row_height_(-1),
-      currenttrack_play_(":currenttrack_play.png"),
-      currenttrack_pause_(":currenttrack_pause.png"),
       cached_current_row_row_(-1),
       drop_indicator_row_(-1),
       drag_over_(false),
@@ -137,6 +136,17 @@ PlaylistView::PlaylistView(QWidget* parent)
   header_->setMovable(true);
   setStyle(style_);
   setMouseTracking(true);
+
+  QIcon currenttrack_play = IconLoader::Load("currenttrack_play",
+                                             IconLoader::Other);
+  currenttrack_play_ = currenttrack_play.pixmap(currenttrack_play
+                                                .availableSizes()
+                                                .last());
+  QIcon currenttrack_pause = IconLoader::Load("currenttrack_pause",
+                                              IconLoader::Other);
+  currenttrack_pause_ = currenttrack_pause.pixmap(currenttrack_pause
+                                                  .availableSizes()
+                                                  .last());
 
   connect(header_, SIGNAL(sectionResized(int, int, int)), SLOT(SaveGeometry()));
   connect(header_, SIGNAL(sectionMoved(int, int, int)), SLOT(SaveGeometry()));

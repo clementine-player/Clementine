@@ -107,9 +107,11 @@ LibraryModel::LibraryModel(LibraryBackend* backend, Application* app,
       Utilities::GetConfigPath(Utilities::Path_CacheRoot) + "/pixmapcache");
   icon_cache_->setMaximumCacheSize(LibraryModel::kIconCacheSize);
 
-  no_cover_icon_ = QPixmap(":nocover.png")
-                       .scaled(kPrettyCoverSize, kPrettyCoverSize,
-                               Qt::KeepAspectRatio, Qt::SmoothTransformation);
+  QIcon nocover = IconLoader::Load("nocover", IconLoader::Other);
+  no_cover_icon_ = nocover.pixmap(nocover.availableSizes().last()).scaled(
+                           kPrettyCoverSize, kPrettyCoverSize, 
+                           Qt::KeepAspectRatio,
+                           Qt::SmoothTransformation);
 
   connect(backend_, SIGNAL(SongsDiscovered(SongList)),
           SLOT(SongsDiscovered(SongList)));

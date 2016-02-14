@@ -16,8 +16,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2016-01-14 07:45+0000\n"
-"Last-Translator: Senno Kaasjager <senno.kaasjager@gmail.com>\n"
+"PO-Revision-Date: 2016-02-03 14:58+0000\n"
+"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Dutch (http://www.transifex.com/davidsansome/clementine/language/nl/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -425,8 +425,7 @@ msgid "Absolute"
 msgstr "Absoluut"
 
 #: ../bin/src/ui_magnatunesettingspage.h:154
-#: ../bin/src/ui_spotifysettingspage.h:207
-#: ../bin/src/ui_lastfmsettingspage.h:150 ../bin/src/ui_vksettingspage.h:213
+#: ../bin/src/ui_spotifysettingspage.h:207 ../bin/src/ui_vksettingspage.h:213
 #: ../bin/src/ui_seafilesettingspage.h:168
 msgid "Account details"
 msgstr "Account gegevens"
@@ -824,7 +823,7 @@ msgid "Append files/URLs to the playlist"
 msgstr "Bestanden/URLs aan afspeellijst toevoegen"
 
 #: devices/deviceview.cpp:218 globalsearch/globalsearchview.cpp:453
-#: internet/core/internetservice.cpp:81 library/libraryview.cpp:378
+#: internet/core/internetservice.cpp:81 library/libraryview.cpp:377
 #: widgets/fileviewlist.cpp:31
 msgid "Append to current playlist"
 msgstr "Aan huidige afspeellijst toevoegen"
@@ -889,8 +888,8 @@ msgstr "Audiouitvoer"
 
 #: internet/digitally/digitallyimportedsettingspage.cpp:82
 #: internet/magnatune/magnatunesettingspage.cpp:117
-#: internet/lastfm/lastfmservice.cpp:228
-#: internet/lastfm/lastfmsettingspage.cpp:84
+#: internet/lastfm/lastfmservice.cpp:247
+#: internet/lastfm/lastfmsettingspage.cpp:97
 msgid "Authentication failed"
 msgstr "Aanmelden mislukt"
 
@@ -1280,7 +1279,11 @@ msgstr "Clementine heeft geen resultaten voor dit bestand gevonden"
 msgid "Clementine will find music in:"
 msgstr "Clementine zal zoeken in:"
 
-#: library/libraryview.cpp:359
+#: internet/lastfm/lastfmsettingspage.cpp:78
+msgid "Click Ok once you authenticated Clementine in your last.fm account."
+msgstr ""
+
+#: library/libraryview.cpp:358
 msgid "Click here to add some music"
 msgstr "Klik hier om muziek toe te voegen"
 
@@ -1295,6 +1298,7 @@ msgid "Click to toggle between remaining time and total time"
 msgstr "Klik om te schakelen tussen resterende duur en totale duur"
 
 #: ../bin/src/ui_soundcloudsettingspage.h:103
+#: ../bin/src/ui_lastfmsettingspage.h:133
 #: ../bin/src/ui_googledrivesettingspage.h:102
 #: ../bin/src/ui_dropboxsettingspage.h:102
 #: ../bin/src/ui_skydrivesettingspage.h:102
@@ -1468,7 +1472,7 @@ msgstr "Kopieer url om te delen naar klembord"
 msgid "Copy to clipboard"
 msgstr "Kopieer naar klembord"
 
-#: library/libraryview.cpp:409 internet/podcasts/podcastservice.cpp:438
+#: library/libraryview.cpp:408 internet/podcasts/podcastservice.cpp:438
 #: ui/mainwindow.cpp:680 widgets/fileviewlist.cpp:44
 msgid "Copy to device..."
 msgstr "Naar apparaat kopiëren…"
@@ -1657,7 +1661,7 @@ msgstr "Verwijderen"
 msgid "Delete downloaded data"
 msgstr "Verwijder gedownloadde gegevens"
 
-#: devices/deviceview.cpp:408 library/libraryview.cpp:645
+#: devices/deviceview.cpp:408 library/libraryview.cpp:644
 #: ui/mainwindow.cpp:2317 widgets/fileview.cpp:186
 msgid "Delete files"
 msgstr "Bestanden verwijderen"
@@ -1666,7 +1670,7 @@ msgstr "Bestanden verwijderen"
 msgid "Delete from device..."
 msgstr "Van apparaat verwijderen…"
 
-#: library/libraryview.cpp:411 ui/mainwindow.cpp:683
+#: library/libraryview.cpp:410 ui/mainwindow.cpp:683
 #: widgets/fileviewlist.cpp:47
 msgid "Delete from disk..."
 msgstr "Van schijf verwijderen…"
@@ -1679,7 +1683,7 @@ msgstr "Verwijder afgespeelde afleveringen"
 msgid "Delete preset"
 msgstr "Voorinstelling verwijderen"
 
-#: library/libraryview.cpp:401
+#: library/libraryview.cpp:400
 msgid "Delete smart playlist"
 msgstr "Slimme-afspeellijst verwijderen"
 
@@ -1828,7 +1832,7 @@ msgstr "TIjdens het opnieuw volledig scannen, zal alle metadata, die in Clementi
 msgid "Don't repeat"
 msgstr "Niet herhalen"
 
-#: library/libraryview.cpp:429
+#: library/libraryview.cpp:428
 msgid "Don't show in various artists"
 msgstr "Niet in diverse artiesten weergeven"
 
@@ -1962,7 +1966,7 @@ msgstr "Dynamische-modus ingeschakeld"
 msgid "Dynamic random mix"
 msgstr "Dynamische random mix"
 
-#: library/libraryview.cpp:398
+#: library/libraryview.cpp:397
 msgid "Edit smart playlist..."
 msgstr "Slimme-afspeellijst bewerken…"
 
@@ -1983,12 +1987,12 @@ msgstr "Labels bewerken"
 msgid "Edit track information"
 msgstr "Nummerinformatie bewerken"
 
-#: library/libraryview.cpp:416 widgets/fileviewlist.cpp:51
+#: library/libraryview.cpp:415 widgets/fileviewlist.cpp:51
 #: ../bin/src/ui_mainwindow.h:669
 msgid "Edit track information..."
 msgstr "Nummerinformatie bewerken…"
 
-#: library/libraryview.cpp:419
+#: library/libraryview.cpp:418
 msgid "Edit tracks information..."
 msgstr "Nummerinformatie bewerken…"
 
@@ -2105,7 +2109,7 @@ msgid "Equivalent to --log-levels *:3"
 msgstr "Gelijkwaardig aan --log-levels *:3"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:246
-#: library/libraryview.cpp:639 ui/mainwindow.cpp:2020 ui/mainwindow.cpp:2267
+#: library/libraryview.cpp:638 ui/mainwindow.cpp:2020 ui/mainwindow.cpp:2267
 #: ui/mainwindow.cpp:2415 internet/vk/vkservice.cpp:643
 msgid "Error"
 msgstr "Fout"
@@ -2769,31 +2773,31 @@ msgstr "internet-diensten"
 msgid "Intro tracks"
 msgstr "Intro nummers"
 
-#: internet/lastfm/lastfmservice.cpp:240
+#: internet/lastfm/lastfmservice.cpp:259
 msgid "Invalid API key"
 msgstr "Ongeldige API-sleutel"
 
-#: internet/lastfm/lastfmservice.cpp:230
+#: internet/lastfm/lastfmservice.cpp:249
 msgid "Invalid format"
 msgstr "Ongeldig formaat"
 
-#: internet/lastfm/lastfmservice.cpp:226
+#: internet/lastfm/lastfmservice.cpp:245
 msgid "Invalid method"
 msgstr "Ongeldige methode"
 
-#: internet/lastfm/lastfmservice.cpp:232
+#: internet/lastfm/lastfmservice.cpp:251
 msgid "Invalid parameters"
 msgstr "Ongeldige parameters"
 
-#: internet/lastfm/lastfmservice.cpp:234
+#: internet/lastfm/lastfmservice.cpp:253
 msgid "Invalid resource specified"
 msgstr "Ongeldige bron opgegeven"
 
-#: internet/lastfm/lastfmservice.cpp:224
+#: internet/lastfm/lastfmservice.cpp:243
 msgid "Invalid service"
 msgstr "Ongeldige service"
 
-#: internet/lastfm/lastfmservice.cpp:238
+#: internet/lastfm/lastfmservice.cpp:257
 msgid "Invalid session key"
 msgstr "Ongeldige sessiesleutel"
 
@@ -2899,17 +2903,21 @@ msgctxt "A playlist's tag."
 msgid "Last played"
 msgstr "Laast afgespeeld"
 
-#: ../bin/src/ui_lastfmsettingspage.h:149
+#: ../bin/src/ui_lastfmsettingspage.h:131
 msgid "Last.fm"
 msgstr "Last.fm"
 
-#: internet/lastfm/lastfmservice.cpp:247
+#: internet/lastfm/lastfmsettingspage.cpp:77
+msgid "Last.fm authentication"
+msgstr ""
+
+#: internet/lastfm/lastfmsettingspage.cpp:70
+msgid "Last.fm authentication failed"
+msgstr ""
+
+#: internet/lastfm/lastfmservice.cpp:266
 msgid "Last.fm is currently busy, please try again in a few minutes"
 msgstr "Last.fm is momenteel bezet, probeer het over een paar minuten nogmaals"
-
-#: ../bin/src/ui_lastfmsettingspage.h:153
-msgid "Last.fm password"
-msgstr "Last.fm wachtwoord"
 
 #: songinfo/lastfmtrackinfoprovider.cpp:76
 msgid "Last.fm play counts"
@@ -2918,10 +2926,6 @@ msgstr "Last.fm statistieken"
 #: songinfo/lastfmtrackinfoprovider.cpp:130
 msgid "Last.fm tags"
 msgstr "Last.fm labels"
-
-#: ../bin/src/ui_lastfmsettingspage.h:151
-msgid "Last.fm username"
-msgstr "Last.fm gebruikersnaam"
 
 #: songinfo/lastfmtrackinfoprovider.cpp:110
 msgid "Last.fm wiki"
@@ -3040,7 +3044,7 @@ msgstr "Bestanden/URLs laden, en vervangt de huidige afspeellijst"
 #: ../bin/src/ui_soundcloudsettingspage.h:102
 #: ../bin/src/ui_spotifysettingspage.h:210
 #: ../bin/src/ui_subsonicsettingspage.h:129
-#: ../bin/src/ui_lastfmsettingspage.h:152
+#: ../bin/src/ui_lastfmsettingspage.h:132
 #: ../bin/src/ui_googledrivesettingspage.h:101
 #: ../bin/src/ui_dropboxsettingspage.h:101
 #: ../bin/src/ui_skydrivesettingspage.h:101
@@ -3153,7 +3157,7 @@ msgstr "Voer uit!"
 msgid "Make playlist available offline"
 msgstr "Afspeellijst offline beschikbaar maken"
 
-#: internet/lastfm/lastfmservice.cpp:259
+#: internet/lastfm/lastfmservice.cpp:278
 msgid "Malformed response"
 msgstr "Foutieve respons"
 
@@ -3362,7 +3366,7 @@ msgstr "Nieuwe map"
 msgid "New playlist"
 msgstr "Nieuwe afspeellijst"
 
-#: library/libraryview.cpp:395
+#: library/libraryview.cpp:394
 msgid "New smart playlist..."
 msgstr "Nieuwe slimme afspeellijst…"
 
@@ -3425,7 +3429,7 @@ msgstr "Geen korte blokken"
 msgid "None"
 msgstr "Geen"
 
-#: library/libraryview.cpp:640 ui/mainwindow.cpp:2268 ui/mainwindow.cpp:2416
+#: library/libraryview.cpp:639 ui/mainwindow.cpp:2268 ui/mainwindow.cpp:2416
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Geen van de geselecteerde nummers waren geschikt voor het kopiëren naar een apparaat"
 
@@ -3445,19 +3449,19 @@ msgstr "Niet beschikbaar tijdens het gebruik van een dynamische afspeellijst"
 msgid "Not connected"
 msgstr "Niet verbonden"
 
-#: internet/lastfm/lastfmservice.cpp:250
+#: internet/lastfm/lastfmservice.cpp:269
 msgid "Not enough content"
 msgstr "Onvoldoende inhoud"
 
-#: internet/lastfm/lastfmservice.cpp:254
+#: internet/lastfm/lastfmservice.cpp:273
 msgid "Not enough fans"
 msgstr "Onvoldoende fans"
 
-#: internet/lastfm/lastfmservice.cpp:252
+#: internet/lastfm/lastfmservice.cpp:271
 msgid "Not enough members"
 msgstr "Onvoldoende leden"
 
-#: internet/lastfm/lastfmservice.cpp:256
+#: internet/lastfm/lastfmservice.cpp:275
 msgid "Not enough neighbors"
 msgstr "Onvoldoende buren"
 
@@ -3587,7 +3591,7 @@ msgid "Open in Google Drive"
 msgstr "In Google Drive openen"
 
 #: devices/deviceview.cpp:224 globalsearch/globalsearchview.cpp:461
-#: internet/core/internetservice.cpp:105 library/libraryview.cpp:384
+#: internet/core/internetservice.cpp:105 library/libraryview.cpp:383
 #: widgets/fileviewlist.cpp:36
 msgid "Open in new playlist"
 msgstr "In een nieuwe afspeellijst openen"
@@ -3606,7 +3610,7 @@ msgstr "Open in je browser"
 msgid "Open..."
 msgstr "Openen..."
 
-#: internet/lastfm/lastfmservice.cpp:236
+#: internet/lastfm/lastfmservice.cpp:255
 msgid "Operation failed"
 msgstr "Bewerking is mislukt"
 
@@ -3632,7 +3636,7 @@ msgstr "Opus"
 msgid "Organise Files"
 msgstr "Bestanden sorteren"
 
-#: library/libraryview.cpp:405 ui/mainwindow.cpp:676
+#: library/libraryview.cpp:404 ui/mainwindow.cpp:676
 msgid "Organise files..."
 msgstr "Bestanden sorteren..."
 
@@ -3832,7 +3836,7 @@ msgstr "Voorkeur"
 #: ../bin/src/ui_digitallyimportedsettingspage.h:165
 #: ../bin/src/ui_magnatunesettingspage.h:165
 #: ../bin/src/ui_spotifysettingspage.h:215 ../bin/src/ui_settingsdialog.h:115
-#: ../bin/src/ui_lastfmsettingspage.h:154 ../bin/src/ui_vksettingspage.h:216
+#: ../bin/src/ui_lastfmsettingspage.h:134 ../bin/src/ui_vksettingspage.h:216
 msgid "Preferences"
 msgstr "Voorkeuren"
 
@@ -3955,7 +3959,7 @@ msgstr "Wachtrijbeheer"
 msgid "Queue selected tracks"
 msgstr "Geselecteerde nummers in de wachtrij plaatsen"
 
-#: globalsearch/globalsearchview.cpp:466 library/libraryview.cpp:389
+#: globalsearch/globalsearchview.cpp:466 library/libraryview.cpp:388
 #: ui/mainwindow.cpp:1698
 msgid "Queue track"
 msgstr "Nummer in de wachtrij plaatsen"
@@ -4132,7 +4136,7 @@ msgid "Repeat track"
 msgstr "Nummer herhalen"
 
 #: devices/deviceview.cpp:221 globalsearch/globalsearchview.cpp:457
-#: internet/core/internetservice.cpp:93 library/libraryview.cpp:381
+#: internet/core/internetservice.cpp:93 library/libraryview.cpp:380
 #: widgets/fileviewlist.cpp:34
 msgid "Replace current playlist"
 msgstr "Huidige afspeellijst vervangen"
@@ -4315,7 +4319,7 @@ msgstr "Groote schalen"
 msgid "Score"
 msgstr "Score"
 
-#: ../bin/src/ui_lastfmsettingspage.h:155
+#: ../bin/src/ui_lastfmsettingspage.h:135
 msgid "Scrobble tracks that I listen to"
 msgstr "Scrobble de nummers waar ik naar luister"
 
@@ -4468,7 +4472,7 @@ msgstr "Server URL"
 msgid "Server details"
 msgstr "Server gegevens"
 
-#: internet/lastfm/lastfmservice.cpp:242
+#: internet/lastfm/lastfmservice.cpp:261
 msgid "Service offline"
 msgstr "Service offline"
 
@@ -4572,7 +4576,7 @@ msgstr "Volledig weergeven..."
 msgid "Show groups in global search result"
 msgstr "Toon groepen in globale zoekresultaat"
 
-#: library/libraryview.cpp:423 ui/mainwindow.cpp:686
+#: library/libraryview.cpp:422 ui/mainwindow.cpp:686
 #: widgets/fileviewlist.cpp:53
 msgid "Show in file browser..."
 msgstr "In bestandsbeheer tonen…"
@@ -4581,7 +4585,7 @@ msgstr "In bestandsbeheer tonen…"
 msgid "Show in library..."
 msgstr "Tonen in bibliotheek..."
 
-#: library/libraryview.cpp:426
+#: library/libraryview.cpp:425
 msgid "Show in various artists"
 msgstr "In diverse artiesten weergeven"
 
@@ -4605,11 +4609,11 @@ msgstr "Toon nummer dat wordt afgespeeld op je pagina"
 msgid "Show search suggestions"
 msgstr "Toon zoek sugesties"
 
-#: ../bin/src/ui_lastfmsettingspage.h:156
+#: ../bin/src/ui_lastfmsettingspage.h:136
 msgid "Show the \"love\" button"
 msgstr "Knop \"love\" weergeven"
 
-#: ../bin/src/ui_lastfmsettingspage.h:157
+#: ../bin/src/ui_lastfmsettingspage.h:137
 msgid "Show the scrobble button in the main window"
 msgstr "Toon de scrobble knop in het hoofdvenster"
 
@@ -5006,7 +5010,7 @@ msgid ""
 "rescan because of the new features listed below:"
 msgstr "De versie van Clementine die u zojuist heeft ge-updated vereist vanwege de nieuwe onderdelen die hieronder staan een volledige herscan van de database:"
 
-#: library/libraryview.cpp:562
+#: library/libraryview.cpp:561
 msgid "There are other songs in this album"
 msgstr "Er zijn andere nummers in dit album"
 
@@ -5042,7 +5046,7 @@ msgid ""
 "continue?"
 msgstr "Deze bestanden zullen definitief van het apparaat verwijderd worden. Weet u zeker dat u door wilt gaan?"
 
-#: library/libraryview.cpp:646 ui/mainwindow.cpp:2318 widgets/fileview.cpp:187
+#: library/libraryview.cpp:645 ui/mainwindow.cpp:2318 widgets/fileview.cpp:187
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -5113,7 +5117,7 @@ msgstr "Dit is de eerste keer dat u dit apparaat hebt verbonden. Clementine zal 
 msgid "This option can be changed in the \"Behavior\" preferences"
 msgstr "Deze optie kan aangepast worden bij de \"Gedrag\" instellingen"
 
-#: internet/lastfm/lastfmservice.cpp:244
+#: internet/lastfm/lastfmservice.cpp:263
 msgid "This stream is for paid subscribers only"
 msgstr "Deze stream is alleen voor betalende abonnees"
 
@@ -5264,7 +5268,7 @@ msgid "Unknown content-type"
 msgstr "Onbekend inhoudstype"
 
 #: internet/digitally/digitallyimportedclient.cpp:74
-#: internet/lastfm/lastfmservice.cpp:263
+#: internet/lastfm/lastfmservice.cpp:282
 msgid "Unknown error"
 msgstr "Onbekende fout"
 
@@ -5331,7 +5335,7 @@ msgstr "Bibliotheek wordt bijgewerkt"
 msgid "Usage"
 msgstr "Gebruik"
 
-#: ../bin/src/ui_lastfmsettingspage.h:158
+#: ../bin/src/ui_lastfmsettingspage.h:138
 msgid "Use Album Artist tag when available"
 msgstr "Gebruik Albumartiest label indien beschikbaar"
 
@@ -5584,7 +5588,7 @@ msgstr "Windows Media-audio"
 msgid "Without cover:"
 msgstr "Zonder albumhoes:"
 
-#: library/libraryview.cpp:563
+#: library/libraryview.cpp:562
 msgid ""
 "Would you like to move the other songs in this album to Various Artists as "
 "well?"
@@ -5721,7 +5725,7 @@ msgstr "Clementine moet herstart worden als u de taal veranderd."
 msgid "Your IP address:"
 msgstr "Uw IP-adres:"
 
-#: internet/lastfm/lastfmsettingspage.cpp:80
+#: internet/lastfm/lastfmsettingspage.cpp:93
 msgid "Your Last.fm credentials were incorrect"
 msgstr "Uw Last.fm inloggegevens zijn onjuist"
 
@@ -5729,7 +5733,7 @@ msgstr "Uw Last.fm inloggegevens zijn onjuist"
 msgid "Your Magnatune credentials were incorrect"
 msgstr "Uw Magnatune inloggegevens zijn onjuist"
 
-#: library/libraryview.cpp:353
+#: library/libraryview.cpp:352
 msgid "Your library is empty!"
 msgstr "Uw bibliotheek is leeg!"
 

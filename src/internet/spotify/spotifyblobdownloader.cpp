@@ -82,8 +82,8 @@ void SpotifyBlobDownloader::Start() {
   const QStringList filenames =
       QStringList() << "blob"
                     << "blob" + QString(kSignatureSuffix)
-                    << "libspotify.so.12.1.45"
-                    << "libspotify.so.12.1.45" + QString(kSignatureSuffix);
+                    << "libspotify.so.12.1.51"
+                    << "libspotify.so.12.1.51" + QString(kSignatureSuffix);
 
   for (const QString& filename : filenames) {
     const QUrl url(SpotifyService::kBlobDownloadUrl + version_ + "/" +

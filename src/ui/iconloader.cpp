@@ -1,5 +1,6 @@
 /* This file is part of Clementine.
    Copyright 2010, David Sansome <me@davidsansome.com>
+   Copyright 2015 - 2016, Arun Narayanankutty <n.arun.lifescience@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -31,7 +32,7 @@ void IconLoader::Init() {
   sizes_ << 22 << 32 << 48;
   custom_icon_path_ = Utilities::GetConfigPath(Utilities::Path_Icons);
   icon_sub_path_.clear();
-  icon_sub_path_ << "/icons" << "/providers" << "/last.fm";
+  icon_sub_path_ << "/icons" << "/providers" << "/last.fm" << "";
 }
 
 QIcon IconLoader::Load(const QString& name, const IconType& icontype) {
@@ -48,22 +49,30 @@ QIcon IconLoader::Load(const QString& name, const IconType& icontype) {
   case Base: case Provider:
     break;
 
-  case Lastfm: {
+  case Lastfm: case Other: {
     // lastfm icons location
-    const QString custom_lastfm_icon_location = custom_icon_path_ + "/last.fm";
-    if (QDir(custom_lastfm_icon_location).exists()) {
+    const QString custom_fm_other_icon_location = custom_icon_path_
+        + icon_sub_path_.at(icontype);
+    if (QDir(custom_fm_other_icon_location).exists()) {
       // Try to load icons from the custom icon location initially
       const QString locate_file(
-          custom_lastfm_icon_location + "/" + name + ".png");
+          custom_fm_other_icon_location + "/" + name + ".png");
 
       if (QFile::exists(locate_file)) ret.addFile(locate_file);
       if (!ret.isNull()) return ret;
     }
 
-    // Otherwise use our fallback theme
-    const QString lastfm_path_file(":/last.fm/" + name + ".png");
+#if QT_VERSION >= 0x040600
+    // Then try to load it from the system theme
+    ret = QIcon::fromTheme(name);
+    if (!ret.isNull()) return ret;
+#endif
 
-    if (QFile::exists(lastfm_path_file)) ret.addFile(lastfm_path_file);
+    // Otherwise use our fallback theme
+    const QString path_file(":" + icon_sub_path_.at(icontype)
+        + "/" + name + ".png");
+
+    if (QFile::exists(path_file)) ret.addFile(path_file);
     if (ret.isNull()) qLog(Warning) << "Couldn't load icon" << name;
     return ret;
   }
@@ -74,14 +83,16 @@ QIcon IconLoader::Load(const QString& name, const IconType& icontype) {
     return ret;
   }
 
-  const QString custom_icon_location = custom_icon_path_ + icon_sub_path_.at(icontype);
+  const QString custom_icon_location = custom_icon_path_
+      + icon_sub_path_.at(icontype);
   if (QDir(custom_icon_location).exists()) {
     // Try to load icons from the custom icon location initially
     const QString locate(custom_icon_location + "/%1x%2/%3.png");
     for (int size : sizes_) {
       QString filename_custom(locate.arg(size).arg(size).arg(name));
       
-      if (QFile::exists(filename_custom)) ret.addFile(filename_custom, QSize(size, size));
+      if (QFile::exists(filename_custom)) ret.addFile(filename_custom,
+                                                      QSize(size, size));
     }
     if (!ret.isNull()) return ret;
   }
@@ -103,4 +114,3 @@ QIcon IconLoader::Load(const QString& name, const IconType& icontype) {
   if (ret.isNull()) qLog(Warning) << "Couldn't load icon" << name;
   return ret;
 }
-

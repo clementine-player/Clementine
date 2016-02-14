@@ -18,7 +18,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2016-01-13 23:28+0000\n"
+"PO-Revision-Date: 2016-02-03 14:58+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Greek (http://www.transifex.com/davidsansome/clementine/language/el/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -427,8 +427,7 @@ msgid "Absolute"
 msgstr "Απόλυτο"
 
 #: ../bin/src/ui_magnatunesettingspage.h:154
-#: ../bin/src/ui_spotifysettingspage.h:207
-#: ../bin/src/ui_lastfmsettingspage.h:150 ../bin/src/ui_vksettingspage.h:213
+#: ../bin/src/ui_spotifysettingspage.h:207 ../bin/src/ui_vksettingspage.h:213
 #: ../bin/src/ui_seafilesettingspage.h:168
 msgid "Account details"
 msgstr "Λεπτομέρειες λογαριασμού"
@@ -826,7 +825,7 @@ msgid "Append files/URLs to the playlist"
 msgstr "Προσάρτηση αρχείων/URLs στην λίστα αναπαραγωγής"
 
 #: devices/deviceview.cpp:218 globalsearch/globalsearchview.cpp:453
-#: internet/core/internetservice.cpp:81 library/libraryview.cpp:378
+#: internet/core/internetservice.cpp:81 library/libraryview.cpp:377
 #: widgets/fileviewlist.cpp:31
 msgid "Append to current playlist"
 msgstr "Προσάρτηση στην τρέχουσα λίστα αναπαραγωγής"
@@ -891,8 +890,8 @@ msgstr "Έξοδος ήχου"
 
 #: internet/digitally/digitallyimportedsettingspage.cpp:82
 #: internet/magnatune/magnatunesettingspage.cpp:117
-#: internet/lastfm/lastfmservice.cpp:228
-#: internet/lastfm/lastfmsettingspage.cpp:84
+#: internet/lastfm/lastfmservice.cpp:247
+#: internet/lastfm/lastfmsettingspage.cpp:97
 msgid "Authentication failed"
 msgstr "Η πιστοποίηση απέτυχε"
 
@@ -1282,7 +1281,11 @@ msgstr "Ο Clementine δεν μπόρεσε να βρει αποτελέσματ
 msgid "Clementine will find music in:"
 msgstr "Ο Clementine θα βρει μουσική στο:"
 
-#: library/libraryview.cpp:359
+#: internet/lastfm/lastfmsettingspage.cpp:78
+msgid "Click Ok once you authenticated Clementine in your last.fm account."
+msgstr ""
+
+#: library/libraryview.cpp:358
 msgid "Click here to add some music"
 msgstr "Κλικ εδώ για να προσθέσετε μουσική"
 
@@ -1297,6 +1300,7 @@ msgid "Click to toggle between remaining time and total time"
 msgstr "\"Κλικ\" για εναλλαγή μεταξύ συνολικού και εναπομείναντα χρόνου"
 
 #: ../bin/src/ui_soundcloudsettingspage.h:103
+#: ../bin/src/ui_lastfmsettingspage.h:133
 #: ../bin/src/ui_googledrivesettingspage.h:102
 #: ../bin/src/ui_dropboxsettingspage.h:102
 #: ../bin/src/ui_skydrivesettingspage.h:102
@@ -1470,7 +1474,7 @@ msgstr "Αντιγραφή στο πρόχειρο"
 msgid "Copy to clipboard"
 msgstr "Αντιγραφή στο πρόχειρο"
 
-#: library/libraryview.cpp:409 internet/podcasts/podcastservice.cpp:438
+#: library/libraryview.cpp:408 internet/podcasts/podcastservice.cpp:438
 #: ui/mainwindow.cpp:680 widgets/fileviewlist.cpp:44
 msgid "Copy to device..."
 msgstr "Αντιγραφή στην συσκευή..."
@@ -1659,7 +1663,7 @@ msgstr "Διαγραφή"
 msgid "Delete downloaded data"
 msgstr "Διαγραφή δεδομένων που έχουν \"κατέβει\""
 
-#: devices/deviceview.cpp:408 library/libraryview.cpp:645
+#: devices/deviceview.cpp:408 library/libraryview.cpp:644
 #: ui/mainwindow.cpp:2317 widgets/fileview.cpp:186
 msgid "Delete files"
 msgstr "Διαγραφή αρχείων"
@@ -1668,7 +1672,7 @@ msgstr "Διαγραφή αρχείων"
 msgid "Delete from device..."
 msgstr "Διαγραφή από την συσκευή..."
 
-#: library/libraryview.cpp:411 ui/mainwindow.cpp:683
+#: library/libraryview.cpp:410 ui/mainwindow.cpp:683
 #: widgets/fileviewlist.cpp:47
 msgid "Delete from disk..."
 msgstr "Διαγραφή από τον δίσκο..."
@@ -1681,7 +1685,7 @@ msgstr "Διαγραφή επεισοδίων που έχουν αναπαραχ
 msgid "Delete preset"
 msgstr "Διαγραφή ρύθμισης"
 
-#: library/libraryview.cpp:401
+#: library/libraryview.cpp:400
 msgid "Delete smart playlist"
 msgstr "Διαγραφή έξυπνης λίστας αναπαραγωγής"
 
@@ -1830,7 +1834,7 @@ msgstr "Κάνοντας μια πλήρη επανάληψη της σάρωσ�
 msgid "Don't repeat"
 msgstr "Χωρίς επανάληψη"
 
-#: library/libraryview.cpp:429
+#: library/libraryview.cpp:428
 msgid "Don't show in various artists"
 msgstr "Αφαίρεση από τους διάφορους καλλιτέχνες"
 
@@ -1964,7 +1968,7 @@ msgstr "Η δυναμική λειτουργία είναι ενεργή"
 msgid "Dynamic random mix"
 msgstr "Δυναμική τυχαία ανάμιξη"
 
-#: library/libraryview.cpp:398
+#: library/libraryview.cpp:397
 msgid "Edit smart playlist..."
 msgstr "Τροποποίηση έξυπνης λίστας αναπαραγωγής"
 
@@ -1985,12 +1989,12 @@ msgstr "Επεξεργασία ετικετών"
 msgid "Edit track information"
 msgstr "Τροποποίηση πληροφοριών κομματιού"
 
-#: library/libraryview.cpp:416 widgets/fileviewlist.cpp:51
+#: library/libraryview.cpp:415 widgets/fileviewlist.cpp:51
 #: ../bin/src/ui_mainwindow.h:669
 msgid "Edit track information..."
 msgstr "Τροποποίηση πληροφοριών κομματιού..."
 
-#: library/libraryview.cpp:419
+#: library/libraryview.cpp:418
 msgid "Edit tracks information..."
 msgstr "Επεξεργασία πληροφοριών των κομματιών..."
 
@@ -2107,7 +2111,7 @@ msgid "Equivalent to --log-levels *:3"
 msgstr "Ισοδύναμο με --log-levels *:3"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:246
-#: library/libraryview.cpp:639 ui/mainwindow.cpp:2020 ui/mainwindow.cpp:2267
+#: library/libraryview.cpp:638 ui/mainwindow.cpp:2020 ui/mainwindow.cpp:2267
 #: ui/mainwindow.cpp:2415 internet/vk/vkservice.cpp:643
 msgid "Error"
 msgstr "Σφάλμα"
@@ -2771,31 +2775,31 @@ msgstr "Υπηρεσίες Internet"
 msgid "Intro tracks"
 msgstr "Εισαγωγικά κομμάτια"
 
-#: internet/lastfm/lastfmservice.cpp:240
+#: internet/lastfm/lastfmservice.cpp:259
 msgid "Invalid API key"
 msgstr "Εσφαλμένο κλειδί API"
 
-#: internet/lastfm/lastfmservice.cpp:230
+#: internet/lastfm/lastfmservice.cpp:249
 msgid "Invalid format"
 msgstr "Εσφαλμένη διαμόρφωση"
 
-#: internet/lastfm/lastfmservice.cpp:226
+#: internet/lastfm/lastfmservice.cpp:245
 msgid "Invalid method"
 msgstr "Εσφαλμένη μέθοδος"
 
-#: internet/lastfm/lastfmservice.cpp:232
+#: internet/lastfm/lastfmservice.cpp:251
 msgid "Invalid parameters"
 msgstr "Εσφαλμένοι παράμετροι"
 
-#: internet/lastfm/lastfmservice.cpp:234
+#: internet/lastfm/lastfmservice.cpp:253
 msgid "Invalid resource specified"
 msgstr "Καθορίστηκε εσφαλμένη πηγή"
 
-#: internet/lastfm/lastfmservice.cpp:224
+#: internet/lastfm/lastfmservice.cpp:243
 msgid "Invalid service"
 msgstr "Εσφαλμένη υπηρεσία"
 
-#: internet/lastfm/lastfmservice.cpp:238
+#: internet/lastfm/lastfmservice.cpp:257
 msgid "Invalid session key"
 msgstr "Εσφαλμένο κλειδί συνεδρίας"
 
@@ -2901,17 +2905,21 @@ msgctxt "A playlist's tag."
 msgid "Last played"
 msgstr "Τελευταία εκτέλεση"
 
-#: ../bin/src/ui_lastfmsettingspage.h:149
+#: ../bin/src/ui_lastfmsettingspage.h:131
 msgid "Last.fm"
 msgstr "Last.fm"
 
-#: internet/lastfm/lastfmservice.cpp:247
+#: internet/lastfm/lastfmsettingspage.cpp:77
+msgid "Last.fm authentication"
+msgstr ""
+
+#: internet/lastfm/lastfmsettingspage.cpp:70
+msgid "Last.fm authentication failed"
+msgstr ""
+
+#: internet/lastfm/lastfmservice.cpp:266
 msgid "Last.fm is currently busy, please try again in a few minutes"
 msgstr "Το Last.fm είναι απασχολημένο, παρακαλώ δοκιμάστε σε λίγα λεπτά"
-
-#: ../bin/src/ui_lastfmsettingspage.h:153
-msgid "Last.fm password"
-msgstr "Last.fm συνθηματικό"
 
 #: songinfo/lastfmtrackinfoprovider.cpp:76
 msgid "Last.fm play counts"
@@ -2920,10 +2928,6 @@ msgstr "Αριθμός αναπαραγωγής Last.fm"
 #: songinfo/lastfmtrackinfoprovider.cpp:130
 msgid "Last.fm tags"
 msgstr "Ετικέτες του Last.fm"
-
-#: ../bin/src/ui_lastfmsettingspage.h:151
-msgid "Last.fm username"
-msgstr "Last.fm όνομα χρήστη"
 
 #: songinfo/lastfmtrackinfoprovider.cpp:110
 msgid "Last.fm wiki"
@@ -3042,7 +3046,7 @@ msgstr "Φορτώνει αρχεία/URLs, αντικαθιστώντας τη�
 #: ../bin/src/ui_soundcloudsettingspage.h:102
 #: ../bin/src/ui_spotifysettingspage.h:210
 #: ../bin/src/ui_subsonicsettingspage.h:129
-#: ../bin/src/ui_lastfmsettingspage.h:152
+#: ../bin/src/ui_lastfmsettingspage.h:132
 #: ../bin/src/ui_googledrivesettingspage.h:101
 #: ../bin/src/ui_dropboxsettingspage.h:101
 #: ../bin/src/ui_skydrivesettingspage.h:101
@@ -3155,7 +3159,7 @@ msgstr "Κάνε το!"
 msgid "Make playlist available offline"
 msgstr "Η λίστα να είναι διαθέσιμη και εκτός σύνδεσης"
 
-#: internet/lastfm/lastfmservice.cpp:259
+#: internet/lastfm/lastfmservice.cpp:278
 msgid "Malformed response"
 msgstr "Παραμορφωμένη απάντηση"
 
@@ -3364,7 +3368,7 @@ msgstr "Νέος φάκελος"
 msgid "New playlist"
 msgstr "Νέα λίστα"
 
-#: library/libraryview.cpp:395
+#: library/libraryview.cpp:394
 msgid "New smart playlist..."
 msgstr "Νέα έξυπνη λίστα..."
 
@@ -3427,7 +3431,7 @@ msgstr "Όχι βραχαία μπλοκς"
 msgid "None"
 msgstr "Κανένα"
 
-#: library/libraryview.cpp:640 ui/mainwindow.cpp:2268 ui/mainwindow.cpp:2416
+#: library/libraryview.cpp:639 ui/mainwindow.cpp:2268 ui/mainwindow.cpp:2416
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Κανένα από τα επιλεγμένα τραγούδια δεν ήταν κατάλληλο για αντιγραφή σε μία συσκευή"
 
@@ -3447,19 +3451,19 @@ msgstr "Δεν είναι διαθέσιμο κατά την χρήση Δυνα
 msgid "Not connected"
 msgstr "Αποσυνδεμένο"
 
-#: internet/lastfm/lastfmservice.cpp:250
+#: internet/lastfm/lastfmservice.cpp:269
 msgid "Not enough content"
 msgstr "Δεν υπάρχει αρκετό περιεχόμενο"
 
-#: internet/lastfm/lastfmservice.cpp:254
+#: internet/lastfm/lastfmservice.cpp:273
 msgid "Not enough fans"
 msgstr "Δεν υπάρχουν αρκετοί οπαδοί"
 
-#: internet/lastfm/lastfmservice.cpp:252
+#: internet/lastfm/lastfmservice.cpp:271
 msgid "Not enough members"
 msgstr "Δεν υπάρχουν αρκετά μέλη"
 
-#: internet/lastfm/lastfmservice.cpp:256
+#: internet/lastfm/lastfmservice.cpp:275
 msgid "Not enough neighbors"
 msgstr "Δεν υπάρχουν αρκετοί γείτονες"
 
@@ -3589,7 +3593,7 @@ msgid "Open in Google Drive"
 msgstr "Άνοιγμα στο Google Drive"
 
 #: devices/deviceview.cpp:224 globalsearch/globalsearchview.cpp:461
-#: internet/core/internetservice.cpp:105 library/libraryview.cpp:384
+#: internet/core/internetservice.cpp:105 library/libraryview.cpp:383
 #: widgets/fileviewlist.cpp:36
 msgid "Open in new playlist"
 msgstr "Άνοιγμα σε νέα λίστα"
@@ -3608,7 +3612,7 @@ msgstr "Άνοιγμα στον περιηγητή"
 msgid "Open..."
 msgstr "Άνοιγμα..."
 
-#: internet/lastfm/lastfmservice.cpp:236
+#: internet/lastfm/lastfmservice.cpp:255
 msgid "Operation failed"
 msgstr "Η λειτουργία απέτυχε"
 
@@ -3634,7 +3638,7 @@ msgstr "Opus"
 msgid "Organise Files"
 msgstr "Οργάνωση Αρχείων"
 
-#: library/libraryview.cpp:405 ui/mainwindow.cpp:676
+#: library/libraryview.cpp:404 ui/mainwindow.cpp:676
 msgid "Organise files..."
 msgstr "Οργάνωση αρχείων..."
 
@@ -3834,7 +3838,7 @@ msgstr "Προτιμήσεις"
 #: ../bin/src/ui_digitallyimportedsettingspage.h:165
 #: ../bin/src/ui_magnatunesettingspage.h:165
 #: ../bin/src/ui_spotifysettingspage.h:215 ../bin/src/ui_settingsdialog.h:115
-#: ../bin/src/ui_lastfmsettingspage.h:154 ../bin/src/ui_vksettingspage.h:216
+#: ../bin/src/ui_lastfmsettingspage.h:134 ../bin/src/ui_vksettingspage.h:216
 msgid "Preferences"
 msgstr "Προτιμήσεις"
 
@@ -3957,7 +3961,7 @@ msgstr "Διαχειριστής λίστας αναμονής"
 msgid "Queue selected tracks"
 msgstr "Τοποθέτηση στη λίστας αναμονής τα επιλεγμένα κομμάτια"
 
-#: globalsearch/globalsearchview.cpp:466 library/libraryview.cpp:389
+#: globalsearch/globalsearchview.cpp:466 library/libraryview.cpp:388
 #: ui/mainwindow.cpp:1698
 msgid "Queue track"
 msgstr "Τοποθέτηση στη λίστας αναμονής του κομματιού"
@@ -4134,7 +4138,7 @@ msgid "Repeat track"
 msgstr "Επανάληψη κομματιού"
 
 #: devices/deviceview.cpp:221 globalsearch/globalsearchview.cpp:457
-#: internet/core/internetservice.cpp:93 library/libraryview.cpp:381
+#: internet/core/internetservice.cpp:93 library/libraryview.cpp:380
 #: widgets/fileviewlist.cpp:34
 msgid "Replace current playlist"
 msgstr "Αντικατάσταση της τρέχουσας λίστας αναπαραγωγής"
@@ -4317,7 +4321,7 @@ msgstr "Διαβάθμιση μεγέθους"
 msgid "Score"
 msgstr "Σκορ"
 
-#: ../bin/src/ui_lastfmsettingspage.h:155
+#: ../bin/src/ui_lastfmsettingspage.h:135
 msgid "Scrobble tracks that I listen to"
 msgstr "Κάνε \"srobble\" τα κομμάτια που ακούω"
 
@@ -4470,7 +4474,7 @@ msgstr "URL Εξυπηρετητή"
 msgid "Server details"
 msgstr "Λεπτομέρειες διακομιστή"
 
-#: internet/lastfm/lastfmservice.cpp:242
+#: internet/lastfm/lastfmservice.cpp:261
 msgid "Service offline"
 msgstr "Υπηρεσία εκτός σύνδεσης"
 
@@ -4574,7 +4578,7 @@ msgstr "Εμφάνισε σε πλήρες μέγεθος..."
 msgid "Show groups in global search result"
 msgstr "Εμφάνιση ομάδων με συνολικό αποτέλεσμα αναζήτησης"
 
-#: library/libraryview.cpp:423 ui/mainwindow.cpp:686
+#: library/libraryview.cpp:422 ui/mainwindow.cpp:686
 #: widgets/fileviewlist.cpp:53
 msgid "Show in file browser..."
 msgstr "Εμφάνιση στον περιηγητή αρχείων..."
@@ -4583,7 +4587,7 @@ msgstr "Εμφάνιση στον περιηγητή αρχείων..."
 msgid "Show in library..."
 msgstr "Εμφάνιση στην βιβλιοθήκη"
 
-#: library/libraryview.cpp:426
+#: library/libraryview.cpp:425
 msgid "Show in various artists"
 msgstr "Εμφάνιση στους διάφορους καλλιτέχνες"
 
@@ -4607,11 +4611,11 @@ msgstr "Εμφάνιση τραγούδιου που παίζει στη σελ�
 msgid "Show search suggestions"
 msgstr "Εμφάνιση προτάσεις αναζήτησης"
 
-#: ../bin/src/ui_lastfmsettingspage.h:156
+#: ../bin/src/ui_lastfmsettingspage.h:136
 msgid "Show the \"love\" button"
 msgstr "Εμφάνιση του κουμπιού \"αγάπη\""
 
-#: ../bin/src/ui_lastfmsettingspage.h:157
+#: ../bin/src/ui_lastfmsettingspage.h:137
 msgid "Show the scrobble button in the main window"
 msgstr "Εμφάνισε του κουμπιού scrobble στο κυρίως παράθυρο"
 
@@ -5008,7 +5012,7 @@ msgid ""
 "rescan because of the new features listed below:"
 msgstr "Η έκδοση του Clementine που μόλις ενημερώθηκε απαιτεί πλήρη επανασάρωση  της βιβλιοθήκης λόγο της παρακάτω νέας λειτουργίας:"
 
-#: library/libraryview.cpp:562
+#: library/libraryview.cpp:561
 msgid "There are other songs in this album"
 msgstr "Δεν υπάρχουν πλέον τραγούδια σε αυτό το άλμπουμ"
 
@@ -5044,7 +5048,7 @@ msgid ""
 "continue?"
 msgstr "Αυτά τα αρχεία θα διαγραφούν από την συσκευή, θέλετε σίγουρα να συνεχίσετε;"
 
-#: library/libraryview.cpp:646 ui/mainwindow.cpp:2318 widgets/fileview.cpp:187
+#: library/libraryview.cpp:645 ui/mainwindow.cpp:2318 widgets/fileview.cpp:187
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -5115,7 +5119,7 @@ msgstr "Αυτή είναι η πρώτη φορά που συνδέετε αυ�
 msgid "This option can be changed in the \"Behavior\" preferences"
 msgstr "Η επιλογή αυτή μπορεί να αλλάξει από τις προτιμήσεις \"Συμπεριφορά\""
 
-#: internet/lastfm/lastfmservice.cpp:244
+#: internet/lastfm/lastfmservice.cpp:263
 msgid "This stream is for paid subscribers only"
 msgstr "Η ροή (stream) αυτή είναι μόνο για συνδρομητές"
 
@@ -5266,7 +5270,7 @@ msgid "Unknown content-type"
 msgstr "Άγνωστος τύπος περιεχομένου"
 
 #: internet/digitally/digitallyimportedclient.cpp:74
-#: internet/lastfm/lastfmservice.cpp:263
+#: internet/lastfm/lastfmservice.cpp:282
 msgid "Unknown error"
 msgstr "Άγνωστο σφάλμα"
 
@@ -5333,7 +5337,7 @@ msgstr "Ενημέρωση λίστας"
 msgid "Usage"
 msgstr "Χρήση"
 
-#: ../bin/src/ui_lastfmsettingspage.h:158
+#: ../bin/src/ui_lastfmsettingspage.h:138
 msgid "Use Album Artist tag when available"
 msgstr "Χρήση ετικέτας Άλμπουμ Καλλιτέχνη όταν είναι διαθέσιμα"
 
@@ -5586,7 +5590,7 @@ msgstr "Windows Media audio"
 msgid "Without cover:"
 msgstr "Χωρίς εξώφυλλο:"
 
-#: library/libraryview.cpp:563
+#: library/libraryview.cpp:562
 msgid ""
 "Would you like to move the other songs in this album to Various Artists as "
 "well?"
@@ -5723,7 +5727,7 @@ msgstr "Πρέπει να ξεκινήσετε πάλι τον Clementine αν �
 msgid "Your IP address:"
 msgstr "Η IP διεύθυνση σας:"
 
-#: internet/lastfm/lastfmsettingspage.cpp:80
+#: internet/lastfm/lastfmsettingspage.cpp:93
 msgid "Your Last.fm credentials were incorrect"
 msgstr "Τα στοιχεία σας στο Last.fm ήταν εσφαλμένα"
 
@@ -5731,7 +5735,7 @@ msgstr "Τα στοιχεία σας στο Last.fm ήταν εσφαλμένα"
 msgid "Your Magnatune credentials were incorrect"
 msgstr "Τα διαπιστευτήρια σας του Magnatune δεν ήταν σωστά"
 
-#: library/libraryview.cpp:353
+#: library/libraryview.cpp:352
 msgid "Your library is empty!"
 msgstr "Η βιβλιοθήκη σας είναι άδεια!"
 

@@ -13,8 +13,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2016-01-17 16:06+0000\n"
-"Last-Translator: Gwenn M <tornoz@laposte.net>\n"
+"PO-Revision-Date: 2016-02-03 14:58+0000\n"
+"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Breton (http://www.transifex.com/davidsansome/clementine/language/br/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -422,8 +422,7 @@ msgid "Absolute"
 msgstr "Absolut"
 
 #: ../bin/src/ui_magnatunesettingspage.h:154
-#: ../bin/src/ui_spotifysettingspage.h:207
-#: ../bin/src/ui_lastfmsettingspage.h:150 ../bin/src/ui_vksettingspage.h:213
+#: ../bin/src/ui_spotifysettingspage.h:207 ../bin/src/ui_vksettingspage.h:213
 #: ../bin/src/ui_seafilesettingspage.h:168
 msgid "Account details"
 msgstr "Titouroù ar gont"
@@ -821,7 +820,7 @@ msgid "Append files/URLs to the playlist"
 msgstr "Ouzhpennañ restroù pe liammoù internet d'ar roll seniñ"
 
 #: devices/deviceview.cpp:218 globalsearch/globalsearchview.cpp:453
-#: internet/core/internetservice.cpp:81 library/libraryview.cpp:378
+#: internet/core/internetservice.cpp:81 library/libraryview.cpp:377
 #: widgets/fileviewlist.cpp:31
 msgid "Append to current playlist"
 msgstr "Ouzhpennañ d'ar roll seniñ lennet"
@@ -886,8 +885,8 @@ msgstr "Ezkas son"
 
 #: internet/digitally/digitallyimportedsettingspage.cpp:82
 #: internet/magnatune/magnatunesettingspage.cpp:117
-#: internet/lastfm/lastfmservice.cpp:228
-#: internet/lastfm/lastfmsettingspage.cpp:84
+#: internet/lastfm/lastfmservice.cpp:247
+#: internet/lastfm/lastfmsettingspage.cpp:97
 msgid "Authentication failed"
 msgstr "Dilesadur sac'het"
 
@@ -1277,7 +1276,11 @@ msgstr "N'eo ket bet gouest Clementine da gavout disoc'hoù evit ar restr-mañ"
 msgid "Clementine will find music in:"
 msgstr "Clementine a gavo ar sonerezh e :"
 
-#: library/libraryview.cpp:359
+#: internet/lastfm/lastfmsettingspage.cpp:78
+msgid "Click Ok once you authenticated Clementine in your last.fm account."
+msgstr ""
+
+#: library/libraryview.cpp:358
 msgid "Click here to add some music"
 msgstr "Klikit aze evit krouiñ ho levraoueg sonerezh"
 
@@ -1292,6 +1295,7 @@ msgid "Click to toggle between remaining time and total time"
 msgstr "Klikit evit kemmañ etre an amzer a chom hag an amzer total"
 
 #: ../bin/src/ui_soundcloudsettingspage.h:103
+#: ../bin/src/ui_lastfmsettingspage.h:133
 #: ../bin/src/ui_googledrivesettingspage.h:102
 #: ../bin/src/ui_dropboxsettingspage.h:102
 #: ../bin/src/ui_skydrivesettingspage.h:102
@@ -1465,7 +1469,7 @@ msgstr "Kopiañ an url kenrannañ er golver"
 msgid "Copy to clipboard"
 msgstr "Kopiañ d'ar golver"
 
-#: library/libraryview.cpp:409 internet/podcasts/podcastservice.cpp:438
+#: library/libraryview.cpp:408 internet/podcasts/podcastservice.cpp:438
 #: ui/mainwindow.cpp:680 widgets/fileviewlist.cpp:44
 msgid "Copy to device..."
 msgstr "Kopiañ war an drobarzhell"
@@ -1654,7 +1658,7 @@ msgstr "Diverkañ"
 msgid "Delete downloaded data"
 msgstr "Diverkañ ar roadennoù pellgarget"
 
-#: devices/deviceview.cpp:408 library/libraryview.cpp:645
+#: devices/deviceview.cpp:408 library/libraryview.cpp:644
 #: ui/mainwindow.cpp:2317 widgets/fileview.cpp:186
 msgid "Delete files"
 msgstr "Diverkañ restroù"
@@ -1663,7 +1667,7 @@ msgstr "Diverkañ restroù"
 msgid "Delete from device..."
 msgstr "Diverkañ eus an drobarzhell"
 
-#: library/libraryview.cpp:411 ui/mainwindow.cpp:683
+#: library/libraryview.cpp:410 ui/mainwindow.cpp:683
 #: widgets/fileviewlist.cpp:47
 msgid "Delete from disk..."
 msgstr "Diverkañ eus ar bladenn"
@@ -1676,7 +1680,7 @@ msgstr "Diverkañ ar pennadoù lennet"
 msgid "Delete preset"
 msgstr "Diverkañ ar ragarventennoù"
 
-#: library/libraryview.cpp:401
+#: library/libraryview.cpp:400
 msgid "Delete smart playlist"
 msgstr "Diverkañ ar roll seniñ speredek"
 
@@ -1825,7 +1829,7 @@ msgstr "Ober un adc'hwilervadur a-bezh a diverko an holl meta-roadennoù bet enr
 msgid "Don't repeat"
 msgstr "Chom hep adlenn"
 
-#: library/libraryview.cpp:429
+#: library/libraryview.cpp:428
 msgid "Don't show in various artists"
 msgstr "Chom hep diskouez el lodenn \"arzourien liesseurt\""
 
@@ -1959,7 +1963,7 @@ msgstr "Ar stumm dinamikel a zo aktivet"
 msgid "Dynamic random mix"
 msgstr "Meskaj dargouezhek dialuskel"
 
-#: library/libraryview.cpp:398
+#: library/libraryview.cpp:397
 msgid "Edit smart playlist..."
 msgstr "Kemmañ ar roll seniñ speredek..."
 
@@ -1980,12 +1984,12 @@ msgstr "Cheñch ar c'hlavioù"
 msgid "Edit track information"
 msgstr "Cheñch deskrivadur ar roud"
 
-#: library/libraryview.cpp:416 widgets/fileviewlist.cpp:51
+#: library/libraryview.cpp:415 widgets/fileviewlist.cpp:51
 #: ../bin/src/ui_mainwindow.h:669
 msgid "Edit track information..."
 msgstr "Cheñch deskrivadur ar roud..."
 
-#: library/libraryview.cpp:419
+#: library/libraryview.cpp:418
 msgid "Edit tracks information..."
 msgstr "Cheñch deskrivadur ar roudoù..."
 
@@ -2102,7 +2106,7 @@ msgid "Equivalent to --log-levels *:3"
 msgstr "Kenkoulz a --log-levels *:3"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:246
-#: library/libraryview.cpp:639 ui/mainwindow.cpp:2020 ui/mainwindow.cpp:2267
+#: library/libraryview.cpp:638 ui/mainwindow.cpp:2020 ui/mainwindow.cpp:2267
 #: ui/mainwindow.cpp:2415 internet/vk/vkservice.cpp:643
 msgid "Error"
 msgstr "Fazi"
@@ -2766,31 +2770,31 @@ msgstr "Servijoù internet"
 msgid "Intro tracks"
 msgstr "Roudennoù digeriñ"
 
-#: internet/lastfm/lastfmservice.cpp:240
+#: internet/lastfm/lastfmservice.cpp:259
 msgid "Invalid API key"
 msgstr "Alc'hwez API didalvoudek"
 
-#: internet/lastfm/lastfmservice.cpp:230
+#: internet/lastfm/lastfmservice.cpp:249
 msgid "Invalid format"
 msgstr "Mentrezh didalvoudek"
 
-#: internet/lastfm/lastfmservice.cpp:226
+#: internet/lastfm/lastfmservice.cpp:245
 msgid "Invalid method"
 msgstr "Hentenn didalvoudek"
 
-#: internet/lastfm/lastfmservice.cpp:232
+#: internet/lastfm/lastfmservice.cpp:251
 msgid "Invalid parameters"
 msgstr "Arventennoù didalvoudek"
 
-#: internet/lastfm/lastfmservice.cpp:234
+#: internet/lastfm/lastfmservice.cpp:253
 msgid "Invalid resource specified"
 msgstr "Loazioù erspizet didalvoudek"
 
-#: internet/lastfm/lastfmservice.cpp:224
+#: internet/lastfm/lastfmservice.cpp:243
 msgid "Invalid service"
 msgstr "Servij didalvoudek"
 
-#: internet/lastfm/lastfmservice.cpp:238
+#: internet/lastfm/lastfmservice.cpp:257
 msgid "Invalid session key"
 msgstr "Kudenn gant alc'hwez an dalc'h"
 
@@ -2896,17 +2900,21 @@ msgctxt "A playlist's tag."
 msgid "Last played"
 msgstr "Sonet e ziwezhañ"
 
-#: ../bin/src/ui_lastfmsettingspage.h:149
+#: ../bin/src/ui_lastfmsettingspage.h:131
 msgid "Last.fm"
 msgstr "Last.fm"
 
-#: internet/lastfm/lastfmservice.cpp:247
+#: internet/lastfm/lastfmsettingspage.cpp:77
+msgid "Last.fm authentication"
+msgstr ""
+
+#: internet/lastfm/lastfmsettingspage.cpp:70
+msgid "Last.fm authentication failed"
+msgstr ""
+
+#: internet/lastfm/lastfmservice.cpp:266
 msgid "Last.fm is currently busy, please try again in a few minutes"
 msgstr "Last.fm a zo ac'hubet, klaskit en-dro en un nebeut munutennoù"
-
-#: ../bin/src/ui_lastfmsettingspage.h:153
-msgid "Last.fm password"
-msgstr "Ger-tremen Last.fm"
 
 #: songinfo/lastfmtrackinfoprovider.cpp:76
 msgid "Last.fm play counts"
@@ -2915,10 +2923,6 @@ msgstr "Niver a selaouadennoù Last.fm"
 #: songinfo/lastfmtrackinfoprovider.cpp:130
 msgid "Last.fm tags"
 msgstr "Klavioù Last.fm"
-
-#: ../bin/src/ui_lastfmsettingspage.h:151
-msgid "Last.fm username"
-msgstr "Anv implijer Last.fm"
 
 #: songinfo/lastfmtrackinfoprovider.cpp:110
 msgid "Last.fm wiki"
@@ -3037,7 +3041,7 @@ msgstr "Kargañ restroù pe liammoù internet, hag eilec'hiañ ar roll seniñ"
 #: ../bin/src/ui_soundcloudsettingspage.h:102
 #: ../bin/src/ui_spotifysettingspage.h:210
 #: ../bin/src/ui_subsonicsettingspage.h:129
-#: ../bin/src/ui_lastfmsettingspage.h:152
+#: ../bin/src/ui_lastfmsettingspage.h:132
 #: ../bin/src/ui_googledrivesettingspage.h:101
 #: ../bin/src/ui_dropboxsettingspage.h:101
 #: ../bin/src/ui_skydrivesettingspage.h:101
@@ -3150,7 +3154,7 @@ msgstr "Gra an dra-mañ !"
 msgid "Make playlist available offline"
 msgstr "Lakaat ar roll seniñ da vezañ lennus ezlinenn"
 
-#: internet/lastfm/lastfmservice.cpp:259
+#: internet/lastfm/lastfmservice.cpp:278
 msgid "Malformed response"
 msgstr "Respont furmed fall"
 
@@ -3359,7 +3363,7 @@ msgstr "Teuliad nevez"
 msgid "New playlist"
 msgstr "Roll seniñ nevez"
 
-#: library/libraryview.cpp:395
+#: library/libraryview.cpp:394
 msgid "New smart playlist..."
 msgstr "Roll seniñ speredek nevez..."
 
@@ -3422,7 +3426,7 @@ msgstr "Bloc'h berr ebet"
 msgid "None"
 msgstr "Hini ebet"
 
-#: library/libraryview.cpp:640 ui/mainwindow.cpp:2268 ui/mainwindow.cpp:2416
+#: library/libraryview.cpp:639 ui/mainwindow.cpp:2268 ui/mainwindow.cpp:2416
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Ton ebet eus ar reoù diuzet a oa mat evit bezañ kopiet war an drobarzhell"
 
@@ -3442,19 +3446,19 @@ msgstr "N'eus ket tu implij pa vez implijet ur roll seniñ dinamek"
 msgid "Not connected"
 msgstr "Digennasket"
 
-#: internet/lastfm/lastfmservice.cpp:250
+#: internet/lastfm/lastfmservice.cpp:269
 msgid "Not enough content"
 msgstr "N'eus ket trawalc'h a endalc'h"
 
-#: internet/lastfm/lastfmservice.cpp:254
+#: internet/lastfm/lastfmservice.cpp:273
 msgid "Not enough fans"
 msgstr "N'eus ket trawalc'h a fans"
 
-#: internet/lastfm/lastfmservice.cpp:252
+#: internet/lastfm/lastfmservice.cpp:271
 msgid "Not enough members"
 msgstr "N'eus ket izili a-walc'h"
 
-#: internet/lastfm/lastfmservice.cpp:256
+#: internet/lastfm/lastfmservice.cpp:275
 msgid "Not enough neighbors"
 msgstr "N'eus ket trawalc'h a amezeizen"
 
@@ -3584,7 +3588,7 @@ msgid "Open in Google Drive"
 msgstr "Digeriñ e-barzh Google Drive"
 
 #: devices/deviceview.cpp:224 globalsearch/globalsearchview.cpp:461
-#: internet/core/internetservice.cpp:105 library/libraryview.cpp:384
+#: internet/core/internetservice.cpp:105 library/libraryview.cpp:383
 #: widgets/fileviewlist.cpp:36
 msgid "Open in new playlist"
 msgstr "Digerin en ur roll seniñ nevez"
@@ -3603,7 +3607,7 @@ msgstr "Digeriñ en ho merdeer"
 msgid "Open..."
 msgstr "Digeriñ..."
 
-#: internet/lastfm/lastfmservice.cpp:236
+#: internet/lastfm/lastfmservice.cpp:255
 msgid "Operation failed"
 msgstr "Oberiadenn c'hwitet"
 
@@ -3629,7 +3633,7 @@ msgstr "Opus"
 msgid "Organise Files"
 msgstr "Aozañ ar restroù"
 
-#: library/libraryview.cpp:405 ui/mainwindow.cpp:676
+#: library/libraryview.cpp:404 ui/mainwindow.cpp:676
 msgid "Organise files..."
 msgstr "Aozañ ar restroù..."
 
@@ -3829,7 +3833,7 @@ msgstr "Gwellvezioù"
 #: ../bin/src/ui_digitallyimportedsettingspage.h:165
 #: ../bin/src/ui_magnatunesettingspage.h:165
 #: ../bin/src/ui_spotifysettingspage.h:215 ../bin/src/ui_settingsdialog.h:115
-#: ../bin/src/ui_lastfmsettingspage.h:154 ../bin/src/ui_vksettingspage.h:216
+#: ../bin/src/ui_lastfmsettingspage.h:134 ../bin/src/ui_vksettingspage.h:216
 msgid "Preferences"
 msgstr "Gwellvezioù"
 
@@ -3952,7 +3956,7 @@ msgstr "Merour listenn c'hortoz"
 msgid "Queue selected tracks"
 msgstr "Lakaat ar roudoù da heul"
 
-#: globalsearch/globalsearchview.cpp:466 library/libraryview.cpp:389
+#: globalsearch/globalsearchview.cpp:466 library/libraryview.cpp:388
 #: ui/mainwindow.cpp:1698
 msgid "Queue track"
 msgstr "Lakaat ar roud da heul"
@@ -4129,7 +4133,7 @@ msgid "Repeat track"
 msgstr "Adlenn an ton"
 
 #: devices/deviceview.cpp:221 globalsearch/globalsearchview.cpp:457
-#: internet/core/internetservice.cpp:93 library/libraryview.cpp:381
+#: internet/core/internetservice.cpp:93 library/libraryview.cpp:380
 #: widgets/fileviewlist.cpp:34
 msgid "Replace current playlist"
 msgstr "Eillec'hiañ ar roll seniñ lennet"
@@ -4312,7 +4316,7 @@ msgstr "Cheñch ar ment"
 msgid "Score"
 msgstr "Poentoù"
 
-#: ../bin/src/ui_lastfmsettingspage.h:155
+#: ../bin/src/ui_lastfmsettingspage.h:135
 msgid "Scrobble tracks that I listen to"
 msgstr "Scrobble ar roudoù selaouet ganin"
 
@@ -4465,7 +4469,7 @@ msgstr "URL ar servijer"
 msgid "Server details"
 msgstr "Munudoù ar servijer"
 
-#: internet/lastfm/lastfmservice.cpp:242
+#: internet/lastfm/lastfmservice.cpp:261
 msgid "Service offline"
 msgstr "Servij ezlinenn"
 
@@ -4569,7 +4573,7 @@ msgstr "Diskouez er ment gwirion..."
 msgid "Show groups in global search result"
 msgstr "Diskouez ar strolladoù e disoc'hoù an enklask hollek"
 
-#: library/libraryview.cpp:423 ui/mainwindow.cpp:686
+#: library/libraryview.cpp:422 ui/mainwindow.cpp:686
 #: widgets/fileviewlist.cpp:53
 msgid "Show in file browser..."
 msgstr "Diskouez er merdeer retroù"
@@ -4578,7 +4582,7 @@ msgstr "Diskouez er merdeer retroù"
 msgid "Show in library..."
 msgstr "Diskouez er sonaoueg"
 
-#: library/libraryview.cpp:426
+#: library/libraryview.cpp:425
 msgid "Show in various artists"
 msgstr "Diskouez e \"Arzourien Liesseurt\""
 
@@ -4602,11 +4606,11 @@ msgstr "Diskouez an ton o vezañ lennet war ho bajenn"
 msgid "Show search suggestions"
 msgstr "Diskouez alioù enklask."
 
-#: ../bin/src/ui_lastfmsettingspage.h:156
+#: ../bin/src/ui_lastfmsettingspage.h:136
 msgid "Show the \"love\" button"
 msgstr "Diskouez ar bouton \"karout\""
 
-#: ../bin/src/ui_lastfmsettingspage.h:157
+#: ../bin/src/ui_lastfmsettingspage.h:137
 msgid "Show the scrobble button in the main window"
 msgstr "Diskouez ar bouton scrobbling er prenestr pennañ"
 
@@ -5003,7 +5007,7 @@ msgid ""
 "rescan because of the new features listed below:"
 msgstr "Handelv nevez Clementine a c'houlenn ma vefe hizivaet ho sonaoueg evit kemer e kont an arc'hweladurioù a-zeu :"
 
-#: library/libraryview.cpp:562
+#: library/libraryview.cpp:561
 msgid "There are other songs in this album"
 msgstr "Tonioù all a zo en album-mañ"
 
@@ -5039,7 +5043,7 @@ msgid ""
 "continue?"
 msgstr "Ar restroù-mañ a vo diverket eus an drobarzhell, sur oc'h da gaout c'hoant kenderc'hel ?"
 
-#: library/libraryview.cpp:646 ui/mainwindow.cpp:2318 widgets/fileview.cpp:187
+#: library/libraryview.cpp:645 ui/mainwindow.cpp:2318 widgets/fileview.cpp:187
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -5110,7 +5114,7 @@ msgstr "Ar wech kentañ eo e liammit un drobarzhell-mañ. Clementine a skanno an
 msgid "This option can be changed in the \"Behavior\" preferences"
 msgstr "Ar arventenn-mañ a c'hell bezañ kemmet e rann \"Emzalc'h\" ar gwellvezioù"
 
-#: internet/lastfm/lastfmservice.cpp:244
+#: internet/lastfm/lastfmservice.cpp:263
 msgid "This stream is for paid subscribers only"
 msgstr "Al lanv-mañ a zo evit an izili o deus paet."
 
@@ -5261,7 +5265,7 @@ msgid "Unknown content-type"
 msgstr "Doare endalc'h dianavezet"
 
 #: internet/digitally/digitallyimportedclient.cpp:74
-#: internet/lastfm/lastfmservice.cpp:263
+#: internet/lastfm/lastfmservice.cpp:282
 msgid "Unknown error"
 msgstr "Kudenn dianav"
 
@@ -5328,7 +5332,7 @@ msgstr "O hizivaat ar sonaoueg"
 msgid "Usage"
 msgstr "Implij"
 
-#: ../bin/src/ui_lastfmsettingspage.h:158
+#: ../bin/src/ui_lastfmsettingspage.h:138
 msgid "Use Album Artist tag when available"
 msgstr "Implij klav arzour an albom pa vez tu"
 
@@ -5581,7 +5585,7 @@ msgstr "ausio Windows Media"
 msgid "Without cover:"
 msgstr "Hep golo:"
 
-#: library/libraryview.cpp:563
+#: library/libraryview.cpp:562
 msgid ""
 "Would you like to move the other songs in this album to Various Artists as "
 "well?"
@@ -5718,7 +5722,7 @@ msgstr "Ezhomm a vo adloc'hañ Clementine ma cheñchit ar yezh."
 msgid "Your IP address:"
 msgstr "Ho chomlec'h IP a zo :"
 
-#: internet/lastfm/lastfmsettingspage.cpp:80
+#: internet/lastfm/lastfmsettingspage.cpp:93
 msgid "Your Last.fm credentials were incorrect"
 msgstr "Hoc'h aotreoù arveriad evit Last.fm a zo direizh."
 
@@ -5726,7 +5730,7 @@ msgstr "Hoc'h aotreoù arveriad evit Last.fm a zo direizh."
 msgid "Your Magnatune credentials were incorrect"
 msgstr "Hoc'h aotreoù arveriad evit Magnatune a zo direizh."
 
-#: library/libraryview.cpp:353
+#: library/libraryview.cpp:352
 msgid "Your library is empty!"
 msgstr "Ho sonaoueg a zo goullo !"
 
