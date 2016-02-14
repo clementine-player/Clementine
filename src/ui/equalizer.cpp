@@ -28,8 +28,8 @@
 #include "widgets/equalizerslider.h"
 
 // We probably don't need to translate these, right?
-const char* Equalizer::kGainText[] = {"60", "170", "310", "600", "1k",
-                                      "3k", "6k",  "12k", "14k", "16k"};
+const char* Equalizer::kGainText[] = {"31.5", "63", "125", "250", "500",
+                                      "1k",   "2k", "4k",  "8k",  "16k"};
 
 const char* Equalizer::kSettingsGroup = "Equalizer";
 
@@ -39,7 +39,8 @@ Equalizer::Equalizer(QWidget* parent)
 
   // Icons
   ui_->preset_del->setIcon(IconLoader::Load("list-remove", IconLoader::Base));
-  ui_->preset_save->setIcon(IconLoader::Load("document-save", IconLoader::Base));
+  ui_->preset_save->setIcon(
+      IconLoader::Load("document-save", IconLoader::Base));
 
   preamp_ = AddSlider(tr("Pre-amp"));
 

@@ -171,7 +171,7 @@ signals:
   static const int kGstStateTimeoutNanosecs;
   static const int kFaderFudgeMsec;
   static const int kEqBandCount;
-  static const int kEqBandFrequencies[];
+  static const float kEqBandFrequencies[];
 
   static GstElementDeleter* sElementDeleter;
 
