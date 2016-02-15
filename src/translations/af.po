@@ -12,7 +12,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2016-02-03 14:58+0000\n"
+"PO-Revision-Date: 2016-02-10 16:08+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Afrikaans (http://www.transifex.com/davidsansome/clementine/language/af/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -78,6 +78,12 @@ msgstr "%1 (%2 liedjies)"
 msgid "%1 albums"
 msgstr "%1 albums"
 
+#: widgets/equalizerslider.cpp:29 widgets/equalizerslider.cpp:31
+#: widgets/equalizerslider.cpp:43
+#, qt-format
+msgid "%1 dB"
+msgstr ""
+
 #: core/utilities.cpp:120
 #, qt-format
 msgid "%1 days"
@@ -128,7 +134,7 @@ msgstr "%1 liedjies gevind (%2 word getoon)"
 msgid "%1 tracks"
 msgstr "%1 snitte"
 
-#: ui/albumcovermanager.cpp:466
+#: ui/albumcovermanager.cpp:469
 #, qt-format
 msgid "%1 transferred"
 msgstr "%1 oorgedra"
@@ -248,7 +254,7 @@ msgstr "&Gereedskap"
 msgid "(different across multiple songs)"
 msgstr "(verskillend tussen meervuldige liedjies)"
 
-#: internet/spotify/spotifyservice.cpp:468
+#: internet/spotify/spotifyservice.cpp:469
 msgid ", by "
 msgstr ", deur"
 
@@ -398,7 +404,7 @@ msgstr "AIFF"
 msgid "ALL GLORY TO THE HYPNOTOAD"
 msgstr "Alle glorie aan die HYPNOTOAD"
 
-#: ui/albumcovermanager.cpp:111 ui/albumcoversearcher.cpp:158
+#: ui/albumcovermanager.cpp:114 ui/albumcoversearcher.cpp:158
 msgid "Abort"
 msgstr "Staak"
 
@@ -475,7 +481,7 @@ msgstr "Voeg nog 'n stroom by..."
 msgid "Add directory..."
 msgstr "Voeg gids by..."
 
-#: ui/mainwindow.cpp:1954
+#: ui/mainwindow.cpp:1978
 msgid "Add file"
 msgstr "Voeg lêer by"
 
@@ -495,7 +501,7 @@ msgstr "Voeg lêer by..."
 msgid "Add files to transcode"
 msgstr "Voeg lêers by om te transkodeer"
 
-#: transcoder/transcodedialog.cpp:306 ui/mainwindow.cpp:1981
+#: transcoder/transcodedialog.cpp:306 ui/mainwindow.cpp:2005
 #: ripper/ripcddialog.cpp:185
 msgid "Add folder"
 msgstr "Voeg gids by"
@@ -604,15 +610,15 @@ msgstr "Voeg stroom by..."
 msgid "Add to My Music"
 msgstr "Voeg tot My Music"
 
-#: internet/spotify/spotifyservice.cpp:621
+#: internet/spotify/spotifyservice.cpp:623
 msgid "Add to Spotify playlists"
 msgstr "Voeg tot Spotify speellyste by"
 
-#: internet/spotify/spotifyservice.cpp:613
+#: internet/spotify/spotifyservice.cpp:615
 msgid "Add to Spotify starred"
 msgstr "Voeg by Spotify gester"
 
-#: ui/mainwindow.cpp:1775
+#: ui/mainwindow.cpp:1800
 msgid "Add to another playlist"
 msgstr "Voeg tot 'n ander speellys by"
 
@@ -702,11 +708,11 @@ msgstr "Album se inligting op jamendo.com..."
 msgid "Albums"
 msgstr "Albums"
 
-#: ui/albumcovermanager.cpp:135
+#: ui/albumcovermanager.cpp:138
 msgid "Albums with covers"
 msgstr "Albums met omslae"
 
-#: ui/albumcovermanager.cpp:136
+#: ui/albumcovermanager.cpp:139
 msgid "Albums without covers"
 msgstr "Albums sonder omslae"
 
@@ -723,11 +729,11 @@ msgctxt "Label for button to enable/disable Hypnotoad background sound."
 msgid "All Glory to the Hypnotoad!"
 msgstr "Alle heil aan die Hypnotoad!"
 
-#: ui/albumcovermanager.cpp:134
+#: ui/albumcovermanager.cpp:137
 msgid "All albums"
 msgstr "Alle albums"
 
-#: ui/albumcovermanager.cpp:268
+#: ui/albumcovermanager.cpp:271
 msgid "All artists"
 msgstr "Alle kunstenaars"
 
@@ -791,7 +797,7 @@ msgstr "'n Ekstra uitbreiding word benodig om Spotify in Clementine te gebruik. 
 msgid "An error occurred loading the iTunes database"
 msgstr "'n Fout het plaasgevind tydens die laai van die iTunes-databasis"
 
-#: playlist/playlist.cpp:423 ui/edittagdialog.cpp:695
+#: playlist/playlist.cpp:423 ui/edittagdialog.cpp:703
 #, qt-format
 msgid "An error occurred writing metadata to '%1'"
 msgstr "'n Fout het plaasgevind tydens die skryf van metadata na '%1'"
@@ -819,7 +825,7 @@ msgid "Append files/URLs to the playlist"
 msgstr "Voeg lêers/URLs by die speellys by"
 
 #: devices/deviceview.cpp:218 globalsearch/globalsearchview.cpp:453
-#: internet/core/internetservice.cpp:81 library/libraryview.cpp:377
+#: internet/core/internetservice.cpp:48 library/libraryview.cpp:378
 #: widgets/fileviewlist.cpp:31
 msgid "Append to current playlist"
 msgstr "Voeg by huidige speellys by"
@@ -837,7 +843,7 @@ msgstr "Doen kompressie om afkapping te voorkom"
 msgid "Are you sure you want to delete the \"%1\" preset?"
 msgstr "Is jy seker jy wil die \"%1\" opstellingspatroon verwyder?"
 
-#: ui/edittagdialog.cpp:795
+#: ui/edittagdialog.cpp:803
 msgid "Are you sure you want to reset this song's statistics?"
 msgstr "Is jy seker jy wil die liedjie se statistiek herstel?"
 
@@ -856,7 +862,7 @@ msgstr "Is jy seker dat jy die liedjie se statestiek in die liedjie se lêer wil
 msgid "Artist"
 msgstr "Kunstenaar"
 
-#: ui/mainwindow.cpp:258
+#: ui/mainwindow.cpp:286
 msgid "Artist info"
 msgstr "Kunstenaar informasie"
 
@@ -884,7 +890,7 @@ msgstr "Oudio uitset"
 
 #: internet/digitally/digitallyimportedsettingspage.cpp:82
 #: internet/magnatune/magnatunesettingspage.cpp:117
-#: internet/lastfm/lastfmservice.cpp:247
+#: internet/lastfm/lastfmservice.cpp:249
 #: internet/lastfm/lastfmsettingspage.cpp:97
 msgid "Authentication failed"
 msgstr "Aanteken onsuksesvol"
@@ -1139,7 +1145,7 @@ msgstr "Soek vir nuwe episodes"
 msgid "Check for updates"
 msgstr "Kyk vir nuwer weergawes"
 
-#: ui/mainwindow.cpp:781
+#: ui/mainwindow.cpp:806
 msgid "Check for updates..."
 msgstr "Kyk vir nuwer weergawes..."
 
@@ -1279,7 +1285,7 @@ msgstr "Clementine sal musiek vind in:"
 msgid "Click Ok once you authenticated Clementine in your last.fm account."
 msgstr ""
 
-#: library/libraryview.cpp:358
+#: library/libraryview.cpp:359
 msgid "Click here to add some music"
 msgstr "Kliek hier om musiek by te voeg"
 
@@ -1320,7 +1326,7 @@ msgstr "Maak visualisasie toe"
 msgid "Closing this window will cancel the download."
 msgstr "Die aflaai sal stop as hierdie venster toegemaak word."
 
-#: ui/albumcovermanager.cpp:219
+#: ui/albumcovermanager.cpp:222
 msgid "Closing this window will stop searching for album covers."
 msgstr "Die soek vir album-omslae sal stop as hierdie venster toegemaak word."
 
@@ -1377,7 +1383,7 @@ msgstr "Stel snelskakels op"
 msgid "Configure SoundCloud..."
 msgstr ""
 
-#: internet/spotify/spotifyservice.cpp:919
+#: internet/spotify/spotifyservice.cpp:921
 msgid "Configure Spotify..."
 msgstr "Stel Spotify op..."
 
@@ -1393,7 +1399,7 @@ msgstr "Stel VK.com op..."
 msgid "Configure global search..."
 msgstr "Globale soek instellings..."
 
-#: ui/mainwindow.cpp:631
+#: ui/mainwindow.cpp:656
 msgid "Configure library..."
 msgstr "Stel my versameling op..."
 
@@ -1464,16 +1470,16 @@ msgstr "Omskep verlieslose lêers"
 msgid "Copy share url to clipboard"
 msgstr "Kopieër die deel URL na die klipbord"
 
-#: internet/core/internetservice.cpp:57
+#: internet/core/internetservice.cpp:79
 msgid "Copy to clipboard"
 msgstr "Kopiëer na knipbord"
 
-#: library/libraryview.cpp:408 internet/podcasts/podcastservice.cpp:438
-#: ui/mainwindow.cpp:680 widgets/fileviewlist.cpp:44
+#: library/libraryview.cpp:409 internet/podcasts/podcastservice.cpp:438
+#: ui/mainwindow.cpp:705 widgets/fileviewlist.cpp:44
 msgid "Copy to device..."
 msgstr "Kopiëer na die toestel..."
 
-#: devices/deviceview.cpp:228 ui/mainwindow.cpp:670
+#: devices/deviceview.cpp:228 ui/mainwindow.cpp:695
 #: widgets/fileviewlist.cpp:40
 msgid "Copy to library..."
 msgstr "Kopiëer na my versameling"
@@ -1525,24 +1531,24 @@ msgstr "Kan nie die uittreelêer %1 oopmaak nie"
 msgid "Cover Manager"
 msgstr "Omslagbestuurder"
 
-#: ui/edittagdialog.cpp:476
+#: ui/edittagdialog.cpp:484
 msgid "Cover art from embedded image"
 msgstr "Omslag van ingeslote beeld"
 
-#: ui/edittagdialog.cpp:479
+#: ui/edittagdialog.cpp:487
 #, qt-format
 msgid "Cover art loaded automatically from %1"
 msgstr "Omslag outomaties gelaai vanaf %1"
 
-#: ui/edittagdialog.cpp:471
+#: ui/edittagdialog.cpp:479
 msgid "Cover art manually unset"
 msgstr "Omslag per hand onstel"
 
-#: ui/edittagdialog.cpp:481
+#: ui/edittagdialog.cpp:489
 msgid "Cover art not set"
 msgstr "Geen omslag"
 
-#: ui/edittagdialog.cpp:474
+#: ui/edittagdialog.cpp:482
 #, qt-format
 msgid "Cover art set from %1"
 msgstr "Omslag gestel vanaf %1"
@@ -1657,8 +1663,8 @@ msgstr "Skrap"
 msgid "Delete downloaded data"
 msgstr "Vee afgelaaide data uit"
 
-#: devices/deviceview.cpp:408 library/libraryview.cpp:644
-#: ui/mainwindow.cpp:2317 widgets/fileview.cpp:186
+#: devices/deviceview.cpp:408 library/libraryview.cpp:645
+#: ui/mainwindow.cpp:2324 widgets/fileview.cpp:186
 msgid "Delete files"
 msgstr "Skrap lêers"
 
@@ -1666,7 +1672,7 @@ msgstr "Skrap lêers"
 msgid "Delete from device..."
 msgstr "Skrap van toestel..."
 
-#: library/libraryview.cpp:410 ui/mainwindow.cpp:683
+#: library/libraryview.cpp:411 ui/mainwindow.cpp:708
 #: widgets/fileviewlist.cpp:47
 msgid "Delete from disk..."
 msgstr "Skrap van skyf..."
@@ -1679,7 +1685,7 @@ msgstr "Vee gespeelde episodes uit"
 msgid "Delete preset"
 msgstr "Skrap voorafinstelling"
 
-#: library/libraryview.cpp:400
+#: library/libraryview.cpp:401
 msgid "Delete smart playlist"
 msgstr "Skrap slimspeellys"
 
@@ -1691,11 +1697,11 @@ msgstr "Skrap die oorspronklike lêers"
 msgid "Deleting files"
 msgstr "Lêers word geskrap"
 
-#: ui/mainwindow.cpp:1696
+#: ui/mainwindow.cpp:1721
 msgid "Dequeue selected tracks"
 msgstr "Verwyder gekose snitte uit die tou"
 
-#: ui/mainwindow.cpp:1694
+#: ui/mainwindow.cpp:1719
 msgid "Dequeue track"
 msgstr "Verwyder snit uit die tou"
 
@@ -1724,7 +1730,7 @@ msgstr "Toestelsnaam"
 msgid "Device properties..."
 msgstr "Toestelseienskappe..."
 
-#: ui/mainwindow.cpp:251
+#: ui/mainwindow.cpp:279
 msgid "Devices"
 msgstr "Toestelle"
 
@@ -1828,7 +1834,7 @@ msgstr "As jy in geheel nagaan, sal jy al die metadata wat jy in Clementine gest
 msgid "Don't repeat"
 msgstr "Moenie herhaal nie"
 
-#: library/libraryview.cpp:428
+#: library/libraryview.cpp:429
 msgid "Don't show in various artists"
 msgstr "Moenie onder verskeie kunstenaars wys nie"
 
@@ -1841,7 +1847,7 @@ msgid "Don't shuffle"
 msgstr "Moenie skommel nie"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:312
-#: ui/albumcovermanager.cpp:221
+#: ui/albumcovermanager.cpp:224
 msgid "Don't stop!"
 msgstr "Moenie stop nie!"
 
@@ -1938,7 +1944,7 @@ msgstr "Laai Spotify uitbreiding af"
 msgid "Downloading metadata"
 msgstr "Laai metadata af"
 
-#: ui/notificationssettingspage.cpp:36
+#: ui/notificationssettingspage.cpp:38
 msgid "Drag to reposition"
 msgstr "Sleep om te skuif"
 
@@ -1962,11 +1968,11 @@ msgstr "Tans in dinamiese modus"
 msgid "Dynamic random mix"
 msgstr "Dinamiese skommeling"
 
-#: library/libraryview.cpp:397
+#: library/libraryview.cpp:398
 msgid "Edit smart playlist..."
 msgstr "Verander slimspeellys"
 
-#: ui/mainwindow.cpp:1738
+#: ui/mainwindow.cpp:1763
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr "Verander etiket \"%1\"..."
@@ -1983,12 +1989,12 @@ msgstr "Verander etikette"
 msgid "Edit track information"
 msgstr "Verander snit se inligting"
 
-#: library/libraryview.cpp:415 widgets/fileviewlist.cpp:51
+#: library/libraryview.cpp:416 widgets/fileviewlist.cpp:51
 #: ../bin/src/ui_mainwindow.h:669
 msgid "Edit track information..."
 msgstr "Verander snit se inligting..."
 
-#: library/libraryview.cpp:418
+#: library/libraryview.cpp:419
 msgid "Edit tracks information..."
 msgstr "Verander snitte se inligting"
 
@@ -2105,8 +2111,8 @@ msgid "Equivalent to --log-levels *:3"
 msgstr "Ekwivalent aan --log-levels *:3"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:246
-#: library/libraryview.cpp:638 ui/mainwindow.cpp:2020 ui/mainwindow.cpp:2267
-#: ui/mainwindow.cpp:2415 internet/vk/vkservice.cpp:643
+#: library/libraryview.cpp:639 ui/mainwindow.cpp:2034 ui/mainwindow.cpp:2276
+#: ui/mainwindow.cpp:2422 internet/vk/vkservice.cpp:643
 msgid "Error"
 msgstr "Fout"
 
@@ -2214,11 +2220,11 @@ msgstr "Voer afgelaaide omslae uit"
 msgid "Export embedded covers"
 msgstr "Voer ingeslote omslae uit"
 
-#: ui/albumcovermanager.cpp:785 ui/albumcovermanager.cpp:809
+#: ui/albumcovermanager.cpp:788 ui/albumcovermanager.cpp:812
 msgid "Export finished"
 msgstr "Uitvoer voltooid"
 
-#: ui/albumcovermanager.cpp:794
+#: ui/albumcovermanager.cpp:797
 #, qt-format
 msgid "Exported %1 covers out of %2 (%3 skipped)"
 msgstr "%1 omslae uit %2 uitgevoer (%3 gespring)"
@@ -2246,7 +2252,7 @@ msgstr "Uitdowing"
 msgid "Fading duration"
 msgstr "Duur van uitdowing"
 
-#: ui/mainwindow.cpp:2021
+#: ui/mainwindow.cpp:2035
 msgid "Failed reading CD drive"
 msgstr "Kan nie van die CD-dryf lees nie"
 
@@ -2351,7 +2357,7 @@ msgstr "Lêertipe"
 msgid "Filename"
 msgstr "Lêernaam"
 
-#: ui/mainwindow.cpp:241
+#: ui/mainwindow.cpp:269
 msgid "Files"
 msgstr "Lêers"
 
@@ -2416,7 +2422,7 @@ msgstr "Deur van 'n toestel te vergeet sal dit uit hierdie lys verwyder word. Cl
 #: ../bin/src/ui_internetviewcontainer.h:70 ../bin/src/ui_searchboxwidget.h:61
 #: ../bin/src/ui_libraryfilterwidget.h:91
 #: ../bin/src/ui_libraryviewcontainer.h:58
-#: ../bin/src/ui_playlistcontainer.h:142
+#: ../bin/src/ui_playlistcontainer.h:134
 #: ../bin/src/ui_playlistlistcontainer.h:125
 #: ../bin/src/ui_podcastinfowidget.h:190 ../bin/src/ui_querysearchpage.h:111
 #: ../bin/src/ui_querysortpage.h:136 ../bin/src/ui_searchpreview.h:103
@@ -2428,7 +2434,7 @@ msgstr "Deur van 'n toestel te vergeet sal dit uit hierdie lys verwyder word. Cl
 #: ../bin/src/ui_transcoderoptionsopus.h:78
 #: ../bin/src/ui_transcoderoptionsspeex.h:215
 #: ../bin/src/ui_transcoderoptionsvorbis.h:200
-#: ../bin/src/ui_transcoderoptionswma.h:77 ../bin/src/ui_equalizerslider.h:82
+#: ../bin/src/ui_transcoderoptionswma.h:77 ../bin/src/ui_equalizerslider.h:98
 #: ../bin/src/ui_fileview.h:106 ../bin/src/ui_loginstatewidget.h:167
 #: ../bin/src/ui_trackslider.h:68 ../bin/src/ui_visualisationoverlay.h:181
 msgid "Form"
@@ -2482,12 +2488,12 @@ msgstr "Algemene instellings"
 msgid "Genre"
 msgstr "Genre"
 
-#: internet/spotify/spotifyservice.cpp:637
-#: internet/spotify/spotifyservice.cpp:681
+#: internet/spotify/spotifyservice.cpp:639
+#: internet/spotify/spotifyservice.cpp:683
 msgid "Get a URL to share this Spotify song"
 msgstr "Kry 'n URL om hierdie Spotify lied te deel"
 
-#: internet/spotify/spotifyservice.cpp:669
+#: internet/spotify/spotifyservice.cpp:671
 msgid "Get a URL to share this playlist"
 msgstr "Kry 'n URL om hierdie snitlys te deel"
 
@@ -2519,7 +2525,7 @@ msgstr "Gaan na vorige speellys oortjie"
 msgid "Google Drive"
 msgstr "Google Drive"
 
-#: covers/coversearchstatisticsdialog.cpp:53 ui/albumcovermanager.cpp:460
+#: covers/coversearchstatisticsdialog.cpp:53 ui/albumcovermanager.cpp:463
 #: ../bin/src/ui_coversearchstatisticsdialog.h:75
 #, qt-format
 msgid "Got %1 covers out of %2 (%3 failed)"
@@ -2639,7 +2645,7 @@ msgstr "Ek het nie 'n Magnatune rekening nie"
 msgid "Icon"
 msgstr "Ikoon"
 
-#: widgets/fancytabwidget.cpp:666
+#: widgets/fancytabwidget.cpp:646
 msgid "Icons on top"
 msgstr "Ikone bo"
 
@@ -2691,7 +2697,7 @@ msgid ""
 "time a song finishes."
 msgstr "In dinamiese modus sal nuwe snitte gekies en bygevoeg word by die speellys elke keer as 'n liedjie klaarmaak."
 
-#: internet/spotify/spotifyservice.cpp:424
+#: internet/spotify/spotifyservice.cpp:425
 msgid "Inbox"
 msgstr "Posbus"
 
@@ -2752,7 +2758,7 @@ msgstr "Geïnstalleer"
 msgid "Integrity check"
 msgstr "Integriteitstoets"
 
-#: ui/mainwindow.cpp:247
+#: ui/mainwindow.cpp:275
 msgid "Internet"
 msgstr "Internet"
 
@@ -2769,31 +2775,31 @@ msgstr "Internet dienste"
 msgid "Intro tracks"
 msgstr ""
 
-#: internet/lastfm/lastfmservice.cpp:259
+#: internet/lastfm/lastfmservice.cpp:261
 msgid "Invalid API key"
 msgstr "Ongeldige API sleutel"
 
-#: internet/lastfm/lastfmservice.cpp:249
+#: internet/lastfm/lastfmservice.cpp:251
 msgid "Invalid format"
 msgstr "Ongeldige formaat"
 
-#: internet/lastfm/lastfmservice.cpp:245
+#: internet/lastfm/lastfmservice.cpp:247
 msgid "Invalid method"
 msgstr "Ongeldige metode"
 
-#: internet/lastfm/lastfmservice.cpp:251
+#: internet/lastfm/lastfmservice.cpp:253
 msgid "Invalid parameters"
 msgstr "Ongeldige parameters"
 
-#: internet/lastfm/lastfmservice.cpp:253
+#: internet/lastfm/lastfmservice.cpp:255
 msgid "Invalid resource specified"
 msgstr "Ongeldige bron gespesifiseer"
 
-#: internet/lastfm/lastfmservice.cpp:243
+#: internet/lastfm/lastfmservice.cpp:245
 msgid "Invalid service"
 msgstr "Ongeldige diens"
 
-#: internet/lastfm/lastfmservice.cpp:257
+#: internet/lastfm/lastfmservice.cpp:259
 msgid "Invalid session key"
 msgstr "Ongeldige sessiesleutel"
 
@@ -2886,7 +2892,7 @@ msgstr "Groot album omslag (besonderhede benede)"
 msgid "Large album cover (no details)"
 msgstr "Groot album omslag (geen besonderhede)"
 
-#: widgets/fancytabwidget.cpp:662
+#: widgets/fancytabwidget.cpp:642
 msgid "Large sidebar"
 msgstr "Groot kantlyn-kieslys"
 
@@ -2911,7 +2917,7 @@ msgstr ""
 msgid "Last.fm authentication failed"
 msgstr ""
 
-#: internet/lastfm/lastfmservice.cpp:266
+#: internet/lastfm/lastfmservice.cpp:268
 msgid "Last.fm is currently busy, please try again in a few minutes"
 msgstr "Last.fm is tans besig. Probeer asseblief later weer."
 
@@ -2940,7 +2946,7 @@ msgstr "Links"
 msgid "Length"
 msgstr "Lengte"
 
-#: ui/mainwindow.cpp:223 ui/mainwindow.cpp:238
+#: ui/mainwindow.cpp:251 ui/mainwindow.cpp:266
 #: ../bin/src/ui_seafilesettingspage.h:177
 msgid "Library"
 msgstr "Versameling"
@@ -2949,7 +2955,7 @@ msgstr "Versameling"
 msgid "Library advanced grouping"
 msgstr "Gevorderde groeppering van versameling"
 
-#: ui/mainwindow.cpp:2539
+#: ui/mainwindow.cpp:2514
 msgid "Library rescan notice"
 msgstr "Versameling hernagaan kennisgewing"
 
@@ -2985,7 +2991,7 @@ msgstr "Laai omslag vanaf skyf"
 msgid "Load cover from disk..."
 msgstr "Verkry omslag van skyf..."
 
-#: playlist/playlistcontainer.cpp:291
+#: playlist/playlistcontainer.cpp:294
 msgid "Load playlist"
 msgstr "Laai speellys"
 
@@ -3005,7 +3011,7 @@ msgstr "iPod databasis word gelaai"
 msgid "Loading smart playlist"
 msgstr "Slimspeellys word gelaai"
 
-#: library/librarymodel.cpp:167
+#: library/librarymodel.cpp:169
 msgid "Loading songs"
 msgstr "Liedjies word gelaai"
 
@@ -3014,7 +3020,7 @@ msgstr "Liedjies word gelaai"
 msgid "Loading stream"
 msgstr "Stroom word gelaai"
 
-#: playlist/songloaderinserter.cpp:129 ui/edittagdialog.cpp:247
+#: playlist/songloaderinserter.cpp:129 ui/edittagdialog.cpp:251
 msgid "Loading tracks"
 msgstr "Snitte word gelaai"
 
@@ -3022,7 +3028,7 @@ msgstr "Snitte word gelaai"
 msgid "Loading tracks info"
 msgstr "Snitinligting word gelaai"
 
-#: library/librarymodel.cpp:162
+#: library/librarymodel.cpp:164
 #: internet/podcasts/podcastdiscoverymodel.cpp:105 widgets/prettyimage.cpp:161
 #: widgets/widgetfadehelper.cpp:96 internet/vk/vkservice.cpp:513
 #: internet/vk/vksettingspage.cpp:125 ../bin/src/ui_addpodcastdialog.h:179
@@ -3149,11 +3155,11 @@ msgctxt "Label for button to enable/disable Enterprise background sound."
 msgid "Make it so!"
 msgstr "Maak dit so!"
 
-#: internet/spotify/spotifyservice.cpp:667
+#: internet/spotify/spotifyservice.cpp:669
 msgid "Make playlist available offline"
 msgstr "Maak speellys beskikbaar indien van lyn af"
 
-#: internet/lastfm/lastfmservice.cpp:278
+#: internet/lastfm/lastfmservice.cpp:280
 msgid "Malformed response"
 msgstr "Misvormde antwoord"
 
@@ -3278,7 +3284,7 @@ msgstr "Monteringsadresse"
 msgid "Move down"
 msgstr "Skuid af"
 
-#: ui/mainwindow.cpp:673 widgets/fileviewlist.cpp:42
+#: ui/mainwindow.cpp:698 widgets/fileviewlist.cpp:42
 msgid "Move to library..."
 msgstr "Skuif na my versameling..."
 
@@ -3287,7 +3293,7 @@ msgstr "Skuif na my versameling..."
 msgid "Move up"
 msgstr "Skuid op"
 
-#: transcoder/transcodedialog.cpp:225 ui/mainwindow.cpp:1955
+#: transcoder/transcodedialog.cpp:225 ui/mainwindow.cpp:1979
 #: internet/vk/vkservice.cpp:908
 msgid "Music"
 msgstr "Musiek"
@@ -3339,7 +3345,7 @@ msgstr "Instaanbediener"
 msgid "Network Remote"
 msgstr "Netwerk-afstandbeheer"
 
-#: playlist/playlistdelegates.cpp:295 ui/edittagdialog.cpp:523
+#: playlist/playlistdelegates.cpp:295 ui/edittagdialog.cpp:531
 msgid "Never"
 msgstr "Nooit"
 
@@ -3358,11 +3364,11 @@ msgstr "Moet nooit begin speel nie"
 msgid "New folder"
 msgstr "Nuwe gids"
 
-#: ui/mainwindow.cpp:1792 ../bin/src/ui_mainwindow.h:693
+#: ui/mainwindow.cpp:1817 ../bin/src/ui_mainwindow.h:693
 msgid "New playlist"
 msgstr "Nuwe speellys"
 
-#: library/libraryview.cpp:394
+#: library/libraryview.cpp:395
 msgid "New smart playlist..."
 msgstr "Nuwe slimspeellys"
 
@@ -3382,7 +3388,7 @@ msgstr ""
 msgid "Newest tracks"
 msgstr "Nuutste snitte"
 
-#: ui/edittagdialog.cpp:168 ui/trackselectiondialog.cpp:49
+#: ui/edittagdialog.cpp:172 ui/trackselectiondialog.cpp:49
 msgid "Next"
 msgstr "Volgende"
 
@@ -3403,7 +3409,7 @@ msgstr "Geen analiseerder"
 msgid "No background image"
 msgstr "Geen agtergrond prentjie"
 
-#: ui/albumcovermanager.cpp:786
+#: ui/albumcovermanager.cpp:789
 msgid "No covers to export."
 msgstr "Geen omslae om uit te voer nie"
 
@@ -3411,7 +3417,7 @@ msgstr "Geen omslae om uit te voer nie"
 msgid "No long blocks"
 msgstr "Geen lang blokke"
 
-#: playlist/playlistcontainer.cpp:376
+#: playlist/playlistcontainer.cpp:379
 msgid ""
 "No matches found.  Clear the search box to show the whole playlist again."
 msgstr "Geen gevind.  Vee soekveld uit om hele speellys te toon."
@@ -3425,7 +3431,7 @@ msgstr "Geen kort blokke"
 msgid "None"
 msgstr "Geen"
 
-#: library/libraryview.cpp:639 ui/mainwindow.cpp:2268 ui/mainwindow.cpp:2416
+#: library/libraryview.cpp:640 ui/mainwindow.cpp:2277 ui/mainwindow.cpp:2423
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Geen van die gekose liedjies is geskik om na die toestel te kopiëer nie."
 
@@ -3445,19 +3451,19 @@ msgstr "Nie beskibaar gedurende die gebruik van dinamies speellyste nie"
 msgid "Not connected"
 msgstr "Nie verbind"
 
-#: internet/lastfm/lastfmservice.cpp:269
+#: internet/lastfm/lastfmservice.cpp:271
 msgid "Not enough content"
 msgstr "Nie genoeg inhoud"
 
-#: internet/lastfm/lastfmservice.cpp:273
+#: internet/lastfm/lastfmservice.cpp:275
 msgid "Not enough fans"
 msgstr "Nie genoeg ondersteuners nie"
 
-#: internet/lastfm/lastfmservice.cpp:271
+#: internet/lastfm/lastfmservice.cpp:273
 msgid "Not enough members"
 msgstr "Nie genoeg lidmate nie"
 
-#: internet/lastfm/lastfmservice.cpp:275
+#: internet/lastfm/lastfmservice.cpp:277
 msgid "Not enough neighbors"
 msgstr "Nie genoeg bure nie"
 
@@ -3494,7 +3500,7 @@ msgstr "Aan die speel"
 msgid "Number of episodes to show"
 msgstr "Nommer van episodes om te wys"
 
-#: ui/notificationssettingspage.cpp:36
+#: ui/notificationssettingspage.cpp:38
 msgid "OSD Preview"
 msgstr "Skermbeeld voorskou"
 
@@ -3587,7 +3593,7 @@ msgid "Open in Google Drive"
 msgstr "Maak oop in Google Drive."
 
 #: devices/deviceview.cpp:224 globalsearch/globalsearchview.cpp:461
-#: internet/core/internetservice.cpp:105 library/libraryview.cpp:383
+#: internet/core/internetservice.cpp:62 library/libraryview.cpp:384
 #: widgets/fileviewlist.cpp:36
 msgid "Open in new playlist"
 msgstr "Maak in nuwe speellys oop"
@@ -3606,7 +3612,7 @@ msgstr "Maak in jou webblaaier oop"
 msgid "Open..."
 msgstr "Maak oop..."
 
-#: internet/lastfm/lastfmservice.cpp:255
+#: internet/lastfm/lastfmservice.cpp:257
 msgid "Operation failed"
 msgstr "Aksie gestop"
 
@@ -3632,7 +3638,7 @@ msgstr "Opus"
 msgid "Organise Files"
 msgstr "Sorteer Lêers"
 
-#: library/libraryview.cpp:404 ui/mainwindow.cpp:676
+#: library/libraryview.cpp:405 ui/mainwindow.cpp:701
 msgid "Organise files..."
 msgstr "Sorteer Lêers..."
 
@@ -3708,7 +3714,7 @@ msgstr "Partytjie"
 msgid "Password"
 msgstr "Wagwoord"
 
-#: core/globalshortcuts.cpp:50 ui/mainwindow.cpp:1107 ui/mainwindow.cpp:1603
+#: core/globalshortcuts.cpp:50 ui/mainwindow.cpp:1132 ui/mainwindow.cpp:1628
 #: ui/qtsystemtrayicon.cpp:175 wiimotedev/wiimotesettingspage.cpp:114
 msgid "Pause"
 msgstr "Vries"
@@ -3732,12 +3738,12 @@ msgstr "Kunstenaar"
 msgid "Pixel"
 msgstr "Pixel"
 
-#: widgets/fancytabwidget.cpp:664
+#: widgets/fancytabwidget.cpp:644
 msgid "Plain sidebar"
 msgstr "Gewone sykieslys"
 
-#: core/globalshortcuts.cpp:49 ui/mainwindow.cpp:648 ui/mainwindow.cpp:1073
-#: ui/mainwindow.cpp:1092 ui/mainwindow.cpp:1607 ui/qtsystemtrayicon.cpp:164
+#: core/globalshortcuts.cpp:49 ui/mainwindow.cpp:673 ui/mainwindow.cpp:1098
+#: ui/mainwindow.cpp:1117 ui/mainwindow.cpp:1632 ui/qtsystemtrayicon.cpp:164
 #: ui/qtsystemtrayicon.cpp:188 wiimotedev/wiimotesettingspage.cpp:107
 #: ../bin/src/ui_mainwindow.h:659
 msgid "Play"
@@ -3772,7 +3778,7 @@ msgstr "Terugspeel"
 msgid "Player options"
 msgstr "Speler keuses"
 
-#: playlist/playlistcontainer.cpp:287 playlist/playlistlistcontainer.cpp:228
+#: playlist/playlistcontainer.cpp:290 playlist/playlistlistcontainer.cpp:228
 #: playlist/playlistmanager.cpp:86 playlist/playlistmanager.cpp:155
 #: playlist/playlistmanager.cpp:495 playlist/playlisttabbar.cpp:366
 msgid "Playlist"
@@ -3791,7 +3797,7 @@ msgstr "Speellys keuses"
 msgid "Playlist type"
 msgstr "Speellys tipe"
 
-#: internet/soundcloud/soundcloudservice.cpp:132 ui/mainwindow.cpp:244
+#: internet/soundcloud/soundcloudservice.cpp:132 ui/mainwindow.cpp:272
 msgid "Playlists"
 msgstr "Speellys"
 
@@ -3891,7 +3897,7 @@ msgstr "Mooi skermbeeld keuses"
 msgid "Preview"
 msgstr "Voorskou"
 
-#: ui/edittagdialog.cpp:166 ui/trackselectiondialog.cpp:47
+#: ui/edittagdialog.cpp:170 ui/trackselectiondialog.cpp:47
 msgid "Previous"
 msgstr "Vorige"
 
@@ -3951,12 +3957,12 @@ msgstr "Toestel word ondervra..."
 msgid "Queue Manager"
 msgstr "Tou bestuurder"
 
-#: ui/mainwindow.cpp:1700
+#: ui/mainwindow.cpp:1725
 msgid "Queue selected tracks"
 msgstr "Plaas geselekteerde snitte in die tou"
 
-#: globalsearch/globalsearchview.cpp:466 library/libraryview.cpp:388
-#: ui/mainwindow.cpp:1698
+#: globalsearch/globalsearchview.cpp:466 library/libraryview.cpp:389
+#: ui/mainwindow.cpp:1723
 msgid "Queue track"
 msgstr "Plaas snit in die tou"
 
@@ -4010,7 +4016,7 @@ msgid "Rating"
 msgstr "Aantal sterre"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:309
-#: ui/albumcovermanager.cpp:218
+#: ui/albumcovermanager.cpp:221
 msgid "Really cancel?"
 msgstr "Wil jy rêrig opgee?"
 
@@ -4087,7 +4093,7 @@ msgstr "Verwyder vanuit My Musiek"
 msgid "Remove from bookmarks"
 msgstr "Verwyder vanuit boekmerke"
 
-#: internet/spotify/spotifyservice.cpp:679 ../bin/src/ui_mainwindow.h:688
+#: internet/spotify/spotifyservice.cpp:681 ../bin/src/ui_mainwindow.h:688
 msgid "Remove from playlist"
 msgstr "Verwyder vanuit speellys"
 
@@ -4132,7 +4138,7 @@ msgid "Repeat track"
 msgstr "Herhaal snit"
 
 #: devices/deviceview.cpp:221 globalsearch/globalsearchview.cpp:457
-#: internet/core/internetservice.cpp:93 library/libraryview.cpp:380
+#: internet/core/internetservice.cpp:55 library/libraryview.cpp:381
 #: widgets/fileviewlist.cpp:34
 msgid "Replace current playlist"
 msgstr "Vervang huidige speellys"
@@ -4165,7 +4171,7 @@ msgstr "Benodig verifikasie kode"
 msgid "Reset"
 msgstr "Herstel"
 
-#: ui/edittagdialog.cpp:794 ../bin/src/ui_edittagdialog.h:713
+#: ui/edittagdialog.cpp:802 ../bin/src/ui_edittagdialog.h:713
 msgid "Reset play counts"
 msgstr "Herstel afspeeltelling"
 
@@ -4299,7 +4305,7 @@ msgstr ""
 msgid "Saving songs statistics into songs files"
 msgstr "Die liedjies se statistiek word in die liedjies se lêer geskryf"
 
-#: ui/edittagdialog.cpp:703 ui/trackselectiondialog.cpp:255
+#: ui/edittagdialog.cpp:711 ui/trackselectiondialog.cpp:255
 msgid "Saving tracks"
 msgstr "Snitte word gestoor"
 
@@ -4329,7 +4335,7 @@ msgstr "Seafile"
 msgid "Search"
 msgstr "Soek"
 
-#: ui/mainwindow.cpp:235 ../bin/src/ui_globalsearchsettingspage.h:141
+#: ui/mainwindow.cpp:263 ../bin/src/ui_globalsearchsettingspage.h:141
 msgctxt "Global search settings dialog title."
 msgid "Search"
 msgstr "Soek"
@@ -4468,11 +4474,11 @@ msgstr "URL van Bediener"
 msgid "Server details"
 msgstr "Bedienerbesonderhede"
 
-#: internet/lastfm/lastfmservice.cpp:261
+#: internet/lastfm/lastfmservice.cpp:263
 msgid "Service offline"
 msgstr "Diens aflyn"
 
-#: ui/mainwindow.cpp:1737
+#: ui/mainwindow.cpp:1762
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr "Stel %1 na \"%2\"..."
@@ -4548,7 +4554,7 @@ msgstr "Wys 'n mooi skermbeeld"
 msgid "Show above status bar"
 msgstr "Wys bo toestandsbalk"
 
-#: ui/mainwindow.cpp:615
+#: ui/mainwindow.cpp:640
 msgid "Show all songs"
 msgstr "Wys alle liedjies"
 
@@ -4572,16 +4578,16 @@ msgstr "Wys volgrootte..."
 msgid "Show groups in global search result"
 msgstr "Vertoon groepe in die globale soektog resultate"
 
-#: library/libraryview.cpp:422 ui/mainwindow.cpp:686
+#: library/libraryview.cpp:423 ui/mainwindow.cpp:711
 #: widgets/fileviewlist.cpp:53
 msgid "Show in file browser..."
 msgstr "Wys in lêerblaaier..."
 
-#: ui/mainwindow.cpp:688
+#: ui/mainwindow.cpp:713
 msgid "Show in library..."
 msgstr "Wys in die biblioteek..."
 
-#: library/libraryview.cpp:425
+#: library/libraryview.cpp:426
 msgid "Show in various artists"
 msgstr "Wys tussen verkeie kunstenaars"
 
@@ -4589,11 +4595,11 @@ msgstr "Wys tussen verkeie kunstenaars"
 msgid "Show moodbar"
 msgstr "Wys stemmingsbalk"
 
-#: ui/mainwindow.cpp:617
+#: ui/mainwindow.cpp:642
 msgid "Show only duplicates"
 msgstr "Wys slegs duplikate"
 
-#: ui/mainwindow.cpp:619
+#: ui/mainwindow.cpp:644
 msgid "Show only untagged"
 msgstr "Wys slegs sonder etikette"
 
@@ -4685,11 +4691,11 @@ msgstr "Aantal keer oorgeslaan"
 msgid "Skip forwards in playlist"
 msgstr "Spring voorentoe in speellys"
 
-#: ui/mainwindow.cpp:1711
+#: ui/mainwindow.cpp:1736
 msgid "Skip selected tracks"
 msgstr "Spring geselekteerde snitte"
 
-#: ui/mainwindow.cpp:1709
+#: ui/mainwindow.cpp:1734
 msgid "Skip track"
 msgstr "Spring snit"
 
@@ -4697,7 +4703,7 @@ msgstr "Spring snit"
 msgid "Small album cover"
 msgstr "Klein omslag"
 
-#: widgets/fancytabwidget.cpp:663
+#: widgets/fancytabwidget.cpp:643
 msgid "Small sidebar"
 msgstr "Klein kantbalk"
 
@@ -4705,7 +4711,7 @@ msgstr "Klein kantbalk"
 msgid "Smart playlist"
 msgstr "Slimspeellys"
 
-#: library/librarymodel.cpp:1362
+#: library/librarymodel.cpp:1364
 msgid "Smart playlists"
 msgstr "Slimspeellyste"
 
@@ -4721,7 +4727,7 @@ msgstr "Sagte Rock"
 msgid "Song Information"
 msgstr "Liedjie Inligting"
 
-#: ui/mainwindow.cpp:255
+#: ui/mainwindow.cpp:283
 msgid "Song info"
 msgstr "Liedjie"
 
@@ -4778,7 +4784,7 @@ msgstr "Spotify"
 msgid "Spotify login error"
 msgstr "Spotify aantekenfout"
 
-#: internet/spotify/spotifyservice.cpp:842
+#: internet/spotify/spotifyservice.cpp:844
 msgid "Spotify playlist's URL"
 msgstr "Spotifyspeellys se URL"
 
@@ -4790,7 +4796,7 @@ msgstr "Spotify uitbreiding"
 msgid "Spotify plugin not installed"
 msgstr "Spotify uitbreiding is nie geïnstalleer nie"
 
-#: internet/spotify/spotifyservice.cpp:833
+#: internet/spotify/spotifyservice.cpp:835
 msgid "Spotify song's URL"
 msgstr "Spotify lied se URL"
 
@@ -4798,7 +4804,7 @@ msgstr "Spotify lied se URL"
 msgid "Standard"
 msgstr "Standaard"
 
-#: internet/spotify/spotifyservice.cpp:416
+#: internet/spotify/spotifyservice.cpp:417
 #: internet/subsonic/subsonicservice.cpp:115
 msgid "Starred"
 msgstr "Gegradeer"
@@ -4848,7 +4854,7 @@ msgstr "Stop na elke snit"
 msgid "Stop after every track"
 msgstr "Stop na elke snit"
 
-#: ui/mainwindow.cpp:652 ../bin/src/ui_mainwindow.h:663
+#: ui/mainwindow.cpp:677 ../bin/src/ui_mainwindow.h:663
 msgid "Stop after this track"
 msgstr "Stop na hierdie snit"
 
@@ -4928,15 +4934,15 @@ msgstr "Ondersteunde formate"
 msgid "Synchronize statistics to files now"
 msgstr "Sinkroniseer nou die statistiek na die lêers"
 
-#: internet/spotify/spotifyservice.cpp:706
+#: internet/spotify/spotifyservice.cpp:708
 msgid "Syncing Spotify inbox"
 msgstr "Spotify inbox word gesinkroniseer"
 
-#: internet/spotify/spotifyservice.cpp:700
+#: internet/spotify/spotifyservice.cpp:702
 msgid "Syncing Spotify playlist"
 msgstr "Spotify speellys word gesinkroniseer"
 
-#: internet/spotify/spotifyservice.cpp:711
+#: internet/spotify/spotifyservice.cpp:713
 msgid "Syncing Spotify starred tracks"
 msgstr "Gegradeerde Spotify snitte word gesinkroniseer"
 
@@ -4944,7 +4950,7 @@ msgstr "Gegradeerde Spotify snitte word gesinkroniseer"
 msgid "System colors"
 msgstr "Standaard kleure"
 
-#: widgets/fancytabwidget.cpp:665
+#: widgets/fancytabwidget.cpp:645
 msgid "Tabs on top"
 msgstr "Oortjies bo"
 
@@ -5000,13 +5006,13 @@ msgid ""
 "license key. Visit subsonic.org for details."
 msgstr "Die toetsperiode vir toegang tot die Subsonic bediener is verstreke. Gee asseblief 'n donasie om 'n lisensie sleutel te ontvang. Besoek subsonic.org vir meer inligting."
 
-#: ui/mainwindow.cpp:2530
+#: ui/mainwindow.cpp:2505
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
 msgstr "Die weergawe van Clementine waarheen jy sopas opgradeer het benodig 'n volle versameling herindeksering weens hierdie nuwe funksies:"
 
-#: library/libraryview.cpp:561
+#: library/libraryview.cpp:562
 msgid "There are other songs in this album"
 msgstr "Daar is ander liedjies in hierdie album"
 
@@ -5042,7 +5048,7 @@ msgid ""
 "continue?"
 msgstr "Hierdie lêers sal vanaf die toestel verwyder word. Is jy seker?"
 
-#: library/libraryview.cpp:645 ui/mainwindow.cpp:2318 widgets/fileview.cpp:187
+#: library/libraryview.cpp:646 ui/mainwindow.cpp:2325 widgets/fileview.cpp:187
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -5113,7 +5119,7 @@ msgstr "Dit is die eerste keer dat jy hierdie toestel verbind. Clementine gaan d
 msgid "This option can be changed in the \"Behavior\" preferences"
 msgstr "Die opsie kan in die \"Gedrag\" opstellinge verander word"
 
-#: internet/lastfm/lastfmservice.cpp:263
+#: internet/lastfm/lastfmservice.cpp:265
 msgid "This stream is for paid subscribers only"
 msgstr "Hierdie stroom is slegs vir betalende lede."
 
@@ -5145,7 +5151,7 @@ msgstr "Skakel mooi skermbeeld aan/af"
 msgid "Toggle fullscreen"
 msgstr "Skakel volskerm aan/af"
 
-#: ui/mainwindow.cpp:1702
+#: ui/mainwindow.cpp:1727
 msgid "Toggle queue status"
 msgstr "Skakel tou-status aan/af"
 
@@ -5169,7 +5175,7 @@ msgstr "Te veel aansture"
 msgid "Top Rated"
 msgstr ""
 
-#: internet/spotify/spotifyservice.cpp:430
+#: internet/spotify/spotifyservice.cpp:431
 msgid "Top tracks"
 msgstr "Top snitte"
 
@@ -5250,12 +5256,12 @@ msgstr "Kan nie konnekteer nie"
 msgid "Unable to download %1 (%2)"
 msgstr "Kan nie %1 aflaai nie (%2)"
 
-#: core/song.cpp:435 library/librarymodel.cpp:372 library/librarymodel.cpp:377
-#: library/librarymodel.cpp:381 library/librarymodel.cpp:1154
+#: core/song.cpp:435 library/librarymodel.cpp:374 library/librarymodel.cpp:379
+#: library/librarymodel.cpp:383 library/librarymodel.cpp:1156
 #: library/savedgroupingmanager.cpp:103 playlist/playlistdelegates.cpp:305
 #: playlist/playlistmanager.cpp:502 playlist/playlistmanager.cpp:503
-#: ui/albumcoverchoicecontroller.cpp:126 ui/edittagdialog.cpp:455
-#: ui/edittagdialog.cpp:499
+#: ui/albumcoverchoicecontroller.cpp:126 ui/edittagdialog.cpp:463
+#: ui/edittagdialog.cpp:507
 msgid "Unknown"
 msgstr "Onbekend"
 
@@ -5264,7 +5270,7 @@ msgid "Unknown content-type"
 msgstr "Onbekende inhoudtipe"
 
 #: internet/digitally/digitallyimportedclient.cpp:74
-#: internet/lastfm/lastfmservice.cpp:282
+#: internet/lastfm/lastfmservice.cpp:284
 msgid "Unknown error"
 msgstr "Onbekende fout"
 
@@ -5272,11 +5278,11 @@ msgstr "Onbekende fout"
 msgid "Unset cover"
 msgstr "Verwyder omslag"
 
-#: ui/mainwindow.cpp:1707
+#: ui/mainwindow.cpp:1732
 msgid "Unskip selected tracks"
 msgstr "Moet nie geselekteerde snitte spring nie"
 
-#: ui/mainwindow.cpp:1705
+#: ui/mainwindow.cpp:1730
 msgid "Unskip track"
 msgstr "Moet nie snit spring nie"
 
@@ -5285,7 +5291,7 @@ msgstr "Moet nie snit spring nie"
 msgid "Unsubscribe"
 msgstr "Teken uit"
 
-#: songinfo/songkickconcerts.cpp:173
+#: songinfo/songkickconcerts.cpp:174
 msgid "Upcoming Concerts"
 msgstr "Komende opvoerings"
 
@@ -5432,8 +5438,8 @@ msgstr "VBR MP3"
 msgid "Variable bit rate"
 msgstr "Wisselende bistempo"
 
-#: globalsearch/globalsearchmodel.cpp:107 library/librarymodel.cpp:298
-#: playlist/playlistmanager.cpp:514 ui/albumcovermanager.cpp:270
+#: globalsearch/globalsearchmodel.cpp:109 library/librarymodel.cpp:300
+#: playlist/playlistmanager.cpp:514 ui/albumcovermanager.cpp:273
 msgid "Various artists"
 msgstr "Verskeie kunstenaars"
 
@@ -5584,13 +5590,13 @@ msgstr "Windows Media oudio"
 msgid "Without cover:"
 msgstr "Sonder omslag:"
 
-#: library/libraryview.cpp:562
+#: library/libraryview.cpp:563
 msgid ""
 "Would you like to move the other songs in this album to Various Artists as "
 "well?"
 msgstr "Wil jy die ander liedjies in hierdie album ook na Verskeie Kunstenaars skuif?"
 
-#: ui/mainwindow.cpp:2537
+#: ui/mainwindow.cpp:2512
 msgid "Would you like to run a full rescan right now?"
 msgstr "Wil jy alles van voor af deursoek?"
 
@@ -5729,7 +5735,7 @@ msgstr "Jou Last.fm aanteken details was verkeerd"
 msgid "Your Magnatune credentials were incorrect"
 msgstr "Jou Magnatune aanteken details was verkeerd"
 
-#: library/libraryview.cpp:352
+#: library/libraryview.cpp:353
 msgid "Your library is empty!"
 msgstr "Jou versameling is leeg!"
 
@@ -5793,7 +5799,7 @@ msgstr "tussen"
 msgid "biggest first"
 msgstr "grootste eerste"
 
-#: playlist/playlistview.cpp:232 ui/edittagdialog.cpp:492
+#: playlist/playlistview.cpp:242 ui/edittagdialog.cpp:500
 msgid "bpm"
 msgstr "bpm"
 
@@ -5846,8 +5852,8 @@ msgstr "in die laaste"
 
 #: internet/spotify/spotifysettingspage.cpp:62
 #: internet/spotify/spotifysettingspage.cpp:63
-#: internet/spotify/spotifysettingspage.cpp:64 playlist/playlistview.cpp:236
-#: ui/edittagdialog.cpp:494
+#: internet/spotify/spotifysettingspage.cpp:64 playlist/playlistview.cpp:246
+#: ui/edittagdialog.cpp:502
 msgid "kbps"
 msgstr "kbps"
 

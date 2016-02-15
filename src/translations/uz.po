@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2016-02-03 14:58+0000\n"
+"PO-Revision-Date: 2016-02-10 16:08+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Uzbek (http://www.transifex.com/davidsansome/clementine/language/uz/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -74,6 +74,12 @@ msgstr ""
 msgid "%1 albums"
 msgstr "%1 albom"
 
+#: widgets/equalizerslider.cpp:29 widgets/equalizerslider.cpp:31
+#: widgets/equalizerslider.cpp:43
+#, qt-format
+msgid "%1 dB"
+msgstr ""
+
 #: core/utilities.cpp:120
 #, qt-format
 msgid "%1 days"
@@ -124,7 +130,7 @@ msgstr "%1 qo'shiq topildi (ko'rsatildi %2)"
 msgid "%1 tracks"
 msgstr "%1 trek"
 
-#: ui/albumcovermanager.cpp:466
+#: ui/albumcovermanager.cpp:469
 #, qt-format
 msgid "%1 transferred"
 msgstr "%1 ko'chirildi"
@@ -244,7 +250,7 @@ msgstr "&Vositalar"
 msgid "(different across multiple songs)"
 msgstr "(har xil bir nechta qo'shiqlar orqali)"
 
-#: internet/spotify/spotifyservice.cpp:468
+#: internet/spotify/spotifyservice.cpp:469
 msgid ", by "
 msgstr ""
 
@@ -394,7 +400,7 @@ msgstr "AIFF"
 msgid "ALL GLORY TO THE HYPNOTOAD"
 msgstr "ALL GLORY TO THE HYPNOTOAD"
 
-#: ui/albumcovermanager.cpp:111 ui/albumcoversearcher.cpp:158
+#: ui/albumcovermanager.cpp:114 ui/albumcoversearcher.cpp:158
 msgid "Abort"
 msgstr ""
 
@@ -471,7 +477,7 @@ msgstr "Boshqa to'lqinni qo'shish..."
 msgid "Add directory..."
 msgstr "Jild qo'shish..."
 
-#: ui/mainwindow.cpp:1954
+#: ui/mainwindow.cpp:1978
 msgid "Add file"
 msgstr "Fayl qo'shish"
 
@@ -491,7 +497,7 @@ msgstr "Fayl qo'shish..."
 msgid "Add files to transcode"
 msgstr "Transkodlash uchun fayllar qo'shish"
 
-#: transcoder/transcodedialog.cpp:306 ui/mainwindow.cpp:1981
+#: transcoder/transcodedialog.cpp:306 ui/mainwindow.cpp:2005
 #: ripper/ripcddialog.cpp:185
 msgid "Add folder"
 msgstr "Jild qo'shish"
@@ -600,15 +606,15 @@ msgstr "To'lqinni qo'shish..."
 msgid "Add to My Music"
 msgstr ""
 
-#: internet/spotify/spotifyservice.cpp:621
+#: internet/spotify/spotifyservice.cpp:623
 msgid "Add to Spotify playlists"
 msgstr ""
 
-#: internet/spotify/spotifyservice.cpp:613
+#: internet/spotify/spotifyservice.cpp:615
 msgid "Add to Spotify starred"
 msgstr ""
 
-#: ui/mainwindow.cpp:1775
+#: ui/mainwindow.cpp:1800
 msgid "Add to another playlist"
 msgstr "Boshqa pleylistga qo'shish"
 
@@ -698,11 +704,11 @@ msgstr "jamendo.com sahifasida albom haqida ma'lumot..."
 msgid "Albums"
 msgstr ""
 
-#: ui/albumcovermanager.cpp:135
+#: ui/albumcovermanager.cpp:138
 msgid "Albums with covers"
 msgstr "Rasmli albomlar"
 
-#: ui/albumcovermanager.cpp:136
+#: ui/albumcovermanager.cpp:139
 msgid "Albums without covers"
 msgstr "Rasmsiz albomlar"
 
@@ -719,11 +725,11 @@ msgctxt "Label for button to enable/disable Hypnotoad background sound."
 msgid "All Glory to the Hypnotoad!"
 msgstr ""
 
-#: ui/albumcovermanager.cpp:134
+#: ui/albumcovermanager.cpp:137
 msgid "All albums"
 msgstr "Hamma albomlar"
 
-#: ui/albumcovermanager.cpp:268
+#: ui/albumcovermanager.cpp:271
 msgid "All artists"
 msgstr "Hamma artistlar"
 
@@ -787,7 +793,7 @@ msgstr "Clementine'da Spotify'dan foydalanish uchun qo'shimcha plagin kerak.  Un
 msgid "An error occurred loading the iTunes database"
 msgstr "iTunes ma'lumot bazasini yuklaganda xato ro'y berdi"
 
-#: playlist/playlist.cpp:423 ui/edittagdialog.cpp:695
+#: playlist/playlist.cpp:423 ui/edittagdialog.cpp:703
 #, qt-format
 msgid "An error occurred writing metadata to '%1'"
 msgstr "'%1'ga meta-ma'lumot yozilganda xato ro'y berdi"
@@ -815,7 +821,7 @@ msgid "Append files/URLs to the playlist"
 msgstr "Fayllarni/URL'larni pleylistga qo'shish"
 
 #: devices/deviceview.cpp:218 globalsearch/globalsearchview.cpp:453
-#: internet/core/internetservice.cpp:81 library/libraryview.cpp:377
+#: internet/core/internetservice.cpp:48 library/libraryview.cpp:378
 #: widgets/fileviewlist.cpp:31
 msgid "Append to current playlist"
 msgstr "Joriy pleylistga qo'shish"
@@ -833,7 +839,7 @@ msgstr "Kesilmaslik uchun qisishni qo'llash"
 msgid "Are you sure you want to delete the \"%1\" preset?"
 msgstr "\"%1\" presetini o'chirishga ishonchingiz komilmi?"
 
-#: ui/edittagdialog.cpp:795
+#: ui/edittagdialog.cpp:803
 msgid "Are you sure you want to reset this song's statistics?"
 msgstr "Statistikani boshlang'ich holatga qaytarishga ishonchingiz komilmi?"
 
@@ -852,7 +858,7 @@ msgstr ""
 msgid "Artist"
 msgstr "Artist"
 
-#: ui/mainwindow.cpp:258
+#: ui/mainwindow.cpp:286
 msgid "Artist info"
 msgstr "Artist haqida ma'lumot"
 
@@ -880,7 +886,7 @@ msgstr ""
 
 #: internet/digitally/digitallyimportedsettingspage.cpp:82
 #: internet/magnatune/magnatunesettingspage.cpp:117
-#: internet/lastfm/lastfmservice.cpp:247
+#: internet/lastfm/lastfmservice.cpp:249
 #: internet/lastfm/lastfmsettingspage.cpp:97
 msgid "Authentication failed"
 msgstr "Tasdiqlash muvaffaqiyatsiz tugadi"
@@ -1135,7 +1141,7 @@ msgstr "Yangi epizodlarni tekshirish"
 msgid "Check for updates"
 msgstr ""
 
-#: ui/mainwindow.cpp:781
+#: ui/mainwindow.cpp:806
 msgid "Check for updates..."
 msgstr "Yangilanishlarni tekshirish..."
 
@@ -1275,7 +1281,7 @@ msgstr ""
 msgid "Click Ok once you authenticated Clementine in your last.fm account."
 msgstr ""
 
-#: library/libraryview.cpp:358
+#: library/libraryview.cpp:359
 msgid "Click here to add some music"
 msgstr "Musiqani qo'shish uchun shu joyga bosing"
 
@@ -1316,7 +1322,7 @@ msgstr "Vizualizatsiyani yopish"
 msgid "Closing this window will cancel the download."
 msgstr "Ushbu oynani yopganda yuklab olish bekor qilinadi."
 
-#: ui/albumcovermanager.cpp:219
+#: ui/albumcovermanager.cpp:222
 msgid "Closing this window will stop searching for album covers."
 msgstr "Ushbu oynani yopganda albom rasmlarini qidirish to'xtatiladi."
 
@@ -1373,7 +1379,7 @@ msgstr "Tugmalar birikmalarini moslash"
 msgid "Configure SoundCloud..."
 msgstr ""
 
-#: internet/spotify/spotifyservice.cpp:919
+#: internet/spotify/spotifyservice.cpp:921
 msgid "Configure Spotify..."
 msgstr "Spotify moslash..."
 
@@ -1389,7 +1395,7 @@ msgstr ""
 msgid "Configure global search..."
 msgstr ""
 
-#: ui/mainwindow.cpp:631
+#: ui/mainwindow.cpp:656
 msgid "Configure library..."
 msgstr "Kutubxonani sozlash..."
 
@@ -1460,16 +1466,16 @@ msgstr ""
 msgid "Copy share url to clipboard"
 msgstr ""
 
-#: internet/core/internetservice.cpp:57
+#: internet/core/internetservice.cpp:79
 msgid "Copy to clipboard"
 msgstr "Klipbordga nusxa olish"
 
-#: library/libraryview.cpp:408 internet/podcasts/podcastservice.cpp:438
-#: ui/mainwindow.cpp:680 widgets/fileviewlist.cpp:44
+#: library/libraryview.cpp:409 internet/podcasts/podcastservice.cpp:438
+#: ui/mainwindow.cpp:705 widgets/fileviewlist.cpp:44
 msgid "Copy to device..."
 msgstr "Uskunaga nusxa olish..."
 
-#: devices/deviceview.cpp:228 ui/mainwindow.cpp:670
+#: devices/deviceview.cpp:228 ui/mainwindow.cpp:695
 #: widgets/fileviewlist.cpp:40
 msgid "Copy to library..."
 msgstr "Kutubxonaga nusxa ko'chirish..."
@@ -1521,24 +1527,24 @@ msgstr ""
 msgid "Cover Manager"
 msgstr "Albom rasmi boshqaruvchisi"
 
-#: ui/edittagdialog.cpp:476
+#: ui/edittagdialog.cpp:484
 msgid "Cover art from embedded image"
 msgstr ""
 
-#: ui/edittagdialog.cpp:479
+#: ui/edittagdialog.cpp:487
 #, qt-format
 msgid "Cover art loaded automatically from %1"
 msgstr "Albom rasmi avtomatik ravishda %1'dan yuklandi"
 
-#: ui/edittagdialog.cpp:471
+#: ui/edittagdialog.cpp:479
 msgid "Cover art manually unset"
 msgstr ""
 
-#: ui/edittagdialog.cpp:481
+#: ui/edittagdialog.cpp:489
 msgid "Cover art not set"
 msgstr ""
 
-#: ui/edittagdialog.cpp:474
+#: ui/edittagdialog.cpp:482
 #, qt-format
 msgid "Cover art set from %1"
 msgstr ""
@@ -1653,8 +1659,8 @@ msgstr "O'chirish"
 msgid "Delete downloaded data"
 msgstr "Yuklab olingan ma'lumotni o'chirish"
 
-#: devices/deviceview.cpp:408 library/libraryview.cpp:644
-#: ui/mainwindow.cpp:2317 widgets/fileview.cpp:186
+#: devices/deviceview.cpp:408 library/libraryview.cpp:645
+#: ui/mainwindow.cpp:2324 widgets/fileview.cpp:186
 msgid "Delete files"
 msgstr "Fayllarni o'chirish"
 
@@ -1662,7 +1668,7 @@ msgstr "Fayllarni o'chirish"
 msgid "Delete from device..."
 msgstr "Uskunadan o'chirish..."
 
-#: library/libraryview.cpp:410 ui/mainwindow.cpp:683
+#: library/libraryview.cpp:411 ui/mainwindow.cpp:708
 #: widgets/fileviewlist.cpp:47
 msgid "Delete from disk..."
 msgstr "Diskdan o'chirish..."
@@ -1675,7 +1681,7 @@ msgstr "Ijro etilgan epizodlarni o'chirish"
 msgid "Delete preset"
 msgstr "Presetni o'chirish"
 
-#: library/libraryview.cpp:400
+#: library/libraryview.cpp:401
 msgid "Delete smart playlist"
 msgstr "Aqlli pleylistni o'chirish"
 
@@ -1687,11 +1693,11 @@ msgstr "Asl faylini o'chirish"
 msgid "Deleting files"
 msgstr "Fayllar o'chirilmoqda"
 
-#: ui/mainwindow.cpp:1696
+#: ui/mainwindow.cpp:1721
 msgid "Dequeue selected tracks"
 msgstr ""
 
-#: ui/mainwindow.cpp:1694
+#: ui/mainwindow.cpp:1719
 msgid "Dequeue track"
 msgstr ""
 
@@ -1720,7 +1726,7 @@ msgstr "Uskuna nomi"
 msgid "Device properties..."
 msgstr "Uskuna hossalari..."
 
-#: ui/mainwindow.cpp:251
+#: ui/mainwindow.cpp:279
 msgid "Devices"
 msgstr "Uskunalar"
 
@@ -1824,7 +1830,7 @@ msgstr ""
 msgid "Don't repeat"
 msgstr "Takrorlanmasin"
 
-#: library/libraryview.cpp:428
+#: library/libraryview.cpp:429
 msgid "Don't show in various artists"
 msgstr "Boshqa artistlarda ko'rsatilmasin"
 
@@ -1837,7 +1843,7 @@ msgid "Don't shuffle"
 msgstr ""
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:312
-#: ui/albumcovermanager.cpp:221
+#: ui/albumcovermanager.cpp:224
 msgid "Don't stop!"
 msgstr "To'xtatilmasin!"
 
@@ -1934,7 +1940,7 @@ msgstr "Spotify plagini yuklab olinmoqda"
 msgid "Downloading metadata"
 msgstr "Meta-ma'lumot yuklab olinmoqda"
 
-#: ui/notificationssettingspage.cpp:36
+#: ui/notificationssettingspage.cpp:38
 msgid "Drag to reposition"
 msgstr ""
 
@@ -1958,11 +1964,11 @@ msgstr ""
 msgid "Dynamic random mix"
 msgstr ""
 
-#: library/libraryview.cpp:397
+#: library/libraryview.cpp:398
 msgid "Edit smart playlist..."
 msgstr "Smart ijro ro'yxatini tahrirlash..."
 
-#: ui/mainwindow.cpp:1738
+#: ui/mainwindow.cpp:1763
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr ""
@@ -1979,12 +1985,12 @@ msgstr "Teglarni tahrirlash"
 msgid "Edit track information"
 msgstr "Trek ma'lumotini tahrirlash"
 
-#: library/libraryview.cpp:415 widgets/fileviewlist.cpp:51
+#: library/libraryview.cpp:416 widgets/fileviewlist.cpp:51
 #: ../bin/src/ui_mainwindow.h:669
 msgid "Edit track information..."
 msgstr "Trek ma'lumotini tahrirlash..."
 
-#: library/libraryview.cpp:418
+#: library/libraryview.cpp:419
 msgid "Edit tracks information..."
 msgstr "Treklar ma'lumotini tahrirlash"
 
@@ -2101,8 +2107,8 @@ msgid "Equivalent to --log-levels *:3"
 msgstr ""
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:246
-#: library/libraryview.cpp:638 ui/mainwindow.cpp:2020 ui/mainwindow.cpp:2267
-#: ui/mainwindow.cpp:2415 internet/vk/vkservice.cpp:643
+#: library/libraryview.cpp:639 ui/mainwindow.cpp:2034 ui/mainwindow.cpp:2276
+#: ui/mainwindow.cpp:2422 internet/vk/vkservice.cpp:643
 msgid "Error"
 msgstr "Xato"
 
@@ -2210,11 +2216,11 @@ msgstr ""
 msgid "Export embedded covers"
 msgstr ""
 
-#: ui/albumcovermanager.cpp:785 ui/albumcovermanager.cpp:809
+#: ui/albumcovermanager.cpp:788 ui/albumcovermanager.cpp:812
 msgid "Export finished"
 msgstr ""
 
-#: ui/albumcovermanager.cpp:794
+#: ui/albumcovermanager.cpp:797
 #, qt-format
 msgid "Exported %1 covers out of %2 (%3 skipped)"
 msgstr ""
@@ -2242,7 +2248,7 @@ msgstr ""
 msgid "Fading duration"
 msgstr ""
 
-#: ui/mainwindow.cpp:2021
+#: ui/mainwindow.cpp:2035
 msgid "Failed reading CD drive"
 msgstr ""
 
@@ -2347,7 +2353,7 @@ msgstr "Fayl turi"
 msgid "Filename"
 msgstr "Fayl nomi"
 
-#: ui/mainwindow.cpp:241
+#: ui/mainwindow.cpp:269
 msgid "Files"
 msgstr "Fayllar"
 
@@ -2412,7 +2418,7 @@ msgstr ""
 #: ../bin/src/ui_internetviewcontainer.h:70 ../bin/src/ui_searchboxwidget.h:61
 #: ../bin/src/ui_libraryfilterwidget.h:91
 #: ../bin/src/ui_libraryviewcontainer.h:58
-#: ../bin/src/ui_playlistcontainer.h:142
+#: ../bin/src/ui_playlistcontainer.h:134
 #: ../bin/src/ui_playlistlistcontainer.h:125
 #: ../bin/src/ui_podcastinfowidget.h:190 ../bin/src/ui_querysearchpage.h:111
 #: ../bin/src/ui_querysortpage.h:136 ../bin/src/ui_searchpreview.h:103
@@ -2424,7 +2430,7 @@ msgstr ""
 #: ../bin/src/ui_transcoderoptionsopus.h:78
 #: ../bin/src/ui_transcoderoptionsspeex.h:215
 #: ../bin/src/ui_transcoderoptionsvorbis.h:200
-#: ../bin/src/ui_transcoderoptionswma.h:77 ../bin/src/ui_equalizerslider.h:82
+#: ../bin/src/ui_transcoderoptionswma.h:77 ../bin/src/ui_equalizerslider.h:98
 #: ../bin/src/ui_fileview.h:106 ../bin/src/ui_loginstatewidget.h:167
 #: ../bin/src/ui_trackslider.h:68 ../bin/src/ui_visualisationoverlay.h:181
 msgid "Form"
@@ -2478,12 +2484,12 @@ msgstr "Umumiy moslamalar"
 msgid "Genre"
 msgstr "Janr"
 
-#: internet/spotify/spotifyservice.cpp:637
-#: internet/spotify/spotifyservice.cpp:681
+#: internet/spotify/spotifyservice.cpp:639
+#: internet/spotify/spotifyservice.cpp:683
 msgid "Get a URL to share this Spotify song"
 msgstr ""
 
-#: internet/spotify/spotifyservice.cpp:669
+#: internet/spotify/spotifyservice.cpp:671
 msgid "Get a URL to share this playlist"
 msgstr ""
 
@@ -2515,7 +2521,7 @@ msgstr ""
 msgid "Google Drive"
 msgstr "Google Drive"
 
-#: covers/coversearchstatisticsdialog.cpp:53 ui/albumcovermanager.cpp:460
+#: covers/coversearchstatisticsdialog.cpp:53 ui/albumcovermanager.cpp:463
 #: ../bin/src/ui_coversearchstatisticsdialog.h:75
 #, qt-format
 msgid "Got %1 covers out of %2 (%3 failed)"
@@ -2635,7 +2641,7 @@ msgstr "Mening Magnatune hisob qaydnomam yo'q"
 msgid "Icon"
 msgstr "Nishoncha"
 
-#: widgets/fancytabwidget.cpp:666
+#: widgets/fancytabwidget.cpp:646
 msgid "Icons on top"
 msgstr ""
 
@@ -2687,7 +2693,7 @@ msgid ""
 "time a song finishes."
 msgstr ""
 
-#: internet/spotify/spotifyservice.cpp:424
+#: internet/spotify/spotifyservice.cpp:425
 msgid "Inbox"
 msgstr "Kelganlar"
 
@@ -2748,7 +2754,7 @@ msgstr "O'rnatilgan"
 msgid "Integrity check"
 msgstr ""
 
-#: ui/mainwindow.cpp:247
+#: ui/mainwindow.cpp:275
 msgid "Internet"
 msgstr "Internet"
 
@@ -2765,31 +2771,31 @@ msgstr ""
 msgid "Intro tracks"
 msgstr ""
 
-#: internet/lastfm/lastfmservice.cpp:259
+#: internet/lastfm/lastfmservice.cpp:261
 msgid "Invalid API key"
 msgstr "API kaliti haqiqiy emas"
 
-#: internet/lastfm/lastfmservice.cpp:249
+#: internet/lastfm/lastfmservice.cpp:251
 msgid "Invalid format"
 msgstr "Format haqiqiy emas"
 
-#: internet/lastfm/lastfmservice.cpp:245
+#: internet/lastfm/lastfmservice.cpp:247
 msgid "Invalid method"
 msgstr "Usul haqiqiy emas"
 
-#: internet/lastfm/lastfmservice.cpp:251
+#: internet/lastfm/lastfmservice.cpp:253
 msgid "Invalid parameters"
 msgstr "Parametrlar haqiqiy emas"
 
-#: internet/lastfm/lastfmservice.cpp:253
+#: internet/lastfm/lastfmservice.cpp:255
 msgid "Invalid resource specified"
 msgstr ""
 
-#: internet/lastfm/lastfmservice.cpp:243
+#: internet/lastfm/lastfmservice.cpp:245
 msgid "Invalid service"
 msgstr "Xizmat haqiqiy emas"
 
-#: internet/lastfm/lastfmservice.cpp:257
+#: internet/lastfm/lastfmservice.cpp:259
 msgid "Invalid session key"
 msgstr "Seans kaliti haqiqiy emas"
 
@@ -2882,7 +2888,7 @@ msgstr ""
 msgid "Large album cover (no details)"
 msgstr ""
 
-#: widgets/fancytabwidget.cpp:662
+#: widgets/fancytabwidget.cpp:642
 msgid "Large sidebar"
 msgstr ""
 
@@ -2907,7 +2913,7 @@ msgstr ""
 msgid "Last.fm authentication failed"
 msgstr ""
 
-#: internet/lastfm/lastfmservice.cpp:266
+#: internet/lastfm/lastfmservice.cpp:268
 msgid "Last.fm is currently busy, please try again in a few minutes"
 msgstr ""
 
@@ -2936,7 +2942,7 @@ msgstr ""
 msgid "Length"
 msgstr "Uzunligi"
 
-#: ui/mainwindow.cpp:223 ui/mainwindow.cpp:238
+#: ui/mainwindow.cpp:251 ui/mainwindow.cpp:266
 #: ../bin/src/ui_seafilesettingspage.h:177
 msgid "Library"
 msgstr "Kutubxona"
@@ -2945,7 +2951,7 @@ msgstr "Kutubxona"
 msgid "Library advanced grouping"
 msgstr ""
 
-#: ui/mainwindow.cpp:2539
+#: ui/mainwindow.cpp:2514
 msgid "Library rescan notice"
 msgstr ""
 
@@ -2981,7 +2987,7 @@ msgstr "Albom rasmini diskdan yuklash"
 msgid "Load cover from disk..."
 msgstr "Albom rasmini diskdan yuklash..."
 
-#: playlist/playlistcontainer.cpp:291
+#: playlist/playlistcontainer.cpp:294
 msgid "Load playlist"
 msgstr "Pleylistni yuklash"
 
@@ -3001,7 +3007,7 @@ msgstr "iPod ma'lumot bazasi yuklanmoqda"
 msgid "Loading smart playlist"
 msgstr "Aqlli pleylist yuklanmoqda"
 
-#: library/librarymodel.cpp:167
+#: library/librarymodel.cpp:169
 msgid "Loading songs"
 msgstr "Qo'shiqlar yuklanmoqda"
 
@@ -3010,7 +3016,7 @@ msgstr "Qo'shiqlar yuklanmoqda"
 msgid "Loading stream"
 msgstr "To'lqin yuklanmoqda"
 
-#: playlist/songloaderinserter.cpp:129 ui/edittagdialog.cpp:247
+#: playlist/songloaderinserter.cpp:129 ui/edittagdialog.cpp:251
 msgid "Loading tracks"
 msgstr "Treklar yuklanmoqda"
 
@@ -3018,7 +3024,7 @@ msgstr "Treklar yuklanmoqda"
 msgid "Loading tracks info"
 msgstr "Treklar haqida ma'lumot yuklanmoqda"
 
-#: library/librarymodel.cpp:162
+#: library/librarymodel.cpp:164
 #: internet/podcasts/podcastdiscoverymodel.cpp:105 widgets/prettyimage.cpp:161
 #: widgets/widgetfadehelper.cpp:96 internet/vk/vkservice.cpp:513
 #: internet/vk/vksettingspage.cpp:125 ../bin/src/ui_addpodcastdialog.h:179
@@ -3145,11 +3151,11 @@ msgctxt "Label for button to enable/disable Enterprise background sound."
 msgid "Make it so!"
 msgstr ""
 
-#: internet/spotify/spotifyservice.cpp:667
+#: internet/spotify/spotifyservice.cpp:669
 msgid "Make playlist available offline"
 msgstr ""
 
-#: internet/lastfm/lastfmservice.cpp:278
+#: internet/lastfm/lastfmservice.cpp:280
 msgid "Malformed response"
 msgstr ""
 
@@ -3274,7 +3280,7 @@ msgstr ""
 msgid "Move down"
 msgstr ""
 
-#: ui/mainwindow.cpp:673 widgets/fileviewlist.cpp:42
+#: ui/mainwindow.cpp:698 widgets/fileviewlist.cpp:42
 msgid "Move to library..."
 msgstr ""
 
@@ -3283,7 +3289,7 @@ msgstr ""
 msgid "Move up"
 msgstr ""
 
-#: transcoder/transcodedialog.cpp:225 ui/mainwindow.cpp:1955
+#: transcoder/transcodedialog.cpp:225 ui/mainwindow.cpp:1979
 #: internet/vk/vkservice.cpp:908
 msgid "Music"
 msgstr "Musiqa"
@@ -3335,7 +3341,7 @@ msgstr "Tarmoq proksi"
 msgid "Network Remote"
 msgstr ""
 
-#: playlist/playlistdelegates.cpp:295 ui/edittagdialog.cpp:523
+#: playlist/playlistdelegates.cpp:295 ui/edittagdialog.cpp:531
 msgid "Never"
 msgstr "Hech qachon"
 
@@ -3354,11 +3360,11 @@ msgstr ""
 msgid "New folder"
 msgstr "Yangi jild"
 
-#: ui/mainwindow.cpp:1792 ../bin/src/ui_mainwindow.h:693
+#: ui/mainwindow.cpp:1817 ../bin/src/ui_mainwindow.h:693
 msgid "New playlist"
 msgstr "Yangi pleylist"
 
-#: library/libraryview.cpp:394
+#: library/libraryview.cpp:395
 msgid "New smart playlist..."
 msgstr "Yangi aqlli pleylist..."
 
@@ -3378,7 +3384,7 @@ msgstr ""
 msgid "Newest tracks"
 msgstr ""
 
-#: ui/edittagdialog.cpp:168 ui/trackselectiondialog.cpp:49
+#: ui/edittagdialog.cpp:172 ui/trackselectiondialog.cpp:49
 msgid "Next"
 msgstr "Keyingi"
 
@@ -3399,7 +3405,7 @@ msgstr ""
 msgid "No background image"
 msgstr ""
 
-#: ui/albumcovermanager.cpp:786
+#: ui/albumcovermanager.cpp:789
 msgid "No covers to export."
 msgstr ""
 
@@ -3407,7 +3413,7 @@ msgstr ""
 msgid "No long blocks"
 msgstr ""
 
-#: playlist/playlistcontainer.cpp:376
+#: playlist/playlistcontainer.cpp:379
 msgid ""
 "No matches found.  Clear the search box to show the whole playlist again."
 msgstr ""
@@ -3421,7 +3427,7 @@ msgstr ""
 msgid "None"
 msgstr "Yo'q"
 
-#: library/libraryview.cpp:639 ui/mainwindow.cpp:2268 ui/mainwindow.cpp:2416
+#: library/libraryview.cpp:640 ui/mainwindow.cpp:2277 ui/mainwindow.cpp:2423
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr ""
 
@@ -3441,19 +3447,19 @@ msgstr ""
 msgid "Not connected"
 msgstr "Ulanmagan"
 
-#: internet/lastfm/lastfmservice.cpp:269
+#: internet/lastfm/lastfmservice.cpp:271
 msgid "Not enough content"
 msgstr "Hajmi yetarli emas"
 
-#: internet/lastfm/lastfmservice.cpp:273
+#: internet/lastfm/lastfmservice.cpp:275
 msgid "Not enough fans"
 msgstr ""
 
-#: internet/lastfm/lastfmservice.cpp:271
+#: internet/lastfm/lastfmservice.cpp:273
 msgid "Not enough members"
 msgstr ""
 
-#: internet/lastfm/lastfmservice.cpp:275
+#: internet/lastfm/lastfmservice.cpp:277
 msgid "Not enough neighbors"
 msgstr ""
 
@@ -3490,7 +3496,7 @@ msgstr ""
 msgid "Number of episodes to show"
 msgstr ""
 
-#: ui/notificationssettingspage.cpp:36
+#: ui/notificationssettingspage.cpp:38
 msgid "OSD Preview"
 msgstr ""
 
@@ -3583,7 +3589,7 @@ msgid "Open in Google Drive"
 msgstr "Google Driveda ochish"
 
 #: devices/deviceview.cpp:224 globalsearch/globalsearchview.cpp:461
-#: internet/core/internetservice.cpp:105 library/libraryview.cpp:383
+#: internet/core/internetservice.cpp:62 library/libraryview.cpp:384
 #: widgets/fileviewlist.cpp:36
 msgid "Open in new playlist"
 msgstr "Yangi pleylistda ochish"
@@ -3602,7 +3608,7 @@ msgstr ""
 msgid "Open..."
 msgstr "Ochish..."
 
-#: internet/lastfm/lastfmservice.cpp:255
+#: internet/lastfm/lastfmservice.cpp:257
 msgid "Operation failed"
 msgstr "Jarayon muvaffaqiyatsiz tugadi"
 
@@ -3628,7 +3634,7 @@ msgstr ""
 msgid "Organise Files"
 msgstr "Fayllarni boshqarish"
 
-#: library/libraryview.cpp:404 ui/mainwindow.cpp:676
+#: library/libraryview.cpp:405 ui/mainwindow.cpp:701
 msgid "Organise files..."
 msgstr "Fayllarni boshqarish..."
 
@@ -3704,7 +3710,7 @@ msgstr ""
 msgid "Password"
 msgstr "Maxfiy so'z"
 
-#: core/globalshortcuts.cpp:50 ui/mainwindow.cpp:1107 ui/mainwindow.cpp:1603
+#: core/globalshortcuts.cpp:50 ui/mainwindow.cpp:1132 ui/mainwindow.cpp:1628
 #: ui/qtsystemtrayicon.cpp:175 wiimotedev/wiimotesettingspage.cpp:114
 msgid "Pause"
 msgstr ""
@@ -3728,12 +3734,12 @@ msgstr ""
 msgid "Pixel"
 msgstr ""
 
-#: widgets/fancytabwidget.cpp:664
+#: widgets/fancytabwidget.cpp:644
 msgid "Plain sidebar"
 msgstr ""
 
-#: core/globalshortcuts.cpp:49 ui/mainwindow.cpp:648 ui/mainwindow.cpp:1073
-#: ui/mainwindow.cpp:1092 ui/mainwindow.cpp:1607 ui/qtsystemtrayicon.cpp:164
+#: core/globalshortcuts.cpp:49 ui/mainwindow.cpp:673 ui/mainwindow.cpp:1098
+#: ui/mainwindow.cpp:1117 ui/mainwindow.cpp:1632 ui/qtsystemtrayicon.cpp:164
 #: ui/qtsystemtrayicon.cpp:188 wiimotedev/wiimotesettingspage.cpp:107
 #: ../bin/src/ui_mainwindow.h:659
 msgid "Play"
@@ -3768,7 +3774,7 @@ msgstr ""
 msgid "Player options"
 msgstr "Pleyer parametrlari"
 
-#: playlist/playlistcontainer.cpp:287 playlist/playlistlistcontainer.cpp:228
+#: playlist/playlistcontainer.cpp:290 playlist/playlistlistcontainer.cpp:228
 #: playlist/playlistmanager.cpp:86 playlist/playlistmanager.cpp:155
 #: playlist/playlistmanager.cpp:495 playlist/playlisttabbar.cpp:366
 msgid "Playlist"
@@ -3787,7 +3793,7 @@ msgstr "Pleylist parametrlari"
 msgid "Playlist type"
 msgstr "Pleylist turi"
 
-#: internet/soundcloud/soundcloudservice.cpp:132 ui/mainwindow.cpp:244
+#: internet/soundcloud/soundcloudservice.cpp:132 ui/mainwindow.cpp:272
 msgid "Playlists"
 msgstr "Pleylistlar"
 
@@ -3887,7 +3893,7 @@ msgstr ""
 msgid "Preview"
 msgstr "Ko'rib chiqish"
 
-#: ui/edittagdialog.cpp:166 ui/trackselectiondialog.cpp:47
+#: ui/edittagdialog.cpp:170 ui/trackselectiondialog.cpp:47
 msgid "Previous"
 msgstr "Oldingi"
 
@@ -3947,12 +3953,12 @@ msgstr ""
 msgid "Queue Manager"
 msgstr ""
 
-#: ui/mainwindow.cpp:1700
+#: ui/mainwindow.cpp:1725
 msgid "Queue selected tracks"
 msgstr ""
 
-#: globalsearch/globalsearchview.cpp:466 library/libraryview.cpp:388
-#: ui/mainwindow.cpp:1698
+#: globalsearch/globalsearchview.cpp:466 library/libraryview.cpp:389
+#: ui/mainwindow.cpp:1723
 msgid "Queue track"
 msgstr ""
 
@@ -4006,7 +4012,7 @@ msgid "Rating"
 msgstr "Baho"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:309
-#: ui/albumcovermanager.cpp:218
+#: ui/albumcovermanager.cpp:221
 msgid "Really cancel?"
 msgstr "Rostdan bekor qilinsinmi?"
 
@@ -4083,7 +4089,7 @@ msgstr "Mening musiqamdan o'chirish"
 msgid "Remove from bookmarks"
 msgstr ""
 
-#: internet/spotify/spotifyservice.cpp:679 ../bin/src/ui_mainwindow.h:688
+#: internet/spotify/spotifyservice.cpp:681 ../bin/src/ui_mainwindow.h:688
 msgid "Remove from playlist"
 msgstr ""
 
@@ -4128,7 +4134,7 @@ msgid "Repeat track"
 msgstr ""
 
 #: devices/deviceview.cpp:221 globalsearch/globalsearchview.cpp:457
-#: internet/core/internetservice.cpp:93 library/libraryview.cpp:380
+#: internet/core/internetservice.cpp:55 library/libraryview.cpp:381
 #: widgets/fileviewlist.cpp:34
 msgid "Replace current playlist"
 msgstr ""
@@ -4161,7 +4167,7 @@ msgstr ""
 msgid "Reset"
 msgstr ""
 
-#: ui/edittagdialog.cpp:794 ../bin/src/ui_edittagdialog.h:713
+#: ui/edittagdialog.cpp:802 ../bin/src/ui_edittagdialog.h:713
 msgid "Reset play counts"
 msgstr ""
 
@@ -4295,7 +4301,7 @@ msgstr ""
 msgid "Saving songs statistics into songs files"
 msgstr ""
 
-#: ui/edittagdialog.cpp:703 ui/trackselectiondialog.cpp:255
+#: ui/edittagdialog.cpp:711 ui/trackselectiondialog.cpp:255
 msgid "Saving tracks"
 msgstr "Treklar saqlanmoqda"
 
@@ -4325,7 +4331,7 @@ msgstr ""
 msgid "Search"
 msgstr "Qidirish"
 
-#: ui/mainwindow.cpp:235 ../bin/src/ui_globalsearchsettingspage.h:141
+#: ui/mainwindow.cpp:263 ../bin/src/ui_globalsearchsettingspage.h:141
 msgctxt "Global search settings dialog title."
 msgid "Search"
 msgstr ""
@@ -4464,11 +4470,11 @@ msgstr ""
 msgid "Server details"
 msgstr ""
 
-#: internet/lastfm/lastfmservice.cpp:261
+#: internet/lastfm/lastfmservice.cpp:263
 msgid "Service offline"
 msgstr ""
 
-#: ui/mainwindow.cpp:1737
+#: ui/mainwindow.cpp:1762
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr ""
@@ -4544,7 +4550,7 @@ msgstr ""
 msgid "Show above status bar"
 msgstr ""
 
-#: ui/mainwindow.cpp:615
+#: ui/mainwindow.cpp:640
 msgid "Show all songs"
 msgstr "Hamma qo'shiqlarni ko'rsatish"
 
@@ -4568,16 +4574,16 @@ msgstr ""
 msgid "Show groups in global search result"
 msgstr ""
 
-#: library/libraryview.cpp:422 ui/mainwindow.cpp:686
+#: library/libraryview.cpp:423 ui/mainwindow.cpp:711
 #: widgets/fileviewlist.cpp:53
 msgid "Show in file browser..."
 msgstr ""
 
-#: ui/mainwindow.cpp:688
+#: ui/mainwindow.cpp:713
 msgid "Show in library..."
 msgstr ""
 
-#: library/libraryview.cpp:425
+#: library/libraryview.cpp:426
 msgid "Show in various artists"
 msgstr ""
 
@@ -4585,11 +4591,11 @@ msgstr ""
 msgid "Show moodbar"
 msgstr ""
 
-#: ui/mainwindow.cpp:617
+#: ui/mainwindow.cpp:642
 msgid "Show only duplicates"
 msgstr ""
 
-#: ui/mainwindow.cpp:619
+#: ui/mainwindow.cpp:644
 msgid "Show only untagged"
 msgstr ""
 
@@ -4681,11 +4687,11 @@ msgstr ""
 msgid "Skip forwards in playlist"
 msgstr ""
 
-#: ui/mainwindow.cpp:1711
+#: ui/mainwindow.cpp:1736
 msgid "Skip selected tracks"
 msgstr ""
 
-#: ui/mainwindow.cpp:1709
+#: ui/mainwindow.cpp:1734
 msgid "Skip track"
 msgstr ""
 
@@ -4693,7 +4699,7 @@ msgstr ""
 msgid "Small album cover"
 msgstr ""
 
-#: widgets/fancytabwidget.cpp:663
+#: widgets/fancytabwidget.cpp:643
 msgid "Small sidebar"
 msgstr ""
 
@@ -4701,7 +4707,7 @@ msgstr ""
 msgid "Smart playlist"
 msgstr ""
 
-#: library/librarymodel.cpp:1362
+#: library/librarymodel.cpp:1364
 msgid "Smart playlists"
 msgstr ""
 
@@ -4717,7 +4723,7 @@ msgstr "Soft Rock"
 msgid "Song Information"
 msgstr "Qo'shiq haqida ma'lumot"
 
-#: ui/mainwindow.cpp:255
+#: ui/mainwindow.cpp:283
 msgid "Song info"
 msgstr "Qo'shiq haqida ma'lumot"
 
@@ -4774,7 +4780,7 @@ msgstr "Spotify"
 msgid "Spotify login error"
 msgstr "Spotify kirish xatosi"
 
-#: internet/spotify/spotifyservice.cpp:842
+#: internet/spotify/spotifyservice.cpp:844
 msgid "Spotify playlist's URL"
 msgstr ""
 
@@ -4786,7 +4792,7 @@ msgstr "Spotify plagini"
 msgid "Spotify plugin not installed"
 msgstr "Spotify plagini o'rnatilmagan"
 
-#: internet/spotify/spotifyservice.cpp:833
+#: internet/spotify/spotifyservice.cpp:835
 msgid "Spotify song's URL"
 msgstr ""
 
@@ -4794,7 +4800,7 @@ msgstr ""
 msgid "Standard"
 msgstr ""
 
-#: internet/spotify/spotifyservice.cpp:416
+#: internet/spotify/spotifyservice.cpp:417
 #: internet/subsonic/subsonicservice.cpp:115
 msgid "Starred"
 msgstr ""
@@ -4844,7 +4850,7 @@ msgstr ""
 msgid "Stop after every track"
 msgstr ""
 
-#: ui/mainwindow.cpp:652 ../bin/src/ui_mainwindow.h:663
+#: ui/mainwindow.cpp:677 ../bin/src/ui_mainwindow.h:663
 msgid "Stop after this track"
 msgstr ""
 
@@ -4924,15 +4930,15 @@ msgstr ""
 msgid "Synchronize statistics to files now"
 msgstr ""
 
-#: internet/spotify/spotifyservice.cpp:706
+#: internet/spotify/spotifyservice.cpp:708
 msgid "Syncing Spotify inbox"
 msgstr ""
 
-#: internet/spotify/spotifyservice.cpp:700
+#: internet/spotify/spotifyservice.cpp:702
 msgid "Syncing Spotify playlist"
 msgstr ""
 
-#: internet/spotify/spotifyservice.cpp:711
+#: internet/spotify/spotifyservice.cpp:713
 msgid "Syncing Spotify starred tracks"
 msgstr ""
 
@@ -4940,7 +4946,7 @@ msgstr ""
 msgid "System colors"
 msgstr "Tizim ranglari"
 
-#: widgets/fancytabwidget.cpp:665
+#: widgets/fancytabwidget.cpp:645
 msgid "Tabs on top"
 msgstr ""
 
@@ -4996,13 +5002,13 @@ msgid ""
 "license key. Visit subsonic.org for details."
 msgstr ""
 
-#: ui/mainwindow.cpp:2530
+#: ui/mainwindow.cpp:2505
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
 msgstr ""
 
-#: library/libraryview.cpp:561
+#: library/libraryview.cpp:562
 msgid "There are other songs in this album"
 msgstr "Ushbi albomda boshqa qo'shiqlar mavjud"
 
@@ -5038,7 +5044,7 @@ msgid ""
 "continue?"
 msgstr ""
 
-#: library/libraryview.cpp:645 ui/mainwindow.cpp:2318 widgets/fileview.cpp:187
+#: library/libraryview.cpp:646 ui/mainwindow.cpp:2325 widgets/fileview.cpp:187
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -5109,7 +5115,7 @@ msgstr ""
 msgid "This option can be changed in the \"Behavior\" preferences"
 msgstr ""
 
-#: internet/lastfm/lastfmservice.cpp:263
+#: internet/lastfm/lastfmservice.cpp:265
 msgid "This stream is for paid subscribers only"
 msgstr ""
 
@@ -5141,7 +5147,7 @@ msgstr ""
 msgid "Toggle fullscreen"
 msgstr ""
 
-#: ui/mainwindow.cpp:1702
+#: ui/mainwindow.cpp:1727
 msgid "Toggle queue status"
 msgstr ""
 
@@ -5165,7 +5171,7 @@ msgstr ""
 msgid "Top Rated"
 msgstr ""
 
-#: internet/spotify/spotifyservice.cpp:430
+#: internet/spotify/spotifyservice.cpp:431
 msgid "Top tracks"
 msgstr ""
 
@@ -5246,12 +5252,12 @@ msgstr ""
 msgid "Unable to download %1 (%2)"
 msgstr "%1 (%2) yuklab olib bo'lmadi"
 
-#: core/song.cpp:435 library/librarymodel.cpp:372 library/librarymodel.cpp:377
-#: library/librarymodel.cpp:381 library/librarymodel.cpp:1154
+#: core/song.cpp:435 library/librarymodel.cpp:374 library/librarymodel.cpp:379
+#: library/librarymodel.cpp:383 library/librarymodel.cpp:1156
 #: library/savedgroupingmanager.cpp:103 playlist/playlistdelegates.cpp:305
 #: playlist/playlistmanager.cpp:502 playlist/playlistmanager.cpp:503
-#: ui/albumcoverchoicecontroller.cpp:126 ui/edittagdialog.cpp:455
-#: ui/edittagdialog.cpp:499
+#: ui/albumcoverchoicecontroller.cpp:126 ui/edittagdialog.cpp:463
+#: ui/edittagdialog.cpp:507
 msgid "Unknown"
 msgstr "Noma'lum"
 
@@ -5260,7 +5266,7 @@ msgid "Unknown content-type"
 msgstr ""
 
 #: internet/digitally/digitallyimportedclient.cpp:74
-#: internet/lastfm/lastfmservice.cpp:282
+#: internet/lastfm/lastfmservice.cpp:284
 msgid "Unknown error"
 msgstr "Noma'lum xato"
 
@@ -5268,11 +5274,11 @@ msgstr "Noma'lum xato"
 msgid "Unset cover"
 msgstr ""
 
-#: ui/mainwindow.cpp:1707
+#: ui/mainwindow.cpp:1732
 msgid "Unskip selected tracks"
 msgstr ""
 
-#: ui/mainwindow.cpp:1705
+#: ui/mainwindow.cpp:1730
 msgid "Unskip track"
 msgstr ""
 
@@ -5281,7 +5287,7 @@ msgstr ""
 msgid "Unsubscribe"
 msgstr ""
 
-#: songinfo/songkickconcerts.cpp:173
+#: songinfo/songkickconcerts.cpp:174
 msgid "Upcoming Concerts"
 msgstr ""
 
@@ -5428,8 +5434,8 @@ msgstr ""
 msgid "Variable bit rate"
 msgstr ""
 
-#: globalsearch/globalsearchmodel.cpp:107 library/librarymodel.cpp:298
-#: playlist/playlistmanager.cpp:514 ui/albumcovermanager.cpp:270
+#: globalsearch/globalsearchmodel.cpp:109 library/librarymodel.cpp:300
+#: playlist/playlistmanager.cpp:514 ui/albumcovermanager.cpp:273
 msgid "Various artists"
 msgstr ""
 
@@ -5580,13 +5586,13 @@ msgstr "Windows Media audio"
 msgid "Without cover:"
 msgstr ""
 
-#: library/libraryview.cpp:562
+#: library/libraryview.cpp:563
 msgid ""
 "Would you like to move the other songs in this album to Various Artists as "
 "well?"
 msgstr ""
 
-#: ui/mainwindow.cpp:2537
+#: ui/mainwindow.cpp:2512
 msgid "Would you like to run a full rescan right now?"
 msgstr ""
 
@@ -5725,7 +5731,7 @@ msgstr ""
 msgid "Your Magnatune credentials were incorrect"
 msgstr ""
 
-#: library/libraryview.cpp:352
+#: library/libraryview.cpp:353
 msgid "Your library is empty!"
 msgstr ""
 
@@ -5789,7 +5795,7 @@ msgstr "orasida"
 msgid "biggest first"
 msgstr "kattasidan boshlab"
 
-#: playlist/playlistview.cpp:232 ui/edittagdialog.cpp:492
+#: playlist/playlistview.cpp:242 ui/edittagdialog.cpp:500
 msgid "bpm"
 msgstr "bpm"
 
@@ -5842,8 +5848,8 @@ msgstr ""
 
 #: internet/spotify/spotifysettingspage.cpp:62
 #: internet/spotify/spotifysettingspage.cpp:63
-#: internet/spotify/spotifysettingspage.cpp:64 playlist/playlistview.cpp:236
-#: ui/edittagdialog.cpp:494
+#: internet/spotify/spotifysettingspage.cpp:64 playlist/playlistview.cpp:246
+#: ui/edittagdialog.cpp:502
 msgid "kbps"
 msgstr "kb/s"
 
