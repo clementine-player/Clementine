@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2016-02-03 14:58+0000\n"
+"PO-Revision-Date: 2016-02-10 16:08+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Malay (http://www.transifex.com/davidsansome/clementine/language/ms/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -75,6 +75,12 @@ msgstr "%1 (%2 lagu)"
 msgid "%1 albums"
 msgstr "%1 album"
 
+#: widgets/equalizerslider.cpp:29 widgets/equalizerslider.cpp:31
+#: widgets/equalizerslider.cpp:43
+#, qt-format
+msgid "%1 dB"
+msgstr ""
+
 #: core/utilities.cpp:120
 #, qt-format
 msgid "%1 days"
@@ -125,7 +131,7 @@ msgstr "%1 lagu ditemui (memaparkan %2)"
 msgid "%1 tracks"
 msgstr "%1 trek"
 
-#: ui/albumcovermanager.cpp:466
+#: ui/albumcovermanager.cpp:469
 #, qt-format
 msgid "%1 transferred"
 msgstr "%1 dipindahkan"
@@ -245,7 +251,7 @@ msgstr "&Alatan"
 msgid "(different across multiple songs)"
 msgstr "(berbeza dengan pelbagai lagu)"
 
-#: internet/spotify/spotifyservice.cpp:468
+#: internet/spotify/spotifyservice.cpp:469
 msgid ", by "
 msgstr ", oleh"
 
@@ -395,7 +401,7 @@ msgstr "AIFF"
 msgid "ALL GLORY TO THE HYPNOTOAD"
 msgstr "HIDUP HYPNOTOAD"
 
-#: ui/albumcovermanager.cpp:111 ui/albumcoversearcher.cpp:158
+#: ui/albumcovermanager.cpp:114 ui/albumcoversearcher.cpp:158
 msgid "Abort"
 msgstr "Henti Paksa"
 
@@ -472,7 +478,7 @@ msgstr "Tambah strim lain..."
 msgid "Add directory..."
 msgstr "Tambah direktori..."
 
-#: ui/mainwindow.cpp:1954
+#: ui/mainwindow.cpp:1978
 msgid "Add file"
 msgstr "Tambah fail"
 
@@ -492,7 +498,7 @@ msgstr "Tambah fail..."
 msgid "Add files to transcode"
 msgstr "Tambah fail-fail untuk transkod"
 
-#: transcoder/transcodedialog.cpp:306 ui/mainwindow.cpp:1981
+#: transcoder/transcodedialog.cpp:306 ui/mainwindow.cpp:2005
 #: ripper/ripcddialog.cpp:185
 msgid "Add folder"
 msgstr "Tambah folder"
@@ -601,15 +607,15 @@ msgstr "Tambah stream..."
 msgid "Add to My Music"
 msgstr "Tambah ke Muzik Saya"
 
-#: internet/spotify/spotifyservice.cpp:621
+#: internet/spotify/spotifyservice.cpp:623
 msgid "Add to Spotify playlists"
 msgstr "Tambah ke senarai main Spotify"
 
-#: internet/spotify/spotifyservice.cpp:613
+#: internet/spotify/spotifyservice.cpp:615
 msgid "Add to Spotify starred"
 msgstr "Tambah ke Spotify dibintangi"
 
-#: ui/mainwindow.cpp:1775
+#: ui/mainwindow.cpp:1800
 msgid "Add to another playlist"
 msgstr "Tambahkan ke senarai main lain"
 
@@ -699,11 +705,11 @@ msgstr "Info album di jamendo.com..."
 msgid "Albums"
 msgstr "Album"
 
-#: ui/albumcovermanager.cpp:135
+#: ui/albumcovermanager.cpp:138
 msgid "Albums with covers"
 msgstr "Album dengan kulit muka"
 
-#: ui/albumcovermanager.cpp:136
+#: ui/albumcovermanager.cpp:139
 msgid "Albums without covers"
 msgstr "Album tanpa kulit muka"
 
@@ -720,11 +726,11 @@ msgctxt "Label for button to enable/disable Hypnotoad background sound."
 msgid "All Glory to the Hypnotoad!"
 msgstr "All Glory to the Hypnotoad!"
 
-#: ui/albumcovermanager.cpp:134
+#: ui/albumcovermanager.cpp:137
 msgid "All albums"
 msgstr "Semua album"
 
-#: ui/albumcovermanager.cpp:268
+#: ui/albumcovermanager.cpp:271
 msgid "All artists"
 msgstr "Semua artis"
 
@@ -788,7 +794,7 @@ msgstr "Satu plugin tambahan diperlukan untuk menggunakan Spotify dalam Clementi
 msgid "An error occurred loading the iTunes database"
 msgstr "Ralat berlaku semasa memuat pangkalan data iTunes"
 
-#: playlist/playlist.cpp:423 ui/edittagdialog.cpp:695
+#: playlist/playlist.cpp:423 ui/edittagdialog.cpp:703
 #, qt-format
 msgid "An error occurred writing metadata to '%1'"
 msgstr "Ralat berlaku semasa menulis metadata ke '%1'"
@@ -816,7 +822,7 @@ msgid "Append files/URLs to the playlist"
 msgstr "Tambah fail/URL ke senarai main"
 
 #: devices/deviceview.cpp:218 globalsearch/globalsearchview.cpp:453
-#: internet/core/internetservice.cpp:81 library/libraryview.cpp:377
+#: internet/core/internetservice.cpp:48 library/libraryview.cpp:378
 #: widgets/fileviewlist.cpp:31
 msgid "Append to current playlist"
 msgstr "Tambah ke senarai main semasa"
@@ -834,7 +840,7 @@ msgstr "Laksana pemampatan untuk hindari pengeratan"
 msgid "Are you sure you want to delete the \"%1\" preset?"
 msgstr "Anda pasti mahu memadam praset \"%1\"?"
 
-#: ui/edittagdialog.cpp:795
+#: ui/edittagdialog.cpp:803
 msgid "Are you sure you want to reset this song's statistics?"
 msgstr "Anda pasti mahu menetap semula statistik lagu ini?"
 
@@ -853,7 +859,7 @@ msgstr "Anda pasti mahu menulis statistik lagu ke dalam fail lagu untuk semua la
 msgid "Artist"
 msgstr "Artis"
 
-#: ui/mainwindow.cpp:258
+#: ui/mainwindow.cpp:286
 msgid "Artist info"
 msgstr "Info artis"
 
@@ -881,7 +887,7 @@ msgstr "Output audio"
 
 #: internet/digitally/digitallyimportedsettingspage.cpp:82
 #: internet/magnatune/magnatunesettingspage.cpp:117
-#: internet/lastfm/lastfmservice.cpp:247
+#: internet/lastfm/lastfmservice.cpp:249
 #: internet/lastfm/lastfmsettingspage.cpp:97
 msgid "Authentication failed"
 msgstr "Pengesahan gagal"
@@ -1136,7 +1142,7 @@ msgstr "Periksa episod baharu"
 msgid "Check for updates"
 msgstr "Periksa kemaskini"
 
-#: ui/mainwindow.cpp:781
+#: ui/mainwindow.cpp:806
 msgid "Check for updates..."
 msgstr "Periksa kemaskini..."
 
@@ -1276,7 +1282,7 @@ msgstr "Clementine akan mencari muzik di dalam:"
 msgid "Click Ok once you authenticated Clementine in your last.fm account."
 msgstr ""
 
-#: library/libraryview.cpp:358
+#: library/libraryview.cpp:359
 msgid "Click here to add some music"
 msgstr "Klik di sini untuk menambah muzik"
 
@@ -1317,7 +1323,7 @@ msgstr "Tutup pengvisualan"
 msgid "Closing this window will cancel the download."
 msgstr "Menutup tetingkap ini akan membatalkan muat turun."
 
-#: ui/albumcovermanager.cpp:219
+#: ui/albumcovermanager.cpp:222
 msgid "Closing this window will stop searching for album covers."
 msgstr "Menutup tetingkap ini akan hentikan penggelintaran kulit album."
 
@@ -1374,7 +1380,7 @@ msgstr "Tetapkan Pintasan"
 msgid "Configure SoundCloud..."
 msgstr ""
 
-#: internet/spotify/spotifyservice.cpp:919
+#: internet/spotify/spotifyservice.cpp:921
 msgid "Configure Spotify..."
 msgstr "Konfigur Spotify..."
 
@@ -1390,7 +1396,7 @@ msgstr "Konfigur Vk.com..."
 msgid "Configure global search..."
 msgstr "Konfigure gelintar sejagat..."
 
-#: ui/mainwindow.cpp:631
+#: ui/mainwindow.cpp:656
 msgid "Configure library..."
 msgstr "Konfigur pustaka..."
 
@@ -1461,16 +1467,16 @@ msgstr "Tukar fail tak hilang"
 msgid "Copy share url to clipboard"
 msgstr "Salin url kongsi ke papan keratan"
 
-#: internet/core/internetservice.cpp:57
+#: internet/core/internetservice.cpp:79
 msgid "Copy to clipboard"
 msgstr "Salin ke papan keratan"
 
-#: library/libraryview.cpp:408 internet/podcasts/podcastservice.cpp:438
-#: ui/mainwindow.cpp:680 widgets/fileviewlist.cpp:44
+#: library/libraryview.cpp:409 internet/podcasts/podcastservice.cpp:438
+#: ui/mainwindow.cpp:705 widgets/fileviewlist.cpp:44
 msgid "Copy to device..."
 msgstr "Salin ke peranti..."
 
-#: devices/deviceview.cpp:228 ui/mainwindow.cpp:670
+#: devices/deviceview.cpp:228 ui/mainwindow.cpp:695
 #: widgets/fileviewlist.cpp:40
 msgid "Copy to library..."
 msgstr "Salin ke pustaka..."
@@ -1522,24 +1528,24 @@ msgstr "Tidak dapat buka fail output %1"
 msgid "Cover Manager"
 msgstr "Pengurus Kulit Muka"
 
-#: ui/edittagdialog.cpp:476
+#: ui/edittagdialog.cpp:484
 msgid "Cover art from embedded image"
 msgstr "Seni kulit muka dari imej terbenam"
 
-#: ui/edittagdialog.cpp:479
+#: ui/edittagdialog.cpp:487
 #, qt-format
 msgid "Cover art loaded automatically from %1"
 msgstr "Seni kulit muka dimuat secara automatik dari %1"
 
-#: ui/edittagdialog.cpp:471
+#: ui/edittagdialog.cpp:479
 msgid "Cover art manually unset"
 msgstr "Seni kulit muka dinyatetap secara manual"
 
-#: ui/edittagdialog.cpp:481
+#: ui/edittagdialog.cpp:489
 msgid "Cover art not set"
 msgstr "Seni kulit muka tidak ditetapkan"
 
-#: ui/edittagdialog.cpp:474
+#: ui/edittagdialog.cpp:482
 #, qt-format
 msgid "Cover art set from %1"
 msgstr "Seni kulit muka ditetap dari %1"
@@ -1654,8 +1660,8 @@ msgstr "Padam"
 msgid "Delete downloaded data"
 msgstr "Padam data dimuat turun"
 
-#: devices/deviceview.cpp:408 library/libraryview.cpp:644
-#: ui/mainwindow.cpp:2317 widgets/fileview.cpp:186
+#: devices/deviceview.cpp:408 library/libraryview.cpp:645
+#: ui/mainwindow.cpp:2324 widgets/fileview.cpp:186
 msgid "Delete files"
 msgstr "Padam fail"
 
@@ -1663,7 +1669,7 @@ msgstr "Padam fail"
 msgid "Delete from device..."
 msgstr "Padam dari peranti..."
 
-#: library/libraryview.cpp:410 ui/mainwindow.cpp:683
+#: library/libraryview.cpp:411 ui/mainwindow.cpp:708
 #: widgets/fileviewlist.cpp:47
 msgid "Delete from disk..."
 msgstr "Padam dari cakera..."
@@ -1676,7 +1682,7 @@ msgstr "Padam episod telah dimain"
 msgid "Delete preset"
 msgstr "Padam praset"
 
-#: library/libraryview.cpp:400
+#: library/libraryview.cpp:401
 msgid "Delete smart playlist"
 msgstr "Padam senarai main pintar"
 
@@ -1688,11 +1694,11 @@ msgstr "Padam fail asal"
 msgid "Deleting files"
 msgstr "Memadam fail-fail"
 
-#: ui/mainwindow.cpp:1696
+#: ui/mainwindow.cpp:1721
 msgid "Dequeue selected tracks"
 msgstr "Nyahbaris gilir trek terpilih"
 
-#: ui/mainwindow.cpp:1694
+#: ui/mainwindow.cpp:1719
 msgid "Dequeue track"
 msgstr "Nyahbaris gilir trek"
 
@@ -1721,7 +1727,7 @@ msgstr "Nama peranti"
 msgid "Device properties..."
 msgstr "Ciri-ciri peranti..."
 
-#: ui/mainwindow.cpp:251
+#: ui/mainwindow.cpp:279
 msgid "Devices"
 msgstr "Peranti-peranti"
 
@@ -1825,7 +1831,7 @@ msgstr "Membuat imbas semula penuh akan kehilangan mana-mana data meta yang anda
 msgid "Don't repeat"
 msgstr "Jangan ulang"
 
-#: library/libraryview.cpp:428
+#: library/libraryview.cpp:429
 msgid "Don't show in various artists"
 msgstr "Jangan tunjuk dalam artis pelbagai"
 
@@ -1838,7 +1844,7 @@ msgid "Don't shuffle"
 msgstr "Jangan kocok"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:312
-#: ui/albumcovermanager.cpp:221
+#: ui/albumcovermanager.cpp:224
 msgid "Don't stop!"
 msgstr "Jangan berhenti!"
 
@@ -1935,7 +1941,7 @@ msgstr "Memuat turun pemalam Spotify"
 msgid "Downloading metadata"
 msgstr "Memuatturun data meta"
 
-#: ui/notificationssettingspage.cpp:36
+#: ui/notificationssettingspage.cpp:38
 msgid "Drag to reposition"
 msgstr "Seret untuk betulkan kedudukan"
 
@@ -1959,11 +1965,11 @@ msgstr "Mod dinamik hidup"
 msgid "Dynamic random mix"
 msgstr "Campuran rawak dinamik"
 
-#: library/libraryview.cpp:397
+#: library/libraryview.cpp:398
 msgid "Edit smart playlist..."
 msgstr "Sunting senarai main pintar..."
 
-#: ui/mainwindow.cpp:1738
+#: ui/mainwindow.cpp:1763
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr "Sunting tag \"%1\"..."
@@ -1980,12 +1986,12 @@ msgstr "Sunting tag"
 msgid "Edit track information"
 msgstr "Sunting maklumat trek"
 
-#: library/libraryview.cpp:415 widgets/fileviewlist.cpp:51
+#: library/libraryview.cpp:416 widgets/fileviewlist.cpp:51
 #: ../bin/src/ui_mainwindow.h:669
 msgid "Edit track information..."
 msgstr "Sunting maklumat trek..."
 
-#: library/libraryview.cpp:418
+#: library/libraryview.cpp:419
 msgid "Edit tracks information..."
 msgstr "Sunting maklumat trek..."
 
@@ -2102,8 +2108,8 @@ msgid "Equivalent to --log-levels *:3"
 msgstr "Sama dengan --log-levels *:3"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:246
-#: library/libraryview.cpp:638 ui/mainwindow.cpp:2020 ui/mainwindow.cpp:2267
-#: ui/mainwindow.cpp:2415 internet/vk/vkservice.cpp:643
+#: library/libraryview.cpp:639 ui/mainwindow.cpp:2034 ui/mainwindow.cpp:2276
+#: ui/mainwindow.cpp:2422 internet/vk/vkservice.cpp:643
 msgid "Error"
 msgstr "Ralat"
 
@@ -2211,11 +2217,11 @@ msgstr "Eksport kulit muka dimuat turun"
 msgid "Export embedded covers"
 msgstr "Eksport kulit muka terbenam"
 
-#: ui/albumcovermanager.cpp:785 ui/albumcovermanager.cpp:809
+#: ui/albumcovermanager.cpp:788 ui/albumcovermanager.cpp:812
 msgid "Export finished"
 msgstr "Eksport selesai"
 
-#: ui/albumcovermanager.cpp:794
+#: ui/albumcovermanager.cpp:797
 #, qt-format
 msgid "Exported %1 covers out of %2 (%3 skipped)"
 msgstr "%1 kulit muka dieksport dari %2 (%3 dilangkau)"
@@ -2243,7 +2249,7 @@ msgstr "Peresapan"
 msgid "Fading duration"
 msgstr "Jangkamasa peresapan"
 
-#: ui/mainwindow.cpp:2021
+#: ui/mainwindow.cpp:2035
 msgid "Failed reading CD drive"
 msgstr "Gagal membaca pemacu CD"
 
@@ -2348,7 +2354,7 @@ msgstr "Jenis fail"
 msgid "Filename"
 msgstr "Namafail"
 
-#: ui/mainwindow.cpp:241
+#: ui/mainwindow.cpp:269
 msgid "Files"
 msgstr "Fail"
 
@@ -2413,7 +2419,7 @@ msgstr "Melupakan peranti akan membuangnya dari senarai dan Clementine perlu men
 #: ../bin/src/ui_internetviewcontainer.h:70 ../bin/src/ui_searchboxwidget.h:61
 #: ../bin/src/ui_libraryfilterwidget.h:91
 #: ../bin/src/ui_libraryviewcontainer.h:58
-#: ../bin/src/ui_playlistcontainer.h:142
+#: ../bin/src/ui_playlistcontainer.h:134
 #: ../bin/src/ui_playlistlistcontainer.h:125
 #: ../bin/src/ui_podcastinfowidget.h:190 ../bin/src/ui_querysearchpage.h:111
 #: ../bin/src/ui_querysortpage.h:136 ../bin/src/ui_searchpreview.h:103
@@ -2425,7 +2431,7 @@ msgstr "Melupakan peranti akan membuangnya dari senarai dan Clementine perlu men
 #: ../bin/src/ui_transcoderoptionsopus.h:78
 #: ../bin/src/ui_transcoderoptionsspeex.h:215
 #: ../bin/src/ui_transcoderoptionsvorbis.h:200
-#: ../bin/src/ui_transcoderoptionswma.h:77 ../bin/src/ui_equalizerslider.h:82
+#: ../bin/src/ui_transcoderoptionswma.h:77 ../bin/src/ui_equalizerslider.h:98
 #: ../bin/src/ui_fileview.h:106 ../bin/src/ui_loginstatewidget.h:167
 #: ../bin/src/ui_trackslider.h:68 ../bin/src/ui_visualisationoverlay.h:181
 msgid "Form"
@@ -2479,12 +2485,12 @@ msgstr "Tetapan am"
 msgid "Genre"
 msgstr "Genre"
 
-#: internet/spotify/spotifyservice.cpp:637
-#: internet/spotify/spotifyservice.cpp:681
+#: internet/spotify/spotifyservice.cpp:639
+#: internet/spotify/spotifyservice.cpp:683
 msgid "Get a URL to share this Spotify song"
 msgstr "Dapatkan URL untuk kongsikan lagu Spotify ini"
 
-#: internet/spotify/spotifyservice.cpp:669
+#: internet/spotify/spotifyservice.cpp:671
 msgid "Get a URL to share this playlist"
 msgstr "Dapatkan URL untuk kongsikan senarai main ini"
 
@@ -2516,7 +2522,7 @@ msgstr "Pergi ke tab senarai main sebelumnya"
 msgid "Google Drive"
 msgstr "Google Drive"
 
-#: covers/coversearchstatisticsdialog.cpp:53 ui/albumcovermanager.cpp:460
+#: covers/coversearchstatisticsdialog.cpp:53 ui/albumcovermanager.cpp:463
 #: ../bin/src/ui_coversearchstatisticsdialog.h:75
 #, qt-format
 msgid "Got %1 covers out of %2 (%3 failed)"
@@ -2636,7 +2642,7 @@ msgstr "Saya tidak mempunyai akaun Magnatune"
 msgid "Icon"
 msgstr "Ikon"
 
-#: widgets/fancytabwidget.cpp:666
+#: widgets/fancytabwidget.cpp:646
 msgid "Icons on top"
 msgstr "Ikon di atas"
 
@@ -2688,7 +2694,7 @@ msgid ""
 "time a song finishes."
 msgstr "Dalam mod dinamik trek baharu akan dipilih dan ditambah ke senarai main setiap kali lagu selesai."
 
-#: internet/spotify/spotifyservice.cpp:424
+#: internet/spotify/spotifyservice.cpp:425
 msgid "Inbox"
 msgstr "Peti Masuk"
 
@@ -2749,7 +2755,7 @@ msgstr "Terpasang"
 msgid "Integrity check"
 msgstr "Semakan integriti"
 
-#: ui/mainwindow.cpp:247
+#: ui/mainwindow.cpp:275
 msgid "Internet"
 msgstr "Internet"
 
@@ -2766,31 +2772,31 @@ msgstr "Perkhidmatan Internet"
 msgid "Intro tracks"
 msgstr "Trek pengenalan"
 
-#: internet/lastfm/lastfmservice.cpp:259
+#: internet/lastfm/lastfmservice.cpp:261
 msgid "Invalid API key"
 msgstr "Kunci API tidak sah"
 
-#: internet/lastfm/lastfmservice.cpp:249
+#: internet/lastfm/lastfmservice.cpp:251
 msgid "Invalid format"
 msgstr "Format tidak sah"
 
-#: internet/lastfm/lastfmservice.cpp:245
+#: internet/lastfm/lastfmservice.cpp:247
 msgid "Invalid method"
 msgstr "Kaedah tidak sah"
 
-#: internet/lastfm/lastfmservice.cpp:251
+#: internet/lastfm/lastfmservice.cpp:253
 msgid "Invalid parameters"
 msgstr "Parameter tidak sah"
 
-#: internet/lastfm/lastfmservice.cpp:253
+#: internet/lastfm/lastfmservice.cpp:255
 msgid "Invalid resource specified"
 msgstr "Sumber dinyatakan tidak sah"
 
-#: internet/lastfm/lastfmservice.cpp:243
+#: internet/lastfm/lastfmservice.cpp:245
 msgid "Invalid service"
 msgstr "Perkhidmatan tidak sah"
 
-#: internet/lastfm/lastfmservice.cpp:257
+#: internet/lastfm/lastfmservice.cpp:259
 msgid "Invalid session key"
 msgstr "Kunci sesi tidak sah"
 
@@ -2883,7 +2889,7 @@ msgstr "Kulit album besar (perincian di bawah)"
 msgid "Large album cover (no details)"
 msgstr "Kulit album besar (tiada perincian)"
 
-#: widgets/fancytabwidget.cpp:662
+#: widgets/fancytabwidget.cpp:642
 msgid "Large sidebar"
 msgstr "Palang sisi besar"
 
@@ -2908,7 +2914,7 @@ msgstr ""
 msgid "Last.fm authentication failed"
 msgstr ""
 
-#: internet/lastfm/lastfmservice.cpp:266
+#: internet/lastfm/lastfmservice.cpp:268
 msgid "Last.fm is currently busy, please try again in a few minutes"
 msgstr "Last.fm sedang sibuk, sila cuba lagi setelah beberapa minit"
 
@@ -2937,7 +2943,7 @@ msgstr "Kiri"
 msgid "Length"
 msgstr "Jangkamasa"
 
-#: ui/mainwindow.cpp:223 ui/mainwindow.cpp:238
+#: ui/mainwindow.cpp:251 ui/mainwindow.cpp:266
 #: ../bin/src/ui_seafilesettingspage.h:177
 msgid "Library"
 msgstr "Pustaka"
@@ -2946,7 +2952,7 @@ msgstr "Pustaka"
 msgid "Library advanced grouping"
 msgstr "Pengelompokan lanjutan pustaka"
 
-#: ui/mainwindow.cpp:2539
+#: ui/mainwindow.cpp:2514
 msgid "Library rescan notice"
 msgstr "Notis imbas semula pustaka"
 
@@ -2982,7 +2988,7 @@ msgstr "Muat kulit muka dari cakera"
 msgid "Load cover from disk..."
 msgstr "Muat kulit muka dari cakera..."
 
-#: playlist/playlistcontainer.cpp:291
+#: playlist/playlistcontainer.cpp:294
 msgid "Load playlist"
 msgstr "Muat senarai main"
 
@@ -3002,7 +3008,7 @@ msgstr "Memuatkan pangkalan data iPod"
 msgid "Loading smart playlist"
 msgstr "Memuatkan senarai main pintar"
 
-#: library/librarymodel.cpp:167
+#: library/librarymodel.cpp:169
 msgid "Loading songs"
 msgstr "Memuatkan lagu"
 
@@ -3011,7 +3017,7 @@ msgstr "Memuatkan lagu"
 msgid "Loading stream"
 msgstr "Memuatkan strim"
 
-#: playlist/songloaderinserter.cpp:129 ui/edittagdialog.cpp:247
+#: playlist/songloaderinserter.cpp:129 ui/edittagdialog.cpp:251
 msgid "Loading tracks"
 msgstr "Memuatkan trek"
 
@@ -3019,7 +3025,7 @@ msgstr "Memuatkan trek"
 msgid "Loading tracks info"
 msgstr "Memuatkan maklumat trek"
 
-#: library/librarymodel.cpp:162
+#: library/librarymodel.cpp:164
 #: internet/podcasts/podcastdiscoverymodel.cpp:105 widgets/prettyimage.cpp:161
 #: widgets/widgetfadehelper.cpp:96 internet/vk/vkservice.cpp:513
 #: internet/vk/vksettingspage.cpp:125 ../bin/src/ui_addpodcastdialog.h:179
@@ -3146,11 +3152,11 @@ msgctxt "Label for button to enable/disable Enterprise background sound."
 msgid "Make it so!"
 msgstr "Make it so!"
 
-#: internet/spotify/spotifyservice.cpp:667
+#: internet/spotify/spotifyservice.cpp:669
 msgid "Make playlist available offline"
 msgstr "Buatkan senarai main tersedia di luar talian"
 
-#: internet/lastfm/lastfmservice.cpp:278
+#: internet/lastfm/lastfmservice.cpp:280
 msgid "Malformed response"
 msgstr "Respon cacat"
 
@@ -3275,7 +3281,7 @@ msgstr "Titik lekap"
 msgid "Move down"
 msgstr "Alih ke bawah"
 
-#: ui/mainwindow.cpp:673 widgets/fileviewlist.cpp:42
+#: ui/mainwindow.cpp:698 widgets/fileviewlist.cpp:42
 msgid "Move to library..."
 msgstr "Alih ke pustaka..."
 
@@ -3284,7 +3290,7 @@ msgstr "Alih ke pustaka..."
 msgid "Move up"
 msgstr "Alih ke atas"
 
-#: transcoder/transcodedialog.cpp:225 ui/mainwindow.cpp:1955
+#: transcoder/transcodedialog.cpp:225 ui/mainwindow.cpp:1979
 #: internet/vk/vkservice.cpp:908
 msgid "Music"
 msgstr "Muzik"
@@ -3336,7 +3342,7 @@ msgstr "Proksi Rangkaian"
 msgid "Network Remote"
 msgstr "Jauh Rangkaian"
 
-#: playlist/playlistdelegates.cpp:295 ui/edittagdialog.cpp:523
+#: playlist/playlistdelegates.cpp:295 ui/edittagdialog.cpp:531
 msgid "Never"
 msgstr "Tidak Sesekali"
 
@@ -3355,11 +3361,11 @@ msgstr "Tidak sesekali mula dimainkan"
 msgid "New folder"
 msgstr "Folder baharu"
 
-#: ui/mainwindow.cpp:1792 ../bin/src/ui_mainwindow.h:693
+#: ui/mainwindow.cpp:1817 ../bin/src/ui_mainwindow.h:693
 msgid "New playlist"
 msgstr "Senarai main baharu"
 
-#: library/libraryview.cpp:394
+#: library/libraryview.cpp:395
 msgid "New smart playlist..."
 msgstr "Senarai main pintar baharu..."
 
@@ -3379,7 +3385,7 @@ msgstr ""
 msgid "Newest tracks"
 msgstr "Trek terbaharu"
 
-#: ui/edittagdialog.cpp:168 ui/trackselectiondialog.cpp:49
+#: ui/edittagdialog.cpp:172 ui/trackselectiondialog.cpp:49
 msgid "Next"
 msgstr "Seterusnya"
 
@@ -3400,7 +3406,7 @@ msgstr "Tiada penganalisis"
 msgid "No background image"
 msgstr "Tiada imej latar belakang"
 
-#: ui/albumcovermanager.cpp:786
+#: ui/albumcovermanager.cpp:789
 msgid "No covers to export."
 msgstr "Tiada kulit muka dieksport."
 
@@ -3408,7 +3414,7 @@ msgstr "Tiada kulit muka dieksport."
 msgid "No long blocks"
 msgstr "Tiada blok panjang"
 
-#: playlist/playlistcontainer.cpp:376
+#: playlist/playlistcontainer.cpp:379
 msgid ""
 "No matches found.  Clear the search box to show the whole playlist again."
 msgstr "Tiada padanan ditemui. Kosongkan kotak carian untuk paparkan seluruh senarai main semula."
@@ -3422,7 +3428,7 @@ msgstr "Tiada blok pendek"
 msgid "None"
 msgstr "Tiada"
 
-#: library/libraryview.cpp:639 ui/mainwindow.cpp:2268 ui/mainwindow.cpp:2416
+#: library/libraryview.cpp:640 ui/mainwindow.cpp:2277 ui/mainwindow.cpp:2423
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Tiada satupun lagu yang dipilih sesuai untuk disalin ke peranti"
 
@@ -3442,19 +3448,19 @@ msgstr "Tidak tersedia bila menggunakan senarai main dinamik"
 msgid "Not connected"
 msgstr "Tidak disambung"
 
-#: internet/lastfm/lastfmservice.cpp:269
+#: internet/lastfm/lastfmservice.cpp:271
 msgid "Not enough content"
 msgstr "Tidak cukup kandungan"
 
-#: internet/lastfm/lastfmservice.cpp:273
+#: internet/lastfm/lastfmservice.cpp:275
 msgid "Not enough fans"
 msgstr "Tidak cukup peminat"
 
-#: internet/lastfm/lastfmservice.cpp:271
+#: internet/lastfm/lastfmservice.cpp:273
 msgid "Not enough members"
 msgstr "Tidak cukup ahli"
 
-#: internet/lastfm/lastfmservice.cpp:275
+#: internet/lastfm/lastfmservice.cpp:277
 msgid "Not enough neighbors"
 msgstr "Kejiranan tidak mencukupi"
 
@@ -3491,7 +3497,7 @@ msgstr "Sekarang Dimainkan"
 msgid "Number of episodes to show"
 msgstr "Bilangan episod yang ditunjukkan"
 
-#: ui/notificationssettingspage.cpp:36
+#: ui/notificationssettingspage.cpp:38
 msgid "OSD Preview"
 msgstr "Pratonton"
 
@@ -3584,7 +3590,7 @@ msgid "Open in Google Drive"
 msgstr "Buka dalam Google Drive"
 
 #: devices/deviceview.cpp:224 globalsearch/globalsearchview.cpp:461
-#: internet/core/internetservice.cpp:105 library/libraryview.cpp:383
+#: internet/core/internetservice.cpp:62 library/libraryview.cpp:384
 #: widgets/fileviewlist.cpp:36
 msgid "Open in new playlist"
 msgstr "Buka dalam senarai main baharu"
@@ -3603,7 +3609,7 @@ msgstr "Buka dalam pelayar anda"
 msgid "Open..."
 msgstr "Buka..."
 
-#: internet/lastfm/lastfmservice.cpp:255
+#: internet/lastfm/lastfmservice.cpp:257
 msgid "Operation failed"
 msgstr "Operasi gagal"
 
@@ -3629,7 +3635,7 @@ msgstr "Opus"
 msgid "Organise Files"
 msgstr "Aturkan Fail"
 
-#: library/libraryview.cpp:404 ui/mainwindow.cpp:676
+#: library/libraryview.cpp:405 ui/mainwindow.cpp:701
 msgid "Organise files..."
 msgstr "Urus fail..."
 
@@ -3705,7 +3711,7 @@ msgstr "Parti"
 msgid "Password"
 msgstr "Kata laluan"
 
-#: core/globalshortcuts.cpp:50 ui/mainwindow.cpp:1107 ui/mainwindow.cpp:1603
+#: core/globalshortcuts.cpp:50 ui/mainwindow.cpp:1132 ui/mainwindow.cpp:1628
 #: ui/qtsystemtrayicon.cpp:175 wiimotedev/wiimotesettingspage.cpp:114
 msgid "Pause"
 msgstr "Jeda"
@@ -3729,12 +3735,12 @@ msgstr "Penyampai"
 msgid "Pixel"
 msgstr "Piksel"
 
-#: widgets/fancytabwidget.cpp:664
+#: widgets/fancytabwidget.cpp:644
 msgid "Plain sidebar"
 msgstr "Palang sisi biasa"
 
-#: core/globalshortcuts.cpp:49 ui/mainwindow.cpp:648 ui/mainwindow.cpp:1073
-#: ui/mainwindow.cpp:1092 ui/mainwindow.cpp:1607 ui/qtsystemtrayicon.cpp:164
+#: core/globalshortcuts.cpp:49 ui/mainwindow.cpp:673 ui/mainwindow.cpp:1098
+#: ui/mainwindow.cpp:1117 ui/mainwindow.cpp:1632 ui/qtsystemtrayicon.cpp:164
 #: ui/qtsystemtrayicon.cpp:188 wiimotedev/wiimotesettingspage.cpp:107
 #: ../bin/src/ui_mainwindow.h:659
 msgid "Play"
@@ -3769,7 +3775,7 @@ msgstr "Main balik"
 msgid "Player options"
 msgstr "Pilihan pemain"
 
-#: playlist/playlistcontainer.cpp:287 playlist/playlistlistcontainer.cpp:228
+#: playlist/playlistcontainer.cpp:290 playlist/playlistlistcontainer.cpp:228
 #: playlist/playlistmanager.cpp:86 playlist/playlistmanager.cpp:155
 #: playlist/playlistmanager.cpp:495 playlist/playlisttabbar.cpp:366
 msgid "Playlist"
@@ -3788,7 +3794,7 @@ msgstr "Pilihan senarai main"
 msgid "Playlist type"
 msgstr "Jenis senarai main"
 
-#: internet/soundcloud/soundcloudservice.cpp:132 ui/mainwindow.cpp:244
+#: internet/soundcloud/soundcloudservice.cpp:132 ui/mainwindow.cpp:272
 msgid "Playlists"
 msgstr "Senarai main"
 
@@ -3888,7 +3894,7 @@ msgstr "Pilihan OSD menarik"
 msgid "Preview"
 msgstr "Pratonton"
 
-#: ui/edittagdialog.cpp:166 ui/trackselectiondialog.cpp:47
+#: ui/edittagdialog.cpp:170 ui/trackselectiondialog.cpp:47
 msgid "Previous"
 msgstr "Sebelum"
 
@@ -3948,12 +3954,12 @@ msgstr "Menanya peranti..."
 msgid "Queue Manager"
 msgstr "Pengurus Baris Gilir"
 
-#: ui/mainwindow.cpp:1700
+#: ui/mainwindow.cpp:1725
 msgid "Queue selected tracks"
 msgstr "Baris gilir trek terpilih"
 
-#: globalsearch/globalsearchview.cpp:466 library/libraryview.cpp:388
-#: ui/mainwindow.cpp:1698
+#: globalsearch/globalsearchview.cpp:466 library/libraryview.cpp:389
+#: ui/mainwindow.cpp:1723
 msgid "Queue track"
 msgstr "Baris gilir trek"
 
@@ -4007,7 +4013,7 @@ msgid "Rating"
 msgstr "Penarafan"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:309
-#: ui/albumcovermanager.cpp:218
+#: ui/albumcovermanager.cpp:221
 msgid "Really cancel?"
 msgstr "Betul batalkan?"
 
@@ -4084,7 +4090,7 @@ msgstr "Buang dari Muzik Saya"
 msgid "Remove from bookmarks"
 msgstr "Buang dari tanda buku"
 
-#: internet/spotify/spotifyservice.cpp:679 ../bin/src/ui_mainwindow.h:688
+#: internet/spotify/spotifyservice.cpp:681 ../bin/src/ui_mainwindow.h:688
 msgid "Remove from playlist"
 msgstr "Buang dari senarai main"
 
@@ -4129,7 +4135,7 @@ msgid "Repeat track"
 msgstr "Ulang trek"
 
 #: devices/deviceview.cpp:221 globalsearch/globalsearchview.cpp:457
-#: internet/core/internetservice.cpp:93 library/libraryview.cpp:380
+#: internet/core/internetservice.cpp:55 library/libraryview.cpp:381
 #: widgets/fileviewlist.cpp:34
 msgid "Replace current playlist"
 msgstr "Ganti senarai main semasa"
@@ -4162,7 +4168,7 @@ msgstr "Perlukan kod pengesahihan"
 msgid "Reset"
 msgstr "Tetap semula"
 
-#: ui/edittagdialog.cpp:794 ../bin/src/ui_edittagdialog.h:713
+#: ui/edittagdialog.cpp:802 ../bin/src/ui_edittagdialog.h:713
 msgid "Reset play counts"
 msgstr "Tetap semula kiraan main"
 
@@ -4296,7 +4302,7 @@ msgstr ""
 msgid "Saving songs statistics into songs files"
 msgstr "Menyimpan statistik lagu dalam fail lagu"
 
-#: ui/edittagdialog.cpp:703 ui/trackselectiondialog.cpp:255
+#: ui/edittagdialog.cpp:711 ui/trackselectiondialog.cpp:255
 msgid "Saving tracks"
 msgstr "Menyimpan trek"
 
@@ -4326,7 +4332,7 @@ msgstr "Seafile"
 msgid "Search"
 msgstr "Gelintar"
 
-#: ui/mainwindow.cpp:235 ../bin/src/ui_globalsearchsettingspage.h:141
+#: ui/mainwindow.cpp:263 ../bin/src/ui_globalsearchsettingspage.h:141
 msgctxt "Global search settings dialog title."
 msgid "Search"
 msgstr "Gelintar"
@@ -4465,11 +4471,11 @@ msgstr "URL pelayan"
 msgid "Server details"
 msgstr "Perincian pelayan"
 
-#: internet/lastfm/lastfmservice.cpp:261
+#: internet/lastfm/lastfmservice.cpp:263
 msgid "Service offline"
 msgstr "Perkhidmatan di luar talian"
 
-#: ui/mainwindow.cpp:1737
+#: ui/mainwindow.cpp:1762
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr "Tetapkan %1 ke \"%2\"..."
@@ -4545,7 +4551,7 @@ msgstr "Tunjuk OSD menarik"
 msgid "Show above status bar"
 msgstr "Tunjuk di atas palang status"
 
-#: ui/mainwindow.cpp:615
+#: ui/mainwindow.cpp:640
 msgid "Show all songs"
 msgstr "Tunjuk semua lagu"
 
@@ -4569,16 +4575,16 @@ msgstr "Tunjuk saiz penuh..."
 msgid "Show groups in global search result"
 msgstr "Tunjuk kumpulan dalam keputusan gelintar sejagat"
 
-#: library/libraryview.cpp:422 ui/mainwindow.cpp:686
+#: library/libraryview.cpp:423 ui/mainwindow.cpp:711
 #: widgets/fileviewlist.cpp:53
 msgid "Show in file browser..."
 msgstr "Tunjuk dalam pelayar fail..."
 
-#: ui/mainwindow.cpp:688
+#: ui/mainwindow.cpp:713
 msgid "Show in library..."
 msgstr "Tunjuk dalam pustaka...."
 
-#: library/libraryview.cpp:425
+#: library/libraryview.cpp:426
 msgid "Show in various artists"
 msgstr "Tunjuk dalam artis pelbagai"
 
@@ -4586,11 +4592,11 @@ msgstr "Tunjuk dalam artis pelbagai"
 msgid "Show moodbar"
 msgstr "Tunjuk palang suasana"
 
-#: ui/mainwindow.cpp:617
+#: ui/mainwindow.cpp:642
 msgid "Show only duplicates"
 msgstr "Hanya tunjuk pendua"
 
-#: ui/mainwindow.cpp:619
+#: ui/mainwindow.cpp:644
 msgid "Show only untagged"
 msgstr "Tunjuk hanya tidak ditag"
 
@@ -4682,11 +4688,11 @@ msgstr "Kiraan langkau"
 msgid "Skip forwards in playlist"
 msgstr "Langkau maju dalam senarai main"
 
-#: ui/mainwindow.cpp:1711
+#: ui/mainwindow.cpp:1736
 msgid "Skip selected tracks"
 msgstr "Langkau trek terpilih"
 
-#: ui/mainwindow.cpp:1709
+#: ui/mainwindow.cpp:1734
 msgid "Skip track"
 msgstr "Langkau trek"
 
@@ -4694,7 +4700,7 @@ msgstr "Langkau trek"
 msgid "Small album cover"
 msgstr "Kulit album kecil"
 
-#: widgets/fancytabwidget.cpp:663
+#: widgets/fancytabwidget.cpp:643
 msgid "Small sidebar"
 msgstr "Palang sisi kecil"
 
@@ -4702,7 +4708,7 @@ msgstr "Palang sisi kecil"
 msgid "Smart playlist"
 msgstr "Senarai main pintar"
 
-#: library/librarymodel.cpp:1362
+#: library/librarymodel.cpp:1364
 msgid "Smart playlists"
 msgstr "Senarai main pintar"
 
@@ -4718,7 +4724,7 @@ msgstr "Soft Rock"
 msgid "Song Information"
 msgstr "Maklumat Lagu"
 
-#: ui/mainwindow.cpp:255
+#: ui/mainwindow.cpp:283
 msgid "Song info"
 msgstr "Maklumat lagu"
 
@@ -4775,7 +4781,7 @@ msgstr "Spotify"
 msgid "Spotify login error"
 msgstr "Ralat daftar masuk Spotify"
 
-#: internet/spotify/spotifyservice.cpp:842
+#: internet/spotify/spotifyservice.cpp:844
 msgid "Spotify playlist's URL"
 msgstr "URL senarai main Spotify"
 
@@ -4787,7 +4793,7 @@ msgstr "Pemalam Spotify"
 msgid "Spotify plugin not installed"
 msgstr "Pemalam Spotify tidak dipasang"
 
-#: internet/spotify/spotifyservice.cpp:833
+#: internet/spotify/spotifyservice.cpp:835
 msgid "Spotify song's URL"
 msgstr "URL lagu Spotify"
 
@@ -4795,7 +4801,7 @@ msgstr "URL lagu Spotify"
 msgid "Standard"
 msgstr "Piawai"
 
-#: internet/spotify/spotifyservice.cpp:416
+#: internet/spotify/spotifyservice.cpp:417
 #: internet/subsonic/subsonicservice.cpp:115
 msgid "Starred"
 msgstr "Disukai"
@@ -4845,7 +4851,7 @@ msgstr "Henti selepas setiap trek"
 msgid "Stop after every track"
 msgstr "Henti selepas setiap trek"
 
-#: ui/mainwindow.cpp:652 ../bin/src/ui_mainwindow.h:663
+#: ui/mainwindow.cpp:677 ../bin/src/ui_mainwindow.h:663
 msgid "Stop after this track"
 msgstr "Henti selepas trek ini"
 
@@ -4925,15 +4931,15 @@ msgstr "Format disokong"
 msgid "Synchronize statistics to files now"
 msgstr "Segerak statistik ke fail sekarang"
 
-#: internet/spotify/spotifyservice.cpp:706
+#: internet/spotify/spotifyservice.cpp:708
 msgid "Syncing Spotify inbox"
 msgstr "Menyegerak kotak masuk Spotify"
 
-#: internet/spotify/spotifyservice.cpp:700
+#: internet/spotify/spotifyservice.cpp:702
 msgid "Syncing Spotify playlist"
 msgstr "Menyegerak senarai main Spotify"
 
-#: internet/spotify/spotifyservice.cpp:711
+#: internet/spotify/spotifyservice.cpp:713
 msgid "Syncing Spotify starred tracks"
 msgstr "Menyegerak trek terbintang Spotify"
 
@@ -4941,7 +4947,7 @@ msgstr "Menyegerak trek terbintang Spotify"
 msgid "System colors"
 msgstr "Warna sistem"
 
-#: widgets/fancytabwidget.cpp:665
+#: widgets/fancytabwidget.cpp:645
 msgid "Tabs on top"
 msgstr "Tab di atas"
 
@@ -4997,13 +5003,13 @@ msgid ""
 "license key. Visit subsonic.org for details."
 msgstr "Tempoh percubaan pelayan Subsonic telah tamat. Sila beri derma untuk dapatkan kunci lesen. Lawati subsonic untuk perincian."
 
-#: ui/mainwindow.cpp:2530
+#: ui/mainwindow.cpp:2505
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
 msgstr "Versi Clementine yang anda telah kemaskini memerlukan imbas semula pustaka penuh kerana terdapat beberapa fitur baharu yang tersenarai di bawah:"
 
-#: library/libraryview.cpp:561
+#: library/libraryview.cpp:562
 msgid "There are other songs in this album"
 msgstr "Terdapat lagu lain di dalam album ini"
 
@@ -5039,7 +5045,7 @@ msgid ""
 "continue?"
 msgstr "Fail ini akan dipadam dari peranti, anda pasti untuk meneruskan?"
 
-#: library/libraryview.cpp:645 ui/mainwindow.cpp:2318 widgets/fileview.cpp:187
+#: library/libraryview.cpp:646 ui/mainwindow.cpp:2325 widgets/fileview.cpp:187
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -5110,7 +5116,7 @@ msgstr "Ini kali pertama anda menyambung ke peranti ini. Sekarang Clementine aka
 msgid "This option can be changed in the \"Behavior\" preferences"
 msgstr "Pilihan ini boleh diubah dalam keutamaan \"Kelakuan\""
 
-#: internet/lastfm/lastfmservice.cpp:263
+#: internet/lastfm/lastfmservice.cpp:265
 msgid "This stream is for paid subscribers only"
 msgstr "Strim ini untuk pelanggan berbayar sahaja"
 
@@ -5142,7 +5148,7 @@ msgstr "Togol OSD Menarik"
 msgid "Toggle fullscreen"
 msgstr "Togol skrin penuh"
 
-#: ui/mainwindow.cpp:1702
+#: ui/mainwindow.cpp:1727
 msgid "Toggle queue status"
 msgstr "Togol status baris gilir"
 
@@ -5166,7 +5172,7 @@ msgstr "Terlalu banyak arah semula"
 msgid "Top Rated"
 msgstr ""
 
-#: internet/spotify/spotifyservice.cpp:430
+#: internet/spotify/spotifyservice.cpp:431
 msgid "Top tracks"
 msgstr "Trek terbaik"
 
@@ -5247,12 +5253,12 @@ msgstr "Tidak boleh sambung"
 msgid "Unable to download %1 (%2)"
 msgstr "Tidak boleh muat turun %1 (%2)"
 
-#: core/song.cpp:435 library/librarymodel.cpp:372 library/librarymodel.cpp:377
-#: library/librarymodel.cpp:381 library/librarymodel.cpp:1154
+#: core/song.cpp:435 library/librarymodel.cpp:374 library/librarymodel.cpp:379
+#: library/librarymodel.cpp:383 library/librarymodel.cpp:1156
 #: library/savedgroupingmanager.cpp:103 playlist/playlistdelegates.cpp:305
 #: playlist/playlistmanager.cpp:502 playlist/playlistmanager.cpp:503
-#: ui/albumcoverchoicecontroller.cpp:126 ui/edittagdialog.cpp:455
-#: ui/edittagdialog.cpp:499
+#: ui/albumcoverchoicecontroller.cpp:126 ui/edittagdialog.cpp:463
+#: ui/edittagdialog.cpp:507
 msgid "Unknown"
 msgstr "Tidak diketahui"
 
@@ -5261,7 +5267,7 @@ msgid "Unknown content-type"
 msgstr "Jenis-kandungan tidak diketahui"
 
 #: internet/digitally/digitallyimportedclient.cpp:74
-#: internet/lastfm/lastfmservice.cpp:282
+#: internet/lastfm/lastfmservice.cpp:284
 msgid "Unknown error"
 msgstr "Ralat tidak diketahui"
 
@@ -5269,11 +5275,11 @@ msgstr "Ralat tidak diketahui"
 msgid "Unset cover"
 msgstr "Nyahtetap kulit muka"
 
-#: ui/mainwindow.cpp:1707
+#: ui/mainwindow.cpp:1732
 msgid "Unskip selected tracks"
 msgstr "Jangan langkau trek terpilih"
 
-#: ui/mainwindow.cpp:1705
+#: ui/mainwindow.cpp:1730
 msgid "Unskip track"
 msgstr "Jangan langkau trek"
 
@@ -5282,7 +5288,7 @@ msgstr "Jangan langkau trek"
 msgid "Unsubscribe"
 msgstr "Jangan langgan"
 
-#: songinfo/songkickconcerts.cpp:173
+#: songinfo/songkickconcerts.cpp:174
 msgid "Upcoming Concerts"
 msgstr "Konsert Akan Datang"
 
@@ -5429,8 +5435,8 @@ msgstr "MP3 VBR"
 msgid "Variable bit rate"
 msgstr "Kadar bit pembolehubah"
 
-#: globalsearch/globalsearchmodel.cpp:107 library/librarymodel.cpp:298
-#: playlist/playlistmanager.cpp:514 ui/albumcovermanager.cpp:270
+#: globalsearch/globalsearchmodel.cpp:109 library/librarymodel.cpp:300
+#: playlist/playlistmanager.cpp:514 ui/albumcovermanager.cpp:273
 msgid "Various artists"
 msgstr "Pelbagai artis"
 
@@ -5581,13 +5587,13 @@ msgstr "Audio Windows Media"
 msgid "Without cover:"
 msgstr "Tanpa kulit muka:"
 
-#: library/libraryview.cpp:562
+#: library/libraryview.cpp:563
 msgid ""
 "Would you like to move the other songs in this album to Various Artists as "
 "well?"
 msgstr "Anda mahu alih lagu lain dalam album ini ke Artis Pelbagai juga?"
 
-#: ui/mainwindow.cpp:2537
+#: ui/mainwindow.cpp:2512
 msgid "Would you like to run a full rescan right now?"
 msgstr "Anda mahu jalankan imbas semula penuh sekarang?"
 
@@ -5726,7 +5732,7 @@ msgstr "Kelayakan Last.fm anda tidak betul"
 msgid "Your Magnatune credentials were incorrect"
 msgstr "Kelayakan Magnatune anda tidak betul"
 
-#: library/libraryview.cpp:352
+#: library/libraryview.cpp:353
 msgid "Your library is empty!"
 msgstr "Pustaka anda kosong!"
 
@@ -5790,7 +5796,7 @@ msgstr "antara"
 msgid "biggest first"
 msgstr "terbesar dahulu"
 
-#: playlist/playlistview.cpp:232 ui/edittagdialog.cpp:492
+#: playlist/playlistview.cpp:242 ui/edittagdialog.cpp:500
 msgid "bpm"
 msgstr "bpm"
 
@@ -5843,8 +5849,8 @@ msgstr "ditempat terakhir"
 
 #: internet/spotify/spotifysettingspage.cpp:62
 #: internet/spotify/spotifysettingspage.cpp:63
-#: internet/spotify/spotifysettingspage.cpp:64 playlist/playlistview.cpp:236
-#: ui/edittagdialog.cpp:494
+#: internet/spotify/spotifysettingspage.cpp:64 playlist/playlistview.cpp:246
+#: ui/edittagdialog.cpp:502
 msgid "kbps"
 msgstr "kbps"
 
