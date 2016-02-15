@@ -20,6 +20,7 @@
 #include "core/application.h"
 #include "core/logging.h"
 #include "networkremote/networkremote.h"
+#include "playlist/playlistmanager.h"
 
 NetworkRemoteHelper* NetworkRemoteHelper::sInstance = nullptr;
 
