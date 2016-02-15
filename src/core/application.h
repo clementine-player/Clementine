@@ -22,6 +22,8 @@
 #ifndef CORE_APPLICATION_H_
 #define CORE_APPLICATION_H_
 
+#include <memory>
+
 #include <QObject>
 
 #include "ui/settingsdialog.h"
@@ -111,7 +113,7 @@ signals:
 
  private:
   QString language_name_;
-  ApplicationImpl* p_;
+  std::unique_ptr<ApplicationImpl> p_;
   QList<QThread*> threads_;
 };
 
