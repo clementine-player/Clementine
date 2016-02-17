@@ -55,7 +55,10 @@ void EchoNestImages::RequestFinished() {
   }
 
   for (const Echonest::ArtistImage& image : request->artist_->images()) {
-    emit ImageReady(request->id_, image.url());
+    // Echonest still sends these broken URLs for last.fm.
+    if (image.url().authority() != "userserve-ak.last.fm") {
+      emit ImageReady(request->id_, image.url());
+    }
   }
 
   emit Finished(request->id_);
