@@ -125,7 +125,9 @@ void EchoNestImages::DoSpotifyImageRequest(const QString& id, int request_id) {
       return (a.second.height() * a.second.width()) <
           (b.second.height() * b.second.width());
     });
-    emit ImageReady(request_id, image_urls.last().first);
+    if (!image_urls.isEmpty()) {
+      emit ImageReady(request_id, image_urls.last().first);
+    }
   });
 }
 
