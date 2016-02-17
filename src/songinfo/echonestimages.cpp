@@ -119,8 +119,8 @@ void EchoNestImages::DoSpotifyImageRequest(const QString& id, int request_id) {
     }
     // All the images are the same just different sizes; just pick the largest.
     std::sort(image_urls.begin(), image_urls.end(),
-              [](decltype(image_urls)::const_reference a,
-                 decltype(image_urls)::const_reference b) {
+              [](const QPair<QUrl, QSize>& a,
+                 const QPair<QUrl, QSize>& b) {
       // Sorted by area ascending.
       return (a.second.height() * a.second.width()) <
           (b.second.height() * b.second.width());
