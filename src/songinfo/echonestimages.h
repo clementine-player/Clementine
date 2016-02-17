@@ -20,24 +20,33 @@
 
 #include <memory>
 
-#include "songinfoprovider.h"
+#include <QMultiMap>
 
+#include <echonest/Artist.h>
+
+#include "songinfo/songinfoprovider.h"
+
+class NetworkAccessManager;
 class QNetworkReply;
 
 class EchoNestImages : public SongInfoProvider {
   Q_OBJECT
 
  public:
+  EchoNestImages();
+  virtual ~EchoNestImages();
   void FetchInfo(int id, const Song& metadata);
 
  private slots:
-  void RequestFinished();
+  void RequestFinished(QNetworkReply*, int id, Echonest::Artist artist);
+  void IdsFound(QNetworkReply* reply, int id);
 
  private:
-  struct Request;
-  typedef std::shared_ptr<Request> RequestPtr;
+  void DoSpotifyImageRequest(const QString& id, int request_id);
 
-  QMap<QNetworkReply*, RequestPtr> requests_;
+  void RegisterReply(QNetworkReply* reply, int id);
+  QMultiMap<int, QNetworkReply*> replies_;
+  std::unique_ptr<NetworkAccessManager> network_;
 };
 
 #endif  // ECHONESTIMAGES_H
