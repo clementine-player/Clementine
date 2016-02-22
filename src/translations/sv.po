@@ -7,7 +7,7 @@
 # Christian Svensson <chris.sv88@gmail.com>, 2013
 # Daniel Sandman <revoltism@gmail.com>, 2012
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
-# Kristian <kristianm24@gmail.com>, 2013-2015
+# Kristian <kristianm24@gmail.com>, 2013-2016
 # Kristian <kristianm24@gmail.com>, 2012
 # Kristoffer Grundström <kristoffer.grundstrom1983@gmail.com>, 2014
 # Mattias Andersson <mandersson444@gmail.com>, 2014-2015
@@ -22,8 +22,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2016-02-10 16:08+0000\n"
-"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
+"PO-Revision-Date: 2016-02-20 04:11+0000\n"
+"Last-Translator: Kristian <kristianm24@gmail.com>\n"
 "Language-Team: Swedish (http://www.transifex.com/davidsansome/clementine/language/sv/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -92,7 +92,7 @@ msgstr "%1 album"
 #: widgets/equalizerslider.cpp:43
 #, qt-format
 msgid "%1 dB"
-msgstr ""
+msgstr "%1 dB"
 
 #: core/utilities.cpp:120
 #, qt-format
@@ -410,7 +410,7 @@ msgstr "AAC 64k"
 msgid "AIFF"
 msgstr "AIFF"
 
-#: widgets/nowplayingwidget.cpp:149
+#: widgets/nowplayingwidget.cpp:151
 msgid "ALL GLORY TO THE HYPNOTOAD"
 msgstr "ÄRAD VARE HYPNOTOAD"
 
@@ -1279,7 +1279,7 @@ msgid ""
 "installed Clementine properly."
 msgstr "Clementine kunde inte läsa in några projectM-visualiseringar. Kontrollera att du har installerat Clementine ordentligt."
 
-#: widgets/prettyimage.cpp:193
+#: widgets/prettyimage.cpp:199
 msgid "Clementine image viewer"
 msgstr "Clementine-bildvisare"
 
@@ -1293,7 +1293,7 @@ msgstr "Clementine kommer att söka musik i:"
 
 #: internet/lastfm/lastfmsettingspage.cpp:78
 msgid "Click Ok once you authenticated Clementine in your last.fm account."
-msgstr ""
+msgstr "Klicka på Ok när du har gett Clementine rätt att ansluta till ditt last.fm konto."
 
 #: library/libraryview.cpp:359
 msgid "Click here to add some music"
@@ -1754,15 +1754,15 @@ msgstr "Menade du"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:159
 msgid "Digitally Imported"
-msgstr "Digitalt importerad"
+msgstr "Digitally Imported"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:163
 msgid "Digitally Imported password"
-msgstr "Digitalt importerat lösenord"
+msgstr "Digitally Imported lösenord"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:161
 msgid "Digitally Imported username"
-msgstr "Digitalt importerat användarnamn"
+msgstr "Digitally Imported användarnamn"
 
 #: ../bin/src/ui_networkproxysettingspage.h:158
 msgid "Direct internet connection"
@@ -2315,7 +2315,7 @@ msgstr "Hämtning klar"
 
 #: internet/subsonic/subsonicdynamicplaylist.cpp:88
 msgid "Fetching Playlist Items"
-msgstr ""
+msgstr "Hämtar Spellistsobjekt"
 
 #: internet/subsonic/subsonicservice.cpp:282
 msgid "Fetching Subsonic library"
@@ -2395,7 +2395,7 @@ msgstr "Avsluta"
 msgid "First level"
 msgstr "Första nivån"
 
-#: widgets/nowplayingwidget.cpp:108
+#: widgets/nowplayingwidget.cpp:110
 msgid "Fit cover to width"
 msgstr "Passa omslag till bredd"
 
@@ -2890,15 +2890,15 @@ msgstr "Laptop/hörlurar"
 msgid "Large Hall"
 msgstr "Stor hall"
 
-#: widgets/nowplayingwidget.cpp:98
+#: widgets/nowplayingwidget.cpp:100
 msgid "Large album cover"
 msgstr "Stort albumomslag"
 
-#: widgets/nowplayingwidget.cpp:101
+#: widgets/nowplayingwidget.cpp:103
 msgid "Large album cover (details below)"
 msgstr "Stora skivomslag (detaljer nedan)"
 
-#: widgets/nowplayingwidget.cpp:103
+#: widgets/nowplayingwidget.cpp:105
 msgid "Large album cover (no details)"
 msgstr "Stora skivomslag (inga detaljer)"
 
@@ -2925,7 +2925,7 @@ msgstr "Last.fm-autentisering"
 
 #: internet/lastfm/lastfmsettingspage.cpp:70
 msgid "Last.fm authentication failed"
-msgstr ""
+msgstr "Last.fm autentiseringen misslyckades"
 
 #: internet/lastfm/lastfmservice.cpp:268
 msgid "Last.fm is currently busy, please try again in a few minutes"
@@ -3039,7 +3039,7 @@ msgid "Loading tracks info"
 msgstr "Laddar låtinformation"
 
 #: library/librarymodel.cpp:164
-#: internet/podcasts/podcastdiscoverymodel.cpp:105 widgets/prettyimage.cpp:161
+#: internet/podcasts/podcastdiscoverymodel.cpp:105 widgets/prettyimage.cpp:167
 #: widgets/widgetfadehelper.cpp:96 internet/vk/vkservice.cpp:513
 #: internet/vk/vksettingspage.cpp:125 ../bin/src/ui_addpodcastdialog.h:179
 #: ../bin/src/ui_searchpreview.h:105 ../bin/src/ui_organisedialog.h:261
@@ -3264,7 +3264,7 @@ msgstr "Månader"
 msgid "Mood"
 msgstr "Stämning"
 
-#: moodbar/moodbarproxystyle.cpp:353
+#: moodbar/moodbarproxystyle.cpp:358
 #: ../bin/src/ui_appearancesettingspage.h:293
 msgid "Moodbar style"
 msgstr "Stil på stämningsdiagrammet"
@@ -4273,7 +4273,7 @@ msgstr "Spara omslag till disk..."
 msgid "Save current grouping"
 msgstr "Spara aktuell gruppering"
 
-#: widgets/prettyimage.cpp:178 widgets/prettyimage.cpp:223
+#: widgets/prettyimage.cpp:184 widgets/prettyimage.cpp:229
 msgid "Save image"
 msgstr "Spara bild"
 
@@ -4309,7 +4309,7 @@ msgstr "Spara denna ström i Internet-filken"
 
 #: ../bin/src/ui_savedgroupingmanager.h:101
 msgid "Saved Grouping Manager"
-msgstr ""
+msgstr "Sparad Grupperings Hanterare"
 
 #: library/library.cpp:194
 msgid "Saving songs statistics into songs files"
@@ -4560,7 +4560,7 @@ msgstr "Visa en popup från notifieringsytan"
 msgid "Show a pretty OSD"
 msgstr "Visa en skön notifiering"
 
-#: widgets/nowplayingwidget.cpp:140
+#: widgets/nowplayingwidget.cpp:142
 msgid "Show above status bar"
 msgstr "Visa ovanför statusraden"
 
@@ -4580,7 +4580,7 @@ msgstr "Visa omslagsbilder i biblioteket"
 msgid "Show dividers"
 msgstr "Visa avdelare"
 
-#: ui/albumcoverchoicecontroller.cpp:72 widgets/prettyimage.cpp:176
+#: ui/albumcoverchoicecontroller.cpp:72 widgets/prettyimage.cpp:182
 msgid "Show fullsize..."
 msgstr "Visa full storlek..."
 
@@ -4601,7 +4601,7 @@ msgstr "Visa i biblioteket"
 msgid "Show in various artists"
 msgstr "Visa i diverse artister"
 
-#: moodbar/moodbarproxystyle.cpp:348
+#: moodbar/moodbarproxystyle.cpp:353
 msgid "Show moodbar"
 msgstr "Visa stämningsdiagram"
 
@@ -4709,7 +4709,7 @@ msgstr "Hoppa över valda spår"
 msgid "Skip track"
 msgstr "Hoppa över spår"
 
-#: widgets/nowplayingwidget.cpp:96
+#: widgets/nowplayingwidget.cpp:98
 msgid "Small album cover"
 msgstr "Liten omslagsbild"
 
