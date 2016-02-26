@@ -35,13 +35,15 @@
 #include "core/utilities.h"
 #include "internet/core/internetmodel.h"
 #include "internet/spotify/spotifyservice.h"
+#include "internet/subsonic/subsonicservice.h"
 
 AlbumCoverLoader::AlbumCoverLoader(QObject* parent)
     : QObject(parent),
       stop_requested_(false),
       next_id_(1),
       network_(new NetworkAccessManager(this)),
-      connected_spotify_(false) {}
+      connected_spotify_(false),
+      connected_subsonic_(false) {}
 
 QString AlbumCoverLoader::ImageCacheDir() {
   return Utilities::GetConfigPath(Utilities::Path_AlbumCovers);
@@ -196,6 +198,26 @@ AlbumCoverLoader::TryLoadResult AlbumCoverLoader::TryLoadImage(
     QMetaObject::invokeMethod(spotify, "LoadImage", Qt::QueuedConnection,
                               Q_ARG(QString, id));
     return TryLoadResult(true, false, QImage());
+  } else if (filename.toLower().startsWith("subsonic://image/")) {
+    // HACK: we should add generic image URL handlers
+    SubsonicService* subsonic = InternetModel::Service<SubsonicService>();
+
+    if (!connected_subsonic_) {
+      connect(subsonic, SIGNAL(ImageLoaded(QString, QImage)),
+              SLOT(SubsonicImageLoaded(QString, QImage)));
+      connected_subsonic_ = true;
+    }
+
+    QString id = QUrl(filename).path();
+    if (id.startsWith('/')) {
+      id.remove(0, 1);
+    }
+    remote_subsonic_tasks_.insert(id, task);
+
+    // Need to schedule this in the subsonic service's thread
+    QMetaObject::invokeMethod(subsonic, "LoadImage", Qt::QueuedConnection,
+                              Q_ARG(QString, id));
+    return TryLoadResult(true, false, QImage());
   }
 
   QImage image(filename);
@@ -209,6 +231,16 @@ void AlbumCoverLoader::SpotifyImageLoaded(const QString& id,
   if (!remote_spotify_tasks_.contains(id)) return;
 
   Task task = remote_spotify_tasks_.take(id);
+  QImage scaled = ScaleAndPad(task.options, image);
+  emit ImageLoaded(task.id, scaled);
+  emit ImageLoaded(task.id, scaled, image);
+}
+
+void AlbumCoverLoader::SubsonicImageLoaded(const QString& id,
+                                          const QImage& image) {
+  if (!remote_subsonic_tasks_.contains(id)) return;
+
+  Task task = remote_subsonic_tasks_.take(id);
   QImage scaled = ScaleAndPad(task.options, image);
   emit ImageLoaded(task.id, scaled);
   emit ImageLoaded(task.id, scaled, image);
