@@ -14,7 +14,7 @@
    <string>Transcode Music</string>
   </property>
   <property name="windowIcon">
-   <iconset>
+   <iconset resource="../../data/data.qrc">
     <normaloff>:/icon.png</normaloff>:/icon.png</iconset>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -64,7 +64,17 @@
         <item>
          <widget class="QPushButton" name="add">
           <property name="text">
-           <string>Add...</string>
+           <string>Add file...</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="import">
+          <property name="toolTip">
+           <string>Add all tracks from a directory and all its subdirectories</string>
+          </property>
+          <property name="text">
+           <string>Add directory...</string>
           </property>
          </widget>
         </item>
@@ -87,16 +97,6 @@
            </size>
           </property>
          </spacer>
-        </item>
-        <item>
-         <widget class="QPushButton" name="import">
-          <property name="toolTip">
-           <string>Add all tracks from a directory and all its subdirectories</string>
-          </property>
-          <property name="text">
-           <string>Import...</string>
-          </property>
-         </widget>
         </item>
        </layout>
       </item>
@@ -216,10 +216,16 @@
  <tabstops>
   <tabstop>files</tabstop>
   <tabstop>add</tabstop>
+  <tabstop>import</tabstop>
   <tabstop>remove</tabstop>
   <tabstop>format</tabstop>
-  <tabstop>button_box</tabstop>
+  <tabstop>options</tabstop>
+  <tabstop>destination</tabstop>
+  <tabstop>select</tabstop>
+  <tabstop>details</tabstop>
  </tabstops>
- <resources/>
+ <resources>
+  <include location="../../data/data.qrc"/>
+ </resources>
  <connections/>
 </ui>

@@ -47,6 +47,7 @@ class TrackSelectionDialog : public QDialog {
   void accept();
 
 signals:
+  void Error(const QString& error);
   void SongChosen(const Song& original_song, const Song& new_metadata);
 
  private slots:
@@ -75,7 +76,7 @@ signals:
   void AddSong(const Song& song, int result_index, QTreeWidget* parent) const;
 
   void SetLoading(const QString& message);
-  static void SaveData(const QList<Data>& data);
+  void SaveData(const QList<Data>& data);
 
  private:
   QList<Data> data_;

@@ -172,8 +172,8 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
       app_(app),
       tray_icon_(tray_icon),
       osd_(osd),
+      edit_tag_dialog_(std::bind(&MainWindow::CreateEditTagDialog, this)),
       global_shortcuts_(new GlobalShortcuts(this)),
-      remote_(nullptr),
       global_search_view_(new GlobalSearchView(app_, this)),
       library_view_(new LibraryViewContainer(this)),
       file_view_(new FileView(this)),
@@ -183,8 +183,36 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
       device_view_(device_view_container_->view()),
       song_info_view_(new SongInfoView(this)),
       artist_info_view_(new ArtistInfoView(this)),
+      settings_dialog_(std::bind(&MainWindow::CreateSettingsDialog, this)),
+      add_stream_dialog_([=]() {
+        AddStreamDialog* add_stream_dialog = new AddStreamDialog;
+        connect(add_stream_dialog, SIGNAL(accepted()), this,
+                SLOT(AddStreamAccepted()));
+        add_stream_dialog->set_add_on_accept(
+            InternetModel::Service<SavedRadio>());
+        return add_stream_dialog;
+      }),
+      cover_manager_([=]() {
+        AlbumCoverManager* cover_manager =
+            new AlbumCoverManager(app, app->library_backend());
+        cover_manager->Init();
+
+        // Cover manager connections
+        connect(cover_manager, SIGNAL(AddToPlaylist(QMimeData*)), this,
+                SLOT(AddToPlaylist(QMimeData*)));
+        return cover_manager;
+      }),
       equalizer_(new Equalizer),
-      organise_dialog_(new OrganiseDialog(app_->task_manager())),
+      organise_dialog_([=]() {
+        OrganiseDialog* dialog = new OrganiseDialog(app->task_manager());
+        dialog->SetDestinationModel(app->library()->model()->directory_model());
+        return dialog;
+      }),
+      queue_manager_([=]() {
+        QueueManager* manager = new QueueManager;
+        manager->SetPlaylistManager(app->playlist_manager());
+        return manager;
+      }),
       playlist_menu_(new QMenu(this)),
       playlist_add_to_another_(nullptr),
       playlistitem_actions_separator_(nullptr),
@@ -230,23 +258,31 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
           SLOT(AddToPlaylist(QMimeData*)));
 
   // Add tabs to the fancy tab widget
-  ui_->tabs->AddTab(global_search_view_, IconLoader::Load("search", IconLoader::Base),
+  ui_->tabs->AddTab(global_search_view_,
+                    IconLoader::Load("search", IconLoader::Base),
                     tr("Search", "Global search settings dialog title."));
-  ui_->tabs->AddTab(library_view_, IconLoader::Load("folder-sound", IconLoader::Base),
+  ui_->tabs->AddTab(library_view_,
+                    IconLoader::Load("folder-sound", IconLoader::Base),
                     tr("Library"));
-  ui_->tabs->AddTab(file_view_, IconLoader::Load("document-open", IconLoader::Base), 
+  ui_->tabs->AddTab(file_view_,
+                    IconLoader::Load("document-open", IconLoader::Base),
                     tr("Files"));
-  ui_->tabs->AddTab(playlist_list_, IconLoader::Load("view-media-playlist", IconLoader::Base),
+  ui_->tabs->AddTab(playlist_list_,
+                    IconLoader::Load("view-media-playlist", IconLoader::Base),
                     tr("Playlists"));
-  ui_->tabs->AddTab(internet_view_, IconLoader::Load("applications-internet", IconLoader::Base),
+  ui_->tabs->AddTab(internet_view_,
+                    IconLoader::Load("applications-internet", IconLoader::Base),
                     tr("Internet"));
-  ui_->tabs->AddTab(device_view_container_,
-                    IconLoader::Load("multimedia-player-ipod-mini-blue", IconLoader::Base),
-                    tr("Devices"));
+  ui_->tabs->AddTab(
+      device_view_container_,
+      IconLoader::Load("multimedia-player-ipod-mini-blue", IconLoader::Base),
+      tr("Devices"));
   ui_->tabs->AddSpacer();
-  ui_->tabs->AddTab(song_info_view_, IconLoader::Load("view-media-lyrics", IconLoader::Base),
+  ui_->tabs->AddTab(song_info_view_,
+                    IconLoader::Load("view-media-lyrics", IconLoader::Base),
                     tr("Song info"));
-  ui_->tabs->AddTab(artist_info_view_, IconLoader::Load("x-clementine-artist", IconLoader::Base),
+  ui_->tabs->AddTab(artist_info_view_,
+                    IconLoader::Load("x-clementine-artist", IconLoader::Base),
                     tr("Artist info"));
 
   // Add the now playing widget to the fancy tab widget
@@ -286,46 +322,72 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
   device_view_->SetApplication(app_);
   playlist_list_->SetApplication(app_);
 
-  organise_dialog_->SetDestinationModel(
-      app_->library()->model()->directory_model());
-
   // Icons
   qLog(Debug) << "Creating UI";
   ui_->action_about->setIcon(IconLoader::Load("help-about", IconLoader::Base));
   ui_->action_about_qt->setIcon(IconLoader::Load("qtlogo", IconLoader::Base));
-  ui_->action_add_file->setIcon(IconLoader::Load("document-open", IconLoader::Base));
-  ui_->action_add_folder->setIcon(IconLoader::Load("document-open-folder", IconLoader::Base));
-  ui_->action_add_stream->setIcon(IconLoader::Load("document-open-remote", IconLoader::Base));
-  ui_->action_add_podcast->setIcon(IconLoader::Load("podcast", IconLoader::Provider));
-  ui_->action_clear_playlist->setIcon(IconLoader::Load("edit-clear-list", IconLoader::Base));
-  ui_->action_configure->setIcon(IconLoader::Load("configure", IconLoader::Base));
-  ui_->action_cover_manager->setIcon(IconLoader::Load("download", IconLoader::Base));
-  ui_->action_edit_track->setIcon(IconLoader::Load("edit-rename", IconLoader::Base));
-  ui_->action_equalizer->setIcon(IconLoader::Load("view-media-equalizer", IconLoader::Base));
+  ui_->action_add_file->setIcon(
+      IconLoader::Load("document-open", IconLoader::Base));
+  ui_->action_add_folder->setIcon(
+      IconLoader::Load("document-open-folder", IconLoader::Base));
+  ui_->action_add_stream->setIcon(
+      IconLoader::Load("document-open-remote", IconLoader::Base));
+  ui_->action_add_podcast->setIcon(
+      IconLoader::Load("podcast", IconLoader::Provider));
+  ui_->action_clear_playlist->setIcon(
+      IconLoader::Load("edit-clear-list", IconLoader::Base));
+  ui_->action_configure->setIcon(
+      IconLoader::Load("configure", IconLoader::Base));
+  ui_->action_cover_manager->setIcon(
+      IconLoader::Load("download", IconLoader::Base));
+  ui_->action_edit_track->setIcon(
+      IconLoader::Load("edit-rename", IconLoader::Base));
+  ui_->action_equalizer->setIcon(
+      IconLoader::Load("view-media-equalizer", IconLoader::Base));
   ui_->action_jump->setIcon(IconLoader::Load("go-jump", IconLoader::Base));
-  ui_->action_next_track->setIcon(IconLoader::Load("media-skip-forward", IconLoader::Base));
-  ui_->action_open_media->setIcon(IconLoader::Load("document-open", IconLoader::Base));
-  ui_->action_open_cd->setIcon(IconLoader::Load("media-optical", IconLoader::Base));
-  ui_->action_play_pause->setIcon(IconLoader::Load("media-playback-start", IconLoader::Base));
-  ui_->action_previous_track->setIcon(IconLoader::Load("media-skip-backward", IconLoader::Base));
-  ui_->action_mute->setIcon(IconLoader::Load("audio-volume-muted", IconLoader::Base));
-  ui_->action_quit->setIcon(IconLoader::Load("application-exit", IconLoader::Base));
-  ui_->action_remove_from_playlist->setIcon(IconLoader::Load("list-remove", IconLoader::Base));
-  ui_->action_repeat_mode->setIcon(IconLoader::Load("media-playlist-repeat", IconLoader::Base));
-  ui_->action_rip_audio_cd->setIcon(IconLoader::Load("media-optical", IconLoader::Base));
-  ui_->action_shuffle->setIcon(IconLoader::Load("x-clementine-shuffle", IconLoader::Base));
-  ui_->action_shuffle_mode->setIcon(IconLoader::Load("media-playlist-shuffle", IconLoader::Base));
-  ui_->action_stop->setIcon(IconLoader::Load("media-playback-stop", IconLoader::Base));
+  ui_->action_next_track->setIcon(
+      IconLoader::Load("media-skip-forward", IconLoader::Base));
+  ui_->action_open_media->setIcon(
+      IconLoader::Load("document-open", IconLoader::Base));
+  ui_->action_open_cd->setIcon(
+      IconLoader::Load("media-optical", IconLoader::Base));
+  ui_->action_play_pause->setIcon(
+      IconLoader::Load("media-playback-start", IconLoader::Base));
+  ui_->action_previous_track->setIcon(
+      IconLoader::Load("media-skip-backward", IconLoader::Base));
+  ui_->action_mute->setIcon(
+      IconLoader::Load("audio-volume-muted", IconLoader::Base));
+  ui_->action_quit->setIcon(
+      IconLoader::Load("application-exit", IconLoader::Base));
+  ui_->action_remove_from_playlist->setIcon(
+      IconLoader::Load("list-remove", IconLoader::Base));
+  ui_->action_repeat_mode->setIcon(
+      IconLoader::Load("media-playlist-repeat", IconLoader::Base));
+  ui_->action_rip_audio_cd->setIcon(
+      IconLoader::Load("media-optical", IconLoader::Base));
+  ui_->action_shuffle->setIcon(
+      IconLoader::Load("x-clementine-shuffle", IconLoader::Base));
+  ui_->action_shuffle_mode->setIcon(
+      IconLoader::Load("media-playlist-shuffle", IconLoader::Base));
+  ui_->action_stop->setIcon(
+      IconLoader::Load("media-playback-stop", IconLoader::Base));
   ui_->action_stop_after_this_track->setIcon(
       IconLoader::Load("media-playback-stop", IconLoader::Base));
-  ui_->action_new_playlist->setIcon(IconLoader::Load("document-new", IconLoader::Base));
-  ui_->action_load_playlist->setIcon(IconLoader::Load("document-open", IconLoader::Base));
-  ui_->action_save_playlist->setIcon(IconLoader::Load("document-save", IconLoader::Base));
-  ui_->action_full_library_scan->setIcon(IconLoader::Load("view-refresh", IconLoader::Base));
-  ui_->action_rain->setIcon(IconLoader::Load("weather-showers-scattered", IconLoader::Base));
-  ui_->action_hypnotoad->setIcon(IconLoader::Load("hypnotoad", IconLoader::Base));
+  ui_->action_new_playlist->setIcon(
+      IconLoader::Load("document-new", IconLoader::Base));
+  ui_->action_load_playlist->setIcon(
+      IconLoader::Load("document-open", IconLoader::Base));
+  ui_->action_save_playlist->setIcon(
+      IconLoader::Load("document-save", IconLoader::Base));
+  ui_->action_full_library_scan->setIcon(
+      IconLoader::Load("view-refresh", IconLoader::Base));
+  ui_->action_rain->setIcon(
+      IconLoader::Load("weather-showers-scattered", IconLoader::Base));
+  ui_->action_hypnotoad->setIcon(
+      IconLoader::Load("hypnotoad", IconLoader::Base));
   ui_->action_kittens->setIcon(IconLoader::Load("kittens", IconLoader::Base));
-  ui_->action_enterprise->setIcon(IconLoader::Load("enterprise", IconLoader::Base));
+  ui_->action_enterprise->setIcon(
+      IconLoader::Load("enterprise", IconLoader::Base));
   ui_->action_love->setIcon(IconLoader::Load("love", IconLoader::Lastfm));
 
   // File view connections
@@ -589,9 +651,9 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
   connect(library_view_group, SIGNAL(triggered(QAction*)),
           SLOT(ChangeLibraryQueryMode(QAction*)));
 
-  QAction* library_config_action = new QAction(
-      IconLoader::Load("configure", IconLoader::Base), 
-                       tr("Configure library..."), this);
+  QAction* library_config_action =
+      new QAction(IconLoader::Load("configure", IconLoader::Base),
+                  tr("Configure library..."), this);
   connect(library_config_action, SIGNAL(triggered()),
           SLOT(ShowLibraryConfig()));
   library_view_->filter()->SetSettingsGroup(kSettingsGroup);
@@ -611,7 +673,7 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
       playlist_menu_->addAction(tr("Play"), this, SLOT(PlaylistPlay()));
   playlist_menu_->addAction(ui_->action_stop);
   playlist_stop_after_ = playlist_menu_->addAction(
-      IconLoader::Load("media-playback-stop", IconLoader::Base), 
+      IconLoader::Load("media-playback-stop", IconLoader::Base),
       tr("Stop after this track"), this, SLOT(PlaylistStopAfter()));
   playlist_queue_ = playlist_menu_->addAction("", this, SLOT(PlaylistQueue()));
   playlist_queue_->setShortcut(QKeySequence("Ctrl+D"));
@@ -630,29 +692,26 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
   playlist_menu_->addAction(ui_->action_add_files_to_transcoder);
   playlist_menu_->addSeparator();
   playlist_copy_to_library_ = playlist_menu_->addAction(
-      IconLoader::Load("edit-copy", IconLoader::Base), 
-      tr("Copy to library..."), this, SLOT(PlaylistCopyToLibrary()));
+      IconLoader::Load("edit-copy", IconLoader::Base), tr("Copy to library..."),
+      this, SLOT(PlaylistCopyToLibrary()));
   playlist_move_to_library_ = playlist_menu_->addAction(
-      IconLoader::Load("go-jump", IconLoader::Base), 
-      tr("Move to library..."), this, SLOT(PlaylistMoveToLibrary()));
-  playlist_organise_ = playlist_menu_->addAction(IconLoader::Load("edit-copy", 
-                                                 IconLoader::Base),
-                                                 tr("Organise files..."), this,
-                                                 SLOT(PlaylistMoveToLibrary()));
+      IconLoader::Load("go-jump", IconLoader::Base), tr("Move to library..."),
+      this, SLOT(PlaylistMoveToLibrary()));
+  playlist_organise_ = playlist_menu_->addAction(
+      IconLoader::Load("edit-copy", IconLoader::Base), tr("Organise files..."),
+      this, SLOT(PlaylistMoveToLibrary()));
   playlist_copy_to_device_ = playlist_menu_->addAction(
       IconLoader::Load("multimedia-player-ipod-mini-blue", IconLoader::Base),
       tr("Copy to device..."), this, SLOT(PlaylistCopyToDevice()));
-  playlist_delete_ = playlist_menu_->addAction(IconLoader::Load("edit-delete", 
-                                               IconLoader::Base),
-                                               tr("Delete from disk..."), this,
-                                               SLOT(PlaylistDelete()));
+  playlist_delete_ = playlist_menu_->addAction(
+      IconLoader::Load("edit-delete", IconLoader::Base),
+      tr("Delete from disk..."), this, SLOT(PlaylistDelete()));
   playlist_open_in_browser_ = playlist_menu_->addAction(
-      IconLoader::Load("document-open-folder", IconLoader::Base), 
-                       tr("Show in file browser..."),
-      this, SLOT(PlaylistOpenInBrowser()));
+      IconLoader::Load("document-open-folder", IconLoader::Base),
+      tr("Show in file browser..."), this, SLOT(PlaylistOpenInBrowser()));
   playlist_show_in_library_ = playlist_menu_->addAction(
-      IconLoader::Load("edit-find", IconLoader::Base), 
-      tr("Show in library..."), this, SLOT(ShowInLibrary()));
+      IconLoader::Load("edit-find", IconLoader::Base), tr("Show in library..."),
+      this, SLOT(ShowInLibrary()));
   playlist_menu_->addSeparator();
   playlistitem_actions_separator_ = playlist_menu_->addSeparator();
   playlist_menu_->addAction(ui_->action_clear_playlist);
@@ -1033,7 +1092,8 @@ void MainWindow::MediaStopped() {
 
   ui_->action_stop->setEnabled(false);
   ui_->action_stop_after_this_track->setEnabled(false);
-  ui_->action_play_pause->setIcon(IconLoader::Load("media-playback-start", IconLoader::Base));
+  ui_->action_play_pause->setIcon(
+      IconLoader::Load("media-playback-start", IconLoader::Base));
   ui_->action_play_pause->setText(tr("Play"));
 
   ui_->action_play_pause->setEnabled(true);
@@ -1051,7 +1111,8 @@ void MainWindow::MediaStopped() {
 void MainWindow::MediaPaused() {
   ui_->action_stop->setEnabled(true);
   ui_->action_stop_after_this_track->setEnabled(true);
-  ui_->action_play_pause->setIcon(IconLoader::Load("media-playback-start", IconLoader::Base));
+  ui_->action_play_pause->setIcon(
+      IconLoader::Load("media-playback-start", IconLoader::Base));
   ui_->action_play_pause->setText(tr("Play"));
 
   ui_->action_play_pause->setEnabled(true);
@@ -1065,7 +1126,8 @@ void MainWindow::MediaPaused() {
 void MainWindow::MediaPlaying() {
   ui_->action_stop->setEnabled(true);
   ui_->action_stop_after_this_track->setEnabled(true);
-  ui_->action_play_pause->setIcon(IconLoader::Load("media-playback-pause", IconLoader::Base));
+  ui_->action_play_pause->setIcon(
+      IconLoader::Load("media-playback-pause", IconLoader::Base));
   ui_->action_play_pause->setText(tr("Pause"));
 
   bool enable_play_pause = !(app_->player()->GetCurrentItem()->options() &
@@ -1165,7 +1227,8 @@ void MainWindow::ScrobbleButtonVisibilityChanged(bool value) {
     // check if the song was scrobbled
     if (app_->playlist_manager()->active()->get_lastfm_status() ==
         Playlist::LastFM_Scrobbled) {
-      ui_->action_toggle_scrobbling->setIcon(IconLoader::Load("as", IconLoader::Lastfm));
+      ui_->action_toggle_scrobbling->setIcon(
+          IconLoader::Load("as", IconLoader::Lastfm));
     } else {
 #ifdef HAVE_LIBLASTFM
       SetToggleScrobblingIcon(app_->scrobbler()->IsScrobblingEnabled());
@@ -1562,10 +1625,12 @@ void MainWindow::PlaylistRightClick(const QPoint& global_pos,
           source_index.row() &&
       app_->player()->GetState() == Engine::Playing) {
     playlist_play_pause_->setText(tr("Pause"));
-    playlist_play_pause_->setIcon(IconLoader::Load("media-playback-pause", IconLoader::Base));
+    playlist_play_pause_->setIcon(
+        IconLoader::Load("media-playback-pause", IconLoader::Base));
   } else {
     playlist_play_pause_->setText(tr("Play"));
-    playlist_play_pause_->setIcon(IconLoader::Load("media-playback-start", IconLoader::Base));
+    playlist_play_pause_->setIcon(
+        IconLoader::Load("media-playback-start", IconLoader::Base));
   }
 
   // Are we allowed to pause?
@@ -1791,7 +1856,6 @@ void MainWindow::EditTracks() {
     }
   }
 
-  EnsureEditTagDialogCreated();
   edit_tag_dialog_->SetSongs(songs, items);
   edit_tag_dialog_->show();
 }
@@ -1950,17 +2014,7 @@ void MainWindow::AddFolder() {
   AddToPlaylist(data);
 }
 
-void MainWindow::AddStream() {
-  if (!add_stream_dialog_) {
-    add_stream_dialog_.reset(new AddStreamDialog);
-    connect(add_stream_dialog_.get(), SIGNAL(accepted()),
-            SLOT(AddStreamAccepted()));
-
-    add_stream_dialog_->set_add_on_accept(InternetModel::Service<SavedRadio>());
-  }
-
-  add_stream_dialog_->show();
-}
+void MainWindow::AddStream() { add_stream_dialog_->show(); }
 
 void MainWindow::AddStreamAccepted() {
   MimeData* data = new MimeData;
@@ -2148,10 +2202,6 @@ void MainWindow::PlaylistUndoRedoChanged(QAction* undo, QAction* redo) {
 }
 
 void MainWindow::AddFilesToTranscoder() {
-  if (!transcode_dialog_) {
-    transcode_dialog_.reset(new TranscodeDialog);
-  }
-
   QStringList filenames;
 
   for (const QModelIndex& index :
@@ -2170,7 +2220,6 @@ void MainWindow::AddFilesToTranscoder() {
 }
 
 void MainWindow::ShowLibraryConfig() {
-  EnsureSettingsDialogCreated();
   settings_dialog_->OpenAtPage(SettingsDialog::Page_Library);
 }
 
@@ -2223,8 +2272,6 @@ void MainWindow::CopyFilesToDevice(const QList<QUrl>& urls) {
 }
 
 void MainWindow::EditFileTags(const QList<QUrl>& urls) {
-  EnsureEditTagDialogCreated();
-
   SongList songs;
   for (const QUrl& url : urls) {
     Song song;
@@ -2380,81 +2427,49 @@ void MainWindow::ChangeLibraryQueryMode(QAction* action) {
   }
 }
 
-void MainWindow::ShowCoverManager() {
-  if (!cover_manager_) {
-    cover_manager_.reset(new AlbumCoverManager(app_, app_->library_backend()));
-    cover_manager_->Init();
+void MainWindow::ShowCoverManager() { cover_manager_->show(); }
 
-    // Cover manager connections
-    connect(cover_manager_.get(), SIGNAL(AddToPlaylist(QMimeData*)),
-            SLOT(AddToPlaylist(QMimeData*)));
-  }
-
-  cover_manager_->show();
-}
-
-void MainWindow::EnsureSettingsDialogCreated() {
-  if (settings_dialog_) return;
-
-  settings_dialog_.reset(new SettingsDialog(app_, background_streams_));
-  settings_dialog_->SetGlobalShortcutManager(global_shortcuts_);
-  settings_dialog_->SetSongInfoView(song_info_view_);
+SettingsDialog* MainWindow::CreateSettingsDialog() {
+  SettingsDialog* settings_dialog =
+      new SettingsDialog(app_, background_streams_);
+  settings_dialog->SetGlobalShortcutManager(global_shortcuts_);
+  settings_dialog->SetSongInfoView(song_info_view_);
 
   // Settings
-  connect(settings_dialog_.get(), SIGNAL(accepted()),
-          SLOT(ReloadAllSettings()));
+  connect(settings_dialog, SIGNAL(accepted()), SLOT(ReloadAllSettings()));
 
 #ifdef HAVE_WIIMOTEDEV
-  connect(settings_dialog_.get(), SIGNAL(SetWiimotedevInterfaceActived(bool)),
+  connect(settings_dialog, SIGNAL(SetWiimotedevInterfaceActived(bool)),
           wiimotedev_shortcuts_.get(),
           SLOT(SetWiimotedevInterfaceActived(bool)));
 #endif
 
   // Allows custom notification preview
-  connect(settings_dialog_.get(),
+  connect(settings_dialog,
           SIGNAL(NotificationPreview(OSD::Behaviour, QString, QString)),
           SLOT(HandleNotificationPreview(OSD::Behaviour, QString, QString)));
+  return settings_dialog;
 }
 
-void MainWindow::OpenSettingsDialog() {
-  EnsureSettingsDialogCreated();
-  settings_dialog_->show();
-}
+void MainWindow::OpenSettingsDialog() { settings_dialog_->show(); }
 
 void MainWindow::OpenSettingsDialogAtPage(SettingsDialog::Page page) {
-  EnsureSettingsDialogCreated();
   settings_dialog_->OpenAtPage(page);
 }
 
-void MainWindow::EnsureEditTagDialogCreated() {
-  if (edit_tag_dialog_) return;
-
-  edit_tag_dialog_.reset(new EditTagDialog(app_));
-  connect(edit_tag_dialog_.get(), SIGNAL(accepted()),
-          SLOT(EditTagDialogAccepted()));
-  connect(edit_tag_dialog_.get(), SIGNAL(Error(QString)),
+EditTagDialog* MainWindow::CreateEditTagDialog() {
+  EditTagDialog* edit_tag_dialog = new EditTagDialog(app_);
+  connect(edit_tag_dialog, SIGNAL(accepted()), SLOT(EditTagDialogAccepted()));
+  connect(edit_tag_dialog, SIGNAL(Error(QString)),
           SLOT(ShowErrorDialog(QString)));
+  return edit_tag_dialog;
 }
 
-void MainWindow::ShowAboutDialog() {
-  if (!about_dialog_) {
-    about_dialog_.reset(new About);
-  }
+void MainWindow::ShowAboutDialog() { about_dialog_->show(); }
 
-  about_dialog_->show();
-}
-
-void MainWindow::ShowTranscodeDialog() {
-  if (!transcode_dialog_) {
-    transcode_dialog_.reset(new TranscodeDialog);
-  }
-  transcode_dialog_->show();
-}
+void MainWindow::ShowTranscodeDialog() { transcode_dialog_->show(); }
 
 void MainWindow::ShowErrorDialog(const QString& message) {
-  if (!error_dialog_) {
-    error_dialog_.reset(new ErrorDialog);
-  }
   error_dialog_->ShowMessage(message);
 }
 
@@ -2497,13 +2512,7 @@ void MainWindow::CheckFullRescanRevisions() {
   }
 }
 
-void MainWindow::ShowQueueManager() {
-  if (!queue_manager_) {
-    queue_manager_.reset(new QueueManager);
-    queue_manager_->SetPlaylistManager(app_->playlist_manager());
-  }
-  queue_manager_->show();
-}
+void MainWindow::ShowQueueManager() { queue_manager_->show(); }
 
 void MainWindow::ShowVisualisations() {
 #ifdef ENABLE_VISUALISATIONS
@@ -2612,6 +2621,8 @@ void MainWindow::AutoCompleteTags() {
             SLOT(AutoCompleteTagsAccepted()));
     connect(track_selection_dialog_.get(), SIGNAL(finished(int)),
             tag_fetcher_.get(), SLOT(Cancel()));
+    connect(track_selection_dialog_.get(), SIGNAL(Error(QString)),
+            SLOT(ShowErrorDialog(QString)));
   }
 
   // Get the selected songs and start fetching tags for them
@@ -2647,7 +2658,8 @@ void MainWindow::AutoCompleteTagsAccepted() {
 }
 
 QPixmap MainWindow::CreateOverlayedIcon(int position, int scrobble_point) {
-  QPixmap normal_icon = IconLoader::Load("as_light", IconLoader::Lastfm).pixmap(16);
+  QPixmap normal_icon =
+      IconLoader::Load("as_light", IconLoader::Lastfm).pixmap(16);
   QPixmap light_icon = IconLoader::Load("as", IconLoader::Lastfm).pixmap(16);
   QRect rect(normal_icon.rect());
 
@@ -2675,9 +2687,11 @@ QPixmap MainWindow::CreateOverlayedIcon(int position, int scrobble_point) {
 
 void MainWindow::SetToggleScrobblingIcon(bool value) {
   if (!value) {
-    ui_->action_toggle_scrobbling->setIcon(IconLoader::Load("as_disabled", IconLoader::Lastfm));
+    ui_->action_toggle_scrobbling->setIcon(
+        IconLoader::Load("as_disabled", IconLoader::Lastfm));
   } else {
-    ui_->action_toggle_scrobbling->setIcon(IconLoader::Load("as_light", IconLoader::Lastfm));
+    ui_->action_toggle_scrobbling->setIcon(
+        IconLoader::Load("as_light", IconLoader::Lastfm));
   }
 }
 
@@ -2692,7 +2706,8 @@ void MainWindow::ScrobbleSubmitted() {
 
   // update the button icon
   if (last_fm_enabled)
-    ui_->action_toggle_scrobbling->setIcon(IconLoader::Load("as", IconLoader::Lastfm));
+    ui_->action_toggle_scrobbling->setIcon(
+        IconLoader::Load("as", IconLoader::Lastfm));
 }
 
 void MainWindow::ScrobbleError(int value) {

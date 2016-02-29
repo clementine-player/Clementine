@@ -30,7 +30,7 @@
 #include "core/closure.h"
 #include "core/logging.h"
 
-const char* Geolocator::kUrl = "http://data.clementine-player.org/geolocate";
+const char* Geolocator::kUrl = "https://data.clementine-player.org/geolocate";
 
 using std::numeric_limits;
 

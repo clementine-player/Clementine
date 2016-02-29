@@ -1,5 +1,5 @@
 /* This file is part of Clementine.
-   Copyright 2010, David Sansome <me@davidsansome.com>
+   Copyright 2015, Nick Lanham <nick@afternight.org>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -15,32 +15,37 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef EQUALISERSLIDER_H
-#define EQUALISERSLIDER_H
+#ifndef SAVEDGROUPINGMANAGER_H
+#define SAVEDGROUPINGMANAGER_H
 
-#include <QWidget>
+#include <QDialog>
+#include <QStandardItemModel>
 
-class Ui_EqualizerSlider;
+#include "librarymodel.h"
 
-// Contains the slider and the label
-class EqualizerSlider : public QWidget {
+class Ui_SavedGroupingManager;
+class LibraryFilterWidget;
+
+class SavedGroupingManager : public QDialog {
   Q_OBJECT
 
  public:
-  EqualizerSlider(const QString& label, QWidget* parent = nullptr);
-  ~EqualizerSlider();
+  SavedGroupingManager(QWidget* parent = nullptr);
+  ~SavedGroupingManager();
 
-  int value() const;
-  void set_value(int value);
+  void UpdateModel();
+  void SetFilter(LibraryFilterWidget* filter) { filter_ = filter; }
 
- public slots:
-  void onValueChanged(int value);
+  static QString GroupByToString(const LibraryModel::GroupBy& g);
 
-signals:
-  void ValueChanged(int value);
+ private slots:
+  void UpdateButtonState();
+  void Remove();
 
  private:
-  Ui_EqualizerSlider* ui_;
+  Ui_SavedGroupingManager* ui_;
+  QStandardItemModel* model_;
+  LibraryFilterWidget* filter_;
 };
 
-#endif  // EQUALISERSLIDER_H
+#endif  // SAVEDGROUPINGMANAGER_H

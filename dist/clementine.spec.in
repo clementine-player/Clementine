@@ -1,6 +1,6 @@
 Name:           clementine
 Version:        @CLEMENTINE_VERSION_RPM_V@
-Release:        @CLEMENTINE_VERSION_RPM_R@.@RPM_DISTRO@
+Release:        @CLEMENTINE_VERSION_RPM_R@%{?dist}
 Summary:        A music player and library organiser
 
 Group:          Applications/Multimedia
@@ -61,7 +61,7 @@ Features include:
 
 %build
 cd bin
-%{cmake} .. -DUSE_INSTALL_PREFIX=OFF -DBUNDLE_PROJECTM_PRESETS=ON
+%{cmake} .. -DUSE_INSTALL_PREFIX=OFF -DBUNDLE_PROJECTM_PRESETS=ON -DCMAKE_POSITION_INDEPENDENT_CODE=ON
 make %{?_smp_mflags}
 
 %install

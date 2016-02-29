@@ -117,7 +117,7 @@ Playlist* PlaylistManager::AddPlaylist(int id, const QString& name,
   connect(ret, SIGNAL(PlaylistChanged()), SLOT(UpdateSummaryText()));
   connect(ret, SIGNAL(EditingFinished(QModelIndex)),
           SIGNAL(EditingFinished(QModelIndex)));
-  connect(ret, SIGNAL(LoadTracksError(QString)), SIGNAL(Error(QString)));
+  connect(ret, SIGNAL(Error(QString)), SIGNAL(Error(QString)));
   connect(ret, SIGNAL(PlayRequested(QModelIndex)),
           SIGNAL(PlayRequested(QModelIndex)));
   connect(playlist_container_->view(),

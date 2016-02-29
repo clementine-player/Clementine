@@ -205,6 +205,7 @@ set(SOURCES
   library/libraryview.cpp
   library/libraryviewcontainer.cpp
   library/librarywatcher.cpp
+  library/savedgroupingmanager.cpp
   library/sqlrow.cpp
 
   musicbrainz/acoustidclient.cpp
@@ -506,7 +507,8 @@ set(HEADERS
   library/libraryview.h
   library/libraryviewcontainer.h
   library/librarywatcher.h
-
+  library/savedgroupingmanager.h
+  
   musicbrainz/acoustidclient.h
   musicbrainz/musicbrainzclient.h
   musicbrainz/tagfetcher.h
@@ -693,6 +695,7 @@ set(UI
   library/libraryfilterwidget.ui
   library/librarysettingspage.ui
   library/libraryviewcontainer.ui
+  library/savedgroupingmanager.ui
 
   playlist/dynamicplaylistcontrols.ui
   playlist/playlistcontainer.ui

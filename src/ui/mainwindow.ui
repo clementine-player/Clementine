@@ -490,7 +490,7 @@
     <string>Previous track</string>
    </property>
    <property name="shortcut">
-    <string>F5</string>
+    <string notr="true">F5</string>
    </property>
   </action>
   <action name="action_play_pause">
@@ -498,7 +498,7 @@
     <string>Play</string>
    </property>
    <property name="shortcut">
-    <string>F6</string>
+    <string notr="true">F6</string>
    </property>
   </action>
   <action name="action_stop">
@@ -509,7 +509,7 @@
     <string>Stop</string>
    </property>
    <property name="shortcut">
-    <string>F7</string>
+    <string notr="true">F7</string>
    </property>
   </action>
   <action name="action_next_track">
@@ -517,7 +517,7 @@
     <string>Next track</string>
    </property>
    <property name="shortcut">
-    <string>F8</string>
+    <string notr="true">F8</string>
    </property>
   </action>
   <action name="action_quit">
@@ -525,7 +525,7 @@
     <string>&amp;Quit</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+Q</string>
+    <string notr="true">Ctrl+Q</string>
    </property>
    <property name="menuRole">
     <enum>QAction::QuitRole</enum>
@@ -536,7 +536,7 @@
     <string>Stop after this track</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+Alt+V</string>
+    <string notr="true">Ctrl+Alt+V</string>
    </property>
   </action>
   <action name="action_love">
@@ -547,7 +547,7 @@
     <string>Love</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+L</string>
+    <string notr="true">Ctrl+L</string>
    </property>
   </action>
   <action name="action_clear_playlist">
@@ -558,7 +558,7 @@
     <string>Clear playlist</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+K</string>
+    <string notr="true">Ctrl+K</string>
    </property>
   </action>
   <action name="action_edit_track">
@@ -566,7 +566,7 @@
     <string>Edit track information...</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+E</string>
+    <string notr="true">Ctrl+E</string>
    </property>
   </action>
   <action name="action_renumber_tracks">
@@ -584,7 +584,7 @@
     <string>Edit tag...</string>
    </property>
    <property name="shortcut">
-    <string>F2</string>
+    <string notr="true">F2</string>
    </property>
   </action>
   <action name="action_configure">
@@ -592,7 +592,7 @@
     <string>Preferences...</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+P</string>
+    <string notr="true">Ctrl+P</string>
    </property>
    <property name="menuRole">
     <enum>QAction::PreferencesRole</enum>
@@ -603,7 +603,7 @@
     <string>About Clementine...</string>
    </property>
    <property name="shortcut">
-    <string>F1</string>
+    <string notr="true">F1</string>
    </property>
    <property name="menuRole">
     <enum>QAction::AboutRole</enum>
@@ -614,7 +614,7 @@
     <string>Shuffle playlist</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+H</string>
+    <string notr="true">Ctrl+H</string>
    </property>
   </action>
   <action name="action_add_file">
@@ -622,7 +622,7 @@
     <string>Add file...</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+Shift+A</string>
+    <string notr="true">Ctrl+Shift+A</string>
    </property>
   </action>
   <action name="action_add_stream">
@@ -630,7 +630,7 @@
     <string>Add stream...</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+O</string>
+    <string notr="true">Ctrl+O</string>
    </property>
   </action>
   <action name="action_open_media">
@@ -720,7 +720,7 @@
     <string>Jump to the currently playing track</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+J</string>
+    <string notr="true">Ctrl+J</string>
    </property>
   </action>
   <action name="action_new_playlist">
@@ -728,7 +728,7 @@
     <string>New playlist</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+N</string>
+    <string notr="true">Ctrl+N</string>
    </property>
   </action>
   <action name="action_save_playlist">
@@ -736,7 +736,7 @@
     <string>Save playlist...</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+S</string>
+    <string notr="true">Ctrl+S</string>
    </property>
   </action>
   <action name="action_load_playlist">
@@ -744,7 +744,7 @@
     <string>Load playlist...</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+Shift+O</string>
+    <string notr="true">Ctrl+Shift+O</string>
    </property>
   </action>
   <action name="action_next_playlist">
@@ -788,7 +788,7 @@
     <string>Mute</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+M</string>
+    <string notr="true">Ctrl+M</string>
    </property>
   </action>
   <action name="action_full_library_scan">
@@ -805,7 +805,7 @@
     <string>Complete tags automatically...</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+T</string>
+    <string notr="true">Ctrl+T</string>
    </property>
   </action>
   <action name="action_toggle_scrobbling">
@@ -838,7 +838,7 @@
     <string>Add file to transcoder</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+Shift+T</string>
+    <string notr="true">Ctrl+Shift+T</string>
    </property>
   </action>
   <action name="action_rip_audio_cd">

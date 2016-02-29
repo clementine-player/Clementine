@@ -3,14 +3,17 @@
 
 #include <memory>
 
-#include <QTcpServer>
-#include <QTcpSocket>
+#include <QList>
+#include <QObject>
 
-#include "core/player.h"
-#include "core/application.h"
-#include "incomingdataparser.h"
-#include "outgoingdatacreator.h"
-#include "remoteclient.h"
+class Application;
+class IncomingDataParser;
+class OutgoingDataCreator;
+class QHostAddress;
+class QImage;
+class QTcpServer;
+class QTcpSocket;
+class RemoteClient;
 
 class NetworkRemote : public QObject {
   Q_OBJECT

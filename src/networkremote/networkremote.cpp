@@ -17,15 +17,18 @@
 
 #include "networkremote.h"
 
-#include "core/logging.h"
-#include "covers/currentartloader.h"
-#include "networkremote/zeroconf.h"
-#include "playlist/playlistmanager.h"
-
 #include <QDataStream>
 #include <QSettings>
 #include <QHostInfo>
 #include <QNetworkProxy>
+#include <QTcpServer>
+
+#include "core/logging.h"
+#include "covers/currentartloader.h"
+#include "networkremote/incomingdataparser.h"
+#include "networkremote/outgoingdatacreator.h"
+#include "networkremote/zeroconf.h"
+#include "playlist/playlistmanager.h"
 
 const char* NetworkRemote::kSettingsGroup = "NetworkRemote";
 const quint16 NetworkRemote::kDefaultServerPort = 5500;

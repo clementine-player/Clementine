@@ -1,5 +1,6 @@
 /* This file is part of Clementine.
    Copyright 2010, David Sansome <me@davidsansome.com>
+   Copyright 2015 - 2016, Arun Narayanankutty <n.arun.lifescience@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -25,7 +26,8 @@ class IconLoader {
   enum IconType {
     Base = 0,
     Provider = 1,
-    Lastfm = 2
+    Lastfm = 2,
+    Other = 3
   };
 
   static void Init();
