@@ -58,8 +58,8 @@ class ExtendedEditor : public LineEditInterface {
   virtual bool is_empty() const { return text().isEmpty(); }
 
   QString hint() const { return hint_; }
-  void set_hint(const QString& hint);
-  void clear_hint() { set_hint(QString()); }
+  void set_hint(const QString& hint) { hint_ = hint; };
+  void clear_hint() { if (!hint_.isEmpty()) this->set_hint(QString()); }
 
   bool has_clear_button() const { return has_clear_button_; }
   void set_clear_button(bool visible);
@@ -67,11 +67,9 @@ class ExtendedEditor : public LineEditInterface {
   bool has_reset_button() const;
   void set_reset_button(bool visible);
 
-  qreal font_point_size() const { return font_point_size_; }
-  void set_font_point_size(qreal size) { font_point_size_ = size; }
-
  protected:
   void Paint(QPaintDevice* device);
+  void PaintHint(QPaintDevice* device);
   void Resize();
 
  private:
@@ -93,8 +91,6 @@ class ExtendedEditor : public LineEditInterface {
 class LineEdit : public QLineEdit, public ExtendedEditor {
   Q_OBJECT
   Q_PROPERTY(QString hint READ hint WRITE set_hint);
-  Q_PROPERTY(qreal font_point_size READ font_point_size WRITE
-                 set_font_point_size);
   Q_PROPERTY(bool has_clear_button READ has_clear_button WRITE
                  set_clear_button);
   Q_PROPERTY(bool has_reset_button READ has_reset_button WRITE
@@ -107,6 +103,7 @@ class LineEdit : public QLineEdit, public ExtendedEditor {
   void set_focus() { QLineEdit::setFocus(); }
   QString text() const { return QLineEdit::text(); }
   void set_text(const QString& text) { QLineEdit::setText(text); }
+  void set_hint(const QString& text);
   void set_enabled(bool enabled) { QLineEdit::setEnabled(enabled); }
 
  protected:
@@ -139,11 +136,15 @@ class TextEdit : public QPlainTextEdit, public ExtendedEditor {
   void set_focus() { QPlainTextEdit::setFocus(); }
   QString text() const { return QPlainTextEdit::toPlainText(); }
   void set_text(const QString& text) { QPlainTextEdit::setPlainText(text); }
+  void set_hint(const QString& hint);
   void set_enabled(bool enabled) { QPlainTextEdit::setEnabled(enabled); }
 
  protected:
   void paintEvent(QPaintEvent*);
   void resizeEvent(QResizeEvent*);
+
+ private slots:
+  void text_changed() { clear_hint(); };
 
 signals:
   void Reset();
@@ -164,18 +165,27 @@ class SpinBox : public QSpinBox, public ExtendedEditor {
   QString textFromValue(int val) const;
 
   // ExtendedEditor
+
   bool is_empty() const { return text().isEmpty() || text() == "0"; }
   void set_focus() { QSpinBox::setFocus(); }
   QString text() const { return QSpinBox::text(); }
   void set_text(const QString& text) { QSpinBox::setValue(text.toInt()); }
+  void set_hint(const QString& hint);
   void set_enabled(bool enabled) { QSpinBox::setEnabled(enabled); }
 
  protected:
   void paintEvent(QPaintEvent*);
   void resizeEvent(QResizeEvent*);
+  void focusOutEvent(QFocusEvent* event);
 
-signals:
+ private slots:
+  void value_changed() { clear_hint(); };
+
+ signals:
   void Reset();
+
+ private:
+  static const char* abbrev_hint;
 };
 
 #endif  // LINEEDIT_H
