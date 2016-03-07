@@ -6,7 +6,7 @@
 		<method name='GetTracksMetadata'>
 			<arg direction='in' name='TrackIds' type='ao'/>
 			<arg direction='out' name='Metadata' type='aa{sv}'>
-				<annotation name="com.trolltech.QtDBus.QtTypeName.Out0" value="TrackMetadata" />
+                                <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="TrackMetadata" />
 			</arg>
 		</method>
 		<method name='AddTrack'>
@@ -26,7 +26,7 @@
 		</signal>
 		<signal name='TrackAdded'>
 			<arg name='Metadata' type='a{sv}'>
-				<annotation name="com.trolltech.QtDBus.QtTypeName.In0" value="TrackMetadata"/>
+                                <annotation name="org.qtproject.QtDBus.QtTypeName.In0" value="TrackMetadata"/>
 			</arg>
 			<arg name='AfterTrack' type='o'/>
 		</signal>
@@ -36,7 +36,7 @@
 		<signal name='TrackMetadataChanged'>
 			<arg name='TrackId' type='o'/>
 			<arg name='Metadata' type='a{sv}'>
-				<annotation name="com.trolltech.QtDBus.QtTypeName.In1" value="TrackMetadata"/>
+                                <annotation name="org.qtproject.QtDBus.QtTypeName.In1" value="TrackMetadata"/>
 			</arg>
 		</signal>
 		<property name='Tracks' type='ao' access='read'/>
