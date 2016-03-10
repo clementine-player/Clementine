@@ -332,7 +332,12 @@ QString Mpris2::current_track_id() const {
 
 // We send Metadata change notification as soon as the process of
 // changing song starts...
-void Mpris2::CurrentSongChanged(const Song& song) { ArtLoaded(song, ""); }
+void Mpris2::CurrentSongChanged(const Song& song) {
+  ArtLoaded(song, "");
+  EmitNotification("CanGoNext", CanGoNext());
+  EmitNotification("CanGoPrevious", CanGoPrevious());
+  EmitNotification("CanSeek", CanSeek());
+}
 
 // ... and we add the cover information later, when it's available.
 void Mpris2::ArtLoaded(const Song& song, const QString& art_uri) {
