@@ -633,10 +633,6 @@ void Playlist::set_current_row(int i, bool is_stopping) {
                          old_current_item_index.row(), ColumnCount - 1));
   }
 
-  if (current_item_index_.isValid() && !is_stopping) {
-    InformOfCurrentSongChange();
-  }
-
   // Update the virtual index
   if (i == -1) {
     current_virtual_index_ = -1;
@@ -653,6 +649,10 @@ void Playlist::set_current_row(int i, bool is_stopping) {
     current_virtual_index_ = virtual_items_.indexOf(i);
   } else {
     current_virtual_index_ = i;
+  }
+
+  if (current_item_index_.isValid() && !is_stopping) {
+    InformOfCurrentSongChange();
   }
 
   // The structure of a dynamic playlist is as follows:
