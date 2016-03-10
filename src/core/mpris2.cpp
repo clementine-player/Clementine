@@ -134,6 +134,8 @@ void Mpris2::EngineStateChanged(Engine::State newState) {
   }
 
   EmitNotification("PlaybackStatus", PlaybackStatus(newState));
+  if (newState == Engine::Playing)
+    EmitNotification("CanSeek", CanSeek(newState));
 }
 
 void Mpris2::VolumeChanged() { EmitNotification("Volume"); }
