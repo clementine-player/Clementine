@@ -171,6 +171,12 @@ void Mpris2::EmitNotification(const QString& name) {
     value = Volume();
   else if (name == "Position")
     value = Position();
+  else if (name == "CanGoNext")
+    value = CanGoNext();
+  else if (name == "CanGoPrevious")
+    value = CanGoPrevious();
+  else if (name == "CanSeek")
+    value = CanSeek();
 
   if (value.isValid()) EmitNotification(name, value);
 }
@@ -402,6 +408,14 @@ bool Mpris2::CanSeek() const {
   } else {
     return true;
   }
+}
+
+bool Mpris2::CanSeek(Engine::State state) const {
+    if (mpris1_->player()) {
+      return mpris1_->player()->GetCaps(state) & CAN_SEEK;
+    } else {
+      return true;
+    }
 }
 
 bool Mpris2::CanControl() const { return true; }
