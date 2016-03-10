@@ -140,7 +140,11 @@ void Mpris2::VolumeChanged() { EmitNotification("Volume"); }
 
 void Mpris2::ShuffleModeChanged() { EmitNotification("Shuffle"); }
 
-void Mpris2::RepeatModeChanged() { EmitNotification("LoopStatus"); }
+void Mpris2::RepeatModeChanged() {
+  EmitNotification("LoopStatus");
+  EmitNotification("CanGoNext", CanGoNext());
+  EmitNotification("CanGoPrevious", CanGoPrevious());
+}
 
 void Mpris2::EmitNotification(const QString& name, const QVariant& val) {
   EmitNotification(name, val, "org.mpris.MediaPlayer2.Player");
