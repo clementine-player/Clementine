@@ -27,10 +27,10 @@ add_executable(clementine-tagreader
 
 target_link_libraries(clementine-tagreader
   ${TAGLIB_LIBRARIES}
-  ${QT_QTCORE_LIBRARY}
-  ${QT_QTNETWORK_LIBRARY}
   libclementine-common
   libclementine-tagreader
+  ${QT_QTCORE_LIBRARY}
+  ${QT_QTNETWORK_LIBRARY}
 )
 
 if(${CMAKE_SYSTEM_NAME} MATCHES "FreeBSD")
