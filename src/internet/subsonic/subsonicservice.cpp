@@ -59,6 +59,7 @@ const char* SubsonicService::kSongsTable = "subsonic_songs";
 const char* SubsonicService::kFtsTable = "subsonic_songs_fts";
 
 const int SubsonicService::kMaxRedirects = 10;
+const int SubsonicService::kCoverArtSize = 1024;
 
 SubsonicService::SubsonicService(Application* app, InternetModel* parent)
     : InternetService(kServiceName, app, parent, parent),
@@ -573,7 +574,7 @@ void SubsonicLibraryScanner::OnGetAlbumCoverFinished(QNetworkReply* reply, QStri
 
   QByteArray image = reply->readAll();
 
-  service_->emitImageLoaded(albumid, QImage::fromData(image));
+  service_->EmitImageLoaded(albumid, QImage::fromData(image));
 }
 
 void SubsonicLibraryScanner::GetAlbumList(int offset) {
@@ -589,7 +590,7 @@ void SubsonicLibraryScanner::GetAlbumList(int offset) {
 void SubsonicLibraryScanner::GetAlbumCover(const QString& id) {
   QUrl url = service_->BuildRequestUrl("getCoverArt");
   url.addQueryItem("id", id);
-  url.addQueryItem("size", "1024");
+  url.addQueryItem("size", QString::number(kCoverArtSize));
   QNetworkReply* reply = service_->Send(url);
   NewClosure(reply, SIGNAL(finished()), this,
              SLOT(OnGetAlbumCoverFinished(QNetworkReply*,QString)), reply, id);
@@ -600,7 +601,7 @@ void SubsonicService::LoadImage(const QString& id) {
   scanner_->GetAlbumCover(id);
 }
 
-void SubsonicService::emitImageLoaded(const QString& id, const QImage& image) {
+void SubsonicService::EmitImageLoaded(const QString& id, const QImage& image) {
   emit ImageLoaded(id, image);
 }
 

@@ -102,7 +102,7 @@ class SubsonicService : public InternetService {
   LoginState login_state() const { return login_state_; }
 
   Q_INVOKABLE void LoadImage(const QString& id);
-  void emitImageLoaded(const QString& id, const QImage& image);
+  void EmitImageLoaded(const QString& id, const QImage& image);
 
   // Subsonic API methods
   void Ping();

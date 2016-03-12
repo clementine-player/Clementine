@@ -110,7 +110,8 @@ class AlbumCoverLoader : public QObject {
 
   NetworkAccessManager* network_;
 
-  bool connected_spotify_, connected_subsonic_;
+  bool connected_spotify_;
+  bool connected_subsonic_;
 
   static const int kMaxRedirects = 3;
 };
