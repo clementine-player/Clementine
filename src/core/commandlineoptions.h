@@ -54,6 +54,7 @@ class CommandlineOptions {
     Player_Previous = 5,
     Player_Next = 6,
     Player_RestartOrPrevious = 7,
+    Player_StopAfterCurrent = 8,
   };
 
   bool Parse();
