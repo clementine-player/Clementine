@@ -17,7 +17,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2016-02-14 14:27+0000\n"
+"PO-Revision-Date: 2016-03-21 10:37+0000\n"
 "Last-Translator: Balázs Meskó <meskobalazs@gmail.com>\n"
 "Language-Team: Hungarian (http://www.transifex.com/davidsansome/clementine/language/hu/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -32,7 +32,7 @@ msgid ""
 "You can favorite playlists by clicking the star icon next to a playlist name\n"
 "\n"
 "Favorited playlists will be saved here"
-msgstr "\n\nA lejátszási lista kedvenccé tételéhez klikkelj a list melletti csillagra"
+msgstr "\n\nA lejátszólista kedvenccé tételéhez kattints a lista neve melletti csillag ikonra\n\nA kedvenc lejátszólisták ide lesznek elmentve"
 
 #: ../bin/src/ui_podcastsettingspage.h:270
 msgid " days"
@@ -107,7 +107,7 @@ msgstr "%1, %2"
 #: playlistparsers/playlistparser.cpp:76
 #, qt-format
 msgid "%1 playlists (%2)"
-msgstr "%1 lejátszási lista (%2)"
+msgstr "%1 lejátszólista (%2)"
 
 #: playlist/playlistmanager.cpp:403
 #, qt-format
@@ -196,7 +196,7 @@ msgstr "&Egyéni"
 
 #: ../bin/src/ui_mainwindow.h:718
 msgid "&Extras"
-msgstr "Extrák"
+msgstr "&Extrák"
 
 #: ../bin/src/ui_mainwindow.h:717
 msgid "&Help"
@@ -217,11 +217,11 @@ msgstr "&Balra"
 
 #: playlist/playlistheader.cpp:36
 msgid "&Lock Rating"
-msgstr "&értékelés lezárása"
+msgstr "Értékelés &zárolása"
 
 #: ../bin/src/ui_mainwindow.h:715
 msgid "&Music"
-msgstr "Zene"
+msgstr "&Zene"
 
 #: ../bin/src/ui_globalshortcutssettingspage.h:175
 msgid "&None"
@@ -229,7 +229,7 @@ msgstr "&Egyik sem"
 
 #: ../bin/src/ui_mainwindow.h:716
 msgid "&Playlist"
-msgstr "Lejátszási lista"
+msgstr "&Lejátszólista"
 
 #: ../bin/src/ui_mainwindow.h:662
 msgid "&Quit"
@@ -237,7 +237,7 @@ msgstr "&Kilépés"
 
 #: ../bin/src/ui_mainwindow.h:687
 msgid "&Repeat mode"
-msgstr "Ismétlési mód"
+msgstr "&Ismétlési mód"
 
 #: playlist/playlistheader.cpp:49
 msgid "&Right"
@@ -253,7 +253,7 @@ msgstr "&Oszlopszélességek igazítása az ablakhoz"
 
 #: ../bin/src/ui_mainwindow.h:719
 msgid "&Tools"
-msgstr "Eszközök"
+msgstr "&Eszközök"
 
 #: ui/edittagdialog.cpp:50
 msgid "(different across multiple songs)"
@@ -374,12 +374,12 @@ msgid ""
 "A smart playlist is a dynamic list of songs that come from your library.  "
 "There are different types of smart playlist that offer different ways of "
 "selecting songs."
-msgstr "Az intelligens lejátszási listák dinamikusan jönnek létre a zenetáradból. Többféle ilyen lista létezik, melyek különféle módon nyújtanak lehetőséget a számok rendezésére."
+msgstr "Az intelligens lejátszólisták dinamikusan jönnek létre a zenetáradból. Többféle ilyen lista létezik, melyek különféle módon nyújtanak lehetőséget a számok rendezésére."
 
 #: smartplaylists/querywizardplugin.cpp:157
 msgid ""
 "A song will be included in the playlist if it matches these conditions."
-msgstr "Egy szám fel lesz véve a listára, ha kielégíti az alábbi feltételeket."
+msgstr "Egy szám fel lesz véve a lejátszólistára, ha kielégíti az alábbi feltételeket."
 
 #: smartplaylists/searchterm.cpp:370
 msgid "A-Z"
@@ -456,7 +456,7 @@ msgstr "Wiiremote aktiválása/deaktiválása"
 
 #: internet/soundcloud/soundcloudservice.cpp:127
 msgid "Activities stream"
-msgstr "Stream események"
+msgstr "Eseményfolyam"
 
 #: internet/podcasts/addpodcastdialog.cpp:63
 msgid "Add Podcast"
@@ -617,7 +617,7 @@ msgstr "Hozzáadás a Zenéimhez"
 
 #: internet/spotify/spotifyservice.cpp:623
 msgid "Add to Spotify playlists"
-msgstr "Hozzáadás a Spotify lejtszási listához"
+msgstr "Hozzáadás a Spotify lejátszólistához"
 
 #: internet/spotify/spotifyservice.cpp:615
 msgid "Add to Spotify starred"
@@ -625,7 +625,7 @@ msgstr "Hozzáadás a Spotify csillagozottakhoz"
 
 #: ui/mainwindow.cpp:1800
 msgid "Add to another playlist"
-msgstr "Hozzáadás másik lejátszási listához"
+msgstr "Hozzáadás másik lejátszólistához"
 
 #: internet/vk/vkservice.cpp:309
 msgid "Add to bookmarks"
@@ -633,7 +633,7 @@ msgstr "Add a könyvjelzőkhöz"
 
 #: ../bin/src/ui_albumcovermanager.h:217
 msgid "Add to playlist"
-msgstr "Hozzáadás a lejátszási listához"
+msgstr "Hozzáadás a lejátszólistához"
 
 #: ../bin/src/ui_behavioursettingspage.h:343
 #: ../bin/src/ui_behavioursettingspage.h:355
@@ -749,7 +749,7 @@ msgstr "Minden fájl (*)"
 #: playlistparsers/playlistparser.cpp:63
 #, qt-format
 msgid "All playlists (%1)"
-msgstr "Minden lejátszási lista (%1)"
+msgstr "Minden lejátszólista (%1)"
 
 #: ui/about.cpp:80
 msgid "All the translators"
@@ -827,17 +827,17 @@ msgstr "Megjelenés"
 
 #: core/commandlineoptions.cpp:167
 msgid "Append files/URLs to the playlist"
-msgstr "Fájlok/URL-ek hozzáadása a lejátszási listához"
+msgstr "Fájlok/URL-ek hozzáfűzése a lejátszólistához"
 
 #: devices/deviceview.cpp:218 globalsearch/globalsearchview.cpp:453
 #: internet/core/internetservice.cpp:48 library/libraryview.cpp:378
 #: widgets/fileviewlist.cpp:31
 msgid "Append to current playlist"
-msgstr "Hozzáfűz az aktuális listához"
+msgstr "Hozzáfűz az aktuális lejátszólistához"
 
 #: ../bin/src/ui_behavioursettingspage.h:340
 msgid "Append to the playlist"
-msgstr "Hozzáadja a lejátszási listához"
+msgstr "Hozzáadja a lejátszólistához"
 
 #: ../bin/src/ui_playbacksettingspage.h:360
 msgid "Apply compression to prevent clipping"
@@ -1160,7 +1160,7 @@ msgstr "Vk.com gyorsítótár mappa"
 
 #: smartplaylists/wizard.cpp:84
 msgid "Choose a name for your smart playlist"
-msgstr "Válassz egy nevet az intelligens lejátszási listádnak"
+msgstr "Válassz egy nevet az intelligens lejátszólistádnak"
 
 #: engines/gstengine.cpp:919
 msgid "Choose automatically"
@@ -1180,7 +1180,7 @@ msgstr "Választás a listáról"
 
 #: smartplaylists/querywizardplugin.cpp:161
 msgid "Choose how the playlist is sorted and how many songs it will contain."
-msgstr "Válaszd ki, hogy a lejátszási lista hogyan legyen rendezve és hány számot tartalmazzon."
+msgstr "Válaszd ki, hogy a lejátszólista hogyan legyen rendezve és hány számot tartalmazzon."
 
 #: internet/podcasts/podcastsettingspage.cpp:143
 msgid "Choose podcast download directory"
@@ -1210,7 +1210,7 @@ msgstr "Kiürít"
 
 #: ../bin/src/ui_mainwindow.h:665 ../bin/src/ui_mainwindow.h:667
 msgid "Clear playlist"
-msgstr "Lejátszási lista űrítése"
+msgstr "Lejátszólista ürítése"
 
 #: smartplaylists/searchtermwidget.cpp:345
 #: visualisations/visualisationcontainer.cpp:215
@@ -1298,7 +1298,7 @@ msgstr "Zene felvételéhez kattintson ide"
 msgid ""
 "Click here to favorite this playlist so it will be saved and remain "
 "accessible through the \"Playlists\" panel on the left side bar"
-msgstr "A lejátszási lista kedvenccé tételéhez kattints ide. A lista elérhető lesz a bal oldali panelen."
+msgstr "A lejátszólista kedvenccé tételéhez kattints ide. A lista elérhető lesz a bal oldali panelen."
 
 #: ../bin/src/ui_trackslider.h:71
 msgid "Click to toggle between remaining time and total time"
@@ -1508,7 +1508,7 @@ msgstr "Nem hozható létre a \"%1\" GStreamer objektum. Ellenőrizze, hogy tele
 
 #: playlist/playlistmanager.cpp:166
 msgid "Couldn't create playlist"
-msgstr "Nem lehet létrehozni a lejátszási listát"
+msgstr "Nem lehet létrehozni a lejátszólistát"
 
 #: transcoder/transcoder.cpp:425
 #, qt-format
@@ -1692,7 +1692,7 @@ msgstr "Beállítás törlése"
 
 #: library/libraryview.cpp:401
 msgid "Delete smart playlist"
-msgstr "Intelligens lejátszási lista törlése"
+msgstr "Intelligens lejátszólista törlése"
 
 #: ../bin/src/ui_organisedialog.h:245
 msgid "Delete the original files"
@@ -1866,7 +1866,7 @@ msgstr "Dupla kattintás a megnyitáshoz"
 
 #: ../bin/src/ui_behavioursettingspage.h:351
 msgid "Double clicking a song in the playlist will..."
-msgstr "Dupla kattintásra egy számon..."
+msgstr "Dupla kattintásra egy számon…"
 
 #: ../bin/src/ui_behavioursettingspage.h:337
 msgid "Double clicking a song will..."
@@ -1975,7 +1975,7 @@ msgstr "Dinamikus véletlenszerű mix"
 
 #: library/libraryview.cpp:398
 msgid "Edit smart playlist..."
-msgstr "Intelligens lejátszási lista szerkesztése..."
+msgstr "Intelligens lejátszólista szerkesztése…"
 
 #: ui/mainwindow.cpp:1763
 #, qt-format
@@ -2067,7 +2067,7 @@ msgstr "Add meg az exportálandó borítók nevét (kiterjesztés nélkül):"
 
 #: playlist/playlisttabbar.cpp:147
 msgid "Enter a new name for this playlist"
-msgstr "Adjon meg új nevet ennek a lejátszási listának"
+msgstr "Adjon meg új nevet ennek a lejátszólistának"
 
 #: ../bin/src/ui_globalsearchview.h:208
 msgid ""
@@ -2500,7 +2500,7 @@ msgstr "URL lekérése ezen Grooveshark szám megosztásához"
 
 #: internet/spotify/spotifyservice.cpp:671
 msgid "Get a URL to share this playlist"
-msgstr "URL lekérése a lejátszási lista megosztásához"
+msgstr "URL lekérése a lejátszólista megosztásához"
 
 #: internet/somafm/somafmservice.cpp:120
 msgid "Getting channels"
@@ -2520,11 +2520,11 @@ msgstr "Ugrás"
 
 #: ../bin/src/ui_mainwindow.h:696
 msgid "Go to next playlist tab"
-msgstr "Váltás a következő lejátszási lista lapra"
+msgstr "Váltás a következő lejátszólista lapra"
 
 #: ../bin/src/ui_mainwindow.h:697
 msgid "Go to previous playlist tab"
-msgstr "Váltás az előző lejátszási lista lapra"
+msgstr "Váltás az előző lejátszólista lapra"
 
 #: ../bin/src/ui_googledrivesettingspage.h:99
 msgid "Google Drive"
@@ -2538,7 +2538,7 @@ msgstr "%1 borító a %2-ból/ből letöltve (%3 sikertelen)"
 
 #: ../bin/src/ui_behavioursettingspage.h:319
 msgid "Grey out non existent songs in my playlists"
-msgstr "Nem létező számok szürke színnel jelölése a lejátszási listákon"
+msgstr "Nem létező számok szürke színnel jelölése a lejátszólistákban"
 
 #: ../bin/src/ui_groupbydialog.h:123
 msgid "Group Library by..."
@@ -2700,7 +2700,7 @@ msgstr "%1 héten belül"
 msgid ""
 "In dynamic mode new tracks will be chosen and added to the playlist every "
 "time a song finishes."
-msgstr "Dinamikus módban új számok lesznek kiválasztva és hozzáadva a lejátszási listához, amikor egy zeneszám véget ér."
+msgstr "Dinamikus módban új számok lesznek kiválasztva és hozzáadva a lejátszólistához, amikor egy zeneszám véget ér."
 
 #: internet/spotify/spotifyservice.cpp:425
 msgid "Inbox"
@@ -2998,11 +2998,11 @@ msgstr "Borító betöltése lemezről..."
 
 #: playlist/playlistcontainer.cpp:294
 msgid "Load playlist"
-msgstr "Lejátszási lista betöltése"
+msgstr "Lejátszólista betöltése"
 
 #: ../bin/src/ui_mainwindow.h:695
 msgid "Load playlist..."
-msgstr "Lejátszási lista betöltése..."
+msgstr "Lejátszólista betöltése…"
 
 #: devices/mtploader.cpp:42
 msgid "Loading MTP device"
@@ -3014,7 +3014,7 @@ msgstr "iPod adatbázis betöltése"
 
 #: smartplaylists/generatorinserter.cpp:48
 msgid "Loading smart playlist"
-msgstr "Inteligens lejátszási lista betöltése"
+msgstr "Intelligens lejátszólista betöltése"
 
 #: library/librarymodel.cpp:169
 msgid "Loading songs"
@@ -3043,7 +3043,7 @@ msgstr "Töltés..."
 
 #: core/commandlineoptions.cpp:168
 msgid "Loads files/URLs, replacing current playlist"
-msgstr "Fájlok/URL-ek betöltése, lejátszási lista cseréje"
+msgstr "Fájlok/URL-ek betöltése, lejátszólista cseréje"
 
 #: internet/vk/vksettingspage.cpp:114
 #: ../bin/src/ui_digitallyimportedsettingspage.h:162
@@ -3371,11 +3371,11 @@ msgstr "Új mappa"
 
 #: ui/mainwindow.cpp:1817 ../bin/src/ui_mainwindow.h:693
 msgid "New playlist"
-msgstr "Új lejátszási lista"
+msgstr "Új lejátszólista"
 
 #: library/libraryview.cpp:395
 msgid "New smart playlist..."
-msgstr "Új intelligens lejátszási lista..."
+msgstr "Új intelligens lejátszólista…"
 
 #: widgets/freespacebar.cpp:45
 msgid "New songs"
@@ -3425,7 +3425,7 @@ msgstr "Hosszú blokkok nélkül"
 #: playlist/playlistcontainer.cpp:379
 msgid ""
 "No matches found.  Clear the search box to show the whole playlist again."
-msgstr "Nincs egyezés. Törölje a keresési feltételeket, hogy újra lássa a teljes lejátszási listát."
+msgstr "Nincs egyezés. Törölje a keresési feltételeket, hogy újra lássa a teljes lejátszólista."
 
 #: ../bin/src/ui_transcoderoptionsaac.h:144
 msgid "No short blocks"
@@ -3450,7 +3450,7 @@ msgstr "Normál blokkok"
 
 #: playlist/playlistsequence.cpp:203
 msgid "Not available while using a dynamic playlist"
-msgstr "Nem elérhető dinamikus lejátszási lista használatakor"
+msgstr "Nem elérhető dinamikus lejátszólista használatakor"
 
 #: devices/deviceview.cpp:109
 msgid "Not connected"
@@ -3601,12 +3601,12 @@ msgstr "Google Drive megnyitása"
 #: internet/core/internetservice.cpp:62 library/libraryview.cpp:384
 #: widgets/fileviewlist.cpp:36
 msgid "Open in new playlist"
-msgstr "Megnyitás új lejátszási listán"
+msgstr "Megnyitás új lejátszólistában"
 
 #: ../bin/src/ui_behavioursettingspage.h:342
 msgctxt "Refers to behavior settings in Clementine settings page."
 msgid "Open in new playlist"
-msgstr "Megnyitás új lejátszási listán"
+msgstr "Megnyitás új lejátszólistában"
 
 #: songinfo/echonestbiographies.cpp:102
 msgid "Open in your browser"
@@ -3769,7 +3769,7 @@ msgstr "Lejátszás, ha nincs lejátszás folyamatban"
 
 #: core/commandlineoptions.cpp:169
 msgid "Play the <n>th track in the playlist"
-msgstr "A(z) <n>. szám lejátszása a listában"
+msgstr "A(z) <n>. szám lejátszása a lejátszólistában"
 
 #: core/globalshortcuts.cpp:51 wiimotedev/wiimotesettingspage.cpp:116
 msgid "Play/Pause"
@@ -3787,24 +3787,24 @@ msgstr "Lejátszó beállítások"
 #: playlist/playlistmanager.cpp:86 playlist/playlistmanager.cpp:155
 #: playlist/playlistmanager.cpp:495 playlist/playlisttabbar.cpp:366
 msgid "Playlist"
-msgstr "Lejátszási lista"
+msgstr "Lejátszólista"
 
 #: widgets/osd.cpp:181
 msgid "Playlist finished"
-msgstr "A lejátszási lista befejezve"
+msgstr "A lejátszólista befejezve"
 
 #: core/commandlineoptions.cpp:166
 #: ../bin/src/ui_playlistsaveoptionsdialog.h:94
 msgid "Playlist options"
-msgstr "Lejátszási lista beállítások"
+msgstr "Lejátszólista beállítások"
 
 #: smartplaylists/wizard.cpp:72
 msgid "Playlist type"
-msgstr "Lejátszási lista típus"
+msgstr "Lejátszólista típusa"
 
 #: internet/soundcloud/soundcloudservice.cpp:132 ui/mainwindow.cpp:272
 msgid "Playlists"
-msgstr "Lejátszási lista"
+msgstr "Lejátszólista"
 
 #: ../data/oauthsuccess.html:38
 msgid "Please close your browser and return to Clementine."
@@ -4084,7 +4084,7 @@ msgstr "Esemény eltávolítása"
 
 #: ../bin/src/ui_mainwindow.h:707
 msgid "Remove duplicates from playlist"
-msgstr "Duplikációk eltávolítása a lejátszási listáról"
+msgstr "Duplikációk eltávolítása a lejátszólistáról"
 
 #: ../bin/src/ui_librarysettingspage.h:188
 msgid "Remove folder"
@@ -4100,27 +4100,27 @@ msgstr "Eltávolítás a kedvencekből"
 
 #: internet/spotify/spotifyservice.cpp:681 ../bin/src/ui_mainwindow.h:688
 msgid "Remove from playlist"
-msgstr "Eltávolítás a lejátszási listáról"
+msgstr "Eltávolítás a lejátszólistáról"
 
 #: playlist/playlisttabbar.cpp:183
 msgid "Remove playlist"
-msgstr "Lejátszási lista eltávolítása"
+msgstr "Lejátszólista eltávolítása"
 
 #: playlist/playlistlistcontainer.cpp:317
 msgid "Remove playlists"
-msgstr "Lejátszási lista eltávolítása"
+msgstr "Lejátszólista eltávolítása"
 
 #: ../bin/src/ui_mainwindow.h:713
 msgid "Remove unavailable tracks from playlist"
-msgstr "Az elérhetetlen számok törlése a lejátszási listáról"
+msgstr "Az elérhetetlen számok törlése a lejátszólistáról"
 
 #: playlist/playlisttabbar.cpp:146
 msgid "Rename playlist"
-msgstr "Lejátszási lista átnevezése"
+msgstr "Lejátszólista átnevezése"
 
 #: playlist/playlisttabbar.cpp:57
 msgid "Rename playlist..."
-msgstr "Lejátszási lista átnevezése..."
+msgstr "Lejátszólista átnevezése…"
 
 #: ../bin/src/ui_mainwindow.h:670
 msgid "Renumber tracks in this order..."
@@ -4136,7 +4136,7 @@ msgstr "Album ismétlése"
 
 #: widgets/osd.cpp:317 ../bin/src/ui_playlistsequence.h:113
 msgid "Repeat playlist"
-msgstr "Lejátszási lista ismétlése"
+msgstr "Lejátszólista ismétlése"
 
 #: widgets/osd.cpp:311 ../bin/src/ui_playlistsequence.h:111
 msgid "Repeat track"
@@ -4146,11 +4146,11 @@ msgstr "Szám ismétlése"
 #: internet/core/internetservice.cpp:55 library/libraryview.cpp:381
 #: widgets/fileviewlist.cpp:34
 msgid "Replace current playlist"
-msgstr "Az aktuális lista cseréje"
+msgstr "Az aktuális lejátszólista cseréje"
 
 #: ../bin/src/ui_behavioursettingspage.h:341
 msgid "Replace the playlist"
-msgstr "Lejátszási lista cseréje"
+msgstr "Lejátszólista cseréje"
 
 #: ../bin/src/ui_organisedialog.h:256
 msgid "Replaces spaces with underscores"
@@ -4275,16 +4275,16 @@ msgstr "Kép mentése"
 #: playlist/playlistlistcontainer.cpp:72
 msgctxt "Save playlist menu action."
 msgid "Save playlist"
-msgstr "Lejátszási lista mentése"
+msgstr "Lejátszólista mentése"
 
 #: playlist/playlistmanager.cpp:225
 msgctxt "Title of the playlist save dialog."
 msgid "Save playlist"
-msgstr "Lejátszási lista mentése"
+msgstr "Lejátszólista mentése"
 
 #: playlist/playlisttabbar.cpp:59 ../bin/src/ui_mainwindow.h:694
 msgid "Save playlist..."
-msgstr "Lejátszási lista mentése..."
+msgstr "Lejátszólista mentése..."
 
 #: ui/equalizer.cpp:205 ../bin/src/ui_equalizer.h:165
 msgid "Save preset"
@@ -4650,7 +4650,7 @@ msgstr "Az összes véletlenszerűen"
 
 #: ../bin/src/ui_mainwindow.h:675
 msgid "Shuffle playlist"
-msgstr "Lejátszási lista véletlenszerűen"
+msgstr "Lejátszólista véletlenszerűen"
 
 #: widgets/osd.cpp:293 ../bin/src/ui_playlistsequence.h:117
 msgid "Shuffle tracks in this album"
@@ -4686,7 +4686,7 @@ msgstr "Ska"
 
 #: core/commandlineoptions.cpp:153
 msgid "Skip backwards in playlist"
-msgstr "Visszalépés a lejátszási listában"
+msgstr "Visszalépés a lejátszólistában"
 
 #: playlist/playlist.cpp:1344 ../bin/src/ui_edittagdialog.h:717
 msgid "Skip count"
@@ -4694,7 +4694,7 @@ msgstr "Kihagyások száma"
 
 #: core/commandlineoptions.cpp:154
 msgid "Skip forwards in playlist"
-msgstr "Léptetés előre a lejátszási listában"
+msgstr "Léptetés előre a lejátszólistában"
 
 #: ui/mainwindow.cpp:1736
 msgid "Skip selected tracks"
@@ -4714,11 +4714,11 @@ msgstr "Kis oldalsáv"
 
 #: smartplaylists/wizard.cpp:63
 msgid "Smart playlist"
-msgstr "Intelligens lejátszási lista"
+msgstr "Intelligens lejátszólista"
 
 #: library/librarymodel.cpp:1364
 msgid "Smart playlists"
-msgstr "Intelligens lejátszási listák"
+msgstr "Intelligens lejátszólisták"
 
 #: ui/equalizer.cpp:150
 msgid "Soft"
@@ -4791,7 +4791,7 @@ msgstr "Hiba a Spotifyra való bejelentkezéskor"
 
 #: internet/spotify/spotifyservice.cpp:844
 msgid "Spotify playlist's URL"
-msgstr "Spotify lejátszási lista URL"
+msgstr "Spotify lejátszólista URL"
 
 #: ../bin/src/ui_spotifysettingspage.h:211
 msgid "Spotify plugin"
@@ -4820,7 +4820,7 @@ msgstr "Beolvasás indítása"
 
 #: core/commandlineoptions.cpp:150
 msgid "Start the playlist currently playing"
-msgstr "Az éppen lejátszott lista indítása"
+msgstr "Az éppen játszott lejátszólista indítása"
 
 #: transcoder/transcodedialog.cpp:90
 msgid "Start transcoding"
@@ -4945,7 +4945,7 @@ msgstr "Spotify üzenetek szinkronizálása"
 
 #: internet/spotify/spotifyservice.cpp:702
 msgid "Syncing Spotify playlist"
-msgstr "Spotify lejátszási lista szinkronizálása"
+msgstr "Spotify lejátszólista szinkronizálása"
 
 #: internet/spotify/spotifyservice.cpp:713
 msgid "Syncing Spotify starred tracks"
@@ -5501,7 +5501,7 @@ msgstr "Fal"
 
 #: playlist/playlisttabbar.cpp:192 ../bin/src/ui_behavioursettingspage.h:307
 msgid "Warn me when closing a playlist tab"
-msgstr "Figyelmeztessen a lejátszási lista bezárásakor"
+msgstr "Figyelmeztessen a lejátszólista bezárásakor"
 
 #: core/song.cpp:424 transcoder/transcoder.cpp:256
 msgid "Wav"
@@ -5527,7 +5527,7 @@ msgstr "Amikor a Clementine albumborítót keres, először azokat a fájlokat e
 
 #: ../bin/src/ui_behavioursettingspage.h:361
 msgid "When saving a playlist, file paths should be"
-msgstr "A lejátszási lista mentésekor a fájl elérési útvonal"
+msgstr "A lejátszólista mentésekor a fájl elérési útvonal"
 
 #: ../bin/src/ui_globalsearchsettingspage.h:147
 msgid "When the list is empty..."
@@ -5652,7 +5652,7 @@ msgstr "Biztos, hogy törölni szeretnéd a(z) %1 lejátszólistát a kedvencek 
 msgid ""
 "You are about to remove a playlist which is not part of your favorite playlists: the playlist will be deleted (this action cannot be undone). \n"
 "Are you sure you want to continue?"
-msgstr "A lejátszási lista nem tartozik a kedvencek közé, a törléssel a listát nem lehet visszaállítani.\nBiztos, hogy folytatod?"
+msgstr "A lejátszólista nem tartozik a kedvencek közé, a törléssel a listát nem lehet visszaállítani.\nBiztos, hogy folytatod?"
 
 #: ../bin/src/ui_loginstatewidget.h:168
 msgid "You are not signed in."
@@ -5701,7 +5701,7 @@ msgid ""
 "You don't need to be logged in to search and to listen to music on "
 "SoundCloud. However, you need to login to access your playlists and your "
 "stream."
-msgstr "Számok kereséséhez és hallgatásához nem kell bejelentkezni a SoundCloud- ra, viszont a lejátszási listád és streamed eléréséhez bejelentkezés  szükséges."
+msgstr "Számok kereséséhez és hallgatásához nem kell bejelentkezni a SoundCloud- ra, viszont a lejátszólistád és streamed eléréséhez bejelentkezés  szükséges."
 
 #: internet/spotify/spotifyservice.cpp:205
 msgid ""
