@@ -17,7 +17,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2016-03-21 10:37+0000\n"
+"PO-Revision-Date: 2016-03-25 12:54+0000\n"
 "Last-Translator: Balázs Meskó <meskobalazs@gmail.com>\n"
 "Language-Team: Hungarian (http://www.transifex.com/davidsansome/clementine/language/hu/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -825,7 +825,7 @@ msgstr "Mérges"
 msgid "Appearance"
 msgstr "Megjelenés"
 
-#: core/commandlineoptions.cpp:167
+#: core/commandlineoptions.cpp:170
 msgid "Append files/URLs to the playlist"
 msgstr "Fájlok/URL-ek hozzáfűzése a lejátszólistához"
 
@@ -1128,7 +1128,7 @@ msgstr "Véletlenszerű lejátszási mód megváltoztatása"
 msgid "Change the currently playing song"
 msgstr "Az éppen játszott szám váltása"
 
-#: core/commandlineoptions.cpp:172
+#: core/commandlineoptions.cpp:175
 msgid "Change the language"
 msgstr "Nyelv váltása"
 
@@ -1343,7 +1343,7 @@ msgstr "Club"
 msgid "Colors"
 msgstr "Színek"
 
-#: core/commandlineoptions.cpp:175
+#: core/commandlineoptions.cpp:178
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Vesszővel tagolt lista az osztály:szint pároknak, a szintek 0-3 értékeket vehetnek fel"
 
@@ -1630,11 +1630,11 @@ msgstr "Nap"
 msgid "De&fault"
 msgstr "&alapértelmezés"
 
-#: core/commandlineoptions.cpp:157
+#: core/commandlineoptions.cpp:160
 msgid "Decrease the volume by 4%"
 msgstr "Hangerő csökkentése 4%-kal"
 
-#: core/commandlineoptions.cpp:159
+#: core/commandlineoptions.cpp:162
 msgid "Decrease the volume by <value> percent"
 msgstr "Hangerő csökkentése <value> százalékra"
 
@@ -1669,7 +1669,7 @@ msgid "Delete downloaded data"
 msgstr "Letöltött adatok törlése"
 
 #: devices/deviceview.cpp:408 library/libraryview.cpp:645
-#: ui/mainwindow.cpp:2324 widgets/fileview.cpp:186
+#: ui/mainwindow.cpp:2327 widgets/fileview.cpp:186
 msgid "Delete files"
 msgstr "Fájlok törlése"
 
@@ -1803,7 +1803,7 @@ msgstr "Szakaszos átvitel"
 msgid "Display options"
 msgstr "Beállítások megtekintése"
 
-#: core/commandlineoptions.cpp:170
+#: core/commandlineoptions.cpp:173
 msgid "Display the on-screen-display"
 msgstr "OSD mutatása"
 
@@ -2107,17 +2107,17 @@ msgstr "A teljes kollekció"
 msgid "Equalizer"
 msgstr "Hangszínszabályzó"
 
-#: core/commandlineoptions.cpp:173
+#: core/commandlineoptions.cpp:176
 msgid "Equivalent to --log-levels *:1"
 msgstr "Megegyezik a --log-levels *:1 kapcsolóval"
 
-#: core/commandlineoptions.cpp:174
+#: core/commandlineoptions.cpp:177
 msgid "Equivalent to --log-levels *:3"
 msgstr "Megegyezik a --log-levels *:3 kapcsolóval"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:246
-#: library/libraryview.cpp:639 ui/mainwindow.cpp:2034 ui/mainwindow.cpp:2276
-#: ui/mainwindow.cpp:2422 internet/vk/vkservice.cpp:643
+#: library/libraryview.cpp:639 ui/mainwindow.cpp:2034 ui/mainwindow.cpp:2279
+#: ui/mainwindow.cpp:2425 internet/vk/vkservice.cpp:643
 msgid "Error"
 msgstr "Hiba"
 
@@ -2726,11 +2726,11 @@ msgstr "Nem kompatibilis Subsonic REST protokoll verzió. A szervert frissíteni
 msgid "Incomplete configuration, please ensure all fields are populated."
 msgstr "A beállítás nem teljes, ellenőrizd, hogy minden mező ki van- e töltve!"
 
-#: core/commandlineoptions.cpp:156
+#: core/commandlineoptions.cpp:159
 msgid "Increase the volume by 4%"
 msgstr "Hangerő növelése 4%-kal"
 
-#: core/commandlineoptions.cpp:158
+#: core/commandlineoptions.cpp:161
 msgid "Increase the volume by <value> percent"
 msgstr "Hangerő növelése <value> százalékra"
 
@@ -2960,7 +2960,7 @@ msgstr "Zenetár"
 msgid "Library advanced grouping"
 msgstr "Zenetár egyedi csoportosítása"
 
-#: ui/mainwindow.cpp:2514
+#: ui/mainwindow.cpp:2517
 msgid "Library rescan notice"
 msgstr "Zenetár újraolvasási figyelmeztetés"
 
@@ -3041,7 +3041,7 @@ msgstr "Szám információk betöltése"
 msgid "Loading..."
 msgstr "Töltés..."
 
-#: core/commandlineoptions.cpp:168
+#: core/commandlineoptions.cpp:171
 msgid "Loads files/URLs, replacing current playlist"
 msgstr "Fájlok/URL-ek betöltése, lejátszólista cseréje"
 
@@ -3436,7 +3436,7 @@ msgstr "Rövid blokkok nélkül"
 msgid "None"
 msgstr "Egyik sem"
 
-#: library/libraryview.cpp:640 ui/mainwindow.cpp:2277 ui/mainwindow.cpp:2423
+#: library/libraryview.cpp:640 ui/mainwindow.cpp:2280 ui/mainwindow.cpp:2426
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Egy kiválasztott szám sem alkalmas az eszközre való másoláshoz"
 
@@ -3670,7 +3670,7 @@ msgstr "Eredeti megjelenés - Album"
 msgid "Original year tag support"
 msgstr "Eredeti megjelenés címke támogatás"
 
-#: core/commandlineoptions.cpp:170
+#: core/commandlineoptions.cpp:173
 msgid "Other options"
 msgstr "Egyéb beállítások"
 
@@ -3724,7 +3724,7 @@ msgstr "Jelszó"
 msgid "Pause"
 msgstr "Szünet"
 
-#: core/commandlineoptions.cpp:152
+#: core/commandlineoptions.cpp:154
 msgid "Pause playback"
 msgstr "Lejátszás szüneteltetése"
 
@@ -3758,7 +3758,7 @@ msgstr "Lejátszás"
 msgid "Play count"
 msgstr "Lejátszások száma"
 
-#: core/commandlineoptions.cpp:151
+#: core/commandlineoptions.cpp:153
 msgid "Play if stopped, pause if playing"
 msgstr "Lejátszás, ha le van állítva, különben szünet"
 
@@ -3767,7 +3767,7 @@ msgstr "Lejátszás, ha le van állítva, különben szünet"
 msgid "Play if there is nothing already playing"
 msgstr "Lejátszás, ha nincs lejátszás folyamatban"
 
-#: core/commandlineoptions.cpp:169
+#: core/commandlineoptions.cpp:172
 msgid "Play the <n>th track in the playlist"
 msgstr "A(z) <n>. szám lejátszása a lejátszólistában"
 
@@ -3779,7 +3779,7 @@ msgstr "Lejátszás/Szünet"
 msgid "Playback"
 msgstr "Lejátszás"
 
-#: core/commandlineoptions.cpp:149
+#: core/commandlineoptions.cpp:151
 msgid "Player options"
 msgstr "Lejátszó beállítások"
 
@@ -3793,7 +3793,7 @@ msgstr "Lejátszólista"
 msgid "Playlist finished"
 msgstr "A lejátszólista befejezve"
 
-#: core/commandlineoptions.cpp:166
+#: core/commandlineoptions.cpp:169
 #: ../bin/src/ui_playlistsaveoptionsdialog.h:94
 msgid "Playlist options"
 msgstr "Lejátszólista beállítások"
@@ -3911,7 +3911,7 @@ msgstr "Előző"
 msgid "Previous track"
 msgstr "Előző szám"
 
-#: core/commandlineoptions.cpp:176
+#: core/commandlineoptions.cpp:179
 msgid "Print out version information"
 msgstr "Verzió információ mutatása..."
 
@@ -4184,7 +4184,7 @@ msgstr "Lejátszás számlálók visszaállítása"
 msgid "Restart song, then jump to previous if pressed again"
 msgstr "Szám újraindítása és újboli megnyomáskor ugrás az előzőre"
 
-#: core/commandlineoptions.cpp:164
+#: core/commandlineoptions.cpp:167
 msgid ""
 "Restart the track, or play the previous track if within 8 seconds of start."
 msgstr "Szám újraindítása, vagy az előző szám lejátszása, ha 8 msp- en belül elindul."
@@ -4415,11 +4415,11 @@ msgstr "Léptetés hátra"
 msgid "Seek forward"
 msgstr "Léptetés előre"
 
-#: core/commandlineoptions.cpp:162
+#: core/commandlineoptions.cpp:165
 msgid "Seek the currently playing track by a relative amount"
 msgstr "Léptetés hátra"
 
-#: core/commandlineoptions.cpp:160
+#: core/commandlineoptions.cpp:163
 msgid "Seek the currently playing track to an absolute position"
 msgstr "A lejátszott szám adott pozícióra léptetése"
 
@@ -4488,7 +4488,7 @@ msgstr "A szolgáltatás nem üzemel"
 msgid "Set %1 to \"%2\"..."
 msgstr "%1 beállítása \"%2\"-ra/re..."
 
-#: core/commandlineoptions.cpp:155
+#: core/commandlineoptions.cpp:158
 msgid "Set the volume to <value> percent"
 msgstr "Hangerő beállítása <value> százalékra"
 
@@ -4684,7 +4684,7 @@ msgstr "Méret:"
 msgid "Ska"
 msgstr "Ska"
 
-#: core/commandlineoptions.cpp:153
+#: core/commandlineoptions.cpp:156
 msgid "Skip backwards in playlist"
 msgstr "Visszalépés a lejátszólistában"
 
@@ -4692,7 +4692,7 @@ msgstr "Visszalépés a lejátszólistában"
 msgid "Skip count"
 msgstr "Kihagyások száma"
 
-#: core/commandlineoptions.cpp:154
+#: core/commandlineoptions.cpp:157
 msgid "Skip forwards in playlist"
 msgstr "Léptetés előre a lejátszólistában"
 
@@ -4818,7 +4818,7 @@ msgstr "Kedvenc"
 msgid "Start ripping"
 msgstr "Beolvasás indítása"
 
-#: core/commandlineoptions.cpp:150
+#: core/commandlineoptions.cpp:152
 msgid "Start the playlist currently playing"
 msgstr "Az éppen játszott lejátszólista indítása"
 
@@ -4863,9 +4863,13 @@ msgstr "Leállítás minden szám után"
 msgid "Stop after this track"
 msgstr "Leállítás az aktuális szám után"
 
-#: core/commandlineoptions.cpp:152
+#: core/commandlineoptions.cpp:154
 msgid "Stop playback"
 msgstr "Lejátszás leállítása"
+
+#: core/commandlineoptions.cpp:155
+msgid "Stop playback after current track"
+msgstr "Leállítás az aktuális szám után"
 
 #: core/globalshortcuts.cpp:55
 msgid "Stop playing after current track"
@@ -5011,7 +5015,7 @@ msgid ""
 "license key. Visit subsonic.org for details."
 msgstr "A Subsonic szerver próbaideje lejárt. Adakozáshoz, vagy licensz vásárlásához látogasd meg a subsonic.org oldalt."
 
-#: ui/mainwindow.cpp:2505
+#: ui/mainwindow.cpp:2508
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -5053,7 +5057,7 @@ msgid ""
 "continue?"
 msgstr "Ezek a fájlok törölve lesznek az eszközről. Biztos benne, hogy folytatja?"
 
-#: library/libraryview.cpp:646 ui/mainwindow.cpp:2325 widgets/fileview.cpp:187
+#: library/libraryview.cpp:646 ui/mainwindow.cpp:2328 widgets/fileview.cpp:187
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -5164,7 +5168,7 @@ msgstr "Sorállapot megjelenítése"
 msgid "Toggle scrobbling"
 msgstr "Scrobble funkció váltása"
 
-#: core/commandlineoptions.cpp:171
+#: core/commandlineoptions.cpp:174
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "OSD láthatóság bekapcsolása"
 
@@ -5243,7 +5247,7 @@ msgstr "Kikapcsolás"
 msgid "URI"
 msgstr "URI"
 
-#: core/commandlineoptions.cpp:148
+#: core/commandlineoptions.cpp:150
 msgid "URL(s)"
 msgstr "URL(-ek)"
 
@@ -5338,7 +5342,7 @@ msgstr "%1 frissítése..."
 msgid "Updating library"
 msgstr "Zenetár frissítése"
 
-#: core/commandlineoptions.cpp:148
+#: core/commandlineoptions.cpp:150
 msgid "Usage"
 msgstr "Kihasználtság"
 
@@ -5601,7 +5605,7 @@ msgid ""
 "well?"
 msgstr "Szeretné a többi számot ebből az albumból áthelyezni a Vegyes előadók közé is?"
 
-#: ui/mainwindow.cpp:2512
+#: ui/mainwindow.cpp:2515
 msgid "Would you like to run a full rescan right now?"
 msgstr "Akarsz futtatni egy teljes újraolvasást most?"
 
@@ -5900,7 +5904,7 @@ msgstr "régebbi először"
 msgid "on"
 msgstr "ezen"
 
-#: core/commandlineoptions.cpp:148
+#: core/commandlineoptions.cpp:150
 msgid "options"
 msgstr "beállítások"
 
