@@ -32,8 +32,7 @@ if (UNIX AND NOT APPLE)
   set(LINUX 1)
 endif (UNIX AND NOT APPLE)
 
-# See https://bugreports.qt.io/browse/QTBUG-43859
-set(QT_MIN_VERSION 5.4.2)
+set(QT_MIN_VERSION 5.6.0)
 
 find_package(Qt5 ${QT_MIN_VERSION} REQUIRED COMPONENTS Core OpenGL Sql Network Xml Widgets Concurrent Test)
 find_package(X11)
