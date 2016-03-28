@@ -2109,6 +2109,9 @@ void MainWindow::CommandlineOptionsReceived(const CommandlineOptions& options) {
     case CommandlineOptions::Player_Stop:
       app_->player()->Stop();
       break;
+    case CommandlineOptions::Player_StopAfterCurrent:
+      app_->player()->StopAfterCurrent();
+      break;
     case CommandlineOptions::Player_Previous:
       app_->player()->Previous();
       break;

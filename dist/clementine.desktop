@@ -33,7 +33,7 @@ Terminal=false
 Categories=AudioVideo;Player;Qt;Audio;
 StartupNotify=false
 MimeType=application/ogg;application/x-ogg;application/x-ogm-audio;audio/aac;audio/mp4;audio/mpeg;audio/mpegurl;audio/ogg;audio/vnd.rn-realaudio;audio/vorbis;audio/x-flac;audio/x-mp3;audio/x-mpeg;audio/x-mpegurl;audio/x-ms-wma;audio/x-musepack;audio/x-oggflac;audio/x-pn-realaudio;audio/x-scpls;audio/x-speex;audio/x-vorbis;audio/x-vorbis+ogg;audio/x-wav;video/x-ms-asf;x-content/audio-player;x-scheme-handler/zune;x-scheme-handler/itpc;x-scheme-handler/itms;x-scheme-handler/feed;
-Actions=Play;Pause;Stop;Previous;Next;
+Actions=Play;Pause;Stop;StopAfterCurrent;Previous;Next;
 
 [Desktop Action Play]
 Name=Play
@@ -180,6 +180,54 @@ Name[uk]=Зупинити
 Name[vi]=Dừng
 Name[zh_CN]=停止
 Name[zh_TW]=停止
+
+[Desktop Action StopAfterCurrent]
+Name=Stop after this track
+Exec=clementine --stop-after-current
+OnlyShowIn=Unity;
+Name[be]=Спыніць пасьля гэтага трэку
+Name[bg]=Спри след тази песен
+Name[br]=Paouez goude ar roud-mañ
+Name[ca]=Atura després d’aquesta peça
+Name[cs]=Zastavit po této skladbě
+Name[da]=Stop efter dette spor
+Name[de]=Wiedergabe nach diesem Titel anhalten
+Name[el]=Σταμάτημα μετά από αυτό το κομμάτι
+Name[es]=Detener reproducción al finalizar la pista
+Name[eu]=Gelditu pista honen ondoren
+Name[fa]=ایست پس از این آهنگ
+Name[fi]=Pysäytä toistettavan kappaleen jälkeen
+Name[fr]=Arrêter la lecture après cette piste
+Name[ga]=Stad i ndiaidh an rian seo
+Name[gl]=Deter a reprodución despois da pista actual
+Name[he]=הפסקה אחרי רצועה זו
+Name[hr]=Zaustavi reprodukciju nakon ove pjesme
+Name[hu]=Leállítás az aktuális szám után
+Name[it]=Ferma dopo questa traccia
+Name[ja]=このトラック後に停止
+Name[ko]=이번 트랙 이후 정지
+Name[lt]=Sustabdyti po šio takelio
+Name[lv]=Apturēt pēc šīs dziesmas
+Name[ms]=Henti selepas trek ini
+Name[nb]=Stopp etter denne sangen
+Name[nl]=Na dit nummer stoppen
+Name[pl]=Zatrzymaj po tym utworze
+Name[pt]=Parar após esta faixa
+Name[pt_BR]=Parar depois desta música
+Name[ro]=Oprește după această piesă
+Name[ru]=Остановить после этого трека
+Name[sk]=Zastaviť po tejto skladbe
+Name[sl]=Zaustavi po tej skladbi
+Name[sr]=Заустави после ове нумере
+Name[sr@ijekavian]=
+Name[sr@ijekavianlatin]=
+Name[sr@latin]=Zaustavi posle ove numere
+Name[sv]=Stoppa efter detta spår
+Name[tr]=Bu parçadan sonra durdur
+Name[uk]=Зупинити після цієї доріжки
+Name[vi]=Dừng sau khi phát xong bài này
+Name[zh_CN]=在此曲目后停止
+Name[zh_TW]=在這首歌之後停止
 
 [Desktop Action Previous]
 Name=Previous

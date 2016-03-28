@@ -42,30 +42,31 @@ const char* CommandlineOptions::kHelpText =
     "  -t, --play-pause          %6\n"
     "  -u, --pause               %7\n"
     "  -s, --stop                %8\n"
-    "  -r, --previous            %9\n"
-    "  -f, --next                %10\n"
-    "  -v, --volume <value>      %11\n"
-    "  --volume-up               %12\n"
-    "  --volume-down             %13\n"
-    "  --volume-increase-by      %14\n"
-    "  --volume-decrease-by      %15\n"
-    "  --seek-to <seconds>       %16\n"
-    "  --seek-by <seconds>       %17\n"
-    "  --restart-or-previous     %18\n"
+    "  -q, --stop-after-current  %9\n"
+    "  -r, --previous            %10\n"
+    "  -f, --next                %11\n"
+    "  -v, --volume <value>      %12\n"
+    "  --volume-up               %13\n"
+    "  --volume-down             %14\n"
+    "  --volume-increase-by      %15\n"
+    "  --volume-decrease-by      %16\n"
+    "  --seek-to <seconds>       %17\n"
+    "  --seek-by <seconds>       %18\n"
+    "  --restart-or-previous     %19\n"
     "\n"
-    "%19:\n"
-    "  -a, --append              %20\n"
-    "  -l, --load                %21\n"
-    "  -k, --play-track <n>      %22\n"
+    "%20:\n"
+    "  -a, --append              %21\n"
+    "  -l, --load                %22\n"
+    "  -k, --play-track <n>      %23\n"
     "\n"
-    "%23:\n"
-    "  -o, --show-osd            %24\n"
-    "  -y, --toggle-pretty-osd   %25\n"
-    "  -g, --language <lang>     %26\n"
-    "      --quiet               %27\n"
-    "      --verbose             %28\n"
-    "      --log-levels <levels> %29\n"
-    "      --version             %30\n";
+    "%24:\n"
+    "  -o, --show-osd            %25\n"
+    "  -y, --toggle-pretty-osd   %26\n"
+    "  -g, --language <lang>     %27\n"
+    "      --quiet               %28\n"
+    "      --verbose             %29\n"
+    "      --log-levels <levels> %30\n"
+    "      --version             %31\n";
 
 const char* CommandlineOptions::kVersionText = "Clementine %1";
 
@@ -111,6 +112,7 @@ bool CommandlineOptions::Parse() {
       {"play-pause", no_argument, 0, 't'},
       {"pause", no_argument, 0, 'u'},
       {"stop", no_argument, 0, 's'},
+      {"stop-after-current", no_argument, 0, 'q'},
       {"previous", no_argument, 0, 'r'},
       {"next", no_argument, 0, 'f'},
       {"volume", required_argument, 0, 'v'},
@@ -136,7 +138,7 @@ bool CommandlineOptions::Parse() {
   // Parse the arguments
   bool ok = false;
   forever {
-    int c = getopt_long(argc_, argv_, "hptusrfv:alk:oyg:", kOptions, nullptr);
+    int c = getopt_long(argc_, argv_, "hptusqrfv:alk:oyg:", kOptions, nullptr);
 
     // End of the options
     if (c == -1) break;
@@ -150,8 +152,9 @@ bool CommandlineOptions::Parse() {
                      tr("Start the playlist currently playing"),
                      tr("Play if stopped, pause if playing"),
                      tr("Pause playback"), tr("Stop playback"),
-                     tr("Skip backwards in playlist"))
-                .arg(tr("Skip forwards in playlist"),
+                     tr("Stop playback after current track"))
+                .arg(tr("Skip backwards in playlist"),
+                     tr("Skip forwards in playlist"),
                      tr("Set the volume to <value> percent"),
                      tr("Increase the volume by 4%"),
                      tr("Decrease the volume by 4%"),
@@ -190,6 +193,9 @@ bool CommandlineOptions::Parse() {
         break;
       case 's':
         player_action_ = Player_Stop;
+        break;
+      case 'q':
+        player_action_ = Player_StopAfterCurrent;
         break;
       case 'r':
         player_action_ = Player_Previous;

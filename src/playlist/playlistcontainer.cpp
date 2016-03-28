@@ -397,10 +397,18 @@ void PlaylistContainer::resizeEvent(QResizeEvent* e) {
 
 void PlaylistContainer::FocusOnFilter(QKeyEvent* event) {
   ui_->filter->setFocus();
-  if (event->key() == Qt::Key_Escape) {
-    ui_->filter->clear();
-  } else {
-    ui_->filter->setText(ui_->filter->text() + event->text());
+
+  switch (event->key()) {
+    case Qt::Key_Backspace:
+      break;
+
+    case Qt::Key_Escape:
+      ui_->filter->clear();
+      break;
+
+    default:
+      ui_->filter->setText(ui_->filter->text() + event->text());
+      break;
   }
 }
 

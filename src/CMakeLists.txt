@@ -1336,6 +1336,7 @@ if (WIN32)
     tinysvcmdns
     qtwin
     dsound
+    ${QT_QTGUI_LIBRARY}
   )
 endif (WIN32)
 
