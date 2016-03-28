@@ -108,6 +108,7 @@ void RegisterMetaTypes() {
   qRegisterMetaType<SubdirectoryList>("SubdirectoryList");
   qRegisterMetaType<Subdirectory>("Subdirectory");
   qRegisterMetaType<QList<QUrl>>("QList<QUrl>");
+  qRegisterMetaType<QAbstractSocket::SocketState>();
 
 #ifdef HAVE_DBUS
   qDBusRegisterMetaType<QImage>();
