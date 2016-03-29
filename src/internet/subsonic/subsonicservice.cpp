@@ -59,6 +59,7 @@ const char* SubsonicService::kSongsTable = "subsonic_songs";
 const char* SubsonicService::kFtsTable = "subsonic_songs_fts";
 
 const int SubsonicService::kMaxRedirects = 10;
+const int SubsonicService::kCoverArtSize = 1024;
 
 SubsonicService::SubsonicService(Application* app, InternetModel* parent)
     : InternetService(kServiceName, app, parent, parent),
@@ -490,7 +491,7 @@ void SubsonicLibraryScanner::OnGetAlbumListFinished(QNetworkReply* reply,
   }
 }
 
-void SubsonicLibraryScanner::OnGetAlbumFinished(QNetworkReply* reply) {
+void SubsonicLibraryScanner::OnGetAlbumFinished(QNetworkReply* reply, QString albumid) {
   reply->deleteLater();
   pending_requests_.remove(reply);
 
@@ -534,6 +535,7 @@ void SubsonicLibraryScanner::OnGetAlbumFinished(QNetworkReply* reply) {
     song.set_bitrate(reader.attributes().value("bitRate").toString().toInt());
     song.set_year(reader.attributes().value("year").toString().toInt());
     song.set_genre(reader.attributes().value("genre").toString());
+    song.set_art_automatic(QString("subsonic://image/%1").arg(albumid));
     qint64 length = reader.attributes().value("duration").toString().toInt();
     length *= kNsecPerSec;
     song.set_length_nanosec(length);
@@ -566,6 +568,15 @@ void SubsonicLibraryScanner::OnGetAlbumFinished(QNetworkReply* reply) {
   }
 }
 
+void SubsonicLibraryScanner::OnGetAlbumCoverFinished(QNetworkReply* reply, QString albumid) {
+  reply->deleteLater();
+  pending_requests_.remove(reply);
+
+  QByteArray image = reply->readAll();
+
+  service_->EmitImageLoaded(albumid, QImage::fromData(image));
+}
+
 void SubsonicLibraryScanner::GetAlbumList(int offset) {
   QUrl url = service_->BuildRequestUrl("getAlbumList2");
   url.addQueryItem("type", "alphabeticalByName");
@@ -576,6 +587,24 @@ void SubsonicLibraryScanner::GetAlbumList(int offset) {
              SLOT(OnGetAlbumListFinished(QNetworkReply*, int)), reply, offset);
 }
 
+void SubsonicLibraryScanner::GetAlbumCover(const QString& id) {
+  QUrl url = service_->BuildRequestUrl("getCoverArt");
+  url.addQueryItem("id", id);
+  url.addQueryItem("size", QString::number(kCoverArtSize));
+  QNetworkReply* reply = service_->Send(url);
+  NewClosure(reply, SIGNAL(finished()), this,
+             SLOT(OnGetAlbumCoverFinished(QNetworkReply*,QString)), reply, id);
+  pending_requests_.insert(reply);
+}
+
+void SubsonicService::LoadImage(const QString& id) {
+  scanner_->GetAlbumCover(id);
+}
+
+void SubsonicService::EmitImageLoaded(const QString& id, const QImage& image) {
+  emit ImageLoaded(id, image);
+}
+
 void SubsonicLibraryScanner::GetAlbum(const QString& id) {
   QUrl url = service_->BuildRequestUrl("getAlbum");
   url.addQueryItem("id", id);
@@ -584,7 +613,7 @@ void SubsonicLibraryScanner::GetAlbum(const QString& id) {
   }
   QNetworkReply* reply = service_->Send(url);
   NewClosure(reply, SIGNAL(finished()), this,
-             SLOT(OnGetAlbumFinished(QNetworkReply*)), reply);
+             SLOT(OnGetAlbumFinished(QNetworkReply*, QString)), reply, id);
   pending_requests_.insert(reply);
 }
 
