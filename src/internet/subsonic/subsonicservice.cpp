@@ -138,7 +138,7 @@ SubsonicService::SubsonicService(Application* app, InternetModel* parent)
                            tr("Refresh catalogue"), this,
                            SLOT(ReloadDatabase()));
   QAction* config_action = context_menu_->addAction(
-      IconLoader::Load("configure", IconLoader::Base), tr("Configure Subsonic..."), 
+      IconLoader::Load("configure", IconLoader::Base), tr("Configure Subsonic..."),
       this, SLOT(ShowConfig()));
   context_menu_->addSeparator();
   context_menu_->addMenu(library_filter_->menu());
@@ -153,7 +153,7 @@ SubsonicService::SubsonicService(Application* app, InternetModel* parent)
 SubsonicService::~SubsonicService() {}
 
 QStandardItem* SubsonicService::CreateRootItem() {
-  root_ = new QStandardItem(IconLoader::Load("subsonic", IconLoader::Provider), 
+  root_ = new QStandardItem(IconLoader::Load("subsonic", IconLoader::Provider),
                             kServiceName);
   root_->setData(true, InternetModel::Role_CanLazyLoad);
   return root_;
@@ -403,6 +403,7 @@ void SubsonicService::UpdateServer(const QString& server) {
 
 const int SubsonicLibraryScanner::kAlbumChunkSize = 500;
 const int SubsonicLibraryScanner::kConcurrentRequests = 8;
+const int SubsonicLibraryScanner::kCoverArtSize = 1024;
 
 SubsonicLibraryScanner::SubsonicLibraryScanner(SubsonicService* service,
                                                QObject* parent)
