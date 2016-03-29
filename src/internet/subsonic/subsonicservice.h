@@ -101,9 +101,6 @@ class SubsonicService : public InternetService {
 
   LoginState login_state() const { return login_state_; }
 
-  Q_INVOKABLE void LoadImage(const QString& id);
-  void EmitImageLoaded(const QString& id, const QImage& image);
-
   // Subsonic API methods
   void Ping();
 
@@ -128,7 +125,6 @@ class SubsonicService : public InternetService {
 
 signals:
   void LoginStateChanged(SubsonicService::LoginState newstate);
-  void ImageLoaded(const QString& id, const QImage& image);
 
  private:
   void EnsureMenuCreated();
@@ -186,8 +182,6 @@ class SubsonicLibraryScanner : public QObject {
   static const int kAlbumChunkSize;
   static const int kConcurrentRequests;
 
-  void GetAlbumCover(const QString& id);
-
 signals:
   void ScanFinished();
 
@@ -195,8 +189,7 @@ signals:
   // Step 1: use getAlbumList2 type=alphabeticalByName to list all albums
   void OnGetAlbumListFinished(QNetworkReply* reply, int offset);
   // Step 2: use getAlbum id=? to list all songs for each album
-  void OnGetAlbumFinished(QNetworkReply* reply, QString albumid);
-  void OnGetAlbumCoverFinished(QNetworkReply* reply, QString albumid);
+  void OnGetAlbumFinished(QNetworkReply* reply);
 
  private:
   void GetAlbumList(int offset);
