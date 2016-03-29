@@ -19,6 +19,7 @@
 #include "notificationssettingspage.h"
 #include "settingsdialog.h"
 #include "ui_notificationssettingspage.h"
+#include "ui/iconloader.h"
 #include "widgets/osdpretty.h"
 
 #include <QColorDialog>
@@ -33,8 +34,10 @@ NotificationsSettingsPage::NotificationsSettingsPage(SettingsDialog* dialog)
   ui_->setupUi(this);
   setWindowIcon(IconLoader::Load("help-hint", IconLoader::Base));
 
+  QIcon nocover = IconLoader::Load("nocover", IconLoader::Other);
   pretty_popup_->SetMessage(tr("OSD Preview"), tr("Drag to reposition"),
-                            QImage(":nocover.png"));
+                            nocover.pixmap(nocover.availableSizes().last())
+                                   .toImage());
 
   ui_->notifications_bg_preset->setItemData(0, QColor(OSDPretty::kPresetBlue),
                                             Qt::DecorationRole);

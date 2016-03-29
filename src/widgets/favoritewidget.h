@@ -37,6 +37,7 @@ signals:
 
  protected:
   void paintEvent(QPaintEvent* e);
+  void resizeEvent(QResizeEvent * e);
   void mouseReleaseEvent(QMouseEvent* e);
 
  private:

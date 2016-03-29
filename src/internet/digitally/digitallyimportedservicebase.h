@@ -89,13 +89,11 @@ signals:
   QString service_description_;
   QString api_service_name_;
 
-  QStringList basic_playlists_;
   QStringList premium_playlists_;
 
   QNetworkAccessManager* network_;
   DigitallyImportedUrlHandler* url_handler_;
 
-  int basic_audio_type_;
   int premium_audio_type_;
   QString username_;
   QString listen_hash_;

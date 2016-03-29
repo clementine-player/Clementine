@@ -79,10 +79,6 @@ class MoodbarProxyStyle : public QProxyStyle {
   void ChangeStyle(QAction* action);
 
  private:
-  // The slider "groove" is smaller than the actual slider: this convenient
-  // function returns the difference between groove width and slider width.
-  int GetExtraSpace(const QStyleOptionComplex* opt) const;
-
   Application* app_;
   QSlider* slider_;
 

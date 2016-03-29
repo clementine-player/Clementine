@@ -56,6 +56,12 @@ UrlHandler::LoadResult DigitallyImportedUrlHandler::StartLoading(
     return ret;
   }
 
+  if (!service_->is_premium_account()) {
+    service_->StreamError(tr("A premium account is required"));
+    ret.type_ = LoadResult::NoMoreTracks;
+    return ret;
+  }
+
   // Start loading the station
   const QString key = url.host();
   qLog(Info) << "Loading station" << key;

@@ -59,6 +59,7 @@ const char* LibraryModel::kSmartPlaylistsMimeType =
     "application/x-clementine-smart-playlist-generator";
 const char* LibraryModel::kSmartPlaylistsSettingsGroup =
     "SerialisedSmartPlaylists";
+const char* LibraryModel::kSavedGroupingsSettingsGroup = "SavedGroupings";
 const int LibraryModel::kSmartPlaylistsVersion = 4;
 const int LibraryModel::kPrettyCoverSize = 32;
 const qint64 LibraryModel::kIconCacheSize = 100000000;  //~100MB
@@ -106,9 +107,11 @@ LibraryModel::LibraryModel(LibraryBackend* backend, Application* app,
       Utilities::GetConfigPath(Utilities::Path_CacheRoot) + "/pixmapcache");
   icon_cache_->setMaximumCacheSize(LibraryModel::kIconCacheSize);
 
-  no_cover_icon_ = QPixmap(":nocover.png")
-                       .scaled(kPrettyCoverSize, kPrettyCoverSize,
-                               Qt::KeepAspectRatio, Qt::SmoothTransformation);
+  QIcon nocover = IconLoader::Load("nocover", IconLoader::Other);
+  no_cover_icon_ = nocover.pixmap(nocover.availableSizes().last()).scaled(
+                           kPrettyCoverSize, kPrettyCoverSize, 
+                           Qt::KeepAspectRatio,
+                           Qt::SmoothTransformation);
 
   connect(backend_, SIGNAL(SongsDiscovered(SongList)),
           SLOT(SongsDiscovered(SongList)));
@@ -139,6 +142,18 @@ void LibraryModel::set_show_dividers(bool show_dividers) {
     show_dividers_ = show_dividers;
     Reset();
   }
+}
+
+void LibraryModel::SaveGrouping(QString name) {
+  qLog(Debug) << "Model, save to: " << name;
+
+  QByteArray buffer;
+  QDataStream ds(&buffer, QIODevice::WriteOnly);
+  ds << group_by_;
+
+  QSettings s;
+  s.beginGroup(kSavedGroupingsSettingsGroup);
+  s.setValue(name, buffer);
 }
 
 void LibraryModel::Init(bool async) {
@@ -1490,4 +1505,20 @@ GeneratorPtr LibraryModel::CreateGenerator(const QModelIndex& index) const {
 void LibraryModel::TotalSongCountUpdatedSlot(int count) {
   total_song_count_ = count;
   emit TotalSongCountUpdated(count);
+}
+
+QDataStream& operator<<(QDataStream& s, const LibraryModel::Grouping& g) {
+  s << quint32(g.first) << quint32(g.second) << quint32(g.third);
+  return s;
+}
+
+QDataStream& operator>>(QDataStream& s, LibraryModel::Grouping& g) {
+  quint32 buf;
+  s >> buf;
+  g.first = LibraryModel::GroupBy(buf);
+  s >> buf;
+  g.second = LibraryModel::GroupBy(buf);
+  s >> buf;
+  g.third = LibraryModel::GroupBy(buf);
+  return s;
 }

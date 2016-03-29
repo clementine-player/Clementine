@@ -244,8 +244,8 @@ void TrackSelectionDialog::SaveData(const QList<Data>& data) {
 
     if (!TagReaderClient::Instance()->SaveFileBlocking(copy.url().toLocalFile(),
                                                        copy)) {
-      qLog(Warning) << "Failed to write new auto-tags to"
-                    << copy.url().toLocalFile();
+      emit Error(tr("Failed to write new auto-tags to '%1'")
+                     .arg(copy.url().toLocalFile()));
     }
   }
 }
@@ -256,7 +256,7 @@ void TrackSelectionDialog::accept() {
 
     // Save tags in the background
     QFuture<void> future =
-        QtConcurrent::run(&TrackSelectionDialog::SaveData, data_);
+        QtConcurrent::run(this, &TrackSelectionDialog::SaveData, data_);
     NewClosure(future, this, SLOT(AcceptFinished()));
     return;
   }

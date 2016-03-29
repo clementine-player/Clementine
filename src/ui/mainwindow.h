@@ -25,11 +25,13 @@
 #include <QSystemTrayIcon>
 
 #include "config.h"
+#include "core/lazy.h"
 #include "core/mac_startup.h"
 #include "core/tagreaderclient.h"
 #include "engines/engine_fwd.h"
 #include "library/librarymodel.h"
 #include "playlist/playlistitem.h"
+#include "ui/organisedialog.h"
 #include "ui/settingsdialog.h"
 
 class About;
@@ -57,7 +59,6 @@ class Library;
 class LibraryViewContainer;
 class MimeData;
 class MultiLoadingIndicator;
-class OrganiseDialog;
 class OSD;
 class Player;
 class PlaylistBackend;
@@ -67,7 +68,6 @@ class QueueManager;
 class InternetItem;
 class InternetModel;
 class InternetViewContainer;
-class Remote;
 class RipCDDialog;
 class Song;
 class SongInfoBase;
@@ -250,8 +250,8 @@ signals:
   void ShowErrorDialog(const QString& message);
   void ShowQueueManager();
   void ShowVisualisations();
-  void EnsureSettingsDialogCreated();
-  void EnsureEditTagDialogCreated();
+  SettingsDialog* CreateSettingsDialog();
+  EditTagDialog* CreateEditTagDialog();
   void OpenSettingsDialog();
   void OpenSettingsDialogAtPage(SettingsDialog::Page page);
   void ShowSongInfoConfig();
@@ -296,11 +296,10 @@ signals:
   Application* app_;
   SystemTrayIcon* tray_icon_;
   OSD* osd_;
-  std::unique_ptr<EditTagDialog> edit_tag_dialog_;
-  std::unique_ptr<About> about_dialog_;
+  Lazy<EditTagDialog> edit_tag_dialog_;
+  Lazy<About> about_dialog_;
 
   GlobalShortcuts* global_shortcuts_;
-  Remote* remote_;
 
   GlobalSearchView* global_search_view_;
   LibraryViewContainer* library_view_;
@@ -315,14 +314,14 @@ signals:
   SongInfoView* song_info_view_;
   ArtistInfoView* artist_info_view_;
 
-  std::unique_ptr<SettingsDialog> settings_dialog_;
-  std::unique_ptr<AddStreamDialog> add_stream_dialog_;
-  std::unique_ptr<AlbumCoverManager> cover_manager_;
+  Lazy<SettingsDialog> settings_dialog_;
+  Lazy<AddStreamDialog> add_stream_dialog_;
+  Lazy<AlbumCoverManager> cover_manager_;
   std::unique_ptr<Equalizer> equalizer_;
-  std::unique_ptr<TranscodeDialog> transcode_dialog_;
-  std::unique_ptr<ErrorDialog> error_dialog_;
-  std::unique_ptr<OrganiseDialog> organise_dialog_;
-  std::unique_ptr<QueueManager> queue_manager_;
+  Lazy<TranscodeDialog> transcode_dialog_;
+  Lazy<ErrorDialog> error_dialog_;
+  Lazy<OrganiseDialog> organise_dialog_;
+  Lazy<QueueManager> queue_manager_;
 
   std::unique_ptr<TagFetcher> tag_fetcher_;
   std::unique_ptr<TrackSelectionDialog> track_selection_dialog_;

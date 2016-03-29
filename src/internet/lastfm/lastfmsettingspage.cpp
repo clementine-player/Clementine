@@ -24,6 +24,7 @@
 
 #include <lastfm5/ws.h>
 
+#include <QDesktopServices>
 #include <QMessageBox>
 #include <QSettings>
 
@@ -42,17 +43,16 @@ LastFMSettingsPage::LastFMSettingsPage(SettingsDialog* dialog)
   // Icons
   setWindowIcon(IconLoader::Load("lastfm", IconLoader::Provider));
 
+  connect(service_, SIGNAL(TokenReceived(bool,QString)),
+          SLOT(TokenReceived(bool,QString)));
   connect(service_, SIGNAL(AuthenticationComplete(bool, QString)),
           SLOT(AuthenticationComplete(bool, QString)));
   connect(ui_->login_state, SIGNAL(LogoutClicked()), SLOT(Logout()));
   connect(ui_->login_state, SIGNAL(LoginClicked()), SLOT(Login()));
   connect(ui_->login, SIGNAL(clicked()), SLOT(Login()));
 
-  ui_->login_state->AddCredentialField(ui_->username);
-  ui_->login_state->AddCredentialField(ui_->password);
-  ui_->login_state->AddCredentialGroup(ui_->groupBox);
+  ui_->login_state->AddCredentialGroup(ui_->login_container);
 
-  ui_->username->setMinimumWidth(QFontMetrics(QFont()).width("WWWWWWWWWWWW"));
   resize(sizeHint());
 }
 
@@ -62,7 +62,22 @@ void LastFMSettingsPage::Login() {
   waiting_for_auth_ = true;
 
   ui_->login_state->SetLoggedIn(LoginStateWidget::LoginInProgress);
-  service_->Authenticate(ui_->username->text(), ui_->password->text());
+  service_->GetToken();
+}
+
+void LastFMSettingsPage::TokenReceived(bool success, const QString &token) {
+  if (!success) {
+    QMessageBox::warning(this, tr("Last.fm authentication failed"), token);
+    return;
+  }
+
+  QString url = QString(LastFMService::kAuthLoginUrl).arg(LastFMService::kApiKey, token);
+  QDesktopServices::openUrl(QUrl(url));
+
+  QMessageBox::information(this, tr("Last.fm authentication"),
+                           tr("Click Ok once you authenticated Clementine in your last.fm account."));
+
+  service_->Authenticate(token);
 }
 
 void LastFMSettingsPage::AuthenticationComplete(bool success,
@@ -72,8 +87,6 @@ void LastFMSettingsPage::AuthenticationComplete(bool success,
   waiting_for_auth_ = false;
 
   if (success) {
-    // Clear password just to be sure
-    ui_->password->clear();
     // Save settings
     Save();
   } else {
@@ -109,8 +122,6 @@ void LastFMSettingsPage::Save() {
 }
 
 void LastFMSettingsPage::Logout() {
-  ui_->username->clear();
-  ui_->password->clear();
   RefreshControls(false);
 
   service_->SignOut();

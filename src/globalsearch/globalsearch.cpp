@@ -44,6 +44,8 @@ GlobalSearch::GlobalSearch(Application* app, QObject* parent)
 
   connect(app_->album_cover_loader(), SIGNAL(ImageLoaded(quint64, QImage)),
           SLOT(AlbumArtLoaded(quint64, QImage)));
+  connect(this, SIGNAL(SearchAsyncSig(int,QString)),
+          this, SLOT(DoSearchAsync(int,QString)));
 
   ConnectProvider(url_provider_);
 }
@@ -82,6 +84,13 @@ void GlobalSearch::AddProvider(SearchProvider* provider) {
 
 int GlobalSearch::SearchAsync(const QString& query) {
   const int id = next_id_++;
+
+  emit SearchAsyncSig(id, query);
+
+  return id;
+}
+
+void GlobalSearch::DoSearchAsync(int id, const QString& query) {
   pending_search_providers_[id] = 0;
 
   int timer_id = -1;
@@ -106,8 +115,6 @@ int GlobalSearch::SearchAsync(const QString& query) {
       }
     }
   }
-
-  return id;
 }
 
 void GlobalSearch::CancelSearch(int id) {

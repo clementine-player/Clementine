@@ -24,7 +24,7 @@
 
 class QMenu;
 class QNetworkAccessManager;
-class QNetworkReply;
+class RedirectFollower;
 
 class PrettyImage : public QWidget {
   Q_OBJECT
@@ -57,7 +57,7 @@ signals:
   void paintEvent(QPaintEvent*);
 
  private slots:
-  void ImageFetched(QNetworkReply* reply);
+  void ImageFetched(RedirectFollower* reply);
   void ImageScaled(QFuture<QImage> future);
 
  private:

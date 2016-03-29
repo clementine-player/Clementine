@@ -28,11 +28,16 @@
 
 #include <cmath>
 
+#include "ui/iconloader.h"
+
 SystemTrayIcon::SystemTrayIcon(QObject* parent)
     : QObject(parent),
-      percentage_(0),
-      playing_icon_(":/tiny-start.png"),
-      paused_icon_(":/tiny-pause.png") {}
+      percentage_(0) {
+  QIcon tiny_start = IconLoader::Load("tiny-start", IconLoader::Other);
+  playing_icon_ = tiny_start.pixmap(tiny_start.availableSizes().last());
+  QIcon tiny_pause = IconLoader::Load("tiny-pause", IconLoader::Other);
+  paused_icon_ = tiny_pause.pixmap(tiny_pause.availableSizes().last());
+}
 
 QPixmap SystemTrayIcon::CreateIcon(const QPixmap& icon,
                                    const QPixmap& grey_icon) {

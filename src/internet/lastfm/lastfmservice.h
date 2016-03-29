@@ -54,6 +54,7 @@ class LastFMService : public Scrobbler {
   static const char* kAudioscrobblerClientId;
   static const char* kApiKey;
   static const char* kSecret;
+  static const char* kAuthLoginUrl;
 
   void ReloadSettings();
 
@@ -68,7 +69,8 @@ class LastFMService : public Scrobbler {
   bool PreferAlbumArtist() const { return prefer_albumartist_; }
   bool HasConnectionProblems() const { return connection_problems_; }
 
-  void Authenticate(const QString& username, const QString& password);
+  void GetToken();
+  void Authenticate(const QString& token);
   void SignOut();
   void UpdateSubscriberStatus();
 
@@ -80,7 +82,8 @@ class LastFMService : public Scrobbler {
   void ShowConfig();
   void ToggleScrobbling();
 
- signals:
+signals:
+  void TokenReceived(bool success, const QString& token);
   void AuthenticationComplete(bool success, const QString& error_message);
   void ScrobblingEnabledChanged(bool value);
   void ButtonVisibilityChanged(bool value);
@@ -94,6 +97,7 @@ class LastFMService : public Scrobbler {
   void SavedItemsChanged();
 
  private slots:
+  void GetTokenReplyFinished(QNetworkReply* reply);
   void AuthenticateReplyFinished(QNetworkReply* reply);
   void UpdateSubscriberStatusFinished(QNetworkReply* reply);
 
@@ -107,7 +111,7 @@ class LastFMService : public Scrobbler {
   static QUrl FixupUrl(const QUrl& url);
 
  private:
-  lastfm::Audioscrobbler* scrobbler_;
+  std::unique_ptr<lastfm::Audioscrobbler> scrobbler_;
   lastfm::Track last_track_;
   lastfm::Track next_metadata_;
   bool already_scrobbled_;

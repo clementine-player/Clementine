@@ -414,9 +414,15 @@ bool Playlist::setData(const QModelIndex& index, const QVariant& value,
 void Playlist::SongSaveComplete(TagReaderReply* reply,
                                 const QPersistentModelIndex& index) {
   if (reply->is_successful() && index.isValid()) {
-    QFuture<void> future = item_at(index.row())->BackgroundReload();
-    NewClosure(future, this, SLOT(ItemReloadComplete(QPersistentModelIndex)),
-               index);
+    if (reply->message().save_file_response().success()) {
+      QFuture<void> future = item_at(index.row())->BackgroundReload();
+      NewClosure(future, this, SLOT(ItemReloadComplete(QPersistentModelIndex)),
+                 index);
+    } else {
+      emit Error(tr("An error occurred writing metadata to '%1'").arg(
+          QString::fromStdString(
+              reply->request_message().save_file_request().filename())));
+    }
   }
   reply->deleteLater();
 }
@@ -691,7 +697,7 @@ void Playlist::set_current_row(int i, bool is_stopping) {
 void Playlist::InsertDynamicItems(int count) {
   GeneratorInserter* inserter =
       new GeneratorInserter(task_manager_, library_, this);
-  connect(inserter, SIGNAL(Error(QString)), SIGNAL(LoadTracksError(QString)));
+  connect(inserter, SIGNAL(Error(QString)), SIGNAL(Error(QString)));
   connect(inserter, SIGNAL(PlayRequested(QModelIndex)),
           SIGNAL(PlayRequested(QModelIndex)));
 
@@ -819,7 +825,7 @@ bool Playlist::dropMimeData(const QMimeData* data, Qt::DropAction action,
   } else if (data->hasFormat(kCddaMimeType)) {
     SongLoaderInserter* inserter = new SongLoaderInserter(
         task_manager_, library_, backend_->app()->player());
-    connect(inserter, SIGNAL(Error(QString)), SIGNAL(LoadTracksError(QString)));
+    connect(inserter, SIGNAL(Error(QString)), SIGNAL(Error(QString)));
     inserter->LoadAudioCD(this, row, play_now, enqueue_now);
   } else if (data->hasUrls()) {
     // URL list dragged from the file list or some other app
@@ -833,7 +839,7 @@ void Playlist::InsertUrls(const QList<QUrl>& urls, int pos, bool play_now,
                           bool enqueue) {
   SongLoaderInserter* inserter = new SongLoaderInserter(
       task_manager_, library_, backend_->app()->player());
-  connect(inserter, SIGNAL(Error(QString)), SIGNAL(LoadTracksError(QString)));
+  connect(inserter, SIGNAL(Error(QString)), SIGNAL(Error(QString)));
 
   inserter->Load(this, pos, play_now, enqueue, urls);
 }
@@ -847,7 +853,7 @@ void Playlist::InsertSmartPlaylist(GeneratorPtr generator, int pos,
 
   GeneratorInserter* inserter =
       new GeneratorInserter(task_manager_, library_, this);
-  connect(inserter, SIGNAL(Error(QString)), SIGNAL(LoadTracksError(QString)));
+  connect(inserter, SIGNAL(Error(QString)), SIGNAL(Error(QString)));
 
   inserter->Load(this, pos, play_now, enqueue, generator);
 

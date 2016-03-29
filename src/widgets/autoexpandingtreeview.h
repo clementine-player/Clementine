@@ -47,6 +47,7 @@ signals:
 
   // QWidget
   void mousePressEvent(QMouseEvent* event);
+  void mouseDoubleClickEvent(QMouseEvent* event);
   void keyPressEvent(QKeyEvent* event);
 
   virtual bool CanRecursivelyExpand(const QModelIndex& index) const {

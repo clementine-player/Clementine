@@ -354,6 +354,10 @@ void SoundCloudService::EnsureMenuCreated() {
     context_menu_->addAction(IconLoader::Load("download", IconLoader::Base),
                              tr("Open %1 in browser").arg("soundcloud.com"),
                              this, SLOT(Homepage()));
+    context_menu_->addSeparator();
+    context_menu_->addAction(IconLoader::Load("configure", IconLoader::Base),
+                             tr("Configure SoundCloud..."),
+                             this, SLOT(ShowConfig()));
   }
 }
 

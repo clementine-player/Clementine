@@ -25,6 +25,7 @@
 #include "ui/settingsdialog.h"
 
 #include <QActionGroup>
+#include <QInputDialog>
 #include <QKeyEvent>
 #include <QMenu>
 #include <QRegExp>
@@ -100,11 +101,17 @@ LibraryFilterWidget::LibraryFilterWidget(QWidget* parent)
   connect(group_by_group_, SIGNAL(triggered(QAction*)),
           SLOT(GroupByClicked(QAction*)));
 
+  connect(ui_->save_grouping, SIGNAL(triggered()), this, SLOT(SaveGroupBy()));
+  connect(ui_->manage_groupings, SIGNAL(triggered()), this,
+          SLOT(ShowGroupingManager()));
+
   // Library config menu
   library_menu_ = new QMenu(tr("Display options"), this);
   library_menu_->setIcon(ui_->options->icon());
   library_menu_->addMenu(filter_age_menu_);
   library_menu_->addMenu(group_by_menu_);
+  library_menu_->addAction(ui_->save_grouping);
+  library_menu_->addAction(ui_->manage_groupings);
   library_menu_->addSeparator();
   ui_->options->setMenu(library_menu_);
 
@@ -113,6 +120,22 @@ LibraryFilterWidget::LibraryFilterWidget(QWidget* parent)
 }
 
 LibraryFilterWidget::~LibraryFilterWidget() { delete ui_; }
+
+void LibraryFilterWidget::UpdateGroupByActions() {
+  if (group_by_group_) {
+    disconnect(group_by_group_, 0, 0, 0);
+    delete group_by_group_;
+  }
+
+  group_by_group_ = CreateGroupByActions(this);
+  group_by_menu_->clear();
+  group_by_menu_->addActions(group_by_group_->actions());
+  connect(group_by_group_, SIGNAL(triggered(QAction*)),
+          SLOT(GroupByClicked(QAction*)));
+  if (model_) {
+    CheckCurrentGrouping(model_->GetGroupBy());
+  }
+}
 
 QActionGroup* LibraryFilterWidget::CreateGroupByActions(QObject* parent) {
   QActionGroup* ret = new QActionGroup(parent);
@@ -139,6 +162,27 @@ QActionGroup* LibraryFilterWidget::CreateGroupByActions(QObject* parent) {
                           LibraryModel::Grouping(LibraryModel::GroupBy_Genre,
                                                  LibraryModel::GroupBy_Artist,
                                                  LibraryModel::GroupBy_Album)));
+
+  QAction* sep1 = new QAction(parent);
+  sep1->setSeparator(true);
+  ret->addAction(sep1);
+
+  // read saved groupings
+  QSettings s;
+  s.beginGroup(LibraryModel::kSavedGroupingsSettingsGroup);
+  QStringList saved = s.childKeys();
+  for (int i = 0; i < saved.size(); ++i) {
+    QByteArray bytes = s.value(saved.at(i)).toByteArray();
+    QDataStream ds(&bytes, QIODevice::ReadOnly);
+    LibraryModel::Grouping g;
+    ds >> g;
+    ret->addAction(CreateGroupByAction(saved.at(i), parent, g));
+  }
+
+  QAction* sep2 = new QAction(parent);
+  sep2->setSeparator(true);
+  ret->addAction(sep2);
+
   ret->addAction(CreateGroupByAction(tr("Advanced grouping..."), parent,
                                      LibraryModel::Grouping()));
 
@@ -156,6 +200,24 @@ QAction* LibraryFilterWidget::CreateGroupByAction(
   }
 
   return ret;
+}
+
+void LibraryFilterWidget::SaveGroupBy() {
+  QString text =
+      QInputDialog::getText(this, tr("Grouping Name"), tr("Grouping name:"));
+  if (!text.isEmpty() && model_) {
+    model_->SaveGrouping(text);
+    UpdateGroupByActions();
+  }
+}
+
+void LibraryFilterWidget::ShowGroupingManager() {
+  if (!groupings_manager_) {
+    groupings_manager_.reset(new SavedGroupingManager);
+  }
+  groupings_manager_->SetFilter(this);
+  groupings_manager_->UpdateModel();
+  groupings_manager_->show();
 }
 
 void LibraryFilterWidget::FocusOnFilter(QKeyEvent* event) {
@@ -220,6 +282,11 @@ void LibraryFilterWidget::GroupingChanged(const LibraryModel::Grouping& g) {
   }
 
   // Now make sure the correct action is checked
+  CheckCurrentGrouping(g);
+}
+
+void LibraryFilterWidget::CheckCurrentGrouping(
+    const LibraryModel::Grouping& g) {
   for (QAction* action : group_by_group_->actions()) {
     if (action->property("group_by").isNull()) continue;
 
