@@ -67,7 +67,6 @@ class AlbumCoverLoader : public QObject {
   void ProcessTasks();
   void RemoteFetchFinished(QNetworkReply* reply);
   void SpotifyImageLoaded(const QString& url, const QImage& image);
-  void SubsonicImageLoaded(const QString& url, const QImage& image);
 
  protected:
   enum State { State_TryingManual, State_TryingAuto, };
@@ -105,13 +104,11 @@ class AlbumCoverLoader : public QObject {
   QQueue<Task> tasks_;
   QMap<QNetworkReply*, Task> remote_tasks_;
   QMap<QString, Task> remote_spotify_tasks_;
-  QMap<QString, Task> remote_subsonic_tasks_;
   quint64 next_id_;
 
   NetworkAccessManager* network_;
 
   bool connected_spotify_;
-  bool connected_subsonic_;
 
   static const int kMaxRedirects = 3;
 };
