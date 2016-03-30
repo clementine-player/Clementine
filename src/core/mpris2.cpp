@@ -187,7 +187,7 @@ void Mpris2::EmitNotification(const QString& name) {
   if (value.isValid()) EmitNotification(name, value);
 }
 
-  // ------------------Root Interface--------------- //
+// ------------------Root Interface--------------- //
 
 bool Mpris2::CanQuit() const { return true; }
 
@@ -414,19 +414,12 @@ bool Mpris2::CanPause() const {
 }
 
 bool Mpris2::CanSeek() const {
-  if (mpris1_->player()) {
-    return mpris1_->player()->GetCaps() & CAN_SEEK;
-  } else {
-    return true;
-  }
+  return mpris1_->player() ? mpris1_->player()->GetCaps() & CAN_SEEK : true;
 }
 
 bool Mpris2::CanSeek(Engine::State state) const {
-    if (mpris1_->player()) {
-      return mpris1_->player()->GetCaps(state) & CAN_SEEK;
-    } else {
-      return true;
-    }
+  return mpris1_->player() ? mpris1_->player()->GetCaps(state) & CAN_SEEK
+                           : true;
 }
 
 bool Mpris2::CanControl() const { return true; }
