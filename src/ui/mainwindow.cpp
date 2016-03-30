@@ -251,9 +251,6 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
       app_->library_backend(), tr("Library"), "library",
       IconLoader::Load("folder-sound", IconLoader::Base), true, app_, this));
 
-  app_->global_search()->ReloadSettings();
-  global_search_view_->ReloadSettings();
-
   connect(global_search_view_, SIGNAL(AddToPlaylist(QMimeData*)),
           SLOT(AddToPlaylist(QMimeData*)));
 
@@ -987,6 +984,11 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
   ui_->splitter->setChildrenCollapsible(false);
 
   ReloadSettings();
+
+  // The "GlobalSearchView" requires that "InternetModel" has already been
+  // initialised before reload settings.
+  app_->global_search()->ReloadSettings();
+  global_search_view_->ReloadSettings();
 
   // Reload pretty OSD to avoid issues with fonts
   osd_->ReloadPrettyOSDSettings();
