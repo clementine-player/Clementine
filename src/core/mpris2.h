@@ -22,11 +22,11 @@
 #ifndef CORE_MPRIS2_H_
 #define CORE_MPRIS2_H_
 
-#include "playlist/playlistitem.h"
-
 #include <QMetaObject>
 #include <QObject>
 #include <QtDBus>
+
+#include "playlist/playlistitem.h"
 
 class Application;
 class MainWindow;
@@ -61,12 +61,12 @@ const QDBusArgument& operator>>(const QDBusArgument& arg,
 
 namespace mpris {
 
-class Mpris1;
-
 class Mpris2 : public QObject {
   Q_OBJECT
 
  public:
+  Mpris2(Application* app, QObject* parent = nullptr);
+
   // org.mpris.MediaPlayer2 MPRIS 2.0 Root interface
   Q_PROPERTY(bool CanQuit READ CanQuit)
   Q_PROPERTY(bool CanRaise READ CanRaise)
@@ -105,8 +105,6 @@ class Mpris2 : public QObject {
   Q_PROPERTY(quint32 PlaylistCount READ PlaylistCount)
   Q_PROPERTY(QStringList Orderings READ Orderings)
   Q_PROPERTY(MaybePlaylist ActivePlaylist READ ActivePlaylist)
-
-  Mpris2(Application* app, Mpris1* mpris1, QObject* parent = nullptr);
 
   // Root Properties
   bool CanQuit() const;
@@ -179,7 +177,7 @@ class Mpris2 : public QObject {
   QList<MprisPlaylist> GetPlaylists(quint32 index, quint32 max_count,
                                     const QString& order, bool reverse_order);
 
- signals:
+signals:
   // Player
   void Seeked(qlonglong position);
 
@@ -229,7 +227,6 @@ class Mpris2 : public QObject {
   QVariantMap last_metadata_;
 
   Application* app_;
-  Mpris1* mpris1_;
 };
 
 }  // namespace mpris
