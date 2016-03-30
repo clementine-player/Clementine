@@ -217,6 +217,8 @@ class Mpris2 : public QObject {
 
   QString current_track_id() const;
 
+  bool CanSeek(Engine::State state) const;
+
   QString DesktopEntryAbsolutePath() const;
 
  private:

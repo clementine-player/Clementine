@@ -134,13 +134,19 @@ void Mpris2::EngineStateChanged(Engine::State newState) {
   }
 
   EmitNotification("PlaybackStatus", PlaybackStatus(newState));
+  if (newState == Engine::Playing)
+    EmitNotification("CanSeek", CanSeek(newState));
 }
 
 void Mpris2::VolumeChanged() { EmitNotification("Volume"); }
 
 void Mpris2::ShuffleModeChanged() { EmitNotification("Shuffle"); }
 
-void Mpris2::RepeatModeChanged() { EmitNotification("LoopStatus"); }
+void Mpris2::RepeatModeChanged() {
+  EmitNotification("LoopStatus");
+  EmitNotification("CanGoNext", CanGoNext());
+  EmitNotification("CanGoPrevious", CanGoPrevious());
+}
 
 void Mpris2::EmitNotification(const QString& name, const QVariant& val) {
   EmitNotification(name, val, "org.mpris.MediaPlayer2.Player");
@@ -171,11 +177,17 @@ void Mpris2::EmitNotification(const QString& name) {
     value = Volume();
   else if (name == "Position")
     value = Position();
+  else if (name == "CanGoNext")
+    value = CanGoNext();
+  else if (name == "CanGoPrevious")
+    value = CanGoPrevious();
+  else if (name == "CanSeek")
+    value = CanSeek();
 
   if (value.isValid()) EmitNotification(name, value);
 }
 
-  // ------------------Root Interface--------------- //
+// ------------------Root Interface--------------- //
 
 bool Mpris2::CanQuit() const { return true; }
 
@@ -326,7 +338,12 @@ QString Mpris2::current_track_id() const {
 
 // We send Metadata change notification as soon as the process of
 // changing song starts...
-void Mpris2::CurrentSongChanged(const Song& song) { ArtLoaded(song, ""); }
+void Mpris2::CurrentSongChanged(const Song& song) {
+  ArtLoaded(song, "");
+  EmitNotification("CanGoNext", CanGoNext());
+  EmitNotification("CanGoPrevious", CanGoPrevious());
+  EmitNotification("CanSeek", CanSeek());
+}
 
 // ... and we add the cover information later, when it's available.
 void Mpris2::ArtLoaded(const Song& song, const QString& art_uri) {
@@ -397,11 +414,12 @@ bool Mpris2::CanPause() const {
 }
 
 bool Mpris2::CanSeek() const {
-  if (mpris1_->player()) {
-    return mpris1_->player()->GetCaps() & CAN_SEEK;
-  } else {
-    return true;
-  }
+  return mpris1_->player() ? mpris1_->player()->GetCaps() & CAN_SEEK : true;
+}
+
+bool Mpris2::CanSeek(Engine::State state) const {
+  return mpris1_->player() ? mpris1_->player()->GetCaps(state) & CAN_SEEK
+                           : true;
 }
 
 bool Mpris2::CanControl() const { return true; }
