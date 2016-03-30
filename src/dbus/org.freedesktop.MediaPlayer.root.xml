@@ -12,8 +12,9 @@
         </method>
 
         <method name="MprisVersion">
-            <arg type="(qq)" direction="out"/>
-            <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="Version"/>
+            <arg type="(qq)" direction="out">
+                <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="Version"/>
+            </arg>
         </method>
 
     </interface>

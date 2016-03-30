@@ -6,8 +6,9 @@
 
     <method name="GetMetadata">
         <arg type="i" direction="in" />
-        <arg type="a{sv}" direction="out" />
-        <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="QVariantMap"/>
+        <arg type="a{sv}" direction="out">
+            <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="QVariantMap"/>
+        </arg>
     </method>
 
     <method name="GetCurrentTrack">
