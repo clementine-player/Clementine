@@ -42,7 +42,7 @@ QIcon IntergalacticFMUrlHandler::icon() const { return service_->icon(); }
 
 UrlHandler::LoadResult IntergalacticFMUrlHandler::StartLoading(const QUrl& url) {
   QUrl playlist_url = url;
-  playlist_url.setScheme("http");
+  playlist_url.setScheme("https");
 
   // Load the playlist
   QNetworkReply* reply =
