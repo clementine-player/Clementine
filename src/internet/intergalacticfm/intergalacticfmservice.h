@@ -36,9 +36,9 @@ class IntergalacticFMServiceBase : public InternetService {
 
  public:
   IntergalacticFMServiceBase(Application* app, InternetModel* parent,
-                    const QString& name, const QUrl& channel_list_url,
-                    const QUrl& homepage_url, const QUrl& donate_page_url,
-                    const QIcon& icon);
+                             const QString& name, const QUrl& channel_list_url,
+                             const QUrl& homepage_url,
+                             const QUrl& donate_page_url, const QIcon& icon);
   ~IntergalacticFMServiceBase();
 
   enum ItemType {
@@ -71,7 +71,7 @@ class IntergalacticFMServiceBase : public InternetService {
   bool IsStreamListStale() const { return streams_.IsStale(); }
   StreamList Streams();
 
- signals:
+signals:
   void StreamsChanged();
 
  private slots:
@@ -109,8 +109,10 @@ class IntergalacticFMService : public IntergalacticFMServiceBase {
   IntergalacticFMService(Application* app, InternetModel* parent);
 };
 
-QDataStream& operator<<(QDataStream& out, const IntergalacticFMService::Stream& stream);
-QDataStream& operator>>(QDataStream& in, IntergalacticFMService::Stream& stream);
+QDataStream& operator<<(QDataStream& out,
+                        const IntergalacticFMService::Stream& stream);
+QDataStream& operator>>(QDataStream& in,
+                        IntergalacticFMService::Stream& stream);
 Q_DECLARE_METATYPE(IntergalacticFMService::Stream)
 
 #endif  // INTERNET_INTERGALACTICFM_INTERGALACTICFMSERVICE_H_

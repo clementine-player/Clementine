@@ -17,8 +17,8 @@
 
 #include "intergalacticfmsearchprovider.h"
 
-IntergalacticFMSearchProvider::IntergalacticFMSearchProvider(IntergalacticFMServiceBase* service,
-                                           Application* app, QObject* parent)
+IntergalacticFMSearchProvider::IntergalacticFMSearchProvider(
+    IntergalacticFMServiceBase* service, Application* app, QObject* parent)
     : SimpleSearchProvider(app, parent), service_(service) {
   Init(service->name(), service->url_scheme(), service->icon(),
        CanGiveSuggestions);

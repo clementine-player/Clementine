@@ -50,12 +50,10 @@ bool operator<(const IntergalacticFMServiceBase::Stream& a,
   return a.title_.compare(b.title_, Qt::CaseInsensitive) < 0;
 }
 
-IntergalacticFMServiceBase::IntergalacticFMServiceBase(Application* app, InternetModel* parent,
-                                     const QString& name,
-                                     const QUrl& channel_list_url,
-                                     const QUrl& homepage_url,
-                                     const QUrl& donate_page_url,
-                                     const QIcon& icon)
+IntergalacticFMServiceBase::IntergalacticFMServiceBase(
+    Application* app, InternetModel* parent, const QString& name,
+    const QUrl& channel_list_url, const QUrl& homepage_url,
+    const QUrl& donate_page_url, const QIcon& icon)
     : InternetService(name, app, parent, parent),
       url_scheme_(name.toLower().remove(' ')),
       url_handler_(new IntergalacticFMUrlHandler(app, this, this)),
@@ -75,7 +73,9 @@ IntergalacticFMServiceBase::IntergalacticFMServiceBase(Application* app, Interne
       new IntergalacticFMSearchProvider(this, app_, this));
 }
 
-IntergalacticFMServiceBase::~IntergalacticFMServiceBase() { delete context_menu_; }
+IntergalacticFMServiceBase::~IntergalacticFMServiceBase() {
+  delete context_menu_;
+}
 
 QStandardItem* IntergalacticFMServiceBase::CreateRootItem() {
   root_ = new QStandardItem(icon_, name_);
@@ -103,11 +103,11 @@ void IntergalacticFMServiceBase::ShowContextMenu(const QPoint& global_pos) {
                              this, SLOT(Homepage()));
 
     if (!donate_page_url_.isEmpty()) {
-      context_menu_->addAction(IconLoader::Load("download", IconLoader::Base), 
+      context_menu_->addAction(IconLoader::Load("download", IconLoader::Base),
                                tr("Donate"), this, SLOT(Donate()));
     }
 
-    context_menu_->addAction(IconLoader::Load("view-refresh",  IconLoader::Base),
+    context_menu_->addAction(IconLoader::Load("view-refresh", IconLoader::Base),
                              tr("Refresh channels"), this,
                              SLOT(ForceRefreshStreams()));
   }
@@ -124,7 +124,7 @@ void IntergalacticFMServiceBase::ForceRefreshStreams() {
 }
 
 void IntergalacticFMServiceBase::RefreshStreamsFinished(QNetworkReply* reply,
-                                               int task_id) {
+                                                        int task_id) {
   app_->task_manager()->SetTaskFinished(task_id);
   reply->deleteLater();
 
@@ -155,7 +155,8 @@ void IntergalacticFMServiceBase::RefreshStreamsFinished(QNetworkReply* reply,
   emit StreamsChanged();
 }
 
-void IntergalacticFMServiceBase::ReadChannel(QXmlStreamReader& reader, StreamList* ret) {
+void IntergalacticFMServiceBase::ReadChannel(QXmlStreamReader& reader,
+                                             StreamList* ret) {
   Stream stream;
   bool found = false;
 
@@ -179,8 +180,7 @@ void IntergalacticFMServiceBase::ReadChannel(QXmlStreamReader& reader, StreamLis
 
           stream.url_ = url;
           found = true;
-        } else if (found == false &&
-                   reader.name() == "highestpls" &&
+        } else if (!found && reader.name() == "highestpls" &&
                    reader.attributes().value("format") == "mp3") {
           QUrl url(reader.readElementText());
           url.setScheme(url_handler_->scheme());
@@ -211,7 +211,9 @@ Song IntergalacticFMServiceBase::Stream::ToSong(const QString& prefix) const {
   return ret;
 }
 
-void IntergalacticFMServiceBase::Homepage() { QDesktopServices::openUrl(homepage_url_); }
+void IntergalacticFMServiceBase::Homepage() {
+  QDesktopServices::openUrl(homepage_url_);
+}
 
 void IntergalacticFMServiceBase::Donate() {
   QDesktopServices::openUrl(donate_page_url_);
@@ -241,9 +243,8 @@ void IntergalacticFMServiceBase::PopulateStreams() {
   if (root_->hasChildren()) root_->removeRows(0, root_->rowCount());
 
   for (const Stream& stream : streams_) {
-    QStandardItem* item =
-        new QStandardItem(IconLoader::Load("icon_radio", IconLoader::Lastfm), 
-                          QString());
+    QStandardItem* item = new QStandardItem(
+        IconLoader::Load("icon_radio", IconLoader::Lastfm), QString());
     item->setText(stream.title_);
     item->setData(QVariant::fromValue(stream.ToSong(name_)),
                   InternetModel::Role_SongMetadata);
@@ -260,7 +261,8 @@ QDataStream& operator<<(QDataStream& out,
   return out;
 }
 
-QDataStream& operator>>(QDataStream& in, IntergalacticFMServiceBase::Stream& stream) {
+QDataStream& operator>>(QDataStream& in,
+                        IntergalacticFMServiceBase::Stream& stream) {
   in >> stream.title_ >> stream.dj_ >> stream.url_;
   return in;
 }
@@ -270,8 +272,10 @@ void IntergalacticFMServiceBase::ReloadSettings() {
   streams_.Sort();
 }
 
-IntergalacticFMService::IntergalacticFMService(Application* app, InternetModel* parent)
+IntergalacticFMService::IntergalacticFMService(Application* app,
+                                               InternetModel* parent)
     : IntergalacticFMServiceBase(
-          app, parent, "Intergalactic FM", QUrl("https://intergalacticfm.com/channels.xml"),
-          QUrl("http://intergalacticfm.com"), QUrl(), IconLoader::Load("intergalacticfm", 
-          IconLoader::Provider)) {}
+          app, parent, "Intergalactic FM",
+          QUrl("https://intergalacticfm.com/channels.xml"),
+          QUrl("http://intergalacticfm.com"), QUrl(),
+          IconLoader::Load("intergalacticfm", IconLoader::Provider)) {}

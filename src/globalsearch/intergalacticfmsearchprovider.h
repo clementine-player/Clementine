@@ -23,8 +23,8 @@
 
 class IntergalacticFMSearchProvider : public SimpleSearchProvider {
  public:
-  IntergalacticFMSearchProvider(IntergalacticFMServiceBase* service, Application* app,
-                       QObject* parent);
+  IntergalacticFMSearchProvider(IntergalacticFMServiceBase* service,
+                                Application* app, QObject* parent);
   // SearchProvider
   InternetService* internet_service() override { return service_; }
 

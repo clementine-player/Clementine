@@ -32,15 +32,18 @@
 #include "core/taskmanager.h"
 #include "playlistparsers/playlistparser.h"
 
-IntergalacticFMUrlHandler::IntergalacticFMUrlHandler(Application* app, IntergalacticFMServiceBase* service,
-                                   QObject* parent)
+IntergalacticFMUrlHandler::IntergalacticFMUrlHandler(
+    Application* app, IntergalacticFMServiceBase* service, QObject* parent)
     : UrlHandler(parent), app_(app), service_(service), task_id_(0) {}
 
-QString IntergalacticFMUrlHandler::scheme() const { return service_->url_scheme(); }
+QString IntergalacticFMUrlHandler::scheme() const {
+  return service_->url_scheme();
+}
 
 QIcon IntergalacticFMUrlHandler::icon() const { return service_->icon(); }
 
-UrlHandler::LoadResult IntergalacticFMUrlHandler::StartLoading(const QUrl& url) {
+UrlHandler::LoadResult IntergalacticFMUrlHandler::StartLoading(
+    const QUrl& url) {
   QUrl playlist_url = url;
   playlist_url.setScheme("https");
 

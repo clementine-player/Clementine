@@ -96,7 +96,8 @@ void RegisterMetaTypes() {
   qRegisterMetaType<smart_playlists::GeneratorPtr>(
       "smart_playlists::GeneratorPtr");
   qRegisterMetaType<SomaFMService::Stream>("SomaFMService::Stream");
-  qRegisterMetaType<IntergalacticFMService::Stream>("IntergalacticFMService::Stream");
+  qRegisterMetaType<IntergalacticFMService::Stream>(
+      "IntergalacticFMService::Stream");
   qRegisterMetaType<SongList>("SongList");
   qRegisterMetaType<Song>("Song");
   qRegisterMetaTypeStreamOperators<DigitallyImportedClient::Channel>(

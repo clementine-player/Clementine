@@ -29,8 +29,9 @@ class IntergalacticFMUrlHandler : public UrlHandler {
   Q_OBJECT
 
  public:
-  IntergalacticFMUrlHandler(Application* app, IntergalacticFMServiceBase* service,
-                   QObject* parent);
+  IntergalacticFMUrlHandler(Application* app,
+                            IntergalacticFMServiceBase* service,
+                            QObject* parent);
 
   QString scheme() const;
   QIcon icon() const;
