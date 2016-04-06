@@ -67,7 +67,10 @@ PlaylistContainer::PlaylistContainer(QWidget* parent)
   no_matches_palette.setColor(QPalette::Inactive, QPalette::WindowText,
                               no_matches_color);
   no_matches_label_->setPalette(no_matches_palette);
-
+  
+  // Remove QFrame border
+  ui_->toolbar->setStyleSheet("QFrame { border: 0px; }");
+  
   // Make it bold
   QFont no_matches_font = no_matches_label_->font();
   no_matches_font.setBold(true);
@@ -224,11 +227,11 @@ void PlaylistContainer::SetViewModel(Playlist* playlist) {
 }
 
 void PlaylistContainer::ActivePlaying() {
-  UpdateActiveIcon(QIcon(":tiny-start.png"));
+  UpdateActiveIcon(IconLoader::Load("tiny-start", IconLoader::Other));
 }
 
 void PlaylistContainer::ActivePaused() {
-  UpdateActiveIcon(QIcon(":tiny-pause.png"));
+  UpdateActiveIcon(IconLoader::Load("tiny-pause", IconLoader::Other));
 }
 
 void PlaylistContainer::ActiveStopped() { UpdateActiveIcon(QIcon()); }
@@ -394,10 +397,18 @@ void PlaylistContainer::resizeEvent(QResizeEvent* e) {
 
 void PlaylistContainer::FocusOnFilter(QKeyEvent* event) {
   ui_->filter->setFocus();
-  if (event->key() == Qt::Key_Escape) {
-    ui_->filter->clear();
-  } else {
-    ui_->filter->setText(ui_->filter->text() + event->text());
+
+  switch (event->key()) {
+    case Qt::Key_Backspace:
+      break;
+
+    case Qt::Key_Escape:
+      ui_->filter->clear();
+      break;
+
+    default:
+      ui_->filter->setText(ui_->filter->text() + event->text());
+      break;
   }
 }
 

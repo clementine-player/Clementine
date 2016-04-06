@@ -15,7 +15,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2016-02-03 14:58+0000\n"
+"PO-Revision-Date: 2016-03-23 16:53+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Arabic (http://www.transifex.com/davidsansome/clementine/language/ar/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -81,6 +81,12 @@ msgstr "1% (2% أغنية)"
 msgid "%1 albums"
 msgstr "%1 ألبومات"
 
+#: widgets/equalizerslider.cpp:29 widgets/equalizerslider.cpp:31
+#: widgets/equalizerslider.cpp:43
+#, qt-format
+msgid "%1 dB"
+msgstr ""
+
 #: core/utilities.cpp:120
 #, qt-format
 msgid "%1 days"
@@ -131,7 +137,7 @@ msgstr "عثر على 1% أغنية (يعرض منها 2%)"
 msgid "%1 tracks"
 msgstr "%1 المسارات"
 
-#: ui/albumcovermanager.cpp:466
+#: ui/albumcovermanager.cpp:469
 #, qt-format
 msgid "%1 transferred"
 msgstr "%1 منقولة"
@@ -251,7 +257,7 @@ msgstr "&أدوات"
 msgid "(different across multiple songs)"
 msgstr "(مختلفة عبر أغنيات متعددة)"
 
-#: internet/spotify/spotifyservice.cpp:468
+#: internet/spotify/spotifyservice.cpp:469
 msgid ", by "
 msgstr ""
 
@@ -397,11 +403,11 @@ msgstr "AAC 64k"
 msgid "AIFF"
 msgstr "AIFF"
 
-#: widgets/nowplayingwidget.cpp:149
+#: widgets/nowplayingwidget.cpp:151
 msgid "ALL GLORY TO THE HYPNOTOAD"
 msgstr "HYPNOTOADكل المجد ل"
 
-#: ui/albumcovermanager.cpp:111 ui/albumcoversearcher.cpp:158
+#: ui/albumcovermanager.cpp:114 ui/albumcoversearcher.cpp:158
 msgid "Abort"
 msgstr "ألغ"
 
@@ -478,7 +484,7 @@ msgstr "إضافة Stream أخر"
 msgid "Add directory..."
 msgstr "أضف مجلد..."
 
-#: ui/mainwindow.cpp:1954
+#: ui/mainwindow.cpp:1980
 msgid "Add file"
 msgstr "أضف ملفا"
 
@@ -498,7 +504,7 @@ msgstr "أضافة ملف..."
 msgid "Add files to transcode"
 msgstr "أضف ملفات للتحويل"
 
-#: transcoder/transcodedialog.cpp:306 ui/mainwindow.cpp:1981
+#: transcoder/transcodedialog.cpp:306 ui/mainwindow.cpp:2007
 #: ripper/ripcddialog.cpp:185
 msgid "Add folder"
 msgstr "إضافة مجلد"
@@ -607,15 +613,15 @@ msgstr "أضف رابط انترنت..."
 msgid "Add to My Music"
 msgstr "أضف إلى الموسيقى"
 
-#: internet/spotify/spotifyservice.cpp:621
+#: internet/spotify/spotifyservice.cpp:623
 msgid "Add to Spotify playlists"
 msgstr "إضافة لقائمات تشغيل Spotify"
 
-#: internet/spotify/spotifyservice.cpp:613
+#: internet/spotify/spotifyservice.cpp:615
 msgid "Add to Spotify starred"
 msgstr "إضافة للمميزة على Spotify"
 
-#: ui/mainwindow.cpp:1775
+#: ui/mainwindow.cpp:1802
 msgid "Add to another playlist"
 msgstr "أضف إلى قائمة تشغيل أخرى"
 
@@ -705,11 +711,11 @@ msgstr "معلومات الألبوم على Jamendo.com..."
 msgid "Albums"
 msgstr "ألبومات"
 
-#: ui/albumcovermanager.cpp:135
+#: ui/albumcovermanager.cpp:138
 msgid "Albums with covers"
 msgstr "ألبومات بغلاف"
 
-#: ui/albumcovermanager.cpp:136
+#: ui/albumcovermanager.cpp:139
 msgid "Albums without covers"
 msgstr "ألبومات بدون غلاف"
 
@@ -726,11 +732,11 @@ msgctxt "Label for button to enable/disable Hypnotoad background sound."
 msgid "All Glory to the Hypnotoad!"
 msgstr "العظمة لهيبنوتود!"
 
-#: ui/albumcovermanager.cpp:134
+#: ui/albumcovermanager.cpp:137
 msgid "All albums"
 msgstr "كل الألبومات"
 
-#: ui/albumcovermanager.cpp:268
+#: ui/albumcovermanager.cpp:271
 msgid "All artists"
 msgstr "كل الفنانين"
 
@@ -794,7 +800,7 @@ msgstr "لاستعمال Spotify في كلمنتاين تحتاج لملحق إ�
 msgid "An error occurred loading the iTunes database"
 msgstr "حدث خطأ أثناء تحميل قاعدة بيانات iTunes"
 
-#: playlist/playlist.cpp:423 ui/edittagdialog.cpp:695
+#: playlist/playlist.cpp:423 ui/edittagdialog.cpp:703
 #, qt-format
 msgid "An error occurred writing metadata to '%1'"
 msgstr "حدث خطأ أثناء حفظ المعلومات في '%1'"
@@ -817,12 +823,12 @@ msgstr "غاضب"
 msgid "Appearance"
 msgstr "المظهر"
 
-#: core/commandlineoptions.cpp:167
+#: core/commandlineoptions.cpp:170
 msgid "Append files/URLs to the playlist"
 msgstr "أضف الملفات/العناوين إلى قائمة التشغيل"
 
 #: devices/deviceview.cpp:218 globalsearch/globalsearchview.cpp:453
-#: internet/core/internetservice.cpp:81 library/libraryview.cpp:377
+#: internet/core/internetservice.cpp:48 library/libraryview.cpp:378
 #: widgets/fileviewlist.cpp:31
 msgid "Append to current playlist"
 msgstr "أضف إلى قائمة التشغيل الحالية"
@@ -840,7 +846,7 @@ msgstr "اجعل المقاطع مضغوطة لتفادي أخطاء القص"
 msgid "Are you sure you want to delete the \"%1\" preset?"
 msgstr "هل أنت متأكد من رغبتك بحذف ملف الإعدادات \"%1\"؟"
 
-#: ui/edittagdialog.cpp:795
+#: ui/edittagdialog.cpp:803
 msgid "Are you sure you want to reset this song's statistics?"
 msgstr "هل أنت متأكد من رغبتك بتصفير إحصائيات هذا المقطع؟"
 
@@ -859,7 +865,7 @@ msgstr "هل أنت متأكد من رغبتك بكتابة احصائيات ا�
 msgid "Artist"
 msgstr "الفنان"
 
-#: ui/mainwindow.cpp:258
+#: ui/mainwindow.cpp:283
 msgid "Artist info"
 msgstr "معلومات الفنان"
 
@@ -887,7 +893,7 @@ msgstr "مخرج الصوت"
 
 #: internet/digitally/digitallyimportedsettingspage.cpp:82
 #: internet/magnatune/magnatunesettingspage.cpp:117
-#: internet/lastfm/lastfmservice.cpp:247
+#: internet/lastfm/lastfmservice.cpp:249
 #: internet/lastfm/lastfmsettingspage.cpp:97
 msgid "Authentication failed"
 msgstr "فشلت عملية التحقق"
@@ -1120,7 +1126,7 @@ msgstr "تغيير نمط الخلط"
 msgid "Change the currently playing song"
 msgstr "تغيير المقطع المشغل حاليا"
 
-#: core/commandlineoptions.cpp:172
+#: core/commandlineoptions.cpp:175
 msgid "Change the language"
 msgstr "تغيير اللغة"
 
@@ -1142,7 +1148,7 @@ msgstr "التمس حلقات جديدة"
 msgid "Check for updates"
 msgstr "التمس التحديثات"
 
-#: ui/mainwindow.cpp:781
+#: ui/mainwindow.cpp:803
 msgid "Check for updates..."
 msgstr "التمس التحديثات"
 
@@ -1266,7 +1272,7 @@ msgid ""
 "installed Clementine properly."
 msgstr "تعذر على كلمنتاين تحميل أي تأثيرات مرئية. تأكد من أنك ثبت كلمنتاين بطريقة صحيحة."
 
-#: widgets/prettyimage.cpp:193
+#: widgets/prettyimage.cpp:199
 msgid "Clementine image viewer"
 msgstr "عارض صور كلمنتاين"
 
@@ -1282,7 +1288,7 @@ msgstr "سيبحث كلمنتاين عن المقاطع في:"
 msgid "Click Ok once you authenticated Clementine in your last.fm account."
 msgstr ""
 
-#: library/libraryview.cpp:358
+#: library/libraryview.cpp:359
 msgid "Click here to add some music"
 msgstr "اضغط هنا لإضافة بعض الموسيقى"
 
@@ -1323,7 +1329,7 @@ msgstr "غلق التأثيرات المرئية"
 msgid "Closing this window will cancel the download."
 msgstr "إغلاق هذه النافذة سيلغي التحميل."
 
-#: ui/albumcovermanager.cpp:219
+#: ui/albumcovermanager.cpp:222
 msgid "Closing this window will stop searching for album covers."
 msgstr "غلق هذه النافذة سينهي البحث عن أغلفة الألبومات"
 
@@ -1335,7 +1341,7 @@ msgstr "Club"
 msgid "Colors"
 msgstr "الألوان"
 
-#: core/commandlineoptions.cpp:175
+#: core/commandlineoptions.cpp:178
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "لائحة عناصر مفروقة بفاصلة لـ \"class:level\"، قيمة Level بين 0-3"
 
@@ -1380,7 +1386,7 @@ msgstr "إعدادات اختصارات لوحة المفاتيح"
 msgid "Configure SoundCloud..."
 msgstr ""
 
-#: internet/spotify/spotifyservice.cpp:919
+#: internet/spotify/spotifyservice.cpp:921
 msgid "Configure Spotify..."
 msgstr "إعدادات Spotify..."
 
@@ -1396,7 +1402,7 @@ msgstr "ضبط VK.com..."
 msgid "Configure global search..."
 msgstr "إعدادات البحث العامة..."
 
-#: ui/mainwindow.cpp:631
+#: ui/mainwindow.cpp:653
 msgid "Configure library..."
 msgstr "إعدادات المكتبة"
 
@@ -1467,16 +1473,16 @@ msgstr ""
 msgid "Copy share url to clipboard"
 msgstr "انسخ الرابط إلى الحافظة"
 
-#: internet/core/internetservice.cpp:57
+#: internet/core/internetservice.cpp:79
 msgid "Copy to clipboard"
 msgstr "نسخ إلى المكتبة..."
 
-#: library/libraryview.cpp:408 internet/podcasts/podcastservice.cpp:438
-#: ui/mainwindow.cpp:680 widgets/fileviewlist.cpp:44
+#: library/libraryview.cpp:409 internet/podcasts/podcastservice.cpp:438
+#: ui/mainwindow.cpp:702 widgets/fileviewlist.cpp:44
 msgid "Copy to device..."
 msgstr "نسخ إلى جهاز..."
 
-#: devices/deviceview.cpp:228 ui/mainwindow.cpp:670
+#: devices/deviceview.cpp:228 ui/mainwindow.cpp:692
 #: widgets/fileviewlist.cpp:40
 msgid "Copy to library..."
 msgstr "نسخ إلى المكتبة..."
@@ -1528,24 +1534,24 @@ msgstr "تعذر فتح الملف %1"
 msgid "Cover Manager"
 msgstr "مدير الغلاف"
 
-#: ui/edittagdialog.cpp:476
+#: ui/edittagdialog.cpp:484
 msgid "Cover art from embedded image"
 msgstr "الغلاف من الصورة المدمجة"
 
-#: ui/edittagdialog.cpp:479
+#: ui/edittagdialog.cpp:487
 #, qt-format
 msgid "Cover art loaded automatically from %1"
 msgstr "تم تحميل الغلاف تلقائيا من %1"
 
-#: ui/edittagdialog.cpp:471
+#: ui/edittagdialog.cpp:479
 msgid "Cover art manually unset"
 msgstr "الغلاف غير محدد يدويا"
 
-#: ui/edittagdialog.cpp:481
+#: ui/edittagdialog.cpp:489
 msgid "Cover art not set"
 msgstr "الغلاف غير محدد"
 
-#: ui/edittagdialog.cpp:474
+#: ui/edittagdialog.cpp:482
 #, qt-format
 msgid "Cover art set from %1"
 msgstr "الغلاف محدد من %1"
@@ -1622,11 +1628,11 @@ msgstr "الأيام"
 msgid "De&fault"
 msgstr "&افتراضي"
 
-#: core/commandlineoptions.cpp:157
+#: core/commandlineoptions.cpp:160
 msgid "Decrease the volume by 4%"
 msgstr "اخفض الصوت 4%"
 
-#: core/commandlineoptions.cpp:159
+#: core/commandlineoptions.cpp:162
 msgid "Decrease the volume by <value> percent"
 msgstr "أخفض الصوت بنسبة <value> مئوية"
 
@@ -1660,8 +1666,8 @@ msgstr "احذف"
 msgid "Delete downloaded data"
 msgstr "حذف البيانات المحملة"
 
-#: devices/deviceview.cpp:408 library/libraryview.cpp:644
-#: ui/mainwindow.cpp:2317 widgets/fileview.cpp:186
+#: devices/deviceview.cpp:408 library/libraryview.cpp:645
+#: ui/mainwindow.cpp:2329 widgets/fileview.cpp:186
 msgid "Delete files"
 msgstr "احذف الملفات"
 
@@ -1669,7 +1675,7 @@ msgstr "احذف الملفات"
 msgid "Delete from device..."
 msgstr "احذف من الجهاز"
 
-#: library/libraryview.cpp:410 ui/mainwindow.cpp:683
+#: library/libraryview.cpp:411 ui/mainwindow.cpp:705
 #: widgets/fileviewlist.cpp:47
 msgid "Delete from disk..."
 msgstr "احذف من القرص..."
@@ -1682,7 +1688,7 @@ msgstr "حذف الحلقات المشغلة"
 msgid "Delete preset"
 msgstr "احذف ملف الإعدادات"
 
-#: library/libraryview.cpp:400
+#: library/libraryview.cpp:401
 msgid "Delete smart playlist"
 msgstr "احذف لائحة التشغيل الذكية"
 
@@ -1694,11 +1700,11 @@ msgstr "احذف الملفات الأصلية"
 msgid "Deleting files"
 msgstr "حذف الملفات"
 
-#: ui/mainwindow.cpp:1696
+#: ui/mainwindow.cpp:1723
 msgid "Dequeue selected tracks"
 msgstr "أزل المختارة من لائحة الانتظار"
 
-#: ui/mainwindow.cpp:1694
+#: ui/mainwindow.cpp:1721
 msgid "Dequeue track"
 msgstr "أزل المقطع من لائحة الانتظار"
 
@@ -1727,7 +1733,7 @@ msgstr "اسم الجهاز"
 msgid "Device properties..."
 msgstr "خصائص الجهاز..."
 
-#: ui/mainwindow.cpp:251
+#: ui/mainwindow.cpp:276
 msgid "Devices"
 msgstr "أجهزة"
 
@@ -1795,7 +1801,7 @@ msgstr "إرسال غير مستمر"
 msgid "Display options"
 msgstr "خيارات العرض"
 
-#: core/commandlineoptions.cpp:170
+#: core/commandlineoptions.cpp:173
 msgid "Display the on-screen-display"
 msgstr "أظهر قائمة الشاشة"
 
@@ -1831,7 +1837,7 @@ msgstr ""
 msgid "Don't repeat"
 msgstr "لا تكرر"
 
-#: library/libraryview.cpp:428
+#: library/libraryview.cpp:429
 msgid "Don't show in various artists"
 msgstr "لا تظهره في فئة فنانون متنوعون"
 
@@ -1844,7 +1850,7 @@ msgid "Don't shuffle"
 msgstr "لا تخلط"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:312
-#: ui/albumcovermanager.cpp:221
+#: ui/albumcovermanager.cpp:224
 msgid "Don't stop!"
 msgstr "لا تتوقف!"
 
@@ -1942,7 +1948,7 @@ msgstr "جاري تحميل ملحق Spotify"
 msgid "Downloading metadata"
 msgstr "جاري تحميل المعلومات..."
 
-#: ui/notificationssettingspage.cpp:36
+#: ui/notificationssettingspage.cpp:38
 msgid "Drag to reposition"
 msgstr "جر لإعادة الترتيب"
 
@@ -1966,11 +1972,11 @@ msgstr "النمط النشيط مفعل"
 msgid "Dynamic random mix"
 msgstr "مزج عشوائي تلقائيا"
 
-#: library/libraryview.cpp:397
+#: library/libraryview.cpp:398
 msgid "Edit smart playlist..."
 msgstr "حرر قائمة التشغيل الذكية"
 
-#: ui/mainwindow.cpp:1738
+#: ui/mainwindow.cpp:1765
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr "حرر الوسم \"%1\""
@@ -1987,12 +1993,12 @@ msgstr "حرر الوسوم"
 msgid "Edit track information"
 msgstr "تعديل معلومات المقطع"
 
-#: library/libraryview.cpp:415 widgets/fileviewlist.cpp:51
+#: library/libraryview.cpp:416 widgets/fileviewlist.cpp:51
 #: ../bin/src/ui_mainwindow.h:669
 msgid "Edit track information..."
 msgstr "تعديل معلومات المقطع..."
 
-#: library/libraryview.cpp:418
+#: library/libraryview.cpp:419
 msgid "Edit tracks information..."
 msgstr "تعديل معلومات المقاطع..."
 
@@ -2100,17 +2106,17 @@ msgstr "كامل المجموعة"
 msgid "Equalizer"
 msgstr "معدل الصوت"
 
-#: core/commandlineoptions.cpp:173
+#: core/commandlineoptions.cpp:176
 msgid "Equivalent to --log-levels *:1"
 msgstr "يكافئ --log-levels *:1"
 
-#: core/commandlineoptions.cpp:174
+#: core/commandlineoptions.cpp:177
 msgid "Equivalent to --log-levels *:3"
 msgstr "يكافئ --log-levels *:3"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:246
-#: library/libraryview.cpp:638 ui/mainwindow.cpp:2020 ui/mainwindow.cpp:2267
-#: ui/mainwindow.cpp:2415 internet/vk/vkservice.cpp:643
+#: library/libraryview.cpp:639 ui/mainwindow.cpp:2036 ui/mainwindow.cpp:2281
+#: ui/mainwindow.cpp:2427 internet/vk/vkservice.cpp:643
 msgid "Error"
 msgstr "خطأ"
 
@@ -2218,11 +2224,11 @@ msgstr "صدر الأغلفة المحملة"
 msgid "Export embedded covers"
 msgstr "صدر الأغلفة المدمجة"
 
-#: ui/albumcovermanager.cpp:785 ui/albumcovermanager.cpp:809
+#: ui/albumcovermanager.cpp:788 ui/albumcovermanager.cpp:812
 msgid "Export finished"
 msgstr "تم الانتهاء من التصدير"
 
-#: ui/albumcovermanager.cpp:794
+#: ui/albumcovermanager.cpp:797
 #, qt-format
 msgid "Exported %1 covers out of %2 (%3 skipped)"
 msgstr "تم تصدير %1 أغلفة من إجمالي %2 (تم تخطي %3)"
@@ -2250,7 +2256,7 @@ msgstr "تلاشي"
 msgid "Fading duration"
 msgstr "مدة التلاشي"
 
-#: ui/mainwindow.cpp:2021
+#: ui/mainwindow.cpp:2037
 msgid "Failed reading CD drive"
 msgstr "فشل في قراءة القرص CD"
 
@@ -2355,7 +2361,7 @@ msgstr "نوع الملف"
 msgid "Filename"
 msgstr "اسم الملف"
 
-#: ui/mainwindow.cpp:241
+#: ui/mainwindow.cpp:266
 msgid "Files"
 msgstr "الملفات"
 
@@ -2383,7 +2389,7 @@ msgstr "انهاء"
 msgid "First level"
 msgstr "المستوى الأول"
 
-#: widgets/nowplayingwidget.cpp:108
+#: widgets/nowplayingwidget.cpp:110
 msgid "Fit cover to width"
 msgstr ""
 
@@ -2420,7 +2426,7 @@ msgstr "نسيان جهاز سيحذفه من القائمة. لهذا، سيت�
 #: ../bin/src/ui_internetviewcontainer.h:70 ../bin/src/ui_searchboxwidget.h:61
 #: ../bin/src/ui_libraryfilterwidget.h:91
 #: ../bin/src/ui_libraryviewcontainer.h:58
-#: ../bin/src/ui_playlistcontainer.h:142
+#: ../bin/src/ui_playlistcontainer.h:134
 #: ../bin/src/ui_playlistlistcontainer.h:125
 #: ../bin/src/ui_podcastinfowidget.h:190 ../bin/src/ui_querysearchpage.h:111
 #: ../bin/src/ui_querysortpage.h:136 ../bin/src/ui_searchpreview.h:103
@@ -2432,7 +2438,7 @@ msgstr "نسيان جهاز سيحذفه من القائمة. لهذا، سيت�
 #: ../bin/src/ui_transcoderoptionsopus.h:78
 #: ../bin/src/ui_transcoderoptionsspeex.h:215
 #: ../bin/src/ui_transcoderoptionsvorbis.h:200
-#: ../bin/src/ui_transcoderoptionswma.h:77 ../bin/src/ui_equalizerslider.h:82
+#: ../bin/src/ui_transcoderoptionswma.h:77 ../bin/src/ui_equalizerslider.h:98
 #: ../bin/src/ui_fileview.h:106 ../bin/src/ui_loginstatewidget.h:167
 #: ../bin/src/ui_trackslider.h:68 ../bin/src/ui_visualisationoverlay.h:181
 msgid "Form"
@@ -2486,12 +2492,12 @@ msgstr "إعدادات عامة"
 msgid "Genre"
 msgstr "النوع"
 
-#: internet/spotify/spotifyservice.cpp:637
-#: internet/spotify/spotifyservice.cpp:681
+#: internet/spotify/spotifyservice.cpp:639
+#: internet/spotify/spotifyservice.cpp:683
 msgid "Get a URL to share this Spotify song"
 msgstr ""
 
-#: internet/spotify/spotifyservice.cpp:669
+#: internet/spotify/spotifyservice.cpp:671
 msgid "Get a URL to share this playlist"
 msgstr ""
 
@@ -2524,7 +2530,7 @@ msgstr "انتقل للسان قائمة التشغيل السابق"
 msgid "Google Drive"
 msgstr "Google Drive"
 
-#: covers/coversearchstatisticsdialog.cpp:53 ui/albumcovermanager.cpp:460
+#: covers/coversearchstatisticsdialog.cpp:53 ui/albumcovermanager.cpp:463
 #: ../bin/src/ui_coversearchstatisticsdialog.h:75
 #, qt-format
 msgid "Got %1 covers out of %2 (%3 failed)"
@@ -2644,7 +2650,7 @@ msgstr "ليس لدي حساب Magnatune"
 msgid "Icon"
 msgstr "أيقونة"
 
-#: widgets/fancytabwidget.cpp:666
+#: widgets/fancytabwidget.cpp:646
 msgid "Icons on top"
 msgstr "الأيقونة في الأعلى"
 
@@ -2696,7 +2702,7 @@ msgid ""
 "time a song finishes."
 msgstr "في النمط الديناميكي سيتم اختيار مقاطع جديدة وإضافتها لقائمة التشغيل كلما انتهى تشغيل المقطع."
 
-#: internet/spotify/spotifyservice.cpp:424
+#: internet/spotify/spotifyservice.cpp:425
 msgid "Inbox"
 msgstr "صندوق البريد"
 
@@ -2720,11 +2726,11 @@ msgstr "نسخة Subsonic REST غير متوافقة. يجب تحديث الخا
 msgid "Incomplete configuration, please ensure all fields are populated."
 msgstr "لم يتم إكمال التهيئة، الرجاء التأكد من أن جميع الحقول مملوئة."
 
-#: core/commandlineoptions.cpp:156
+#: core/commandlineoptions.cpp:159
 msgid "Increase the volume by 4%"
 msgstr "ارفع الصوت 4%"
 
-#: core/commandlineoptions.cpp:158
+#: core/commandlineoptions.cpp:161
 msgid "Increase the volume by <value> percent"
 msgstr "ارفع الصوت بنسبة <value> مئوية"
 
@@ -2757,7 +2763,7 @@ msgstr "مثبت"
 msgid "Integrity check"
 msgstr "فحص شامل"
 
-#: ui/mainwindow.cpp:247
+#: ui/mainwindow.cpp:272
 msgid "Internet"
 msgstr "انترنت"
 
@@ -2774,31 +2780,31 @@ msgstr ""
 msgid "Intro tracks"
 msgstr ""
 
-#: internet/lastfm/lastfmservice.cpp:259
+#: internet/lastfm/lastfmservice.cpp:261
 msgid "Invalid API key"
 msgstr "مفتاح API غير صالح"
 
-#: internet/lastfm/lastfmservice.cpp:249
+#: internet/lastfm/lastfmservice.cpp:251
 msgid "Invalid format"
 msgstr "صيغة غير متاحة"
 
-#: internet/lastfm/lastfmservice.cpp:245
+#: internet/lastfm/lastfmservice.cpp:247
 msgid "Invalid method"
 msgstr "طريقة غير متاحة"
 
-#: internet/lastfm/lastfmservice.cpp:251
+#: internet/lastfm/lastfmservice.cpp:253
 msgid "Invalid parameters"
 msgstr "إعدادات غير صالحة"
 
-#: internet/lastfm/lastfmservice.cpp:253
+#: internet/lastfm/lastfmservice.cpp:255
 msgid "Invalid resource specified"
 msgstr "تم تعيين مصدر غير صالح"
 
-#: internet/lastfm/lastfmservice.cpp:243
+#: internet/lastfm/lastfmservice.cpp:245
 msgid "Invalid service"
 msgstr "خدمة غير متاحة"
 
-#: internet/lastfm/lastfmservice.cpp:257
+#: internet/lastfm/lastfmservice.cpp:259
 msgid "Invalid session key"
 msgstr "مفتاح جلسة غير صالح"
 
@@ -2879,19 +2885,19 @@ msgstr "جهاز محمول/سماعات"
 msgid "Large Hall"
 msgstr "قاعة واسعة"
 
-#: widgets/nowplayingwidget.cpp:98
+#: widgets/nowplayingwidget.cpp:100
 msgid "Large album cover"
 msgstr "غلاف كبير لـ الألبوم"
 
-#: widgets/nowplayingwidget.cpp:101
+#: widgets/nowplayingwidget.cpp:103
 msgid "Large album cover (details below)"
 msgstr "غلاف ألبوم كبير (التفاصيل في الأسفل)"
 
-#: widgets/nowplayingwidget.cpp:103
+#: widgets/nowplayingwidget.cpp:105
 msgid "Large album cover (no details)"
 msgstr ""
 
-#: widgets/fancytabwidget.cpp:662
+#: widgets/fancytabwidget.cpp:642
 msgid "Large sidebar"
 msgstr "عارضة جانبية عريضة"
 
@@ -2916,7 +2922,7 @@ msgstr ""
 msgid "Last.fm authentication failed"
 msgstr ""
 
-#: internet/lastfm/lastfmservice.cpp:266
+#: internet/lastfm/lastfmservice.cpp:268
 msgid "Last.fm is currently busy, please try again in a few minutes"
 msgstr "Last.fm مشغول حاليا، الرجاء إعادة المحاولة بعد دقائق."
 
@@ -2945,7 +2951,7 @@ msgstr "يسار"
 msgid "Length"
 msgstr "المدة"
 
-#: ui/mainwindow.cpp:223 ui/mainwindow.cpp:238
+#: ui/mainwindow.cpp:251 ui/mainwindow.cpp:263
 #: ../bin/src/ui_seafilesettingspage.h:177
 msgid "Library"
 msgstr "المكتبة"
@@ -2954,7 +2960,7 @@ msgstr "المكتبة"
 msgid "Library advanced grouping"
 msgstr "إعدادات متقدمة لتجميع المكتبة"
 
-#: ui/mainwindow.cpp:2539
+#: ui/mainwindow.cpp:2519
 msgid "Library rescan notice"
 msgstr "إشعار إعادة فحص المكتبة"
 
@@ -2990,7 +2996,7 @@ msgstr "حمل الغلاف من القرص"
 msgid "Load cover from disk..."
 msgstr "تحميل الغلاف من القرص..."
 
-#: playlist/playlistcontainer.cpp:291
+#: playlist/playlistcontainer.cpp:294
 msgid "Load playlist"
 msgstr "تحميل قائمة تشغيل"
 
@@ -3010,7 +3016,7 @@ msgstr "تحميل قاعدة بيانات أيبود"
 msgid "Loading smart playlist"
 msgstr "تحميل قائمة تشغيل ذكية"
 
-#: library/librarymodel.cpp:167
+#: library/librarymodel.cpp:169
 msgid "Loading songs"
 msgstr "تحميل المقاطع"
 
@@ -3020,7 +3026,7 @@ msgstr "تحميل المقاطع"
 msgid "Loading stream"
 msgstr "تحميل تيار الانترنت"
 
-#: playlist/songloaderinserter.cpp:129 ui/edittagdialog.cpp:247
+#: playlist/songloaderinserter.cpp:129 ui/edittagdialog.cpp:251
 msgid "Loading tracks"
 msgstr "جاري تحميل المقاطع"
 
@@ -3028,15 +3034,15 @@ msgstr "جاري تحميل المقاطع"
 msgid "Loading tracks info"
 msgstr "جاري تحميل معلومات المقاطع"
 
-#: library/librarymodel.cpp:162
-#: internet/podcasts/podcastdiscoverymodel.cpp:105 widgets/prettyimage.cpp:161
+#: library/librarymodel.cpp:164
+#: internet/podcasts/podcastdiscoverymodel.cpp:105 widgets/prettyimage.cpp:167
 #: widgets/widgetfadehelper.cpp:96 internet/vk/vkservice.cpp:513
 #: internet/vk/vksettingspage.cpp:125 ../bin/src/ui_addpodcastdialog.h:179
 #: ../bin/src/ui_searchpreview.h:105 ../bin/src/ui_organisedialog.h:261
 msgid "Loading..."
 msgstr "جاري التحميل"
 
-#: core/commandlineoptions.cpp:168
+#: core/commandlineoptions.cpp:171
 msgid "Loads files/URLs, replacing current playlist"
 msgstr "تحميل ملفات/روابط، استبدال قائمة التشغيل الحالية"
 
@@ -3155,11 +3161,11 @@ msgctxt "Label for button to enable/disable Enterprise background sound."
 msgid "Make it so!"
 msgstr "اجعلها كذلك!"
 
-#: internet/spotify/spotifyservice.cpp:667
+#: internet/spotify/spotifyservice.cpp:669
 msgid "Make playlist available offline"
 msgstr "اجعل قائمة التشغيل متاحة دون اتصال"
 
-#: internet/lastfm/lastfmservice.cpp:278
+#: internet/lastfm/lastfmservice.cpp:280
 msgid "Malformed response"
 msgstr "إجابة غير صالحة"
 
@@ -3254,7 +3260,7 @@ msgstr "الأشهر"
 msgid "Mood"
 msgstr "المزاج"
 
-#: moodbar/moodbarproxystyle.cpp:353
+#: moodbar/moodbarproxystyle.cpp:358
 #: ../bin/src/ui_appearancesettingspage.h:293
 msgid "Moodbar style"
 msgstr "نمط عارضة المزاج"
@@ -3284,7 +3290,7 @@ msgstr "نقط الوصل"
 msgid "Move down"
 msgstr "أسفل"
 
-#: ui/mainwindow.cpp:673 widgets/fileviewlist.cpp:42
+#: ui/mainwindow.cpp:695 widgets/fileviewlist.cpp:42
 msgid "Move to library..."
 msgstr "انقل إلى المكتبة"
 
@@ -3293,7 +3299,7 @@ msgstr "انقل إلى المكتبة"
 msgid "Move up"
 msgstr "أعلى"
 
-#: transcoder/transcodedialog.cpp:225 ui/mainwindow.cpp:1955
+#: transcoder/transcodedialog.cpp:225 ui/mainwindow.cpp:1981
 #: internet/vk/vkservice.cpp:908
 msgid "Music"
 msgstr "موسيقى"
@@ -3345,7 +3351,7 @@ msgstr "شبكة بروكسي"
 msgid "Network Remote"
 msgstr "شبكة عن بعد"
 
-#: playlist/playlistdelegates.cpp:295 ui/edittagdialog.cpp:523
+#: playlist/playlistdelegates.cpp:295 ui/edittagdialog.cpp:531
 msgid "Never"
 msgstr "أبدا"
 
@@ -3364,11 +3370,11 @@ msgstr "لم يبدأ تشغيلها أبدا"
 msgid "New folder"
 msgstr "مجلد جديد"
 
-#: ui/mainwindow.cpp:1792 ../bin/src/ui_mainwindow.h:693
+#: ui/mainwindow.cpp:1819 ../bin/src/ui_mainwindow.h:693
 msgid "New playlist"
 msgstr "قائمة تشغيل جديدة"
 
-#: library/libraryview.cpp:394
+#: library/libraryview.cpp:395
 msgid "New smart playlist..."
 msgstr "قائمة تشغيل ذكية جديدة"
 
@@ -3388,7 +3394,7 @@ msgstr "الأحدث"
 msgid "Newest tracks"
 msgstr "أحدث المقاطع"
 
-#: ui/edittagdialog.cpp:168 ui/trackselectiondialog.cpp:49
+#: ui/edittagdialog.cpp:172 ui/trackselectiondialog.cpp:49
 msgid "Next"
 msgstr "التالي"
 
@@ -3409,7 +3415,7 @@ msgstr "دون محلل"
 msgid "No background image"
 msgstr "دون صورة خلفية"
 
-#: ui/albumcovermanager.cpp:786
+#: ui/albumcovermanager.cpp:789
 msgid "No covers to export."
 msgstr "لا توجد أغلفة للتصدير."
 
@@ -3417,7 +3423,7 @@ msgstr "لا توجد أغلفة للتصدير."
 msgid "No long blocks"
 msgstr "بدون أجزاء طويلة"
 
-#: playlist/playlistcontainer.cpp:376
+#: playlist/playlistcontainer.cpp:379
 msgid ""
 "No matches found.  Clear the search box to show the whole playlist again."
 msgstr "لم يتم العثور على أي نتيجة. امسح خانة البحث لإظهار جميع قوائم التشغيل من جديد."
@@ -3431,7 +3437,7 @@ msgstr "بدون أجزاء قصيرة"
 msgid "None"
 msgstr "لا شيء"
 
-#: library/libraryview.cpp:639 ui/mainwindow.cpp:2268 ui/mainwindow.cpp:2416
+#: library/libraryview.cpp:640 ui/mainwindow.cpp:2282 ui/mainwindow.cpp:2428
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "لا مقطع من المقاطع المختارة مناسب لنسخه لجهاز."
 
@@ -3451,19 +3457,19 @@ msgstr "غير متاح عند استعمال قائمة تشغيل دينامي
 msgid "Not connected"
 msgstr "غير متصل"
 
-#: internet/lastfm/lastfmservice.cpp:269
+#: internet/lastfm/lastfmservice.cpp:271
 msgid "Not enough content"
 msgstr "لا يوجد محتوى كافي"
 
-#: internet/lastfm/lastfmservice.cpp:273
+#: internet/lastfm/lastfmservice.cpp:275
 msgid "Not enough fans"
 msgstr "عدد المعجبين غير كافٍ"
 
-#: internet/lastfm/lastfmservice.cpp:271
+#: internet/lastfm/lastfmservice.cpp:273
 msgid "Not enough members"
 msgstr "عدد الأعضاء غير كافٍ"
 
-#: internet/lastfm/lastfmservice.cpp:275
+#: internet/lastfm/lastfmservice.cpp:277
 msgid "Not enough neighbors"
 msgstr "عدد الجيران غير كافٍ"
 
@@ -3500,7 +3506,7 @@ msgstr "جاري تشغيلها"
 msgid "Number of episodes to show"
 msgstr ""
 
-#: ui/notificationssettingspage.cpp:36
+#: ui/notificationssettingspage.cpp:38
 msgid "OSD Preview"
 msgstr "معاينة التنبيهات"
 
@@ -3594,7 +3600,7 @@ msgid "Open in Google Drive"
 msgstr "فتح في Google Drive"
 
 #: devices/deviceview.cpp:224 globalsearch/globalsearchview.cpp:461
-#: internet/core/internetservice.cpp:105 library/libraryview.cpp:383
+#: internet/core/internetservice.cpp:62 library/libraryview.cpp:384
 #: widgets/fileviewlist.cpp:36
 msgid "Open in new playlist"
 msgstr "فتح في قائمة تشغيل جديدة"
@@ -3613,7 +3619,7 @@ msgstr "افتح في المتصفح"
 msgid "Open..."
 msgstr "فتح..."
 
-#: internet/lastfm/lastfmservice.cpp:255
+#: internet/lastfm/lastfmservice.cpp:257
 msgid "Operation failed"
 msgstr "فشلت العملية"
 
@@ -3639,7 +3645,7 @@ msgstr "Opus"
 msgid "Organise Files"
 msgstr "ترتيب الملفات"
 
-#: library/libraryview.cpp:404 ui/mainwindow.cpp:676
+#: library/libraryview.cpp:405 ui/mainwindow.cpp:698
 msgid "Organise files..."
 msgstr "ترتيب الملفات..."
 
@@ -3666,7 +3672,7 @@ msgstr ""
 msgid "Original year tag support"
 msgstr ""
 
-#: core/commandlineoptions.cpp:170
+#: core/commandlineoptions.cpp:173
 msgid "Other options"
 msgstr "خيارات اخرى"
 
@@ -3715,12 +3721,12 @@ msgstr "حفلة"
 msgid "Password"
 msgstr "كلمة السر"
 
-#: core/globalshortcuts.cpp:50 ui/mainwindow.cpp:1107 ui/mainwindow.cpp:1603
+#: core/globalshortcuts.cpp:50 ui/mainwindow.cpp:1134 ui/mainwindow.cpp:1630
 #: ui/qtsystemtrayicon.cpp:175 wiimotedev/wiimotesettingspage.cpp:114
 msgid "Pause"
 msgstr "إيقاف مؤقت"
 
-#: core/commandlineoptions.cpp:152
+#: core/commandlineoptions.cpp:154
 msgid "Pause playback"
 msgstr "أوقف التشغيل مؤقتا"
 
@@ -3739,12 +3745,12 @@ msgstr "المؤدي"
 msgid "Pixel"
 msgstr "بكسل"
 
-#: widgets/fancytabwidget.cpp:664
+#: widgets/fancytabwidget.cpp:644
 msgid "Plain sidebar"
 msgstr "شريط جانبي عريض"
 
-#: core/globalshortcuts.cpp:49 ui/mainwindow.cpp:648 ui/mainwindow.cpp:1073
-#: ui/mainwindow.cpp:1092 ui/mainwindow.cpp:1607 ui/qtsystemtrayicon.cpp:164
+#: core/globalshortcuts.cpp:49 ui/mainwindow.cpp:670 ui/mainwindow.cpp:1100
+#: ui/mainwindow.cpp:1119 ui/mainwindow.cpp:1634 ui/qtsystemtrayicon.cpp:164
 #: ui/qtsystemtrayicon.cpp:188 wiimotedev/wiimotesettingspage.cpp:107
 #: ../bin/src/ui_mainwindow.h:659
 msgid "Play"
@@ -3754,7 +3760,7 @@ msgstr "تشغيل"
 msgid "Play count"
 msgstr "عدد مرات التشغيل"
 
-#: core/commandlineoptions.cpp:151
+#: core/commandlineoptions.cpp:153
 msgid "Play if stopped, pause if playing"
 msgstr "شغل إذا انتهى، أوقف إذا كان قيد التشغيل"
 
@@ -3763,7 +3769,7 @@ msgstr "شغل إذا انتهى، أوقف إذا كان قيد التشغيل"
 msgid "Play if there is nothing already playing"
 msgstr "شغل إذا لم يكن هناك مقطع قيد التشغيل "
 
-#: core/commandlineoptions.cpp:169
+#: core/commandlineoptions.cpp:172
 msgid "Play the <n>th track in the playlist"
 msgstr "شغيل المقطع رقم <n> في قائمة التشغيل"
 
@@ -3775,11 +3781,11 @@ msgstr "تشغيل/إيقاف"
 msgid "Playback"
 msgstr "التشغيل"
 
-#: core/commandlineoptions.cpp:149
+#: core/commandlineoptions.cpp:151
 msgid "Player options"
 msgstr "خيارات المشغل"
 
-#: playlist/playlistcontainer.cpp:287 playlist/playlistlistcontainer.cpp:228
+#: playlist/playlistcontainer.cpp:290 playlist/playlistlistcontainer.cpp:228
 #: playlist/playlistmanager.cpp:86 playlist/playlistmanager.cpp:155
 #: playlist/playlistmanager.cpp:495 playlist/playlisttabbar.cpp:366
 msgid "Playlist"
@@ -3789,7 +3795,7 @@ msgstr "قائمة تشغيل"
 msgid "Playlist finished"
 msgstr "قائمة تشغيل منتهية"
 
-#: core/commandlineoptions.cpp:166
+#: core/commandlineoptions.cpp:169
 #: ../bin/src/ui_playlistsaveoptionsdialog.h:94
 msgid "Playlist options"
 msgstr "خيارات قائمة التشغيل"
@@ -3798,7 +3804,7 @@ msgstr "خيارات قائمة التشغيل"
 msgid "Playlist type"
 msgstr "نوع قائمة التشغيل"
 
-#: internet/soundcloud/soundcloudservice.cpp:132 ui/mainwindow.cpp:244
+#: internet/soundcloud/soundcloudservice.cpp:132 ui/mainwindow.cpp:269
 msgid "Playlists"
 msgstr "قوائم التشغيل"
 
@@ -3898,7 +3904,7 @@ msgstr "إعدادات تنبيهات كلمنتاين"
 msgid "Preview"
 msgstr "المعاينة"
 
-#: ui/edittagdialog.cpp:166 ui/trackselectiondialog.cpp:47
+#: ui/edittagdialog.cpp:170 ui/trackselectiondialog.cpp:47
 msgid "Previous"
 msgstr "السابق"
 
@@ -3907,7 +3913,7 @@ msgstr "السابق"
 msgid "Previous track"
 msgstr "المقطع السابق"
 
-#: core/commandlineoptions.cpp:176
+#: core/commandlineoptions.cpp:179
 msgid "Print out version information"
 msgstr "اطبع معلومات النسخة"
 
@@ -3958,12 +3964,12 @@ msgstr "الاستعلام عن الجهاز..."
 msgid "Queue Manager"
 msgstr "مدير لائحة الانتظار"
 
-#: ui/mainwindow.cpp:1700
+#: ui/mainwindow.cpp:1727
 msgid "Queue selected tracks"
 msgstr "أضف المختارة للائحة الانتظار"
 
-#: globalsearch/globalsearchview.cpp:466 library/libraryview.cpp:388
-#: ui/mainwindow.cpp:1698
+#: globalsearch/globalsearchview.cpp:466 library/libraryview.cpp:389
+#: ui/mainwindow.cpp:1725
 msgid "Queue track"
 msgstr "أضف للائحة الانتظار"
 
@@ -4017,7 +4023,7 @@ msgid "Rating"
 msgstr "تقييم"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:309
-#: ui/albumcovermanager.cpp:218
+#: ui/albumcovermanager.cpp:221
 msgid "Really cancel?"
 msgstr "تريد فعلا الإلغاء؟"
 
@@ -4095,7 +4101,7 @@ msgstr "حذف من مقاطعي"
 msgid "Remove from bookmarks"
 msgstr "إزالة من الإشارات المرجعية"
 
-#: internet/spotify/spotifyservice.cpp:679 ../bin/src/ui_mainwindow.h:688
+#: internet/spotify/spotifyservice.cpp:681 ../bin/src/ui_mainwindow.h:688
 msgid "Remove from playlist"
 msgstr "احذف من قائمة التشغيل"
 
@@ -4140,7 +4146,7 @@ msgid "Repeat track"
 msgstr "كرر المقطع"
 
 #: devices/deviceview.cpp:221 globalsearch/globalsearchview.cpp:457
-#: internet/core/internetservice.cpp:93 library/libraryview.cpp:380
+#: internet/core/internetservice.cpp:55 library/libraryview.cpp:381
 #: widgets/fileviewlist.cpp:34
 msgid "Replace current playlist"
 msgstr "استبدل قائمة التشغيل الحالية"
@@ -4173,7 +4179,7 @@ msgstr "يتطلب كود التحقق"
 msgid "Reset"
 msgstr "استرجاع الحالة البدئية"
 
-#: ui/edittagdialog.cpp:794 ../bin/src/ui_edittagdialog.h:713
+#: ui/edittagdialog.cpp:802 ../bin/src/ui_edittagdialog.h:713
 msgid "Reset play counts"
 msgstr "صفّر عدد مرات التشغيل"
 
@@ -4181,7 +4187,7 @@ msgstr "صفّر عدد مرات التشغيل"
 msgid "Restart song, then jump to previous if pressed again"
 msgstr ""
 
-#: core/commandlineoptions.cpp:164
+#: core/commandlineoptions.cpp:167
 msgid ""
 "Restart the track, or play the previous track if within 8 seconds of start."
 msgstr "أعد تشغيل المقطع، أو شغل المقطع السابق إن كان لم يتجاوز 8 ثوانٍ من بدء التشغيل."
@@ -4265,7 +4271,7 @@ msgstr "احفظ الغلاف في القرص..."
 msgid "Save current grouping"
 msgstr ""
 
-#: widgets/prettyimage.cpp:178 widgets/prettyimage.cpp:223
+#: widgets/prettyimage.cpp:184 widgets/prettyimage.cpp:229
 msgid "Save image"
 msgstr "احفظ الصورة"
 
@@ -4307,7 +4313,7 @@ msgstr ""
 msgid "Saving songs statistics into songs files"
 msgstr "حفظ إحصائيات المقاطع في ملفات المقاطع"
 
-#: ui/edittagdialog.cpp:703 ui/trackselectiondialog.cpp:255
+#: ui/edittagdialog.cpp:711 ui/trackselectiondialog.cpp:255
 msgid "Saving tracks"
 msgstr "حفظ المقاطع"
 
@@ -4337,7 +4343,7 @@ msgstr ""
 msgid "Search"
 msgstr "البحث"
 
-#: ui/mainwindow.cpp:235 ../bin/src/ui_globalsearchsettingspage.h:141
+#: ui/mainwindow.cpp:260 ../bin/src/ui_globalsearchsettingspage.h:141
 msgctxt "Global search settings dialog title."
 msgid "Search"
 msgstr "بحث"
@@ -4412,11 +4418,11 @@ msgstr "ابحث إلى الخلف"
 msgid "Seek forward"
 msgstr "ابحث إلى الأمام"
 
-#: core/commandlineoptions.cpp:162
+#: core/commandlineoptions.cpp:165
 msgid "Seek the currently playing track by a relative amount"
 msgstr "انتقل في المقطع الحالي إلى موضع نسبي"
 
-#: core/commandlineoptions.cpp:160
+#: core/commandlineoptions.cpp:163
 msgid "Seek the currently playing track to an absolute position"
 msgstr "انتقل في المقطع الحالي إلى موضع محدد"
 
@@ -4476,16 +4482,16 @@ msgstr "عنوان الخادم"
 msgid "Server details"
 msgstr "معلومات الخادم"
 
-#: internet/lastfm/lastfmservice.cpp:261
+#: internet/lastfm/lastfmservice.cpp:263
 msgid "Service offline"
 msgstr "خدمة غير متصلة"
 
-#: ui/mainwindow.cpp:1737
+#: ui/mainwindow.cpp:1764
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr "غير %1 إلى %2"
 
-#: core/commandlineoptions.cpp:155
+#: core/commandlineoptions.cpp:158
 msgid "Set the volume to <value> percent"
 msgstr "اجعل درجة الصوت بنسبة <value>"
 
@@ -4552,11 +4558,11 @@ msgstr "أظهر نافذة انبثاق من شريط التنبيهات"
 msgid "Show a pretty OSD"
 msgstr "أظهر تنبيهات كلمنتاين"
 
-#: widgets/nowplayingwidget.cpp:140
+#: widgets/nowplayingwidget.cpp:142
 msgid "Show above status bar"
 msgstr "أظهر فوق شريط الحالة"
 
-#: ui/mainwindow.cpp:615
+#: ui/mainwindow.cpp:637
 msgid "Show all songs"
 msgstr "أظهر جميع المقاطع"
 
@@ -4572,7 +4578,7 @@ msgstr "أظهر الغلاف في المكتبة"
 msgid "Show dividers"
 msgstr "أظهر الفواصل"
 
-#: ui/albumcoverchoicecontroller.cpp:72 widgets/prettyimage.cpp:176
+#: ui/albumcoverchoicecontroller.cpp:72 widgets/prettyimage.cpp:182
 msgid "Show fullsize..."
 msgstr "أظهر الحجم الأصلي..."
 
@@ -4580,28 +4586,28 @@ msgstr "أظهر الحجم الأصلي..."
 msgid "Show groups in global search result"
 msgstr "أظهر المجموعات في نتائج البحث الشامل"
 
-#: library/libraryview.cpp:422 ui/mainwindow.cpp:686
+#: library/libraryview.cpp:423 ui/mainwindow.cpp:708
 #: widgets/fileviewlist.cpp:53
 msgid "Show in file browser..."
 msgstr "أظهر في متصفح الملفات..."
 
-#: ui/mainwindow.cpp:688
+#: ui/mainwindow.cpp:710
 msgid "Show in library..."
 msgstr "أظهر في المكتبة..."
 
-#: library/libraryview.cpp:425
+#: library/libraryview.cpp:426
 msgid "Show in various artists"
 msgstr "أظهر في فنانين متنوعين"
 
-#: moodbar/moodbarproxystyle.cpp:348
+#: moodbar/moodbarproxystyle.cpp:353
 msgid "Show moodbar"
 msgstr "أظهر عارضة المزاج"
 
-#: ui/mainwindow.cpp:617
+#: ui/mainwindow.cpp:639
 msgid "Show only duplicates"
 msgstr "أظهر المقاطع المكررة فقط"
 
-#: ui/mainwindow.cpp:619
+#: ui/mainwindow.cpp:641
 msgid "Show only untagged"
 msgstr "أظهر المقطاع غير الموسومة فقط"
 
@@ -4681,7 +4687,7 @@ msgstr "الحجم:"
 msgid "Ska"
 msgstr "Ska"
 
-#: core/commandlineoptions.cpp:153
+#: core/commandlineoptions.cpp:156
 msgid "Skip backwards in playlist"
 msgstr "تجاهل السابق في قائمة التشغيل"
 
@@ -4689,23 +4695,23 @@ msgstr "تجاهل السابق في قائمة التشغيل"
 msgid "Skip count"
 msgstr "تخطى العد"
 
-#: core/commandlineoptions.cpp:154
+#: core/commandlineoptions.cpp:157
 msgid "Skip forwards in playlist"
 msgstr "تجاهل اللاحق في قائمة التشغيل"
 
-#: ui/mainwindow.cpp:1711
+#: ui/mainwindow.cpp:1738
 msgid "Skip selected tracks"
 msgstr "تجاوز المسارات المختارة"
 
-#: ui/mainwindow.cpp:1709
+#: ui/mainwindow.cpp:1736
 msgid "Skip track"
 msgstr "تجاوز المسار"
 
-#: widgets/nowplayingwidget.cpp:96
+#: widgets/nowplayingwidget.cpp:98
 msgid "Small album cover"
 msgstr "غلاف ألبوم صغير"
 
-#: widgets/fancytabwidget.cpp:663
+#: widgets/fancytabwidget.cpp:643
 msgid "Small sidebar"
 msgstr "عارضة جانبية صغيرة"
 
@@ -4713,7 +4719,7 @@ msgstr "عارضة جانبية صغيرة"
 msgid "Smart playlist"
 msgstr "قائمة تشغيل ذكية"
 
-#: library/librarymodel.cpp:1362
+#: library/librarymodel.cpp:1364
 msgid "Smart playlists"
 msgstr "قوائم تشغيل ذكية"
 
@@ -4729,7 +4735,7 @@ msgstr "Soft Rock"
 msgid "Song Information"
 msgstr "معلومات المقطع"
 
-#: ui/mainwindow.cpp:255
+#: ui/mainwindow.cpp:280
 msgid "Song info"
 msgstr "معلومات المقطع"
 
@@ -4786,7 +4792,7 @@ msgstr "Spotify"
 msgid "Spotify login error"
 msgstr "خطأ بتسجيل الدخول لـ Spotify"
 
-#: internet/spotify/spotifyservice.cpp:842
+#: internet/spotify/spotifyservice.cpp:844
 msgid "Spotify playlist's URL"
 msgstr ""
 
@@ -4798,7 +4804,7 @@ msgstr "ملحق Spotify"
 msgid "Spotify plugin not installed"
 msgstr "ملحق Spotify غير مثبت."
 
-#: internet/spotify/spotifyservice.cpp:833
+#: internet/spotify/spotifyservice.cpp:835
 msgid "Spotify song's URL"
 msgstr ""
 
@@ -4806,7 +4812,7 @@ msgstr ""
 msgid "Standard"
 msgstr "قياسي"
 
-#: internet/spotify/spotifyservice.cpp:416
+#: internet/spotify/spotifyservice.cpp:417
 #: internet/subsonic/subsonicservice.cpp:115
 msgid "Starred"
 msgstr "مميز"
@@ -4815,7 +4821,7 @@ msgstr "مميز"
 msgid "Start ripping"
 msgstr "ابدء النسخ"
 
-#: core/commandlineoptions.cpp:150
+#: core/commandlineoptions.cpp:152
 msgid "Start the playlist currently playing"
 msgstr "ابدأ قئمة التشغيل اللتي تعمل حالياً"
 
@@ -4856,13 +4862,17 @@ msgstr ""
 msgid "Stop after every track"
 msgstr ""
 
-#: ui/mainwindow.cpp:652 ../bin/src/ui_mainwindow.h:663
+#: ui/mainwindow.cpp:674 ../bin/src/ui_mainwindow.h:663
 msgid "Stop after this track"
 msgstr "أوقف بعد هذا المقطع"
 
-#: core/commandlineoptions.cpp:152
+#: core/commandlineoptions.cpp:154
 msgid "Stop playback"
 msgstr "أوقف التشغيل"
+
+#: core/commandlineoptions.cpp:155
+msgid "Stop playback after current track"
+msgstr ""
 
 #: core/globalshortcuts.cpp:55
 msgid "Stop playing after current track"
@@ -4936,15 +4946,15 @@ msgstr "الصيغ المدعومة"
 msgid "Synchronize statistics to files now"
 msgstr "زامن الإحصائيات مع الملفات الآن"
 
-#: internet/spotify/spotifyservice.cpp:706
+#: internet/spotify/spotifyservice.cpp:708
 msgid "Syncing Spotify inbox"
 msgstr "مزامنة صندوق بريد Spotify"
 
-#: internet/spotify/spotifyservice.cpp:700
+#: internet/spotify/spotifyservice.cpp:702
 msgid "Syncing Spotify playlist"
 msgstr "مزامنة قائمة تشغيل Spotify"
 
-#: internet/spotify/spotifyservice.cpp:711
+#: internet/spotify/spotifyservice.cpp:713
 msgid "Syncing Spotify starred tracks"
 msgstr "مزامنة مقاطع Spotify المميزة"
 
@@ -4952,7 +4962,7 @@ msgstr "مزامنة مقاطع Spotify المميزة"
 msgid "System colors"
 msgstr "ألوان النظام"
 
-#: widgets/fancytabwidget.cpp:665
+#: widgets/fancytabwidget.cpp:645
 msgid "Tabs on top"
 msgstr "الألسنة فوق"
 
@@ -5008,13 +5018,13 @@ msgid ""
 "license key. Visit subsonic.org for details."
 msgstr "لقد انتهت المدة التجريبية لخادم Subsonic. الرجاء التبرع للحصول على مفتاح رخصة. لمزيد من التفاصيل زر subsonic.org."
 
-#: ui/mainwindow.cpp:2530
+#: ui/mainwindow.cpp:2510
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
 msgstr "إصدار كلمنتاين الذي حدثت إليه يتطلب القيام بفحص شامل للمكتبة من جديد لدعم ميزات الإصدار الجديدة المذكورة أسفله:"
 
-#: library/libraryview.cpp:561
+#: library/libraryview.cpp:562
 msgid "There are other songs in this album"
 msgstr "هناك مقاطع أخرى في هذا الألبوم"
 
@@ -5050,7 +5060,7 @@ msgid ""
 "continue?"
 msgstr "سيتم حذف هذه الملفات من الجهاز. هل أنت متأكد من رغبتك بالاستمرار؟"
 
-#: library/libraryview.cpp:645 ui/mainwindow.cpp:2318 widgets/fileview.cpp:187
+#: library/libraryview.cpp:646 ui/mainwindow.cpp:2330 widgets/fileview.cpp:187
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -5121,7 +5131,7 @@ msgstr "هذه أول مرة تقوم بوصل هذا الجهاز. سيعمل �
 msgid "This option can be changed in the \"Behavior\" preferences"
 msgstr "يمكن تغيير هذه الخاصية من إعدادات \"السلوك\""
 
-#: internet/lastfm/lastfmservice.cpp:263
+#: internet/lastfm/lastfmservice.cpp:265
 msgid "This stream is for paid subscribers only"
 msgstr "هذا التيار للاشتراكات المدفوعة فقط"
 
@@ -5153,7 +5163,7 @@ msgstr "بدّل تنبيهات كلمنتاين"
 msgid "Toggle fullscreen"
 msgstr "بدّل نمط ملء الشاشة"
 
-#: ui/mainwindow.cpp:1702
+#: ui/mainwindow.cpp:1729
 msgid "Toggle queue status"
 msgstr "بدّل حالة لائحة الانتظار"
 
@@ -5161,7 +5171,7 @@ msgstr "بدّل حالة لائحة الانتظار"
 msgid "Toggle scrobbling"
 msgstr "بدّل حالة نقل المعلومات المستمع إليها"
 
-#: core/commandlineoptions.cpp:171
+#: core/commandlineoptions.cpp:174
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "بدّل حالة الإظهار على الشاشة"
 
@@ -5177,7 +5187,7 @@ msgstr "إعادات توجيه كثيرة جدا"
 msgid "Top Rated"
 msgstr ""
 
-#: internet/spotify/spotifyservice.cpp:430
+#: internet/spotify/spotifyservice.cpp:431
 msgid "Top tracks"
 msgstr "أفضل المقاطع"
 
@@ -5240,7 +5250,7 @@ msgstr "إيقاف تشغيل"
 msgid "URI"
 msgstr "URI"
 
-#: core/commandlineoptions.cpp:148
+#: core/commandlineoptions.cpp:150
 msgid "URL(s)"
 msgstr "رابط(روابط)"
 
@@ -5258,12 +5268,12 @@ msgstr ""
 msgid "Unable to download %1 (%2)"
 msgstr "تعذر تحميل %1 (%2)"
 
-#: core/song.cpp:435 library/librarymodel.cpp:372 library/librarymodel.cpp:377
-#: library/librarymodel.cpp:381 library/librarymodel.cpp:1154
+#: core/song.cpp:435 library/librarymodel.cpp:374 library/librarymodel.cpp:379
+#: library/librarymodel.cpp:383 library/librarymodel.cpp:1156
 #: library/savedgroupingmanager.cpp:103 playlist/playlistdelegates.cpp:305
 #: playlist/playlistmanager.cpp:502 playlist/playlistmanager.cpp:503
-#: ui/albumcoverchoicecontroller.cpp:126 ui/edittagdialog.cpp:455
-#: ui/edittagdialog.cpp:499
+#: ui/albumcoverchoicecontroller.cpp:126 ui/edittagdialog.cpp:463
+#: ui/edittagdialog.cpp:507
 msgid "Unknown"
 msgstr "مجهول"
 
@@ -5272,7 +5282,7 @@ msgid "Unknown content-type"
 msgstr "نوع محتوى غير معروف"
 
 #: internet/digitally/digitallyimportedclient.cpp:74
-#: internet/lastfm/lastfmservice.cpp:282
+#: internet/lastfm/lastfmservice.cpp:284
 msgid "Unknown error"
 msgstr "خطأ مجهول"
 
@@ -5280,11 +5290,11 @@ msgstr "خطأ مجهول"
 msgid "Unset cover"
 msgstr "ألغ الغلاف"
 
-#: ui/mainwindow.cpp:1707
+#: ui/mainwindow.cpp:1734
 msgid "Unskip selected tracks"
 msgstr "إلغاء تجاوز المسارات المختارة"
 
-#: ui/mainwindow.cpp:1705
+#: ui/mainwindow.cpp:1732
 msgid "Unskip track"
 msgstr "إلغاء تجاوز المسار"
 
@@ -5293,7 +5303,7 @@ msgstr "إلغاء تجاوز المسار"
 msgid "Unsubscribe"
 msgstr "ألغ الاشتراك"
 
-#: songinfo/songkickconcerts.cpp:173
+#: songinfo/songkickconcerts.cpp:174
 msgid "Upcoming Concerts"
 msgstr "الحفلات القادمة"
 
@@ -5335,7 +5345,7 @@ msgstr "جاري تحديث %1%"
 msgid "Updating library"
 msgstr "تحديث المكتبة"
 
-#: core/commandlineoptions.cpp:148
+#: core/commandlineoptions.cpp:150
 msgid "Usage"
 msgstr "الإستخدام"
 
@@ -5440,8 +5450,8 @@ msgstr "VBR MP3"
 msgid "Variable bit rate"
 msgstr "معدل بت متغير"
 
-#: globalsearch/globalsearchmodel.cpp:107 library/librarymodel.cpp:298
-#: playlist/playlistmanager.cpp:514 ui/albumcovermanager.cpp:270
+#: globalsearch/globalsearchmodel.cpp:109 library/librarymodel.cpp:300
+#: playlist/playlistmanager.cpp:514 ui/albumcovermanager.cpp:273
 msgid "Various artists"
 msgstr "فنانون متنوعون"
 
@@ -5592,13 +5602,13 @@ msgstr "Windows Media audio"
 msgid "Without cover:"
 msgstr "بدون أغلفة:"
 
-#: library/libraryview.cpp:562
+#: library/libraryview.cpp:563
 msgid ""
 "Would you like to move the other songs in this album to Various Artists as "
 "well?"
 msgstr "هل ترغب بنقل المقاطع الأخرى في هذا الألبوم لفئة فنانون متنوعون؟"
 
-#: ui/mainwindow.cpp:2537
+#: ui/mainwindow.cpp:2517
 msgid "Would you like to run a full rescan right now?"
 msgstr "هل ترغب بالقيام بفحص شامل الآن؟"
 
@@ -5737,7 +5747,7 @@ msgstr "بيانات التعريف الخاصة بحسابك على Last.fm خ�
 msgid "Your Magnatune credentials were incorrect"
 msgstr "بيانات التعريف الخاصة بحسابك على Magnatune خاطئة"
 
-#: library/libraryview.cpp:352
+#: library/libraryview.cpp:353
 msgid "Your library is empty!"
 msgstr "مكتبتك فارغة!"
 
@@ -5801,7 +5811,7 @@ msgstr "بين"
 msgid "biggest first"
 msgstr "الأكبر أولا"
 
-#: playlist/playlistview.cpp:232 ui/edittagdialog.cpp:492
+#: playlist/playlistview.cpp:242 ui/edittagdialog.cpp:500
 msgid "bpm"
 msgstr "bpm"
 
@@ -5854,8 +5864,8 @@ msgstr "من بين اخر المقاطع المشغلة"
 
 #: internet/spotify/spotifysettingspage.cpp:62
 #: internet/spotify/spotifysettingspage.cpp:63
-#: internet/spotify/spotifysettingspage.cpp:64 playlist/playlistview.cpp:236
-#: ui/edittagdialog.cpp:494
+#: internet/spotify/spotifysettingspage.cpp:64 playlist/playlistview.cpp:246
+#: ui/edittagdialog.cpp:502
 msgid "kbps"
 msgstr "kbps"
 
@@ -5897,7 +5907,7 @@ msgstr "الأقدم أولا"
 msgid "on"
 msgstr "مفعل"
 
-#: core/commandlineoptions.cpp:148
+#: core/commandlineoptions.cpp:150
 msgid "options"
 msgstr "الخيارات"
 

@@ -33,6 +33,8 @@
 #include <QtConcurrentRun>
 
 #include "core/closure.h"
+#include "core/logging.h"
+#include "core/network.h"
 #include "ui/iconloader.h"
 
 const int PrettyImage::kTotalHeight = 200;
@@ -61,9 +63,10 @@ void PrettyImage::LazyLoad() {
 
   // Start fetching the image
   QNetworkReply* reply = network_->get(QNetworkRequest(url_));
+  RedirectFollower* follower = new RedirectFollower(reply);
   state_ = State_Fetching;
-  NewClosure(reply, SIGNAL(finished()), this,
-             SLOT(ImageFetched(QNetworkReply*)), reply);
+  NewClosure(follower, SIGNAL(finished()), this,
+             SLOT(ImageFetched(RedirectFollower*)), follower);
 }
 
 QSize PrettyImage::image_size() const {
@@ -78,11 +81,14 @@ QSize PrettyImage::sizeHint() const {
   return QSize(image_size().width(), kTotalHeight);
 }
 
-void PrettyImage::ImageFetched(QNetworkReply* reply) {
+void PrettyImage::ImageFetched(RedirectFollower* follower) {
+  follower->deleteLater();
+  QNetworkReply* reply = follower->reply();
   reply->deleteLater();
 
   QImage image = QImage::fromData(reply->readAll());
   if (image.isNull()) {
+    qLog(Debug) << "Image failed to load" << reply->request().url();
     deleteLater();
   } else {
     state_ = State_CreatingThumbnail;

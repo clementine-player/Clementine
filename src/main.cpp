@@ -56,9 +56,6 @@
 #include "core/song.h"
 #include "core/ubuntuunityhack.h"
 #include "core/utilities.h"
-#include "covers/amazoncoverprovider.h"
-#include "covers/coverproviders.h"
-#include "covers/musicbrainzcoverprovider.h"
 #include "engines/enginebase.h"
 #include "smartplaylists/generator.h"
 #include "ui/iconloader.h"
@@ -447,11 +444,6 @@ int main(int argc, char* argv[]) {
   // Network proxy
   QNetworkProxyFactory::setApplicationProxyFactory(
       NetworkProxyFactory::Instance());
-
-  // Initialize the repository of cover providers.  Last.fm registers itself
-  // when its service is created.
-  app.cover_providers()->AddProvider(new AmazonCoverProvider);
-  app.cover_providers()->AddProvider(new MusicbrainzCoverProvider);
 
 #ifdef Q_OS_LINUX
   // In 11.04 Ubuntu decided that the system tray should be reserved for certain

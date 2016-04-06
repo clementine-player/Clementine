@@ -22,12 +22,15 @@
 #ifndef CORE_APPLICATION_H_
 #define CORE_APPLICATION_H_
 
-#include "ui/settingsdialog.h"
+#include <memory>
 
 #include <QObject>
 
+#include "ui/settingsdialog.h"
+
 class AlbumCoverLoader;
 class Appearance;
+class ApplicationImpl;
 class CoverProviders;
 class CurrentArtLoader;
 class Database;
@@ -44,10 +47,10 @@ class NetworkRemote;
 class NetworkRemoteHelper;
 class Player;
 class PlaylistBackend;
-class PodcastDeleter;
-class PodcastDownloader;
 class PlaylistManager;
 class PodcastBackend;
+class PodcastDeleter;
+class PodcastDownloader;
 class PodcastUpdater;
 class Scrobbler;
 class TagReaderClient;
@@ -68,35 +71,32 @@ class Application : public QObject {
   QString language_without_region() const;
   void set_language_name(const QString& name) { language_name_ = name; }
 
-  TagReaderClient* tag_reader_client() const { return tag_reader_client_; }
-  Database* database() const { return database_; }
-  AlbumCoverLoader* album_cover_loader() const { return album_cover_loader_; }
-  PlaylistBackend* playlist_backend() const { return playlist_backend_; }
-  PodcastBackend* podcast_backend() const { return podcast_backend_; }
-  Appearance* appearance() const { return appearance_; }
-  CoverProviders* cover_providers() const { return cover_providers_; }
-  TaskManager* task_manager() const { return task_manager_; }
-  Player* player() const { return player_; }
-  PlaylistManager* playlist_manager() const { return playlist_manager_; }
-  CurrentArtLoader* current_art_loader() const { return current_art_loader_; }
-  GlobalSearch* global_search() const { return global_search_; }
-  InternetModel* internet_model() const { return internet_model_; }
-  Library* library() const { return library_; }
-  DeviceManager* device_manager() const { return device_manager_; }
-  PodcastUpdater* podcast_updater() const { return podcast_updater_; }
-  PodcastDeleter* podcast_deleter() const { return podcast_deleter_; }
-  PodcastDownloader* podcast_downloader() const { return podcast_downloader_; }
-  GPodderSync* gpodder_sync() const { return gpodder_sync_; }
-  MoodbarLoader* moodbar_loader() const { return moodbar_loader_; }
-  MoodbarController* moodbar_controller() const { return moodbar_controller_; }
-  NetworkRemote* network_remote() const { return network_remote_; }
-  NetworkRemoteHelper* network_remote_helper() const {
-    return network_remote_helper_;
-  }
-  Scrobbler* scrobbler() const { return scrobbler_; }
-
+  AlbumCoverLoader* album_cover_loader() const;
+  Appearance* appearance() const;
+  CoverProviders* cover_providers() const;
+  CurrentArtLoader* current_art_loader() const;
+  Database* database() const;
+  DeviceManager* device_manager() const;
+  GlobalSearch* global_search() const;
+  GPodderSync* gpodder_sync() const;
+  InternetModel* internet_model() const;
+  Library* library() const;
   LibraryBackend* library_backend() const;
   LibraryModel* library_model() const;
+  MoodbarController* moodbar_controller() const;
+  MoodbarLoader* moodbar_loader() const;
+  NetworkRemoteHelper* network_remote_helper() const;
+  NetworkRemote* network_remote() const;
+  Player* player() const;
+  PlaylistBackend* playlist_backend() const;
+  PlaylistManager* playlist_manager() const;
+  PodcastBackend* podcast_backend() const;
+  PodcastDeleter* podcast_deleter() const;
+  PodcastDownloader* podcast_downloader() const;
+  PodcastUpdater* podcast_updater() const;
+  Scrobbler* scrobbler() const;
+  TagReaderClient* tag_reader_client() const;
+  TaskManager* task_manager() const;
 
   void MoveToNewThread(QObject* object);
   void MoveToThread(QObject* object, QThread* thread);
@@ -106,40 +106,14 @@ class Application : public QObject {
   void ReloadSettings();
   void OpenSettingsDialogAtPage(SettingsDialog::Page page);
 
- signals:
+signals:
   void ErrorAdded(const QString& message);
   void SettingsChanged();
   void SettingsDialogRequested(SettingsDialog::Page page);
 
  private:
   QString language_name_;
-
-  TagReaderClient* tag_reader_client_;
-  Database* database_;
-  AlbumCoverLoader* album_cover_loader_;
-  PlaylistBackend* playlist_backend_;
-  PodcastBackend* podcast_backend_;
-  Appearance* appearance_;
-  CoverProviders* cover_providers_;
-  TaskManager* task_manager_;
-  Player* player_;
-  PlaylistManager* playlist_manager_;
-  CurrentArtLoader* current_art_loader_;
-  GlobalSearch* global_search_;
-  InternetModel* internet_model_;
-  Library* library_;
-  DeviceManager* device_manager_;
-  PodcastUpdater* podcast_updater_;
-  PodcastDeleter* podcast_deleter_;
-  PodcastDownloader* podcast_downloader_;
-  GPodderSync* gpodder_sync_;
-  MoodbarLoader* moodbar_loader_;
-  MoodbarController* moodbar_controller_;
-  NetworkRemote* network_remote_;
-  NetworkRemoteHelper* network_remote_helper_;
-  Scrobbler* scrobbler_;
-
-  QList<QObject*> objects_in_threads_;
+  std::unique_ptr<ApplicationImpl> p_;
   QList<QThread*> threads_;
 };
 

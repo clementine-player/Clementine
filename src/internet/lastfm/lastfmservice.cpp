@@ -83,15 +83,15 @@ LastFMService::LastFMService(Application* app, QObject* parent)
       scrobbling_enabled_(false),
       connection_problems_(false),
       app_(app) {
+#ifdef HAVE_LIBLASTFM1
   lastfm::ws::setScheme(lastfm::ws::Https);
+#endif
 
   ReloadSettings();
 
   // we emit the signal the first time to be sure the buttons are in the right
   // state
   emit ScrobblingEnabledChanged(scrobbling_enabled_);
-
-  app_->cover_providers()->AddProvider(new LastFmCoverProvider(this));
 }
 
 LastFMService::~LastFMService() {}

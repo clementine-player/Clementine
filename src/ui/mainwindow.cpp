@@ -172,8 +172,8 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
       app_(app),
       tray_icon_(tray_icon),
       osd_(osd),
+      edit_tag_dialog_(std::bind(&MainWindow::CreateEditTagDialog, this)),
       global_shortcuts_(new GlobalShortcuts(this)),
-      remote_(nullptr),
       global_search_view_(new GlobalSearchView(app_, this)),
       library_view_(new LibraryViewContainer(this)),
       file_view_(new FileView(this)),
@@ -183,8 +183,36 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
       device_view_(device_view_container_->view()),
       song_info_view_(new SongInfoView(this)),
       artist_info_view_(new ArtistInfoView(this)),
+      settings_dialog_(std::bind(&MainWindow::CreateSettingsDialog, this)),
+      add_stream_dialog_([=]() {
+        AddStreamDialog* add_stream_dialog = new AddStreamDialog;
+        connect(add_stream_dialog, SIGNAL(accepted()), this,
+                SLOT(AddStreamAccepted()));
+        add_stream_dialog->set_add_on_accept(
+            InternetModel::Service<SavedRadio>());
+        return add_stream_dialog;
+      }),
+      cover_manager_([=]() {
+        AlbumCoverManager* cover_manager =
+            new AlbumCoverManager(app, app->library_backend());
+        cover_manager->Init();
+
+        // Cover manager connections
+        connect(cover_manager, SIGNAL(AddToPlaylist(QMimeData*)), this,
+                SLOT(AddToPlaylist(QMimeData*)));
+        return cover_manager;
+      }),
       equalizer_(new Equalizer),
-      organise_dialog_(new OrganiseDialog(app_->task_manager())),
+      organise_dialog_([=]() {
+        OrganiseDialog* dialog = new OrganiseDialog(app->task_manager());
+        dialog->SetDestinationModel(app->library()->model()->directory_model());
+        return dialog;
+      }),
+      queue_manager_([=]() {
+        QueueManager* manager = new QueueManager;
+        manager->SetPlaylistManager(app->playlist_manager());
+        return manager;
+      }),
       playlist_menu_(new QMenu(this)),
       playlist_add_to_another_(nullptr),
       playlistitem_actions_separator_(nullptr),
@@ -222,9 +250,6 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
   app_->global_search()->AddProvider(new LibrarySearchProvider(
       app_->library_backend(), tr("Library"), "library",
       IconLoader::Load("folder-sound", IconLoader::Base), true, app_, this));
-
-  app_->global_search()->ReloadSettings();
-  global_search_view_->ReloadSettings();
 
   connect(global_search_view_, SIGNAL(AddToPlaylist(QMimeData*)),
           SLOT(AddToPlaylist(QMimeData*)));
@@ -293,9 +318,6 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
   internet_view_->SetApplication(app_);
   device_view_->SetApplication(app_);
   playlist_list_->SetApplication(app_);
-
-  organise_dialog_->SetDestinationModel(
-      app_->library()->model()->directory_model());
 
   // Icons
   qLog(Debug) << "Creating UI";
@@ -962,6 +984,11 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
   ui_->splitter->setChildrenCollapsible(false);
 
   ReloadSettings();
+
+  // The "GlobalSearchView" requires that "InternetModel" has already been
+  // initialised before reload settings.
+  app_->global_search()->ReloadSettings();
+  global_search_view_->ReloadSettings();
 
   // Reload pretty OSD to avoid issues with fonts
   osd_->ReloadPrettyOSDSettings();
@@ -1832,7 +1859,6 @@ void MainWindow::EditTracks() {
     }
   }
 
-  EnsureEditTagDialogCreated();
   edit_tag_dialog_->SetSongs(songs, items);
   edit_tag_dialog_->show();
 }
@@ -1991,17 +2017,7 @@ void MainWindow::AddFolder() {
   AddToPlaylist(data);
 }
 
-void MainWindow::AddStream() {
-  if (!add_stream_dialog_) {
-    add_stream_dialog_.reset(new AddStreamDialog);
-    connect(add_stream_dialog_.get(), SIGNAL(accepted()),
-            SLOT(AddStreamAccepted()));
-
-    add_stream_dialog_->set_add_on_accept(InternetModel::Service<SavedRadio>());
-  }
-
-  add_stream_dialog_->show();
-}
+void MainWindow::AddStream() { add_stream_dialog_->show(); }
 
 void MainWindow::AddStreamAccepted() {
   MimeData* data = new MimeData;
@@ -2102,6 +2118,9 @@ void MainWindow::CommandlineOptionsReceived(const CommandlineOptions& options) {
     case CommandlineOptions::Player_Stop:
       app_->player()->Stop();
       break;
+    case CommandlineOptions::Player_StopAfterCurrent:
+      app_->player()->StopAfterCurrent();
+      break;
     case CommandlineOptions::Player_Previous:
       app_->player()->Previous();
       break;
@@ -2195,10 +2214,6 @@ void MainWindow::PlaylistUndoRedoChanged(QAction* undo, QAction* redo) {
 }
 
 void MainWindow::AddFilesToTranscoder() {
-  if (!transcode_dialog_) {
-    transcode_dialog_.reset(new TranscodeDialog);
-  }
-
   QStringList filenames;
 
   for (const QModelIndex& index :
@@ -2217,7 +2232,6 @@ void MainWindow::AddFilesToTranscoder() {
 }
 
 void MainWindow::ShowLibraryConfig() {
-  EnsureSettingsDialogCreated();
   settings_dialog_->OpenAtPage(SettingsDialog::Page_Library);
 }
 
@@ -2270,8 +2284,6 @@ void MainWindow::CopyFilesToDevice(const QList<QUrl>& urls) {
 }
 
 void MainWindow::EditFileTags(const QList<QUrl>& urls) {
-  EnsureEditTagDialogCreated();
-
   SongList songs;
   for (const QUrl& url : urls) {
     Song song;
@@ -2427,81 +2439,49 @@ void MainWindow::ChangeLibraryQueryMode(QAction* action) {
   }
 }
 
-void MainWindow::ShowCoverManager() {
-  if (!cover_manager_) {
-    cover_manager_.reset(new AlbumCoverManager(app_, app_->library_backend()));
-    cover_manager_->Init();
+void MainWindow::ShowCoverManager() { cover_manager_->show(); }
 
-    // Cover manager connections
-    connect(cover_manager_.get(), SIGNAL(AddToPlaylist(QMimeData*)),
-            SLOT(AddToPlaylist(QMimeData*)));
-  }
-
-  cover_manager_->show();
-}
-
-void MainWindow::EnsureSettingsDialogCreated() {
-  if (settings_dialog_) return;
-
-  settings_dialog_.reset(new SettingsDialog(app_, background_streams_));
-  settings_dialog_->SetGlobalShortcutManager(global_shortcuts_);
-  settings_dialog_->SetSongInfoView(song_info_view_);
+SettingsDialog* MainWindow::CreateSettingsDialog() {
+  SettingsDialog* settings_dialog =
+      new SettingsDialog(app_, background_streams_);
+  settings_dialog->SetGlobalShortcutManager(global_shortcuts_);
+  settings_dialog->SetSongInfoView(song_info_view_);
 
   // Settings
-  connect(settings_dialog_.get(), SIGNAL(accepted()),
-          SLOT(ReloadAllSettings()));
+  connect(settings_dialog, SIGNAL(accepted()), SLOT(ReloadAllSettings()));
 
 #ifdef HAVE_WIIMOTEDEV
-  connect(settings_dialog_.get(), SIGNAL(SetWiimotedevInterfaceActived(bool)),
+  connect(settings_dialog, SIGNAL(SetWiimotedevInterfaceActived(bool)),
           wiimotedev_shortcuts_.get(),
           SLOT(SetWiimotedevInterfaceActived(bool)));
 #endif
 
   // Allows custom notification preview
-  connect(settings_dialog_.get(),
+  connect(settings_dialog,
           SIGNAL(NotificationPreview(OSD::Behaviour, QString, QString)),
           SLOT(HandleNotificationPreview(OSD::Behaviour, QString, QString)));
+  return settings_dialog;
 }
 
-void MainWindow::OpenSettingsDialog() {
-  EnsureSettingsDialogCreated();
-  settings_dialog_->show();
-}
+void MainWindow::OpenSettingsDialog() { settings_dialog_->show(); }
 
 void MainWindow::OpenSettingsDialogAtPage(SettingsDialog::Page page) {
-  EnsureSettingsDialogCreated();
   settings_dialog_->OpenAtPage(page);
 }
 
-void MainWindow::EnsureEditTagDialogCreated() {
-  if (edit_tag_dialog_) return;
-
-  edit_tag_dialog_.reset(new EditTagDialog(app_));
-  connect(edit_tag_dialog_.get(), SIGNAL(accepted()),
-          SLOT(EditTagDialogAccepted()));
-  connect(edit_tag_dialog_.get(), SIGNAL(Error(QString)),
+EditTagDialog* MainWindow::CreateEditTagDialog() {
+  EditTagDialog* edit_tag_dialog = new EditTagDialog(app_);
+  connect(edit_tag_dialog, SIGNAL(accepted()), SLOT(EditTagDialogAccepted()));
+  connect(edit_tag_dialog, SIGNAL(Error(QString)),
           SLOT(ShowErrorDialog(QString)));
+  return edit_tag_dialog;
 }
 
-void MainWindow::ShowAboutDialog() {
-  if (!about_dialog_) {
-    about_dialog_.reset(new About);
-  }
+void MainWindow::ShowAboutDialog() { about_dialog_->show(); }
 
-  about_dialog_->show();
-}
-
-void MainWindow::ShowTranscodeDialog() {
-  if (!transcode_dialog_) {
-    transcode_dialog_.reset(new TranscodeDialog);
-  }
-  transcode_dialog_->show();
-}
+void MainWindow::ShowTranscodeDialog() { transcode_dialog_->show(); }
 
 void MainWindow::ShowErrorDialog(const QString& message) {
-  if (!error_dialog_) {
-    error_dialog_.reset(new ErrorDialog);
-  }
   error_dialog_->ShowMessage(message);
 }
 
@@ -2544,13 +2524,7 @@ void MainWindow::CheckFullRescanRevisions() {
   }
 }
 
-void MainWindow::ShowQueueManager() {
-  if (!queue_manager_) {
-    queue_manager_.reset(new QueueManager);
-    queue_manager_->SetPlaylistManager(app_->playlist_manager());
-  }
-  queue_manager_->show();
-}
+void MainWindow::ShowQueueManager() { queue_manager_->show(); }
 
 void MainWindow::ShowVisualisations() {
 #ifdef ENABLE_VISUALISATIONS

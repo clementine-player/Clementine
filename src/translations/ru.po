@@ -34,7 +34,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2016-02-03 15:08+0000\n"
+"PO-Revision-Date: 2016-04-03 09:18+0000\n"
 "Last-Translator: Andrei Stepanov\n"
 "Language-Team: Russian (http://www.transifex.com/davidsansome/clementine/language/ru/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -100,6 +100,12 @@ msgstr "%1 (%2 песен)"
 msgid "%1 albums"
 msgstr "%1 альбомов"
 
+#: widgets/equalizerslider.cpp:29 widgets/equalizerslider.cpp:31
+#: widgets/equalizerslider.cpp:43
+#, qt-format
+msgid "%1 dB"
+msgstr "%1 дБ"
+
 #: core/utilities.cpp:120
 #, qt-format
 msgid "%1 days"
@@ -150,7 +156,7 @@ msgstr "Найдено %1 песен (показано %2)"
 msgid "%1 tracks"
 msgstr "%1 треков"
 
-#: ui/albumcovermanager.cpp:466
+#: ui/albumcovermanager.cpp:469
 #, qt-format
 msgid "%1 transferred"
 msgstr "%1 передано"
@@ -211,7 +217,7 @@ msgstr "Дополнения"
 
 #: ../bin/src/ui_mainwindow.h:717
 msgid "&Help"
-msgstr "Помощь"
+msgstr "&Справка"
 
 #: playlist/playlistheader.cpp:81
 #, qt-format
@@ -270,7 +276,7 @@ msgstr "&Инструменты"
 msgid "(different across multiple songs)"
 msgstr "(различный через несколько композиций)"
 
-#: internet/spotify/spotifyservice.cpp:468
+#: internet/spotify/spotifyservice.cpp:469
 msgid ", by "
 msgstr ", от"
 
@@ -416,11 +422,11 @@ msgstr "AAC 64 кбит/c"
 msgid "AIFF"
 msgstr "AIFF"
 
-#: widgets/nowplayingwidget.cpp:149
+#: widgets/nowplayingwidget.cpp:151
 msgid "ALL GLORY TO THE HYPNOTOAD"
 msgstr "СЛАВА ГИПНОЖАБЕ"
 
-#: ui/albumcovermanager.cpp:111 ui/albumcoversearcher.cpp:158
+#: ui/albumcovermanager.cpp:114 ui/albumcoversearcher.cpp:158
 msgid "Abort"
 msgstr "Прервать"
 
@@ -497,7 +503,7 @@ msgstr "Добавить другой поток…"
 msgid "Add directory..."
 msgstr "Добавить каталог…"
 
-#: ui/mainwindow.cpp:1954
+#: ui/mainwindow.cpp:1980
 msgid "Add file"
 msgstr "Добавить файл"
 
@@ -517,7 +523,7 @@ msgstr "Добавить файл…"
 msgid "Add files to transcode"
 msgstr "Конвертировать файлы"
 
-#: transcoder/transcodedialog.cpp:306 ui/mainwindow.cpp:1981
+#: transcoder/transcodedialog.cpp:306 ui/mainwindow.cpp:2007
 #: ripper/ripcddialog.cpp:185
 msgid "Add folder"
 msgstr "Добавить папку"
@@ -626,15 +632,15 @@ msgstr "Добавить поток…"
 msgid "Add to My Music"
 msgstr "Добавить в Мою музыку"
 
-#: internet/spotify/spotifyservice.cpp:621
+#: internet/spotify/spotifyservice.cpp:623
 msgid "Add to Spotify playlists"
 msgstr "Добавить в плейлисты Spotify"
 
-#: internet/spotify/spotifyservice.cpp:613
+#: internet/spotify/spotifyservice.cpp:615
 msgid "Add to Spotify starred"
 msgstr "Добавить в оценённые Spotify"
 
-#: ui/mainwindow.cpp:1775
+#: ui/mainwindow.cpp:1802
 msgid "Add to another playlist"
 msgstr "Добавить в другой плейлист"
 
@@ -724,11 +730,11 @@ msgstr "Информация об альбоме на jamendo.com…"
 msgid "Albums"
 msgstr "Альбомы"
 
-#: ui/albumcovermanager.cpp:135
+#: ui/albumcovermanager.cpp:138
 msgid "Albums with covers"
 msgstr "Альбомы с обложками"
 
-#: ui/albumcovermanager.cpp:136
+#: ui/albumcovermanager.cpp:139
 msgid "Albums without covers"
 msgstr "Альбомы без обложек"
 
@@ -745,11 +751,11 @@ msgctxt "Label for button to enable/disable Hypnotoad background sound."
 msgid "All Glory to the Hypnotoad!"
 msgstr "Cлава Гипножабе!"
 
-#: ui/albumcovermanager.cpp:134
+#: ui/albumcovermanager.cpp:137
 msgid "All albums"
 msgstr "Все альбомы"
 
-#: ui/albumcovermanager.cpp:268
+#: ui/albumcovermanager.cpp:271
 msgid "All artists"
 msgstr "Все исполнители"
 
@@ -813,7 +819,7 @@ msgstr "Требуется дополнительный модуль для ис
 msgid "An error occurred loading the iTunes database"
 msgstr "Произошла ошибка при загрузке данных iTunes"
 
-#: playlist/playlist.cpp:423 ui/edittagdialog.cpp:695
+#: playlist/playlist.cpp:423 ui/edittagdialog.cpp:703
 #, qt-format
 msgid "An error occurred writing metadata to '%1'"
 msgstr "Ошибка при записи мета-данных в '%1'"
@@ -836,12 +842,12 @@ msgstr "Сердитый"
 msgid "Appearance"
 msgstr "Внешний вид"
 
-#: core/commandlineoptions.cpp:167
+#: core/commandlineoptions.cpp:170
 msgid "Append files/URLs to the playlist"
 msgstr "Добавить файлы/URLs в плейлист"
 
 #: devices/deviceview.cpp:218 globalsearch/globalsearchview.cpp:453
-#: internet/core/internetservice.cpp:81 library/libraryview.cpp:377
+#: internet/core/internetservice.cpp:48 library/libraryview.cpp:378
 #: widgets/fileviewlist.cpp:31
 msgid "Append to current playlist"
 msgstr "Добавить в текущий плейлист"
@@ -859,7 +865,7 @@ msgstr "Применить сжатие для предотвращения ис
 msgid "Are you sure you want to delete the \"%1\" preset?"
 msgstr "Вы действительно хотите удалить профиль \"%1\"?"
 
-#: ui/edittagdialog.cpp:795
+#: ui/edittagdialog.cpp:803
 msgid "Are you sure you want to reset this song's statistics?"
 msgstr "Вы действительно хотите сбросить статистику этой песни?"
 
@@ -878,7 +884,7 @@ msgstr "Вы действительно хотите записывать ста
 msgid "Artist"
 msgstr "Исполнитель"
 
-#: ui/mainwindow.cpp:258
+#: ui/mainwindow.cpp:283
 msgid "Artist info"
 msgstr "Артист"
 
@@ -906,7 +912,7 @@ msgstr "Вывод звука"
 
 #: internet/digitally/digitallyimportedsettingspage.cpp:82
 #: internet/magnatune/magnatunesettingspage.cpp:117
-#: internet/lastfm/lastfmservice.cpp:247
+#: internet/lastfm/lastfmservice.cpp:249
 #: internet/lastfm/lastfmsettingspage.cpp:97
 msgid "Authentication failed"
 msgstr "Ошибка аутентификации"
@@ -1113,7 +1119,7 @@ msgstr "Отменить загрузку"
 msgid ""
 "Captcha is needed.\n"
 "Try to login into Vk.com with your browser,to fix this problem."
-msgstr "Нужна капча.%s\nПопробуйте зайти в VK.com через браузер для решения этой проблемы."
+msgstr "Нужна капча.\nПопробуйте зайти в VK.com через браузер для решения этой проблемы."
 
 #: ../bin/src/ui_edittagdialog.h:712
 msgid "Change cover art"
@@ -1139,7 +1145,7 @@ msgstr "Изменить режим перемешивания"
 msgid "Change the currently playing song"
 msgstr "Сменить текущий трек"
 
-#: core/commandlineoptions.cpp:172
+#: core/commandlineoptions.cpp:175
 msgid "Change the language"
 msgstr "Сменить язык"
 
@@ -1161,7 +1167,7 @@ msgstr "Проверять новые выпуски"
 msgid "Check for updates"
 msgstr "Проверить обновления"
 
-#: ui/mainwindow.cpp:781
+#: ui/mainwindow.cpp:803
 msgid "Check for updates..."
 msgstr "Проверить обновления…"
 
@@ -1285,7 +1291,7 @@ msgid ""
 "installed Clementine properly."
 msgstr "Clementine не может загрузить ни одну визуализацию projectM. Проверьте, что Clementine установлен правильно."
 
-#: widgets/prettyimage.cpp:193
+#: widgets/prettyimage.cpp:199
 msgid "Clementine image viewer"
 msgstr "Просмотр изображений в Clementine"
 
@@ -1301,7 +1307,7 @@ msgstr "Clementine будет искать здесь:"
 msgid "Click Ok once you authenticated Clementine in your last.fm account."
 msgstr "Нажмите на OK после прохождения аутентификации Clementine в вашем аккаунте Last.fm."
 
-#: library/libraryview.cpp:358
+#: library/libraryview.cpp:359
 msgid "Click here to add some music"
 msgstr "Нажмите сюда, чтобы добавить музыку"
 
@@ -1342,7 +1348,7 @@ msgstr "Закрыть визуализацию"
 msgid "Closing this window will cancel the download."
 msgstr "Закрытие этого окна отменит загрузку."
 
-#: ui/albumcovermanager.cpp:219
+#: ui/albumcovermanager.cpp:222
 msgid "Closing this window will stop searching for album covers."
 msgstr "Закрытие этого окна остановит поиск обложек для альбомов."
 
@@ -1354,7 +1360,7 @@ msgstr "Клубный"
 msgid "Colors"
 msgstr "Цвета"
 
-#: core/commandlineoptions.cpp:175
+#: core/commandlineoptions.cpp:178
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Разделенный запятыми список \"класс:уровень\", где уровень от 0 до 3"
 
@@ -1399,7 +1405,7 @@ msgstr "Горячие клавиши"
 msgid "Configure SoundCloud..."
 msgstr "Настроить SoundCloud…"
 
-#: internet/spotify/spotifyservice.cpp:919
+#: internet/spotify/spotifyservice.cpp:921
 msgid "Configure Spotify..."
 msgstr "Настройка Spotify…"
 
@@ -1415,7 +1421,7 @@ msgstr "Настроить VK.com…"
 msgid "Configure global search..."
 msgstr "Настроить глобальный поиск…"
 
-#: ui/mainwindow.cpp:631
+#: ui/mainwindow.cpp:653
 msgid "Configure library..."
 msgstr "Настроить фонотеку…"
 
@@ -1486,16 +1492,16 @@ msgstr "Конвертировать файлы сжатые без потери
 msgid "Copy share url to clipboard"
 msgstr "Скопировать ссылку для публикации в буфер"
 
-#: internet/core/internetservice.cpp:57
+#: internet/core/internetservice.cpp:79
 msgid "Copy to clipboard"
 msgstr "Скопировать в буфер"
 
-#: library/libraryview.cpp:408 internet/podcasts/podcastservice.cpp:438
-#: ui/mainwindow.cpp:680 widgets/fileviewlist.cpp:44
+#: library/libraryview.cpp:409 internet/podcasts/podcastservice.cpp:438
+#: ui/mainwindow.cpp:702 widgets/fileviewlist.cpp:44
 msgid "Copy to device..."
 msgstr "Копировать на носитель"
 
-#: devices/deviceview.cpp:228 ui/mainwindow.cpp:670
+#: devices/deviceview.cpp:228 ui/mainwindow.cpp:692
 #: widgets/fileviewlist.cpp:40
 msgid "Copy to library..."
 msgstr "Копировать в фонотеку…"
@@ -1547,24 +1553,24 @@ msgstr "Невозможно открыть выходной файл %1"
 msgid "Cover Manager"
 msgstr "Менеджер обложек"
 
-#: ui/edittagdialog.cpp:476
+#: ui/edittagdialog.cpp:484
 msgid "Cover art from embedded image"
 msgstr "Обложка из встроенного изображения"
 
-#: ui/edittagdialog.cpp:479
+#: ui/edittagdialog.cpp:487
 #, qt-format
 msgid "Cover art loaded automatically from %1"
 msgstr "Обложка загружена автоматически с %1"
 
-#: ui/edittagdialog.cpp:471
+#: ui/edittagdialog.cpp:479
 msgid "Cover art manually unset"
 msgstr "Обложка вручную отключена"
 
-#: ui/edittagdialog.cpp:481
+#: ui/edittagdialog.cpp:489
 msgid "Cover art not set"
 msgstr "Обложка не задана"
 
-#: ui/edittagdialog.cpp:474
+#: ui/edittagdialog.cpp:482
 #, qt-format
 msgid "Cover art set from %1"
 msgstr "Обложка задана из %1"
@@ -1641,11 +1647,11 @@ msgstr "день (дня, дней)"
 msgid "De&fault"
 msgstr "По &умолчанию"
 
-#: core/commandlineoptions.cpp:157
+#: core/commandlineoptions.cpp:160
 msgid "Decrease the volume by 4%"
 msgstr "Уменьшить громкость на 4%"
 
-#: core/commandlineoptions.cpp:159
+#: core/commandlineoptions.cpp:162
 msgid "Decrease the volume by <value> percent"
 msgstr "Уменьшить громкость на <value> процентов"
 
@@ -1679,8 +1685,8 @@ msgstr "Удалить"
 msgid "Delete downloaded data"
 msgstr "Удалить загруженные данные"
 
-#: devices/deviceview.cpp:408 library/libraryview.cpp:644
-#: ui/mainwindow.cpp:2317 widgets/fileview.cpp:186
+#: devices/deviceview.cpp:408 library/libraryview.cpp:645
+#: ui/mainwindow.cpp:2329 widgets/fileview.cpp:186
 msgid "Delete files"
 msgstr "Удалить файлы"
 
@@ -1688,7 +1694,7 @@ msgstr "Удалить файлы"
 msgid "Delete from device..."
 msgstr "Удалить с носителя"
 
-#: library/libraryview.cpp:410 ui/mainwindow.cpp:683
+#: library/libraryview.cpp:411 ui/mainwindow.cpp:705
 #: widgets/fileviewlist.cpp:47
 msgid "Delete from disk..."
 msgstr "Удалить с диска…"
@@ -1701,7 +1707,7 @@ msgstr "Удалять прослушанные выпуски"
 msgid "Delete preset"
 msgstr "Удалить профиль"
 
-#: library/libraryview.cpp:400
+#: library/libraryview.cpp:401
 msgid "Delete smart playlist"
 msgstr "Удалить умный плейлист"
 
@@ -1713,11 +1719,11 @@ msgstr "Удалить оригинальные файлы"
 msgid "Deleting files"
 msgstr "Удаление файлов"
 
-#: ui/mainwindow.cpp:1696
+#: ui/mainwindow.cpp:1723
 msgid "Dequeue selected tracks"
 msgstr "Убрать выбранные треки из очереди"
 
-#: ui/mainwindow.cpp:1694
+#: ui/mainwindow.cpp:1721
 msgid "Dequeue track"
 msgstr "Убрать трек из очереди"
 
@@ -1746,7 +1752,7 @@ msgstr "Имя носителя"
 msgid "Device properties..."
 msgstr "Свойства носителя…"
 
-#: ui/mainwindow.cpp:251
+#: ui/mainwindow.cpp:276
 msgid "Devices"
 msgstr "Носители"
 
@@ -1814,7 +1820,7 @@ msgstr "Непрерывная передача"
 msgid "Display options"
 msgstr "Настройки вида"
 
-#: core/commandlineoptions.cpp:170
+#: core/commandlineoptions.cpp:173
 msgid "Display the on-screen-display"
 msgstr "Показывать экранное уведомление"
 
@@ -1850,7 +1856,7 @@ msgstr "После полного пересканирования потеря�
 msgid "Don't repeat"
 msgstr "Не повторять"
 
-#: library/libraryview.cpp:428
+#: library/libraryview.cpp:429
 msgid "Don't show in various artists"
 msgstr "Не показывать в \"Различных исполнителях\""
 
@@ -1863,7 +1869,7 @@ msgid "Don't shuffle"
 msgstr "Не перемешивать"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:312
-#: ui/albumcovermanager.cpp:221
+#: ui/albumcovermanager.cpp:224
 msgid "Don't stop!"
 msgstr "Не останавливать!"
 
@@ -1961,7 +1967,7 @@ msgstr "Загружается модуль Spotify"
 msgid "Downloading metadata"
 msgstr "Загрузка метаданных"
 
-#: ui/notificationssettingspage.cpp:36
+#: ui/notificationssettingspage.cpp:38
 msgid "Drag to reposition"
 msgstr "Тащите для перемещения"
 
@@ -1985,11 +1991,11 @@ msgstr "Динамический режим включён"
 msgid "Dynamic random mix"
 msgstr "Случайный динамичный микс"
 
-#: library/libraryview.cpp:397
+#: library/libraryview.cpp:398
 msgid "Edit smart playlist..."
 msgstr "Изменить умный плейлист…"
 
-#: ui/mainwindow.cpp:1738
+#: ui/mainwindow.cpp:1765
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr "Изменить тег \"%1\"…"
@@ -2006,12 +2012,12 @@ msgstr "Изменить теги"
 msgid "Edit track information"
 msgstr "Изменить информацию о треке"
 
-#: library/libraryview.cpp:415 widgets/fileviewlist.cpp:51
+#: library/libraryview.cpp:416 widgets/fileviewlist.cpp:51
 #: ../bin/src/ui_mainwindow.h:669
 msgid "Edit track information..."
 msgstr "Изменить информацию о треке"
 
-#: library/libraryview.cpp:418
+#: library/libraryview.cpp:419
 msgid "Edit tracks information..."
 msgstr "Изменить информацию о треках"
 
@@ -2119,17 +2125,17 @@ msgstr "Вся коллекция"
 msgid "Equalizer"
 msgstr "Эквалайзер"
 
-#: core/commandlineoptions.cpp:173
+#: core/commandlineoptions.cpp:176
 msgid "Equivalent to --log-levels *:1"
 msgstr "Аналогично --log-levels *:1"
 
-#: core/commandlineoptions.cpp:174
+#: core/commandlineoptions.cpp:177
 msgid "Equivalent to --log-levels *:3"
 msgstr "Аналогично --log-levels *:3"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:246
-#: library/libraryview.cpp:638 ui/mainwindow.cpp:2020 ui/mainwindow.cpp:2267
-#: ui/mainwindow.cpp:2415 internet/vk/vkservice.cpp:643
+#: library/libraryview.cpp:639 ui/mainwindow.cpp:2036 ui/mainwindow.cpp:2281
+#: ui/mainwindow.cpp:2427 internet/vk/vkservice.cpp:643
 msgid "Error"
 msgstr "Ошибка"
 
@@ -2237,11 +2243,11 @@ msgstr "Экспорт загруженных обложек"
 msgid "Export embedded covers"
 msgstr "Экспорт встроенных обложек"
 
-#: ui/albumcovermanager.cpp:785 ui/albumcovermanager.cpp:809
+#: ui/albumcovermanager.cpp:788 ui/albumcovermanager.cpp:812
 msgid "Export finished"
 msgstr "Экспорт завершён"
 
-#: ui/albumcovermanager.cpp:794
+#: ui/albumcovermanager.cpp:797
 #, qt-format
 msgid "Exported %1 covers out of %2 (%3 skipped)"
 msgstr "Экспортировано %1 обложек из %2 (%3 пропущено)"
@@ -2269,7 +2275,7 @@ msgstr "Затухание звука"
 msgid "Fading duration"
 msgstr "Длительность затухания"
 
-#: ui/mainwindow.cpp:2021
+#: ui/mainwindow.cpp:2037
 msgid "Failed reading CD drive"
 msgstr "Не удалось прочесть CD-привод"
 
@@ -2374,7 +2380,7 @@ msgstr "Тип файла"
 msgid "Filename"
 msgstr "Имя файла"
 
-#: ui/mainwindow.cpp:241
+#: ui/mainwindow.cpp:266
 msgid "Files"
 msgstr "Файлы"
 
@@ -2402,7 +2408,7 @@ msgstr "Готово"
 msgid "First level"
 msgstr "Первый уровень"
 
-#: widgets/nowplayingwidget.cpp:108
+#: widgets/nowplayingwidget.cpp:110
 msgid "Fit cover to width"
 msgstr "Подогнать обложку по ширине"
 
@@ -2439,7 +2445,7 @@ msgstr "Команда \"Забыть носитель\", удалит носи�
 #: ../bin/src/ui_internetviewcontainer.h:70 ../bin/src/ui_searchboxwidget.h:61
 #: ../bin/src/ui_libraryfilterwidget.h:91
 #: ../bin/src/ui_libraryviewcontainer.h:58
-#: ../bin/src/ui_playlistcontainer.h:142
+#: ../bin/src/ui_playlistcontainer.h:134
 #: ../bin/src/ui_playlistlistcontainer.h:125
 #: ../bin/src/ui_podcastinfowidget.h:190 ../bin/src/ui_querysearchpage.h:111
 #: ../bin/src/ui_querysortpage.h:136 ../bin/src/ui_searchpreview.h:103
@@ -2451,7 +2457,7 @@ msgstr "Команда \"Забыть носитель\", удалит носи�
 #: ../bin/src/ui_transcoderoptionsopus.h:78
 #: ../bin/src/ui_transcoderoptionsspeex.h:215
 #: ../bin/src/ui_transcoderoptionsvorbis.h:200
-#: ../bin/src/ui_transcoderoptionswma.h:77 ../bin/src/ui_equalizerslider.h:82
+#: ../bin/src/ui_transcoderoptionswma.h:77 ../bin/src/ui_equalizerslider.h:98
 #: ../bin/src/ui_fileview.h:106 ../bin/src/ui_loginstatewidget.h:167
 #: ../bin/src/ui_trackslider.h:68 ../bin/src/ui_visualisationoverlay.h:181
 msgid "Form"
@@ -2505,12 +2511,12 @@ msgstr "Общие настройки"
 msgid "Genre"
 msgstr "Жанр"
 
-#: internet/spotify/spotifyservice.cpp:637
-#: internet/spotify/spotifyservice.cpp:681
+#: internet/spotify/spotifyservice.cpp:639
+#: internet/spotify/spotifyservice.cpp:683
 msgid "Get a URL to share this Spotify song"
 msgstr "Получить адрес песни со Spotify для публикации"
 
-#: internet/spotify/spotifyservice.cpp:669
+#: internet/spotify/spotifyservice.cpp:671
 msgid "Get a URL to share this playlist"
 msgstr "Получить адрес плейлиста для публикации"
 
@@ -2543,7 +2549,7 @@ msgstr "Перейти к предудыщему плейлисту"
 msgid "Google Drive"
 msgstr "Google Диск"
 
-#: covers/coversearchstatisticsdialog.cpp:53 ui/albumcovermanager.cpp:460
+#: covers/coversearchstatisticsdialog.cpp:53 ui/albumcovermanager.cpp:463
 #: ../bin/src/ui_coversearchstatisticsdialog.h:75
 #, qt-format
 msgid "Got %1 covers out of %2 (%3 failed)"
@@ -2663,7 +2669,7 @@ msgstr "У меня нет учётной записи Magnatune"
 msgid "Icon"
 msgstr "Значок"
 
-#: widgets/fancytabwidget.cpp:666
+#: widgets/fancytabwidget.cpp:646
 msgid "Icons on top"
 msgstr "Значки сверху"
 
@@ -2715,7 +2721,7 @@ msgid ""
 "time a song finishes."
 msgstr "В динамическом режиме новые дорожки выбираются и добавляются в плейлист каждый раз, когда заканчивается очередная песня."
 
-#: internet/spotify/spotifyservice.cpp:424
+#: internet/spotify/spotifyservice.cpp:425
 msgid "Inbox"
 msgstr "Входящие"
 
@@ -2739,11 +2745,11 @@ msgstr "Несовместимая версия протокола Subsonic REST
 msgid "Incomplete configuration, please ensure all fields are populated."
 msgstr "Неполная конфигурация, пожалуйста, убедитесь, что все поля заполнены."
 
-#: core/commandlineoptions.cpp:156
+#: core/commandlineoptions.cpp:159
 msgid "Increase the volume by 4%"
 msgstr "Увеличить громкость на 4%"
 
-#: core/commandlineoptions.cpp:158
+#: core/commandlineoptions.cpp:161
 msgid "Increase the volume by <value> percent"
 msgstr "Увеличить громкость на <value> процентов"
 
@@ -2776,7 +2782,7 @@ msgstr "Установлено"
 msgid "Integrity check"
 msgstr "Проверка целостности"
 
-#: ui/mainwindow.cpp:247
+#: ui/mainwindow.cpp:272
 msgid "Internet"
 msgstr "Интернет"
 
@@ -2793,31 +2799,31 @@ msgstr "Службы интернет"
 msgid "Intro tracks"
 msgstr "Вступительные треки"
 
-#: internet/lastfm/lastfmservice.cpp:259
+#: internet/lastfm/lastfmservice.cpp:261
 msgid "Invalid API key"
 msgstr "Неверный ключ API"
 
-#: internet/lastfm/lastfmservice.cpp:249
+#: internet/lastfm/lastfmservice.cpp:251
 msgid "Invalid format"
 msgstr "Неверный формат"
 
-#: internet/lastfm/lastfmservice.cpp:245
+#: internet/lastfm/lastfmservice.cpp:247
 msgid "Invalid method"
 msgstr "Неверный метод"
 
-#: internet/lastfm/lastfmservice.cpp:251
+#: internet/lastfm/lastfmservice.cpp:253
 msgid "Invalid parameters"
 msgstr "Неверные параметры"
 
-#: internet/lastfm/lastfmservice.cpp:253
+#: internet/lastfm/lastfmservice.cpp:255
 msgid "Invalid resource specified"
 msgstr "Указан неверный источник"
 
-#: internet/lastfm/lastfmservice.cpp:243
+#: internet/lastfm/lastfmservice.cpp:245
 msgid "Invalid service"
 msgstr "Неверная служба"
 
-#: internet/lastfm/lastfmservice.cpp:257
+#: internet/lastfm/lastfmservice.cpp:259
 msgid "Invalid session key"
 msgstr "Неверный ключ сессии"
 
@@ -2898,19 +2904,19 @@ msgstr "Наушники/ноутбук"
 msgid "Large Hall"
 msgstr "Большой зал"
 
-#: widgets/nowplayingwidget.cpp:98
+#: widgets/nowplayingwidget.cpp:100
 msgid "Large album cover"
 msgstr "Большая обложка альбома"
 
-#: widgets/nowplayingwidget.cpp:101
+#: widgets/nowplayingwidget.cpp:103
 msgid "Large album cover (details below)"
 msgstr "Большая обложка альбома (сведения снизу)"
 
-#: widgets/nowplayingwidget.cpp:103
+#: widgets/nowplayingwidget.cpp:105
 msgid "Large album cover (no details)"
 msgstr "Большая обложка альбома (без сведений)"
 
-#: widgets/fancytabwidget.cpp:662
+#: widgets/fancytabwidget.cpp:642
 msgid "Large sidebar"
 msgstr "Широкая боковая панель"
 
@@ -2935,7 +2941,7 @@ msgstr "Аутентификация в Last.fm"
 msgid "Last.fm authentication failed"
 msgstr "Аутентификация в Last.fm не удалась"
 
-#: internet/lastfm/lastfmservice.cpp:266
+#: internet/lastfm/lastfmservice.cpp:268
 msgid "Last.fm is currently busy, please try again in a few minutes"
 msgstr "Last.fm в данный момент занят, попробуйте позже"
 
@@ -2964,7 +2970,7 @@ msgstr "Левый канал"
 msgid "Length"
 msgstr "Длина"
 
-#: ui/mainwindow.cpp:223 ui/mainwindow.cpp:238
+#: ui/mainwindow.cpp:251 ui/mainwindow.cpp:263
 #: ../bin/src/ui_seafilesettingspage.h:177
 msgid "Library"
 msgstr "Фонотека"
@@ -2973,7 +2979,7 @@ msgstr "Фонотека"
 msgid "Library advanced grouping"
 msgstr "Расширенная группировка фонотеки"
 
-#: ui/mainwindow.cpp:2539
+#: ui/mainwindow.cpp:2519
 msgid "Library rescan notice"
 msgstr "Уведомление о сканировании фонотеки"
 
@@ -3009,7 +3015,7 @@ msgstr "Загрузить обложку с диска"
 msgid "Load cover from disk..."
 msgstr "Загрузить обложку с диска…"
 
-#: playlist/playlistcontainer.cpp:291
+#: playlist/playlistcontainer.cpp:294
 msgid "Load playlist"
 msgstr "Загрузить плейлист"
 
@@ -3029,7 +3035,7 @@ msgstr "Загрузка база данных iPod"
 msgid "Loading smart playlist"
 msgstr "Загрузка умного плейлиста"
 
-#: library/librarymodel.cpp:167
+#: library/librarymodel.cpp:169
 msgid "Loading songs"
 msgstr "Загрузка песен"
 
@@ -3039,7 +3045,7 @@ msgstr "Загрузка песен"
 msgid "Loading stream"
 msgstr "Загрузка потока"
 
-#: playlist/songloaderinserter.cpp:129 ui/edittagdialog.cpp:247
+#: playlist/songloaderinserter.cpp:129 ui/edittagdialog.cpp:251
 msgid "Loading tracks"
 msgstr "Загрузка композиций"
 
@@ -3047,15 +3053,15 @@ msgstr "Загрузка композиций"
 msgid "Loading tracks info"
 msgstr "Загрузка информации о треках"
 
-#: library/librarymodel.cpp:162
-#: internet/podcasts/podcastdiscoverymodel.cpp:105 widgets/prettyimage.cpp:161
+#: library/librarymodel.cpp:164
+#: internet/podcasts/podcastdiscoverymodel.cpp:105 widgets/prettyimage.cpp:167
 #: widgets/widgetfadehelper.cpp:96 internet/vk/vkservice.cpp:513
 #: internet/vk/vksettingspage.cpp:125 ../bin/src/ui_addpodcastdialog.h:179
 #: ../bin/src/ui_searchpreview.h:105 ../bin/src/ui_organisedialog.h:261
 msgid "Loading..."
 msgstr "Загрузка…"
 
-#: core/commandlineoptions.cpp:168
+#: core/commandlineoptions.cpp:171
 msgid "Loads files/URLs, replacing current playlist"
 msgstr "Загрузка файлов или ссылок с заменой текущего плейлиста"
 
@@ -3174,11 +3180,11 @@ msgctxt "Label for button to enable/disable Enterprise background sound."
 msgid "Make it so!"
 msgstr "Да будет так!"
 
-#: internet/spotify/spotifyservice.cpp:667
+#: internet/spotify/spotifyservice.cpp:669
 msgid "Make playlist available offline"
 msgstr "Сделать плейлист доступным автономно"
 
-#: internet/lastfm/lastfmservice.cpp:278
+#: internet/lastfm/lastfmservice.cpp:280
 msgid "Malformed response"
 msgstr "Неправильный ответ"
 
@@ -3273,7 +3279,7 @@ msgstr "Месяцев"
 msgid "Mood"
 msgstr "Тон"
 
-#: moodbar/moodbarproxystyle.cpp:353
+#: moodbar/moodbarproxystyle.cpp:358
 #: ../bin/src/ui_appearancesettingspage.h:293
 msgid "Moodbar style"
 msgstr "Стиль индикатора тона"
@@ -3303,7 +3309,7 @@ msgstr "Точки монтирования"
 msgid "Move down"
 msgstr "Переместить вниз"
 
-#: ui/mainwindow.cpp:673 widgets/fileviewlist.cpp:42
+#: ui/mainwindow.cpp:695 widgets/fileviewlist.cpp:42
 msgid "Move to library..."
 msgstr "Переместить в фонотеку…"
 
@@ -3312,7 +3318,7 @@ msgstr "Переместить в фонотеку…"
 msgid "Move up"
 msgstr "Переместить вверх"
 
-#: transcoder/transcodedialog.cpp:225 ui/mainwindow.cpp:1955
+#: transcoder/transcodedialog.cpp:225 ui/mainwindow.cpp:1981
 #: internet/vk/vkservice.cpp:908
 msgid "Music"
 msgstr "Музыка"
@@ -3364,7 +3370,7 @@ msgstr "Прокси-сервер"
 msgid "Network Remote"
 msgstr "Удалённое управление"
 
-#: playlist/playlistdelegates.cpp:295 ui/edittagdialog.cpp:523
+#: playlist/playlistdelegates.cpp:295 ui/edittagdialog.cpp:531
 msgid "Never"
 msgstr "Никогда"
 
@@ -3383,11 +3389,11 @@ msgstr "Никогда не начинать воспроизведение"
 msgid "New folder"
 msgstr "Новая папка"
 
-#: ui/mainwindow.cpp:1792 ../bin/src/ui_mainwindow.h:693
+#: ui/mainwindow.cpp:1819 ../bin/src/ui_mainwindow.h:693
 msgid "New playlist"
 msgstr "Новый плейлист"
 
-#: library/libraryview.cpp:394
+#: library/libraryview.cpp:395
 msgid "New smart playlist..."
 msgstr "Новый умный плейлист…"
 
@@ -3407,7 +3413,7 @@ msgstr "Новые"
 msgid "Newest tracks"
 msgstr "Последние треки"
 
-#: ui/edittagdialog.cpp:168 ui/trackselectiondialog.cpp:49
+#: ui/edittagdialog.cpp:172 ui/trackselectiondialog.cpp:49
 msgid "Next"
 msgstr "Дальше"
 
@@ -3428,7 +3434,7 @@ msgstr "Без анализатора"
 msgid "No background image"
 msgstr "Нет фонового изображения"
 
-#: ui/albumcovermanager.cpp:786
+#: ui/albumcovermanager.cpp:789
 msgid "No covers to export."
 msgstr "Нет обложек для экспорта."
 
@@ -3436,7 +3442,7 @@ msgstr "Нет обложек для экспорта."
 msgid "No long blocks"
 msgstr "Без длинных блоков"
 
-#: playlist/playlistcontainer.cpp:376
+#: playlist/playlistcontainer.cpp:379
 msgid ""
 "No matches found.  Clear the search box to show the whole playlist again."
 msgstr "Совпадений не найдено. Очистите строку поиска, чтобы увидеть плейлист снова."
@@ -3450,7 +3456,7 @@ msgstr "Без коротких блоков"
 msgid "None"
 msgstr "Ничего"
 
-#: library/libraryview.cpp:639 ui/mainwindow.cpp:2268 ui/mainwindow.cpp:2416
+#: library/libraryview.cpp:640 ui/mainwindow.cpp:2282 ui/mainwindow.cpp:2428
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Ни одна из выбранных песен не будет скопирована на устройство"
 
@@ -3470,19 +3476,19 @@ msgstr "Не доступно при использовании динамиче
 msgid "Not connected"
 msgstr "Не подключено"
 
-#: internet/lastfm/lastfmservice.cpp:269
+#: internet/lastfm/lastfmservice.cpp:271
 msgid "Not enough content"
 msgstr "Недостаточно содержания"
 
-#: internet/lastfm/lastfmservice.cpp:273
+#: internet/lastfm/lastfmservice.cpp:275
 msgid "Not enough fans"
 msgstr "Недостаточно фанатов"
 
-#: internet/lastfm/lastfmservice.cpp:271
+#: internet/lastfm/lastfmservice.cpp:273
 msgid "Not enough members"
 msgstr "Недостаточно участников"
 
-#: internet/lastfm/lastfmservice.cpp:275
+#: internet/lastfm/lastfmservice.cpp:277
 msgid "Not enough neighbors"
 msgstr "Недостаточно соседей"
 
@@ -3519,7 +3525,7 @@ msgstr "Сейчас проигрывается"
 msgid "Number of episodes to show"
 msgstr "Количество показываемых выпусков"
 
-#: ui/notificationssettingspage.cpp:36
+#: ui/notificationssettingspage.cpp:38
 msgid "OSD Preview"
 msgstr "Предпросмотр OSD"
 
@@ -3613,7 +3619,7 @@ msgid "Open in Google Drive"
 msgstr "Открыть в Google Диске"
 
 #: devices/deviceview.cpp:224 globalsearch/globalsearchview.cpp:461
-#: internet/core/internetservice.cpp:105 library/libraryview.cpp:383
+#: internet/core/internetservice.cpp:62 library/libraryview.cpp:384
 #: widgets/fileviewlist.cpp:36
 msgid "Open in new playlist"
 msgstr "Открыть в новом плейлисте"
@@ -3632,7 +3638,7 @@ msgstr "Открыть в браузере"
 msgid "Open..."
 msgstr "Открыть…"
 
-#: internet/lastfm/lastfmservice.cpp:255
+#: internet/lastfm/lastfmservice.cpp:257
 msgid "Operation failed"
 msgstr "Операция не удалась"
 
@@ -3658,7 +3664,7 @@ msgstr "Opus"
 msgid "Organise Files"
 msgstr "Упорядочить файлы"
 
-#: library/libraryview.cpp:404 ui/mainwindow.cpp:676
+#: library/libraryview.cpp:405 ui/mainwindow.cpp:698
 msgid "Organise files..."
 msgstr "Упорядочить файлы…"
 
@@ -3685,7 +3691,7 @@ msgstr "Год выхода оригинала - Альбом"
 msgid "Original year tag support"
 msgstr "Поддержка года выхода оригинала"
 
-#: core/commandlineoptions.cpp:170
+#: core/commandlineoptions.cpp:173
 msgid "Other options"
 msgstr "Другие настройки"
 
@@ -3734,12 +3740,12 @@ msgstr "Вечеринка"
 msgid "Password"
 msgstr "Пароль"
 
-#: core/globalshortcuts.cpp:50 ui/mainwindow.cpp:1107 ui/mainwindow.cpp:1603
+#: core/globalshortcuts.cpp:50 ui/mainwindow.cpp:1134 ui/mainwindow.cpp:1630
 #: ui/qtsystemtrayicon.cpp:175 wiimotedev/wiimotesettingspage.cpp:114
 msgid "Pause"
 msgstr "Пауза"
 
-#: core/commandlineoptions.cpp:152
+#: core/commandlineoptions.cpp:154
 msgid "Pause playback"
 msgstr "Приостановить воспроизведение"
 
@@ -3758,12 +3764,12 @@ msgstr "Исполнитель"
 msgid "Pixel"
 msgstr "Пиксель"
 
-#: widgets/fancytabwidget.cpp:664
+#: widgets/fancytabwidget.cpp:644
 msgid "Plain sidebar"
 msgstr "Нормальная боковая панель"
 
-#: core/globalshortcuts.cpp:49 ui/mainwindow.cpp:648 ui/mainwindow.cpp:1073
-#: ui/mainwindow.cpp:1092 ui/mainwindow.cpp:1607 ui/qtsystemtrayicon.cpp:164
+#: core/globalshortcuts.cpp:49 ui/mainwindow.cpp:670 ui/mainwindow.cpp:1100
+#: ui/mainwindow.cpp:1119 ui/mainwindow.cpp:1634 ui/qtsystemtrayicon.cpp:164
 #: ui/qtsystemtrayicon.cpp:188 wiimotedev/wiimotesettingspage.cpp:107
 #: ../bin/src/ui_mainwindow.h:659
 msgid "Play"
@@ -3773,7 +3779,7 @@ msgstr "Воспроизвести"
 msgid "Play count"
 msgstr "Количество проигрываний"
 
-#: core/commandlineoptions.cpp:151
+#: core/commandlineoptions.cpp:153
 msgid "Play if stopped, pause if playing"
 msgstr "Воспроизвести если остановлено, приостановить если воспроизводится"
 
@@ -3782,7 +3788,7 @@ msgstr "Воспроизвести если остановлено, приост
 msgid "Play if there is nothing already playing"
 msgstr "Проиграть, если ничего не проигрывается"
 
-#: core/commandlineoptions.cpp:169
+#: core/commandlineoptions.cpp:172
 msgid "Play the <n>th track in the playlist"
 msgstr "Воспроизвести <n>-ную композицию в плейлисте"
 
@@ -3794,11 +3800,11 @@ msgstr "Воспроизведение/Пауза"
 msgid "Playback"
 msgstr "Проигрывание"
 
-#: core/commandlineoptions.cpp:149
+#: core/commandlineoptions.cpp:151
 msgid "Player options"
 msgstr "Настройки проигрывателя"
 
-#: playlist/playlistcontainer.cpp:287 playlist/playlistlistcontainer.cpp:228
+#: playlist/playlistcontainer.cpp:290 playlist/playlistlistcontainer.cpp:228
 #: playlist/playlistmanager.cpp:86 playlist/playlistmanager.cpp:155
 #: playlist/playlistmanager.cpp:495 playlist/playlisttabbar.cpp:366
 msgid "Playlist"
@@ -3808,7 +3814,7 @@ msgstr "Плейлист"
 msgid "Playlist finished"
 msgstr "Плейлист закончился"
 
-#: core/commandlineoptions.cpp:166
+#: core/commandlineoptions.cpp:169
 #: ../bin/src/ui_playlistsaveoptionsdialog.h:94
 msgid "Playlist options"
 msgstr "Настройки плейлиста"
@@ -3817,7 +3823,7 @@ msgstr "Настройки плейлиста"
 msgid "Playlist type"
 msgstr "Тип плейлиста"
 
-#: internet/soundcloud/soundcloudservice.cpp:132 ui/mainwindow.cpp:244
+#: internet/soundcloud/soundcloudservice.cpp:132 ui/mainwindow.cpp:269
 msgid "Playlists"
 msgstr "Списки"
 
@@ -3917,7 +3923,7 @@ msgstr "Настройки OSD"
 msgid "Preview"
 msgstr "Предпросмотр"
 
-#: ui/edittagdialog.cpp:166 ui/trackselectiondialog.cpp:47
+#: ui/edittagdialog.cpp:170 ui/trackselectiondialog.cpp:47
 msgid "Previous"
 msgstr "Предыдущий"
 
@@ -3926,7 +3932,7 @@ msgstr "Предыдущий"
 msgid "Previous track"
 msgstr "Предыдущий трек"
 
-#: core/commandlineoptions.cpp:176
+#: core/commandlineoptions.cpp:179
 msgid "Print out version information"
 msgstr "Вывести информацию о версии"
 
@@ -3977,12 +3983,12 @@ msgstr "Опрашиваем устройство…"
 msgid "Queue Manager"
 msgstr "Управление очередью"
 
-#: ui/mainwindow.cpp:1700
+#: ui/mainwindow.cpp:1727
 msgid "Queue selected tracks"
 msgstr "Выбранные треки в очередь"
 
-#: globalsearch/globalsearchview.cpp:466 library/libraryview.cpp:388
-#: ui/mainwindow.cpp:1698
+#: globalsearch/globalsearchview.cpp:466 library/libraryview.cpp:389
+#: ui/mainwindow.cpp:1725
 msgid "Queue track"
 msgstr "Трек в очередь"
 
@@ -4036,7 +4042,7 @@ msgid "Rating"
 msgstr "Рейтинг"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:309
-#: ui/albumcovermanager.cpp:218
+#: ui/albumcovermanager.cpp:221
 msgid "Really cancel?"
 msgstr "Действительно отменить?"
 
@@ -4114,7 +4120,7 @@ msgstr "Удалить из Моей музыки"
 msgid "Remove from bookmarks"
 msgstr "Удалить из закладок"
 
-#: internet/spotify/spotifyservice.cpp:679 ../bin/src/ui_mainwindow.h:688
+#: internet/spotify/spotifyservice.cpp:681 ../bin/src/ui_mainwindow.h:688
 msgid "Remove from playlist"
 msgstr "Удалить из плейлиста"
 
@@ -4159,7 +4165,7 @@ msgid "Repeat track"
 msgstr "Повторять композицию"
 
 #: devices/deviceview.cpp:221 globalsearch/globalsearchview.cpp:457
-#: internet/core/internetservice.cpp:93 library/libraryview.cpp:380
+#: internet/core/internetservice.cpp:55 library/libraryview.cpp:381
 #: widgets/fileviewlist.cpp:34
 msgid "Replace current playlist"
 msgstr "Заменить текущий плейлист"
@@ -4192,7 +4198,7 @@ msgstr "Требовать код аутентификации"
 msgid "Reset"
 msgstr "Сброс"
 
-#: ui/edittagdialog.cpp:794 ../bin/src/ui_edittagdialog.h:713
+#: ui/edittagdialog.cpp:802 ../bin/src/ui_edittagdialog.h:713
 msgid "Reset play counts"
 msgstr "Сбросить счётчики воспроизведения"
 
@@ -4200,7 +4206,7 @@ msgstr "Сбросить счётчики воспроизведения"
 msgid "Restart song, then jump to previous if pressed again"
 msgstr "Перезапустит песню при повторном переходе к предыдущей "
 
-#: core/commandlineoptions.cpp:164
+#: core/commandlineoptions.cpp:167
 msgid ""
 "Restart the track, or play the previous track if within 8 seconds of start."
 msgstr "Перезапустить трек или проиграть предыдущий, если не прошло 8 секунд от начала."
@@ -4284,7 +4290,7 @@ msgstr "Сохранить обложку на диск…"
 msgid "Save current grouping"
 msgstr "Сохранить текущую группу"
 
-#: widgets/prettyimage.cpp:178 widgets/prettyimage.cpp:223
+#: widgets/prettyimage.cpp:184 widgets/prettyimage.cpp:229
 msgid "Save image"
 msgstr "Сохранить изображение"
 
@@ -4326,7 +4332,7 @@ msgstr "Менеджер сохранённых групп"
 msgid "Saving songs statistics into songs files"
 msgstr "Сохранение статистики композиций в файлы"
 
-#: ui/edittagdialog.cpp:703 ui/trackselectiondialog.cpp:255
+#: ui/edittagdialog.cpp:711 ui/trackselectiondialog.cpp:255
 msgid "Saving tracks"
 msgstr "Сохранение композиций"
 
@@ -4356,7 +4362,7 @@ msgstr "Seafile"
 msgid "Search"
 msgstr "Поиск"
 
-#: ui/mainwindow.cpp:235 ../bin/src/ui_globalsearchsettingspage.h:141
+#: ui/mainwindow.cpp:260 ../bin/src/ui_globalsearchsettingspage.h:141
 msgctxt "Global search settings dialog title."
 msgid "Search"
 msgstr "Поиск"
@@ -4431,11 +4437,11 @@ msgstr "Перемотка назад"
 msgid "Seek forward"
 msgstr "Перемотка вперед"
 
-#: core/commandlineoptions.cpp:162
+#: core/commandlineoptions.cpp:165
 msgid "Seek the currently playing track by a relative amount"
 msgstr "Перемотать текущий трек на относительную позицию"
 
-#: core/commandlineoptions.cpp:160
+#: core/commandlineoptions.cpp:163
 msgid "Seek the currently playing track to an absolute position"
 msgstr "Перемотать текущую трек на абсолютную позицию"
 
@@ -4495,16 +4501,16 @@ msgstr "Адрес сервера"
 msgid "Server details"
 msgstr "Информация о сервере"
 
-#: internet/lastfm/lastfmservice.cpp:261
+#: internet/lastfm/lastfmservice.cpp:263
 msgid "Service offline"
 msgstr "Служба недоступна"
 
-#: ui/mainwindow.cpp:1737
+#: ui/mainwindow.cpp:1764
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr "Установить %1 в \"%2\"…"
 
-#: core/commandlineoptions.cpp:155
+#: core/commandlineoptions.cpp:158
 msgid "Set the volume to <value> percent"
 msgstr "Установить громкость в <value> процентов"
 
@@ -4571,11 +4577,11 @@ msgstr "Всплывающие сообщения из системного ло
 msgid "Show a pretty OSD"
 msgstr "Показывать OSD"
 
-#: widgets/nowplayingwidget.cpp:140
+#: widgets/nowplayingwidget.cpp:142
 msgid "Show above status bar"
 msgstr "Показать над строкой состояния"
 
-#: ui/mainwindow.cpp:615
+#: ui/mainwindow.cpp:637
 msgid "Show all songs"
 msgstr "Показать все композиции"
 
@@ -4591,7 +4597,7 @@ msgstr "Показывать обложки в фонотеке"
 msgid "Show dividers"
 msgstr "Показывать разделители"
 
-#: ui/albumcoverchoicecontroller.cpp:72 widgets/prettyimage.cpp:176
+#: ui/albumcoverchoicecontroller.cpp:72 widgets/prettyimage.cpp:182
 msgid "Show fullsize..."
 msgstr "Показать в полный размер…"
 
@@ -4599,28 +4605,28 @@ msgstr "Показать в полный размер…"
 msgid "Show groups in global search result"
 msgstr "Показывать группы в результатах глобального поиска"
 
-#: library/libraryview.cpp:422 ui/mainwindow.cpp:686
+#: library/libraryview.cpp:423 ui/mainwindow.cpp:708
 #: widgets/fileviewlist.cpp:53
 msgid "Show in file browser..."
 msgstr "Показать в диспетчере файлов"
 
-#: ui/mainwindow.cpp:688
+#: ui/mainwindow.cpp:710
 msgid "Show in library..."
 msgstr "Показать в фонотеке…"
 
-#: library/libraryview.cpp:425
+#: library/libraryview.cpp:426
 msgid "Show in various artists"
 msgstr "Показать в \"Различных исполнителях\""
 
-#: moodbar/moodbarproxystyle.cpp:348
+#: moodbar/moodbarproxystyle.cpp:353
 msgid "Show moodbar"
 msgstr "Показывать индикатор тона"
 
-#: ui/mainwindow.cpp:617
+#: ui/mainwindow.cpp:639
 msgid "Show only duplicates"
 msgstr "Показывать только повторяющиеся"
 
-#: ui/mainwindow.cpp:619
+#: ui/mainwindow.cpp:641
 msgid "Show only untagged"
 msgstr "Показывать только без тегов"
 
@@ -4700,7 +4706,7 @@ msgstr "Размер:"
 msgid "Ska"
 msgstr "Ска"
 
-#: core/commandlineoptions.cpp:153
+#: core/commandlineoptions.cpp:156
 msgid "Skip backwards in playlist"
 msgstr "Переместить назад в плейлисте"
 
@@ -4708,23 +4714,23 @@ msgstr "Переместить назад в плейлисте"
 msgid "Skip count"
 msgstr "Пропустить подсчёт"
 
-#: core/commandlineoptions.cpp:154
+#: core/commandlineoptions.cpp:157
 msgid "Skip forwards in playlist"
 msgstr "Переместить вперед в плейлисте"
 
-#: ui/mainwindow.cpp:1711
+#: ui/mainwindow.cpp:1738
 msgid "Skip selected tracks"
 msgstr "Пропустить выбранные треки"
 
-#: ui/mainwindow.cpp:1709
+#: ui/mainwindow.cpp:1736
 msgid "Skip track"
 msgstr "Пропустить трек"
 
-#: widgets/nowplayingwidget.cpp:96
+#: widgets/nowplayingwidget.cpp:98
 msgid "Small album cover"
 msgstr "Маленькая обложка альбома"
 
-#: widgets/fancytabwidget.cpp:663
+#: widgets/fancytabwidget.cpp:643
 msgid "Small sidebar"
 msgstr "Узкая боковая панель"
 
@@ -4732,7 +4738,7 @@ msgstr "Узкая боковая панель"
 msgid "Smart playlist"
 msgstr "Умный плейлист"
 
-#: library/librarymodel.cpp:1362
+#: library/librarymodel.cpp:1364
 msgid "Smart playlists"
 msgstr "Умные плейлисты"
 
@@ -4748,7 +4754,7 @@ msgstr "Софт-рок"
 msgid "Song Information"
 msgstr "Тексты песен"
 
-#: ui/mainwindow.cpp:255
+#: ui/mainwindow.cpp:280
 msgid "Song info"
 msgstr "Песня"
 
@@ -4805,7 +4811,7 @@ msgstr "Spotify"
 msgid "Spotify login error"
 msgstr "Ошибка при входе на Spotify"
 
-#: internet/spotify/spotifyservice.cpp:842
+#: internet/spotify/spotifyservice.cpp:844
 msgid "Spotify playlist's URL"
 msgstr "Адрес плейлиста Spotify"
 
@@ -4817,7 +4823,7 @@ msgstr "Модуль Spotify"
 msgid "Spotify plugin not installed"
 msgstr "Модуль Spotify не установлен"
 
-#: internet/spotify/spotifyservice.cpp:833
+#: internet/spotify/spotifyservice.cpp:835
 msgid "Spotify song's URL"
 msgstr "Адрес песни Spotify"
 
@@ -4825,7 +4831,7 @@ msgstr "Адрес песни Spotify"
 msgid "Standard"
 msgstr "Стандартнoe"
 
-#: internet/spotify/spotifyservice.cpp:416
+#: internet/spotify/spotifyservice.cpp:417
 #: internet/subsonic/subsonicservice.cpp:115
 msgid "Starred"
 msgstr "Оцененные"
@@ -4834,7 +4840,7 @@ msgstr "Оцененные"
 msgid "Start ripping"
 msgstr "Начать конвертирование"
 
-#: core/commandlineoptions.cpp:150
+#: core/commandlineoptions.cpp:152
 msgid "Start the playlist currently playing"
 msgstr "Запустить проигрываемый сейчас плейлист"
 
@@ -4875,13 +4881,17 @@ msgstr "Останавливать после каждого трека"
 msgid "Stop after every track"
 msgstr "Останавливать после каждого трека"
 
-#: ui/mainwindow.cpp:652 ../bin/src/ui_mainwindow.h:663
+#: ui/mainwindow.cpp:674 ../bin/src/ui_mainwindow.h:663
 msgid "Stop after this track"
 msgstr "Остановить после этого трека"
 
-#: core/commandlineoptions.cpp:152
+#: core/commandlineoptions.cpp:154
 msgid "Stop playback"
 msgstr "Остановить воспроизведение"
+
+#: core/commandlineoptions.cpp:155
+msgid "Stop playback after current track"
+msgstr "Остановить после текущего трека"
 
 #: core/globalshortcuts.cpp:55
 msgid "Stop playing after current track"
@@ -4955,15 +4965,15 @@ msgstr "Поддерживаемые форматы"
 msgid "Synchronize statistics to files now"
 msgstr "Синхронизировать статистику в файлы прямо сейчас"
 
-#: internet/spotify/spotifyservice.cpp:706
+#: internet/spotify/spotifyservice.cpp:708
 msgid "Syncing Spotify inbox"
 msgstr "Синхронизация входящих Spotify"
 
-#: internet/spotify/spotifyservice.cpp:700
+#: internet/spotify/spotifyservice.cpp:702
 msgid "Syncing Spotify playlist"
 msgstr "Синхронизация плейлистов Spotify"
 
-#: internet/spotify/spotifyservice.cpp:711
+#: internet/spotify/spotifyservice.cpp:713
 msgid "Syncing Spotify starred tracks"
 msgstr "Синхронизация оцененных треков Spotify"
 
@@ -4971,7 +4981,7 @@ msgstr "Синхронизация оцененных треков Spotify"
 msgid "System colors"
 msgstr "Системные цвета"
 
-#: widgets/fancytabwidget.cpp:665
+#: widgets/fancytabwidget.cpp:645
 msgid "Tabs on top"
 msgstr "Вкладки вверху"
 
@@ -5027,13 +5037,13 @@ msgid ""
 "license key. Visit subsonic.org for details."
 msgstr "Пробный период для сервера Subsonic закончен. Пожалуйста, поддержите разработчика, чтобы получить лицензионный ключ. Посетите subsonic.org для подробной информации."
 
-#: ui/mainwindow.cpp:2530
+#: ui/mainwindow.cpp:2510
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
 msgstr "Обновленная версия Clementine требует повторного сканирования фонотеки из-за следующих новых особенностей:"
 
-#: library/libraryview.cpp:561
+#: library/libraryview.cpp:562
 msgid "There are other songs in this album"
 msgstr "В альбоме присутствуют другие композиции"
 
@@ -5069,7 +5079,7 @@ msgid ""
 "continue?"
 msgstr "Эти файлы будут удалены с устройства. Вы действительно хотите продолжить?"
 
-#: library/libraryview.cpp:645 ui/mainwindow.cpp:2318 widgets/fileview.cpp:187
+#: library/libraryview.cpp:646 ui/mainwindow.cpp:2330 widgets/fileview.cpp:187
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -5140,7 +5150,7 @@ msgstr "Это устройство подключено впервые. Clement
 msgid "This option can be changed in the \"Behavior\" preferences"
 msgstr "Эта опция может быть изменена в настройках на вкладке \"Поведение\""
 
-#: internet/lastfm/lastfmservice.cpp:263
+#: internet/lastfm/lastfmservice.cpp:265
 msgid "This stream is for paid subscribers only"
 msgstr "Поток только для платных подписчиков"
 
@@ -5172,7 +5182,7 @@ msgstr "Включить OSD"
 msgid "Toggle fullscreen"
 msgstr "Развернуть на весь экран"
 
-#: ui/mainwindow.cpp:1702
+#: ui/mainwindow.cpp:1729
 msgid "Toggle queue status"
 msgstr "Переключить состояние очереди"
 
@@ -5180,7 +5190,7 @@ msgstr "Переключить состояние очереди"
 msgid "Toggle scrobbling"
 msgstr "Вкл/выкл скробблинг"
 
-#: core/commandlineoptions.cpp:171
+#: core/commandlineoptions.cpp:174
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "Переключить видимость OSD"
 
@@ -5196,7 +5206,7 @@ msgstr "Слишком много перенаправлений"
 msgid "Top Rated"
 msgstr "Высоко оценённые"
 
-#: internet/spotify/spotifyservice.cpp:430
+#: internet/spotify/spotifyservice.cpp:431
 msgid "Top tracks"
 msgstr "Самые популярные"
 
@@ -5259,7 +5269,7 @@ msgstr "Выключить"
 msgid "URI"
 msgstr "URI"
 
-#: core/commandlineoptions.cpp:148
+#: core/commandlineoptions.cpp:150
 msgid "URL(s)"
 msgstr "Ссылки"
 
@@ -5277,12 +5287,12 @@ msgstr "Невозможно подключиться"
 msgid "Unable to download %1 (%2)"
 msgstr "Невозможно загрузить %1 (%2)"
 
-#: core/song.cpp:435 library/librarymodel.cpp:372 library/librarymodel.cpp:377
-#: library/librarymodel.cpp:381 library/librarymodel.cpp:1154
+#: core/song.cpp:435 library/librarymodel.cpp:374 library/librarymodel.cpp:379
+#: library/librarymodel.cpp:383 library/librarymodel.cpp:1156
 #: library/savedgroupingmanager.cpp:103 playlist/playlistdelegates.cpp:305
 #: playlist/playlistmanager.cpp:502 playlist/playlistmanager.cpp:503
-#: ui/albumcoverchoicecontroller.cpp:126 ui/edittagdialog.cpp:455
-#: ui/edittagdialog.cpp:499
+#: ui/albumcoverchoicecontroller.cpp:126 ui/edittagdialog.cpp:463
+#: ui/edittagdialog.cpp:507
 msgid "Unknown"
 msgstr "Неизвестный"
 
@@ -5291,7 +5301,7 @@ msgid "Unknown content-type"
 msgstr "Неизвестный тип контента"
 
 #: internet/digitally/digitallyimportedclient.cpp:74
-#: internet/lastfm/lastfmservice.cpp:282
+#: internet/lastfm/lastfmservice.cpp:284
 msgid "Unknown error"
 msgstr "Неизвестная ошибка"
 
@@ -5299,11 +5309,11 @@ msgstr "Неизвестная ошибка"
 msgid "Unset cover"
 msgstr "Удалить обложку"
 
-#: ui/mainwindow.cpp:1707
+#: ui/mainwindow.cpp:1734
 msgid "Unskip selected tracks"
 msgstr "Не пропускать выбранные треки"
 
-#: ui/mainwindow.cpp:1705
+#: ui/mainwindow.cpp:1732
 msgid "Unskip track"
 msgstr "Не пропускать трек"
 
@@ -5312,7 +5322,7 @@ msgstr "Не пропускать трек"
 msgid "Unsubscribe"
 msgstr "Отписаться"
 
-#: songinfo/songkickconcerts.cpp:173
+#: songinfo/songkickconcerts.cpp:174
 msgid "Upcoming Concerts"
 msgstr "Предстоящие концерты"
 
@@ -5354,7 +5364,7 @@ msgstr "Обновление %1%…"
 msgid "Updating library"
 msgstr "Обновление фонотеки"
 
-#: core/commandlineoptions.cpp:148
+#: core/commandlineoptions.cpp:150
 msgid "Usage"
 msgstr "Использование"
 
@@ -5459,8 +5469,8 @@ msgstr "VBR MP3"
 msgid "Variable bit rate"
 msgstr "Переменный битрейт"
 
-#: globalsearch/globalsearchmodel.cpp:107 library/librarymodel.cpp:298
-#: playlist/playlistmanager.cpp:514 ui/albumcovermanager.cpp:270
+#: globalsearch/globalsearchmodel.cpp:109 library/librarymodel.cpp:300
+#: playlist/playlistmanager.cpp:514 ui/albumcovermanager.cpp:273
 msgid "Various artists"
 msgstr "Различные исполнители"
 
@@ -5611,13 +5621,13 @@ msgstr "Windows Media"
 msgid "Without cover:"
 msgstr "Без обложек:"
 
-#: library/libraryview.cpp:562
+#: library/libraryview.cpp:563
 msgid ""
 "Would you like to move the other songs in this album to Various Artists as "
 "well?"
 msgstr "Хотите ли вы переместить и другие песни из этого альбома в \"Различные исполнители?"
 
-#: ui/mainwindow.cpp:2537
+#: ui/mainwindow.cpp:2517
 msgid "Would you like to run a full rescan right now?"
 msgstr "Желаете запустить повторное сканирование?"
 
@@ -5756,7 +5766,7 @@ msgstr "Учётные данные Last.fm введены неверно"
 msgid "Your Magnatune credentials were incorrect"
 msgstr "Учётные данные Magnatune введены неверно"
 
-#: library/libraryview.cpp:352
+#: library/libraryview.cpp:353
 msgid "Your library is empty!"
 msgstr "Ваша фонотека пуста!"
 
@@ -5820,7 +5830,7 @@ msgstr "между"
 msgid "biggest first"
 msgstr "наибольшие сначала"
 
-#: playlist/playlistview.cpp:232 ui/edittagdialog.cpp:492
+#: playlist/playlistview.cpp:242 ui/edittagdialog.cpp:500
 msgid "bpm"
 msgstr "bpm"
 
@@ -5873,8 +5883,8 @@ msgstr "в последние"
 
 #: internet/spotify/spotifysettingspage.cpp:62
 #: internet/spotify/spotifysettingspage.cpp:63
-#: internet/spotify/spotifysettingspage.cpp:64 playlist/playlistview.cpp:236
-#: ui/edittagdialog.cpp:494
+#: internet/spotify/spotifysettingspage.cpp:64 playlist/playlistview.cpp:246
+#: ui/edittagdialog.cpp:502
 msgid "kbps"
 msgstr "кбит/с"
 
@@ -5916,7 +5926,7 @@ msgstr "сначала самые старые"
 msgid "on"
 msgstr "на"
 
-#: core/commandlineoptions.cpp:148
+#: core/commandlineoptions.cpp:150
 msgid "options"
 msgstr "настройки"
 

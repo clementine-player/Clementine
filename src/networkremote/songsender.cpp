@@ -17,14 +17,15 @@
 
 #include "songsender.h"
 
-#include "networkremote.h"
-
 #include <QFileInfo>
 
 #include "core/application.h"
 #include "core/logging.h"
 #include "core/utilities.h"
 #include "library/librarybackend.h"
+#include "networkremote/networkremote.h"
+#include "networkremote/outgoingdatacreator.h"
+#include "networkremote/remoteclient.h"
 #include "playlist/playlistitem.h"
 
 const quint32 SongSender::kFileChunkSize = 100000;  // in Bytes
@@ -32,16 +33,18 @@ const quint32 SongSender::kFileChunkSize = 100000;  // in Bytes
 SongSender::SongSender(Application* app, RemoteClient* client)
     : app_(app),
       client_(client),
-      transcoder_(new Transcoder(this, NetworkRemote::kTranscoderSettingPostfix)) {
+      transcoder_(
+          new Transcoder(this, NetworkRemote::kTranscoderSettingPostfix)) {
   QSettings s;
   s.beginGroup(NetworkRemote::kSettingsGroup);
 
   transcode_lossless_files_ = s.value("convert_lossless", false).toBool();
 
   // Load preset
-  QString last_output_format = s.value("last_output_format", "audio/x-vorbis").toString();
+  QString last_output_format =
+      s.value("last_output_format", "audio/x-vorbis").toString();
   QList<TranscoderPreset> presets = transcoder_->GetAllPresets();
-  for (int i = 0; i<presets.count(); ++i) {
+  for (int i = 0; i < presets.count(); ++i) {
     if (last_output_format == presets.at(i).codec_mimetype_) {
       transcoder_preset_ = presets.at(i);
       break;
@@ -58,8 +61,9 @@ SongSender::SongSender(Application* app, RemoteClient* client)
 
 SongSender::~SongSender() {
   disconnect(transcoder_, SIGNAL(JobComplete(QString, QString, bool)), this,
-          SLOT(TranscodeJobComplete(QString, QString, bool)));
-  disconnect(transcoder_, SIGNAL(AllJobsComplete()), this, SLOT(StartTransfer()));
+             SLOT(TranscodeJobComplete(QString, QString, bool)));
+  disconnect(transcoder_, SIGNAL(AllJobsComplete()), this,
+             SLOT(StartTransfer()));
   transcoder_->Cancel();
 }
 
@@ -102,8 +106,7 @@ void SongSender::SendSongs(const pb::remote::RequestDownloadSongs& request) {
 void SongSender::TranscodeLosslessFiles() {
   for (DownloadItem item : download_queue_) {
     // Check only lossless files
-    if (!item.song_.IsFileLossless())
-      continue;
+    if (!item.song_.IsFileLossless()) continue;
 
     // Add the file to the transcoder
     QString local_file = item.song_.url().toLocalFile();
@@ -122,7 +125,8 @@ void SongSender::TranscodeLosslessFiles() {
   }
 }
 
-void SongSender::TranscodeJobComplete(const QString& input, const QString& output, bool success) {
+void SongSender::TranscodeJobComplete(const QString& input,
+                                      const QString& output, bool success) {
   qLog(Debug) << input << "transcoded to" << output << success;
 
   // If it wasn't successful send original file
@@ -204,7 +208,8 @@ void SongSender::OfferNextSong() {
     chunk->set_file_number(item.song_no_);
     chunk->set_size(file.size());
 
-    OutgoingDataCreator::CreateSong(item.song_, QImage(), -1, chunk->mutable_song_metadata());
+    OutgoingDataCreator::CreateSong(item.song_, QImage(), -1,
+                                    chunk->mutable_song_metadata());
   }
 
   client_->SendData(&msg);
@@ -215,8 +220,7 @@ void SongSender::ResponseSongOffer(bool accepted) {
 
   // Get the item and send the single song
   DownloadItem item = download_queue_.dequeue();
-  if (accepted)
-    SendSingleSong(item);
+  if (accepted) SendSingleSong(item);
 
   // And offer the next song
   OfferNextSong();
@@ -273,7 +277,8 @@ void SongSender::SendSingleSong(DownloadItem download_item) {
       int i = app_->playlist_manager()->active()->current_row();
       pb::remote::SongMetadata* song_metadata =
           msg.mutable_response_song_file_chunk()->mutable_song_metadata();
-      OutgoingDataCreator::CreateSong(download_item.song_, null_image, i,song_metadata);
+      OutgoingDataCreator::CreateSong(download_item.song_, null_image, i,
+                                      song_metadata);
 
       // if the file was transcoded, we have to change the filename and filesize
       if (is_transcoded) {
@@ -341,7 +346,7 @@ void SongSender::SendPlaylist(int playlist_id) {
   }
 }
 
-void SongSender::SendUrls(const pb::remote::RequestDownloadSongs &request) {
+void SongSender::SendUrls(const pb::remote::RequestDownloadSongs& request) {
   SongList song_list;
 
   // First gather all valid songs

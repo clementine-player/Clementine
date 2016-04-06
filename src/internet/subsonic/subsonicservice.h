@@ -122,6 +122,8 @@ class SubsonicService : public InternetService {
   static const char* kFtsTable;
 
   static const int kMaxRedirects;
+  static const int kCoverArtSize;
+
 
 signals:
   void LoginStateChanged(SubsonicService::LoginState newstate);
@@ -181,6 +183,7 @@ class SubsonicLibraryScanner : public QObject {
 
   static const int kAlbumChunkSize;
   static const int kConcurrentRequests;
+  static const int kCoverArtSize;
 
 signals:
   void ScanFinished();
