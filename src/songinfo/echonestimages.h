@@ -22,7 +22,7 @@
 
 #include <QMultiMap>
 
-#include <echonest/Artist.h>
+#include <Artist.h>
 
 #include "songinfo/songinfoprovider.h"
 
