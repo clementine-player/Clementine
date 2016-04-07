@@ -165,7 +165,7 @@ const int kTrackPositionUpdateTimeMs = 1000;
 }
 
 MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
-                       QWidget* parent)
+                       const CommandlineOptions& options, QWidget* parent)
     : QMainWindow(parent),
       ui_(new Ui_MainWindow),
       thumbbar_(new Windows7ThumbBar(this)),
@@ -1038,7 +1038,10 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
 
   CheckFullRescanRevisions();
 
-  LoadPlaybackStatus();
+  CommandlineOptionsReceived(options);
+
+  if (!options.contains_play_options())
+    LoadPlaybackStatus();
 
   qLog(Debug) << "Started";
 }
