@@ -118,7 +118,8 @@ Playlist::Playlist(PlaylistBackend* backend, TaskManager* task_manager,
       playlist_sequence_(nullptr),
       ignore_sorting_(false),
       undo_stack_(new QUndoStack(this)),
-      special_type_(special_type) {
+      special_type_(special_type),
+      cancel_restore_(false) {
   undo_stack_->setUndoLimit(kUndoStackSize);
 
   connect(this, SIGNAL(rowsInserted(const QModelIndex&, int, int)),
@@ -1470,6 +1471,7 @@ void Playlist::Restore() {
   virtual_items_.clear();
   library_items_by_id_.clear();
 
+  cancel_restore_ = false;
   QFuture<QList<PlaylistItemPtr>> future =
       QtConcurrent::run(backend_, &PlaylistBackend::GetPlaylistItems, id_);
   NewClosure(future, this, SLOT(ItemsLoaded(QFuture<PlaylistItemList>)),
@@ -1477,6 +1479,9 @@ void Playlist::Restore() {
 }
 
 void Playlist::ItemsLoaded(QFuture<PlaylistItemList> future) {
+  if (cancel_restore_)
+    return;
+
   PlaylistItemList items = future.result();
 
   // backend returns empty elements for library items which it couldn't
@@ -1749,6 +1754,9 @@ void Playlist::UpdateScrobblePoint(qint64 seek_point_nanosec) {
 }
 
 void Playlist::Clear() {
+  // If loading songs from session restore async, don't insert them
+  cancel_restore_ = true;
+
   const int count = items_.count();
 
   if (count > kUndoItemLimit) {
