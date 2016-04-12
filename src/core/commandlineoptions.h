@@ -60,6 +60,7 @@ class CommandlineOptions {
   bool Parse();
 
   bool is_empty() const;
+  bool contains_play_options() const;
 
   UrlListAction url_list_action() const { return url_list_action_; }
   PlayerAction player_action() const { return player_action_; }
