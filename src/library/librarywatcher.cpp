@@ -43,6 +43,11 @@
 #undef RemoveDirectory
 #endif
 
+namespace {
+static const char *kNoMediaFile = ".nomedia";
+static const char *kNoMusicFile   = ".nomusic";
+}
+
 QStringList LibraryWatcher::sValidImages;
 
 const char* LibraryWatcher::kSettingsGroup = "LibraryWatcher";
@@ -219,6 +224,7 @@ void LibraryWatcher::ScanSubdirectory(const QString& path,
                                       ScanTransaction* t,
                                       bool force_noincremental) {
   QFileInfo path_info(path);
+  QDir      path_dir(path);
 
   // Do not scan symlinked dirs that are already in collection
   if (path_info.isSymLink()) {
@@ -229,6 +235,13 @@ void LibraryWatcher::ScanSubdirectory(const QString& path,
         return;
       }
     }
+  }
+
+  // Do not scan directories containing a .nomedia or .nomusic file
+  if (path_dir.exists(kNoMediaFile) ||
+      path_dir.exists(kNoMusicFile)) {
+    t->AddToProgress(1);
+    return;
   }
 
   if (!t->ignores_mtime() && !force_noincremental && t->is_incremental() &&
