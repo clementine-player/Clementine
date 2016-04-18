@@ -22,7 +22,7 @@
 # felipeacsi <felipeacsi@gmail.com>, 2012
 # Fernando Torres <free.thought.ae@gmail.com>, 2012
 # José Antonio Moray <moray33@gmx.com>, 2013-2014
-# Jose Gregorio Jimenez Sanchez <josegjimenez@gmail.com>, 2015
+# Jose G. Jimenez S. <josegjimenez@gmail.com>, 2015
 # Roony Alvarez <legion1978@gmail.com>, 2012
 # LeonimuZ <inactive+LeonimuZ@transifex.com>, 2011
 # davidsansome <me@davidsansome.com>, 2013
@@ -504,7 +504,7 @@ msgstr "Añadir otra transmisión…"
 msgid "Add directory..."
 msgstr "Añadir una carpeta…"
 
-#: ui/mainwindow.cpp:1980
+#: ui/mainwindow.cpp:1983
 msgid "Add file"
 msgstr "Añadir archivo"
 
@@ -524,7 +524,7 @@ msgstr "Añadir un archivo…"
 msgid "Add files to transcode"
 msgstr "Añadir archivos para convertir"
 
-#: transcoder/transcodedialog.cpp:306 ui/mainwindow.cpp:2007
+#: transcoder/transcodedialog.cpp:306 ui/mainwindow.cpp:2010
 #: ripper/ripcddialog.cpp:185
 msgid "Add folder"
 msgstr "Añadir una carpeta"
@@ -641,7 +641,7 @@ msgstr "Añadir a listas de Spotify"
 msgid "Add to Spotify starred"
 msgstr "Añadir a las destacadas de Spotify"
 
-#: ui/mainwindow.cpp:1802
+#: ui/mainwindow.cpp:1805
 msgid "Add to another playlist"
 msgstr "Añadir a otra lista de reproducción"
 
@@ -699,7 +699,7 @@ msgstr "Después de "
 msgid "After copying..."
 msgstr "Después de copiar…"
 
-#: library/savedgroupingmanager.cpp:65 playlist/playlist.cpp:1317
+#: library/savedgroupingmanager.cpp:65 playlist/playlist.cpp:1318
 #: ui/organisedialog.cpp:61 ui/qtsystemtrayicon.cpp:236
 #: ../bin/src/ui_groupbydialog.h:128 ../bin/src/ui_groupbydialog.h:147
 #: ../bin/src/ui_groupbydialog.h:166 ../bin/src/ui_albumcoversearcher.h:110
@@ -712,7 +712,7 @@ msgstr "Álbum"
 msgid "Album (ideal loudness for all tracks)"
 msgstr "Álbum (volumen ideal para todas las pistas)"
 
-#: library/savedgroupingmanager.cpp:80 playlist/playlist.cpp:1331
+#: library/savedgroupingmanager.cpp:80 playlist/playlist.cpp:1332
 #: ui/organisedialog.cpp:64 ../bin/src/ui_groupbydialog.h:130
 #: ../bin/src/ui_groupbydialog.h:149 ../bin/src/ui_groupbydialog.h:168
 #: ../bin/src/ui_edittagdialog.h:736
@@ -820,7 +820,7 @@ msgstr "Se requiere un complemento adicional para usar Spotify en Clementine.  �
 msgid "An error occurred loading the iTunes database"
 msgstr "Ocurrió un error al cargar la base de datos de iTunes"
 
-#: playlist/playlist.cpp:423 ui/edittagdialog.cpp:703
+#: playlist/playlist.cpp:424 ui/edittagdialog.cpp:703
 #, qt-format
 msgid "An error occurred writing metadata to '%1'"
 msgstr "Ocurrió un error al escribir los metadatos en «%1»"
@@ -876,7 +876,7 @@ msgid ""
 "the songs of your library?"
 msgstr "¿Confirma que quiere almacenar las estadísticas en todos los archivos de su colección?"
 
-#: library/savedgroupingmanager.cpp:62 playlist/playlist.cpp:1315
+#: library/savedgroupingmanager.cpp:62 playlist/playlist.cpp:1316
 #: ui/organisedialog.cpp:62 ui/qtsystemtrayicon.cpp:234
 #: ../bin/src/ui_groupbydialog.h:129 ../bin/src/ui_groupbydialog.h:148
 #: ../bin/src/ui_groupbydialog.h:167 ../bin/src/ui_albumcoversearcher.h:106
@@ -960,7 +960,7 @@ msgstr "Tamaño promedio de imagen"
 msgid "BBC Podcasts"
 msgstr "Podcasts de BBC"
 
-#: playlist/playlist.cpp:1351 ui/organisedialog.cpp:71
+#: playlist/playlist.cpp:1352 ui/organisedialog.cpp:71
 #: ../bin/src/ui_edittagdialog.h:716
 msgid "BPM"
 msgstr "PPM"
@@ -1018,7 +1018,7 @@ msgstr "Mejor"
 msgid "Biography from %1"
 msgstr "Biografía de %1"
 
-#: playlist/playlist.cpp:1353 ../bin/src/ui_edittagdialog.h:718
+#: playlist/playlist.cpp:1354 ../bin/src/ui_edittagdialog.h:718
 msgid "Bit rate"
 msgstr "Tasa de bits"
 
@@ -1365,7 +1365,7 @@ msgstr "Colores"
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Lista separada por comas de la clase:nivel, el nivel es 0-3"
 
-#: playlist/playlist.cpp:1370 smartplaylists/searchterm.cpp:358
+#: playlist/playlist.cpp:1371 smartplaylists/searchterm.cpp:358
 #: ui/organisedialog.cpp:75 ../bin/src/ui_edittagdialog.h:743
 msgid "Comment"
 msgstr "Comentario"
@@ -1382,7 +1382,7 @@ msgstr "Completar etiquetas automáticamente"
 msgid "Complete tags automatically..."
 msgstr "Completar etiquetas automáticamente…"
 
-#: library/savedgroupingmanager.cpp:74 playlist/playlist.cpp:1333
+#: library/savedgroupingmanager.cpp:74 playlist/playlist.cpp:1334
 #: ui/organisedialog.cpp:65 ../bin/src/ui_groupbydialog.h:131
 #: ../bin/src/ui_groupbydialog.h:150 ../bin/src/ui_groupbydialog.h:169
 #: ../bin/src/ui_edittagdialog.h:737
@@ -1632,11 +1632,11 @@ msgid ""
 "recover your database"
 msgstr "Se detectó un daño en la base de datos. Consulte https://github.com/clementine-player/Clementine/wiki/Database-Corruption para obtener instrucciones de recuperación"
 
-#: playlist/playlist.cpp:1367 ../bin/src/ui_edittagdialog.h:727
+#: playlist/playlist.cpp:1368 ../bin/src/ui_edittagdialog.h:727
 msgid "Date created"
 msgstr "Fecha de creación"
 
-#: playlist/playlist.cpp:1365 ../bin/src/ui_edittagdialog.h:726
+#: playlist/playlist.cpp:1366 ../bin/src/ui_edittagdialog.h:726
 msgid "Date modified"
 msgstr "Fecha de modificación"
 
@@ -1687,7 +1687,7 @@ msgid "Delete downloaded data"
 msgstr "Eliminar datos descargados"
 
 #: devices/deviceview.cpp:408 library/libraryview.cpp:645
-#: ui/mainwindow.cpp:2329 widgets/fileview.cpp:186
+#: ui/mainwindow.cpp:2332 widgets/fileview.cpp:186
 msgid "Delete files"
 msgstr "Eliminar archivos"
 
@@ -1720,11 +1720,11 @@ msgstr "Eliminar los archivos originales"
 msgid "Deleting files"
 msgstr "Eliminando los archivos"
 
-#: ui/mainwindow.cpp:1723
+#: ui/mainwindow.cpp:1726
 msgid "Dequeue selected tracks"
 msgstr "Quitar las pistas seleccionadas de la cola"
 
-#: ui/mainwindow.cpp:1721
+#: ui/mainwindow.cpp:1724
 msgid "Dequeue track"
 msgstr "Quitar la pista de la cola"
 
@@ -1804,7 +1804,7 @@ msgctxt "Refers to search provider's status."
 msgid "Disabled"
 msgstr "Desactivado"
 
-#: library/savedgroupingmanager.cpp:95 playlist/playlist.cpp:1323
+#: library/savedgroupingmanager.cpp:95 playlist/playlist.cpp:1324
 #: ui/organisedialog.cpp:70 ../bin/src/ui_groupbydialog.h:139
 #: ../bin/src/ui_groupbydialog.h:158 ../bin/src/ui_groupbydialog.h:177
 #: ../bin/src/ui_edittagdialog.h:733 ../bin/src/ui_ripcddialog.h:313
@@ -1996,7 +1996,7 @@ msgstr "Mezcla dinámica aleatoria"
 msgid "Edit smart playlist..."
 msgstr "Editar lista de reproducción inteligente…"
 
-#: ui/mainwindow.cpp:1765
+#: ui/mainwindow.cpp:1768
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr "Editar la etiqueta «%1»…"
@@ -2135,8 +2135,8 @@ msgid "Equivalent to --log-levels *:3"
 msgstr "Equivalente a --log-levels*:3"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:246
-#: library/libraryview.cpp:639 ui/mainwindow.cpp:2036 ui/mainwindow.cpp:2281
-#: ui/mainwindow.cpp:2427 internet/vk/vkservice.cpp:643
+#: library/libraryview.cpp:639 ui/mainwindow.cpp:2039 ui/mainwindow.cpp:2284
+#: ui/mainwindow.cpp:2430 internet/vk/vkservice.cpp:643
 msgid "Error"
 msgstr "Error"
 
@@ -2276,7 +2276,7 @@ msgstr "Fundido"
 msgid "Fading duration"
 msgstr "Duración del fundido"
 
-#: ui/mainwindow.cpp:2037
+#: ui/mainwindow.cpp:2040
 msgid "Failed reading CD drive"
 msgstr "Falló la lectura de la unidad de CD"
 
@@ -2351,11 +2351,11 @@ msgstr "Extensión del archivo"
 msgid "File formats"
 msgstr "Formatos de archivo"
 
-#: playlist/playlist.cpp:1357 ../bin/src/ui_edittagdialog.h:728
+#: playlist/playlist.cpp:1358 ../bin/src/ui_edittagdialog.h:728
 msgid "File name"
 msgstr "Nombre del archivo"
 
-#: playlist/playlist.cpp:1359
+#: playlist/playlist.cpp:1360
 msgid "File name (without path)"
 msgstr "Nombre del archivo (sin ruta)"
 
@@ -2367,11 +2367,11 @@ msgstr "Patrón de nombre de archivo:"
 msgid "File paths"
 msgstr "Rutas de archivos"
 
-#: playlist/playlist.cpp:1361 ../bin/src/ui_edittagdialog.h:722
+#: playlist/playlist.cpp:1362 ../bin/src/ui_edittagdialog.h:722
 msgid "File size"
 msgstr "Tamaño del archivo"
 
-#: library/savedgroupingmanager.cpp:83 playlist/playlist.cpp:1363
+#: library/savedgroupingmanager.cpp:83 playlist/playlist.cpp:1364
 #: ../bin/src/ui_groupbydialog.h:132 ../bin/src/ui_groupbydialog.h:151
 #: ../bin/src/ui_groupbydialog.h:170 ../bin/src/ui_edittagdialog.h:724
 msgid "File type"
@@ -2505,7 +2505,7 @@ msgstr "General"
 msgid "General settings"
 msgstr "Configuración general"
 
-#: library/savedgroupingmanager.cpp:77 playlist/playlist.cpp:1329
+#: library/savedgroupingmanager.cpp:77 playlist/playlist.cpp:1330
 #: ui/organisedialog.cpp:74 ../bin/src/ui_groupbydialog.h:133
 #: ../bin/src/ui_groupbydialog.h:152 ../bin/src/ui_groupbydialog.h:171
 #: ../bin/src/ui_edittagdialog.h:740 ../bin/src/ui_ripcddialog.h:316
@@ -2592,7 +2592,7 @@ msgstr "Agrupar por género/álbum"
 msgid "Group by Genre/Artist/Album"
 msgstr "Agrupar por género/artista/álbum"
 
-#: library/savedgroupingmanager.cpp:89 playlist/playlist.cpp:1337
+#: library/savedgroupingmanager.cpp:89 playlist/playlist.cpp:1338
 #: ui/organisedialog.cpp:67 ../bin/src/ui_groupbydialog.h:141
 #: ../bin/src/ui_groupbydialog.h:160 ../bin/src/ui_groupbydialog.h:179
 #: ../bin/src/ui_edittagdialog.h:739
@@ -2925,7 +2925,7 @@ msgstr "Barra lateral grande"
 msgid "Last played"
 msgstr "Últimas reproducidas"
 
-#: playlist/playlist.cpp:1346 ../bin/src/ui_edittagdialog.h:719
+#: playlist/playlist.cpp:1347 ../bin/src/ui_edittagdialog.h:719
 msgctxt "A playlist's tag."
 msgid "Last played"
 msgstr "Última reproducción"
@@ -2966,7 +2966,7 @@ msgstr "Pistas menos favoritas"
 msgid "Left"
 msgstr "Izquierda"
 
-#: playlist/playlist.cpp:1319 ui/organisedialog.cpp:76
+#: playlist/playlist.cpp:1320 ui/organisedialog.cpp:76
 #: ui/qtsystemtrayicon.cpp:239 ../bin/src/ui_edittagdialog.h:714
 msgid "Length"
 msgstr "Duración"
@@ -2980,7 +2980,7 @@ msgstr "Colección"
 msgid "Library advanced grouping"
 msgstr "Agrupamiento avanzado de la colección"
 
-#: ui/mainwindow.cpp:2519
+#: ui/mainwindow.cpp:2522
 msgid "Library rescan notice"
 msgstr "Aviso de reanálisis de la colección"
 
@@ -3276,7 +3276,7 @@ msgstr "Reproducción monoaural"
 msgid "Months"
 msgstr "Meses"
 
-#: playlist/playlist.cpp:1374
+#: playlist/playlist.cpp:1375
 msgid "Mood"
 msgstr "Ánimo"
 
@@ -3319,7 +3319,7 @@ msgstr "Mover a la colección…"
 msgid "Move up"
 msgstr "Subir"
 
-#: transcoder/transcodedialog.cpp:225 ui/mainwindow.cpp:1981
+#: transcoder/transcodedialog.cpp:225 ui/mainwindow.cpp:1984
 #: internet/vk/vkservice.cpp:908
 msgid "Music"
 msgstr "Música"
@@ -3390,7 +3390,7 @@ msgstr "Nunca comenzar la reproducción"
 msgid "New folder"
 msgstr "Carpeta nueva"
 
-#: ui/mainwindow.cpp:1819 ../bin/src/ui_mainwindow.h:693
+#: ui/mainwindow.cpp:1822 ../bin/src/ui_mainwindow.h:693
 msgid "New playlist"
 msgstr "Lista de reproducción nueva"
 
@@ -3457,7 +3457,7 @@ msgstr "Sin bloques cortos"
 msgid "None"
 msgstr "Ninguno"
 
-#: library/libraryview.cpp:640 ui/mainwindow.cpp:2282 ui/mainwindow.cpp:2428
+#: library/libraryview.cpp:640 ui/mainwindow.cpp:2285 ui/mainwindow.cpp:2431
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Ninguna de las canciones seleccionadas fue apta para copiarse en un dispositivo"
 
@@ -3677,7 +3677,7 @@ msgstr "Organizando los archivos"
 msgid "Original tags"
 msgstr "Etiquetas originales"
 
-#: library/savedgroupingmanager.cpp:101 playlist/playlist.cpp:1327
+#: library/savedgroupingmanager.cpp:101 playlist/playlist.cpp:1328
 #: ui/organisedialog.cpp:73 ../bin/src/ui_groupbydialog.h:135
 #: ../bin/src/ui_groupbydialog.h:154 ../bin/src/ui_groupbydialog.h:173
 msgid "Original year"
@@ -3741,7 +3741,7 @@ msgstr "Fiesta"
 msgid "Password"
 msgstr "Contraseña"
 
-#: core/globalshortcuts.cpp:50 ui/mainwindow.cpp:1134 ui/mainwindow.cpp:1630
+#: core/globalshortcuts.cpp:50 ui/mainwindow.cpp:1137 ui/mainwindow.cpp:1633
 #: ui/qtsystemtrayicon.cpp:175 wiimotedev/wiimotesettingspage.cpp:114
 msgid "Pause"
 msgstr "Pausar"
@@ -3754,7 +3754,7 @@ msgstr "Pausar la reproducción"
 msgid "Paused"
 msgstr "En pausa"
 
-#: library/savedgroupingmanager.cpp:86 playlist/playlist.cpp:1335
+#: library/savedgroupingmanager.cpp:86 playlist/playlist.cpp:1336
 #: ui/organisedialog.cpp:66 ../bin/src/ui_groupbydialog.h:140
 #: ../bin/src/ui_groupbydialog.h:159 ../bin/src/ui_groupbydialog.h:178
 #: ../bin/src/ui_edittagdialog.h:738
@@ -3769,14 +3769,14 @@ msgstr "Píxel"
 msgid "Plain sidebar"
 msgstr "Barra lateral simple"
 
-#: core/globalshortcuts.cpp:49 ui/mainwindow.cpp:670 ui/mainwindow.cpp:1100
-#: ui/mainwindow.cpp:1119 ui/mainwindow.cpp:1634 ui/qtsystemtrayicon.cpp:164
+#: core/globalshortcuts.cpp:49 ui/mainwindow.cpp:670 ui/mainwindow.cpp:1103
+#: ui/mainwindow.cpp:1122 ui/mainwindow.cpp:1637 ui/qtsystemtrayicon.cpp:164
 #: ui/qtsystemtrayicon.cpp:188 wiimotedev/wiimotesettingspage.cpp:107
 #: ../bin/src/ui_mainwindow.h:659
 msgid "Play"
 msgstr "Reproducir"
 
-#: playlist/playlist.cpp:1342 ../bin/src/ui_edittagdialog.h:715
+#: playlist/playlist.cpp:1343 ../bin/src/ui_edittagdialog.h:715
 msgid "Play count"
 msgstr "N.º de reproducciones"
 
@@ -3984,12 +3984,12 @@ msgstr "Consultando dispositivo…"
 msgid "Queue Manager"
 msgstr "Gestor de la cola"
 
-#: ui/mainwindow.cpp:1727
+#: ui/mainwindow.cpp:1730
 msgid "Queue selected tracks"
 msgstr "Añadir las pistas seleccionadas a la cola"
 
 #: globalsearch/globalsearchview.cpp:466 library/libraryview.cpp:389
-#: ui/mainwindow.cpp:1725
+#: ui/mainwindow.cpp:1728
 msgid "Queue track"
 msgstr "Añadir a la cola de reproducción"
 
@@ -4038,7 +4038,7 @@ msgstr "Valorar la canción actual con 4 estrellas"
 msgid "Rate the current song 5 stars"
 msgstr "Valorar la canción actual con 5 estrellas"
 
-#: playlist/playlist.cpp:1340 ../bin/src/ui_edittagdialog.h:723
+#: playlist/playlist.cpp:1341 ../bin/src/ui_edittagdialog.h:723
 msgid "Rating"
 msgstr "Valoración"
 
@@ -4266,7 +4266,7 @@ msgstr "Quitar dispositivo con seguridad"
 msgid "Safely remove the device after copying"
 msgstr "Quitar dispositivo con seguridad después de copiar"
 
-#: playlist/playlist.cpp:1355 ../bin/src/ui_edittagdialog.h:720
+#: playlist/playlist.cpp:1356 ../bin/src/ui_edittagdialog.h:720
 #: ../bin/src/ui_playbacksettingspage.h:371
 msgid "Sample rate"
 msgstr "Tasa de muestreo"
@@ -4345,7 +4345,7 @@ msgstr "Perfil de tasa de muestreo escalable (SSR)"
 msgid "Scale size"
 msgstr "Tamaño de escala"
 
-#: playlist/playlist.cpp:1348 ../bin/src/ui_edittagdialog.h:721
+#: playlist/playlist.cpp:1349 ../bin/src/ui_edittagdialog.h:721
 msgid "Score"
 msgstr "Valoración"
 
@@ -4506,7 +4506,7 @@ msgstr "Detalles del servidor"
 msgid "Service offline"
 msgstr "Servicio fuera de línea"
 
-#: ui/mainwindow.cpp:1764
+#: ui/mainwindow.cpp:1767
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr "Establecer %1 a «%2»…"
@@ -4711,7 +4711,7 @@ msgstr "Ska"
 msgid "Skip backwards in playlist"
 msgstr "Saltar hacia atrás en la lista de reproducción"
 
-#: playlist/playlist.cpp:1344 ../bin/src/ui_edittagdialog.h:717
+#: playlist/playlist.cpp:1345 ../bin/src/ui_edittagdialog.h:717
 msgid "Skip count"
 msgstr "N.º de omisiones"
 
@@ -4719,11 +4719,11 @@ msgstr "N.º de omisiones"
 msgid "Skip forwards in playlist"
 msgstr "Saltar hacia adelante en la lista de reproducción"
 
-#: ui/mainwindow.cpp:1738
+#: ui/mainwindow.cpp:1741
 msgid "Skip selected tracks"
 msgstr "Omitir pistas seleccionadas"
 
-#: ui/mainwindow.cpp:1736
+#: ui/mainwindow.cpp:1739
 msgid "Skip track"
 msgstr "Omitir pista"
 
@@ -4791,7 +4791,7 @@ msgstr "Ordenación"
 msgid "SoundCloud"
 msgstr "SoundCloud"
 
-#: playlist/playlist.cpp:1372
+#: playlist/playlist.cpp:1373
 msgid "Source"
 msgstr "Origen"
 
@@ -5038,7 +5038,7 @@ msgid ""
 "license key. Visit subsonic.org for details."
 msgstr "Ha terminado el período de prueba del servidor de Subsonic. Haga una donación para obtener una clave de licencia. Visite subsonic.org para más detalles."
 
-#: ui/mainwindow.cpp:2510
+#: ui/mainwindow.cpp:2513
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -5080,7 +5080,7 @@ msgid ""
 "continue?"
 msgstr "Se eliminarán estos archivos del dispositivo. ¿Confirma que quiere continuar?"
 
-#: library/libraryview.cpp:646 ui/mainwindow.cpp:2330 widgets/fileview.cpp:187
+#: library/libraryview.cpp:646 ui/mainwindow.cpp:2333 widgets/fileview.cpp:187
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -5164,7 +5164,7 @@ msgstr "No se admite este tipo de dispositivo: %1"
 msgid "Time step"
 msgstr "Salto en el tiempo"
 
-#: playlist/playlist.cpp:1313 ui/organisedialog.cpp:60
+#: playlist/playlist.cpp:1314 ui/organisedialog.cpp:60
 #: ui/qtsystemtrayicon.cpp:232 ../bin/src/ui_about.h:141
 #: ../bin/src/ui_edittagdialog.h:730 ../bin/src/ui_trackselectiondialog.h:210
 #: ../bin/src/ui_ripcddialog.h:306
@@ -5183,7 +5183,7 @@ msgstr "Conmutar OSD estético"
 msgid "Toggle fullscreen"
 msgstr "Pantalla completa"
 
-#: ui/mainwindow.cpp:1729
+#: ui/mainwindow.cpp:1732
 msgid "Toggle queue status"
 msgstr "Cambiar estado de la cola"
 
@@ -5223,7 +5223,7 @@ msgstr "Total de bytes transferidos"
 msgid "Total network requests made"
 msgstr "Total de solicitudes hechas a la red"
 
-#: playlist/playlist.cpp:1321 ui/organisedialog.cpp:69
+#: playlist/playlist.cpp:1322 ui/organisedialog.cpp:69
 #: ../bin/src/ui_edittagdialog.h:731 ../bin/src/ui_trackselectiondialog.h:212
 #: ../bin/src/ui_ripcddialog.h:304
 msgid "Track"
@@ -5310,11 +5310,11 @@ msgstr "Error desconocido"
 msgid "Unset cover"
 msgstr "Eliminar la carátula"
 
-#: ui/mainwindow.cpp:1734
+#: ui/mainwindow.cpp:1737
 msgid "Unskip selected tracks"
 msgstr "No omitir pistas seleccionadas"
 
-#: ui/mainwindow.cpp:1732
+#: ui/mainwindow.cpp:1735
 msgid "Unskip track"
 msgstr "No omitir pista"
 
@@ -5351,7 +5351,7 @@ msgstr "Actualizar este podcast"
 msgid "Updating"
 msgstr "Actualización"
 
-#: library/librarywatcher.cpp:92
+#: library/librarywatcher.cpp:97
 #, qt-format
 msgid "Updating %1"
 msgstr "Actualizando %1"
@@ -5361,7 +5361,7 @@ msgstr "Actualizando %1"
 msgid "Updating %1%..."
 msgstr "Actualizando… (%1%)"
 
-#: library/librarywatcher.cpp:90
+#: library/librarywatcher.cpp:95
 msgid "Updating library"
 msgstr "Actualizando la colección"
 
@@ -5628,7 +5628,7 @@ msgid ""
 "well?"
 msgstr "¿Le gustaría mover también las otras canciones de este álbum a Varios artistas?"
 
-#: ui/mainwindow.cpp:2517
+#: ui/mainwindow.cpp:2520
 msgid "Would you like to run a full rescan right now?"
 msgstr "¿Quiere ejecutar un reanálisis completo ahora?"
 
@@ -5644,7 +5644,7 @@ msgstr "Guardar los metadatos"
 msgid "Wrong username or password."
 msgstr "Nombre de usuario o contraseña incorrectos."
 
-#: library/savedgroupingmanager.cpp:71 playlist/playlist.cpp:1325
+#: library/savedgroupingmanager.cpp:71 playlist/playlist.cpp:1326
 #: ui/organisedialog.cpp:72 ../bin/src/ui_groupbydialog.h:134
 #: ../bin/src/ui_groupbydialog.h:153 ../bin/src/ui_groupbydialog.h:172
 #: ../bin/src/ui_edittagdialog.h:735 ../bin/src/ui_trackselectiondialog.h:211

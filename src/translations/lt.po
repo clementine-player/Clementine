@@ -12,8 +12,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2016-03-23 16:53+0000\n"
-"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
+"PO-Revision-Date: 2016-04-17 18:11+0000\n"
+"Last-Translator: Moo\n"
 "Language-Team: Lithuanian (http://www.transifex.com/davidsansome/clementine/language/lt/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -212,7 +212,7 @@ msgstr "&Kairė"
 
 #: playlist/playlistheader.cpp:36
 msgid "&Lock Rating"
-msgstr ""
+msgstr "&Užrakinti įvertinimą"
 
 #: ../bin/src/ui_mainwindow.h:715
 msgid "&Music"
@@ -481,7 +481,7 @@ msgstr "Pridėti kitą srautą..."
 msgid "Add directory..."
 msgstr "Pridėti nuorodą..."
 
-#: ui/mainwindow.cpp:1980
+#: ui/mainwindow.cpp:1983
 msgid "Add file"
 msgstr "Pridėti  failą"
 
@@ -501,7 +501,7 @@ msgstr "Pridėti failą..."
 msgid "Add files to transcode"
 msgstr "Pridėti failus perkodavimui"
 
-#: transcoder/transcodedialog.cpp:306 ui/mainwindow.cpp:2007
+#: transcoder/transcodedialog.cpp:306 ui/mainwindow.cpp:2010
 #: ripper/ripcddialog.cpp:185
 msgid "Add folder"
 msgstr "Pridėti aplanką"
@@ -618,7 +618,7 @@ msgstr "Pridėti į Spotify grojaraščius"
 msgid "Add to Spotify starred"
 msgstr "Pridėti į Spotify pažymėtus"
 
-#: ui/mainwindow.cpp:1802
+#: ui/mainwindow.cpp:1805
 msgid "Add to another playlist"
 msgstr "Pridėti prie kito grojaraščio"
 
@@ -676,7 +676,7 @@ msgstr "Po"
 msgid "After copying..."
 msgstr "Po kopijavimo..."
 
-#: library/savedgroupingmanager.cpp:65 playlist/playlist.cpp:1317
+#: library/savedgroupingmanager.cpp:65 playlist/playlist.cpp:1318
 #: ui/organisedialog.cpp:61 ui/qtsystemtrayicon.cpp:236
 #: ../bin/src/ui_groupbydialog.h:128 ../bin/src/ui_groupbydialog.h:147
 #: ../bin/src/ui_groupbydialog.h:166 ../bin/src/ui_albumcoversearcher.h:110
@@ -689,7 +689,7 @@ msgstr "Albumas"
 msgid "Album (ideal loudness for all tracks)"
 msgstr "Albumas (idealus garsumas visoms dainoms)"
 
-#: library/savedgroupingmanager.cpp:80 playlist/playlist.cpp:1331
+#: library/savedgroupingmanager.cpp:80 playlist/playlist.cpp:1332
 #: ui/organisedialog.cpp:64 ../bin/src/ui_groupbydialog.h:130
 #: ../bin/src/ui_groupbydialog.h:149 ../bin/src/ui_groupbydialog.h:168
 #: ../bin/src/ui_edittagdialog.h:736
@@ -797,7 +797,7 @@ msgstr "Kad naudotumėte Spotify Clementine grotuve, jums reikia papildomo išpl
 msgid "An error occurred loading the iTunes database"
 msgstr "Iškilo klaida įkeliant iTunes duomenų bazę"
 
-#: playlist/playlist.cpp:423 ui/edittagdialog.cpp:703
+#: playlist/playlist.cpp:424 ui/edittagdialog.cpp:703
 #, qt-format
 msgid "An error occurred writing metadata to '%1'"
 msgstr "Klaida rašant meta duomenis į '%1'"
@@ -853,7 +853,7 @@ msgid ""
 "the songs of your library?"
 msgstr "Ar tikrai norite įrašyti dainos statistiką į dainos failą visoms dainoms Jūsų fonotekoje?"
 
-#: library/savedgroupingmanager.cpp:62 playlist/playlist.cpp:1315
+#: library/savedgroupingmanager.cpp:62 playlist/playlist.cpp:1316
 #: ui/organisedialog.cpp:62 ui/qtsystemtrayicon.cpp:234
 #: ../bin/src/ui_groupbydialog.h:129 ../bin/src/ui_groupbydialog.h:148
 #: ../bin/src/ui_groupbydialog.h:167 ../bin/src/ui_albumcoversearcher.h:106
@@ -893,7 +893,7 @@ msgstr "Audio išvestis"
 #: internet/lastfm/lastfmservice.cpp:249
 #: internet/lastfm/lastfmsettingspage.cpp:97
 msgid "Authentication failed"
-msgstr "Autorizacija nepavyko"
+msgstr "Atpažinimas nepavyko"
 
 #: ../bin/src/ui_podcastinfowidget.h:191
 msgid "Author"
@@ -937,7 +937,7 @@ msgstr "Vidutinis paveikslo dydis"
 msgid "BBC Podcasts"
 msgstr "BBC srautas"
 
-#: playlist/playlist.cpp:1351 ui/organisedialog.cpp:71
+#: playlist/playlist.cpp:1352 ui/organisedialog.cpp:71
 #: ../bin/src/ui_edittagdialog.h:716
 msgid "BPM"
 msgstr "BPM"
@@ -995,7 +995,7 @@ msgstr "Geriausias"
 msgid "Biography from %1"
 msgstr "Biografija iš %1"
 
-#: playlist/playlist.cpp:1353 ../bin/src/ui_edittagdialog.h:718
+#: playlist/playlist.cpp:1354 ../bin/src/ui_edittagdialog.h:718
 msgid "Bit rate"
 msgstr "Bitų greitis"
 
@@ -1283,7 +1283,7 @@ msgstr "Clementine ras muziką:"
 
 #: internet/lastfm/lastfmsettingspage.cpp:78
 msgid "Click Ok once you authenticated Clementine in your last.fm account."
-msgstr ""
+msgstr "Spustelėkite Gerai, kai patvirtinsite Clementine tapatybę savo last.fm paskyroje."
 
 #: library/libraryview.cpp:359
 msgid "Click here to add some music"
@@ -1342,7 +1342,7 @@ msgstr "Spalvos"
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Kableliais išskirtas sąrašas iš klasės:lygio, lygis yra nuo 0 iki 3"
 
-#: playlist/playlist.cpp:1370 smartplaylists/searchterm.cpp:358
+#: playlist/playlist.cpp:1371 smartplaylists/searchterm.cpp:358
 #: ui/organisedialog.cpp:75 ../bin/src/ui_edittagdialog.h:743
 msgid "Comment"
 msgstr "Komentaras"
@@ -1359,7 +1359,7 @@ msgstr "Užbaigti žymes automatiškai"
 msgid "Complete tags automatically..."
 msgstr "Pabaigti žymes automatiškai..."
 
-#: library/savedgroupingmanager.cpp:74 playlist/playlist.cpp:1333
+#: library/savedgroupingmanager.cpp:74 playlist/playlist.cpp:1334
 #: ui/organisedialog.cpp:65 ../bin/src/ui_groupbydialog.h:131
 #: ../bin/src/ui_groupbydialog.h:150 ../bin/src/ui_groupbydialog.h:169
 #: ../bin/src/ui_edittagdialog.h:737
@@ -1609,11 +1609,11 @@ msgid ""
 "recover your database"
 msgstr "Aptiktas duomenų bazės pažeidimas. Norėdami gauti nurodymus kaip atkurti savo duomenų bazę, skaitykite https://github.com/clementine-player/Clementine/wiki/Database-Corruption"
 
-#: playlist/playlist.cpp:1367 ../bin/src/ui_edittagdialog.h:727
+#: playlist/playlist.cpp:1368 ../bin/src/ui_edittagdialog.h:727
 msgid "Date created"
 msgstr "Sukūrimo data"
 
-#: playlist/playlist.cpp:1365 ../bin/src/ui_edittagdialog.h:726
+#: playlist/playlist.cpp:1366 ../bin/src/ui_edittagdialog.h:726
 msgid "Date modified"
 msgstr "Pakeitimo data"
 
@@ -1664,7 +1664,7 @@ msgid "Delete downloaded data"
 msgstr "Naikinti atsiųstus duomenis"
 
 #: devices/deviceview.cpp:408 library/libraryview.cpp:645
-#: ui/mainwindow.cpp:2329 widgets/fileview.cpp:186
+#: ui/mainwindow.cpp:2332 widgets/fileview.cpp:186
 msgid "Delete files"
 msgstr "Ištrinti failus"
 
@@ -1697,11 +1697,11 @@ msgstr "Ištrinti originalius failus"
 msgid "Deleting files"
 msgstr "Trinami failai"
 
-#: ui/mainwindow.cpp:1723
+#: ui/mainwindow.cpp:1726
 msgid "Dequeue selected tracks"
 msgstr "Iš eilės pažymėtus takelius"
 
-#: ui/mainwindow.cpp:1721
+#: ui/mainwindow.cpp:1724
 msgid "Dequeue track"
 msgstr "Iš eilės takelį"
 
@@ -1781,7 +1781,7 @@ msgctxt "Refers to search provider's status."
 msgid "Disabled"
 msgstr "Išjungta"
 
-#: library/savedgroupingmanager.cpp:95 playlist/playlist.cpp:1323
+#: library/savedgroupingmanager.cpp:95 playlist/playlist.cpp:1324
 #: ui/organisedialog.cpp:70 ../bin/src/ui_groupbydialog.h:139
 #: ../bin/src/ui_groupbydialog.h:158 ../bin/src/ui_groupbydialog.h:177
 #: ../bin/src/ui_edittagdialog.h:733 ../bin/src/ui_ripcddialog.h:313
@@ -1973,7 +1973,7 @@ msgstr "Dinaminis atsitiktinis maišymas"
 msgid "Edit smart playlist..."
 msgstr "Taisyti išmanųjį grojaraštį..."
 
-#: ui/mainwindow.cpp:1765
+#: ui/mainwindow.cpp:1768
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr "Redaguoti žymę \"%1\"..."
@@ -2112,8 +2112,8 @@ msgid "Equivalent to --log-levels *:3"
 msgstr "Tai atitinka --log-levels *:3"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:246
-#: library/libraryview.cpp:639 ui/mainwindow.cpp:2036 ui/mainwindow.cpp:2281
-#: ui/mainwindow.cpp:2427 internet/vk/vkservice.cpp:643
+#: library/libraryview.cpp:639 ui/mainwindow.cpp:2039 ui/mainwindow.cpp:2284
+#: ui/mainwindow.cpp:2430 internet/vk/vkservice.cpp:643
 msgid "Error"
 msgstr "Klaida"
 
@@ -2253,7 +2253,7 @@ msgstr "Pradingimas"
 msgid "Fading duration"
 msgstr "Suliejimo trukmė"
 
-#: ui/mainwindow.cpp:2037
+#: ui/mainwindow.cpp:2040
 msgid "Failed reading CD drive"
 msgstr "Nepavyko perskaityti CD disko"
 
@@ -2281,7 +2281,7 @@ msgstr "Nepavyko apdoroti XML šiam RSS srautui"
 #: ui/trackselectiondialog.cpp:247
 #, qt-format
 msgid "Failed to write new auto-tags to '%1'"
-msgstr ""
+msgstr "Nepavyko įrašyti naujas automatines žymes į '%1'"
 
 #: ../bin/src/ui_transcoderoptionsflac.h:81
 #: ../bin/src/ui_transcoderoptionsmp3.h:199
@@ -2328,11 +2328,11 @@ msgstr "Failo plėtinys"
 msgid "File formats"
 msgstr "Failų formatai"
 
-#: playlist/playlist.cpp:1357 ../bin/src/ui_edittagdialog.h:728
+#: playlist/playlist.cpp:1358 ../bin/src/ui_edittagdialog.h:728
 msgid "File name"
 msgstr "Failo vardas"
 
-#: playlist/playlist.cpp:1359
+#: playlist/playlist.cpp:1360
 msgid "File name (without path)"
 msgstr "Failo vardas (be kelio)"
 
@@ -2344,11 +2344,11 @@ msgstr "Failo pavadinimo šablonas:"
 msgid "File paths"
 msgstr "Failų keliai"
 
-#: playlist/playlist.cpp:1361 ../bin/src/ui_edittagdialog.h:722
+#: playlist/playlist.cpp:1362 ../bin/src/ui_edittagdialog.h:722
 msgid "File size"
 msgstr "Failo dydis"
 
-#: library/savedgroupingmanager.cpp:83 playlist/playlist.cpp:1363
+#: library/savedgroupingmanager.cpp:83 playlist/playlist.cpp:1364
 #: ../bin/src/ui_groupbydialog.h:132 ../bin/src/ui_groupbydialog.h:151
 #: ../bin/src/ui_groupbydialog.h:170 ../bin/src/ui_edittagdialog.h:724
 msgid "File type"
@@ -2482,7 +2482,7 @@ msgstr "Bendri"
 msgid "General settings"
 msgstr "Pagrindiniai nustatymai"
 
-#: library/savedgroupingmanager.cpp:77 playlist/playlist.cpp:1329
+#: library/savedgroupingmanager.cpp:77 playlist/playlist.cpp:1330
 #: ui/organisedialog.cpp:74 ../bin/src/ui_groupbydialog.h:133
 #: ../bin/src/ui_groupbydialog.h:152 ../bin/src/ui_groupbydialog.h:171
 #: ../bin/src/ui_edittagdialog.h:740 ../bin/src/ui_ripcddialog.h:316
@@ -2569,7 +2569,7 @@ msgstr "Grupuoti pagal Žanrą/Albumą"
 msgid "Group by Genre/Artist/Album"
 msgstr "Grupuoti pagal Žanrą/Atlikėją/Albumą"
 
-#: library/savedgroupingmanager.cpp:89 playlist/playlist.cpp:1337
+#: library/savedgroupingmanager.cpp:89 playlist/playlist.cpp:1338
 #: ui/organisedialog.cpp:67 ../bin/src/ui_groupbydialog.h:141
 #: ../bin/src/ui_groupbydialog.h:160 ../bin/src/ui_groupbydialog.h:179
 #: ../bin/src/ui_edittagdialog.h:739
@@ -2902,7 +2902,7 @@ msgstr "Didelė juosta"
 msgid "Last played"
 msgstr "Vėliausiai grota"
 
-#: playlist/playlist.cpp:1346 ../bin/src/ui_edittagdialog.h:719
+#: playlist/playlist.cpp:1347 ../bin/src/ui_edittagdialog.h:719
 msgctxt "A playlist's tag."
 msgid "Last played"
 msgstr "Paskiausiai grota"
@@ -2913,11 +2913,11 @@ msgstr "Last.fm"
 
 #: internet/lastfm/lastfmsettingspage.cpp:77
 msgid "Last.fm authentication"
-msgstr ""
+msgstr "Last.fm atpažinimas"
 
 #: internet/lastfm/lastfmsettingspage.cpp:70
 msgid "Last.fm authentication failed"
-msgstr ""
+msgstr "Last.fm atpažinimas nepavyko"
 
 #: internet/lastfm/lastfmservice.cpp:268
 msgid "Last.fm is currently busy, please try again in a few minutes"
@@ -2943,7 +2943,7 @@ msgstr "Mažiausiai populiarūs takeliai"
 msgid "Left"
 msgstr "Kairė"
 
-#: playlist/playlist.cpp:1319 ui/organisedialog.cpp:76
+#: playlist/playlist.cpp:1320 ui/organisedialog.cpp:76
 #: ui/qtsystemtrayicon.cpp:239 ../bin/src/ui_edittagdialog.h:714
 msgid "Length"
 msgstr "Trukmė"
@@ -2957,7 +2957,7 @@ msgstr "Fonoteka"
 msgid "Library advanced grouping"
 msgstr "Sudėtingesnis fonotekos grupavimas"
 
-#: ui/mainwindow.cpp:2519
+#: ui/mainwindow.cpp:2522
 msgid "Library rescan notice"
 msgstr "Fonotekos perskenavimo žinutė"
 
@@ -3029,7 +3029,7 @@ msgstr "Įkeliami takeliai"
 
 #: playlist/songloaderinserter.cpp:149
 msgid "Loading tracks info"
-msgstr "Užkraunama kūrinio informacija"
+msgstr "Įkeliama kūrinio informacija"
 
 #: library/librarymodel.cpp:164
 #: internet/podcasts/podcastdiscoverymodel.cpp:105 widgets/prettyimage.cpp:167
@@ -3253,7 +3253,7 @@ msgstr "Mono grojimas"
 msgid "Months"
 msgstr "Mėnesiai"
 
-#: playlist/playlist.cpp:1374
+#: playlist/playlist.cpp:1375
 msgid "Mood"
 msgstr "Nuotaika"
 
@@ -3296,7 +3296,7 @@ msgstr "Perkelti į fonoteką"
 msgid "Move up"
 msgstr "Perkelti aukštyn"
 
-#: transcoder/transcodedialog.cpp:225 ui/mainwindow.cpp:1981
+#: transcoder/transcodedialog.cpp:225 ui/mainwindow.cpp:1984
 #: internet/vk/vkservice.cpp:908
 msgid "Music"
 msgstr "Muzika"
@@ -3367,7 +3367,7 @@ msgstr "Niekada nepradėti groti"
 msgid "New folder"
 msgstr "Naujas aplankas"
 
-#: ui/mainwindow.cpp:1819 ../bin/src/ui_mainwindow.h:693
+#: ui/mainwindow.cpp:1822 ../bin/src/ui_mainwindow.h:693
 msgid "New playlist"
 msgstr "Naujas grojaraštis"
 
@@ -3434,7 +3434,7 @@ msgstr "Jokių trumpų blokų"
 msgid "None"
 msgstr "Nėra"
 
-#: library/libraryview.cpp:640 ui/mainwindow.cpp:2282 ui/mainwindow.cpp:2428
+#: library/libraryview.cpp:640 ui/mainwindow.cpp:2285 ui/mainwindow.cpp:2431
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Nei viena iš pažymėtų dainų netinka kopijavimui į įrenginį"
 
@@ -3654,7 +3654,7 @@ msgstr "Tvarkomi failai"
 msgid "Original tags"
 msgstr "Originalios žymės"
 
-#: library/savedgroupingmanager.cpp:101 playlist/playlist.cpp:1327
+#: library/savedgroupingmanager.cpp:101 playlist/playlist.cpp:1328
 #: ui/organisedialog.cpp:73 ../bin/src/ui_groupbydialog.h:135
 #: ../bin/src/ui_groupbydialog.h:154 ../bin/src/ui_groupbydialog.h:173
 msgid "Original year"
@@ -3718,7 +3718,7 @@ msgstr "Vakarėlis"
 msgid "Password"
 msgstr "Slaptažodis"
 
-#: core/globalshortcuts.cpp:50 ui/mainwindow.cpp:1134 ui/mainwindow.cpp:1630
+#: core/globalshortcuts.cpp:50 ui/mainwindow.cpp:1137 ui/mainwindow.cpp:1633
 #: ui/qtsystemtrayicon.cpp:175 wiimotedev/wiimotesettingspage.cpp:114
 msgid "Pause"
 msgstr "Pristabdyti"
@@ -3731,7 +3731,7 @@ msgstr "Sulaikyti grojimą"
 msgid "Paused"
 msgstr "Pristabdyta"
 
-#: library/savedgroupingmanager.cpp:86 playlist/playlist.cpp:1335
+#: library/savedgroupingmanager.cpp:86 playlist/playlist.cpp:1336
 #: ui/organisedialog.cpp:66 ../bin/src/ui_groupbydialog.h:140
 #: ../bin/src/ui_groupbydialog.h:159 ../bin/src/ui_groupbydialog.h:178
 #: ../bin/src/ui_edittagdialog.h:738
@@ -3746,14 +3746,14 @@ msgstr "Pikselis"
 msgid "Plain sidebar"
 msgstr "Paprasta juosta"
 
-#: core/globalshortcuts.cpp:49 ui/mainwindow.cpp:670 ui/mainwindow.cpp:1100
-#: ui/mainwindow.cpp:1119 ui/mainwindow.cpp:1634 ui/qtsystemtrayicon.cpp:164
+#: core/globalshortcuts.cpp:49 ui/mainwindow.cpp:670 ui/mainwindow.cpp:1103
+#: ui/mainwindow.cpp:1122 ui/mainwindow.cpp:1637 ui/qtsystemtrayicon.cpp:164
 #: ui/qtsystemtrayicon.cpp:188 wiimotedev/wiimotesettingspage.cpp:107
 #: ../bin/src/ui_mainwindow.h:659
 msgid "Play"
 msgstr "Groti"
 
-#: playlist/playlist.cpp:1342 ../bin/src/ui_edittagdialog.h:715
+#: playlist/playlist.cpp:1343 ../bin/src/ui_edittagdialog.h:715
 msgid "Play count"
 msgstr "Grojimo skaitiklis"
 
@@ -3961,12 +3961,12 @@ msgstr "Pateikiama užklausa įrenginiui..."
 msgid "Queue Manager"
 msgstr "Eilės tvarkytuvė"
 
-#: ui/mainwindow.cpp:1727
+#: ui/mainwindow.cpp:1730
 msgid "Queue selected tracks"
 msgstr "į eilę pažymėtus takelius"
 
 #: globalsearch/globalsearchview.cpp:466 library/libraryview.cpp:389
-#: ui/mainwindow.cpp:1725
+#: ui/mainwindow.cpp:1728
 msgid "Queue track"
 msgstr "į eilę takelį"
 
@@ -4015,7 +4015,7 @@ msgstr "Įvertinti šią dainą 4 žvaigždėmis"
 msgid "Rate the current song 5 stars"
 msgstr "Įvertinti šią dainą 5 žvaigždėmis"
 
-#: playlist/playlist.cpp:1340 ../bin/src/ui_edittagdialog.h:723
+#: playlist/playlist.cpp:1341 ../bin/src/ui_edittagdialog.h:723
 msgid "Rating"
 msgstr "Įvertinimas"
 
@@ -4243,7 +4243,7 @@ msgstr "Saugiai pašalinti įrenginį"
 msgid "Safely remove the device after copying"
 msgstr "Saugiai pašalinti įrenginį po kopijavimo"
 
-#: playlist/playlist.cpp:1355 ../bin/src/ui_edittagdialog.h:720
+#: playlist/playlist.cpp:1356 ../bin/src/ui_edittagdialog.h:720
 #: ../bin/src/ui_playbacksettingspage.h:371
 msgid "Sample rate"
 msgstr "Išrankos dažnis"
@@ -4322,7 +4322,7 @@ msgstr "Besikeičiantis kodavimo dažnio profilis (SSR)"
 msgid "Scale size"
 msgstr "Keisti dydį"
 
-#: playlist/playlist.cpp:1348 ../bin/src/ui_edittagdialog.h:721
+#: playlist/playlist.cpp:1349 ../bin/src/ui_edittagdialog.h:721
 msgid "Score"
 msgstr "Įvertinimas"
 
@@ -4401,7 +4401,7 @@ msgstr "Paieškos terminai"
 
 #: library/savedgroupingmanager.cpp:37
 msgid "Second Level"
-msgstr ""
+msgstr "Antras lygis"
 
 #: ../bin/src/ui_groupbydialog.h:143
 msgid "Second level"
@@ -4483,7 +4483,7 @@ msgstr "Serverio detalės"
 msgid "Service offline"
 msgstr "Servisas nepasiekiamas"
 
-#: ui/mainwindow.cpp:1764
+#: ui/mainwindow.cpp:1767
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr "Nustatyti %1 į \"%2\"..."
@@ -4688,7 +4688,7 @@ msgstr "Ska"
 msgid "Skip backwards in playlist"
 msgstr "Ankstesnis kūrinys grojaraštyje"
 
-#: playlist/playlist.cpp:1344 ../bin/src/ui_edittagdialog.h:717
+#: playlist/playlist.cpp:1345 ../bin/src/ui_edittagdialog.h:717
 msgid "Skip count"
 msgstr "Praleisti skaičiavimą"
 
@@ -4696,11 +4696,11 @@ msgstr "Praleisti skaičiavimą"
 msgid "Skip forwards in playlist"
 msgstr "Kitas grojaraščio kūrinys"
 
-#: ui/mainwindow.cpp:1738
+#: ui/mainwindow.cpp:1741
 msgid "Skip selected tracks"
 msgstr "Praleisti pasirinktus takelius"
 
-#: ui/mainwindow.cpp:1736
+#: ui/mainwindow.cpp:1739
 msgid "Skip track"
 msgstr "Praleisti takelį"
 
@@ -4768,7 +4768,7 @@ msgstr "Rikiavimas"
 msgid "SoundCloud"
 msgstr "SoundCloud"
 
-#: playlist/playlist.cpp:1372
+#: playlist/playlist.cpp:1373
 msgid "Source"
 msgstr "Šaltinis"
 
@@ -4861,7 +4861,7 @@ msgstr "Stabdyti po kiekvieno takelio"
 
 #: ui/mainwindow.cpp:674 ../bin/src/ui_mainwindow.h:663
 msgid "Stop after this track"
-msgstr "Sustabdyti po šio takelio"
+msgstr "Stabdyti po šio takelio"
 
 #: core/commandlineoptions.cpp:154
 msgid "Stop playback"
@@ -4869,7 +4869,7 @@ msgstr "Stabdyti grojimą"
 
 #: core/commandlineoptions.cpp:155
 msgid "Stop playback after current track"
-msgstr ""
+msgstr "Stabdyti atkūrimą po esamo takelio"
 
 #: core/globalshortcuts.cpp:55
 msgid "Stop playing after current track"
@@ -5015,7 +5015,7 @@ msgid ""
 "license key. Visit subsonic.org for details."
 msgstr "Bandomasis subsonic laikotarpis baigėsi. Paaukokite ir gaukite licenciją. Norėdami sužinoti daugiau aplankykite subsonic.org."
 
-#: ui/mainwindow.cpp:2510
+#: ui/mainwindow.cpp:2513
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -5057,7 +5057,7 @@ msgid ""
 "continue?"
 msgstr "Šie failai bus ištrinti iš įrenginio, ar tikrai norite tęsti?"
 
-#: library/libraryview.cpp:646 ui/mainwindow.cpp:2330 widgets/fileview.cpp:187
+#: library/libraryview.cpp:646 ui/mainwindow.cpp:2333 widgets/fileview.cpp:187
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -5075,7 +5075,7 @@ msgstr "Šie nustatymai yra naudojami \"Muzikos perkodavimas\" lange, o taip pat
 
 #: library/savedgroupingmanager.cpp:38
 msgid "Third Level"
-msgstr ""
+msgstr "Trečias lygis"
 
 #: ../bin/src/ui_groupbydialog.h:162
 msgid "Third level"
@@ -5141,7 +5141,7 @@ msgstr "Šio tipo įrenginys yra nepalaikomas: %1"
 msgid "Time step"
 msgstr "Žingsnio trukmė"
 
-#: playlist/playlist.cpp:1313 ui/organisedialog.cpp:60
+#: playlist/playlist.cpp:1314 ui/organisedialog.cpp:60
 #: ui/qtsystemtrayicon.cpp:232 ../bin/src/ui_about.h:141
 #: ../bin/src/ui_edittagdialog.h:730 ../bin/src/ui_trackselectiondialog.h:210
 #: ../bin/src/ui_ripcddialog.h:306
@@ -5160,7 +5160,7 @@ msgstr "Išjungti gražųjį OSD"
 msgid "Toggle fullscreen"
 msgstr "Visame ekrane"
 
-#: ui/mainwindow.cpp:1729
+#: ui/mainwindow.cpp:1732
 msgid "Toggle queue status"
 msgstr "Perjungti eilės statusą"
 
@@ -5182,7 +5182,7 @@ msgstr "Per daug peradresavimų."
 
 #: internet/subsonic/subsonicservice.cpp:109
 msgid "Top Rated"
-msgstr ""
+msgstr "Aukščiausiai įvertinti"
 
 #: internet/spotify/spotifyservice.cpp:431
 msgid "Top tracks"
@@ -5200,7 +5200,7 @@ msgstr "Viso baitų perkelta"
 msgid "Total network requests made"
 msgstr "Viso tinklo užklausų padaryta"
 
-#: playlist/playlist.cpp:1321 ui/organisedialog.cpp:69
+#: playlist/playlist.cpp:1322 ui/organisedialog.cpp:69
 #: ../bin/src/ui_edittagdialog.h:731 ../bin/src/ui_trackselectiondialog.h:212
 #: ../bin/src/ui_ripcddialog.h:304
 msgid "Track"
@@ -5287,11 +5287,11 @@ msgstr "Nežinoma klaida"
 msgid "Unset cover"
 msgstr "Pašalinti viršelį"
 
-#: ui/mainwindow.cpp:1734
+#: ui/mainwindow.cpp:1737
 msgid "Unskip selected tracks"
 msgstr "Nepraleisti pasirinktų takelių"
 
-#: ui/mainwindow.cpp:1732
+#: ui/mainwindow.cpp:1735
 msgid "Unskip track"
 msgstr "Nepraleisti takelio"
 
@@ -5328,7 +5328,7 @@ msgstr "Atnaujinti šią garso prenumeratą"
 msgid "Updating"
 msgstr "Atnaujinama"
 
-#: library/librarywatcher.cpp:92
+#: library/librarywatcher.cpp:97
 #, qt-format
 msgid "Updating %1"
 msgstr "Atnaujinama %1"
@@ -5338,7 +5338,7 @@ msgstr "Atnaujinama %1"
 msgid "Updating %1%..."
 msgstr "Atnaujinama %1..."
 
-#: library/librarywatcher.cpp:90
+#: library/librarywatcher.cpp:95
 msgid "Updating library"
 msgstr "Atnaujinama biblioteka"
 
@@ -5384,7 +5384,7 @@ msgstr "Naudoti tinklo nuotolinį valdymą"
 
 #: ../bin/src/ui_networkproxysettingspage.h:166
 msgid "Use authentication"
-msgstr "Naudoti tapatybės patvirtinimą"
+msgstr "Naudoti atpažinimą"
 
 #: ../bin/src/ui_transcoderoptionsvorbis.h:202
 msgid "Use bitrate management engine"
@@ -5605,7 +5605,7 @@ msgid ""
 "well?"
 msgstr "Ar norėtumėte perkelti kitas dainas į šio atlikėjo albumą?"
 
-#: ui/mainwindow.cpp:2517
+#: ui/mainwindow.cpp:2520
 msgid "Would you like to run a full rescan right now?"
 msgstr "Ar norite paleisti pilną perskenavimą dabar?"
 
@@ -5621,7 +5621,7 @@ msgstr "Įrašyti meta duomenis"
 msgid "Wrong username or password."
 msgstr "Netinkamas naudotojo vardas ar slaptažodis."
 
-#: library/savedgroupingmanager.cpp:71 playlist/playlist.cpp:1325
+#: library/savedgroupingmanager.cpp:71 playlist/playlist.cpp:1326
 #: ui/organisedialog.cpp:72 ../bin/src/ui_groupbydialog.h:134
 #: ../bin/src/ui_groupbydialog.h:153 ../bin/src/ui_groupbydialog.h:172
 #: ../bin/src/ui_edittagdialog.h:735 ../bin/src/ui_trackselectiondialog.h:211
