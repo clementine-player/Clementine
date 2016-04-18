@@ -1035,9 +1035,7 @@ QString Song::PrettyTitle() const {
 }
 
 QString Song::PrettyTitleWithArtist() const {
-  QString title(d->title_);
-
-  if (title.isEmpty()) title = d->basefilename_;
+  QString title(PrettyTitle());
 
   if (!d->artist_.isEmpty()) title = d->artist_ + " - " + title;
 
