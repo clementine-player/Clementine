@@ -1165,4 +1165,7 @@ void Song::MergeUserSetData(const Song& other) {
   set_lastplayed(other.lastplayed());
   set_score(other.score());
   set_art_manual(other.art_manual());
+  if (rating() == -1.0f) {
+    set_rating(other.rating());
+  }
 }
