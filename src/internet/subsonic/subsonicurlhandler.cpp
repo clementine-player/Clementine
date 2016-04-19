@@ -31,7 +31,7 @@ UrlHandler::LoadResult SubsonicUrlHandler::StartLoading(const QUrl& url) {
     return LoadResult(url);
 
   QUrl newurl = service_->BuildRequestUrl("stream");
-  QUrlQuery url_query;
+  QUrlQuery url_query(newurl.query());
   url_query.addQueryItem("id", url.host());
   newurl.setQuery(url_query);
   return LoadResult(url, LoadResult::TrackAvailable, newurl);
