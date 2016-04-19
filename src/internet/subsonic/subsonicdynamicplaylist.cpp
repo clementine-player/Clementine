@@ -99,7 +99,7 @@ PlaylistItemList SubsonicDynamicPlaylist::GenerateMore(int count) {
 
   if (count > kMaxCount) count = kMaxCount;
 
-  QUrlQuery url_query;
+  QUrlQuery url_query(url.query());
   url_query.addQueryItem("type", GetTypeString());
   url_query.addQueryItem("size", QString::number(count));
   url_query.addQueryItem("offset", QString::number(offset_));
@@ -160,7 +160,7 @@ void SubsonicDynamicPlaylist::GetAlbum(SubsonicService* service,
                                        QNetworkAccessManager& network,
                                        const bool usesslv3) {
   QUrl url = service->BuildRequestUrl("getAlbum");
-  QUrlQuery url_query;
+  QUrlQuery url_query(url.query());
   url_query.addQueryItem("id", id);
   if (service->IsAmpache()) {
     url_query.addQueryItem("ampache", "1");
