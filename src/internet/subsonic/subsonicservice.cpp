@@ -571,7 +571,7 @@ void SubsonicLibraryScanner::OnGetAlbumFinished(QNetworkReply* reply) {
 
 void SubsonicLibraryScanner::GetAlbumList(int offset) {
   QUrl url = service_->BuildRequestUrl("getAlbumList2");
-  QUrlQuery url_query;
+  QUrlQuery url_query(url.query());
   url_query.addQueryItem("type", "alphabeticalByName");
   url_query.addQueryItem("size", QString::number(kAlbumChunkSize));
   url_query.addQueryItem("offset", QString::number(offset));
@@ -583,7 +583,7 @@ void SubsonicLibraryScanner::GetAlbumList(int offset) {
 
 void SubsonicLibraryScanner::GetAlbum(const QString& id) {
   QUrl url = service_->BuildRequestUrl("getAlbum");
-  QUrlQuery url_query;
+  QUrlQuery url_query(url.query());
   url_query.addQueryItem("id", id);
   if (service_->IsAmpache()) {
     url_query.addQueryItem("ampache", "1");
