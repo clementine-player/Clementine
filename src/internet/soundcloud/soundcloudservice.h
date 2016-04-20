@@ -67,6 +67,7 @@ class SoundCloudService : public InternetService {
   void UserTracksRetrieved(QNetworkReply* reply);
   void UserActivitiesRetrieved(QNetworkReply* reply);
   void UserPlaylistsRetrieved(QNetworkReply* reply);
+  void UserFavoritesRetrieved(QNetworkReply* reply);
   void PlaylistRetrieved(QNetworkReply* reply, int request_id);
   void Search(const QString& text, bool now = false);
   void DoSearch();
@@ -91,6 +92,7 @@ class SoundCloudService : public InternetService {
   void RetrieveUserTracks();
   void RetrieveUserActivities();
   void RetrieveUserPlaylists();
+  void RetrieveUserFavorites();
   void RetrievePlaylist(int playlist_id, QStandardItem* playlist_item);
   void ClearSearchResults();
   void EnsureItemsCreated();
@@ -112,6 +114,7 @@ class SoundCloudService : public InternetService {
   QStandardItem* user_tracks_;
   QStandardItem* user_playlists_;
   QStandardItem* user_activities_;
+  QStandardItem* user_favorites_;
 
   NetworkAccessManager* network_;
 
