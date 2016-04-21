@@ -72,6 +72,7 @@ SoundCloudService::SoundCloudService(Application* app, InternetModel* parent)
       user_tracks_(nullptr),
       user_playlists_(nullptr),
       user_activities_(nullptr),
+      user_favorites_(nullptr),
       network_(new NetworkAccessManager(this)),
       context_menu_(nullptr),
       search_box_(new SearchBoxWidget(this)),
@@ -136,7 +137,6 @@ void SoundCloudService::EnsureItemsCreated() {
     user_tracks_->setData(InternetModel::PlayBehaviour_MultipleItems,
                           InternetModel::Role_PlayBehaviour);
     root_->appendRow(user_tracks_);
-
 
     user_favorites_ = new QStandardItem(tr("Favorites"));
     root_->appendRow(user_favorites_);
