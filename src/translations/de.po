@@ -11,6 +11,7 @@
 # Mariaki <inactive+Mariaki@transifex.com>, 2013
 # burtek <burtekdotryw@gmail.com>, 2013
 # burtek <burtekdotryw@gmail.com>, 2013
+# AG_Caesar <caesar@drachenhain.net>, 2016
 # Christian Sturm <reezer@reezer.org>, 2011-2012
 # Claudius Henrichs <claudius.h@gmx.de>, 2011
 # daschuer <daschuer@gmx.de>, 2012
@@ -39,7 +40,7 @@
 # Mohamed Sakhri, 2013
 # Mosley <stefan@stefantiemann.de>, 2011
 # Paul E. <>, 2012
-# Peter B. <pb@das-werkstatt.com>, 2014-2015
+# Peter B. <pb@das-werkstatt.com>, 2014-2016
 # Phillip Schichtel, 2013
 # Phillip Schichtel, 2013
 # robfloop <robertbeckmann@fastmail.fm>, 2012
@@ -57,8 +58,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2016-03-24 01:44+0000\n"
-"Last-Translator: Tobias Bannert <tobannert@gmail.com>\n"
+"PO-Revision-Date: 2016-04-21 16:08+0000\n"
+"Last-Translator: AG_Caesar <caesar@drachenhain.net>\n"
 "Language-Team: German (http://www.transifex.com/davidsansome/clementine/language/de/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -494,7 +495,7 @@ msgstr "Aktion"
 msgid "Active/deactive Wiiremote"
 msgstr "Wii-Fernbedienung aktivieren/deaktivieren"
 
-#: internet/soundcloud/soundcloudservice.cpp:127
+#: internet/soundcloud/soundcloudservice.cpp:128
 msgid "Activities stream"
 msgstr "Aktivitätenstrom"
 
@@ -1424,7 +1425,7 @@ msgstr "Magnatune einrichten …"
 msgid "Configure Shortcuts"
 msgstr "Tastenkürzel einrichten"
 
-#: internet/soundcloud/soundcloudservice.cpp:357
+#: internet/soundcloud/soundcloudservice.cpp:381
 msgid "Configure SoundCloud..."
 msgstr "SoundCloud konfigurieren …"
 
@@ -2333,6 +2334,10 @@ msgstr "Schreiben neuer automatischer Schlagworte nach »%1« ist fehlgeschlagen
 msgid "Fast"
 msgstr "Schnell"
 
+#: internet/soundcloud/soundcloudservice.cpp:141
+msgid "Favorites"
+msgstr "Favoriten"
+
 #: library/library.cpp:88
 msgid "Favourite tracks"
 msgstr "Lieblingstitel"
@@ -2682,7 +2687,7 @@ msgstr "Stunden"
 
 #: core/backgroundstreams.cpp:46
 msgid "Hypnotoad"
-msgstr "Hypnosekröte"
+msgstr "Hypnotoad"
 
 #: ../bin/src/ui_magnatunesettingspage.h:158
 msgid "I don't have a Magnatune account"
@@ -3608,7 +3613,7 @@ msgstr "Deckkraft"
 #: internet/magnatune/magnatuneservice.cpp:287
 #: internet/somafm/somafmservice.cpp:102
 #: internet/intergalacticfm/intergalacticfmservice.cpp:102
-#: internet/soundcloud/soundcloudservice.cpp:353
+#: internet/soundcloud/soundcloudservice.cpp:377
 #, qt-format
 msgid "Open %1 in browser"
 msgstr "%1 im Browser öffnen"
@@ -3846,7 +3851,7 @@ msgstr "Wiedergabeliste einrichten"
 msgid "Playlist type"
 msgstr "Art der Wiedergabeliste"
 
-#: internet/soundcloud/soundcloudservice.cpp:132 ui/mainwindow.cpp:269
+#: internet/soundcloud/soundcloudservice.cpp:133 ui/mainwindow.cpp:269
 msgid "Playlists"
 msgstr "Wiedergabelisten"
 
@@ -4203,11 +4208,11 @@ msgstr "Leerzeichen mit Unterstrichen ersetzen"
 
 #: ../bin/src/ui_playbacksettingspage.h:351
 msgid "Replay Gain"
-msgstr "Wiederholungsverstärker"
+msgstr "Replay Gain"
 
 #: ../bin/src/ui_playbacksettingspage.h:353
 msgid "Replay Gain mode"
-msgstr "Wiederholungsverstärkermodus"
+msgstr "Replay Gain"
 
 #: ../bin/src/ui_dynamicplaylistcontrols.h:111
 msgid "Repopulate"
@@ -4434,7 +4439,7 @@ msgstr "Suchmodus"
 msgid "Search options"
 msgstr "Suchoptionen"
 
-#: internet/soundcloud/soundcloudservice.cpp:118
+#: internet/soundcloud/soundcloudservice.cpp:119
 #: internet/spotify/spotifyservice.cpp:408
 msgid "Search results"
 msgstr "Suchergebnisse"
@@ -4871,7 +4876,7 @@ msgstr "Die aktuelle Wiedergabeliste abspielen"
 msgid "Start transcoding"
 msgstr "Umwandeln starten"
 
-#: internet/soundcloud/soundcloudservice.cpp:120
+#: internet/soundcloud/soundcloudservice.cpp:121
 #: internet/spotify/spotifyservice.cpp:410
 msgid ""
 "Start typing something on the search box above to fill this search results "
@@ -5251,7 +5256,7 @@ msgstr "Insgesamt gestellte Netzwerkanfragen"
 msgid "Track"
 msgstr "Titel-Nr."
 
-#: internet/soundcloud/soundcloudservice.cpp:135
+#: internet/soundcloud/soundcloudservice.cpp:136
 msgid "Tracks"
 msgstr "Titel"
 
@@ -5405,7 +5410,7 @@ msgstr "Psychedelische Farben verwenden"
 
 #: ../bin/src/ui_playbacksettingspage.h:352
 msgid "Use Replay Gain metadata if it is available"
-msgstr "Metadaten des Wiederholungsverstärkers verwenden, wenn verfügbar"
+msgstr "Replay Gain Metadaten benutzen, wenn verfügbar"
 
 #: ../bin/src/ui_subsonicsettingspage.h:128
 msgid "Use SSLv3"
@@ -5890,7 +5895,7 @@ msgstr "gpodder.net"
 
 #: internet/podcasts/gpoddertoptagspage.cpp:36
 msgid "gpodder.net directory"
-msgstr "gpodder.net-Verzeichnis"
+msgstr "gpodder.net Verzeichnis"
 
 #: smartplaylists/searchterm.cpp:233
 msgid "greater than"

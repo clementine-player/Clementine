@@ -3,11 +3,11 @@
 # This file is distributed under the same license as the Clementine package.
 # 
 # Translators:
-# Adolfo Jayme Barrientos, 2014-2015
-# Adolfo Jayme Barrientos, 2012-2013
-# Adolfo Jayme Barrientos, 2015-2016
-# Adolfo Jayme Barrientos, 2013
-# Adolfo Jayme Barrientos, 2014
+# Adolfo Jayme-Barrientos, 2014-2015
+# Adolfo Jayme-Barrientos, 2012-2013
+# Adolfo Jayme-Barrientos, 2015-2016
+# Adolfo Jayme-Barrientos, 2013
+# Adolfo Jayme-Barrientos, 2014
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # Juanjo, 2016
 # davidsansome <me@davidsansome.com>, 2013
@@ -15,7 +15,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2016-04-16 20:03+0000\n"
+"PO-Revision-Date: 2016-04-20 22:41+0000\n"
 "Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/davidsansome/clementine/language/ca/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -452,7 +452,7 @@ msgstr "Acció"
 msgid "Active/deactive Wiiremote"
 msgstr "Habilita/inhabilita el Wiiremote"
 
-#: internet/soundcloud/soundcloudservice.cpp:127
+#: internet/soundcloud/soundcloudservice.cpp:128
 msgid "Activities stream"
 msgstr "Llista d’activitats"
 
@@ -1382,7 +1382,7 @@ msgstr "Configura el Magnatune…"
 msgid "Configure Shortcuts"
 msgstr "Configura les dreceres"
 
-#: internet/soundcloud/soundcloudservice.cpp:357
+#: internet/soundcloud/soundcloudservice.cpp:381
 msgid "Configure SoundCloud..."
 msgstr "Configura el SoundCloud…"
 
@@ -2290,6 +2290,10 @@ msgstr "No s’han pogut escriure les etiquetes automàtiques noves a «%1»"
 #: ../bin/src/ui_transcoderoptionsmp3.h:199
 msgid "Fast"
 msgstr "Ràpid"
+
+#: internet/soundcloud/soundcloudservice.cpp:141
+msgid "Favorites"
+msgstr "Favorits"
 
 #: library/library.cpp:88
 msgid "Favourite tracks"
@@ -3566,7 +3570,7 @@ msgstr "Opacitat"
 #: internet/magnatune/magnatuneservice.cpp:287
 #: internet/somafm/somafmservice.cpp:102
 #: internet/intergalacticfm/intergalacticfmservice.cpp:102
-#: internet/soundcloud/soundcloudservice.cpp:353
+#: internet/soundcloud/soundcloudservice.cpp:377
 #, qt-format
 msgid "Open %1 in browser"
 msgstr "Obre %1 en un navegador"
@@ -3804,7 +3808,7 @@ msgstr "Opcions de la llista de reproducció"
 msgid "Playlist type"
 msgstr "Tipus de llista de reproducció"
 
-#: internet/soundcloud/soundcloudservice.cpp:132 ui/mainwindow.cpp:269
+#: internet/soundcloud/soundcloudservice.cpp:133 ui/mainwindow.cpp:269
 msgid "Playlists"
 msgstr "Llistes"
 
@@ -4392,7 +4396,7 @@ msgstr "Mode de cerca"
 msgid "Search options"
 msgstr "Opcions de cerca"
 
-#: internet/soundcloud/soundcloudservice.cpp:118
+#: internet/soundcloud/soundcloudservice.cpp:119
 #: internet/spotify/spotifyservice.cpp:408
 msgid "Search results"
 msgstr "Resultats de la cerca"
@@ -4829,7 +4833,7 @@ msgstr "Inicia la llista de reproducció que s'està reproduint"
 msgid "Start transcoding"
 msgstr "Inicia la conversió"
 
-#: internet/soundcloud/soundcloudservice.cpp:120
+#: internet/soundcloud/soundcloudservice.cpp:121
 #: internet/spotify/spotifyservice.cpp:410
 msgid ""
 "Start typing something on the search box above to fill this search results "
@@ -5209,7 +5213,7 @@ msgstr "Total de sol·licituds de xarxa fetes"
 msgid "Track"
 msgstr "Peça"
 
-#: internet/soundcloud/soundcloudservice.cpp:135
+#: internet/soundcloud/soundcloudservice.cpp:136
 msgid "Tracks"
 msgstr "Peces"
 
@@ -5653,13 +5657,13 @@ msgstr "Sou a punt de baixar els següents àlbums"
 #, qt-format
 msgid ""
 "You are about to remove %1 playlists from your favorites, are you sure?"
-msgstr "Esteu segur que voleu suprimir %1 llistes de reproducció dels vostres preferits?"
+msgstr "Esteu segur que voleu suprimir %1 llistes de reproducció de les vostres llistes favorites?"
 
 #: playlist/playlisttabbar.cpp:186
 msgid ""
 "You are about to remove a playlist which is not part of your favorite playlists: the playlist will be deleted (this action cannot be undone). \n"
 "Are you sure you want to continue?"
-msgstr "Sou a punt d’eliminar una llista de reproducció que no heu desat com a preferida: la llista de reproducció es suprimirà (aquesta acció és irreversible).\nEsteu segur que voleu continuar?"
+msgstr "Sou a punt d’eliminar una llista de reproducció que no heu desat com a favorita: la llista de reproducció es suprimirà (aquesta acció és irreversible).\nEsteu segur que voleu continuar?"
 
 #: ../bin/src/ui_loginstatewidget.h:168
 msgid "You are not signed in."

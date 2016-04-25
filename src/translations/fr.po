@@ -7,6 +7,7 @@
 # arnaudbienner <arnaud.bienner@gmail.com>, 2013
 # arnaudbienner <arnaud.bienner@gmail.com>, 2013-2015
 # arnaudbienner <arnaud.bienner@gmail.com>, 2011-2012
+# Axel Céard <axel.ceard@hotmail.fr>, 2016
 # Gwenn M <tornoz@laposte.net>, 2011
 # Brice <bmaron@gmail.com>, 2011
 # Brice <bmaron@gmail.com>, 2011
@@ -45,7 +46,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2016-03-23 16:53+0000\n"
+"PO-Revision-Date: 2016-04-20 12:23+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: French (http://www.transifex.com/davidsansome/clementine/language/fr/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -482,7 +483,7 @@ msgstr "Action"
 msgid "Active/deactive Wiiremote"
 msgstr "Activer/désactiver Wiiremote"
 
-#: internet/soundcloud/soundcloudservice.cpp:127
+#: internet/soundcloud/soundcloudservice.cpp:128
 msgid "Activities stream"
 msgstr "Flux des activités"
 
@@ -1412,7 +1413,7 @@ msgstr "Configurer Magnatune..."
 msgid "Configure Shortcuts"
 msgstr "Configurer les raccourcis clavier"
 
-#: internet/soundcloud/soundcloudservice.cpp:357
+#: internet/soundcloud/soundcloudservice.cpp:381
 msgid "Configure SoundCloud..."
 msgstr "Configurer SoundCloud"
 
@@ -2320,6 +2321,10 @@ msgstr "Impossible d'écrire les nouveaux tags automatiques vers '%1'"
 #: ../bin/src/ui_transcoderoptionsmp3.h:199
 msgid "Fast"
 msgstr "Rapide"
+
+#: internet/soundcloud/soundcloudservice.cpp:141
+msgid "Favorites"
+msgstr ""
 
 #: library/library.cpp:88
 msgid "Favourite tracks"
@@ -3596,7 +3601,7 @@ msgstr "Opacité"
 #: internet/magnatune/magnatuneservice.cpp:287
 #: internet/somafm/somafmservice.cpp:102
 #: internet/intergalacticfm/intergalacticfmservice.cpp:102
-#: internet/soundcloud/soundcloudservice.cpp:353
+#: internet/soundcloud/soundcloudservice.cpp:377
 #, qt-format
 msgid "Open %1 in browser"
 msgstr "Ouvrir %1 dans le navigateur"
@@ -3834,7 +3839,7 @@ msgstr "Options de la liste de lecture"
 msgid "Playlist type"
 msgstr "Type de liste de lecture"
 
-#: internet/soundcloud/soundcloudservice.cpp:132 ui/mainwindow.cpp:269
+#: internet/soundcloud/soundcloudservice.cpp:133 ui/mainwindow.cpp:269
 msgid "Playlists"
 msgstr "Listes de lecture"
 
@@ -4422,7 +4427,7 @@ msgstr "Mode de recherche"
 msgid "Search options"
 msgstr "Options de recherche"
 
-#: internet/soundcloud/soundcloudservice.cpp:118
+#: internet/soundcloud/soundcloudservice.cpp:119
 #: internet/spotify/spotifyservice.cpp:408
 msgid "Search results"
 msgstr "Résultats de recherche"
@@ -4859,7 +4864,7 @@ msgstr "Commencer la liste de lecture jouée actuellement"
 msgid "Start transcoding"
 msgstr "Démarrer transcodage"
 
-#: internet/soundcloud/soundcloudservice.cpp:120
+#: internet/soundcloud/soundcloudservice.cpp:121
 #: internet/spotify/spotifyservice.cpp:410
 msgid ""
 "Start typing something on the search box above to fill this search results "
@@ -4902,7 +4907,7 @@ msgstr "Arrêter la lecture"
 
 #: core/commandlineoptions.cpp:155
 msgid "Stop playback after current track"
-msgstr ""
+msgstr "Arrêter la lecture après ce morceau"
 
 #: core/globalshortcuts.cpp:55
 msgid "Stop playing after current track"
@@ -5239,7 +5244,7 @@ msgstr "Nombre total de requêtes réseau effectuées"
 msgid "Track"
 msgstr "Piste"
 
-#: internet/soundcloud/soundcloudservice.cpp:135
+#: internet/soundcloud/soundcloudservice.cpp:136
 msgid "Tracks"
 msgstr "Pistes"
 

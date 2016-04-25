@@ -13,7 +13,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2016-03-28 10:33+0000\n"
+"PO-Revision-Date: 2016-04-21 09:37+0000\n"
 "Last-Translator: Gwenn M <tornoz@laposte.net>\n"
 "Language-Team: Breton (http://www.transifex.com/davidsansome/clementine/language/br/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -450,7 +450,7 @@ msgstr "Oberenn"
 msgid "Active/deactive Wiiremote"
 msgstr "Gweredekaat/Diweredekaat Wiiremote"
 
-#: internet/soundcloud/soundcloudservice.cpp:127
+#: internet/soundcloud/soundcloudservice.cpp:128
 msgid "Activities stream"
 msgstr "Red obererezhioù"
 
@@ -1380,7 +1380,7 @@ msgstr "KefluniañMagnatune..."
 msgid "Configure Shortcuts"
 msgstr "Kefluniañ ar Berradennoù"
 
-#: internet/soundcloud/soundcloudservice.cpp:357
+#: internet/soundcloud/soundcloudservice.cpp:381
 msgid "Configure SoundCloud..."
 msgstr "Kefluniañ SoundCloud..."
 
@@ -1432,12 +1432,12 @@ msgstr "O kennaskañ da Spotify"
 msgid ""
 "Connection refused by server, check server URL. Example: "
 "http://localhost:4040/"
-msgstr "Kennask nac'het gant ar servijer, gwiriekait URL ar servijer. Da skouer : http://localhost:4040/"
+msgstr "Kennask nac'het gant an dafariad, gwiriekait URL an dafariad. Skouer : http://localhost:4040/"
 
 #: internet/subsonic/subsonicsettingspage.cpp:141
 msgid ""
 "Connection timed out, check server URL. Example: http://localhost:4040/"
-msgstr "Ar c'hennask a lak re a amzer, gwiriekait URL ar servijer. Da skouer : http://localhost:4040/"
+msgstr "Ar c'hennask a lak re a amzer, gwiriekait URL an dafariad. Skouer : http://localhost:4040/"
 
 #: internet/vk/vkservice.cpp:1128
 msgid "Connection trouble or audio is disabled by owner"
@@ -1493,7 +1493,7 @@ msgstr "Gwirioù arzour"
 msgid ""
 "Could not connect to Subsonic, check server URL. Example: "
 "http://localhost:4040/"
-msgstr "Dibosupl kennaskañ ouzh Subsonic, gwiriekait URL ar sevijer. Da skouer : http://localhost:4040/"
+msgstr "Dibosupl kennaskañ ouzh Subsonic, gwiriekait URL an dafariad. Skouer : http://localhost:4040/"
 
 #: transcoder/transcoder.cpp:58
 #, qt-format
@@ -2289,6 +2289,10 @@ msgstr "C'hwitadenn war skrivañ klavioù emgefreek nevez da '%1'"
 msgid "Fast"
 msgstr "Trumm"
 
+#: internet/soundcloud/soundcloudservice.cpp:141
+msgid "Favorites"
+msgstr "Karetañ"
+
 #: library/library.cpp:88
 msgid "Favourite tracks"
 msgstr "Roudoù karetañ"
@@ -2592,7 +2596,7 @@ msgstr "Ar pajenn HTML a oa hep lanv RSS ebet."
 #: internet/subsonic/subsonicsettingspage.cpp:163
 msgid ""
 "HTTP 3xx status code received without URL, verify server configuration."
-msgstr "Kod Statud HTTP 3xx resevet hep URL, gwiriekait kefluniadur ar servijer."
+msgstr "Boneg Statud HTTP 3xx resevet hep URL, gwiriekait kefluniadur an dafariad."
 
 #: ../bin/src/ui_networkproxysettingspage.h:162
 msgid "HTTP proxy"
@@ -2630,7 +2634,7 @@ msgstr "HipHop"
 
 #: internet/subsonic/subsonicsettingspage.cpp:135
 msgid "Host not found, check server URL. Example: http://localhost:4040/"
-msgstr "N'eo ket bet kavet an herberc'hier, gwiriekait URL ar servijer. Da skouer : http://localhost:4040/"
+msgstr "N'eo ket bet kavet an herberc'hier, gwiriekait URL an dafariad. Skouer : http://localhost:4040/"
 
 #: smartplaylists/searchterm.cpp:391
 msgid "Hours"
@@ -2718,7 +2722,7 @@ msgstr "Handelv protokol REST Subsonic digenglotus. Hizivait an arval."
 
 #: internet/subsonic/subsonicsettingspage.cpp:112
 msgid "Incompatible Subsonic REST protocol version. Server must upgrade."
-msgstr "Handelv protokol REST Subsonic digenglotus. Ret eo d'ar servijer hizivaat."
+msgstr "Handelv komenad REST Subsonic digeverlec'h. Ret eo d'an dafariad hizivaat."
 
 #: internet/subsonic/subsonicsettingspage.cpp:153
 msgid "Incomplete configuration, please ensure all fields are populated."
@@ -3165,7 +3169,7 @@ msgstr "Lakaat ar roll seniñ da vezañ lennus ezlinenn"
 
 #: internet/lastfm/lastfmservice.cpp:280
 msgid "Malformed response"
-msgstr "Respont furmed fall"
+msgstr "Respont stummet fall"
 
 #: ../bin/src/ui_libraryfilterwidget.h:102
 msgid "Manage saved groupings"
@@ -3564,7 +3568,7 @@ msgstr "Demerez"
 #: internet/magnatune/magnatuneservice.cpp:287
 #: internet/somafm/somafmservice.cpp:102
 #: internet/intergalacticfm/intergalacticfmservice.cpp:102
-#: internet/soundcloud/soundcloudservice.cpp:353
+#: internet/soundcloud/soundcloudservice.cpp:377
 #, qt-format
 msgid "Open %1 in browser"
 msgstr "Digeriñ %1 er merdeer"
@@ -3802,7 +3806,7 @@ msgstr "Dibarzhioù ar roll seniñ"
 msgid "Playlist type"
 msgstr "Doare ar roll seniñ"
 
-#: internet/soundcloud/soundcloudservice.cpp:132 ui/mainwindow.cpp:269
+#: internet/soundcloud/soundcloudservice.cpp:133 ui/mainwindow.cpp:269
 msgid "Playlists"
 msgstr "Rolloù seniñ"
 
@@ -4031,7 +4035,7 @@ msgstr "Sonet nevez 'zo"
 
 #: internet/subsonic/subsonicsettingspage.cpp:158
 msgid "Redirect limit exceeded, verify server configuration."
-msgstr "Aet e biou ar vevenn adkas, gwiriekait kefluniadur ar servijer."
+msgstr "Aet dreist ar vevenn adkas, gwiriekait kefluniadur an dafariad."
 
 #: internet/jamendo/jamendoservice.cpp:430
 #: internet/magnatune/magnatuneservice.cpp:290
@@ -4234,7 +4238,7 @@ msgstr "SOCKS proksi"
 msgid ""
 "SSL handshake error, verify server configuration. SSLv3 option below may "
 "workaround some issues."
-msgstr "Kudenn er c'hennask SSL, gwiriekait kefluniadur ar servijer. An arventenn SSLv3 en traoñ a c'hell reizhañ kudennoù 'zo."
+msgstr "Kudenn er c'hennask SSL, gwiriekait kefluniadur an dafariad. An arventenn SSLv3 dinan a c'hell reizhañ kudennoù 'zo."
 
 #: devices/deviceview.cpp:204
 msgid "Safely remove device"
@@ -4390,7 +4394,7 @@ msgstr "Doare klask"
 msgid "Search options"
 msgstr "Dibarzhioù klask"
 
-#: internet/soundcloud/soundcloudservice.cpp:118
+#: internet/soundcloud/soundcloudservice.cpp:119
 #: internet/spotify/spotifyservice.cpp:408
 msgid "Search results"
 msgstr "Disoc'hoù an enklask"
@@ -4470,15 +4474,15 @@ msgstr "Niver heuliad"
 
 #: ../bin/src/ui_seafilesettingspage.h:173
 msgid "Server"
-msgstr "Servijer"
+msgstr "Dafariad"
 
 #: ../bin/src/ui_subsonicsettingspage.h:125
 msgid "Server URL"
-msgstr "URL ar servijer"
+msgstr "URL an dafariad"
 
 #: ../bin/src/ui_subsonicsettingspage.h:124
 msgid "Server details"
-msgstr "Munudoù ar servijer"
+msgstr "Munudoù an dafariad"
 
 #: internet/lastfm/lastfmservice.cpp:263
 msgid "Service offline"
@@ -4827,7 +4831,7 @@ msgstr "Kregiñ ar roll seniñ"
 msgid "Start transcoding"
 msgstr "Kregin an transkodiñ"
 
-#: internet/soundcloud/soundcloudservice.cpp:120
+#: internet/soundcloud/soundcloudservice.cpp:121
 #: internet/spotify/spotifyservice.cpp:410
 msgid ""
 "Start typing something on the search box above to fill this search results "
@@ -4893,7 +4897,7 @@ msgstr "Lanv"
 msgid ""
 "Streaming from a Subsonic server requires a valid server license after the "
 "30-day trial period."
-msgstr "Evit implij ar streaming adalek ur servijer Subsonic goude an 30 devezh amprouiñ ho peus ezhomm eus  ul lañvaz servijer reizh."
+msgstr "Evit implij ar streaming adalek un dafariad Subsonic goude an 30 devezh amprouiñ ho peus ezhomm eus ul lañvaz dafariad talvoudek."
 
 #: ../bin/src/ui_magnatunesettingspage.h:159
 msgid "Streaming membership"
@@ -5014,7 +5018,7 @@ msgstr "Al lec'hienn goulennet n'eo ket ur skeudenn"
 msgid ""
 "The trial period for the Subsonic server is over. Please donate to get a "
 "license key. Visit subsonic.org for details."
-msgstr "Ar mare amprouiñ evit ar servijer Subsonic a zo echuet. Roit arc'hant evit kaout un alc'hwez lañvaz mar plij. KIt war subsonic.org evit ar munudoù."
+msgstr "Ar mare amprouiñ evit an dafariad Subsonic a zo echuet. Roit arc'hant evit kaout un alc'hwez lañvaz mar plij. Kit war subsonic.org evit ar munudoù."
 
 #: ui/mainwindow.cpp:2513
 msgid ""
@@ -5207,7 +5211,7 @@ msgstr "Niver a atersadennoù rouedad"
 msgid "Track"
 msgstr "Roud"
 
-#: internet/soundcloud/soundcloudservice.cpp:135
+#: internet/soundcloud/soundcloudservice.cpp:136
 msgid "Tracks"
 msgstr "Roudoù"
 

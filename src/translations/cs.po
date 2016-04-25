@@ -20,7 +20,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2016-03-23 22:23+0000\n"
+"PO-Revision-Date: 2016-04-21 21:08+0000\n"
 "Last-Translator: fri\n"
 "Language-Team: Czech (http://www.transifex.com/davidsansome/clementine/language/cs/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -457,7 +457,7 @@ msgstr "Činnost"
 msgid "Active/deactive Wiiremote"
 msgstr "Zapnout/Vypnout Wiiremote"
 
-#: internet/soundcloud/soundcloudservice.cpp:127
+#: internet/soundcloud/soundcloudservice.cpp:128
 msgid "Activities stream"
 msgstr "Proud činností"
 
@@ -1316,7 +1316,7 @@ msgstr "Klepněte pro přepnutí mezi zbývajícím časem a celkovým časem"
 msgid ""
 "Clicking the Login button will open a web browser.  You should return to "
 "Clementine after you have logged in."
-msgstr "Klepnutí na přihlašovací tlačítko otevře internetových stránek.  Po přihlášení se vraťte do Clementine."
+msgstr "Klepnutí na přihlašovací tlačítko otevře prohlížeč internetových stránek.  Po přihlášení se vraťte do Clementine."
 
 #: widgets/didyoumean.cpp:37
 msgid "Close"
@@ -1387,7 +1387,7 @@ msgstr "Nastavit Magnatune..."
 msgid "Configure Shortcuts"
 msgstr "Nastavit klávesové zkratky"
 
-#: internet/soundcloud/soundcloudservice.cpp:357
+#: internet/soundcloud/soundcloudservice.cpp:381
 msgid "Configure SoundCloud..."
 msgstr "Nastavit SoundCloud..."
 
@@ -2295,6 +2295,10 @@ msgstr "Nepodařilo se zapsat nové automatické značky do '%1'"
 #: ../bin/src/ui_transcoderoptionsmp3.h:199
 msgid "Fast"
 msgstr "Rychlý"
+
+#: internet/soundcloud/soundcloudservice.cpp:141
+msgid "Favorites"
+msgstr "Oblíbené"
 
 #: library/library.cpp:88
 msgid "Favourite tracks"
@@ -3571,7 +3575,7 @@ msgstr "Neprůhlednost"
 #: internet/magnatune/magnatuneservice.cpp:287
 #: internet/somafm/somafmservice.cpp:102
 #: internet/intergalacticfm/intergalacticfmservice.cpp:102
-#: internet/soundcloud/soundcloudservice.cpp:353
+#: internet/soundcloud/soundcloudservice.cpp:377
 #, qt-format
 msgid "Open %1 in browser"
 msgstr "Otevřít %1 v prohlížeči"
@@ -3809,7 +3813,7 @@ msgstr "Nastavení seznamu skladeb"
 msgid "Playlist type"
 msgstr "Typ seznamu skladeb"
 
-#: internet/soundcloud/soundcloudservice.cpp:132 ui/mainwindow.cpp:269
+#: internet/soundcloud/soundcloudservice.cpp:133 ui/mainwindow.cpp:269
 msgid "Playlists"
 msgstr "Seznamy"
 
@@ -4336,7 +4340,7 @@ msgstr "Výsledek"
 
 #: ../bin/src/ui_lastfmsettingspage.h:135
 msgid "Scrobble tracks that I listen to"
-msgstr "Odesílat informace o přehrávaných skladbách."
+msgstr "Odesílat informace o přehrávaných skladbách"
 
 #: ../bin/src/ui_seafilesettingspage.h:164
 msgid "Seafile"
@@ -4397,7 +4401,7 @@ msgstr "Režim vyhledávání"
 msgid "Search options"
 msgstr "Možnosti vyhledávání"
 
-#: internet/soundcloud/soundcloudservice.cpp:118
+#: internet/soundcloud/soundcloudservice.cpp:119
 #: internet/spotify/spotifyservice.cpp:408
 msgid "Search results"
 msgstr "Hledat výsledky"
@@ -4834,7 +4838,7 @@ msgstr "Přehrát současnou skladbu v seznamu skladeb"
 msgid "Start transcoding"
 msgstr "Převést"
 
-#: internet/soundcloud/soundcloudservice.cpp:120
+#: internet/soundcloud/soundcloudservice.cpp:121
 #: internet/spotify/spotifyservice.cpp:410
 msgid ""
 "Start typing something on the search box above to fill this search results "
@@ -5214,7 +5218,7 @@ msgstr "Celkem uskutečněno síťových požadavků"
 msgid "Track"
 msgstr "Skladba"
 
-#: internet/soundcloud/soundcloudservice.cpp:135
+#: internet/soundcloud/soundcloudservice.cpp:136
 msgid "Tracks"
 msgstr "Skladby"
 
@@ -5334,7 +5338,7 @@ msgstr "Obnovit tento zvukový záznam"
 
 #: ../bin/src/ui_podcastsettingspage.h:251
 msgid "Updating"
-msgstr "Obnovuje se"
+msgstr "Obnovení"
 
 #: library/librarywatcher.cpp:97
 #, qt-format

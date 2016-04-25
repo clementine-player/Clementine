@@ -14,7 +14,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2016-04-15 22:29+0000\n"
+"PO-Revision-Date: 2016-04-20 12:49+0000\n"
 "Last-Translator: Sérgio Marques <smarquespt@gmail.com>\n"
 "Language-Team: Portuguese (http://www.transifex.com/davidsansome/clementine/language/pt/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -451,7 +451,7 @@ msgstr "Ação"
 msgid "Active/deactive Wiiremote"
 msgstr "Ativar/desativar Wiiremote"
 
-#: internet/soundcloud/soundcloudservice.cpp:127
+#: internet/soundcloud/soundcloudservice.cpp:128
 msgid "Activities stream"
 msgstr "Emissão de atividades"
 
@@ -843,7 +843,7 @@ msgstr "Aplicar compressão para impedir a distorção"
 #: ui/equalizer.cpp:222
 #, qt-format
 msgid "Are you sure you want to delete the \"%1\" preset?"
-msgstr "Tem a certeza de que quer apagar o pré-ajuste \"%1\"?"
+msgstr "Tem a certeza de que deseja apagar o pré-ajuste \"%1\"?"
 
 #: ui/edittagdialog.cpp:803
 msgid "Are you sure you want to reset this song's statistics?"
@@ -1381,7 +1381,7 @@ msgstr "Configurar Magnatune..."
 msgid "Configure Shortcuts"
 msgstr "Configurar atalhos"
 
-#: internet/soundcloud/soundcloudservice.cpp:357
+#: internet/soundcloud/soundcloudservice.cpp:381
 msgid "Configure SoundCloud..."
 msgstr "Configurar SoundCloud..."
 
@@ -1886,7 +1886,7 @@ msgstr "Descarregar episódios para"
 
 #: ../bin/src/ui_magnatunesettingspage.h:160
 msgid "Download membership"
-msgstr "Transferência"
+msgstr "Adesão de descarga"
 
 #: ../bin/src/ui_podcastsettingspage.h:265
 msgid "Download new episodes automatically"
@@ -2289,6 +2289,10 @@ msgstr "Falha ao gravar os detalhes para '%1'"
 #: ../bin/src/ui_transcoderoptionsmp3.h:199
 msgid "Fast"
 msgstr "Rápida"
+
+#: internet/soundcloud/soundcloudservice.cpp:141
+msgid "Favorites"
+msgstr "Favoritas"
 
 #: library/library.cpp:88
 msgid "Favourite tracks"
@@ -3565,7 +3569,7 @@ msgstr "Opacidade"
 #: internet/magnatune/magnatuneservice.cpp:287
 #: internet/somafm/somafmservice.cpp:102
 #: internet/intergalacticfm/intergalacticfmservice.cpp:102
-#: internet/soundcloud/soundcloudservice.cpp:353
+#: internet/soundcloud/soundcloudservice.cpp:377
 #, qt-format
 msgid "Open %1 in browser"
 msgstr "Abrir %1 no navegador"
@@ -3803,7 +3807,7 @@ msgstr "Opções da lista de reprodução"
 msgid "Playlist type"
 msgstr "Tipo de lista de reprodução"
 
-#: internet/soundcloud/soundcloudservice.cpp:132 ui/mainwindow.cpp:269
+#: internet/soundcloud/soundcloudservice.cpp:133 ui/mainwindow.cpp:269
 msgid "Playlists"
 msgstr "Listas de reprodução"
 
@@ -4391,7 +4395,7 @@ msgstr "Modo de pesquisa"
 msgid "Search options"
 msgstr "Opções de pesquisa"
 
-#: internet/soundcloud/soundcloudservice.cpp:118
+#: internet/soundcloud/soundcloudservice.cpp:119
 #: internet/spotify/spotifyservice.cpp:408
 msgid "Search results"
 msgstr "Resultados da pesquisa"
@@ -4828,7 +4832,7 @@ msgstr "Iniciar lista de reprodução atual"
 msgid "Start transcoding"
 msgstr "Iniciar conversão"
 
-#: internet/soundcloud/soundcloudservice.cpp:120
+#: internet/soundcloud/soundcloudservice.cpp:121
 #: internet/spotify/spotifyservice.cpp:410
 msgid ""
 "Start typing something on the search box above to fill this search results "
@@ -4898,7 +4902,7 @@ msgstr "Para receber as emissões do servidor Subsonic, tem que adquirir uma lic
 
 #: ../bin/src/ui_magnatunesettingspage.h:159
 msgid "Streaming membership"
-msgstr "Emissão"
+msgstr "Adesão de emissão"
 
 #: ../bin/src/ui_podcastinfowidget.h:195
 msgid "Subscribers"
@@ -5063,7 +5067,7 @@ msgstr "Estes ficheiros serão removidos do dispositivo. Tem a certeza de que de
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
-msgstr "Estes ficheiros serão removidos permanentemente do disco. Tem a certeza de que deseja continuar?"
+msgstr "Estes ficheiros serão apagados permanentemente do disco. Tem a certeza de que deseja continuar?"
 
 #: ../bin/src/ui_librarysettingspage.h:186
 msgid "These folders will be scanned for music to make up your library"
@@ -5208,7 +5212,7 @@ msgstr "Total de pedidos efetuados"
 msgid "Track"
 msgstr "Faixa"
 
-#: internet/soundcloud/soundcloudservice.cpp:135
+#: internet/soundcloud/soundcloudservice.cpp:136
 msgid "Tracks"
 msgstr "Faixas"
 
@@ -5652,7 +5656,7 @@ msgstr "Está prestes a descarregar os seguintes álbuns"
 #, qt-format
 msgid ""
 "You are about to remove %1 playlists from your favorites, are you sure?"
-msgstr "Está prestes a eliminar %1 listas de reprodução dos favoritos. Tem a certeza?"
+msgstr "Está prestes a eliminar %1 listas de reprodução das suas favoritas. Tem a certeza?"
 
 #: playlist/playlisttabbar.cpp:186
 msgid ""

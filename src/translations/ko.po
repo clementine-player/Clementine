@@ -20,8 +20,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2016-04-16 18:30+0000\n"
-"Last-Translator: 박정규(Jung-Kyu Park) <bagjunggyu@gmail.com>\n"
+"PO-Revision-Date: 2016-04-20 12:23+0000\n"
+"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Korean (http://www.transifex.com/davidsansome/clementine/language/ko/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -65,7 +65,7 @@ msgstr " pt"
 
 #: ../bin/src/ui_behavioursettingspage.h:359
 msgid " s"
-msgstr ""
+msgstr " "
 
 #: ../bin/src/ui_notificationssettingspage.h:444
 #: ../bin/src/ui_visualisationselector.h:115
@@ -220,7 +220,7 @@ msgstr "왼쪽(&L)"
 
 #: playlist/playlistheader.cpp:36
 msgid "&Lock Rating"
-msgstr ""
+msgstr "평가 잠금"
 
 #: ../bin/src/ui_mainwindow.h:715
 msgid "&Music"
@@ -264,7 +264,7 @@ msgstr "(전반적으로 다양한 곡)"
 
 #: internet/spotify/spotifyservice.cpp:469
 msgid ", by "
-msgstr ""
+msgstr ", by "
 
 #: ui/about.cpp:84
 msgid "...and all the Amarok contributors"
@@ -457,7 +457,7 @@ msgstr "동작"
 msgid "Active/deactive Wiiremote"
 msgstr "Wii 리모컨 사용/중지"
 
-#: internet/soundcloud/soundcloudservice.cpp:127
+#: internet/soundcloud/soundcloudservice.cpp:128
 msgid "Activities stream"
 msgstr "활동 스트림"
 
@@ -1387,7 +1387,7 @@ msgstr "Magnatune 설정..."
 msgid "Configure Shortcuts"
 msgstr "단축키 설정"
 
-#: internet/soundcloud/soundcloudservice.cpp:357
+#: internet/soundcloud/soundcloudservice.cpp:381
 msgid "Configure SoundCloud..."
 msgstr "SoundCloud 설정..."
 
@@ -2295,6 +2295,10 @@ msgstr ""
 #: ../bin/src/ui_transcoderoptionsmp3.h:199
 msgid "Fast"
 msgstr "빠른"
+
+#: internet/soundcloud/soundcloudservice.cpp:141
+msgid "Favorites"
+msgstr ""
 
 #: library/library.cpp:88
 msgid "Favourite tracks"
@@ -3571,7 +3575,7 @@ msgstr "투명도"
 #: internet/magnatune/magnatuneservice.cpp:287
 #: internet/somafm/somafmservice.cpp:102
 #: internet/intergalacticfm/intergalacticfmservice.cpp:102
-#: internet/soundcloud/soundcloudservice.cpp:353
+#: internet/soundcloud/soundcloudservice.cpp:377
 #, qt-format
 msgid "Open %1 in browser"
 msgstr "브라우저에서 %1 열기"
@@ -3809,7 +3813,7 @@ msgstr "재생목록 옵션"
 msgid "Playlist type"
 msgstr "재생목록 종류"
 
-#: internet/soundcloud/soundcloudservice.cpp:132 ui/mainwindow.cpp:269
+#: internet/soundcloud/soundcloudservice.cpp:133 ui/mainwindow.cpp:269
 msgid "Playlists"
 msgstr "재생목록"
 
@@ -4397,7 +4401,7 @@ msgstr "모드 검색"
 msgid "Search options"
 msgstr "옵션 검색"
 
-#: internet/soundcloud/soundcloudservice.cpp:118
+#: internet/soundcloud/soundcloudservice.cpp:119
 #: internet/spotify/spotifyservice.cpp:408
 msgid "Search results"
 msgstr "검색 결과"
@@ -4834,7 +4838,7 @@ msgstr "현재 재생중인 재생목록 시작"
 msgid "Start transcoding"
 msgstr "변환 시작"
 
-#: internet/soundcloud/soundcloudservice.cpp:120
+#: internet/soundcloud/soundcloudservice.cpp:121
 #: internet/spotify/spotifyservice.cpp:410
 msgid ""
 "Start typing something on the search box above to fill this search results "
@@ -5214,7 +5218,7 @@ msgstr ""
 msgid "Track"
 msgstr "트랙"
 
-#: internet/soundcloud/soundcloudservice.cpp:135
+#: internet/soundcloud/soundcloudservice.cpp:136
 msgid "Tracks"
 msgstr "트랙"
 
