@@ -497,6 +497,7 @@ QVariant LibraryModel::AlbumIcon(const QModelIndex& index) {
   std::unique_ptr<QIODevice> cache(icon_cache_->data(QUrl(cache_key)));
   if (cache) {
     QImage cached_pixmap;
+    qLog(Info) << "Loading album icon from cache for " << item->metadata.artist() << item->metadata.title() << QUrl(cache_key);
     if (cached_pixmap.load(cache.get(), "XPM")) {
       QPixmapCache::insert(cache_key, QPixmap::fromImage(cached_pixmap));
       return QPixmap::fromImage(cached_pixmap);
