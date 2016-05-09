@@ -74,6 +74,7 @@ SoundCloudService::SoundCloudService(Application* app, InternetModel* parent)
       user_tracks_(nullptr),
       user_playlists_(nullptr),
       user_activities_(nullptr),
+      user_favorites_(nullptr),
       network_(new NetworkAccessManager(this)),
       context_menu_(nullptr),
       search_box_(new SearchBoxWidget(this)),
@@ -138,6 +139,9 @@ void SoundCloudService::EnsureItemsCreated() {
     user_tracks_->setData(InternetModel::PlayBehaviour_MultipleItems,
                           InternetModel::Role_PlayBehaviour);
     root_->appendRow(user_tracks_);
+
+    user_favorites_ = new QStandardItem(tr("Favorites"));
+    root_->appendRow(user_favorites_);
 
     RetrieveUserData();  // at least, try to (this will do nothing if user isn't
                          // logged)
@@ -216,6 +220,7 @@ void SoundCloudService::RetrieveUserData() {
   RetrieveUserActivities();
   RetrieveUserTracks();
   RetrieveUserPlaylists();
+  RetrieveUserFavorites();
 }
 
 void SoundCloudService::RetrieveUserTracks() {
@@ -263,6 +268,14 @@ void SoundCloudService::RetrieveUserPlaylists() {
              SLOT(UserPlaylistsRetrieved(QNetworkReply*)), reply);
 }
 
+void SoundCloudService::RetrieveUserFavorites() {
+  QList<Param> parameters;
+  parameters << Param("oauth_token", access_token_);
+  QNetworkReply* reply = CreateRequest("me/favorites", parameters);
+  NewClosure(reply, SIGNAL(finished()), this,
+             SLOT(UserFavoritesRetrieved(QNetworkReply*)), reply);
+}
+
 void SoundCloudService::UserPlaylistsRetrieved(QNetworkReply* reply) {
   reply->deleteLater();
 
@@ -276,6 +289,17 @@ void SoundCloudService::UserPlaylistsRetrieved(QNetworkReply* reply) {
       playlist_item->appendRow(CreateSongItem(song));
     }
     user_playlists_->appendRow(playlist_item);
+  }
+}
+
+void SoundCloudService::UserFavoritesRetrieved(QNetworkReply* reply) {
+  reply->deleteLater();
+
+  SongList songs = ExtractSongs(ExtractResult(reply).array());
+  // Fill results list
+  for (const Song& song : songs) {
+    QStandardItem* child = CreateSongItem(song);
+    user_favorites_->appendRow(child);
   }
 }
 

@@ -1035,9 +1035,7 @@ QString Song::PrettyTitle() const {
 }
 
 QString Song::PrettyTitleWithArtist() const {
-  QString title(d->title_);
-
-  if (title.isEmpty()) title = d->basefilename_;
+  QString title(PrettyTitle());
 
   if (!d->artist_.isEmpty()) title = d->artist_ + " - " + title;
 
@@ -1165,4 +1163,7 @@ void Song::MergeUserSetData(const Song& other) {
   set_lastplayed(other.lastplayed());
   set_score(other.score());
   set_art_manual(other.art_manual());
+  if (rating() == -1.0f) {
+    set_rating(other.rating());
+  }
 }

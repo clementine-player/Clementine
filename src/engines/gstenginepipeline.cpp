@@ -174,12 +174,12 @@ bool GstEnginePipeline::ReplaceDecodeBin(const QUrl& url) {
     gst_object_unref(GST_OBJECT(pad));
 
     // Tell spotify to start sending data to us.
-    SpotifyServer* spotify_server = InternetModel::Service<SpotifyService>()->server();
+    SpotifyServer* spotify_server =
+        InternetModel::Service<SpotifyService>()->server();
     // Need to schedule this in the spotify server's thread
-    QMetaObject::invokeMethod(spotify_server, "StartPlayback",
-                              Qt::QueuedConnection,
-                              Q_ARG(QString, url.toString()),
-                              Q_ARG(quint16, port));
+    QMetaObject::invokeMethod(
+        spotify_server, "StartPlayback", Qt::QueuedConnection,
+        Q_ARG(QString, url.toString()), Q_ARG(quint16, port));
   } else {
     new_bin = engine_->CreateElement("uridecodebin");
     g_object_set(G_OBJECT(new_bin), "uri", url.toEncoded().constData(),
@@ -334,13 +334,35 @@ bool GstEnginePipeline::Init() {
   // Configure the fakesink properly
   g_object_set(G_OBJECT(probe_sink), "sync", TRUE, nullptr);
 
-  // Set the equalizer bands
-  g_object_set(G_OBJECT(equalizer_), "num-bands", 10, nullptr);
+  // Setting the equalizer bands:
+  //
+  // GStreamer's GstIirEqualizerNBands sets up shelve filters for the first and
+  // last bands as corner cases. That was causing the "inverted slider" bug.
+  // As a workaround, we create two dummy bands at both ends of the spectrum.
+  // This causes the actual first and last adjustable bands to be
+  // implemented using band-pass filters.
+
+  g_object_set(G_OBJECT(equalizer_), "num-bands", 10 + 2, nullptr);
+
+  // Dummy first band (bandwidth 0, cutting below 20Hz):
+  GstObject* first_band = GST_OBJECT(
+      gst_child_proxy_get_child_by_index(GST_CHILD_PROXY(equalizer_), 0));
+  g_object_set(G_OBJECT(first_band), "freq", 20.0, "bandwidth", 0, "gain", 0.0f,
+               nullptr);
+  g_object_unref(G_OBJECT(first_band));
+
+  // Dummy last band (bandwidth 0, cutting over 20KHz):
+  GstObject* last_band = GST_OBJECT(gst_child_proxy_get_child_by_index(
+      GST_CHILD_PROXY(equalizer_), kEqBandCount + 1));
+  g_object_set(G_OBJECT(last_band), "freq", 20000.0, "bandwidth", 0, "gain",
+               0.0f, nullptr);
+  g_object_unref(G_OBJECT(last_band));
 
   int last_band_frequency = 0;
   for (int i = 0; i < kEqBandCount; ++i) {
-    GstObject* band = GST_OBJECT(
-        gst_child_proxy_get_child_by_index(GST_CHILD_PROXY(equalizer_), i));
+    const int index_in_eq = i + 1;
+    GstObject* band = GST_OBJECT(gst_child_proxy_get_child_by_index(
+        GST_CHILD_PROXY(equalizer_), index_in_eq));
 
     const float frequency = kEqBandFrequencies[i];
     const float bandwidth = frequency - last_band_frequency;
@@ -1097,8 +1119,10 @@ void GstEnginePipeline::UpdateEqualizer() {
     else
       gain *= 0.12;
 
-    GstObject* band = GST_OBJECT(
-        gst_child_proxy_get_child_by_index(GST_CHILD_PROXY(equalizer_), i));
+    const int index_in_eq = i + 1;
+    // Offset because of the first dummy band we created.
+    GstObject* band = GST_OBJECT(gst_child_proxy_get_child_by_index(
+        GST_CHILD_PROXY(equalizer_), index_in_eq));
     g_object_set(G_OBJECT(band), "gain", gain, nullptr);
     g_object_unref(G_OBJECT(band));
   }

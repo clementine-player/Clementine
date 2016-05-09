@@ -36,6 +36,7 @@
 #include "internet/podcasts/podcastepisode.h"
 #include "internet/podcasts/podcast.h"
 #include "internet/somafm/somafmservice.h"
+#include "internet/intergalacticfm/intergalacticfmservice.h"
 #include "library/directory.h"
 #include "playlist/playlist.h"
 #include "songinfo/collapsibleinfopane.h"
@@ -95,6 +96,8 @@ void RegisterMetaTypes() {
   qRegisterMetaType<smart_playlists::GeneratorPtr>(
       "smart_playlists::GeneratorPtr");
   qRegisterMetaType<SomaFMService::Stream>("SomaFMService::Stream");
+  qRegisterMetaType<IntergalacticFMService::Stream>(
+      "IntergalacticFMService::Stream");
   qRegisterMetaType<SongList>("SongList");
   qRegisterMetaType<Song>("Song");
   qRegisterMetaTypeStreamOperators<DigitallyImportedClient::Channel>(
@@ -103,6 +106,8 @@ void RegisterMetaTypes() {
   qRegisterMetaTypeStreamOperators<QMap<int, int>>("ColumnAlignmentMap");
   qRegisterMetaTypeStreamOperators<SomaFMService::Stream>(
       "SomaFMService::Stream");
+  qRegisterMetaTypeStreamOperators<IntergalacticFMService::Stream>(
+      "IntergalacticFMService::Stream");
   qRegisterMetaType<SubdirectoryList>("SubdirectoryList");
   qRegisterMetaType<Subdirectory>("Subdirectory");
   qRegisterMetaType<QList<QUrl>>("QList<QUrl>");

@@ -221,7 +221,7 @@ optional_component(SEAFILE ON "Seafile support"
   DEPENDS "Taglib 1.8" "TAGLIB_VERSION VERSION_GREATER 1.7.999"
 )
 
-optional_component(AMAZON_CLOUD_DRIVE ON "Amazon Cloud Drive support"
+optional_component(AMAZON_CLOUD_DRIVE OFF "Amazon Cloud Drive support"
   DEPENDS "Google sparsehash" SPARSEHASH_INCLUDE_DIRS
   DEPENDS "Taglib 1.8" "TAGLIB_VERSION VERSION_GREATER 1.7.999"
 )

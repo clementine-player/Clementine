@@ -443,6 +443,9 @@ signals:
   QList<SongInsertVetoListener*> veto_listeners_;
 
   QString special_type_;
+
+  // Cancel async restore if songs are already replaced
+  bool cancel_restore_;
 };
 
 // QDataStream& operator <<(QDataStream&, const Playlist*);

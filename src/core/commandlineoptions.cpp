@@ -299,6 +299,11 @@ bool CommandlineOptions::is_empty() const {
          toggle_pretty_osd_ == false && urls_.isEmpty();
 }
 
+bool CommandlineOptions::contains_play_options() const {
+  return player_action_ != Player_None || play_track_at_ != -1 ||
+         !urls_.isEmpty();
+}
+
 QByteArray CommandlineOptions::Serialize() const {
   QBuffer buf;
   buf.open(QIODevice::WriteOnly);
