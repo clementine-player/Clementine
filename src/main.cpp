@@ -73,6 +73,8 @@
 #include <glib.h>
 #include <gst/gst.h>
 
+#include <Config.h>
+
 #ifdef Q_OS_DARWIN
 #include <sys/resource.h>
 #include <sys/sysctl.h>
