@@ -449,7 +449,7 @@ int main(int argc, char* argv[]) {
 #endif
 
   // Window
-  MainWindow w(&app, tray_icon.get(), &osd);
+  MainWindow w(&app, tray_icon.get(), &osd, options);
 #ifdef Q_OS_DARWIN
   mac::EnableFullScreen(w);
 #endif  // Q_OS_DARWIN
@@ -461,7 +461,6 @@ int main(int argc, char* argv[]) {
 #endif
   QObject::connect(&a, SIGNAL(messageReceived(QString)), &w,
                    SLOT(CommandlineOptionsReceived(QString)));
-  w.CommandlineOptionsReceived(options);
 
   int ret = a.exec();
 

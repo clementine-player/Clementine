@@ -165,7 +165,7 @@ const int kTrackPositionUpdateTimeMs = 1000;
 }
 
 MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
-                       QWidget* parent)
+                       const CommandlineOptions& options, QWidget* parent)
     : QMainWindow(parent),
       ui_(new Ui_MainWindow),
       thumbbar_(new Windows7ThumbBar(this)),
@@ -250,9 +250,6 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
   app_->global_search()->AddProvider(new LibrarySearchProvider(
       app_->library_backend(), tr("Library"), "library",
       IconLoader::Load("folder-sound", IconLoader::Base), true, app_, this));
-
-  app_->global_search()->ReloadSettings();
-  global_search_view_->ReloadSettings();
 
   connect(global_search_view_, SIGNAL(AddToPlaylist(QMimeData*)),
           SLOT(AddToPlaylist(QMimeData*)));
@@ -988,6 +985,11 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
 
   ReloadSettings();
 
+  // The "GlobalSearchView" requires that "InternetModel" has already been
+  // initialised before reload settings.
+  app_->global_search()->ReloadSettings();
+  global_search_view_->ReloadSettings();
+
   // Reload pretty OSD to avoid issues with fonts
   osd_->ReloadPrettyOSDSettings();
 
@@ -1036,7 +1038,10 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
 
   CheckFullRescanRevisions();
 
-  LoadPlaybackStatus();
+  CommandlineOptionsReceived(options);
+
+  if (!options.contains_play_options())
+    LoadPlaybackStatus();
 
   qLog(Debug) << "Started";
 }

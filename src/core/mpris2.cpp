@@ -25,11 +25,14 @@
 
 #include <algorithm>
 
+#include <QApplication>
+#include <QDBusConnection>
+#include <QtConcurrentRun>
+
 #include "config.h"
-#include "mpris_common.h"
-#include "mpris1.h"
 #include "core/application.h"
 #include "core/logging.h"
+#include "core/mpris_common.h"
 #include "core/mpris2_player.h"
 #include "core/mpris2_playlists.h"
 #include "core/mpris2_root.h"
@@ -42,10 +45,6 @@
 #include "playlist/playlistmanager.h"
 #include "playlist/playlistsequence.h"
 #include "ui/mainwindow.h"
-
-#include <QApplication>
-#include <QDBusConnection>
-#include <QtConcurrentRun>
 
 QDBusArgument& operator<<(QDBusArgument& arg, const MprisPlaylist& playlist) {
   arg.beginStructure();
@@ -84,8 +83,7 @@ const char* Mpris2::kMprisObjectPath = "/org/mpris/MediaPlayer2";
 const char* Mpris2::kServiceName = "org.mpris.MediaPlayer2.clementine";
 const char* Mpris2::kFreedesktopPath = "org.freedesktop.DBus.Properties";
 
-Mpris2::Mpris2(Application* app, Mpris1* mpris1, QObject* parent)
-    : QObject(parent), app_(app), mpris1_(mpris1) {
+Mpris2::Mpris2(Application* app, QObject* parent) : QObject(parent), app_(app) {
   new Mpris2Root(this);
   new Mpris2TrackList(this);
   new Mpris2Player(this);
@@ -134,13 +132,19 @@ void Mpris2::EngineStateChanged(Engine::State newState) {
   }
 
   EmitNotification("PlaybackStatus", PlaybackStatus(newState));
+  if (newState == Engine::Playing)
+    EmitNotification("CanSeek", CanSeek(newState));
 }
 
 void Mpris2::VolumeChanged() { EmitNotification("Volume"); }
 
 void Mpris2::ShuffleModeChanged() { EmitNotification("Shuffle"); }
 
-void Mpris2::RepeatModeChanged() { EmitNotification("LoopStatus"); }
+void Mpris2::RepeatModeChanged() {
+  EmitNotification("LoopStatus");
+  EmitNotification("CanGoNext", CanGoNext());
+  EmitNotification("CanGoPrevious", CanGoPrevious());
+}
 
 void Mpris2::EmitNotification(const QString& name, const QVariant& val) {
   EmitNotification(name, val, "org.mpris.MediaPlayer2.Player");
@@ -171,11 +175,17 @@ void Mpris2::EmitNotification(const QString& name) {
     value = Volume();
   else if (name == "Position")
     value = Position();
+  else if (name == "CanGoNext")
+    value = CanGoNext();
+  else if (name == "CanGoPrevious")
+    value = CanGoPrevious();
+  else if (name == "CanSeek")
+    value = CanSeek();
 
   if (value.isValid()) EmitNotification(name, value);
 }
 
-  // ------------------Root Interface--------------- //
+// ------------------Root Interface--------------- //
 
 bool Mpris2::CanQuit() const { return true; }
 
@@ -293,40 +303,35 @@ double Mpris2::Rate() const { return 1.0; }
 
 void Mpris2::SetRate(double rate) {
   if (rate == 0) {
-    if (mpris1_->player()) {
-      mpris1_->player()->Pause();
-    }
+    app_->player()->Pause();
   }
 }
 
 bool Mpris2::Shuffle() const {
-  if (mpris1_->player()) {
-    return mpris1_->player()->GetStatus().random;
-  } else {
-    return false;
-  }
+  return app_->playlist_manager()->sequence()->shuffle_mode() !=
+         PlaylistSequence::Shuffle_Off;
 }
 
-void Mpris2::SetShuffle(bool value) {
-  if (mpris1_->tracklist()) {
-    mpris1_->tracklist()->SetRandom(value);
-  }
+void Mpris2::SetShuffle(bool enable) {
+  app_->playlist_manager()->active()->sequence()->SetShuffleMode(
+      enable ? PlaylistSequence::Shuffle_All : PlaylistSequence::Shuffle_Off);
 }
 
 QVariantMap Mpris2::Metadata() const { return last_metadata_; }
 
 QString Mpris2::current_track_id() const {
-  if (!mpris1_->tracklist()) {
-    return QString();
-  }
-
   return QString("/org/mpris/MediaPlayer2/Track/%1")
-      .arg(QString::number(mpris1_->tracklist()->GetCurrentTrack()));
+      .arg(QString::number(app_->playlist_manager()->active()->current_row()));
 }
 
 // We send Metadata change notification as soon as the process of
 // changing song starts...
-void Mpris2::CurrentSongChanged(const Song& song) { ArtLoaded(song, ""); }
+void Mpris2::CurrentSongChanged(const Song& song) {
+  ArtLoaded(song, "");
+  EmitNotification("CanGoNext", CanGoNext());
+  EmitNotification("CanGoPrevious", CanGoPrevious());
+  EmitNotification("CanSeek", CanSeek());
+}
 
 // ... and we add the cover information later, when it's available.
 void Mpris2::ArtLoaded(const Song& song, const QString& art_uri) {
@@ -349,13 +354,7 @@ void Mpris2::ArtLoaded(const Song& song, const QString& art_uri) {
   EmitNotification("Metadata", last_metadata_);
 }
 
-double Mpris2::Volume() const {
-  if (mpris1_->player()) {
-    return static_cast<double>(mpris1_->player()->VolumeGet()) / 100;
-  } else {
-    return 0.0;
-  }
-}
+double Mpris2::Volume() const { return app_->player()->GetVolume() / 100.0; }
 
 void Mpris2::SetVolume(double value) { app_->player()->SetVolume(value * 100); }
 
@@ -368,40 +367,39 @@ double Mpris2::MaximumRate() const { return 1.0; }
 double Mpris2::MinimumRate() const { return 1.0; }
 
 bool Mpris2::CanGoNext() const {
-  if (mpris1_->player()) {
-    return mpris1_->player()->GetCaps() & CAN_GO_NEXT;
-  } else {
-    return true;
-  }
+  return app_->playlist_manager()->active() &&
+         app_->playlist_manager()->active()->next_row() != -1;
 }
 
 bool Mpris2::CanGoPrevious() const {
-  if (mpris1_->player()) {
-    return mpris1_->player()->GetCaps() & CAN_GO_PREV;
-  } else {
-    return true;
-  }
+  return app_->playlist_manager()->active() &&
+         (app_->playlist_manager()->active()->previous_row() != -1 ||
+          app_->player()->PreviousWouldRestartTrack());
 }
 
-bool Mpris2::CanPlay() const { return mpris1_->player()->GetCaps() & CAN_PLAY; }
+bool Mpris2::CanPlay() const {
+  return app_->playlist_manager()->active() &&
+         app_->playlist_manager()->active()->rowCount() != 0 &&
+         !(app_->player()->GetState() == Engine::Playing &&
+           (app_->player()->GetCurrentItem()->options() &
+            PlaylistItem::LastFMControls));
+}
 
 // This one's a bit different than MPRIS 1 - we want this to be true even when
 // the song is already paused or stopped.
 bool Mpris2::CanPause() const {
-  if (mpris1_->player()) {
-    return mpris1_->player()->GetCaps() & CAN_PAUSE ||
-           PlaybackStatus() == "Paused" || PlaybackStatus() == "Stopped";
-  } else {
-    return true;
-  }
+  return (app_->player()->GetCurrentItem() &&
+          app_->player()->GetState() == Engine::Playing &&
+          !(app_->player()->GetCurrentItem()->options() &
+            PlaylistItem::PauseDisabled)) ||
+         PlaybackStatus() == "Paused" || PlaybackStatus() == "Stopped";
 }
 
-bool Mpris2::CanSeek() const {
-  if (mpris1_->player()) {
-    return mpris1_->player()->GetCaps() & CAN_SEEK;
-  } else {
-    return true;
-  }
+bool Mpris2::CanSeek() const { return CanSeek(app_->player()->GetState()); }
+
+bool Mpris2::CanSeek(Engine::State state) const {
+  return app_->player()->GetCurrentItem() && state != Engine::Empty &&
+         !app_->player()->GetCurrentItem()->Metadata().is_stream();
 }
 
 bool Mpris2::CanControl() const { return true; }
@@ -458,9 +456,8 @@ void Mpris2::SetPosition(const QDBusObjectPath& trackId, qlonglong offset) {
 }
 
 void Mpris2::OpenUri(const QString& uri) {
-  if (mpris1_->tracklist()) {
-    mpris1_->tracklist()->AddTrack(uri, true);
-  }
+  app_->playlist_manager()->active()->InsertUrls(QList<QUrl>() << QUrl(uri), -1,
+                                                 true);
 }
 
 TrackIds Mpris2::Tracks() const {

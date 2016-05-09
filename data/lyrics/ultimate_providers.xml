@@ -3,13 +3,14 @@
   <provider name="azlyrics.com" title="{artist} LYRICS - {title}" charset="utf-8" url="http://www.azlyrics.com/lyrics/{artist}/{title}.html">
     <urlFormat replace=" ._@,;&amp;\/()'&quot;-" with=""/>
     <extract>
-      <item begin="&lt;!-- start of lyrics --&gt;" end="&lt;!-- end of lyrics --&gt;"/>
+      <item begin="&lt;!-- Usage of azlyrics.com content by any third-party lyrics provider is prohibited by our licensing agreement. Sorry about that. --&gt;" end="&lt;/div&gt;"/>
     </extract>
     <exclude>
       <item tag="&lt;B&gt;"/>
       <item begin="&lt;i&gt;[" end="]&lt;/i&gt;"/>
       <item begin="[" end="]"/>
     </exclude>
+    <invalidIndicator value="&lt;h1&gt;Welcome to AZLyrics!&lt;/h1&gt;"/>
   </provider>
   <provider name="bollywoodlyrics.com (Bollywood songs)" title="{title} Song Lyrics - BollywoodLyrics.com" charset="utf-8" url="http://www.bollywoodlyrics.com/lyric/{Title}">
     <urlFormat replace=" _@;\/&quot;'()[]" with="-"/>

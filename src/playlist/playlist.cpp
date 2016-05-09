@@ -117,7 +117,8 @@ Playlist::Playlist(PlaylistBackend* backend, TaskManager* task_manager,
       playlist_sequence_(nullptr),
       ignore_sorting_(false),
       undo_stack_(new QUndoStack(this)),
-      special_type_(special_type) {
+      special_type_(special_type),
+      cancel_restore_(false) {
   undo_stack_->setUndoLimit(kUndoStackSize);
 
   connect(this, SIGNAL(rowsInserted(const QModelIndex&, int, int)),
@@ -632,10 +633,6 @@ void Playlist::set_current_row(int i, bool is_stopping) {
                          old_current_item_index.row(), ColumnCount - 1));
   }
 
-  if (current_item_index_.isValid() && !is_stopping) {
-    InformOfCurrentSongChange();
-  }
-
   // Update the virtual index
   if (i == -1) {
     current_virtual_index_ = -1;
@@ -652,6 +649,10 @@ void Playlist::set_current_row(int i, bool is_stopping) {
     current_virtual_index_ = virtual_items_.indexOf(i);
   } else {
     current_virtual_index_ = i;
+  }
+
+  if (current_item_index_.isValid() && !is_stopping) {
+    InformOfCurrentSongChange();
   }
 
   // The structure of a dynamic playlist is as follows:
@@ -1469,6 +1470,7 @@ void Playlist::Restore() {
   virtual_items_.clear();
   library_items_by_id_.clear();
 
+  cancel_restore_ = false;
   QFuture<QList<PlaylistItemPtr>> future =
       QtConcurrent::run(backend_, &PlaylistBackend::GetPlaylistItems, id_);
   NewClosure(future, this, SLOT(ItemsLoaded(QFuture<PlaylistItemList>)),
@@ -1476,6 +1478,9 @@ void Playlist::Restore() {
 }
 
 void Playlist::ItemsLoaded(QFuture<PlaylistItemList> future) {
+  if (cancel_restore_)
+    return;
+
   PlaylistItemList items = future.result();
 
   // backend returns empty elements for library items which it couldn't
@@ -1748,6 +1753,9 @@ void Playlist::UpdateScrobblePoint(qint64 seek_point_nanosec) {
 }
 
 void Playlist::Clear() {
+  // If loading songs from session restore async, don't insert them
+  cancel_restore_ = true;
+
   const int count = items_.count();
 
   if (count > kUndoItemLimit) {

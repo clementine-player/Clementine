@@ -147,6 +147,7 @@ set(SOURCES
   globalsearch/searchproviderstatuswidget.cpp
   globalsearch/simplesearchprovider.cpp
   globalsearch/somafmsearchprovider.cpp
+  globalsearch/intergalacticfmsearchprovider.cpp
   globalsearch/soundcloudsearchprovider.cpp
   globalsearch/spotifysearchprovider.cpp
   globalsearch/suggestionwidget.cpp
@@ -183,6 +184,8 @@ set(SOURCES
   internet/core/searchboxwidget.cpp
   internet/somafm/somafmservice.cpp
   internet/somafm/somafmurlhandler.cpp
+  internet/intergalacticfm/intergalacticfmservice.cpp
+  internet/intergalacticfm/intergalacticfmurlhandler.cpp
   internet/soundcloud/soundcloudservice.cpp
   internet/soundcloud/soundcloudsettingspage.cpp
   internet/spotify/spotifyserver.cpp
@@ -487,6 +490,8 @@ set(HEADERS
   internet/core/searchboxwidget.h
   internet/somafm/somafmservice.h
   internet/somafm/somafmurlhandler.h
+  internet/intergalacticfm/intergalacticfmservice.h
+  internet/intergalacticfm/intergalacticfmurlhandler.h
   internet/soundcloud/soundcloudservice.h
   internet/soundcloud/soundcloudsettingspage.h
   internet/spotify/spotifyserver.h
@@ -508,11 +513,11 @@ set(HEADERS
   library/libraryviewcontainer.h
   library/librarywatcher.h
   library/savedgroupingmanager.h
-  
+
   musicbrainz/acoustidclient.h
   musicbrainz/musicbrainzclient.h
   musicbrainz/tagfetcher.h
-  
+
   networkremote/networkremotehelper.h
   networkremote/networkremote.h
   networkremote/incomingdataparser.h
@@ -885,17 +890,6 @@ optional_source(LINUX SOURCES widgets/osd_x11.cpp)
 if(HAVE_DBUS)
   file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/dbus)
 
-  # MPRIS DBUS interfaces
-  qt5_add_dbus_adaptor(SOURCES
-      dbus/org.freedesktop.MediaPlayer.player.xml
-      core/mpris1.h mpris::Mpris1Player core/mpris_player MprisPlayer)
-  qt5_add_dbus_adaptor(SOURCES
-      dbus/org.freedesktop.MediaPlayer.root.xml
-      core/mpris1.h mpris::Mpris1Root core/mpris_root MprisRoot)
-  qt5_add_dbus_adaptor(SOURCES
-      dbus/org.freedesktop.MediaPlayer.tracklist.xml
-      core/mpris1.h mpris::Mpris1TrackList core/mpris_tracklist MprisTrackList)
-
   # MPRIS 2.0 DBUS interfaces
   qt5_add_dbus_adaptor(SOURCES
       dbus/org.mpris.MediaPlayer2.Player.xml
@@ -975,13 +969,11 @@ endif(HAVE_DBUS)
 optional_source(HAVE_DBUS
   SOURCES
     core/mpris.cpp
-    core/mpris1.cpp
     core/mpris2.cpp
     networkremote/avahi.cpp
     ui/dbusscreensaver.cpp
   HEADERS
     core/mpris.h
-    core/mpris1.h
     core/mpris2.h
 )
 
@@ -1127,7 +1119,7 @@ optional_source(HAVE_BOX
 
 # Vk.com support
 optional_source(HAVE_VK
-  INCLUDE_DIRECTORIES 
+  INCLUDE_DIRECTORIES
     ${VREEN_INCLUDE_DIRS}
   SOURCES
     globalsearch/vksearchprovider.cpp

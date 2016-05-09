@@ -89,7 +89,7 @@ class MainWindow : public QMainWindow, public PlatformInterface {
 
  public:
   MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
-             QWidget* parent = nullptr);
+             const CommandlineOptions& options, QWidget* parent = nullptr);
   ~MainWindow();
 
   static const char* kSettingsGroup;
