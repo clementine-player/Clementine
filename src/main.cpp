@@ -257,7 +257,7 @@ int main(int argc, char* argv[]) {
   QCoreApplication::setApplicationName("Clementine-qt5");
   QCoreApplication::setApplicationVersion(CLEMENTINE_VERSION_DISPLAY);
   QCoreApplication::setOrganizationName("Clementine-qt5");
-  QCoreApplication::setOrganizationDomain("clementine-player-qt5.org");
+  QCoreApplication::setOrganizationDomain("clementine-player.org");
 
 // This makes us show up nicely in gnome-volume-control
 #if !GLIB_CHECK_VERSION(2, 36, 0)
