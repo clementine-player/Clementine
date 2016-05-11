@@ -103,7 +103,7 @@ void GioLister::Init() {
 
 GioLister::~GioLister()
 {
-  foreach(gulong signal, signals_)
+  for (gulong signal : signals_)
   {
     g_signal_handler_disconnect(monitor_, signal);
   }
