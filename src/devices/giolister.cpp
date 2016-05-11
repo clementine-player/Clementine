@@ -94,11 +94,19 @@ void GioLister::Init() {
   g_list_free(mounts);
 
   // Connect signals from the monitor
-  CHECKED_GCONNECT(monitor_, "volume-added", &VolumeAddedCallback, this);
-  CHECKED_GCONNECT(monitor_, "volume-removed", &VolumeRemovedCallback, this);
-  CHECKED_GCONNECT(monitor_, "mount-added", &MountAddedCallback, this);
-  CHECKED_GCONNECT(monitor_, "mount-changed", &MountChangedCallback, this);
-  CHECKED_GCONNECT(monitor_, "mount-removed", &MountRemovedCallback, this);
+  signals_.append(CHECKED_GCONNECT(monitor_, "volume-added", &VolumeAddedCallback, this));
+  signals_.append(CHECKED_GCONNECT(monitor_, "volume-removed", &VolumeRemovedCallback, this));
+  signals_.append(CHECKED_GCONNECT(monitor_, "mount-added", &MountAddedCallback, this));
+  signals_.append(CHECKED_GCONNECT(monitor_, "mount-changed", &MountChangedCallback, this));
+  signals_.append(CHECKED_GCONNECT(monitor_, "mount-removed", &MountRemovedCallback, this));
+}
+
+GioLister::~GioLister()
+{
+  foreach(gulong signal, signals_)
+  {
+    g_signal_handler_disconnect(monitor_, signal);
+  }
 }
 
 QStringList GioLister::DeviceUniqueIDs() {
