@@ -393,13 +393,7 @@ bool GstEnginePipeline::Init() {
   }
 
   gst_element_link_many(queue_, audioconvert_, convert_sink, nullptr);
-
-  // Link the elements with special caps
-  // The scope path through the tee gets 16-bit ints.
-  GstCaps* caps16 = gst_caps_new_simple("audio/x-raw", "format", G_TYPE_STRING,
-                                        "S16LE", NULL);
-  gst_element_link_filtered(probe_converter, probe_sink, caps16);
-  gst_caps_unref(caps16);
+  gst_element_link(probe_converter, probe_sink);
 
   // Link the outputs of tee to the queues on each path.
   gst_pad_link(gst_element_get_request_pad(tee, "src_%u"),
@@ -412,30 +406,31 @@ bool GstEnginePipeline::Init() {
     gst_element_link_many(rgvolume_, rglimiter_, audioconvert2_, tee, nullptr);
   }
 
-  // Link everything else.
-  gst_element_link(probe_queue, probe_converter);
+  // Link the analyzer output of the tee and force 16 bit caps
+  GstCaps* caps16 = gst_caps_new_simple("audio/x-raw", "format", G_TYPE_STRING,
+                                        "S16LE", NULL);
+  gst_element_link_filtered(probe_queue, probe_converter, caps16);
+  gst_caps_unref(caps16);
+
   gst_element_link_many(audio_queue, equalizer_preamp_, equalizer_,
                         stereo_panorama_, volume_, audioscale_, convert,
                         nullptr);
 
-  // add caps for fixed sample rate and mono, but only if requested
-  if (sample_rate_ != GstEngine::kAutoSampleRate && sample_rate_ > 0) {
-    GstCaps* caps = gst_caps_new_simple("audio/x-raw", "rate", G_TYPE_INT,
-                                        sample_rate_, nullptr);
-    if (mono_playback_) {
-      gst_caps_set_simple(caps, "channels", G_TYPE_INT, 1, nullptr);
-    }
+  // Ensure that the audio output of the tee does not autonegotiate to 16 bit
+  GstCaps* caps = gst_caps_new_simple("audio/x-raw", "format", G_TYPE_STRING,
+                                      "F32LE", NULL);
 
-    gst_element_link_filtered(convert, audiosink_, caps);
-    gst_caps_unref(caps);
-  } else if (mono_playback_) {
-    GstCaps* capsmono =
-        gst_caps_new_simple("audio/x-raw", "channels", G_TYPE_INT, 1, nullptr);
-    gst_element_link_filtered(convert, audiosink_, capsmono);
-    gst_caps_unref(capsmono);
-  } else {
-    gst_element_link(convert, audiosink_);
+  // Add caps for fixed sample rate and mono, but only if requested
+  if (sample_rate_ != GstEngine::kAutoSampleRate && sample_rate_ > 0) {
+    gst_caps_set_simple(caps, "rate", G_TYPE_INT, sample_rate_, nullptr);
   }
+
+  if (mono_playback_) {
+    gst_caps_set_simple(caps, "channels", G_TYPE_INT, 1, nullptr);
+  }
+
+  gst_element_link_filtered(convert, audiosink_, caps);
+  gst_caps_unref(caps);
 
   // Add probes and handlers.
   gst_pad_add_probe(gst_element_get_static_pad(probe_converter, "src"),
