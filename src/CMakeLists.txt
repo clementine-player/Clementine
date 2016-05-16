@@ -1164,21 +1164,6 @@ optional_source(HAVE_SEAFILE
     internet/seafile/seafilesettingspage.ui
 )
 
-# Amazon Cloud Drive support
-optional_source(HAVE_AMAZON_CLOUD_DRIVE
-  SOURCES
-    internet/amazon/amazonclouddrive.cpp
-    internet/amazon/amazonsettingspage.cpp
-    internet/amazon/amazonurlhandler.cpp
-  HEADERS
-    internet/amazon/amazonclouddrive.h
-    internet/amazon/amazonsettingspage.h
-    internet/amazon/amazonurlhandler.h
-  UI
-    internet/amazon/amazonsettingspage.ui
-)
-
-
 # Pulse audio integration
 optional_source(HAVE_LIBPULSE
   INCLUDE_DIRECTORIES
