@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!DOCTYPE node PUBLIC "-//freedesktop//DTD D-BUS Object Introspection 1.0//EN" "http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
+<node>
+  <interface name="org.freedesktop.DBus.ObjectManager">
+    <method name="GetManagedObjects">
+      <arg name="objects" type="a{oa{sa{sv}}}" direction="out"/>
+      <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="ManagedObjectList"/>
+    </method>
+    <signal name="InterfacesAdded">
+      <arg name="object" type="o"/>
+      <arg name="interfaces" type="a{sa{sv}}"/>
+      <annotation name="org.qtproject.QtDBus.QtTypeName.In1" value="InterfacesAndProperties"/>
+    </signal>
+    <signal name="InterfacesRemoved">
+      <arg type="o" name="object_path"/>
+      <arg type="as" name="interfaces"/>
+    </signal>
+  </interface>
+</node>

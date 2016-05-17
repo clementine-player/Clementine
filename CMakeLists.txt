@@ -254,6 +254,10 @@ optional_component(DEVICEKIT ON "Devices: DeviceKit backend"
   DEPENDS "D-Bus support" HAVE_DBUS
 )
 
+optional_component(UDISKS2 ON "Devices: UDisks2 backend"
+  DEPENDS "D-Bus support" HAVE_DBUS
+)
+
 optional_component(SPOTIFY_BLOB ON "Spotify support: non-GPL binary helper"
   DEPENDS "protobuf" PROTOBUF_FOUND PROTOBUF_PROTOC_EXECUTABLE
   DEPENDS "libspotify" SPOTIFY_FOUND

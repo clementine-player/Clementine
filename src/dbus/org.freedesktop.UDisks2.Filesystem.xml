@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE node PUBLIC "-//freedesktop//DTD D-BUS Object Introspection 1.0//EN" "http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
+<node>
+  <interface name="org.freedesktop.UDisks2.Filesystem">
+    <method name="Mount">
+      <arg type="a{sv}" name="options" direction="in"/>
+      <annotation name="org.qtproject.QtDBus.QtTypeName.In0" value="QVariantMap"/>
+      <arg type="s" name="mount_path" direction="out"/>
+    </method>
+    <method name="Unmount">
+      <arg type="a{sv}" name="options" direction="in"/>
+      <annotation name="org.qtproject.QtDBus.QtTypeName.In0" value="QVariantMap"/>
+    </method>
+    <property type="aay" name="MountPoints" access="read">
+      <annotation name="org.qtproject.QtDBus.QtTypeName" value="QList&lt;QByteArray&gt;"/>
+    </property>
+  </interface>
+</node>
