@@ -101,10 +101,8 @@ void GioLister::Init() {
   signals_.append(CHECKED_GCONNECT(monitor_, "mount-removed", &MountRemovedCallback, this));
 }
 
-GioLister::~GioLister()
-{
-  for (gulong signal : signals_)
-  {
+GioLister::~GioLister() {
+  for (gulong signal : signals_) {
     g_signal_handler_disconnect(monitor_, signal);
   }
 }
