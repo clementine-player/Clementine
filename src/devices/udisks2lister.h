@@ -37,11 +37,18 @@ private slots:
   void DBusInterfaceRemoved(const QDBusObjectPath &path, const QStringList &ifaces);
 
 private:
-  bool isPendingJob(const QDBusObjectPath &path);
-  void RemoveDevice(const QDBusObjectPath &path);
+  bool isPendingJob(const QDBusObjectPath &jobPath);
+  void RemoveDevice(const QDBusObjectPath &devicePath);
+
+  class MountJob
+  {
+  public:
+    bool isMount = true;
+    QList<QDBusObjectPath> mount_paths;
+  };
 
   QMutex jobs_lock_;
-  QMap<QString, QList<QDBusObjectPath>> mounting_jobs_;
+  QMap<QString, MountJob> mounting_jobs_;
 
 private:
   class PartitionData {
