@@ -973,6 +973,8 @@ if(HAVE_DBUS)
           PROPERTIES NO_NAMESPACE dbus/udisks2block INCLUDE dbus/metatypes.h)
       set_source_files_properties(dbus/org.freedesktop.UDisks2.Drive.xml
           PROPERTIES NO_NAMESPACE dbus/udisks2drive INCLUDE dbus/metatypes.h)
+      set_source_files_properties(dbus/org.freedesktop.UDisks2.Job.xml
+          PROPERTIES NO_NAMESPACE dbus/udisks2job INCLUDE dbus/metatypes.h)
       qt4_add_dbus_interface(SOURCES
           dbus/org.freedesktop.DBus.ObjectManager.xml
           dbus/objectmanager)
@@ -985,6 +987,9 @@ if(HAVE_DBUS)
       qt4_add_dbus_interface(SOURCES
           dbus/org.freedesktop.UDisks2.Drive.xml
           dbus/udisks2drive)
+      qt4_add_dbus_interface(SOURCES
+          dbus/org.freedesktop.UDisks2.Job.xml
+          dbus/udisks2job)
   endif(HAVE_UDISKS2)
 
   # Wiimotedev interface classes

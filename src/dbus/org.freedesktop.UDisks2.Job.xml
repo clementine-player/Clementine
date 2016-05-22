@@ -1,0 +1,11 @@
+<!DOCTYPE node PUBLIC "-//freedesktop//DTD D-BUS Object Introspection 1.0//EN" "http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
+<node name="/" xmlns:doc="http://www.freedesktop.org/dbus/1.0/doc.dtd">
+  <interface name="org.freedesktop.UDisks2.Job">
+    <property name="Operation" type="s" access="read"/>
+    <property name="Objects" type="ao" access="read"/>
+    <signal name="Completed">
+      <arg name="success" type="b"/>
+      <arg name="message" type="s"/>
+    </signal>
+  </interface>
+</node>

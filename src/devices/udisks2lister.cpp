@@ -8,6 +8,7 @@
 #include "dbus/udisks2filesystem.h"
 #include "dbus/udisks2block.h"
 #include "dbus/udisks2drive.h"
+#include "dbus/udisks2job.h"
 
 const QString Udisks2Lister::udisks2service_ = "org.freedesktop.UDisks2";
 
@@ -165,6 +166,16 @@ void Udisks2Lister::DBusInterfaceAdded(const QDBusObjectPath &path,
     if (interface.key() != "org.freedesktop.UDisks2.Job")
       continue;
 
+    std::shared_ptr<OrgFreedesktopUDisks2JobInterface> job = std::make_shared<OrgFreedesktopUDisks2JobInterface>(
+          udisks2service_,
+          path.path(),
+          QDBusConnection::systemBus());
+
+    if (!job->isValid())
+      continue;
+
+    // For some reason access through Job interface returns all properties
+    // as invalid for unmount job so we're doing this the hard way
     bool isMountJob = false;
     if (interface.value()["Operation"] == "filesystem-mount")
       isMountJob = true;
@@ -173,30 +184,24 @@ void Udisks2Lister::DBusInterfaceAdded(const QDBusObjectPath &path,
     else
       continue;
 
-    const QDBusArgument &objects = interface.value()["Objects"].value<QDBusArgument>();
-
-    QList<QDBusObjectPath> mountedParititons;
-    objects.beginArray();
-    while (!objects.atEnd()) {
-      QDBusObjectPath extractedPath;
-      objects >> extractedPath;
-      mountedParititons.push_back(extractedPath);
-    }
-    objects.endArray();
+    QList<QDBusObjectPath> mountedParititons
+        = GetMountedPartitionsFromDBusArgument(interface.value()["Objects"].value<QDBusArgument>());
 
     if (mountedParititons.isEmpty()) {
       qLog(Warning) << "Empty Udisks2 mount/umount job " << path.path();
-      return;
+      continue;
     }
-
-    qLog(Debug) << "Adding Udisks job " << path.path()
-                << " | Operation = " << interface.value()["Operation"].toString()
-                << " with first path: " << mountedParititons.at(0).path();
 
     {
       QMutexLocker locker(&jobs_lock_);
-      mounting_jobs_[path.path()].isMount = isMountJob;
-      mounting_jobs_[path.path()].mount_paths = mountedParititons;
+      qLog(Debug) << "Adding pending job | DBus Path = " << job->path()
+                  << " | IsMountJob = " << isMountJob
+                  << " | First partition = " << mountedParititons.at(0).path();
+      mounting_jobs_[path].dbus_interface = job;
+      mounting_jobs_[path].isMount = isMountJob;
+      mounting_jobs_[path].mounted_partitions = mountedParititons;
+      connect(job.get(), SIGNAL(Completed(bool, const QString&)),
+              SLOT(JobCompleted(bool, const QString&)));
     }
   }
 }
@@ -207,47 +212,12 @@ void Udisks2Lister::DBusInterfaceRemoved(const QDBusObjectPath &path, const QStr
 }
 
 bool Udisks2Lister::isPendingJob(const QDBusObjectPath &jobPath) {
-  // should be actually done with a succcess signal from job, I guess, but it makes it kinda complicated
   QMutexLocker locker(&jobs_lock_);
 
-  if (!mounting_jobs_.contains(jobPath.path()))
+  if (!mounting_jobs_.contains(jobPath))
     return false;
 
-  const auto &mountPaths = mounting_jobs_[jobPath.path()].mount_paths;
-  const auto &isMount = mounting_jobs_[jobPath.path()].isMount;
-  for (const auto &partition : mountPaths) {
-    auto data = ReadPartitionData(partition, true);
-    if (!data.dbus_path.isEmpty()) {
-      if (isMount) {
-        qLog(Debug) << "UDisks2 mount job finished: Drive = " << data.dbus_drive_path
-                    << " | Partition = " << data.dbus_path;
-        QWriteLocker locker(&device_data_lock_);
-        device_data_[data.unique_id()] = data;
-        DeviceAdded(data.unique_id());
-      } else {
-        QWriteLocker locker(&device_data_lock_);
-        QString id;
-        for (auto &data : device_data_) {
-          if (data.mount_paths.contains(partition.path())) {
-            qLog(Debug) << "UDisks2 umount job finished, found corresponding device: Drive = " << data.dbus_drive_path
-                        << " | Partition = " << data.dbus_path;
-            data.mount_paths.removeOne(partition.path());
-            if (data.mount_paths.empty())
-              id = data.unique_id();
-            break;
-          }
-        }
-
-        if (!id.isEmpty())
-        {
-          qLog(Debug) << "Partition " << data.dbus_path << " has no more mount points, removing it from device list";
-          device_data_.remove(id);
-          DeviceRemoved(id);
-        }
-      }
-    }
-  }
-  mounting_jobs_.remove(jobPath.path());
+  mounting_jobs_.remove(jobPath);
   return true;
 }
 
@@ -267,6 +237,67 @@ void Udisks2Lister::RemoveDevice(const QDBusObjectPath &devicePath) {
   qLog(Debug) << "UDisks2 device removed: " << devicePath.path();
   device_data_.remove(id);
   DeviceRemoved(id);
+}
+
+QList<QDBusObjectPath> Udisks2Lister::GetMountedPartitionsFromDBusArgument(const QDBusArgument &input) {
+  QList<QDBusObjectPath> result;
+
+  input.beginArray();
+  while (!input.atEnd()) {
+    QDBusObjectPath extractedPath;
+    input >> extractedPath;
+    result.push_back(extractedPath);
+  }
+  input.endArray();
+
+  return result;
+}
+
+void Udisks2Lister::JobCompleted(bool success, const QString &message) {
+  auto job = qobject_cast<OrgFreedesktopUDisks2JobInterface*>(sender());
+  QDBusObjectPath jobPath(job->path());
+
+  if (!job->isValid()
+      || !success
+      || !mounting_jobs_.contains(jobPath))
+    return;
+
+  qLog(Debug) << "Pending Job Completed | Path = " << job->path()
+              << " | Mount? = " << mounting_jobs_[jobPath].isMount
+              << " | Success = " << success;
+
+  for (const auto &mountedObject : mounting_jobs_[jobPath].mounted_partitions) {
+    auto data = ReadPartitionData(mountedObject, false);
+    if (data.dbus_path.isEmpty())
+      continue;
+
+    if (mounting_jobs_[jobPath].isMount) {
+      qLog(Debug) << "UDisks2 mount job finished: Drive = " << data.dbus_drive_path
+                  << " | Partition = " << data.dbus_path;
+      QWriteLocker locker(&device_data_lock_);
+      device_data_[data.unique_id()] = data;
+      DeviceAdded(data.unique_id());
+    } else {
+      QWriteLocker locker(&device_data_lock_);
+      QString id;
+      for (auto &data : device_data_) {
+        if (data.mount_paths.contains(mountedObject.path())) {
+          qLog(Debug) << "UDisks2 umount job finished, found corresponding device: Drive = " << data.dbus_drive_path
+                      << " | Partition = " << data.dbus_path;
+          data.mount_paths.removeOne(mountedObject.path());
+          if (data.mount_paths.empty())
+            id = data.unique_id();
+          break;
+        }
+      }
+
+      if (!id.isEmpty()) {
+        qLog(Debug) << "Partition " << data.dbus_path << " has no more mount points, removing it from device list";
+        device_data_.remove(id);
+        DeviceRemoved(id);
+      }
+    }
+  }
 }
 
 Udisks2Lister::PartitionData Udisks2Lister::ReadPartitionData(const QDBusObjectPath &path,

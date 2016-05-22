@@ -6,6 +6,8 @@
 
 #include "dbus/objectmanager.h"
 
+class OrgFreedesktopUDisks2JobInterface;
+
 class Udisks2Lister : public DeviceLister {
   Q_OBJECT
 
@@ -35,20 +37,23 @@ protected:
 private slots:
   void DBusInterfaceAdded(const QDBusObjectPath &path, const InterfacesAndProperties &ifaces);
   void DBusInterfaceRemoved(const QDBusObjectPath &path, const QStringList &ifaces);
+  void JobCompleted(bool success, const QString &message);
 
 private:
   bool isPendingJob(const QDBusObjectPath &jobPath);
   void RemoveDevice(const QDBusObjectPath &devicePath);
+  QList<QDBusObjectPath> GetMountedPartitionsFromDBusArgument(const QDBusArgument &input);
 
-  class MountJob
+  class Udisks2Job
   {
   public:
     bool isMount = true;
-    QList<QDBusObjectPath> mount_paths;
+    QList<QDBusObjectPath> mounted_partitions;
+    std::shared_ptr<OrgFreedesktopUDisks2JobInterface> dbus_interface;
   };
 
   QMutex jobs_lock_;
-  QMap<QString, MountJob> mounting_jobs_;
+  QMap<QDBusObjectPath, Udisks2Job> mounting_jobs_;
 
 private:
   class PartitionData {
