@@ -14,7 +14,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2016-04-20 12:49+0000\n"
+"PO-Revision-Date: 2016-05-22 21:37+0000\n"
 "Last-Translator: Sérgio Marques <smarquespt@gmail.com>\n"
 "Language-Team: Portuguese (http://www.transifex.com/davidsansome/clementine/language/pt/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -506,15 +506,15 @@ msgstr "Adicionar ficheiros a converter"
 #: transcoder/transcodedialog.cpp:306 ui/mainwindow.cpp:2010
 #: ripper/ripcddialog.cpp:185
 msgid "Add folder"
-msgstr "Adicionar pasta"
+msgstr "Adicionar diretório"
 
 #: ../bin/src/ui_mainwindow.h:691
 msgid "Add folder..."
-msgstr "Adicionar pasta..."
+msgstr "Adicionar diretório..."
 
 #: ../bin/src/ui_librarysettingspage.h:187
 msgid "Add new folder..."
-msgstr "Adicionar nova pasta..."
+msgstr "Adicionar novo diretório..."
 
 #: ../bin/src/ui_addpodcastdialog.h:178
 msgid "Add podcast"
@@ -784,10 +784,6 @@ msgstr "Mostrar sempre a janela principal"
 #: ../bin/src/ui_behavioursettingspage.h:349
 msgid "Always start playing"
 msgstr "Iniciar sempre a reprodução"
-
-#: ../bin/src/ui_amazonsettingspage.h:99
-msgid "Amazon Cloud Drive"
-msgstr "Amazon Cloud Drive"
 
 #: internet/spotify/spotifyblobdownloader.cpp:72
 msgid ""
@@ -1234,10 +1230,6 @@ msgid ""
 "a format that it can play."
 msgstr "O Clementine pode converter automaticamente, num formato reconhecido pelo leitor, os ficheiros copiados para o dispositivo"
 
-#: ../bin/src/ui_amazonsettingspage.h:100
-msgid "Clementine can play music that you have uploaded to Amazon Cloud Drive"
-msgstr "O Clementine pode reproduzir as músicas enviadas para o Amazon Cloud Drive"
-
 #: ../bin/src/ui_boxsettingspage.h:100
 msgid "Clementine can play music that you have uploaded to Box"
 msgstr "O Clementine pode reproduzir as faixas existentes no Box"
@@ -1306,7 +1298,7 @@ msgstr "Clique para alternar entre tempo restante e tempo total"
 #: ../bin/src/ui_googledrivesettingspage.h:102
 #: ../bin/src/ui_dropboxsettingspage.h:102
 #: ../bin/src/ui_skydrivesettingspage.h:102
-#: ../bin/src/ui_boxsettingspage.h:102 ../bin/src/ui_amazonsettingspage.h:102
+#: ../bin/src/ui_boxsettingspage.h:102
 msgid ""
 "Clicking the Login button will open a web browser.  You should return to "
 "Clementine after you have logged in."
@@ -1685,7 +1677,7 @@ msgstr "Apagar episódios reproduzidos"
 
 #: ui/equalizer.cpp:221 ../bin/src/ui_equalizer.h:168
 msgid "Delete preset"
-msgstr "Apagar pré-ajustes"
+msgstr "Apagar pré-ajuste"
 
 #: library/libraryview.cpp:401
 msgid "Delete smart playlist"
@@ -2091,7 +2083,7 @@ msgstr "Introduza o URL da rádio na Internet:"
 
 #: playlist/playlistlistcontainer.cpp:169
 msgid "Enter the name of the folder"
-msgstr "Introduza o nome da pasta"
+msgstr "Introduza o nome do diretório"
 
 #: ../bin/src/ui_networkremotesettingspage.h:238
 msgid "Enter this IP in the App to connect to Clementine."
@@ -2480,7 +2472,7 @@ msgstr "Graves e agudos"
 msgid "Full Treble"
 msgstr "Agudos"
 
-#: ui/settingsdialog.cpp:141
+#: ui/settingsdialog.cpp:137
 msgid "General"
 msgstr "Geral"
 
@@ -2770,7 +2762,7 @@ msgstr "Verificação de integridade"
 msgid "Internet"
 msgstr "Internet"
 
-#: ui/settingsdialog.cpp:164
+#: ui/settingsdialog.cpp:160
 msgid "Internet providers"
 msgstr "Serviços na Internet"
 
@@ -3061,7 +3053,6 @@ msgstr "Carregar ficheiros/URL, substituindo a lista de reprodução atual"
 #: ../bin/src/ui_skydrivesettingspage.h:101
 #: ../bin/src/ui_boxsettingspage.h:101 ../bin/src/ui_vksettingspage.h:215
 #: ../bin/src/ui_seafilesettingspage.h:172
-#: ../bin/src/ui_amazonsettingspage.h:101
 msgid "Login"
 msgstr "Iniciar sessão"
 
@@ -3371,7 +3362,7 @@ msgstr "Nunca iniciar a reprodução"
 #: playlist/playlistlistcontainer.cpp:168
 #: ../bin/src/ui_playlistlistcontainer.h:127
 msgid "New folder"
-msgstr "Nova pasta"
+msgstr "Novo diretório"
 
 #: ui/mainwindow.cpp:1822 ../bin/src/ui_mainwindow.h:693
 msgid "New playlist"
@@ -4094,7 +4085,7 @@ msgstr "Remover duplicados da lista de reprodução"
 
 #: ../bin/src/ui_librarysettingspage.h:188
 msgid "Remove folder"
-msgstr "Remover pasta"
+msgstr "Remover diretório"
 
 #: internet/vk/vkservice.cpp:328
 msgid "Remove from My Music"
@@ -5071,7 +5062,7 @@ msgstr "Estes ficheiros serão apagados permanentemente do disco. Tem a certeza 
 
 #: ../bin/src/ui_librarysettingspage.h:186
 msgid "These folders will be scanned for music to make up your library"
-msgstr "Estas pastas vão ser analisadas para criar a sua coleção"
+msgstr "Estes diretórios vão ser analisadas para criar a sua coleção"
 
 #: ../bin/src/ui_transcodersettingspage.h:173
 msgid ""
@@ -5320,7 +5311,7 @@ msgstr "Atualizar todos os podcasts"
 
 #: ../bin/src/ui_mainwindow.h:698
 msgid "Update changed library folders"
-msgstr "Atualizar pastas alteradas"
+msgstr "Atualizar diretórios lterados"
 
 #: ../bin/src/ui_librarysettingspage.h:190
 msgid "Update the library when Clementine starts"
@@ -5428,7 +5419,7 @@ msgstr "Utilizar normalização de volume"
 msgid "Used"
 msgstr "Utilizado"
 
-#: ui/settingsdialog.cpp:155
+#: ui/settingsdialog.cpp:151
 msgid "User interface"
 msgstr "Interface de utilizador"
 
