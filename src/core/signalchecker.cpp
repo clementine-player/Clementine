@@ -21,7 +21,7 @@
 
 #include "core/logging.h"
 
-bool CheckedGConnect(gpointer source, const char* signal, GCallback callback,
+gulong CheckedGConnect(gpointer source, const char* signal, GCallback callback,
                      gpointer data, const int callback_param_count) {
   guint signal_id = 0;
   GQuark detail = 0;
@@ -29,7 +29,7 @@ bool CheckedGConnect(gpointer source, const char* signal, GCallback callback,
   if (!g_signal_parse_name(signal, G_OBJECT_TYPE(source), &signal_id, &detail,
                            false)) {
     qFatal("Connecting to invalid signal: %s", signal);
-    return false;
+    return 0;
   }
 
   GSignalQuery query;
@@ -39,9 +39,8 @@ bool CheckedGConnect(gpointer source, const char* signal, GCallback callback,
   int signal_params = query.n_params + 2;
   if (signal_params != callback_param_count) {
     qFatal("Connecting callback to signal with different parameters counts");
-    return false;
+    return 0;
   }
 
-  g_signal_connect(source, signal, G_CALLBACK(callback), data);
-  return true;
+  return g_signal_connect(source, signal, G_CALLBACK(callback), data);
 }

@@ -36,6 +36,7 @@ class GioLister : public DeviceLister {
 
  public:
   GioLister() {}
+  ~GioLister();
 
   int priority() const { return 50; }
 
@@ -137,6 +138,7 @@ class GioLister : public DeviceLister {
 
  private:
   ScopedGObject<GVolumeMonitor> monitor_;
+  QList<gulong> signals_;
 
   QMutex mutex_;
   QMap<QString, DeviceInfo> devices_;
