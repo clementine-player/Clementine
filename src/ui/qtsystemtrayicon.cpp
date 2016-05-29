@@ -85,7 +85,18 @@ bool QtSystemTrayIcon::eventFilter(QObject* object, QEvent* event) {
         emit PreviousTrack();
       }
     } else {
+      QSettings s;
+      s.beginGroup(MainWindow::kSettingsGroup);
+      bool prev_next_track = s.value("scrolltrayicon").toBool();
+	  if(prev_next_track) {
+	    if (e->delta() < 0) {
+              emit NextTrack();
+            } else {
+              emit PreviousTrack();
+            }
+	  } else {
       emit ChangeVolume(e->delta());
+      }
     }
     return true;
   }

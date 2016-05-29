@@ -18,6 +18,7 @@
 #ifndef QTSYSTEMTRAYICON_H
 #define QTSYSTEMTRAYICON_H
 
+#include "mainwindow.h"
 #include "systemtrayicon.h"
 
 #include <QSystemTrayIcon>
