@@ -2,10 +2,15 @@
 
 #include <memory>
 
+#include <QReadWriteLock>
+#include <QMutex>
+#include <QStringList>
+#include <QDBusArgument>
+
 #include "devicelister.h"
+#include "dbus/metatypes.h"
 
-#include "dbus/objectmanager.h"
-
+class OrgFreedesktopDBusObjectManagerInterface;
 class OrgFreedesktopUDisks2JobInterface;
 
 class Udisks2Lister : public DeviceLister {
@@ -44,9 +49,7 @@ private:
   void RemoveDevice(const QDBusObjectPath &devicePath);
   QList<QDBusObjectPath> GetMountedPartitionsFromDBusArgument(const QDBusArgument &input);
 
-  class Udisks2Job
-  {
-  public:
+  struct Udisks2Job {
     bool isMount = true;
     QList<QDBusObjectPath> mounted_partitions;
     std::shared_ptr<OrgFreedesktopUDisks2JobInterface> dbus_interface;
@@ -56,8 +59,7 @@ private:
   QMap<QDBusObjectPath, Udisks2Job> mounting_jobs_;
 
 private:
-  class PartitionData {
-  public:
+  struct PartitionData {
     QString unique_id() const;
 
     QString dbus_path;
@@ -77,7 +79,9 @@ private:
     QStringList mount_paths;
   };
 
-  PartitionData ReadPartitionData(const QDBusObjectPath &path, bool beingMounted);
+  PartitionData ReadPartitionData(const QDBusObjectPath &path);
+  void HandleFinishedMountJob(const Udisks2Lister::PartitionData &partitionData);
+  void HandleFinishedUnmountJob(const Udisks2Lister::PartitionData &partitionData, const QDBusObjectPath &mountedObject);
 
   QReadWriteLock device_data_lock_;
   QMap<QString, PartitionData> device_data_;
