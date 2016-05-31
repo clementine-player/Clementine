@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!DOCTYPE node PUBLIC "-//freedesktop//DTD D-BUS Object Introspection 1.0//EN" "http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
+<node>
+  <interface name="org.freedesktop.UDisks2.Drive">
+    <method name="Eject">
+      <arg type="a{sv}" name="options" direction="in"/>
+      <annotation name="org.qtproject.QtDBus.QtTypeName.In0" value="QVariantMap"/>
+    </method>
+    <property type="s" name="Vendor" access="read"/>
+    <property type="s" name="Model" access="read"/>
+    <property type="s" name="Revision" access="read"/>
+    <property type="s" name="Serial" access="read"/>
+    <property type="s" name="Id" access="read"/>
+    <property type="b" name="MediaRemovable" access="read"/>
+    <property type="t" name="Size" access="read"/>
+  </interface>
+</node>

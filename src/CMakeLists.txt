@@ -964,6 +964,34 @@ if(HAVE_DBUS)
         dbus/udisksdevice)
   endif(HAVE_DEVICEKIT)
 
+  if(HAVE_UDISKS2)
+      set_source_files_properties(dbus/org.freedesktop.DBus.ObjectManager.xml
+          PROPERTIES NO_NAMESPACE dbus/objectmanager INCLUDE dbus/metatypes.h)
+      set_source_files_properties(dbus/org.freedesktop.UDisks2.Filesystem.xml
+          PROPERTIES NO_NAMESPACE dbus/udisks2filesystem INCLUDE dbus/metatypes.h)
+      set_source_files_properties(dbus/org.freedesktop.UDisks2.Block.xml
+          PROPERTIES NO_NAMESPACE dbus/udisks2block INCLUDE dbus/metatypes.h)
+      set_source_files_properties(dbus/org.freedesktop.UDisks2.Drive.xml
+          PROPERTIES NO_NAMESPACE dbus/udisks2drive INCLUDE dbus/metatypes.h)
+      set_source_files_properties(dbus/org.freedesktop.UDisks2.Job.xml
+          PROPERTIES NO_NAMESPACE dbus/udisks2job INCLUDE dbus/metatypes.h)
+      qt4_add_dbus_interface(SOURCES
+          dbus/org.freedesktop.DBus.ObjectManager.xml
+          dbus/objectmanager)
+      qt4_add_dbus_interface(SOURCES
+          dbus/org.freedesktop.UDisks2.Filesystem.xml
+          dbus/udisks2filesystem)
+      qt4_add_dbus_interface(SOURCES
+          dbus/org.freedesktop.UDisks2.Block.xml
+          dbus/udisks2block)
+      qt4_add_dbus_interface(SOURCES
+          dbus/org.freedesktop.UDisks2.Drive.xml
+          dbus/udisks2drive)
+      qt4_add_dbus_interface(SOURCES
+          dbus/org.freedesktop.UDisks2.Job.xml
+          dbus/udisks2job)
+  endif(HAVE_UDISKS2)
+
   # Wiimotedev interface classes
   if(ENABLE_WIIMOTEDEV)
     qt4_add_dbus_interface(SOURCES
@@ -997,6 +1025,11 @@ optional_source(HAVE_WIIMOTEDEV
 optional_source(HAVE_DEVICEKIT
   SOURCES devices/devicekitlister.cpp
   HEADERS devices/devicekitlister.h
+)
+
+optional_source(HAVE_UDISKS2
+  SOURCES devices/udisks2lister.cpp
+  HEADERS devices/udisks2lister.h
 )
 
 # Libgpod device backend
