@@ -11,14 +11,14 @@
 #include "dbus/udisks2drive.h"
 #include "dbus/udisks2job.h"
 
-const QString Udisks2Lister::udisks2service_ = "org.freedesktop.UDisks2";
+constexpr char Udisks2Lister::udisks2_service_[];
 
 Udisks2Lister::Udisks2Lister() {
 
 }
 
 Udisks2Lister::~Udisks2Lister() {
-  qLog(Debug) << __PRETTY_FUNCTION__;
+
 }
 
 QStringList Udisks2Lister::DeviceUniqueIDs() {
@@ -95,7 +95,7 @@ void Udisks2Lister::UnmountDevice(const QString &id) {
     return;
 
   OrgFreedesktopUDisks2FilesystemInterface filesystem(
-        udisks2service_,
+        udisks2_service_,
         device_data_[id].dbus_path,
         QDBusConnection::systemBus());
 
@@ -110,7 +110,7 @@ void Udisks2Lister::UnmountDevice(const QString &id) {
     }
 
     OrgFreedesktopUDisks2DriveInterface drive(
-          udisks2service_,
+          udisks2_service_,
           device_data_[id].dbus_drive_path,
           QDBusConnection::systemBus());
 
@@ -136,7 +136,7 @@ void Udisks2Lister::UpdateDeviceFreeSpace(const QString &id) {
 
 void Udisks2Lister::Init() {
   udisks2_interface_.reset(new OrgFreedesktopDBusObjectManagerInterface(
-                             udisks2service_,
+                             udisks2_service_,
                              "/org/freedesktop/UDisks2",
                              QDBusConnection::systemBus()));
 
@@ -178,18 +178,18 @@ void Udisks2Lister::DBusInterfaceAdded(const QDBusObjectPath &path,
       continue;
 
     std::shared_ptr<OrgFreedesktopUDisks2JobInterface> job = std::make_shared<OrgFreedesktopUDisks2JobInterface>(
-          udisks2service_,
+          udisks2_service_,
           path.path(),
           QDBusConnection::systemBus());
 
     if (!job->isValid())
       continue;
 
-    bool isMountJob = false;
+    bool is_mount_job = false;
     if (job->operation() == "filesystem-mount")
-      isMountJob = true;
+      is_mount_job = true;
     else if (job->operation() == "filesystem-unmount")
-      isMountJob = false;
+      is_mount_job = false;
     else
       continue;
 
@@ -203,10 +203,10 @@ void Udisks2Lister::DBusInterfaceAdded(const QDBusObjectPath &path,
     {
       QMutexLocker locker(&jobs_lock_);
       qLog(Debug) << "Adding pending job | DBus Path = " << job->path()
-                  << " | IsMountJob = " << isMountJob
+                  << " | IsMountJob = " << is_mount_job
                   << " | First partition = " << mountedPartitions.at(0).path();
       mounting_jobs_[path].dbus_interface = job;
-      mounting_jobs_[path].isMount = isMountJob;
+      mounting_jobs_[path].is_mount = is_mount_job;
       mounting_jobs_[path].mounted_partitions = mountedPartitions;
       connect(job.get(), SIGNAL(Completed(bool, const QString&)),
               SLOT(JobCompleted(bool, const QString&)));
@@ -271,7 +271,7 @@ void Udisks2Lister::JobCompleted(bool success, const QString &message) {
     return;
 
   qLog(Debug) << "Pending Job Completed | Path = " << job->path()
-              << " | Mount? = " << mounting_jobs_[jobPath].isMount
+              << " | Mount? = " << mounting_jobs_[jobPath].is_mount
               << " | Success = " << success;
 
   for (const auto &mountedObject : mounting_jobs_[jobPath].mounted_partitions) {
@@ -279,7 +279,7 @@ void Udisks2Lister::JobCompleted(bool success, const QString &message) {
     if (partitionData.dbus_path.isEmpty())
       continue;
 
-    mounting_jobs_[jobPath].isMount ?
+    mounting_jobs_[jobPath].is_mount ?
           HandleFinishedMountJob(partitionData) : HandleFinishedUnmountJob(partitionData, mountedObject);
   }
 }
@@ -316,11 +316,11 @@ void Udisks2Lister::HandleFinishedUnmountJob(const Udisks2Lister::PartitionData 
 Udisks2Lister::PartitionData Udisks2Lister::ReadPartitionData(const QDBusObjectPath &path) {
   PartitionData result;
   OrgFreedesktopUDisks2FilesystemInterface filesystem(
-        udisks2service_,
+        udisks2_service_,
         path.path(),
         QDBusConnection::systemBus());
   OrgFreedesktopUDisks2BlockInterface block(
-        udisks2service_,
+        udisks2_service_,
         path.path(),
         QDBusConnection::systemBus());
 
@@ -329,7 +329,7 @@ Udisks2Lister::PartitionData Udisks2Lister::ReadPartitionData(const QDBusObjectP
       && !filesystem.mountPoints().empty()) {
 
     OrgFreedesktopUDisks2DriveInterface drive(
-          udisks2service_,
+          udisks2_service_,
           block.drive().path(),
           QDBusConnection::systemBus());
 

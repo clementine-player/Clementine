@@ -1,11 +1,12 @@
-#pragma once
+#ifndef UDISKS2LISTER_H
+#define UDISKS2LISTER_H
 
 #include <memory>
 
-#include <QReadWriteLock>
-#include <QMutex>
-#include <QStringList>
 #include <QDBusArgument>
+#include <QMutex>
+#include <QReadWriteLock>
+#include <QStringList>
 
 #include "devicelister.h"
 #include "dbus/metatypes.h"
@@ -20,24 +21,24 @@ public:
   Udisks2Lister();
   ~Udisks2Lister();
 
-  QStringList DeviceUniqueIDs();
-  QVariantList DeviceIcons(const QString &id);
-  QString DeviceManufacturer(const QString &id);
-  QString DeviceModel(const QString &id);
-  quint64 DeviceCapacity(const QString &id);
-  quint64 DeviceFreeSpace(const QString &id);
-  QVariantMap DeviceHardwareInfo(const QString &id);
+  QStringList DeviceUniqueIDs() override;
+  QVariantList DeviceIcons(const QString &id) override;
+  QString DeviceManufacturer(const QString &id) override;
+  QString DeviceModel(const QString &id) override;
+  quint64 DeviceCapacity(const QString &id) override;
+  quint64 DeviceFreeSpace(const QString &id) override;
+  QVariantMap DeviceHardwareInfo(const QString &id) override;
 
-  QString MakeFriendlyName(const QString &id);
-  QList<QUrl> MakeDeviceUrls(const QString &id);
+  QString MakeFriendlyName(const QString &id) override;
+  QList<QUrl> MakeDeviceUrls(const QString &id) override;
 
-  void UnmountDevice(const QString &id);
+  void UnmountDevice(const QString &id) override;
 
 public slots:
-  void UpdateDeviceFreeSpace(const QString &id);
+  void UpdateDeviceFreeSpace(const QString &id) override;
 
 protected:
-  void Init();
+  void Init() override;
 
 private slots:
   void DBusInterfaceAdded(const QDBusObjectPath &path, const InterfacesAndProperties &ifaces);
@@ -50,7 +51,7 @@ private:
   QList<QDBusObjectPath> GetMountedPartitionsFromDBusArgument(const QDBusArgument &input);
 
   struct Udisks2Job {
-    bool isMount = true;
+    bool is_mount = true;
     QList<QDBusObjectPath> mounted_partitions;
     std::shared_ptr<OrgFreedesktopUDisks2JobInterface> dbus_interface;
   };
@@ -89,5 +90,7 @@ private:
 private:
   std::unique_ptr<OrgFreedesktopDBusObjectManagerInterface> udisks2_interface_;
 
-  static const QString udisks2service_;
+  static constexpr char udisks2_service_[] = "org.freedesktop.UDisks2";
 };
+
+#endif // UDISKS2LISTER_H
