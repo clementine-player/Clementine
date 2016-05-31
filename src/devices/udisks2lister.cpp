@@ -1,71 +1,78 @@
+/* This file is part of Clementine.
+   Copyright 2016, Valeriy Malov <jazzvoid@gmail.com>
+
+   Clementine is free software: you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation, either version 3 of the License, or
+   (at your option) any later version.
+
+   Clementine is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+
+   You should have received a copy of the GNU General Public License
+   along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
 #include "udisks2lister.h"
 
 #include <QDBusConnection>
 
 #include "core/logging.h"
 #include "core/utilities.h"
-
 #include "dbus/objectmanager.h"
-#include "dbus/udisks2filesystem.h"
 #include "dbus/udisks2block.h"
 #include "dbus/udisks2drive.h"
+#include "dbus/udisks2filesystem.h"
 #include "dbus/udisks2job.h"
 
 constexpr char Udisks2Lister::udisks2_service_[];
 
-Udisks2Lister::Udisks2Lister() {
+Udisks2Lister::Udisks2Lister() {}
 
-}
-
-Udisks2Lister::~Udisks2Lister() {
-
-}
+Udisks2Lister::~Udisks2Lister() {}
 
 QStringList Udisks2Lister::DeviceUniqueIDs() {
   QReadLocker locker(&device_data_lock_);
   return device_data_.keys();
 }
 
-QVariantList Udisks2Lister::DeviceIcons(const QString &id) {
+QVariantList Udisks2Lister::DeviceIcons(const QString& id) {
   return QVariantList();
 }
 
-QString Udisks2Lister::DeviceManufacturer(const QString &id) {
+QString Udisks2Lister::DeviceManufacturer(const QString& id) {
   QReadLocker locker(&device_data_lock_);
-  if (!device_data_.contains(id))
-    return "";
+  if (!device_data_.contains(id)) return "";
   return device_data_[id].vendor;
 }
 
-QString Udisks2Lister::DeviceModel(const QString &id) {
+QString Udisks2Lister::DeviceModel(const QString& id) {
   QReadLocker locker(&device_data_lock_);
-  if (!device_data_.contains(id))
-    return "";
+  if (!device_data_.contains(id)) return "";
   return device_data_[id].model;
 }
 
-quint64 Udisks2Lister::DeviceCapacity(const QString &id) {
+quint64 Udisks2Lister::DeviceCapacity(const QString& id) {
   QReadLocker locker(&device_data_lock_);
-  if (!device_data_.contains(id))
-    return 0;
+  if (!device_data_.contains(id)) return 0;
   return device_data_[id].capacity;
 }
 
-quint64 Udisks2Lister::DeviceFreeSpace(const QString &id) {
+quint64 Udisks2Lister::DeviceFreeSpace(const QString& id) {
   QReadLocker locker(&device_data_lock_);
-  if (!device_data_.contains(id))
-    return 0;
+  if (!device_data_.contains(id)) return 0;
   return device_data_[id].free_space;
 }
 
-QVariantMap Udisks2Lister::DeviceHardwareInfo(const QString &id) {
+QVariantMap Udisks2Lister::DeviceHardwareInfo(const QString& id) {
   QReadLocker locker(&device_data_lock_);
-  if (!device_data_.contains(id))
-    return QVariantMap();
+  if (!device_data_.contains(id)) return QVariantMap();
 
   QVariantMap result;
 
-  const auto &data = device_data_[id];
+  const auto& data = device_data_[id];
   result[QT_TR_NOOP("DBus path")] = data.dbus_path;
   result[QT_TR_NOOP("Serial number")] = data.serial;
   result[QT_TR_NOOP("Mount points")] = data.mount_paths.join(", ");
@@ -75,51 +82,48 @@ QVariantMap Udisks2Lister::DeviceHardwareInfo(const QString &id) {
   return result;
 }
 
-QString Udisks2Lister::MakeFriendlyName(const QString &id) {
+QString Udisks2Lister::MakeFriendlyName(const QString& id) {
   QReadLocker locker(&device_data_lock_);
-  if (!device_data_.contains(id))
-    return "";
+  if (!device_data_.contains(id)) return "";
   return device_data_[id].friendly_name;
 }
 
-QList<QUrl> Udisks2Lister::MakeDeviceUrls(const QString &id) {
+QList<QUrl> Udisks2Lister::MakeDeviceUrls(const QString& id) {
   QReadLocker locker(&device_data_lock_);
-  if (!device_data_.contains(id))
-    return QList<QUrl>();
-  return QList<QUrl>() << QUrl::fromLocalFile(device_data_[id].mount_paths.at(0));
+  if (!device_data_.contains(id)) return QList<QUrl>();
+  return QList<QUrl>() << QUrl::fromLocalFile(
+             device_data_[id].mount_paths.at(0));
 }
 
-void Udisks2Lister::UnmountDevice(const QString &id) {
+void Udisks2Lister::UnmountDevice(const QString& id) {
   QReadLocker locker(&device_data_lock_);
-  if (!device_data_.contains(id))
-    return;
+  if (!device_data_.contains(id)) return;
 
   OrgFreedesktopUDisks2FilesystemInterface filesystem(
-        udisks2_service_,
-        device_data_[id].dbus_path,
-        QDBusConnection::systemBus());
+      udisks2_service_, device_data_[id].dbus_path,
+      QDBusConnection::systemBus());
 
-  if (filesystem.isValid())
-  {
+  if (filesystem.isValid()) {
     auto unmountResult = filesystem.Unmount(QVariantMap());
     unmountResult.waitForFinished();
 
     if (unmountResult.isError()) {
-      qLog(Warning) << "Failed to unmount " << id << ": " << unmountResult.error();
+      qLog(Warning) << "Failed to unmount " << id << ": "
+                    << unmountResult.error();
       return;
     }
 
-    OrgFreedesktopUDisks2DriveInterface drive(
-          udisks2_service_,
-          device_data_[id].dbus_drive_path,
-          QDBusConnection::systemBus());
+    OrgFreedesktopUDisks2DriveInterface drive(udisks2_service_,
+                                              device_data_[id].dbus_drive_path,
+                                              QDBusConnection::systemBus());
 
     if (drive.isValid()) {
       auto ejectResult = drive.Eject(QVariantMap());
       ejectResult.waitForFinished();
 
       if (ejectResult.isError())
-        qLog(Warning) << "Failed to eject " << id << ": " << ejectResult.error();
+        qLog(Warning) << "Failed to eject " << id << ": "
+                      << ejectResult.error();
     }
 
     device_data_.remove(id);
@@ -127,20 +131,21 @@ void Udisks2Lister::UnmountDevice(const QString &id) {
   }
 }
 
-void Udisks2Lister::UpdateDeviceFreeSpace(const QString &id) {
+void Udisks2Lister::UpdateDeviceFreeSpace(const QString& id) {
   QWriteLocker locker(&device_data_lock_);
-  device_data_[id].free_space = Utilities::FileSystemFreeSpace(device_data_[id].mount_paths.at(0));
+  device_data_[id].free_space =
+      Utilities::FileSystemFreeSpace(device_data_[id].mount_paths.at(0));
 
   emit DeviceChanged(id);
 }
 
 void Udisks2Lister::Init() {
   udisks2_interface_.reset(new OrgFreedesktopDBusObjectManagerInterface(
-                             udisks2_service_,
-                             "/org/freedesktop/UDisks2",
-                             QDBusConnection::systemBus()));
+      udisks2_service_, "/org/freedesktop/UDisks2",
+      QDBusConnection::systemBus()));
 
-  QDBusPendingReply<ManagedObjectList> reply = udisks2_interface_->GetManagedObjects();
+  QDBusPendingReply<ManagedObjectList> reply =
+      udisks2_interface_->GetManagedObjects();
   reply.waitForFinished();
 
   if (!reply.isValid()) {
@@ -150,40 +155,38 @@ void Udisks2Lister::Init() {
     return;
   }
 
-  for (const QDBusObjectPath &path : reply.value().keys()) {
+  for (const QDBusObjectPath& path : reply.value().keys()) {
     auto partitionData = ReadPartitionData(path);
 
-    if (!partitionData.dbus_path.isEmpty())
-    {
+    if (!partitionData.dbus_path.isEmpty()) {
       QWriteLocker locker(&device_data_lock_);
       device_data_[partitionData.unique_id()] = partitionData;
     }
   }
 
-  for (const auto &id : device_data_.keys()) {
+  for (const auto& id : device_data_.keys()) {
     emit DeviceAdded(id);
   }
 
-  connect(udisks2_interface_.get(), SIGNAL(InterfacesAdded(QDBusObjectPath, InterfacesAndProperties)),
+  connect(udisks2_interface_.get(),
+          SIGNAL(InterfacesAdded(QDBusObjectPath, InterfacesAndProperties)),
           SLOT(DBusInterfaceAdded(QDBusObjectPath, InterfacesAndProperties)));
-  connect(udisks2_interface_.get(), SIGNAL(InterfacesRemoved(QDBusObjectPath, QStringList)),
+  connect(udisks2_interface_.get(),
+          SIGNAL(InterfacesRemoved(QDBusObjectPath, QStringList)),
           SLOT(DBusInterfaceRemoved(QDBusObjectPath, QStringList)));
 }
 
-void Udisks2Lister::DBusInterfaceAdded(const QDBusObjectPath &path,
-                                       const InterfacesAndProperties &interfaces) {
-  for (auto interface = interfaces.constBegin(); interface != interfaces.constEnd(); ++interface)
-  {
-    if (interface.key() != "org.freedesktop.UDisks2.Job")
-      continue;
+void Udisks2Lister::DBusInterfaceAdded(
+    const QDBusObjectPath& path, const InterfacesAndProperties& interfaces) {
+  for (auto interface = interfaces.constBegin();
+       interface != interfaces.constEnd(); ++interface) {
+    if (interface.key() != "org.freedesktop.UDisks2.Job") continue;
 
-    std::shared_ptr<OrgFreedesktopUDisks2JobInterface> job = std::make_shared<OrgFreedesktopUDisks2JobInterface>(
-          udisks2_service_,
-          path.path(),
-          QDBusConnection::systemBus());
+    std::shared_ptr<OrgFreedesktopUDisks2JobInterface> job =
+        std::make_shared<OrgFreedesktopUDisks2JobInterface>(
+            udisks2_service_, path.path(), QDBusConnection::systemBus());
 
-    if (!job->isValid())
-      continue;
+    if (!job->isValid()) continue;
 
     bool is_mount_job = false;
     if (job->operation() == "filesystem-mount")
@@ -214,40 +217,39 @@ void Udisks2Lister::DBusInterfaceAdded(const QDBusObjectPath &path,
   }
 }
 
-void Udisks2Lister::DBusInterfaceRemoved(const QDBusObjectPath &path, const QStringList &ifaces) {
-  if (!isPendingJob(path))
-    RemoveDevice(path);
+void Udisks2Lister::DBusInterfaceRemoved(const QDBusObjectPath& path,
+                                         const QStringList& ifaces) {
+  if (!isPendingJob(path)) RemoveDevice(path);
 }
 
-bool Udisks2Lister::isPendingJob(const QDBusObjectPath &jobPath) {
+bool Udisks2Lister::isPendingJob(const QDBusObjectPath& jobPath) {
   QMutexLocker locker(&jobs_lock_);
 
-  if (!mounting_jobs_.contains(jobPath))
-    return false;
+  if (!mounting_jobs_.contains(jobPath)) return false;
 
   mounting_jobs_.remove(jobPath);
   return true;
 }
 
-void Udisks2Lister::RemoveDevice(const QDBusObjectPath &devicePath) {
+void Udisks2Lister::RemoveDevice(const QDBusObjectPath& devicePath) {
   QWriteLocker locker(&device_data_lock_);
   QString id;
-  for (const auto &data : device_data_) {
+  for (const auto& data : device_data_) {
     if (data.dbus_path == devicePath.path()) {
       id = data.unique_id();
       break;
     }
   }
 
-  if (id.isEmpty())
-    return;
+  if (id.isEmpty()) return;
 
   qLog(Debug) << "UDisks2 device removed: " << devicePath.path();
   device_data_.remove(id);
   DeviceRemoved(id);
 }
 
-QList<QDBusObjectPath> Udisks2Lister::GetMountedPartitionsFromDBusArgument(const QDBusArgument &input) {
+QList<QDBusObjectPath> Udisks2Lister::GetMountedPartitionsFromDBusArgument(
+    const QDBusArgument& input) {
   QList<QDBusObjectPath> result;
 
   input.beginArray();
@@ -261,80 +263,74 @@ QList<QDBusObjectPath> Udisks2Lister::GetMountedPartitionsFromDBusArgument(const
   return result;
 }
 
-void Udisks2Lister::JobCompleted(bool success, const QString &message) {
+void Udisks2Lister::JobCompleted(bool success, const QString& message) {
   auto job = qobject_cast<OrgFreedesktopUDisks2JobInterface*>(sender());
   QDBusObjectPath jobPath(job->path());
 
-  if (!job->isValid()
-      || !success
-      || !mounting_jobs_.contains(jobPath))
-    return;
+  if (!job->isValid() || !success || !mounting_jobs_.contains(jobPath)) return;
 
   qLog(Debug) << "Pending Job Completed | Path = " << job->path()
               << " | Mount? = " << mounting_jobs_[jobPath].is_mount
               << " | Success = " << success;
 
-  for (const auto &mountedObject : mounting_jobs_[jobPath].mounted_partitions) {
+  for (const auto& mountedObject : mounting_jobs_[jobPath].mounted_partitions) {
     auto partitionData = ReadPartitionData(mountedObject);
-    if (partitionData.dbus_path.isEmpty())
-      continue;
+    if (partitionData.dbus_path.isEmpty()) continue;
 
-    mounting_jobs_[jobPath].is_mount ?
-          HandleFinishedMountJob(partitionData) : HandleFinishedUnmountJob(partitionData, mountedObject);
+    mounting_jobs_[jobPath].is_mount
+        ? HandleFinishedMountJob(partitionData)
+        : HandleFinishedUnmountJob(partitionData, mountedObject);
   }
 }
 
-void Udisks2Lister::HandleFinishedMountJob(const Udisks2Lister::PartitionData &partitionData) {
-  qLog(Debug) << "UDisks2 mount job finished: Drive = " << partitionData.dbus_drive_path
+void Udisks2Lister::HandleFinishedMountJob(
+    const Udisks2Lister::PartitionData& partitionData) {
+  qLog(Debug) << "UDisks2 mount job finished: Drive = "
+              << partitionData.dbus_drive_path
               << " | Partition = " << partitionData.dbus_path;
   QWriteLocker locker(&device_data_lock_);
   device_data_[partitionData.unique_id()] = partitionData;
   DeviceAdded(partitionData.unique_id());
 }
 
-void Udisks2Lister::HandleFinishedUnmountJob(const Udisks2Lister::PartitionData &partitionData, const QDBusObjectPath &mountedObject) {
+void Udisks2Lister::HandleFinishedUnmountJob(
+    const Udisks2Lister::PartitionData& partitionData,
+    const QDBusObjectPath& mountedObject) {
   QWriteLocker locker(&device_data_lock_);
   QString id;
-  for (auto &data : device_data_) {
+  for (auto& data : device_data_) {
     if (data.mount_paths.contains(mountedObject.path())) {
-      qLog(Debug) << "UDisks2 umount job finished, found corresponding device: Drive = " << data.dbus_drive_path
-                  << " | Partition = " << data.dbus_path;
+      qLog(Debug)
+          << "UDisks2 umount job finished, found corresponding device: Drive = "
+          << data.dbus_drive_path << " | Partition = " << data.dbus_path;
       data.mount_paths.removeOne(mountedObject.path());
-      if (data.mount_paths.empty())
-        id = data.unique_id();
+      if (data.mount_paths.empty()) id = data.unique_id();
       break;
     }
   }
 
   if (!id.isEmpty()) {
-    qLog(Debug) << "Partition " << partitionData.dbus_path << " has no more mount points, removing it from device list";
+    qLog(Debug) << "Partition " << partitionData.dbus_path
+                << " has no more mount points, removing it from device list";
     device_data_.remove(id);
     DeviceRemoved(id);
   }
 }
 
-Udisks2Lister::PartitionData Udisks2Lister::ReadPartitionData(const QDBusObjectPath &path) {
+Udisks2Lister::PartitionData Udisks2Lister::ReadPartitionData(
+    const QDBusObjectPath& path) {
   PartitionData result;
   OrgFreedesktopUDisks2FilesystemInterface filesystem(
-        udisks2_service_,
-        path.path(),
-        QDBusConnection::systemBus());
-  OrgFreedesktopUDisks2BlockInterface block(
-        udisks2_service_,
-        path.path(),
-        QDBusConnection::systemBus());
+      udisks2_service_, path.path(), QDBusConnection::systemBus());
+  OrgFreedesktopUDisks2BlockInterface block(udisks2_service_, path.path(),
+                                            QDBusConnection::systemBus());
 
-  if (filesystem.isValid()
-      && block.isValid()
-      && !filesystem.mountPoints().empty()) {
-
+  if (filesystem.isValid() && block.isValid() &&
+      !filesystem.mountPoints().empty()) {
     OrgFreedesktopUDisks2DriveInterface drive(
-          udisks2_service_,
-          block.drive().path(),
-          QDBusConnection::systemBus());
+        udisks2_service_, block.drive().path(), QDBusConnection::systemBus());
 
-    if (drive.isValid()
-        && drive.mediaRemovable()) {
+    if (drive.isValid() && drive.mediaRemovable()) {
       result.dbus_path = path.path();
       result.dbus_drive_path = block.drive().path();
 
@@ -351,10 +347,11 @@ Udisks2Lister::PartitionData Udisks2Lister::ReadPartitionData(const QDBusObjectP
       else
         result.friendly_name = result.model + " " + result.uuid;
 
-      for (const auto &path : filesystem.mountPoints())
+      for (const auto& path : filesystem.mountPoints())
         result.mount_paths.push_back(path);
 
-      result.free_space = Utilities::FileSystemFreeSpace(result.mount_paths.at(0));
+      result.free_space =
+          Utilities::FileSystemFreeSpace(result.mount_paths.at(0));
     }
   }
 
