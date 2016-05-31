@@ -65,8 +65,8 @@ class Udisks2Lister : public DeviceLister {
   void JobCompleted(bool success, const QString& message);
 
  private:
-  bool isPendingJob(const QDBusObjectPath& jobPath);
-  void RemoveDevice(const QDBusObjectPath& devicePath);
+  bool isPendingJob(const QDBusObjectPath& job_path);
+  void RemoveDevice(const QDBusObjectPath& device_path);
   QList<QDBusObjectPath> GetMountedPartitionsFromDBusArgument(
       const QDBusArgument& input);
 
@@ -102,10 +102,10 @@ class Udisks2Lister : public DeviceLister {
 
   PartitionData ReadPartitionData(const QDBusObjectPath& path);
   void HandleFinishedMountJob(
-      const Udisks2Lister::PartitionData& partitionData);
+      const Udisks2Lister::PartitionData& partition_data);
   void HandleFinishedUnmountJob(
-      const Udisks2Lister::PartitionData& partitionData,
-      const QDBusObjectPath& mountedObject);
+      const Udisks2Lister::PartitionData& partition_data,
+      const QDBusObjectPath& mounted_object);
 
   QReadWriteLock device_data_lock_;
   QMap<QString, PartitionData> device_data_;
