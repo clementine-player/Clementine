@@ -76,7 +76,7 @@ QVariantMap Udisks2Lister::DeviceHardwareInfo(const QString& id) {
   result[QT_TR_NOOP("DBus path")] = data.dbus_path;
   result[QT_TR_NOOP("Serial number")] = data.serial;
   result[QT_TR_NOOP("Mount points")] = data.mount_paths.join(", ");
-  result[QT_TR_NOOP("Parition label")] = data.label;
+  result[QT_TR_NOOP("Partition label")] = data.label;
   result[QT_TR_NOOP("UUID")] = data.uuid;
 
   return result;
