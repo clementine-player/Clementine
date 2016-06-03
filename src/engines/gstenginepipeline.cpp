@@ -418,7 +418,7 @@ bool GstEnginePipeline::Init() {
 
   // Ensure that the audio output of the tee does not autonegotiate to 16 bit
   GstCaps* caps = gst_caps_new_simple("audio/x-raw", "format", G_TYPE_STRING,
-                                      "F32LE", NULL);
+                                      "S32LE", NULL);
 
   // Add caps for fixed sample rate and mono, but only if requested
   if (sample_rate_ != GstEngine::kAutoSampleRate && sample_rate_ > 0) {
