@@ -12,7 +12,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2016-05-18 16:11+0000\n"
+"PO-Revision-Date: 2016-06-02 14:50+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Afrikaans (http://www.transifex.com/davidsansome/clementine/language/af/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -55,7 +55,7 @@ msgstr "ms"
 msgid " pt"
 msgstr "pte"
 
-#: ../bin/src/ui_behavioursettingspage.h:359
+#: ../bin/src/ui_behavioursettingspage.h:367
 msgid " s"
 msgstr "s"
 
@@ -422,7 +422,7 @@ msgid "About Qt..."
 msgstr "Meer oor Qt..."
 
 #: playlist/playlistsaveoptionsdialog.cpp:34
-#: ../bin/src/ui_behavioursettingspage.h:363
+#: ../bin/src/ui_behavioursettingspage.h:371
 msgid "Absolute"
 msgstr "Absoluut"
 
@@ -630,8 +630,8 @@ msgstr "Voeg tot boekmerke by"
 msgid "Add to playlist"
 msgstr "Voeg tot 'n speellys by"
 
-#: ../bin/src/ui_behavioursettingspage.h:343
-#: ../bin/src/ui_behavioursettingspage.h:355
+#: ../bin/src/ui_behavioursettingspage.h:351
+#: ../bin/src/ui_behavioursettingspage.h:363
 msgid "Add to the queue"
 msgstr "Voeg aan die einde van die tou by"
 
@@ -677,7 +677,7 @@ msgid "After copying..."
 msgstr "Na kopiëring..."
 
 #: library/savedgroupingmanager.cpp:65 playlist/playlist.cpp:1318
-#: ui/organisedialog.cpp:61 ui/qtsystemtrayicon.cpp:236
+#: ui/organisedialog.cpp:61 ui/qtsystemtrayicon.cpp:251
 #: ../bin/src/ui_groupbydialog.h:128 ../bin/src/ui_groupbydialog.h:147
 #: ../bin/src/ui_groupbydialog.h:166 ../bin/src/ui_albumcoversearcher.h:110
 #: ../bin/src/ui_albumcoversearcher.h:112 ../bin/src/ui_edittagdialog.h:734
@@ -770,16 +770,16 @@ msgstr "Laat \"mid/side\"-enkodering toe."
 msgid "Alongside the originals"
 msgstr "Naas die oorspronlikes"
 
-#: ../bin/src/ui_behavioursettingspage.h:316
+#: ../bin/src/ui_behavioursettingspage.h:324
 msgid "Always hide the main window"
 msgstr "Steek altyd die hoofvenster weg"
 
-#: ../bin/src/ui_behavioursettingspage.h:315
+#: ../bin/src/ui_behavioursettingspage.h:323
 msgid "Always show the main window"
 msgstr "Wys altyd die hoofvenster"
 
-#: ../bin/src/ui_behavioursettingspage.h:329
-#: ../bin/src/ui_behavioursettingspage.h:349
+#: ../bin/src/ui_behavioursettingspage.h:337
+#: ../bin/src/ui_behavioursettingspage.h:357
 msgid "Always start playing"
 msgstr "Begin altyd dadelik speel"
 
@@ -826,7 +826,7 @@ msgstr "Voeg lêers/URLs by die speellys by"
 msgid "Append to current playlist"
 msgstr "Voeg by huidige speellys by"
 
-#: ../bin/src/ui_behavioursettingspage.h:340
+#: ../bin/src/ui_behavioursettingspage.h:348
 msgid "Append to the playlist"
 msgstr "Voeg by speellys by"
 
@@ -850,7 +850,7 @@ msgid ""
 msgstr "Is jy seker dat jy die liedjie se statestiek in die liedjie se lêer wil skryf vir al die liedjies in jou biblioteek?"
 
 #: library/savedgroupingmanager.cpp:62 playlist/playlist.cpp:1316
-#: ui/organisedialog.cpp:62 ui/qtsystemtrayicon.cpp:234
+#: ui/organisedialog.cpp:62 ui/qtsystemtrayicon.cpp:249
 #: ../bin/src/ui_groupbydialog.h:129 ../bin/src/ui_groupbydialog.h:148
 #: ../bin/src/ui_groupbydialog.h:167 ../bin/src/ui_albumcoversearcher.h:106
 #: ../bin/src/ui_albumcoversearcher.h:108 ../bin/src/ui_edittagdialog.h:732
@@ -870,7 +870,7 @@ msgstr "Kunstenaarsetikette"
 msgid "Artist's initial"
 msgstr "Kunstenaar se voorletters"
 
-#: ../bin/src/ui_behavioursettingspage.h:365
+#: ../bin/src/ui_behavioursettingspage.h:373
 msgid "Ask when saving"
 msgstr "Vra voor storing"
 
@@ -905,7 +905,7 @@ msgid "Auto"
 msgstr "Outomaties"
 
 #: playlist/playlistsaveoptionsdialog.cpp:32
-#: ../bin/src/ui_behavioursettingspage.h:362
+#: ../bin/src/ui_behavioursettingspage.h:370
 msgid "Automatic"
 msgstr "Outomaties"
 
@@ -978,7 +978,7 @@ msgstr "Eenvoudig Blou"
 msgid "Basic audio type"
 msgstr "Basies oudio tipe"
 
-#: ../bin/src/ui_behavioursettingspage.h:304
+#: ../bin/src/ui_behavioursettingspage.h:311
 msgid "Behavior"
 msgstr "Gedrag"
 
@@ -1115,7 +1115,7 @@ msgstr "Verander kortskakel"
 msgid "Change shuffle mode"
 msgstr "Verander skommel modus"
 
-#: ../bin/src/ui_behavioursettingspage.h:354
+#: ../bin/src/ui_behavioursettingspage.h:362
 msgid "Change the currently playing song"
 msgstr "Kies 'n nuwe liedjie"
 
@@ -1411,7 +1411,7 @@ msgstr "Stel op"
 msgid "Connect Wii Remotes using active/deactive action"
 msgstr "Verbind Wii-afstandbehere met aktiveer/deaktiveer aksie"
 
-#: devices/devicemanager.cpp:321 devices/devicemanager.cpp:326
+#: devices/devicemanager.cpp:330 devices/devicemanager.cpp:335
 msgid "Connect device"
 msgstr "Verbind toestel"
 
@@ -1586,7 +1586,7 @@ msgstr "Eie gekose boodskap"
 msgid "Custom..."
 msgstr "Na keuse..."
 
-#: devices/devicekitlister.cpp:125
+#: devices/devicekitlister.cpp:125 devices/udisks2lister.cpp:76
 msgid "DBus path"
 msgstr "DBus lêergids"
 
@@ -1852,11 +1852,11 @@ msgstr "Maak 'n skenking"
 msgid "Double click to open"
 msgstr "Dubbelkliek om oop te maak"
 
-#: ../bin/src/ui_behavioursettingspage.h:351
+#: ../bin/src/ui_behavioursettingspage.h:359
 msgid "Double clicking a song in the playlist will..."
 msgstr "As jy 'n liedjie in die snitlys tweemaal klik sal..."
 
-#: ../bin/src/ui_behavioursettingspage.h:337
+#: ../bin/src/ui_behavioursettingspage.h:345
 msgid "Double clicking a song will..."
 msgstr "Dubbelkliek op 'n liedjie sal..."
 
@@ -2015,7 +2015,7 @@ msgstr "Skakel grafiese effenaar aan"
 msgid "Enable shortcuts only when Clementine is focused"
 msgstr "Laat kortskakels slegs toe wanneer Clementine in fokus is"
 
-#: ../bin/src/ui_behavioursettingspage.h:323
+#: ../bin/src/ui_behavioursettingspage.h:331
 msgid "Enable song metadata inline edition with click"
 msgstr "Skakel liedjie metadata in-lyn uitgawe aan met 'n kliek"
 
@@ -2529,7 +2529,7 @@ msgstr "Google Drive"
 msgid "Got %1 covers out of %2 (%3 failed)"
 msgstr "%1 van %2 omslae is verky (%3 onsuksesvol)"
 
-#: ../bin/src/ui_behavioursettingspage.h:319
+#: ../bin/src/ui_behavioursettingspage.h:327
 msgid "Grey out non existent songs in my playlists"
 msgstr "Maak lidejies in my speellys wat nie bestaan nie grys"
 
@@ -2651,13 +2651,13 @@ msgstr "Ikone bo"
 msgid "Identifying song"
 msgstr "Liedjies word geïdentifiseer"
 
-#: ../bin/src/ui_behavioursettingspage.h:321
+#: ../bin/src/ui_behavioursettingspage.h:329
 msgid ""
 "If activated, clicking a selected song in the playlist view will let you "
 "edit the tag value directly"
 msgstr "Indien aangeskakel, sal die kliek van 'n liedjie in die speellys direkte redigering van die etiket toelaat."
 
-#: devices/devicemanager.cpp:566 devices/devicemanager.cpp:577
+#: devices/devicemanager.cpp:575 devices/devicemanager.cpp:586
 msgid ""
 "If you continue, this device will work slowly and songs copied to it may not"
 " work."
@@ -2829,7 +2829,7 @@ msgstr "Jamendo se top snitte vir die week"
 msgid "Jamendo database"
 msgstr "Jamendo databasis"
 
-#: ../bin/src/ui_behavioursettingspage.h:334
+#: ../bin/src/ui_behavioursettingspage.h:342
 msgid "Jump to previous song right away"
 msgstr "Spring dadelik na vorige lied"
 
@@ -2849,7 +2849,7 @@ msgstr "Hou knoppies vir %1 sekonde vas"
 msgid "Keep buttons for %1 seconds..."
 msgstr "Hou knoppies vir %1 sekondes vas"
 
-#: ../bin/src/ui_behavioursettingspage.h:306
+#: ../bin/src/ui_behavioursettingspage.h:314
 msgid "Keep running in the background when the window is closed"
 msgstr "Hou aan uitvoer in die agtergrond al word die venster gesluit"
 
@@ -2866,7 +2866,7 @@ msgstr "Katjies"
 msgid "Kuduro"
 msgstr "Kuduro"
 
-#: ../bin/src/ui_behavioursettingspage.h:308
+#: ../bin/src/ui_behavioursettingspage.h:316
 msgid "Language"
 msgstr "Taal"
 
@@ -2940,7 +2940,7 @@ msgid "Left"
 msgstr "Links"
 
 #: playlist/playlist.cpp:1320 ui/organisedialog.cpp:76
-#: ui/qtsystemtrayicon.cpp:239 ../bin/src/ui_edittagdialog.h:714
+#: ui/qtsystemtrayicon.cpp:254 ../bin/src/ui_edittagdialog.h:714
 msgid "Length"
 msgstr "Lengte"
 
@@ -3273,7 +3273,7 @@ msgstr "Meeste gespeel"
 msgid "Mount point"
 msgstr "Monteringsadres"
 
-#: devices/devicekitlister.cpp:127
+#: devices/devicekitlister.cpp:127 devices/udisks2lister.cpp:78
 msgid "Mount points"
 msgstr "Monteringsadresse"
 
@@ -3351,8 +3351,8 @@ msgstr "Nooit"
 msgid "Never played"
 msgstr "Nooit deurgespeel"
 
-#: ../bin/src/ui_behavioursettingspage.h:327
-#: ../bin/src/ui_behavioursettingspage.h:347
+#: ../bin/src/ui_behavioursettingspage.h:335
+#: ../bin/src/ui_behavioursettingspage.h:355
 msgid "Never start playing"
 msgstr "Moet nooit begin speel nie"
 
@@ -3597,7 +3597,7 @@ msgstr "Maak oop in Google Drive."
 msgid "Open in new playlist"
 msgstr "Maak in nuwe speellys oop"
 
-#: ../bin/src/ui_behavioursettingspage.h:342
+#: ../bin/src/ui_behavioursettingspage.h:350
 msgctxt "Refers to behavior settings in Clementine settings page."
 msgid "Open in new playlist"
 msgstr "Open in 'n nuwe speellys"
@@ -3700,6 +3700,10 @@ msgstr "Eienaar"
 msgid "Parsing Jamendo catalogue"
 msgstr "Verwerk Jamendo katalogus"
 
+#: devices/udisks2lister.cpp:79
+msgid "Partition label"
+msgstr ""
+
 #: ui/equalizer.cpp:139
 msgid "Party"
 msgstr "Partytjie"
@@ -3714,7 +3718,7 @@ msgid "Password"
 msgstr "Wagwoord"
 
 #: core/globalshortcuts.cpp:50 ui/mainwindow.cpp:1137 ui/mainwindow.cpp:1633
-#: ui/qtsystemtrayicon.cpp:175 wiimotedev/wiimotesettingspage.cpp:114
+#: ui/qtsystemtrayicon.cpp:189 wiimotedev/wiimotesettingspage.cpp:114
 msgid "Pause"
 msgstr "Vries"
 
@@ -3742,8 +3746,8 @@ msgid "Plain sidebar"
 msgstr "Gewone sykieslys"
 
 #: core/globalshortcuts.cpp:49 ui/mainwindow.cpp:670 ui/mainwindow.cpp:1103
-#: ui/mainwindow.cpp:1122 ui/mainwindow.cpp:1637 ui/qtsystemtrayicon.cpp:164
-#: ui/qtsystemtrayicon.cpp:188 wiimotedev/wiimotesettingspage.cpp:107
+#: ui/mainwindow.cpp:1122 ui/mainwindow.cpp:1637 ui/qtsystemtrayicon.cpp:177
+#: ui/qtsystemtrayicon.cpp:203 wiimotedev/wiimotesettingspage.cpp:107
 #: ../bin/src/ui_mainwindow.h:659
 msgid "Play"
 msgstr "Speel"
@@ -3756,8 +3760,8 @@ msgstr "Speeltelling"
 msgid "Play if stopped, pause if playing"
 msgstr "Speel indien gestop, vries indien aan die speel"
 
-#: ../bin/src/ui_behavioursettingspage.h:328
-#: ../bin/src/ui_behavioursettingspage.h:348
+#: ../bin/src/ui_behavioursettingspage.h:336
+#: ../bin/src/ui_behavioursettingspage.h:356
 msgid "Play if there is nothing already playing"
 msgstr "Speel as daar niks anders tans speel nie"
 
@@ -3882,7 +3886,7 @@ msgstr "Druk 'n knoppie"
 msgid "Press a key combination to use for %1..."
 msgstr "Druk 'n sleutelsametelling om te gebruik vir %1..."
 
-#: ../bin/src/ui_behavioursettingspage.h:331
+#: ../bin/src/ui_behavioursettingspage.h:339
 msgid "Pressing \"Previous\" in player will..."
 msgstr "Om \"Vorige\" in die speler te druk sal..."
 
@@ -4051,7 +4055,7 @@ msgid "Reggae"
 msgstr "Reggae"
 
 #: playlist/playlistsaveoptionsdialog.cpp:33
-#: ../bin/src/ui_behavioursettingspage.h:364
+#: ../bin/src/ui_behavioursettingspage.h:372
 msgid "Relative"
 msgstr "Relatief"
 
@@ -4059,7 +4063,7 @@ msgstr "Relatief"
 msgid "Remember Wii remote swing"
 msgstr "Onthou die Wii-afstandsbeheer se swaai"
 
-#: ../bin/src/ui_behavioursettingspage.h:317
+#: ../bin/src/ui_behavioursettingspage.h:325
 msgid "Remember from last time"
 msgstr "Onthou van laas keer"
 
@@ -4143,7 +4147,7 @@ msgstr "Herhaal snit"
 msgid "Replace current playlist"
 msgstr "Vervang huidige speellys"
 
-#: ../bin/src/ui_behavioursettingspage.h:341
+#: ../bin/src/ui_behavioursettingspage.h:349
 msgid "Replace the playlist"
 msgstr "Vervang die speellys"
 
@@ -4175,7 +4179,7 @@ msgstr "Herstel"
 msgid "Reset play counts"
 msgstr "Herstel afspeeltelling"
 
-#: ../bin/src/ui_behavioursettingspage.h:335
+#: ../bin/src/ui_behavioursettingspage.h:343
 msgid "Restart song, then jump to previous if pressed again"
 msgstr "Herbegin lied, dan spring na vorige as weer gedruk"
 
@@ -4188,7 +4192,7 @@ msgstr "Hervat die snit, of speel die vorige snit indien binne 8 sekondes van di
 msgid "Restrict to ASCII characters"
 msgstr "Beperk tot ASCII karakters"
 
-#: ../bin/src/ui_behavioursettingspage.h:318
+#: ../bin/src/ui_behavioursettingspage.h:326
 msgid "Resume playback on start"
 msgstr "Hervat terugspel met opening"
 
@@ -4325,6 +4329,10 @@ msgstr "Telling"
 msgid "Scrobble tracks that I listen to"
 msgstr "Scrobble snitte wat ek na luister op"
 
+#: ../bin/src/ui_behavioursettingspage.h:313
+msgid "Scroll over icon to change track"
+msgstr ""
+
 #: ../bin/src/ui_seafilesettingspage.h:164
 msgid "Seafile"
 msgstr "Seafile"
@@ -4418,7 +4426,7 @@ msgstr "Streef 'n relatiewe hoeveelheid deur die huidige snit"
 msgid "Seek the currently playing track to an absolute position"
 msgstr "Streef na 'n spesifieke posisie in die huidige snit"
 
-#: ../bin/src/ui_behavioursettingspage.h:357
+#: ../bin/src/ui_behavioursettingspage.h:365
 msgid "Seeking using a keyboard shortcut or mouse wheel"
 msgstr ""
 
@@ -4458,7 +4466,7 @@ msgstr "Kies visualisasie..."
 msgid "Select..."
 msgstr "Selekteer..."
 
-#: devices/devicekitlister.cpp:126
+#: devices/devicekitlister.cpp:126 devices/udisks2lister.cpp:77
 msgid "Serial number"
 msgstr "Reeksnommer"
 
@@ -4619,7 +4627,7 @@ msgstr "Vertoon die \"bemin\" knoppie"
 msgid "Show the scrobble button in the main window"
 msgstr "Wys die scrobble knoppie in die hoofvenster"
 
-#: ../bin/src/ui_behavioursettingspage.h:305
+#: ../bin/src/ui_behavioursettingspage.h:312
 msgid "Show tray icon"
 msgstr "Wys in stelselbalk"
 
@@ -5100,20 +5108,20 @@ msgstr "Hierdie toestel moet eers gekoppel en oopgemaak word voordat Clememntine
 msgid "This device supports the following file formats:"
 msgstr "Die toestel ondersteun die volgende lêer formate:"
 
-#: devices/devicemanager.cpp:563 devices/devicemanager.cpp:574
+#: devices/devicemanager.cpp:572 devices/devicemanager.cpp:583
 msgid "This device will not work properly"
 msgstr "Hierdie toestel sal nie goed werk nie"
 
-#: devices/devicemanager.cpp:564
+#: devices/devicemanager.cpp:573
 msgid ""
 "This is an MTP device, but you compiled Clementine without libmtp support."
 msgstr "Hierdie is 'n MTP toestel, maar jy het Clementine sonder libmtp ondersteuning gekompileer."
 
-#: devices/devicemanager.cpp:575
+#: devices/devicemanager.cpp:584
 msgid "This is an iPod, but you compiled Clementine without libgpod support."
 msgstr "Hierdie is 'n iPos, maar jy het Clementine sonder libgpod ondersteuning gekompileer."
 
-#: devices/devicemanager.cpp:322
+#: devices/devicemanager.cpp:331
 msgid ""
 "This is the first time you have connected this device.  Clementine will now "
 "scan the device to find music files - this may take some time."
@@ -5127,17 +5135,17 @@ msgstr "Die opsie kan in die \"Gedrag\" opstellinge verander word"
 msgid "This stream is for paid subscribers only"
 msgstr "Hierdie stroom is slegs vir betalende lede."
 
-#: devices/devicemanager.cpp:591
+#: devices/devicemanager.cpp:600
 #, qt-format
 msgid "This type of device is not supported: %1"
 msgstr "Hierdie tipe toestel word nie ondersteun nie: %1"
 
-#: ../bin/src/ui_behavioursettingspage.h:358
+#: ../bin/src/ui_behavioursettingspage.h:366
 msgid "Time step"
 msgstr ""
 
 #: playlist/playlist.cpp:1314 ui/organisedialog.cpp:60
-#: ui/qtsystemtrayicon.cpp:232 ../bin/src/ui_about.h:141
+#: ui/qtsystemtrayicon.cpp:247 ../bin/src/ui_about.h:141
 #: ../bin/src/ui_edittagdialog.h:730 ../bin/src/ui_trackselectiondialog.h:210
 #: ../bin/src/ui_ripcddialog.h:306
 msgid "Title"
@@ -5245,6 +5253,10 @@ msgstr "URI"
 #: core/commandlineoptions.cpp:150
 msgid "URL(s)"
 msgstr "URL(s)"
+
+#: devices/udisks2lister.cpp:80
+msgid "UUID"
+msgstr ""
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:227
 msgid "Ultra wide band (UWB)"
@@ -5397,7 +5409,7 @@ msgstr "Gebruik kennisgewings om die Wii-afstandsbeheer se status te toon"
 msgid "Use temporal noise shaping"
 msgstr "Gebruik tydgebasseerde ruis vervorming"
 
-#: ../bin/src/ui_behavioursettingspage.h:311
+#: ../bin/src/ui_behavioursettingspage.h:319
 msgid "Use the system default"
 msgstr "Gebruik die stelsel se standaard waarde"
 
@@ -5429,7 +5441,7 @@ msgstr "Gebruikerskoppelvlak"
 msgid "Username"
 msgstr "Gebruikersnaam"
 
-#: ../bin/src/ui_behavioursettingspage.h:324
+#: ../bin/src/ui_behavioursettingspage.h:332
 msgid "Using the menu to add a song will..."
 msgstr "Deur van die kieslys gebruik te maak om 'n liedjie by te voeg sal..."
 
@@ -5498,7 +5510,7 @@ msgstr "WMA"
 msgid "Wall"
 msgstr "Muur"
 
-#: playlist/playlisttabbar.cpp:192 ../bin/src/ui_behavioursettingspage.h:307
+#: playlist/playlisttabbar.cpp:192 ../bin/src/ui_behavioursettingspage.h:315
 msgid "Warn me when closing a playlist tab"
 msgstr "Waarsku my met die sluit van 'n speellys oortjie"
 
@@ -5514,7 +5526,7 @@ msgstr "Webtuiste"
 msgid "Weeks"
 msgstr "Weke"
 
-#: ../bin/src/ui_behavioursettingspage.h:314
+#: ../bin/src/ui_behavioursettingspage.h:322
 msgid "When Clementine starts"
 msgstr "Wanneer Clementine oopgemaak word"
 
@@ -5524,7 +5536,7 @@ msgid ""
 "If there are no matches then it will use the largest image in the directory."
 msgstr "Wanneer daar vir album omslae gesoek word, sal Clementine eers soek vir beelde met die volgende woorde in hulle name.\nAs daar niks gevind word nie word die grootste beeld gebruik."
 
-#: ../bin/src/ui_behavioursettingspage.h:361
+#: ../bin/src/ui_behavioursettingspage.h:369
 msgid "When saving a playlist, file paths should be"
 msgstr "Met die stoor van 'n speellys moet die lêer roetes"
 
@@ -5608,7 +5620,7 @@ msgstr "Wil jy alles van voor af deursoek?"
 msgid "Write all songs statistics into songs' files"
 msgstr "Skryf al die liedjies se statistiek in die liedjie se lêer."
 
-#: ../bin/src/ui_behavioursettingspage.h:366
+#: ../bin/src/ui_behavioursettingspage.h:374
 msgid "Write metadata"
 msgstr "Skryf metedata"
 
@@ -5723,7 +5735,7 @@ msgid ""
 "shortcuts in Clementine."
 msgstr "Jy moet \"System Preferences\" oopmaak en Clementine toelaat om \"<span style=\"font-style:italic\">control your computer</span>\" vir die gebruik van globale kortpaaie."
 
-#: ../bin/src/ui_behavioursettingspage.h:313
+#: ../bin/src/ui_behavioursettingspage.h:321
 msgid "You will need to restart Clementine if you change the language."
 msgstr "Jy moet Clementine van voor af oopmaak om die taal te verander."
 

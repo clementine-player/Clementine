@@ -14,13 +14,13 @@
 # xaojan <cxiaojian@gmail.com>, 2012
 # Xinkai Chen <yeled.nova@gmail.com>, 2012
 # Xinkai Chen <yeled.nova@gmail.com>, 2012
-# zhangmin <zm1990s@gmail.com>, 2013-2015
+# zhangmin <zm1990s@gmail.com>, 2013-2016
 # zhangmin <zm1990s@gmail.com>, 2013-2014
 # 吴宇龙 <popolovenono@outlook.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2016-05-18 16:11+0000\n"
+"PO-Revision-Date: 2016-06-02 14:50+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/davidsansome/clementine/language/zh_CN/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -63,7 +63,7 @@ msgstr " 毫秒"
 msgid " pt"
 msgstr " 磅"
 
-#: ../bin/src/ui_behavioursettingspage.h:359
+#: ../bin/src/ui_behavioursettingspage.h:367
 msgid " s"
 msgstr "s"
 
@@ -430,7 +430,7 @@ msgid "About Qt..."
 msgstr "关于 Qt..."
 
 #: playlist/playlistsaveoptionsdialog.cpp:34
-#: ../bin/src/ui_behavioursettingspage.h:363
+#: ../bin/src/ui_behavioursettingspage.h:371
 msgid "Absolute"
 msgstr "绝对"
 
@@ -638,8 +638,8 @@ msgstr "添加到书签"
 msgid "Add to playlist"
 msgstr "添加到播放列表"
 
-#: ../bin/src/ui_behavioursettingspage.h:343
-#: ../bin/src/ui_behavioursettingspage.h:355
+#: ../bin/src/ui_behavioursettingspage.h:351
+#: ../bin/src/ui_behavioursettingspage.h:363
 msgid "Add to the queue"
 msgstr "添加到队列"
 
@@ -685,7 +685,7 @@ msgid "After copying..."
 msgstr "复制后..."
 
 #: library/savedgroupingmanager.cpp:65 playlist/playlist.cpp:1318
-#: ui/organisedialog.cpp:61 ui/qtsystemtrayicon.cpp:236
+#: ui/organisedialog.cpp:61 ui/qtsystemtrayicon.cpp:251
 #: ../bin/src/ui_groupbydialog.h:128 ../bin/src/ui_groupbydialog.h:147
 #: ../bin/src/ui_groupbydialog.h:166 ../bin/src/ui_albumcoversearcher.h:110
 #: ../bin/src/ui_albumcoversearcher.h:112 ../bin/src/ui_edittagdialog.h:734
@@ -778,16 +778,16 @@ msgstr "允许 M/S 编码 (和差编码)"
 msgid "Alongside the originals"
 msgstr "原始歌曲同一目录下"
 
-#: ../bin/src/ui_behavioursettingspage.h:316
+#: ../bin/src/ui_behavioursettingspage.h:324
 msgid "Always hide the main window"
 msgstr "总是隐藏主窗口"
 
-#: ../bin/src/ui_behavioursettingspage.h:315
+#: ../bin/src/ui_behavioursettingspage.h:323
 msgid "Always show the main window"
 msgstr "总是显示主窗口"
 
-#: ../bin/src/ui_behavioursettingspage.h:329
-#: ../bin/src/ui_behavioursettingspage.h:349
+#: ../bin/src/ui_behavioursettingspage.h:337
+#: ../bin/src/ui_behavioursettingspage.h:357
 msgid "Always start playing"
 msgstr "总是开始播放"
 
@@ -834,7 +834,7 @@ msgstr "添加文件/URL 到播放列表"
 msgid "Append to current playlist"
 msgstr "追加至当前播放列表"
 
-#: ../bin/src/ui_behavioursettingspage.h:340
+#: ../bin/src/ui_behavioursettingspage.h:348
 msgid "Append to the playlist"
 msgstr "追加至播放列表"
 
@@ -858,7 +858,7 @@ msgid ""
 msgstr "您确定要将媒体库中所有歌曲的统计信息写入相应的歌曲文件?"
 
 #: library/savedgroupingmanager.cpp:62 playlist/playlist.cpp:1316
-#: ui/organisedialog.cpp:62 ui/qtsystemtrayicon.cpp:234
+#: ui/organisedialog.cpp:62 ui/qtsystemtrayicon.cpp:249
 #: ../bin/src/ui_groupbydialog.h:129 ../bin/src/ui_groupbydialog.h:148
 #: ../bin/src/ui_groupbydialog.h:167 ../bin/src/ui_albumcoversearcher.h:106
 #: ../bin/src/ui_albumcoversearcher.h:108 ../bin/src/ui_edittagdialog.h:732
@@ -878,7 +878,7 @@ msgstr "歌手标签"
 msgid "Artist's initial"
 msgstr "歌手名字的首字母"
 
-#: ../bin/src/ui_behavioursettingspage.h:365
+#: ../bin/src/ui_behavioursettingspage.h:373
 msgid "Ask when saving"
 msgstr "保存时提示"
 
@@ -913,7 +913,7 @@ msgid "Auto"
 msgstr "自动"
 
 #: playlist/playlistsaveoptionsdialog.cpp:32
-#: ../bin/src/ui_behavioursettingspage.h:362
+#: ../bin/src/ui_behavioursettingspage.h:370
 msgid "Automatic"
 msgstr "自动"
 
@@ -986,7 +986,7 @@ msgstr "基础蓝"
 msgid "Basic audio type"
 msgstr "基本音频类型"
 
-#: ../bin/src/ui_behavioursettingspage.h:304
+#: ../bin/src/ui_behavioursettingspage.h:311
 msgid "Behavior"
 msgstr "行为"
 
@@ -1123,7 +1123,7 @@ msgstr "更改快捷键..."
 msgid "Change shuffle mode"
 msgstr "更改乱序模式"
 
-#: ../bin/src/ui_behavioursettingspage.h:354
+#: ../bin/src/ui_behavioursettingspage.h:362
 msgid "Change the currently playing song"
 msgstr "改变正在播放歌曲"
 
@@ -1419,7 +1419,7 @@ msgstr "配置..."
 msgid "Connect Wii Remotes using active/deactive action"
 msgstr "连接 Wii 遥控器"
 
-#: devices/devicemanager.cpp:321 devices/devicemanager.cpp:326
+#: devices/devicemanager.cpp:330 devices/devicemanager.cpp:335
 msgid "Connect device"
 msgstr "连接设备"
 
@@ -1594,7 +1594,7 @@ msgstr "自定义消息设置"
 msgid "Custom..."
 msgstr "自定义..."
 
-#: devices/devicekitlister.cpp:125
+#: devices/devicekitlister.cpp:125 devices/udisks2lister.cpp:76
 msgid "DBus path"
 msgstr "DBus 路径"
 
@@ -1860,11 +1860,11 @@ msgstr "捐助"
 msgid "Double click to open"
 msgstr "双击打开"
 
-#: ../bin/src/ui_behavioursettingspage.h:351
+#: ../bin/src/ui_behavioursettingspage.h:359
 msgid "Double clicking a song in the playlist will..."
 msgstr "双击播放列表中的歌曲将..."
 
-#: ../bin/src/ui_behavioursettingspage.h:337
+#: ../bin/src/ui_behavioursettingspage.h:345
 msgid "Double clicking a song will..."
 msgstr "双击歌曲将..."
 
@@ -2023,7 +2023,7 @@ msgstr "启用均衡器"
 msgid "Enable shortcuts only when Clementine is focused"
 msgstr "仅当 Clementine 在焦点时启用快捷键"
 
-#: ../bin/src/ui_behavioursettingspage.h:323
+#: ../bin/src/ui_behavioursettingspage.h:331
 msgid "Enable song metadata inline edition with click"
 msgstr "启用单击后行内编辑元数据"
 
@@ -2290,7 +2290,7 @@ msgstr "快速"
 
 #: internet/soundcloud/soundcloudservice.cpp:141
 msgid "Favorites"
-msgstr ""
+msgstr "收藏夹"
 
 #: library/library.cpp:88
 msgid "Favourite tracks"
@@ -2537,7 +2537,7 @@ msgstr "Google云存储"
 msgid "Got %1 covers out of %2 (%3 failed)"
 msgstr "获取了 %1 个封面，共 %2 个(失败 %3 个)"
 
-#: ../bin/src/ui_behavioursettingspage.h:319
+#: ../bin/src/ui_behavioursettingspage.h:327
 msgid "Grey out non existent songs in my playlists"
 msgstr "灰色显示播放列表中不存在的歌曲"
 
@@ -2659,13 +2659,13 @@ msgstr "图标在上"
 msgid "Identifying song"
 msgstr "识别曲目"
 
-#: ../bin/src/ui_behavioursettingspage.h:321
+#: ../bin/src/ui_behavioursettingspage.h:329
 msgid ""
 "If activated, clicking a selected song in the playlist view will let you "
 "edit the tag value directly"
 msgstr "如果选择启用，在播放列表中点击一个已选择的歌曲则会直接打开标签编辑"
 
-#: devices/devicemanager.cpp:566 devices/devicemanager.cpp:577
+#: devices/devicemanager.cpp:575 devices/devicemanager.cpp:586
 msgid ""
 "If you continue, this device will work slowly and songs copied to it may not"
 " work."
@@ -2837,7 +2837,7 @@ msgstr "Jamendo 本周曲目排行"
 msgid "Jamendo database"
 msgstr "Jamendo 数据库"
 
-#: ../bin/src/ui_behavioursettingspage.h:334
+#: ../bin/src/ui_behavioursettingspage.h:342
 msgid "Jump to previous song right away"
 msgstr "立即跳到上首歌"
 
@@ -2857,7 +2857,7 @@ msgstr "保持按钮 %1 秒..."
 msgid "Keep buttons for %1 seconds..."
 msgstr "保持按钮 %1 秒..."
 
-#: ../bin/src/ui_behavioursettingspage.h:306
+#: ../bin/src/ui_behavioursettingspage.h:314
 msgid "Keep running in the background when the window is closed"
 msgstr "当窗口关闭时仍在后台运行"
 
@@ -2874,7 +2874,7 @@ msgstr "小猫咪"
 msgid "Kuduro"
 msgstr "Kuduro"
 
-#: ../bin/src/ui_behavioursettingspage.h:308
+#: ../bin/src/ui_behavioursettingspage.h:316
 msgid "Language"
 msgstr "语言"
 
@@ -2948,7 +2948,7 @@ msgid "Left"
 msgstr "左"
 
 #: playlist/playlist.cpp:1320 ui/organisedialog.cpp:76
-#: ui/qtsystemtrayicon.cpp:239 ../bin/src/ui_edittagdialog.h:714
+#: ui/qtsystemtrayicon.cpp:254 ../bin/src/ui_edittagdialog.h:714
 msgid "Length"
 msgstr "长度"
 
@@ -3281,7 +3281,7 @@ msgstr "最常播放"
 msgid "Mount point"
 msgstr "挂载点"
 
-#: devices/devicekitlister.cpp:127
+#: devices/devicekitlister.cpp:127 devices/udisks2lister.cpp:78
 msgid "Mount points"
 msgstr "挂载点"
 
@@ -3359,8 +3359,8 @@ msgstr "从不"
 msgid "Never played"
 msgstr "从未播放"
 
-#: ../bin/src/ui_behavioursettingspage.h:327
-#: ../bin/src/ui_behavioursettingspage.h:347
+#: ../bin/src/ui_behavioursettingspage.h:335
+#: ../bin/src/ui_behavioursettingspage.h:355
 msgid "Never start playing"
 msgstr "从未播放"
 
@@ -3605,7 +3605,7 @@ msgstr "打开 Google 云存储"
 msgid "Open in new playlist"
 msgstr "在新播放列表中打开"
 
-#: ../bin/src/ui_behavioursettingspage.h:342
+#: ../bin/src/ui_behavioursettingspage.h:350
 msgctxt "Refers to behavior settings in Clementine settings page."
 msgid "Open in new playlist"
 msgstr "在新的播放列表中打开"
@@ -3708,6 +3708,10 @@ msgstr "所有者"
 msgid "Parsing Jamendo catalogue"
 msgstr "正在解析 Jamendo 分类"
 
+#: devices/udisks2lister.cpp:79
+msgid "Partition label"
+msgstr ""
+
 #: ui/equalizer.cpp:139
 msgid "Party"
 msgstr "晚会"
@@ -3722,7 +3726,7 @@ msgid "Password"
 msgstr "密码"
 
 #: core/globalshortcuts.cpp:50 ui/mainwindow.cpp:1137 ui/mainwindow.cpp:1633
-#: ui/qtsystemtrayicon.cpp:175 wiimotedev/wiimotesettingspage.cpp:114
+#: ui/qtsystemtrayicon.cpp:189 wiimotedev/wiimotesettingspage.cpp:114
 msgid "Pause"
 msgstr "暂停"
 
@@ -3750,8 +3754,8 @@ msgid "Plain sidebar"
 msgstr "普通侧边栏"
 
 #: core/globalshortcuts.cpp:49 ui/mainwindow.cpp:670 ui/mainwindow.cpp:1103
-#: ui/mainwindow.cpp:1122 ui/mainwindow.cpp:1637 ui/qtsystemtrayicon.cpp:164
-#: ui/qtsystemtrayicon.cpp:188 wiimotedev/wiimotesettingspage.cpp:107
+#: ui/mainwindow.cpp:1122 ui/mainwindow.cpp:1637 ui/qtsystemtrayicon.cpp:177
+#: ui/qtsystemtrayicon.cpp:203 wiimotedev/wiimotesettingspage.cpp:107
 #: ../bin/src/ui_mainwindow.h:659
 msgid "Play"
 msgstr "播放"
@@ -3764,8 +3768,8 @@ msgstr "播放计数"
 msgid "Play if stopped, pause if playing"
 msgstr "若停止则播放，若播放则停止"
 
-#: ../bin/src/ui_behavioursettingspage.h:328
-#: ../bin/src/ui_behavioursettingspage.h:348
+#: ../bin/src/ui_behavioursettingspage.h:336
+#: ../bin/src/ui_behavioursettingspage.h:356
 msgid "Play if there is nothing already playing"
 msgstr "如无歌曲播放则自动播放添加的歌曲"
 
@@ -3890,7 +3894,7 @@ msgstr "按一个键"
 msgid "Press a key combination to use for %1..."
 msgstr "请为 %1 按下新的组合键..."
 
-#: ../bin/src/ui_behavioursettingspage.h:331
+#: ../bin/src/ui_behavioursettingspage.h:339
 msgid "Pressing \"Previous\" in player will..."
 msgstr "点击“上一首”将会..."
 
@@ -4059,7 +4063,7 @@ msgid "Reggae"
 msgstr "Reggae"
 
 #: playlist/playlistsaveoptionsdialog.cpp:33
-#: ../bin/src/ui_behavioursettingspage.h:364
+#: ../bin/src/ui_behavioursettingspage.h:372
 msgid "Relative"
 msgstr "相关"
 
@@ -4067,7 +4071,7 @@ msgstr "相关"
 msgid "Remember Wii remote swing"
 msgstr "记住 Wii遥控器 节奏"
 
-#: ../bin/src/ui_behavioursettingspage.h:317
+#: ../bin/src/ui_behavioursettingspage.h:325
 msgid "Remember from last time"
 msgstr "记住上次设置"
 
@@ -4151,7 +4155,7 @@ msgstr "单曲循环"
 msgid "Replace current playlist"
 msgstr "移除当前播放列表"
 
-#: ../bin/src/ui_behavioursettingspage.h:341
+#: ../bin/src/ui_behavioursettingspage.h:349
 msgid "Replace the playlist"
 msgstr "移除播放列表"
 
@@ -4183,7 +4187,7 @@ msgstr "重置"
 msgid "Reset play counts"
 msgstr "重置播放计数"
 
-#: ../bin/src/ui_behavioursettingspage.h:335
+#: ../bin/src/ui_behavioursettingspage.h:343
 msgid "Restart song, then jump to previous if pressed again"
 msgstr "按一次重新播放歌曲，连按两次则播放上首歌"
 
@@ -4196,7 +4200,7 @@ msgstr "重播当前曲目，如果曲目开播不足8秒钟则播放上一曲�
 msgid "Restrict to ASCII characters"
 msgstr "仅使用 ASCII 字符"
 
-#: ../bin/src/ui_behavioursettingspage.h:318
+#: ../bin/src/ui_behavioursettingspage.h:326
 msgid "Resume playback on start"
 msgstr "启动时恢复播放"
 
@@ -4333,6 +4337,10 @@ msgstr "得分"
 msgid "Scrobble tracks that I listen to"
 msgstr "提交正在收听的音乐"
 
+#: ../bin/src/ui_behavioursettingspage.h:313
+msgid "Scroll over icon to change track"
+msgstr ""
+
 #: ../bin/src/ui_seafilesettingspage.h:164
 msgid "Seafile"
 msgstr "Seafile"
@@ -4426,7 +4434,7 @@ msgstr "当前播放的曲目以相对步长快进/快退"
 msgid "Seek the currently playing track to an absolute position"
 msgstr "当前播放的曲目快进/快退至指定时间点"
 
-#: ../bin/src/ui_behavioursettingspage.h:357
+#: ../bin/src/ui_behavioursettingspage.h:365
 msgid "Seeking using a keyboard shortcut or mouse wheel"
 msgstr "使用键盘快捷键或者鼠标滑轮进行寻位"
 
@@ -4466,7 +4474,7 @@ msgstr "选择视觉效果..."
 msgid "Select..."
 msgstr "选择……"
 
-#: devices/devicekitlister.cpp:126
+#: devices/devicekitlister.cpp:126 devices/udisks2lister.cpp:77
 msgid "Serial number"
 msgstr "序列号"
 
@@ -4627,7 +4635,7 @@ msgstr "显示\"喜欢\"按钮"
 msgid "Show the scrobble button in the main window"
 msgstr "在主窗体中显示提交按钮"
 
-#: ../bin/src/ui_behavioursettingspage.h:305
+#: ../bin/src/ui_behavioursettingspage.h:312
 msgid "Show tray icon"
 msgstr "显示托盘图标"
 
@@ -4872,7 +4880,7 @@ msgstr "停止播放"
 
 #: core/commandlineoptions.cpp:155
 msgid "Stop playback after current track"
-msgstr ""
+msgstr "播放完此曲目后停止"
 
 #: core/globalshortcuts.cpp:55
 msgid "Stop playing after current track"
@@ -5108,20 +5116,20 @@ msgstr "此设备必须在连接并打开之前，Clementine可以检测它支�
 msgid "This device supports the following file formats:"
 msgstr "该设备支持以下文件格式:"
 
-#: devices/devicemanager.cpp:563 devices/devicemanager.cpp:574
+#: devices/devicemanager.cpp:572 devices/devicemanager.cpp:583
 msgid "This device will not work properly"
 msgstr "这个设备将不会正常工作"
 
-#: devices/devicemanager.cpp:564
+#: devices/devicemanager.cpp:573
 msgid ""
 "This is an MTP device, but you compiled Clementine without libmtp support."
 msgstr "这个一部 MTP 设备，但是您可以通过 Clementine 来编辑而无需 libmtp 的支持。"
 
-#: devices/devicemanager.cpp:575
+#: devices/devicemanager.cpp:584
 msgid "This is an iPod, but you compiled Clementine without libgpod support."
 msgstr "这是 iPod 设备，但 Clementine 编译时未包含 libgpod 支持。"
 
-#: devices/devicemanager.cpp:322
+#: devices/devicemanager.cpp:331
 msgid ""
 "This is the first time you have connected this device.  Clementine will now "
 "scan the device to find music files - this may take some time."
@@ -5135,17 +5143,17 @@ msgstr "这些选项可以在“行为”设置中修改"
 msgid "This stream is for paid subscribers only"
 msgstr "该流媒体只有付费用户才能收听"
 
-#: devices/devicemanager.cpp:591
+#: devices/devicemanager.cpp:600
 #, qt-format
 msgid "This type of device is not supported: %1"
 msgstr "这种设备不被支持： %1"
 
-#: ../bin/src/ui_behavioursettingspage.h:358
+#: ../bin/src/ui_behavioursettingspage.h:366
 msgid "Time step"
 msgstr "时间步长"
 
 #: playlist/playlist.cpp:1314 ui/organisedialog.cpp:60
-#: ui/qtsystemtrayicon.cpp:232 ../bin/src/ui_about.h:141
+#: ui/qtsystemtrayicon.cpp:247 ../bin/src/ui_about.h:141
 #: ../bin/src/ui_edittagdialog.h:730 ../bin/src/ui_trackselectiondialog.h:210
 #: ../bin/src/ui_ripcddialog.h:306
 msgid "Title"
@@ -5253,6 +5261,10 @@ msgstr "URI"
 #: core/commandlineoptions.cpp:150
 msgid "URL(s)"
 msgstr "URL"
+
+#: devices/udisks2lister.cpp:80
+msgid "UUID"
+msgstr "UUID"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:227
 msgid "Ultra wide band (UWB)"
@@ -5405,7 +5417,7 @@ msgstr "通告 Wii Remote 状态"
 msgid "Use temporal noise shaping"
 msgstr "使用瞬时降噪"
 
-#: ../bin/src/ui_behavioursettingspage.h:311
+#: ../bin/src/ui_behavioursettingspage.h:319
 msgid "Use the system default"
 msgstr "使用系统默认"
 
@@ -5437,7 +5449,7 @@ msgstr "用户界面"
 msgid "Username"
 msgstr "用户名"
 
-#: ../bin/src/ui_behavioursettingspage.h:324
+#: ../bin/src/ui_behavioursettingspage.h:332
 msgid "Using the menu to add a song will..."
 msgstr "使用菜单添加歌曲将..."
 
@@ -5506,7 +5518,7 @@ msgstr "WMA"
 msgid "Wall"
 msgstr "墙"
 
-#: playlist/playlisttabbar.cpp:192 ../bin/src/ui_behavioursettingspage.h:307
+#: playlist/playlisttabbar.cpp:192 ../bin/src/ui_behavioursettingspage.h:315
 msgid "Warn me when closing a playlist tab"
 msgstr "关闭播放列表标签时，提示我"
 
@@ -5522,7 +5534,7 @@ msgstr "网站"
 msgid "Weeks"
 msgstr "周"
 
-#: ../bin/src/ui_behavioursettingspage.h:314
+#: ../bin/src/ui_behavioursettingspage.h:322
 msgid "When Clementine starts"
 msgstr "Clementine 启动时"
 
@@ -5532,7 +5544,7 @@ msgid ""
 "If there are no matches then it will use the largest image in the directory."
 msgstr "当查找专辑封面时,Clementine将首先查找包含这些关键词的图片。\n如果未能匹配,Clementine将使用目录下最大的图片。"
 
-#: ../bin/src/ui_behavioursettingspage.h:361
+#: ../bin/src/ui_behavioursettingspage.h:369
 msgid "When saving a playlist, file paths should be"
 msgstr "保存播放列表时，保存路径应该为"
 
@@ -5616,7 +5628,7 @@ msgstr "您要立即做个全部重新扫描？"
 msgid "Write all songs statistics into songs' files"
 msgstr "所有统计信息写入至歌曲文件"
 
-#: ../bin/src/ui_behavioursettingspage.h:366
+#: ../bin/src/ui_behavioursettingspage.h:374
 msgid "Write metadata"
 msgstr "写入元数据"
 
@@ -5731,7 +5743,7 @@ msgid ""
 "shortcuts in Clementine."
 msgstr "您需要在系统设置中开启\"<span style=\" font-style:italic;\">控制您的电脑</span>\"选项，允许Clementine使用全局快捷键。"
 
-#: ../bin/src/ui_behavioursettingspage.h:313
+#: ../bin/src/ui_behavioursettingspage.h:321
 msgid "You will need to restart Clementine if you change the language."
 msgstr "如果更改语言，您需要重启 Clementine 使设置生效。"
 
