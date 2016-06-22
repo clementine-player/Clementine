@@ -302,7 +302,6 @@ set(SOURCES
   songinfo/collapsibleinfoheader.cpp
   songinfo/collapsibleinfopane.cpp
   songinfo/echonestbiographies.cpp
-  songinfo/echonestimages.cpp
   songinfo/songinfobase.cpp
   songinfo/songinfofetcher.cpp
   songinfo/songinfoprovider.cpp
@@ -312,6 +311,7 @@ set(SOURCES
   songinfo/songkickconcerts.cpp
   songinfo/songkickconcertwidget.cpp
   songinfo/songplaystats.cpp
+  songinfo/spotifyimages.cpp
   songinfo/taglyricsinfoprovider.cpp
   songinfo/ultimatelyricslyric.cpp
   songinfo/ultimatelyricsprovider.cpp
@@ -594,7 +594,6 @@ set(HEADERS
   songinfo/collapsibleinfoheader.h
   songinfo/collapsibleinfopane.h
   songinfo/echonestbiographies.h
-  songinfo/echonestimages.h
   songinfo/songinfobase.h
   songinfo/songinfofetcher.h
   songinfo/songinfoprovider.h
@@ -604,6 +603,7 @@ set(HEADERS
   songinfo/songkickconcerts.h
   songinfo/songkickconcertwidget.h
   songinfo/songplaystats.h
+  songinfo/spotifyimages.h
   songinfo/taglyricsinfoprovider.h
   songinfo/ultimatelyricslyric.h
   songinfo/ultimatelyricsprovider.h

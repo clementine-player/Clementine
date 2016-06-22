@@ -1,5 +1,5 @@
 /* This file is part of Clementine.
-   Copyright 2010, David Sansome <me@davidsansome.com>
+   Copyright 2016, John Maguire <john.maguire@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -15,38 +15,27 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef ECHONESTIMAGES_H
-#define ECHONESTIMAGES_H
+#ifndef SPOTIFYIMAGES_H
+#define SPOTIFYIMAGES_H
 
 #include <memory>
-
-#include <QMultiMap>
-
-#include <echonest/Artist.h>
 
 #include "songinfo/songinfoprovider.h"
 
 class NetworkAccessManager;
-class QNetworkReply;
 
-class EchoNestImages : public SongInfoProvider {
+class SpotifyImages : public SongInfoProvider {
   Q_OBJECT
-
  public:
-  EchoNestImages();
-  virtual ~EchoNestImages();
-  void FetchInfo(int id, const Song& metadata);
+  SpotifyImages();
+  ~SpotifyImages();
 
- private slots:
-  void RequestFinished(QNetworkReply*, int id, Echonest::Artist artist);
-  void IdsFound(QNetworkReply* reply, int id);
+  void FetchInfo(int id, const Song& metadata) override;
 
  private:
-  void DoSpotifyImageRequest(const QString& id, int request_id);
+  void FetchImagesForArtist(int id, const QString& spotify_id);
 
-  void RegisterReply(QNetworkReply* reply, int id);
-  QMultiMap<int, QNetworkReply*> replies_;
   std::unique_ptr<NetworkAccessManager> network_;
 };
 
-#endif  // ECHONESTIMAGES_H
+#endif  // SPOTIFYIMAGES_H
