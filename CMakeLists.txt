@@ -364,9 +364,6 @@ else (USE_SYSTEM_QXT)
   endif (NOT APPLE)
 endif (USE_SYSTEM_QXT)
 
-find_path(ECHONEST_INCLUDE_DIRS echonest/echonest_export.h)
-find_library(ECHONEST_LIBRARIES echonest)
-
 # Use system gmock if it's available
 # We need to look for both gmock and gtest
 find_path(GMOCK_INCLUDE_DIRS gmock/gmock.h)

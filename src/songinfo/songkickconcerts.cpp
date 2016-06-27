@@ -21,9 +21,6 @@
 #include <QVBoxLayout>
 #include <QXmlStreamWriter>
 
-#include <echonest/Artist.h>
-#include <echonest/TypeInformation.h>
-
 #include <qjson/parser.h>
 
 #include "core/closure.h"
@@ -31,77 +28,64 @@
 #include "songkickconcertwidget.h"
 #include "ui/iconloader.h"
 
-const char* SongkickConcerts::kSongkickArtistBucket = "songkick";
-const char* SongkickConcerts::kSongkickArtistCalendarUrl =
-    "https://api.songkick.com/api/3.0/artists/%1/calendar.json?"
-    "per_page=5&"
-    "apikey=8rgKfy1WU6IlJFfN";
+namespace {
+const char* kSongkickArtistCalendarUrl =
+    "https://api.songkick.com/api/3.0/artists/%1/calendar.json";
+const char* kSongkickArtistSearchUrl =
+    "https://api.songkick.com/api/3.0/search/artists.json";
+const char* kSongkickApiKey = "8rgKfy1WU6IlJFfN";
+}  // namespace
 
 SongkickConcerts::SongkickConcerts() {
   Geolocator* geolocator = new Geolocator;
   geolocator->Geolocate();
   connect(geolocator, SIGNAL(Finished(Geolocator::LatLng)),
           SLOT(GeolocateFinished(Geolocator::LatLng)));
-  NewClosure(geolocator, SIGNAL(Finished(Geolocator::LatLng)), geolocator,
-             SLOT(deleteLater()));
+  connect(geolocator, SIGNAL(Finished(Geolocator::LatLng)), geolocator,
+          SLOT(deleteLater()));
 }
 
 void SongkickConcerts::FetchInfo(int id, const Song& metadata) {
-  Echonest::Artist::SearchParams params;
-  params.push_back(
-      qMakePair(Echonest::Artist::Name, QVariant(metadata.artist())));
-  qLog(Debug) << "Params:" << params;
-  QNetworkReply* reply = Echonest::Artist::search(
-      params,
-      Echonest::ArtistInformation(Echonest::ArtistInformation::NoInformation,
-                                  QStringList() << kSongkickArtistBucket));
-  qLog(Debug) << reply->request().url();
+  if (metadata.artist().isEmpty()) {
+    emit Finished(id);
+    return;
+  }
+
+  QUrl url(kSongkickArtistSearchUrl);
+  url.addQueryItem("apikey", kSongkickApiKey);
+  url.addQueryItem("query", metadata.artist());
+
+  QNetworkRequest request(url);
+  QNetworkReply* reply = network_.get(request);
   NewClosure(reply, SIGNAL(finished()), this,
              SLOT(ArtistSearchFinished(QNetworkReply*, int)), reply, id);
 }
 
 void SongkickConcerts::ArtistSearchFinished(QNetworkReply* reply, int id) {
   reply->deleteLater();
-  try {
-    Echonest::Artists artists = Echonest::Artist::parseSearch(reply);
-    if (artists.isEmpty()) {
-      qLog(Debug) << "Failed to find artist in echonest";
-      emit Finished(id);
-      return;
-    }
 
-    const Echonest::Artist& artist = artists[0];
-    const Echonest::ForeignIds& foreign_ids = artist.foreignIds();
-    QString songkick_id;
-    for (const Echonest::ForeignId& id : foreign_ids) {
-      if (id.catalog == "songkick") {
-        songkick_id = id.foreign_id;
-        break;
-      }
-    }
+  QJson::Parser parser;
+  QVariantMap json = parser.parse(reply).toMap();
 
-    if (songkick_id.isEmpty()) {
-      qLog(Debug) << "Failed to fetch songkick foreign id for artist";
-      emit Finished(id);
-      return;
-    }
+  QVariantMap results_page = json["resultsPage"].toMap();
+  QVariantMap results = results_page["results"].toMap();
+  QVariantList artists = results["artist"].toList();
 
-    QStringList split = songkick_id.split(':');
-    if (split.count() != 3) {
-      qLog(Error) << "Weird songkick id";
-      emit Finished(id);
-      return;
-    }
-
-    FetchSongkickCalendar(split[2], id);
-  } catch (Echonest::ParseError& e) {
-    qLog(Error) << "Error parsing echonest reply:" << e.errorType() << e.what();
+  if (artists.isEmpty()) {
     emit Finished(id);
+    return;
   }
+
+  QVariantMap artist = artists.first().toMap();
+  QString artist_id = artist["id"].toString();
+
+  FetchSongkickCalendar(artist_id, id);
 }
 
 void SongkickConcerts::FetchSongkickCalendar(const QString& artist_id, int id) {
   QUrl url(QString(kSongkickArtistCalendarUrl).arg(artist_id));
+  url.addQueryItem("per_page", "5");
+  url.addQueryItem("apikey", kSongkickApiKey);
   qLog(Debug) << url;
   QNetworkReply* reply = network_.get(QNetworkRequest(url));
   NewClosure(reply, SIGNAL(finished()), this,

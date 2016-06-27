@@ -73,8 +73,6 @@
 #include <glib.h>
 #include <gst/gst.h>
 
-#include <echonest/Config.h>
-
 #ifdef Q_OS_DARWIN
 #include <sys/resource.h>
 #include <sys/sysctl.h>
@@ -398,8 +396,8 @@ int main(int argc, char* argv[]) {
   // Add root CA cert for SoundCloud, whose certificate is missing on OS X.
   QSslSocket::addDefaultCaCertificates(
       QSslCertificate::fromPath(":/soundcloud-ca.pem", QSsl::Pem));
-  QSslSocket::addDefaultCaCertificates(
-      QSslCertificate::fromPath(":/Equifax_Secure_Certificate_Authority.pem", QSsl::Pem));
+  QSslSocket::addDefaultCaCertificates(QSslCertificate::fromPath(
+      ":/Equifax_Secure_Certificate_Authority.pem", QSsl::Pem));
 
   // Has the user forced a different language?
   QString override_language = options.language();
@@ -436,10 +434,6 @@ int main(int argc, char* argv[]) {
 
   Application app;
   app.set_language_name(language);
-
-  Echonest::Config::instance()->setAPIKey("DFLFLJBUF4EGTXHIG");
-  Echonest::Config::instance()->setNetworkAccessManager(
-      new NetworkAccessManager);
 
   // Network proxy
   QNetworkProxyFactory::setApplicationProxyFactory(
