@@ -22,11 +22,18 @@
 #include <qjson/parser.h>
 
 #include "core/closure.h"
+#include "core/latch.h"
+#include "core/logging.h"
 #include "core/network.h"
 #include "songinfo/songinfotextview.h"
 
 namespace {
 const char* kArtistBioUrl = "https://data.clementine-player.org/fetchbio";
+const char* kWikipediaImageListUrl =
+    "https://en.wikipedia.org/w/api.php?action=query&prop=images&format=json";
+const char* kWikipediaImageInfoUrl =
+    "https://en.wikipedia.org/w/"
+    "api.php?action=query&prop=imageinfo&iiprop=url&format=json";
 
 QString GetLocale() {
   QLocale locale;
@@ -75,6 +82,105 @@ void ArtistBiography::FetchInfo(int id, const Song& metadata) {
     editor->SetHtml(text);
     data.contents_ = editor;
     emit InfoReady(id, data);
+
+    if (url.contains("wikipedia.org")) {
+      FetchWikipediaImages(id, url);
+    } else {
+      emit Finished(id);
+    }
+  });
+}
+
+namespace {
+
+QStringList ExtractImageTitles(const QVariantMap& json) {
+  QStringList ret;
+  for (auto it = json.constBegin(); it != json.constEnd(); ++it) {
+    if (it.value().type() == QVariant::Map) {
+      ret.append(ExtractImageTitles(it.value().toMap()));
+    } else if (it.key() == "images" && it.value().type() == QVariant::List) {
+      QVariantList images = it.value().toList();
+      for (QVariant i : images) {
+        QVariantMap image = i.toMap();
+        QString image_title = image["title"].toString();
+        if (!image_title.isEmpty() &&
+            (
+                // SVGs tend to be irrelevant icons.
+                image_title.endsWith(".jpg", Qt::CaseInsensitive) ||
+                image_title.endsWith(".png", Qt::CaseInsensitive))) {
+          ret.append(image_title);
+        }
+      }
+    }
+  }
+  return ret;
+}
+
+QString ExtractImageUrl(const QVariantMap& json) {
+  for (auto it = json.constBegin(); it != json.constEnd(); ++it) {
+    if (it.value().type() == QVariant::Map) {
+      QString r = ExtractImageUrl(it.value().toMap());
+      if (!r.isEmpty()) {
+        return r;
+      }
+    } else if (it.key() == "imageinfo") {
+      QVariantList imageinfos = it.value().toList();
+      QVariantMap imageinfo = imageinfos.first().toMap();
+      return imageinfo["url"].toString();
+    }
+  }
+  return QString::null;
+}
+
+}  // namespace
+
+void ArtistBiography::FetchWikipediaImages(int id,
+                                           const QString& wikipedia_url) {
+  QRegExp regex("/wiki/(.*)");
+  if (regex.indexIn(wikipedia_url) == -1) {
     emit Finished(id);
+    return;
+  }
+  QString wiki_title = regex.cap(1);
+  QUrl url(kWikipediaImageListUrl);
+  url.addQueryItem("titles", wiki_title);
+
+  qLog(Debug) << "Wikipedia images:" << url;
+
+  QNetworkRequest request(url);
+  QNetworkReply* reply = network_->get(request);
+  NewClosure(reply, SIGNAL(finished()), [this, id, reply]() {
+    reply->deleteLater();
+
+    QJson::Parser parser;
+    QVariantMap response = parser.parse(reply).toMap();
+
+    QStringList image_titles = ExtractImageTitles(response);
+
+    CountdownLatch* latch = new CountdownLatch;
+    NewClosure(latch, SIGNAL(Done()), [this, latch, id]() {
+      latch->deleteLater();
+      emit Finished(id);
+    });
+
+    for (const QString& image_title : image_titles) {
+      latch->Wait();
+      QUrl url(kWikipediaImageInfoUrl);
+      url.addQueryItem("titles", image_title);
+
+      QNetworkRequest request(url);
+      QNetworkReply* reply = network_->get(request);
+      NewClosure(reply, SIGNAL(finished()), [this, id, reply, latch]() {
+        reply->deleteLater();
+        QJson::Parser parser;
+        QVariantMap json = parser.parse(reply).toMap();
+        QString url = ExtractImageUrl(json);
+        qLog(Debug) << "Found wikipedia image url:" << url;
+        if (!url.isEmpty()) {
+          emit ImageReady(id, QUrl(url));
+        }
+        latch->CountDown();
+      });
+    }
   });
 }

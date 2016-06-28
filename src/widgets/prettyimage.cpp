@@ -88,7 +88,8 @@ void PrettyImage::ImageFetched(RedirectFollower* follower) {
 
   QImage image = QImage::fromData(reply->readAll());
   if (image.isNull()) {
-    qLog(Debug) << "Image failed to load" << reply->request().url();
+    qLog(Debug) << "Image failed to load" << reply->request().url()
+                << reply->error();
     deleteLater();
   } else {
     state_ = State_CreatingThumbnail;

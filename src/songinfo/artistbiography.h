@@ -34,6 +34,8 @@ class ArtistBiography : public SongInfoProvider {
   void FetchInfo(int id, const Song& metadata) override;
 
  private:
+  void FetchWikipediaImages(int id, const QString& title);
+
   std::unique_ptr<NetworkAccessManager> network_;
 };
 
