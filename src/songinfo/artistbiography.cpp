@@ -30,10 +30,12 @@
 namespace {
 const char* kArtistBioUrl = "https://data.clementine-player.org/fetchbio";
 const char* kWikipediaImageListUrl =
-    "https://en.wikipedia.org/w/api.php?action=query&prop=images&format=json";
+    "https://%1.wikipedia.org/w/"
+    "api.php?action=query&prop=images&format=json&imlimit=25";
 const char* kWikipediaImageInfoUrl =
-    "https://en.wikipedia.org/w/"
-    "api.php?action=query&prop=imageinfo&iiprop=url&format=json";
+    "https://%1.wikipedia.org/w/"
+    "api.php?action=query&prop=imageinfo&iiprop=url|size&format=json";
+const int kMinimumImageSize = 400;
 
 QString GetLocale() {
   QLocale locale;
@@ -55,6 +57,8 @@ void ArtistBiography::FetchInfo(int id, const Song& metadata) {
   QUrl url(kArtistBioUrl);
   url.addQueryItem("artist", metadata.artist());
   url.addQueryItem("lang", GetLocale());
+
+  qLog(Debug) << "Biography url: " << url;
 
   QNetworkRequest request(url);
   QNetworkReply* reply = network_->get(request);
@@ -126,6 +130,11 @@ QString ExtractImageUrl(const QVariantMap& json) {
     } else if (it.key() == "imageinfo") {
       QVariantList imageinfos = it.value().toList();
       QVariantMap imageinfo = imageinfos.first().toMap();
+      int width = imageinfo["width"].toInt();
+      int height = imageinfo["height"].toInt();
+      if (width < kMinimumImageSize || height < kMinimumImageSize) {
+        return QString::null;
+      }
       return imageinfo["url"].toString();
     }
   }
@@ -136,20 +145,22 @@ QString ExtractImageUrl(const QVariantMap& json) {
 
 void ArtistBiography::FetchWikipediaImages(int id,
                                            const QString& wikipedia_url) {
-  QRegExp regex("/wiki/(.*)");
+  qLog(Debug) << wikipedia_url;
+  QRegExp regex("([a-z]+)\\.wikipedia\\.org/wiki/(.*)");
   if (regex.indexIn(wikipedia_url) == -1) {
     emit Finished(id);
     return;
   }
-  QString wiki_title = regex.cap(1);
-  QUrl url(kWikipediaImageListUrl);
+  QString wiki_title = regex.cap(2);
+  QString language = regex.cap(1);
+  QUrl url(QString(kWikipediaImageListUrl).arg(language));
   url.addQueryItem("titles", wiki_title);
 
   qLog(Debug) << "Wikipedia images:" << url;
 
   QNetworkRequest request(url);
   QNetworkReply* reply = network_->get(request);
-  NewClosure(reply, SIGNAL(finished()), [this, id, reply]() {
+  NewClosure(reply, SIGNAL(finished()), [this, id, reply, language]() {
     reply->deleteLater();
 
     QJson::Parser parser;
@@ -165,7 +176,7 @@ void ArtistBiography::FetchWikipediaImages(int id,
 
     for (const QString& image_title : image_titles) {
       latch->Wait();
-      QUrl url(kWikipediaImageInfoUrl);
+      QUrl url(QString(kWikipediaImageInfoUrl).arg(language));
       url.addQueryItem("titles", image_title);
 
       QNetworkRequest request(url);

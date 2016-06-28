@@ -1479,8 +1479,7 @@ void Playlist::Restore() {
 }
 
 void Playlist::ItemsLoaded(QFuture<PlaylistItemList> future) {
-  if (cancel_restore_)
-    return;
+  if (cancel_restore_) return;
 
   PlaylistItemList items = future.result();
 
@@ -1671,8 +1670,6 @@ void Playlist::StopAfter(int row) {
 }
 
 void Playlist::SetStreamMetadata(const QUrl& url, const Song& song) {
-  qLog(Debug) << "Setting metadata for" << url << "to" << song.artist()
-              << song.title();
   if (!current_item()) return;
 
   if (current_item()->Url() != url) return;
