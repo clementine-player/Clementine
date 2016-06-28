@@ -29,7 +29,6 @@ void CountdownLatch::CountDown() {
   QMutexLocker l(&mutex_);
   Q_ASSERT(count_ > 0);
   --count_;
-  qLog(Debug) << "Decrement:" << count_;
   if (count_ == 0) {
     emit Done();
   }

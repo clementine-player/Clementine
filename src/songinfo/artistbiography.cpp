@@ -72,20 +72,22 @@ void ArtistBiography::FetchInfo(int id, const Song& metadata) {
     QString body = response["articleBody"].toString();
     QString url = response["url"].toString();
 
-    CollapsibleInfoPane::Data data;
-    data.id_ = url;
-    data.title_ = tr("Biography");
-    data.type_ = CollapsibleInfoPane::Data::Type_Biography;
+    if (!body.isEmpty()) {
+      CollapsibleInfoPane::Data data;
+      data.id_ = url;
+      data.title_ = tr("Biography");
+      data.type_ = CollapsibleInfoPane::Data::Type_Biography;
 
-    QString text;
-    text +=
-        "<p><a href=\"" + url + "\">" + tr("Open in your browser") + "</a></p>";
+      QString text;
+      text += "<p><a href=\"" + url + "\">" + tr("Open in your browser") +
+              "</a></p>";
 
-    text += body;
-    SongInfoTextView* editor = new SongInfoTextView;
-    editor->SetHtml(text);
-    data.contents_ = editor;
-    emit InfoReady(id, data);
+      text += body;
+      SongInfoTextView* editor = new SongInfoTextView;
+      editor->SetHtml(text);
+      data.contents_ = editor;
+      emit InfoReady(id, data);
+    }
 
     if (url.contains("wikipedia.org")) {
       FetchWikipediaImages(id, url);
