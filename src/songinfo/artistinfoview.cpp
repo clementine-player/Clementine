@@ -17,6 +17,7 @@
 
 #include "artistinfoview.h"
 
+#include "songinfo/artistbiography.h"
 #include "songinfo/songinfofetcher.h"
 #include "songinfo/songkickconcerts.h"
 #include "songinfo/spotifyimages.h"
@@ -25,6 +26,7 @@
 ArtistInfoView::ArtistInfoView(QWidget* parent) : SongInfoBase(parent) {
   fetcher_->AddProvider(new SongkickConcerts);
   fetcher_->AddProvider(new SpotifyImages);
+  fetcher_->AddProvider(new ArtistBiography);
 }
 
 ArtistInfoView::~ArtistInfoView() {}
