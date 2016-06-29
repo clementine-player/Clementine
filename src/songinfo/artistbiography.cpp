@@ -122,10 +122,10 @@ QStringList ExtractImageTitles(const QVariantMap& json) {
   return ret;
 }
 
-QString ExtractImageUrl(const QVariantMap& json) {
+QUrl ExtractImageUrl(const QVariantMap& json) {
   for (auto it = json.constBegin(); it != json.constEnd(); ++it) {
     if (it.value().type() == QVariant::Map) {
-      QString r = ExtractImageUrl(it.value().toMap());
+      QUrl r = ExtractImageUrl(it.value().toMap());
       if (!r.isEmpty()) {
         return r;
       }
@@ -135,12 +135,12 @@ QString ExtractImageUrl(const QVariantMap& json) {
       int width = imageinfo["width"].toInt();
       int height = imageinfo["height"].toInt();
       if (width < kMinimumImageSize || height < kMinimumImageSize) {
-        return QString::null;
+        return QUrl();
       }
-      return imageinfo["url"].toString();
+      return QUrl::fromEncoded(imageinfo["url"].toByteArray());
     }
   }
-  return QString::null;
+  return QUrl();
 }
 
 }  // namespace
@@ -187,10 +187,10 @@ void ArtistBiography::FetchWikipediaImages(int id,
         reply->deleteLater();
         QJson::Parser parser;
         QVariantMap json = parser.parse(reply).toMap();
-        QString url = ExtractImageUrl(json);
+        QUrl url = ExtractImageUrl(json);
         qLog(Debug) << "Found wikipedia image url:" << url;
         if (!url.isEmpty()) {
-          emit ImageReady(id, QUrl(url));
+          emit ImageReady(id, url);
         }
         latch->CountDown();
       });
