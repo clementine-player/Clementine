@@ -153,7 +153,7 @@ void ArtistBiography::FetchWikipediaImages(int id,
     emit Finished(id);
     return;
   }
-  QString wiki_title = regex.cap(2);
+  QString wiki_title = QUrl::fromPercentEncoding(regex.cap(2).toUtf8());
   QString language = regex.cap(1);
   QUrl url(QString(kWikipediaImageListUrl).arg(language));
   url.addQueryItem("titles", wiki_title);
@@ -180,6 +180,7 @@ void ArtistBiography::FetchWikipediaImages(int id,
       latch->Wait();
       QUrl url(QString(kWikipediaImageInfoUrl).arg(language));
       url.addQueryItem("titles", image_title);
+      qLog(Debug) << "Image info:" << url;
 
       QNetworkRequest request(url);
       QNetworkReply* reply = network_->get(request);
