@@ -26,6 +26,7 @@
 #include "core/logging.h"
 #include "core/network.h"
 #include "songinfo/songinfotextview.h"
+#include "ui/iconloader.h"
 
 namespace {
 const char* kArtistBioUrl = "https://data.clementine-player.org/fetchbio";
@@ -35,6 +36,9 @@ const char* kWikipediaImageListUrl =
 const char* kWikipediaImageInfoUrl =
     "https://%1.wikipedia.org/w/"
     "api.php?action=query&prop=imageinfo&iiprop=url|size&format=json";
+const char* kWikipediaExtractUrl =
+    "https://%1.wikipedia.org/w/"
+    "api.php?action=query&format=json&prop=extracts";
 const int kMinimumImageSize = 400;
 
 QString GetLocale() {
@@ -72,28 +76,37 @@ void ArtistBiography::FetchInfo(int id, const Song& metadata) {
     QString body = response["articleBody"].toString();
     QString url = response["url"].toString();
 
-    if (!body.isEmpty()) {
-      CollapsibleInfoPane::Data data;
-      data.id_ = url;
-      data.title_ = tr("Biography");
-      data.type_ = CollapsibleInfoPane::Data::Type_Biography;
-
-      QString text;
-      text += "<p><a href=\"" + url + "\">" + tr("Open in your browser") +
-              "</a></p>";
-
-      text += body;
-      SongInfoTextView* editor = new SongInfoTextView;
-      editor->SetHtml(text);
-      data.contents_ = editor;
-      emit InfoReady(id, data);
-    }
+    CountdownLatch* latch = new CountdownLatch;
 
     if (url.contains("wikipedia.org")) {
-      FetchWikipediaImages(id, url);
+      FetchWikipediaImages(id, url, latch);
+      FetchWikipediaArticle(id, url, latch);
     } else {
-      emit Finished(id);
+      latch->Wait();
+      // Use the simple article body from KG.
+      if (!body.isEmpty()) {
+        CollapsibleInfoPane::Data data;
+        data.id_ = url;
+        data.title_ = tr("Biography");
+        data.type_ = CollapsibleInfoPane::Data::Type_Biography;
+
+        QString text;
+        text += "<p><a href=\"" + url + "\">" + tr("Open in your browser") +
+                "</a></p>";
+
+        text += body;
+        SongInfoTextView* editor = new SongInfoTextView;
+        editor->SetHtml(text);
+        data.contents_ = editor;
+        emit InfoReady(id, data);
+      }
+      latch->CountDown();
     }
+
+    NewClosure(latch, SIGNAL(Done()), [this, id, latch]() {
+      latch->deleteLater();
+      emit Finished(id);
+    });
   });
 }
 
@@ -143,10 +156,25 @@ QUrl ExtractImageUrl(const QVariantMap& json) {
   return QUrl();
 }
 
+QString ExtractExtract(const QVariantMap& json) {
+  for (auto it = json.constBegin(); it != json.constEnd(); ++it) {
+    if (it.value().type() == QVariant::Map) {
+      QString extract = ExtractExtract(it.value().toMap());
+      if (!extract.isEmpty()) {
+        return extract;
+      }
+    } else if (it.key() == "extract") {
+      return it.value().toString();
+    }
+  }
+  return QString::null;
+}
+
 }  // namespace
 
-void ArtistBiography::FetchWikipediaImages(int id,
-                                           const QString& wikipedia_url) {
+void ArtistBiography::FetchWikipediaImages(int id, const QString& wikipedia_url,
+                                           CountdownLatch* latch) {
+  latch->Wait();
   qLog(Debug) << wikipedia_url;
   QRegExp regex("([a-z]+)\\.wikipedia\\.org/wiki/(.*)");
   if (regex.indexIn(wikipedia_url) == -1) {
@@ -162,19 +190,13 @@ void ArtistBiography::FetchWikipediaImages(int id,
 
   QNetworkRequest request(url);
   QNetworkReply* reply = network_->get(request);
-  NewClosure(reply, SIGNAL(finished()), [this, id, reply, language]() {
+  NewClosure(reply, SIGNAL(finished()), [this, id, reply, language, latch]() {
     reply->deleteLater();
 
     QJson::Parser parser;
     QVariantMap response = parser.parse(reply).toMap();
 
     QStringList image_titles = ExtractImageTitles(response);
-
-    CountdownLatch* latch = new CountdownLatch;
-    NewClosure(latch, SIGNAL(Done()), [this, latch, id]() {
-      latch->deleteLater();
-      emit Finished(id);
-    });
 
     for (const QString& image_title : image_titles) {
       latch->Wait();
@@ -196,5 +218,53 @@ void ArtistBiography::FetchWikipediaImages(int id,
         latch->CountDown();
       });
     }
+
+    latch->CountDown();
+  });
+}
+
+void ArtistBiography::FetchWikipediaArticle(int id,
+                                            const QString& wikipedia_url,
+                                            CountdownLatch* latch) {
+  latch->Wait();
+  QRegExp regex("([a-z]+)\\.wikipedia\\.org/wiki/(.*)");
+  if (regex.indexIn(wikipedia_url) == -1) {
+    emit Finished(id);
+    return;
+  }
+  QString wiki_title = QUrl::fromPercentEncoding(regex.cap(2).toUtf8());
+  QString language = regex.cap(1);
+
+  QUrl url(QString(kWikipediaExtractUrl).arg(language));
+  url.addQueryItem("titles", wiki_title);
+  QNetworkRequest request(url);
+  QNetworkReply* reply = network_->get(request);
+
+  qLog(Debug) << "Article url:" << url;
+
+  NewClosure(reply, SIGNAL(finished()),
+             [this, id, reply, wikipedia_url, latch]() {
+    reply->deleteLater();
+
+    QJson::Parser parser;
+    QVariantMap json = parser.parse(reply).toMap();
+    QString html = ExtractExtract(json);
+
+    CollapsibleInfoPane::Data data;
+    data.id_ = wikipedia_url;
+    data.title_ = tr("Biography");
+    data.type_ = CollapsibleInfoPane::Data::Type_Biography;
+    data.icon_ = IconLoader::Load("wikipedia", IconLoader::Provider);
+
+    QString text;
+    text += "<p><a href=\"" + wikipedia_url + "\">" +
+            tr("Open in your browser") + "</a></p>";
+
+    text += html;
+    SongInfoTextView* editor = new SongInfoTextView;
+    editor->SetHtml(text);
+    data.contents_ = editor;
+    emit InfoReady(id, data);
+    latch->CountDown();
   });
 }

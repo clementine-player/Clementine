@@ -22,6 +22,7 @@
 
 #include "songinfoprovider.h"
 
+class CountdownLatch;
 class NetworkAccessManager;
 
 class ArtistBiography : public SongInfoProvider {
@@ -34,7 +35,9 @@ class ArtistBiography : public SongInfoProvider {
   void FetchInfo(int id, const Song& metadata) override;
 
  private:
-  void FetchWikipediaImages(int id, const QString& title);
+  void FetchWikipediaImages(int id, const QString& title,
+                            CountdownLatch* latch);
+  void FetchWikipediaArticle(int id, const QString& url, CountdownLatch* latch);
 
   std::unique_ptr<NetworkAccessManager> network_;
 };
