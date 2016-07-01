@@ -1040,8 +1040,7 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
 
   CommandlineOptionsReceived(options);
 
-  if (!options.contains_play_options())
-    LoadPlaybackStatus();
+  if (!options.contains_play_options()) LoadPlaybackStatus();
 
   qLog(Debug) << "Started";
 }
@@ -2078,6 +2077,7 @@ void MainWindow::ShowInLibrary() {
         "artist:" + songs.first().artist() + " album:" + songs.first().album();
   }
   library_view_->filter()->ShowInLibrary(search);
+  FocusLibraryTab();
 }
 
 void MainWindow::PlaylistRemoveCurrent() {
@@ -2784,6 +2784,10 @@ void MainWindow::ScrollToInternetIndex(const QModelIndex& index) {
 
 void MainWindow::AddPodcast() {
   app_->internet_model()->Service<PodcastService>()->AddPodcast();
+}
+
+void MainWindow::FocusLibraryTab() {
+  ui_->tabs->SetCurrentWidget(library_view_);
 }
 
 void MainWindow::FocusGlobalSearchField() {

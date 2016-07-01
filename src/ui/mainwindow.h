@@ -273,6 +273,7 @@ signals:
                                  QString line2);
 
   void ScrollToInternetIndex(const QModelIndex& index);
+  void FocusLibraryTab();
   void FocusGlobalSearchField();
   void DoGlobalSearch(const QString& query);
 
