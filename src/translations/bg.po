@@ -15,7 +15,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2016-06-02 14:50+0000\n"
+"PO-Revision-Date: 2016-06-28 13:51+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Bulgarian (http://www.transifex.com/davidsansome/clementine/language/bg/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -484,7 +484,7 @@ msgstr "Добавяне на друг поток..."
 msgid "Add directory..."
 msgstr "Добавяне на папка..."
 
-#: ui/mainwindow.cpp:1983
+#: ui/mainwindow.cpp:1982
 msgid "Add file"
 msgstr "Добавяне на файл"
 
@@ -504,7 +504,7 @@ msgstr "Добавяне на файл..."
 msgid "Add files to transcode"
 msgstr "Добавяне на файлове за прекодиране"
 
-#: transcoder/transcodedialog.cpp:306 ui/mainwindow.cpp:2010
+#: transcoder/transcodedialog.cpp:306 ui/mainwindow.cpp:2009
 #: ripper/ripcddialog.cpp:185
 msgid "Add folder"
 msgstr "Добавяне на папка"
@@ -621,7 +621,7 @@ msgstr "Добавяне към списъците с песни от Spotify"
 msgid "Add to Spotify starred"
 msgstr "Добавяне към оценените песни от Spotify"
 
-#: ui/mainwindow.cpp:1805
+#: ui/mainwindow.cpp:1804
 msgid "Add to another playlist"
 msgstr "Добави в друг списък с песни"
 
@@ -865,10 +865,6 @@ msgstr "Изпълнител"
 msgid "Artist info"
 msgstr "Информация за изпълнителя"
 
-#: songinfo/echonesttags.cpp:62
-msgid "Artist tags"
-msgstr "Етикети за изпълнителя"
-
 #: ui/organisedialog.cpp:63
 msgid "Artist's initial"
 msgstr "Инициали на изпълнителя"
@@ -989,10 +985,9 @@ msgstr "Поведение"
 msgid "Best"
 msgstr "Най-добро"
 
-#: songinfo/echonestbiographies.cpp:85
-#, qt-format
-msgid "Biography from %1"
-msgstr "Биография от %1"
+#: songinfo/artistbiography.cpp:78
+msgid "Biography"
+msgstr ""
 
 #: playlist/playlist.cpp:1354 ../bin/src/ui_edittagdialog.h:718
 msgid "Bit rate"
@@ -1264,7 +1259,7 @@ msgid ""
 "installed Clementine properly."
 msgstr "Clementine не можа да зареди никаква projectM визуализация.  Проверете дали сте инсталирали Clementine правилно."
 
-#: widgets/prettyimage.cpp:199
+#: widgets/prettyimage.cpp:200
 msgid "Clementine image viewer"
 msgstr "Clementine мениджър на изображения"
 
@@ -1692,11 +1687,11 @@ msgstr "Изтрий оригиналните файлове"
 msgid "Deleting files"
 msgstr "Изтриване на файлове"
 
-#: ui/mainwindow.cpp:1726
+#: ui/mainwindow.cpp:1725
 msgid "Dequeue selected tracks"
 msgstr "Махни от опашката избраните парчета"
 
-#: ui/mainwindow.cpp:1724
+#: ui/mainwindow.cpp:1723
 msgid "Dequeue track"
 msgstr "Махни от опашката парчето"
 
@@ -1968,7 +1963,7 @@ msgstr "Динамичен случаен микс"
 msgid "Edit smart playlist..."
 msgstr "Редактиране умен списък с песни..."
 
-#: ui/mainwindow.cpp:1768
+#: ui/mainwindow.cpp:1767
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr "Редактиране на етикет \"%1\"..."
@@ -2107,7 +2102,7 @@ msgid "Equivalent to --log-levels *:3"
 msgstr "Еквивалентно на --log-levels *:3"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:246
-#: library/libraryview.cpp:639 ui/mainwindow.cpp:2039 ui/mainwindow.cpp:2284
+#: library/libraryview.cpp:639 ui/mainwindow.cpp:2038 ui/mainwindow.cpp:2284
 #: ui/mainwindow.cpp:2430 internet/vk/vkservice.cpp:643
 msgid "Error"
 msgstr "Грешка"
@@ -2248,7 +2243,7 @@ msgstr "Заглушаване"
 msgid "Fading duration"
 msgstr "Продължителност на заглушаване"
 
-#: ui/mainwindow.cpp:2040
+#: ui/mainwindow.cpp:2039
 msgid "Failed reading CD drive"
 msgstr "Не успях да прочета CD устройството"
 
@@ -3031,7 +3026,7 @@ msgid "Loading tracks info"
 msgstr "Зареждане на информация за песните"
 
 #: library/librarymodel.cpp:164
-#: internet/podcasts/podcastdiscoverymodel.cpp:105 widgets/prettyimage.cpp:167
+#: internet/podcasts/podcastdiscoverymodel.cpp:105 widgets/prettyimage.cpp:168
 #: widgets/widgetfadehelper.cpp:96 internet/vk/vkservice.cpp:513
 #: internet/vk/vksettingspage.cpp:125 ../bin/src/ui_addpodcastdialog.h:179
 #: ../bin/src/ui_searchpreview.h:105 ../bin/src/ui_organisedialog.h:261
@@ -3294,7 +3289,7 @@ msgstr "Преместване в библиотека..."
 msgid "Move up"
 msgstr "Преместване нагоре"
 
-#: transcoder/transcodedialog.cpp:225 ui/mainwindow.cpp:1984
+#: transcoder/transcodedialog.cpp:225 ui/mainwindow.cpp:1983
 #: internet/vk/vkservice.cpp:908
 msgid "Music"
 msgstr "Музика"
@@ -3365,7 +3360,7 @@ msgstr "Никога да не се пуска възпроизвежданет�
 msgid "New folder"
 msgstr "Нова папка"
 
-#: ui/mainwindow.cpp:1822 ../bin/src/ui_mainwindow.h:693
+#: ui/mainwindow.cpp:1821 ../bin/src/ui_mainwindow.h:693
 msgid "New playlist"
 msgstr "Нов списък с песни"
 
@@ -3605,9 +3600,9 @@ msgctxt "Refers to behavior settings in Clementine settings page."
 msgid "Open in new playlist"
 msgstr "Отваряне в нов списък с песни"
 
-#: songinfo/echonestbiographies.cpp:102
+#: songinfo/artistbiography.cpp:82
 msgid "Open in your browser"
-msgstr "Отвори в браузера"
+msgstr ""
 
 #: ../bin/src/ui_globalshortcutssettingspage.h:168
 #: ../bin/src/ui_globalshortcutssettingspage.h:170
@@ -3720,7 +3715,7 @@ msgstr "Парти"
 msgid "Password"
 msgstr "Парола"
 
-#: core/globalshortcuts.cpp:50 ui/mainwindow.cpp:1137 ui/mainwindow.cpp:1633
+#: core/globalshortcuts.cpp:50 ui/mainwindow.cpp:1136 ui/mainwindow.cpp:1632
 #: ui/qtsystemtrayicon.cpp:189 wiimotedev/wiimotesettingspage.cpp:114
 msgid "Pause"
 msgstr "Пауза"
@@ -3748,8 +3743,8 @@ msgstr "Пиксел"
 msgid "Plain sidebar"
 msgstr "Стандартна странична лента"
 
-#: core/globalshortcuts.cpp:49 ui/mainwindow.cpp:670 ui/mainwindow.cpp:1103
-#: ui/mainwindow.cpp:1122 ui/mainwindow.cpp:1637 ui/qtsystemtrayicon.cpp:177
+#: core/globalshortcuts.cpp:49 ui/mainwindow.cpp:670 ui/mainwindow.cpp:1102
+#: ui/mainwindow.cpp:1121 ui/mainwindow.cpp:1636 ui/qtsystemtrayicon.cpp:177
 #: ui/qtsystemtrayicon.cpp:203 wiimotedev/wiimotesettingspage.cpp:107
 #: ../bin/src/ui_mainwindow.h:659
 msgid "Play"
@@ -3963,12 +3958,12 @@ msgstr "Заявящо устойство..."
 msgid "Queue Manager"
 msgstr "Мениджър на опашката"
 
-#: ui/mainwindow.cpp:1730
+#: ui/mainwindow.cpp:1729
 msgid "Queue selected tracks"
 msgstr "Пратете избраните песни на опашката"
 
 #: globalsearch/globalsearchview.cpp:466 library/libraryview.cpp:389
-#: ui/mainwindow.cpp:1728
+#: ui/mainwindow.cpp:1727
 msgid "Queue track"
 msgstr "Прати избрана песен на опашката"
 
@@ -4270,7 +4265,7 @@ msgstr "Запази обложката на диска..."
 msgid "Save current grouping"
 msgstr ""
 
-#: widgets/prettyimage.cpp:184 widgets/prettyimage.cpp:229
+#: widgets/prettyimage.cpp:185 widgets/prettyimage.cpp:230
 msgid "Save image"
 msgstr "Запазване на изображение"
 
@@ -4489,7 +4484,7 @@ msgstr "Подробности за сървъра"
 msgid "Service offline"
 msgstr "Услугата е недостъпна"
 
-#: ui/mainwindow.cpp:1767
+#: ui/mainwindow.cpp:1766
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr "Задай %1 да е %2\"..."
@@ -4581,7 +4576,7 @@ msgstr "Показвай обложки в библиотеката"
 msgid "Show dividers"
 msgstr "Покажи разделители"
 
-#: ui/albumcoverchoicecontroller.cpp:72 widgets/prettyimage.cpp:182
+#: ui/albumcoverchoicecontroller.cpp:72 widgets/prettyimage.cpp:183
 msgid "Show fullsize..."
 msgstr "Покажи в пълен размер..."
 
@@ -4674,10 +4669,6 @@ msgstr "Изход"
 msgid "Signing in..."
 msgstr "Вписване..."
 
-#: songinfo/echonestsimilarartists.cpp:58
-msgid "Similar artists"
-msgstr "Подобни изпълнители"
-
 #: ../bin/src/ui_albumcoverexport.h:211
 msgid "Size"
 msgstr "Размер"
@@ -4702,11 +4693,11 @@ msgstr "Презключи броя"
 msgid "Skip forwards in playlist"
 msgstr "Прескачане напред в списъка с песни"
 
-#: ui/mainwindow.cpp:1741
+#: ui/mainwindow.cpp:1740
 msgid "Skip selected tracks"
 msgstr "Прескачане на избраните песни"
 
-#: ui/mainwindow.cpp:1739
+#: ui/mainwindow.cpp:1738
 msgid "Skip track"
 msgstr "Прескачане на песента"
 
@@ -5166,7 +5157,7 @@ msgstr "Вкл./Изкл. на красиво екранно меню"
 msgid "Toggle fullscreen"
 msgstr "Превключване на пълен екран"
 
-#: ui/mainwindow.cpp:1732
+#: ui/mainwindow.cpp:1731
 msgid "Toggle queue status"
 msgstr "Покажи статус на опашката"
 
@@ -5297,11 +5288,11 @@ msgstr "Неизвестна грешка"
 msgid "Unset cover"
 msgstr "Махни обложката"
 
-#: ui/mainwindow.cpp:1737
+#: ui/mainwindow.cpp:1736
 msgid "Unskip selected tracks"
 msgstr "Не прескачай избраните песни"
 
-#: ui/mainwindow.cpp:1735
+#: ui/mainwindow.cpp:1734
 msgid "Unskip track"
 msgstr "Не прескачай песента"
 
@@ -5310,7 +5301,7 @@ msgstr "Не прескачай песента"
 msgid "Unsubscribe"
 msgstr "Премахване абонамент"
 
-#: songinfo/songkickconcerts.cpp:174
+#: songinfo/songkickconcerts.cpp:158
 msgid "Upcoming Concerts"
 msgstr "Наближаващи концерти"
 

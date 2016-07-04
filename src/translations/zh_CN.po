@@ -20,7 +20,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2016-06-19 05:33+0000\n"
+"PO-Revision-Date: 2016-07-03 09:16+0000\n"
 "Last-Translator: zhangmin <zm1990s@gmail.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/davidsansome/clementine/language/zh_CN/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -489,7 +489,7 @@ msgstr "添加其他流媒体..."
 msgid "Add directory..."
 msgstr "添加目录..."
 
-#: ui/mainwindow.cpp:1983
+#: ui/mainwindow.cpp:1982
 msgid "Add file"
 msgstr "添加文件"
 
@@ -509,7 +509,7 @@ msgstr "添加文件..."
 msgid "Add files to transcode"
 msgstr "添加需转码文件"
 
-#: transcoder/transcodedialog.cpp:306 ui/mainwindow.cpp:2010
+#: transcoder/transcodedialog.cpp:306 ui/mainwindow.cpp:2009
 #: ripper/ripcddialog.cpp:185
 msgid "Add folder"
 msgstr "添加文件夹"
@@ -626,7 +626,7 @@ msgstr "添加到 Spotify 播放列表"
 msgid "Add to Spotify starred"
 msgstr "添加到 Spotify 收藏"
 
-#: ui/mainwindow.cpp:1805
+#: ui/mainwindow.cpp:1804
 msgid "Add to another playlist"
 msgstr "添加到另一播放列表"
 
@@ -870,10 +870,6 @@ msgstr "歌手"
 msgid "Artist info"
 msgstr "歌手信息"
 
-#: songinfo/echonesttags.cpp:62
-msgid "Artist tags"
-msgstr "歌手标签"
-
 #: ui/organisedialog.cpp:63
 msgid "Artist's initial"
 msgstr "歌手名字的首字母"
@@ -994,10 +990,9 @@ msgstr "行为"
 msgid "Best"
 msgstr "最佳"
 
-#: songinfo/echonestbiographies.cpp:85
-#, qt-format
-msgid "Biography from %1"
-msgstr "%1 上的个人档案"
+#: songinfo/artistbiography.cpp:78
+msgid "Biography"
+msgstr "档案"
 
 #: playlist/playlist.cpp:1354 ../bin/src/ui_edittagdialog.h:718
 msgid "Bit rate"
@@ -1269,7 +1264,7 @@ msgid ""
 "installed Clementine properly."
 msgstr "Clementine 无法加载 projectM 可视化效果。请确定您已正确安装了 Clementine。"
 
-#: widgets/prettyimage.cpp:199
+#: widgets/prettyimage.cpp:200
 msgid "Clementine image viewer"
 msgstr "Clementine 图像查看器"
 
@@ -1697,11 +1692,11 @@ msgstr "删除原始文件"
 msgid "Deleting files"
 msgstr "删除文件"
 
-#: ui/mainwindow.cpp:1726
+#: ui/mainwindow.cpp:1725
 msgid "Dequeue selected tracks"
 msgstr "移除选定曲目"
 
-#: ui/mainwindow.cpp:1724
+#: ui/mainwindow.cpp:1723
 msgid "Dequeue track"
 msgstr "移除曲目"
 
@@ -1973,7 +1968,7 @@ msgstr "动态随机混音"
 msgid "Edit smart playlist..."
 msgstr "编辑智能播放列表..."
 
-#: ui/mainwindow.cpp:1768
+#: ui/mainwindow.cpp:1767
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr "编辑标签 \"%1\"..."
@@ -2112,7 +2107,7 @@ msgid "Equivalent to --log-levels *:3"
 msgstr "相当于 --log-levels *:3"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:246
-#: library/libraryview.cpp:639 ui/mainwindow.cpp:2039 ui/mainwindow.cpp:2284
+#: library/libraryview.cpp:639 ui/mainwindow.cpp:2038 ui/mainwindow.cpp:2284
 #: ui/mainwindow.cpp:2430 internet/vk/vkservice.cpp:643
 msgid "Error"
 msgstr "错误"
@@ -2253,7 +2248,7 @@ msgstr "淡出"
 msgid "Fading duration"
 msgstr "淡出时长"
 
-#: ui/mainwindow.cpp:2040
+#: ui/mainwindow.cpp:2039
 msgid "Failed reading CD drive"
 msgstr "读取 CD 失败"
 
@@ -3036,7 +3031,7 @@ msgid "Loading tracks info"
 msgstr "正在加载曲目信息"
 
 #: library/librarymodel.cpp:164
-#: internet/podcasts/podcastdiscoverymodel.cpp:105 widgets/prettyimage.cpp:167
+#: internet/podcasts/podcastdiscoverymodel.cpp:105 widgets/prettyimage.cpp:168
 #: widgets/widgetfadehelper.cpp:96 internet/vk/vkservice.cpp:513
 #: internet/vk/vksettingspage.cpp:125 ../bin/src/ui_addpodcastdialog.h:179
 #: ../bin/src/ui_searchpreview.h:105 ../bin/src/ui_organisedialog.h:261
@@ -3299,7 +3294,7 @@ msgstr "移动至媒体库..."
 msgid "Move up"
 msgstr "上移"
 
-#: transcoder/transcodedialog.cpp:225 ui/mainwindow.cpp:1984
+#: transcoder/transcodedialog.cpp:225 ui/mainwindow.cpp:1983
 #: internet/vk/vkservice.cpp:908
 msgid "Music"
 msgstr "音乐"
@@ -3370,7 +3365,7 @@ msgstr "从未播放"
 msgid "New folder"
 msgstr "创建新文件夹"
 
-#: ui/mainwindow.cpp:1822 ../bin/src/ui_mainwindow.h:693
+#: ui/mainwindow.cpp:1821 ../bin/src/ui_mainwindow.h:693
 msgid "New playlist"
 msgstr "新建播放列表"
 
@@ -3610,7 +3605,7 @@ msgctxt "Refers to behavior settings in Clementine settings page."
 msgid "Open in new playlist"
 msgstr "在新的播放列表中打开"
 
-#: songinfo/echonestbiographies.cpp:102
+#: songinfo/artistbiography.cpp:82
 msgid "Open in your browser"
 msgstr "在浏览器中打开"
 
@@ -3725,7 +3720,7 @@ msgstr "晚会"
 msgid "Password"
 msgstr "密码"
 
-#: core/globalshortcuts.cpp:50 ui/mainwindow.cpp:1137 ui/mainwindow.cpp:1633
+#: core/globalshortcuts.cpp:50 ui/mainwindow.cpp:1136 ui/mainwindow.cpp:1632
 #: ui/qtsystemtrayicon.cpp:189 wiimotedev/wiimotesettingspage.cpp:114
 msgid "Pause"
 msgstr "暂停"
@@ -3753,8 +3748,8 @@ msgstr "像素"
 msgid "Plain sidebar"
 msgstr "普通侧边栏"
 
-#: core/globalshortcuts.cpp:49 ui/mainwindow.cpp:670 ui/mainwindow.cpp:1103
-#: ui/mainwindow.cpp:1122 ui/mainwindow.cpp:1637 ui/qtsystemtrayicon.cpp:177
+#: core/globalshortcuts.cpp:49 ui/mainwindow.cpp:670 ui/mainwindow.cpp:1102
+#: ui/mainwindow.cpp:1121 ui/mainwindow.cpp:1636 ui/qtsystemtrayicon.cpp:177
 #: ui/qtsystemtrayicon.cpp:203 wiimotedev/wiimotesettingspage.cpp:107
 #: ../bin/src/ui_mainwindow.h:659
 msgid "Play"
@@ -3968,12 +3963,12 @@ msgstr "正在查询设备..."
 msgid "Queue Manager"
 msgstr "队列管理器"
 
-#: ui/mainwindow.cpp:1730
+#: ui/mainwindow.cpp:1729
 msgid "Queue selected tracks"
 msgstr "将选定曲目加入队列"
 
 #: globalsearch/globalsearchview.cpp:466 library/libraryview.cpp:389
-#: ui/mainwindow.cpp:1728
+#: ui/mainwindow.cpp:1727
 msgid "Queue track"
 msgstr "加入队列"
 
@@ -4275,7 +4270,7 @@ msgstr "保存封面至硬盘..."
 msgid "Save current grouping"
 msgstr "保存当前分组"
 
-#: widgets/prettyimage.cpp:184 widgets/prettyimage.cpp:229
+#: widgets/prettyimage.cpp:185 widgets/prettyimage.cpp:230
 msgid "Save image"
 msgstr "保存图像"
 
@@ -4494,7 +4489,7 @@ msgstr "服务器详情"
 msgid "Service offline"
 msgstr "服务离线"
 
-#: ui/mainwindow.cpp:1767
+#: ui/mainwindow.cpp:1766
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr "将 %1 设置为 %2..."
@@ -4586,7 +4581,7 @@ msgstr "在媒体库中显示封面"
 msgid "Show dividers"
 msgstr "显示分频器"
 
-#: ui/albumcoverchoicecontroller.cpp:72 widgets/prettyimage.cpp:182
+#: ui/albumcoverchoicecontroller.cpp:72 widgets/prettyimage.cpp:183
 msgid "Show fullsize..."
 msgstr "显示完整尺寸..."
 
@@ -4679,10 +4674,6 @@ msgstr "注销"
 msgid "Signing in..."
 msgstr "登录..."
 
-#: songinfo/echonestsimilarartists.cpp:58
-msgid "Similar artists"
-msgstr "相似艺人"
-
 #: ../bin/src/ui_albumcoverexport.h:211
 msgid "Size"
 msgstr "大小"
@@ -4707,11 +4698,11 @@ msgstr "跳过计数"
 msgid "Skip forwards in playlist"
 msgstr "在播放列表中前进"
 
-#: ui/mainwindow.cpp:1741
+#: ui/mainwindow.cpp:1740
 msgid "Skip selected tracks"
 msgstr "跳过所选择的曲目"
 
-#: ui/mainwindow.cpp:1739
+#: ui/mainwindow.cpp:1738
 msgid "Skip track"
 msgstr "跳过曲目"
 
@@ -5171,7 +5162,7 @@ msgstr "切换漂亮的 OSD"
 msgid "Toggle fullscreen"
 msgstr "切换全屏"
 
-#: ui/mainwindow.cpp:1732
+#: ui/mainwindow.cpp:1731
 msgid "Toggle queue status"
 msgstr "切换队列状态"
 
@@ -5302,11 +5293,11 @@ msgstr "未知错误"
 msgid "Unset cover"
 msgstr "撤销封面"
 
-#: ui/mainwindow.cpp:1737
+#: ui/mainwindow.cpp:1736
 msgid "Unskip selected tracks"
 msgstr "取消略过的选定曲目"
 
-#: ui/mainwindow.cpp:1735
+#: ui/mainwindow.cpp:1734
 msgid "Unskip track"
 msgstr "取消掠过曲目"
 
@@ -5315,7 +5306,7 @@ msgstr "取消掠过曲目"
 msgid "Unsubscribe"
 msgstr "取消订阅"
 
-#: songinfo/songkickconcerts.cpp:174
+#: songinfo/songkickconcerts.cpp:158
 msgid "Upcoming Concerts"
 msgstr "近期音乐会"
 

@@ -28,7 +28,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2016-06-03 13:11+0000\n"
+"PO-Revision-Date: 2016-06-28 14:45+0000\n"
 "Last-Translator: zk\n"
 "Language-Team: Indonesian (http://www.transifex.com/davidsansome/clementine/language/id/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -497,7 +497,7 @@ msgstr "Tambah strim lainnya..."
 msgid "Add directory..."
 msgstr "Tambah direktori..."
 
-#: ui/mainwindow.cpp:1983
+#: ui/mainwindow.cpp:1982
 msgid "Add file"
 msgstr "Tambah berkas"
 
@@ -517,7 +517,7 @@ msgstr "Tambah berkas..."
 msgid "Add files to transcode"
 msgstr "Tambah berkas untuk ditranskode"
 
-#: transcoder/transcodedialog.cpp:306 ui/mainwindow.cpp:2010
+#: transcoder/transcodedialog.cpp:306 ui/mainwindow.cpp:2009
 #: ripper/ripcddialog.cpp:185
 msgid "Add folder"
 msgstr "Tambah folder"
@@ -634,7 +634,7 @@ msgstr "Tambahkan ke daftar-putar Spotify"
 msgid "Add to Spotify starred"
 msgstr "Tambahkan ke bintang Spotify"
 
-#: ui/mainwindow.cpp:1805
+#: ui/mainwindow.cpp:1804
 msgid "Add to another playlist"
 msgstr "Tambahkan ke daftar-putar lainnya"
 
@@ -878,10 +878,6 @@ msgstr "Artis"
 msgid "Artist info"
 msgstr "Info artis"
 
-#: songinfo/echonesttags.cpp:62
-msgid "Artist tags"
-msgstr "Tag artis"
-
 #: ui/organisedialog.cpp:63
 msgid "Artist's initial"
 msgstr "Inisial artis"
@@ -1002,10 +998,9 @@ msgstr "Perilaku"
 msgid "Best"
 msgstr "Terbaik"
 
-#: songinfo/echonestbiographies.cpp:85
-#, qt-format
-msgid "Biography from %1"
-msgstr "Biografi dari %1"
+#: songinfo/artistbiography.cpp:78
+msgid "Biography"
+msgstr "Biografi"
 
 #: playlist/playlist.cpp:1354 ../bin/src/ui_edittagdialog.h:718
 msgid "Bit rate"
@@ -1277,7 +1272,7 @@ msgid ""
 "installed Clementine properly."
 msgstr "Clementine tidak dapat memuat visualisasi projectM. Periksa bahwa Anda telah memasang Clementine dengan benar."
 
-#: widgets/prettyimage.cpp:199
+#: widgets/prettyimage.cpp:200
 msgid "Clementine image viewer"
 msgstr "Penampil gambar Clementine"
 
@@ -1705,11 +1700,11 @@ msgstr "Hapus berkas yang asli"
 msgid "Deleting files"
 msgstr "Menghapus berkas"
 
-#: ui/mainwindow.cpp:1726
+#: ui/mainwindow.cpp:1725
 msgid "Dequeue selected tracks"
 msgstr "Buang antrean trek terpilih"
 
-#: ui/mainwindow.cpp:1724
+#: ui/mainwindow.cpp:1723
 msgid "Dequeue track"
 msgstr "Buang antrean trek"
 
@@ -1981,7 +1976,7 @@ msgstr "Miks acak dinamis"
 msgid "Edit smart playlist..."
 msgstr "Sunting daftar-putar cerdas..."
 
-#: ui/mainwindow.cpp:1768
+#: ui/mainwindow.cpp:1767
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr "Sunting tag \"%1\"..."
@@ -2120,7 +2115,7 @@ msgid "Equivalent to --log-levels *:3"
 msgstr "Setara dengan --log-level *: 3"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:246
-#: library/libraryview.cpp:639 ui/mainwindow.cpp:2039 ui/mainwindow.cpp:2284
+#: library/libraryview.cpp:639 ui/mainwindow.cpp:2038 ui/mainwindow.cpp:2284
 #: ui/mainwindow.cpp:2430 internet/vk/vkservice.cpp:643
 msgid "Error"
 msgstr "Galat"
@@ -2261,7 +2256,7 @@ msgstr "Melesap"
 msgid "Fading duration"
 msgstr "Durasi lesap"
 
-#: ui/mainwindow.cpp:2040
+#: ui/mainwindow.cpp:2039
 msgid "Failed reading CD drive"
 msgstr "Gagal membaca penggerak CD"
 
@@ -3044,7 +3039,7 @@ msgid "Loading tracks info"
 msgstr "Memuat info trek"
 
 #: library/librarymodel.cpp:164
-#: internet/podcasts/podcastdiscoverymodel.cpp:105 widgets/prettyimage.cpp:167
+#: internet/podcasts/podcastdiscoverymodel.cpp:105 widgets/prettyimage.cpp:168
 #: widgets/widgetfadehelper.cpp:96 internet/vk/vkservice.cpp:513
 #: internet/vk/vksettingspage.cpp:125 ../bin/src/ui_addpodcastdialog.h:179
 #: ../bin/src/ui_searchpreview.h:105 ../bin/src/ui_organisedialog.h:261
@@ -3307,7 +3302,7 @@ msgstr "Pindah ke pustaka..."
 msgid "Move up"
 msgstr "Pindah naik"
 
-#: transcoder/transcodedialog.cpp:225 ui/mainwindow.cpp:1984
+#: transcoder/transcodedialog.cpp:225 ui/mainwindow.cpp:1983
 #: internet/vk/vkservice.cpp:908
 msgid "Music"
 msgstr "Musik"
@@ -3378,7 +3373,7 @@ msgstr "Jangan mulai memutar"
 msgid "New folder"
 msgstr "Folder baru"
 
-#: ui/mainwindow.cpp:1822 ../bin/src/ui_mainwindow.h:693
+#: ui/mainwindow.cpp:1821 ../bin/src/ui_mainwindow.h:693
 msgid "New playlist"
 msgstr "Daftar-putar baru"
 
@@ -3618,7 +3613,7 @@ msgctxt "Refers to behavior settings in Clementine settings page."
 msgid "Open in new playlist"
 msgstr "Buka di daftar-putar baru"
 
-#: songinfo/echonestbiographies.cpp:102
+#: songinfo/artistbiography.cpp:82
 msgid "Open in your browser"
 msgstr "Buka di peramban Anda"
 
@@ -3733,7 +3728,7 @@ msgstr "Pesta"
 msgid "Password"
 msgstr "Sandi"
 
-#: core/globalshortcuts.cpp:50 ui/mainwindow.cpp:1137 ui/mainwindow.cpp:1633
+#: core/globalshortcuts.cpp:50 ui/mainwindow.cpp:1136 ui/mainwindow.cpp:1632
 #: ui/qtsystemtrayicon.cpp:189 wiimotedev/wiimotesettingspage.cpp:114
 msgid "Pause"
 msgstr "Jeda"
@@ -3761,8 +3756,8 @@ msgstr "Piksel"
 msgid "Plain sidebar"
 msgstr "Bilah sisi polos"
 
-#: core/globalshortcuts.cpp:49 ui/mainwindow.cpp:670 ui/mainwindow.cpp:1103
-#: ui/mainwindow.cpp:1122 ui/mainwindow.cpp:1637 ui/qtsystemtrayicon.cpp:177
+#: core/globalshortcuts.cpp:49 ui/mainwindow.cpp:670 ui/mainwindow.cpp:1102
+#: ui/mainwindow.cpp:1121 ui/mainwindow.cpp:1636 ui/qtsystemtrayicon.cpp:177
 #: ui/qtsystemtrayicon.cpp:203 wiimotedev/wiimotesettingspage.cpp:107
 #: ../bin/src/ui_mainwindow.h:659
 msgid "Play"
@@ -3976,12 +3971,12 @@ msgstr "Meminta perangkat..."
 msgid "Queue Manager"
 msgstr "Pengelola antrean"
 
-#: ui/mainwindow.cpp:1730
+#: ui/mainwindow.cpp:1729
 msgid "Queue selected tracks"
 msgstr "Antre trek terpilih"
 
 #: globalsearch/globalsearchview.cpp:466 library/libraryview.cpp:389
-#: ui/mainwindow.cpp:1728
+#: ui/mainwindow.cpp:1727
 msgid "Queue track"
 msgstr "Antre trek"
 
@@ -4283,7 +4278,7 @@ msgstr "Simpan sampul ke diska..."
 msgid "Save current grouping"
 msgstr "Simpan pengelompokan saat ini"
 
-#: widgets/prettyimage.cpp:184 widgets/prettyimage.cpp:229
+#: widgets/prettyimage.cpp:185 widgets/prettyimage.cpp:230
 msgid "Save image"
 msgstr "Simpan gambar"
 
@@ -4502,7 +4497,7 @@ msgstr "Detail server"
 msgid "Service offline"
 msgstr "Layanan luring"
 
-#: ui/mainwindow.cpp:1767
+#: ui/mainwindow.cpp:1766
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr "Tetapkan %1 ke \"%2\"..."
@@ -4594,7 +4589,7 @@ msgstr "Tampilkan sampul di pustaka"
 msgid "Show dividers"
 msgstr "Tampilkan pembagi"
 
-#: ui/albumcoverchoicecontroller.cpp:72 widgets/prettyimage.cpp:182
+#: ui/albumcoverchoicecontroller.cpp:72 widgets/prettyimage.cpp:183
 msgid "Show fullsize..."
 msgstr "Tampilkan ukuran penuh..."
 
@@ -4687,10 +4682,6 @@ msgstr "Keluar"
 msgid "Signing in..."
 msgstr "Sedang masuk..."
 
-#: songinfo/echonestsimilarartists.cpp:58
-msgid "Similar artists"
-msgstr "Artis serupa"
-
 #: ../bin/src/ui_albumcoverexport.h:211
 msgid "Size"
 msgstr "Ukuran"
@@ -4715,11 +4706,11 @@ msgstr "Lewati hitungan"
 msgid "Skip forwards in playlist"
 msgstr "Lewati maju di dalam daftar-putar"
 
-#: ui/mainwindow.cpp:1741
+#: ui/mainwindow.cpp:1740
 msgid "Skip selected tracks"
 msgstr "Lewati trek yang dipilih"
 
-#: ui/mainwindow.cpp:1739
+#: ui/mainwindow.cpp:1738
 msgid "Skip track"
 msgstr "Lewati trek"
 
@@ -5179,7 +5170,7 @@ msgstr "Jungkit Pretty OSD"
 msgid "Toggle fullscreen"
 msgstr "Jungkit layar penuh"
 
-#: ui/mainwindow.cpp:1732
+#: ui/mainwindow.cpp:1731
 msgid "Toggle queue status"
 msgstr "Jungkit status antrean"
 
@@ -5310,11 +5301,11 @@ msgstr "Galat tidak diketahui"
 msgid "Unset cover"
 msgstr "Tak set sampul"
 
-#: ui/mainwindow.cpp:1737
+#: ui/mainwindow.cpp:1736
 msgid "Unskip selected tracks"
 msgstr "Taklewati trek yang dipilih"
 
-#: ui/mainwindow.cpp:1735
+#: ui/mainwindow.cpp:1734
 msgid "Unskip track"
 msgstr "Taklewati trek"
 
@@ -5323,7 +5314,7 @@ msgstr "Taklewati trek"
 msgid "Unsubscribe"
 msgstr "Taklangganan"
 
-#: songinfo/songkickconcerts.cpp:174
+#: songinfo/songkickconcerts.cpp:158
 msgid "Upcoming Concerts"
 msgstr "Konser Mendatang"
 

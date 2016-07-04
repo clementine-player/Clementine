@@ -22,7 +22,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2016-06-02 14:50+0000\n"
+"PO-Revision-Date: 2016-06-28 13:51+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Polish (http://www.transifex.com/davidsansome/clementine/language/pl/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -491,7 +491,7 @@ msgstr "Dodaj następny strumień..."
 msgid "Add directory..."
 msgstr "Dodaj katalog..."
 
-#: ui/mainwindow.cpp:1983
+#: ui/mainwindow.cpp:1982
 msgid "Add file"
 msgstr "Dodaj plik"
 
@@ -511,7 +511,7 @@ msgstr "Dodaj plik..."
 msgid "Add files to transcode"
 msgstr "Dodaj pliki to transkodowania"
 
-#: transcoder/transcodedialog.cpp:306 ui/mainwindow.cpp:2010
+#: transcoder/transcodedialog.cpp:306 ui/mainwindow.cpp:2009
 #: ripper/ripcddialog.cpp:185
 msgid "Add folder"
 msgstr "Dodaj katalog"
@@ -628,7 +628,7 @@ msgstr "Dodaj do list odtwarzania Spotify"
 msgid "Add to Spotify starred"
 msgstr "Dodaj do śledzonych w Spotify"
 
-#: ui/mainwindow.cpp:1805
+#: ui/mainwindow.cpp:1804
 msgid "Add to another playlist"
 msgstr "Dodaj do innej listy odtwarzania"
 
@@ -872,10 +872,6 @@ msgstr "Wykonawca"
 msgid "Artist info"
 msgstr "O artyście"
 
-#: songinfo/echonesttags.cpp:62
-msgid "Artist tags"
-msgstr "Tagi wykonawcy"
-
 #: ui/organisedialog.cpp:63
 msgid "Artist's initial"
 msgstr "Inicjały wykonawcy"
@@ -996,10 +992,9 @@ msgstr "Tryb"
 msgid "Best"
 msgstr "Najlepsza"
 
-#: songinfo/echonestbiographies.cpp:85
-#, qt-format
-msgid "Biography from %1"
-msgstr "Biografia z %1"
+#: songinfo/artistbiography.cpp:78
+msgid "Biography"
+msgstr ""
 
 #: playlist/playlist.cpp:1354 ../bin/src/ui_edittagdialog.h:718
 msgid "Bit rate"
@@ -1271,7 +1266,7 @@ msgid ""
 "installed Clementine properly."
 msgstr "Clementine nie może wczytać wizualizacji. Sprawdź czy Clementine został zainstalowany prawidłowo."
 
-#: widgets/prettyimage.cpp:199
+#: widgets/prettyimage.cpp:200
 msgid "Clementine image viewer"
 msgstr "Przeglądarka obrazów Clementine"
 
@@ -1699,11 +1694,11 @@ msgstr "Usuń oryginalne pliki"
 msgid "Deleting files"
 msgstr "Usuwanie plików"
 
-#: ui/mainwindow.cpp:1726
+#: ui/mainwindow.cpp:1725
 msgid "Dequeue selected tracks"
 msgstr "Usuń ścieżki z kolejki odtwarzania"
 
-#: ui/mainwindow.cpp:1724
+#: ui/mainwindow.cpp:1723
 msgid "Dequeue track"
 msgstr "Usuń ścieżkę z kolejki odtwarzania"
 
@@ -1975,7 +1970,7 @@ msgstr "Dynamiczny, losowy miks"
 msgid "Edit smart playlist..."
 msgstr "Edytuj inteligentną listę odtwarzania..."
 
-#: ui/mainwindow.cpp:1768
+#: ui/mainwindow.cpp:1767
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr "Edytuj tag \"%1\"..."
@@ -2114,7 +2109,7 @@ msgid "Equivalent to --log-levels *:3"
 msgstr "Rownoważny --log-levels *:3"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:246
-#: library/libraryview.cpp:639 ui/mainwindow.cpp:2039 ui/mainwindow.cpp:2284
+#: library/libraryview.cpp:639 ui/mainwindow.cpp:2038 ui/mainwindow.cpp:2284
 #: ui/mainwindow.cpp:2430 internet/vk/vkservice.cpp:643
 msgid "Error"
 msgstr "Błąd"
@@ -2255,7 +2250,7 @@ msgstr "Przejście"
 msgid "Fading duration"
 msgstr "Czas przejścia"
 
-#: ui/mainwindow.cpp:2040
+#: ui/mainwindow.cpp:2039
 msgid "Failed reading CD drive"
 msgstr "Błąd odczytywania napędu CD"
 
@@ -3038,7 +3033,7 @@ msgid "Loading tracks info"
 msgstr "Wczytywanie informacji o utworze"
 
 #: library/librarymodel.cpp:164
-#: internet/podcasts/podcastdiscoverymodel.cpp:105 widgets/prettyimage.cpp:167
+#: internet/podcasts/podcastdiscoverymodel.cpp:105 widgets/prettyimage.cpp:168
 #: widgets/widgetfadehelper.cpp:96 internet/vk/vkservice.cpp:513
 #: internet/vk/vksettingspage.cpp:125 ../bin/src/ui_addpodcastdialog.h:179
 #: ../bin/src/ui_searchpreview.h:105 ../bin/src/ui_organisedialog.h:261
@@ -3301,7 +3296,7 @@ msgstr "Przenieś do biblioteki..."
 msgid "Move up"
 msgstr "Przesuń w górę"
 
-#: transcoder/transcodedialog.cpp:225 ui/mainwindow.cpp:1984
+#: transcoder/transcodedialog.cpp:225 ui/mainwindow.cpp:1983
 #: internet/vk/vkservice.cpp:908
 msgid "Music"
 msgstr "Muzyka"
@@ -3372,7 +3367,7 @@ msgstr "Nie odtwarzaj automatycznie"
 msgid "New folder"
 msgstr "Nowy folder"
 
-#: ui/mainwindow.cpp:1822 ../bin/src/ui_mainwindow.h:693
+#: ui/mainwindow.cpp:1821 ../bin/src/ui_mainwindow.h:693
 msgid "New playlist"
 msgstr "Nowa lista odtwarzania"
 
@@ -3612,9 +3607,9 @@ msgctxt "Refers to behavior settings in Clementine settings page."
 msgid "Open in new playlist"
 msgstr "Otwórz w nowej liście odtwarzania"
 
-#: songinfo/echonestbiographies.cpp:102
+#: songinfo/artistbiography.cpp:82
 msgid "Open in your browser"
-msgstr "Otwórz w przeglądarce"
+msgstr ""
 
 #: ../bin/src/ui_globalshortcutssettingspage.h:168
 #: ../bin/src/ui_globalshortcutssettingspage.h:170
@@ -3727,7 +3722,7 @@ msgstr "Impreza"
 msgid "Password"
 msgstr "Hasło"
 
-#: core/globalshortcuts.cpp:50 ui/mainwindow.cpp:1137 ui/mainwindow.cpp:1633
+#: core/globalshortcuts.cpp:50 ui/mainwindow.cpp:1136 ui/mainwindow.cpp:1632
 #: ui/qtsystemtrayicon.cpp:189 wiimotedev/wiimotesettingspage.cpp:114
 msgid "Pause"
 msgstr "Pauza"
@@ -3755,8 +3750,8 @@ msgstr "Piksel"
 msgid "Plain sidebar"
 msgstr "Zwykły pasek boczny"
 
-#: core/globalshortcuts.cpp:49 ui/mainwindow.cpp:670 ui/mainwindow.cpp:1103
-#: ui/mainwindow.cpp:1122 ui/mainwindow.cpp:1637 ui/qtsystemtrayicon.cpp:177
+#: core/globalshortcuts.cpp:49 ui/mainwindow.cpp:670 ui/mainwindow.cpp:1102
+#: ui/mainwindow.cpp:1121 ui/mainwindow.cpp:1636 ui/qtsystemtrayicon.cpp:177
 #: ui/qtsystemtrayicon.cpp:203 wiimotedev/wiimotesettingspage.cpp:107
 #: ../bin/src/ui_mainwindow.h:659
 msgid "Play"
@@ -3970,12 +3965,12 @@ msgstr "Odpytywanie urządzenia..."
 msgid "Queue Manager"
 msgstr "Menedżer kolejki odtwarzania"
 
-#: ui/mainwindow.cpp:1730
+#: ui/mainwindow.cpp:1729
 msgid "Queue selected tracks"
 msgstr "Kolejkuj wybrane ścieżki"
 
 #: globalsearch/globalsearchview.cpp:466 library/libraryview.cpp:389
-#: ui/mainwindow.cpp:1728
+#: ui/mainwindow.cpp:1727
 msgid "Queue track"
 msgstr "Kolejkuj ścieżkę"
 
@@ -4277,7 +4272,7 @@ msgstr "Zapisz okładkę na dysk..."
 msgid "Save current grouping"
 msgstr "Zapisz bieżące zgrupowanie"
 
-#: widgets/prettyimage.cpp:184 widgets/prettyimage.cpp:229
+#: widgets/prettyimage.cpp:185 widgets/prettyimage.cpp:230
 msgid "Save image"
 msgstr "Zapisz obraz"
 
@@ -4496,7 +4491,7 @@ msgstr "Szczegóły serwera"
 msgid "Service offline"
 msgstr "Usługa niedostępna"
 
-#: ui/mainwindow.cpp:1767
+#: ui/mainwindow.cpp:1766
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr "Ustaw %1 na \"%2\"..."
@@ -4588,7 +4583,7 @@ msgstr "Pokazuj okładki w bibliotece"
 msgid "Show dividers"
 msgstr "Pokaż separatory"
 
-#: ui/albumcoverchoicecontroller.cpp:72 widgets/prettyimage.cpp:182
+#: ui/albumcoverchoicecontroller.cpp:72 widgets/prettyimage.cpp:183
 msgid "Show fullsize..."
 msgstr "Pokaż w pełnej wielkości..."
 
@@ -4681,10 +4676,6 @@ msgstr "Wyloguj"
 msgid "Signing in..."
 msgstr "Logowanie..."
 
-#: songinfo/echonestsimilarartists.cpp:58
-msgid "Similar artists"
-msgstr "Podobni wykonawcy"
-
 #: ../bin/src/ui_albumcoverexport.h:211
 msgid "Size"
 msgstr "Wielkość"
@@ -4709,11 +4700,11 @@ msgstr "Ilość przeskoczeń utworu"
 msgid "Skip forwards in playlist"
 msgstr "Przeskocz w przód w liście odtwarzania"
 
-#: ui/mainwindow.cpp:1741
+#: ui/mainwindow.cpp:1740
 msgid "Skip selected tracks"
 msgstr "Pomiń wybrane ścieżki"
 
-#: ui/mainwindow.cpp:1739
+#: ui/mainwindow.cpp:1738
 msgid "Skip track"
 msgstr "Pomiń ścieżkę"
 
@@ -5173,7 +5164,7 @@ msgstr "Przełącz ładne OSD"
 msgid "Toggle fullscreen"
 msgstr "Przełącz tryb pełnoekranowy"
 
-#: ui/mainwindow.cpp:1732
+#: ui/mainwindow.cpp:1731
 msgid "Toggle queue status"
 msgstr "Przełącz stan kolejki"
 
@@ -5304,11 +5295,11 @@ msgstr "Nieznany błąd"
 msgid "Unset cover"
 msgstr "Usuń okładkę"
 
-#: ui/mainwindow.cpp:1737
+#: ui/mainwindow.cpp:1736
 msgid "Unskip selected tracks"
 msgstr "Nie pomijaj wybranych ścieżek"
 
-#: ui/mainwindow.cpp:1735
+#: ui/mainwindow.cpp:1734
 msgid "Unskip track"
 msgstr "Nie pomijaj ścieżki"
 
@@ -5317,7 +5308,7 @@ msgstr "Nie pomijaj ścieżki"
 msgid "Unsubscribe"
 msgstr "Anuluj subskrypcję"
 
-#: songinfo/songkickconcerts.cpp:174
+#: songinfo/songkickconcerts.cpp:158
 msgid "Upcoming Concerts"
 msgstr "Nadchodzące koncerty"
 

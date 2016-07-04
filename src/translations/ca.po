@@ -5,6 +5,7 @@
 # Translators:
 # Adolfo Jayme-Barrientos, 2014-2015
 # Adolfo Jayme-Barrientos, 2012-2013
+# Adolfo Jayme-Barrientos, 2016
 # Adolfo Jayme-Barrientos, 2015-2016
 # Adolfo Jayme-Barrientos, 2013
 # Adolfo Jayme-Barrientos, 2014
@@ -15,8 +16,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2016-06-04 10:49+0000\n"
-"Last-Translator: Juanjo\n"
+"PO-Revision-Date: 2016-06-30 06:43+0000\n"
+"Last-Translator: Adolfo Jayme-Barrientos\n"
 "Language-Team: Catalan (http://www.transifex.com/davidsansome/clementine/language/ca/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -484,7 +485,7 @@ msgstr "Afegeix un altre flux…"
 msgid "Add directory..."
 msgstr "Afegeix un directori…"
 
-#: ui/mainwindow.cpp:1983
+#: ui/mainwindow.cpp:1982
 msgid "Add file"
 msgstr "Afegeix un fitxer"
 
@@ -504,7 +505,7 @@ msgstr "Afegeix un fitxer…"
 msgid "Add files to transcode"
 msgstr "Afegeix fitxers per convertir-los"
 
-#: transcoder/transcodedialog.cpp:306 ui/mainwindow.cpp:2010
+#: transcoder/transcodedialog.cpp:306 ui/mainwindow.cpp:2009
 #: ripper/ripcddialog.cpp:185
 msgid "Add folder"
 msgstr "Afegeix una carpeta"
@@ -621,7 +622,7 @@ msgstr "Afegeix a les llistes de l’Spotify"
 msgid "Add to Spotify starred"
 msgstr "Afegeix a les destacades de l’Spotify"
 
-#: ui/mainwindow.cpp:1805
+#: ui/mainwindow.cpp:1804
 msgid "Add to another playlist"
 msgstr "Afegeix a una altra llista de reproducció"
 
@@ -865,10 +866,6 @@ msgstr "Artista"
 msgid "Artist info"
 msgstr "Inf.artista"
 
-#: songinfo/echonesttags.cpp:62
-msgid "Artist tags"
-msgstr "Etiquetes de l’artista"
-
 #: ui/organisedialog.cpp:63
 msgid "Artist's initial"
 msgstr "Inicials de l’artista"
@@ -885,7 +882,7 @@ msgstr "Format d’àudio"
 
 #: ../bin/src/ui_playbacksettingspage.h:361
 msgid "Audio output"
-msgstr "Sortida d'àudio"
+msgstr "Sortida d’àudio"
 
 #: internet/digitally/digitallyimportedsettingspage.cpp:82
 #: internet/magnatune/magnatunesettingspage.cpp:117
@@ -989,10 +986,9 @@ msgstr "Comportament"
 msgid "Best"
 msgstr "Millor"
 
-#: songinfo/echonestbiographies.cpp:85
-#, qt-format
-msgid "Biography from %1"
-msgstr "Biografia de %1"
+#: songinfo/artistbiography.cpp:78
+msgid "Biography"
+msgstr "Biografia"
 
 #: playlist/playlist.cpp:1354 ../bin/src/ui_edittagdialog.h:718
 msgid "Bit rate"
@@ -1264,7 +1260,7 @@ msgid ""
 "installed Clementine properly."
 msgstr "El Clementine no ha pogut carregar cap visualització de projectM. Assegureu-vos que teniu el Clementine instal·lat correctament."
 
-#: widgets/prettyimage.cpp:199
+#: widgets/prettyimage.cpp:200
 msgid "Clementine image viewer"
 msgstr "Visor d’imatges del Clementine"
 
@@ -1412,7 +1408,7 @@ msgstr "Configura…"
 
 #: ../bin/src/ui_wiimotesettingspage.h:176
 msgid "Connect Wii Remotes using active/deactive action"
-msgstr "Connetar els comandaments remot Wii amb l'acció activar/desactivar"
+msgstr "Connecteu els comandaments del Wii amb el botó d’habilita/inhabilita"
 
 #: devices/devicemanager.cpp:330 devices/devicemanager.cpp:335
 msgid "Connect device"
@@ -1692,11 +1688,11 @@ msgstr "Suprimeix els fitxers originals"
 msgid "Deleting files"
 msgstr "S’estan suprimint els fitxers"
 
-#: ui/mainwindow.cpp:1726
+#: ui/mainwindow.cpp:1725
 msgid "Dequeue selected tracks"
 msgstr "Treu de la cua les peces seleccionades"
 
-#: ui/mainwindow.cpp:1724
+#: ui/mainwindow.cpp:1723
 msgid "Dequeue track"
 msgstr "Treu de la cua la peça"
 
@@ -1968,7 +1964,7 @@ msgstr "Mescla dinàmica aleatòria"
 msgid "Edit smart playlist..."
 msgstr "Edita la llista de reproducció intel·ligent"
 
-#: ui/mainwindow.cpp:1768
+#: ui/mainwindow.cpp:1767
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr "Edita l’etiqueta «%1»…"
@@ -2107,7 +2103,7 @@ msgid "Equivalent to --log-levels *:3"
 msgstr "Equivalent a --log-levels *:3"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:246
-#: library/libraryview.cpp:639 ui/mainwindow.cpp:2039 ui/mainwindow.cpp:2284
+#: library/libraryview.cpp:639 ui/mainwindow.cpp:2038 ui/mainwindow.cpp:2284
 #: ui/mainwindow.cpp:2430 internet/vk/vkservice.cpp:643
 msgid "Error"
 msgstr "Error"
@@ -2248,7 +2244,7 @@ msgstr "Esvaïment"
 msgid "Fading duration"
 msgstr "Durada de l’esvaïment"
 
-#: ui/mainwindow.cpp:2040
+#: ui/mainwindow.cpp:2039
 msgid "Failed reading CD drive"
 msgstr "Ha fallat la lectura de la unitat de CD"
 
@@ -3031,7 +3027,7 @@ msgid "Loading tracks info"
 msgstr "S’està carregant la informació de les peces"
 
 #: library/librarymodel.cpp:164
-#: internet/podcasts/podcastdiscoverymodel.cpp:105 widgets/prettyimage.cpp:167
+#: internet/podcasts/podcastdiscoverymodel.cpp:105 widgets/prettyimage.cpp:168
 #: widgets/widgetfadehelper.cpp:96 internet/vk/vkservice.cpp:513
 #: internet/vk/vksettingspage.cpp:125 ../bin/src/ui_addpodcastdialog.h:179
 #: ../bin/src/ui_searchpreview.h:105 ../bin/src/ui_organisedialog.h:261
@@ -3294,7 +3290,7 @@ msgstr "Mou a la col·lecció…"
 msgid "Move up"
 msgstr "Mou cap amunt"
 
-#: transcoder/transcodedialog.cpp:225 ui/mainwindow.cpp:1984
+#: transcoder/transcodedialog.cpp:225 ui/mainwindow.cpp:1983
 #: internet/vk/vkservice.cpp:908
 msgid "Music"
 msgstr "Música"
@@ -3332,7 +3328,7 @@ msgstr "Nom"
 
 #: ../bin/src/ui_organisedialog.h:248
 msgid "Naming options"
-msgstr "Opcions d'anomenat"
+msgstr "Opcions d’anomenament"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:229
 msgid "Narrow band (NB)"
@@ -3365,7 +3361,7 @@ msgstr "Mai comencis a reproduir"
 msgid "New folder"
 msgstr "Carpeta nova"
 
-#: ui/mainwindow.cpp:1822 ../bin/src/ui_mainwindow.h:693
+#: ui/mainwindow.cpp:1821 ../bin/src/ui_mainwindow.h:693
 msgid "New playlist"
 msgstr "Llista de reproducció nova"
 
@@ -3605,7 +3601,7 @@ msgctxt "Refers to behavior settings in Clementine settings page."
 msgid "Open in new playlist"
 msgstr "Obre en una llista nova"
 
-#: songinfo/echonestbiographies.cpp:102
+#: songinfo/artistbiography.cpp:82
 msgid "Open in your browser"
 msgstr "Obre al navegador"
 
@@ -3720,7 +3716,7 @@ msgstr "Festa"
 msgid "Password"
 msgstr "Contrasenya"
 
-#: core/globalshortcuts.cpp:50 ui/mainwindow.cpp:1137 ui/mainwindow.cpp:1633
+#: core/globalshortcuts.cpp:50 ui/mainwindow.cpp:1136 ui/mainwindow.cpp:1632
 #: ui/qtsystemtrayicon.cpp:189 wiimotedev/wiimotesettingspage.cpp:114
 msgid "Pause"
 msgstr "Pausa"
@@ -3748,8 +3744,8 @@ msgstr "Píxel"
 msgid "Plain sidebar"
 msgstr "Barra lateral senzilla"
 
-#: core/globalshortcuts.cpp:49 ui/mainwindow.cpp:670 ui/mainwindow.cpp:1103
-#: ui/mainwindow.cpp:1122 ui/mainwindow.cpp:1637 ui/qtsystemtrayicon.cpp:177
+#: core/globalshortcuts.cpp:49 ui/mainwindow.cpp:670 ui/mainwindow.cpp:1102
+#: ui/mainwindow.cpp:1121 ui/mainwindow.cpp:1636 ui/qtsystemtrayicon.cpp:177
 #: ui/qtsystemtrayicon.cpp:203 wiimotedev/wiimotesettingspage.cpp:107
 #: ../bin/src/ui_mainwindow.h:659
 msgid "Play"
@@ -3963,12 +3959,12 @@ msgstr "S’està consultant el dispositiu…"
 msgid "Queue Manager"
 msgstr "Gestor de la cua"
 
-#: ui/mainwindow.cpp:1730
+#: ui/mainwindow.cpp:1729
 msgid "Queue selected tracks"
 msgstr "Afegeix les peces seleccionades a la cua"
 
 #: globalsearch/globalsearchview.cpp:466 library/libraryview.cpp:389
-#: ui/mainwindow.cpp:1728
+#: ui/mainwindow.cpp:1727
 msgid "Queue track"
 msgstr "Afegeix la peça a la cua"
 
@@ -4270,7 +4266,7 @@ msgstr "Desa la caràtula al disc dur…"
 msgid "Save current grouping"
 msgstr "Desa l'agrupació actual"
 
-#: widgets/prettyimage.cpp:184 widgets/prettyimage.cpp:229
+#: widgets/prettyimage.cpp:185 widgets/prettyimage.cpp:230
 msgid "Save image"
 msgstr "Desa la imatge"
 
@@ -4489,7 +4485,7 @@ msgstr "Detalls del servidor"
 msgid "Service offline"
 msgstr "Servei fora de línia"
 
-#: ui/mainwindow.cpp:1767
+#: ui/mainwindow.cpp:1766
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr "Estableix %1 a «%2»…"
@@ -4581,7 +4577,7 @@ msgstr "Mostra les caràtules a la col·lecció"
 msgid "Show dividers"
 msgstr "Mostra els separadors"
 
-#: ui/albumcoverchoicecontroller.cpp:72 widgets/prettyimage.cpp:182
+#: ui/albumcoverchoicecontroller.cpp:72 widgets/prettyimage.cpp:183
 msgid "Show fullsize..."
 msgstr "Mostra a mida completa..."
 
@@ -4674,10 +4670,6 @@ msgstr "Finalitza la sessió"
 msgid "Signing in..."
 msgstr "S’està iniciant la sessió…"
 
-#: songinfo/echonestsimilarartists.cpp:58
-msgid "Similar artists"
-msgstr "Artistes similars"
-
 #: ../bin/src/ui_albumcoverexport.h:211
 msgid "Size"
 msgstr "Mida"
@@ -4702,11 +4694,11 @@ msgstr "Comptador d’omissions"
 msgid "Skip forwards in playlist"
 msgstr "Salta endavant en la llista de reproducció"
 
-#: ui/mainwindow.cpp:1741
+#: ui/mainwindow.cpp:1740
 msgid "Skip selected tracks"
 msgstr "Omet les peces seleccionades"
 
-#: ui/mainwindow.cpp:1739
+#: ui/mainwindow.cpp:1738
 msgid "Skip track"
 msgstr "Omet la peça"
 
@@ -4801,7 +4793,7 @@ msgstr "URL de llista de l’Spotify"
 
 #: ../bin/src/ui_spotifysettingspage.h:211
 msgid "Spotify plugin"
-msgstr "Connector d'Spotify"
+msgstr "Connector de l’Spotify"
 
 #: internet/spotify/spotifyblobdownloader.cpp:71
 msgid "Spotify plugin not installed"
@@ -4955,7 +4947,7 @@ msgstr "S'està sincronitzant la safata d'entrada de Spotify"
 
 #: internet/spotify/spotifyservice.cpp:702
 msgid "Syncing Spotify playlist"
-msgstr "S'està sincronitzant la llista de reproducció de Spotify"
+msgstr "S’està sincronitzant la llista de l’Spotify"
 
 #: internet/spotify/spotifyservice.cpp:713
 msgid "Syncing Spotify starred tracks"
@@ -5166,7 +5158,7 @@ msgstr "Activa la visualització per pantalla elegant"
 msgid "Toggle fullscreen"
 msgstr "Commuta a pantalla completa"
 
-#: ui/mainwindow.cpp:1732
+#: ui/mainwindow.cpp:1731
 msgid "Toggle queue status"
 msgstr "Commuta l’estat de la cua"
 
@@ -5297,11 +5289,11 @@ msgstr "Error desconegut"
 msgid "Unset cover"
 msgstr "Esborra’n la caràtula"
 
-#: ui/mainwindow.cpp:1737
+#: ui/mainwindow.cpp:1736
 msgid "Unskip selected tracks"
 msgstr "No ometis les peces seleccionades"
 
-#: ui/mainwindow.cpp:1735
+#: ui/mainwindow.cpp:1734
 msgid "Unskip track"
 msgstr "No ometis la peça"
 
@@ -5310,7 +5302,7 @@ msgstr "No ometis la peça"
 msgid "Unsubscribe"
 msgstr "Canceleu la subscripció"
 
-#: songinfo/songkickconcerts.cpp:174
+#: songinfo/songkickconcerts.cpp:158
 msgid "Upcoming Concerts"
 msgstr "Propers concerts"
 

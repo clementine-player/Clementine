@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2016-06-02 14:50+0000\n"
+"PO-Revision-Date: 2016-06-28 13:51+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Croatian (http://www.transifex.com/davidsansome/clementine/language/hr/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -480,7 +480,7 @@ msgstr "Dodajte novi stream..."
 msgid "Add directory..."
 msgstr "Dodajte direktorij..."
 
-#: ui/mainwindow.cpp:1983
+#: ui/mainwindow.cpp:1982
 msgid "Add file"
 msgstr "Dodaj datoteku"
 
@@ -500,7 +500,7 @@ msgstr "Dodajte datoteku..."
 msgid "Add files to transcode"
 msgstr "Dodajte datoteku za transkôdiranje..."
 
-#: transcoder/transcodedialog.cpp:306 ui/mainwindow.cpp:2010
+#: transcoder/transcodedialog.cpp:306 ui/mainwindow.cpp:2009
 #: ripper/ripcddialog.cpp:185
 msgid "Add folder"
 msgstr "Dodajte mapu"
@@ -617,7 +617,7 @@ msgstr "Dodaj na Spotify popis izvođenja"
 msgid "Add to Spotify starred"
 msgstr "Dodaj u Spotify ocjenjeno"
 
-#: ui/mainwindow.cpp:1805
+#: ui/mainwindow.cpp:1804
 msgid "Add to another playlist"
 msgstr "Dodajte na drugi popis izvođenja"
 
@@ -861,10 +861,6 @@ msgstr "Izvođač"
 msgid "Artist info"
 msgstr "Info izvođača"
 
-#: songinfo/echonesttags.cpp:62
-msgid "Artist tags"
-msgstr "Vrsta glazbe izvođača"
-
 #: ui/organisedialog.cpp:63
 msgid "Artist's initial"
 msgstr "Prvi izvođač"
@@ -985,10 +981,9 @@ msgstr "Ponašanje"
 msgid "Best"
 msgstr "Najbolje"
 
-#: songinfo/echonestbiographies.cpp:85
-#, qt-format
-msgid "Biography from %1"
-msgstr "Životopis s %1"
+#: songinfo/artistbiography.cpp:78
+msgid "Biography"
+msgstr ""
 
 #: playlist/playlist.cpp:1354 ../bin/src/ui_edittagdialog.h:718
 msgid "Bit rate"
@@ -1260,7 +1255,7 @@ msgid ""
 "installed Clementine properly."
 msgstr "Clementine ne može učitati nijednu projektM vizualizaciju. Provjerite da li je Clementine instaliran ispravno."
 
-#: widgets/prettyimage.cpp:199
+#: widgets/prettyimage.cpp:200
 msgid "Clementine image viewer"
 msgstr "Clementine preglednik slika"
 
@@ -1688,11 +1683,11 @@ msgstr "Izbriši orginalne datoteke"
 msgid "Deleting files"
 msgstr "Brisanje datoteka"
 
-#: ui/mainwindow.cpp:1726
+#: ui/mainwindow.cpp:1725
 msgid "Dequeue selected tracks"
 msgstr "Uklonite označenu pjesmu s reprodukcije"
 
-#: ui/mainwindow.cpp:1724
+#: ui/mainwindow.cpp:1723
 msgid "Dequeue track"
 msgstr "Uklonite označenu pjesmu za reprodukciju"
 
@@ -1964,7 +1959,7 @@ msgstr "Dinamičan naizmjeničan mix"
 msgid "Edit smart playlist..."
 msgstr "Uredite pametni popis izvođenja..."
 
-#: ui/mainwindow.cpp:1768
+#: ui/mainwindow.cpp:1767
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr "Uredi oznaku \"%1\"..."
@@ -2103,7 +2098,7 @@ msgid "Equivalent to --log-levels *:3"
 msgstr "Odgovara --log-levels *: 3"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:246
-#: library/libraryview.cpp:639 ui/mainwindow.cpp:2039 ui/mainwindow.cpp:2284
+#: library/libraryview.cpp:639 ui/mainwindow.cpp:2038 ui/mainwindow.cpp:2284
 #: ui/mainwindow.cpp:2430 internet/vk/vkservice.cpp:643
 msgid "Error"
 msgstr "Greška"
@@ -2244,7 +2239,7 @@ msgstr "Utišavanje"
 msgid "Fading duration"
 msgstr "Trajanje utišavanja"
 
-#: ui/mainwindow.cpp:2040
+#: ui/mainwindow.cpp:2039
 msgid "Failed reading CD drive"
 msgstr "Nemoguće čitanje CD uređaja"
 
@@ -3027,7 +3022,7 @@ msgid "Loading tracks info"
 msgstr "Učitavanje informacija o pjesmi"
 
 #: library/librarymodel.cpp:164
-#: internet/podcasts/podcastdiscoverymodel.cpp:105 widgets/prettyimage.cpp:167
+#: internet/podcasts/podcastdiscoverymodel.cpp:105 widgets/prettyimage.cpp:168
 #: widgets/widgetfadehelper.cpp:96 internet/vk/vkservice.cpp:513
 #: internet/vk/vksettingspage.cpp:125 ../bin/src/ui_addpodcastdialog.h:179
 #: ../bin/src/ui_searchpreview.h:105 ../bin/src/ui_organisedialog.h:261
@@ -3290,7 +3285,7 @@ msgstr "Premjesti u fonoteku..."
 msgid "Move up"
 msgstr "Pomakni gore"
 
-#: transcoder/transcodedialog.cpp:225 ui/mainwindow.cpp:1984
+#: transcoder/transcodedialog.cpp:225 ui/mainwindow.cpp:1983
 #: internet/vk/vkservice.cpp:908
 msgid "Music"
 msgstr "Glazba"
@@ -3361,7 +3356,7 @@ msgstr "Nikada ne započinji reprodukciju glazbe"
 msgid "New folder"
 msgstr "Nova mapa"
 
-#: ui/mainwindow.cpp:1822 ../bin/src/ui_mainwindow.h:693
+#: ui/mainwindow.cpp:1821 ../bin/src/ui_mainwindow.h:693
 msgid "New playlist"
 msgstr "Novi popis izvođenja"
 
@@ -3601,9 +3596,9 @@ msgctxt "Refers to behavior settings in Clementine settings page."
 msgid "Open in new playlist"
 msgstr "Se otvoriti u novom popisu izvođenja"
 
-#: songinfo/echonestbiographies.cpp:102
+#: songinfo/artistbiography.cpp:82
 msgid "Open in your browser"
-msgstr "Otvori u svojem pregledniku"
+msgstr ""
 
 #: ../bin/src/ui_globalshortcutssettingspage.h:168
 #: ../bin/src/ui_globalshortcutssettingspage.h:170
@@ -3716,7 +3711,7 @@ msgstr "Party"
 msgid "Password"
 msgstr "Lozinka"
 
-#: core/globalshortcuts.cpp:50 ui/mainwindow.cpp:1137 ui/mainwindow.cpp:1633
+#: core/globalshortcuts.cpp:50 ui/mainwindow.cpp:1136 ui/mainwindow.cpp:1632
 #: ui/qtsystemtrayicon.cpp:189 wiimotedev/wiimotesettingspage.cpp:114
 msgid "Pause"
 msgstr "Pauziraj reprodukciju"
@@ -3744,8 +3739,8 @@ msgstr "Piksela"
 msgid "Plain sidebar"
 msgstr "Jednostavna bočna traka"
 
-#: core/globalshortcuts.cpp:49 ui/mainwindow.cpp:670 ui/mainwindow.cpp:1103
-#: ui/mainwindow.cpp:1122 ui/mainwindow.cpp:1637 ui/qtsystemtrayicon.cpp:177
+#: core/globalshortcuts.cpp:49 ui/mainwindow.cpp:670 ui/mainwindow.cpp:1102
+#: ui/mainwindow.cpp:1121 ui/mainwindow.cpp:1636 ui/qtsystemtrayicon.cpp:177
 #: ui/qtsystemtrayicon.cpp:203 wiimotedev/wiimotesettingspage.cpp:107
 #: ../bin/src/ui_mainwindow.h:659
 msgid "Play"
@@ -3959,12 +3954,12 @@ msgstr "Tražim uređaj..."
 msgid "Queue Manager"
 msgstr "Upravljanje odabranim pjesmama za reprodukciju"
 
-#: ui/mainwindow.cpp:1730
+#: ui/mainwindow.cpp:1729
 msgid "Queue selected tracks"
 msgstr "Odaberite označenu pjesmu za reprodukciju"
 
 #: globalsearch/globalsearchview.cpp:466 library/libraryview.cpp:389
-#: ui/mainwindow.cpp:1728
+#: ui/mainwindow.cpp:1727
 msgid "Queue track"
 msgstr "Odaberite pjesmu za reprodukciju"
 
@@ -4266,7 +4261,7 @@ msgstr "Spremite omot na disk..."
 msgid "Save current grouping"
 msgstr "Spremi trenutno grupiranje"
 
-#: widgets/prettyimage.cpp:184 widgets/prettyimage.cpp:229
+#: widgets/prettyimage.cpp:185 widgets/prettyimage.cpp:230
 msgid "Save image"
 msgstr "Preuzmi sliku"
 
@@ -4485,7 +4480,7 @@ msgstr "Pojedinosti poslužitelja"
 msgid "Service offline"
 msgstr "Usluga nedostupna"
 
-#: ui/mainwindow.cpp:1767
+#: ui/mainwindow.cpp:1766
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr "Postavite %1 na \"%2\"..."
@@ -4577,7 +4572,7 @@ msgstr "Prikaži omot albuma u fonoteci"
 msgid "Show dividers"
 msgstr "Prikaži razdjelnike u stablu fonoteke"
 
-#: ui/albumcoverchoicecontroller.cpp:72 widgets/prettyimage.cpp:182
+#: ui/albumcoverchoicecontroller.cpp:72 widgets/prettyimage.cpp:183
 msgid "Show fullsize..."
 msgstr "Prikaži u punoj veličini..."
 
@@ -4670,10 +4665,6 @@ msgstr "Odjavi se"
 msgid "Signing in..."
 msgstr "Prijavljivanje..."
 
-#: songinfo/echonestsimilarartists.cpp:58
-msgid "Similar artists"
-msgstr "Srodni izvođači"
-
 #: ../bin/src/ui_albumcoverexport.h:211
 msgid "Size"
 msgstr "Veličina"
@@ -4698,11 +4689,11 @@ msgstr "Preskoči računanje"
 msgid "Skip forwards in playlist"
 msgstr "Preskoči unaprijed u popisu izvođenja"
 
-#: ui/mainwindow.cpp:1741
+#: ui/mainwindow.cpp:1740
 msgid "Skip selected tracks"
 msgstr "Preskoči odabrane pjesme"
 
-#: ui/mainwindow.cpp:1739
+#: ui/mainwindow.cpp:1738
 msgid "Skip track"
 msgstr "Preskoči pjesmu"
 
@@ -5162,7 +5153,7 @@ msgstr "Uključi/Isključi ljepši OSD"
 msgid "Toggle fullscreen"
 msgstr "Cijelozaslonski prikaz"
 
-#: ui/mainwindow.cpp:1732
+#: ui/mainwindow.cpp:1731
 msgid "Toggle queue status"
 msgstr "Uključi/isključi stanje reda čekanja"
 
@@ -5293,11 +5284,11 @@ msgstr "Nepoznata greška"
 msgid "Unset cover"
 msgstr "Uklonite omot"
 
-#: ui/mainwindow.cpp:1737
+#: ui/mainwindow.cpp:1736
 msgid "Unskip selected tracks"
 msgstr "Ukloni preskakanje odabrane pjesme"
 
-#: ui/mainwindow.cpp:1735
+#: ui/mainwindow.cpp:1734
 msgid "Unskip track"
 msgstr "Ukloni preskakanje pjesme"
 
@@ -5306,7 +5297,7 @@ msgstr "Ukloni preskakanje pjesme"
 msgid "Unsubscribe"
 msgstr "Otkažite pretplatu"
 
-#: songinfo/songkickconcerts.cpp:174
+#: songinfo/songkickconcerts.cpp:158
 msgid "Upcoming Concerts"
 msgstr "Nadolazeći koncerti"
 

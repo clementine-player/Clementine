@@ -12,7 +12,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2016-06-02 18:20+0000\n"
+"PO-Revision-Date: 2016-06-28 14:07+0000\n"
 "Last-Translator: Ján Ďanovský <dagsoftware@yahoo.com>\n"
 "Language-Team: Slovak (http://www.transifex.com/davidsansome/clementine/language/sk/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -481,7 +481,7 @@ msgstr "Pridať ďalší stream..."
 msgid "Add directory..."
 msgstr "Pridať priečinok..."
 
-#: ui/mainwindow.cpp:1983
+#: ui/mainwindow.cpp:1982
 msgid "Add file"
 msgstr "Pridať súbor"
 
@@ -501,7 +501,7 @@ msgstr "Pridať súbor..."
 msgid "Add files to transcode"
 msgstr "Pridať súbory na transkódovanie"
 
-#: transcoder/transcodedialog.cpp:306 ui/mainwindow.cpp:2010
+#: transcoder/transcodedialog.cpp:306 ui/mainwindow.cpp:2009
 #: ripper/ripcddialog.cpp:185
 msgid "Add folder"
 msgstr "Pridať priečinok"
@@ -618,7 +618,7 @@ msgstr "Pridať do Spotify playlistov"
 msgid "Add to Spotify starred"
 msgstr "Pridať do S hviezdičkou na Spotify"
 
-#: ui/mainwindow.cpp:1805
+#: ui/mainwindow.cpp:1804
 msgid "Add to another playlist"
 msgstr "Pridať do iného playlistu"
 
@@ -862,10 +862,6 @@ msgstr "Interprét"
 msgid "Artist info"
 msgstr "Interprét"
 
-#: songinfo/echonesttags.cpp:62
-msgid "Artist tags"
-msgstr "Tagy interpréta"
-
 #: ui/organisedialog.cpp:63
 msgid "Artist's initial"
 msgstr "Iniciálky interpréta"
@@ -986,10 +982,9 @@ msgstr "Správanie"
 msgid "Best"
 msgstr "Najlepšia"
 
-#: songinfo/echonestbiographies.cpp:85
-#, qt-format
-msgid "Biography from %1"
-msgstr "Životopis z %1"
+#: songinfo/artistbiography.cpp:78
+msgid "Biography"
+msgstr "Životopis"
 
 #: playlist/playlist.cpp:1354 ../bin/src/ui_edittagdialog.h:718
 msgid "Bit rate"
@@ -1261,7 +1256,7 @@ msgid ""
 "installed Clementine properly."
 msgstr "Clementine nemôže načítať žiadnu projectM vizualizáciu. Skontrolujte, či máte Clementine nainštalovaný správne."
 
-#: widgets/prettyimage.cpp:199
+#: widgets/prettyimage.cpp:200
 msgid "Clementine image viewer"
 msgstr "Clementine prehliadač obrázkov"
 
@@ -1689,11 +1684,11 @@ msgstr "Vymazať pôvodné súbory"
 msgid "Deleting files"
 msgstr "Odstraňujú sa súbory"
 
-#: ui/mainwindow.cpp:1726
+#: ui/mainwindow.cpp:1725
 msgid "Dequeue selected tracks"
 msgstr "Vybrať z radu vybrané skladby"
 
-#: ui/mainwindow.cpp:1724
+#: ui/mainwindow.cpp:1723
 msgid "Dequeue track"
 msgstr "Vybrať z radu skladbu"
 
@@ -1965,7 +1960,7 @@ msgstr "Dynamicky náhodná zmes"
 msgid "Edit smart playlist..."
 msgstr "Upraviť inteligentný playlist..."
 
-#: ui/mainwindow.cpp:1768
+#: ui/mainwindow.cpp:1767
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr "Upraviť tag \"%1\"..."
@@ -2104,7 +2099,7 @@ msgid "Equivalent to --log-levels *:3"
 msgstr "Ekvivalent k --log-levels *:3"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:246
-#: library/libraryview.cpp:639 ui/mainwindow.cpp:2039 ui/mainwindow.cpp:2284
+#: library/libraryview.cpp:639 ui/mainwindow.cpp:2038 ui/mainwindow.cpp:2284
 #: ui/mainwindow.cpp:2430 internet/vk/vkservice.cpp:643
 msgid "Error"
 msgstr "Chyba"
@@ -2245,7 +2240,7 @@ msgstr "Zoslabovanie"
 msgid "Fading duration"
 msgstr "Trvanie zoslabovania"
 
-#: ui/mainwindow.cpp:2040
+#: ui/mainwindow.cpp:2039
 msgid "Failed reading CD drive"
 msgstr "Zlyhalo čítanie CD v mechanike"
 
@@ -3028,7 +3023,7 @@ msgid "Loading tracks info"
 msgstr "Načítavajú sa informácie o skladbe"
 
 #: library/librarymodel.cpp:164
-#: internet/podcasts/podcastdiscoverymodel.cpp:105 widgets/prettyimage.cpp:167
+#: internet/podcasts/podcastdiscoverymodel.cpp:105 widgets/prettyimage.cpp:168
 #: widgets/widgetfadehelper.cpp:96 internet/vk/vkservice.cpp:513
 #: internet/vk/vksettingspage.cpp:125 ../bin/src/ui_addpodcastdialog.h:179
 #: ../bin/src/ui_searchpreview.h:105 ../bin/src/ui_organisedialog.h:261
@@ -3291,7 +3286,7 @@ msgstr "Presunúť do zbierky..."
 msgid "Move up"
 msgstr "Posunúť vyššie"
 
-#: transcoder/transcodedialog.cpp:225 ui/mainwindow.cpp:1984
+#: transcoder/transcodedialog.cpp:225 ui/mainwindow.cpp:1983
 #: internet/vk/vkservice.cpp:908
 msgid "Music"
 msgstr "Hudba"
@@ -3362,7 +3357,7 @@ msgstr "Nezačne sa prehrávať"
 msgid "New folder"
 msgstr "Nový playlist"
 
-#: ui/mainwindow.cpp:1822 ../bin/src/ui_mainwindow.h:693
+#: ui/mainwindow.cpp:1821 ../bin/src/ui_mainwindow.h:693
 msgid "New playlist"
 msgstr "Nový playlist"
 
@@ -3602,7 +3597,7 @@ msgctxt "Refers to behavior settings in Clementine settings page."
 msgid "Open in new playlist"
 msgstr "ju otvorí v novom playliste"
 
-#: songinfo/echonestbiographies.cpp:102
+#: songinfo/artistbiography.cpp:82
 msgid "Open in your browser"
 msgstr "Otvoriť v prehliadači"
 
@@ -3717,7 +3712,7 @@ msgstr "Party"
 msgid "Password"
 msgstr "Heslo"
 
-#: core/globalshortcuts.cpp:50 ui/mainwindow.cpp:1137 ui/mainwindow.cpp:1633
+#: core/globalshortcuts.cpp:50 ui/mainwindow.cpp:1136 ui/mainwindow.cpp:1632
 #: ui/qtsystemtrayicon.cpp:189 wiimotedev/wiimotesettingspage.cpp:114
 msgid "Pause"
 msgstr "Pozastaviť"
@@ -3745,8 +3740,8 @@ msgstr "Pixel"
 msgid "Plain sidebar"
 msgstr "Obyčajný bočný panel"
 
-#: core/globalshortcuts.cpp:49 ui/mainwindow.cpp:670 ui/mainwindow.cpp:1103
-#: ui/mainwindow.cpp:1122 ui/mainwindow.cpp:1637 ui/qtsystemtrayicon.cpp:177
+#: core/globalshortcuts.cpp:49 ui/mainwindow.cpp:670 ui/mainwindow.cpp:1102
+#: ui/mainwindow.cpp:1121 ui/mainwindow.cpp:1636 ui/qtsystemtrayicon.cpp:177
 #: ui/qtsystemtrayicon.cpp:203 wiimotedev/wiimotesettingspage.cpp:107
 #: ../bin/src/ui_mainwindow.h:659
 msgid "Play"
@@ -3960,12 +3955,12 @@ msgstr "Zaraďuje sa zariadenie..."
 msgid "Queue Manager"
 msgstr "Správca poradia"
 
-#: ui/mainwindow.cpp:1730
+#: ui/mainwindow.cpp:1729
 msgid "Queue selected tracks"
 msgstr "Zaradiť vybrané skladby"
 
 #: globalsearch/globalsearchview.cpp:466 library/libraryview.cpp:389
-#: ui/mainwindow.cpp:1728
+#: ui/mainwindow.cpp:1727
 msgid "Queue track"
 msgstr "Zaradiť skladbu"
 
@@ -4267,7 +4262,7 @@ msgstr "Uložiť obal na disk..."
 msgid "Save current grouping"
 msgstr "Uložiť aktuálne zoskupenie"
 
-#: widgets/prettyimage.cpp:184 widgets/prettyimage.cpp:229
+#: widgets/prettyimage.cpp:185 widgets/prettyimage.cpp:230
 msgid "Save image"
 msgstr "Uložiť obrázok"
 
@@ -4486,7 +4481,7 @@ msgstr "Podrobnosti servera"
 msgid "Service offline"
 msgstr "Služba je offline"
 
-#: ui/mainwindow.cpp:1767
+#: ui/mainwindow.cpp:1766
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr "Nastaviť %1 do \"%2\"..."
@@ -4578,7 +4573,7 @@ msgstr "Zobraziť obaly albumov v zbierke"
 msgid "Show dividers"
 msgstr "Zobraziť oddeľovače"
 
-#: ui/albumcoverchoicecontroller.cpp:72 widgets/prettyimage.cpp:182
+#: ui/albumcoverchoicecontroller.cpp:72 widgets/prettyimage.cpp:183
 msgid "Show fullsize..."
 msgstr "Zobraziť celú veľkosť..."
 
@@ -4671,10 +4666,6 @@ msgstr "Odhlásiť"
 msgid "Signing in..."
 msgstr "Prihlasovanie..."
 
-#: songinfo/echonestsimilarartists.cpp:58
-msgid "Similar artists"
-msgstr "Podobní interpréti"
-
 #: ../bin/src/ui_albumcoverexport.h:211
 msgid "Size"
 msgstr "Veľkosť"
@@ -4699,11 +4690,11 @@ msgstr "Počet preskočení"
 msgid "Skip forwards in playlist"
 msgstr "Preskočiť dopredu v playliste"
 
-#: ui/mainwindow.cpp:1741
+#: ui/mainwindow.cpp:1740
 msgid "Skip selected tracks"
 msgstr "Preskočiť vybrané skladby"
 
-#: ui/mainwindow.cpp:1739
+#: ui/mainwindow.cpp:1738
 msgid "Skip track"
 msgstr "Preskočiť skladbu"
 
@@ -5163,7 +5154,7 @@ msgstr "Prepnúť Krásne OSD"
 msgid "Toggle fullscreen"
 msgstr "Prepnúť na celú obrazovku"
 
-#: ui/mainwindow.cpp:1732
+#: ui/mainwindow.cpp:1731
 msgid "Toggle queue status"
 msgstr "Prepínať stav radu"
 
@@ -5294,11 +5285,11 @@ msgstr "Neznáma chyba"
 msgid "Unset cover"
 msgstr "Nenastavený obal"
 
-#: ui/mainwindow.cpp:1737
+#: ui/mainwindow.cpp:1736
 msgid "Unskip selected tracks"
 msgstr "Nepreskočiť vybraté skladby"
 
-#: ui/mainwindow.cpp:1735
+#: ui/mainwindow.cpp:1734
 msgid "Unskip track"
 msgstr "Nepreskočiť skladbu"
 
@@ -5307,7 +5298,7 @@ msgstr "Nepreskočiť skladbu"
 msgid "Unsubscribe"
 msgstr "Zrušiť predplatné"
 
-#: songinfo/songkickconcerts.cpp:174
+#: songinfo/songkickconcerts.cpp:158
 msgid "Upcoming Concerts"
 msgstr "Pripravované koncerty"
 

@@ -20,7 +20,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2016-06-02 19:01+0000\n"
+"PO-Revision-Date: 2016-06-28 17:03+0000\n"
 "Last-Translator: fri\n"
 "Language-Team: Czech (http://www.transifex.com/davidsansome/clementine/language/cs/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -489,7 +489,7 @@ msgstr "Přidat další proud..."
 msgid "Add directory..."
 msgstr "Přidat složku..."
 
-#: ui/mainwindow.cpp:1983
+#: ui/mainwindow.cpp:1982
 msgid "Add file"
 msgstr "Přidat soubor"
 
@@ -509,7 +509,7 @@ msgstr "Přidat soubor..."
 msgid "Add files to transcode"
 msgstr "Přidat soubory pro překódování"
 
-#: transcoder/transcodedialog.cpp:306 ui/mainwindow.cpp:2010
+#: transcoder/transcodedialog.cpp:306 ui/mainwindow.cpp:2009
 #: ripper/ripcddialog.cpp:185
 msgid "Add folder"
 msgstr "Přidat složku"
@@ -626,7 +626,7 @@ msgstr "Přidat do seznamů skladeb Spotify"
 msgid "Add to Spotify starred"
 msgstr "Přidat do Spotify s hvězdičkou"
 
-#: ui/mainwindow.cpp:1805
+#: ui/mainwindow.cpp:1804
 msgid "Add to another playlist"
 msgstr "Přidat do jiného seznamu skladeb"
 
@@ -870,10 +870,6 @@ msgstr "Umělec"
 msgid "Artist info"
 msgstr "Umělec"
 
-#: songinfo/echonesttags.cpp:62
-msgid "Artist tags"
-msgstr "Značky umělce"
-
 #: ui/organisedialog.cpp:63
 msgid "Artist's initial"
 msgstr "Začáteční písmena umělce"
@@ -994,10 +990,9 @@ msgstr "Chování"
 msgid "Best"
 msgstr "Nejlepší"
 
-#: songinfo/echonestbiographies.cpp:85
-#, qt-format
-msgid "Biography from %1"
-msgstr "Životopis od %1"
+#: songinfo/artistbiography.cpp:78
+msgid "Biography"
+msgstr "Životopis"
 
 #: playlist/playlist.cpp:1354 ../bin/src/ui_edittagdialog.h:718
 msgid "Bit rate"
@@ -1269,7 +1264,7 @@ msgid ""
 "installed Clementine properly."
 msgstr "Clementine se nepodařilo nahrát žádné vizualizace z projectM. Ověřte, že jste Clementine nainstalovali správně."
 
-#: widgets/prettyimage.cpp:199
+#: widgets/prettyimage.cpp:200
 msgid "Clementine image viewer"
 msgstr "Prohlížeč obrázků pro Clementine"
 
@@ -1697,11 +1692,11 @@ msgstr "Smazat původní soubory"
 msgid "Deleting files"
 msgstr "Probíhá mazání souborů"
 
-#: ui/mainwindow.cpp:1726
+#: ui/mainwindow.cpp:1725
 msgid "Dequeue selected tracks"
 msgstr "Odstranit vybrané skladby z řady"
 
-#: ui/mainwindow.cpp:1724
+#: ui/mainwindow.cpp:1723
 msgid "Dequeue track"
 msgstr "Odstranit skladbu z řady"
 
@@ -1973,7 +1968,7 @@ msgstr "Dynamický náhodný výběr"
 msgid "Edit smart playlist..."
 msgstr "Upravit chytrý seznam skladeb..."
 
-#: ui/mainwindow.cpp:1768
+#: ui/mainwindow.cpp:1767
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr "Upravit značku \"%1\"..."
@@ -2112,7 +2107,7 @@ msgid "Equivalent to --log-levels *:3"
 msgstr "Rovnocenné s --log-levels *:3"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:246
-#: library/libraryview.cpp:639 ui/mainwindow.cpp:2039 ui/mainwindow.cpp:2284
+#: library/libraryview.cpp:639 ui/mainwindow.cpp:2038 ui/mainwindow.cpp:2284
 #: ui/mainwindow.cpp:2430 internet/vk/vkservice.cpp:643
 msgid "Error"
 msgstr "Chyba"
@@ -2253,7 +2248,7 @@ msgstr "Slábnutí"
 msgid "Fading duration"
 msgstr "Doba slábnutí"
 
-#: ui/mainwindow.cpp:2040
+#: ui/mainwindow.cpp:2039
 msgid "Failed reading CD drive"
 msgstr "Nepodařilo se číst z CD v mechanice"
 
@@ -3036,7 +3031,7 @@ msgid "Loading tracks info"
 msgstr "Nahrávají se informace o skladbě"
 
 #: library/librarymodel.cpp:164
-#: internet/podcasts/podcastdiscoverymodel.cpp:105 widgets/prettyimage.cpp:167
+#: internet/podcasts/podcastdiscoverymodel.cpp:105 widgets/prettyimage.cpp:168
 #: widgets/widgetfadehelper.cpp:96 internet/vk/vkservice.cpp:513
 #: internet/vk/vksettingspage.cpp:125 ../bin/src/ui_addpodcastdialog.h:179
 #: ../bin/src/ui_searchpreview.h:105 ../bin/src/ui_organisedialog.h:261
@@ -3299,7 +3294,7 @@ msgstr "Přesunout do sbírky..."
 msgid "Move up"
 msgstr "Posunout nahoru"
 
-#: transcoder/transcodedialog.cpp:225 ui/mainwindow.cpp:1984
+#: transcoder/transcodedialog.cpp:225 ui/mainwindow.cpp:1983
 #: internet/vk/vkservice.cpp:908
 msgid "Music"
 msgstr "Hudba"
@@ -3370,7 +3365,7 @@ msgstr "Nikdy nezačít přehrávání"
 msgid "New folder"
 msgstr "Nová složka"
 
-#: ui/mainwindow.cpp:1822 ../bin/src/ui_mainwindow.h:693
+#: ui/mainwindow.cpp:1821 ../bin/src/ui_mainwindow.h:693
 msgid "New playlist"
 msgstr "Nový seznam skladeb"
 
@@ -3610,7 +3605,7 @@ msgctxt "Refers to behavior settings in Clementine settings page."
 msgid "Open in new playlist"
 msgstr "Otevřít v novém seznamu skladeb"
 
-#: songinfo/echonestbiographies.cpp:102
+#: songinfo/artistbiography.cpp:82
 msgid "Open in your browser"
 msgstr "Otevřít v prohlížeči"
 
@@ -3725,7 +3720,7 @@ msgstr "Oslava"
 msgid "Password"
 msgstr "Heslo"
 
-#: core/globalshortcuts.cpp:50 ui/mainwindow.cpp:1137 ui/mainwindow.cpp:1633
+#: core/globalshortcuts.cpp:50 ui/mainwindow.cpp:1136 ui/mainwindow.cpp:1632
 #: ui/qtsystemtrayicon.cpp:189 wiimotedev/wiimotesettingspage.cpp:114
 msgid "Pause"
 msgstr "Pozastavit"
@@ -3753,8 +3748,8 @@ msgstr "Pixel"
 msgid "Plain sidebar"
 msgstr "Prostý postranní panel"
 
-#: core/globalshortcuts.cpp:49 ui/mainwindow.cpp:670 ui/mainwindow.cpp:1103
-#: ui/mainwindow.cpp:1122 ui/mainwindow.cpp:1637 ui/qtsystemtrayicon.cpp:177
+#: core/globalshortcuts.cpp:49 ui/mainwindow.cpp:670 ui/mainwindow.cpp:1102
+#: ui/mainwindow.cpp:1121 ui/mainwindow.cpp:1636 ui/qtsystemtrayicon.cpp:177
 #: ui/qtsystemtrayicon.cpp:203 wiimotedev/wiimotesettingspage.cpp:107
 #: ../bin/src/ui_mainwindow.h:659
 msgid "Play"
@@ -3968,12 +3963,12 @@ msgstr "Dotazování se zařízení..."
 msgid "Queue Manager"
 msgstr "Správce řady"
 
-#: ui/mainwindow.cpp:1730
+#: ui/mainwindow.cpp:1729
 msgid "Queue selected tracks"
 msgstr "Přidat vybrané skladby do řady"
 
 #: globalsearch/globalsearchview.cpp:466 library/libraryview.cpp:389
-#: ui/mainwindow.cpp:1728
+#: ui/mainwindow.cpp:1727
 msgid "Queue track"
 msgstr "Přidat skladbu do řady"
 
@@ -4275,7 +4270,7 @@ msgstr "Uložit obal na disk..."
 msgid "Save current grouping"
 msgstr "Uložit nynější seskupení"
 
-#: widgets/prettyimage.cpp:184 widgets/prettyimage.cpp:229
+#: widgets/prettyimage.cpp:185 widgets/prettyimage.cpp:230
 msgid "Save image"
 msgstr "Uložit obrázek"
 
@@ -4494,7 +4489,7 @@ msgstr "Podrobnosti o serveru"
 msgid "Service offline"
 msgstr "Služba není dostupná"
 
-#: ui/mainwindow.cpp:1767
+#: ui/mainwindow.cpp:1766
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr "Nastavit %1 na \"%2\"..."
@@ -4586,7 +4581,7 @@ msgstr "Ukazovat obal ve sbírce"
 msgid "Show dividers"
 msgstr "Ukazovat oddělovače"
 
-#: ui/albumcoverchoicecontroller.cpp:72 widgets/prettyimage.cpp:182
+#: ui/albumcoverchoicecontroller.cpp:72 widgets/prettyimage.cpp:183
 msgid "Show fullsize..."
 msgstr "Ukázat v plné velikosti..."
 
@@ -4679,10 +4674,6 @@ msgstr "Odhlásit"
 msgid "Signing in..."
 msgstr "Přihlašuje se..."
 
-#: songinfo/echonestsimilarartists.cpp:58
-msgid "Similar artists"
-msgstr "Podobní umělci"
-
 #: ../bin/src/ui_albumcoverexport.h:211
 msgid "Size"
 msgstr "Velikost"
@@ -4707,11 +4698,11 @@ msgstr "Počet přeskočení"
 msgid "Skip forwards in playlist"
 msgstr "Další skladba v seznamu skladeb"
 
-#: ui/mainwindow.cpp:1741
+#: ui/mainwindow.cpp:1740
 msgid "Skip selected tracks"
 msgstr "Přeskočit vybrané skladby"
 
-#: ui/mainwindow.cpp:1739
+#: ui/mainwindow.cpp:1738
 msgid "Skip track"
 msgstr "Přeskočit skladbu"
 
@@ -5171,7 +5162,7 @@ msgstr "Přepnout OSD"
 msgid "Toggle fullscreen"
 msgstr "Zapnout/Vypnout zobrazení na celou obrazovku"
 
-#: ui/mainwindow.cpp:1732
+#: ui/mainwindow.cpp:1731
 msgid "Toggle queue status"
 msgstr "Přepnout stav řady"
 
@@ -5302,11 +5293,11 @@ msgstr "Neznámá chyba"
 msgid "Unset cover"
 msgstr "Odebrat obal"
 
-#: ui/mainwindow.cpp:1737
+#: ui/mainwindow.cpp:1736
 msgid "Unskip selected tracks"
 msgstr "Zrušit přeskočení vybraných skladeb"
 
-#: ui/mainwindow.cpp:1735
+#: ui/mainwindow.cpp:1734
 msgid "Unskip track"
 msgstr "Zrušit přeskočení skladby"
 
@@ -5315,7 +5306,7 @@ msgstr "Zrušit přeskočení skladby"
 msgid "Unsubscribe"
 msgstr "Zrušit odběr"
 
-#: songinfo/songkickconcerts.cpp:174
+#: songinfo/songkickconcerts.cpp:158
 msgid "Upcoming Concerts"
 msgstr "Připravované koncerty"
 

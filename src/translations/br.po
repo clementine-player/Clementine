@@ -13,7 +13,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2016-06-03 14:51+0000\n"
+"PO-Revision-Date: 2016-07-02 16:12+0000\n"
 "Last-Translator: Gwenn M <tornoz@laposte.net>\n"
 "Language-Team: Breton (http://www.transifex.com/davidsansome/clementine/language/br/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -482,7 +482,7 @@ msgstr "Ouzhpennañ ul lanv all..."
 msgid "Add directory..."
 msgstr "Ouzhpennañ un teuliad..."
 
-#: ui/mainwindow.cpp:1983
+#: ui/mainwindow.cpp:1982
 msgid "Add file"
 msgstr "Ouzhpennañ ur restr"
 
@@ -502,7 +502,7 @@ msgstr "Ouzhpennañ ur restr..."
 msgid "Add files to transcode"
 msgstr "Ouzhpennañ restroù da"
 
-#: transcoder/transcodedialog.cpp:306 ui/mainwindow.cpp:2010
+#: transcoder/transcodedialog.cpp:306 ui/mainwindow.cpp:2009
 #: ripper/ripcddialog.cpp:185
 msgid "Add folder"
 msgstr "Ouzhpennañ un teuliad"
@@ -619,7 +619,7 @@ msgstr "Ouzhpennañ d'am rolloù-seniñ Spotify"
 msgid "Add to Spotify starred"
 msgstr "Ouzhpennañ da tonioù karetañ Spotify"
 
-#: ui/mainwindow.cpp:1805
+#: ui/mainwindow.cpp:1804
 msgid "Add to another playlist"
 msgstr "Ouzhpennañ d'ur roll seniñ all"
 
@@ -863,10 +863,6 @@ msgstr "Arzour"
 msgid "Artist info"
 msgstr "Arzour"
 
-#: songinfo/echonesttags.cpp:62
-msgid "Artist tags"
-msgstr "Klavioù an arzour"
-
 #: ui/organisedialog.cpp:63
 msgid "Artist's initial"
 msgstr "Lizherennoù-tal an arzour"
@@ -987,10 +983,9 @@ msgstr "Emzalc'h"
 msgid "Best"
 msgstr "Gwell"
 
-#: songinfo/echonestbiographies.cpp:85
-#, qt-format
-msgid "Biography from %1"
-msgstr "Buhezskrid %1"
+#: songinfo/artistbiography.cpp:78
+msgid "Biography"
+msgstr "Buhezskrid"
 
 #: playlist/playlist.cpp:1354 ../bin/src/ui_edittagdialog.h:718
 msgid "Bit rate"
@@ -1262,7 +1257,7 @@ msgid ""
 "installed Clementine properly."
 msgstr "N'eo ket bet gouest Clementine da gargañ diskwel projectM. Gwiriekait ez eo staliet mat Clementine."
 
-#: widgets/prettyimage.cpp:199
+#: widgets/prettyimage.cpp:200
 msgid "Clementine image viewer"
 msgstr "Gweler skeudennoù Clementine"
 
@@ -1690,11 +1685,11 @@ msgstr "Diverkañ ar restroù orin"
 msgid "Deleting files"
 msgstr "O tiverkañ restroù"
 
-#: ui/mainwindow.cpp:1726
+#: ui/mainwindow.cpp:1725
 msgid "Dequeue selected tracks"
 msgstr "Dilemel ar roudoù diuzet diwar al listenn c'hortoz"
 
-#: ui/mainwindow.cpp:1724
+#: ui/mainwindow.cpp:1723
 msgid "Dequeue track"
 msgstr "Dilemel ar roud-mañ diwar al listenn c'hortoz"
 
@@ -1966,7 +1961,7 @@ msgstr "Meskaj dargouezhek dialuskel"
 msgid "Edit smart playlist..."
 msgstr "Kemmañ ar roll seniñ speredek..."
 
-#: ui/mainwindow.cpp:1768
+#: ui/mainwindow.cpp:1767
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr "Cheñch an tag \"%1\"..."
@@ -2105,7 +2100,7 @@ msgid "Equivalent to --log-levels *:3"
 msgstr "Kenkoulz a --log-levels *:3"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:246
-#: library/libraryview.cpp:639 ui/mainwindow.cpp:2039 ui/mainwindow.cpp:2284
+#: library/libraryview.cpp:639 ui/mainwindow.cpp:2038 ui/mainwindow.cpp:2284
 #: ui/mainwindow.cpp:2430 internet/vk/vkservice.cpp:643
 msgid "Error"
 msgstr "Fazi"
@@ -2246,7 +2241,7 @@ msgstr "Arveuz"
 msgid "Fading duration"
 msgstr "Padelezh an arveuz"
 
-#: ui/mainwindow.cpp:2040
+#: ui/mainwindow.cpp:2039
 msgid "Failed reading CD drive"
 msgstr "Kudenn en ul lenn ar CD"
 
@@ -3029,7 +3024,7 @@ msgid "Loading tracks info"
 msgstr "O kargañ titouroù ar roud"
 
 #: library/librarymodel.cpp:164
-#: internet/podcasts/podcastdiscoverymodel.cpp:105 widgets/prettyimage.cpp:167
+#: internet/podcasts/podcastdiscoverymodel.cpp:105 widgets/prettyimage.cpp:168
 #: widgets/widgetfadehelper.cpp:96 internet/vk/vkservice.cpp:513
 #: internet/vk/vksettingspage.cpp:125 ../bin/src/ui_addpodcastdialog.h:179
 #: ../bin/src/ui_searchpreview.h:105 ../bin/src/ui_organisedialog.h:261
@@ -3292,7 +3287,7 @@ msgstr "Dilec'hiañ davet ar sonaoueg..."
 msgid "Move up"
 msgstr "A-us"
 
-#: transcoder/transcodedialog.cpp:225 ui/mainwindow.cpp:1984
+#: transcoder/transcodedialog.cpp:225 ui/mainwindow.cpp:1983
 #: internet/vk/vkservice.cpp:908
 msgid "Music"
 msgstr "Sonerezh"
@@ -3363,7 +3358,7 @@ msgstr "Morse kregiñ da lenn"
 msgid "New folder"
 msgstr "Teuliad nevez"
 
-#: ui/mainwindow.cpp:1822 ../bin/src/ui_mainwindow.h:693
+#: ui/mainwindow.cpp:1821 ../bin/src/ui_mainwindow.h:693
 msgid "New playlist"
 msgstr "Roll seniñ nevez"
 
@@ -3603,7 +3598,7 @@ msgctxt "Refers to behavior settings in Clementine settings page."
 msgid "Open in new playlist"
 msgstr "Digeriñ en ur roll-seniñ nevez"
 
-#: songinfo/echonestbiographies.cpp:102
+#: songinfo/artistbiography.cpp:82
 msgid "Open in your browser"
 msgstr "Digeriñ en ho merdeer"
 
@@ -3718,7 +3713,7 @@ msgstr "Fest"
 msgid "Password"
 msgstr "Ger-tremen"
 
-#: core/globalshortcuts.cpp:50 ui/mainwindow.cpp:1137 ui/mainwindow.cpp:1633
+#: core/globalshortcuts.cpp:50 ui/mainwindow.cpp:1136 ui/mainwindow.cpp:1632
 #: ui/qtsystemtrayicon.cpp:189 wiimotedev/wiimotesettingspage.cpp:114
 msgid "Pause"
 msgstr "Ehan"
@@ -3746,8 +3741,8 @@ msgstr "Piksel"
 msgid "Plain sidebar"
 msgstr "Bareen gostez simpl"
 
-#: core/globalshortcuts.cpp:49 ui/mainwindow.cpp:670 ui/mainwindow.cpp:1103
-#: ui/mainwindow.cpp:1122 ui/mainwindow.cpp:1637 ui/qtsystemtrayicon.cpp:177
+#: core/globalshortcuts.cpp:49 ui/mainwindow.cpp:670 ui/mainwindow.cpp:1102
+#: ui/mainwindow.cpp:1121 ui/mainwindow.cpp:1636 ui/qtsystemtrayicon.cpp:177
 #: ui/qtsystemtrayicon.cpp:203 wiimotedev/wiimotesettingspage.cpp:107
 #: ../bin/src/ui_mainwindow.h:659
 msgid "Play"
@@ -3961,12 +3956,12 @@ msgstr "Goulennadeg trobarzhell"
 msgid "Queue Manager"
 msgstr "Merour listenn c'hortoz"
 
-#: ui/mainwindow.cpp:1730
+#: ui/mainwindow.cpp:1729
 msgid "Queue selected tracks"
 msgstr "Lakaat ar roudoù da heul"
 
 #: globalsearch/globalsearchview.cpp:466 library/libraryview.cpp:389
-#: ui/mainwindow.cpp:1728
+#: ui/mainwindow.cpp:1727
 msgid "Queue track"
 msgstr "Lakaat ar roud da heul"
 
@@ -4268,7 +4263,7 @@ msgstr "Enrollan ar golo war ar bladenn..."
 msgid "Save current grouping"
 msgstr "Enrollañ ar strollad bremanel"
 
-#: widgets/prettyimage.cpp:184 widgets/prettyimage.cpp:229
+#: widgets/prettyimage.cpp:185 widgets/prettyimage.cpp:230
 msgid "Save image"
 msgstr "Enrollañ ar skeudenn"
 
@@ -4487,7 +4482,7 @@ msgstr "Munudoù an dafariad"
 msgid "Service offline"
 msgstr "Servij ezlinenn"
 
-#: ui/mainwindow.cpp:1767
+#: ui/mainwindow.cpp:1766
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr "Termeniñ %1 d'an talvoud %2..."
@@ -4579,7 +4574,7 @@ msgstr "Diskouez ar golo er sonaoueg"
 msgid "Show dividers"
 msgstr "Diskouez an dispartierien"
 
-#: ui/albumcoverchoicecontroller.cpp:72 widgets/prettyimage.cpp:182
+#: ui/albumcoverchoicecontroller.cpp:72 widgets/prettyimage.cpp:183
 msgid "Show fullsize..."
 msgstr "Diskouez er ment gwirion..."
 
@@ -4672,10 +4667,6 @@ msgstr "Digennaskañ"
 msgid "Signing in..."
 msgstr "O kennaskañ..."
 
-#: songinfo/echonestsimilarartists.cpp:58
-msgid "Similar artists"
-msgstr "Arzourien dammheñvel"
-
 #: ../bin/src/ui_albumcoverexport.h:211
 msgid "Size"
 msgstr "Ment"
@@ -4700,11 +4691,11 @@ msgstr "Konter tonioù lammet"
 msgid "Skip forwards in playlist"
 msgstr "Mont dirak er roll seniñ"
 
-#: ui/mainwindow.cpp:1741
+#: ui/mainwindow.cpp:1740
 msgid "Skip selected tracks"
 msgstr "Tremen ar roudoù diuzet"
 
-#: ui/mainwindow.cpp:1739
+#: ui/mainwindow.cpp:1738
 msgid "Skip track"
 msgstr "Tremen ar roud"
 
@@ -5164,7 +5155,7 @@ msgstr "Gweredekaat/Diweredekaat an OSD brav"
 msgid "Toggle fullscreen"
 msgstr "Tremen e skramm leun"
 
-#: ui/mainwindow.cpp:1732
+#: ui/mainwindow.cpp:1731
 msgid "Toggle queue status"
 msgstr "Cheñch stad al listenn c'hortoz"
 
@@ -5295,11 +5286,11 @@ msgstr "Kudenn dianav"
 msgid "Unset cover"
 msgstr "Ar golo n'eo ket bet lakaet"
 
-#: ui/mainwindow.cpp:1737
+#: ui/mainwindow.cpp:1736
 msgid "Unskip selected tracks"
 msgstr "Nullañ tremen ar roudoù diuzet"
 
-#: ui/mainwindow.cpp:1735
+#: ui/mainwindow.cpp:1734
 msgid "Unskip track"
 msgstr "Nullañ tremen ar roud"
 
@@ -5308,7 +5299,7 @@ msgstr "Nullañ tremen ar roud"
 msgid "Unsubscribe"
 msgstr "Digoumanantiñ"
 
-#: songinfo/songkickconcerts.cpp:174
+#: songinfo/songkickconcerts.cpp:158
 msgid "Upcoming Concerts"
 msgstr "Sonadegoù o-tont"
 

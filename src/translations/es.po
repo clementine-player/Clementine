@@ -22,6 +22,7 @@
 # felipeacsi <felipeacsi@gmail.com>, 2014
 # felipeacsi <felipeacsi@gmail.com>, 2012
 # Fernando Torres <free.thought.ae@gmail.com>, 2012
+# Guillem Arias Fauste <oficialredstonehelper@gmail.com>, 2016
 # José Antonio Moray <moray33@gmx.com>, 2013-2014
 # Jose G. Jimenez S. <josegjimenez@gmail.com>, 2015
 # Roony Alvarez <legion1978@gmail.com>, 2012
@@ -36,8 +37,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2016-06-02 14:50+0000\n"
-"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
+"PO-Revision-Date: 2016-06-30 06:41+0000\n"
+"Last-Translator: Adolfo Jayme-Barrientos\n"
 "Language-Team: Spanish (http://www.transifex.com/davidsansome/clementine/language/es/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -505,7 +506,7 @@ msgstr "Añadir otra transmisión…"
 msgid "Add directory..."
 msgstr "Añadir una carpeta…"
 
-#: ui/mainwindow.cpp:1983
+#: ui/mainwindow.cpp:1982
 msgid "Add file"
 msgstr "Añadir archivo"
 
@@ -525,7 +526,7 @@ msgstr "Añadir un archivo…"
 msgid "Add files to transcode"
 msgstr "Añadir archivos para convertir"
 
-#: transcoder/transcodedialog.cpp:306 ui/mainwindow.cpp:2010
+#: transcoder/transcodedialog.cpp:306 ui/mainwindow.cpp:2009
 #: ripper/ripcddialog.cpp:185
 msgid "Add folder"
 msgstr "Añadir una carpeta"
@@ -642,7 +643,7 @@ msgstr "Añadir a listas de Spotify"
 msgid "Add to Spotify starred"
 msgstr "Añadir a las destacadas de Spotify"
 
-#: ui/mainwindow.cpp:1805
+#: ui/mainwindow.cpp:1804
 msgid "Add to another playlist"
 msgstr "Añadir a otra lista de reproducción"
 
@@ -886,10 +887,6 @@ msgstr "Artista"
 msgid "Artist info"
 msgstr "Inf. artista"
 
-#: songinfo/echonesttags.cpp:62
-msgid "Artist tags"
-msgstr "Etiquetas del artista"
-
 #: ui/organisedialog.cpp:63
 msgid "Artist's initial"
 msgstr "Iniciales del artista"
@@ -1010,10 +1007,9 @@ msgstr "Comportamiento"
 msgid "Best"
 msgstr "Mejor"
 
-#: songinfo/echonestbiographies.cpp:85
-#, qt-format
-msgid "Biography from %1"
-msgstr "Biografía de %1"
+#: songinfo/artistbiography.cpp:78
+msgid "Biography"
+msgstr "Biografía"
 
 #: playlist/playlist.cpp:1354 ../bin/src/ui_edittagdialog.h:718
 msgid "Bit rate"
@@ -1285,7 +1281,7 @@ msgid ""
 "installed Clementine properly."
 msgstr "Clementine no pudo cargar ninguna visualización de projectM. Asegúrese de que tiene instalado Clementine adecuadamente."
 
-#: widgets/prettyimage.cpp:199
+#: widgets/prettyimage.cpp:200
 msgid "Clementine image viewer"
 msgstr "Visor de imágenes de Clementine"
 
@@ -1713,11 +1709,11 @@ msgstr "Eliminar los archivos originales"
 msgid "Deleting files"
 msgstr "Eliminando los archivos"
 
-#: ui/mainwindow.cpp:1726
+#: ui/mainwindow.cpp:1725
 msgid "Dequeue selected tracks"
 msgstr "Quitar las pistas seleccionadas de la cola"
 
-#: ui/mainwindow.cpp:1724
+#: ui/mainwindow.cpp:1723
 msgid "Dequeue track"
 msgstr "Quitar la pista de la cola"
 
@@ -1989,7 +1985,7 @@ msgstr "Mezcla dinámica aleatoria"
 msgid "Edit smart playlist..."
 msgstr "Editar lista de reproducción inteligente…"
 
-#: ui/mainwindow.cpp:1768
+#: ui/mainwindow.cpp:1767
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr "Editar la etiqueta «%1»…"
@@ -2128,7 +2124,7 @@ msgid "Equivalent to --log-levels *:3"
 msgstr "Equivalente a --log-levels*:3"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:246
-#: library/libraryview.cpp:639 ui/mainwindow.cpp:2039 ui/mainwindow.cpp:2284
+#: library/libraryview.cpp:639 ui/mainwindow.cpp:2038 ui/mainwindow.cpp:2284
 #: ui/mainwindow.cpp:2430 internet/vk/vkservice.cpp:643
 msgid "Error"
 msgstr "Error"
@@ -2269,7 +2265,7 @@ msgstr "Fundido"
 msgid "Fading duration"
 msgstr "Duración del fundido"
 
-#: ui/mainwindow.cpp:2040
+#: ui/mainwindow.cpp:2039
 msgid "Failed reading CD drive"
 msgstr "Falló la lectura de la unidad de CD"
 
@@ -3052,7 +3048,7 @@ msgid "Loading tracks info"
 msgstr "Cargando información de pistas"
 
 #: library/librarymodel.cpp:164
-#: internet/podcasts/podcastdiscoverymodel.cpp:105 widgets/prettyimage.cpp:167
+#: internet/podcasts/podcastdiscoverymodel.cpp:105 widgets/prettyimage.cpp:168
 #: widgets/widgetfadehelper.cpp:96 internet/vk/vkservice.cpp:513
 #: internet/vk/vksettingspage.cpp:125 ../bin/src/ui_addpodcastdialog.h:179
 #: ../bin/src/ui_searchpreview.h:105 ../bin/src/ui_organisedialog.h:261
@@ -3315,7 +3311,7 @@ msgstr "Mover a la colección…"
 msgid "Move up"
 msgstr "Subir"
 
-#: transcoder/transcodedialog.cpp:225 ui/mainwindow.cpp:1984
+#: transcoder/transcodedialog.cpp:225 ui/mainwindow.cpp:1983
 #: internet/vk/vkservice.cpp:908
 msgid "Music"
 msgstr "Música"
@@ -3386,7 +3382,7 @@ msgstr "Nunca comenzar la reproducción"
 msgid "New folder"
 msgstr "Carpeta nueva"
 
-#: ui/mainwindow.cpp:1822 ../bin/src/ui_mainwindow.h:693
+#: ui/mainwindow.cpp:1821 ../bin/src/ui_mainwindow.h:693
 msgid "New playlist"
 msgstr "Lista de reproducción nueva"
 
@@ -3626,7 +3622,7 @@ msgctxt "Refers to behavior settings in Clementine settings page."
 msgid "Open in new playlist"
 msgstr "Abrir en una lista nueva"
 
-#: songinfo/echonestbiographies.cpp:102
+#: songinfo/artistbiography.cpp:82
 msgid "Open in your browser"
 msgstr "Abrir en el navegador"
 
@@ -3726,7 +3722,7 @@ msgstr "Analizando el catálogo de Jamendo"
 
 #: devices/udisks2lister.cpp:79
 msgid "Partition label"
-msgstr ""
+msgstr "Etiqueta de partición"
 
 #: ui/equalizer.cpp:139
 msgid "Party"
@@ -3741,7 +3737,7 @@ msgstr "Fiesta"
 msgid "Password"
 msgstr "Contraseña"
 
-#: core/globalshortcuts.cpp:50 ui/mainwindow.cpp:1137 ui/mainwindow.cpp:1633
+#: core/globalshortcuts.cpp:50 ui/mainwindow.cpp:1136 ui/mainwindow.cpp:1632
 #: ui/qtsystemtrayicon.cpp:189 wiimotedev/wiimotesettingspage.cpp:114
 msgid "Pause"
 msgstr "Pausar"
@@ -3769,8 +3765,8 @@ msgstr "Píxel"
 msgid "Plain sidebar"
 msgstr "Barra lateral simple"
 
-#: core/globalshortcuts.cpp:49 ui/mainwindow.cpp:670 ui/mainwindow.cpp:1103
-#: ui/mainwindow.cpp:1122 ui/mainwindow.cpp:1637 ui/qtsystemtrayicon.cpp:177
+#: core/globalshortcuts.cpp:49 ui/mainwindow.cpp:670 ui/mainwindow.cpp:1102
+#: ui/mainwindow.cpp:1121 ui/mainwindow.cpp:1636 ui/qtsystemtrayicon.cpp:177
 #: ui/qtsystemtrayicon.cpp:203 wiimotedev/wiimotesettingspage.cpp:107
 #: ../bin/src/ui_mainwindow.h:659
 msgid "Play"
@@ -3984,12 +3980,12 @@ msgstr "Consultando dispositivo…"
 msgid "Queue Manager"
 msgstr "Gestor de la cola"
 
-#: ui/mainwindow.cpp:1730
+#: ui/mainwindow.cpp:1729
 msgid "Queue selected tracks"
 msgstr "Añadir las pistas seleccionadas a la cola"
 
 #: globalsearch/globalsearchview.cpp:466 library/libraryview.cpp:389
-#: ui/mainwindow.cpp:1728
+#: ui/mainwindow.cpp:1727
 msgid "Queue track"
 msgstr "Añadir a la cola de reproducción"
 
@@ -4291,7 +4287,7 @@ msgstr "Guardar la carátula en el disco…"
 msgid "Save current grouping"
 msgstr "Guardar agrupación actual"
 
-#: widgets/prettyimage.cpp:184 widgets/prettyimage.cpp:229
+#: widgets/prettyimage.cpp:185 widgets/prettyimage.cpp:230
 msgid "Save image"
 msgstr "Guardar imagen"
 
@@ -4355,7 +4351,7 @@ msgstr "Enviar las pistas que reproduzco"
 
 #: ../bin/src/ui_behavioursettingspage.h:313
 msgid "Scroll over icon to change track"
-msgstr ""
+msgstr "Haz scoll encima del icono para cambiar de pista"
 
 #: ../bin/src/ui_seafilesettingspage.h:164
 msgid "Seafile"
@@ -4510,7 +4506,7 @@ msgstr "Detalles del servidor"
 msgid "Service offline"
 msgstr "Servicio fuera de línea"
 
-#: ui/mainwindow.cpp:1767
+#: ui/mainwindow.cpp:1766
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr "Establecer %1 a «%2»…"
@@ -4602,7 +4598,7 @@ msgstr "Mostrar las carátulas en la colección"
 msgid "Show dividers"
 msgstr "Mostrar divisores"
 
-#: ui/albumcoverchoicecontroller.cpp:72 widgets/prettyimage.cpp:182
+#: ui/albumcoverchoicecontroller.cpp:72 widgets/prettyimage.cpp:183
 msgid "Show fullsize..."
 msgstr "Mostrar a tamaño completo…"
 
@@ -4695,10 +4691,6 @@ msgstr "Cerrar sesión"
 msgid "Signing in..."
 msgstr "Iniciando sesión…"
 
-#: songinfo/echonestsimilarartists.cpp:58
-msgid "Similar artists"
-msgstr "Artistas similares"
-
 #: ../bin/src/ui_albumcoverexport.h:211
 msgid "Size"
 msgstr "Tamaño"
@@ -4723,11 +4715,11 @@ msgstr "N.º de omisiones"
 msgid "Skip forwards in playlist"
 msgstr "Saltar hacia adelante en la lista de reproducción"
 
-#: ui/mainwindow.cpp:1741
+#: ui/mainwindow.cpp:1740
 msgid "Skip selected tracks"
 msgstr "Omitir pistas seleccionadas"
 
-#: ui/mainwindow.cpp:1739
+#: ui/mainwindow.cpp:1738
 msgid "Skip track"
 msgstr "Omitir pista"
 
@@ -5187,7 +5179,7 @@ msgstr "Conmutar OSD estético"
 msgid "Toggle fullscreen"
 msgstr "Pantalla completa"
 
-#: ui/mainwindow.cpp:1732
+#: ui/mainwindow.cpp:1731
 msgid "Toggle queue status"
 msgstr "Cambiar estado de la cola"
 
@@ -5280,7 +5272,7 @@ msgstr "URL"
 
 #: devices/udisks2lister.cpp:80
 msgid "UUID"
-msgstr ""
+msgstr "UUID"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:227
 msgid "Ultra wide band (UWB)"
@@ -5318,11 +5310,11 @@ msgstr "Error desconocido"
 msgid "Unset cover"
 msgstr "Eliminar la carátula"
 
-#: ui/mainwindow.cpp:1737
+#: ui/mainwindow.cpp:1736
 msgid "Unskip selected tracks"
 msgstr "No omitir pistas seleccionadas"
 
-#: ui/mainwindow.cpp:1735
+#: ui/mainwindow.cpp:1734
 msgid "Unskip track"
 msgstr "No omitir pista"
 
@@ -5331,7 +5323,7 @@ msgstr "No omitir pista"
 msgid "Unsubscribe"
 msgstr "Cancelar suscripción"
 
-#: songinfo/songkickconcerts.cpp:174
+#: songinfo/songkickconcerts.cpp:158
 msgid "Upcoming Concerts"
 msgstr "Próximos conciertos"
 

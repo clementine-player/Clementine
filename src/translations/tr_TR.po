@@ -38,7 +38,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2016-06-02 14:50+0000\n"
+"PO-Revision-Date: 2016-06-28 13:51+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Turkish (Turkey) (http://www.transifex.com/davidsansome/clementine/language/tr_TR/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -507,7 +507,7 @@ msgstr "Başka bir yayın ekle..."
 msgid "Add directory..."
 msgstr "Dizin ekle..."
 
-#: ui/mainwindow.cpp:1983
+#: ui/mainwindow.cpp:1982
 msgid "Add file"
 msgstr "Dosya ekle"
 
@@ -527,7 +527,7 @@ msgstr "Dosya ekle..."
 msgid "Add files to transcode"
 msgstr "Dönüştürülecek dosyaları ekle"
 
-#: transcoder/transcodedialog.cpp:306 ui/mainwindow.cpp:2010
+#: transcoder/transcodedialog.cpp:306 ui/mainwindow.cpp:2009
 #: ripper/ripcddialog.cpp:185
 msgid "Add folder"
 msgstr "Klasör ekle"
@@ -644,7 +644,7 @@ msgstr "Spotify çalma listelerine ekle"
 msgid "Add to Spotify starred"
 msgstr "Spotify yıldızlılarına ekle"
 
-#: ui/mainwindow.cpp:1805
+#: ui/mainwindow.cpp:1804
 msgid "Add to another playlist"
 msgstr "Başka bir çalma listesine ekle"
 
@@ -888,10 +888,6 @@ msgstr "Sanatçı"
 msgid "Artist info"
 msgstr "Sanatçı bilgisi"
 
-#: songinfo/echonesttags.cpp:62
-msgid "Artist tags"
-msgstr "Sanatçı etiketleri"
-
 #: ui/organisedialog.cpp:63
 msgid "Artist's initial"
 msgstr "Sanatçının kısaltması"
@@ -1012,10 +1008,9 @@ msgstr "Davranış"
 msgid "Best"
 msgstr "En iyi"
 
-#: songinfo/echonestbiographies.cpp:85
-#, qt-format
-msgid "Biography from %1"
-msgstr "%1 sitesinden biyografi"
+#: songinfo/artistbiography.cpp:78
+msgid "Biography"
+msgstr ""
 
 #: playlist/playlist.cpp:1354 ../bin/src/ui_edittagdialog.h:718
 msgid "Bit rate"
@@ -1287,7 +1282,7 @@ msgid ""
 "installed Clementine properly."
 msgstr "Clementine projectM görsellerini yükleyemedi. Clementine programını düzgün yüklediğinizi kontrol edin."
 
-#: widgets/prettyimage.cpp:199
+#: widgets/prettyimage.cpp:200
 msgid "Clementine image viewer"
 msgstr "Clementine resim görüntüleyici"
 
@@ -1715,11 +1710,11 @@ msgstr "Orijinal dosyaları sil"
 msgid "Deleting files"
 msgstr "Dosyalar siliniyor"
 
-#: ui/mainwindow.cpp:1726
+#: ui/mainwindow.cpp:1725
 msgid "Dequeue selected tracks"
 msgstr "Seçili parçaları kuyruktan çıkar"
 
-#: ui/mainwindow.cpp:1724
+#: ui/mainwindow.cpp:1723
 msgid "Dequeue track"
 msgstr "Parçayı kuyruktan çıkar"
 
@@ -1991,7 +1986,7 @@ msgstr "Dinamik rastgele karışım"
 msgid "Edit smart playlist..."
 msgstr "Akıllı çalma listesini düzenleyin"
 
-#: ui/mainwindow.cpp:1768
+#: ui/mainwindow.cpp:1767
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr "\"%1\" etiketini düzenle..."
@@ -2130,7 +2125,7 @@ msgid "Equivalent to --log-levels *:3"
 msgstr "--log-levels *:3'e eşdeğer"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:246
-#: library/libraryview.cpp:639 ui/mainwindow.cpp:2039 ui/mainwindow.cpp:2284
+#: library/libraryview.cpp:639 ui/mainwindow.cpp:2038 ui/mainwindow.cpp:2284
 #: ui/mainwindow.cpp:2430 internet/vk/vkservice.cpp:643
 msgid "Error"
 msgstr "Hata"
@@ -2271,7 +2266,7 @@ msgstr "Yumuşak geçiş"
 msgid "Fading duration"
 msgstr "Yumuşak geçiş süresi"
 
-#: ui/mainwindow.cpp:2040
+#: ui/mainwindow.cpp:2039
 msgid "Failed reading CD drive"
 msgstr "CD sürücünü okuma başarısız"
 
@@ -3054,7 +3049,7 @@ msgid "Loading tracks info"
 msgstr "Parça bilgileri yükleniyor"
 
 #: library/librarymodel.cpp:164
-#: internet/podcasts/podcastdiscoverymodel.cpp:105 widgets/prettyimage.cpp:167
+#: internet/podcasts/podcastdiscoverymodel.cpp:105 widgets/prettyimage.cpp:168
 #: widgets/widgetfadehelper.cpp:96 internet/vk/vkservice.cpp:513
 #: internet/vk/vksettingspage.cpp:125 ../bin/src/ui_addpodcastdialog.h:179
 #: ../bin/src/ui_searchpreview.h:105 ../bin/src/ui_organisedialog.h:261
@@ -3317,7 +3312,7 @@ msgstr "Kütüphaneye taşı..."
 msgid "Move up"
 msgstr "Yukarı taşı"
 
-#: transcoder/transcodedialog.cpp:225 ui/mainwindow.cpp:1984
+#: transcoder/transcodedialog.cpp:225 ui/mainwindow.cpp:1983
 #: internet/vk/vkservice.cpp:908
 msgid "Music"
 msgstr "Müzik"
@@ -3388,7 +3383,7 @@ msgstr "Asla çalarak başlama"
 msgid "New folder"
 msgstr "Yeni klasör"
 
-#: ui/mainwindow.cpp:1822 ../bin/src/ui_mainwindow.h:693
+#: ui/mainwindow.cpp:1821 ../bin/src/ui_mainwindow.h:693
 msgid "New playlist"
 msgstr "Yeni çalma listesi"
 
@@ -3628,9 +3623,9 @@ msgctxt "Refers to behavior settings in Clementine settings page."
 msgid "Open in new playlist"
 msgstr "Yeni çalma listesinde aç"
 
-#: songinfo/echonestbiographies.cpp:102
+#: songinfo/artistbiography.cpp:82
 msgid "Open in your browser"
-msgstr "Tarayıcınızda açın"
+msgstr ""
 
 #: ../bin/src/ui_globalshortcutssettingspage.h:168
 #: ../bin/src/ui_globalshortcutssettingspage.h:170
@@ -3743,7 +3738,7 @@ msgstr "Parti"
 msgid "Password"
 msgstr "Parola"
 
-#: core/globalshortcuts.cpp:50 ui/mainwindow.cpp:1137 ui/mainwindow.cpp:1633
+#: core/globalshortcuts.cpp:50 ui/mainwindow.cpp:1136 ui/mainwindow.cpp:1632
 #: ui/qtsystemtrayicon.cpp:189 wiimotedev/wiimotesettingspage.cpp:114
 msgid "Pause"
 msgstr "Duraklat"
@@ -3771,8 +3766,8 @@ msgstr "Piksel"
 msgid "Plain sidebar"
 msgstr "Düz kenar çubuğu"
 
-#: core/globalshortcuts.cpp:49 ui/mainwindow.cpp:670 ui/mainwindow.cpp:1103
-#: ui/mainwindow.cpp:1122 ui/mainwindow.cpp:1637 ui/qtsystemtrayicon.cpp:177
+#: core/globalshortcuts.cpp:49 ui/mainwindow.cpp:670 ui/mainwindow.cpp:1102
+#: ui/mainwindow.cpp:1121 ui/mainwindow.cpp:1636 ui/qtsystemtrayicon.cpp:177
 #: ui/qtsystemtrayicon.cpp:203 wiimotedev/wiimotesettingspage.cpp:107
 #: ../bin/src/ui_mainwindow.h:659
 msgid "Play"
@@ -3986,12 +3981,12 @@ msgstr "Aygıt sorgulanıyor..."
 msgid "Queue Manager"
 msgstr "Kuyruk Yöneticisi"
 
-#: ui/mainwindow.cpp:1730
+#: ui/mainwindow.cpp:1729
 msgid "Queue selected tracks"
 msgstr "Seçili parçaları kuyruğa ekle"
 
 #: globalsearch/globalsearchview.cpp:466 library/libraryview.cpp:389
-#: ui/mainwindow.cpp:1728
+#: ui/mainwindow.cpp:1727
 msgid "Queue track"
 msgstr "Parçayı kuyruğa ekle"
 
@@ -4293,7 +4288,7 @@ msgstr "Kapağı diske kaydet..."
 msgid "Save current grouping"
 msgstr "Geçerli gruplamayı kaydet"
 
-#: widgets/prettyimage.cpp:184 widgets/prettyimage.cpp:229
+#: widgets/prettyimage.cpp:185 widgets/prettyimage.cpp:230
 msgid "Save image"
 msgstr "Görüntüyü kaydet"
 
@@ -4512,7 +4507,7 @@ msgstr "Sunucu ayrıntıları"
 msgid "Service offline"
 msgstr "Hizmet çevrim dışı"
 
-#: ui/mainwindow.cpp:1767
+#: ui/mainwindow.cpp:1766
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr "%1'i \"%2\" olarak ayarla"
@@ -4604,7 +4599,7 @@ msgstr "Kapak resmini kütüphanede göster"
 msgid "Show dividers"
 msgstr "Ayırıcıları göster"
 
-#: ui/albumcoverchoicecontroller.cpp:72 widgets/prettyimage.cpp:182
+#: ui/albumcoverchoicecontroller.cpp:72 widgets/prettyimage.cpp:183
 msgid "Show fullsize..."
 msgstr "Tam boyutta göster"
 
@@ -4697,10 +4692,6 @@ msgstr "Çıkış yap"
 msgid "Signing in..."
 msgstr "Oturum açılıyor..."
 
-#: songinfo/echonestsimilarartists.cpp:58
-msgid "Similar artists"
-msgstr "Benzer sanatçılar"
-
 #: ../bin/src/ui_albumcoverexport.h:211
 msgid "Size"
 msgstr "Boyut"
@@ -4725,11 +4716,11 @@ msgstr "Atlama sayısı"
 msgid "Skip forwards in playlist"
 msgstr "Parça listesinde ileri git"
 
-#: ui/mainwindow.cpp:1741
+#: ui/mainwindow.cpp:1740
 msgid "Skip selected tracks"
 msgstr "Seçili parçaları atla"
 
-#: ui/mainwindow.cpp:1739
+#: ui/mainwindow.cpp:1738
 msgid "Skip track"
 msgstr "Parçayı atla"
 
@@ -5189,7 +5180,7 @@ msgstr "Şirin OSD'yi Aç/Kapa"
 msgid "Toggle fullscreen"
 msgstr "Tam ekran göster/gizle"
 
-#: ui/mainwindow.cpp:1732
+#: ui/mainwindow.cpp:1731
 msgid "Toggle queue status"
 msgstr "Kuyruk durumunu göster/gizle"
 
@@ -5320,11 +5311,11 @@ msgstr "Bilinmeyen hata"
 msgid "Unset cover"
 msgstr "Albüm kapağını çıkar"
 
-#: ui/mainwindow.cpp:1737
+#: ui/mainwindow.cpp:1736
 msgid "Unskip selected tracks"
 msgstr "Seçili parçaları atlama"
 
-#: ui/mainwindow.cpp:1735
+#: ui/mainwindow.cpp:1734
 msgid "Unskip track"
 msgstr "Parçayı atlama"
 
@@ -5333,7 +5324,7 @@ msgstr "Parçayı atlama"
 msgid "Unsubscribe"
 msgstr "Abonelikten çık"
 
-#: songinfo/songkickconcerts.cpp:174
+#: songinfo/songkickconcerts.cpp:158
 msgid "Upcoming Concerts"
 msgstr "Yaklaşan Konserler"
 

@@ -23,8 +23,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2016-06-02 17:31+0000\n"
-"Last-Translator: Dimitrios Glentadakis <dglent@free.fr>\n"
+"PO-Revision-Date: 2016-06-28 13:51+0000\n"
+"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Greek (http://www.transifex.com/davidsansome/clementine/language/el/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -492,7 +492,7 @@ msgstr "Προσθήκη άλλης ροής..."
 msgid "Add directory..."
 msgstr "Προσθήκη καταλόγου..."
 
-#: ui/mainwindow.cpp:1983
+#: ui/mainwindow.cpp:1982
 msgid "Add file"
 msgstr "Προσθήκη αρχείου"
 
@@ -512,7 +512,7 @@ msgstr "Προσθήκη αρχείου..."
 msgid "Add files to transcode"
 msgstr "Προσθήκη αρχείων για επανακωδικοποίηση"
 
-#: transcoder/transcodedialog.cpp:306 ui/mainwindow.cpp:2010
+#: transcoder/transcodedialog.cpp:306 ui/mainwindow.cpp:2009
 #: ripper/ripcddialog.cpp:185
 msgid "Add folder"
 msgstr "Προσθήκη φακέλου"
@@ -629,7 +629,7 @@ msgstr "Προσθήκη στην λίστα αναπαραγωγής Spotify"
 msgid "Add to Spotify starred"
 msgstr "Προσθήκη για Spotify πρωταγωνίστησε"
 
-#: ui/mainwindow.cpp:1805
+#: ui/mainwindow.cpp:1804
 msgid "Add to another playlist"
 msgstr "Προσθήκη σε άλλη λίστα"
 
@@ -873,10 +873,6 @@ msgstr "Καλλιτέχνης"
 msgid "Artist info"
 msgstr "Πληρ. καλλιτέχνη"
 
-#: songinfo/echonesttags.cpp:62
-msgid "Artist tags"
-msgstr "Ετικέτες Καλλιτέχνη"
-
 #: ui/organisedialog.cpp:63
 msgid "Artist's initial"
 msgstr "Αρχικά του καλλιτέχνη"
@@ -997,10 +993,9 @@ msgstr "Συμπεριφορά"
 msgid "Best"
 msgstr "Βέλτιστος"
 
-#: songinfo/echonestbiographies.cpp:85
-#, qt-format
-msgid "Biography from %1"
-msgstr "Βιογραφία από %1"
+#: songinfo/artistbiography.cpp:78
+msgid "Biography"
+msgstr ""
 
 #: playlist/playlist.cpp:1354 ../bin/src/ui_edittagdialog.h:718
 msgid "Bit rate"
@@ -1272,7 +1267,7 @@ msgid ""
 "installed Clementine properly."
 msgstr "Ο Clementine δεν μπορεί να φορτώσει κάποιο projectM οπτικό εφέ. Βεβαιωθείτε πως έχετε εγκαταστήσει τον Clementine σωστά."
 
-#: widgets/prettyimage.cpp:199
+#: widgets/prettyimage.cpp:200
 msgid "Clementine image viewer"
 msgstr "Προβολή εικόνων του Clementine"
 
@@ -1700,11 +1695,11 @@ msgstr "Διαγραφή των αρχικών αρχείων"
 msgid "Deleting files"
 msgstr "Γίνεται διαγραφή αρχείων"
 
-#: ui/mainwindow.cpp:1726
+#: ui/mainwindow.cpp:1725
 msgid "Dequeue selected tracks"
 msgstr "Αφαίρεση των επιλεγμένων κομματιών από την λίστα αναμονής"
 
-#: ui/mainwindow.cpp:1724
+#: ui/mainwindow.cpp:1723
 msgid "Dequeue track"
 msgstr "Αφαίρεση του κομματιού από την λίστα αναμονής"
 
@@ -1976,7 +1971,7 @@ msgstr "Δυναμική τυχαία ανάμιξη"
 msgid "Edit smart playlist..."
 msgstr "Τροποποίηση έξυπνης λίστας αναπαραγωγής"
 
-#: ui/mainwindow.cpp:1768
+#: ui/mainwindow.cpp:1767
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr "Τροποποίηση ετικέτας \"%1\"..."
@@ -2115,7 +2110,7 @@ msgid "Equivalent to --log-levels *:3"
 msgstr "Ισοδύναμο με --log-levels *:3"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:246
-#: library/libraryview.cpp:639 ui/mainwindow.cpp:2039 ui/mainwindow.cpp:2284
+#: library/libraryview.cpp:639 ui/mainwindow.cpp:2038 ui/mainwindow.cpp:2284
 #: ui/mainwindow.cpp:2430 internet/vk/vkservice.cpp:643
 msgid "Error"
 msgstr "Σφάλμα"
@@ -2256,7 +2251,7 @@ msgstr "Εξομάλυνση"
 msgid "Fading duration"
 msgstr "Διάρκεια εξομάλυνσης"
 
-#: ui/mainwindow.cpp:2040
+#: ui/mainwindow.cpp:2039
 msgid "Failed reading CD drive"
 msgstr "Αποτυχία ανάγνωσης της μονάδας CD"
 
@@ -3039,7 +3034,7 @@ msgid "Loading tracks info"
 msgstr "Φόρτωση πληροφοριών κομματιού"
 
 #: library/librarymodel.cpp:164
-#: internet/podcasts/podcastdiscoverymodel.cpp:105 widgets/prettyimage.cpp:167
+#: internet/podcasts/podcastdiscoverymodel.cpp:105 widgets/prettyimage.cpp:168
 #: widgets/widgetfadehelper.cpp:96 internet/vk/vkservice.cpp:513
 #: internet/vk/vksettingspage.cpp:125 ../bin/src/ui_addpodcastdialog.h:179
 #: ../bin/src/ui_searchpreview.h:105 ../bin/src/ui_organisedialog.h:261
@@ -3302,7 +3297,7 @@ msgstr "Μετακίνηση στην βιβλιοθήκη..."
 msgid "Move up"
 msgstr "Μετακίνηση πάνω"
 
-#: transcoder/transcodedialog.cpp:225 ui/mainwindow.cpp:1984
+#: transcoder/transcodedialog.cpp:225 ui/mainwindow.cpp:1983
 #: internet/vk/vkservice.cpp:908
 msgid "Music"
 msgstr "Μουσική"
@@ -3373,7 +3368,7 @@ msgstr "Ποτέ μην ξεκινά η αναπαραγωγή"
 msgid "New folder"
 msgstr "Νέος φάκελος"
 
-#: ui/mainwindow.cpp:1822 ../bin/src/ui_mainwindow.h:693
+#: ui/mainwindow.cpp:1821 ../bin/src/ui_mainwindow.h:693
 msgid "New playlist"
 msgstr "Νέα λίστα"
 
@@ -3613,9 +3608,9 @@ msgctxt "Refers to behavior settings in Clementine settings page."
 msgid "Open in new playlist"
 msgstr "Άνοιγμα σε νέα λίστα"
 
-#: songinfo/echonestbiographies.cpp:102
+#: songinfo/artistbiography.cpp:82
 msgid "Open in your browser"
-msgstr "Άνοιγμα στον περιηγητή"
+msgstr ""
 
 #: ../bin/src/ui_globalshortcutssettingspage.h:168
 #: ../bin/src/ui_globalshortcutssettingspage.h:170
@@ -3728,7 +3723,7 @@ msgstr "Πάρτι"
 msgid "Password"
 msgstr "Συνθηματικό"
 
-#: core/globalshortcuts.cpp:50 ui/mainwindow.cpp:1137 ui/mainwindow.cpp:1633
+#: core/globalshortcuts.cpp:50 ui/mainwindow.cpp:1136 ui/mainwindow.cpp:1632
 #: ui/qtsystemtrayicon.cpp:189 wiimotedev/wiimotesettingspage.cpp:114
 msgid "Pause"
 msgstr "Παύση"
@@ -3756,8 +3751,8 @@ msgstr "Εικονοστοιχεία"
 msgid "Plain sidebar"
 msgstr "Απλή πλευρική μπάρα"
 
-#: core/globalshortcuts.cpp:49 ui/mainwindow.cpp:670 ui/mainwindow.cpp:1103
-#: ui/mainwindow.cpp:1122 ui/mainwindow.cpp:1637 ui/qtsystemtrayicon.cpp:177
+#: core/globalshortcuts.cpp:49 ui/mainwindow.cpp:670 ui/mainwindow.cpp:1102
+#: ui/mainwindow.cpp:1121 ui/mainwindow.cpp:1636 ui/qtsystemtrayicon.cpp:177
 #: ui/qtsystemtrayicon.cpp:203 wiimotedev/wiimotesettingspage.cpp:107
 #: ../bin/src/ui_mainwindow.h:659
 msgid "Play"
@@ -3971,12 +3966,12 @@ msgstr "Ερώτηση συσκευής..."
 msgid "Queue Manager"
 msgstr "Διαχειριστής λίστας αναμονής"
 
-#: ui/mainwindow.cpp:1730
+#: ui/mainwindow.cpp:1729
 msgid "Queue selected tracks"
 msgstr "Τοποθέτηση στη λίστας αναμονής τα επιλεγμένα κομμάτια"
 
 #: globalsearch/globalsearchview.cpp:466 library/libraryview.cpp:389
-#: ui/mainwindow.cpp:1728
+#: ui/mainwindow.cpp:1727
 msgid "Queue track"
 msgstr "Τοποθέτηση στη λίστας αναμονής του κομματιού"
 
@@ -4278,7 +4273,7 @@ msgstr "Αποθ. εξώφυλλου στον δίσκο..."
 msgid "Save current grouping"
 msgstr "Αποθήκευση της τρέχουσας ομαδοποίησης"
 
-#: widgets/prettyimage.cpp:184 widgets/prettyimage.cpp:229
+#: widgets/prettyimage.cpp:185 widgets/prettyimage.cpp:230
 msgid "Save image"
 msgstr "Αποθήκευση εικόνας"
 
@@ -4497,7 +4492,7 @@ msgstr "Λεπτομέρειες διακομιστή"
 msgid "Service offline"
 msgstr "Υπηρεσία εκτός σύνδεσης"
 
-#: ui/mainwindow.cpp:1767
+#: ui/mainwindow.cpp:1766
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr "Δώσε %1 στο \"%2\"..."
@@ -4589,7 +4584,7 @@ msgstr "Εμφάνιση του εξώφυλλου στην βιβλιοθήκη
 msgid "Show dividers"
 msgstr "Εμφάνιση διαχωριστών"
 
-#: ui/albumcoverchoicecontroller.cpp:72 widgets/prettyimage.cpp:182
+#: ui/albumcoverchoicecontroller.cpp:72 widgets/prettyimage.cpp:183
 msgid "Show fullsize..."
 msgstr "Εμφάνισε σε πλήρες μέγεθος..."
 
@@ -4682,10 +4677,6 @@ msgstr "Αποσύνδεση"
 msgid "Signing in..."
 msgstr "Γίνεται είσοδος..."
 
-#: songinfo/echonestsimilarartists.cpp:58
-msgid "Similar artists"
-msgstr "Παρόμοιοι καλλιτέχνες"
-
 #: ../bin/src/ui_albumcoverexport.h:211
 msgid "Size"
 msgstr "Μέγεθος"
@@ -4710,11 +4701,11 @@ msgstr "Μετρητής παραλήψεων"
 msgid "Skip forwards in playlist"
 msgstr "Παράλειψη προς τα μπροστά στη λίστα"
 
-#: ui/mainwindow.cpp:1741
+#: ui/mainwindow.cpp:1740
 msgid "Skip selected tracks"
 msgstr "Παράκαμψη επιλεγμένων κομματιών"
 
-#: ui/mainwindow.cpp:1739
+#: ui/mainwindow.cpp:1738
 msgid "Skip track"
 msgstr "Παράκαμψη κομματιού"
 
@@ -5174,7 +5165,7 @@ msgstr "Εναλλαγή Όμορφου OSD"
 msgid "Toggle fullscreen"
 msgstr "Εναλλαγή πλήρης οθόνης"
 
-#: ui/mainwindow.cpp:1732
+#: ui/mainwindow.cpp:1731
 msgid "Toggle queue status"
 msgstr "Εναλλαγή της κατάστασης της λίστας αναμονής"
 
@@ -5305,11 +5296,11 @@ msgstr "Άγνωστο σφάλμα"
 msgid "Unset cover"
 msgstr "Αφαίρεση εξώφυλλου"
 
-#: ui/mainwindow.cpp:1737
+#: ui/mainwindow.cpp:1736
 msgid "Unskip selected tracks"
 msgstr "Καταργήση της παράλειψης επιλεγμένων κομματιών"
 
-#: ui/mainwindow.cpp:1735
+#: ui/mainwindow.cpp:1734
 msgid "Unskip track"
 msgstr "Καταργήση της παράλειψης τροχιάς"
 
@@ -5318,7 +5309,7 @@ msgstr "Καταργήση της παράλειψης τροχιάς"
 msgid "Unsubscribe"
 msgstr "Ακύρωση συνδρομής"
 
-#: songinfo/songkickconcerts.cpp:174
+#: songinfo/songkickconcerts.cpp:158
 msgid "Upcoming Concerts"
 msgstr "Προσεχής συναυλίες"
 

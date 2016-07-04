@@ -12,7 +12,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2016-06-02 14:50+0000\n"
+"PO-Revision-Date: 2016-06-28 13:51+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Lithuanian (http://www.transifex.com/davidsansome/clementine/language/lt/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -481,7 +481,7 @@ msgstr "Pridėti kitą srautą..."
 msgid "Add directory..."
 msgstr "Pridėti nuorodą..."
 
-#: ui/mainwindow.cpp:1983
+#: ui/mainwindow.cpp:1982
 msgid "Add file"
 msgstr "Pridėti  failą"
 
@@ -501,7 +501,7 @@ msgstr "Pridėti failą..."
 msgid "Add files to transcode"
 msgstr "Pridėti failus perkodavimui"
 
-#: transcoder/transcodedialog.cpp:306 ui/mainwindow.cpp:2010
+#: transcoder/transcodedialog.cpp:306 ui/mainwindow.cpp:2009
 #: ripper/ripcddialog.cpp:185
 msgid "Add folder"
 msgstr "Pridėti aplanką"
@@ -618,7 +618,7 @@ msgstr "Pridėti į Spotify grojaraščius"
 msgid "Add to Spotify starred"
 msgstr "Pridėti į Spotify pažymėtus"
 
-#: ui/mainwindow.cpp:1805
+#: ui/mainwindow.cpp:1804
 msgid "Add to another playlist"
 msgstr "Pridėti prie kito grojaraščio"
 
@@ -862,10 +862,6 @@ msgstr "Atlikėjas"
 msgid "Artist info"
 msgstr "Atlikėjo info"
 
-#: songinfo/echonesttags.cpp:62
-msgid "Artist tags"
-msgstr "Atlikėjo žymės"
-
 #: ui/organisedialog.cpp:63
 msgid "Artist's initial"
 msgstr "Atlikėjo inicialai"
@@ -986,10 +982,9 @@ msgstr "Elgsena"
 msgid "Best"
 msgstr "Geriausias"
 
-#: songinfo/echonestbiographies.cpp:85
-#, qt-format
-msgid "Biography from %1"
-msgstr "Biografija iš %1"
+#: songinfo/artistbiography.cpp:78
+msgid "Biography"
+msgstr ""
 
 #: playlist/playlist.cpp:1354 ../bin/src/ui_edittagdialog.h:718
 msgid "Bit rate"
@@ -1261,7 +1256,7 @@ msgid ""
 "installed Clementine properly."
 msgstr "„Clementine“ negalėjo įkelti jokios „projectM“ vizualizacijos. Įsitikinkite ar tinkamai įdiegėte „Clementine“."
 
-#: widgets/prettyimage.cpp:199
+#: widgets/prettyimage.cpp:200
 msgid "Clementine image viewer"
 msgstr "„Clementine“ nuotraukų peržiūra"
 
@@ -1689,11 +1684,11 @@ msgstr "Ištrinti originalius failus"
 msgid "Deleting files"
 msgstr "Trinami failai"
 
-#: ui/mainwindow.cpp:1726
+#: ui/mainwindow.cpp:1725
 msgid "Dequeue selected tracks"
 msgstr "Iš eilės pažymėtus takelius"
 
-#: ui/mainwindow.cpp:1724
+#: ui/mainwindow.cpp:1723
 msgid "Dequeue track"
 msgstr "Iš eilės takelį"
 
@@ -1965,7 +1960,7 @@ msgstr "Dinaminis atsitiktinis maišymas"
 msgid "Edit smart playlist..."
 msgstr "Taisyti išmanųjį grojaraštį..."
 
-#: ui/mainwindow.cpp:1768
+#: ui/mainwindow.cpp:1767
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr "Redaguoti žymę \"%1\"..."
@@ -2104,7 +2099,7 @@ msgid "Equivalent to --log-levels *:3"
 msgstr "Tai atitinka --log-levels *:3"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:246
-#: library/libraryview.cpp:639 ui/mainwindow.cpp:2039 ui/mainwindow.cpp:2284
+#: library/libraryview.cpp:639 ui/mainwindow.cpp:2038 ui/mainwindow.cpp:2284
 #: ui/mainwindow.cpp:2430 internet/vk/vkservice.cpp:643
 msgid "Error"
 msgstr "Klaida"
@@ -2245,7 +2240,7 @@ msgstr "Pradingimas"
 msgid "Fading duration"
 msgstr "Suliejimo trukmė"
 
-#: ui/mainwindow.cpp:2040
+#: ui/mainwindow.cpp:2039
 msgid "Failed reading CD drive"
 msgstr "Nepavyko perskaityti CD disko"
 
@@ -3028,7 +3023,7 @@ msgid "Loading tracks info"
 msgstr "Įkeliama kūrinio informacija"
 
 #: library/librarymodel.cpp:164
-#: internet/podcasts/podcastdiscoverymodel.cpp:105 widgets/prettyimage.cpp:167
+#: internet/podcasts/podcastdiscoverymodel.cpp:105 widgets/prettyimage.cpp:168
 #: widgets/widgetfadehelper.cpp:96 internet/vk/vkservice.cpp:513
 #: internet/vk/vksettingspage.cpp:125 ../bin/src/ui_addpodcastdialog.h:179
 #: ../bin/src/ui_searchpreview.h:105 ../bin/src/ui_organisedialog.h:261
@@ -3291,7 +3286,7 @@ msgstr "Perkelti į fonoteką"
 msgid "Move up"
 msgstr "Perkelti aukštyn"
 
-#: transcoder/transcodedialog.cpp:225 ui/mainwindow.cpp:1984
+#: transcoder/transcodedialog.cpp:225 ui/mainwindow.cpp:1983
 #: internet/vk/vkservice.cpp:908
 msgid "Music"
 msgstr "Muzika"
@@ -3362,7 +3357,7 @@ msgstr "Niekada nepradėti groti"
 msgid "New folder"
 msgstr "Naujas aplankas"
 
-#: ui/mainwindow.cpp:1822 ../bin/src/ui_mainwindow.h:693
+#: ui/mainwindow.cpp:1821 ../bin/src/ui_mainwindow.h:693
 msgid "New playlist"
 msgstr "Naujas grojaraštis"
 
@@ -3602,9 +3597,9 @@ msgctxt "Refers to behavior settings in Clementine settings page."
 msgid "Open in new playlist"
 msgstr "Atidaryti naujame grojaraštyje"
 
-#: songinfo/echonestbiographies.cpp:102
+#: songinfo/artistbiography.cpp:82
 msgid "Open in your browser"
-msgstr "Atidaryti naršyklėje"
+msgstr ""
 
 #: ../bin/src/ui_globalshortcutssettingspage.h:168
 #: ../bin/src/ui_globalshortcutssettingspage.h:170
@@ -3717,7 +3712,7 @@ msgstr "Vakarėlis"
 msgid "Password"
 msgstr "Slaptažodis"
 
-#: core/globalshortcuts.cpp:50 ui/mainwindow.cpp:1137 ui/mainwindow.cpp:1633
+#: core/globalshortcuts.cpp:50 ui/mainwindow.cpp:1136 ui/mainwindow.cpp:1632
 #: ui/qtsystemtrayicon.cpp:189 wiimotedev/wiimotesettingspage.cpp:114
 msgid "Pause"
 msgstr "Pristabdyti"
@@ -3745,8 +3740,8 @@ msgstr "Pikselis"
 msgid "Plain sidebar"
 msgstr "Paprasta juosta"
 
-#: core/globalshortcuts.cpp:49 ui/mainwindow.cpp:670 ui/mainwindow.cpp:1103
-#: ui/mainwindow.cpp:1122 ui/mainwindow.cpp:1637 ui/qtsystemtrayicon.cpp:177
+#: core/globalshortcuts.cpp:49 ui/mainwindow.cpp:670 ui/mainwindow.cpp:1102
+#: ui/mainwindow.cpp:1121 ui/mainwindow.cpp:1636 ui/qtsystemtrayicon.cpp:177
 #: ui/qtsystemtrayicon.cpp:203 wiimotedev/wiimotesettingspage.cpp:107
 #: ../bin/src/ui_mainwindow.h:659
 msgid "Play"
@@ -3960,12 +3955,12 @@ msgstr "Pateikiama užklausa įrenginiui..."
 msgid "Queue Manager"
 msgstr "Eilės tvarkytuvė"
 
-#: ui/mainwindow.cpp:1730
+#: ui/mainwindow.cpp:1729
 msgid "Queue selected tracks"
 msgstr "į eilę pažymėtus takelius"
 
 #: globalsearch/globalsearchview.cpp:466 library/libraryview.cpp:389
-#: ui/mainwindow.cpp:1728
+#: ui/mainwindow.cpp:1727
 msgid "Queue track"
 msgstr "į eilę takelį"
 
@@ -4267,7 +4262,7 @@ msgstr "Išsaugoti albumo viršelį į diską..."
 msgid "Save current grouping"
 msgstr ""
 
-#: widgets/prettyimage.cpp:184 widgets/prettyimage.cpp:229
+#: widgets/prettyimage.cpp:185 widgets/prettyimage.cpp:230
 msgid "Save image"
 msgstr "Išsaugoti paveikslėlį"
 
@@ -4486,7 +4481,7 @@ msgstr "Serverio detalės"
 msgid "Service offline"
 msgstr "Servisas nepasiekiamas"
 
-#: ui/mainwindow.cpp:1767
+#: ui/mainwindow.cpp:1766
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr "Nustatyti %1 į \"%2\"..."
@@ -4578,7 +4573,7 @@ msgstr "Rodyti albumo viršelius fonotekoje"
 msgid "Show dividers"
 msgstr "Rodyti skirtukus"
 
-#: ui/albumcoverchoicecontroller.cpp:72 widgets/prettyimage.cpp:182
+#: ui/albumcoverchoicecontroller.cpp:72 widgets/prettyimage.cpp:183
 msgid "Show fullsize..."
 msgstr "Rodyti viso dydžio..."
 
@@ -4671,10 +4666,6 @@ msgstr "Atsijungti"
 msgid "Signing in..."
 msgstr "Jungiamasi..."
 
-#: songinfo/echonestsimilarartists.cpp:58
-msgid "Similar artists"
-msgstr "Panašūs atlikėjai"
-
 #: ../bin/src/ui_albumcoverexport.h:211
 msgid "Size"
 msgstr "Dydis"
@@ -4699,11 +4690,11 @@ msgstr "Praleisti skaičiavimą"
 msgid "Skip forwards in playlist"
 msgstr "Kitas grojaraščio kūrinys"
 
-#: ui/mainwindow.cpp:1741
+#: ui/mainwindow.cpp:1740
 msgid "Skip selected tracks"
 msgstr "Praleisti pasirinktus takelius"
 
-#: ui/mainwindow.cpp:1739
+#: ui/mainwindow.cpp:1738
 msgid "Skip track"
 msgstr "Praleisti takelį"
 
@@ -5163,7 +5154,7 @@ msgstr "Išjungti gražųjį OSD"
 msgid "Toggle fullscreen"
 msgstr "Visame ekrane"
 
-#: ui/mainwindow.cpp:1732
+#: ui/mainwindow.cpp:1731
 msgid "Toggle queue status"
 msgstr "Perjungti eilės statusą"
 
@@ -5294,11 +5285,11 @@ msgstr "Nežinoma klaida"
 msgid "Unset cover"
 msgstr "Pašalinti viršelį"
 
-#: ui/mainwindow.cpp:1737
+#: ui/mainwindow.cpp:1736
 msgid "Unskip selected tracks"
 msgstr "Nepraleisti pasirinktų takelių"
 
-#: ui/mainwindow.cpp:1735
+#: ui/mainwindow.cpp:1734
 msgid "Unskip track"
 msgstr "Nepraleisti takelio"
 
@@ -5307,7 +5298,7 @@ msgstr "Nepraleisti takelio"
 msgid "Unsubscribe"
 msgstr "Nebeprenumeruoti"
 
-#: songinfo/songkickconcerts.cpp:174
+#: songinfo/songkickconcerts.cpp:158
 msgid "Upcoming Concerts"
 msgstr "Artėjantys koncertai"
 
