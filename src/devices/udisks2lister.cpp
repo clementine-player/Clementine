@@ -366,3 +366,7 @@ QString Udisks2Lister::PartitionData::unique_id() const {
       .arg(capacity)
       .arg(uuid);
 }
+
+Udisks2Lister::Udisks2Job::Udisks2Job() : is_mount(true) {}
+
+Udisks2Lister::PartitionData::PartitionData() : capacity(0), free_space(0) {}

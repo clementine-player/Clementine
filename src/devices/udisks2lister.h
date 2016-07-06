@@ -25,8 +25,8 @@
 #include <QReadWriteLock>
 #include <QStringList>
 
-#include "devicelister.h"
 #include "dbus/metatypes.h"
+#include "devicelister.h"
 
 class OrgFreedesktopDBusObjectManagerInterface;
 class OrgFreedesktopUDisks2JobInterface;
@@ -71,7 +71,8 @@ class Udisks2Lister : public DeviceLister {
       const QDBusArgument& input);
 
   struct Udisks2Job {
-    bool is_mount = true;
+    Udisks2Job();
+    bool is_mount;
     QList<QDBusObjectPath> mounted_partitions;
     std::shared_ptr<OrgFreedesktopUDisks2JobInterface> dbus_interface;
   };
@@ -81,6 +82,8 @@ class Udisks2Lister : public DeviceLister {
 
  private:
   struct PartitionData {
+    PartitionData();
+
     QString unique_id() const;
 
     QString dbus_path;
@@ -90,13 +93,13 @@ class Udisks2Lister : public DeviceLister {
     QString serial;
     QString vendor;
     QString model;
-    quint64 capacity = 0;
+    quint64 capacity;
     QString dbus_drive_path;
 
     // Paritition
     QString label;
     QString uuid;
-    quint64 free_space = 0;
+    quint64 free_space;
     QStringList mount_paths;
   };
 
