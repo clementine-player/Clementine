@@ -4,12 +4,12 @@
   <interface name="org.freedesktop.DBus.ObjectManager">
     <method name="GetManagedObjects">
       <arg name="objects" type="a{oa{sa{sv}}}" direction="out"/>
-      <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="ManagedObjectList"/>
+      <annotation name="com.trolltech.QtDBus.QtTypeName.Out0" value="ManagedObjectList"/>
     </method>
     <signal name="InterfacesAdded">
       <arg name="object" type="o"/>
       <arg name="interfaces" type="a{sa{sv}}"/>
-      <annotation name="org.qtproject.QtDBus.QtTypeName.In1" value="InterfacesAndProperties"/>
+      <annotation name="com.trolltech.QtDBus.QtTypeName.In1" value="InterfacesAndProperties"/>
     </signal>
     <signal name="InterfacesRemoved">
       <arg type="o" name="object_path"/>
