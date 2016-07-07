@@ -21,9 +21,7 @@ QString ExtractSpotifyId(const QString& spotify_uri) {
 }
 }  // namespace
 
-SpotifyImages::SpotifyImages()
-  : network_(new NetworkAccessManager) {
-}
+SpotifyImages::SpotifyImages() : network_(new NetworkAccessManager) {}
 
 SpotifyImages::~SpotifyImages() {}
 
@@ -82,13 +80,16 @@ void SpotifyImages::FetchImagesForArtist(int id, const QString& spotify_id) {
       QUrl url = image["url"].toUrl();
       image_candidates.append(qMakePair(url, QSize(width, height)));
     }
-    QPair<QUrl, QSize> winner = *std::max_element(
-        image_candidates.begin(),
-        image_candidates.end(),
-        [](const QPair<QUrl, QSize>& a, const QPair<QUrl, QSize>& b) {
-          return (a.second.height() * a.second.width()) < (b.second.height() * b.second.width());
-        });
-    emit ImageReady(id, winner.first);
+    if (!image_candidates.isEmpty()) {
+      QPair<QUrl, QSize> winner =
+          *std::max_element(
+              image_candidates.begin(), image_candidates.end(),
+              [](const QPair<QUrl, QSize>& a, const QPair<QUrl, QSize>& b) {
+                return (a.second.height() * a.second.width()) <
+                       (b.second.height() * b.second.width());
+              });
+      emit ImageReady(id, winner.first);
+    }
     emit Finished(id);
   });
 }
