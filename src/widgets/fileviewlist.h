@@ -38,6 +38,8 @@ signals:
   void CopyToDevice(const QList<QUrl>& urls);
   void Delete(const QStringList& filenames);
   void EditTags(const QList<QUrl>& urls);
+  void Back();
+  void Forward();
 
  protected:
   void contextMenuEvent(QContextMenuEvent* e);

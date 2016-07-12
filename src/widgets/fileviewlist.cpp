@@ -132,17 +132,29 @@ void FileViewList::DeleteSlot() { emit Delete(FilenamesFromSelection()); }
 void FileViewList::EditTagsSlot() { emit EditTags(UrlListFromSelection()); }
 
 void FileViewList::mousePressEvent(QMouseEvent* e) {
-  QListView::mousePressEvent(e);
+  switch (e->button()) {
+    case Qt::XButton1:
+      emit Back();
+      break;
+    case Qt::XButton2:
+      emit Forward();
+      break;
+    // enqueue to playlist with middleClick
+    case Qt::MidButton: {
+      QListView::mousePressEvent(e);
 
-  // enqueue to playlist with middleClick
-  if (e->button() == Qt::MidButton) {
-    // we need to update the menu selection
-    menu_selection_ = selectionModel()->selection();
+      // we need to update the menu selection
+      menu_selection_ = selectionModel()->selection();
 
-    MimeData* data = new MimeData;
-    data->setUrls(UrlListFromSelection());
-    data->enqueue_now_ = true;
-    emit AddToPlaylist(data);
+      MimeData* data = new MimeData;
+      data->setUrls(UrlListFromSelection());
+      data->enqueue_now_ = true;
+      emit AddToPlaylist(data);
+      break;
+    }
+    default:
+      QListView::mousePressEvent(e);
+      break;
   }
 }
 
