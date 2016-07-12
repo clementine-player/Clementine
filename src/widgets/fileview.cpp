@@ -56,6 +56,8 @@ FileView::FileView(QWidget* parent)
   connect(ui_->up, SIGNAL(clicked()), SLOT(FileUp()));
   connect(ui_->path, SIGNAL(textChanged(QString)),
           SLOT(ChangeFilePath(QString)));
+  connect(ui_->list, SIGNAL(Back()), undo_stack_, SLOT(undo()));
+  connect(ui_->list, SIGNAL(Forward()), undo_stack_, SLOT(redo()));
 
   connect(undo_stack_, SIGNAL(canUndoChanged(bool)), ui_->back,
           SLOT(setEnabled(bool)));
