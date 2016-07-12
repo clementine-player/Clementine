@@ -162,6 +162,9 @@ void TagReader::ReadFile(const QString& filename,
   if (TagLib::Ogg::XiphComment* tag =
           dynamic_cast<TagLib::Ogg::XiphComment*>(fileref->file()->tag())) {
     ParseOggTag(tag->fieldListMap(), nullptr, &disc, &compilation, song);
+#if TAGLIB_MAJOR_VERSION >= 1 && TAGLIB_MINOR_VERSION >= 11
+    if (!tag->pictureList().isEmpty()) song->set_art_automatic(kEmbeddedCover);
+#endif
   }
 
   if (TagLib::MPEG::File* file =
@@ -998,6 +1001,7 @@ QByteArray TagReader::LoadEmbeddedArt(const QString& filename) const {
   if (xiph_comment) {
     TagLib::Ogg::FieldListMap map = xiph_comment->fieldListMap();
 
+#if TAGLIB_MAJOR_VERSION <= 1 && TAGLIB_MINOR_VERSION < 11
     // Other than the below mentioned non-standard COVERART,
     // METADATA_BLOCK_PICTURE
     // is the proposed tag for cover pictures.
@@ -1019,6 +1023,20 @@ QByteArray TagReader::LoadEmbeddedArt(const QString& filename) const {
       TagLib::FLAC::Picture p(tdata);
       return QByteArray(p.data().data(), p.data().size());
     }
+#else
+    TagLib::List<TagLib::FLAC::Picture*> pics = xiph_comment->pictureList();
+    if (!pics.isEmpty()) {
+      for (auto p : pics) {
+        if (p->type() == TagLib::FLAC::Picture::FrontCover)
+          return QByteArray(p->data().data(), p->data().size());
+      }
+      // If there was no specific front cover, just take the first picture
+      std::list<TagLib::FLAC::Picture*>::iterator it = pics.begin();
+      TagLib::FLAC::Picture* picture = *it;
+
+      return QByteArray(picture->data().data(), picture->data().size());
+    }
+#endif
 
     // Ogg lacks a definitive standard for embedding cover art, but it seems
     // b64 encoding a field called COVERART is the general convention
