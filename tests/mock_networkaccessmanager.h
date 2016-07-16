@@ -15,7 +15,7 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef MOCK_NETWORKACCESSAMANGER_H
+#ifndef MOCK_NETWORKACCESSMANAGER_H
 #define MOCK_NETWORKACCESSMANAGER_H
 
 #include <QByteArray>
