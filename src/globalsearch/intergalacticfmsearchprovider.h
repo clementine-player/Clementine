@@ -28,10 +28,10 @@ class IntergalacticFMSearchProvider : public SimpleSearchProvider {
   // SearchProvider
   InternetService* internet_service() override { return service_; }
 
-  void LoadArtAsync(int id, const Result& result);
+  void LoadArtAsync(int id, const Result& result) override;
 
  protected:
-  void RecreateItems();
+  void RecreateItems() override;
 
  private:
   IntergalacticFMServiceBase* service_;

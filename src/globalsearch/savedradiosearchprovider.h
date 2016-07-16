@@ -30,7 +30,7 @@ class SavedRadioSearchProvider : public SimpleSearchProvider {
   InternetService* internet_service() override { return service_; }
 
  protected:
-  void RecreateItems();
+  void RecreateItems() override;
 
  private:
   SavedRadio* service_;

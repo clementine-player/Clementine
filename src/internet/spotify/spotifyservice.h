@@ -102,7 +102,7 @@ signals:
 
  public slots:
   void Search(const QString& text, bool now = false);
-  void ShowConfig();
+  void ShowConfig() override;
   void RemoveCurrentFromPlaylist();
 
  private:
