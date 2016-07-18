@@ -386,7 +386,7 @@ msgid ""
 "A song will be included in the playlist if it matches these conditions."
 msgstr "Utwór zostanie uwzględniony w liście odtwarzania, jeśli spełni następujące kryteria."
 
-#: smartplaylists/searchterm.cpp:370
+#: smartplaylists/searchterm.cpp:382
 msgid "A-Z"
 msgstr "A-Z"
 
@@ -1339,7 +1339,7 @@ msgstr "Kolory"
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Rozdzielona przecinkami lista klasa:poziom, gdzie poziom wynosi 0-3"
 
-#: playlist/playlist.cpp:1371 smartplaylists/searchterm.cpp:358
+#: playlist/playlist.cpp:1371 smartplaylists/searchterm.cpp:370
 #: ui/organisedialog.cpp:75 ../bin/src/ui_edittagdialog.h:743
 msgid "Comment"
 msgstr "Komentarz"
@@ -1614,7 +1614,7 @@ msgstr "Data utworzenia"
 msgid "Date modified"
 msgstr "Data modyfikacji"
 
-#: smartplaylists/searchterm.cpp:393
+#: smartplaylists/searchterm.cpp:405
 msgid "Days"
 msgstr "Dni"
 
@@ -1661,7 +1661,7 @@ msgid "Delete downloaded data"
 msgstr "Usuń pobrane dane"
 
 #: devices/deviceview.cpp:408 library/libraryview.cpp:645
-#: ui/mainwindow.cpp:2332 widgets/fileview.cpp:186
+#: ui/mainwindow.cpp:2332 widgets/fileview.cpp:188
 msgid "Delete files"
 msgstr "Usuń pliki"
 
@@ -2632,7 +2632,7 @@ msgstr "HipHop"
 msgid "Host not found, check server URL. Example: http://localhost:4040/"
 msgstr "Host nie został znaleziony, sprawdź URL serwera. Przykład: http://localhost:4040/"
 
-#: smartplaylists/searchterm.cpp:391
+#: smartplaylists/searchterm.cpp:403
 msgid "Hours"
 msgstr "Godzin"
 
@@ -3249,7 +3249,7 @@ msgstr "Monitoruj zmiany biblioteki"
 msgid "Mono playback"
 msgstr "Odtwarzanie mono"
 
-#: smartplaylists/searchterm.cpp:397
+#: smartplaylists/searchterm.cpp:409
 msgid "Months"
 msgstr "Miesięcy"
 
@@ -5061,7 +5061,7 @@ msgid ""
 "continue?"
 msgstr "Te pliki zostaną usunięte z urządzenia. Na pewno chcesz kontynuować?"
 
-#: library/libraryview.cpp:646 ui/mainwindow.cpp:2333 widgets/fileview.cpp:187
+#: library/libraryview.cpp:646 ui/mainwindow.cpp:2333 widgets/fileview.cpp:189
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -5523,7 +5523,7 @@ msgstr "Wav"
 msgid "Website"
 msgstr "Strona internetowa"
 
-#: smartplaylists/searchterm.cpp:395
+#: smartplaylists/searchterm.cpp:407
 msgid "Weeks"
 msgstr "Tygodni"
 
@@ -5642,7 +5642,7 @@ msgstr "Rok"
 msgid "Year - Album"
 msgstr "Rok - Album"
 
-#: smartplaylists/searchterm.cpp:399
+#: smartplaylists/searchterm.cpp:411
 msgid "Years"
 msgstr "Lat"
 
@@ -5774,7 +5774,7 @@ msgstr "W Twoim systemie brakuje wsparcia dla OpenGL, wizualizacje są niedostę
 msgid "Your username or password was incorrect."
 msgstr "Nazwa użytkownika lub hasło niepoprawne."
 
-#: smartplaylists/searchterm.cpp:370
+#: smartplaylists/searchterm.cpp:382
 msgid "Z-A"
 msgstr "Z-A"
 
@@ -5788,7 +5788,7 @@ msgctxt ""
 msgid "add %n songs"
 msgstr "dodaj %n utworów"
 
-#: smartplaylists/searchterm.cpp:205
+#: smartplaylists/searchterm.cpp:217
 msgid "after"
 msgstr "po"
 
@@ -5804,15 +5804,15 @@ msgstr "i"
 msgid "automatic"
 msgstr "automatycznie"
 
-#: smartplaylists/searchterm.cpp:207
+#: smartplaylists/searchterm.cpp:219
 msgid "before"
 msgstr "przed"
 
-#: smartplaylists/searchterm.cpp:217
+#: smartplaylists/searchterm.cpp:229
 msgid "between"
 msgstr "pomiędzy"
 
-#: smartplaylists/searchterm.cpp:380
+#: smartplaylists/searchterm.cpp:392
 msgid "biggest first"
 msgstr "najpierw największe"
 
@@ -5820,7 +5820,7 @@ msgstr "najpierw największe"
 msgid "bpm"
 msgstr "uderzeń na minutę"
 
-#: smartplaylists/searchterm.cpp:225
+#: smartplaylists/searchterm.cpp:237
 msgid "contains"
 msgstr "zawiera"
 
@@ -5835,15 +5835,15 @@ msgstr "wyłączony"
 msgid "disc %1"
 msgstr "płyta %1"
 
-#: smartplaylists/searchterm.cpp:227
+#: smartplaylists/searchterm.cpp:239
 msgid "does not contain"
 msgstr "nie zawiera"
 
-#: smartplaylists/searchterm.cpp:231
+#: smartplaylists/searchterm.cpp:243
 msgid "ends with"
 msgstr "kończy się na"
 
-#: smartplaylists/searchterm.cpp:237
+#: smartplaylists/searchterm.cpp:249
 msgid "equals"
 msgstr "jest równy"
 
@@ -5855,7 +5855,7 @@ msgstr "gpodder.net"
 msgid "gpodder.net directory"
 msgstr "katalog gpodder.net"
 
-#: smartplaylists/searchterm.cpp:233
+#: smartplaylists/searchterm.cpp:245
 msgid "greater than"
 msgstr "większy niż"
 
@@ -5863,7 +5863,7 @@ msgstr "większy niż"
 msgid "iPods and USB devices currently don't work on Windows.  Sorry!"
 msgstr "IPody i urządzenia USB obecnie nie działają na systemie Windows. Przepraszamy!"
 
-#: smartplaylists/searchterm.cpp:213
+#: smartplaylists/searchterm.cpp:225
 msgid "in the last"
 msgstr "w ostatnich"
 
@@ -5874,11 +5874,11 @@ msgstr "w ostatnich"
 msgid "kbps"
 msgstr "kbps"
 
-#: smartplaylists/searchterm.cpp:235
+#: smartplaylists/searchterm.cpp:247
 msgid "less than"
 msgstr "mniejszy niż"
 
-#: smartplaylists/searchterm.cpp:376
+#: smartplaylists/searchterm.cpp:388
 msgid "longest first"
 msgstr "najpierw najdłuższe"
 
@@ -5888,27 +5888,27 @@ msgctxt ""
 msgid "move %n songs"
 msgstr "przenieś utwory: %n"
 
-#: smartplaylists/searchterm.cpp:373
+#: smartplaylists/searchterm.cpp:385
 msgid "newest first"
 msgstr "najpierw najnowsze"
 
-#: smartplaylists/searchterm.cpp:239
+#: smartplaylists/searchterm.cpp:251
 msgid "not equals"
 msgstr "nie wynosi"
 
-#: smartplaylists/searchterm.cpp:215
+#: smartplaylists/searchterm.cpp:227
 msgid "not in the last"
 msgstr "oprócz ostatnich"
 
-#: smartplaylists/searchterm.cpp:211
+#: smartplaylists/searchterm.cpp:223
 msgid "not on"
 msgstr "nie w"
 
-#: smartplaylists/searchterm.cpp:372
+#: smartplaylists/searchterm.cpp:384
 msgid "oldest first"
 msgstr "najpierw najstarsze"
 
-#: smartplaylists/searchterm.cpp:209
+#: smartplaylists/searchterm.cpp:221
 msgid "on"
 msgstr "w dniu"
 
@@ -5930,7 +5930,7 @@ msgctxt ""
 msgid "remove %n songs"
 msgstr "usuń %n utworów"
 
-#: smartplaylists/searchterm.cpp:375
+#: smartplaylists/searchterm.cpp:387
 msgid "shortest first"
 msgstr "najpierw najkrótsze"
 
@@ -5938,7 +5938,7 @@ msgstr "najpierw najkrótsze"
 msgid "shuffle songs"
 msgstr "losuj utwory"
 
-#: smartplaylists/searchterm.cpp:379
+#: smartplaylists/searchterm.cpp:391
 msgid "smallest first"
 msgstr "najpierw najmniejsze"
 
@@ -5946,7 +5946,7 @@ msgstr "najpierw najmniejsze"
 msgid "sort songs"
 msgstr "sortuj utwory"
 
-#: smartplaylists/searchterm.cpp:229
+#: smartplaylists/searchterm.cpp:241
 msgid "starts with"
 msgstr "zaczyna się na"
 

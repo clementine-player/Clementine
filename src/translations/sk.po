@@ -6,7 +6,7 @@
 # Dušan Kazik <prescott66@gmail.com>, 2015-2016
 # bs_ <info@pwn.sk>, 2013
 # Ján Ďanovský <dagsoftware@yahoo.com>, 2011-2016
-# Levi Taule <levi.taule@gmail.com>, 2015
+# LeviTaule <levi.taule@gmail.com>, 2015
 # Michal Ján Mária Polovka <michal.polovka@gmail.com>, 2012
 # MiroslavR <miroslavr256@gmail.com>, 2015
 msgid ""
@@ -376,7 +376,7 @@ msgid ""
 "A song will be included in the playlist if it matches these conditions."
 msgstr "Pieseň bude zahrnutá do playlistu ak spĺňa tieto podmienky."
 
-#: smartplaylists/searchterm.cpp:370
+#: smartplaylists/searchterm.cpp:382
 msgid "A-Z"
 msgstr "A-Z"
 
@@ -1329,7 +1329,7 @@ msgstr "Farby"
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Čiarkou oddelený zoznam class:level, level je 0-3"
 
-#: playlist/playlist.cpp:1371 smartplaylists/searchterm.cpp:358
+#: playlist/playlist.cpp:1371 smartplaylists/searchterm.cpp:370
 #: ui/organisedialog.cpp:75 ../bin/src/ui_edittagdialog.h:743
 msgid "Comment"
 msgstr "Komentár"
@@ -1604,7 +1604,7 @@ msgstr "Dátum vytvorenia"
 msgid "Date modified"
 msgstr "Dátum zmeny"
 
-#: smartplaylists/searchterm.cpp:393
+#: smartplaylists/searchterm.cpp:405
 msgid "Days"
 msgstr "Dni"
 
@@ -1651,7 +1651,7 @@ msgid "Delete downloaded data"
 msgstr "Vymazať stiahnuté dáta"
 
 #: devices/deviceview.cpp:408 library/libraryview.cpp:645
-#: ui/mainwindow.cpp:2332 widgets/fileview.cpp:186
+#: ui/mainwindow.cpp:2332 widgets/fileview.cpp:188
 msgid "Delete files"
 msgstr "Vymazať súbory"
 
@@ -2622,7 +2622,7 @@ msgstr "Hip Hop"
 msgid "Host not found, check server URL. Example: http://localhost:4040/"
 msgstr "Hostiteľ nenájdený, skontrolujte URL adresu serveru. Príklad: http://localhost:4040/"
 
-#: smartplaylists/searchterm.cpp:391
+#: smartplaylists/searchterm.cpp:403
 msgid "Hours"
 msgstr "Hodiny"
 
@@ -3239,7 +3239,7 @@ msgstr "Sledovať zmeny v zbierke"
 msgid "Mono playback"
 msgstr "Mono prehrávanie"
 
-#: smartplaylists/searchterm.cpp:397
+#: smartplaylists/searchterm.cpp:409
 msgid "Months"
 msgstr "Mesiace"
 
@@ -5051,7 +5051,7 @@ msgid ""
 "continue?"
 msgstr "Tieto súbory budú vymazané zo zariadenia, ste si istý, že chcete pokračovať?"
 
-#: library/libraryview.cpp:646 ui/mainwindow.cpp:2333 widgets/fileview.cpp:187
+#: library/libraryview.cpp:646 ui/mainwindow.cpp:2333 widgets/fileview.cpp:189
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -5513,7 +5513,7 @@ msgstr "Wav"
 msgid "Website"
 msgstr "Webstránka"
 
-#: smartplaylists/searchterm.cpp:395
+#: smartplaylists/searchterm.cpp:407
 msgid "Weeks"
 msgstr "Týždne"
 
@@ -5632,7 +5632,7 @@ msgstr "Rok"
 msgid "Year - Album"
 msgstr "Rok - Album"
 
-#: smartplaylists/searchterm.cpp:399
+#: smartplaylists/searchterm.cpp:411
 msgid "Years"
 msgstr "Roky"
 
@@ -5764,7 +5764,7 @@ msgstr "Vášmu systému chýba OpenGL podpora, vizualizácie nebudú dostupné.
 msgid "Your username or password was incorrect."
 msgstr "Vaše meno používateľa alebo heslo bolo nesprávne."
 
-#: smartplaylists/searchterm.cpp:370
+#: smartplaylists/searchterm.cpp:382
 msgid "Z-A"
 msgstr "Z-A"
 
@@ -5778,7 +5778,7 @@ msgctxt ""
 msgid "add %n songs"
 msgstr "pridať %n piesní"
 
-#: smartplaylists/searchterm.cpp:205
+#: smartplaylists/searchterm.cpp:217
 msgid "after"
 msgstr "po"
 
@@ -5794,15 +5794,15 @@ msgstr "a"
 msgid "automatic"
 msgstr "automaticky"
 
-#: smartplaylists/searchterm.cpp:207
+#: smartplaylists/searchterm.cpp:219
 msgid "before"
 msgstr "pred"
 
-#: smartplaylists/searchterm.cpp:217
+#: smartplaylists/searchterm.cpp:229
 msgid "between"
 msgstr "medzi"
 
-#: smartplaylists/searchterm.cpp:380
+#: smartplaylists/searchterm.cpp:392
 msgid "biggest first"
 msgstr "najprv najväčšie"
 
@@ -5810,7 +5810,7 @@ msgstr "najprv najväčšie"
 msgid "bpm"
 msgstr "bpm"
 
-#: smartplaylists/searchterm.cpp:225
+#: smartplaylists/searchterm.cpp:237
 msgid "contains"
 msgstr "obsahuje"
 
@@ -5825,15 +5825,15 @@ msgstr "zakázané"
 msgid "disc %1"
 msgstr "disk %1"
 
-#: smartplaylists/searchterm.cpp:227
+#: smartplaylists/searchterm.cpp:239
 msgid "does not contain"
 msgstr "neobsahuje"
 
-#: smartplaylists/searchterm.cpp:231
+#: smartplaylists/searchterm.cpp:243
 msgid "ends with"
 msgstr "končí na"
 
-#: smartplaylists/searchterm.cpp:237
+#: smartplaylists/searchterm.cpp:249
 msgid "equals"
 msgstr "rovná sa"
 
@@ -5845,7 +5845,7 @@ msgstr "gpodder.net"
 msgid "gpodder.net directory"
 msgstr "gpodder.net priečinok"
 
-#: smartplaylists/searchterm.cpp:233
+#: smartplaylists/searchterm.cpp:245
 msgid "greater than"
 msgstr "väčšie ako"
 
@@ -5853,7 +5853,7 @@ msgstr "väčšie ako"
 msgid "iPods and USB devices currently don't work on Windows.  Sorry!"
 msgstr "iPody a USB zariadenia momentálne na Windows nefungujú. Prepáčte!"
 
-#: smartplaylists/searchterm.cpp:213
+#: smartplaylists/searchterm.cpp:225
 msgid "in the last"
 msgstr "za posledných"
 
@@ -5864,11 +5864,11 @@ msgstr "za posledných"
 msgid "kbps"
 msgstr "kbps"
 
-#: smartplaylists/searchterm.cpp:235
+#: smartplaylists/searchterm.cpp:247
 msgid "less than"
 msgstr "menšie ako"
 
-#: smartplaylists/searchterm.cpp:376
+#: smartplaylists/searchterm.cpp:388
 msgid "longest first"
 msgstr "najprv najdlhšie"
 
@@ -5878,27 +5878,27 @@ msgctxt ""
 msgid "move %n songs"
 msgstr "presunúť %n piesní"
 
-#: smartplaylists/searchterm.cpp:373
+#: smartplaylists/searchterm.cpp:385
 msgid "newest first"
 msgstr "najprv najnovšie"
 
-#: smartplaylists/searchterm.cpp:239
+#: smartplaylists/searchterm.cpp:251
 msgid "not equals"
 msgstr "sa nerovná"
 
-#: smartplaylists/searchterm.cpp:215
+#: smartplaylists/searchterm.cpp:227
 msgid "not in the last"
 msgstr "nie za posledných"
 
-#: smartplaylists/searchterm.cpp:211
+#: smartplaylists/searchterm.cpp:223
 msgid "not on"
 msgstr "nie na"
 
-#: smartplaylists/searchterm.cpp:372
+#: smartplaylists/searchterm.cpp:384
 msgid "oldest first"
 msgstr "najprv najstaršie"
 
-#: smartplaylists/searchterm.cpp:209
+#: smartplaylists/searchterm.cpp:221
 msgid "on"
 msgstr "na"
 
@@ -5920,7 +5920,7 @@ msgctxt ""
 msgid "remove %n songs"
 msgstr "odstrániť %n piesní"
 
-#: smartplaylists/searchterm.cpp:375
+#: smartplaylists/searchterm.cpp:387
 msgid "shortest first"
 msgstr "najprv najkratšie"
 
@@ -5928,7 +5928,7 @@ msgstr "najprv najkratšie"
 msgid "shuffle songs"
 msgstr "zamiešať piesne"
 
-#: smartplaylists/searchterm.cpp:379
+#: smartplaylists/searchterm.cpp:391
 msgid "smallest first"
 msgstr "najprv najmenšie"
 
@@ -5936,7 +5936,7 @@ msgstr "najprv najmenšie"
 msgid "sort songs"
 msgstr "zoradiť piesne"
 
-#: smartplaylists/searchterm.cpp:229
+#: smartplaylists/searchterm.cpp:241
 msgid "starts with"
 msgstr "začína na"
 
