@@ -1,11 +1,11 @@
 /***************************************************************************
-    copyright           :(C) 2011 by Mathias Panzenböck
+    copyright           : (C) 2011 by Mathias Panzenböck
     email               : grosser.meister.morti@gmx.net
  ***************************************************************************/
 
 /***************************************************************************
  *   This library is free software; you can redistribute it and/or modify  *
- *   it  under the terms of the GNU Lesser General Public License version  *
+ *   it under the terms of the GNU Lesser General Public License version   *
  *   2.1 as published by the Free Software Foundation.                     *
  *                                                                         *
  *   This library is distributed in the hope that it will be useful, but   *
@@ -15,9 +15,14 @@
  *                                                                         *
  *   You should have received a copy of the GNU Lesser General Public      *
  *   License along with this library; if not, write to the Free Software   *
- *   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,            *
- *   MA  02110-1301  USA                                                   *
+ *   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA         *
+ *   02110-1301  USA                                                       *
+ *                                                                         *
+ *   Alternatively, this file is available under the Mozilla Public        *
+ *   License Version 1.1.  You may obtain a copy of the License at         *
+ *   http://www.mozilla.org/MPL/                                           *
  ***************************************************************************/
+
 
 #include "xmproperties.h"
 
@@ -41,16 +46,16 @@ public:
   {
   }
 
-  ushort lengthInPatterns;
-  int    channels;
-  ushort version;
-  ushort restartPosition;
-  ushort patternCount;
-  ushort instrumentCount;
-  uint   sampleCount;
-  ushort flags;
-  ushort tempo;
-  ushort bpmSpeed;
+  unsigned short lengthInPatterns;
+  int            channels;
+  unsigned short version;
+  unsigned short restartPosition;
+  unsigned short patternCount;
+  unsigned short instrumentCount;
+  unsigned int   sampleCount;
+  unsigned short flags;
+  unsigned short tempo;
+  unsigned short bpmSpeed;
 };
 
 XM::Properties::Properties(AudioProperties::ReadStyle propertiesStyle) :
@@ -94,52 +99,52 @@ int XM::Properties::channels() const
   return d->channels;
 }
 
-TagLib::ushort XM::Properties::lengthInPatterns() const
+unsigned short XM::Properties::lengthInPatterns() const
 {
   return d->lengthInPatterns;
 }
 
-TagLib::ushort XM::Properties::version() const
+unsigned short XM::Properties::version() const
 {
   return d->version;
 }
 
-TagLib::ushort XM::Properties::restartPosition() const
+unsigned short XM::Properties::restartPosition() const
 {
   return d->restartPosition;
 }
 
-TagLib::ushort XM::Properties::patternCount() const
+unsigned short XM::Properties::patternCount() const
 {
   return d->patternCount;
 }
 
-TagLib::ushort XM::Properties::instrumentCount() const
+unsigned short XM::Properties::instrumentCount() const
 {
   return d->instrumentCount;
 }
 
-TagLib::uint XM::Properties::sampleCount() const
+unsigned int XM::Properties::sampleCount() const
 {
   return d->sampleCount;
 }
 
-TagLib::ushort XM::Properties::flags() const
+unsigned short XM::Properties::flags() const
 {
   return d->flags;
 }
 
-TagLib::ushort XM::Properties::tempo() const
+unsigned short XM::Properties::tempo() const
 {
   return d->tempo;
 }
 
-TagLib::ushort XM::Properties::bpmSpeed() const
+unsigned short XM::Properties::bpmSpeed() const
 {
   return d->bpmSpeed;
 }
 
-void XM::Properties::setLengthInPatterns(ushort lengthInPatterns)
+void XM::Properties::setLengthInPatterns(unsigned short lengthInPatterns)
 {
   d->lengthInPatterns = lengthInPatterns;
 }
@@ -149,42 +154,42 @@ void XM::Properties::setChannels(int channels)
   d->channels = channels;
 }
 
-void XM::Properties::setVersion(ushort version)
+void XM::Properties::setVersion(unsigned short version)
 {
   d->version = version;
 }
 
-void XM::Properties::setRestartPosition(ushort restartPosition)
+void XM::Properties::setRestartPosition(unsigned short restartPosition)
 {
   d->restartPosition = restartPosition;
 }
 
-void XM::Properties::setPatternCount(ushort patternCount)
+void XM::Properties::setPatternCount(unsigned short patternCount)
 {
   d->patternCount = patternCount;
 }
 
-void XM::Properties::setInstrumentCount(ushort instrumentCount)
+void XM::Properties::setInstrumentCount(unsigned short instrumentCount)
 {
   d->instrumentCount = instrumentCount;
 }
 
-void XM::Properties::setSampleCount(uint sampleCount)
+void XM::Properties::setSampleCount(unsigned int sampleCount)
 {
   d->sampleCount = sampleCount;
 }
 
-void XM::Properties::setFlags(ushort flags)
+void XM::Properties::setFlags(unsigned short flags)
 {
   d->flags = flags;
 }
 
-void XM::Properties::setTempo(ushort tempo)
+void XM::Properties::setTempo(unsigned short tempo)
 {
   d->tempo = tempo;
 }
 
-void XM::Properties::setBpmSpeed(ushort bpmSpeed)
+void XM::Properties::setBpmSpeed(unsigned short bpmSpeed)
 {
   d->bpmSpeed = bpmSpeed;
 }

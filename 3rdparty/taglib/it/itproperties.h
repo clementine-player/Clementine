@@ -5,7 +5,7 @@
 
 /***************************************************************************
  *   This library is free software; you can redistribute it and/or modify  *
- *   it  under the terms of the GNU Lesser General Public License version  *
+ *   it under the terms of the GNU Lesser General Public License version   *
  *   2.1 as published by the Free Software Foundation.                     *
  *                                                                         *
  *   This library is distributed in the hope that it will be useful, but   *
@@ -15,8 +15,12 @@
  *                                                                         *
  *   You should have received a copy of the GNU Lesser General Public      *
  *   License along with this library; if not, write to the Free Software   *
- *   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,            *
- *   MA  02110-1301  USA                                                   *
+ *   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA         *
+ *   02110-1301  USA                                                       *
+ *                                                                         *
+ *   Alternatively, this file is available under the Mozilla Public        *
+ *   License Version 1.1.  You may obtain a copy of the License at         *
+ *   http://www.mozilla.org/MPL/                                           *
  ***************************************************************************/
 
 #ifndef TAGLIB_ITPROPERTIES_H
@@ -58,37 +62,37 @@ namespace TagLib {
       int sampleRate()           const;
       int channels()             const;
 
-      ushort lengthInPatterns()  const;
-      bool   stereo()            const;
-      ushort instrumentCount()   const;
-      ushort sampleCount()       const;
-      ushort patternCount()      const;
-      ushort version()           const;
-      ushort compatibleVersion() const;
-      ushort flags()             const;
-      ushort special()           const;
-      uchar  globalVolume()      const;
-      uchar  mixVolume()         const;
-      uchar  tempo()             const;
-      uchar  bpmSpeed()          const;
-      uchar  panningSeparation() const;
-      uchar  pitchWheelDepth()   const;
+      unsigned short lengthInPatterns()  const;
+      bool           stereo()            const;
+      unsigned short instrumentCount()   const;
+      unsigned short sampleCount()       const;
+      unsigned short patternCount()      const;
+      unsigned short version()           const;
+      unsigned short compatibleVersion() const;
+      unsigned short flags()             const;
+      unsigned short special()           const;
+      unsigned char  globalVolume()      const;
+      unsigned char  mixVolume()         const;
+      unsigned char  tempo()             const;
+      unsigned char  bpmSpeed()          const;
+      unsigned char  panningSeparation() const;
+      unsigned char  pitchWheelDepth()   const;
 
       void setChannels(int channels);
-      void setLengthInPatterns(ushort lengthInPatterns);
-      void setInstrumentCount(ushort instrumentCount);
-      void setSampleCount (ushort sampleCount);
-      void setPatternCount(ushort patternCount);
-      void setVersion     (ushort version);
-      void setCompatibleVersion(ushort compatibleVersion);
-      void setFlags       (ushort flags);
-      void setSpecial     (ushort special);
-      void setGlobalVolume(uchar globalVolume);
-      void setMixVolume   (uchar mixVolume);
-      void setTempo       (uchar tempo);
-      void setBpmSpeed    (uchar bpmSpeed);
-      void setPanningSeparation(uchar panningSeparation);
-      void setPitchWheelDepth  (uchar pitchWheelDepth);
+      void setLengthInPatterns(unsigned short lengthInPatterns);
+      void setInstrumentCount(unsigned short instrumentCount);
+      void setSampleCount (unsigned short sampleCount);
+      void setPatternCount(unsigned short patternCount);
+      void setVersion     (unsigned short version);
+      void setCompatibleVersion(unsigned short compatibleVersion);
+      void setFlags       (unsigned short flags);
+      void setSpecial     (unsigned short special);
+      void setGlobalVolume(unsigned char globalVolume);
+      void setMixVolume   (unsigned char mixVolume);
+      void setTempo       (unsigned char tempo);
+      void setBpmSpeed    (unsigned char bpmSpeed);
+      void setPanningSeparation(unsigned char panningSeparation);
+      void setPitchWheelDepth  (unsigned char pitchWheelDepth);
 
     private:
       Properties(const Properties&);

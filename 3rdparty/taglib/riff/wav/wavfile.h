@@ -126,6 +126,15 @@ namespace TagLib {
         Info::Tag *InfoTag() const;
 
         /*!
+         * This will strip the tags that match the OR-ed together TagTypes from the
+         * file.  By default it strips all tags.  It returns true if the tags are
+         * successfully stripped.
+         *
+         * \note This will update the file immediately.
+         */
+        void strip(TagTypes tags = AllTags);
+
+        /*!
          * Implements the unified property interface -- export function.
          * This method forwards to ID3v2::Tag::properties().
          */
@@ -171,13 +180,7 @@ namespace TagLib {
         File &operator=(const File &);
 
         void read(bool readProperties);
-
-        void strip(TagTypes tags);
-
-        /*!
-         * Returns the index of the chunk that its name is "LIST" and list type is "INFO".
-         */
-        uint findInfoTagChunk();
+        void removeTagChunks(TagTypes tags);
 
         friend class Properties;
 

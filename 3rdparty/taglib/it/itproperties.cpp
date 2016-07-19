@@ -5,7 +5,7 @@
 
 /***************************************************************************
  *   This library is free software; you can redistribute it and/or modify  *
- *   it  under the terms of the GNU Lesser General Public License version  *
+ *   it under the terms of the GNU Lesser General Public License version   *
  *   2.1 as published by the Free Software Foundation.                     *
  *                                                                         *
  *   This library is distributed in the hope that it will be useful, but   *
@@ -15,9 +15,14 @@
  *                                                                         *
  *   You should have received a copy of the GNU Lesser General Public      *
  *   License along with this library; if not, write to the Free Software   *
- *   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,            *
- *   MA  02110-1301  USA                                                   *
+ *   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA         *
+ *   02110-1301  USA                                                       *
+ *                                                                         *
+ *   Alternatively, this file is available under the Mozilla Public        *
+ *   License Version 1.1.  You may obtain a copy of the License at         *
+ *   http://www.mozilla.org/MPL/                                           *
  ***************************************************************************/
+
 
 #include "itproperties.h"
 
@@ -46,21 +51,21 @@ public:
   {
   }
 
-  int    channels;
-  ushort lengthInPatterns;
-  ushort instrumentCount;
-  ushort sampleCount;
-  ushort patternCount;
-  ushort version;
-  ushort compatibleVersion;
-  ushort flags;
-  ushort special;
-  uchar  globalVolume;
-  uchar  mixVolume;
-  uchar  tempo;
-  uchar  bpmSpeed;
-  uchar  panningSeparation;
-  uchar  pitchWheelDepth;
+  int            channels;
+  unsigned short lengthInPatterns;
+  unsigned short instrumentCount;
+  unsigned short sampleCount;
+  unsigned short patternCount;
+  unsigned short version;
+  unsigned short compatibleVersion;
+  unsigned short flags;
+  unsigned short special;
+  unsigned char  globalVolume;
+  unsigned char  mixVolume;
+  unsigned char  tempo;
+  unsigned char  bpmSpeed;
+  unsigned char  panningSeparation;
+  unsigned char  pitchWheelDepth;
 };
 
 IT::Properties::Properties(AudioProperties::ReadStyle propertiesStyle) :
@@ -104,7 +109,7 @@ int IT::Properties::channels() const
   return d->channels;
 }
 
-TagLib::ushort IT::Properties::lengthInPatterns() const
+unsigned short IT::Properties::lengthInPatterns() const
 {
   return d->lengthInPatterns;
 }
@@ -114,67 +119,67 @@ bool IT::Properties::stereo() const
   return d->flags & Stereo;
 }
 
-TagLib::ushort IT::Properties::instrumentCount() const
+unsigned short IT::Properties::instrumentCount() const
 {
   return d->instrumentCount;
 }
 
-TagLib::ushort IT::Properties::sampleCount() const
+unsigned short IT::Properties::sampleCount() const
 {
   return d->sampleCount;
 }
 
-TagLib::ushort IT::Properties::patternCount() const
+unsigned short IT::Properties::patternCount() const
 {
   return d->patternCount;
 }
 
-TagLib::ushort IT::Properties::version() const
+unsigned short IT::Properties::version() const
 {
   return d->version;
 }
 
-TagLib::ushort IT::Properties::compatibleVersion() const
+unsigned short IT::Properties::compatibleVersion() const
 {
   return d->compatibleVersion;
 }
 
-TagLib::ushort IT::Properties::flags() const
+unsigned short IT::Properties::flags() const
 {
   return d->flags;
 }
 
-TagLib::ushort IT::Properties::special() const
+unsigned short IT::Properties::special() const
 {
   return d->special;
 }
 
-uchar IT::Properties::globalVolume() const
+unsigned char IT::Properties::globalVolume() const
 {
   return d->globalVolume;
 }
 
-uchar IT::Properties::mixVolume() const
+unsigned char IT::Properties::mixVolume() const
 {
   return d->mixVolume;
 }
 
-uchar IT::Properties::tempo() const
+unsigned char IT::Properties::tempo() const
 {
   return d->tempo;
 }
 
-uchar IT::Properties::bpmSpeed() const
+unsigned char IT::Properties::bpmSpeed() const
 {
   return d->bpmSpeed;
 }
 
-uchar IT::Properties::panningSeparation() const
+unsigned char IT::Properties::panningSeparation() const
 {
   return d->panningSeparation;
 }
 
-uchar IT::Properties::pitchWheelDepth() const
+unsigned char IT::Properties::pitchWheelDepth() const
 {
   return d->pitchWheelDepth;
 }
@@ -184,72 +189,72 @@ void IT::Properties::setChannels(int channels)
   d->channels = channels;
 }
 
-void IT::Properties::setLengthInPatterns(ushort lengthInPatterns)
+void IT::Properties::setLengthInPatterns(unsigned short lengthInPatterns)
 {
   d->lengthInPatterns = lengthInPatterns;
 }
 
-void IT::Properties::setInstrumentCount(ushort instrumentCount)
+void IT::Properties::setInstrumentCount(unsigned short instrumentCount)
 {
   d->instrumentCount = instrumentCount;
 }
 
-void IT::Properties::setSampleCount(ushort sampleCount)
+void IT::Properties::setSampleCount(unsigned short sampleCount)
 {
   d->sampleCount = sampleCount;
 }
 
-void IT::Properties::setPatternCount(ushort patternCount)
+void IT::Properties::setPatternCount(unsigned short patternCount)
 {
   d->patternCount = patternCount;
 }
 
-void IT::Properties::setFlags(ushort flags)
+void IT::Properties::setFlags(unsigned short flags)
 {
   d->flags = flags;
 }
 
-void IT::Properties::setSpecial(ushort special)
+void IT::Properties::setSpecial(unsigned short special)
 {
   d->special = special;
 }
 
-void IT::Properties::setCompatibleVersion(ushort compatibleVersion)
+void IT::Properties::setCompatibleVersion(unsigned short compatibleVersion)
 {
   d->compatibleVersion = compatibleVersion;
 }
 
-void IT::Properties::setVersion(ushort version)
+void IT::Properties::setVersion(unsigned short version)
 {
   d->version = version;
 }
 
-void IT::Properties::setGlobalVolume(uchar globalVolume)
+void IT::Properties::setGlobalVolume(unsigned char globalVolume)
 {
   d->globalVolume = globalVolume;
 }
 
-void IT::Properties::setMixVolume(uchar mixVolume)
+void IT::Properties::setMixVolume(unsigned char mixVolume)
 {
   d->mixVolume = mixVolume;
 }
 
-void IT::Properties::setTempo(uchar tempo)
+void IT::Properties::setTempo(unsigned char tempo)
 {
   d->tempo = tempo;
 }
 
-void IT::Properties::setBpmSpeed(uchar bpmSpeed)
+void IT::Properties::setBpmSpeed(unsigned char bpmSpeed)
 {
   d->bpmSpeed = bpmSpeed;
 }
 
-void IT::Properties::setPanningSeparation(uchar panningSeparation)
+void IT::Properties::setPanningSeparation(unsigned char panningSeparation)
 {
   d->panningSeparation = panningSeparation;
 }
 
-void IT::Properties::setPitchWheelDepth(uchar pitchWheelDepth)
+void IT::Properties::setPitchWheelDepth(unsigned char pitchWheelDepth)
 {
   d->pitchWheelDepth = pitchWheelDepth;
 }

@@ -128,6 +128,23 @@ namespace TagLib {
                      audioPropertiesStyle = AudioProperties::Average);
 
     /*!
+     * Construct a FileRef from an opened \a IOStream.  If \a readAudioProperties
+     * is true then the audio properties will be read using \a audioPropertiesStyle.
+     * If \a readAudioProperties is false then \a audioPropertiesStyle will be
+     * ignored.
+     *
+     * Also see the note in the class documentation about why you may not want to
+     * use this method in your application.
+     *
+     * \note TagLib will *not* take ownership of the stream, the caller is
+     * responsible for deleting it after the File object.
+     */
+    explicit FileRef(IOStream* stream,
+                     bool readAudioProperties = true,
+                     AudioProperties::ReadStyle
+                     audioPropertiesStyle = AudioProperties::Average);
+
+    /*!
      * Construct a FileRef using \a file.  The FileRef now takes ownership of the
      * pointer and will delete the File when it passes out of scope.
      */
@@ -225,6 +242,11 @@ namespace TagLib {
      * Assign the file pointed to by \a ref to this FileRef.
      */
     FileRef &operator=(const FileRef &ref);
+
+    /*!
+     * Exchanges the content of the FileRef by the content of \a ref.
+     */
+    void swap(FileRef &ref);
 
     /*!
      * Returns true if this FileRef and \a ref point to the same File object.

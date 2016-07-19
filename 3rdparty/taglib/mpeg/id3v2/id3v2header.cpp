@@ -39,36 +39,33 @@ using namespace ID3v2;
 class Header::HeaderPrivate
 {
 public:
-  HeaderPrivate() : majorVersion(4),
-                    revisionNumber(0),
-                    unsynchronisation(false),
-                    extendedHeader(false),
-                    experimentalIndicator(false),
-                    footerPresent(false),
-                    tagSize(0) {}
+  HeaderPrivate() :
+    majorVersion(4),
+    revisionNumber(0),
+    unsynchronisation(false),
+    extendedHeader(false),
+    experimentalIndicator(false),
+    footerPresent(false),
+    tagSize(0) {}
 
-  ~HeaderPrivate() {}
-
-  uint majorVersion;
-  uint revisionNumber;
+  unsigned int majorVersion;
+  unsigned int revisionNumber;
 
   bool unsynchronisation;
   bool extendedHeader;
   bool experimentalIndicator;
   bool footerPresent;
 
-  uint tagSize;
-
-  static const uint size = 10;
+  unsigned int tagSize;
 };
 
 ////////////////////////////////////////////////////////////////////////////////
 // static members
 ////////////////////////////////////////////////////////////////////////////////
 
-TagLib::uint Header::size()
+unsigned int Header::size()
 {
-  return HeaderPrivate::size;
+  return 10;
 }
 
 ByteVector Header::fileIdentifier()
@@ -80,14 +77,14 @@ ByteVector Header::fileIdentifier()
 // public members
 ////////////////////////////////////////////////////////////////////////////////
 
-Header::Header()
+Header::Header() :
+  d(new HeaderPrivate())
 {
-  d = new HeaderPrivate;
 }
 
-Header::Header(const ByteVector &data)
+Header::Header(const ByteVector &data) :
+  d(new HeaderPrivate())
 {
-  d = new HeaderPrivate;
   parse(data);
 }
 
@@ -96,17 +93,17 @@ Header::~Header()
   delete d;
 }
 
-TagLib::uint Header::majorVersion() const
+unsigned int Header::majorVersion() const
 {
   return d->majorVersion;
 }
 
-void Header::setMajorVersion(TagLib::uint version)
+void Header::setMajorVersion(unsigned int version)
 {
   d->majorVersion = version;
 }
 
-TagLib::uint Header::revisionNumber() const
+unsigned int Header::revisionNumber() const
 {
   return d->revisionNumber;
 }
@@ -131,20 +128,20 @@ bool Header::footerPresent() const
   return d->footerPresent;
 }
 
-TagLib::uint Header::tagSize() const
+unsigned int Header::tagSize() const
 {
   return d->tagSize;
 }
 
-TagLib::uint Header::completeTagSize() const
+unsigned int Header::completeTagSize() const
 {
   if(d->footerPresent)
-    return d->tagSize + d->size + Footer::size();
+    return d->tagSize + size() + Footer::size();
   else
-    return d->tagSize + d->size;
+    return d->tagSize + size();
 }
 
-void Header::setTagSize(uint s)
+void Header::setTagSize(unsigned int s)
 {
   d->tagSize = s;
 }
@@ -199,7 +196,6 @@ void Header::parse(const ByteVector &data)
   if(data.size() < size())
     return;
 
-
   // do some sanity checking -- even in ID3v2.3.0 and less the tag size is a
   // synch-safe integer, so all bytes must be less than 128.  If this is not
   // true then this is an invalid tag.
@@ -216,7 +212,7 @@ void Header::parse(const ByteVector &data)
   }
 
   for(ByteVector::ConstIterator it = sizeData.begin(); it != sizeData.end(); it++) {
-    if(uchar(*it) >= 128) {
+    if(static_cast<unsigned char>(*it) >= 128) {
       d->tagSize = 0;
       debug("TagLib::ID3v2::Header::parse() - One of the size bytes in the id3v2 header was greater than the allowed 128.");
       return;

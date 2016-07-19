@@ -124,7 +124,7 @@ namespace TagLib {
         /*!
          * Returns the number of sample frames
          */
-        uint sampleFrames() const;
+        unsigned int sampleFrames() const;
 
         /*!
          * Returns true if the file is in AIFF-C format, false if AIFF format.

@@ -131,7 +131,7 @@ void Speex::Properties::read(File *file)
     return;
   }
 
-  uint pos = 28;
+  unsigned int pos = 28;
 
   // speex_version_id;       /**< Version for Speex (for checking compatibility) */
   d->speexVersion = data.toUInt(pos, false);

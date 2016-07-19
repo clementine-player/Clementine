@@ -50,7 +50,7 @@ public:
   ByteVector compressionType;
   String compressionName;
 
-  uint sampleFrames;
+  unsigned int sampleFrames;
 };
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -116,7 +116,7 @@ int RIFF::AIFF::Properties::sampleWidth() const
   return bitsPerSample();
 }
 
-TagLib::uint RIFF::AIFF::Properties::sampleFrames() const
+unsigned int RIFF::AIFF::Properties::sampleFrames() const
 {
   return d->sampleFrames;
 }
@@ -143,8 +143,8 @@ String RIFF::AIFF::Properties::compressionName() const
 void RIFF::AIFF::Properties::read(File *file)
 {
   ByteVector data;
-  uint streamLength = 0;
-  for(uint i = 0; i < file->chunkCount(); i++) {
+  unsigned int streamLength = 0;
+  for(unsigned int i = 0; i < file->chunkCount(); i++) {
     const ByteVector name = file->chunkName(i);
     if(name == "COMM") {
       if(data.isEmpty())
@@ -179,13 +179,14 @@ void RIFF::AIFF::Properties::read(File *file)
     d->sampleRate = static_cast<int>(sampleRate + 0.5);
 
   if(d->sampleFrames > 0 && d->sampleRate > 0) {
-    const double length = d->sampleFrames * 1000.0 / d->sampleRate;
+    const double length = d->sampleFrames * 1000.0 / sampleRate;
     d->length  = static_cast<int>(length + 0.5);
     d->bitrate = static_cast<int>(streamLength * 8.0 / length + 0.5);
   }
 
   if(data.size() >= 23) {
     d->compressionType = data.mid(18, 4);
-    d->compressionName = String(data.mid(23, static_cast<uchar>(data[22])), String::Latin1);
+    d->compressionName
+      = String(data.mid(23, static_cast<unsigned char>(data[22])), String::Latin1);
   }
 }

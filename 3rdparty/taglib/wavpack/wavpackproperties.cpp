@@ -58,7 +58,7 @@ public:
   int version;
   int bitsPerSample;
   bool lossless;
-  uint sampleFrames;
+  unsigned int sampleFrames;
 };
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -129,7 +129,7 @@ bool WavPack::Properties::isLossless() const
   return d->lossless;
 }
 
-TagLib::uint WavPack::Properties::sampleFrames() const
+unsigned int WavPack::Properties::sampleFrames() const
 {
   return d->sampleFrames;
 }
@@ -155,8 +155,8 @@ namespace
 #define SRATE_LSB       23
 #define SRATE_MASK      (0xfL << SRATE_LSB)
 
-#define MIN_STREAM_VERS     0x402
-#define MAX_STREAM_VERS     0x410
+#define MIN_STREAM_VERS 0x402
+#define MAX_STREAM_VERS 0x410
 
 #define FINAL_BLOCK     0x1000
 
@@ -178,7 +178,7 @@ void WavPack::Properties::read(File *file, long streamLength)
       break;
     }
 
-    const uint flags = data.toUInt(24, false);
+    const unsigned int flags = data.toUInt(24, false);
 
     if(offset == 0) {
       d->version = data.toShort(8, false);
@@ -196,7 +196,7 @@ void WavPack::Properties::read(File *file, long streamLength)
     if(flags & FINAL_BLOCK)
       break;
 
-    const uint blockSize = data.toUInt(4, false);
+    const unsigned int blockSize = data.toUInt(4, false);
     offset += blockSize + 8;
   }
 
@@ -210,7 +210,7 @@ void WavPack::Properties::read(File *file, long streamLength)
   }
 }
 
-TagLib::uint WavPack::Properties::seekFinalIndex(File *file, long streamLength)
+unsigned int WavPack::Properties::seekFinalIndex(File *file, long streamLength)
 {
   const long offset = file->rfind("wvpk", streamLength);
   if(offset == -1)
@@ -225,12 +225,12 @@ TagLib::uint WavPack::Properties::seekFinalIndex(File *file, long streamLength)
   if(version < MIN_STREAM_VERS || version > MAX_STREAM_VERS)
     return 0;
 
-  const uint flags = data.toUInt(24, false);
+  const unsigned int flags = data.toUInt(24, false);
   if(!(flags & FINAL_BLOCK))
     return 0;
 
-  const uint blockIndex   = data.toUInt(16, false);
-  const uint blockSamples = data.toUInt(20, false);
+  const unsigned int blockIndex   = data.toUInt(16, false);
+  const unsigned int blockSamples = data.toUInt(20, false);
 
   return blockIndex + blockSamples;
 }

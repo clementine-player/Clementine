@@ -5,7 +5,7 @@
 
 /***************************************************************************
  *   This library is free software; you can redistribute it and/or modify  *
- *   it  under the terms of the GNU Lesser General Public License version  *
+ *   it under the terms of the GNU Lesser General Public License version   *
  *   2.1 as published by the Free Software Foundation.                     *
  *                                                                         *
  *   This library is distributed in the hope that it will be useful, but   *
@@ -15,8 +15,12 @@
  *                                                                         *
  *   You should have received a copy of the GNU Lesser General Public      *
  *   License along with this library; if not, write to the Free Software   *
- *   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,            *
- *   MA  02110-1301  USA                                                   *
+ *   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA         *
+ *   02110-1301  USA                                                       *
+ *                                                                         *
+ *   Alternatively, this file is available under the Mozilla Public        *
+ *   License Version 1.1.  You may obtain a copy of the License at         *
+ *   http://www.mozilla.org/MPL/                                           *
  ***************************************************************************/
 
 #ifndef TAGLIB_XMPROPERTIES_H
@@ -46,27 +50,27 @@ namespace TagLib {
       int sampleRate()           const;
       int channels()             const;
 
-      ushort lengthInPatterns() const;
-      ushort version()          const;
-      ushort restartPosition()  const;
-      ushort patternCount()     const;
-      ushort instrumentCount()  const;
-      uint   sampleCount()      const;
-      ushort flags()            const;
-      ushort tempo()            const;
-      ushort bpmSpeed()         const;
+      unsigned short lengthInPatterns() const;
+      unsigned short version()          const;
+      unsigned short restartPosition()  const;
+      unsigned short patternCount()     const;
+      unsigned short instrumentCount()  const;
+      unsigned int   sampleCount()      const;
+      unsigned short flags()            const;
+      unsigned short tempo()            const;
+      unsigned short bpmSpeed()         const;
 
       void setChannels(int channels);
 
-      void setLengthInPatterns(ushort lengthInPatterns);
-      void setVersion(ushort version);
-      void setRestartPosition(ushort restartPosition);
-      void setPatternCount(ushort patternCount);
-      void setInstrumentCount(ushort instrumentCount);
-      void setSampleCount(uint sampleCount);
-      void setFlags(ushort flags);
-      void setTempo(ushort tempo);
-      void setBpmSpeed(ushort bpmSpeed);
+      void setLengthInPatterns(unsigned short lengthInPatterns);
+      void setVersion(unsigned short version);
+      void setRestartPosition(unsigned short restartPosition);
+      void setPatternCount(unsigned short patternCount);
+      void setInstrumentCount(unsigned short instrumentCount);
+      void setSampleCount(unsigned int sampleCount);
+      void setFlags(unsigned short flags);
+      void setTempo(unsigned short tempo);
+      void setBpmSpeed(unsigned short bpmSpeed);
 
     private:
       Properties(const Properties&);

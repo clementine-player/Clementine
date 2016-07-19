@@ -1,6 +1,7 @@
 /***************************************************************************
     copyright            : (C) 2002 - 2008 by Scott Wheeler
     email                : wheeler@kde.org
+
     copyright            : (C) 2006 by Urs Fleisch
     email                : ufleisch@users.sourceforge.net
  ***************************************************************************/

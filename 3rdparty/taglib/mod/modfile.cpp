@@ -5,7 +5,7 @@
 
 /***************************************************************************
  *   This library is free software; you can redistribute it and/or modify  *
- *   it  under the terms of the GNU Lesser General Public License version  *
+ *   it under the terms of the GNU Lesser General Public License version   *
  *   2.1 as published by the Free Software Foundation.                     *
  *                                                                         *
  *   This library is distributed in the hope that it will be useful, but   *
@@ -15,9 +15,14 @@
  *                                                                         *
  *   You should have received a copy of the GNU Lesser General Public      *
  *   License along with this library; if not, write to the Free Software   *
- *   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,            *
- *   MA  02110-1301  USA                                                   *
+ *   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA         *
+ *   02110-1301  USA                                                       *
+ *                                                                         *
+ *   Alternatively, this file is available under the Mozilla Public        *
+ *   License Version 1.1.  You may obtain a copy of the License at         *
+ *   http://www.mozilla.org/MPL/                                           *
  ***************************************************************************/
+
 
 #include "modfile.h"
 #include "tstringlist.h"
@@ -92,14 +97,14 @@ bool Mod::File::save()
   seek(0);
   writeString(d->tag.title(), 20);
   StringList lines = d->tag.comment().split("\n");
-  uint n = std::min(lines.size(), d->properties.instrumentCount());
-  for(uint i = 0; i < n; ++ i) {
+  unsigned int n = std::min(lines.size(), d->properties.instrumentCount());
+  for(unsigned int i = 0; i < n; ++ i) {
     writeString(lines[i], 22);
     seek(8, Current);
   }
 
-  for(uint i = n; i < d->properties.instrumentCount(); ++ i) {
-    writeString(String::null, 22);
+  for(unsigned int i = n; i < d->properties.instrumentCount(); ++ i) {
+    writeString(String(), 22);
     seek(8, Current);
   }
   return true;
@@ -114,8 +119,8 @@ void Mod::File::read(bool)
   ByteVector modId = readBlock(4);
   READ_ASSERT(modId.size() == 4);
 
-  int  channels    =  4;
-  uint instruments = 31;
+  int          channels    =  4;
+  unsigned int instruments = 31;
   if(modId == "M.K." || modId == "M!K!" || modId == "M&K!" || modId == "N.T.") {
     d->tag.setTrackerName("ProTracker");
     channels = 4;
@@ -159,7 +164,7 @@ void Mod::File::read(bool)
   READ_STRING(d->tag.setTitle, 20);
 
   StringList comment;
-  for(uint i = 0; i < instruments; ++ i) {
+  for(unsigned int i = 0; i < instruments; ++ i) {
     READ_STRING_AS(instrumentName, 22);
     // value in words, * 2 (<< 1) for bytes:
     READ_U16B_AS(sampleLength);

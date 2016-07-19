@@ -31,10 +31,12 @@
 #ifndef DO_NOT_DOCUMENT  // tell Doxygen not to document this header
 
 #ifdef HAVE_CONFIG_H
-#include <config.h>
+# include <config.h>
 #endif
 
-#if defined(HAVE_MSC_BYTESWAP)
+#if defined(HAVE_BOOST_BYTESWAP)
+# include <boost/endian/conversion.hpp>
+#elif defined(HAVE_MSC_BYTESWAP)
 # include <stdlib.h>
 #elif defined(HAVE_GLIBC_BYTESWAP)
 # include <byteswap.h>
@@ -53,206 +55,237 @@ namespace TagLib
 {
   namespace Utils
   {
-
-    /*!
-     * Reverses the order of bytes in an 16-bit integer.
-     */
-    inline ushort byteSwap(ushort x)
+    namespace
     {
-#if defined(HAVE_GCC_BYTESWAP)
 
-      return __builtin_bswap16(x);
+      /*!
+       * Reverses the order of bytes in an 16-bit integer.
+       */
+      inline unsigned short byteSwap(unsigned short x)
+      {
+#if defined(HAVE_BOOST_BYTESWAP)
+
+        return boost::endian::endian_reverse(static_cast<uint16_t>(x));
+
+#elif defined(HAVE_GCC_BYTESWAP)
+
+        return __builtin_bswap16(x);
 
 #elif defined(HAVE_MSC_BYTESWAP)
 
-      return _byteswap_ushort(x);
+        return _byteswap_ushort(x);
 
 #elif defined(HAVE_GLIBC_BYTESWAP)
 
-      return __bswap_16(x);
+        return __bswap_16(x);
 
 #elif defined(HAVE_MAC_BYTESWAP)
 
-      return OSSwapInt16(x);
+        return OSSwapInt16(x);
 
 #elif defined(HAVE_OPENBSD_BYTESWAP)
 
-      return swap16(x);
+        return swap16(x);
 
 #else
 
-      return ((x >> 8) & 0xff) | ((x & 0xff) << 8);
+        return ((x >> 8) & 0xff) | ((x & 0xff) << 8);
 
 #endif
-    }
+      }
 
-    /*!
-     * Reverses the order of bytes in an 32-bit integer.
-     */
-    inline uint byteSwap(uint x)
-    {
-#if defined(HAVE_GCC_BYTESWAP)
+      /*!
+       * Reverses the order of bytes in an 32-bit integer.
+       */
+      inline unsigned int byteSwap(unsigned int x)
+      {
+#if defined(HAVE_BOOST_BYTESWAP)
 
-      return __builtin_bswap32(x);
+        return boost::endian::endian_reverse(static_cast<uint32_t>(x));
+
+#elif defined(HAVE_GCC_BYTESWAP)
+
+        return __builtin_bswap32(x);
 
 #elif defined(HAVE_MSC_BYTESWAP)
 
-      return _byteswap_ulong(x);
+        return _byteswap_ulong(x);
 
 #elif defined(HAVE_GLIBC_BYTESWAP)
 
-      return __bswap_32(x);
+        return __bswap_32(x);
 
 #elif defined(HAVE_MAC_BYTESWAP)
 
-      return OSSwapInt32(x);
+        return OSSwapInt32(x);
 
 #elif defined(HAVE_OPENBSD_BYTESWAP)
 
-      return swap32(x);
+        return swap32(x);
 
 #else
 
-      return ((x & 0xff000000u) >> 24)
-        | ((x & 0x00ff0000u) >>  8)
-        | ((x & 0x0000ff00u) <<  8)
-        | ((x & 0x000000ffu) << 24);
+        return ((x & 0xff000000u) >> 24)
+          | ((x & 0x00ff0000u) >>  8)
+          | ((x & 0x0000ff00u) <<  8)
+          | ((x & 0x000000ffu) << 24);
 
 #endif
-    }
+      }
 
-    /*!
-     * Reverses the order of bytes in an 64-bit integer.
-     */
-    inline ulonglong byteSwap(ulonglong x)
-    {
-#if defined(HAVE_GCC_BYTESWAP)
+      /*!
+       * Reverses the order of bytes in an 64-bit integer.
+       */
+      inline unsigned long long byteSwap(unsigned long long x)
+      {
+#if defined(HAVE_BOOST_BYTESWAP)
 
-      return __builtin_bswap64(x);
+        return boost::endian::endian_reverse(static_cast<uint64_t>(x));
+
+#elif defined(HAVE_GCC_BYTESWAP)
+
+        return __builtin_bswap64(x);
 
 #elif defined(HAVE_MSC_BYTESWAP)
 
-      return _byteswap_uint64(x);
+        return _byteswap_uint64(x);
 
 #elif defined(HAVE_GLIBC_BYTESWAP)
 
-      return __bswap_64(x);
+        return __bswap_64(x);
 
 #elif defined(HAVE_MAC_BYTESWAP)
 
-      return OSSwapInt64(x);
+        return OSSwapInt64(x);
 
 #elif defined(HAVE_OPENBSD_BYTESWAP)
 
-      return swap64(x);
+        return swap64(x);
 
 #else
 
-      return ((x & 0xff00000000000000ull) >> 56)
-        | ((x & 0x00ff000000000000ull) >> 40)
-        | ((x & 0x0000ff0000000000ull) >> 24)
-        | ((x & 0x000000ff00000000ull) >> 8)
-        | ((x & 0x00000000ff000000ull) << 8)
-        | ((x & 0x0000000000ff0000ull) << 24)
-        | ((x & 0x000000000000ff00ull) << 40)
-        | ((x & 0x00000000000000ffull) << 56);
+        return ((x & 0xff00000000000000ull) >> 56)
+          | ((x & 0x00ff000000000000ull) >> 40)
+          | ((x & 0x0000ff0000000000ull) >> 24)
+          | ((x & 0x000000ff00000000ull) >> 8)
+          | ((x & 0x00000000ff000000ull) << 8)
+          | ((x & 0x0000000000ff0000ull) << 24)
+          | ((x & 0x000000000000ff00ull) << 40)
+          | ((x & 0x00000000000000ffull) << 56);
 
 #endif
-    }
+      }
 
-    /*!
-     * Returns a formatted string just like standard sprintf(), but makes use of
-     * safer functions such as snprintf() if available.
-     */
-    inline String formatString(const char *format, ...)
-    {
-      // Sufficient buffer size for the current internal uses.
-      // Consider changing this value when you use this function.
+      /*!
+       * Returns a formatted string just like standard sprintf(), but makes use of
+       * safer functions such as snprintf() if available.
+       */
+      inline String formatString(const char *format, ...)
+      {
+        // Sufficient buffer size for the current internal uses.
+        // Consider changing this value when you use this function.
 
-      static const size_t BufferSize = 128;
+        static const size_t BufferSize = 128;
 
-      va_list args;
-      va_start(args, format);
+        va_list args;
+        va_start(args, format);
 
-      char buf[BufferSize];
-      int length;
+        char buf[BufferSize];
+        int length;
 
 #if defined(HAVE_VSNPRINTF)
 
-      length = vsnprintf(buf, BufferSize, format, args);
+        length = vsnprintf(buf, BufferSize, format, args);
 
 #elif defined(HAVE_VSPRINTF_S)
 
-      length = vsprintf_s(buf, format, args);
+        length = vsprintf_s(buf, format, args);
 
 #else
 
-      // The last resort. May cause a buffer overflow.
+        // The last resort. May cause a buffer overflow.
 
-      length = vsprintf(buf, format, args);
-      if(length >= BufferSize) {
-        debug("Utils::formatString() - Buffer overflow! Returning an empty string.");
-        length = -1;
-      }
+        length = vsprintf(buf, format, args);
+        if(length >= BufferSize) {
+          debug("Utils::formatString() - Buffer overflow! Returning an empty string.");
+          length = -1;
+        }
 
 #endif
 
-      va_end(args);
+        va_end(args);
 
-      if(length != -1)
-        return String(buf);
-      else
-        return String::null;
+        if(length > 0)
+          return String(buf);
+        else
+          return String();
+      }
+
+      /*!
+       * Returns whether the two strings s1 and s2 are equal, ignoring the case of
+       * the characters.
+       *
+       * We took the trouble to define this one here, since there are some
+       * incompatible variations of case insensitive strcmp().
+       */
+      inline bool equalsIgnoreCase(const char *s1, const char *s2)
+      {
+        while(*s1 != '\0' && *s2 != '\0' && ::tolower(*s1) == ::tolower(*s2)) {
+          s1++;
+          s2++;
+        }
+
+        return (*s1 == '\0' && *s2 == '\0');
+      }
+
+      /*!
+       * The types of byte order of the running system.
+       */
+      enum ByteOrder
+      {
+        //! Little endian systems.
+        LittleEndian,
+        //! Big endian systems.
+        BigEndian
+      };
+
+      /*!
+       * Returns the integer byte order of the system.
+       */
+      inline ByteOrder systemByteOrder()
+      {
+        union {
+          int  i;
+          char c;
+        } u;
+
+        u.i = 1;
+        if(u.c == 1)
+          return LittleEndian;
+        else
+          return BigEndian;
+      }
+
+      /*!
+       * Returns the IEEE754 byte order of the system.
+       */
+      inline ByteOrder floatByteOrder()
+      {
+        union {
+          double d;
+          char   c;
+        } u;
+
+        // 1.0 is stored in memory like 0x3FF0000000000000 in canonical form.
+        // So the first byte is zero if little endian.
+
+        u.d = 1.0;
+        if(u.c == 0)
+          return LittleEndian;
+        else
+          return BigEndian;
+      }
     }
-
-    /*!
-     * The types of byte order of the running system.
-     */
-    enum ByteOrder
-    {
-      //! Little endian systems.
-      LittleEndian,
-      //! Big endian systems.
-      BigEndian
-    };
-
-    /*!
-     * Returns the integer byte order of the system.
-     */
-    inline ByteOrder systemByteOrder()
-    {
-      union {
-        int  i;
-        char c;
-      } u;
-
-      u.i = 1;
-      if(u.c == 1)
-        return LittleEndian;
-      else
-        return BigEndian;
-    }
-
-    /*!
-     * Returns the IEEE754 byte order of the system.
-     */
-    inline ByteOrder floatByteOrder()
-    {
-      union {
-        double d;
-        char   c;
-      } u;
-
-      // 1.0 is stored in memory like 0x3FF0000000000000 in canonical form.
-      // So the first byte is zero if little endian.
-
-      u.d = 1.0;
-      if(u.c == 0)
-        return LittleEndian;
-      else
-        return BigEndian;
-    }
-
   }
 }
 

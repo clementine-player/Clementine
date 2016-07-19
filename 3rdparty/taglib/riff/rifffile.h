@@ -61,46 +61,46 @@ namespace TagLib {
       /*!
        * \return The size of the main RIFF chunk.
        */
-      uint riffSize() const;
+      unsigned int riffSize() const;
 
       /*!
        * \return The number of chunks in the file.
        */
-      uint chunkCount() const;
+      unsigned int chunkCount() const;
 
       /*!
        * \return The offset within the file for the selected chunk number.
        */
-      uint chunkOffset(uint i) const;
+      unsigned int chunkOffset(unsigned int i) const;
 
       /*!
        * \return The size of the chunk data.
        */
-      uint chunkDataSize(uint i) const;
+      unsigned int chunkDataSize(unsigned int i) const;
 
       /*!
        * \return The size of the padding after the chunk (can be either 0 or 1).
        */
-      uint chunkPadding(uint i) const;
+      unsigned int chunkPadding(unsigned int i) const;
 
       /*!
        * \return The name of the specified chunk, for instance, "COMM" or "ID3 "
        */
-      ByteVector chunkName(uint i) const;
+      ByteVector chunkName(unsigned int i) const;
 
       /*!
        * Reads the chunk data from the file and returns it.
        *
        * \note This \e will move the read pointer for the file.
        */
-      ByteVector chunkData(uint i);
+      ByteVector chunkData(unsigned int i);
 
       /*!
        * Sets the data for the specified chunk to \a data.
        *
        * \warning This will update the file immediately.
        */
-      void setChunkData(uint i, const ByteVector &data);
+      void setChunkData(unsigned int i, const ByteVector &data);
 
       /*!
        * Sets the data for the chunk \a name to \a data.  If a chunk with the
@@ -129,7 +129,7 @@ namespace TagLib {
        *
        * \warning This will update the file immediately.
        */
-      void removeChunk(uint i);
+      void removeChunk(unsigned int i);
 
       /*!
        * Removes the chunk \a name.
@@ -145,8 +145,12 @@ namespace TagLib {
 
       void read();
       void writeChunk(const ByteVector &name, const ByteVector &data,
-                      ulong offset, ulong replace = 0,
-                      uint leadingPadding = 0);
+                      unsigned long offset, unsigned long replace = 0);
+
+      /*!
+       * Update the global RIFF size based on the current internal structure.
+       */
+      void updateGlobalSize();
 
       class FilePrivate;
       FilePrivate *d;

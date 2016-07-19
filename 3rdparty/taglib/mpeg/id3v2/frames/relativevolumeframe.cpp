@@ -31,11 +31,6 @@
 using namespace TagLib;
 using namespace ID3v2;
 
-static inline int bitsToBytes(int i)
-{
-  return i % 8 == 0 ? i / 8 : (i - i % 8) / 8 + 1;
-}
-
 struct ChannelData
 {
   ChannelData() : channelType(RelativeVolumeFrame::Other), volumeAdjustment(0) {}
@@ -185,19 +180,18 @@ void RelativeVolumeFrame::parseFields(const ByteVector &data)
 
   while(pos <= (int)data.size() - 4) {
 
-
     ChannelType type = ChannelType(data[pos]);
     pos += 1;
 
     ChannelData &channel = d->channels[type];
 
-    channel.volumeAdjustment = data.toShort(static_cast<uint>(pos));
+    channel.volumeAdjustment = data.toShort(static_cast<unsigned int>(pos));
     pos += 2;
 
     channel.peakVolume.bitsRepresentingPeak = data[pos];
     pos += 1;
 
-    int bytes = bitsToBytes(channel.peakVolume.bitsRepresentingPeak);
+    const int bytes = (channel.peakVolume.bitsRepresentingPeak + 7) / 8;
     channel.peakVolume.peakVolume = data.mid(pos, bytes);
     pos += bytes;
   }

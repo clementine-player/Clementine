@@ -43,12 +43,22 @@ namespace TagLib {
 
       Item();
       Item(const Item &item);
+
+      /*!
+       * Copies the contents of \a item into this Item.
+       */
       Item &operator=(const Item &item);
+
+      /*!
+       * Exchanges the content of the Item by the content of \a item.
+       */
+      void swap(Item &item);
+
       ~Item();
 
       Item(int value);
-      Item(uchar value);
-      Item(uint value);
+      Item(unsigned char value);
+      Item(unsigned int value);
       Item(long long value);
       Item(bool value);
       Item(int first, int second);
@@ -60,8 +70,8 @@ namespace TagLib {
       AtomDataType atomDataType() const;
 
       int toInt() const;
-      uchar toByte() const;
-      uint toUInt() const;
+      unsigned char toByte() const;
+      unsigned int toUInt() const;
       long long toLongLong() const;
       bool toBool() const;
       IntPair toIntPair() const;
