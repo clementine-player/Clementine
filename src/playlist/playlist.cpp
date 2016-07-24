@@ -1284,7 +1284,8 @@ bool Playlist::CompareItems(int column, Qt::SortOrder order,
     case Column_Samplerate:
       cmp(samplerate);
     case Column_Filename:
-      cmp(url);
+      return (QString::localeAwareCompare(a->Url().path().toLower(),
+                                          b->Url().path().toLower()) < 0);
     case Column_BaseFilename:
       cmp(basefilename);
     case Column_Filesize:
