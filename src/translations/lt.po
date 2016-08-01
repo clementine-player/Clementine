@@ -12,8 +12,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2016-06-28 13:51+0000\n"
-"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
+"PO-Revision-Date: 2016-07-25 11:19+0000\n"
+"Last-Translator: Moo\n"
 "Language-Team: Lithuanian (http://www.transifex.com/davidsansome/clementine/language/lt/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -193,6 +193,10 @@ msgstr "&Pasirinktinas"
 msgid "&Extras"
 msgstr "P&apildomai"
 
+#: ../bin/src/ui_edittagdialog.h:728
+msgid "&Grouping"
+msgstr "&Grupavimas"
+
 #: ../bin/src/ui_mainwindow.h:717
 msgid "&Help"
 msgstr "&Pagalba"
@@ -213,6 +217,10 @@ msgstr "&Kairė"
 #: playlist/playlistheader.cpp:36
 msgid "&Lock Rating"
 msgstr "&Užrakinti įvertinimą"
+
+#: ../bin/src/ui_edittagdialog.h:731
+msgid "&Lyrics"
+msgstr "&Dainų žodžiai"
 
 #: ../bin/src/ui_mainwindow.h:715
 msgid "&Music"
@@ -249,6 +257,10 @@ msgstr "&Ištempti stulpelius, kad užpildytų langą"
 #: ../bin/src/ui_mainwindow.h:719
 msgid "&Tools"
 msgstr "Įrankiai"
+
+#: ../bin/src/ui_edittagdialog.h:724
+msgid "&Year"
+msgstr "&Metai"
 
 #: ui/edittagdialog.cpp:50
 msgid "(different across multiple songs)"
@@ -676,11 +688,11 @@ msgstr "Po"
 msgid "After copying..."
 msgstr "Po kopijavimo..."
 
-#: library/savedgroupingmanager.cpp:65 playlist/playlist.cpp:1318
+#: library/savedgroupingmanager.cpp:65 playlist/playlist.cpp:1319
 #: ui/organisedialog.cpp:61 ui/qtsystemtrayicon.cpp:251
 #: ../bin/src/ui_groupbydialog.h:128 ../bin/src/ui_groupbydialog.h:147
 #: ../bin/src/ui_groupbydialog.h:166 ../bin/src/ui_albumcoversearcher.h:110
-#: ../bin/src/ui_albumcoversearcher.h:112 ../bin/src/ui_edittagdialog.h:734
+#: ../bin/src/ui_albumcoversearcher.h:112 ../bin/src/ui_edittagdialog.h:723
 #: ../bin/src/ui_trackselectiondialog.h:208 ../bin/src/ui_ripcddialog.h:314
 msgid "Album"
 msgstr "Albumas"
@@ -689,10 +701,10 @@ msgstr "Albumas"
 msgid "Album (ideal loudness for all tracks)"
 msgstr "Albumas (idealus garsumas visoms dainoms)"
 
-#: library/savedgroupingmanager.cpp:80 playlist/playlist.cpp:1332
+#: library/savedgroupingmanager.cpp:80 playlist/playlist.cpp:1333
 #: ui/organisedialog.cpp:64 ../bin/src/ui_groupbydialog.h:130
 #: ../bin/src/ui_groupbydialog.h:149 ../bin/src/ui_groupbydialog.h:168
-#: ../bin/src/ui_edittagdialog.h:736
+#: ../bin/src/ui_edittagdialog.h:725
 msgid "Album artist"
 msgstr "Albumo atlikėjas"
 
@@ -849,11 +861,11 @@ msgid ""
 "the songs of your library?"
 msgstr "Ar tikrai norite įrašyti dainos statistiką į dainos failą visoms dainoms Jūsų fonotekoje?"
 
-#: library/savedgroupingmanager.cpp:62 playlist/playlist.cpp:1316
+#: library/savedgroupingmanager.cpp:62 playlist/playlist.cpp:1317
 #: ui/organisedialog.cpp:62 ui/qtsystemtrayicon.cpp:249
 #: ../bin/src/ui_groupbydialog.h:129 ../bin/src/ui_groupbydialog.h:148
 #: ../bin/src/ui_groupbydialog.h:167 ../bin/src/ui_albumcoversearcher.h:106
-#: ../bin/src/ui_albumcoversearcher.h:108 ../bin/src/ui_edittagdialog.h:732
+#: ../bin/src/ui_albumcoversearcher.h:108 ../bin/src/ui_edittagdialog.h:721
 #: ../bin/src/ui_trackselectiondialog.h:209 ../bin/src/ui_ripcddialog.h:315
 msgid "Artist"
 msgstr "Atlikėjas"
@@ -929,8 +941,8 @@ msgstr "Vidutinis paveikslo dydis"
 msgid "BBC Podcasts"
 msgstr "BBC srautas"
 
-#: playlist/playlist.cpp:1352 ui/organisedialog.cpp:71
-#: ../bin/src/ui_edittagdialog.h:716
+#: playlist/playlist.cpp:1353 ui/organisedialog.cpp:71
+#: ../bin/src/ui_edittagdialog.h:704
 msgid "BPM"
 msgstr "BPM"
 
@@ -984,9 +996,9 @@ msgstr "Geriausias"
 
 #: songinfo/artistbiography.cpp:90 songinfo/artistbiography.cpp:255
 msgid "Biography"
-msgstr ""
+msgstr "Biografija"
 
-#: playlist/playlist.cpp:1354 ../bin/src/ui_edittagdialog.h:718
+#: playlist/playlist.cpp:1355 ../bin/src/ui_edittagdialog.h:706
 msgid "Bit rate"
 msgstr "Bitų greitis"
 
@@ -1090,7 +1102,7 @@ msgid ""
 "Try to login into Vk.com with your browser,to fix this problem."
 msgstr "Reikalingas saugos kodas.\nKad išspręsti šią problemą, pabandykite prisijungti prie Vk.com per savo naršyklę."
 
-#: ../bin/src/ui_edittagdialog.h:712
+#: ../bin/src/ui_edittagdialog.h:700
 msgid "Change cover art"
 msgstr "Keisti viršelio paveikslėlį"
 
@@ -1321,6 +1333,10 @@ msgstr "Uždarant šį langą bus sustabdyta albumo viršelių paieška."
 msgid "Club"
 msgstr "Klubinė"
 
+#: ../bin/src/ui_edittagdialog.h:726
+msgid "Co&mposer"
+msgstr "Ko&mpozitorius"
+
 #: ../bin/src/ui_appearancesettingspage.h:271
 msgid "Colors"
 msgstr "Spalvos"
@@ -1329,8 +1345,8 @@ msgstr "Spalvos"
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Kableliais išskirtas sąrašas iš klasės:lygio, lygis yra nuo 0 iki 3"
 
-#: playlist/playlist.cpp:1371 smartplaylists/searchterm.cpp:370
-#: ui/organisedialog.cpp:75 ../bin/src/ui_edittagdialog.h:743
+#: playlist/playlist.cpp:1372 smartplaylists/searchterm.cpp:370
+#: ui/organisedialog.cpp:75 ../bin/src/ui_edittagdialog.h:718
 msgid "Comment"
 msgstr "Komentaras"
 
@@ -1338,7 +1354,7 @@ msgstr "Komentaras"
 msgid "Community Radio"
 msgstr "Bendruomeninis Radijas"
 
-#: ../bin/src/ui_edittagdialog.h:741
+#: ../bin/src/ui_edittagdialog.h:730
 msgid "Complete tags automatically"
 msgstr "Užbaigti žymes automatiškai"
 
@@ -1346,10 +1362,9 @@ msgstr "Užbaigti žymes automatiškai"
 msgid "Complete tags automatically..."
 msgstr "Pabaigti žymes automatiškai..."
 
-#: library/savedgroupingmanager.cpp:74 playlist/playlist.cpp:1334
+#: library/savedgroupingmanager.cpp:74 playlist/playlist.cpp:1335
 #: ui/organisedialog.cpp:65 ../bin/src/ui_groupbydialog.h:131
 #: ../bin/src/ui_groupbydialog.h:150 ../bin/src/ui_groupbydialog.h:169
-#: ../bin/src/ui_edittagdialog.h:737
 msgid "Composer"
 msgstr "Kompozitorius"
 
@@ -1596,11 +1611,11 @@ msgid ""
 "recover your database"
 msgstr "Aptiktas duomenų bazės pažeidimas. Norėdami gauti nurodymus kaip atkurti savo duomenų bazę, skaitykite https://github.com/clementine-player/Clementine/wiki/Database-Corruption"
 
-#: playlist/playlist.cpp:1368 ../bin/src/ui_edittagdialog.h:727
+#: playlist/playlist.cpp:1369 ../bin/src/ui_edittagdialog.h:715
 msgid "Date created"
 msgstr "Sukūrimo data"
 
-#: playlist/playlist.cpp:1366 ../bin/src/ui_edittagdialog.h:726
+#: playlist/playlist.cpp:1367 ../bin/src/ui_edittagdialog.h:714
 msgid "Date modified"
 msgstr "Pakeitimo data"
 
@@ -1768,10 +1783,10 @@ msgctxt "Refers to search provider's status."
 msgid "Disabled"
 msgstr "Išjungta"
 
-#: library/savedgroupingmanager.cpp:95 playlist/playlist.cpp:1324
+#: library/savedgroupingmanager.cpp:95 playlist/playlist.cpp:1325
 #: ui/organisedialog.cpp:70 ../bin/src/ui_groupbydialog.h:139
 #: ../bin/src/ui_groupbydialog.h:158 ../bin/src/ui_groupbydialog.h:177
-#: ../bin/src/ui_edittagdialog.h:733 ../bin/src/ui_ripcddialog.h:313
+#: ../bin/src/ui_edittagdialog.h:722 ../bin/src/ui_ripcddialog.h:313
 msgid "Disc"
 msgstr "Diskas"
 
@@ -1969,11 +1984,11 @@ msgstr "Redaguoti žymę \"%1\"..."
 msgid "Edit tag..."
 msgstr "Taisyti žymę..."
 
-#: ../bin/src/ui_edittagdialog.h:744
+#: ../bin/src/ui_edittagdialog.h:732
 msgid "Edit tags"
 msgstr "Taisyti žymes"
 
-#: ../bin/src/ui_edittagdialog.h:710
+#: ../bin/src/ui_edittagdialog.h:698
 msgid "Edit track information"
 msgstr "Taisyti takelio informaciją"
 
@@ -2319,11 +2334,11 @@ msgstr "Failo plėtinys"
 msgid "File formats"
 msgstr "Failų formatai"
 
-#: playlist/playlist.cpp:1358 ../bin/src/ui_edittagdialog.h:728
+#: playlist/playlist.cpp:1359 ../bin/src/ui_edittagdialog.h:716
 msgid "File name"
 msgstr "Failo vardas"
 
-#: playlist/playlist.cpp:1360
+#: playlist/playlist.cpp:1361
 msgid "File name (without path)"
 msgstr "Failo vardas (be kelio)"
 
@@ -2335,13 +2350,13 @@ msgstr "Failo pavadinimo šablonas:"
 msgid "File paths"
 msgstr "Failų keliai"
 
-#: playlist/playlist.cpp:1362 ../bin/src/ui_edittagdialog.h:722
+#: playlist/playlist.cpp:1363 ../bin/src/ui_edittagdialog.h:710
 msgid "File size"
 msgstr "Failo dydis"
 
-#: library/savedgroupingmanager.cpp:83 playlist/playlist.cpp:1364
+#: library/savedgroupingmanager.cpp:83 playlist/playlist.cpp:1365
 #: ../bin/src/ui_groupbydialog.h:132 ../bin/src/ui_groupbydialog.h:151
-#: ../bin/src/ui_groupbydialog.h:170 ../bin/src/ui_edittagdialog.h:724
+#: ../bin/src/ui_groupbydialog.h:170 ../bin/src/ui_edittagdialog.h:712
 msgid "File type"
 msgstr "Failo tipas"
 
@@ -2465,6 +2480,10 @@ msgstr "Visi žemi ir aukšti tonai"
 msgid "Full Treble"
 msgstr "Visi aukšti tonai"
 
+#: ../bin/src/ui_edittagdialog.h:729
+msgid "Ge&nre"
+msgstr "Ža&nras"
+
 #: ui/settingsdialog.cpp:137
 msgid "General"
 msgstr "Bendri"
@@ -2473,10 +2492,10 @@ msgstr "Bendri"
 msgid "General settings"
 msgstr "Pagrindiniai nustatymai"
 
-#: library/savedgroupingmanager.cpp:77 playlist/playlist.cpp:1330
+#: library/savedgroupingmanager.cpp:77 playlist/playlist.cpp:1331
 #: ui/organisedialog.cpp:74 ../bin/src/ui_groupbydialog.h:133
 #: ../bin/src/ui_groupbydialog.h:152 ../bin/src/ui_groupbydialog.h:171
-#: ../bin/src/ui_edittagdialog.h:740 ../bin/src/ui_ripcddialog.h:316
+#: ../bin/src/ui_ripcddialog.h:316
 msgid "Genre"
 msgstr "Žanras"
 
@@ -2560,10 +2579,9 @@ msgstr "Grupuoti pagal Žanrą/Albumą"
 msgid "Group by Genre/Artist/Album"
 msgstr "Grupuoti pagal Žanrą/Atlikėją/Albumą"
 
-#: library/savedgroupingmanager.cpp:89 playlist/playlist.cpp:1338
+#: library/savedgroupingmanager.cpp:89 playlist/playlist.cpp:1339
 #: ui/organisedialog.cpp:67 ../bin/src/ui_groupbydialog.h:141
 #: ../bin/src/ui_groupbydialog.h:160 ../bin/src/ui_groupbydialog.h:179
-#: ../bin/src/ui_edittagdialog.h:739
 msgid "Grouping"
 msgstr "Grupavimas"
 
@@ -2893,7 +2911,7 @@ msgstr "Didelė juosta"
 msgid "Last played"
 msgstr "Vėliausiai grota"
 
-#: playlist/playlist.cpp:1347 ../bin/src/ui_edittagdialog.h:719
+#: playlist/playlist.cpp:1348 ../bin/src/ui_edittagdialog.h:707
 msgctxt "A playlist's tag."
 msgid "Last played"
 msgstr "Paskiausiai grota"
@@ -2934,8 +2952,8 @@ msgstr "Mažiausiai populiarūs takeliai"
 msgid "Left"
 msgstr "Kairė"
 
-#: playlist/playlist.cpp:1320 ui/organisedialog.cpp:76
-#: ui/qtsystemtrayicon.cpp:254 ../bin/src/ui_edittagdialog.h:714
+#: playlist/playlist.cpp:1321 ui/organisedialog.cpp:76
+#: ui/qtsystemtrayicon.cpp:254 ../bin/src/ui_edittagdialog.h:702
 msgid "Length"
 msgstr "Trukmė"
 
@@ -3084,7 +3102,6 @@ msgid "Low complexity profile (LC)"
 msgstr "Žemo sudėtingumo profilis (LC)"
 
 #: ui/organisedialog.cpp:68 ../bin/src/ui_songinfosettingspage.h:158
-#: ../bin/src/ui_edittagdialog.h:742
 msgid "Lyrics"
 msgstr "Dainų žodžiai"
 
@@ -3243,7 +3260,7 @@ msgstr "Mono grojimas"
 msgid "Months"
 msgstr "Mėnesiai"
 
-#: playlist/playlist.cpp:1375
+#: playlist/playlist.cpp:1376
 msgid "Mood"
 msgstr "Nuotaika"
 
@@ -3572,7 +3589,7 @@ msgstr "Atverti OPML failą..."
 
 #: transcoder/transcodedialog.cpp:240
 msgid "Open a directory to import music from"
-msgstr "Atidaryti katalogą, iš kurio importuoti muziką"
+msgstr "Atverti katalogą, iš kurio importuoti muziką"
 
 #: ../bin/src/ui_deviceproperties.h:381
 msgid "Open device"
@@ -3595,11 +3612,11 @@ msgstr "Atverti naujame grojaraštyje"
 #: ../bin/src/ui_behavioursettingspage.h:350
 msgctxt "Refers to behavior settings in Clementine settings page."
 msgid "Open in new playlist"
-msgstr "Atidaryti naujame grojaraštyje"
+msgstr "Atverti naujame grojaraštyje"
 
 #: songinfo/artistbiography.cpp:94 songinfo/artistbiography.cpp:261
 msgid "Open in your browser"
-msgstr ""
+msgstr "Atverti naršyklėje"
 
 #: ../bin/src/ui_globalshortcutssettingspage.h:168
 #: ../bin/src/ui_globalshortcutssettingspage.h:170
@@ -3644,7 +3661,7 @@ msgstr "Tvarkomi failai"
 msgid "Original tags"
 msgstr "Originalios žymės"
 
-#: library/savedgroupingmanager.cpp:101 playlist/playlist.cpp:1328
+#: library/savedgroupingmanager.cpp:101 playlist/playlist.cpp:1329
 #: ui/organisedialog.cpp:73 ../bin/src/ui_groupbydialog.h:135
 #: ../bin/src/ui_groupbydialog.h:154 ../bin/src/ui_groupbydialog.h:173
 msgid "Original year"
@@ -3697,7 +3714,7 @@ msgstr "Apdorojamas Jamendo katalogas"
 
 #: devices/udisks2lister.cpp:79
 msgid "Partition label"
-msgstr ""
+msgstr "Skaidinio etiketė"
 
 #: ui/equalizer.cpp:139
 msgid "Party"
@@ -3725,10 +3742,10 @@ msgstr "Sulaikyti grojimą"
 msgid "Paused"
 msgstr "Pristabdyta"
 
-#: library/savedgroupingmanager.cpp:86 playlist/playlist.cpp:1336
+#: library/savedgroupingmanager.cpp:86 playlist/playlist.cpp:1337
 #: ui/organisedialog.cpp:66 ../bin/src/ui_groupbydialog.h:140
 #: ../bin/src/ui_groupbydialog.h:159 ../bin/src/ui_groupbydialog.h:178
-#: ../bin/src/ui_edittagdialog.h:738
+#: ../bin/src/ui_edittagdialog.h:727
 msgid "Performer"
 msgstr "Atlikėjas"
 
@@ -3747,7 +3764,7 @@ msgstr "Paprasta juosta"
 msgid "Play"
 msgstr "Groti"
 
-#: playlist/playlist.cpp:1343 ../bin/src/ui_edittagdialog.h:715
+#: playlist/playlist.cpp:1344 ../bin/src/ui_edittagdialog.h:703
 msgid "Play count"
 msgstr "Grojimo skaitiklis"
 
@@ -4009,7 +4026,7 @@ msgstr "Įvertinti šią dainą 4 žvaigždėmis"
 msgid "Rate the current song 5 stars"
 msgstr "Įvertinti šią dainą 5 žvaigždėmis"
 
-#: playlist/playlist.cpp:1341 ../bin/src/ui_edittagdialog.h:723
+#: playlist/playlist.cpp:1342 ../bin/src/ui_edittagdialog.h:711
 msgid "Rating"
 msgstr "Įvertinimas"
 
@@ -4170,7 +4187,7 @@ msgstr "Reikalauti atpažinimo kodo"
 msgid "Reset"
 msgstr "Atstatyti"
 
-#: ui/edittagdialog.cpp:802 ../bin/src/ui_edittagdialog.h:713
+#: ui/edittagdialog.cpp:802 ../bin/src/ui_edittagdialog.h:701
 msgid "Reset play counts"
 msgstr "Atstatyti perklausų skaičių"
 
@@ -4237,7 +4254,7 @@ msgstr "Saugiai pašalinti įrenginį"
 msgid "Safely remove the device after copying"
 msgstr "Saugiai pašalinti įrenginį po kopijavimo"
 
-#: playlist/playlist.cpp:1356 ../bin/src/ui_edittagdialog.h:720
+#: playlist/playlist.cpp:1357 ../bin/src/ui_edittagdialog.h:708
 #: ../bin/src/ui_playbacksettingspage.h:371
 msgid "Sample rate"
 msgstr "Išrankos dažnis"
@@ -4316,7 +4333,7 @@ msgstr "Besikeičiantis kodavimo dažnio profilis (SSR)"
 msgid "Scale size"
 msgstr "Keisti dydį"
 
-#: playlist/playlist.cpp:1349 ../bin/src/ui_edittagdialog.h:721
+#: playlist/playlist.cpp:1350 ../bin/src/ui_edittagdialog.h:709
 msgid "Score"
 msgstr "Įvertinimas"
 
@@ -4682,7 +4699,7 @@ msgstr "Ska"
 msgid "Skip backwards in playlist"
 msgstr "Ankstesnis kūrinys grojaraštyje"
 
-#: playlist/playlist.cpp:1345 ../bin/src/ui_edittagdialog.h:717
+#: playlist/playlist.cpp:1346 ../bin/src/ui_edittagdialog.h:705
 msgid "Skip count"
 msgstr "Praleisti skaičiavimą"
 
@@ -4762,7 +4779,7 @@ msgstr "Rikiavimas"
 msgid "SoundCloud"
 msgstr "SoundCloud"
 
-#: playlist/playlist.cpp:1373
+#: playlist/playlist.cpp:1374
 msgid "Source"
 msgstr "Šaltinis"
 
@@ -4914,7 +4931,7 @@ msgstr "Sėkmingai įrašyta %1"
 msgid "Suggested tags"
 msgstr "Siūlomos žymės"
 
-#: ../bin/src/ui_edittagdialog.h:729
+#: ../bin/src/ui_edittagdialog.h:717
 #: ../bin/src/ui_notificationssettingspage.h:454
 msgid "Summary"
 msgstr "Santrauka"
@@ -5093,7 +5110,7 @@ msgstr "Vėliau tai gali būti pakeista per nustatymus"
 msgid ""
 "This device must be connected and opened before Clementine can see what file"
 " formats it supports."
-msgstr "Įrenginys privalo būti prijungtas ir atidarytas, kad Clementine matytų kokius formatus jis palaiko."
+msgstr "Įrenginys privalo būti prijungtas ir atvertas, kad Clementine matytų kokius formatus jis palaiko."
 
 #: ../bin/src/ui_deviceproperties.h:374
 msgid "This device supports the following file formats:"
@@ -5135,9 +5152,9 @@ msgstr "Šio tipo įrenginys yra nepalaikomas: %1"
 msgid "Time step"
 msgstr "Žingsnio trukmė"
 
-#: playlist/playlist.cpp:1314 ui/organisedialog.cpp:60
+#: playlist/playlist.cpp:1315 ui/organisedialog.cpp:60
 #: ui/qtsystemtrayicon.cpp:247 ../bin/src/ui_about.h:141
-#: ../bin/src/ui_edittagdialog.h:730 ../bin/src/ui_trackselectiondialog.h:210
+#: ../bin/src/ui_edittagdialog.h:719 ../bin/src/ui_trackselectiondialog.h:210
 #: ../bin/src/ui_ripcddialog.h:306
 msgid "Title"
 msgstr "Pavadinimas"
@@ -5194,9 +5211,12 @@ msgstr "Viso baitų perkelta"
 msgid "Total network requests made"
 msgstr "Viso tinklo užklausų padaryta"
 
-#: playlist/playlist.cpp:1322 ui/organisedialog.cpp:69
-#: ../bin/src/ui_edittagdialog.h:731 ../bin/src/ui_trackselectiondialog.h:212
-#: ../bin/src/ui_ripcddialog.h:304
+#: ../bin/src/ui_edittagdialog.h:720
+msgid "Trac&k"
+msgstr "Ta&kelis"
+
+#: playlist/playlist.cpp:1323 ui/organisedialog.cpp:69
+#: ../bin/src/ui_trackselectiondialog.h:212 ../bin/src/ui_ripcddialog.h:304
 msgid "Track"
 msgstr "Takelis"
 
@@ -5619,11 +5639,10 @@ msgstr "Įrašyti meta duomenis"
 msgid "Wrong username or password."
 msgstr "Netinkamas naudotojo vardas ar slaptažodis."
 
-#: library/savedgroupingmanager.cpp:71 playlist/playlist.cpp:1326
+#: library/savedgroupingmanager.cpp:71 playlist/playlist.cpp:1327
 #: ui/organisedialog.cpp:72 ../bin/src/ui_groupbydialog.h:134
 #: ../bin/src/ui_groupbydialog.h:153 ../bin/src/ui_groupbydialog.h:172
-#: ../bin/src/ui_edittagdialog.h:735 ../bin/src/ui_trackselectiondialog.h:211
-#: ../bin/src/ui_ripcddialog.h:312
+#: ../bin/src/ui_trackselectiondialog.h:211 ../bin/src/ui_ripcddialog.h:312
 msgid "Year"
 msgstr "Metai"
 

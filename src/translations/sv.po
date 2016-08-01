@@ -28,8 +28,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2016-07-05 06:50+0000\n"
-"Last-Translator: Chloride Cull <steamruler@gmail.com>\n"
+"PO-Revision-Date: 2016-07-25 11:07+0000\n"
+"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Swedish (http://www.transifex.com/davidsansome/clementine/language/sv/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -209,6 +209,10 @@ msgstr "A&npassad"
 msgid "&Extras"
 msgstr "&Extrafunktioner"
 
+#: ../bin/src/ui_edittagdialog.h:728
+msgid "&Grouping"
+msgstr ""
+
 #: ../bin/src/ui_mainwindow.h:717
 msgid "&Help"
 msgstr "&Hjälp"
@@ -229,6 +233,10 @@ msgstr "&Vänster"
 #: playlist/playlistheader.cpp:36
 msgid "&Lock Rating"
 msgstr "&Lås betyg"
+
+#: ../bin/src/ui_edittagdialog.h:731
+msgid "&Lyrics"
+msgstr ""
 
 #: ../bin/src/ui_mainwindow.h:715
 msgid "&Music"
@@ -265,6 +273,10 @@ msgstr "&Justera kolumner så de passar fönstret"
 #: ../bin/src/ui_mainwindow.h:719
 msgid "&Tools"
 msgstr "&Verktyg"
+
+#: ../bin/src/ui_edittagdialog.h:724
+msgid "&Year"
+msgstr ""
 
 #: ui/edittagdialog.cpp:50
 msgid "(different across multiple songs)"
@@ -692,11 +704,11 @@ msgstr "Efter "
 msgid "After copying..."
 msgstr "Efter kopiering..."
 
-#: library/savedgroupingmanager.cpp:65 playlist/playlist.cpp:1318
+#: library/savedgroupingmanager.cpp:65 playlist/playlist.cpp:1319
 #: ui/organisedialog.cpp:61 ui/qtsystemtrayicon.cpp:251
 #: ../bin/src/ui_groupbydialog.h:128 ../bin/src/ui_groupbydialog.h:147
 #: ../bin/src/ui_groupbydialog.h:166 ../bin/src/ui_albumcoversearcher.h:110
-#: ../bin/src/ui_albumcoversearcher.h:112 ../bin/src/ui_edittagdialog.h:734
+#: ../bin/src/ui_albumcoversearcher.h:112 ../bin/src/ui_edittagdialog.h:723
 #: ../bin/src/ui_trackselectiondialog.h:208 ../bin/src/ui_ripcddialog.h:314
 msgid "Album"
 msgstr "Album"
@@ -705,10 +717,10 @@ msgstr "Album"
 msgid "Album (ideal loudness for all tracks)"
 msgstr "Album (lämplig ljudstyrka för alla spår)"
 
-#: library/savedgroupingmanager.cpp:80 playlist/playlist.cpp:1332
+#: library/savedgroupingmanager.cpp:80 playlist/playlist.cpp:1333
 #: ui/organisedialog.cpp:64 ../bin/src/ui_groupbydialog.h:130
 #: ../bin/src/ui_groupbydialog.h:149 ../bin/src/ui_groupbydialog.h:168
-#: ../bin/src/ui_edittagdialog.h:736
+#: ../bin/src/ui_edittagdialog.h:725
 msgid "Album artist"
 msgstr "Albumartist"
 
@@ -865,11 +877,11 @@ msgid ""
 "the songs of your library?"
 msgstr "Är du säker på att du vill skriva låtstatistik till låtfilerna på alla låtar i ditt musikbibliotek?"
 
-#: library/savedgroupingmanager.cpp:62 playlist/playlist.cpp:1316
+#: library/savedgroupingmanager.cpp:62 playlist/playlist.cpp:1317
 #: ui/organisedialog.cpp:62 ui/qtsystemtrayicon.cpp:249
 #: ../bin/src/ui_groupbydialog.h:129 ../bin/src/ui_groupbydialog.h:148
 #: ../bin/src/ui_groupbydialog.h:167 ../bin/src/ui_albumcoversearcher.h:106
-#: ../bin/src/ui_albumcoversearcher.h:108 ../bin/src/ui_edittagdialog.h:732
+#: ../bin/src/ui_albumcoversearcher.h:108 ../bin/src/ui_edittagdialog.h:721
 #: ../bin/src/ui_trackselectiondialog.h:209 ../bin/src/ui_ripcddialog.h:315
 msgid "Artist"
 msgstr "Artist"
@@ -945,8 +957,8 @@ msgstr "Genomsnittlig bildstorlek"
 msgid "BBC Podcasts"
 msgstr "BBC podsändningar"
 
-#: playlist/playlist.cpp:1352 ui/organisedialog.cpp:71
-#: ../bin/src/ui_edittagdialog.h:716
+#: playlist/playlist.cpp:1353 ui/organisedialog.cpp:71
+#: ../bin/src/ui_edittagdialog.h:704
 msgid "BPM"
 msgstr "BPM"
 
@@ -1002,7 +1014,7 @@ msgstr "Bästa"
 msgid "Biography"
 msgstr "Biografi"
 
-#: playlist/playlist.cpp:1354 ../bin/src/ui_edittagdialog.h:718
+#: playlist/playlist.cpp:1355 ../bin/src/ui_edittagdialog.h:706
 msgid "Bit rate"
 msgstr "Bithastighet"
 
@@ -1106,7 +1118,7 @@ msgid ""
 "Try to login into Vk.com with your browser,to fix this problem."
 msgstr "Captcha krävs.\nFörsök logga in på Vk.com med din webbläsare för att fixa det här problemet."
 
-#: ../bin/src/ui_edittagdialog.h:712
+#: ../bin/src/ui_edittagdialog.h:700
 msgid "Change cover art"
 msgstr "Ändra omslag"
 
@@ -1337,6 +1349,10 @@ msgstr "Stängning av detta fönster kommer att stoppa sökningen efter albumoms
 msgid "Club"
 msgstr "Club"
 
+#: ../bin/src/ui_edittagdialog.h:726
+msgid "Co&mposer"
+msgstr ""
+
 #: ../bin/src/ui_appearancesettingspage.h:271
 msgid "Colors"
 msgstr "Färger"
@@ -1345,8 +1361,8 @@ msgstr "Färger"
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Lista, separerad med komma, över class:level; level är 0-3"
 
-#: playlist/playlist.cpp:1371 smartplaylists/searchterm.cpp:370
-#: ui/organisedialog.cpp:75 ../bin/src/ui_edittagdialog.h:743
+#: playlist/playlist.cpp:1372 smartplaylists/searchterm.cpp:370
+#: ui/organisedialog.cpp:75 ../bin/src/ui_edittagdialog.h:718
 msgid "Comment"
 msgstr "Kommentar"
 
@@ -1354,7 +1370,7 @@ msgstr "Kommentar"
 msgid "Community Radio"
 msgstr "Samhällsradio"
 
-#: ../bin/src/ui_edittagdialog.h:741
+#: ../bin/src/ui_edittagdialog.h:730
 msgid "Complete tags automatically"
 msgstr "Fyll i etiketter automatiskt"
 
@@ -1362,10 +1378,9 @@ msgstr "Fyll i etiketter automatiskt"
 msgid "Complete tags automatically..."
 msgstr "Fyll i etiketter automatiskt..."
 
-#: library/savedgroupingmanager.cpp:74 playlist/playlist.cpp:1334
+#: library/savedgroupingmanager.cpp:74 playlist/playlist.cpp:1335
 #: ui/organisedialog.cpp:65 ../bin/src/ui_groupbydialog.h:131
 #: ../bin/src/ui_groupbydialog.h:150 ../bin/src/ui_groupbydialog.h:169
-#: ../bin/src/ui_edittagdialog.h:737
 msgid "Composer"
 msgstr "Kompositör"
 
@@ -1612,11 +1627,11 @@ msgid ""
 "recover your database"
 msgstr "Databas-korruption upptäckt. Läs https://github.com/clementine-player/Clementine/wiki/Database-Corruption för instruktioner om hur du återställer din databas"
 
-#: playlist/playlist.cpp:1368 ../bin/src/ui_edittagdialog.h:727
+#: playlist/playlist.cpp:1369 ../bin/src/ui_edittagdialog.h:715
 msgid "Date created"
 msgstr "Datum skapad"
 
-#: playlist/playlist.cpp:1366 ../bin/src/ui_edittagdialog.h:726
+#: playlist/playlist.cpp:1367 ../bin/src/ui_edittagdialog.h:714
 msgid "Date modified"
 msgstr "Datum ändrad"
 
@@ -1784,10 +1799,10 @@ msgctxt "Refers to search provider's status."
 msgid "Disabled"
 msgstr "Inaktiverad"
 
-#: library/savedgroupingmanager.cpp:95 playlist/playlist.cpp:1324
+#: library/savedgroupingmanager.cpp:95 playlist/playlist.cpp:1325
 #: ui/organisedialog.cpp:70 ../bin/src/ui_groupbydialog.h:139
 #: ../bin/src/ui_groupbydialog.h:158 ../bin/src/ui_groupbydialog.h:177
-#: ../bin/src/ui_edittagdialog.h:733 ../bin/src/ui_ripcddialog.h:313
+#: ../bin/src/ui_edittagdialog.h:722 ../bin/src/ui_ripcddialog.h:313
 msgid "Disc"
 msgstr "Skiva"
 
@@ -1985,11 +2000,11 @@ msgstr "Redigera etikett \"%1\"..."
 msgid "Edit tag..."
 msgstr "Redigera tagg..."
 
-#: ../bin/src/ui_edittagdialog.h:744
+#: ../bin/src/ui_edittagdialog.h:732
 msgid "Edit tags"
 msgstr "Redigera etiketter"
 
-#: ../bin/src/ui_edittagdialog.h:710
+#: ../bin/src/ui_edittagdialog.h:698
 msgid "Edit track information"
 msgstr "Redigera spårinformation"
 
@@ -2335,11 +2350,11 @@ msgstr "Filändelse"
 msgid "File formats"
 msgstr "Filformat"
 
-#: playlist/playlist.cpp:1358 ../bin/src/ui_edittagdialog.h:728
+#: playlist/playlist.cpp:1359 ../bin/src/ui_edittagdialog.h:716
 msgid "File name"
 msgstr "Filnamn"
 
-#: playlist/playlist.cpp:1360
+#: playlist/playlist.cpp:1361
 msgid "File name (without path)"
 msgstr "Filnamn (utan sökväg)"
 
@@ -2351,13 +2366,13 @@ msgstr "Filnamnsmönster:"
 msgid "File paths"
 msgstr "Filsökvägar"
 
-#: playlist/playlist.cpp:1362 ../bin/src/ui_edittagdialog.h:722
+#: playlist/playlist.cpp:1363 ../bin/src/ui_edittagdialog.h:710
 msgid "File size"
 msgstr "Filstorlek"
 
-#: library/savedgroupingmanager.cpp:83 playlist/playlist.cpp:1364
+#: library/savedgroupingmanager.cpp:83 playlist/playlist.cpp:1365
 #: ../bin/src/ui_groupbydialog.h:132 ../bin/src/ui_groupbydialog.h:151
-#: ../bin/src/ui_groupbydialog.h:170 ../bin/src/ui_edittagdialog.h:724
+#: ../bin/src/ui_groupbydialog.h:170 ../bin/src/ui_edittagdialog.h:712
 msgid "File type"
 msgstr "Filtyp"
 
@@ -2481,6 +2496,10 @@ msgstr "Full bas + diskant"
 msgid "Full Treble"
 msgstr "Full diskant"
 
+#: ../bin/src/ui_edittagdialog.h:729
+msgid "Ge&nre"
+msgstr ""
+
 #: ui/settingsdialog.cpp:137
 msgid "General"
 msgstr "Allmänt"
@@ -2489,10 +2508,10 @@ msgstr "Allmänt"
 msgid "General settings"
 msgstr "Allmänna inställningar"
 
-#: library/savedgroupingmanager.cpp:77 playlist/playlist.cpp:1330
+#: library/savedgroupingmanager.cpp:77 playlist/playlist.cpp:1331
 #: ui/organisedialog.cpp:74 ../bin/src/ui_groupbydialog.h:133
 #: ../bin/src/ui_groupbydialog.h:152 ../bin/src/ui_groupbydialog.h:171
-#: ../bin/src/ui_edittagdialog.h:740 ../bin/src/ui_ripcddialog.h:316
+#: ../bin/src/ui_ripcddialog.h:316
 msgid "Genre"
 msgstr "Genre"
 
@@ -2576,10 +2595,9 @@ msgstr "Gruppera efter genre/album"
 msgid "Group by Genre/Artist/Album"
 msgstr "Gruppera efter genre/artist/album"
 
-#: library/savedgroupingmanager.cpp:89 playlist/playlist.cpp:1338
+#: library/savedgroupingmanager.cpp:89 playlist/playlist.cpp:1339
 #: ui/organisedialog.cpp:67 ../bin/src/ui_groupbydialog.h:141
 #: ../bin/src/ui_groupbydialog.h:160 ../bin/src/ui_groupbydialog.h:179
-#: ../bin/src/ui_edittagdialog.h:739
 msgid "Grouping"
 msgstr "Gruppera"
 
@@ -2909,7 +2927,7 @@ msgstr "Stor sidopanel"
 msgid "Last played"
 msgstr "Senast spelad"
 
-#: playlist/playlist.cpp:1347 ../bin/src/ui_edittagdialog.h:719
+#: playlist/playlist.cpp:1348 ../bin/src/ui_edittagdialog.h:707
 msgctxt "A playlist's tag."
 msgid "Last played"
 msgstr "Senast spelad"
@@ -2950,8 +2968,8 @@ msgstr "Minst omtyckta spår"
 msgid "Left"
 msgstr "Vänster"
 
-#: playlist/playlist.cpp:1320 ui/organisedialog.cpp:76
-#: ui/qtsystemtrayicon.cpp:254 ../bin/src/ui_edittagdialog.h:714
+#: playlist/playlist.cpp:1321 ui/organisedialog.cpp:76
+#: ui/qtsystemtrayicon.cpp:254 ../bin/src/ui_edittagdialog.h:702
 msgid "Length"
 msgstr "Speltid"
 
@@ -3100,7 +3118,6 @@ msgid "Low complexity profile (LC)"
 msgstr "Låg komplexitetprofil (LC)"
 
 #: ui/organisedialog.cpp:68 ../bin/src/ui_songinfosettingspage.h:158
-#: ../bin/src/ui_edittagdialog.h:742
 msgid "Lyrics"
 msgstr "Låttexter"
 
@@ -3259,7 +3276,7 @@ msgstr "Mono uppspeling"
 msgid "Months"
 msgstr "Månader"
 
-#: playlist/playlist.cpp:1375
+#: playlist/playlist.cpp:1376
 msgid "Mood"
 msgstr "Stämning"
 
@@ -3660,7 +3677,7 @@ msgstr "Organiserar filer..."
 msgid "Original tags"
 msgstr "Ursprungliga etiketter"
 
-#: library/savedgroupingmanager.cpp:101 playlist/playlist.cpp:1328
+#: library/savedgroupingmanager.cpp:101 playlist/playlist.cpp:1329
 #: ui/organisedialog.cpp:73 ../bin/src/ui_groupbydialog.h:135
 #: ../bin/src/ui_groupbydialog.h:154 ../bin/src/ui_groupbydialog.h:173
 msgid "Original year"
@@ -3741,10 +3758,10 @@ msgstr "Gör paus i uppspelning"
 msgid "Paused"
 msgstr "Pausad"
 
-#: library/savedgroupingmanager.cpp:86 playlist/playlist.cpp:1336
+#: library/savedgroupingmanager.cpp:86 playlist/playlist.cpp:1337
 #: ui/organisedialog.cpp:66 ../bin/src/ui_groupbydialog.h:140
 #: ../bin/src/ui_groupbydialog.h:159 ../bin/src/ui_groupbydialog.h:178
-#: ../bin/src/ui_edittagdialog.h:738
+#: ../bin/src/ui_edittagdialog.h:727
 msgid "Performer"
 msgstr "Utövare"
 
@@ -3763,7 +3780,7 @@ msgstr "Vanlig sidorad"
 msgid "Play"
 msgstr "Spela upp"
 
-#: playlist/playlist.cpp:1343 ../bin/src/ui_edittagdialog.h:715
+#: playlist/playlist.cpp:1344 ../bin/src/ui_edittagdialog.h:703
 msgid "Play count"
 msgstr "Antal uppspelningar"
 
@@ -4025,7 +4042,7 @@ msgstr "Betygsätt den aktuella låten 4 stjärnor"
 msgid "Rate the current song 5 stars"
 msgstr "Betygsätt den aktuella låten 5 stjärnor"
 
-#: playlist/playlist.cpp:1341 ../bin/src/ui_edittagdialog.h:723
+#: playlist/playlist.cpp:1342 ../bin/src/ui_edittagdialog.h:711
 msgid "Rating"
 msgstr "Betyg"
 
@@ -4186,7 +4203,7 @@ msgstr "Kräv autentiseringskod"
 msgid "Reset"
 msgstr "Återställ"
 
-#: ui/edittagdialog.cpp:802 ../bin/src/ui_edittagdialog.h:713
+#: ui/edittagdialog.cpp:802 ../bin/src/ui_edittagdialog.h:701
 msgid "Reset play counts"
 msgstr "Återställ låtstatistik"
 
@@ -4253,7 +4270,7 @@ msgstr "Säker borttagning av enhet"
 msgid "Safely remove the device after copying"
 msgstr "Säker borttagning av enheten efter kopiering"
 
-#: playlist/playlist.cpp:1356 ../bin/src/ui_edittagdialog.h:720
+#: playlist/playlist.cpp:1357 ../bin/src/ui_edittagdialog.h:708
 #: ../bin/src/ui_playbacksettingspage.h:371
 msgid "Sample rate"
 msgstr "Samplingsfrekvens"
@@ -4332,7 +4349,7 @@ msgstr "Skalbar samplingsfrekvensprofil (SSR)"
 msgid "Scale size"
 msgstr "Skalnings storlek"
 
-#: playlist/playlist.cpp:1349 ../bin/src/ui_edittagdialog.h:721
+#: playlist/playlist.cpp:1350 ../bin/src/ui_edittagdialog.h:709
 msgid "Score"
 msgstr "Poäng"
 
@@ -4698,7 +4715,7 @@ msgstr "Ska"
 msgid "Skip backwards in playlist"
 msgstr "Gå bakåt i spellista"
 
-#: playlist/playlist.cpp:1345 ../bin/src/ui_edittagdialog.h:717
+#: playlist/playlist.cpp:1346 ../bin/src/ui_edittagdialog.h:705
 msgid "Skip count"
 msgstr "Antal överhoppningar"
 
@@ -4778,7 +4795,7 @@ msgstr "Sortering"
 msgid "SoundCloud"
 msgstr "SoundCloud"
 
-#: playlist/playlist.cpp:1373
+#: playlist/playlist.cpp:1374
 msgid "Source"
 msgstr "Källa"
 
@@ -4930,7 +4947,7 @@ msgstr "Skrev %1 med lyckat resultat"
 msgid "Suggested tags"
 msgstr "Föreslagna etiketter"
 
-#: ../bin/src/ui_edittagdialog.h:729
+#: ../bin/src/ui_edittagdialog.h:717
 #: ../bin/src/ui_notificationssettingspage.h:454
 msgid "Summary"
 msgstr "Sammanfattning"
@@ -5151,9 +5168,9 @@ msgstr "Denna typ av enhet är inte stödd: %1"
 msgid "Time step"
 msgstr "Tidssteg"
 
-#: playlist/playlist.cpp:1314 ui/organisedialog.cpp:60
+#: playlist/playlist.cpp:1315 ui/organisedialog.cpp:60
 #: ui/qtsystemtrayicon.cpp:247 ../bin/src/ui_about.h:141
-#: ../bin/src/ui_edittagdialog.h:730 ../bin/src/ui_trackselectiondialog.h:210
+#: ../bin/src/ui_edittagdialog.h:719 ../bin/src/ui_trackselectiondialog.h:210
 #: ../bin/src/ui_ripcddialog.h:306
 msgid "Title"
 msgstr "Titel"
@@ -5210,9 +5227,12 @@ msgstr "Totalt antal byte överfört"
 msgid "Total network requests made"
 msgstr "Totalt antal nätverksbegäran"
 
-#: playlist/playlist.cpp:1322 ui/organisedialog.cpp:69
-#: ../bin/src/ui_edittagdialog.h:731 ../bin/src/ui_trackselectiondialog.h:212
-#: ../bin/src/ui_ripcddialog.h:304
+#: ../bin/src/ui_edittagdialog.h:720
+msgid "Trac&k"
+msgstr ""
+
+#: playlist/playlist.cpp:1323 ui/organisedialog.cpp:69
+#: ../bin/src/ui_trackselectiondialog.h:212 ../bin/src/ui_ripcddialog.h:304
 msgid "Track"
 msgstr "Spår"
 
@@ -5635,11 +5655,10 @@ msgstr "Skriv metadata"
 msgid "Wrong username or password."
 msgstr "Fel användarnamn eller lösenord."
 
-#: library/savedgroupingmanager.cpp:71 playlist/playlist.cpp:1326
+#: library/savedgroupingmanager.cpp:71 playlist/playlist.cpp:1327
 #: ui/organisedialog.cpp:72 ../bin/src/ui_groupbydialog.h:134
 #: ../bin/src/ui_groupbydialog.h:153 ../bin/src/ui_groupbydialog.h:172
-#: ../bin/src/ui_edittagdialog.h:735 ../bin/src/ui_trackselectiondialog.h:211
-#: ../bin/src/ui_ripcddialog.h:312
+#: ../bin/src/ui_trackselectiondialog.h:211 ../bin/src/ui_ripcddialog.h:312
 msgid "Year"
 msgstr "År"
 

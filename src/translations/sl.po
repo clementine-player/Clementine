@@ -13,7 +13,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2016-07-10 13:10+0000\n"
+"PO-Revision-Date: 2016-07-25 14:14+0000\n"
 "Last-Translator: Andrej Mernik <andrejm@ubuntu.si>\n"
 "Language-Team: Slovenian (http://www.transifex.com/davidsansome/clementine/language/sl/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -194,6 +194,10 @@ msgstr "Po &meri"
 msgid "&Extras"
 msgstr "Dodatki"
 
+#: ../bin/src/ui_edittagdialog.h:728
+msgid "&Grouping"
+msgstr "&Združevanje"
+
 #: ../bin/src/ui_mainwindow.h:717
 msgid "&Help"
 msgstr "&Pomoč"
@@ -214,6 +218,10 @@ msgstr "&Levo"
 #: playlist/playlistheader.cpp:36
 msgid "&Lock Rating"
 msgstr "Zak&leni oceno"
+
+#: ../bin/src/ui_edittagdialog.h:731
+msgid "&Lyrics"
+msgstr "Besedi&la"
 
 #: ../bin/src/ui_mainwindow.h:715
 msgid "&Music"
@@ -250,6 +258,10 @@ msgstr "Raztegni &stolpce, da se prilegajo oknu"
 #: ../bin/src/ui_mainwindow.h:719
 msgid "&Tools"
 msgstr "&Orodja"
+
+#: ../bin/src/ui_edittagdialog.h:724
+msgid "&Year"
+msgstr "Le&to"
 
 #: ui/edittagdialog.cpp:50
 msgid "(different across multiple songs)"
@@ -677,11 +689,11 @@ msgstr "Po "
 msgid "After copying..."
 msgstr "Po kopiranju ..."
 
-#: library/savedgroupingmanager.cpp:65 playlist/playlist.cpp:1318
+#: library/savedgroupingmanager.cpp:65 playlist/playlist.cpp:1319
 #: ui/organisedialog.cpp:61 ui/qtsystemtrayicon.cpp:251
 #: ../bin/src/ui_groupbydialog.h:128 ../bin/src/ui_groupbydialog.h:147
 #: ../bin/src/ui_groupbydialog.h:166 ../bin/src/ui_albumcoversearcher.h:110
-#: ../bin/src/ui_albumcoversearcher.h:112 ../bin/src/ui_edittagdialog.h:734
+#: ../bin/src/ui_albumcoversearcher.h:112 ../bin/src/ui_edittagdialog.h:723
 #: ../bin/src/ui_trackselectiondialog.h:208 ../bin/src/ui_ripcddialog.h:314
 msgid "Album"
 msgstr "Album"
@@ -690,10 +702,10 @@ msgstr "Album"
 msgid "Album (ideal loudness for all tracks)"
 msgstr "Album (najboljša glasnost za vse skladbe)"
 
-#: library/savedgroupingmanager.cpp:80 playlist/playlist.cpp:1332
+#: library/savedgroupingmanager.cpp:80 playlist/playlist.cpp:1333
 #: ui/organisedialog.cpp:64 ../bin/src/ui_groupbydialog.h:130
 #: ../bin/src/ui_groupbydialog.h:149 ../bin/src/ui_groupbydialog.h:168
-#: ../bin/src/ui_edittagdialog.h:736
+#: ../bin/src/ui_edittagdialog.h:725
 msgid "Album artist"
 msgstr "Izvajalec albuma"
 
@@ -850,11 +862,11 @@ msgid ""
 "the songs of your library?"
 msgstr "Ali ste prepričani, da želite zapisati statistike skladbe v datoteko skladbe za vse skladbe v vaši knjižnici?"
 
-#: library/savedgroupingmanager.cpp:62 playlist/playlist.cpp:1316
+#: library/savedgroupingmanager.cpp:62 playlist/playlist.cpp:1317
 #: ui/organisedialog.cpp:62 ui/qtsystemtrayicon.cpp:249
 #: ../bin/src/ui_groupbydialog.h:129 ../bin/src/ui_groupbydialog.h:148
 #: ../bin/src/ui_groupbydialog.h:167 ../bin/src/ui_albumcoversearcher.h:106
-#: ../bin/src/ui_albumcoversearcher.h:108 ../bin/src/ui_edittagdialog.h:732
+#: ../bin/src/ui_albumcoversearcher.h:108 ../bin/src/ui_edittagdialog.h:721
 #: ../bin/src/ui_trackselectiondialog.h:209 ../bin/src/ui_ripcddialog.h:315
 msgid "Artist"
 msgstr "Izvajalec"
@@ -930,8 +942,8 @@ msgstr "Povprečna velikost slike"
 msgid "BBC Podcasts"
 msgstr "BBC-jevi podcasti"
 
-#: playlist/playlist.cpp:1352 ui/organisedialog.cpp:71
-#: ../bin/src/ui_edittagdialog.h:716
+#: playlist/playlist.cpp:1353 ui/organisedialog.cpp:71
+#: ../bin/src/ui_edittagdialog.h:704
 msgid "BPM"
 msgstr "udarcev/min"
 
@@ -987,7 +999,7 @@ msgstr "Najboljše"
 msgid "Biography"
 msgstr "Biografija"
 
-#: playlist/playlist.cpp:1354 ../bin/src/ui_edittagdialog.h:718
+#: playlist/playlist.cpp:1355 ../bin/src/ui_edittagdialog.h:706
 msgid "Bit rate"
 msgstr "Bitna hitrost"
 
@@ -1091,7 +1103,7 @@ msgid ""
 "Try to login into Vk.com with your browser,to fix this problem."
 msgstr "Zahtevan je Captcha.\nDa rešite to težavo, se poskusite v Vk.prijaviti z vašim brskalnikom."
 
-#: ../bin/src/ui_edittagdialog.h:712
+#: ../bin/src/ui_edittagdialog.h:700
 msgid "Change cover art"
 msgstr "Spremeni ovitek albuma"
 
@@ -1322,6 +1334,10 @@ msgstr "Zaprtje tega okna bo prekinilo iskanje ovitkov albumov."
 msgid "Club"
 msgstr "Klubska"
 
+#: ../bin/src/ui_edittagdialog.h:726
+msgid "Co&mposer"
+msgstr "&Skladatelj"
+
 #: ../bin/src/ui_appearancesettingspage.h:271
 msgid "Colors"
 msgstr "Barve"
@@ -1330,8 +1346,8 @@ msgstr "Barve"
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Z vejicami ločen seznam razred:raven, raven je 0-3"
 
-#: playlist/playlist.cpp:1371 smartplaylists/searchterm.cpp:370
-#: ui/organisedialog.cpp:75 ../bin/src/ui_edittagdialog.h:743
+#: playlist/playlist.cpp:1372 smartplaylists/searchterm.cpp:370
+#: ui/organisedialog.cpp:75 ../bin/src/ui_edittagdialog.h:718
 msgid "Comment"
 msgstr "Opomba"
 
@@ -1339,7 +1355,7 @@ msgstr "Opomba"
 msgid "Community Radio"
 msgstr "Radio skupnosti"
 
-#: ../bin/src/ui_edittagdialog.h:741
+#: ../bin/src/ui_edittagdialog.h:730
 msgid "Complete tags automatically"
 msgstr "Samodejno dopolni oznake"
 
@@ -1347,10 +1363,9 @@ msgstr "Samodejno dopolni oznake"
 msgid "Complete tags automatically..."
 msgstr "Samodejno dopolni oznake ..."
 
-#: library/savedgroupingmanager.cpp:74 playlist/playlist.cpp:1334
+#: library/savedgroupingmanager.cpp:74 playlist/playlist.cpp:1335
 #: ui/organisedialog.cpp:65 ../bin/src/ui_groupbydialog.h:131
 #: ../bin/src/ui_groupbydialog.h:150 ../bin/src/ui_groupbydialog.h:169
-#: ../bin/src/ui_edittagdialog.h:737
 msgid "Composer"
 msgstr "Skladatelj"
 
@@ -1597,11 +1612,11 @@ msgid ""
 "recover your database"
 msgstr "Zaznana je bila okvara podatkovne zbirke. Za navodila obnovitve podatkovne zbirke si oglejte: https://github.com/clementine-player/Clementine/wiki/Database-Corruption"
 
-#: playlist/playlist.cpp:1368 ../bin/src/ui_edittagdialog.h:727
+#: playlist/playlist.cpp:1369 ../bin/src/ui_edittagdialog.h:715
 msgid "Date created"
 msgstr "Datum ustvarjenja"
 
-#: playlist/playlist.cpp:1366 ../bin/src/ui_edittagdialog.h:726
+#: playlist/playlist.cpp:1367 ../bin/src/ui_edittagdialog.h:714
 msgid "Date modified"
 msgstr "Datum spremembe"
 
@@ -1769,10 +1784,10 @@ msgctxt "Refers to search provider's status."
 msgid "Disabled"
 msgstr "Onemogočeno"
 
-#: library/savedgroupingmanager.cpp:95 playlist/playlist.cpp:1324
+#: library/savedgroupingmanager.cpp:95 playlist/playlist.cpp:1325
 #: ui/organisedialog.cpp:70 ../bin/src/ui_groupbydialog.h:139
 #: ../bin/src/ui_groupbydialog.h:158 ../bin/src/ui_groupbydialog.h:177
-#: ../bin/src/ui_edittagdialog.h:733 ../bin/src/ui_ripcddialog.h:313
+#: ../bin/src/ui_edittagdialog.h:722 ../bin/src/ui_ripcddialog.h:313
 msgid "Disc"
 msgstr "Disk"
 
@@ -1854,7 +1869,7 @@ msgstr "Dvoklik skladbe v seznamu predvajanja bo ..."
 
 #: ../bin/src/ui_behavioursettingspage.h:345
 msgid "Double clicking a song will..."
-msgstr "Dvoklik skladbe bo povzročil sledeče ..."
+msgstr "Dvoklik skladbe bo povzročil naslednje ..."
 
 #: internet/podcasts/podcastservice.cpp:531
 #, c-format, qt-plural-format
@@ -1970,11 +1985,11 @@ msgstr "Uredi oznako \"%1\" ..."
 msgid "Edit tag..."
 msgstr "Uredi oznako ..."
 
-#: ../bin/src/ui_edittagdialog.h:744
+#: ../bin/src/ui_edittagdialog.h:732
 msgid "Edit tags"
 msgstr "Uredi oznake"
 
-#: ../bin/src/ui_edittagdialog.h:710
+#: ../bin/src/ui_edittagdialog.h:698
 msgid "Edit track information"
 msgstr "Uredi podrobnosti o skladbi"
 
@@ -2019,7 +2034,7 @@ msgstr "Omogoči znotrajvrstično urejanje metapodatkov skladbe s klikom"
 msgid ""
 "Enable sources below to include them in search results.  Results will be "
 "displayed in this order."
-msgstr "Omogočite spodnje vire, da bodo vključeni v iskalne rezultate. Rezultati bodo prikazani v sledečem vrstnem redu."
+msgstr "Omogočite spodnje vire, da bodo vključeni v iskalne rezultate. Rezultati bodo prikazani v naslednjem vrstnem redu."
 
 #: core/globalshortcuts.cpp:76
 msgid "Enable/disable Last.fm scrobbling"
@@ -2320,11 +2335,11 @@ msgstr "Pripona datoteke"
 msgid "File formats"
 msgstr "Vrste datotek"
 
-#: playlist/playlist.cpp:1358 ../bin/src/ui_edittagdialog.h:728
+#: playlist/playlist.cpp:1359 ../bin/src/ui_edittagdialog.h:716
 msgid "File name"
 msgstr "Ime datoteke"
 
-#: playlist/playlist.cpp:1360
+#: playlist/playlist.cpp:1361
 msgid "File name (without path)"
 msgstr "Ime datoteke (brez poti)"
 
@@ -2336,13 +2351,13 @@ msgstr "Vzorec imena datoteke:"
 msgid "File paths"
 msgstr "Poti do datotek"
 
-#: playlist/playlist.cpp:1362 ../bin/src/ui_edittagdialog.h:722
+#: playlist/playlist.cpp:1363 ../bin/src/ui_edittagdialog.h:710
 msgid "File size"
 msgstr "Velikost datoteke"
 
-#: library/savedgroupingmanager.cpp:83 playlist/playlist.cpp:1364
+#: library/savedgroupingmanager.cpp:83 playlist/playlist.cpp:1365
 #: ../bin/src/ui_groupbydialog.h:132 ../bin/src/ui_groupbydialog.h:151
-#: ../bin/src/ui_groupbydialog.h:170 ../bin/src/ui_edittagdialog.h:724
+#: ../bin/src/ui_groupbydialog.h:170 ../bin/src/ui_edittagdialog.h:712
 msgid "File type"
 msgstr "Vrsta datoteke"
 
@@ -2466,6 +2481,10 @@ msgstr "Polni basi in visoki toni"
 msgid "Full Treble"
 msgstr "Polni visoki toni"
 
+#: ../bin/src/ui_edittagdialog.h:729
+msgid "Ge&nre"
+msgstr "Z&vrst"
+
 #: ui/settingsdialog.cpp:137
 msgid "General"
 msgstr "Splošno"
@@ -2474,10 +2493,10 @@ msgstr "Splošno"
 msgid "General settings"
 msgstr "Splošne nastavitve"
 
-#: library/savedgroupingmanager.cpp:77 playlist/playlist.cpp:1330
+#: library/savedgroupingmanager.cpp:77 playlist/playlist.cpp:1331
 #: ui/organisedialog.cpp:74 ../bin/src/ui_groupbydialog.h:133
 #: ../bin/src/ui_groupbydialog.h:152 ../bin/src/ui_groupbydialog.h:171
-#: ../bin/src/ui_edittagdialog.h:740 ../bin/src/ui_ripcddialog.h:316
+#: ../bin/src/ui_ripcddialog.h:316
 msgid "Genre"
 msgstr "Zvrst"
 
@@ -2561,10 +2580,9 @@ msgstr "Združi po zvrsti/albumu"
 msgid "Group by Genre/Artist/Album"
 msgstr "Združi po zvrsti/izvajalcu/albumu"
 
-#: library/savedgroupingmanager.cpp:89 playlist/playlist.cpp:1338
+#: library/savedgroupingmanager.cpp:89 playlist/playlist.cpp:1339
 #: ui/organisedialog.cpp:67 ../bin/src/ui_groupbydialog.h:141
 #: ../bin/src/ui_groupbydialog.h:160 ../bin/src/ui_groupbydialog.h:179
-#: ../bin/src/ui_edittagdialog.h:739
 msgid "Grouping"
 msgstr "Združevanje"
 
@@ -2894,7 +2912,7 @@ msgstr "Velika stranska vrstica"
 msgid "Last played"
 msgstr "Zadnjič predvajano"
 
-#: playlist/playlist.cpp:1347 ../bin/src/ui_edittagdialog.h:719
+#: playlist/playlist.cpp:1348 ../bin/src/ui_edittagdialog.h:707
 msgctxt "A playlist's tag."
 msgid "Last played"
 msgstr "Zadnjič predvajano"
@@ -2935,8 +2953,8 @@ msgstr "Najmanj priljubljene skladbe"
 msgid "Left"
 msgstr "Levo"
 
-#: playlist/playlist.cpp:1320 ui/organisedialog.cpp:76
-#: ui/qtsystemtrayicon.cpp:254 ../bin/src/ui_edittagdialog.h:714
+#: playlist/playlist.cpp:1321 ui/organisedialog.cpp:76
+#: ui/qtsystemtrayicon.cpp:254 ../bin/src/ui_edittagdialog.h:702
 msgid "Length"
 msgstr "Dolžina"
 
@@ -3085,7 +3103,6 @@ msgid "Low complexity profile (LC)"
 msgstr "Profil nizke kompleksnosti (LC)"
 
 #: ui/organisedialog.cpp:68 ../bin/src/ui_songinfosettingspage.h:158
-#: ../bin/src/ui_edittagdialog.h:742
 msgid "Lyrics"
 msgstr "Besedila"
 
@@ -3244,7 +3261,7 @@ msgstr "Predvajanje v načinu mono"
 msgid "Months"
 msgstr "Meseci"
 
-#: playlist/playlist.cpp:1375
+#: playlist/playlist.cpp:1376
 msgid "Mood"
 msgstr "Razpoloženje"
 
@@ -3645,7 +3662,7 @@ msgstr "Organiziranje datotek"
 msgid "Original tags"
 msgstr "Izvorne oznake"
 
-#: library/savedgroupingmanager.cpp:101 playlist/playlist.cpp:1328
+#: library/savedgroupingmanager.cpp:101 playlist/playlist.cpp:1329
 #: ui/organisedialog.cpp:73 ../bin/src/ui_groupbydialog.h:135
 #: ../bin/src/ui_groupbydialog.h:154 ../bin/src/ui_groupbydialog.h:173
 msgid "Original year"
@@ -3726,10 +3743,10 @@ msgstr "Naredi premor predvajanja"
 msgid "Paused"
 msgstr "V premoru"
 
-#: library/savedgroupingmanager.cpp:86 playlist/playlist.cpp:1336
+#: library/savedgroupingmanager.cpp:86 playlist/playlist.cpp:1337
 #: ui/organisedialog.cpp:66 ../bin/src/ui_groupbydialog.h:140
 #: ../bin/src/ui_groupbydialog.h:159 ../bin/src/ui_groupbydialog.h:178
-#: ../bin/src/ui_edittagdialog.h:738
+#: ../bin/src/ui_edittagdialog.h:727
 msgid "Performer"
 msgstr "Izvajalec"
 
@@ -3748,7 +3765,7 @@ msgstr "Navadna stranska vrstica"
 msgid "Play"
 msgstr "Predvajaj"
 
-#: playlist/playlist.cpp:1343 ../bin/src/ui_edittagdialog.h:715
+#: playlist/playlist.cpp:1344 ../bin/src/ui_edittagdialog.h:703
 msgid "Play count"
 msgstr "Število predvajanj"
 
@@ -4010,7 +4027,7 @@ msgstr "Oceni trenutno skladbo: 4 zvezdice"
 msgid "Rate the current song 5 stars"
 msgstr "Oceni trenutno skladbo: 5 zvezdic"
 
-#: playlist/playlist.cpp:1341 ../bin/src/ui_edittagdialog.h:723
+#: playlist/playlist.cpp:1342 ../bin/src/ui_edittagdialog.h:711
 msgid "Rating"
 msgstr "Ocena"
 
@@ -4171,7 +4188,7 @@ msgstr "Zahtevaj overitveno kodo"
 msgid "Reset"
 msgstr "Ponastavi"
 
-#: ui/edittagdialog.cpp:802 ../bin/src/ui_edittagdialog.h:713
+#: ui/edittagdialog.cpp:802 ../bin/src/ui_edittagdialog.h:701
 msgid "Reset play counts"
 msgstr "Ponastavi število predvajanj"
 
@@ -4238,7 +4255,7 @@ msgstr "Varno odstrani napravo"
 msgid "Safely remove the device after copying"
 msgstr "Varno odstrani napravo po kopiranju"
 
-#: playlist/playlist.cpp:1356 ../bin/src/ui_edittagdialog.h:720
+#: playlist/playlist.cpp:1357 ../bin/src/ui_edittagdialog.h:708
 #: ../bin/src/ui_playbacksettingspage.h:371
 msgid "Sample rate"
 msgstr "Hitrost vzorčenja"
@@ -4317,7 +4334,7 @@ msgstr "Profil prilagodljive vzorčne hitrosti (SSR)"
 msgid "Scale size"
 msgstr "Umeri velikost"
 
-#: playlist/playlist.cpp:1349 ../bin/src/ui_edittagdialog.h:721
+#: playlist/playlist.cpp:1350 ../bin/src/ui_edittagdialog.h:709
 msgid "Score"
 msgstr "Rezultat"
 
@@ -4683,7 +4700,7 @@ msgstr "Ska"
 msgid "Skip backwards in playlist"
 msgstr "Skoči nazaj po seznamu predvajanja"
 
-#: playlist/playlist.cpp:1345 ../bin/src/ui_edittagdialog.h:717
+#: playlist/playlist.cpp:1346 ../bin/src/ui_edittagdialog.h:705
 msgid "Skip count"
 msgstr "Število preskočenih"
 
@@ -4763,7 +4780,7 @@ msgstr "Razvrščanje"
 msgid "SoundCloud"
 msgstr "SoundCloud"
 
-#: playlist/playlist.cpp:1373
+#: playlist/playlist.cpp:1374
 msgid "Source"
 msgstr "Vir"
 
@@ -4915,7 +4932,7 @@ msgstr "Uspešno zapisan %1"
 msgid "Suggested tags"
 msgstr "Predlagane oznake"
 
-#: ../bin/src/ui_edittagdialog.h:729
+#: ../bin/src/ui_edittagdialog.h:717
 #: ../bin/src/ui_notificationssettingspage.h:454
 msgid "Summary"
 msgstr "Povzetek"
@@ -5038,13 +5055,13 @@ msgstr "Med razčlenjevanjem odgovora iz trgovine iTunes je prišlo do težave"
 msgid ""
 "There were problems copying some songs.  The following files could not be "
 "copied:"
-msgstr "Med kopiranjem nekaterih skladb so nastopile težave. Sledečih datotek ni bilo mogoče kopirati:"
+msgstr "Med kopiranjem nekaterih skladb so nastopile težave. Naslednjih datotek ni bilo mogoče kopirati:"
 
 #: ui/organiseerrordialog.cpp:61
 msgid ""
 "There were problems deleting some songs.  The following files could not be "
 "deleted:"
-msgstr "Med brisanjem nekaterih skladb so nastopile težave. Sledečih datotek ni bilo mogoče izbrisati:"
+msgstr "Med brisanjem nekaterih skladb so nastopile težave. Naslednjih datotek ni bilo mogoče izbrisati:"
 
 #: devices/deviceview.cpp:409
 msgid ""
@@ -5098,7 +5115,7 @@ msgstr "Ta naprava mora biti povezana in odprta, preden lahko Clementine ugotovi
 
 #: ../bin/src/ui_deviceproperties.h:374
 msgid "This device supports the following file formats:"
-msgstr "Ta naprava podpira sledeče vrste datotek:"
+msgstr "Ta naprava podpira naslednje vrste datotek:"
 
 #: devices/devicemanager.cpp:572 devices/devicemanager.cpp:583
 msgid "This device will not work properly"
@@ -5136,9 +5153,9 @@ msgstr "Ta vrsta naprave ni podprta: %1"
 msgid "Time step"
 msgstr "Časovni korak"
 
-#: playlist/playlist.cpp:1314 ui/organisedialog.cpp:60
+#: playlist/playlist.cpp:1315 ui/organisedialog.cpp:60
 #: ui/qtsystemtrayicon.cpp:247 ../bin/src/ui_about.h:141
-#: ../bin/src/ui_edittagdialog.h:730 ../bin/src/ui_trackselectiondialog.h:210
+#: ../bin/src/ui_edittagdialog.h:719 ../bin/src/ui_trackselectiondialog.h:210
 #: ../bin/src/ui_ripcddialog.h:306
 msgid "Title"
 msgstr "Naslov"
@@ -5195,9 +5212,12 @@ msgstr "Skupno prenesenih bajtov"
 msgid "Total network requests made"
 msgstr "Skupno število omrežnih zahtev"
 
-#: playlist/playlist.cpp:1322 ui/organisedialog.cpp:69
-#: ../bin/src/ui_edittagdialog.h:731 ../bin/src/ui_trackselectiondialog.h:212
-#: ../bin/src/ui_ripcddialog.h:304
+#: ../bin/src/ui_edittagdialog.h:720
+msgid "Trac&k"
+msgstr "S&kladba"
+
+#: playlist/playlist.cpp:1323 ui/organisedialog.cpp:69
+#: ../bin/src/ui_trackselectiondialog.h:212 ../bin/src/ui_ripcddialog.h:304
 msgid "Track"
 msgstr "Skladba"
 
@@ -5435,7 +5455,7 @@ msgstr "Uporabniško ime"
 
 #: ../bin/src/ui_behavioursettingspage.h:332
 msgid "Using the menu to add a song will..."
-msgstr "Uporaba menija za dodajanje skladbe bo povzročila sledeče ..."
+msgstr "Uporaba menija za dodajanje skladbe bo povzročila naslednje ..."
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:138
 #: ../bin/src/ui_magnatunesettingspage.h:172
@@ -5620,11 +5640,10 @@ msgstr "Zapiši metapodatke"
 msgid "Wrong username or password."
 msgstr "Napačno uporabniško ime ali geslo."
 
-#: library/savedgroupingmanager.cpp:71 playlist/playlist.cpp:1326
+#: library/savedgroupingmanager.cpp:71 playlist/playlist.cpp:1327
 #: ui/organisedialog.cpp:72 ../bin/src/ui_groupbydialog.h:134
 #: ../bin/src/ui_groupbydialog.h:153 ../bin/src/ui_groupbydialog.h:172
-#: ../bin/src/ui_edittagdialog.h:735 ../bin/src/ui_trackselectiondialog.h:211
-#: ../bin/src/ui_ripcddialog.h:312
+#: ../bin/src/ui_trackselectiondialog.h:211 ../bin/src/ui_ripcddialog.h:312
 msgid "Year"
 msgstr "Leto"
 
