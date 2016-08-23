@@ -537,9 +537,9 @@ void LibraryModel::AlbumArtLoaded(quint64 id, const QImage& image) {
     QPixmapCache::insert(cache_key, QPixmap::fromImage(image));
   }
 
-  // if not already in the disk cache
+  // If we have a valid cover not already in the disk cache
   std::unique_ptr<QIODevice> cached_img(icon_cache_->data(QUrl(cache_key)));
-  if (!cached_img) {
+  if (!cached_img && !image.isNull()) {
     QNetworkCacheMetaData item_metadata;
     item_metadata.setSaveToDisk(true);
     item_metadata.setUrl(QUrl(cache_key));
