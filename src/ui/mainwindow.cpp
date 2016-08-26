@@ -2159,6 +2159,10 @@ void MainWindow::CommandlineOptionsReceived(const CommandlineOptions& options) {
       case CommandlineOptions::UrlList_None:
         ApplyAddBehaviour(doubleclick_addmode_, data);
         break;
+      case CommandlineOptions::UrlList_CreateNew:
+        data->name_for_new_playlist_ = options.playlist_name();
+        ApplyAddBehaviour(AddBehaviour_OpenInNew, data);
+        break;
     }
 
     AddToPlaylist(data);
