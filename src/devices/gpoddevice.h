@@ -63,7 +63,6 @@ class GPodDevice : public ConnectedDevice, public virtual MusicStorage {
 
  private:
   void WriteDatabase(bool success);
-
  protected:
   QThread* loader_thread_;
   GPodLoader* loader_;
