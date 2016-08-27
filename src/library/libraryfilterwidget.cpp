@@ -146,6 +146,10 @@ QActionGroup* LibraryFilterWidget::CreateGroupByActions(QObject* parent) {
       CreateGroupByAction(tr("Group by Artist/Album"), parent,
                           LibraryModel::Grouping(LibraryModel::GroupBy_Artist,
                                                  LibraryModel::GroupBy_Album)));
+  ret->addAction(
+      CreateGroupByAction(tr("Group by Album artist/Album"), parent,
+                          LibraryModel::Grouping(LibraryModel::GroupBy_AlbumArtist,
+                                                 LibraryModel::GroupBy_Album)));
   ret->addAction(CreateGroupByAction(
       tr("Group by Artist/Year - Album"), parent,
       LibraryModel::Grouping(LibraryModel::GroupBy_Artist,
