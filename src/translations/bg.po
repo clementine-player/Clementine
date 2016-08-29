@@ -15,7 +15,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2016-07-25 11:07+0000\n"
+"PO-Revision-Date: 2016-08-26 14:20+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Bulgarian (http://www.transifex.com/davidsansome/clementine/language/bg/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -831,7 +831,7 @@ msgstr "Ядосан"
 msgid "Appearance"
 msgstr "Облик"
 
-#: core/commandlineoptions.cpp:170
+#: core/commandlineoptions.cpp:173
 msgid "Append files/URLs to the playlist"
 msgstr "Добавяне на файлове/URL адреси към списъка с песни"
 
@@ -1129,7 +1129,7 @@ msgstr "Смени режим разбъркване"
 msgid "Change the currently playing song"
 msgstr ""
 
-#: core/commandlineoptions.cpp:175
+#: core/commandlineoptions.cpp:178
 msgid "Change the language"
 msgstr "Промяна на езика"
 
@@ -1344,7 +1344,7 @@ msgstr ""
 msgid "Colors"
 msgstr "Цветове"
 
-#: core/commandlineoptions.cpp:178
+#: core/commandlineoptions.cpp:181
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Разделен със запетаи списък с class:level, level (ниво) е 0-3"
 
@@ -1563,6 +1563,10 @@ msgstr "Обложката е зададена от %1"
 msgid "Covers from %1"
 msgstr "Обложки от %1"
 
+#: core/commandlineoptions.cpp:172
+msgid "Create a new playlist with files/URLs"
+msgstr ""
+
 #: ../bin/src/ui_playbacksettingspage.h:344
 msgid "Cross-fade when changing tracks automatically"
 msgstr "Плавен преход при автоматична смяна на песни"
@@ -1630,11 +1634,11 @@ msgstr "Дни"
 msgid "De&fault"
 msgstr "&По подразбиране"
 
-#: core/commandlineoptions.cpp:160
+#: core/commandlineoptions.cpp:162
 msgid "Decrease the volume by 4%"
 msgstr "Намаляване на звука с 4%"
 
-#: core/commandlineoptions.cpp:162
+#: core/commandlineoptions.cpp:164
 msgid "Decrease the volume by <value> percent"
 msgstr "Намаляване на звука с <value> процента"
 
@@ -1669,7 +1673,7 @@ msgid "Delete downloaded data"
 msgstr "Изтрий свалените данни"
 
 #: devices/deviceview.cpp:408 library/libraryview.cpp:645
-#: ui/mainwindow.cpp:2332 widgets/fileview.cpp:188
+#: ui/mainwindow.cpp:2336 widgets/fileview.cpp:188
 msgid "Delete files"
 msgstr "Изтриване на файлове"
 
@@ -1803,7 +1807,7 @@ msgstr "Непрекъснато излъчване"
 msgid "Display options"
 msgstr "Настройки на показването"
 
-#: core/commandlineoptions.cpp:173
+#: core/commandlineoptions.cpp:176
 msgid "Display the on-screen-display"
 msgstr "Показване на екранно уведомление"
 
@@ -2108,17 +2112,17 @@ msgstr "Цялата колекция"
 msgid "Equalizer"
 msgstr "Еквалайзер"
 
-#: core/commandlineoptions.cpp:176
+#: core/commandlineoptions.cpp:179
 msgid "Equivalent to --log-levels *:1"
 msgstr "Еквивалентно на --log-levels *:1"
 
-#: core/commandlineoptions.cpp:177
+#: core/commandlineoptions.cpp:180
 msgid "Equivalent to --log-levels *:3"
 msgstr "Еквивалентно на --log-levels *:3"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:246
-#: library/libraryview.cpp:639 ui/mainwindow.cpp:2038 ui/mainwindow.cpp:2284
-#: ui/mainwindow.cpp:2430 internet/vk/vkservice.cpp:643
+#: library/libraryview.cpp:639 ui/mainwindow.cpp:2038 ui/mainwindow.cpp:2288
+#: ui/mainwindow.cpp:2434 internet/vk/vkservice.cpp:643
 msgid "Error"
 msgstr "Грешка"
 
@@ -2735,11 +2739,11 @@ msgstr "Несъвместима версия на Subsonic REST протоко�
 msgid "Incomplete configuration, please ensure all fields are populated."
 msgstr "Непълна конфигурация, моля уверете се, че всички полета са запълнени."
 
-#: core/commandlineoptions.cpp:159
+#: core/commandlineoptions.cpp:161
 msgid "Increase the volume by 4%"
 msgstr "Увеличаване на звука с 4%"
 
-#: core/commandlineoptions.cpp:161
+#: core/commandlineoptions.cpp:163
 msgid "Increase the volume by <value> percent"
 msgstr "Увеличаване на звука с <value> процента"
 
@@ -2969,7 +2973,7 @@ msgstr "Библиотека"
 msgid "Library advanced grouping"
 msgstr "Разширено групиране на Библиотеката"
 
-#: ui/mainwindow.cpp:2522
+#: ui/mainwindow.cpp:2526
 msgid "Library rescan notice"
 msgstr "Известие за повторно сканиране на библиотеката"
 
@@ -3051,7 +3055,7 @@ msgstr "Зареждане на информация за песните"
 msgid "Loading..."
 msgstr "Зареждане…"
 
-#: core/commandlineoptions.cpp:171
+#: core/commandlineoptions.cpp:174
 msgid "Loads files/URLs, replacing current playlist"
 msgstr "Зареждане на файлове/URL адреси, замествайки настоящият списък с песни"
 
@@ -3444,7 +3448,7 @@ msgstr "No short blocks"
 msgid "None"
 msgstr "Никаква"
 
-#: library/libraryview.cpp:640 ui/mainwindow.cpp:2285 ui/mainwindow.cpp:2431
+#: library/libraryview.cpp:640 ui/mainwindow.cpp:2289 ui/mainwindow.cpp:2435
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Никоя от избраните песни бяха сподобни да бъдат копирани на устройството"
 
@@ -3679,7 +3683,7 @@ msgstr ""
 msgid "Original year tag support"
 msgstr ""
 
-#: core/commandlineoptions.cpp:173
+#: core/commandlineoptions.cpp:176
 msgid "Other options"
 msgstr "Други настройки"
 
@@ -3737,7 +3741,7 @@ msgstr "Парола"
 msgid "Pause"
 msgstr "Пауза"
 
-#: core/commandlineoptions.cpp:154
+#: core/commandlineoptions.cpp:156
 msgid "Pause playback"
 msgstr "На пауза"
 
@@ -3771,7 +3775,7 @@ msgstr "Възпроизвеждане"
 msgid "Play count"
 msgstr "Брой изпълнения"
 
-#: core/commandlineoptions.cpp:153
+#: core/commandlineoptions.cpp:155
 msgid "Play if stopped, pause if playing"
 msgstr "Продължаване ако е спряно и обратно"
 
@@ -3780,7 +3784,7 @@ msgstr "Продължаване ако е спряно и обратно"
 msgid "Play if there is nothing already playing"
 msgstr "Възпроизвеждане, ако има песен, която вече се изпълнява"
 
-#: core/commandlineoptions.cpp:172
+#: core/commandlineoptions.cpp:175
 msgid "Play the <n>th track in the playlist"
 msgstr "Възпроизвеждане на <n>тата песен от списъка с песни"
 
@@ -3792,7 +3796,7 @@ msgstr "Възпроизвеждане/Пауза"
 msgid "Playback"
 msgstr "Възпроизвеждане"
 
-#: core/commandlineoptions.cpp:151
+#: core/commandlineoptions.cpp:153
 msgid "Player options"
 msgstr "Настройки на плеър"
 
@@ -3806,7 +3810,7 @@ msgstr "Списък с песни"
 msgid "Playlist finished"
 msgstr "Списъка с песни е завършен"
 
-#: core/commandlineoptions.cpp:169
+#: core/commandlineoptions.cpp:171
 #: ../bin/src/ui_playlistsaveoptionsdialog.h:94
 msgid "Playlist options"
 msgstr "Настройки на списъка с песни"
@@ -3924,7 +3928,7 @@ msgstr "Предишна"
 msgid "Previous track"
 msgstr "Предишна песен"
 
-#: core/commandlineoptions.cpp:179
+#: core/commandlineoptions.cpp:182
 msgid "Print out version information"
 msgstr "Показване на информация за версията"
 
@@ -4198,7 +4202,7 @@ msgstr "Изчистване на броя възпроизвеждания"
 msgid "Restart song, then jump to previous if pressed again"
 msgstr "Започни песента отначало, после премини към предната, ако се натисне още веднъж"
 
-#: core/commandlineoptions.cpp:167
+#: core/commandlineoptions.cpp:169
 msgid ""
 "Restart the track, or play the previous track if within 8 seconds of start."
 msgstr "Рестартиране на песента, или свирене на предишната песен, ако са минали по-малко от 8 секунди от началото й."
@@ -4433,11 +4437,11 @@ msgstr "Придвижване назад"
 msgid "Seek forward"
 msgstr "Придвижване напред"
 
-#: core/commandlineoptions.cpp:165
+#: core/commandlineoptions.cpp:167
 msgid "Seek the currently playing track by a relative amount"
 msgstr "Следене на текущата песен с относително количество"
 
-#: core/commandlineoptions.cpp:163
+#: core/commandlineoptions.cpp:165
 msgid "Seek the currently playing track to an absolute position"
 msgstr "Следене на текущата песен с абсолютно позиция"
 
@@ -4506,7 +4510,7 @@ msgstr "Услугата е недостъпна"
 msgid "Set %1 to \"%2\"..."
 msgstr "Задай %1 да е %2\"..."
 
-#: core/commandlineoptions.cpp:158
+#: core/commandlineoptions.cpp:160
 msgid "Set the volume to <value> percent"
 msgstr "Ниво на звука - <value> процента"
 
@@ -4698,7 +4702,7 @@ msgstr "Размер:"
 msgid "Ska"
 msgstr "Ска"
 
-#: core/commandlineoptions.cpp:156
+#: core/commandlineoptions.cpp:158
 msgid "Skip backwards in playlist"
 msgstr "Прескачане назад в списъка с песни"
 
@@ -4706,7 +4710,7 @@ msgstr "Прескачане назад в списъка с песни"
 msgid "Skip count"
 msgstr "Презключи броя"
 
-#: core/commandlineoptions.cpp:157
+#: core/commandlineoptions.cpp:159
 msgid "Skip forwards in playlist"
 msgstr "Прескачане напред в списъка с песни"
 
@@ -4832,7 +4836,7 @@ msgstr "Със звезда"
 msgid "Start ripping"
 msgstr "Започни печене"
 
-#: core/commandlineoptions.cpp:152
+#: core/commandlineoptions.cpp:154
 msgid "Start the playlist currently playing"
 msgstr "Стартиране на текущо възпроизвеждания списък с песни"
 
@@ -4877,11 +4881,11 @@ msgstr ""
 msgid "Stop after this track"
 msgstr "Спри след тази песен"
 
-#: core/commandlineoptions.cpp:154
+#: core/commandlineoptions.cpp:156
 msgid "Stop playback"
 msgstr "Спиране на възпроизвеждането"
 
-#: core/commandlineoptions.cpp:155
+#: core/commandlineoptions.cpp:157
 msgid "Stop playback after current track"
 msgstr ""
 
@@ -5029,7 +5033,7 @@ msgid ""
 "license key. Visit subsonic.org for details."
 msgstr "Пробния период на Subsonic сървъра изтече. Моля дайте дарение за да получите ключ за лиценз. Посетете subsonic.org за подробности."
 
-#: ui/mainwindow.cpp:2513
+#: ui/mainwindow.cpp:2517
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -5071,7 +5075,7 @@ msgid ""
 "continue?"
 msgstr "Тези файлове ще бъдат изтрити от устройството,сигурни ли сте че искате да продължите?"
 
-#: library/libraryview.cpp:646 ui/mainwindow.cpp:2333 widgets/fileview.cpp:189
+#: library/libraryview.cpp:646 ui/mainwindow.cpp:2337 widgets/fileview.cpp:189
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -5182,7 +5186,7 @@ msgstr "Покажи статус на опашката"
 msgid "Toggle scrobbling"
 msgstr "Включаване на скроблинга"
 
-#: core/commandlineoptions.cpp:174
+#: core/commandlineoptions.cpp:177
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "Превключване видимостта на красиво екранно меню"
 
@@ -5264,7 +5268,7 @@ msgstr "Изключване"
 msgid "URI"
 msgstr "URI"
 
-#: core/commandlineoptions.cpp:150
+#: core/commandlineoptions.cpp:152
 msgid "URL(s)"
 msgstr "URL-и"
 
@@ -5363,7 +5367,7 @@ msgstr "Обновяване %1%..."
 msgid "Updating library"
 msgstr "Обновяване на библиотеката"
 
-#: core/commandlineoptions.cpp:150
+#: core/commandlineoptions.cpp:152
 msgid "Usage"
 msgstr "Използване"
 
@@ -5626,7 +5630,7 @@ msgid ""
 "well?"
 msgstr "Искате ли да преместим другите песни от този албум в Различни изпълнители?"
 
-#: ui/mainwindow.cpp:2520
+#: ui/mainwindow.cpp:2524
 msgid "Would you like to run a full rescan right now?"
 msgstr "Искате ли да изпълните пълно повторно сканиране сега?"
 
@@ -5924,7 +5928,7 @@ msgstr "първо най-старите"
 msgid "on"
 msgstr "вкл."
 
-#: core/commandlineoptions.cpp:150
+#: core/commandlineoptions.cpp:152
 msgid "options"
 msgstr "опции"
 

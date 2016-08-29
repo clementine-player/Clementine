@@ -12,7 +12,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2016-07-25 11:19+0000\n"
+"PO-Revision-Date: 2016-08-26 20:51+0000\n"
 "Last-Translator: Moo\n"
 "Language-Team: Lithuanian (http://www.transifex.com/davidsansome/clementine/language/lt/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -828,7 +828,7 @@ msgstr "Piktas"
 msgid "Appearance"
 msgstr "Išvaizda"
 
-#: core/commandlineoptions.cpp:170
+#: core/commandlineoptions.cpp:173
 msgid "Append files/URLs to the playlist"
 msgstr "Įterpti failus/URL į grojaraštį"
 
@@ -1126,7 +1126,7 @@ msgstr "Keisti maišymo režimą"
 msgid "Change the currently playing song"
 msgstr "Keisti esamu metu grojamą dainą"
 
-#: core/commandlineoptions.cpp:175
+#: core/commandlineoptions.cpp:178
 msgid "Change the language"
 msgstr "Keisti kalbą"
 
@@ -1341,7 +1341,7 @@ msgstr "Ko&mpozitorius"
 msgid "Colors"
 msgstr "Spalvos"
 
-#: core/commandlineoptions.cpp:178
+#: core/commandlineoptions.cpp:181
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Kableliais išskirtas sąrašas iš klasės:lygio, lygis yra nuo 0 iki 3"
 
@@ -1560,6 +1560,10 @@ msgstr "Viršelio paveikslėlis nustatytas iš %1"
 msgid "Covers from %1"
 msgstr "Viršeliai iš %1"
 
+#: core/commandlineoptions.cpp:172
+msgid "Create a new playlist with files/URLs"
+msgstr "Sukurti naują grojaraštį su failais/URL"
+
 #: ../bin/src/ui_playbacksettingspage.h:344
 msgid "Cross-fade when changing tracks automatically"
 msgstr "Naudoti „Cross-fade“ funkciją kai takeliai keičiami automatiškai"
@@ -1627,11 +1631,11 @@ msgstr "Dienos"
 msgid "De&fault"
 msgstr "Numatytas"
 
-#: core/commandlineoptions.cpp:160
+#: core/commandlineoptions.cpp:162
 msgid "Decrease the volume by 4%"
 msgstr "Sumažinti garsą per 4%"
 
-#: core/commandlineoptions.cpp:162
+#: core/commandlineoptions.cpp:164
 msgid "Decrease the volume by <value> percent"
 msgstr "Patildyti <value> procentais"
 
@@ -1666,7 +1670,7 @@ msgid "Delete downloaded data"
 msgstr "Naikinti atsiųstus duomenis"
 
 #: devices/deviceview.cpp:408 library/libraryview.cpp:645
-#: ui/mainwindow.cpp:2332 widgets/fileview.cpp:188
+#: ui/mainwindow.cpp:2336 widgets/fileview.cpp:188
 msgid "Delete files"
 msgstr "Ištrinti failus"
 
@@ -1800,7 +1804,7 @@ msgstr "Nevientisa transliacija"
 msgid "Display options"
 msgstr "Rodymo nuostatos"
 
-#: core/commandlineoptions.cpp:173
+#: core/commandlineoptions.cpp:176
 msgid "Display the on-screen-display"
 msgstr "Rodyti OSD"
 
@@ -2105,17 +2109,17 @@ msgstr "Visa kolekcija"
 msgid "Equalizer"
 msgstr "Glodintuvas"
 
-#: core/commandlineoptions.cpp:176
+#: core/commandlineoptions.cpp:179
 msgid "Equivalent to --log-levels *:1"
 msgstr "Tai atitinka --log-levels *:1"
 
-#: core/commandlineoptions.cpp:177
+#: core/commandlineoptions.cpp:180
 msgid "Equivalent to --log-levels *:3"
 msgstr "Tai atitinka --log-levels *:3"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:246
-#: library/libraryview.cpp:639 ui/mainwindow.cpp:2038 ui/mainwindow.cpp:2284
-#: ui/mainwindow.cpp:2430 internet/vk/vkservice.cpp:643
+#: library/libraryview.cpp:639 ui/mainwindow.cpp:2038 ui/mainwindow.cpp:2288
+#: ui/mainwindow.cpp:2434 internet/vk/vkservice.cpp:643
 msgid "Error"
 msgstr "Klaida"
 
@@ -2732,11 +2736,11 @@ msgstr "Nesuderinama Subsonic REST protokolo versija. Serveris turi atsinaujinti
 msgid "Incomplete configuration, please ensure all fields are populated."
 msgstr "Nepilna konfigūracija, įsitikinkite kad visi laukai užpildyti."
 
-#: core/commandlineoptions.cpp:159
+#: core/commandlineoptions.cpp:161
 msgid "Increase the volume by 4%"
 msgstr "Pagarsinti 4%"
 
-#: core/commandlineoptions.cpp:161
+#: core/commandlineoptions.cpp:163
 msgid "Increase the volume by <value> percent"
 msgstr "Pagarsinti <value> procentais"
 
@@ -2966,7 +2970,7 @@ msgstr "Fonoteka"
 msgid "Library advanced grouping"
 msgstr "Sudėtingesnis fonotekos grupavimas"
 
-#: ui/mainwindow.cpp:2522
+#: ui/mainwindow.cpp:2526
 msgid "Library rescan notice"
 msgstr "Fonotekos perskenavimo žinutė"
 
@@ -3048,7 +3052,7 @@ msgstr "Įkeliama kūrinio informacija"
 msgid "Loading..."
 msgstr "Įkeliama..."
 
-#: core/commandlineoptions.cpp:171
+#: core/commandlineoptions.cpp:174
 msgid "Loads files/URLs, replacing current playlist"
 msgstr "Įkelia failus/URL, pakeičiant esamą sąrašą"
 
@@ -3441,7 +3445,7 @@ msgstr "Jokių trumpų blokų"
 msgid "None"
 msgstr "Nėra"
 
-#: library/libraryview.cpp:640 ui/mainwindow.cpp:2285 ui/mainwindow.cpp:2431
+#: library/libraryview.cpp:640 ui/mainwindow.cpp:2289 ui/mainwindow.cpp:2435
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Nei viena iš pažymėtų dainų netinka kopijavimui į įrenginį"
 
@@ -3676,7 +3680,7 @@ msgstr ""
 msgid "Original year tag support"
 msgstr ""
 
-#: core/commandlineoptions.cpp:173
+#: core/commandlineoptions.cpp:176
 msgid "Other options"
 msgstr "Kitos parinktys"
 
@@ -3734,7 +3738,7 @@ msgstr "Slaptažodis"
 msgid "Pause"
 msgstr "Pristabdyti"
 
-#: core/commandlineoptions.cpp:154
+#: core/commandlineoptions.cpp:156
 msgid "Pause playback"
 msgstr "Sulaikyti grojimą"
 
@@ -3768,7 +3772,7 @@ msgstr "Groti"
 msgid "Play count"
 msgstr "Grojimo skaitiklis"
 
-#: core/commandlineoptions.cpp:153
+#: core/commandlineoptions.cpp:155
 msgid "Play if stopped, pause if playing"
 msgstr "Groti jei sustabdyta, Pristabdyti jei grojama"
 
@@ -3777,7 +3781,7 @@ msgstr "Groti jei sustabdyta, Pristabdyti jei grojama"
 msgid "Play if there is nothing already playing"
 msgstr "Groti jei jau kas nors negroja"
 
-#: core/commandlineoptions.cpp:172
+#: core/commandlineoptions.cpp:175
 msgid "Play the <n>th track in the playlist"
 msgstr "Groti <n> takelį grojaraštyje"
 
@@ -3789,7 +3793,7 @@ msgstr "Groti/Pristabdyti"
 msgid "Playback"
 msgstr "Grojimas"
 
-#: core/commandlineoptions.cpp:151
+#: core/commandlineoptions.cpp:153
 msgid "Player options"
 msgstr "Leistuvo parinktys"
 
@@ -3803,7 +3807,7 @@ msgstr "Grojaraštis"
 msgid "Playlist finished"
 msgstr "Grojaraštis baigtas"
 
-#: core/commandlineoptions.cpp:169
+#: core/commandlineoptions.cpp:171
 #: ../bin/src/ui_playlistsaveoptionsdialog.h:94
 msgid "Playlist options"
 msgstr "Grojaraščio parinktys"
@@ -3921,7 +3925,7 @@ msgstr "Atgal"
 msgid "Previous track"
 msgstr "Ankstesnis takelis"
 
-#: core/commandlineoptions.cpp:179
+#: core/commandlineoptions.cpp:182
 msgid "Print out version information"
 msgstr "Išvesti versijos informaciją"
 
@@ -4195,7 +4199,7 @@ msgstr "Atstatyti perklausų skaičių"
 msgid "Restart song, then jump to previous if pressed again"
 msgstr "Iš naujo grojama daina, o jei nuspaudžiama dar kartą, perjungiama į ankstesnį takelį"
 
-#: core/commandlineoptions.cpp:167
+#: core/commandlineoptions.cpp:169
 msgid ""
 "Restart the track, or play the previous track if within 8 seconds of start."
 msgstr "Paleisti takelį, arba groti ankstesnį per 8 sekundes po paleidimo."
@@ -4343,7 +4347,7 @@ msgstr "Pateikti klausomų takelių informaciją"
 
 #: ../bin/src/ui_behavioursettingspage.h:313
 msgid "Scroll over icon to change track"
-msgstr ""
+msgstr "Slinkti virš piktogramos, norint pakeisti takelį"
 
 #: ../bin/src/ui_seafilesettingspage.h:164
 msgid "Seafile"
@@ -4430,11 +4434,11 @@ msgstr "Sukti atgal"
 msgid "Seek forward"
 msgstr "Sukti į priekį"
 
-#: core/commandlineoptions.cpp:165
+#: core/commandlineoptions.cpp:167
 msgid "Seek the currently playing track by a relative amount"
 msgstr "Rasti dabar grojamą takelį pagal santykinį kiekį"
 
-#: core/commandlineoptions.cpp:163
+#: core/commandlineoptions.cpp:165
 msgid "Seek the currently playing track to an absolute position"
 msgstr "Rasti dabar grojamą takelį į absoliučiąją poziciją"
 
@@ -4503,7 +4507,7 @@ msgstr "Servisas nepasiekiamas"
 msgid "Set %1 to \"%2\"..."
 msgstr "Nustatyti %1 į \"%2\"..."
 
-#: core/commandlineoptions.cpp:158
+#: core/commandlineoptions.cpp:160
 msgid "Set the volume to <value> percent"
 msgstr "Nustatyti garsumą iki <value> procentų"
 
@@ -4695,7 +4699,7 @@ msgstr "Dydis:"
 msgid "Ska"
 msgstr "Ska"
 
-#: core/commandlineoptions.cpp:156
+#: core/commandlineoptions.cpp:158
 msgid "Skip backwards in playlist"
 msgstr "Ankstesnis kūrinys grojaraštyje"
 
@@ -4703,7 +4707,7 @@ msgstr "Ankstesnis kūrinys grojaraštyje"
 msgid "Skip count"
 msgstr "Praleisti skaičiavimą"
 
-#: core/commandlineoptions.cpp:157
+#: core/commandlineoptions.cpp:159
 msgid "Skip forwards in playlist"
 msgstr "Kitas grojaraščio kūrinys"
 
@@ -4829,7 +4833,7 @@ msgstr "Su žvaigždute"
 msgid "Start ripping"
 msgstr "Pradėti perrašymą"
 
-#: core/commandlineoptions.cpp:152
+#: core/commandlineoptions.cpp:154
 msgid "Start the playlist currently playing"
 msgstr "Pradėti grajaraštį nuo dabar grojančio"
 
@@ -4874,11 +4878,11 @@ msgstr "Stabdyti po kiekvieno takelio"
 msgid "Stop after this track"
 msgstr "Stabdyti po šio takelio"
 
-#: core/commandlineoptions.cpp:154
+#: core/commandlineoptions.cpp:156
 msgid "Stop playback"
 msgstr "Stabdyti grojimą"
 
-#: core/commandlineoptions.cpp:155
+#: core/commandlineoptions.cpp:157
 msgid "Stop playback after current track"
 msgstr "Stabdyti atkūrimą po esamo takelio"
 
@@ -5026,7 +5030,7 @@ msgid ""
 "license key. Visit subsonic.org for details."
 msgstr "Bandomasis subsonic laikotarpis baigėsi. Paaukokite ir gaukite licenciją. Norėdami sužinoti daugiau aplankykite subsonic.org."
 
-#: ui/mainwindow.cpp:2513
+#: ui/mainwindow.cpp:2517
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -5068,7 +5072,7 @@ msgid ""
 "continue?"
 msgstr "Šie failai bus ištrinti iš įrenginio, ar tikrai norite tęsti?"
 
-#: library/libraryview.cpp:646 ui/mainwindow.cpp:2333 widgets/fileview.cpp:189
+#: library/libraryview.cpp:646 ui/mainwindow.cpp:2337 widgets/fileview.cpp:189
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -5179,7 +5183,7 @@ msgstr "Perjungti eilės statusą"
 msgid "Toggle scrobbling"
 msgstr "Perjungti „scrobbling“ būseną"
 
-#: core/commandlineoptions.cpp:174
+#: core/commandlineoptions.cpp:177
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "Keisti ekrano pranešimų (OSD) matomumą"
 
@@ -5261,7 +5265,7 @@ msgstr "Išjungti"
 msgid "URI"
 msgstr "URI"
 
-#: core/commandlineoptions.cpp:150
+#: core/commandlineoptions.cpp:152
 msgid "URL(s)"
 msgstr "URL"
 
@@ -5360,7 +5364,7 @@ msgstr "Atnaujinama %1..."
 msgid "Updating library"
 msgstr "Atnaujinama biblioteka"
 
-#: core/commandlineoptions.cpp:150
+#: core/commandlineoptions.cpp:152
 msgid "Usage"
 msgstr "Naudojimas"
 
@@ -5623,7 +5627,7 @@ msgid ""
 "well?"
 msgstr "Ar norėtumėte perkelti kitas dainas į šio atlikėjo albumą?"
 
-#: ui/mainwindow.cpp:2520
+#: ui/mainwindow.cpp:2524
 msgid "Would you like to run a full rescan right now?"
 msgstr "Ar norite paleisti pilną perskenavimą dabar?"
 
@@ -5921,7 +5925,7 @@ msgstr "seniausi pirmiausia"
 msgid "on"
 msgstr "iš"
 
-#: core/commandlineoptions.cpp:150
+#: core/commandlineoptions.cpp:152
 msgid "options"
 msgstr "parinktys"
 

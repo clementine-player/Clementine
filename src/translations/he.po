@@ -14,7 +14,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2016-07-25 11:07+0000\n"
+"PO-Revision-Date: 2016-08-26 14:20+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Hebrew (http://www.transifex.com/davidsansome/clementine/language/he/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -830,7 +830,7 @@ msgstr "כָּעוּס"
 msgid "Appearance"
 msgstr "מראה"
 
-#: core/commandlineoptions.cpp:170
+#: core/commandlineoptions.cpp:173
 msgid "Append files/URLs to the playlist"
 msgstr "הוסף קבצים/כתובות לסוף רשימת ההשמעה"
 
@@ -1128,7 +1128,7 @@ msgstr "שינוי מצב ערבוב"
 msgid "Change the currently playing song"
 msgstr ""
 
-#: core/commandlineoptions.cpp:175
+#: core/commandlineoptions.cpp:178
 msgid "Change the language"
 msgstr "שינוי השפה"
 
@@ -1343,7 +1343,7 @@ msgstr ""
 msgid "Colors"
 msgstr "צבעים"
 
-#: core/commandlineoptions.cpp:178
+#: core/commandlineoptions.cpp:181
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "רשימה מופרדת בפסיקים של class:level,level יכול להיות 0-3 "
 
@@ -1562,6 +1562,10 @@ msgstr "עטיפת אלבום נבחרה מתוך %1"
 msgid "Covers from %1"
 msgstr "עטיפות מ־%1"
 
+#: core/commandlineoptions.cpp:172
+msgid "Create a new playlist with files/URLs"
+msgstr ""
+
 #: ../bin/src/ui_playbacksettingspage.h:344
 msgid "Cross-fade when changing tracks automatically"
 msgstr "מעבר באמצעות עמעום בין רצועות, בהחלפה אוטומטית של רצועות"
@@ -1629,11 +1633,11 @@ msgstr "ימים"
 msgid "De&fault"
 msgstr "בררת מח&דל"
 
-#: core/commandlineoptions.cpp:160
+#: core/commandlineoptions.cpp:162
 msgid "Decrease the volume by 4%"
 msgstr "הנמכת עוצמת השמע ב־4%"
 
-#: core/commandlineoptions.cpp:162
+#: core/commandlineoptions.cpp:164
 msgid "Decrease the volume by <value> percent"
 msgstr "הנמך את עוצמת השמע ב־<value> אחוזים"
 
@@ -1668,7 +1672,7 @@ msgid "Delete downloaded data"
 msgstr "מחיקת מידע שהתקבל"
 
 #: devices/deviceview.cpp:408 library/libraryview.cpp:645
-#: ui/mainwindow.cpp:2332 widgets/fileview.cpp:188
+#: ui/mainwindow.cpp:2336 widgets/fileview.cpp:188
 msgid "Delete files"
 msgstr "מחיקת קבצים"
 
@@ -1802,7 +1806,7 @@ msgstr "תמסורת רציפה"
 msgid "Display options"
 msgstr "הגדרות תצוגה"
 
-#: core/commandlineoptions.cpp:173
+#: core/commandlineoptions.cpp:176
 msgid "Display the on-screen-display"
 msgstr "הצגת חיווי מסך"
 
@@ -2107,17 +2111,17 @@ msgstr "כל האוסף"
 msgid "Equalizer"
 msgstr "אקולייזר"
 
-#: core/commandlineoptions.cpp:176
+#: core/commandlineoptions.cpp:179
 msgid "Equivalent to --log-levels *:1"
 msgstr "זהה לאפשרות --log-levels *:1"
 
-#: core/commandlineoptions.cpp:177
+#: core/commandlineoptions.cpp:180
 msgid "Equivalent to --log-levels *:3"
 msgstr "זהה לאפשרות--log-levels *:3"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:246
-#: library/libraryview.cpp:639 ui/mainwindow.cpp:2038 ui/mainwindow.cpp:2284
-#: ui/mainwindow.cpp:2430 internet/vk/vkservice.cpp:643
+#: library/libraryview.cpp:639 ui/mainwindow.cpp:2038 ui/mainwindow.cpp:2288
+#: ui/mainwindow.cpp:2434 internet/vk/vkservice.cpp:643
 msgid "Error"
 msgstr "שגיאה"
 
@@ -2734,11 +2738,11 @@ msgstr "גרסת סותרת של פרוטוקול Subsonic REST . שרת חיי�
 msgid "Incomplete configuration, please ensure all fields are populated."
 msgstr ""
 
-#: core/commandlineoptions.cpp:159
+#: core/commandlineoptions.cpp:161
 msgid "Increase the volume by 4%"
 msgstr "הגברת עצמת השמע ב־4%"
 
-#: core/commandlineoptions.cpp:161
+#: core/commandlineoptions.cpp:163
 msgid "Increase the volume by <value> percent"
 msgstr "הגבר את עוצמת השמע ב־<value> אחוזים"
 
@@ -2968,7 +2972,7 @@ msgstr "ספרייה"
 msgid "Library advanced grouping"
 msgstr "קיבוץ מתקדם של הספרייה"
 
-#: ui/mainwindow.cpp:2522
+#: ui/mainwindow.cpp:2526
 msgid "Library rescan notice"
 msgstr "הודעה על סריקה מחודשת של הספרייה"
 
@@ -3050,7 +3054,7 @@ msgstr "נטען מידע אודות השירים"
 msgid "Loading..."
 msgstr "בטעינה..."
 
-#: core/commandlineoptions.cpp:171
+#: core/commandlineoptions.cpp:174
 msgid "Loads files/URLs, replacing current playlist"
 msgstr "טעינת קבצים/כתובות, תוך החלפת רשימת ההשמעה הנוכחית"
 
@@ -3443,7 +3447,7 @@ msgstr "ללא מקטעים קצרים"
 msgid "None"
 msgstr "אין"
 
-#: library/libraryview.cpp:640 ui/mainwindow.cpp:2285 ui/mainwindow.cpp:2431
+#: library/libraryview.cpp:640 ui/mainwindow.cpp:2289 ui/mainwindow.cpp:2435
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "אף אחד מהשירים הנבחרים לא היה ראוי להעתקה להתקן"
 
@@ -3678,7 +3682,7 @@ msgstr ""
 msgid "Original year tag support"
 msgstr ""
 
-#: core/commandlineoptions.cpp:173
+#: core/commandlineoptions.cpp:176
 msgid "Other options"
 msgstr "אפשרויות נוספות"
 
@@ -3736,7 +3740,7 @@ msgstr "ססמה"
 msgid "Pause"
 msgstr "השהייה"
 
-#: core/commandlineoptions.cpp:154
+#: core/commandlineoptions.cpp:156
 msgid "Pause playback"
 msgstr "השהיית הנגינה"
 
@@ -3770,7 +3774,7 @@ msgstr "נגינה"
 msgid "Play count"
 msgstr "מונה השמעות"
 
-#: core/commandlineoptions.cpp:153
+#: core/commandlineoptions.cpp:155
 msgid "Play if stopped, pause if playing"
 msgstr "ניגון אם מושהה, השהייה אם מנגן"
 
@@ -3779,7 +3783,7 @@ msgstr "ניגון אם מושהה, השהייה אם מנגן"
 msgid "Play if there is nothing already playing"
 msgstr "השמעה אם אין שום שמושמע כרגע"
 
-#: core/commandlineoptions.cpp:172
+#: core/commandlineoptions.cpp:175
 msgid "Play the <n>th track in the playlist"
 msgstr "נגן הרצועה ה־<n> מרשימת ההשמעה"
 
@@ -3791,7 +3795,7 @@ msgstr "ניגון/השהייה"
 msgid "Playback"
 msgstr "השמעה"
 
-#: core/commandlineoptions.cpp:151
+#: core/commandlineoptions.cpp:153
 msgid "Player options"
 msgstr "אפשרויות נגן"
 
@@ -3805,7 +3809,7 @@ msgstr "רשימת השמעה"
 msgid "Playlist finished"
 msgstr "רשימת ההשמעה הסתיימה"
 
-#: core/commandlineoptions.cpp:169
+#: core/commandlineoptions.cpp:171
 #: ../bin/src/ui_playlistsaveoptionsdialog.h:94
 msgid "Playlist options"
 msgstr "אפשרויות רשימת ההשמעה"
@@ -3923,7 +3927,7 @@ msgstr "הקודם"
 msgid "Previous track"
 msgstr "רצועה קודמת"
 
-#: core/commandlineoptions.cpp:179
+#: core/commandlineoptions.cpp:182
 msgid "Print out version information"
 msgstr "Print out version information"
 
@@ -4197,7 +4201,7 @@ msgstr "איפוס מונה ההשמעות"
 msgid "Restart song, then jump to previous if pressed again"
 msgstr ""
 
-#: core/commandlineoptions.cpp:167
+#: core/commandlineoptions.cpp:169
 msgid ""
 "Restart the track, or play the previous track if within 8 seconds of start."
 msgstr ""
@@ -4432,11 +4436,11 @@ msgstr "דילוג אחורה"
 msgid "Seek forward"
 msgstr "דילוג קדימה"
 
-#: core/commandlineoptions.cpp:165
+#: core/commandlineoptions.cpp:167
 msgid "Seek the currently playing track by a relative amount"
 msgstr "דילוג בתוך הרצועה המתנגנת כעת למיקום יחסי"
 
-#: core/commandlineoptions.cpp:163
+#: core/commandlineoptions.cpp:165
 msgid "Seek the currently playing track to an absolute position"
 msgstr "דילוג בתוך הרצועה המתנגנת כעת למיקום מוחלט"
 
@@ -4505,7 +4509,7 @@ msgstr "שירות לא מקוון"
 msgid "Set %1 to \"%2\"..."
 msgstr "הגדרת %1 בתור „%2“..."
 
-#: core/commandlineoptions.cpp:158
+#: core/commandlineoptions.cpp:160
 msgid "Set the volume to <value> percent"
 msgstr "הגדרת עצמת השמע ל־<value> אחוזים"
 
@@ -4697,7 +4701,7 @@ msgstr "גודל:"
 msgid "Ska"
 msgstr "סקא"
 
-#: core/commandlineoptions.cpp:156
+#: core/commandlineoptions.cpp:158
 msgid "Skip backwards in playlist"
 msgstr "דילוג אחורה ברשימת ההשמעה"
 
@@ -4705,7 +4709,7 @@ msgstr "דילוג אחורה ברשימת ההשמעה"
 msgid "Skip count"
 msgstr "מונה דילוגים"
 
-#: core/commandlineoptions.cpp:157
+#: core/commandlineoptions.cpp:159
 msgid "Skip forwards in playlist"
 msgstr "דילוג קדימה ברשימת ההשמעה"
 
@@ -4831,7 +4835,7 @@ msgstr "מסומן בכוכב"
 msgid "Start ripping"
 msgstr ""
 
-#: core/commandlineoptions.cpp:152
+#: core/commandlineoptions.cpp:154
 msgid "Start the playlist currently playing"
 msgstr "התחלת רשימת ההשמעה המתנגנת כעת"
 
@@ -4876,11 +4880,11 @@ msgstr ""
 msgid "Stop after this track"
 msgstr "הפסקה אחרי רצועה זו"
 
-#: core/commandlineoptions.cpp:154
+#: core/commandlineoptions.cpp:156
 msgid "Stop playback"
 msgstr "הפסקת הנגינה"
 
-#: core/commandlineoptions.cpp:155
+#: core/commandlineoptions.cpp:157
 msgid "Stop playback after current track"
 msgstr ""
 
@@ -5028,7 +5032,7 @@ msgid ""
 "license key. Visit subsonic.org for details."
 msgstr "תמה תקופת הניסיון לשרת Subsonic. נא תרומתך לקבלת מפתח רישיון. לפרטים, נא לבקר ב subsonic.org "
 
-#: ui/mainwindow.cpp:2513
+#: ui/mainwindow.cpp:2517
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -5070,7 +5074,7 @@ msgid ""
 "continue?"
 msgstr "קבצים אלו ימחקו מההתקן, האם להמשיך?"
 
-#: library/libraryview.cpp:646 ui/mainwindow.cpp:2333 widgets/fileview.cpp:189
+#: library/libraryview.cpp:646 ui/mainwindow.cpp:2337 widgets/fileview.cpp:189
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -5181,7 +5185,7 @@ msgstr "החלף מצב התור"
 msgid "Toggle scrobbling"
 msgstr "החלפה לscrobbling"
 
-#: core/commandlineoptions.cpp:174
+#: core/commandlineoptions.cpp:177
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "הפעלה או כיבוי נראות ההצגה היפה על המסך"
 
@@ -5263,7 +5267,7 @@ msgstr "כבה"
 msgid "URI"
 msgstr "URI"
 
-#: core/commandlineoptions.cpp:150
+#: core/commandlineoptions.cpp:152
 msgid "URL(s)"
 msgstr "URL(s)"
 
@@ -5362,7 +5366,7 @@ msgstr "עדכון %1%..."
 msgid "Updating library"
 msgstr "הספרייה בעדכון"
 
-#: core/commandlineoptions.cpp:150
+#: core/commandlineoptions.cpp:152
 msgid "Usage"
 msgstr "בשימוש"
 
@@ -5625,7 +5629,7 @@ msgid ""
 "well?"
 msgstr "האם ברצונך להעביר גם את שאר השירים באלבום לאמנים שונים?"
 
-#: ui/mainwindow.cpp:2520
+#: ui/mainwindow.cpp:2524
 msgid "Would you like to run a full rescan right now?"
 msgstr "האם ברצונך לבצע סריקה חוזרת כעת?"
 
@@ -5923,7 +5927,7 @@ msgstr "הישן ביותר ראשון"
 msgid "on"
 msgstr "ב־"
 
-#: core/commandlineoptions.cpp:150
+#: core/commandlineoptions.cpp:152
 msgid "options"
 msgstr "אפשרויות"
 

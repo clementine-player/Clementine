@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2016-07-25 11:07+0000\n"
+"PO-Revision-Date: 2016-08-26 14:20+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Malay (http://www.transifex.com/davidsansome/clementine/language/ms/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -825,7 +825,7 @@ msgstr "Marah"
 msgid "Appearance"
 msgstr "Penampilan"
 
-#: core/commandlineoptions.cpp:170
+#: core/commandlineoptions.cpp:173
 msgid "Append files/URLs to the playlist"
 msgstr "Tambah fail/URL ke senarai main"
 
@@ -1123,7 +1123,7 @@ msgstr "Ubah mod kocok"
 msgid "Change the currently playing song"
 msgstr "Ubah lagu yang kini dimainkan"
 
-#: core/commandlineoptions.cpp:175
+#: core/commandlineoptions.cpp:178
 msgid "Change the language"
 msgstr "Ubah bahasa"
 
@@ -1338,7 +1338,7 @@ msgstr ""
 msgid "Colors"
 msgstr "Warna"
 
-#: core/commandlineoptions.cpp:178
+#: core/commandlineoptions.cpp:181
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Senarai kelas dipisah dengan tanda koma: aras, aras diantara 0-3"
 
@@ -1557,6 +1557,10 @@ msgstr "Seni kulit muka ditetap dari %1"
 msgid "Covers from %1"
 msgstr "Kulit muka dari %1"
 
+#: core/commandlineoptions.cpp:172
+msgid "Create a new playlist with files/URLs"
+msgstr ""
+
 #: ../bin/src/ui_playbacksettingspage.h:344
 msgid "Cross-fade when changing tracks automatically"
 msgstr "Resap-silang bila mengubah trek secara automatik"
@@ -1624,11 +1628,11 @@ msgstr "Hari"
 msgid "De&fault"
 msgstr "&Lalai"
 
-#: core/commandlineoptions.cpp:160
+#: core/commandlineoptions.cpp:162
 msgid "Decrease the volume by 4%"
 msgstr "Kurangkan volum sebanyak 4%"
 
-#: core/commandlineoptions.cpp:162
+#: core/commandlineoptions.cpp:164
 msgid "Decrease the volume by <value> percent"
 msgstr "Kurangkan volum mengikut <value> peratus"
 
@@ -1663,7 +1667,7 @@ msgid "Delete downloaded data"
 msgstr "Padam data dimuat turun"
 
 #: devices/deviceview.cpp:408 library/libraryview.cpp:645
-#: ui/mainwindow.cpp:2332 widgets/fileview.cpp:188
+#: ui/mainwindow.cpp:2336 widgets/fileview.cpp:188
 msgid "Delete files"
 msgstr "Padam fail"
 
@@ -1797,7 +1801,7 @@ msgstr "Penghantaran terputus"
 msgid "Display options"
 msgstr "Pilihan paparan"
 
-#: core/commandlineoptions.cpp:173
+#: core/commandlineoptions.cpp:176
 msgid "Display the on-screen-display"
 msgstr "Papar paparan-atas-skrin"
 
@@ -2102,17 +2106,17 @@ msgstr "Kesemua koleksi"
 msgid "Equalizer"
 msgstr "Penyama"
 
-#: core/commandlineoptions.cpp:176
+#: core/commandlineoptions.cpp:179
 msgid "Equivalent to --log-levels *:1"
 msgstr "Sama dengan --log-levels *:1"
 
-#: core/commandlineoptions.cpp:177
+#: core/commandlineoptions.cpp:180
 msgid "Equivalent to --log-levels *:3"
 msgstr "Sama dengan --log-levels *:3"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:246
-#: library/libraryview.cpp:639 ui/mainwindow.cpp:2038 ui/mainwindow.cpp:2284
-#: ui/mainwindow.cpp:2430 internet/vk/vkservice.cpp:643
+#: library/libraryview.cpp:639 ui/mainwindow.cpp:2038 ui/mainwindow.cpp:2288
+#: ui/mainwindow.cpp:2434 internet/vk/vkservice.cpp:643
 msgid "Error"
 msgstr "Ralat"
 
@@ -2729,11 +2733,11 @@ msgstr "Versi protokol Subsonic REST tidak serasi. Pelayan mesti ditatar."
 msgid "Incomplete configuration, please ensure all fields are populated."
 msgstr "Konfigurasi tidak lengkap, sila pastikan semua medan diisi."
 
-#: core/commandlineoptions.cpp:159
+#: core/commandlineoptions.cpp:161
 msgid "Increase the volume by 4%"
 msgstr "Naikkan kadar bunyi sebanyak 4%"
 
-#: core/commandlineoptions.cpp:161
+#: core/commandlineoptions.cpp:163
 msgid "Increase the volume by <value> percent"
 msgstr "Tingkatkan volum mengikut <value> peratus"
 
@@ -2963,7 +2967,7 @@ msgstr "Pustaka"
 msgid "Library advanced grouping"
 msgstr "Pengelompokan lanjutan pustaka"
 
-#: ui/mainwindow.cpp:2522
+#: ui/mainwindow.cpp:2526
 msgid "Library rescan notice"
 msgstr "Notis imbas semula pustaka"
 
@@ -3045,7 +3049,7 @@ msgstr "Memuatkan maklumat trek"
 msgid "Loading..."
 msgstr "Memuatkan..."
 
-#: core/commandlineoptions.cpp:171
+#: core/commandlineoptions.cpp:174
 msgid "Loads files/URLs, replacing current playlist"
 msgstr "Memuat fail/URL, menggantikan senarai main semasa"
 
@@ -3438,7 +3442,7 @@ msgstr "Tiada blok pendek"
 msgid "None"
 msgstr "Tiada"
 
-#: library/libraryview.cpp:640 ui/mainwindow.cpp:2285 ui/mainwindow.cpp:2431
+#: library/libraryview.cpp:640 ui/mainwindow.cpp:2289 ui/mainwindow.cpp:2435
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Tiada satupun lagu yang dipilih sesuai untuk disalin ke peranti"
 
@@ -3673,7 +3677,7 @@ msgstr "Tahun asal - Album"
 msgid "Original year tag support"
 msgstr "Sokongan tag tahun asal"
 
-#: core/commandlineoptions.cpp:173
+#: core/commandlineoptions.cpp:176
 msgid "Other options"
 msgstr "Pilihan lain"
 
@@ -3731,7 +3735,7 @@ msgstr "Kata laluan"
 msgid "Pause"
 msgstr "Jeda"
 
-#: core/commandlineoptions.cpp:154
+#: core/commandlineoptions.cpp:156
 msgid "Pause playback"
 msgstr "Jeda main balik"
 
@@ -3765,7 +3769,7 @@ msgstr "Main"
 msgid "Play count"
 msgstr "Kiraan main"
 
-#: core/commandlineoptions.cpp:153
+#: core/commandlineoptions.cpp:155
 msgid "Play if stopped, pause if playing"
 msgstr "Main sekiranya telah dihenti, jeda sekiranya dimainkan"
 
@@ -3774,7 +3778,7 @@ msgstr "Main sekiranya telah dihenti, jeda sekiranya dimainkan"
 msgid "Play if there is nothing already playing"
 msgstr "Main sekiranya tiada apa yang tersedia dimainkan"
 
-#: core/commandlineoptions.cpp:172
+#: core/commandlineoptions.cpp:175
 msgid "Play the <n>th track in the playlist"
 msgstr "Mainkan trek ke-<n> dalam senarai main"
 
@@ -3786,7 +3790,7 @@ msgstr "Main/Jeda"
 msgid "Playback"
 msgstr "Main balik"
 
-#: core/commandlineoptions.cpp:151
+#: core/commandlineoptions.cpp:153
 msgid "Player options"
 msgstr "Pilihan pemain"
 
@@ -3800,7 +3804,7 @@ msgstr "Senarai main"
 msgid "Playlist finished"
 msgstr "Senarai main selesai"
 
-#: core/commandlineoptions.cpp:169
+#: core/commandlineoptions.cpp:171
 #: ../bin/src/ui_playlistsaveoptionsdialog.h:94
 msgid "Playlist options"
 msgstr "Pilihan senarai main"
@@ -3918,7 +3922,7 @@ msgstr "Sebelum"
 msgid "Previous track"
 msgstr "Trek sebelumnya"
 
-#: core/commandlineoptions.cpp:179
+#: core/commandlineoptions.cpp:182
 msgid "Print out version information"
 msgstr "Cetak maklumat versi"
 
@@ -4192,7 +4196,7 @@ msgstr "Tetap semula kiraan main"
 msgid "Restart song, then jump to previous if pressed again"
 msgstr "Memulakan semula lagu, kemudian lompat ke kedudukan terdahulu jika ditekan sekali lagi"
 
-#: core/commandlineoptions.cpp:167
+#: core/commandlineoptions.cpp:169
 msgid ""
 "Restart the track, or play the previous track if within 8 seconds of start."
 msgstr "Mula semula trek, atau mainkan trek sebelum ini jika dalam tempoh 8 saat bermula."
@@ -4427,11 +4431,11 @@ msgstr "Jangkau mengundur"
 msgid "Seek forward"
 msgstr "Jangkau maju"
 
-#: core/commandlineoptions.cpp:165
+#: core/commandlineoptions.cpp:167
 msgid "Seek the currently playing track by a relative amount"
 msgstr "Jangkau trek semasa dimainkan mengikut amaun relatif"
 
-#: core/commandlineoptions.cpp:163
+#: core/commandlineoptions.cpp:165
 msgid "Seek the currently playing track to an absolute position"
 msgstr "Jangkau trek semasa dimainkan ke kedudukan mutlak"
 
@@ -4500,7 +4504,7 @@ msgstr "Perkhidmatan di luar talian"
 msgid "Set %1 to \"%2\"..."
 msgstr "Tetapkan %1 ke \"%2\"..."
 
-#: core/commandlineoptions.cpp:158
+#: core/commandlineoptions.cpp:160
 msgid "Set the volume to <value> percent"
 msgstr "Tetapkan volum ke <value> peratus"
 
@@ -4692,7 +4696,7 @@ msgstr "Saiz:"
 msgid "Ska"
 msgstr "Ska"
 
-#: core/commandlineoptions.cpp:156
+#: core/commandlineoptions.cpp:158
 msgid "Skip backwards in playlist"
 msgstr "Langkau mengundur dalam senarai main"
 
@@ -4700,7 +4704,7 @@ msgstr "Langkau mengundur dalam senarai main"
 msgid "Skip count"
 msgstr "Kiraan langkau"
 
-#: core/commandlineoptions.cpp:157
+#: core/commandlineoptions.cpp:159
 msgid "Skip forwards in playlist"
 msgstr "Langkau maju dalam senarai main"
 
@@ -4826,7 +4830,7 @@ msgstr "Disukai"
 msgid "Start ripping"
 msgstr "Mula meretas"
 
-#: core/commandlineoptions.cpp:152
+#: core/commandlineoptions.cpp:154
 msgid "Start the playlist currently playing"
 msgstr "Mulakan senarai main semasa dimainkan"
 
@@ -4871,11 +4875,11 @@ msgstr "Henti selepas setiap trek"
 msgid "Stop after this track"
 msgstr "Henti selepas trek ini"
 
-#: core/commandlineoptions.cpp:154
+#: core/commandlineoptions.cpp:156
 msgid "Stop playback"
 msgstr "Henti main balik"
 
-#: core/commandlineoptions.cpp:155
+#: core/commandlineoptions.cpp:157
 msgid "Stop playback after current track"
 msgstr "Henti main balik selepas trek semasa"
 
@@ -5023,7 +5027,7 @@ msgid ""
 "license key. Visit subsonic.org for details."
 msgstr "Tempoh percubaan pelayan Subsonic telah tamat. Sila beri derma untuk dapatkan kunci lesen. Lawati subsonic untuk perincian."
 
-#: ui/mainwindow.cpp:2513
+#: ui/mainwindow.cpp:2517
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -5065,7 +5069,7 @@ msgid ""
 "continue?"
 msgstr "Fail ini akan dipadam dari peranti, anda pasti untuk meneruskan?"
 
-#: library/libraryview.cpp:646 ui/mainwindow.cpp:2333 widgets/fileview.cpp:189
+#: library/libraryview.cpp:646 ui/mainwindow.cpp:2337 widgets/fileview.cpp:189
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -5176,7 +5180,7 @@ msgstr "Togol status baris gilir"
 msgid "Toggle scrobbling"
 msgstr "Togol scrobble"
 
-#: core/commandlineoptions.cpp:174
+#: core/commandlineoptions.cpp:177
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "Togol ketampakan paparan-atas-skrin menarik"
 
@@ -5258,7 +5262,7 @@ msgstr "Matikan"
 msgid "URI"
 msgstr "URI"
 
-#: core/commandlineoptions.cpp:150
+#: core/commandlineoptions.cpp:152
 msgid "URL(s)"
 msgstr "URL"
 
@@ -5357,7 +5361,7 @@ msgstr "Mengemaskini %1%..."
 msgid "Updating library"
 msgstr "Mengemaskini pustaka"
 
-#: core/commandlineoptions.cpp:150
+#: core/commandlineoptions.cpp:152
 msgid "Usage"
 msgstr "Penggunaan"
 
@@ -5620,7 +5624,7 @@ msgid ""
 "well?"
 msgstr "Anda mahu alih lagu lain dalam album ini ke Artis Pelbagai juga?"
 
-#: ui/mainwindow.cpp:2520
+#: ui/mainwindow.cpp:2524
 msgid "Would you like to run a full rescan right now?"
 msgstr "Anda mahu jalankan imbas semula penuh sekarang?"
 
@@ -5918,7 +5922,7 @@ msgstr "paling lama dahulu"
 msgid "on"
 msgstr "hidup"
 
-#: core/commandlineoptions.cpp:150
+#: core/commandlineoptions.cpp:152
 msgid "options"
 msgstr "pilihan"
 

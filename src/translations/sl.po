@@ -13,8 +13,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2016-07-25 14:14+0000\n"
-"Last-Translator: Andrej Mernik <andrejm@ubuntu.si>\n"
+"PO-Revision-Date: 2016-08-26 14:20+0000\n"
+"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Slovenian (http://www.transifex.com/davidsansome/clementine/language/sl/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -829,7 +829,7 @@ msgstr "Jezen"
 msgid "Appearance"
 msgstr "Videz"
 
-#: core/commandlineoptions.cpp:170
+#: core/commandlineoptions.cpp:173
 msgid "Append files/URLs to the playlist"
 msgstr "Pripni datoteke/naslove URL seznamu predvajanja"
 
@@ -1127,7 +1127,7 @@ msgstr "Spremeni način naključnega predvajanja"
 msgid "Change the currently playing song"
 msgstr "Spremenil skladbo, ki se trenutno predvaja"
 
-#: core/commandlineoptions.cpp:175
+#: core/commandlineoptions.cpp:178
 msgid "Change the language"
 msgstr "Sprememba jezika"
 
@@ -1342,7 +1342,7 @@ msgstr "&Skladatelj"
 msgid "Colors"
 msgstr "Barve"
 
-#: core/commandlineoptions.cpp:178
+#: core/commandlineoptions.cpp:181
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Z vejicami ločen seznam razred:raven, raven je 0-3"
 
@@ -1561,6 +1561,10 @@ msgstr "Ovitek albuma je nastavljen iz %1"
 msgid "Covers from %1"
 msgstr "Ovitki iz %1"
 
+#: core/commandlineoptions.cpp:172
+msgid "Create a new playlist with files/URLs"
+msgstr ""
+
 #: ../bin/src/ui_playbacksettingspage.h:344
 msgid "Cross-fade when changing tracks automatically"
 msgstr "Postopni prehod med samodejno spremembo skladb"
@@ -1628,11 +1632,11 @@ msgstr "Dnevi"
 msgid "De&fault"
 msgstr "&Privzeto"
 
-#: core/commandlineoptions.cpp:160
+#: core/commandlineoptions.cpp:162
 msgid "Decrease the volume by 4%"
 msgstr "Zmanjšaj glasnost za 4%"
 
-#: core/commandlineoptions.cpp:162
+#: core/commandlineoptions.cpp:164
 msgid "Decrease the volume by <value> percent"
 msgstr "Zmanjšaj glasnost za <value> odstotkov"
 
@@ -1667,7 +1671,7 @@ msgid "Delete downloaded data"
 msgstr "Izbriši prejete podatke"
 
 #: devices/deviceview.cpp:408 library/libraryview.cpp:645
-#: ui/mainwindow.cpp:2332 widgets/fileview.cpp:188
+#: ui/mainwindow.cpp:2336 widgets/fileview.cpp:188
 msgid "Delete files"
 msgstr "Izbriši datoteke"
 
@@ -1801,7 +1805,7 @@ msgstr "Nezvezni prenos (DTX)"
 msgid "Display options"
 msgstr "Možnosti prikaza"
 
-#: core/commandlineoptions.cpp:173
+#: core/commandlineoptions.cpp:176
 msgid "Display the on-screen-display"
 msgstr "Pokaži prikaz na zaslonu"
 
@@ -2106,17 +2110,17 @@ msgstr "Celotna zbirka"
 msgid "Equalizer"
 msgstr "Uravnalnik"
 
-#: core/commandlineoptions.cpp:176
+#: core/commandlineoptions.cpp:179
 msgid "Equivalent to --log-levels *:1"
 msgstr "Enakovredno --log-levels *:1"
 
-#: core/commandlineoptions.cpp:177
+#: core/commandlineoptions.cpp:180
 msgid "Equivalent to --log-levels *:3"
 msgstr "Enakovredno --log-levels *:3"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:246
-#: library/libraryview.cpp:639 ui/mainwindow.cpp:2038 ui/mainwindow.cpp:2284
-#: ui/mainwindow.cpp:2430 internet/vk/vkservice.cpp:643
+#: library/libraryview.cpp:639 ui/mainwindow.cpp:2038 ui/mainwindow.cpp:2288
+#: ui/mainwindow.cpp:2434 internet/vk/vkservice.cpp:643
 msgid "Error"
 msgstr "Napaka"
 
@@ -2733,11 +2737,11 @@ msgstr "Nezdružljiva različica protokola REST za Subsonic. Strežnik mora nadg
 msgid "Incomplete configuration, please ensure all fields are populated."
 msgstr "Nepopolna nastavitev, prepričajte se, da so vsa polja izpolnjena."
 
-#: core/commandlineoptions.cpp:159
+#: core/commandlineoptions.cpp:161
 msgid "Increase the volume by 4%"
 msgstr "Povečaj glasnost za 4%"
 
-#: core/commandlineoptions.cpp:161
+#: core/commandlineoptions.cpp:163
 msgid "Increase the volume by <value> percent"
 msgstr "Povečaj glasnost za <value> odstotkov"
 
@@ -2967,7 +2971,7 @@ msgstr "Knjižnica"
 msgid "Library advanced grouping"
 msgstr "Napredno združevanje v knjižnici"
 
-#: ui/mainwindow.cpp:2522
+#: ui/mainwindow.cpp:2526
 msgid "Library rescan notice"
 msgstr "Obvestilo ponovnega preiskovanja knjižnice"
 
@@ -3049,7 +3053,7 @@ msgstr "Nalaganje podrobnosti o skladbah"
 msgid "Loading..."
 msgstr "Nalaganje ..."
 
-#: core/commandlineoptions.cpp:171
+#: core/commandlineoptions.cpp:174
 msgid "Loads files/URLs, replacing current playlist"
 msgstr "Naloži datoteke/naslove URL in zamenjaj trenutni seznam predvajanja"
 
@@ -3442,7 +3446,7 @@ msgstr "Brez kratkih blokov"
 msgid "None"
 msgstr "Brez"
 
-#: library/libraryview.cpp:640 ui/mainwindow.cpp:2285 ui/mainwindow.cpp:2431
+#: library/libraryview.cpp:640 ui/mainwindow.cpp:2289 ui/mainwindow.cpp:2435
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Nobena izmed izbranih skladb ni bila primerna za kopiranje na napravo"
 
@@ -3677,7 +3681,7 @@ msgstr "Izvorno leto - album"
 msgid "Original year tag support"
 msgstr "Podpora za oznako izvornega leta"
 
-#: core/commandlineoptions.cpp:173
+#: core/commandlineoptions.cpp:176
 msgid "Other options"
 msgstr "Druge možnosti"
 
@@ -3735,7 +3739,7 @@ msgstr "Geslo"
 msgid "Pause"
 msgstr "Naredi premor"
 
-#: core/commandlineoptions.cpp:154
+#: core/commandlineoptions.cpp:156
 msgid "Pause playback"
 msgstr "Naredi premor predvajanja"
 
@@ -3769,7 +3773,7 @@ msgstr "Predvajaj"
 msgid "Play count"
 msgstr "Število predvajanj"
 
-#: core/commandlineoptions.cpp:153
+#: core/commandlineoptions.cpp:155
 msgid "Play if stopped, pause if playing"
 msgstr "Predvajaj, če je zaustavljeno, napravi premor, če se predvaja"
 
@@ -3778,7 +3782,7 @@ msgstr "Predvajaj, če je zaustavljeno, napravi premor, če se predvaja"
 msgid "Play if there is nothing already playing"
 msgstr "Predvajaj, če se trenutno ne predvaja nič"
 
-#: core/commandlineoptions.cpp:172
+#: core/commandlineoptions.cpp:175
 msgid "Play the <n>th track in the playlist"
 msgstr "Predvajaj <n>-to skladbo v seznamu predvajanja"
 
@@ -3790,7 +3794,7 @@ msgstr "Predvajaj/premor"
 msgid "Playback"
 msgstr "Predvajanje"
 
-#: core/commandlineoptions.cpp:151
+#: core/commandlineoptions.cpp:153
 msgid "Player options"
 msgstr "Možnosti predvajalnika"
 
@@ -3804,7 +3808,7 @@ msgstr "Seznam predvajanja"
 msgid "Playlist finished"
 msgstr "Seznam predvajanja je končan"
 
-#: core/commandlineoptions.cpp:169
+#: core/commandlineoptions.cpp:171
 #: ../bin/src/ui_playlistsaveoptionsdialog.h:94
 msgid "Playlist options"
 msgstr "Možnosti seznama predvajanja"
@@ -3922,7 +3926,7 @@ msgstr "Predhodni"
 msgid "Previous track"
 msgstr "Predhodna skladba"
 
-#: core/commandlineoptions.cpp:179
+#: core/commandlineoptions.cpp:182
 msgid "Print out version information"
 msgstr "Izpiši podrobnosti o različici"
 
@@ -4196,7 +4200,7 @@ msgstr "Ponastavi število predvajanj"
 msgid "Restart song, then jump to previous if pressed again"
 msgstr "ponovil skladbo, nato pa ob ponovnem kliku skočil na predhodno"
 
-#: core/commandlineoptions.cpp:167
+#: core/commandlineoptions.cpp:169
 msgid ""
 "Restart the track, or play the previous track if within 8 seconds of start."
 msgstr "Znova zaženi skladbo ali predvajaj predhodno skladbo, če je znotraj 8 sekund začetka."
@@ -4431,11 +4435,11 @@ msgstr "Previj nazaj"
 msgid "Seek forward"
 msgstr "Previj naprej"
 
-#: core/commandlineoptions.cpp:165
+#: core/commandlineoptions.cpp:167
 msgid "Seek the currently playing track by a relative amount"
 msgstr "Previj trenutno predvajano skladbo za relativno količino"
 
-#: core/commandlineoptions.cpp:163
+#: core/commandlineoptions.cpp:165
 msgid "Seek the currently playing track to an absolute position"
 msgstr "Previj trenutno predvajano skladbo na absoluten položaj"
 
@@ -4504,7 +4508,7 @@ msgstr "Storitev je nepovezana"
 msgid "Set %1 to \"%2\"..."
 msgstr "Nastavi %1 na \"%2\" ..."
 
-#: core/commandlineoptions.cpp:158
+#: core/commandlineoptions.cpp:160
 msgid "Set the volume to <value> percent"
 msgstr "Nastavi glasnost na <value> odstotkov"
 
@@ -4696,7 +4700,7 @@ msgstr "Velikost:"
 msgid "Ska"
 msgstr "Ska"
 
-#: core/commandlineoptions.cpp:156
+#: core/commandlineoptions.cpp:158
 msgid "Skip backwards in playlist"
 msgstr "Skoči nazaj po seznamu predvajanja"
 
@@ -4704,7 +4708,7 @@ msgstr "Skoči nazaj po seznamu predvajanja"
 msgid "Skip count"
 msgstr "Število preskočenih"
 
-#: core/commandlineoptions.cpp:157
+#: core/commandlineoptions.cpp:159
 msgid "Skip forwards in playlist"
 msgstr "Skoči naprej po seznamu predvajanja"
 
@@ -4830,7 +4834,7 @@ msgstr "Z zvezdico"
 msgid "Start ripping"
 msgstr "Začni z zajemanjem"
 
-#: core/commandlineoptions.cpp:152
+#: core/commandlineoptions.cpp:154
 msgid "Start the playlist currently playing"
 msgstr "Predvajaj skladbo, ki je označena v seznamu predvajanja"
 
@@ -4875,11 +4879,11 @@ msgstr "Zaustavi po vsaki skladbi"
 msgid "Stop after this track"
 msgstr "Zaustavi po tej skladbi"
 
-#: core/commandlineoptions.cpp:154
+#: core/commandlineoptions.cpp:156
 msgid "Stop playback"
 msgstr "Zaustavi predvajanje"
 
-#: core/commandlineoptions.cpp:155
+#: core/commandlineoptions.cpp:157
 msgid "Stop playback after current track"
 msgstr "Zaustavi predvajanje po trenutni skladbi"
 
@@ -5027,7 +5031,7 @@ msgid ""
 "license key. Visit subsonic.org for details."
 msgstr "Preizkusno obdobje za strežnik Subsonic je končano. Da pridobite licenčni ključ, morate donirati. Za podrobnosti si oglejte subsonic.org."
 
-#: ui/mainwindow.cpp:2513
+#: ui/mainwindow.cpp:2517
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -5069,7 +5073,7 @@ msgid ""
 "continue?"
 msgstr "Te datoteke bodo izbrisane iz naprave. Ali ste prepričani, da želite nadaljevati?"
 
-#: library/libraryview.cpp:646 ui/mainwindow.cpp:2333 widgets/fileview.cpp:189
+#: library/libraryview.cpp:646 ui/mainwindow.cpp:2337 widgets/fileview.cpp:189
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -5180,7 +5184,7 @@ msgstr "Preklopi stanje vrste"
 msgid "Toggle scrobbling"
 msgstr "Preklopi med pošiljanjem podatkov o predvajanih skladbah"
 
-#: core/commandlineoptions.cpp:174
+#: core/commandlineoptions.cpp:177
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "Preklopi vidnost lepega prikaza na zaslonu"
 
@@ -5262,7 +5266,7 @@ msgstr "Izklopi"
 msgid "URI"
 msgstr "Naslov URI"
 
-#: core/commandlineoptions.cpp:150
+#: core/commandlineoptions.cpp:152
 msgid "URL(s)"
 msgstr "Naslovi URL"
 
@@ -5361,7 +5365,7 @@ msgstr "Posodabljanje %1 % ..."
 msgid "Updating library"
 msgstr "Posodabljanje knjižnice"
 
-#: core/commandlineoptions.cpp:150
+#: core/commandlineoptions.cpp:152
 msgid "Usage"
 msgstr "Uporaba"
 
@@ -5624,7 +5628,7 @@ msgid ""
 "well?"
 msgstr "Ali bi želeli tudi druge skladbe v tem albumu premakniti med kategorijo Različni izvajalci?"
 
-#: ui/mainwindow.cpp:2520
+#: ui/mainwindow.cpp:2524
 msgid "Would you like to run a full rescan right now?"
 msgstr "Ali želite opraviti ponovno preiskovanje celotne knjižnice?"
 
@@ -5922,7 +5926,7 @@ msgstr "najprej starejši"
 msgid "on"
 msgstr "v"
 
-#: core/commandlineoptions.cpp:150
+#: core/commandlineoptions.cpp:152
 msgid "options"
 msgstr "možnosti"
 

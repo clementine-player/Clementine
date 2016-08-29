@@ -26,7 +26,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2016-07-25 11:07+0000\n"
+"PO-Revision-Date: 2016-08-26 14:20+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Turkish (http://www.transifex.com/davidsansome/clementine/language/tr/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -842,7 +842,7 @@ msgstr "Öfkeli"
 msgid "Appearance"
 msgstr "Görünüm"
 
-#: core/commandlineoptions.cpp:170
+#: core/commandlineoptions.cpp:173
 msgid "Append files/URLs to the playlist"
 msgstr "Çalma listesine dosya/URL ekle"
 
@@ -1140,7 +1140,7 @@ msgstr "Karıştırma kipini değiştir"
 msgid "Change the currently playing song"
 msgstr "Şu anda çalınan parçayı değiştir"
 
-#: core/commandlineoptions.cpp:175
+#: core/commandlineoptions.cpp:178
 msgid "Change the language"
 msgstr "Dili değiştir"
 
@@ -1355,7 +1355,7 @@ msgstr ""
 msgid "Colors"
 msgstr "Renk"
 
-#: core/commandlineoptions.cpp:178
+#: core/commandlineoptions.cpp:181
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Virgülle ayrılmış sınıf:seviye listesi, sınıf 0-3 arasında olabilir "
 
@@ -1574,6 +1574,10 @@ msgstr "Kapak resmi %1 adresinden ayarlandı"
 msgid "Covers from %1"
 msgstr "%1 adresindeki kapak resimleri"
 
+#: core/commandlineoptions.cpp:172
+msgid "Create a new playlist with files/URLs"
+msgstr ""
+
 #: ../bin/src/ui_playbacksettingspage.h:344
 msgid "Cross-fade when changing tracks automatically"
 msgstr "Parça değiştirirken otomatik olarak çapraz geçiş yap"
@@ -1641,11 +1645,11 @@ msgstr "Gün"
 msgid "De&fault"
 msgstr "&Öntanımlı"
 
-#: core/commandlineoptions.cpp:160
+#: core/commandlineoptions.cpp:162
 msgid "Decrease the volume by 4%"
 msgstr "Ses seviyesini 4% azalt"
 
-#: core/commandlineoptions.cpp:162
+#: core/commandlineoptions.cpp:164
 msgid "Decrease the volume by <value> percent"
 msgstr "<value> oranında sesi azaltın"
 
@@ -1680,7 +1684,7 @@ msgid "Delete downloaded data"
 msgstr "İndirilmiş veriyi sil"
 
 #: devices/deviceview.cpp:408 library/libraryview.cpp:645
-#: ui/mainwindow.cpp:2332 widgets/fileview.cpp:188
+#: ui/mainwindow.cpp:2336 widgets/fileview.cpp:188
 msgid "Delete files"
 msgstr "Dosyaları sil"
 
@@ -1814,7 +1818,7 @@ msgstr "Kesikli aktarma"
 msgid "Display options"
 msgstr "Gösterim seçenekleri"
 
-#: core/commandlineoptions.cpp:173
+#: core/commandlineoptions.cpp:176
 msgid "Display the on-screen-display"
 msgstr "Ekran görselini göster"
 
@@ -2119,17 +2123,17 @@ msgstr "Tüm koleksiyon"
 msgid "Equalizer"
 msgstr "Ekolayzır"
 
-#: core/commandlineoptions.cpp:176
+#: core/commandlineoptions.cpp:179
 msgid "Equivalent to --log-levels *:1"
 msgstr "--log-levels *:1'e eşdeğer"
 
-#: core/commandlineoptions.cpp:177
+#: core/commandlineoptions.cpp:180
 msgid "Equivalent to --log-levels *:3"
 msgstr "--log-levels *:3'e eşdeğer"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:246
-#: library/libraryview.cpp:639 ui/mainwindow.cpp:2038 ui/mainwindow.cpp:2284
-#: ui/mainwindow.cpp:2430 internet/vk/vkservice.cpp:643
+#: library/libraryview.cpp:639 ui/mainwindow.cpp:2038 ui/mainwindow.cpp:2288
+#: ui/mainwindow.cpp:2434 internet/vk/vkservice.cpp:643
 msgid "Error"
 msgstr "Hata"
 
@@ -2746,11 +2750,11 @@ msgstr "Uyumsuz Subsonic REST protokol sürümü. Sunucu yükseltilmeli."
 msgid "Incomplete configuration, please ensure all fields are populated."
 msgstr "Tamamlanmamış yapılandırma, lütfen tüm alanların dolduğundan emin olun"
 
-#: core/commandlineoptions.cpp:159
+#: core/commandlineoptions.cpp:161
 msgid "Increase the volume by 4%"
 msgstr "Ses seviyesini 4% arttır"
 
-#: core/commandlineoptions.cpp:161
+#: core/commandlineoptions.cpp:163
 msgid "Increase the volume by <value> percent"
 msgstr "<value> oranında sesi artırın"
 
@@ -2980,7 +2984,7 @@ msgstr "Kütüphane"
 msgid "Library advanced grouping"
 msgstr "Kütüphane gelişmiş gruplama"
 
-#: ui/mainwindow.cpp:2522
+#: ui/mainwindow.cpp:2526
 msgid "Library rescan notice"
 msgstr "Kütüphane yeniden tarama bildirisi"
 
@@ -3062,7 +3066,7 @@ msgstr "Parça bilgileri yükleniyor"
 msgid "Loading..."
 msgstr "Yükleniyor..."
 
-#: core/commandlineoptions.cpp:171
+#: core/commandlineoptions.cpp:174
 msgid "Loads files/URLs, replacing current playlist"
 msgstr "Dosyaları/URLleri yükler, mevcut çalma listesinin yerine koyar"
 
@@ -3455,7 +3459,7 @@ msgstr "Kısa blok yok"
 msgid "None"
 msgstr "Hiçbiri"
 
-#: library/libraryview.cpp:640 ui/mainwindow.cpp:2285 ui/mainwindow.cpp:2431
+#: library/libraryview.cpp:640 ui/mainwindow.cpp:2289 ui/mainwindow.cpp:2435
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Seçili şarkıların hiçbiri aygıta yüklemeye uygun değil"
 
@@ -3690,7 +3694,7 @@ msgstr ""
 msgid "Original year tag support"
 msgstr ""
 
-#: core/commandlineoptions.cpp:173
+#: core/commandlineoptions.cpp:176
 msgid "Other options"
 msgstr "Diğer seçenekler"
 
@@ -3748,7 +3752,7 @@ msgstr "Parola"
 msgid "Pause"
 msgstr "Duraklat"
 
-#: core/commandlineoptions.cpp:154
+#: core/commandlineoptions.cpp:156
 msgid "Pause playback"
 msgstr "Beklet"
 
@@ -3782,7 +3786,7 @@ msgstr "Çal"
 msgid "Play count"
 msgstr "Çalma sayısı"
 
-#: core/commandlineoptions.cpp:153
+#: core/commandlineoptions.cpp:155
 msgid "Play if stopped, pause if playing"
 msgstr "Duraklatılmışsa çal, çalıyorsa beklet"
 
@@ -3791,7 +3795,7 @@ msgstr "Duraklatılmışsa çal, çalıyorsa beklet"
 msgid "Play if there is nothing already playing"
 msgstr "Çalan bir şey yoksa çal"
 
-#: core/commandlineoptions.cpp:172
+#: core/commandlineoptions.cpp:175
 msgid "Play the <n>th track in the playlist"
 msgstr "Listedeki <n> numaralı parçayı çal"
 
@@ -3803,7 +3807,7 @@ msgstr "Çal/Duraklat"
 msgid "Playback"
 msgstr "Oynat"
 
-#: core/commandlineoptions.cpp:151
+#: core/commandlineoptions.cpp:153
 msgid "Player options"
 msgstr "Oynatıcı seçenekleri"
 
@@ -3817,7 +3821,7 @@ msgstr "Çalma Listesi"
 msgid "Playlist finished"
 msgstr "Parça listesi tamamlandı"
 
-#: core/commandlineoptions.cpp:169
+#: core/commandlineoptions.cpp:171
 #: ../bin/src/ui_playlistsaveoptionsdialog.h:94
 msgid "Playlist options"
 msgstr "Çalma listesi seçenekleri"
@@ -3935,7 +3939,7 @@ msgstr "Önceki"
 msgid "Previous track"
 msgstr "Önceki parça"
 
-#: core/commandlineoptions.cpp:179
+#: core/commandlineoptions.cpp:182
 msgid "Print out version information"
 msgstr "Sürüm bilgisini bastır"
 
@@ -4209,7 +4213,7 @@ msgstr "Çalma sayısını sıfırla"
 msgid "Restart song, then jump to previous if pressed again"
 msgstr "Şarkıyı yeniden başlatacak, ardından tekrar basılırsa öncekine gidecek"
 
-#: core/commandlineoptions.cpp:167
+#: core/commandlineoptions.cpp:169
 msgid ""
 "Restart the track, or play the previous track if within 8 seconds of start."
 msgstr "Eğer başlangıçtan en fazla 8 saniye geçmişse parçayı yeniden başlat veya önceki parçayı çal."
@@ -4444,11 +4448,11 @@ msgstr "Geriye doğru ara"
 msgid "Seek forward"
 msgstr "İleri doğru ara"
 
-#: core/commandlineoptions.cpp:165
+#: core/commandlineoptions.cpp:167
 msgid "Seek the currently playing track by a relative amount"
 msgstr "Çalan parçayı görece miktara göre ara"
 
-#: core/commandlineoptions.cpp:163
+#: core/commandlineoptions.cpp:165
 msgid "Seek the currently playing track to an absolute position"
 msgstr "Çalan parçayı kesin bir konuma göre ara"
 
@@ -4517,7 +4521,7 @@ msgstr "Hizmet çevrim dışı"
 msgid "Set %1 to \"%2\"..."
 msgstr "%1'i \"%2\" olarak ayarla"
 
-#: core/commandlineoptions.cpp:158
+#: core/commandlineoptions.cpp:160
 msgid "Set the volume to <value> percent"
 msgstr "Ses seviyesini yüzde <value> yap"
 
@@ -4709,7 +4713,7 @@ msgstr "Boyut:"
 msgid "Ska"
 msgstr "Ska"
 
-#: core/commandlineoptions.cpp:156
+#: core/commandlineoptions.cpp:158
 msgid "Skip backwards in playlist"
 msgstr "Parça listesinde geri git"
 
@@ -4717,7 +4721,7 @@ msgstr "Parça listesinde geri git"
 msgid "Skip count"
 msgstr "Atlama sayısı"
 
-#: core/commandlineoptions.cpp:157
+#: core/commandlineoptions.cpp:159
 msgid "Skip forwards in playlist"
 msgstr "Parça listesinde ileri git"
 
@@ -4843,7 +4847,7 @@ msgstr "Yıldızlı"
 msgid "Start ripping"
 msgstr "Dönüştürmeyi başlat"
 
-#: core/commandlineoptions.cpp:152
+#: core/commandlineoptions.cpp:154
 msgid "Start the playlist currently playing"
 msgstr "Çalma listesini mevcut çalınanla başlat"
 
@@ -4888,11 +4892,11 @@ msgstr "Her parçadan sonra dur"
 msgid "Stop after this track"
 msgstr "Bu parçadan sonra durdur"
 
-#: core/commandlineoptions.cpp:154
+#: core/commandlineoptions.cpp:156
 msgid "Stop playback"
 msgstr "Duraklat"
 
-#: core/commandlineoptions.cpp:155
+#: core/commandlineoptions.cpp:157
 msgid "Stop playback after current track"
 msgstr ""
 
@@ -5040,7 +5044,7 @@ msgid ""
 "license key. Visit subsonic.org for details."
 msgstr "Subsonic sunucusunun deneme süresi bitti. Lisans anahtarı almak için lütfen bağış yapın. Ayrıntılar için subsonic.org'u ziyaret edin."
 
-#: ui/mainwindow.cpp:2513
+#: ui/mainwindow.cpp:2517
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -5082,7 +5086,7 @@ msgid ""
 "continue?"
 msgstr "Bu dosyalar aygıttan silinecek, devam etmek istiyor musunuz?"
 
-#: library/libraryview.cpp:646 ui/mainwindow.cpp:2333 widgets/fileview.cpp:189
+#: library/libraryview.cpp:646 ui/mainwindow.cpp:2337 widgets/fileview.cpp:189
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -5193,7 +5197,7 @@ msgstr "Kuyruk durumunu göster/gizle"
 msgid "Toggle scrobbling"
 msgstr "Skroplamayı aç/kapa"
 
-#: core/commandlineoptions.cpp:174
+#: core/commandlineoptions.cpp:177
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "Şirin OSD görünürlüğünü aç/kapa"
 
@@ -5275,7 +5279,7 @@ msgstr "Kapat"
 msgid "URI"
 msgstr "URI"
 
-#: core/commandlineoptions.cpp:150
+#: core/commandlineoptions.cpp:152
 msgid "URL(s)"
 msgstr "URL(ler)"
 
@@ -5374,7 +5378,7 @@ msgstr "%1% Güncelleniyor..."
 msgid "Updating library"
 msgstr "Kütüphane güncelleniyor"
 
-#: core/commandlineoptions.cpp:150
+#: core/commandlineoptions.cpp:152
 msgid "Usage"
 msgstr "Kullanım"
 
@@ -5637,7 +5641,7 @@ msgid ""
 "well?"
 msgstr "Bu albümdeki diğer şarkıları da Çeşitli Sanatçılar'a taşımak ister misiniz?"
 
-#: ui/mainwindow.cpp:2520
+#: ui/mainwindow.cpp:2524
 msgid "Would you like to run a full rescan right now?"
 msgstr "Şu anda tam bir yeniden tarama çalıştırmak ister misiniz?"
 
@@ -5935,7 +5939,7 @@ msgstr "ilk önce en eskisi"
 msgid "on"
 msgstr "açık"
 
-#: core/commandlineoptions.cpp:150
+#: core/commandlineoptions.cpp:152
 msgid "options"
 msgstr "seçenekler"
 

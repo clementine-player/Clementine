@@ -13,7 +13,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2016-07-25 11:07+0000\n"
+"PO-Revision-Date: 2016-08-26 14:20+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Breton (http://www.transifex.com/davidsansome/clementine/language/br/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -829,7 +829,7 @@ msgstr "Fuloret"
 msgid "Appearance"
 msgstr "Neuz"
 
-#: core/commandlineoptions.cpp:170
+#: core/commandlineoptions.cpp:173
 msgid "Append files/URLs to the playlist"
 msgstr "Ouzhpennañ restroù pe liammoù internet d'ar roll seniñ"
 
@@ -1127,7 +1127,7 @@ msgstr "Cheñch an doare meskañ"
 msgid "Change the currently playing song"
 msgstr "O kemmañ an ton o vezañ lennet"
 
-#: core/commandlineoptions.cpp:175
+#: core/commandlineoptions.cpp:178
 msgid "Change the language"
 msgstr "Kemmañ ar yezh"
 
@@ -1342,7 +1342,7 @@ msgstr ""
 msgid "Colors"
 msgstr "Livioù"
 
-#: core/commandlineoptions.cpp:178
+#: core/commandlineoptions.cpp:181
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Listenn dispartiet gant ur virgulenn eus klas:live, live etre 0 ha 3"
 
@@ -1561,6 +1561,10 @@ msgstr "Golo diuzet adalek %1"
 msgid "Covers from %1"
 msgstr "Goloioù adalek %1"
 
+#: core/commandlineoptions.cpp:172
+msgid "Create a new playlist with files/URLs"
+msgstr ""
+
 #: ../bin/src/ui_playbacksettingspage.h:344
 msgid "Cross-fade when changing tracks automatically"
 msgstr "Lakaat un treveuz pa vez kemmet ar roud ent emgefreek"
@@ -1628,11 +1632,11 @@ msgstr "Deizioù"
 msgid "De&fault"
 msgstr "Dre &ziouer"
 
-#: core/commandlineoptions.cpp:160
+#: core/commandlineoptions.cpp:162
 msgid "Decrease the volume by 4%"
 msgstr "Digreskiñ an ampled eus 4%"
 
-#: core/commandlineoptions.cpp:162
+#: core/commandlineoptions.cpp:164
 msgid "Decrease the volume by <value> percent"
 msgstr "Digreskiñ an ampled eus <value> dre gant."
 
@@ -1667,7 +1671,7 @@ msgid "Delete downloaded data"
 msgstr "Diverkañ ar roadennoù pellgarget"
 
 #: devices/deviceview.cpp:408 library/libraryview.cpp:645
-#: ui/mainwindow.cpp:2332 widgets/fileview.cpp:188
+#: ui/mainwindow.cpp:2336 widgets/fileview.cpp:188
 msgid "Delete files"
 msgstr "Diverkañ restroù"
 
@@ -1801,7 +1805,7 @@ msgstr "Treuzkas digendalc'hus"
 msgid "Display options"
 msgstr "Dibarzhioù ar skrammañ"
 
-#: core/commandlineoptions.cpp:173
+#: core/commandlineoptions.cpp:176
 msgid "Display the on-screen-display"
 msgstr "Diskouez ar roll war ar skramm"
 
@@ -2106,17 +2110,17 @@ msgstr "Dastumadeg hollek"
 msgid "Equalizer"
 msgstr "Kevataler"
 
-#: core/commandlineoptions.cpp:176
+#: core/commandlineoptions.cpp:179
 msgid "Equivalent to --log-levels *:1"
 msgstr "Kenkoulz a --log-levels *:1"
 
-#: core/commandlineoptions.cpp:177
+#: core/commandlineoptions.cpp:180
 msgid "Equivalent to --log-levels *:3"
 msgstr "Kenkoulz a --log-levels *:3"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:246
-#: library/libraryview.cpp:639 ui/mainwindow.cpp:2038 ui/mainwindow.cpp:2284
-#: ui/mainwindow.cpp:2430 internet/vk/vkservice.cpp:643
+#: library/libraryview.cpp:639 ui/mainwindow.cpp:2038 ui/mainwindow.cpp:2288
+#: ui/mainwindow.cpp:2434 internet/vk/vkservice.cpp:643
 msgid "Error"
 msgstr "Fazi"
 
@@ -2733,11 +2737,11 @@ msgstr "Handelv komenad REST Subsonic digeverlec'h. Ret eo d'an dafariad hizivaa
 msgid "Incomplete configuration, please ensure all fields are populated."
 msgstr "Kefluniadur diglok, bezit sur eo leuniet an holl maeziennoù."
 
-#: core/commandlineoptions.cpp:159
+#: core/commandlineoptions.cpp:161
 msgid "Increase the volume by 4%"
 msgstr "Kreskiñ an ampled eus 4%"
 
-#: core/commandlineoptions.cpp:161
+#: core/commandlineoptions.cpp:163
 msgid "Increase the volume by <value> percent"
 msgstr "Kreskiñ an ampled eus <value> dre gant"
 
@@ -2967,7 +2971,7 @@ msgstr "Sonaoueg"
 msgid "Library advanced grouping"
 msgstr "Strolladur ar sonaoueg kempleshoc'h"
 
-#: ui/mainwindow.cpp:2522
+#: ui/mainwindow.cpp:2526
 msgid "Library rescan notice"
 msgstr "Kemenn hizivadur ar sonaoueg"
 
@@ -3049,7 +3053,7 @@ msgstr "O kargañ titouroù ar roud"
 msgid "Loading..."
 msgstr "O kargañ..."
 
-#: core/commandlineoptions.cpp:171
+#: core/commandlineoptions.cpp:174
 msgid "Loads files/URLs, replacing current playlist"
 msgstr "Kargañ restroù pe liammoù internet, hag eilec'hiañ ar roll seniñ"
 
@@ -3442,7 +3446,7 @@ msgstr "Bloc'h berr ebet"
 msgid "None"
 msgstr "Hini ebet"
 
-#: library/libraryview.cpp:640 ui/mainwindow.cpp:2285 ui/mainwindow.cpp:2431
+#: library/libraryview.cpp:640 ui/mainwindow.cpp:2289 ui/mainwindow.cpp:2435
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Ton ebet eus ar reoù diuzet a oa mat evit bezañ kopiet war an drobarzhell"
 
@@ -3677,7 +3681,7 @@ msgstr "Bloavezh orin - albom"
 msgid "Original year tag support"
 msgstr "Skor ar c'hlav \"bloavezh orin\""
 
-#: core/commandlineoptions.cpp:173
+#: core/commandlineoptions.cpp:176
 msgid "Other options"
 msgstr "Dibarzhioù all"
 
@@ -3735,7 +3739,7 @@ msgstr "Ger-tremen"
 msgid "Pause"
 msgstr "Ehan"
 
-#: core/commandlineoptions.cpp:154
+#: core/commandlineoptions.cpp:156
 msgid "Pause playback"
 msgstr "Ehan al lenn"
 
@@ -3769,7 +3773,7 @@ msgstr "Lenn"
 msgid "Play count"
 msgstr "Konter selaouadennoù"
 
-#: core/commandlineoptions.cpp:153
+#: core/commandlineoptions.cpp:155
 msgid "Play if stopped, pause if playing"
 msgstr "Lenn pe ehan, hervez ar stad"
 
@@ -3778,7 +3782,7 @@ msgstr "Lenn pe ehan, hervez ar stad"
 msgid "Play if there is nothing already playing"
 msgstr "Lenn ma vez netra all o vezañ lennet"
 
-#: core/commandlineoptions.cpp:172
+#: core/commandlineoptions.cpp:175
 msgid "Play the <n>th track in the playlist"
 msgstr "Seniñ an <n>vet roud eus ar roll seniñ"
 
@@ -3790,7 +3794,7 @@ msgstr "Lenn/Ehan"
 msgid "Playback"
 msgstr "Lenn sonerezh"
 
-#: core/commandlineoptions.cpp:151
+#: core/commandlineoptions.cpp:153
 msgid "Player options"
 msgstr "Dibarzhioù al lenner"
 
@@ -3804,7 +3808,7 @@ msgstr "Roll seniñ"
 msgid "Playlist finished"
 msgstr "Roll seniñ echuet"
 
-#: core/commandlineoptions.cpp:169
+#: core/commandlineoptions.cpp:171
 #: ../bin/src/ui_playlistsaveoptionsdialog.h:94
 msgid "Playlist options"
 msgstr "Dibarzhioù ar roll seniñ"
@@ -3922,7 +3926,7 @@ msgstr "A-raok"
 msgid "Previous track"
 msgstr "Roud a-raok"
 
-#: core/commandlineoptions.cpp:179
+#: core/commandlineoptions.cpp:182
 msgid "Print out version information"
 msgstr "Diskouez titouroù an handelv"
 
@@ -4196,7 +4200,7 @@ msgstr "Adderaouiñ ar konter lennadennoù"
 msgid "Restart song, then jump to previous if pressed again"
 msgstr "Adlenn an ton, ha lammat d'an hini a-raok ma vez adpouezet"
 
-#: core/commandlineoptions.cpp:167
+#: core/commandlineoptions.cpp:169
 msgid ""
 "Restart the track, or play the previous track if within 8 seconds of start."
 msgstr "Adkregiñ ar roud, pe lenn ar roud a-raok m'eo kroget abaoe 8 eilenn pe nebeutoc'h."
@@ -4431,11 +4435,11 @@ msgstr "Mont war gil"
 msgid "Seek forward"
 msgstr "Mont war-raok"
 
-#: core/commandlineoptions.cpp:165
+#: core/commandlineoptions.cpp:167
 msgid "Seek the currently playing track by a relative amount"
 msgstr "Klask ar roud lennet gant ur sammad relativel"
 
-#: core/commandlineoptions.cpp:163
+#: core/commandlineoptions.cpp:165
 msgid "Seek the currently playing track to an absolute position"
 msgstr "Klask ar roud lennet gant ul lec'hiadur absolud"
 
@@ -4504,7 +4508,7 @@ msgstr "Servij ezlinenn"
 msgid "Set %1 to \"%2\"..."
 msgstr "Termeniñ %1 d'an talvoud %2..."
 
-#: core/commandlineoptions.cpp:158
+#: core/commandlineoptions.cpp:160
 msgid "Set the volume to <value> percent"
 msgstr "Termeniñ an ampled da <value> dre gant"
 
@@ -4696,7 +4700,7 @@ msgstr "Ment:"
 msgid "Ska"
 msgstr "Ska"
 
-#: core/commandlineoptions.cpp:156
+#: core/commandlineoptions.cpp:158
 msgid "Skip backwards in playlist"
 msgstr "Mont a-drek er roll seniñ"
 
@@ -4704,7 +4708,7 @@ msgstr "Mont a-drek er roll seniñ"
 msgid "Skip count"
 msgstr "Konter tonioù lammet"
 
-#: core/commandlineoptions.cpp:157
+#: core/commandlineoptions.cpp:159
 msgid "Skip forwards in playlist"
 msgstr "Mont dirak er roll seniñ"
 
@@ -4830,7 +4834,7 @@ msgstr "Karetañ"
 msgid "Start ripping"
 msgstr "Kregiñ gant an eztennadenn"
 
-#: core/commandlineoptions.cpp:152
+#: core/commandlineoptions.cpp:154
 msgid "Start the playlist currently playing"
 msgstr "Kregiñ ar roll seniñ"
 
@@ -4875,11 +4879,11 @@ msgstr "Paouez goude pep roudenn"
 msgid "Stop after this track"
 msgstr "Paouez goude ar roud-mañ"
 
-#: core/commandlineoptions.cpp:154
+#: core/commandlineoptions.cpp:156
 msgid "Stop playback"
 msgstr "Paouez goude vefe lennet an ton"
 
-#: core/commandlineoptions.cpp:155
+#: core/commandlineoptions.cpp:157
 msgid "Stop playback after current track"
 msgstr "Paouez gant al lenn goude ar roud bremanel"
 
@@ -5027,7 +5031,7 @@ msgid ""
 "license key. Visit subsonic.org for details."
 msgstr "Ar mare amprouiñ evit an dafariad Subsonic a zo echuet. Roit arc'hant evit kaout un alc'hwez lañvaz mar plij. Kit war subsonic.org evit ar munudoù."
 
-#: ui/mainwindow.cpp:2513
+#: ui/mainwindow.cpp:2517
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -5069,7 +5073,7 @@ msgid ""
 "continue?"
 msgstr "Ar restroù-mañ a vo diverket eus an drobarzhell, sur oc'h da gaout c'hoant kenderc'hel ?"
 
-#: library/libraryview.cpp:646 ui/mainwindow.cpp:2333 widgets/fileview.cpp:189
+#: library/libraryview.cpp:646 ui/mainwindow.cpp:2337 widgets/fileview.cpp:189
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -5180,7 +5184,7 @@ msgstr "Cheñch stad al listenn c'hortoz"
 msgid "Toggle scrobbling"
 msgstr "Cheñch ar scrobbling"
 
-#: core/commandlineoptions.cpp:174
+#: core/commandlineoptions.cpp:177
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "Gweredekaat/Diweredekaat an OSD brav"
 
@@ -5262,7 +5266,7 @@ msgstr "Lazhañ"
 msgid "URI"
 msgstr "URI"
 
-#: core/commandlineoptions.cpp:150
+#: core/commandlineoptions.cpp:152
 msgid "URL(s)"
 msgstr "URL(où)"
 
@@ -5361,7 +5365,7 @@ msgstr "Hizivadenn %1%..."
 msgid "Updating library"
 msgstr "O hizivaat ar sonaoueg"
 
-#: core/commandlineoptions.cpp:150
+#: core/commandlineoptions.cpp:152
 msgid "Usage"
 msgstr "Implij"
 
@@ -5624,7 +5628,7 @@ msgid ""
 "well?"
 msgstr "Ha c'hoant ho peus lakaat tonioù all an albom-mañ e Arzourien Liesseurt ?"
 
-#: ui/mainwindow.cpp:2520
+#: ui/mainwindow.cpp:2524
 msgid "Would you like to run a full rescan right now?"
 msgstr "C'hoant ho peus d'ober ur c'hwilervadenn eus al levraoueg bremañ ?"
 
@@ -5922,7 +5926,7 @@ msgstr "koshoc'h da gentañ"
 msgid "on"
 msgstr "war"
 
-#: core/commandlineoptions.cpp:150
+#: core/commandlineoptions.cpp:152
 msgid "options"
 msgstr "dibarzhioù"
 

@@ -16,7 +16,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2016-07-25 13:53+0000\n"
+"PO-Revision-Date: 2016-08-26 16:45+0000\n"
 "Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/davidsansome/clementine/language/ca/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -832,7 +832,7 @@ msgstr "Enfadat"
 msgid "Appearance"
 msgstr "Aparença"
 
-#: core/commandlineoptions.cpp:170
+#: core/commandlineoptions.cpp:173
 msgid "Append files/URLs to the playlist"
 msgstr "Afegeix fitxers/URL a la llista de reproducció"
 
@@ -1130,7 +1130,7 @@ msgstr "Canvia el mode de mescla aleatòria"
 msgid "Change the currently playing song"
 msgstr "Canvia la cançó que s’està reproduint ara"
 
-#: core/commandlineoptions.cpp:175
+#: core/commandlineoptions.cpp:178
 msgid "Change the language"
 msgstr "Canvia l’idioma"
 
@@ -1345,7 +1345,7 @@ msgstr "Co&mpositor"
 msgid "Colors"
 msgstr "Colors"
 
-#: core/commandlineoptions.cpp:178
+#: core/commandlineoptions.cpp:181
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Llista separada per comes de classe:nivell, el nivell és 0-3"
 
@@ -1564,6 +1564,10 @@ msgstr "Imatge de portada establerta des de %1"
 msgid "Covers from %1"
 msgstr "Caràtules de %1"
 
+#: core/commandlineoptions.cpp:172
+msgid "Create a new playlist with files/URLs"
+msgstr "Crea una nova llista de reproducció amb arxius i adreces URL"
+
 #: ../bin/src/ui_playbacksettingspage.h:344
 msgid "Cross-fade when changing tracks automatically"
 msgstr "Fusiona el so quan es canviï la peça automàticament"
@@ -1631,11 +1635,11 @@ msgstr "Dies"
 msgid "De&fault"
 msgstr "Per de&fecte"
 
-#: core/commandlineoptions.cpp:160
+#: core/commandlineoptions.cpp:162
 msgid "Decrease the volume by 4%"
 msgstr "Redueix el volum un 4%"
 
-#: core/commandlineoptions.cpp:162
+#: core/commandlineoptions.cpp:164
 msgid "Decrease the volume by <value> percent"
 msgstr "Redueix el volum <value> per cent"
 
@@ -1670,7 +1674,7 @@ msgid "Delete downloaded data"
 msgstr "Suprimeix les dades baixades"
 
 #: devices/deviceview.cpp:408 library/libraryview.cpp:645
-#: ui/mainwindow.cpp:2332 widgets/fileview.cpp:188
+#: ui/mainwindow.cpp:2336 widgets/fileview.cpp:188
 msgid "Delete files"
 msgstr "Suprimeix els fitxers"
 
@@ -1804,7 +1808,7 @@ msgstr "Transmissió discontínua"
 msgid "Display options"
 msgstr "Opcions de visualització"
 
-#: core/commandlineoptions.cpp:173
+#: core/commandlineoptions.cpp:176
 msgid "Display the on-screen-display"
 msgstr "Mostrar la indicació-a-pantalla"
 
@@ -2109,17 +2113,17 @@ msgstr "Tota la col·lecció"
 msgid "Equalizer"
 msgstr "Equalitzador"
 
-#: core/commandlineoptions.cpp:176
+#: core/commandlineoptions.cpp:179
 msgid "Equivalent to --log-levels *:1"
 msgstr "Equivalent a --log-levels *:1"
 
-#: core/commandlineoptions.cpp:177
+#: core/commandlineoptions.cpp:180
 msgid "Equivalent to --log-levels *:3"
 msgstr "Equivalent a --log-levels *:3"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:246
-#: library/libraryview.cpp:639 ui/mainwindow.cpp:2038 ui/mainwindow.cpp:2284
-#: ui/mainwindow.cpp:2430 internet/vk/vkservice.cpp:643
+#: library/libraryview.cpp:639 ui/mainwindow.cpp:2038 ui/mainwindow.cpp:2288
+#: ui/mainwindow.cpp:2434 internet/vk/vkservice.cpp:643
 msgid "Error"
 msgstr "Error"
 
@@ -2736,11 +2740,11 @@ msgstr "La versió del protocol REST de Subsonic és incompatible. El servidor h
 msgid "Incomplete configuration, please ensure all fields are populated."
 msgstr "La configuració està incompleta. Assegureu-vos que heu emplenat tots els camps."
 
-#: core/commandlineoptions.cpp:159
+#: core/commandlineoptions.cpp:161
 msgid "Increase the volume by 4%"
 msgstr "Incrementa el volum un 4 %"
 
-#: core/commandlineoptions.cpp:161
+#: core/commandlineoptions.cpp:163
 msgid "Increase the volume by <value> percent"
 msgstr "Augmenta el volum <value> per cent"
 
@@ -2970,7 +2974,7 @@ msgstr "Col·lecció"
 msgid "Library advanced grouping"
 msgstr "Agrupació avançada de la col·lecció"
 
-#: ui/mainwindow.cpp:2522
+#: ui/mainwindow.cpp:2526
 msgid "Library rescan notice"
 msgstr "Avís de reescaneig de la col·lecció"
 
@@ -3052,7 +3056,7 @@ msgstr "S’està carregant la informació de les peces"
 msgid "Loading..."
 msgstr "S’està carregant…"
 
-#: core/commandlineoptions.cpp:171
+#: core/commandlineoptions.cpp:174
 msgid "Loads files/URLs, replacing current playlist"
 msgstr "Carregar fitxers/URLs, substituïnt l'actual llista de reproducció"
 
@@ -3445,7 +3449,7 @@ msgstr "No utilitzis blocs curs"
 msgid "None"
 msgstr "Cap"
 
-#: library/libraryview.cpp:640 ui/mainwindow.cpp:2285 ui/mainwindow.cpp:2431
+#: library/libraryview.cpp:640 ui/mainwindow.cpp:2289 ui/mainwindow.cpp:2435
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Cap de les cançons seleccionades són adequades per copiar-les a un dispositiu"
 
@@ -3680,7 +3684,7 @@ msgstr "Any original - àlbum"
 msgid "Original year tag support"
 msgstr "Compatibilitat amb l’etiqueta d’any original"
 
-#: core/commandlineoptions.cpp:173
+#: core/commandlineoptions.cpp:176
 msgid "Other options"
 msgstr "Altres opcions"
 
@@ -3738,7 +3742,7 @@ msgstr "Contrasenya"
 msgid "Pause"
 msgstr "Pausa"
 
-#: core/commandlineoptions.cpp:154
+#: core/commandlineoptions.cpp:156
 msgid "Pause playback"
 msgstr "Pausa la reproducció"
 
@@ -3772,7 +3776,7 @@ msgstr "Reprodueix"
 msgid "Play count"
 msgstr "Comptador de reproduccions"
 
-#: core/commandlineoptions.cpp:153
+#: core/commandlineoptions.cpp:155
 msgid "Play if stopped, pause if playing"
 msgstr "Reprodueix si esta parat, pausa si esta reproduïnt"
 
@@ -3781,7 +3785,7 @@ msgstr "Reprodueix si esta parat, pausa si esta reproduïnt"
 msgid "Play if there is nothing already playing"
 msgstr "Reprodueix si encara no hi ha res reproduint-se"
 
-#: core/commandlineoptions.cpp:172
+#: core/commandlineoptions.cpp:175
 msgid "Play the <n>th track in the playlist"
 msgstr "Reprodueix la <n>a cançó de la llista de reproducció"
 
@@ -3793,7 +3797,7 @@ msgstr "Reprodueix/Pausa"
 msgid "Playback"
 msgstr "Reproducció"
 
-#: core/commandlineoptions.cpp:151
+#: core/commandlineoptions.cpp:153
 msgid "Player options"
 msgstr "Opcions del reproductor"
 
@@ -3807,7 +3811,7 @@ msgstr "Llista de reproducció"
 msgid "Playlist finished"
 msgstr "Llista de reproducció finalitzada"
 
-#: core/commandlineoptions.cpp:169
+#: core/commandlineoptions.cpp:171
 #: ../bin/src/ui_playlistsaveoptionsdialog.h:94
 msgid "Playlist options"
 msgstr "Opcions de la llista de reproducció"
@@ -3925,7 +3929,7 @@ msgstr "Anterior"
 msgid "Previous track"
 msgstr "Peça anterior"
 
-#: core/commandlineoptions.cpp:179
+#: core/commandlineoptions.cpp:182
 msgid "Print out version information"
 msgstr "Mostra la informació de la versió"
 
@@ -4199,7 +4203,7 @@ msgstr "Posa a zero el comptador de reproduccions"
 msgid "Restart song, then jump to previous if pressed again"
 msgstr "Reinicia la peça i salta a l’anterior en fer clic un altre cop"
 
-#: core/commandlineoptions.cpp:167
+#: core/commandlineoptions.cpp:169
 msgid ""
 "Restart the track, or play the previous track if within 8 seconds of start."
 msgstr "Reinicia la peça, o canvia a l’anterior si no han transcorregut 8 segons des de l’inici."
@@ -4434,11 +4438,11 @@ msgstr "Retrocedeix 10 segons"
 msgid "Seek forward"
 msgstr "Avança 10 segons"
 
-#: core/commandlineoptions.cpp:165
+#: core/commandlineoptions.cpp:167
 msgid "Seek the currently playing track by a relative amount"
 msgstr "Mou-te per la peça en reproducció a una posició relativa"
 
-#: core/commandlineoptions.cpp:163
+#: core/commandlineoptions.cpp:165
 msgid "Seek the currently playing track to an absolute position"
 msgstr "Mou-te per la peça en reproducció a una posició absoluta"
 
@@ -4507,7 +4511,7 @@ msgstr "Servei fora de línia"
 msgid "Set %1 to \"%2\"..."
 msgstr "Estableix %1 a «%2»…"
 
-#: core/commandlineoptions.cpp:158
+#: core/commandlineoptions.cpp:160
 msgid "Set the volume to <value> percent"
 msgstr "Estableix el volum al <value> percent"
 
@@ -4699,7 +4703,7 @@ msgstr "Mida:"
 msgid "Ska"
 msgstr "Ska"
 
-#: core/commandlineoptions.cpp:156
+#: core/commandlineoptions.cpp:158
 msgid "Skip backwards in playlist"
 msgstr "Salta enrere en la llista de reproducció"
 
@@ -4707,7 +4711,7 @@ msgstr "Salta enrere en la llista de reproducció"
 msgid "Skip count"
 msgstr "Comptador d’omissions"
 
-#: core/commandlineoptions.cpp:157
+#: core/commandlineoptions.cpp:159
 msgid "Skip forwards in playlist"
 msgstr "Salta endavant en la llista de reproducció"
 
@@ -4833,7 +4837,7 @@ msgstr "Destacat"
 msgid "Start ripping"
 msgstr "Inicia la captura"
 
-#: core/commandlineoptions.cpp:152
+#: core/commandlineoptions.cpp:154
 msgid "Start the playlist currently playing"
 msgstr "Inicia la llista de reproducció que s'està reproduint"
 
@@ -4878,11 +4882,11 @@ msgstr "Atura després de cada peça"
 msgid "Stop after this track"
 msgstr "Atura després d’aquesta peça"
 
-#: core/commandlineoptions.cpp:154
+#: core/commandlineoptions.cpp:156
 msgid "Stop playback"
 msgstr "Atura la reproducció"
 
-#: core/commandlineoptions.cpp:155
+#: core/commandlineoptions.cpp:157
 msgid "Stop playback after current track"
 msgstr "Atura la reproducció després de la peça actual"
 
@@ -5030,7 +5034,7 @@ msgid ""
 "license key. Visit subsonic.org for details."
 msgstr "Ha acabat el període de prova del servidor de Subsonic. Fareu una donació per obtenir una clau de llicència. Visiteu subsonic.org para més detalls."
 
-#: ui/mainwindow.cpp:2513
+#: ui/mainwindow.cpp:2517
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -5072,7 +5076,7 @@ msgid ""
 "continue?"
 msgstr "Se suprimiran aquests fitxers del dispositiu, esteu segur que voleu continuar?"
 
-#: library/libraryview.cpp:646 ui/mainwindow.cpp:2333 widgets/fileview.cpp:189
+#: library/libraryview.cpp:646 ui/mainwindow.cpp:2337 widgets/fileview.cpp:189
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -5183,7 +5187,7 @@ msgstr "Commuta l’estat de la cua"
 msgid "Toggle scrobbling"
 msgstr "Commuta el «scrobbling»"
 
-#: core/commandlineoptions.cpp:174
+#: core/commandlineoptions.cpp:177
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "Canvia la visibilitat del OSD estètic"
 
@@ -5265,7 +5269,7 @@ msgstr "Atura"
 msgid "URI"
 msgstr "URI"
 
-#: core/commandlineoptions.cpp:150
+#: core/commandlineoptions.cpp:152
 msgid "URL(s)"
 msgstr "URL(s)"
 
@@ -5364,7 +5368,7 @@ msgstr "S’està actualitzant %1%…"
 msgid "Updating library"
 msgstr "S’està actualitzant la col·lecció"
 
-#: core/commandlineoptions.cpp:150
+#: core/commandlineoptions.cpp:152
 msgid "Usage"
 msgstr "Ús"
 
@@ -5627,7 +5631,7 @@ msgid ""
 "well?"
 msgstr "Voleu moure també les altres cançons d’aquest àlbum a Artistes diversos?"
 
-#: ui/mainwindow.cpp:2520
+#: ui/mainwindow.cpp:2524
 msgid "Would you like to run a full rescan right now?"
 msgstr "Voleu fer de nou un escaneig complet ara?"
 
@@ -5925,7 +5929,7 @@ msgstr "els més antics primer"
 msgid "on"
 msgstr "a"
 
-#: core/commandlineoptions.cpp:150
+#: core/commandlineoptions.cpp:152
 msgid "options"
 msgstr "opcions"
 

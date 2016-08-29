@@ -23,8 +23,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2016-07-25 11:07+0000\n"
-"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
+"PO-Revision-Date: 2016-08-28 06:35+0000\n"
+"Last-Translator: Dimitrios Glentadakis <dglent@free.fr>\n"
 "Language-Team: Greek (http://www.transifex.com/davidsansome/clementine/language/el/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -206,7 +206,7 @@ msgstr "&Επιπρόσθετα"
 
 #: ../bin/src/ui_edittagdialog.h:728
 msgid "&Grouping"
-msgstr ""
+msgstr "&Ομαδοποίηση"
 
 #: ../bin/src/ui_mainwindow.h:717
 msgid "&Help"
@@ -231,7 +231,7 @@ msgstr "&Κλείδωμα της αξιολόγησης"
 
 #: ../bin/src/ui_edittagdialog.h:731
 msgid "&Lyrics"
-msgstr ""
+msgstr "&Στίχοι"
 
 #: ../bin/src/ui_mainwindow.h:715
 msgid "&Music"
@@ -271,7 +271,7 @@ msgstr "Εργαλεία"
 
 #: ../bin/src/ui_edittagdialog.h:724
 msgid "&Year"
-msgstr ""
+msgstr "&Έτος"
 
 #: ui/edittagdialog.cpp:50
 msgid "(different across multiple songs)"
@@ -839,7 +839,7 @@ msgstr "Angry"
 msgid "Appearance"
 msgstr "Εμφάνιση"
 
-#: core/commandlineoptions.cpp:170
+#: core/commandlineoptions.cpp:173
 msgid "Append files/URLs to the playlist"
 msgstr "Προσάρτηση αρχείων/URLs στην λίστα αναπαραγωγής"
 
@@ -1007,7 +1007,7 @@ msgstr "Βέλτιστος"
 
 #: songinfo/artistbiography.cpp:90 songinfo/artistbiography.cpp:255
 msgid "Biography"
-msgstr ""
+msgstr "&Βιογραφία"
 
 #: playlist/playlist.cpp:1355 ../bin/src/ui_edittagdialog.h:706
 msgid "Bit rate"
@@ -1137,7 +1137,7 @@ msgstr "Αλλάξτε μέθοδο ανάμιξης"
 msgid "Change the currently playing song"
 msgstr "Αλλαγή του τρέχοντος τραγουδιού"
 
-#: core/commandlineoptions.cpp:175
+#: core/commandlineoptions.cpp:178
 msgid "Change the language"
 msgstr "Αλλαγή γλώσσας"
 
@@ -1346,13 +1346,13 @@ msgstr "Club"
 
 #: ../bin/src/ui_edittagdialog.h:726
 msgid "Co&mposer"
-msgstr ""
+msgstr "&Συνθέτης"
 
 #: ../bin/src/ui_appearancesettingspage.h:271
 msgid "Colors"
 msgstr "Χρώματα"
 
-#: core/commandlineoptions.cpp:178
+#: core/commandlineoptions.cpp:181
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Λίστα χωρισμένη με κόμμα από class:level, το level είναι 0-3"
 
@@ -1571,6 +1571,10 @@ msgstr "Το εξώφυλλο ορίστηκε από %1"
 msgid "Covers from %1"
 msgstr "Εξώφυλλα από %1"
 
+#: core/commandlineoptions.cpp:172
+msgid "Create a new playlist with files/URLs"
+msgstr "Δημιουργία μιας νέας λίστας αναπαραγωγής με αρχεία/URL"
+
 #: ../bin/src/ui_playbacksettingspage.h:344
 msgid "Cross-fade when changing tracks automatically"
 msgstr "Χρήση «Cross-Fade» κατά την αυτόματη αλλαγή του κομματιού"
@@ -1638,11 +1642,11 @@ msgstr "Ημέρες"
 msgid "De&fault"
 msgstr "Προ&επιλογή"
 
-#: core/commandlineoptions.cpp:160
+#: core/commandlineoptions.cpp:162
 msgid "Decrease the volume by 4%"
 msgstr "Μείωση της έντασης ήχου κατά 4%"
 
-#: core/commandlineoptions.cpp:162
+#: core/commandlineoptions.cpp:164
 msgid "Decrease the volume by <value> percent"
 msgstr "Μείωση του ήχου κατά <value> τοις εκατό"
 
@@ -1677,7 +1681,7 @@ msgid "Delete downloaded data"
 msgstr "Διαγραφή ληφθέντων δεδομένων"
 
 #: devices/deviceview.cpp:408 library/libraryview.cpp:645
-#: ui/mainwindow.cpp:2332 widgets/fileview.cpp:188
+#: ui/mainwindow.cpp:2336 widgets/fileview.cpp:188
 msgid "Delete files"
 msgstr "Διαγραφή αρχείων"
 
@@ -1811,7 +1815,7 @@ msgstr "Διακεκομμένη μετάδοση"
 msgid "Display options"
 msgstr "Επιλογές απεικόνισης"
 
-#: core/commandlineoptions.cpp:173
+#: core/commandlineoptions.cpp:176
 msgid "Display the on-screen-display"
 msgstr "Απεικόνιση της «απεικόνισης στην οθόνη»"
 
@@ -2116,17 +2120,17 @@ msgstr "Ολόκληρη η συλλογή"
 msgid "Equalizer"
 msgstr "Ισοσταθμιστής"
 
-#: core/commandlineoptions.cpp:176
+#: core/commandlineoptions.cpp:179
 msgid "Equivalent to --log-levels *:1"
 msgstr "Ισοδύναμο με --log-levels *:1"
 
-#: core/commandlineoptions.cpp:177
+#: core/commandlineoptions.cpp:180
 msgid "Equivalent to --log-levels *:3"
 msgstr "Ισοδύναμο με --log-levels *:3"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:246
-#: library/libraryview.cpp:639 ui/mainwindow.cpp:2038 ui/mainwindow.cpp:2284
-#: ui/mainwindow.cpp:2430 internet/vk/vkservice.cpp:643
+#: library/libraryview.cpp:639 ui/mainwindow.cpp:2038 ui/mainwindow.cpp:2288
+#: ui/mainwindow.cpp:2434 internet/vk/vkservice.cpp:643
 msgid "Error"
 msgstr "Σφάλμα"
 
@@ -2493,7 +2497,7 @@ msgstr "Πλήρως πρίμα"
 
 #: ../bin/src/ui_edittagdialog.h:729
 msgid "Ge&nre"
-msgstr ""
+msgstr "Εί&δος"
 
 #: ui/settingsdialog.cpp:137
 msgid "General"
@@ -2743,11 +2747,11 @@ msgstr "Ασύμβατη έκδοση πρωτοκόλλου REST. Ο διακο
 msgid "Incomplete configuration, please ensure all fields are populated."
 msgstr "Ατελής ρύθμιση, παρακαλώ βεβαιωθείτε πως όλα τα πεδία είναι συμπληρωμένα."
 
-#: core/commandlineoptions.cpp:159
+#: core/commandlineoptions.cpp:161
 msgid "Increase the volume by 4%"
 msgstr "Αύξηση της έντασης ήχου κατά 4%"
 
-#: core/commandlineoptions.cpp:161
+#: core/commandlineoptions.cpp:163
 msgid "Increase the volume by <value> percent"
 msgstr "Αύξηση του ήχου κατά <value> της εκατό"
 
@@ -2977,7 +2981,7 @@ msgstr "Βιβλιοθήκη"
 msgid "Library advanced grouping"
 msgstr "Προχωρημένη ομαδοποίηση βιβλιοθήκης"
 
-#: ui/mainwindow.cpp:2522
+#: ui/mainwindow.cpp:2526
 msgid "Library rescan notice"
 msgstr "Ειδοποίηση σάρωσης βιβλιοθήκης"
 
@@ -3059,7 +3063,7 @@ msgstr "Φόρτωση πληροφοριών κομματιού"
 msgid "Loading..."
 msgstr "Φόρτωση..."
 
-#: core/commandlineoptions.cpp:171
+#: core/commandlineoptions.cpp:174
 msgid "Loads files/URLs, replacing current playlist"
 msgstr "Φορτώνει αρχεία/URLs, αντικαθιστώντας την τρέχουσα λίστα αναπαραγωγής"
 
@@ -3452,7 +3456,7 @@ msgstr "Όχι βραχαία μπλοκς"
 msgid "None"
 msgstr "Κανένα"
 
-#: library/libraryview.cpp:640 ui/mainwindow.cpp:2285 ui/mainwindow.cpp:2431
+#: library/libraryview.cpp:640 ui/mainwindow.cpp:2289 ui/mainwindow.cpp:2435
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Κανένα από τα επιλεγμένα τραγούδια δεν ήταν κατάλληλο για αντιγραφή σε μία συσκευή"
 
@@ -3627,7 +3631,7 @@ msgstr "Άνοιγμα σε νέα λίστα"
 
 #: songinfo/artistbiography.cpp:94 songinfo/artistbiography.cpp:261
 msgid "Open in your browser"
-msgstr ""
+msgstr "Άνοιγμα στον φυλλομετρητή"
 
 #: ../bin/src/ui_globalshortcutssettingspage.h:168
 #: ../bin/src/ui_globalshortcutssettingspage.h:170
@@ -3687,7 +3691,7 @@ msgstr "Αρχικό έτος - Άλμπουμ"
 msgid "Original year tag support"
 msgstr "Αρχικό έτος"
 
-#: core/commandlineoptions.cpp:173
+#: core/commandlineoptions.cpp:176
 msgid "Other options"
 msgstr "Άλλες επιλογές"
 
@@ -3745,7 +3749,7 @@ msgstr "Συνθηματικό"
 msgid "Pause"
 msgstr "Παύση"
 
-#: core/commandlineoptions.cpp:154
+#: core/commandlineoptions.cpp:156
 msgid "Pause playback"
 msgstr "Παύση αναπαραγωγής"
 
@@ -3779,7 +3783,7 @@ msgstr "Αναπαραγωγή"
 msgid "Play count"
 msgstr "Μετρητής εκτελέσεων"
 
-#: core/commandlineoptions.cpp:153
+#: core/commandlineoptions.cpp:155
 msgid "Play if stopped, pause if playing"
 msgstr "Αναπαραγωγή αν είναι σταματημένο, αλλιώς παύση"
 
@@ -3788,7 +3792,7 @@ msgstr "Αναπαραγωγή αν είναι σταματημένο, αλλι�
 msgid "Play if there is nothing already playing"
 msgstr "Αναπαραγωγή εάν δεν παίζει κάτι άλλο"
 
-#: core/commandlineoptions.cpp:172
+#: core/commandlineoptions.cpp:175
 msgid "Play the <n>th track in the playlist"
 msgstr "Αναπαραγωγή του κομματιού <n> της λίστας αναπαραγωγής"
 
@@ -3800,7 +3804,7 @@ msgstr "Αναπαραγωγή/Παύση"
 msgid "Playback"
 msgstr "Αναπαραγωγή"
 
-#: core/commandlineoptions.cpp:151
+#: core/commandlineoptions.cpp:153
 msgid "Player options"
 msgstr "Επιλογές αναπαραγωγής"
 
@@ -3814,7 +3818,7 @@ msgstr "Λίστα"
 msgid "Playlist finished"
 msgstr "Η λίστα τελείωσε"
 
-#: core/commandlineoptions.cpp:169
+#: core/commandlineoptions.cpp:171
 #: ../bin/src/ui_playlistsaveoptionsdialog.h:94
 msgid "Playlist options"
 msgstr "Επιλογές λίστας αναπαραγωγής"
@@ -3932,7 +3936,7 @@ msgstr "Προηγούμενο"
 msgid "Previous track"
 msgstr "Προηγούμενο κομμάτι"
 
-#: core/commandlineoptions.cpp:179
+#: core/commandlineoptions.cpp:182
 msgid "Print out version information"
 msgstr "Εκτύπωση πληροφοριών έκδοσης"
 
@@ -4206,7 +4210,7 @@ msgstr "Επαναφορά μετρητή εκτελέσεων"
 msgid "Restart song, then jump to previous if pressed again"
 msgstr "Επανεκκίνηση τραγουδιού, στη συνέχεια, μεταβαση στο προηγούμενο εάν πατήσετε ξανά"
 
-#: core/commandlineoptions.cpp:167
+#: core/commandlineoptions.cpp:169
 msgid ""
 "Restart the track, or play the previous track if within 8 seconds of start."
 msgstr "Επανεκκίνηση του κομμάτιου, ή αναπαραγωγή του προηγούμενου κομματιού, εντός 8 δευτερολέπτων από την έναρξη."
@@ -4441,11 +4445,11 @@ msgstr "Αναζήτηση πίσω"
 msgid "Seek forward"
 msgstr "Αναζήτηση εμπρός"
 
-#: core/commandlineoptions.cpp:165
+#: core/commandlineoptions.cpp:167
 msgid "Seek the currently playing track by a relative amount"
 msgstr "Άλμα στο τρέχον κομμάτι κατά ένα σχετικό ποσό."
 
-#: core/commandlineoptions.cpp:163
+#: core/commandlineoptions.cpp:165
 msgid "Seek the currently playing track to an absolute position"
 msgstr "Άλμα σε σε μια καθορισμένη θέση στο τρέχον κομμάτι."
 
@@ -4514,7 +4518,7 @@ msgstr "Υπηρεσία εκτός σύνδεσης"
 msgid "Set %1 to \"%2\"..."
 msgstr "Δώσε %1 στο \"%2\"..."
 
-#: core/commandlineoptions.cpp:158
+#: core/commandlineoptions.cpp:160
 msgid "Set the volume to <value> percent"
 msgstr "Ρύθμιση της έντασης ήχου στο <value> της εκατό"
 
@@ -4706,7 +4710,7 @@ msgstr "Μέγεθος:"
 msgid "Ska"
 msgstr "Ska"
 
-#: core/commandlineoptions.cpp:156
+#: core/commandlineoptions.cpp:158
 msgid "Skip backwards in playlist"
 msgstr "Παράλειψη προς τα πίσω στη λίστα"
 
@@ -4714,7 +4718,7 @@ msgstr "Παράλειψη προς τα πίσω στη λίστα"
 msgid "Skip count"
 msgstr "Μετρητής παραλήψεων"
 
-#: core/commandlineoptions.cpp:157
+#: core/commandlineoptions.cpp:159
 msgid "Skip forwards in playlist"
 msgstr "Παράλειψη προς τα μπροστά στη λίστα"
 
@@ -4840,7 +4844,7 @@ msgstr "Με αστέρι"
 msgid "Start ripping"
 msgstr "Έναρξη αντιγραφής"
 
-#: core/commandlineoptions.cpp:152
+#: core/commandlineoptions.cpp:154
 msgid "Start the playlist currently playing"
 msgstr "Εκκίνηση της λίστας αναπαραγωγής που παίζει τώρα"
 
@@ -4885,11 +4889,11 @@ msgstr "Σταμάτημα μετά από κάθε κομμάτι"
 msgid "Stop after this track"
 msgstr "Σταμάτημα μετά από αυτό το κομμάτι"
 
-#: core/commandlineoptions.cpp:154
+#: core/commandlineoptions.cpp:156
 msgid "Stop playback"
 msgstr "Διακοπή αναπαραγωγής"
 
-#: core/commandlineoptions.cpp:155
+#: core/commandlineoptions.cpp:157
 msgid "Stop playback after current track"
 msgstr "Διακοπή της αναπαραγωγής μετά το τρέχον κομμάτι"
 
@@ -5037,7 +5041,7 @@ msgid ""
 "license key. Visit subsonic.org for details."
 msgstr "Η δοκιμαστική περίοδος του Subsonic τελείωσε. Παρακαλώ κάντε μια δωρεά για να λάβετε ένα κλειδί άδειας. Δείτε στο subsonic.org για λεπτομέρειες."
 
-#: ui/mainwindow.cpp:2513
+#: ui/mainwindow.cpp:2517
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -5079,7 +5083,7 @@ msgid ""
 "continue?"
 msgstr "Αυτά τα αρχεία θα διαγραφούν από την συσκευή, θέλετε σίγουρα να συνεχίσετε;"
 
-#: library/libraryview.cpp:646 ui/mainwindow.cpp:2333 widgets/fileview.cpp:189
+#: library/libraryview.cpp:646 ui/mainwindow.cpp:2337 widgets/fileview.cpp:189
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -5188,9 +5192,9 @@ msgstr "Εναλλαγή της κατάστασης της λίστας ανα�
 
 #: ../bin/src/ui_mainwindow.h:705
 msgid "Toggle scrobbling"
-msgstr "Εναλλαγή του scrobbling"
+msgstr "Εναλλαγή του μουσικού προφίλ"
 
-#: core/commandlineoptions.cpp:174
+#: core/commandlineoptions.cpp:177
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "Εναλλαγή ορατότητας της όμορφης «απεικόνισης στην οθόνη»"
 
@@ -5224,7 +5228,7 @@ msgstr "Συνολικές αιτήσεις δικτύου που πραγματ
 
 #: ../bin/src/ui_edittagdialog.h:720
 msgid "Trac&k"
-msgstr ""
+msgstr "Κο&μμάτι"
 
 #: playlist/playlist.cpp:1323 ui/organisedialog.cpp:69
 #: ../bin/src/ui_trackselectiondialog.h:212 ../bin/src/ui_ripcddialog.h:304
@@ -5272,7 +5276,7 @@ msgstr "Απενεργοποίηση"
 msgid "URI"
 msgstr "URI"
 
-#: core/commandlineoptions.cpp:150
+#: core/commandlineoptions.cpp:152
 msgid "URL(s)"
 msgstr "URL(s)"
 
@@ -5371,7 +5375,7 @@ msgstr "Ενημέρωση %1%..."
 msgid "Updating library"
 msgstr "Ενημέρωση λίστας"
 
-#: core/commandlineoptions.cpp:150
+#: core/commandlineoptions.cpp:152
 msgid "Usage"
 msgstr "Χρήση"
 
@@ -5634,7 +5638,7 @@ msgid ""
 "well?"
 msgstr "Θα θέλατε να μετακινήσετε και τα άλλα τραγούδια σε αυτό το άλμπουμ στο Διάφοροι Καλλιτέχνες;"
 
-#: ui/mainwindow.cpp:2520
+#: ui/mainwindow.cpp:2524
 msgid "Would you like to run a full rescan right now?"
 msgstr "Θέλετε να εκτελέσετε μία πλήρη επανασάρωση αμέσως τώρα;"
 
@@ -5932,7 +5936,7 @@ msgstr "το παλαιότερο πρώτα"
 msgid "on"
 msgstr "σε"
 
-#: core/commandlineoptions.cpp:150
+#: core/commandlineoptions.cpp:152
 msgid "options"
 msgstr "επιλογές"
 

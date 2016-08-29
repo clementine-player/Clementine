@@ -15,7 +15,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2016-07-25 11:07+0000\n"
+"PO-Revision-Date: 2016-08-26 14:20+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Arabic (http://www.transifex.com/davidsansome/clementine/language/ar/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -831,7 +831,7 @@ msgstr "غاضب"
 msgid "Appearance"
 msgstr "المظهر"
 
-#: core/commandlineoptions.cpp:170
+#: core/commandlineoptions.cpp:173
 msgid "Append files/URLs to the playlist"
 msgstr "أضف الملفات/العناوين إلى قائمة التشغيل"
 
@@ -1129,7 +1129,7 @@ msgstr "تغيير نمط الخلط"
 msgid "Change the currently playing song"
 msgstr "تغيير المقطع المشغل حاليا"
 
-#: core/commandlineoptions.cpp:175
+#: core/commandlineoptions.cpp:178
 msgid "Change the language"
 msgstr "تغيير اللغة"
 
@@ -1344,7 +1344,7 @@ msgstr ""
 msgid "Colors"
 msgstr "الألوان"
 
-#: core/commandlineoptions.cpp:178
+#: core/commandlineoptions.cpp:181
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "لائحة عناصر مفروقة بفاصلة لـ \"class:level\"، قيمة Level بين 0-3"
 
@@ -1563,6 +1563,10 @@ msgstr "الغلاف محدد من %1"
 msgid "Covers from %1"
 msgstr "الأغلفة من %1"
 
+#: core/commandlineoptions.cpp:172
+msgid "Create a new playlist with files/URLs"
+msgstr ""
+
 #: ../bin/src/ui_playbacksettingspage.h:344
 msgid "Cross-fade when changing tracks automatically"
 msgstr "أخفت الصوت تدريجيا عند التبديل تلقائيا بين المقاطع"
@@ -1630,11 +1634,11 @@ msgstr "الأيام"
 msgid "De&fault"
 msgstr "&افتراضي"
 
-#: core/commandlineoptions.cpp:160
+#: core/commandlineoptions.cpp:162
 msgid "Decrease the volume by 4%"
 msgstr "اخفض الصوت 4%"
 
-#: core/commandlineoptions.cpp:162
+#: core/commandlineoptions.cpp:164
 msgid "Decrease the volume by <value> percent"
 msgstr "أخفض الصوت بنسبة <value> مئوية"
 
@@ -1669,7 +1673,7 @@ msgid "Delete downloaded data"
 msgstr "حذف البيانات المحملة"
 
 #: devices/deviceview.cpp:408 library/libraryview.cpp:645
-#: ui/mainwindow.cpp:2332 widgets/fileview.cpp:188
+#: ui/mainwindow.cpp:2336 widgets/fileview.cpp:188
 msgid "Delete files"
 msgstr "احذف الملفات"
 
@@ -1803,7 +1807,7 @@ msgstr "إرسال غير مستمر"
 msgid "Display options"
 msgstr "خيارات العرض"
 
-#: core/commandlineoptions.cpp:173
+#: core/commandlineoptions.cpp:176
 msgid "Display the on-screen-display"
 msgstr "أظهر قائمة الشاشة"
 
@@ -2108,17 +2112,17 @@ msgstr "كامل المجموعة"
 msgid "Equalizer"
 msgstr "معدل الصوت"
 
-#: core/commandlineoptions.cpp:176
+#: core/commandlineoptions.cpp:179
 msgid "Equivalent to --log-levels *:1"
 msgstr "يكافئ --log-levels *:1"
 
-#: core/commandlineoptions.cpp:177
+#: core/commandlineoptions.cpp:180
 msgid "Equivalent to --log-levels *:3"
 msgstr "يكافئ --log-levels *:3"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:246
-#: library/libraryview.cpp:639 ui/mainwindow.cpp:2038 ui/mainwindow.cpp:2284
-#: ui/mainwindow.cpp:2430 internet/vk/vkservice.cpp:643
+#: library/libraryview.cpp:639 ui/mainwindow.cpp:2038 ui/mainwindow.cpp:2288
+#: ui/mainwindow.cpp:2434 internet/vk/vkservice.cpp:643
 msgid "Error"
 msgstr "خطأ"
 
@@ -2735,11 +2739,11 @@ msgstr "نسخة Subsonic REST غير متوافقة. يجب تحديث الخا
 msgid "Incomplete configuration, please ensure all fields are populated."
 msgstr "لم يتم إكمال التهيئة، الرجاء التأكد من أن جميع الحقول مملوئة."
 
-#: core/commandlineoptions.cpp:159
+#: core/commandlineoptions.cpp:161
 msgid "Increase the volume by 4%"
 msgstr "ارفع الصوت 4%"
 
-#: core/commandlineoptions.cpp:161
+#: core/commandlineoptions.cpp:163
 msgid "Increase the volume by <value> percent"
 msgstr "ارفع الصوت بنسبة <value> مئوية"
 
@@ -2969,7 +2973,7 @@ msgstr "المكتبة"
 msgid "Library advanced grouping"
 msgstr "إعدادات متقدمة لتجميع المكتبة"
 
-#: ui/mainwindow.cpp:2522
+#: ui/mainwindow.cpp:2526
 msgid "Library rescan notice"
 msgstr "إشعار إعادة فحص المكتبة"
 
@@ -3051,7 +3055,7 @@ msgstr "جاري تحميل معلومات المقاطع"
 msgid "Loading..."
 msgstr "جاري التحميل"
 
-#: core/commandlineoptions.cpp:171
+#: core/commandlineoptions.cpp:174
 msgid "Loads files/URLs, replacing current playlist"
 msgstr "تحميل ملفات/روابط، استبدال قائمة التشغيل الحالية"
 
@@ -3444,7 +3448,7 @@ msgstr "بدون أجزاء قصيرة"
 msgid "None"
 msgstr "لا شيء"
 
-#: library/libraryview.cpp:640 ui/mainwindow.cpp:2285 ui/mainwindow.cpp:2431
+#: library/libraryview.cpp:640 ui/mainwindow.cpp:2289 ui/mainwindow.cpp:2435
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "لا مقطع من المقاطع المختارة مناسب لنسخه لجهاز."
 
@@ -3679,7 +3683,7 @@ msgstr ""
 msgid "Original year tag support"
 msgstr ""
 
-#: core/commandlineoptions.cpp:173
+#: core/commandlineoptions.cpp:176
 msgid "Other options"
 msgstr "خيارات اخرى"
 
@@ -3737,7 +3741,7 @@ msgstr "كلمة السر"
 msgid "Pause"
 msgstr "إيقاف مؤقت"
 
-#: core/commandlineoptions.cpp:154
+#: core/commandlineoptions.cpp:156
 msgid "Pause playback"
 msgstr "أوقف التشغيل مؤقتا"
 
@@ -3771,7 +3775,7 @@ msgstr "تشغيل"
 msgid "Play count"
 msgstr "عدد مرات التشغيل"
 
-#: core/commandlineoptions.cpp:153
+#: core/commandlineoptions.cpp:155
 msgid "Play if stopped, pause if playing"
 msgstr "شغل إذا انتهى، أوقف إذا كان قيد التشغيل"
 
@@ -3780,7 +3784,7 @@ msgstr "شغل إذا انتهى، أوقف إذا كان قيد التشغيل"
 msgid "Play if there is nothing already playing"
 msgstr "شغل إذا لم يكن هناك مقطع قيد التشغيل "
 
-#: core/commandlineoptions.cpp:172
+#: core/commandlineoptions.cpp:175
 msgid "Play the <n>th track in the playlist"
 msgstr "شغيل المقطع رقم <n> في قائمة التشغيل"
 
@@ -3792,7 +3796,7 @@ msgstr "تشغيل/إيقاف"
 msgid "Playback"
 msgstr "التشغيل"
 
-#: core/commandlineoptions.cpp:151
+#: core/commandlineoptions.cpp:153
 msgid "Player options"
 msgstr "خيارات المشغل"
 
@@ -3806,7 +3810,7 @@ msgstr "قائمة تشغيل"
 msgid "Playlist finished"
 msgstr "قائمة تشغيل منتهية"
 
-#: core/commandlineoptions.cpp:169
+#: core/commandlineoptions.cpp:171
 #: ../bin/src/ui_playlistsaveoptionsdialog.h:94
 msgid "Playlist options"
 msgstr "خيارات قائمة التشغيل"
@@ -3924,7 +3928,7 @@ msgstr "السابق"
 msgid "Previous track"
 msgstr "المقطع السابق"
 
-#: core/commandlineoptions.cpp:179
+#: core/commandlineoptions.cpp:182
 msgid "Print out version information"
 msgstr "اطبع معلومات النسخة"
 
@@ -4198,7 +4202,7 @@ msgstr "صفّر عدد مرات التشغيل"
 msgid "Restart song, then jump to previous if pressed again"
 msgstr ""
 
-#: core/commandlineoptions.cpp:167
+#: core/commandlineoptions.cpp:169
 msgid ""
 "Restart the track, or play the previous track if within 8 seconds of start."
 msgstr "أعد تشغيل المقطع، أو شغل المقطع السابق إن كان لم يتجاوز 8 ثوانٍ من بدء التشغيل."
@@ -4433,11 +4437,11 @@ msgstr "ابحث إلى الخلف"
 msgid "Seek forward"
 msgstr "ابحث إلى الأمام"
 
-#: core/commandlineoptions.cpp:165
+#: core/commandlineoptions.cpp:167
 msgid "Seek the currently playing track by a relative amount"
 msgstr "انتقل في المقطع الحالي إلى موضع نسبي"
 
-#: core/commandlineoptions.cpp:163
+#: core/commandlineoptions.cpp:165
 msgid "Seek the currently playing track to an absolute position"
 msgstr "انتقل في المقطع الحالي إلى موضع محدد"
 
@@ -4506,7 +4510,7 @@ msgstr "خدمة غير متصلة"
 msgid "Set %1 to \"%2\"..."
 msgstr "غير %1 إلى %2"
 
-#: core/commandlineoptions.cpp:158
+#: core/commandlineoptions.cpp:160
 msgid "Set the volume to <value> percent"
 msgstr "اجعل درجة الصوت بنسبة <value>"
 
@@ -4698,7 +4702,7 @@ msgstr "الحجم:"
 msgid "Ska"
 msgstr "Ska"
 
-#: core/commandlineoptions.cpp:156
+#: core/commandlineoptions.cpp:158
 msgid "Skip backwards in playlist"
 msgstr "تجاهل السابق في قائمة التشغيل"
 
@@ -4706,7 +4710,7 @@ msgstr "تجاهل السابق في قائمة التشغيل"
 msgid "Skip count"
 msgstr "تخطى العد"
 
-#: core/commandlineoptions.cpp:157
+#: core/commandlineoptions.cpp:159
 msgid "Skip forwards in playlist"
 msgstr "تجاهل اللاحق في قائمة التشغيل"
 
@@ -4832,7 +4836,7 @@ msgstr "مميز"
 msgid "Start ripping"
 msgstr "ابدء النسخ"
 
-#: core/commandlineoptions.cpp:152
+#: core/commandlineoptions.cpp:154
 msgid "Start the playlist currently playing"
 msgstr "ابدأ قئمة التشغيل اللتي تعمل حالياً"
 
@@ -4877,11 +4881,11 @@ msgstr ""
 msgid "Stop after this track"
 msgstr "أوقف بعد هذا المقطع"
 
-#: core/commandlineoptions.cpp:154
+#: core/commandlineoptions.cpp:156
 msgid "Stop playback"
 msgstr "أوقف التشغيل"
 
-#: core/commandlineoptions.cpp:155
+#: core/commandlineoptions.cpp:157
 msgid "Stop playback after current track"
 msgstr ""
 
@@ -5029,7 +5033,7 @@ msgid ""
 "license key. Visit subsonic.org for details."
 msgstr "لقد انتهت المدة التجريبية لخادم Subsonic. الرجاء التبرع للحصول على مفتاح رخصة. لمزيد من التفاصيل زر subsonic.org."
 
-#: ui/mainwindow.cpp:2513
+#: ui/mainwindow.cpp:2517
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -5071,7 +5075,7 @@ msgid ""
 "continue?"
 msgstr "سيتم حذف هذه الملفات من الجهاز. هل أنت متأكد من رغبتك بالاستمرار؟"
 
-#: library/libraryview.cpp:646 ui/mainwindow.cpp:2333 widgets/fileview.cpp:189
+#: library/libraryview.cpp:646 ui/mainwindow.cpp:2337 widgets/fileview.cpp:189
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -5182,7 +5186,7 @@ msgstr "بدّل حالة لائحة الانتظار"
 msgid "Toggle scrobbling"
 msgstr "بدّل حالة نقل المعلومات المستمع إليها"
 
-#: core/commandlineoptions.cpp:174
+#: core/commandlineoptions.cpp:177
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "بدّل حالة الإظهار على الشاشة"
 
@@ -5264,7 +5268,7 @@ msgstr "إيقاف تشغيل"
 msgid "URI"
 msgstr "URI"
 
-#: core/commandlineoptions.cpp:150
+#: core/commandlineoptions.cpp:152
 msgid "URL(s)"
 msgstr "رابط(روابط)"
 
@@ -5363,7 +5367,7 @@ msgstr "جاري تحديث %1%"
 msgid "Updating library"
 msgstr "تحديث المكتبة"
 
-#: core/commandlineoptions.cpp:150
+#: core/commandlineoptions.cpp:152
 msgid "Usage"
 msgstr "الإستخدام"
 
@@ -5626,7 +5630,7 @@ msgid ""
 "well?"
 msgstr "هل ترغب بنقل المقاطع الأخرى في هذا الألبوم لفئة فنانون متنوعون؟"
 
-#: ui/mainwindow.cpp:2520
+#: ui/mainwindow.cpp:2524
 msgid "Would you like to run a full rescan right now?"
 msgstr "هل ترغب بالقيام بفحص شامل الآن؟"
 
@@ -5924,7 +5928,7 @@ msgstr "الأقدم أولا"
 msgid "on"
 msgstr "مفعل"
 
-#: core/commandlineoptions.cpp:150
+#: core/commandlineoptions.cpp:152
 msgid "options"
 msgstr "الخيارات"
 

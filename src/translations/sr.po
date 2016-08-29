@@ -10,8 +10,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2016-07-25 12:21+0000\n"
-"Last-Translator: Mladen Pejaković <pejakm@autistici.org>\n"
+"PO-Revision-Date: 2016-08-26 14:20+0000\n"
+"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Serbian (http://www.transifex.com/davidsansome/clementine/language/sr/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -826,7 +826,7 @@ msgstr "љутит"
 msgid "Appearance"
 msgstr "Изглед"
 
-#: core/commandlineoptions.cpp:170
+#: core/commandlineoptions.cpp:173
 msgid "Append files/URLs to the playlist"
 msgstr "Додај нумере/УРЛ токове у листу нумера"
 
@@ -1124,7 +1124,7 @@ msgstr "Насумичност"
 msgid "Change the currently playing song"
 msgstr "мења тренутно пуштену песму"
 
-#: core/commandlineoptions.cpp:175
+#: core/commandlineoptions.cpp:178
 msgid "Change the language"
 msgstr "Промени језик"
 
@@ -1339,7 +1339,7 @@ msgstr "&Композитор"
 msgid "Colors"
 msgstr "Боје"
 
-#: core/commandlineoptions.cpp:178
+#: core/commandlineoptions.cpp:181
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Зарез раздваја листу од класа: ниво, ниво је 0-3"
 
@@ -1558,6 +1558,10 @@ msgstr "Омот постављен из %1"
 msgid "Covers from %1"
 msgstr "Омоти са %1"
 
+#: core/commandlineoptions.cpp:172
+msgid "Create a new playlist with files/URLs"
+msgstr ""
+
 #: ../bin/src/ui_playbacksettingspage.h:344
 msgid "Cross-fade when changing tracks automatically"
 msgstr "Претапање при аутоматској измени нумера"
@@ -1625,11 +1629,11 @@ msgstr "дана"
 msgid "De&fault"
 msgstr "Под&разумевана"
 
-#: core/commandlineoptions.cpp:160
+#: core/commandlineoptions.cpp:162
 msgid "Decrease the volume by 4%"
 msgstr "Утишај звук за 4%"
 
-#: core/commandlineoptions.cpp:162
+#: core/commandlineoptions.cpp:164
 msgid "Decrease the volume by <value> percent"
 msgstr "Смањи јачину звука за <вредност> процената"
 
@@ -1664,7 +1668,7 @@ msgid "Delete downloaded data"
 msgstr "Обриши преузете податке"
 
 #: devices/deviceview.cpp:408 library/libraryview.cpp:645
-#: ui/mainwindow.cpp:2332 widgets/fileview.cpp:188
+#: ui/mainwindow.cpp:2336 widgets/fileview.cpp:188
 msgid "Delete files"
 msgstr "Брисање фајлова"
 
@@ -1798,7 +1802,7 @@ msgstr "Испрекидан пренос"
 msgid "Display options"
 msgstr "Опције приказа"
 
-#: core/commandlineoptions.cpp:173
+#: core/commandlineoptions.cpp:176
 msgid "Display the on-screen-display"
 msgstr "Прикажи екрански преглед"
 
@@ -2103,17 +2107,17 @@ msgstr "читаву колекцију"
 msgid "Equalizer"
 msgstr "Еквилајзер"
 
-#: core/commandlineoptions.cpp:176
+#: core/commandlineoptions.cpp:179
 msgid "Equivalent to --log-levels *:1"
 msgstr "Исто као и --log-levels *:1"
 
-#: core/commandlineoptions.cpp:177
+#: core/commandlineoptions.cpp:180
 msgid "Equivalent to --log-levels *:3"
 msgstr "Исто као и --log-levels *:3"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:246
-#: library/libraryview.cpp:639 ui/mainwindow.cpp:2038 ui/mainwindow.cpp:2284
-#: ui/mainwindow.cpp:2430 internet/vk/vkservice.cpp:643
+#: library/libraryview.cpp:639 ui/mainwindow.cpp:2038 ui/mainwindow.cpp:2288
+#: ui/mainwindow.cpp:2434 internet/vk/vkservice.cpp:643
 msgid "Error"
 msgstr "Грешка"
 
@@ -2730,11 +2734,11 @@ msgstr "Неодговарајуће издање Субсониковог РЕ�
 msgid "Incomplete configuration, please ensure all fields are populated."
 msgstr "Непотпуно подешавање, испуните сва поља."
 
-#: core/commandlineoptions.cpp:159
+#: core/commandlineoptions.cpp:161
 msgid "Increase the volume by 4%"
 msgstr "Појачај звук за 4%"
 
-#: core/commandlineoptions.cpp:161
+#: core/commandlineoptions.cpp:163
 msgid "Increase the volume by <value> percent"
 msgstr "Повећај јачину звука за <вредност> процената"
 
@@ -2964,7 +2968,7 @@ msgstr "Библиотека"
 msgid "Library advanced grouping"
 msgstr "Напредно груписање библиотеке"
 
-#: ui/mainwindow.cpp:2522
+#: ui/mainwindow.cpp:2526
 msgid "Library rescan notice"
 msgstr "Обавештење о поновном скенирању библиотеке"
 
@@ -3046,7 +3050,7 @@ msgstr "Учитавам податке о нумерама"
 msgid "Loading..."
 msgstr "Учитавам..."
 
-#: core/commandlineoptions.cpp:171
+#: core/commandlineoptions.cpp:174
 msgid "Loads files/URLs, replacing current playlist"
 msgstr "Учитава датотеке/УРЛ-ове, замењујући текућу листу"
 
@@ -3439,7 +3443,7 @@ msgstr "без кратких блокова"
 msgid "None"
 msgstr "ништа"
 
-#: library/libraryview.cpp:640 ui/mainwindow.cpp:2285 ui/mainwindow.cpp:2431
+#: library/libraryview.cpp:640 ui/mainwindow.cpp:2289 ui/mainwindow.cpp:2435
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Ниједна од изабраних песама није погодна за копирање на уређај"
 
@@ -3674,7 +3678,7 @@ msgstr "изворна година — албум"
 msgid "Original year tag support"
 msgstr "Подршка за ознаку изворне године"
 
-#: core/commandlineoptions.cpp:173
+#: core/commandlineoptions.cpp:176
 msgid "Other options"
 msgstr "Остале опције"
 
@@ -3732,7 +3736,7 @@ msgstr "Лозинка"
 msgid "Pause"
 msgstr "Паузирај"
 
-#: core/commandlineoptions.cpp:154
+#: core/commandlineoptions.cpp:156
 msgid "Pause playback"
 msgstr "Паузирај пуштање"
 
@@ -3766,7 +3770,7 @@ msgstr "Пусти"
 msgid "Play count"
 msgstr "број пуштања"
 
-#: core/commandlineoptions.cpp:153
+#: core/commandlineoptions.cpp:155
 msgid "Play if stopped, pause if playing"
 msgstr "Пусти ако је заустављено, заустави ако се пушта"
 
@@ -3775,7 +3779,7 @@ msgstr "Пусти ако је заустављено, заустави ако �
 msgid "Play if there is nothing already playing"
 msgstr "почеће пуштање ако тренутно ништа није пуштено"
 
-#: core/commandlineoptions.cpp:172
+#: core/commandlineoptions.cpp:175
 msgid "Play the <n>th track in the playlist"
 msgstr "Пусти <n>у нумеру са листе"
 
@@ -3787,7 +3791,7 @@ msgstr "Пусти/паузирај"
 msgid "Playback"
 msgstr "Пуштање"
 
-#: core/commandlineoptions.cpp:151
+#: core/commandlineoptions.cpp:153
 msgid "Player options"
 msgstr "Опције плејера"
 
@@ -3801,7 +3805,7 @@ msgstr "Листа нумера"
 msgid "Playlist finished"
 msgstr "Листа нумера је завршена"
 
-#: core/commandlineoptions.cpp:169
+#: core/commandlineoptions.cpp:171
 #: ../bin/src/ui_playlistsaveoptionsdialog.h:94
 msgid "Playlist options"
 msgstr "Опције листе нумера"
@@ -3919,7 +3923,7 @@ msgstr "Претходна"
 msgid "Previous track"
 msgstr "Претходна нумера"
 
-#: core/commandlineoptions.cpp:179
+#: core/commandlineoptions.cpp:182
 msgid "Print out version information"
 msgstr "Прикажи податке о издању"
 
@@ -4193,7 +4197,7 @@ msgstr "Поништи број пуштања"
 msgid "Restart song, then jump to previous if pressed again"
 msgstr "понавља песму, и пушта претходну ако је поново притиснуто"
 
-#: core/commandlineoptions.cpp:167
+#: core/commandlineoptions.cpp:169
 msgid ""
 "Restart the track, or play the previous track if within 8 seconds of start."
 msgstr "Поново пусти нумеру или пусти претходну ако је текућа унутар почетних 8 секунди."
@@ -4428,11 +4432,11 @@ msgstr "Тражи уназад"
 msgid "Seek forward"
 msgstr "Тражи унапред"
 
-#: core/commandlineoptions.cpp:165
+#: core/commandlineoptions.cpp:167
 msgid "Seek the currently playing track by a relative amount"
 msgstr "Иди на положај текуће нумере за релативни износ"
 
-#: core/commandlineoptions.cpp:163
+#: core/commandlineoptions.cpp:165
 msgid "Seek the currently playing track to an absolute position"
 msgstr "Иди на положај текуће нумере за апсолутни износ"
 
@@ -4501,7 +4505,7 @@ msgstr "Сервис ван мреже"
 msgid "Set %1 to \"%2\"..."
 msgstr "Промени %1 у „%2“..."
 
-#: core/commandlineoptions.cpp:158
+#: core/commandlineoptions.cpp:160
 msgid "Set the volume to <value> percent"
 msgstr "Постави јачину звука на <вредност> процената"
 
@@ -4693,7 +4697,7 @@ msgstr "Величина:"
 msgid "Ska"
 msgstr "ска"
 
-#: core/commandlineoptions.cpp:156
+#: core/commandlineoptions.cpp:158
 msgid "Skip backwards in playlist"
 msgstr "Прескочи уназад у листи нумера"
 
@@ -4701,7 +4705,7 @@ msgstr "Прескочи уназад у листи нумера"
 msgid "Skip count"
 msgstr "број прескакања"
 
-#: core/commandlineoptions.cpp:157
+#: core/commandlineoptions.cpp:159
 msgid "Skip forwards in playlist"
 msgstr "Прескочи унапред у листи нумера"
 
@@ -4827,7 +4831,7 @@ msgstr "Са звездицом"
 msgid "Start ripping"
 msgstr "Почни чупање"
 
-#: core/commandlineoptions.cpp:152
+#: core/commandlineoptions.cpp:154
 msgid "Start the playlist currently playing"
 msgstr "Пусти текућу листу нумера"
 
@@ -4872,11 +4876,11 @@ msgstr "Заустављање после сваке нумере"
 msgid "Stop after this track"
 msgstr "Заустави после ове нумере"
 
-#: core/commandlineoptions.cpp:154
+#: core/commandlineoptions.cpp:156
 msgid "Stop playback"
 msgstr "Заустави пуштање"
 
-#: core/commandlineoptions.cpp:155
+#: core/commandlineoptions.cpp:157
 msgid "Stop playback after current track"
 msgstr "Заустави после текуће нумере"
 
@@ -5024,7 +5028,7 @@ msgid ""
 "license key. Visit subsonic.org for details."
 msgstr "Пробни период за Субсоников сервер је истекао. Донирајте да бисте добили лиценцни кључ. Посетите subsonic.org за више детаља."
 
-#: ui/mainwindow.cpp:2513
+#: ui/mainwindow.cpp:2517
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -5066,7 +5070,7 @@ msgid ""
 "continue?"
 msgstr "Ови фајлови ће бити обрисани са уређаја, желите ли заиста да наставите?"
 
-#: library/libraryview.cpp:646 ui/mainwindow.cpp:2333 widgets/fileview.cpp:189
+#: library/libraryview.cpp:646 ui/mainwindow.cpp:2337 widgets/fileview.cpp:189
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -5177,7 +5181,7 @@ msgstr "Мењај стање редоследа"
 msgid "Toggle scrobbling"
 msgstr "Мењај скробловање"
 
-#: core/commandlineoptions.cpp:174
+#: core/commandlineoptions.cpp:177
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "Мењај видљивост лепог ОСД-а"
 
@@ -5259,7 +5263,7 @@ msgstr "Искључи"
 msgid "URI"
 msgstr "УРИ"
 
-#: core/commandlineoptions.cpp:150
+#: core/commandlineoptions.cpp:152
 msgid "URL(s)"
 msgstr "Адресе"
 
@@ -5358,7 +5362,7 @@ msgstr "Ажурирам %1%..."
 msgid "Updating library"
 msgstr "Ажурирање библиотеке"
 
-#: core/commandlineoptions.cpp:150
+#: core/commandlineoptions.cpp:152
 msgid "Usage"
 msgstr "Употреба"
 
@@ -5621,7 +5625,7 @@ msgid ""
 "well?"
 msgstr "Желите ли да померите и остале песме из овог албума у разне извођаче такође?"
 
-#: ui/mainwindow.cpp:2520
+#: ui/mainwindow.cpp:2524
 msgid "Would you like to run a full rescan right now?"
 msgstr "Желите ли сада да покренете потпуно скенирање?"
 
@@ -5919,7 +5923,7 @@ msgstr "прво најстарије"
 msgid "on"
 msgstr "на дан"
 
-#: core/commandlineoptions.cpp:150
+#: core/commandlineoptions.cpp:152
 msgid "options"
 msgstr "Опције"
 

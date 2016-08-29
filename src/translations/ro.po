@@ -19,7 +19,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2016-07-25 11:07+0000\n"
+"PO-Revision-Date: 2016-08-26 14:20+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Romanian (http://www.transifex.com/davidsansome/clementine/language/ro/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -835,7 +835,7 @@ msgstr "Furios"
 msgid "Appearance"
 msgstr "Aspect"
 
-#: core/commandlineoptions.cpp:170
+#: core/commandlineoptions.cpp:173
 msgid "Append files/URLs to the playlist"
 msgstr "Adaugă fișiere/URL-uri în lista de redare"
 
@@ -1133,7 +1133,7 @@ msgstr "Schimbă modul amestecare"
 msgid "Change the currently playing song"
 msgstr "Schimba melodia redată în prezent"
 
-#: core/commandlineoptions.cpp:175
+#: core/commandlineoptions.cpp:178
 msgid "Change the language"
 msgstr "Schimbă limba"
 
@@ -1348,7 +1348,7 @@ msgstr ""
 msgid "Colors"
 msgstr "Culori"
 
-#: core/commandlineoptions.cpp:178
+#: core/commandlineoptions.cpp:181
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Listă separată prin virgulă de clasă:nivel, nivelul este 0-3"
 
@@ -1567,6 +1567,10 @@ msgstr "Copertă stabilită de la %1"
 msgid "Covers from %1"
 msgstr "Coperți de la %1"
 
+#: core/commandlineoptions.cpp:172
+msgid "Create a new playlist with files/URLs"
+msgstr ""
+
 #: ../bin/src/ui_playbacksettingspage.h:344
 msgid "Cross-fade when changing tracks automatically"
 msgstr "Estompare-încrucișată când se schimbă automat piesele"
@@ -1634,11 +1638,11 @@ msgstr "Zile"
 msgid "De&fault"
 msgstr "Im&plicit"
 
-#: core/commandlineoptions.cpp:160
+#: core/commandlineoptions.cpp:162
 msgid "Decrease the volume by 4%"
 msgstr "Scade volumul cu 4%"
 
-#: core/commandlineoptions.cpp:162
+#: core/commandlineoptions.cpp:164
 msgid "Decrease the volume by <value> percent"
 msgstr "Scade volumul cu <value> procent"
 
@@ -1673,7 +1677,7 @@ msgid "Delete downloaded data"
 msgstr "Șterge datele descărcate"
 
 #: devices/deviceview.cpp:408 library/libraryview.cpp:645
-#: ui/mainwindow.cpp:2332 widgets/fileview.cpp:188
+#: ui/mainwindow.cpp:2336 widgets/fileview.cpp:188
 msgid "Delete files"
 msgstr "Șterge fișiere"
 
@@ -1807,7 +1811,7 @@ msgstr "Transmisie discontinuă"
 msgid "Display options"
 msgstr "Afișează opțiunile"
 
-#: core/commandlineoptions.cpp:173
+#: core/commandlineoptions.cpp:176
 msgid "Display the on-screen-display"
 msgstr "Afișează afișarea pe ecran"
 
@@ -2112,17 +2116,17 @@ msgstr "Toată colecția"
 msgid "Equalizer"
 msgstr "Egalizator"
 
-#: core/commandlineoptions.cpp:176
+#: core/commandlineoptions.cpp:179
 msgid "Equivalent to --log-levels *:1"
 msgstr "Echivalent cu --log-levels *:1"
 
-#: core/commandlineoptions.cpp:177
+#: core/commandlineoptions.cpp:180
 msgid "Equivalent to --log-levels *:3"
 msgstr "Echivalent cu --log-levels *:3"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:246
-#: library/libraryview.cpp:639 ui/mainwindow.cpp:2038 ui/mainwindow.cpp:2284
-#: ui/mainwindow.cpp:2430 internet/vk/vkservice.cpp:643
+#: library/libraryview.cpp:639 ui/mainwindow.cpp:2038 ui/mainwindow.cpp:2288
+#: ui/mainwindow.cpp:2434 internet/vk/vkservice.cpp:643
 msgid "Error"
 msgstr "Eroare"
 
@@ -2739,11 +2743,11 @@ msgstr "Versiune protocol Subsonic REST incompatibilă. Serverul trebuie actuali
 msgid "Incomplete configuration, please ensure all fields are populated."
 msgstr "Configurație incompletă, asigurați-vă că toate câmpurile sunt populate."
 
-#: core/commandlineoptions.cpp:159
+#: core/commandlineoptions.cpp:161
 msgid "Increase the volume by 4%"
 msgstr "Crește volumul cu 4%"
 
-#: core/commandlineoptions.cpp:161
+#: core/commandlineoptions.cpp:163
 msgid "Increase the volume by <value> percent"
 msgstr "Crește volumul cu <value> procent"
 
@@ -2973,7 +2977,7 @@ msgstr "Colecție"
 msgid "Library advanced grouping"
 msgstr "Grupare avansată colecție"
 
-#: ui/mainwindow.cpp:2522
+#: ui/mainwindow.cpp:2526
 msgid "Library rescan notice"
 msgstr "Notă rescanare colecție"
 
@@ -3055,7 +3059,7 @@ msgstr "Se încarcă informațiile pieselor"
 msgid "Loading..."
 msgstr "Se încarcă..."
 
-#: core/commandlineoptions.cpp:171
+#: core/commandlineoptions.cpp:174
 msgid "Loads files/URLs, replacing current playlist"
 msgstr "Încarcă fișiere/URL-uri, înlocuind lista de redare curentă"
 
@@ -3448,7 +3452,7 @@ msgstr "Fără blocuri scurte"
 msgid "None"
 msgstr "Nimic"
 
-#: library/libraryview.cpp:640 ui/mainwindow.cpp:2285 ui/mainwindow.cpp:2431
+#: library/libraryview.cpp:640 ui/mainwindow.cpp:2289 ui/mainwindow.cpp:2435
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Niciuna dintre melodiile selectate nu este potrivită pentru copierea pe un dispozitiv"
 
@@ -3683,7 +3687,7 @@ msgstr "An original - Album"
 msgid "Original year tag support"
 msgstr "Etichetă suport an original"
 
-#: core/commandlineoptions.cpp:173
+#: core/commandlineoptions.cpp:176
 msgid "Other options"
 msgstr "Alte opțiuni"
 
@@ -3741,7 +3745,7 @@ msgstr "Parolă"
 msgid "Pause"
 msgstr "Pauză"
 
-#: core/commandlineoptions.cpp:154
+#: core/commandlineoptions.cpp:156
 msgid "Pause playback"
 msgstr "Pauză redare"
 
@@ -3775,7 +3779,7 @@ msgstr "Redare"
 msgid "Play count"
 msgstr "Număr redări"
 
-#: core/commandlineoptions.cpp:153
+#: core/commandlineoptions.cpp:155
 msgid "Play if stopped, pause if playing"
 msgstr "Redă dacă este oprit, întrerupe dacă se redă"
 
@@ -3784,7 +3788,7 @@ msgstr "Redă dacă este oprit, întrerupe dacă se redă"
 msgid "Play if there is nothing already playing"
 msgstr "Redă numai dacă nu se redă deja ceva"
 
-#: core/commandlineoptions.cpp:172
+#: core/commandlineoptions.cpp:175
 msgid "Play the <n>th track in the playlist"
 msgstr "Redă piesa a <n>a din lista de redare"
 
@@ -3796,7 +3800,7 @@ msgstr "Redare/Pauză"
 msgid "Playback"
 msgstr "Redare"
 
-#: core/commandlineoptions.cpp:151
+#: core/commandlineoptions.cpp:153
 msgid "Player options"
 msgstr "Opțiuni player"
 
@@ -3810,7 +3814,7 @@ msgstr "Listă de redare"
 msgid "Playlist finished"
 msgstr "Listă de redare terminată"
 
-#: core/commandlineoptions.cpp:169
+#: core/commandlineoptions.cpp:171
 #: ../bin/src/ui_playlistsaveoptionsdialog.h:94
 msgid "Playlist options"
 msgstr "Opțiuni listă de redare"
@@ -3928,7 +3932,7 @@ msgstr "Anterior"
 msgid "Previous track"
 msgstr "Piesa precedentă"
 
-#: core/commandlineoptions.cpp:179
+#: core/commandlineoptions.cpp:182
 msgid "Print out version information"
 msgstr "Tipărește informația versiunii"
 
@@ -4202,7 +4206,7 @@ msgstr "Resetează numărul de ascultări"
 msgid "Restart song, then jump to previous if pressed again"
 msgstr "Reporni melodia, apoi se va sări la melodia anterioară dacă este apăsat din nou"
 
-#: core/commandlineoptions.cpp:167
+#: core/commandlineoptions.cpp:169
 msgid ""
 "Restart the track, or play the previous track if within 8 seconds of start."
 msgstr "Repornește piesa sau redă piesa precedentă după 8 secunde de la pornire"
@@ -4437,11 +4441,11 @@ msgstr "Derulează înapoi"
 msgid "Seek forward"
 msgstr "Derulează înainte"
 
-#: core/commandlineoptions.cpp:165
+#: core/commandlineoptions.cpp:167
 msgid "Seek the currently playing track by a relative amount"
 msgstr "Caută în piesa redată curent după o cantitate relativă"
 
-#: core/commandlineoptions.cpp:163
+#: core/commandlineoptions.cpp:165
 msgid "Seek the currently playing track to an absolute position"
 msgstr "Caută în piesa redată curent pentru o poziție absolută"
 
@@ -4510,7 +4514,7 @@ msgstr "Serviciu offline"
 msgid "Set %1 to \"%2\"..."
 msgstr "Setează %1 la „%2”..."
 
-#: core/commandlineoptions.cpp:158
+#: core/commandlineoptions.cpp:160
 msgid "Set the volume to <value> percent"
 msgstr "Stabilește volumul la <value> procent"
 
@@ -4702,7 +4706,7 @@ msgstr "Dimensiune:"
 msgid "Ska"
 msgstr "Ska"
 
-#: core/commandlineoptions.cpp:156
+#: core/commandlineoptions.cpp:158
 msgid "Skip backwards in playlist"
 msgstr "Sari înapoi în lista de redare"
 
@@ -4710,7 +4714,7 @@ msgstr "Sari înapoi în lista de redare"
 msgid "Skip count"
 msgstr "Omite numărătoarea"
 
-#: core/commandlineoptions.cpp:157
+#: core/commandlineoptions.cpp:159
 msgid "Skip forwards in playlist"
 msgstr "Sari înainte în lista de redare"
 
@@ -4836,7 +4840,7 @@ msgstr "Cu steluță"
 msgid "Start ripping"
 msgstr "Pornire extragere"
 
-#: core/commandlineoptions.cpp:152
+#: core/commandlineoptions.cpp:154
 msgid "Start the playlist currently playing"
 msgstr "Pornește lista de redare curent redată"
 
@@ -4881,11 +4885,11 @@ msgstr "Oprește după fiecare piesă"
 msgid "Stop after this track"
 msgstr "Oprește după această piesă"
 
-#: core/commandlineoptions.cpp:154
+#: core/commandlineoptions.cpp:156
 msgid "Stop playback"
 msgstr "Oprește redarea"
 
-#: core/commandlineoptions.cpp:155
+#: core/commandlineoptions.cpp:157
 msgid "Stop playback after current track"
 msgstr "Oprește redarea după piesa curentă"
 
@@ -5033,7 +5037,7 @@ msgid ""
 "license key. Visit subsonic.org for details."
 msgstr "Perioada de încercare pentru serverul Subsonic s-a terminat. Donați pentru a obține o cheie de licență. Vizitați subsonic.org pentru detalii."
 
-#: ui/mainwindow.cpp:2513
+#: ui/mainwindow.cpp:2517
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -5075,7 +5079,7 @@ msgid ""
 "continue?"
 msgstr "Aceste fișiere vor fi șterse de pe dispozitiv, sigur doriți să continuați?"
 
-#: library/libraryview.cpp:646 ui/mainwindow.cpp:2333 widgets/fileview.cpp:189
+#: library/libraryview.cpp:646 ui/mainwindow.cpp:2337 widgets/fileview.cpp:189
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -5186,7 +5190,7 @@ msgstr "Comută stare coadă"
 msgid "Toggle scrobbling"
 msgstr "Comută scrobbling"
 
-#: core/commandlineoptions.cpp:174
+#: core/commandlineoptions.cpp:177
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "Comută vizibilitatea pentru afișare-pe-ecran drăguță"
 
@@ -5268,7 +5272,7 @@ msgstr "Oprește"
 msgid "URI"
 msgstr "URI"
 
-#: core/commandlineoptions.cpp:150
+#: core/commandlineoptions.cpp:152
 msgid "URL(s)"
 msgstr "URL(-uri)"
 
@@ -5367,7 +5371,7 @@ msgstr "Se actualizează %1%..."
 msgid "Updating library"
 msgstr "Se actualizează colecția"
 
-#: core/commandlineoptions.cpp:150
+#: core/commandlineoptions.cpp:152
 msgid "Usage"
 msgstr "Utilizare"
 
@@ -5630,7 +5634,7 @@ msgid ""
 "well?"
 msgstr "Doriți să fie mutate, de asemenea, și celelalte melodii din acest album în Artiști diferiți?"
 
-#: ui/mainwindow.cpp:2520
+#: ui/mainwindow.cpp:2524
 msgid "Would you like to run a full rescan right now?"
 msgstr "Doriți să rulați o rescanare completă chiar acum?"
 
@@ -5928,7 +5932,7 @@ msgstr "întâi cele mai vechi"
 msgid "on"
 msgstr "pornire"
 
-#: core/commandlineoptions.cpp:150
+#: core/commandlineoptions.cpp:152
 msgid "options"
 msgstr "opțiuni"
 

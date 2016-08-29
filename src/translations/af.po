@@ -12,7 +12,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2016-07-25 11:07+0000\n"
+"PO-Revision-Date: 2016-08-26 14:20+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Afrikaans (http://www.transifex.com/davidsansome/clementine/language/af/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -828,7 +828,7 @@ msgstr "Kwaai"
 msgid "Appearance"
 msgstr "Voorkoms"
 
-#: core/commandlineoptions.cpp:170
+#: core/commandlineoptions.cpp:173
 msgid "Append files/URLs to the playlist"
 msgstr "Voeg lêers/URLs by die speellys by"
 
@@ -1126,7 +1126,7 @@ msgstr "Verander skommel modus"
 msgid "Change the currently playing song"
 msgstr "Kies 'n nuwe liedjie"
 
-#: core/commandlineoptions.cpp:175
+#: core/commandlineoptions.cpp:178
 msgid "Change the language"
 msgstr "Verander die taal"
 
@@ -1341,7 +1341,7 @@ msgstr ""
 msgid "Colors"
 msgstr "Kleure"
 
-#: core/commandlineoptions.cpp:178
+#: core/commandlineoptions.cpp:181
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Komma geskeide lys van klas:vlak, vlak is 0-3"
 
@@ -1560,6 +1560,10 @@ msgstr "Omslag gestel vanaf %1"
 msgid "Covers from %1"
 msgstr "Omslae vanaf %1"
 
+#: core/commandlineoptions.cpp:172
+msgid "Create a new playlist with files/URLs"
+msgstr ""
+
 #: ../bin/src/ui_playbacksettingspage.h:344
 msgid "Cross-fade when changing tracks automatically"
 msgstr "Pas oorgangsdowing toe wanneer snitte outomaties verander word"
@@ -1627,11 +1631,11 @@ msgstr "Dae"
 msgid "De&fault"
 msgstr "&Verstek"
 
-#: core/commandlineoptions.cpp:160
+#: core/commandlineoptions.cpp:162
 msgid "Decrease the volume by 4%"
 msgstr "Verlaag die volume met 4%"
 
-#: core/commandlineoptions.cpp:162
+#: core/commandlineoptions.cpp:164
 msgid "Decrease the volume by <value> percent"
 msgstr "Verlaag die volume met <value>%"
 
@@ -1666,7 +1670,7 @@ msgid "Delete downloaded data"
 msgstr "Vee afgelaaide data uit"
 
 #: devices/deviceview.cpp:408 library/libraryview.cpp:645
-#: ui/mainwindow.cpp:2332 widgets/fileview.cpp:188
+#: ui/mainwindow.cpp:2336 widgets/fileview.cpp:188
 msgid "Delete files"
 msgstr "Skrap lêers"
 
@@ -1800,7 +1804,7 @@ msgstr "Uitsending met onderbrekings"
 msgid "Display options"
 msgstr "Vertoon keuses"
 
-#: core/commandlineoptions.cpp:173
+#: core/commandlineoptions.cpp:176
 msgid "Display the on-screen-display"
 msgstr "Toon skermbeeld"
 
@@ -2105,17 +2109,17 @@ msgstr "Hele versameling"
 msgid "Equalizer"
 msgstr "Grafiese effenaar"
 
-#: core/commandlineoptions.cpp:176
+#: core/commandlineoptions.cpp:179
 msgid "Equivalent to --log-levels *:1"
 msgstr "Ekwivalent aan --log-levels *:1"
 
-#: core/commandlineoptions.cpp:177
+#: core/commandlineoptions.cpp:180
 msgid "Equivalent to --log-levels *:3"
 msgstr "Ekwivalent aan --log-levels *:3"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:246
-#: library/libraryview.cpp:639 ui/mainwindow.cpp:2038 ui/mainwindow.cpp:2284
-#: ui/mainwindow.cpp:2430 internet/vk/vkservice.cpp:643
+#: library/libraryview.cpp:639 ui/mainwindow.cpp:2038 ui/mainwindow.cpp:2288
+#: ui/mainwindow.cpp:2434 internet/vk/vkservice.cpp:643
 msgid "Error"
 msgstr "Fout"
 
@@ -2732,11 +2736,11 @@ msgstr "Onversoenbare Subsonic REST protokol weergawe.  Die bediener moet opgrad
 msgid "Incomplete configuration, please ensure all fields are populated."
 msgstr "Onvoltooide konfigurasie.  Verseker asseblief dat al die velde ingevul is."
 
-#: core/commandlineoptions.cpp:159
+#: core/commandlineoptions.cpp:161
 msgid "Increase the volume by 4%"
 msgstr "Verhoog die volume met 4%"
 
-#: core/commandlineoptions.cpp:161
+#: core/commandlineoptions.cpp:163
 msgid "Increase the volume by <value> percent"
 msgstr "Verhoog die volume met <value>%"
 
@@ -2966,7 +2970,7 @@ msgstr "Versameling"
 msgid "Library advanced grouping"
 msgstr "Gevorderde groeppering van versameling"
 
-#: ui/mainwindow.cpp:2522
+#: ui/mainwindow.cpp:2526
 msgid "Library rescan notice"
 msgstr "Versameling hernagaan kennisgewing"
 
@@ -3048,7 +3052,7 @@ msgstr "Snitinligting word gelaai"
 msgid "Loading..."
 msgstr "Besig om te laai..."
 
-#: core/commandlineoptions.cpp:171
+#: core/commandlineoptions.cpp:174
 msgid "Loads files/URLs, replacing current playlist"
 msgstr "Laai lêers/URLs en vervang huidige speellys"
 
@@ -3441,7 +3445,7 @@ msgstr "Geen kort blokke"
 msgid "None"
 msgstr "Geen"
 
-#: library/libraryview.cpp:640 ui/mainwindow.cpp:2285 ui/mainwindow.cpp:2431
+#: library/libraryview.cpp:640 ui/mainwindow.cpp:2289 ui/mainwindow.cpp:2435
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Geen van die gekose liedjies is geskik om na die toestel te kopiëer nie."
 
@@ -3676,7 +3680,7 @@ msgstr ""
 msgid "Original year tag support"
 msgstr ""
 
-#: core/commandlineoptions.cpp:173
+#: core/commandlineoptions.cpp:176
 msgid "Other options"
 msgstr "Ander keuses"
 
@@ -3734,7 +3738,7 @@ msgstr "Wagwoord"
 msgid "Pause"
 msgstr "Vries"
 
-#: core/commandlineoptions.cpp:154
+#: core/commandlineoptions.cpp:156
 msgid "Pause playback"
 msgstr "Vries terugspel"
 
@@ -3768,7 +3772,7 @@ msgstr "Speel"
 msgid "Play count"
 msgstr "Speeltelling"
 
-#: core/commandlineoptions.cpp:153
+#: core/commandlineoptions.cpp:155
 msgid "Play if stopped, pause if playing"
 msgstr "Speel indien gestop, vries indien aan die speel"
 
@@ -3777,7 +3781,7 @@ msgstr "Speel indien gestop, vries indien aan die speel"
 msgid "Play if there is nothing already playing"
 msgstr "Speel as daar niks anders tans speel nie"
 
-#: core/commandlineoptions.cpp:172
+#: core/commandlineoptions.cpp:175
 msgid "Play the <n>th track in the playlist"
 msgstr "Speel die <n>de snit in die speellys"
 
@@ -3789,7 +3793,7 @@ msgstr "Speel/Vries"
 msgid "Playback"
 msgstr "Terugspeel"
 
-#: core/commandlineoptions.cpp:151
+#: core/commandlineoptions.cpp:153
 msgid "Player options"
 msgstr "Speler keuses"
 
@@ -3803,7 +3807,7 @@ msgstr "Speellys"
 msgid "Playlist finished"
 msgstr "Speellys deurgewerk"
 
-#: core/commandlineoptions.cpp:169
+#: core/commandlineoptions.cpp:171
 #: ../bin/src/ui_playlistsaveoptionsdialog.h:94
 msgid "Playlist options"
 msgstr "Speellys keuses"
@@ -3921,7 +3925,7 @@ msgstr "Vorige"
 msgid "Previous track"
 msgstr "Vorige snit"
 
-#: core/commandlineoptions.cpp:179
+#: core/commandlineoptions.cpp:182
 msgid "Print out version information"
 msgstr "Toon weergawe inligting"
 
@@ -4195,7 +4199,7 @@ msgstr "Herstel afspeeltelling"
 msgid "Restart song, then jump to previous if pressed again"
 msgstr "Herbegin lied, dan spring na vorige as weer gedruk"
 
-#: core/commandlineoptions.cpp:167
+#: core/commandlineoptions.cpp:169
 msgid ""
 "Restart the track, or play the previous track if within 8 seconds of start."
 msgstr "Hervat die snit, of speel die vorige snit indien binne 8 sekondes van die opening."
@@ -4430,11 +4434,11 @@ msgstr "Streef terugwaarts"
 msgid "Seek forward"
 msgstr "Streef vorentoe"
 
-#: core/commandlineoptions.cpp:165
+#: core/commandlineoptions.cpp:167
 msgid "Seek the currently playing track by a relative amount"
 msgstr "Streef 'n relatiewe hoeveelheid deur die huidige snit"
 
-#: core/commandlineoptions.cpp:163
+#: core/commandlineoptions.cpp:165
 msgid "Seek the currently playing track to an absolute position"
 msgstr "Streef na 'n spesifieke posisie in die huidige snit"
 
@@ -4503,7 +4507,7 @@ msgstr "Diens aflyn"
 msgid "Set %1 to \"%2\"..."
 msgstr "Stel %1 na \"%2\"..."
 
-#: core/commandlineoptions.cpp:158
+#: core/commandlineoptions.cpp:160
 msgid "Set the volume to <value> percent"
 msgstr "Stel die volume na <value> persent"
 
@@ -4695,7 +4699,7 @@ msgstr "Grootte:"
 msgid "Ska"
 msgstr "Ska"
 
-#: core/commandlineoptions.cpp:156
+#: core/commandlineoptions.cpp:158
 msgid "Skip backwards in playlist"
 msgstr "Spring terugwaarts in speellys"
 
@@ -4703,7 +4707,7 @@ msgstr "Spring terugwaarts in speellys"
 msgid "Skip count"
 msgstr "Aantal keer oorgeslaan"
 
-#: core/commandlineoptions.cpp:157
+#: core/commandlineoptions.cpp:159
 msgid "Skip forwards in playlist"
 msgstr "Spring voorentoe in speellys"
 
@@ -4829,7 +4833,7 @@ msgstr "Gegradeer"
 msgid "Start ripping"
 msgstr "Bigin om te \"rip\""
 
-#: core/commandlineoptions.cpp:152
+#: core/commandlineoptions.cpp:154
 msgid "Start the playlist currently playing"
 msgstr "Begin die huidige speellys speel"
 
@@ -4874,11 +4878,11 @@ msgstr "Stop na elke snit"
 msgid "Stop after this track"
 msgstr "Stop na hierdie snit"
 
-#: core/commandlineoptions.cpp:154
+#: core/commandlineoptions.cpp:156
 msgid "Stop playback"
 msgstr "Beëindig terugspel"
 
-#: core/commandlineoptions.cpp:155
+#: core/commandlineoptions.cpp:157
 msgid "Stop playback after current track"
 msgstr ""
 
@@ -5026,7 +5030,7 @@ msgid ""
 "license key. Visit subsonic.org for details."
 msgstr "Die toetsperiode vir toegang tot die Subsonic bediener is verstreke. Gee asseblief 'n donasie om 'n lisensie sleutel te ontvang. Besoek subsonic.org vir meer inligting."
 
-#: ui/mainwindow.cpp:2513
+#: ui/mainwindow.cpp:2517
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -5068,7 +5072,7 @@ msgid ""
 "continue?"
 msgstr "Hierdie lêers sal vanaf die toestel verwyder word. Is jy seker?"
 
-#: library/libraryview.cpp:646 ui/mainwindow.cpp:2333 widgets/fileview.cpp:189
+#: library/libraryview.cpp:646 ui/mainwindow.cpp:2337 widgets/fileview.cpp:189
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -5179,7 +5183,7 @@ msgstr "Skakel tou-status aan/af"
 msgid "Toggle scrobbling"
 msgstr "Skakel log van geluisterde musiek aanlyn aan/af"
 
-#: core/commandlineoptions.cpp:174
+#: core/commandlineoptions.cpp:177
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "Skakel mooi skermbeeld aan/af"
 
@@ -5261,7 +5265,7 @@ msgstr "Skakel af"
 msgid "URI"
 msgstr "URI"
 
-#: core/commandlineoptions.cpp:150
+#: core/commandlineoptions.cpp:152
 msgid "URL(s)"
 msgstr "URL(s)"
 
@@ -5360,7 +5364,7 @@ msgstr "%1% word opgedateer..."
 msgid "Updating library"
 msgstr "Jou versameling word nagegaan"
 
-#: core/commandlineoptions.cpp:150
+#: core/commandlineoptions.cpp:152
 msgid "Usage"
 msgstr "Gebruik"
 
@@ -5623,7 +5627,7 @@ msgid ""
 "well?"
 msgstr "Wil jy die ander liedjies in hierdie album ook na Verskeie Kunstenaars skuif?"
 
-#: ui/mainwindow.cpp:2520
+#: ui/mainwindow.cpp:2524
 msgid "Would you like to run a full rescan right now?"
 msgstr "Wil jy alles van voor af deursoek?"
 
@@ -5921,7 +5925,7 @@ msgstr "oudste eerste"
 msgid "on"
 msgstr "volgens"
 
-#: core/commandlineoptions.cpp:150
+#: core/commandlineoptions.cpp:152
 msgid "options"
 msgstr "instellings"
 
