@@ -61,12 +61,15 @@ Organise::Organise(TaskManager* task_manager,
       task_id_(0),
       current_copy_progress_(0) {
   original_thread_ = thread();
-
   for (const NewSongInfo& song_info : songs_info) {
     tasks_pending_ << Task(song_info);
   }
 }
 
+Organise::~Organise()
+{
+    qDeleteAll(tmpCoverFilesList);
+}
 void Organise::Start() {
   if (thread_) return;
 
@@ -134,6 +137,11 @@ void Organise::ProcessSomeFiles() {
 
     // Use a Song instead of a tag reader
     Song song = task.song_info_.song_;
+    //get the cover art
+    QString fileName = task.song_info_.song_.url().toLocalFile();
+    QImage coverArt = TagReaderClient::Instance()->LoadEmbeddedArtBlocking(fileName);
+    if(!coverArt.isNull())
+        song.set_image(coverArt);
     if (!song.is_valid()) continue;
 
     // Maybe this file is one that's been transcoded already?
@@ -191,6 +199,7 @@ void Organise::ProcessSomeFiles() {
     job.progress_ = std::bind(&Organise::SetSongProgress, this, _1,
                               !task.transcoded_filename_.isEmpty());
 
+    job.userData = &tmpCoverFilesList;
     if (!destination_->CopyToStorage(job)) {
       files_with_errors_ << task.song_info_.song_.basefilename();
     } else {

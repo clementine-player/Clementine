@@ -22,7 +22,7 @@
 #include "core/application.h"
 #include "library/librarybackend.h"
 #include "library/librarymodel.h"
-
+#include <QTemporaryFile>
 #include <QDir>
 #include <QFile>
 #include <QThread>
@@ -83,10 +83,12 @@ bool GPodDevice::StartCopy(QList<Song::FileType>* supported_filetypes) {
 Itdb_Track* GPodDevice::AddTrackToITunesDb(const Song& metadata) {
   // Create the track
   Itdb_Track* track = itdb_track_new();
-  metadata.ToItdb(track);
+  Song copyOfSong(metadata);
+  copyOfSong.ToItdb(track);
 
   // Add it to the DB and the master playlist
   // The DB takes ownership of the track
+  //TODO: here we can add this track to the 'Recent played' playlist
   itdb_track_add(db_, track, -1);
   Itdb_Playlist* mpl = itdb_playlist_mpl(db_);
   itdb_playlist_add_track(mpl, track, -1);
@@ -103,11 +105,28 @@ void GPodDevice::AddTrackToModel(Itdb_Track* track, const QString& prefix) {
 }
 
 bool GPodDevice::CopyToStorage(const CopyJob& job) {
-  Q_ASSERT(db_);
-
+  Q_ASSERT(db_); 
   Itdb_Track* track = AddTrackToITunesDb(job.metadata_);
-
   // Copy the file
+  /*
+  this List is for temporary files that contain cover art
+  for every track. It should be alive until sync is in progress
+   */
+  QList<QTemporaryFile*> fileList = *job.userData;
+  QImage copy(job.metadata_.image());
+  if(track->has_artwork == false) // not override if it has cover already
+  {
+      QTemporaryFile *m_temp_album_art_file = new QTemporaryFile();
+      fileList.append(m_temp_album_art_file);
+      if(m_temp_album_art_file->open())
+      {
+          m_temp_album_art_file->rename(m_temp_album_art_file->fileName() + ".png");
+          copy.save(m_temp_album_art_file->fileName(),"PNG");
+          bool result = itdb_track_set_thumbnails(track, QFile::encodeName(m_temp_album_art_file->fileName()));
+          if(!result)
+            qLog(Error) << "Setting cover art failed";
+      }
+    }
   GError* error = nullptr;
   itdb_cp_track_to_ipod(
       track, QDir::toNativeSeparators(job.source_).toLocal8Bit().constData(),
@@ -116,19 +135,15 @@ bool GPodDevice::CopyToStorage(const CopyJob& job) {
     qLog(Error) << "copying failed:" << error->message;
     app_->AddError(QString::fromUtf8(error->message));
     g_error_free(error);
-
     // Need to remove the track from the db again
     itdb_track_remove(track);
     return false;
   }
-
   AddTrackToModel(track, url_.path());
-
   // Remove the original if it was requested
   if (job.remove_original_) {
     QFile::remove(job.source_);
   }
-
   return true;
 }
 

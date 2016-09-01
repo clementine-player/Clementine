@@ -51,7 +51,7 @@ class Organise : public QObject {
            const OrganiseFormat& format, bool copy, bool overwrite,
            bool mark_as_listened, const NewSongInfoList& songs,
            bool eject_after);
-
+  ~Organise();
   static const int kBatchSize;
   static const int kTranscodeProgressInterval;
 
@@ -114,6 +114,7 @@ class Organise : public QObject {
   int current_copy_progress_;
 
   QStringList files_with_errors_;
+  QList<QTemporaryFile*> tmpCoverFilesList;
 };
 
 #endif  // CORE_ORGANISE_H_
