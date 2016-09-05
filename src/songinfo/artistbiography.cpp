@@ -242,8 +242,8 @@ void ArtistBiography::FetchWikipediaArticle(int id,
 
   qLog(Debug) << "Article url:" << url;
 
-  NewClosure(reply, SIGNAL(finished()),
-             [this, id, reply, wikipedia_url, latch]() {
+  NewClosure(reply, SIGNAL(finished()), [this, id, reply, wikipedia_url,
+                                         wiki_title, latch]() {
     reply->deleteLater();
 
     QJson::Parser parser;
@@ -261,6 +261,15 @@ void ArtistBiography::FetchWikipediaArticle(int id,
             tr("Open in your browser") + "</a></p>";
 
     text += html;
+
+    text += tr("<p>This article uses material from the Wikipedia article "
+               "<a href=\"%1\">%2</a>, which is released under the <a "
+               "href=\"https://clementine-player.org/licenses/by-sa/"
+               "3.0/legalcode.txt\">Creative Commons Attribution-Share-Alike "
+               "License 3.0</a>.</p>")
+                .arg(wikipedia_url)
+                .arg(wiki_title);
+
     SongInfoTextView* editor = new SongInfoTextView;
     editor->SetHtml(text);
     data.contents_ = editor;
