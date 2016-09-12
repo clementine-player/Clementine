@@ -57,6 +57,16 @@ PlaylistTabBar::PlaylistTabBar(QWidget* parent)
                              tr("Rename playlist..."), this, SLOT(Rename()));
   save_ = menu_->addAction(IconLoader::Load("document-save", IconLoader::Base),
                            tr("Save playlist..."), this, SLOT(Save()));
+
+  menu_->addSeparator();
+
+  expand_ = menu_->addAction(IconLoader::Load("zoom-in", IconLoader::Base),
+                             tr("Show full playlists names"), this, SLOT(ExpandNames()));
+  elide_ = menu_->addAction(IconLoader::Load("zoom-in", IconLoader::Base),
+                             tr("Hide full playlists names"), this, SLOT(ExpandNames()));
+
+  elide_->setVisible(false);
+
   menu_->addSeparator();
 
   rename_editor_->setVisible(false);
@@ -407,4 +417,26 @@ void PlaylistTabBar::PlaylistFavoritedSlot(int id, bool favorite) {
   if (favorite_widget) {
     favorite_widget->SetFavorite(favorite);
   }
+}
+
+void PlaylistTabBar::ExpandNames()
+{
+    switch(elideMode()) {
+        case Qt::ElideNone: {
+            setElideMode(Qt::ElideRight);
+            elide_->setVisible(false);
+            expand_->setVisible(true);
+            break;
+        }
+
+        case Qt::ElideRight: {
+            setElideMode(Qt::ElideNone);
+            elide_->setVisible(true);
+            expand_->setVisible(false);
+            break;
+        }
+
+        default:
+            assert(false);
+    }
 }
