@@ -14,7 +14,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2016-08-26 14:20+0000\n"
+"PO-Revision-Date: 2016-09-06 12:48+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Hebrew (http://www.transifex.com/davidsansome/clementine/language/he/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -191,7 +191,7 @@ msgstr "מ&רכז"
 msgid "&Custom"
 msgstr "ה&תאמה אישית"
 
-#: ../bin/src/ui_mainwindow.h:718
+#: ../bin/src/ui_mainwindow.h:735
 msgid "&Extras"
 msgstr "תוספות"
 
@@ -199,7 +199,7 @@ msgstr "תוספות"
 msgid "&Grouping"
 msgstr ""
 
-#: ../bin/src/ui_mainwindow.h:717
+#: ../bin/src/ui_mainwindow.h:734
 msgid "&Help"
 msgstr "ע&זרה"
 
@@ -224,7 +224,7 @@ msgstr ""
 msgid "&Lyrics"
 msgstr ""
 
-#: ../bin/src/ui_mainwindow.h:715
+#: ../bin/src/ui_mainwindow.h:732
 msgid "&Music"
 msgstr "מוזיקה"
 
@@ -232,15 +232,15 @@ msgstr "מוזיקה"
 msgid "&None"
 msgstr "&ללא"
 
-#: ../bin/src/ui_mainwindow.h:716
+#: ../bin/src/ui_mainwindow.h:733
 msgid "&Playlist"
 msgstr "רשימת השמעה"
 
-#: ../bin/src/ui_mainwindow.h:662
+#: ../bin/src/ui_mainwindow.h:675
 msgid "&Quit"
 msgstr "י&ציאה"
 
-#: ../bin/src/ui_mainwindow.h:687
+#: ../bin/src/ui_mainwindow.h:700
 msgid "&Repeat mode"
 msgstr "מצב חזרה"
 
@@ -248,7 +248,7 @@ msgstr "מצב חזרה"
 msgid "&Right"
 msgstr "&ימין"
 
-#: ../bin/src/ui_mainwindow.h:686
+#: ../bin/src/ui_mainwindow.h:699
 msgid "&Shuffle mode"
 msgstr "מצב ערבוב"
 
@@ -256,7 +256,7 @@ msgstr "מצב ערבוב"
 msgid "&Stretch columns to fit window"
 msgstr "&מתיחת עמודות בהתאמה לחלון"
 
-#: ../bin/src/ui_mainwindow.h:719
+#: ../bin/src/ui_mainwindow.h:736
 msgid "&Tools"
 msgstr "&כלים"
 
@@ -358,6 +358,15 @@ msgid ""
 "activated.</p></body></html>"
 msgstr ""
 
+#: songinfo/artistbiography.cpp:265
+#, qt-format
+msgid ""
+"<p>This article uses material from the Wikipedia article <a "
+"href=\"%1\">%2</a>, which is released under the <a href=\"https"
+"://clementine-player.org/licenses/by-sa/3.0/legalcode.txt\">Creative Commons"
+" Attribution-Share-Alike License 3.0</a>.</p>"
+msgstr ""
+
 #: ../bin/src/ui_organisedialog.h:250
 msgid ""
 "<p>Tokens start with %, for example: %artist %album %title </p>\n"
@@ -427,11 +436,11 @@ msgstr "בטל"
 msgid "About %1"
 msgstr "בערך %1"
 
-#: ../bin/src/ui_mainwindow.h:674
+#: ../bin/src/ui_mainwindow.h:687
 msgid "About Clementine..."
 msgstr "על אודות Clementine..."
 
-#: ../bin/src/ui_mainwindow.h:701
+#: ../bin/src/ui_mainwindow.h:714
 msgid "About Qt..."
 msgstr "על אודות Qt..."
 
@@ -495,19 +504,19 @@ msgstr "הוספת תזרים אחר..."
 msgid "Add directory..."
 msgstr "הוספת תיקייה..."
 
-#: ui/mainwindow.cpp:1982
+#: ui/mainwindow.cpp:1988
 msgid "Add file"
 msgstr "הוספת קובץ"
 
-#: ../bin/src/ui_mainwindow.h:710
+#: ../bin/src/ui_mainwindow.h:723
 msgid "Add file to transcoder"
 msgstr "הוסף קובץ לממיר"
 
-#: ../bin/src/ui_mainwindow.h:708
+#: ../bin/src/ui_mainwindow.h:721
 msgid "Add file(s) to transcoder"
 msgstr "הוסף קבצים לממיר"
 
-#: ../bin/src/ui_transcodedialog.h:218 ../bin/src/ui_mainwindow.h:676
+#: ../bin/src/ui_transcodedialog.h:218 ../bin/src/ui_mainwindow.h:689
 msgid "Add file..."
 msgstr "הוספת קובץ..."
 
@@ -515,12 +524,12 @@ msgstr "הוספת קובץ..."
 msgid "Add files to transcode"
 msgstr "הוספת קובצי מוזיקה להמרה"
 
-#: transcoder/transcodedialog.cpp:306 ui/mainwindow.cpp:2009
+#: transcoder/transcodedialog.cpp:306 ui/mainwindow.cpp:2015
 #: ripper/ripcddialog.cpp:185
 msgid "Add folder"
 msgstr "הוספת תיקייה"
 
-#: ../bin/src/ui_mainwindow.h:691
+#: ../bin/src/ui_mainwindow.h:704
 msgid "Add folder..."
 msgstr "הוספת תיקייה..."
 
@@ -532,7 +541,7 @@ msgstr "הוספת תיקייה חדשה..."
 msgid "Add podcast"
 msgstr "הוספת פודקאסט"
 
-#: internet/podcasts/podcastservice.cpp:418 ../bin/src/ui_mainwindow.h:706
+#: internet/podcasts/podcastservice.cpp:418 ../bin/src/ui_mainwindow.h:719
 msgid "Add podcast..."
 msgstr "הוספת פודקאסט..."
 
@@ -616,7 +625,7 @@ msgstr "הוספת תג שנה לשיר"
 msgid "Add songs to \"My Music\" when the \"Love\" button is clicked"
 msgstr "הוסף שירים ל-\"שירים שלי\" אם כפתור ה-\"אוהב\" נלחץ"
 
-#: ../bin/src/ui_mainwindow.h:677
+#: ../bin/src/ui_mainwindow.h:690
 msgid "Add stream..."
 msgstr "הוספת תזרים"
 
@@ -632,7 +641,7 @@ msgstr "הוסף לרשימת ההשמעה של Spotify"
 msgid "Add to Spotify starred"
 msgstr "הוסף למועדפים של Spotify"
 
-#: ui/mainwindow.cpp:1804
+#: ui/mainwindow.cpp:1810
 msgid "Add to another playlist"
 msgstr "הוספה לרשימת השמעה אחרת"
 
@@ -678,7 +687,7 @@ msgstr "התווסף היום"
 msgid "Added within three months"
 msgstr "התווסף בשלושה החודשים האחרונים"
 
-#: library/libraryfilterwidget.cpp:186
+#: library/libraryfilterwidget.cpp:190
 msgid "Advanced grouping..."
 msgstr "קיבוץ מתקדם..."
 
@@ -738,7 +747,7 @@ msgstr "הכל"
 msgid "All Files (*)"
 msgstr "כל הקבצים (*)"
 
-#: ../bin/src/ui_mainwindow.h:682
+#: ../bin/src/ui_mainwindow.h:695
 msgctxt "Label for button to enable/disable Hypnotoad background sound."
 msgid "All Glory to the Hypnotoad!"
 msgstr ""
@@ -1150,7 +1159,7 @@ msgstr "בדיקת פרקים חדשים"
 msgid "Check for updates"
 msgstr "בדוק עדכונים"
 
-#: ui/mainwindow.cpp:803
+#: ui/mainwindow.cpp:805
 msgid "Check for updates..."
 msgstr "בדיקת עדכונים..."
 
@@ -1208,13 +1217,13 @@ msgstr "מנקה"
 msgid "Clear"
 msgstr "ניקוי"
 
-#: ../bin/src/ui_mainwindow.h:665 ../bin/src/ui_mainwindow.h:667
+#: ../bin/src/ui_mainwindow.h:678 ../bin/src/ui_mainwindow.h:680
 msgid "Clear playlist"
 msgstr "ניקוי רשימת ההשמעה"
 
 #: smartplaylists/searchtermwidget.cpp:345
 #: visualisations/visualisationcontainer.cpp:215
-#: ../bin/src/ui_mainwindow.h:657 ../bin/src/ui_visualisationoverlay.h:182
+#: ../bin/src/ui_mainwindow.h:670 ../bin/src/ui_visualisationoverlay.h:182
 msgid "Clementine"
 msgstr "Clementine"
 
@@ -1360,7 +1369,7 @@ msgstr ""
 msgid "Complete tags automatically"
 msgstr "השלמת תג אוטומטית"
 
-#: ../bin/src/ui_mainwindow.h:704
+#: ../bin/src/ui_mainwindow.h:717
 msgid "Complete tags automatically..."
 msgstr "השלמת תגים אוטומטית..."
 
@@ -1403,7 +1412,7 @@ msgstr ""
 msgid "Configure global search..."
 msgstr "מגדיר חיפוש "
 
-#: ui/mainwindow.cpp:653
+#: ui/mainwindow.cpp:655
 msgid "Configure library..."
 msgstr "הגדרת הספרייה..."
 
@@ -1446,7 +1455,7 @@ msgstr ""
 msgid "Connection trouble or audio is disabled by owner"
 msgstr ""
 
-#: ../bin/src/ui_console.h:79 ../bin/src/ui_mainwindow.h:685
+#: ../bin/src/ui_console.h:79 ../bin/src/ui_mainwindow.h:698
 msgid "Console"
 msgstr "קונסול"
 
@@ -1479,11 +1488,11 @@ msgid "Copy to clipboard"
 msgstr "העתקה אל הלוח"
 
 #: library/libraryview.cpp:409 internet/podcasts/podcastservice.cpp:438
-#: ui/mainwindow.cpp:702 widgets/fileviewlist.cpp:44
+#: ui/mainwindow.cpp:704 widgets/fileviewlist.cpp:44
 msgid "Copy to device..."
 msgstr "העתקה להתקן.."
 
-#: devices/deviceview.cpp:228 ui/mainwindow.cpp:692
+#: devices/deviceview.cpp:228 ui/mainwindow.cpp:694
 #: widgets/fileviewlist.cpp:40
 msgid "Copy to library..."
 msgstr "העתקה לספרייה..."
@@ -1531,7 +1540,7 @@ msgstr "לא ניתן לפתוח את קובץ הפלט %1"
 #: internet/core/cloudfileservice.cpp:103
 #: internet/googledrive/googledriveservice.cpp:228
 #: ../bin/src/ui_albumcovermanager.h:214
-#: ../bin/src/ui_albumcoversearcher.h:104 ../bin/src/ui_mainwindow.h:680
+#: ../bin/src/ui_albumcoversearcher.h:104 ../bin/src/ui_mainwindow.h:693
 msgid "Cover Manager"
 msgstr "מנהל העטיפות"
 
@@ -1672,7 +1681,7 @@ msgid "Delete downloaded data"
 msgstr "מחיקת מידע שהתקבל"
 
 #: devices/deviceview.cpp:408 library/libraryview.cpp:645
-#: ui/mainwindow.cpp:2336 widgets/fileview.cpp:188
+#: ui/mainwindow.cpp:2342 widgets/fileview.cpp:188
 msgid "Delete files"
 msgstr "מחיקת קבצים"
 
@@ -1680,7 +1689,7 @@ msgstr "מחיקת קבצים"
 msgid "Delete from device..."
 msgstr "מחיקה מתוך התקן..."
 
-#: library/libraryview.cpp:411 ui/mainwindow.cpp:705
+#: library/libraryview.cpp:411 ui/mainwindow.cpp:707
 #: widgets/fileviewlist.cpp:47
 msgid "Delete from disk..."
 msgstr "מחיקה מתוך דיסק..."
@@ -1705,11 +1714,11 @@ msgstr "מחיקת הקבצים המקוריים"
 msgid "Deleting files"
 msgstr "הקבצים נמחקים"
 
-#: ui/mainwindow.cpp:1725
+#: ui/mainwindow.cpp:1731
 msgid "Dequeue selected tracks"
 msgstr "הסרת הרצועות הנבחרות מהתור"
 
-#: ui/mainwindow.cpp:1723
+#: ui/mainwindow.cpp:1729
 msgid "Dequeue track"
 msgstr "הסרת הרצועה מהתור"
 
@@ -1810,7 +1819,7 @@ msgstr "הגדרות תצוגה"
 msgid "Display the on-screen-display"
 msgstr "הצגת חיווי מסך"
 
-#: ../bin/src/ui_mainwindow.h:703
+#: ../bin/src/ui_mainwindow.h:716
 msgid "Do a full library rescan"
 msgstr "ביצוע סריקה חוזרת לכל הספרייה"
 
@@ -1981,12 +1990,12 @@ msgstr "מיקס דינמי אקראי"
 msgid "Edit smart playlist..."
 msgstr "עריכת רשימת השמעה חכמה..."
 
-#: ui/mainwindow.cpp:1767
+#: ui/mainwindow.cpp:1773
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr ""
 
-#: ../bin/src/ui_mainwindow.h:672
+#: ../bin/src/ui_mainwindow.h:685
 msgid "Edit tag..."
 msgstr "עריכת תגית..."
 
@@ -1999,7 +2008,7 @@ msgid "Edit track information"
 msgstr "עריכת פרטי הרצועה"
 
 #: library/libraryview.cpp:416 widgets/fileviewlist.cpp:51
-#: ../bin/src/ui_mainwindow.h:669
+#: ../bin/src/ui_mainwindow.h:682
 msgid "Edit track information..."
 msgstr "עריכת פרטי הרצועה..."
 
@@ -2107,7 +2116,7 @@ msgstr "הכנס כתובת IP באפליקציה על מנת להתחבר ל-Cl
 msgid "Entire collection"
 msgstr "כל האוסף"
 
-#: ../bin/src/ui_equalizer.h:162 ../bin/src/ui_mainwindow.h:689
+#: ../bin/src/ui_equalizer.h:162 ../bin/src/ui_mainwindow.h:702
 msgid "Equalizer"
 msgstr "אקולייזר"
 
@@ -2120,8 +2129,8 @@ msgid "Equivalent to --log-levels *:3"
 msgstr "זהה לאפשרות--log-levels *:3"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:246
-#: library/libraryview.cpp:639 ui/mainwindow.cpp:2038 ui/mainwindow.cpp:2288
-#: ui/mainwindow.cpp:2434 internet/vk/vkservice.cpp:643
+#: library/libraryview.cpp:639 ui/mainwindow.cpp:2044 ui/mainwindow.cpp:2294
+#: ui/mainwindow.cpp:2440 internet/vk/vkservice.cpp:643
 msgid "Error"
 msgstr "שגיאה"
 
@@ -2261,7 +2270,7 @@ msgstr "עמעום מוזיקה"
 msgid "Fading duration"
 msgstr "משך זמן עמעום המוזיקה"
 
-#: ui/mainwindow.cpp:2039
+#: ui/mainwindow.cpp:2045
 msgid "Failed reading CD drive"
 msgstr ""
 
@@ -2531,11 +2540,11 @@ msgstr "שם עבור הפריט:"
 msgid "Go"
 msgstr "מעבר"
 
-#: ../bin/src/ui_mainwindow.h:696
+#: ../bin/src/ui_mainwindow.h:709
 msgid "Go to next playlist tab"
 msgstr "מעבר ללשונית רשימת ההשמעה הבאה"
 
-#: ../bin/src/ui_mainwindow.h:697
+#: ../bin/src/ui_mainwindow.h:710
 msgid "Go to previous playlist tab"
 msgstr "מעבר ללשונית רשימת ההשמעה הקודמת"
 
@@ -2561,9 +2570,13 @@ msgstr "קיבוץ ספרייה על פי..."
 msgid "Group by"
 msgstr "קיבוץ על פי"
 
-#: library/libraryfilterwidget.cpp:154
+#: library/libraryfilterwidget.cpp:158
 msgid "Group by Album"
 msgstr "קיבוץ על פי אלבום"
+
+#: library/libraryfilterwidget.cpp:150
+msgid "Group by Album artist/Album"
+msgstr ""
 
 #: library/libraryfilterwidget.cpp:143
 msgid "Group by Artist"
@@ -2573,15 +2586,15 @@ msgstr "קיבוץ על פי אמן"
 msgid "Group by Artist/Album"
 msgstr "קיבוץ על פי אמן/אלבום"
 
-#: library/libraryfilterwidget.cpp:150
+#: library/libraryfilterwidget.cpp:154
 msgid "Group by Artist/Year - Album"
 msgstr "קיבוץ על פי אמן/שנת אלבום"
 
-#: library/libraryfilterwidget.cpp:157
+#: library/libraryfilterwidget.cpp:161
 msgid "Group by Genre/Album"
 msgstr "קיבוץ על פי סגנון/אלבום"
 
-#: library/libraryfilterwidget.cpp:161
+#: library/libraryfilterwidget.cpp:165
 msgid "Group by Genre/Artist/Album"
 msgstr "קיבוץ על פי סגנון/אמן/אלבום"
 
@@ -2591,11 +2604,11 @@ msgstr "קיבוץ על פי סגנון/אמן/אלבום"
 msgid "Grouping"
 msgstr "קיבוץ"
 
-#: library/libraryfilterwidget.cpp:207
+#: library/libraryfilterwidget.cpp:211
 msgid "Grouping Name"
 msgstr ""
 
-#: library/libraryfilterwidget.cpp:207
+#: library/libraryfilterwidget.cpp:211
 msgid "Grouping name:"
 msgstr ""
 
@@ -2852,7 +2865,7 @@ msgstr "מסד הנתונים של Jamendo"
 msgid "Jump to previous song right away"
 msgstr ""
 
-#: ../bin/src/ui_mainwindow.h:692
+#: ../bin/src/ui_mainwindow.h:705
 msgid "Jump to the currently playing track"
 msgstr "קפיצה לרצועה המתנגנת כעת"
 
@@ -2876,7 +2889,7 @@ msgstr "להמשיך ולהריץ ברקע כאשר החלון סגור"
 msgid "Keep the original files"
 msgstr "שמירה על הקבצים המקוריים"
 
-#: ../bin/src/ui_mainwindow.h:684
+#: ../bin/src/ui_mainwindow.h:697
 msgctxt "Label for buton to enable/disable kittens in the now playing widget"
 msgid "Kittens"
 msgstr ""
@@ -2972,7 +2985,7 @@ msgstr "ספרייה"
 msgid "Library advanced grouping"
 msgstr "קיבוץ מתקדם של הספרייה"
 
-#: ui/mainwindow.cpp:2526
+#: ui/mainwindow.cpp:2532
 msgid "Library rescan notice"
 msgstr "הודעה על סריקה מחודשת של הספרייה"
 
@@ -3012,7 +3025,7 @@ msgstr "טעינת עטיפה מהדיסק..."
 msgid "Load playlist"
 msgstr "טעינת רשימת השמעה"
 
-#: ../bin/src/ui_mainwindow.h:695
+#: ../bin/src/ui_mainwindow.h:708
 msgid "Load playlist..."
 msgstr "טעינת רשימת השמעה..."
 
@@ -3085,7 +3098,7 @@ msgstr ""
 msgid "Long term prediction profile (LTP)"
 msgstr "פרופיל תחזית ארוכת טווח(LTP)"
 
-#: ../bin/src/ui_mainwindow.h:664
+#: ../bin/src/ui_mainwindow.h:677
 msgid "Love"
 msgstr "אהוב"
 
@@ -3166,7 +3179,7 @@ msgstr "הפרופיל הראשי (ראשי)"
 msgid "Make it so!"
 msgstr "ביצוע!"
 
-#: ../bin/src/ui_mainwindow.h:683
+#: ../bin/src/ui_mainwindow.h:696
 msgctxt "Label for button to enable/disable Enterprise background sound."
 msgid "Make it so!"
 msgstr ""
@@ -3300,7 +3313,7 @@ msgstr "נקודות עגינה"
 msgid "Move down"
 msgstr "הזזה מטה"
 
-#: ui/mainwindow.cpp:695 widgets/fileviewlist.cpp:42
+#: ui/mainwindow.cpp:697 widgets/fileviewlist.cpp:42
 msgid "Move to library..."
 msgstr "העברה לספרייה..."
 
@@ -3309,7 +3322,7 @@ msgstr "העברה לספרייה..."
 msgid "Move up"
 msgstr "הזזה מעלה"
 
-#: transcoder/transcodedialog.cpp:225 ui/mainwindow.cpp:1983
+#: transcoder/transcodedialog.cpp:225 ui/mainwindow.cpp:1989
 #: internet/vk/vkservice.cpp:908
 msgid "Music"
 msgstr "מוזיקה"
@@ -3319,7 +3332,7 @@ msgid "Music Library"
 msgstr "ספריית המוזיקה"
 
 #: core/globalshortcuts.cpp:63 wiimotedev/wiimotesettingspage.cpp:113
-#: ../bin/src/ui_mainwindow.h:702
+#: ../bin/src/ui_mainwindow.h:715
 msgid "Mute"
 msgstr "השתקה"
 
@@ -3380,7 +3393,7 @@ msgstr "אין להתחיל להשמיע אף פעם"
 msgid "New folder"
 msgstr "תיקייה חדשה"
 
-#: ui/mainwindow.cpp:1821 ../bin/src/ui_mainwindow.h:693
+#: ui/mainwindow.cpp:1827 ../bin/src/ui_mainwindow.h:706
 msgid "New playlist"
 msgstr "רשימת השמעה חדשה"
 
@@ -3409,7 +3422,7 @@ msgid "Next"
 msgstr "הבא"
 
 #: core/globalshortcuts.cpp:57 wiimotedev/wiimotesettingspage.cpp:104
-#: ../bin/src/ui_mainwindow.h:661
+#: ../bin/src/ui_mainwindow.h:674
 msgid "Next track"
 msgstr "הרצועה הבאה"
 
@@ -3447,7 +3460,7 @@ msgstr "ללא מקטעים קצרים"
 msgid "None"
 msgstr "אין"
 
-#: library/libraryview.cpp:640 ui/mainwindow.cpp:2289 ui/mainwindow.cpp:2435
+#: library/libraryview.cpp:640 ui/mainwindow.cpp:2295 ui/mainwindow.cpp:2441
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "אף אחד מהשירים הנבחרים לא היה ראוי להעתקה להתקן"
 
@@ -3581,7 +3594,7 @@ msgstr "שקיפות"
 msgid "Open %1 in browser"
 msgstr "פתיחת %1 בדפדפן"
 
-#: ../bin/src/ui_mainwindow.h:679
+#: ../bin/src/ui_mainwindow.h:692
 msgid "Open &audio CD..."
 msgstr "פתיחת &דיסק שמע..."
 
@@ -3601,7 +3614,7 @@ msgstr ""
 msgid "Open device"
 msgstr "פתיחת התקן"
 
-#: ../bin/src/ui_mainwindow.h:678
+#: ../bin/src/ui_mainwindow.h:691
 msgid "Open file..."
 msgstr "פתיחת קובץ..."
 
@@ -3655,7 +3668,7 @@ msgstr ""
 msgid "Organise Files"
 msgstr "ארגון קבצים"
 
-#: library/libraryview.cpp:405 ui/mainwindow.cpp:698
+#: library/libraryview.cpp:405 ui/mainwindow.cpp:700
 msgid "Organise files..."
 msgstr "ארגון קבצים..."
 
@@ -3735,7 +3748,7 @@ msgstr "מסיבה"
 msgid "Password"
 msgstr "ססמה"
 
-#: core/globalshortcuts.cpp:50 ui/mainwindow.cpp:1136 ui/mainwindow.cpp:1632
+#: core/globalshortcuts.cpp:50 ui/mainwindow.cpp:1142 ui/mainwindow.cpp:1638
 #: ui/qtsystemtrayicon.cpp:189 wiimotedev/wiimotesettingspage.cpp:114
 msgid "Pause"
 msgstr "השהייה"
@@ -3763,10 +3776,10 @@ msgstr "פיקסל"
 msgid "Plain sidebar"
 msgstr "סרגל צד פשוט"
 
-#: core/globalshortcuts.cpp:49 ui/mainwindow.cpp:670 ui/mainwindow.cpp:1102
-#: ui/mainwindow.cpp:1121 ui/mainwindow.cpp:1636 ui/qtsystemtrayicon.cpp:177
+#: core/globalshortcuts.cpp:49 ui/mainwindow.cpp:672 ui/mainwindow.cpp:1108
+#: ui/mainwindow.cpp:1127 ui/mainwindow.cpp:1642 ui/qtsystemtrayicon.cpp:177
 #: ui/qtsystemtrayicon.cpp:203 wiimotedev/wiimotesettingspage.cpp:107
-#: ../bin/src/ui_mainwindow.h:659
+#: ../bin/src/ui_mainwindow.h:672
 msgid "Play"
 msgstr "נגינה"
 
@@ -3863,7 +3876,7 @@ msgstr ""
 msgid "Preferences"
 msgstr "מאפיינים"
 
-#: ../bin/src/ui_mainwindow.h:673
+#: ../bin/src/ui_mainwindow.h:686
 msgid "Preferences..."
 msgstr "מאפיינים..."
 
@@ -3923,7 +3936,7 @@ msgid "Previous"
 msgstr "הקודם"
 
 #: core/globalshortcuts.cpp:59 wiimotedev/wiimotesettingspage.cpp:106
-#: ../bin/src/ui_mainwindow.h:658
+#: ../bin/src/ui_mainwindow.h:671
 msgid "Previous track"
 msgstr "רצועה קודמת"
 
@@ -3974,16 +3987,16 @@ msgstr ""
 msgid "Querying device..."
 msgstr "התקן מתושאל..."
 
-#: ../bin/src/ui_queuemanager.h:124 ../bin/src/ui_mainwindow.h:700
+#: ../bin/src/ui_queuemanager.h:124 ../bin/src/ui_mainwindow.h:713
 msgid "Queue Manager"
 msgstr "מנהל התור"
 
-#: ui/mainwindow.cpp:1729
+#: ui/mainwindow.cpp:1735
 msgid "Queue selected tracks"
 msgstr "הוספת הרצועות הנבחרות"
 
 #: globalsearch/globalsearchview.cpp:466 library/libraryview.cpp:389
-#: ui/mainwindow.cpp:1727
+#: ui/mainwindow.cpp:1733
 msgid "Queue track"
 msgstr "הוספת הרצועה לתור"
 
@@ -3995,7 +4008,7 @@ msgstr "רדיו (עצמה זהה לכל הרצועות)"
 msgid "Rain"
 msgstr "גשם"
 
-#: ../bin/src/ui_mainwindow.h:681
+#: ../bin/src/ui_mainwindow.h:694
 msgctxt "Label for button to enable/disable rain background sound."
 msgid "Rain"
 msgstr ""
@@ -4099,7 +4112,7 @@ msgstr "הסרה"
 msgid "Remove action"
 msgstr "הסרת הפעולה"
 
-#: ../bin/src/ui_mainwindow.h:707
+#: ../bin/src/ui_mainwindow.h:720
 msgid "Remove duplicates from playlist"
 msgstr "הסרת כפילויות מרשימת ההשמעה"
 
@@ -4115,7 +4128,7 @@ msgstr "הסרה מהמוסיקה שלי"
 msgid "Remove from bookmarks"
 msgstr ""
 
-#: internet/spotify/spotifyservice.cpp:681 ../bin/src/ui_mainwindow.h:688
+#: internet/spotify/spotifyservice.cpp:681 ../bin/src/ui_mainwindow.h:701
 msgid "Remove from playlist"
 msgstr "הסרה מרשימת ההשמעה"
 
@@ -4127,7 +4140,7 @@ msgstr "הסר רשימת השמעה"
 msgid "Remove playlists"
 msgstr "הסר רשימות השמעה"
 
-#: ../bin/src/ui_mainwindow.h:713
+#: ../bin/src/ui_mainwindow.h:726
 msgid "Remove unavailable tracks from playlist"
 msgstr ""
 
@@ -4139,7 +4152,7 @@ msgstr "שינוי שם רשימת ההשמעה"
 msgid "Rename playlist..."
 msgstr "שינוי שם רשימת ההשמעה..."
 
-#: ../bin/src/ui_mainwindow.h:670
+#: ../bin/src/ui_mainwindow.h:683
 msgid "Renumber tracks in this order..."
 msgstr "מספור הרצועות מחדש על פי הסדר הנוכחי..."
 
@@ -4230,7 +4243,7 @@ msgstr ""
 msgid "Rip CD"
 msgstr ""
 
-#: ../bin/src/ui_mainwindow.h:712
+#: ../bin/src/ui_mainwindow.h:725
 msgid "Rip audio CD"
 msgstr ""
 
@@ -4299,7 +4312,7 @@ msgctxt "Title of the playlist save dialog."
 msgid "Save playlist"
 msgstr ""
 
-#: playlist/playlisttabbar.cpp:59 ../bin/src/ui_mainwindow.h:694
+#: playlist/playlisttabbar.cpp:59 ../bin/src/ui_mainwindow.h:707
 msgid "Save playlist..."
 msgstr "שמירת רשימת ההשמעה..."
 
@@ -4504,7 +4517,7 @@ msgstr "פרטי שרת"
 msgid "Service offline"
 msgstr "שירות לא מקוון"
 
-#: ui/mainwindow.cpp:1766
+#: ui/mainwindow.cpp:1772
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr "הגדרת %1 בתור „%2“..."
@@ -4513,7 +4526,7 @@ msgstr "הגדרת %1 בתור „%2“..."
 msgid "Set the volume to <value> percent"
 msgstr "הגדרת עצמת השמע ל־<value> אחוזים"
 
-#: ../bin/src/ui_mainwindow.h:671
+#: ../bin/src/ui_mainwindow.h:684
 msgid "Set value for all selected tracks..."
 msgstr "הגדרת הערך לכל הרצועות הנבחרות..."
 
@@ -4580,7 +4593,7 @@ msgstr "הצגת חיווי מסך נאה"
 msgid "Show above status bar"
 msgstr "הצגה מעל לשורת המצב"
 
-#: ui/mainwindow.cpp:637
+#: ui/mainwindow.cpp:639
 msgid "Show all songs"
 msgstr "הצגת כל השירים"
 
@@ -4604,12 +4617,12 @@ msgstr "הצגה על מסך מלא..."
 msgid "Show groups in global search result"
 msgstr ""
 
-#: library/libraryview.cpp:423 ui/mainwindow.cpp:708
+#: library/libraryview.cpp:423 ui/mainwindow.cpp:710
 #: widgets/fileviewlist.cpp:53
 msgid "Show in file browser..."
 msgstr "הצגה בסייר הקבצים..."
 
-#: ui/mainwindow.cpp:710
+#: ui/mainwindow.cpp:712
 msgid "Show in library..."
 msgstr ""
 
@@ -4621,13 +4634,17 @@ msgstr "הצגה תחת אמנים שונים"
 msgid "Show moodbar"
 msgstr "הצגת סרגל האווירה"
 
-#: ui/mainwindow.cpp:639
+#: ui/mainwindow.cpp:641
 msgid "Show only duplicates"
 msgstr "הצגת כפילויות בלבד"
 
-#: ui/mainwindow.cpp:641
+#: ui/mainwindow.cpp:643
 msgid "Show only untagged"
 msgstr "הצגת לא מתוייגים בלבד"
+
+#: ../bin/src/ui_mainwindow.h:729
+msgid "Show or hide the sidebar"
+msgstr ""
 
 #: ../bin/src/ui_vksettingspage.h:220
 msgid "Show playing song on your page"
@@ -4636,6 +4653,10 @@ msgstr ""
 #: ../bin/src/ui_globalsearchsettingspage.h:149
 msgid "Show search suggestions"
 msgstr "הצגת הצעות חיפוש"
+
+#: ../bin/src/ui_mainwindow.h:727
+msgid "Show sidebar"
+msgstr ""
 
 #: ../bin/src/ui_lastfmsettingspage.h:136
 msgid "Show the \"love\" button"
@@ -4669,7 +4690,7 @@ msgstr "ערבוב אלבומים"
 msgid "Shuffle all"
 msgstr "ערבוב עם הכול"
 
-#: ../bin/src/ui_mainwindow.h:675
+#: ../bin/src/ui_mainwindow.h:688
 msgid "Shuffle playlist"
 msgstr "ערבוב רשימת ההשמעה"
 
@@ -4713,11 +4734,11 @@ msgstr "מונה דילוגים"
 msgid "Skip forwards in playlist"
 msgstr "דילוג קדימה ברשימת ההשמעה"
 
-#: ui/mainwindow.cpp:1740
+#: ui/mainwindow.cpp:1746
 msgid "Skip selected tracks"
 msgstr ""
 
-#: ui/mainwindow.cpp:1738
+#: ui/mainwindow.cpp:1744
 msgid "Skip track"
 msgstr ""
 
@@ -4860,7 +4881,7 @@ msgid "Starting..."
 msgstr "מופעל..."
 
 #: core/globalshortcuts.cpp:53 wiimotedev/wiimotesettingspage.cpp:108
-#: ../bin/src/ui_mainwindow.h:660
+#: ../bin/src/ui_mainwindow.h:673
 msgid "Stop"
 msgstr "הפסקה"
 
@@ -4876,7 +4897,7 @@ msgstr ""
 msgid "Stop after every track"
 msgstr ""
 
-#: ui/mainwindow.cpp:674 ../bin/src/ui_mainwindow.h:663
+#: ui/mainwindow.cpp:676 ../bin/src/ui_mainwindow.h:676
 msgid "Stop after this track"
 msgstr "הפסקה אחרי רצועה זו"
 
@@ -5032,7 +5053,7 @@ msgid ""
 "license key. Visit subsonic.org for details."
 msgstr "תמה תקופת הניסיון לשרת Subsonic. נא תרומתך לקבלת מפתח רישיון. לפרטים, נא לבקר ב subsonic.org "
 
-#: ui/mainwindow.cpp:2517
+#: ui/mainwindow.cpp:2523
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -5074,7 +5095,7 @@ msgid ""
 "continue?"
 msgstr "קבצים אלו ימחקו מההתקן, האם להמשיך?"
 
-#: library/libraryview.cpp:646 ui/mainwindow.cpp:2337 widgets/fileview.cpp:189
+#: library/libraryview.cpp:646 ui/mainwindow.cpp:2343 widgets/fileview.cpp:189
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -5177,11 +5198,11 @@ msgstr "החלפה ל/ממצב חיווי נאה"
 msgid "Toggle fullscreen"
 msgstr "הפעלה או כיבוי של מסך מלא"
 
-#: ui/mainwindow.cpp:1731
+#: ui/mainwindow.cpp:1737
 msgid "Toggle queue status"
 msgstr "החלף מצב התור"
 
-#: ../bin/src/ui_mainwindow.h:705
+#: ../bin/src/ui_mainwindow.h:718
 msgid "Toggle scrobbling"
 msgstr "החלפה לscrobbling"
 
@@ -5230,7 +5251,7 @@ msgstr "רצועה"
 msgid "Tracks"
 msgstr ""
 
-#: ../bin/src/ui_transcodedialog.h:213 ../bin/src/ui_mainwindow.h:690
+#: ../bin/src/ui_transcodedialog.h:213 ../bin/src/ui_mainwindow.h:703
 msgid "Transcode Music"
 msgstr "ממיר קבצי המוזיקה"
 
@@ -5311,11 +5332,11 @@ msgstr "שגיאה לא ידועה"
 msgid "Unset cover"
 msgstr "הסרת עטיפה"
 
-#: ui/mainwindow.cpp:1736
+#: ui/mainwindow.cpp:1742
 msgid "Unskip selected tracks"
 msgstr ""
 
-#: ui/mainwindow.cpp:1734
+#: ui/mainwindow.cpp:1740
 msgid "Unskip track"
 msgstr ""
 
@@ -5336,7 +5357,7 @@ msgstr ""
 msgid "Update all podcasts"
 msgstr "עדכון כל הפודקאסטים"
 
-#: ../bin/src/ui_mainwindow.h:698
+#: ../bin/src/ui_mainwindow.h:711
 msgid "Update changed library folders"
 msgstr "עדכון תיקיות שהשתנו בספרייה"
 
@@ -5489,7 +5510,7 @@ msgstr "הצגה"
 msgid "Visualization mode"
 msgstr "מצב אפקטים חזותיים"
 
-#: ui/dbusscreensaver.cpp:33 ../bin/src/ui_mainwindow.h:699
+#: ui/dbusscreensaver.cpp:33 ../bin/src/ui_mainwindow.h:712
 msgid "Visualizations"
 msgstr "אפקטים חזותיים"
 
@@ -5629,7 +5650,7 @@ msgid ""
 "well?"
 msgstr "האם ברצונך להעביר גם את שאר השירים באלבום לאמנים שונים?"
 
-#: ui/mainwindow.cpp:2524
+#: ui/mainwindow.cpp:2530
 msgid "Would you like to run a full rescan right now?"
 msgstr "האם ברצונך לבצע סריקה חוזרת כעת?"
 

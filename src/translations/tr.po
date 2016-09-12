@@ -26,7 +26,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2016-08-26 14:20+0000\n"
+"PO-Revision-Date: 2016-09-06 12:48+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Turkish (http://www.transifex.com/davidsansome/clementine/language/tr/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -203,7 +203,7 @@ msgstr "&Ortala"
 msgid "&Custom"
 msgstr "&Özel"
 
-#: ../bin/src/ui_mainwindow.h:718
+#: ../bin/src/ui_mainwindow.h:735
 msgid "&Extras"
 msgstr "Ekler"
 
@@ -211,7 +211,7 @@ msgstr "Ekler"
 msgid "&Grouping"
 msgstr ""
 
-#: ../bin/src/ui_mainwindow.h:717
+#: ../bin/src/ui_mainwindow.h:734
 msgid "&Help"
 msgstr "&Yardım"
 
@@ -236,7 +236,7 @@ msgstr ""
 msgid "&Lyrics"
 msgstr ""
 
-#: ../bin/src/ui_mainwindow.h:715
+#: ../bin/src/ui_mainwindow.h:732
 msgid "&Music"
 msgstr "Müzik"
 
@@ -244,15 +244,15 @@ msgstr "Müzik"
 msgid "&None"
 msgstr "&Hiçbiri"
 
-#: ../bin/src/ui_mainwindow.h:716
+#: ../bin/src/ui_mainwindow.h:733
 msgid "&Playlist"
 msgstr "Çalma Listesi"
 
-#: ../bin/src/ui_mainwindow.h:662
+#: ../bin/src/ui_mainwindow.h:675
 msgid "&Quit"
 msgstr "&Çık"
 
-#: ../bin/src/ui_mainwindow.h:687
+#: ../bin/src/ui_mainwindow.h:700
 msgid "&Repeat mode"
 msgstr "Tekrar kipi"
 
@@ -260,7 +260,7 @@ msgstr "Tekrar kipi"
 msgid "&Right"
 msgstr "&Sağ"
 
-#: ../bin/src/ui_mainwindow.h:686
+#: ../bin/src/ui_mainwindow.h:699
 msgid "&Shuffle mode"
 msgstr "Rastgele kipi"
 
@@ -268,7 +268,7 @@ msgstr "Rastgele kipi"
 msgid "&Stretch columns to fit window"
 msgstr "&Sütunları pencereye sığacak şekilde ayarla"
 
-#: ../bin/src/ui_mainwindow.h:719
+#: ../bin/src/ui_mainwindow.h:736
 msgid "&Tools"
 msgstr "&Araçlar"
 
@@ -370,6 +370,15 @@ msgid ""
 "activated.</p></body></html>"
 msgstr "<html><head/><body><p>Bu şarkının beğenilerini ve isatistiklerini, tüm kütüphanenizin şarkılarındaki dosya etiketlerine yazacaktır.</p><p>Eğer &quot;Beğeni ve istatistikleri dosya etiketinde sakla&quot; seçeneği her zaman etkin ise, gerekli değildir.</p></body></html>"
 
+#: songinfo/artistbiography.cpp:265
+#, qt-format
+msgid ""
+"<p>This article uses material from the Wikipedia article <a "
+"href=\"%1\">%2</a>, which is released under the <a href=\"https"
+"://clementine-player.org/licenses/by-sa/3.0/legalcode.txt\">Creative Commons"
+" Attribution-Share-Alike License 3.0</a>.</p>"
+msgstr ""
+
 #: ../bin/src/ui_organisedialog.h:250
 msgid ""
 "<p>Tokens start with %, for example: %artist %album %title </p>\n"
@@ -439,11 +448,11 @@ msgstr "İptal"
 msgid "About %1"
 msgstr "%1 Hakkında"
 
-#: ../bin/src/ui_mainwindow.h:674
+#: ../bin/src/ui_mainwindow.h:687
 msgid "About Clementine..."
 msgstr "Clementine Hakkında..."
 
-#: ../bin/src/ui_mainwindow.h:701
+#: ../bin/src/ui_mainwindow.h:714
 msgid "About Qt..."
 msgstr "Qt Hakkında..."
 
@@ -507,19 +516,19 @@ msgstr "Başka bir yayın ekle..."
 msgid "Add directory..."
 msgstr "Dizin ekle..."
 
-#: ui/mainwindow.cpp:1982
+#: ui/mainwindow.cpp:1988
 msgid "Add file"
 msgstr "Dosya ekle"
 
-#: ../bin/src/ui_mainwindow.h:710
+#: ../bin/src/ui_mainwindow.h:723
 msgid "Add file to transcoder"
 msgstr "Dosyayı dönüştürücüye ekle"
 
-#: ../bin/src/ui_mainwindow.h:708
+#: ../bin/src/ui_mainwindow.h:721
 msgid "Add file(s) to transcoder"
 msgstr "Dosyayı/dosyaları dönüştürücüye ekle"
 
-#: ../bin/src/ui_transcodedialog.h:218 ../bin/src/ui_mainwindow.h:676
+#: ../bin/src/ui_transcodedialog.h:218 ../bin/src/ui_mainwindow.h:689
 msgid "Add file..."
 msgstr "Dosya ekle..."
 
@@ -527,12 +536,12 @@ msgstr "Dosya ekle..."
 msgid "Add files to transcode"
 msgstr "Dönüştürülecek dosyaları ekle"
 
-#: transcoder/transcodedialog.cpp:306 ui/mainwindow.cpp:2009
+#: transcoder/transcodedialog.cpp:306 ui/mainwindow.cpp:2015
 #: ripper/ripcddialog.cpp:185
 msgid "Add folder"
 msgstr "Klasör ekle"
 
-#: ../bin/src/ui_mainwindow.h:691
+#: ../bin/src/ui_mainwindow.h:704
 msgid "Add folder..."
 msgstr "Klasör ekle..."
 
@@ -544,7 +553,7 @@ msgstr "Yeni klasör ekle..."
 msgid "Add podcast"
 msgstr "Podcast ekle"
 
-#: internet/podcasts/podcastservice.cpp:418 ../bin/src/ui_mainwindow.h:706
+#: internet/podcasts/podcastservice.cpp:418 ../bin/src/ui_mainwindow.h:719
 msgid "Add podcast..."
 msgstr "Podcast ekle..."
 
@@ -628,7 +637,7 @@ msgstr "Yıl etiketi ekle"
 msgid "Add songs to \"My Music\" when the \"Love\" button is clicked"
 msgstr "\"Beğendim\" düğmesi tıklandığında şarkıları \"Müziklerim\"e ekle"
 
-#: ../bin/src/ui_mainwindow.h:677
+#: ../bin/src/ui_mainwindow.h:690
 msgid "Add stream..."
 msgstr "Yayın ekle..."
 
@@ -644,7 +653,7 @@ msgstr "Spotify çalma listelerine ekle"
 msgid "Add to Spotify starred"
 msgstr "Spotify yıldızlılarına ekle"
 
-#: ui/mainwindow.cpp:1804
+#: ui/mainwindow.cpp:1810
 msgid "Add to another playlist"
 msgstr "Başka bir çalma listesine ekle"
 
@@ -690,7 +699,7 @@ msgstr "Bugün eklenenler"
 msgid "Added within three months"
 msgstr "Son üç ay içinde eklenenler"
 
-#: library/libraryfilterwidget.cpp:186
+#: library/libraryfilterwidget.cpp:190
 msgid "Advanced grouping..."
 msgstr "Gelişmiş gruplama..."
 
@@ -750,7 +759,7 @@ msgstr "Tümü"
 msgid "All Files (*)"
 msgstr "Tüm Dosyalar (*)"
 
-#: ../bin/src/ui_mainwindow.h:682
+#: ../bin/src/ui_mainwindow.h:695
 msgctxt "Label for button to enable/disable Hypnotoad background sound."
 msgid "All Glory to the Hypnotoad!"
 msgstr "All Glory to the Hypnotoad!"
@@ -1162,7 +1171,7 @@ msgstr "Yeni bölümler için kontrol et"
 msgid "Check for updates"
 msgstr "Güncellemeleri denetle"
 
-#: ui/mainwindow.cpp:803
+#: ui/mainwindow.cpp:805
 msgid "Check for updates..."
 msgstr "Güncellemeleri denetle..."
 
@@ -1220,13 +1229,13 @@ msgstr "Temizliyor"
 msgid "Clear"
 msgstr "Temizle"
 
-#: ../bin/src/ui_mainwindow.h:665 ../bin/src/ui_mainwindow.h:667
+#: ../bin/src/ui_mainwindow.h:678 ../bin/src/ui_mainwindow.h:680
 msgid "Clear playlist"
 msgstr "Çalma listesini temizle"
 
 #: smartplaylists/searchtermwidget.cpp:345
 #: visualisations/visualisationcontainer.cpp:215
-#: ../bin/src/ui_mainwindow.h:657 ../bin/src/ui_visualisationoverlay.h:182
+#: ../bin/src/ui_mainwindow.h:670 ../bin/src/ui_visualisationoverlay.h:182
 msgid "Clementine"
 msgstr "Clementine"
 
@@ -1372,7 +1381,7 @@ msgstr "Topluluk Radyosu"
 msgid "Complete tags automatically"
 msgstr "Etiketleri otomatik tamamla"
 
-#: ../bin/src/ui_mainwindow.h:704
+#: ../bin/src/ui_mainwindow.h:717
 msgid "Complete tags automatically..."
 msgstr "Etiketleri otomatik tamamla..."
 
@@ -1415,7 +1424,7 @@ msgstr "Vk.com'u yapılandır..."
 msgid "Configure global search..."
 msgstr "Genel aramayı düzenle..."
 
-#: ui/mainwindow.cpp:653
+#: ui/mainwindow.cpp:655
 msgid "Configure library..."
 msgstr "Kütüphaneyi düzenle..."
 
@@ -1458,7 +1467,7 @@ msgstr "Bağlantı zaman aşımına uğradı, sunucu adresini denetleyin. Örnek
 msgid "Connection trouble or audio is disabled by owner"
 msgstr "Bağlantı sorunu veya ses sahibi tarafından devre dışı bırakılmış"
 
-#: ../bin/src/ui_console.h:79 ../bin/src/ui_mainwindow.h:685
+#: ../bin/src/ui_console.h:79 ../bin/src/ui_mainwindow.h:698
 msgid "Console"
 msgstr "Konsol"
 
@@ -1491,11 +1500,11 @@ msgid "Copy to clipboard"
 msgstr "Panoya kopyala"
 
 #: library/libraryview.cpp:409 internet/podcasts/podcastservice.cpp:438
-#: ui/mainwindow.cpp:702 widgets/fileviewlist.cpp:44
+#: ui/mainwindow.cpp:704 widgets/fileviewlist.cpp:44
 msgid "Copy to device..."
 msgstr "Aygıta kopyala..."
 
-#: devices/deviceview.cpp:228 ui/mainwindow.cpp:692
+#: devices/deviceview.cpp:228 ui/mainwindow.cpp:694
 #: widgets/fileviewlist.cpp:40
 msgid "Copy to library..."
 msgstr "Kütüphaneye kopyala..."
@@ -1543,7 +1552,7 @@ msgstr "%1 çıktı dosyası açılamadı"
 #: internet/core/cloudfileservice.cpp:103
 #: internet/googledrive/googledriveservice.cpp:228
 #: ../bin/src/ui_albumcovermanager.h:214
-#: ../bin/src/ui_albumcoversearcher.h:104 ../bin/src/ui_mainwindow.h:680
+#: ../bin/src/ui_albumcoversearcher.h:104 ../bin/src/ui_mainwindow.h:693
 msgid "Cover Manager"
 msgstr "Kapak Yöneticisi"
 
@@ -1684,7 +1693,7 @@ msgid "Delete downloaded data"
 msgstr "İndirilmiş veriyi sil"
 
 #: devices/deviceview.cpp:408 library/libraryview.cpp:645
-#: ui/mainwindow.cpp:2336 widgets/fileview.cpp:188
+#: ui/mainwindow.cpp:2342 widgets/fileview.cpp:188
 msgid "Delete files"
 msgstr "Dosyaları sil"
 
@@ -1692,7 +1701,7 @@ msgstr "Dosyaları sil"
 msgid "Delete from device..."
 msgstr "Aygıttan sil..."
 
-#: library/libraryview.cpp:411 ui/mainwindow.cpp:705
+#: library/libraryview.cpp:411 ui/mainwindow.cpp:707
 #: widgets/fileviewlist.cpp:47
 msgid "Delete from disk..."
 msgstr "Diskten sil..."
@@ -1717,11 +1726,11 @@ msgstr "Orijinal dosyaları sil"
 msgid "Deleting files"
 msgstr "Dosyalar siliniyor"
 
-#: ui/mainwindow.cpp:1725
+#: ui/mainwindow.cpp:1731
 msgid "Dequeue selected tracks"
 msgstr "Seçili parçaları kuyruktan çıkar"
 
-#: ui/mainwindow.cpp:1723
+#: ui/mainwindow.cpp:1729
 msgid "Dequeue track"
 msgstr "Parçayı kuyruktan çıkar"
 
@@ -1822,7 +1831,7 @@ msgstr "Gösterim seçenekleri"
 msgid "Display the on-screen-display"
 msgstr "Ekran görselini göster"
 
-#: ../bin/src/ui_mainwindow.h:703
+#: ../bin/src/ui_mainwindow.h:716
 msgid "Do a full library rescan"
 msgstr "Tüm kütüphaneyi yeniden tara"
 
@@ -1993,12 +2002,12 @@ msgstr "Dinamik rastgele karışım"
 msgid "Edit smart playlist..."
 msgstr "Akıllı çalma listesini düzenleyin"
 
-#: ui/mainwindow.cpp:1767
+#: ui/mainwindow.cpp:1773
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr "\"%1\" etiketini düzenle..."
 
-#: ../bin/src/ui_mainwindow.h:672
+#: ../bin/src/ui_mainwindow.h:685
 msgid "Edit tag..."
 msgstr "Etiketi düzenle..."
 
@@ -2011,7 +2020,7 @@ msgid "Edit track information"
 msgstr "Parça bilgisini düzenle"
 
 #: library/libraryview.cpp:416 widgets/fileviewlist.cpp:51
-#: ../bin/src/ui_mainwindow.h:669
+#: ../bin/src/ui_mainwindow.h:682
 msgid "Edit track information..."
 msgstr "Parça bilgisini düzenle..."
 
@@ -2119,7 +2128,7 @@ msgstr "App Clementine için bağlanmak için IP girin."
 msgid "Entire collection"
 msgstr "Tüm koleksiyon"
 
-#: ../bin/src/ui_equalizer.h:162 ../bin/src/ui_mainwindow.h:689
+#: ../bin/src/ui_equalizer.h:162 ../bin/src/ui_mainwindow.h:702
 msgid "Equalizer"
 msgstr "Ekolayzır"
 
@@ -2132,8 +2141,8 @@ msgid "Equivalent to --log-levels *:3"
 msgstr "--log-levels *:3'e eşdeğer"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:246
-#: library/libraryview.cpp:639 ui/mainwindow.cpp:2038 ui/mainwindow.cpp:2288
-#: ui/mainwindow.cpp:2434 internet/vk/vkservice.cpp:643
+#: library/libraryview.cpp:639 ui/mainwindow.cpp:2044 ui/mainwindow.cpp:2294
+#: ui/mainwindow.cpp:2440 internet/vk/vkservice.cpp:643
 msgid "Error"
 msgstr "Hata"
 
@@ -2273,7 +2282,7 @@ msgstr "Yumuşak geçiş"
 msgid "Fading duration"
 msgstr "Yumuşak geçiş süresi"
 
-#: ui/mainwindow.cpp:2039
+#: ui/mainwindow.cpp:2045
 msgid "Failed reading CD drive"
 msgstr "CD sürücünü okuma başarısız"
 
@@ -2543,11 +2552,11 @@ msgstr "Bir isim verin:"
 msgid "Go"
 msgstr "Git"
 
-#: ../bin/src/ui_mainwindow.h:696
+#: ../bin/src/ui_mainwindow.h:709
 msgid "Go to next playlist tab"
 msgstr "Sıradaki listeye git"
 
-#: ../bin/src/ui_mainwindow.h:697
+#: ../bin/src/ui_mainwindow.h:710
 msgid "Go to previous playlist tab"
 msgstr "Önceki listeye git"
 
@@ -2573,9 +2582,13 @@ msgstr "Kütüpheneyi şuna göre grupla..."
 msgid "Group by"
 msgstr "Grupla"
 
-#: library/libraryfilterwidget.cpp:154
+#: library/libraryfilterwidget.cpp:158
 msgid "Group by Album"
 msgstr "Albüme göre grupla"
+
+#: library/libraryfilterwidget.cpp:150
+msgid "Group by Album artist/Album"
+msgstr ""
 
 #: library/libraryfilterwidget.cpp:143
 msgid "Group by Artist"
@@ -2585,15 +2598,15 @@ msgstr "Sanatçıya göre grupla"
 msgid "Group by Artist/Album"
 msgstr "Sanatçı/Albüme göre grupla"
 
-#: library/libraryfilterwidget.cpp:150
+#: library/libraryfilterwidget.cpp:154
 msgid "Group by Artist/Year - Album"
 msgstr "Sanatçı/Yıl - Albüme göre grupla"
 
-#: library/libraryfilterwidget.cpp:157
+#: library/libraryfilterwidget.cpp:161
 msgid "Group by Genre/Album"
 msgstr "Tür/Albüme göre grupla"
 
-#: library/libraryfilterwidget.cpp:161
+#: library/libraryfilterwidget.cpp:165
 msgid "Group by Genre/Artist/Album"
 msgstr "Tür/Sanatçı/Albüme göre grupla"
 
@@ -2603,11 +2616,11 @@ msgstr "Tür/Sanatçı/Albüme göre grupla"
 msgid "Grouping"
 msgstr "Gruplandırma"
 
-#: library/libraryfilterwidget.cpp:207
+#: library/libraryfilterwidget.cpp:211
 msgid "Grouping Name"
 msgstr ""
 
-#: library/libraryfilterwidget.cpp:207
+#: library/libraryfilterwidget.cpp:211
 msgid "Grouping name:"
 msgstr ""
 
@@ -2864,7 +2877,7 @@ msgstr "Jamendo veritabanı"
 msgid "Jump to previous song right away"
 msgstr "Hemen bir önceki şarkıya gidecek"
 
-#: ../bin/src/ui_mainwindow.h:692
+#: ../bin/src/ui_mainwindow.h:705
 msgid "Jump to the currently playing track"
 msgstr "Şu anda çalınan parçaya atla"
 
@@ -2888,7 +2901,7 @@ msgstr "Pencere kapandığında arkaplanda çalışmaya devam et"
 msgid "Keep the original files"
 msgstr "Orijinal dosyaları sakla"
 
-#: ../bin/src/ui_mainwindow.h:684
+#: ../bin/src/ui_mainwindow.h:697
 msgctxt "Label for buton to enable/disable kittens in the now playing widget"
 msgid "Kittens"
 msgstr "Kedicikler"
@@ -2984,7 +2997,7 @@ msgstr "Kütüphane"
 msgid "Library advanced grouping"
 msgstr "Kütüphane gelişmiş gruplama"
 
-#: ui/mainwindow.cpp:2526
+#: ui/mainwindow.cpp:2532
 msgid "Library rescan notice"
 msgstr "Kütüphane yeniden tarama bildirisi"
 
@@ -3024,7 +3037,7 @@ msgstr "Albüm kapağını diskten yükle..."
 msgid "Load playlist"
 msgstr "Çalma listesini yükle"
 
-#: ../bin/src/ui_mainwindow.h:695
+#: ../bin/src/ui_mainwindow.h:708
 msgid "Load playlist..."
 msgstr "Çalma listesi yükle..."
 
@@ -3097,7 +3110,7 @@ msgstr "Oturumu Kapat"
 msgid "Long term prediction profile (LTP)"
 msgstr "Long term prediction profile (LTP)"
 
-#: ../bin/src/ui_mainwindow.h:664
+#: ../bin/src/ui_mainwindow.h:677
 msgid "Love"
 msgstr "Beğen"
 
@@ -3178,7 +3191,7 @@ msgstr "Ana profil (MAIN)"
 msgid "Make it so!"
 msgstr "Yap gitsin!"
 
-#: ../bin/src/ui_mainwindow.h:683
+#: ../bin/src/ui_mainwindow.h:696
 msgctxt "Label for button to enable/disable Enterprise background sound."
 msgid "Make it so!"
 msgstr "Yap gitsin!"
@@ -3312,7 +3325,7 @@ msgstr "Bağlama noktaları"
 msgid "Move down"
 msgstr "Aşağı taşı"
 
-#: ui/mainwindow.cpp:695 widgets/fileviewlist.cpp:42
+#: ui/mainwindow.cpp:697 widgets/fileviewlist.cpp:42
 msgid "Move to library..."
 msgstr "Kütüphaneye taşı..."
 
@@ -3321,7 +3334,7 @@ msgstr "Kütüphaneye taşı..."
 msgid "Move up"
 msgstr "Yukarı taşı"
 
-#: transcoder/transcodedialog.cpp:225 ui/mainwindow.cpp:1983
+#: transcoder/transcodedialog.cpp:225 ui/mainwindow.cpp:1989
 #: internet/vk/vkservice.cpp:908
 msgid "Music"
 msgstr "Müzik"
@@ -3331,7 +3344,7 @@ msgid "Music Library"
 msgstr "Müzik Kütüphanesi"
 
 #: core/globalshortcuts.cpp:63 wiimotedev/wiimotesettingspage.cpp:113
-#: ../bin/src/ui_mainwindow.h:702
+#: ../bin/src/ui_mainwindow.h:715
 msgid "Mute"
 msgstr "Sessiz"
 
@@ -3392,7 +3405,7 @@ msgstr "Asla çalarak başlama"
 msgid "New folder"
 msgstr "Yeni klasör"
 
-#: ui/mainwindow.cpp:1821 ../bin/src/ui_mainwindow.h:693
+#: ui/mainwindow.cpp:1827 ../bin/src/ui_mainwindow.h:706
 msgid "New playlist"
 msgstr "Yeni çalma listesi"
 
@@ -3421,7 +3434,7 @@ msgid "Next"
 msgstr "İleri"
 
 #: core/globalshortcuts.cpp:57 wiimotedev/wiimotesettingspage.cpp:104
-#: ../bin/src/ui_mainwindow.h:661
+#: ../bin/src/ui_mainwindow.h:674
 msgid "Next track"
 msgstr "Sonraki parça"
 
@@ -3459,7 +3472,7 @@ msgstr "Kısa blok yok"
 msgid "None"
 msgstr "Hiçbiri"
 
-#: library/libraryview.cpp:640 ui/mainwindow.cpp:2289 ui/mainwindow.cpp:2435
+#: library/libraryview.cpp:640 ui/mainwindow.cpp:2295 ui/mainwindow.cpp:2441
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Seçili şarkıların hiçbiri aygıta yüklemeye uygun değil"
 
@@ -3593,7 +3606,7 @@ msgstr "Opaklık"
 msgid "Open %1 in browser"
 msgstr "Tarayıcıda aç: %1"
 
-#: ../bin/src/ui_mainwindow.h:679
+#: ../bin/src/ui_mainwindow.h:692
 msgid "Open &audio CD..."
 msgstr "&Ses CD'si aç..."
 
@@ -3613,7 +3626,7 @@ msgstr "Müziğin içe aktarılacağı bir dizin aç"
 msgid "Open device"
 msgstr "Aygıtı aç"
 
-#: ../bin/src/ui_mainwindow.h:678
+#: ../bin/src/ui_mainwindow.h:691
 msgid "Open file..."
 msgstr "Dosya aç..."
 
@@ -3667,7 +3680,7 @@ msgstr "Opus"
 msgid "Organise Files"
 msgstr "Dosyaları Düzenle"
 
-#: library/libraryview.cpp:405 ui/mainwindow.cpp:698
+#: library/libraryview.cpp:405 ui/mainwindow.cpp:700
 msgid "Organise files..."
 msgstr "Dosyaları düzenle..."
 
@@ -3747,7 +3760,7 @@ msgstr "Parti"
 msgid "Password"
 msgstr "Parola"
 
-#: core/globalshortcuts.cpp:50 ui/mainwindow.cpp:1136 ui/mainwindow.cpp:1632
+#: core/globalshortcuts.cpp:50 ui/mainwindow.cpp:1142 ui/mainwindow.cpp:1638
 #: ui/qtsystemtrayicon.cpp:189 wiimotedev/wiimotesettingspage.cpp:114
 msgid "Pause"
 msgstr "Duraklat"
@@ -3775,10 +3788,10 @@ msgstr "Piksel"
 msgid "Plain sidebar"
 msgstr "Düz kenar çubuğu"
 
-#: core/globalshortcuts.cpp:49 ui/mainwindow.cpp:670 ui/mainwindow.cpp:1102
-#: ui/mainwindow.cpp:1121 ui/mainwindow.cpp:1636 ui/qtsystemtrayicon.cpp:177
+#: core/globalshortcuts.cpp:49 ui/mainwindow.cpp:672 ui/mainwindow.cpp:1108
+#: ui/mainwindow.cpp:1127 ui/mainwindow.cpp:1642 ui/qtsystemtrayicon.cpp:177
 #: ui/qtsystemtrayicon.cpp:203 wiimotedev/wiimotesettingspage.cpp:107
-#: ../bin/src/ui_mainwindow.h:659
+#: ../bin/src/ui_mainwindow.h:672
 msgid "Play"
 msgstr "Çal"
 
@@ -3875,7 +3888,7 @@ msgstr "Tercih"
 msgid "Preferences"
 msgstr "Tercihler"
 
-#: ../bin/src/ui_mainwindow.h:673
+#: ../bin/src/ui_mainwindow.h:686
 msgid "Preferences..."
 msgstr "Tercihler..."
 
@@ -3935,7 +3948,7 @@ msgid "Previous"
 msgstr "Önceki"
 
 #: core/globalshortcuts.cpp:59 wiimotedev/wiimotesettingspage.cpp:106
-#: ../bin/src/ui_mainwindow.h:658
+#: ../bin/src/ui_mainwindow.h:671
 msgid "Previous track"
 msgstr "Önceki parça"
 
@@ -3986,16 +3999,16 @@ msgstr "Kalite"
 msgid "Querying device..."
 msgstr "Aygıt sorgulanıyor..."
 
-#: ../bin/src/ui_queuemanager.h:124 ../bin/src/ui_mainwindow.h:700
+#: ../bin/src/ui_queuemanager.h:124 ../bin/src/ui_mainwindow.h:713
 msgid "Queue Manager"
 msgstr "Kuyruk Yöneticisi"
 
-#: ui/mainwindow.cpp:1729
+#: ui/mainwindow.cpp:1735
 msgid "Queue selected tracks"
 msgstr "Seçili parçaları kuyruğa ekle"
 
 #: globalsearch/globalsearchview.cpp:466 library/libraryview.cpp:389
-#: ui/mainwindow.cpp:1727
+#: ui/mainwindow.cpp:1733
 msgid "Queue track"
 msgstr "Parçayı kuyruğa ekle"
 
@@ -4007,7 +4020,7 @@ msgstr "Radyo (tüm parçalar için eşit ses seviyesi)"
 msgid "Rain"
 msgstr "Yağmur"
 
-#: ../bin/src/ui_mainwindow.h:681
+#: ../bin/src/ui_mainwindow.h:694
 msgctxt "Label for button to enable/disable rain background sound."
 msgid "Rain"
 msgstr "Yağmur"
@@ -4111,7 +4124,7 @@ msgstr "Kaldır"
 msgid "Remove action"
 msgstr "Eylemi kaldır"
 
-#: ../bin/src/ui_mainwindow.h:707
+#: ../bin/src/ui_mainwindow.h:720
 msgid "Remove duplicates from playlist"
 msgstr "Şarkı listesindeki çiftleri birleştir"
 
@@ -4127,7 +4140,7 @@ msgstr "Müziklerimden sil"
 msgid "Remove from bookmarks"
 msgstr "Yer imlerinden kaldır"
 
-#: internet/spotify/spotifyservice.cpp:681 ../bin/src/ui_mainwindow.h:688
+#: internet/spotify/spotifyservice.cpp:681 ../bin/src/ui_mainwindow.h:701
 msgid "Remove from playlist"
 msgstr "Çalma listesinden kaldır"
 
@@ -4139,7 +4152,7 @@ msgstr "Çalma listesini kaldır"
 msgid "Remove playlists"
 msgstr "Çalma listesini kaldır"
 
-#: ../bin/src/ui_mainwindow.h:713
+#: ../bin/src/ui_mainwindow.h:726
 msgid "Remove unavailable tracks from playlist"
 msgstr "Şarkı listesindeki kullanılamayan parçaları kaldır"
 
@@ -4151,7 +4164,7 @@ msgstr "Çalma listesini yeniden adlandır"
 msgid "Rename playlist..."
 msgstr "Çalma listesini yeniden adlandır..."
 
-#: ../bin/src/ui_mainwindow.h:670
+#: ../bin/src/ui_mainwindow.h:683
 msgid "Renumber tracks in this order..."
 msgstr "Parçaları bu sırada hatırla..."
 
@@ -4242,7 +4255,7 @@ msgstr "Dönüştür"
 msgid "Rip CD"
 msgstr "CD Dönüştür"
 
-#: ../bin/src/ui_mainwindow.h:712
+#: ../bin/src/ui_mainwindow.h:725
 msgid "Rip audio CD"
 msgstr "Ses CD'si dönüştür"
 
@@ -4311,7 +4324,7 @@ msgctxt "Title of the playlist save dialog."
 msgid "Save playlist"
 msgstr "Çalma listesini kaydet"
 
-#: playlist/playlisttabbar.cpp:59 ../bin/src/ui_mainwindow.h:694
+#: playlist/playlisttabbar.cpp:59 ../bin/src/ui_mainwindow.h:707
 msgid "Save playlist..."
 msgstr "Çalma listesini kaydet..."
 
@@ -4516,7 +4529,7 @@ msgstr "Sunucu ayrıntıları"
 msgid "Service offline"
 msgstr "Hizmet çevrim dışı"
 
-#: ui/mainwindow.cpp:1766
+#: ui/mainwindow.cpp:1772
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr "%1'i \"%2\" olarak ayarla"
@@ -4525,7 +4538,7 @@ msgstr "%1'i \"%2\" olarak ayarla"
 msgid "Set the volume to <value> percent"
 msgstr "Ses seviyesini yüzde <value> yap"
 
-#: ../bin/src/ui_mainwindow.h:671
+#: ../bin/src/ui_mainwindow.h:684
 msgid "Set value for all selected tracks..."
 msgstr "Seçili tüm parçalar için değeri ayarla..."
 
@@ -4592,7 +4605,7 @@ msgstr "Şirin bir OSD göster"
 msgid "Show above status bar"
 msgstr "Durum çubuğunun üzerinde göster"
 
-#: ui/mainwindow.cpp:637
+#: ui/mainwindow.cpp:639
 msgid "Show all songs"
 msgstr "Tüm şarkıları göster"
 
@@ -4616,12 +4629,12 @@ msgstr "Tam boyutta göster"
 msgid "Show groups in global search result"
 msgstr "Genel arama sonuçlarında grupları göster"
 
-#: library/libraryview.cpp:423 ui/mainwindow.cpp:708
+#: library/libraryview.cpp:423 ui/mainwindow.cpp:710
 #: widgets/fileviewlist.cpp:53
 msgid "Show in file browser..."
 msgstr "Dosya gözatıcısında göster..."
 
-#: ui/mainwindow.cpp:710
+#: ui/mainwindow.cpp:712
 msgid "Show in library..."
 msgstr "Kütüphanede göster..."
 
@@ -4633,13 +4646,17 @@ msgstr "Çeşitli sanatçılarda göster"
 msgid "Show moodbar"
 msgstr "Atmosfer çubuğunu göster"
 
-#: ui/mainwindow.cpp:639
+#: ui/mainwindow.cpp:641
 msgid "Show only duplicates"
 msgstr "Sadece aynı olanları göster"
 
-#: ui/mainwindow.cpp:641
+#: ui/mainwindow.cpp:643
 msgid "Show only untagged"
 msgstr "Sadece etiketi olmayanları göster"
+
+#: ../bin/src/ui_mainwindow.h:729
+msgid "Show or hide the sidebar"
+msgstr ""
 
 #: ../bin/src/ui_vksettingspage.h:220
 msgid "Show playing song on your page"
@@ -4648,6 +4665,10 @@ msgstr "Sayfanızda oynatılan parçayı göster"
 #: ../bin/src/ui_globalsearchsettingspage.h:149
 msgid "Show search suggestions"
 msgstr "Arama önerilerini göster"
+
+#: ../bin/src/ui_mainwindow.h:727
+msgid "Show sidebar"
+msgstr ""
 
 #: ../bin/src/ui_lastfmsettingspage.h:136
 msgid "Show the \"love\" button"
@@ -4681,7 +4702,7 @@ msgstr "Albümleri karıştır"
 msgid "Shuffle all"
 msgstr "Hepsini karıştır"
 
-#: ../bin/src/ui_mainwindow.h:675
+#: ../bin/src/ui_mainwindow.h:688
 msgid "Shuffle playlist"
 msgstr "Çalma listesini karıştır"
 
@@ -4725,11 +4746,11 @@ msgstr "Atlama sayısı"
 msgid "Skip forwards in playlist"
 msgstr "Parça listesinde ileri git"
 
-#: ui/mainwindow.cpp:1740
+#: ui/mainwindow.cpp:1746
 msgid "Skip selected tracks"
 msgstr "Seçili parçaları atla"
 
-#: ui/mainwindow.cpp:1738
+#: ui/mainwindow.cpp:1744
 msgid "Skip track"
 msgstr "Parçayı atla"
 
@@ -4872,7 +4893,7 @@ msgid "Starting..."
 msgstr "Başlatılıyor..."
 
 #: core/globalshortcuts.cpp:53 wiimotedev/wiimotesettingspage.cpp:108
-#: ../bin/src/ui_mainwindow.h:660
+#: ../bin/src/ui_mainwindow.h:673
 msgid "Stop"
 msgstr "Durdur"
 
@@ -4888,7 +4909,7 @@ msgstr "Her parçadan sonra dur"
 msgid "Stop after every track"
 msgstr "Her parçadan sonra dur"
 
-#: ui/mainwindow.cpp:674 ../bin/src/ui_mainwindow.h:663
+#: ui/mainwindow.cpp:676 ../bin/src/ui_mainwindow.h:676
 msgid "Stop after this track"
 msgstr "Bu parçadan sonra durdur"
 
@@ -5044,7 +5065,7 @@ msgid ""
 "license key. Visit subsonic.org for details."
 msgstr "Subsonic sunucusunun deneme süresi bitti. Lisans anahtarı almak için lütfen bağış yapın. Ayrıntılar için subsonic.org'u ziyaret edin."
 
-#: ui/mainwindow.cpp:2517
+#: ui/mainwindow.cpp:2523
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -5086,7 +5107,7 @@ msgid ""
 "continue?"
 msgstr "Bu dosyalar aygıttan silinecek, devam etmek istiyor musunuz?"
 
-#: library/libraryview.cpp:646 ui/mainwindow.cpp:2337 widgets/fileview.cpp:189
+#: library/libraryview.cpp:646 ui/mainwindow.cpp:2343 widgets/fileview.cpp:189
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -5189,11 +5210,11 @@ msgstr "Şirin OSD'yi Aç/Kapa"
 msgid "Toggle fullscreen"
 msgstr "Tam ekran göster/gizle"
 
-#: ui/mainwindow.cpp:1731
+#: ui/mainwindow.cpp:1737
 msgid "Toggle queue status"
 msgstr "Kuyruk durumunu göster/gizle"
 
-#: ../bin/src/ui_mainwindow.h:705
+#: ../bin/src/ui_mainwindow.h:718
 msgid "Toggle scrobbling"
 msgstr "Skroplamayı aç/kapa"
 
@@ -5242,7 +5263,7 @@ msgstr "Parça"
 msgid "Tracks"
 msgstr "Parçalar"
 
-#: ../bin/src/ui_transcodedialog.h:213 ../bin/src/ui_mainwindow.h:690
+#: ../bin/src/ui_transcodedialog.h:213 ../bin/src/ui_mainwindow.h:703
 msgid "Transcode Music"
 msgstr "Müzik Dönüştür"
 
@@ -5323,11 +5344,11 @@ msgstr "Bilinmeyen hata"
 msgid "Unset cover"
 msgstr "Albüm kapağını çıkar"
 
-#: ui/mainwindow.cpp:1736
+#: ui/mainwindow.cpp:1742
 msgid "Unskip selected tracks"
 msgstr "Seçili parçaları atlama"
 
-#: ui/mainwindow.cpp:1734
+#: ui/mainwindow.cpp:1740
 msgid "Unskip track"
 msgstr "Parçayı atlama"
 
@@ -5348,7 +5369,7 @@ msgstr "Güncelle"
 msgid "Update all podcasts"
 msgstr "Bütün podcastları güncelle"
 
-#: ../bin/src/ui_mainwindow.h:698
+#: ../bin/src/ui_mainwindow.h:711
 msgid "Update changed library folders"
 msgstr "Değişen kütüphane klasörlerini güncelle"
 
@@ -5501,7 +5522,7 @@ msgstr "Görünüm"
 msgid "Visualization mode"
 msgstr "Görüntüleme kipi"
 
-#: ui/dbusscreensaver.cpp:33 ../bin/src/ui_mainwindow.h:699
+#: ui/dbusscreensaver.cpp:33 ../bin/src/ui_mainwindow.h:712
 msgid "Visualizations"
 msgstr "Görseller"
 
@@ -5641,7 +5662,7 @@ msgid ""
 "well?"
 msgstr "Bu albümdeki diğer şarkıları da Çeşitli Sanatçılar'a taşımak ister misiniz?"
 
-#: ui/mainwindow.cpp:2524
+#: ui/mainwindow.cpp:2530
 msgid "Would you like to run a full rescan right now?"
 msgstr "Şu anda tam bir yeniden tarama çalıştırmak ister misiniz?"
 

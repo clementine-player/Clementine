@@ -15,7 +15,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2016-08-26 14:20+0000\n"
+"PO-Revision-Date: 2016-09-06 12:48+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Japanese (http://www.transifex.com/davidsansome/clementine/language/ja/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -192,7 +192,7 @@ msgstr "中央揃え(&C)"
 msgid "&Custom"
 msgstr "カスタム(&C)"
 
-#: ../bin/src/ui_mainwindow.h:718
+#: ../bin/src/ui_mainwindow.h:735
 msgid "&Extras"
 msgstr "おまけ(&E)"
 
@@ -200,7 +200,7 @@ msgstr "おまけ(&E)"
 msgid "&Grouping"
 msgstr ""
 
-#: ../bin/src/ui_mainwindow.h:717
+#: ../bin/src/ui_mainwindow.h:734
 msgid "&Help"
 msgstr "ヘルプ(&H)"
 
@@ -225,7 +225,7 @@ msgstr "評価をロック(&L)"
 msgid "&Lyrics"
 msgstr ""
 
-#: ../bin/src/ui_mainwindow.h:715
+#: ../bin/src/ui_mainwindow.h:732
 msgid "&Music"
 msgstr "ミュージック(&M)"
 
@@ -233,15 +233,15 @@ msgstr "ミュージック(&M)"
 msgid "&None"
 msgstr "なし(&N)"
 
-#: ../bin/src/ui_mainwindow.h:716
+#: ../bin/src/ui_mainwindow.h:733
 msgid "&Playlist"
 msgstr "プレイリスト(&P)"
 
-#: ../bin/src/ui_mainwindow.h:662
+#: ../bin/src/ui_mainwindow.h:675
 msgid "&Quit"
 msgstr "終了(&Q)"
 
-#: ../bin/src/ui_mainwindow.h:687
+#: ../bin/src/ui_mainwindow.h:700
 msgid "&Repeat mode"
 msgstr "リピートモード(&R)"
 
@@ -249,7 +249,7 @@ msgstr "リピートモード(&R)"
 msgid "&Right"
 msgstr "右揃え(&R)"
 
-#: ../bin/src/ui_mainwindow.h:686
+#: ../bin/src/ui_mainwindow.h:699
 msgid "&Shuffle mode"
 msgstr "シャッフルモード(&S)"
 
@@ -257,7 +257,7 @@ msgstr "シャッフルモード(&S)"
 msgid "&Stretch columns to fit window"
 msgstr "列の幅をウィンドウに合わせる(&S)"
 
-#: ../bin/src/ui_mainwindow.h:719
+#: ../bin/src/ui_mainwindow.h:736
 msgid "&Tools"
 msgstr "ツール(&T)"
 
@@ -359,6 +359,15 @@ msgid ""
 "activated.</p></body></html>"
 msgstr ""
 
+#: songinfo/artistbiography.cpp:265
+#, qt-format
+msgid ""
+"<p>This article uses material from the Wikipedia article <a "
+"href=\"%1\">%2</a>, which is released under the <a href=\"https"
+"://clementine-player.org/licenses/by-sa/3.0/legalcode.txt\">Creative Commons"
+" Attribution-Share-Alike License 3.0</a>.</p>"
+msgstr ""
+
 #: ../bin/src/ui_organisedialog.h:250
 msgid ""
 "<p>Tokens start with %, for example: %artist %album %title </p>\n"
@@ -428,11 +437,11 @@ msgstr "中止"
 msgid "About %1"
 msgstr "%1 について"
 
-#: ../bin/src/ui_mainwindow.h:674
+#: ../bin/src/ui_mainwindow.h:687
 msgid "About Clementine..."
 msgstr "Clementine について..."
 
-#: ../bin/src/ui_mainwindow.h:701
+#: ../bin/src/ui_mainwindow.h:714
 msgid "About Qt..."
 msgstr "Qt について..."
 
@@ -496,19 +505,19 @@ msgstr "別のストリームを追加..."
 msgid "Add directory..."
 msgstr "ディレクトリを追加..."
 
-#: ui/mainwindow.cpp:1982
+#: ui/mainwindow.cpp:1988
 msgid "Add file"
 msgstr "ファイルを追加"
 
-#: ../bin/src/ui_mainwindow.h:710
+#: ../bin/src/ui_mainwindow.h:723
 msgid "Add file to transcoder"
 msgstr "ファイルをトランスコーダーに追加する"
 
-#: ../bin/src/ui_mainwindow.h:708
+#: ../bin/src/ui_mainwindow.h:721
 msgid "Add file(s) to transcoder"
 msgstr "ファイルをトランスコーダーに追加する"
 
-#: ../bin/src/ui_transcodedialog.h:218 ../bin/src/ui_mainwindow.h:676
+#: ../bin/src/ui_transcodedialog.h:218 ../bin/src/ui_mainwindow.h:689
 msgid "Add file..."
 msgstr "ファイルを追加..."
 
@@ -516,12 +525,12 @@ msgstr "ファイルを追加..."
 msgid "Add files to transcode"
 msgstr "変換するファイルを追加"
 
-#: transcoder/transcodedialog.cpp:306 ui/mainwindow.cpp:2009
+#: transcoder/transcodedialog.cpp:306 ui/mainwindow.cpp:2015
 #: ripper/ripcddialog.cpp:185
 msgid "Add folder"
 msgstr "フォルダーを追加"
 
-#: ../bin/src/ui_mainwindow.h:691
+#: ../bin/src/ui_mainwindow.h:704
 msgid "Add folder..."
 msgstr "フォルダーを追加..."
 
@@ -533,7 +542,7 @@ msgstr "新しいフォルダーを追加..."
 msgid "Add podcast"
 msgstr "ポッドキャストを追加"
 
-#: internet/podcasts/podcastservice.cpp:418 ../bin/src/ui_mainwindow.h:706
+#: internet/podcasts/podcastservice.cpp:418 ../bin/src/ui_mainwindow.h:719
 msgid "Add podcast..."
 msgstr "ポッドキャストを追加..."
 
@@ -617,7 +626,7 @@ msgstr "曲の年タグを追加"
 msgid "Add songs to \"My Music\" when the \"Love\" button is clicked"
 msgstr "「Love」ボタンをクリックしたときに「マイミュージック」に曲を追加する"
 
-#: ../bin/src/ui_mainwindow.h:677
+#: ../bin/src/ui_mainwindow.h:690
 msgid "Add stream..."
 msgstr "ストリームを追加..."
 
@@ -633,7 +642,7 @@ msgstr "Spotify のプレイリストに追加する"
 msgid "Add to Spotify starred"
 msgstr "Spotify の星付きトラックを追加する"
 
-#: ui/mainwindow.cpp:1804
+#: ui/mainwindow.cpp:1810
 msgid "Add to another playlist"
 msgstr "別のプレイリストに追加する"
 
@@ -679,7 +688,7 @@ msgstr "今日追加されたもの"
 msgid "Added within three months"
 msgstr "3 ヶ月以内に追加されたもの"
 
-#: library/libraryfilterwidget.cpp:186
+#: library/libraryfilterwidget.cpp:190
 msgid "Advanced grouping..."
 msgstr "高度なグループ化..."
 
@@ -739,7 +748,7 @@ msgstr ""
 msgid "All Files (*)"
 msgstr "すべてのファイル (*)"
 
-#: ../bin/src/ui_mainwindow.h:682
+#: ../bin/src/ui_mainwindow.h:695
 msgctxt "Label for button to enable/disable Hypnotoad background sound."
 msgid "All Glory to the Hypnotoad!"
 msgstr ""
@@ -1151,7 +1160,7 @@ msgstr "新しいエピソードのチェック"
 msgid "Check for updates"
 msgstr "更新の確認"
 
-#: ui/mainwindow.cpp:803
+#: ui/mainwindow.cpp:805
 msgid "Check for updates..."
 msgstr "更新のチェック..."
 
@@ -1209,13 +1218,13 @@ msgstr "整理"
 msgid "Clear"
 msgstr "クリア"
 
-#: ../bin/src/ui_mainwindow.h:665 ../bin/src/ui_mainwindow.h:667
+#: ../bin/src/ui_mainwindow.h:678 ../bin/src/ui_mainwindow.h:680
 msgid "Clear playlist"
 msgstr "プレイリストをクリア"
 
 #: smartplaylists/searchtermwidget.cpp:345
 #: visualisations/visualisationcontainer.cpp:215
-#: ../bin/src/ui_mainwindow.h:657 ../bin/src/ui_visualisationoverlay.h:182
+#: ../bin/src/ui_mainwindow.h:670 ../bin/src/ui_visualisationoverlay.h:182
 msgid "Clementine"
 msgstr "Clementine"
 
@@ -1361,7 +1370,7 @@ msgstr "コミュニティラジオ"
 msgid "Complete tags automatically"
 msgstr "タグの自動補完"
 
-#: ../bin/src/ui_mainwindow.h:704
+#: ../bin/src/ui_mainwindow.h:717
 msgid "Complete tags automatically..."
 msgstr "タグを自動補完..."
 
@@ -1404,7 +1413,7 @@ msgstr "VK.com の設定..."
 msgid "Configure global search..."
 msgstr "全体検索の設定..."
 
-#: ui/mainwindow.cpp:653
+#: ui/mainwindow.cpp:655
 msgid "Configure library..."
 msgstr "ライブラリの設定..."
 
@@ -1447,7 +1456,7 @@ msgstr "接続がタイムアウトしました。サーバーの URL を確認�
 msgid "Connection trouble or audio is disabled by owner"
 msgstr "接続の問題またはオーディオが所有者により無効化されています"
 
-#: ../bin/src/ui_console.h:79 ../bin/src/ui_mainwindow.h:685
+#: ../bin/src/ui_console.h:79 ../bin/src/ui_mainwindow.h:698
 msgid "Console"
 msgstr "コンソール"
 
@@ -1480,11 +1489,11 @@ msgid "Copy to clipboard"
 msgstr "クリップボードにコピー"
 
 #: library/libraryview.cpp:409 internet/podcasts/podcastservice.cpp:438
-#: ui/mainwindow.cpp:702 widgets/fileviewlist.cpp:44
+#: ui/mainwindow.cpp:704 widgets/fileviewlist.cpp:44
 msgid "Copy to device..."
 msgstr "デバイスへコピー..."
 
-#: devices/deviceview.cpp:228 ui/mainwindow.cpp:692
+#: devices/deviceview.cpp:228 ui/mainwindow.cpp:694
 #: widgets/fileviewlist.cpp:40
 msgid "Copy to library..."
 msgstr "ライブラリへコピー..."
@@ -1532,7 +1541,7 @@ msgstr "出力ファイル %1 を開けませんでした"
 #: internet/core/cloudfileservice.cpp:103
 #: internet/googledrive/googledriveservice.cpp:228
 #: ../bin/src/ui_albumcovermanager.h:214
-#: ../bin/src/ui_albumcoversearcher.h:104 ../bin/src/ui_mainwindow.h:680
+#: ../bin/src/ui_albumcoversearcher.h:104 ../bin/src/ui_mainwindow.h:693
 msgid "Cover Manager"
 msgstr "カバーマネージャー"
 
@@ -1673,7 +1682,7 @@ msgid "Delete downloaded data"
 msgstr "ダウンロード済みデータを削除"
 
 #: devices/deviceview.cpp:408 library/libraryview.cpp:645
-#: ui/mainwindow.cpp:2336 widgets/fileview.cpp:188
+#: ui/mainwindow.cpp:2342 widgets/fileview.cpp:188
 msgid "Delete files"
 msgstr "ファイルの削除"
 
@@ -1681,7 +1690,7 @@ msgstr "ファイルの削除"
 msgid "Delete from device..."
 msgstr "デバイスから削除..."
 
-#: library/libraryview.cpp:411 ui/mainwindow.cpp:705
+#: library/libraryview.cpp:411 ui/mainwindow.cpp:707
 #: widgets/fileviewlist.cpp:47
 msgid "Delete from disk..."
 msgstr "ディスクから削除..."
@@ -1706,11 +1715,11 @@ msgstr "元のファイルを削除する"
 msgid "Deleting files"
 msgstr "ファイルの削除中"
 
-#: ui/mainwindow.cpp:1725
+#: ui/mainwindow.cpp:1731
 msgid "Dequeue selected tracks"
 msgstr "選択されたトラックをキューから削除する"
 
-#: ui/mainwindow.cpp:1723
+#: ui/mainwindow.cpp:1729
 msgid "Dequeue track"
 msgstr "トラックをキューから削除"
 
@@ -1811,7 +1820,7 @@ msgstr "画面のオプション"
 msgid "Display the on-screen-display"
 msgstr "OSD を表示する"
 
-#: ../bin/src/ui_mainwindow.h:703
+#: ../bin/src/ui_mainwindow.h:716
 msgid "Do a full library rescan"
 msgstr "ライブラリ全体を再スキャン"
 
@@ -1982,12 +1991,12 @@ msgstr "ダイナミックランダムミックス"
 msgid "Edit smart playlist..."
 msgstr "スマートプレイリストの編集..."
 
-#: ui/mainwindow.cpp:1767
+#: ui/mainwindow.cpp:1773
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr "タグ「%1」を編集..."
 
-#: ../bin/src/ui_mainwindow.h:672
+#: ../bin/src/ui_mainwindow.h:685
 msgid "Edit tag..."
 msgstr "タグの編集..."
 
@@ -2000,7 +2009,7 @@ msgid "Edit track information"
 msgstr "トラック情報の編集"
 
 #: library/libraryview.cpp:416 widgets/fileviewlist.cpp:51
-#: ../bin/src/ui_mainwindow.h:669
+#: ../bin/src/ui_mainwindow.h:682
 msgid "Edit track information..."
 msgstr "トラック情報の編集..."
 
@@ -2108,7 +2117,7 @@ msgstr "この IP アドレスをアプリケーションに入力して Clement
 msgid "Entire collection"
 msgstr "コレクション全体"
 
-#: ../bin/src/ui_equalizer.h:162 ../bin/src/ui_mainwindow.h:689
+#: ../bin/src/ui_equalizer.h:162 ../bin/src/ui_mainwindow.h:702
 msgid "Equalizer"
 msgstr "イコライザー"
 
@@ -2121,8 +2130,8 @@ msgid "Equivalent to --log-levels *:3"
 msgstr "--log-levels *:3 と同じ"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:246
-#: library/libraryview.cpp:639 ui/mainwindow.cpp:2038 ui/mainwindow.cpp:2288
-#: ui/mainwindow.cpp:2434 internet/vk/vkservice.cpp:643
+#: library/libraryview.cpp:639 ui/mainwindow.cpp:2044 ui/mainwindow.cpp:2294
+#: ui/mainwindow.cpp:2440 internet/vk/vkservice.cpp:643
 msgid "Error"
 msgstr "エラー"
 
@@ -2262,7 +2271,7 @@ msgstr "フェード"
 msgid "Fading duration"
 msgstr "フェードの長さ"
 
-#: ui/mainwindow.cpp:2039
+#: ui/mainwindow.cpp:2045
 msgid "Failed reading CD drive"
 msgstr "CD ドライブの読み込みが失敗しました"
 
@@ -2532,11 +2541,11 @@ msgstr "名前を入力してください:"
 msgid "Go"
 msgstr "進む"
 
-#: ../bin/src/ui_mainwindow.h:696
+#: ../bin/src/ui_mainwindow.h:709
 msgid "Go to next playlist tab"
 msgstr "次のプレイリストタブへ"
 
-#: ../bin/src/ui_mainwindow.h:697
+#: ../bin/src/ui_mainwindow.h:710
 msgid "Go to previous playlist tab"
 msgstr "前のプレイリストタブへ"
 
@@ -2562,9 +2571,13 @@ msgstr "ライブラリのグループ化..."
 msgid "Group by"
 msgstr "グループ化"
 
-#: library/libraryfilterwidget.cpp:154
+#: library/libraryfilterwidget.cpp:158
 msgid "Group by Album"
 msgstr "アルバムでグループ化"
+
+#: library/libraryfilterwidget.cpp:150
+msgid "Group by Album artist/Album"
+msgstr ""
 
 #: library/libraryfilterwidget.cpp:143
 msgid "Group by Artist"
@@ -2574,15 +2587,15 @@ msgstr "アーティストでグループ化"
 msgid "Group by Artist/Album"
 msgstr "アーティスト/アルバムでグループ化"
 
-#: library/libraryfilterwidget.cpp:150
+#: library/libraryfilterwidget.cpp:154
 msgid "Group by Artist/Year - Album"
 msgstr "アーティスト/年 - アルバムでグループ化"
 
-#: library/libraryfilterwidget.cpp:157
+#: library/libraryfilterwidget.cpp:161
 msgid "Group by Genre/Album"
 msgstr "ジャンル/アルバムでグループ化"
 
-#: library/libraryfilterwidget.cpp:161
+#: library/libraryfilterwidget.cpp:165
 msgid "Group by Genre/Artist/Album"
 msgstr "ジャンル/アーティスト/アルバムでグループ化"
 
@@ -2592,11 +2605,11 @@ msgstr "ジャンル/アーティスト/アルバムでグループ化"
 msgid "Grouping"
 msgstr "分類"
 
-#: library/libraryfilterwidget.cpp:207
+#: library/libraryfilterwidget.cpp:211
 msgid "Grouping Name"
 msgstr "分類名"
 
-#: library/libraryfilterwidget.cpp:207
+#: library/libraryfilterwidget.cpp:211
 msgid "Grouping name:"
 msgstr "分類名:"
 
@@ -2853,7 +2866,7 @@ msgstr "Jamendo のデータベース"
 msgid "Jump to previous song right away"
 msgstr "すぐに前の曲にジャンプ"
 
-#: ../bin/src/ui_mainwindow.h:692
+#: ../bin/src/ui_mainwindow.h:705
 msgid "Jump to the currently playing track"
 msgstr "現在再生中のトラックへジャンプ"
 
@@ -2877,7 +2890,7 @@ msgstr "ウィンドウを閉じたときバックグラウンドで起動し続
 msgid "Keep the original files"
 msgstr "元のファイルを保持する"
 
-#: ../bin/src/ui_mainwindow.h:684
+#: ../bin/src/ui_mainwindow.h:697
 msgctxt "Label for buton to enable/disable kittens in the now playing widget"
 msgid "Kittens"
 msgstr "Kittens"
@@ -2973,7 +2986,7 @@ msgstr "ライブラリ"
 msgid "Library advanced grouping"
 msgstr "ライブラリの高度なグループ化"
 
-#: ui/mainwindow.cpp:2526
+#: ui/mainwindow.cpp:2532
 msgid "Library rescan notice"
 msgstr "ライブラリー再スキャン通知"
 
@@ -3013,7 +3026,7 @@ msgstr "ディスクからカバーの読み込み..."
 msgid "Load playlist"
 msgstr "プレイリストの読み込み"
 
-#: ../bin/src/ui_mainwindow.h:695
+#: ../bin/src/ui_mainwindow.h:708
 msgid "Load playlist..."
 msgstr "プレイリストの読み込み..."
 
@@ -3086,7 +3099,7 @@ msgstr "ログアウト"
 msgid "Long term prediction profile (LTP)"
 msgstr "Long Term Prediction プロファイル (LTP)"
 
-#: ../bin/src/ui_mainwindow.h:664
+#: ../bin/src/ui_mainwindow.h:677
 msgid "Love"
 msgstr "Love"
 
@@ -3167,7 +3180,7 @@ msgstr "Main プロファイル (MAIN)"
 msgid "Make it so!"
 msgstr "Make it so!"
 
-#: ../bin/src/ui_mainwindow.h:683
+#: ../bin/src/ui_mainwindow.h:696
 msgctxt "Label for button to enable/disable Enterprise background sound."
 msgid "Make it so!"
 msgstr "Make it so!"
@@ -3301,7 +3314,7 @@ msgstr "マウントポイント"
 msgid "Move down"
 msgstr "下へ移動"
 
-#: ui/mainwindow.cpp:695 widgets/fileviewlist.cpp:42
+#: ui/mainwindow.cpp:697 widgets/fileviewlist.cpp:42
 msgid "Move to library..."
 msgstr "ライブラリへ移動..."
 
@@ -3310,7 +3323,7 @@ msgstr "ライブラリへ移動..."
 msgid "Move up"
 msgstr "上へ移動"
 
-#: transcoder/transcodedialog.cpp:225 ui/mainwindow.cpp:1983
+#: transcoder/transcodedialog.cpp:225 ui/mainwindow.cpp:1989
 #: internet/vk/vkservice.cpp:908
 msgid "Music"
 msgstr "ミュージック"
@@ -3320,7 +3333,7 @@ msgid "Music Library"
 msgstr "ミュージックライブラリ"
 
 #: core/globalshortcuts.cpp:63 wiimotedev/wiimotesettingspage.cpp:113
-#: ../bin/src/ui_mainwindow.h:702
+#: ../bin/src/ui_mainwindow.h:715
 msgid "Mute"
 msgstr "ミュート"
 
@@ -3381,7 +3394,7 @@ msgstr "再生を開始しない"
 msgid "New folder"
 msgstr "新しいフォルダー"
 
-#: ui/mainwindow.cpp:1821 ../bin/src/ui_mainwindow.h:693
+#: ui/mainwindow.cpp:1827 ../bin/src/ui_mainwindow.h:706
 msgid "New playlist"
 msgstr "新しいプレイリスト"
 
@@ -3410,7 +3423,7 @@ msgid "Next"
 msgstr "次へ"
 
 #: core/globalshortcuts.cpp:57 wiimotedev/wiimotesettingspage.cpp:104
-#: ../bin/src/ui_mainwindow.h:661
+#: ../bin/src/ui_mainwindow.h:674
 msgid "Next track"
 msgstr "次のトラック"
 
@@ -3448,7 +3461,7 @@ msgstr "短いブロックなし"
 msgid "None"
 msgstr "なし"
 
-#: library/libraryview.cpp:640 ui/mainwindow.cpp:2289 ui/mainwindow.cpp:2435
+#: library/libraryview.cpp:640 ui/mainwindow.cpp:2295 ui/mainwindow.cpp:2441
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "デバイスへのコピーに適切な曲が選択されていません"
 
@@ -3582,7 +3595,7 @@ msgstr "不透明度"
 msgid "Open %1 in browser"
 msgstr "%1 をブラウザーで開く"
 
-#: ../bin/src/ui_mainwindow.h:679
+#: ../bin/src/ui_mainwindow.h:692
 msgid "Open &audio CD..."
 msgstr "オーディオ CD を開く(&A)..."
 
@@ -3602,7 +3615,7 @@ msgstr "音楽を取り込むディレクトリを開く"
 msgid "Open device"
 msgstr "デバイスを開く"
 
-#: ../bin/src/ui_mainwindow.h:678
+#: ../bin/src/ui_mainwindow.h:691
 msgid "Open file..."
 msgstr "ファイルを開く..."
 
@@ -3656,7 +3669,7 @@ msgstr "Opus"
 msgid "Organise Files"
 msgstr "ファイルの整理"
 
-#: library/libraryview.cpp:405 ui/mainwindow.cpp:698
+#: library/libraryview.cpp:405 ui/mainwindow.cpp:700
 msgid "Organise files..."
 msgstr "ファイルの整理..."
 
@@ -3736,7 +3749,7 @@ msgstr "パーティー"
 msgid "Password"
 msgstr "パスワード"
 
-#: core/globalshortcuts.cpp:50 ui/mainwindow.cpp:1136 ui/mainwindow.cpp:1632
+#: core/globalshortcuts.cpp:50 ui/mainwindow.cpp:1142 ui/mainwindow.cpp:1638
 #: ui/qtsystemtrayicon.cpp:189 wiimotedev/wiimotesettingspage.cpp:114
 msgid "Pause"
 msgstr "一時停止"
@@ -3764,10 +3777,10 @@ msgstr "ピクセル"
 msgid "Plain sidebar"
 msgstr "プレーンサイドバー"
 
-#: core/globalshortcuts.cpp:49 ui/mainwindow.cpp:670 ui/mainwindow.cpp:1102
-#: ui/mainwindow.cpp:1121 ui/mainwindow.cpp:1636 ui/qtsystemtrayicon.cpp:177
+#: core/globalshortcuts.cpp:49 ui/mainwindow.cpp:672 ui/mainwindow.cpp:1108
+#: ui/mainwindow.cpp:1127 ui/mainwindow.cpp:1642 ui/qtsystemtrayicon.cpp:177
 #: ui/qtsystemtrayicon.cpp:203 wiimotedev/wiimotesettingspage.cpp:107
-#: ../bin/src/ui_mainwindow.h:659
+#: ../bin/src/ui_mainwindow.h:672
 msgid "Play"
 msgstr "再生"
 
@@ -3864,7 +3877,7 @@ msgstr "設定"
 msgid "Preferences"
 msgstr "設定"
 
-#: ../bin/src/ui_mainwindow.h:673
+#: ../bin/src/ui_mainwindow.h:686
 msgid "Preferences..."
 msgstr "設定..."
 
@@ -3924,7 +3937,7 @@ msgid "Previous"
 msgstr "前へ"
 
 #: core/globalshortcuts.cpp:59 wiimotedev/wiimotesettingspage.cpp:106
-#: ../bin/src/ui_mainwindow.h:658
+#: ../bin/src/ui_mainwindow.h:671
 msgid "Previous track"
 msgstr "前のトラック"
 
@@ -3975,16 +3988,16 @@ msgstr "品質"
 msgid "Querying device..."
 msgstr "デバイスを照会しています..."
 
-#: ../bin/src/ui_queuemanager.h:124 ../bin/src/ui_mainwindow.h:700
+#: ../bin/src/ui_queuemanager.h:124 ../bin/src/ui_mainwindow.h:713
 msgid "Queue Manager"
 msgstr "キューマネージャー"
 
-#: ui/mainwindow.cpp:1729
+#: ui/mainwindow.cpp:1735
 msgid "Queue selected tracks"
 msgstr "選択されたトラックをキューに追加"
 
 #: globalsearch/globalsearchview.cpp:466 library/libraryview.cpp:389
-#: ui/mainwindow.cpp:1727
+#: ui/mainwindow.cpp:1733
 msgid "Queue track"
 msgstr "トラックをキューに追加"
 
@@ -3996,7 +4009,7 @@ msgstr "ラジオ (すべてのトラックで均一の音量)"
 msgid "Rain"
 msgstr "Rain"
 
-#: ../bin/src/ui_mainwindow.h:681
+#: ../bin/src/ui_mainwindow.h:694
 msgctxt "Label for button to enable/disable rain background sound."
 msgid "Rain"
 msgstr "Rain"
@@ -4100,7 +4113,7 @@ msgstr "削除"
 msgid "Remove action"
 msgstr "アクションの削除"
 
-#: ../bin/src/ui_mainwindow.h:707
+#: ../bin/src/ui_mainwindow.h:720
 msgid "Remove duplicates from playlist"
 msgstr "重複するものをプレイリストから削除"
 
@@ -4116,7 +4129,7 @@ msgstr "マイミュージックから削除する"
 msgid "Remove from bookmarks"
 msgstr "ブックマークから削除する"
 
-#: internet/spotify/spotifyservice.cpp:681 ../bin/src/ui_mainwindow.h:688
+#: internet/spotify/spotifyservice.cpp:681 ../bin/src/ui_mainwindow.h:701
 msgid "Remove from playlist"
 msgstr "プレイリストから削除"
 
@@ -4128,7 +4141,7 @@ msgstr "プレイリストを削除する"
 msgid "Remove playlists"
 msgstr "プレイリストを削除する"
 
-#: ../bin/src/ui_mainwindow.h:713
+#: ../bin/src/ui_mainwindow.h:726
 msgid "Remove unavailable tracks from playlist"
 msgstr "無効なトラックをプレイリストから削除"
 
@@ -4140,7 +4153,7 @@ msgstr "プレイリストの名前の変更"
 msgid "Rename playlist..."
 msgstr "プレイリストの名前の変更..."
 
-#: ../bin/src/ui_mainwindow.h:670
+#: ../bin/src/ui_mainwindow.h:683
 msgid "Renumber tracks in this order..."
 msgstr "この順序でトラック番号を振る..."
 
@@ -4231,7 +4244,7 @@ msgstr "リッピングする"
 msgid "Rip CD"
 msgstr "CD をリッピングする"
 
-#: ../bin/src/ui_mainwindow.h:712
+#: ../bin/src/ui_mainwindow.h:725
 msgid "Rip audio CD"
 msgstr "オーディオ CD をリッピングする"
 
@@ -4300,7 +4313,7 @@ msgctxt "Title of the playlist save dialog."
 msgid "Save playlist"
 msgstr "プレイリストを保存する"
 
-#: playlist/playlisttabbar.cpp:59 ../bin/src/ui_mainwindow.h:694
+#: playlist/playlisttabbar.cpp:59 ../bin/src/ui_mainwindow.h:707
 msgid "Save playlist..."
 msgstr "プレイリストの保存..."
 
@@ -4505,7 +4518,7 @@ msgstr "サーバーの詳細"
 msgid "Service offline"
 msgstr "サービスがオフラインです"
 
-#: ui/mainwindow.cpp:1766
+#: ui/mainwindow.cpp:1772
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr "%1 を「%2」に設定します..."
@@ -4514,7 +4527,7 @@ msgstr "%1 を「%2」に設定します..."
 msgid "Set the volume to <value> percent"
 msgstr "音量を <value> パーセントへ設定しました"
 
-#: ../bin/src/ui_mainwindow.h:671
+#: ../bin/src/ui_mainwindow.h:684
 msgid "Set value for all selected tracks..."
 msgstr "すべての選択されたトラックの音量を設定しました..."
 
@@ -4581,7 +4594,7 @@ msgstr "Pretty OSD を表示する"
 msgid "Show above status bar"
 msgstr "ステータスバーの上に表示"
 
-#: ui/mainwindow.cpp:637
+#: ui/mainwindow.cpp:639
 msgid "Show all songs"
 msgstr "すべての曲を表示する"
 
@@ -4605,12 +4618,12 @@ msgstr "原寸表示..."
 msgid "Show groups in global search result"
 msgstr "検索結果にグループを表示する"
 
-#: library/libraryview.cpp:423 ui/mainwindow.cpp:708
+#: library/libraryview.cpp:423 ui/mainwindow.cpp:710
 #: widgets/fileviewlist.cpp:53
 msgid "Show in file browser..."
 msgstr "ファイルブラウザーで表示..."
 
-#: ui/mainwindow.cpp:710
+#: ui/mainwindow.cpp:712
 msgid "Show in library..."
 msgstr "ライブラリーに表示..."
 
@@ -4622,13 +4635,17 @@ msgstr "さまざまなアーティストに表示"
 msgid "Show moodbar"
 msgstr "ムードバーを表示する"
 
-#: ui/mainwindow.cpp:639
+#: ui/mainwindow.cpp:641
 msgid "Show only duplicates"
 msgstr "重複するものだけ表示"
 
-#: ui/mainwindow.cpp:641
+#: ui/mainwindow.cpp:643
 msgid "Show only untagged"
 msgstr "タグのないものだけ表示"
+
+#: ../bin/src/ui_mainwindow.h:729
+msgid "Show or hide the sidebar"
+msgstr ""
 
 #: ../bin/src/ui_vksettingspage.h:220
 msgid "Show playing song on your page"
@@ -4637,6 +4654,10 @@ msgstr "再生中の曲をページに表示する"
 #: ../bin/src/ui_globalsearchsettingspage.h:149
 msgid "Show search suggestions"
 msgstr "検索のおすすめを表示する"
+
+#: ../bin/src/ui_mainwindow.h:727
+msgid "Show sidebar"
+msgstr ""
 
 #: ../bin/src/ui_lastfmsettingspage.h:136
 msgid "Show the \"love\" button"
@@ -4670,7 +4691,7 @@ msgstr "アルバムをシャッフル"
 msgid "Shuffle all"
 msgstr "すべてシャッフル"
 
-#: ../bin/src/ui_mainwindow.h:675
+#: ../bin/src/ui_mainwindow.h:688
 msgid "Shuffle playlist"
 msgstr "プレイリストをシャッフル"
 
@@ -4714,11 +4735,11 @@ msgstr "スキップ回数"
 msgid "Skip forwards in playlist"
 msgstr "プレイリストで前にスキップ"
 
-#: ui/mainwindow.cpp:1740
+#: ui/mainwindow.cpp:1746
 msgid "Skip selected tracks"
 msgstr "選択したトラックをスキップする"
 
-#: ui/mainwindow.cpp:1738
+#: ui/mainwindow.cpp:1744
 msgid "Skip track"
 msgstr "トラックをスキップする"
 
@@ -4861,7 +4882,7 @@ msgid "Starting..."
 msgstr "開始しています..."
 
 #: core/globalshortcuts.cpp:53 wiimotedev/wiimotesettingspage.cpp:108
-#: ../bin/src/ui_mainwindow.h:660
+#: ../bin/src/ui_mainwindow.h:673
 msgid "Stop"
 msgstr "停止"
 
@@ -4877,7 +4898,7 @@ msgstr "各トラック後に停止"
 msgid "Stop after every track"
 msgstr "各トラック後に停止"
 
-#: ui/mainwindow.cpp:674 ../bin/src/ui_mainwindow.h:663
+#: ui/mainwindow.cpp:676 ../bin/src/ui_mainwindow.h:676
 msgid "Stop after this track"
 msgstr "このトラック後に停止"
 
@@ -5033,7 +5054,7 @@ msgid ""
 "license key. Visit subsonic.org for details."
 msgstr "Subsonic サーバーのお試し期間は終了しました。寄付してライセンスキーを取得してください。詳細は subsonic.org を参照してください。"
 
-#: ui/mainwindow.cpp:2517
+#: ui/mainwindow.cpp:2523
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -5075,7 +5096,7 @@ msgid ""
 "continue?"
 msgstr "これらのファイルはデバイスから削除されます。続行してもよろしいですか?"
 
-#: library/libraryview.cpp:646 ui/mainwindow.cpp:2337 widgets/fileview.cpp:189
+#: library/libraryview.cpp:646 ui/mainwindow.cpp:2343 widgets/fileview.cpp:189
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -5178,11 +5199,11 @@ msgstr "Pretty OSD の切り替え"
 msgid "Toggle fullscreen"
 msgstr "全画面表示の切り替え"
 
-#: ui/mainwindow.cpp:1731
+#: ui/mainwindow.cpp:1737
 msgid "Toggle queue status"
 msgstr "キュー状態の切り替え"
 
-#: ../bin/src/ui_mainwindow.h:705
+#: ../bin/src/ui_mainwindow.h:718
 msgid "Toggle scrobbling"
 msgstr "scrobbling の切り替え"
 
@@ -5231,7 +5252,7 @@ msgstr "トラック"
 msgid "Tracks"
 msgstr "トラック"
 
-#: ../bin/src/ui_transcodedialog.h:213 ../bin/src/ui_mainwindow.h:690
+#: ../bin/src/ui_transcodedialog.h:213 ../bin/src/ui_mainwindow.h:703
 msgid "Transcode Music"
 msgstr "ミュージックのトランスコード"
 
@@ -5312,11 +5333,11 @@ msgstr "不明なエラー"
 msgid "Unset cover"
 msgstr "カバーを未設定にする"
 
-#: ui/mainwindow.cpp:1736
+#: ui/mainwindow.cpp:1742
 msgid "Unskip selected tracks"
 msgstr "選択したトラックをスキップしない"
 
-#: ui/mainwindow.cpp:1734
+#: ui/mainwindow.cpp:1740
 msgid "Unskip track"
 msgstr "トラックをスキップしない"
 
@@ -5337,7 +5358,7 @@ msgstr "更新"
 msgid "Update all podcasts"
 msgstr "すべてのポッドキャストを更新"
 
-#: ../bin/src/ui_mainwindow.h:698
+#: ../bin/src/ui_mainwindow.h:711
 msgid "Update changed library folders"
 msgstr "変更されたライブラリフォルダーを更新"
 
@@ -5490,7 +5511,7 @@ msgstr "表示"
 msgid "Visualization mode"
 msgstr "ビジュアライゼーションモード"
 
-#: ui/dbusscreensaver.cpp:33 ../bin/src/ui_mainwindow.h:699
+#: ui/dbusscreensaver.cpp:33 ../bin/src/ui_mainwindow.h:712
 msgid "Visualizations"
 msgstr "ビジュアライゼーション"
 
@@ -5630,7 +5651,7 @@ msgid ""
 "well?"
 msgstr "このアルバムにある他の曲も さまざまなアーティスト に移動しますか?"
 
-#: ui/mainwindow.cpp:2524
+#: ui/mainwindow.cpp:2530
 msgid "Would you like to run a full rescan right now?"
 msgstr "全体の再スキャンを今すぐ実行しますか?"
 

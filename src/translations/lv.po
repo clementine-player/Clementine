@@ -12,7 +12,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2016-08-26 14:20+0000\n"
+"PO-Revision-Date: 2016-09-06 12:48+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Latvian (http://www.transifex.com/davidsansome/clementine/language/lv/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -189,7 +189,7 @@ msgstr "&Centrs"
 msgid "&Custom"
 msgstr "&Pielāgots"
 
-#: ../bin/src/ui_mainwindow.h:718
+#: ../bin/src/ui_mainwindow.h:735
 msgid "&Extras"
 msgstr "Ekstras"
 
@@ -197,7 +197,7 @@ msgstr "Ekstras"
 msgid "&Grouping"
 msgstr ""
 
-#: ../bin/src/ui_mainwindow.h:717
+#: ../bin/src/ui_mainwindow.h:734
 msgid "&Help"
 msgstr "&Palīdzība"
 
@@ -222,7 +222,7 @@ msgstr ""
 msgid "&Lyrics"
 msgstr ""
 
-#: ../bin/src/ui_mainwindow.h:715
+#: ../bin/src/ui_mainwindow.h:732
 msgid "&Music"
 msgstr "Mūzika"
 
@@ -230,15 +230,15 @@ msgstr "Mūzika"
 msgid "&None"
 msgstr "&Nav"
 
-#: ../bin/src/ui_mainwindow.h:716
+#: ../bin/src/ui_mainwindow.h:733
 msgid "&Playlist"
 msgstr "Atskaņošanas saraksts"
 
-#: ../bin/src/ui_mainwindow.h:662
+#: ../bin/src/ui_mainwindow.h:675
 msgid "&Quit"
 msgstr "&Iziet"
 
-#: ../bin/src/ui_mainwindow.h:687
+#: ../bin/src/ui_mainwindow.h:700
 msgid "&Repeat mode"
 msgstr "Atkārtošanas režīms"
 
@@ -246,7 +246,7 @@ msgstr "Atkārtošanas režīms"
 msgid "&Right"
 msgstr "&Pa labi"
 
-#: ../bin/src/ui_mainwindow.h:686
+#: ../bin/src/ui_mainwindow.h:699
 msgid "&Shuffle mode"
 msgstr "Jaukšanas režīms"
 
@@ -254,7 +254,7 @@ msgstr "Jaukšanas režīms"
 msgid "&Stretch columns to fit window"
 msgstr "&izstiept kolonnas, lai pielāgotu loga izmēram"
 
-#: ../bin/src/ui_mainwindow.h:719
+#: ../bin/src/ui_mainwindow.h:736
 msgid "&Tools"
 msgstr "&Rīki"
 
@@ -356,6 +356,15 @@ msgid ""
 "activated.</p></body></html>"
 msgstr ""
 
+#: songinfo/artistbiography.cpp:265
+#, qt-format
+msgid ""
+"<p>This article uses material from the Wikipedia article <a "
+"href=\"%1\">%2</a>, which is released under the <a href=\"https"
+"://clementine-player.org/licenses/by-sa/3.0/legalcode.txt\">Creative Commons"
+" Attribution-Share-Alike License 3.0</a>.</p>"
+msgstr ""
+
 #: ../bin/src/ui_organisedialog.h:250
 msgid ""
 "<p>Tokens start with %, for example: %artist %album %title </p>\n"
@@ -425,11 +434,11 @@ msgstr "Atcelt"
 msgid "About %1"
 msgstr "Par %1"
 
-#: ../bin/src/ui_mainwindow.h:674
+#: ../bin/src/ui_mainwindow.h:687
 msgid "About Clementine..."
 msgstr "Par Clementine..."
 
-#: ../bin/src/ui_mainwindow.h:701
+#: ../bin/src/ui_mainwindow.h:714
 msgid "About Qt..."
 msgstr "Par Qt..."
 
@@ -493,19 +502,19 @@ msgstr "Pievienot citu straumi..."
 msgid "Add directory..."
 msgstr "Pievienot mapi..."
 
-#: ui/mainwindow.cpp:1982
+#: ui/mainwindow.cpp:1988
 msgid "Add file"
 msgstr "Pievienot failu"
 
-#: ../bin/src/ui_mainwindow.h:710
+#: ../bin/src/ui_mainwindow.h:723
 msgid "Add file to transcoder"
 msgstr "Pievienot failu pārkodētājam"
 
-#: ../bin/src/ui_mainwindow.h:708
+#: ../bin/src/ui_mainwindow.h:721
 msgid "Add file(s) to transcoder"
 msgstr "Pievienot failu(s) pārkodētājam"
 
-#: ../bin/src/ui_transcodedialog.h:218 ../bin/src/ui_mainwindow.h:676
+#: ../bin/src/ui_transcodedialog.h:218 ../bin/src/ui_mainwindow.h:689
 msgid "Add file..."
 msgstr "Pievienot failu..."
 
@@ -513,12 +522,12 @@ msgstr "Pievienot failu..."
 msgid "Add files to transcode"
 msgstr "Pievienot failus pārkodēšanai"
 
-#: transcoder/transcodedialog.cpp:306 ui/mainwindow.cpp:2009
+#: transcoder/transcodedialog.cpp:306 ui/mainwindow.cpp:2015
 #: ripper/ripcddialog.cpp:185
 msgid "Add folder"
 msgstr "Pievienot mapi"
 
-#: ../bin/src/ui_mainwindow.h:691
+#: ../bin/src/ui_mainwindow.h:704
 msgid "Add folder..."
 msgstr "Pievienot mapi..."
 
@@ -530,7 +539,7 @@ msgstr "Pievienot jaunu mapi..."
 msgid "Add podcast"
 msgstr "Pievienot podraidi"
 
-#: internet/podcasts/podcastservice.cpp:418 ../bin/src/ui_mainwindow.h:706
+#: internet/podcasts/podcastservice.cpp:418 ../bin/src/ui_mainwindow.h:719
 msgid "Add podcast..."
 msgstr "Pievienot podraidi..."
 
@@ -614,7 +623,7 @@ msgstr "Pievienot dziesmas gada birku"
 msgid "Add songs to \"My Music\" when the \"Love\" button is clicked"
 msgstr "Pievienot dziesmas \"Manai mūzikai\", nospiežot pogu \"Patīk\""
 
-#: ../bin/src/ui_mainwindow.h:677
+#: ../bin/src/ui_mainwindow.h:690
 msgid "Add stream..."
 msgstr "Pievienot straumi..."
 
@@ -630,7 +639,7 @@ msgstr "Pievienot Spotify atskaņošanas sarakstiem"
 msgid "Add to Spotify starred"
 msgstr ""
 
-#: ui/mainwindow.cpp:1804
+#: ui/mainwindow.cpp:1810
 msgid "Add to another playlist"
 msgstr "Pievienot citam atskaņošanas sarakstam"
 
@@ -676,7 +685,7 @@ msgstr "Pievienots šodien"
 msgid "Added within three months"
 msgstr "Pievienots pēdējos 3 mēnešos"
 
-#: library/libraryfilterwidget.cpp:186
+#: library/libraryfilterwidget.cpp:190
 msgid "Advanced grouping..."
 msgstr "Advancēta grupēšana..."
 
@@ -736,7 +745,7 @@ msgstr "Visi"
 msgid "All Files (*)"
 msgstr "Visi faili (*)"
 
-#: ../bin/src/ui_mainwindow.h:682
+#: ../bin/src/ui_mainwindow.h:695
 msgctxt "Label for button to enable/disable Hypnotoad background sound."
 msgid "All Glory to the Hypnotoad!"
 msgstr ""
@@ -1148,7 +1157,7 @@ msgstr "BBC podraides"
 msgid "Check for updates"
 msgstr "Pārbaudīt atjauninājumu"
 
-#: ui/mainwindow.cpp:803
+#: ui/mainwindow.cpp:805
 msgid "Check for updates..."
 msgstr "Pārbaudīt atjauninājumus..."
 
@@ -1206,13 +1215,13 @@ msgstr ""
 msgid "Clear"
 msgstr "Notīrīt"
 
-#: ../bin/src/ui_mainwindow.h:665 ../bin/src/ui_mainwindow.h:667
+#: ../bin/src/ui_mainwindow.h:678 ../bin/src/ui_mainwindow.h:680
 msgid "Clear playlist"
 msgstr "Notīrīt atskaņošanas sarakstu"
 
 #: smartplaylists/searchtermwidget.cpp:345
 #: visualisations/visualisationcontainer.cpp:215
-#: ../bin/src/ui_mainwindow.h:657 ../bin/src/ui_visualisationoverlay.h:182
+#: ../bin/src/ui_mainwindow.h:670 ../bin/src/ui_visualisationoverlay.h:182
 msgid "Clementine"
 msgstr "Clementine"
 
@@ -1358,7 +1367,7 @@ msgstr ""
 msgid "Complete tags automatically"
 msgstr "Noformēt tagus automātiski"
 
-#: ../bin/src/ui_mainwindow.h:704
+#: ../bin/src/ui_mainwindow.h:717
 msgid "Complete tags automatically..."
 msgstr "Noformēt tagus automātiski..."
 
@@ -1401,7 +1410,7 @@ msgstr "Konfigurēt Vk.com..."
 msgid "Configure global search..."
 msgstr "Konfigurēt globālo meklēšanu..."
 
-#: ui/mainwindow.cpp:653
+#: ui/mainwindow.cpp:655
 msgid "Configure library..."
 msgstr "Konfigurēt bibliotēku..."
 
@@ -1444,7 +1453,7 @@ msgstr ""
 msgid "Connection trouble or audio is disabled by owner"
 msgstr ""
 
-#: ../bin/src/ui_console.h:79 ../bin/src/ui_mainwindow.h:685
+#: ../bin/src/ui_console.h:79 ../bin/src/ui_mainwindow.h:698
 msgid "Console"
 msgstr "Konsole"
 
@@ -1477,11 +1486,11 @@ msgid "Copy to clipboard"
 msgstr "Kopēt starpliktuvē"
 
 #: library/libraryview.cpp:409 internet/podcasts/podcastservice.cpp:438
-#: ui/mainwindow.cpp:702 widgets/fileviewlist.cpp:44
+#: ui/mainwindow.cpp:704 widgets/fileviewlist.cpp:44
 msgid "Copy to device..."
 msgstr "Kopēt uz ierīci..."
 
-#: devices/deviceview.cpp:228 ui/mainwindow.cpp:692
+#: devices/deviceview.cpp:228 ui/mainwindow.cpp:694
 #: widgets/fileviewlist.cpp:40
 msgid "Copy to library..."
 msgstr "Kopēt uz bibliotēku..."
@@ -1529,7 +1538,7 @@ msgstr "Nevar atvērt izejas failu %1"
 #: internet/core/cloudfileservice.cpp:103
 #: internet/googledrive/googledriveservice.cpp:228
 #: ../bin/src/ui_albumcovermanager.h:214
-#: ../bin/src/ui_albumcoversearcher.h:104 ../bin/src/ui_mainwindow.h:680
+#: ../bin/src/ui_albumcoversearcher.h:104 ../bin/src/ui_mainwindow.h:693
 msgid "Cover Manager"
 msgstr "Vāka attēlu pārvaldnieks"
 
@@ -1670,7 +1679,7 @@ msgid "Delete downloaded data"
 msgstr "Dzēst lejuplādētos datus"
 
 #: devices/deviceview.cpp:408 library/libraryview.cpp:645
-#: ui/mainwindow.cpp:2336 widgets/fileview.cpp:188
+#: ui/mainwindow.cpp:2342 widgets/fileview.cpp:188
 msgid "Delete files"
 msgstr "Dzēst failus"
 
@@ -1678,7 +1687,7 @@ msgstr "Dzēst failus"
 msgid "Delete from device..."
 msgstr "Dzēst no ierīces..."
 
-#: library/libraryview.cpp:411 ui/mainwindow.cpp:705
+#: library/libraryview.cpp:411 ui/mainwindow.cpp:707
 #: widgets/fileviewlist.cpp:47
 msgid "Delete from disk..."
 msgstr "Dzēst no diska..."
@@ -1703,11 +1712,11 @@ msgstr "Dzēst oriģinālos failus"
 msgid "Deleting files"
 msgstr "Dzēš failus"
 
-#: ui/mainwindow.cpp:1725
+#: ui/mainwindow.cpp:1731
 msgid "Dequeue selected tracks"
 msgstr "Izņemt dziesmas no rindas"
 
-#: ui/mainwindow.cpp:1723
+#: ui/mainwindow.cpp:1729
 msgid "Dequeue track"
 msgstr "Izņemt dziesmu no rindas"
 
@@ -1808,7 +1817,7 @@ msgstr "Displeja opcijas"
 msgid "Display the on-screen-display"
 msgstr "Rādīt displeju-uz-ekrāna"
 
-#: ../bin/src/ui_mainwindow.h:703
+#: ../bin/src/ui_mainwindow.h:716
 msgid "Do a full library rescan"
 msgstr "Veikt pilnu bibliotēkas skenēšanu"
 
@@ -1979,12 +1988,12 @@ msgstr "Dinamisks nejaušs mikss"
 msgid "Edit smart playlist..."
 msgstr "Rediģēt gudro dziesmu listi..."
 
-#: ui/mainwindow.cpp:1767
+#: ui/mainwindow.cpp:1773
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr "Rediģēt birku \"%1\"..."
 
-#: ../bin/src/ui_mainwindow.h:672
+#: ../bin/src/ui_mainwindow.h:685
 msgid "Edit tag..."
 msgstr "Rediģēt birku"
 
@@ -1997,7 +2006,7 @@ msgid "Edit track information"
 msgstr "Rediģēt dziesmas informāciju"
 
 #: library/libraryview.cpp:416 widgets/fileviewlist.cpp:51
-#: ../bin/src/ui_mainwindow.h:669
+#: ../bin/src/ui_mainwindow.h:682
 msgid "Edit track information..."
 msgstr "Rediģēt dziesmas informāciju..."
 
@@ -2105,7 +2114,7 @@ msgstr ""
 msgid "Entire collection"
 msgstr "Visa kolekcija"
 
-#: ../bin/src/ui_equalizer.h:162 ../bin/src/ui_mainwindow.h:689
+#: ../bin/src/ui_equalizer.h:162 ../bin/src/ui_mainwindow.h:702
 msgid "Equalizer"
 msgstr "Ekvalaizers"
 
@@ -2118,8 +2127,8 @@ msgid "Equivalent to --log-levels *:3"
 msgstr "Vienāds ar --log-levels *:3"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:246
-#: library/libraryview.cpp:639 ui/mainwindow.cpp:2038 ui/mainwindow.cpp:2288
-#: ui/mainwindow.cpp:2434 internet/vk/vkservice.cpp:643
+#: library/libraryview.cpp:639 ui/mainwindow.cpp:2044 ui/mainwindow.cpp:2294
+#: ui/mainwindow.cpp:2440 internet/vk/vkservice.cpp:643
 msgid "Error"
 msgstr "Kļūda"
 
@@ -2259,7 +2268,7 @@ msgstr "Pāreja"
 msgid "Fading duration"
 msgstr "Pārejas garums"
 
-#: ui/mainwindow.cpp:2039
+#: ui/mainwindow.cpp:2045
 msgid "Failed reading CD drive"
 msgstr ""
 
@@ -2529,11 +2538,11 @@ msgstr "Dodiet tam vārdu:"
 msgid "Go"
 msgstr "Aiziet"
 
-#: ../bin/src/ui_mainwindow.h:696
+#: ../bin/src/ui_mainwindow.h:709
 msgid "Go to next playlist tab"
 msgstr "Iet uz nākamās dziesmu listes cilni"
 
-#: ../bin/src/ui_mainwindow.h:697
+#: ../bin/src/ui_mainwindow.h:710
 msgid "Go to previous playlist tab"
 msgstr "Iet uz iepriekšējās dziesmu listes cilni"
 
@@ -2559,9 +2568,13 @@ msgstr "Grupēt Bibliotēku pēc..."
 msgid "Group by"
 msgstr "Grupēt pēc"
 
-#: library/libraryfilterwidget.cpp:154
+#: library/libraryfilterwidget.cpp:158
 msgid "Group by Album"
 msgstr "Grupēt pēc Albumiem"
+
+#: library/libraryfilterwidget.cpp:150
+msgid "Group by Album artist/Album"
+msgstr ""
 
 #: library/libraryfilterwidget.cpp:143
 msgid "Group by Artist"
@@ -2571,15 +2584,15 @@ msgstr "Grupēt pēc Izpildītāja"
 msgid "Group by Artist/Album"
 msgstr "Grupēt pēc Izpildītāja/Albuma"
 
-#: library/libraryfilterwidget.cpp:150
+#: library/libraryfilterwidget.cpp:154
 msgid "Group by Artist/Year - Album"
 msgstr "Grupēt pēc Izpildītāja/Gada - Albuma"
 
-#: library/libraryfilterwidget.cpp:157
+#: library/libraryfilterwidget.cpp:161
 msgid "Group by Genre/Album"
 msgstr "Grupēt pēc Stils/Albums"
 
-#: library/libraryfilterwidget.cpp:161
+#: library/libraryfilterwidget.cpp:165
 msgid "Group by Genre/Artist/Album"
 msgstr "Grupēt pēc Stila/Izpildītāja/Albuma"
 
@@ -2589,11 +2602,11 @@ msgstr "Grupēt pēc Stila/Izpildītāja/Albuma"
 msgid "Grouping"
 msgstr "Grupēšana"
 
-#: library/libraryfilterwidget.cpp:207
+#: library/libraryfilterwidget.cpp:211
 msgid "Grouping Name"
 msgstr ""
 
-#: library/libraryfilterwidget.cpp:207
+#: library/libraryfilterwidget.cpp:211
 msgid "Grouping name:"
 msgstr ""
 
@@ -2850,7 +2863,7 @@ msgstr "Jamendo datubāze"
 msgid "Jump to previous song right away"
 msgstr ""
 
-#: ../bin/src/ui_mainwindow.h:692
+#: ../bin/src/ui_mainwindow.h:705
 msgid "Jump to the currently playing track"
 msgstr "Pārslēgties uz šobrīd skanošo dziesmu"
 
@@ -2874,7 +2887,7 @@ msgstr "Darboties fonā, kad logs ir aizvērts"
 msgid "Keep the original files"
 msgstr "Atstāt oriģinālos failus"
 
-#: ../bin/src/ui_mainwindow.h:684
+#: ../bin/src/ui_mainwindow.h:697
 msgctxt "Label for buton to enable/disable kittens in the now playing widget"
 msgid "Kittens"
 msgstr "Kaķīši"
@@ -2970,7 +2983,7 @@ msgstr "Bibliotēka"
 msgid "Library advanced grouping"
 msgstr "Advancēta Bibliotēkas grupēšana"
 
-#: ui/mainwindow.cpp:2526
+#: ui/mainwindow.cpp:2532
 msgid "Library rescan notice"
 msgstr "Bibliotēkās skenēšanas paziņojums"
 
@@ -3010,7 +3023,7 @@ msgstr "Ielādēt vāka attēlu no diska..."
 msgid "Load playlist"
 msgstr "Ielādēt dziesmu listi"
 
-#: ../bin/src/ui_mainwindow.h:695
+#: ../bin/src/ui_mainwindow.h:708
 msgid "Load playlist..."
 msgstr "Ielādēt dziesmu listi..."
 
@@ -3083,7 +3096,7 @@ msgstr ""
 msgid "Long term prediction profile (LTP)"
 msgstr "Ilga termiņa paredzēšanas profils (LTP)"
 
-#: ../bin/src/ui_mainwindow.h:664
+#: ../bin/src/ui_mainwindow.h:677
 msgid "Love"
 msgstr "Patīk"
 
@@ -3164,7 +3177,7 @@ msgstr "Galvenais profils (MAIN)"
 msgid "Make it so!"
 msgstr ""
 
-#: ../bin/src/ui_mainwindow.h:683
+#: ../bin/src/ui_mainwindow.h:696
 msgctxt "Label for button to enable/disable Enterprise background sound."
 msgid "Make it so!"
 msgstr ""
@@ -3298,7 +3311,7 @@ msgstr "Montēšanas punkti"
 msgid "Move down"
 msgstr "Pārvietot uz leju"
 
-#: ui/mainwindow.cpp:695 widgets/fileviewlist.cpp:42
+#: ui/mainwindow.cpp:697 widgets/fileviewlist.cpp:42
 msgid "Move to library..."
 msgstr "Pārvietot uz bibliotēku..."
 
@@ -3307,7 +3320,7 @@ msgstr "Pārvietot uz bibliotēku..."
 msgid "Move up"
 msgstr "Pārvietot uz augšu"
 
-#: transcoder/transcodedialog.cpp:225 ui/mainwindow.cpp:1983
+#: transcoder/transcodedialog.cpp:225 ui/mainwindow.cpp:1989
 #: internet/vk/vkservice.cpp:908
 msgid "Music"
 msgstr "Mūzika"
@@ -3317,7 +3330,7 @@ msgid "Music Library"
 msgstr "Mūzikas bibliotēka"
 
 #: core/globalshortcuts.cpp:63 wiimotedev/wiimotesettingspage.cpp:113
-#: ../bin/src/ui_mainwindow.h:702
+#: ../bin/src/ui_mainwindow.h:715
 msgid "Mute"
 msgstr "Klusums"
 
@@ -3378,7 +3391,7 @@ msgstr "Nekad Nesākt atskaņot"
 msgid "New folder"
 msgstr "Jauna mape"
 
-#: ui/mainwindow.cpp:1821 ../bin/src/ui_mainwindow.h:693
+#: ui/mainwindow.cpp:1827 ../bin/src/ui_mainwindow.h:706
 msgid "New playlist"
 msgstr "Jauna dziesmu liste"
 
@@ -3407,7 +3420,7 @@ msgid "Next"
 msgstr "Uz priekšu"
 
 #: core/globalshortcuts.cpp:57 wiimotedev/wiimotesettingspage.cpp:104
-#: ../bin/src/ui_mainwindow.h:661
+#: ../bin/src/ui_mainwindow.h:674
 msgid "Next track"
 msgstr "Nākamā"
 
@@ -3445,7 +3458,7 @@ msgstr "Bez īsiem blokiem"
 msgid "None"
 msgstr "Nekas"
 
-#: library/libraryview.cpp:640 ui/mainwindow.cpp:2289 ui/mainwindow.cpp:2435
+#: library/libraryview.cpp:640 ui/mainwindow.cpp:2295 ui/mainwindow.cpp:2441
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Neviena no izvēlētajām dziesmām nav piemērota kopēšanai uz ierīci"
 
@@ -3579,7 +3592,7 @@ msgstr ""
 msgid "Open %1 in browser"
 msgstr "Atvērt %1 pārlūkā"
 
-#: ../bin/src/ui_mainwindow.h:679
+#: ../bin/src/ui_mainwindow.h:692
 msgid "Open &audio CD..."
 msgstr "Atvērt &audio CD..."
 
@@ -3599,7 +3612,7 @@ msgstr ""
 msgid "Open device"
 msgstr "Atvērt ierīci"
 
-#: ../bin/src/ui_mainwindow.h:678
+#: ../bin/src/ui_mainwindow.h:691
 msgid "Open file..."
 msgstr "Atvērt datni..."
 
@@ -3653,7 +3666,7 @@ msgstr ""
 msgid "Organise Files"
 msgstr "Organizēt Failus"
 
-#: library/libraryview.cpp:405 ui/mainwindow.cpp:698
+#: library/libraryview.cpp:405 ui/mainwindow.cpp:700
 msgid "Organise files..."
 msgstr "Organizēt failus..."
 
@@ -3733,7 +3746,7 @@ msgstr "Ballīte"
 msgid "Password"
 msgstr "Parole"
 
-#: core/globalshortcuts.cpp:50 ui/mainwindow.cpp:1136 ui/mainwindow.cpp:1632
+#: core/globalshortcuts.cpp:50 ui/mainwindow.cpp:1142 ui/mainwindow.cpp:1638
 #: ui/qtsystemtrayicon.cpp:189 wiimotedev/wiimotesettingspage.cpp:114
 msgid "Pause"
 msgstr "Pauze"
@@ -3761,10 +3774,10 @@ msgstr "Pikselis"
 msgid "Plain sidebar"
 msgstr "Parasta sānjosla"
 
-#: core/globalshortcuts.cpp:49 ui/mainwindow.cpp:670 ui/mainwindow.cpp:1102
-#: ui/mainwindow.cpp:1121 ui/mainwindow.cpp:1636 ui/qtsystemtrayicon.cpp:177
+#: core/globalshortcuts.cpp:49 ui/mainwindow.cpp:672 ui/mainwindow.cpp:1108
+#: ui/mainwindow.cpp:1127 ui/mainwindow.cpp:1642 ui/qtsystemtrayicon.cpp:177
 #: ui/qtsystemtrayicon.cpp:203 wiimotedev/wiimotesettingspage.cpp:107
-#: ../bin/src/ui_mainwindow.h:659
+#: ../bin/src/ui_mainwindow.h:672
 msgid "Play"
 msgstr "Atskaņot"
 
@@ -3861,7 +3874,7 @@ msgstr ""
 msgid "Preferences"
 msgstr "Uzstādījumi"
 
-#: ../bin/src/ui_mainwindow.h:673
+#: ../bin/src/ui_mainwindow.h:686
 msgid "Preferences..."
 msgstr "Iestatījumi..."
 
@@ -3921,7 +3934,7 @@ msgid "Previous"
 msgstr "Iepriekšējais"
 
 #: core/globalshortcuts.cpp:59 wiimotedev/wiimotesettingspage.cpp:106
-#: ../bin/src/ui_mainwindow.h:658
+#: ../bin/src/ui_mainwindow.h:671
 msgid "Previous track"
 msgstr "Iepriekšējā"
 
@@ -3972,16 +3985,16 @@ msgstr "Kvalitāte"
 msgid "Querying device..."
 msgstr "Ierindoju ierīci..."
 
-#: ../bin/src/ui_queuemanager.h:124 ../bin/src/ui_mainwindow.h:700
+#: ../bin/src/ui_queuemanager.h:124 ../bin/src/ui_mainwindow.h:713
 msgid "Queue Manager"
 msgstr "Rindas pārvaldnieks"
 
-#: ui/mainwindow.cpp:1729
+#: ui/mainwindow.cpp:1735
 msgid "Queue selected tracks"
 msgstr "Ierindot izvēlētās dziesmas"
 
 #: globalsearch/globalsearchview.cpp:466 library/libraryview.cpp:389
-#: ui/mainwindow.cpp:1727
+#: ui/mainwindow.cpp:1733
 msgid "Queue track"
 msgstr "Ierindot dziesmu"
 
@@ -3993,7 +4006,7 @@ msgstr "Radio (ekvivalents skaļums visiem celiņiem)"
 msgid "Rain"
 msgstr "Lietus"
 
-#: ../bin/src/ui_mainwindow.h:681
+#: ../bin/src/ui_mainwindow.h:694
 msgctxt "Label for button to enable/disable rain background sound."
 msgid "Rain"
 msgstr "Lietus"
@@ -4097,7 +4110,7 @@ msgstr "Izņemt"
 msgid "Remove action"
 msgstr "Noņemt darbību"
 
-#: ../bin/src/ui_mainwindow.h:707
+#: ../bin/src/ui_mainwindow.h:720
 msgid "Remove duplicates from playlist"
 msgstr ""
 
@@ -4113,7 +4126,7 @@ msgstr ""
 msgid "Remove from bookmarks"
 msgstr ""
 
-#: internet/spotify/spotifyservice.cpp:681 ../bin/src/ui_mainwindow.h:688
+#: internet/spotify/spotifyservice.cpp:681 ../bin/src/ui_mainwindow.h:701
 msgid "Remove from playlist"
 msgstr "Azivākt no dziesmu listes"
 
@@ -4125,7 +4138,7 @@ msgstr "Dzēst atskaņošanas sarakstu"
 msgid "Remove playlists"
 msgstr ""
 
-#: ../bin/src/ui_mainwindow.h:713
+#: ../bin/src/ui_mainwindow.h:726
 msgid "Remove unavailable tracks from playlist"
 msgstr ""
 
@@ -4137,7 +4150,7 @@ msgstr "Pārdēvēt dziesmu listi"
 msgid "Rename playlist..."
 msgstr "Pārdēvēt dziesmu listi..."
 
-#: ../bin/src/ui_mainwindow.h:670
+#: ../bin/src/ui_mainwindow.h:683
 msgid "Renumber tracks in this order..."
 msgstr "Pārkārtot šādā secībā..."
 
@@ -4228,7 +4241,7 @@ msgstr ""
 msgid "Rip CD"
 msgstr "Noripot CD"
 
-#: ../bin/src/ui_mainwindow.h:712
+#: ../bin/src/ui_mainwindow.h:725
 msgid "Rip audio CD"
 msgstr "Noripot audio CD"
 
@@ -4297,7 +4310,7 @@ msgctxt "Title of the playlist save dialog."
 msgid "Save playlist"
 msgstr "Saglabāt dziesmu listi"
 
-#: playlist/playlisttabbar.cpp:59 ../bin/src/ui_mainwindow.h:694
+#: playlist/playlisttabbar.cpp:59 ../bin/src/ui_mainwindow.h:707
 msgid "Save playlist..."
 msgstr "Saglabāt dziesmu listi..."
 
@@ -4502,7 +4515,7 @@ msgstr ""
 msgid "Service offline"
 msgstr "Serviss atslēgts"
 
-#: ui/mainwindow.cpp:1766
+#: ui/mainwindow.cpp:1772
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr "Uzstādīt %1 uz \"%2\"..."
@@ -4511,7 +4524,7 @@ msgstr "Uzstādīt %1 uz \"%2\"..."
 msgid "Set the volume to <value> percent"
 msgstr "Uzstādīt skaļumu uz <value> procentiem"
 
-#: ../bin/src/ui_mainwindow.h:671
+#: ../bin/src/ui_mainwindow.h:684
 msgid "Set value for all selected tracks..."
 msgstr "Saglabāt vērtību izvēlētajām dziesmām..."
 
@@ -4578,7 +4591,7 @@ msgstr "Rādīt skaistu paziņojumu logu"
 msgid "Show above status bar"
 msgstr "Rādīt virs statusa joslas"
 
-#: ui/mainwindow.cpp:637
+#: ui/mainwindow.cpp:639
 msgid "Show all songs"
 msgstr "Rādīt visas dziesmas"
 
@@ -4602,12 +4615,12 @@ msgstr "Radīt pa visu ekrānu..."
 msgid "Show groups in global search result"
 msgstr ""
 
-#: library/libraryview.cpp:423 ui/mainwindow.cpp:708
+#: library/libraryview.cpp:423 ui/mainwindow.cpp:710
 #: widgets/fileviewlist.cpp:53
 msgid "Show in file browser..."
 msgstr "Rādīt failu pārlūkā..."
 
-#: ui/mainwindow.cpp:710
+#: ui/mainwindow.cpp:712
 msgid "Show in library..."
 msgstr "Rādīt bibliotēkā..."
 
@@ -4619,13 +4632,17 @@ msgstr "Rādīt pie dažādiem izpildītājiem"
 msgid "Show moodbar"
 msgstr ""
 
-#: ui/mainwindow.cpp:639
+#: ui/mainwindow.cpp:641
 msgid "Show only duplicates"
 msgstr "Rādīt tikai dublikātus"
 
-#: ui/mainwindow.cpp:641
+#: ui/mainwindow.cpp:643
 msgid "Show only untagged"
 msgstr "Rādīt tikai bez birkām"
+
+#: ../bin/src/ui_mainwindow.h:729
+msgid "Show or hide the sidebar"
+msgstr ""
 
 #: ../bin/src/ui_vksettingspage.h:220
 msgid "Show playing song on your page"
@@ -4633,6 +4650,10 @@ msgstr ""
 
 #: ../bin/src/ui_globalsearchsettingspage.h:149
 msgid "Show search suggestions"
+msgstr ""
+
+#: ../bin/src/ui_mainwindow.h:727
+msgid "Show sidebar"
 msgstr ""
 
 #: ../bin/src/ui_lastfmsettingspage.h:136
@@ -4667,7 +4688,7 @@ msgstr "Jaukt albumus"
 msgid "Shuffle all"
 msgstr "Jaukt visu"
 
-#: ../bin/src/ui_mainwindow.h:675
+#: ../bin/src/ui_mainwindow.h:688
 msgid "Shuffle playlist"
 msgstr "Jaukt dziesmu listi"
 
@@ -4711,11 +4732,11 @@ msgstr "Izlaista"
 msgid "Skip forwards in playlist"
 msgstr "Izlaist turpinot dziesmu listē"
 
-#: ui/mainwindow.cpp:1740
+#: ui/mainwindow.cpp:1746
 msgid "Skip selected tracks"
 msgstr ""
 
-#: ui/mainwindow.cpp:1738
+#: ui/mainwindow.cpp:1744
 msgid "Skip track"
 msgstr ""
 
@@ -4858,7 +4879,7 @@ msgid "Starting..."
 msgstr "Palaiž..."
 
 #: core/globalshortcuts.cpp:53 wiimotedev/wiimotesettingspage.cpp:108
-#: ../bin/src/ui_mainwindow.h:660
+#: ../bin/src/ui_mainwindow.h:673
 msgid "Stop"
 msgstr "Apturēt"
 
@@ -4874,7 +4895,7 @@ msgstr "Apstāties pēc katras dziesmas"
 msgid "Stop after every track"
 msgstr "Apstāties pēc katras dziesmas"
 
-#: ui/mainwindow.cpp:674 ../bin/src/ui_mainwindow.h:663
+#: ui/mainwindow.cpp:676 ../bin/src/ui_mainwindow.h:676
 msgid "Stop after this track"
 msgstr "Apturēt pēc šīs dziesmas"
 
@@ -5030,7 +5051,7 @@ msgid ""
 "license key. Visit subsonic.org for details."
 msgstr ""
 
-#: ui/mainwindow.cpp:2517
+#: ui/mainwindow.cpp:2523
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -5072,7 +5093,7 @@ msgid ""
 "continue?"
 msgstr "Šie faili tiks dzēsti no ierīces. Vai jūs tiešām vēlaties turpināt?"
 
-#: library/libraryview.cpp:646 ui/mainwindow.cpp:2337 widgets/fileview.cpp:189
+#: library/libraryview.cpp:646 ui/mainwindow.cpp:2343 widgets/fileview.cpp:189
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -5175,11 +5196,11 @@ msgstr ""
 msgid "Toggle fullscreen"
 msgstr "Ieslēgt pilnu ekrānu"
 
-#: ui/mainwindow.cpp:1731
+#: ui/mainwindow.cpp:1737
 msgid "Toggle queue status"
 msgstr "Ieslēgt rindas statusu"
 
-#: ../bin/src/ui_mainwindow.h:705
+#: ../bin/src/ui_mainwindow.h:718
 msgid "Toggle scrobbling"
 msgstr "Ieslēgt skroblēšanu"
 
@@ -5228,7 +5249,7 @@ msgstr "Dziesma"
 msgid "Tracks"
 msgstr "Dziesmas"
 
-#: ../bin/src/ui_transcodedialog.h:213 ../bin/src/ui_mainwindow.h:690
+#: ../bin/src/ui_transcodedialog.h:213 ../bin/src/ui_mainwindow.h:703
 msgid "Transcode Music"
 msgstr "Kodēt Mūziku"
 
@@ -5309,11 +5330,11 @@ msgstr "Nezināma kļūda"
 msgid "Unset cover"
 msgstr "Noņemt vāka attēlu"
 
-#: ui/mainwindow.cpp:1736
+#: ui/mainwindow.cpp:1742
 msgid "Unskip selected tracks"
 msgstr ""
 
-#: ui/mainwindow.cpp:1734
+#: ui/mainwindow.cpp:1740
 msgid "Unskip track"
 msgstr ""
 
@@ -5334,7 +5355,7 @@ msgstr "Atjaunot"
 msgid "Update all podcasts"
 msgstr ""
 
-#: ../bin/src/ui_mainwindow.h:698
+#: ../bin/src/ui_mainwindow.h:711
 msgid "Update changed library folders"
 msgstr "Atjaunot mainītās bibliotēkas mapes"
 
@@ -5487,7 +5508,7 @@ msgstr "Skats"
 msgid "Visualization mode"
 msgstr "Vizualizāciju režīms"
 
-#: ui/dbusscreensaver.cpp:33 ../bin/src/ui_mainwindow.h:699
+#: ui/dbusscreensaver.cpp:33 ../bin/src/ui_mainwindow.h:712
 msgid "Visualizations"
 msgstr "Vizualizācijas"
 
@@ -5627,7 +5648,7 @@ msgid ""
 "well?"
 msgstr ""
 
-#: ui/mainwindow.cpp:2524
+#: ui/mainwindow.cpp:2530
 msgid "Would you like to run a full rescan right now?"
 msgstr "Vai jūs vēlaties palaist pilnu skenēšanu?"
 

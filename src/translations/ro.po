@@ -19,7 +19,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2016-08-26 14:20+0000\n"
+"PO-Revision-Date: 2016-09-06 12:48+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Romanian (http://www.transifex.com/davidsansome/clementine/language/ro/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -196,7 +196,7 @@ msgstr "&Centrat"
 msgid "&Custom"
 msgstr "&Personalizat"
 
-#: ../bin/src/ui_mainwindow.h:718
+#: ../bin/src/ui_mainwindow.h:735
 msgid "&Extras"
 msgstr "&Extra"
 
@@ -204,7 +204,7 @@ msgstr "&Extra"
 msgid "&Grouping"
 msgstr ""
 
-#: ../bin/src/ui_mainwindow.h:717
+#: ../bin/src/ui_mainwindow.h:734
 msgid "&Help"
 msgstr "&Ajutor"
 
@@ -229,7 +229,7 @@ msgstr "&Blochează evaluarea"
 msgid "&Lyrics"
 msgstr ""
 
-#: ../bin/src/ui_mainwindow.h:715
+#: ../bin/src/ui_mainwindow.h:732
 msgid "&Music"
 msgstr "&Muzică"
 
@@ -237,15 +237,15 @@ msgstr "&Muzică"
 msgid "&None"
 msgstr "&Nimic"
 
-#: ../bin/src/ui_mainwindow.h:716
+#: ../bin/src/ui_mainwindow.h:733
 msgid "&Playlist"
 msgstr "&Listă de redare"
 
-#: ../bin/src/ui_mainwindow.h:662
+#: ../bin/src/ui_mainwindow.h:675
 msgid "&Quit"
 msgstr "&Termină"
 
-#: ../bin/src/ui_mainwindow.h:687
+#: ../bin/src/ui_mainwindow.h:700
 msgid "&Repeat mode"
 msgstr "&Mod repetare"
 
@@ -253,7 +253,7 @@ msgstr "&Mod repetare"
 msgid "&Right"
 msgstr "&Dreapta"
 
-#: ../bin/src/ui_mainwindow.h:686
+#: ../bin/src/ui_mainwindow.h:699
 msgid "&Shuffle mode"
 msgstr "&Mod aleator"
 
@@ -261,7 +261,7 @@ msgstr "&Mod aleator"
 msgid "&Stretch columns to fit window"
 msgstr "&Îngustează coloanele pentru a se potrivi în fereastră"
 
-#: ../bin/src/ui_mainwindow.h:719
+#: ../bin/src/ui_mainwindow.h:736
 msgid "&Tools"
 msgstr "&Unelte"
 
@@ -363,6 +363,15 @@ msgid ""
 "activated.</p></body></html>"
 msgstr "<html><head/><body><p>Aceasta va scrie evaluările și statisticile melodiilor în etichetele fișierelor pentru toate melodiile din colecția dumneavoastră.</p><p>Această acțiune nu este necesară dacă opțiunea &quot;Salvează evaluările și statisticile în etichetele fișierelor&quot; este activă.</p></body></html>"
 
+#: songinfo/artistbiography.cpp:265
+#, qt-format
+msgid ""
+"<p>This article uses material from the Wikipedia article <a "
+"href=\"%1\">%2</a>, which is released under the <a href=\"https"
+"://clementine-player.org/licenses/by-sa/3.0/legalcode.txt\">Creative Commons"
+" Attribution-Share-Alike License 3.0</a>.</p>"
+msgstr ""
+
 #: ../bin/src/ui_organisedialog.h:250
 msgid ""
 "<p>Tokens start with %, for example: %artist %album %title </p>\n"
@@ -432,11 +441,11 @@ msgstr "Anulează"
 msgid "About %1"
 msgstr "Despre %1"
 
-#: ../bin/src/ui_mainwindow.h:674
+#: ../bin/src/ui_mainwindow.h:687
 msgid "About Clementine..."
 msgstr "Despre Clementine..."
 
-#: ../bin/src/ui_mainwindow.h:701
+#: ../bin/src/ui_mainwindow.h:714
 msgid "About Qt..."
 msgstr "Despre Qt..."
 
@@ -500,19 +509,19 @@ msgstr "Adaugă alt flux..."
 msgid "Add directory..."
 msgstr "Adăugare dosar..."
 
-#: ui/mainwindow.cpp:1982
+#: ui/mainwindow.cpp:1988
 msgid "Add file"
 msgstr "Adăugare fișier"
 
-#: ../bin/src/ui_mainwindow.h:710
+#: ../bin/src/ui_mainwindow.h:723
 msgid "Add file to transcoder"
 msgstr "Adaugă fișier la transcodor"
 
-#: ../bin/src/ui_mainwindow.h:708
+#: ../bin/src/ui_mainwindow.h:721
 msgid "Add file(s) to transcoder"
 msgstr "Adaugă fișier(e) la transcodor"
 
-#: ../bin/src/ui_transcodedialog.h:218 ../bin/src/ui_mainwindow.h:676
+#: ../bin/src/ui_transcodedialog.h:218 ../bin/src/ui_mainwindow.h:689
 msgid "Add file..."
 msgstr "Adaugă fișier..."
 
@@ -520,12 +529,12 @@ msgstr "Adaugă fișier..."
 msgid "Add files to transcode"
 msgstr "Adaugă fișiere pentru transcodat"
 
-#: transcoder/transcodedialog.cpp:306 ui/mainwindow.cpp:2009
+#: transcoder/transcodedialog.cpp:306 ui/mainwindow.cpp:2015
 #: ripper/ripcddialog.cpp:185
 msgid "Add folder"
 msgstr "Adăugare dosar"
 
-#: ../bin/src/ui_mainwindow.h:691
+#: ../bin/src/ui_mainwindow.h:704
 msgid "Add folder..."
 msgstr "Adaugă dosar..."
 
@@ -537,7 +546,7 @@ msgstr "Adaugă dosar nou..."
 msgid "Add podcast"
 msgstr "Adaugă podcast"
 
-#: internet/podcasts/podcastservice.cpp:418 ../bin/src/ui_mainwindow.h:706
+#: internet/podcasts/podcastservice.cpp:418 ../bin/src/ui_mainwindow.h:719
 msgid "Add podcast..."
 msgstr "Adaugă podcast..."
 
@@ -621,7 +630,7 @@ msgstr "Adaugă eticheta anului melodiei"
 msgid "Add songs to \"My Music\" when the \"Love\" button is clicked"
 msgstr "Adaugă melodiile la \"Muzica mea\" când se face clic pe butonul \"Apreciați\""
 
-#: ../bin/src/ui_mainwindow.h:677
+#: ../bin/src/ui_mainwindow.h:690
 msgid "Add stream..."
 msgstr "Adaugă flux..."
 
@@ -637,7 +646,7 @@ msgstr "Adaugă la listele de redare Spotify"
 msgid "Add to Spotify starred"
 msgstr "Adaugă la Spotify starred"
 
-#: ui/mainwindow.cpp:1804
+#: ui/mainwindow.cpp:1810
 msgid "Add to another playlist"
 msgstr "Adaugă la altă listă de redare"
 
@@ -683,7 +692,7 @@ msgstr "Adăugat azi"
 msgid "Added within three months"
 msgstr "Adăugat în ultimele trei luni"
 
-#: library/libraryfilterwidget.cpp:186
+#: library/libraryfilterwidget.cpp:190
 msgid "Advanced grouping..."
 msgstr "Grupare avansată..."
 
@@ -743,7 +752,7 @@ msgstr "Toate"
 msgid "All Files (*)"
 msgstr "Toate fișierele (*)"
 
-#: ../bin/src/ui_mainwindow.h:682
+#: ../bin/src/ui_mainwindow.h:695
 msgctxt "Label for button to enable/disable Hypnotoad background sound."
 msgid "All Glory to the Hypnotoad!"
 msgstr "Glorie Hypnotoadului!"
@@ -1155,7 +1164,7 @@ msgstr "Verifică după episoade noi"
 msgid "Check for updates"
 msgstr "Verifică după actualizări"
 
-#: ui/mainwindow.cpp:803
+#: ui/mainwindow.cpp:805
 msgid "Check for updates..."
 msgstr "Verifică după actualizări..."
 
@@ -1213,13 +1222,13 @@ msgstr "Curățare"
 msgid "Clear"
 msgstr "Curăță"
 
-#: ../bin/src/ui_mainwindow.h:665 ../bin/src/ui_mainwindow.h:667
+#: ../bin/src/ui_mainwindow.h:678 ../bin/src/ui_mainwindow.h:680
 msgid "Clear playlist"
 msgstr "Curăță lista de redare"
 
 #: smartplaylists/searchtermwidget.cpp:345
 #: visualisations/visualisationcontainer.cpp:215
-#: ../bin/src/ui_mainwindow.h:657 ../bin/src/ui_visualisationoverlay.h:182
+#: ../bin/src/ui_mainwindow.h:670 ../bin/src/ui_visualisationoverlay.h:182
 msgid "Clementine"
 msgstr "Clementine"
 
@@ -1365,7 +1374,7 @@ msgstr "Radio al comunității"
 msgid "Complete tags automatically"
 msgstr "Completează etichetele automat"
 
-#: ../bin/src/ui_mainwindow.h:704
+#: ../bin/src/ui_mainwindow.h:717
 msgid "Complete tags automatically..."
 msgstr "Completează etichetele automat..."
 
@@ -1408,7 +1417,7 @@ msgstr "Configurați Vk.com..."
 msgid "Configure global search..."
 msgstr "Configurați căutarea globală..."
 
-#: ui/mainwindow.cpp:653
+#: ui/mainwindow.cpp:655
 msgid "Configure library..."
 msgstr "Configurați colecția..."
 
@@ -1451,7 +1460,7 @@ msgstr "Conexiunea a expirat, verificați adresa URL a serverului. Exemplu: http
 msgid "Connection trouble or audio is disabled by owner"
 msgstr "Probleme cu conexiunea sau audio dezactivat de către proprietar"
 
-#: ../bin/src/ui_console.h:79 ../bin/src/ui_mainwindow.h:685
+#: ../bin/src/ui_console.h:79 ../bin/src/ui_mainwindow.h:698
 msgid "Console"
 msgstr "Consolă"
 
@@ -1484,11 +1493,11 @@ msgid "Copy to clipboard"
 msgstr "Copiază în memoria temporară"
 
 #: library/libraryview.cpp:409 internet/podcasts/podcastservice.cpp:438
-#: ui/mainwindow.cpp:702 widgets/fileviewlist.cpp:44
+#: ui/mainwindow.cpp:704 widgets/fileviewlist.cpp:44
 msgid "Copy to device..."
 msgstr "Copiază pe dispozitiv..."
 
-#: devices/deviceview.cpp:228 ui/mainwindow.cpp:692
+#: devices/deviceview.cpp:228 ui/mainwindow.cpp:694
 #: widgets/fileviewlist.cpp:40
 msgid "Copy to library..."
 msgstr "Copiază în colecție..."
@@ -1536,7 +1545,7 @@ msgstr "Nu s-a putut deschide fișierul de ieșire %1"
 #: internet/core/cloudfileservice.cpp:103
 #: internet/googledrive/googledriveservice.cpp:228
 #: ../bin/src/ui_albumcovermanager.h:214
-#: ../bin/src/ui_albumcoversearcher.h:104 ../bin/src/ui_mainwindow.h:680
+#: ../bin/src/ui_albumcoversearcher.h:104 ../bin/src/ui_mainwindow.h:693
 msgid "Cover Manager"
 msgstr "Administrator coperți"
 
@@ -1677,7 +1686,7 @@ msgid "Delete downloaded data"
 msgstr "Șterge datele descărcate"
 
 #: devices/deviceview.cpp:408 library/libraryview.cpp:645
-#: ui/mainwindow.cpp:2336 widgets/fileview.cpp:188
+#: ui/mainwindow.cpp:2342 widgets/fileview.cpp:188
 msgid "Delete files"
 msgstr "Șterge fișiere"
 
@@ -1685,7 +1694,7 @@ msgstr "Șterge fișiere"
 msgid "Delete from device..."
 msgstr "Șterge de pe dispozitiv..."
 
-#: library/libraryview.cpp:411 ui/mainwindow.cpp:705
+#: library/libraryview.cpp:411 ui/mainwindow.cpp:707
 #: widgets/fileviewlist.cpp:47
 msgid "Delete from disk..."
 msgstr "Șterge de pe disc..."
@@ -1710,11 +1719,11 @@ msgstr "Șterge fișierele originale"
 msgid "Deleting files"
 msgstr "Se șterg fișierele"
 
-#: ui/mainwindow.cpp:1725
+#: ui/mainwindow.cpp:1731
 msgid "Dequeue selected tracks"
 msgstr "Elimină din coadă piesele selectate"
 
-#: ui/mainwindow.cpp:1723
+#: ui/mainwindow.cpp:1729
 msgid "Dequeue track"
 msgstr "Elimină din coadă piesa"
 
@@ -1815,7 +1824,7 @@ msgstr "Afișează opțiunile"
 msgid "Display the on-screen-display"
 msgstr "Afișează afișarea pe ecran"
 
-#: ../bin/src/ui_mainwindow.h:703
+#: ../bin/src/ui_mainwindow.h:716
 msgid "Do a full library rescan"
 msgstr "Rescanează complet colecția"
 
@@ -1986,12 +1995,12 @@ msgstr "Mixare aleatoare dinamică"
 msgid "Edit smart playlist..."
 msgstr "Editare listă de redare inteligentă..."
 
-#: ui/mainwindow.cpp:1767
+#: ui/mainwindow.cpp:1773
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr "Editare eticheta \"%1\"..."
 
-#: ../bin/src/ui_mainwindow.h:672
+#: ../bin/src/ui_mainwindow.h:685
 msgid "Edit tag..."
 msgstr "Editare etichetă..."
 
@@ -2004,7 +2013,7 @@ msgid "Edit track information"
 msgstr "Editare informație piesă"
 
 #: library/libraryview.cpp:416 widgets/fileviewlist.cpp:51
-#: ../bin/src/ui_mainwindow.h:669
+#: ../bin/src/ui_mainwindow.h:682
 msgid "Edit track information..."
 msgstr "Editare informație piesă..."
 
@@ -2112,7 +2121,7 @@ msgstr "Introduceți acest IP în aplicație pentru conectarea la Clementine."
 msgid "Entire collection"
 msgstr "Toată colecția"
 
-#: ../bin/src/ui_equalizer.h:162 ../bin/src/ui_mainwindow.h:689
+#: ../bin/src/ui_equalizer.h:162 ../bin/src/ui_mainwindow.h:702
 msgid "Equalizer"
 msgstr "Egalizator"
 
@@ -2125,8 +2134,8 @@ msgid "Equivalent to --log-levels *:3"
 msgstr "Echivalent cu --log-levels *:3"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:246
-#: library/libraryview.cpp:639 ui/mainwindow.cpp:2038 ui/mainwindow.cpp:2288
-#: ui/mainwindow.cpp:2434 internet/vk/vkservice.cpp:643
+#: library/libraryview.cpp:639 ui/mainwindow.cpp:2044 ui/mainwindow.cpp:2294
+#: ui/mainwindow.cpp:2440 internet/vk/vkservice.cpp:643
 msgid "Error"
 msgstr "Eroare"
 
@@ -2266,7 +2275,7 @@ msgstr "Se estompează"
 msgid "Fading duration"
 msgstr "Durata estompării"
 
-#: ui/mainwindow.cpp:2039
+#: ui/mainwindow.cpp:2045
 msgid "Failed reading CD drive"
 msgstr "A eșuat citirea unității CD"
 
@@ -2536,11 +2545,11 @@ msgstr "Dați-i un nume:"
 msgid "Go"
 msgstr "Mergi"
 
-#: ../bin/src/ui_mainwindow.h:696
+#: ../bin/src/ui_mainwindow.h:709
 msgid "Go to next playlist tab"
 msgstr "Mergi la fila listei de redare următoare"
 
-#: ../bin/src/ui_mainwindow.h:697
+#: ../bin/src/ui_mainwindow.h:710
 msgid "Go to previous playlist tab"
 msgstr "Mergi la fila listei de redare anterioare"
 
@@ -2566,9 +2575,13 @@ msgstr "Grupează colecția după..."
 msgid "Group by"
 msgstr "Grupează după"
 
-#: library/libraryfilterwidget.cpp:154
+#: library/libraryfilterwidget.cpp:158
 msgid "Group by Album"
 msgstr "Grupează după album"
+
+#: library/libraryfilterwidget.cpp:150
+msgid "Group by Album artist/Album"
+msgstr ""
 
 #: library/libraryfilterwidget.cpp:143
 msgid "Group by Artist"
@@ -2578,15 +2591,15 @@ msgstr "Grupează după artist"
 msgid "Group by Artist/Album"
 msgstr "Grupează după artist/album"
 
-#: library/libraryfilterwidget.cpp:150
+#: library/libraryfilterwidget.cpp:154
 msgid "Group by Artist/Year - Album"
 msgstr "Grupează după artist/an - album"
 
-#: library/libraryfilterwidget.cpp:157
+#: library/libraryfilterwidget.cpp:161
 msgid "Group by Genre/Album"
 msgstr "Grupează după gen/album"
 
-#: library/libraryfilterwidget.cpp:161
+#: library/libraryfilterwidget.cpp:165
 msgid "Group by Genre/Artist/Album"
 msgstr "Grupează după gen/artist/album"
 
@@ -2596,11 +2609,11 @@ msgstr "Grupează după gen/artist/album"
 msgid "Grouping"
 msgstr "Gruparea"
 
-#: library/libraryfilterwidget.cpp:207
+#: library/libraryfilterwidget.cpp:211
 msgid "Grouping Name"
 msgstr "Nume grupare"
 
-#: library/libraryfilterwidget.cpp:207
+#: library/libraryfilterwidget.cpp:211
 msgid "Grouping name:"
 msgstr "Nume grupare:"
 
@@ -2857,7 +2870,7 @@ msgstr "Baza de date Jamendo"
 msgid "Jump to previous song right away"
 msgstr "Sări imediat la melodia anterioară"
 
-#: ../bin/src/ui_mainwindow.h:692
+#: ../bin/src/ui_mainwindow.h:705
 msgid "Jump to the currently playing track"
 msgstr "Sari la piesa în curs de redare"
 
@@ -2881,7 +2894,7 @@ msgstr "Menține rularea în fundal atunci când fereastra este închisă"
 msgid "Keep the original files"
 msgstr "Menține fișierele originale"
 
-#: ../bin/src/ui_mainwindow.h:684
+#: ../bin/src/ui_mainwindow.h:697
 msgctxt "Label for buton to enable/disable kittens in the now playing widget"
 msgid "Kittens"
 msgstr "Pisicuțe"
@@ -2977,7 +2990,7 @@ msgstr "Colecție"
 msgid "Library advanced grouping"
 msgstr "Grupare avansată colecție"
 
-#: ui/mainwindow.cpp:2526
+#: ui/mainwindow.cpp:2532
 msgid "Library rescan notice"
 msgstr "Notă rescanare colecție"
 
@@ -3017,7 +3030,7 @@ msgstr "Încarcă copertă de pe disc..."
 msgid "Load playlist"
 msgstr "Încarcă listă de redare"
 
-#: ../bin/src/ui_mainwindow.h:695
+#: ../bin/src/ui_mainwindow.h:708
 msgid "Load playlist..."
 msgstr "Încarcă listă de redare..."
 
@@ -3090,7 +3103,7 @@ msgstr "Deautentificare"
 msgid "Long term prediction profile (LTP)"
 msgstr "Profil de predicție pe termen lung (LTP)"
 
-#: ../bin/src/ui_mainwindow.h:664
+#: ../bin/src/ui_mainwindow.h:677
 msgid "Love"
 msgstr "Apreciați"
 
@@ -3171,7 +3184,7 @@ msgstr "Profil principal (MAIN)"
 msgid "Make it so!"
 msgstr "Fă-o așa!"
 
-#: ../bin/src/ui_mainwindow.h:683
+#: ../bin/src/ui_mainwindow.h:696
 msgctxt "Label for button to enable/disable Enterprise background sound."
 msgid "Make it so!"
 msgstr "Fă-o așa!"
@@ -3305,7 +3318,7 @@ msgstr "Puncte de montare"
 msgid "Move down"
 msgstr "Mută în jos"
 
-#: ui/mainwindow.cpp:695 widgets/fileviewlist.cpp:42
+#: ui/mainwindow.cpp:697 widgets/fileviewlist.cpp:42
 msgid "Move to library..."
 msgstr "Mută în colecție..."
 
@@ -3314,7 +3327,7 @@ msgstr "Mută în colecție..."
 msgid "Move up"
 msgstr "Mută în sus"
 
-#: transcoder/transcodedialog.cpp:225 ui/mainwindow.cpp:1983
+#: transcoder/transcodedialog.cpp:225 ui/mainwindow.cpp:1989
 #: internet/vk/vkservice.cpp:908
 msgid "Music"
 msgstr "Muzică"
@@ -3324,7 +3337,7 @@ msgid "Music Library"
 msgstr "Colecție de muzică"
 
 #: core/globalshortcuts.cpp:63 wiimotedev/wiimotesettingspage.cpp:113
-#: ../bin/src/ui_mainwindow.h:702
+#: ../bin/src/ui_mainwindow.h:715
 msgid "Mute"
 msgstr "Mut"
 
@@ -3385,7 +3398,7 @@ msgstr "Nu va începe redarea niciodată"
 msgid "New folder"
 msgstr "Dosar nou"
 
-#: ui/mainwindow.cpp:1821 ../bin/src/ui_mainwindow.h:693
+#: ui/mainwindow.cpp:1827 ../bin/src/ui_mainwindow.h:706
 msgid "New playlist"
 msgstr "Listă de redare nouă"
 
@@ -3414,7 +3427,7 @@ msgid "Next"
 msgstr "Următorul"
 
 #: core/globalshortcuts.cpp:57 wiimotedev/wiimotesettingspage.cpp:104
-#: ../bin/src/ui_mainwindow.h:661
+#: ../bin/src/ui_mainwindow.h:674
 msgid "Next track"
 msgstr "Piesa următoare"
 
@@ -3452,7 +3465,7 @@ msgstr "Fără blocuri scurte"
 msgid "None"
 msgstr "Nimic"
 
-#: library/libraryview.cpp:640 ui/mainwindow.cpp:2289 ui/mainwindow.cpp:2435
+#: library/libraryview.cpp:640 ui/mainwindow.cpp:2295 ui/mainwindow.cpp:2441
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Niciuna dintre melodiile selectate nu este potrivită pentru copierea pe un dispozitiv"
 
@@ -3586,7 +3599,7 @@ msgstr "Opacitate"
 msgid "Open %1 in browser"
 msgstr "Deschide %1 în browser"
 
-#: ../bin/src/ui_mainwindow.h:679
+#: ../bin/src/ui_mainwindow.h:692
 msgid "Open &audio CD..."
 msgstr "Deschide CD &audio..."
 
@@ -3606,7 +3619,7 @@ msgstr "Deschide un director pentru a se importa muzica din el"
 msgid "Open device"
 msgstr "Deschide dispozitiv"
 
-#: ../bin/src/ui_mainwindow.h:678
+#: ../bin/src/ui_mainwindow.h:691
 msgid "Open file..."
 msgstr "Deschide fișier..."
 
@@ -3660,7 +3673,7 @@ msgstr "Opus"
 msgid "Organise Files"
 msgstr "Organizează fișiere"
 
-#: library/libraryview.cpp:405 ui/mainwindow.cpp:698
+#: library/libraryview.cpp:405 ui/mainwindow.cpp:700
 msgid "Organise files..."
 msgstr "Organizează fișiere..."
 
@@ -3740,7 +3753,7 @@ msgstr "Petrecere"
 msgid "Password"
 msgstr "Parolă"
 
-#: core/globalshortcuts.cpp:50 ui/mainwindow.cpp:1136 ui/mainwindow.cpp:1632
+#: core/globalshortcuts.cpp:50 ui/mainwindow.cpp:1142 ui/mainwindow.cpp:1638
 #: ui/qtsystemtrayicon.cpp:189 wiimotedev/wiimotesettingspage.cpp:114
 msgid "Pause"
 msgstr "Pauză"
@@ -3768,10 +3781,10 @@ msgstr "Pixel"
 msgid "Plain sidebar"
 msgstr "Bară laterală simplă"
 
-#: core/globalshortcuts.cpp:49 ui/mainwindow.cpp:670 ui/mainwindow.cpp:1102
-#: ui/mainwindow.cpp:1121 ui/mainwindow.cpp:1636 ui/qtsystemtrayicon.cpp:177
+#: core/globalshortcuts.cpp:49 ui/mainwindow.cpp:672 ui/mainwindow.cpp:1108
+#: ui/mainwindow.cpp:1127 ui/mainwindow.cpp:1642 ui/qtsystemtrayicon.cpp:177
 #: ui/qtsystemtrayicon.cpp:203 wiimotedev/wiimotesettingspage.cpp:107
-#: ../bin/src/ui_mainwindow.h:659
+#: ../bin/src/ui_mainwindow.h:672
 msgid "Play"
 msgstr "Redare"
 
@@ -3868,7 +3881,7 @@ msgstr "Preferință"
 msgid "Preferences"
 msgstr "Preferințe"
 
-#: ../bin/src/ui_mainwindow.h:673
+#: ../bin/src/ui_mainwindow.h:686
 msgid "Preferences..."
 msgstr "Preferințe..."
 
@@ -3928,7 +3941,7 @@ msgid "Previous"
 msgstr "Anterior"
 
 #: core/globalshortcuts.cpp:59 wiimotedev/wiimotesettingspage.cpp:106
-#: ../bin/src/ui_mainwindow.h:658
+#: ../bin/src/ui_mainwindow.h:671
 msgid "Previous track"
 msgstr "Piesa precedentă"
 
@@ -3979,16 +3992,16 @@ msgstr "Calitate"
 msgid "Querying device..."
 msgstr "Se interoghează dispozitivul..."
 
-#: ../bin/src/ui_queuemanager.h:124 ../bin/src/ui_mainwindow.h:700
+#: ../bin/src/ui_queuemanager.h:124 ../bin/src/ui_mainwindow.h:713
 msgid "Queue Manager"
 msgstr "Administrator coadă"
 
-#: ui/mainwindow.cpp:1729
+#: ui/mainwindow.cpp:1735
 msgid "Queue selected tracks"
 msgstr "Adaugă în coadă piesele selectate"
 
 #: globalsearch/globalsearchview.cpp:466 library/libraryview.cpp:389
-#: ui/mainwindow.cpp:1727
+#: ui/mainwindow.cpp:1733
 msgid "Queue track"
 msgstr "Adaugă în coadă piesa"
 
@@ -4000,7 +4013,7 @@ msgstr "Radio (egalizare loudness pentru toate piesele)"
 msgid "Rain"
 msgstr "Ploaie"
 
-#: ../bin/src/ui_mainwindow.h:681
+#: ../bin/src/ui_mainwindow.h:694
 msgctxt "Label for button to enable/disable rain background sound."
 msgid "Rain"
 msgstr "Ploaie"
@@ -4104,7 +4117,7 @@ msgstr "Elimină"
 msgid "Remove action"
 msgstr "Elimină acțiune"
 
-#: ../bin/src/ui_mainwindow.h:707
+#: ../bin/src/ui_mainwindow.h:720
 msgid "Remove duplicates from playlist"
 msgstr "Elimină dublurile din lista de redare"
 
@@ -4120,7 +4133,7 @@ msgstr "Elimină din Muzica mea"
 msgid "Remove from bookmarks"
 msgstr "Elimină din semne de carte"
 
-#: internet/spotify/spotifyservice.cpp:681 ../bin/src/ui_mainwindow.h:688
+#: internet/spotify/spotifyservice.cpp:681 ../bin/src/ui_mainwindow.h:701
 msgid "Remove from playlist"
 msgstr "Elimină din lista de redare"
 
@@ -4132,7 +4145,7 @@ msgstr "Elimină lista de redare"
 msgid "Remove playlists"
 msgstr "Elimină listele de redare"
 
-#: ../bin/src/ui_mainwindow.h:713
+#: ../bin/src/ui_mainwindow.h:726
 msgid "Remove unavailable tracks from playlist"
 msgstr "Elimină piesele indisponibile din lista de redare"
 
@@ -4144,7 +4157,7 @@ msgstr "Redenumește lista de redare"
 msgid "Rename playlist..."
 msgstr "Redenumește lista de redare..."
 
-#: ../bin/src/ui_mainwindow.h:670
+#: ../bin/src/ui_mainwindow.h:683
 msgid "Renumber tracks in this order..."
 msgstr "Renumerotează piesele în această ordine..."
 
@@ -4235,7 +4248,7 @@ msgstr "Extrage"
 msgid "Rip CD"
 msgstr "Extrage CD"
 
-#: ../bin/src/ui_mainwindow.h:712
+#: ../bin/src/ui_mainwindow.h:725
 msgid "Rip audio CD"
 msgstr "Extrage CD audio"
 
@@ -4304,7 +4317,7 @@ msgctxt "Title of the playlist save dialog."
 msgid "Save playlist"
 msgstr "Salvează lista de redare"
 
-#: playlist/playlisttabbar.cpp:59 ../bin/src/ui_mainwindow.h:694
+#: playlist/playlisttabbar.cpp:59 ../bin/src/ui_mainwindow.h:707
 msgid "Save playlist..."
 msgstr "Salvează lista de redare..."
 
@@ -4509,7 +4522,7 @@ msgstr "Detalii server"
 msgid "Service offline"
 msgstr "Serviciu offline"
 
-#: ui/mainwindow.cpp:1766
+#: ui/mainwindow.cpp:1772
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr "Setează %1 la „%2”..."
@@ -4518,7 +4531,7 @@ msgstr "Setează %1 la „%2”..."
 msgid "Set the volume to <value> percent"
 msgstr "Stabilește volumul la <value> procent"
 
-#: ../bin/src/ui_mainwindow.h:671
+#: ../bin/src/ui_mainwindow.h:684
 msgid "Set value for all selected tracks..."
 msgstr "Stabilește valoarea pentru toate piesele selectate..."
 
@@ -4585,7 +4598,7 @@ msgstr "Arată un OSD simpatic"
 msgid "Show above status bar"
 msgstr "Arată deasupra barei de stare"
 
-#: ui/mainwindow.cpp:637
+#: ui/mainwindow.cpp:639
 msgid "Show all songs"
 msgstr "Arată toate melodiile"
 
@@ -4609,12 +4622,12 @@ msgstr "Arată dimensiunea completă..."
 msgid "Show groups in global search result"
 msgstr "Arată grupurile în rezultatul căutării globale"
 
-#: library/libraryview.cpp:423 ui/mainwindow.cpp:708
+#: library/libraryview.cpp:423 ui/mainwindow.cpp:710
 #: widgets/fileviewlist.cpp:53
 msgid "Show in file browser..."
 msgstr "Arată în navigatorul de fișiere..."
 
-#: ui/mainwindow.cpp:710
+#: ui/mainwindow.cpp:712
 msgid "Show in library..."
 msgstr "Arată în colecție..."
 
@@ -4626,13 +4639,17 @@ msgstr "Arată în Artiști diferiți"
 msgid "Show moodbar"
 msgstr "Arată bara de dispoziție"
 
-#: ui/mainwindow.cpp:639
+#: ui/mainwindow.cpp:641
 msgid "Show only duplicates"
 msgstr "Arată numai duplicatele"
 
-#: ui/mainwindow.cpp:641
+#: ui/mainwindow.cpp:643
 msgid "Show only untagged"
 msgstr "Arată numai pe cele neetichetate"
+
+#: ../bin/src/ui_mainwindow.h:729
+msgid "Show or hide the sidebar"
+msgstr ""
 
 #: ../bin/src/ui_vksettingspage.h:220
 msgid "Show playing song on your page"
@@ -4641,6 +4658,10 @@ msgstr "Arată melodia redată pe pagina dumneavoastră"
 #: ../bin/src/ui_globalsearchsettingspage.h:149
 msgid "Show search suggestions"
 msgstr "Arată sugestii de căutare"
+
+#: ../bin/src/ui_mainwindow.h:727
+msgid "Show sidebar"
+msgstr ""
 
 #: ../bin/src/ui_lastfmsettingspage.h:136
 msgid "Show the \"love\" button"
@@ -4674,7 +4695,7 @@ msgstr "Amestecă albume"
 msgid "Shuffle all"
 msgstr "Amestecă tot"
 
-#: ../bin/src/ui_mainwindow.h:675
+#: ../bin/src/ui_mainwindow.h:688
 msgid "Shuffle playlist"
 msgstr "Amestecă lista de redare"
 
@@ -4718,11 +4739,11 @@ msgstr "Omite numărătoarea"
 msgid "Skip forwards in playlist"
 msgstr "Sari înainte în lista de redare"
 
-#: ui/mainwindow.cpp:1740
+#: ui/mainwindow.cpp:1746
 msgid "Skip selected tracks"
 msgstr "Omite piesele selectate"
 
-#: ui/mainwindow.cpp:1738
+#: ui/mainwindow.cpp:1744
 msgid "Skip track"
 msgstr "Omite piesa"
 
@@ -4865,7 +4886,7 @@ msgid "Starting..."
 msgstr "Se pornește..."
 
 #: core/globalshortcuts.cpp:53 wiimotedev/wiimotesettingspage.cpp:108
-#: ../bin/src/ui_mainwindow.h:660
+#: ../bin/src/ui_mainwindow.h:673
 msgid "Stop"
 msgstr "Oprire"
 
@@ -4881,7 +4902,7 @@ msgstr "Oprește după fiecare piesă"
 msgid "Stop after every track"
 msgstr "Oprește după fiecare piesă"
 
-#: ui/mainwindow.cpp:674 ../bin/src/ui_mainwindow.h:663
+#: ui/mainwindow.cpp:676 ../bin/src/ui_mainwindow.h:676
 msgid "Stop after this track"
 msgstr "Oprește după această piesă"
 
@@ -5037,7 +5058,7 @@ msgid ""
 "license key. Visit subsonic.org for details."
 msgstr "Perioada de încercare pentru serverul Subsonic s-a terminat. Donați pentru a obține o cheie de licență. Vizitați subsonic.org pentru detalii."
 
-#: ui/mainwindow.cpp:2517
+#: ui/mainwindow.cpp:2523
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -5079,7 +5100,7 @@ msgid ""
 "continue?"
 msgstr "Aceste fișiere vor fi șterse de pe dispozitiv, sigur doriți să continuați?"
 
-#: library/libraryview.cpp:646 ui/mainwindow.cpp:2337 widgets/fileview.cpp:189
+#: library/libraryview.cpp:646 ui/mainwindow.cpp:2343 widgets/fileview.cpp:189
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -5182,11 +5203,11 @@ msgstr "Comută OSD simpatic"
 msgid "Toggle fullscreen"
 msgstr "Comută afișare pe tot ecranul"
 
-#: ui/mainwindow.cpp:1731
+#: ui/mainwindow.cpp:1737
 msgid "Toggle queue status"
 msgstr "Comută stare coadă"
 
-#: ../bin/src/ui_mainwindow.h:705
+#: ../bin/src/ui_mainwindow.h:718
 msgid "Toggle scrobbling"
 msgstr "Comută scrobbling"
 
@@ -5235,7 +5256,7 @@ msgstr "Piesă"
 msgid "Tracks"
 msgstr "Piese"
 
-#: ../bin/src/ui_transcodedialog.h:213 ../bin/src/ui_mainwindow.h:690
+#: ../bin/src/ui_transcodedialog.h:213 ../bin/src/ui_mainwindow.h:703
 msgid "Transcode Music"
 msgstr "Transcodare muzică"
 
@@ -5316,11 +5337,11 @@ msgstr "Eroare necunoscută"
 msgid "Unset cover"
 msgstr "Deselectează coperta"
 
-#: ui/mainwindow.cpp:1736
+#: ui/mainwindow.cpp:1742
 msgid "Unskip selected tracks"
 msgstr "Nu omite piesele selectate"
 
-#: ui/mainwindow.cpp:1734
+#: ui/mainwindow.cpp:1740
 msgid "Unskip track"
 msgstr "Nu omite piesa"
 
@@ -5341,7 +5362,7 @@ msgstr "Actualizare"
 msgid "Update all podcasts"
 msgstr "Actualizează toate podcasturile"
 
-#: ../bin/src/ui_mainwindow.h:698
+#: ../bin/src/ui_mainwindow.h:711
 msgid "Update changed library folders"
 msgstr "Actualizează dosarele modificate ale colecției"
 
@@ -5494,7 +5515,7 @@ msgstr "Vizualizare"
 msgid "Visualization mode"
 msgstr "Mod vizualizare"
 
-#: ui/dbusscreensaver.cpp:33 ../bin/src/ui_mainwindow.h:699
+#: ui/dbusscreensaver.cpp:33 ../bin/src/ui_mainwindow.h:712
 msgid "Visualizations"
 msgstr "Vizualizări"
 
@@ -5634,7 +5655,7 @@ msgid ""
 "well?"
 msgstr "Doriți să fie mutate, de asemenea, și celelalte melodii din acest album în Artiști diferiți?"
 
-#: ui/mainwindow.cpp:2524
+#: ui/mainwindow.cpp:2530
 msgid "Would you like to run a full rescan right now?"
 msgstr "Doriți să rulați o rescanare completă chiar acum?"
 
