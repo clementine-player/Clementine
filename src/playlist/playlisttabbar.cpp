@@ -419,24 +419,23 @@ void PlaylistTabBar::PlaylistFavoritedSlot(int id, bool favorite) {
   }
 }
 
-void PlaylistTabBar::ExpandNames()
-{
-    switch(elideMode()) {
-        case Qt::ElideNone: {
-            setElideMode(Qt::ElideRight);
-            elide_->setVisible(false);
-            expand_->setVisible(true);
-            break;
-        }
-
-        case Qt::ElideRight: {
-            setElideMode(Qt::ElideNone);
-            elide_->setVisible(true);
-            expand_->setVisible(false);
-            break;
-        }
-
-        default:
-            assert(false);
+void PlaylistTabBar::ExpandNames() {
+  switch (elideMode()) {
+    case Qt::ElideNone: {
+      setElideMode(Qt::ElideRight);
+      elide_->setVisible(false);
+      expand_->setVisible(true);
+      break;
     }
+
+    case Qt::ElideRight: {
+      setElideMode(Qt::ElideNone);
+      elide_->setVisible(true);
+      expand_->setVisible(false);
+      break;
+    }
+
+    default:
+      assert(false);
+  }
 }
