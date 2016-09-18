@@ -520,7 +520,7 @@ void TagReader::ParseFMPSFrame(const QString& name, const QString& value,
 void TagReader::ParseOggTag(const TagLib::Ogg::FieldListMap& map,
                             const QTextCodec* codec, QString* disc,
                             QString* compilation,
-                            pb::tagreader::SongMetadata* song) const {
+                            pb::tagreader::SongMetadata* song) const {                                                     
   if (!map["COMPOSER"].isEmpty())
     Decode(map["COMPOSER"].front(), codec, song->mutable_composer());
   if (!map["PERFORMER"].isEmpty())
@@ -568,6 +568,12 @@ void TagReader::ParseOggTag(const TagLib::Ogg::FieldListMap& map,
                         .trimmed()
                         .toFloat() *
                     100);
+
+  if (!map["LYRICS"].isEmpty()) {
+    Decode(map["LYRICS"].front(), codec, song->mutable_lyrics());
+  } else if (!map["UNSYNCEDLYRICS"].isEmpty()) {
+    Decode(map["UNSYNCEDLYRICS"].front(), codec, song->mutable_lyrics());
+  }
 }
 
 void TagReader::SetVorbisComments(
@@ -593,9 +599,15 @@ void TagReader::SetVorbisComments(
       true);
 
   // Try to be coherent, the two forms are used but the first one is preferred
+  
   vorbis_comments->addField("ALBUMARTIST",
                             StdStringToTaglibString(song.albumartist()), true);
   vorbis_comments->removeField("ALBUM ARTIST");
+
+  vorbis_comments->addField("LYRICS",
+                            StdStringToTaglibString(song.lyrics()), true);
+  vorbis_comments->removeField("UNSYNCEDLYRICS");
+
 }
 
 void TagReader::SetFMPSStatisticsVorbisComments(
