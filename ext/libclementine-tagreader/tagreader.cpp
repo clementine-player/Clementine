@@ -568,6 +568,11 @@ void TagReader::ParseOggTag(const TagLib::Ogg::FieldListMap& map,
                         .trimmed()
                         .toFloat() *
                     100);
+
+  if (!map["LYRICS"].isEmpty())
+    Decode(map["LYRICS"].front(), codec, song->mutable_lyrics());
+  else if (!map["UNSYNCEDLYRICS"].isEmpty())
+    Decode(map["UNSYNCEDLYRICS"].front(), codec, song->mutable_lyrics());
 }
 
 void TagReader::SetVorbisComments(
@@ -593,9 +598,15 @@ void TagReader::SetVorbisComments(
       true);
 
   // Try to be coherent, the two forms are used but the first one is preferred
+
   vorbis_comments->addField("ALBUMARTIST",
                             StdStringToTaglibString(song.albumartist()), true);
   vorbis_comments->removeField("ALBUM ARTIST");
+
+  vorbis_comments->addField("LYRICS",
+                            StdStringToTaglibString(song.lyrics()), true);
+  vorbis_comments->removeField("UNSYNCEDLYRICS");
+
 }
 
 void TagReader::SetFMPSStatisticsVorbisComments(
