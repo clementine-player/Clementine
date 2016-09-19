@@ -14,7 +14,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2016-09-11 22:41+0000\n"
+"PO-Revision-Date: 2016-09-18 21:28+0000\n"
 "Last-Translator: Sérgio Marques <smarquespt@gmail.com>\n"
 "Language-Team: Portuguese (http://www.transifex.com/davidsansome/clementine/language/pt/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -356,7 +356,7 @@ msgid ""
 "files tags for all your library's songs.</p><p>This is not needed if the "
 "&quot;Save ratings and statistics in file tags&quot; option has always been "
 "activated.</p></body></html>"
-msgstr "<html><head/><body><p>Esta ação irá guardar as estatísticas e as avaliações nos detalhes dos ficheiros, para todas as faixas da coleção.</p><p>Não será necessário se a opção &quot;Guardar avaliações e estatísticas nos detalhes dos ficheiros&quot; estiver sempre ativa.</p></body></html>"
+msgstr "<html><head/><body><p>Esta ação irá guardar as estatísticas e as avaliações nas etiquetas dos ficheiros, para todas as faixas da coleção.</p><p>Não será necessário se a opção &quot;Guardar avaliações e estatísticas nas etiquetas dos ficheiros&quot; estiver sempre ativa.</p></body></html>"
 
 #: songinfo/artistbiography.cpp:265
 #, qt-format
@@ -1367,11 +1367,11 @@ msgstr "Rádio da comunidade"
 
 #: ../bin/src/ui_edittagdialog.h:730
 msgid "Complete tags automatically"
-msgstr "Preencher detalhes automaticamente"
+msgstr "Preencher etiquetas automaticamente"
 
 #: ../bin/src/ui_mainwindow.h:717
 msgid "Complete tags automatically..."
-msgstr "Preencher detalhes automaticamente..."
+msgstr "Preencher etiquetas automaticamente..."
 
 #: library/savedgroupingmanager.cpp:74 playlist/playlist.cpp:1335
 #: ui/organisedialog.cpp:65 ../bin/src/ui_groupbydialog.h:131
@@ -1997,11 +1997,11 @@ msgstr "Editar \"%1\"..."
 
 #: ../bin/src/ui_mainwindow.h:685
 msgid "Edit tag..."
-msgstr "Editar \"tag\"..."
+msgstr "Editar etiqueta..."
 
 #: ../bin/src/ui_edittagdialog.h:732
 msgid "Edit tags"
-msgstr "Editar detalhes"
+msgstr "Editar etiquetas"
 
 #: ../bin/src/ui_edittagdialog.h:698
 msgid "Edit track information"
@@ -2298,7 +2298,7 @@ msgstr "Erro ao processar o XML desta fonte RSS"
 #: ui/trackselectiondialog.cpp:247
 #, qt-format
 msgid "Failed to write new auto-tags to '%1'"
-msgstr "Falha ao gravar os detalhes para '%1'"
+msgstr "Falha ao gravar as etiquetas para '%1'"
 
 #: ../bin/src/ui_transcoderoptionsflac.h:81
 #: ../bin/src/ui_transcoderoptionsmp3.h:199
@@ -2687,7 +2687,7 @@ msgstr "A identificar faixa"
 msgid ""
 "If activated, clicking a selected song in the playlist view will let you "
 "edit the tag value directly"
-msgstr "Se ativar esta opção, ao clicar numa faixa da lista de reprodução, pode editar os seus detalhes diretamente"
+msgstr "Se ativar esta opção, ao clicar numa faixa da lista de reprodução, pode editar as etiquetas diretamente"
 
 #: devices/devicemanager.cpp:575 devices/devicemanager.cpp:586
 msgid ""
@@ -3130,8 +3130,8 @@ msgid "Lyrics from %1"
 msgstr "Letras musicais de %1"
 
 #: songinfo/taglyricsinfoprovider.cpp:29
-msgid "Lyrics from the ID3v2 tag"
-msgstr "Obter letra nos detalhes ID3v2"
+msgid "Lyrics from the tag"
+msgstr "Letra existente nas etiquetas"
 
 #: transcoder/transcoder.cpp:235
 msgid "M4A AAC"
@@ -3678,7 +3678,7 @@ msgstr "Organizando ficheiros"
 
 #: ui/trackselectiondialog.cpp:163
 msgid "Original tags"
-msgstr "Detalhes originais"
+msgstr "Etiquetas originais"
 
 #: library/savedgroupingmanager.cpp:101 playlist/playlist.cpp:1329
 #: ui/organisedialog.cpp:73 ../bin/src/ui_groupbydialog.h:135
@@ -3693,7 +3693,7 @@ msgstr "Ano original - Álbum"
 
 #: library/library.cpp:118
 msgid "Original year tag support"
-msgstr "Suporte ao detalhe Ano original"
+msgstr "Suporte à etiqueta Ano original"
 
 #: core/commandlineoptions.cpp:176
 msgid "Other options"
@@ -4322,11 +4322,11 @@ msgstr "Guardar pré-ajuste"
 
 #: ../bin/src/ui_librarysettingspage.h:192
 msgid "Save ratings in file tags when possible"
-msgstr "Se possível, guardar avaliação nos detalhes do ficheiro"
+msgstr "Se possível, guardar avaliação nas etiquetas do ficheiro"
 
 #: ../bin/src/ui_librarysettingspage.h:196
 msgid "Save statistics in file tags when possible"
-msgstr "Se possível, guardar estatísticas nos detalhes do ficheiro"
+msgstr "Se possível, guardar estatísticas nas etiquetas do ficheiro"
 
 #: ../bin/src/ui_addstreamdialog.h:114
 msgid "Save this stream in the Internet tab"
@@ -4640,7 +4640,7 @@ msgstr "Mostrar apenas as repetidas"
 
 #: ui/mainwindow.cpp:643
 msgid "Show only untagged"
-msgstr "Mostrar apenas faixas sem detalhes"
+msgstr "Mostrar apenas faixas sem etiquetas"
 
 #: ../bin/src/ui_mainwindow.h:729
 msgid "Show or hide the sidebar"
@@ -4956,7 +4956,7 @@ msgstr "Escrito com sucesso %1"
 
 #: ui/trackselectiondialog.cpp:167
 msgid "Suggested tags"
-msgstr "Detalhes sugeridos"
+msgstr "Etiquetas sugeridas"
 
 #: ../bin/src/ui_edittagdialog.h:717
 #: ../bin/src/ui_notificationssettingspage.h:454
@@ -5003,7 +5003,7 @@ msgstr "Separadores no topo"
 
 #: ../bin/src/ui_trackselectiondialog.h:203
 msgid "Tag fetcher"
-msgstr "Obtenção de detalhes"
+msgstr "Obtenção de etiquetas"
 
 #: ../bin/src/ui_transcoderoptionsvorbis.h:203
 msgid "Target bitrate"
@@ -5393,7 +5393,7 @@ msgstr "Utilização"
 
 #: ../bin/src/ui_lastfmsettingspage.h:138
 msgid "Use Album Artist tag when available"
-msgstr "Se disponível, utilizar os detalhes Artista do álbum"
+msgstr "Se disponível, utilizar a etiqueta Artista do álbum"
 
 #: ../bin/src/ui_globalshortcutssettingspage.h:167
 msgid "Use Gnome's shortcut keys"
