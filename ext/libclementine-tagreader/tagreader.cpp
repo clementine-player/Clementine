@@ -709,9 +709,9 @@ bool TagReader::SaveFile(const QString& filename,
         TagLib::MP4::Item(song.disc() <= 0 - 1 ? 0 : song.disc(), 0);
     tag->itemListMap()["tmpo"] = TagLib::StringList(
         song.bpm() <= 0 - 1 ? "0" : TagLib::String::number(song.bpm()));
-    tag->itemListMap()["\251wrt"] = TagLib::StringList(song.composer());
-    tag->itemListMap()["\251grp"] = TagLib::StringList(song.grouping());
-    tag->itemListMap()["aART"] = TagLib::StringList(song.albumartist());
+    tag->itemListMap()["\251wrt"] = TagLib::StringList(song.composer().c_str());
+    tag->itemListMap()["\251grp"] = TagLib::StringList(song.grouping().c_str());
+    tag->itemListMap()["aART"] = TagLib::StringList(song.albumartist().c_str());
     tag->itemListMap()["cpil"] =
         TagLib::StringList(song.compilation() ? "1" : "0");
   }
