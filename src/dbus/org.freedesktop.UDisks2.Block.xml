@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<!DOCTYPE node PUBLIC "-//freedesktop//DTD D-BUS Object Introspection 1.0//EN" "http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
+<node>
+  <interface name="org.freedesktop.UDisks2.Block">
+    <property type="o" name="Drive" access="read"/>
+    <property type="s" name="IdLabel" access="read"/>
+    <property type="s" name="IdUUID" access="read"/>
+  </interface>
+</node>

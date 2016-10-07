@@ -51,12 +51,12 @@ namespace TagLib {
        * <a href="id3v2-structure.html#6.2">6.2</a>).  The default \a length of
        * 4 is used if another value is not specified.
        */
-      TAGLIB_EXPORT uint toUInt(const ByteVector &data);
+      TAGLIB_EXPORT unsigned int toUInt(const ByteVector &data);
 
       /*!
        * Returns a 4 byte (32 bit) synchsafe integer based on \a value.
        */
-      TAGLIB_EXPORT ByteVector fromUInt(uint value);
+      TAGLIB_EXPORT ByteVector fromUInt(unsigned int value);
 
       /*!
        * Convert the data from unsynchronized data to its original format.

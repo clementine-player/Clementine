@@ -77,29 +77,29 @@ namespace TagLib {
     class Atom
     {
     public:
-        Atom(File *file);
-        ~Atom();
-        Atom *find(const char *name1, const char *name2 = 0, const char *name3 = 0, const char *name4 = 0);
-        bool path(AtomList &path, const char *name1, const char *name2 = 0, const char *name3 = 0);
-        AtomList findall(const char *name, bool recursive = false);
-        long offset;
-        long length;
-        TagLib::ByteVector name;
-        AtomList children;
+      Atom(File *file);
+      ~Atom();
+      Atom *find(const char *name1, const char *name2 = 0, const char *name3 = 0, const char *name4 = 0);
+      bool path(AtomList &path, const char *name1, const char *name2 = 0, const char *name3 = 0);
+      AtomList findall(const char *name, bool recursive = false);
+      long offset;
+      long length;
+      TagLib::ByteVector name;
+      AtomList children;
     private:
-        static const int numContainers = 11;
-        static const char *containers[11];
+      static const int numContainers = 11;
+      static const char *containers[11];
     };
 
     //! Root-level atoms
     class Atoms
     {
     public:
-        Atoms(File *file);
-        ~Atoms();
-        Atom *find(const char *name1, const char *name2 = 0, const char *name3 = 0, const char *name4 = 0);
-        AtomList path(const char *name1, const char *name2 = 0, const char *name3 = 0, const char *name4 = 0);
-        AtomList atoms;
+      Atoms(File *file);
+      ~Atoms();
+      Atom *find(const char *name1, const char *name2 = 0, const char *name3 = 0, const char *name4 = 0);
+      AtomList path(const char *name1, const char *name2 = 0, const char *name3 = 0, const char *name4 = 0);
+      AtomList atoms;
     };
 
   }

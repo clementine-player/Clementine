@@ -57,21 +57,21 @@ public:
   int sampleRate;
   int channels;
   int bitsPerSample;
-  uint sampleFrames;
+  unsigned int sampleFrames;
 };
 
 ////////////////////////////////////////////////////////////////////////////////
 // public members
 ////////////////////////////////////////////////////////////////////////////////
 
-RIFF::WAV::Properties::Properties(const ByteVector & /*data*/, ReadStyle style) :
+RIFF::WAV::Properties::Properties(const ByteVector &, ReadStyle style) :
   AudioProperties(style),
   d(new PropertiesPrivate())
 {
   debug("RIFF::WAV::Properties::Properties() -- This constructor is no longer used.");
 }
 
-RIFF::WAV::Properties::Properties(const ByteVector & /*data*/, uint /*streamLength*/, ReadStyle style) :
+RIFF::WAV::Properties::Properties(const ByteVector &, unsigned int, ReadStyle style) :
   AudioProperties(style),
   d(new PropertiesPrivate())
 {
@@ -130,7 +130,7 @@ int RIFF::WAV::Properties::sampleWidth() const
   return bitsPerSample();
 }
 
-TagLib::uint RIFF::WAV::Properties::sampleFrames() const
+unsigned int RIFF::WAV::Properties::sampleFrames() const
 {
   return d->sampleFrames;
 }
@@ -147,10 +147,10 @@ int RIFF::WAV::Properties::format() const
 void RIFF::WAV::Properties::read(File *file)
 {
   ByteVector data;
-  uint streamLength = 0;
-  uint totalSamples = 0;
+  unsigned int streamLength = 0;
+  unsigned int totalSamples = 0;
 
-  for(uint i = 0; i < file->chunkCount(); ++i) {
+  for(unsigned int i = 0; i < file->chunkCount(); ++i) {
     const ByteVector name = file->chunkName(i);
     if(name == "fmt ") {
       if(data.isEmpty())
@@ -192,7 +192,7 @@ void RIFF::WAV::Properties::read(File *file)
   d->sampleRate    = data.toUInt(4, false);
   d->bitsPerSample = data.toShort(14, false);
 
-  if(totalSamples > 0)
+  if(d->format != FORMAT_PCM)
     d->sampleFrames = totalSamples;
   else if(d->channels > 0 && d->bitsPerSample > 0)
     d->sampleFrames = streamLength / (d->channels * ((d->bitsPerSample + 7) / 8));
@@ -203,7 +203,7 @@ void RIFF::WAV::Properties::read(File *file)
     d->bitrate = static_cast<int>(streamLength * 8.0 / length + 0.5);
   }
   else {
-    const uint byteRate = data.toUInt(8, false);
+    const unsigned int byteRate = data.toUInt(8, false);
     if(byteRate > 0) {
       d->length  = static_cast<int>(streamLength * 1000.0 / byteRate + 0.5);
       d->bitrate = static_cast<int>(byteRate * 8.0 / 1000.0 + 0.5);

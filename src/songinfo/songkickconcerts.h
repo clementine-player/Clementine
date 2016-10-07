@@ -44,9 +44,6 @@ class SongkickConcerts : public SongInfoProvider {
 
   NetworkAccessManager network_;
   Geolocator::LatLng latlng_;
-
-  static const char* kSongkickArtistBucket;
-  static const char* kSongkickArtistCalendarUrl;
 };
 
 #endif

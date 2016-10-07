@@ -63,7 +63,7 @@ namespace TagLib {
          *
          * \deprecated
          */
-        Properties(const ByteVector &data, uint streamLength, ReadStyle style);
+        Properties(const ByteVector &data, unsigned int streamLength, ReadStyle style);
 
         /*!
          * Create an instance of WAV::Properties with the data read from the
@@ -135,7 +135,7 @@ namespace TagLib {
         /*!
          * Returns the number of sample frames.
          */
-        uint sampleFrames() const;
+        unsigned int sampleFrames() const;
 
         /*!
          * Returns the format ID of the file.

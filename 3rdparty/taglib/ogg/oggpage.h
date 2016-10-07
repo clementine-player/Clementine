@@ -71,10 +71,27 @@ namespace TagLib {
       const PageHeader *header() const;
 
       /*!
+       * Returns the index of the page within the Ogg stream.  This helps make it
+       * possible to determine if pages have been lost.
+       *
+       * \see setPageSequenceNumber()
+       */
+      int pageSequenceNumber() const;
+
+      /*!
+       * Sets the page's position in the stream to \a sequenceNumber.
+       *
+       * \see pageSequenceNumber()
+       */
+      void setPageSequenceNumber(int sequenceNumber);
+
+      /*!
        * Returns a copy of the page with \a sequenceNumber set as sequence number.
        *
        * \see header()
        * \see PageHeader::setPageSequenceNumber()
+       *
+       * \deprecated Always returns null.
        */
       Page* getCopyWithNewPageSequenceNumber(int sequenceNumber);
 
@@ -121,7 +138,7 @@ namespace TagLib {
       /*!
        * Returns the number of packets (whole or partial) in this page.
        */
-      uint packetCount() const;
+      unsigned int packetCount() const;
 
       /*!
        * Returns a list of the packets in this page.
@@ -181,7 +198,7 @@ namespace TagLib {
        */
       static List<Page *> paginate(const ByteVectorList &packets,
                                    PaginationStrategy strategy,
-                                   uint streamSerialNumber,
+                                   unsigned int streamSerialNumber,
                                    int firstPage,
                                    bool firstPacketContinued = false,
                                    bool lastPacketCompleted = true,
@@ -193,7 +210,7 @@ namespace TagLib {
        * for each page will be set to \a pageNumber.
        */
       Page(const ByteVectorList &packets,
-           uint streamSerialNumber,
+           unsigned int streamSerialNumber,
            int pageNumber,
            bool firstPacketContinued = false,
            bool lastPacketCompleted = true,

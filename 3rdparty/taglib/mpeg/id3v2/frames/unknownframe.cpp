@@ -51,7 +51,7 @@ UnknownFrame::~UnknownFrame()
 
 String UnknownFrame::toString() const
 {
-  return String::null;
+  return String();
 }
 
 ByteVector UnknownFrame::data() const

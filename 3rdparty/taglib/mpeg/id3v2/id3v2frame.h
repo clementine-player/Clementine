@@ -79,7 +79,7 @@ namespace TagLib {
       /*!
        * Returns the size of the frame.
        */
-      uint size() const;
+      unsigned int size() const;
 
       /*!
        * Returns the size of the frame header
@@ -89,14 +89,14 @@ namespace TagLib {
        * non-binary compatible release this will be made into a non-static
        * member that checks the internal ID3v2 version.
        */
-      static uint headerSize(); // BIC: remove and make non-static
+      static unsigned int headerSize(); // BIC: remove and make non-static
 
       /*!
        * Returns the size of the frame header for the given ID3v2 version.
        *
        * \deprecated Please see the explanation above.
        */
-      static uint headerSize(uint version); // BIC: remove and make non-static
+      static unsigned int headerSize(unsigned int version); // BIC: remove and make non-static
 
       /*!
        * Sets the data that will be used as the frame.  Since the length is not
@@ -242,7 +242,7 @@ namespace TagLib {
        */
       // BIC: remove and make non-static
       static String::Type checkEncoding(const StringList &fields,
-                                        String::Type encoding, uint version);
+                                        String::Type encoding, unsigned int version);
 
       /*!
        * Checks a the list of string values to see if they can be used with the
@@ -264,13 +264,13 @@ namespace TagLib {
 
       /*!
        * Returns an appropriate ID3 frame ID for the given free-form tag key. This method
-       * will return ByteVector::null if no specialized translation is found.
+       * will return an empty ByteVector if no specialized translation is found.
        */
       static ByteVector keyToFrameID(const String &);
 
       /*!
        * Returns a free-form tag name for the given ID3 frame ID. Note that this does not work
-       * for general frame IDs such as TXXX or WXXX; in such a case String::null is returned.
+       * for general frame IDs such as TXXX or WXXX; in such a case an empty string is returned.
        */
       static String frameIDToKey(const ByteVector &);
 
@@ -343,7 +343,7 @@ namespace TagLib {
        *
        * \a version should be the ID3v2 version of the tag.
        */
-      explicit Header(const ByteVector &data, uint version = 4);
+      explicit Header(const ByteVector &data, unsigned int version = 4);
 
       /*!
        * Destroys this Header instance.
@@ -362,7 +362,7 @@ namespace TagLib {
        * Sets the data for the Header.  \a version should indicate the ID3v2
        * version number of the tag that this frame is contained in.
        */
-      void setData(const ByteVector &data, uint version = 4);
+      void setData(const ByteVector &data, unsigned int version = 4);
 
       /*!
        * Returns the Frame ID (Structure, <a href="id3v2-structure.html#4">4</a>)
@@ -384,24 +384,24 @@ namespace TagLib {
        * Returns the size of the frame data portion, as set when setData() was
        * called or set explicitly via setFrameSize().
        */
-      uint frameSize() const;
+      unsigned int frameSize() const;
 
       /*!
        * Sets the size of the frame data portion.
        */
-      void setFrameSize(uint size);
+      void setFrameSize(unsigned int size);
 
       /*!
        * Returns the ID3v2 version of the header, as passed in from the
        * construction of the header or set via setVersion().
        */
-      uint version() const;
+      unsigned int version() const;
 
       /*!
        * Sets the ID3v2 version of the header, changing has impact on the
        * correct parsing/rendering of frame data.
        */
-      void setVersion(uint version);
+      void setVersion(unsigned int version);
 
       /*!
        * Returns the size of the frame header in bytes.
@@ -411,7 +411,7 @@ namespace TagLib {
        * removed in the next binary incompatible release (2.0) and will be
        * replaced with a non-static method that checks the frame version.
        */
-      static uint size();
+      static unsigned int size();
 
       /*!
        * Returns the size of the frame header in bytes for the ID3v2 version
@@ -419,7 +419,7 @@ namespace TagLib {
        *
        * \deprecated Please see the explanation in the version above.
        */
-      static uint size(uint version);
+      static unsigned int size(unsigned int version);
 
       /*!
        * Returns true if the flag for tag alter preservation is set.

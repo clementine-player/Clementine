@@ -62,8 +62,8 @@ namespace TagLib {
        * All times are in milliseconds.
        */
       ChapterFrame(const ByteVector &elementID,
-                   uint startTime, uint endTime,
-                   uint startOffset, uint endOffset,
+                   unsigned int startTime, unsigned int endTime,
+                   unsigned int startOffset, unsigned int endOffset,
                    const FrameList &embeddedFrames = FrameList());
 
       /*!
@@ -84,14 +84,14 @@ namespace TagLib {
        *
        * \see setStartTime()
        */
-      uint startTime() const;
+      unsigned int startTime() const;
 
       /*!
        * Returns time of chapter's end (in milliseconds).
        *
        * \see setEndTime()
        */
-      uint endTime() const;
+      unsigned int endTime() const;
 
       /*!
        * Returns zero based byte offset (count of bytes from the beginning
@@ -100,7 +100,7 @@ namespace TagLib {
        * \note If returned value is 0xFFFFFFFF, start time should be used instead.
        * \see setStartOffset()
        */
-      uint startOffset() const;
+      unsigned int startOffset() const;
 
       /*!
        * Returns zero based byte offset (count of bytes from the beginning
@@ -109,7 +109,7 @@ namespace TagLib {
        * \note If returned value is 0xFFFFFFFF, end time should be used instead.
        * \see setEndOffset()
        */
-      uint endOffset() const;
+      unsigned int endOffset() const;
 
       /*!
        * Sets the element ID of the frame to \a eID. If \a eID isn't
@@ -124,14 +124,14 @@ namespace TagLib {
        *
        * \see startTime()
        */
-      void setStartTime(const uint &sT);
+      void setStartTime(const unsigned int &sT);
 
       /*!
        * Sets time of chapter's end (in milliseconds) to \a eT.
        *
        * \see endTime()
        */
-      void setEndTime(const uint &eT);
+      void setEndTime(const unsigned int &eT);
 
       /*!
        * Sets zero based byte offset (count of bytes from the beginning
@@ -139,7 +139,7 @@ namespace TagLib {
        *
        * \see startOffset()
        */
-      void setStartOffset(const uint &sO);
+      void setStartOffset(const unsigned int &sO);
 
       /*!
        * Sets zero based byte offset (count of bytes from the beginning
@@ -147,7 +147,7 @@ namespace TagLib {
        *
        * \see endOffset()
        */
-      void setEndOffset(const uint &eO);
+      void setEndOffset(const unsigned int &eO);
 
       /*!
        * Returns a reference to the frame list map.  This is an FrameListMap of

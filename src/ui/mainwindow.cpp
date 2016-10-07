@@ -433,6 +433,8 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
           app_->playlist_manager(), SLOT(RemoveUnavailableCurrent()));
   connect(ui_->action_remove_from_playlist, SIGNAL(triggered()),
           SLOT(PlaylistRemoveCurrent()));
+  connect(ui_->action_toggle_show_sidebar, SIGNAL(toggled(bool)),
+          ui_->sidebar_layout, SLOT(setVisible(bool)));
   connect(ui_->action_edit_track, SIGNAL(triggered()), SLOT(EditTracks()));
   connect(ui_->action_renumber_tracks, SIGNAL(triggered()),
           SLOT(RenumberTracks()));
@@ -1040,8 +1042,7 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
 
   CommandlineOptionsReceived(options);
 
-  if (!options.contains_play_options())
-    LoadPlaybackStatus();
+  if (!options.contains_play_options()) LoadPlaybackStatus();
 
   qLog(Debug) << "Started";
 }
@@ -1070,6 +1071,10 @@ void MainWindow::ReloadSettings() {
                                    PlaylistAddBehaviour_Play).toInt());
   menu_playmode_ =
       PlayBehaviour(s.value("menu_playmode", PlayBehaviour_IfStopped).toInt());
+
+  bool show_sidebar = settings_.value("show_sidebar", true).toBool();
+  ui_->sidebar_layout->setVisible(show_sidebar);
+  ui_->action_toggle_show_sidebar->setChecked(show_sidebar);
 }
 
 void MainWindow::ReloadAllSettings() {
@@ -2077,6 +2082,7 @@ void MainWindow::ShowInLibrary() {
         "artist:" + songs.first().artist() + " album:" + songs.first().album();
   }
   library_view_->filter()->ShowInLibrary(search);
+  FocusLibraryTab();
 }
 
 void MainWindow::PlaylistRemoveCurrent() {
@@ -2151,6 +2157,10 @@ void MainWindow::CommandlineOptionsReceived(const CommandlineOptions& options) {
         break;
       case CommandlineOptions::UrlList_None:
         ApplyAddBehaviour(doubleclick_addmode_, data);
+        break;
+      case CommandlineOptions::UrlList_CreateNew:
+        data->name_for_new_playlist_ = options.playlist_name();
+        ApplyAddBehaviour(AddBehaviour_OpenInNew, data);
         break;
     }
 
@@ -2597,6 +2607,9 @@ bool MainWindow::winEvent(MSG* msg, long*) {
 
 void MainWindow::Exit() {
   SavePlaybackStatus();
+  settings_.setValue("show_sidebar",
+                     ui_->action_toggle_show_sidebar->isChecked());
+
   if (app_->player()->engine()->is_fadeout_enabled()) {
     // To shut down the application when fadeout will be finished
     connect(app_->player()->engine(), SIGNAL(FadeoutFinishedSignal()), qApp,
@@ -2777,6 +2790,10 @@ void MainWindow::ScrollToInternetIndex(const QModelIndex& index) {
 
 void MainWindow::AddPodcast() {
   app_->internet_model()->Service<PodcastService>()->AddPodcast();
+}
+
+void MainWindow::FocusLibraryTab() {
+  ui_->tabs->SetCurrentWidget(library_view_);
 }
 
 void MainWindow::FocusGlobalSearchField() {

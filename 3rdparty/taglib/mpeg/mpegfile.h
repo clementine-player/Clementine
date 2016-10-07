@@ -175,9 +175,6 @@ namespace TagLib {
        * If you would like more granular control over the content of the tags,
        * with the concession of generality, use parameterized save call below.
        *
-       * \warning In the current implementation, it's dangerous to call save()
-       * repeatedly.  At worst it will corrupt the file.
-       *
        * \see save(int tags)
        */
       virtual bool save();
@@ -190,9 +187,6 @@ namespace TagLib {
        * This strips all tags not included in the mask, but does not modify them
        * in memory, so later calls to save() which make use of these tags will
        * remain valid.  This also strips empty tags.
-       *
-       * \warning In the current implementation, it's dangerous to call save()
-       * repeatedly.  At worst it will corrupt the file.
        */
       bool save(int tags);
 
@@ -204,9 +198,6 @@ namespace TagLib {
        * If \a stripOthers is true this strips all tags not included in the mask,
        * but does not modify them in memory, so later calls to save() which make
        * use of these tags will remain valid.  This also strips empty tags.
-       *
-       * \warning In the current implementation, it's dangerous to call save()
-       * repeatedly.  At worst it will corrupt the file.
        */
       // BIC: combine with the above method
       bool save(int tags, bool stripOthers);
@@ -222,9 +213,6 @@ namespace TagLib {
        *
        * The \a id3v2Version parameter specifies the version of the saved
        * ID3v2 tag. It can be either 4 or 3.
-       *
-       * \warning In the current implementation, it's dangerous to call save()
-       * repeatedly.  At worst it will corrupt the file.
        */
       // BIC: combine with the above method
       bool save(int tags, bool stripOthers, int id3v2Version);
@@ -243,9 +231,6 @@ namespace TagLib {
        *
        * If \a duplicateTags is true and at least one tag -- ID3v1 or ID3v2 --
        * exists this will duplicate its content into the other tag.
-       *
-       * \warning In the current implementation, it's dangerous to call save()
-       * repeatedly.  At worst it will corrupt the file.
        */
       // BIC: combine with the above method
       bool save(int tags, bool stripOthers, int id3v2Version, bool duplicateTags);
@@ -390,9 +375,7 @@ namespace TagLib {
       File &operator=(const File &);
 
       void read(bool readProperties);
-      long findID3v2(long offset);
-      long findID3v1();
-      void findAPE();
+      long findID3v2();
 
       class FilePrivate;
       FilePrivate *d;

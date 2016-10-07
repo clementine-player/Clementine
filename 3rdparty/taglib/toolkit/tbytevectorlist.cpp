@@ -47,7 +47,7 @@ ByteVectorList ByteVectorList::split(const ByteVector &v, const ByteVector &patt
 {
   ByteVectorList l;
 
-  uint previousOffset = 0;
+  unsigned int previousOffset = 0;
   for(int offset = v.find(pattern, 0, byteAlign);
       offset != -1 && (max == 0 || max > int(l.size()) + 1);
       offset = v.find(pattern, offset + pattern.size(), byteAlign))
@@ -55,7 +55,7 @@ ByteVectorList ByteVectorList::split(const ByteVector &v, const ByteVector &patt
     if(offset - previousOffset >= 1)
       l.append(v.mid(previousOffset, offset - previousOffset));
     else
-      l.append(ByteVector::null);
+      l.append(ByteVector());
 
     previousOffset = offset + pattern.size();
   }

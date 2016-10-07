@@ -26,7 +26,7 @@ void TagLyricsInfoProvider::FetchInfo(int id, const Song& metadata) {
   if (!lyrics.isEmpty()) {
     CollapsibleInfoPane::Data data;
     data.id_ = "tag/lyrics";
-    data.title_ = tr("Lyrics from the ID3v2 tag");
+    data.title_ = tr("Lyrics from the tag");
     data.type_ = CollapsibleInfoPane::Data::Type_Lyrics;
 
     SongInfoTextView* editor = new SongInfoTextView;

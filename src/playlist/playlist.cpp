@@ -1283,7 +1283,8 @@ bool Playlist::CompareItems(int column, Qt::SortOrder order,
     case Column_Samplerate:
       cmp(samplerate);
     case Column_Filename:
-      cmp(url);
+      return (QString::localeAwareCompare(a->Url().path().toLower(),
+                                          b->Url().path().toLower()) < 0);
     case Column_BaseFilename:
       cmp(basefilename);
     case Column_Filesize:
@@ -1415,6 +1416,8 @@ void Playlist::sort(int column, Qt::SortOrder order) {
 
   undo_stack_->push(
       new PlaylistUndoCommands::SortItems(this, column, order, new_items));
+
+  ReshuffleIndices();
 }
 
 void Playlist::ReOrderWithoutUndo(const PlaylistItemList& new_items) {
@@ -1478,8 +1481,7 @@ void Playlist::Restore() {
 }
 
 void Playlist::ItemsLoaded(QFuture<PlaylistItemList> future) {
-  if (cancel_restore_)
-    return;
+  if (cancel_restore_) return;
 
   PlaylistItemList items = future.result();
 
@@ -1670,8 +1672,6 @@ void Playlist::StopAfter(int row) {
 }
 
 void Playlist::SetStreamMetadata(const QUrl& url, const Song& song) {
-  qLog(Debug) << "Setting metadata for" << url << "to" << song.artist()
-              << song.title();
   if (!current_item()) return;
 
   if (current_item()->Url() != url) return;

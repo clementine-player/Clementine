@@ -56,7 +56,7 @@ public:
   int channels;
   int version;
   int bitsPerSample;
-  uint sampleFrames;
+  unsigned int sampleFrames;
 };
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -122,7 +122,7 @@ int APE::Properties::bitsPerSample() const
   return d->bitsPerSample;
 }
 
-TagLib::uint APE::Properties::sampleFrames() const
+unsigned int APE::Properties::sampleFrames() const
 {
   return d->sampleFrames;
 }
@@ -133,7 +133,7 @@ TagLib::uint APE::Properties::sampleFrames() const
 
 namespace
 {
-  inline int headerVersion(const ByteVector &header)
+  int headerVersion(const ByteVector &header)
   {
     if(header.size() < 6 || !header.startsWith("MAC "))
       return -1;
@@ -184,7 +184,7 @@ void APE::Properties::analyzeCurrent(File *file)
     return;
   }
 
-  const uint descriptorBytes = descriptor.toUInt(0, false);
+  const unsigned int descriptorBytes = descriptor.toUInt(0, false);
 
   if((descriptorBytes - 52) > 0)
     file->seek(descriptorBytes - 52, File::Current);
@@ -201,12 +201,12 @@ void APE::Properties::analyzeCurrent(File *file)
   d->sampleRate    = header.toUInt(20, false);
   d->bitsPerSample = header.toShort(16, false);
 
-  const uint totalFrames = header.toUInt(12, false);
+  const unsigned int totalFrames = header.toUInt(12, false);
   if(totalFrames == 0)
     return;
 
-  const uint blocksPerFrame   = header.toUInt(4, false);
-  const uint finalFrameBlocks = header.toUInt(8, false);
+  const unsigned int blocksPerFrame   = header.toUInt(4, false);
+  const unsigned int finalFrameBlocks = header.toUInt(8, false);
   d->sampleFrames = (totalFrames - 1) * blocksPerFrame + finalFrameBlocks;
 }
 
@@ -218,14 +218,14 @@ void APE::Properties::analyzeOld(File *file)
     return;
   }
 
-  const uint totalFrames = header.toUInt(18, false);
+  const unsigned int totalFrames = header.toUInt(18, false);
 
   // Fail on 0 length APE files (catches non-finalized APE files)
   if(totalFrames == 0)
     return;
 
   const short compressionLevel = header.toShort(0, false);
-  uint blocksPerFrame;
+  unsigned int blocksPerFrame;
   if(d->version >= 3950)
     blocksPerFrame = 73728 * 4;
   else if(d->version >= 3900 || (d->version >= 3800 && compressionLevel == 4000))
@@ -237,7 +237,7 @@ void APE::Properties::analyzeOld(File *file)
   d->channels   = header.toShort(4, false);
   d->sampleRate = header.toUInt(6, false);
 
-  const uint finalFrameBlocks = header.toUInt(22, false);
+  const unsigned int finalFrameBlocks = header.toUInt(22, false);
   d->sampleFrames = (totalFrames - 1) * blocksPerFrame + finalFrameBlocks;
 
   // Get the bit depth from the RIFF-fmt chunk.

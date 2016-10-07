@@ -5,7 +5,7 @@
 
 /***************************************************************************
  *   This library is free software; you can redistribute it and/or modify  *
- *   it  under the terms of the GNU Lesser General Public License version  *
+ *   it under the terms of the GNU Lesser General Public License version   *
  *   2.1 as published by the Free Software Foundation.                     *
  *                                                                         *
  *   This library is distributed in the hope that it will be useful, but   *
@@ -15,9 +15,14 @@
  *                                                                         *
  *   You should have received a copy of the GNU Lesser General Public      *
  *   License along with this library; if not, write to the Free Software   *
- *   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,            *
- *   MA  02110-1301  USA                                                   *
+ *   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA         *
+ *   02110-1301  USA                                                       *
+ *                                                                         *
+ *   Alternatively, this file is available under the Mozilla Public        *
+ *   License Version 1.1.  You may obtain a copy of the License at         *
+ *   http://www.mozilla.org/MPL/                                           *
  ***************************************************************************/
+
 
 #include "modtag.h"
 #include "tstringlist.h"
@@ -55,12 +60,12 @@ String Mod::Tag::title() const
 
 String Mod::Tag::artist() const
 {
-  return String::null;
+  return String();
 }
 
 String Mod::Tag::album() const
 {
-  return String::null;
+  return String();
 }
 
 String Mod::Tag::comment() const
@@ -70,15 +75,15 @@ String Mod::Tag::comment() const
 
 String Mod::Tag::genre() const
 {
-  return String::null;
+  return String();
 }
 
-TagLib::uint Mod::Tag::year() const
+unsigned int Mod::Tag::year() const
 {
   return 0;
 }
 
-TagLib::uint Mod::Tag::track() const
+unsigned int Mod::Tag::track() const
 {
   return 0;
 }
@@ -110,11 +115,11 @@ void Mod::Tag::setGenre(const String &)
 {
 }
 
-void Mod::Tag::setYear(uint)
+void Mod::Tag::setYear(unsigned int)
 {
 }
 
-void Mod::Tag::setTrack(uint)
+void Mod::Tag::setTrack(unsigned int)
 {
 }
 
@@ -128,7 +133,7 @@ PropertyMap Mod::Tag::properties() const
   PropertyMap properties;
   properties["TITLE"] = d->title;
   properties["COMMENT"] = d->comment;
-  if(!(d->trackerName.isNull()))
+  if(!(d->trackerName.isEmpty()))
     properties["TRACKERNAME"] = d->trackerName;
   return properties;
 }
@@ -142,19 +147,19 @@ PropertyMap Mod::Tag::setProperties(const PropertyMap &origProps)
     d->title = properties["TITLE"].front();
     oneValueSet.append("TITLE");
   } else
-    d->title = String::null;
+    d->title.clear();
 
   if(properties.contains("COMMENT")) {
     d->comment = properties["COMMENT"].front();
     oneValueSet.append("COMMENT");
   } else
-    d->comment = String::null;
+    d->comment.clear();
 
   if(properties.contains("TRACKERNAME")) {
     d->trackerName = properties["TRACKERNAME"].front();
     oneValueSet.append("TRACKERNAME");
   } else
-    d->trackerName = String::null;
+    d->trackerName.clear();
 
   // for each tag that has been set above, remove the first entry in the corresponding
   // value list. The others will be returned as unsupported by this format.

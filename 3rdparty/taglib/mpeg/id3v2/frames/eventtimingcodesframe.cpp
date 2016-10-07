@@ -109,8 +109,8 @@ void EventTimingCodesFrame::parseFields(const ByteVector &data)
   int pos = 1;
   d->synchedEvents.clear();
   while(pos + 4 < end) {
-    EventType type = EventType(uchar(data[pos++]));
-    uint time = data.toUInt(pos, true);
+    EventType type = static_cast<EventType>(static_cast<unsigned char>(data[pos++]));
+    unsigned int time = data.toUInt(pos, true);
     pos += 4;
     d->synchedEvents.append(SynchedEvent(time, type));
   }

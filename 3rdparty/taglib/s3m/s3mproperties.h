@@ -5,7 +5,7 @@
 
 /***************************************************************************
  *   This library is free software; you can redistribute it and/or modify  *
- *   it  under the terms of the GNU Lesser General Public License version  *
+ *   it under the terms of the GNU Lesser General Public License version   *
  *   2.1 as published by the Free Software Foundation.                     *
  *                                                                         *
  *   This library is distributed in the hope that it will be useful, but   *
@@ -15,8 +15,12 @@
  *                                                                         *
  *   You should have received a copy of the GNU Lesser General Public      *
  *   License along with this library; if not, write to the Free Software   *
- *   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,            *
- *   MA  02110-1301  USA                                                   *
+ *   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA         *
+ *   02110-1301  USA                                                       *
+ *                                                                         *
+ *   Alternatively, this file is available under the Mozilla Public        *
+ *   License Version 1.1.  You may obtain a copy of the License at         *
+ *   http://www.mozilla.org/MPL/                                           *
  ***************************************************************************/
 
 #ifndef TAGLIB_S3MPROPERTIES_H
@@ -51,31 +55,31 @@ namespace TagLib {
       int sampleRate()           const;
       int channels()             const;
 
-      ushort lengthInPatterns()  const;
-      bool   stereo()            const;
-      ushort sampleCount()       const;
-      ushort patternCount()      const;
-      ushort flags()             const;
-      ushort trackerVersion()    const;
-      ushort fileFormatVersion() const;
-      uchar  globalVolume()      const;
-      uchar  masterVolume()      const;
-      uchar  tempo()             const;
-      uchar  bpmSpeed()          const;
+      unsigned short lengthInPatterns()  const;
+      bool           stereo()            const;
+      unsigned short sampleCount()       const;
+      unsigned short patternCount()      const;
+      unsigned short flags()             const;
+      unsigned short trackerVersion()    const;
+      unsigned short fileFormatVersion() const;
+      unsigned char  globalVolume()      const;
+      unsigned char  masterVolume()      const;
+      unsigned char  tempo()             const;
+      unsigned char  bpmSpeed()          const;
 
       void setChannels(int channels);
 
-      void setLengthInPatterns (ushort lengthInPatterns);
+      void setLengthInPatterns (unsigned short lengthInPatterns);
       void setStereo           (bool stereo);
-      void setSampleCount      (ushort sampleCount);
-      void setPatternCount     (ushort patternCount);
-      void setFlags            (ushort flags);
-      void setTrackerVersion   (ushort trackerVersion);
-      void setFileFormatVersion(ushort fileFormatVersion);
-      void setGlobalVolume     (uchar globalVolume);
-      void setMasterVolume     (uchar masterVolume);
-      void setTempo            (uchar tempo);
-      void setBpmSpeed         (uchar bpmSpeed);
+      void setSampleCount      (unsigned short sampleCount);
+      void setPatternCount     (unsigned short patternCount);
+      void setFlags            (unsigned short flags);
+      void setTrackerVersion   (unsigned short trackerVersion);
+      void setFileFormatVersion(unsigned short fileFormatVersion);
+      void setGlobalVolume     (unsigned char globalVolume);
+      void setMasterVolume     (unsigned char masterVolume);
+      void setTempo            (unsigned char tempo);
+      void setBpmSpeed         (unsigned char bpmSpeed);
 
     private:
       Properties(const Properties&);

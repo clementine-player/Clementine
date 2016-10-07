@@ -44,6 +44,7 @@ class CommandlineOptions {
     UrlList_Append = 0,
     UrlList_Load = 1,
     UrlList_None = 2,
+    UrlList_CreateNew = 3,
   };
   enum PlayerAction {
     Player_None = 0,
@@ -74,6 +75,7 @@ class CommandlineOptions {
   QList<QUrl> urls() const { return urls_; }
   QString language() const { return language_; }
   QString log_levels() const { return log_levels_; }
+  QString playlist_name() const { return playlist_name_; }
 
   QByteArray Serialize() const;
   void Load(const QByteArray& serialized);
@@ -115,6 +117,7 @@ class CommandlineOptions {
   bool toggle_pretty_osd_;
   QString language_;
   QString log_levels_;
+  QString playlist_name_;
 
   QList<QUrl> urls_;
 };

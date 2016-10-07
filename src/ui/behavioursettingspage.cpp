@@ -104,6 +104,8 @@ void BehaviourSettingsPage::Load() {
 
   s.beginGroup(MainWindow::kSettingsGroup);
   ui_->b_show_tray_icon_->setChecked(s.value("showtray", true).toBool());
+  ui_->b_scroll_tray_icon_->setChecked(
+      s.value("scrolltrayicon", ui_->b_show_tray_icon_->isChecked()).toBool());
   ui_->b_keep_running_->setChecked(
       s.value("keeprunning", ui_->b_show_tray_icon_->isChecked()).toBool());
   ui_->doubleclick_addmode->setCurrentIndex(ui_->doubleclick_addmode->findData(
@@ -225,6 +227,7 @@ void BehaviourSettingsPage::Save() {
 
   s.beginGroup(MainWindow::kSettingsGroup);
   s.setValue("showtray", ui_->b_show_tray_icon_->isChecked());
+  s.setValue("scrolltrayicon", ui_->b_scroll_tray_icon_->isChecked());
   s.setValue("keeprunning", ui_->b_keep_running_->isChecked());
   s.setValue("startupbehaviour", int(behaviour));
   s.setValue("doubleclick_addmode", doubleclick_addmode);
@@ -264,4 +267,5 @@ void BehaviourSettingsPage::ShowTrayIconToggled(bool on) {
     ui_->b_remember_->setChecked(true);
   ui_->b_keep_running_->setEnabled(on);
   ui_->b_keep_running_->setChecked(on);
+  ui_->b_scroll_tray_icon_->setEnabled(on);
 }

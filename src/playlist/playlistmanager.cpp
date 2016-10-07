@@ -200,7 +200,12 @@ void PlaylistManager::SaveWithUI(int id, const QString& suggested_filename) {
   QSettings settings;
   settings.beginGroup(Playlist::kSettingsGroup);
   QString filename = settings.value("last_save_playlist").toString();
-  settings.endGroup();
+  QString extension = settings.value("last_save_extension",
+                                     parser()->default_extension()).toString();
+  QString filter =
+      settings.value("last_save_filter", parser()->default_filter()).toString();
+
+  qLog(Debug) << "Using extension:" << extension;
 
   // We want to use the playlist tab name as a default filename, but in the
   // same directory as the last saved file.
@@ -217,22 +222,18 @@ void PlaylistManager::SaveWithUI(int id, const QString& suggested_filename) {
   if (filename.isEmpty()) filename = QDir::homePath();
 
   // Add the suggested filename
-  filename += "/" + suggested_filename + "." + parser()->default_extension();
-
-  QString default_filter = parser()->default_filter();
+  filename += "/" + suggested_filename + "." + extension;
+  qLog(Debug) << "Suggested filename:" << filename;
 
   filename = QFileDialog::getSaveFileName(
       nullptr, tr("Save playlist", "Title of the playlist save dialog."),
-      filename, parser()->filters(), &default_filter);
+      filename, parser()->filters(), &filter);
 
   if (filename.isNull()) {
-    settings.endGroup();
     return;
   }
 
-  QSettings s;
-  s.beginGroup(Playlist::kSettingsGroup);
-  int p = s.value(Playlist::kPathType, Playlist::Path_Automatic).toInt();
+  int p = settings.value(Playlist::kPathType, Playlist::Path_Automatic).toInt();
   Playlist::Path path = static_cast<Playlist::Path>(p);
   if (path == Playlist::Path_Ask_User) {
     PlaylistSaveOptionsDialog optionsDialog(nullptr);
@@ -244,7 +245,9 @@ void PlaylistManager::SaveWithUI(int id, const QString& suggested_filename) {
   }
 
   settings.setValue("last_save_playlist", filename);
-  settings.endGroup();
+  settings.setValue("last_save_filter", filter);
+  QFileInfo info(filename);
+  settings.setValue("last_save_extension", info.suffix());
 
   Save(id == -1 ? current_id() : id, filename, path);
 }

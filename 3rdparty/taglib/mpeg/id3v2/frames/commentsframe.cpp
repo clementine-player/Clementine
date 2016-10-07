@@ -116,8 +116,6 @@ PropertyMap CommentsFrame::asProperties() const
   PropertyMap map;
   if(key.isEmpty() || key == "COMMENT")
     map.insert("COMMENT", text());
-  else if(key.isNull())
-    map.unsupportedData().append(L"COMM/" + description());
   else
     map.insert("COMMENT:" + key, text());
   return map;
@@ -164,7 +162,7 @@ void CommentsFrame::parseFields(const ByteVector &data)
     } else {
       d->description = String(l.front(), d->textEncoding);
       d->text = String(l.back(), d->textEncoding);
-    }  
+    }
   }
 }
 

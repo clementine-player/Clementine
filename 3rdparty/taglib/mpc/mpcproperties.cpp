@@ -49,18 +49,18 @@ public:
     albumGain(0),
     albumPeak(0) {}
 
-  int version;
-  int length;
-  int bitrate;
-  int sampleRate;
-  int channels;
-  uint totalFrames;
-  uint sampleFrames;
-  uint trackGain;
-  uint trackPeak;
-  uint albumGain;
-  uint albumPeak;
-  String flags;
+  int          version;
+  int          length;
+  int          bitrate;
+  int          sampleRate;
+  int          channels;
+  unsigned int totalFrames;
+  unsigned int sampleFrames;
+  unsigned int trackGain;
+  unsigned int trackPeak;
+  unsigned int albumGain;
+  unsigned int albumPeak;
+  String       flags;
 };
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -129,12 +129,12 @@ int MPC::Properties::mpcVersion() const
   return d->version;
 }
 
-TagLib::uint MPC::Properties::totalFrames() const
+unsigned int MPC::Properties::totalFrames() const
 {
   return d->totalFrames;
 }
 
-TagLib::uint MPC::Properties::sampleFrames() const
+unsigned int MPC::Properties::sampleFrames() const
 {
   return d->sampleFrames;
 }
@@ -163,42 +163,42 @@ int MPC::Properties::albumPeak() const
 // private members
 ////////////////////////////////////////////////////////////////////////////////
 
-unsigned long readSize(File *file, TagLib::uint &sizeLength, bool &eof)
-{
-  sizeLength = 0;
-  eof = false;
-
-  unsigned char tmp;
-  unsigned long size = 0;
-
-  do {
-    const ByteVector b = file->readBlock(1);
-    if(b.isEmpty()) {
-      eof = true;
-      break;
-    }
-
-    tmp = b[0];
-    size = (size << 7) | (tmp & 0x7F);
-    sizeLength++;
-  } while((tmp & 0x80));
-  return size;
-}
-
-unsigned long readSize(const ByteVector &data, TagLib::uint &pos)
-{
-  unsigned char tmp;
-  unsigned long size = 0;
-
-  do {
-    tmp = data[pos++];
-    size = (size << 7) | (tmp & 0x7F);
-  } while((tmp & 0x80) && (pos < data.size()));
-  return size;
-}
-
 namespace
 {
+  unsigned long readSize(File *file, unsigned int &sizeLength, bool &eof)
+  {
+    sizeLength = 0;
+    eof = false;
+
+    unsigned char tmp;
+    unsigned long size = 0;
+
+    do {
+      const ByteVector b = file->readBlock(1);
+      if(b.isEmpty()) {
+        eof = true;
+        break;
+      }
+
+      tmp = b[0];
+      size = (size << 7) | (tmp & 0x7F);
+      sizeLength++;
+    } while((tmp & 0x80));
+    return size;
+  }
+
+  unsigned long readSize(const ByteVector &data, unsigned int &pos)
+  {
+    unsigned char tmp;
+    unsigned long size = 0;
+
+    do {
+      tmp = data[pos++];
+      size = (size << 7) | (tmp & 0x7F);
+    } while((tmp & 0x80) && (pos < data.size()));
+    return size;
+  }
+
   // This array looks weird, but the same as original MusePack code found at:
   // https://www.musepack.net/index.php?pg=src
   const unsigned short sftable [8] = { 44100, 48000, 37800, 32000, 0, 0, 0, 0 };
@@ -211,7 +211,7 @@ void MPC::Properties::readSV8(File *file, long streamLength)
   while(!readSH && !readRG) {
     const ByteVector packetType = file->readBlock(2);
 
-    uint packetSizeLength;
+    unsigned int packetSizeLength;
     bool eof;
     const unsigned long packetSize = readSize(file, packetSizeLength, eof);
     if(eof) {
@@ -238,7 +238,7 @@ void MPC::Properties::readSV8(File *file, long streamLength)
 
       readSH = true;
 
-      TagLib::uint pos = 4;
+      unsigned int pos = 4;
       d->version = data[pos];
       pos += 1;
       d->sampleFrames = readSize(data, pos);
@@ -247,19 +247,19 @@ void MPC::Properties::readSV8(File *file, long streamLength)
         break;
       }
 
-      const ulong begSilence = readSize(data, pos);
+      const unsigned long begSilence = readSize(data, pos);
       if(pos > dataSize - 2) {
         debug("MPC::Properties::readSV8() - \"SH\" packet is corrupt.");
         break;
       }
 
-      const ushort flags = data.toUShort(pos, true);
+      const unsigned short flags = data.toUShort(pos, true);
       pos += 2;
 
       d->sampleRate = sftable[(flags >> 13) & 0x07];
       d->channels   = ((flags >> 4) & 0x0F) + 1;
 
-      const uint frameCount = d->sampleFrames - begSilence;
+      const unsigned int frameCount = d->sampleFrames - begSilence;
       if(frameCount > 0 && d->sampleRate > 0) {
         const double length = frameCount * 1000.0 / d->sampleRate;
         d->length  = static_cast<int>(length + 0.5);
@@ -305,11 +305,11 @@ void MPC::Properties::readSV7(const ByteVector &data, long streamLength)
 
     d->totalFrames = data.toUInt(4, false);
 
-    const uint flags = data.toUInt(8, false);
+    const unsigned int flags = data.toUInt(8, false);
     d->sampleRate = sftable[(flags >> 16) & 0x03];
     d->channels   = 2;
 
-    const uint gapless = data.toUInt(5, false);
+    const unsigned int gapless = data.toUInt(5, false);
 
     d->trackGain = data.toShort(14, false);
     d->trackPeak = data.toShort(12, false);
@@ -337,14 +337,14 @@ void MPC::Properties::readSV7(const ByteVector &data, long streamLength)
 
     bool trueGapless = (gapless >> 31) & 0x0001;
     if(trueGapless) {
-      uint lastFrameSamples = (gapless >> 20) & 0x07FF;
+      unsigned int lastFrameSamples = (gapless >> 20) & 0x07FF;
       d->sampleFrames = d->totalFrames * 1152 - lastFrameSamples;
     }
     else
       d->sampleFrames = d->totalFrames * 1152 - 576;
   }
   else {
-    const uint headerData = data.toUInt(0, false);
+    const unsigned int headerData = data.toUInt(0, false);
 
     d->bitrate    = (headerData >> 23) & 0x01ff;
     d->version    = (headerData >> 11) & 0x03ff;
