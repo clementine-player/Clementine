@@ -55,18 +55,19 @@ const char* CommandlineOptions::kHelpText =
     "  --restart-or-previous     %19\n"
     "\n"
     "%20:\n"
-    "  -a, --append              %21\n"
-    "  -l, --load                %22\n"
-    "  -k, --play-track <n>      %23\n"
+    "  -c, --create <name>       %21\n"
+    "  -a, --append              %22\n"
+    "  -l, --load                %23\n"
+    "  -k, --play-track <n>      %24\n"
     "\n"
-    "%24:\n"
-    "  -o, --show-osd            %25\n"
-    "  -y, --toggle-pretty-osd   %26\n"
-    "  -g, --language <lang>     %27\n"
-    "      --quiet               %28\n"
-    "      --verbose             %29\n"
-    "      --log-levels <levels> %30\n"
-    "      --version             %31\n";
+    "%25:\n"
+    "  -o, --show-osd            %26\n"
+    "  -y, --toggle-pretty-osd   %27\n"
+    "  -g, --language <lang>     %28\n"
+    "      --quiet               %29\n"
+    "      --verbose             %30\n"
+    "      --log-levels <levels> %31\n"
+    "      --version             %32\n";
 
 const char* CommandlineOptions::kVersionText = "Clementine %1";
 
@@ -123,6 +124,7 @@ bool CommandlineOptions::Parse() {
       {"seek-to", required_argument, 0, SeekTo},
       {"seek-by", required_argument, 0, SeekBy},
       {"restart-or-previous", no_argument, 0, RestartOrPrevious},
+      {"create", required_argument, 0, 'c'},
       {"append", no_argument, 0, 'a'},
       {"load", no_argument, 0, 'l'},
       {"play-track", required_argument, 0, 'k'},
@@ -138,7 +140,7 @@ bool CommandlineOptions::Parse() {
   // Parse the arguments
   bool ok = false;
   forever {
-    int c = getopt_long(argc_, argv_, "hptusqrfv:alk:oyg:", kOptions, nullptr);
+    int c = getopt_long(argc_, argv_, "hptusqrfv:c:alk:oyg:", kOptions, nullptr);
 
     // End of the options
     if (c == -1) break;
@@ -167,6 +169,7 @@ bool CommandlineOptions::Parse() {
                      tr("Restart the track, or play the previous track if "
                         "within 8 seconds of start."),
                      tr("Playlist options"),
+                     tr("Create a new playlist with files/URLs"),
                      tr("Append files/URLs to the playlist"),
                      tr("Loads files/URLs, replacing current playlist"),
                      tr("Play the <n>th track in the playlist"))
@@ -202,6 +205,10 @@ bool CommandlineOptions::Parse() {
         break;
       case 'f':
         player_action_ = Player_Next;
+        break;
+      case 'c':
+        url_list_action_ = UrlList_CreateNew;
+        playlist_name_ = QString(optarg);
         break;
       case 'a':
         url_list_action_ = UrlList_Append;

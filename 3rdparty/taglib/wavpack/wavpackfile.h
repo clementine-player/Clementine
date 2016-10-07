@@ -135,9 +135,6 @@ namespace TagLib {
        * Saves the file.
        *
        * This returns true if the save was successful.
-       *
-       * \warning In the current implementation, it's dangerous to call save()
-       * repeatedly.  At worst it will corrupt the file.
        */
       virtual bool save();
 
@@ -208,8 +205,6 @@ namespace TagLib {
       File &operator=(const File &);
 
       void read(bool readProperties);
-      long findID3v1();
-      long findAPE();
 
       class FilePrivate;
       FilePrivate *d;

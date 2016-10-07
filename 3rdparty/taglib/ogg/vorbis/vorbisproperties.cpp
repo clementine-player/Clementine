@@ -144,7 +144,7 @@ void Vorbis::Properties::read(File *file)
     return;
   }
 
-  uint pos = 0;
+  unsigned int pos = 0;
 
   if(data.mid(pos, 7) != vorbisSetupHeaderID) {
     debug("Vorbis::Properties::read() -- invalid Vorbis identification header");
@@ -156,7 +156,7 @@ void Vorbis::Properties::read(File *file)
   d->vorbisVersion = data.toUInt(pos, false);
   pos += 4;
 
-  d->channels = uchar(data[pos]);
+  d->channels = static_cast<unsigned char>(data[pos]);
   pos += 1;
 
   d->sampleRate = data.toUInt(pos, false);

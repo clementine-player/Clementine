@@ -64,9 +64,6 @@
 #ifdef HAVE_SEAFILE
 #include "internet/seafile/seafileservice.h"
 #endif
-#ifdef HAVE_AMAZON_CLOUD_DRIVE
-#include "internet/amazon/amazonclouddrive.h"
-#endif
 
 using smart_playlists::Generator;
 using smart_playlists::GeneratorMimeData;
@@ -118,9 +115,6 @@ InternetModel::InternetModel(Application* app, QObject* parent)
 #endif
 #ifdef HAVE_VK
   AddService(new VkService(app, this));
-#endif
-#ifdef HAVE_AMAZON_CLOUD_DRIVE
-  AddService(new AmazonCloudDrive(app, this));
 #endif
 
   invisibleRootItem()->sortChildren(0, Qt::AscendingOrder);

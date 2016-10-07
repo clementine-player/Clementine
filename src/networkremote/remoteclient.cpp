@@ -64,6 +64,10 @@ void RemoteClient::setDownloader(bool downloader) { downloader_ = downloader; }
 void RemoteClient::IncomingData() {
   while (client_->bytesAvailable()) {
     if (!reading_protobuf_) {
+      // If we have less than 4 byte, we cannot read the length. Wait for more data
+      if (client_->bytesAvailable() < 4) {
+        break;
+      }
       // Read the length of the next message
       QDataStream s(client_);
       s >> expected_length_;

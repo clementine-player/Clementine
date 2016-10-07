@@ -194,7 +194,7 @@ List<T> &List<T>::clear()
 }
 
 template <class T>
-TagLib::uint List<T>::size() const
+unsigned int List<T>::size() const
 {
   return d->list.size();
 }
@@ -263,7 +263,7 @@ T &List<T>::back()
 }
 
 template <class T>
-T &List<T>::operator[](uint i)
+T &List<T>::operator[](unsigned int i)
 {
   Iterator it = d->list.begin();
   std::advance(it, i);
@@ -272,7 +272,7 @@ T &List<T>::operator[](uint i)
 }
 
 template <class T>
-const T &List<T>::operator[](uint i) const
+const T &List<T>::operator[](unsigned int i) const
 {
   ConstIterator it = d->list.begin();
   std::advance(it, i);

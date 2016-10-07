@@ -1,6 +1,7 @@
 /***************************************************************************
     copyright            : (C) 2002 - 2008 by Scott Wheeler
     email                : wheeler@kde.org
+
     copyright            : (C) 2006 by Urs Fleisch
     email                : ufleisch@users.sourceforge.net
  ***************************************************************************/
@@ -84,7 +85,7 @@ PropertyMap UrlLinkFrame::asProperties() const
 {
   String key = frameIDToKey(frameID());
   PropertyMap map;
-  if(key.isNull())
+  if(key.isEmpty())
     // unknown W*** frame - this normally shouldn't happen
     map.unsupportedData().append(frameID());
   else
@@ -159,8 +160,6 @@ PropertyMap UserUrlLinkFrame::asProperties() const
   String key = description().upper();
   if(key.isEmpty() || key.upper() == "URL")
     map.insert("URL", url());
-  else if(key.isNull())
-    map.unsupportedData().append(L"WXXX/" + description());
   else
     map.insert("URL:" + key, url());
   return map;

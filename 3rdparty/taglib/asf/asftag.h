@@ -90,13 +90,13 @@ namespace TagLib {
       /*!
        * Returns the year; if there is no year set, this will return 0.
        */
-      virtual uint year() const;
+      virtual unsigned int year() const;
 
       /*!
        * Returns the track number; if there is no track number set, this will
        * return 0.
        */
-      virtual uint track() const;
+      virtual unsigned int track() const;
 
       /*!
        * Sets the title to \a s.
@@ -137,12 +137,12 @@ namespace TagLib {
       /*!
        * Sets the year to \a i.  If \a s is 0 then this value will be cleared.
        */
-      virtual void setYear(uint i);
+      virtual void setYear(unsigned int i);
 
       /*!
        * Sets the track to \a i.  If \a s is 0 then this value will be cleared.
        */
-      virtual void setTrack(uint i);
+      virtual void setTrack(unsigned int i);
 
       /*!
        * Returns true if the tag does not contain any data.  This should be

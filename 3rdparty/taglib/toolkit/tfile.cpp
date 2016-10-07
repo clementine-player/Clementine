@@ -224,7 +224,7 @@ PropertyMap File::setProperties(const PropertyMap &properties)
     return tag()->setProperties(properties);
 }
 
-ByteVector File::readBlock(ulong length)
+ByteVector File::readBlock(unsigned long length)
 {
   return d->stream->readBlock(length);
 }
@@ -289,7 +289,7 @@ long File::find(const ByteVector &pattern, long fromOffset, const ByteVector &be
       }
     }
 
-    if(!before.isNull() && beforePreviousPartialMatch >= 0 && int(bufferSize()) > beforePreviousPartialMatch) {
+    if(!before.isEmpty() && beforePreviousPartialMatch >= 0 && int(bufferSize()) > beforePreviousPartialMatch) {
       const int beforeOffset = (bufferSize() - beforePreviousPartialMatch);
       if(buffer.containsAt(before, 0, beforeOffset)) {
         seek(originalPosition);
@@ -305,7 +305,7 @@ long File::find(const ByteVector &pattern, long fromOffset, const ByteVector &be
       return bufferOffset + location;
     }
 
-    if(!before.isNull() && buffer.find(before) >= 0) {
+    if(!before.isEmpty() && buffer.find(before) >= 0) {
       seek(originalPosition);
       return -1;
     }
@@ -314,7 +314,7 @@ long File::find(const ByteVector &pattern, long fromOffset, const ByteVector &be
 
     previousPartialMatch = buffer.endsWithPartialMatch(pattern);
 
-    if(!before.isNull())
+    if(!before.isEmpty())
       beforePreviousPartialMatch = buffer.endsWithPartialMatch(before);
 
     bufferOffset += bufferSize();
@@ -387,7 +387,7 @@ long File::rfind(const ByteVector &pattern, long fromOffset, const ByteVector &b
       return bufferOffset + location;
     }
 
-    if(!before.isNull() && buffer.find(before) >= 0) {
+    if(!before.isEmpty() && buffer.find(before) >= 0) {
       seek(originalPosition);
       return -1;
     }
@@ -404,12 +404,12 @@ long File::rfind(const ByteVector &pattern, long fromOffset, const ByteVector &b
   return -1;
 }
 
-void File::insert(const ByteVector &data, ulong start, ulong replace)
+void File::insert(const ByteVector &data, unsigned long start, unsigned long replace)
 {
   d->stream->insert(data, start, replace);
 }
 
-void File::removeBlock(ulong start, ulong length)
+void File::removeBlock(unsigned long start, unsigned long length)
 {
   d->stream->removeBlock(start, length);
 }
@@ -488,7 +488,7 @@ bool File::isWritable(const char *file)
 // protected members
 ////////////////////////////////////////////////////////////////////////////////
 
-TagLib::uint File::bufferSize()
+unsigned int File::bufferSize()
 {
   return 1024;
 }

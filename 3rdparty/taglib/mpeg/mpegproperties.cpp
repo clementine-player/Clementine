@@ -155,27 +155,31 @@ bool MPEG::Properties::isOriginal() const
 
 void MPEG::Properties::read(File *file)
 {
-  // Only the first frame is required if we have a VBR header.
+  // Only the first valid frame is required if we have a VBR header.
 
-  const long first = file->firstFrameOffset();
-  if(first < 0) {
-    debug("MPEG::Properties::read() -- Could not find a valid first MPEG frame in the stream.");
+  long firstFrameOffset = file->firstFrameOffset();
+  if(firstFrameOffset < 0) {
+    debug("MPEG::Properties::read() -- Could not find an MPEG frame in the stream.");
     return;
   }
 
-  file->seek(first);
-  const Header firstHeader(file->readBlock(4));
+  Header firstHeader(file, firstFrameOffset);
 
-  if(!firstHeader.isValid()) {
-    debug("MPEG::Properties::read() -- The first page header is invalid.");
-    return;
+  while(!firstHeader.isValid()) {
+    firstFrameOffset = file->nextFrameOffset(firstFrameOffset + 1);
+    if(firstFrameOffset < 0) {
+      debug("MPEG::Properties::read() -- Could not find a valid first MPEG frame in the stream.");
+      return;
+    }
+
+    firstHeader = Header(file, firstFrameOffset);
   }
 
   // Check for a VBR header that will help us in gathering information about a
   // VBR stream.
 
-  file->seek(first + 4);
-  d->xingHeader = new XingHeader(file->readBlock(firstHeader.frameLength() - 4));
+  file->seek(firstFrameOffset);
+  d->xingHeader = new XingHeader(file->readBlock(firstHeader.frameLength()));
   if(!d->xingHeader->isValid()) {
     delete d->xingHeader;
     d->xingHeader = 0;
@@ -201,14 +205,27 @@ void MPEG::Properties::read(File *file)
 
     d->bitrate = firstHeader.bitrate();
 
-    long streamLength = file->length() - first;
+    // Look for the last MPEG audio frame to calculate the stream length.
 
-    if(file->hasID3v1Tag())
-      streamLength -= 128;
+    long lastFrameOffset = file->lastFrameOffset();
+    if(lastFrameOffset < 0) {
+      debug("MPEG::Properties::read() -- Could not find an MPEG frame in the stream.");
+      return;
+    }
 
-    if(file->hasAPETag())
-      streamLength -= file->APETag()->footer()->completeTagSize();
+    Header lastHeader(file, lastFrameOffset, false);
 
+    while(!lastHeader.isValid()) {
+      lastFrameOffset = file->previousFrameOffset(lastFrameOffset);
+      if(lastFrameOffset < 0) {
+        debug("MPEG::Properties::read() -- Could not find a valid last MPEG frame in the stream.");
+        return;
+      }
+
+      lastHeader = Header(file, lastFrameOffset, false);
+    }
+
+    const long streamLength = lastFrameOffset - firstFrameOffset + lastHeader.frameLength();
     if(streamLength > 0)
       d->length = static_cast<int>(streamLength * 8.0 / d->bitrate + 0.5);
   }

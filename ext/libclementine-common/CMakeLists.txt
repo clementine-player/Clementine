@@ -7,6 +7,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --std=c++0x")
 
 set(SOURCES
   core/closure.cpp
+  core/latch.cpp
   core/logging.cpp
   core/messagehandler.cpp
   core/messagereply.cpp
@@ -16,6 +17,7 @@ set(SOURCES
 
 set(HEADERS
   core/closure.h
+  core/latch.h
   core/messagehandler.h
   core/messagereply.h
   core/workerpool.h

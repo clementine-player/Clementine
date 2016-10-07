@@ -83,10 +83,6 @@
 #include "internet/seafile/seafilesettingspage.h"
 #endif
 
-#ifdef HAVE_AMAZON_CLOUD_DRIVE
-#include "internet/amazon/amazonsettingspage.h"
-#endif
-
 #include <QAbstractButton>
 #include <QDesktopWidget>
 #include <QPainter>

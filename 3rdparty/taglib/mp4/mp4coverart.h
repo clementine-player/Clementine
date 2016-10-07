@@ -53,7 +53,16 @@ namespace TagLib {
       ~CoverArt();
 
       CoverArt(const CoverArt &item);
+
+      /*!
+       * Copies the contents of \a item into this CoverArt.
+       */
       CoverArt &operator=(const CoverArt &item);
+
+      /*!
+       * Exchanges the content of the CoverArt by the content of \a item.
+       */
+      void swap(CoverArt &item);
 
       //! Format of the image
       Format format() const;

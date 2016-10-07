@@ -126,7 +126,7 @@ else(FORCE_GIT_REVISION)
   find_program(GIT_EXECUTABLE git)
 
   if(NOT GIT_EXECUTABLE-NOTFOUND)
-    execute_process(COMMAND ${GIT_EXECUTABLE} describe
+    execute_process(COMMAND ${GIT_EXECUTABLE} describe --tags
         RESULT_VARIABLE GIT_INFO_RESULT
         OUTPUT_VARIABLE GIT_REV
         ERROR_QUIET

@@ -67,7 +67,7 @@ namespace TagLib {
     /*!
      * Reads a block of size \a length at the current get pointer.
      */
-    ByteVector readBlock(ulong length);
+    ByteVector readBlock(unsigned long length);
 
     /*!
      * Attempts to write the block \a data at the current get pointer.  If the
@@ -87,7 +87,7 @@ namespace TagLib {
      * \note This method is slow since it requires rewriting all of the file
      * after the insertion point.
      */
-    void insert(const ByteVector &data, ulong start = 0, ulong replace = 0);
+    void insert(const ByteVector &data, unsigned long start = 0, unsigned long replace = 0);
 
     /*!
      * Removes a block of the file starting a \a start and continuing for
@@ -96,7 +96,7 @@ namespace TagLib {
      * \note This method is slow since it involves rewriting all of the file
      * after the removed portion.
      */
-    void removeBlock(ulong start = 0, ulong length = 0);
+    void removeBlock(unsigned long start = 0, unsigned long length = 0);
 
     /*!
      * Returns true if the file is read only (or if the file can not be opened).
@@ -142,7 +142,7 @@ namespace TagLib {
     /*!
      * Returns the buffer size that is used for internal buffering.
      */
-    static uint bufferSize();
+    static unsigned int bufferSize();
 
   private:
     class FileStreamPrivate;

@@ -59,6 +59,9 @@
 #ifdef HAVE_LIBMTP
 #include "mtpdevice.h"
 #endif
+#ifdef HAVE_UDISKS2
+#include "udisks2lister.h"
+#endif
 
 using std::bind;
 
@@ -191,6 +194,9 @@ DeviceManager::DeviceManager(Application* app, QObject* parent)
 #ifdef HAVE_DEVICEKIT
   AddLister(new DeviceKitLister);
 #endif
+#ifdef HAVE_UDISKS2
+  AddLister(new Udisks2Lister);
+#endif
 #ifdef HAVE_GIO
   AddLister(new GioLister);
 #endif
@@ -228,7 +234,10 @@ void DeviceManager::LoadAllDevices() {
   for (const DeviceDatabaseBackend::Device& device : devices) {
     DeviceInfo info;
     info.InitFromDb(device);
+
+    beginInsertRows(QModelIndex(), devices_.count(), devices_.count());
     devices_ << info;
+    endInsertRows();
   }
 }
 

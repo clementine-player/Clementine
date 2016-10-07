@@ -1,5 +1,5 @@
 /* This file is part of Clementine.
-   Copyright 2015, John Maguire <john.maguire@gmail.com>
+   Copyright 2016, John Maguire <john.maguire@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -15,14 +15,27 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "internet/amazon/amazonurlhandler.h"
+#ifndef SPOTIFYIMAGES_H
+#define SPOTIFYIMAGES_H
 
-#include "internet/amazon/amazonclouddrive.h"
+#include <memory>
 
-AmazonUrlHandler::AmazonUrlHandler(AmazonCloudDrive* service, QObject* parent)
-    : UrlHandler(parent), service_(service) {}
+#include "songinfo/songinfoprovider.h"
 
-UrlHandler::LoadResult AmazonUrlHandler::StartLoading(const QUrl& url) {
-  return LoadResult(url, LoadResult::TrackAvailable,
-                    service_->GetStreamingUrlFromSongId(url));
-}
+class NetworkAccessManager;
+
+class SpotifyImages : public SongInfoProvider {
+  Q_OBJECT
+ public:
+  SpotifyImages();
+  ~SpotifyImages();
+
+  void FetchInfo(int id, const Song& metadata) override;
+
+ private:
+  void FetchImagesForArtist(int id, const QString& spotify_id);
+
+  std::unique_ptr<NetworkAccessManager> network_;
+};
+
+#endif  // SPOTIFYIMAGES_H

@@ -1,5 +1,5 @@
 /* This file is part of Clementine.
-   Copyright 2010, David Sansome <me@davidsansome.com>
+   Copyright 2016, John Maguire <john.maguire@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -15,34 +15,31 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef ECHONESTBIOGRAPHIES_H
-#define ECHONESTBIOGRAPHIES_H
+#ifndef ARTISTBIOGRAPHY_H
+#define ARTISTBIOGRAPHY_H
 
 #include <memory>
 
 #include "songinfoprovider.h"
 
-class QNetworkReply;
+class CountdownLatch;
+class NetworkAccessManager;
 
-class EchoNestBiographies : public SongInfoProvider {
+class ArtistBiography : public SongInfoProvider {
   Q_OBJECT
 
  public:
-  EchoNestBiographies();
+  ArtistBiography();
+  ~ArtistBiography();
 
-  void FetchInfo(int id, const Song& metadata);
-
- private slots:
-  void RequestFinished();
+  void FetchInfo(int id, const Song& metadata) override;
 
  private:
-  QMap<QString, int> site_relevance_;
-  QMap<QString, QIcon> site_icons_;
+  void FetchWikipediaImages(int id, const QString& title,
+                            CountdownLatch* latch);
+  void FetchWikipediaArticle(int id, const QString& url, CountdownLatch* latch);
 
-  struct Request;
-  typedef std::shared_ptr<Request> RequestPtr;
-
-  QMap<QNetworkReply*, RequestPtr> requests_;
+  std::unique_ptr<NetworkAccessManager> network_;
 };
 
-#endif  // ECHONESTBIOGRAPHIES_H
+#endif  // ARTISTBIOGRAPHY_H

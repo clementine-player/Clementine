@@ -5,7 +5,7 @@
 
 /***************************************************************************
  *   This library is free software; you can redistribute it and/or modify  *
- *   it  under the terms of the GNU Lesser General Public License version  *
+ *   it under the terms of the GNU Lesser General Public License version   *
  *   2.1 as published by the Free Software Foundation.                     *
  *                                                                         *
  *   This library is distributed in the hope that it will be useful, but   *
@@ -15,9 +15,14 @@
  *                                                                         *
  *   You should have received a copy of the GNU Lesser General Public      *
  *   License along with this library; if not, write to the Free Software   *
- *   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,            *
- *   MA  02110-1301  USA                                                   *
+ *   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA         *
+ *   02110-1301  USA                                                       *
+ *                                                                         *
+ *   Alternatively, this file is available under the Mozilla Public        *
+ *   License Version 1.1.  You may obtain a copy of the License at         *
+ *   http://www.mozilla.org/MPL/                                           *
  ***************************************************************************/
+
 
 #include "modproperties.h"
 
@@ -34,9 +39,9 @@ public:
   {
   }
 
-  int   channels;
-  uint  instrumentCount;
-  uchar lengthInPatterns;
+  int           channels;
+  unsigned int  instrumentCount;
+  unsigned char lengthInPatterns;
 };
 
 Mod::Properties::Properties(AudioProperties::ReadStyle propertiesStyle) :
@@ -80,12 +85,12 @@ int Mod::Properties::channels() const
   return d->channels;
 }
 
-TagLib::uint Mod::Properties::instrumentCount() const
+unsigned int Mod::Properties::instrumentCount() const
 {
   return d->instrumentCount;
 }
 
-uchar Mod::Properties::lengthInPatterns() const
+unsigned char Mod::Properties::lengthInPatterns() const
 {
   return d->lengthInPatterns;
 }
@@ -95,12 +100,12 @@ void Mod::Properties::setChannels(int channels)
   d->channels = channels;
 }
 
-void Mod::Properties::setInstrumentCount(uint instrumentCount)
+void Mod::Properties::setInstrumentCount(unsigned int instrumentCount)
 {
   d->instrumentCount = instrumentCount;
 }
 
-void Mod::Properties::setLengthInPatterns(uchar lengthInPatterns)
+void Mod::Properties::setLengthInPatterns(unsigned char lengthInPatterns)
 {
   d->lengthInPatterns = lengthInPatterns;
 }

@@ -23,8 +23,15 @@
  *   http://www.mozilla.org/MPL/                                           *
  ***************************************************************************/
 
-#include "tagunion.h"
-#include "tstringlist.h"
+#include <tagunion.h>
+#include <tstringlist.h>
+#include <tpropertymap.h>
+
+#include "id3v1tag.h"
+#include "id3v2tag.h"
+#include "apetag.h"
+#include "xiphcomment.h"
+#include "infotag.h"
 
 using namespace TagLib;
 
@@ -35,7 +42,7 @@ using namespace TagLib;
     return tag(1)->method();                                         \
   if(tag(2) && !tag(2)->method().isEmpty())                          \
     return tag(2)->method();                                         \
-  return String::null                                                \
+  return String();                                                   \
 
 #define numberUnion(method)                                          \
   if(tag(0) && tag(0)->method() > 0)                                 \
@@ -102,6 +109,62 @@ void TagUnion::set(int index, Tag *tag)
   d->tags[index] = tag;
 }
 
+PropertyMap TagUnion::properties() const
+{
+  // This is an ugly workaround but we can't add a virtual function.
+  // Should be virtual in taglib2.
+
+  for(size_t i = 0; i < 3; ++i) {
+
+    if(d->tags[i] && !d->tags[i]->isEmpty()) {
+
+      if(dynamic_cast<const ID3v1::Tag *>(d->tags[i]))
+        return dynamic_cast<const ID3v1::Tag *>(d->tags[i])->properties();
+
+      else if(dynamic_cast<const ID3v2::Tag *>(d->tags[i]))
+        return dynamic_cast<const ID3v2::Tag *>(d->tags[i])->properties();
+
+      else if(dynamic_cast<const APE::Tag *>(d->tags[i]))
+        return dynamic_cast<const APE::Tag *>(d->tags[i])->properties();
+
+      else if(dynamic_cast<const Ogg::XiphComment *>(d->tags[i]))
+        return dynamic_cast<const Ogg::XiphComment *>(d->tags[i])->properties();
+
+      else if(dynamic_cast<const RIFF::Info::Tag *>(d->tags[i]))
+        return dynamic_cast<const RIFF::Info::Tag *>(d->tags[i])->properties();
+    }
+  }
+
+  return PropertyMap();
+}
+
+void TagUnion::removeUnsupportedProperties(const StringList &unsupported)
+{
+  // This is an ugly workaround but we can't add a virtual function.
+  // Should be virtual in taglib2.
+
+  for(size_t i = 0; i < 3; ++i) {
+
+    if(d->tags[i]) {
+
+      if(dynamic_cast<ID3v1::Tag *>(d->tags[i]))
+        dynamic_cast<ID3v1::Tag *>(d->tags[i])->removeUnsupportedProperties(unsupported);
+
+      else if(dynamic_cast<ID3v2::Tag *>(d->tags[i]))
+        dynamic_cast<ID3v2::Tag *>(d->tags[i])->removeUnsupportedProperties(unsupported);
+
+      else if(dynamic_cast<APE::Tag *>(d->tags[i]))
+        dynamic_cast<APE::Tag *>(d->tags[i])->removeUnsupportedProperties(unsupported);
+
+      else if(dynamic_cast<Ogg::XiphComment *>(d->tags[i]))
+        dynamic_cast<Ogg::XiphComment *>(d->tags[i])->removeUnsupportedProperties(unsupported);
+
+      else if(dynamic_cast<RIFF::Info::Tag *>(d->tags[i]))
+        dynamic_cast<RIFF::Info::Tag *>(d->tags[i])->removeUnsupportedProperties(unsupported);
+    }
+  }
+}
+
 String TagUnion::title() const
 {
   stringUnion(title);
@@ -127,12 +190,12 @@ String TagUnion::genre() const
   stringUnion(genre);
 }
 
-TagLib::uint TagUnion::year() const
+unsigned int TagUnion::year() const
 {
   numberUnion(year);
 }
 
-TagLib::uint TagUnion::track() const
+unsigned int TagUnion::track() const
 {
   numberUnion(track);
 }
@@ -162,12 +225,12 @@ void TagUnion::setGenre(const String &s)
   setUnion(Genre, s);
 }
 
-void TagUnion::setYear(uint i)
+void TagUnion::setYear(unsigned int i)
 {
   setUnion(Year, i);
 }
 
-void TagUnion::setTrack(uint i)
+void TagUnion::setTrack(unsigned int i)
 {
   setUnion(Track, i);
 }

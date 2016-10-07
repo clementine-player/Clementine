@@ -21,7 +21,6 @@
 
 #include <QFileInfo>
 #include <QTimer>
-#include <QUrlQuery>
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QJsonArray>
@@ -46,10 +45,14 @@ namespace {
 
 static const char* kServiceId = "dropbox";
 
-static const char* kMediaEndpoint = "https://api.dropbox.com/1/media/dropbox/";
-static const char* kDeltaEndpoint = "https://api.dropbox.com/1/delta";
+static const char* kMediaEndpoint =
+    "https://api.dropboxapi.com/2/files/get_temporary_link";
+static const char* kListFolderEndpoint =
+    "https://api.dropboxapi.com/2/files/list_folder";
+static const char* kListFolderContinueEndpoint =
+    "https://api.dropboxapi.com/2/files/list_folder/continue";
 static const char* kLongPollEndpoint =
-    "https://api-notify.dropbox.com/1/longpoll_delta";
+    "https://notify.dropboxapi.com/2/files/list_folder/longpoll";
 
 }  // namespace
 
@@ -99,18 +102,36 @@ void DropboxService::RequestFileList() {
   QSettings s;
   s.beginGroup(kSettingsGroup);
 
-  QUrl url = QUrl(QString(kDeltaEndpoint));
-  QUrlQuery url_query;
-  if (s.contains("cursor")) {
-    url_query.addQueryItem("cursor", s.value("cursor").toString());
-  }
-  url.setQuery(url_query);
-  QNetworkRequest request(url);
-  request.setRawHeader("Authorization", GenerateAuthorisationHeader());
+  QString cursor = s.value("cursor", "").toString();
 
-  QNetworkReply* reply = network_->post(request, QByteArray());
-  NewClosure(reply, SIGNAL(finished()), this,
-             SLOT(RequestFileListFinished(QNetworkReply*)), reply);
+  if (cursor.isEmpty()) {
+    QUrl url = QUrl(QString(kListFolderEndpoint));
+
+    QJsonObject json;
+    json.insert("path", "");
+    json.insert("recursive", true);
+    json.insert("include_deleted", true);
+
+    QNetworkRequest request(url);
+    request.setRawHeader("Authorization", GenerateAuthorisationHeader());
+    request.setRawHeader("Content-Type", "application/json; charset=utf-8");
+
+    QJsonDocument document(json);
+    QNetworkReply* reply = network_->post(request, document.toJson());
+    NewClosure(reply, SIGNAL(finished()), this,
+               SLOT(RequestFileListFinished(QNetworkReply*)), reply);
+  } else {
+    QUrl url = QUrl(kListFolderContinueEndpoint);
+    QJsonObject json;
+    json.insert("cursor", cursor);
+    QJsonDocument document(json);
+    QNetworkRequest request(url);
+    request.setRawHeader("Authorization", GenerateAuthorisationHeader());
+    request.setRawHeader("Content-Type", "application/json; charset=utf-8");
+    QNetworkReply* reply = network_->post(request, document.toJson());
+    NewClosure(reply, SIGNAL(finished()), this,
+               SLOT(RequestFileListFinished(QNetworkReply*)), reply);
+  }
 }
 
 void DropboxService::RequestFileListFinished(QNetworkReply* reply) {
@@ -129,17 +150,16 @@ void DropboxService::RequestFileListFinished(QNetworkReply* reply) {
   settings.setValue("cursor", json_response["cursor"].toString());
 
   QJsonArray contents = json_response["entries"].toArray();
-  qLog(Debug) << "Delta found:" << contents.size();
+  qLog(Debug) << "File list found:" << contents.size();
   for (const QJsonValue& c : contents) {
-    QJsonArray item = c.toArray();
-    QString path = item[0].toString();
+    QJsonObject item = c.toObject();
+    QString path = item["path_lower"].toString();
 
     QUrl url;
     url.setScheme("dropbox");
     url.setPath(path);
 
-    if (item[1].isNull()) {
-      // Null metadata indicates path deleted.
+    if (item[".tag"].toString() == "deleted") {
       qLog(Debug) << "Deleting:" << url;
       Song song = library_backend_->GetSongByUrl(url);
       if (song.is_valid()) {
@@ -148,27 +168,22 @@ void DropboxService::RequestFileListFinished(QNetworkReply* reply) {
       continue;
     }
 
-    QJsonObject metadata = item[1].toObject();
-    if (metadata["is_dir"].toBool()) {
+    if (item[".tag"].toString() == "folder") {
       continue;
     }
 
-    // Workaround: Since Dropbox doesn't recognize Opus files and thus treats
-    // them
-    // as application/octet-stream, we overwrite the mime type here
-    if (metadata["mime_type"].toString() == "application/octet-stream" &&
-        url.toString().endsWith(".opus"))
-      metadata["mime_type"] = GuessMimeTypeForFile(url.toString());
-
-    if (ShouldIndexFile(url, metadata["mime_type"].toString())) {
+    if (ShouldIndexFile(url, GuessMimeTypeForFile(url.toString()))) {
       QNetworkReply* reply = FetchContentUrl(url);
       NewClosure(reply, SIGNAL(finished()), this,
                  SLOT(FetchContentUrlFinished(QNetworkReply*, QVariantMap)),
-                 reply, metadata);
+                 reply, item);
     }
   }
 
   if (json_response.contains("has_more") && json_response["has_more"].toBool()) {
+    QSettings s;
+    s.beginGroup(kSettingsGroup);
+    s.setValue("cursor", json_response["cursor"].toVariant());
     RequestFileList();
   } else {
     // Long-poll wait for changes.
@@ -185,14 +200,13 @@ void DropboxService::LongPollDelta() {
   s.beginGroup(kSettingsGroup);
 
   QUrl request_url = QUrl(QString(kLongPollEndpoint));
-  QUrlQuery url_query;
-  if (s.contains("cursor")) {
-    url_query.addQueryItem("cursor", s.value("cursor").toString());
-  }
-  request_url.setQuery(url_query);
+  QJsonObject json;
+  json.insert("cursor", s.value("cursor").toString());
+  json.insert("timeout", 30);
   QNetworkRequest request(request_url);
-  request.setRawHeader("Authorization", GenerateAuthorisationHeader());
-  QNetworkReply* reply = network_->get(request);
+  request.setRawHeader("Content-Type", "application/json; charset=utf-8");
+  QJsonDocument document(json);
+  QNetworkReply* reply = network_->post(request, document.toJson());
   NewClosure(reply, SIGNAL(finished()), this,
              SLOT(LongPollFinished(QNetworkReply*)), reply);
 }
@@ -214,33 +228,37 @@ void DropboxService::LongPollFinished(QNetworkReply* reply) {
 }
 
 QNetworkReply* DropboxService::FetchContentUrl(const QUrl& url) {
-  QUrl request_url = QUrl((QString(kMediaEndpoint)));
-  request_url.setPath(request_url.path() + url.path().mid(1));
+  QUrl request_url(kMediaEndpoint);
+  QJsonObject json;
+  json.insert("path", url.path());
+  QJsonDocument document(json);
   QNetworkRequest request(request_url);
   request.setRawHeader("Authorization", GenerateAuthorisationHeader());
-  return network_->post(request, QByteArray());
+  request.setRawHeader("Content-Type", "application/json; charset=utf-8");
+  return network_->post(request, document.toJson());
 }
 
 void DropboxService::FetchContentUrlFinished(QNetworkReply* reply,
                                              const QVariantMap& data) {
   reply->deleteLater();
   QJsonObject json_response = QJsonDocument::fromBinaryData(reply->readAll()).object();
-  QFileInfo info(data["path"].toString());
+  QFileInfo info(data["path_lower"].toString());
 
   QUrl url;
   url.setScheme("dropbox");
-  url.setPath(data["path"].toString());
+  url.setPath(data["path_lower"].toString());
 
   Song song;
   song.set_url(url);
   song.set_etag(data["rev"].toString());
-  song.set_mtime(ParseRFC822DateTime(data["modified"].toString()).toTime_t());
+  song.set_mtime(QDateTime::fromString(data["server_modified"].toString(),
+                                       Qt::ISODate).toTime_t());
   song.set_title(info.fileName());
-  song.set_filesize(data["bytes"].toInt());
+  song.set_filesize(data["size"].toInt());
   song.set_ctime(0);
 
-  MaybeAddFileToDatabase(song, data["mime_type"].toString(),
-                         QUrl::fromEncoded(json_response["url"].toString().toLatin1()),
+  MaybeAddFileToDatabase(song, GuessMimeTypeForFile(url.toString()),
+                         QUrl::fromEncoded(json_response["link"].toVariant().toByteArray()),
                          QString::null);
 }
 
@@ -249,5 +267,5 @@ QUrl DropboxService::GetStreamingUrlFromSongId(const QUrl& url) {
   WaitForSignal(reply, SIGNAL(finished()));
 
   QJsonObject json_response = QJsonDocument::fromJson(reply->readAll()).object();
-  return QUrl::fromEncoded(json_response["url"].toString().toLatin1());
+  return QUrl::fromEncoded(json_response["link"].toVariant().toByteArray());
 }

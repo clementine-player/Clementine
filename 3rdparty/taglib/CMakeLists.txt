@@ -1,8 +1,9 @@
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-delete-non-virtual-dtor")
 
-set(TAGLIB_SOVERSION_CURRENT  16)
-set(TAGLIB_SOVERSION_REVISION 1)
-set(TAGLIB_SOVERSION_AGE      15)
+set(TAGLIB_SOVERSION_CURRENT  17)
+set(TAGLIB_SOVERSION_REVISION 0)
+set(TAGLIB_SOVERSION_AGE      16)
+
 math(EXPR TAGLIB_SOVERSION_MAJOR "${TAGLIB_SOVERSION_CURRENT} - ${TAGLIB_SOVERSION_AGE}")
 math(EXPR TAGLIB_SOVERSION_MINOR "${TAGLIB_SOVERSION_AGE}")
 math(EXPR TAGLIB_SOVERSION_PATCH "${TAGLIB_SOVERSION_REVISION}")
@@ -50,6 +51,10 @@ if(ZLIB_FOUND)
   include_directories(${ZLIB_INCLUDE_DIR})
 elseif(HAVE_ZLIB_SOURCE)
   include_directories(${ZLIB_SOURCE})
+endif()
+
+if(HAVE_BOOST_BYTESWAP OR HAVE_BOOST_ATOMIC OR HAVE_BOOST_ZLIB)
+  include_directories(${Boost_INCLUDE_DIR})
 endif()
 
 set(tag_HDRS
@@ -103,6 +108,7 @@ set(tag_HDRS
   mpeg/id3v2/frames/urllinkframe.h
   mpeg/id3v2/frames/chapterframe.h
   mpeg/id3v2/frames/tableofcontentsframe.h
+  mpeg/id3v2/frames/podcastframe.h
   ogg/oggfile.h
   ogg/oggpage.h
   ogg/oggpageheader.h
@@ -197,6 +203,7 @@ set(frames_SRCS
   mpeg/id3v2/frames/urllinkframe.cpp
   mpeg/id3v2/frames/chapterframe.cpp
   mpeg/id3v2/frames/tableofcontentsframe.cpp
+  mpeg/id3v2/frames/podcastframe.cpp
 )
 
 set(ogg_SRCS
@@ -323,6 +330,7 @@ set(toolkit_SRCS
   toolkit/tpropertymap.cpp
   toolkit/trefcounter.cpp
   toolkit/tdebuglistener.cpp
+  toolkit/tzlib.cpp
 )
 
 if(NOT WIN32)
@@ -352,12 +360,21 @@ set(tag_LIB_SRCS
   tagunion.cpp
   fileref.cpp
   audioproperties.cpp
+  tagutils.cpp
 )
 
 add_library(tag STATIC ${tag_LIB_SRCS} ${tag_HDRS})
 
 if(ZLIB_FOUND)
   target_link_libraries(tag ${ZLIB_LIBRARIES})
+endif()
+
+if(HAVE_BOOST_ATOMIC)
+  target_link_libraries(tag ${Boost_ATOMIC_LIBRARY})
+endif()
+
+if(HAVE_BOOST_ZLIB)
+  target_link_libraries(tag ${Boost_IOSTREAMS_LIBRARY} ${Boost_ZLIB_LIBRARY})
 endif()
 
 set_target_properties(tag PROPERTIES

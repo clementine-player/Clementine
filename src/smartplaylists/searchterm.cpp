@@ -18,6 +18,8 @@
 #include "searchterm.h"
 #include "playlist/playlist.h"
 
+#include <QUrl>
+
 namespace smart_playlists {
 
 SearchTerm::SearchTerm() : field_(Field_Title), operator_(Op_Equals) {}
@@ -68,6 +70,16 @@ QString SearchTerm::ToSql() const {
   } else if (TypeOf(field_) == Type_Time) {
     // Convert seconds to nanoseconds
     value = "CAST (" + value + " *1000000000 AS INTEGER)";
+  }
+
+  // File paths need some extra processing since they are stored as
+  // encoded urls in the database.
+  if (field_ == Field_Filepath) {
+    if (operator_ == Op_StartsWith || operator_ == Op_Equals) {
+      value = QUrl::fromLocalFile(value).toEncoded();
+    } else {
+      value = QUrl(value).toEncoded();
+    }
   }
 
   switch (operator_) {

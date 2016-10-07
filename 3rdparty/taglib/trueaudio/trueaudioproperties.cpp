@@ -54,7 +54,7 @@ public:
   int sampleRate;
   int channels;
   int bitsPerSample;
-  uint sampleFrames;
+  unsigned int sampleFrames;
 };
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -108,7 +108,7 @@ int TrueAudio::Properties::channels() const
   return d->channels;
 }
 
-TagLib::uint TrueAudio::Properties::sampleFrames() const
+unsigned int TrueAudio::Properties::sampleFrames() const
 {
   return d->sampleFrames;
 }
@@ -134,7 +134,7 @@ void TrueAudio::Properties::read(const ByteVector &data, long streamLength)
     return;
   }
 
-  uint pos = 3;
+  unsigned int pos = 3;
 
   d->version = data[pos] - '0';
   pos += 1;

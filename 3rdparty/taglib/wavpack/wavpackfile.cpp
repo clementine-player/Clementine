@@ -32,6 +32,7 @@
 #include <tdebug.h>
 #include <tagunion.h>
 #include <tpropertymap.h>
+#include <tagutils.h>
 
 #include "wavpackfile.h"
 #include "id3v1tag.h"
@@ -53,9 +54,7 @@ public:
     APELocation(-1),
     APESize(0),
     ID3v1Location(-1),
-    properties(0),
-    hasAPE(false),
-    hasID3v1(false) {}
+    properties(0) {}
 
   ~FilePrivate()
   {
@@ -63,19 +62,13 @@ public:
   }
 
   long APELocation;
-  uint APESize;
+  long APESize;
 
   long ID3v1Location;
 
   TagUnion tag;
 
   Properties *properties;
-
-  // These indicate whether the file *on disk* has these tags, not if
-  // this data structure does.  This is used in computing offsets.
-
-  bool hasAPE;
-  bool hasID3v1;
 };
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -110,26 +103,20 @@ TagLib::Tag *WavPack::File::tag() const
 
 PropertyMap WavPack::File::properties() const
 {
-  if(d->hasAPE)
-    return d->tag.access<APE::Tag>(WavAPEIndex, false)->properties();
-  if(d->hasID3v1)
-    return d->tag.access<ID3v1::Tag>(WavID3v1Index, false)->properties();
-  return PropertyMap();
+  return d->tag.properties();
 }
-
 
 void WavPack::File::removeUnsupportedProperties(const StringList &unsupported)
 {
-  if(d->hasAPE)
-    d->tag.access<APE::Tag>(WavAPEIndex, false)->removeUnsupportedProperties(unsupported);
+  d->tag.removeUnsupportedProperties(unsupported);
 }
-
 
 PropertyMap WavPack::File::setProperties(const PropertyMap &properties)
 {
-  if(d->hasID3v1)
-    d->tag.access<ID3v1::Tag>(WavID3v1Index, false)->setProperties(properties);
-  return d->tag.access<APE::Tag>(WavAPEIndex, true)->setProperties(properties);
+  if(ID3v1Tag())
+    ID3v1Tag()->setProperties(properties);
+
+  return APETag(true)->setProperties(properties);
 }
 
 WavPack::Properties *WavPack::File::audioProperties() const
@@ -146,64 +133,67 @@ bool WavPack::File::save()
 
   // Update ID3v1 tag
 
-  if(ID3v1Tag()) {
-    if(d->hasID3v1) {
+  if(ID3v1Tag() && !ID3v1Tag()->isEmpty()) {
+
+    // ID3v1 tag is not empty. Update the old one or create a new one.
+
+    if(d->ID3v1Location >= 0) {
       seek(d->ID3v1Location);
-      writeBlock(ID3v1Tag()->render());
     }
     else {
       seek(0, End);
       d->ID3v1Location = tell();
-      writeBlock(ID3v1Tag()->render());
-      d->hasID3v1 = true;
     }
+
+    writeBlock(ID3v1Tag()->render());
   }
   else {
-    if(d->hasID3v1) {
-      removeBlock(d->ID3v1Location, 128);
-      d->hasID3v1 = false;
-      if(d->hasAPE) {
-        if(d->APELocation > d->ID3v1Location)
-          d->APELocation -= 128;
-      }
+
+    // ID3v1 tag is empty. Remove the old one.
+
+    if(d->ID3v1Location >= 0) {
+      truncate(d->ID3v1Location);
+      d->ID3v1Location = -1;
     }
   }
 
   // Update APE tag
 
-  if(APETag()) {
-    if(d->hasAPE)
-      insert(APETag()->render(), d->APELocation, d->APESize);
-    else {
-      if(d->hasID3v1)  {
-        insert(APETag()->render(), d->ID3v1Location, 0);
-        d->APESize = APETag()->footer()->completeTagSize();
-        d->hasAPE = true;
+  if(APETag() && !APETag()->isEmpty()) {
+
+    // APE tag is not empty. Update the old one or create a new one.
+
+    if(d->APELocation < 0) {
+      if(d->ID3v1Location >= 0)
         d->APELocation = d->ID3v1Location;
-        d->ID3v1Location += d->APESize;
-      }
-      else {
-        seek(0, End);
-        d->APELocation = tell();
-        writeBlock(APETag()->render());
-        d->APESize = APETag()->footer()->completeTagSize();
-        d->hasAPE = true;
-      }
+      else
+        d->APELocation = length();
     }
+
+    const ByteVector data = APETag()->render();
+    insert(data, d->APELocation, d->APESize);
+
+    if(d->ID3v1Location >= 0)
+      d->ID3v1Location += (static_cast<long>(data.size()) - d->APESize);
+
+    d->APESize = data.size();
   }
   else {
-    if(d->hasAPE) {
+
+    // APE tag is empty. Remove the old one.
+
+    if(d->APELocation >= 0) {
       removeBlock(d->APELocation, d->APESize);
-      d->hasAPE = false;
-      if(d->hasID3v1) {
-        if(d->ID3v1Location > d->APELocation) {
-          d->ID3v1Location -= d->APESize;
-        }
-      }
+
+      if(d->ID3v1Location >= 0)
+        d->ID3v1Location -= d->APESize;
+
+      d->APELocation = -1;
+      d->APESize = 0;
     }
   }
 
-   return true;
+  return true;
 }
 
 ID3v1::Tag *WavPack::File::ID3v1Tag(bool create)
@@ -218,27 +208,24 @@ APE::Tag *WavPack::File::APETag(bool create)
 
 void WavPack::File::strip(int tags)
 {
-  if(tags & ID3v1) {
+  if(tags & ID3v1)
     d->tag.set(WavID3v1Index, 0);
-    APETag(true);
-  }
 
-  if(tags & APE) {
+  if(tags & APE)
     d->tag.set(WavAPEIndex, 0);
 
-    if(!ID3v1Tag())
-      APETag(true);
-  }
+  if(!ID3v1Tag())
+    APETag(true);
 }
 
 bool WavPack::File::hasID3v1Tag() const
 {
-  return d->hasID3v1;
+  return (d->ID3v1Location >= 0);
 }
 
 bool WavPack::File::hasAPETag() const
 {
-  return d->hasAPE;
+  return (d->APELocation >= 0);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -249,25 +236,22 @@ void WavPack::File::read(bool readProperties)
 {
   // Look for an ID3v1 tag
 
-  d->ID3v1Location = findID3v1();
+  d->ID3v1Location = Utils::findID3v1(this);
 
-  if(d->ID3v1Location >= 0) {
+  if(d->ID3v1Location >= 0)
     d->tag.set(WavID3v1Index, new ID3v1::Tag(this, d->ID3v1Location));
-    d->hasID3v1 = true;
-  }
 
   // Look for an APE tag
 
-  d->APELocation = findAPE();
+  d->APELocation = Utils::findAPE(this, d->ID3v1Location);
 
   if(d->APELocation >= 0) {
     d->tag.set(WavAPEIndex, new APE::Tag(this, d->APELocation));
     d->APESize = APETag()->footer()->completeTagSize();
-    d->APELocation = d->APELocation + APETag()->footer()->size() - d->APESize;
-    d->hasAPE = true;
+    d->APELocation = d->APELocation + APE::Footer::size() - d->APESize;
   }
 
-  if(!d->hasID3v1)
+  if(d->ID3v1Location >= 0)
     APETag(true);
 
   // Look for WavPack audio properties
@@ -276,45 +260,13 @@ void WavPack::File::read(bool readProperties)
 
     long streamLength;
 
-    if(d->hasAPE)
+    if(d->APELocation >= 0)
       streamLength = d->APELocation;
-    else if(d->hasID3v1)
+    else if(d->ID3v1Location >= 0)
       streamLength = d->ID3v1Location;
     else
       streamLength = length();
 
     d->properties = new Properties(this, streamLength);
   }
-}
-
-long WavPack::File::findAPE()
-{
-  if(!isValid())
-    return -1;
-
-  if(d->hasID3v1)
-    seek(-160, End);
-  else
-    seek(-32, End);
-
-  long p = tell();
-
-  if(readBlock(8) == APE::Tag::fileIdentifier())
-    return p;
-
-  return -1;
-}
-
-long WavPack::File::findID3v1()
-{
-  if(!isValid())
-    return -1;
-
-  seek(-128, End);
-  long p = tell();
-
-  if(readBlock(3) == ID3v1::Tag::fileIdentifier())
-    return p;
-
-  return -1;
 }

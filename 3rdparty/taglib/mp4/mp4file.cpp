@@ -130,8 +130,7 @@ MP4::File::read(bool readProperties)
   }
 
   // must have a moov atom, otherwise consider it invalid
-  MP4::Atom *moov = d->atoms->find("moov");
-  if(!moov) {
+  if(!d->atoms->find("moov")) {
     setValid(false);
     return;
   }
@@ -158,3 +157,8 @@ MP4::File::save()
   return d->tag->save();
 }
 
+bool
+MP4::File::hasMP4Tag() const
+{
+  return (d->atoms->find("moov", "udta", "meta", "ilst") != 0);
+}

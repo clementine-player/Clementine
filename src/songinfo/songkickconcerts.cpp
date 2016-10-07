@@ -23,86 +23,76 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QJsonArray>
-
-#include <Artist.h>
-#include <TypeInformation.h>
+#include <QUrl>
+#include <QUrlQuery>
 
 #include "core/closure.h"
 #include "core/logging.h"
 #include "songkickconcertwidget.h"
 #include "ui/iconloader.h"
 
-const char* SongkickConcerts::kSongkickArtistBucket = "songkick";
-const char* SongkickConcerts::kSongkickArtistCalendarUrl =
-    "https://api.songkick.com/api/3.0/artists/%1/calendar.json?"
-    "per_page=5&"
-    "apikey=8rgKfy1WU6IlJFfN";
+namespace {
+const char* kSongkickArtistCalendarUrl =
+    "https://api.songkick.com/api/3.0/artists/%1/calendar.json";
+const char* kSongkickArtistSearchUrl =
+    "https://api.songkick.com/api/3.0/search/artists.json";
+const char* kSongkickApiKey = "8rgKfy1WU6IlJFfN";
+}  // namespace
 
 SongkickConcerts::SongkickConcerts() {
   Geolocator* geolocator = new Geolocator;
   geolocator->Geolocate();
   connect(geolocator, SIGNAL(Finished(Geolocator::LatLng)),
           SLOT(GeolocateFinished(Geolocator::LatLng)));
-  NewClosure(geolocator, SIGNAL(Finished(Geolocator::LatLng)), geolocator,
-             SLOT(deleteLater()));
+  connect(geolocator, SIGNAL(Finished(Geolocator::LatLng)), geolocator,
+          SLOT(deleteLater()));
 }
 
 void SongkickConcerts::FetchInfo(int id, const Song& metadata) {
-  Echonest::Artist::SearchParams params;
-  params.push_back(
-      qMakePair(Echonest::Artist::Name, QVariant(metadata.artist())));
-  qLog(Debug) << "Params:" << params;
-  QNetworkReply* reply = Echonest::Artist::search(
-      params,
-      Echonest::ArtistInformation(Echonest::ArtistInformation::NoInformation,
-                                  QStringList() << kSongkickArtistBucket));
-  qLog(Debug) << reply->request().url();
+  if (metadata.artist().isEmpty()) {
+    emit Finished(id);
+    return;
+  }
+
+  QUrl url(kSongkickArtistSearchUrl);
+  QUrlQuery url_query;
+  url_query.addQueryItem("apikey", kSongkickApiKey);
+  url_query.addQueryItem("query", metadata.artist());
+  url.setQuery(url_query);
+
+  QNetworkRequest request(url);
+  QNetworkReply* reply = network_.get(request);
   NewClosure(reply, SIGNAL(finished()), this,
              SLOT(ArtistSearchFinished(QNetworkReply*, int)), reply, id);
 }
 
 void SongkickConcerts::ArtistSearchFinished(QNetworkReply* reply, int id) {
   reply->deleteLater();
-  try {
-    Echonest::Artists artists = Echonest::Artist::parseSearch(reply);
-    if (artists.isEmpty()) {
-      qLog(Debug) << "Failed to find artist in echonest";
-      emit Finished(id);
-      return;
-    }
 
-    const Echonest::Artist& artist = artists[0];
-    const Echonest::ForeignIds& foreign_ids = artist.foreignIds();
-    QString songkick_id;
-    for (const Echonest::ForeignId& id : foreign_ids) {
-      if (id.catalog == "songkick") {
-        songkick_id = id.foreign_id;
-        break;
-      }
-    }
+  QJsonDocument document = QJsonDocument::fromBinaryData(reply->readAll());
+  QJsonObject json = document.object();
 
-    if (songkick_id.isEmpty()) {
-      qLog(Debug) << "Failed to fetch songkick foreign id for artist";
-      emit Finished(id);
-      return;
-    }
+  QJsonObject results_page = json["resultsPage"].toObject();
+  QJsonObject results = results_page["results"].toObject();
+  QJsonArray artists = results["artist"].toArray();
 
-    QStringList split = songkick_id.split(':');
-    if (split.count() != 3) {
-      qLog(Error) << "Weird songkick id";
-      emit Finished(id);
-      return;
-    }
-
-    FetchSongkickCalendar(split[2], id);
-  } catch (Echonest::ParseError& e) {
-    qLog(Error) << "Error parsing echonest reply:" << e.errorType() << e.what();
+  if (artists.isEmpty()) {
     emit Finished(id);
+    return;
   }
+
+  QJsonObject artist = artists.first().toObject();
+  QString artist_id = artist["id"].toString();
+
+  FetchSongkickCalendar(artist_id, id);
 }
 
 void SongkickConcerts::FetchSongkickCalendar(const QString& artist_id, int id) {
   QUrl url(QString(kSongkickArtistCalendarUrl).arg(artist_id));
+  QUrlQuery url_query;
+  url_query.addQueryItem("per_page", "5");
+  url_query.addQueryItem("apikey", kSongkickApiKey);
+  url.setQuery(url_query);
   qLog(Debug) << url;
   QNetworkReply* reply = network_.get(QNetworkRequest(url));
   NewClosure(reply, SIGNAL(finished()), this,

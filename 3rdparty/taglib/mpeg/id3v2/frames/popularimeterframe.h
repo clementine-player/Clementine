@@ -100,14 +100,14 @@ namespace TagLib {
        *
        * \see setCounter()
        */
-      uint counter() const;
+      unsigned int counter() const;
 
       /*!
        * Set the counter.
        *
        * \see counter()
        */
-      void setCounter(uint counter);
+      void setCounter(unsigned int counter);
 
     protected:
       // Reimplementations.

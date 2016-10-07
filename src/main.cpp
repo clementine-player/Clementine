@@ -73,8 +73,6 @@
 #include <glib.h>
 #include <gst/gst.h>
 
-#include <Config.h>
-
 #ifdef Q_OS_DARWIN
 #include <sys/resource.h>
 #include <sys/sysctl.h>
@@ -423,10 +421,6 @@ int main(int argc, char* argv[]) {
 
   Application app;
   app.set_language_name(language);
-
-  Echonest::Config::instance()->setAPIKey("DFLFLJBUF4EGTXHIG");
-  Echonest::Config::instance()->setNetworkAccessManager(
-      new NetworkAccessManager);
 
   // Network proxy
   QNetworkProxyFactory::setApplicationProxyFactory(

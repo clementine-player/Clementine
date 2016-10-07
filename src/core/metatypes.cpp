@@ -126,5 +126,8 @@ void RegisterMetaTypes() {
   qDBusRegisterMetaType<MprisPlaylist>();
   qDBusRegisterMetaType<MaybePlaylist>();
   qDBusRegisterMetaType<MprisPlaylistList>();
+
+  qDBusRegisterMetaType<InterfacesAndProperties>();
+  qDBusRegisterMetaType<ManagedObjectList>();
 #endif
 }

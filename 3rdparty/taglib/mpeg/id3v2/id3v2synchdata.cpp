@@ -30,9 +30,9 @@
 using namespace TagLib;
 using namespace ID3v2;
 
-TagLib::uint SynchData::toUInt(const ByteVector &data)
+unsigned int SynchData::toUInt(const ByteVector &data)
 {
-  uint sum = 0;
+  unsigned int sum = 0;
   bool notSynchSafe = false;
   int last = data.size() > 4 ? 3 : data.size() - 1;
 
@@ -62,23 +62,37 @@ TagLib::uint SynchData::toUInt(const ByteVector &data)
   return sum;
 }
 
-ByteVector SynchData::fromUInt(uint value)
+ByteVector SynchData::fromUInt(unsigned int value)
 {
   ByteVector v(4, 0);
 
   for(int i = 0; i < 4; i++)
-    v[i] = uchar(value >> ((3 - i) * 7) & 0x7f);
+    v[i] = static_cast<unsigned char>(value >> ((3 - i) * 7) & 0x7f);
 
   return v;
 }
 
 ByteVector SynchData::decode(const ByteVector &data)
 {
-  ByteVector result = data;
+  // We have this optimized method instead of using ByteVector::replace(),
+  // since it makes a great difference when decoding huge unsynchronized frames.
 
-  ByteVector pattern(2, char(0));
-  pattern[0] = '\xFF';
-  pattern[1] = '\x00';
+  ByteVector result(data.size());
 
-  return result.replace(pattern, '\xFF');
+  ByteVector::ConstIterator src = data.begin();
+  ByteVector::Iterator dst = result.begin();
+
+  while(src < data.end() - 1) {
+    *dst++ = *src++;
+
+    if(*(src - 1) == '\xff' && *src == '\x00')
+      src++;
+  }
+
+  if(src < data.end())
+    *dst++ = *src++;
+
+  result.resize(static_cast<unsigned int>(dst - result.begin()));
+
+  return result;
 }

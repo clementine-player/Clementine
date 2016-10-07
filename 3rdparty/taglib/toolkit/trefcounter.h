@@ -102,7 +102,7 @@ namespace TagLib
     bool deref() { return ! --refCount; }
     int count() { return refCount; }
   private:
-    uint refCount;
+    unsigned int refCount;
 #endif
   };
 

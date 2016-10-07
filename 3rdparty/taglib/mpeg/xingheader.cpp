@@ -40,8 +40,8 @@ public:
     size(0),
     type(MPEG::XingHeader::Invalid) {}
 
-  uint frames;
-  uint size;
+  unsigned int frames;
+  unsigned int size;
 
   MPEG::XingHeader::HeaderType type;
 };
@@ -66,12 +66,12 @@ bool MPEG::XingHeader::isValid() const
   return (d->type != Invalid && d->frames > 0 && d->size > 0);
 }
 
-TagLib::uint MPEG::XingHeader::totalFrames() const
+unsigned int MPEG::XingHeader::totalFrames() const
 {
   return d->frames;
 }
 
-TagLib::uint MPEG::XingHeader::totalSize() const
+unsigned int MPEG::XingHeader::totalSize() const
 {
   return d->size;
 }
@@ -103,7 +103,7 @@ void MPEG::XingHeader::parse(const ByteVector &data)
 
     // Xing header found.
 
-    if(data.size() < static_cast<ulong>(offset + 16)) {
+    if(data.size() < static_cast<unsigned long>(offset + 16)) {
       debug("MPEG::XingHeader::parse() -- Xing header found but too short.");
       return;
     }
@@ -127,7 +127,7 @@ void MPEG::XingHeader::parse(const ByteVector &data)
 
       // VBRI header found.
 
-      if(data.size() < static_cast<ulong>(offset + 32)) {
+      if(data.size() < static_cast<unsigned long>(offset + 32)) {
         debug("MPEG::XingHeader::parse() -- VBRI header found but too short.");
         return;
       }

@@ -62,7 +62,7 @@ namespace TagLib {
        * Returns the size of the extended header.  This is variable for the
        * extended header.
        */
-      uint size() const;
+      unsigned int size() const;
 
       /*!
        * Sets the data that will be used as the extended header.  Since the

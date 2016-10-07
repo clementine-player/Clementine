@@ -39,7 +39,6 @@ public:
   FilePrivate() :
     properties(0),
     tag(0),
-    tagChunkID("ID3 "),
     hasID3v2(false) {}
 
   ~FilePrivate()
@@ -50,7 +49,6 @@ public:
 
   Properties *properties;
   ID3v2::Tag *tag;
-  ByteVector tagChunkID;
 
   bool hasID3v2;
 };
@@ -117,8 +115,16 @@ bool RIFF::AIFF::File::save()
     return false;
   }
 
-  setChunkData(d->tagChunkID, d->tag->render());
-  d->hasID3v2 = true;
+  if(d->hasID3v2) {
+    removeChunk("ID3 ");
+    removeChunk("id3 ");
+    d->hasID3v2 = false;
+  }
+
+  if(tag() && !tag()->isEmpty()) {
+    setChunkData("ID3 ", d->tag->render());
+    d->hasID3v2 = true;
+  }
 
   return true;
 }
@@ -134,12 +140,11 @@ bool RIFF::AIFF::File::hasID3v2Tag() const
 
 void RIFF::AIFF::File::read(bool readProperties)
 {
-  for(uint i = 0; i < chunkCount(); ++i) {
+  for(unsigned int i = 0; i < chunkCount(); ++i) {
     const ByteVector name = chunkName(i);
     if(name == "ID3 " || name == "id3 ") {
       if(!d->tag) {
         d->tag = new ID3v2::Tag(this, chunkOffset(i));
-        d->tagChunkID = name;
         d->hasID3v2 = true;
       }
       else {
