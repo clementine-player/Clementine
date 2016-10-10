@@ -121,7 +121,7 @@ PlaylistView::PlaylistView(QWidget* parent)
       last_height_(-1),
       last_width_(-1),
       force_background_redraw_(false),
-      glow_enabled_(true),
+      glow_enabled_(false),
       currently_glowing_(false),
       glow_intensity_step_(0),
       rating_delegate_(nullptr),
@@ -1072,7 +1072,7 @@ void PlaylistView::PlaylistDestroyed() {
 void PlaylistView::ReloadSettings() {
   QSettings s;
   s.beginGroup(Playlist::kSettingsGroup);
-  glow_enabled_ = s.value("glow_effect", true).toBool();
+  glow_enabled_ = s.value("glow_effect", false).toBool();
 
   if (setting_initial_header_layout_ || upgrading_from_qheaderview_) {
     header_->SetStretchEnabled(s.value("stretch", true).toBool());
