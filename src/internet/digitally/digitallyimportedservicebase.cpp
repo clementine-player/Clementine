@@ -25,17 +25,17 @@
 #include <QNetworkReply>
 #include <QSettings>
 
-#include "digitallyimportedclient.h"
-#include "digitallyimportedurlhandler.h"
-#include "internet/core/internetmodel.h"
 #include "core/application.h"
 #include "core/closure.h"
 #include "core/logging.h"
 #include "core/network.h"
 #include "core/player.h"
 #include "core/taskmanager.h"
+#include "digitallyimportedclient.h"
+#include "digitallyimportedurlhandler.h"
 #include "globalsearch/digitallyimportedsearchprovider.h"
 #include "globalsearch/globalsearch.h"
+#include "internet/core/internetmodel.h"
 #include "ui/iconloader.h"
 
 const char* DigitallyImportedServiceBase::kSettingsGroup = "digitally_imported";
@@ -260,3 +260,12 @@ RockRadioService::RockRadioService(Application* app, InternetModel* model,
           "RockRadio", "ROCKRADIO.com", QUrl("http://www.rockradio.com"),
           IconLoader::Load("rockradio", IconLoader::Provider), "rockradio", app,
           model, false, parent) {}
+
+ClassicalRadioService::ClassicalRadioService(Application* app,
+                                             InternetModel* model,
+                                             QObject* parent)
+    : DigitallyImportedServiceBase(
+          "ClassicalRadio", "ClassicalRadio.com",
+          QUrl("http://www.classicalradio.com"),
+          IconLoader::Load("digitallyimported", IconLoader::Provider),
+          "classicalradio", app, model, false, parent) {}
