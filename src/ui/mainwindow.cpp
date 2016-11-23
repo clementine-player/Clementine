@@ -101,12 +101,14 @@
 #include "smartplaylists/generatormimedata.h"
 #include "songinfo/artistinfoview.h"
 #include "songinfo/songinfoview.h"
+#include "songinfo/streamdiscoverer.h"
 #include "transcoder/transcodedialog.h"
 #include "ui/about.h"
 #include "ui/addstreamdialog.h"
 #include "ui/albumcovermanager.h"
 #include "ui/console.h"
 #include "ui/edittagdialog.h"
+#include "ui/streamdetailsdialog.h"
 #include "ui/equalizer.h"
 #include "ui/iconloader.h"
 #include "ui/organisedialog.h"
@@ -173,6 +175,7 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
       tray_icon_(tray_icon),
       osd_(osd),
       edit_tag_dialog_(std::bind(&MainWindow::CreateEditTagDialog, this)),
+      stream_discoverer_(std::bind(&MainWindow::CreateStreamDiscoverer, this)),
       global_shortcuts_(new GlobalShortcuts(this)),
       global_search_view_(new GlobalSearchView(app_, this)),
       library_view_(new LibraryViewContainer(this)),
@@ -436,6 +439,8 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
   connect(ui_->action_toggle_show_sidebar, SIGNAL(toggled(bool)),
           ui_->sidebar_layout, SLOT(setShown(bool)));
   connect(ui_->action_edit_track, SIGNAL(triggered()), SLOT(EditTracks()));
+  connect(ui_->action_view_stream_details, SIGNAL(triggered()),
+          SLOT(DiscoverStreamDetails()));
   connect(ui_->action_renumber_tracks, SIGNAL(triggered()),
           SLOT(RenumberTracks()));
   connect(ui_->action_selection_set_value, SIGNAL(triggered()),
@@ -684,6 +689,7 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
   playlist_menu_->addAction(ui_->action_remove_from_playlist);
   playlist_undoredo_ = playlist_menu_->addSeparator();
   playlist_menu_->addAction(ui_->action_edit_track);
+  playlist_menu_->addAction(ui_->action_view_stream_details);
   playlist_menu_->addAction(ui_->action_edit_value);
   playlist_menu_->addAction(ui_->action_renumber_tracks);
   playlist_menu_->addAction(ui_->action_selection_set_value);
@@ -1712,6 +1718,10 @@ void MainWindow::PlaylistRightClick(const QPoint& global_pos,
   // no 'show in browser' action if only streams are selected
   playlist_open_in_browser_->setVisible(streams != all);
 
+  // If exactly one stream is selected, enable the 'show details' action.
+  ui_->action_view_stream_details->setEnabled(all == 1 && streams == 1);
+  ui_->action_view_stream_details->setVisible(all == 1 && streams == 1);
+
   bool track_column = (index.column() == Playlist::Column_Track);
   ui_->action_renumber_tracks->setVisible(editable >= 2 && track_column);
   ui_->action_selection_set_value->setVisible(editable >= 2 && !track_column);
@@ -1880,6 +1890,29 @@ void MainWindow::EditTagDialogAccepted() {
   ui_->playlist->view()->update();
 
   app_->playlist_manager()->current()->Save();
+}
+
+void MainWindow::DiscoverStreamDetails() {
+  int row = playlist_menu_index_.row();
+  Song song = app_->playlist_manager()->current()->item_at(row)->Metadata();
+
+  QString url = song.url().toString();
+  qLog(Debug) << "Attempting to discover " << url << endl;
+
+  stream_discoverer_->discover(url);
+}
+
+void MainWindow::ShowStreamDetails(StreamDetails details) {
+  StreamDetailsDialog stream_details_dialog(this);
+
+  stream_details_dialog.setUrl(details.url);
+  stream_details_dialog.setFormat(details.format);
+  stream_details_dialog.setBitrate(details.bitrate);
+  stream_details_dialog.setChannels(details.channels);
+  stream_details_dialog.setDepth(details.depth);
+  stream_details_dialog.setSampleRate(details.sample_rate);
+
+  stream_details_dialog.exec();
 }
 
 void MainWindow::RenumberTracks() {
@@ -2488,6 +2521,14 @@ EditTagDialog* MainWindow::CreateEditTagDialog() {
   connect(edit_tag_dialog, SIGNAL(Error(QString)),
           SLOT(ShowErrorDialog(QString)));
   return edit_tag_dialog;
+}
+
+StreamDiscoverer* MainWindow::CreateStreamDiscoverer() {
+  StreamDiscoverer* discoverer = new StreamDiscoverer();
+  connect(discoverer, SIGNAL(DataReady(StreamDetails)),
+          SLOT(ShowStreamDetails(StreamDetails)));
+  connect(discoverer, SIGNAL(Error(QString)), SLOT(ShowErrorDialog(QString)));
+  return discoverer;
 }
 
 void MainWindow::ShowAboutDialog() { about_dialog_->show(); }

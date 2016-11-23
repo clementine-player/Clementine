@@ -477,7 +477,7 @@
      <x>0</x>
      <y>0</y>
      <width>1131</width>
-     <height>23</height>
+     <height>28</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu_music">
@@ -501,7 +501,7 @@
    </widget>
    <widget class="QMenu" name="menu_playlist">
     <property name="title">
-     <string>&amp;Playlist</string>
+     <string>P&amp;laylist</string>
     </property>
     <addaction name="action_add_file"/>
     <addaction name="action_add_folder"/>
@@ -564,7 +564,7 @@
   </widget>
   <action name="action_previous_track">
    <property name="text">
-    <string>Previous track</string>
+    <string>&amp;Previous track</string>
    </property>
    <property name="shortcut">
     <string notr="true">F5</string>
@@ -572,7 +572,7 @@
   </action>
   <action name="action_play_pause">
    <property name="text">
-    <string>Play</string>
+    <string>Pla&amp;y</string>
    </property>
    <property name="shortcut">
     <string notr="true">F6</string>
@@ -583,7 +583,7 @@
     <bool>false</bool>
    </property>
    <property name="text">
-    <string>Stop</string>
+    <string>&amp;Stop</string>
    </property>
    <property name="shortcut">
     <string notr="true">F7</string>
@@ -591,7 +591,7 @@
   </action>
   <action name="action_next_track">
    <property name="text">
-    <string>Next track</string>
+    <string>&amp;Next track</string>
    </property>
    <property name="shortcut">
     <string notr="true">F8</string>
@@ -621,7 +621,7 @@
     <bool>false</bool>
    </property>
    <property name="text">
-    <string>Love</string>
+    <string>&amp;Love</string>
    </property>
    <property name="shortcut">
     <string notr="true">Ctrl+L</string>
@@ -629,7 +629,7 @@
   </action>
   <action name="action_clear_playlist">
    <property name="text">
-    <string>Clear playlist</string>
+    <string>&amp;Clear playlist</string>
    </property>
    <property name="toolTip">
     <string>Clear playlist</string>
@@ -666,7 +666,7 @@
   </action>
   <action name="action_configure">
    <property name="text">
-    <string>Preferences...</string>
+    <string>&amp;Preferences...</string>
    </property>
    <property name="shortcut">
     <string notr="true">Ctrl+P</string>
@@ -677,7 +677,7 @@
   </action>
   <action name="action_about">
    <property name="text">
-    <string>About Clementine...</string>
+    <string>&amp;About Clementine...</string>
    </property>
    <property name="shortcut">
     <string notr="true">F1</string>
@@ -688,7 +688,7 @@
   </action>
   <action name="action_shuffle">
    <property name="text">
-    <string>Shuffle playlist</string>
+    <string>S&amp;huffle playlist</string>
    </property>
    <property name="shortcut">
     <string notr="true">Ctrl+H</string>
@@ -696,7 +696,7 @@
   </action>
   <action name="action_add_file">
    <property name="text">
-    <string>Add file...</string>
+    <string>&amp;Add file...</string>
    </property>
    <property name="shortcut">
     <string notr="true">Ctrl+Shift+A</string>
@@ -704,7 +704,7 @@
   </action>
   <action name="action_add_stream">
    <property name="text">
-    <string>Add stream...</string>
+    <string>Add strea&amp;m...</string>
    </property>
    <property name="shortcut">
     <string notr="true">Ctrl+O</string>
@@ -712,7 +712,7 @@
   </action>
   <action name="action_open_media">
    <property name="text">
-    <string>Open file...</string>
+    <string>&amp;Open file...</string>
    </property>
   </action>
   <action name="action_open_cd">
@@ -722,7 +722,7 @@
   </action>
   <action name="action_cover_manager">
    <property name="text">
-    <string>Cover Manager</string>
+    <string>&amp;Cover Manager</string>
    </property>
   </action>
   <action name="action_rain">
@@ -730,7 +730,7 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string comment="Label for button to enable/disable rain background sound.">Rain</string>
+    <string comment="Label for button to enable/disable rain background sound.">&amp;Rain</string>
    </property>
   </action>
   <action name="action_hypnotoad">
@@ -738,7 +738,7 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string comment="Label for button to enable/disable Hypnotoad background sound.">All Glory to the Hypnotoad!</string>
+    <string comment="Label for button to enable/disable Hypnotoad background sound.">&amp;All Glory to the Hypnotoad!</string>
    </property>
   </action>
   <action name="action_enterprise">
@@ -746,7 +746,7 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string comment="Label for button to enable/disable Enterprise background sound.">Make it so!</string>
+    <string comment="Label for button to enable/disable Enterprise background sound.">&amp;Make it so!</string>
    </property>
   </action>
   <action name="action_kittens">
@@ -754,7 +754,7 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string comment="Label for buton to enable/disable kittens in the now playing widget">Kittens</string>
+    <string comment="Label for buton to enable/disable kittens in the now playing widget">&amp;Kittens</string>
    </property>
   </action>
   <action name="action_console">
@@ -779,22 +779,22 @@
   </action>
   <action name="action_equalizer">
    <property name="text">
-    <string>Equalizer</string>
+    <string>&amp;Equalizer</string>
    </property>
   </action>
   <action name="action_transcode">
    <property name="text">
-    <string>Transcode Music</string>
+    <string>&amp;Transcode Music</string>
    </property>
   </action>
   <action name="action_add_folder">
    <property name="text">
-    <string>Add folder...</string>
+    <string>Add &amp;folder...</string>
    </property>
   </action>
   <action name="action_jump">
    <property name="text">
-    <string>Jump to the currently playing track</string>
+    <string>&amp;Jump to the currently playing track</string>
    </property>
    <property name="shortcut">
     <string notr="true">Ctrl+J</string>
@@ -802,7 +802,7 @@
   </action>
   <action name="action_new_playlist">
    <property name="text">
-    <string>New playlist</string>
+    <string>&amp;New playlist</string>
    </property>
    <property name="shortcut">
     <string notr="true">Ctrl+N</string>
@@ -810,7 +810,7 @@
   </action>
   <action name="action_save_playlist">
    <property name="text">
-    <string>Save playlist...</string>
+    <string>Save &amp;playlist...</string>
    </property>
    <property name="shortcut">
     <string notr="true">Ctrl+S</string>
@@ -818,7 +818,7 @@
   </action>
   <action name="action_load_playlist">
    <property name="text">
-    <string>Load playlist...</string>
+    <string>&amp;Load playlist...</string>
    </property>
    <property name="shortcut">
     <string notr="true">Ctrl+Shift+O</string>
@@ -836,22 +836,22 @@
   </action>
   <action name="action_update_library">
    <property name="text">
-    <string>Update changed library folders</string>
+    <string>&amp;Update changed library folders</string>
    </property>
   </action>
   <action name="action_visualisations">
    <property name="text">
-    <string>Visualizations</string>
+    <string>&amp;Visualizations</string>
    </property>
   </action>
   <action name="action_queue_manager">
    <property name="text">
-    <string>Queue Manager</string>
+    <string>&amp;Queue Manager</string>
    </property>
   </action>
   <action name="action_about_qt">
    <property name="text">
-    <string>About Qt...</string>
+    <string>About &amp;Qt...</string>
    </property>
    <property name="menuRole">
     <enum>QAction::AboutQtRole</enum>
@@ -862,7 +862,7 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>Mute</string>
+    <string>&amp;Mute</string>
    </property>
    <property name="shortcut">
     <string notr="true">Ctrl+M</string>
@@ -870,7 +870,7 @@
   </action>
   <action name="action_full_library_scan">
    <property name="text">
-    <string>Do a full library rescan</string>
+    <string>&amp;Do a full library rescan</string>
    </property>
   </action>
   <action name="action_auto_complete_tags">
@@ -896,12 +896,12 @@
      <normaloff>:/providers/podcast16.png</normaloff>:/providers/podcast16.png</iconset>
    </property>
    <property name="text">
-    <string>Add podcast...</string>
+    <string>A&amp;dd podcast...</string>
    </property>
   </action>
   <action name="action_remove_duplicates">
    <property name="text">
-    <string>Remove duplicates from playlist</string>
+    <string>Remove &amp;duplicates from playlist</string>
    </property>
   </action>
   <action name="action_add_files_to_transcoder">
@@ -920,12 +920,17 @@
   </action>
   <action name="action_rip_audio_cd">
    <property name="text">
-    <string>Rip audio CD</string>
+    <string>&amp;Rip audio CD</string>
    </property>
   </action>
   <action name="action_remove_unavailable">
    <property name="text">
-    <string>Remove unavailable tracks from playlist</string>
+    <string>Remove &amp;unavailable tracks from playlist</string>
+   </property>
+  </action>
+  <action name="action_view_stream_details">
+   <property name="text">
+    <string>View Stream Details</string>
    </property>
   </action>
   <action name="action_toggle_show_sidebar">
