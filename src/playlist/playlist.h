@@ -339,7 +339,7 @@ class Playlist : public QAbstractListModel {
   void SetStreamMetadata(const QUrl& url, const Song& song);
   void ItemChanged(PlaylistItemPtr item);
   void UpdateItems(const SongList& songs);
-  void UpdateFilenames(const FoundSongs& songs);
+  void UpdateFilePaths(const TrackingResult& songs);
 
   void Clear();
   void RemoveDuplicateSongs();

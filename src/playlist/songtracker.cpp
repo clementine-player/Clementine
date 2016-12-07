@@ -94,10 +94,8 @@ void SongTracker::Untrack(int playlist_id, const Song& song) {
       ++it;
     }
   }
-  if (!dir_map_.contains(dir_path)) {
-    qLog(Debug) << "unwatching dir: " << dir_path;
-    fs_watcher_->RemovePath(dir_path);
-  }
+
+  updateWatcher(dir_path);
 }
 
 QString SongTracker::GetFingerprint(const QString& filename) {
@@ -150,7 +148,7 @@ void SongTracker::DirectoryChanged(const QString& path) {
   const QList<WatchedSong>& watched_songs = dir_map_.values(path);
   dir_map_.remove(path);
 
-  QHash<int, FoundSongs> playlist_map;
+  QHash<int, TrackingResult> playlist_map;
   for (WatchedSong watched_song : watched_songs) {
     const QFileInfo& fileInfo = QFileInfo(watched_song.url.toLocalFile());
     const qint64 mtime =
@@ -161,35 +159,34 @@ void SongTracker::DirectoryChanged(const QString& path) {
       continue;
     }
 
-    const QUrl& new_file_url =
+    const QUrl& found_path =
         SearchDir(watched_song.fingerprint, watched_song.url);
-    if (new_file_url.isEmpty()) {
-      // Song is lost
-      continue;
-    }
-    playlist_map[watched_song.playlist_id].insert(watched_song.url,
-                                                  new_file_url);
+    playlist_map[watched_song.playlist_id].insert(watched_song.url, found_path);
 
-    // Re-insert
-    const QFileInfo& new_fileInfo = QFileInfo(new_file_url.toLocalFile());
-    watched_song.url = new_file_url;
-    watched_song.mtime = new_fileInfo.lastModified().toMSecsSinceEpoch();
-    dir_map_.insert(new_fileInfo.absoluteDir().path(), watched_song);
+    if (!found_path.isEmpty()) {
+      // Re-insert
+      const QFileInfo& new_fileInfo = QFileInfo(found_path.toLocalFile());
+      watched_song.url = found_path;
+      watched_song.mtime = new_fileInfo.lastModified().toMSecsSinceEpoch();
+      dir_map_.insert(new_fileInfo.absoluteDir().path(), watched_song);
+    }
   }
 
   if (!playlist_map.isEmpty())
-    qLog(Debug) << "found files: " << playlist_map;
+    qLog(Debug) << "tracking result: " << playlist_map;
 
-  QHashIterator<int, FoundSongs> it(playlist_map);
+  QHashIterator<int, TrackingResult> it(playlist_map);
   while (it.hasNext()) {
     it.next();
     Playlist* playlist = manager_->playlist(it.key());
     if (playlist) {
-      metaObject()->invokeMethod(playlist, "UpdateFilenames",
+      metaObject()->invokeMethod(playlist, "UpdateFilePaths",
                                  Qt::QueuedConnection,
-                                 Q_ARG(FoundSongs, it.value()));
+                                 Q_ARG(TrackingResult, it.value()));
     }
   }
+
+  updateWatcher(path);
 }
 
 QUrl SongTracker::SearchDir(const QString& fingerprint, const QUrl& old_url) {
@@ -210,4 +207,11 @@ QUrl SongTracker::SearchDir(const QString& fingerprint, const QUrl& old_url) {
   }
 
   return QUrl();
+}
+
+void SongTracker::updateWatcher(const QString& dir_path) {
+  if (!dir_map_.contains(dir_path)) {
+    qLog(Debug) << "unwatching dir: " << dir_path;
+    fs_watcher_->RemovePath(dir_path);
+  }
 }

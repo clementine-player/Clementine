@@ -66,7 +66,7 @@ void RegisterMetaTypes() {
   qRegisterMetaType<Engine::State>("Engine::State");
   qRegisterMetaType<Engine::TrackChangeFlags>("Engine::TrackChangeFlags");
   qRegisterMetaType<Equalizer::Params>("Equalizer::Params");
-  qRegisterMetaType<FoundSongs>("FoundSongs");
+  qRegisterMetaType<TrackingResult>("TrackingResult");
   qRegisterMetaType<Geolocator::LatLng>("Geolocator::LatLng");
   qRegisterMetaType<GstBuffer*>("GstBuffer*");
   qRegisterMetaType<GstElement*>("GstElement*");

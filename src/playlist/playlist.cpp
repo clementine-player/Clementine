@@ -1103,7 +1103,7 @@ void Playlist::InsertItemsWithoutUndo(const PlaylistItemList& items, int pos,
 
   // Feed to song tracker
   SongList songs;
-  for (PlaylistItemPtr item: items) {
+  for (PlaylistItemPtr item : items) {
     songs << item->Metadata();
   }
   tracker_->TrackAsync(id_, songs);
@@ -1248,25 +1248,35 @@ void Playlist::UpdateItems(const SongList& songs) {
   Save();
 }
 
-void Playlist::UpdateFilenames(const FoundSongs& songs) {
-  for (int i = 0; i < items_.size(); i++) {
-    PlaylistItemPtr& item = items_[i];
-    QUrl old_filename = item->Metadata().url();
-    if (!songs.contains(old_filename))
-      continue;
-    Song song(item->Metadata());
-    song.set_url(QUrl(songs[old_filename]));
-    song.set_basefilename(QFileInfo(songs[old_filename].path()).fileName());
-    PlaylistItemPtr new_item;
+void Playlist::UpdateFilePaths(const TrackingResult& songs) {
+  QList<int> changed_rows;
+
+  for (int row = 0; row < items_.size(); row++) {
+    PlaylistItemPtr& item = items_[row];
+    const QUrl old_path = item->Metadata().url();
+    if (!songs.contains(old_path)) continue;
+
+    const QUrl new_path = songs[old_path];
+    if (new_path.isEmpty()) {
+      // song lost, grey out
+      item->SetForegroundColor(kInvalidSongPriority, kInvalidSongColor);
+    } else {
+      Song song(item->Metadata());
+      song.set_url(QUrl(songs[old_path]));
+      song.set_basefilename(QFileInfo(new_path.path()).fileName());
+      PlaylistItemPtr new_item;
       if (song.is_library_song()) {
         new_item = PlaylistItemPtr(new LibraryPlaylistItem(song));
         library_items_by_id_.insertMulti(song.id(), new_item);
       } else {
         new_item = PlaylistItemPtr(new SongPlaylistItem(song));
       }
-      items_[i] = new_item;
-    emit dataChanged(index(i, 0), index(i, ColumnCount - 1));
+      items_[row] = new_item;
+    }
+    changed_rows.append(row);
   }
+
+  ReloadItems(changed_rows);
   Save();
 }
 
