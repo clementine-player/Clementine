@@ -28,10 +28,13 @@
 class FileSystemWatcherInterface;
 class PlaylistManager;
 
-// Track local files automatically by fingerprinting them and watching for
-// directory changes.
-// Internal maps are used to avoid unnecessary duplicate operations, so it
-// is recommended to use one instance of this class for the whole application.
+/**
+ * Track local files automatically by fingerprinting them and watching for
+ * directory changes.
+ *
+ * Internal maps are used to avoid unnecessary duplicate operations, so it
+ * is recommended to use one instance of this class for the whole application.
+ */
 class SongTracker : public QObject {
   Q_OBJECT
 
@@ -40,14 +43,18 @@ class SongTracker : public QObject {
 
   void SetEnabled(bool enabled);
   bool IsEnabled() { return enabled_; }
-  // Track file movements for songs in a playlist.
-  // Songs might not have been fully loaded.
+  /**
+   * Track file movements for songs in a playlist. Songs might not have been
+   * fully loaded.
+   */
   void TrackAsync(int playlist_id, const SongList& songs);
   // void Untrack(int playlist_id, const SongList& songs);
   void Untrack(int playlist_id, const Song& song);
   // void UntrackAll();
-  // Get the fingerprint of a song file. Empty string is returned if file does
-  // not exist.
+  /**
+   * Get the fingerprint of a song file. Empty string is returned if file does
+   * not exist.
+   */
   QString GetFingerprint(const QString& filename);
 
  private slots:
@@ -67,6 +74,7 @@ class SongTracker : public QObject {
   };
 
   QUrl SearchDir(const QString& fingerprint, const QUrl& old_url);
+  void updateWatcher(const QString& dir_path);
 
   PlaylistManager* manager_;
   FileSystemWatcherInterface* fs_watcher_;
@@ -80,8 +88,8 @@ class SongTracker : public QObject {
   bool enabled_;
 };
 
-// old filename to new filename
-typedef QHash<QUrl, QUrl> FoundSongs;
-Q_DECLARE_METATYPE(FoundSongs)
+// old file path to new path; or empty URL if not found
+typedef QHash<QUrl, QUrl> TrackingResult;
+Q_DECLARE_METATYPE(TrackingResult)
 
 #endif  // SONGTRACKER_H
