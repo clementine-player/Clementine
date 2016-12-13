@@ -29,7 +29,7 @@ StreamDiscoverer::~StreamDiscoverer() {
   g_object_unref(discoverer_);
 }
 
-void StreamDiscoverer::Discover(QString url) {
+void StreamDiscoverer::Discover(const QString& url) {
   // Adding the request to discover the url given as a parameter:
   qLog(Debug) << "Discover" << url;
   std::string url_std = url.toStdString();

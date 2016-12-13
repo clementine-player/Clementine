@@ -24,7 +24,7 @@ class StreamDiscoverer : public QObject {
   StreamDiscoverer();
   ~StreamDiscoverer();
 
-  void Discover(QString url);
+  void Discover(const QString& url);
 
 signals:
   void DiscoverererFinished();
