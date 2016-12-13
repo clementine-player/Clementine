@@ -1898,7 +1898,7 @@ void MainWindow::DiscoverStreamDetails() {
   Song song = app_->playlist_manager()->current()->item_at(row)->Metadata();
 
   QString url = song.url().toString();
-  stream_discoverer_->discover(url);
+  stream_discoverer_->Discover(url);
 }
 
 void MainWindow::ShowStreamDetails(StreamDetails details) {
