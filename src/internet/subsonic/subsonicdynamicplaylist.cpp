@@ -94,7 +94,7 @@ PlaylistItemList SubsonicDynamicPlaylist::GenerateMore(int count) {
   }
   BOOST_SCOPE_EXIT_END
 
-  QUrl url = service->BuildRequestUrl("GetAlbumList");
+  QUrl url = service->BuildRequestUrl("getAlbumList");
   QNetworkAccessManager network;
 
   if (count > kMaxCount) count = kMaxCount;
