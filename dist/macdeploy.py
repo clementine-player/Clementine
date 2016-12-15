@@ -15,6 +15,7 @@
 #  You should have received a copy of the GNU General Public License
 #  along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 
+from distutils import spawn
 import logging
 import os
 import re
@@ -107,15 +108,18 @@ QT_PLUGINS = [
     'imageformats/libqmng.dylib',
     'imageformats/libqsvg.dylib',
 ]
-QT_PLUGINS_SEARCH_PATH=[
+QT_PLUGINS_SEARCH_PATH = [
     '/target/plugins',
     '/usr/local/Trolltech/Qt-4.7.0/plugins',
     '/Developer/Applications/Qt/plugins',
 ]
 
-GIO_MODULES_SEARCH_PATH=[
-    '/target/lib/gio/modules',
-]
+GIO_MODULES_SEARCH_PATH = ['/target/lib/gio/modules',]
+
+INSTALL_NAME_TOOL_APPLE = 'install_name_tool'
+INSTALL_NAME_TOOL_CROSS = 'x86_64-apple-darwin-%s' % INSTALL_NAME_TOOL_APPLE
+INSTALL_NAME_TOOL = INSTALL_NAME_TOOL_CROSS if spawn.find_executable(
+    INSTALL_NAME_TOOL_CROSS) else INSTALL_NAME_TOOL_APPLE
 
 
 class Error(Exception):
@@ -334,33 +338,38 @@ def CopyFramework(src_binary):
 
   # Create symlinks in the Framework to make it look like
   # https://developer.apple.com/library/mac/documentation/MacOSX/Conceptual/BPFrameworks/Concepts/FrameworkAnatomy.html
-  commands.append(['ln', '-sf',
-      'Versions/Current/%s' % name,
-      os.path.join(dest_base, name)])
-  commands.append(['ln', '-sf',
-      'Versions/Current/Resources',
-      os.path.join(dest_base, 'Resources')])
-  commands.append(['ln', '-sf',
-      version,
-      os.path.join(dest_base, 'Versions/Current')])
+  commands.append([
+      'ln', '-sf', 'Versions/Current/%s' % name, os.path.join(dest_base, name)
+  ])
+  commands.append([
+      'ln', '-sf', 'Versions/Current/Resources',
+      os.path.join(dest_base, 'Resources')
+  ])
+  commands.append(
+      ['ln', '-sf', version, os.path.join(dest_base, 'Versions/Current')])
 
   return dest_binary
 
+
 def FixId(path, library_name):
   id = '@executable_path/../Frameworks/%s' % library_name
-  args = ['install_name_tool', '-id', id, path]
+  args = [INSTALL_NAME_TOOL, '-id', id, path]
   commands.append(args)
+
 
 def FixLibraryId(path):
   library_name = os.path.basename(path)
   FixId(path, library_name)
 
+
 def FixFrameworkId(path, id):
   FixId(path, id)
 
+
 def FixInstallPath(library_path, library, new_path):
-  args = ['install_name_tool', '-change', library_path, new_path, library]
+  args = [INSTALL_NAME_TOOL, '-change', library_path, new_path, library]
   commands.append(args)
+
 
 def FindSystemLibrary(library_name):
   for path in ['/lib', '/usr/lib']:
