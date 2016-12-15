@@ -31,7 +31,7 @@ FRAMEWORK_SEARCH_PATH=[
     os.path.join(os.environ['HOME'], 'Library/Frameworks')
 ]
 
-LIBRARY_SEARCH_PATH=['/target/lib', '/usr/local/lib', '/sw/lib']
+LIBRARY_SEARCH_PATH=['/target', '/target/lib', '/usr/local/lib', '/sw/lib']
 
 
 GSTREAMER_PLUGINS=[
@@ -277,7 +277,7 @@ def FixBinary(path):
 
 def CopyLibrary(path):
   new_path = os.path.join(frameworks_dir, os.path.basename(path))
-  args = ['ditto', '--arch=x86_64', path, new_path]
+  args = ['cp',  path, new_path]
   commands.append(args)
   LOGGER.info("Copying library '%s'", path)
   return new_path
@@ -286,7 +286,7 @@ def CopyPlugin(path, subdir):
   new_path = os.path.join(plugins_dir, subdir, os.path.basename(path))
   args = ['mkdir', '-p', os.path.dirname(new_path)]
   commands.append(args)
-  args = ['ditto', '--arch=x86_64', path, new_path]
+  args = ['cp', path, new_path]
   commands.append(args)
   LOGGER.info("Copying plugin '%s'", path)
   return new_path
@@ -310,7 +310,7 @@ def CopyFramework(src_binary):
   dest_binary = os.path.join(dest_dir, name)
 
   commands.append(['mkdir', '-p', dest_dir])
-  commands.append(['ditto', '--arch=x86_64', src_binary, dest_binary])
+  commands.append(['cp', src_binary, dest_binary])
 
   # Copy special files from various places:
   #   QtCore has Resources/qt_menu.nib (copy to app's Resources)
@@ -334,13 +334,13 @@ def CopyFramework(src_binary):
 
   # Create symlinks in the Framework to make it look like
   # https://developer.apple.com/library/mac/documentation/MacOSX/Conceptual/BPFrameworks/Concepts/FrameworkAnatomy.html
-  commands.append(['ln', '-sfh',
+  commands.append(['ln', '-sf',
       'Versions/Current/%s' % name,
       os.path.join(dest_base, name)])
-  commands.append(['ln', '-sfh',
+  commands.append(['ln', '-sf',
       'Versions/Current/Resources',
       os.path.join(dest_base, 'Resources')])
-  commands.append(['ln', '-sfh',
+  commands.append(['ln', '-sf',
       version,
       os.path.join(dest_base, 'Versions/Current')])
 
