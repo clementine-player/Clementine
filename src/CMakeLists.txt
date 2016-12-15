@@ -1330,13 +1330,13 @@ endif()
 
 if (APPLE)
   target_link_libraries(clementine_lib
-    /System/Library/Frameworks/AppKit.framework
-    /System/Library/Frameworks/Carbon.framework
-    /System/Library/Frameworks/CoreAudio.framework
-    /System/Library/Frameworks/DiskArbitration.framework
-    /System/Library/Frameworks/Foundation.framework
-    /System/Library/Frameworks/IOKit.framework
-    /System/Library/Frameworks/ScriptingBridge.framework
+    "-framework AppKit"
+    "-framework Carbon"
+    "-framework CoreAudio"
+    "-framework DiskArbitration"
+    "-framework Foundation"
+    "-framework IOKit"
+    "-framework ScriptingBridge"
   )
   target_link_libraries(clementine_lib ${SPMEDIAKEYTAP_LIBRARIES})
   if (HAVE_SPARKLE)
