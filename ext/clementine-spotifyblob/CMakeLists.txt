@@ -53,7 +53,7 @@ target_link_libraries(clementine-spotifyblob
 
 if(APPLE)
   target_link_libraries(clementine-spotifyblob
-    /System/Library/Frameworks/Foundation.framework
+    "-framework Foundation"
   )
 endif(APPLE)
 

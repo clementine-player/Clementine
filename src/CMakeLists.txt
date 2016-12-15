@@ -859,7 +859,6 @@ optional_source(APPLE
     core/macfslistener.mm
     core/macglobalshortcutbackend.mm
     core/mac_startup.mm
-    devices/macdevicelister.mm
     engines/osxdevicefinder.cpp
     networkremote/bonjour.mm
     ui/globalshortcutgrabber.mm
@@ -869,9 +868,17 @@ optional_source(APPLE
   HEADERS
     core/macfslistener.h
     core/macglobalshortcutbackend.h
-    devices/macdevicelister.h
     ui/macsystemtrayicon.h
 )
+
+if(APPLE)
+  optional_source(HAVE_LIBMTP
+   SOURCES
+      devices/macdevicelister.mm
+    HEADERS
+      devices/macdevicelister.h
+  )
+endif()
 
 # Platform specific - Windows
 optional_source(WIN32
