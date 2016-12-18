@@ -29,10 +29,6 @@
 #include <QUrl>
 
 #include "config.h"
-#include "devicedatabasebackend.h"
-#include "devicekitlister.h"
-#include "devicestatefiltermodel.h"
-#include "filesystemdevice.h"
 #include "core/application.h"
 #include "core/concurrentrun.h"
 #include "core/database.h"
@@ -40,14 +36,18 @@
 #include "core/musicstorage.h"
 #include "core/taskmanager.h"
 #include "core/utilities.h"
+#include "devicedatabasebackend.h"
+#include "devicekitlister.h"
+#include "devicestatefiltermodel.h"
+#include "filesystemdevice.h"
 #include "ui/iconloader.h"
 
 #ifdef HAVE_AUDIOCD
-#include "cddalister.h"
 #include "cddadevice.h"
+#include "cddalister.h"
 #endif
 
-#ifdef Q_OS_DARWIN
+#if defined(Q_OS_DARWIN) and defined(HAVE_LIBMTP)
 #include "macdevicelister.h"
 #endif
 #ifdef HAVE_LIBGPOD
@@ -169,7 +169,8 @@ DeviceManager::DeviceInfo::BestBackend() const {
 DeviceManager::DeviceManager(Application* app, QObject* parent)
     : QAbstractListModel(parent),
       app_(app),
-      not_connected_overlay_(IconLoader::Load("edit-delete", IconLoader::Base)) {
+      not_connected_overlay_(
+          IconLoader::Load("edit-delete", IconLoader::Base)) {
   thread_pool_.setMaxThreadCount(1);
   connect(app_->task_manager(), SIGNAL(TasksChanged()), SLOT(TasksChanged()));
 
@@ -200,7 +201,7 @@ DeviceManager::DeviceManager(Application* app, QObject* parent)
 #ifdef HAVE_GIO
   AddLister(new GioLister);
 #endif
-#ifdef Q_OS_DARWIN
+#if defined(Q_OS_DARWIN) and defined(HAVE_LIBMTP)
   AddLister(new MacDeviceLister);
 #endif
 
@@ -322,8 +323,7 @@ QVariant DeviceManager::data(const QModelIndex& index, int role) const {
       if (!info.device_) {
         if (info.database_id_ == -1 &&
             !info.BestBackend()->lister_->DeviceNeedsMount(
-                 info.BestBackend()->unique_id_)) {
-
+                info.BestBackend()->unique_id_)) {
           if (info.BestBackend()->lister_->AskForScan(
                   info.BestBackend()->unique_id_)) {
             std::unique_ptr<QMessageBox> dialog(new QMessageBox(
@@ -629,8 +629,8 @@ std::shared_ptr<ConnectedDevice> DeviceManager::Connect(int row) {
   return ret;
 }
 
-std::shared_ptr<ConnectedDevice> DeviceManager::GetConnectedDevice(int row)
-    const {
+std::shared_ptr<ConnectedDevice> DeviceManager::GetConnectedDevice(
+    int row) const {
   return devices_[row].device_;
 }
 

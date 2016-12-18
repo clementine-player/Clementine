@@ -229,7 +229,7 @@ PodcastEpisodeList PodcastBackend::GetEpisodes(int podcast_id) {
                   " FROM podcast_episodes"
                   " WHERE podcast_id = :id"
                   " ORDER BY publication_date DESC");
-  q.bindValue(":db", podcast_id);
+  q.bindValue(":id", podcast_id);
   q.exec();
   if (db_->CheckErrors(q)) return ret;
 
@@ -252,7 +252,7 @@ PodcastEpisode PodcastBackend::GetEpisodeById(int id) {
   q.prepare("SELECT ROWID, " + PodcastEpisode::kColumnSpec +
                   " FROM podcast_episodes"
                   " WHERE ROWID = :id");
-  q.bindValue(":db", id);
+  q.bindValue(":id", id);
   q.exec();
   if (!db_->CheckErrors(q) && q.next()) {
     ret.InitFromQuery(q);

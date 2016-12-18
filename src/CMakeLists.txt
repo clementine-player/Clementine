@@ -853,7 +853,6 @@ optional_source(APPLE
     core/macfslistener.mm
     core/macglobalshortcutbackend.mm
     core/mac_startup.mm
-    devices/macdevicelister.mm
     engines/osxdevicefinder.cpp
     networkremote/bonjour.mm
     ui/globalshortcutgrabber.mm
@@ -863,9 +862,17 @@ optional_source(APPLE
   HEADERS
     core/macfslistener.h
     core/macglobalshortcutbackend.h
-    devices/macdevicelister.h
     ui/macsystemtrayicon.h
 )
+
+if(APPLE)
+  optional_source(HAVE_LIBMTP
+   SOURCES
+      devices/macdevicelister.mm
+    HEADERS
+      devices/macdevicelister.h
+  )
+endif()
 
 # Platform specific - Windows
 optional_source(WIN32
@@ -1313,13 +1320,13 @@ endif()
 
 if (APPLE)
   target_link_libraries(clementine_lib
-    /System/Library/Frameworks/AppKit.framework
-    /System/Library/Frameworks/Carbon.framework
-    /System/Library/Frameworks/CoreAudio.framework
-    /System/Library/Frameworks/DiskArbitration.framework
-    /System/Library/Frameworks/Foundation.framework
-    /System/Library/Frameworks/IOKit.framework
-    /System/Library/Frameworks/ScriptingBridge.framework
+    "-framework AppKit"
+    "-framework Carbon"
+    "-framework CoreAudio"
+    "-framework DiskArbitration"
+    "-framework Foundation"
+    "-framework IOKit"
+    "-framework ScriptingBridge"
   )
   target_link_libraries(clementine_lib ${SPMEDIAKEYTAP_LIBRARIES})
   if (HAVE_SPARKLE)
