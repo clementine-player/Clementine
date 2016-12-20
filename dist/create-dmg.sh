@@ -28,5 +28,18 @@ OUT="$NAME.dmg"
 mkdir -p "$TMP"
 ################################################################################
 
-genisoimage -D -V "Clementine" -no-pad -r -apple -o $NAME.iso $IN
+# clean up
+rm -rf "$TMP"
+rm -f "$OUT"
+
+# create DMG contents and copy files
+mkdir -p "$TMP/.background"
+cp ../dist/dmg_background.png "$TMP/.background/background.png"
+cp ../dist/DS_Store.in "$TMP/.DS_Store"
+chmod go-rwx "$TMP/.DS_Store"
+ln -s /Applications "$TMP/Applications"
+# copies the prepared bundle into the dir that will become the DMG
+cp -R "$IN" "$TMP"
+
+genisoimage -D -V "Clementine" -no-pad -r -apple -o $NAME.iso $TMP
 dmg dmg $NAME.iso $OUT
