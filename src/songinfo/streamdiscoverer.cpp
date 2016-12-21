@@ -18,8 +18,8 @@ StreamDiscoverer::StreamDiscoverer() : QObject(nullptr) {
   }
 
   // Connecting its signals:
-  CHECKED_GCONNECT(discoverer_, "discovered", &on_discovered_cb, this);
-  CHECKED_GCONNECT(discoverer_, "finished", &on_finished_cb, this);
+  CHECKED_GCONNECT(discoverer_, "discovered", &OnDiscovered, this);
+  CHECKED_GCONNECT(discoverer_, "finished", &OnFinished, this);
 
   // Starting the discoverer process:
   gst_discoverer_start(discoverer_);
@@ -38,23 +38,21 @@ void StreamDiscoverer::Discover(const QString& url) {
     qLog(Error) << "Failed to start discovering" << url << endl;
     return;
   }
-
   WaitForSignal(this, SIGNAL(DiscovererFinished()));
 }
 
-void StreamDiscoverer::on_discovered_cb(GstDiscoverer* discoverer,
-                                        GstDiscovererInfo* info, GError* err,
-                                        gpointer self) {
+void StreamDiscoverer::OnDiscovered(GstDiscoverer* discoverer,
+                                    GstDiscovererInfo* info, GError* err,
+                                    gpointer self) {
   StreamDiscoverer* instance = reinterpret_cast<StreamDiscoverer*>(self);
 
   QString discovered_url(gst_discoverer_info_get_uri(info));
 
   GstDiscovererResult result = gst_discoverer_info_get_result(info);
   if (result != GST_DISCOVERER_OK) {
-    qLog(Error) << "Discovery failed:" << gstDiscovererErrorMessage(result)
-                << endl;
-    emit instance->Error(tr("Error discovering %1: %2").arg(discovered_url).arg(
-        gstDiscovererErrorMessage(result)));
+    QString error_message = GSTdiscovererErrorMessage(result);
+    qLog(Error) << "Discovery failed:" << error_message << endl;
+    emit instance->Error(tr("Error discovering %1: %2").arg(discovered_url).arg(error_message));
     return;
   }
 
@@ -101,15 +99,14 @@ void StreamDiscoverer::on_discovered_cb(GstDiscoverer* discoverer,
   gst_discoverer_stream_info_list_free(audio_streams);
 }
 
-void StreamDiscoverer::on_finished_cb(GstDiscoverer* discoverer,
-                                      gpointer self) {
+void StreamDiscoverer::OnFinished(GstDiscoverer* discoverer, gpointer self) {
   // The discoverer doesn't have any more urls in its queue. Let the loop know
   // it can exit.
   StreamDiscoverer* instance = reinterpret_cast<StreamDiscoverer*>(self);
   emit instance->DiscoverererFinished();
 }
 
-QString StreamDiscoverer::gstDiscovererErrorMessage(
+QString StreamDiscoverer::GSTdiscovererErrorMessage(
     GstDiscovererResult result) {
   switch (result) {
     case (GST_DISCOVERER_URI_INVALID):

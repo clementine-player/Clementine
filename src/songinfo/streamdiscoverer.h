@@ -37,13 +37,12 @@ signals:
   static const unsigned int kDiscoveryTimeoutS;
 
   // GstDiscoverer callbacks:
-  static void on_discovered_cb(GstDiscoverer* discoverer,
-                               GstDiscovererInfo* info, GError* err,
-                               gpointer instance);
-  static void on_finished_cb(GstDiscoverer* discoverer, gpointer instance);
+  static void OnDiscovered(GstDiscoverer* discoverer, GstDiscovererInfo* info,
+                           GError* err, gpointer instance);
+  static void OnFinished(GstDiscoverer* discoverer, gpointer instance);
 
   // Helper to return descriptive error messages:
-  static QString gstDiscovererErrorMessage(GstDiscovererResult result);
+  static QString GSTdiscovererErrorMessage(GstDiscovererResult result);
 };
 
 #endif  // STREAMDISCOVERER_H
