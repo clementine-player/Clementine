@@ -311,6 +311,7 @@ set(SOURCES
   songinfo/songkickconcertwidget.cpp
   songinfo/songplaystats.cpp
   songinfo/spotifyimages.cpp
+  songinfo/streamdiscoverer.cpp
   songinfo/taglyricsinfoprovider.cpp
   songinfo/ultimatelyricslyric.cpp
   songinfo/ultimatelyricsprovider.cpp
@@ -358,6 +359,7 @@ set(SOURCES
   ui/settingsdialog.cpp
   ui/settingspage.cpp
   ui/standarditemiconloader.cpp
+  ui/streamdetailsdialog.cpp
   ui/systemtrayicon.cpp
   ui/trackselectiondialog.cpp
   ui/windows7thumbbar.cpp
@@ -603,6 +605,7 @@ set(HEADERS
   songinfo/songkickconcertwidget.h
   songinfo/songplaystats.h
   songinfo/spotifyimages.h
+  songinfo/streamdiscoverer.h
   songinfo/taglyricsinfoprovider.h
   songinfo/ultimatelyricslyric.h
   songinfo/ultimatelyricsprovider.h
@@ -641,6 +644,7 @@ set(HEADERS
   ui/settingsdialog.h
   ui/settingspage.h
   ui/standarditemiconloader.h
+  ui/streamdetailsdialog.h
   ui/systemtrayicon.h
   ui/trackselectiondialog.h
   ui/windows7thumbbar.h
@@ -764,6 +768,7 @@ set(UI
   ui/organiseerrordialog.ui
   ui/playbacksettingspage.ui
   ui/settingsdialog.ui
+  ui/streamdetailsdialog.ui
   ui/trackselectiondialog.ui
 
   widgets/equalizerslider.ui
@@ -1265,6 +1270,7 @@ target_link_libraries(clementine_lib
   ${GSTREAMER_LIBRARIES}
   ${GSTREAMER_APP_LIBRARIES}
   ${GSTREAMER_TAG_LIBRARIES}
+  ${GSTREAMER_PBUTILS_LIBRARIES}
   ${QTSINGLEAPPLICATION_LIBRARIES}
   ${QTSINGLECOREAPPLICATION_LIBRARIES}
   ${QTIOCOMPRESSOR_LIBRARIES}
