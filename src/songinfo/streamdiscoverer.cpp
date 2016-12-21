@@ -60,7 +60,7 @@ void StreamDiscoverer::OnDiscovered(GstDiscoverer* discoverer,
   // the only one).
   GList* audio_streams = gst_discoverer_info_get_audio_streams(info);
 
-  if (audio_streams != NULL) {
+  if (audio_streams != nullptr) {
     qLog(Debug) << "Discovery successful" << endl;
     // We found a valid audio stream, extracting and saving its info:
     GstDiscovererStreamInfo* stream_audio_info =
