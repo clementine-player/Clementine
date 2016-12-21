@@ -3,6 +3,7 @@
 #include <gst/pbutils/pbutils.h>
 #include "core/logging.h"
 #include "core/signalchecker.h"
+#include "core/waitforsignal.h"
 
 #include <QEventLoop>
 
@@ -32,19 +33,13 @@ StreamDiscoverer::~StreamDiscoverer() {
 void StreamDiscoverer::Discover(const QString& url) {
   // Adding the request to discover the url given as a parameter:
   qLog(Debug) << "Discover" << url;
-  std::string url_std = url.toStdString();
-  const char* url_c = url_std.c_str();
-  if (!gst_discoverer_discover_uri_async(discoverer_, url_c)) {
-    qLog(Error) << "Failed to start discovering" << url
-                << endl;
-    g_object_unref(discoverer_);
+  if (!gst_discoverer_discover_uri_async(discoverer_,
+                                         url.toStdString().c_str())) {
+    qLog(Error) << "Failed to start discovering" << url << endl;
     return;
   }
 
-  // Creating a loop and setting it to run. That way we can wait for signals.
-  QEventLoop loop;
-  loop.connect(this, SIGNAL(DiscoverererFinished()), SLOT(quit()));
-  loop.exec();
+  WaitForSignal(this, SIGNAL(DiscovererFinished()));
 }
 
 void StreamDiscoverer::on_discovered_cb(GstDiscoverer* discoverer,
@@ -56,13 +51,15 @@ void StreamDiscoverer::on_discovered_cb(GstDiscoverer* discoverer,
 
   GstDiscovererResult result = gst_discoverer_info_get_result(info);
   if (result != GST_DISCOVERER_OK) {
-    qLog(Error) << "Discovery failed:" << gstDiscovererErrorMessage(result) << endl;
+    qLog(Error) << "Discovery failed:" << gstDiscovererErrorMessage(result)
+                << endl;
     emit instance->Error(tr("Error discovering %1: %2").arg(discovered_url).arg(
         gstDiscovererErrorMessage(result)));
     return;
   }
 
-  // Get audio streams (we will only care about the first one, which should be the only one).
+  // Get audio streams (we will only care about the first one, which should be
+  // the only one).
   GList* audio_streams = gst_discoverer_info_get_audio_streams(info);
 
   if (audio_streams != NULL) {
