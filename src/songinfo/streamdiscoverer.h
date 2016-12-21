@@ -28,7 +28,7 @@ class StreamDiscoverer : public QObject {
 
 signals:
   void DiscoverFinished();
-  void DataReady(StreamDetails data);
+  void DataReady(const StreamDetails& data);
   void Error(const QString& message);
 
  private:
