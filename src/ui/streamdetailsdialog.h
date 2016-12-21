@@ -23,7 +23,7 @@ class StreamDetailsDialog : public QDialog {
   void setSampleRate(unsigned int);
 
  private slots:
-  void on_buttonBox_rejected();
+  void Close();
 
  private:
   Ui::StreamDetailsDialog* ui;
