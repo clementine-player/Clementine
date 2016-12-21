@@ -1,6 +1,8 @@
 #ifndef STREAMDETAILSDIALOG_H
 #define STREAMDETAILSDIALOG_H
 
+#include <memory>
+
 #include <QDialog>
 
 namespace Ui {
@@ -17,16 +19,16 @@ class StreamDetailsDialog : public QDialog {
   void setUrl(const QString& url);
   void setFormat(const QString& codec);  // This is localized, so only for human
                                          // consumption.
-  void setBitrate(unsigned int);
-  void setDepth(unsigned int);
-  void setChannels(unsigned int);
-  void setSampleRate(unsigned int);
+  void setBitrate(int);
+  void setDepth(int);
+  void setChannels(int);
+  void setSampleRate(int);
 
  private slots:
   void Close();
 
  private:
-  Ui::StreamDetailsDialog* ui_;
+  std::unique_ptr<Ui::StreamDetailsDialog> ui_;
 };
 
 #endif  // STREAMDETAILSDIALOG_H
