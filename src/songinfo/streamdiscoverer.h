@@ -10,10 +10,10 @@
 struct StreamDetails {
   QString url;
   QString format;
-  unsigned int bitrate;
-  unsigned int depth;
-  unsigned int channels;
-  unsigned int sample_rate;
+  int bitrate;
+  int depth;
+  int channels;
+  int sample_rate;
 };
 Q_DECLARE_METATYPE(StreamDetails)
 
@@ -34,7 +34,7 @@ signals:
  private:
   GstDiscoverer* discoverer_;
 
-  static const unsigned int kDiscoveryTimeoutS;
+  static const int kDiscoveryTimeoutS;
 
   // GstDiscoverer callbacks:
   static void OnDiscovered(GstDiscoverer* discoverer, GstDiscovererInfo* info,

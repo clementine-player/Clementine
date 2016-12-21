@@ -7,7 +7,7 @@
 
 #include <QEventLoop>
 
-const unsigned int StreamDiscoverer::kDiscoveryTimeoutS = 10;
+const int StreamDiscoverer::kDiscoveryTimeoutS = 10;
 
 StreamDiscoverer::StreamDiscoverer() : QObject(nullptr) {
   // Setting up a discoverer:
