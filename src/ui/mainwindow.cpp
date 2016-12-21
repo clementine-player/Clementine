@@ -480,8 +480,8 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
           SLOT(ShowQueueManager()));
   connect(ui_->action_add_files_to_transcoder, SIGNAL(triggered()),
           SLOT(AddFilesToTranscoder()));
-  connect(ui_->action_view_stream_details, SIGNAL(triggered()), SLOT(DiscoverStreamDetails()));
-
+  connect(ui_->action_view_stream_details, SIGNAL(triggered()),
+          SLOT(DiscoverStreamDetails()));
 
   background_streams_->AddAction("Rain", ui_->action_rain);
   background_streams_->AddAction("Hypnotoad", ui_->action_hypnotoad);
@@ -1722,7 +1722,6 @@ void MainWindow::PlaylistRightClick(const QPoint& global_pos,
   ui_->action_view_stream_details->setEnabled(all == 1 && streams == 1);
   ui_->action_view_stream_details->setVisible(all == 1 && streams == 1);
 
-
   bool track_column = (index.column() == Playlist::Column_Track);
   ui_->action_renumber_tracks->setVisible(editable >= 2 && track_column);
   ui_->action_selection_set_value->setVisible(editable >= 2 && !track_column);
@@ -1901,7 +1900,7 @@ void MainWindow::DiscoverStreamDetails() {
   stream_discoverer_->Discover(url);
 }
 
-void MainWindow::ShowStreamDetails(StreamDetails details) {
+void MainWindow::ShowStreamDetails(const StreamDetails& details) {
   StreamDetailsDialog stream_details_dialog(this);
 
   stream_details_dialog.setUrl(details.url);
@@ -2524,7 +2523,8 @@ EditTagDialog* MainWindow::CreateEditTagDialog() {
 
 StreamDiscoverer* MainWindow::CreateStreamDiscoverer() {
   StreamDiscoverer* discoverer = new StreamDiscoverer();
-  connect(discoverer, SIGNAL(DataReady(StreamDetails)), SLOT(ShowStreamDetails(StreamDetails)));
+  connect(discoverer, SIGNAL(DataReady(StreamDetails)),
+          SLOT(ShowStreamDetails(StreamDetails)));
   connect(discoverer, SIGNAL(Error(QString)), SLOT(ShowErrorDialog(QString)));
   return discoverer;
 }
