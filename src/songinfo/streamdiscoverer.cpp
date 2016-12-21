@@ -38,7 +38,7 @@ void StreamDiscoverer::Discover(const QString& url) {
     qLog(Error) << "Failed to start discovering" << url << endl;
     return;
   }
-  WaitForSignal(this, SIGNAL(DiscovererFinished()));
+  WaitForSignal(this, SIGNAL(DiscoverFinished()));
 }
 
 void StreamDiscoverer::OnDiscovered(GstDiscoverer* discoverer,
@@ -52,7 +52,8 @@ void StreamDiscoverer::OnDiscovered(GstDiscoverer* discoverer,
   if (result != GST_DISCOVERER_OK) {
     QString error_message = GSTdiscovererErrorMessage(result);
     qLog(Error) << "Discovery failed:" << error_message << endl;
-    emit instance->Error(tr("Error discovering %1: %2").arg(discovered_url).arg(error_message));
+    emit instance->Error(
+        tr("Error discovering %1: %2").arg(discovered_url).arg(error_message));
     return;
   }
 
@@ -103,7 +104,7 @@ void StreamDiscoverer::OnFinished(GstDiscoverer* discoverer, gpointer self) {
   // The discoverer doesn't have any more urls in its queue. Let the loop know
   // it can exit.
   StreamDiscoverer* instance = reinterpret_cast<StreamDiscoverer*>(self);
-  emit instance->DiscoverererFinished();
+  emit instance->DiscoverFinished();
 }
 
 QString StreamDiscoverer::GSTdiscovererErrorMessage(
