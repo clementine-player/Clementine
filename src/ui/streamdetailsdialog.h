@@ -26,7 +26,7 @@ class StreamDetailsDialog : public QDialog {
   void Close();
 
  private:
-  Ui::StreamDetailsDialog* ui;
+  Ui::StreamDetailsDialog* ui_;
 };
 
 #endif  // STREAMDETAILSDIALOG_H
