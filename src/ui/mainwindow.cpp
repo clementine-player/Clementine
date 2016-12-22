@@ -1295,11 +1295,15 @@ void MainWindow::LoadPlaybackStatus() {
     return;
   }
 
-  QTimer::singleShot(100, this, SLOT(ResumePlayback()));
+  connect(app_->playlist_manager()->active(), SIGNAL(RestoreFinished()),
+          SLOT(ResumePlayback()));
 }
 
 void MainWindow::ResumePlayback() {
   qLog(Debug) << "Resuming playback";
+
+  disconnect(app_->playlist_manager()->active(), SIGNAL(RestoreFinished()),
+             this, SLOT(ResumePlayback()));
 
   if (saved_playback_state_ == Engine::Paused) {
     NewClosure(app_->player(), SIGNAL(Playing()), app_->player(),
