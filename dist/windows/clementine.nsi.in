@@ -251,6 +251,7 @@ Section "Delete old files" oldfiles
 
   # Dependencies bump
   Delete "$INSTDIR\libgnutls-28.dll"
+  Delete "$INSTDIR\libhogweed-2-4.dll"
   Delete "$INSTDIR\libprotobuf-8.dll"
 
   ; No longer using built-in libechonest
@@ -301,7 +302,7 @@ Section "Clementine" Clementine
   File "libgsttag-1.0-0.dll"
   File "libgstvideo-1.0-0.dll"
   File "libgthread-2.0-0.dll"
-  File "libhogweed-2-4.dll"
+  File "libhogweed-4.dll"
   File "libiconv-2.dll"
   File "libid3tag.dll"
   File "libintl-8.dll"
