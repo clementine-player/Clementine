@@ -1309,6 +1309,18 @@ bool Playlist::CompareItems(int column, Qt::SortOrder order,
   return false;
 }
 
+bool Playlist::ComparePathDepths(Qt::SortOrder order,
+                                 shared_ptr<PlaylistItem> _a,
+                                 shared_ptr<PlaylistItem> _b) {
+  shared_ptr<PlaylistItem> a = order == Qt::AscendingOrder ? _a : _b;
+  shared_ptr<PlaylistItem> b = order == Qt::AscendingOrder ? _b : _a;
+
+  int a_dir_level = a->Url().path().count('/');
+  int b_dir_level = b->Url().path().count('/');
+
+  return a_dir_level < b_dir_level;
+}
+
 QString Playlist::column_name(Column column) {
   switch (column) {
     case Column_Title:
@@ -1410,6 +1422,14 @@ void Playlist::sort(int column, Qt::SortOrder order) {
                 std::bind(&Playlist::CompareItems, Column_Disc, order, _1, _2));
     qStableSort(begin, new_items.end(), std::bind(&Playlist::CompareItems,
                                                   Column_Album, order, _1, _2));
+  } else if (column == Column_Filename) {
+    // When sorting by full paths we also expect a hierarchical order. This
+    // returns a breath-first ordering of paths.
+    qStableSort(
+        begin, new_items.end(),
+        std::bind(&Playlist::CompareItems, Column_Filename, order, _1, _2));
+    qStableSort(begin, new_items.end(),
+                std::bind(&Playlist::ComparePathDepths, order, _1, _2));
   } else {
     qStableSort(begin, new_items.end(),
                 std::bind(&Playlist::CompareItems, column, order, _1, _2));
