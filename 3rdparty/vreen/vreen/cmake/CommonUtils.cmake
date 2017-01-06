@@ -92,7 +92,7 @@ macro(UPDATE_COMPILER_FLAGS target)
 
     if(FLAGS_CXX11)
         update_cxx_compiler_flag(${target} "-std=c++0x" CXX_11)
-	update_cxx_compiler_flag(${target} "-stdlib=libc++" STD_LIBCXX)
+        #update_cxx_compiler_flag(${target} "-stdlib=libc++" STD_LIBCXX)
         #add check for c++11 support
     endif()
 
