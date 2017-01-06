@@ -258,6 +258,9 @@ Section "Delete old files" oldfiles
   Delete "$INSTDIR\libechonest.dll"
   ; No longer using built-in chromaprint
   Delete "$INSTDIR\libchromaprint.dll"
+
+  ; Versioned FLAC DLL
+  Delete "$INSTDIR\libFLAC.dll"
 SectionEnd
 
 Section "Clementine" Clementine
@@ -276,7 +279,7 @@ Section "Clementine" Clementine
   File "libfaad.dll"
   File "libffi-6.dll"
   File "libfftw3-3.dll"
-  File "libFLAC.dll"
+  File "libFLAC-8.dll"
   File "libgcc_s_sjlj-1.dll"
   File "libgcrypt-20.dll"
   File "libgio-2.0-0.dll"
@@ -1089,7 +1092,7 @@ Section "Uninstall"
   Delete "$INSTDIR\libfaad.dll"
   Delete "$INSTDIR\libffi-6.dll"
   Delete "$INSTDIR\libfftw3-3.dll"
-  Delete "$INSTDIR\libFLAC.dll"
+  Delete "$INSTDIR\libFLAC-8.dll"
   Delete "$INSTDIR\libgcc_s_sjlj-1.dll"
   Delete "$INSTDIR\libgcrypt-20.dll"
   Delete "$INSTDIR\libgio-2.0-0.dll"
