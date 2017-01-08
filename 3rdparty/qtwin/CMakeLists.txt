@@ -7,3 +7,7 @@ set(QTWIN-SOURCES
 ADD_LIBRARY(qtwin STATIC
     ${QTWIN-SOURCES}
 )
+
+target_link_libraries(qtwin
+    Qt5::Widgets
+)
