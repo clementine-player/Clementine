@@ -133,7 +133,7 @@ void Windows7ThumbBar::HandleWinEvent(MSG* msg) {
     }
 
     qLog(Debug) << "Adding buttons";
-    hr = taskbar_list->ThumbBarAddButtons(widget_->winId(), actions_.count(),
+    hr = taskbar_list->ThumbBarAddButtons((HWND)widget_->winId(), actions_.count(),
                                           buttons);
     if (hr != S_OK) qLog(Debug) << "Failed to add buttons" << hex << DWORD(hr);
     for (int i = 0; i < actions_.count(); i++) {
@@ -167,7 +167,7 @@ void Windows7ThumbBar::ActionChanged() {
     if (buttons->hIcon > 0) DestroyIcon(buttons->hIcon);
   }
 
-  taskbar_list->ThumbBarUpdateButtons(widget_->winId(), actions_.count(),
+  taskbar_list->ThumbBarUpdateButtons((HWND)widget_->winId(), actions_.count(),
                                       buttons);
 #endif  // Q_OS_WIN32
 }
