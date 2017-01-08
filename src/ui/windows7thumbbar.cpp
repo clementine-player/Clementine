@@ -53,10 +53,13 @@ void Windows7ThumbBar::SetActions(const QList<QAction*>& actions) {
 }
 
 #ifdef Q_OS_WIN32
+
+extern HICON qt_pixmapToWinHICON(const QPixmap &p);
+
 static void SetupButton(const QAction* action, THUMBBUTTON* button) {
   if (action) {
     button->hIcon =
-        action->icon().pixmap(Windows7ThumbBar::kIconSize).toWinHICON();
+        qt_pixmapToWinHICON(action->icon().pixmap(Windows7ThumbBar::kIconSize));
     button->dwFlags = action->isEnabled() ? THBF_ENABLED : THBF_DISABLED;
     // This is unsafe - doesn't obey 260-char restriction
     action->text().toWCharArray(button->szTip);
