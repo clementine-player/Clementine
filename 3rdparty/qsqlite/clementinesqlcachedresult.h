@@ -53,7 +53,7 @@
 // We mean it.
 //
 
-#include "QtSql/qsqlresult.h"
+#include <QtSql/qsqlresult.h>
 
 QT_BEGIN_NAMESPACE
 
@@ -62,7 +62,7 @@ template <typename T> class QVector;
 
 class ClementineSqlCachedResultPrivate;
 
-class Q_SQL_EXPORT ClementineSqlCachedResult: public QSqlResult
+class ClementineSqlCachedResult: public QSqlResult
 {
 public:
     virtual ~ClementineSqlCachedResult();
