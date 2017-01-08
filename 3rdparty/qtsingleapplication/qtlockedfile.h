@@ -61,8 +61,6 @@
 #  define QT_QTLOCKEDFILE_EXPORT
 #endif
 
-namespace QtLP_Private {
-
 class QT_QTLOCKEDFILE_EXPORT QtLockedFile : public QFile
 {
 public:
@@ -92,5 +90,5 @@ private:
 #endif
     LockMode m_lock_mode;
 };
-}
+
 #endif
