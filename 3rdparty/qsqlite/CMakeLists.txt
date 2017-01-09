@@ -46,4 +46,5 @@ set_property(TARGET qsqlite PROPERTY QT_STATICPLUGIN 1)
 
 target_link_libraries(qsqlite
     Qt5::Core Qt5::Sql
+    ${SQLITE_LIBRARIES}
 )
