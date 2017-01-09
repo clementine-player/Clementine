@@ -25,7 +25,7 @@
 
 #include <QtCore/qglobal.h>
 
-#ifndef MYGPO_EXPORT
+#ifndef MYGPO_STATIC
 # if defined(MYGPO_MAKEDLL)
 /* We are building this library */
 #  define MYGPO_EXPORT Q_DECL_EXPORT
@@ -33,6 +33,8 @@
 /* We are using this library */
 #  define MYGPO_EXPORT Q_DECL_IMPORT
 # endif
+#else
+# define MYGPO_EXPORT
 #endif
 
 #endif // MYGPO_EXPORT_H
