@@ -28,4 +28,8 @@ ADD_LIBRARY(qxt STATIC
   ${QXT-SOURCES-MOC}
 )
 
-QT5_USE_MODULES(qxt Core Widgets X11Extras)
+if(WIN32)
+  QT5_USE_MODULES(qxt Core Widgets)
+else(WIN32)
+  QT5_USE_MODULES(qxt Core Widgets X11Extras)
+endif(WIN32)

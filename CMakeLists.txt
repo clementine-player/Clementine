@@ -85,7 +85,7 @@ pkg_check_modules(TAGLIB REQUIRED taglib>=1.6)
 
 if (WIN32)
   find_package(ZLIB REQUIRED)
-  find_library(QTSPARKLE_LIBRARIES qtsparkle)
+  find_library(QTSPARKLE_LIBRARIES qtsparkle-qt5)
 endif (WIN32)
 
 find_library(LASTFM5_LIBRARIES lastfm5)
@@ -299,7 +299,11 @@ if (HAVE_VK)
 endif(HAVE_VK)
 
 # We can include the Qt definitions now
-set(QT_LIBRARIES Qt5::Core Qt5::OpenGL Qt5::Sql Qt5::Network Qt5::Xml Qt5::Widgets Qt5::Concurrent Qt5::X11Extras Qt5::DBus)
+if(WIN32)
+  set(QT_LIBRARIES Qt5::Core Qt5::OpenGL Qt5::Sql Qt5::Network Qt5::Xml Qt5::Widgets Qt5::Concurrent)
+else(WIN32)
+  set(QT_LIBRARIES Qt5::Core Qt5::OpenGL Qt5::Sql Qt5::Network Qt5::Xml Qt5::Widgets Qt5::Concurrent Qt5::X11Extras Qt5::DBus)
+endif(WIN32)
 
 # Remove GLU and GL from the link line - they're not really required
 # and don't exist on my mingw toolchain
