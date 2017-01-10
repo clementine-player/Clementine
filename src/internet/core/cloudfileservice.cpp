@@ -219,15 +219,17 @@ bool CloudFileService::IsSupportedMimeType(const QString& mime_type) const {
 }
 
 QString CloudFileService::GuessMimeTypeForFile(const QString& filename) const {
-  if (filename.endsWith(".mp3")) {
+  if (filename.endsWith(".mp3", Qt::CaseInsensitive)) {
     return "audio/mpeg";
-  } else if (filename.endsWith(".m4a") || filename.endsWith(".m4b")) {
+  } else if (filename.endsWith(".m4a", Qt::CaseInsensitive) ||
+             filename.endsWith(".m4b", Qt::CaseInsensitive)) {
     return "audio/mpeg";
-  } else if (filename.endsWith(".ogg") || filename.endsWith(".opus")) {
+  } else if (filename.endsWith(".ogg", Qt::CaseInsensitive) ||
+             filename.endsWith(".opus", Qt::CaseInsensitive)) {
     return "application/ogg";
-  } else if (filename.endsWith(".flac")) {
+  } else if (filename.endsWith(".flac", Qt::CaseInsensitive)) {
     return "application/x-flac";
-  } else if (filename.endsWith(".wma")) {
+  } else if (filename.endsWith(".wma", Qt::CaseInsensitive)) {
     return "audio/x-ms-wma";
   }
   return QString::null;
