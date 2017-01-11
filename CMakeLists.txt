@@ -211,8 +211,6 @@ optional_component(BOX ON "Box support"
   DEPENDS "Taglib 1.8" "TAGLIB_VERSION VERSION_GREATER 1.7.999"
 )
 
-optional_component(VK ON "Vk.com support")
-
 optional_component(SEAFILE ON "Seafile support"
   DEPENDS "Google sparsehash" SPARSEHASH_INCLUDE_DIRS
   DEPENDS "Taglib 1.8" "TAGLIB_VERSION VERSION_GREATER 1.7.999"
@@ -287,12 +285,6 @@ endif()
 if (HAVE_DBUS)
   find_package(Qt4 REQUIRED QtDbus)
 endif ()
-
-if (HAVE_VK)
-  add_subdirectory(3rdparty/vreen)
-  include_directories(${VREEN_INCLUDE_DIRS})
-  include_directories(${VREENOAUTH_INCLUDE_DIRS})
-endif(HAVE_VK)
 
 # We can include the Qt definitions now
 include(${QT_USE_FILE})

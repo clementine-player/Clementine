@@ -30,20 +30,16 @@
 #include "engines/enginebase.h"
 #include "engines/gstengine.h"
 #include "globalsearch/searchprovider.h"
-#include "internet/digitally/digitallyimportedclient.h"
 #include "internet/core/geolocator.h"
-#include "internet/podcasts/podcastepisode.h"
-#include "internet/podcasts/podcast.h"
-#include "internet/somafm/somafmservice.h"
+#include "internet/digitally/digitallyimportedclient.h"
 #include "internet/intergalacticfm/intergalacticfmservice.h"
+#include "internet/podcasts/podcast.h"
+#include "internet/podcasts/podcastepisode.h"
+#include "internet/somafm/somafmservice.h"
 #include "library/directory.h"
 #include "playlist/playlist.h"
 #include "songinfo/collapsibleinfopane.h"
 #include "ui/equalizer.h"
-
-#ifdef HAVE_VK
-#include "internet/vk/vkservice.h"
-#endif
 
 #ifdef HAVE_DBUS
 #include <QDBusMetaType>
@@ -111,11 +107,6 @@ void RegisterMetaTypes() {
   qRegisterMetaType<SubdirectoryList>("SubdirectoryList");
   qRegisterMetaType<Subdirectory>("Subdirectory");
   qRegisterMetaType<QList<QUrl>>("QList<QUrl>");
-
-#ifdef HAVE_VK
-  qRegisterMetaType<MusicOwner>("MusicOwner");
-  qRegisterMetaTypeStreamOperators<MusicOwner>("MusicOwner");
-#endif
 
 #ifdef HAVE_DBUS
   qDBusRegisterMetaType<QImage>();

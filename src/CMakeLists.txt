@@ -1163,31 +1163,6 @@ optional_source(HAVE_BOX
     internet/box/boxsettingspage.ui
 )
 
-# Vk.com support
-optional_source(HAVE_VK
-  INCLUDE_DIRECTORIES 
-    ${VREEN_INCLUDE_DIRS}
-  SOURCES
-    globalsearch/vksearchprovider.cpp
-    internet/vk/vkconnection.cpp
-    internet/vk/vkmusiccache.cpp
-    internet/vk/vksearchdialog.cpp
-    internet/vk/vkservice.cpp
-    internet/vk/vksettingspage.cpp
-    internet/vk/vkurlhandler.cpp
-  HEADERS
-    globalsearch/vksearchprovider.h
-    internet/vk/vkconnection.h
-    internet/vk/vkmusiccache.h
-    internet/vk/vksearchdialog.h
-    internet/vk/vkservice.h
-    internet/vk/vksettingspage.h
-    internet/vk/vkurlhandler.h
-  UI
-    internet/vk/vksearchdialog.ui
-    internet/vk/vksettingspage.ui
-)
-
 # Seafile support
 optional_source(HAVE_SEAFILE
   SOURCES
@@ -1279,10 +1254,6 @@ target_link_libraries(clementine_lib
   z
   Qocoa
 )
-
-if(HAVE_VK)
-  target_link_libraries(clementine_lib ${VREEN_LIBRARIES})
-endif(HAVE_VK)
 
 if(ENABLE_VISUALISATIONS)
   target_link_libraries(clementine_lib ${LIBPROJECTM_LIBRARIES})

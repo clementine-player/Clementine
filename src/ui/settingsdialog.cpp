@@ -15,18 +15,11 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "settingsdialog.h"
 #include "appearancesettingspage.h"
 #include "backgroundstreamssettingspage.h"
 #include "behavioursettingspage.h"
 #include "config.h"
-#include "globalshortcutssettingspage.h"
-#include "iconloader.h"
-#include "playbacksettingspage.h"
-#include "networkproxysettingspage.h"
-#include "networkremotesettingspage.h"
-#include "notificationssettingspage.h"
-#include "mainwindow.h"
-#include "settingsdialog.h"
 #include "core/application.h"
 #include "core/backgroundstreams.h"
 #include "core/logging.h"
@@ -35,15 +28,22 @@
 #include "engines/enginebase.h"
 #include "engines/gstengine.h"
 #include "globalsearch/globalsearchsettingspage.h"
-#include "internet/digitally/digitallyimportedsettingspage.h"
+#include "globalshortcutssettingspage.h"
+#include "iconloader.h"
 #include "internet/core/internetshowsettingspage.h"
+#include "internet/digitally/digitallyimportedsettingspage.h"
 #include "internet/magnatune/magnatunesettingspage.h"
+#include "internet/podcasts/podcastsettingspage.h"
 #include "internet/soundcloud/soundcloudsettingspage.h"
 #include "internet/spotify/spotifysettingspage.h"
 #include "internet/subsonic/subsonicsettingspage.h"
 #include "library/librarysettingspage.h"
+#include "mainwindow.h"
+#include "networkproxysettingspage.h"
+#include "networkremotesettingspage.h"
+#include "notificationssettingspage.h"
+#include "playbacksettingspage.h"
 #include "playlist/playlistview.h"
-#include "internet/podcasts/podcastsettingspage.h"
 #include "songinfo/songinfosettingspage.h"
 #include "transcoder/transcodersettingspage.h"
 #include "widgets/groupediconview.h"
@@ -69,10 +69,6 @@
 
 #ifdef HAVE_BOX
 #include "internet/box/boxsettingspage.h"
-#endif
-
-#ifdef HAVE_VK
-#include "internet/vk/vksettingspage.h"
 #endif
 
 #ifdef HAVE_SKYDRIVE
@@ -181,10 +177,6 @@ SettingsDialog::SettingsDialog(Application* app, BackgroundStreams* streams,
 
   AddPage(Page_SoundCloud, new SoundCloudSettingsPage(this), providers);
   AddPage(Page_Spotify, new SpotifySettingsPage(this), providers);
-
-#ifdef HAVE_VK
-  AddPage(Page_Vk, new VkSettingsPage(this), providers);
-#endif
 
 #ifdef HAVE_SEAFILE
   AddPage(Page_Seafile, new SeafileSettingsPage(this), providers);

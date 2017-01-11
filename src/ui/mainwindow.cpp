@@ -33,9 +33,9 @@
 #include <QSignalMapper>
 #include <QSortFilterProxyModel>
 #include <QStatusBar>
-#include <QtDebug>
 #include <QTimer>
 #include <QUndoStack>
+#include <QtDebug>
 
 #ifdef Q_OS_WIN32
 #include <qtsparkle/Updater>
@@ -70,11 +70,12 @@
 #include "globalsearch/globalsearch.h"
 #include "globalsearch/globalsearchview.h"
 #include "globalsearch/librarysearchprovider.h"
-#include "internet/magnatune/magnatuneservice.h"
 #include "internet/core/internetmodel.h"
 #include "internet/core/internetview.h"
 #include "internet/core/internetviewcontainer.h"
 #include "internet/internetradio/savedradio.h"
+#include "internet/magnatune/magnatuneservice.h"
+#include "internet/podcasts/podcastservice.h"
 #include "library/groupbydialog.h"
 #include "library/library.h"
 #include "library/librarybackend.h"
@@ -83,8 +84,8 @@
 #include "library/libraryviewcontainer.h"
 #include "musicbrainz/tagfetcher.h"
 #include "networkremote/networkremote.h"
-#include "playlist/playlistbackend.h"
 #include "playlist/playlist.h"
+#include "playlist/playlistbackend.h"
 #include "playlist/playlistlistcontainer.h"
 #include "playlist/playlistmanager.h"
 #include "playlist/playlistsequence.h"
@@ -93,7 +94,6 @@
 #include "playlist/queuemanager.h"
 #include "playlist/songplaylistitem.h"
 #include "playlistparsers/playlistparser.h"
-#include "internet/podcasts/podcastservice.h"
 #ifdef HAVE_AUDIOCD
 #include "ripper/ripcddialog.h"
 #endif
@@ -145,10 +145,6 @@
 #ifdef HAVE_MOODBAR
 #include "moodbar/moodbarcontroller.h"
 #include "moodbar/moodbarproxystyle.h"
-#endif
-
-#ifdef HAVE_VK
-#include "internet/vk/vkservice.h"
 #endif
 
 #include <cmath>
@@ -421,11 +417,6 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
   connect(ui_->action_love, SIGNAL(triggered()), SLOT(Love()));
   connect(ui_->action_toggle_scrobbling, SIGNAL(triggered()), app_->scrobbler(),
           SLOT(ToggleScrobbling()));
-#endif
-
-#ifdef HAVE_VK
-  connect(ui_->action_love, SIGNAL(triggered()),
-          InternetModel::Service<VkService>(), SLOT(AddToMyMusicCurrent()));
 #endif
 
   connect(ui_->action_clear_playlist, SIGNAL(triggered()),
@@ -1073,9 +1064,9 @@ void MainWindow::ReloadSettings() {
       AddBehaviour(s.value("doubleclick_addmode", AddBehaviour_Append).toInt());
   doubleclick_playmode_ = PlayBehaviour(
       s.value("doubleclick_playmode", PlayBehaviour_IfStopped).toInt());
-  doubleclick_playlist_addmode_ =
-      PlaylistAddBehaviour(s.value("doubleclick_playlist_addmode",
-                                   PlaylistAddBehaviour_Play).toInt());
+  doubleclick_playlist_addmode_ = PlaylistAddBehaviour(
+      s.value("doubleclick_playlist_addmode", PlaylistAddBehaviour_Play)
+          .toInt());
   menu_playmode_ =
       PlayBehaviour(s.value("menu_playmode", PlayBehaviour_IfStopped).toInt());
 
@@ -2021,9 +2012,9 @@ void MainWindow::AddFile() {
   // Show dialog
   QStringList file_names = QFileDialog::getOpenFileNames(
       this, tr("Add file"), directory,
-      QString("%1 (%2);;%3;;%4").arg(tr("Music"), FileView::kFileFilter,
-                                     parser.filters(),
-                                     tr(kAllFilesFilterSpec)));
+      QString("%1 (%2);;%3;;%4")
+          .arg(tr("Music"), FileView::kFileFilter, parser.filters(),
+               tr(kAllFilesFilterSpec)));
   if (file_names.isEmpty()) return;
 
   // Save last used directory
