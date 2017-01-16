@@ -9,7 +9,7 @@
 # xaojan <cxiaojian@gmail.com>, 2012
 # davidsansome <me@davidsansome.com>, 2010,2014
 # mabier <ma_120420@msn.com>, 2014
-# Tong Hui <tonghuix@gmail.com>, 2016
+# Tong Hui <tonghuix@gmail.com>, 2016-2017
 # walking <waling@mail.i2p>, 2013
 # xaojan <cxiaojian@gmail.com>, 2012
 # Xinkai Chen <yeled.nova@gmail.com>, 2012
@@ -20,8 +20,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2017-01-12 13:21+0000\n"
-"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
+"PO-Revision-Date: 2017-01-15 20:23+0000\n"
+"Last-Translator: Tong Hui <tonghuix@gmail.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/davidsansome/clementine/language/zh_CN/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1112,7 +1112,7 @@ msgstr "单声道回放设置的改变将在下首歌曲播放时生效"
 
 #: ../bin/src/ui_streamdetailsdialog.h:137
 msgid "Channels"
-msgstr ""
+msgstr "频道"
 
 #: ../bin/src/ui_podcastsettingspage.h:252
 msgid "Check for new episodes"
@@ -1399,7 +1399,7 @@ msgstr "连接被服务器拒绝，请检查服务器链接。例如: http://loc
 
 #: songinfo/streamdiscoverer.cpp:116
 msgid "Connection timed out"
-msgstr ""
+msgstr "连接超时"
 
 #: internet/subsonic/subsonicsettingspage.cpp:141
 msgid ""
@@ -1464,11 +1464,11 @@ msgstr "无法创建GStreamer元素 \"%1\" - 请确认您已安装了所需GStre
 #: songinfo/streamdiscoverer.cpp:97
 #, qt-format
 msgid "Could not detect an audio stream in %1"
-msgstr ""
+msgstr "不能在 %1 检测到音频流"
 
 #: songinfo/streamdiscoverer.cpp:123
 msgid "Could not get details"
-msgstr ""
+msgstr "不能获取详情"
 
 #: playlist/playlistmanager.cpp:166
 msgid "Couldn't create playlist"
@@ -1672,7 +1672,7 @@ msgstr "删除文件"
 
 #: ../bin/src/ui_streamdetailsdialog.h:143
 msgid "Depth"
-msgstr ""
+msgstr "深度"
 
 #: ui/mainwindow.cpp:1736
 msgid "Dequeue selected tracks"
@@ -2109,7 +2109,7 @@ msgstr "删除曲目出错"
 #: songinfo/streamdiscoverer.cpp:56
 #, qt-format
 msgid "Error discovering %1: %2"
-msgstr ""
+msgstr "发现 %1: %2 错误"
 
 #: internet/spotify/spotifyblobdownloader.cpp:260
 msgid "Error downloading Spotify plugin"
@@ -2765,7 +2765,7 @@ msgstr "无效的 API 密钥"
 
 #: songinfo/streamdiscoverer.cpp:114
 msgid "Invalid URL"
-msgstr ""
+msgstr "无效的 URL"
 
 #: internet/lastfm/lastfmservice.cpp:251
 msgid "Invalid format"
@@ -3208,7 +3208,7 @@ msgstr "最小缓冲填充"
 
 #: songinfo/streamdiscoverer.cpp:120
 msgid "Missing plugins"
-msgstr ""
+msgstr "缺少插件"
 
 #: visualisations/projectmvisualisation.cpp:131
 msgid "Missing projectM presets"
@@ -4843,7 +4843,7 @@ msgstr "流媒体"
 
 #: ../bin/src/ui_streamdetailsdialog.h:133
 msgid "Stream Details"
-msgstr ""
+msgstr "流详情"
 
 #: internet/subsonic/subsonicsettingspage.cpp:51
 msgid ""
@@ -4956,7 +4956,7 @@ msgstr "文件夹 %1 无效"
 
 #: songinfo/streamdiscoverer.cpp:118
 msgid "The discoverer is busy"
-msgstr ""
+msgstr "发现器正在忙"
 
 #: smartplaylists/searchtermwidget.cpp:346
 msgid "The second value must be greater than the first one!"
@@ -5213,7 +5213,7 @@ msgstr "URI"
 
 #: ../bin/src/ui_streamdetailsdialog.h:134
 msgid "URL"
-msgstr ""
+msgstr "URL"
 
 #: core/commandlineoptions.cpp:152
 msgid "URL(s)"
@@ -5431,7 +5431,7 @@ msgstr "查看"
 
 #: ../bin/src/ui_mainwindow.h:730
 msgid "View Stream Details"
-msgstr ""
+msgstr "查看流详情"
 
 #: ../bin/src/ui_visualisationselector.h:108
 msgid "Visualization mode"

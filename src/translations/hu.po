@@ -4,7 +4,7 @@
 # 
 # Translators:
 # andrewtranslates <andrewtranslates@aol.com>, 2014
-# Balázs Meskó <meskobalazs@gmail.com>, 2015-2016
+# Balázs Meskó <meskobalazs@gmail.com>, 2015-2017
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # gyeben <gyonkibendeguz@gmail.com>, 2012
 # lukibeni <lukacs.bence1@gmail.com>, 2012
@@ -17,8 +17,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2017-01-12 13:21+0000\n"
-"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
+"PO-Revision-Date: 2017-01-12 16:03+0000\n"
+"Last-Translator: Balázs Meskó <meskobalazs@gmail.com>\n"
 "Language-Team: Hungarian (http://www.transifex.com/davidsansome/clementine/language/hu/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1109,7 +1109,7 @@ msgstr "A mono lejátszás bekapcsolása csak a következő zeneszámnál lesz �
 
 #: ../bin/src/ui_streamdetailsdialog.h:137
 msgid "Channels"
-msgstr ""
+msgstr "Csatornák"
 
 #: ../bin/src/ui_podcastsettingspage.h:252
 msgid "Check for new episodes"
@@ -1396,7 +1396,7 @@ msgstr "A szerver elutasította a kapcsolódást, ellenőrizd a linket. Példa: 
 
 #: songinfo/streamdiscoverer.cpp:116
 msgid "Connection timed out"
-msgstr ""
+msgstr "A kapcsolat időtúllépés miatt megszakadt"
 
 #: internet/subsonic/subsonicsettingspage.cpp:141
 msgid ""
@@ -1461,11 +1461,11 @@ msgstr "Nem hozható létre a \"%1\" GStreamer objektum. Ellenőrizze, hogy tele
 #: songinfo/streamdiscoverer.cpp:97
 #, qt-format
 msgid "Could not detect an audio stream in %1"
-msgstr ""
+msgstr "A hangfolyam nem észlelhető itt: %1"
 
 #: songinfo/streamdiscoverer.cpp:123
 msgid "Could not get details"
-msgstr ""
+msgstr "A részletek nem kérhetőek le"
 
 #: playlist/playlistmanager.cpp:166
 msgid "Couldn't create playlist"
@@ -1669,7 +1669,7 @@ msgstr "Fájlok törlése"
 
 #: ../bin/src/ui_streamdetailsdialog.h:143
 msgid "Depth"
-msgstr ""
+msgstr "Mélység"
 
 #: ui/mainwindow.cpp:1736
 msgid "Dequeue selected tracks"
@@ -2106,7 +2106,7 @@ msgstr "Hiba történt a számok törlése közben"
 #: songinfo/streamdiscoverer.cpp:56
 #, qt-format
 msgid "Error discovering %1: %2"
-msgstr ""
+msgstr "Hiba a következő feltérképezésekor: %1: %2"
 
 #: internet/spotify/spotifyblobdownloader.cpp:260
 msgid "Error downloading Spotify plugin"
@@ -2762,7 +2762,7 @@ msgstr "Érvénytelen API kulcs"
 
 #: songinfo/streamdiscoverer.cpp:114
 msgid "Invalid URL"
-msgstr ""
+msgstr "Érvénytelen URL"
 
 #: internet/lastfm/lastfmservice.cpp:251
 msgid "Invalid format"
@@ -3205,7 +3205,7 @@ msgstr "Minimum puffer"
 
 #: songinfo/streamdiscoverer.cpp:120
 msgid "Missing plugins"
-msgstr ""
+msgstr "Hiányzó bővítmények"
 
 #: visualisations/projectmvisualisation.cpp:131
 msgid "Missing projectM presets"
@@ -4840,13 +4840,13 @@ msgstr "Adatfolyam"
 
 #: ../bin/src/ui_streamdetailsdialog.h:133
 msgid "Stream Details"
-msgstr ""
+msgstr "Adatfolyam részletei"
 
 #: internet/subsonic/subsonicsettingspage.cpp:51
 msgid ""
 "Streaming from a Subsonic server requires a valid server license after the "
 "30-day trial period."
-msgstr "A Subsonic szerverről való streamelés érvényes szerver licenszt igényel a 30 napos próbaidő után."
+msgstr "A Subsonic szerverről való streamelés érvényes kiszolgáló licenct igényel a 30 napos próbaidő után."
 
 #: ../bin/src/ui_magnatunesettingspage.h:159
 msgid "Streaming membership"
@@ -4953,7 +4953,7 @@ msgstr "A %1 mappa érvénytelen"
 
 #: songinfo/streamdiscoverer.cpp:118
 msgid "The discoverer is busy"
-msgstr ""
+msgstr "A feltérképező foglalt"
 
 #: smartplaylists/searchtermwidget.cpp:346
 msgid "The second value must be greater than the first one!"
@@ -5210,7 +5210,7 @@ msgstr "URI"
 
 #: ../bin/src/ui_streamdetailsdialog.h:134
 msgid "URL"
-msgstr ""
+msgstr "URL"
 
 #: core/commandlineoptions.cpp:152
 msgid "URL(s)"
@@ -5428,7 +5428,7 @@ msgstr "Nézet"
 
 #: ../bin/src/ui_mainwindow.h:730
 msgid "View Stream Details"
-msgstr ""
+msgstr "Adatfolyam részleteinek megtekintése"
 
 #: ../bin/src/ui_visualisationselector.h:108
 msgid "Visualization mode"
