@@ -33,9 +33,9 @@
 #include <QSignalMapper>
 #include <QSortFilterProxyModel>
 #include <QStatusBar>
-#include <QtDebug>
 #include <QTimer>
 #include <QUndoStack>
+#include <QtDebug>
 
 #ifdef Q_OS_WIN32
 #include <qtsparkle/Updater>
@@ -70,11 +70,12 @@
 #include "globalsearch/globalsearch.h"
 #include "globalsearch/globalsearchview.h"
 #include "globalsearch/librarysearchprovider.h"
-#include "internet/magnatune/magnatuneservice.h"
 #include "internet/core/internetmodel.h"
 #include "internet/core/internetview.h"
 #include "internet/core/internetviewcontainer.h"
 #include "internet/internetradio/savedradio.h"
+#include "internet/magnatune/magnatuneservice.h"
+#include "internet/podcasts/podcastservice.h"
 #include "library/groupbydialog.h"
 #include "library/library.h"
 #include "library/librarybackend.h"
@@ -83,8 +84,8 @@
 #include "library/libraryviewcontainer.h"
 #include "musicbrainz/tagfetcher.h"
 #include "networkremote/networkremote.h"
-#include "playlist/playlistbackend.h"
 #include "playlist/playlist.h"
+#include "playlist/playlistbackend.h"
 #include "playlist/playlistlistcontainer.h"
 #include "playlist/playlistmanager.h"
 #include "playlist/playlistsequence.h"
@@ -93,7 +94,6 @@
 #include "playlist/queuemanager.h"
 #include "playlist/songplaylistitem.h"
 #include "playlistparsers/playlistparser.h"
-#include "internet/podcasts/podcastservice.h"
 #ifdef HAVE_AUDIOCD
 #include "ripper/ripcddialog.h"
 #endif
@@ -101,6 +101,7 @@
 #include "smartplaylists/generatormimedata.h"
 #include "songinfo/artistinfoview.h"
 #include "songinfo/songinfoview.h"
+#include "songinfo/streamdiscoverer.h"
 #include "transcoder/transcodedialog.h"
 #include "ui/about.h"
 #include "ui/addstreamdialog.h"
@@ -113,6 +114,7 @@
 #include "ui/organiseerrordialog.h"
 #include "ui/qtsystemtrayicon.h"
 #include "ui/settingsdialog.h"
+#include "ui/streamdetailsdialog.h"
 #include "ui/systemtrayicon.h"
 #include "ui/trackselectiondialog.h"
 #include "ui/windows7thumbbar.h"
@@ -145,10 +147,6 @@
 #include "moodbar/moodbarproxystyle.h"
 #endif
 
-#ifdef HAVE_VK
-#include "internet/vk/vkservice.h"
-#endif
-
 #include <cmath>
 
 #ifdef Q_OS_DARWIN
@@ -173,6 +171,7 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
       tray_icon_(tray_icon),
       osd_(osd),
       edit_tag_dialog_(std::bind(&MainWindow::CreateEditTagDialog, this)),
+      stream_discoverer_(std::bind(&MainWindow::CreateStreamDiscoverer, this)),
       global_shortcuts_(new GlobalShortcuts(this)),
       global_search_view_(new GlobalSearchView(app_, this)),
       library_view_(new LibraryViewContainer(this)),
@@ -420,11 +419,6 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
           SLOT(ToggleScrobbling()));
 #endif
 
-#ifdef HAVE_VK
-  connect(ui_->action_love, SIGNAL(triggered()),
-          InternetModel::Service<VkService>(), SLOT(AddToMyMusicCurrent()));
-#endif
-
   connect(ui_->action_clear_playlist, SIGNAL(triggered()),
           app_->playlist_manager(), SLOT(ClearCurrent()));
   connect(ui_->action_remove_duplicates, SIGNAL(triggered()),
@@ -477,6 +471,8 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
           SLOT(ShowQueueManager()));
   connect(ui_->action_add_files_to_transcoder, SIGNAL(triggered()),
           SLOT(AddFilesToTranscoder()));
+  connect(ui_->action_view_stream_details, SIGNAL(triggered()),
+          SLOT(DiscoverStreamDetails()));
 
   background_streams_->AddAction("Rain", ui_->action_rain);
   background_streams_->AddAction("Hypnotoad", ui_->action_hypnotoad);
@@ -684,6 +680,7 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
   playlist_menu_->addAction(ui_->action_remove_from_playlist);
   playlist_undoredo_ = playlist_menu_->addSeparator();
   playlist_menu_->addAction(ui_->action_edit_track);
+  playlist_menu_->addAction(ui_->action_view_stream_details);
   playlist_menu_->addAction(ui_->action_edit_value);
   playlist_menu_->addAction(ui_->action_renumber_tracks);
   playlist_menu_->addAction(ui_->action_selection_set_value);
@@ -1066,9 +1063,9 @@ void MainWindow::ReloadSettings() {
       AddBehaviour(s.value("doubleclick_addmode", AddBehaviour_Append).toInt());
   doubleclick_playmode_ = PlayBehaviour(
       s.value("doubleclick_playmode", PlayBehaviour_IfStopped).toInt());
-  doubleclick_playlist_addmode_ =
-      PlaylistAddBehaviour(s.value("doubleclick_playlist_addmode",
-                                   PlaylistAddBehaviour_Play).toInt());
+  doubleclick_playlist_addmode_ = PlaylistAddBehaviour(
+      s.value("doubleclick_playlist_addmode", PlaylistAddBehaviour_Play)
+          .toInt());
   menu_playmode_ =
       PlayBehaviour(s.value("menu_playmode", PlayBehaviour_IfStopped).toInt());
 
@@ -1288,11 +1285,15 @@ void MainWindow::LoadPlaybackStatus() {
     return;
   }
 
-  QTimer::singleShot(100, this, SLOT(ResumePlayback()));
+  connect(app_->playlist_manager()->active(), SIGNAL(RestoreFinished()),
+          SLOT(ResumePlayback()));
 }
 
 void MainWindow::ResumePlayback() {
   qLog(Debug) << "Resuming playback";
+
+  disconnect(app_->playlist_manager()->active(), SIGNAL(RestoreFinished()),
+             this, SLOT(ResumePlayback()));
 
   if (saved_playback_state_ == Engine::Paused) {
     NewClosure(app_->player(), SIGNAL(Playing()), app_->player(),
@@ -1711,6 +1712,10 @@ void MainWindow::PlaylistRightClick(const QPoint& global_pos,
   // no 'show in browser' action if only streams are selected
   playlist_open_in_browser_->setVisible(streams != all);
 
+  // If exactly one stream is selected, enable the 'show details' action.
+  ui_->action_view_stream_details->setEnabled(all == 1 && streams == 1);
+  ui_->action_view_stream_details->setVisible(all == 1 && streams == 1);
+
   bool track_column = (index.column() == Playlist::Column_Track);
   ui_->action_renumber_tracks->setVisible(editable >= 2 && track_column);
   ui_->action_selection_set_value->setVisible(editable >= 2 && !track_column);
@@ -1881,6 +1886,27 @@ void MainWindow::EditTagDialogAccepted() {
   app_->playlist_manager()->current()->Save();
 }
 
+void MainWindow::DiscoverStreamDetails() {
+  int row = playlist_menu_index_.row();
+  Song song = app_->playlist_manager()->current()->item_at(row)->Metadata();
+
+  QString url = song.url().toString();
+  stream_discoverer_->Discover(url);
+}
+
+void MainWindow::ShowStreamDetails(const StreamDetails& details) {
+  StreamDetailsDialog stream_details_dialog(this);
+
+  stream_details_dialog.setUrl(details.url);
+  stream_details_dialog.setFormat(details.format);
+  stream_details_dialog.setBitrate(details.bitrate);
+  stream_details_dialog.setChannels(details.channels);
+  stream_details_dialog.setDepth(details.depth);
+  stream_details_dialog.setSampleRate(details.sample_rate);
+
+  stream_details_dialog.exec();
+}
+
 void MainWindow::RenumberTracks() {
   QModelIndexList indexes =
       ui_->playlist->view()->selectionModel()->selection().indexes();
@@ -1985,9 +2011,9 @@ void MainWindow::AddFile() {
   // Show dialog
   QStringList file_names = QFileDialog::getOpenFileNames(
       this, tr("Add file"), directory,
-      QString("%1 (%2);;%3;;%4").arg(tr("Music"), FileView::kFileFilter,
-                                     parser.filters(),
-                                     tr(kAllFilesFilterSpec)));
+      QString("%1 (%2);;%3;;%4")
+          .arg(tr("Music"), FileView::kFileFilter, parser.filters(),
+               tr(kAllFilesFilterSpec)));
   if (file_names.isEmpty()) return;
 
   // Save last used directory
@@ -2481,6 +2507,14 @@ EditTagDialog* MainWindow::CreateEditTagDialog() {
   connect(edit_tag_dialog, SIGNAL(Error(QString)),
           SLOT(ShowErrorDialog(QString)));
   return edit_tag_dialog;
+}
+
+StreamDiscoverer* MainWindow::CreateStreamDiscoverer() {
+  StreamDiscoverer* discoverer = new StreamDiscoverer();
+  connect(discoverer, SIGNAL(DataReady(StreamDetails)),
+          SLOT(ShowStreamDetails(StreamDetails)));
+  connect(discoverer, SIGNAL(Error(QString)), SLOT(ShowErrorDialog(QString)));
+  return discoverer;
 }
 
 void MainWindow::ShowAboutDialog() { about_dialog_->show(); }

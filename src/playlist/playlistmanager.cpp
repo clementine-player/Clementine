@@ -233,6 +233,17 @@ void PlaylistManager::SaveWithUI(int id, const QString& suggested_filename) {
     return;
   }
 
+  // Check if the file extension is valid. Fallback to the default if not.
+  QFileInfo info(filename);
+  ParserBase* parser = parser_->ParserForExtension(info.suffix());
+  if (!parser) {
+      qLog(Warning) << "Unknown file extension:" << info.suffix();
+      filename = info.absolutePath() + "/" + info.fileName()
+        + "." + parser_->default_extension();
+      info.setFile(filename);
+      filter = info.suffix();
+  }
+
   int p = settings.value(Playlist::kPathType, Playlist::Path_Automatic).toInt();
   Playlist::Path path = static_cast<Playlist::Path>(p);
   if (path == Playlist::Path_Ask_User) {
@@ -246,7 +257,6 @@ void PlaylistManager::SaveWithUI(int id, const QString& suggested_filename) {
 
   settings.setValue("last_save_playlist", filename);
   settings.setValue("last_save_filter", filter);
-  QFileInfo info(filename);
   settings.setValue("last_save_extension", info.suffix());
 
   Save(id == -1 ? current_id() : id, filename, path);

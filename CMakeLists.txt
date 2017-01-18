@@ -75,6 +75,7 @@ pkg_check_modules(GSTREAMER_APP REQUIRED gstreamer-app-1.0)
 pkg_check_modules(GSTREAMER_AUDIO REQUIRED gstreamer-audio-1.0)
 pkg_check_modules(GSTREAMER_BASE REQUIRED gstreamer-base-1.0)
 pkg_check_modules(GSTREAMER_TAG REQUIRED gstreamer-tag-1.0)
+pkg_check_modules(GSTREAMER_PBUTILS REQUIRED gstreamer-pbutils-1.0)
 pkg_check_modules(LIBGPOD libgpod-1.0>=0.7.92)
 pkg_check_modules(LIBMTP libmtp>=1.0)
 pkg_check_modules(LIBMYGPO_QT5 libmygpo-qt5>=1.0.9)
@@ -160,6 +161,7 @@ include_directories(${GSTREAMER_APP_INCLUDE_DIRS})
 include_directories(${GSTREAMER_AUDIO_INCLUDE_DIRS})
 include_directories(${GSTREAMER_BASE_INCLUDE_DIRS})
 include_directories(${GSTREAMER_TAG_INCLUDE_DIRS})
+include_directories(${GSTREAMER_PBUTILS_INCLUDE_DIRS})
 include_directories(${GLIB_INCLUDE_DIRS})
 include_directories(${GLIBCONFIG_INCLUDE_DIRS})
 include_directories(${LIBXML_INCLUDE_DIRS})
@@ -213,8 +215,6 @@ optional_component(BOX ON "Box support"
   DEPENDS "Google sparsehash" SPARSEHASH_INCLUDE_DIRS
   DEPENDS "Taglib 1.8" "TAGLIB_VERSION VERSION_GREATER 1.7.999"
 )
-
-optional_component(VK ON "Vk.com support")
 
 optional_component(SEAFILE ON "Seafile support"
   DEPENDS "Google sparsehash" SPARSEHASH_INCLUDE_DIRS
@@ -291,12 +291,6 @@ if (HAVE_DBUS)
   find_package(Qt5 COMPONENTS DBus)
   get_target_property(QT_DBUSXML2CPP_EXECUTABLE Qt5::qdbusxml2cpp LOCATION)
 endif ()
-
-if (HAVE_VK)
-  add_subdirectory(3rdparty/vreen)
-  include_directories(${VREEN_INCLUDE_DIRS})
-  include_directories(${VREENOAUTH_INCLUDE_DIRS})
-endif(HAVE_VK)
 
 # We can include the Qt definitions now
 if(WIN32)

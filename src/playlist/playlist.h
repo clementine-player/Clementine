@@ -306,6 +306,9 @@ class Playlist : public QAbstractListModel {
   bool removeRows(int row, int count,
                   const QModelIndex& parent = QModelIndex());
 
+  static bool ComparePathDepths(Qt::SortOrder, PlaylistItemPtr,
+                                PlaylistItemPtr);
+
  public slots:
   void set_current_row(int index, bool is_stopping = false);
   void Paused();

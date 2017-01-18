@@ -17,6 +17,7 @@
 
 #include "osd.h"
 
+#import <Foundation/NSProcessInfo.h>
 #import <Foundation/NSUserNotification.h>
 
 #include <QBuffer>
@@ -36,6 +37,13 @@ void SendNotificationCenterMessage(NSString* title, NSString* subtitle) {
   [notification setTitle:title];
   [notification setSubtitle:subtitle];
 
+  if ([[NSProcessInfo processInfo]
+          isOperatingSystemAtLeastVersion:(NSOperatingSystemVersion){
+                                              .majorVersion = 10,
+                                              .minorVersion = 9,
+                                              .patchVersion = 0}]) {
+    [notification_center removeAllDeliveredNotifications];
+  }
   [notification_center deliverNotification:notification];
 }
 

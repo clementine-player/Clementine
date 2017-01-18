@@ -18,8 +18,8 @@
 #ifndef INTERGALACTICFMSEARCHPROVIDER_H
 #define INTERGALACTICFMSEARCHPROVIDER_H
 
-#include "simplesearchprovider.h"
 #include "internet/intergalacticfm/intergalacticfmservice.h"
+#include "simplesearchprovider.h"
 
 class IntergalacticFMSearchProvider : public SimpleSearchProvider {
  public:
@@ -28,10 +28,10 @@ class IntergalacticFMSearchProvider : public SimpleSearchProvider {
   // SearchProvider
   InternetService* internet_service() override { return service_; }
 
-  void LoadArtAsync(int id, const Result& result);
+  void LoadArtAsync(int id, const Result& result) override;
 
  protected:
-  void RecreateItems();
+  void RecreateItems() override;
 
  private:
   IntergalacticFMServiceBase* service_;
