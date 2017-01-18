@@ -131,9 +131,11 @@ void OAuthenticator::FetchAccessTokenFinished(QNetworkReply* reply) {
     return;
   }
 
+  QByteArray replyData = reply->readAll();
+
   QJson::Parser parser;
   bool ok = false;
-  QVariantMap result = parser.parse(reply, &ok).toMap();
+  QVariantMap result = parser.parse(replyData, &ok).toMap();
   if (!ok) {
     qLog(Error) << "Failed to parse oauth reply";
     return;
