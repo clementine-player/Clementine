@@ -58,9 +58,6 @@
 #ifdef HAVE_BOX
 #include "internet/box/boxservice.h"
 #endif
-#ifdef HAVE_VK
-#include "internet/vk/vkservice.h"
-#endif
 #ifdef HAVE_SEAFILE
 #include "internet/seafile/seafileservice.h"
 #endif
@@ -113,9 +110,6 @@ InternetModel::InternetModel(Application* app, QObject* parent)
 #endif
 #ifdef HAVE_SKYDRIVE
   AddService(new SkydriveService(app, this));
-#endif
-#ifdef HAVE_VK
-  AddService(new VkService(app, this));
 #endif
 
   invisibleRootItem()->sortChildren(0, Qt::AscendingOrder);

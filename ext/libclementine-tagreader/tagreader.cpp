@@ -1104,19 +1104,21 @@ bool TagReader::ReadCloudFile(const QUrl& download_url, const QString& title,
       download_url, title, size, authorisation_header, network_));
   stream->Precache();
   std::unique_ptr<TagLib::File> tag;
-  if (mime_type == "audio/mpeg" && title.endsWith(".mp3")) {
+  if (mime_type == "audio/mpeg" &&
+      title.endsWith(".mp3", Qt::CaseInsensitive)) {
     tag.reset(new TagLib::MPEG::File(stream.get(),
                                      TagLib::ID3v2::FrameFactory::instance(),
                                      TagLib::AudioProperties::Accurate));
   } else if (mime_type == "audio/mp4" ||
-             (mime_type == "audio/mpeg" && title.endsWith(".m4a"))) {
+             (mime_type == "audio/mpeg" &&
+              title.endsWith(".m4a", Qt::CaseInsensitive))) {
     tag.reset(new TagLib::MP4::File(stream.get(), true,
                                     TagLib::AudioProperties::Accurate));
   }
 #ifdef TAGLIB_HAS_OPUS
   else if ((mime_type == "application/opus" || mime_type == "audio/opus" ||
             mime_type == "application/ogg" || mime_type == "audio/ogg") &&
-           title.endsWith(".opus")) {
+           title.endsWith(".opus", Qt::CaseInsensitive)) {
     tag.reset(new TagLib::Ogg::Opus::File(stream.get(), true,
                                           TagLib::AudioProperties::Accurate));
   }

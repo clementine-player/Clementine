@@ -28,7 +28,6 @@ OUT="$NAME.dmg"
 mkdir -p "$TMP"
 ################################################################################
 
-
 # clean up
 rm -rf "$TMP"
 rm -f "$OUT"
@@ -39,21 +38,8 @@ cp ../dist/dmg_background.png "$TMP/.background/background.png"
 cp ../dist/DS_Store.in "$TMP/.DS_Store"
 chmod go-rwx "$TMP/.DS_Store"
 ln -s /Applications "$TMP/Applications"
-# copies the prepared bundle into the dir that will become the DMG 
+# copies the prepared bundle into the dir that will become the DMG
 cp -R "$IN" "$TMP"
 
-# create
-hdiutil makehybrid -hfs -hfs-volume-name Clementine -hfs-openfolder "$TMP" "$TMP" -o tmp.dmg
-hdiutil convert -format UDZO -imagekey zlib-level=9 tmp.dmg -o "$OUT"
-
-# cleanup
-rm tmp.dmg
-
-#hdiutil create -srcfolder "$TMP" \
-#               -format UDZO -imagekey zlib-level=9 \
-#               -scrub \
-#               "$OUT" \
-#               || die "Error creating DMG :("
-
-# done !
-echo 'DMG size:' `du -hs "$OUT" | awk '{print $1}'`
+genisoimage -D -V "Clementine" -no-pad -r -apple -o $NAME.iso $TMP
+dmg dmg $NAME.iso $OUT

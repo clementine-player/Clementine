@@ -18,8 +18,8 @@
 #ifndef DIGITALLYIMPORTEDSEARCHPROVIDER_H
 #define DIGITALLYIMPORTEDSEARCHPROVIDER_H
 
-#include "simplesearchprovider.h"
 #include "internet/digitally/digitallyimportedservicebase.h"
+#include "simplesearchprovider.h"
 
 class DigitallyImportedSearchProvider : public SimpleSearchProvider {
  public:
@@ -31,7 +31,7 @@ class DigitallyImportedSearchProvider : public SimpleSearchProvider {
   InternetService* internet_service() override { return service_; }
 
  protected:
-  void RecreateItems();
+  void RecreateItems() override;
 
  private:
   DigitallyImportedServiceBase* service_;

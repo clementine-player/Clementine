@@ -18,9 +18,9 @@
 #ifndef SPOTIFYSEARCHPROVIDER_H
 #define SPOTIFYSEARCHPROVIDER_H
 
+#include "internet/spotify/spotifyservice.h"
 #include "searchprovider.h"
 #include "spotifymessages.pb.h"
-#include "internet/spotify/spotifyservice.h"
 
 class SpotifyServer;
 
@@ -30,9 +30,9 @@ class SpotifySearchProvider : public SearchProvider {
  public:
   SpotifySearchProvider(Application* app, QObject* parent = nullptr);
 
-  void SearchAsync(int id, const QString& query);
-  void LoadArtAsync(int id, const Result& result);
-  QStringList GetSuggestions(int count);
+  void SearchAsync(int id, const QString& query) override;
+  void LoadArtAsync(int id, const Result& result) override;
+  QStringList GetSuggestions(int count) override;
 
   // SearchProvider
   bool IsLoggedIn() override;

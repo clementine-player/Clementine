@@ -34,8 +34,8 @@ class DropboxSettingsPage : public SettingsPage {
   explicit DropboxSettingsPage(SettingsDialog* parent = nullptr);
   ~DropboxSettingsPage();
 
-  void Load();
-  void Save();
+  void Load() override;
+  void Save() override;
 
   // QObject
   bool eventFilter(QObject* object, QEvent* event) override;
