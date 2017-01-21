@@ -65,7 +65,7 @@ void SongkickConcerts::ArtistSearchFinished(QNetworkReply* reply, int id) {
   reply->deleteLater();
 
   QJson::Parser parser;
-  QVariantMap json = parser.parse(reply).toMap();
+  QVariantMap json = parser.parse(reply->readAll()).toMap();
 
   QVariantMap results_page = json["resultsPage"].toMap();
   QVariantMap results = results_page["results"].toMap();
@@ -95,7 +95,7 @@ void SongkickConcerts::FetchSongkickCalendar(const QString& artist_id, int id) {
 void SongkickConcerts::CalendarRequestFinished(QNetworkReply* reply, int id) {
   QJson::Parser parser;
   bool ok = false;
-  QVariant result = parser.parse(reply, &ok);
+  QVariant result = parser.parse(reply->readAll(), &ok);
 
   if (!ok) {
     qLog(Error) << "Error parsing Songkick reply";

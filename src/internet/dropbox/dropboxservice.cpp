@@ -139,7 +139,7 @@ void DropboxService::RequestFileListFinished(QNetworkReply* reply) {
   reply->deleteLater();
 
   QJson::Parser parser;
-  QVariantMap response = parser.parse(reply).toMap();
+  QVariantMap response = parser.parse(reply->readAll()).toMap();
 
   QSettings settings;
   settings.beginGroup(kSettingsGroup);
@@ -210,7 +210,7 @@ void DropboxService::LongPollDelta() {
 void DropboxService::LongPollFinished(QNetworkReply* reply) {
   reply->deleteLater();
   QJson::Parser parser;
-  QVariantMap response = parser.parse(reply).toMap();
+  QVariantMap response = parser.parse(reply->readAll()).toMap();
   if (response["changes"].toBool()) {
     // New changes, we should request deltas again.
     qLog(Debug) << "Detected new dropbox changes; fetching...";
@@ -239,7 +239,7 @@ void DropboxService::FetchContentUrlFinished(QNetworkReply* reply,
                                              const QVariantMap& data) {
   reply->deleteLater();
   QJson::Parser parser;
-  QVariantMap response = parser.parse(reply).toMap();
+  QVariantMap response = parser.parse(reply->readAll()).toMap();
   QFileInfo info(data["path_lower"].toString());
 
   QUrl url;
@@ -265,6 +265,6 @@ QUrl DropboxService::GetStreamingUrlFromSongId(const QUrl& url) {
   WaitForSignal(reply, SIGNAL(finished()));
 
   QJson::Parser parser;
-  QVariantMap response = parser.parse(reply).toMap();
+  QVariantMap response = parser.parse(reply->readAll()).toMap();
   return QUrl::fromEncoded(response["link"].toByteArray());
 }

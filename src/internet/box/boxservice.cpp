@@ -125,7 +125,7 @@ void BoxService::FetchUserInfoFinished(QNetworkReply* reply) {
   reply->deleteLater();
 
   QJson::Parser parser;
-  QVariantMap response = parser.parse(reply).toMap();
+  QVariantMap response = parser.parse(reply->readAll()).toMap();
 
   QString name = response["name"].toString();
   if (!name.isEmpty()) {
@@ -173,7 +173,7 @@ void BoxService::InitialiseEventsCursor() {
 void BoxService::InitialiseEventsFinished(QNetworkReply* reply) {
   reply->deleteLater();
   QJson::Parser parser;
-  QVariantMap response = parser.parse(reply).toMap();
+  QVariantMap response = parser.parse(reply->readAll()).toMap();
   if (response.contains("next_stream_position")) {
     QSettings s;
     s.beginGroup(kSettingsGroup);
@@ -286,7 +286,7 @@ void BoxService::FetchEventsFinished(QNetworkReply* reply) {
   // TODO(John Maguire): Page through events.
   reply->deleteLater();
   QJson::Parser parser;
-  QVariantMap response = parser.parse(reply).toMap();
+  QVariantMap response = parser.parse(reply->readAll()).toMap();
 
   QSettings s;
   s.beginGroup(kSettingsGroup);

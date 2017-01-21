@@ -96,7 +96,7 @@ void AcoustidClient::RequestFinished(QNetworkReply* reply, int request_id) {
 
   QJson::Parser parser;
   bool ok = false;
-  QVariantMap result = parser.parse(reply, &ok).toMap();
+  QVariantMap result = parser.parse(reply->readAll(), &ok).toMap();
   if (!ok) {
     emit Finished(request_id, QStringList());
     return;
