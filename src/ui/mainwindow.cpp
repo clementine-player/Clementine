@@ -722,6 +722,7 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
   playlist_delete_ = playlist_menu_->addAction(
       IconLoader::Load("edit-delete", IconLoader::Base),
       tr("Delete from disk..."), this, SLOT(PlaylistDelete()));
+  playlist_delete_->setShortcut(QKeySequence("Ctrl+X"));
   playlist_open_in_browser_ = playlist_menu_->addAction(
       IconLoader::Load("document-open-folder", IconLoader::Base),
       tr("Show in file browser..."), this, SLOT(PlaylistOpenInBrowser()));
