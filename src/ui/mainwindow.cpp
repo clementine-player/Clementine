@@ -125,6 +125,7 @@
 #include "widgets/osd.h"
 #include "widgets/stylehelper.h"
 #include "widgets/trackslider.h"
+#include "widgets/scrollmessagebox.h"
 
 #ifdef Q_OS_DARWIN
 #include "ui/macsystemtrayicon.h"
@@ -2377,13 +2378,6 @@ void MainWindow::PlaylistOrganiseSelected(bool copy) {
 void MainWindow::PlaylistDelete() {
   // Note: copied from LibraryView::Delete
 
-  if (QMessageBox::warning(this, tr("Delete files"),
-                           tr("These files will be permanently deleted from "
-                              "disk, are you sure you want to continue?"),
-                           QMessageBox::Yes,
-                           QMessageBox::Cancel) != QMessageBox::Yes)
-    return;
-
   std::shared_ptr<MusicStorage> storage(new FilesystemMusicStorage("/"));
 
   // Get selected songs
@@ -2411,6 +2405,20 @@ void MainWindow::PlaylistDelete() {
       }
     }
   }
+
+  qLog(Debug) << "deleting" << selected_songs.count() << "songs";
+
+  QString message = tr("The following files will be permanently deleted from "
+                              "disk:") +
+                      "<ul>";
+  for (const Song& song : selected_songs) {
+    message += ("<li>" + song.url().toString() + "</li>");
+  }
+  message += "</ul>" + tr("Are you sure you want to continue?");
+
+  if (ScrollMessageBox::warning(this, tr("Delete files"),
+                           message, {QDialogButtonBox::No | QDialogButtonBox::Yes}, QDialogButtonBox::No) != QDialogButtonBox::Yes)
+    return;
 
   ui_->playlist->view()->RemoveSelected(true);
 
@@ -2900,6 +2908,12 @@ void MainWindow::ShowConsole() {
 void MainWindow::keyPressEvent(QKeyEvent* event) {
   if (event->key() == Qt::Key_Space) {
     app_->player()->PlayPause();
+    event->accept();
+  } else if (event->key() == Qt::Key_Left) {
+    app_->player()->SeekBackward();
+    event->accept();
+  } else if (event->key() == Qt::Key_Right) {
+    app_->player()->SeekForward();
     event->accept();
   } else {
     QMainWindow::keyPressEvent(event);

@@ -45,6 +45,7 @@
 #include "ui/iconloader.h"
 #include "ui/organisedialog.h"
 #include "ui/organiseerrordialog.h"
+#include "widgets/scrollmessagebox.h"
 
 using smart_playlists::Wizard;
 
@@ -663,11 +664,19 @@ void LibraryView::Organise() {
 }
 
 void LibraryView::Delete() {
-  if (QMessageBox::warning(this, tr("Delete files"),
-                           tr("These files will be permanently deleted from "
-                              "disk, are you sure you want to continue?"),
-                           QMessageBox::Yes,
-                           QMessageBox::Cancel) != QMessageBox::Yes)
+
+  const SongList selected_songs = GetSelectedSongs();
+
+  QString message = tr("The following files will be permanently deleted from "
+                              "disk:") +
+                      "<ul>";
+  for (const Song& song : selected_songs) {
+    message += ("<li>" + song.url().toString() + "</li>");
+  }
+  message += "</ul>" + tr("Are you sure you want to continue?");
+
+  if (ScrollMessageBox::warning(this, tr("Delete files"),
+                           message, {QDialogButtonBox::No | QDialogButtonBox::Yes}, QDialogButtonBox::No) != QDialogButtonBox::Yes)
     return;
 
   // We can cheat and always take the storage of the first directory, since
@@ -683,7 +692,7 @@ void LibraryView::Delete() {
   DeleteFiles* delete_files = new DeleteFiles(app_->task_manager(), storage);
   connect(delete_files, SIGNAL(Finished(SongList)),
           SLOT(DeleteFinished(SongList)));
-  delete_files->Start(GetSelectedSongs());
+  delete_files->Start(selected_songs);
 }
 
 void LibraryView::EditTracks() {
