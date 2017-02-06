@@ -23,7 +23,7 @@
 # Kadir Celep <kadirche@gmail.com>, 2012
 # Kadir Celep <kadirche@gmail.com>, 2012
 # Ege Öz <ege.oz@yandex.com.tr>, 2013
-# mutlucan96 <mtlcnylmz@gmail.com>, 2013
+# mutlucan96 <mtlcnylmz@gmail.com>, 2013,2017
 # Muhammet Kara <muhammetk@gmail.com>, 2012
 # Muhammet Kara <muhammetk@gmail.com>, 2012,2015
 # Murat Ikilik <>, 2012
@@ -41,8 +41,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2017-01-12 13:21+0000\n"
-"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
+"PO-Revision-Date: 2017-01-31 05:15+0000\n"
+"Last-Translator: mutlucan96 <mtlcnylmz@gmail.com>\n"
 "Language-Team: Turkish (Turkey) (http://www.transifex.com/davidsansome/clementine/language/tr_TR/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1133,7 +1133,7 @@ msgstr "Mono çalma ayarını değiştirmek sonraki şarkılarda da etkili olur"
 
 #: ../bin/src/ui_streamdetailsdialog.h:137
 msgid "Channels"
-msgstr ""
+msgstr "Kanallar"
 
 #: ../bin/src/ui_podcastsettingspage.h:252
 msgid "Check for new episodes"
@@ -1420,7 +1420,7 @@ msgstr "Bağlantı sunucu tarafından reddedildi, sunucu adresini denetleyin. Ö
 
 #: songinfo/streamdiscoverer.cpp:116
 msgid "Connection timed out"
-msgstr ""
+msgstr "Bağlantı zaman aşımına uğradı"
 
 #: internet/subsonic/subsonicsettingspage.cpp:141
 msgid ""
@@ -1485,11 +1485,11 @@ msgstr "GStreamer elementi  \"%1\" oluşturulamadı - tüm Gstreamer eklentileri
 #: songinfo/streamdiscoverer.cpp:97
 #, qt-format
 msgid "Could not detect an audio stream in %1"
-msgstr ""
+msgstr "%1 kaynağında ses akışı tespit edilemedi."
 
 #: songinfo/streamdiscoverer.cpp:123
 msgid "Could not get details"
-msgstr ""
+msgstr "Ayrıntılar alınamadı"
 
 #: playlist/playlistmanager.cpp:166
 msgid "Couldn't create playlist"
@@ -1693,7 +1693,7 @@ msgstr "Dosyalar siliniyor"
 
 #: ../bin/src/ui_streamdetailsdialog.h:143
 msgid "Depth"
-msgstr ""
+msgstr "Derinlik"
 
 #: ui/mainwindow.cpp:1736
 msgid "Dequeue selected tracks"
@@ -2130,7 +2130,7 @@ msgstr "Şarkılar silinirken hata"
 #: songinfo/streamdiscoverer.cpp:56
 #, qt-format
 msgid "Error discovering %1: %2"
-msgstr ""
+msgstr "Keşifte hata  %1: %2"
 
 #: internet/spotify/spotifyblobdownloader.cpp:260
 msgid "Error downloading Spotify plugin"
@@ -2786,7 +2786,7 @@ msgstr "Geçersiz API anahtarı"
 
 #: songinfo/streamdiscoverer.cpp:114
 msgid "Invalid URL"
-msgstr ""
+msgstr "Geçersiz URL"
 
 #: internet/lastfm/lastfmservice.cpp:251
 msgid "Invalid format"
@@ -3229,7 +3229,7 @@ msgstr "Asgari tampon doldurma"
 
 #: songinfo/streamdiscoverer.cpp:120
 msgid "Missing plugins"
-msgstr ""
+msgstr "Eksik eklentiler"
 
 #: visualisations/projectmvisualisation.cpp:131
 msgid "Missing projectM presets"
@@ -4864,7 +4864,7 @@ msgstr "Akış"
 
 #: ../bin/src/ui_streamdetailsdialog.h:133
 msgid "Stream Details"
-msgstr ""
+msgstr "Akış Ayrıntıları"
 
 #: internet/subsonic/subsonicsettingspage.cpp:51
 msgid ""
@@ -4977,7 +4977,7 @@ msgstr "%1 dizini geçersiz"
 
 #: songinfo/streamdiscoverer.cpp:118
 msgid "The discoverer is busy"
-msgstr ""
+msgstr "Kaşif meşgul"
 
 #: smartplaylists/searchtermwidget.cpp:346
 msgid "The second value must be greater than the first one!"
@@ -5234,7 +5234,7 @@ msgstr "URI"
 
 #: ../bin/src/ui_streamdetailsdialog.h:134
 msgid "URL"
-msgstr ""
+msgstr "URL"
 
 #: core/commandlineoptions.cpp:152
 msgid "URL(s)"
@@ -5452,7 +5452,7 @@ msgstr "Görünüm"
 
 #: ../bin/src/ui_mainwindow.h:730
 msgid "View Stream Details"
-msgstr ""
+msgstr "Akış Detaylarını Göster"
 
 #: ../bin/src/ui_visualisationselector.h:108
 msgid "Visualization mode"
