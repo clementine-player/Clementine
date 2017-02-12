@@ -1979,8 +1979,8 @@ void Playlist::ReshuffleIndices() {
 
       // Shuffle them
       QStringList shuffled_album_keys = album_key_set.toList();
-      std::random_shuffle(shuffled_album_keys.begin(),
-                          shuffled_album_keys.end());
+      std::shuffle(shuffled_album_keys.begin(), shuffled_album_keys.end(),
+                   std::mt19937());
 
       // If the user is currently playing a song, force its album to be first
       // Or if the song was not playing but it was selected, force its album
