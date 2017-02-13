@@ -20,6 +20,8 @@
 
 #include <QPushButton>
 
+#include <functional>
+
 // boost::multi_index still relies on these being in the global namespace.
 using std::placeholders::_1;
 using std::placeholders::_2;
