@@ -9,7 +9,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # Runkeldunk <generallangsohm@gmail.com>, 2014
 # Runkeldunk <generallangsohm@gmail.com>, 2012
-# Jens E. Jensen <jens.e.jensen@gmail.com>, 2012
+# Jens E. Jensen <jens.e.jensen@gmail.com>, 2012,2017
 # Joe Hansen <joedalton2@yahoo.dk>, 2014,2016
 # Johan Olesen <johan.olesen97@gmail.com>, 2013
 # Morten Anton Bach Sjøgren <m_abs@mabs.dk>, 2010
@@ -19,8 +19,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2017-01-12 13:21+0000\n"
-"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
+"PO-Revision-Date: 2017-02-16 08:03+0000\n"
+"Last-Translator: Jens E. Jensen <jens.e.jensen@gmail.com>\n"
 "Language-Team: Danish (http://www.transifex.com/davidsansome/clementine/language/da/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -365,7 +365,7 @@ msgid ""
 "href=\"%1\">%2</a>, which is released under the <a href=\"https"
 "://clementine-player.org/licenses/by-sa/3.0/legalcode.txt\">Creative Commons"
 " Attribution-Share-Alike License 3.0</a>.</p>"
-msgstr ""
+msgstr "<p>Denne artikel bruger materiale fra Wikipedia artiklen <a href=\"%1\">%2</a>, som er udgivet under <a href=\"https://clementine-player.org/licenses/by-sa/3.0/legalcode.txt\">Creative Commons Attribution-Share-Alike License 3.0</a>.</p>"
 
 #: ../bin/src/ui_organisedialog.h:250
 msgid ""
@@ -1111,7 +1111,7 @@ msgstr "Ændring af mono afspilningspræference vil først træde i kraft for de
 
 #: ../bin/src/ui_streamdetailsdialog.h:137
 msgid "Channels"
-msgstr ""
+msgstr "Kanaler"
 
 #: ../bin/src/ui_podcastsettingspage.h:252
 msgid "Check for new episodes"
@@ -1398,7 +1398,7 @@ msgstr "Forbindelse afvist af server, kontroller serveradresse. Eksempel: http:/
 
 #: songinfo/streamdiscoverer.cpp:116
 msgid "Connection timed out"
-msgstr ""
+msgstr "Forbindelse udløb"
 
 #: internet/subsonic/subsonicsettingspage.cpp:141
 msgid ""
@@ -1463,11 +1463,11 @@ msgstr "Kunne ikke oprette GStreamer-elementet »%1« - sørg for at du har alle
 #: songinfo/streamdiscoverer.cpp:97
 #, qt-format
 msgid "Could not detect an audio stream in %1"
-msgstr ""
+msgstr "Kunne ikke detektere en lydstrøm/kilde i %1"
 
 #: songinfo/streamdiscoverer.cpp:123
 msgid "Could not get details"
-msgstr ""
+msgstr "Kunne ikke hente detaljer"
 
 #: playlist/playlistmanager.cpp:166
 msgid "Couldn't create playlist"
@@ -1528,7 +1528,7 @@ msgstr "Omslag fra %1"
 
 #: core/commandlineoptions.cpp:172
 msgid "Create a new playlist with files/URLs"
-msgstr ""
+msgstr "Opret en ny playliste med filer/URLer"
 
 #: ../bin/src/ui_playbacksettingspage.h:344
 msgid "Cross-fade when changing tracks automatically"
@@ -1671,7 +1671,7 @@ msgstr "Sletter filer"
 
 #: ../bin/src/ui_streamdetailsdialog.h:143
 msgid "Depth"
-msgstr ""
+msgstr "Dybde"
 
 #: ui/mainwindow.cpp:1736
 msgid "Dequeue selected tracks"
@@ -1690,7 +1690,7 @@ msgstr "Destination"
 msgid "Details..."
 msgstr "Detaljer ..."
 
-#: devices/devicekitlister.cpp:128 devices/giolister.cpp:162
+#: devices/devicekitlister.cpp:128 devices/giolister.cpp:163
 msgid "Device"
 msgstr "Enhed"
 
@@ -2108,7 +2108,7 @@ msgstr "Fejl ved sletning af sang"
 #: songinfo/streamdiscoverer.cpp:56
 #, qt-format
 msgid "Error discovering %1: %2"
-msgstr ""
+msgstr "Fejl under afsøgning %1: %2"
 
 #: internet/spotify/spotifyblobdownloader.cpp:260
 msgid "Error downloading Spotify plugin"
@@ -2529,7 +2529,7 @@ msgstr "Gruppér efter album"
 
 #: library/libraryfilterwidget.cpp:150
 msgid "Group by Album artist/Album"
-msgstr ""
+msgstr "Gruppér efter albumkunstner/album"
 
 #: library/libraryfilterwidget.cpp:143
 msgid "Group by Artist"
@@ -2764,7 +2764,7 @@ msgstr "Ugyldig API-nøgle"
 
 #: songinfo/streamdiscoverer.cpp:114
 msgid "Invalid URL"
-msgstr ""
+msgstr "Ugyldig URL"
 
 #: internet/lastfm/lastfmservice.cpp:251
 msgid "Invalid format"
@@ -3081,7 +3081,7 @@ msgstr "Sangtekster fra %1"
 
 #: songinfo/taglyricsinfoprovider.cpp:29
 msgid "Lyrics from the tag"
-msgstr ""
+msgstr "Sangtekster fra mærket"
 
 #: transcoder/transcoder.cpp:235
 msgid "M4A AAC"
@@ -3207,7 +3207,7 @@ msgstr "Minimum mellemlagerudfyldning"
 
 #: songinfo/streamdiscoverer.cpp:120
 msgid "Missing plugins"
-msgstr ""
+msgstr "Manglende plugin"
 
 #: visualisations/projectmvisualisation.cpp:131
 msgid "Missing projectM presets"
@@ -3246,7 +3246,7 @@ msgstr "Stemningslinier"
 msgid "Most played"
 msgstr "Mest afspillede"
 
-#: devices/giolister.cpp:161
+#: devices/giolister.cpp:162
 msgid "Mount point"
 msgstr "Monteringspunkt"
 
@@ -4562,7 +4562,7 @@ msgstr "Vis kun filer uden mærker"
 
 #: ../bin/src/ui_mainwindow.h:733
 msgid "Show or hide the sidebar"
-msgstr ""
+msgstr "Vis eller skjul sidepanel"
 
 #: ../bin/src/ui_globalsearchsettingspage.h:149
 msgid "Show search suggestions"
@@ -4570,7 +4570,7 @@ msgstr "Vis søgeforslag"
 
 #: ../bin/src/ui_mainwindow.h:731
 msgid "Show sidebar"
-msgstr ""
+msgstr "Vis sidepanel"
 
 #: ../bin/src/ui_lastfmsettingspage.h:136
 msgid "Show the \"love\" button"
@@ -4842,7 +4842,7 @@ msgstr "Udsendelse"
 
 #: ../bin/src/ui_streamdetailsdialog.h:133
 msgid "Stream Details"
-msgstr ""
+msgstr "Lydkilde/strøm Detaljer"
 
 #: internet/subsonic/subsonicsettingspage.cpp:51
 msgid ""
@@ -4955,7 +4955,7 @@ msgstr "Mappen %1 er ugyldig"
 
 #: songinfo/streamdiscoverer.cpp:118
 msgid "The discoverer is busy"
-msgstr ""
+msgstr "Søgefunktionen er optaget"
 
 #: smartplaylists/searchtermwidget.cpp:346
 msgid "The second value must be greater than the first one!"
@@ -5206,13 +5206,13 @@ msgstr "Turbine"
 msgid "Turn off"
 msgstr "Slå fra"
 
-#: devices/giolister.cpp:163
+#: devices/giolister.cpp:164
 msgid "URI"
 msgstr "URI"
 
 #: ../bin/src/ui_streamdetailsdialog.h:134
 msgid "URL"
-msgstr ""
+msgstr "URL"
 
 #: core/commandlineoptions.cpp:152
 msgid "URL(s)"
@@ -5430,7 +5430,7 @@ msgstr "Vis"
 
 #: ../bin/src/ui_mainwindow.h:730
 msgid "View Stream Details"
-msgstr ""
+msgstr "Se Lydkilde/strøm Detaljer"
 
 #: ../bin/src/ui_visualisationselector.h:108
 msgid "Visualization mode"
