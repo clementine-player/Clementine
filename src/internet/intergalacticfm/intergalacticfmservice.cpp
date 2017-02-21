@@ -24,13 +24,11 @@
 #include <QCoreApplication>
 #include <QDesktopServices>
 #include <QMenu>
-#include <QNetworkRequest>
 #include <QNetworkReply>
+#include <QNetworkRequest>
 #include <QXmlStreamReader>
 #include <QtDebug>
 
-#include "intergalacticfmurlhandler.h"
-#include "internet/core/internetmodel.h"
 #include "core/application.h"
 #include "core/closure.h"
 #include "core/logging.h"
@@ -40,6 +38,8 @@
 #include "core/utilities.h"
 #include "globalsearch/globalsearch.h"
 #include "globalsearch/intergalacticfmsearchprovider.h"
+#include "intergalacticfmurlhandler.h"
+#include "internet/core/internetmodel.h"
 #include "ui/iconloader.h"
 
 const int IntergalacticFMServiceBase::kStreamsCacheDurationSecs =
@@ -276,6 +276,6 @@ IntergalacticFMService::IntergalacticFMService(Application* app,
                                                InternetModel* parent)
     : IntergalacticFMServiceBase(
           app, parent, "Intergalactic FM",
-          QUrl("https://intergalacticfm.com/channels.xml"),
-          QUrl("http://intergalacticfm.com"), QUrl(),
+          QUrl("https://www.intergalactic.fm/channels.xml"),
+          QUrl("https://www.intergalactic.fm"), QUrl(),
           IconLoader::Load("intergalacticfm", IconLoader::Provider)) {}
