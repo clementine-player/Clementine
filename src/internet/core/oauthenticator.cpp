@@ -80,7 +80,6 @@ void OAuthenticator::StartAuthorisation(const QString& oauth_endpoint,
 void OAuthenticator::RedirectArrived(LocalRedirectServer* server, QUrl url) {
   server->deleteLater();
   QUrl request_url = server->request_url();
-  qLog(Debug) << Q_FUNC_INFO << request_url;
   RequestAccessToken(request_url.queryItemValue("code").toUtf8(), url);
 }
 
@@ -138,8 +137,6 @@ void OAuthenticator::FetchAccessTokenFinished(QNetworkReply* reply) {
     qLog(Error) << "Failed to parse oauth reply";
     return;
   }
-
-  qLog(Debug) << result;
 
   access_token_ = result["access_token"].toString();
   refresh_token_ = result["refresh_token"].toString();
