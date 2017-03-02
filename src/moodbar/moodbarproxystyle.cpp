@@ -270,17 +270,20 @@ QRect MoodbarProxyStyle::subControlRect(ComplexControl cc,
         case SC_SliderHandle: {
           const QStyleOptionSlider* slider_opt =
               qstyleoption_cast<const QStyleOptionSlider*>(opt);
-          int x = 0;
+          int x_offset = 0;
 
           /* slider_opt->{maximum,minimum} can have the value 0 (their default
              values), so this check avoids a division by 0. */
           if (slider_opt->maximum > slider_opt->minimum) {
-            x = (slider_opt->sliderValue - slider_opt->minimum) *
-                (opt->rect.width() - kArrowWidth) /
-				(slider_opt->maximum - slider_opt->minimum);
+            qint64 slider_delta = slider_opt->sliderValue - slider_opt->minimum;
+            qint64 slider_range = slider_opt->maximum - slider_opt->minimum;
+            int rectangle_effective_width = opt->rect.width() - kArrowWidth;
+
+            qint64 x = slider_delta * rectangle_effective_width / slider_range;
+            x_offset = static_cast<int>(x);
           }
 
-          return QRect(QPoint(opt->rect.left() + x, opt->rect.top()),
+          return QRect(QPoint(opt->rect.left() + x_offset, opt->rect.top()),
                        QSize(kArrowWidth, kArrowHeight));
         }
 
