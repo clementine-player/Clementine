@@ -327,8 +327,9 @@ void AlbumCoverManager::ArtistChanged(QListWidgetItem* current) {
     // Don't show songs without an album, obviously
     if (info.album_name.isEmpty()) continue;
 
+    QIcon no_cover(no_cover_icon_.pixmap(120, 120));
     QListWidgetItem* item =
-        new QListWidgetItem(no_cover_icon_, info.album_name, ui_->albums);
+        new QListWidgetItem(no_cover, info.album_name, ui_->albums);
     item->setData(Role_ArtistName, info.artist);
     item->setData(Role_AlbumName, info.album_name);
     item->setData(Role_FirstUrl, info.first_url);
