@@ -272,7 +272,7 @@ void AlbumCoverChoiceController::SaveCover(Song* song, const QString& cover) {
   if (song->is_valid() && song->id() != -1) {
     song->set_art_manual(cover);
     app_->library_backend()->UpdateManualAlbumArtAsync(
-        song->effective_albumartist(), song->album(), cover);
+        song->artist(), song->albumartist(), song->album(), cover);
 
     if (song->url() == app_->current_art_loader()->last_song().url()) {
       app_->current_art_loader()->LoadArt(*song);
