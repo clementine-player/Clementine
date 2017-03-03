@@ -523,19 +523,33 @@ QStringList LibraryBackend::GetAllArtists(const QueryOptions& opt) {
 }
 
 QStringList LibraryBackend::GetAllArtistsWithAlbums(const QueryOptions& opt) {
+  // Albums with 'albumartist' field set:
   LibraryQuery query(opt);
-  query.SetColumnSpec("DISTINCT artist");
+  query.SetColumnSpec("DISTINCT albumartist");
   query.AddCompilationRequirement(false);
   query.AddWhere("album", "", "!=");
 
-  QMutexLocker l(db_->Mutex());
-  if (!ExecQuery(&query)) return QStringList();
+  // Albums with no 'albumartist' (extract 'artist'):
+  LibraryQuery query2(opt);
+  query2.SetColumnSpec("DISTINCT artist");
+  query2.AddCompilationRequirement(false);
+  query2.AddWhere("album", "", "!=");
+  query2.AddWhere("albumartist", "", "=");
 
-  QStringList ret;
+  QMutexLocker l(db_->Mutex());
+  ExecQuery(&query);
+  ExecQuery(&query2);
+  l.unlock();
+
+  QSet<QString> artists;
   while (query.Next()) {
-    ret << query.Value(0).toString();
+    artists << query.Value(0).toString();
   }
-  return ret;
+  while (query2.Next()) {
+    artists << query2.Value(0).toString();
+  }
+
+  return QStringList(artists.toList());
 }
 
 LibraryBackend::AlbumList LibraryBackend::GetAllAlbums(
