@@ -424,8 +424,8 @@ bool AlbumCoverManager::ShouldHide(const QListWidgetItem& item,
   QStringList query = filter.split(' ');
   for (const QString& s : query) {
     if (!item.text().contains(s, Qt::CaseInsensitive) &&
-            !item.data(Role_ArtistName).toString().contains(
-                s, Qt::CaseInsensitive),
+        !item.data(Role_ArtistName).toString().contains(
+            s, Qt::CaseInsensitive) &&
         !item.data(Role_AlbumArtistName).toString().contains(
             s, Qt::CaseInsensitive)) {
       return true;
@@ -578,9 +578,8 @@ void AlbumCoverManager::ShowCover() {
 
 void AlbumCoverManager::FetchSingleCover() {
   for (QListWidgetItem* item : context_menu_items_) {
-    QString artist_name = EffectiveAlbumArtistName(item);
     quint64 id = cover_fetcher_->FetchAlbumCover(
-        artist_name, item->data(Role_AlbumName).toString());
+        EffectiveAlbumArtistName(item), item->data(Role_AlbumName).toString());
     cover_fetching_tasks_[id] = item;
     jobs_++;
   }
