@@ -70,6 +70,9 @@ AlbumCoverManager::AlbumCoverManager(Application* app,
       artist_icon_(IconLoader::Load("x-clementine-artist", IconLoader::Base)),
       all_artists_icon_(
           IconLoader::Load("x-clementine-album", IconLoader::Base)),
+      no_cover_icon_(IconLoader::Load("nocover", IconLoader::Other)),
+      no_cover_image_(GenerateNoCoverImage(no_cover_icon_)),
+      no_cover_item_icon_(QPixmap::fromImage(no_cover_image_)),
       context_menu_(new QMenu(this)),
       progress_bar_(new QProgressBar(this)),
       abort_progress_(new QPushButton(this)),
@@ -91,22 +94,7 @@ AlbumCoverManager::AlbumCoverManager(Application* app,
 
   album_cover_choice_controller_->SetApplication(app_);
 
-  // Get a square version of nocover.png
-  no_cover_icon_ = IconLoader::Load("nocover", IconLoader::Other);
-  no_cover_image_ =
-      no_cover_icon_.pixmap(no_cover_icon_.availableSizes().last()).toImage();
-  QImage nocover(no_cover_image_);
-  nocover =
-      nocover.scaled(120, 120, Qt::KeepAspectRatio, Qt::SmoothTransformation);
-  QImage square_nocover(120, 120, QImage::Format_ARGB32);
-  square_nocover.fill(0);
-  QPainter p(&square_nocover);
-  p.setOpacity(0.4);
-  p.drawImage((120 - nocover.width()) / 2, (120 - nocover.height()) / 2,
-              nocover);
-  p.end();
-
-  cover_searcher_ = new AlbumCoverSearcher(no_cover_icon_, app_, this);
+  cover_searcher_ = new AlbumCoverSearcher(no_cover_item_icon_, app_, this);
   cover_export_ = new AlbumCoverExport(this);
 
   // Set up the status bar
@@ -331,9 +319,8 @@ void AlbumCoverManager::ArtistChanged(QListWidgetItem* current) {
     // Don't show songs without an album, obviously
     if (info.album_name.isEmpty()) continue;
 
-    QIcon no_cover(no_cover_icon_.pixmap(120, 120));
     QListWidgetItem* item =
-        new QListWidgetItem(no_cover, info.album_name, ui_->albums);
+        new QListWidgetItem(no_cover_item_icon_, info.album_name, ui_->albums);
 
     item->setData(Role_ArtistName, info.artist);
     item->setData(Role_AlbumArtistName, info.album_artist);
@@ -397,7 +384,7 @@ void AlbumCoverManager::UpdateFilter() {
 
     if (!should_hide) {
       total_count++;
-      if (item->icon().cacheKey() == no_cover_icon_.cacheKey()) {
+      if (!ItemHasCover(item)) {
         without_cover++;
       }
     }
@@ -410,7 +397,7 @@ void AlbumCoverManager::UpdateFilter() {
 bool AlbumCoverManager::ShouldHide(const QListWidgetItem& item,
                                    const QString& filter,
                                    HideCovers hide) const {
-  bool has_cover = item.icon().cacheKey() != no_cover_icon_.cacheKey();
+  bool has_cover = ItemHasCover(&item);
   if (hide == Hide_WithCovers && has_cover) {
     return true;
   } else if (hide == Hide_WithoutCovers && !has_cover) {
@@ -423,11 +410,12 @@ bool AlbumCoverManager::ShouldHide(const QListWidgetItem& item,
 
   QStringList query = filter.split(' ');
   for (const QString& s : query) {
-    if (!item.text().contains(s, Qt::CaseInsensitive) &&
-        !item.data(Role_ArtistName).toString().contains(
-            s, Qt::CaseInsensitive) &&
-        !item.data(Role_AlbumArtistName).toString().contains(
-            s, Qt::CaseInsensitive)) {
+    bool in_text = item.text().contains(s, Qt::CaseInsensitive);
+    bool in_artist =
+        item.data(Role_ArtistName).toString().contains(s, Qt::CaseInsensitive);
+    bool in_albumartist = item.data(Role_AlbumArtistName).toString().contains(
+        s, Qt::CaseInsensitive);
+    if (!in_text && !in_artist && !in_albumartist) {
       return true;
     }
   }
@@ -439,7 +427,7 @@ void AlbumCoverManager::FetchAlbumCovers() {
   for (int i = 0; i < ui_->albums->count(); ++i) {
     QListWidgetItem* item = ui_->albums->item(i);
     if (item->isHidden()) continue;
-    if (item->icon().cacheKey() != no_cover_icon_.cacheKey()) continue;
+    if (ItemHasCover(item)) continue;
 
     quint64 id = cover_fetcher_->FetchAlbumCover(
         EffectiveAlbumArtistName(item), item->data(Role_AlbumName).toString());
@@ -510,8 +498,7 @@ bool AlbumCoverManager::eventFilter(QObject* obj, QEvent* event) {
     bool some_with_covers = false;
 
     for (QListWidgetItem* item : context_menu_items_) {
-      if (item->icon().cacheKey() != no_cover_icon_.cacheKey())
-        some_with_covers = true;
+      if (ItemHasCover(item)) some_with_covers = true;
     }
 
     album_cover_choice_controller_->cover_from_file_action()->setEnabled(
@@ -678,7 +665,7 @@ void AlbumCoverManager::UnsetCover() {
 
   // force the 'none' cover on all of the selected items
   for (QListWidgetItem* current : context_menu_items_) {
-    current->setIcon(no_cover_icon_);
+    current->setIcon(no_cover_item_icon_);
     current->setData(Role_PathManual, cover);
 
     // don't save the first one twice
@@ -794,8 +781,7 @@ void AlbumCoverManager::ExportCovers() {
     QListWidgetItem* item = ui_->albums->item(i);
 
     // skip hidden and coverless albums
-    if (item->isHidden() ||
-        item->icon().cacheKey() == no_cover_icon_.cacheKey()) {
+    if (item->isHidden() || !ItemHasCover(item)) {
       continue;
     }
 
@@ -841,9 +827,32 @@ void AlbumCoverManager::UpdateExportStatus(int exported, int skipped, int max) {
 }
 
 QString AlbumCoverManager::EffectiveAlbumArtistName(
-    QListWidgetItem* item) const {
+    const QListWidgetItem* item) const {
   if (!item->data(Role_AlbumArtistName).toString().isEmpty()) {
     return item->data(Role_AlbumArtistName).toString();
   }
   return item->data(Role_ArtistName).toString();
+}
+
+QImage AlbumCoverManager::GenerateNoCoverImage(
+    const QIcon& no_cover_icon) const {
+  // Get a square version of nocover.png with some transparency:
+  QImage nocover =
+      no_cover_icon.pixmap(no_cover_icon.availableSizes().last()).toImage();
+  nocover =
+      nocover.scaled(120, 120, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+
+  QImage square_nocover(120, 120, QImage::Format_ARGB32);
+  square_nocover.fill(0);
+  QPainter p(&square_nocover);
+  p.setOpacity(0.4);
+  p.drawImage((120 - nocover.width()) / 2, (120 - nocover.height()) / 2,
+              nocover);
+  p.end();
+
+  return square_nocover;
+}
+
+bool AlbumCoverManager::ItemHasCover(const QListWidgetItem* item) const {
+  return item->icon().cacheKey() != no_cover_item_icon_.cacheKey();
 }
