@@ -130,7 +130,7 @@ signals:
   QString InitialPathForOpenCoverDialog(const QString& path_automatic,
                                         const QString& first_file_name) const;
 
-  QString EffectiveAlbumArtistName(QListWidgetItem* item) const;
+  QString EffectiveAlbumArtistName(const QListWidgetItem* item) const;
 
   // Returns the selected element in form of a Song ready to be used
   // by AlbumCoverChoiceController or invalid song if there's nothing
@@ -169,10 +169,14 @@ signals:
   AlbumCoverExport* cover_export_;
   AlbumCoverExporter* cover_exporter_;
 
+  QImage GenerateNoCoverImage(const QIcon& no_cover_icon) const;
+  bool ItemHasCover(const QListWidgetItem* item) const;
+
   QIcon artist_icon_;
   QIcon all_artists_icon_;
-  QIcon no_cover_icon_;
-  QImage no_cover_image_;
+  const QIcon no_cover_icon_;
+  const QImage no_cover_image_;
+  const QIcon no_cover_item_icon_;
 
   QMenu* context_menu_;
   QList<QListWidgetItem*> context_menu_items_;
