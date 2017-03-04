@@ -180,12 +180,12 @@ QString AlbumCoverChoiceController::LoadCoverFromURL(Song* song) {
 
 QString AlbumCoverChoiceController::SearchForCover(Song* song) {
   // Get something sensible to stick in the search box
-  QImage image =
-      cover_searcher_->Exec(song->effective_albumartist(), song->album());
+  QImage image = cover_searcher_->Exec(song->effective_albumartist(),
+                                       song->effective_album());
 
   if (!image.isNull()) {
-    QString cover =
-        SaveCoverInCache(song->effective_albumartist(), song->album(), image);
+    QString cover = SaveCoverInCache(song->effective_albumartist(),
+                                     song->effective_album(), image);
     SaveCover(song, cover);
 
     return cover;
@@ -248,7 +248,7 @@ void AlbumCoverChoiceController::ShowCover(const Song& song) {
 
 void AlbumCoverChoiceController::SearchCoverAutomatically(const Song& song) {
   qint64 id = cover_fetcher_->FetchAlbumCover(song.effective_albumartist(),
-                                              song.album());
+                                              song.effective_album());
   cover_fetching_tasks_[id] = song;
 }
 
