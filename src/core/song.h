@@ -162,6 +162,7 @@ class Song {
 
   const QString& title() const;
   const QString& album() const;
+  const QString& effective_album() const;
   const QString& artist() const;
   const QString& albumartist() const;
   const QString& effective_albumartist() const;
