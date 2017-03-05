@@ -82,6 +82,9 @@ signals:
   void OpenSelectedInNewPlaylist();
   void AddSelectedToPlaylistEnqueue();
 
+  void SearchForArtist();
+  void SearchForAlbum();
+
   void GroupByClicked(QAction* action);
   void SetGroupBy(const LibraryModel::Grouping& grouping);
 

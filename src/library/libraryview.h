@@ -101,6 +101,10 @@ signals:
   void ShowInVarious();
   void NoShowInVarious();
 
+  void SearchForArtist();
+  void SearchForAlbum();
+  void SearchForThis();
+
   void NewSmartPlaylist();
   void EditSmartPlaylist();
   void DeleteSmartPlaylist();
@@ -138,6 +142,10 @@ signals:
   QAction* show_in_browser_;
   QAction* show_in_various_;
   QAction* no_show_in_various_;
+
+  QAction* search_for_artist_;
+  QAction* search_for_album_;
+  QAction* search_for_this_;
 
   QAction* new_smart_playlist_;
   QAction* edit_smart_playlist_;

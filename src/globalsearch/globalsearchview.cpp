@@ -36,9 +36,11 @@
 #include "core/logging.h"
 #include "core/mimedata.h"
 #include "core/timeconstants.h"
+#include "internet/core/internetsongmimedata.h"
 #include "library/libraryfilterwidget.h"
 #include "library/librarymodel.h"
 #include "library/groupbydialog.h"
+#include "playlist/songmimedata.h"
 
 using std::placeholders::_1;
 using std::placeholders::_2;
@@ -446,33 +448,38 @@ bool GlobalSearchView::SearchKeyEvent(QKeyEvent* event) {
 }
 
 bool GlobalSearchView::ResultsContextMenuEvent(QContextMenuEvent* event) {
-  if (!context_menu_) {
-    context_menu_ = new QMenu(this);
-    context_actions_ << context_menu_->addAction(
-                            IconLoader::Load("media-playback-start", IconLoader::Base),
-                            tr("Append to current playlist"), this,
-                            SLOT(AddSelectedToPlaylist()));
-    context_actions_ << context_menu_->addAction(
-                            IconLoader::Load("media-playback-start", IconLoader::Base),
-                            tr("Replace current playlist"), this,
-                            SLOT(LoadSelected()));
-    context_actions_ << context_menu_->addAction(
-                            IconLoader::Load("document-new", IconLoader::Base),
-                            tr("Open in new playlist"), this,
-                            SLOT(OpenSelectedInNewPlaylist()));
+  context_menu_ = new QMenu(this);
+  context_actions_ << context_menu_->addAction(
+      IconLoader::Load("media-playback-start", IconLoader::Base),
+      tr("Append to current playlist"), this, SLOT(AddSelectedToPlaylist()));
+  context_actions_ << context_menu_->addAction(
+      IconLoader::Load("media-playback-start", IconLoader::Base),
+      tr("Replace current playlist"), this, SLOT(LoadSelected()));
+  context_actions_ << context_menu_->addAction(
+      IconLoader::Load("document-new", IconLoader::Base),
+      tr("Open in new playlist"), this, SLOT(OpenSelectedInNewPlaylist()));
 
-    context_menu_->addSeparator();
-    context_actions_ << context_menu_->addAction(
-                            IconLoader::Load("go-next", IconLoader::Base), tr("Queue track"),
-                            this, SLOT(AddSelectedToPlaylistEnqueue()));
+  context_menu_->addSeparator();
+  context_actions_ << context_menu_->addAction(
+      IconLoader::Load("go-next", IconLoader::Base), tr("Queue track"), this,
+      SLOT(AddSelectedToPlaylistEnqueue()));
 
-    context_menu_->addSeparator();
-    context_menu_->addMenu(tr("Group by"))
-        ->addActions(group_by_actions_->actions());
-    context_menu_->addAction(IconLoader::Load("configure", IconLoader::Base),
-                             tr("Configure global search..."), this,
-                             SLOT(OpenSettingsDialog()));
+  context_menu_->addSeparator();
+  if (ui_->results->selectionModel() &&
+      ui_->results->selectionModel()->selectedRows().length() == 1) {
+    context_actions_ << context_menu_->addAction(
+        IconLoader::Load("system-search", IconLoader::Base),
+        tr("Search for artist"), this, SLOT(SearchForArtist()));
+    context_actions_ << context_menu_->addAction(
+        IconLoader::Load("system-search", IconLoader::Base),
+        tr("Search for album"), this, SLOT(SearchForAlbum()));
   }
+  context_menu_->addSeparator();
+  context_menu_->addMenu(tr("Group by"))
+      ->addActions(group_by_actions_->actions());
+  context_menu_->addAction(IconLoader::Load("configure", IconLoader::Base),
+                           tr("Configure global search..."), this,
+                           SLOT(OpenSettingsDialog()));
 
   const bool enable_context_actions =
       ui_->results->selectionModel() &&
@@ -513,6 +520,46 @@ void GlobalSearchView::OpenSelectedInNewPlaylist() {
 
   data->open_in_new_playlist_ = true;
   emit AddToPlaylist(data);
+}
+
+void GlobalSearchView::SearchForArtist() {
+  if (const SongMimeData* data =
+          qobject_cast<const SongMimeData*>(SelectedMimeData())) {
+    if (data && !data->songs.isEmpty()) {
+      if (!data->songs.first().albumartist().isEmpty()) {
+        StartSearch(data->songs.first().albumartist().simplified());
+      } else if (!data->songs.first().artist().isEmpty()) {
+        StartSearch(data->songs.first().artist().simplified());
+      }
+    }
+  } else if (const InternetSongMimeData* data =
+                 qobject_cast<const InternetSongMimeData*>(
+                     SelectedMimeData())) {
+    if (data && !data->songs.isEmpty()) {
+      if (!data->songs.first().albumartist().isEmpty()) {
+        StartSearch(data->songs.first().albumartist().simplified());
+      } else if (!data->songs.first().artist().isEmpty()) {
+        StartSearch(data->songs.first().artist().simplified());
+      }
+    }
+  }
+}
+
+void GlobalSearchView::SearchForAlbum() {
+  if (const SongMimeData* data =
+          qobject_cast<const SongMimeData*>(SelectedMimeData())) {
+    if (data && !data->songs.isEmpty() &&
+        !data->songs.first().album().isEmpty()) {
+      StartSearch(data->songs.first().album().simplified());
+    }
+  } else if (const InternetSongMimeData* data =
+                 qobject_cast<const InternetSongMimeData*>(
+                     SelectedMimeData())) {
+    if (data && !data->songs.isEmpty() &&
+        !data->songs.first().album().isEmpty()) {
+      StartSearch(data->songs.first().album().simplified());
+    }
+  }
 }
 
 void GlobalSearchView::showEvent(QShowEvent* e) {
@@ -560,9 +607,12 @@ void GlobalSearchView::GroupByClicked(QAction* action) {
 }
 
 void GlobalSearchView::SetGroupBy(const LibraryModel::Grouping& g) {
-  // Clear requests: changing "group by" on the models will cause all the items to be removed/added
-  // again, so all the QModelIndex here will become invalid. New requests will be created for those
-  // songs when they will be displayed again anyway (when GlobalSearchItemDelegate::paint will call
+  // Clear requests: changing "group by" on the models will cause all the items
+  // to be removed/added
+  // again, so all the QModelIndex here will become invalid. New requests will
+  // be created for those
+  // songs when they will be displayed again anyway (when
+  // GlobalSearchItemDelegate::paint will call
   // LazyLoadArt)
   art_requests_.clear();
   // Update the models

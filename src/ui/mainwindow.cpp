@@ -675,7 +675,13 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
   ui_->playlist->addAction(playlist_queue_);
   playlist_skip_ = playlist_menu_->addAction("", this, SLOT(PlaylistSkip()));
   ui_->playlist->addAction(playlist_skip_);
-
+  playlist_menu_->addSeparator();
+  search_for_artist_ = playlist_menu_->addAction(
+      IconLoader::Load("system-search", IconLoader::Base),
+      tr("Search for artist"), this, SLOT(SearchForArtist()));
+  search_for_album_ = playlist_menu_->addAction(
+      IconLoader::Load("system-search", IconLoader::Base),
+      tr("Search for album"), this, SLOT(SearchForAlbum()));
   playlist_menu_->addSeparator();
   playlist_menu_->addAction(ui_->action_remove_from_playlist);
   playlist_undoredo_ = playlist_menu_->addSeparator();
@@ -1732,6 +1738,9 @@ void MainWindow::PlaylistRightClick(const QPoint& global_pos,
   playlist_delete_->setVisible(false);
   playlist_copy_to_device_->setVisible(false);
 
+  search_for_artist_->setVisible(all == 1);
+  search_for_album_->setVisible(all == 1);
+
   if (in_queue == 1 && not_in_queue == 0)
     playlist_queue_->setText(tr("Dequeue track"));
   else if (in_queue > 1 && not_in_queue == 0)
@@ -2480,6 +2489,26 @@ void MainWindow::PlaylistCopyToDevice() {
     QMessageBox::warning(
         this, tr("Error"),
         tr("None of the selected songs were suitable for copying to a device"));
+  }
+}
+
+void MainWindow::SearchForArtist() {
+  PlaylistItemPtr item(
+      app_->playlist_manager()->current()->item_at(playlist_menu_index_.row()));
+  Song song = item->Metadata();
+  if (!song.albumartist().isEmpty()) {
+    DoGlobalSearch(song.albumartist().simplified());
+  } else if (!song.artist().isEmpty()) {
+    DoGlobalSearch(song.artist().simplified());
+  }
+}
+
+void MainWindow::SearchForAlbum() {
+  PlaylistItemPtr item(
+      app_->playlist_manager()->current()->item_at(playlist_menu_index_.row()));
+  Song song = item->Metadata();
+  if (!song.album().isEmpty()) {
+    DoGlobalSearch(song.album().simplified());
   }
 }
 
