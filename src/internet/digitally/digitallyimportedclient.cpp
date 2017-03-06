@@ -83,7 +83,7 @@ DigitallyImportedClient::AuthReply DigitallyImportedClient::ParseAuthReply(
   }
 
   QJson::Parser parser;
-  QVariantMap data = parser.parse(reply).toMap();
+  QVariantMap data = parser.parse(reply->readAll()).toMap();
 
   if (!data.contains("subscriptions")) {
     return ret;
@@ -124,7 +124,7 @@ DigitallyImportedClient::ChannelList DigitallyImportedClient::ParseChannelList(
   ChannelList ret;
 
   QJson::Parser parser;
-  QVariantMap data = parser.parse(reply).toMap();
+  QVariantMap data = parser.parse(reply->readAll()).toMap();
 
   if (!data.contains("channel_filters")) return ret;
 

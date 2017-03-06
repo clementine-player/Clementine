@@ -132,7 +132,7 @@ void OAuthenticator::FetchAccessTokenFinished(QNetworkReply* reply) {
 
   QJson::Parser parser;
   bool ok = false;
-  QVariantMap result = parser.parse(reply, &ok).toMap();
+  QVariantMap result = parser.parse(reply->readAll(), &ok).toMap();
   if (!ok) {
     qLog(Error) << "Failed to parse oauth reply";
     return;
@@ -183,7 +183,7 @@ void OAuthenticator::RefreshAccessTokenFinished(QNetworkReply* reply) {
   QJson::Parser parser;
   bool ok = false;
 
-  QVariantMap result = parser.parse(reply, &ok).toMap();
+  QVariantMap result = parser.parse(reply->readAll(), &ok).toMap();
   access_token_ = result["access_token"].toString();
   if (result.contains("refresh_token")) {
     refresh_token_ = result["refresh_token"].toString();

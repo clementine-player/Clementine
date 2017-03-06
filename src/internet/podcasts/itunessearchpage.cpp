@@ -70,7 +70,7 @@ void ITunesSearchPage::SearchFinished(QNetworkReply* reply) {
   }
 
   QJson::Parser parser;
-  QVariant data = parser.parse(reply);
+  QVariant data = parser.parse(reply->readAll());
 
   // Was it valid JSON?
   if (data.isNull()) {

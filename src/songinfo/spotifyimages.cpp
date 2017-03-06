@@ -44,7 +44,7 @@ void SpotifyImages::FetchInfo(int id, const Song& metadata) {
   NewClosure(reply, SIGNAL(finished()), [this, id, reply]() {
     reply->deleteLater();
     QJson::Parser parser;
-    QVariantMap result = parser.parse(reply).toMap();
+    QVariantMap result = parser.parse(reply->readAll()).toMap();
     QVariantMap artists = result["artists"].toMap();
     if (artists.isEmpty()) {
       emit Finished(id);
@@ -70,7 +70,7 @@ void SpotifyImages::FetchImagesForArtist(int id, const QString& spotify_id) {
   NewClosure(reply, SIGNAL(finished()), [this, id, reply]() {
     reply->deleteLater();
     QJson::Parser parser;
-    QVariantMap result = parser.parse(reply).toMap();
+    QVariantMap result = parser.parse(reply->readAll()).toMap();
     QVariantList images = result["images"].toList();
     QList<QPair<QUrl, QSize>> image_candidates;
     for (QVariant i : images) {

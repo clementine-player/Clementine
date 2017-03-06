@@ -71,7 +71,7 @@ void ArtistBiography::FetchInfo(int id, const Song& metadata) {
     reply->deleteLater();
 
     QJson::Parser parser;
-    QVariantMap response = parser.parse(reply).toMap();
+    QVariantMap response = parser.parse(reply->readAll()).toMap();
 
     QString body = response["articleBody"].toString();
     QString url = response["url"].toString();
@@ -194,7 +194,7 @@ void ArtistBiography::FetchWikipediaImages(int id, const QString& wikipedia_url,
     reply->deleteLater();
 
     QJson::Parser parser;
-    QVariantMap response = parser.parse(reply).toMap();
+    QVariantMap response = parser.parse(reply->readAll()).toMap();
 
     QStringList image_titles = ExtractImageTitles(response);
 
@@ -209,7 +209,7 @@ void ArtistBiography::FetchWikipediaImages(int id, const QString& wikipedia_url,
       NewClosure(reply, SIGNAL(finished()), [this, id, reply, latch]() {
         reply->deleteLater();
         QJson::Parser parser;
-        QVariantMap json = parser.parse(reply).toMap();
+        QVariantMap json = parser.parse(reply->readAll()).toMap();
         QUrl url = ExtractImageUrl(json);
         qLog(Debug) << "Found wikipedia image url:" << url;
         if (!url.isEmpty()) {
@@ -247,7 +247,7 @@ void ArtistBiography::FetchWikipediaArticle(int id,
     reply->deleteLater();
 
     QJson::Parser parser;
-    QVariantMap json = parser.parse(reply).toMap();
+    QVariantMap json = parser.parse(reply->readAll()).toMap();
     QString html = ExtractExtract(json);
 
     CollapsibleInfoPane::Data data;

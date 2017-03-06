@@ -116,7 +116,7 @@ void Client::FetchUserInfoFinished(ConnectResponse* response,
   } else {
     QJson::Parser parser;
     bool ok = false;
-    QVariantMap result = parser.parse(reply, &ok).toMap();
+    QVariantMap result = parser.parse(reply->readAll(), &ok).toMap();
     if (!ok) {
       qLog(Error) << "Failed to parse user info reply";
       return;
@@ -159,7 +159,7 @@ void Client::GetFileFinished(GetFileResponse* response, QNetworkReply* reply) {
 
   QJson::Parser parser;
   bool ok = false;
-  QVariantMap result = parser.parse(reply, &ok).toMap();
+  QVariantMap result = parser.parse(reply->readAll(), &ok).toMap();
   if (!ok) {
     qLog(Error) << "Failed to fetch file with ID" << response->file_id_;
     emit response->Finished();
@@ -204,7 +204,7 @@ void Client::ListChangesFinished(ListChangesResponse* response,
   QJson::Parser parser;
   bool ok = false;
   // TODO(John Maguire): Put this on a separate thread as the response could be large.
-  QVariantMap result = parser.parse(reply, &ok).toMap();
+  QVariantMap result = parser.parse(reply->readAll(), &ok).toMap();
   if (!ok) {
     qLog(Error) << "Failed to fetch changes" << response->cursor();
     emit response->Finished();

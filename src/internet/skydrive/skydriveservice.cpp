@@ -109,7 +109,7 @@ void SkydriveService::AddAuthorizationHeader(QNetworkRequest* request) {
 void SkydriveService::FetchUserInfoFinished(QNetworkReply* reply) {
   reply->deleteLater();
   QJson::Parser parser;
-  QVariantMap response = parser.parse(reply).toMap();
+  QVariantMap response = parser.parse(reply->readAll()).toMap();
 
   QString name = response["name"].toString();
   if (!name.isEmpty()) {
@@ -137,7 +137,7 @@ void SkydriveService::ListFiles(const QString& folder) {
 void SkydriveService::ListFilesFinished(QNetworkReply* reply) {
   reply->deleteLater();
   QJson::Parser parser;
-  QVariantMap response = parser.parse(reply).toMap();
+  QVariantMap response = parser.parse(reply->readAll()).toMap();
 
   QVariantList files = response["data"].toList();
   for (const QVariant& f : files) {
@@ -177,7 +177,7 @@ QUrl SkydriveService::GetStreamingUrlFromSongId(const QString& file_id) {
   WaitForSignal(reply.get(), SIGNAL(finished()));
 
   QJson::Parser parser;
-  QVariantMap response = parser.parse(reply.get()).toMap();
+  QVariantMap response = parser.parse(reply->readAll()).toMap();
   return response["source"].toUrl();
 }
 
