@@ -536,10 +536,12 @@ QStringList LibraryBackend::GetAllArtistsWithAlbums(const QueryOptions& opt) {
   query2.AddWhere("album", "", "!=");
   query2.AddWhere("albumartist", "", "=");
 
-  QMutexLocker l(db_->Mutex());
-  ExecQuery(&query);
-  ExecQuery(&query2);
-  l.unlock();
+  {
+    QMutexLocker l(db_->Mutex());
+    if (!ExecQuery(&query) || !ExecQuery(&query2)) {
+      return QStringList();
+    }
+  }
 
   QSet<QString> artists;
   while (query.Next()) {
@@ -870,12 +872,14 @@ LibraryBackend::AlbumList LibraryBackend::GetAlbums(const QString& artist,
     query.AddWhere("artist", artist);
   }
 
-  QMutexLocker l(db_->Mutex());
-  if (!ExecQuery(&query)) return ret;
-  l.unlock();
+  {
+    QMutexLocker l(db_->Mutex());
+    if (!ExecQuery(&query)) return ret;
+  }
 
   QString last_album;
-  QString last_artist, last_album_artist;
+  QString last_artist;
+  QString last_album_artist;
   while (query.Next()) {
     bool compilation = query.Value(3).toBool() | query.Value(4).toBool();
 
