@@ -384,7 +384,7 @@ void AlbumCoverManager::UpdateFilter() {
 
     if (!should_hide) {
       total_count++;
-      if (!ItemHasCover(item)) {
+      if (!ItemHasCover(*item)) {
         without_cover++;
       }
     }
@@ -397,7 +397,7 @@ void AlbumCoverManager::UpdateFilter() {
 bool AlbumCoverManager::ShouldHide(const QListWidgetItem& item,
                                    const QString& filter,
                                    HideCovers hide) const {
-  bool has_cover = ItemHasCover(&item);
+  bool has_cover = ItemHasCover(item);
   if (hide == Hide_WithCovers && has_cover) {
     return true;
   } else if (hide == Hide_WithoutCovers && !has_cover) {
@@ -427,7 +427,7 @@ void AlbumCoverManager::FetchAlbumCovers() {
   for (int i = 0; i < ui_->albums->count(); ++i) {
     QListWidgetItem* item = ui_->albums->item(i);
     if (item->isHidden()) continue;
-    if (ItemHasCover(item)) continue;
+    if (ItemHasCover(*item)) continue;
 
     quint64 id = cover_fetcher_->FetchAlbumCover(
         EffectiveAlbumArtistName(item), item->data(Role_AlbumName).toString());
@@ -498,7 +498,7 @@ bool AlbumCoverManager::eventFilter(QObject* obj, QEvent* event) {
     bool some_with_covers = false;
 
     for (QListWidgetItem* item : context_menu_items_) {
-      if (ItemHasCover(item)) some_with_covers = true;
+      if (ItemHasCover(*item)) some_with_covers = true;
     }
 
     album_cover_choice_controller_->cover_from_file_action()->setEnabled(
@@ -781,7 +781,7 @@ void AlbumCoverManager::ExportCovers() {
     QListWidgetItem* item = ui_->albums->item(i);
 
     // skip hidden and coverless albums
-    if (item->isHidden() || !ItemHasCover(item)) {
+    if (item->isHidden() || !ItemHasCover(*item)) {
       continue;
     }
 
@@ -853,6 +853,6 @@ QImage AlbumCoverManager::GenerateNoCoverImage(
   return square_nocover;
 }
 
-bool AlbumCoverManager::ItemHasCover(const QListWidgetItem* item) const {
-  return item->icon().cacheKey() != no_cover_item_icon_.cacheKey();
+bool AlbumCoverManager::ItemHasCover(const QListWidgetItem& item) const {
+  return item.icon().cacheKey() != no_cover_item_icon_.cacheKey();
 }

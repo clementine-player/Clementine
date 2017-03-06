@@ -170,7 +170,7 @@ signals:
   AlbumCoverExporter* cover_exporter_;
 
   QImage GenerateNoCoverImage(const QIcon& no_cover_icon) const;
-  bool ItemHasCover(const QListWidgetItem* item) const;
+  bool ItemHasCover(const QListWidgetItem& item) const;
 
   QIcon artist_icon_;
   QIcon all_artists_icon_;
