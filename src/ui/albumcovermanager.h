@@ -130,7 +130,7 @@ signals:
   QString InitialPathForOpenCoverDialog(const QString& path_automatic,
                                         const QString& first_file_name) const;
 
-  QString EffectiveAlbumArtistName(const QListWidgetItem* item) const;
+  QString EffectiveAlbumArtistName(const QListWidgetItem& item) const;
 
   // Returns the selected element in form of a Song ready to be used
   // by AlbumCoverChoiceController or invalid song if there's nothing
