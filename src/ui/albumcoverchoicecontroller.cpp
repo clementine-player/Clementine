@@ -123,7 +123,9 @@ QString AlbumCoverChoiceController::LoadCoverFromFile(Song* song) {
 void AlbumCoverChoiceController::SaveCoverToFile(const Song& song,
                                                  const QImage& image) {
   QString initial_file_name =
-      "/" + (song.album().isEmpty() ? tr("Unknown") : song.album()) + ".jpg";
+      "/" + (song.effective_album().isEmpty() ? tr("Unknown")
+                                              : song.effective_album()) +
+      ".jpg";
 
   QString save_filename = QFileDialog::getSaveFileName(
       this, tr("Save album cover"),
@@ -168,8 +170,7 @@ QString AlbumCoverChoiceController::LoadCoverFromURL(Song* song) {
   QImage image = cover_from_url_dialog_->Exec();
 
   if (!image.isNull()) {
-    QString cover =
-        SaveCoverInCache(song->effective_albumartist(), song->album(), image);
+    QString cover = SaveCoverInCache(song->artist(), song->album(), image);
     SaveCover(song, cover);
 
     return cover;
@@ -179,13 +180,14 @@ QString AlbumCoverChoiceController::LoadCoverFromURL(Song* song) {
 }
 
 QString AlbumCoverChoiceController::SearchForCover(Song* song) {
-  // Get something sensible to stick in the search box
+  // Get something sensible to stick in the search box.
+  // We search for the 'effective' values, but we cache the covers with the
+  // Song's artist() and album().
   QImage image = cover_searcher_->Exec(song->effective_albumartist(),
                                        song->effective_album());
 
   if (!image.isNull()) {
-    QString cover = SaveCoverInCache(song->effective_albumartist(),
-                                     song->effective_album(), image);
+    QString cover = SaveCoverInCache(song->artist(), song->album(), image);
     SaveCover(song, cover);
 
     return cover;
@@ -205,11 +207,10 @@ void AlbumCoverChoiceController::ShowCover(const Song& song) {
   QDialog* dialog = new QDialog(this);
   dialog->setAttribute(Qt::WA_DeleteOnClose, true);
 
-  // Use Artist - Album as the window title
-  QString title_text(song.albumartist());
-  if (title_text.isEmpty()) title_text = song.effective_albumartist();
-
-  if (!song.album().isEmpty()) title_text += " - " + song.album();
+  // Use (Album)Artist - Album as the window title
+  QString title_text(song.effective_albumartist());
+  if (!song.effective_album().isEmpty())
+    title_text += " - " + song.effective_album();
 
   QLabel* label = new QLabel(dialog);
   label->setPixmap(AlbumCoverLoader::TryLoadPixmap(
@@ -260,8 +261,7 @@ void AlbumCoverChoiceController::AlbumCoverFetched(
   }
 
   if (!image.isNull()) {
-    QString cover =
-        SaveCoverInCache(song.effective_albumartist(), song.album(), image);
+    QString cover = SaveCoverInCache(song.artist(), song.album(), image);
     SaveCover(&song, cover);
   }
 
@@ -341,7 +341,7 @@ QString AlbumCoverChoiceController::SaveCover(Song* song, const QDropEvent* e) {
     QImage image = qvariant_cast<QImage>(e->mimeData()->imageData());
     if (!image.isNull()) {
       QString cover_path =
-          SaveCoverInCache(song->effective_albumartist(), song->album(), image);
+          SaveCoverInCache(song->artist(), song->album(), image);
       SaveCover(song, cover_path);
       return cover_path;
     }
