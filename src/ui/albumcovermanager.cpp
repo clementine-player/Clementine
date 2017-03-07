@@ -753,8 +753,8 @@ void AlbumCoverManager::SaveAndSetCover(QListWidgetItem* item,
   const QString albumartist = item->data(Role_ArtistName).toString();
   const QString album = item->data(Role_AlbumName).toString();
 
-  QString path = album_cover_choice_controller_->SaveCoverInCache(
-      EffectiveAlbumArtistName(*item), album, image);
+  QString path =
+      album_cover_choice_controller_->SaveCoverInCache(artist, album, image);
 
   // Save the image in the database
   library_backend_->UpdateManualAlbumArtAsync(artist, albumartist, album, path);
