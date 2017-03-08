@@ -1141,12 +1141,13 @@ bool Song::IsOnSameAlbum(const Song& other) const {
 
   if (is_compilation() && album() == other.album()) return true;
 
-  return album() == other.album() && artist() == other.artist();
+  return effective_album() == other.effective_album() && 
+    effective_albumartist() == other.effective_albumartist();
 }
 
 QString Song::AlbumKey() const {
-  return QString("%1|%2|%3").arg(is_compilation() ? "_compilation" : artist(),
-                                 has_cue() ? cue_path() : "", album());
+  return QString("%1|%2|%3").arg(is_compilation() ? "_compilation" : effective_albumartist(),
+                                 has_cue() ? cue_path() : "", effective_album());
 }
 
 void Song::ToXesam(QVariantMap* map) const {
