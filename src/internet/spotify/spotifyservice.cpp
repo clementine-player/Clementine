@@ -872,12 +872,14 @@ void SpotifyService::SearchResults(
   }
   qLog(Debug) << "Got" << songs.count() << "results";
 
-  ClearSearchResults();
-
   // Must initialize search pointer if it is nullptr
   if (!search_) {
      InitSearch();
   }
+  else{
+     ClearSearchResults();
+  }
+   
   // Fill results list
   for (const Song& song : songs) {
     QStandardItem* child = CreateSongItem(song);
