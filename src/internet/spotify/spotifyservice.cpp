@@ -397,7 +397,7 @@ void SpotifyService::AddSongsToStarred(const QList<QUrl>& songs_urls) {
 
 void SpotifyService::InitSearch() {
     search_ =
-        new QStandardItem(IconLoader::Load("edit-find", IconLoader::Base), 
+        new QStandardItem(IconLoader::Load("edit-find", IconLoader::Base),
                           tr("Search results"));
     search_->setToolTip(
         tr("Start typing something on the search box above to "
@@ -414,7 +414,7 @@ void SpotifyService::InitSearch() {
                       InternetModel::Role_PlayBehaviour);
     starred_->setData(true, InternetModel::Role_CanBeModified);
 
-    inbox_ = new QStandardItem(IconLoader::Load("mail-message", 
+    inbox_ = new QStandardItem(IconLoader::Load("mail-message",
                                IconLoader::Base), tr("Inbox"));
     inbox_->setData(Type_InboxPlaylist, InternetModel::Role_Type);
     inbox_->setData(true, InternetModel::Role_CanLazyLoad);
@@ -431,6 +431,17 @@ void SpotifyService::InitSearch() {
     root_->appendRow(toplist_);
     root_->appendRow(starred_);
     root_->appendRow(inbox_);
+}
+
+void SpotifyService::PlaylistsUpdated(const pb::spotify::Playlists& response) {
+  if (login_task_id_) {
+    app_->task_manager()->SetTaskFinished(login_task_id_);
+    login_task_id_ = 0;
+  }
+
+  // Create starred and inbox playlists if they're not here already
+  if (!search_) {
+    InitSearch();
   } else {
     // Always reset starred playlist
     // TODO: might be improved by including starred playlist in the response,
@@ -756,14 +767,12 @@ void SpotifyService::SearchResults(
 
   qLog(Debug) << "Got" << songs.count() << "results";
 
+  ClearSearchResults();
+
   // Must initialize search pointer if it is nullptr
   if (!search_) {
      InitSearch();
   }
-  else{
-     ClearSearchResults();
-  }
-   
   // Fill results list
   for (const Song& song : songs) {
     QStandardItem* child = CreateSongItem(song);
