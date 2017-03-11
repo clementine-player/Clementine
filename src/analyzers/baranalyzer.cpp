@@ -100,8 +100,11 @@ void BarAnalyzer::colorChanged() {
     rgb = palette().color(QPalette::Highlight);
   }
 
-  for (int x = 0, r = rgb.red(), g = rgb.green(), b = rgb.blue(), r2 = 255 - r;
-       x < height(); ++x) {
+  for (int x = 0; x < height(); ++x) {
+    int r = rgb.red();
+    int g = rgb.green();
+    int b = rgb.blue();
+    int r2 = 255 - r;
     for (int y = x; y > 0; --y) {
       const double fraction = static_cast<double>(y) / height();
 
@@ -121,7 +124,7 @@ void BarAnalyzer::psychedelicModeChanged(bool enabled) {
 }
 
 void BarAnalyzer::analyze(QPainter& p, const Scope& s, bool new_frame) {
-  if (!new_frame  || engine_->state() == Engine::Paused) {
+  if (!new_frame || engine_->state() == Engine::Paused) {
     p.drawPixmap(0, 0, canvas_);
     return;
   }
