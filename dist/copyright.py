@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python2
 
 from subprocess import *
 from sys import *
@@ -6,7 +6,7 @@ from os import rename, remove
 from datetime import *
 
 def pretty_years(s):
-	
+
 	l = list(s)
 	l.sort()
 
@@ -23,7 +23,7 @@ def pretty_years(s):
 		if x == prev + 1:
 			prev = x
 			continue
-		
+
 		if prev == start:
 			r.append("%i" % prev)
 		else:
@@ -41,10 +41,10 @@ def pretty_years(s):
 	return ", ".join(r)
 
 def order_by_year(a, b):
-	
+
 	la = list(a[2])
 	la.sort()
-	
+
 	lb = list(b[2])
 	lb.sort()
 
@@ -60,9 +60,9 @@ def gen_copyrights(f):
 	commits = []
 	data = {}
         copyrights = []
-        
+
 	for ln in Popen(["git", "blame", "--incremental", f], stdout=PIPE).stdout:
-		
+
 		if ln.startswith("filename "):
 			if len(data) > 0:
 				commits.append(data)
@@ -110,7 +110,7 @@ def gen_copyrights(f):
 			if a[1] == b[1]:
 				a[2].update(b[2])
 
-				if by_author.has_key(an) and by_author.has_key(bn):	
+				if by_author.has_key(an) and by_author.has_key(bn):
 					del by_author[bn]
 
 	copyright = list(by_author.itervalues())
@@ -129,7 +129,7 @@ def change_file(filename):
                 content=fi.readlines()
 
         copyrights=gen_copyrights(filename)
-                
+
         if -1 == content[0].find("/* This file is part of Clementine."):
                 print("File {} have no Clementine copyright info".format(filename))
                 return 0
@@ -141,16 +141,16 @@ def change_file(filename):
                         if not extended:
                                 out.extend(copyrights)
                                 extended = 1
-                                
+
                         if not ends:
                                 continue
                 else:
                         out.append(i)
-        
+
         with open(filename+'_tmp', "w") as fi:
                 fi.writelines(out)
         rename(filename+'_tmp', filename)
-        
+
 
 if __name__ == "__main__":
         for files in argv[1:]:
