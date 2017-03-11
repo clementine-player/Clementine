@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python2
 # Emulates the behaviour of codesign --deep which is missing on OS X < 10.9
 
 import os

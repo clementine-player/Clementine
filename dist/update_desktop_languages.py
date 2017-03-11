@@ -1,3 +1,4 @@
+#!/usr/bin/python2
 import codecs
 import glob
 import logging
