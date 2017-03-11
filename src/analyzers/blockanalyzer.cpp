@@ -127,10 +127,8 @@ void BlockAnalyzer::framerateChanged() {  // virtual
 void BlockAnalyzer::transform(Analyzer::Scope& s) {
   for (uint x = 0; x < s.size(); ++x) s[x] *= 2;
 
-  float* front = static_cast<float*>(&s.front());
-
-  fht_->spectrum(front);
-  fht_->scale(front, 1.0 / 20);
+  fht_->spectrum(s.data());
+  fht_->scale(s.data(), 1.0 / 20);
 
   // the second half is pretty dull, so only show it if the user has a large
   // analyzer
