@@ -126,7 +126,7 @@ msgstr "%1 songs found (showing %2)"
 msgid "%1 tracks"
 msgstr "%1 tracks"
 
-#: ui/albumcovermanager.cpp:470
+#: ui/albumcovermanager.cpp:472
 #, qt-format
 msgid "%1 transferred"
 msgstr "%1 transferred"
@@ -409,7 +409,7 @@ msgstr "AAC 32k"
 msgid "AAC 64k"
 msgstr "AAC 64k"
 
-#: core/song.cpp:422
+#: core/song.cpp:426
 msgid "AIFF"
 msgstr "AIFF"
 
@@ -417,7 +417,7 @@ msgstr "AIFF"
 msgid "ALL GLORY TO THE HYPNOTOAD"
 msgstr "ALL GLORY TO THE HYPNOTOAD"
 
-#: ui/albumcovermanager.cpp:114 ui/albumcoversearcher.cpp:158
+#: ui/albumcovermanager.cpp:105 ui/albumcoversearcher.cpp:158
 msgid "Abort"
 msgstr "Abort"
 
@@ -697,11 +697,11 @@ msgstr "Album cover"
 msgid "Album info on jamendo.com..."
 msgstr "Album info on jamendo.com..."
 
-#: ui/albumcovermanager.cpp:138
+#: ui/albumcovermanager.cpp:129
 msgid "Albums with covers"
 msgstr "Albums with covers"
 
-#: ui/albumcovermanager.cpp:139
+#: ui/albumcovermanager.cpp:130
 msgid "Albums without covers"
 msgstr "Albums without covers"
 
@@ -718,11 +718,11 @@ msgctxt "Label for button to enable/disable Hypnotoad background sound."
 msgid "All Glory to the Hypnotoad!"
 msgstr "All Glory to the Hypnotoad!"
 
-#: ui/albumcovermanager.cpp:137
+#: ui/albumcovermanager.cpp:128
 msgid "All albums"
 msgstr "All albums"
 
-#: ui/albumcovermanager.cpp:271
+#: ui/albumcovermanager.cpp:262
 msgid "All artists"
 msgstr "All artists"
 
@@ -1045,7 +1045,7 @@ msgstr "But these sources are disabled:"
 msgid "Buttons"
 msgstr "Buttons"
 
-#: core/song.cpp:428
+#: core/song.cpp:432
 msgid "CDDA"
 msgstr "CDDA"
 
@@ -1284,7 +1284,7 @@ msgstr "Close visualisation"
 msgid "Closing this window will cancel the download."
 msgstr "Closing this window will cancel the download."
 
-#: ui/albumcovermanager.cpp:222
+#: ui/albumcovermanager.cpp:213
 msgid "Closing this window will stop searching for album covers."
 msgstr "Closing this window will stop searching for album covers."
 
@@ -1813,7 +1813,7 @@ msgid "Don't shuffle"
 msgstr "Don't shuffle"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:312
-#: ui/albumcovermanager.cpp:224
+#: ui/albumcovermanager.cpp:215
 msgid "Don't stop!"
 msgstr "Don't stop!"
 
@@ -2188,11 +2188,11 @@ msgstr "Export downloaded covers"
 msgid "Export embedded covers"
 msgstr "Export embedded covers"
 
-#: ui/albumcovermanager.cpp:789 ui/albumcovermanager.cpp:813
+#: ui/albumcovermanager.cpp:799 ui/albumcovermanager.cpp:823
 msgid "Export finished"
 msgstr "Export finished"
 
-#: ui/albumcovermanager.cpp:798
+#: ui/albumcovermanager.cpp:808
 #, qt-format
 msgid "Exported %1 covers out of %2 (%3 skipped)"
 msgstr "Exported %1 covers out of %2 (%3 skipped)"
@@ -2353,7 +2353,7 @@ msgstr "First level"
 msgid "Fit cover to width"
 msgstr "Fit cover to width"
 
-#: core/song.cpp:406 transcoder/transcoder.cpp:233
+#: core/song.cpp:410 transcoder/transcoder.cpp:233
 msgid "Flac"
 msgstr "Flac"
 
@@ -2495,7 +2495,7 @@ msgstr "Go to previous playlist tab"
 msgid "Google Drive"
 msgstr "Google Drive"
 
-#: covers/coversearchstatisticsdialog.cpp:53 ui/albumcovermanager.cpp:464
+#: covers/coversearchstatisticsdialog.cpp:53 ui/albumcovermanager.cpp:465
 #: ../bin/src/ui_coversearchstatisticsdialog.h:75
 #, qt-format
 msgid "Got %1 covers out of %2 (%3 failed)"
@@ -2956,7 +2956,7 @@ msgstr "Load"
 msgid "Load cover from URL"
 msgstr "Load cover from URL"
 
-#: ui/albumcoverchoicecontroller.cpp:64
+#: ui/albumcoverchoicecontroller.cpp:66
 msgid "Load cover from URL..."
 msgstr "Load cover from URL..."
 
@@ -2964,7 +2964,7 @@ msgstr "Load cover from URL..."
 msgid "Load cover from disk"
 msgstr "Load cover from disk"
 
-#: ui/albumcoverchoicecontroller.cpp:60
+#: ui/albumcoverchoicecontroller.cpp:61
 msgid "Load cover from disk..."
 msgstr "Load cover from disk..."
 
@@ -3077,7 +3077,7 @@ msgstr "Lyrics from the tag"
 msgid "M4A AAC"
 msgstr "M4A AAC"
 
-#: core/song.cpp:412 transcoder/transcoder.cpp:238
+#: core/song.cpp:416 transcoder/transcoder.cpp:238
 #: ../bin/src/ui_transcodersettingspage.h:174
 msgid "MP3"
 msgstr "MP3"
@@ -3090,11 +3090,11 @@ msgstr "MP3 256k"
 msgid "MP3 96k"
 msgstr "MP3 96k"
 
-#: core/song.cpp:408
+#: core/song.cpp:412
 msgid "MP4 AAC"
 msgstr "MP4 AAC"
 
-#: core/song.cpp:410
+#: core/song.cpp:414
 msgid "MPC"
 msgstr "MPC"
 
@@ -3361,7 +3361,7 @@ msgstr "No analyzer"
 msgid "No background image"
 msgstr "No background image"
 
-#: ui/albumcovermanager.cpp:790
+#: ui/albumcovermanager.cpp:800
 msgid "No covers to export."
 msgstr "No covers to export."
 
@@ -3456,19 +3456,19 @@ msgstr "OSD Preview"
 msgid "Off"
 msgstr "Off"
 
-#: core/song.cpp:414 transcoder/transcoder.cpp:244
+#: core/song.cpp:418 transcoder/transcoder.cpp:244
 msgid "Ogg Flac"
 msgstr "Ogg Flac"
 
-#: core/song.cpp:420 transcoder/transcoder.cpp:250
+#: core/song.cpp:424 transcoder/transcoder.cpp:250
 msgid "Ogg Opus"
 msgstr "Ogg Opus"
 
-#: core/song.cpp:416 transcoder/transcoder.cpp:247
+#: core/song.cpp:420 transcoder/transcoder.cpp:247
 msgid "Ogg Speex"
 msgstr "Ogg Speex"
 
-#: core/song.cpp:418 transcoder/transcoder.cpp:241
+#: core/song.cpp:422 transcoder/transcoder.cpp:241
 #: ../bin/src/ui_magnatunedownloaddialog.h:135
 #: ../bin/src/ui_magnatunesettingspage.h:169
 msgid "Ogg Vorbis"
@@ -3969,7 +3969,7 @@ msgid "Rating"
 msgstr "Rating"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:309
-#: ui/albumcovermanager.cpp:221
+#: ui/albumcovermanager.cpp:212
 msgid "Really cancel?"
 msgstr "Really cancel?"
 
@@ -4198,11 +4198,11 @@ msgstr "Samplerate"
 msgid "Save .mood files in your music library"
 msgstr "Save .mood files in your music library"
 
-#: ui/albumcoverchoicecontroller.cpp:129
+#: ui/albumcoverchoicecontroller.cpp:131
 msgid "Save album cover"
 msgstr "Save album cover"
 
-#: ui/albumcoverchoicecontroller.cpp:62
+#: ui/albumcoverchoicecontroller.cpp:64
 msgid "Save cover to disk..."
 msgstr "Save cover to disk..."
 
@@ -4311,7 +4311,7 @@ msgstr "Search Subsonic"
 msgid "Search automatically"
 msgstr "Search automatically"
 
-#: ui/albumcoverchoicecontroller.cpp:66
+#: ui/albumcoverchoicecontroller.cpp:68
 msgid "Search for album covers..."
 msgstr "Search for album covers..."
 
@@ -4826,7 +4826,7 @@ msgstr "Stop playing after track: %1"
 msgid "Stopped"
 msgstr "Stopped"
 
-#: core/song.cpp:431
+#: core/song.cpp:435
 msgid "Stream"
 msgstr "Stream"
 
@@ -5184,7 +5184,7 @@ msgstr "Transcoding %1 files using %2 threads"
 msgid "Transcoding options"
 msgstr "Transcoding options"
 
-#: core/song.cpp:426
+#: core/song.cpp:430
 msgid "TrueAudio"
 msgstr "TrueAudio"
 
@@ -5226,7 +5226,7 @@ msgstr "Unable to connect"
 msgid "Unable to download %1 (%2)"
 msgstr "Unable to download %1 (%2)"
 
-#: core/song.cpp:435 library/librarymodel.cpp:374 library/librarymodel.cpp:379
+#: core/song.cpp:439 library/librarymodel.cpp:374 library/librarymodel.cpp:379
 #: library/librarymodel.cpp:383 library/librarymodel.cpp:1156
 #: library/savedgroupingmanager.cpp:103 playlist/playlistdelegates.cpp:305
 #: playlist/playlistmanager.cpp:515 playlist/playlistmanager.cpp:516
@@ -5244,7 +5244,7 @@ msgstr "Unknown content-type"
 msgid "Unknown error"
 msgstr "Unknown error"
 
-#: ui/albumcoverchoicecontroller.cpp:69
+#: ui/albumcoverchoicecontroller.cpp:70
 msgid "Unset cover"
 msgstr "Unset cover"
 
@@ -5405,7 +5405,7 @@ msgid "Variable bit rate"
 msgstr "Variable bit rate"
 
 #: globalsearch/globalsearchmodel.cpp:109 library/librarymodel.cpp:300
-#: playlist/playlistmanager.cpp:527 ui/albumcovermanager.cpp:273
+#: playlist/playlistmanager.cpp:527 ui/albumcovermanager.cpp:264
 msgid "Various artists"
 msgstr "Various artists"
 
@@ -5460,7 +5460,7 @@ msgstr "WMA"
 msgid "Warn me when closing a playlist tab"
 msgstr "Warn me when closing a playlist tab"
 
-#: core/song.cpp:424 transcoder/transcoder.cpp:256
+#: core/song.cpp:428 transcoder/transcoder.cpp:256
 msgid "Wav"
 msgstr "Wav"
 
@@ -5544,7 +5544,7 @@ msgstr "Windows Media 40k"
 msgid "Windows Media 64k"
 msgstr "Windows Media 64k"
 
-#: core/song.cpp:404 transcoder/transcoder.cpp:253
+#: core/song.cpp:408 transcoder/transcoder.cpp:253
 msgid "Windows Media audio"
 msgstr "Windows Media audio"
 

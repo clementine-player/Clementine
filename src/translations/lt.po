@@ -129,7 +129,7 @@ msgstr "%1 rasta dainų (rodoma %2)"
 msgid "%1 tracks"
 msgstr "%1 takeliai"
 
-#: ui/albumcovermanager.cpp:470
+#: ui/albumcovermanager.cpp:472
 #, qt-format
 msgid "%1 transferred"
 msgstr "%1 perkelta"
@@ -412,7 +412,7 @@ msgstr "AAC 32k"
 msgid "AAC 64k"
 msgstr "AAC 64k"
 
-#: core/song.cpp:422
+#: core/song.cpp:426
 msgid "AIFF"
 msgstr "AIFF"
 
@@ -420,7 +420,7 @@ msgstr "AIFF"
 msgid "ALL GLORY TO THE HYPNOTOAD"
 msgstr "Šlovė HYPNOTOAD'ui"
 
-#: ui/albumcovermanager.cpp:114 ui/albumcoversearcher.cpp:158
+#: ui/albumcovermanager.cpp:105 ui/albumcoversearcher.cpp:158
 msgid "Abort"
 msgstr "Nutraukti"
 
@@ -700,11 +700,11 @@ msgstr "Albumo viršelis"
 msgid "Album info on jamendo.com..."
 msgstr "Albumo info iš jamendo.com..."
 
-#: ui/albumcovermanager.cpp:138
+#: ui/albumcovermanager.cpp:129
 msgid "Albums with covers"
 msgstr "Albumai su viršeliais"
 
-#: ui/albumcovermanager.cpp:139
+#: ui/albumcovermanager.cpp:130
 msgid "Albums without covers"
 msgstr "Albumai be viršelių"
 
@@ -721,11 +721,11 @@ msgctxt "Label for button to enable/disable Hypnotoad background sound."
 msgid "All Glory to the Hypnotoad!"
 msgstr "Visa šlovė Hypnotoad'ui!"
 
-#: ui/albumcovermanager.cpp:137
+#: ui/albumcovermanager.cpp:128
 msgid "All albums"
 msgstr "Visi albumai"
 
-#: ui/albumcovermanager.cpp:271
+#: ui/albumcovermanager.cpp:262
 msgid "All artists"
 msgstr "Visi atlikėjai"
 
@@ -1048,7 +1048,7 @@ msgstr "Bet šie šaltiniai yra išjungti"
 msgid "Buttons"
 msgstr "Mygtukai"
 
-#: core/song.cpp:428
+#: core/song.cpp:432
 msgid "CDDA"
 msgstr "CDDA"
 
@@ -1287,7 +1287,7 @@ msgstr "Uždaryti vizualizacijas"
 msgid "Closing this window will cancel the download."
 msgstr "Uždarant šį langą bus atšaukti atsisiuntimai."
 
-#: ui/albumcovermanager.cpp:222
+#: ui/albumcovermanager.cpp:213
 msgid "Closing this window will stop searching for album covers."
 msgstr "Uždarant šį langą bus sustabdyta albumo viršelių paieška."
 
@@ -1816,7 +1816,7 @@ msgid "Don't shuffle"
 msgstr "Nemaišyti"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:312
-#: ui/albumcovermanager.cpp:224
+#: ui/albumcovermanager.cpp:215
 msgid "Don't stop!"
 msgstr "Nesustoti!"
 
@@ -2191,11 +2191,11 @@ msgstr "Eksportuoti atsisiųstus viršelius"
 msgid "Export embedded covers"
 msgstr "Eksportuoti įterptus viršelius"
 
-#: ui/albumcovermanager.cpp:789 ui/albumcovermanager.cpp:813
+#: ui/albumcovermanager.cpp:799 ui/albumcovermanager.cpp:823
 msgid "Export finished"
 msgstr "Eksportavimas baigtas"
 
-#: ui/albumcovermanager.cpp:798
+#: ui/albumcovermanager.cpp:808
 #, qt-format
 msgid "Exported %1 covers out of %2 (%3 skipped)"
 msgstr "Eksportuota %1 viršelių iš %2 (%3 praleista)"
@@ -2356,7 +2356,7 @@ msgstr "Pirmas lygis"
 msgid "Fit cover to width"
 msgstr "Pritaikyti viršelį prie pločio"
 
-#: core/song.cpp:406 transcoder/transcoder.cpp:233
+#: core/song.cpp:410 transcoder/transcoder.cpp:233
 msgid "Flac"
 msgstr "Flac"
 
@@ -2498,7 +2498,7 @@ msgstr "Eiti į praeitą grojarasčių kortelę"
 msgid "Google Drive"
 msgstr "Google diskas"
 
-#: covers/coversearchstatisticsdialog.cpp:53 ui/albumcovermanager.cpp:464
+#: covers/coversearchstatisticsdialog.cpp:53 ui/albumcovermanager.cpp:465
 #: ../bin/src/ui_coversearchstatisticsdialog.h:75
 #, qt-format
 msgid "Got %1 covers out of %2 (%3 failed)"
@@ -2959,7 +2959,7 @@ msgstr "Įkelti"
 msgid "Load cover from URL"
 msgstr "Įkelti viršelį iš URL"
 
-#: ui/albumcoverchoicecontroller.cpp:64
+#: ui/albumcoverchoicecontroller.cpp:66
 msgid "Load cover from URL..."
 msgstr "Įkelti viršelį iš URL..."
 
@@ -2967,7 +2967,7 @@ msgstr "Įkelti viršelį iš URL..."
 msgid "Load cover from disk"
 msgstr "Įkelti viršelį iš disko"
 
-#: ui/albumcoverchoicecontroller.cpp:60
+#: ui/albumcoverchoicecontroller.cpp:61
 msgid "Load cover from disk..."
 msgstr "Įkelti viršelį iš disko..."
 
@@ -3080,7 +3080,7 @@ msgstr "Dainos žodžiai iš žymės"
 msgid "M4A AAC"
 msgstr "M4A AAC"
 
-#: core/song.cpp:412 transcoder/transcoder.cpp:238
+#: core/song.cpp:416 transcoder/transcoder.cpp:238
 #: ../bin/src/ui_transcodersettingspage.h:174
 msgid "MP3"
 msgstr "MP3"
@@ -3093,11 +3093,11 @@ msgstr "MP3 256k"
 msgid "MP3 96k"
 msgstr "MP3 96k"
 
-#: core/song.cpp:408
+#: core/song.cpp:412
 msgid "MP4 AAC"
 msgstr "MP4 AAC"
 
-#: core/song.cpp:410
+#: core/song.cpp:414
 msgid "MPC"
 msgstr "MPC"
 
@@ -3364,7 +3364,7 @@ msgstr "Jokio analizatoriaus"
 msgid "No background image"
 msgstr "Išjungti fono paveikslėlį"
 
-#: ui/albumcovermanager.cpp:790
+#: ui/albumcovermanager.cpp:800
 msgid "No covers to export."
 msgstr "Nėra eksportuotinų viršelių."
 
@@ -3459,19 +3459,19 @@ msgstr "OSD peržiūra"
 msgid "Off"
 msgstr "Išjungta"
 
-#: core/song.cpp:414 transcoder/transcoder.cpp:244
+#: core/song.cpp:418 transcoder/transcoder.cpp:244
 msgid "Ogg Flac"
 msgstr "Ogg Flac"
 
-#: core/song.cpp:420 transcoder/transcoder.cpp:250
+#: core/song.cpp:424 transcoder/transcoder.cpp:250
 msgid "Ogg Opus"
 msgstr "Ogg opus"
 
-#: core/song.cpp:416 transcoder/transcoder.cpp:247
+#: core/song.cpp:420 transcoder/transcoder.cpp:247
 msgid "Ogg Speex"
 msgstr "Ogg Speex"
 
-#: core/song.cpp:418 transcoder/transcoder.cpp:241
+#: core/song.cpp:422 transcoder/transcoder.cpp:241
 #: ../bin/src/ui_magnatunedownloaddialog.h:135
 #: ../bin/src/ui_magnatunesettingspage.h:169
 msgid "Ogg Vorbis"
@@ -3972,7 +3972,7 @@ msgid "Rating"
 msgstr "Įvertinimas"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:309
-#: ui/albumcovermanager.cpp:221
+#: ui/albumcovermanager.cpp:212
 msgid "Really cancel?"
 msgstr "Tikrai atšaukti?"
 
@@ -4201,11 +4201,11 @@ msgstr "Išrankosdažnis"
 msgid "Save .mood files in your music library"
 msgstr "Įrašyti .mood failus jūsų fonotekoje"
 
-#: ui/albumcoverchoicecontroller.cpp:129
+#: ui/albumcoverchoicecontroller.cpp:131
 msgid "Save album cover"
 msgstr "Įrašyti albumo viršelį"
 
-#: ui/albumcoverchoicecontroller.cpp:62
+#: ui/albumcoverchoicecontroller.cpp:64
 msgid "Save cover to disk..."
 msgstr "Įrašyti albumo viršelį į diską..."
 
@@ -4314,7 +4314,7 @@ msgstr "Ieškoti subsonic"
 msgid "Search automatically"
 msgstr "Ieškoti automatiškai"
 
-#: ui/albumcoverchoicecontroller.cpp:66
+#: ui/albumcoverchoicecontroller.cpp:68
 msgid "Search for album covers..."
 msgstr "Ieškoti albumo viršelių..."
 
@@ -4829,7 +4829,7 @@ msgstr "Stabdyti grojimą po takelio: %1"
 msgid "Stopped"
 msgstr "Sustabdyta"
 
-#: core/song.cpp:431
+#: core/song.cpp:435
 msgid "Stream"
 msgstr "Srautas"
 
@@ -5187,7 +5187,7 @@ msgstr "Perkoduojami %1 failai naudojant %2 gijų"
 msgid "Transcoding options"
 msgstr "Perkodavimo parinktys"
 
-#: core/song.cpp:426
+#: core/song.cpp:430
 msgid "TrueAudio"
 msgstr "TrueAudio"
 
@@ -5229,7 +5229,7 @@ msgstr "Nepavyko prisijungti"
 msgid "Unable to download %1 (%2)"
 msgstr "Nepavyko atsiųsti %1 (%2)"
 
-#: core/song.cpp:435 library/librarymodel.cpp:374 library/librarymodel.cpp:379
+#: core/song.cpp:439 library/librarymodel.cpp:374 library/librarymodel.cpp:379
 #: library/librarymodel.cpp:383 library/librarymodel.cpp:1156
 #: library/savedgroupingmanager.cpp:103 playlist/playlistdelegates.cpp:305
 #: playlist/playlistmanager.cpp:515 playlist/playlistmanager.cpp:516
@@ -5247,7 +5247,7 @@ msgstr "Nežinomas turinio tipas"
 msgid "Unknown error"
 msgstr "Nežinoma klaida"
 
-#: ui/albumcoverchoicecontroller.cpp:69
+#: ui/albumcoverchoicecontroller.cpp:70
 msgid "Unset cover"
 msgstr "Pašalinti viršelį"
 
@@ -5408,7 +5408,7 @@ msgid "Variable bit rate"
 msgstr "Kintamas bitrate"
 
 #: globalsearch/globalsearchmodel.cpp:109 library/librarymodel.cpp:300
-#: playlist/playlistmanager.cpp:527 ui/albumcovermanager.cpp:273
+#: playlist/playlistmanager.cpp:527 ui/albumcovermanager.cpp:264
 msgid "Various artists"
 msgstr "Įvairūs atlikėjai"
 
@@ -5463,7 +5463,7 @@ msgstr "WMA"
 msgid "Warn me when closing a playlist tab"
 msgstr "Perspėti mane, kai uždaroma grojaraščio kortelė."
 
-#: core/song.cpp:424 transcoder/transcoder.cpp:256
+#: core/song.cpp:428 transcoder/transcoder.cpp:256
 msgid "Wav"
 msgstr "Wav"
 
@@ -5547,7 +5547,7 @@ msgstr "Windows Media 40k"
 msgid "Windows Media 64k"
 msgstr "Windows Media 64k"
 
-#: core/song.cpp:404 transcoder/transcoder.cpp:253
+#: core/song.cpp:408 transcoder/transcoder.cpp:253
 msgid "Windows Media audio"
 msgstr "Windows Media Audio"
 

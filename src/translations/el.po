@@ -140,7 +140,7 @@ msgstr "βρέθηκαν %1 τραγούδια (εμφάνιση %2)"
 msgid "%1 tracks"
 msgstr "%1 κομμάτια"
 
-#: ui/albumcovermanager.cpp:470
+#: ui/albumcovermanager.cpp:472
 #, qt-format
 msgid "%1 transferred"
 msgstr "%1 μεταφέρθηκε"
@@ -423,7 +423,7 @@ msgstr "AAC 32k"
 msgid "AAC 64k"
 msgstr "AAC 64k"
 
-#: core/song.cpp:422
+#: core/song.cpp:426
 msgid "AIFF"
 msgstr "AIFF"
 
@@ -431,7 +431,7 @@ msgstr "AIFF"
 msgid "ALL GLORY TO THE HYPNOTOAD"
 msgstr "ΟΛΗ Η ΔΟΞΑ ΣΤΟΝ HYPNOTOAD"
 
-#: ui/albumcovermanager.cpp:114 ui/albumcoversearcher.cpp:158
+#: ui/albumcovermanager.cpp:105 ui/albumcoversearcher.cpp:158
 msgid "Abort"
 msgstr "Ματαίωση"
 
@@ -711,11 +711,11 @@ msgstr "Εξώφυλλο άλμπουμ"
 msgid "Album info on jamendo.com..."
 msgstr "Πληροφορίες άλμπουμ στο jamendo.com..."
 
-#: ui/albumcovermanager.cpp:138
+#: ui/albumcovermanager.cpp:129
 msgid "Albums with covers"
 msgstr "Άλμπουμ με εξώφυλλα"
 
-#: ui/albumcovermanager.cpp:139
+#: ui/albumcovermanager.cpp:130
 msgid "Albums without covers"
 msgstr "Άλμπουμ χωρίς εξώφυλλα"
 
@@ -732,11 +732,11 @@ msgctxt "Label for button to enable/disable Hypnotoad background sound."
 msgid "All Glory to the Hypnotoad!"
 msgstr "Όλη η δόξα στον Hypnotoad!"
 
-#: ui/albumcovermanager.cpp:137
+#: ui/albumcovermanager.cpp:128
 msgid "All albums"
 msgstr "Όλα τα άλμπουμ"
 
-#: ui/albumcovermanager.cpp:271
+#: ui/albumcovermanager.cpp:262
 msgid "All artists"
 msgstr "Όλοι οι καλλιτέχνες"
 
@@ -1059,7 +1059,7 @@ msgstr "Αλλά αυτές οι πηγές είναι απενεργοποιη�
 msgid "Buttons"
 msgstr "Κουμπιά"
 
-#: core/song.cpp:428
+#: core/song.cpp:432
 msgid "CDDA"
 msgstr "CDDA"
 
@@ -1298,7 +1298,7 @@ msgstr "Κλείσιμο οπτικών εφέ"
 msgid "Closing this window will cancel the download."
 msgstr "Το κλείσιμο του παραθύρου θα ακυρώσει το \"κατέβασμα\"."
 
-#: ui/albumcovermanager.cpp:222
+#: ui/albumcovermanager.cpp:213
 msgid "Closing this window will stop searching for album covers."
 msgstr "Το κλείσιμο του παραθύρου θα σταματήσει την αναζήτηση για εξώφυλλα άλμπουμ."
 
@@ -1827,7 +1827,7 @@ msgid "Don't shuffle"
 msgstr "Χωρίς ανακάτεμα"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:312
-#: ui/albumcovermanager.cpp:224
+#: ui/albumcovermanager.cpp:215
 msgid "Don't stop!"
 msgstr "Μην σταματάς!"
 
@@ -2202,11 +2202,11 @@ msgstr "Εξαγωγή μεταφορτωμένων εξώφυλλων"
 msgid "Export embedded covers"
 msgstr "Εξαγωγή ενσωματωμένων εξώφυλλων"
 
-#: ui/albumcovermanager.cpp:789 ui/albumcovermanager.cpp:813
+#: ui/albumcovermanager.cpp:799 ui/albumcovermanager.cpp:823
 msgid "Export finished"
 msgstr "Η εξαγωγή ολοκληρώθηκε"
 
-#: ui/albumcovermanager.cpp:798
+#: ui/albumcovermanager.cpp:808
 #, qt-format
 msgid "Exported %1 covers out of %2 (%3 skipped)"
 msgstr "Εξαγωγή %1 εξώφυλλων από τα %2 (%3 παραλείφθηκαν)"
@@ -2367,7 +2367,7 @@ msgstr "Πρώτο επίπεδο"
 msgid "Fit cover to width"
 msgstr "Τοποθετήστε το καπάκι για πλάτος"
 
-#: core/song.cpp:406 transcoder/transcoder.cpp:233
+#: core/song.cpp:410 transcoder/transcoder.cpp:233
 msgid "Flac"
 msgstr "Flac"
 
@@ -2509,7 +2509,7 @@ msgstr "Μετάβαση στην προηγούμενη καρτέλα της �
 msgid "Google Drive"
 msgstr "Google Drive"
 
-#: covers/coversearchstatisticsdialog.cpp:53 ui/albumcovermanager.cpp:464
+#: covers/coversearchstatisticsdialog.cpp:53 ui/albumcovermanager.cpp:465
 #: ../bin/src/ui_coversearchstatisticsdialog.h:75
 #, qt-format
 msgid "Got %1 covers out of %2 (%3 failed)"
@@ -2970,7 +2970,7 @@ msgstr "Φόρτωση"
 msgid "Load cover from URL"
 msgstr "Φόρτωμα εξώφυλλου από διεύθυνση (URL)"
 
-#: ui/albumcoverchoicecontroller.cpp:64
+#: ui/albumcoverchoicecontroller.cpp:66
 msgid "Load cover from URL..."
 msgstr "Φόρτωμα εξώφυλλου από διεύθυνση (URL)..."
 
@@ -2978,7 +2978,7 @@ msgstr "Φόρτωμα εξώφυλλου από διεύθυνση (URL)..."
 msgid "Load cover from disk"
 msgstr "Φόρτωση εξώφυλλου από τον δίσκο"
 
-#: ui/albumcoverchoicecontroller.cpp:60
+#: ui/albumcoverchoicecontroller.cpp:61
 msgid "Load cover from disk..."
 msgstr "Φόρτωση εξώφυλλου από τον δίσκο..."
 
@@ -3091,7 +3091,7 @@ msgstr "Στίχοι από την ετικέτα"
 msgid "M4A AAC"
 msgstr "M4A AAC"
 
-#: core/song.cpp:412 transcoder/transcoder.cpp:238
+#: core/song.cpp:416 transcoder/transcoder.cpp:238
 #: ../bin/src/ui_transcodersettingspage.h:174
 msgid "MP3"
 msgstr "MP3"
@@ -3104,11 +3104,11 @@ msgstr "MP3 256k"
 msgid "MP3 96k"
 msgstr "MP3 96k"
 
-#: core/song.cpp:408
+#: core/song.cpp:412
 msgid "MP4 AAC"
 msgstr "MP4 AAC"
 
-#: core/song.cpp:410
+#: core/song.cpp:414
 msgid "MPC"
 msgstr "MPC"
 
@@ -3375,7 +3375,7 @@ msgstr "Χωρίς αναλυτή"
 msgid "No background image"
 msgstr "Χωρίς εικόνα φόντου"
 
-#: ui/albumcovermanager.cpp:790
+#: ui/albumcovermanager.cpp:800
 msgid "No covers to export."
 msgstr "Κανενα καβερ δεν επιλεχθηκε για εξαγωγη."
 
@@ -3470,19 +3470,19 @@ msgstr "Προ-επισκόπηση OSD"
 msgid "Off"
 msgstr "Απενεργοποίηση"
 
-#: core/song.cpp:414 transcoder/transcoder.cpp:244
+#: core/song.cpp:418 transcoder/transcoder.cpp:244
 msgid "Ogg Flac"
 msgstr "Ogg Flac"
 
-#: core/song.cpp:420 transcoder/transcoder.cpp:250
+#: core/song.cpp:424 transcoder/transcoder.cpp:250
 msgid "Ogg Opus"
 msgstr "Ogg Opus"
 
-#: core/song.cpp:416 transcoder/transcoder.cpp:247
+#: core/song.cpp:420 transcoder/transcoder.cpp:247
 msgid "Ogg Speex"
 msgstr "Ogg Speex"
 
-#: core/song.cpp:418 transcoder/transcoder.cpp:241
+#: core/song.cpp:422 transcoder/transcoder.cpp:241
 #: ../bin/src/ui_magnatunedownloaddialog.h:135
 #: ../bin/src/ui_magnatunesettingspage.h:169
 msgid "Ogg Vorbis"
@@ -3983,7 +3983,7 @@ msgid "Rating"
 msgstr "Βαθμολόγηση"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:309
-#: ui/albumcovermanager.cpp:221
+#: ui/albumcovermanager.cpp:212
 msgid "Really cancel?"
 msgstr "Ακύρωση στ' αλήθεια;"
 
@@ -4212,11 +4212,11 @@ msgstr "Δειγματοληψία"
 msgid "Save .mood files in your music library"
 msgstr "Αποθήκευση .mood αρχείων στην βιβλιοθήκη σας"
 
-#: ui/albumcoverchoicecontroller.cpp:129
+#: ui/albumcoverchoicecontroller.cpp:131
 msgid "Save album cover"
 msgstr "Αποθήκευση του εξώφυλλου του άλμπουμ"
 
-#: ui/albumcoverchoicecontroller.cpp:62
+#: ui/albumcoverchoicecontroller.cpp:64
 msgid "Save cover to disk..."
 msgstr "Αποθ. εξώφυλλου στον δίσκο..."
 
@@ -4325,7 +4325,7 @@ msgstr "Αναζήτηση στο Subsonic"
 msgid "Search automatically"
 msgstr "Αναζήτηση αυτόματα"
 
-#: ui/albumcoverchoicecontroller.cpp:66
+#: ui/albumcoverchoicecontroller.cpp:68
 msgid "Search for album covers..."
 msgstr "Αναζήτηση για εξώφυλλο άλμπουμ..."
 
@@ -4840,7 +4840,7 @@ msgstr "Διακοπή αναπαραγωγής μετά από διαδρομή
 msgid "Stopped"
 msgstr "Σταματημένο"
 
-#: core/song.cpp:431
+#: core/song.cpp:435
 msgid "Stream"
 msgstr "Ροή"
 
@@ -5198,7 +5198,7 @@ msgstr "Διακωδικοποίηση %1 αρχείων χρησιμοποιώ�
 msgid "Transcoding options"
 msgstr "Επιλογές διακωδικοποίησης"
 
-#: core/song.cpp:426
+#: core/song.cpp:430
 msgid "TrueAudio"
 msgstr "TrueAudio"
 
@@ -5240,7 +5240,7 @@ msgstr "Αδυναμία σύνδεσης"
 msgid "Unable to download %1 (%2)"
 msgstr "Αδυναμία λήψης του %1 (%2)"
 
-#: core/song.cpp:435 library/librarymodel.cpp:374 library/librarymodel.cpp:379
+#: core/song.cpp:439 library/librarymodel.cpp:374 library/librarymodel.cpp:379
 #: library/librarymodel.cpp:383 library/librarymodel.cpp:1156
 #: library/savedgroupingmanager.cpp:103 playlist/playlistdelegates.cpp:305
 #: playlist/playlistmanager.cpp:515 playlist/playlistmanager.cpp:516
@@ -5258,7 +5258,7 @@ msgstr "Άγνωστος τύπος περιεχομένου"
 msgid "Unknown error"
 msgstr "Άγνωστο σφάλμα"
 
-#: ui/albumcoverchoicecontroller.cpp:69
+#: ui/albumcoverchoicecontroller.cpp:70
 msgid "Unset cover"
 msgstr "Αφαίρεση εξώφυλλου"
 
@@ -5419,7 +5419,7 @@ msgid "Variable bit rate"
 msgstr "Μεταβαλλόμενος ρυθμός bit"
 
 #: globalsearch/globalsearchmodel.cpp:109 library/librarymodel.cpp:300
-#: playlist/playlistmanager.cpp:527 ui/albumcovermanager.cpp:273
+#: playlist/playlistmanager.cpp:527 ui/albumcovermanager.cpp:264
 msgid "Various artists"
 msgstr "Διάφοροι καλλιτέχνες"
 
@@ -5474,7 +5474,7 @@ msgstr "WMA"
 msgid "Warn me when closing a playlist tab"
 msgstr "Προειδοποίηση κατά το κλείσιμο μίας λίστας αναπαραγωγής"
 
-#: core/song.cpp:424 transcoder/transcoder.cpp:256
+#: core/song.cpp:428 transcoder/transcoder.cpp:256
 msgid "Wav"
 msgstr "Wav"
 
@@ -5558,7 +5558,7 @@ msgstr "Windows Media 40k"
 msgid "Windows Media 64k"
 msgstr "Windows Media 64k"
 
-#: core/song.cpp:404 transcoder/transcoder.cpp:253
+#: core/song.cpp:408 transcoder/transcoder.cpp:253
 msgid "Windows Media audio"
 msgstr "Windows Media audio"
 

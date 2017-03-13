@@ -131,7 +131,7 @@ msgstr "%1 faixas encontradas (a mostrar %2)"
 msgid "%1 tracks"
 msgstr "%1 faixas"
 
-#: ui/albumcovermanager.cpp:470
+#: ui/albumcovermanager.cpp:472
 #, qt-format
 msgid "%1 transferred"
 msgstr "%1 transferidas"
@@ -414,7 +414,7 @@ msgstr "AAC 32k"
 msgid "AAC 64k"
 msgstr "AAC 64k"
 
-#: core/song.cpp:422
+#: core/song.cpp:426
 msgid "AIFF"
 msgstr "AIFF"
 
@@ -422,7 +422,7 @@ msgstr "AIFF"
 msgid "ALL GLORY TO THE HYPNOTOAD"
 msgstr "ALL GLORY TO THE HYPNOTOAD"
 
-#: ui/albumcovermanager.cpp:114 ui/albumcoversearcher.cpp:158
+#: ui/albumcovermanager.cpp:105 ui/albumcoversearcher.cpp:158
 msgid "Abort"
 msgstr "Abortar"
 
@@ -702,11 +702,11 @@ msgstr "Capa do álbum"
 msgid "Album info on jamendo.com..."
 msgstr "Informações do álbum em jamendo.com..."
 
-#: ui/albumcovermanager.cpp:138
+#: ui/albumcovermanager.cpp:129
 msgid "Albums with covers"
 msgstr "Álbuns com capas"
 
-#: ui/albumcovermanager.cpp:139
+#: ui/albumcovermanager.cpp:130
 msgid "Albums without covers"
 msgstr "Álbuns sem capas"
 
@@ -723,11 +723,11 @@ msgctxt "Label for button to enable/disable Hypnotoad background sound."
 msgid "All Glory to the Hypnotoad!"
 msgstr "All Glory to the Hypnotoad!"
 
-#: ui/albumcovermanager.cpp:137
+#: ui/albumcovermanager.cpp:128
 msgid "All albums"
 msgstr "Todos os álbuns"
 
-#: ui/albumcovermanager.cpp:271
+#: ui/albumcovermanager.cpp:262
 msgid "All artists"
 msgstr "Todos os artistas"
 
@@ -1050,7 +1050,7 @@ msgstr "Mas estas fontes estão inativas:"
 msgid "Buttons"
 msgstr "Botões"
 
-#: core/song.cpp:428
+#: core/song.cpp:432
 msgid "CDDA"
 msgstr "CDDA"
 
@@ -1289,7 +1289,7 @@ msgstr "Fechar visualização"
 msgid "Closing this window will cancel the download."
 msgstr "Se fechar esta janela, irá cancelar a descarga."
 
-#: ui/albumcovermanager.cpp:222
+#: ui/albumcovermanager.cpp:213
 msgid "Closing this window will stop searching for album covers."
 msgstr "Se fechar esta janela, irá parar a pesquisa das capas de álbum."
 
@@ -1818,7 +1818,7 @@ msgid "Don't shuffle"
 msgstr "Não desordenar"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:312
-#: ui/albumcovermanager.cpp:224
+#: ui/albumcovermanager.cpp:215
 msgid "Don't stop!"
 msgstr "Não parar!"
 
@@ -2193,11 +2193,11 @@ msgstr "Exportar capas descarregadas"
 msgid "Export embedded covers"
 msgstr "Exportar capas incorporadas"
 
-#: ui/albumcovermanager.cpp:789 ui/albumcovermanager.cpp:813
+#: ui/albumcovermanager.cpp:799 ui/albumcovermanager.cpp:823
 msgid "Export finished"
 msgstr "Exportação terminada"
 
-#: ui/albumcovermanager.cpp:798
+#: ui/albumcovermanager.cpp:808
 #, qt-format
 msgid "Exported %1 covers out of %2 (%3 skipped)"
 msgstr "Exportada(s) %1 de %2 capa(s) (%3 ignoradas)"
@@ -2358,7 +2358,7 @@ msgstr "Primeiro nível"
 msgid "Fit cover to width"
 msgstr "Ajustar capa à largura"
 
-#: core/song.cpp:406 transcoder/transcoder.cpp:233
+#: core/song.cpp:410 transcoder/transcoder.cpp:233
 msgid "Flac"
 msgstr "Flac"
 
@@ -2500,7 +2500,7 @@ msgstr "Ir para o separador anterior"
 msgid "Google Drive"
 msgstr "Google Drive"
 
-#: covers/coversearchstatisticsdialog.cpp:53 ui/albumcovermanager.cpp:464
+#: covers/coversearchstatisticsdialog.cpp:53 ui/albumcovermanager.cpp:465
 #: ../bin/src/ui_coversearchstatisticsdialog.h:75
 #, qt-format
 msgid "Got %1 covers out of %2 (%3 failed)"
@@ -2961,7 +2961,7 @@ msgstr "Carregar"
 msgid "Load cover from URL"
 msgstr "Carregar capa de álbum do URL"
 
-#: ui/albumcoverchoicecontroller.cpp:64
+#: ui/albumcoverchoicecontroller.cpp:66
 msgid "Load cover from URL..."
 msgstr "Carregar capa de álbum do URL..."
 
@@ -2969,7 +2969,7 @@ msgstr "Carregar capa de álbum do URL..."
 msgid "Load cover from disk"
 msgstr "Carregar capa de álbum no disco"
 
-#: ui/albumcoverchoicecontroller.cpp:60
+#: ui/albumcoverchoicecontroller.cpp:61
 msgid "Load cover from disk..."
 msgstr "Carregar capa de álbum no disco..."
 
@@ -3082,7 +3082,7 @@ msgstr "Letra existente nas etiquetas"
 msgid "M4A AAC"
 msgstr "M4A AAC"
 
-#: core/song.cpp:412 transcoder/transcoder.cpp:238
+#: core/song.cpp:416 transcoder/transcoder.cpp:238
 #: ../bin/src/ui_transcodersettingspage.h:174
 msgid "MP3"
 msgstr "MP3"
@@ -3095,11 +3095,11 @@ msgstr "MP3 256k"
 msgid "MP3 96k"
 msgstr "MP3 96k"
 
-#: core/song.cpp:408
+#: core/song.cpp:412
 msgid "MP4 AAC"
 msgstr "MP4 AAC"
 
-#: core/song.cpp:410
+#: core/song.cpp:414
 msgid "MPC"
 msgstr "MPC"
 
@@ -3366,7 +3366,7 @@ msgstr "Sem analisador"
 msgid "No background image"
 msgstr "Sem imagem de fundo"
 
-#: ui/albumcovermanager.cpp:790
+#: ui/albumcovermanager.cpp:800
 msgid "No covers to export."
 msgstr "Nenhuma capa para exportar"
 
@@ -3461,19 +3461,19 @@ msgstr "Antevisão da notificação"
 msgid "Off"
 msgstr "Desligado"
 
-#: core/song.cpp:414 transcoder/transcoder.cpp:244
+#: core/song.cpp:418 transcoder/transcoder.cpp:244
 msgid "Ogg Flac"
 msgstr "Ogg Flac"
 
-#: core/song.cpp:420 transcoder/transcoder.cpp:250
+#: core/song.cpp:424 transcoder/transcoder.cpp:250
 msgid "Ogg Opus"
 msgstr "Ogg Opus"
 
-#: core/song.cpp:416 transcoder/transcoder.cpp:247
+#: core/song.cpp:420 transcoder/transcoder.cpp:247
 msgid "Ogg Speex"
 msgstr "Ogg Speex"
 
-#: core/song.cpp:418 transcoder/transcoder.cpp:241
+#: core/song.cpp:422 transcoder/transcoder.cpp:241
 #: ../bin/src/ui_magnatunedownloaddialog.h:135
 #: ../bin/src/ui_magnatunesettingspage.h:169
 msgid "Ogg Vorbis"
@@ -3974,7 +3974,7 @@ msgid "Rating"
 msgstr "Avaliação"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:309
-#: ui/albumcovermanager.cpp:221
+#: ui/albumcovermanager.cpp:212
 msgid "Really cancel?"
 msgstr "Realmente cancelar?"
 
@@ -4203,11 +4203,11 @@ msgstr "Frequência"
 msgid "Save .mood files in your music library"
 msgstr "Guardar ficheiros .mood na coleção de faixas"
 
-#: ui/albumcoverchoicecontroller.cpp:129
+#: ui/albumcoverchoicecontroller.cpp:131
 msgid "Save album cover"
 msgstr "Guardar capa de álbum"
 
-#: ui/albumcoverchoicecontroller.cpp:62
+#: ui/albumcoverchoicecontroller.cpp:64
 msgid "Save cover to disk..."
 msgstr "Guardar capa de álbum no disco..."
 
@@ -4316,7 +4316,7 @@ msgstr "Pesquisar no Subsconic"
 msgid "Search automatically"
 msgstr "Pesquisar automaticamente"
 
-#: ui/albumcoverchoicecontroller.cpp:66
+#: ui/albumcoverchoicecontroller.cpp:68
 msgid "Search for album covers..."
 msgstr "Pesquisar capas de álbuns..."
 
@@ -4831,7 +4831,7 @@ msgstr "Parar reprodução após a faixa: %1"
 msgid "Stopped"
 msgstr "Parado"
 
-#: core/song.cpp:431
+#: core/song.cpp:435
 msgid "Stream"
 msgstr "Emissão"
 
@@ -5189,7 +5189,7 @@ msgstr "A converter %1 ficheiros com %2 processos"
 msgid "Transcoding options"
 msgstr "Opções de conversão"
 
-#: core/song.cpp:426
+#: core/song.cpp:430
 msgid "TrueAudio"
 msgstr "TrueAudio"
 
@@ -5231,7 +5231,7 @@ msgstr "Ligação não estabelecida"
 msgid "Unable to download %1 (%2)"
 msgstr "Incapaz de descarregar %1 (%2)"
 
-#: core/song.cpp:435 library/librarymodel.cpp:374 library/librarymodel.cpp:379
+#: core/song.cpp:439 library/librarymodel.cpp:374 library/librarymodel.cpp:379
 #: library/librarymodel.cpp:383 library/librarymodel.cpp:1156
 #: library/savedgroupingmanager.cpp:103 playlist/playlistdelegates.cpp:305
 #: playlist/playlistmanager.cpp:515 playlist/playlistmanager.cpp:516
@@ -5249,7 +5249,7 @@ msgstr "Conteúdo desconhecido"
 msgid "Unknown error"
 msgstr "Erro desconhecido"
 
-#: ui/albumcoverchoicecontroller.cpp:69
+#: ui/albumcoverchoicecontroller.cpp:70
 msgid "Unset cover"
 msgstr "Sem capa"
 
@@ -5410,7 +5410,7 @@ msgid "Variable bit rate"
 msgstr "Taxa de dados variável"
 
 #: globalsearch/globalsearchmodel.cpp:109 library/librarymodel.cpp:300
-#: playlist/playlistmanager.cpp:527 ui/albumcovermanager.cpp:273
+#: playlist/playlistmanager.cpp:527 ui/albumcovermanager.cpp:264
 msgid "Various artists"
 msgstr "Vários artistas"
 
@@ -5465,7 +5465,7 @@ msgstr "WMA"
 msgid "Warn me when closing a playlist tab"
 msgstr "Avisar ao fechar um separador de lista de reprodução"
 
-#: core/song.cpp:424 transcoder/transcoder.cpp:256
+#: core/song.cpp:428 transcoder/transcoder.cpp:256
 msgid "Wav"
 msgstr "Wav"
 
@@ -5549,7 +5549,7 @@ msgstr "Windows Media 40k"
 msgid "Windows Media 64k"
 msgstr "Windows Media 64k"
 
-#: core/song.cpp:404 transcoder/transcoder.cpp:253
+#: core/song.cpp:408 transcoder/transcoder.cpp:253
 msgid "Windows Media audio"
 msgstr "Windows Media Áudio"
 

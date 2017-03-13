@@ -127,7 +127,7 @@ msgstr "%1 песама пронађено (приказујем %2)"
 msgid "%1 tracks"
 msgstr "%1 нумера"
 
-#: ui/albumcovermanager.cpp:470
+#: ui/albumcovermanager.cpp:472
 #, qt-format
 msgid "%1 transferred"
 msgstr "%1 пребачено"
@@ -410,7 +410,7 @@ msgstr "ААЦ 32k"
 msgid "AAC 64k"
 msgstr "ААЦ 64k"
 
-#: core/song.cpp:422
+#: core/song.cpp:426
 msgid "AIFF"
 msgstr "АИФФ"
 
@@ -418,7 +418,7 @@ msgstr "АИФФ"
 msgid "ALL GLORY TO THE HYPNOTOAD"
 msgstr "СЛАВА ХИПНОЖАПЦУ"
 
-#: ui/albumcovermanager.cpp:114 ui/albumcoversearcher.cpp:158
+#: ui/albumcovermanager.cpp:105 ui/albumcoversearcher.cpp:158
 msgid "Abort"
 msgstr "Прекини"
 
@@ -698,11 +698,11 @@ msgstr "Омот албума"
 msgid "Album info on jamendo.com..."
 msgstr "Подаци албума са Џаменда..."
 
-#: ui/albumcovermanager.cpp:138
+#: ui/albumcovermanager.cpp:129
 msgid "Albums with covers"
 msgstr "Албуми са омотима"
 
-#: ui/albumcovermanager.cpp:139
+#: ui/albumcovermanager.cpp:130
 msgid "Albums without covers"
 msgstr "Албуми без омота"
 
@@ -719,11 +719,11 @@ msgctxt "Label for button to enable/disable Hypnotoad background sound."
 msgid "All Glory to the Hypnotoad!"
 msgstr "Слава Хипножапцу!"
 
-#: ui/albumcovermanager.cpp:137
+#: ui/albumcovermanager.cpp:128
 msgid "All albums"
 msgstr "Сви албуми"
 
-#: ui/albumcovermanager.cpp:271
+#: ui/albumcovermanager.cpp:262
 msgid "All artists"
 msgstr "Сви извођачи"
 
@@ -1046,7 +1046,7 @@ msgstr "али ови извори су онемогућени:"
 msgid "Buttons"
 msgstr "дугмад"
 
-#: core/song.cpp:428
+#: core/song.cpp:432
 msgid "CDDA"
 msgstr "ЦДДА"
 
@@ -1285,7 +1285,7 @@ msgstr "Затвори визуелизацију"
 msgid "Closing this window will cancel the download."
 msgstr "Затварањем овог прозора прекинућете преузимање."
 
-#: ui/albumcovermanager.cpp:222
+#: ui/albumcovermanager.cpp:213
 msgid "Closing this window will stop searching for album covers."
 msgstr "Затварањем овог прозора прекинућете потрагу за омотима албума."
 
@@ -1814,7 +1814,7 @@ msgid "Don't shuffle"
 msgstr "Не пуштај насумично"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:312
-#: ui/albumcovermanager.cpp:224
+#: ui/albumcovermanager.cpp:215
 msgid "Don't stop!"
 msgstr "Не заустављај!"
 
@@ -2189,11 +2189,11 @@ msgstr "Извези преузете омоте"
 msgid "Export embedded covers"
 msgstr "Извези уграђене омоте"
 
-#: ui/albumcovermanager.cpp:789 ui/albumcovermanager.cpp:813
+#: ui/albumcovermanager.cpp:799 ui/albumcovermanager.cpp:823
 msgid "Export finished"
 msgstr "Извоз завршен"
 
-#: ui/albumcovermanager.cpp:798
+#: ui/albumcovermanager.cpp:808
 #, qt-format
 msgid "Exported %1 covers out of %2 (%3 skipped)"
 msgstr "Извезено %1 омота од %2 (%3 прескочено)"
@@ -2354,7 +2354,7 @@ msgstr "Први ниво"
 msgid "Fit cover to width"
 msgstr "Уклопи омот по ширини"
 
-#: core/song.cpp:406 transcoder/transcoder.cpp:233
+#: core/song.cpp:410 transcoder/transcoder.cpp:233
 msgid "Flac"
 msgstr "ФЛАЦ"
 
@@ -2496,7 +2496,7 @@ msgstr "Иди на претходни језичак листе"
 msgid "Google Drive"
 msgstr "Гугл Драјв"
 
-#: covers/coversearchstatisticsdialog.cpp:53 ui/albumcovermanager.cpp:464
+#: covers/coversearchstatisticsdialog.cpp:53 ui/albumcovermanager.cpp:465
 #: ../bin/src/ui_coversearchstatisticsdialog.h:75
 #, qt-format
 msgid "Got %1 covers out of %2 (%3 failed)"
@@ -2957,7 +2957,7 @@ msgstr "Учитај"
 msgid "Load cover from URL"
 msgstr "Учитавање омота са УРЛ-а"
 
-#: ui/albumcoverchoicecontroller.cpp:64
+#: ui/albumcoverchoicecontroller.cpp:66
 msgid "Load cover from URL..."
 msgstr "Учитај омот са УРЛ-а..."
 
@@ -2965,7 +2965,7 @@ msgstr "Учитај омот са УРЛ-а..."
 msgid "Load cover from disk"
 msgstr "Учитавање омота са диска"
 
-#: ui/albumcoverchoicecontroller.cpp:60
+#: ui/albumcoverchoicecontroller.cpp:61
 msgid "Load cover from disk..."
 msgstr "Учитај омот са диска..."
 
@@ -3078,7 +3078,7 @@ msgstr "Стихови из ознаке"
 msgid "M4A AAC"
 msgstr "М4А ААЦ"
 
-#: core/song.cpp:412 transcoder/transcoder.cpp:238
+#: core/song.cpp:416 transcoder/transcoder.cpp:238
 #: ../bin/src/ui_transcodersettingspage.h:174
 msgid "MP3"
 msgstr "MП3"
@@ -3091,11 +3091,11 @@ msgstr "МП3 256k"
 msgid "MP3 96k"
 msgstr "МП3 96k"
 
-#: core/song.cpp:408
+#: core/song.cpp:412
 msgid "MP4 AAC"
 msgstr "МП4 ААЦ"
 
-#: core/song.cpp:410
+#: core/song.cpp:414
 msgid "MPC"
 msgstr "МПЦ"
 
@@ -3362,7 +3362,7 @@ msgstr "Без анализатора"
 msgid "No background image"
 msgstr "Без слике позадине"
 
-#: ui/albumcovermanager.cpp:790
+#: ui/albumcovermanager.cpp:800
 msgid "No covers to export."
 msgstr "Нема омота за извоз."
 
@@ -3457,19 +3457,19 @@ msgstr "ОСД преглед"
 msgid "Off"
 msgstr "искључено"
 
-#: core/song.cpp:414 transcoder/transcoder.cpp:244
+#: core/song.cpp:418 transcoder/transcoder.cpp:244
 msgid "Ogg Flac"
 msgstr "ОГГ ФЛАЦ"
 
-#: core/song.cpp:420 transcoder/transcoder.cpp:250
+#: core/song.cpp:424 transcoder/transcoder.cpp:250
 msgid "Ogg Opus"
 msgstr "ОГГ Опус"
 
-#: core/song.cpp:416 transcoder/transcoder.cpp:247
+#: core/song.cpp:420 transcoder/transcoder.cpp:247
 msgid "Ogg Speex"
 msgstr "ОГГ Спикс"
 
-#: core/song.cpp:418 transcoder/transcoder.cpp:241
+#: core/song.cpp:422 transcoder/transcoder.cpp:241
 #: ../bin/src/ui_magnatunedownloaddialog.h:135
 #: ../bin/src/ui_magnatunesettingspage.h:169
 msgid "Ogg Vorbis"
@@ -3970,7 +3970,7 @@ msgid "Rating"
 msgstr "оцена"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:309
-#: ui/albumcovermanager.cpp:221
+#: ui/albumcovermanager.cpp:212
 msgid "Really cancel?"
 msgstr "Заиста одустајете?"
 
@@ -4199,11 +4199,11 @@ msgstr "узорковање"
 msgid "Save .mood files in your music library"
 msgstr "Сачувај .mood фајлове у музичкој библиотеци"
 
-#: ui/albumcoverchoicecontroller.cpp:129
+#: ui/albumcoverchoicecontroller.cpp:131
 msgid "Save album cover"
 msgstr "Уписивање омота албума"
 
-#: ui/albumcoverchoicecontroller.cpp:62
+#: ui/albumcoverchoicecontroller.cpp:64
 msgid "Save cover to disk..."
 msgstr "Сачувај омот на диск..."
 
@@ -4312,7 +4312,7 @@ msgstr "Тражи на Субсонику"
 msgid "Search automatically"
 msgstr "Тражи аутоматски"
 
-#: ui/albumcoverchoicecontroller.cpp:66
+#: ui/albumcoverchoicecontroller.cpp:68
 msgid "Search for album covers..."
 msgstr "Тражи омоте албума..."
 
@@ -4827,7 +4827,7 @@ msgstr "Заустави пуштање после нумере: %1"
 msgid "Stopped"
 msgstr "Заустављено"
 
-#: core/song.cpp:431
+#: core/song.cpp:435
 msgid "Stream"
 msgstr "Ток"
 
@@ -5185,7 +5185,7 @@ msgstr "Прекодирам %1 фајлова користећи %2 ниски"
 msgid "Transcoding options"
 msgstr "Опције прекодирања"
 
-#: core/song.cpp:426
+#: core/song.cpp:430
 msgid "TrueAudio"
 msgstr "ТруеАудио"
 
@@ -5227,7 +5227,7 @@ msgstr "Не могу да се повежем"
 msgid "Unable to download %1 (%2)"
 msgstr "Не могу да преузмем %1 (%2)"
 
-#: core/song.cpp:435 library/librarymodel.cpp:374 library/librarymodel.cpp:379
+#: core/song.cpp:439 library/librarymodel.cpp:374 library/librarymodel.cpp:379
 #: library/librarymodel.cpp:383 library/librarymodel.cpp:1156
 #: library/savedgroupingmanager.cpp:103 playlist/playlistdelegates.cpp:305
 #: playlist/playlistmanager.cpp:515 playlist/playlistmanager.cpp:516
@@ -5245,7 +5245,7 @@ msgstr "Непознат тип садржаја"
 msgid "Unknown error"
 msgstr "Непозната грешка"
 
-#: ui/albumcoverchoicecontroller.cpp:69
+#: ui/albumcoverchoicecontroller.cpp:70
 msgid "Unset cover"
 msgstr "Уклони омот"
 
@@ -5406,7 +5406,7 @@ msgid "Variable bit rate"
 msgstr "Промењив битски проток"
 
 #: globalsearch/globalsearchmodel.cpp:109 library/librarymodel.cpp:300
-#: playlist/playlistmanager.cpp:527 ui/albumcovermanager.cpp:273
+#: playlist/playlistmanager.cpp:527 ui/albumcovermanager.cpp:264
 msgid "Various artists"
 msgstr "Разни извођачи"
 
@@ -5461,7 +5461,7 @@ msgstr "ВМА"
 msgid "Warn me when closing a playlist tab"
 msgstr "Упозори ме приликом затварања језичка листе нумера"
 
-#: core/song.cpp:424 transcoder/transcoder.cpp:256
+#: core/song.cpp:428 transcoder/transcoder.cpp:256
 msgid "Wav"
 msgstr "ВАВ"
 
@@ -5545,7 +5545,7 @@ msgstr "Виндоуз медија 40k"
 msgid "Windows Media 64k"
 msgstr "Виндоуз медија 64k"
 
-#: core/song.cpp:404 transcoder/transcoder.cpp:253
+#: core/song.cpp:408 transcoder/transcoder.cpp:253
 msgid "Windows Media audio"
 msgstr "Виндоуз медија аудио"
 
