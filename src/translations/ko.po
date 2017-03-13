@@ -137,7 +137,7 @@ msgstr "%1개 노래 찾음 (%2개 표시 중)"
 msgid "%1 tracks"
 msgstr "%1개 트랙"
 
-#: ui/albumcovermanager.cpp:470
+#: ui/albumcovermanager.cpp:472
 #, qt-format
 msgid "%1 transferred"
 msgstr "%1 이동됨"
@@ -420,7 +420,7 @@ msgstr "AAC 32k"
 msgid "AAC 64k"
 msgstr "AAC 64k"
 
-#: core/song.cpp:422
+#: core/song.cpp:426
 msgid "AIFF"
 msgstr "AIFF"
 
@@ -428,7 +428,7 @@ msgstr "AIFF"
 msgid "ALL GLORY TO THE HYPNOTOAD"
 msgstr "HYPNOTOAD에 모든 영광을"
 
-#: ui/albumcovermanager.cpp:114 ui/albumcoversearcher.cpp:158
+#: ui/albumcovermanager.cpp:105 ui/albumcoversearcher.cpp:158
 msgid "Abort"
 msgstr "중단"
 
@@ -708,11 +708,11 @@ msgstr "앨범 표지"
 msgid "Album info on jamendo.com..."
 msgstr " jamendo.com 앨범 정보..."
 
-#: ui/albumcovermanager.cpp:138
+#: ui/albumcovermanager.cpp:129
 msgid "Albums with covers"
 msgstr "앨범 표지가 있는 앨범"
 
-#: ui/albumcovermanager.cpp:139
+#: ui/albumcovermanager.cpp:130
 msgid "Albums without covers"
 msgstr "앨범 표지가 없는 앨범"
 
@@ -729,11 +729,11 @@ msgctxt "Label for button to enable/disable Hypnotoad background sound."
 msgid "All Glory to the Hypnotoad!"
 msgstr "Hypnotoad에 모든 영광을!"
 
-#: ui/albumcovermanager.cpp:137
+#: ui/albumcovermanager.cpp:128
 msgid "All albums"
 msgstr "모든 앨범"
 
-#: ui/albumcovermanager.cpp:271
+#: ui/albumcovermanager.cpp:262
 msgid "All artists"
 msgstr "모든 음악가"
 
@@ -1056,7 +1056,7 @@ msgstr "하지만 다음 출처는 사용할 수 없습니다:"
 msgid "Buttons"
 msgstr "버튼"
 
-#: core/song.cpp:428
+#: core/song.cpp:432
 msgid "CDDA"
 msgstr "CDDA"
 
@@ -1295,7 +1295,7 @@ msgstr "시각화 닫기"
 msgid "Closing this window will cancel the download."
 msgstr "이 창을 닫으면 다운로드가 취소됩니다."
 
-#: ui/albumcovermanager.cpp:222
+#: ui/albumcovermanager.cpp:213
 msgid "Closing this window will stop searching for album covers."
 msgstr "이 창을 닫으면 앨범 표지 검색이 중지됩니다."
 
@@ -1824,7 +1824,7 @@ msgid "Don't shuffle"
 msgstr "섞지 않기"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:312
-#: ui/albumcovermanager.cpp:224
+#: ui/albumcovermanager.cpp:215
 msgid "Don't stop!"
 msgstr "멈추지 마세요!"
 
@@ -2199,11 +2199,11 @@ msgstr "다운로드된 커버 내보내기"
 msgid "Export embedded covers"
 msgstr "내장된 커버 내보내기"
 
-#: ui/albumcovermanager.cpp:789 ui/albumcovermanager.cpp:813
+#: ui/albumcovermanager.cpp:799 ui/albumcovermanager.cpp:823
 msgid "Export finished"
 msgstr "내보내기 완료"
 
-#: ui/albumcovermanager.cpp:798
+#: ui/albumcovermanager.cpp:808
 #, qt-format
 msgid "Exported %1 covers out of %2 (%3 skipped)"
 msgstr "%2개의 앨범 표지중 %1개 내보냄. (%3개 건너뜀)"
@@ -2364,7 +2364,7 @@ msgstr "첫 단계"
 msgid "Fit cover to width"
 msgstr "앨범 커버를 너비에 맞춤"
 
-#: core/song.cpp:406 transcoder/transcoder.cpp:233
+#: core/song.cpp:410 transcoder/transcoder.cpp:233
 msgid "Flac"
 msgstr "Flac"
 
@@ -2506,7 +2506,7 @@ msgstr "이전 재생목록 탭으로 가기"
 msgid "Google Drive"
 msgstr "Google Drive"
 
-#: covers/coversearchstatisticsdialog.cpp:53 ui/albumcovermanager.cpp:464
+#: covers/coversearchstatisticsdialog.cpp:53 ui/albumcovermanager.cpp:465
 #: ../bin/src/ui_coversearchstatisticsdialog.h:75
 #, qt-format
 msgid "Got %1 covers out of %2 (%3 failed)"
@@ -2967,7 +2967,7 @@ msgstr "열기"
 msgid "Load cover from URL"
 msgstr "URL로 부터 커버 열기"
 
-#: ui/albumcoverchoicecontroller.cpp:64
+#: ui/albumcoverchoicecontroller.cpp:66
 msgid "Load cover from URL..."
 msgstr "URL로 부터 커버 열기..."
 
@@ -2975,7 +2975,7 @@ msgstr "URL로 부터 커버 열기..."
 msgid "Load cover from disk"
 msgstr "디스크로부터 커버 열기"
 
-#: ui/albumcoverchoicecontroller.cpp:60
+#: ui/albumcoverchoicecontroller.cpp:61
 msgid "Load cover from disk..."
 msgstr "디스크로부터 커버열기..."
 
@@ -3088,7 +3088,7 @@ msgstr ""
 msgid "M4A AAC"
 msgstr "MP4 AAC"
 
-#: core/song.cpp:412 transcoder/transcoder.cpp:238
+#: core/song.cpp:416 transcoder/transcoder.cpp:238
 #: ../bin/src/ui_transcodersettingspage.h:174
 msgid "MP3"
 msgstr "MP3"
@@ -3101,11 +3101,11 @@ msgstr "MP3 256k"
 msgid "MP3 96k"
 msgstr "MP3 96k"
 
-#: core/song.cpp:408
+#: core/song.cpp:412
 msgid "MP4 AAC"
 msgstr "MP4 AAC"
 
-#: core/song.cpp:410
+#: core/song.cpp:414
 msgid "MPC"
 msgstr "MPC"
 
@@ -3372,7 +3372,7 @@ msgstr "없음"
 msgid "No background image"
 msgstr "배경 그림 없음"
 
-#: ui/albumcovermanager.cpp:790
+#: ui/albumcovermanager.cpp:800
 msgid "No covers to export."
 msgstr "내보낼수 있는 커버가 없습니다."
 
@@ -3467,19 +3467,19 @@ msgstr "OSD 미리보기"
 msgid "Off"
 msgstr "꺼짐"
 
-#: core/song.cpp:414 transcoder/transcoder.cpp:244
+#: core/song.cpp:418 transcoder/transcoder.cpp:244
 msgid "Ogg Flac"
 msgstr "OGG Flac"
 
-#: core/song.cpp:420 transcoder/transcoder.cpp:250
+#: core/song.cpp:424 transcoder/transcoder.cpp:250
 msgid "Ogg Opus"
 msgstr "Ogg Opus"
 
-#: core/song.cpp:416 transcoder/transcoder.cpp:247
+#: core/song.cpp:420 transcoder/transcoder.cpp:247
 msgid "Ogg Speex"
 msgstr "Ogg Speex"
 
-#: core/song.cpp:418 transcoder/transcoder.cpp:241
+#: core/song.cpp:422 transcoder/transcoder.cpp:241
 #: ../bin/src/ui_magnatunedownloaddialog.h:135
 #: ../bin/src/ui_magnatunesettingspage.h:169
 msgid "Ogg Vorbis"
@@ -3980,7 +3980,7 @@ msgid "Rating"
 msgstr "등급"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:309
-#: ui/albumcovermanager.cpp:221
+#: ui/albumcovermanager.cpp:212
 msgid "Really cancel?"
 msgstr "정말 취소 하시겠습니까?"
 
@@ -4209,11 +4209,11 @@ msgstr "샘플 레이트"
 msgid "Save .mood files in your music library"
 msgstr "음악 라이브러리에 .mood 파일 저장"
 
-#: ui/albumcoverchoicecontroller.cpp:129
+#: ui/albumcoverchoicecontroller.cpp:131
 msgid "Save album cover"
 msgstr "앨범 표지 저장"
 
-#: ui/albumcoverchoicecontroller.cpp:62
+#: ui/albumcoverchoicecontroller.cpp:64
 msgid "Save cover to disk..."
 msgstr "커버를 디스크에 저장..."
 
@@ -4322,7 +4322,7 @@ msgstr "Subsonic 검색"
 msgid "Search automatically"
 msgstr "자동적으로 찾기"
 
-#: ui/albumcoverchoicecontroller.cpp:66
+#: ui/albumcoverchoicecontroller.cpp:68
 msgid "Search for album covers..."
 msgstr "앨범 표지 검색..."
 
@@ -4837,7 +4837,7 @@ msgstr "%1 트랙 재생 후 정지"
 msgid "Stopped"
 msgstr "중지됨"
 
-#: core/song.cpp:431
+#: core/song.cpp:435
 msgid "Stream"
 msgstr "스트림"
 
@@ -5195,7 +5195,7 @@ msgstr "%2개의 쓰레드를 이용하여 %1 파일을 변환 중"
 msgid "Transcoding options"
 msgstr "변환 옵션"
 
-#: core/song.cpp:426
+#: core/song.cpp:430
 msgid "TrueAudio"
 msgstr "트루오디오"
 
@@ -5237,7 +5237,7 @@ msgstr "연결할 수 없음"
 msgid "Unable to download %1 (%2)"
 msgstr "%1(%2)를 다운로드 할 수 없습니다"
 
-#: core/song.cpp:435 library/librarymodel.cpp:374 library/librarymodel.cpp:379
+#: core/song.cpp:439 library/librarymodel.cpp:374 library/librarymodel.cpp:379
 #: library/librarymodel.cpp:383 library/librarymodel.cpp:1156
 #: library/savedgroupingmanager.cpp:103 playlist/playlistdelegates.cpp:305
 #: playlist/playlistmanager.cpp:515 playlist/playlistmanager.cpp:516
@@ -5255,7 +5255,7 @@ msgstr "알 수 없는 content-type"
 msgid "Unknown error"
 msgstr "알 수 없는 오류"
 
-#: ui/albumcoverchoicecontroller.cpp:69
+#: ui/albumcoverchoicecontroller.cpp:70
 msgid "Unset cover"
 msgstr "커버 해제"
 
@@ -5416,7 +5416,7 @@ msgid "Variable bit rate"
 msgstr "가변 비트 전송률"
 
 #: globalsearch/globalsearchmodel.cpp:109 library/librarymodel.cpp:300
-#: playlist/playlistmanager.cpp:527 ui/albumcovermanager.cpp:273
+#: playlist/playlistmanager.cpp:527 ui/albumcovermanager.cpp:264
 msgid "Various artists"
 msgstr "다양한 음악가"
 
@@ -5471,7 +5471,7 @@ msgstr "WMA"
 msgid "Warn me when closing a playlist tab"
 msgstr "재생목록 탭을 닫으면 알림"
 
-#: core/song.cpp:424 transcoder/transcoder.cpp:256
+#: core/song.cpp:428 transcoder/transcoder.cpp:256
 msgid "Wav"
 msgstr "Wav"
 
@@ -5555,7 +5555,7 @@ msgstr "윈도우 미디어 40k"
 msgid "Windows Media 64k"
 msgstr "윈도우 미디어 64k"
 
-#: core/song.cpp:404 transcoder/transcoder.cpp:253
+#: core/song.cpp:408 transcoder/transcoder.cpp:253
 msgid "Windows Media audio"
 msgstr "윈도우 미디어 오디오"
 
