@@ -582,7 +582,7 @@ void Song::ToProtobuf(pb::tagreader::SongMetadata* pb) const {
   pb->set_filesize(d->filesize_);
   pb->set_suspicious_tags(d->suspicious_tags_);
   pb->set_art_automatic(DataCommaSizeFromQString(d->art_automatic_));
-  pb->set_type(static_cast<::pb::tagreader::SongMetadata_Type>(d->filetype_));
+  pb->set_type(static_cast<pb::tagreader::SongMetadata_Type>(d->filetype_));
 }
 
 void Song::InitFromQuery(const SqlRow& q, bool reliable_metadata, int col) {
@@ -950,8 +950,9 @@ void Song::BindToQuery(QSqlQuery* query) const {
 
   if (Application::kIsPortable &&
       Utilities::UrlOnSameDriveAsClementine(d->url_)) {
-    query->bindValue(":filename", Utilities::GetRelativePathToClementineBin(
-                                      d->url_).toEncoded());
+    query->bindValue(
+        ":filename",
+        Utilities::GetRelativePathToClementineBin(d->url_).toEncoded());
   } else {
     query->bindValue(":filename", d->url_.toEncoded());
   }
@@ -1141,13 +1142,14 @@ bool Song::IsOnSameAlbum(const Song& other) const {
 
   if (is_compilation() && album() == other.album()) return true;
 
-  return effective_album() == other.effective_album() && 
-    effective_albumartist() == other.effective_albumartist();
+  return effective_album() == other.effective_album() &&
+         effective_albumartist() == other.effective_albumartist();
 }
 
 QString Song::AlbumKey() const {
-  return QString("%1|%2|%3").arg(is_compilation() ? "_compilation" : effective_albumartist(),
-                                 has_cue() ? cue_path() : "", effective_album());
+  return QString("%1|%2|%3")
+      .arg(is_compilation() ? "_compilation" : effective_albumartist(),
+           has_cue() ? cue_path() : "", effective_album());
 }
 
 void Song::ToXesam(QVariantMap* map) const {
