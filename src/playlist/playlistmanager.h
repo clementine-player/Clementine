@@ -184,7 +184,7 @@ class PlaylistManager : public PlaylistManagerInterface {
   void Load(const QString& filename);
   void Save(int id, const QString& filename, Playlist::Path path_type);
   // Display a file dialog to let user choose a file before saving the file
-  void SaveWithUI(int id, const QString& suggested_filename);
+  void SaveWithUI(int id, const QString& playlist_name);
   void Rename(int id, const QString& new_name);
   void Favorite(int id, bool favorite);
   void Delete(int id);
