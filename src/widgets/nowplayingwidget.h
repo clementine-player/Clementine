@@ -59,6 +59,7 @@ class NowPlayingWidget : public QWidget {
     LargeSongDetails = 1,
     LargeSongDetailsBelow = 2,
     LargeNoSongDetails = 3,
+    SmallSongDetailsNoCover = 4,
   };
 
   void SetApplication(Application* app);
@@ -119,6 +120,8 @@ signals:
   void SetImage(const QImage& image);
   void ScaleCover();
   bool GetCoverAutomatically();
+
+  static bool ModeAllowsResizing(Mode m);
 
  private:
   Application* app_;
