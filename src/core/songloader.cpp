@@ -34,6 +34,7 @@
 #include "config.h"
 #include "core/logging.h"
 #include "core/player.h"
+#include "core/utilities.h"
 #include "core/signalchecker.h"
 #include "core/song.h"
 #include "core/tagreaderclient.h"
@@ -115,6 +116,11 @@ SongLoader::Result SongLoader::Load(const QUrl& url) {
     return Success;
   }
 
+  // It could be a playlist, we give it a shot.
+  if (LoadRemotePlaylist(url_)) {
+    return Success;
+  }
+
   url_ = PodcastUrlLoader::FixPodcastUrl(url_);
 
   preload_func_ = std::bind(&SongLoader::LoadRemote, this);
@@ -144,10 +150,10 @@ SongLoader::Result SongLoader::LoadLocalPartial(const QString& filename) {
 SongLoader::Result SongLoader::LoadAudioCD() {
 #ifdef HAVE_AUDIOCD
   CddaSongLoader* cdda_song_loader = new CddaSongLoader;
-  connect(cdda_song_loader, SIGNAL(SongsDurationLoaded(SongList)),
-          this, SLOT(AudioCDTracksLoadedSlot(SongList)));
-  connect(cdda_song_loader, SIGNAL(SongsMetadataLoaded(SongList)),
-          this, SLOT(AudioCDTracksTagsLoaded(SongList)));
+  connect(cdda_song_loader, SIGNAL(SongsDurationLoaded(SongList)), this,
+          SLOT(AudioCDTracksLoadedSlot(SongList)));
+  connect(cdda_song_loader, SIGNAL(SongsMetadataLoaded(SongList)), this,
+          SLOT(AudioCDTracksTagsLoaded(SongList)));
   cdda_song_loader->LoadSongs();
   return Success;
 #else  // HAVE_AUDIOCD
@@ -194,8 +200,7 @@ SongLoader::Result SongLoader::LoadLocal(const QString& filename) {
   }
 
   // It's not in the database, load it asynchronously.
-  preload_func_ =
-      std::bind(&SongLoader::LoadLocalAsync, this, filename);
+  preload_func_ = std::bind(&SongLoader::LoadLocalAsync, this, filename);
   return BlockingLoadRequired;
 }
 
@@ -217,8 +222,8 @@ void SongLoader::LoadLocalAsync(const QString& filename) {
   if (!parser) {
     // Check the file extension as well, maybe the magic failed, or it was a
     // basic M3U file which is just a plain list of filenames.
-    parser = playlist_parser_->
-      ParserForExtension(QFileInfo(filename).suffix().toLower());
+    parser = playlist_parser_->ParserForExtension(
+        QFileInfo(filename).suffix().toLower());
   }
 
   if (parser) {
@@ -410,8 +415,7 @@ void SongLoader::LoadRemote() {
 
   // Add a probe to the sink so we can capture the data if it's a playlist
   GstPad* pad = gst_element_get_static_pad(fakesink, "sink");
-  gst_pad_add_probe(
-      pad, GST_PAD_PROBE_TYPE_BUFFER, &DataReady, this, NULL);
+  gst_pad_add_probe(pad, GST_PAD_PROBE_TYPE_BUFFER, &DataReady, this, NULL);
   gst_object_unref(pad);
 
   QEventLoop loop;
@@ -447,12 +451,11 @@ void SongLoader::TypeFound(GstElement*, uint, GstCaps* caps, void* self) {
   instance->StopTypefindAsync(true);
 }
 
-GstPadProbeReturn SongLoader::DataReady(
-    GstPad*, GstPadProbeInfo* info, gpointer self) {
+GstPadProbeReturn SongLoader::DataReady(GstPad*, GstPadProbeInfo* info,
+                                        gpointer self) {
   SongLoader* instance = reinterpret_cast<SongLoader*>(self);
 
-  if (instance->state_ == Finished)
-    return GST_PAD_PROBE_OK;
+  if (instance->state_ == Finished) return GST_PAD_PROBE_OK;
 
   GstBuffer* buffer = gst_pad_probe_info_get_buffer(info);
   GstMapInfo map;
@@ -616,4 +619,65 @@ void SongLoader::StopTypefindAsync(bool success) {
   success_ = success;
 
   metaObject()->invokeMethod(this, "StopTypefind", Qt::QueuedConnection);
+}
+
+bool SongLoader::LoadRemotePlaylist(const QUrl& url) {
+  // This function makes a remote request for the given URL and, if its MIME
+  // type corresponds to a known playlist type, saves the content to a
+  // temporary file, loads it, and returns true.
+  // If the URL does not point to a playlist file we could handle,
+  // it returns false.
+
+  NetworkAccessManager manager;
+  QNetworkRequest req = QNetworkRequest(url);
+
+  // Getting headers:
+  QNetworkReply* reply = manager.head(req);
+  {
+    QEventLoop loop;
+    QObject::connect(reply, SIGNAL(finished()), &loop, SLOT(quit()));
+    loop.exec();
+  }
+  if (reply->error() != QNetworkReply::NoError) {
+    qLog(Debug) << url.toString() << reply->errorString();
+    return false;
+  }
+
+  // Now we check if there is a parser that can handle that MIME type.
+  QString mime_type =
+      reply->header(QNetworkRequest::ContentTypeHeader).toString();
+
+  ParserBase* parser = playlist_parser_->ParserForMimeType(mime_type);
+  if (parser == nullptr) {
+    qLog(Debug) << url.toString() << "seems to not be a playlist";
+    return false;
+  }
+
+  // We know it is a playlist!
+  // Getting its contents:
+  reply = manager.get(req);
+  {
+    QEventLoop loop;
+    QObject::connect(reply, SIGNAL(finished()), &loop, SLOT(quit()));
+    loop.exec();
+  }
+  if (reply->error() != QNetworkReply::NoError) {
+    qLog(Debug) << url.toString() << reply->errorString();
+    return false;
+  }
+
+  // Save them to a temporary file...
+  QString playlist_filename = Utilities::GetTemporaryFileName();
+  QFile file(playlist_filename);
+  file.open(QIODevice::WriteOnly);
+  file.write(reply->readAll());
+  file.close();
+  qLog(Debug) << url.toString() << "with MIME" << mime_type << "saved to"
+              << playlist_filename;
+
+  // ...and load it.
+  LoadPlaylist(parser, playlist_filename);
+
+  file.remove();
+  return true;
 }
