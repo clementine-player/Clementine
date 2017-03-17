@@ -56,6 +56,8 @@ quint64 FileSystemFreeSpace(const QString& path);
 
 QString MakeTempDir(const QString template_name = QString());
 QString GetTemporaryFileName();
+QString SaveToTemporaryFile(const QByteArray& data);
+
 bool RemoveRecursive(const QString& path);
 bool CopyRecursive(const QString& source, const QString& destination);
 bool Copy(QIODevice* source, QIODevice* destination);
