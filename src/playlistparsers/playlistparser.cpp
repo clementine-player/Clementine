@@ -53,6 +53,17 @@ QStringList PlaylistParser::file_extensions() const {
   return ret;
 }
 
+QStringList PlaylistParser::mime_types() const {
+  QStringList ret;
+
+  for (ParserBase* parser : parsers_) {
+    if (!parser->mime_type().isEmpty()) ret << parser->mime_type();
+  }
+
+  qStableSort(ret);
+  return ret;
+}
+
 QString PlaylistParser::filters() const {
   QStringList filters;
   QStringList all_extensions;
@@ -87,6 +98,15 @@ QString PlaylistParser::default_filter() const {
 ParserBase* PlaylistParser::ParserForExtension(const QString& suffix) const {
   for (ParserBase* p : parsers_) {
     if (p->file_extensions().contains(suffix)) return p;
+  }
+  return nullptr;
+}
+
+ParserBase* PlaylistParser::ParserForMimeType(const QString& mime_type) const {
+  for (ParserBase* p : parsers_) {
+    if (!p->mime_type().isEmpty() &&
+        (QString::compare(p->mime_type(), mime_type, Qt::CaseInsensitive) == 0))
+      return p;
   }
   return nullptr;
 }
