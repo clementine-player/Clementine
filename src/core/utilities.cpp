@@ -237,20 +237,20 @@ QString GetTemporaryFileName() {
 }
 
 QString SaveToTemporaryFile(const QByteArray& data) {
-  QString filename = GetTemporaryFileName();
+  QTemporaryFile tempfile;
+  tempfile.setAutoRemove(false);
 
-  QFile file(filename);
-  if (!file.open(QIODevice::WriteOnly)) {
+  if (!tempfile.open()) {
     return QString();
   }
 
-  if (file.write(data) != data.size()) {
-    file.remove();
+  if (tempfile.write(data) != data.size()) {
+    tempfile.remove();
     return QString();
   }
 
-  file.close();
-  return filename;
+  tempfile.close();
+  return tempfile.fileName();
 }
 
 bool RemoveRecursive(const QString& path) {
