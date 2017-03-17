@@ -39,16 +39,18 @@
 #include "core/song.h"
 #include "core/tagreaderclient.h"
 #include "core/timeconstants.h"
+#include "core/waitforsignal.h"
 #include "internet/lastfm/fixlastfm.h"
 #include "internet/core/internetmodel.h"
+#include "internet/podcasts/podcastparser.h"
+#include "internet/podcasts/podcastservice.h"
+#include "internet/podcasts/podcasturlloader.h"
 #include "library/librarybackend.h"
 #include "library/sqlrow.h"
 #include "playlistparsers/cueparser.h"
 #include "playlistparsers/parserbase.h"
 #include "playlistparsers/playlistparser.h"
-#include "internet/podcasts/podcastparser.h"
-#include "internet/podcasts/podcastservice.h"
-#include "internet/podcasts/podcasturlloader.h"
+#include "utilities.h"
 
 #ifdef HAVE_AUDIOCD
 #include <gst/audio/gstaudiocdsrc.h>
@@ -632,22 +634,19 @@ bool SongLoader::LoadRemotePlaylist(const QUrl& url) {
   QNetworkRequest req = QNetworkRequest(url);
 
   // Getting headers:
-  QNetworkReply* reply = manager.head(req);
-  {
-    QEventLoop loop;
-    QObject::connect(reply, SIGNAL(finished()), &loop, SLOT(quit()));
-    loop.exec();
-  }
-  if (reply->error() != QNetworkReply::NoError) {
-    qLog(Debug) << url.toString() << reply->errorString();
+  QNetworkReply* const headers_reply = manager.head(req);
+  WaitForSignal(headers_reply, SIGNAL(finished()));
+
+  if (headers_reply->error() != QNetworkReply::NoError) {
+    qLog(Error) << url.toString() << headers_reply->errorString();
     return false;
   }
 
   // Now we check if there is a parser that can handle that MIME type.
   QString mime_type =
-      reply->header(QNetworkRequest::ContentTypeHeader).toString();
+      headers_reply->header(QNetworkRequest::ContentTypeHeader).toString();
 
-  ParserBase* parser = playlist_parser_->ParserForMimeType(mime_type);
+  ParserBase* const parser = playlist_parser_->ParserForMimeType(mime_type);
   if (parser == nullptr) {
     qLog(Debug) << url.toString() << "seems to not be a playlist";
     return false;
@@ -655,29 +654,29 @@ bool SongLoader::LoadRemotePlaylist(const QUrl& url) {
 
   // We know it is a playlist!
   // Getting its contents:
-  reply = manager.get(req);
-  {
-    QEventLoop loop;
-    QObject::connect(reply, SIGNAL(finished()), &loop, SLOT(quit()));
-    loop.exec();
-  }
-  if (reply->error() != QNetworkReply::NoError) {
-    qLog(Debug) << url.toString() << reply->errorString();
+  QNetworkReply* const data_reply = manager.get(req);
+  WaitForSignal(data_reply, SIGNAL(finished()));
+
+  if (data_reply->error() != QNetworkReply::NoError) {
+    qLog(Error) << url.toString() << data_reply->errorString();
     return false;
   }
 
   // Save them to a temporary file...
-  QString playlist_filename = Utilities::GetTemporaryFileName();
-  QFile file(playlist_filename);
-  file.open(QIODevice::WriteOnly);
-  file.write(reply->readAll());
-  file.close();
-  qLog(Debug) << url.toString() << "with MIME" << mime_type << "saved to"
+  QString playlist_filename =
+      Utilities::SaveToTemporaryFile(data_reply->readAll());
+  if (playlist_filename.isEmpty()) {
+    qLog(Error) << url.toString()
+                << "could not write contents to temporary file";
+    return false;
+  }
+
+  qLog(Debug) << url.toString() << "with MIME" << mime_type << "loading from"
               << playlist_filename;
 
   // ...and load it.
   LoadPlaylist(parser, playlist_filename);
 
-  file.remove();
+  QFile(playlist_filename).remove();
   return true;
 }
