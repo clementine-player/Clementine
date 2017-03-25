@@ -180,8 +180,8 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
 //      internet_view_(new InternetViewContainer(this)),
 //      device_view_container_(new DeviceViewContainer(this)),
 //      device_view_(device_view_container_->view()),
-//      song_info_view_(new SongInfoView(this)),
-//      artist_info_view_(new ArtistInfoView(this)),
+      song_info_view_(new SongInfoView(this)),
+      artist_info_view_(new ArtistInfoView(this)),
       settings_dialog_(std::bind(&MainWindow::CreateSettingsDialog, this)),
       add_stream_dialog_([=]() {
         AddStreamDialog* add_stream_dialog = new AddStreamDialog;
@@ -1085,7 +1085,7 @@ void MainWindow::ReloadAllSettings() {
   app_->player()->ReloadSettings();
   osd_->ReloadSettings();
   library_view_->ReloadSettings();
-//  song_info_view_->ReloadSettings();
+  song_info_view_->ReloadSettings();
   app_->player()->engine()->ReloadSettings();
   ui_->playlist->view()->ReloadSettings();
   app_->internet_model()->ReloadSettings();
@@ -2484,7 +2484,7 @@ SettingsDialog* MainWindow::CreateSettingsDialog() {
   SettingsDialog* settings_dialog =
       new SettingsDialog(app_, background_streams_);
   settings_dialog->SetGlobalShortcutManager(global_shortcuts_);
-//  settings_dialog->SetSongInfoView(song_info_view_);
+  settings_dialog->SetSongInfoView(song_info_view_);
 
   // Settings
   connect(settings_dialog, SIGNAL(accepted()), SLOT(ReloadAllSettings()));
