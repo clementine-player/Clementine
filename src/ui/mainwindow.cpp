@@ -126,26 +126,26 @@
 #include "widgets/stylehelper.h"
 #include "widgets/trackslider.h"
 
-#ifdef Q_OS_DARWIN
-#include "ui/macsystemtrayicon.h"
-#endif
+//#ifdef Q_OS_DARWIN
+//#include "ui/macsystemtrayicon.h"
+//#endif
 
-#ifdef HAVE_LIBLASTFM
-#include "internet/lastfm/lastfmservice.h"
-#endif
+//#ifdef HAVE_LIBLASTFM
+//#include "internet/lastfm/lastfmservice.h"
+//#endif
 
-#ifdef HAVE_WIIMOTEDEV
-#include "wiimotedev/shortcuts.h"
-#endif
+//#ifdef HAVE_WIIMOTEDEV
+//#include "wiimotedev/shortcuts.h"
+//#endif
 
 #ifdef ENABLE_VISUALISATIONS
 #include "visualisations/visualisationcontainer.h"
 #endif
 
-#ifdef HAVE_MOODBAR
-#include "moodbar/moodbarcontroller.h"
-#include "moodbar/moodbarproxystyle.h"
-#endif
+//#ifdef HAVE_MOODBAR
+//#include "moodbar/moodbarcontroller.h"
+//#include "moodbar/moodbarproxystyle.h"
+//#endif
 
 #include <cmath>
 
@@ -177,7 +177,7 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
       library_view_(new LibraryViewContainer(this)),
       file_view_(new FileView(this)),
       playlist_list_(new PlaylistListContainer(this)),
-      internet_view_(new InternetViewContainer(this)),
+//      internet_view_(new InternetViewContainer(this)),
 //      device_view_container_(new DeviceViewContainer(this)),
 //      device_view_(device_view_container_->view()),
 //      song_info_view_(new SongInfoView(this)),
@@ -266,9 +266,9 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
   ui_->tabs->AddTab(playlist_list_,
                     IconLoader::Load("view-media-playlist", IconLoader::Base),
                     tr("Playlists"));
-  ui_->tabs->AddTab(internet_view_,
-                    IconLoader::Load("applications-internet", IconLoader::Base),
-                    tr("Internet"));
+//  ui_->tabs->AddTab(internet_view_,
+//                    IconLoader::Load("applications-internet", IconLoader::Base),
+//                    tr("Internet"));
 //  ui_->tabs->AddTab(
 //      device_view_container_,
 //      IconLoader::Load("multimedia-player-ipod-mini-blue", IconLoader::Base),
@@ -314,7 +314,7 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
 
   library_view_->view()->setModel(library_sort_model_);
   library_view_->view()->SetApplication(app_);
-  internet_view_->SetApplication(app_);
+//  internet_view_->SetApplication(app_);
 //  device_view_->SetApplication(app_);
   playlist_list_->SetApplication(app_);
 
@@ -763,8 +763,8 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
   connect(app_->internet_model()->Service<MagnatuneService>(),
           SIGNAL(DownloadFinished(QStringList)), osd_,
           SLOT(MagnatuneDownloadFinished(QStringList)));
-  connect(internet_view_->tree(), SIGNAL(AddToPlaylistSignal(QMimeData*)),
-          SLOT(AddToPlaylist(QMimeData*)));
+//  connect(internet_view_->tree(), SIGNAL(AddToPlaylistSignal(QMimeData*)),
+//          SLOT(AddToPlaylist(QMimeData*)));
 
   // Connections to the saved streams service
   connect(InternetModel::Service<SavedRadio>(), SIGNAL(ShowAddStreamDialog()),
@@ -2825,8 +2825,8 @@ void MainWindow::HandleNotificationPreview(OSD::Behaviour type, QString line1,
 }
 
 void MainWindow::ScrollToInternetIndex(const QModelIndex& index) {
-  internet_view_->ScrollToIndex(index);
-  ui_->tabs->SetCurrentWidget(internet_view_);
+//  internet_view_->ScrollToIndex(index);
+//  ui_->tabs->SetCurrentWidget(internet_view_);
 }
 
 void MainWindow::AddPodcast() {

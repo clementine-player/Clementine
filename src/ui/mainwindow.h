@@ -316,7 +316,7 @@ signals:
   std::unique_ptr<RipCDDialog> rip_cd_dialog_;
 #endif
   PlaylistListContainer* playlist_list_;
-  InternetViewContainer* internet_view_;
+//  InternetViewContainer* internet_view_;
 //  DeviceViewContainer* device_view_container_;
 //  DeviceView* device_view_;
 //  SongInfoView* song_info_view_;
