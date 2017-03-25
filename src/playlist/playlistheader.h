@@ -55,7 +55,8 @@ signals:
 
   int menu_section_;
   QMenu* menu_;
-  QAction* hide_action_;
+  /// Remove 'hide this column' option:
+  ///QAction* hide_action_;
   QAction* rating_lock_;
   QAction* stretch_action_;
   QAction* align_left_action_;
