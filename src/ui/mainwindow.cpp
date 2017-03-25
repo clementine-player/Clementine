@@ -180,8 +180,8 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
       internet_view_(new InternetViewContainer(this)),
 //      device_view_container_(new DeviceViewContainer(this)),
 //      device_view_(device_view_container_->view()),
-      song_info_view_(new SongInfoView(this)),
-      artist_info_view_(new ArtistInfoView(this)),
+//      song_info_view_(new SongInfoView(this)),
+//      artist_info_view_(new ArtistInfoView(this)),
       settings_dialog_(std::bind(&MainWindow::CreateSettingsDialog, this)),
       add_stream_dialog_([=]() {
         AddStreamDialog* add_stream_dialog = new AddStreamDialog;
@@ -273,13 +273,13 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
 //      device_view_container_,
 //      IconLoader::Load("multimedia-player-ipod-mini-blue", IconLoader::Base),
 //      tr("Devices"));
-  ui_->tabs->AddSpacer();
-  ui_->tabs->AddTab(song_info_view_,
-                    IconLoader::Load("view-media-lyrics", IconLoader::Base),
-                    tr("Song info"));
-  ui_->tabs->AddTab(artist_info_view_,
-                    IconLoader::Load("x-clementine-artist", IconLoader::Base),
-                    tr("Artist info"));
+//  ui_->tabs->AddSpacer();
+//  ui_->tabs->AddTab(song_info_view_,
+//                    IconLoader::Load("view-media-lyrics", IconLoader::Base),
+//                    tr("Song info"));
+//  ui_->tabs->AddTab(artist_info_view_,
+//                    IconLoader::Load("x-clementine-artist", IconLoader::Base),
+//                    tr("Artist info"));
 
   // Add the now playing widget to the fancy tab widget
   ui_->tabs->AddBottomWidget(ui_->now_playing);
@@ -855,8 +855,8 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
   connect(ui_->tabs, SIGNAL(CurrentChanged(int)), SLOT(SaveGeometry()));
 
   // Lyrics
-  ConnectInfoView(song_info_view_);
-  ConnectInfoView(artist_info_view_);
+//  ConnectInfoView(song_info_view_);
+//  ConnectInfoView(artist_info_view_);
 
   // Analyzer
   ui_->analyzer->SetEngine(app_->player()->engine());
@@ -1085,7 +1085,7 @@ void MainWindow::ReloadAllSettings() {
   app_->player()->ReloadSettings();
   osd_->ReloadSettings();
   library_view_->ReloadSettings();
-  song_info_view_->ReloadSettings();
+//  song_info_view_->ReloadSettings();
   app_->player()->engine()->ReloadSettings();
   ui_->playlist->view()->ReloadSettings();
   app_->internet_model()->ReloadSettings();
@@ -2484,7 +2484,7 @@ SettingsDialog* MainWindow::CreateSettingsDialog() {
   SettingsDialog* settings_dialog =
       new SettingsDialog(app_, background_streams_);
   settings_dialog->SetGlobalShortcutManager(global_shortcuts_);
-  settings_dialog->SetSongInfoView(song_info_view_);
+//  settings_dialog->SetSongInfoView(song_info_view_);
 
   // Settings
   connect(settings_dialog, SIGNAL(accepted()), SLOT(ReloadAllSettings()));
@@ -2597,14 +2597,14 @@ void MainWindow::ShowVisualisations() {
 }
 
 void MainWindow::ConnectInfoView(SongInfoBase* view) {
-  connect(app_->playlist_manager(), SIGNAL(CurrentSongChanged(Song)), view,
-          SLOT(SongChanged(Song)));
-  connect(app_->player(), SIGNAL(PlaylistFinished()), view,
-          SLOT(SongFinished()));
-  connect(app_->player(), SIGNAL(Stopped()), view, SLOT(SongFinished()));
+//  connect(app_->playlist_manager(), SIGNAL(CurrentSongChanged(Song)), view,
+//          SLOT(SongChanged(Song)));
+//  connect(app_->player(), SIGNAL(PlaylistFinished()), view,
+//          SLOT(SongFinished()));
+//  connect(app_->player(), SIGNAL(Stopped()), view, SLOT(SongFinished()));
 
-  connect(view, SIGNAL(ShowSettingsDialog()), SLOT(ShowSongInfoConfig()));
-  connect(view, SIGNAL(DoGlobalSearch(QString)), SLOT(DoGlobalSearch(QString)));
+//  connect(view, SIGNAL(ShowSettingsDialog()), SLOT(ShowSongInfoConfig()));
+//  connect(view, SIGNAL(DoGlobalSearch(QString)), SLOT(DoGlobalSearch(QString)));
 }
 
 void MainWindow::AddSongInfoGenerator(smart_playlists::GeneratorPtr gen) {
