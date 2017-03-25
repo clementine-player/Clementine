@@ -70,12 +70,12 @@
 #include "globalsearch/globalsearch.h"
 #include "globalsearch/globalsearchview.h"
 #include "globalsearch/librarysearchprovider.h"
-#include "internet/core/internetmodel.h"
-#include "internet/core/internetview.h"
-#include "internet/core/internetviewcontainer.h"
-#include "internet/internetradio/savedradio.h"
-#include "internet/magnatune/magnatuneservice.h"
-#include "internet/podcasts/podcastservice.h"
+//#include "internet/core/internetmodel.h"
+//#include "internet/core/internetview.h"
+//#include "internet/core/internetviewcontainer.h"
+//#include "internet/internetradio/savedradio.h"
+//#include "internet/magnatune/magnatuneservice.h"
+//#include "internet/podcasts/podcastservice.h"
 #include "library/groupbydialog.h"
 #include "library/library.h"
 #include "library/librarybackend.h"
@@ -117,7 +117,7 @@
 #include "ui/streamdetailsdialog.h"
 #include "ui/systemtrayicon.h"
 #include "ui/trackselectiondialog.h"
-#include "ui/windows7thumbbar.h"
+//#include "ui/windows7thumbbar.h"
 #include "version.h"
 #include "widgets/errordialog.h"
 #include "widgets/fileview.h"
@@ -166,7 +166,7 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
                        const CommandlineOptions& options, QWidget* parent)
     : QMainWindow(parent),
       ui_(new Ui_MainWindow),
-      thumbbar_(new Windows7ThumbBar(this)),
+//      thumbbar_(new Windows7ThumbBar(this)),
       app_(app),
       tray_icon_(tray_icon),
       osd_(osd),
@@ -185,10 +185,10 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
       settings_dialog_(std::bind(&MainWindow::CreateSettingsDialog, this)),
       add_stream_dialog_([=]() {
         AddStreamDialog* add_stream_dialog = new AddStreamDialog;
-        connect(add_stream_dialog, SIGNAL(accepted()), this,
-                SLOT(AddStreamAccepted()));
-        add_stream_dialog->set_add_on_accept(
-            InternetModel::Service<SavedRadio>());
+//        connect(add_stream_dialog, SIGNAL(accepted()), this,
+//                SLOT(AddStreamAccepted()));
+//        add_stream_dialog->set_add_on_accept(
+//            InternetModel::Service<SavedRadio>());
         return add_stream_dialog;
       }),
       cover_manager_([=]() {
@@ -741,34 +741,34 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
   connect(global_search_action, SIGNAL(triggered()),
           SLOT(FocusGlobalSearchField()));
 
-  // Internet connections
-  connect(app_->internet_model(), SIGNAL(StreamError(QString)),
-          SLOT(ShowErrorDialog(QString)));
-  connect(app_->internet_model(), SIGNAL(StreamMetadataFound(QUrl, Song)),
-          app_->playlist_manager(), SLOT(SetActiveStreamMetadata(QUrl, Song)));
-  connect(app_->internet_model(), SIGNAL(AddToPlaylist(QMimeData*)),
-          SLOT(AddToPlaylist(QMimeData*)));
-  connect(app_->internet_model(), SIGNAL(ScrollToIndex(QModelIndex)),
-          SLOT(ScrollToInternetIndex(QModelIndex)));
-#ifdef HAVE_LIBLASTFM
-  connect(app_->scrobbler(), SIGNAL(ButtonVisibilityChanged(bool)),
-          SLOT(LastFMButtonVisibilityChanged(bool)));
-  connect(app_->scrobbler(), SIGNAL(ScrobbleButtonVisibilityChanged(bool)),
-          SLOT(ScrobbleButtonVisibilityChanged(bool)));
-  connect(app_->scrobbler(), SIGNAL(ScrobblingEnabledChanged(bool)),
-          SLOT(ScrobblingEnabledChanged(bool)));
-  connect(app_->scrobbler(), SIGNAL(ScrobbledRadioStream()),
-          SLOT(ScrobbledRadioStream()));
-#endif
-  connect(app_->internet_model()->Service<MagnatuneService>(),
-          SIGNAL(DownloadFinished(QStringList)), osd_,
-          SLOT(MagnatuneDownloadFinished(QStringList)));
+//  // Internet connections
+//  connect(app_->internet_model(), SIGNAL(StreamError(QString)),
+//          SLOT(ShowErrorDialog(QString)));
+//  connect(app_->internet_model(), SIGNAL(StreamMetadataFound(QUrl, Song)),
+//          app_->playlist_manager(), SLOT(SetActiveStreamMetadata(QUrl, Song)));
+//  connect(app_->internet_model(), SIGNAL(AddToPlaylist(QMimeData*)),
+//          SLOT(AddToPlaylist(QMimeData*)));
+//  connect(app_->internet_model(), SIGNAL(ScrollToIndex(QModelIndex)),
+//          SLOT(ScrollToInternetIndex(QModelIndex)));
+//#ifdef HAVE_LIBLASTFM
+//  connect(app_->scrobbler(), SIGNAL(ButtonVisibilityChanged(bool)),
+//          SLOT(LastFMButtonVisibilityChanged(bool)));
+//  connect(app_->scrobbler(), SIGNAL(ScrobbleButtonVisibilityChanged(bool)),
+//          SLOT(ScrobbleButtonVisibilityChanged(bool)));
+//  connect(app_->scrobbler(), SIGNAL(ScrobblingEnabledChanged(bool)),
+//          SLOT(ScrobblingEnabledChanged(bool)));
+//  connect(app_->scrobbler(), SIGNAL(ScrobbledRadioStream()),
+//          SLOT(ScrobbledRadioStream()));
+//#endif
+//  connect(app_->internet_model()->Service<MagnatuneService>(),
+//          SIGNAL(DownloadFinished(QStringList)), osd_,
+//          SLOT(MagnatuneDownloadFinished(QStringList)));
 //  connect(internet_view_->tree(), SIGNAL(AddToPlaylistSignal(QMimeData*)),
 //          SLOT(AddToPlaylist(QMimeData*)));
 
   // Connections to the saved streams service
-  connect(InternetModel::Service<SavedRadio>(), SIGNAL(ShowAddStreamDialog()),
-          SLOT(AddStream()));
+//  connect(InternetModel::Service<SavedRadio>(), SIGNAL(ShowAddStreamDialog()),
+//          SLOT(AddStream()));
 
 #ifdef Q_OS_DARWIN
   mac::SetApplicationHandler(this);
@@ -790,11 +790,11 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
   connect(tray_icon_, SIGNAL(ChangeVolume(int)), SLOT(VolumeWheelEvent(int)));
 
   // Windows 7 thumbbar buttons
-  thumbbar_->SetActions(QList<QAction*>()
-                        << ui_->action_previous_track << ui_->action_play_pause
-                        << ui_->action_stop << ui_->action_next_track
-                        << nullptr  // spacer
-                        << ui_->action_love);
+//  thumbbar_->SetActions(QList<QAction*>()
+//                        << ui_->action_previous_track << ui_->action_play_pause
+//                        << ui_->action_stop << ui_->action_next_track
+//                        << nullptr  // spacer
+//                        << ui_->action_love);
 
 #if (defined(Q_OS_DARWIN) && defined(HAVE_SPARKLE)) || defined(Q_OS_WIN32)
   // Add check for updates item to application menu.
@@ -804,14 +804,14 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
   connect(check_updates, SIGNAL(triggered(bool)), SLOT(CheckForUpdates()));
 #endif
 
-#ifdef Q_OS_WIN32
-  qLog(Debug) << "Creating sparkle updater";
-  qtsparkle::Updater* updater = new qtsparkle::Updater(
-      QUrl("https://clementine-data.appspot.com/sparkle-windows"), this);
-  updater->SetNetworkAccessManager(new NetworkAccessManager(this));
-  updater->SetVersion(CLEMENTINE_VERSION_SPARKLE);
-  connect(check_updates, SIGNAL(triggered()), updater, SLOT(CheckNow()));
-#endif
+//#ifdef Q_OS_WIN32
+//  qLog(Debug) << "Creating sparkle updater";
+//  qtsparkle::Updater* updater = new qtsparkle::Updater(
+//      QUrl("https://clementine-data.appspot.com/sparkle-windows"), this);
+//  updater->SetNetworkAccessManager(new NetworkAccessManager(this));
+//  updater->SetVersion(CLEMENTINE_VERSION_SPARKLE);
+//  connect(check_updates, SIGNAL(triggered()), updater, SLOT(CheckNow()));
+//#endif
 
   // Global shortcuts
   connect(global_shortcuts_, SIGNAL(Play()), app_->player(), SLOT(Play()));
@@ -1088,10 +1088,10 @@ void MainWindow::ReloadAllSettings() {
   song_info_view_->ReloadSettings();
   app_->player()->engine()->ReloadSettings();
   ui_->playlist->view()->ReloadSettings();
-  app_->internet_model()->ReloadSettings();
-#ifdef HAVE_WIIMOTEDEV
-  wiimotedev_shortcuts_->ReloadSettings();
-#endif
+//  app_->internet_model()->ReloadSettings();
+//#ifdef HAVE_WIIMOTEDEV
+//  wiimotedev_shortcuts_->ReloadSettings();
+//#endif
 }
 
 void MainWindow::RefreshStyleSheet() { setStyleSheet(styleSheet()); }
@@ -2830,7 +2830,7 @@ void MainWindow::ScrollToInternetIndex(const QModelIndex& index) {
 }
 
 void MainWindow::AddPodcast() {
-  app_->internet_model()->Service<PodcastService>()->AddPodcast();
+//  app_->internet_model()->Service<PodcastService>()->AddPodcast();
 }
 
 void MainWindow::FocusLibraryTab() {
