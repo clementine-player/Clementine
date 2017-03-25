@@ -33,10 +33,10 @@
 #include "internet/core/internetshowsettingspage.h"
 #include "internet/digitally/digitallyimportedsettingspage.h"
 #include "internet/magnatune/magnatunesettingspage.h"
-#include "internet/podcasts/podcastsettingspage.h"
-#include "internet/soundcloud/soundcloudsettingspage.h"
-#include "internet/spotify/spotifysettingspage.h"
-#include "internet/subsonic/subsonicsettingspage.h"
+//#include "internet/podcasts/podcastsettingspage.h"
+//#include "internet/soundcloud/soundcloudsettingspage.h"
+//#include "internet/spotify/spotifysettingspage.h"
+//#include "internet/subsonic/subsonicsettingspage.h"
 #include "library/librarysettingspage.h"
 #include "mainwindow.h"
 #include "networkproxysettingspage.h"
@@ -175,8 +175,8 @@ SettingsDialog::SettingsDialog(Application* app, BackgroundStreams* streams,
   AddPage(Page_Skydrive, new SkydriveSettingsPage(this), providers);
 #endif
 
-  AddPage(Page_SoundCloud, new SoundCloudSettingsPage(this), providers);
-  AddPage(Page_Spotify, new SpotifySettingsPage(this), providers);
+//  AddPage(Page_SoundCloud, new SoundCloudSettingsPage(this), providers);
+//  AddPage(Page_Spotify, new SpotifySettingsPage(this), providers);
 
 #ifdef HAVE_SEAFILE
   AddPage(Page_Seafile, new SeafileSettingsPage(this), providers);
@@ -186,13 +186,13 @@ SettingsDialog::SettingsDialog(Application* app, BackgroundStreams* streams,
   AddPage(Page_AmazonCloudDrive, new AmazonSettingsPage(this), providers);
 #endif
 
-  AddPage(Page_Magnatune, new MagnatuneSettingsPage(this), providers);
-  AddPage(Page_DigitallyImported, new DigitallyImportedSettingsPage(this),
-          providers);
+//  AddPage(Page_Magnatune, new MagnatuneSettingsPage(this), providers);
+//  AddPage(Page_DigitallyImported, new DigitallyImportedSettingsPage(this),
+//          providers);
   AddPage(Page_BackgroundStreams, new BackgroundStreamsSettingsPage(this),
           providers);
-  AddPage(Page_Subsonic, new SubsonicSettingsPage(this), providers);
-  AddPage(Page_Podcasts, new PodcastSettingsPage(this), providers);
+//  AddPage(Page_Subsonic, new SubsonicSettingsPage(this), providers);
+//  AddPage(Page_Podcasts, new PodcastSettingsPage(this), providers);
 
   providers->sortChildren(0, Qt::AscendingOrder);
 
