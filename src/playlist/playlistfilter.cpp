@@ -58,7 +58,8 @@ PlaylistFilter::~PlaylistFilter() {}
 
 void PlaylistFilter::sort(int column, Qt::SortOrder order) {
   // Pass this through to the Playlist, it does sorting itself
-  sourceModel()->sort(column, order);
+  /// disable sorting according to columns
+  /// sourceModel()->sort(column, order);
 }
 
 bool PlaylistFilter::filterAcceptsRow(int row,
