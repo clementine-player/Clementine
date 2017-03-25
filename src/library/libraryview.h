@@ -126,7 +126,7 @@ signals:
 
   QMenu* context_menu_;
   QModelIndex context_menu_index_;
-  QAction* load_;
+///  QAction* load_;
   QAction* add_to_playlist_;
   QAction* add_to_playlist_enqueue_;
   QAction* open_in_new_playlist_;

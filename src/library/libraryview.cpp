@@ -376,9 +376,9 @@ void LibraryView::contextMenuEvent(QContextMenuEvent* e) {
     add_to_playlist_ = context_menu_->addAction(
         IconLoader::Load("media-playback-start", IconLoader::Base),
         tr("Append to current playlist"), this, SLOT(AddToPlaylist()));
-    load_ = context_menu_->addAction(
-        IconLoader::Load("media-playback-start", IconLoader::Base),
-        tr("Replace current playlist"), this, SLOT(Load()));
+///    load_ = context_menu_->addAction(
+///        IconLoader::Load("media-playback-start", IconLoader::Base),
+///        tr("Replace current playlist"), this, SLOT(Load()));
     open_in_new_playlist_ = context_menu_->addAction(
         IconLoader::Load("document-new", IconLoader::Base), 
         tr("Open in new playlist"), this, SLOT(OpenInNewPlaylist()));
@@ -489,7 +489,7 @@ void LibraryView::contextMenuEvent(QContextMenuEvent* e) {
       smart_playlists == 1 && songs_selected == 1;
 
   // in all modes
-  load_->setEnabled(songs_selected);
+///  load_->setEnabled(songs_selected);
   add_to_playlist_->setEnabled(songs_selected);
   open_in_new_playlist_->setEnabled(songs_selected);
   add_to_playlist_enqueue_->setEnabled(songs_selected);
