@@ -1,13 +1,10 @@
 Clementine
 ==========
 
-This is the edited version of Clementine. I've tweaked a few things to make it more stable, more local and less precarious.
-
-This is a list of changes (updated over time):
-* Don't build any of the external services.
-* Disable playlist sorting according to columns (as there is no way to bring back original sorting).
+This is my edited version of Clementine. My aim is to make it more stable and less precarious. I'm intending to use it locally, so I've disabled all online music services.
 
 A Clementine fork:
+------------------
 - Website: http://www.clementine-player.org/
 - Github: https://github.com/clementine-player/Clementine
 - Buildbot: http://buildbot.clementine-player.org/grid
