@@ -236,12 +236,16 @@ QColor Analyzer::Base::getPsychedelicColor(const Scope& scope,
     rgb[(i * 3) / sBarkBandCount] += pow(bands[i], 2);
   }
 
-  for (int i = 0; i < 3; ++i) {
-    // bias colours for a threshold around normally amplified audio
-    rgb[i] = qMin(255, (int)((sqrt(rgb[i]) * ampFactor) + bias));
-  }
+  // bias colours for a threshold around normally amplified audio
+  rgb[0] = sqrt(rgb[0]) * ampFactor + bias;
+  rgb[1] = sqrt(rgb[1]) * ampFactor + bias;
+  rgb[2] = sqrt(rgb[2]) * ampFactor + bias;
 
-  return QColor::fromRgb(rgb[0], rgb[1], rgb[2]);
+  const int r = qMax(0, qMin(255, static_cast<int>(rgb[0])));
+  const int g = qMax(0, qMin(255, static_cast<int>(rgb[1])));
+  const int b = qMax(0, qMin(255, static_cast<int>(rgb[2])));
+
+  return QColor::fromRgb(r, g, b);
 }
 
 void Analyzer::Base::polishEvent() {
