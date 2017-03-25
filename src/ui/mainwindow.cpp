@@ -330,8 +330,8 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
       IconLoader::Load("document-open-remote", IconLoader::Base));
   ui_->action_add_podcast->setIcon(
       IconLoader::Load("podcast", IconLoader::Provider));
-  ui_->action_clear_playlist->setIcon(
-      IconLoader::Load("edit-clear-list", IconLoader::Base));
+//  ui_->action_clear_playlist->setIcon(
+//      IconLoader::Load("edit-clear-list", IconLoader::Base));
   ui_->action_configure->setIcon(
       IconLoader::Load("configure", IconLoader::Base));
   ui_->action_cover_manager->setIcon(
@@ -419,8 +419,8 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
           SLOT(ToggleScrobbling()));
 #endif
 
-  connect(ui_->action_clear_playlist, SIGNAL(triggered()),
-          app_->playlist_manager(), SLOT(ClearCurrent()));
+//  connect(ui_->action_clear_playlist, SIGNAL(triggered()),
+//          app_->playlist_manager(), SLOT(ClearCurrent()));
   connect(ui_->action_remove_duplicates, SIGNAL(triggered()),
           app_->playlist_manager(), SLOT(RemoveDuplicatesCurrent()));
   connect(ui_->action_remove_unavailable, SIGNAL(triggered()),
@@ -512,7 +512,7 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
   ui_->stop_button->setDefaultAction(ui_->action_stop);
   ui_->love_button->setDefaultAction(ui_->action_love);
   ui_->scrobbling_button->setDefaultAction(ui_->action_toggle_scrobbling);
-  ui_->clear_playlist_button->setDefaultAction(ui_->action_clear_playlist);
+//  ui_->clear_playlist_button->setDefaultAction(ui_->action_clear_playlist);
   ui_->playlist->SetActions(
       ui_->action_new_playlist, ui_->action_load_playlist,
       ui_->action_save_playlist,
@@ -710,8 +710,8 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
       this, SLOT(ShowInLibrary()));
   playlist_menu_->addSeparator();
   playlistitem_actions_separator_ = playlist_menu_->addSeparator();
-  playlist_menu_->addAction(ui_->action_clear_playlist);
-  playlist_menu_->addAction(ui_->action_shuffle);
+//  playlist_menu_->addAction(ui_->action_clear_playlist);
+//  playlist_menu_->addAction(ui_->action_shuffle);
   playlist_menu_->addAction(ui_->action_remove_duplicates);
   playlist_menu_->addAction(ui_->action_remove_unavailable);
 
