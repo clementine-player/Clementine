@@ -178,8 +178,8 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
       file_view_(new FileView(this)),
       playlist_list_(new PlaylistListContainer(this)),
       internet_view_(new InternetViewContainer(this)),
-      device_view_container_(new DeviceViewContainer(this)),
-      device_view_(device_view_container_->view()),
+//      device_view_container_(new DeviceViewContainer(this)),
+//      device_view_(device_view_container_->view()),
       song_info_view_(new SongInfoView(this)),
       artist_info_view_(new ArtistInfoView(this)),
       settings_dialog_(std::bind(&MainWindow::CreateSettingsDialog, this)),
@@ -269,10 +269,10 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
   ui_->tabs->AddTab(internet_view_,
                     IconLoader::Load("applications-internet", IconLoader::Base),
                     tr("Internet"));
-  ui_->tabs->AddTab(
-      device_view_container_,
-      IconLoader::Load("multimedia-player-ipod-mini-blue", IconLoader::Base),
-      tr("Devices"));
+//  ui_->tabs->AddTab(
+//      device_view_container_,
+//      IconLoader::Load("multimedia-player-ipod-mini-blue", IconLoader::Base),
+//      tr("Devices"));
   ui_->tabs->AddSpacer();
   ui_->tabs->AddTab(song_info_view_,
                     IconLoader::Load("view-media-lyrics", IconLoader::Base),
@@ -315,7 +315,7 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
   library_view_->view()->setModel(library_sort_model_);
   library_view_->view()->SetApplication(app_);
   internet_view_->SetApplication(app_);
-  device_view_->SetApplication(app_);
+//  device_view_->SetApplication(app_);
   playlist_list_->SetApplication(app_);
 
   // Icons
@@ -397,8 +397,8 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
           SLOT(MoveFilesToLibrary(QList<QUrl>)));
   connect(file_view_, SIGNAL(EditTags(QList<QUrl>)),
           SLOT(EditFileTags(QList<QUrl>)));
-  connect(file_view_, SIGNAL(CopyToDevice(QList<QUrl>)),
-          SLOT(CopyFilesToDevice(QList<QUrl>)));
+//  connect(file_view_, SIGNAL(CopyToDevice(QList<QUrl>)),
+//          SLOT(CopyFilesToDevice(QList<QUrl>)));
   file_view_->SetTaskManager(app_->task_manager());
 
   // Action connections
@@ -626,8 +626,8 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
           app_->library(), SLOT(ResumeWatcher()));
 
   // Devices connections
-  connect(device_view_, SIGNAL(AddToPlaylistSignal(QMimeData*)),
-          SLOT(AddToPlaylist(QMimeData*)));
+//  connect(device_view_, SIGNAL(AddToPlaylistSignal(QMimeData*)),
+//          SLOT(AddToPlaylist(QMimeData*)));
 
   // Library filter widget
   QActionGroup* library_view_group = new QActionGroup(this);
@@ -696,9 +696,9 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
   playlist_organise_ = playlist_menu_->addAction(
       IconLoader::Load("edit-copy", IconLoader::Base), tr("Organise files..."),
       this, SLOT(PlaylistMoveToLibrary()));
-  playlist_copy_to_device_ = playlist_menu_->addAction(
-      IconLoader::Load("multimedia-player-ipod-mini-blue", IconLoader::Base),
-      tr("Copy to device..."), this, SLOT(PlaylistCopyToDevice()));
+//  playlist_copy_to_device_ = playlist_menu_->addAction(
+//      IconLoader::Load("multimedia-player-ipod-mini-blue", IconLoader::Base),
+//      tr("Copy to device..."), this, SLOT(PlaylistCopyToDevice()));
   playlist_delete_ = playlist_menu_->addAction(
       IconLoader::Load("edit-delete", IconLoader::Base),
       tr("Delete from disk..."), this, SLOT(PlaylistDelete()));
@@ -726,11 +726,11 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
   connect(ui_->playlist, SIGNAL(UndoRedoActionsChanged(QAction*, QAction*)),
           SLOT(PlaylistUndoRedoChanged(QAction*, QAction*)));
 
-  playlist_copy_to_device_->setDisabled(
-      app_->device_manager()->connected_devices_model()->rowCount() == 0);
-  connect(app_->device_manager()->connected_devices_model(),
-          SIGNAL(IsEmptyChanged(bool)), playlist_copy_to_device_,
-          SLOT(setDisabled(bool)));
+//  playlist_copy_to_device_->setDisabled(
+//      app_->device_manager()->connected_devices_model()->rowCount() == 0);
+//  connect(app_->device_manager()->connected_devices_model(),
+//          SIGNAL(IsEmptyChanged(bool)), playlist_copy_to_device_,
+//          SLOT(setDisabled(bool)));
 
   // Global search shortcut
   QAction* global_search_action = new QAction(this);
@@ -1728,7 +1728,7 @@ void MainWindow::PlaylistRightClick(const QPoint& global_pos,
   playlist_move_to_library_->setVisible(false);
   playlist_organise_->setVisible(false);
   playlist_delete_->setVisible(false);
-  playlist_copy_to_device_->setVisible(false);
+//  playlist_copy_to_device_->setVisible(false);
 
   if (in_queue == 1 && not_in_queue == 0)
     playlist_queue_->setText(tr("Dequeue track"));
@@ -1789,7 +1789,7 @@ void MainWindow::PlaylistRightClick(const QPoint& global_pos,
     }
 
     playlist_delete_->setVisible(editable);
-    playlist_copy_to_device_->setVisible(editable);
+//    playlist_copy_to_device_->setVisible(editable);
 
     // Remove old item actions, if any.
     for (QAction* action : playlistitem_actions_) {
@@ -2310,16 +2310,16 @@ void MainWindow::MoveFilesToLibrary(const QList<QUrl>& urls) {
 }
 
 void MainWindow::CopyFilesToDevice(const QList<QUrl>& urls) {
-  organise_dialog_->SetDestinationModel(
-      app_->device_manager()->connected_devices_model(), true);
-  organise_dialog_->SetCopy(true);
-  if (organise_dialog_->SetUrls(urls))
-    organise_dialog_->show();
-  else {
-    QMessageBox::warning(
-        this, tr("Error"),
-        tr("None of the selected songs were suitable for copying to a device"));
-  }
+//  organise_dialog_->SetDestinationModel(
+//      app_->device_manager()->connected_devices_model(), true);
+//  organise_dialog_->SetCopy(true);
+//  if (organise_dialog_->SetUrls(urls))
+//    organise_dialog_->show();
+//  else {
+//    QMessageBox::warning(
+//        this, tr("Error"),
+//        tr("None of the selected songs were suitable for copying to a device"));
+//  }
 }
 
 void MainWindow::EditFileTags(const QList<QUrl>& urls) {
@@ -2442,30 +2442,30 @@ void MainWindow::PlaylistSkip() {
 }
 
 void MainWindow::PlaylistCopyToDevice() {
-  QModelIndexList proxy_indexes =
-      ui_->playlist->view()->selectionModel()->selectedRows();
-  SongList songs;
+//  QModelIndexList proxy_indexes =
+//      ui_->playlist->view()->selectionModel()->selectedRows();
+//  SongList songs;
 
-  for (const QModelIndex& proxy_index : proxy_indexes) {
-    QModelIndex index =
-        app_->playlist_manager()->current()->proxy()->mapToSource(proxy_index);
+//  for (const QModelIndex& proxy_index : proxy_indexes) {
+//    QModelIndex index =
+//        app_->playlist_manager()->current()->proxy()->mapToSource(proxy_index);
 
-    songs << app_->playlist_manager()
-                 ->current()
-                 ->item_at(index.row())
-                 ->Metadata();
-  }
+//    songs << app_->playlist_manager()
+//                 ->current()
+//                 ->item_at(index.row())
+//                 ->Metadata();
+//  }
 
-  organise_dialog_->SetDestinationModel(
-      app_->device_manager()->connected_devices_model(), true);
-  organise_dialog_->SetCopy(true);
-  if (organise_dialog_->SetSongs(songs))
-    organise_dialog_->show();
-  else {
-    QMessageBox::warning(
-        this, tr("Error"),
-        tr("None of the selected songs were suitable for copying to a device"));
-  }
+//  organise_dialog_->SetDestinationModel(
+//      app_->device_manager()->connected_devices_model(), true);
+//  organise_dialog_->SetCopy(true);
+//  if (organise_dialog_->SetSongs(songs))
+//    organise_dialog_->show();
+//  else {
+//    QMessageBox::warning(
+//        this, tr("Error"),
+//        tr("None of the selected songs were suitable for copying to a device"));
+//  }
 }
 
 void MainWindow::ChangeLibraryQueryMode(QAction* action) {

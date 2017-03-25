@@ -317,8 +317,8 @@ signals:
 #endif
   PlaylistListContainer* playlist_list_;
   InternetViewContainer* internet_view_;
-  DeviceViewContainer* device_view_container_;
-  DeviceView* device_view_;
+//  DeviceViewContainer* device_view_container_;
+//  DeviceView* device_view_;
   SongInfoView* song_info_view_;
   ArtistInfoView* artist_info_view_;
 
