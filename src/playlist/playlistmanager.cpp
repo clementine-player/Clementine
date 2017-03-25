@@ -200,8 +200,8 @@ void PlaylistManager::SaveWithUI(int id, const QString& playlist_name) {
   QSettings settings;
   settings.beginGroup(Playlist::kSettingsGroup);
   QString filename = settings.value("last_save_playlist").toString();
-  QString extension = settings.value("last_save_extension",
-                                     parser()->default_extension()).toString();
+  QString extension = "M3U";// settings.value("last_save_extension",
+                            //         parser()->default_extension()).toString();
   QString filter =
       settings.value("last_save_filter", parser()->default_filter()).toString();
 
