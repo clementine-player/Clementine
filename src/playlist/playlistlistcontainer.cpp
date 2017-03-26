@@ -356,9 +356,10 @@ void PlaylistListContainer::contextMenuEvent(QContextMenuEvent* e) {
   if (!menu_) {
     menu_ = new QMenu(this);
     menu_->addAction(action_new_folder_);
-    menu_->addAction(action_remove_);
     menu_->addSeparator();
     menu_->addAction(action_save_playlist_);
+    menu_->addSeparator();
+    menu_->addAction(action_remove_);
   }
   menu_->popup(e->globalPos());
 }
