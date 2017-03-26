@@ -241,9 +241,9 @@ QColor Analyzer::Base::getPsychedelicColor(const Scope& scope,
   rgb[1] = sqrt(rgb[1]) * ampFactor + bias;
   rgb[2] = sqrt(rgb[2]) * ampFactor + bias;
 
-  const int r = qMax(0, qMin(255, static_cast<int>(rgb[0])));
-  const int g = qMax(0, qMin(255, static_cast<int>(rgb[1])));
-  const int b = qMax(0, qMin(255, static_cast<int>(rgb[2])));
+  const int r = qBound(0, static_cast<int>(rgb[0]), 255);
+  const int g = qBound(0, static_cast<int>(rgb[1]), 255);
+  const int b = qBound(0, static_cast<int>(rgb[2]), 255);
 
   return QColor::fromRgb(r, g, b);
 }
