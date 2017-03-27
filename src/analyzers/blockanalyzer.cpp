@@ -398,6 +398,10 @@ void BlockAnalyzer::paletteChange(const QPalette&) {
 }
 
 void BlockAnalyzer::drawBackground() {
+  if (background_.isNull()) {
+    return;
+  }
+
   const QColor bg = palette().color(QPalette::Background);
   const QColor bgdark = bg.dark(112);
 
