@@ -125,7 +125,7 @@ SpotifyService::~SpotifyService() {
 }
 
 QStandardItem* SpotifyService::CreateRootItem() {
-  root_ = new QStandardItem(IconLoader::Load("spotify", IconLoader::Provider), 
+  root_ = new QStandardItem(IconLoader::Load("spotify", IconLoader::Provider),
                             kServiceName);
   root_->setData(true, InternetModel::Role_CanLazyLoad);
   return root_;
@@ -396,41 +396,40 @@ void SpotifyService::AddSongsToStarred(const QList<QUrl>& songs_urls) {
 }
 
 void SpotifyService::InitSearch() {
-    search_ =
-        new QStandardItem(IconLoader::Load("edit-find", IconLoader::Base),
-                          tr("Search results"));
-    search_->setToolTip(
-        tr("Start typing something on the search box above to "
-           "fill this search results list"));
-    search_->setData(Type_SearchResults, InternetModel::Role_Type);
-    search_->setData(InternetModel::PlayBehaviour_MultipleItems,
-                     InternetModel::Role_PlayBehaviour);
+  search_ = new QStandardItem(IconLoader::Load("edit-find", IconLoader::Base),
+                              tr("Search results"));
+  search_->setToolTip(
+      tr("Start typing something on the search box above to "
+         "fill this search results list"));
+  search_->setData(Type_SearchResults, InternetModel::Role_Type);
+  search_->setData(InternetModel::PlayBehaviour_MultipleItems,
+                   InternetModel::Role_PlayBehaviour);
 
-    starred_ = new QStandardItem(IconLoader::Load("star-on", IconLoader::Other),
-                                 tr("Starred"));
-    starred_->setData(Type_StarredPlaylist, InternetModel::Role_Type);
-    starred_->setData(true, InternetModel::Role_CanLazyLoad);
-    starred_->setData(InternetModel::PlayBehaviour_MultipleItems,
-                      InternetModel::Role_PlayBehaviour);
-    starred_->setData(true, InternetModel::Role_CanBeModified);
+  starred_ = new QStandardItem(IconLoader::Load("star-on", IconLoader::Other),
+                               tr("Starred"));
+  starred_->setData(Type_StarredPlaylist, InternetModel::Role_Type);
+  starred_->setData(true, InternetModel::Role_CanLazyLoad);
+  starred_->setData(InternetModel::PlayBehaviour_MultipleItems,
+                    InternetModel::Role_PlayBehaviour);
+  starred_->setData(true, InternetModel::Role_CanBeModified);
 
-    inbox_ = new QStandardItem(IconLoader::Load("mail-message",
-                               IconLoader::Base), tr("Inbox"));
-    inbox_->setData(Type_InboxPlaylist, InternetModel::Role_Type);
-    inbox_->setData(true, InternetModel::Role_CanLazyLoad);
-    inbox_->setData(InternetModel::PlayBehaviour_MultipleItems,
+  inbox_ = new QStandardItem(IconLoader::Load("mail-message", IconLoader::Base),
+                             tr("Inbox"));
+  inbox_->setData(Type_InboxPlaylist, InternetModel::Role_Type);
+  inbox_->setData(true, InternetModel::Role_CanLazyLoad);
+  inbox_->setData(InternetModel::PlayBehaviour_MultipleItems,
+                  InternetModel::Role_PlayBehaviour);
+
+  toplist_ = new QStandardItem(QIcon(), tr("Top tracks"));
+  toplist_->setData(Type_Toplist, InternetModel::Role_Type);
+  toplist_->setData(true, InternetModel::Role_CanLazyLoad);
+  toplist_->setData(InternetModel::PlayBehaviour_MultipleItems,
                     InternetModel::Role_PlayBehaviour);
 
-    toplist_ = new QStandardItem(QIcon(), tr("Top tracks"));
-    toplist_->setData(Type_Toplist, InternetModel::Role_Type);
-    toplist_->setData(true, InternetModel::Role_CanLazyLoad);
-    toplist_->setData(InternetModel::PlayBehaviour_MultipleItems,
-                      InternetModel::Role_PlayBehaviour);
-
-    root_->appendRow(search_);
-    root_->appendRow(toplist_);
-    root_->appendRow(starred_);
-    root_->appendRow(inbox_);
+  root_->appendRow(search_);
+  root_->appendRow(toplist_);
+  root_->appendRow(starred_);
+  root_->appendRow(inbox_);
 }
 
 void SpotifyService::PlaylistsUpdated(const pb::spotify::Playlists& response) {
@@ -622,9 +621,9 @@ QList<QAction*> SpotifyService::playlistitem_actions(const Song& song) {
   playlistitem_actions_.append(add_to_starred);
 
   // Create a menu with 'add to playlist' actions for each Spotify playlist
-  QAction* add_to_playlists = new QAction(IconLoader::Load("list-add", 
-                                          IconLoader::Base),
-                                          tr("Add to Spotify playlists"), this);
+  QAction* add_to_playlists =
+      new QAction(IconLoader::Load("list-add", IconLoader::Base),
+                  tr("Add to Spotify playlists"), this);
   QMenu* playlists_menu = new QMenu();
   for (const QStandardItem* playlist_item : playlists_) {
     if (!playlist_item->data(InternetModel::Role_CanBeModified).toBool()) {
@@ -669,7 +668,7 @@ void SpotifyService::EnsureMenuCreated() {
   playlist_context_menu_->addActions(GetPlaylistActions());
   playlist_context_menu_->addSeparator();
   playlist_sync_action_ = playlist_context_menu_->addAction(
-      IconLoader::Load("view-refresh", IconLoader::Base), 
+      IconLoader::Load("view-refresh", IconLoader::Base),
       tr("Make playlist available offline"), this, SLOT(SyncPlaylist()));
   get_url_to_share_playlist_ = playlist_context_menu_->addAction(
       tr("Get a URL to share this playlist"), this,
@@ -681,9 +680,8 @@ void SpotifyService::EnsureMenuCreated() {
   song_context_menu_->addActions(GetPlaylistActions());
   song_context_menu_->addSeparator();
   remove_from_playlist_ = song_context_menu_->addAction(
-      IconLoader::Load("list-remove", IconLoader::Base), 
-      tr("Remove from playlist"), this,
-      SLOT(RemoveCurrentFromPlaylist()));
+      IconLoader::Load("list-remove", IconLoader::Base),
+      tr("Remove from playlist"), this, SLOT(RemoveCurrentFromPlaylist()));
   song_context_menu_->addAction(tr("Get a URL to share this Spotify song"),
                                 this, SLOT(GetCurrentSongUrlToShare()));
   song_context_menu_->addSeparator();
@@ -771,7 +769,7 @@ void SpotifyService::SearchResults(
 
   // Must initialize search pointer if it is nullptr
   if (!search_) {
-     InitSearch();
+    InitSearch();
   }
   // Fill results list
   for (const Song& song : songs) {
@@ -856,10 +854,10 @@ void SpotifyService::ItemDoubleClicked(QStandardItem* item) {}
 
 void SpotifyService::DropMimeData(const QMimeData* data,
                                   const QModelIndex& index) {
-
   QModelIndex playlist_root_index = index;
   QVariant q_playlist_type = playlist_root_index.data(InternetModel::Role_Type);
-  if (!q_playlist_type.isValid() || q_playlist_type.toInt() == InternetModel::Type_Track) {
+  if (!q_playlist_type.isValid() ||
+      q_playlist_type.toInt() == InternetModel::Type_Track) {
     // In case song was dropped on a playlist item, not on the playlist
     // title/root element
     playlist_root_index = index.parent();
@@ -872,7 +870,8 @@ void SpotifyService::DropMimeData(const QMimeData* data,
   if (playlist_type == Type_StarredPlaylist) {
     AddSongsToStarred(data->urls());
   } else if (playlist_type == InternetModel::Type_UserPlaylist) {
-    QVariant q_playlist_index = playlist_root_index.data(Role_UserPlaylistIndex);
+    QVariant q_playlist_index =
+        playlist_root_index.data(Role_UserPlaylistIndex);
     if (!q_playlist_index.isValid()) return;
     AddSongsToUserPlaylist(q_playlist_index.toInt(), data->urls());
   }
@@ -924,8 +923,7 @@ void SpotifyService::SyncPlaylistProgress(
 }
 
 QAction* SpotifyService::GetNewShowConfigAction() {
-  QAction* action = new QAction(IconLoader::Load("configure", 
-                                IconLoader::Base),
+  QAction* action = new QAction(IconLoader::Load("configure", IconLoader::Base),
                                 tr("Configure Spotify..."), this);
   connect(action, SIGNAL(triggered()), this, SLOT(ShowConfig()));
   return action;
