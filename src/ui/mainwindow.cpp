@@ -663,7 +663,15 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
   library_view_->filter()->AddMenuAction(separator);
   library_view_->filter()->AddMenuAction(library_config_action);
 
-  // Playlist menu
+  /// Playlist menu ******************************************** right click - elias
+// reordered entries:
+  playlist_menu_->addAction(ui_->action_edit_track);
+  playlist_open_in_browser_ = playlist_menu_->addAction(
+      IconLoader::Load("document-open-folder", IconLoader::Base),
+      tr("Show in file browser..."), this, SLOT(PlaylistOpenInBrowser()));
+  playlist_menu_->addSeparator();
+// end reorder.. (elias)
+
   playlist_play_pause_ =
       playlist_menu_->addAction(tr("Play"), this, SLOT(PlaylistPlay()));
   playlist_menu_->addAction(ui_->action_stop);
@@ -679,7 +687,6 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
   playlist_menu_->addSeparator();
   playlist_menu_->addAction(ui_->action_remove_from_playlist);
   playlist_undoredo_ = playlist_menu_->addSeparator();
-  playlist_menu_->addAction(ui_->action_edit_track);
   playlist_menu_->addAction(ui_->action_view_stream_details);
   playlist_menu_->addAction(ui_->action_edit_value);
   playlist_menu_->addAction(ui_->action_renumber_tracks);
@@ -702,9 +709,6 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
   playlist_delete_ = playlist_menu_->addAction(
       IconLoader::Load("edit-delete", IconLoader::Base),
       tr("Delete from disk..."), this, SLOT(PlaylistDelete()));
-  playlist_open_in_browser_ = playlist_menu_->addAction(
-      IconLoader::Load("document-open-folder", IconLoader::Base),
-      tr("Show in file browser..."), this, SLOT(PlaylistOpenInBrowser()));
   playlist_show_in_library_ = playlist_menu_->addAction(
       IconLoader::Load("edit-find", IconLoader::Base), tr("Show in library..."),
       this, SLOT(ShowInLibrary()));
@@ -2367,32 +2371,33 @@ void MainWindow::PlaylistDelete() {
 
   if (QMessageBox::warning(this, tr("Delete files"),
                            tr("These files will be permanently deleted from "
-                              "disk, are you sure you want to continue?"),
+                              "disk, are you sure you want to continue? (elias: won't do anything)"),
                            QMessageBox::Yes,
                            QMessageBox::Cancel) != QMessageBox::Yes)
     return;
 
-  std::shared_ptr<MusicStorage> storage(new FilesystemMusicStorage("/"));
+  /// disabled by elias:
+//  std::shared_ptr<MusicStorage> storage(new FilesystemMusicStorage("/"));
 
-  // Get selected songs
-  SongList selected_songs;
-  QModelIndexList proxy_indexes =
-      ui_->playlist->view()->selectionModel()->selectedRows();
-  for (const QModelIndex& proxy_index : proxy_indexes) {
-    QModelIndex index =
-        app_->playlist_manager()->current()->proxy()->mapToSource(proxy_index);
-    selected_songs << app_->playlist_manager()
-                          ->current()
-                          ->item_at(index.row())
-                          ->Metadata();
-  }
+//  // Get selected songs
+//  SongList selected_songs;
+//  QModelIndexList proxy_indexes =
+//      ui_->playlist->view()->selectionModel()->selectedRows();
+//  for (const QModelIndex& proxy_index : proxy_indexes) {
+//    QModelIndex index =
+//        app_->playlist_manager()->current()->proxy()->mapToSource(proxy_index);
+//    selected_songs << app_->playlist_manager()
+//                          ->current()
+//                          ->item_at(index.row())
+//                          ->Metadata();
+//  }
 
-  ui_->playlist->view()->RemoveSelected();
+//  ui_->playlist->view()->RemoveSelected();
 
-  DeleteFiles* delete_files = new DeleteFiles(app_->task_manager(), storage);
-  connect(delete_files, SIGNAL(Finished(SongList)),
-          SLOT(DeleteFinished(SongList)));
-  delete_files->Start(selected_songs);
+//  DeleteFiles* delete_files = new DeleteFiles(app_->task_manager(), storage);
+//  connect(delete_files, SIGNAL(Finished(SongList)),
+//          SLOT(DeleteFinished(SongList)));
+//  delete_files->Start(selected_songs);
 }
 
 void MainWindow::PlaylistOpenInBrowser() {
