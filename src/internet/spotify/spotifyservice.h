@@ -120,8 +120,8 @@ class SpotifyService : public InternetService {
   // the pointer (or adding it to menu or anything else that will take ownership
   // of it)
   QAction* GetNewShowConfigAction();
+  void InitSearch();
   void ClearSearchResults();
-
   QStandardItem* PlaylistBySpotifyIndex(int index) const;
   bool DoPlaylistsDiffer(const pb::spotify::Playlists& response) const;
 
