@@ -2856,12 +2856,6 @@ void MainWindow::keyPressEvent(QKeyEvent* event) {
   if (event->key() == Qt::Key_Space) {
     app_->player()->PlayPause();
     event->accept();
-  } else if (event->key() == Qt::Key_Left) {
-    app_->player()->SeekBackward();
-    event->accept();
-  } else if (event->key() == Qt::Key_Right) {
-    app_->player()->SeekForward();
-    event->accept();
   } else {
     QMainWindow::keyPressEvent(event);
   }
