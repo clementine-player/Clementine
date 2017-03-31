@@ -218,7 +218,7 @@ void LibraryView::SaveFocus() {
     case LibraryItem::Type_Container:
     case LibraryItem::Type_Divider: {
       QString text =
-          model()->data(current, LibraryModel::Role_SortText).toString();
+          model()->data(current, LibraryModel::Role_Key).toString();
       last_selected_container_ = text;
       break;
     }
@@ -278,7 +278,7 @@ bool LibraryView::RestoreLevelFocus(const QModelIndex& parent) {
       case LibraryItem::Type_Container:
       case LibraryItem::Type_Divider: {
         QString text =
-            model()->data(current, LibraryModel::Role_SortText).toString();
+            model()->data(current, LibraryModel::Role_Key).toString();
         if (!last_selected_container_.isEmpty() &&
             last_selected_container_ == text) {
           emit expand(current);

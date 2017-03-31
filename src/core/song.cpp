@@ -130,7 +130,8 @@ const QStringList Song::kFtsColumns = QStringList() << "ftstitle"
                                                     << "ftsperformer"
                                                     << "ftsgrouping"
                                                     << "ftsgenre"
-                                                    << "ftscomment";
+                                                    << "ftscomment"
+                                                    << "ftsyear";
 
 const QString Song::kFtsColumnSpec = Song::kFtsColumns.join(", ");
 const QString Song::kFtsBindSpec =
@@ -996,6 +997,7 @@ void Song::BindToFtsQuery(QSqlQuery* query) const {
   query->bindValue(":ftsgrouping", d->grouping_);
   query->bindValue(":ftsgenre", d->genre_);
   query->bindValue(":ftscomment", d->comment_);
+  query->bindValue(":ftsyear", d->year_);
 }
 
 #ifdef HAVE_LIBLASTFM
