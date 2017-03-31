@@ -203,7 +203,6 @@ void Analyzer::Base::updateBandSize(const int scopeSize) {
   bands_ = scopeSize;
 
   barkband_table_.clear();
-  barkband_table_.resize(bands_ + 1);
 
   int barkband = 0;
   for (int i = 0; i < bands_ + 1; ++i) {
