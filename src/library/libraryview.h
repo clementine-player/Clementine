@@ -101,8 +101,6 @@ signals:
   void ShowInVarious();
   void NoShowInVarious();
 
-  void SearchForArtist();
-  void SearchForAlbum();
   void SearchForThis();
 
   void NewSmartPlaylist();
@@ -143,8 +141,6 @@ signals:
   QAction* show_in_various_;
   QAction* no_show_in_various_;
 
-  QAction* search_for_artist_;
-  QAction* search_for_album_;
   QAction* search_for_this_;
 
   QAction* new_smart_playlist_;
@@ -159,6 +155,7 @@ signals:
   // Save focus
   Song last_selected_song_;
   QString last_selected_container_;
+  QString last_selected_text_;
   QSet<QString> last_selected_path_;
 };
 

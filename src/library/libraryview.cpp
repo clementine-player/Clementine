@@ -203,6 +203,7 @@ void LibraryView::SaveFocus() {
   last_selected_path_.clear();
   last_selected_song_ = Song();
   last_selected_container_ = QString();
+  last_selected_text_ = QString();
 
   switch (type.toInt()) {
     case LibraryItem::Type_Song: {
@@ -211,6 +212,7 @@ void LibraryView::SaveFocus() {
       SongList songs = app_->library_model()->GetChildSongs(index);
       if (!songs.isEmpty()) {
         last_selected_song_ = songs.last();
+        last_selected_text_ = songs.last().title();
       }
       break;
     }
@@ -220,6 +222,7 @@ void LibraryView::SaveFocus() {
       QString text =
           model()->data(current, LibraryModel::Role_SortText).toString();
       last_selected_container_ = text;
+      last_selected_text_ = model()->data(current, LibraryModel::Role_DisplayText).toString();
       break;
     }
 
@@ -391,12 +394,6 @@ void LibraryView::contextMenuEvent(QContextMenuEvent* e) {
         SLOT(AddToPlaylistEnqueue()));
 
     context_menu_->addSeparator();
-    search_for_artist_ = context_menu_->addAction(
-        IconLoader::Load("system-search", IconLoader::Base),
-        tr("Search for artist"), this, SLOT(SearchForArtist()));
-    search_for_album_ = context_menu_->addAction(
-        IconLoader::Load("system-search", IconLoader::Base),
-        tr("Search for album"), this, SLOT(SearchForAlbum()));
     search_for_this_ = context_menu_->addAction(
         IconLoader::Load("system-search", IconLoader::Base),
         tr("Search for this"), this, SLOT(SearchForThis()));
@@ -530,12 +527,8 @@ void LibraryView::contextMenuEvent(QContextMenuEvent* e) {
   show_in_various_->setVisible(regular_elements_only);
   no_show_in_various_->setVisible(regular_elements_only);
 
-  // only when a single song is selected exclusively
-  search_for_artist_->setVisible(one_regular_song_only);
-  search_for_album_->setVisible(one_regular_song_only);
-
-  // only when a single container is selected exclusively
-  search_for_this_->setVisible(one_container_only);
+  // only when a single container or one song is selected exclusively
+  search_for_this_->setVisible(one_container_only || one_regular_song_only);
 
   // only when all selected items are editable
   organise_->setEnabled(regular_elements == regular_editable);
@@ -737,26 +730,10 @@ void LibraryView::FilterReturnPressed() {
   emit doubleClicked(currentIndex());
 }
 
-void LibraryView::SearchForArtist() {
-  SaveFocus();
-  if (!last_selected_song_.albumartist().isEmpty()) {
-    filter_->ShowInLibrary(last_selected_song_.albumartist().simplified());
-  } else if (!last_selected_song_.artist().isEmpty()) {
-    filter_->ShowInLibrary(last_selected_song_.artist().simplified());
-  }
-}
-
-void LibraryView::SearchForAlbum() {
-  SaveFocus();
-  if (!last_selected_song_.album().isEmpty()) {
-    filter_->ShowInLibrary(last_selected_song_.album().simplified());
-  }
-}
-
 void LibraryView::SearchForThis() {
   SaveFocus();
-  if (!last_selected_container_.isEmpty()) {
-    filter_->ShowInLibrary(last_selected_container_.simplified());
+  if (!last_selected_text_.isEmpty()) {
+    filter_->ShowInLibrary(last_selected_text_.simplified());
   }
 }
 
