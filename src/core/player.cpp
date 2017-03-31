@@ -334,6 +334,7 @@ void Player::PreviousItem(Engine::TrackChangeFlags change) {
   app_->playlist_manager()->active()->set_current_row(i);
   if (i == -1) {
     Stop();
+    PlayAt(i, change, true);
     return;
   }
 
