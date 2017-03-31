@@ -465,15 +465,14 @@ bool GlobalSearchView::ResultsContextMenuEvent(QContextMenuEvent* event) {
       SLOT(AddSelectedToPlaylistEnqueue()));
 
   context_menu_->addSeparator();
+
   if (ui_->results->selectionModel() &&
       ui_->results->selectionModel()->selectedRows().length() == 1) {
     context_actions_ << context_menu_->addAction(
         IconLoader::Load("system-search", IconLoader::Base),
-        tr("Search for artist"), this, SLOT(SearchForArtist()));
-    context_actions_ << context_menu_->addAction(
-        IconLoader::Load("system-search", IconLoader::Base),
-        tr("Search for album"), this, SLOT(SearchForAlbum()));
+        tr("Search for this"), this, SLOT(SearchForThis()));
   }
+
   context_menu_->addSeparator();
   context_menu_->addMenu(tr("Group by"))
       ->addActions(group_by_actions_->actions());
@@ -522,44 +521,9 @@ void GlobalSearchView::OpenSelectedInNewPlaylist() {
   emit AddToPlaylist(data);
 }
 
-void GlobalSearchView::SearchForArtist() {
-  if (const SongMimeData* data =
-          qobject_cast<const SongMimeData*>(SelectedMimeData())) {
-    if (data && !data->songs.isEmpty()) {
-      if (!data->songs.first().albumartist().isEmpty()) {
-        StartSearch(data->songs.first().albumartist().simplified());
-      } else if (!data->songs.first().artist().isEmpty()) {
-        StartSearch(data->songs.first().artist().simplified());
-      }
-    }
-  } else if (const InternetSongMimeData* data =
-                 qobject_cast<const InternetSongMimeData*>(
-                     SelectedMimeData())) {
-    if (data && !data->songs.isEmpty()) {
-      if (!data->songs.first().albumartist().isEmpty()) {
-        StartSearch(data->songs.first().albumartist().simplified());
-      } else if (!data->songs.first().artist().isEmpty()) {
-        StartSearch(data->songs.first().artist().simplified());
-      }
-    }
-  }
-}
-
-void GlobalSearchView::SearchForAlbum() {
-  if (const SongMimeData* data =
-          qobject_cast<const SongMimeData*>(SelectedMimeData())) {
-    if (data && !data->songs.isEmpty() &&
-        !data->songs.first().album().isEmpty()) {
-      StartSearch(data->songs.first().album().simplified());
-    }
-  } else if (const InternetSongMimeData* data =
-                 qobject_cast<const InternetSongMimeData*>(
-                     SelectedMimeData())) {
-    if (data && !data->songs.isEmpty() &&
-        !data->songs.first().album().isEmpty()) {
-      StartSearch(data->songs.first().album().simplified());
-    }
-  }
+void GlobalSearchView::SearchForThis() {
+  StartSearch(
+      ui_->results->selectionModel()->selectedRows().first().data().toString());
 }
 
 void GlobalSearchView::showEvent(QShowEvent* e) {
