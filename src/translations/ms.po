@@ -3,14 +3,14 @@
 # This file is distributed under the same license as the Clementine package.
 # 
 # Translators:
-# abuyop <abuyop@gmail.com>, 2014-2016
+# abuyop <abuyop@gmail.com>, 2014-2017
 # Deo Favente <acrox999@gmail.com>, 2013
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2011
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2017-01-12 13:21+0000\n"
-"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
+"PO-Revision-Date: 2017-04-02 08:45+0000\n"
+"Last-Translator: abuyop <abuyop@gmail.com>\n"
 "Language-Team: Malay (http://www.transifex.com/davidsansome/clementine/language/ms/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -258,7 +258,7 @@ msgstr "&Tahun"
 msgid "(different across multiple songs)"
 msgstr "(berbeza dengan pelbagai lagu)"
 
-#: internet/spotify/spotifyservice.cpp:469
+#: internet/spotify/spotifyservice.cpp:472
 msgid ", by "
 msgstr ", oleh"
 
@@ -611,11 +611,11 @@ msgstr "Tambah tag tahun lagu"
 msgid "Add stream..."
 msgstr "Tambah stream..."
 
-#: internet/spotify/spotifyservice.cpp:623
+#: internet/spotify/spotifyservice.cpp:626
 msgid "Add to Spotify playlists"
 msgstr "Tambah ke senarai main Spotify"
 
-#: internet/spotify/spotifyservice.cpp:615
+#: internet/spotify/spotifyservice.cpp:618
 msgid "Add to Spotify starred"
 msgstr "Tambah ke Spotify dibintangi"
 
@@ -1101,7 +1101,7 @@ msgstr "Perubahan keutamaan main balik mono akan berkesan pada lagu seterusnya y
 
 #: ../bin/src/ui_streamdetailsdialog.h:137
 msgid "Channels"
-msgstr ""
+msgstr "Saluran"
 
 #: ../bin/src/ui_podcastsettingspage.h:252
 msgid "Check for new episodes"
@@ -1340,7 +1340,7 @@ msgstr "Tetapkan Pintasan"
 msgid "Configure SoundCloud..."
 msgstr "Konfigur SoundCloud..."
 
-#: internet/spotify/spotifyservice.cpp:921
+#: internet/spotify/spotifyservice.cpp:927
 msgid "Configure Spotify..."
 msgstr "Konfigur Spotify..."
 
@@ -1388,7 +1388,7 @@ msgstr "Sambungan dinafi oleh pelayan, periksa URL pelayan. Contoh: http://local
 
 #: songinfo/streamdiscoverer.cpp:116
 msgid "Connection timed out"
-msgstr ""
+msgstr "Sambungan tamat masa"
 
 #: internet/subsonic/subsonicsettingspage.cpp:141
 msgid ""
@@ -1453,11 +1453,11 @@ msgstr "Tidak dapat cipta unsur GStreamer \"%1\" - pastikan anda telah mempunyai
 #: songinfo/streamdiscoverer.cpp:97
 #, qt-format
 msgid "Could not detect an audio stream in %1"
-msgstr ""
+msgstr "Tidak dapat kesan strim audio dalam %1"
 
 #: songinfo/streamdiscoverer.cpp:123
 msgid "Could not get details"
-msgstr ""
+msgstr "Tidak memperoleh perincian"
 
 #: playlist/playlistmanager.cpp:166
 msgid "Couldn't create playlist"
@@ -1661,7 +1661,7 @@ msgstr "Memadam fail-fail"
 
 #: ../bin/src/ui_streamdetailsdialog.h:143
 msgid "Depth"
-msgstr ""
+msgstr "Kedalaman"
 
 #: ui/mainwindow.cpp:1736
 msgid "Dequeue selected tracks"
@@ -2098,7 +2098,7 @@ msgstr "Ralat memadam lagu"
 #: songinfo/streamdiscoverer.cpp:56
 #, qt-format
 msgid "Error discovering %1: %2"
-msgstr ""
+msgstr "Ralat menemui %1: %2"
 
 #: internet/spotify/spotifyblobdownloader.cpp:260
 msgid "Error downloading Spotify plugin"
@@ -2457,12 +2457,12 @@ msgstr "Tetapan am"
 msgid "Genre"
 msgstr "Genre"
 
-#: internet/spotify/spotifyservice.cpp:639
-#: internet/spotify/spotifyservice.cpp:683
+#: internet/spotify/spotifyservice.cpp:642
+#: internet/spotify/spotifyservice.cpp:685
 msgid "Get a URL to share this Spotify song"
 msgstr "Dapatkan URL untuk kongsikan lagu Spotify ini"
 
-#: internet/spotify/spotifyservice.cpp:671
+#: internet/spotify/spotifyservice.cpp:674
 msgid "Get a URL to share this playlist"
 msgstr "Dapatkan URL untuk kongsikan senarai main ini"
 
@@ -2670,7 +2670,7 @@ msgid ""
 "time a song finishes."
 msgstr "Dalam mod dinamik trek baharu akan dipilih dan ditambah ke senarai main setiap kali lagu selesai."
 
-#: internet/spotify/spotifyservice.cpp:425
+#: internet/spotify/spotifyservice.cpp:417
 msgid "Inbox"
 msgstr "Peti Masuk"
 
@@ -2754,7 +2754,7 @@ msgstr "Kunci API tidak sah"
 
 #: songinfo/streamdiscoverer.cpp:114
 msgid "Invalid URL"
-msgstr ""
+msgstr "URL tidak sah"
 
 #: internet/lastfm/lastfmservice.cpp:251
 msgid "Invalid format"
@@ -3124,7 +3124,7 @@ msgctxt "Label for button to enable/disable Enterprise background sound."
 msgid "Make it so!"
 msgstr "Make it so!"
 
-#: internet/spotify/spotifyservice.cpp:669
+#: internet/spotify/spotifyservice.cpp:672
 msgid "Make playlist available offline"
 msgstr "Buatkan senarai main tersedia di luar talian"
 
@@ -3197,7 +3197,7 @@ msgstr "Isian penimbal minimum"
 
 #: songinfo/streamdiscoverer.cpp:120
 msgid "Missing plugins"
-msgstr ""
+msgstr "Pemalam hilang"
 
 #: visualisations/projectmvisualisation.cpp:131
 msgid "Missing projectM presets"
@@ -4039,7 +4039,7 @@ msgstr "Buang pendua dari senarai main"
 msgid "Remove folder"
 msgstr "Buang folder"
 
-#: internet/spotify/spotifyservice.cpp:681 ../bin/src/ui_mainwindow.h:704
+#: internet/spotify/spotifyservice.cpp:684 ../bin/src/ui_mainwindow.h:704
 msgid "Remove from playlist"
 msgstr "Buang dari senarai main"
 
@@ -4311,7 +4311,7 @@ msgstr "Gelintar Subsonic"
 msgid "Search automatically"
 msgstr "Gelintar secara automatik"
 
-#: ui/albumcoverchoicecontroller.cpp:68
+#: ui/albumcoverchoicecontroller.cpp:69
 msgid "Search for album covers..."
 msgstr "Gelintar kulit album..."
 
@@ -4336,7 +4336,7 @@ msgid "Search options"
 msgstr "Pilihan gelintar"
 
 #: internet/soundcloud/soundcloudservice.cpp:119
-#: internet/spotify/spotifyservice.cpp:408
+#: internet/spotify/spotifyservice.cpp:400
 msgid "Search results"
 msgstr "Keputusan gelintar"
 
@@ -4521,7 +4521,7 @@ msgstr "Tunjuk seni kulit muka dalam pustaka"
 msgid "Show dividers"
 msgstr "Tunjuk pembahagi"
 
-#: ui/albumcoverchoicecontroller.cpp:72 widgets/prettyimage.cpp:183
+#: ui/albumcoverchoicecontroller.cpp:73 widgets/prettyimage.cpp:183
 msgid "Show fullsize..."
 msgstr "Tunjuk saiz penuh..."
 
@@ -4731,7 +4731,7 @@ msgstr "Spotify"
 msgid "Spotify login error"
 msgstr "Ralat daftar masuk Spotify"
 
-#: internet/spotify/spotifyservice.cpp:844
+#: internet/spotify/spotifyservice.cpp:850
 msgid "Spotify playlist's URL"
 msgstr "URL senarai main Spotify"
 
@@ -4743,7 +4743,7 @@ msgstr "Pemalam Spotify"
 msgid "Spotify plugin not installed"
 msgstr "Pemalam Spotify tidak dipasang"
 
-#: internet/spotify/spotifyservice.cpp:835
+#: internet/spotify/spotifyservice.cpp:841
 msgid "Spotify song's URL"
 msgstr "URL lagu Spotify"
 
@@ -4751,7 +4751,7 @@ msgstr "URL lagu Spotify"
 msgid "Standard"
 msgstr "Piawai"
 
-#: internet/spotify/spotifyservice.cpp:417
+#: internet/spotify/spotifyservice.cpp:409
 #: internet/subsonic/subsonicservice.cpp:115
 msgid "Starred"
 msgstr "Disukai"
@@ -4769,7 +4769,7 @@ msgid "Start transcoding"
 msgstr "Mulakan transkod"
 
 #: internet/soundcloud/soundcloudservice.cpp:121
-#: internet/spotify/spotifyservice.cpp:410
+#: internet/spotify/spotifyservice.cpp:402
 msgid ""
 "Start typing something on the search box above to fill this search results "
 "list"
@@ -4832,7 +4832,7 @@ msgstr "Strim"
 
 #: ../bin/src/ui_streamdetailsdialog.h:133
 msgid "Stream Details"
-msgstr ""
+msgstr "Perincian Strim"
 
 #: internet/subsonic/subsonicsettingspage.cpp:51
 msgid ""
@@ -4889,15 +4889,15 @@ msgstr "Format disokong"
 msgid "Synchronize statistics to files now"
 msgstr "Segerak statistik ke fail sekarang"
 
-#: internet/spotify/spotifyservice.cpp:708
+#: internet/spotify/spotifyservice.cpp:710
 msgid "Syncing Spotify inbox"
 msgstr "Menyegerak kotak masuk Spotify"
 
-#: internet/spotify/spotifyservice.cpp:702
+#: internet/spotify/spotifyservice.cpp:704
 msgid "Syncing Spotify playlist"
 msgstr "Menyegerak senarai main Spotify"
 
-#: internet/spotify/spotifyservice.cpp:713
+#: internet/spotify/spotifyservice.cpp:715
 msgid "Syncing Spotify starred tracks"
 msgstr "Menyegerak trek terbintang Spotify"
 
@@ -4945,7 +4945,7 @@ msgstr "Direktori %1 tidak sah"
 
 #: songinfo/streamdiscoverer.cpp:118
 msgid "The discoverer is busy"
-msgstr ""
+msgstr "Penjelajah sibuk"
 
 #: smartplaylists/searchtermwidget.cpp:346
 msgid "The second value must be greater than the first one!"
@@ -5134,7 +5134,7 @@ msgstr "Terlalu banyak arah semula"
 msgid "Top Rated"
 msgstr "Penarafan Tertinggi"
 
-#: internet/spotify/spotifyservice.cpp:431
+#: internet/spotify/spotifyservice.cpp:423
 msgid "Top tracks"
 msgstr "Trek terbaik"
 
@@ -5202,7 +5202,7 @@ msgstr "URI"
 
 #: ../bin/src/ui_streamdetailsdialog.h:134
 msgid "URL"
-msgstr ""
+msgstr "URL"
 
 #: core/commandlineoptions.cpp:152
 msgid "URL(s)"
@@ -5244,7 +5244,7 @@ msgstr "Jenis-kandungan tidak diketahui"
 msgid "Unknown error"
 msgstr "Ralat tidak diketahui"
 
-#: ui/albumcoverchoicecontroller.cpp:70
+#: ui/albumcoverchoicecontroller.cpp:71
 msgid "Unset cover"
 msgstr "Nyahtetap kulit muka"
 
@@ -5420,7 +5420,7 @@ msgstr "Lihat"
 
 #: ../bin/src/ui_mainwindow.h:730
 msgid "View Stream Details"
-msgstr ""
+msgstr "Lihat Perincian Strim"
 
 #: ../bin/src/ui_visualisationselector.h:108
 msgid "Visualization mode"
