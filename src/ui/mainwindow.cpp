@@ -2113,7 +2113,7 @@ void MainWindow::ShowInLibrary() {
 }
 
 void MainWindow::PlaylistRemoveCurrent() {
-  ui_->playlist->view()->RemoveSelected();
+  ui_->playlist->view()->RemoveSelected(false);
 }
 
 void MainWindow::PlaylistEditFinished(const QModelIndex& index) {
@@ -2400,7 +2400,7 @@ void MainWindow::PlaylistDelete() {
     }
   }
 
-  ui_->playlist->view()->RemoveSelected();
+  ui_->playlist->view()->RemoveSelected(true);
 
   DeleteFiles* delete_files = new DeleteFiles(app_->task_manager(), storage);
   connect(delete_files, SIGNAL(Finished(SongList)),
