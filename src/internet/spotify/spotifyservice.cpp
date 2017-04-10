@@ -20,7 +20,9 @@
    You should have received a copy of the GNU General Public License
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
-
+#include <fstream>
+#include <iostream>
+#include <iomanip>
 #include "spotifyservice.h"
 
 #include <QCoreApplication>
@@ -59,12 +61,12 @@
 #endif
 
 Q_DECLARE_METATYPE(QStandardItem*);
-
 const char* SpotifyService::kServiceName = "Spotify";
 const char* SpotifyService::kSettingsGroup = "Spotify";
 const char* SpotifyService::kBlobDownloadUrl =
     "https://spotify.clementine-player.org/";
 const int SpotifyService::kSearchDelayMsec = 400;
+Song SpotifyService::current_song_ = Song();
 
 SpotifyService::SpotifyService(Application* app, InternetModel* parent)
     : InternetService(kServiceName, app, parent, parent),
@@ -356,6 +358,7 @@ void SpotifyService::StartBlobProcess() {
   qLog(Info) << "Starting" << blob_path;
   blob_process_->start(
       blob_path, QStringList() << QString::number(server_->server_port()));
+
 }
 
 bool SpotifyService::IsBlobInstalled() const {
@@ -373,7 +376,105 @@ void SpotifyService::InstallBlob() {
 #endif  // HAVE_SPOTIFY_DOWNLOADER
 }
 
-void SpotifyService::BlobDownloadFinished() { EnsureServerCreated(); }
+void SpotifyService::BlobDownloadFinished() {
+    EnsureServerCreated();
+}
+
+int SpotifyService::SongIsInPlayCountFile(std::fstream &ofs,
+                                          const std::string& songArtist,
+                                          const std::string& songTitle,
+                                          const std::string& songYear,
+                                          int &playCount ) const {
+
+    playCount = 0;
+
+    // Get the size of the file in bytes.
+    ofs.seekp( 0, std::ios_base::end );
+    int fileSize = ofs.tellp();
+    ofs.seekp( 0, std::ios_base::beg );
+
+    // Initialize local variables.
+    int filePosition = -1;
+    bool endOfFile = false;
+    bool songFound = false;
+    size_t artistLength = strlen(songArtist.c_str());
+    size_t titleLength = strlen(songTitle.c_str());
+    int numChars = 0;
+
+    while( !endOfFile && !songFound ) {
+         char line[256];
+
+         ofs.getline( line, 256 );
+         if( strncmp(line, songArtist.c_str(), artistLength) == 0 ) {
+             if( strncmp( &(line[artistLength+1]), songTitle.c_str(), titleLength ) == 0 ) {
+                 ofs.seekp( numChars, std::ios_base::beg ); // Seek back to the beginning of this line in the file.
+                 filePosition = numChars;
+                 songFound = true;
+                 const int YEAR_LENGTH_CHARS = 4;
+                 playCount = atoi( &line[artistLength+1+titleLength+1+YEAR_LENGTH_CHARS+1] );
+             }
+         }
+         numChars += (strlen(line)+1);
+         endOfFile = (ofs.tellg() == -1) || (ofs.tellg() >= fileSize);
+    }
+
+    if(! songFound ) {
+        ofs.seekp( 0, std::ios_base::end ); // Seek to the end of the file to add the song there.
+        filePosition = ofs.tellp();
+    }
+
+    return filePosition;
+}
+
+void SpotifyService::UpdatePlayCountFile(const QString& artist,
+                                         const QString& title,
+                                         const QString& year) { // const Engine::SimpleMetaBundle& bundle) {
+    int playCount = 0;
+
+    qLog(Info) << "artist=" << artist << " title=" << title << " year=" << year;
+
+    char* userHomeDir = std::getenv("HOME");
+    char  SpotifyPlayCountFileName[256];
+    strncpy( SpotifyPlayCountFileName, userHomeDir, strlen(userHomeDir) );
+    strcat(SpotifyPlayCountFileName,"/SpotifyPlayCount2.csv");
+    const int DEFAULT_WIDTH= 8;
+    std::fstream ofs(SpotifyPlayCountFileName, std::ios_base::in | std::ios_base::out);
+    if( !ofs ) {
+
+        ofs.open(SpotifyPlayCountFileName, std::ios_base::app);
+        ofs << artist.toStdString() << ","
+            << title.toStdString() << ","
+            << year.toStdString() << ","
+            << std::setw(DEFAULT_WIDTH) << std::left << ++playCount << std::endl;
+        ofs.flush();
+        ofs.close();
+    }
+    else {
+        ofs.seekp(0,std::ios_base::beg);
+
+        // Try to see if the song is in the "PlayCountFile".
+        int filePosition = this->SongIsInPlayCountFile(ofs,
+                                                       artist.toStdString(),
+                                                       title.toStdString(),
+                                                       year.toStdString(),
+                                                       playCount);
+        if( filePosition > 0) {
+            // Seek to the position in the file where the song is located, or the end of the file.
+            ofs.seekp(filePosition, std::ios_base::beg);
+        }
+        ofs << artist.toStdString() << ","
+            << title.toStdString() << ","
+            << year.toStdString() << ","
+            << std::setw(DEFAULT_WIDTH) << std::left << ++playCount << std::endl;
+
+        ofs.seekp(0,std::ios_base::end);
+
+        ofs.flush();
+        ofs.close();
+    }
+
+    return;
+}
 
 void SpotifyService::AddCurrentSongToUserPlaylist(QAction* action) {
   int playlist_index = action->data().toInt();
@@ -600,6 +701,7 @@ void SpotifyService::SongFromProtobuf(const pb::spotify::Track& track,
   song->set_mtime(0);
   song->set_ctime(0);
   song->set_filesize(0);
+
 }
 
 QList<QAction*> SpotifyService::playlistitem_actions(const Song& song) {
@@ -642,6 +744,10 @@ QList<QAction*> SpotifyService::playlistitem_actions(const Song& song) {
 
   // Keep in mind the current song URL
   current_song_url_ = song.url();
+
+  SpotifyService::current_song_ = song;
+  qLog(Debug) << "playlistitem_actions: " << SpotifyService::current_song_.PrettyTitleWithArtist();
+
 
   return playlistitem_actions_;
 }
@@ -760,7 +866,6 @@ void SpotifyService::SearchResults(
     SongFromProtobuf(response.result(i), &song);
     songs << song;
   }
-
   qLog(Debug) << "Got" << songs.count() << "results";
 
   ClearSearchResults();

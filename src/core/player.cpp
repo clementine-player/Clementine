@@ -411,16 +411,32 @@ void Player::PlayAt(int index, Engine::TrackChangeFlags change,
 
     stream_change_type_ = change;
     HandleLoadResult(url_handlers_[url.scheme()]->StartLoading(url));
-  } else {
-    loading_async_ = QUrl();
-    engine_->Play(current_item_->Url(), change,
-                  current_item_->Metadata().has_cue(),
-                  current_item_->Metadata().beginning_nanosec(),
-                  current_item_->Metadata().end_nanosec());
+  }
+  else {
+      loading_async_ = QUrl();
+
+      if( current_item_->Url().scheme() == "spotify" ) {
+          Engine::SimpleMetaBundle myBundle;
+          current_item_->Metadata().MakeMetaData(myBundle);
+          qLog(Info) << "artist=" << myBundle.artist << " title=" << myBundle.title << " year=" << myBundle.year;
+          engine_->Play(myBundle,
+                        current_item_->Url(),
+                        change,
+                        current_item_->Metadata().has_cue(),
+                        current_item_->Metadata().beginning_nanosec(),
+                        current_item_->Metadata().end_nanosec());
+      }
+      else {
+          engine_->Play(current_item_->Url(),
+                        change,
+                        current_item_->Metadata().has_cue(),
+                        current_item_->Metadata().beginning_nanosec(),
+                        current_item_->Metadata().end_nanosec());
+      }
 
 #ifdef HAVE_LIBLASTFM
-    if (lastfm_->IsScrobblingEnabled())
-      lastfm_->NowPlaying(current_item_->Metadata());
+      if (lastfm_->IsScrobblingEnabled())
+          lastfm_->NowPlaying(current_item_->Metadata());
 #endif
   }
 }

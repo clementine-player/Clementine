@@ -41,6 +41,7 @@
 #include <QTime>
 #include <QVariant>
 #include <QtConcurrentRun>
+#include <QString>
 
 #ifdef HAVE_LIBLASTFM
 #include "internet/lastfm/fixlastfm.h"
@@ -903,6 +904,19 @@ void Song::MergeFromSimpleMetaBundle(const Engine::SimpleMetaBundle& bundle) {
   if (!bundle.length.isEmpty()) set_length_nanosec(bundle.length.toLongLong());
   if (!bundle.year.isEmpty()) d->year_ = bundle.year.toInt();
   if (!bundle.tracknr.isEmpty()) d->track_ = bundle.tracknr.toInt();
+}
+
+void Song::MakeMetaData( Engine::SimpleMetaBundle& bundle ) const {
+    bundle.title = QString( d->title_.data() );
+    bundle.artist = QString(d->artist_.data());
+    bundle.album = QString(d->album_.data());
+    bundle.comment = QString(d->comment_.data());
+    bundle.genre = QString(d->genre_.data());
+    bundle.bitrate = QString::number(d->bitrate_);
+    bundle.samplerate = QString::number(d->samplerate_);
+    bundle.length = QString::number(d->end_-d->beginning_);
+    bundle.year = QString::number(d->year_);
+    bundle.tracknr = QString::number(d->track_);
 }
 
 void Song::BindToQuery(QSqlQuery* query) const {

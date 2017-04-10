@@ -67,6 +67,7 @@ class SpotifyService : public InternetService {
   static const char* kSettingsGroup;
   static const char* kBlobDownloadUrl;
   static const int kSearchDelayMsec;
+  static Song current_song_;
 
   void ReloadSettings() override;
 
@@ -83,6 +84,9 @@ class SpotifyService : public InternetService {
   void Login(const QString& username, const QString& password);
   Q_INVOKABLE void LoadImage(const QString& id);
   Q_INVOKABLE void SetPaused(bool paused);
+  Q_INVOKABLE void UpdatePlayCountFile(const QString& artist,
+                                       const QString& title,
+                                       const QString& year);    // const Engine::SimpleMetaBundle &bundle);
 
   SpotifyServer* server() const;
 
@@ -124,6 +128,12 @@ class SpotifyService : public InternetService {
 
   QStandardItem* PlaylistBySpotifyIndex(int index) const;
   bool DoPlaylistsDiffer(const pb::spotify::Playlists& response) const;
+  int SongIsInPlayCountFile(std::fstream &ofs,
+                            const std::string& songArtist,
+                            const std::string& songTitle,
+                            const std::string& songYear,
+                            int &playCount ) const;
+  void SetMetaData( const Engine::SimpleMetaBundle &bundle );
 
  private slots:
   void EnsureServerCreated(const QString& username = QString(),
@@ -153,7 +163,6 @@ class SpotifyService : public InternetService {
 
  private:
   SpotifyServer* server_;
-
   QString system_blob_path_;
   QString local_blob_version_;
   QString local_blob_path_;
@@ -161,7 +170,7 @@ class SpotifyService : public InternetService {
 
   QStandardItem* root_;
   QStandardItem* search_;
-  QStandardItem* starred_;
+  QStandardItem* starred_; // We suspect this is the current song
   QStandardItem* inbox_;
   QStandardItem* toplist_;
   QList<QStandardItem*> playlists_;

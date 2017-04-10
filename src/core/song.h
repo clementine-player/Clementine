@@ -144,6 +144,8 @@ class Song {
 
   static QString Decode(const QString& tag, const QTextCodec* codec = nullptr);
 
+  void MakeMetaData(Engine::SimpleMetaBundle &bundle ) const;
+
   // Save
   void BindToQuery(QSqlQuery* query) const;
   void BindToFtsQuery(QSqlQuery* query) const;

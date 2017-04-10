@@ -469,6 +469,12 @@ bool GstEngine::Play(quint64 offset_nanosec) {
   return true;
 }
 
+bool GstEngine::Play(const Engine::SimpleMetaBundle &bundle,
+                     quint64 offset_nanosec) {
+  this->bundle = bundle;
+  return( this->Play(offset_nanosec) );
+}
+
 void GstEngine::PlayDone(QFuture<GstStateChangeReturn> future,
                          const quint64 offset_nanosec, const int pipeline_id) {
   GstStateChangeReturn ret = future.result();
@@ -574,6 +580,10 @@ void GstEngine::Pause() {
       StopTimers();
     }
   }
+}
+
+const Engine::SimpleMetaBundle& GstEngine::GetMetaDataBundle() const {
+    return( this->bundle );
 }
 
 void GstEngine::Unpause() {
