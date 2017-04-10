@@ -2406,11 +2406,6 @@ void MainWindow::PlaylistDelete() {
   connect(delete_files, SIGNAL(Finished(SongList)),
           SLOT(DeleteFinished(SongList)));
   delete_files->Start(selected_songs);
-
-  DeleteFiles* delete_files = new DeleteFiles(app_->task_manager(), storage);
-  connect(delete_files, SIGNAL(Finished(SongList)),
-          SLOT(DeleteFinished(SongList)));
-  delete_files->Start(selected_songs);
 }
 
 void MainWindow::PlaylistOpenInBrowser() {
