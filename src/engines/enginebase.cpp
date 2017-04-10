@@ -100,3 +100,13 @@ bool Engine::Base::Play(const QUrl& u, TrackChangeFlags c,
 
   return Play(0);
 }
+
+bool Engine::Base::Play(const SimpleMetaBundle &bundle, const QUrl& u, TrackChangeFlags c,
+                        bool force_stop_at_end, quint64 beginning_nanosec,
+                        qint64 end_nanosec) {
+
+  if (!Load(u, c, force_stop_at_end, beginning_nanosec, end_nanosec))
+    return false;
+
+  return( Play(bundle, 0) );
+}
