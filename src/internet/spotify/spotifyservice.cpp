@@ -436,7 +436,7 @@ void SpotifyService::UpdatePlayCountFile(const QString& artist,
     char* userHomeDir = std::getenv("HOME");
     char  SpotifyPlayCountFileName[256];
     strncpy( SpotifyPlayCountFileName, userHomeDir, strlen(userHomeDir) );
-    strcat(SpotifyPlayCountFileName,"/SpotifyPlayCount2.csv");
+    strcat(SpotifyPlayCountFileName,"/SpotifyPlayCount.csv");
     const int DEFAULT_WIDTH= 8;
     std::fstream ofs(SpotifyPlayCountFileName, std::ios_base::in | std::ios_base::out);
     if( !ofs ) {
