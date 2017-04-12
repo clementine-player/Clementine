@@ -137,16 +137,14 @@ PlaylistView::PlaylistView(QWidget* parent)
   setStyle(style_);
   setMouseTracking(true);
 
-  QIcon currenttrack_play = IconLoader::Load("currenttrack_play",
-                                             IconLoader::Other);
-  currenttrack_play_ = currenttrack_play.pixmap(currenttrack_play
-                                                .availableSizes()
-                                                .last());
-  QIcon currenttrack_pause = IconLoader::Load("currenttrack_pause",
-                                              IconLoader::Other);
-  currenttrack_pause_ = currenttrack_pause.pixmap(currenttrack_pause
-                                                  .availableSizes()
-                                                  .last());
+  QIcon currenttrack_play =
+      IconLoader::Load("currenttrack_play", IconLoader::Other);
+  currenttrack_play_ =
+      currenttrack_play.pixmap(currenttrack_play.availableSizes().last());
+  QIcon currenttrack_pause =
+      IconLoader::Load("currenttrack_pause", IconLoader::Other);
+  currenttrack_pause_ =
+      currenttrack_pause.pixmap(currenttrack_pause.availableSizes().last());
 
   connect(header_, SIGNAL(sectionResized(int, int, int)), SLOT(SaveGeometry()));
   connect(header_, SIGNAL(sectionMoved(int, int, int)), SLOT(SaveGeometry()));
@@ -662,9 +660,9 @@ void PlaylistView::RemoveSelected(bool deleting_from_disk) {
     if (range.top() < last_row) rows_removed += range.height();
 
     if (!deleting_from_disk) {
-        model()->removeRows(range.top(), range.height(), range.topLeft());
+      model()->removeRows(range.top(), range.height(), range.topLeft());
     } else {
-        model()->removeRows(range.top(), range.height(), QModelIndex());
+      model()->removeRows(range.top(), range.height(), QModelIndex());
     }
   }
 

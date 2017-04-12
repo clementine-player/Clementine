@@ -246,7 +246,7 @@ signals:
   int drop_indicator_row_;
   bool drag_over_;
 
-  bool ratings_locked_; // To store Ratings section lock status
+  bool ratings_locked_;  // To store Ratings section lock status
 
   DynamicPlaylistControls* dynamic_controls_;
 
