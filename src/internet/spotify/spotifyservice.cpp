@@ -428,7 +428,7 @@ int SpotifyService::SongIsInPlayCountFile(std::fstream &ofs,
 
 void SpotifyService::UpdatePlayCountFile(const QString& artist,
                                          const QString& title,
-                                         const QString& year) { // const Engine::SimpleMetaBundle& bundle) {
+                                         const QString& year) {
     int playCount = 0;
 
     qLog(Info) << "artist=" << artist << " title=" << title << " year=" << year;
