@@ -545,7 +545,7 @@ void PlaylistView::UpdateCachedCurrentRowPixmap(QStyleOptionViewItemV4 option,
                                                 const QModelIndex& index) {
   cached_current_row_rect_ = option.rect;
   cached_current_row_row_ = index.row();
-e
+
   option.rect.moveTo(0, 0);
   cached_current_row_ = QPixmap(option.rect.size());
   cached_current_row_.fill(Qt::transparent);
@@ -555,7 +555,7 @@ e
 }
 
 void PlaylistView::InvalidateCachedCurrentPixmap() {
-s  cached_current_row_ = QPixmap();
+  cached_current_row_ = QPixmap();
 }
 
 void PlaylistView::timerEvent(QTimerEvent* event) {
@@ -565,7 +565,7 @@ void PlaylistView::timerEvent(QTimerEvent* event) {
 
 void PlaylistView::GlowIntensityChanged() {
   glow_intensity_step_ = (glow_intensity_step_ + 1) % (kGlowIntensitySteps * 2);
-l
+
   viewport()->update(last_glow_rect_);
 }
 
@@ -575,7 +575,7 @@ void PlaylistView::StopGlowing() {
   glow_intensity_step_ = kGlowIntensitySteps;
 }
 
-avoid PlaylistView::StartGlowing() {
+void PlaylistView::StartGlowing() {
   currently_glowing_ = true;
   if (isVisible() && glow_enabled_)
     glow_timer_.start(1500 / kGlowIntensitySteps, this);
@@ -585,7 +585,7 @@ void PlaylistView::hideEvent(QHideEvent*) { glow_timer_.stop(); }
 
 void PlaylistView::showEvent(QShowEvent*) {
   if (currently_glowing_ && glow_enabled_)
-f    glow_timer_.start(1500 / kGlowIntensitySteps, this);
+    glow_timer_.start(1500 / kGlowIntensitySteps, this);
   MaybeAutoscroll();
 }
 
