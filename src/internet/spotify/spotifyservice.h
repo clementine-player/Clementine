@@ -170,7 +170,7 @@ class SpotifyService : public InternetService {
 
   QStandardItem* root_;
   QStandardItem* search_;
-  QStandardItem* starred_; // We suspect this is the current song
+  QStandardItem* starred_; 
   QStandardItem* inbox_;
   QStandardItem* toplist_;
   QList<QStandardItem*> playlists_;
