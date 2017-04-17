@@ -30,7 +30,7 @@ PlaylistHeader::PlaylistHeader(Qt::Orientation orientation, PlaylistView* view,
       view_(view),
       menu_(new QMenu(this)),
       show_mapper_(new QSignalMapper(this)) {
-  hide_action_ = menu_->addAction(tr("&Hide..."), this, SLOT(HideCurrent()));
+  /// hide_action_ = menu_->addAction(tr("&Hide..."), this, SLOT(HideCurrent()));
   stretch_action_ = menu_->addAction(tr("&Stretch columns to fit window"), this,
                                      SLOT(ToggleStretchEnabled()));
   rating_lock_ = menu_->addAction(tr("&Lock Rating"), this, 
@@ -71,14 +71,14 @@ void PlaylistHeader::contextMenuEvent(QContextMenuEvent* e) {
   menu_section_ = logicalIndexAt(e->pos());
 
   if (menu_section_ == -1 ||
-      (menu_section_ == logicalIndex(0) && logicalIndex(1) == -1))
-    hide_action_->setVisible(false);
+      (menu_section_ == logicalIndex(0) && logicalIndex(1) == -1)){}
+    /// hide_action_->setVisible(false);
   else {
-    hide_action_->setVisible(true);
+    /// hide_action_->setVisible(true);
 
     QString title(
         model()->headerData(menu_section_, Qt::Horizontal).toString());
-    hide_action_->setText(tr("&Hide %1").arg(title));
+    ///hide_action_->setText(tr("&Hide %1").arg(title));
     
     // show rating_lock action only for ratings section
     rating_lock_->setVisible(menu_section_ == Playlist::Column_Rating);

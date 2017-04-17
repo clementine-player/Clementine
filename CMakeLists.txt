@@ -42,11 +42,11 @@ endif(NOT APPLE)
 find_program(QT_LCONVERT_EXECUTABLE NAMES lconvert lconvert-qt4 PATHS ${QT_BINARY_DIR} NO_DEFAULT_PATH)
 find_program(QT_LCONVERT_EXECUTABLE NAMES lconvert lconvert-qt4)
 
-if(APPLE)
-  if(NOT QT_MAC_USE_COCOA)
-    message(FATAL_ERROR "Cocoa support is required")
-  endif(NOT QT_MAC_USE_COCOA)
-endif(APPLE)
+#if(APPLE)
+#  if(NOT QT_MAC_USE_COCOA)
+#    message(FATAL_ERROR "Cocoa support is required")
+#  endif(NOT QT_MAC_USE_COCOA)
+#endif(APPLE)
 
 find_package(OpenGL REQUIRED)
 find_package(Boost REQUIRED)
@@ -78,10 +78,10 @@ pkg_check_modules(QJSON REQUIRED QJson)
 pkg_check_modules(SPOTIFY libspotify>=12.1.45)
 pkg_check_modules(TAGLIB REQUIRED taglib>=1.6)
 
-if (WIN32)
-  find_package(ZLIB REQUIRED)
-  find_library(QTSPARKLE_LIBRARIES qtsparkle)
-endif (WIN32)
+#if (WIN32)
+#  find_package(ZLIB REQUIRED)
+#  find_library(QTSPARKLE_LIBRARIES qtsparkle)
+#endif (WIN32)
 
 find_library(LASTFM_LIBRARIES lastfm)
 find_path(LASTFM_INCLUDE_DIRS lastfm/ws.h)
@@ -115,20 +115,20 @@ if(LASTFM_INCLUDE_DIRS AND LASTFM1_INCLUDE_DIRS)
   set(HAVE_LIBLASTFM1 ON)
 endif()
 
-if (APPLE)
-  find_library(SPARKLE Sparkle)
+#if (APPLE)
+#  find_library(SPARKLE Sparkle)
 
-  find_library(SPOTIFY libspotify)
-  if (SPOTIFY)
-    set (SPOTIFY_FOUND ON)
-    set (SPOTIFY_INCLUDE_DIRS ${SPOTIFY})
-    set (SPOTIFY_LIBRARIES ${SPOTIFY})
-  endif (SPOTIFY)
+#  find_library(SPOTIFY libspotify)
+#  if (SPOTIFY)
+#    set (SPOTIFY_FOUND ON)
+#    set (SPOTIFY_INCLUDE_DIRS ${SPOTIFY})
+#    set (SPOTIFY_LIBRARIES ${SPOTIFY})
+#  endif (SPOTIFY)
 
-  add_subdirectory(3rdparty/SPMediaKeyTap)
-  set(SPMEDIAKEYTAP_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/SPMediaKeyTap)
-  set(SPMEDIAKEYTAP_LIBRARIES SPMediaKeyTap)
-endif (APPLE)
+#  add_subdirectory(3rdparty/SPMediaKeyTap)
+#  set(SPMEDIAKEYTAP_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/SPMediaKeyTap)
+#  set(SPMEDIAKEYTAP_LIBRARIES SPMediaKeyTap)
+#endif (APPLE)
 
 find_package(Threads)
 
@@ -161,12 +161,12 @@ include_directories(${GLIB_INCLUDE_DIRS})
 include_directories(${GLIBCONFIG_INCLUDE_DIRS})
 include_directories(${LIBXML_INCLUDE_DIRS})
 
-if (WIN32)
-  # RC compiler
-  string(REPLACE "gcc" "windres" CMAKE_RC_COMPILER_INIT ${CMAKE_C_COMPILER})
-  enable_language(RC)
-  SET(CMAKE_RC_COMPILE_OBJECT "<CMAKE_RC_COMPILER> -O coff -o <OBJECT> <SOURCE> -I ${CMAKE_SOURCE_DIR}/dist/windows")
-endif(WIN32)
+#if (WIN32)
+#  # RC compiler
+#  string(REPLACE "gcc" "windres" CMAKE_RC_COMPILER_INIT ${CMAKE_C_COMPILER})
+#  enable_language(RC)
+#  SET(CMAKE_RC_COMPILE_OBJECT "<CMAKE_RC_COMPILER> -O coff -o <OBJECT> <SOURCE> -I ${CMAKE_SOURCE_DIR}/dist/windows")
+#endif(WIN32)
 
 add_definitions(-DQT_NO_CAST_TO_ASCII -DQT_STRICT_ITERATORS)
 
@@ -191,27 +191,27 @@ endif(WIN32)
 
 optional_component(BREAKPAD OFF "Crash reporting")
 
-optional_component(GOOGLE_DRIVE ON "Google Drive support"
+optional_component(GOOGLE_DRIVE OFF "Google Drive support"
   DEPENDS "Google sparsehash" SPARSEHASH_INCLUDE_DIRS
   DEPENDS "Taglib 1.8" "TAGLIB_VERSION VERSION_GREATER 1.7.999"
 )
 
-optional_component(DROPBOX ON "Dropbox support"
+optional_component(DROPBOX OFF "Dropbox support"
   DEPENDS "Google sparsehash" SPARSEHASH_INCLUDE_DIRS
   DEPENDS "Taglib 1.8" "TAGLIB_VERSION VERSION_GREATER 1.7.999"
 )
 
-optional_component(SKYDRIVE ON "Skydrive support"
+optional_component(SKYDRIVE OFF "Skydrive support"
   DEPENDS "Google sparsehash" SPARSEHASH_INCLUDE_DIRS
   DEPENDS "Taglib 1.8" "TAGLIB_VERSION VERSION_GREATER 1.7.999"
 )
 
-optional_component(BOX ON "Box support"
+optional_component(BOX OFF "Box support"
   DEPENDS "Google sparsehash" SPARSEHASH_INCLUDE_DIRS
   DEPENDS "Taglib 1.8" "TAGLIB_VERSION VERSION_GREATER 1.7.999"
 )
 
-optional_component(SEAFILE ON "Seafile support"
+optional_component(SEAFILE OFF "Seafile support"
   DEPENDS "Google sparsehash" SPARSEHASH_INCLUDE_DIRS
   DEPENDS "Taglib 1.8" "TAGLIB_VERSION VERSION_GREATER 1.7.999"
 )
@@ -220,58 +220,58 @@ optional_component(AUDIOCD ON "Devices: Audio CD support"
   DEPENDS "libcdio" CDIO_FOUND
 )
 
-optional_component(LIBGPOD ON "Devices: iPod classic support"
+optional_component(LIBGPOD OFF "Devices: iPod classic support"
   DEPENDS "libgpod" LIBGPOD_FOUND
 )
 
-optional_component(GIO ON "Devices: GIO device backend"
+optional_component(GIO OFF "Devices: GIO device backend"
   DEPENDS "libgio" GIO_FOUND
   DEPENDS "Linux or Windows" "NOT APPLE"
 )
 
-optional_component(LIBMTP ON "Devices: MTP support"
+optional_component(LIBMTP OFF "Devices: MTP support"
   DEPENDS "libmtp" LIBMTP_FOUND
 )
 
-optional_component(LIBLASTFM ON "Last.fm support"
+optional_component(LIBLASTFM OFF "Last.fm support"
   DEPENDS "liblastfm" LASTFM_LIBRARIES LASTFM_INCLUDE_DIRS
 )
 
-optional_component(DBUS ON "D-Bus support"
+optional_component(DBUS OFF "D-Bus support"
   DEPENDS "Linux" LINUX
 )
 
-optional_component(WIIMOTEDEV ON "Wiimote support"
+optional_component(WIIMOTEDEV OFF "Wiimote support"
   DEPENDS "D-Bus support" HAVE_DBUS
 )
 
-optional_component(DEVICEKIT ON "Devices: DeviceKit backend"
+optional_component(DEVICEKIT OFF "Devices: DeviceKit backend"
   DEPENDS "D-Bus support" HAVE_DBUS
 )
 
-optional_component(UDISKS2 ON "Devices: UDisks2 backend"
+optional_component(UDISKS2 OFF "Devices: UDisks2 backend"
   DEPENDS "D-Bus support" HAVE_DBUS
 )
 
-optional_component(SPOTIFY_BLOB ON "Spotify support: non-GPL binary helper"
+optional_component(SPOTIFY_BLOB OFF "Spotify support: non-GPL binary helper"
   DEPENDS "protobuf" PROTOBUF_FOUND PROTOBUF_PROTOC_EXECUTABLE
   DEPENDS "libspotify" SPOTIFY_FOUND
 )
 
-optional_component(MOODBAR ON "Moodbar support"
+optional_component(MOODBAR OFF "Moodbar support"
   DEPENDS "fftw3" FFTW3_FOUND
 )
 
-optional_component(SPARKLE ON "Sparkle integration"
+optional_component(SPARKLE OFF "Sparkle integration"
   DEPENDS "Mac OS X" APPLE
   DEPENDS "Sparkle" SPARKLE
 )
 
-optional_component(LIBPULSE ON "Pulse audio integration"
+optional_component(LIBPULSE OFF "Pulse audio integration"
   DEPENDS "libpulse" LIBPULSE_FOUND
 )
 
-optional_component(VISUALISATIONS ON "Visualisations")
+optional_component(VISUALISATIONS OFF "Visualisations")
 
 if(NOT HAVE_SPOTIFY_BLOB AND NOT CRYPTOPP_FOUND)
   message(FATAL_ERROR "Either crypto++ must be available or the non-GPL Spotify "
@@ -401,10 +401,10 @@ add_subdirectory(3rdparty/qocoa)
 
 # Subdirectories
 add_subdirectory(src)
-if (WIN32)
-  add_subdirectory(3rdparty/qtwin)
-  add_subdirectory(3rdparty/tinysvcmdns)
-endif (WIN32)
+#if (WIN32)
+#  add_subdirectory(3rdparty/qtwin)
+#  add_subdirectory(3rdparty/tinysvcmdns)
+#endif (WIN32)
 add_subdirectory(tests)
 add_subdirectory(dist)
 add_subdirectory(tools/ultimate_lyrics_parser)

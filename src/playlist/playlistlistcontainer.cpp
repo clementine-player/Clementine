@@ -72,7 +72,7 @@ PlaylistListContainer::PlaylistListContainer(QWidget* parent)
       tr("Save playlist", "Save playlist menu action."));
 
   ui_->new_folder->setDefaultAction(action_new_folder_);
-  ui_->remove->setDefaultAction(action_remove_);
+//  ui_->remove->setDefaultAction(action_remove_);
   ui_->save_playlist->setDefaultAction(action_save_playlist_);
 
   connect(action_new_folder_, SIGNAL(triggered()), SLOT(NewFolderClicked()));
@@ -356,9 +356,10 @@ void PlaylistListContainer::contextMenuEvent(QContextMenuEvent* e) {
   if (!menu_) {
     menu_ = new QMenu(this);
     menu_->addAction(action_new_folder_);
-    menu_->addAction(action_remove_);
     menu_->addSeparator();
     menu_->addAction(action_save_playlist_);
+    menu_->addSeparator();
+    menu_->addAction(action_remove_);
   }
   menu_->popup(e->globalPos());
 }
