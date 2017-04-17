@@ -1064,9 +1064,9 @@ void MainWindow::ReloadSettings() {
       AddBehaviour(s.value("doubleclick_addmode", AddBehaviour_Append).toInt());
   doubleclick_playmode_ = PlayBehaviour(
       s.value("doubleclick_playmode", PlayBehaviour_IfStopped).toInt());
-  doubleclick_playlist_addmode_ = PlaylistAddBehaviour(
-      s.value("doubleclick_playlist_addmode", PlaylistAddBehaviour_Play)
-          .toInt());
+  doubleclick_playlist_addmode_ =
+      PlaylistAddBehaviour(s.value("doubleclick_playlist_addmode",
+                                   PlaylistAddBehaviour_Play).toInt());
   menu_playmode_ =
       PlayBehaviour(s.value("menu_playmode", PlayBehaviour_IfStopped).toInt());
 
@@ -2012,9 +2012,9 @@ void MainWindow::AddFile() {
   // Show dialog
   QStringList file_names = QFileDialog::getOpenFileNames(
       this, tr("Add file"), directory,
-      QString("%1 (%2);;%3;;%4")
-          .arg(tr("Music"), FileView::kFileFilter, parser.filters(),
-               tr(kAllFilesFilterSpec)));
+      QString("%1 (%2);;%3;;%4").arg(tr("Music"), FileView::kFileFilter,
+                                     parser.filters(),
+                                     tr(kAllFilesFilterSpec)));
   if (file_names.isEmpty()) return;
 
   // Save last used directory
@@ -2385,6 +2385,19 @@ void MainWindow::PlaylistDelete() {
                           ->current()
                           ->item_at(index.row())
                           ->Metadata();
+  }
+
+  if (app_->player()->GetState() == Engine::Playing) {
+    if (app_->playlist_manager()->current()->rowCount() ==
+        selected_songs.length()) {
+      app_->player()->Stop();
+    } else {
+      for (Song x : selected_songs) {
+        if (x == app_->player()->GetCurrentItem()->Metadata()) {
+          app_->player()->Next();
+        }
+      }
+    }
   }
 
   ui_->playlist->view()->RemoveSelected();
