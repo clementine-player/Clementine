@@ -440,8 +440,15 @@ void SpotifyService::UpdatePlayCountFile(const QString& artist,
     const int DEFAULT_WIDTH= 8;
     std::fstream ofs(SpotifyPlayCountFileName, std::ios_base::in | std::ios_base::out);
     if( !ofs ) {
-
         ofs.open(SpotifyPlayCountFileName, std::ios_base::app);
+        ofs << "Artist"
+            << ","
+            << "Title"
+            << ","
+            << "Year"
+            << ","
+            << "Play Count" << std::endl; // Output headings for the file
+        ofs.flush();
         ofs << artist.toStdString() << ","
             << title.toStdString() << ","
             << year.toStdString() << ","
