@@ -29,7 +29,16 @@
          <bool>true</bool>
         </property>
         <layout class="QGridLayout" name="gridLayout">
-         <property name="margin">
+         <property name="leftMargin">
+          <number>0</number>
+         </property>
+         <property name="topMargin">
+          <number>0</number>
+         </property>
+         <property name="rightMargin">
+          <number>0</number>
+         </property>
+         <property name="bottomMargin">
           <number>0</number>
          </property>
          <item row="1" column="0">
@@ -139,6 +148,13 @@
        <widget class="QCheckBox" name="volume_normalisation">
         <property name="text">
          <string>Use volume normalisation</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QCheckBox" name="spotifySongTracking">
+        <property name="text">
+         <string>Enable Spotify Song Tracking</string>
         </property>
        </widget>
       </item>

@@ -22,6 +22,7 @@
 #include <QPair>
 #include <QRegExp>
 #include <QUuid>
+#include <QSettings>
 
 #include "bufferconsumer.h"
 #include "config.h"
@@ -1069,10 +1070,15 @@ QFuture<GstStateChangeReturn> GstEnginePipeline::SetState(GstState state) {
                    << " title=" << engine_->GetMetaDataBundle().title
                    << " year=" << engine_->GetMetaDataBundle().year;
 
+        QSettings s;
+        s.beginGroup(SpotifyService::kSettingsGroup);
+
+        if(s.value("spotifySongTracking").toBool()){
         QMetaObject::invokeMethod(spotify, "UpdatePlayCountFile", Qt::QueuedConnection,
                                   Q_ARG(const QString&, engine_->GetMetaDataBundle().artist),
                                   Q_ARG(const QString&, engine_->GetMetaDataBundle().title),
                                   Q_ARG(const QString&, engine_->GetMetaDataBundle().year));
+        }
     }
 
   }
