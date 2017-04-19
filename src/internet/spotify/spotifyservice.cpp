@@ -437,9 +437,8 @@ void SpotifyService::UpdatePlayCountFile(const QString& artist,
   QSettings s;
   s.beginGroup(SpotifyService::kSettingsGroup);
 
-  QByteArray tempArray =
-      s.value("folderDirectory", "").toString().toLocal8Bit();
-  char* currentDirectory = tempArray.data();
+  QByteArray tempArray = s.value("folderDirectory", "").toString().toLocal8Bit();
+  const char *currentDirectory = tempArray.data();
 
   if (!currentDirectory) {
     currentDirectory = std::getenv("HOME");
