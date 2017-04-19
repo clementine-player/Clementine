@@ -81,12 +81,12 @@ msgstr "%1 álbuns"
 msgid "%1 dB"
 msgstr "%1 dB"
 
-#: core/utilities.cpp:120
+#: core/utilities.cpp:121
 #, qt-format
 msgid "%1 days"
 msgstr "%1 dias"
 
-#: core/utilities.cpp:139
+#: core/utilities.cpp:140
 #, qt-format
 msgid "%1 days ago"
 msgstr "%1 dias atrás"
@@ -96,12 +96,12 @@ msgstr "%1 dias atrás"
 msgid "%1 on %2"
 msgstr "%1 em %2"
 
-#: playlistparsers/playlistparser.cpp:76
+#: playlistparsers/playlistparser.cpp:87
 #, qt-format
 msgid "%1 playlists (%2)"
 msgstr "%1 listas de reprodução (%2)"
 
-#: playlist/playlistmanager.cpp:416
+#: playlist/playlistmanager.cpp:419
 #, qt-format
 msgid "%1 selected of"
 msgstr "selecionada(s) %1 de"
@@ -126,12 +126,12 @@ msgstr "%1 faixas encontradas"
 msgid "%1 songs found (showing %2)"
 msgstr "%1 faixas encontradas (a mostrar %2)"
 
-#: playlist/playlistmanager.cpp:422
+#: playlist/playlistmanager.cpp:425
 #, qt-format
 msgid "%1 tracks"
 msgstr "%1 faixas"
 
-#: ui/albumcovermanager.cpp:469
+#: ui/albumcovermanager.cpp:472
 #, qt-format
 msgid "%1 transferred"
 msgstr "%1 transferidas"
@@ -263,7 +263,7 @@ msgstr "&Ano"
 msgid "(different across multiple songs)"
 msgstr "(diferente entre as várias faixas)"
 
-#: internet/spotify/spotifyservice.cpp:469
+#: internet/spotify/spotifyservice.cpp:472
 msgid ", by "
 msgstr ", de"
 
@@ -271,7 +271,7 @@ msgstr ", de"
 msgid "...and all the Amarok contributors"
 msgstr "...e a todos os colaboradores do Amarok"
 
-#: ../bin/src/ui_albumcovermanager.h:222 ../bin/src/ui_albumcovermanager.h:223
+#: ../bin/src/ui_albumcovermanager.h:228 ../bin/src/ui_albumcovermanager.h:229
 msgid "0"
 msgstr "0"
 
@@ -283,11 +283,11 @@ msgstr "0:00:00"
 msgid "0px"
 msgstr "0 px."
 
-#: core/utilities.cpp:120
+#: core/utilities.cpp:121
 msgid "1 day"
 msgstr "1 dia"
 
-#: playlist/playlistmanager.cpp:422
+#: playlist/playlistmanager.cpp:425
 msgid "1 track"
 msgstr "1 faixa"
 
@@ -414,7 +414,7 @@ msgstr "AAC 32k"
 msgid "AAC 64k"
 msgstr "AAC 64k"
 
-#: core/song.cpp:422
+#: core/song.cpp:426
 msgid "AIFF"
 msgstr "AIFF"
 
@@ -422,7 +422,7 @@ msgstr "AIFF"
 msgid "ALL GLORY TO THE HYPNOTOAD"
 msgstr "ALL GLORY TO THE HYPNOTOAD"
 
-#: ui/albumcovermanager.cpp:114 ui/albumcoversearcher.cpp:158
+#: ui/albumcovermanager.cpp:105 ui/albumcoversearcher.cpp:158
 msgid "Abort"
 msgstr "Abortar"
 
@@ -616,11 +616,11 @@ msgstr "Adicionar ano"
 msgid "Add stream..."
 msgstr "Adicionar emissão..."
 
-#: internet/spotify/spotifyservice.cpp:623
+#: internet/spotify/spotifyservice.cpp:626
 msgid "Add to Spotify playlists"
 msgstr "Adicionar às listas do Spotify"
 
-#: internet/spotify/spotifyservice.cpp:615
+#: internet/spotify/spotifyservice.cpp:618
 msgid "Add to Spotify starred"
 msgstr "Adicionar ao Spotify com estrela"
 
@@ -628,7 +628,7 @@ msgstr "Adicionar ao Spotify com estrela"
 msgid "Add to another playlist"
 msgstr "Adicionar noutra lista de reprodução"
 
-#: ../bin/src/ui_albumcovermanager.h:217
+#: ../bin/src/ui_albumcovermanager.h:223
 msgid "Add to playlist"
 msgstr "Adicionar à lista de reprodução"
 
@@ -702,11 +702,11 @@ msgstr "Capa do álbum"
 msgid "Album info on jamendo.com..."
 msgstr "Informações do álbum em jamendo.com..."
 
-#: ui/albumcovermanager.cpp:138
+#: ui/albumcovermanager.cpp:129
 msgid "Albums with covers"
 msgstr "Álbuns com capas"
 
-#: ui/albumcovermanager.cpp:139
+#: ui/albumcovermanager.cpp:130
 msgid "Albums without covers"
 msgstr "Álbuns sem capas"
 
@@ -723,11 +723,11 @@ msgctxt "Label for button to enable/disable Hypnotoad background sound."
 msgid "All Glory to the Hypnotoad!"
 msgstr "All Glory to the Hypnotoad!"
 
-#: ui/albumcovermanager.cpp:137
+#: ui/albumcovermanager.cpp:128
 msgid "All albums"
 msgstr "Todos os álbuns"
 
-#: ui/albumcovermanager.cpp:271
+#: ui/albumcovermanager.cpp:262
 msgid "All artists"
 msgstr "Todos os artistas"
 
@@ -735,7 +735,7 @@ msgstr "Todos os artistas"
 msgid "All files (*)"
 msgstr "Todos os ficheiros (*)"
 
-#: playlistparsers/playlistparser.cpp:63
+#: playlistparsers/playlistparser.cpp:74
 #, qt-format
 msgid "All playlists (%1)"
 msgstr "Todas as listas de reprodução (%1)"
@@ -1050,7 +1050,7 @@ msgstr "Mas estas fontes estão inativas:"
 msgid "Buttons"
 msgstr "Botões"
 
-#: core/song.cpp:428
+#: core/song.cpp:432
 msgid "CDDA"
 msgstr "CDDA"
 
@@ -1289,7 +1289,7 @@ msgstr "Fechar visualização"
 msgid "Closing this window will cancel the download."
 msgstr "Se fechar esta janela, irá cancelar a descarga."
 
-#: ui/albumcovermanager.cpp:222
+#: ui/albumcovermanager.cpp:213
 msgid "Closing this window will stop searching for album covers."
 msgstr "Se fechar esta janela, irá parar a pesquisa das capas de álbum."
 
@@ -1345,7 +1345,7 @@ msgstr "Configurar atalhos"
 msgid "Configure SoundCloud..."
 msgstr "Configurar SoundCloud..."
 
-#: internet/spotify/spotifyservice.cpp:921
+#: internet/spotify/spotifyservice.cpp:927
 msgid "Configure Spotify..."
 msgstr "Configurar Spotify..."
 
@@ -1489,7 +1489,7 @@ msgstr "Não foi possível abrir o ficheiro %1"
 
 #: internet/core/cloudfileservice.cpp:103
 #: internet/googledrive/googledriveservice.cpp:228
-#: ../bin/src/ui_albumcovermanager.h:214
+#: ../bin/src/ui_albumcovermanager.h:220
 #: ../bin/src/ui_albumcoversearcher.h:104 ../bin/src/ui_mainwindow.h:696
 msgid "Cover Manager"
 msgstr "Gestor de capas"
@@ -1818,7 +1818,7 @@ msgid "Don't shuffle"
 msgstr "Não desordenar"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:312
-#: ui/albumcovermanager.cpp:224
+#: ui/albumcovermanager.cpp:215
 msgid "Don't stop!"
 msgstr "Não parar!"
 
@@ -2046,7 +2046,7 @@ msgid "Enter search terms below to find podcasts on gpodder.net"
 msgstr "Introduza os termos de pesquisa para os podcasts do gpodder.net"
 
 #: ../bin/src/ui_libraryfilterwidget.h:106
-#: ../bin/src/ui_albumcovermanager.h:218
+#: ../bin/src/ui_albumcovermanager.h:224
 msgid "Enter search terms here"
 msgstr "Introduza aqui os termos de pesquisa"
 
@@ -2177,7 +2177,7 @@ msgstr "Expandir"
 msgid "Expires on %1"
 msgstr "Termina em %1"
 
-#: ../bin/src/ui_albumcovermanager.h:225
+#: ../bin/src/ui_albumcovermanager.h:231
 msgid "Export Covers"
 msgstr "Exportar capas"
 
@@ -2193,11 +2193,11 @@ msgstr "Exportar capas descarregadas"
 msgid "Export embedded covers"
 msgstr "Exportar capas incorporadas"
 
-#: ui/albumcovermanager.cpp:788 ui/albumcovermanager.cpp:812
+#: ui/albumcovermanager.cpp:799 ui/albumcovermanager.cpp:823
 msgid "Export finished"
 msgstr "Exportação terminada"
 
-#: ui/albumcovermanager.cpp:797
+#: ui/albumcovermanager.cpp:808
 #, qt-format
 msgid "Exported %1 covers out of %2 (%3 skipped)"
 msgstr "Exportada(s) %1 de %2 capa(s) (%3 ignoradas)"
@@ -2268,11 +2268,11 @@ msgstr "Favoritas"
 msgid "Favourite tracks"
 msgstr "Faixas preferidas"
 
-#: ../bin/src/ui_albumcovermanager.h:224
+#: ../bin/src/ui_albumcovermanager.h:230
 msgid "Fetch Missing Covers"
 msgstr "Obter capas em falta"
 
-#: ../bin/src/ui_albumcovermanager.h:215
+#: ../bin/src/ui_albumcovermanager.h:221
 msgid "Fetch automatically"
 msgstr "Obter automaticamente"
 
@@ -2358,7 +2358,7 @@ msgstr "Primeiro nível"
 msgid "Fit cover to width"
 msgstr "Ajustar capa à largura"
 
-#: core/song.cpp:406 transcoder/transcoder.cpp:233
+#: core/song.cpp:410 transcoder/transcoder.cpp:233
 msgid "Flac"
 msgstr "Flac"
 
@@ -2462,12 +2462,12 @@ msgstr "Definições gerais"
 msgid "Genre"
 msgstr "Género"
 
-#: internet/spotify/spotifyservice.cpp:639
-#: internet/spotify/spotifyservice.cpp:683
+#: internet/spotify/spotifyservice.cpp:642
+#: internet/spotify/spotifyservice.cpp:685
 msgid "Get a URL to share this Spotify song"
 msgstr "Obter URL para partilhar esta faixa Spotify"
 
-#: internet/spotify/spotifyservice.cpp:671
+#: internet/spotify/spotifyservice.cpp:674
 msgid "Get a URL to share this playlist"
 msgstr "Obter URL para partilhar esta lista de reprodução"
 
@@ -2500,7 +2500,7 @@ msgstr "Ir para o separador anterior"
 msgid "Google Drive"
 msgstr "Google Drive"
 
-#: covers/coversearchstatisticsdialog.cpp:53 ui/albumcovermanager.cpp:463
+#: covers/coversearchstatisticsdialog.cpp:53 ui/albumcovermanager.cpp:465
 #: ../bin/src/ui_coversearchstatisticsdialog.h:75
 #, qt-format
 msgid "Got %1 covers out of %2 (%3 failed)"
@@ -2659,12 +2659,12 @@ msgstr "Imagens (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm)"
 msgid "Images (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 msgstr "Imagens (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 
-#: core/utilities.cpp:151
+#: core/utilities.cpp:152
 #, qt-format
 msgid "In %1 days"
 msgstr "No espaço de %1 dia(s)"
 
-#: core/utilities.cpp:154
+#: core/utilities.cpp:155
 #, qt-format
 msgid "In %1 weeks"
 msgstr "No espaço de %1 semana(s)"
@@ -2675,7 +2675,7 @@ msgid ""
 "time a song finishes."
 msgstr "No modo dinâmico, as faixas são escolhidas e adicionadas à lista de reprodução assim que uma faixa termine"
 
-#: internet/spotify/spotifyservice.cpp:425
+#: internet/spotify/spotifyservice.cpp:417
 msgid "Inbox"
 msgstr "Caixa de entrada"
 
@@ -2953,7 +2953,7 @@ msgstr "Restrições"
 msgid "Live"
 msgstr "Ao vivo"
 
-#: ../bin/src/ui_albumcovermanager.h:216
+#: ../bin/src/ui_albumcovermanager.h:222
 msgid "Load"
 msgstr "Carregar"
 
@@ -2961,7 +2961,7 @@ msgstr "Carregar"
 msgid "Load cover from URL"
 msgstr "Carregar capa de álbum do URL"
 
-#: ui/albumcoverchoicecontroller.cpp:64
+#: ui/albumcoverchoicecontroller.cpp:66
 msgid "Load cover from URL..."
 msgstr "Carregar capa de álbum do URL..."
 
@@ -2969,7 +2969,7 @@ msgstr "Carregar capa de álbum do URL..."
 msgid "Load cover from disk"
 msgstr "Carregar capa de álbum no disco"
 
-#: ui/albumcoverchoicecontroller.cpp:60
+#: ui/albumcoverchoicecontroller.cpp:61
 msgid "Load cover from disk..."
 msgstr "Carregar capa de álbum no disco..."
 
@@ -3082,7 +3082,7 @@ msgstr "Letra existente nas etiquetas"
 msgid "M4A AAC"
 msgstr "M4A AAC"
 
-#: core/song.cpp:412 transcoder/transcoder.cpp:238
+#: core/song.cpp:416 transcoder/transcoder.cpp:238
 #: ../bin/src/ui_transcodersettingspage.h:174
 msgid "MP3"
 msgstr "MP3"
@@ -3095,11 +3095,11 @@ msgstr "MP3 256k"
 msgid "MP3 96k"
 msgstr "MP3 96k"
 
-#: core/song.cpp:408
+#: core/song.cpp:412
 msgid "MP4 AAC"
 msgstr "MP4 AAC"
 
-#: core/song.cpp:410
+#: core/song.cpp:414
 msgid "MPC"
 msgstr "MPC"
 
@@ -3129,7 +3129,7 @@ msgctxt "Label for button to enable/disable Enterprise background sound."
 msgid "Make it so!"
 msgstr "Make it so!"
 
-#: internet/spotify/spotifyservice.cpp:669
+#: internet/spotify/spotifyservice.cpp:672
 msgid "Make playlist available offline"
 msgstr "Criar lista de reprodução local"
 
@@ -3228,7 +3228,7 @@ msgstr "Meses"
 msgid "Mood"
 msgstr "Estado de espírito"
 
-#: moodbar/moodbarproxystyle.cpp:358
+#: moodbar/moodbarproxystyle.cpp:361
 #: ../bin/src/ui_appearancesettingspage.h:293
 msgid "Moodbar style"
 msgstr "Estilo da barra"
@@ -3354,7 +3354,7 @@ msgstr "Seguinte"
 msgid "Next track"
 msgstr "Faixa seguinte"
 
-#: core/utilities.cpp:152
+#: core/utilities.cpp:153
 msgid "Next week"
 msgstr "Na próxima semana"
 
@@ -3366,7 +3366,7 @@ msgstr "Sem analisador"
 msgid "No background image"
 msgstr "Sem imagem de fundo"
 
-#: ui/albumcovermanager.cpp:789
+#: ui/albumcovermanager.cpp:800
 msgid "No covers to export."
 msgstr "Nenhuma capa para exportar"
 
@@ -3461,19 +3461,19 @@ msgstr "Antevisão da notificação"
 msgid "Off"
 msgstr "Desligado"
 
-#: core/song.cpp:414 transcoder/transcoder.cpp:244
+#: core/song.cpp:418 transcoder/transcoder.cpp:244
 msgid "Ogg Flac"
 msgstr "Ogg Flac"
 
-#: core/song.cpp:420 transcoder/transcoder.cpp:250
+#: core/song.cpp:424 transcoder/transcoder.cpp:250
 msgid "Ogg Opus"
 msgstr "Ogg Opus"
 
-#: core/song.cpp:416 transcoder/transcoder.cpp:247
+#: core/song.cpp:420 transcoder/transcoder.cpp:247
 msgid "Ogg Speex"
 msgstr "Ogg Speex"
 
-#: core/song.cpp:418 transcoder/transcoder.cpp:241
+#: core/song.cpp:422 transcoder/transcoder.cpp:241
 #: ../bin/src/ui_magnatunedownloaddialog.h:135
 #: ../bin/src/ui_magnatunesettingspage.h:169
 msgid "Ogg Vorbis"
@@ -3738,7 +3738,7 @@ msgstr "Opções do reprodutor"
 
 #: playlist/playlistcontainer.cpp:290 playlist/playlistlistcontainer.cpp:228
 #: playlist/playlistmanager.cpp:86 playlist/playlistmanager.cpp:155
-#: playlist/playlistmanager.cpp:508 playlist/playlisttabbar.cpp:366
+#: playlist/playlistmanager.cpp:511 playlist/playlisttabbar.cpp:366
 msgid "Playlist"
 msgstr "Lista de reprodução"
 
@@ -3974,7 +3974,7 @@ msgid "Rating"
 msgstr "Avaliação"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:309
-#: ui/albumcovermanager.cpp:221
+#: ui/albumcovermanager.cpp:212
 msgid "Really cancel?"
 msgstr "Realmente cancelar?"
 
@@ -4044,7 +4044,7 @@ msgstr "Remover duplicados da lista de reprodução"
 msgid "Remove folder"
 msgstr "Remover diretório"
 
-#: internet/spotify/spotifyservice.cpp:681 ../bin/src/ui_mainwindow.h:704
+#: internet/spotify/spotifyservice.cpp:684 ../bin/src/ui_mainwindow.h:704
 msgid "Remove from playlist"
 msgstr "Remover da lista de reprodução"
 
@@ -4203,11 +4203,11 @@ msgstr "Frequência"
 msgid "Save .mood files in your music library"
 msgstr "Guardar ficheiros .mood na coleção de faixas"
 
-#: ui/albumcoverchoicecontroller.cpp:129
+#: ui/albumcoverchoicecontroller.cpp:131
 msgid "Save album cover"
 msgstr "Guardar capa de álbum"
 
-#: ui/albumcoverchoicecontroller.cpp:62
+#: ui/albumcoverchoicecontroller.cpp:64
 msgid "Save cover to disk..."
 msgstr "Guardar capa de álbum no disco..."
 
@@ -4224,7 +4224,7 @@ msgctxt "Save playlist menu action."
 msgid "Save playlist"
 msgstr "Guardar lista de reprodução"
 
-#: playlist/playlistmanager.cpp:229
+#: playlist/playlistmanager.cpp:232
 msgctxt "Title of the playlist save dialog."
 msgid "Save playlist"
 msgstr "Guardar lista de reprodução"
@@ -4316,7 +4316,7 @@ msgstr "Pesquisar no Subsconic"
 msgid "Search automatically"
 msgstr "Pesquisar automaticamente"
 
-#: ui/albumcoverchoicecontroller.cpp:66
+#: ui/albumcoverchoicecontroller.cpp:69
 msgid "Search for album covers..."
 msgstr "Pesquisar capas de álbuns..."
 
@@ -4341,7 +4341,7 @@ msgid "Search options"
 msgstr "Opções de pesquisa"
 
 #: internet/soundcloud/soundcloudservice.cpp:119
-#: internet/spotify/spotifyservice.cpp:408
+#: internet/spotify/spotifyservice.cpp:400
 msgid "Search results"
 msgstr "Resultados da pesquisa"
 
@@ -4526,7 +4526,7 @@ msgstr "Mostrar capa de álbum na coleção"
 msgid "Show dividers"
 msgstr "Mostrar separadores"
 
-#: ui/albumcoverchoicecontroller.cpp:72 widgets/prettyimage.cpp:183
+#: ui/albumcoverchoicecontroller.cpp:73 widgets/prettyimage.cpp:183
 msgid "Show fullsize..."
 msgstr "Mostrar em ecrã completo..."
 
@@ -4543,7 +4543,7 @@ msgstr "Mostrar na coleção..."
 msgid "Show in various artists"
 msgstr "Mostrar em vários artistas"
 
-#: moodbar/moodbarproxystyle.cpp:353
+#: moodbar/moodbarproxystyle.cpp:356
 msgid "Show moodbar"
 msgstr "Mostrar barra de estado de espírito"
 
@@ -4736,7 +4736,7 @@ msgstr "Spotify"
 msgid "Spotify login error"
 msgstr "Erro de autenticação Spotify"
 
-#: internet/spotify/spotifyservice.cpp:844
+#: internet/spotify/spotifyservice.cpp:850
 msgid "Spotify playlist's URL"
 msgstr "URL da lista de reprodução Spotify"
 
@@ -4748,7 +4748,7 @@ msgstr "Suplemento Spotify"
 msgid "Spotify plugin not installed"
 msgstr "Suplemento Spotify não instalado"
 
-#: internet/spotify/spotifyservice.cpp:835
+#: internet/spotify/spotifyservice.cpp:841
 msgid "Spotify song's URL"
 msgstr "URL da faixa Spotify"
 
@@ -4756,7 +4756,7 @@ msgstr "URL da faixa Spotify"
 msgid "Standard"
 msgstr "Padrão"
 
-#: internet/spotify/spotifyservice.cpp:417
+#: internet/spotify/spotifyservice.cpp:409
 #: internet/subsonic/subsonicservice.cpp:115
 msgid "Starred"
 msgstr "Com estrela"
@@ -4774,7 +4774,7 @@ msgid "Start transcoding"
 msgstr "Iniciar conversão"
 
 #: internet/soundcloud/soundcloudservice.cpp:121
-#: internet/spotify/spotifyservice.cpp:410
+#: internet/spotify/spotifyservice.cpp:402
 msgid ""
 "Start typing something on the search box above to fill this search results "
 "list"
@@ -4831,7 +4831,7 @@ msgstr "Parar reprodução após a faixa: %1"
 msgid "Stopped"
 msgstr "Parado"
 
-#: core/song.cpp:431
+#: core/song.cpp:435
 msgid "Stream"
 msgstr "Emissão"
 
@@ -4894,15 +4894,15 @@ msgstr "Formatos suportados"
 msgid "Synchronize statistics to files now"
 msgstr "Sincronizar estatísticas dos ficheiros"
 
-#: internet/spotify/spotifyservice.cpp:708
+#: internet/spotify/spotifyservice.cpp:710
 msgid "Syncing Spotify inbox"
 msgstr "A sincronizar caixa de entrada Spotify"
 
-#: internet/spotify/spotifyservice.cpp:702
+#: internet/spotify/spotifyservice.cpp:704
 msgid "Syncing Spotify playlist"
 msgstr "A sincronizar lista de reprodução Spotify"
 
-#: internet/spotify/spotifyservice.cpp:713
+#: internet/spotify/spotifyservice.cpp:715
 msgid "Syncing Spotify starred tracks"
 msgstr "A sincronizar faixas Spotify com estrela"
 
@@ -5103,7 +5103,7 @@ msgstr "Valor de tempo"
 msgid "Title"
 msgstr "Título"
 
-#: core/utilities.cpp:137 core/utilities.cpp:149
+#: core/utilities.cpp:138 core/utilities.cpp:150
 msgid "Today"
 msgstr "Hoje"
 
@@ -5127,7 +5127,7 @@ msgstr "Alternar envio"
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "Alternar visibilidade da notificação"
 
-#: core/utilities.cpp:150
+#: core/utilities.cpp:151
 msgid "Tomorrow"
 msgstr "Amanhã"
 
@@ -5139,11 +5139,11 @@ msgstr "Demasiados reencaminhamentos"
 msgid "Top Rated"
 msgstr "Melhor avaliadas"
 
-#: internet/spotify/spotifyservice.cpp:431
+#: internet/spotify/spotifyservice.cpp:423
 msgid "Top tracks"
 msgstr "As melhores faixas"
 
-#: ../bin/src/ui_albumcovermanager.h:220
+#: ../bin/src/ui_albumcovermanager.h:226
 msgid "Total albums:"
 msgstr "Total de álbuns:"
 
@@ -5189,7 +5189,7 @@ msgstr "A converter %1 ficheiros com %2 processos"
 msgid "Transcoding options"
 msgstr "Opções de conversão"
 
-#: core/song.cpp:426
+#: core/song.cpp:430
 msgid "TrueAudio"
 msgstr "TrueAudio"
 
@@ -5231,10 +5231,10 @@ msgstr "Ligação não estabelecida"
 msgid "Unable to download %1 (%2)"
 msgstr "Incapaz de descarregar %1 (%2)"
 
-#: core/song.cpp:435 library/librarymodel.cpp:374 library/librarymodel.cpp:379
+#: core/song.cpp:439 library/librarymodel.cpp:374 library/librarymodel.cpp:379
 #: library/librarymodel.cpp:383 library/librarymodel.cpp:1156
 #: library/savedgroupingmanager.cpp:103 playlist/playlistdelegates.cpp:305
-#: playlist/playlistmanager.cpp:515 playlist/playlistmanager.cpp:516
+#: playlist/playlistmanager.cpp:518 playlist/playlistmanager.cpp:519
 #: songinfo/streamdiscoverer.cpp:87 ui/albumcoverchoicecontroller.cpp:126
 #: ui/edittagdialog.cpp:463 ui/edittagdialog.cpp:507
 msgid "Unknown"
@@ -5249,7 +5249,7 @@ msgstr "Conteúdo desconhecido"
 msgid "Unknown error"
 msgstr "Erro desconhecido"
 
-#: ui/albumcoverchoicecontroller.cpp:69
+#: ui/albumcoverchoicecontroller.cpp:71
 msgid "Unset cover"
 msgstr "Sem capa"
 
@@ -5410,7 +5410,7 @@ msgid "Variable bit rate"
 msgstr "Taxa de dados variável"
 
 #: globalsearch/globalsearchmodel.cpp:109 library/librarymodel.cpp:300
-#: playlist/playlistmanager.cpp:527 ui/albumcovermanager.cpp:273
+#: playlist/playlistmanager.cpp:530 ui/albumcovermanager.cpp:264
 msgid "Various artists"
 msgstr "Vários artistas"
 
@@ -5419,7 +5419,7 @@ msgstr "Vários artistas"
 msgid "Version %1"
 msgstr "Versão %1"
 
-#: ../bin/src/ui_albumcovermanager.h:219
+#: ../bin/src/ui_albumcovermanager.h:225
 msgid "View"
 msgstr "Ver"
 
@@ -5465,7 +5465,7 @@ msgstr "WMA"
 msgid "Warn me when closing a playlist tab"
 msgstr "Avisar ao fechar um separador de lista de reprodução"
 
-#: core/song.cpp:424 transcoder/transcoder.cpp:256
+#: core/song.cpp:428 transcoder/transcoder.cpp:256
 msgid "Wav"
 msgstr "Wav"
 
@@ -5549,11 +5549,11 @@ msgstr "Windows Media 40k"
 msgid "Windows Media 64k"
 msgstr "Windows Media 64k"
 
-#: core/song.cpp:404 transcoder/transcoder.cpp:253
+#: core/song.cpp:408 transcoder/transcoder.cpp:253
 msgid "Windows Media audio"
 msgstr "Windows Media Áudio"
 
-#: ../bin/src/ui_albumcovermanager.h:221
+#: ../bin/src/ui_albumcovermanager.h:227
 msgid "Without cover:"
 msgstr "Sem capa:"
 
@@ -5595,7 +5595,7 @@ msgstr "Ano - Álbum"
 msgid "Years"
 msgstr "Anos"
 
-#: core/utilities.cpp:138
+#: core/utilities.cpp:139
 msgid "Yesterday"
 msgstr "Ontem"
 

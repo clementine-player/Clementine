@@ -79,12 +79,12 @@ msgstr "%1 albumov"
 msgid "%1 dB"
 msgstr "%1 dB"
 
-#: core/utilities.cpp:120
+#: core/utilities.cpp:121
 #, qt-format
 msgid "%1 days"
 msgstr "%1 dní"
 
-#: core/utilities.cpp:139
+#: core/utilities.cpp:140
 #, qt-format
 msgid "%1 days ago"
 msgstr "Pred %1 dňami"
@@ -94,12 +94,12 @@ msgstr "Pred %1 dňami"
 msgid "%1 on %2"
 msgstr "%1 na %2"
 
-#: playlistparsers/playlistparser.cpp:76
+#: playlistparsers/playlistparser.cpp:87
 #, qt-format
 msgid "%1 playlists (%2)"
 msgstr "%1 playlistov (%2)"
 
-#: playlist/playlistmanager.cpp:416
+#: playlist/playlistmanager.cpp:419
 #, qt-format
 msgid "%1 selected of"
 msgstr "%1 vybratých z"
@@ -124,12 +124,12 @@ msgstr "nájdených %1 piesní"
 msgid "%1 songs found (showing %2)"
 msgstr "nájdených %1 piesní (zobrazuje sa %2)"
 
-#: playlist/playlistmanager.cpp:422
+#: playlist/playlistmanager.cpp:425
 #, qt-format
 msgid "%1 tracks"
 msgstr "%1 skladieb"
 
-#: ui/albumcovermanager.cpp:469
+#: ui/albumcovermanager.cpp:472
 #, qt-format
 msgid "%1 transferred"
 msgstr "%1 prenesených"
@@ -261,7 +261,7 @@ msgstr "&Rok"
 msgid "(different across multiple songs)"
 msgstr "(odlišné naprieč mnohými piesňami)"
 
-#: internet/spotify/spotifyservice.cpp:469
+#: internet/spotify/spotifyservice.cpp:472
 msgid ", by "
 msgstr ", od "
 
@@ -269,7 +269,7 @@ msgstr ", od "
 msgid "...and all the Amarok contributors"
 msgstr "...a všetkým prispievateľom Amaroku"
 
-#: ../bin/src/ui_albumcovermanager.h:222 ../bin/src/ui_albumcovermanager.h:223
+#: ../bin/src/ui_albumcovermanager.h:228 ../bin/src/ui_albumcovermanager.h:229
 msgid "0"
 msgstr "0"
 
@@ -281,11 +281,11 @@ msgstr "0:00:00"
 msgid "0px"
 msgstr "0px"
 
-#: core/utilities.cpp:120
+#: core/utilities.cpp:121
 msgid "1 day"
 msgstr "1 deň"
 
-#: playlist/playlistmanager.cpp:422
+#: playlist/playlistmanager.cpp:425
 msgid "1 track"
 msgstr "1 skladba"
 
@@ -412,7 +412,7 @@ msgstr "AAC 32k"
 msgid "AAC 64k"
 msgstr "AAC 64k"
 
-#: core/song.cpp:422
+#: core/song.cpp:426
 msgid "AIFF"
 msgstr "AIFF"
 
@@ -420,7 +420,7 @@ msgstr "AIFF"
 msgid "ALL GLORY TO THE HYPNOTOAD"
 msgstr "ALL GLORY TO THE HYPNOTOAD"
 
-#: ui/albumcovermanager.cpp:114 ui/albumcoversearcher.cpp:158
+#: ui/albumcovermanager.cpp:105 ui/albumcoversearcher.cpp:158
 msgid "Abort"
 msgstr "Zrušiť"
 
@@ -614,11 +614,11 @@ msgstr "Pridať tag roka piesne"
 msgid "Add stream..."
 msgstr "Pridať stream..."
 
-#: internet/spotify/spotifyservice.cpp:623
+#: internet/spotify/spotifyservice.cpp:626
 msgid "Add to Spotify playlists"
 msgstr "Pridať do Spotify playlistov"
 
-#: internet/spotify/spotifyservice.cpp:615
+#: internet/spotify/spotifyservice.cpp:618
 msgid "Add to Spotify starred"
 msgstr "Pridať do S hviezdičkou na Spotify"
 
@@ -626,7 +626,7 @@ msgstr "Pridať do S hviezdičkou na Spotify"
 msgid "Add to another playlist"
 msgstr "Pridať do iného playlistu"
 
-#: ../bin/src/ui_albumcovermanager.h:217
+#: ../bin/src/ui_albumcovermanager.h:223
 msgid "Add to playlist"
 msgstr "Pridať do playlistu"
 
@@ -700,11 +700,11 @@ msgstr "Obal albumu"
 msgid "Album info on jamendo.com..."
 msgstr "Informácie o albume na jamendo.com..."
 
-#: ui/albumcovermanager.cpp:138
+#: ui/albumcovermanager.cpp:129
 msgid "Albums with covers"
 msgstr "Albumy s obalmi"
 
-#: ui/albumcovermanager.cpp:139
+#: ui/albumcovermanager.cpp:130
 msgid "Albums without covers"
 msgstr "Albumy bez obalov"
 
@@ -721,11 +721,11 @@ msgctxt "Label for button to enable/disable Hypnotoad background sound."
 msgid "All Glory to the Hypnotoad!"
 msgstr "All Glory to the Hypnotoad!"
 
-#: ui/albumcovermanager.cpp:137
+#: ui/albumcovermanager.cpp:128
 msgid "All albums"
 msgstr "Všetky albumy"
 
-#: ui/albumcovermanager.cpp:271
+#: ui/albumcovermanager.cpp:262
 msgid "All artists"
 msgstr "Všetci interpréti"
 
@@ -733,7 +733,7 @@ msgstr "Všetci interpréti"
 msgid "All files (*)"
 msgstr "Všetky súbory (*)"
 
-#: playlistparsers/playlistparser.cpp:63
+#: playlistparsers/playlistparser.cpp:74
 #, qt-format
 msgid "All playlists (%1)"
 msgstr "Všetky playlisty (%1)"
@@ -1048,7 +1048,7 @@ msgstr "Ale tieto zdroje sú zakázané:"
 msgid "Buttons"
 msgstr "Tlačidlá"
 
-#: core/song.cpp:428
+#: core/song.cpp:432
 msgid "CDDA"
 msgstr "CDDA"
 
@@ -1287,7 +1287,7 @@ msgstr "Zatvoriť vizualizáciu"
 msgid "Closing this window will cancel the download."
 msgstr "Zatvorenie tohto okna zruší sťahovanie."
 
-#: ui/albumcovermanager.cpp:222
+#: ui/albumcovermanager.cpp:213
 msgid "Closing this window will stop searching for album covers."
 msgstr "Zatvorenie tohto okna zastaví hľadanie obalov albumov"
 
@@ -1343,7 +1343,7 @@ msgstr "Klávesové skratky"
 msgid "Configure SoundCloud..."
 msgstr "Nastaviť SoundCloud..."
 
-#: internet/spotify/spotifyservice.cpp:921
+#: internet/spotify/spotifyservice.cpp:927
 msgid "Configure Spotify..."
 msgstr "Nastaviť Spotify..."
 
@@ -1487,7 +1487,7 @@ msgstr "Nedá sa otvoriť výstupný súbor %1"
 
 #: internet/core/cloudfileservice.cpp:103
 #: internet/googledrive/googledriveservice.cpp:228
-#: ../bin/src/ui_albumcovermanager.h:214
+#: ../bin/src/ui_albumcovermanager.h:220
 #: ../bin/src/ui_albumcoversearcher.h:104 ../bin/src/ui_mainwindow.h:696
 msgid "Cover Manager"
 msgstr "Správca obalov"
@@ -1816,7 +1816,7 @@ msgid "Don't shuffle"
 msgstr "Nezamiešavať"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:312
-#: ui/albumcovermanager.cpp:224
+#: ui/albumcovermanager.cpp:215
 msgid "Don't stop!"
 msgstr "Neprestávať!"
 
@@ -2044,7 +2044,7 @@ msgid "Enter search terms below to find podcasts on gpodder.net"
 msgstr "Zadajte výrazy na hľadanie nižšie, aby ste našli podcasty na gpodder.net"
 
 #: ../bin/src/ui_libraryfilterwidget.h:106
-#: ../bin/src/ui_albumcovermanager.h:218
+#: ../bin/src/ui_albumcovermanager.h:224
 msgid "Enter search terms here"
 msgstr "Sem napíšte výrazy na hľadanie"
 
@@ -2175,7 +2175,7 @@ msgstr "Rozbaliť"
 msgid "Expires on %1"
 msgstr "Vyprší %1"
 
-#: ../bin/src/ui_albumcovermanager.h:225
+#: ../bin/src/ui_albumcovermanager.h:231
 msgid "Export Covers"
 msgstr "Exportovať obaly"
 
@@ -2191,11 +2191,11 @@ msgstr "Exportovať stiahnuté obaly"
 msgid "Export embedded covers"
 msgstr "Exportovať vložené obaly"
 
-#: ui/albumcovermanager.cpp:788 ui/albumcovermanager.cpp:812
+#: ui/albumcovermanager.cpp:799 ui/albumcovermanager.cpp:823
 msgid "Export finished"
 msgstr "Exportovanie dokončené"
 
-#: ui/albumcovermanager.cpp:797
+#: ui/albumcovermanager.cpp:808
 #, qt-format
 msgid "Exported %1 covers out of %2 (%3 skipped)"
 msgstr "Exportovaných %1 obalov z %2 (%3 preskočených)"
@@ -2266,11 +2266,11 @@ msgstr "Obľúbené"
 msgid "Favourite tracks"
 msgstr "Obľúbené skladby"
 
-#: ../bin/src/ui_albumcovermanager.h:224
+#: ../bin/src/ui_albumcovermanager.h:230
 msgid "Fetch Missing Covers"
 msgstr "Získať chýbajúce obaly"
 
-#: ../bin/src/ui_albumcovermanager.h:215
+#: ../bin/src/ui_albumcovermanager.h:221
 msgid "Fetch automatically"
 msgstr "Získavať automaticky"
 
@@ -2356,7 +2356,7 @@ msgstr "Prvá úroveň"
 msgid "Fit cover to width"
 msgstr "Prispôsobiť obal šírke"
 
-#: core/song.cpp:406 transcoder/transcoder.cpp:233
+#: core/song.cpp:410 transcoder/transcoder.cpp:233
 msgid "Flac"
 msgstr "Flac"
 
@@ -2460,12 +2460,12 @@ msgstr "Všeobecné nastavenia"
 msgid "Genre"
 msgstr "Žáner"
 
-#: internet/spotify/spotifyservice.cpp:639
-#: internet/spotify/spotifyservice.cpp:683
+#: internet/spotify/spotifyservice.cpp:642
+#: internet/spotify/spotifyservice.cpp:685
 msgid "Get a URL to share this Spotify song"
 msgstr "Získať URL adresu na zdieľanie tejto piesne na Spotify"
 
-#: internet/spotify/spotifyservice.cpp:671
+#: internet/spotify/spotifyservice.cpp:674
 msgid "Get a URL to share this playlist"
 msgstr "Získať URL adresu na zdieľanie tohto playlistu"
 
@@ -2498,7 +2498,7 @@ msgstr "Prejsť na kartu predchádzajúceho playlistu"
 msgid "Google Drive"
 msgstr "Google Drive"
 
-#: covers/coversearchstatisticsdialog.cpp:53 ui/albumcovermanager.cpp:463
+#: covers/coversearchstatisticsdialog.cpp:53 ui/albumcovermanager.cpp:465
 #: ../bin/src/ui_coversearchstatisticsdialog.h:75
 #, qt-format
 msgid "Got %1 covers out of %2 (%3 failed)"
@@ -2657,12 +2657,12 @@ msgstr "Obrázky (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm)"
 msgid "Images (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 msgstr "Obrázky (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 
-#: core/utilities.cpp:151
+#: core/utilities.cpp:152
 #, qt-format
 msgid "In %1 days"
 msgstr "Za %1 dní"
 
-#: core/utilities.cpp:154
+#: core/utilities.cpp:155
 #, qt-format
 msgid "In %1 weeks"
 msgstr "Za %1 týždňov"
@@ -2673,7 +2673,7 @@ msgid ""
 "time a song finishes."
 msgstr "V dynamickom režime budú nové skladby vybraté a pridané do playlistu zakaždým keď skončí pieseň."
 
-#: internet/spotify/spotifyservice.cpp:425
+#: internet/spotify/spotifyservice.cpp:417
 msgid "Inbox"
 msgstr "Doručené"
 
@@ -2951,7 +2951,7 @@ msgstr "Obmedzenia"
 msgid "Live"
 msgstr "Live"
 
-#: ../bin/src/ui_albumcovermanager.h:216
+#: ../bin/src/ui_albumcovermanager.h:222
 msgid "Load"
 msgstr "Načítať"
 
@@ -2959,7 +2959,7 @@ msgstr "Načítať"
 msgid "Load cover from URL"
 msgstr "Načítať obal z URL adresy"
 
-#: ui/albumcoverchoicecontroller.cpp:64
+#: ui/albumcoverchoicecontroller.cpp:66
 msgid "Load cover from URL..."
 msgstr "Načítať obal z URL adresy..."
 
@@ -2967,7 +2967,7 @@ msgstr "Načítať obal z URL adresy..."
 msgid "Load cover from disk"
 msgstr "Načítať obal z disku"
 
-#: ui/albumcoverchoicecontroller.cpp:60
+#: ui/albumcoverchoicecontroller.cpp:61
 msgid "Load cover from disk..."
 msgstr "Načítať obal z disku..."
 
@@ -3080,7 +3080,7 @@ msgstr "Texty z tagu"
 msgid "M4A AAC"
 msgstr "M4A AAC"
 
-#: core/song.cpp:412 transcoder/transcoder.cpp:238
+#: core/song.cpp:416 transcoder/transcoder.cpp:238
 #: ../bin/src/ui_transcodersettingspage.h:174
 msgid "MP3"
 msgstr "MP3"
@@ -3093,11 +3093,11 @@ msgstr "MP3 256k"
 msgid "MP3 96k"
 msgstr "MP3 96k"
 
-#: core/song.cpp:408
+#: core/song.cpp:412
 msgid "MP4 AAC"
 msgstr "MP4 AAC"
 
-#: core/song.cpp:410
+#: core/song.cpp:414
 msgid "MPC"
 msgstr "MPC"
 
@@ -3127,7 +3127,7 @@ msgctxt "Label for button to enable/disable Enterprise background sound."
 msgid "Make it so!"
 msgstr "Make it so!"
 
-#: internet/spotify/spotifyservice.cpp:669
+#: internet/spotify/spotifyservice.cpp:672
 msgid "Make playlist available offline"
 msgstr "Urobiť playlist dostupný offline"
 
@@ -3226,7 +3226,7 @@ msgstr "Mesiace"
 msgid "Mood"
 msgstr "Nálada"
 
-#: moodbar/moodbarproxystyle.cpp:358
+#: moodbar/moodbarproxystyle.cpp:361
 #: ../bin/src/ui_appearancesettingspage.h:293
 msgid "Moodbar style"
 msgstr "Štýl panelu nálady"
@@ -3352,7 +3352,7 @@ msgstr "Ďalšia"
 msgid "Next track"
 msgstr "Nasledujúca skladba"
 
-#: core/utilities.cpp:152
+#: core/utilities.cpp:153
 msgid "Next week"
 msgstr "Budúci týždeň"
 
@@ -3364,7 +3364,7 @@ msgstr "Bez analyzéru"
 msgid "No background image"
 msgstr "Žiaden obrázok na pozadí"
 
-#: ui/albumcovermanager.cpp:789
+#: ui/albumcovermanager.cpp:800
 msgid "No covers to export."
 msgstr "Žiadne obaly na exportovanie."
 
@@ -3459,19 +3459,19 @@ msgstr "OSD ukážka"
 msgid "Off"
 msgstr "Vypnuté"
 
-#: core/song.cpp:414 transcoder/transcoder.cpp:244
+#: core/song.cpp:418 transcoder/transcoder.cpp:244
 msgid "Ogg Flac"
 msgstr "Ogg Flac"
 
-#: core/song.cpp:420 transcoder/transcoder.cpp:250
+#: core/song.cpp:424 transcoder/transcoder.cpp:250
 msgid "Ogg Opus"
 msgstr "Ogg Opus"
 
-#: core/song.cpp:416 transcoder/transcoder.cpp:247
+#: core/song.cpp:420 transcoder/transcoder.cpp:247
 msgid "Ogg Speex"
 msgstr "Ogg Speex"
 
-#: core/song.cpp:418 transcoder/transcoder.cpp:241
+#: core/song.cpp:422 transcoder/transcoder.cpp:241
 #: ../bin/src/ui_magnatunedownloaddialog.h:135
 #: ../bin/src/ui_magnatunesettingspage.h:169
 msgid "Ogg Vorbis"
@@ -3736,7 +3736,7 @@ msgstr "Možnosti prehrávača"
 
 #: playlist/playlistcontainer.cpp:290 playlist/playlistlistcontainer.cpp:228
 #: playlist/playlistmanager.cpp:86 playlist/playlistmanager.cpp:155
-#: playlist/playlistmanager.cpp:508 playlist/playlisttabbar.cpp:366
+#: playlist/playlistmanager.cpp:511 playlist/playlisttabbar.cpp:366
 msgid "Playlist"
 msgstr "Playlist"
 
@@ -3972,7 +3972,7 @@ msgid "Rating"
 msgstr "Hodnotenie"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:309
-#: ui/albumcovermanager.cpp:221
+#: ui/albumcovermanager.cpp:212
 msgid "Really cancel?"
 msgstr "Naozaj zrušiť?"
 
@@ -4042,7 +4042,7 @@ msgstr "Odstrániť duplikáty z playlistu"
 msgid "Remove folder"
 msgstr "Odstrániť priečinok"
 
-#: internet/spotify/spotifyservice.cpp:681 ../bin/src/ui_mainwindow.h:704
+#: internet/spotify/spotifyservice.cpp:684 ../bin/src/ui_mainwindow.h:704
 msgid "Remove from playlist"
 msgstr "Odstrániť z playlistu"
 
@@ -4201,11 +4201,11 @@ msgstr "Rýchlosť vzorkovania"
 msgid "Save .mood files in your music library"
 msgstr "Ukladať súbory .mood vo vašej hudobnej zbierke"
 
-#: ui/albumcoverchoicecontroller.cpp:129
+#: ui/albumcoverchoicecontroller.cpp:131
 msgid "Save album cover"
 msgstr "Uložiť obal albumu"
 
-#: ui/albumcoverchoicecontroller.cpp:62
+#: ui/albumcoverchoicecontroller.cpp:64
 msgid "Save cover to disk..."
 msgstr "Uložiť obal na disk..."
 
@@ -4222,7 +4222,7 @@ msgctxt "Save playlist menu action."
 msgid "Save playlist"
 msgstr "Uložiť playlist"
 
-#: playlist/playlistmanager.cpp:229
+#: playlist/playlistmanager.cpp:232
 msgctxt "Title of the playlist save dialog."
 msgid "Save playlist"
 msgstr "Uložiť playlist"
@@ -4314,7 +4314,7 @@ msgstr "Vyhľadať na Subsonicu"
 msgid "Search automatically"
 msgstr "Hľadať automaticky"
 
-#: ui/albumcoverchoicecontroller.cpp:66
+#: ui/albumcoverchoicecontroller.cpp:69
 msgid "Search for album covers..."
 msgstr "Hľadať obaly albumov..."
 
@@ -4339,7 +4339,7 @@ msgid "Search options"
 msgstr "Možnosti hľadania"
 
 #: internet/soundcloud/soundcloudservice.cpp:119
-#: internet/spotify/spotifyservice.cpp:408
+#: internet/spotify/spotifyservice.cpp:400
 msgid "Search results"
 msgstr "Výsledky hľadania"
 
@@ -4524,7 +4524,7 @@ msgstr "Zobraziť obaly albumov v zbierke"
 msgid "Show dividers"
 msgstr "Zobraziť oddeľovače"
 
-#: ui/albumcoverchoicecontroller.cpp:72 widgets/prettyimage.cpp:183
+#: ui/albumcoverchoicecontroller.cpp:73 widgets/prettyimage.cpp:183
 msgid "Show fullsize..."
 msgstr "Zobraziť celú veľkosť..."
 
@@ -4541,7 +4541,7 @@ msgstr "Zobraziť v zbierke..."
 msgid "Show in various artists"
 msgstr "Zobrazovať v rôznych interprétoch"
 
-#: moodbar/moodbarproxystyle.cpp:353
+#: moodbar/moodbarproxystyle.cpp:356
 msgid "Show moodbar"
 msgstr "Zobraziť panel nálady"
 
@@ -4734,7 +4734,7 @@ msgstr "Spotify"
 msgid "Spotify login error"
 msgstr "Chyba pri prihlasovaní na Spotify"
 
-#: internet/spotify/spotifyservice.cpp:844
+#: internet/spotify/spotifyservice.cpp:850
 msgid "Spotify playlist's URL"
 msgstr "URL adresa playlistu na Spotify"
 
@@ -4746,7 +4746,7 @@ msgstr "Spotify plugin"
 msgid "Spotify plugin not installed"
 msgstr "Spotify plugin nieje nainštalovaný"
 
-#: internet/spotify/spotifyservice.cpp:835
+#: internet/spotify/spotifyservice.cpp:841
 msgid "Spotify song's URL"
 msgstr "URL adresa piesne na Spotify"
 
@@ -4754,7 +4754,7 @@ msgstr "URL adresa piesne na Spotify"
 msgid "Standard"
 msgstr "Štandardný"
 
-#: internet/spotify/spotifyservice.cpp:417
+#: internet/spotify/spotifyservice.cpp:409
 #: internet/subsonic/subsonicservice.cpp:115
 msgid "Starred"
 msgstr "S hviezdičkou"
@@ -4772,7 +4772,7 @@ msgid "Start transcoding"
 msgstr "Začať transkódovanie"
 
 #: internet/soundcloud/soundcloudservice.cpp:121
-#: internet/spotify/spotifyservice.cpp:410
+#: internet/spotify/spotifyservice.cpp:402
 msgid ""
 "Start typing something on the search box above to fill this search results "
 "list"
@@ -4829,7 +4829,7 @@ msgstr "Zastaviť prehrávanie po skladbe: %1"
 msgid "Stopped"
 msgstr "Zastavené"
 
-#: core/song.cpp:431
+#: core/song.cpp:435
 msgid "Stream"
 msgstr "Stream"
 
@@ -4892,15 +4892,15 @@ msgstr "Podporované formáty"
 msgid "Synchronize statistics to files now"
 msgstr "Synchronizovať štatistiky do súborov teraz"
 
-#: internet/spotify/spotifyservice.cpp:708
+#: internet/spotify/spotifyservice.cpp:710
 msgid "Syncing Spotify inbox"
 msgstr "Synchronizuje sa Spotify schránka"
 
-#: internet/spotify/spotifyservice.cpp:702
+#: internet/spotify/spotifyservice.cpp:704
 msgid "Syncing Spotify playlist"
 msgstr "Synchronizuje sa Spotify playlist"
 
-#: internet/spotify/spotifyservice.cpp:713
+#: internet/spotify/spotifyservice.cpp:715
 msgid "Syncing Spotify starred tracks"
 msgstr "Synchronizujú sa skladby ohviezdičkované na Spotify"
 
@@ -5101,7 +5101,7 @@ msgstr "Časový krok"
 msgid "Title"
 msgstr "Názov"
 
-#: core/utilities.cpp:137 core/utilities.cpp:149
+#: core/utilities.cpp:138 core/utilities.cpp:150
 msgid "Today"
 msgstr "Dnes"
 
@@ -5125,7 +5125,7 @@ msgstr "Prepnúť skroblovanie"
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "Prepnúť viditeľnosť Krásneho OSD"
 
-#: core/utilities.cpp:150
+#: core/utilities.cpp:151
 msgid "Tomorrow"
 msgstr "Zajtra"
 
@@ -5137,11 +5137,11 @@ msgstr "Príliš veľa presmerování"
 msgid "Top Rated"
 msgstr "Najvyššie hodnotené"
 
-#: internet/spotify/spotifyservice.cpp:431
+#: internet/spotify/spotifyservice.cpp:423
 msgid "Top tracks"
 msgstr "Top skladby"
 
-#: ../bin/src/ui_albumcovermanager.h:220
+#: ../bin/src/ui_albumcovermanager.h:226
 msgid "Total albums:"
 msgstr "Albumov celkom:"
 
@@ -5187,7 +5187,7 @@ msgstr "Transkódovanie %1 súborov použitím %2 vlákien."
 msgid "Transcoding options"
 msgstr "Možnosti transkódovania"
 
-#: core/song.cpp:426
+#: core/song.cpp:430
 msgid "TrueAudio"
 msgstr "TrueAudio"
 
@@ -5229,10 +5229,10 @@ msgstr "Nepodarilo sa pripojiť"
 msgid "Unable to download %1 (%2)"
 msgstr "Nedá sa stiahnuť %1 (%2)"
 
-#: core/song.cpp:435 library/librarymodel.cpp:374 library/librarymodel.cpp:379
+#: core/song.cpp:439 library/librarymodel.cpp:374 library/librarymodel.cpp:379
 #: library/librarymodel.cpp:383 library/librarymodel.cpp:1156
 #: library/savedgroupingmanager.cpp:103 playlist/playlistdelegates.cpp:305
-#: playlist/playlistmanager.cpp:515 playlist/playlistmanager.cpp:516
+#: playlist/playlistmanager.cpp:518 playlist/playlistmanager.cpp:519
 #: songinfo/streamdiscoverer.cpp:87 ui/albumcoverchoicecontroller.cpp:126
 #: ui/edittagdialog.cpp:463 ui/edittagdialog.cpp:507
 msgid "Unknown"
@@ -5247,7 +5247,7 @@ msgstr "Neznámy typ obsahu"
 msgid "Unknown error"
 msgstr "Neznáma chyba"
 
-#: ui/albumcoverchoicecontroller.cpp:69
+#: ui/albumcoverchoicecontroller.cpp:71
 msgid "Unset cover"
 msgstr "Nenastavený obal"
 
@@ -5408,7 +5408,7 @@ msgid "Variable bit rate"
 msgstr "Premenlivý dátový tok"
 
 #: globalsearch/globalsearchmodel.cpp:109 library/librarymodel.cpp:300
-#: playlist/playlistmanager.cpp:527 ui/albumcovermanager.cpp:273
+#: playlist/playlistmanager.cpp:530 ui/albumcovermanager.cpp:264
 msgid "Various artists"
 msgstr "Rôzni interpréti"
 
@@ -5417,7 +5417,7 @@ msgstr "Rôzni interpréti"
 msgid "Version %1"
 msgstr "Verzia %1"
 
-#: ../bin/src/ui_albumcovermanager.h:219
+#: ../bin/src/ui_albumcovermanager.h:225
 msgid "View"
 msgstr "Zobraziť"
 
@@ -5463,7 +5463,7 @@ msgstr "WMA"
 msgid "Warn me when closing a playlist tab"
 msgstr "Varovať ma pri zatvorení karty s playlistom"
 
-#: core/song.cpp:424 transcoder/transcoder.cpp:256
+#: core/song.cpp:428 transcoder/transcoder.cpp:256
 msgid "Wav"
 msgstr "Wav"
 
@@ -5547,11 +5547,11 @@ msgstr "Windows Media 40k"
 msgid "Windows Media 64k"
 msgstr "Windows Media 64k"
 
-#: core/song.cpp:404 transcoder/transcoder.cpp:253
+#: core/song.cpp:408 transcoder/transcoder.cpp:253
 msgid "Windows Media audio"
 msgstr "WMa"
 
-#: ../bin/src/ui_albumcovermanager.h:221
+#: ../bin/src/ui_albumcovermanager.h:227
 msgid "Without cover:"
 msgstr "Bez obalu:"
 
@@ -5593,7 +5593,7 @@ msgstr "Rok - Album"
 msgid "Years"
 msgstr "Roky"
 
-#: core/utilities.cpp:138
+#: core/utilities.cpp:139
 msgid "Yesterday"
 msgstr "Včera"
 

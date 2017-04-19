@@ -74,7 +74,7 @@ class PlaylistView : public QTreeView {
   void SetApplication(Application* app);
   void SetItemDelegates(LibraryBackend* backend);
   void SetPlaylist(Playlist* playlist);
-  void RemoveSelected();
+  void RemoveSelected(bool deleting_from_disk);
 
   void SetReadOnlySettings(bool read_only) { read_only_settings_ = read_only; }
 
@@ -246,7 +246,7 @@ signals:
   int drop_indicator_row_;
   bool drag_over_;
 
-  bool ratings_locked_; // To store Ratings section lock status
+  bool ratings_locked_;  // To store Ratings section lock status
 
   DynamicPlaylistControls* dynamic_controls_;
 

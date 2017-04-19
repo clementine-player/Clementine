@@ -78,12 +78,12 @@ msgstr "%1 альбом(аў)"
 msgid "%1 dB"
 msgstr ""
 
-#: core/utilities.cpp:120
+#: core/utilities.cpp:121
 #, qt-format
 msgid "%1 days"
 msgstr "%1 дзён"
 
-#: core/utilities.cpp:139
+#: core/utilities.cpp:140
 #, qt-format
 msgid "%1 days ago"
 msgstr "%1 дзён таму"
@@ -93,12 +93,12 @@ msgstr "%1 дзён таму"
 msgid "%1 on %2"
 msgstr "%1 на %2"
 
-#: playlistparsers/playlistparser.cpp:76
+#: playlistparsers/playlistparser.cpp:87
 #, qt-format
 msgid "%1 playlists (%2)"
 msgstr "%1 плэйлістоў (%2)"
 
-#: playlist/playlistmanager.cpp:416
+#: playlist/playlistmanager.cpp:419
 #, qt-format
 msgid "%1 selected of"
 msgstr "%1 абрана з"
@@ -123,12 +123,12 @@ msgstr "%1 кампазыцый знойдзена"
 msgid "%1 songs found (showing %2)"
 msgstr "%1 кампазыцый знойдзена (паказана %2)"
 
-#: playlist/playlistmanager.cpp:422
+#: playlist/playlistmanager.cpp:425
 #, qt-format
 msgid "%1 tracks"
 msgstr "%1 трэкаў"
 
-#: ui/albumcovermanager.cpp:469
+#: ui/albumcovermanager.cpp:472
 #, qt-format
 msgid "%1 transferred"
 msgstr "%1 перададзены"
@@ -260,7 +260,7 @@ msgstr ""
 msgid "(different across multiple songs)"
 msgstr "(розны праз некалькі кампазыцый)"
 
-#: internet/spotify/spotifyservice.cpp:469
+#: internet/spotify/spotifyservice.cpp:472
 msgid ", by "
 msgstr ""
 
@@ -268,7 +268,7 @@ msgstr ""
 msgid "...and all the Amarok contributors"
 msgstr "...і ўсім стваральнікам Amarok"
 
-#: ../bin/src/ui_albumcovermanager.h:222 ../bin/src/ui_albumcovermanager.h:223
+#: ../bin/src/ui_albumcovermanager.h:228 ../bin/src/ui_albumcovermanager.h:229
 msgid "0"
 msgstr "0"
 
@@ -280,11 +280,11 @@ msgstr "0:00:00"
 msgid "0px"
 msgstr "0px"
 
-#: core/utilities.cpp:120
+#: core/utilities.cpp:121
 msgid "1 day"
 msgstr "1 дзень"
 
-#: playlist/playlistmanager.cpp:422
+#: playlist/playlistmanager.cpp:425
 msgid "1 track"
 msgstr "1 кампазыцыя"
 
@@ -411,7 +411,7 @@ msgstr "AAC 32k"
 msgid "AAC 64k"
 msgstr "AAC 64k"
 
-#: core/song.cpp:422
+#: core/song.cpp:426
 msgid "AIFF"
 msgstr "AIFF"
 
@@ -419,7 +419,7 @@ msgstr "AIFF"
 msgid "ALL GLORY TO THE HYPNOTOAD"
 msgstr "УСЯ СЛАВА ГІПНАЖАБЕ!"
 
-#: ui/albumcovermanager.cpp:114 ui/albumcoversearcher.cpp:158
+#: ui/albumcovermanager.cpp:105 ui/albumcoversearcher.cpp:158
 msgid "Abort"
 msgstr "Адмена"
 
@@ -613,11 +613,11 @@ msgstr "Дадаць тэг \"Год\""
 msgid "Add stream..."
 msgstr "Дадаць струмень..."
 
-#: internet/spotify/spotifyservice.cpp:623
+#: internet/spotify/spotifyservice.cpp:626
 msgid "Add to Spotify playlists"
 msgstr ""
 
-#: internet/spotify/spotifyservice.cpp:615
+#: internet/spotify/spotifyservice.cpp:618
 msgid "Add to Spotify starred"
 msgstr ""
 
@@ -625,7 +625,7 @@ msgstr ""
 msgid "Add to another playlist"
 msgstr "Дадаць у іншы плэйліст"
 
-#: ../bin/src/ui_albumcovermanager.h:217
+#: ../bin/src/ui_albumcovermanager.h:223
 msgid "Add to playlist"
 msgstr "Дадаць у плэйліст"
 
@@ -699,11 +699,11 @@ msgstr "Вокладка альбому"
 msgid "Album info on jamendo.com..."
 msgstr "Інфармацыя аб альбоме на jamendo.com..."
 
-#: ui/albumcovermanager.cpp:138
+#: ui/albumcovermanager.cpp:129
 msgid "Albums with covers"
 msgstr "Альбомы з вокладкамі"
 
-#: ui/albumcovermanager.cpp:139
+#: ui/albumcovermanager.cpp:130
 msgid "Albums without covers"
 msgstr "Альбомы бяз вокладак"
 
@@ -720,11 +720,11 @@ msgctxt "Label for button to enable/disable Hypnotoad background sound."
 msgid "All Glory to the Hypnotoad!"
 msgstr ""
 
-#: ui/albumcovermanager.cpp:137
+#: ui/albumcovermanager.cpp:128
 msgid "All albums"
 msgstr "Усе альбомы"
 
-#: ui/albumcovermanager.cpp:271
+#: ui/albumcovermanager.cpp:262
 msgid "All artists"
 msgstr "Усе выканаўцы"
 
@@ -732,7 +732,7 @@ msgstr "Усе выканаўцы"
 msgid "All files (*)"
 msgstr "Усе файлы (*)"
 
-#: playlistparsers/playlistparser.cpp:63
+#: playlistparsers/playlistparser.cpp:74
 #, qt-format
 msgid "All playlists (%1)"
 msgstr "Усе спісы прайгравання (%1)"
@@ -1047,7 +1047,7 @@ msgstr "Гэтыя крыніцы адключаныя:"
 msgid "Buttons"
 msgstr "Клявішы"
 
-#: core/song.cpp:428
+#: core/song.cpp:432
 msgid "CDDA"
 msgstr "CDDA"
 
@@ -1286,7 +1286,7 @@ msgstr "Зачыніць візуалізацыю"
 msgid "Closing this window will cancel the download."
 msgstr "Закрыцьцё гэтага вакна адменіць загрузку."
 
-#: ui/albumcovermanager.cpp:222
+#: ui/albumcovermanager.cpp:213
 msgid "Closing this window will stop searching for album covers."
 msgstr "Закрыцьцё гэтага вакна спыніць пошук вокладак альбомаў."
 
@@ -1342,7 +1342,7 @@ msgstr "Камбінацыі клявішаў"
 msgid "Configure SoundCloud..."
 msgstr ""
 
-#: internet/spotify/spotifyservice.cpp:921
+#: internet/spotify/spotifyservice.cpp:927
 msgid "Configure Spotify..."
 msgstr "Наладзіць Spotify..."
 
@@ -1486,7 +1486,7 @@ msgstr "Немагчыма адкрыць выходны файл %1"
 
 #: internet/core/cloudfileservice.cpp:103
 #: internet/googledrive/googledriveservice.cpp:228
-#: ../bin/src/ui_albumcovermanager.h:214
+#: ../bin/src/ui_albumcovermanager.h:220
 #: ../bin/src/ui_albumcoversearcher.h:104 ../bin/src/ui_mainwindow.h:696
 msgid "Cover Manager"
 msgstr "Мэнэджэр вокладак"
@@ -1815,7 +1815,7 @@ msgid "Don't shuffle"
 msgstr "Ня зьмешваць"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:312
-#: ui/albumcovermanager.cpp:224
+#: ui/albumcovermanager.cpp:215
 msgid "Don't stop!"
 msgstr "Не спыняць!"
 
@@ -2043,7 +2043,7 @@ msgid "Enter search terms below to find podcasts on gpodder.net"
 msgstr "Уведзьце ключавыя словы для пошуку ў gpodder.net"
 
 #: ../bin/src/ui_libraryfilterwidget.h:106
-#: ../bin/src/ui_albumcovermanager.h:218
+#: ../bin/src/ui_albumcovermanager.h:224
 msgid "Enter search terms here"
 msgstr "Пошук..."
 
@@ -2174,7 +2174,7 @@ msgstr "Разгарнуць"
 msgid "Expires on %1"
 msgstr "Тэрмін дзеяньня мінае %1"
 
-#: ../bin/src/ui_albumcovermanager.h:225
+#: ../bin/src/ui_albumcovermanager.h:231
 msgid "Export Covers"
 msgstr "Экспартаваць Вокладкі"
 
@@ -2190,11 +2190,11 @@ msgstr "Экспартаваць спампаваныя вокладкі"
 msgid "Export embedded covers"
 msgstr ""
 
-#: ui/albumcovermanager.cpp:788 ui/albumcovermanager.cpp:812
+#: ui/albumcovermanager.cpp:799 ui/albumcovermanager.cpp:823
 msgid "Export finished"
 msgstr "Экспартаваньне скончана"
 
-#: ui/albumcovermanager.cpp:797
+#: ui/albumcovermanager.cpp:808
 #, qt-format
 msgid "Exported %1 covers out of %2 (%3 skipped)"
 msgstr "Экспартавана %1 вокладак(кі) з %2 (%3 прапушчана)"
@@ -2265,11 +2265,11 @@ msgstr ""
 msgid "Favourite tracks"
 msgstr "Улюбёныя трэкі"
 
-#: ../bin/src/ui_albumcovermanager.h:224
+#: ../bin/src/ui_albumcovermanager.h:230
 msgid "Fetch Missing Covers"
 msgstr "Запоўнiць пустыя вокладкi"
 
-#: ../bin/src/ui_albumcovermanager.h:215
+#: ../bin/src/ui_albumcovermanager.h:221
 msgid "Fetch automatically"
 msgstr "Выбіраць аўтаматычна"
 
@@ -2355,7 +2355,7 @@ msgstr "Першы ўзровень"
 msgid "Fit cover to width"
 msgstr ""
 
-#: core/song.cpp:406 transcoder/transcoder.cpp:233
+#: core/song.cpp:410 transcoder/transcoder.cpp:233
 msgid "Flac"
 msgstr "Flac"
 
@@ -2459,12 +2459,12 @@ msgstr "Агульныя налады"
 msgid "Genre"
 msgstr "Жанр"
 
-#: internet/spotify/spotifyservice.cpp:639
-#: internet/spotify/spotifyservice.cpp:683
+#: internet/spotify/spotifyservice.cpp:642
+#: internet/spotify/spotifyservice.cpp:685
 msgid "Get a URL to share this Spotify song"
 msgstr ""
 
-#: internet/spotify/spotifyservice.cpp:671
+#: internet/spotify/spotifyservice.cpp:674
 msgid "Get a URL to share this playlist"
 msgstr ""
 
@@ -2497,7 +2497,7 @@ msgstr "Перайсьці да папярэдняга сьпісу прайгр
 msgid "Google Drive"
 msgstr "Google Drive"
 
-#: covers/coversearchstatisticsdialog.cpp:53 ui/albumcovermanager.cpp:463
+#: covers/coversearchstatisticsdialog.cpp:53 ui/albumcovermanager.cpp:465
 #: ../bin/src/ui_coversearchstatisticsdialog.h:75
 #, qt-format
 msgid "Got %1 covers out of %2 (%3 failed)"
@@ -2656,12 +2656,12 @@ msgstr "Выявы (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm
 msgid "Images (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 msgstr "Выявы (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 
-#: core/utilities.cpp:151
+#: core/utilities.cpp:152
 #, qt-format
 msgid "In %1 days"
 msgstr "Праз %1 дзён (дні)"
 
-#: core/utilities.cpp:154
+#: core/utilities.cpp:155
 #, qt-format
 msgid "In %1 weeks"
 msgstr "Праз %1 тыдняў (тыдні)"
@@ -2672,7 +2672,7 @@ msgid ""
 "time a song finishes."
 msgstr "У дынамічнам рэжыме новыя трэкі выбіраюцца й дадаюцца ў сьпіс прайграваньня кожны раз, калі зьвяршаецца чарговая песьня."
 
-#: internet/spotify/spotifyservice.cpp:425
+#: internet/spotify/spotifyservice.cpp:417
 msgid "Inbox"
 msgstr "Уваходныя"
 
@@ -2950,7 +2950,7 @@ msgstr "Абмежаваньні"
 msgid "Live"
 msgstr "Live"
 
-#: ../bin/src/ui_albumcovermanager.h:216
+#: ../bin/src/ui_albumcovermanager.h:222
 msgid "Load"
 msgstr "Загрузіць"
 
@@ -2958,7 +2958,7 @@ msgstr "Загрузіць"
 msgid "Load cover from URL"
 msgstr "Загрузка вокладкі па спасылцы"
 
-#: ui/albumcoverchoicecontroller.cpp:64
+#: ui/albumcoverchoicecontroller.cpp:66
 msgid "Load cover from URL..."
 msgstr "Загрузіць вокладку з URL..."
 
@@ -2966,7 +2966,7 @@ msgstr "Загрузіць вокладку з URL..."
 msgid "Load cover from disk"
 msgstr "Загрузіць вокладку з дыску"
 
-#: ui/albumcoverchoicecontroller.cpp:60
+#: ui/albumcoverchoicecontroller.cpp:61
 msgid "Load cover from disk..."
 msgstr "Загрузіць вокладку з дыску..."
 
@@ -3079,7 +3079,7 @@ msgstr ""
 msgid "M4A AAC"
 msgstr ""
 
-#: core/song.cpp:412 transcoder/transcoder.cpp:238
+#: core/song.cpp:416 transcoder/transcoder.cpp:238
 #: ../bin/src/ui_transcodersettingspage.h:174
 msgid "MP3"
 msgstr "MP3"
@@ -3092,11 +3092,11 @@ msgstr "MP3 256k"
 msgid "MP3 96k"
 msgstr "MP3 96k"
 
-#: core/song.cpp:408
+#: core/song.cpp:412
 msgid "MP4 AAC"
 msgstr "MP4 AAC"
 
-#: core/song.cpp:410
+#: core/song.cpp:414
 msgid "MPC"
 msgstr "MPC"
 
@@ -3126,7 +3126,7 @@ msgctxt "Label for button to enable/disable Enterprise background sound."
 msgid "Make it so!"
 msgstr ""
 
-#: internet/spotify/spotifyservice.cpp:669
+#: internet/spotify/spotifyservice.cpp:672
 msgid "Make playlist available offline"
 msgstr "Зрабіць плэйліст даступным офлайн"
 
@@ -3225,7 +3225,7 @@ msgstr "Месяцаў"
 msgid "Mood"
 msgstr "Настрой"
 
-#: moodbar/moodbarproxystyle.cpp:358
+#: moodbar/moodbarproxystyle.cpp:361
 #: ../bin/src/ui_appearancesettingspage.h:293
 msgid "Moodbar style"
 msgstr "Стыль панэлі настрою"
@@ -3351,7 +3351,7 @@ msgstr "Далей"
 msgid "Next track"
 msgstr "Наступны трэк"
 
-#: core/utilities.cpp:152
+#: core/utilities.cpp:153
 msgid "Next week"
 msgstr "На наступным тыдні"
 
@@ -3363,7 +3363,7 @@ msgstr "Без аналізатару"
 msgid "No background image"
 msgstr "Няма фонавай выявы"
 
-#: ui/albumcovermanager.cpp:789
+#: ui/albumcovermanager.cpp:800
 msgid "No covers to export."
 msgstr "Няма вокладак для экспартаваньня."
 
@@ -3458,19 +3458,19 @@ msgstr "Перадагляд OSD"
 msgid "Off"
 msgstr ""
 
-#: core/song.cpp:414 transcoder/transcoder.cpp:244
+#: core/song.cpp:418 transcoder/transcoder.cpp:244
 msgid "Ogg Flac"
 msgstr "Ogg Flac"
 
-#: core/song.cpp:420 transcoder/transcoder.cpp:250
+#: core/song.cpp:424 transcoder/transcoder.cpp:250
 msgid "Ogg Opus"
 msgstr "Ogg Opus"
 
-#: core/song.cpp:416 transcoder/transcoder.cpp:247
+#: core/song.cpp:420 transcoder/transcoder.cpp:247
 msgid "Ogg Speex"
 msgstr "Ogg Speex"
 
-#: core/song.cpp:418 transcoder/transcoder.cpp:241
+#: core/song.cpp:422 transcoder/transcoder.cpp:241
 #: ../bin/src/ui_magnatunedownloaddialog.h:135
 #: ../bin/src/ui_magnatunesettingspage.h:169
 msgid "Ogg Vorbis"
@@ -3735,7 +3735,7 @@ msgstr "Налады плэеру"
 
 #: playlist/playlistcontainer.cpp:290 playlist/playlistlistcontainer.cpp:228
 #: playlist/playlistmanager.cpp:86 playlist/playlistmanager.cpp:155
-#: playlist/playlistmanager.cpp:508 playlist/playlisttabbar.cpp:366
+#: playlist/playlistmanager.cpp:511 playlist/playlisttabbar.cpp:366
 msgid "Playlist"
 msgstr "Плэйліст"
 
@@ -3971,7 +3971,7 @@ msgid "Rating"
 msgstr "Рэйтынг"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:309
-#: ui/albumcovermanager.cpp:221
+#: ui/albumcovermanager.cpp:212
 msgid "Really cancel?"
 msgstr "Ці сапраўды адмяніць?"
 
@@ -4041,7 +4041,7 @@ msgstr "Прыбраць паўторы з плэйлісту"
 msgid "Remove folder"
 msgstr "Прыбраць каталёг"
 
-#: internet/spotify/spotifyservice.cpp:681 ../bin/src/ui_mainwindow.h:704
+#: internet/spotify/spotifyservice.cpp:684 ../bin/src/ui_mainwindow.h:704
 msgid "Remove from playlist"
 msgstr "Прыбраць з плэйлісту"
 
@@ -4200,11 +4200,11 @@ msgstr "Чашчыня дыскрэтызацыі"
 msgid "Save .mood files in your music library"
 msgstr "Захаваць файлы .mood у музычную бібліятэку"
 
-#: ui/albumcoverchoicecontroller.cpp:129
+#: ui/albumcoverchoicecontroller.cpp:131
 msgid "Save album cover"
 msgstr "Такая ж вокладка альбому"
 
-#: ui/albumcoverchoicecontroller.cpp:62
+#: ui/albumcoverchoicecontroller.cpp:64
 msgid "Save cover to disk..."
 msgstr "Захаваць вокладку на дыск..."
 
@@ -4221,7 +4221,7 @@ msgctxt "Save playlist menu action."
 msgid "Save playlist"
 msgstr ""
 
-#: playlist/playlistmanager.cpp:229
+#: playlist/playlistmanager.cpp:232
 msgctxt "Title of the playlist save dialog."
 msgid "Save playlist"
 msgstr ""
@@ -4313,7 +4313,7 @@ msgstr "Пошук "
 msgid "Search automatically"
 msgstr ""
 
-#: ui/albumcoverchoicecontroller.cpp:66
+#: ui/albumcoverchoicecontroller.cpp:69
 msgid "Search for album covers..."
 msgstr "Шукаць вокладкі альбомаў..."
 
@@ -4338,7 +4338,7 @@ msgid "Search options"
 msgstr "Парамэтры пошуку"
 
 #: internet/soundcloud/soundcloudservice.cpp:119
-#: internet/spotify/spotifyservice.cpp:408
+#: internet/spotify/spotifyservice.cpp:400
 msgid "Search results"
 msgstr "Вынікі пошуку"
 
@@ -4523,7 +4523,7 @@ msgstr "Паказваць вокладкі ў бібліятэцы"
 msgid "Show dividers"
 msgstr "Паказваць падзяляльнікі"
 
-#: ui/albumcoverchoicecontroller.cpp:72 widgets/prettyimage.cpp:183
+#: ui/albumcoverchoicecontroller.cpp:73 widgets/prettyimage.cpp:183
 msgid "Show fullsize..."
 msgstr "Паказаць поўны памер..."
 
@@ -4540,7 +4540,7 @@ msgstr ""
 msgid "Show in various artists"
 msgstr "Паказаць ў \"Розных выканаўцах\""
 
-#: moodbar/moodbarproxystyle.cpp:353
+#: moodbar/moodbarproxystyle.cpp:356
 msgid "Show moodbar"
 msgstr "Паказаць панэль настрою"
 
@@ -4733,7 +4733,7 @@ msgstr "Spotify"
 msgid "Spotify login error"
 msgstr "Памылка логіну Spotify"
 
-#: internet/spotify/spotifyservice.cpp:844
+#: internet/spotify/spotifyservice.cpp:850
 msgid "Spotify playlist's URL"
 msgstr ""
 
@@ -4745,7 +4745,7 @@ msgstr "Плагін Spotify"
 msgid "Spotify plugin not installed"
 msgstr "Плагін Spotify не ўсталяваны"
 
-#: internet/spotify/spotifyservice.cpp:835
+#: internet/spotify/spotifyservice.cpp:841
 msgid "Spotify song's URL"
 msgstr ""
 
@@ -4753,7 +4753,7 @@ msgstr ""
 msgid "Standard"
 msgstr "Стандартны"
 
-#: internet/spotify/spotifyservice.cpp:417
+#: internet/spotify/spotifyservice.cpp:409
 #: internet/subsonic/subsonicservice.cpp:115
 msgid "Starred"
 msgstr "Ацэненыя"
@@ -4771,7 +4771,7 @@ msgid "Start transcoding"
 msgstr "Пачаць перакадаваньне"
 
 #: internet/soundcloud/soundcloudservice.cpp:121
-#: internet/spotify/spotifyservice.cpp:410
+#: internet/spotify/spotifyservice.cpp:402
 msgid ""
 "Start typing something on the search box above to fill this search results "
 "list"
@@ -4828,7 +4828,7 @@ msgstr ""
 msgid "Stopped"
 msgstr "Спынена"
 
-#: core/song.cpp:431
+#: core/song.cpp:435
 msgid "Stream"
 msgstr "Струмень"
 
@@ -4891,15 +4891,15 @@ msgstr "Падтрыманыя фарматы"
 msgid "Synchronize statistics to files now"
 msgstr ""
 
-#: internet/spotify/spotifyservice.cpp:708
+#: internet/spotify/spotifyservice.cpp:710
 msgid "Syncing Spotify inbox"
 msgstr "Сынхранізацыя ўваходных Spotify"
 
-#: internet/spotify/spotifyservice.cpp:702
+#: internet/spotify/spotifyservice.cpp:704
 msgid "Syncing Spotify playlist"
 msgstr "Сынхранізацыя плэйлістоў Spotify"
 
-#: internet/spotify/spotifyservice.cpp:713
+#: internet/spotify/spotifyservice.cpp:715
 msgid "Syncing Spotify starred tracks"
 msgstr "Сынхранізацыя рэйтынгавых трэкаў Spotify"
 
@@ -5100,7 +5100,7 @@ msgstr ""
 msgid "Title"
 msgstr "Назва"
 
-#: core/utilities.cpp:137 core/utilities.cpp:149
+#: core/utilities.cpp:138 core/utilities.cpp:150
 msgid "Today"
 msgstr "Сёньня"
 
@@ -5124,7 +5124,7 @@ msgstr "Укл/Выкл скроблінг"
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "Паказаць/Скрыць экраннае апавяшчэньне"
 
-#: core/utilities.cpp:150
+#: core/utilities.cpp:151
 msgid "Tomorrow"
 msgstr "Заўтра"
 
@@ -5136,11 +5136,11 @@ msgstr "Занадта шмат перанакіраваньняў"
 msgid "Top Rated"
 msgstr ""
 
-#: internet/spotify/spotifyservice.cpp:431
+#: internet/spotify/spotifyservice.cpp:423
 msgid "Top tracks"
 msgstr "Самыя папулярныя"
 
-#: ../bin/src/ui_albumcovermanager.h:220
+#: ../bin/src/ui_albumcovermanager.h:226
 msgid "Total albums:"
 msgstr ""
 
@@ -5186,7 +5186,7 @@ msgstr "Перакадавана %1 файлаў, выкарыстоўваючы
 msgid "Transcoding options"
 msgstr "Парамэтры перакадоўкі"
 
-#: core/song.cpp:426
+#: core/song.cpp:430
 msgid "TrueAudio"
 msgstr "TrueAudio"
 
@@ -5228,10 +5228,10 @@ msgstr ""
 msgid "Unable to download %1 (%2)"
 msgstr "Немагчыма спампаваць %1 (%2)"
 
-#: core/song.cpp:435 library/librarymodel.cpp:374 library/librarymodel.cpp:379
+#: core/song.cpp:439 library/librarymodel.cpp:374 library/librarymodel.cpp:379
 #: library/librarymodel.cpp:383 library/librarymodel.cpp:1156
 #: library/savedgroupingmanager.cpp:103 playlist/playlistdelegates.cpp:305
-#: playlist/playlistmanager.cpp:515 playlist/playlistmanager.cpp:516
+#: playlist/playlistmanager.cpp:518 playlist/playlistmanager.cpp:519
 #: songinfo/streamdiscoverer.cpp:87 ui/albumcoverchoicecontroller.cpp:126
 #: ui/edittagdialog.cpp:463 ui/edittagdialog.cpp:507
 msgid "Unknown"
@@ -5246,7 +5246,7 @@ msgstr "Невядомы тып кантэнту"
 msgid "Unknown error"
 msgstr "Невядомая памылка"
 
-#: ui/albumcoverchoicecontroller.cpp:69
+#: ui/albumcoverchoicecontroller.cpp:71
 msgid "Unset cover"
 msgstr "Выдаліць вокладку"
 
@@ -5407,7 +5407,7 @@ msgid "Variable bit rate"
 msgstr "Пераменны бітрэйт"
 
 #: globalsearch/globalsearchmodel.cpp:109 library/librarymodel.cpp:300
-#: playlist/playlistmanager.cpp:527 ui/albumcovermanager.cpp:273
+#: playlist/playlistmanager.cpp:530 ui/albumcovermanager.cpp:264
 msgid "Various artists"
 msgstr "Розныя выканаўцы"
 
@@ -5416,7 +5416,7 @@ msgstr "Розныя выканаўцы"
 msgid "Version %1"
 msgstr "Вэрсія %1"
 
-#: ../bin/src/ui_albumcovermanager.h:219
+#: ../bin/src/ui_albumcovermanager.h:225
 msgid "View"
 msgstr "Прагляд"
 
@@ -5462,7 +5462,7 @@ msgstr "WMA"
 msgid "Warn me when closing a playlist tab"
 msgstr ""
 
-#: core/song.cpp:424 transcoder/transcoder.cpp:256
+#: core/song.cpp:428 transcoder/transcoder.cpp:256
 msgid "Wav"
 msgstr "Wav"
 
@@ -5546,11 +5546,11 @@ msgstr "Windows Media 40k"
 msgid "Windows Media 64k"
 msgstr "Windows Media 64k"
 
-#: core/song.cpp:404 transcoder/transcoder.cpp:253
+#: core/song.cpp:408 transcoder/transcoder.cpp:253
 msgid "Windows Media audio"
 msgstr "Windows Media audio"
 
-#: ../bin/src/ui_albumcovermanager.h:221
+#: ../bin/src/ui_albumcovermanager.h:227
 msgid "Without cover:"
 msgstr "Бяз вокладкі:"
 
@@ -5592,7 +5592,7 @@ msgstr "Год - Альбом"
 msgid "Years"
 msgstr "Годы"
 
-#: core/utilities.cpp:138
+#: core/utilities.cpp:139
 msgid "Yesterday"
 msgstr "Учора"
 

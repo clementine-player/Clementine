@@ -87,12 +87,12 @@ msgstr "%1 个专辑"
 msgid "%1 dB"
 msgstr "%1 dB"
 
-#: core/utilities.cpp:120
+#: core/utilities.cpp:121
 #, qt-format
 msgid "%1 days"
 msgstr "%1 天"
 
-#: core/utilities.cpp:139
+#: core/utilities.cpp:140
 #, qt-format
 msgid "%1 days ago"
 msgstr "%1 天前"
@@ -102,12 +102,12 @@ msgstr "%1 天前"
 msgid "%1 on %2"
 msgstr "%1 在 %2"
 
-#: playlistparsers/playlistparser.cpp:76
+#: playlistparsers/playlistparser.cpp:87
 #, qt-format
 msgid "%1 playlists (%2)"
 msgstr "%1 播放列表 (%2)"
 
-#: playlist/playlistmanager.cpp:416
+#: playlist/playlistmanager.cpp:419
 #, qt-format
 msgid "%1 selected of"
 msgstr "%1 选定"
@@ -132,12 +132,12 @@ msgstr "找到 %1 首歌"
 msgid "%1 songs found (showing %2)"
 msgstr "找到 %1 首(显示 %2)"
 
-#: playlist/playlistmanager.cpp:422
+#: playlist/playlistmanager.cpp:425
 #, qt-format
 msgid "%1 tracks"
 msgstr "%1 首"
 
-#: ui/albumcovermanager.cpp:469
+#: ui/albumcovermanager.cpp:472
 #, qt-format
 msgid "%1 transferred"
 msgstr "%1 已传输"
@@ -269,7 +269,7 @@ msgstr "年份(&Y)"
 msgid "(different across multiple songs)"
 msgstr "(多个曲目间不同)"
 
-#: internet/spotify/spotifyservice.cpp:469
+#: internet/spotify/spotifyservice.cpp:472
 msgid ", by "
 msgstr ", - "
 
@@ -277,7 +277,7 @@ msgstr ", - "
 msgid "...and all the Amarok contributors"
 msgstr "...和所有 Amarok 的贡献者"
 
-#: ../bin/src/ui_albumcovermanager.h:222 ../bin/src/ui_albumcovermanager.h:223
+#: ../bin/src/ui_albumcovermanager.h:228 ../bin/src/ui_albumcovermanager.h:229
 msgid "0"
 msgstr "0"
 
@@ -289,11 +289,11 @@ msgstr "0:00:00"
 msgid "0px"
 msgstr "0px"
 
-#: core/utilities.cpp:120
+#: core/utilities.cpp:121
 msgid "1 day"
 msgstr "1 天"
 
-#: playlist/playlistmanager.cpp:422
+#: playlist/playlistmanager.cpp:425
 msgid "1 track"
 msgstr "1 个曲目"
 
@@ -420,7 +420,7 @@ msgstr "AAC 32k"
 msgid "AAC 64k"
 msgstr "AAC 64k"
 
-#: core/song.cpp:422
+#: core/song.cpp:426
 msgid "AIFF"
 msgstr "AIFF"
 
@@ -428,7 +428,7 @@ msgstr "AIFF"
 msgid "ALL GLORY TO THE HYPNOTOAD"
 msgstr "ALL GLORY TO THE HYPNOTOAD"
 
-#: ui/albumcovermanager.cpp:114 ui/albumcoversearcher.cpp:158
+#: ui/albumcovermanager.cpp:105 ui/albumcoversearcher.cpp:158
 msgid "Abort"
 msgstr "中止"
 
@@ -622,11 +622,11 @@ msgstr "添加歌曲年份标签"
 msgid "Add stream..."
 msgstr "添加流媒体..."
 
-#: internet/spotify/spotifyservice.cpp:623
+#: internet/spotify/spotifyservice.cpp:626
 msgid "Add to Spotify playlists"
 msgstr "添加到 Spotify 播放列表"
 
-#: internet/spotify/spotifyservice.cpp:615
+#: internet/spotify/spotifyservice.cpp:618
 msgid "Add to Spotify starred"
 msgstr "添加到 Spotify 收藏"
 
@@ -634,7 +634,7 @@ msgstr "添加到 Spotify 收藏"
 msgid "Add to another playlist"
 msgstr "添加到另一播放列表"
 
-#: ../bin/src/ui_albumcovermanager.h:217
+#: ../bin/src/ui_albumcovermanager.h:223
 msgid "Add to playlist"
 msgstr "添加到播放列表"
 
@@ -708,11 +708,11 @@ msgstr "专辑封面"
 msgid "Album info on jamendo.com..."
 msgstr "jamendo.com 上的专辑信息..."
 
-#: ui/albumcovermanager.cpp:138
+#: ui/albumcovermanager.cpp:129
 msgid "Albums with covers"
 msgstr "有封面的专辑"
 
-#: ui/albumcovermanager.cpp:139
+#: ui/albumcovermanager.cpp:130
 msgid "Albums without covers"
 msgstr "无封面的专辑"
 
@@ -729,11 +729,11 @@ msgctxt "Label for button to enable/disable Hypnotoad background sound."
 msgid "All Glory to the Hypnotoad!"
 msgstr "全部归功于睡蛙！"
 
-#: ui/albumcovermanager.cpp:137
+#: ui/albumcovermanager.cpp:128
 msgid "All albums"
 msgstr "全部专辑"
 
-#: ui/albumcovermanager.cpp:271
+#: ui/albumcovermanager.cpp:262
 msgid "All artists"
 msgstr "全部艺人"
 
@@ -741,7 +741,7 @@ msgstr "全部艺人"
 msgid "All files (*)"
 msgstr "全部文件 (*)"
 
-#: playlistparsers/playlistparser.cpp:63
+#: playlistparsers/playlistparser.cpp:74
 #, qt-format
 msgid "All playlists (%1)"
 msgstr "全部播放列表 (%1)"
@@ -1056,7 +1056,7 @@ msgstr "但这些资源已经被禁止"
 msgid "Buttons"
 msgstr "按钮"
 
-#: core/song.cpp:428
+#: core/song.cpp:432
 msgid "CDDA"
 msgstr "CDDA"
 
@@ -1295,7 +1295,7 @@ msgstr "关闭视觉效果"
 msgid "Closing this window will cancel the download."
 msgstr "关闭此窗口将取消下载。"
 
-#: ui/albumcovermanager.cpp:222
+#: ui/albumcovermanager.cpp:213
 msgid "Closing this window will stop searching for album covers."
 msgstr "关闭此窗口将停止寻找专辑封面。"
 
@@ -1351,7 +1351,7 @@ msgstr "配置快捷键"
 msgid "Configure SoundCloud..."
 msgstr "配置 SoundCloud..."
 
-#: internet/spotify/spotifyservice.cpp:921
+#: internet/spotify/spotifyservice.cpp:927
 msgid "Configure Spotify..."
 msgstr "配置Spotify..."
 
@@ -1495,7 +1495,7 @@ msgstr "无法打开输出文件 %1"
 
 #: internet/core/cloudfileservice.cpp:103
 #: internet/googledrive/googledriveservice.cpp:228
-#: ../bin/src/ui_albumcovermanager.h:214
+#: ../bin/src/ui_albumcovermanager.h:220
 #: ../bin/src/ui_albumcoversearcher.h:104 ../bin/src/ui_mainwindow.h:696
 msgid "Cover Manager"
 msgstr "封面管理器"
@@ -1824,7 +1824,7 @@ msgid "Don't shuffle"
 msgstr "不随机播放"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:312
-#: ui/albumcovermanager.cpp:224
+#: ui/albumcovermanager.cpp:215
 msgid "Don't stop!"
 msgstr "不要停止！"
 
@@ -2052,7 +2052,7 @@ msgid "Enter search terms below to find podcasts on gpodder.net"
 msgstr "使用下方输入的内容在 gpodder.net 上搜索播客"
 
 #: ../bin/src/ui_libraryfilterwidget.h:106
-#: ../bin/src/ui_albumcovermanager.h:218
+#: ../bin/src/ui_albumcovermanager.h:224
 msgid "Enter search terms here"
 msgstr "在此输入查找条件"
 
@@ -2183,7 +2183,7 @@ msgstr "扩展"
 msgid "Expires on %1"
 msgstr "于%1过期"
 
-#: ../bin/src/ui_albumcovermanager.h:225
+#: ../bin/src/ui_albumcovermanager.h:231
 msgid "Export Covers"
 msgstr "导出封面"
 
@@ -2199,11 +2199,11 @@ msgstr "导出下载的封面"
 msgid "Export embedded covers"
 msgstr "导出内嵌封面"
 
-#: ui/albumcovermanager.cpp:788 ui/albumcovermanager.cpp:812
+#: ui/albumcovermanager.cpp:799 ui/albumcovermanager.cpp:823
 msgid "Export finished"
 msgstr "导出完成"
 
-#: ui/albumcovermanager.cpp:797
+#: ui/albumcovermanager.cpp:808
 #, qt-format
 msgid "Exported %1 covers out of %2 (%3 skipped)"
 msgstr "已导出 %1 个封面，共 %2 个(跳过 %3 个)"
@@ -2274,11 +2274,11 @@ msgstr "收藏夹"
 msgid "Favourite tracks"
 msgstr "收藏的曲目"
 
-#: ../bin/src/ui_albumcovermanager.h:224
+#: ../bin/src/ui_albumcovermanager.h:230
 msgid "Fetch Missing Covers"
 msgstr "获取缺少的封面"
 
-#: ../bin/src/ui_albumcovermanager.h:215
+#: ../bin/src/ui_albumcovermanager.h:221
 msgid "Fetch automatically"
 msgstr "自动获取"
 
@@ -2364,7 +2364,7 @@ msgstr "第一阶段"
 msgid "Fit cover to width"
 msgstr "适应封面到等宽"
 
-#: core/song.cpp:406 transcoder/transcoder.cpp:233
+#: core/song.cpp:410 transcoder/transcoder.cpp:233
 msgid "Flac"
 msgstr "Flac"
 
@@ -2468,12 +2468,12 @@ msgstr "常规设置"
 msgid "Genre"
 msgstr "流派"
 
-#: internet/spotify/spotifyservice.cpp:639
-#: internet/spotify/spotifyservice.cpp:683
+#: internet/spotify/spotifyservice.cpp:642
+#: internet/spotify/spotifyservice.cpp:685
 msgid "Get a URL to share this Spotify song"
 msgstr "获取一个分享该 Spotify 音乐的网址"
 
-#: internet/spotify/spotifyservice.cpp:671
+#: internet/spotify/spotifyservice.cpp:674
 msgid "Get a URL to share this playlist"
 msgstr "获取一个分享该播放列表的网址"
 
@@ -2506,7 +2506,7 @@ msgstr "转到上一播放列表标签"
 msgid "Google Drive"
 msgstr "Google云存储"
 
-#: covers/coversearchstatisticsdialog.cpp:53 ui/albumcovermanager.cpp:463
+#: covers/coversearchstatisticsdialog.cpp:53 ui/albumcovermanager.cpp:465
 #: ../bin/src/ui_coversearchstatisticsdialog.h:75
 #, qt-format
 msgid "Got %1 covers out of %2 (%3 failed)"
@@ -2665,12 +2665,12 @@ msgstr "图像 (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm)"
 msgid "Images (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 msgstr "图像 (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 
-#: core/utilities.cpp:151
+#: core/utilities.cpp:152
 #, qt-format
 msgid "In %1 days"
 msgstr "在 %1 天内"
 
-#: core/utilities.cpp:154
+#: core/utilities.cpp:155
 #, qt-format
 msgid "In %1 weeks"
 msgstr "%1 周内"
@@ -2681,7 +2681,7 @@ msgid ""
 "time a song finishes."
 msgstr "在动态模式中, 每次歌曲播放完之后会被选择并添加新歌曲到播放列表.使用动态模式将忽略您的播放列表大小设定值。"
 
-#: internet/spotify/spotifyservice.cpp:425
+#: internet/spotify/spotifyservice.cpp:417
 msgid "Inbox"
 msgstr "收件夹"
 
@@ -2959,7 +2959,7 @@ msgstr "限制"
 msgid "Live"
 msgstr "直播"
 
-#: ../bin/src/ui_albumcovermanager.h:216
+#: ../bin/src/ui_albumcovermanager.h:222
 msgid "Load"
 msgstr "载入"
 
@@ -2967,7 +2967,7 @@ msgstr "载入"
 msgid "Load cover from URL"
 msgstr "从 URL 载入封面"
 
-#: ui/albumcoverchoicecontroller.cpp:64
+#: ui/albumcoverchoicecontroller.cpp:66
 msgid "Load cover from URL..."
 msgstr "从 URL 载入封面..."
 
@@ -2975,7 +2975,7 @@ msgstr "从 URL 载入封面..."
 msgid "Load cover from disk"
 msgstr "从磁盘读取封面"
 
-#: ui/albumcoverchoicecontroller.cpp:60
+#: ui/albumcoverchoicecontroller.cpp:61
 msgid "Load cover from disk..."
 msgstr "从磁盘载入封面..."
 
@@ -3088,7 +3088,7 @@ msgstr "此标签中的歌词"
 msgid "M4A AAC"
 msgstr "M4A AAC"
 
-#: core/song.cpp:412 transcoder/transcoder.cpp:238
+#: core/song.cpp:416 transcoder/transcoder.cpp:238
 #: ../bin/src/ui_transcodersettingspage.h:174
 msgid "MP3"
 msgstr "MP3"
@@ -3101,11 +3101,11 @@ msgstr "MP3 256k"
 msgid "MP3 96k"
 msgstr "MP3 96k"
 
-#: core/song.cpp:408
+#: core/song.cpp:412
 msgid "MP4 AAC"
 msgstr "MP4 AAC"
 
-#: core/song.cpp:410
+#: core/song.cpp:414
 msgid "MPC"
 msgstr "MPC"
 
@@ -3135,7 +3135,7 @@ msgctxt "Label for button to enable/disable Enterprise background sound."
 msgid "Make it so!"
 msgstr "努力去实现它！"
 
-#: internet/spotify/spotifyservice.cpp:669
+#: internet/spotify/spotifyservice.cpp:672
 msgid "Make playlist available offline"
 msgstr "播放列表离线可用"
 
@@ -3234,7 +3234,7 @@ msgstr "月"
 msgid "Mood"
 msgstr "心情"
 
-#: moodbar/moodbarproxystyle.cpp:358
+#: moodbar/moodbarproxystyle.cpp:361
 #: ../bin/src/ui_appearancesettingspage.h:293
 msgid "Moodbar style"
 msgstr "心情指示条风格"
@@ -3360,7 +3360,7 @@ msgstr "下一首"
 msgid "Next track"
 msgstr "下一个曲目"
 
-#: core/utilities.cpp:152
+#: core/utilities.cpp:153
 msgid "Next week"
 msgstr "下一周"
 
@@ -3372,7 +3372,7 @@ msgstr "无均衡器"
 msgid "No background image"
 msgstr "无背景图片"
 
-#: ui/albumcovermanager.cpp:789
+#: ui/albumcovermanager.cpp:800
 msgid "No covers to export."
 msgstr "无封面可供导出。"
 
@@ -3467,19 +3467,19 @@ msgstr "OSD 预览"
 msgid "Off"
 msgstr "关闭"
 
-#: core/song.cpp:414 transcoder/transcoder.cpp:244
+#: core/song.cpp:418 transcoder/transcoder.cpp:244
 msgid "Ogg Flac"
 msgstr "Ogg Flac"
 
-#: core/song.cpp:420 transcoder/transcoder.cpp:250
+#: core/song.cpp:424 transcoder/transcoder.cpp:250
 msgid "Ogg Opus"
 msgstr "Ogg Opus"
 
-#: core/song.cpp:416 transcoder/transcoder.cpp:247
+#: core/song.cpp:420 transcoder/transcoder.cpp:247
 msgid "Ogg Speex"
 msgstr "Ogg Speex"
 
-#: core/song.cpp:418 transcoder/transcoder.cpp:241
+#: core/song.cpp:422 transcoder/transcoder.cpp:241
 #: ../bin/src/ui_magnatunedownloaddialog.h:135
 #: ../bin/src/ui_magnatunesettingspage.h:169
 msgid "Ogg Vorbis"
@@ -3744,7 +3744,7 @@ msgstr "播放器选项"
 
 #: playlist/playlistcontainer.cpp:290 playlist/playlistlistcontainer.cpp:228
 #: playlist/playlistmanager.cpp:86 playlist/playlistmanager.cpp:155
-#: playlist/playlistmanager.cpp:508 playlist/playlisttabbar.cpp:366
+#: playlist/playlistmanager.cpp:511 playlist/playlisttabbar.cpp:366
 msgid "Playlist"
 msgstr "播放列表"
 
@@ -3980,7 +3980,7 @@ msgid "Rating"
 msgstr "评级"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:309
-#: ui/albumcovermanager.cpp:221
+#: ui/albumcovermanager.cpp:212
 msgid "Really cancel?"
 msgstr "确实取消？"
 
@@ -4050,7 +4050,7 @@ msgstr "从播放列表中移除重复项"
 msgid "Remove folder"
 msgstr "删除文件夹"
 
-#: internet/spotify/spotifyservice.cpp:681 ../bin/src/ui_mainwindow.h:704
+#: internet/spotify/spotifyservice.cpp:684 ../bin/src/ui_mainwindow.h:704
 msgid "Remove from playlist"
 msgstr "从播放列表中移除"
 
@@ -4209,11 +4209,11 @@ msgstr "采样率"
 msgid "Save .mood files in your music library"
 msgstr "保存 .mood 文件至您的音乐库"
 
-#: ui/albumcoverchoicecontroller.cpp:129
+#: ui/albumcoverchoicecontroller.cpp:131
 msgid "Save album cover"
 msgstr "保存转接封面"
 
-#: ui/albumcoverchoicecontroller.cpp:62
+#: ui/albumcoverchoicecontroller.cpp:64
 msgid "Save cover to disk..."
 msgstr "保存封面至硬盘..."
 
@@ -4230,7 +4230,7 @@ msgctxt "Save playlist menu action."
 msgid "Save playlist"
 msgstr "保存播放列表"
 
-#: playlist/playlistmanager.cpp:229
+#: playlist/playlistmanager.cpp:232
 msgctxt "Title of the playlist save dialog."
 msgid "Save playlist"
 msgstr "保存播放列表"
@@ -4322,7 +4322,7 @@ msgstr "搜索 Subsonic"
 msgid "Search automatically"
 msgstr "自动搜索"
 
-#: ui/albumcoverchoicecontroller.cpp:66
+#: ui/albumcoverchoicecontroller.cpp:69
 msgid "Search for album covers..."
 msgstr "搜索专辑封面..."
 
@@ -4347,7 +4347,7 @@ msgid "Search options"
 msgstr "搜索选项"
 
 #: internet/soundcloud/soundcloudservice.cpp:119
-#: internet/spotify/spotifyservice.cpp:408
+#: internet/spotify/spotifyservice.cpp:400
 msgid "Search results"
 msgstr "搜索结果"
 
@@ -4532,7 +4532,7 @@ msgstr "在媒体库中显示封面"
 msgid "Show dividers"
 msgstr "显示分频器"
 
-#: ui/albumcoverchoicecontroller.cpp:72 widgets/prettyimage.cpp:183
+#: ui/albumcoverchoicecontroller.cpp:73 widgets/prettyimage.cpp:183
 msgid "Show fullsize..."
 msgstr "显示完整尺寸..."
 
@@ -4549,7 +4549,7 @@ msgstr "在媒体库中显示"
 msgid "Show in various artists"
 msgstr "在群星中显示"
 
-#: moodbar/moodbarproxystyle.cpp:353
+#: moodbar/moodbarproxystyle.cpp:356
 msgid "Show moodbar"
 msgstr "显示心情指示条"
 
@@ -4742,7 +4742,7 @@ msgstr "Spotify"
 msgid "Spotify login error"
 msgstr "Spotify 登录失败"
 
-#: internet/spotify/spotifyservice.cpp:844
+#: internet/spotify/spotifyservice.cpp:850
 msgid "Spotify playlist's URL"
 msgstr "Spotify 播放列表地址"
 
@@ -4754,7 +4754,7 @@ msgstr "Spotify插件"
 msgid "Spotify plugin not installed"
 msgstr "potify 插件未安装"
 
-#: internet/spotify/spotifyservice.cpp:835
+#: internet/spotify/spotifyservice.cpp:841
 msgid "Spotify song's URL"
 msgstr "Spotify 歌曲地址"
 
@@ -4762,7 +4762,7 @@ msgstr "Spotify 歌曲地址"
 msgid "Standard"
 msgstr "标准"
 
-#: internet/spotify/spotifyservice.cpp:417
+#: internet/spotify/spotifyservice.cpp:409
 #: internet/subsonic/subsonicservice.cpp:115
 msgid "Starred"
 msgstr "用星号标记"
@@ -4780,7 +4780,7 @@ msgid "Start transcoding"
 msgstr "开始转换"
 
 #: internet/soundcloud/soundcloudservice.cpp:121
-#: internet/spotify/spotifyservice.cpp:410
+#: internet/spotify/spotifyservice.cpp:402
 msgid ""
 "Start typing something on the search box above to fill this search results "
 "list"
@@ -4837,7 +4837,7 @@ msgstr "播完曲目 %1 后停止"
 msgid "Stopped"
 msgstr "已停止"
 
-#: core/song.cpp:431
+#: core/song.cpp:435
 msgid "Stream"
 msgstr "流媒体"
 
@@ -4900,15 +4900,15 @@ msgstr "支持的格式"
 msgid "Synchronize statistics to files now"
 msgstr "立即同步统计数据至文件"
 
-#: internet/spotify/spotifyservice.cpp:708
+#: internet/spotify/spotifyservice.cpp:710
 msgid "Syncing Spotify inbox"
 msgstr "同步 Spotify 收件箱"
 
-#: internet/spotify/spotifyservice.cpp:702
+#: internet/spotify/spotifyservice.cpp:704
 msgid "Syncing Spotify playlist"
 msgstr "同步 Spotify 播放列表"
 
-#: internet/spotify/spotifyservice.cpp:713
+#: internet/spotify/spotifyservice.cpp:715
 msgid "Syncing Spotify starred tracks"
 msgstr "同步 Spotify 星号标记的曲目"
 
@@ -5109,7 +5109,7 @@ msgstr "时间步长"
 msgid "Title"
 msgstr "标题"
 
-#: core/utilities.cpp:137 core/utilities.cpp:149
+#: core/utilities.cpp:138 core/utilities.cpp:150
 msgid "Today"
 msgstr "今日"
 
@@ -5133,7 +5133,7 @@ msgstr "切换歌曲记录"
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "切换 OSD 可见性"
 
-#: core/utilities.cpp:150
+#: core/utilities.cpp:151
 msgid "Tomorrow"
 msgstr "明天"
 
@@ -5145,11 +5145,11 @@ msgstr "太多的重定向"
 msgid "Top Rated"
 msgstr "最佳"
 
-#: internet/spotify/spotifyservice.cpp:431
+#: internet/spotify/spotifyservice.cpp:423
 msgid "Top tracks"
 msgstr "热门曲目"
 
-#: ../bin/src/ui_albumcovermanager.h:220
+#: ../bin/src/ui_albumcovermanager.h:226
 msgid "Total albums:"
 msgstr "专辑总数:"
 
@@ -5195,7 +5195,7 @@ msgstr "正在转码 %1 个文件，占用线程 %2 个"
 msgid "Transcoding options"
 msgstr "转码设置"
 
-#: core/song.cpp:426
+#: core/song.cpp:430
 msgid "TrueAudio"
 msgstr "TrueAudio"
 
@@ -5237,10 +5237,10 @@ msgstr "无法连接"
 msgid "Unable to download %1 (%2)"
 msgstr "无法下载 %1 (%2)"
 
-#: core/song.cpp:435 library/librarymodel.cpp:374 library/librarymodel.cpp:379
+#: core/song.cpp:439 library/librarymodel.cpp:374 library/librarymodel.cpp:379
 #: library/librarymodel.cpp:383 library/librarymodel.cpp:1156
 #: library/savedgroupingmanager.cpp:103 playlist/playlistdelegates.cpp:305
-#: playlist/playlistmanager.cpp:515 playlist/playlistmanager.cpp:516
+#: playlist/playlistmanager.cpp:518 playlist/playlistmanager.cpp:519
 #: songinfo/streamdiscoverer.cpp:87 ui/albumcoverchoicecontroller.cpp:126
 #: ui/edittagdialog.cpp:463 ui/edittagdialog.cpp:507
 msgid "Unknown"
@@ -5255,7 +5255,7 @@ msgstr "未知的content-type"
 msgid "Unknown error"
 msgstr "未知错误"
 
-#: ui/albumcoverchoicecontroller.cpp:69
+#: ui/albumcoverchoicecontroller.cpp:71
 msgid "Unset cover"
 msgstr "撤销封面"
 
@@ -5416,7 +5416,7 @@ msgid "Variable bit rate"
 msgstr "可变比特率"
 
 #: globalsearch/globalsearchmodel.cpp:109 library/librarymodel.cpp:300
-#: playlist/playlistmanager.cpp:527 ui/albumcovermanager.cpp:273
+#: playlist/playlistmanager.cpp:530 ui/albumcovermanager.cpp:264
 msgid "Various artists"
 msgstr "群星"
 
@@ -5425,7 +5425,7 @@ msgstr "群星"
 msgid "Version %1"
 msgstr "版本 %1"
 
-#: ../bin/src/ui_albumcovermanager.h:219
+#: ../bin/src/ui_albumcovermanager.h:225
 msgid "View"
 msgstr "查看"
 
@@ -5471,7 +5471,7 @@ msgstr "WMA"
 msgid "Warn me when closing a playlist tab"
 msgstr "关闭播放列表标签时，提示我"
 
-#: core/song.cpp:424 transcoder/transcoder.cpp:256
+#: core/song.cpp:428 transcoder/transcoder.cpp:256
 msgid "Wav"
 msgstr "Wav"
 
@@ -5555,11 +5555,11 @@ msgstr "Windows Media 40k"
 msgid "Windows Media 64k"
 msgstr "Windows Media 64k"
 
-#: core/song.cpp:404 transcoder/transcoder.cpp:253
+#: core/song.cpp:408 transcoder/transcoder.cpp:253
 msgid "Windows Media audio"
 msgstr "Windows Media 音频"
 
-#: ../bin/src/ui_albumcovermanager.h:221
+#: ../bin/src/ui_albumcovermanager.h:227
 msgid "Without cover:"
 msgstr "无封面:"
 
@@ -5601,7 +5601,7 @@ msgstr "年份 - 专辑"
 msgid "Years"
 msgstr "年"
 
-#: core/utilities.cpp:138
+#: core/utilities.cpp:139
 msgid "Yesterday"
 msgstr "昨天"
 

@@ -78,12 +78,12 @@ msgstr "%1 album"
 msgid "%1 dB"
 msgstr "%1 dB"
 
-#: core/utilities.cpp:120
+#: core/utilities.cpp:121
 #, qt-format
 msgid "%1 days"
 msgstr "%1 egun"
 
-#: core/utilities.cpp:139
+#: core/utilities.cpp:140
 #, qt-format
 msgid "%1 days ago"
 msgstr "duela %1 egun"
@@ -93,12 +93,12 @@ msgstr "duela %1 egun"
 msgid "%1 on %2"
 msgstr "%1 %2-tik"
 
-#: playlistparsers/playlistparser.cpp:76
+#: playlistparsers/playlistparser.cpp:87
 #, qt-format
 msgid "%1 playlists (%2)"
 msgstr "%1 erreprodukzio-zerrenda (%2)"
 
-#: playlist/playlistmanager.cpp:416
+#: playlist/playlistmanager.cpp:419
 #, qt-format
 msgid "%1 selected of"
 msgstr "%1 aukeraturik"
@@ -123,12 +123,12 @@ msgstr "%1 abesti aurkiturik"
 msgid "%1 songs found (showing %2)"
 msgstr "%1 abesti aurkiturik (%2 erakusten)"
 
-#: playlist/playlistmanager.cpp:422
+#: playlist/playlistmanager.cpp:425
 #, qt-format
 msgid "%1 tracks"
 msgstr "%1 pista"
 
-#: ui/albumcovermanager.cpp:469
+#: ui/albumcovermanager.cpp:472
 #, qt-format
 msgid "%1 transferred"
 msgstr "%1 transferitua"
@@ -260,7 +260,7 @@ msgstr "&Urtea"
 msgid "(different across multiple songs)"
 msgstr "(desberdinak zenbait abestien zehar)"
 
-#: internet/spotify/spotifyservice.cpp:469
+#: internet/spotify/spotifyservice.cpp:472
 msgid ", by "
 msgstr ""
 
@@ -268,7 +268,7 @@ msgstr ""
 msgid "...and all the Amarok contributors"
 msgstr "...eta Amarok-eko laguntzaile guztiei"
 
-#: ../bin/src/ui_albumcovermanager.h:222 ../bin/src/ui_albumcovermanager.h:223
+#: ../bin/src/ui_albumcovermanager.h:228 ../bin/src/ui_albumcovermanager.h:229
 msgid "0"
 msgstr "0"
 
@@ -280,11 +280,11 @@ msgstr "0:00:00"
 msgid "0px"
 msgstr "0px"
 
-#: core/utilities.cpp:120
+#: core/utilities.cpp:121
 msgid "1 day"
 msgstr "Egun 1"
 
-#: playlist/playlistmanager.cpp:422
+#: playlist/playlistmanager.cpp:425
 msgid "1 track"
 msgstr "Pista 1"
 
@@ -411,7 +411,7 @@ msgstr "AAC 32k"
 msgid "AAC 64k"
 msgstr "AAC 64K"
 
-#: core/song.cpp:422
+#: core/song.cpp:426
 msgid "AIFF"
 msgstr "AIFF"
 
@@ -419,7 +419,7 @@ msgstr "AIFF"
 msgid "ALL GLORY TO THE HYPNOTOAD"
 msgstr "LORIA OSOA HIPNOAPOARENTZAT"
 
-#: ui/albumcovermanager.cpp:114 ui/albumcoversearcher.cpp:158
+#: ui/albumcovermanager.cpp:105 ui/albumcoversearcher.cpp:158
 msgid "Abort"
 msgstr ""
 
@@ -613,11 +613,11 @@ msgstr "Gehitu urtea etiketa kantari"
 msgid "Add stream..."
 msgstr "Gehitu jarioa..."
 
-#: internet/spotify/spotifyservice.cpp:623
+#: internet/spotify/spotifyservice.cpp:626
 msgid "Add to Spotify playlists"
 msgstr ""
 
-#: internet/spotify/spotifyservice.cpp:615
+#: internet/spotify/spotifyservice.cpp:618
 msgid "Add to Spotify starred"
 msgstr ""
 
@@ -625,7 +625,7 @@ msgstr ""
 msgid "Add to another playlist"
 msgstr "Gehitu beste erreprodukzio-zerrenda batera"
 
-#: ../bin/src/ui_albumcovermanager.h:217
+#: ../bin/src/ui_albumcovermanager.h:223
 msgid "Add to playlist"
 msgstr "Gehitu erreprodukzio-zerrendara"
 
@@ -699,11 +699,11 @@ msgstr "Albumeko azala"
 msgid "Album info on jamendo.com..."
 msgstr "Albumeko informazioa jamendo.com-en..."
 
-#: ui/albumcovermanager.cpp:138
+#: ui/albumcovermanager.cpp:129
 msgid "Albums with covers"
 msgstr "Azaldun albumak"
 
-#: ui/albumcovermanager.cpp:139
+#: ui/albumcovermanager.cpp:130
 msgid "Albums without covers"
 msgstr "Azal gabeko albumak"
 
@@ -720,11 +720,11 @@ msgctxt "Label for button to enable/disable Hypnotoad background sound."
 msgid "All Glory to the Hypnotoad!"
 msgstr ""
 
-#: ui/albumcovermanager.cpp:137
+#: ui/albumcovermanager.cpp:128
 msgid "All albums"
 msgstr "Album guztiak"
 
-#: ui/albumcovermanager.cpp:271
+#: ui/albumcovermanager.cpp:262
 msgid "All artists"
 msgstr "Artista guztiak"
 
@@ -732,7 +732,7 @@ msgstr "Artista guztiak"
 msgid "All files (*)"
 msgstr "Fitxategi guztiak (*)"
 
-#: playlistparsers/playlistparser.cpp:63
+#: playlistparsers/playlistparser.cpp:74
 #, qt-format
 msgid "All playlists (%1)"
 msgstr "Erreprodukzio-zerrenda guztiak (%1)"
@@ -1047,7 +1047,7 @@ msgstr "Baina iturri hauek desgaiturik daude:"
 msgid "Buttons"
 msgstr "Botoiak"
 
-#: core/song.cpp:428
+#: core/song.cpp:432
 msgid "CDDA"
 msgstr "CDDA"
 
@@ -1286,7 +1286,7 @@ msgstr "Itxi bistaratzea"
 msgid "Closing this window will cancel the download."
 msgstr "Leiho hau ixteak deskarga bertan-behera utziko du."
 
-#: ui/albumcovermanager.cpp:222
+#: ui/albumcovermanager.cpp:213
 msgid "Closing this window will stop searching for album covers."
 msgstr "Leiho hau ixteak albumen azalen bilaketa geldituko du."
 
@@ -1342,7 +1342,7 @@ msgstr "Konfiguratu laster-teklak"
 msgid "Configure SoundCloud..."
 msgstr ""
 
-#: internet/spotify/spotifyservice.cpp:921
+#: internet/spotify/spotifyservice.cpp:927
 msgid "Configure Spotify..."
 msgstr "Konfiguratu Spotify..."
 
@@ -1486,7 +1486,7 @@ msgstr "Ezin izan da %1 irteera-fitxategia ireki"
 
 #: internet/core/cloudfileservice.cpp:103
 #: internet/googledrive/googledriveservice.cpp:228
-#: ../bin/src/ui_albumcovermanager.h:214
+#: ../bin/src/ui_albumcovermanager.h:220
 #: ../bin/src/ui_albumcoversearcher.h:104 ../bin/src/ui_mainwindow.h:696
 msgid "Cover Manager"
 msgstr "Azal-kudeatzailea"
@@ -1815,7 +1815,7 @@ msgid "Don't shuffle"
 msgstr "Ez nahastu"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:312
-#: ui/albumcovermanager.cpp:224
+#: ui/albumcovermanager.cpp:215
 msgid "Don't stop!"
 msgstr "Ez gelditu!"
 
@@ -2043,7 +2043,7 @@ msgid "Enter search terms below to find podcasts on gpodder.net"
 msgstr "Sartu bilaketa terminoak gpodder.net-en podcast-ak bilatzeko"
 
 #: ../bin/src/ui_libraryfilterwidget.h:106
-#: ../bin/src/ui_albumcovermanager.h:218
+#: ../bin/src/ui_albumcovermanager.h:224
 msgid "Enter search terms here"
 msgstr "Sartu bilaketa-terminoak hemen"
 
@@ -2174,7 +2174,7 @@ msgstr "Zabaldu"
 msgid "Expires on %1"
 msgstr "%1-(e)an iraungitzen da"
 
-#: ../bin/src/ui_albumcovermanager.h:225
+#: ../bin/src/ui_albumcovermanager.h:231
 msgid "Export Covers"
 msgstr ""
 
@@ -2190,11 +2190,11 @@ msgstr ""
 msgid "Export embedded covers"
 msgstr ""
 
-#: ui/albumcovermanager.cpp:788 ui/albumcovermanager.cpp:812
+#: ui/albumcovermanager.cpp:799 ui/albumcovermanager.cpp:823
 msgid "Export finished"
 msgstr ""
 
-#: ui/albumcovermanager.cpp:797
+#: ui/albumcovermanager.cpp:808
 #, qt-format
 msgid "Exported %1 covers out of %2 (%3 skipped)"
 msgstr ""
@@ -2265,11 +2265,11 @@ msgstr ""
 msgid "Favourite tracks"
 msgstr "Pista gogokoenak"
 
-#: ../bin/src/ui_albumcovermanager.h:224
+#: ../bin/src/ui_albumcovermanager.h:230
 msgid "Fetch Missing Covers"
 msgstr "Falta diren azalak eskuratu"
 
-#: ../bin/src/ui_albumcovermanager.h:215
+#: ../bin/src/ui_albumcovermanager.h:221
 msgid "Fetch automatically"
 msgstr "Automatikoki eskuratu"
 
@@ -2355,7 +2355,7 @@ msgstr "Lehen maila"
 msgid "Fit cover to width"
 msgstr ""
 
-#: core/song.cpp:406 transcoder/transcoder.cpp:233
+#: core/song.cpp:410 transcoder/transcoder.cpp:233
 msgid "Flac"
 msgstr "Flac"
 
@@ -2459,12 +2459,12 @@ msgstr "Ezarpen orokorrak"
 msgid "Genre"
 msgstr "Generoa"
 
-#: internet/spotify/spotifyservice.cpp:639
-#: internet/spotify/spotifyservice.cpp:683
+#: internet/spotify/spotifyservice.cpp:642
+#: internet/spotify/spotifyservice.cpp:685
 msgid "Get a URL to share this Spotify song"
 msgstr ""
 
-#: internet/spotify/spotifyservice.cpp:671
+#: internet/spotify/spotifyservice.cpp:674
 msgid "Get a URL to share this playlist"
 msgstr ""
 
@@ -2497,7 +2497,7 @@ msgstr "Aurreko erreprodukzio-zerrendara joan"
 msgid "Google Drive"
 msgstr "Google Drive"
 
-#: covers/coversearchstatisticsdialog.cpp:53 ui/albumcovermanager.cpp:463
+#: covers/coversearchstatisticsdialog.cpp:53 ui/albumcovermanager.cpp:465
 #: ../bin/src/ui_coversearchstatisticsdialog.h:75
 #, qt-format
 msgid "Got %1 covers out of %2 (%3 failed)"
@@ -2656,12 +2656,12 @@ msgstr "Irudiak (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm)"
 msgid "Images (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 msgstr "Irudiak (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 
-#: core/utilities.cpp:151
+#: core/utilities.cpp:152
 #, qt-format
 msgid "In %1 days"
 msgstr "%1 egunetan"
 
-#: core/utilities.cpp:154
+#: core/utilities.cpp:155
 #, qt-format
 msgid "In %1 weeks"
 msgstr "%1 asteetan"
@@ -2672,7 +2672,7 @@ msgid ""
 "time a song finishes."
 msgstr "Modu dinamikoan pista berriak aukeratu eta gehituko dira erreprodukzio-zerrendara abesti bat amaitzen den bakoitzean."
 
-#: internet/spotify/spotifyservice.cpp:425
+#: internet/spotify/spotifyservice.cpp:417
 msgid "Inbox"
 msgstr "Sarrera-ontzia"
 
@@ -2950,7 +2950,7 @@ msgstr "Limiteak"
 msgid "Live"
 msgstr "Zuzenean"
 
-#: ../bin/src/ui_albumcovermanager.h:216
+#: ../bin/src/ui_albumcovermanager.h:222
 msgid "Load"
 msgstr "Kargatu"
 
@@ -2958,7 +2958,7 @@ msgstr "Kargatu"
 msgid "Load cover from URL"
 msgstr "Kargatu azala URLtik"
 
-#: ui/albumcoverchoicecontroller.cpp:64
+#: ui/albumcoverchoicecontroller.cpp:66
 msgid "Load cover from URL..."
 msgstr "Kargatu azala URLtik..."
 
@@ -2966,7 +2966,7 @@ msgstr "Kargatu azala URLtik..."
 msgid "Load cover from disk"
 msgstr "Kargatu azala diskotik"
 
-#: ui/albumcoverchoicecontroller.cpp:60
+#: ui/albumcoverchoicecontroller.cpp:61
 msgid "Load cover from disk..."
 msgstr "Kargatu azala diskotik..."
 
@@ -3079,7 +3079,7 @@ msgstr ""
 msgid "M4A AAC"
 msgstr ""
 
-#: core/song.cpp:412 transcoder/transcoder.cpp:238
+#: core/song.cpp:416 transcoder/transcoder.cpp:238
 #: ../bin/src/ui_transcodersettingspage.h:174
 msgid "MP3"
 msgstr "MP3"
@@ -3092,11 +3092,11 @@ msgstr "MP3 256k"
 msgid "MP3 96k"
 msgstr "MP3 96k"
 
-#: core/song.cpp:408
+#: core/song.cpp:412
 msgid "MP4 AAC"
 msgstr "MP4 AAC"
 
-#: core/song.cpp:410
+#: core/song.cpp:414
 msgid "MPC"
 msgstr "MPC"
 
@@ -3126,7 +3126,7 @@ msgctxt "Label for button to enable/disable Enterprise background sound."
 msgid "Make it so!"
 msgstr ""
 
-#: internet/spotify/spotifyservice.cpp:669
+#: internet/spotify/spotifyservice.cpp:672
 msgid "Make playlist available offline"
 msgstr "Erreprodukzio-zerrenda eskuragarri egin lineaz-kanpo"
 
@@ -3225,7 +3225,7 @@ msgstr "Hilabete"
 msgid "Mood"
 msgstr "Aldarte"
 
-#: moodbar/moodbarproxystyle.cpp:358
+#: moodbar/moodbarproxystyle.cpp:361
 #: ../bin/src/ui_appearancesettingspage.h:293
 msgid "Moodbar style"
 msgstr "Aldarte-barraren itxura"
@@ -3351,7 +3351,7 @@ msgstr "Hurrengoa"
 msgid "Next track"
 msgstr "Hurrengo pista"
 
-#: core/utilities.cpp:152
+#: core/utilities.cpp:153
 msgid "Next week"
 msgstr "Hurrengo astea"
 
@@ -3363,7 +3363,7 @@ msgstr "Analizatzailerik ez"
 msgid "No background image"
 msgstr "Atzeko planoko irudirik ez"
 
-#: ui/albumcovermanager.cpp:789
+#: ui/albumcovermanager.cpp:800
 msgid "No covers to export."
 msgstr ""
 
@@ -3458,19 +3458,19 @@ msgstr "OSD aurrebista"
 msgid "Off"
 msgstr ""
 
-#: core/song.cpp:414 transcoder/transcoder.cpp:244
+#: core/song.cpp:418 transcoder/transcoder.cpp:244
 msgid "Ogg Flac"
 msgstr "Ogg Flac"
 
-#: core/song.cpp:420 transcoder/transcoder.cpp:250
+#: core/song.cpp:424 transcoder/transcoder.cpp:250
 msgid "Ogg Opus"
 msgstr "Ogg Opus"
 
-#: core/song.cpp:416 transcoder/transcoder.cpp:247
+#: core/song.cpp:420 transcoder/transcoder.cpp:247
 msgid "Ogg Speex"
 msgstr "Ogg Speex"
 
-#: core/song.cpp:418 transcoder/transcoder.cpp:241
+#: core/song.cpp:422 transcoder/transcoder.cpp:241
 #: ../bin/src/ui_magnatunedownloaddialog.h:135
 #: ../bin/src/ui_magnatunesettingspage.h:169
 msgid "Ogg Vorbis"
@@ -3735,7 +3735,7 @@ msgstr "Erreproduzitzailearen aukerak"
 
 #: playlist/playlistcontainer.cpp:290 playlist/playlistlistcontainer.cpp:228
 #: playlist/playlistmanager.cpp:86 playlist/playlistmanager.cpp:155
-#: playlist/playlistmanager.cpp:508 playlist/playlisttabbar.cpp:366
+#: playlist/playlistmanager.cpp:511 playlist/playlisttabbar.cpp:366
 msgid "Playlist"
 msgstr "Erreprodukzio-zerrenda"
 
@@ -3971,7 +3971,7 @@ msgid "Rating"
 msgstr "Balioztatzea"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:309
-#: ui/albumcovermanager.cpp:221
+#: ui/albumcovermanager.cpp:212
 msgid "Really cancel?"
 msgstr "Benetan utzi?"
 
@@ -4041,7 +4041,7 @@ msgstr "Abesti bikoiztuak kendu erreprodukzio-zerrendatik "
 msgid "Remove folder"
 msgstr "Kendu karpeta"
 
-#: internet/spotify/spotifyservice.cpp:681 ../bin/src/ui_mainwindow.h:704
+#: internet/spotify/spotifyservice.cpp:684 ../bin/src/ui_mainwindow.h:704
 msgid "Remove from playlist"
 msgstr "Kendu erreprodukzio-zerrendatik"
 
@@ -4200,11 +4200,11 @@ msgstr "Lagintze-tasa"
 msgid "Save .mood files in your music library"
 msgstr ".mood fitxategiak musika-bilduman gorde"
 
-#: ui/albumcoverchoicecontroller.cpp:129
+#: ui/albumcoverchoicecontroller.cpp:131
 msgid "Save album cover"
 msgstr "Gorde albumeko azala"
 
-#: ui/albumcoverchoicecontroller.cpp:62
+#: ui/albumcoverchoicecontroller.cpp:64
 msgid "Save cover to disk..."
 msgstr "Gorde azala diskoan..."
 
@@ -4221,7 +4221,7 @@ msgctxt "Save playlist menu action."
 msgid "Save playlist"
 msgstr ""
 
-#: playlist/playlistmanager.cpp:229
+#: playlist/playlistmanager.cpp:232
 msgctxt "Title of the playlist save dialog."
 msgid "Save playlist"
 msgstr ""
@@ -4313,7 +4313,7 @@ msgstr "Subsonic-en bilatu"
 msgid "Search automatically"
 msgstr ""
 
-#: ui/albumcoverchoicecontroller.cpp:66
+#: ui/albumcoverchoicecontroller.cpp:69
 msgid "Search for album covers..."
 msgstr "Bilatu albumetako azalak"
 
@@ -4338,7 +4338,7 @@ msgid "Search options"
 msgstr "Bilaketa-aukerak"
 
 #: internet/soundcloud/soundcloudservice.cpp:119
-#: internet/spotify/spotifyservice.cpp:408
+#: internet/spotify/spotifyservice.cpp:400
 msgid "Search results"
 msgstr "Bilaketaren emaitzak"
 
@@ -4523,7 +4523,7 @@ msgstr "Erakutsi azalak bilduman"
 msgid "Show dividers"
 msgstr "Erakutsi zatitzaileak"
 
-#: ui/albumcoverchoicecontroller.cpp:72 widgets/prettyimage.cpp:183
+#: ui/albumcoverchoicecontroller.cpp:73 widgets/prettyimage.cpp:183
 msgid "Show fullsize..."
 msgstr "Erakutsi tamaina osoan..."
 
@@ -4540,7 +4540,7 @@ msgstr ""
 msgid "Show in various artists"
 msgstr "Erakutsi hainbat artista"
 
-#: moodbar/moodbarproxystyle.cpp:353
+#: moodbar/moodbarproxystyle.cpp:356
 msgid "Show moodbar"
 msgstr "Aldarte-barra erakutsi"
 
@@ -4733,7 +4733,7 @@ msgstr "Spotify"
 msgid "Spotify login error"
 msgstr "Spotify-ko saio-hasiera errorea"
 
-#: internet/spotify/spotifyservice.cpp:844
+#: internet/spotify/spotifyservice.cpp:850
 msgid "Spotify playlist's URL"
 msgstr ""
 
@@ -4745,7 +4745,7 @@ msgstr "Spotify plugina"
 msgid "Spotify plugin not installed"
 msgstr "Spotify plugina ez dago instalatuta"
 
-#: internet/spotify/spotifyservice.cpp:835
+#: internet/spotify/spotifyservice.cpp:841
 msgid "Spotify song's URL"
 msgstr ""
 
@@ -4753,7 +4753,7 @@ msgstr ""
 msgid "Standard"
 msgstr "Estandarra"
 
-#: internet/spotify/spotifyservice.cpp:417
+#: internet/spotify/spotifyservice.cpp:409
 #: internet/subsonic/subsonicservice.cpp:115
 msgid "Starred"
 msgstr "Izarduna(k)"
@@ -4771,7 +4771,7 @@ msgid "Start transcoding"
 msgstr "Hasi transkodetzen"
 
 #: internet/soundcloud/soundcloudservice.cpp:121
-#: internet/spotify/spotifyservice.cpp:410
+#: internet/spotify/spotifyservice.cpp:402
 msgid ""
 "Start typing something on the search box above to fill this search results "
 "list"
@@ -4828,7 +4828,7 @@ msgstr ""
 msgid "Stopped"
 msgstr "Geldituta"
 
-#: core/song.cpp:431
+#: core/song.cpp:435
 msgid "Stream"
 msgstr "Jarioa"
 
@@ -4891,15 +4891,15 @@ msgstr "Onartutako formatuak"
 msgid "Synchronize statistics to files now"
 msgstr ""
 
-#: internet/spotify/spotifyservice.cpp:708
+#: internet/spotify/spotifyservice.cpp:710
 msgid "Syncing Spotify inbox"
 msgstr "Spotify-ko sarrera-ontzia sinkronizatzen"
 
-#: internet/spotify/spotifyservice.cpp:702
+#: internet/spotify/spotifyservice.cpp:704
 msgid "Syncing Spotify playlist"
 msgstr "Spotify-ko erreprodukzio-zerrenda sinkronizatzen"
 
-#: internet/spotify/spotifyservice.cpp:713
+#: internet/spotify/spotifyservice.cpp:715
 msgid "Syncing Spotify starred tracks"
 msgstr "Spotify-ko pista izardunak sinkronizatzen"
 
@@ -5100,7 +5100,7 @@ msgstr ""
 msgid "Title"
 msgstr "Izenburua"
 
-#: core/utilities.cpp:137 core/utilities.cpp:149
+#: core/utilities.cpp:138 core/utilities.cpp:150
 msgid "Today"
 msgstr "Gaur"
 
@@ -5124,7 +5124,7 @@ msgstr "Txandakatu partekatzea"
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "Txandakatu pantailako bistaratze itxurosoaren ikuspena"
 
-#: core/utilities.cpp:150
+#: core/utilities.cpp:151
 msgid "Tomorrow"
 msgstr "Bihar"
 
@@ -5136,11 +5136,11 @@ msgstr "Redirekzio gehiegi"
 msgid "Top Rated"
 msgstr ""
 
-#: internet/spotify/spotifyservice.cpp:431
+#: internet/spotify/spotifyservice.cpp:423
 msgid "Top tracks"
 msgstr "Pista gogokoenak"
 
-#: ../bin/src/ui_albumcovermanager.h:220
+#: ../bin/src/ui_albumcovermanager.h:226
 msgid "Total albums:"
 msgstr "Album kopurua:"
 
@@ -5186,7 +5186,7 @@ msgstr "%1 fitxategi %2 hari erabiliz transkodetzen"
 msgid "Transcoding options"
 msgstr "Transkodetze-aukerak"
 
-#: core/song.cpp:426
+#: core/song.cpp:430
 msgid "TrueAudio"
 msgstr "TrueAudio"
 
@@ -5228,10 +5228,10 @@ msgstr ""
 msgid "Unable to download %1 (%2)"
 msgstr "Ezin izan da %1 deskargatu (%2)"
 
-#: core/song.cpp:435 library/librarymodel.cpp:374 library/librarymodel.cpp:379
+#: core/song.cpp:439 library/librarymodel.cpp:374 library/librarymodel.cpp:379
 #: library/librarymodel.cpp:383 library/librarymodel.cpp:1156
 #: library/savedgroupingmanager.cpp:103 playlist/playlistdelegates.cpp:305
-#: playlist/playlistmanager.cpp:515 playlist/playlistmanager.cpp:516
+#: playlist/playlistmanager.cpp:518 playlist/playlistmanager.cpp:519
 #: songinfo/streamdiscoverer.cpp:87 ui/albumcoverchoicecontroller.cpp:126
 #: ui/edittagdialog.cpp:463 ui/edittagdialog.cpp:507
 msgid "Unknown"
@@ -5246,7 +5246,7 @@ msgstr "Eduki-mota ezezaguna"
 msgid "Unknown error"
 msgstr "Errore ezezaguna"
 
-#: ui/albumcoverchoicecontroller.cpp:69
+#: ui/albumcoverchoicecontroller.cpp:71
 msgid "Unset cover"
 msgstr "Ezarri gabeko azala"
 
@@ -5407,7 +5407,7 @@ msgid "Variable bit rate"
 msgstr "Bit-tasa aldakorra"
 
 #: globalsearch/globalsearchmodel.cpp:109 library/librarymodel.cpp:300
-#: playlist/playlistmanager.cpp:527 ui/albumcovermanager.cpp:273
+#: playlist/playlistmanager.cpp:530 ui/albumcovermanager.cpp:264
 msgid "Various artists"
 msgstr "Hainbat artista"
 
@@ -5416,7 +5416,7 @@ msgstr "Hainbat artista"
 msgid "Version %1"
 msgstr "%1 bertsioa"
 
-#: ../bin/src/ui_albumcovermanager.h:219
+#: ../bin/src/ui_albumcovermanager.h:225
 msgid "View"
 msgstr "Ikusi"
 
@@ -5462,7 +5462,7 @@ msgstr "WMA"
 msgid "Warn me when closing a playlist tab"
 msgstr ""
 
-#: core/song.cpp:424 transcoder/transcoder.cpp:256
+#: core/song.cpp:428 transcoder/transcoder.cpp:256
 msgid "Wav"
 msgstr "Wav"
 
@@ -5546,11 +5546,11 @@ msgstr "Windows Media 40k"
 msgid "Windows Media 64k"
 msgstr "Windows Media 64k"
 
-#: core/song.cpp:404 transcoder/transcoder.cpp:253
+#: core/song.cpp:408 transcoder/transcoder.cpp:253
 msgid "Windows Media audio"
 msgstr "Windows Media audio"
 
-#: ../bin/src/ui_albumcovermanager.h:221
+#: ../bin/src/ui_albumcovermanager.h:227
 msgid "Without cover:"
 msgstr ""
 
@@ -5592,7 +5592,7 @@ msgstr "Urtea - Albuma"
 msgid "Years"
 msgstr "Urte"
 
-#: core/utilities.cpp:138
+#: core/utilities.cpp:139
 msgid "Yesterday"
 msgstr "Atzo"
 

@@ -523,29 +523,50 @@ QStringList LibraryBackend::GetAllArtists(const QueryOptions& opt) {
 }
 
 QStringList LibraryBackend::GetAllArtistsWithAlbums(const QueryOptions& opt) {
+  // Albums with 'albumartist' field set:
   LibraryQuery query(opt);
-  query.SetColumnSpec("DISTINCT artist");
+  query.SetColumnSpec("DISTINCT albumartist");
   query.AddCompilationRequirement(false);
   query.AddWhere("album", "", "!=");
 
-  QMutexLocker l(db_->Mutex());
-  if (!ExecQuery(&query)) return QStringList();
+  // Albums with no 'albumartist' (extract 'artist'):
+  LibraryQuery query2(opt);
+  query2.SetColumnSpec("DISTINCT artist");
+  query2.AddCompilationRequirement(false);
+  query2.AddWhere("album", "", "!=");
+  query2.AddWhere("albumartist", "", "=");
 
-  QStringList ret;
-  while (query.Next()) {
-    ret << query.Value(0).toString();
+  {
+    QMutexLocker l(db_->Mutex());
+    if (!ExecQuery(&query) || !ExecQuery(&query2)) {
+      return QStringList();
+    }
   }
-  return ret;
+
+  QSet<QString> artists;
+  while (query.Next()) {
+    artists << query.Value(0).toString();
+  }
+  while (query2.Next()) {
+    artists << query2.Value(0).toString();
+  }
+
+  return QStringList(artists.toList());
 }
 
 LibraryBackend::AlbumList LibraryBackend::GetAllAlbums(
     const QueryOptions& opt) {
-  return GetAlbums(QString(), false, opt);
+  return GetAlbums(QString(), QString(), false, opt);
 }
 
 LibraryBackend::AlbumList LibraryBackend::GetAlbumsByArtist(
     const QString& artist, const QueryOptions& opt) {
-  return GetAlbums(artist, false, opt);
+  return GetAlbums(artist, QString(), false, opt);
+}
+
+LibraryBackend::AlbumList LibraryBackend::GetAlbumsByAlbumArtist(
+    const QString& album_artist, const QueryOptions& opt) {
+  return GetAlbums(QString(), album_artist, false, opt);
 }
 
 SongList LibraryBackend::GetSongsByAlbum(const QString& album,
@@ -692,7 +713,7 @@ SongList LibraryBackend::GetSongsByUrl(const QUrl& url) {
 
 LibraryBackend::AlbumList LibraryBackend::GetCompilationAlbums(
     const QueryOptions& opt) {
-  return GetAlbums(QString(), true, opt);
+  return GetAlbums(QString(), QString(), true, opt);
 }
 
 SongList LibraryBackend::GetCompilationSongs(const QString& album,
@@ -830,58 +851,76 @@ void LibraryBackend::UpdateCompilations(QSqlQuery& find_songs,
 }
 
 LibraryBackend::AlbumList LibraryBackend::GetAlbums(const QString& artist,
+                                                    const QString& album_artist,
                                                     bool compilation,
                                                     const QueryOptions& opt) {
   AlbumList ret;
 
   LibraryQuery query(opt);
   query.SetColumnSpec(
-      "album, artist, compilation, sampler, art_automatic, "
+      "album, artist, albumartist, compilation, sampler, art_automatic, "
       "art_manual, filename");
   query.SetOrderBy("album");
 
   if (compilation) {
     query.AddCompilationRequirement(true);
+  } else if (!album_artist.isNull()) {
+    query.AddCompilationRequirement(false);
+    query.AddWhere("albumartist", album_artist);
   } else if (!artist.isNull()) {
     query.AddCompilationRequirement(false);
     query.AddWhere("artist", artist);
   }
 
-  QMutexLocker l(db_->Mutex());
-  if (!ExecQuery(&query)) return ret;
+  {
+    QMutexLocker l(db_->Mutex());
+    if (!ExecQuery(&query)) return ret;
+  }
 
   QString last_album;
   QString last_artist;
+  QString last_album_artist;
   while (query.Next()) {
-    bool compilation = query.Value(2).toBool() | query.Value(3).toBool();
+    bool compilation = query.Value(3).toBool() | query.Value(4).toBool();
 
     Album info;
     info.artist = compilation ? QString() : query.Value(1).toString();
+    info.album_artist = compilation ? QString() : query.Value(2).toString();
     info.album_name = query.Value(0).toString();
-    info.art_automatic = query.Value(4).toString();
-    info.art_manual = query.Value(5).toString();
-    info.first_url = QUrl::fromEncoded(query.Value(6).toByteArray());
+    info.art_automatic = query.Value(5).toString();
+    info.art_manual = query.Value(6).toString();
+    info.first_url = QUrl::fromEncoded(query.Value(7).toByteArray());
 
-    if (info.artist == last_artist && info.album_name == last_album) continue;
+    if ((info.artist == last_artist ||
+         info.album_artist == last_album_artist) &&
+        info.album_name == last_album)
+      continue;
 
     ret << info;
 
     last_album = info.album_name;
     last_artist = info.artist;
+    last_album_artist = info.album_artist;
   }
 
   return ret;
 }
 
 LibraryBackend::Album LibraryBackend::GetAlbumArt(const QString& artist,
+                                                  const QString& albumartist,
                                                   const QString& album) {
   Album ret;
   ret.album_name = album;
   ret.artist = artist;
+  ret.album_artist = albumartist;
 
   LibraryQuery query = LibraryQuery(QueryOptions());
   query.SetColumnSpec("art_automatic, art_manual, filename");
-  query.AddWhere("artist", artist);
+  if (!albumartist.isEmpty()) {
+    query.AddWhere("albumartist", albumartist);
+  } else if (!artist.isEmpty()) {
+    query.AddWhere("artist", artist);
+  }
   query.AddWhere("album", album);
 
   QMutexLocker l(db_->Mutex());
@@ -897,14 +936,17 @@ LibraryBackend::Album LibraryBackend::GetAlbumArt(const QString& artist,
 }
 
 void LibraryBackend::UpdateManualAlbumArtAsync(const QString& artist,
+                                               const QString& albumartist,
                                                const QString& album,
                                                const QString& art) {
   metaObject()->invokeMethod(this, "UpdateManualAlbumArt", Qt::QueuedConnection,
-                             Q_ARG(QString, artist), Q_ARG(QString, album),
+                             Q_ARG(QString, artist),
+                             Q_ARG(QString, albumartist), Q_ARG(QString, album),
                              Q_ARG(QString, art));
 }
 
 void LibraryBackend::UpdateManualAlbumArt(const QString& artist,
+                                          const QString& albumartist,
                                           const QString& album,
                                           const QString& art) {
   QMutexLocker l(db_->Mutex());
@@ -914,7 +956,12 @@ void LibraryBackend::UpdateManualAlbumArt(const QString& artist,
   LibraryQuery query;
   query.SetColumnSpec("ROWID, " + Song::kColumnSpec);
   query.AddWhere("album", album);
-  if (!artist.isNull()) query.AddWhere("artist", artist);
+
+  if (!albumartist.isNull()) {
+    query.AddWhere("albumartist", albumartist);
+  } else if (!artist.isNull()) {
+    query.AddWhere("artist", artist);
+  }
 
   if (!ExecQuery(&query)) return;
 
@@ -930,12 +977,20 @@ void LibraryBackend::UpdateManualAlbumArt(const QString& artist,
       QString(
           "UPDATE %1 SET art_manual = :art"
           " WHERE album = :album AND unavailable = 0").arg(songs_table_));
-  if (!artist.isNull()) sql += " AND artist = :artist";
+  if (!albumartist.isNull()) {
+    sql += " AND albumartist = :albumartist";
+  } else if (!artist.isNull()) {
+    sql += " AND artist = :artist";
+  }
 
   QSqlQuery q(sql, db);
   q.bindValue(":art", art);
   q.bindValue(":album", album);
-  if (!artist.isNull()) q.bindValue(":artist", artist);
+  if (!albumartist.isNull()) {
+    q.bindValue(":albumartist", albumartist);
+  } else if (!artist.isNull()) {
+    q.bindValue(":artist", artist);
+  }
 
   q.exec();
   db_->CheckErrors(q);

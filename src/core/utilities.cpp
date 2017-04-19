@@ -100,7 +100,8 @@ QString PrettyTime(int seconds) {
 
   QString ret;
   if (hours)
-    ret.sprintf("%d:%02d:%02d", hours, minutes, seconds);  // NOLINT(runtime/printf)
+    ret.sprintf("%d:%02d:%02d", hours, minutes,
+                seconds);  // NOLINT(runtime/printf)
   else
     ret.sprintf("%d:%02d", minutes, seconds);  // NOLINT(runtime/printf)
 
@@ -161,11 +162,15 @@ QString PrettySize(quint64 bytes) {
     if (bytes <= 1000)
       ret = QString::number(bytes) + " bytes";
     else if (bytes <= 1000 * 1000)
-      ret.sprintf("%.1f KB", static_cast<float>(bytes) / 1000);  // NOLINT(runtime/printf)
+      ret.sprintf("%.1f KB",
+                  static_cast<float>(bytes) / 1000);  // NOLINT(runtime/printf)
     else if (bytes <= 1000 * 1000 * 1000)
-      ret.sprintf("%.1f MB", static_cast<float>(bytes) / (1000 * 1000));  // NOLINT(runtime/printf)
+      ret.sprintf("%.1f MB", static_cast<float>(bytes) /
+                                 (1000 * 1000));  // NOLINT(runtime/printf)
     else
-      ret.sprintf("%.1f GB", static_cast<float>(bytes) / (1000 * 1000 * 1000));  // NOLINT(runtime/printf)
+      ret.sprintf("%.1f GB",
+                  static_cast<float>(bytes) /
+                      (1000 * 1000 * 1000));  // NOLINT(runtime/printf)
   }
   return ret;
 }
@@ -229,6 +234,23 @@ QString GetTemporaryFileName() {
   }
 
   return file;
+}
+
+QString SaveToTemporaryFile(const QByteArray& data) {
+  QTemporaryFile tempfile;
+  tempfile.setAutoRemove(false);
+
+  if (!tempfile.open()) {
+    return QString();
+  }
+
+  if (tempfile.write(data) != data.size()) {
+    tempfile.remove();
+    return QString();
+  }
+
+  tempfile.close();
+  return tempfile.fileName();
 }
 
 bool RemoveRecursive(const QString& path) {
@@ -562,19 +584,13 @@ bool ParseUntilElement(QXmlStreamReader* reader, const QString& name) {
 }
 
 QDateTime ParseRFC822DateTime(const QString& text) {
-  QRegExp regexp("(\\d{1,2}) (\\w{3,12}) (\\d+) (\\d{1,2}):(\\d{1,2}):(\\d{1,2})");
+  QRegExp regexp(
+      "(\\d{1,2}) (\\w{3,12}) (\\d+) (\\d{1,2}):(\\d{1,2}):(\\d{1,2})");
   if (regexp.indexIn(text) == -1) {
     return QDateTime();
   }
 
-  enum class MatchNames {
-    DAYS = 1,
-    MONTHS,
-    YEARS,
-    HOURS,
-    MINUTES,
-    SECONDS
-  };
+  enum class MatchNames { DAYS = 1, MONTHS, YEARS, HOURS, MINUTES, SECONDS };
 
   QMap<QString, int> monthmap;
   monthmap["Jan"] = 1;
@@ -610,7 +626,7 @@ QDateTime ParseRFC822DateTime(const QString& text) {
                    regexp.cap(static_cast<int>(MatchNames::MINUTES)).toInt(),
                    regexp.cap(static_cast<int>(MatchNames::SECONDS)).toInt());
 
-  return QDateTime (date, time);
+  return QDateTime(date, time);
 }
 
 const char* EnumToString(const QMetaObject& meta, const char* name, int value) {

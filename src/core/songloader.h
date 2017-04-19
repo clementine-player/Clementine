@@ -79,7 +79,7 @@ class SongLoader : public QObject {
   void LoadMetadataBlocking();
   Result LoadAudioCD();
 
- signals:
+signals:
   void AudioCDTracksLoaded();
   void LoadAudioCDFinished(bool success);
   void LoadRemoteFinished();
@@ -93,7 +93,12 @@ class SongLoader : public QObject {
 #endif  // HAVE_AUDIOCD
 
  private:
-  enum State { WaitingForType, WaitingForMagic, WaitingForData, Finished, };
+  enum State {
+    WaitingForType,
+    WaitingForMagic,
+    WaitingForData,
+    Finished,
+  };
 
   Result LoadLocal(const QString& filename);
   void LoadLocalAsync(const QString& filename);
@@ -105,6 +110,7 @@ class SongLoader : public QObject {
   void AddAsRawStream();
 
   void LoadRemote();
+  bool LoadRemotePlaylist(const QUrl& url);
 
   // GStreamer callbacks
   static void TypeFound(GstElement* typefind, uint probability, GstCaps* caps,

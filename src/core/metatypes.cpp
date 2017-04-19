@@ -80,6 +80,8 @@ void RegisterMetaTypes() {
       "PlaylistSequence::RepeatMode");
   qRegisterMetaType<PlaylistSequence::ShuffleMode>(
       "PlaylistSequence::ShuffleMode");
+  qRegisterMetaType<QAbstractSocket::SocketState>(
+      "QAbstractSocket::SocketState");
   qRegisterMetaType<QList<PodcastEpisode>>("QList<PodcastEpisode>");
   qRegisterMetaType<QList<Podcast>>("QList<Podcast>");
   qRegisterMetaType<QList<QNetworkCookie>>("QList<QNetworkCookie>");

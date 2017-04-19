@@ -1064,9 +1064,9 @@ void MainWindow::ReloadSettings() {
       AddBehaviour(s.value("doubleclick_addmode", AddBehaviour_Append).toInt());
   doubleclick_playmode_ = PlayBehaviour(
       s.value("doubleclick_playmode", PlayBehaviour_IfStopped).toInt());
-  doubleclick_playlist_addmode_ = PlaylistAddBehaviour(
-      s.value("doubleclick_playlist_addmode", PlaylistAddBehaviour_Play)
-          .toInt());
+  doubleclick_playlist_addmode_ =
+      PlaylistAddBehaviour(s.value("doubleclick_playlist_addmode",
+                                   PlaylistAddBehaviour_Play).toInt());
   menu_playmode_ =
       PlayBehaviour(s.value("menu_playmode", PlayBehaviour_IfStopped).toInt());
 
@@ -2010,9 +2010,9 @@ void MainWindow::AddFile() {
   // Show dialog
   QStringList file_names = QFileDialog::getOpenFileNames(
       this, tr("Add file"), directory,
-      QString("%1 (%2);;%3;;%4")
-          .arg(tr("Music"), FileView::kFileFilter, parser.filters(),
-               tr(kAllFilesFilterSpec)));
+      QString("%1 (%2);;%3;;%4").arg(tr("Music"), FileView::kFileFilter,
+                                     parser.filters(),
+                                     tr(kAllFilesFilterSpec)));
   if (file_names.isEmpty()) return;
 
   // Save last used directory
@@ -2111,7 +2111,7 @@ void MainWindow::ShowInLibrary() {
 }
 
 void MainWindow::PlaylistRemoveCurrent() {
-  ui_->playlist->view()->RemoveSelected();
+  ui_->playlist->view()->RemoveSelected(false);
 }
 
 void MainWindow::PlaylistEditFinished(const QModelIndex& index) {
@@ -2385,7 +2385,20 @@ void MainWindow::PlaylistDelete() {
                           ->Metadata();
   }
 
-  ui_->playlist->view()->RemoveSelected();
+  if (app_->player()->GetState() == Engine::Playing) {
+    if (app_->playlist_manager()->current()->rowCount() ==
+        selected_songs.length()) {
+      app_->player()->Stop();
+    } else {
+      for (Song x : selected_songs) {
+        if (x == app_->player()->GetCurrentItem()->Metadata()) {
+          app_->player()->Next();
+        }
+      }
+    }
+  }
+
+  ui_->playlist->view()->RemoveSelected(true);
 
   DeleteFiles* delete_files = new DeleteFiles(app_->task_manager(), storage);
   connect(delete_files, SIGNAL(Finished(SongList)),
@@ -2853,12 +2866,6 @@ void MainWindow::ShowConsole() {
 void MainWindow::keyPressEvent(QKeyEvent* event) {
   if (event->key() == Qt::Key_Space) {
     app_->player()->PlayPause();
-    event->accept();
-  } else if (event->key() == Qt::Key_Left) {
-    app_->player()->SeekBackward();
-    event->accept();
-  } else if (event->key() == Qt::Key_Right) {
-    app_->player()->SeekForward();
     event->accept();
   } else {
     QMainWindow::keyPressEvent(event);

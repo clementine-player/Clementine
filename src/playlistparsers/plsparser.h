@@ -28,6 +28,7 @@ class PLSParser : public ParserBase {
 
   QString name() const { return "PLS"; }
   QStringList file_extensions() const { return QStringList() << "pls"; }
+  QString mime_type() const { return "audio/x-scpls"; }
 
   bool TryMagic(const QByteArray& data) const;
 

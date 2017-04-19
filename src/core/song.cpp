@@ -274,6 +274,10 @@ bool Song::is_unavailable() const { return d->unavailable_; }
 int Song::id() const { return d->id_; }
 const QString& Song::title() const { return d->title_; }
 const QString& Song::album() const { return d->album_; }
+const QString& Song::effective_album() const {
+  // This value is useful for singles, which are one-track albums on their own.
+  return d->album_.isEmpty() ? d->title_ : d->album_;
+}
 const QString& Song::artist() const { return d->artist_; }
 const QString& Song::albumartist() const { return d->albumartist_; }
 const QString& Song::effective_albumartist() const {
@@ -578,7 +582,7 @@ void Song::ToProtobuf(pb::tagreader::SongMetadata* pb) const {
   pb->set_filesize(d->filesize_);
   pb->set_suspicious_tags(d->suspicious_tags_);
   pb->set_art_automatic(DataCommaSizeFromQString(d->art_automatic_));
-  pb->set_type(static_cast< ::pb::tagreader::SongMetadata_Type>(d->filetype_));
+  pb->set_type(static_cast<pb::tagreader::SongMetadata_Type>(d->filetype_));
 }
 
 void Song::InitFromQuery(const SqlRow& q, bool reliable_metadata, int col) {
@@ -946,8 +950,9 @@ void Song::BindToQuery(QSqlQuery* query) const {
 
   if (Application::kIsPortable &&
       Utilities::UrlOnSameDriveAsClementine(d->url_)) {
-    query->bindValue(":filename", Utilities::GetRelativePathToClementineBin(
-                                      d->url_).toEncoded());
+    query->bindValue(
+        ":filename",
+        Utilities::GetRelativePathToClementineBin(d->url_).toEncoded());
   } else {
     query->bindValue(":filename", d->url_.toEncoded());
   }
@@ -987,7 +992,8 @@ void Song::BindToQuery(QSqlQuery* query) const {
   query->bindValue(":grouping", strval(d->grouping_));
   query->bindValue(":lyrics", strval(d->lyrics_));
   query->bindValue(":originalyear", intval(d->originalyear_));
-  query->bindValue(":effective_originalyear", intval(this->effective_originalyear()));
+  query->bindValue(":effective_originalyear",
+                   intval(this->effective_originalyear()));
 
 #undef intval
 #undef notnullintval
@@ -1088,9 +1094,9 @@ bool Song::IsMetadataEqual(const Song& other) const {
          d->performer_ == other.d->performer_ &&
          d->grouping_ == other.d->grouping_ && d->track_ == other.d->track_ &&
          d->disc_ == other.d->disc_ && qFuzzyCompare(d->bpm_, other.d->bpm_) &&
-         d->year_ == other.d->year_ && d->originalyear_ == other.d->originalyear_ &&
-         d->genre_ == other.d->genre_ &&
-         d->comment_ == other.d->comment_ &&
+         d->year_ == other.d->year_ &&
+         d->originalyear_ == other.d->originalyear_ &&
+         d->genre_ == other.d->genre_ && d->comment_ == other.d->comment_ &&
          d->compilation_ == other.d->compilation_ &&
          d->beginning_ == other.d->beginning_ &&
          length_nanosec() == other.length_nanosec() &&
@@ -1098,8 +1104,7 @@ bool Song::IsMetadataEqual(const Song& other) const {
          d->samplerate_ == other.d->samplerate_ &&
          d->art_automatic_ == other.d->art_automatic_ &&
          d->art_manual_ == other.d->art_manual_ &&
-         d->rating_ == other.d->rating_ &&
-         d->cue_path_ == other.d->cue_path_ &&
+         d->rating_ == other.d->rating_ && d->cue_path_ == other.d->cue_path_ &&
          d->lyrics_ == other.d->lyrics_;
 }
 
@@ -1137,12 +1142,14 @@ bool Song::IsOnSameAlbum(const Song& other) const {
 
   if (is_compilation() && album() == other.album()) return true;
 
-  return album() == other.album() && artist() == other.artist();
+  return effective_album() == other.effective_album() &&
+         effective_albumartist() == other.effective_albumartist();
 }
 
 QString Song::AlbumKey() const {
-  return QString("%1|%2|%3").arg(is_compilation() ? "_compilation" : artist(),
-                                 has_cue() ? cue_path() : "", album());
+  return QString("%1|%2|%3")
+      .arg(is_compilation() ? "_compilation" : effective_albumartist(),
+           has_cue() ? cue_path() : "", effective_album());
 }
 
 void Song::ToXesam(QVariantMap* map) const {

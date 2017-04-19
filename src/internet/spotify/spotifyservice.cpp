@@ -510,6 +510,43 @@ void SpotifyService::AddSongsToStarred(const QList<QUrl>& songs_urls) {
   server_->AddSongsToStarred(songs_urls);
 }
 
+void SpotifyService::InitSearch() {
+  search_ = new QStandardItem(IconLoader::Load("edit-find", IconLoader::Base),
+                              tr("Search results"));
+  search_->setToolTip(
+      tr("Start typing something on the search box above to "
+         "fill this search results list"));
+  search_->setData(Type_SearchResults, InternetModel::Role_Type);
+  search_->setData(InternetModel::PlayBehaviour_MultipleItems,
+                   InternetModel::Role_PlayBehaviour);
+
+  starred_ = new QStandardItem(IconLoader::Load("star-on", IconLoader::Other),
+                               tr("Starred"));
+  starred_->setData(Type_StarredPlaylist, InternetModel::Role_Type);
+  starred_->setData(true, InternetModel::Role_CanLazyLoad);
+  starred_->setData(InternetModel::PlayBehaviour_MultipleItems,
+                    InternetModel::Role_PlayBehaviour);
+  starred_->setData(true, InternetModel::Role_CanBeModified);
+
+  inbox_ = new QStandardItem(IconLoader::Load("mail-message", IconLoader::Base),
+                             tr("Inbox"));
+  inbox_->setData(Type_InboxPlaylist, InternetModel::Role_Type);
+  inbox_->setData(true, InternetModel::Role_CanLazyLoad);
+  inbox_->setData(InternetModel::PlayBehaviour_MultipleItems,
+                  InternetModel::Role_PlayBehaviour);
+
+  toplist_ = new QStandardItem(QIcon(), tr("Top tracks"));
+  toplist_->setData(Type_Toplist, InternetModel::Role_Type);
+  toplist_->setData(true, InternetModel::Role_CanLazyLoad);
+  toplist_->setData(InternetModel::PlayBehaviour_MultipleItems,
+                    InternetModel::Role_PlayBehaviour);
+
+  root_->appendRow(search_);
+  root_->appendRow(toplist_);
+  root_->appendRow(starred_);
+  root_->appendRow(inbox_);
+}
+
 void SpotifyService::PlaylistsUpdated(const pb::spotify::Playlists& response) {
   if (login_task_id_) {
     app_->task_manager()->SetTaskFinished(login_task_id_);
@@ -518,40 +555,7 @@ void SpotifyService::PlaylistsUpdated(const pb::spotify::Playlists& response) {
 
   // Create starred and inbox playlists if they're not here already
   if (!search_) {
-    search_ = new QStandardItem(IconLoader::Load("edit-find", IconLoader::Base),
-                                tr("Search results"));
-    search_->setToolTip(
-        tr("Start typing something on the search box above to "
-           "fill this search results list"));
-    search_->setData(Type_SearchResults, InternetModel::Role_Type);
-    search_->setData(InternetModel::PlayBehaviour_MultipleItems,
-                     InternetModel::Role_PlayBehaviour);
-
-    starred_ = new QStandardItem(IconLoader::Load("star-on", IconLoader::Other),
-                                 tr("Starred"));
-    starred_->setData(Type_StarredPlaylist, InternetModel::Role_Type);
-    starred_->setData(true, InternetModel::Role_CanLazyLoad);
-    starred_->setData(InternetModel::PlayBehaviour_MultipleItems,
-                      InternetModel::Role_PlayBehaviour);
-    starred_->setData(true, InternetModel::Role_CanBeModified);
-
-    inbox_ = new QStandardItem(
-        IconLoader::Load("mail-message", IconLoader::Base), tr("Inbox"));
-    inbox_->setData(Type_InboxPlaylist, InternetModel::Role_Type);
-    inbox_->setData(true, InternetModel::Role_CanLazyLoad);
-    inbox_->setData(InternetModel::PlayBehaviour_MultipleItems,
-                    InternetModel::Role_PlayBehaviour);
-
-    toplist_ = new QStandardItem(QIcon(), tr("Top tracks"));
-    toplist_->setData(Type_Toplist, InternetModel::Role_Type);
-    toplist_->setData(true, InternetModel::Role_CanLazyLoad);
-    toplist_->setData(InternetModel::PlayBehaviour_MultipleItems,
-                      InternetModel::Role_PlayBehaviour);
-
-    root_->appendRow(search_);
-    root_->appendRow(toplist_);
-    root_->appendRow(starred_);
-    root_->appendRow(inbox_);
+    InitSearch();
   } else {
     // Always reset starred playlist
     // TODO: might be improved by including starred playlist in the response,
@@ -881,6 +885,10 @@ void SpotifyService::SearchResults(
 
   ClearSearchResults();
 
+  // Must initialize search pointer if it is nullptr
+  if (!search_) {
+    InitSearch();
+  }
   // Fill results list
   for (const Song& song : songs) {
     QStandardItem* child = CreateSongItem(song);

@@ -74,12 +74,12 @@ msgstr "%1 အယ်လဘမ်များ"
 msgid "%1 dB"
 msgstr ""
 
-#: core/utilities.cpp:120
+#: core/utilities.cpp:121
 #, qt-format
 msgid "%1 days"
 msgstr "%1 နေ့များ"
 
-#: core/utilities.cpp:139
+#: core/utilities.cpp:140
 #, qt-format
 msgid "%1 days ago"
 msgstr "%1 လွန်ခဲ့သောနေ့များ"
@@ -89,12 +89,12 @@ msgstr "%1 လွန်ခဲ့သောနေ့များ"
 msgid "%1 on %2"
 msgstr "%1 မှအပေါ် %2"
 
-#: playlistparsers/playlistparser.cpp:76
+#: playlistparsers/playlistparser.cpp:87
 #, qt-format
 msgid "%1 playlists (%2)"
 msgstr "%1 သီချင်းစာရင်းများ (%2)"
 
-#: playlist/playlistmanager.cpp:416
+#: playlist/playlistmanager.cpp:419
 #, qt-format
 msgid "%1 selected of"
 msgstr "%1 ကိုရွေးချယ်ခဲ့"
@@ -119,12 +119,12 @@ msgstr "%1 သီချင်းများရှာတွေ့"
 msgid "%1 songs found (showing %2)"
 msgstr "%1 သီချင်းများရှာတွေ့ (%2 ပြသနေ)"
 
-#: playlist/playlistmanager.cpp:422
+#: playlist/playlistmanager.cpp:425
 #, qt-format
 msgid "%1 tracks"
 msgstr "%1 တေးသံလမ်းကြောများ"
 
-#: ui/albumcovermanager.cpp:469
+#: ui/albumcovermanager.cpp:472
 #, qt-format
 msgid "%1 transferred"
 msgstr "%1 ကူးပြောင်း"
@@ -256,7 +256,7 @@ msgstr ""
 msgid "(different across multiple songs)"
 msgstr "(အမျိုးမျိုးသောသီချင်းများပေါင်းစုံဖြတ်၍)"
 
-#: internet/spotify/spotifyservice.cpp:469
+#: internet/spotify/spotifyservice.cpp:472
 msgid ", by "
 msgstr ""
 
@@ -264,7 +264,7 @@ msgstr ""
 msgid "...and all the Amarok contributors"
 msgstr "...နှင့်အမာရော့ခ်ကူညီသူများအားလံုး"
 
-#: ../bin/src/ui_albumcovermanager.h:222 ../bin/src/ui_albumcovermanager.h:223
+#: ../bin/src/ui_albumcovermanager.h:228 ../bin/src/ui_albumcovermanager.h:229
 msgid "0"
 msgstr "၀"
 
@@ -276,11 +276,11 @@ msgstr "၀:၀၀:၀၀"
 msgid "0px"
 msgstr "၀ပီအိတ်စ်"
 
-#: core/utilities.cpp:120
+#: core/utilities.cpp:121
 msgid "1 day"
 msgstr "တစ်နေ့"
 
-#: playlist/playlistmanager.cpp:422
+#: playlist/playlistmanager.cpp:425
 msgid "1 track"
 msgstr "တေးသံလမ်းကြောတစ်ခု"
 
@@ -407,7 +407,7 @@ msgstr "အေအေစီ၃၂ကီလို"
 msgid "AAC 64k"
 msgstr "အေအေစီ၆၄ကီလို"
 
-#: core/song.cpp:422
+#: core/song.cpp:426
 msgid "AIFF"
 msgstr "အေအိုင်အက်ဖ်အက်ဖ်"
 
@@ -415,7 +415,7 @@ msgstr "အေအိုင်အက်ဖ်အက်ဖ်"
 msgid "ALL GLORY TO THE HYPNOTOAD"
 msgstr "အံ့မခန်းဖွယ်အားလံုးကိုဟိုက်ဖ်နိုဖားသို့"
 
-#: ui/albumcovermanager.cpp:114 ui/albumcoversearcher.cpp:158
+#: ui/albumcovermanager.cpp:105 ui/albumcoversearcher.cpp:158
 msgid "Abort"
 msgstr "ဖျက်သိမ်း"
 
@@ -609,11 +609,11 @@ msgstr "သီချင်းနှစ်အမည်ထည့်"
 msgid "Add stream..."
 msgstr "သီချင်းစီးကြောင်းထည့်..."
 
-#: internet/spotify/spotifyservice.cpp:623
+#: internet/spotify/spotifyservice.cpp:626
 msgid "Add to Spotify playlists"
 msgstr ""
 
-#: internet/spotify/spotifyservice.cpp:615
+#: internet/spotify/spotifyservice.cpp:618
 msgid "Add to Spotify starred"
 msgstr ""
 
@@ -621,7 +621,7 @@ msgstr ""
 msgid "Add to another playlist"
 msgstr "သီချင်းစာရင်းနောက်တစ်ခုသို့ထည့်"
 
-#: ../bin/src/ui_albumcovermanager.h:217
+#: ../bin/src/ui_albumcovermanager.h:223
 msgid "Add to playlist"
 msgstr "သီချင်းစာရင်းသို့ထည့်"
 
@@ -695,11 +695,11 @@ msgstr "အယ်လဘမ်အဖုံး"
 msgid "Album info on jamendo.com..."
 msgstr "ဂျမန်ဒို.ကွမ်းမှအယ်လဘမ်အချက်အလက်..."
 
-#: ui/albumcovermanager.cpp:138
+#: ui/albumcovermanager.cpp:129
 msgid "Albums with covers"
 msgstr "အဖုံးများနဲ့အယ်လဘမ်များ"
 
-#: ui/albumcovermanager.cpp:139
+#: ui/albumcovermanager.cpp:130
 msgid "Albums without covers"
 msgstr "အဖုံးများနဲ့အယ်လဘမ်များ"
 
@@ -716,11 +716,11 @@ msgctxt "Label for button to enable/disable Hypnotoad background sound."
 msgid "All Glory to the Hypnotoad!"
 msgstr "အံ့မခန်းဖွယ်အားလံုးကိုဟိုက်ဖ်နိုဖားသို့!"
 
-#: ui/albumcovermanager.cpp:137
+#: ui/albumcovermanager.cpp:128
 msgid "All albums"
 msgstr "အယ်လဘမ်များအားလံုး"
 
-#: ui/albumcovermanager.cpp:271
+#: ui/albumcovermanager.cpp:262
 msgid "All artists"
 msgstr "အနုပညာရှင်များအားလံုး"
 
@@ -728,7 +728,7 @@ msgstr "အနုပညာရှင်များအားလံုး"
 msgid "All files (*)"
 msgstr "ဖိုင်များအားလံုး(*)"
 
-#: playlistparsers/playlistparser.cpp:63
+#: playlistparsers/playlistparser.cpp:74
 #, qt-format
 msgid "All playlists (%1)"
 msgstr "သီချင်းစာရင်းများအားလံုး(%1)"
@@ -1043,7 +1043,7 @@ msgstr "သို့သော်ရင်းမြစ်များမလုပ
 msgid "Buttons"
 msgstr "ခလုတ်များ"
 
-#: core/song.cpp:428
+#: core/song.cpp:432
 msgid "CDDA"
 msgstr "စီဒီဒီအေ"
 
@@ -1282,7 +1282,7 @@ msgstr "ပုံဖော်ကြည့်ခြင်းပိတ်"
 msgid "Closing this window will cancel the download."
 msgstr "ယခုဝင်းဒိုးပိတ်လျှင်ကူးဆွဲပယ်ဖျက်သွားလိမ့်မည်။"
 
-#: ui/albumcovermanager.cpp:222
+#: ui/albumcovermanager.cpp:213
 msgid "Closing this window will stop searching for album covers."
 msgstr "ယခုဝင်းဒိုးပိတ်လျှင်အယ်လဘမ်အဖုံးများရှာဖွေခြင်းရပ်သွားလိမ့်မည်။"
 
@@ -1338,7 +1338,7 @@ msgstr "အတိုကောက်များပုံစံပြင်"
 msgid "Configure SoundCloud..."
 msgstr ""
 
-#: internet/spotify/spotifyservice.cpp:921
+#: internet/spotify/spotifyservice.cpp:927
 msgid "Configure Spotify..."
 msgstr "စပေါ့တီဖိုင်ပုံစံပြင်..."
 
@@ -1482,7 +1482,7 @@ msgstr "ပေးပို့ဖိုင်ဖွင့်မရ %1"
 
 #: internet/core/cloudfileservice.cpp:103
 #: internet/googledrive/googledriveservice.cpp:228
-#: ../bin/src/ui_albumcovermanager.h:214
+#: ../bin/src/ui_albumcovermanager.h:220
 #: ../bin/src/ui_albumcoversearcher.h:104 ../bin/src/ui_mainwindow.h:696
 msgid "Cover Manager"
 msgstr "အဖုံးမန်နေဂျာ"
@@ -1811,7 +1811,7 @@ msgid "Don't shuffle"
 msgstr "ကုလားဖန်မထိုး"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:312
-#: ui/albumcovermanager.cpp:224
+#: ui/albumcovermanager.cpp:215
 msgid "Don't stop!"
 msgstr "မရပ်ဆိုင်းနဲ့!"
 
@@ -2039,7 +2039,7 @@ msgid "Enter search terms below to find podcasts on gpodder.net"
 msgstr "ဂျီပေါ့တာ.နက်ထဲရှိပို့စ်ကဒ်များကိုရှာဖွေရန်ရှာဖွေစကားရပ်များကိုအောက်တွင်ထည့်သွင်းပါ"
 
 #: ../bin/src/ui_libraryfilterwidget.h:106
-#: ../bin/src/ui_albumcovermanager.h:218
+#: ../bin/src/ui_albumcovermanager.h:224
 msgid "Enter search terms here"
 msgstr "ရှာဖွေစကားရပ်များဒီမှာထည့်သွင်း"
 
@@ -2170,7 +2170,7 @@ msgstr "ချဲ့တွင်"
 msgid "Expires on %1"
 msgstr "%1 တွင်သက်တမ်းကုန်"
 
-#: ../bin/src/ui_albumcovermanager.h:225
+#: ../bin/src/ui_albumcovermanager.h:231
 msgid "Export Covers"
 msgstr "အဖံုးများတင်ပို့"
 
@@ -2186,11 +2186,11 @@ msgstr "ကူးဆွဲပြီးအဖံုးများတင်ပိ
 msgid "Export embedded covers"
 msgstr "အဖံုးမြှပ်များတင်ပို့"
 
-#: ui/albumcovermanager.cpp:788 ui/albumcovermanager.cpp:812
+#: ui/albumcovermanager.cpp:799 ui/albumcovermanager.cpp:823
 msgid "Export finished"
 msgstr "တင်ပို့ခြင်းပြီးဆံုး"
 
-#: ui/albumcovermanager.cpp:797
+#: ui/albumcovermanager.cpp:808
 #, qt-format
 msgid "Exported %1 covers out of %2 (%3 skipped)"
 msgstr "တင်ပို့ပြီး %1 အဖံုးများရရှိ %2 မှ (%3 ခုန်ကျော်)"
@@ -2261,11 +2261,11 @@ msgstr ""
 msgid "Favourite tracks"
 msgstr "အနှစ်သက်ဆုံးတေးသံလမ်းကြောများ"
 
-#: ../bin/src/ui_albumcovermanager.h:224
+#: ../bin/src/ui_albumcovermanager.h:230
 msgid "Fetch Missing Covers"
 msgstr "ပျောက်နေသောအဖံုးများယူဆောင်"
 
-#: ../bin/src/ui_albumcovermanager.h:215
+#: ../bin/src/ui_albumcovermanager.h:221
 msgid "Fetch automatically"
 msgstr "အလိုအလျောက်ယူဆောင်ခြင်း"
 
@@ -2351,7 +2351,7 @@ msgstr "ပထမဆံုးအဆင့်"
 msgid "Fit cover to width"
 msgstr ""
 
-#: core/song.cpp:406 transcoder/transcoder.cpp:233
+#: core/song.cpp:410 transcoder/transcoder.cpp:233
 msgid "Flac"
 msgstr "အက်ဖ်အယ်အေစီ"
 
@@ -2455,12 +2455,12 @@ msgstr "အထွေထွေချိန်ညှိချက်"
 msgid "Genre"
 msgstr "အမျိုးအစား"
 
-#: internet/spotify/spotifyservice.cpp:639
-#: internet/spotify/spotifyservice.cpp:683
+#: internet/spotify/spotifyservice.cpp:642
+#: internet/spotify/spotifyservice.cpp:685
 msgid "Get a URL to share this Spotify song"
 msgstr ""
 
-#: internet/spotify/spotifyservice.cpp:671
+#: internet/spotify/spotifyservice.cpp:674
 msgid "Get a URL to share this playlist"
 msgstr ""
 
@@ -2493,7 +2493,7 @@ msgstr "ယခင်သီချင်းစာရင်းမျက်နှာ
 msgid "Google Drive"
 msgstr "ဂူဂယ်ဒရိုက်ဗ်"
 
-#: covers/coversearchstatisticsdialog.cpp:53 ui/albumcovermanager.cpp:463
+#: covers/coversearchstatisticsdialog.cpp:53 ui/albumcovermanager.cpp:465
 #: ../bin/src/ui_coversearchstatisticsdialog.h:75
 #, qt-format
 msgid "Got %1 covers out of %2 (%3 failed)"
@@ -2652,12 +2652,12 @@ msgstr "ပုံများ (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm 
 msgid "Images (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 msgstr "ပုံများ (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 
-#: core/utilities.cpp:151
+#: core/utilities.cpp:152
 #, qt-format
 msgid "In %1 days"
 msgstr "%1 နေ့များအတွင်း"
 
-#: core/utilities.cpp:154
+#: core/utilities.cpp:155
 #, qt-format
 msgid "In %1 weeks"
 msgstr "%1 အပတ်များအတွင်း"
@@ -2668,7 +2668,7 @@ msgid ""
 "time a song finishes."
 msgstr "စနစ်အရှင်ထဲတွင်တေးသံလမ်းကြောများရွေးချယ်ပြီးသီချင်းတစ်ပုဒ်ပြီးတိုင်းတေးသံလမ်းကြောထဲသို့ထည့်သွင်း။"
 
-#: internet/spotify/spotifyservice.cpp:425
+#: internet/spotify/spotifyservice.cpp:417
 msgid "Inbox"
 msgstr "စာတိုက်ပံုး"
 
@@ -2946,7 +2946,7 @@ msgstr "ကန့်သတ်ချက်များ"
 msgid "Live"
 msgstr "တိုက်ရိုက်ထုတ်လွှင့်မှု"
 
-#: ../bin/src/ui_albumcovermanager.h:216
+#: ../bin/src/ui_albumcovermanager.h:222
 msgid "Load"
 msgstr "ထည့်သွင်း"
 
@@ -2954,7 +2954,7 @@ msgstr "ထည့်သွင်း"
 msgid "Load cover from URL"
 msgstr "ယူအာအလ်မှအဖုံးထည့်သွင်း"
 
-#: ui/albumcoverchoicecontroller.cpp:64
+#: ui/albumcoverchoicecontroller.cpp:66
 msgid "Load cover from URL..."
 msgstr "ယူအာအလ်မှအဖုံးထည့်သွင်း..."
 
@@ -2962,7 +2962,7 @@ msgstr "ယူအာအလ်မှအဖုံးထည့်သွင်း...
 msgid "Load cover from disk"
 msgstr "ဓာတ်ပြားမှအဖုံးထည့်သွင်း"
 
-#: ui/albumcoverchoicecontroller.cpp:60
+#: ui/albumcoverchoicecontroller.cpp:61
 msgid "Load cover from disk..."
 msgstr "ဓာတ်ပြားမှအဖုံးထည့်သွင်း..."
 
@@ -3075,7 +3075,7 @@ msgstr ""
 msgid "M4A AAC"
 msgstr "MP4 AAC"
 
-#: core/song.cpp:412 transcoder/transcoder.cpp:238
+#: core/song.cpp:416 transcoder/transcoder.cpp:238
 #: ../bin/src/ui_transcodersettingspage.h:174
 msgid "MP3"
 msgstr "အမ်ပီသရီး"
@@ -3088,11 +3088,11 @@ msgstr "အမ်ပီသရီး၂၅၆ကီလို"
 msgid "MP3 96k"
 msgstr "အမ်ပီသရီး၉၆ကီလို"
 
-#: core/song.cpp:408
+#: core/song.cpp:412
 msgid "MP4 AAC"
 msgstr "အမ်ပီဖိုးအေအေစီ"
 
-#: core/song.cpp:410
+#: core/song.cpp:414
 msgid "MPC"
 msgstr "အမ်ပီစီ"
 
@@ -3122,7 +3122,7 @@ msgctxt "Label for button to enable/disable Enterprise background sound."
 msgid "Make it so!"
 msgstr "အဲဒီကဲ့သို့လုပ်"
 
-#: internet/spotify/spotifyservice.cpp:669
+#: internet/spotify/spotifyservice.cpp:672
 msgid "Make playlist available offline"
 msgstr "သီချင်းစာရင်းအောဖ့်လိုင်းသုံးလုပ်"
 
@@ -3221,7 +3221,7 @@ msgstr "လများ"
 msgid "Mood"
 msgstr "စိတ်နေစိတ်ထား"
 
-#: moodbar/moodbarproxystyle.cpp:358
+#: moodbar/moodbarproxystyle.cpp:361
 #: ../bin/src/ui_appearancesettingspage.h:293
 msgid "Moodbar style"
 msgstr "စိတ်နေစိတ်ထားဘားမျဉ်းပုံစံ"
@@ -3347,7 +3347,7 @@ msgstr "နောက်တစ်ခု"
 msgid "Next track"
 msgstr "နောက်တေးသံလမ်းကြော"
 
-#: core/utilities.cpp:152
+#: core/utilities.cpp:153
 msgid "Next week"
 msgstr "နောက်အပတ်"
 
@@ -3359,7 +3359,7 @@ msgstr "စိစစ်သူမရှိ"
 msgid "No background image"
 msgstr "နောက်ခံပုံမသံုး"
 
-#: ui/albumcovermanager.cpp:789
+#: ui/albumcovermanager.cpp:800
 msgid "No covers to export."
 msgstr "တင်ပို့ရန်အဖံုးများမရှိ"
 
@@ -3454,19 +3454,19 @@ msgstr "ဖန်သားပြင်ပေါ်ပံုရိပ်ကြိ
 msgid "Off"
 msgstr "ပိတ်"
 
-#: core/song.cpp:414 transcoder/transcoder.cpp:244
+#: core/song.cpp:418 transcoder/transcoder.cpp:244
 msgid "Ogg Flac"
 msgstr "အောဖ့်အက်ဖ်အယ်အေစီ"
 
-#: core/song.cpp:420 transcoder/transcoder.cpp:250
+#: core/song.cpp:424 transcoder/transcoder.cpp:250
 msgid "Ogg Opus"
 msgstr "အောဖ့်တေး"
 
-#: core/song.cpp:416 transcoder/transcoder.cpp:247
+#: core/song.cpp:420 transcoder/transcoder.cpp:247
 msgid "Ogg Speex"
 msgstr "အောဖ့်စဖိစ်"
 
-#: core/song.cpp:418 transcoder/transcoder.cpp:241
+#: core/song.cpp:422 transcoder/transcoder.cpp:241
 #: ../bin/src/ui_magnatunedownloaddialog.h:135
 #: ../bin/src/ui_magnatunesettingspage.h:169
 msgid "Ogg Vorbis"
@@ -3731,7 +3731,7 @@ msgstr "ဖွင့်စက်ရွေးပိုင်ခွင့်မျ
 
 #: playlist/playlistcontainer.cpp:290 playlist/playlistlistcontainer.cpp:228
 #: playlist/playlistmanager.cpp:86 playlist/playlistmanager.cpp:155
-#: playlist/playlistmanager.cpp:508 playlist/playlisttabbar.cpp:366
+#: playlist/playlistmanager.cpp:511 playlist/playlisttabbar.cpp:366
 msgid "Playlist"
 msgstr "သီချင်းစာရင်း"
 
@@ -3967,7 +3967,7 @@ msgid "Rating"
 msgstr "အဆင့်သတ်မှတ်ချက်များ"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:309
-#: ui/albumcovermanager.cpp:221
+#: ui/albumcovermanager.cpp:212
 msgid "Really cancel?"
 msgstr "တကယ်ပယ်ဖျက်?"
 
@@ -4037,7 +4037,7 @@ msgstr "သီချင်းစာရင်းမှပုံတူများ
 msgid "Remove folder"
 msgstr "ဖိုင်တွဲဖယ်ရှား"
 
-#: internet/spotify/spotifyservice.cpp:681 ../bin/src/ui_mainwindow.h:704
+#: internet/spotify/spotifyservice.cpp:684 ../bin/src/ui_mainwindow.h:704
 msgid "Remove from playlist"
 msgstr "သီချင်းစာရင်းမှဖယ်ရှား"
 
@@ -4196,11 +4196,11 @@ msgstr "နမူနာနှုန်း"
 msgid "Save .mood files in your music library"
 msgstr "ဂီတတိုက်တွင်.moodဖိုင်များမှတ်သား"
 
-#: ui/albumcoverchoicecontroller.cpp:129
+#: ui/albumcoverchoicecontroller.cpp:131
 msgid "Save album cover"
 msgstr "အယ်လဘမ်အဖုံးမှတ်သား"
 
-#: ui/albumcoverchoicecontroller.cpp:62
+#: ui/albumcoverchoicecontroller.cpp:64
 msgid "Save cover to disk..."
 msgstr "ဓာတ်ပြားသို့အဖံုးမှတ်သား..."
 
@@ -4217,7 +4217,7 @@ msgctxt "Save playlist menu action."
 msgid "Save playlist"
 msgstr "သီချင်းစာရင်းမှတ်သား"
 
-#: playlist/playlistmanager.cpp:229
+#: playlist/playlistmanager.cpp:232
 msgctxt "Title of the playlist save dialog."
 msgid "Save playlist"
 msgstr "သီချင်းစာရင်းမှတ်သား"
@@ -4309,7 +4309,7 @@ msgstr "ဆပ်ဆိုးနစ်ရှာဖွေ"
 msgid "Search automatically"
 msgstr "အလိုအလျောက်ရှာဖွေ"
 
-#: ui/albumcoverchoicecontroller.cpp:66
+#: ui/albumcoverchoicecontroller.cpp:69
 msgid "Search for album covers..."
 msgstr "အယ်လဘမ်အဖုံးများအားရှာဖွေ..."
 
@@ -4334,7 +4334,7 @@ msgid "Search options"
 msgstr "ရှာဖွေရွေးပိုင်ခွင့်များ"
 
 #: internet/soundcloud/soundcloudservice.cpp:119
-#: internet/spotify/spotifyservice.cpp:408
+#: internet/spotify/spotifyservice.cpp:400
 msgid "Search results"
 msgstr "ရလဒ်များရှာဖွေ"
 
@@ -4519,7 +4519,7 @@ msgstr "သီချင်းတိုက်ထဲအနုပညာအဖုံ
 msgid "Show dividers"
 msgstr "ခွဲခြားမှုများပြသ"
 
-#: ui/albumcoverchoicecontroller.cpp:72 widgets/prettyimage.cpp:183
+#: ui/albumcoverchoicecontroller.cpp:73 widgets/prettyimage.cpp:183
 msgid "Show fullsize..."
 msgstr "အရွယ်အပြည့်ပြသ..."
 
@@ -4536,7 +4536,7 @@ msgstr ""
 msgid "Show in various artists"
 msgstr "အနုပညာရှင်များအမျိုးမျိုးပြသ"
 
-#: moodbar/moodbarproxystyle.cpp:353
+#: moodbar/moodbarproxystyle.cpp:356
 msgid "Show moodbar"
 msgstr "စိတ်နေစိတ်ထားဘားမျဉ်းပြသ"
 
@@ -4729,7 +4729,7 @@ msgstr "စပေါ့တီဖိုင်"
 msgid "Spotify login error"
 msgstr "စပေါ့တီဖိုင်းဖွင့်ဝင်အမှားပြ"
 
-#: internet/spotify/spotifyservice.cpp:844
+#: internet/spotify/spotifyservice.cpp:850
 msgid "Spotify playlist's URL"
 msgstr ""
 
@@ -4741,7 +4741,7 @@ msgstr "စပေါ့တီဖိုင်ဖြည့်စွက်ပရိ
 msgid "Spotify plugin not installed"
 msgstr "စပေါ့တီဖိုင်ဖြည့်စွက်ပရိုဂရမ်မသွင်းထား"
 
-#: internet/spotify/spotifyservice.cpp:835
+#: internet/spotify/spotifyservice.cpp:841
 msgid "Spotify song's URL"
 msgstr ""
 
@@ -4749,7 +4749,7 @@ msgstr ""
 msgid "Standard"
 msgstr "အဆင့်အတန်း"
 
-#: internet/spotify/spotifyservice.cpp:417
+#: internet/spotify/spotifyservice.cpp:409
 #: internet/subsonic/subsonicservice.cpp:115
 msgid "Starred"
 msgstr "ကြည့်ခဲ့ပြီး"
@@ -4767,7 +4767,7 @@ msgid "Start transcoding"
 msgstr "ပံုစံပြောင်းလဲခြင်းစတင်"
 
 #: internet/soundcloud/soundcloudservice.cpp:121
-#: internet/spotify/spotifyservice.cpp:410
+#: internet/spotify/spotifyservice.cpp:402
 msgid ""
 "Start typing something on the search box above to fill this search results "
 "list"
@@ -4824,7 +4824,7 @@ msgstr ""
 msgid "Stopped"
 msgstr "ရပ်တန့်ပြီး"
 
-#: core/song.cpp:431
+#: core/song.cpp:435
 msgid "Stream"
 msgstr "သီချင်းစီးကြောင်း"
 
@@ -4887,15 +4887,15 @@ msgstr "လက်ခံပုံစံများ"
 msgid "Synchronize statistics to files now"
 msgstr "ယခုကိန်းဂဏန်းအချက်အလက်များကိုဖိုင်များသို့လိုက်လျောညီထွေဖြစ်ရန်လုပ်"
 
-#: internet/spotify/spotifyservice.cpp:708
+#: internet/spotify/spotifyservice.cpp:710
 msgid "Syncing Spotify inbox"
 msgstr "စပေါ့တီဖိုင်စာတိုက်ပံုးညီတူညှိ"
 
-#: internet/spotify/spotifyservice.cpp:702
+#: internet/spotify/spotifyservice.cpp:704
 msgid "Syncing Spotify playlist"
 msgstr "စပေါ့တီဖိုင်သီချင်းစာရင်းညီတူညှိ"
 
-#: internet/spotify/spotifyservice.cpp:713
+#: internet/spotify/spotifyservice.cpp:715
 msgid "Syncing Spotify starred tracks"
 msgstr "စပေါ့တီဖိုင်ကြည့်ခဲ့ပြီးတေးသံလမ်းကြောများညီတူညှိ"
 
@@ -5096,7 +5096,7 @@ msgstr ""
 msgid "Title"
 msgstr "ခေါင်းစဉ်"
 
-#: core/utilities.cpp:137 core/utilities.cpp:149
+#: core/utilities.cpp:138 core/utilities.cpp:150
 msgid "Today"
 msgstr "ယနေ့"
 
@@ -5120,7 +5120,7 @@ msgstr "သီချင်းနာမည်ပေးပို့ခြင်း
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "ဖန်သားပြင်ပေါ်ပံုရိပ်လှလှမြင်ကွင်းပေါ်ရန်ဖွင့်ပိတ်လုပ်"
 
-#: core/utilities.cpp:150
+#: core/utilities.cpp:151
 msgid "Tomorrow"
 msgstr "မနက်ဖြန်"
 
@@ -5132,11 +5132,11 @@ msgstr "ဦးတည်ရာပြောင်းများများပြ
 msgid "Top Rated"
 msgstr ""
 
-#: internet/spotify/spotifyservice.cpp:431
+#: internet/spotify/spotifyservice.cpp:423
 msgid "Top tracks"
 msgstr "ထိပ်တန်းတေးသံများ"
 
-#: ../bin/src/ui_albumcovermanager.h:220
+#: ../bin/src/ui_albumcovermanager.h:226
 msgid "Total albums:"
 msgstr "စုစုပေါင်းအယ်လဘမ်များ:"
 
@@ -5182,7 +5182,7 @@ msgstr "%2 ပရိုဂရမ်များအသံုးပြုပြီ
 msgid "Transcoding options"
 msgstr "ပံုစံပြောင်းလဲခြင်းရွေးပိုင်ခွင့်များ"
 
-#: core/song.cpp:426
+#: core/song.cpp:430
 msgid "TrueAudio"
 msgstr "တီတီအေ"
 
@@ -5224,10 +5224,10 @@ msgstr ""
 msgid "Unable to download %1 (%2)"
 msgstr "မကူးဆွဲနိုင် %1 (%2)"
 
-#: core/song.cpp:435 library/librarymodel.cpp:374 library/librarymodel.cpp:379
+#: core/song.cpp:439 library/librarymodel.cpp:374 library/librarymodel.cpp:379
 #: library/librarymodel.cpp:383 library/librarymodel.cpp:1156
 #: library/savedgroupingmanager.cpp:103 playlist/playlistdelegates.cpp:305
-#: playlist/playlistmanager.cpp:515 playlist/playlistmanager.cpp:516
+#: playlist/playlistmanager.cpp:518 playlist/playlistmanager.cpp:519
 #: songinfo/streamdiscoverer.cpp:87 ui/albumcoverchoicecontroller.cpp:126
 #: ui/edittagdialog.cpp:463 ui/edittagdialog.cpp:507
 msgid "Unknown"
@@ -5242,7 +5242,7 @@ msgstr "မသိအကြောင်းအရာအမျိုးအစား
 msgid "Unknown error"
 msgstr "အမည်မသိအမှားပြ"
 
-#: ui/albumcoverchoicecontroller.cpp:69
+#: ui/albumcoverchoicecontroller.cpp:71
 msgid "Unset cover"
 msgstr "အဖုံးမသတ်မှတ်"
 
@@ -5403,7 +5403,7 @@ msgid "Variable bit rate"
 msgstr "ဘစ်နှုန်းကိန်းရှင်"
 
 #: globalsearch/globalsearchmodel.cpp:109 library/librarymodel.cpp:300
-#: playlist/playlistmanager.cpp:527 ui/albumcovermanager.cpp:273
+#: playlist/playlistmanager.cpp:530 ui/albumcovermanager.cpp:264
 msgid "Various artists"
 msgstr "အနုပညာရှင်များအမျိုးမျိုး"
 
@@ -5412,7 +5412,7 @@ msgstr "အနုပညာရှင်များအမျိုးမျို
 msgid "Version %1"
 msgstr "ပုံစံ %1"
 
-#: ../bin/src/ui_albumcovermanager.h:219
+#: ../bin/src/ui_albumcovermanager.h:225
 msgid "View"
 msgstr "ကြည့်ရှု"
 
@@ -5458,7 +5458,7 @@ msgstr "တပလူအမ်အေ"
 msgid "Warn me when closing a playlist tab"
 msgstr "သီချင်းစာရင်းမျက်နှာစာကိုပိတ်နေတုန်းသတိပေး"
 
-#: core/song.cpp:424 transcoder/transcoder.cpp:256
+#: core/song.cpp:428 transcoder/transcoder.cpp:256
 msgid "Wav"
 msgstr "တပလူအေဗီ"
 
@@ -5542,11 +5542,11 @@ msgstr "ဝင်းဒိုးမီဒီယာ၄၀ကီလို"
 msgid "Windows Media 64k"
 msgstr "ဝင်းဒိုးမီဒီယာ၆၄ကီလို"
 
-#: core/song.cpp:404 transcoder/transcoder.cpp:253
+#: core/song.cpp:408 transcoder/transcoder.cpp:253
 msgid "Windows Media audio"
 msgstr "ဝင်းဒိုးမီဒီယာအသံ"
 
-#: ../bin/src/ui_albumcovermanager.h:221
+#: ../bin/src/ui_albumcovermanager.h:227
 msgid "Without cover:"
 msgstr "အဖံုးမပါ:"
 
@@ -5588,7 +5588,7 @@ msgstr "နှစ် - အယ်လဘမ်"
 msgid "Years"
 msgstr "နှစ်များ"
 
-#: core/utilities.cpp:138
+#: core/utilities.cpp:139
 msgid "Yesterday"
 msgstr "မနေ့က"
 
