@@ -84,9 +84,9 @@ class SpotifyService : public InternetService {
   void Login(const QString& username, const QString& password);
   Q_INVOKABLE void LoadImage(const QString& id);
   Q_INVOKABLE void SetPaused(bool paused);
-  Q_INVOKABLE void UpdatePlayCountFile(const QString& artist,
-                                       const QString& title,
-                                       const QString& year);    // const Engine::SimpleMetaBundle &bundle);
+  Q_INVOKABLE void UpdatePlayCountFile(
+      const QString& artist, const QString& title,
+      const QString& year);  // const Engine::SimpleMetaBundle &bundle);
 
   SpotifyServer* server() const;
 
@@ -99,7 +99,7 @@ class SpotifyService : public InternetService {
 
   static void SongFromProtobuf(const pb::spotify::Track& track, Song* song);
 
- signals:
+signals:
   void BlobStateChanged();
   void LoginFinished(bool success);
   void ImageLoaded(const QString& id, const QImage& image);
@@ -128,12 +128,10 @@ class SpotifyService : public InternetService {
 
   QStandardItem* PlaylistBySpotifyIndex(int index) const;
   bool DoPlaylistsDiffer(const pb::spotify::Playlists& response) const;
-  int SongIsInPlayCountFile(std::fstream &ofs,
-                            const std::string& songArtist,
+  int SongIsInPlayCountFile(std::fstream& ofs, const std::string& songArtist,
                             const std::string& songTitle,
-                            const std::string& songYear,
-                            int &playCount ) const;
-  void SetMetaData( const Engine::SimpleMetaBundle &bundle );
+                            const std::string& songYear, int& playCount) const;
+  void SetMetaData(const Engine::SimpleMetaBundle& bundle);
 
  private slots:
   void EnsureServerCreated(const QString& username = QString(),
@@ -170,7 +168,7 @@ class SpotifyService : public InternetService {
 
   QStandardItem* root_;
   QStandardItem* search_;
-  QStandardItem* starred_; 
+  QStandardItem* starred_;
   QStandardItem* inbox_;
   QStandardItem* toplist_;
   QList<QStandardItem*> playlists_;

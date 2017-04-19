@@ -44,6 +44,8 @@ class SpotifySettingsPage : public SettingsPage {
   void Login();
   void LoginFinished(bool success);
   void Logout();
+  void on_spotifySongTracking_toggled(bool toggled);
+  void on_openFolder_clicked();
 
  private:
   void UpdateLoginState();

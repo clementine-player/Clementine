@@ -127,7 +127,7 @@ SpotifyService::~SpotifyService() {
 }
 
 QStandardItem* SpotifyService::CreateRootItem() {
-  root_ = new QStandardItem(IconLoader::Load("spotify", IconLoader::Provider), 
+  root_ = new QStandardItem(IconLoader::Load("spotify", IconLoader::Provider),
                             kServiceName);
   root_->setData(true, InternetModel::Role_CanLazyLoad);
   return root_;
@@ -358,7 +358,6 @@ void SpotifyService::StartBlobProcess() {
   qLog(Info) << "Starting" << blob_path;
   blob_process_->start(
       blob_path, QStringList() << QString::number(server_->server_port()));
-
 }
 
 bool SpotifyService::IsBlobInstalled() const {
@@ -376,111 +375,119 @@ void SpotifyService::InstallBlob() {
 #endif  // HAVE_SPOTIFY_DOWNLOADER
 }
 
-void SpotifyService::BlobDownloadFinished() {
-    EnsureServerCreated();
-}
+void SpotifyService::BlobDownloadFinished() { EnsureServerCreated(); }
 
-int SpotifyService::SongIsInPlayCountFile(std::fstream &ofs,
+int SpotifyService::SongIsInPlayCountFile(std::fstream& ofs,
                                           const std::string& songArtist,
                                           const std::string& songTitle,
                                           const std::string& songYear,
-                                          int &playCount ) const {
+                                          int& playCount) const {
+  playCount = 0;
 
-    playCount = 0;
+  // Get the size of the file in bytes.
+  ofs.seekp(0, std::ios_base::end);
+  int fileSize = ofs.tellp();
+  ofs.seekp(0, std::ios_base::beg);
 
-    // Get the size of the file in bytes.
-    ofs.seekp( 0, std::ios_base::end );
-    int fileSize = ofs.tellp();
-    ofs.seekp( 0, std::ios_base::beg );
+  // Initialize local variables.
+  int filePosition = -1;
+  bool endOfFile = false;
+  bool songFound = false;
+  size_t artistLength = strlen(songArtist.c_str());
+  size_t titleLength = strlen(songTitle.c_str());
+  int numChars = 0;
 
-    // Initialize local variables.
-    int filePosition = -1;
-    bool endOfFile = false;
-    bool songFound = false;
-    size_t artistLength = strlen(songArtist.c_str());
-    size_t titleLength = strlen(songTitle.c_str());
-    int numChars = 0;
+  while (!endOfFile && !songFound) {
+    char line[256];
 
-    while( !endOfFile && !songFound ) {
-         char line[256];
-
-         ofs.getline( line, 256 );
-         if( strncmp(line, songArtist.c_str(), artistLength) == 0 ) {
-             if( strncmp( &(line[artistLength+1]), songTitle.c_str(), titleLength ) == 0 ) {
-                 ofs.seekp( numChars, std::ios_base::beg ); // Seek back to the beginning of this line in the file.
-                 filePosition = numChars;
-                 songFound = true;
-                 const int YEAR_LENGTH_CHARS = 4;
-                 playCount = atoi( &line[artistLength+1+titleLength+1+YEAR_LENGTH_CHARS+1] );
-             }
-         }
-         numChars += (strlen(line)+1);
-         endOfFile = (ofs.tellg() == -1) || (ofs.tellg() >= fileSize);
+    ofs.getline(line, 256);
+    if (strncmp(line, songArtist.c_str(), artistLength) == 0) {
+      if (strncmp(&(line[artistLength + 1]), songTitle.c_str(), titleLength) ==
+          0) {
+        ofs.seekp(numChars, std::ios_base::beg);  // Seek back to the beginning
+                                                  // of this line in the file.
+        filePosition = numChars;
+        songFound = true;
+        const int YEAR_LENGTH_CHARS = 4;
+        playCount = atoi(
+            &line[artistLength + 1 + titleLength + 1 + YEAR_LENGTH_CHARS + 1]);
+      }
     }
+    numChars += (strlen(line) + 1);
+    endOfFile = (ofs.tellg() == -1) || (ofs.tellg() >= fileSize);
+  }
 
-    if(! songFound ) {
-        ofs.seekp( 0, std::ios_base::end ); // Seek to the end of the file to add the song there.
-        filePosition = ofs.tellp();
-    }
+  if (!songFound) {
+    ofs.seekp(0, std::ios_base::end);  // Seek to the end of the file to add the
+                                       // song there.
+    filePosition = ofs.tellp();
+  }
 
-    return filePosition;
+  return filePosition;
 }
 
 void SpotifyService::UpdatePlayCountFile(const QString& artist,
                                          const QString& title,
                                          const QString& year) {
-    int playCount = 0;
+  int playCount = 0;
 
-    qLog(Info) << "artist=" << artist << " title=" << title << " year=" << year;
+  qLog(Info) << "artist=" << artist << " title=" << title << " year=" << year;
+  char SpotifyPlayCountFileName[256];
 
-    char* userHomeDir = std::getenv("HOME");
-    char  SpotifyPlayCountFileName[256];
-    strncpy( SpotifyPlayCountFileName, userHomeDir, strlen(userHomeDir) );
-    strcat(SpotifyPlayCountFileName,"/SpotifyPlayCount.csv");
-    const int DEFAULT_WIDTH= 8;
-    std::fstream ofs(SpotifyPlayCountFileName, std::ios_base::in | std::ios_base::out);
-    if( !ofs ) {
-        ofs.open(SpotifyPlayCountFileName, std::ios_base::app);
-        ofs << "Artist"
-            << ","
-            << "Title"
-            << ","
-            << "Year"
-            << ","
-            << "Play Count" << std::endl; // Output headings for the file
-        ofs.flush();
-        ofs << artist.toStdString() << ","
-            << title.toStdString() << ","
-            << year.toStdString() << ","
-            << std::setw(DEFAULT_WIDTH) << std::left << ++playCount << std::endl;
-        ofs.flush();
-        ofs.close();
+  QSettings s;
+  s.beginGroup(SpotifyService::kSettingsGroup);
+
+  QByteArray tempArray =
+      s.value("folderDirectory", "").toString().toLocal8Bit();
+  char* currentDirectory = tempArray.data();
+
+  if (currentDirectory) {
+    currentDirectory = std::getenv("HOME");
+  }
+
+  strncpy(SpotifyPlayCountFileName, currentDirectory, strlen(currentDirectory));
+  strcat(SpotifyPlayCountFileName, "/SpotifyPlayCount.csv");
+  const int DEFAULT_WIDTH = 8;
+  std::fstream ofs(SpotifyPlayCountFileName,
+                   std::ios_base::in | std::ios_base::out);
+  if (!ofs) {
+    ofs.open(SpotifyPlayCountFileName, std::ios_base::app);
+    ofs << "Artist"
+        << ","
+        << "Title"
+        << ","
+        << "Year"
+        << ","
+        << "Play Count" << std::endl;  // Output headings for the file
+    ofs.flush();
+    ofs << artist.toStdString() << "," << title.toStdString() << ","
+        << year.toStdString() << "," << std::setw(DEFAULT_WIDTH) << std::left
+        << ++playCount << std::endl;
+    ofs.flush();
+    ofs.close();
+  } else {
+    ofs.seekp(0, std::ios_base::beg);
+
+    // Try to see if the song is in the "PlayCountFile".
+    int filePosition = this->SongIsInPlayCountFile(
+        ofs, artist.toStdString(), title.toStdString(), year.toStdString(),
+        playCount);
+    if (filePosition > 0) {
+      // Seek to the position in the file where the song is located, or the end
+      // of the file.
+      ofs.seekp(filePosition, std::ios_base::beg);
     }
-    else {
-        ofs.seekp(0,std::ios_base::beg);
+    ofs << artist.toStdString() << "," << title.toStdString() << ","
+        << year.toStdString() << "," << std::setw(DEFAULT_WIDTH) << std::left
+        << ++playCount << std::endl;
 
-        // Try to see if the song is in the "PlayCountFile".
-        int filePosition = this->SongIsInPlayCountFile(ofs,
-                                                       artist.toStdString(),
-                                                       title.toStdString(),
-                                                       year.toStdString(),
-                                                       playCount);
-        if( filePosition > 0) {
-            // Seek to the position in the file where the song is located, or the end of the file.
-            ofs.seekp(filePosition, std::ios_base::beg);
-        }
-        ofs << artist.toStdString() << ","
-            << title.toStdString() << ","
-            << year.toStdString() << ","
-            << std::setw(DEFAULT_WIDTH) << std::left << ++playCount << std::endl;
+    ofs.seekp(0, std::ios_base::end);
 
-        ofs.seekp(0,std::ios_base::end);
+    ofs.flush();
+    ofs.close();
+  }
 
-        ofs.flush();
-        ofs.close();
-    }
-
-    return;
+  return;
 }
 
 void SpotifyService::AddCurrentSongToUserPlaylist(QAction* action) {
@@ -511,9 +518,8 @@ void SpotifyService::PlaylistsUpdated(const pb::spotify::Playlists& response) {
 
   // Create starred and inbox playlists if they're not here already
   if (!search_) {
-    search_ =
-        new QStandardItem(IconLoader::Load("edit-find", IconLoader::Base), 
-                          tr("Search results"));
+    search_ = new QStandardItem(IconLoader::Load("edit-find", IconLoader::Base),
+                                tr("Search results"));
     search_->setToolTip(
         tr("Start typing something on the search box above to "
            "fill this search results list"));
@@ -529,8 +535,8 @@ void SpotifyService::PlaylistsUpdated(const pb::spotify::Playlists& response) {
                       InternetModel::Role_PlayBehaviour);
     starred_->setData(true, InternetModel::Role_CanBeModified);
 
-    inbox_ = new QStandardItem(IconLoader::Load("mail-message", 
-                               IconLoader::Base), tr("Inbox"));
+    inbox_ = new QStandardItem(
+        IconLoader::Load("mail-message", IconLoader::Base), tr("Inbox"));
     inbox_->setData(Type_InboxPlaylist, InternetModel::Role_Type);
     inbox_->setData(true, InternetModel::Role_CanLazyLoad);
     inbox_->setData(InternetModel::PlayBehaviour_MultipleItems,
@@ -708,7 +714,6 @@ void SpotifyService::SongFromProtobuf(const pb::spotify::Track& track,
   song->set_mtime(0);
   song->set_ctime(0);
   song->set_filesize(0);
-
 }
 
 QList<QAction*> SpotifyService::playlistitem_actions(const Song& song) {
@@ -727,9 +732,9 @@ QList<QAction*> SpotifyService::playlistitem_actions(const Song& song) {
   playlistitem_actions_.append(add_to_starred);
 
   // Create a menu with 'add to playlist' actions for each Spotify playlist
-  QAction* add_to_playlists = new QAction(IconLoader::Load("list-add", 
-                                          IconLoader::Base),
-                                          tr("Add to Spotify playlists"), this);
+  QAction* add_to_playlists =
+      new QAction(IconLoader::Load("list-add", IconLoader::Base),
+                  tr("Add to Spotify playlists"), this);
   QMenu* playlists_menu = new QMenu();
   for (const QStandardItem* playlist_item : playlists_) {
     if (!playlist_item->data(InternetModel::Role_CanBeModified).toBool()) {
@@ -753,8 +758,8 @@ QList<QAction*> SpotifyService::playlistitem_actions(const Song& song) {
   current_song_url_ = song.url();
 
   SpotifyService::current_song_ = song;
-  qLog(Debug) << "playlistitem_actions: " << SpotifyService::current_song_.PrettyTitleWithArtist();
-
+  qLog(Debug) << "playlistitem_actions: "
+              << SpotifyService::current_song_.PrettyTitleWithArtist();
 
   return playlistitem_actions_;
 }
@@ -778,7 +783,7 @@ void SpotifyService::EnsureMenuCreated() {
   playlist_context_menu_->addActions(GetPlaylistActions());
   playlist_context_menu_->addSeparator();
   playlist_sync_action_ = playlist_context_menu_->addAction(
-      IconLoader::Load("view-refresh", IconLoader::Base), 
+      IconLoader::Load("view-refresh", IconLoader::Base),
       tr("Make playlist available offline"), this, SLOT(SyncPlaylist()));
   get_url_to_share_playlist_ = playlist_context_menu_->addAction(
       tr("Get a URL to share this playlist"), this,
@@ -790,9 +795,8 @@ void SpotifyService::EnsureMenuCreated() {
   song_context_menu_->addActions(GetPlaylistActions());
   song_context_menu_->addSeparator();
   remove_from_playlist_ = song_context_menu_->addAction(
-      IconLoader::Load("list-remove", IconLoader::Base), 
-      tr("Remove from playlist"), this,
-      SLOT(RemoveCurrentFromPlaylist()));
+      IconLoader::Load("list-remove", IconLoader::Base),
+      tr("Remove from playlist"), this, SLOT(RemoveCurrentFromPlaylist()));
   song_context_menu_->addAction(tr("Get a URL to share this Spotify song"),
                                 this, SLOT(GetCurrentSongUrlToShare()));
   song_context_menu_->addSeparator();
@@ -960,10 +964,10 @@ void SpotifyService::ItemDoubleClicked(QStandardItem* item) {}
 
 void SpotifyService::DropMimeData(const QMimeData* data,
                                   const QModelIndex& index) {
-
   QModelIndex playlist_root_index = index;
   QVariant q_playlist_type = playlist_root_index.data(InternetModel::Role_Type);
-  if (!q_playlist_type.isValid() || q_playlist_type.toInt() == InternetModel::Type_Track) {
+  if (!q_playlist_type.isValid() ||
+      q_playlist_type.toInt() == InternetModel::Type_Track) {
     // In case song was dropped on a playlist item, not on the playlist
     // title/root element
     playlist_root_index = index.parent();
@@ -976,7 +980,8 @@ void SpotifyService::DropMimeData(const QMimeData* data,
   if (playlist_type == Type_StarredPlaylist) {
     AddSongsToStarred(data->urls());
   } else if (playlist_type == InternetModel::Type_UserPlaylist) {
-    QVariant q_playlist_index = playlist_root_index.data(Role_UserPlaylistIndex);
+    QVariant q_playlist_index =
+        playlist_root_index.data(Role_UserPlaylistIndex);
     if (!q_playlist_index.isValid()) return;
     AddSongsToUserPlaylist(q_playlist_index.toInt(), data->urls());
   }
@@ -1028,8 +1033,7 @@ void SpotifyService::SyncPlaylistProgress(
 }
 
 QAction* SpotifyService::GetNewShowConfigAction() {
-  QAction* action = new QAction(IconLoader::Load("configure", 
-                                IconLoader::Base),
+  QAction* action = new QAction(IconLoader::Load("configure", IconLoader::Base),
                                 tr("Configure Spotify..."), this);
   connect(action, SIGNAL(triggered()), this, SLOT(ShowConfig()));
   return action;

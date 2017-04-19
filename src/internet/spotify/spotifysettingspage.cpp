@@ -26,6 +26,7 @@
 #include <QNetworkRequest>
 #include <QSettings>
 #include <QtDebug>
+#include <QFileDialog>
 
 #include "config.h"
 #include "spotifymessages.pb.h"
@@ -48,9 +49,13 @@ SpotifySettingsPage::SpotifySettingsPage(SettingsDialog* dialog)
   ui_->blob_status->setFont(bold_font);
 
   connect(ui_->download_blob, SIGNAL(clicked()), SLOT(DownloadBlob()));
+  connect(ui_->spotifySongTracking, SIGNAL(clicked()),
+          SLOT(spotifySongTracking()));
   connect(ui_->login, SIGNAL(clicked()), SLOT(Login()));
   connect(ui_->login_state, SIGNAL(LogoutClicked()), SLOT(Logout()));
   connect(ui_->login_state, SIGNAL(LoginClicked()), SLOT(Login()));
+  connect(ui_->login_state, SIGNAL(LoginClicked()), SLOT(Login()));
+  connect(ui_->openFolder, SIGNAL(clicked()), SLOT(openFolder()));
 
   connect(service_, SIGNAL(LoginFinished(bool)), SLOT(LoginFinished(bool)));
   connect(service_, SIGNAL(BlobStateChanged()), SLOT(BlobStateChanged()));
@@ -113,7 +118,7 @@ void SpotifySettingsPage::Load() {
       s.value("volume_normalisation", false).toBool());
   ui_->spotifySongTracking->setChecked(
       s.value("spotifySongTracking", false).toBool());
-
+  ui_->folderDirectory->setText(s.value("folderDirectory", "").toString());
   UpdateLoginState();
 }
 
@@ -128,6 +133,7 @@ void SpotifySettingsPage::Save() {
              ui_->bitrate->itemData(ui_->bitrate->currentIndex()).toInt());
   s.setValue("volume_normalisation", ui_->volume_normalisation->isChecked());
   s.setValue("spotifySongTracking", ui_->spotifySongTracking->isChecked());
+  s.setValue("folderDirectory", ui_->folderDirectory->text());
 }
 
 void SpotifySettingsPage::LoginFinished(bool success) {
@@ -135,6 +141,23 @@ void SpotifySettingsPage::LoginFinished(bool success) {
 
   Save();
   UpdateLoginState();
+}
+
+void SpotifySettingsPage::on_openFolder_clicked() {
+  QString directory = QFileDialog::getExistingDirectory(
+      this, tr("Open Directory"), "/home",
+      QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
+  ui_->folderDirectory->setText(directory);
+}
+
+void SpotifySettingsPage::on_spotifySongTracking_toggled(bool toggled) {
+  if (toggled) {
+    ui_->openFolder->setEnabled(true);
+    ui_->folderDirectory->setEnabled(true);
+  } else {
+    ui_->openFolder->setEnabled(false);
+    ui_->folderDirectory->setEnabled(false);
+  }
 }
 
 void SpotifySettingsPage::UpdateLoginState() {

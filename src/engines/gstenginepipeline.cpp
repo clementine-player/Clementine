@@ -1061,26 +1061,27 @@ QFuture<GstStateChangeReturn> GstEnginePipeline::SetState(GstState state) {
 
     // Update the playcount if we are playing again.
     if (state == GST_STATE_PLAYING && current_state != GST_STATE_PAUSED) {
-        SpotifyService* spotify = InternetModel::Service<SpotifyService>();
+      SpotifyService* spotify = InternetModel::Service<SpotifyService>();
 
-        // Invoke the "UpdatePlayCountFile" method in the SpotifyService class (via the
-        // spotify object).
+      // Invoke the "UpdatePlayCountFile" method in the SpotifyService class
+      // (via the
+      // spotify object).
 
-        qLog(Info) << "artist=" << engine_->GetMetaDataBundle().artist
-                   << " title=" << engine_->GetMetaDataBundle().title
-                   << " year=" << engine_->GetMetaDataBundle().year;
+      qLog(Info) << "artist=" << engine_->GetMetaDataBundle().artist
+                 << " title=" << engine_->GetMetaDataBundle().title
+                 << " year=" << engine_->GetMetaDataBundle().year;
 
-        QSettings s;
-        s.beginGroup(SpotifyService::kSettingsGroup);
+      QSettings s;
+      s.beginGroup(SpotifyService::kSettingsGroup);
 
-        if(s.value("spotifySongTracking").toBool()){
-        QMetaObject::invokeMethod(spotify, "UpdatePlayCountFile", Qt::QueuedConnection,
-                                  Q_ARG(const QString&, engine_->GetMetaDataBundle().artist),
-                                  Q_ARG(const QString&, engine_->GetMetaDataBundle().title),
-                                  Q_ARG(const QString&, engine_->GetMetaDataBundle().year));
-        }
+      if (s.value("spotifySongTracking").toBool()) {
+        QMetaObject::invokeMethod(
+            spotify, "UpdatePlayCountFile", Qt::QueuedConnection,
+            Q_ARG(const QString&, engine_->GetMetaDataBundle().artist),
+            Q_ARG(const QString&, engine_->GetMetaDataBundle().title),
+            Q_ARG(const QString&, engine_->GetMetaDataBundle().year));
+      }
     }
-
   }
 
   return ConcurrentRun::Run<GstStateChangeReturn, GstElement*, GstState>(
