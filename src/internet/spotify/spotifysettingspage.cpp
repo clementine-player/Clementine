@@ -153,10 +153,8 @@ void SpotifySettingsPage::on_openFolder_clicked() {
 void SpotifySettingsPage::on_spotifySongTracking_toggled(bool toggled) {
   if (toggled) {
     ui_->openFolder->setEnabled(true);
-    ui_->folderDirectory->setEnabled(true);
   } else {
     ui_->openFolder->setEnabled(false);
-    ui_->folderDirectory->setEnabled(false);
   }
 }
 
