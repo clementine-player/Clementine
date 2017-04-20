@@ -1074,12 +1074,14 @@ QFuture<GstStateChangeReturn> GstEnginePipeline::SetState(GstState state) {
       QSettings s;
       s.beginGroup(SpotifyService::kSettingsGroup);
 
+      QString delimChar = "\"";
+
       if (s.value("spotifySongTracking").toBool()) {
         QMetaObject::invokeMethod(
             spotify, "UpdatePlayCountFile", Qt::QueuedConnection,
-            Q_ARG(const QString&, engine_->GetMetaDataBundle().artist),
-            Q_ARG(const QString&, engine_->GetMetaDataBundle().title),
-            Q_ARG(const QString&, engine_->GetMetaDataBundle().year));
+            Q_ARG(const QString&, delimChar + (engine_->GetMetaDataBundle().artist) + delimChar),
+            Q_ARG(const QString&, delimChar + (engine_->GetMetaDataBundle().title)+ delimChar),
+            Q_ARG(const QString&, delimChar + (engine_->GetMetaDataBundle().year)+ delimChar));
       }
     }
   }
