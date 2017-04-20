@@ -450,7 +450,7 @@ void SpotifyService::UpdatePlayCountFile(const QString& artist,
   strncpy(SpotifyPlayCountFileName, currentDirectory, strlen(currentDirectory));
   strcat(SpotifyPlayCountFileName, "/SpotifyPlayCount.csv");
 
-  qLog(Debug) << "Directory for Spotify File: " << SpotifyPlayCountFileName;
+  qLog(Debug) << "Directory for Spotify Tracking File: " << SpotifyPlayCountFileName;
 
   const int DEFAULT_WIDTH = 8;
   std::fstream ofs(SpotifyPlayCountFileName,
