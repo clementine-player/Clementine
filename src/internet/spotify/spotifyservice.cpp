@@ -395,6 +395,7 @@ int SpotifyService::SongIsInPlayCountFile(std::fstream& ofs,
   bool songFound = false;
   size_t artistLength = strlen(songArtist.c_str());
   size_t titleLength = strlen(songTitle.c_str());
+  size_t yearLength = strlen(songTitle.c_str());
   int numChars = 0;
 
   while (!endOfFile && !songFound) {
@@ -408,10 +409,9 @@ int SpotifyService::SongIsInPlayCountFile(std::fstream& ofs,
                                                   // of this line in the file.
         filePosition = numChars;
         songFound = true;
-        const int YEAR_LENGTH_CHARS =
-            4 + 2;  // Length + length of quote at end and begining of year
-        playCount = atoi(
-            &line[artistLength + 1 + titleLength + 1 + YEAR_LENGTH_CHARS + 1]);
+        playCount =
+            strtol(&line[artistLength + 1 + titleLength + 1 + yearLength + 1],
+                   nullptr, 10);
       }
     }
     numChars += (strlen(line) + 1);
@@ -455,13 +455,13 @@ void SpotifyService::UpdatePlayCountFile(const QString& artist,
                    std::ios_base::in | std::ios_base::out);
   if (!ofs) {
     ofs.open(SpotifyPlayCountFileName, std::ios_base::app);
-    ofs << "Artist"
+    ofs << "\"Artist\""
         << ","
-        << "Title"
+        << "\"Title\""
         << ","
-        << "Year"
+        << "\"Year\""
         << ","
-        << "Play Count" << std::endl;  // Output headings for the file
+        << "\"Play Count\"" << std::endl;  // Output headings for the file
     ofs.flush();
   } else {
     ofs.seekp(0, std::ios_base::beg);
@@ -475,14 +475,14 @@ void SpotifyService::UpdatePlayCountFile(const QString& artist,
       // of the file.
       ofs.seekp(filePosition, std::ios_base::beg);
     }
-
-    ofs << artist.toStdString() << "," << title.toStdString() << ","
-        << year.toStdString() << "," << std::setw(DEFAULT_WIDTH) << std::left
-        << ++playCount << std::endl;
-
-    ofs.flush();
-    ofs.close();
   }
+
+  ofs << artist.toStdString() << "," << title.toStdString() << ","
+      << year.toStdString() << "," << std::setw(DEFAULT_WIDTH) << std::left
+      << ++playCount << std::endl;
+
+  ofs.flush();
+  ofs.close();
 }
 
 void SpotifyService::AddCurrentSongToUserPlaylist(QAction* action) {
