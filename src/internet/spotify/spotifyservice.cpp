@@ -463,11 +463,6 @@ void SpotifyService::UpdatePlayCountFile(const QString& artist,
         << ","
         << "Play Count" << std::endl;  // Output headings for the file
     ofs.flush();
-    ofs << artist.toStdString() << "," << title.toStdString() << ","
-        << year.toStdString() << "," << std::setw(DEFAULT_WIDTH) << std::left
-        << ++playCount << std::endl;
-    ofs.flush();
-    ofs.close();
   } else {
     ofs.seekp(0, std::ios_base::beg);
 
@@ -480,11 +475,10 @@ void SpotifyService::UpdatePlayCountFile(const QString& artist,
       // of the file.
       ofs.seekp(filePosition, std::ios_base::beg);
     }
+
     ofs << artist.toStdString() << "," << title.toStdString() << ","
         << year.toStdString() << "," << std::setw(DEFAULT_WIDTH) << std::left
         << ++playCount << std::endl;
-
-    ofs.seekp(0, std::ios_base::end);
 
     ofs.flush();
     ofs.close();
