@@ -1079,9 +1079,13 @@ QFuture<GstStateChangeReturn> GstEnginePipeline::SetState(GstState state) {
       if (s.value("spotifySongTracking").toBool()) {
         QMetaObject::invokeMethod(
             spotify, "UpdatePlayCountFile", Qt::QueuedConnection,
-            Q_ARG(const QString&, delimChar + (engine_->GetMetaDataBundle().artist) + delimChar),
-            Q_ARG(const QString&, delimChar + (engine_->GetMetaDataBundle().title)+ delimChar),
-            Q_ARG(const QString&, delimChar + (engine_->GetMetaDataBundle().year)+ delimChar));
+            Q_ARG(
+                const QString&,
+                delimChar + (engine_->GetMetaDataBundle().artist) + delimChar),
+            Q_ARG(const QString&,
+                  delimChar + (engine_->GetMetaDataBundle().title) + delimChar),
+            Q_ARG(const QString&,
+                  delimChar + (engine_->GetMetaDataBundle().year) + delimChar));
       }
     }
   }
