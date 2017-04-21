@@ -377,114 +377,93 @@ void SpotifyService::InstallBlob() {
 
 void SpotifyService::BlobDownloadFinished() { EnsureServerCreated(); }
 
-int SpotifyService::SongIsInPlayCountFile(std::fstream& ofs,
-                                          const std::string& songArtist,
-                                          const std::string& songTitle,
-                                          const std::string& songYear,
-                                          int& playCount) const {
+void SpotifyService::SeekToSongInPlayCountFile(QFile& file,
+                                               QTextStream& fileStream,
+                                               const QString& songArtist,
+                                               const QString& songTitle,
+                                               const QString& songYear,
+                                               qint64& playCount) const {
   playCount = 0;
-
-  // Get the size of the file in bytes.
-  ofs.seekp(0, std::ios_base::end);
-  int fileSize = ofs.tellp();
-  ofs.seekp(0, std::ios_base::beg);
+  fileStream.seek(0);
 
   // Initialize local variables.
-  int filePosition = -1;
-  bool endOfFile = false;
   bool songFound = false;
-  size_t artistLength = strlen(songArtist.c_str());
-  size_t titleLength = strlen(songTitle.c_str());
-  size_t yearLength = strlen(songTitle.c_str());
+  size_t artistLength = songArtist.length();
+  size_t titleLength = songTitle.length();
+  size_t yearLength = songYear.length();
   int numChars = 0;
 
-  while (!endOfFile && !songFound) {
-    char line[256];
-
-    ofs.getline(line, 256);
-    if (strncmp(line, songArtist.c_str(), artistLength) == 0) {
-      if (strncmp(&(line[artistLength + 1]), songTitle.c_str(), titleLength) ==
-          0) {
-        ofs.seekp(numChars, std::ios_base::beg);  // Seek back to the beginning
-                                                  // of this line in the file.
-        filePosition = numChars;
-        songFound = true;
-        playCount =
-            strtol(&line[artistLength + 1 + titleLength + 1 + yearLength + 1],
-                   nullptr, 10);
+  while (!fileStream.atEnd() && !songFound) {
+    QString buffer;
+    buffer = fileStream.readLine();
+    if (buffer.left(artistLength).compare(songArtist) == 0) {
+      if (buffer.mid(artistLength + 1, titleLength).compare(songTitle) == 0) {
+        if (buffer.mid(artistLength + 1 + titleLength + 1, yearLength)
+                .compare(songYear) == 0) {
+          fileStream.seek(numChars);  // Seek back to the beginning of this line
+                                      // in the file.
+          songFound = true;
+          playCount = buffer.mid(artistLength + 1 + titleLength + 1 +
+                                 yearLength + 1).toInt();
+        }
       }
     }
-    numChars += (strlen(line) + 1);
-    endOfFile = (ofs.tellg() == -1) || (ofs.tellg() >= fileSize);
+    numChars += (buffer.size() + 1);
   }
 
   if (!songFound) {
-    ofs.seekp(0, std::ios_base::end);  // Seek to the end of the file to add the
-                                       // song there.
-    filePosition = ofs.tellp();
+    fileStream.reset();  // Seek to the end of the file to add the song there.
   }
-
-  return filePosition;
 }
 
 void SpotifyService::UpdatePlayCountFile(const QString& artist,
                                          const QString& title,
                                          const QString& year) {
-  int playCount = 0;
+  qint64 playCount = 0;
 
   qLog(Info) << "artist=" << artist << " title=" << title << " year=" << year;
-  char SpotifyPlayCountFileName[256];
-  const char* currentDirectory;
+
+  QString SpotifyPlayCountFileName;
 
   QSettings s;
   s.beginGroup(SpotifyService::kSettingsGroup);
   QString storedDirectory = s.value("folderDirectory", "").toString();
 
   if (storedDirectory.length() == 0) {
-    currentDirectory = std::getenv("HOME");
+    SpotifyPlayCountFileName = QString::fromStdString(std::getenv("HOME"));
   } else {
-    QByteArray tempArray = storedDirectory.toLocal8Bit();
-    currentDirectory = tempArray.data();
+    SpotifyPlayCountFileName += storedDirectory;
   }
 
-  strncpy(SpotifyPlayCountFileName, currentDirectory, strlen(currentDirectory));
-  strcat(SpotifyPlayCountFileName, "/SpotifyPlayCount.csv");
+  SpotifyPlayCountFileName += QString("/SpotifyPlayCount.csv");
 
-  qLog(Debug) << "Directory for Spotify Tracking File: " << SpotifyPlayCountFileName;
+  qLog(Debug) << "Directory for Spotify Tracking File: "
+              << SpotifyPlayCountFileName;
 
-  const int DEFAULT_WIDTH = 8;
-  std::fstream ofs(SpotifyPlayCountFileName,
-                   std::ios_base::in | std::ios_base::out);
-  if (!ofs) {
-    ofs.open(SpotifyPlayCountFileName, std::ios_base::app);
-    ofs << "\"Artist\""
-        << ","
-        << "\"Title\""
-        << ","
-        << "\"Year\""
-        << ","
-        << "\"Play Count\"" << std::endl;  // Output headings for the file
-    ofs.flush();
-  } else {
-    ofs.seekp(0, std::ios_base::beg);
+  QFile file(SpotifyPlayCountFileName);
+  file.open((QIODevice::ReadWrite | QIODevice::Text));
+  QTextStream fileStream(&file);
 
-    // Try to see if the song is in the "PlayCountFile".
-    int filePosition = this->SongIsInPlayCountFile(
-        ofs, artist.toStdString(), title.toStdString(), year.toStdString(),
-        playCount);
-    if (filePosition > 0) {
-      // Seek to the position in the file where the song is located, or the end
-      // of the file.
-      ofs.seekp(filePosition, std::ios_base::beg);
-    }
+  if (file.size() == 0) {
+    // Output headings for the file
+    fileStream << "\"Artist\""
+               << ","
+               << "\"Title\""
+               << ","
+               << "\"Year\""
+               << ","
+               << "\"Play Count\"" << '\n';
+    fileStream.flush();
   }
 
-  ofs << artist.toStdString() << "," << title.toStdString() << ","
-      << year.toStdString() << "," << std::setw(DEFAULT_WIDTH) << std::left
-      << ++playCount << std::endl;
+  // Seek to song in "PlayCountFile".
+  this->SeekToSongInPlayCountFile(file, fileStream, artist, title, year,
+                                  playCount);
 
-  ofs.flush();
-  ofs.close();
+  fileStream << artist << "," << title << "," << year << "," << ++playCount
+             << '\n';
+  fileStream.flush();
+  file.close();
 }
 
 void SpotifyService::AddCurrentSongToUserPlaylist(QAction* action) {

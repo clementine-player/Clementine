@@ -128,9 +128,11 @@ signals:
   void ClearSearchResults();
   QStandardItem* PlaylistBySpotifyIndex(int index) const;
   bool DoPlaylistsDiffer(const pb::spotify::Playlists& response) const;
-  int SongIsInPlayCountFile(std::fstream& ofs, const std::string& songArtist,
-                            const std::string& songTitle,
-                            const std::string& songYear, int& playCount) const;
+  void SeekToSongInPlayCountFile(QFile& file, QTextStream& fileStream,
+                                 const QString& songArtist,
+                                 const QString& songTitle,
+                                 const QString& songYear,
+                                 qint64& playCount) const;
   void SetMetaData(const Engine::SimpleMetaBundle& bundle);
 
  private slots:
