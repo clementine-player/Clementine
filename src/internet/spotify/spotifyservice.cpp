@@ -384,7 +384,7 @@ void SpotifyService::SeekToSongInPlayCountFile(QFile& file,
                                                const QString& songYear,
                                                qint64& playCount) const {
   playCount = 0;
-  fileStream.seek(0);
+  fileStream.seek(0);  // Go to beginning of file.
 
   // Initialize local variables.
   bool songFound = false;
@@ -393,6 +393,7 @@ void SpotifyService::SeekToSongInPlayCountFile(QFile& file,
   size_t yearLength = songYear.length();
   int numChars = 0;
 
+  //+1's to skip over commas.
   while (!fileStream.atEnd() && !songFound) {
     QString buffer;
     buffer = fileStream.readLine();
@@ -408,7 +409,7 @@ void SpotifyService::SeekToSongInPlayCountFile(QFile& file,
         }
       }
     }
-    numChars += (buffer.size() + 1);
+    numChars += (buffer.size() + 1);  //+1 to go to next line.
   }
 
   if (!songFound) {
@@ -425,10 +426,12 @@ void SpotifyService::UpdatePlayCountFile(const QString& artist,
 
   QString SpotifyPlayCountFileName;
 
+  // Retrieve user-specified directory.
   QSettings s;
   s.beginGroup(SpotifyService::kSettingsGroup);
   QString storedDirectory = s.value("folderDirectory", "").toString();
 
+  // If user doesn't specifiy directory -- automatically use Home directory.
   if (storedDirectory.length() == 0) {
     SpotifyPlayCountFileName = QString::fromStdString(std::getenv("HOME"));
   } else {
