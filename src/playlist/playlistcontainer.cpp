@@ -67,10 +67,10 @@ PlaylistContainer::PlaylistContainer(QWidget* parent)
   no_matches_palette.setColor(QPalette::Inactive, QPalette::WindowText,
                               no_matches_color);
   no_matches_label_->setPalette(no_matches_palette);
-  
+
   // Remove QFrame border
   ui_->toolbar->setStyleSheet("QFrame { border: 0px; }");
-  
+
   // Make it bold
   QFont no_matches_font = no_matches_label_->font();
   no_matches_font.setBold(true);
@@ -273,9 +273,7 @@ void PlaylistContainer::PlaylistAdded(int id, const QString& name,
   }
 }
 
-void PlaylistContainer::Started() {
-    starting_up_ = false;
-}
+void PlaylistContainer::Started() { starting_up_ = false; }
 
 void PlaylistContainer::PlaylistClosed(int id) {
   ui_->tab_bar->RemoveTab(id);
@@ -436,7 +434,6 @@ bool PlaylistContainer::eventFilter(QObject* objectWatched, QEvent* event) {
     if (event->type() == QEvent::KeyPress) {
       QKeyEvent* e = static_cast<QKeyEvent*>(event);
       switch (e->key()) {
-        case Qt::Key_Up:
         case Qt::Key_Down:
         case Qt::Key_PageUp:
         case Qt::Key_PageDown:
