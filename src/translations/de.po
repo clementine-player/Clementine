@@ -29,6 +29,7 @@
 # janlaymann <janlaymann@googlemail.com>, 2012
 # jonas.mue <jonas.mue@gmail.com>, 2013
 # jonas.mue <jonas.mue@gmail.com>, 2013
+# happykraut, 2017
 # Konrad <ko.heidler@gmail.com>, 2015
 # Lenzitsch <lenz.furrer@gmail.com>, 2013
 # Lenzitsch <lenz.furrer@gmail.com>, 2012
@@ -61,8 +62,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2017-01-13 18:29+0000\n"
-"Last-Translator: Ettore Atalan <atalanttore@googlemail.com>\n"
+"PO-Revision-Date: 2017-04-15 14:06+0000\n"
+"Last-Translator: happykraut\n"
 "Language-Team: German (http://www.transifex.com/davidsansome/clementine/language/de/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1505,7 +1506,7 @@ msgstr "GStreamer-Element »%1« konnte nicht erstellt werden. Stellen Sie siche
 #: songinfo/streamdiscoverer.cpp:97
 #, qt-format
 msgid "Could not detect an audio stream in %1"
-msgstr ""
+msgstr "Konnte keinen Audiostream in %1 entdecken"
 
 #: songinfo/streamdiscoverer.cpp:123
 msgid "Could not get details"
@@ -2127,7 +2128,7 @@ msgstr "Äquivalent zu --log-levels *:3"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:246
 #: library/libraryview.cpp:639 ui/mainwindow.cpp:2070 ui/mainwindow.cpp:2320
-#: ui/mainwindow.cpp:2466
+#: ui/mainwindow.cpp:2479
 msgid "Error"
 msgstr "Fehler"
 
@@ -2150,11 +2151,11 @@ msgstr "Fehler beim Löschen der Titel"
 #: songinfo/streamdiscoverer.cpp:56
 #, qt-format
 msgid "Error discovering %1: %2"
-msgstr ""
+msgstr "Fehlern beim Finden von %1: %2"
 
 #: internet/spotify/spotifyblobdownloader.cpp:260
 msgid "Error downloading Spotify plugin"
-msgstr "Fehler beim herunterladen der Spotify-Erweiterung"
+msgstr "Fehler beim Herunterladen der Spotify-Erweiterung"
 
 #: playlist/songloaderinserter.cpp:64
 #, qt-format
@@ -2984,7 +2985,7 @@ msgstr "Bibliothek"
 msgid "Library advanced grouping"
 msgstr "Erweiterte Bibliothekssortierung"
 
-#: ui/mainwindow.cpp:2566
+#: ui/mainwindow.cpp:2579
 msgid "Library rescan notice"
 msgstr "Hinweis beim erneuten durchsuchen der Bibliothek"
 
@@ -3249,7 +3250,7 @@ msgstr "Mindestpufferfüllung"
 
 #: songinfo/streamdiscoverer.cpp:120
 msgid "Missing plugins"
-msgstr ""
+msgstr "Fehlende Plugins"
 
 #: visualisations/projectmvisualisation.cpp:131
 msgid "Missing projectM presets"
@@ -3310,7 +3311,7 @@ msgstr "Zur Bibliothek verschieben …"
 msgid "Move up"
 msgstr "Nach oben"
 
-#: transcoder/transcodedialog.cpp:225 ui/mainwindow.cpp:2016
+#: transcoder/transcodedialog.cpp:225 ui/mainwindow.cpp:2015
 msgid "Music"
 msgstr "Musik"
 
@@ -3435,7 +3436,7 @@ msgstr "Keine kurzen Blöcke"
 msgid "None"
 msgstr "Nichts"
 
-#: library/libraryview.cpp:640 ui/mainwindow.cpp:2321 ui/mainwindow.cpp:2467
+#: library/libraryview.cpp:640 ui/mainwindow.cpp:2321 ui/mainwindow.cpp:2480
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Keiner der gewählten Titel war zum Kopieren auf ein Gerät geeignet."
 
@@ -4997,7 +4998,7 @@ msgstr "Verzeichnis %1 ist ungültig"
 
 #: songinfo/streamdiscoverer.cpp:118
 msgid "The discoverer is busy"
-msgstr ""
+msgstr "Suche ist beschäftigt"
 
 #: smartplaylists/searchtermwidget.cpp:346
 msgid "The second value must be greater than the first one!"
@@ -5017,7 +5018,7 @@ msgid ""
 "license key. Visit subsonic.org for details."
 msgstr "Die Versuchsperiode für den Subsonic-Server ist abgelaufen. Bitte machen Sie eine Spende, um einen Lizenzschlüssel zu erhalten. Details finden sich auf subsonic.org."
 
-#: ui/mainwindow.cpp:2557
+#: ui/mainwindow.cpp:2570
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -5472,7 +5473,7 @@ msgstr "Ansicht"
 
 #: ../bin/src/ui_mainwindow.h:730
 msgid "View Stream Details"
-msgstr ""
+msgstr "Streamdetails"
 
 #: ../bin/src/ui_visualisationselector.h:108
 msgid "Visualization mode"
@@ -5610,7 +5611,7 @@ msgid ""
 "well?"
 msgstr "Möchten Sie die anderen Titel dieses Albums ebenfalls unter »Verschiedene Interpreten« anzeigen?"
 
-#: ui/mainwindow.cpp:2564
+#: ui/mainwindow.cpp:2577
 msgid "Would you like to run a full rescan right now?"
 msgstr "Möchten Sie jetzt Ihre Musiksammlung erneut einlesen?"
 
@@ -5812,7 +5813,7 @@ msgstr "zwischen"
 msgid "biggest first"
 msgstr "größte zuerst"
 
-#: playlist/playlistview.cpp:242 ui/edittagdialog.cpp:500
+#: playlist/playlistview.cpp:240 ui/edittagdialog.cpp:500
 msgid "bpm"
 msgstr "BPM"
 
@@ -5865,7 +5866,7 @@ msgstr "in den letzten"
 
 #: internet/spotify/spotifysettingspage.cpp:62
 #: internet/spotify/spotifysettingspage.cpp:63
-#: internet/spotify/spotifysettingspage.cpp:64 playlist/playlistview.cpp:246
+#: internet/spotify/spotifysettingspage.cpp:64 playlist/playlistview.cpp:244
 #: ui/edittagdialog.cpp:502
 msgid "kbps"
 msgstr "Kb/s"
