@@ -414,7 +414,6 @@ void SpotifyService::SeekToSongInPlayCountFile(QFile& fileStream,
         fileStream
             .size());  // Seek to the end of the file to add the song there.
   } else {
-    playCount++;
     textStream.seek(seekCount);
   }
 }
@@ -466,7 +465,7 @@ void SpotifyService::UpdatePlayCountFile(const QString& artist,
 
   QString output;
   QTextStream(&output) << artist << "," << title << "," << year << ","
-                       << playCount << '\n';
+                       << playCount+1 << '\n';
 
   qint64 prevPosition = textStream.pos();
 
