@@ -377,43 +377,45 @@ void SpotifyService::InstallBlob() {
 
 void SpotifyService::BlobDownloadFinished() { EnsureServerCreated(); }
 
-void SpotifyService::SeekToSongInPlayCountFile(QFile& file,
-                                               QTextStream& fileStream,
+void SpotifyService::SeekToSongInPlayCountFile(QFile& fileStream,
+                                               QTextStream& textStream,
                                                const QString& songArtist,
                                                const QString& songTitle,
                                                const QString& songYear,
                                                qint64& playCount) const {
   playCount = 0;
-  fileStream.seek(0);  // Go to beginning of file.
+  textStream.seek(0);  // Go to beginning of file.
 
   // Initialize local variables.
   bool songFound = false;
   size_t artistLength = songArtist.length();
   size_t titleLength = songTitle.length();
   size_t yearLength = songYear.length();
-  int numChars = 0;
+  int seekCount = 0;
 
   //+1's to skip over commas.
-  while (!fileStream.atEnd() && !songFound) {
+  while (!textStream.atEnd() && !songFound) {
     QString buffer;
-    buffer = fileStream.readLine();
+    seekCount = textStream.pos();
+    buffer = textStream.readLine();
     if (buffer.left(artistLength).compare(songArtist) == 0) {
       if (buffer.mid(artistLength + 1, titleLength).compare(songTitle) == 0) {
         if (buffer.mid(artistLength + 1 + titleLength + 1, yearLength)
                 .compare(songYear) == 0) {
-          fileStream.seek(numChars);  // Seek back to the beginning of this line
-                                      // in the file.
           songFound = true;
           playCount = buffer.mid(artistLength + 1 + titleLength + 1 +
                                  yearLength + 1).toInt();
         }
       }
     }
-    numChars += (buffer.size() + 1);  //+1 to go to next line.
   }
-
   if (!songFound) {
-    fileStream.reset();  // Seek to the end of the file to add the song there.
+    textStream.seek(
+        fileStream
+            .size());  // Seek to the end of the file to add the song there.
+  } else {
+    playCount++;
+    textStream.seek(seekCount);
   }
 }
 
@@ -443,30 +445,44 @@ void SpotifyService::UpdatePlayCountFile(const QString& artist,
   qLog(Debug) << "Directory for Spotify Tracking File: "
               << SpotifyPlayCountFileName;
 
-  QFile file(SpotifyPlayCountFileName);
-  file.open((QIODevice::ReadWrite | QIODevice::Text));
-  QTextStream fileStream(&file);
+  QFile fileStream(SpotifyPlayCountFileName);
+  fileStream.open((QIODevice::ReadWrite | QIODevice::Text));
+  QTextStream textStream(&fileStream);
 
-  if (file.size() == 0) {
+  if (fileStream.size() == 0) {
     // Output headings for the file
-    fileStream << "\"Artist\""
+    textStream << "\"Artist\""
                << ","
                << "\"Title\""
                << ","
                << "\"Year\""
                << ","
                << "\"Play Count\"" << '\n';
-    fileStream.flush();
+    textStream.flush();
   }
 
-  // Seek to song in "PlayCountFile".
-  this->SeekToSongInPlayCountFile(file, fileStream, artist, title, year,
+  this->SeekToSongInPlayCountFile(fileStream, textStream, artist, title, year,
                                   playCount);
 
-  fileStream << artist << "," << title << "," << year << "," << ++playCount
-             << '\n';
-  fileStream.flush();
-  file.close();
+  QString output;
+  QTextStream(&output) << artist << "," << title << "," << year << ","
+                       << playCount << '\n';
+
+  qint64 prevPosition = textStream.pos();
+
+  textStream.readLine();  // Skip to line after to store contents after the
+                          // string we want to replace.
+
+  QString tempFile;
+  tempFile = textStream.read(fileStream.size());  // Store the rest of the file
+                                                  // so we don't overwrite the
+                                                  // next line when replacing
+                                                  // the previous line.
+
+  textStream.seek(prevPosition);
+  textStream << output << tempFile;
+  textStream.flush();
+  fileStream.close();
 }
 
 void SpotifyService::AddCurrentSongToUserPlaylist(QAction* action) {

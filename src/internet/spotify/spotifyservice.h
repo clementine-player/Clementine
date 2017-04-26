@@ -128,7 +128,7 @@ signals:
   void ClearSearchResults();
   QStandardItem* PlaylistBySpotifyIndex(int index) const;
   bool DoPlaylistsDiffer(const pb::spotify::Playlists& response) const;
-  void SeekToSongInPlayCountFile(QFile& file, QTextStream& fileStream,
+  void SeekToSongInPlayCountFile(QFile& fileStream, QTextStream& textStream,
                                  const QString& songArtist,
                                  const QString& songTitle,
                                  const QString& songYear,
