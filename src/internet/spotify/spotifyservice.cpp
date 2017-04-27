@@ -472,8 +472,7 @@ void SpotifyService::UpdatePlayCountFile(const QString& artist,
   textStream.readLine();  // Skip to line after to store contents after the
                           // string we want to replace.
 
-  QString tempFile;
-  tempFile = textStream.read(fileStream.size());  // Store the rest of the file
+  QString tempFile = textStream.read(fileStream.size());  // Store the rest of the file
                                                   // so we don't overwrite the
                                                   // next line when replacing
                                                   // the previous line.
