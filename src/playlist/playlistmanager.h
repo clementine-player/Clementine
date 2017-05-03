@@ -225,6 +225,8 @@ class PlaylistManager : public PlaylistManagerInterface {
   // Removes items with given indices from the playlist. This operation is not
   // undoable.
   void RemoveItemsWithoutUndo(int id, const QList<int>& indices);
+  // Remove the current playing song
+  void RemoveCurrentSong();
 
  private slots:
   void SetActivePlaying();
