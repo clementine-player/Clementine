@@ -36,7 +36,7 @@ void IconLoader::Init() {
 }
 
 QIcon IconLoader::Load(const QString& name, const IconType& icontype) {
-
+   
   QIcon ret;
   // If the icon name is empty
   if (name.isEmpty()) {
@@ -46,8 +46,29 @@ QIcon IconLoader::Load(const QString& name, const IconType& icontype) {
 
   // Set the icon load location based on IConType
   switch (icontype) {
-  case Base: case Provider:
-    break;
+  case Base: case Provider: {
+    const QString custom_icon_location = custom_icon_path_
+        + icon_sub_path_.at(icontype);
+    if (QDir(custom_icon_location).exists()) {
+      // Try to load icons from the custom icon location initially
+      const QString locate(custom_icon_location + "/%1x%2/%3.png");
+      for (int size : sizes_) {
+        QString filename_custom(locate.arg(size).arg(size).arg(name));
+
+        if (QFile::exists(filename_custom)) ret.addFile(filename_custom,
+                                                        QSize(size, size));
+      }
+      if (!ret.isNull()) return ret;
+    }
+
+    // Otherwise use our fallback theme
+    const QString path(":" + icon_sub_path_.at(icontype) + "/%1x%2/%3.png");
+    for (int size : sizes_) {
+      QString filename(path.arg(size).arg(size).arg(name));
+
+      if (QFile::exists(filename)) ret.addFile(filename, QSize(size, size));
+    }
+  }
 
   case Lastfm: case Other: {
     // lastfm icons location
@@ -62,55 +83,27 @@ QIcon IconLoader::Load(const QString& name, const IconType& icontype) {
       if (!ret.isNull()) return ret;
     }
 
-#if QT_VERSION >= 0x040600
-    // Then try to load it from the system theme
-    ret = QIcon::fromTheme(name);
-    if (!ret.isNull()) return ret;
-#endif
-
     // Otherwise use our fallback theme
     const QString path_file(":" + icon_sub_path_.at(icontype)
         + "/" + name + ".png");
 
     if (QFile::exists(path_file)) ret.addFile(path_file);
     if (ret.isNull()) qLog(Warning) << "Couldn't load icon" << name;
-    return ret;
   }
 
   default:
     // Should never be reached
     qLog(Warning) << "Couldn't recognize IconType" << name;
-    return ret;
   }
 
-  const QString custom_icon_location = custom_icon_path_
-      + icon_sub_path_.at(icontype);
-  if (QDir(custom_icon_location).exists()) {
-    // Try to load icons from the custom icon location initially
-    const QString locate(custom_icon_location + "/%1x%2/%3.png");
-    for (int size : sizes_) {
-      QString filename_custom(locate.arg(size).arg(size).arg(name));
-      
-      if (QFile::exists(filename_custom)) ret.addFile(filename_custom,
-                                                      QSize(size, size));
-    }
-    if (!ret.isNull()) return ret;
-  }
-
+    // Load icon from system theme only if it hasn't been found
+  if (ret.isNull()) {
 #if QT_VERSION >= 0x040600
-  // Then try to load it from the system theme
-  ret = QIcon::fromTheme(name);
-  if (!ret.isNull()) return ret;
+    ret = QIcon::fromTheme(name);
+    if (!ret.isNull()) return ret;
 #endif
-
-  // Otherwise use our fallback theme
-  const QString path(":" + icon_sub_path_.at(icontype) + "/%1x%2/%3.png");
-  for (int size : sizes_) {
-    QString filename(path.arg(size).arg(size).arg(name));
-
-    if (QFile::exists(filename)) ret.addFile(filename, QSize(size, size));
   }
+  else qLog(Warning) << "Couldn't load icon" << name;
 
-  if (ret.isNull()) qLog(Warning) << "Couldn't load icon" << name;
   return ret;
 }
