@@ -54,8 +54,8 @@ MagnatuneDownloadDialog::MagnatuneDownloadDialog(MagnatuneService* service,
 
   setWindowIcon(IconLoader::Load("magnatune", IconLoader::Provider));
 
-  ui_->albums->header()->setResizeMode(QHeaderView::ResizeToContents);
-  ui_->albums->header()->setResizeMode(1, QHeaderView::Fixed);
+  ui_->albums->header()->setSectionResizeMode(QHeaderView::ResizeToContents);
+  ui_->albums->header()->setSectionResizeMode(1, QHeaderView::Fixed);
   ui_->albums->header()->resizeSection(1, 150);
   ui_->albums->setItemDelegateForColumn(1, new ProgressItemDelegate(this));
 

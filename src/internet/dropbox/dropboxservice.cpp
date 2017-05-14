@@ -52,8 +52,6 @@ static const char* kListFolderEndpoint =
     "https://api.dropboxapi.com/2/files/list_folder";
 static const char* kListFolderContinueEndpoint =
     "https://api.dropboxapi.com/2/files/list_folder/continue";
-static const char* kLongPollEndpoint =
-    "https://notify.dropboxapi.com/2/files/list_folder/longpoll";
 
 }  // namespace
 
@@ -156,8 +154,8 @@ void DropboxService::RequestFileListFinished(QNetworkReply* reply) {
   QJsonArray contents = json_response["entries"].toArray();
   qLog(Debug) << "Delta found:" << contents.size();
   for (const QJsonValue& c : contents) {
-    QJsonArray item = c.toArray();
-    QString path = item[0].toString();
+    QVariantMap item = c.toObject().toVariantMap();
+    QString path = item["path_lower"].toString();
 
     QUrl url;
     url.setScheme("dropbox");
@@ -172,8 +170,7 @@ void DropboxService::RequestFileListFinished(QNetworkReply* reply) {
       continue;
     }
 
-    QJsonObject metadata = item[1].toObject();
-    if (metadata["is_dir"].toBool()) {
+    if (item[".tag"].toString() == "folder") {
       continue;
     }
 
@@ -189,7 +186,7 @@ void DropboxService::RequestFileListFinished(QNetworkReply* reply) {
 
     QSettings s;
     s.beginGroup(kSettingsGroup);
-    s.setValue("cursor", response["cursor"]);
+    s.setValue("cursor", json_response["cursor"].toVariant());
     RequestFileList();
   } else {
     // Long-poll wait for changes.
@@ -202,22 +199,30 @@ void DropboxService::LongPollDelta() {
     // Might have been signed out by the user.
     return;
   }
+
   QSettings s;
   s.beginGroup(kSettingsGroup);
+  QString cursor = s.value("cursor", "").toString();
 
-  QUrl request_url = QUrl(QString(kLongPollEndpoint));
-  QUrlQuery url_query;
-  if (s.contains("cursor")) {
-    url_query.addQueryItem("cursor", s.value("cursor").toString());
-    url_query.addQueryItem("timeout", 30);
+  if (cursor.isEmpty()) {
+    QUrl url = QUrl(QString(kListFolderEndpoint));
+    QUrlQuery url_query(url.query());
+
+    QJsonDocument json_document;
+    QJsonObject json_request_params;
+    json_request_params.insert("cursor", s.value("cursor").toString());
+    json_request_params.insert("timeout", 30);
+
+    QNetworkRequest request(url);
+    request.setRawHeader("Content-Type", "application/json; charset=utf-8");
+
+    json_document.setObject(json_request_params);
+    QByteArray post_params = json_document.toBinaryData();
+
+    QNetworkReply* reply = network_->post(request, post_params);
+    NewClosure(reply, SIGNAL(finished()), this,
+               SLOT(LongPollFinished(QNetworkReply*)), reply);
   }
-  request_url.setQuery(url_query);
-  QNetworkRequest request(request_url);
-  request.setRawHeader("Content-Type", "application/json; charset=utf-8");
-  QJson::Serializer serializer;
-  QNetworkReply* reply = network_->post(request, serializer.serialize(json));
-  NewClosure(reply, SIGNAL(finished()), this,
-             SLOT(LongPollFinished(QNetworkReply*)), reply);
 }
 
 void DropboxService::LongPollFinished(QNetworkReply* reply) {

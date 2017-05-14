@@ -106,10 +106,8 @@ void PodcastBackend::Unsubscribe(const Podcast& podcast) {
 void PodcastBackend::AddEpisodes(PodcastEpisodeList* episodes,
                                  QSqlDatabase* db) {
   QSqlQuery q(*db);
-  q.prepare("INSERT INTO podcast_episodes (" + PodcastEpisode::kColumnSpec +
-                  ")"
-                  " VALUES (" +
-                  PodcastEpisode::kBindSpec + ")");
+  q.prepare("INSERT INTO podcast_episodes (" + PodcastEpisode::kColumnSpec +")"
+            " VALUES (" + PodcastEpisode::kBindSpec + ")");
 
   for (auto it = episodes->begin(); it != episodes->end(); ++it) {
     it->BindToQuery(&q);
@@ -225,20 +223,21 @@ PodcastEpisodeList PodcastBackend::GetEpisodes(int podcast_id) {
   QSqlDatabase db(db_->Connect());
 
   QSqlQuery q(db);
+
   q.prepare("SELECT ROWID, " + PodcastEpisode::kColumnSpec +
                   " FROM podcast_episodes"
                   " WHERE podcast_id = :id"
                   " ORDER BY publication_date DESC");
-  q.bindValue(":db", podcast_id);
+  q.bindValue(":id", podcast_id);
+
   q.exec();
   if (db_->CheckErrors(q)) return ret;
-
   while (q.next()) {
     PodcastEpisode episode;
     episode.InitFromQuery(q);
     ret << episode;
   }
-
+  qLog(Info) << "# size:" << ret.size();
   return ret;
 }
 
@@ -252,7 +251,7 @@ PodcastEpisode PodcastBackend::GetEpisodeById(int id) {
   q.prepare("SELECT ROWID, " + PodcastEpisode::kColumnSpec +
                   " FROM podcast_episodes"
                   " WHERE ROWID = :id");
-  q.bindValue(":db", id);
+  q.bindValue(":id", id);
   q.exec();
   if (!db_->CheckErrors(q) && q.next()) {
     ret.InitFromQuery(q);

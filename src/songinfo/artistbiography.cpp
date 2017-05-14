@@ -17,9 +17,11 @@
 
 #include "artistbiography.h"
 
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QJsonArray>
+#include <QUrlQuery>
 #include <QLocale>
-
-#include <qjson/parser.h>
 
 #include "core/closure.h"
 #include "core/latch.h"
@@ -59,8 +61,9 @@ void ArtistBiography::FetchInfo(int id, const Song& metadata) {
   }
 
   QUrl url(kArtistBioUrl);
-  url.addQueryItem("artist", metadata.artist());
-  url.addQueryItem("lang", GetLocale());
+  QUrlQuery url_query(url.query());
+  url_query.addQueryItem("artist", metadata.artist());
+  url_query.addQueryItem("lang", GetLocale());
 
   qLog(Debug) << "Biography url: " << url;
 
@@ -70,11 +73,10 @@ void ArtistBiography::FetchInfo(int id, const Song& metadata) {
   NewClosure(reply, SIGNAL(finished()), [this, reply, id]() {
     reply->deleteLater();
 
-    QJson::Parser parser;
-    QVariantMap response = parser.parse(reply).toMap();
+    QJsonObject json_response = QJsonDocument::fromJson(reply->readAll()).object();
 
-    QString body = response["articleBody"].toString();
-    QString url = response["url"].toString();
+    QString body = json_response["articleBody"].toString();
+    QString url = json_response["url"].toString();
 
     CountdownLatch* latch = new CountdownLatch;
 
@@ -184,7 +186,9 @@ void ArtistBiography::FetchWikipediaImages(int id, const QString& wikipedia_url,
   QString wiki_title = QUrl::fromPercentEncoding(regex.cap(2).toUtf8());
   QString language = regex.cap(1);
   QUrl url(QString(kWikipediaImageListUrl).arg(language));
-  url.addQueryItem("titles", wiki_title);
+  QUrlQuery url_query;
+  url_query.addQueryItem("titles", wiki_title);
+  url.setQuery(url_query);
 
   qLog(Debug) << "Wikipedia images:" << url;
 
@@ -192,25 +196,25 @@ void ArtistBiography::FetchWikipediaImages(int id, const QString& wikipedia_url,
   QNetworkReply* reply = network_->get(request);
   NewClosure(reply, SIGNAL(finished()), [this, id, reply, language, latch]() {
     reply->deleteLater();
+    
+    QJsonObject json_response = QJsonDocument::fromJson(reply->readAll()).object();
 
-    QJson::Parser parser;
-    QVariantMap response = parser.parse(reply).toMap();
-
-    QStringList image_titles = ExtractImageTitles(response);
+    QStringList image_titles = ExtractImageTitles(json_response.toVariantMap());
 
     for (const QString& image_title : image_titles) {
       latch->Wait();
+      QUrlQuery url_query;
       QUrl url(QString(kWikipediaImageInfoUrl).arg(language));
-      url.addQueryItem("titles", image_title);
+      url_query.addQueryItem("titles", image_title);
+      url.setQuery(url_query);
       qLog(Debug) << "Image info:" << url;
 
       QNetworkRequest request(url);
       QNetworkReply* reply = network_->get(request);
       NewClosure(reply, SIGNAL(finished()), [this, id, reply, latch]() {
         reply->deleteLater();
-        QJson::Parser parser;
-        QVariantMap json = parser.parse(reply).toMap();
-        QUrl url = ExtractImageUrl(json);
+        QJsonObject json_response = QJsonDocument::fromJson(reply->readAll()).object();
+        QUrl url = ExtractImageUrl(json_response.toVariantMap());
         qLog(Debug) << "Found wikipedia image url:" << url;
         if (!url.isEmpty()) {
           emit ImageReady(id, url);
@@ -235,8 +239,10 @@ void ArtistBiography::FetchWikipediaArticle(int id,
   QString wiki_title = QUrl::fromPercentEncoding(regex.cap(2).toUtf8());
   QString language = regex.cap(1);
 
+  QUrlQuery url_query;
   QUrl url(QString(kWikipediaExtractUrl).arg(language));
-  url.addQueryItem("titles", wiki_title);
+  url_query.addQueryItem("titles", wiki_title);
+  url.setQuery(url_query);
   QNetworkRequest request(url);
   QNetworkReply* reply = network_->get(request);
 
@@ -246,9 +252,8 @@ void ArtistBiography::FetchWikipediaArticle(int id,
                                          wiki_title, latch]() {
     reply->deleteLater();
 
-    QJson::Parser parser;
-    QVariantMap json = parser.parse(reply).toMap();
-    QString html = ExtractExtract(json);
+    QJsonObject json_response = QJsonDocument::fromJson(reply->readAll()).object();
+    QString html = ExtractExtract(json_response.toVariantMap());
 
     CollapsibleInfoPane::Data data;
     data.id_ = wikipedia_url;

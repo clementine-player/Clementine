@@ -72,7 +72,7 @@ void OAuthenticator::StartAuthorisation(const QString& oauth_endpoint,
 
   url_query.addQueryItem("redirect_uri", redirect_url.toString());
   if (!scope.isEmpty()) {  // Empty scope is valid for Dropbox.
-    url.addQueryItem("scope", scope);
+    url_query.addQueryItem("scope", scope);
   }
 
   url.setQuery(url_query);

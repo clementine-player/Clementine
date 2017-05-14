@@ -20,6 +20,7 @@
 #include <QImage>
 #include <QVBoxLayout>
 #include <QXmlStreamWriter>
+#include <QUrlQuery>
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QJsonArray>
@@ -53,10 +54,12 @@ void SongkickConcerts::FetchInfo(int id, const Song& metadata) {
     emit Finished(id);
     return;
   }
-
+  QUrlQuery url_query;
   QUrl url(kSongkickArtistSearchUrl);
-  url.addQueryItem("apikey", kSongkickApiKey);
-  url.addQueryItem("query", metadata.artist());
+  
+  url_query.addQueryItem("apikey", kSongkickApiKey);
+  url_query.addQueryItem("query", metadata.artist());
+  url.setQuery(url_query);
 
   QNetworkRequest request(url);
   QNetworkReply* reply = network_.get(request);
@@ -69,11 +72,11 @@ void SongkickConcerts::ArtistSearchFinished(QNetworkReply* reply, int id) {
 
   QJsonObject json_response = QJsonDocument::fromJson(reply->readAll()).object();
 
-  QJsonObject json_results_page = json["resultsPage"].toObject();
+  QJsonObject json_results_page = json_response["resultsPage"].toObject();
   QJsonObject json_results = json_results_page["results"].toObject();
   QJsonArray json_artists = json_results["artist"].toArray();
 
-  if (artists.isEmpty()) {
+  if (json_artists.isEmpty()) {
     emit Finished(id);
     return;
   }
@@ -85,9 +88,11 @@ void SongkickConcerts::ArtistSearchFinished(QNetworkReply* reply, int id) {
 }
 
 void SongkickConcerts::FetchSongkickCalendar(const QString& artist_id, int id) {
+  QUrlQuery url_query;
   QUrl url(QString(kSongkickArtistCalendarUrl).arg(artist_id));
-  url.addQueryItem("per_page", "5");
-  url.addQueryItem("apikey", kSongkickApiKey);
+  url_query.addQueryItem("per_page", "5");
+  url_query.addQueryItem("apikey", kSongkickApiKey);
+  url.setQuery(url_query);
   qLog(Debug) << url;
   QNetworkReply* reply = network_.get(QNetworkRequest(url));
   NewClosure(reply, SIGNAL(finished()), this,

@@ -428,7 +428,7 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
   connect(ui_->action_remove_from_playlist, SIGNAL(triggered()),
           SLOT(PlaylistRemoveCurrent()));
   connect(ui_->action_toggle_show_sidebar, SIGNAL(toggled(bool)),
-          ui_->sidebar_layout, SLOT(setShown(bool)));
+          ui_->sidebar_layout, SLOT(setVisible(bool)));
   connect(ui_->action_edit_track, SIGNAL(triggered()), SLOT(EditTracks()));
   connect(ui_->action_renumber_tracks, SIGNAL(triggered()),
           SLOT(RenumberTracks()));
@@ -1070,7 +1070,7 @@ void MainWindow::ReloadSettings() {
       PlayBehaviour(s.value("menu_playmode", PlayBehaviour_IfStopped).toInt());
 
   bool show_sidebar = settings_.value("show_sidebar", true).toBool();
-  ui_->sidebar_layout->setShown(show_sidebar);
+  ui_->sidebar_layout->setVisible(show_sidebar);
   ui_->action_toggle_show_sidebar->setChecked(show_sidebar);
 }
 

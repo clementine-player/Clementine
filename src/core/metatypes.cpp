@@ -29,6 +29,7 @@
 #include "covers/albumcoverfetcher.h"
 #include "engines/enginebase.h"
 #include "engines/gstengine.h"
+#include "engines/gstenginepipeline.h"
 #include "globalsearch/searchprovider.h"
 #include "internet/core/geolocator.h"
 #include "internet/digitally/digitallyimportedclient.h"

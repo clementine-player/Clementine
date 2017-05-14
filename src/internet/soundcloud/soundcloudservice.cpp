@@ -295,11 +295,16 @@ void SoundCloudService::UserPlaylistsRetrieved(QNetworkReply* reply) {
 void SoundCloudService::UserFavoritesRetrieved(QNetworkReply* reply) {
   reply->deleteLater();
 
-  SongList songs = ExtractSongs(ExtractResult(reply));
-  // Fill results list
-  for (const Song& song : songs) {
-    QStandardItem* child = CreateSongItem(song);
-    user_favorites_->appendRow(child);
+  QJsonArray json_playlists = ExtractResult(reply).array();
+  for (const QJsonValue& playlist : json_playlists) {
+    QJsonObject json_playlist = playlist.toObject();
+
+    QStandardItem* playlist_item = CreatePlaylistItem(json_playlist["title"].toString());
+    SongList songs = ExtractSongs(json_playlist["tracks"].toArray());
+    for (const Song& song : songs) {
+      playlist_item->appendRow(CreateSongItem(song));
+    }
+    user_favorites_->appendRow(playlist_item);
   }
 }
 

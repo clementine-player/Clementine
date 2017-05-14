@@ -47,8 +47,6 @@
 #include "core/application.h"
 #include "core/closure.h"
 #include "core/logging.h"
-#include "core/modelfuturewatcher.h"
-#include "core/qhash_qurl.h"
 #include "core/tagreaderclient.h"
 #include "core/timeconstants.h"
 #include "internet/jamendo/jamendoplaylistitem.h"
@@ -418,20 +416,13 @@ void Playlist::SongSaveComplete(TagReaderReply* reply,
                                 const QPersistentModelIndex& index) {
   if (reply->is_successful() && index.isValid()) {
     QFuture<void> future = item_at(index.row())->BackgroundReload();
-    ModelFutureWatcher<void>* watcher =
-        new ModelFutureWatcher<void>(index, this);
-    watcher->setFuture(future);
-    connect(watcher, SIGNAL(finished()), SLOT(ItemReloadComplete()));
+    NewClosure(future, this, SLOT(ItemReloadComplete(QPersistentModelIndex)), index);
   }
 
   reply->deleteLater();
 }
 
-void Playlist::ItemReloadComplete() {
-  ModelFutureWatcher<void>* watcher =
-      static_cast<ModelFutureWatcher<void>*>(sender());
-  watcher->deleteLater();
-  const QPersistentModelIndex& index = watcher->index();
+void Playlist::ItemReloadComplete(const QPersistentModelIndex& index) {
   if (index.isValid()) {
     emit dataChanged(index, index);
     emit EditingFinished(index);
@@ -705,7 +696,7 @@ void Playlist::set_current_row(int i, bool is_stopping) {
 void Playlist::InsertDynamicItems(int count) {
   GeneratorInserter* inserter =
       new GeneratorInserter(task_manager_, library_, this);
-  connect(inserter, SIGNAL(Error(QString)), SIGNAL(LoadTracksError(QString)));
+  connect(inserter, SIGNAL(Error(QString)), SIGNAL(Error(QString)));
   connect(inserter, SIGNAL(PlayRequested(QModelIndex)),
           SIGNAL(PlayRequested(QModelIndex)));
 
@@ -833,7 +824,7 @@ bool Playlist::dropMimeData(const QMimeData* data, Qt::DropAction action,
   } else if (data->hasFormat(kCddaMimeType)) {
     SongLoaderInserter* inserter = new SongLoaderInserter(
         task_manager_, library_, backend_->app()->player());
-    connect(inserter, SIGNAL(Error(QString)), SIGNAL(LoadTracksError(QString)));
+    connect(inserter, SIGNAL(Error(QString)), SIGNAL(Error(QString)));
     inserter->LoadAudioCD(this, row, play_now, enqueue_now);
   } else if (data->hasUrls()) {
     // URL list dragged from the file list or some other app
@@ -847,7 +838,7 @@ void Playlist::InsertUrls(const QList<QUrl>& urls, int pos, bool play_now,
                           bool enqueue) {
   SongLoaderInserter* inserter = new SongLoaderInserter(
       task_manager_, library_, backend_->app()->player());
-  connect(inserter, SIGNAL(Error(QString)), SIGNAL(LoadTracksError(QString)));
+  connect(inserter, SIGNAL(Error(QString)), SIGNAL(Error(QString)));
 
   inserter->Load(this, pos, play_now, enqueue, urls);
 }
@@ -861,7 +852,7 @@ void Playlist::InsertSmartPlaylist(GeneratorPtr generator, int pos,
 
   GeneratorInserter* inserter =
       new GeneratorInserter(task_manager_, library_, this);
-  connect(inserter, SIGNAL(Error(QString)), SIGNAL(LoadTracksError(QString)));
+  connect(inserter, SIGNAL(Error(QString)), SIGNAL(Error(QString)));
 
   inserter->Load(this, pos, play_now, enqueue, generator);
 
@@ -1493,31 +1484,21 @@ void Playlist::Save() const {
                               dynamic_playlist_);
 }
 
-namespace {
-typedef QFutureWatcher<QList<PlaylistItemPtr>> PlaylistItemFutureWatcher;
-}
-
 void Playlist::Restore() {
   if (!backend_) return;
+  QFuture<QList<PlaylistItemPtr>> future = QtConcurrent::run(backend_, &PlaylistBackend::GetPlaylistItems, id_);
 
   items_.clear();
   virtual_items_.clear();
   library_items_by_id_.clear();
 
   cancel_restore_ = false;
-  QFuture<QList<PlaylistItemPtr>> future =
-      QtConcurrent::run(backend_, &PlaylistBackend::GetPlaylistItems, id_);
-  PlaylistItemFutureWatcher* watcher = new PlaylistItemFutureWatcher(this);
-  watcher->setFuture(future);
-  connect(watcher, SIGNAL(finished()), SLOT(ItemsLoaded()));
+  NewClosure(future, this, SLOT(ItemsLoaded(QFuture<PlaylistItemList>)), future);
+
 }
 
-void Playlist::ItemsLoaded() {
-  PlaylistItemFutureWatcher* watcher =
-      static_cast<PlaylistItemFutureWatcher*>(sender());
-  watcher->deleteLater();
-
-  PlaylistItemList items = watcher->future().result();
+void Playlist::ItemsLoaded(QFuture<PlaylistItemList> future) {
+  PlaylistItemList items = future.result();
 
   // backend returns empty elements for library items which it couldn't
   // match (because they got deleted); we don't need those

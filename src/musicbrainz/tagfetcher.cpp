@@ -20,16 +20,15 @@
 #include "acoustidclient.h"
 #include "chromaprinter.h"
 #include "musicbrainzclient.h"
+#include "core/closure.h"
 #include "core/timeconstants.h"
 
 #include <QFuture>
-#include <QFutureWatcher>
 #include <QUrl>
 #include <QtConcurrentMap>
 
 TagFetcher::TagFetcher(QObject* parent)
     : QObject(parent),
-      fingerprint_watcher_(nullptr),
       acoustid_client_(new AcoustidClient(this)),
       musicbrainz_client_(new MusicBrainzClient(this)) {
   connect(acoustid_client_, SIGNAL(Finished(int, QStringList)),
@@ -49,10 +48,8 @@ void TagFetcher::StartFetch(const SongList& songs) {
   songs_ = songs;
 
   QFuture<QString> future = QtConcurrent::mapped(songs_, GetFingerprint);
-  fingerprint_watcher_ = new QFutureWatcher<QString>(this);
-  fingerprint_watcher_->setFuture(future);
-  connect(fingerprint_watcher_, SIGNAL(resultReadyAt(int)),
-          SLOT(FingerprintFound(int)));
+  NewClosure(future, SIGNAL(resultReadyAt(QFuture<int>)), this, SLOT(FingerprintFound(QFuture<int>)), future);
+
 
   for (const Song& song : songs) {
     emit Progress(song, tr("Fingerprinting song"));
@@ -60,36 +57,15 @@ void TagFetcher::StartFetch(const SongList& songs) {
 }
 
 void TagFetcher::Cancel() {
-  if (fingerprint_watcher_) {
-    fingerprint_watcher_->cancel();
-
-    delete fingerprint_watcher_;
-    fingerprint_watcher_ = nullptr;
-  }
-
   acoustid_client_->CancelAll();
   musicbrainz_client_->CancelAll();
   songs_.clear();
 }
 
 void TagFetcher::FingerprintFound(int index) {
-  QFutureWatcher<QString>* watcher =
-      reinterpret_cast<QFutureWatcher<QString>*>(sender());
-  if (!watcher || index >= songs_.count()) {
-    return;
-  }
-
-  const QString fingerprint = watcher->resultAt(index);
   const Song& song = songs_[index];
 
-  if (fingerprint.isEmpty()) {
-    emit ResultAvailable(song, SongList());
-    return;
-  }
-
-  emit Progress(song, tr("Identifying song"));
-  acoustid_client_->Start(index, fingerprint,
-                          song.length_nanosec() / kNsecPerMsec);
+  emit ResultAvailable(song, SongList());
 }
 
 void TagFetcher::PuidsFound(int index, const QStringList& puid_list) {

@@ -134,20 +134,20 @@ void Podcast::add_episode(const PodcastEpisode& episode) {
 
 void Podcast::InitFromQuery(const QSqlQuery& query) {
   d->database_id_ = query.value(0).toInt();
-  d->url_ = QUrl::fromEncoded(query.value(1).toByteArray());
-  d->title_ = query.value(2).toString();
-  d->description_ = query.value(3).toString();
-  d->copyright_ = query.value(4).toString();
-  d->link_ = QUrl::fromEncoded(query.value(5).toByteArray());
-  d->image_url_large_ = QUrl::fromEncoded(query.value(6).toByteArray());
-  d->image_url_small_ = QUrl::fromEncoded(query.value(7).toByteArray());
-  d->author_ = query.value(8).toString();
-  d->owner_name_ = query.value(9).toString();
-  d->owner_email_ = query.value(10).toString();
-  d->last_updated_ = QDateTime::fromTime_t(query.value(11).toUInt());
-  d->last_update_error_ = query.value(12).toString();
+  d->url_ = QUrl::fromEncoded(query.value("url").toByteArray());
+  d->title_ = query.value("title").toString();
+  d->description_ = query.value("description").toString();
+  d->copyright_ = query.value("copyright").toString();
+  d->link_ = QUrl::fromEncoded(query.value("link").toByteArray());
+  d->image_url_large_ = QUrl::fromEncoded(query.value("image_url_large").toByteArray());
+  d->image_url_small_ = QUrl::fromEncoded(query.value("image_url_small").toByteArray());
+  d->author_ = query.value("author").toString();
+  d->owner_name_ = query.value("owner_name").toString();
+  d->owner_email_ = query.value("owner_email").toString();
+  d->last_updated_ = QDateTime::fromTime_t(query.value("last_updated").toUInt());
+  d->last_update_error_ = query.value("last_updated_error").toString();
 
-  QDataStream extra_stream(query.value(13).toByteArray());
+  QDataStream extra_stream(query.value("extra").toByteArray());
   extra_stream >> d->extra_;
 }
 

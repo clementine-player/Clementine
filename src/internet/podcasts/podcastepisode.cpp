@@ -138,29 +138,29 @@ void PodcastEpisode::set_extra(const QString& key, const QVariant& value) {
 
 void PodcastEpisode::InitFromQuery(const QSqlQuery& query) {
   d->database_id_ = query.value(0).toInt();
-  d->podcast_database_id_ = query.value(1).toInt();
-  d->title_ = query.value(2).toString();
-  d->description_ = query.value(3).toString();
-  d->author_ = query.value(4).toString();
-  d->publication_date_ = QDateTime::fromTime_t(query.value(5).toUInt());
-  d->duration_secs_ = query.value(6).toInt();
-  d->url_ = QUrl::fromEncoded(query.value(7).toByteArray());
-  d->listened_ = query.value(8).toBool();
+  d->podcast_database_id_ = query.value("podcast_id").toInt();
+  d->title_ = query.value("title").toString();
+  d->description_ = query.value("description").toString();
+  d->author_ = query.value("author").toString();
+  d->publication_date_ = QDateTime::fromTime_t(query.value("publication_date").toUInt());
+  d->duration_secs_ = query.value("duration_secs").toInt();
+  d->url_ = QUrl::fromEncoded(query.value("url").toByteArray());
+  d->listened_ = query.value("listened").toBool();
 
   // After setting QDateTime to invalid state, it's saved into database as time_t,
   // when this number std::numeric_limits<unsigned int>::max() (4294967295) is read back
   // from database, it creates a valid QDateTime.
   // So to make it behave consistently, this change is needed.
-  if (query.value(9).toUInt() == std::numeric_limits<unsigned int>::max()) {
+  if (query.value("listened_date").toUInt() == std::numeric_limits<unsigned int>::max()) {
     d->listened_date_ = QDateTime();
   } else {
-    d->listened_date_ = QDateTime::fromTime_t(query.value(9).toUInt());
+    d->listened_date_ = QDateTime::fromTime_t(query.value("listened_date").toUInt());
   }
 
-  d->downloaded_ = query.value(10).toBool();
-  d->local_url_ = QUrl::fromEncoded(query.value(11).toByteArray());
+  d->downloaded_ = query.value("downloaded").toBool();
+  d->local_url_ = QUrl::fromEncoded(query.value("local_url").toByteArray());
 
-  QDataStream extra_stream(query.value(12).toByteArray());
+  QDataStream extra_stream(query.value("extra").toByteArray());
   extra_stream >> d->extra_;
 }
 

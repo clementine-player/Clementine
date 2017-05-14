@@ -589,7 +589,7 @@ void SubsonicLibraryScanner::GetAlbum(const QString& id) {
   url.setQuery(url_query);
 
   if (service_->IsAmpache()) {
-    url.addQueryItem("ampache", "1");
+    url_query.addQueryItem("ampache", "1");
   }
   QNetworkReply* reply = service_->Send(url);
   NewClosure(reply, SIGNAL(finished()), this,

@@ -26,7 +26,7 @@ include_directories(${GLIB_INCLUDE_DIRS})
 include_directories(${LIBXML_INCLUDE_DIRS})
 include_directories(${GOBJECT_INCLUDE_DIRS})
 include_directories(${LIBPROJECTM_INCLUDE_DIRS})
-include_directories(${SINGLEAPPLICATION_INCLUDE_DIRS})
+include_directories(${QTSINGLEAPPLICATION_INCLUDE_DIRS})
 include_directories(${QTIOCOMPRESSOR_INCLUDE_DIRS})
 include_directories(${QXT_INCLUDE_DIRS})
 include_directories(${SHA2_INCLUDE_DIRS})
@@ -1181,12 +1181,6 @@ optional_source(HAVE_LIBPULSE
     engines/pulsedevicefinder.cpp
 )
 
-# Hack to add Clementine to the Unity system tray whitelist
-optional_source(LINUX
-  SOURCES core/ubuntuunityhack.cpp
-  HEADERS core/ubuntuunityhack.h
-)
-
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/config.h.in
                ${CMAKE_CURRENT_BINARY_DIR}/config.h)
 
@@ -1237,8 +1231,7 @@ target_link_libraries(clementine_lib
   ${GSTREAMER_APP_LIBRARIES}
   ${GSTREAMER_TAG_LIBRARIES}
   ${GSTREAMER_PBUTILS_LIBRARIES}
-  ${SINGLEAPPLICATION_LIBRARIES}
-  ${QTSINGLECOREAPPLICATION_LIBRARIES}
+  ${QTSINGLEAPPLICATION_LIBRARIES}
   ${QTIOCOMPRESSOR_LIBRARIES}
   ${CMAKE_THREAD_LIBS_INIT}
   ${SQLITE_LIBRARIES}
@@ -1343,7 +1336,7 @@ if (UNIX AND NOT APPLE)
   endif ()
 endif ()
 
-add_dependencies(clementine_lib singleapplication)
+add_dependencies(clementine_lib qtsingleapplication)
 
 
 ###############################################################################
