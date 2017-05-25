@@ -39,6 +39,7 @@ class IconLoader {
   static QList<int> sizes_;
   static QString custom_icon_path_;
   static QList<QString> icon_sub_path_;
+  static bool use_sys_icons_;
 };
 
 #endif  // ICONLOADER_H

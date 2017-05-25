@@ -19,13 +19,16 @@
 #include "iconloader.h"
 #include "core/logging.h"
 #include "core/utilities.h"
+#include "core/appearance.h"
 
 #include <QtDebug>
 #include <QDir>
+#include <QSettings>
 
 QList<int> IconLoader::sizes_;
 QString IconLoader::custom_icon_path_;
 QList<QString> IconLoader::icon_sub_path_;
+bool IconLoader::use_sys_icons_;
 
 void IconLoader::Init() {
   sizes_.clear();
@@ -33,10 +36,12 @@ void IconLoader::Init() {
   custom_icon_path_ = Utilities::GetConfigPath(Utilities::Path_Icons);
   icon_sub_path_.clear();
   icon_sub_path_ << "/icons" << "/providers" << "/last.fm" << "";
+  QSettings qsetts;
+  qsetts.beginGroup(Appearance::kSettingsGroup);
+  use_sys_icons_ = qsetts.value("b_use_sys_icons", false).toBool();
 }
 
 QIcon IconLoader::Load(const QString& name, const IconType& icontype) {
-   
   QIcon ret;
   // If the icon name is empty
   if (name.isEmpty()) {
