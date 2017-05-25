@@ -49,9 +49,17 @@ QIcon IconLoader::Load(const QString& name, const IconType& icontype) {
     return ret;
   }
 
+#if QT_VERSION >= 0x040600
+  if (use_sys_icons_) {
+    ret = QIcon::fromTheme(name);
+    if (!ret.isNull()) return ret;
+  }
+#endif
+
   // Set the icon load location based on IConType
   switch (icontype) {
-  case Base: case Provider: {
+  case Base:
+  case Provider: {
     const QString custom_icon_location = custom_icon_path_
         + icon_sub_path_.at(icontype);
     if (QDir(custom_icon_location).exists()) {
@@ -73,9 +81,11 @@ QIcon IconLoader::Load(const QString& name, const IconType& icontype) {
 
       if (QFile::exists(filename)) ret.addFile(filename, QSize(size, size));
     }
+    break;
   }
 
-  case Lastfm: case Other: {
+  case Lastfm:
+  case Other: {
     // lastfm icons location
     const QString custom_fm_other_icon_location = custom_icon_path_
         + icon_sub_path_.at(icontype);
@@ -93,7 +103,7 @@ QIcon IconLoader::Load(const QString& name, const IconType& icontype) {
         + "/" + name + ".png");
 
     if (QFile::exists(path_file)) ret.addFile(path_file);
-    if (ret.isNull()) qLog(Warning) << "Couldn't load icon" << name;
+    break;
   }
 
   default:
@@ -107,8 +117,8 @@ QIcon IconLoader::Load(const QString& name, const IconType& icontype) {
     ret = QIcon::fromTheme(name);
     if (!ret.isNull()) return ret;
 #endif
+    qLog(Warning) << "Couldn't load icon" << name;
   }
-  else qLog(Warning) << "Couldn't load icon" << name;
 
   return ret;
 }
