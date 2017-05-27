@@ -47,8 +47,6 @@ class NowPlayingWidget : public QWidget {
 
   static const char* kSettingsGroup;
   static const int kPadding;
-  static const int kGradientHead;
-  static const int kGradientTail;
   static const int kMaxCoverSize;
   static const int kBottomOffset;
   static const int kTopBorder;
