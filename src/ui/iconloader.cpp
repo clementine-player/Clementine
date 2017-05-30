@@ -17,9 +17,9 @@
 */
 
 #include "iconloader.h"
+#include "core/appearance.h"
 #include "core/logging.h"
 #include "core/utilities.h"
-#include "core/appearance.h"
 
 #include <QtDebug>
 #include <QDir>
@@ -36,9 +36,9 @@ void IconLoader::Init() {
   custom_icon_path_ = Utilities::GetConfigPath(Utilities::Path_Icons);
   icon_sub_path_.clear();
   icon_sub_path_ << "/icons" << "/providers" << "/last.fm" << "";
-  QSettings qsetts;
-  qsetts.beginGroup(Appearance::kSettingsGroup);
-  use_sys_icons_ = qsetts.value("b_use_sys_icons", false).toBool();
+  QSettings settings;
+  settings.beginGroup(Appearance::kSettingsGroup);
+  use_sys_icons_ = settings.value("b_use_sys_icons", false).toBool();
 }
 
 QIcon IconLoader::Load(const QString& name, const IconType& icontype) {
