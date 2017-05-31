@@ -79,6 +79,9 @@ GlobalShortcuts::GlobalShortcuts(QWidget* parent)
               SIGNAL(Love()));
   AddShortcut("ban_last_fm_scrobbling", tr("Ban (Last.fm scrobbling)"),
               SIGNAL(Ban()));
+  AddShortcut("remove_current_song_from_playlist",
+              tr("Remove current song from playlist"),
+              SIGNAL(RemoveCurrentSong()));
 
   AddRatingShortcut("rate_zero_star", tr("Rate the current song 0 stars"),
                     rating_signals_mapper_, 0);

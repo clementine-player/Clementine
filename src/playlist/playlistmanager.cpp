@@ -494,6 +494,10 @@ void PlaylistManager::RemoveItemsWithoutUndo(int id,
   playlists_[id].p->RemoveItemsWithoutUndo(indices);
 }
 
+void PlaylistManager::RemoveCurrentSong() {
+  active()->removeRows(active()->current_index().row(), 1);
+}
+
 void PlaylistManager::InvalidateDeletedSongs() {
   for (Playlist* playlist : GetAllPlaylists()) {
     playlist->InvalidateDeletedSongs();

@@ -848,6 +848,8 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
 
   connect(global_shortcuts_, SIGNAL(RateCurrentSong(int)),
           app_->playlist_manager(), SLOT(RateCurrentSong(int)));
+  connect(global_shortcuts_, SIGNAL(RemoveCurrentSong()),
+          app_->playlist_manager(), SLOT(RemoveCurrentSong()));
 
   // Fancy tabs
   connect(ui_->tabs, SIGNAL(ModeChanged(FancyTabWidget::Mode)),
