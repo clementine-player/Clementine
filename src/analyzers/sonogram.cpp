@@ -114,9 +114,8 @@ void Sonogram::analyze(QPainter& p, const Scope& s, bool new_frame) {
 }
 
 void Sonogram::transform(Scope& scope) {
-  float* front = static_cast<float*>(&scope.front());
-  fht_->power2(front);
-  fht_->scale(front, 1.0 / 256);
+  fht_->power2(scope.data());
+  fht_->scale(scope.data(), 1.0 / 256);
   scope.resize(fht_->size() / 2);
 }
 

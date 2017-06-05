@@ -87,7 +87,6 @@ void OAuthenticator::StartAuthorisation(const QString& oauth_endpoint,
 void OAuthenticator::RedirectArrived(LocalRedirectServer* server, QUrl url) {
   server->deleteLater();
   QUrl request_url = server->request_url();
-  qLog(Debug) << Q_FUNC_INFO << request_url;
   RequestAccessToken(QUrlQuery(request_url).queryItemValue("code").toUtf8(), url);
 }
 
@@ -146,12 +145,10 @@ void OAuthenticator::FetchAccessTokenFinished(QNetworkReply* reply) {
     return;
   }
 
-  QJsonObject json_result = json_document.object();
-  qLog(Debug) << json_result;
-
-  access_token_ = json_result["access_token"].toString();
-  refresh_token_ = json_result["refresh_token"].toString();
-  SetExpiryTime(json_result["expires_in"].toInt());
+  QJsonObject result = json_document.object();
+  access_token_ = result["access_token"].toString();
+  refresh_token_ = result["refresh_token"].toString();
+  SetExpiryTime(result["expires_in"].toInt());
 
   emit Finished();
 }

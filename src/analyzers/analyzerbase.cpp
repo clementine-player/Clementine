@@ -62,14 +62,13 @@ static const int sBarkBandCount = arraysize(sBarkBands);
 
 Analyzer::Base::Base(QWidget* parent, uint scopeSize)
     : QWidget(parent),
-      timeout_(40)  // msec
-      ,
+      timeout_(40),  // msec
       fht_(new FHT(scopeSize)),
       engine_(nullptr),
       lastScope_(512),
       new_frame_(false),
       is_playing_(false),
-      barkband_table_(QList<uint>()),
+      barkband_table_(),
       prev_color_index_(0),
       bands_(0),
       psychedelic_enabled_(false) {}
@@ -86,15 +85,17 @@ void Analyzer::Base::transform(Scope& scope) {
   // values
   // scope.resize( fht_->size() );
 
-  float* front = static_cast<float*>(&scope.front());
+  QVector<float> aux(fht_->size());
+  if (aux.size() >= scope.size()) {
+    qCopy(scope.begin(), scope.end(), aux.begin());
+  } else {
+    qCopy(scope.begin(), scope.begin() + aux.size(), aux.begin());
+  }
 
-  float* f = new float[fht_->size()];
-  fht_->copy(&f[0], front);
-  fht_->logSpectrum(front, &f[0]);
-  fht_->scale(front, 1.0 / 20);
+  fht_->logSpectrum(scope.data(), aux.data());
+  fht_->scale(scope.data(), 1.0 / 20);
 
   scope.resize(fht_->size() / 2);  // second half of values are rubbish
-  delete[] f;
 }
 
 void Analyzer::Base::paintEvent(QPaintEvent* e) {
@@ -202,7 +203,6 @@ void Analyzer::Base::updateBandSize(const int scopeSize) {
   bands_ = scopeSize;
 
   barkband_table_.clear();
-  barkband_table_.reserve(bands_ + 1);
 
   int barkband = 0;
   for (int i = 0; i < bands_ + 1; ++i) {
@@ -218,7 +218,7 @@ void Analyzer::Base::updateBandSize(const int scopeSize) {
 QColor Analyzer::Base::getPsychedelicColor(const Scope& scope,
                                            const int ampFactor,
                                            const int bias) {
-  if (scope.size() > barkband_table_.length()) {
+  if (scope.size() > barkband_table_.size()) {
     return palette().color(QPalette::Highlight);
   }
 
@@ -232,15 +232,12 @@ QColor Analyzer::Base::getPsychedelicColor(const Scope& scope,
   // Now divide the bark bands into thirds and compute their total amplitudes.
   double rgb[3]{};
   for (int i = 0; i < sBarkBandCount - 1; ++i) {
-    rgb[(i * 3) / sBarkBandCount] += bands[i] * bands[i];
+    rgb[(i * 3) / sBarkBandCount] += pow(bands[i], 2);
   }
 
   for (int i = 0; i < 3; ++i) {
     // bias colours for a threshold around normally amplified audio
-    rgb[i] = (int)((sqrt(rgb[i]) * ampFactor) + bias);
-    if (rgb[i] > 255) {
-      rgb[i] = 255;
-    }
+    rgb[i] = qMin(255, (int)((sqrt(rgb[i]) * ampFactor) + bias));
   }
 
   return QColor::fromRgb(rgb[0], rgb[1], rgb[2]);

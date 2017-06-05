@@ -40,7 +40,6 @@ void TurbineAnalyzer::analyze(QPainter& p, const Scope& scope, bool new_frame) {
     return;
   }
 
-  float h;
   const uint hd2 = height() / 2;
   const uint kMaxHeight = hd2 - 1;
 
@@ -55,13 +54,10 @@ void TurbineAnalyzer::analyze(QPainter& p, const Scope& scope, bool new_frame) {
   }
 
   for (uint i = 0, x = 0, y; i < bands_; ++i, x += kColumnWidth + 1) {
-    h = log10(scope_[i] * 256.0) * F_ * 0.5;
-
-    if (h > kMaxHeight) h = kMaxHeight;
+    float h = std::min(log10(scope_[i] * 256.0) * F_ * 0.5, kMaxHeight * 1.0);
 
     if (h > bar_height_[i]) {
       bar_height_[i] = h;
-
       if (h > peak_height_[i]) {
         peak_height_[i] = h;
         peak_speed_[i] = 0.01;
@@ -75,13 +71,11 @@ void TurbineAnalyzer::analyze(QPainter& p, const Scope& scope, bool new_frame) {
       }
 
     peak_handling:
-
       if (peak_height_[i] > 0.0) {
         peak_height_[i] -= peak_speed_[i];
         peak_speed_[i] *= F_peakSpeed_;  // 1.12
-
-        if (peak_height_[i] < bar_height_[i]) peak_height_[i] = bar_height_[i];
-        if (peak_height_[i] < 0.0) peak_height_[i] = 0.0;
+        peak_height_[i] =
+            std::max(0.0f, std::max(bar_height_[i], peak_height_[i]));
       }
     }
 

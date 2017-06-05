@@ -1197,7 +1197,6 @@ qt5_wrap_cpp(MOC ${HEADERS})
 qt5_wrap_ui(UIC ${UI})
 qt5_add_resources(QRC ${RESOURCES})
 
-
 add_pot(POT
   ${CMAKE_CURRENT_SOURCE_DIR}/translations/header
   ${CMAKE_CURRENT_SOURCE_DIR}/translations/translations.pot
