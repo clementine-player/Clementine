@@ -1441,7 +1441,6 @@ void MainWindow::UpdateTrackPosition() {
       float(app_->player()->engine()->position_nanosec()) / kNsecPerSec + 0.5);
   const int length = app_->player()->engine()->length_nanosec() / kNsecPerSec;
   const int scrobble_point = playlist->scrobble_point_nanosec() / kNsecPerSec;
-
   if (length <= 0) {
     // Probably a stream that we don't know the length of
     return;
@@ -1501,7 +1500,6 @@ void MainWindow::UpdateTrackPosition() {
 
 void MainWindow::UpdateTrackSliderPosition() {
   PlaylistItemPtr item(app_->player()->GetCurrentItem());
-
   const int slider_position = std::floor(
       float(app_->player()->engine()->position_nanosec()) / kNsecPerMsec);
   const int slider_length =

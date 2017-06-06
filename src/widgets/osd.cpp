@@ -160,6 +160,7 @@ void OSD::Paused() {
 
 void OSD::Stopped() {
   tray_icon_->ClearNowPlaying();
+
   if (ignore_next_stopped_) {
     ignore_next_stopped_ = false;
     return;

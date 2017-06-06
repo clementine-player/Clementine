@@ -47,6 +47,7 @@ class Base : public QObject {
 
   virtual void StartPreloading(const QUrl&, bool, qint64, qint64) {}
   virtual bool Play(quint64 offset_nanosec) = 0;
+  virtual bool Play(const SimpleMetaBundle &bundle, quint64 offset_nanosec) = 0;
   virtual void Stop(bool stop_after = false) = 0;
   virtual void Pause() = 0;
   virtual void Unpause() = 0;
@@ -79,6 +80,10 @@ class Base : public QObject {
   // should be passed in nanoseconds. 'end' can be negative, indicating that the
   // real length of 'u' stream is unknown.
   bool Play(const QUrl& u, TrackChangeFlags c, bool force_stop_at_end,
+            quint64 beginning_nanosec, qint64 end_nanosec);
+
+  bool Play(const SimpleMetaBundle &bundle,
+            const QUrl& u, TrackChangeFlags c, bool force_stop_at_end,
             quint64 beginning_nanosec, qint64 end_nanosec);
 
   void SetVolume(uint value);

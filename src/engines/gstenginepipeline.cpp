@@ -22,6 +22,7 @@
 #include <QPair>
 #include <QRegExp>
 #include <QUuid>
+#include <QSettings>
 
 #include "bufferconsumer.h"
 #include "config.h"
@@ -1057,7 +1058,42 @@ QFuture<GstStateChangeReturn> GstEnginePipeline::SetState(GstState state) {
       QMetaObject::invokeMethod(spotify, "SetPaused", Qt::QueuedConnection,
                                 Q_ARG(bool, false));
     }
+
+    // Update the playcount if we are playing again.
+    if (state == GST_STATE_PLAYING && current_state != GST_STATE_PAUSED) {
+      SpotifyService* spotify = InternetModel::Service<SpotifyService>();
+
+      // Invoke the "UpdatePlayCountFile" method in the SpotifyService class
+      // (via the
+      // spotify object).
+
+      qLog(Info) << "artist=" << engine_->GetMetaDataBundle().artist
+                 << " title=" << engine_->GetMetaDataBundle().title
+                 << " year=" << engine_->GetMetaDataBundle().year;
+
+      QSettings s;
+      s.beginGroup(SpotifyService::kSettingsGroup);
+
+      QString delimiter = "\"";
+
+      QString artist = engine_->GetMetaDataBundle().artist;
+      QString title = engine_->GetMetaDataBundle().title;
+      QString year = engine_->GetMetaDataBundle().year;
+
+      artist =
+          delimiter + artist.replace(delimiter, QString("\"\"")) + delimiter;
+      title = delimiter + title.replace(delimiter, QString("\"\"")) + delimiter;
+      year = delimiter + year.replace(delimiter, QString("\"\"")) + delimiter;
+
+      if (s.value("spotifySongTracking").toBool()) {
+        QMetaObject::invokeMethod(
+            spotify, "UpdatePlayCountFile", Qt::QueuedConnection,
+            Q_ARG(const QString&, artist), Q_ARG(const QString&, title),
+            Q_ARG(const QString&, year));
+      }
+    }
   }
+
   return ConcurrentRun::Run<GstStateChangeReturn, GstElement*, GstState>(
       &set_state_threadpool_, &gst_element_set_state, pipeline_, state);
 }

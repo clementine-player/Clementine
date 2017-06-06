@@ -20,7 +20,9 @@
    You should have received a copy of the GNU General Public License
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
-
+#include <fstream>
+#include <iostream>
+#include <iomanip>
 #include "spotifyservice.h"
 
 #include <QCoreApplication>
@@ -59,12 +61,12 @@
 #endif
 
 Q_DECLARE_METATYPE(QStandardItem*);
-
 const char* SpotifyService::kServiceName = "Spotify";
 const char* SpotifyService::kSettingsGroup = "Spotify";
 const char* SpotifyService::kBlobDownloadUrl =
     "https://spotify.clementine-player.org/";
 const int SpotifyService::kSearchDelayMsec = 400;
+Song SpotifyService::current_song_ = Song();
 
 SpotifyService::SpotifyService(Application* app, InternetModel* parent)
     : InternetService(kServiceName, app, parent, parent),
@@ -375,6 +377,112 @@ void SpotifyService::InstallBlob() {
 
 void SpotifyService::BlobDownloadFinished() { EnsureServerCreated(); }
 
+void SpotifyService::SeekToSongInPlayCountFile(QFile& fileStream,
+                                               QTextStream& textStream,
+                                               const QString& songArtist,
+                                               const QString& songTitle,
+                                               const QString& songYear,
+                                               qint64& playCount) const {
+  playCount = 0;
+  textStream.seek(0);  // Go to beginning of file.
+
+  // Initialize local variables.
+  bool songFound = false;
+  size_t artistLength = songArtist.length();
+  size_t titleLength = songTitle.length();
+  size_t yearLength = songYear.length();
+  int seekCount = 0;
+
+  //+1's to skip over commas.
+  while (!textStream.atEnd() && !songFound) {
+    QString buffer;
+    seekCount = textStream.pos();
+    buffer = textStream.readLine();
+    if (buffer.left(artistLength).compare(songArtist) == 0) {
+      if (buffer.mid(artistLength + 1, titleLength).compare(songTitle) == 0) {
+        if (buffer.mid(artistLength + 1 + titleLength + 1, yearLength)
+                .compare(songYear) == 0) {
+          songFound = true;
+          playCount = buffer.mid(artistLength + 1 + titleLength + 1 +
+                                 yearLength + 1).toInt();
+        }
+      }
+    }
+  }
+  if (!songFound) {
+    textStream.seek(
+        fileStream
+            .size());  // Seek to the end of the file to add the song there.
+  } else {
+    textStream.seek(seekCount);
+  }
+}
+
+void SpotifyService::UpdatePlayCountFile(const QString& artist,
+                                         const QString& title,
+                                         const QString& year) {
+  qint64 playCount = 0;
+
+  qLog(Info) << "artist=" << artist << " title=" << title << " year=" << year;
+
+  QString SpotifyPlayCountFileName;
+
+  // Retrieve user-specified directory.
+  QSettings s;
+  s.beginGroup(SpotifyService::kSettingsGroup);
+  QString storedDirectory = s.value("folderDirectory", "").toString();
+
+  // If user doesn't specifiy directory -- automatically use Home directory.
+  if (storedDirectory.length() == 0) {
+    SpotifyPlayCountFileName = QString::fromStdString(std::getenv("HOME"));
+  } else {
+    SpotifyPlayCountFileName += storedDirectory;
+  }
+
+  SpotifyPlayCountFileName += QString("/SpotifyPlayCount.csv");
+
+  qLog(Debug) << "Directory for Spotify Tracking File: "
+              << SpotifyPlayCountFileName;
+
+  QFile fileStream(SpotifyPlayCountFileName);
+  fileStream.open((QIODevice::ReadWrite | QIODevice::Text));
+  QTextStream textStream(&fileStream);
+
+  if (fileStream.size() == 0) {
+    // Output headings for the file
+    textStream << "\"Artist\""
+               << ","
+               << "\"Title\""
+               << ","
+               << "\"Year\""
+               << ","
+               << "\"Play Count\"" << '\n';
+    textStream.flush();
+  }
+
+  this->SeekToSongInPlayCountFile(fileStream, textStream, artist, title, year,
+                                  playCount);
+
+  QString output;
+  QTextStream(&output) << artist << "," << title << "," << year << ","
+                       << playCount+1 << '\n';
+
+  qint64 prevPosition = textStream.pos();
+
+  textStream.readLine();  // Skip to line after to store contents after the
+                          // string we want to replace.
+
+  QString tempFile = textStream.read(fileStream.size());  // Store the rest of the file
+                                                  // so we don't overwrite the
+                                                  // next line when replacing
+                                                  // the previous line.
+
+  textStream.seek(prevPosition);
+  textStream << output << tempFile;
+  textStream.flush();
+  fileStream.close();
+}
+
 void SpotifyService::AddCurrentSongToUserPlaylist(QAction* action) {
   int playlist_index = action->data().toInt();
   AddSongsToUserPlaylist(playlist_index, QList<QUrl>() << current_song_url_);
@@ -646,6 +754,10 @@ QList<QAction*> SpotifyService::playlistitem_actions(const Song& song) {
   // Keep in mind the current song URL
   current_song_url_ = song.url();
 
+  SpotifyService::current_song_ = song;
+  qLog(Debug) << "playlistitem_actions: "
+              << SpotifyService::current_song_.PrettyTitleWithArtist();
+
   return playlistitem_actions_;
 }
 
@@ -762,7 +874,6 @@ void SpotifyService::SearchResults(
     SongFromProtobuf(response.result(i), &song);
     songs << song;
   }
-
   qLog(Debug) << "Got" << songs.count() << "results";
 
   ClearSearchResults();
