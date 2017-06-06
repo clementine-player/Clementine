@@ -395,8 +395,8 @@ void Player::PlayAt(int index, Engine::TrackChangeFlags change,
     change |= Engine::SameAlbum;
   }
 
-  if (reshuffle) app_->playlist_manager()->active()->ReshuffleIndices();
   app_->playlist_manager()->active()->set_current_row(index);
+  if (reshuffle) app_->playlist_manager()->active()->ReshuffleIndices();
 
   if (app_->playlist_manager()->active()->current_row() == -1) {
     // Maybe index didn't exist in the playlist.
