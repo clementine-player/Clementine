@@ -111,6 +111,11 @@ void AppearanceSettingsPage::Load() {
   ui_->b_use_sys_icons->setChecked(s.value("b_use_sys_icons", false).toBool());
   s.endGroup();
 
+  // Menubar hide status settings
+  s.beginGroup("HideMenu");
+  ui_->menu_hide_status_checkbox->setChecked(s.value("hide-menu-status", false).toBool());
+  s.endGroup();
+
   // Playlist settings
   s.beginGroup(Playlist::kSettingsGroup);
   playlist_view_background_image_type_ =
@@ -171,6 +176,11 @@ void AppearanceSettingsPage::Save() {
     dialog()->appearance()->ResetToSystemDefaultTheme();
   }
   s.setValue("b_use_sys_icons", ui_->b_use_sys_icons->isChecked());
+  s.endGroup();
+
+  // Menubar hide status settings
+  s.beginGroup("HideMenu");
+  s.setValue("hide-menu-status", ui_->menu_hide_status_checkbox->isChecked());
   s.endGroup();
 
   // Playlist settings
