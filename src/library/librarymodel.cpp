@@ -73,6 +73,20 @@ static bool IsCompilationArtistNode(const LibraryItem* node) {
   return node == node->parent->compilation_artist_node_;
 }
 
+static bool HasAlbumGroupBy(LibraryModel::Grouping group)
+{
+	if(group.first == LibraryModel::GroupBy_Album){
+		return true;
+	}
+	if(group.second == LibraryModel::GroupBy_Album){
+		return true;
+	}
+	if(group.third == LibraryModel::GroupBy_Album){
+		return true;
+	}
+	return false;
+}
+
 LibraryModel::LibraryModel(LibraryBackend* backend, Application* app,
                            QObject* parent)
     : SimpleTreeModel<LibraryItem>(new LibraryItem(this), parent),
@@ -195,9 +209,9 @@ void LibraryModel::SongsDiscovered(const SongList& songs) {
       GroupBy type = group_by_[i];
       if (type == GroupBy_None) break;
 
-      // Special case: if the song is a compilation and the current GroupBy
-      // level is Artists, then we want the Various Artists node :(
-      if (IsArtistGroupBy(type) && song.is_compilation()) {
+      // Special case: if the song is a compilation, the current GroupBy
+      // level is Artists and Album GroupBy is used, then we want the Various Artists node :(
+      if (IsArtistGroupBy(type) && HasAlbumGroupBy(group_by_) && song.is_compilation()) {
         if (container->compilation_artist_node_ == nullptr)
           CreateCompilationArtistNode(true, container);
         container = container->compilation_artist_node_;
@@ -691,7 +705,7 @@ LibraryModel::QueryResult LibraryModel::RunQuery(LibraryItem* parent) {
   }
 
   // Artists GroupBy is special - we don't want compilation albums appearing
-  if (IsArtistGroupBy(child_type)) {
+  if (IsArtistGroupBy(child_type) && HasAlbumGroupBy(group_by_)) {
     // Add the special Various artists node
     if (show_various_artists_ && HasCompilations(q)) {
       result.create_va = true;
@@ -856,11 +870,16 @@ void LibraryModel::FilterQuery(GroupBy type, LibraryItem* item,
 
   switch (type) {
     case GroupBy_Artist:
-      if (IsCompilationArtistNode(item))
-        q->AddCompilationRequirement(true);
-      else {
-        // Don't duplicate compilations outside the Various artists node
-        q->AddCompilationRequirement(false);
+      // Don't use compilation artist node if Album GroupBy is not present
+      if(HasAlbumGroupBy(group_by_)){
+        if (IsCompilationArtistNode(item))
+          q->AddCompilationRequirement(true);
+        else {
+          // Don't duplicate compilations outside the Various artists node
+           q->AddCompilationRequirement(false);
+           q->AddWhere("artist", item->key);
+        }
+      }else{
         q->AddWhere("artist", item->key);
       }
       break;
@@ -901,11 +920,16 @@ void LibraryModel::FilterQuery(GroupBy type, LibraryItem* item,
       q->AddWhere("genre", item->key);
       break;
     case GroupBy_AlbumArtist:
-      if (IsCompilationArtistNode(item))
-        q->AddCompilationRequirement(true);
-      else {
-        // Don't duplicate compilations outside the Various artists node
-        q->AddCompilationRequirement(false);
+      // Don't use compilation artist node if Album GroupBy is not present
+      if(HasAlbumGroupBy(group_by_)){
+        if (IsCompilationArtistNode(item))
+          q->AddCompilationRequirement(true);
+        else {
+          // Don't duplicate compilations outside the Various artists node
+          q->AddCompilationRequirement(false);
+          q->AddWhere("effective_albumartist", item->key);
+        }
+      }else{
         q->AddWhere("effective_albumartist", item->key);
       }
       break;
@@ -1020,7 +1044,12 @@ LibraryItem* LibraryModel::ItemFromQuery(GroupBy type, bool signal,
     case GroupBy_None:
       item->metadata.InitFromQuery(row, true);
       item->key = item->metadata.title();
-      item->display_text = item->metadata.TitleWithCompilationArtist();
+      // Don't use compilation artist if Album GroupBy is not present
+      if(HasAlbumGroupBy(group_by_)){
+        item->display_text = item->metadata.TitleWithCompilationArtist();
+      }else{
+        item->display_text = item->metadata.PrettyTitle();
+      }
       item->sort_text = SortTextForSong(item->metadata);
       break;
   }
@@ -1113,7 +1142,12 @@ LibraryItem* LibraryModel::ItemFromSong(GroupBy type, bool signal,
     case GroupBy_None:
       item->metadata = s;
       item->key = s.title();
-      item->display_text = s.TitleWithCompilationArtist();
+      // Don't use compilation artist if Album GroupBy is not present
+      if(HasAlbumGroupBy(group_by_)){
+        item->display_text = item->metadata.TitleWithCompilationArtist();
+      }else{
+        item->display_text = item->metadata.PrettyTitle();
+      }
       item->sort_text = SortTextForSong(s);
       break;
   }
