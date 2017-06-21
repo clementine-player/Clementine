@@ -120,6 +120,9 @@ void QtSystemTrayIcon::SetupMenu(QAction* previous, QAction* play,
       menu_->addAction(stop->icon(), stop->text(), stop, SLOT(trigger()));
   action_stop_after_this_track_ = menu_->addAction(
       stop_after->icon(), stop_after->text(), stop_after, SLOT(trigger()));
+  action_stop_after_this_track_->setCheckable(true);
+  action_stop_after_this_track_->setChecked(stop_after->isChecked());
+
   menu_->addAction(next->icon(), next->text(), next, SLOT(trigger()));
 
   menu_->addSeparator();
@@ -198,6 +201,7 @@ void QtSystemTrayIcon::SetStopped() {
 
   action_stop_->setEnabled(false);
   action_stop_after_this_track_->setEnabled(false);
+  action_stop_after_this_track_->setChecked(false);
   action_play_pause_->setIcon(
       IconLoader::Load("media-playback-start", IconLoader::Base));
   action_play_pause_->setText(tr("Play"));
