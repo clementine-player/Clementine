@@ -105,7 +105,7 @@
     <urlFormat replace=" _@;\&quot;" with="_"/>
     <urlFormat replace="?" with="%3F"/>
     <extract>
-      <item begin="&lt;div class='lyricbox'&gt;" end="&lt;!--"/>
+      <item begin="&lt;div class='lyricbox'&gt;" end="&lt;div class='lyricsbreak'"/>
     </extract>
     <exclude>
       <item tag="&lt;div class='rtMatcher'&gt;"/>
