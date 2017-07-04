@@ -26,6 +26,7 @@
 
 #ifdef HAVE_DBUS
 #include "dbus/notification.h"
+#include "dbus/mpris2.h"
 #include <QCoreApplication>
 #include <QTextDocument>
 
@@ -85,9 +86,26 @@ void OSD::Init() {
   interface_.reset(new OrgFreedesktopNotificationsInterface(
       OrgFreedesktopNotificationsInterface::staticInterfaceName(),
       "/org/freedesktop/Notifications", QDBusConnection::sessionBus()));
-  if (!interface_->isValid()) {
+  if (!interface_ || !interface_->isValid()) {
     qLog(Warning) << "Error connecting to notifications service.";
+  } else {
+    capabilities_ = interface_->GetCapabilities();
+    connect(dynamic_cast<OrgFreedesktopNotificationsInterface*>(interface_.get()),
+            SIGNAL(NotificationClosed(uint, uint)),
+            this, SLOT(NotificationClosed(uint, uint)));
+    connect(dynamic_cast<OrgFreedesktopNotificationsInterface*>(interface_.get()),
+            SIGNAL(ActionInvoked(uint, QString)),
+            this, SLOT(NotificationAction(uint, QString)));
   }
+  player_.reset(new OrgMprisMediaPlayer2PlayerInterface(
+      "org.mpris.MediaPlayer2.clementine",
+      "/org/mpris/MediaPlayer2",
+      QDBusConnection::sessionBus()));
+  if (!player_ || !player_->isValid()) {
+    qLog(Warning) << "Error connecting to mpris service.";
+  }
+#else   // HAVE_DBUS
+  qLog(Warning) << "not implemented";
 #endif  // HAVE_DBUS
 }
 
@@ -105,29 +123,35 @@ void OSD::ShowMessageNative(const QString& summary, const QString& message,
                             const QString& icon, const QImage& image) {
 #ifdef HAVE_DBUS
   if (!interface_) return;
-
+ 
   QVariantMap hints;
+
   if (!image.isNull()) {
     hints["image_data"] = QVariant(image);
   }
 
-  int id = 0;
-  if (last_notification_time_.secsTo(QDateTime::currentDateTime()) * 1000 <
-      timeout_msec_) {
-    // Reuse the existing popup if it's still open.  The reason we don't always
-    // reuse the popup is because the notification daemon on KDE4 won't re-show
-    // the bubble if it's already gone to the tray.  See issue #118
-    id = notification_id_;
+  if (capabilities_.contains("persistence")) {
+    hints["resident"] = QVariant(true);
   }
 
+  QStringList actions;
+  if (capabilities_.contains("action-icons") && player_) {
+    hints["action-icons"] = QVariant(true);
+    actions << "media-skip-backward" << tr("Previous");
+    actions << "media-skip-forward" << tr("Next");
+  }
+
+  // Used by gnome shell
+  hints["category"]  = QVariant("x-gnome.music");
+
+  hints["desktop-entry"] = QVariant("clementine");
+
   QDBusPendingReply<uint> reply =
-      interface_->Notify(QCoreApplication::applicationName(), id, icon, summary,
-                         message, QStringList(), hints, timeout_msec_);
+      interface_->Notify(QCoreApplication::applicationName(), notification_id_, icon, summary,
+                         message, actions, hints, timeout_msec_);
   QDBusPendingCallWatcher* watcher = new QDBusPendingCallWatcher(reply, this);
   connect(watcher, SIGNAL(finished(QDBusPendingCallWatcher*)),
           SLOT(CallFinished(QDBusPendingCallWatcher*)));
-#else   // HAVE_DBUS
-  qLog(Warning) << "not implemented";
 #endif  // HAVE_DBUS
 }
 
@@ -144,7 +168,21 @@ void OSD::CallFinished(QDBusPendingCallWatcher* watcher) {
   uint id = reply.value();
   if (id != 0) {
     notification_id_ = id;
-    last_notification_time_ = QDateTime::currentDateTime();
   }
 }
+
+void OSD::NotificationClosed(uint id, uint reason) {
+  if (notification_id_ == id) {
+    notification_id_ = 0;
+  }
+}
+
+void OSD::NotificationAction(uint id, QString reason) {
+  if (reason == "media-skip-backward") {
+    player_->Previous();
+  } else if (reason == "media-skip-forward") {
+    player_->Next();
+  }
+}
+
 #endif

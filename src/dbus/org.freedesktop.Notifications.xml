@@ -2,6 +2,14 @@
 "http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
 <node>
   <interface name="org.freedesktop.Notifications">
+    <signal name="NotificationClosed">
+      <arg name="id" type="u" direction="out"/>
+      <arg name="reason" type="u" direction="out"/>
+    </signal>
+    <signal name="ActionInvoked">
+      <arg name="id" type="u" direction="out"/>
+      <arg name="reason" type="s" direction="out"/>
+    </signal>
     <method name="GetServerInformation">
       <arg name="return_name" type="s" direction="out"/>
       <arg name="return_vendor" type="s" direction="out"/>

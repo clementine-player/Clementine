@@ -919,6 +919,10 @@ if(HAVE_DBUS)
       dbus/org.mpris.MediaPlayer2.Playlists.xml
       core/mpris2.h mpris::Mpris2 core/mpris2_playlists Mpris2Playlists)
 
+  qt4_add_dbus_interface(SOURCES
+      dbus/org.mpris.MediaPlayer2.Player.xml
+      dbus/mpris2)
+
   # org.freedesktop.Notifications DBUS interface
   qt4_add_dbus_interface(SOURCES
       dbus/org.freedesktop.Notifications.xml
