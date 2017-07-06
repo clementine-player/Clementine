@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.6)
+cmake_minimum_required(VERSION 2.8.11)
 cmake_policy(SET CMP0011 OLD)
 
 include(CheckCXXCompilerFlag)
@@ -32,15 +32,22 @@ if (UNIX AND NOT APPLE)
   set(LINUX 1)
 endif (UNIX AND NOT APPLE)
 
-find_package(Qt4 4.8.1 REQUIRED QtCore QtGui QtOpenGL QtSql QtNetwork QtXml)
+set(QT_MIN_VERSION 5.6.0)
+
+find_package(Qt5 ${QT_MIN_VERSION} REQUIRED COMPONENTS Core OpenGL Sql Network Xml Widgets Concurrent Test)
+find_package(X11)
+if(X11_FOUND)
+  find_package(Qt5 ${QT_MIN_VERSION} REQUIRED COMPONENTS X11Extras)
+endif()
+
 
 if(NOT APPLE)
-  find_package(Qt4 COMPONENTS QtWebKit)
+  find_package(Qt5 COMPONENTS WebKitWidgets)
 endif(NOT APPLE)
 
 # Find Qt's lconvert binary.  Try qt's binary dir first, fall back to looking in PATH
-find_program(QT_LCONVERT_EXECUTABLE NAMES lconvert lconvert-qt4 PATHS ${QT_BINARY_DIR} NO_DEFAULT_PATH)
-find_program(QT_LCONVERT_EXECUTABLE NAMES lconvert lconvert-qt4)
+find_program(QT_LCONVERT_EXECUTABLE NAMES lconvert lconvert-qt5 PATHS ${QT_BINARY_DIR} NO_DEFAULT_PATH)
+find_program(QT_LCONVERT_EXECUTABLE NAMES lconvert lconvert-qt5)
 
 if(APPLE)
   if(NOT QT_MAC_USE_COCOA)
@@ -71,21 +78,20 @@ pkg_check_modules(GSTREAMER_TAG REQUIRED gstreamer-tag-1.0)
 pkg_check_modules(GSTREAMER_PBUTILS REQUIRED gstreamer-pbutils-1.0)
 pkg_check_modules(LIBGPOD libgpod-1.0>=0.7.92)
 pkg_check_modules(LIBMTP libmtp>=1.0)
-pkg_check_modules(LIBMYGPO_QT libmygpo-qt>=1.0.9)
+pkg_check_modules(LIBMYGPO_QT5 libmygpo-qt5>=1.0.7)
 pkg_check_modules(LIBPULSE libpulse)
 pkg_check_modules(LIBXML libxml-2.0)
-pkg_check_modules(QJSON REQUIRED QJson)
 pkg_check_modules(SPOTIFY libspotify>=12.1.45)
 pkg_check_modules(TAGLIB REQUIRED taglib>=1.6)
 
 if (WIN32)
   find_package(ZLIB REQUIRED)
-  find_library(QTSPARKLE_LIBRARIES qtsparkle)
+  find_library(QTSPARKLE_LIBRARIES qtsparkle-qt5)
 endif (WIN32)
 
-find_library(LASTFM_LIBRARIES lastfm)
-find_path(LASTFM_INCLUDE_DIRS lastfm/ws.h)
-find_path(LASTFM1_INCLUDE_DIRS lastfm/Track.h)
+find_library(LASTFM5_LIBRARIES lastfm5)
+find_path(LASTFM5_INCLUDE_DIRS lastfm5/ws.h)
+find_path(LASTFM51_INCLUDE_DIRS lastfm5/Track.h)
 
 find_path(SPARSEHASH_INCLUDE_DIRS google/sparsetable)
 
@@ -111,7 +117,7 @@ else()
   set(CMAKE_REQUIRED_LIBRARIES)
 endif()
 
-if(LASTFM_INCLUDE_DIRS AND LASTFM1_INCLUDE_DIRS)
+if(LASTFM5_INCLUDE_DIRS AND LASTFM51_INCLUDE_DIRS)
   set(HAVE_LIBLASTFM1 ON)
 endif()
 
@@ -135,12 +141,12 @@ find_package(Threads)
 if(${CMAKE_BUILD_TYPE} MATCHES "Release")
   add_definitions(-DNDEBUG)
   add_definitions(-DQT_NO_DEBUG_OUTPUT)
+  add_definitions(-DQT_NO_WARNING_OUTPUT)
 endif(${CMAKE_BUILD_TYPE} MATCHES "Release")
 
 # Set up definitions and paths
 add_definitions(${QT_DEFINITIONS})
 link_directories(${TAGLIB_LIBRARY_DIRS})
-link_directories(${QJSON_LIBRARY_DIRS})
 link_directories(${GSTREAMER_LIBRARY_DIRS})
 
 # Don't try to use webkit if their include directories couldn't be found.
@@ -150,7 +156,6 @@ endif (NOT QT_QTWEBKIT_INCLUDE_DIR)
 
 include_directories(${Boost_INCLUDE_DIRS})
 include_directories(${TAGLIB_INCLUDE_DIRS})
-include_directories(${QJSON_INCLUDE_DIRS})
 include_directories(${GSTREAMER_INCLUDE_DIRS})
 include_directories(${GSTREAMER_APP_INCLUDE_DIRS})
 include_directories(${GSTREAMER_AUDIO_INCLUDE_DIRS})
@@ -234,7 +239,7 @@ optional_component(LIBMTP ON "Devices: MTP support"
 )
 
 optional_component(LIBLASTFM ON "Last.fm support"
-  DEPENDS "liblastfm" LASTFM_LIBRARIES LASTFM_INCLUDE_DIRS
+  DEPENDS "liblastfm" LASTFM5_LIBRARIES LASTFM5_INCLUDE_DIRS
 )
 
 optional_component(DBUS ON "D-Bus support"
@@ -283,11 +288,16 @@ endif()
 
 # Find DBus if it's enabled
 if (HAVE_DBUS)
-  find_package(Qt4 REQUIRED QtDbus)
+  find_package(Qt5 COMPONENTS DBus)
+  get_target_property(QT_DBUSXML2CPP_EXECUTABLE Qt5::qdbusxml2cpp LOCATION)
 endif ()
 
 # We can include the Qt definitions now
-include(${QT_USE_FILE})
+if(WIN32)
+  set(QT_LIBRARIES Qt5::Core Qt5::OpenGL Qt5::Sql Qt5::Network Qt5::Xml Qt5::Widgets Qt5::Concurrent)
+else(WIN32)
+  set(QT_LIBRARIES Qt5::Core Qt5::OpenGL Qt5::Sql Qt5::Network Qt5::Xml Qt5::Widgets Qt5::Concurrent Qt5::X11Extras Qt5::DBus)
+endif(WIN32)
 
 # Remove GLU and GL from the link line - they're not really required
 # and don't exist on my mingw toolchain
@@ -385,15 +395,15 @@ else()
   set(SHA2_LIBRARIES sha2)
 endif()
 
-# Use the system libmygpo-qt if a recent enough version was found
-if(LIBMYGPO_QT_FOUND)
-  set(MYGPOQT_LIBRARIES ${LIBMYGPO_QT_LIBRARIES})
-  set(MYGPOQT_INCLUDE_DIRS ${LIBMYGPO_QT_INCLUDE_DIRS})
+# Use the system libmygpo-qt5 if a recent enough version was found
+if(LIBMYGPO_QT5_FOUND)
+  set(MYGPOQT5_LIBRARIES ${LIBMYGPO_QT5_LIBRARIES})
+  set(MYGPOQT5_INCLUDE_DIRS ${LIBMYGPO_QT5_INCLUDE_DIRS})
 else()
-  add_definitions(-DMYGPO_EXPORT=)
-  add_subdirectory(3rdparty/libmygpo-qt)
-  set(MYGPOQT_LIBRARIES mygpo-qt)
-  set(MYGPOQT_INCLUDE_DIRS ${CMAKE_SOURCE_DIR}/3rdparty/libmygpo-qt/)
+  add_definitions(-DMYGPO_STATIC)
+  add_subdirectory(3rdparty/libmygpo-qt5)
+  set(MYGPOQT5_LIBRARIES mygpo-qt5)
+  set(MYGPOQT5_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/libmygpo-qt5/src)
 endif()
 
 # Qocoa

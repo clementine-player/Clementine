@@ -76,7 +76,7 @@ void WidgetFadeHelper::StartBlur() {
 
 void WidgetFadeHelper::CaptureParent() {
   // Take a "screenshot" of the window
-  original_pixmap_ = QPixmap::grabWidget(parent_);
+  original_pixmap_ = parent_->grab();
   QImage original_image = original_pixmap_.toImage();
 
   // Blur it

@@ -63,13 +63,15 @@ TEST_F(ScopedTransactionTest, RollbackOnDtor) {
     ScopedTransaction t(&database_);
     database_.exec("INSERT INTO foo (bar) VALUES (42)");
 
-    QSqlQuery q("SELECT * FROM foo", database_);
+    QSqlQuery q(database_);
+    q.prepare("SELECT * FROM foo");
     ASSERT_TRUE(q.exec());
     ASSERT_TRUE(q.next());
     EXPECT_EQ(42, q.value(0).toInt());
   }
 
-  QSqlQuery q("SELECT * FROM foo", database_);
+  QSqlQuery q(database_);
+  q.prepare("SELECT * FROM foo");
   ASSERT_TRUE(q.exec());
   ASSERT_FALSE(q.next());
 }
@@ -83,7 +85,8 @@ TEST_F(ScopedTransactionTest, Commit) {
     t.Commit();
   }
 
-  QSqlQuery q("SELECT * FROM foo", database_);
+  QSqlQuery q(database_);
+  q.prepare("SELECT * FROM foo");
   ASSERT_TRUE(q.exec());
   ASSERT_TRUE(q.next());
   EXPECT_EQ(42, q.value(0).toInt());

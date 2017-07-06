@@ -21,6 +21,7 @@
 #include <QEventLoop>
 #include <QFileInfo>
 #include <QSslConfiguration>
+#include <QUrlQuery>
 #include <QXmlStreamReader>
 
 #include "core/application.h"
@@ -98,9 +99,11 @@ PlaylistItemList SubsonicDynamicPlaylist::GenerateMore(int count) {
 
   if (count > kMaxCount) count = kMaxCount;
 
-  url.addQueryItem("type", GetTypeString());
-  url.addQueryItem("size", QString::number(count));
-  url.addQueryItem("offset", QString::number(offset_));
+  QUrlQuery url_query(url.query());
+  url_query.addQueryItem("type", GetTypeString());
+  url_query.addQueryItem("size", QString::number(count));
+  url_query.addQueryItem("offset", QString::number(offset_));
+  url.setQuery(url_query);
 
   PlaylistItemList items;
 
@@ -157,10 +160,12 @@ void SubsonicDynamicPlaylist::GetAlbum(SubsonicService* service,
                                        QNetworkAccessManager& network,
                                        const bool usesslv3) {
   QUrl url = service->BuildRequestUrl("getAlbum");
-  url.addQueryItem("id", id);
+  QUrlQuery url_query(url.query());
+  url_query.addQueryItem("id", id);
   if (service->IsAmpache()) {
-    url.addQueryItem("ampache", "1");
+    url_query.addQueryItem("ampache", "1");
   }
+  url.setQuery(url_query);
   QNetworkReply* reply = Send(network, url, usesslv3);
   WaitForSignal(reply, SIGNAL(finished()));
   reply->deleteLater();

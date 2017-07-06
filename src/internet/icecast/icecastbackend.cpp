@@ -43,7 +43,8 @@ QStringList IcecastBackend::GetGenresAlphabetical(const QString& filter) {
   QString sql = QString("SELECT DISTINCT genre FROM %1 %2 ORDER BY genre")
                     .arg(kTableName, where);
 
-  QSqlQuery q(sql, db);
+  QSqlQuery q(db);
+  q.prepare(sql);
   if (!filter.isEmpty()) {
     q.bindValue(":filter", QString("%" + filter + "%"));
   }
@@ -69,7 +70,8 @@ QStringList IcecastBackend::GetGenresByPopularity(const QString& filter) {
                     " %2"
                     " GROUP BY genre"
                     " ORDER BY count DESC").arg(kTableName, where);
-  QSqlQuery q(sql, db);
+  QSqlQuery q(db);
+  q.prepare(sql);
   if (!filter.isEmpty()) {
     q.bindValue(":filter", QString("%" + filter + "%"));
   }
@@ -109,7 +111,8 @@ IcecastBackend::StationList IcecastBackend::GetStations(const QString& filter,
   if (!where_clauses.isEmpty()) {
     sql += " WHERE " + where_clauses.join(" AND ");
   }
-  QSqlQuery q(sql, db);
+  QSqlQuery q(db);
+  q.prepare(sql);
   for (const QString& value : bound_items) {
     q.addBindValue(value);
   }
@@ -134,7 +137,8 @@ IcecastBackend::StationList IcecastBackend::GetStations(const QString& filter,
 bool IcecastBackend::IsEmpty() {
   QMutexLocker l(db_->Mutex());
   QSqlDatabase db = db_->Connect();
-  QSqlQuery q(QString("SELECT ROWID FROM %1 LIMIT 1").arg(kTableName), db);
+  QSqlQuery q(db);
+  q.prepare(QString("SELECT ROWID FROM %1 LIMIT 1").arg(kTableName));
   q.exec();
   return !q.next();
 }
@@ -146,17 +150,16 @@ void IcecastBackend::ClearAndAddStations(const StationList& stations) {
     ScopedTransaction t(&db);
 
     // Remove all existing items
-    QSqlQuery q(QString("DELETE FROM %1").arg(kTableName), db);
+    QSqlQuery q(db);
+    q.prepare(QString("DELETE FROM %1").arg(kTableName));
     q.exec();
     if (db_->CheckErrors(q)) return;
 
-    q = QSqlQuery(
-        QString(
+    q.prepare(QString(
             "INSERT INTO %1 (name, url, mime_type, bitrate,"
             "                channels, samplerate, genre)"
             " VALUES (:name, :url, :mime_type, :bitrate,"
-            "         :channels, :samplerate, :genre)").arg(kTableName),
-        db);
+            "         :channels, :samplerate, :genre)").arg(kTableName));
 
     // Add these ones
     for (const Station& station : stations) {

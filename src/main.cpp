@@ -37,7 +37,6 @@
 #include <QSqlDatabase>
 #include <QSqlQuery>
 #include <QSysInfo>
-#include <QTextCodec>
 #include <QTranslator>
 #include <QtConcurrentRun>
 #include <QtDebug>
@@ -54,7 +53,6 @@
 #include "core/networkproxyfactory.h"
 #include "core/potranslator.h"
 #include "core/song.h"
-#include "core/ubuntuunityhack.h"
 #include "core/utilities.h"
 #include "engines/enginebase.h"
 #include "smartplaylists/generator.h"
@@ -72,6 +70,8 @@
 #include <glib-object.h>
 #include <glib.h>
 #include <gst/gst.h>
+
+#include <Config.h>
 
 #ifdef Q_OS_DARWIN
 #include <sys/resource.h>
@@ -100,28 +100,17 @@ const QDBusArgument& operator>>(const QDBusArgument& arg, QImage& image);
 
 // Load sqlite plugin on windows and mac.
 #include <QtPlugin>
-Q_IMPORT_PLUGIN(qsqlite)
+Q_IMPORT_PLUGIN(QSQLiteDriverPlugin)
 
 namespace {
 
 void LoadTranslation(const QString& prefix, const QString& path,
                      const QString& language) {
-#if QT_VERSION < 0x040700
-  // QTranslator::load will try to open and read "clementine" if it exists,
-  // without checking if it's a file first.
-  // This was fixed in Qt 4.7
-  QFileInfo maybe_clementine_directory(path + "/clementine");
-  if (maybe_clementine_directory.exists() &&
-      !maybe_clementine_directory.isFile())
-    return;
-#endif
-
   QTranslator* t = new PoTranslator;
   if (t->load(prefix + "_" + language, path))
     QCoreApplication::installTranslator(t);
   else
     delete t;
-  QTextCodec::setCodecForTr(QTextCodec::codecForLocale());
 }
 
 void IncreaseFDLimit() {
@@ -352,10 +341,9 @@ int main(int argc, char* argv[]) {
       QStringList() << QCoreApplication::applicationDirPath() + "/../PlugIns");
 #endif
 
-  a.setQuitOnLastWindowClosed(false);
-
   // Do this check again because another instance might have started by now
-  if (a.isRunning() && a.sendMessage(options.Serialize(), 5000)) {
+  if (a.isRunning() &&
+      a.sendMessage(QString::fromLatin1(options.Serialize()), 5000)) {
     return 0;
   }
 
@@ -365,8 +353,6 @@ int main(int argc, char* argv[]) {
   QCoreApplication::setAttribute(Qt::AA_DontShowIconsInMenus, false);
 #else
   QCoreApplication::setAttribute(Qt::AA_DontShowIconsInMenus, true);
-  // Fixes focus issue with NSSearchField, see QTBUG-11401
-  QCoreApplication::setAttribute(Qt::AA_NativeWindows, true);
 #endif
 
   SetGstreamerEnvironment();
@@ -439,13 +425,6 @@ int main(int argc, char* argv[]) {
   QNetworkProxyFactory::setApplicationProxyFactory(
       NetworkProxyFactory::Instance());
 
-#ifdef Q_OS_LINUX
-  // In 11.04 Ubuntu decided that the system tray should be reserved for certain
-  // whitelisted applications.  Clementine will override this setting and insert
-  // itself into the list of whitelisted apps.
-  UbuntuUnityHack hack;
-#endif  // Q_OS_LINUX
-
   // Create the tray icon and OSD
   std::unique_ptr<SystemTrayIcon> tray_icon(
       SystemTrayIcon::CreateSystemTrayIcon());
@@ -466,8 +445,10 @@ int main(int argc, char* argv[]) {
 #ifdef HAVE_DBUS
   QObject::connect(&mpris, SIGNAL(RaiseMainWindow()), &w, SLOT(Raise()));
 #endif
-  QObject::connect(&a, SIGNAL(messageReceived(QByteArray)), &w,
-                   SLOT(CommandlineOptionsReceived(QByteArray)));
+  QObject::connect(&a, SIGNAL(messageReceived(QString)), &w,
+                   SLOT(CommandlineOptionsReceived(QString)));
+
+  w.CommandlineOptionsReceived(options);
 
   int ret = a.exec();
 

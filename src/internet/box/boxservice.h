@@ -64,7 +64,7 @@ class BoxService : public CloudFileService {
   void UpdateFilesFromCursor(const QString& cursor);
   QNetworkReply* FetchContentUrlForFile(const QString& file_id);
   void InitialiseEventsCursor();
-  void MaybeAddFileEntry(const QVariantMap& entry);
+  void MaybeAddFileEntry(const QJsonObject& entry);
   void EnsureConnected();
 
   QString access_token_;

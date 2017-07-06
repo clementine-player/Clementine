@@ -75,12 +75,10 @@ BehaviourSettingsPage::BehaviourSettingsPage(SettingsDialog* dialog)
                               .replace("_TW", "_Hant_TW");
     QString language_name =
         QLocale::languageToString(QLocale(lookup_code).language());
-#if QT_VERSION >= 0x040800
     QString native_name = QLocale(lookup_code).nativeLanguageName();
     if (!native_name.isEmpty()) {
       language_name = native_name;
     }
-#endif
     QString name = QString("%1 (%2)").arg(language_name, code);
 
     language_map_[name] = code;

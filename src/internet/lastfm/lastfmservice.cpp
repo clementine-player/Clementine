@@ -28,14 +28,7 @@
 // some functions in their includes files, which aren't compatible with
 // QStringBuilder, we undef it here
 #include <QtGlobal>
-#if QT_VERSION >= 0x040600
-#if QT_VERSION >= 0x040800
 #undef QT_USE_QSTRINGBUILDER
-#else
-#undef QT_USE_FAST_CONCATENATION
-#undef QT_USE_FAST_OPERATOR_PLUS
-#endif  // QT_VERSION >= 0x040800
-#endif  // QT_VERSION >= 0x040600
 
 #include "lastfmservice.h"
 
@@ -43,9 +36,9 @@
 #include <QSettings>
 
 #ifdef HAVE_LIBLASTFM1
-#include <lastfm/RadioStation.h>
+#include <lastfm5/RadioStation.h>
 #else
-#include <lastfm/RadioStation>
+#include <lastfm5/RadioStation>
 #endif
 
 #include "lastfmcompat.h"
@@ -234,7 +227,7 @@ void LastFMService::UpdateSubscriberStatusFinished(QNetworkReply* reply) {
 
 QUrl LastFMService::FixupUrl(const QUrl& url) {
   QUrl ret;
-  ret.setEncodedUrl(url.toEncoded().replace(
+  ret.setUrl(url.toEncoded().replace(
       "USERNAME", QUrl::toPercentEncoding(lastfm::ws::Username)));
   return ret;
 }

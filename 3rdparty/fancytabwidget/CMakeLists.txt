@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.6)
+cmake_minimum_required(VERSION 2.8.11)
 
 set(SOURCES
   fancytabwidget.cpp
@@ -9,7 +9,7 @@ set(HEADERS
   fancytabwidget.h
 )
 
-qt4_wrap_cpp(MOC ${HEADERS})
+qt5_wrap_cpp(MOC ${HEADERS})
 
 include_directories(${CMAKE_CURRENT_BINARY_DIR} ${CMAKE_CURRENT_SOURCE_DIR})
 

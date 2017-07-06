@@ -459,7 +459,7 @@ bool GstEnginePipeline::InitFromString(const QString& pipeline) {
   pipeline_ = gst_pipeline_new("pipeline");
 
   GstElement* new_bin =
-      CreateDecodeBinFromString(pipeline.toAscii().constData());
+      CreateDecodeBinFromString(pipeline.toLatin1().constData());
   if (!new_bin) {
     return false;
   }

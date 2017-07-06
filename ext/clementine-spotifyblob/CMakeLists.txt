@@ -28,7 +28,7 @@ if(APPLE)
   list(APPEND SOURCES spotify_utilities.mm)
 endif(APPLE)
 
-qt4_wrap_cpp(MOC ${HEADERS})
+qt5_wrap_cpp(MOC ${HEADERS})
 
 if(WIN32 AND NOT CMAKE_BUILD_TYPE STREQUAL "Debug" AND NOT ENABLE_WIN32_CONSOLE)
   set(win32_build_flag WIN32)

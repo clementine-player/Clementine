@@ -22,7 +22,7 @@
 #include "lastfmsettingspage.h"
 #include "ui_lastfmsettingspage.h"
 
-#include <lastfm/ws.h>
+#include <lastfm5/ws.h>
 
 #include <QDesktopServices>
 #include <QMessageBox>

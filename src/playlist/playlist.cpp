@@ -47,7 +47,6 @@
 #include "core/application.h"
 #include "core/closure.h"
 #include "core/logging.h"
-#include "core/qhash_qurl.h"
 #include "core/tagreaderclient.h"
 #include "core/timeconstants.h"
 #include "internet/jamendo/jamendoplaylistitem.h"
@@ -416,16 +415,10 @@ bool Playlist::setData(const QModelIndex& index, const QVariant& value,
 void Playlist::SongSaveComplete(TagReaderReply* reply,
                                 const QPersistentModelIndex& index) {
   if (reply->is_successful() && index.isValid()) {
-    if (reply->message().save_file_response().success()) {
-      QFuture<void> future = item_at(index.row())->BackgroundReload();
-      NewClosure(future, this, SLOT(ItemReloadComplete(QPersistentModelIndex)),
-                 index);
-    } else {
-      emit Error(tr("An error occurred writing metadata to '%1'").arg(
-          QString::fromStdString(
-              reply->request_message().save_file_request().filename())));
-    }
+    QFuture<void> future = item_at(index.row())->BackgroundReload();
+    NewClosure(future, this, SLOT(ItemReloadComplete(QPersistentModelIndex)), index);
   }
+
   reply->deleteLater();
 }
 
@@ -632,6 +625,10 @@ void Playlist::set_current_row(int i, bool is_stopping) {
     emit dataChanged(old_current_item_index,
                      old_current_item_index.sibling(
                          old_current_item_index.row(), ColumnCount - 1));
+  }
+
+  if (current_item_index_.isValid() && !is_stopping) {
+    InformOfCurrentSongChange();
   }
 
   // Update the virtual index
@@ -1489,21 +1486,18 @@ void Playlist::Save() const {
 
 void Playlist::Restore() {
   if (!backend_) return;
+  QFuture<QList<PlaylistItemPtr>> future = QtConcurrent::run(backend_, &PlaylistBackend::GetPlaylistItems, id_);
 
   items_.clear();
   virtual_items_.clear();
   library_items_by_id_.clear();
 
   cancel_restore_ = false;
-  QFuture<QList<PlaylistItemPtr>> future =
-      QtConcurrent::run(backend_, &PlaylistBackend::GetPlaylistItems, id_);
-  NewClosure(future, this, SLOT(ItemsLoaded(QFuture<PlaylistItemList>)),
-             future);
+  NewClosure(future, this, SLOT(ItemsLoaded(QFuture<PlaylistItemList>)), future);
+
 }
 
 void Playlist::ItemsLoaded(QFuture<PlaylistItemList> future) {
-  if (cancel_restore_) return;
-
   PlaylistItemList items = future.result();
 
   // backend returns empty elements for library items which it couldn't
@@ -1695,6 +1689,8 @@ void Playlist::StopAfter(int row) {
 }
 
 void Playlist::SetStreamMetadata(const QUrl& url, const Song& song) {
+  qLog(Debug) << "Setting metadata for" << url << "to" << song.artist()
+              << song.title();
   if (!current_item()) return;
 
   if (current_item()->Url() != url) return;

@@ -62,7 +62,7 @@ if (NOT APPLE)
                 clementine-itpc.protocol
                 clementine-feed.protocol
                 clementine-zune.protocol
-    DESTINATION share/kde4/services
+    DESTINATION share/kservices5
   )
 
   install(FILES clementine.appdata.xml

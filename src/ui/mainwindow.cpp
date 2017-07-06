@@ -428,7 +428,7 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
   connect(ui_->action_remove_from_playlist, SIGNAL(triggered()),
           SLOT(PlaylistRemoveCurrent()));
   connect(ui_->action_toggle_show_sidebar, SIGNAL(toggled(bool)),
-          ui_->sidebar_layout, SLOT(setShown(bool)));
+          ui_->sidebar_layout, SLOT(setVisible(bool)));
   connect(ui_->action_edit_track, SIGNAL(triggered()), SLOT(EditTracks()));
   connect(ui_->action_renumber_tracks, SIGNAL(triggered()),
           SLOT(RenumberTracks()));
@@ -1054,7 +1054,6 @@ MainWindow::~MainWindow() {
 void MainWindow::ReloadSettings() {
 #ifndef Q_OS_DARWIN
   bool show_tray = settings_.value("showtray", true).toBool();
-
   tray_icon_->SetVisible(show_tray);
   if (!show_tray && !isVisible()) show();
 #endif
@@ -1073,7 +1072,7 @@ void MainWindow::ReloadSettings() {
       PlayBehaviour(s.value("menu_playmode", PlayBehaviour_IfStopped).toInt());
 
   bool show_sidebar = settings_.value("show_sidebar", true).toBool();
-  ui_->sidebar_layout->setShown(show_sidebar);
+  ui_->sidebar_layout->setVisible(show_sidebar);
   ui_->action_toggle_show_sidebar->setChecked(show_sidebar);
 }
 
@@ -2122,15 +2121,9 @@ void MainWindow::PlaylistEditFinished(const QModelIndex& index) {
   if (index == playlist_menu_index_) SelectionSetValue();
 }
 
-void MainWindow::CommandlineOptionsReceived(
-    const QByteArray& serialized_options) {
-  if (serialized_options == "wake up!") {
-    // Old versions of Clementine sent this - just ignore it
-    return;
-  }
-
+void MainWindow::CommandlineOptionsReceived(const QString& string_options) {
   CommandlineOptions options;
-  options.Load(serialized_options);
+  options.Load(string_options.toLatin1());
 
   if (options.is_empty()) {
     show();

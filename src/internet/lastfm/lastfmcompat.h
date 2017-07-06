@@ -24,21 +24,21 @@
 #include "fixlastfm.h"
 
 #ifdef HAVE_LIBLASTFM1
-#include <lastfm/Audioscrobbler.h>
-#include <lastfm/misc.h>
-#include <lastfm/ScrobbleCache.h>
-#include <lastfm/ScrobblePoint.h>
-#include <lastfm/User.h>
-#include <lastfm/ws.h>
-#include <lastfm/XmlQuery.h>
+#include <lastfm5/Audioscrobbler.h>
+#include <lastfm5/misc.h>
+#include <lastfm5/ScrobbleCache.h>
+#include <lastfm5/ScrobblePoint.h>
+#include <lastfm5/User.h>
+#include <lastfm5/ws.h>
+#include <lastfm5/XmlQuery.h>
 #else
-#include <lastfm/Audioscrobbler>
-#include <lastfm/misc.h>
-#include <lastfm/ScrobbleCache>
-#include <lastfm/ScrobblePoint>
-#include <lastfm/User>
-#include <lastfm/ws.h>
-#include <lastfm/XmlQuery>
+#include <lastfm5/Audioscrobbler>
+#include <lastfm5/misc.h>
+#include <lastfm5/ScrobbleCache>
+#include <lastfm5/ScrobblePoint>
+#include <lastfm5/User>
+#include <lastfm5/ws.h>
+#include <lastfm5/XmlQuery>
 #endif
 
 namespace lastfm {

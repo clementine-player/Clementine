@@ -17,13 +17,7 @@ if(WIN32)
 endif(WIN32)
 
 # Activate fast QString concatenation
-if (QT_VERSION_MINOR GREATER 5)
-  if (QT_VERSION_MINOR GREATER 7)
-    add_definitions(-DQT_USE_QSTRINGBUILDER)
-  else(QT_VERSION_MINOR GREATER 7)
-    add_definitions(-DQT_USE_FAST_CONCATENATION -DQT_USE_FAST_OPERATOR_PLUS)
-  endif(QT_VERSION_MINOR GREATER 7)
-endif(QT_VERSION_MINOR GREATER 5)
+add_definitions(-DQT_USE_QSTRINGBUILDER)
 add_definitions(-DQT_NO_URL_CAST_FROM_STRING)
 add_definitions(-DBOOST_BIND_NO_PLACEHOLDERS)
 
@@ -37,13 +31,13 @@ include_directories(${QTIOCOMPRESSOR_INCLUDE_DIRS})
 include_directories(${QXT_INCLUDE_DIRS})
 include_directories(${SHA2_INCLUDE_DIRS})
 include_directories(${CHROMAPRINT_INCLUDE_DIRS})
-include_directories(${MYGPOQT_INCLUDE_DIRS})
+include_directories(${MYGPOQT5_INCLUDE_DIRS})
 
 find_package(OpenGL)
 include_directories(${OPENGL_INCLUDE_DIR})
 
 if(HAVE_LIBLASTFM)
-  include_directories(${LASTFM_INCLUDE_DIRS})
+  include_directories(${LASTFM5_INCLUDE_DIRS})
 endif(HAVE_LIBLASTFM)
 
 if(HAVE_BREAKPAD)
@@ -904,28 +898,28 @@ if(HAVE_DBUS)
   file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/dbus)
 
   # MPRIS 2.0 DBUS interfaces
-  qt4_add_dbus_adaptor(SOURCES
+  qt5_add_dbus_adaptor(SOURCES
       dbus/org.mpris.MediaPlayer2.Player.xml
       core/mpris2.h mpris::Mpris2 core/mpris2_player Mpris2Player)
-  qt4_add_dbus_adaptor(SOURCES
+  qt5_add_dbus_adaptor(SOURCES
       dbus/org.mpris.MediaPlayer2.xml
       core/mpris2.h mpris::Mpris2 core/mpris2_root Mpris2Root)
-  qt4_add_dbus_adaptor(SOURCES
+  qt5_add_dbus_adaptor(SOURCES
       dbus/org.mpris.MediaPlayer2.TrackList.xml
       core/mpris2.h mpris::Mpris2 core/mpris2_tracklist Mpris2TrackList)
 
   # MPRIS 2.1 DBUS interfaces
-  qt4_add_dbus_adaptor(SOURCES
+  qt5_add_dbus_adaptor(SOURCES
       dbus/org.mpris.MediaPlayer2.Playlists.xml
       core/mpris2.h mpris::Mpris2 core/mpris2_playlists Mpris2Playlists)
 
   # org.freedesktop.Notifications DBUS interface
-  qt4_add_dbus_interface(SOURCES
+  qt5_add_dbus_interface(SOURCES
       dbus/org.freedesktop.Notifications.xml
       dbus/notification)
 
   # org.gnome.SettingsDaemon interface
-  qt4_add_dbus_interface(SOURCES
+  qt5_add_dbus_interface(SOURCES
       dbus/org.gnome.SettingsDaemon.MediaKeys.xml
       dbus/gnomesettingsdaemon)
 
@@ -963,10 +957,10 @@ if(HAVE_DBUS)
         PROPERTIES NO_NAMESPACE dbus/udisks)
     set_source_files_properties(dbus/org.freedesktop.UDisks.Device.xml
         PROPERTIES NO_NAMESPACE dbus/udisksdevice)
-    qt4_add_dbus_interface(SOURCES
+    qt5_add_dbus_interface(SOURCES
         dbus/org.freedesktop.UDisks.xml
         dbus/udisks)
-    qt4_add_dbus_interface(SOURCES
+    qt5_add_dbus_interface(SOURCES
         dbus/org.freedesktop.UDisks.Device.xml
         dbus/udisksdevice)
   endif(HAVE_DEVICEKIT)
@@ -982,26 +976,26 @@ if(HAVE_DBUS)
           PROPERTIES NO_NAMESPACE dbus/udisks2drive INCLUDE dbus/metatypes.h)
       set_source_files_properties(dbus/org.freedesktop.UDisks2.Job.xml
           PROPERTIES NO_NAMESPACE dbus/udisks2job INCLUDE dbus/metatypes.h)
-      qt4_add_dbus_interface(SOURCES
+      qt5_add_dbus_interface(SOURCES
           dbus/org.freedesktop.DBus.ObjectManager.xml
           dbus/objectmanager)
-      qt4_add_dbus_interface(SOURCES
+      qt5_add_dbus_interface(SOURCES
           dbus/org.freedesktop.UDisks2.Filesystem.xml
           dbus/udisks2filesystem)
-      qt4_add_dbus_interface(SOURCES
+      qt5_add_dbus_interface(SOURCES
           dbus/org.freedesktop.UDisks2.Block.xml
           dbus/udisks2block)
-      qt4_add_dbus_interface(SOURCES
+      qt5_add_dbus_interface(SOURCES
           dbus/org.freedesktop.UDisks2.Drive.xml
           dbus/udisks2drive)
-      qt4_add_dbus_interface(SOURCES
+      qt5_add_dbus_interface(SOURCES
           dbus/org.freedesktop.UDisks2.Job.xml
           dbus/udisks2job)
   endif(HAVE_UDISKS2)
 
   # Wiimotedev interface classes
   if(ENABLE_WIIMOTEDEV)
-    qt4_add_dbus_interface(SOURCES
+    qt5_add_dbus_interface(SOURCES
         dbus/org.wiimotedev.deviceEvents.xml
         dbus/wiimotedev)
   endif(ENABLE_WIIMOTEDEV)
@@ -1187,21 +1181,16 @@ optional_source(HAVE_LIBPULSE
     engines/pulsedevicefinder.cpp
 )
 
-# Hack to add Clementine to the Unity system tray whitelist
-optional_source(LINUX
-  SOURCES core/ubuntuunityhack.cpp
-  HEADERS core/ubuntuunityhack.h
-)
-
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/config.h.in
                ${CMAKE_CURRENT_BINARY_DIR}/config.h)
 
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/version.h.in
                ${CMAKE_CURRENT_BINARY_DIR}/version.h)
 
-qt4_wrap_cpp(MOC ${HEADERS} OPTIONS "-D_SYS_SYSMACROS_H_OUTER")
-qt4_wrap_ui(UIC ${UI})
-qt4_add_resources(QRC ${RESOURCES})
+qt5_wrap_cpp(MOC ${HEADERS})
+qt5_wrap_ui(UIC ${UI})
+qt5_add_resources(QRC ${RESOURCES})
+
 
 add_pot(POT
   ${CMAKE_CURRENT_SOURCE_DIR}/translations/header
@@ -1224,9 +1213,6 @@ add_library(clementine_lib STATIC
   ${OTHER_UIC_SOURCES}
 )
 
-add_dependencies(clementine_lib pot)
-
-
 target_link_libraries(clementine_lib
   clementine-spotifyblob-messages
   libclementine-common
@@ -1234,12 +1220,11 @@ target_link_libraries(clementine_lib
   libclementine-remote
   ${SHA2_LIBRARIES}
   ${TAGLIB_LIBRARIES}
-  ${MYGPOQT_LIBRARIES}
+  ${MYGPOQT5_LIBRARIES}
   ${CHROMAPRINT_LIBRARIES}
   ${GOBJECT_LIBRARIES}
   ${GLIB_LIBRARIES}
   ${GIO_LIBRARIES}
-  ${QJSON_LIBRARIES}
   ${QT_LIBRARIES}
   ${GSTREAMER_BASE_LIBRARIES}
   ${GSTREAMER_LIBRARIES}
@@ -1247,7 +1232,6 @@ target_link_libraries(clementine_lib
   ${GSTREAMER_TAG_LIBRARIES}
   ${GSTREAMER_PBUTILS_LIBRARIES}
   ${QTSINGLEAPPLICATION_LIBRARIES}
-  ${QTSINGLECOREAPPLICATION_LIBRARIES}
   ${QTIOCOMPRESSOR_LIBRARIES}
   ${CMAKE_THREAD_LIBS_INIT}
   ${SQLITE_LIBRARIES}
@@ -1260,7 +1244,7 @@ if(ENABLE_VISUALISATIONS)
 endif(ENABLE_VISUALISATIONS)
 
 if(HAVE_LIBLASTFM)
-  target_link_libraries(clementine_lib ${LASTFM_LIBRARIES})
+  target_link_libraries(clementine_lib ${LASTFM5_LIBRARIES})
 endif(HAVE_LIBLASTFM)
 
 if(HAVE_LIBGPOD)

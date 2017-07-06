@@ -21,7 +21,6 @@
 #include "musicbrainzclient.h"
 #include "core/song.h"
 
-#include <QFutureWatcher>
 #include <QObject>
 
 class AcoustidClient;
@@ -53,7 +52,6 @@ signals:
  private:
   static QString GetFingerprint(const Song& song);
 
-  QFutureWatcher<QString>* fingerprint_watcher_;
   AcoustidClient* acoustid_client_;
   MusicBrainzClient* musicbrainz_client_;
 

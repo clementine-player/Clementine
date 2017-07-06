@@ -2,7 +2,10 @@
 
 #include <algorithm>
 
-#include <qjson/parser.h>
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QJsonArray>
+#include <QUrlQuery>
 
 #include <QPair>
 
@@ -24,23 +27,24 @@ void SpotifyImages::FetchInfo(int id, const Song& metadata) {
     emit Finished(id);
     return;
   }
-
+  QUrlQuery url_query;
   QUrl url(kSpotifyImagesUrl);
-  url.addQueryItem("artist", metadata.artist());
-
+  url_query.addQueryItem("artist", metadata.artist());
+  url.setQuery(url_query);
+  
   QNetworkRequest request(url);
   QNetworkReply* reply = network_->get(request);
   NewClosure(reply, SIGNAL(finished()), [this, id, reply]() {
     reply->deleteLater();
-    QJson::Parser parser;
-    bool ok = false;
-    QVariant result = parser.parse(reply, &ok);
-    if (!ok || result.type() != QVariant::List) {
+    QJsonObject json_result = QJsonDocument::fromJson(reply->readAll()).object();
+    #if 0
+    if (!ok || result.toVariantMap.type() != QVariant::List) {
       emit Finished(id);
       return;
     }
-
-    QVariantList results = result.toList();
+    #endif
+    
+    QVariantList results = json_result.toVariantMap().values();
     QList<QPair<QUrl, QSize>> image_candidates;
     for (QVariant v : results) {
       QVariantMap image = v.toMap();
