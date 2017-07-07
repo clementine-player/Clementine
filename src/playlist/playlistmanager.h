@@ -184,7 +184,7 @@ class PlaylistManager : public PlaylistManagerInterface {
   void Load(const QString& filename);
   void Save(int id, const QString& filename, Playlist::Path path_type);
   // Display a file dialog to let user choose a file before saving the file
-  void SaveWithUI(int id, const QString& suggested_filename);
+  void SaveWithUI(int id, const QString& playlist_name);
   void Rename(int id, const QString& new_name);
   void Favorite(int id, bool favorite);
   void Delete(int id);
@@ -225,6 +225,8 @@ class PlaylistManager : public PlaylistManagerInterface {
   // Removes items with given indices from the playlist. This operation is not
   // undoable.
   void RemoveItemsWithoutUndo(int id, const QList<int>& indices);
+  // Remove the current playing song
+  void RemoveCurrentSong();
 
  private slots:
   void SetActivePlaying();

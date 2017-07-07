@@ -23,6 +23,8 @@
 #ifndef ANALYZERS_FHT_H_
 #define ANALYZERS_FHT_H_
 
+#include <QVector>
+
 /**
  * Implementation of the Hartley Transform after Bracewell's discrete
  * algorithm. The algorithm is subject to US patent No. 4,646,256 (1987)
@@ -32,11 +34,16 @@
  * [1] Computer in Physics, Vol. 9, No. 4, Jul/Aug 1995 pp 373-379
  */
 class FHT {
-  int exp2_;
-  int num_;
-  float* buf_;
-  float* tab_;
-  int* log_;
+  const int num_;
+  const int exp2_;
+
+  QVector<float> buf_vector_;
+  QVector<float> tab_vector_;
+  QVector<int> log_vector_;
+
+  float* buf_();
+  float* tab_();
+  int* log_();
 
   /**
    * Create a table of "cas" (cosine and sine) values.
@@ -56,13 +63,11 @@ class FHT {
   * should be at least 3. Values of more than 3 need a trigonometry table.
   * @see makeCasTable()
   */
-  explicit FHT(int);
+  FHT(int);
 
   ~FHT();
-  inline int sizeExp() const { return exp2_; }
-  inline int size() const { return num_; }
-  float* copy(float*, float*);
-  float* clear(float*);
+  int sizeExp() const;
+  int size() const;
   void scale(float*, float);
 
   /**

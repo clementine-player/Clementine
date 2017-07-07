@@ -17,6 +17,7 @@
 
 #include "config.h"
 
+#include <functional>
 #include <memory>
 
 #include <QFile>

@@ -1592,6 +1592,8 @@ bool Playlist::removeRows(int row, int count, const QModelIndex& parent) {
     // might have been invalidated.
     RemoveItemsWithoutUndo(row, count);
     undo_stack_->clear();
+  } else if (parent == QModelIndex()) {
+    RemoveItemsWithoutUndo(row, count);
   } else {
     undo_stack_->push(new PlaylistUndoCommands::RemoveItems(this, row, count));
   }

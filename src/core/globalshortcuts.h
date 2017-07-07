@@ -82,6 +82,7 @@ signals:
   void ToggleScrobbling();
   void Love();
   void Ban();
+  void RemoveCurrentSong();
 
  private:
   void AddShortcut(const QString& id, const QString& name, const char* signal,

@@ -109,7 +109,7 @@ class Base : public QWidget {
   bool new_frame_;
   bool is_playing_;
 
-  QList<uint> barkband_table_;
+  QVector<uint> barkband_table_;
   double prev_colors_[10][3];
   int prev_color_index_;
   int bands_;

@@ -63,7 +63,7 @@ const char* SoundCloudService::kHomepage = "http://soundcloud.com/";
 
 const int SoundCloudService::kSearchDelayMsec = 400;
 const int SoundCloudService::kSongSearchLimit = 100;
-const int SoundCloudService::kSongSimpleSearchLimit = 10;
+const int SoundCloudService::kSongSimpleSearchLimit = 100;
 
 typedef QPair<QString, QString> Param;
 
@@ -325,9 +325,8 @@ void SoundCloudService::Search(const QString& text, bool now) {
 void SoundCloudService::DoSearch() {
   ClearSearchResults();
 
-  QList<Param> parameters;
-  parameters << Param("q", pending_search_);
-  QNetworkReply* reply = CreateRequest("/tracks", parameters);
+  QList<Param> parameters;  parameters << Param("q", pending_search_) << Param("limit", QString::number(kSongSearchLimit));
+  QNetworkReply* reply = CreateRequest("tracks", parameters);
   const int id = next_pending_search_id_++;
   NewClosure(reply, SIGNAL(finished()), this,
              SLOT(SearchFinished(QNetworkReply*, int)), reply, id);
@@ -355,8 +354,8 @@ void SoundCloudService::ClearSearchResults() {
 
 int SoundCloudService::SimpleSearch(const QString& text) {
   QList<Param> parameters;
-  parameters << Param("q", text);
-  QNetworkReply* reply = CreateRequest("/tracks", parameters);
+  parameters << Param("q", text) << Param("limit", QString::number(kSongSimpleSearchLimit));
+  QNetworkReply* reply = CreateRequest("tracks", parameters);
   const int id = next_pending_search_id_++;
   NewClosure(reply, SIGNAL(finished()), this,
              SLOT(SimpleSearchFinished(QNetworkReply*, int)), reply, id);
