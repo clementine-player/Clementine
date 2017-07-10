@@ -58,6 +58,10 @@
 #include "engines/pulsedevicefinder.h"
 #endif
 
+#ifdef Q_OS_LINUX
+#include "engines/alsadevicefinder.h"
+#endif
+
 #ifdef Q_OS_DARWIN
 #include "engines/osxdevicefinder.h"
 #endif
@@ -161,6 +165,9 @@ void GstEngine::InitialiseGstreamer() {
   QList<DeviceFinder*> device_finders;
 #ifdef HAVE_LIBPULSE
   device_finders.append(new PulseDeviceFinder);
+#endif
+#ifdef Q_OS_LINUX
+  device_finders.append(new AlsaDeviceFinder);
 #endif
 #ifdef Q_OS_DARWIN
   device_finders.append(new OsxDeviceFinder);

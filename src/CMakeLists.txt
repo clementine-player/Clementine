@@ -896,6 +896,14 @@ optional_source(WIN32
     ${CMAKE_SOURCE_DIR}/3rdparty/tinysvcmdns
 )
 
+# Platform specific - Linux
+optional_source(LINUX
+  SOURCES
+    engines/alsadevicefinder.cpp
+  HEADERS
+    engines/alsadevicefinder.h
+)
+
 # Platform specific - X11
 optional_source(LINUX SOURCES widgets/osd_x11.cpp)
 
