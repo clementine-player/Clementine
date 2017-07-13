@@ -1562,6 +1562,18 @@ void Playlist::ItemsLoaded(QFuture<PlaylistItemList> future) {
 
 static bool DescendingIntLessThan(int a, int b) { return a > b; }
 
+void Playlist::UpdateSongWithoutUndo(int old_id, const Song& new_song) {
+  if (new_song.is_valid()) {
+    for (int i = 0; i < items_.size(); i++) {
+      if (items_[i]->type() == "Library") {
+        if (old_id == items_[i]->Metadata().id()) {
+          items_[i] = PlaylistItemPtr(new LibraryPlaylistItem(new_song));
+        }
+      }
+    }
+  }
+}
+
 void Playlist::RemoveItemsWithoutUndo(const QList<int>& indicesIn) {
   // Sort the indices descending because removing elements 'backwards'
   // is easier - indices don't 'move' in the process.

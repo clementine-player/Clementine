@@ -23,6 +23,7 @@
 #include <QMap>
 #include <QObject>
 #include <QSettings>
+#include <QFileInfo>
 
 #include "core/song.h"
 #include "playlist.h"
@@ -222,6 +223,7 @@ class PlaylistManager : public PlaylistManagerInterface {
                   bool play_now = false, bool enqueue = false);
   void InsertSongs(int id, const SongList& songs, int pos = -1,
                    bool play_now = false, bool enqueue = false);
+  void UpdateSongWithoutUndo(int old_id, const QFileInfo& new_path);
   // Removes items with given indices from the playlist. This operation is not
   // undoable.
   void RemoveItemsWithoutUndo(int id, const QList<int>& indices);

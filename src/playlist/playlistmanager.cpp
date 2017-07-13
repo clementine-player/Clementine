@@ -37,6 +37,8 @@
 #include <QtConcurrentRun>
 #include <QtDebug>
 
+#include <iostream>
+
 using smart_playlists::GeneratorPtr;
 
 PlaylistManager::PlaylistManager(Application* app, QObject* parent)
@@ -485,6 +487,21 @@ void PlaylistManager::InsertSongs(int id, const SongList& songs, int pos,
   Q_ASSERT(playlists_.contains(id));
 
   playlists_[id].p->InsertSongs(songs, pos, play_now, enqueue);
+}
+
+void PlaylistManager::UpdateSongWithoutUndo(int old_id,
+                                            const QFileInfo& new_path) {
+  // Iterate through all values of playlists_ and call UpdateSongsWithoutUndo
+  QMap<int, Data>::const_iterator it = playlists_.constBegin();
+  QUrl new_url = QUrl::fromLocalFile(new_path.absoluteFilePath());
+  std::cout << "New URL: " << new_url.toString().toStdString() << std::endl;
+  Song test_song = library_backend_->GetSongById(old_id);
+  std::cout << "Old URL: " << test_song.url().toString().toStdString() << std::endl;
+  Song new_song = library_backend_->GetSongByUrl(new_url);
+  while (it != playlists_.constEnd()) {
+    it.value().p->UpdateSongWithoutUndo(old_id, new_song);
+    ++it;
+  }
 }
 
 void PlaylistManager::RemoveItemsWithoutUndo(int id,
