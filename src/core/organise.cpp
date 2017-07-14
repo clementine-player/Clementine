@@ -194,6 +194,10 @@ void Organise::ProcessSomeFiles() {
     if (!destination_->CopyToStorage(job)) {
       files_with_errors_ << task.song_info_.song_.basefilename();
     } else {
+      if (job.remove_original_) {
+        // Notify other aspects of system that song has been invalidated
+        emit OrganiseSongReplaced(job.metadata_.id(), job.destination_);
+      }
       if (job.mark_as_listened_) {
         emit FileCopied(job.metadata_.id());
       }
