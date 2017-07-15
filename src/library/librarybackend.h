@@ -229,7 +229,7 @@ signals:
   void SongsStatisticsChanged(const SongList& songs);
   void SongsRatingChanged(const SongList& songs);
   void DatabaseReset();
-  void SongPathChanged(int, QString);
+  void SongPathChanged(Song& song, QFileInfo& new_file);
 
   void TotalSongCountUpdated(int total);
 

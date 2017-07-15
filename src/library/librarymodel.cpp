@@ -113,8 +113,8 @@ LibraryModel::LibraryModel(LibraryBackend* backend, Application* app,
                            Qt::KeepAspectRatio,
                            Qt::SmoothTransformation);
 
-  connect(backend_, SIGNAL(SongPathChanged(int, QString)),
-          SLOT(SongPathChanged(int, QString)));
+  connect(backend_, SIGNAL(SongPathChanged(Song, QFileInfo)),
+          SLOT(SongPathChanged(Song, QFileInfo)));
   connect(backend_, SIGNAL(SongsDiscovered(SongList)),
           SLOT(SongsDiscovered(SongList)));
   connect(backend_, SIGNAL(SongsDeleted(SongList)),
@@ -176,8 +176,16 @@ void LibraryModel::Init(bool async) {
   }
 }
 
-void LibraryModel::SongPathChanged(int song_id, QString& new_filename) {
-  return;
+void LibraryModel::SongPathChanged(const Song& song, QFileInfo& new_file) {
+  SongList new_songs;
+  Song new_song = Song();
+  new_song.set_url(QUrl::fromLocalFile(new_file.absoluteFilePath()));
+  new_songs << new_song;
+  SongsDiscovered(new_songs);
+  SongList deleted_songs;
+  deleted_songs << old_song;
+  SongsDeleted(deleted_songs);
+  emit SongReplaced(old_song, new_song);
 }
 
 void LibraryModel::SongsDiscovered(const SongList& songs) {

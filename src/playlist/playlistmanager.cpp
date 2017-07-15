@@ -72,6 +72,9 @@ void PlaylistManager::Init(LibraryBackend* library_backend,
   parser_ = new PlaylistParser(library_backend, this);
   playlist_container_ = playlist_container;
 
+  // TODO: connect this to the library model/backend signals to figure out when
+  // to Update Playlist songs
+
   connect(library_backend_, SIGNAL(SongsDiscovered(SongList)),
           SLOT(SongsDiscovered(SongList)));
   connect(library_backend_, SIGNAL(SongsStatisticsChanged(SongList)),

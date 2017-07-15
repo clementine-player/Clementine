@@ -354,8 +354,8 @@ void OrganiseDialog::accept() {
       ui_->eject_after->isChecked());
   connect(organise, SIGNAL(Finished(QStringList)),
           SLOT(OrganiseFinished(QStringList)));
-  connect(organise, SIGNAL(SongPathChanged(int, QString&)),
-      backend_, SIGNAL(SongPathChanged(int, QString&)));
+  connect(organise, SIGNAL(SongPathChanged(int, QUrl)),
+      backend_, SIGNAL(SongPathChanged(int, QUrl)));
   connect(organise, SIGNAL(FileCopied(int)), this, SIGNAL(FileCopied(int)));
   organise->Start();
 
