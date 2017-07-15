@@ -194,6 +194,7 @@ signals:
 
  private slots:
   // From LibraryBackend
+  void SongPathChanged(int song_id, QString& new_filename);
   void SongsDiscovered(const SongList& songs);
   void SongsDeleted(const SongList& songs);
   void SongsSlightlyChanged(const SongList& songs);

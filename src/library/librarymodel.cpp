@@ -109,10 +109,12 @@ LibraryModel::LibraryModel(LibraryBackend* backend, Application* app,
 
   QIcon nocover = IconLoader::Load("nocover", IconLoader::Other);
   no_cover_icon_ = nocover.pixmap(nocover.availableSizes().last()).scaled(
-                           kPrettyCoverSize, kPrettyCoverSize, 
+                           kPrettyCoverSize, kPrettyCoverSize,
                            Qt::KeepAspectRatio,
                            Qt::SmoothTransformation);
 
+  connect(backend_, SIGNAL(OrganisePathChanged(int, QString)),
+          SLOT(SongPathChanged(int, QString)));
   connect(backend_, SIGNAL(SongsDiscovered(SongList)),
           SLOT(SongsDiscovered(SongList)));
   connect(backend_, SIGNAL(SongsDeleted(SongList)),
@@ -172,6 +174,10 @@ void LibraryModel::Init(bool async) {
   } else {
     Reset();
   }
+}
+
+void LibraryModel::SongPathChanged(int song_id, QString& new_filename) {
+  return;
 }
 
 void LibraryModel::SongsDiscovered(const SongList& songs) {

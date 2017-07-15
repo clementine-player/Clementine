@@ -196,7 +196,7 @@ void Organise::ProcessSomeFiles() {
     } else {
       if (job.remove_original_) {
         // Notify other aspects of system that song has been invalidated
-        emit OrganiseSongReplaced(job.metadata_.id(), job.destination_);
+        emit SongPathChanged(job.metadata_.id(), job.destination_);
       }
       if (job.mark_as_listened_) {
         emit FileCopied(job.metadata_.id());

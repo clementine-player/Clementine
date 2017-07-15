@@ -229,6 +229,7 @@ signals:
   void SongsStatisticsChanged(const SongList& songs);
   void SongsRatingChanged(const SongList& songs);
   void DatabaseReset();
+  void OrganisePathChanged(int, QString);
 
   void TotalSongCountUpdated(int total);
 

@@ -37,14 +37,17 @@
 #include "core/organise.h"
 #include "core/tagreaderclient.h"
 #include "core/utilities.h"
+#include "library/librarybackend.h"
 
 const char* OrganiseDialog::kDefaultFormat =
     "%artist/%album{ (Disc %disc)}/{%track - }%title.%extension";
 const char* OrganiseDialog::kSettingsGroup = "OrganiseDialog";
 
-OrganiseDialog::OrganiseDialog(TaskManager* task_manager, QWidget* parent)
+OrganiseDialog::OrganiseDialog(
+    TaskManager* task_manager, LibraryBackend* backend, QWidget* parent)
     : QDialog(parent),
       ui_(new Ui_OrganiseDialog),
+      backend_(backend),
       task_manager_(task_manager),
       total_size_(0),
       resized_by_user_(false) {
@@ -351,6 +354,8 @@ void OrganiseDialog::accept() {
       ui_->eject_after->isChecked());
   connect(organise, SIGNAL(Finished(QStringList)),
           SLOT(OrganiseFinished(QStringList)));
+  connect(organise, SIGNAL(SongPathChanged(int, QString&)),
+      backend_, SIGNAL(SongPathChanged(int, QString&)));
   connect(organise, SIGNAL(FileCopied(int)), this, SIGNAL(FileCopied(int)));
   organise->Start();
 
