@@ -113,7 +113,7 @@ LibraryModel::LibraryModel(LibraryBackend* backend, Application* app,
                            Qt::KeepAspectRatio,
                            Qt::SmoothTransformation);
 
-  connect(backend_, SIGNAL(OrganisePathChanged(int, QString)),
+  connect(backend_, SIGNAL(SongPathChanged(int, QString)),
           SLOT(SongPathChanged(int, QString)));
   connect(backend_, SIGNAL(SongsDiscovered(SongList)),
           SLOT(SongsDiscovered(SongList)));
