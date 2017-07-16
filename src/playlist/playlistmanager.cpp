@@ -81,6 +81,8 @@ void PlaylistManager::Init(LibraryBackend* library_backend,
           SLOT(SongsDiscovered(SongList)));
   connect(library_backend_, SIGNAL(SongsRatingChanged(SongList)),
           SLOT(SongsDiscovered(SongList)));
+  connect(library_backend_, SIGNAL(SongReplaced(Song, Song)),
+          SLOT(UpdateSongWithoutUndo(Song, Song)));
 
   for (const PlaylistBackend::Playlist& p :
        playlist_backend->GetAllOpenPlaylists()) {
@@ -492,17 +494,16 @@ void PlaylistManager::InsertSongs(int id, const SongList& songs, int pos,
   playlists_[id].p->InsertSongs(songs, pos, play_now, enqueue);
 }
 
-void PlaylistManager::UpdateSongWithoutUndo(int old_id,
-                                            const QFileInfo& new_path) {
+void PlaylistManager::UpdateSongWithoutUndo(const Song& old_song,
+                                            const Song& new_song) {
   // Iterate through all values of playlists_ and call UpdateSongsWithoutUndo
+
+  qLog(Debug) << "New Song: " << new_song.url();
+  qLog(Debug) << "Valid?" << new_song.is_valid();
+  qLog(Debug) << "ID: " << new_song.id();
   QMap<int, Data>::const_iterator it = playlists_.constBegin();
-  QUrl new_url = QUrl::fromLocalFile(new_path.absoluteFilePath());
-  std::cout << "New URL: " << new_url.toString().toStdString() << std::endl;
-  Song test_song = library_backend_->GetSongById(old_id);
-  std::cout << "Old URL: " << test_song.url().toString().toStdString() << std::endl;
-  Song new_song = library_backend_->GetSongByUrl(new_url);
   while (it != playlists_.constEnd()) {
-    it.value().p->UpdateSongWithoutUndo(old_id, new_song);
+    it.value().p->UpdateSongWithoutUndo(old_song, new_song);
     ++it;
   }
 }

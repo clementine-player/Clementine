@@ -24,6 +24,7 @@
 
 #include <memory>
 
+#include <QFileInfo>
 #include <QBasicTimer>
 #include <QObject>
 #include <QTemporaryFile>

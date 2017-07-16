@@ -176,7 +176,6 @@ class LibraryModel : public SimpleTreeModel<LibraryItem> {
 signals:
   void TotalSongCountUpdated(int count);
   void GroupingChanged(const LibraryModel::Grouping& g);
-  void SongReplaced(const Song& old_song, const Song& new_song);
 
  public slots:
   void SetFilterAge(int age);
@@ -195,7 +194,6 @@ signals:
 
  private slots:
   // From LibraryBackend
-  void SongPathChanged(const Song& song, QFileInfo& new_file);
   void SongsDiscovered(const SongList& songs);
   void SongsDeleted(const SongList& songs);
   void SongsSlightlyChanged(const SongList& songs);

@@ -336,7 +336,7 @@ class Playlist : public QAbstractListModel {
 
   void InsertUrls(const QList<QUrl>& urls, int pos = -1, bool play_now = false,
                   bool enqueue = false);
-  void UpdateSongWithoutUndo(int old_id, const Song& new_song);
+  void UpdateSongWithoutUndo(const Song& old_song, const Song& new_song);
   // Removes items with given indices from the playlist. This operation is not
   // undoable.
   void RemoveItemsWithoutUndo(const QList<int>& indices);

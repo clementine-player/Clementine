@@ -198,7 +198,7 @@ void Organise::ProcessSomeFiles() {
         // Notify other aspects of system that song has been invalidated
         QString root = destination_->LocalPath();
         QFileInfo new_file = QFileInfo(
-             root + "/" + job.song_info_.new_filename);
+             root + "/" + task.song_info_.new_filename_);
         emit SongPathChanged(song, new_file);
       }
       if (job.mark_as_listened_) {

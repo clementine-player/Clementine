@@ -1562,11 +1562,12 @@ void Playlist::ItemsLoaded(QFuture<PlaylistItemList> future) {
 
 static bool DescendingIntLessThan(int a, int b) { return a > b; }
 
-void Playlist::UpdateSongWithoutUndo(int old_id, const Song& new_song) {
+void Playlist::UpdateSongWithoutUndo(const Song& old_song,
+                                     const Song& new_song) {
   if (new_song.is_valid()) {
     for (int i = 0; i < items_.size(); i++) {
       if (items_[i]->type() == "Library") {
-        if (old_id == items_[i]->Metadata().id()) {
+        if (old_song == items_[i]->Metadata()) {
           items_[i] = PlaylistItemPtr(new LibraryPlaylistItem(new_song));
         }
       }

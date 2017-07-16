@@ -47,15 +47,14 @@ OrganiseDialog::OrganiseDialog(
     TaskManager* task_manager, LibraryBackend* backend, QWidget* parent)
     : QDialog(parent),
       ui_(new Ui_OrganiseDialog),
-      backend_(backend),
       task_manager_(task_manager),
+      backend_(backend),
       total_size_(0),
       resized_by_user_(false) {
   ui_->setupUi(this);
   connect(ui_->button_box->button(QDialogButtonBox::Reset), SIGNAL(clicked()),
           SLOT(Reset()));
-
-  ui_->aftercopying->setItemIcon(
+ui_->aftercopying->setItemIcon(
       1, IconLoader::Load("edit-delete", IconLoader::Base));
 
   // Valid tags
@@ -354,9 +353,11 @@ void OrganiseDialog::accept() {
       ui_->eject_after->isChecked());
   connect(organise, SIGNAL(Finished(QStringList)),
           SLOT(OrganiseFinished(QStringList)));
-  connect(organise, SIGNAL(SongPathChanged(int, QUrl)),
-      backend_, SIGNAL(SongPathChanged(int, QUrl)));
   connect(organise, SIGNAL(FileCopied(int)), this, SIGNAL(FileCopied(int)));
+  if (backend_ != nullptr) {
+    connect(organise, SIGNAL(SongPathChanged(Song, QUrl)),
+        backend_, SLOT(SongPathChanged(Song, QUrl)));
+  }
   organise->Start();
 
   QDialog::accept();

@@ -67,7 +67,7 @@ PodcastService::PodcastService(Application* app, InternetModel* parent)
       proxy_(new PodcastSortProxyModel(this)),
       context_menu_(nullptr),
       root_(nullptr),
-      organise_dialog_(new OrganiseDialog(app_->task_manager(), nullptr)) {
+      organise_dialog_(new OrganiseDialog(app_->task_manager())) {
   icon_loader_->SetModel(model_);
   proxy_->setSourceModel(model_);
   proxy_->setDynamicSortFilter(true);
@@ -128,7 +128,7 @@ bool PodcastSortProxyModel::lessThan(const QModelIndex& left,
 }
 
 QStandardItem* PodcastService::CreateRootItem() {
-  root_ = new QStandardItem(IconLoader::Load("podcast", IconLoader::Provider), 
+  root_ = new QStandardItem(IconLoader::Load("podcast", IconLoader::Provider),
                             tr("Podcasts"));
   root_->setData(true, InternetModel::Role_CanLazyLoad);
   return root_;
@@ -414,7 +414,7 @@ QStandardItem* PodcastService::CreatePodcastEpisodeItem(
 void PodcastService::ShowContextMenu(const QPoint& global_pos) {
   if (!context_menu_) {
     context_menu_ = new QMenu;
-    context_menu_->addAction(IconLoader::Load("list-add", IconLoader::Base), 
+    context_menu_->addAction(IconLoader::Load("list-add", IconLoader::Base),
                              tr("Add podcast..."), this, SLOT(AddPodcast()));
     context_menu_->addAction(IconLoader::Load("view-refresh", IconLoader::Base),
                              tr("Update all podcasts"), app_->podcast_updater(),
@@ -425,23 +425,23 @@ void PodcastService::ShowContextMenu(const QPoint& global_pos) {
 
     context_menu_->addSeparator();
     update_selected_action_ = context_menu_->addAction(
-        IconLoader::Load("view-refresh", IconLoader::Base), 
+        IconLoader::Load("view-refresh", IconLoader::Base),
         tr("Update this podcast"), this, SLOT(UpdateSelectedPodcast()));
     download_selected_action_ =
-        context_menu_->addAction(IconLoader::Load("download", IconLoader::Base), 
+        context_menu_->addAction(IconLoader::Load("download", IconLoader::Base),
                                  "", this, SLOT(DownloadSelectedEpisode()));
     delete_downloaded_action_ = context_menu_->addAction(
-        IconLoader::Load("edit-delete", IconLoader::Base), 
+        IconLoader::Load("edit-delete", IconLoader::Base),
         tr("Delete downloaded data"), this, SLOT(DeleteDownloadedData()));
     copy_to_device_ = context_menu_->addAction(
         IconLoader::Load("multimedia-player-ipod-mini-blue", IconLoader::Base),
         tr("Copy to device..."), this, SLOT(CopyToDevice()));
-    cancel_download_ = context_menu_->addAction(IconLoader::Load("cancel", 
+    cancel_download_ = context_menu_->addAction(IconLoader::Load("cancel",
                                                 IconLoader::Base),
                                                 tr("Cancel download"), this,
                                                 SLOT(CancelDownload()));
     remove_selected_action_ = context_menu_->addAction(
-        IconLoader::Load("list-remove", IconLoader::Base), tr("Unsubscribe"), 
+        IconLoader::Load("list-remove", IconLoader::Base), tr("Unsubscribe"),
         this, SLOT(RemoveSelectedPodcast()));
 
     context_menu_->addSeparator();
