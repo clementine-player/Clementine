@@ -289,7 +289,8 @@ SongList LibraryBackend::FindSongsInDirectory(int id) {
   return ret;
 }
 
-void LibraryBackend::SongPathChanged(const Song& song, QFileInfo& new_file) {
+void LibraryBackend::SongPathChanged(const Song& song,
+                                     const QFileInfo& new_file) {
   SongList relevant_songs;
   relevant_songs << song;
 
@@ -297,6 +298,10 @@ void LibraryBackend::SongPathChanged(const Song& song, QFileInfo& new_file) {
   new_song.InitFromFilePartial(new_file.absoluteFilePath());
   relevant_songs << new_song;
   AddOrUpdateSongs(relevant_songs);
+
+  qLog(Debug) << "New Song: " << new_song.url();
+  qLog(Debug) << "Valid?" << new_song.is_valid();
+  qLog(Debug) << "ID: " << new_song.id();
 
   emit SongReplaced(song, new_song);
 }

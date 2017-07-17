@@ -220,7 +220,7 @@ class LibraryBackend : public LibraryBackendInterface {
   void UpdateSongRating(int id, float rating);
   void UpdateSongsRating(const QList<int>& id_list, float rating);
   // Tells the library model that a song path has changed
-  void SongPathChanged(const Song& song, QFileInfo& new_file);
+  void SongPathChanged(const Song& song, const QFileInfo& new_file);
 
 signals:
   void DirectoryDiscovered(const Directory& dir,

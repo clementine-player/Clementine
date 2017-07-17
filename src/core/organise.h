@@ -61,7 +61,7 @@ class Organise : public QObject {
  signals:
   void Finished(const QStringList& files_with_errors);
   void FileCopied(int database_id);
-  void SongPathChanged(const Song& song, QFileInfo& new_file);
+  void SongPathChanged(const Song& song, const QFileInfo& new_file);
 
  protected:
   void timerEvent(QTimerEvent* e);
