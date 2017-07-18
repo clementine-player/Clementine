@@ -54,7 +54,8 @@ OrganiseDialog::OrganiseDialog(
   ui_->setupUi(this);
   connect(ui_->button_box->button(QDialogButtonBox::Reset), SIGNAL(clicked()),
           SLOT(Reset()));
-ui_->aftercopying->setItemIcon(
+
+  ui_->aftercopying->setItemIcon(
       1, IconLoader::Load("edit-delete", IconLoader::Base));
 
   // Valid tags

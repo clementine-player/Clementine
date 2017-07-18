@@ -37,8 +37,6 @@
 #include <QtConcurrentRun>
 #include <QtDebug>
 
-#include <iostream>
-
 using smart_playlists::GeneratorPtr;
 
 PlaylistManager::PlaylistManager(Application* app, QObject* parent)
@@ -72,17 +70,12 @@ void PlaylistManager::Init(LibraryBackend* library_backend,
   parser_ = new PlaylistParser(library_backend, this);
   playlist_container_ = playlist_container;
 
-  // TODO: connect this to the library model/backend signals to figure out when
-  // to Update Playlist songs
-
   connect(library_backend_, SIGNAL(SongsDiscovered(SongList)),
           SLOT(SongsDiscovered(SongList)));
   connect(library_backend_, SIGNAL(SongsStatisticsChanged(SongList)),
           SLOT(SongsDiscovered(SongList)));
   connect(library_backend_, SIGNAL(SongsRatingChanged(SongList)),
           SLOT(SongsDiscovered(SongList)));
-  connect(library_backend_, SIGNAL(SongReplaced(Song, Song)),
-          SLOT(UpdateSongWithoutUndo(Song, Song)));
 
   for (const PlaylistBackend::Playlist& p :
        playlist_backend->GetAllOpenPlaylists()) {
@@ -492,23 +485,6 @@ void PlaylistManager::InsertSongs(int id, const SongList& songs, int pos,
   Q_ASSERT(playlists_.contains(id));
 
   playlists_[id].p->InsertSongs(songs, pos, play_now, enqueue);
-}
-
-void PlaylistManager::UpdateSongWithoutUndo(const Song& old_song,
-                                            const Song& new_song) {
-  // Iterate through all values of playlists_ and call UpdateSongsWithoutUndo
-
-  qLog(Debug) << "New Song: " << new_song.url();
-  qLog(Debug) << "Valid?" << new_song.is_valid();
-  qLog(Debug) << "ID: " << new_song.id();
-  for (Playlist* playlist : GetAllPlaylists()) {
-    PlaylistItemList items = playlist->library_items_by_id(old_song.id());
-    for (PlaylistItemPtr item : items) {
-      if (item->Metadata().directory_id() != old_song.directory_id()) continue;
-      static_cast<LibraryPlaylistItem*>(item.get())->SetMetadata(new_song);
-      playlist->ItemChanged(item);
-    }
-  }
 }
 
 void PlaylistManager::RemoveItemsWithoutUndo(int id,

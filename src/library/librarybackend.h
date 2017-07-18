@@ -232,9 +232,6 @@ signals:
   void SongsStatisticsChanged(const SongList& songs);
   void SongsRatingChanged(const SongList& songs);
   void DatabaseReset();
-  // After the library model handles a path change, backend will notify
-  // all other subscribers (e.g. playlists) of the update
-  void SongReplaced(const Song& old_song, const Song& new_song);
 
   void TotalSongCountUpdated(int total);
 
