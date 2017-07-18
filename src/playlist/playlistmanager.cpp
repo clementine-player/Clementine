@@ -501,10 +501,13 @@ void PlaylistManager::UpdateSongWithoutUndo(const Song& old_song,
   qLog(Debug) << "New Song: " << new_song.url();
   qLog(Debug) << "Valid?" << new_song.is_valid();
   qLog(Debug) << "ID: " << new_song.id();
-  QMap<int, Data>::const_iterator it = playlists_.constBegin();
-  while (it != playlists_.constEnd()) {
-    it.value().p->UpdateSongWithoutUndo(old_song, new_song);
-    ++it;
+  for (Playlist* playlist : GetAllPlaylists()) {
+    PlaylistItemList items = playlist->library_items_by_id(old_song.id());
+    for (PlaylistItemPtr item : items) {
+      if (item->Metadata().directory_id() != old_song.directory_id()) continue;
+      static_cast<LibraryPlaylistItem*>(item.get())->SetMetadata(new_song);
+      playlist->ItemChanged(item);
+    }
   }
 }
 
