@@ -109,7 +109,7 @@ LibraryModel::LibraryModel(LibraryBackend* backend, Application* app,
 
   QIcon nocover = IconLoader::Load("nocover", IconLoader::Other);
   no_cover_icon_ = nocover.pixmap(nocover.availableSizes().last()).scaled(
-                           kPrettyCoverSize, kPrettyCoverSize, 
+                           kPrettyCoverSize, kPrettyCoverSize,
                            Qt::KeepAspectRatio,
                            Qt::SmoothTransformation);
 
