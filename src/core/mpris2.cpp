@@ -320,7 +320,7 @@ void Mpris2::SetShuffle(bool enable) {
 QVariantMap Mpris2::Metadata() const { return last_metadata_; }
 
 QString Mpris2::current_track_id() const {
-  return QString("/org/mpris/MediaPlayer2/Track/%1")
+  return QString("/org/clementineplayer/Clementine/Track/%1")
       .arg(QString::number(app_->playlist_manager()->active()->current_row()));
 }
 
