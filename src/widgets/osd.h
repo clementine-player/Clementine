@@ -23,6 +23,7 @@
 #include <QDateTime>
 #include <QImage>
 #include <QObject>
+#include <QVersionNumber>
 
 #include "config.h"
 #include "engines/engine_fwd.h"
@@ -137,6 +138,7 @@ class OSD : public QObject {
   std::unique_ptr<OrgFreedesktopNotificationsInterface> interface_;
   uint notification_id_;
   QDateTime last_notification_time_;
+  QVersionNumber desktop_notification_version_;
 #endif
 };
 
