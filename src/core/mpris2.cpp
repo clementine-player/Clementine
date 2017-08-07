@@ -495,7 +495,7 @@ namespace {
 
 QDBusObjectPath MakePlaylistPath(int id) {
   return QDBusObjectPath(
-      QString("/org/mpris/MediaPlayer2/Playlists/%1").arg(id));
+      QString("/org/clementineplayer/clementine/PlaylistId/%1").arg(id));
 }
 }
 
