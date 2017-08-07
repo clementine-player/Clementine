@@ -35,5 +35,6 @@ addons:
     - qt4-dev-tools
 
 script:
-  - cmake --build bin
-  - make -C bin
+  - cd bin
+  - cmake ..
+  - make
