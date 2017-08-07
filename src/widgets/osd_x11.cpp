@@ -88,6 +88,19 @@ void OSD::Init() {
   if (!interface_->isValid()) {
     qLog(Warning) << "Error connecting to notifications service.";
   }
+
+  // Read the protocol version
+  QString vendor, version, spec_version;
+  QDBusReply<QString> reply =
+    interface_->GetServerInformation(vendor, version, spec_version);
+  if (reply.isValid()) {
+    desktop_notification_version_ = QVersionNumber::fromString(spec_version);
+  } else {
+    qLog(Warning) << "Could not retrieve notification server information.";
+    qLog(Warning) << reply.error();
+
+    desktop_notification_version_ = QVersionNumber(1,1);
+  }
 #endif  // HAVE_DBUS
 }
 
@@ -108,7 +121,13 @@ void OSD::ShowMessageNative(const QString& summary, const QString& message,
 
   QVariantMap hints;
   if (!image.isNull()) {
-    hints["image_data"] = QVariant(image);
+    if (desktop_notification_version_ >= QVersionNumber(1,2)) {
+      hints["image-data"] = QVariant(image);
+    } else if (desktop_notification_version_ >= QVersionNumber(1,1)) {
+      hints["image_data"] = QVariant(image);
+    } else {
+      hints["icon_data"] = QVariant(image);
+    }
   }
 
   int id = 0;
