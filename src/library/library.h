@@ -62,8 +62,11 @@ class Library : public QObject {
   void ResumeWatcher();
 
   void FullScan();
+  void AbortScan();
 
- private slots:
+  void Rescan(SongList songs);
+
+private slots:
   void IncrementalScan();
 
   void SongsStatisticsChanged(const SongList& songs);

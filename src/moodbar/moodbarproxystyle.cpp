@@ -278,7 +278,6 @@ QRect MoodbarProxyStyle::subControlRect(ComplexControl cc,
             qint64 slider_delta = slider_opt->sliderValue - slider_opt->minimum;
             qint64 slider_range = slider_opt->maximum - slider_opt->minimum;
             int rectangle_effective_width = opt->rect.width() - kArrowWidth;
-
             qint64 x = slider_delta * rectangle_effective_width / slider_range;
             x_offset = static_cast<int>(x);
           }

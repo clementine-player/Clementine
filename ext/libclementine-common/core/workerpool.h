@@ -359,6 +359,7 @@ WorkerPool<HandlerType>::SendMessageWithReply(MessageType* message) {
 
   // Add the pending reply to the queue
   {
+    // @todo This can crash on quit - perhaps something is deleted prematurely?
     QMutexLocker l(&message_queue_mutex_);
     message_queue_.enqueue(reply);
   }

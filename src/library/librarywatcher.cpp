@@ -60,10 +60,12 @@ LibraryWatcher::LibraryWatcher(QObject* parent)
       stop_requested_(false),
       scan_on_startup_(true),
       monitor_(true),
+      rescan_in_progress_(false),
       rescan_timer_(new QTimer(this)),
       rescan_paused_(false),
       total_watches_(0),
-      cue_parser_(new CueParser(backend_, this)) {
+      cue_parser_(new CueParser(backend_, this)),
+      prevent_delete_(false) {
   rescan_timer_->setInterval(1000);
   rescan_timer_->setSingleShot(true);
 
@@ -75,21 +77,26 @@ LibraryWatcher::LibraryWatcher(QObject* parent)
   }
 
   ReloadSettings();
-
+  qLog(Debug) << "LibraryWatcher created, pd:" << prevent_delete_;
   connect(rescan_timer_, SIGNAL(timeout()), SLOT(RescanPathsNow()));
 }
 
 LibraryWatcher::ScanTransaction::ScanTransaction(LibraryWatcher* watcher,
                                                  int dir, bool incremental,
-                                                 bool ignores_mtime)
+                                                 bool ignores_mtime,
+                                                 bool prevent_delete)
     : progress_(0),
       progress_max_(0),
       dir_(dir),
       incremental_(incremental),
       ignores_mtime_(ignores_mtime),
+      prevent_delete_(prevent_delete),
       watcher_(watcher),
       cached_songs_dirty_(true),
-      known_subdirs_dirty_(true) {
+      known_subdirs_dirty_(true)
+      {
+  qLog(Debug) << "ScanTransaction created, prevent delete:" << prevent_delete_;
+
   QString description;
   if (watcher_->device_name_.isEmpty())
     description = tr("Updating library");
@@ -102,22 +109,12 @@ LibraryWatcher::ScanTransaction::ScanTransaction(LibraryWatcher* watcher,
 
 LibraryWatcher::ScanTransaction::~ScanTransaction() {
   // If we're stopping then don't commit the transaction
+  watcher_->task_manager_->SetTaskFinished(task_id_);
+
   if (watcher_->stop_requested_) return;
 
-  if (!new_songs.isEmpty()) emit watcher_->NewOrUpdatedSongs(new_songs);
+  CommitNewOrUpdatedSongs();
 
-  if (!touched_songs.isEmpty()) emit watcher_->SongsMTimeUpdated(touched_songs);
-
-  if (!deleted_songs.isEmpty()) emit watcher_->SongsDeleted(deleted_songs);
-
-  if (!readded_songs.isEmpty()) emit watcher_->SongsReadded(readded_songs);
-
-  if (!new_subdirs.isEmpty()) emit watcher_->SubdirsDiscovered(new_subdirs);
-
-  if (!touched_subdirs.isEmpty())
-    emit watcher_->SubdirsMTimeUpdated(touched_subdirs);
-
-  watcher_->task_manager_->SetTaskFinished(task_id_);
 
   if (watcher_->monitor_) {
     // Watch the new subdirectories
@@ -129,12 +126,30 @@ LibraryWatcher::ScanTransaction::~ScanTransaction() {
 
 void LibraryWatcher::ScanTransaction::AddToProgress(int n) {
   progress_ += n;
+  // @TODO this can crash - task_manager_ is not accessible.
   watcher_->task_manager_->SetTaskProgress(task_id_, progress_, progress_max_);
 }
 
 void LibraryWatcher::ScanTransaction::AddToProgressMax(int n) {
   progress_max_ += n;
   watcher_->task_manager_->SetTaskProgress(task_id_, progress_, progress_max_);
+}
+
+void LibraryWatcher::ScanTransaction::CommitNewOrUpdatedSongs() {
+  if (!new_songs.isEmpty()) emit watcher_->NewOrUpdatedSongs(new_songs);
+  new_songs.clear();
+  if (!touched_songs.isEmpty()) emit watcher_->SongsMTimeUpdated(touched_songs);
+  touched_songs.clear();
+  if (!deleted_songs.isEmpty() && prevent_delete_) qLog(Debug) << deleted_songs.size() << " files deleted, but deletion from database prevented.";
+  if (!deleted_songs.isEmpty() && !prevent_delete_) emit watcher_->SongsDeleted(deleted_songs);
+  deleted_songs.clear();
+  if (!readded_songs.isEmpty()) emit watcher_->SongsReadded(readded_songs);
+  readded_songs.clear();
+  if (!new_subdirs.isEmpty()) emit watcher_->SubdirsDiscovered(new_subdirs);
+  new_subdirs.clear();
+  if (!touched_subdirs.isEmpty())
+    emit watcher_->SubdirsMTimeUpdated(touched_subdirs);
+  touched_subdirs.clear();
 }
 
 SongList LibraryWatcher::ScanTransaction::FindSongsInSubdirectory(
@@ -197,18 +212,20 @@ void LibraryWatcher::AddDirectory(const Directory& dir,
   if (subdirs.isEmpty()) {
     // This is a new directory that we've never seen before.
     // Scan it fully.
-    ScanTransaction transaction(this, dir.id, false);
+    ScanTransaction transaction(this, dir.id, false, false, prevent_delete_);
     transaction.SetKnownSubdirs(subdirs);
     transaction.AddToProgressMax(1);
     ScanSubdirectory(dir.path, Subdirectory(), &transaction);
   } else {
     // We can do an incremental scan - looking at the mtimes of each
     // subdirectory and only rescan if the directory has changed.
-    ScanTransaction transaction(this, dir.id, true);
+    qLog(Debug) << "LibraryWatcher creating a ST, pd:" << prevent_delete_;
+
+    ScanTransaction transaction(this, dir.id, true, false, prevent_delete_);
     transaction.SetKnownSubdirs(subdirs);
     transaction.AddToProgressMax(subdirs.count());
     for (const Subdirectory& subdir : subdirs) {
-      if (stop_requested_) return;
+      if (stop_requested_) break;
 
       if (scan_on_startup_) ScanSubdirectory(subdir.path, subdir, &transaction);
 
@@ -223,6 +240,7 @@ void LibraryWatcher::ScanSubdirectory(const QString& path,
                                       const Subdirectory& subdir,
                                       ScanTransaction* t,
                                       bool force_noincremental) {
+  qLog(Debug) << Q_FUNC_INFO << path;
   QFileInfo path_info(path);
   QDir      path_dir(path);
 
@@ -248,6 +266,7 @@ void LibraryWatcher::ScanSubdirectory(const QString& path,
       subdir.mtime == path_info.lastModified().toTime_t()) {
     // The directory hasn't changed since last time
     t->AddToProgress(1);
+    qLog(Debug) << "This directory " << path << " hasn't changed - ignoring.";
     return;
   }
 
@@ -287,6 +306,7 @@ void LibraryWatcher::ScanSubdirectory(const QString& path,
         new_subdir.path = child;
         new_subdir.mtime = child_info.lastModified().toTime_t();
         my_new_subdirs << new_subdir;
+        qLog(Debug) << "Found new subdir to scan " << new_subdir.path;
       }
     } else {
       QString ext_part(ExtensionPart(child));
@@ -412,6 +432,8 @@ void LibraryWatcher::ScanSubdirectory(const QString& path,
     t->touched_subdirs << updated_subdir;
 
   t->AddToProgress(1);
+
+  emit t->CommitNewOrUpdatedSongs();
 
   // Recurse into the new subdirs that we found
   t->AddToProgressMax(my_new_subdirs.count());
@@ -629,11 +651,11 @@ void LibraryWatcher::DirectoryChanged(const QString& subdir) {
 void LibraryWatcher::RescanPathsNow() {
   for (int dir : rescan_queue_.keys()) {
     if (stop_requested_) return;
-    ScanTransaction transaction(this, dir, false);
+    ScanTransaction transaction(this, dir, false, false, prevent_delete_);
     transaction.AddToProgressMax(rescan_queue_[dir].count());
 
     for (const QString& path : rescan_queue_[dir]) {
-      if (stop_requested_) return;
+      if (stop_requested_) break;
       Subdirectory subdir;
       subdir.directory_id = dir;
       subdir.mtime = 0;
@@ -718,7 +740,7 @@ void LibraryWatcher::ReloadSettings() {
   s.beginGroup(kSettingsGroup);
   scan_on_startup_ = s.value("startup_scan", true).toBool();
   monitor_ = s.value("monitor", true).toBool();
-
+  prevent_delete_ = s.value("prevent_delete", false).toBool();
   best_image_filters_.clear();
   QStringList filters =
       s.value("cover_art_patterns", QStringList() << "front"
@@ -756,21 +778,58 @@ void LibraryWatcher::IncrementalScanAsync() {
 }
 
 void LibraryWatcher::FullScanAsync() {
-  QMetaObject::invokeMethod(this, "FullScanNow", Qt::QueuedConnection);
+    QMetaObject::invokeMethod(this, "FullScanNow", Qt::QueuedConnection);
+}
+
+void LibraryWatcher::RescanTracksAsync(SongList songs) {
+    // Is List thread safe? if not, this may crash.
+    song_rescan_queue_.append(songs);
+
+    // Call only if it's not already running
+    if(!rescan_in_progress_)
+        QMetaObject::invokeMethod(this, "RescanTracksNow", Qt::QueuedConnection);
 }
 
 void LibraryWatcher::IncrementalScanNow() { PerformScan(true, false); }
 
-void LibraryWatcher::FullScanNow() { PerformScan(false, true); }
+void LibraryWatcher::FullScanNow() { PerformScan(false, false); }
+
+void LibraryWatcher::RescanTracksNow() {
+    Q_ASSERT(!rescan_in_progress_);
+    stop_requested_ = false;
+
+    // Currently we are too stupid to rescan one file at a time, so
+    // we'll just scan the full directiories
+    QStringList scanned_dirs; // To avoid double scans
+    while(!song_rescan_queue_.isEmpty()) {
+        if(stop_requested_) break;
+        Song song = song_rescan_queue_.takeFirst();
+        QString songdir = song.url().toLocalFile().section('/', 0, -2);
+        if(!scanned_dirs.contains(songdir)) {
+            qLog(Debug) << Q_FUNC_INFO << "Song " << song.title() << " dir id " << song.directory_id() << " dir " << songdir;
+            ScanTransaction transaction(this, song.directory_id(), false, false, prevent_delete_);
+            ScanSubdirectory(songdir, Subdirectory(), &transaction);
+            scanned_dirs << songdir;
+            emit CompilationsNeedUpdating();
+        } else {
+            qLog(Debug) << Q_FUNC_INFO << "Directory " << songdir << " already scanned - skipping.";
+        }
+    }
+    Q_ASSERT(song_rescan_queue_.isEmpty());
+    rescan_in_progress_ = false;
+}
+// Why would you ignore mtimes?
 
 void LibraryWatcher::PerformScan(bool incremental, bool ignore_mtimes) {
+  stop_requested_ = false;
   for (const Directory& dir : watched_dirs_.values()) {
-    ScanTransaction transaction(this, dir.id, incremental, ignore_mtimes);
+    if (stop_requested_) break;
+    ScanTransaction transaction(this, dir.id, incremental, ignore_mtimes, prevent_delete_);
     SubdirectoryList subdirs(transaction.GetAllSubdirs());
     transaction.AddToProgressMax(subdirs.count());
 
     for (const Subdirectory& subdir : subdirs) {
-      if (stop_requested_) return;
+      if (stop_requested_) break;
 
       ScanSubdirectory(subdir.path, subdir, &transaction);
     }

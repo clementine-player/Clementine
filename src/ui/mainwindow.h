@@ -166,6 +166,7 @@ signals:
   void PlaylistSkip();
   void PlaylistRemoveCurrent();
   void PlaylistEditFinished(const QModelIndex& index);
+  void RescanTracks();
   void EditTracks();
   void EditTagDialogAccepted();
   void DiscoverStreamDetails();

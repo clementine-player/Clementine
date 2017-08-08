@@ -56,6 +56,7 @@ EditTagDialog::EditTagDialog(Application* app, QWidget* parent)
       app_(app),
       album_cover_choice_controller_(new AlbumCoverChoiceController(this)),
       loading_(false),
+      abortRequested_(false),
       ignore_edits_(false),
       tag_fetcher_(new TagFetcher(this)),
       cover_art_id_(0),
@@ -79,7 +80,6 @@ EditTagDialog::EditTagDialog(Application* app, QWidget* parent)
   connect(results_dialog_, SIGNAL(SongChosen(Song, Song)),
           SLOT(FetchTagSongChosen(Song, Song)));
   connect(results_dialog_, SIGNAL(finished(int)), tag_fetcher_, SLOT(Cancel()));
-
   album_cover_choice_controller_->SetApplication(app_);
 
   ui_->setupUi(this);
@@ -139,6 +139,7 @@ EditTagDialog::EditTagDialog(Application* app, QWidget* parent)
   connect(ui_->rating, SIGNAL(RatingChanged(float)), SLOT(SongRated(float)));
   connect(ui_->playcount_reset, SIGNAL(clicked()), SLOT(ResetPlayCounts()));
   connect(ui_->fetch_tag, SIGNAL(clicked()), SLOT(FetchTag()));
+  connect(ui_->abortSaveButton, SIGNAL(clicked()), SLOT(abortSave()));
 
   // Set up the album cover menu
   cover_menu_ = new QMenu(this);
@@ -222,6 +223,7 @@ bool EditTagDialog::SetLoading(const QString& message) {
   ui_->fetch_tag->setEnabled(!loading);
   ui_->loading_label->setVisible(loading);
   ui_->loading_label->set_text(message);
+  ui_->abortSaveButton->setEnabled(loading);
   return true;
 }
 
@@ -677,6 +679,11 @@ void EditTagDialog::NextSong() {
   ui_->song_list->setCurrentRow(row);
 }
 
+void EditTagDialog::abortSave() {
+    abortRequested_ = true;
+    ui_->abortSaveButton->setEnabled(false);
+}
+
 void EditTagDialog::PreviousSong() {
   if (ui_->song_list->count() == 0) {
     return;
@@ -696,6 +703,17 @@ void EditTagDialog::ButtonClicked(QAbstractButton* button) {
 void EditTagDialog::SaveData(const QList<Data>& data) {
   for (int i = 0; i < data.count(); ++i) {
     const Data& ref = data[i];
+
+    // Remove the item from list to show progress
+    for(int i=0;i < ui_->song_list->count();i++) {
+        if(ui_->song_list->item(i)->text() == ref.current_.basefilename()) {
+           ui_->song_list->takeItem(i);
+           break;
+        }
+    }
+    if(abortRequested_) continue;
+
+    // No changes
     if (ref.current_.IsMetadataEqual(ref.original_)) continue;
 
     if (!TagReaderClient::Instance()->SaveFileBlocking(
@@ -710,6 +728,9 @@ void EditTagDialog::accept() {
   // Show the loading indicator
   if (!SetLoading(tr("Saving tracks") + "...")) return;
 
+  abortRequested_ = false;
+  ui_->abortSaveButton->setEnabled(true);
+
   // Save tags in the background
   QFuture<void> future =
       QtConcurrent::run(this, &EditTagDialog::SaveData, data_);
@@ -718,6 +739,14 @@ void EditTagDialog::accept() {
 
 void EditTagDialog::AcceptFinished() {
   if (!SetLoading(QString())) return;
+
+  // Ask library to rescan the edited tracks to update
+  // GUI.
+  SongList editedTracks;
+  for(Data d: data_) {
+      editedTracks << d.current_;
+  }
+  app_->library()->Rescan(editedTracks);
 
   QDialog::accept();
 }

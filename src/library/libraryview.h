@@ -97,6 +97,7 @@ signals:
   void CopyToDevice();
   void Delete();
   void EditTracks();
+  void RescanTracks();
   void ShowInBrowser();
   void ShowInVarious();
   void NoShowInVarious();
@@ -135,6 +136,7 @@ signals:
   QAction* delete_;
   QAction* edit_track_;
   QAction* edit_tracks_;
+  QAction* rescan_files_;
   QAction* show_in_browser_;
   QAction* show_in_various_;
   QAction* no_show_in_various_;
