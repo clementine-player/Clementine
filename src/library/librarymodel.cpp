@@ -656,6 +656,9 @@ QVariant LibraryModel::data(const LibraryItem* item, int role) const {
 
     case Role_SortText:
       return item->SortText();
+
+    case Role_DisplayText:
+      return item->DisplayText(); 
   }
   return QVariant();
 }

@@ -21,6 +21,7 @@
 #include "searchprovider.h"
 #include "library/librarymodel.h"
 #include "ui/settingsdialog.h"
+#include "playlist/playlistmanager.h"
 
 #include <QWidget>
 
@@ -81,6 +82,8 @@ signals:
   void LoadSelected();
   void OpenSelectedInNewPlaylist();
   void AddSelectedToPlaylistEnqueue();
+
+  void SearchForThis();
 
   void GroupByClicked(QAction* action);
   void SetGroupBy(const LibraryModel::Grouping& grouping);

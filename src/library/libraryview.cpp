@@ -103,7 +103,7 @@ void LibraryItemDelegate::paint(QPainter* painter,
     // Draw the line under the item
     QColor line_color = opt.palette.color(QPalette::Text);
     QLinearGradient grad_color(opt.rect.bottomLeft(), opt.rect.bottomRight());
-    const double fade_start_end = (opt.rect.width()/3.0)/opt.rect.width();
+    const double fade_start_end = (opt.rect.width() / 3.0) / opt.rect.width();
     line_color.setAlphaF(0.0);
     grad_color.setColorAt(0, line_color);
     line_color.setAlphaF(0.5);
@@ -193,15 +193,17 @@ LibraryView::~LibraryView() {}
 void LibraryView::SaveFocus() {
   QModelIndex current = currentIndex();
   QVariant type = model()->data(current, LibraryModel::Role_Type);
-  if (!type.isValid() || !(type.toInt() == LibraryItem::Type_Song ||
-                           type.toInt() == LibraryItem::Type_Container ||
-                           type.toInt() == LibraryItem::Type_Divider)) {
+  if (!type.isValid() ||
+      !(type.toInt() == LibraryItem::Type_Song ||
+        type.toInt() == LibraryItem::Type_Container ||
+        type.toInt() == LibraryItem::Type_Divider)) {
     return;
   }
 
   last_selected_path_.clear();
   last_selected_song_ = Song();
   last_selected_container_ = QString();
+  last_selected_text_ = QString();
 
   switch (type.toInt()) {
     case LibraryItem::Type_Song: {
@@ -210,6 +212,7 @@ void LibraryView::SaveFocus() {
       SongList songs = app_->library_model()->GetChildSongs(index);
       if (!songs.isEmpty()) {
         last_selected_song_ = songs.last();
+        last_selected_text_ = songs.last().title();
       }
       break;
     }
@@ -217,8 +220,9 @@ void LibraryView::SaveFocus() {
     case LibraryItem::Type_Container:
     case LibraryItem::Type_Divider: {
       QString text =
-          model()->data(current, LibraryModel::Role_SortText).toString();
+          model()->data(current, LibraryModel::Role_Key).toString();
       last_selected_container_ = text;
+      last_selected_text_ = model()->data(current, LibraryModel::Role_DisplayText).toString();
       break;
     }
 
@@ -232,8 +236,9 @@ void LibraryView::SaveFocus() {
 void LibraryView::SaveContainerPath(const QModelIndex& child) {
   QModelIndex current = model()->parent(child);
   QVariant type = model()->data(current, LibraryModel::Role_Type);
-  if (!type.isValid() || !(type.toInt() == LibraryItem::Type_Container ||
-                           type.toInt() == LibraryItem::Type_Divider)) {
+  if (!type.isValid() ||
+      !(type.toInt() == LibraryItem::Type_Container ||
+        type.toInt() == LibraryItem::Type_Divider)) {
     return;
   }
 
@@ -276,7 +281,7 @@ bool LibraryView::RestoreLevelFocus(const QModelIndex& parent) {
       case LibraryItem::Type_Container:
       case LibraryItem::Type_Divider: {
         QString text =
-            model()->data(current, LibraryModel::Role_SortText).toString();
+            model()->data(current, LibraryModel::Role_Key).toString();
         if (!last_selected_container_.isEmpty() &&
             last_selected_container_ == text) {
           emit expand(current);
@@ -384,11 +389,13 @@ void LibraryView::contextMenuEvent(QContextMenuEvent* e) {
         tr("Open in new playlist"), this, SLOT(OpenInNewPlaylist()));
 
     context_menu_->addSeparator();
-    add_to_playlist_enqueue_ =
-        context_menu_->addAction(IconLoader::Load("go-next", IconLoader::Base),
-                                 tr("Queue track"), this,
-                                 SLOT(AddToPlaylistEnqueue()));
-
+    add_to_playlist_enqueue_ = context_menu_->addAction(
+        IconLoader::Load("go-next", IconLoader::Base), tr("Queue track"), this,
+        SLOT(AddToPlaylistEnqueue()));
+    context_menu_->addSeparator();
+    search_for_this_ = context_menu_->addAction(
+        IconLoader::Load("system-search", IconLoader::Base),
+        tr("Search for this"), this, SLOT(SearchForThis()));
     context_menu_->addSeparator();
     new_smart_playlist_ = context_menu_->addAction(
         IconLoader::Load("document-new", IconLoader::Base),
@@ -401,23 +408,23 @@ void LibraryView::contextMenuEvent(QContextMenuEvent* e) {
         tr("Delete smart playlist"), this, SLOT(DeleteSmartPlaylist()));
 
     context_menu_->addSeparator();
-    organise_ = context_menu_->addAction(IconLoader::Load("edit-copy", IconLoader::Base),
-                                         tr("Organise files..."), this,
-                                         SLOT(Organise()));
+    organise_ = context_menu_->addAction(
+        IconLoader::Load("edit-copy", IconLoader::Base),
+        tr("Organise files..."), this, SLOT(Organise()));
     copy_to_device_ = context_menu_->addAction(
         IconLoader::Load("multimedia-player-ipod-mini-blue", IconLoader::Base),
         tr("Copy to device..."), this, SLOT(CopyToDevice()));
-    delete_ = context_menu_->addAction(IconLoader::Load("edit-delete", IconLoader::Base),
-                                       tr("Delete from disk..."), this,
-                                       SLOT(Delete()));
+    delete_ = context_menu_->addAction(
+        IconLoader::Load("edit-delete", IconLoader::Base),
+        tr("Delete from disk..."), this, SLOT(Delete()));
 
     context_menu_->addSeparator();
-    edit_track_ = context_menu_->addAction(IconLoader::Load("edit-rename", IconLoader::Base),
-                                           tr("Edit track information..."),
-                                           this, SLOT(EditTracks()));
-    edit_tracks_ = context_menu_->addAction(IconLoader::Load("edit-rename", IconLoader::Base),
-                                            tr("Edit tracks information..."),
-                                            this, SLOT(EditTracks()));
+    edit_track_ = context_menu_->addAction(
+        IconLoader::Load("edit-rename", IconLoader::Base),
+        tr("Edit track information..."), this, SLOT(EditTracks()));
+    edit_tracks_ = context_menu_->addAction(
+        IconLoader::Load("edit-rename", IconLoader::Base),
+        tr("Edit tracks information..."), this, SLOT(EditTracks()));
     show_in_browser_ = context_menu_->addAction(
         IconLoader::Load("document-open-folder", IconLoader::Base),
         tr("Show in file browser..."), this, SLOT(ShowInBrowser()));
@@ -458,6 +465,8 @@ void LibraryView::contextMenuEvent(QContextMenuEvent* e) {
   int regular_elements = 0;
   // number of editable non smart playlists selected
   int regular_editable = 0;
+  // number of container elements selected
+  int container_elements = 0;
 
   for (const QModelIndex& index : selected_indexes) {
     int type =
@@ -467,6 +476,10 @@ void LibraryView::contextMenuEvent(QContextMenuEvent* e) {
       smart_playlists++;
     } else if (type == LibraryItem::Type_PlaylistContainer) {
       smart_playlists_header++;
+    } else if (type == LibraryItem::Type_Container) {
+      container_elements++;
+      // To preserve expected behavior, since a container is "regular"
+      regular_elements++;
     } else {
       regular_elements++;
     }
@@ -487,6 +500,10 @@ void LibraryView::contextMenuEvent(QContextMenuEvent* e) {
       songs_selected == smart_playlists + smart_playlists_header;
   const bool only_smart_playlist_selected =
       smart_playlists == 1 && songs_selected == 1;
+  const bool one_regular_song_only =
+      regular_elements_only && container_elements == 0 && regular_elements == 1;
+  const bool one_container_only =
+      container_elements == 1 && songs_selected == 1;
 
   // in all modes
   load_->setEnabled(songs_selected);
@@ -508,6 +525,9 @@ void LibraryView::contextMenuEvent(QContextMenuEvent* e) {
   delete_->setVisible(regular_elements_only);
   show_in_various_->setVisible(regular_elements_only);
   no_show_in_various_->setVisible(regular_elements_only);
+
+  // only when a single container or one song is selected exclusively
+  search_for_this_->setVisible(one_container_only || one_regular_song_only);
 
   // only when all selected items are editable
   organise_->setEnabled(regular_elements == regular_editable);
@@ -712,6 +732,13 @@ void LibraryView::FilterReturnPressed() {
   if (!currentIndex().isValid()) return;
 
   emit doubleClicked(currentIndex());
+}
+
+void LibraryView::SearchForThis() {
+  SaveFocus();
+  if (!last_selected_text_.isEmpty()) {
+    filter_->ShowInLibrary(last_selected_text_.simplified());
+  }
 }
 
 void LibraryView::NewSmartPlaylist() {
