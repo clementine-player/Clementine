@@ -71,7 +71,7 @@
     </exclude>
     <invalidIndicator value="Couldn't find that page."/>
   </provider>
-  <provider name="letras.mus.br" title="" charset="utf-8" url="http://letras.terra.com.br/winamp.php?musica={title}&amp;artista={artist}">
+  <provider name="letras.mus.br" title="" charset="utf-8" url="https://www.letras.mus.br/winamp.php?musica={title}&amp;artista={artist}">
     <urlFormat replace="_@,;&amp;\/&quot;" with="_"/>
     <urlFormat replace=" " with="+"/>
     <extract>
@@ -105,7 +105,7 @@
     <urlFormat replace=" _@;\&quot;" with="_"/>
     <urlFormat replace="?" with="%3F"/>
     <extract>
-      <item begin="&lt;div class='lyricbox'&gt;" end="&lt;!--"/>
+      <item begin="&lt;div class='lyricbox'&gt;" end="&lt;div class='lyricsbreak'"/>
     </extract>
     <exclude>
       <item tag="&lt;div class='rtMatcher'&gt;"/>

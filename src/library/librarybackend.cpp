@@ -289,6 +289,16 @@ SongList LibraryBackend::FindSongsInDirectory(int id) {
   return ret;
 }
 
+void LibraryBackend::SongPathChanged(const Song& song,
+                                     const QFileInfo& new_file) {
+  // Take a song and update its path
+  Song updated_song = song;
+  updated_song.InitFromFilePartial(new_file.absoluteFilePath());
+  SongList updated_songs;
+  updated_songs << updated_song;
+  AddOrUpdateSongs(updated_songs);
+}
+
 void LibraryBackend::AddOrUpdateSubdirs(const SubdirectoryList& subdirs) {
   QMutexLocker l(db_->Mutex());
   QSqlDatabase db(db_->Connect());

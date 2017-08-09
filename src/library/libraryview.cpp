@@ -392,7 +392,6 @@ void LibraryView::contextMenuEvent(QContextMenuEvent* e) {
     add_to_playlist_enqueue_ = context_menu_->addAction(
         IconLoader::Load("go-next", IconLoader::Base), tr("Queue track"), this,
         SLOT(AddToPlaylistEnqueue()));
-
     context_menu_->addSeparator();
     search_for_this_ = context_menu_->addAction(
         IconLoader::Load("system-search", IconLoader::Base),
@@ -648,7 +647,8 @@ SongList LibraryView::GetSelectedSongs() const {
 
 void LibraryView::Organise() {
   if (!organise_dialog_)
-    organise_dialog_.reset(new OrganiseDialog(app_->task_manager()));
+    organise_dialog_.reset(new OrganiseDialog(app_->task_manager(),
+                                              app_->library_backend()));
 
   organise_dialog_->SetDestinationModel(
       app_->library_model()->directory_model());
@@ -696,6 +696,10 @@ void LibraryView::EditTracks() {
 
 void LibraryView::CopyToDevice() {
   if (!organise_dialog_)
+    // Don't notify song has been replaced if copying to device, so
+    // don't associate the organise dialog with the library backend.
+    // Could improve this behavior if the device has a separate set of saved
+    // playlists that are somehow in sync with the library.
     organise_dialog_.reset(new OrganiseDialog(app_->task_manager()));
 
   organise_dialog_->SetDestinationModel(
