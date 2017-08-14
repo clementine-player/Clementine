@@ -80,7 +80,7 @@ AppearanceSettingsPage::AppearanceSettingsPage(SettingsDialog* dialog)
           SLOT(DisableBlurAndOpacitySliders(bool)));
   connect(ui_->use_no_background, SIGNAL(toggled(bool)),
           SLOT(DisableBlurAndOpacitySliders(bool)));
-#if !defined (Q_OS_UNIX) || defined (Q_OS_MACOS)
+#if !defined (Q_OS_UNIX) || defined (Q_OS_MACOS) // any OS except OS X or Windows
   ui_->sys_icons->setDisabled(true);
 #endif
 }
@@ -108,7 +108,8 @@ void AppearanceSettingsPage::Load() {
   current_background_color_ = original_background_color_;
 
   InitColorSelectorsColors();
-  ui_->b_use_sys_icons->setChecked(s.value("b_use_sys_icons", false).toBool());
+  if(ui_->b_use_sys_icons->isEnabled())
+    ui_->b_use_sys_icons->setChecked(s.value("b_use_sys_icons", true).toBool());
   s.endGroup();
 
   // Playlist settings

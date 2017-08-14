@@ -38,7 +38,7 @@ void IconLoader::Init() {
   icon_sub_path_ << "/icons" << "/providers" << "/last.fm" << "";
   QSettings settings;
   settings.beginGroup(Appearance::kSettingsGroup);
-  use_sys_icons_ = settings.value("b_use_sys_icons", false).toBool();
+  use_sys_icons_ = settings.value("b_use_sys_icons", true).toBool();
 }
 
 QIcon IconLoader::Load(const QString& name, const IconType& icontype) {
