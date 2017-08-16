@@ -22,6 +22,7 @@
 
 #include "metatypes.h"
 
+#include <QFileInfo>
 #include <QMetaType>
 #include <QNetworkCookie>
 
