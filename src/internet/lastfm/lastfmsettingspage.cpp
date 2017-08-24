@@ -43,10 +43,8 @@ LastFMSettingsPage::LastFMSettingsPage(SettingsDialog* dialog)
   // Icons
   setWindowIcon(IconLoader::Load("lastfm", IconLoader::Provider));
 
-  connect(service_, SIGNAL(TokenReceived(bool,QString)),
-          SLOT(TokenReceived(bool,QString)));
-  connect(service_, SIGNAL(AuthenticationComplete(bool, QString)),
-          SLOT(AuthenticationComplete(bool, QString)));
+  connect(service_, SIGNAL(AuthenticationComplete(bool)),
+          SLOT(AuthenticationComplete(bool)));
   connect(ui_->login_state, SIGNAL(LogoutClicked()), SLOT(Logout()));
   connect(ui_->login_state, SIGNAL(LoginClicked()), SLOT(Login()));
   connect(ui_->login, SIGNAL(clicked()), SLOT(Login()));
@@ -62,26 +60,10 @@ void LastFMSettingsPage::Login() {
   waiting_for_auth_ = true;
 
   ui_->login_state->SetLoggedIn(LoginStateWidget::LoginInProgress);
-  service_->GetToken();
+  service_->Authenticate();
 }
 
-void LastFMSettingsPage::TokenReceived(bool success, const QString &token) {
-  if (!success) {
-    QMessageBox::warning(this, tr("Last.fm authentication failed"), token);
-    return;
-  }
-
-  QString url = QString(LastFMService::kAuthLoginUrl).arg(LastFMService::kApiKey, token);
-  QDesktopServices::openUrl(QUrl(url));
-
-  QMessageBox::information(this, tr("Last.fm authentication"),
-                           tr("Click Ok once you authenticated Clementine in your last.fm account."));
-
-  service_->Authenticate(token);
-}
-
-void LastFMSettingsPage::AuthenticationComplete(bool success,
-                                                const QString& message) {
+void LastFMSettingsPage::AuthenticationComplete(bool success) {
   if (!waiting_for_auth_) return;  // Wasn't us that was waiting for auth
 
   waiting_for_auth_ = false;
@@ -90,10 +72,7 @@ void LastFMSettingsPage::AuthenticationComplete(bool success,
     // Save settings
     Save();
   } else {
-    QString dialog_text = tr("Your Last.fm credentials were incorrect");
-    if (!message.isEmpty()) {
-      dialog_text = message;
-    }
+    QString dialog_text = tr("Failed to login to last.fm. Please try again.");
     QMessageBox::warning(this, tr("Authentication failed"), dialog_text);
   }
 
