@@ -72,7 +72,7 @@ void LastFMSettingsPage::AuthenticationComplete(bool success) {
     // Save settings
     Save();
   } else {
-    QString dialog_text = tr("Failed to login to last.fm. Please try again.");
+    QString dialog_text = tr("Could not log in to Last.fm. Please try again.");
     QMessageBox::warning(this, tr("Authentication failed"), dialog_text);
   }
 
