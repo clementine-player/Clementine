@@ -175,7 +175,7 @@ void LastFMService::Authenticate() {
   });
 
   if (!QDesktopServices::openUrl(url)) {
-    QMessageBox box(QMessageBox::NoIcon, tr("Last.fm Authentication"), tr("Please open this url in your browser: <a href=\"%1\">%1</a>").arg(url.toString()), QMessageBox::Ok);
+    QMessageBox box(QMessageBox::NoIcon, tr("Last.fm Authentication"), tr("Please open this URL in your browser: <a href=\"%1\">%1</a>").arg(url.toString()), QMessageBox::Ok);
     box.setTextFormat(Qt::RichText);
     qLog(Debug) << "Last.fm authentication URL: " << url.toString();
     box.exec();
