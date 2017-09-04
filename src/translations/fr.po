@@ -9,6 +9,7 @@
 # arnaudbienner <arnaud.bienner@gmail.com>, 2011-2012
 # Axel Céard <axel.ceard@hotmail.fr>, 2016
 # Gwenn M <tornoz@laposte.net>, 2011
+# Ben <benlarcher@gmail.com>, 2017
 # Brice <bmaron@gmail.com>, 2011
 # Brice <bmaron@gmail.com>, 2011
 # Chaopale Lamecarlate <chaopale+transifex@lamecarlate.net>, 2015
@@ -51,8 +52,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2017-08-09 13:36+0000\n"
-"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
+"PO-Revision-Date: 2017-08-29 11:06+0000\n"
+"Last-Translator: Ben <benlarcher@gmail.com>\n"
 "Language-Team: French (http://www.transifex.com/davidsansome/clementine/language/fr/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -913,8 +914,8 @@ msgstr "Sortie audio"
 
 #: internet/digitally/digitallyimportedsettingspage.cpp:82
 #: internet/magnatune/magnatunesettingspage.cpp:117
-#: internet/lastfm/lastfmservice.cpp:249
-#: internet/lastfm/lastfmsettingspage.cpp:97
+#: internet/lastfm/lastfmservice.cpp:268
+#: internet/lastfm/lastfmsettingspage.cpp:76
 msgid "Authentication failed"
 msgstr "Échec de l'authentification"
 
@@ -1281,10 +1282,6 @@ msgstr "Clementine n'a pu trouver aucun résultat pour ce fichier"
 msgid "Clementine will find music in:"
 msgstr "Clementine trouvera de la musique dans :"
 
-#: internet/lastfm/lastfmsettingspage.cpp:78
-msgid "Click Ok once you authenticated Clementine in your last.fm account."
-msgstr "Cliquez sur Ok une fois que Clementine a été authentifié sur votre compte last.fm."
-
 #: library/libraryview.cpp:364
 msgid "Click here to add some music"
 msgstr "Cliquez ici pour créer votre bibliothèque musicale"
@@ -1501,6 +1498,10 @@ msgstr "Aucun flux audio détecté dans %1"
 msgid "Could not get details"
 msgstr "Ne peut récupérer les détails"
 
+#: internet/lastfm/lastfmsettingspage.cpp:75
+msgid "Could not log in to Last.fm. Please try again."
+msgstr "Impossible de se connecter à Last.fm. Veuillez réessayer."
+
 #: playlist/playlistmanager.cpp:166
 msgid "Couldn't create playlist"
 msgstr "La liste de lecture n'a pas pu être créée"
@@ -1599,8 +1600,8 @@ msgid "Custom..."
 msgstr "Personnalisée..."
 
 #: devices/devicekitlister.cpp:125 devices/udisks2lister.cpp:76
-msgid "DBus path"
-msgstr "Chemin DBus"
+msgid "D-Bus path"
+msgstr "Chemin D-Bus"
 
 #: ui/equalizer.cpp:116
 msgid "Dance"
@@ -2239,6 +2240,7 @@ msgstr "Export terminé"
 msgid "Exported %1 covers out of %2 (%3 skipped)"
 msgstr "%1 pochettes exportées sur %2 (%3 ignorées)"
 
+#: core/song.cpp:411 transcoder/transcoder.cpp:233
 #: ../bin/src/ui_magnatunedownloaddialog.h:136
 #: ../bin/src/ui_magnatunesettingspage.h:170
 #: ../bin/src/ui_transcodersettingspage.h:176
@@ -2394,10 +2396,6 @@ msgstr "Premier niveau"
 #: widgets/nowplayingwidget.cpp:110
 msgid "Fit cover to width"
 msgstr "Ajuster la pochette sur la largeur"
-
-#: core/song.cpp:411 transcoder/transcoder.cpp:233
-msgid "Flac"
-msgstr "Flac"
 
 #: ../bin/src/ui_songinfosettingspage.h:155
 msgid "Font size"
@@ -2790,7 +2788,7 @@ msgstr "Services internet"
 msgid "Intro tracks"
 msgstr "Introduction des pistes"
 
-#: internet/lastfm/lastfmservice.cpp:261
+#: internet/lastfm/lastfmservice.cpp:280
 msgid "Invalid API key"
 msgstr "API key invalide"
 
@@ -2798,27 +2796,27 @@ msgstr "API key invalide"
 msgid "Invalid URL"
 msgstr "URL invalide"
 
-#: internet/lastfm/lastfmservice.cpp:251
+#: internet/lastfm/lastfmservice.cpp:270
 msgid "Invalid format"
 msgstr "Format invalide"
 
-#: internet/lastfm/lastfmservice.cpp:247
+#: internet/lastfm/lastfmservice.cpp:266
 msgid "Invalid method"
 msgstr "Méthode invalide"
 
-#: internet/lastfm/lastfmservice.cpp:253
+#: internet/lastfm/lastfmservice.cpp:272
 msgid "Invalid parameters"
 msgstr "Paramètres invalides"
 
-#: internet/lastfm/lastfmservice.cpp:255
+#: internet/lastfm/lastfmservice.cpp:274
 msgid "Invalid resource specified"
 msgstr "Ressource spécifiée invalide"
 
-#: internet/lastfm/lastfmservice.cpp:245
+#: internet/lastfm/lastfmservice.cpp:264
 msgid "Invalid service"
 msgstr "Service invalide"
 
-#: internet/lastfm/lastfmservice.cpp:259
+#: internet/lastfm/lastfmservice.cpp:278
 msgid "Invalid session key"
 msgstr "Clé de session invalide"
 
@@ -2928,15 +2926,11 @@ msgstr "Dernière écoute"
 msgid "Last.fm"
 msgstr "Last.fm"
 
-#: internet/lastfm/lastfmsettingspage.cpp:77
-msgid "Last.fm authentication"
-msgstr "Authentification last.fm"
+#: internet/lastfm/lastfmservice.cpp:178
+msgid "Last.fm Authentication"
+msgstr "Authentification à Last.fm"
 
-#: internet/lastfm/lastfmsettingspage.cpp:70
-msgid "Last.fm authentication failed"
-msgstr "Échec de l'authentification last.fm"
-
-#: internet/lastfm/lastfmservice.cpp:268
+#: internet/lastfm/lastfmservice.cpp:287
 msgid "Last.fm is currently busy, please try again in a few minutes"
 msgstr "Last.fm est actuellement indisponible, veuillez réessayer dans quelques minutes"
 
@@ -3170,7 +3164,7 @@ msgstr "Ainsi soit-il!"
 msgid "Make playlist available offline"
 msgstr "Rendre la liste de lecture accessible hors ligne"
 
-#: internet/lastfm/lastfmservice.cpp:280
+#: internet/lastfm/lastfmservice.cpp:299
 msgid "Malformed response"
 msgstr "Réponse mal formatée"
 
@@ -3445,19 +3439,19 @@ msgstr "Indisponible durant l'utilisation d'une liste de lecture dynamique"
 msgid "Not connected"
 msgstr "Déconnecté"
 
-#: internet/lastfm/lastfmservice.cpp:271
+#: internet/lastfm/lastfmservice.cpp:290
 msgid "Not enough content"
 msgstr "Pas assez de contenu"
 
-#: internet/lastfm/lastfmservice.cpp:275
+#: internet/lastfm/lastfmservice.cpp:294
 msgid "Not enough fans"
 msgstr "Pas assez de fans"
 
-#: internet/lastfm/lastfmservice.cpp:273
+#: internet/lastfm/lastfmservice.cpp:292
 msgid "Not enough members"
 msgstr "Pas assez de membres"
 
-#: internet/lastfm/lastfmservice.cpp:277
+#: internet/lastfm/lastfmservice.cpp:296
 msgid "Not enough neighbors"
 msgstr "Voisins insuffisants"
 
@@ -3498,7 +3492,11 @@ msgstr "Prévisualisation de l'affichage à l'écran (OSD)"
 msgid "Off"
 msgstr "Désactivé"
 
-#: core/song.cpp:419 transcoder/transcoder.cpp:244
+#: core/song.cpp:419
+msgid "Ogg FLAC"
+msgstr "FLAC ogg"
+
+#: transcoder/transcoder.cpp:244
 msgid "Ogg Flac"
 msgstr "Ogg Flac"
 
@@ -3603,7 +3601,7 @@ msgstr "Ouvrir dans votre navigateur"
 msgid "Open..."
 msgstr "Ouvrir..."
 
-#: internet/lastfm/lastfmservice.cpp:257
+#: internet/lastfm/lastfmservice.cpp:276
 msgid "Operation failed"
 msgstr "Opération échouée"
 
@@ -3803,6 +3801,11 @@ msgstr "Listes de lecture"
 #: ../data/oauthsuccess.html:38
 msgid "Please close your browser and return to Clementine."
 msgstr "Merci de fermer votre navigateur et de retourner dans Clementine."
+
+#: internet/lastfm/lastfmservice.cpp:178
+#, qt-format
+msgid "Please open this URL in your browser: <a href=\"%1\">%1</a>"
+msgstr "Veuillez ouvrir cette URL dans votre navigateur: <a href=\"%1\">%1</a>"
 
 #: ../bin/src/ui_spotifysettingspage.h:213
 msgid "Plugin status:"
@@ -4363,7 +4366,7 @@ msgstr "Rechercher automatiquement"
 
 #: ui/mainwindow.cpp:685
 msgid "Search for album"
-msgstr ""
+msgstr "Rechercher l'album"
 
 #: ui/albumcoverchoicecontroller.cpp:69
 msgid "Search for album covers..."
@@ -4375,11 +4378,11 @@ msgstr "Recherche globale"
 
 #: ui/mainwindow.cpp:682
 msgid "Search for artist"
-msgstr ""
+msgstr "Rechercher l'artiste"
 
 #: globalsearch/globalsearchview.cpp:473 library/libraryview.cpp:398
 msgid "Search for this"
-msgstr ""
+msgstr "Rechercher cela"
 
 #: ../bin/src/ui_gpoddersearchpage.h:72
 msgid "Search gpodder.net"
@@ -4487,7 +4490,7 @@ msgstr "URL du serveur"
 msgid "Server details"
 msgstr "Détails du serveur"
 
-#: internet/lastfm/lastfmservice.cpp:263
+#: internet/lastfm/lastfmservice.cpp:282
 msgid "Service offline"
 msgstr "Service hors-ligne"
 
@@ -5140,7 +5143,7 @@ msgstr "C'est la première fois que vous connectez ce périphérique. Clementine
 msgid "This option can be changed in the \"Behavior\" preferences"
 msgstr "Cette option peut être modifiée dans les préférences de « Comportement »"
 
-#: internet/lastfm/lastfmservice.cpp:265
+#: internet/lastfm/lastfmservice.cpp:284
 msgid "This stream is for paid subscribers only"
 msgstr "Ce flux n'est accessible qu'aux abonnés ayant payé"
 
@@ -5302,7 +5305,7 @@ msgid "Unknown content-type"
 msgstr "Type de contenu inconnu"
 
 #: internet/digitally/digitallyimportedclient.cpp:74
-#: internet/lastfm/lastfmservice.cpp:284
+#: internet/lastfm/lastfmservice.cpp:303
 msgid "Unknown error"
 msgstr "Erreur de type inconnu"
 
@@ -5753,10 +5756,6 @@ msgstr "Vous devez redémarrer Clementine si vous changez de langue."
 #: ../bin/src/ui_networkremotesettingspage.h:240
 msgid "Your IP address:"
 msgstr "Votre adresse IP :"
-
-#: internet/lastfm/lastfmsettingspage.cpp:93
-msgid "Your Last.fm credentials were incorrect"
-msgstr "Vos identifiants Last.fm sont incorrects"
 
 #: internet/magnatune/magnatunesettingspage.cpp:118
 msgid "Your Magnatune credentials were incorrect"

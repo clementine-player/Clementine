@@ -10,8 +10,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2017-08-23 13:37+0000\n"
-"Last-Translator: Mladen Pejaković <pejakm@autistici.org>\n"
+"PO-Revision-Date: 2017-08-28 23:35+0000\n"
+"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Serbian (http://www.transifex.com/davidsansome/clementine/language/sr/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -872,8 +872,8 @@ msgstr "Излаз звука"
 
 #: internet/digitally/digitallyimportedsettingspage.cpp:82
 #: internet/magnatune/magnatunesettingspage.cpp:117
-#: internet/lastfm/lastfmservice.cpp:249
-#: internet/lastfm/lastfmsettingspage.cpp:97
+#: internet/lastfm/lastfmservice.cpp:268
+#: internet/lastfm/lastfmsettingspage.cpp:76
 msgid "Authentication failed"
 msgstr "Аутентификација није успела"
 
@@ -1240,10 +1240,6 @@ msgstr "Клементина није могла да нађе резултат�
 msgid "Clementine will find music in:"
 msgstr "Клементина ће тражити музику у:"
 
-#: internet/lastfm/lastfmsettingspage.cpp:78
-msgid "Click Ok once you authenticated Clementine in your last.fm account."
-msgstr "Кликните У реду кад аутентификујете Клементину на вашем ласт.фм налогу."
-
 #: library/libraryview.cpp:364
 msgid "Click here to add some music"
 msgstr "Кликните овде да додате музику"
@@ -1460,6 +1456,10 @@ msgstr "Не могу да откријем ток звука у %1"
 msgid "Could not get details"
 msgstr "Не могу да добавим детаље"
 
+#: internet/lastfm/lastfmsettingspage.cpp:75
+msgid "Could not log in to Last.fm. Please try again."
+msgstr ""
+
 #: playlist/playlistmanager.cpp:166
 msgid "Couldn't create playlist"
 msgstr "Не могу да направим листу нумера"
@@ -1558,8 +1558,8 @@ msgid "Custom..."
 msgstr "посебна..."
 
 #: devices/devicekitlister.cpp:125 devices/udisks2lister.cpp:76
-msgid "DBus path"
-msgstr "Дбус путања"
+msgid "D-Bus path"
+msgstr ""
 
 #: ui/equalizer.cpp:116
 msgid "Dance"
@@ -2198,6 +2198,7 @@ msgstr "Извоз завршен"
 msgid "Exported %1 covers out of %2 (%3 skipped)"
 msgstr "Извезено %1 омота од %2 (%3 прескочено)"
 
+#: core/song.cpp:411 transcoder/transcoder.cpp:233
 #: ../bin/src/ui_magnatunedownloaddialog.h:136
 #: ../bin/src/ui_magnatunesettingspage.h:170
 #: ../bin/src/ui_transcodersettingspage.h:176
@@ -2353,10 +2354,6 @@ msgstr "Први ниво"
 #: widgets/nowplayingwidget.cpp:110
 msgid "Fit cover to width"
 msgstr "Уклопи омот по ширини"
-
-#: core/song.cpp:411 transcoder/transcoder.cpp:233
-msgid "Flac"
-msgstr "ФЛАЦ"
 
 #: ../bin/src/ui_songinfosettingspage.h:155
 msgid "Font size"
@@ -2749,7 +2746,7 @@ msgstr "Интернет сервиси"
 msgid "Intro tracks"
 msgstr "Уводне нумере"
 
-#: internet/lastfm/lastfmservice.cpp:261
+#: internet/lastfm/lastfmservice.cpp:280
 msgid "Invalid API key"
 msgstr "Неважећи АПИ кључ"
 
@@ -2757,27 +2754,27 @@ msgstr "Неважећи АПИ кључ"
 msgid "Invalid URL"
 msgstr "Неисправан УРЛ"
 
-#: internet/lastfm/lastfmservice.cpp:251
+#: internet/lastfm/lastfmservice.cpp:270
 msgid "Invalid format"
 msgstr "Неисправан формат"
 
-#: internet/lastfm/lastfmservice.cpp:247
+#: internet/lastfm/lastfmservice.cpp:266
 msgid "Invalid method"
 msgstr "Неисправан начин"
 
-#: internet/lastfm/lastfmservice.cpp:253
+#: internet/lastfm/lastfmservice.cpp:272
 msgid "Invalid parameters"
 msgstr "Неисправни параметри"
 
-#: internet/lastfm/lastfmservice.cpp:255
+#: internet/lastfm/lastfmservice.cpp:274
 msgid "Invalid resource specified"
 msgstr "Наведен неисправан ресурс"
 
-#: internet/lastfm/lastfmservice.cpp:245
+#: internet/lastfm/lastfmservice.cpp:264
 msgid "Invalid service"
 msgstr "Неисправан сервис"
 
-#: internet/lastfm/lastfmservice.cpp:259
+#: internet/lastfm/lastfmservice.cpp:278
 msgid "Invalid session key"
 msgstr "Неважећи кључ сесије"
 
@@ -2887,15 +2884,11 @@ msgstr "последњи пут пуштена"
 msgid "Last.fm"
 msgstr "Ласт.фм"
 
-#: internet/lastfm/lastfmsettingspage.cpp:77
-msgid "Last.fm authentication"
-msgstr "Ласт.фм аутентификација"
+#: internet/lastfm/lastfmservice.cpp:178
+msgid "Last.fm Authentication"
+msgstr ""
 
-#: internet/lastfm/lastfmsettingspage.cpp:70
-msgid "Last.fm authentication failed"
-msgstr "Аутентификација на Ласт.фм није успела"
-
-#: internet/lastfm/lastfmservice.cpp:268
+#: internet/lastfm/lastfmservice.cpp:287
 msgid "Last.fm is currently busy, please try again in a few minutes"
 msgstr "Ласт.фм је тренутно заузет, покушајте поново за неколико минута"
 
@@ -3129,7 +3122,7 @@ msgstr "Ентерпрајз!"
 msgid "Make playlist available offline"
 msgstr "Направи листу доступну ван мреже"
 
-#: internet/lastfm/lastfmservice.cpp:280
+#: internet/lastfm/lastfmservice.cpp:299
 msgid "Malformed response"
 msgstr "Лош одговор"
 
@@ -3404,19 +3397,19 @@ msgstr "Није доступно док се користи промењива 
 msgid "Not connected"
 msgstr "Неповезан"
 
-#: internet/lastfm/lastfmservice.cpp:271
+#: internet/lastfm/lastfmservice.cpp:290
 msgid "Not enough content"
 msgstr "Нема довољно садржаја"
 
-#: internet/lastfm/lastfmservice.cpp:275
+#: internet/lastfm/lastfmservice.cpp:294
 msgid "Not enough fans"
 msgstr "Нема довољно обожавалаца"
 
-#: internet/lastfm/lastfmservice.cpp:273
+#: internet/lastfm/lastfmservice.cpp:292
 msgid "Not enough members"
 msgstr "Нема довољно чланова"
 
-#: internet/lastfm/lastfmservice.cpp:277
+#: internet/lastfm/lastfmservice.cpp:296
 msgid "Not enough neighbors"
 msgstr "Нема довољно комшија"
 
@@ -3457,7 +3450,11 @@ msgstr "ОСД преглед"
 msgid "Off"
 msgstr "искључено"
 
-#: core/song.cpp:419 transcoder/transcoder.cpp:244
+#: core/song.cpp:419
+msgid "Ogg FLAC"
+msgstr ""
+
+#: transcoder/transcoder.cpp:244
 msgid "Ogg Flac"
 msgstr "ОГГ ФЛАЦ"
 
@@ -3562,7 +3559,7 @@ msgstr "Отвори у прегледачу"
 msgid "Open..."
 msgstr "Отвори..."
 
-#: internet/lastfm/lastfmservice.cpp:257
+#: internet/lastfm/lastfmservice.cpp:276
 msgid "Operation failed"
 msgstr "Радња није успела"
 
@@ -3762,6 +3759,11 @@ msgstr "Листе нумера"
 #: ../data/oauthsuccess.html:38
 msgid "Please close your browser and return to Clementine."
 msgstr "Затворите ваш прегледач и вратите се на Клементину."
+
+#: internet/lastfm/lastfmservice.cpp:178
+#, qt-format
+msgid "Please open this URL in your browser: <a href=\"%1\">%1</a>"
+msgstr ""
 
 #: ../bin/src/ui_spotifysettingspage.h:213
 msgid "Plugin status:"
@@ -4446,7 +4448,7 @@ msgstr "УРЛ сервера"
 msgid "Server details"
 msgstr "Детаљи сервера"
 
-#: internet/lastfm/lastfmservice.cpp:263
+#: internet/lastfm/lastfmservice.cpp:282
 msgid "Service offline"
 msgstr "Сервис ван мреже"
 
@@ -5099,7 +5101,7 @@ msgstr "Ово је први пут да сте повезали овај уре
 msgid "This option can be changed in the \"Behavior\" preferences"
 msgstr "Ову опцију можете изменити у поставкама „Понашања“"
 
-#: internet/lastfm/lastfmservice.cpp:265
+#: internet/lastfm/lastfmservice.cpp:284
 msgid "This stream is for paid subscribers only"
 msgstr "Овај ток је само за претплатнике"
 
@@ -5261,7 +5263,7 @@ msgid "Unknown content-type"
 msgstr "Непознат тип садржаја"
 
 #: internet/digitally/digitallyimportedclient.cpp:74
-#: internet/lastfm/lastfmservice.cpp:284
+#: internet/lastfm/lastfmservice.cpp:303
 msgid "Unknown error"
 msgstr "Непозната грешка"
 
@@ -5712,10 +5714,6 @@ msgstr "Морате поново да покренете Клементину �
 #: ../bin/src/ui_networkremotesettingspage.h:240
 msgid "Your IP address:"
 msgstr "Ваша ИП адреса:"
-
-#: internet/lastfm/lastfmsettingspage.cpp:93
-msgid "Your Last.fm credentials were incorrect"
-msgstr "Ваши акредитиви за Ласт.фм су нетачни"
 
 #: internet/magnatune/magnatunesettingspage.cpp:118
 msgid "Your Magnatune credentials were incorrect"

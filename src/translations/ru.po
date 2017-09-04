@@ -35,7 +35,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2017-08-09 17:45+0000\n"
+"PO-Revision-Date: 2017-08-29 06:25+0000\n"
 "Last-Translator: Andrei Stepanov\n"
 "Language-Team: Russian (http://www.transifex.com/davidsansome/clementine/language/ru/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -897,8 +897,8 @@ msgstr "Вывод звука"
 
 #: internet/digitally/digitallyimportedsettingspage.cpp:82
 #: internet/magnatune/magnatunesettingspage.cpp:117
-#: internet/lastfm/lastfmservice.cpp:249
-#: internet/lastfm/lastfmsettingspage.cpp:97
+#: internet/lastfm/lastfmservice.cpp:268
+#: internet/lastfm/lastfmsettingspage.cpp:76
 msgid "Authentication failed"
 msgstr "Ошибка аутентификации"
 
@@ -1265,10 +1265,6 @@ msgstr "Clementine не смог найти результаты по запро
 msgid "Clementine will find music in:"
 msgstr "Clementine будет искать здесь:"
 
-#: internet/lastfm/lastfmsettingspage.cpp:78
-msgid "Click Ok once you authenticated Clementine in your last.fm account."
-msgstr "Нажмите на OK после прохождения аутентификации Clementine в вашем аккаунте Last.fm."
-
 #: library/libraryview.cpp:364
 msgid "Click here to add some music"
 msgstr "Нажмите сюда, чтобы добавить музыку"
@@ -1485,6 +1481,10 @@ msgstr "Не удалось определить поток аудио в теч
 msgid "Could not get details"
 msgstr "Не удалось получить информацию"
 
+#: internet/lastfm/lastfmsettingspage.cpp:75
+msgid "Could not log in to Last.fm. Please try again."
+msgstr "Не удалось войти в Last.fm. Попробуйте ещё раз."
+
 #: playlist/playlistmanager.cpp:166
 msgid "Couldn't create playlist"
 msgstr "Невозможно создать плейлист"
@@ -1583,8 +1583,8 @@ msgid "Custom..."
 msgstr "Пользовательский…"
 
 #: devices/devicekitlister.cpp:125 devices/udisks2lister.cpp:76
-msgid "DBus path"
-msgstr "Путь DBus"
+msgid "D-Bus path"
+msgstr "Путь D-Bus"
 
 #: ui/equalizer.cpp:116
 msgid "Dance"
@@ -2223,6 +2223,7 @@ msgstr "Экспорт завершён"
 msgid "Exported %1 covers out of %2 (%3 skipped)"
 msgstr "Экспортировано %1 обложек из %2 (%3 пропущено)"
 
+#: core/song.cpp:411 transcoder/transcoder.cpp:233
 #: ../bin/src/ui_magnatunedownloaddialog.h:136
 #: ../bin/src/ui_magnatunesettingspage.h:170
 #: ../bin/src/ui_transcodersettingspage.h:176
@@ -2378,10 +2379,6 @@ msgstr "Первый уровень"
 #: widgets/nowplayingwidget.cpp:110
 msgid "Fit cover to width"
 msgstr "Подогнать обложку по ширине"
-
-#: core/song.cpp:411 transcoder/transcoder.cpp:233
-msgid "Flac"
-msgstr "FLAC"
 
 #: ../bin/src/ui_songinfosettingspage.h:155
 msgid "Font size"
@@ -2774,7 +2771,7 @@ msgstr "Службы интернет"
 msgid "Intro tracks"
 msgstr "Вступительные треки"
 
-#: internet/lastfm/lastfmservice.cpp:261
+#: internet/lastfm/lastfmservice.cpp:280
 msgid "Invalid API key"
 msgstr "Неверный ключ API"
 
@@ -2782,27 +2779,27 @@ msgstr "Неверный ключ API"
 msgid "Invalid URL"
 msgstr "Недопустимый адрес"
 
-#: internet/lastfm/lastfmservice.cpp:251
+#: internet/lastfm/lastfmservice.cpp:270
 msgid "Invalid format"
 msgstr "Неверный формат"
 
-#: internet/lastfm/lastfmservice.cpp:247
+#: internet/lastfm/lastfmservice.cpp:266
 msgid "Invalid method"
 msgstr "Неверный метод"
 
-#: internet/lastfm/lastfmservice.cpp:253
+#: internet/lastfm/lastfmservice.cpp:272
 msgid "Invalid parameters"
 msgstr "Неверные параметры"
 
-#: internet/lastfm/lastfmservice.cpp:255
+#: internet/lastfm/lastfmservice.cpp:274
 msgid "Invalid resource specified"
 msgstr "Указан неверный источник"
 
-#: internet/lastfm/lastfmservice.cpp:245
+#: internet/lastfm/lastfmservice.cpp:264
 msgid "Invalid service"
 msgstr "Неверная служба"
 
-#: internet/lastfm/lastfmservice.cpp:259
+#: internet/lastfm/lastfmservice.cpp:278
 msgid "Invalid session key"
 msgstr "Неверный ключ сессии"
 
@@ -2912,15 +2909,11 @@ msgstr "Последнее прослушивание"
 msgid "Last.fm"
 msgstr "Last.fm"
 
-#: internet/lastfm/lastfmsettingspage.cpp:77
-msgid "Last.fm authentication"
+#: internet/lastfm/lastfmservice.cpp:178
+msgid "Last.fm Authentication"
 msgstr "Аутентификация в Last.fm"
 
-#: internet/lastfm/lastfmsettingspage.cpp:70
-msgid "Last.fm authentication failed"
-msgstr "Аутентификация в Last.fm не удалась"
-
-#: internet/lastfm/lastfmservice.cpp:268
+#: internet/lastfm/lastfmservice.cpp:287
 msgid "Last.fm is currently busy, please try again in a few minutes"
 msgstr "Last.fm в данный момент занят, попробуйте позже"
 
@@ -3154,7 +3147,7 @@ msgstr "Да будет так!"
 msgid "Make playlist available offline"
 msgstr "Сделать плейлист доступным автономно"
 
-#: internet/lastfm/lastfmservice.cpp:280
+#: internet/lastfm/lastfmservice.cpp:299
 msgid "Malformed response"
 msgstr "Неправильный ответ"
 
@@ -3429,19 +3422,19 @@ msgstr "Не доступно при использовании динамиче
 msgid "Not connected"
 msgstr "Не подключено"
 
-#: internet/lastfm/lastfmservice.cpp:271
+#: internet/lastfm/lastfmservice.cpp:290
 msgid "Not enough content"
 msgstr "Недостаточно содержания"
 
-#: internet/lastfm/lastfmservice.cpp:275
+#: internet/lastfm/lastfmservice.cpp:294
 msgid "Not enough fans"
 msgstr "Недостаточно фанатов"
 
-#: internet/lastfm/lastfmservice.cpp:273
+#: internet/lastfm/lastfmservice.cpp:292
 msgid "Not enough members"
 msgstr "Недостаточно участников"
 
-#: internet/lastfm/lastfmservice.cpp:277
+#: internet/lastfm/lastfmservice.cpp:296
 msgid "Not enough neighbors"
 msgstr "Недостаточно соседей"
 
@@ -3482,7 +3475,11 @@ msgstr "Предпросмотр OSD"
 msgid "Off"
 msgstr "Выкл."
 
-#: core/song.cpp:419 transcoder/transcoder.cpp:244
+#: core/song.cpp:419
+msgid "Ogg FLAC"
+msgstr "Ogg FLAC"
+
+#: transcoder/transcoder.cpp:244
 msgid "Ogg Flac"
 msgstr "Ogg Flac"
 
@@ -3587,7 +3584,7 @@ msgstr "Открыть в браузере"
 msgid "Open..."
 msgstr "Открыть…"
 
-#: internet/lastfm/lastfmservice.cpp:257
+#: internet/lastfm/lastfmservice.cpp:276
 msgid "Operation failed"
 msgstr "Операция не удалась"
 
@@ -3787,6 +3784,11 @@ msgstr "Списки"
 #: ../data/oauthsuccess.html:38
 msgid "Please close your browser and return to Clementine."
 msgstr "Пожалуйста, закройте браузер и вернитесь в Clementine."
+
+#: internet/lastfm/lastfmservice.cpp:178
+#, qt-format
+msgid "Please open this URL in your browser: <a href=\"%1\">%1</a>"
+msgstr "Пожалуйста, откройте эту ссылку в вашем браузере: <a href=\"%1\">%1</a>"
 
 #: ../bin/src/ui_spotifysettingspage.h:213
 msgid "Plugin status:"
@@ -4471,7 +4473,7 @@ msgstr "Адрес сервера"
 msgid "Server details"
 msgstr "Информация о сервере"
 
-#: internet/lastfm/lastfmservice.cpp:263
+#: internet/lastfm/lastfmservice.cpp:282
 msgid "Service offline"
 msgstr "Служба недоступна"
 
@@ -5124,7 +5126,7 @@ msgstr "Это устройство подключено впервые. Clement
 msgid "This option can be changed in the \"Behavior\" preferences"
 msgstr "Эта опция может быть изменена в настройках на вкладке «Поведение»"
 
-#: internet/lastfm/lastfmservice.cpp:265
+#: internet/lastfm/lastfmservice.cpp:284
 msgid "This stream is for paid subscribers only"
 msgstr "Поток только для платных подписчиков"
 
@@ -5286,7 +5288,7 @@ msgid "Unknown content-type"
 msgstr "Неизвестный тип контента"
 
 #: internet/digitally/digitallyimportedclient.cpp:74
-#: internet/lastfm/lastfmservice.cpp:284
+#: internet/lastfm/lastfmservice.cpp:303
 msgid "Unknown error"
 msgstr "Неизвестная ошибка"
 
@@ -5737,10 +5739,6 @@ msgstr "Для применения языка потребуется перез
 #: ../bin/src/ui_networkremotesettingspage.h:240
 msgid "Your IP address:"
 msgstr "Ваш IP-адрес:"
-
-#: internet/lastfm/lastfmsettingspage.cpp:93
-msgid "Your Last.fm credentials were incorrect"
-msgstr "Учётные данные Last.fm введены неверно"
 
 #: internet/magnatune/magnatunesettingspage.cpp:118
 msgid "Your Magnatune credentials were incorrect"

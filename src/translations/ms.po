@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2017-08-09 13:36+0000\n"
+"PO-Revision-Date: 2017-08-28 23:35+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Malay (http://www.transifex.com/davidsansome/clementine/language/ms/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -872,8 +872,8 @@ msgstr "Output audio"
 
 #: internet/digitally/digitallyimportedsettingspage.cpp:82
 #: internet/magnatune/magnatunesettingspage.cpp:117
-#: internet/lastfm/lastfmservice.cpp:249
-#: internet/lastfm/lastfmsettingspage.cpp:97
+#: internet/lastfm/lastfmservice.cpp:268
+#: internet/lastfm/lastfmsettingspage.cpp:76
 msgid "Authentication failed"
 msgstr "Pengesahan gagal"
 
@@ -1240,10 +1240,6 @@ msgstr "Clementine tidak dapat mencari keputusan untuk fail ini"
 msgid "Clementine will find music in:"
 msgstr "Clementine akan mencari muzik di dalam:"
 
-#: internet/lastfm/lastfmsettingspage.cpp:78
-msgid "Click Ok once you authenticated Clementine in your last.fm account."
-msgstr "Klik Ok seusai anda sahihkan Clementine dengan akaun las.fm anda."
-
 #: library/libraryview.cpp:364
 msgid "Click here to add some music"
 msgstr "Klik di sini untuk menambah muzik"
@@ -1460,6 +1456,10 @@ msgstr "Tidak dapat kesan strim audio dalam %1"
 msgid "Could not get details"
 msgstr "Tidak memperoleh perincian"
 
+#: internet/lastfm/lastfmsettingspage.cpp:75
+msgid "Could not log in to Last.fm. Please try again."
+msgstr ""
+
 #: playlist/playlistmanager.cpp:166
 msgid "Couldn't create playlist"
 msgstr "Tidak dapat cipta senarai main"
@@ -1558,8 +1558,8 @@ msgid "Custom..."
 msgstr "Suai..."
 
 #: devices/devicekitlister.cpp:125 devices/udisks2lister.cpp:76
-msgid "DBus path"
-msgstr "Laluan DBus"
+msgid "D-Bus path"
+msgstr ""
 
 #: ui/equalizer.cpp:116
 msgid "Dance"
@@ -2198,6 +2198,7 @@ msgstr "Eksport selesai"
 msgid "Exported %1 covers out of %2 (%3 skipped)"
 msgstr "%1 kulit muka dieksport dari %2 (%3 dilangkau)"
 
+#: core/song.cpp:411 transcoder/transcoder.cpp:233
 #: ../bin/src/ui_magnatunedownloaddialog.h:136
 #: ../bin/src/ui_magnatunesettingspage.h:170
 #: ../bin/src/ui_transcodersettingspage.h:176
@@ -2353,10 +2354,6 @@ msgstr "Aras pertama"
 #: widgets/nowplayingwidget.cpp:110
 msgid "Fit cover to width"
 msgstr "Suai muat kulit muka mengikut lebar"
-
-#: core/song.cpp:411 transcoder/transcoder.cpp:233
-msgid "Flac"
-msgstr "Flac"
 
 #: ../bin/src/ui_songinfosettingspage.h:155
 msgid "Font size"
@@ -2749,7 +2746,7 @@ msgstr "Perkhidmatan Internet"
 msgid "Intro tracks"
 msgstr "Trek pengenalan"
 
-#: internet/lastfm/lastfmservice.cpp:261
+#: internet/lastfm/lastfmservice.cpp:280
 msgid "Invalid API key"
 msgstr "Kunci API tidak sah"
 
@@ -2757,27 +2754,27 @@ msgstr "Kunci API tidak sah"
 msgid "Invalid URL"
 msgstr "URL tidak sah"
 
-#: internet/lastfm/lastfmservice.cpp:251
+#: internet/lastfm/lastfmservice.cpp:270
 msgid "Invalid format"
 msgstr "Format tidak sah"
 
-#: internet/lastfm/lastfmservice.cpp:247
+#: internet/lastfm/lastfmservice.cpp:266
 msgid "Invalid method"
 msgstr "Kaedah tidak sah"
 
-#: internet/lastfm/lastfmservice.cpp:253
+#: internet/lastfm/lastfmservice.cpp:272
 msgid "Invalid parameters"
 msgstr "Parameter tidak sah"
 
-#: internet/lastfm/lastfmservice.cpp:255
+#: internet/lastfm/lastfmservice.cpp:274
 msgid "Invalid resource specified"
 msgstr "Sumber dinyatakan tidak sah"
 
-#: internet/lastfm/lastfmservice.cpp:245
+#: internet/lastfm/lastfmservice.cpp:264
 msgid "Invalid service"
 msgstr "Perkhidmatan tidak sah"
 
-#: internet/lastfm/lastfmservice.cpp:259
+#: internet/lastfm/lastfmservice.cpp:278
 msgid "Invalid session key"
 msgstr "Kunci sesi tidak sah"
 
@@ -2887,15 +2884,11 @@ msgstr "Terakhir dimainkan"
 msgid "Last.fm"
 msgstr "Last.fm"
 
-#: internet/lastfm/lastfmsettingspage.cpp:77
-msgid "Last.fm authentication"
-msgstr "Pengesahihan last.fm"
+#: internet/lastfm/lastfmservice.cpp:178
+msgid "Last.fm Authentication"
+msgstr ""
 
-#: internet/lastfm/lastfmsettingspage.cpp:70
-msgid "Last.fm authentication failed"
-msgstr "Pengesahihan last.fm gagal"
-
-#: internet/lastfm/lastfmservice.cpp:268
+#: internet/lastfm/lastfmservice.cpp:287
 msgid "Last.fm is currently busy, please try again in a few minutes"
 msgstr "Last.fm sedang sibuk, sila cuba lagi setelah beberapa minit"
 
@@ -3129,7 +3122,7 @@ msgstr "Make it so!"
 msgid "Make playlist available offline"
 msgstr "Buatkan senarai main tersedia di luar talian"
 
-#: internet/lastfm/lastfmservice.cpp:280
+#: internet/lastfm/lastfmservice.cpp:299
 msgid "Malformed response"
 msgstr "Respon cacat"
 
@@ -3404,19 +3397,19 @@ msgstr "Tidak tersedia bila menggunakan senarai main dinamik"
 msgid "Not connected"
 msgstr "Tidak disambung"
 
-#: internet/lastfm/lastfmservice.cpp:271
+#: internet/lastfm/lastfmservice.cpp:290
 msgid "Not enough content"
 msgstr "Tidak cukup kandungan"
 
-#: internet/lastfm/lastfmservice.cpp:275
+#: internet/lastfm/lastfmservice.cpp:294
 msgid "Not enough fans"
 msgstr "Tidak cukup peminat"
 
-#: internet/lastfm/lastfmservice.cpp:273
+#: internet/lastfm/lastfmservice.cpp:292
 msgid "Not enough members"
 msgstr "Tidak cukup ahli"
 
-#: internet/lastfm/lastfmservice.cpp:277
+#: internet/lastfm/lastfmservice.cpp:296
 msgid "Not enough neighbors"
 msgstr "Kejiranan tidak mencukupi"
 
@@ -3457,7 +3450,11 @@ msgstr "Pratonton"
 msgid "Off"
 msgstr "Mati"
 
-#: core/song.cpp:419 transcoder/transcoder.cpp:244
+#: core/song.cpp:419
+msgid "Ogg FLAC"
+msgstr ""
+
+#: transcoder/transcoder.cpp:244
 msgid "Ogg Flac"
 msgstr "Flac Ogg"
 
@@ -3562,7 +3559,7 @@ msgstr "Buka dengan pelayar anda"
 msgid "Open..."
 msgstr "Buka..."
 
-#: internet/lastfm/lastfmservice.cpp:257
+#: internet/lastfm/lastfmservice.cpp:276
 msgid "Operation failed"
 msgstr "Operasi gagal"
 
@@ -3762,6 +3759,11 @@ msgstr "Senarai main"
 #: ../data/oauthsuccess.html:38
 msgid "Please close your browser and return to Clementine."
 msgstr "Sila tutup pelayar anda dan kembali ke Clementine."
+
+#: internet/lastfm/lastfmservice.cpp:178
+#, qt-format
+msgid "Please open this URL in your browser: <a href=\"%1\">%1</a>"
+msgstr ""
 
 #: ../bin/src/ui_spotifysettingspage.h:213
 msgid "Plugin status:"
@@ -4446,7 +4448,7 @@ msgstr "URL pelayan"
 msgid "Server details"
 msgstr "Perincian pelayan"
 
-#: internet/lastfm/lastfmservice.cpp:263
+#: internet/lastfm/lastfmservice.cpp:282
 msgid "Service offline"
 msgstr "Perkhidmatan di luar talian"
 
@@ -5099,7 +5101,7 @@ msgstr "Ini kali pertama anda menyambung ke peranti ini. Sekarang Clementine aka
 msgid "This option can be changed in the \"Behavior\" preferences"
 msgstr "Pilihan ini boleh diubah dalam keutamaan \"Kelakuan\""
 
-#: internet/lastfm/lastfmservice.cpp:265
+#: internet/lastfm/lastfmservice.cpp:284
 msgid "This stream is for paid subscribers only"
 msgstr "Strim ini untuk pelanggan berbayar sahaja"
 
@@ -5261,7 +5263,7 @@ msgid "Unknown content-type"
 msgstr "Jenis-kandungan tidak diketahui"
 
 #: internet/digitally/digitallyimportedclient.cpp:74
-#: internet/lastfm/lastfmservice.cpp:284
+#: internet/lastfm/lastfmservice.cpp:303
 msgid "Unknown error"
 msgstr "Ralat tidak diketahui"
 
@@ -5712,10 +5714,6 @@ msgstr "Anda perlu mulakan semula Clementine jika anda ubah bahasa."
 #: ../bin/src/ui_networkremotesettingspage.h:240
 msgid "Your IP address:"
 msgstr "Alamat IP anda:"
-
-#: internet/lastfm/lastfmsettingspage.cpp:93
-msgid "Your Last.fm credentials were incorrect"
-msgstr "Kelayakan Last.fm anda tidak betul"
 
 #: internet/magnatune/magnatunesettingspage.cpp:118
 msgid "Your Magnatune credentials were incorrect"
