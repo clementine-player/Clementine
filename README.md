@@ -1,7 +1,7 @@
 Clementine
 ==========
 
-Clementine is a modern music player and library organizer for Windows, Linux and Mac OS X.
+Clementine is a modern music player and library organizer for Windows, Linux and macOS.
 
 - Website: http://www.clementine-player.org/
 - Github: https://github.com/clementine-player/Clementine
