@@ -1,0 +1,77 @@
+name: clementine # check to see if it's available
+version: '1.3.1.25' # check the version number of clementine's packages
+summary: Clementine is a modern music player. # 79 char long summary
+description: |
+  Clementine is a modern music player and library organizer for Windows, Linux and Mac OS X.
+grade: stable # must be 'stable' to release into candidate/stable channels
+confinement: classic # use 'strict' once you have the right plugs
+
+apps:
+  clementine:
+    command: desktop-launch $SNAP/bin/clementine 
+    desktop: share/applications/clementine.desktop
+    plugs:
+      - network
+      - network-bind
+      - home
+      - pulseaudio
+      - unity7
+      - x11
+      - gsettings
+      - optical-drive
+      - removable-media
+      - screen-inhibit-control
+      - alsa
+      - raw-usb
+  
+parts:
+  my-part:
+    # See 'snapcraft plugins'
+    build-packages:
+
+       [liblastfm-dev,libtag1-dev,gettext,libboost-dev,libboost-serialization-dev,libqt4-dev,qt4-dev-tools,libqt4-opengl-dev,cmake,libgstreamer1.0-dev,libgstreamer-plugins-base1.0-dev,libglew1.5-dev,libqjson-dev,libgpod-dev,libplist-dev,libusbmuxd-dev,libmtp-dev,libcdio-dev,protobuf-compiler,libprotobuf-dev,libcrypto++-dev,libfftw3-dev,libsparsehash-dev,libsqlite3-dev,libpulse-dev,libqtwebkit-dev,libechonest-dev,libchromaprint-dev,libqca2-dev]
+  
+    stage-packages: 
+      - libc6
+      - libcdio13
+      - libchromaprint0
+      - libcrypto++9v5
+      - libechonest2.3
+      - libfftw3-double3
+      - libgcc1 
+      - libgl1-mesa-glx
+      - libgl1
+      - libglew1.13
+      - libglib2.0-0
+      - libgpod4
+      - libgstreamer-plugins-base1.0-0
+      - libgstreamer1.0-0
+      - liblastfm1
+      - libmtp9
+      - libprotobuf9v5
+      - libpulse0
+      - libqjson0
+      - libqt4-dbus
+      - libqt4-network
+      - libqt4-opengl
+      - libqt4-sql
+      - libqtcore4
+      - libqtgui4
+      - libsqlite3-0
+      - libstdc++6
+      - libtag1v5
+      - libx11-6
+      - zlib1g
+      - gstreamer1.0-plugins-base
+      - gstreamer1.0-plugins-good
+      - gstreamer1.0-plugins-ugly
+      - gstreamer1.0-plugins-bad 
+      - gstreamer1.0-pulseaudio
+      - libprojectm2v5
+      - projectm-data
+
+    source-type: git
+    source: https://github.com/clementine-player/Clementine
+    after: [desktop-qt4] 
+    plugin: cmake
+    
