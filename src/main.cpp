@@ -258,7 +258,7 @@ int main(int argc, char* argv[]) {
 
   if (QSysInfo::MacintoshVersion > QSysInfo::MV_10_8) {
     // Work around 10.9 issue.
-	// https://bugreports.qt.io/browse/QTBUG-32789
+    // https://bugreports.qt.io/browse/QTBUG-32789
     QFont::insertSubstitution(".Lucida Grande UI", "Lucida Grande");
   }
 #endif
