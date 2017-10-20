@@ -1113,13 +1113,13 @@ uint qHash(const Song& song) {
 }
 
 bool Song::IsSimilar(const Song& other) const {
-  return title().compare(other.title(), Qt::CaseInsensitive) == 0 &&
+  return basefilename().compare(other.basefilename(), Qt::CaseInsensitive) == 0 &&
          artist().compare(other.artist(), Qt::CaseInsensitive) == 0;
 }
 
 uint HashSimilar(const Song& song) {
   // Should compare the same fields as function IsSimilar
-  return qHash(song.title().toLower()) ^ qHash(song.artist().toLower());
+  return qHash(song.basefilename().toLower()) ^ qHash(song.artist().toLower());
 }
 
 bool Song::IsOnSameAlbum(const Song& other) const {
