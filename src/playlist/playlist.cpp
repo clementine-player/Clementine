@@ -1043,11 +1043,18 @@ void Playlist::InsertItemsWithoutUndo(const PlaylistItemList& items, int pos,
   const int start = pos == -1 ? items_.count() : pos;
   const int end = start + items.count() - 1;
 
+  // Increase the index stored in virtual_items_
+  // if the item is after the insert position.
+  for(int j=0; j < virtual_items_.size(); ++j) {
+    if(virtual_items_[j]>=pos)
+      virtual_items_[j]+=items.count();
+  }
+
   beginInsertRows(QModelIndex(), start, end);
   for (int i = start; i <= end; ++i) {
     PlaylistItemPtr item = items[i - start];
     items_.insert(i, item);
-    virtual_items_ << virtual_items_.count();
+    virtual_items_ << i;
 
     if (item->type() == "Library") {
       int id = item->Metadata().id();
