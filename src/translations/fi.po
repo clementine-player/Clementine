@@ -4,7 +4,7 @@
 # 
 # Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
-# Jiri Grönroos <jiri.gronroos@iki.fi>, 2012-2016
+# Jiri Grönroos <jiri.gronroos@iki.fi>, 2012-2017
 # J. S. Tuomisto <jstuomisto@gmail.com>, 2013-2014
 # J. S. Tuomisto <jstuomisto@gmail.com>, 2013
 # Lasse Liehu <larso@gmx.com>, 2014
@@ -12,8 +12,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2017-09-19 10:43+0000\n"
-"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
+"PO-Revision-Date: 2017-10-23 06:45+0000\n"
+"Last-Translator: Jiri Grönroos <jiri.gronroos@iki.fi>\n"
 "Language-Team: Finnish (http://www.transifex.com/davidsansome/clementine/language/fi/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1104,7 +1104,7 @@ msgstr "Mono-toistoasetuksen tilan vaihtaminen tulee voimaan seuraavassa kappale
 
 #: ../bin/src/ui_streamdetailsdialog.h:137
 msgid "Channels"
-msgstr ""
+msgstr "Kanavat"
 
 #: ../bin/src/ui_podcastsettingspage.h:252
 msgid "Check for new episodes"
@@ -1387,7 +1387,7 @@ msgstr "Palvelin hylkäsi yhteyden, tarkista palvelimen osoite. Esimerkki: http:
 
 #: songinfo/streamdiscoverer.cpp:116
 msgid "Connection timed out"
-msgstr ""
+msgstr "Yhteys aikakatkaistiin"
 
 #: internet/subsonic/subsonicsettingspage.cpp:141
 msgid ""
@@ -1456,11 +1456,11 @@ msgstr ""
 
 #: songinfo/streamdiscoverer.cpp:123
 msgid "Could not get details"
-msgstr ""
+msgstr "Ei saatu tietoja"
 
 #: internet/lastfm/lastfmsettingspage.cpp:75
 msgid "Could not log in to Last.fm. Please try again."
-msgstr ""
+msgstr "Kirjautuminen Last.fm:ään ei onnistunut. Yritä uudelleen."
 
 #: playlist/playlistmanager.cpp:166
 msgid "Couldn't create playlist"
@@ -1561,7 +1561,7 @@ msgstr "Mukautettu..."
 
 #: devices/devicekitlister.cpp:125 devices/udisks2lister.cpp:76
 msgid "D-Bus path"
-msgstr ""
+msgstr "D-Bus-polku"
 
 #: ui/equalizer.cpp:116
 msgid "Dance"
@@ -2888,7 +2888,7 @@ msgstr "Last.fm"
 
 #: internet/lastfm/lastfmservice.cpp:178
 msgid "Last.fm Authentication"
-msgstr ""
+msgstr "Last.fm-tunnistautuminen"
 
 #: internet/lastfm/lastfmservice.cpp:287
 msgid "Last.fm is currently busy, please try again in a few minutes"
@@ -3193,7 +3193,7 @@ msgstr "Puskurin vähimmäistäyttö"
 
 #: songinfo/streamdiscoverer.cpp:120
 msgid "Missing plugins"
-msgstr ""
+msgstr "Puuttuvia liitännäisiä"
 
 #: visualisations/projectmvisualisation.cpp:131
 msgid "Missing projectM presets"
@@ -3454,7 +3454,7 @@ msgstr "Pois"
 
 #: core/song.cpp:419
 msgid "Ogg FLAC"
-msgstr ""
+msgstr "Ogg FLAC"
 
 #: transcoder/transcoder.cpp:244
 msgid "Ogg Flac"
@@ -3616,7 +3616,7 @@ msgstr "Alkuperäisen vuoden tunnisteen tuki"
 
 #: ../bin/src/ui_appearancesettingspage.h:317
 msgid "Other"
-msgstr ""
+msgstr "Muu"
 
 #: core/commandlineoptions.cpp:176
 msgid "Other options"
@@ -3765,7 +3765,7 @@ msgstr "Sulje selain ja palaa Clementineen."
 #: internet/lastfm/lastfmservice.cpp:178
 #, qt-format
 msgid "Please open this URL in your browser: <a href=\"%1\">%1</a>"
-msgstr ""
+msgstr "Avaa tämä osoite selaimessa: <a href=\"%1\">%1</a>"
 
 #: ../bin/src/ui_spotifysettingspage.h:213
 msgid "Plugin status:"
@@ -4042,7 +4042,7 @@ msgstr "Poista toiminto"
 
 #: core/globalshortcuts.cpp:83
 msgid "Remove current song from playlist"
-msgstr ""
+msgstr "Poista nykyinen kappale soittolistasta"
 
 #: ../bin/src/ui_mainwindow.h:723
 msgid "Remove duplicates from playlist"
@@ -4326,7 +4326,7 @@ msgstr "Etsi automaattisesti"
 
 #: ui/mainwindow.cpp:685
 msgid "Search for album"
-msgstr ""
+msgstr "Etsi albumia"
 
 #: ui/albumcoverchoicecontroller.cpp:69
 msgid "Search for album covers..."
@@ -4338,7 +4338,7 @@ msgstr "Etsi mitä tahansa"
 
 #: ui/mainwindow.cpp:682
 msgid "Search for artist"
-msgstr ""
+msgstr "Etsi esittäjää"
 
 #: globalsearch/globalsearchview.cpp:473 library/libraryview.cpp:398
 msgid "Search for this"
@@ -4857,7 +4857,7 @@ msgstr "Suoratoisto"
 
 #: ../bin/src/ui_streamdetailsdialog.h:133
 msgid "Stream Details"
-msgstr ""
+msgstr "Suoratoiston tiedot"
 
 #: internet/subsonic/subsonicsettingspage.cpp:51
 msgid ""
@@ -5382,7 +5382,7 @@ msgstr "Käytä ilmoituksia Wii-ohjaimen tilan raportoimiseen"
 
 #: ../bin/src/ui_appearancesettingspage.h:318
 msgid "Use system icons"
-msgstr ""
+msgstr "Käytä järjestelmän kuvakkeita"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:138
 msgid "Use temporal noise shaping"
@@ -5449,7 +5449,7 @@ msgstr "Näkymä"
 
 #: ../bin/src/ui_mainwindow.h:730
 msgid "View Stream Details"
-msgstr ""
+msgstr "Näytä suoratoiston tiedot"
 
 #: ../bin/src/ui_visualisationselector.h:108
 msgid "Visualization mode"
