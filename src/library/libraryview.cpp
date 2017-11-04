@@ -637,6 +637,7 @@ void LibraryView::scrollTo(const QModelIndex& index, ScrollHint hint) {
     QTreeView::scrollTo(index, hint);
 }
 
+// get selected songs
 SongList LibraryView::GetSelectedSongs() const {
   QModelIndexList selected_indexes =
       qobject_cast<QSortFilterProxyModel*>(model())
