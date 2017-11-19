@@ -45,9 +45,8 @@ if(NOT APPLE)
   find_package(Qt5 COMPONENTS WebKitWidgets)
 endif(NOT APPLE)
 
-# Find Qt's lconvert binary.  Try qt's binary dir first, fall back to looking in PATH
-find_program(QT_LCONVERT_EXECUTABLE NAMES lconvert lconvert-qt5 PATHS ${QT_BINARY_DIR} NO_DEFAULT_PATH)
-find_program(QT_LCONVERT_EXECUTABLE NAMES lconvert lconvert-qt5)
+find_package(Qt5LinguistTools CONFIG REQUIRED)
+set(QT_LCONVERT_EXECUTABLE Qt5::lconvert)
 
 if(APPLE)
   if(NOT QT_MAC_USE_COCOA)
