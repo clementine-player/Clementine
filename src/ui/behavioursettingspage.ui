@@ -137,6 +137,16 @@
        </widget>
       </item>
       <item>
+       <widget class="QCheckBox" name="stop_play_if_fail_">
+        <property name="text">
+         <string>Stop playback if song fails to play</string>
+        </property>
+        <property name="checked">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="QCheckBox" name="b_grey_out_deleted_">
         <property name="text">
          <string>Grey out non existent songs in my playlists</string>
