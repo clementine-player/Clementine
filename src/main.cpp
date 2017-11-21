@@ -303,7 +303,10 @@ int main(int argc, char* argv[]) {
         qLog(Info)
             << "Clementine is already running - activating existing window";
       }
-      if (a.sendMessage(options.Serialize(), 5000)) {
+
+      QByteArray serializedOptions = options.Serialize();
+      if (a.sendMessage(serializedOptions, 5000)) {
+        qLog(Info) << "Options found, sent message to running instance";
         return 0;
       }
       // Couldn't send the message so start anyway
