@@ -12,8 +12,9 @@
 # 현구 임 <bradlim980@gmail.com>, 2012
 # Ji yul Kim <kjy00302@gmail.com>, 2015
 # 박정규(Jung-Kyu Park) <bagjunggyu@gmail.com>, 2016
-# 박정용 <kladess@gmail.com>, 2013
-# 박정용 <kladess@gmail.com>, 2014-2015
+# 야생참치 <kladess@gmail.com>, 2013
+# 야생참치 <kladess@gmail.com>, 2014-2015
+# 야생참치 <kladess@gmail.com>, 2017
 # Sungrak Choi <srak.choi@gmail.com>, 2017
 # Thomas Min <thomas.min.v2@gmail.com>, 2013
 # VSFe <klm03025@gmail.com>, 2015
@@ -21,8 +22,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2017-10-08 10:12+0000\n"
-"Last-Translator: Sungrak Choi <srak.choi@gmail.com>\n"
+"PO-Revision-Date: 2017-11-28 05:03+0000\n"
+"Last-Translator: 야생참치 <kladess@gmail.com>\n"
 "Language-Team: Korean (http://www.transifex.com/davidsansome/clementine/language/ko/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -199,7 +200,7 @@ msgstr "효과음(&E)"
 
 #: ../bin/src/ui_edittagdialog.h:728
 msgid "&Grouping"
-msgstr ""
+msgstr "그룹화(&G)"
 
 #: ../bin/src/ui_mainwindow.h:738
 msgid "&Help"
@@ -224,7 +225,7 @@ msgstr "평가 잠금"
 
 #: ../bin/src/ui_edittagdialog.h:731
 msgid "&Lyrics"
-msgstr ""
+msgstr "가사(&Lyrics)"
 
 #: ../bin/src/ui_mainwindow.h:736
 msgid "&Music"
@@ -264,7 +265,7 @@ msgstr "도구(&T)"
 
 #: ../bin/src/ui_edittagdialog.h:724
 msgid "&Year"
-msgstr ""
+msgstr "연도(&Y)"
 
 #: ui/edittagdialog.cpp:50
 msgid "(different across multiple songs)"
@@ -367,14 +368,14 @@ msgid ""
 "href=\"%1\">%2</a>, which is released under the <a href=\"https"
 "://clementine-player.org/licenses/by-sa/3.0/legalcode.txt\">Creative Commons"
 " Attribution-Share-Alike License 3.0</a>.</p>"
-msgstr ""
+msgstr "<p>이 문서는 위키백과의 <a href=\"%1\">%2</a> 문서를 이용하였으며,  <a href=\"https://clementine-player.org/licenses/by-sa/3.0/legalcode.txt\">크레이티브 커먼즈 저작자표시-동일조건변경허락</a>에 따라 사용할 수 있습니다.</p>"
 
 #: ../bin/src/ui_organisedialog.h:250
 msgid ""
 "<p>Tokens start with %, for example: %artist %album %title </p>\n"
 "\n"
 "<p>If you surround sections of text that contain a token with curly-braces, that section will be hidden if the token is empty.</p>"
-msgstr "<p>토큰은 %로 시작하니다, 예제: %artist %album %title </p>⏎\n⏎\n<p>만약 중괄호를 포함하고 있는 토큰을 포함한 텍스트 단원을 감싸고 있고 토큰이 비어 있다면, 그 단원은 감춰질 것입니다.</p>"
+msgstr "<p>토큰은 %로 시작하니다, 예제: %artist %album %title </p>\n\n<p>만약 중괄호를 포함하고 있는 토큰을 포함한 텍스트 단원을 감싸고 있고 토큰이 비어 있다면, 그 단원은 감춰질 것입니다.</p>"
 
 #: internet/spotify/spotifysettingspage.cpp:166
 msgid "A Spotify Premium account is required."
@@ -427,7 +428,7 @@ msgstr "AIFF"
 
 #: widgets/nowplayingwidget.cpp:151
 msgid "ALL GLORY TO THE HYPNOTOAD"
-msgstr "HYPNOTOAD에 모든 영광을"
+msgstr "모든 영광을 최면두꺼비 대왕님께!"
 
 #: ui/albumcovermanager.cpp:105 ui/albumcoversearcher.cpp:158
 msgid "Abort"
@@ -512,11 +513,11 @@ msgstr "파일 추가"
 
 #: ../bin/src/ui_mainwindow.h:726
 msgid "Add file to transcoder"
-msgstr "transcoder에 파일 추가"
+msgstr "변환기에 파일 추가"
 
 #: ../bin/src/ui_mainwindow.h:724
 msgid "Add file(s) to transcoder"
-msgstr "transcoder 파일(들) 추가"
+msgstr "변환기에 파일(들) 추가"
 
 #: ../bin/src/ui_transcodedialog.h:218 ../bin/src/ui_mainwindow.h:692
 msgid "Add file..."
@@ -557,11 +558,11 @@ msgstr "앨범 태그 추가"
 
 #: ../bin/src/ui_notificationssettingspage.h:391
 msgid "Add song albumartist tag"
-msgstr "앨범 가수 태그 추가"
+msgstr "앨범 음악가 태그 추가"
 
 #: ../bin/src/ui_notificationssettingspage.h:382
 msgid "Add song artist tag"
-msgstr "가수 태그 추가"
+msgstr "음악가 태그 추가"
 
 #: ../bin/src/ui_notificationssettingspage.h:427
 msgid "Add song auto score"
@@ -699,7 +700,7 @@ msgstr "앨범 (모든 트랙에 이상적인 음량)"
 #: ../bin/src/ui_groupbydialog.h:149 ../bin/src/ui_groupbydialog.h:168
 #: ../bin/src/ui_edittagdialog.h:725
 msgid "Album artist"
-msgstr "앨범 가수"
+msgstr "앨범 음악가"
 
 #: ../bin/src/ui_appearancesettingspage.h:304
 msgid "Album cover"
@@ -728,7 +729,7 @@ msgstr "모든 파일 (*)"
 #: ../bin/src/ui_mainwindow.h:698
 msgctxt "Label for button to enable/disable Hypnotoad background sound."
 msgid "All Glory to the Hypnotoad!"
-msgstr "Hypnotoad에 모든 영광을!"
+msgstr "모든 영광을 최면두꺼비 대왕님께!"
 
 #: ui/albumcovermanager.cpp:128
 msgid "All albums"
@@ -961,7 +962,7 @@ msgstr "밸런스"
 
 #: core/globalshortcuts.cpp:80
 msgid "Ban (Last.fm scrobbling)"
-msgstr ""
+msgstr "차단 (Last.fm 스크로블)"
 
 #: analyzers/baranalyzer.cpp:34
 msgid "Bar analyzer"
@@ -985,7 +986,7 @@ msgstr "최고"
 
 #: songinfo/artistbiography.cpp:90 songinfo/artistbiography.cpp:255
 msgid "Biography"
-msgstr ""
+msgstr "바이오그래피"
 
 #: playlist/playlist.cpp:1367 ../bin/src/ui_edittagdialog.h:706
 #: ../bin/src/ui_streamdetailsdialog.h:139
@@ -1113,7 +1114,7 @@ msgstr "모노 재생 옵션 변경은 다음곡부터 적용됩니다."
 
 #: ../bin/src/ui_streamdetailsdialog.h:137
 msgid "Channels"
-msgstr ""
+msgstr "채널"
 
 #: ../bin/src/ui_podcastsettingspage.h:252
 msgid "Check for new episodes"
@@ -1302,7 +1303,7 @@ msgstr "클럽"
 
 #: ../bin/src/ui_edittagdialog.h:726
 msgid "Co&mposer"
-msgstr ""
+msgstr "작곡가(&M)"
 
 #: ../bin/src/ui_appearancesettingspage.h:292
 msgid "Colors"
@@ -1396,7 +1397,7 @@ msgstr "서버에서 연결을 거부하였습니다. 서버의 주소를 확인
 
 #: songinfo/streamdiscoverer.cpp:116
 msgid "Connection timed out"
-msgstr ""
+msgstr "연결 시간이 초과됨"
 
 #: internet/subsonic/subsonicsettingspage.cpp:141
 msgid ""
@@ -1461,15 +1462,15 @@ msgstr "GStreamer 요소 \"%1\"를 찾을 수 없습니다  - 필요한 모든 G
 #: songinfo/streamdiscoverer.cpp:97
 #, qt-format
 msgid "Could not detect an audio stream in %1"
-msgstr ""
+msgstr "%1의 오디오 스트림을 감지할 수 없습니다."
 
 #: songinfo/streamdiscoverer.cpp:123
 msgid "Could not get details"
-msgstr ""
+msgstr "상세 정보를 얻을 수 없습니다"
 
 #: internet/lastfm/lastfmsettingspage.cpp:75
 msgid "Could not log in to Last.fm. Please try again."
-msgstr ""
+msgstr "Last.fm에 로그인 할 수 없습니다. 다시 시도하세요."
 
 #: playlist/playlistmanager.cpp:166
 msgid "Couldn't create playlist"
@@ -1530,7 +1531,7 @@ msgstr "%1에서 커버"
 
 #: core/commandlineoptions.cpp:172
 msgid "Create a new playlist with files/URLs"
-msgstr ""
+msgstr "파일/URL에서 새로운 재생목록을 생성합니다."
 
 #: ../bin/src/ui_playbacksettingspage.h:344
 msgid "Cross-fade when changing tracks automatically"
@@ -1570,7 +1571,7 @@ msgstr "사용자 정의..."
 
 #: devices/devicekitlister.cpp:125 devices/udisks2lister.cpp:76
 msgid "D-Bus path"
-msgstr ""
+msgstr "D-Bus 패스"
 
 #: ui/equalizer.cpp:116
 msgid "Dance"
@@ -1581,7 +1582,7 @@ msgid ""
 "Database corruption detected. Please read https://github.com/clementine-"
 "player/Clementine/wiki/Database-Corruption for instructions on how to "
 "recover your database"
-msgstr ""
+msgstr "데이터베이스 손상이 발견되었습니다. 데이터베이스의 복구 방법은 https://github.com/clementine-player/Clementine/wiki/Database-Corruption을 읽으십시오"
 
 #: playlist/playlist.cpp:1381 ../bin/src/ui_edittagdialog.h:715
 msgid "Date created"
@@ -1673,7 +1674,7 @@ msgstr "파일 삭제 중"
 
 #: ../bin/src/ui_streamdetailsdialog.h:143
 msgid "Depth"
-msgstr ""
+msgstr "깊이"
 
 #: ui/mainwindow.cpp:1748
 msgid "Dequeue selected tracks"
@@ -1840,7 +1841,7 @@ msgstr "열려면 더블클릭하세요"
 
 #: ../bin/src/ui_behavioursettingspage.h:359
 msgid "Double clicking a song in the playlist will..."
-msgstr ""
+msgstr "음악을 더블클릭하면 재생목록으로..."
 
 #: ../bin/src/ui_behavioursettingspage.h:345
 msgid "Double clicking a song will..."
@@ -2110,7 +2111,7 @@ msgstr "노래 삭제 오류"
 #: songinfo/streamdiscoverer.cpp:56
 #, qt-format
 msgid "Error discovering %1: %2"
-msgstr ""
+msgstr "%1 에러 발견: %2"
 
 #: internet/spotify/spotifyblobdownloader.cpp:260
 msgid "Error downloading Spotify plugin"
@@ -2261,7 +2262,7 @@ msgstr "RSS 피드를 위한 XML 파싱이 실패되었습니다."
 #: ui/trackselectiondialog.cpp:247
 #, qt-format
 msgid "Failed to write new auto-tags to '%1'"
-msgstr ""
+msgstr "새 자동 태그를 '%1'에 쓰는데 실패하였음"
 
 #: ../bin/src/ui_transcoderoptionsflac.h:81
 #: ../bin/src/ui_transcoderoptionsmp3.h:199
@@ -2449,7 +2450,7 @@ msgstr "고음 강화"
 
 #: ../bin/src/ui_edittagdialog.h:729
 msgid "Ge&nre"
-msgstr ""
+msgstr "장르(&N)"
 
 #: ui/settingsdialog.cpp:133
 msgid "General"
@@ -2528,7 +2529,7 @@ msgstr "앨범에 의한 그룹"
 
 #: library/libraryfilterwidget.cpp:150
 msgid "Group by Album artist/Album"
-msgstr ""
+msgstr "앨범 음악가/앨범에 의한 그룹"
 
 #: library/libraryfilterwidget.cpp:143
 msgid "Group by Artist"
@@ -2617,7 +2618,7 @@ msgstr "시간"
 
 #: core/backgroundstreams.cpp:46
 msgid "Hypnotoad"
-msgstr "최면 두꺼비 대왕"
+msgstr "최면두꺼비 대왕"
 
 #: ../bin/src/ui_magnatunesettingspage.h:158
 msgid "I don't have a Magnatune account"
@@ -2763,7 +2764,7 @@ msgstr "잘못된 API "
 
 #: songinfo/streamdiscoverer.cpp:114
 msgid "Invalid URL"
-msgstr ""
+msgstr "잘못된 URL"
 
 #: internet/lastfm/lastfmservice.cpp:270
 msgid "Invalid format"
@@ -2897,7 +2898,7 @@ msgstr "Last.fm"
 
 #: internet/lastfm/lastfmservice.cpp:178
 msgid "Last.fm Authentication"
-msgstr ""
+msgstr "Last.fm 인증"
 
 #: internet/lastfm/lastfmservice.cpp:287
 msgid "Last.fm is currently busy, please try again in a few minutes"
@@ -3049,7 +3050,7 @@ msgstr "좋아요"
 
 #: core/globalshortcuts.cpp:78
 msgid "Love (Last.fm scrobbling)"
-msgstr ""
+msgstr "사랑해 (Last.fm 스크로블)"
 
 #: analyzers/analyzercontainer.cpp:67
 #: visualisations/visualisationcontainer.cpp:107
@@ -3076,7 +3077,7 @@ msgstr "%1 의 가사"
 
 #: songinfo/taglyricsinfoprovider.cpp:29
 msgid "Lyrics from the tag"
-msgstr ""
+msgstr "태그로부터의 가사"
 
 #: transcoder/transcoder.cpp:235
 msgid "M4A AAC"
@@ -3202,7 +3203,7 @@ msgstr "최소 버퍼량"
 
 #: songinfo/streamdiscoverer.cpp:120
 msgid "Missing plugins"
-msgstr ""
+msgstr "플러그인 없음"
 
 #: visualisations/projectmvisualisation.cpp:131
 msgid "Missing projectM presets"
@@ -3463,7 +3464,7 @@ msgstr "꺼짐"
 
 #: core/song.cpp:419
 msgid "Ogg FLAC"
-msgstr ""
+msgstr "Ogg FLAC"
 
 #: transcoder/transcoder.cpp:244
 msgid "Ogg Flac"
@@ -3563,7 +3564,7 @@ msgstr "새로운 재생목록에서 열기"
 
 #: songinfo/artistbiography.cpp:94 songinfo/artistbiography.cpp:261
 msgid "Open in your browser"
-msgstr ""
+msgstr "브라우저에서 열기"
 
 #: ../bin/src/ui_globalshortcutssettingspage.h:168
 #: ../bin/src/ui_globalshortcutssettingspage.h:170
@@ -3625,7 +3626,7 @@ msgstr "원 년 태그 지원"
 
 #: ../bin/src/ui_appearancesettingspage.h:317
 msgid "Other"
-msgstr ""
+msgstr "그 외"
 
 #: core/commandlineoptions.cpp:176
 msgid "Other options"
@@ -3665,7 +3666,7 @@ msgstr "Jamendo 목록 구성 중"
 
 #: devices/udisks2lister.cpp:79
 msgid "Partition label"
-msgstr ""
+msgstr "부분 레이블"
 
 #: ui/equalizer.cpp:139
 msgid "Party"
@@ -3774,7 +3775,7 @@ msgstr "브라우저를 닫고 Clementine으로 돌아오세요"
 #: internet/lastfm/lastfmservice.cpp:178
 #, qt-format
 msgid "Please open this URL in your browser: <a href=\"%1\">%1</a>"
-msgstr ""
+msgstr "브라우저에서 이 URL을 열어보세요: <a href=\"%1\">%1</a>"
 
 #: ../bin/src/ui_spotifysettingspage.h:213
 msgid "Plugin status:"
@@ -4051,7 +4052,7 @@ msgstr "제거 행동"
 
 #: core/globalshortcuts.cpp:83
 msgid "Remove current song from playlist"
-msgstr ""
+msgstr "재생목록에서 현재곡을 제거"
 
 #: ../bin/src/ui_mainwindow.h:723
 msgid "Remove duplicates from playlist"
@@ -4145,12 +4146,12 @@ msgstr "재생 횟수 초기화"
 
 #: ../bin/src/ui_behavioursettingspage.h:343
 msgid "Restart song, then jump to previous if pressed again"
-msgstr ""
+msgstr "음악을 다시 시작한 다음 다시 누르면 이전으로 건너 뜁니다."
 
 #: core/commandlineoptions.cpp:169
 msgid ""
 "Restart the track, or play the previous track if within 8 seconds of start."
-msgstr ""
+msgstr "트랙을 다시 시작하거나 시작한 지 8 초 이내에는 이전 트랙을 재생"
 
 #: ../bin/src/ui_organisedialog.h:257
 msgid "Restrict to ASCII characters"
@@ -4196,7 +4197,7 @@ msgstr "SOCKS 프록시"
 msgid ""
 "SSL handshake error, verify server configuration. SSLv3 option below may "
 "workaround some issues."
-msgstr ""
+msgstr "SSL 핸드쉐이크 오류, 서버 설정을 확인하세요. SSLv3 옵션은이 가끔 몇몇 문제를 해결할 수 있습니다."
 
 #: devices/deviceview.cpp:204
 msgid "Safely remove device"
@@ -4230,7 +4231,7 @@ msgstr "커버를 디스크에 저장..."
 
 #: ../bin/src/ui_libraryfilterwidget.h:101
 msgid "Save current grouping"
-msgstr ""
+msgstr "현재의 그룹화를 저장"
 
 #: widgets/prettyimage.cpp:185 widgets/prettyimage.cpp:230
 msgid "Save image"
@@ -4268,7 +4269,7 @@ msgstr "인터넷 탭에 이 스트림을 저장"
 
 #: ../bin/src/ui_savedgroupingmanager.h:101
 msgid "Saved Grouping Manager"
-msgstr ""
+msgstr "그룹화 관리자 저장됨"
 
 #: library/library.cpp:194
 msgid "Saving songs statistics into songs files"
@@ -4296,7 +4297,7 @@ msgstr "내가 들은 청취 기록 트랙"
 
 #: ../bin/src/ui_behavioursettingspage.h:313
 msgid "Scroll over icon to change track"
-msgstr ""
+msgstr "트랙을 변경하려면 아이콘을 스크롤하세요"
 
 #: ../bin/src/ui_seafilesettingspage.h:164
 msgid "Seafile"
@@ -4335,7 +4336,7 @@ msgstr "자동적으로 찾기"
 
 #: ui/mainwindow.cpp:685
 msgid "Search for album"
-msgstr ""
+msgstr "앨범 검색"
 
 #: ui/albumcoverchoicecontroller.cpp:69
 msgid "Search for album covers..."
@@ -4347,11 +4348,11 @@ msgstr "검색"
 
 #: ui/mainwindow.cpp:682
 msgid "Search for artist"
-msgstr ""
+msgstr "음악가 검색"
 
 #: globalsearch/globalsearchview.cpp:473 library/libraryview.cpp:398
 msgid "Search for this"
-msgstr ""
+msgstr "이것을 찾기"
 
 #: ../bin/src/ui_gpoddersearchpage.h:72
 msgid "Search gpodder.net"
@@ -4381,7 +4382,7 @@ msgstr "검색 조건"
 
 #: library/savedgroupingmanager.cpp:37
 msgid "Second Level"
-msgstr ""
+msgstr "두 번째 단계"
 
 #: ../bin/src/ui_groupbydialog.h:143
 msgid "Second level"
@@ -4405,7 +4406,7 @@ msgstr "현재 재생중인 트랙을 절대 위치로 탐색"
 
 #: ../bin/src/ui_behavioursettingspage.h:365
 msgid "Seeking using a keyboard shortcut or mouse wheel"
-msgstr ""
+msgstr "키보드 단축키 또는 마우스 휠을 사용하여 탐색"
 
 #: visualisations/visualisationselector.cpp:37 ../bin/src/ui_ripcddialog.h:309
 msgid "Select All"
@@ -4586,7 +4587,7 @@ msgstr "태그되지 않은 것만 보기"
 
 #: ../bin/src/ui_mainwindow.h:733
 msgid "Show or hide the sidebar"
-msgstr ""
+msgstr "사이드바 보기/숨기기"
 
 #: ../bin/src/ui_globalsearchsettingspage.h:149
 msgid "Show search suggestions"
@@ -4594,7 +4595,7 @@ msgstr "검색 제안 표시"
 
 #: ../bin/src/ui_mainwindow.h:731
 msgid "Show sidebar"
-msgstr ""
+msgstr "사이드바 보기"
 
 #: ../bin/src/ui_lastfmsettingspage.h:136
 msgid "Show the \"love\" button"
@@ -4807,7 +4808,7 @@ msgstr "변환 시작"
 msgid ""
 "Start typing something on the search box above to fill this search results "
 "list"
-msgstr ""
+msgstr "이 검색 결과 목록을 채우기 위해 위의 검색 창에 무언가를 입력하십시오."
 
 #: transcoder/transcoder.cpp:397
 #, qt-format
@@ -4833,7 +4834,7 @@ msgstr "현재 트랙이 끝난 후 정지"
 
 #: widgets/osd.cpp:320
 msgid "Stop after every track"
-msgstr ""
+msgstr "모든 트랙 이후에 종료"
 
 #: ui/mainwindow.cpp:673 ../bin/src/ui_mainwindow.h:679
 msgid "Stop after this track"
@@ -4845,7 +4846,7 @@ msgstr "재생 "
 
 #: core/commandlineoptions.cpp:157
 msgid "Stop playback after current track"
-msgstr ""
+msgstr "현재 트랙 이후에 재생 중지"
 
 #: core/globalshortcuts.cpp:55
 msgid "Stop playing after current track"
@@ -4866,13 +4867,13 @@ msgstr "스트림"
 
 #: ../bin/src/ui_streamdetailsdialog.h:133
 msgid "Stream Details"
-msgstr ""
+msgstr "스트림 상세정보"
 
 #: internet/subsonic/subsonicsettingspage.cpp:51
 msgid ""
 "Streaming from a Subsonic server requires a valid server license after the "
 "30-day trial period."
-msgstr ""
+msgstr "Subsonic 서버에서 스트리밍하려면 30 일 평가판 기간 후에 유효한 서버 라이센스가 필요합니다."
 
 #: ../bin/src/ui_magnatunesettingspage.h:159
 msgid "Streaming membership"
@@ -4979,7 +4980,7 @@ msgstr "디렉터리 %1 이 유효하지 않습니다."
 
 #: songinfo/streamdiscoverer.cpp:118
 msgid "The discoverer is busy"
-msgstr ""
+msgstr "수집기가 바쁩니다"
 
 #: smartplaylists/searchtermwidget.cpp:346
 msgid "The second value must be greater than the first one!"
@@ -5186,7 +5187,7 @@ msgstr ""
 
 #: ../bin/src/ui_edittagdialog.h:720
 msgid "Trac&k"
-msgstr ""
+msgstr "트랙(&K)"
 
 #: playlist/playlist.cpp:1335 ui/organisedialog.cpp:72
 #: ../bin/src/ui_trackselectiondialog.h:212 ../bin/src/ui_ripcddialog.h:304
@@ -5203,7 +5204,7 @@ msgstr "음악 변환"
 
 #: ../bin/src/ui_transcodelogdialog.h:62
 msgid "Transcoder Log"
-msgstr "변환 기록"
+msgstr "변환기 기록"
 
 #: ../bin/src/ui_transcodersettingspage.h:172
 msgid "Transcoding"
@@ -5236,7 +5237,7 @@ msgstr "URI"
 
 #: ../bin/src/ui_streamdetailsdialog.h:134
 msgid "URL"
-msgstr ""
+msgstr "URL"
 
 #: core/commandlineoptions.cpp:152
 msgid "URL(s)"
@@ -5244,7 +5245,7 @@ msgstr "URL(들)"
 
 #: devices/udisks2lister.cpp:80
 msgid "UUID"
-msgstr ""
+msgstr "UUID"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:227
 msgid "Ultra wide band (UWB)"
@@ -5339,7 +5340,7 @@ msgstr "사용"
 
 #: ../bin/src/ui_lastfmsettingspage.h:138
 msgid "Use Album Artist tag when available"
-msgstr "가능 하면 앨범 아티스트 태그 사용"
+msgstr "가능 하면 앨범 음악가 태그 사용"
 
 #: ../bin/src/ui_globalshortcutssettingspage.h:167
 msgid "Use Gnome's shortcut keys"
@@ -5347,7 +5348,7 @@ msgstr "Gnome의 단축키를 사용합니다."
 
 #: analyzers/analyzercontainer.cpp:93
 msgid "Use Psychedelic Colors"
-msgstr ""
+msgstr "사이키델리 색상 사용"
 
 #: ../bin/src/ui_playbacksettingspage.h:352
 msgid "Use Replay Gain metadata if it is available"
@@ -5391,7 +5392,7 @@ msgstr "Wii 리모콘 상태 보고를 위한 알림 사용"
 
 #: ../bin/src/ui_appearancesettingspage.h:318
 msgid "Use system icons"
-msgstr ""
+msgstr "시스템 아이콘 사용"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:138
 msgid "Use temporal noise shaping"
@@ -5458,7 +5459,7 @@ msgstr "보기"
 
 #: ../bin/src/ui_mainwindow.h:730
 msgid "View Stream Details"
-msgstr ""
+msgstr "스트림 상세정보 보기"
 
 #: ../bin/src/ui_visualisationselector.h:108
 msgid "Visualization mode"
@@ -5518,7 +5519,7 @@ msgstr "Clementine이 시작할 때"
 msgid ""
 "When looking for album art Clementine will first look for picture files that contain one of these words.\n"
 "If there are no matches then it will use the largest image in the directory."
-msgstr ""
+msgstr "앨범아트를 찾을 때, Clementine은 이 단어들이 포함된 그림파일을 먼저 찾게 됩니다.\n일치하는 항목이 없으면 디렉토리에서 가장 큰 이미지를 사용합니다."
 
 #: ../bin/src/ui_behavioursettingspage.h:369
 msgid "When saving a playlist, file paths should be"
@@ -5594,7 +5595,7 @@ msgstr "커버 제외:"
 msgid ""
 "Would you like to move the other songs in this album to Various Artists as "
 "well?"
-msgstr ""
+msgstr "이 앨범의 다른 곡도 다양한 음악가로 옮기겠습니까?"
 
 #: ui/mainwindow.cpp:2609
 msgid "Would you like to run a full rescan right now?"
@@ -5634,7 +5635,7 @@ msgstr "어제"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:128
 msgid "You are about to download the following albums"
-msgstr ""
+msgstr "다음 앨범을 다운로드 하려고 합니다"
 
 #: playlist/playlistlistcontainer.cpp:318
 #, qt-format

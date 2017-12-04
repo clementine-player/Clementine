@@ -12,7 +12,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2017-11-23 11:50+0000\n"
+"PO-Revision-Date: 2017-11-30 17:48+0000\n"
 "Last-Translator: Sveinn í Felli <sv1@fellsnet.is>\n"
 "Language-Team: Icelandic (http://www.transifex.com/davidsansome/clementine/language/is/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -227,7 +227,7 @@ msgstr "&Ekkert"
 
 #: ../bin/src/ui_mainwindow.h:737
 msgid "&Playlist"
-msgstr "&Laglisti"
+msgstr "S&pilunarlisti"
 
 #: ../bin/src/ui_mainwindow.h:678
 msgid "&Quit"
@@ -365,7 +365,7 @@ msgid ""
 "<p>Tokens start with %, for example: %artist %album %title </p>\n"
 "\n"
 "<p>If you surround sections of text that contain a token with curly-braces, that section will be hidden if the token is empty.</p>"
-msgstr ""
+msgstr "<p>Breytur byrja á %, til dæmis: %artist %album %title </p>\n\n<p>Ef þú setur slaufusviga { } í kringum hluta textans sem inniheldur breytuna verður sá hluti falinn ef stakið er ekki til.</p>"
 
 #: internet/spotify/spotifysettingspage.cpp:166
 msgid "A Spotify Premium account is required."
@@ -373,7 +373,7 @@ msgstr "Krafist er Spotify Premium aðgangs."
 
 #: ../bin/src/ui_networkremotesettingspage.h:233
 msgid "A client can connect only, if the correct code was entered."
-msgstr ""
+msgstr "Forrit getur einungis tengst ef réttur kóði er settur inn."
 
 #: internet/digitally/digitallyimportedsettingspage.cpp:48
 #: internet/digitally/digitallyimportedurlhandler.cpp:60
@@ -1038,7 +1038,7 @@ msgstr "Hleð í biðminni"
 
 #: internet/seafile/seafileservice.cpp:227
 msgid "Building Seafile index..."
-msgstr ""
+msgstr "Bý til atriðaskrá Seafile..."
 
 #: ../bin/src/ui_globalsearchview.h:210
 msgid "But these sources are disabled:"
@@ -1094,13 +1094,13 @@ msgstr "Skipta um tungumál"
 
 #: ../bin/src/ui_playbacksettingspage.h:381
 msgid "Changes will take place when the next song starts playing"
-msgstr ""
+msgstr "Breytingar munu taka gildi þegar næsta lag byrjar að spila"
 
 #: ../bin/src/ui_playbacksettingspage.h:368
 msgid ""
 "Changing mono playback preference will be effective for the next playing "
 "songs"
-msgstr ""
+msgstr "Breytingar í einóma afspilun munu taka gildi þegar næsta lag byrjar að spila"
 
 #: ../bin/src/ui_streamdetailsdialog.h:137
 msgid "Channels"
@@ -1236,7 +1236,7 @@ msgstr "Myndskoðari Clementine"
 
 #: ../bin/src/ui_trackselectiondialog.h:205
 msgid "Clementine was unable to find results for this file"
-msgstr ""
+msgstr "Clementine fann engar niðurstöður fyrir þessa skrá"
 
 #: ../bin/src/ui_globalsearchview.h:209
 msgid "Clementine will find music in:"
@@ -1254,7 +1254,7 @@ msgstr ""
 
 #: ../bin/src/ui_trackslider.h:71
 msgid "Click to toggle between remaining time and total time"
-msgstr ""
+msgstr "Smelltu til að víxla á milli heildartíma og tíma sem er eftir"
 
 #: ../bin/src/ui_soundcloudsettingspage.h:103
 #: ../bin/src/ui_lastfmsettingspage.h:133
@@ -2033,7 +2033,7 @@ msgstr "Settu inn nýtt nafn á þennan lagalista"
 #: ../bin/src/ui_globalsearchview.h:208
 msgid ""
 "Enter search terms above to find music on your computer and on the internet"
-msgstr ""
+msgstr "Settu inn leitarstreng hér fyrir ofan til að finna tónlist á tölvunni þinni og á netinu"
 
 #: ../bin/src/ui_itunessearchpage.h:73
 msgid "Enter search terms below to find podcasts in the iTunes Store"
@@ -2101,7 +2101,7 @@ msgstr "Villa við eyðingu laga"
 #: songinfo/streamdiscoverer.cpp:56
 #, qt-format
 msgid "Error discovering %1: %2"
-msgstr ""
+msgstr "Villa í að uppgötva %1: %2"
 
 #: internet/spotify/spotifyblobdownloader.cpp:260
 msgid "Error downloading Spotify plugin"
@@ -2226,11 +2226,11 @@ msgstr "Tímalengd dofnunar"
 
 #: ui/mainwindow.cpp:2083
 msgid "Failed reading CD drive"
-msgstr ""
+msgstr "Mistókst að lesa CD-drif"
 
 #: internet/podcasts/gpoddertoptagspage.cpp:73
 msgid "Failed to fetch directory"
-msgstr ""
+msgstr "Mistókst að sækja möppu"
 
 #: internet/podcasts/gpoddersearchpage.cpp:77
 #: internet/podcasts/gpoddertoptagsmodel.cpp:103
@@ -2247,7 +2247,7 @@ msgstr "Mistókst að lesa inn hlaðvarp"
 
 #: internet/podcasts/podcasturlloader.cpp:175
 msgid "Failed to parse the XML for this RSS feed"
-msgstr ""
+msgstr "Gat ekki þáttað XML-skrána fyrir þetta RSS-streymi"
 
 #: ui/trackselectiondialog.cpp:247
 #, qt-format
@@ -2343,7 +2343,7 @@ msgstr ""
 
 #: musicbrainz/tagfetcher.cpp:58
 msgid "Fingerprinting song"
-msgstr ""
+msgstr "Tek fingrafar af lagi"
 
 #: smartplaylists/wizard.cpp:83
 msgid "Finish"
@@ -2363,7 +2363,7 @@ msgstr "Leturstærð"
 
 #: ../bin/src/ui_spotifysettingspage.h:212
 msgid "For licensing reasons Spotify support is in a separate plugin."
-msgstr ""
+msgstr "Vegna vandamála með notkunarleyfi er stuðningur við Spotify hafður í sérstakri viðbót."
 
 #: ../bin/src/ui_transcoderoptionsmp3.h:203
 msgid "Force mono encoding"
@@ -2519,7 +2519,7 @@ msgstr "Hópa eftir hljómplötum"
 
 #: library/libraryfilterwidget.cpp:150
 msgid "Group by Album artist/Album"
-msgstr ""
+msgstr "Hópa eftir hljómplötu flytjendum/hljómplötum"
 
 #: library/libraryfilterwidget.cpp:143
 msgid "Group by Artist"
@@ -2549,11 +2549,11 @@ msgstr "Hópun"
 
 #: library/libraryfilterwidget.cpp:211
 msgid "Grouping Name"
-msgstr ""
+msgstr "Nafn hópunar"
 
 #: library/libraryfilterwidget.cpp:211
 msgid "Grouping name:"
-msgstr ""
+msgstr "Nafn hópunar:"
 
 #: internet/podcasts/podcasturlloader.cpp:206
 msgid "HTML page did not contain any RSS feeds"
@@ -2676,7 +2676,7 @@ msgstr "Innhólf"
 
 #: ../bin/src/ui_notificationssettingspage.h:449
 msgid "Include album art in the notification"
-msgstr ""
+msgstr "Hafa með umslagsmynd í tilkynningunni"
 
 #: ../bin/src/ui_querysearchpage.h:114
 msgid "Include all songs"
@@ -2790,19 +2790,19 @@ msgstr "Jamendo"
 
 #: internet/jamendo/jamendoservice.cpp:122
 msgid "Jamendo Most Listened Tracks"
-msgstr ""
+msgstr "Lög sem mest er hlustað á í Jamendo"
 
 #: internet/jamendo/jamendoservice.cpp:119
 msgid "Jamendo Top Tracks"
-msgstr ""
+msgstr "Topplög í Jamendo"
 
 #: internet/jamendo/jamendoservice.cpp:113
 msgid "Jamendo Top Tracks of the Month"
-msgstr ""
+msgstr "Topplög mánaðarins í Jamendo"
 
 #: internet/jamendo/jamendoservice.cpp:116
 msgid "Jamendo Top Tracks of the Week"
-msgstr ""
+msgstr "Topplög vikunnar í Jamendo"
 
 #: internet/jamendo/jamendoservice.cpp:179
 msgid "Jamendo database"
@@ -3155,11 +3155,11 @@ msgstr "Merkja sem nýtt"
 
 #: ../bin/src/ui_querysearchpage.h:112
 msgid "Match every search term (AND)"
-msgstr ""
+msgstr "Samsvara öllum leitarorðum (AND)"
 
 #: ../bin/src/ui_querysearchpage.h:113
 msgid "Match one or more search terms (OR)"
-msgstr ""
+msgstr "Samsvara einu eða fleiri leitarorðum (OR)"
 
 #: ../bin/src/ui_transcoderoptionsvorbis.h:208
 msgid "Maximum bitrate"
@@ -3368,7 +3368,7 @@ msgstr ""
 #: playlist/playlistcontainer.cpp:377
 msgid ""
 "No matches found.  Clear the search box to show the whole playlist again."
-msgstr ""
+msgstr "Engar samsvaranir fundust. Hreinsaðu leitarreitinn til að birta allt safnið aftur."
 
 #: ../bin/src/ui_transcoderoptionsaac.h:144
 msgid "No short blocks"
@@ -4042,7 +4042,7 @@ msgstr "Fjarlægja aðgerð"
 
 #: core/globalshortcuts.cpp:83
 msgid "Remove current song from playlist"
-msgstr ""
+msgstr "Fjarlægja þetta lag af spilunarlistanum"
 
 #: ../bin/src/ui_mainwindow.h:723
 msgid "Remove duplicates from playlist"
@@ -4195,7 +4195,7 @@ msgstr "Fjarlægja tækið örugglega"
 
 #: ../bin/src/ui_organisedialog.h:247
 msgid "Safely remove the device after copying"
-msgstr ""
+msgstr "Fjarlægja tækið á öruggan máta eftir afritun"
 
 #: playlist/playlist.cpp:1369 ../bin/src/ui_edittagdialog.h:708
 #: ../bin/src/ui_playbacksettingspage.h:371
@@ -4798,7 +4798,7 @@ msgstr "Hefja umkóðun"
 msgid ""
 "Start typing something on the search box above to fill this search results "
 "list"
-msgstr ""
+msgstr "Byrjaðu að skrifa í leitarreitinn hér fyrir ofan og niðurstöðurnar munu birtast sjálfkrafa"
 
 #: transcoder/transcoder.cpp:397
 #, qt-format
@@ -4994,7 +4994,7 @@ msgstr ""
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
-msgstr ""
+msgstr "Sú útgáfa af Clementine sem þú varst að uppfæra í, krefst þess að safnið sé skannað til fulls. Það er vegna nýrra eiginleika sem taldir eru upp hér fyrir neðan:"
 
 #: library/libraryview.cpp:582
 msgid "There are other songs in this album"
@@ -5631,13 +5631,13 @@ msgstr "Þú ert við það að sækja eftirfarandi hljómplötur"
 #, qt-format
 msgid ""
 "You are about to remove %1 playlists from your favorites, are you sure?"
-msgstr ""
+msgstr "Þú ert í þann mund að fjarlægja %1 spilunarlista úr eftirlætum, ertu viss um að þú viljir gera það?"
 
 #: playlist/playlisttabbar.cpp:186
 msgid ""
 "You are about to remove a playlist which is not part of your favorite playlists: the playlist will be deleted (this action cannot be undone). \n"
 "Are you sure you want to continue?"
-msgstr ""
+msgstr "Þú ert í þann mund að fjarlægja spilunarlista sem ekki er hluti af eftirlætum: listanum verður eytt (ekki er hægt að afturkalla aðgerðina). \nErtu viss um að þú viljir halda áfram?"
 
 #: ../bin/src/ui_loginstatewidget.h:168
 msgid "You are not signed in."
