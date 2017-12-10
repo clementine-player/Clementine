@@ -692,6 +692,18 @@ void GstEngine::HandlePipelineError(int pipeline_id, const QString& message,
 
   qLog(Warning) << "Gstreamer error:" << message;
 
+  // try to reload the URL in case of a drop of the connection
+  if (domain == GST_RESOURCE_ERROR && error_code == GST_RESOURCE_ERROR_SEEK) {
+    if (Load(url_, 0, false, 0, 0)) {
+
+      current_pipeline_->SetState(GST_STATE_PLAYING);
+
+      return;
+    }
+
+    qLog(Warning) << "Attempt to reload " << url_ << " failed";
+  }
+
   current_pipeline_.reset();
 
   BufferingFinished();
