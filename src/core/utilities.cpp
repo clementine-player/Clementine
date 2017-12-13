@@ -113,13 +113,18 @@ QString PrettyTimeNanosec(qint64 nanoseconds) {
 }
 
 QString WordyTime(quint64 seconds) {
-  quint64 days = seconds / (60 * 60 * 24);
+  quint64 days = seconds / (kSecsPerDay);
+  quint64 remaining_hours = (seconds - days * kSecsPerDay) / (60 * 60);
 
   // TODO(David Sansome): Make the plural rules translatable
   QStringList parts;
 
   if (days) parts << (days == 1 ? tr("1 day") : tr("%1 days").arg(days));
-  parts << PrettyTime(seconds - days * 60 * 60 * 24);
+
+  // Since PrettyTime does not return the hour if it is 0, we need to add it
+  // explicitly for durations longer than 1 day.
+  parts << (days && !remaining_hours ? QString("0:") : QString()) +
+               PrettyTime(seconds - days * kSecsPerDay);
 
   return parts.join(" ");
 }
