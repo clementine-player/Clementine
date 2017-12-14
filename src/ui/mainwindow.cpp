@@ -1354,6 +1354,7 @@ void MainWindow::PlaylistDoubleClick(const QModelIndex& index) {
       app_->playlist_manager()->current()->queue()->ToggleTracks(
           dummyIndexList);
       if (app_->player()->GetState() != Engine::Playing) {
+        app_->playlist_manager()->SetActiveToCurrent();
         app_->player()->PlayAt(
             app_->playlist_manager()->current()->queue()->TakeNext(),
             Engine::Manual, true);
