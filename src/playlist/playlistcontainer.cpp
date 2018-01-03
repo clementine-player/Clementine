@@ -19,6 +19,7 @@
 #include "playlistmanager.h"
 #include "ui_playlistcontainer.h"
 #include "core/logging.h"
+#include "core/appearance.h"
 #include "playlistparsers/playlistparser.h"
 #include "ui/iconloader.h"
 
@@ -70,6 +71,11 @@ PlaylistContainer::PlaylistContainer(QWidget* parent)
 
   // Remove QFrame border
   ui_->toolbar->setStyleSheet("QFrame { border: 0px; }");
+
+  QSettings settings;
+  settings.beginGroup(Appearance::kSettingsGroup);
+  bool hide_toolbar = settings.value("b_hide_filter_toolbar", false).toBool();
+  ui_->toolbar->setVisible(!hide_toolbar);
 
   // Make it bold
   QFont no_matches_font = no_matches_label_->font();
@@ -451,4 +457,11 @@ bool PlaylistContainer::eventFilter(QObject* objectWatched, QEvent* event) {
     }
   }
   return QWidget::eventFilter(objectWatched, event);
+}
+
+void PlaylistContainer::ReloadSettings() {
+  QSettings settings;
+  settings.beginGroup(Appearance::kSettingsGroup);
+  bool hide_toolbar = settings.value("b_hide_filter_toolbar", false).toBool();
+  ui_->toolbar->setVisible(!hide_toolbar);
 }
