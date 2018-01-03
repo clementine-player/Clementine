@@ -61,6 +61,9 @@ signals:
   // QWidget
   void resizeEvent(QResizeEvent*);
 
+ public slots:
+  void ReloadSettings();
+
  private slots:
   void NewPlaylist();
   void LoadPlaylist();
