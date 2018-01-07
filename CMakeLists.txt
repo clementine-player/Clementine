@@ -40,11 +40,6 @@ if(X11_FOUND)
   find_package(Qt5 ${QT_MIN_VERSION} REQUIRED COMPONENTS X11Extras)
 endif()
 
-
-if(NOT APPLE)
-  find_package(Qt5 COMPONENTS WebKitWidgets)
-endif(NOT APPLE)
-
 find_package(Qt5LinguistTools CONFIG REQUIRED)
 set(QT_LCONVERT_EXECUTABLE Qt5::lconvert)
 
@@ -147,11 +142,6 @@ endif(${CMAKE_BUILD_TYPE} MATCHES "Release")
 add_definitions(${QT_DEFINITIONS})
 link_directories(${TAGLIB_LIBRARY_DIRS})
 link_directories(${GSTREAMER_LIBRARY_DIRS})
-
-# Don't try to use webkit if their include directories couldn't be found.
-if (NOT QT_QTWEBKIT_INCLUDE_DIR)
-  set (QT_USE_QTWEBKIT 0)
-endif (NOT QT_QTWEBKIT_INCLUDE_DIR)
 
 include_directories(${Boost_INCLUDE_DIRS})
 include_directories(${TAGLIB_INCLUDE_DIRS})
