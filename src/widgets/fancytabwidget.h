@@ -37,11 +37,14 @@ class FancyTabWidget : public QTabWidget {
     public:
         FancyTabWidget(QWidget* parent = 0);
         int addTab(QWidget * page, const QIcon & icon, const QString & label);
+        int insertTab(int index, QWidget * page, const QIcon & icon, const QString & label);
         void addBottomWidget(QWidget* widget);
 
         void setBackgroundPixmap(const QPixmap& pixmap);
         void addSpacer();
 
+        void loadSettings(const char *);
+        void saveSettings(const char *);
         // Values are persisted - only add to the end
         enum Mode {
             Mode_None = 0,

@@ -30,6 +30,7 @@
 #include <QStylePainter>
 #include <QTimer>
 #include <QVBoxLayout>
+#include <QSettings>
 
 const QSize FancyTabWidget::IconSize_LargeSidebar = QSize(24,24);
 const QSize FancyTabWidget::IconSize_SmallSidebar = QSize(22,22);
@@ -288,12 +289,50 @@ FancyTabWidget::FancyTabWidget(QWidget* parent) : QTabWidget(parent),
     connect(tabBar, SIGNAL(currentChanged(int)), this, SLOT(currentTabChanged(int)));
 }
 
+void FancyTabWidget::loadSettings(const char *kSettingsGroup) {
+    QSettings settings;
+    settings.beginGroup(kSettingsGroup);
+
+    for(int i =0;i<count();i++)
+    {
+        int originalIndex = tabBar()->tabData(i).toInt();
+        std::string k = "tab_index_" + std::to_string(originalIndex);
+
+        int newIndex = settings.value(QString::fromStdString(k), i).toInt();
+
+        if(newIndex >= 0)
+        {
+            tabBar()->moveTab(i,newIndex);
+        }
+        else
+            removeTab(i); // Does not delete page
+    }
+}
+
+void FancyTabWidget::saveSettings(const char *kSettingsGroup) {
+    QSettings settings;
+    settings.beginGroup(kSettingsGroup);
+
+    for(int i =0;i<count();i++)
+    {
+        int originalIndex = tabBar()->tabData(i).toInt();
+        std::string k = "tab_index_" + std::to_string(originalIndex);
+
+        settings.setValue(QString::fromStdString(k), i);
+    }
+        //settings.value(QString::fromStdString(k), i).toInt();
+}
+
+
 void FancyTabWidget::addBottomWidget(QWidget* widget) {
     bottom_widget_ = widget;
 }
 
 int FancyTabWidget::addTab(QWidget * page, const QIcon & icon, const QString & label) {
+    return insertTab(count(),page,icon,label);
+}
 
+int FancyTabWidget::insertTab(int index, QWidget * page, const QIcon & icon, const QString & label) {
     // In order to achieve the same effect as the "Bottom Widget" of the 
     // old Nokia based FancyTabWidget a VBoxLayout is used on each page
     QVBoxLayout *layout = new QVBoxLayout();
@@ -304,7 +343,11 @@ int FancyTabWidget::addTab(QWidget * page, const QIcon & icon, const QString & l
     QWidget *newPage = new QWidget();
     newPage->setLayout(layout);
 
-    return QTabWidget::addTab(newPage,icon,label);
+    const int actualIndex = QTabWidget::insertTab(index,newPage,icon,label);
+    
+    // Remember the original index. Needed to save order of tabs
+    tabBar()->setTabData(actualIndex,QVariant(actualIndex));
+    return actualIndex;
 }
 
 void FancyTabWidget::paintEvent(QPaintEvent *pe)

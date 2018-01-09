@@ -287,6 +287,9 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
 
   ui_->tabs->setBackgroundPixmap(QPixmap(":/sidebar_background.png"));
 
+  // Do this only after all default tabs have been added
+  ui_->tabs->loadSettings(kSettingsGroup);
+
   track_position_timer_->setInterval(kTrackPositionUpdateTimeMs);
   connect(track_position_timer_, SIGNAL(timeout()),
           SLOT(UpdateTrackPosition()));
@@ -1267,6 +1270,8 @@ void MainWindow::SaveGeometry() {
   settings_.setValue("splitter_state", ui_->splitter->saveState());
   settings_.setValue("current_tab", ui_->tabs->currentIndex());
   settings_.setValue("tab_mode", ui_->tabs->mode());
+
+  ui_->tabs->saveSettings(kSettingsGroup);
 }
 
 void MainWindow::SavePlaybackStatus() {
