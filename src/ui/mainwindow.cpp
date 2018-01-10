@@ -255,37 +255,40 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
           SLOT(AddToPlaylist(QMimeData*)));
 
   // Add tabs to the fancy tab widget
-  ui_->tabs->AddTab(global_search_view_,
+  ui_->tabs->addTab(global_search_view_,
                     IconLoader::Load("search", IconLoader::Base),
                     tr("Search", "Global search settings dialog title."));
-  ui_->tabs->AddTab(library_view_,
+  ui_->tabs->addTab(library_view_,
                     IconLoader::Load("folder-sound", IconLoader::Base),
                     tr("Library"));
-  ui_->tabs->AddTab(file_view_,
+  ui_->tabs->addTab(file_view_,
                     IconLoader::Load("document-open", IconLoader::Base),
                     tr("Files"));
-  ui_->tabs->AddTab(playlist_list_,
+  ui_->tabs->addTab(playlist_list_,
                     IconLoader::Load("view-media-playlist", IconLoader::Base),
                     tr("Playlists"));
-  ui_->tabs->AddTab(internet_view_,
+  ui_->tabs->addTab(internet_view_,
                     IconLoader::Load("applications-internet", IconLoader::Base),
                     tr("Internet"));
-  ui_->tabs->AddTab(
+  ui_->tabs->addTab(
       device_view_container_,
       IconLoader::Load("multimedia-player-ipod-mini-blue", IconLoader::Base),
       tr("Devices"));
-  ui_->tabs->AddSpacer();
-  ui_->tabs->AddTab(song_info_view_,
+  ui_->tabs->addSpacer();
+  ui_->tabs->addTab(song_info_view_,
                     IconLoader::Load("view-media-lyrics", IconLoader::Base),
                     tr("Song info"));
-  ui_->tabs->AddTab(artist_info_view_,
+  ui_->tabs->addTab(artist_info_view_,
                     IconLoader::Load("x-clementine-artist", IconLoader::Base),
                     tr("Artist info"));
 
   // Add the now playing widget to the fancy tab widget
-  ui_->tabs->AddBottomWidget(ui_->now_playing);
+  ui_->tabs->addBottomWidget(ui_->now_playing);
 
-  ui_->tabs->SetBackgroundPixmap(QPixmap(":/sidebar_background.png"));
+  ui_->tabs->setBackgroundPixmap(QPixmap(":/sidebar_background.png"));
+
+  // Do this only after all default tabs have been added
+  ui_->tabs->loadSettings(kSettingsGroup);
 
   track_position_timer_->setInterval(kTrackPositionUpdateTimeMs);
   connect(track_position_timer_, SIGNAL(timeout()),
@@ -979,7 +982,7 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
           settings_.value("splitter_state").toByteArray())) {
     ui_->splitter->setSizes(QList<int>() << 300 << width() - 300);
   }
-  ui_->tabs->SetCurrentIndex(
+  ui_->tabs->setCurrentIndex(
       settings_.value("current_tab", 1 /* Library tab */).toInt());
   FancyTabWidget::Mode default_mode = FancyTabWidget::Mode_LargeSidebar;
   ui_->tabs->SetMode(
@@ -1265,8 +1268,10 @@ void MainWindow::SaveGeometry() {
     settings_.setValue("geometry", saveGeometry());
   }
   settings_.setValue("splitter_state", ui_->splitter->saveState());
-  settings_.setValue("current_tab", ui_->tabs->current_index());
+  settings_.setValue("current_tab", ui_->tabs->currentIndex());
   settings_.setValue("tab_mode", ui_->tabs->mode());
+
+  ui_->tabs->saveSettings(kSettingsGroup);
 }
 
 void MainWindow::SavePlaybackStatus() {
@@ -2911,7 +2916,7 @@ void MainWindow::HandleNotificationPreview(OSD::Behaviour type, QString line1,
 
 void MainWindow::ScrollToInternetIndex(const QModelIndex& index) {
   internet_view_->ScrollToIndex(index);
-  ui_->tabs->SetCurrentWidget(internet_view_);
+  ui_->tabs->setCurrentWidget(internet_view_);
 }
 
 void MainWindow::AddPodcast() {
@@ -2919,11 +2924,11 @@ void MainWindow::AddPodcast() {
 }
 
 void MainWindow::FocusLibraryTab() {
-  ui_->tabs->SetCurrentWidget(library_view_);
+  ui_->tabs->setCurrentWidget(library_view_);
 }
 
 void MainWindow::FocusGlobalSearchField() {
-  ui_->tabs->SetCurrentWidget(global_search_view_);
+  ui_->tabs->setCurrentWidget(global_search_view_);
   global_search_view_->FocusSearchField();
 }
 
