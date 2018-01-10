@@ -293,17 +293,14 @@ void FancyTabWidget::loadSettings(const char *kSettingsGroup) {
     QSettings settings;
     settings.beginGroup(kSettingsGroup);
 
-    for(int i =0;i<count();i++)
-    {
+    for(int i =0;i<count();i++) {
         int originalIndex = tabBar()->tabData(i).toInt();
         std::string k = "tab_index_" + std::to_string(originalIndex);
 
         int newIndex = settings.value(QString::fromStdString(k), i).toInt();
 
         if(newIndex >= 0)
-        {
             tabBar()->moveTab(i,newIndex);
-        }
         else
             removeTab(i); // Does not delete page
     }
@@ -313,14 +310,12 @@ void FancyTabWidget::saveSettings(const char *kSettingsGroup) {
     QSettings settings;
     settings.beginGroup(kSettingsGroup);
 
-    for(int i =0;i<count();i++)
-    {
+    for(int i =0;i<count();i++) {
         int originalIndex = tabBar()->tabData(i).toInt();
         std::string k = "tab_index_" + std::to_string(originalIndex);
 
         settings.setValue(QString::fromStdString(k), i);
     }
-        //settings.value(QString::fromStdString(k), i).toInt();
 }
 
 
@@ -350,8 +345,7 @@ int FancyTabWidget::insertTab(int index, QWidget * page, const QIcon & icon, con
     return actualIndex;
 }
 
-void FancyTabWidget::paintEvent(QPaintEvent *pe)
-{
+void FancyTabWidget::paintEvent(QPaintEvent *pe) {
     if(mode() != FancyTabWidget::Mode_LargeSidebar &&
        mode() != FancyTabWidget::Mode_SmallSidebar) {
         QTabWidget::paintEvent(pe);
