@@ -367,10 +367,11 @@ void PlaylistListContainer::SearchTextEdited(const QString& text) {
     QRegExp regexp(text);
     regexp.setCaseSensitivity(Qt::CaseInsensitive);
 
+    proxy_->setFilterRegExp(regexp);
+
     if(regexp.isEmpty()) {
       ui_->tree->collapseAll();
     } else {
-      proxy_->setFilterRegExp(regexp);
       proxy_->refreshExpanded(ui_->tree);
     }
 }
