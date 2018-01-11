@@ -33,9 +33,17 @@
 #include <QSortFilterProxyModel>
 #include <QStandardItemModel>
 
-class PlaylistListSortFilterModel : public QSortFilterProxyModel {
+#include <iostream>
+
+/* This filter proxy will:
+ - Accept all ancestors if at least a single child matches
+ - Accept all children if at least a single ancestor matches
+
+   The tree is then expanded only to the level at which the match occurs
+*/
+class PlaylistListFilterProxyModel : public QSortFilterProxyModel {
  public:
-  explicit PlaylistListSortFilterModel(QObject* parent)
+  explicit PlaylistListFilterProxyModel(QObject* parent)
       : QSortFilterProxyModel(parent) {}
 
   bool lessThan(const QModelIndex& left, const QModelIndex& right) const {
@@ -49,6 +57,83 @@ class PlaylistListSortFilterModel : public QSortFilterProxyModel {
     // deterministic sorting even when two items are named the same.
     return left.row() < right.row();
   }
+
+  QList<QModelIndex> expandList;
+
+  void setFilterRegExp(const QRegExp & regExp) {
+    expandList.clear();
+    QSortFilterProxyModel::setFilterRegExp(regExp);
+  }
+
+  void refreshExpanded(QTreeView *tree) {
+    tree->collapseAll();
+    for(QModelIndex sourceIndex : expandList ) {
+      QModelIndex mappedIndex = mapFromSource( sourceIndex );
+      tree->setExpanded( mappedIndex, true );
+    }
+  }
+
+  // Depth first search of all the items
+  bool hasAcceptedChildren(int source_row, const QModelIndex &source_parent) const {
+    QModelIndex item = sourceModel()->index(source_row,0,source_parent);
+    if (!item.isValid()) {
+      return false;
+    }
+
+    //check if there are children
+    int childCount = item.model()->rowCount(item);
+    if (childCount == 0)
+      return false;
+
+    for (int i = 0; i < childCount; ++i) {
+      if (filterAcceptsRowItself(i, item))
+        return true;
+
+      if (hasAcceptedChildren(i, item))
+        return true;
+    }
+    return false;
+  }
+
+  bool filterAcceptsRowItself(int source_row, const QModelIndex &source_parent) const {
+    bool rv = QSortFilterProxyModel::filterAcceptsRow(source_row, source_parent);
+    if(rv) {
+      if(sourceModel()->hasIndex(source_row,0,source_parent)) {
+        QModelIndex idx = sourceModel()->index(source_row,0,source_parent);
+
+        // Bit of a hack to get around the const in this function
+        auto * me = const_cast<PlaylistListFilterProxyModel*>(this);
+
+        QModelIndex pidx = sourceModel()->parent(idx);
+        while(pidx.isValid()) {
+          me->expandList.append(pidx);
+          pidx = sourceModel()->parent(pidx);
+        }
+      }
+    }
+    return rv;
+  }
+
+  bool filterAcceptsRow(int source_row, const QModelIndex &source_parent) const {
+    if (filterAcceptsRowItself(source_row, source_parent)) {
+      return true;
+    }
+
+    //accept if any of the parents is accepted on it's own merits
+    QModelIndex parent = source_parent;
+    while (parent.isValid()) {
+      if (filterAcceptsRowItself(parent.row(), parent.parent()))
+        return true;
+      parent = parent.parent();
+    }
+
+    //accept if any of the children is accepted on it's own merits
+    if (hasAcceptedChildren(source_row, source_parent)) {
+      return true;
+    }
+
+    return false;
+  }
 };
 
 PlaylistListContainer::PlaylistListContainer(QWidget* parent)
@@ -60,11 +145,12 @@ PlaylistListContainer::PlaylistListContainer(QWidget* parent)
       action_remove_(new QAction(this)),
       action_save_playlist_(new QAction(this)),
       model_(new PlaylistListModel(this)),
-      proxy_(new PlaylistListSortFilterModel(this)),
+      proxy_(new PlaylistListFilterProxyModel(this)),
       loaded_icons_(false),
       active_playlist_id_(-1) {
   ui_->setupUi(this);
   ui_->tree->setAttribute(Qt::WA_MacShowFocusRect, false);
+  ui_->tree->SetAutoOpen(false);
 
   action_new_folder_->setText(tr("New folder"));
   action_remove_->setText(tr("Delete"));
@@ -91,6 +177,8 @@ PlaylistListContainer::PlaylistListContainer(QWidget* parent)
 
   model_->invisibleRootItem()->setData(PlaylistListModel::Type_Folder,
                                        PlaylistListModel::Role_Type);
+
+  connect(ui_->search, SIGNAL(textChanged(QString)), SLOT(SearchTextEdited(QString)));
 }
 
 PlaylistListContainer::~PlaylistListContainer() { delete ui_; }
@@ -128,6 +216,10 @@ void PlaylistListContainer::RecursivelySetIcons(QStandardItem* parent) const {
       case PlaylistListModel::Type_Playlist:
         child->setIcon(model_->playlist_icon());
         break;
+
+      case PlaylistListModel::Type_Track:
+        child->setIcon(model_->track_icon());
+        break;
     }
   }
 }
@@ -161,6 +253,10 @@ void PlaylistListContainer::SetApplication(Application* app) {
     QStandardItem* playlist_item = model_->NewPlaylist(p.name, p.id);
     QStandardItem* parent_folder = model_->FolderByPath(p.ui_path);
     parent_folder->appendRow(playlist_item);
+    for (const Song s : app->playlist_backend()->GetPlaylistSongs(p.id)) {
+      QStandardItem* track_item = model_->NewTrack(s);
+      playlist_item->appendRow(track_item);
+    }
   }
 }
 
@@ -265,6 +361,18 @@ void PlaylistListContainer::CurrentChanged(Playlist* new_playlist) {
   ui_->tree->selectionModel()->setCurrentIndex(
       index, QItemSelectionModel::ClearAndSelect);
   ui_->tree->scrollTo(index);
+}
+
+void PlaylistListContainer::SearchTextEdited(const QString& text) {
+    QRegExp regexp(text);
+    regexp.setCaseSensitivity(Qt::CaseInsensitive);
+
+    if(regexp.isEmpty()) {
+      ui_->tree->collapseAll();
+    } else {
+      proxy_->setFilterRegExp(regexp);
+      proxy_->refreshExpanded(ui_->tree);
+    }
 }
 
 void PlaylistListContainer::PlaylistPathChanged(int id,
