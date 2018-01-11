@@ -255,6 +255,7 @@ void PlaylistListContainer::SetApplication(Application* app) {
     parent_folder->appendRow(playlist_item);
     for (const Song s : app->playlist_backend()->GetPlaylistSongs(p.id)) {
       QStandardItem* track_item = model_->NewTrack(s);
+      track_item->setDragEnabled(false);
       playlist_item->appendRow(track_item);
     }
   }
