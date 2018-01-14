@@ -250,14 +250,7 @@ void PlaylistListContainer::SetApplication(Application* app) {
   // Get all playlists, even ones that are hidden in the UI.
   for (const PlaylistBackend::Playlist& p :
        app->playlist_backend()->GetAllFavoritePlaylists()) {
-    QStandardItem* playlist_item = model_->NewPlaylist(p.name, p.id);
-    QStandardItem* parent_folder = model_->FolderByPath(p.ui_path);
-    parent_folder->appendRow(playlist_item);
-    for (const Song s : app->playlist_backend()->GetPlaylistSongs(p.id)) {
-      QStandardItem* track_item = model_->NewTrack(s);
-      track_item->setDragEnabled(false);
-      playlist_item->appendRow(track_item);
-    }
+    AddPlaylist(p.id,p.name,true,&p.ui_path);
   }
 }
 
@@ -274,7 +267,7 @@ void PlaylistListContainer::NewFolderClicked() {
 }
 
 void PlaylistListContainer::AddPlaylist(int id, const QString& name,
-                                        bool favorite) {
+                                        bool favorite, const QString *ui_path) {
   if (!favorite) {
     return;
   }
@@ -285,11 +278,18 @@ void PlaylistListContainer::AddPlaylist(int id, const QString& name,
     return;
   }
 
-  const QString& ui_path = app_->playlist_manager()->playlist(id)->ui_path();
+  if(ui_path == nullptr)
+    ui_path = &app_->playlist_manager()->playlist(id)->ui_path();
 
   QStandardItem* playlist_item = model_->NewPlaylist(name, id);
-  QStandardItem* parent_folder = model_->FolderByPath(ui_path);
+  QStandardItem* parent_folder = model_->FolderByPath(*ui_path);
   parent_folder->appendRow(playlist_item);
+  for (const Song s : app_->playlist_backend()->GetPlaylistSongs(id)) {
+    QStandardItem* track_item = model_->NewTrack(s);
+    track_item->setDragEnabled(false);
+    playlist_item->appendRow(track_item);
+  }
+
 }
 
 void PlaylistListContainer::PlaylistRenamed(int id, const QString& new_name) {
