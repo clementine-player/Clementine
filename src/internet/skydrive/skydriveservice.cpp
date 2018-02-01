@@ -125,7 +125,6 @@ void SkydriveService::FetchUserInfoFinished(QNetworkReply* reply) {
 
 void SkydriveService::ListFiles(const QString& folder) {
   QUrl url(QString(kSkydriveBase) + folder + "/files");
-  url.addQueryItem("filter", "audio,folders");
   QNetworkRequest request(url);
   AddAuthorizationHeader(&request);
 
@@ -142,7 +141,9 @@ void SkydriveService::ListFilesFinished(QNetworkReply* reply) {
   QVariantList files = response["data"].toList();
   for (const QVariant& f : files) {
     QVariantMap file = f.toMap();
-    if (file["type"].toString() == "audio") {
+    if (file["type"].toString() == "folder") {
+      ListFiles(file["id"].toString());
+    } else {
       QString mime_type = GuessMimeTypeForFile(file["name"].toString());
       QUrl url;
       url.setScheme("skydrive");
@@ -161,8 +162,6 @@ void SkydriveService::ListFilesFinished(QNetworkReply* reply) {
       // Fortunately, just changing the scheme to HTTP works.
       download_url.setScheme("http");
       MaybeAddFileToDatabase(song, mime_type, download_url, QString::null);
-    } else if (file["type"].toString() == "folder") {
-      ListFiles(file["id"].toString());
     }
   }
 }
