@@ -220,6 +220,11 @@ void SubsonicDynamicPlaylist::GetAlbum(SubsonicService* service,
     length *= kNsecPerSec;
     song.set_length_nanosec(length);
     QUrl url = QUrl(QString("subsonic://%1").arg(id));
+    QUrl cover_url = service->BuildRequestUrl("getCoverArt");
+    QUrlQuery cover_url_query(cover_url.query());
+    cover_url_query.addQueryItem("id", id);
+    cover_url.setQuery(cover_url_query);
+    song.set_art_automatic(cover_url.toEncoded());
     song.set_url(url);
     song.set_filesize(reader.attributes().value("size").toString().toInt());
     QFileInfo fi(reader.attributes().value("path").toString());

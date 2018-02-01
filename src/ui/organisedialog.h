@@ -30,11 +30,13 @@
 #include "core/organise.h"
 #include "core/organiseformat.h"
 #include "core/song.h"
+#include "library/librarybackend.h"
 
 class LibraryWatcher;
 class OrganiseErrorDialog;
 class TaskManager;
 class Ui_OrganiseDialog;
+class LibraryBackend;
 
 class QAbstractItemModel;
 
@@ -42,7 +44,8 @@ class OrganiseDialog : public QDialog {
   Q_OBJECT
 
  public:
-  OrganiseDialog(TaskManager* task_manager, QWidget* parent = nullptr);
+  OrganiseDialog(TaskManager* task_manager, LibraryBackend* backend = nullptr,
+                 QWidget* parent = nullptr);
   ~OrganiseDialog();
 
   static const char* kDefaultFormat;
@@ -88,6 +91,7 @@ signals:
 
   Ui_OrganiseDialog* ui_;
   TaskManager* task_manager_;
+  LibraryBackend* backend_;
 
   OrganiseFormat format_;
 

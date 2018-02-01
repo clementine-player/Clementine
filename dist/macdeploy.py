@@ -72,6 +72,7 @@ GSTREAMER_PLUGINS = [
     'libgstvorbis.so',
     'libgstwavpack.so',
     'libgstwavparse.so',
+    'libgstxingmux.so',
 
     # HTTP src support
     'libgstsouphttpsrc.so',

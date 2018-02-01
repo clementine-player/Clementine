@@ -229,9 +229,16 @@ void PodcastParser::ParseItem(QXmlStreamReader* reader, Podcast* ret) const {
           }
         } else if (name == "enclosure") {
           const QString type = reader->attributes().value("type").toString();
+          const QUrl url  = QUrl::fromEncoded(reader->attributes().value("url").toString().toLatin1());
           if (type.startsWith("audio/") || type.startsWith("x-audio/")) {
-            episode.set_url(QUrl::fromEncoded(
-                reader->attributes().value("url").toString().toLatin1()));
+            episode.set_url(url);
+          }
+          // If the URL doesn't have a type, see if it's one of the obvious types
+          else if (type.isEmpty() && (
+                   url.path().endsWith(".mp3", Qt::CaseInsensitive) ||
+                   url.path().endsWith(".m4a", Qt::CaseInsensitive) ||
+                   url.path().endsWith(".wav", Qt::CaseInsensitive))) {
+            episode.set_url(url);
           }
           Utilities::ConsumeCurrentElement(reader);
         } else if (name == "author" && lower_namespace == kItunesNamespace) {

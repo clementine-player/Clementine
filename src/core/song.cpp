@@ -130,7 +130,8 @@ const QStringList Song::kFtsColumns = QStringList() << "ftstitle"
                                                     << "ftsperformer"
                                                     << "ftsgrouping"
                                                     << "ftsgenre"
-                                                    << "ftscomment";
+                                                    << "ftscomment"
+                                                    << "ftsyear";
 
 const QString Song::kFtsColumnSpec = Song::kFtsColumns.join(", ");
 const QString Song::kFtsBindSpec =
@@ -407,7 +408,7 @@ QString Song::TextForFiletype(FileType type) {
     case Song::Type_Asf:
       return QObject::tr("Windows Media audio");
     case Song::Type_Flac:
-      return QObject::tr("Flac");
+      return QObject::tr("FLAC");
     case Song::Type_Mp4:
       return QObject::tr("MP4 AAC");
     case Song::Type_Mpc:
@@ -415,7 +416,7 @@ QString Song::TextForFiletype(FileType type) {
     case Song::Type_Mpeg:
       return QObject::tr("MP3");  // Not technically correct
     case Song::Type_OggFlac:
-      return QObject::tr("Ogg Flac");
+      return QObject::tr("Ogg FLAC");
     case Song::Type_OggSpeex:
       return QObject::tr("Ogg Speex");
     case Song::Type_OggVorbis:
@@ -996,6 +997,7 @@ void Song::BindToFtsQuery(QSqlQuery* query) const {
   query->bindValue(":ftsgrouping", d->grouping_);
   query->bindValue(":ftsgenre", d->genre_);
   query->bindValue(":ftscomment", d->comment_);
+  query->bindValue(":ftsyear", d->year_);
 }
 
 #ifdef HAVE_LIBLASTFM

@@ -139,6 +139,8 @@ void BehaviourSettingsPage::Load() {
   s.endGroup();
 
   s.beginGroup(Player::kSettingsGroup);
+  ui_->stop_play_if_fail_->setChecked(
+      s.value("stop_play_if_fail", false).toBool());
   ui_->menu_previousmode->setCurrentIndex(ui_->menu_previousmode->findData(
       s.value("menu_previousmode", Player::PreviousBehaviour_DontRestart)
           .toInt()));
@@ -239,6 +241,8 @@ void BehaviourSettingsPage::Save() {
   s.endGroup();
 
   s.beginGroup(Player::kSettingsGroup);
+  s.setValue("stop_play_if_fail",
+             ui_->stop_play_if_fail_->isChecked());
   s.setValue("menu_previousmode", menu_previousmode);
   s.setValue("seek_step_sec", ui_->seek_step_sec->value());
   s.endGroup();

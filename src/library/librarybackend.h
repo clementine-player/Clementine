@@ -21,6 +21,7 @@
 #include <QObject>
 #include <QSet>
 #include <QUrl>
+#include <QFileInfo>
 
 #include "directory.h"
 #include "libraryquery.h"
@@ -218,6 +219,8 @@ class LibraryBackend : public LibraryBackendInterface {
   void ResetStatistics(int id);
   void UpdateSongRating(int id, float rating);
   void UpdateSongsRating(const QList<int>& id_list, float rating);
+  // Tells the library model that a song path has changed
+  void SongPathChanged(const Song& song, const QFileInfo& new_file);
 
 signals:
   void DirectoryDiscovered(const Directory& dir,

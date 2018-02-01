@@ -203,7 +203,8 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
       }),
       equalizer_(new Equalizer),
       organise_dialog_([=]() {
-        OrganiseDialog* dialog = new OrganiseDialog(app->task_manager());
+        OrganiseDialog* dialog = new OrganiseDialog(app->task_manager(),
+                                                    app->library_backend());
         dialog->SetDestinationModel(app->library()->model()->directory_model());
         return dialog;
       }),
@@ -254,37 +255,40 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
           SLOT(AddToPlaylist(QMimeData*)));
 
   // Add tabs to the fancy tab widget
-  ui_->tabs->AddTab(global_search_view_,
+  ui_->tabs->addTab(global_search_view_,
                     IconLoader::Load("search", IconLoader::Base),
                     tr("Search", "Global search settings dialog title."));
-  ui_->tabs->AddTab(library_view_,
+  ui_->tabs->addTab(library_view_,
                     IconLoader::Load("folder-sound", IconLoader::Base),
                     tr("Library"));
-  ui_->tabs->AddTab(file_view_,
+  ui_->tabs->addTab(file_view_,
                     IconLoader::Load("document-open", IconLoader::Base),
                     tr("Files"));
-  ui_->tabs->AddTab(playlist_list_,
+  ui_->tabs->addTab(playlist_list_,
                     IconLoader::Load("view-media-playlist", IconLoader::Base),
                     tr("Playlists"));
-  ui_->tabs->AddTab(internet_view_,
+  ui_->tabs->addTab(internet_view_,
                     IconLoader::Load("applications-internet", IconLoader::Base),
                     tr("Internet"));
-  ui_->tabs->AddTab(
+  ui_->tabs->addTab(
       device_view_container_,
       IconLoader::Load("multimedia-player-ipod-mini-blue", IconLoader::Base),
       tr("Devices"));
-  ui_->tabs->AddSpacer();
-  ui_->tabs->AddTab(song_info_view_,
+  ui_->tabs->addSpacer();
+  ui_->tabs->addTab(song_info_view_,
                     IconLoader::Load("view-media-lyrics", IconLoader::Base),
                     tr("Song info"));
-  ui_->tabs->AddTab(artist_info_view_,
+  ui_->tabs->addTab(artist_info_view_,
                     IconLoader::Load("x-clementine-artist", IconLoader::Base),
                     tr("Artist info"));
 
   // Add the now playing widget to the fancy tab widget
-  ui_->tabs->AddBottomWidget(ui_->now_playing);
+  ui_->tabs->addBottomWidget(ui_->now_playing);
 
-  ui_->tabs->SetBackgroundPixmap(QPixmap(":/sidebar_background.png"));
+  ui_->tabs->setBackgroundPixmap(QPixmap(":/sidebar_background.png"));
+
+  // Do this only after all default tabs have been added
+  ui_->tabs->loadSettings(kSettingsGroup);
 
   track_position_timer_->setInterval(kTrackPositionUpdateTimeMs);
   connect(track_position_timer_, SIGNAL(timeout()),
@@ -675,7 +679,13 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
   ui_->playlist->addAction(playlist_queue_);
   playlist_skip_ = playlist_menu_->addAction("", this, SLOT(PlaylistSkip()));
   ui_->playlist->addAction(playlist_skip_);
-
+  playlist_menu_->addSeparator();
+  search_for_artist_ = playlist_menu_->addAction(
+      IconLoader::Load("system-search", IconLoader::Base),
+      tr("Search for artist"), this, SLOT(SearchForArtist()));
+  search_for_album_ = playlist_menu_->addAction(
+      IconLoader::Load("system-search", IconLoader::Base),
+      tr("Search for album"), this, SLOT(SearchForAlbum()));
   playlist_menu_->addSeparator();
   playlist_menu_->addAction(ui_->action_remove_from_playlist);
   playlist_undoredo_ = playlist_menu_->addSeparator();
@@ -972,7 +982,7 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
           settings_.value("splitter_state").toByteArray())) {
     ui_->splitter->setSizes(QList<int>() << 300 << width() - 300);
   }
-  ui_->tabs->SetCurrentIndex(
+  ui_->tabs->setCurrentIndex(
       settings_.value("current_tab", 1 /* Library tab */).toInt());
   FancyTabWidget::Mode default_mode = FancyTabWidget::Mode_LargeSidebar;
   ui_->tabs->SetMode(
@@ -1088,6 +1098,7 @@ void MainWindow::ReloadAllSettings() {
   library_view_->ReloadSettings();
   song_info_view_->ReloadSettings();
   app_->player()->engine()->ReloadSettings();
+  ui_->playlist->ReloadSettings();
   ui_->playlist->view()->ReloadSettings();
   app_->internet_model()->ReloadSettings();
 #ifdef HAVE_WIIMOTEDEV
@@ -1256,8 +1267,10 @@ void MainWindow::SaveGeometry() {
     settings_.setValue("geometry", saveGeometry());
   }
   settings_.setValue("splitter_state", ui_->splitter->saveState());
-  settings_.setValue("current_tab", ui_->tabs->current_index());
+  settings_.setValue("current_tab", ui_->tabs->currentIndex());
   settings_.setValue("tab_mode", ui_->tabs->mode());
+
+  ui_->tabs->saveSettings(kSettingsGroup);
 }
 
 void MainWindow::SavePlaybackStatus() {
@@ -1346,6 +1359,7 @@ void MainWindow::PlaylistDoubleClick(const QModelIndex& index) {
       app_->playlist_manager()->current()->queue()->ToggleTracks(
           dummyIndexList);
       if (app_->player()->GetState() != Engine::Playing) {
+        app_->playlist_manager()->SetActiveToCurrent();
         app_->player()->PlayAt(
             app_->playlist_manager()->current()->queue()->TakeNext(),
             Engine::Manual, true);
@@ -1730,6 +1744,9 @@ void MainWindow::PlaylistRightClick(const QPoint& global_pos,
   playlist_organise_->setVisible(false);
   playlist_delete_->setVisible(false);
   playlist_copy_to_device_->setVisible(false);
+
+  search_for_artist_->setVisible(all == 1);
+  search_for_album_->setVisible(all == 1);
 
   if (in_queue == 1 && not_in_queue == 0)
     playlist_queue_->setText(tr("Dequeue track"));
@@ -2133,6 +2150,8 @@ void MainWindow::CommandlineOptionsReceived(const QString& string_options) {
 }
 
 void MainWindow::CommandlineOptionsReceived(const CommandlineOptions& options) {
+  qLog(Debug) << "command line options received";
+  
   switch (options.player_action()) {
     case CommandlineOptions::Player_Play:
       if (options.urls().empty()) {
@@ -2212,6 +2231,33 @@ void MainWindow::CommandlineOptionsReceived(const CommandlineOptions& options) {
   if (options.play_track_at() != -1)
     app_->player()->PlayAt(options.play_track_at(), Engine::Manual, true);
 
+  qLog(Debug) << options.delete_current_track();
+
+  // Just pass the url of the currently playing 
+  if (options.delete_current_track()) {
+    qLog(Debug) << "deleting current track";
+    
+    Playlist* activePlaylist = app_->playlist_manager()->active();
+    PlaylistItemPtr playlistItemPtr = activePlaylist->current_item();
+
+    if (playlistItemPtr) {
+      const QUrl& url = playlistItemPtr->Url();
+      qLog(Debug) << url;
+      
+      std::shared_ptr<MusicStorage> storage(new FilesystemMusicStorage("/"));  
+      
+      app_->player()->Next();
+        
+      DeleteFiles* delete_files = new DeleteFiles(app_->task_manager(), storage);
+      connect(delete_files, SIGNAL(Finished(SongList)),
+              SLOT(DeleteFinished(SongList)));
+      delete_files->Start(url);
+
+    } else {
+      qLog(Debug) << "no currently playing track to delete";
+    }
+  }
+  
   if (options.show_osd()) app_->player()->ShowOSD();
 
   if (options.toggle_pretty_osd()) app_->player()->TogglePrettyOSD();
@@ -2420,7 +2466,16 @@ void MainWindow::PlaylistOpenInBrowser() {
 }
 
 void MainWindow::DeleteFinished(const SongList& songs_with_errors) {
-  if (songs_with_errors.isEmpty()) return;
+  if (songs_with_errors.isEmpty()) {
+    qLog(Debug) << "Finished deleting songs";
+    Playlist* activePlaylist = app_->playlist_manager()->active();
+    if (activePlaylist->id() != -1) {
+      activePlaylist->RemoveUnavailableSongs();
+      qLog(Debug) << "Found active playlist and removed unavailable songs";
+    }
+    
+    return;
+  } 
 
   OrganiseErrorDialog* dialog = new OrganiseErrorDialog(this);
   dialog->Show(OrganiseErrorDialog::Type_Delete, songs_with_errors);
@@ -2473,6 +2528,26 @@ void MainWindow::PlaylistCopyToDevice() {
     QMessageBox::warning(
         this, tr("Error"),
         tr("None of the selected songs were suitable for copying to a device"));
+  }
+}
+
+void MainWindow::SearchForArtist() {
+  PlaylistItemPtr item(
+      app_->playlist_manager()->current()->item_at(playlist_menu_index_.row()));
+  Song song = item->Metadata();
+  if (!song.albumartist().isEmpty()) {
+    DoGlobalSearch(song.albumartist().simplified());
+  } else if (!song.artist().isEmpty()) {
+    DoGlobalSearch(song.artist().simplified());
+  }
+}
+
+void MainWindow::SearchForAlbum() {
+  PlaylistItemPtr item(
+      app_->playlist_manager()->current()->item_at(playlist_menu_index_.row()));
+  Song song = item->Metadata();
+  if (!song.album().isEmpty()) {
+    DoGlobalSearch(song.album().simplified());
   }
 }
 
@@ -2834,7 +2909,7 @@ void MainWindow::HandleNotificationPreview(OSD::Behaviour type, QString line1,
 
 void MainWindow::ScrollToInternetIndex(const QModelIndex& index) {
   internet_view_->ScrollToIndex(index);
-  ui_->tabs->SetCurrentWidget(internet_view_);
+  ui_->tabs->setCurrentWidget(internet_view_);
 }
 
 void MainWindow::AddPodcast() {
@@ -2842,11 +2917,11 @@ void MainWindow::AddPodcast() {
 }
 
 void MainWindow::FocusLibraryTab() {
-  ui_->tabs->SetCurrentWidget(library_view_);
+  ui_->tabs->setCurrentWidget(library_view_);
 }
 
 void MainWindow::FocusGlobalSearchField() {
-  ui_->tabs->SetCurrentWidget(global_search_view_);
+  ui_->tabs->setCurrentWidget(global_search_view_);
   global_search_view_->FocusSearchField();
 }
 

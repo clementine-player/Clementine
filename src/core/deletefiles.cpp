@@ -57,6 +57,15 @@ void DeleteFiles::Start(const SongList& songs) {
   thread_->start();
 }
 
+void DeleteFiles::Start(const QUrl& url) {
+  SongList songs;
+  Song song;
+  song.set_url(url);
+  songs << song;
+
+  Start(songs);
+}
+
 void DeleteFiles::Start(const QStringList& filenames) {
   SongList songs;
   for (const QString& filename : filenames) {
