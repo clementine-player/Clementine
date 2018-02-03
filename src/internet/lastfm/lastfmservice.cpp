@@ -32,8 +32,12 @@
 
 #include "lastfmservice.h"
 
+#include <QCryptographicHash>
+#include <QDesktopServices>
 #include <QMenu>
+#include <QMessageBox>
 #include <QSettings>
+#include <QUrlQuery>
 
 #ifdef HAVE_LIBLASTFM1
 #include <lastfm5/RadioStation.h>
@@ -42,14 +46,16 @@
 #endif
 
 #include "lastfmcompat.h"
-#include "internet/core/internetmodel.h"
-#include "internet/core/internetplaylistitem.h"
 #include "core/application.h"
 #include "core/closure.h"
 #include "core/logging.h"
+#include "core/network.h"
 #include "core/player.h"
 #include "core/song.h"
 #include "core/taskmanager.h"
+#include "internet/core/internetmodel.h"
+#include "internet/core/internetplaylistitem.h"
+#include "internet/core/localredirectserver.h"
 #include "covers/coverproviders.h"
 #include "covers/lastfmcoverprovider.h"
 #include "ui/iconloader.h"
@@ -75,7 +81,8 @@ LastFMService::LastFMService(Application* app, QObject* parent)
       already_scrobbled_(false),
       scrobbling_enabled_(false),
       connection_problems_(false),
-      app_(app) {
+      app_(app),
+      network_(new NetworkAccessManager) {
 #ifdef HAVE_LIBLASTFM1
   lastfm::ws::setScheme(lastfm::ws::Https);
 #endif
@@ -123,37 +130,53 @@ bool LastFMService::IsSubscriber() const {
   return settings.value("Subscriber", false).toBool();
 }
 
-void LastFMService::GetToken() {
-  QMap<QString, QString> params;
-  params["method"] = "auth.getToken";
-  QNetworkReply* reply = lastfm::ws::post(params);
-  NewClosure(reply, SIGNAL(finished()), this,
-             SLOT(GetTokenReplyFinished(QNetworkReply*)), reply);
-}
-
-void LastFMService::GetTokenReplyFinished(QNetworkReply* reply) {
-  reply->deleteLater();
-
-  // Parse the reply
-  lastfm::XmlQuery lfm(lastfm::compat::EmptyXmlQuery());
-  if (lastfm::compat::ParseQuery(reply->readAll(), &lfm)) {
-    QString token = lfm["token"].text();
-
-    emit TokenReceived(true, token);
-  } else {
-    emit TokenReceived(false, lfm["error"].text().trimmed());
+namespace {
+QByteArray SignApiRequest(QList<QPair<QString, QString>> params) {
+  qSort(params);
+  QString to_sign;
+  for (const auto& p : params) {
+    to_sign += p.first;
+    to_sign += p.second;
   }
+  to_sign += LastFMService::kSecret;
+  return QCryptographicHash::hash(to_sign.toUtf8(), QCryptographicHash::Md5).toHex();
 }
+}  // namespace
 
-void LastFMService::Authenticate(const QString& token) {
-  QMap<QString, QString> params;
-  params["method"] = "auth.getSession";
-  params["token"] = token;
+void LastFMService::Authenticate() {
+  QUrl url("https://www.last.fm/api/auth/");
+  QUrlQuery url_query;
+  url_query.addQueryItem("api_key", kApiKey);
 
-  QNetworkReply* reply = lastfm::ws::post(params);
-  NewClosure(reply, SIGNAL(finished()), this,
-             SLOT(AuthenticateReplyFinished(QNetworkReply*)), reply);
-  // If we need more detailed error reporting, handle error(NetworkError) signal
+  LocalRedirectServer* server = new LocalRedirectServer(this);
+  server->Listen();
+
+  url_query.addQueryItem("cb", server->url().toString());
+
+  NewClosure(server, SIGNAL(Finished()), [this, server]() {
+    server->deleteLater();
+
+    const QUrl& url = server->request_url();
+    QString token = QUrlQuery(url).queryItemValue("token");
+
+    QUrl session_url("https://ws.audioscrobbler.com/2.0/");
+    QUrlQuery session_url_query;
+    session_url_query.addQueryItem("api_key", kApiKey);
+    session_url_query.addQueryItem("method", "auth.getSession");
+    session_url_query.addQueryItem("token", token);
+    session_url_query.addQueryItem("api_sig", SignApiRequest(session_url_query.queryItems()));
+    session_url.setQuery(session_url_query);
+
+    QNetworkReply* reply = network_->get(QNetworkRequest(session_url));
+    NewClosure(reply, SIGNAL(finished()), this, SLOT(AuthenticateReplyFinished(QNetworkReply*)), reply);
+  });
+
+  if (!QDesktopServices::openUrl(url)) {
+    QMessageBox box(QMessageBox::NoIcon, tr("Last.fm Authentication"), tr("Please open this URL in your browser: <a href=\"%1\">%1</a>").arg(url.toString()), QMessageBox::Ok);
+    box.setTextFormat(Qt::RichText);
+    qLog(Debug) << "Last.fm authentication URL: " << url.toString();
+    box.exec();
+  }
 }
 
 void LastFMService::AuthenticateReplyFinished(QNetworkReply* reply) {
@@ -174,14 +197,14 @@ void LastFMService::AuthenticateReplyFinished(QNetworkReply* reply) {
     settings.setValue("Session", lastfm::ws::SessionKey);
     settings.setValue("Subscriber", is_subscriber);
   } else {
-    emit AuthenticationComplete(false, lfm["error"].text().trimmed());
+    emit AuthenticationComplete(false);
     return;
   }
 
   // Invalidate the scrobbler - it will get recreated later
   scrobbler_.reset(nullptr);
 
-  emit AuthenticationComplete(true, QString());
+  emit AuthenticationComplete(true);
 }
 
 void LastFMService::SignOut() {

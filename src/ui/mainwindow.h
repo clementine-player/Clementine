@@ -147,7 +147,6 @@ signals:
   void StopAfterToggled(bool stop);
 
   void IntroPointReached();
-
  private slots:
   void FilePathChanged(const QString& path);
 
@@ -177,6 +176,9 @@ signals:
   void AutoCompleteTagsAccepted();
   void PlaylistUndoRedoChanged(QAction* undo, QAction* redo);
   void AddFilesToTranscoder();
+
+  void SearchForArtist();
+  void SearchForAlbum();
 
   void PlaylistCopyToLibrary();
   void PlaylistMoveToLibrary();
@@ -364,6 +366,9 @@ signals:
   QList<QAction*> playlistitem_actions_;
   QAction* playlistitem_actions_separator_;
   QModelIndex playlist_menu_index_;
+
+  QAction* search_for_artist_;
+  QAction* search_for_album_;
 
   QSortFilterProxyModel* library_sort_model_;
 

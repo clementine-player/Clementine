@@ -613,7 +613,16 @@ void Player::InvalidSongRequested(const QUrl& url) {
   emit SongChangeRequestProcessed(url, false);
   // ... and now when our listeners have completed their processing of the
   // current item we can change the current item by skipping to the next song
-  NextItem(Engine::Auto);
+  
+  QSettings s;
+  s.beginGroup(kSettingsGroup);
+
+  bool stop_playback = s.value("stop_play_if_fail", 0).toBool();
+  s.endGroup();
+
+  if (!stop_playback) {
+    NextItem(Engine::Auto);
+  }
 }
 
 void Player::RegisterUrlHandler(UrlHandler* handler) {

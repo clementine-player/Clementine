@@ -247,7 +247,7 @@ int main(int argc, char* argv[]) {
 
   if (QSysInfo::MacintoshVersion > QSysInfo::MV_10_8) {
     // Work around 10.9 issue.
-    // https://bugreports.qt-project.org/browse/QTBUG-32789
+    // https://bugreports.qt.io/browse/QTBUG-32789
     QFont::insertSubstitution(".Lucida Grande UI", "Lucida Grande");
   }
 #endif
@@ -292,7 +292,10 @@ int main(int argc, char* argv[]) {
         qLog(Info)
             << "Clementine is already running - activating existing window";
       }
-      if (a.sendMessage(options.Serialize(), 5000)) {
+
+      QByteArray serializedOptions = options.Serialize();
+      if (a.sendMessage(serializedOptions, 5000)) {
+        qLog(Info) << "Options found, sent message to running instance";
         return 0;
       }
       // Couldn't send the message so start anyway

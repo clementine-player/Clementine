@@ -38,8 +38,8 @@ uint qHash(const lastfm::Track& track);
 
 class Application;
 class LastFMUrlHandler;
+class NetworkAccessManager;
 class QAction;
-class QNetworkAccessManager;
 class Song;
 
 class LastFMService : public Scrobbler {
@@ -69,8 +69,7 @@ class LastFMService : public Scrobbler {
   bool PreferAlbumArtist() const { return prefer_albumartist_; }
   bool HasConnectionProblems() const { return connection_problems_; }
 
-  void GetToken();
-  void Authenticate(const QString& token);
+  void Authenticate();
   void SignOut();
   void UpdateSubscriberStatus();
 
@@ -83,8 +82,7 @@ class LastFMService : public Scrobbler {
   void ToggleScrobbling();
 
 signals:
-  void TokenReceived(bool success, const QString& token);
-  void AuthenticationComplete(bool success, const QString& error_message);
+  void AuthenticationComplete(bool success);
   void ScrobblingEnabledChanged(bool value);
   void ButtonVisibilityChanged(bool value);
   void ScrobbleButtonVisibilityChanged(bool value);
@@ -97,7 +95,6 @@ signals:
   void SavedItemsChanged();
 
  private slots:
-  void GetTokenReplyFinished(QNetworkReply* reply);
   void AuthenticateReplyFinished(QNetworkReply* reply);
   void UpdateSubscriberStatusFinished(QNetworkReply* reply);
 
@@ -129,6 +126,7 @@ signals:
   bool connection_problems_;
 
   Application* app_;
+  std::unique_ptr<NetworkAccessManager> network_;
 };
 
 #endif  // INTERNET_LASTFM_LASTFMSERVICE_H_

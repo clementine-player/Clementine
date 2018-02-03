@@ -24,6 +24,7 @@
 
 #include <memory>
 
+#include <QFileInfo>
 #include <QBasicTimer>
 #include <QObject>
 #include <QTemporaryFile>
@@ -60,6 +61,7 @@ class Organise : public QObject {
  signals:
   void Finished(const QStringList& files_with_errors);
   void FileCopied(int database_id);
+  void SongPathChanged(const Song& song, const QFileInfo& new_file);
 
  protected:
   void timerEvent(QTimerEvent* e);

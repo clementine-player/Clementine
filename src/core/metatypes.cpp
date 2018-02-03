@@ -22,6 +22,7 @@
 
 #include "metatypes.h"
 
+#include <QFileInfo>
 #include <QMetaType>
 #include <QNetworkCookie>
 
@@ -110,6 +111,7 @@ void RegisterMetaTypes() {
   qRegisterMetaType<Subdirectory>("Subdirectory");
   qRegisterMetaType<QList<QUrl>>("QList<QUrl>");
   qRegisterMetaType<QAbstractSocket::SocketState>();
+  qRegisterMetaType<QFileInfo>("QFileInfo");
 
 #ifdef HAVE_DBUS
   qDBusRegisterMetaType<QImage>();

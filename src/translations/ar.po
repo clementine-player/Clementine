@@ -8,6 +8,7 @@
 # mankind <ghassan658@hotmail.com>, 2014
 # khire aldin  kajjan <cransh.t2@hotmail.com>, 2012
 # StormX <king-166@hotmail.com>, 2013
+# Mhd Mrt <mhdmrt@tutanota.com>, 2017
 # Mohamed Sakhri, 2013-2014,2016
 # Mohammed  A. Tayeh <m.tayeh94@live.com>, 2013-2014
 # newstyle20 <newstyle2.0@gmail.com>, 2012
@@ -15,7 +16,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2017-05-31 17:23+0000\n"
+"PO-Revision-Date: 2017-09-19 10:43+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Arabic (http://www.transifex.com/davidsansome/clementine/language/ar/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -60,7 +61,7 @@ msgstr " pt"
 
 #: ../bin/src/ui_behavioursettingspage.h:367
 msgid " s"
-msgstr ""
+msgstr "ت"
 
 #: ../bin/src/ui_notificationssettingspage.h:444
 #: ../bin/src/ui_visualisationselector.h:115
@@ -80,7 +81,7 @@ msgstr "%1 ألبومات"
 #: widgets/equalizerslider.cpp:43
 #, qt-format
 msgid "%1 dB"
-msgstr ""
+msgstr "%1 ديسيبل"
 
 #: core/utilities.cpp:121
 #, qt-format
@@ -193,7 +194,7 @@ msgstr "&إضافات"
 
 #: ../bin/src/ui_edittagdialog.h:728
 msgid "&Grouping"
-msgstr ""
+msgstr "&تجميع"
 
 #: ../bin/src/ui_mainwindow.h:738
 msgid "&Help"
@@ -214,11 +215,11 @@ msgstr "&يسار"
 
 #: playlist/playlistheader.cpp:36
 msgid "&Lock Rating"
-msgstr ""
+msgstr "&مستوى القفل"
 
 #: ../bin/src/ui_edittagdialog.h:731
 msgid "&Lyrics"
-msgstr ""
+msgstr "&الكلمات"
 
 #: ../bin/src/ui_mainwindow.h:736
 msgid "&Music"
@@ -258,7 +259,7 @@ msgstr "&أدوات"
 
 #: ../bin/src/ui_edittagdialog.h:724
 msgid "&Year"
-msgstr ""
+msgstr "&سنة"
 
 #: ui/edittagdialog.cpp:50
 msgid "(different across multiple songs)"
@@ -266,7 +267,7 @@ msgstr "(مختلفة عبر أغنيات متعددة)"
 
 #: internet/spotify/spotifyservice.cpp:472
 msgid ", by "
-msgstr ""
+msgstr "، بقرب"
 
 #: ui/about.cpp:84
 msgid "...and all the Amarok contributors"
@@ -381,7 +382,7 @@ msgstr "لا يمكن لعميل الاتصال، إلا إن أدخل شفرة 
 #: internet/digitally/digitallyimportedsettingspage.cpp:48
 #: internet/digitally/digitallyimportedurlhandler.cpp:60
 msgid "A premium account is required"
-msgstr ""
+msgstr "حساب مدفوع مطلوب"
 
 #: smartplaylists/wizard.cpp:74
 msgid ""
@@ -415,7 +416,7 @@ msgstr "AAC 32k"
 msgid "AAC 64k"
 msgstr "AAC 64k"
 
-#: core/song.cpp:426
+#: core/song.cpp:427
 msgid "AIFF"
 msgstr "AIFF"
 
@@ -443,7 +444,7 @@ msgstr "عن QT..."
 #: playlist/playlistsaveoptionsdialog.cpp:34
 #: ../bin/src/ui_behavioursettingspage.h:371
 msgid "Absolute"
-msgstr ""
+msgstr "مُطلق"
 
 #: ../bin/src/ui_magnatunesettingspage.h:154
 #: ../bin/src/ui_spotifysettingspage.h:207
@@ -462,7 +463,7 @@ msgstr "عمل"
 #: ../bin/src/ui_globalshortcutssettingspage.h:173
 msgctxt "Category label"
 msgid "Action"
-msgstr ""
+msgstr "الحركة"
 
 #: wiimotedev/wiimotesettingspage.cpp:103
 msgid "Active/deactive Wiiremote"
@@ -490,7 +491,7 @@ msgstr "إضافة عمل"
 
 #: ../bin/src/ui_transcodedialog.h:220
 msgid "Add all tracks from a directory and all its subdirectories"
-msgstr ""
+msgstr "إضافة كل المقاطع الصوتيّة من مسار معيّن وجميع المسارات التي بداخله"
 
 #: internet/internetradio/savedradio.cpp:114
 msgid "Add another stream..."
@@ -500,7 +501,7 @@ msgstr "إضافة Stream أخر"
 msgid "Add directory..."
 msgstr "أضف مجلد..."
 
-#: ui/mainwindow.cpp:2016
+#: ui/mainwindow.cpp:2026
 msgid "Add file"
 msgstr "أضف ملفا"
 
@@ -520,7 +521,7 @@ msgstr "أضافة ملف..."
 msgid "Add files to transcode"
 msgstr "أضف ملفات للتحويل"
 
-#: transcoder/transcodedialog.cpp:306 ui/mainwindow.cpp:2043
+#: transcoder/transcodedialog.cpp:306 ui/mainwindow.cpp:2053
 #: ripper/ripcddialog.cpp:185
 msgid "Add folder"
 msgstr "إضافة مجلد"
@@ -625,7 +626,7 @@ msgstr "إضافة لقائمات تشغيل Spotify"
 msgid "Add to Spotify starred"
 msgstr "إضافة للمميزة على Spotify"
 
-#: ui/mainwindow.cpp:1817
+#: ui/mainwindow.cpp:1827
 msgid "Add to another playlist"
 msgstr "أضف إلى قائمة تشغيل أخرى"
 
@@ -676,7 +677,7 @@ msgid "After copying..."
 msgstr "بعد النسخ..."
 
 #: library/savedgroupingmanager.cpp:65 playlist/playlist.cpp:1331
-#: ui/organisedialog.cpp:61 ui/qtsystemtrayicon.cpp:251
+#: ui/organisedialog.cpp:64 ui/qtsystemtrayicon.cpp:251
 #: ../bin/src/ui_groupbydialog.h:128 ../bin/src/ui_groupbydialog.h:147
 #: ../bin/src/ui_groupbydialog.h:166 ../bin/src/ui_albumcoversearcher.h:110
 #: ../bin/src/ui_albumcoversearcher.h:112 ../bin/src/ui_edittagdialog.h:723
@@ -689,7 +690,7 @@ msgid "Album (ideal loudness for all tracks)"
 msgstr "ألبوم (شدة صوت مثلى لجميع المقاطع)"
 
 #: library/savedgroupingmanager.cpp:80 playlist/playlist.cpp:1345
-#: ui/organisedialog.cpp:64 ../bin/src/ui_groupbydialog.h:130
+#: ui/organisedialog.cpp:67 ../bin/src/ui_groupbydialog.h:130
 #: ../bin/src/ui_groupbydialog.h:149 ../bin/src/ui_groupbydialog.h:168
 #: ../bin/src/ui_edittagdialog.h:725
 msgid "Album artist"
@@ -815,8 +816,8 @@ msgstr "المظهر"
 msgid "Append files/URLs to the playlist"
 msgstr "أضف الملفات/العناوين إلى قائمة التشغيل"
 
-#: devices/deviceview.cpp:218 globalsearch/globalsearchview.cpp:453
-#: internet/core/internetservice.cpp:48 library/libraryview.cpp:378
+#: devices/deviceview.cpp:218 globalsearch/globalsearchview.cpp:454
+#: internet/core/internetservice.cpp:48 library/libraryview.cpp:383
 #: widgets/fileviewlist.cpp:31
 msgid "Append to current playlist"
 msgstr "أضف إلى قائمة التشغيل الحالية"
@@ -845,7 +846,7 @@ msgid ""
 msgstr "هل أنت متأكد من رغبتك بكتابة احصائيات المقاطع في ملفات المقاطع بالنسبة لكل المقاطع التي في مكتبتك الصوتية؟"
 
 #: library/savedgroupingmanager.cpp:62 playlist/playlist.cpp:1329
-#: ui/organisedialog.cpp:62 ui/qtsystemtrayicon.cpp:249
+#: ui/organisedialog.cpp:65 ui/qtsystemtrayicon.cpp:249
 #: ../bin/src/ui_groupbydialog.h:129 ../bin/src/ui_groupbydialog.h:148
 #: ../bin/src/ui_groupbydialog.h:167 ../bin/src/ui_albumcoversearcher.h:106
 #: ../bin/src/ui_albumcoversearcher.h:108 ../bin/src/ui_edittagdialog.h:721
@@ -853,17 +854,17 @@ msgstr "هل أنت متأكد من رغبتك بكتابة احصائيات ا�
 msgid "Artist"
 msgstr "الفنان"
 
-#: ui/mainwindow.cpp:282
+#: ui/mainwindow.cpp:283
 msgid "Artist info"
 msgstr "معلومات الفنان"
 
-#: ui/organisedialog.cpp:63
+#: ui/organisedialog.cpp:66
 msgid "Artist's initial"
 msgstr "بداية الفنان"
 
 #: ../bin/src/ui_behavioursettingspage.h:373
 msgid "Ask when saving"
-msgstr ""
+msgstr "إسأل عند الحفظ"
 
 #: ../bin/src/ui_transcodedialog.h:225
 #: ../bin/src/ui_networkremotesettingspage.h:250
@@ -877,8 +878,8 @@ msgstr "مخرج الصوت"
 
 #: internet/digitally/digitallyimportedsettingspage.cpp:82
 #: internet/magnatune/magnatunesettingspage.cpp:117
-#: internet/lastfm/lastfmservice.cpp:249
-#: internet/lastfm/lastfmsettingspage.cpp:97
+#: internet/lastfm/lastfmservice.cpp:268
+#: internet/lastfm/lastfmsettingspage.cpp:76
 msgid "Authentication failed"
 msgstr "فشلت عملية التحقق"
 
@@ -924,7 +925,7 @@ msgstr "القياس المتوسط للصور"
 msgid "BBC Podcasts"
 msgstr "بودكاست BBC"
 
-#: playlist/playlist.cpp:1365 ui/organisedialog.cpp:71
+#: playlist/playlist.cpp:1365 ui/organisedialog.cpp:74
 #: ../bin/src/ui_edittagdialog.h:704
 msgid "BPM"
 msgstr "BPM"
@@ -955,7 +956,7 @@ msgstr "توازن"
 
 #: core/globalshortcuts.cpp:80
 msgid "Ban (Last.fm scrobbling)"
-msgstr ""
+msgstr "منع (لاست.أف أم سكروبلينغ)"
 
 #: analyzers/baranalyzer.cpp:34
 msgid "Bar analyzer"
@@ -979,7 +980,7 @@ msgstr "الأفضل"
 
 #: songinfo/artistbiography.cpp:90 songinfo/artistbiography.cpp:255
 msgid "Biography"
-msgstr ""
+msgstr "السيرة الذاتية"
 
 #: playlist/playlist.cpp:1367 ../bin/src/ui_edittagdialog.h:706
 #: ../bin/src/ui_streamdetailsdialog.h:139
@@ -996,7 +997,7 @@ msgstr "معدل البت"
 msgid "Bitrate"
 msgstr "الصبيب"
 
-#: ui/organisedialog.cpp:77
+#: ui/organisedialog.cpp:80
 msgctxt "Refers to bitrate in file organise dialog."
 msgid "Bitrate"
 msgstr "معدل البت"
@@ -1041,7 +1042,7 @@ msgstr "تخزين مؤقت"
 
 #: internet/seafile/seafileservice.cpp:227
 msgid "Building Seafile index..."
-msgstr ""
+msgstr "جاري بناء فهرس سيفايل..."
 
 #: ../bin/src/ui_globalsearchview.h:210
 msgid "But these sources are disabled:"
@@ -1051,7 +1052,7 @@ msgstr "لكن هذه المصادر غير مفعلة"
 msgid "Buttons"
 msgstr "أزرار"
 
-#: core/song.cpp:432
+#: core/song.cpp:433
 msgid "CDDA"
 msgstr "CDDA"
 
@@ -1107,7 +1108,7 @@ msgstr "تغيير إعدادات تشغيل مونو سيأخذ بعين الا
 
 #: ../bin/src/ui_streamdetailsdialog.h:137
 msgid "Channels"
-msgstr ""
+msgstr "القنوات"
 
 #: ../bin/src/ui_podcastsettingspage.h:252
 msgid "Check for new episodes"
@@ -1117,7 +1118,7 @@ msgstr "التمس حلقات جديدة"
 msgid "Check for updates"
 msgstr "التمس التحديثات"
 
-#: ui/mainwindow.cpp:802
+#: ui/mainwindow.cpp:809
 msgid "Check for updates..."
 msgstr "التمس التحديثات"
 
@@ -1151,7 +1152,7 @@ msgstr "اختر مجلد تحميل البودكاست"
 
 #: ../bin/src/ui_internetshowsettingspage.h:85
 msgid "Choose the internet services you want to show."
-msgstr ""
+msgstr "إختر خدمات الشبكة التي تريد إظهارها"
 
 #: ../bin/src/ui_songinfosettingspage.h:159
 msgid ""
@@ -1245,11 +1246,7 @@ msgstr "تعذر على كلمنتاين إيجاد نتائج لهذا المل
 msgid "Clementine will find music in:"
 msgstr "سيبحث كلمنتاين عن المقاطع في:"
 
-#: internet/lastfm/lastfmsettingspage.cpp:78
-msgid "Click Ok once you authenticated Clementine in your last.fm account."
-msgstr ""
-
-#: library/libraryview.cpp:359
+#: library/libraryview.cpp:364
 msgid "Click here to add some music"
 msgstr "اضغط هنا لإضافة بعض الموسيقى"
 
@@ -1300,7 +1297,7 @@ msgstr "Club"
 
 #: ../bin/src/ui_edittagdialog.h:726
 msgid "Co&mposer"
-msgstr ""
+msgstr "&المؤلّف"
 
 #: ../bin/src/ui_appearancesettingspage.h:292
 msgid "Colors"
@@ -1311,7 +1308,7 @@ msgid "Comma separated list of class:level, level is 0-3"
 msgstr "لائحة عناصر مفروقة بفاصلة لـ \"class:level\"، قيمة Level بين 0-3"
 
 #: playlist/playlist.cpp:1384 smartplaylists/searchterm.cpp:370
-#: ui/organisedialog.cpp:75 ../bin/src/ui_edittagdialog.h:718
+#: ui/organisedialog.cpp:78 ../bin/src/ui_edittagdialog.h:718
 msgid "Comment"
 msgstr "تعليق"
 
@@ -1324,7 +1321,7 @@ msgid "Complete tags automatically..."
 msgstr "أكمل الوسوم تلقائيا..."
 
 #: library/savedgroupingmanager.cpp:74 playlist/playlist.cpp:1347
-#: ui/organisedialog.cpp:65 ../bin/src/ui_groupbydialog.h:131
+#: ui/organisedialog.cpp:68 ../bin/src/ui_groupbydialog.h:131
 #: ../bin/src/ui_groupbydialog.h:150 ../bin/src/ui_groupbydialog.h:169
 msgid "Composer"
 msgstr "الملحّن"
@@ -1354,11 +1351,11 @@ msgstr "إعدادات Spotify..."
 msgid "Configure Subsonic..."
 msgstr "إعدادات Subsonic..."
 
-#: globalsearch/globalsearchview.cpp:149 globalsearch/globalsearchview.cpp:473
+#: globalsearch/globalsearchview.cpp:151 globalsearch/globalsearchview.cpp:480
 msgid "Configure global search..."
 msgstr "إعدادات البحث العامة..."
 
-#: ui/mainwindow.cpp:651
+#: ui/mainwindow.cpp:652
 msgid "Configure library..."
 msgstr "إعدادات المكتبة"
 
@@ -1429,12 +1426,12 @@ msgstr ""
 msgid "Copy to clipboard"
 msgstr "نسخ إلى المكتبة..."
 
-#: library/libraryview.cpp:409 internet/podcasts/podcastservice.cpp:438
-#: ui/mainwindow.cpp:701 widgets/fileviewlist.cpp:44
+#: library/libraryview.cpp:416 internet/podcasts/podcastservice.cpp:438
+#: ui/mainwindow.cpp:708 widgets/fileviewlist.cpp:44
 msgid "Copy to device..."
 msgstr "نسخ إلى جهاز..."
 
-#: devices/deviceview.cpp:228 ui/mainwindow.cpp:691
+#: devices/deviceview.cpp:228 ui/mainwindow.cpp:698
 #: widgets/fileviewlist.cpp:40
 msgid "Copy to library..."
 msgstr "نسخ إلى المكتبة..."
@@ -1463,6 +1460,10 @@ msgstr ""
 
 #: songinfo/streamdiscoverer.cpp:123
 msgid "Could not get details"
+msgstr ""
+
+#: internet/lastfm/lastfmsettingspage.cpp:75
+msgid "Could not log in to Last.fm. Please try again."
 msgstr ""
 
 #: playlist/playlistmanager.cpp:166
@@ -1563,8 +1564,8 @@ msgid "Custom..."
 msgstr "خصص..."
 
 #: devices/devicekitlister.cpp:125 devices/udisks2lister.cpp:76
-msgid "DBus path"
-msgstr "مسار DBus"
+msgid "D-Bus path"
+msgstr ""
 
 #: ui/equalizer.cpp:116
 msgid "Dance"
@@ -1631,8 +1632,8 @@ msgstr "احذف"
 msgid "Delete downloaded data"
 msgstr "حذف البيانات المحملة"
 
-#: devices/deviceview.cpp:408 library/libraryview.cpp:645
-#: ui/mainwindow.cpp:2370 widgets/fileview.cpp:188
+#: devices/deviceview.cpp:408 library/libraryview.cpp:666
+#: ui/mainwindow.cpp:2380 widgets/fileview.cpp:188
 msgid "Delete files"
 msgstr "احذف الملفات"
 
@@ -1640,7 +1641,7 @@ msgstr "احذف الملفات"
 msgid "Delete from device..."
 msgstr "احذف من الجهاز"
 
-#: library/libraryview.cpp:411 ui/mainwindow.cpp:704
+#: library/libraryview.cpp:419 ui/mainwindow.cpp:711
 #: widgets/fileviewlist.cpp:47
 msgid "Delete from disk..."
 msgstr "احذف من القرص..."
@@ -1653,7 +1654,7 @@ msgstr "حذف الحلقات المشغلة"
 msgid "Delete preset"
 msgstr "احذف ملف الإعدادات"
 
-#: library/libraryview.cpp:401
+#: library/libraryview.cpp:408
 msgid "Delete smart playlist"
 msgstr "احذف لائحة التشغيل الذكية"
 
@@ -1669,11 +1670,11 @@ msgstr "حذف الملفات"
 msgid "Depth"
 msgstr ""
 
-#: ui/mainwindow.cpp:1738
+#: ui/mainwindow.cpp:1748
 msgid "Dequeue selected tracks"
 msgstr "أزل المختارة من لائحة الانتظار"
 
-#: ui/mainwindow.cpp:1736
+#: ui/mainwindow.cpp:1746
 msgid "Dequeue track"
 msgstr "أزل المقطع من لائحة الانتظار"
 
@@ -1702,7 +1703,7 @@ msgstr "اسم الجهاز"
 msgid "Device properties..."
 msgstr "خصائص الجهاز..."
 
-#: ui/mainwindow.cpp:275
+#: ui/mainwindow.cpp:276
 msgid "Devices"
 msgstr "أجهزة"
 
@@ -1754,7 +1755,7 @@ msgid "Disabled"
 msgstr "معطل"
 
 #: library/savedgroupingmanager.cpp:95 playlist/playlist.cpp:1337
-#: ui/organisedialog.cpp:70 ../bin/src/ui_groupbydialog.h:139
+#: ui/organisedialog.cpp:73 ../bin/src/ui_groupbydialog.h:139
 #: ../bin/src/ui_groupbydialog.h:158 ../bin/src/ui_groupbydialog.h:177
 #: ../bin/src/ui_edittagdialog.h:722 ../bin/src/ui_ripcddialog.h:313
 msgid "Disc"
@@ -1806,7 +1807,7 @@ msgstr ""
 msgid "Don't repeat"
 msgstr "لا تكرر"
 
-#: library/libraryview.cpp:429
+#: library/libraryview.cpp:436
 msgid "Don't show in various artists"
 msgstr "لا تظهره في فئة فنانون متنوعون"
 
@@ -1941,11 +1942,11 @@ msgstr "النمط النشيط مفعل"
 msgid "Dynamic random mix"
 msgstr "مزج عشوائي تلقائيا"
 
-#: library/libraryview.cpp:398
+#: library/libraryview.cpp:405
 msgid "Edit smart playlist..."
 msgstr "حرر قائمة التشغيل الذكية"
 
-#: ui/mainwindow.cpp:1780
+#: ui/mainwindow.cpp:1790
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr "حرر الوسم \"%1\""
@@ -1962,12 +1963,12 @@ msgstr "حرر الوسوم"
 msgid "Edit track information"
 msgstr "تعديل معلومات المقطع"
 
-#: library/libraryview.cpp:416 widgets/fileviewlist.cpp:51
+#: library/libraryview.cpp:424 widgets/fileviewlist.cpp:51
 #: ../bin/src/ui_mainwindow.h:685
 msgid "Edit track information..."
 msgstr "تعديل معلومات المقطع..."
 
-#: library/libraryview.cpp:419
+#: library/libraryview.cpp:427
 msgid "Edit tracks information..."
 msgstr "تعديل معلومات المقاطع..."
 
@@ -2080,8 +2081,8 @@ msgid "Equivalent to --log-levels *:3"
 msgstr "يكافئ --log-levels *:3"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:246
-#: library/libraryview.cpp:639 ui/mainwindow.cpp:2072 ui/mainwindow.cpp:2322
-#: ui/mainwindow.cpp:2481
+#: library/libraryview.cpp:660 ui/mainwindow.cpp:2082 ui/mainwindow.cpp:2332
+#: ui/mainwindow.cpp:2491
 msgid "Error"
 msgstr "خطأ"
 
@@ -2203,6 +2204,7 @@ msgstr "تم الانتهاء من التصدير"
 msgid "Exported %1 covers out of %2 (%3 skipped)"
 msgstr "تم تصدير %1 أغلفة من إجمالي %2 (تم تخطي %3)"
 
+#: core/song.cpp:411 transcoder/transcoder.cpp:233
 #: ../bin/src/ui_magnatunedownloaddialog.h:136
 #: ../bin/src/ui_magnatunesettingspage.h:170
 #: ../bin/src/ui_transcodersettingspage.h:176
@@ -2226,7 +2228,7 @@ msgstr "تلاشي"
 msgid "Fading duration"
 msgstr "مدة التلاشي"
 
-#: ui/mainwindow.cpp:2073
+#: ui/mainwindow.cpp:2083
 msgid "Failed reading CD drive"
 msgstr "فشل في قراءة القرص CD"
 
@@ -2263,7 +2265,7 @@ msgstr "سريع"
 
 #: internet/soundcloud/soundcloudservice.cpp:141
 msgid "Favorites"
-msgstr ""
+msgstr "المفضّلات"
 
 #: library/library.cpp:88
 msgid "Favourite tracks"
@@ -2297,7 +2299,7 @@ msgstr "خطأ أثناء جلب الغلاف"
 msgid "File Format"
 msgstr "صيغة الملف"
 
-#: ui/organisedialog.cpp:79
+#: ui/organisedialog.cpp:82
 msgid "File extension"
 msgstr "امتداد الملف"
 
@@ -2331,7 +2333,7 @@ msgstr "نوع الملف"
 msgid "Filename"
 msgstr "اسم الملف"
 
-#: ui/mainwindow.cpp:265
+#: ui/mainwindow.cpp:266
 msgid "Files"
 msgstr "الملفات"
 
@@ -2358,10 +2360,6 @@ msgstr "المستوى الأول"
 #: widgets/nowplayingwidget.cpp:110
 msgid "Fit cover to width"
 msgstr ""
-
-#: core/song.cpp:410 transcoder/transcoder.cpp:233
-msgid "Flac"
-msgstr "Flac"
 
 #: ../bin/src/ui_songinfosettingspage.h:155
 msgid "Font size"
@@ -2394,7 +2392,7 @@ msgstr "نسيان جهاز سيحذفه من القائمة. لهذا، سيت�
 #: ../bin/src/ui_libraryviewcontainer.h:58
 #: ../bin/src/ui_playlistcontainer.h:134
 #: ../bin/src/ui_playlistlistcontainer.h:125
-#: ../bin/src/ui_podcastinfowidget.h:190 ../bin/src/ui_querysearchpage.h:111
+#: ../bin/src/ui_podcastinfowidget.h:190 ../bin/src/ui_querysearchpage.h:108
 #: ../bin/src/ui_querysortpage.h:136 ../bin/src/ui_searchpreview.h:103
 #: ../bin/src/ui_searchtermwidget.h:267 ../bin/src/ui_wizardfinishpage.h:82
 #: ../bin/src/ui_songkickconcertwidget.h:99
@@ -2426,7 +2424,7 @@ msgstr "عدد اللقطات في كل وحدة تخزين"
 
 #: internet/subsonic/subsonicservice.cpp:106
 msgid "Frequently Played"
-msgstr ""
+msgstr "المشغّلة عادةً"
 
 #: moodbar/moodbarrenderer.cpp:173
 msgid "Frozen"
@@ -2457,7 +2455,7 @@ msgid "General settings"
 msgstr "إعدادات عامة"
 
 #: library/savedgroupingmanager.cpp:77 playlist/playlist.cpp:1343
-#: ui/organisedialog.cpp:74 ../bin/src/ui_groupbydialog.h:133
+#: ui/organisedialog.cpp:77 ../bin/src/ui_groupbydialog.h:133
 #: ../bin/src/ui_groupbydialog.h:152 ../bin/src/ui_groupbydialog.h:171
 #: ../bin/src/ui_ripcddialog.h:316
 msgid "Genre"
@@ -2515,7 +2513,7 @@ msgstr "اجعل المقاطع التي لا توجد في مكتبتي بلو�
 msgid "Group Library by..."
 msgstr "تجميع المكتبة حسب:"
 
-#: globalsearch/globalsearchview.cpp:470 library/libraryfilterwidget.cpp:98
+#: globalsearch/globalsearchview.cpp:477 library/libraryfilterwidget.cpp:98
 msgid "Group by"
 msgstr "تجميع حسب"
 
@@ -2548,7 +2546,7 @@ msgid "Group by Genre/Artist/Album"
 msgstr "تجميع حسب النوع/الفنان/الألبوم"
 
 #: library/savedgroupingmanager.cpp:89 playlist/playlist.cpp:1351
-#: ui/organisedialog.cpp:67 ../bin/src/ui_groupbydialog.h:141
+#: ui/organisedialog.cpp:70 ../bin/src/ui_groupbydialog.h:141
 #: ../bin/src/ui_groupbydialog.h:160 ../bin/src/ui_groupbydialog.h:179
 msgid "Grouping"
 msgstr "تجميع"
@@ -2684,7 +2682,7 @@ msgstr "صندوق البريد"
 msgid "Include album art in the notification"
 msgstr "ضمن غلاف الألبوم في التنبيهات"
 
-#: ../bin/src/ui_querysearchpage.h:117
+#: ../bin/src/ui_querysearchpage.h:114
 msgid "Include all songs"
 msgstr "ضمن جميع المقاطع"
 
@@ -2737,7 +2735,7 @@ msgstr "مثبت"
 msgid "Integrity check"
 msgstr "فحص شامل"
 
-#: ui/mainwindow.cpp:271
+#: ui/mainwindow.cpp:272
 msgid "Internet"
 msgstr "انترنت"
 
@@ -2754,7 +2752,7 @@ msgstr ""
 msgid "Intro tracks"
 msgstr ""
 
-#: internet/lastfm/lastfmservice.cpp:261
+#: internet/lastfm/lastfmservice.cpp:280
 msgid "Invalid API key"
 msgstr "مفتاح API غير صالح"
 
@@ -2762,27 +2760,27 @@ msgstr "مفتاح API غير صالح"
 msgid "Invalid URL"
 msgstr ""
 
-#: internet/lastfm/lastfmservice.cpp:251
+#: internet/lastfm/lastfmservice.cpp:270
 msgid "Invalid format"
 msgstr "صيغة غير متاحة"
 
-#: internet/lastfm/lastfmservice.cpp:247
+#: internet/lastfm/lastfmservice.cpp:266
 msgid "Invalid method"
 msgstr "طريقة غير متاحة"
 
-#: internet/lastfm/lastfmservice.cpp:253
+#: internet/lastfm/lastfmservice.cpp:272
 msgid "Invalid parameters"
 msgstr "إعدادات غير صالحة"
 
-#: internet/lastfm/lastfmservice.cpp:255
+#: internet/lastfm/lastfmservice.cpp:274
 msgid "Invalid resource specified"
 msgstr "تم تعيين مصدر غير صالح"
 
-#: internet/lastfm/lastfmservice.cpp:245
+#: internet/lastfm/lastfmservice.cpp:264
 msgid "Invalid service"
 msgstr "خدمة غير متاحة"
 
-#: internet/lastfm/lastfmservice.cpp:259
+#: internet/lastfm/lastfmservice.cpp:278
 msgid "Invalid session key"
 msgstr "مفتاح جلسة غير صالح"
 
@@ -2892,15 +2890,11 @@ msgstr "آخر تشغيل"
 msgid "Last.fm"
 msgstr "Last.fm"
 
-#: internet/lastfm/lastfmsettingspage.cpp:77
-msgid "Last.fm authentication"
+#: internet/lastfm/lastfmservice.cpp:178
+msgid "Last.fm Authentication"
 msgstr ""
 
-#: internet/lastfm/lastfmsettingspage.cpp:70
-msgid "Last.fm authentication failed"
-msgstr ""
-
-#: internet/lastfm/lastfmservice.cpp:268
+#: internet/lastfm/lastfmservice.cpp:287
 msgid "Last.fm is currently busy, please try again in a few minutes"
 msgstr "Last.fm مشغول حاليا، الرجاء إعادة المحاولة بعد دقائق."
 
@@ -2924,12 +2918,12 @@ msgstr "المقاطع الأقل تفضيلا"
 msgid "Left"
 msgstr "يسار"
 
-#: playlist/playlist.cpp:1333 ui/organisedialog.cpp:76
+#: playlist/playlist.cpp:1333 ui/organisedialog.cpp:79
 #: ui/qtsystemtrayicon.cpp:254 ../bin/src/ui_edittagdialog.h:702
 msgid "Length"
 msgstr "المدة"
 
-#: ui/mainwindow.cpp:250 ui/mainwindow.cpp:262
+#: ui/mainwindow.cpp:251 ui/mainwindow.cpp:263
 #: ../bin/src/ui_seafilesettingspage.h:177
 msgid "Library"
 msgstr "المكتبة"
@@ -2938,7 +2932,7 @@ msgstr "المكتبة"
 msgid "Library advanced grouping"
 msgstr "إعدادات متقدمة لتجميع المكتبة"
 
-#: ui/mainwindow.cpp:2581
+#: ui/mainwindow.cpp:2611
 msgid "Library rescan notice"
 msgstr "إشعار إعادة فحص المكتبة"
 
@@ -3066,7 +3060,7 @@ msgstr "أقل (256x256)"
 msgid "Low complexity profile (LC)"
 msgstr "ملف تعريف بأقل تعقيد (LC)"
 
-#: ui/organisedialog.cpp:68 ../bin/src/ui_songinfosettingspage.h:158
+#: ui/organisedialog.cpp:71 ../bin/src/ui_songinfosettingspage.h:158
 msgid "Lyrics"
 msgstr "كلمات المقطع"
 
@@ -3083,7 +3077,7 @@ msgstr ""
 msgid "M4A AAC"
 msgstr "M4A AAC"
 
-#: core/song.cpp:416 transcoder/transcoder.cpp:238
+#: core/song.cpp:417 transcoder/transcoder.cpp:238
 #: ../bin/src/ui_transcodersettingspage.h:174
 msgid "MP3"
 msgstr "MP3"
@@ -3096,11 +3090,11 @@ msgstr "MP3 256k"
 msgid "MP3 96k"
 msgstr "MP3 96k"
 
-#: core/song.cpp:412
+#: core/song.cpp:413
 msgid "MP4 AAC"
 msgstr "MP4 AAC"
 
-#: core/song.cpp:414
+#: core/song.cpp:415
 msgid "MPC"
 msgstr "MPC"
 
@@ -3134,7 +3128,7 @@ msgstr "اجعلها كذلك!"
 msgid "Make playlist available offline"
 msgstr "اجعل قائمة التشغيل متاحة دون اتصال"
 
-#: internet/lastfm/lastfmservice.cpp:280
+#: internet/lastfm/lastfmservice.cpp:299
 msgid "Malformed response"
 msgstr "إجابة غير صالحة"
 
@@ -3163,11 +3157,11 @@ msgstr "علم كمستمع إليه"
 msgid "Mark as new"
 msgstr "علم كجديد"
 
-#: ../bin/src/ui_querysearchpage.h:115
+#: ../bin/src/ui_querysearchpage.h:112
 msgid "Match every search term (AND)"
 msgstr "طابق كل كلمة بحث (و)"
 
-#: ../bin/src/ui_querysearchpage.h:116
+#: ../bin/src/ui_querysearchpage.h:113
 msgid "Match one or more search terms (OR)"
 msgstr "طابق كلمة بحث أو عدة كلمات (أو)"
 
@@ -3255,7 +3249,7 @@ msgstr "نقط الوصل"
 msgid "Move down"
 msgstr "أسفل"
 
-#: ui/mainwindow.cpp:694 widgets/fileviewlist.cpp:42
+#: ui/mainwindow.cpp:701 widgets/fileviewlist.cpp:42
 msgid "Move to library..."
 msgstr "انقل إلى المكتبة"
 
@@ -3264,7 +3258,7 @@ msgstr "انقل إلى المكتبة"
 msgid "Move up"
 msgstr "أعلى"
 
-#: transcoder/transcodedialog.cpp:225 ui/mainwindow.cpp:2017
+#: transcoder/transcodedialog.cpp:225 ui/mainwindow.cpp:2027
 msgid "Music"
 msgstr "موسيقى"
 
@@ -3322,11 +3316,11 @@ msgstr "لم يبدأ تشغيلها أبدا"
 msgid "New folder"
 msgstr "مجلد جديد"
 
-#: ui/mainwindow.cpp:1834 ../bin/src/ui_mainwindow.h:709
+#: ui/mainwindow.cpp:1844 ../bin/src/ui_mainwindow.h:709
 msgid "New playlist"
 msgstr "قائمة تشغيل جديدة"
 
-#: library/libraryview.cpp:395
+#: library/libraryview.cpp:402
 msgid "New smart playlist..."
 msgstr "قائمة تشغيل ذكية جديدة"
 
@@ -3389,7 +3383,7 @@ msgstr "بدون أجزاء قصيرة"
 msgid "None"
 msgstr "لا شيء"
 
-#: library/libraryview.cpp:640 ui/mainwindow.cpp:2323 ui/mainwindow.cpp:2482
+#: library/libraryview.cpp:661 ui/mainwindow.cpp:2333 ui/mainwindow.cpp:2492
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "لا مقطع من المقاطع المختارة مناسب لنسخه لجهاز."
 
@@ -3409,19 +3403,19 @@ msgstr "غير متاح عند استعمال قائمة تشغيل دينامي
 msgid "Not connected"
 msgstr "غير متصل"
 
-#: internet/lastfm/lastfmservice.cpp:271
+#: internet/lastfm/lastfmservice.cpp:290
 msgid "Not enough content"
 msgstr "لا يوجد محتوى كافي"
 
-#: internet/lastfm/lastfmservice.cpp:275
+#: internet/lastfm/lastfmservice.cpp:294
 msgid "Not enough fans"
 msgstr "عدد المعجبين غير كافٍ"
 
-#: internet/lastfm/lastfmservice.cpp:273
+#: internet/lastfm/lastfmservice.cpp:292
 msgid "Not enough members"
 msgstr "عدد الأعضاء غير كافٍ"
 
-#: internet/lastfm/lastfmservice.cpp:277
+#: internet/lastfm/lastfmservice.cpp:296
 msgid "Not enough neighbors"
 msgstr "عدد الجيران غير كافٍ"
 
@@ -3462,19 +3456,23 @@ msgstr "معاينة التنبيهات"
 msgid "Off"
 msgstr "معطل"
 
-#: core/song.cpp:418 transcoder/transcoder.cpp:244
+#: core/song.cpp:419
+msgid "Ogg FLAC"
+msgstr ""
+
+#: transcoder/transcoder.cpp:244
 msgid "Ogg Flac"
 msgstr "Ogg Flac"
 
-#: core/song.cpp:424 transcoder/transcoder.cpp:250
+#: core/song.cpp:425 transcoder/transcoder.cpp:250
 msgid "Ogg Opus"
 msgstr "Ogg Opus"
 
-#: core/song.cpp:420 transcoder/transcoder.cpp:247
+#: core/song.cpp:421 transcoder/transcoder.cpp:247
 msgid "Ogg Speex"
 msgstr "Ogg Speex"
 
-#: core/song.cpp:422 transcoder/transcoder.cpp:241
+#: core/song.cpp:423 transcoder/transcoder.cpp:241
 #: ../bin/src/ui_magnatunedownloaddialog.h:135
 #: ../bin/src/ui_magnatunesettingspage.h:169
 msgid "Ogg Vorbis"
@@ -3547,8 +3545,8 @@ msgstr "فتح ملف..."
 msgid "Open in Google Drive"
 msgstr "فتح في Google Drive"
 
-#: devices/deviceview.cpp:224 globalsearch/globalsearchview.cpp:461
-#: internet/core/internetservice.cpp:62 library/libraryview.cpp:384
+#: devices/deviceview.cpp:224 globalsearch/globalsearchview.cpp:460
+#: internet/core/internetservice.cpp:62 library/libraryview.cpp:389
 #: widgets/fileviewlist.cpp:36
 msgid "Open in new playlist"
 msgstr "فتح في قائمة تشغيل جديدة"
@@ -3560,14 +3558,14 @@ msgstr "فتح في قائمة جديدة"
 
 #: songinfo/artistbiography.cpp:94 songinfo/artistbiography.cpp:261
 msgid "Open in your browser"
-msgstr ""
+msgstr "إفتح في المتصفّح لديك"
 
 #: ../bin/src/ui_globalshortcutssettingspage.h:168
 #: ../bin/src/ui_globalshortcutssettingspage.h:170
 msgid "Open..."
 msgstr "فتح..."
 
-#: internet/lastfm/lastfmservice.cpp:257
+#: internet/lastfm/lastfmservice.cpp:276
 msgid "Operation failed"
 msgstr "فشلت العملية"
 
@@ -3593,7 +3591,7 @@ msgstr "Opus"
 msgid "Organise Files"
 msgstr "ترتيب الملفات"
 
-#: library/libraryview.cpp:405 ui/mainwindow.cpp:697
+#: library/libraryview.cpp:413 ui/mainwindow.cpp:704
 msgid "Organise files..."
 msgstr "ترتيب الملفات..."
 
@@ -3606,10 +3604,10 @@ msgid "Original tags"
 msgstr "الوسوم الأصلية"
 
 #: library/savedgroupingmanager.cpp:101 playlist/playlist.cpp:1341
-#: ui/organisedialog.cpp:73 ../bin/src/ui_groupbydialog.h:135
+#: ui/organisedialog.cpp:76 ../bin/src/ui_groupbydialog.h:135
 #: ../bin/src/ui_groupbydialog.h:154 ../bin/src/ui_groupbydialog.h:173
 msgid "Original year"
-msgstr ""
+msgstr "السنة الأصليّة"
 
 #: library/savedgroupingmanager.cpp:98 ../bin/src/ui_groupbydialog.h:137
 #: ../bin/src/ui_groupbydialog.h:156 ../bin/src/ui_groupbydialog.h:175
@@ -3622,7 +3620,7 @@ msgstr ""
 
 #: ../bin/src/ui_appearancesettingspage.h:317
 msgid "Other"
-msgstr ""
+msgstr "آخر"
 
 #: core/commandlineoptions.cpp:176
 msgid "Other options"
@@ -3677,7 +3675,7 @@ msgstr "حفلة"
 msgid "Password"
 msgstr "كلمة السر"
 
-#: core/globalshortcuts.cpp:50 ui/mainwindow.cpp:1141 ui/mainwindow.cpp:1641
+#: core/globalshortcuts.cpp:50 ui/mainwindow.cpp:1148 ui/mainwindow.cpp:1648
 #: ui/qtsystemtrayicon.cpp:189 wiimotedev/wiimotesettingspage.cpp:114
 msgid "Pause"
 msgstr "إيقاف مؤقت"
@@ -3691,7 +3689,7 @@ msgid "Paused"
 msgstr "تم الإيقاف مؤقتا"
 
 #: library/savedgroupingmanager.cpp:86 playlist/playlist.cpp:1349
-#: ui/organisedialog.cpp:66 ../bin/src/ui_groupbydialog.h:140
+#: ui/organisedialog.cpp:69 ../bin/src/ui_groupbydialog.h:140
 #: ../bin/src/ui_groupbydialog.h:159 ../bin/src/ui_groupbydialog.h:178
 #: ../bin/src/ui_edittagdialog.h:727
 msgid "Performer"
@@ -3705,8 +3703,8 @@ msgstr "بكسل"
 msgid "Plain sidebar"
 msgstr "شريط جانبي عريض"
 
-#: core/globalshortcuts.cpp:49 ui/mainwindow.cpp:668 ui/mainwindow.cpp:1107
-#: ui/mainwindow.cpp:1126 ui/mainwindow.cpp:1645 ui/qtsystemtrayicon.cpp:177
+#: core/globalshortcuts.cpp:49 ui/mainwindow.cpp:669 ui/mainwindow.cpp:1114
+#: ui/mainwindow.cpp:1133 ui/mainwindow.cpp:1652 ui/qtsystemtrayicon.cpp:177
 #: ui/qtsystemtrayicon.cpp:203 wiimotedev/wiimotesettingspage.cpp:107
 #: ../bin/src/ui_mainwindow.h:675
 msgid "Play"
@@ -3760,13 +3758,18 @@ msgstr "خيارات قائمة التشغيل"
 msgid "Playlist type"
 msgstr "نوع قائمة التشغيل"
 
-#: internet/soundcloud/soundcloudservice.cpp:133 ui/mainwindow.cpp:268
+#: internet/soundcloud/soundcloudservice.cpp:133 ui/mainwindow.cpp:269
 msgid "Playlists"
 msgstr "قوائم التشغيل"
 
 #: ../data/oauthsuccess.html:38
 msgid "Please close your browser and return to Clementine."
 msgstr "الرجاء إغلاق متصفحك والعودة إلى كلمنتاين"
+
+#: internet/lastfm/lastfmservice.cpp:178
+#, qt-format
+msgid "Please open this URL in your browser: <a href=\"%1\">%1</a>"
+msgstr ""
 
 #: ../bin/src/ui_spotifysettingspage.h:213
 msgid "Plugin status:"
@@ -3796,7 +3799,7 @@ msgstr "تقوية استباقية"
 
 #: ../bin/src/ui_seafilesettingspage.h:176
 msgid "Preference"
-msgstr ""
+msgstr "التفضيلات"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:165
 #: ../bin/src/ui_magnatunesettingspage.h:165
@@ -3920,12 +3923,12 @@ msgstr "الاستعلام عن الجهاز..."
 msgid "Queue Manager"
 msgstr "مدير لائحة الانتظار"
 
-#: ui/mainwindow.cpp:1742
+#: ui/mainwindow.cpp:1752
 msgid "Queue selected tracks"
 msgstr "أضف المختارة للائحة الانتظار"
 
-#: globalsearch/globalsearchview.cpp:466 library/libraryview.cpp:389
-#: ui/mainwindow.cpp:1740
+#: globalsearch/globalsearchview.cpp:464 library/libraryview.cpp:393
+#: ui/mainwindow.cpp:1750
 msgid "Queue track"
 msgstr "أضف للائحة الانتظار"
 
@@ -4098,7 +4101,7 @@ msgid "Repeat track"
 msgstr "كرر المقطع"
 
 #: devices/deviceview.cpp:221 globalsearch/globalsearchview.cpp:457
-#: internet/core/internetservice.cpp:55 library/libraryview.cpp:381
+#: internet/core/internetservice.cpp:55 library/libraryview.cpp:386
 #: widgets/fileviewlist.cpp:34
 msgid "Replace current playlist"
 msgstr "استبدل قائمة التشغيل الحالية"
@@ -4204,7 +4207,7 @@ msgstr "احذف الجهاز بأمان بعد انتهاء النسخ"
 msgid "Sample rate"
 msgstr "معدل العينة"
 
-#: ui/organisedialog.cpp:78
+#: ui/organisedialog.cpp:81
 msgid "Samplerate"
 msgstr "معدل العينة"
 
@@ -4300,7 +4303,7 @@ msgstr ""
 msgid "Search"
 msgstr "البحث"
 
-#: ui/mainwindow.cpp:259 ../bin/src/ui_globalsearchsettingspage.h:141
+#: ui/mainwindow.cpp:260 ../bin/src/ui_globalsearchsettingspage.h:141
 msgctxt "Global search settings dialog title."
 msgid "Search"
 msgstr "بحث"
@@ -4325,6 +4328,10 @@ msgstr "بحث Subsonic"
 msgid "Search automatically"
 msgstr "ابحث تلقائيا"
 
+#: ui/mainwindow.cpp:685
+msgid "Search for album"
+msgstr ""
+
 #: ui/albumcoverchoicecontroller.cpp:69
 msgid "Search for album covers..."
 msgstr "ابحث عن أغلفة الألبومات..."
@@ -4332,6 +4339,14 @@ msgstr "ابحث عن أغلفة الألبومات..."
 #: ../bin/src/ui_globalsearchview.h:207
 msgid "Search for anything"
 msgstr "ابحث عن أي شيء"
+
+#: ui/mainwindow.cpp:682
+msgid "Search for artist"
+msgstr ""
+
+#: globalsearch/globalsearchview.cpp:473 library/libraryview.cpp:398
+msgid "Search for this"
+msgstr ""
 
 #: ../bin/src/ui_gpoddersearchpage.h:72
 msgid "Search gpodder.net"
@@ -4341,7 +4356,7 @@ msgstr "بحث gpodder.net"
 msgid "Search iTunes"
 msgstr "بحث iTunes"
 
-#: ../bin/src/ui_querysearchpage.h:112
+#: ../bin/src/ui_querysearchpage.h:109
 msgid "Search mode"
 msgstr "نمط البحث"
 
@@ -4355,7 +4370,7 @@ msgid "Search results"
 msgstr "نتائج البحث"
 
 #: smartplaylists/querywizardplugin.cpp:155
-#: ../bin/src/ui_querysearchpage.h:119
+#: ../bin/src/ui_querysearchpage.h:116
 msgid "Search terms"
 msgstr "كلمات البحث"
 
@@ -4439,11 +4454,11 @@ msgstr "عنوان الخادم"
 msgid "Server details"
 msgstr "معلومات الخادم"
 
-#: internet/lastfm/lastfmservice.cpp:263
+#: internet/lastfm/lastfmservice.cpp:282
 msgid "Service offline"
 msgstr "خدمة غير متصلة"
 
-#: ui/mainwindow.cpp:1779
+#: ui/mainwindow.cpp:1789
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr "غير %1 إلى %2"
@@ -4519,7 +4534,7 @@ msgstr "أظهر تنبيهات كلمنتاين"
 msgid "Show above status bar"
 msgstr "أظهر فوق شريط الحالة"
 
-#: ui/mainwindow.cpp:635
+#: ui/mainwindow.cpp:636
 msgid "Show all songs"
 msgstr "أظهر جميع المقاطع"
 
@@ -4539,16 +4554,16 @@ msgstr "أظهر الفواصل"
 msgid "Show fullsize..."
 msgstr "أظهر الحجم الأصلي..."
 
-#: library/libraryview.cpp:423 ui/mainwindow.cpp:707
+#: library/libraryview.cpp:430 ui/mainwindow.cpp:714
 #: widgets/fileviewlist.cpp:53
 msgid "Show in file browser..."
 msgstr "أظهر في متصفح الملفات..."
 
-#: ui/mainwindow.cpp:709
+#: ui/mainwindow.cpp:716
 msgid "Show in library..."
 msgstr "أظهر في المكتبة..."
 
-#: library/libraryview.cpp:426
+#: library/libraryview.cpp:433
 msgid "Show in various artists"
 msgstr "أظهر في فنانين متنوعين"
 
@@ -4556,11 +4571,11 @@ msgstr "أظهر في فنانين متنوعين"
 msgid "Show moodbar"
 msgstr "أظهر عارضة المزاج"
 
-#: ui/mainwindow.cpp:637
+#: ui/mainwindow.cpp:638
 msgid "Show only duplicates"
 msgstr "أظهر المقاطع المكررة فقط"
 
-#: ui/mainwindow.cpp:639
+#: ui/mainwindow.cpp:640
 msgid "Show only untagged"
 msgstr "أظهر المقطاع غير الموسومة فقط"
 
@@ -4652,11 +4667,11 @@ msgstr "تخطى العد"
 msgid "Skip forwards in playlist"
 msgstr "تجاهل اللاحق في قائمة التشغيل"
 
-#: ui/mainwindow.cpp:1753
+#: ui/mainwindow.cpp:1763
 msgid "Skip selected tracks"
 msgstr "تجاوز المسارات المختارة"
 
-#: ui/mainwindow.cpp:1751
+#: ui/mainwindow.cpp:1761
 msgid "Skip track"
 msgstr "تجاوز المسار"
 
@@ -4672,7 +4687,7 @@ msgstr "عارضة جانبية صغيرة"
 msgid "Smart playlist"
 msgstr "قائمة تشغيل ذكية"
 
-#: library/librarymodel.cpp:1364
+#: library/librarymodel.cpp:1367
 msgid "Smart playlists"
 msgstr "قوائم تشغيل ذكية"
 
@@ -4688,7 +4703,7 @@ msgstr "Soft Rock"
 msgid "Song Information"
 msgstr "معلومات المقطع"
 
-#: ui/mainwindow.cpp:279
+#: ui/mainwindow.cpp:280
 msgid "Song info"
 msgstr "معلومات المقطع"
 
@@ -4815,7 +4830,7 @@ msgstr ""
 msgid "Stop after every track"
 msgstr ""
 
-#: ui/mainwindow.cpp:672 ../bin/src/ui_mainwindow.h:679
+#: ui/mainwindow.cpp:673 ../bin/src/ui_mainwindow.h:679
 msgid "Stop after this track"
 msgstr "أوقف بعد هذا المقطع"
 
@@ -4840,7 +4855,7 @@ msgstr "أوقف التشغيل بعد المقطع: %1"
 msgid "Stopped"
 msgstr "تم الايقاف"
 
-#: core/song.cpp:435
+#: core/song.cpp:436
 msgid "Stream"
 msgstr "المجرى"
 
@@ -4979,13 +4994,13 @@ msgid ""
 "license key. Visit subsonic.org for details."
 msgstr "لقد انتهت المدة التجريبية لخادم Subsonic. الرجاء التبرع للحصول على مفتاح رخصة. لمزيد من التفاصيل زر subsonic.org."
 
-#: ui/mainwindow.cpp:2572
+#: ui/mainwindow.cpp:2602
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
 msgstr "إصدار كلمنتاين الذي حدثت إليه يتطلب القيام بفحص شامل للمكتبة من جديد لدعم ميزات الإصدار الجديدة المذكورة أسفله:"
 
-#: library/libraryview.cpp:562
+#: library/libraryview.cpp:582
 msgid "There are other songs in this album"
 msgstr "هناك مقاطع أخرى في هذا الألبوم"
 
@@ -5021,7 +5036,7 @@ msgid ""
 "continue?"
 msgstr "سيتم حذف هذه الملفات من الجهاز. هل أنت متأكد من رغبتك بالاستمرار؟"
 
-#: library/libraryview.cpp:646 ui/mainwindow.cpp:2371 widgets/fileview.cpp:189
+#: library/libraryview.cpp:667 ui/mainwindow.cpp:2381 widgets/fileview.cpp:189
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -5092,7 +5107,7 @@ msgstr "هذه أول مرة تقوم بوصل هذا الجهاز. سيعمل �
 msgid "This option can be changed in the \"Behavior\" preferences"
 msgstr "يمكن تغيير هذه الخاصية من إعدادات \"السلوك\""
 
-#: internet/lastfm/lastfmservice.cpp:265
+#: internet/lastfm/lastfmservice.cpp:284
 msgid "This stream is for paid subscribers only"
 msgstr "هذا التيار للاشتراكات المدفوعة فقط"
 
@@ -5105,7 +5120,7 @@ msgstr "هذا النوع من الأجهزة غير مدعوم: %1"
 msgid "Time step"
 msgstr ""
 
-#: playlist/playlist.cpp:1327 ui/organisedialog.cpp:60
+#: playlist/playlist.cpp:1327 ui/organisedialog.cpp:63
 #: ui/qtsystemtrayicon.cpp:247 ../bin/src/ui_about.h:141
 #: ../bin/src/ui_edittagdialog.h:719 ../bin/src/ui_trackselectiondialog.h:210
 #: ../bin/src/ui_ripcddialog.h:306
@@ -5124,7 +5139,7 @@ msgstr "بدّل تنبيهات كلمنتاين"
 msgid "Toggle fullscreen"
 msgstr "بدّل نمط ملء الشاشة"
 
-#: ui/mainwindow.cpp:1744
+#: ui/mainwindow.cpp:1754
 msgid "Toggle queue status"
 msgstr "بدّل حالة لائحة الانتظار"
 
@@ -5168,7 +5183,7 @@ msgstr "إجمالي طلبات الشبكة "
 msgid "Trac&k"
 msgstr ""
 
-#: playlist/playlist.cpp:1335 ui/organisedialog.cpp:69
+#: playlist/playlist.cpp:1335 ui/organisedialog.cpp:72
 #: ../bin/src/ui_trackselectiondialog.h:212 ../bin/src/ui_ripcddialog.h:304
 msgid "Track"
 msgstr "المقطوعة"
@@ -5198,7 +5213,7 @@ msgstr "جاري تحويل %1 ملفات على %2 أشغال"
 msgid "Transcoding options"
 msgstr "إعدادات تحويل الصوتيات"
 
-#: core/song.cpp:430
+#: core/song.cpp:431
 msgid "TrueAudio"
 msgstr "TrueAudio"
 
@@ -5240,8 +5255,8 @@ msgstr ""
 msgid "Unable to download %1 (%2)"
 msgstr "تعذر تحميل %1 (%2)"
 
-#: core/song.cpp:439 library/librarymodel.cpp:374 library/librarymodel.cpp:379
-#: library/librarymodel.cpp:383 library/librarymodel.cpp:1156
+#: core/song.cpp:440 library/librarymodel.cpp:374 library/librarymodel.cpp:379
+#: library/librarymodel.cpp:383 library/librarymodel.cpp:1159
 #: library/savedgroupingmanager.cpp:103 playlist/playlistdelegates.cpp:305
 #: playlist/playlistmanager.cpp:522 playlist/playlistmanager.cpp:523
 #: songinfo/streamdiscoverer.cpp:87 ui/albumcoverchoicecontroller.cpp:126
@@ -5254,7 +5269,7 @@ msgid "Unknown content-type"
 msgstr "نوع محتوى غير معروف"
 
 #: internet/digitally/digitallyimportedclient.cpp:74
-#: internet/lastfm/lastfmservice.cpp:284
+#: internet/lastfm/lastfmservice.cpp:303
 msgid "Unknown error"
 msgstr "خطأ مجهول"
 
@@ -5262,11 +5277,11 @@ msgstr "خطأ مجهول"
 msgid "Unset cover"
 msgstr "ألغ الغلاف"
 
-#: ui/mainwindow.cpp:1749
+#: ui/mainwindow.cpp:1759
 msgid "Unskip selected tracks"
 msgstr "إلغاء تجاوز المسارات المختارة"
 
-#: ui/mainwindow.cpp:1747
+#: ui/mainwindow.cpp:1757
 msgid "Unskip track"
 msgstr "إلغاء تجاوز المسار"
 
@@ -5478,7 +5493,7 @@ msgstr "WMA"
 msgid "Warn me when closing a playlist tab"
 msgstr "نبهني عند إغلاق لسان قائمة تشغيل"
 
-#: core/song.cpp:428 transcoder/transcoder.cpp:256
+#: core/song.cpp:429 transcoder/transcoder.cpp:256
 msgid "Wav"
 msgstr "Wav"
 
@@ -5562,7 +5577,7 @@ msgstr "Windows Media 40k"
 msgid "Windows Media 64k"
 msgstr "Windows Media 64k"
 
-#: core/song.cpp:408 transcoder/transcoder.cpp:253
+#: core/song.cpp:409 transcoder/transcoder.cpp:253
 msgid "Windows Media audio"
 msgstr "Windows Media audio"
 
@@ -5570,13 +5585,13 @@ msgstr "Windows Media audio"
 msgid "Without cover:"
 msgstr "بدون أغلفة:"
 
-#: library/libraryview.cpp:563
+#: library/libraryview.cpp:583
 msgid ""
 "Would you like to move the other songs in this album to Various Artists as "
 "well?"
 msgstr "هل ترغب بنقل المقاطع الأخرى في هذا الألبوم لفئة فنانون متنوعون؟"
 
-#: ui/mainwindow.cpp:2579
+#: ui/mainwindow.cpp:2609
 msgid "Would you like to run a full rescan right now?"
 msgstr "هل ترغب بالقيام بفحص شامل الآن؟"
 
@@ -5593,7 +5608,7 @@ msgid "Wrong username or password."
 msgstr "اسم مستخدم أو كلمة سر خاطئة."
 
 #: library/savedgroupingmanager.cpp:71 playlist/playlist.cpp:1339
-#: ui/organisedialog.cpp:72 ../bin/src/ui_groupbydialog.h:134
+#: ui/organisedialog.cpp:75 ../bin/src/ui_groupbydialog.h:134
 #: ../bin/src/ui_groupbydialog.h:153 ../bin/src/ui_groupbydialog.h:172
 #: ../bin/src/ui_trackselectiondialog.h:211 ../bin/src/ui_ripcddialog.h:312
 msgid "Year"
@@ -5706,15 +5721,11 @@ msgstr "سيتوجب عليك إعادة تشغيل كلمنتاين إذا غي
 msgid "Your IP address:"
 msgstr "عنوان الايبي الخاص بك هو:"
 
-#: internet/lastfm/lastfmsettingspage.cpp:93
-msgid "Your Last.fm credentials were incorrect"
-msgstr "بيانات التعريف الخاصة بحسابك على Last.fm خاطئة"
-
 #: internet/magnatune/magnatunesettingspage.cpp:118
 msgid "Your Magnatune credentials were incorrect"
 msgstr "بيانات التعريف الخاصة بحسابك على Magnatune خاطئة"
 
-#: library/libraryview.cpp:353
+#: library/libraryview.cpp:358
 msgid "Your library is empty!"
 msgstr "مكتبتك فارغة!"
 

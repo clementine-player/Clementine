@@ -617,9 +617,6 @@ void PlaylistView::keyPressEvent(QKeyEvent* event) {
              event->key() == Qt::Key_Space) {
     emit PlayPause();
     event->accept();
-  } else if (event->key() == Qt::Key_Up) {
-    app_->player()->SeekTo(0);
-    event->accept();
   } else if (event->key() == Qt::Key_Left) {
     emit SeekBackward();
     event->accept();

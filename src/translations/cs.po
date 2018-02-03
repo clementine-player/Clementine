@@ -21,7 +21,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2017-05-31 20:13+0000\n"
+"PO-Revision-Date: 2017-09-19 10:43+0000\n"
 "Last-Translator: fri\n"
 "Language-Team: Czech (http://www.transifex.com/davidsansome/clementine/language/cs/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -421,7 +421,7 @@ msgstr "AAC 32k"
 msgid "AAC 64k"
 msgstr "AAC 64k"
 
-#: core/song.cpp:426
+#: core/song.cpp:427
 msgid "AIFF"
 msgstr "AIFF"
 
@@ -506,7 +506,7 @@ msgstr "Přidat další proud..."
 msgid "Add directory..."
 msgstr "Přidat složku..."
 
-#: ui/mainwindow.cpp:2016
+#: ui/mainwindow.cpp:2026
 msgid "Add file"
 msgstr "Přidat soubor"
 
@@ -526,7 +526,7 @@ msgstr "Přidat soubor..."
 msgid "Add files to transcode"
 msgstr "Přidat soubory pro překódování"
 
-#: transcoder/transcodedialog.cpp:306 ui/mainwindow.cpp:2043
+#: transcoder/transcodedialog.cpp:306 ui/mainwindow.cpp:2053
 #: ripper/ripcddialog.cpp:185
 msgid "Add folder"
 msgstr "Přidat složku"
@@ -631,7 +631,7 @@ msgstr "Přidat do seznamů skladeb Spotify"
 msgid "Add to Spotify starred"
 msgstr "Přidat do Spotify s hvězdičkou"
 
-#: ui/mainwindow.cpp:1817
+#: ui/mainwindow.cpp:1827
 msgid "Add to another playlist"
 msgstr "Přidat do jiného seznamu skladeb"
 
@@ -682,7 +682,7 @@ msgid "After copying..."
 msgstr "Po zkopírování..."
 
 #: library/savedgroupingmanager.cpp:65 playlist/playlist.cpp:1331
-#: ui/organisedialog.cpp:61 ui/qtsystemtrayicon.cpp:251
+#: ui/organisedialog.cpp:64 ui/qtsystemtrayicon.cpp:251
 #: ../bin/src/ui_groupbydialog.h:128 ../bin/src/ui_groupbydialog.h:147
 #: ../bin/src/ui_groupbydialog.h:166 ../bin/src/ui_albumcoversearcher.h:110
 #: ../bin/src/ui_albumcoversearcher.h:112 ../bin/src/ui_edittagdialog.h:723
@@ -695,7 +695,7 @@ msgid "Album (ideal loudness for all tracks)"
 msgstr "Album (ideální hlasitost pro všechny skladby)"
 
 #: library/savedgroupingmanager.cpp:80 playlist/playlist.cpp:1345
-#: ui/organisedialog.cpp:64 ../bin/src/ui_groupbydialog.h:130
+#: ui/organisedialog.cpp:67 ../bin/src/ui_groupbydialog.h:130
 #: ../bin/src/ui_groupbydialog.h:149 ../bin/src/ui_groupbydialog.h:168
 #: ../bin/src/ui_edittagdialog.h:725
 msgid "Album artist"
@@ -821,8 +821,8 @@ msgstr "Vzhled"
 msgid "Append files/URLs to the playlist"
 msgstr "Přidat soubory/adresy do seznamu skladeb"
 
-#: devices/deviceview.cpp:218 globalsearch/globalsearchview.cpp:453
-#: internet/core/internetservice.cpp:48 library/libraryview.cpp:378
+#: devices/deviceview.cpp:218 globalsearch/globalsearchview.cpp:454
+#: internet/core/internetservice.cpp:48 library/libraryview.cpp:383
 #: widgets/fileviewlist.cpp:31
 msgid "Append to current playlist"
 msgstr "Přidat do současného seznamu skladeb"
@@ -851,7 +851,7 @@ msgid ""
 msgstr "Opravdu chcete ukládat statistiky písní do souboru písně u všech písní ve vaší sbírce?"
 
 #: library/savedgroupingmanager.cpp:62 playlist/playlist.cpp:1329
-#: ui/organisedialog.cpp:62 ui/qtsystemtrayicon.cpp:249
+#: ui/organisedialog.cpp:65 ui/qtsystemtrayicon.cpp:249
 #: ../bin/src/ui_groupbydialog.h:129 ../bin/src/ui_groupbydialog.h:148
 #: ../bin/src/ui_groupbydialog.h:167 ../bin/src/ui_albumcoversearcher.h:106
 #: ../bin/src/ui_albumcoversearcher.h:108 ../bin/src/ui_edittagdialog.h:721
@@ -859,11 +859,11 @@ msgstr "Opravdu chcete ukládat statistiky písní do souboru písně u všech p
 msgid "Artist"
 msgstr "Umělec"
 
-#: ui/mainwindow.cpp:282
+#: ui/mainwindow.cpp:283
 msgid "Artist info"
 msgstr "Umělec"
 
-#: ui/organisedialog.cpp:63
+#: ui/organisedialog.cpp:66
 msgid "Artist's initial"
 msgstr "Začáteční písmena umělce"
 
@@ -883,8 +883,8 @@ msgstr "Zvukový výstup"
 
 #: internet/digitally/digitallyimportedsettingspage.cpp:82
 #: internet/magnatune/magnatunesettingspage.cpp:117
-#: internet/lastfm/lastfmservice.cpp:249
-#: internet/lastfm/lastfmsettingspage.cpp:97
+#: internet/lastfm/lastfmservice.cpp:268
+#: internet/lastfm/lastfmsettingspage.cpp:76
 msgid "Authentication failed"
 msgstr "Ověření selhalo"
 
@@ -930,7 +930,7 @@ msgstr "Průměrná velikost obrázku"
 msgid "BBC Podcasts"
 msgstr "Záznamy BBC"
 
-#: playlist/playlist.cpp:1365 ui/organisedialog.cpp:71
+#: playlist/playlist.cpp:1365 ui/organisedialog.cpp:74
 #: ../bin/src/ui_edittagdialog.h:704
 msgid "BPM"
 msgstr "ÚZM"
@@ -1002,7 +1002,7 @@ msgstr "Datový tok"
 msgid "Bitrate"
 msgstr "Datový tok"
 
-#: ui/organisedialog.cpp:77
+#: ui/organisedialog.cpp:80
 msgctxt "Refers to bitrate in file organise dialog."
 msgid "Bitrate"
 msgstr "Datový tok"
@@ -1057,7 +1057,7 @@ msgstr "Ale tyto zdroje jsou zakázány:"
 msgid "Buttons"
 msgstr "Tlačítka"
 
-#: core/song.cpp:432
+#: core/song.cpp:433
 msgid "CDDA"
 msgstr "CDDA"
 
@@ -1123,7 +1123,7 @@ msgstr "Podívat se po nových dílech"
 msgid "Check for updates"
 msgstr "Podívat se po aktualizacích"
 
-#: ui/mainwindow.cpp:802
+#: ui/mainwindow.cpp:809
 msgid "Check for updates..."
 msgstr "Zkontrolovat aktualizace"
 
@@ -1251,11 +1251,7 @@ msgstr "Clementine se pro tento soubor výsledky najít nepodařilo"
 msgid "Clementine will find music in:"
 msgstr "Clementine bude hledat hudbu v:"
 
-#: internet/lastfm/lastfmsettingspage.cpp:78
-msgid "Click Ok once you authenticated Clementine in your last.fm account."
-msgstr "Klepněte na OK, jakmile jste Clementine ověřil pro svůj účet u Last.fm."
-
-#: library/libraryview.cpp:359
+#: library/libraryview.cpp:364
 msgid "Click here to add some music"
 msgstr "Klepněte sem pro přidání nějaké hudby"
 
@@ -1317,7 +1313,7 @@ msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Čárkou oddělený seznam class:level, level je 0-3"
 
 #: playlist/playlist.cpp:1384 smartplaylists/searchterm.cpp:370
-#: ui/organisedialog.cpp:75 ../bin/src/ui_edittagdialog.h:718
+#: ui/organisedialog.cpp:78 ../bin/src/ui_edittagdialog.h:718
 msgid "Comment"
 msgstr "Poznámka"
 
@@ -1330,7 +1326,7 @@ msgid "Complete tags automatically..."
 msgstr "Doplnit značky automaticky..."
 
 #: library/savedgroupingmanager.cpp:74 playlist/playlist.cpp:1347
-#: ui/organisedialog.cpp:65 ../bin/src/ui_groupbydialog.h:131
+#: ui/organisedialog.cpp:68 ../bin/src/ui_groupbydialog.h:131
 #: ../bin/src/ui_groupbydialog.h:150 ../bin/src/ui_groupbydialog.h:169
 msgid "Composer"
 msgstr "Skladatel"
@@ -1360,11 +1356,11 @@ msgstr "Nastavit Spotify..."
 msgid "Configure Subsonic..."
 msgstr "Nastavit Subsonic..."
 
-#: globalsearch/globalsearchview.cpp:149 globalsearch/globalsearchview.cpp:473
+#: globalsearch/globalsearchview.cpp:151 globalsearch/globalsearchview.cpp:480
 msgid "Configure global search..."
 msgstr "Nastavit celkové hledání..."
 
-#: ui/mainwindow.cpp:651
+#: ui/mainwindow.cpp:652
 msgid "Configure library..."
 msgstr "Nastavit sbírku..."
 
@@ -1435,12 +1431,12 @@ msgstr "Převést soubory v bezztrátovém formátu"
 msgid "Copy to clipboard"
 msgstr "Kopírovat do schránky"
 
-#: library/libraryview.cpp:409 internet/podcasts/podcastservice.cpp:438
-#: ui/mainwindow.cpp:701 widgets/fileviewlist.cpp:44
+#: library/libraryview.cpp:416 internet/podcasts/podcastservice.cpp:438
+#: ui/mainwindow.cpp:708 widgets/fileviewlist.cpp:44
 msgid "Copy to device..."
 msgstr "Zkopírovat do zařízení..."
 
-#: devices/deviceview.cpp:228 ui/mainwindow.cpp:691
+#: devices/deviceview.cpp:228 ui/mainwindow.cpp:698
 #: widgets/fileviewlist.cpp:40
 msgid "Copy to library..."
 msgstr "Zkopírovat do sbírky..."
@@ -1470,6 +1466,10 @@ msgstr "Nepodařilo se zjistit zvukový proud v %1"
 #: songinfo/streamdiscoverer.cpp:123
 msgid "Could not get details"
 msgstr "Nepodařilo se získat podrobnosti"
+
+#: internet/lastfm/lastfmsettingspage.cpp:75
+msgid "Could not log in to Last.fm. Please try again."
+msgstr "Nepodařilo se přihlásit se k Last.fm. Zkuste to, prosím, znovu.."
 
 #: playlist/playlistmanager.cpp:166
 msgid "Couldn't create playlist"
@@ -1569,8 +1569,8 @@ msgid "Custom..."
 msgstr "Vlastní..."
 
 #: devices/devicekitlister.cpp:125 devices/udisks2lister.cpp:76
-msgid "DBus path"
-msgstr "Cesta k DBus"
+msgid "D-Bus path"
+msgstr "Cesta k D-Bus"
 
 #: ui/equalizer.cpp:116
 msgid "Dance"
@@ -1637,8 +1637,8 @@ msgstr "Smazat"
 msgid "Delete downloaded data"
 msgstr "Smazat stažená data"
 
-#: devices/deviceview.cpp:408 library/libraryview.cpp:645
-#: ui/mainwindow.cpp:2370 widgets/fileview.cpp:188
+#: devices/deviceview.cpp:408 library/libraryview.cpp:666
+#: ui/mainwindow.cpp:2380 widgets/fileview.cpp:188
 msgid "Delete files"
 msgstr "Smazat soubory"
 
@@ -1646,7 +1646,7 @@ msgstr "Smazat soubory"
 msgid "Delete from device..."
 msgstr "Smazat ze zařízení..."
 
-#: library/libraryview.cpp:411 ui/mainwindow.cpp:704
+#: library/libraryview.cpp:419 ui/mainwindow.cpp:711
 #: widgets/fileviewlist.cpp:47
 msgid "Delete from disk..."
 msgstr "Smazat z disku..."
@@ -1659,7 +1659,7 @@ msgstr "Smazat přehrané díly"
 msgid "Delete preset"
 msgstr "Smazat předvolbu"
 
-#: library/libraryview.cpp:401
+#: library/libraryview.cpp:408
 msgid "Delete smart playlist"
 msgstr "Smazat chytrý seznam skladeb"
 
@@ -1675,11 +1675,11 @@ msgstr "Probíhá mazání souborů"
 msgid "Depth"
 msgstr "Hloubka"
 
-#: ui/mainwindow.cpp:1738
+#: ui/mainwindow.cpp:1748
 msgid "Dequeue selected tracks"
 msgstr "Odstranit vybrané skladby z řady"
 
-#: ui/mainwindow.cpp:1736
+#: ui/mainwindow.cpp:1746
 msgid "Dequeue track"
 msgstr "Odstranit skladbu z řady"
 
@@ -1708,7 +1708,7 @@ msgstr "Název zařízení"
 msgid "Device properties..."
 msgstr "Vlastnosti zařízení..."
 
-#: ui/mainwindow.cpp:275
+#: ui/mainwindow.cpp:276
 msgid "Devices"
 msgstr "Zařízení"
 
@@ -1760,7 +1760,7 @@ msgid "Disabled"
 msgstr "Zakázáno"
 
 #: library/savedgroupingmanager.cpp:95 playlist/playlist.cpp:1337
-#: ui/organisedialog.cpp:70 ../bin/src/ui_groupbydialog.h:139
+#: ui/organisedialog.cpp:73 ../bin/src/ui_groupbydialog.h:139
 #: ../bin/src/ui_groupbydialog.h:158 ../bin/src/ui_groupbydialog.h:177
 #: ../bin/src/ui_edittagdialog.h:722 ../bin/src/ui_ripcddialog.h:313
 msgid "Disc"
@@ -1812,7 +1812,7 @@ msgstr "Úplné znovuprohledání povede ke ztrátě popisných dat uložených 
 msgid "Don't repeat"
 msgstr "Neopakovat"
 
-#: library/libraryview.cpp:429
+#: library/libraryview.cpp:436
 msgid "Don't show in various artists"
 msgstr "Nezobrazovat pod různými umělci"
 
@@ -1947,11 +1947,11 @@ msgstr "Je zapnut dynamický režim"
 msgid "Dynamic random mix"
 msgstr "Dynamický náhodný výběr"
 
-#: library/libraryview.cpp:398
+#: library/libraryview.cpp:405
 msgid "Edit smart playlist..."
 msgstr "Upravit chytrý seznam skladeb..."
 
-#: ui/mainwindow.cpp:1780
+#: ui/mainwindow.cpp:1790
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr "Upravit značku \"%1\"..."
@@ -1968,12 +1968,12 @@ msgstr "Upravit značky"
 msgid "Edit track information"
 msgstr "Upravit informace o skladbě"
 
-#: library/libraryview.cpp:416 widgets/fileviewlist.cpp:51
+#: library/libraryview.cpp:424 widgets/fileviewlist.cpp:51
 #: ../bin/src/ui_mainwindow.h:685
 msgid "Edit track information..."
 msgstr "Upravit informace o skladbě..."
 
-#: library/libraryview.cpp:419
+#: library/libraryview.cpp:427
 msgid "Edit tracks information..."
 msgstr "Upravit informace o skladbách..."
 
@@ -2086,8 +2086,8 @@ msgid "Equivalent to --log-levels *:3"
 msgstr "Rovnocenné s --log-levels *:3"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:246
-#: library/libraryview.cpp:639 ui/mainwindow.cpp:2072 ui/mainwindow.cpp:2322
-#: ui/mainwindow.cpp:2481
+#: library/libraryview.cpp:660 ui/mainwindow.cpp:2082 ui/mainwindow.cpp:2332
+#: ui/mainwindow.cpp:2491
 msgid "Error"
 msgstr "Chyba"
 
@@ -2209,6 +2209,7 @@ msgstr "Uložení dokončeno"
 msgid "Exported %1 covers out of %2 (%3 skipped)"
 msgstr "Uloženo %1 obalů z %2 (%3 přeskočeno)"
 
+#: core/song.cpp:411 transcoder/transcoder.cpp:233
 #: ../bin/src/ui_magnatunedownloaddialog.h:136
 #: ../bin/src/ui_magnatunesettingspage.h:170
 #: ../bin/src/ui_transcodersettingspage.h:176
@@ -2232,7 +2233,7 @@ msgstr "Slábnutí"
 msgid "Fading duration"
 msgstr "Doba slábnutí"
 
-#: ui/mainwindow.cpp:2073
+#: ui/mainwindow.cpp:2083
 msgid "Failed reading CD drive"
 msgstr "Nepodařilo se číst z CD v mechanice"
 
@@ -2303,7 +2304,7 @@ msgstr "Chyba při stahování obalu"
 msgid "File Format"
 msgstr "Souborový formát"
 
-#: ui/organisedialog.cpp:79
+#: ui/organisedialog.cpp:82
 msgid "File extension"
 msgstr "Přípona souboru"
 
@@ -2337,7 +2338,7 @@ msgstr "Typ souboru"
 msgid "Filename"
 msgstr "Název souboru"
 
-#: ui/mainwindow.cpp:265
+#: ui/mainwindow.cpp:266
 msgid "Files"
 msgstr "Soubory"
 
@@ -2364,10 +2365,6 @@ msgstr "První úroveň"
 #: widgets/nowplayingwidget.cpp:110
 msgid "Fit cover to width"
 msgstr "Přizpůsobit obal šířce"
-
-#: core/song.cpp:410 transcoder/transcoder.cpp:233
-msgid "Flac"
-msgstr "FLAC"
 
 #: ../bin/src/ui_songinfosettingspage.h:155
 msgid "Font size"
@@ -2400,7 +2397,7 @@ msgstr "Zařízení bude odstraněno z tohoto seznamu. Po opětovném připojen�
 #: ../bin/src/ui_libraryviewcontainer.h:58
 #: ../bin/src/ui_playlistcontainer.h:134
 #: ../bin/src/ui_playlistlistcontainer.h:125
-#: ../bin/src/ui_podcastinfowidget.h:190 ../bin/src/ui_querysearchpage.h:111
+#: ../bin/src/ui_podcastinfowidget.h:190 ../bin/src/ui_querysearchpage.h:108
 #: ../bin/src/ui_querysortpage.h:136 ../bin/src/ui_searchpreview.h:103
 #: ../bin/src/ui_searchtermwidget.h:267 ../bin/src/ui_wizardfinishpage.h:82
 #: ../bin/src/ui_songkickconcertwidget.h:99
@@ -2463,7 +2460,7 @@ msgid "General settings"
 msgstr "Obecná nastavení"
 
 #: library/savedgroupingmanager.cpp:77 playlist/playlist.cpp:1343
-#: ui/organisedialog.cpp:74 ../bin/src/ui_groupbydialog.h:133
+#: ui/organisedialog.cpp:77 ../bin/src/ui_groupbydialog.h:133
 #: ../bin/src/ui_groupbydialog.h:152 ../bin/src/ui_groupbydialog.h:171
 #: ../bin/src/ui_ripcddialog.h:316
 msgid "Genre"
@@ -2521,7 +2518,7 @@ msgstr "Nechat zešedivět neexistující písně v mých seznamech skladeb"
 msgid "Group Library by..."
 msgstr "Seskupovat v hudební sbírce podle..."
 
-#: globalsearch/globalsearchview.cpp:470 library/libraryfilterwidget.cpp:98
+#: globalsearch/globalsearchview.cpp:477 library/libraryfilterwidget.cpp:98
 msgid "Group by"
 msgstr "Seskupovat podle"
 
@@ -2554,7 +2551,7 @@ msgid "Group by Genre/Artist/Album"
 msgstr "Seskupovat podle žánru/umělce/alba"
 
 #: library/savedgroupingmanager.cpp:89 playlist/playlist.cpp:1351
-#: ui/organisedialog.cpp:67 ../bin/src/ui_groupbydialog.h:141
+#: ui/organisedialog.cpp:70 ../bin/src/ui_groupbydialog.h:141
 #: ../bin/src/ui_groupbydialog.h:160 ../bin/src/ui_groupbydialog.h:179
 msgid "Grouping"
 msgstr "Seskupení"
@@ -2690,7 +2687,7 @@ msgstr "Doručená pošta"
 msgid "Include album art in the notification"
 msgstr "Zahrnout obal alba do oznámení"
 
-#: ../bin/src/ui_querysearchpage.h:117
+#: ../bin/src/ui_querysearchpage.h:114
 msgid "Include all songs"
 msgstr "Zahrnout všechny písně"
 
@@ -2743,7 +2740,7 @@ msgstr "Nainstalován"
 msgid "Integrity check"
 msgstr "Ověření celistvosti"
 
-#: ui/mainwindow.cpp:271
+#: ui/mainwindow.cpp:272
 msgid "Internet"
 msgstr "Internet"
 
@@ -2760,7 +2757,7 @@ msgstr "Internetové služby"
 msgid "Intro tracks"
 msgstr "Skladby úvodu"
 
-#: internet/lastfm/lastfmservice.cpp:261
+#: internet/lastfm/lastfmservice.cpp:280
 msgid "Invalid API key"
 msgstr "Neplatný klíč API"
 
@@ -2768,27 +2765,27 @@ msgstr "Neplatný klíč API"
 msgid "Invalid URL"
 msgstr "Neplatná adresa (URL)"
 
-#: internet/lastfm/lastfmservice.cpp:251
+#: internet/lastfm/lastfmservice.cpp:270
 msgid "Invalid format"
 msgstr "Neplatný formát"
 
-#: internet/lastfm/lastfmservice.cpp:247
+#: internet/lastfm/lastfmservice.cpp:266
 msgid "Invalid method"
 msgstr "Neplatná metoda"
 
-#: internet/lastfm/lastfmservice.cpp:253
+#: internet/lastfm/lastfmservice.cpp:272
 msgid "Invalid parameters"
 msgstr "Neplatné parametry"
 
-#: internet/lastfm/lastfmservice.cpp:255
+#: internet/lastfm/lastfmservice.cpp:274
 msgid "Invalid resource specified"
 msgstr "Zadán neplatný zdroj"
 
-#: internet/lastfm/lastfmservice.cpp:245
+#: internet/lastfm/lastfmservice.cpp:264
 msgid "Invalid service"
 msgstr "Neplatná služba"
 
-#: internet/lastfm/lastfmservice.cpp:259
+#: internet/lastfm/lastfmservice.cpp:278
 msgid "Invalid session key"
 msgstr "Neplatný klíč sezení"
 
@@ -2898,15 +2895,11 @@ msgstr "Naposledy hráno"
 msgid "Last.fm"
 msgstr "Last.fm"
 
-#: internet/lastfm/lastfmsettingspage.cpp:77
-msgid "Last.fm authentication"
+#: internet/lastfm/lastfmservice.cpp:178
+msgid "Last.fm Authentication"
 msgstr "Ověření u Last.fm"
 
-#: internet/lastfm/lastfmsettingspage.cpp:70
-msgid "Last.fm authentication failed"
-msgstr "Ověření u Last.fm selhalo"
-
-#: internet/lastfm/lastfmservice.cpp:268
+#: internet/lastfm/lastfmservice.cpp:287
 msgid "Last.fm is currently busy, please try again in a few minutes"
 msgstr "Last.fm je nyní zaneprázdněno, prosím, zkuste to za pár minut znovu"
 
@@ -2930,12 +2923,12 @@ msgstr "Nejméně oblíbené skladby"
 msgid "Left"
 msgstr "Vlevo"
 
-#: playlist/playlist.cpp:1333 ui/organisedialog.cpp:76
+#: playlist/playlist.cpp:1333 ui/organisedialog.cpp:79
 #: ui/qtsystemtrayicon.cpp:254 ../bin/src/ui_edittagdialog.h:702
 msgid "Length"
 msgstr "Délka"
 
-#: ui/mainwindow.cpp:250 ui/mainwindow.cpp:262
+#: ui/mainwindow.cpp:251 ui/mainwindow.cpp:263
 #: ../bin/src/ui_seafilesettingspage.h:177
 msgid "Library"
 msgstr "Sbírka"
@@ -2944,7 +2937,7 @@ msgstr "Sbírka"
 msgid "Library advanced grouping"
 msgstr "Pokročilé seskupování sbírky"
 
-#: ui/mainwindow.cpp:2581
+#: ui/mainwindow.cpp:2611
 msgid "Library rescan notice"
 msgstr "Zpráva o prohledání sbírky"
 
@@ -3072,7 +3065,7 @@ msgstr "Nízké (256x256)"
 msgid "Low complexity profile (LC)"
 msgstr "Nízkosložitostní profil"
 
-#: ui/organisedialog.cpp:68 ../bin/src/ui_songinfosettingspage.h:158
+#: ui/organisedialog.cpp:71 ../bin/src/ui_songinfosettingspage.h:158
 msgid "Lyrics"
 msgstr "Texty písní"
 
@@ -3089,7 +3082,7 @@ msgstr "Text písně ze značky"
 msgid "M4A AAC"
 msgstr "M4A AAC"
 
-#: core/song.cpp:416 transcoder/transcoder.cpp:238
+#: core/song.cpp:417 transcoder/transcoder.cpp:238
 #: ../bin/src/ui_transcodersettingspage.h:174
 msgid "MP3"
 msgstr "MP3"
@@ -3102,11 +3095,11 @@ msgstr "MP3 256k"
 msgid "MP3 96k"
 msgstr "MP3 96k"
 
-#: core/song.cpp:412
+#: core/song.cpp:413
 msgid "MP4 AAC"
 msgstr "MP4 AAC"
 
-#: core/song.cpp:414
+#: core/song.cpp:415
 msgid "MPC"
 msgstr "MPC"
 
@@ -3140,7 +3133,7 @@ msgstr "Proveďte!"
 msgid "Make playlist available offline"
 msgstr "Zajistit, že seznam skladeb bude dostupný, i když počítač nebude připojen k internetu"
 
-#: internet/lastfm/lastfmservice.cpp:280
+#: internet/lastfm/lastfmservice.cpp:299
 msgid "Malformed response"
 msgstr "Poškozená odpověď"
 
@@ -3169,11 +3162,11 @@ msgstr "Označit jako poslechnuté"
 msgid "Mark as new"
 msgstr "Označit jako nové"
 
-#: ../bin/src/ui_querysearchpage.h:115
+#: ../bin/src/ui_querysearchpage.h:112
 msgid "Match every search term (AND)"
 msgstr "Porovnat všechny hledané výrazy (AND)"
 
-#: ../bin/src/ui_querysearchpage.h:116
+#: ../bin/src/ui_querysearchpage.h:113
 msgid "Match one or more search terms (OR)"
 msgstr "Porovnat jeden nebo více hledaných výrazů (OR)"
 
@@ -3261,7 +3254,7 @@ msgstr "Přípojné body"
 msgid "Move down"
 msgstr "Posunout dolů"
 
-#: ui/mainwindow.cpp:694 widgets/fileviewlist.cpp:42
+#: ui/mainwindow.cpp:701 widgets/fileviewlist.cpp:42
 msgid "Move to library..."
 msgstr "Přesunout do sbírky..."
 
@@ -3270,7 +3263,7 @@ msgstr "Přesunout do sbírky..."
 msgid "Move up"
 msgstr "Posunout nahoru"
 
-#: transcoder/transcodedialog.cpp:225 ui/mainwindow.cpp:2017
+#: transcoder/transcodedialog.cpp:225 ui/mainwindow.cpp:2027
 msgid "Music"
 msgstr "Hudba"
 
@@ -3328,11 +3321,11 @@ msgstr "Nikdy nezačít přehrávání"
 msgid "New folder"
 msgstr "Nová složka"
 
-#: ui/mainwindow.cpp:1834 ../bin/src/ui_mainwindow.h:709
+#: ui/mainwindow.cpp:1844 ../bin/src/ui_mainwindow.h:709
 msgid "New playlist"
 msgstr "Nový seznam skladeb"
 
-#: library/libraryview.cpp:395
+#: library/libraryview.cpp:402
 msgid "New smart playlist..."
 msgstr "Nový chytrý seznam skladeb..."
 
@@ -3395,7 +3388,7 @@ msgstr "Žádné krátké bloky"
 msgid "None"
 msgstr "Žádná"
 
-#: library/libraryview.cpp:640 ui/mainwindow.cpp:2323 ui/mainwindow.cpp:2482
+#: library/libraryview.cpp:661 ui/mainwindow.cpp:2333 ui/mainwindow.cpp:2492
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Žádná z vybraných písní nebyla vhodná ke zkopírování do zařízení"
 
@@ -3415,19 +3408,19 @@ msgstr "Není dostupné během používání dynamického seznamu skladeb"
 msgid "Not connected"
 msgstr "Nepřipojeno"
 
-#: internet/lastfm/lastfmservice.cpp:271
+#: internet/lastfm/lastfmservice.cpp:290
 msgid "Not enough content"
 msgstr "Nedostatek obsahu"
 
-#: internet/lastfm/lastfmservice.cpp:275
+#: internet/lastfm/lastfmservice.cpp:294
 msgid "Not enough fans"
 msgstr "Nedostatek nadšených obdivovatelů"
 
-#: internet/lastfm/lastfmservice.cpp:273
+#: internet/lastfm/lastfmservice.cpp:292
 msgid "Not enough members"
 msgstr "Nedostatek členů"
 
-#: internet/lastfm/lastfmservice.cpp:277
+#: internet/lastfm/lastfmservice.cpp:296
 msgid "Not enough neighbors"
 msgstr "Nedostatek sousedů"
 
@@ -3468,19 +3461,23 @@ msgstr "Náhled OSD"
 msgid "Off"
 msgstr "Vypnuto"
 
-#: core/song.cpp:418 transcoder/transcoder.cpp:244
+#: core/song.cpp:419
+msgid "Ogg FLAC"
+msgstr "Ogg FLAC"
+
+#: transcoder/transcoder.cpp:244
 msgid "Ogg Flac"
 msgstr "Ogg FLAC"
 
-#: core/song.cpp:424 transcoder/transcoder.cpp:250
+#: core/song.cpp:425 transcoder/transcoder.cpp:250
 msgid "Ogg Opus"
 msgstr "Ogg Opus"
 
-#: core/song.cpp:420 transcoder/transcoder.cpp:247
+#: core/song.cpp:421 transcoder/transcoder.cpp:247
 msgid "Ogg Speex"
 msgstr "Ogg Speex"
 
-#: core/song.cpp:422 transcoder/transcoder.cpp:241
+#: core/song.cpp:423 transcoder/transcoder.cpp:241
 #: ../bin/src/ui_magnatunedownloaddialog.h:135
 #: ../bin/src/ui_magnatunesettingspage.h:169
 msgid "Ogg Vorbis"
@@ -3553,8 +3550,8 @@ msgstr "Otevřít soubor"
 msgid "Open in Google Drive"
 msgstr "Otevřít v Google Drive"
 
-#: devices/deviceview.cpp:224 globalsearch/globalsearchview.cpp:461
-#: internet/core/internetservice.cpp:62 library/libraryview.cpp:384
+#: devices/deviceview.cpp:224 globalsearch/globalsearchview.cpp:460
+#: internet/core/internetservice.cpp:62 library/libraryview.cpp:389
 #: widgets/fileviewlist.cpp:36
 msgid "Open in new playlist"
 msgstr "Otevřít v novém seznamu skladeb"
@@ -3573,7 +3570,7 @@ msgstr "Otevřít v prohlížeči"
 msgid "Open..."
 msgstr "Otevřít..."
 
-#: internet/lastfm/lastfmservice.cpp:257
+#: internet/lastfm/lastfmservice.cpp:276
 msgid "Operation failed"
 msgstr "Operace se nezdařila"
 
@@ -3599,7 +3596,7 @@ msgstr "Opus"
 msgid "Organise Files"
 msgstr "Uspořádat soubory"
 
-#: library/libraryview.cpp:405 ui/mainwindow.cpp:697
+#: library/libraryview.cpp:413 ui/mainwindow.cpp:704
 msgid "Organise files..."
 msgstr "Uspořádat soubory..."
 
@@ -3612,7 +3609,7 @@ msgid "Original tags"
 msgstr "Původní značky"
 
 #: library/savedgroupingmanager.cpp:101 playlist/playlist.cpp:1341
-#: ui/organisedialog.cpp:73 ../bin/src/ui_groupbydialog.h:135
+#: ui/organisedialog.cpp:76 ../bin/src/ui_groupbydialog.h:135
 #: ../bin/src/ui_groupbydialog.h:154 ../bin/src/ui_groupbydialog.h:173
 msgid "Original year"
 msgstr "Původní rok"
@@ -3683,7 +3680,7 @@ msgstr "Oslava"
 msgid "Password"
 msgstr "Heslo"
 
-#: core/globalshortcuts.cpp:50 ui/mainwindow.cpp:1141 ui/mainwindow.cpp:1641
+#: core/globalshortcuts.cpp:50 ui/mainwindow.cpp:1148 ui/mainwindow.cpp:1648
 #: ui/qtsystemtrayicon.cpp:189 wiimotedev/wiimotesettingspage.cpp:114
 msgid "Pause"
 msgstr "Pozastavit"
@@ -3697,7 +3694,7 @@ msgid "Paused"
 msgstr "Pozastaveno"
 
 #: library/savedgroupingmanager.cpp:86 playlist/playlist.cpp:1349
-#: ui/organisedialog.cpp:66 ../bin/src/ui_groupbydialog.h:140
+#: ui/organisedialog.cpp:69 ../bin/src/ui_groupbydialog.h:140
 #: ../bin/src/ui_groupbydialog.h:159 ../bin/src/ui_groupbydialog.h:178
 #: ../bin/src/ui_edittagdialog.h:727
 msgid "Performer"
@@ -3711,8 +3708,8 @@ msgstr "Pixel"
 msgid "Plain sidebar"
 msgstr "Prostý postranní panel"
 
-#: core/globalshortcuts.cpp:49 ui/mainwindow.cpp:668 ui/mainwindow.cpp:1107
-#: ui/mainwindow.cpp:1126 ui/mainwindow.cpp:1645 ui/qtsystemtrayicon.cpp:177
+#: core/globalshortcuts.cpp:49 ui/mainwindow.cpp:669 ui/mainwindow.cpp:1114
+#: ui/mainwindow.cpp:1133 ui/mainwindow.cpp:1652 ui/qtsystemtrayicon.cpp:177
 #: ui/qtsystemtrayicon.cpp:203 wiimotedev/wiimotesettingspage.cpp:107
 #: ../bin/src/ui_mainwindow.h:675
 msgid "Play"
@@ -3766,13 +3763,18 @@ msgstr "Nastavení seznamu skladeb"
 msgid "Playlist type"
 msgstr "Typ seznamu skladeb"
 
-#: internet/soundcloud/soundcloudservice.cpp:133 ui/mainwindow.cpp:268
+#: internet/soundcloud/soundcloudservice.cpp:133 ui/mainwindow.cpp:269
 msgid "Playlists"
 msgstr "Seznamy"
 
 #: ../data/oauthsuccess.html:38
 msgid "Please close your browser and return to Clementine."
 msgstr "Zavřete, prosím, svůj prohlížeč a vraťte se do Clementine."
+
+#: internet/lastfm/lastfmservice.cpp:178
+#, qt-format
+msgid "Please open this URL in your browser: <a href=\"%1\">%1</a>"
+msgstr "Otevřete, prosím, tuto adresu (URL) ve svém prohlížeči: <a href=\"%1\">%1</a>"
 
 #: ../bin/src/ui_spotifysettingspage.h:213
 msgid "Plugin status:"
@@ -3926,12 +3928,12 @@ msgstr "Dotazování se zařízení..."
 msgid "Queue Manager"
 msgstr "Správce řady"
 
-#: ui/mainwindow.cpp:1742
+#: ui/mainwindow.cpp:1752
 msgid "Queue selected tracks"
 msgstr "Přidat vybrané skladby do řady"
 
-#: globalsearch/globalsearchview.cpp:466 library/libraryview.cpp:389
-#: ui/mainwindow.cpp:1740
+#: globalsearch/globalsearchview.cpp:464 library/libraryview.cpp:393
+#: ui/mainwindow.cpp:1750
 msgid "Queue track"
 msgstr "Přidat skladbu do řady"
 
@@ -4104,7 +4106,7 @@ msgid "Repeat track"
 msgstr "Opakovat skladbu"
 
 #: devices/deviceview.cpp:221 globalsearch/globalsearchview.cpp:457
-#: internet/core/internetservice.cpp:55 library/libraryview.cpp:381
+#: internet/core/internetservice.cpp:55 library/libraryview.cpp:386
 #: widgets/fileviewlist.cpp:34
 msgid "Replace current playlist"
 msgstr "Nahradit současný seznam skladeb"
@@ -4210,7 +4212,7 @@ msgstr "Po dokončení kopírování bezpečně odebrat zařízení"
 msgid "Sample rate"
 msgstr "Vzorkovací kmitočet"
 
-#: ui/organisedialog.cpp:78
+#: ui/organisedialog.cpp:81
 msgid "Samplerate"
 msgstr "Vzorkovací frekvence"
 
@@ -4306,7 +4308,7 @@ msgstr "Seafile"
 msgid "Search"
 msgstr "Hledat"
 
-#: ui/mainwindow.cpp:259 ../bin/src/ui_globalsearchsettingspage.h:141
+#: ui/mainwindow.cpp:260 ../bin/src/ui_globalsearchsettingspage.h:141
 msgctxt "Global search settings dialog title."
 msgid "Search"
 msgstr "Hledat"
@@ -4331,6 +4333,10 @@ msgstr "Vyhledat Subsonic"
 msgid "Search automatically"
 msgstr "Hledat automaticky"
 
+#: ui/mainwindow.cpp:685
+msgid "Search for album"
+msgstr "Hledat album"
+
 #: ui/albumcoverchoicecontroller.cpp:69
 msgid "Search for album covers..."
 msgstr "Hledat obaly alb..."
@@ -4338,6 +4344,14 @@ msgstr "Hledat obaly alb..."
 #: ../bin/src/ui_globalsearchview.h:207
 msgid "Search for anything"
 msgstr "Hledat vše"
+
+#: ui/mainwindow.cpp:682
+msgid "Search for artist"
+msgstr "Hledat umělce"
+
+#: globalsearch/globalsearchview.cpp:473 library/libraryview.cpp:398
+msgid "Search for this"
+msgstr "Hledat toto"
 
 #: ../bin/src/ui_gpoddersearchpage.h:72
 msgid "Search gpodder.net"
@@ -4347,7 +4361,7 @@ msgstr "Hledat na gpodder.net"
 msgid "Search iTunes"
 msgstr "Hledat na iTunes"
 
-#: ../bin/src/ui_querysearchpage.h:112
+#: ../bin/src/ui_querysearchpage.h:109
 msgid "Search mode"
 msgstr "Režim vyhledávání"
 
@@ -4361,7 +4375,7 @@ msgid "Search results"
 msgstr "Hledat výsledky"
 
 #: smartplaylists/querywizardplugin.cpp:155
-#: ../bin/src/ui_querysearchpage.h:119
+#: ../bin/src/ui_querysearchpage.h:116
 msgid "Search terms"
 msgstr "Hledané výrazy"
 
@@ -4445,11 +4459,11 @@ msgstr "Adresa serveru (URL)"
 msgid "Server details"
 msgstr "Podrobnosti o serveru"
 
-#: internet/lastfm/lastfmservice.cpp:263
+#: internet/lastfm/lastfmservice.cpp:282
 msgid "Service offline"
 msgstr "Služba není dostupná"
 
-#: ui/mainwindow.cpp:1779
+#: ui/mainwindow.cpp:1789
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr "Nastavit %1 na \"%2\"..."
@@ -4525,7 +4539,7 @@ msgstr "Ukazovat OSD"
 msgid "Show above status bar"
 msgstr "Ukazovat nad stavovým řádkem"
 
-#: ui/mainwindow.cpp:635
+#: ui/mainwindow.cpp:636
 msgid "Show all songs"
 msgstr "Ukázat všechny písně"
 
@@ -4545,16 +4559,16 @@ msgstr "Ukazovat oddělovače"
 msgid "Show fullsize..."
 msgstr "Ukázat v plné velikosti..."
 
-#: library/libraryview.cpp:423 ui/mainwindow.cpp:707
+#: library/libraryview.cpp:430 ui/mainwindow.cpp:714
 #: widgets/fileviewlist.cpp:53
 msgid "Show in file browser..."
 msgstr "Ukázat v prohlížeči souborů..."
 
-#: ui/mainwindow.cpp:709
+#: ui/mainwindow.cpp:716
 msgid "Show in library..."
 msgstr "Ukazovat ve sbírce..."
 
-#: library/libraryview.cpp:426
+#: library/libraryview.cpp:433
 msgid "Show in various artists"
 msgstr "Ukázat pod různými umělci"
 
@@ -4562,11 +4576,11 @@ msgstr "Ukázat pod různými umělci"
 msgid "Show moodbar"
 msgstr "Ukázat náladový proužek"
 
-#: ui/mainwindow.cpp:637
+#: ui/mainwindow.cpp:638
 msgid "Show only duplicates"
 msgstr "Ukázat pouze zdvojené"
 
-#: ui/mainwindow.cpp:639
+#: ui/mainwindow.cpp:640
 msgid "Show only untagged"
 msgstr "Ukázat pouze neoznačené"
 
@@ -4658,11 +4672,11 @@ msgstr "Počet přeskočení"
 msgid "Skip forwards in playlist"
 msgstr "Další skladba v seznamu skladeb"
 
-#: ui/mainwindow.cpp:1753
+#: ui/mainwindow.cpp:1763
 msgid "Skip selected tracks"
 msgstr "Přeskočit vybrané skladby"
 
-#: ui/mainwindow.cpp:1751
+#: ui/mainwindow.cpp:1761
 msgid "Skip track"
 msgstr "Přeskočit skladbu"
 
@@ -4678,7 +4692,7 @@ msgstr "Malý postranní panel"
 msgid "Smart playlist"
 msgstr "Chytrý seznam skladeb"
 
-#: library/librarymodel.cpp:1364
+#: library/librarymodel.cpp:1367
 msgid "Smart playlists"
 msgstr "Chytré seznamy skladeb"
 
@@ -4694,7 +4708,7 @@ msgstr "Soft rock"
 msgid "Song Information"
 msgstr "Informace o písni"
 
-#: ui/mainwindow.cpp:279
+#: ui/mainwindow.cpp:280
 msgid "Song info"
 msgstr "Píseň"
 
@@ -4821,7 +4835,7 @@ msgstr "Zastavit po každé skladbě"
 msgid "Stop after every track"
 msgstr "Zastavit po každé skladbě"
 
-#: ui/mainwindow.cpp:672 ../bin/src/ui_mainwindow.h:679
+#: ui/mainwindow.cpp:673 ../bin/src/ui_mainwindow.h:679
 msgid "Stop after this track"
 msgstr "Zastavit po této skladbě"
 
@@ -4846,7 +4860,7 @@ msgstr "Zastavit přehrávání po skladbě: %1"
 msgid "Stopped"
 msgstr "Zastaveno"
 
-#: core/song.cpp:435
+#: core/song.cpp:436
 msgid "Stream"
 msgstr "Proud"
 
@@ -4985,13 +4999,13 @@ msgid ""
 "license key. Visit subsonic.org for details."
 msgstr "Lhůta na vyzkoušení serveru Subsonic uplynula. Dejte, prosím, dar, abyste dostali licenční klíč. Navštivte subsonic.org kvůli podrobnostem."
 
-#: ui/mainwindow.cpp:2572
+#: ui/mainwindow.cpp:2602
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
 msgstr "Verze Clementine, na kterou jste právě povýšili, vyžaduje z důvodu nových vlastností vypsaných níže úplné nové prohledání sbírky:"
 
-#: library/libraryview.cpp:562
+#: library/libraryview.cpp:582
 msgid "There are other songs in this album"
 msgstr "Na tomto albu jsou další písně"
 
@@ -5027,7 +5041,7 @@ msgid ""
 "continue?"
 msgstr "Tyto soubory budou smazány ze zařízení. Opravdu chcete pokračovat?"
 
-#: library/libraryview.cpp:646 ui/mainwindow.cpp:2371 widgets/fileview.cpp:189
+#: library/libraryview.cpp:667 ui/mainwindow.cpp:2381 widgets/fileview.cpp:189
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -5098,7 +5112,7 @@ msgstr "Toto zařízení bylo připojeno poprvé. Clementine na něm nyní hled�
 msgid "This option can be changed in the \"Behavior\" preferences"
 msgstr "Tuto volbu lze změnit v nastavení Chování"
 
-#: internet/lastfm/lastfmservice.cpp:265
+#: internet/lastfm/lastfmservice.cpp:284
 msgid "This stream is for paid subscribers only"
 msgstr "Tento proud je pouze pro předplatitele"
 
@@ -5111,7 +5125,7 @@ msgstr "Tento typ zařízení není podporován: %1"
 msgid "Time step"
 msgstr "Časový krok"
 
-#: playlist/playlist.cpp:1327 ui/organisedialog.cpp:60
+#: playlist/playlist.cpp:1327 ui/organisedialog.cpp:63
 #: ui/qtsystemtrayicon.cpp:247 ../bin/src/ui_about.h:141
 #: ../bin/src/ui_edittagdialog.h:719 ../bin/src/ui_trackselectiondialog.h:210
 #: ../bin/src/ui_ripcddialog.h:306
@@ -5130,7 +5144,7 @@ msgstr "Přepnout OSD"
 msgid "Toggle fullscreen"
 msgstr "Zapnout/Vypnout zobrazení na celou obrazovku"
 
-#: ui/mainwindow.cpp:1744
+#: ui/mainwindow.cpp:1754
 msgid "Toggle queue status"
 msgstr "Přepnout stav řady"
 
@@ -5174,7 +5188,7 @@ msgstr "Celkem uskutečněno síťových požadavků"
 msgid "Trac&k"
 msgstr "Skla&dby"
 
-#: playlist/playlist.cpp:1335 ui/organisedialog.cpp:69
+#: playlist/playlist.cpp:1335 ui/organisedialog.cpp:72
 #: ../bin/src/ui_trackselectiondialog.h:212 ../bin/src/ui_ripcddialog.h:304
 msgid "Track"
 msgstr "Skladba"
@@ -5204,7 +5218,7 @@ msgstr "Převádí se %1 souborů s %2 procesy"
 msgid "Transcoding options"
 msgstr "Volby překódování"
 
-#: core/song.cpp:430
+#: core/song.cpp:431
 msgid "TrueAudio"
 msgstr "TrueAudio"
 
@@ -5246,8 +5260,8 @@ msgstr "Nelze se připojit"
 msgid "Unable to download %1 (%2)"
 msgstr "Nepodařilo se stáhnout %1 (%2)"
 
-#: core/song.cpp:439 library/librarymodel.cpp:374 library/librarymodel.cpp:379
-#: library/librarymodel.cpp:383 library/librarymodel.cpp:1156
+#: core/song.cpp:440 library/librarymodel.cpp:374 library/librarymodel.cpp:379
+#: library/librarymodel.cpp:383 library/librarymodel.cpp:1159
 #: library/savedgroupingmanager.cpp:103 playlist/playlistdelegates.cpp:305
 #: playlist/playlistmanager.cpp:522 playlist/playlistmanager.cpp:523
 #: songinfo/streamdiscoverer.cpp:87 ui/albumcoverchoicecontroller.cpp:126
@@ -5260,7 +5274,7 @@ msgid "Unknown content-type"
 msgstr "Neznámý typ obsahu"
 
 #: internet/digitally/digitallyimportedclient.cpp:74
-#: internet/lastfm/lastfmservice.cpp:284
+#: internet/lastfm/lastfmservice.cpp:303
 msgid "Unknown error"
 msgstr "Neznámá chyba"
 
@@ -5268,11 +5282,11 @@ msgstr "Neznámá chyba"
 msgid "Unset cover"
 msgstr "Odebrat obal"
 
-#: ui/mainwindow.cpp:1749
+#: ui/mainwindow.cpp:1759
 msgid "Unskip selected tracks"
 msgstr "Zrušit přeskočení vybraných skladeb"
 
-#: ui/mainwindow.cpp:1747
+#: ui/mainwindow.cpp:1757
 msgid "Unskip track"
 msgstr "Zrušit přeskočení skladby"
 
@@ -5484,7 +5498,7 @@ msgstr "WMA"
 msgid "Warn me when closing a playlist tab"
 msgstr "Varovat při zavření karty se seznamem skladeb"
 
-#: core/song.cpp:428 transcoder/transcoder.cpp:256
+#: core/song.cpp:429 transcoder/transcoder.cpp:256
 msgid "Wav"
 msgstr "WAV"
 
@@ -5568,7 +5582,7 @@ msgstr "Windows Media 40k"
 msgid "Windows Media 64k"
 msgstr "Windows Media 64k"
 
-#: core/song.cpp:408 transcoder/transcoder.cpp:253
+#: core/song.cpp:409 transcoder/transcoder.cpp:253
 msgid "Windows Media audio"
 msgstr "Windows Media Audio"
 
@@ -5576,13 +5590,13 @@ msgstr "Windows Media Audio"
 msgid "Without cover:"
 msgstr "Bez obalu:"
 
-#: library/libraryview.cpp:563
+#: library/libraryview.cpp:583
 msgid ""
 "Would you like to move the other songs in this album to Various Artists as "
 "well?"
 msgstr "Chcete další písně na tomto albu přesunout do Různí umělci?"
 
-#: ui/mainwindow.cpp:2579
+#: ui/mainwindow.cpp:2609
 msgid "Would you like to run a full rescan right now?"
 msgstr "Chcete spustit toto úplné nové prohledání hned teď?"
 
@@ -5599,7 +5613,7 @@ msgid "Wrong username or password."
 msgstr "Nesprávné uživatelské jméno nebo heslo."
 
 #: library/savedgroupingmanager.cpp:71 playlist/playlist.cpp:1339
-#: ui/organisedialog.cpp:72 ../bin/src/ui_groupbydialog.h:134
+#: ui/organisedialog.cpp:75 ../bin/src/ui_groupbydialog.h:134
 #: ../bin/src/ui_groupbydialog.h:153 ../bin/src/ui_groupbydialog.h:172
 #: ../bin/src/ui_trackselectiondialog.h:211 ../bin/src/ui_ripcddialog.h:312
 msgid "Year"
@@ -5712,15 +5726,11 @@ msgstr "Pokud změníte jazyk, budete muset Clementine spustit znovu."
 msgid "Your IP address:"
 msgstr "Vaše adresa IP:"
 
-#: internet/lastfm/lastfmsettingspage.cpp:93
-msgid "Your Last.fm credentials were incorrect"
-msgstr "Vaše přihlašovací údaje k Last.fm byly nesprávné"
-
 #: internet/magnatune/magnatunesettingspage.cpp:118
 msgid "Your Magnatune credentials were incorrect"
 msgstr "Vaše přihlašovací údaje k Magnatune byly nesprávné"
 
-#: library/libraryview.cpp:353
+#: library/libraryview.cpp:358
 msgid "Your library is empty!"
 msgstr "Vaše hudební sbírka je prázdná!"
 

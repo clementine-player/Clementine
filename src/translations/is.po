@@ -12,8 +12,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2017-05-31 17:23+0000\n"
-"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
+"PO-Revision-Date: 2017-11-30 17:48+0000\n"
+"Last-Translator: Sveinn í Felli <sv1@fellsnet.is>\n"
 "Language-Team: Icelandic (http://www.transifex.com/davidsansome/clementine/language/is/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -227,7 +227,7 @@ msgstr "&Ekkert"
 
 #: ../bin/src/ui_mainwindow.h:737
 msgid "&Playlist"
-msgstr "&Laglisti"
+msgstr "S&pilunarlisti"
 
 #: ../bin/src/ui_mainwindow.h:678
 msgid "&Quit"
@@ -365,7 +365,7 @@ msgid ""
 "<p>Tokens start with %, for example: %artist %album %title </p>\n"
 "\n"
 "<p>If you surround sections of text that contain a token with curly-braces, that section will be hidden if the token is empty.</p>"
-msgstr ""
+msgstr "<p>Breytur byrja á %, til dæmis: %artist %album %title </p>\n\n<p>Ef þú setur slaufusviga { } í kringum hluta textans sem inniheldur breytuna verður sá hluti falinn ef stakið er ekki til.</p>"
 
 #: internet/spotify/spotifysettingspage.cpp:166
 msgid "A Spotify Premium account is required."
@@ -373,7 +373,7 @@ msgstr "Krafist er Spotify Premium aðgangs."
 
 #: ../bin/src/ui_networkremotesettingspage.h:233
 msgid "A client can connect only, if the correct code was entered."
-msgstr ""
+msgstr "Forrit getur einungis tengst ef réttur kóði er settur inn."
 
 #: internet/digitally/digitallyimportedsettingspage.cpp:48
 #: internet/digitally/digitallyimportedurlhandler.cpp:60
@@ -412,7 +412,7 @@ msgstr "AAC 32k"
 msgid "AAC 64k"
 msgstr "AAC 64k"
 
-#: core/song.cpp:426
+#: core/song.cpp:427
 msgid "AIFF"
 msgstr "AIFF"
 
@@ -497,7 +497,7 @@ msgstr "Bæta við öðru streymi..."
 msgid "Add directory..."
 msgstr "Bæta við möppu..."
 
-#: ui/mainwindow.cpp:2016
+#: ui/mainwindow.cpp:2026
 msgid "Add file"
 msgstr "Bæta við skrá"
 
@@ -517,7 +517,7 @@ msgstr "Bæta við skrá..."
 msgid "Add files to transcode"
 msgstr "Bæta við skrá til að millikóða"
 
-#: transcoder/transcodedialog.cpp:306 ui/mainwindow.cpp:2043
+#: transcoder/transcodedialog.cpp:306 ui/mainwindow.cpp:2053
 #: ripper/ripcddialog.cpp:185
 msgid "Add folder"
 msgstr "Bæta við möppu"
@@ -622,7 +622,7 @@ msgstr "Bæta við Spotify-spilunarlista"
 msgid "Add to Spotify starred"
 msgstr "Bæta við Spotify-stjörnumerkt"
 
-#: ui/mainwindow.cpp:1817
+#: ui/mainwindow.cpp:1827
 msgid "Add to another playlist"
 msgstr "Bæta við öðrum spilunarlista"
 
@@ -673,7 +673,7 @@ msgid "After copying..."
 msgstr "Eftir afritun..."
 
 #: library/savedgroupingmanager.cpp:65 playlist/playlist.cpp:1331
-#: ui/organisedialog.cpp:61 ui/qtsystemtrayicon.cpp:251
+#: ui/organisedialog.cpp:64 ui/qtsystemtrayicon.cpp:251
 #: ../bin/src/ui_groupbydialog.h:128 ../bin/src/ui_groupbydialog.h:147
 #: ../bin/src/ui_groupbydialog.h:166 ../bin/src/ui_albumcoversearcher.h:110
 #: ../bin/src/ui_albumcoversearcher.h:112 ../bin/src/ui_edittagdialog.h:723
@@ -686,7 +686,7 @@ msgid "Album (ideal loudness for all tracks)"
 msgstr "Hljómplata (kjörstyrkur hljóðs fyrir öll lög)"
 
 #: library/savedgroupingmanager.cpp:80 playlist/playlist.cpp:1345
-#: ui/organisedialog.cpp:64 ../bin/src/ui_groupbydialog.h:130
+#: ui/organisedialog.cpp:67 ../bin/src/ui_groupbydialog.h:130
 #: ../bin/src/ui_groupbydialog.h:149 ../bin/src/ui_groupbydialog.h:168
 #: ../bin/src/ui_edittagdialog.h:725
 msgid "Album artist"
@@ -812,8 +812,8 @@ msgstr "Útlit"
 msgid "Append files/URLs to the playlist"
 msgstr "Bæta skrám/slóðum í lagalista"
 
-#: devices/deviceview.cpp:218 globalsearch/globalsearchview.cpp:453
-#: internet/core/internetservice.cpp:48 library/libraryview.cpp:378
+#: devices/deviceview.cpp:218 globalsearch/globalsearchview.cpp:454
+#: internet/core/internetservice.cpp:48 library/libraryview.cpp:383
 #: widgets/fileviewlist.cpp:31
 msgid "Append to current playlist"
 msgstr "Bæta við núverandi lagalista"
@@ -842,7 +842,7 @@ msgid ""
 msgstr ""
 
 #: library/savedgroupingmanager.cpp:62 playlist/playlist.cpp:1329
-#: ui/organisedialog.cpp:62 ui/qtsystemtrayicon.cpp:249
+#: ui/organisedialog.cpp:65 ui/qtsystemtrayicon.cpp:249
 #: ../bin/src/ui_groupbydialog.h:129 ../bin/src/ui_groupbydialog.h:148
 #: ../bin/src/ui_groupbydialog.h:167 ../bin/src/ui_albumcoversearcher.h:106
 #: ../bin/src/ui_albumcoversearcher.h:108 ../bin/src/ui_edittagdialog.h:721
@@ -850,11 +850,11 @@ msgstr ""
 msgid "Artist"
 msgstr "Flytjandi"
 
-#: ui/mainwindow.cpp:282
+#: ui/mainwindow.cpp:283
 msgid "Artist info"
 msgstr "Upplýsingar um höfund"
 
-#: ui/organisedialog.cpp:63
+#: ui/organisedialog.cpp:66
 msgid "Artist's initial"
 msgstr "Upphafsstafir flytjanda"
 
@@ -874,8 +874,8 @@ msgstr "Hljóðúttak"
 
 #: internet/digitally/digitallyimportedsettingspage.cpp:82
 #: internet/magnatune/magnatunesettingspage.cpp:117
-#: internet/lastfm/lastfmservice.cpp:249
-#: internet/lastfm/lastfmsettingspage.cpp:97
+#: internet/lastfm/lastfmservice.cpp:268
+#: internet/lastfm/lastfmsettingspage.cpp:76
 msgid "Authentication failed"
 msgstr "Auðkenning mistókst"
 
@@ -921,7 +921,7 @@ msgstr "Meðalstærð mynda"
 msgid "BBC Podcasts"
 msgstr "BBC-hlaðvörp (podcasts)"
 
-#: playlist/playlist.cpp:1365 ui/organisedialog.cpp:71
+#: playlist/playlist.cpp:1365 ui/organisedialog.cpp:74
 #: ../bin/src/ui_edittagdialog.h:704
 msgid "BPM"
 msgstr "BPM"
@@ -993,7 +993,7 @@ msgstr "Bitahraði"
 msgid "Bitrate"
 msgstr "Bitahraði"
 
-#: ui/organisedialog.cpp:77
+#: ui/organisedialog.cpp:80
 msgctxt "Refers to bitrate in file organise dialog."
 msgid "Bitrate"
 msgstr "Bitahraði"
@@ -1038,7 +1038,7 @@ msgstr "Hleð í biðminni"
 
 #: internet/seafile/seafileservice.cpp:227
 msgid "Building Seafile index..."
-msgstr ""
+msgstr "Bý til atriðaskrá Seafile..."
 
 #: ../bin/src/ui_globalsearchview.h:210
 msgid "But these sources are disabled:"
@@ -1048,7 +1048,7 @@ msgstr "En þessar tónlistarveitur eru óvirkar:"
 msgid "Buttons"
 msgstr "Hnappar"
 
-#: core/song.cpp:432
+#: core/song.cpp:433
 msgid "CDDA"
 msgstr "CDDA"
 
@@ -1094,13 +1094,13 @@ msgstr "Skipta um tungumál"
 
 #: ../bin/src/ui_playbacksettingspage.h:381
 msgid "Changes will take place when the next song starts playing"
-msgstr ""
+msgstr "Breytingar munu taka gildi þegar næsta lag byrjar að spila"
 
 #: ../bin/src/ui_playbacksettingspage.h:368
 msgid ""
 "Changing mono playback preference will be effective for the next playing "
 "songs"
-msgstr ""
+msgstr "Breytingar í einóma afspilun munu taka gildi þegar næsta lag byrjar að spila"
 
 #: ../bin/src/ui_streamdetailsdialog.h:137
 msgid "Channels"
@@ -1114,7 +1114,7 @@ msgstr "Leita að nýjum þáttum"
 msgid "Check for updates"
 msgstr "Athuga með uppfærslur"
 
-#: ui/mainwindow.cpp:802
+#: ui/mainwindow.cpp:809
 msgid "Check for updates..."
 msgstr "Athuga með uppfærslur..."
 
@@ -1184,7 +1184,7 @@ msgstr "Villa í Clementine"
 
 #: ../bin/src/ui_notificationssettingspage.h:463
 msgid "Clementine Orange"
-msgstr ""
+msgstr "Appelsínugul Clementine"
 
 #: visualisations/visualisationcontainer.cpp:76
 #: visualisations/visualisationcontainer.cpp:158
@@ -1236,17 +1236,13 @@ msgstr "Myndskoðari Clementine"
 
 #: ../bin/src/ui_trackselectiondialog.h:205
 msgid "Clementine was unable to find results for this file"
-msgstr ""
+msgstr "Clementine fann engar niðurstöður fyrir þessa skrá"
 
 #: ../bin/src/ui_globalsearchview.h:209
 msgid "Clementine will find music in:"
 msgstr "Clementine mun finna tónlist í:"
 
-#: internet/lastfm/lastfmsettingspage.cpp:78
-msgid "Click Ok once you authenticated Clementine in your last.fm account."
-msgstr ""
-
-#: library/libraryview.cpp:359
+#: library/libraryview.cpp:364
 msgid "Click here to add some music"
 msgstr "Smelltu hér til að bæta við tónlist"
 
@@ -1258,7 +1254,7 @@ msgstr ""
 
 #: ../bin/src/ui_trackslider.h:71
 msgid "Click to toggle between remaining time and total time"
-msgstr ""
+msgstr "Smelltu til að víxla á milli heildartíma og tíma sem er eftir"
 
 #: ../bin/src/ui_soundcloudsettingspage.h:103
 #: ../bin/src/ui_lastfmsettingspage.h:133
@@ -1308,7 +1304,7 @@ msgid "Comma separated list of class:level, level is 0-3"
 msgstr ""
 
 #: playlist/playlist.cpp:1384 smartplaylists/searchterm.cpp:370
-#: ui/organisedialog.cpp:75 ../bin/src/ui_edittagdialog.h:718
+#: ui/organisedialog.cpp:78 ../bin/src/ui_edittagdialog.h:718
 msgid "Comment"
 msgstr "Athugasemd"
 
@@ -1321,7 +1317,7 @@ msgid "Complete tags automatically..."
 msgstr "Ljúka merkjum sjálfkrafa..."
 
 #: library/savedgroupingmanager.cpp:74 playlist/playlist.cpp:1347
-#: ui/organisedialog.cpp:65 ../bin/src/ui_groupbydialog.h:131
+#: ui/organisedialog.cpp:68 ../bin/src/ui_groupbydialog.h:131
 #: ../bin/src/ui_groupbydialog.h:150 ../bin/src/ui_groupbydialog.h:169
 msgid "Composer"
 msgstr "Tónskáld"
@@ -1351,11 +1347,11 @@ msgstr "Stilla Spotify..."
 msgid "Configure Subsonic..."
 msgstr "Stilla Subsonic..."
 
-#: globalsearch/globalsearchview.cpp:149 globalsearch/globalsearchview.cpp:473
+#: globalsearch/globalsearchview.cpp:151 globalsearch/globalsearchview.cpp:480
 msgid "Configure global search..."
-msgstr ""
+msgstr "Stilla altæka leit..."
 
-#: ui/mainwindow.cpp:651
+#: ui/mainwindow.cpp:652
 msgid "Configure library..."
 msgstr "Stilla safn..."
 
@@ -1412,7 +1408,7 @@ msgstr "Umbreyta allri tónlist"
 
 #: ../bin/src/ui_deviceproperties.h:377
 msgid "Convert any music that the device can't play"
-msgstr ""
+msgstr "Umbreyta allri tónlist sem tækið getur ekki spilað"
 
 #: ../bin/src/ui_networkremotesettingspage.h:247
 msgid "Convert lossless audiofiles before sending them to the remote."
@@ -1420,18 +1416,18 @@ msgstr ""
 
 #: ../bin/src/ui_networkremotesettingspage.h:249
 msgid "Convert lossless files"
-msgstr ""
+msgstr "Umbreyta taplausum skrám"
 
 #: internet/core/internetservice.cpp:79
 msgid "Copy to clipboard"
 msgstr "Afrita á klippispjald"
 
-#: library/libraryview.cpp:409 internet/podcasts/podcastservice.cpp:438
-#: ui/mainwindow.cpp:701 widgets/fileviewlist.cpp:44
+#: library/libraryview.cpp:416 internet/podcasts/podcastservice.cpp:438
+#: ui/mainwindow.cpp:708 widgets/fileviewlist.cpp:44
 msgid "Copy to device..."
 msgstr "Afrita til tæki..."
 
-#: devices/deviceview.cpp:228 ui/mainwindow.cpp:691
+#: devices/deviceview.cpp:228 ui/mainwindow.cpp:698
 #: widgets/fileviewlist.cpp:40
 msgid "Copy to library..."
 msgstr "Afrita í safn..."
@@ -1460,7 +1456,11 @@ msgstr ""
 
 #: songinfo/streamdiscoverer.cpp:123
 msgid "Could not get details"
-msgstr ""
+msgstr "Gat ekki náð í ítarupplýsingar"
+
+#: internet/lastfm/lastfmsettingspage.cpp:75
+msgid "Could not log in to Last.fm. Please try again."
+msgstr "Ekki tókst að skrá inn á Last.fm, reyndu aftur."
 
 #: playlist/playlistmanager.cpp:166
 msgid "Couldn't create playlist"
@@ -1483,7 +1483,7 @@ msgstr ""
 #: internet/magnatune/magnatunedownloaddialog.cpp:224
 #, qt-format
 msgid "Couldn't open output file %1"
-msgstr ""
+msgstr "Gat ekki opnað úttaksskrána %1"
 
 #: internet/core/cloudfileservice.cpp:103
 #: internet/googledrive/googledriveservice.cpp:228
@@ -1517,7 +1517,7 @@ msgstr ""
 #: covers/coversearchstatisticsdialog.cpp:59 ui/albumcoversearcher.cpp:100
 #, qt-format
 msgid "Covers from %1"
-msgstr ""
+msgstr "Umslög frá %1"
 
 #: core/commandlineoptions.cpp:172
 msgid "Create a new playlist with files/URLs"
@@ -1553,15 +1553,15 @@ msgstr "Sérsniðin mynd"
 
 #: ../bin/src/ui_notificationssettingspage.h:450
 msgid "Custom message settings"
-msgstr ""
+msgstr "Sérsniðnar stillingar skilaboða"
 
 #: ../bin/src/ui_notificationssettingspage.h:464
 msgid "Custom..."
 msgstr "Sérsniðið..."
 
 #: devices/devicekitlister.cpp:125 devices/udisks2lister.cpp:76
-msgid "DBus path"
-msgstr ""
+msgid "D-Bus path"
+msgstr "D-Bus slóð"
 
 #: ui/equalizer.cpp:116
 msgid "Dance"
@@ -1628,8 +1628,8 @@ msgstr "Eyða"
 msgid "Delete downloaded data"
 msgstr "Eyða sóttum gögnum"
 
-#: devices/deviceview.cpp:408 library/libraryview.cpp:645
-#: ui/mainwindow.cpp:2370 widgets/fileview.cpp:188
+#: devices/deviceview.cpp:408 library/libraryview.cpp:666
+#: ui/mainwindow.cpp:2380 widgets/fileview.cpp:188
 msgid "Delete files"
 msgstr "Eyða skrám"
 
@@ -1637,7 +1637,7 @@ msgstr "Eyða skrám"
 msgid "Delete from device..."
 msgstr "Eyða frá tæki..."
 
-#: library/libraryview.cpp:411 ui/mainwindow.cpp:704
+#: library/libraryview.cpp:419 ui/mainwindow.cpp:711
 #: widgets/fileviewlist.cpp:47
 msgid "Delete from disk..."
 msgstr "Eyða frá diski..."
@@ -1650,7 +1650,7 @@ msgstr "Eyða þegar spiluðum þáttum"
 msgid "Delete preset"
 msgstr "Eyða forstillingu"
 
-#: library/libraryview.cpp:401
+#: library/libraryview.cpp:408
 msgid "Delete smart playlist"
 msgstr "Eyða snjöllum spilunarlista"
 
@@ -1666,11 +1666,11 @@ msgstr "Eyði gögnum"
 msgid "Depth"
 msgstr "Dýpt"
 
-#: ui/mainwindow.cpp:1738
+#: ui/mainwindow.cpp:1748
 msgid "Dequeue selected tracks"
 msgstr ""
 
-#: ui/mainwindow.cpp:1736
+#: ui/mainwindow.cpp:1746
 msgid "Dequeue track"
 msgstr ""
 
@@ -1699,7 +1699,7 @@ msgstr "Heiti tækis"
 msgid "Device properties..."
 msgstr "Eiginleikar tækis..."
 
-#: ui/mainwindow.cpp:275
+#: ui/mainwindow.cpp:276
 msgid "Devices"
 msgstr "Tæki"
 
@@ -1713,19 +1713,19 @@ msgstr "Meintirðu"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:159
 msgid "Digitally Imported"
-msgstr ""
+msgstr "Stafrænt flutt inn"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:163
 msgid "Digitally Imported password"
-msgstr ""
+msgstr "Lykilorð flutt inn stafrænt"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:161
 msgid "Digitally Imported username"
-msgstr ""
+msgstr "Notandanafn flutt inn stafrænt"
 
 #: ../bin/src/ui_networkproxysettingspage.h:158
 msgid "Direct internet connection"
-msgstr ""
+msgstr "Bein internettenging"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:141
 #: ../bin/src/ui_transcodedialog.h:216
@@ -1734,7 +1734,7 @@ msgstr "Mappa"
 
 #: ../bin/src/ui_notificationssettingspage.h:445
 msgid "Disable duration"
-msgstr ""
+msgstr "Gera tímalengd óvirka"
 
 #: ../bin/src/ui_appearancesettingspage.h:316
 msgid "Disable moodbar generation"
@@ -1751,7 +1751,7 @@ msgid "Disabled"
 msgstr "Óvirkt"
 
 #: library/savedgroupingmanager.cpp:95 playlist/playlist.cpp:1337
-#: ui/organisedialog.cpp:70 ../bin/src/ui_groupbydialog.h:139
+#: ui/organisedialog.cpp:73 ../bin/src/ui_groupbydialog.h:139
 #: ../bin/src/ui_groupbydialog.h:158 ../bin/src/ui_groupbydialog.h:177
 #: ../bin/src/ui_edittagdialog.h:722 ../bin/src/ui_ripcddialog.h:313
 msgid "Disc"
@@ -1759,7 +1759,7 @@ msgstr "Diskur"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:233
 msgid "Discontinuous transmission"
-msgstr ""
+msgstr "Slitrótt sending"
 
 #: internet/icecast/icecastfilterwidget.cpp:36
 #: internet/core/searchboxwidget.cpp:34 library/libraryfilterwidget.cpp:109
@@ -1778,11 +1778,11 @@ msgstr "Skanna allt tónlistarsafnið"
 #: internet/googledrive/googledriveservice.cpp:270
 #: internet/googledrive/googledriveservice.cpp:276
 msgid "Do a full rescan"
-msgstr ""
+msgstr "Skanna allt safnið"
 
 #: internet/googledrive/googledriveservice.cpp:225
 msgid "Do a full rescan..."
-msgstr ""
+msgstr "Skanna allt safnið..."
 
 #: ../bin/src/ui_deviceproperties.h:376
 msgid "Do not convert any music"
@@ -1803,13 +1803,13 @@ msgstr ""
 msgid "Don't repeat"
 msgstr "Ekki endurtaka"
 
-#: library/libraryview.cpp:429
+#: library/libraryview.cpp:436
 msgid "Don't show in various artists"
-msgstr ""
+msgstr "Ekki birta undir ýmsum flytjendum"
 
 #: ../bin/src/ui_podcastsettingspage.h:274
 msgid "Don't show listened episodes"
-msgstr ""
+msgstr "Ekki sýna áhorfða þætti"
 
 #: widgets/osd.cpp:287 ../bin/src/ui_playlistsequence.h:116
 msgid "Don't shuffle"
@@ -1938,11 +1938,11 @@ msgstr ""
 msgid "Dynamic random mix"
 msgstr ""
 
-#: library/libraryview.cpp:398
+#: library/libraryview.cpp:405
 msgid "Edit smart playlist..."
 msgstr "Sýsla með snjallan spilunarlista..."
 
-#: ui/mainwindow.cpp:1780
+#: ui/mainwindow.cpp:1790
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr "Breyta merki \"%1\"..."
@@ -1959,12 +1959,12 @@ msgstr "Breyta merkjum"
 msgid "Edit track information"
 msgstr "Breyta upplýsingum um lag"
 
-#: library/libraryview.cpp:416 widgets/fileviewlist.cpp:51
+#: library/libraryview.cpp:424 widgets/fileviewlist.cpp:51
 #: ../bin/src/ui_mainwindow.h:685
 msgid "Edit track information..."
 msgstr "Breyta upplýsingum um lag..."
 
-#: library/libraryview.cpp:419
+#: library/libraryview.cpp:427
 msgid "Edit tracks information..."
 msgstr "Breyta upplýsingum um lög..."
 
@@ -2012,7 +2012,7 @@ msgstr ""
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:223
 msgid "Encoding mode"
-msgstr ""
+msgstr "Kóðunarhamur"
 
 #: ../bin/src/ui_addpodcastbyurl.h:72
 msgid "Enter a URL"
@@ -2033,7 +2033,7 @@ msgstr "Settu inn nýtt nafn á þennan lagalista"
 #: ../bin/src/ui_globalsearchview.h:208
 msgid ""
 "Enter search terms above to find music on your computer and on the internet"
-msgstr ""
+msgstr "Settu inn leitarstreng hér fyrir ofan til að finna tónlist á tölvunni þinni og á netinu"
 
 #: ../bin/src/ui_itunessearchpage.h:73
 msgid "Enter search terms below to find podcasts in the iTunes Store"
@@ -2070,15 +2070,15 @@ msgstr "Tónjafnari"
 
 #: core/commandlineoptions.cpp:179
 msgid "Equivalent to --log-levels *:1"
-msgstr ""
+msgstr "Samsvarar --log-levels *:1"
 
 #: core/commandlineoptions.cpp:180
 msgid "Equivalent to --log-levels *:3"
-msgstr ""
+msgstr "Samsvarar --log-levels *:3"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:246
-#: library/libraryview.cpp:639 ui/mainwindow.cpp:2072 ui/mainwindow.cpp:2322
-#: ui/mainwindow.cpp:2481
+#: library/libraryview.cpp:660 ui/mainwindow.cpp:2082 ui/mainwindow.cpp:2332
+#: ui/mainwindow.cpp:2491
 msgid "Error"
 msgstr "Villa"
 
@@ -2101,7 +2101,7 @@ msgstr "Villa við eyðingu laga"
 #: songinfo/streamdiscoverer.cpp:56
 #, qt-format
 msgid "Error discovering %1: %2"
-msgstr ""
+msgstr "Villa í að uppgötva %1: %2"
 
 #: internet/spotify/spotifyblobdownloader.cpp:260
 msgid "Error downloading Spotify plugin"
@@ -2115,7 +2115,7 @@ msgstr "Villa við að hlaða inn %1"
 #: internet/digitally/digitallyimportedservicebase.cpp:200
 #: internet/digitally/digitallyimportedurlhandler.cpp:96
 msgid "Error loading di.fm playlist"
-msgstr ""
+msgstr "Villa við að hlaða inn di.fm spilunarlista"
 
 #: transcoder/transcoder.cpp:390
 #, qt-format
@@ -2124,11 +2124,11 @@ msgstr "Villa við meðhöndlun %1: %2"
 
 #: playlist/songloaderinserter.cpp:94
 msgid "Error while loading audio CD"
-msgstr ""
+msgstr "Villa við að hlaða inn CD-hljómdiski"
 
 #: library/library.cpp:68
 msgid "Ever played"
-msgstr ""
+msgstr "Spilað einhverntíma"
 
 #: ../bin/src/ui_podcastsettingspage.h:256
 msgid "Every 10 minutes"
@@ -2193,13 +2193,14 @@ msgstr "Flytja út innbyggð umslög"
 
 #: ui/albumcovermanager.cpp:799 ui/albumcovermanager.cpp:823
 msgid "Export finished"
-msgstr ""
+msgstr "Útflutningi lokið"
 
 #: ui/albumcovermanager.cpp:808
 #, qt-format
 msgid "Exported %1 covers out of %2 (%3 skipped)"
 msgstr "Flutti út %1 umslög af %2 (%3 sleppt)"
 
+#: core/song.cpp:411 transcoder/transcoder.cpp:233
 #: ../bin/src/ui_magnatunedownloaddialog.h:136
 #: ../bin/src/ui_magnatunesettingspage.h:170
 #: ../bin/src/ui_transcodersettingspage.h:176
@@ -2223,13 +2224,13 @@ msgstr "Deyfing"
 msgid "Fading duration"
 msgstr "Tímalengd dofnunar"
 
-#: ui/mainwindow.cpp:2073
+#: ui/mainwindow.cpp:2083
 msgid "Failed reading CD drive"
-msgstr ""
+msgstr "Mistókst að lesa CD-drif"
 
 #: internet/podcasts/gpoddertoptagspage.cpp:73
 msgid "Failed to fetch directory"
-msgstr ""
+msgstr "Mistókst að sækja möppu"
 
 #: internet/podcasts/gpoddersearchpage.cpp:77
 #: internet/podcasts/gpoddertoptagsmodel.cpp:103
@@ -2246,7 +2247,7 @@ msgstr "Mistókst að lesa inn hlaðvarp"
 
 #: internet/podcasts/podcasturlloader.cpp:175
 msgid "Failed to parse the XML for this RSS feed"
-msgstr ""
+msgstr "Gat ekki þáttað XML-skrána fyrir þetta RSS-streymi"
 
 #: ui/trackselectiondialog.cpp:247
 #, qt-format
@@ -2272,7 +2273,7 @@ msgstr "Sækja umslög sem vantar"
 
 #: ../bin/src/ui_albumcovermanager.h:221
 msgid "Fetch automatically"
-msgstr ""
+msgstr "Sækja sjálfvirkt"
 
 #: ../bin/src/ui_coversearchstatisticsdialog.h:74
 msgid "Fetch completed"
@@ -2294,7 +2295,7 @@ msgstr "Villa við að ná í umslag"
 msgid "File Format"
 msgstr "Skráarsnið"
 
-#: ui/organisedialog.cpp:79
+#: ui/organisedialog.cpp:82
 msgid "File extension"
 msgstr "Skráarending"
 
@@ -2328,7 +2329,7 @@ msgstr "Tegund skráar"
 msgid "Filename"
 msgstr "Skráarheiti"
 
-#: ui/mainwindow.cpp:265
+#: ui/mainwindow.cpp:266
 msgid "Files"
 msgstr "Gögn"
 
@@ -2342,7 +2343,7 @@ msgstr ""
 
 #: musicbrainz/tagfetcher.cpp:58
 msgid "Fingerprinting song"
-msgstr ""
+msgstr "Tek fingrafar af lagi"
 
 #: smartplaylists/wizard.cpp:83
 msgid "Finish"
@@ -2350,15 +2351,11 @@ msgstr "Lokið"
 
 #: library/savedgroupingmanager.cpp:36 ../bin/src/ui_groupbydialog.h:124
 msgid "First level"
-msgstr ""
+msgstr "Fyrsta stig"
 
 #: widgets/nowplayingwidget.cpp:110
 msgid "Fit cover to width"
 msgstr "Laga umslag að breidd"
-
-#: core/song.cpp:410 transcoder/transcoder.cpp:233
-msgid "Flac"
-msgstr "Flac"
 
 #: ../bin/src/ui_songinfosettingspage.h:155
 msgid "Font size"
@@ -2366,7 +2363,7 @@ msgstr "Leturstærð"
 
 #: ../bin/src/ui_spotifysettingspage.h:212
 msgid "For licensing reasons Spotify support is in a separate plugin."
-msgstr ""
+msgstr "Vegna vandamála með notkunarleyfi er stuðningur við Spotify hafður í sérstakri viðbót."
 
 #: ../bin/src/ui_transcoderoptionsmp3.h:203
 msgid "Force mono encoding"
@@ -2391,7 +2388,7 @@ msgstr ""
 #: ../bin/src/ui_libraryviewcontainer.h:58
 #: ../bin/src/ui_playlistcontainer.h:134
 #: ../bin/src/ui_playlistlistcontainer.h:125
-#: ../bin/src/ui_podcastinfowidget.h:190 ../bin/src/ui_querysearchpage.h:111
+#: ../bin/src/ui_podcastinfowidget.h:190 ../bin/src/ui_querysearchpage.h:108
 #: ../bin/src/ui_querysortpage.h:136 ../bin/src/ui_searchpreview.h:103
 #: ../bin/src/ui_searchtermwidget.h:267 ../bin/src/ui_wizardfinishpage.h:82
 #: ../bin/src/ui_songkickconcertwidget.h:99
@@ -2454,7 +2451,7 @@ msgid "General settings"
 msgstr "Almennar stillingar"
 
 #: library/savedgroupingmanager.cpp:77 playlist/playlist.cpp:1343
-#: ui/organisedialog.cpp:74 ../bin/src/ui_groupbydialog.h:133
+#: ui/organisedialog.cpp:77 ../bin/src/ui_groupbydialog.h:133
 #: ../bin/src/ui_groupbydialog.h:152 ../bin/src/ui_groupbydialog.h:171
 #: ../bin/src/ui_ripcddialog.h:316
 msgid "Genre"
@@ -2512,7 +2509,7 @@ msgstr ""
 msgid "Group Library by..."
 msgstr "Hópa safn eftir..."
 
-#: globalsearch/globalsearchview.cpp:470 library/libraryfilterwidget.cpp:98
+#: globalsearch/globalsearchview.cpp:477 library/libraryfilterwidget.cpp:98
 msgid "Group by"
 msgstr "Hópa eftir"
 
@@ -2522,7 +2519,7 @@ msgstr "Hópa eftir hljómplötum"
 
 #: library/libraryfilterwidget.cpp:150
 msgid "Group by Album artist/Album"
-msgstr ""
+msgstr "Hópa eftir hljómplötu flytjendum/hljómplötum"
 
 #: library/libraryfilterwidget.cpp:143
 msgid "Group by Artist"
@@ -2545,18 +2542,18 @@ msgid "Group by Genre/Artist/Album"
 msgstr "Hópa eftir tónlistarstíl/flytjendum/hljómplötu"
 
 #: library/savedgroupingmanager.cpp:89 playlist/playlist.cpp:1351
-#: ui/organisedialog.cpp:67 ../bin/src/ui_groupbydialog.h:141
+#: ui/organisedialog.cpp:70 ../bin/src/ui_groupbydialog.h:141
 #: ../bin/src/ui_groupbydialog.h:160 ../bin/src/ui_groupbydialog.h:179
 msgid "Grouping"
 msgstr "Hópun"
 
 #: library/libraryfilterwidget.cpp:211
 msgid "Grouping Name"
-msgstr ""
+msgstr "Nafn hópunar"
 
 #: library/libraryfilterwidget.cpp:211
 msgid "Grouping name:"
-msgstr ""
+msgstr "Nafn hópunar:"
 
 #: internet/podcasts/podcasturlloader.cpp:206
 msgid "HTML page did not contain any RSS feeds"
@@ -2611,7 +2608,7 @@ msgstr "Klukkustundir"
 
 #: core/backgroundstreams.cpp:46
 msgid "Hypnotoad"
-msgstr ""
+msgstr "Hypnotoad"
 
 #: ../bin/src/ui_magnatunesettingspage.h:158
 msgid "I don't have a Magnatune account"
@@ -2679,9 +2676,9 @@ msgstr "Innhólf"
 
 #: ../bin/src/ui_notificationssettingspage.h:449
 msgid "Include album art in the notification"
-msgstr ""
+msgstr "Hafa með umslagsmynd í tilkynningunni"
 
-#: ../bin/src/ui_querysearchpage.h:117
+#: ../bin/src/ui_querysearchpage.h:114
 msgid "Include all songs"
 msgstr "Hafa með öll lög"
 
@@ -2734,7 +2731,7 @@ msgstr "Uppsett"
 msgid "Integrity check"
 msgstr "Athugun á áreiðanleika"
 
-#: ui/mainwindow.cpp:271
+#: ui/mainwindow.cpp:272
 msgid "Internet"
 msgstr "Internet"
 
@@ -2751,7 +2748,7 @@ msgstr "Internetþjónustur"
 msgid "Intro tracks"
 msgstr "Kynningarlög"
 
-#: internet/lastfm/lastfmservice.cpp:261
+#: internet/lastfm/lastfmservice.cpp:280
 msgid "Invalid API key"
 msgstr "Ógildur API lykill"
 
@@ -2759,27 +2756,27 @@ msgstr "Ógildur API lykill"
 msgid "Invalid URL"
 msgstr "Ógild slóð"
 
-#: internet/lastfm/lastfmservice.cpp:251
+#: internet/lastfm/lastfmservice.cpp:270
 msgid "Invalid format"
 msgstr "Ógilt snið"
 
-#: internet/lastfm/lastfmservice.cpp:247
+#: internet/lastfm/lastfmservice.cpp:266
 msgid "Invalid method"
 msgstr "Ógild aðferð"
 
-#: internet/lastfm/lastfmservice.cpp:253
+#: internet/lastfm/lastfmservice.cpp:272
 msgid "Invalid parameters"
 msgstr "Ógild viðföng"
 
-#: internet/lastfm/lastfmservice.cpp:255
+#: internet/lastfm/lastfmservice.cpp:274
 msgid "Invalid resource specified"
 msgstr "Ógilt tilfang sett inn"
 
-#: internet/lastfm/lastfmservice.cpp:245
+#: internet/lastfm/lastfmservice.cpp:264
 msgid "Invalid service"
 msgstr "Ógild þjónusta"
 
-#: internet/lastfm/lastfmservice.cpp:259
+#: internet/lastfm/lastfmservice.cpp:278
 msgid "Invalid session key"
 msgstr "Ógildur setulykill"
 
@@ -2793,19 +2790,19 @@ msgstr "Jamendo"
 
 #: internet/jamendo/jamendoservice.cpp:122
 msgid "Jamendo Most Listened Tracks"
-msgstr ""
+msgstr "Lög sem mest er hlustað á í Jamendo"
 
 #: internet/jamendo/jamendoservice.cpp:119
 msgid "Jamendo Top Tracks"
-msgstr ""
+msgstr "Topplög í Jamendo"
 
 #: internet/jamendo/jamendoservice.cpp:113
 msgid "Jamendo Top Tracks of the Month"
-msgstr ""
+msgstr "Topplög mánaðarins í Jamendo"
 
 #: internet/jamendo/jamendoservice.cpp:116
 msgid "Jamendo Top Tracks of the Week"
-msgstr ""
+msgstr "Topplög vikunnar í Jamendo"
 
 #: internet/jamendo/jamendoservice.cpp:179
 msgid "Jamendo database"
@@ -2889,15 +2886,11 @@ msgstr "Síðast spilað"
 msgid "Last.fm"
 msgstr "Last.fm"
 
-#: internet/lastfm/lastfmsettingspage.cpp:77
-msgid "Last.fm authentication"
-msgstr "Last.fm auðkenning"
+#: internet/lastfm/lastfmservice.cpp:178
+msgid "Last.fm Authentication"
+msgstr "Auðkenning á Last.fm"
 
-#: internet/lastfm/lastfmsettingspage.cpp:70
-msgid "Last.fm authentication failed"
-msgstr "Auðkenning á Last.fm mistókst"
-
-#: internet/lastfm/lastfmservice.cpp:268
+#: internet/lastfm/lastfmservice.cpp:287
 msgid "Last.fm is currently busy, please try again in a few minutes"
 msgstr "Last.fm er upptekið í augnablikinu, reyndu aftur eftir nokkrar mínútur"
 
@@ -2921,12 +2914,12 @@ msgstr "Minnst vinsælu lögin"
 msgid "Left"
 msgstr "Vinstri"
 
-#: playlist/playlist.cpp:1333 ui/organisedialog.cpp:76
+#: playlist/playlist.cpp:1333 ui/organisedialog.cpp:79
 #: ui/qtsystemtrayicon.cpp:254 ../bin/src/ui_edittagdialog.h:702
 msgid "Length"
 msgstr "Lengd"
 
-#: ui/mainwindow.cpp:250 ui/mainwindow.cpp:262
+#: ui/mainwindow.cpp:251 ui/mainwindow.cpp:263
 #: ../bin/src/ui_seafilesettingspage.h:177
 msgid "Library"
 msgstr "Safn"
@@ -2935,7 +2928,7 @@ msgstr "Safn"
 msgid "Library advanced grouping"
 msgstr ""
 
-#: ui/mainwindow.cpp:2581
+#: ui/mainwindow.cpp:2611
 msgid "Library rescan notice"
 msgstr "Tilkynning um skönnun á tónlistarsafni"
 
@@ -3063,7 +3056,7 @@ msgstr "Lág (256x256)"
 msgid "Low complexity profile (LC)"
 msgstr ""
 
-#: ui/organisedialog.cpp:68 ../bin/src/ui_songinfosettingspage.h:158
+#: ui/organisedialog.cpp:71 ../bin/src/ui_songinfosettingspage.h:158
 msgid "Lyrics"
 msgstr "Lagatextar"
 
@@ -3080,7 +3073,7 @@ msgstr ""
 msgid "M4A AAC"
 msgstr "M4A AAC"
 
-#: core/song.cpp:416 transcoder/transcoder.cpp:238
+#: core/song.cpp:417 transcoder/transcoder.cpp:238
 #: ../bin/src/ui_transcodersettingspage.h:174
 msgid "MP3"
 msgstr "MP3"
@@ -3093,11 +3086,11 @@ msgstr "MP3 256k"
 msgid "MP3 96k"
 msgstr "MP3 96k"
 
-#: core/song.cpp:412
+#: core/song.cpp:413
 msgid "MP4 AAC"
 msgstr "MP4 AAC"
 
-#: core/song.cpp:414
+#: core/song.cpp:415
 msgid "MPC"
 msgstr "MPC"
 
@@ -3131,9 +3124,9 @@ msgstr "Láta það vaða!"
 msgid "Make playlist available offline"
 msgstr "Gera spilunarlista tiltækan án nettengingar"
 
-#: internet/lastfm/lastfmservice.cpp:280
+#: internet/lastfm/lastfmservice.cpp:299
 msgid "Malformed response"
-msgstr ""
+msgstr "Gallað svar"
 
 #: ../bin/src/ui_libraryfilterwidget.h:102
 msgid "Manage saved groupings"
@@ -3160,13 +3153,13 @@ msgstr "Merkja sem heyrt"
 msgid "Mark as new"
 msgstr "Merkja sem nýtt"
 
-#: ../bin/src/ui_querysearchpage.h:115
+#: ../bin/src/ui_querysearchpage.h:112
 msgid "Match every search term (AND)"
-msgstr ""
+msgstr "Samsvara öllum leitarorðum (AND)"
 
-#: ../bin/src/ui_querysearchpage.h:116
+#: ../bin/src/ui_querysearchpage.h:113
 msgid "Match one or more search terms (OR)"
-msgstr ""
+msgstr "Samsvara einu eða fleiri leitarorðum (OR)"
 
 #: ../bin/src/ui_transcoderoptionsvorbis.h:208
 msgid "Maximum bitrate"
@@ -3188,7 +3181,7 @@ msgstr "Miðlungs (512x512)"
 
 #: ../bin/src/ui_magnatunesettingspage.h:155
 msgid "Membership type"
-msgstr ""
+msgstr "Tegund skráningar"
 
 #: ../bin/src/ui_transcoderoptionsvorbis.h:205
 msgid "Minimum bitrate"
@@ -3252,7 +3245,7 @@ msgstr "Tengipunktar"
 msgid "Move down"
 msgstr "Færa niður"
 
-#: ui/mainwindow.cpp:694 widgets/fileviewlist.cpp:42
+#: ui/mainwindow.cpp:701 widgets/fileviewlist.cpp:42
 msgid "Move to library..."
 msgstr "Flytja í safn..."
 
@@ -3261,7 +3254,7 @@ msgstr "Flytja í safn..."
 msgid "Move up"
 msgstr "Færa upp"
 
-#: transcoder/transcodedialog.cpp:225 ui/mainwindow.cpp:2017
+#: transcoder/transcodedialog.cpp:225 ui/mainwindow.cpp:2027
 msgid "Music"
 msgstr "Tónlist"
 
@@ -3290,7 +3283,7 @@ msgstr "Valkostir við nafngiftir"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:229
 msgid "Narrow band (NB)"
-msgstr ""
+msgstr "Þröngtíðni (NB)"
 
 #: ../bin/src/ui_networkproxysettingspage.h:156
 msgid "Network Proxy"
@@ -3319,11 +3312,11 @@ msgstr ""
 msgid "New folder"
 msgstr "Ný mappa"
 
-#: ui/mainwindow.cpp:1834 ../bin/src/ui_mainwindow.h:709
+#: ui/mainwindow.cpp:1844 ../bin/src/ui_mainwindow.h:709
 msgid "New playlist"
 msgstr "Nýr lagalisti"
 
-#: library/libraryview.cpp:395
+#: library/libraryview.cpp:402
 msgid "New smart playlist..."
 msgstr "Nýr snjall spilunarlisti..."
 
@@ -3375,7 +3368,7 @@ msgstr ""
 #: playlist/playlistcontainer.cpp:377
 msgid ""
 "No matches found.  Clear the search box to show the whole playlist again."
-msgstr ""
+msgstr "Engar samsvaranir fundust. Hreinsaðu leitarreitinn til að birta allt safnið aftur."
 
 #: ../bin/src/ui_transcoderoptionsaac.h:144
 msgid "No short blocks"
@@ -3386,7 +3379,7 @@ msgstr ""
 msgid "None"
 msgstr "Ekkert"
 
-#: library/libraryview.cpp:640 ui/mainwindow.cpp:2323 ui/mainwindow.cpp:2482
+#: library/libraryview.cpp:661 ui/mainwindow.cpp:2333 ui/mainwindow.cpp:2492
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr ""
 
@@ -3406,19 +3399,19 @@ msgstr ""
 msgid "Not connected"
 msgstr "Ekki tengt"
 
-#: internet/lastfm/lastfmservice.cpp:271
+#: internet/lastfm/lastfmservice.cpp:290
 msgid "Not enough content"
 msgstr "Það er ekki nægilegt efni"
 
-#: internet/lastfm/lastfmservice.cpp:275
+#: internet/lastfm/lastfmservice.cpp:294
 msgid "Not enough fans"
 msgstr "Ekki nógu margir aðdáendur"
 
-#: internet/lastfm/lastfmservice.cpp:273
+#: internet/lastfm/lastfmservice.cpp:292
 msgid "Not enough members"
 msgstr "Ekki nógu margir meðlimir"
 
-#: internet/lastfm/lastfmservice.cpp:277
+#: internet/lastfm/lastfmservice.cpp:296
 msgid "Not enough neighbors"
 msgstr "Ekki nógu margir nágrannar"
 
@@ -3437,7 +3430,7 @@ msgstr ""
 
 #: ../bin/src/ui_notificationssettingspage.h:437
 msgid "Notification type"
-msgstr ""
+msgstr "Gerð tilkynninga"
 
 #: ../bin/src/ui_notificationssettingspage.h:380
 msgid "Notifications"
@@ -3449,7 +3442,7 @@ msgstr "Í spilun"
 
 #: ../bin/src/ui_podcastsettingspage.h:276
 msgid "Number of episodes to show"
-msgstr ""
+msgstr "Fjöldi þátta sem á að sýna"
 
 #: ui/notificationssettingspage.cpp:38
 msgid "OSD Preview"
@@ -3459,19 +3452,23 @@ msgstr "Forskoðun OSD-stjórntexta"
 msgid "Off"
 msgstr "Af"
 
-#: core/song.cpp:418 transcoder/transcoder.cpp:244
+#: core/song.cpp:419
+msgid "Ogg FLAC"
+msgstr "Ogg FLAC"
+
+#: transcoder/transcoder.cpp:244
 msgid "Ogg Flac"
 msgstr "Ogg Flac"
 
-#: core/song.cpp:424 transcoder/transcoder.cpp:250
+#: core/song.cpp:425 transcoder/transcoder.cpp:250
 msgid "Ogg Opus"
 msgstr "Ogg Opus"
 
-#: core/song.cpp:420 transcoder/transcoder.cpp:247
+#: core/song.cpp:421 transcoder/transcoder.cpp:247
 msgid "Ogg Speex"
 msgstr "Ogg Speex"
 
-#: core/song.cpp:422 transcoder/transcoder.cpp:241
+#: core/song.cpp:423 transcoder/transcoder.cpp:241
 #: ../bin/src/ui_magnatunedownloaddialog.h:135
 #: ../bin/src/ui_magnatunesettingspage.h:169
 msgid "Ogg Vorbis"
@@ -3491,15 +3488,15 @@ msgid ""
 "10.x.x.x\n"
 "172.16.0.0 - 172.31.255.255\n"
 "192.168.x.x"
-msgstr ""
+msgstr "Einungis samþykkja tengingar frá forritum innan IP-vistfangasviðanna:\n10.x.x.x\n172.16.0.0 - 172.31.255.255\n192.168.x.x"
 
 #: ../bin/src/ui_networkremotesettingspage.h:231
 msgid "Only allow connections from the local network"
-msgstr ""
+msgstr "Einungis leyfa tengingar af staðarneti"
 
 #: ../bin/src/ui_querysortpage.h:142
 msgid "Only show the first"
-msgstr ""
+msgstr "Aðeins birta fyrstu"
 
 #: ../bin/src/ui_appearancesettingspage.h:310
 msgid "Opacity"
@@ -3544,8 +3541,8 @@ msgstr "Opna skrá..."
 msgid "Open in Google Drive"
 msgstr "Opna í Google Drive"
 
-#: devices/deviceview.cpp:224 globalsearch/globalsearchview.cpp:461
-#: internet/core/internetservice.cpp:62 library/libraryview.cpp:384
+#: devices/deviceview.cpp:224 globalsearch/globalsearchview.cpp:460
+#: internet/core/internetservice.cpp:62 library/libraryview.cpp:389
 #: widgets/fileviewlist.cpp:36
 msgid "Open in new playlist"
 msgstr "Opna í nýjum spilunarlista"
@@ -3564,7 +3561,7 @@ msgstr "Opna í vafranum þínum"
 msgid "Open..."
 msgstr "Opna..."
 
-#: internet/lastfm/lastfmservice.cpp:257
+#: internet/lastfm/lastfmservice.cpp:276
 msgid "Operation failed"
 msgstr "Aðgerð tókst ekki"
 
@@ -3590,7 +3587,7 @@ msgstr "Opus"
 msgid "Organise Files"
 msgstr "Skipuleggja skrár"
 
-#: library/libraryview.cpp:405 ui/mainwindow.cpp:697
+#: library/libraryview.cpp:413 ui/mainwindow.cpp:704
 msgid "Organise files..."
 msgstr "Skipuleggja skrár..."
 
@@ -3603,7 +3600,7 @@ msgid "Original tags"
 msgstr "Upprunaleg merki"
 
 #: library/savedgroupingmanager.cpp:101 playlist/playlist.cpp:1341
-#: ui/organisedialog.cpp:73 ../bin/src/ui_groupbydialog.h:135
+#: ui/organisedialog.cpp:76 ../bin/src/ui_groupbydialog.h:135
 #: ../bin/src/ui_groupbydialog.h:154 ../bin/src/ui_groupbydialog.h:173
 msgid "Original year"
 msgstr "Upprunaár"
@@ -3619,7 +3616,7 @@ msgstr ""
 
 #: ../bin/src/ui_appearancesettingspage.h:317
 msgid "Other"
-msgstr ""
+msgstr "Annað"
 
 #: core/commandlineoptions.cpp:176
 msgid "Other options"
@@ -3674,7 +3671,7 @@ msgstr "Partý"
 msgid "Password"
 msgstr "Lykilorð"
 
-#: core/globalshortcuts.cpp:50 ui/mainwindow.cpp:1141 ui/mainwindow.cpp:1641
+#: core/globalshortcuts.cpp:50 ui/mainwindow.cpp:1148 ui/mainwindow.cpp:1648
 #: ui/qtsystemtrayicon.cpp:189 wiimotedev/wiimotesettingspage.cpp:114
 msgid "Pause"
 msgstr "Í bið"
@@ -3688,7 +3685,7 @@ msgid "Paused"
 msgstr "Í bið"
 
 #: library/savedgroupingmanager.cpp:86 playlist/playlist.cpp:1349
-#: ui/organisedialog.cpp:66 ../bin/src/ui_groupbydialog.h:140
+#: ui/organisedialog.cpp:69 ../bin/src/ui_groupbydialog.h:140
 #: ../bin/src/ui_groupbydialog.h:159 ../bin/src/ui_groupbydialog.h:178
 #: ../bin/src/ui_edittagdialog.h:727
 msgid "Performer"
@@ -3702,8 +3699,8 @@ msgstr "Mynddíll"
 msgid "Plain sidebar"
 msgstr "Einfalt hliðarspjald"
 
-#: core/globalshortcuts.cpp:49 ui/mainwindow.cpp:668 ui/mainwindow.cpp:1107
-#: ui/mainwindow.cpp:1126 ui/mainwindow.cpp:1645 ui/qtsystemtrayicon.cpp:177
+#: core/globalshortcuts.cpp:49 ui/mainwindow.cpp:669 ui/mainwindow.cpp:1114
+#: ui/mainwindow.cpp:1133 ui/mainwindow.cpp:1652 ui/qtsystemtrayicon.cpp:177
 #: ui/qtsystemtrayicon.cpp:203 wiimotedev/wiimotesettingspage.cpp:107
 #: ../bin/src/ui_mainwindow.h:675
 msgid "Play"
@@ -3757,13 +3754,18 @@ msgstr "Valkostir spilunarlista"
 msgid "Playlist type"
 msgstr "Gerð spilunarlista"
 
-#: internet/soundcloud/soundcloudservice.cpp:133 ui/mainwindow.cpp:268
+#: internet/soundcloud/soundcloudservice.cpp:133 ui/mainwindow.cpp:269
 msgid "Playlists"
 msgstr "Lagalisti"
 
 #: ../data/oauthsuccess.html:38
 msgid "Please close your browser and return to Clementine."
 msgstr "Lokaðu vafranum og farðu til baka í Clementine."
+
+#: internet/lastfm/lastfmservice.cpp:178
+#, qt-format
+msgid "Please open this URL in your browser: <a href=\"%1\">%1</a>"
+msgstr ""
 
 #: ../bin/src/ui_spotifysettingspage.h:213
 msgid "Plugin status:"
@@ -3917,12 +3919,12 @@ msgstr "Skoða tæki..."
 msgid "Queue Manager"
 msgstr "Biðraðastjóri"
 
-#: ui/mainwindow.cpp:1742
+#: ui/mainwindow.cpp:1752
 msgid "Queue selected tracks"
 msgstr "Setja valin lög í biðröð"
 
-#: globalsearch/globalsearchview.cpp:466 library/libraryview.cpp:389
-#: ui/mainwindow.cpp:1740
+#: globalsearch/globalsearchview.cpp:464 library/libraryview.cpp:393
+#: ui/mainwindow.cpp:1750
 msgid "Queue track"
 msgstr "Setja í biðröð"
 
@@ -4040,7 +4042,7 @@ msgstr "Fjarlægja aðgerð"
 
 #: core/globalshortcuts.cpp:83
 msgid "Remove current song from playlist"
-msgstr ""
+msgstr "Fjarlægja þetta lag af spilunarlistanum"
 
 #: ../bin/src/ui_mainwindow.h:723
 msgid "Remove duplicates from playlist"
@@ -4095,7 +4097,7 @@ msgid "Repeat track"
 msgstr "Endurtaka lag"
 
 #: devices/deviceview.cpp:221 globalsearch/globalsearchview.cpp:457
-#: internet/core/internetservice.cpp:55 library/libraryview.cpp:381
+#: internet/core/internetservice.cpp:55 library/libraryview.cpp:386
 #: widgets/fileviewlist.cpp:34
 msgid "Replace current playlist"
 msgstr "Skipta út núverandi spilunarlista"
@@ -4110,11 +4112,11 @@ msgstr ""
 
 #: ../bin/src/ui_playbacksettingspage.h:351
 msgid "Replay Gain"
-msgstr ""
+msgstr "Mögnun endurspilunar"
 
 #: ../bin/src/ui_playbacksettingspage.h:353
 msgid "Replay Gain mode"
-msgstr ""
+msgstr "Hamur fyrir mögnun endurspilunar"
 
 #: ../bin/src/ui_dynamicplaylistcontrols.h:111
 msgid "Repopulate"
@@ -4122,7 +4124,7 @@ msgstr "Endurfylla"
 
 #: ../bin/src/ui_networkremotesettingspage.h:235
 msgid "Require authentication code"
-msgstr ""
+msgstr "Krefjast auðkenningarkóða"
 
 #: widgets/lineedit.cpp:52
 msgid "Reset"
@@ -4179,7 +4181,7 @@ msgstr "Keyra"
 
 #: ../bin/src/ui_networkproxysettingspage.h:163
 msgid "SOCKS proxy"
-msgstr ""
+msgstr "SOCKS milliþjónn"
 
 #: internet/subsonic/subsonicsettingspage.cpp:147
 msgid ""
@@ -4193,7 +4195,7 @@ msgstr "Fjarlægja tækið örugglega"
 
 #: ../bin/src/ui_organisedialog.h:247
 msgid "Safely remove the device after copying"
-msgstr ""
+msgstr "Fjarlægja tækið á öruggan máta eftir afritun"
 
 #: playlist/playlist.cpp:1369 ../bin/src/ui_edittagdialog.h:708
 #: ../bin/src/ui_playbacksettingspage.h:371
@@ -4201,7 +4203,7 @@ msgstr ""
 msgid "Sample rate"
 msgstr "Safntíðni"
 
-#: ui/organisedialog.cpp:78
+#: ui/organisedialog.cpp:81
 msgid "Samplerate"
 msgstr "Safntíðni"
 
@@ -4289,7 +4291,7 @@ msgstr ""
 
 #: ../bin/src/ui_seafilesettingspage.h:164
 msgid "Seafile"
-msgstr ""
+msgstr "Seafile"
 
 #: ui/albumcoversearcher.cpp:165 ui/albumcoversearcher.cpp:182
 #: ../bin/src/ui_gpoddersearchpage.h:74 ../bin/src/ui_itunessearchpage.h:74
@@ -4297,7 +4299,7 @@ msgstr ""
 msgid "Search"
 msgstr "Leita"
 
-#: ui/mainwindow.cpp:259 ../bin/src/ui_globalsearchsettingspage.h:141
+#: ui/mainwindow.cpp:260 ../bin/src/ui_globalsearchsettingspage.h:141
 msgctxt "Global search settings dialog title."
 msgid "Search"
 msgstr "Leita"
@@ -4322,6 +4324,10 @@ msgstr "Leita á Subsonic"
 msgid "Search automatically"
 msgstr "Leita sjálfvirkt"
 
+#: ui/mainwindow.cpp:685
+msgid "Search for album"
+msgstr "Leita að hljómplötu"
+
 #: ui/albumcoverchoicecontroller.cpp:69
 msgid "Search for album covers..."
 msgstr "Leita að plötuumslögum..."
@@ -4329,6 +4335,14 @@ msgstr "Leita að plötuumslögum..."
 #: ../bin/src/ui_globalsearchview.h:207
 msgid "Search for anything"
 msgstr "Leita að einhverju"
+
+#: ui/mainwindow.cpp:682
+msgid "Search for artist"
+msgstr "Leita að flytjanda"
+
+#: globalsearch/globalsearchview.cpp:473 library/libraryview.cpp:398
+msgid "Search for this"
+msgstr "Leita að þessu"
 
 #: ../bin/src/ui_gpoddersearchpage.h:72
 msgid "Search gpodder.net"
@@ -4338,7 +4352,7 @@ msgstr "Leita á gpodder.net"
 msgid "Search iTunes"
 msgstr "Leita á iTunes"
 
-#: ../bin/src/ui_querysearchpage.h:112
+#: ../bin/src/ui_querysearchpage.h:109
 msgid "Search mode"
 msgstr "Leitarhamur"
 
@@ -4352,7 +4366,7 @@ msgid "Search results"
 msgstr "Leitarniðurstöður"
 
 #: smartplaylists/querywizardplugin.cpp:155
-#: ../bin/src/ui_querysearchpage.h:119
+#: ../bin/src/ui_querysearchpage.h:116
 msgid "Search terms"
 msgstr "Leitarorð"
 
@@ -4436,11 +4450,11 @@ msgstr "Slóð þjóns"
 msgid "Server details"
 msgstr "Nánar um þjón "
 
-#: internet/lastfm/lastfmservice.cpp:263
+#: internet/lastfm/lastfmservice.cpp:282
 msgid "Service offline"
 msgstr "Þjónusta ekki á neti"
 
-#: ui/mainwindow.cpp:1779
+#: ui/mainwindow.cpp:1789
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr "Setja %1 sem \"%2\"..."
@@ -4516,7 +4530,7 @@ msgstr "Birta fegraðan OSD-stjórntexta"
 msgid "Show above status bar"
 msgstr ""
 
-#: ui/mainwindow.cpp:635
+#: ui/mainwindow.cpp:636
 msgid "Show all songs"
 msgstr "Birta öll lög"
 
@@ -4534,18 +4548,18 @@ msgstr ""
 
 #: ui/albumcoverchoicecontroller.cpp:73 widgets/prettyimage.cpp:183
 msgid "Show fullsize..."
-msgstr ""
+msgstr "Sýna fulla stærð..."
 
-#: library/libraryview.cpp:423 ui/mainwindow.cpp:707
+#: library/libraryview.cpp:430 ui/mainwindow.cpp:714
 #: widgets/fileviewlist.cpp:53
 msgid "Show in file browser..."
 msgstr "Sýna í skráavafra..."
 
-#: ui/mainwindow.cpp:709
+#: ui/mainwindow.cpp:716
 msgid "Show in library..."
 msgstr "Sýna í safni..."
 
-#: library/libraryview.cpp:426
+#: library/libraryview.cpp:433
 msgid "Show in various artists"
 msgstr ""
 
@@ -4553,11 +4567,11 @@ msgstr ""
 msgid "Show moodbar"
 msgstr "Birta skapbrigðastiku"
 
-#: ui/mainwindow.cpp:637
+#: ui/mainwindow.cpp:638
 msgid "Show only duplicates"
 msgstr ""
 
-#: ui/mainwindow.cpp:639
+#: ui/mainwindow.cpp:640
 msgid "Show only untagged"
 msgstr ""
 
@@ -4649,11 +4663,11 @@ msgstr "Sleppa talningu"
 msgid "Skip forwards in playlist"
 msgstr "Fara áfram í spilunarlista"
 
-#: ui/mainwindow.cpp:1753
+#: ui/mainwindow.cpp:1763
 msgid "Skip selected tracks"
 msgstr "Sleppa völdum lögum"
 
-#: ui/mainwindow.cpp:1751
+#: ui/mainwindow.cpp:1761
 msgid "Skip track"
 msgstr "Sleppa lagi"
 
@@ -4669,7 +4683,7 @@ msgstr "Lítið hliðarspjald"
 msgid "Smart playlist"
 msgstr "Snjall spilunarlisti"
 
-#: library/librarymodel.cpp:1364
+#: library/librarymodel.cpp:1367
 msgid "Smart playlists"
 msgstr "Snjallir spilunarlistar"
 
@@ -4685,13 +4699,13 @@ msgstr "Mjúkt rokk"
 msgid "Song Information"
 msgstr "Upplýsingar um lag"
 
-#: ui/mainwindow.cpp:279
+#: ui/mainwindow.cpp:280
 msgid "Song info"
 msgstr "Um lagið"
 
 #: analyzers/sonogram.cpp:32
 msgid "Sonogram"
-msgstr ""
+msgstr "Sonogram"
 
 #: ../bin/src/ui_trackselectiondialog.h:204
 msgid "Sorry"
@@ -4784,7 +4798,7 @@ msgstr "Hefja umkóðun"
 msgid ""
 "Start typing something on the search box above to fill this search results "
 "list"
-msgstr ""
+msgstr "Byrjaðu að skrifa í leitarreitinn hér fyrir ofan og niðurstöðurnar munu birtast sjálfkrafa"
 
 #: transcoder/transcoder.cpp:397
 #, qt-format
@@ -4812,7 +4826,7 @@ msgstr "Stoppa eftir hvert lag"
 msgid "Stop after every track"
 msgstr "Stoppa eftir öll lög"
 
-#: ui/mainwindow.cpp:672 ../bin/src/ui_mainwindow.h:679
+#: ui/mainwindow.cpp:673 ../bin/src/ui_mainwindow.h:679
 msgid "Stop after this track"
 msgstr "Stoppa eftir þetta lag"
 
@@ -4837,7 +4851,7 @@ msgstr "Stöðva afspilun eftir lagið: %1"
 msgid "Stopped"
 msgstr "Stöðvað"
 
-#: core/song.cpp:435
+#: core/song.cpp:436
 msgid "Stream"
 msgstr "Streymi"
 
@@ -4871,11 +4885,11 @@ msgstr "Tókst!"
 #: transcoder/transcoder.cpp:189
 #, qt-format
 msgid "Successfully written %1"
-msgstr ""
+msgstr "Tókst að skrifa %1"
 
 #: ui/trackselectiondialog.cpp:167
 msgid "Suggested tags"
-msgstr ""
+msgstr "Merki sem mælt er með"
 
 #: ../bin/src/ui_edittagdialog.h:717
 #: ../bin/src/ui_notificationssettingspage.h:454
@@ -4926,7 +4940,7 @@ msgstr ""
 
 #: ../bin/src/ui_transcoderoptionsvorbis.h:203
 msgid "Target bitrate"
-msgstr ""
+msgstr "Óskabitahraði"
 
 #: ui/equalizer.cpp:156
 msgid "Techno"
@@ -4976,15 +4990,15 @@ msgid ""
 "license key. Visit subsonic.org for details."
 msgstr ""
 
-#: ui/mainwindow.cpp:2572
+#: ui/mainwindow.cpp:2602
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
-msgstr ""
+msgstr "Sú útgáfa af Clementine sem þú varst að uppfæra í, krefst þess að safnið sé skannað til fulls. Það er vegna nýrra eiginleika sem taldir eru upp hér fyrir neðan:"
 
-#: library/libraryview.cpp:562
+#: library/libraryview.cpp:582
 msgid "There are other songs in this album"
-msgstr ""
+msgstr "Það eru önnur lög á þessari hljómplötu"
 
 #: internet/podcasts/gpoddersearchpage.cpp:78
 #: internet/podcasts/gpoddertoptagsmodel.cpp:104
@@ -5018,7 +5032,7 @@ msgid ""
 "continue?"
 msgstr ""
 
-#: library/libraryview.cpp:646 ui/mainwindow.cpp:2371 widgets/fileview.cpp:189
+#: library/libraryview.cpp:667 ui/mainwindow.cpp:2381 widgets/fileview.cpp:189
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -5068,7 +5082,7 @@ msgstr ""
 
 #: devices/devicemanager.cpp:572 devices/devicemanager.cpp:583
 msgid "This device will not work properly"
-msgstr ""
+msgstr "Þetta tæki mun ekki virka eðlilega"
 
 #: devices/devicemanager.cpp:573
 msgid ""
@@ -5089,9 +5103,9 @@ msgstr ""
 msgid "This option can be changed in the \"Behavior\" preferences"
 msgstr ""
 
-#: internet/lastfm/lastfmservice.cpp:265
+#: internet/lastfm/lastfmservice.cpp:284
 msgid "This stream is for paid subscribers only"
-msgstr ""
+msgstr "Þetta streymi er einungis fyrir borgandi áskrifendur"
 
 #: devices/devicemanager.cpp:600
 #, qt-format
@@ -5102,7 +5116,7 @@ msgstr "Þessi gerð tækis er ekki studd: %1"
 msgid "Time step"
 msgstr "Tímaþrepun"
 
-#: playlist/playlist.cpp:1327 ui/organisedialog.cpp:60
+#: playlist/playlist.cpp:1327 ui/organisedialog.cpp:63
 #: ui/qtsystemtrayicon.cpp:247 ../bin/src/ui_about.h:141
 #: ../bin/src/ui_edittagdialog.h:719 ../bin/src/ui_trackselectiondialog.h:210
 #: ../bin/src/ui_ripcddialog.h:306
@@ -5121,9 +5135,9 @@ msgstr "Víxla af/á fegruðum OSD-stjórntexta"
 msgid "Toggle fullscreen"
 msgstr "Víxla heilskjá"
 
-#: ui/mainwindow.cpp:1744
+#: ui/mainwindow.cpp:1754
 msgid "Toggle queue status"
-msgstr ""
+msgstr "Víxla stöðu biðraðar"
 
 #: ../bin/src/ui_mainwindow.h:721
 msgid "Toggle scrobbling"
@@ -5147,7 +5161,7 @@ msgstr "Hæsta einkunn"
 
 #: internet/spotify/spotifyservice.cpp:423
 msgid "Top tracks"
-msgstr ""
+msgstr "Efstu lög"
 
 #: ../bin/src/ui_albumcovermanager.h:226
 msgid "Total albums:"
@@ -5165,7 +5179,7 @@ msgstr ""
 msgid "Trac&k"
 msgstr "La&g"
 
-#: playlist/playlist.cpp:1335 ui/organisedialog.cpp:69
+#: playlist/playlist.cpp:1335 ui/organisedialog.cpp:72
 #: ../bin/src/ui_trackselectiondialog.h:212 ../bin/src/ui_ripcddialog.h:304
 msgid "Track"
 msgstr "Lag"
@@ -5195,9 +5209,9 @@ msgstr "Umkóða %1 skrár í %2 þráðum"
 msgid "Transcoding options"
 msgstr "Valkostir umkóðunar"
 
-#: core/song.cpp:430
+#: core/song.cpp:431
 msgid "TrueAudio"
-msgstr ""
+msgstr "TrueAudio"
 
 #: analyzers/turbine.cpp:35
 msgid "Turbine"
@@ -5225,7 +5239,7 @@ msgstr "UUID"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:227
 msgid "Ultra wide band (UWB)"
-msgstr ""
+msgstr "Ofurbreiðtíðni (UWB)"
 
 #: internet/seafile/seafilesettingspage.cpp:131
 #: internet/seafile/seafilesettingspage.cpp:132
@@ -5237,8 +5251,8 @@ msgstr "Tókst ekki að tengjast"
 msgid "Unable to download %1 (%2)"
 msgstr ""
 
-#: core/song.cpp:439 library/librarymodel.cpp:374 library/librarymodel.cpp:379
-#: library/librarymodel.cpp:383 library/librarymodel.cpp:1156
+#: core/song.cpp:440 library/librarymodel.cpp:374 library/librarymodel.cpp:379
+#: library/librarymodel.cpp:383 library/librarymodel.cpp:1159
 #: library/savedgroupingmanager.cpp:103 playlist/playlistdelegates.cpp:305
 #: playlist/playlistmanager.cpp:522 playlist/playlistmanager.cpp:523
 #: songinfo/streamdiscoverer.cpp:87 ui/albumcoverchoicecontroller.cpp:126
@@ -5251,7 +5265,7 @@ msgid "Unknown content-type"
 msgstr ""
 
 #: internet/digitally/digitallyimportedclient.cpp:74
-#: internet/lastfm/lastfmservice.cpp:284
+#: internet/lastfm/lastfmservice.cpp:303
 msgid "Unknown error"
 msgstr "Óþekkt villa"
 
@@ -5259,11 +5273,11 @@ msgstr "Óþekkt villa"
 msgid "Unset cover"
 msgstr "Aftengja umslag"
 
-#: ui/mainwindow.cpp:1749
+#: ui/mainwindow.cpp:1759
 msgid "Unskip selected tracks"
 msgstr ""
 
-#: ui/mainwindow.cpp:1747
+#: ui/mainwindow.cpp:1757
 msgid "Unskip track"
 msgstr ""
 
@@ -5360,7 +5374,7 @@ msgstr ""
 
 #: ../bin/src/ui_wizardfinishpage.h:84
 msgid "Use dynamic mode"
-msgstr ""
+msgstr "Nota breytilegan ham"
 
 #: ../bin/src/ui_wiimotesettingspage.h:178
 msgid "Use notifications to report Wii Remote status"
@@ -5368,7 +5382,7 @@ msgstr ""
 
 #: ../bin/src/ui_appearancesettingspage.h:318
 msgid "Use system icons"
-msgstr ""
+msgstr "Nota kerfistáknmyndir"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:138
 msgid "Use temporal noise shaping"
@@ -5384,7 +5398,7 @@ msgstr "Nota sjálfgefið litastef kerfisins"
 
 #: ../bin/src/ui_networkproxysettingspage.h:157
 msgid "Use the system proxy settings"
-msgstr ""
+msgstr "Nota stillingar kerfis fyrir milliþjón (proxy)"
 
 #: ../bin/src/ui_spotifysettingspage.h:217
 msgid "Use volume normalisation"
@@ -5451,7 +5465,7 @@ msgstr "Stillingar sjóngervinga"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:232
 msgid "Voice activity detection"
-msgstr ""
+msgstr "Greining raddvirkni"
 
 #: widgets/osd.cpp:187
 #, qt-format
@@ -5475,7 +5489,7 @@ msgstr "WMA"
 msgid "Warn me when closing a playlist tab"
 msgstr ""
 
-#: core/song.cpp:428 transcoder/transcoder.cpp:256
+#: core/song.cpp:429 transcoder/transcoder.cpp:256
 msgid "Wav"
 msgstr "Wav"
 
@@ -5511,7 +5525,7 @@ msgstr "Því ekki að prófa..."
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:228
 msgid "Wide band (WB)"
-msgstr ""
+msgstr "Breiðtíðni (WB)"
 
 #: widgets/osd.cpp:245
 #, qt-format
@@ -5559,7 +5573,7 @@ msgstr "Windows Media 40k"
 msgid "Windows Media 64k"
 msgstr "Windows Media 64k"
 
-#: core/song.cpp:408 transcoder/transcoder.cpp:253
+#: core/song.cpp:409 transcoder/transcoder.cpp:253
 msgid "Windows Media audio"
 msgstr "Windows Media hljóðskrá"
 
@@ -5567,13 +5581,13 @@ msgstr "Windows Media hljóðskrá"
 msgid "Without cover:"
 msgstr "Án umslags:"
 
-#: library/libraryview.cpp:563
+#: library/libraryview.cpp:583
 msgid ""
 "Would you like to move the other songs in this album to Various Artists as "
 "well?"
 msgstr ""
 
-#: ui/mainwindow.cpp:2579
+#: ui/mainwindow.cpp:2609
 msgid "Would you like to run a full rescan right now?"
 msgstr ""
 
@@ -5590,7 +5604,7 @@ msgid "Wrong username or password."
 msgstr "Rangt notandanafn eða lykilorð."
 
 #: library/savedgroupingmanager.cpp:71 playlist/playlist.cpp:1339
-#: ui/organisedialog.cpp:72 ../bin/src/ui_groupbydialog.h:134
+#: ui/organisedialog.cpp:75 ../bin/src/ui_groupbydialog.h:134
 #: ../bin/src/ui_groupbydialog.h:153 ../bin/src/ui_groupbydialog.h:172
 #: ../bin/src/ui_trackselectiondialog.h:211 ../bin/src/ui_ripcddialog.h:312
 msgid "Year"
@@ -5617,13 +5631,13 @@ msgstr "Þú ert við það að sækja eftirfarandi hljómplötur"
 #, qt-format
 msgid ""
 "You are about to remove %1 playlists from your favorites, are you sure?"
-msgstr ""
+msgstr "Þú ert í þann mund að fjarlægja %1 spilunarlista úr eftirlætum, ertu viss um að þú viljir gera það?"
 
 #: playlist/playlisttabbar.cpp:186
 msgid ""
 "You are about to remove a playlist which is not part of your favorite playlists: the playlist will be deleted (this action cannot be undone). \n"
 "Are you sure you want to continue?"
-msgstr ""
+msgstr "Þú ert í þann mund að fjarlægja spilunarlista sem ekki er hluti af eftirlætum: listanum verður eytt (ekki er hægt að afturkalla aðgerðina). \nErtu viss um að þú viljir halda áfram?"
 
 #: ../bin/src/ui_loginstatewidget.h:168
 msgid "You are not signed in."
@@ -5686,7 +5700,7 @@ msgstr ""
 
 #: songinfo/lastfmtrackinfoprovider.cpp:85
 msgid "You love this track"
-msgstr ""
+msgstr "Þér líkar við þetta lag"
 
 #: ../bin/src/ui_globalshortcutssettingspage.h:169
 msgid ""
@@ -5703,15 +5717,11 @@ msgstr ""
 msgid "Your IP address:"
 msgstr "IP-vistfangið þitt:"
 
-#: internet/lastfm/lastfmsettingspage.cpp:93
-msgid "Your Last.fm credentials were incorrect"
-msgstr ""
-
 #: internet/magnatune/magnatunesettingspage.cpp:118
 msgid "Your Magnatune credentials were incorrect"
-msgstr ""
+msgstr "Magnatune persónuauðkennin þín voru ekki rétt"
 
-#: library/libraryview.cpp:353
+#: library/libraryview.cpp:358
 msgid "Your library is empty!"
 msgstr "Safnið þitt er tómt!"
 
@@ -5731,7 +5741,7 @@ msgstr "Kerfið þitt styður ekki OpenGL, sjóngervingar eru ekki tiltækar."
 
 #: internet/spotify/spotifysettingspage.cpp:155
 msgid "Your username or password was incorrect."
-msgstr ""
+msgstr "Notandanafnið eða lykilorðið þitt voru ekki rétt."
 
 #: smartplaylists/searchterm.cpp:382
 msgid "Z-A"
