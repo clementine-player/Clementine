@@ -2,16 +2,16 @@
 #define PLAYLISTLISTMODEL_H
 
 #include <QStandardItemModel>
-
+#include "core/song.h"
 class PlaylistListModel : public QStandardItemModel {
   Q_OBJECT
 
  public:
   PlaylistListModel(QObject* parent = nullptr);
 
-  enum Types { Type_Folder, Type_Playlist };
+  enum Types { Type_Folder, Type_Playlist, Type_Track };
 
-  enum Roles { Role_Type = Qt::UserRole, Role_PlaylistId };
+  enum Roles { Role_Type = Qt::UserRole, Role_PlaylistId, Role_TrackId };
 
   bool dropMimeData(const QMimeData* data, Qt::DropAction action, int row,
                     int column, const QModelIndex& parent);
@@ -19,6 +19,7 @@ class PlaylistListModel : public QStandardItemModel {
   // These icons will be used for newly created playlists and folders.
   // The caller will need to set these icons on existing items if there are any.
   void SetIcons(const QIcon& playlist_icon, const QIcon& folder_icon);
+  const QIcon& track_icon() const { return track_icon_; }
   const QIcon& playlist_icon() const { return playlist_icon_; }
   const QIcon& folder_icon() const { return folder_icon_; }
 
@@ -41,6 +42,9 @@ class PlaylistListModel : public QStandardItemModel {
   // added to the model yet.
   QStandardItem* NewPlaylist(const QString& name, int id) const;
 
+  // Returns a new track item. The item isn't added to the model yet.
+  QStandardItem* NewTrack(const Song& song) const;
+
   // QStandardItemModel
   bool setData(const QModelIndex& index, const QVariant& value, int role);
 
@@ -61,6 +65,7 @@ signals:
  private:
   bool dropping_rows_;
 
+  QIcon track_icon_;
   QIcon playlist_icon_;
   QIcon folder_icon_;
 
