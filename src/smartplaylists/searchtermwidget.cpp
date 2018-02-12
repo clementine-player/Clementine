@@ -163,7 +163,11 @@ void SearchTermWidget::FieldChanged(int index) {
       page = ui_->page_rating;
       break;
     case SearchTerm::Type_Text:
-      page = ui_->page_text;
+      if (ui_->op->currentIndex() == 4 || ui_->op->currentIndex() == 5) {
+        page = ui_->page_empty;
+      } else {
+        page = ui_->page_text;
+      }
       break;
     case SearchTerm::Type_Invalid:
       page = nullptr;
@@ -189,8 +193,21 @@ void SearchTermWidget::FieldChanged(int index) {
 }
 
 void SearchTermWidget::OpChanged(int index) {
+  if ((ui_->value_stack->currentWidget() == ui_->page_text) ||
+      (ui_->value_stack->currentWidget() == ui_->page_empty)) {
+    QWidget* page = nullptr;
+    // This assumes the operators always appear in the same order.
+    // Needs a better way for checking which is the current operator.
+    if (index == 4 || index == 5) {
+      page = ui_->page_empty;
+    } else {
+      page = ui_->page_text;
+    }
+    ui_->value_stack->setCurrentWidget(page);
+  }
+
   // We need to change the page only in the following case
-  if ((ui_->value_stack->currentWidget() == ui_->page_date) ||
+  else if ((ui_->value_stack->currentWidget() == ui_->page_date) ||
       (ui_->value_stack->currentWidget() == ui_->page_date_numeric) ||
       (ui_->value_stack->currentWidget() == ui_->page_date_relative)) {
     QWidget* page = nullptr;
@@ -203,6 +220,7 @@ void SearchTermWidget::OpChanged(int index) {
     }
     ui_->value_stack->setCurrentWidget(page);
   }
+
   emit Changed();
 }
 
@@ -267,7 +285,11 @@ void SearchTermWidget::SetTerm(const SearchTerm& term) {
   // The value depends on the data type
   switch (SearchTerm::TypeOf(term.field_)) {
     case SearchTerm::Type_Text:
-      ui_->value_text->setText(term.value_.toString());
+      if (ui_->value_stack->currentWidget() == ui_->page_empty) {
+        ui_->value_text->setText("");
+      } else {
+        ui_->value_text->setText(term.value_.toString());
+      }
       break;
 
     case SearchTerm::Type_Number:
@@ -313,6 +335,8 @@ SearchTerm SearchTermWidget::Term() const {
   const QWidget* value_page = ui_->value_stack->currentWidget();
   if (value_page == ui_->page_text) {
     ret.value_ = ui_->value_text->text();
+  } else if (value_page == ui_->page_empty) {
+    ret.value_ = "";
   } else if (value_page == ui_->page_number) {
     ret.value_ = ui_->value_number->value();
   } else if (value_page == ui_->page_date) {

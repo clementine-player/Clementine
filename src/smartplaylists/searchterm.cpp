@@ -128,6 +128,10 @@ QString SearchTerm::ToSql() const {
       } else {
         return col + " <> " + value;
       }
+    case Op_Empty:
+      return col + " = ''";
+    case Op_NotEmpty:
+      return col + " <> ''";
   }
 
   return QString();
@@ -143,6 +147,11 @@ bool SearchTerm::is_valid() const {
 
   switch (TypeOf(field_)) {
     case Type_Text:
+      if (operator_ == SearchTerm::Op_Empty || operator_ == SearchTerm::Op_NotEmpty) {
+        return true;
+      }
+      // Empty fields should be possible.
+      // All values for Type_Text should be valid.
       return !value_.toString().isEmpty();
     case Type_Date:
       return value_.toInt() != 0;
@@ -199,7 +208,8 @@ OperatorList SearchTerm::OperatorsForType(Type type) {
   switch (type) {
     case Type_Text:
       return OperatorList() << Op_Contains << Op_NotContains << Op_Equals
-                            << Op_NotEquals << Op_StartsWith << Op_EndsWith;
+                            << Op_NotEquals << Op_Empty << Op_NotEmpty
+                            << Op_StartsWith << Op_EndsWith;
     case Type_Date:
       return OperatorList() << Op_Equals << Op_NotEquals << Op_GreaterThan
                             << Op_LessThan << Op_NumericDate
@@ -249,6 +259,10 @@ QString SearchTerm::OperatorText(Type type, Operator op) {
       return QObject::tr("equals");
     case Op_NotEquals:
       return QObject::tr("not equals");
+    case Op_Empty:
+      return QObject::tr("empty");
+    case Op_NotEmpty:
+      return QObject::tr("not empty");
     default:
       return QString();
   }
