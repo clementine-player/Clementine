@@ -149,6 +149,9 @@ void SearchTermWidget::FieldChanged(int index) {
 
   // Show the correct value editor
   QWidget* page = nullptr;
+  SearchTerm::Operator op = static_cast<SearchTerm::Operator>(
+    ui_->op->itemData(ui_->op->currentIndex()).toInt()
+  );
   switch (type) {
     case SearchTerm::Type_Time:
       page = ui_->page_time;
@@ -163,7 +166,7 @@ void SearchTermWidget::FieldChanged(int index) {
       page = ui_->page_rating;
       break;
     case SearchTerm::Type_Text:
-      if (ui_->op->currentIndex() == 4 || ui_->op->currentIndex() == 5) {
+      if (op == SearchTerm::Op_Empty || op == SearchTerm::Op_NotEmpty) {
         page = ui_->page_empty;
       } else {
         page = ui_->page_text;
@@ -193,27 +196,29 @@ void SearchTermWidget::FieldChanged(int index) {
 }
 
 void SearchTermWidget::OpChanged(int index) {
+  // Determine the currently selected operator
+  SearchTerm::Operator op = static_cast<SearchTerm::Operator>(
+    // This uses the operators’s index in the combobox to get its enum value
+    ui_->op->itemData(ui_->op->currentIndex()).toInt()
+  );
+
+  // We need to change the page only in the following case
   if ((ui_->value_stack->currentWidget() == ui_->page_text) ||
       (ui_->value_stack->currentWidget() == ui_->page_empty)) {
     QWidget* page = nullptr;
-    // This assumes the operators always appear in the same order.
-    // Needs a better way for checking which is the current operator.
-    if (index == 4 || index == 5) {
+    if (op == SearchTerm::Op_Empty || op == SearchTerm::Op_NotEmpty) {
       page = ui_->page_empty;
     } else {
       page = ui_->page_text;
     }
     ui_->value_stack->setCurrentWidget(page);
-  }
-
-  // We need to change the page only in the following case
-  else if ((ui_->value_stack->currentWidget() == ui_->page_date) ||
+  } else if ((ui_->value_stack->currentWidget() == ui_->page_date) ||
       (ui_->value_stack->currentWidget() == ui_->page_date_numeric) ||
       (ui_->value_stack->currentWidget() == ui_->page_date_relative)) {
     QWidget* page = nullptr;
-    if (index == 4 || index == 5) {
+    if (op == SearchTerm::Op_NumericDate || op == SearchTerm::Op_NumericDateNot) {
       page = ui_->page_date_numeric;
-    } else if (index == 6) {
+    } else if (op == SearchTerm::Op_RelativeDate) {
       page = ui_->page_date_relative;
     } else {
       page = ui_->page_date;
