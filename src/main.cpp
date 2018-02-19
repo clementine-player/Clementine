@@ -252,9 +252,9 @@ int main(int argc, char* argv[]) {
   }
 #endif
 
-  QCoreApplication::setApplicationName("Clementine-qt5");
+  QCoreApplication::setApplicationName("Clementine");
   QCoreApplication::setApplicationVersion(CLEMENTINE_VERSION_DISPLAY);
-  QCoreApplication::setOrganizationName("Clementine-qt5");
+  QCoreApplication::setOrganizationName("Clementine");
   QCoreApplication::setOrganizationDomain("clementine-player.org");
 
 // This makes us show up nicely in gnome-volume-control
