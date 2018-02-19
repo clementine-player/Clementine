@@ -42,6 +42,13 @@
        <number>0</number>
       </property>
       <item>
+       <widget class="QSearchField" name="search" native="true">
+        <property name="placeholderText" stdset="0">
+         <string>Search for anything</string>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="QToolButton" name="new_folder">
         <property name="toolTip">
          <string>New folder</string>
@@ -71,19 +78,6 @@
          <enum>Qt::Vertical</enum>
         </property>
        </widget>
-      </item>
-      <item>
-       <spacer name="horizontalSpacer">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>70</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
       </item>
      </layout>
     </widget>
@@ -125,6 +119,11 @@
   </layout>
  </widget>
  <customwidgets>
+  <customwidget>
+   <class>QSearchField</class>
+   <extends>QWidget</extends>
+   <header>3rdparty/qocoa/qsearchfield.h</header>
+  </customwidget>
   <customwidget>
    <class>AutoExpandingTreeView</class>
    <extends>QTreeView</extends>

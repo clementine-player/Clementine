@@ -1,40 +1,13 @@
+sudo: required
 language: cpp
 
-addons:
-  apt:
-    packages:
-    - cmake
-    - gettext
-    - libboost-dev
-    - libboost-serialization-dev
-    - libcdio-dev
-    - libchromaprint-dev
-    - libcrypto++-dev
-    - libechonest-dev
-    - libfftw3-dev
-    - libglew1.5-dev
-    - libgpod-dev
-    - libgstreamer1.0-dev
-    - libgstreamer-plugins-base1.0-dev
-    - liblastfm-dev
-    - libmtp-dev
-    - libplist-dev
-    - libprotobuf-dev
-    - libpulse-dev
-    - libqca2-dev
-    - libqca2-plugin-ossl
-    - libqjson-dev
-    - libqt4-dev
-    - libqt4-opengl-dev
-    - libqtwebkit-dev
-    - libsparsehash-dev
-    - libsqlite3-dev
-    - libtag1-dev
-    - libusbmuxd-dev
-    - protobuf-compiler
-    - qt4-dev-tools
+services:
+  - docker
+
+before_script:
+  - sudo docker pull gcr.io/clementine-data/slave-ubuntu-bionic-64
 
 script:
-  - cd bin
-  - cmake ..
-  - make
+  - >
+    sudo docker run --entrypoint=/bin/bash -v ${TRAVIS_BUILD_DIR}:/build gcr.io/clementine-data/slave-ubuntu-bionic-64
+    -c 'cd /build/bin && cmake .. && make'

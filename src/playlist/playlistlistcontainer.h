@@ -31,6 +31,8 @@ class Playlist;
 class PlaylistListModel;
 class Ui_PlaylistListContainer;
 
+class PlaylistListFilterProxyModel;
+
 class PlaylistListContainer : public QWidget {
   Q_OBJECT
 
@@ -49,6 +51,7 @@ class PlaylistListContainer : public QWidget {
   void NewFolderClicked();
   void DeleteClicked();
   void ItemDoubleClicked(const QModelIndex& index);
+  void SearchTextEdited(const QString& text);
 
   // From the model
   void PlaylistPathChanged(int id, const QString& new_path);
@@ -56,7 +59,7 @@ class PlaylistListContainer : public QWidget {
   // From the PlaylistManager
   void PlaylistRenamed(int id, const QString& new_name);
   // Add playlist if favorite == true
-  void AddPlaylist(int id, const QString& name, bool favorite);
+  void AddPlaylist(int id, const QString& name, bool favorite, const QString *ui_path = nullptr);
   void RemovePlaylist(int id);
   void SavePlaylist();
   void PlaylistFavoriteStateChanged(int id, bool favorite);
@@ -87,7 +90,7 @@ class PlaylistListContainer : public QWidget {
   QAction* action_save_playlist_;
 
   PlaylistListModel* model_;
-  QSortFilterProxyModel* proxy_;
+  PlaylistListFilterProxyModel* proxy_;
 
   bool loaded_icons_;
   QIcon padded_play_icon_;
