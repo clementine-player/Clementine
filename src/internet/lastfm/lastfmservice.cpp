@@ -145,13 +145,14 @@ QByteArray SignApiRequest(QList<QPair<QString, QString>> params) {
 
 void LastFMService::Authenticate() {
   QUrl url("https://www.last.fm/api/auth/");
-  QUrlQuery url_query;
-  url_query.addQueryItem("api_key", kApiKey);
 
   LocalRedirectServer* server = new LocalRedirectServer(this);
   server->Listen();
 
+  QUrlQuery url_query;
+  url_query.addQueryItem("api_key", kApiKey);
   url_query.addQueryItem("cb", server->url().toString());
+  url.setQuery(url_query);
 
   NewClosure(server, SIGNAL(Finished()), [this, server]() {
     server->deleteLater();
