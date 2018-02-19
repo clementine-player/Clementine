@@ -9,5 +9,5 @@ before_script:
 
 script:
   - >
-    sudo docker run gcr.io/clementine-data/slave-ubuntu-bionic-64 --entrypoint=/bin/bash -v ${TRAVIS_BUILD_DIR}:/build
+    sudo docker run --entrypoint=/bin/bash -v ${TRAVIS_BUILD_DIR}:/build gcr.io/clementine-data/slave-ubuntu-bionic-64
     -c 'cd /build/bin && cmake .. && make'
