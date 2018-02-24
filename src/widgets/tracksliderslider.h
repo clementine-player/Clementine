@@ -39,7 +39,6 @@ signals:
   void mouseMoveEvent(QMouseEvent* e);
   void wheelEvent(QWheelEvent *e);
   void enterEvent(QEvent*);
-  void leaveEvent(QEvent*);
   void keyPressEvent(QKeyEvent* event);
 
  private slots:
