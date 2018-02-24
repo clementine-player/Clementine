@@ -33,6 +33,7 @@ class TrackSliderPopup : public QWidget {
 
  protected:
   void paintEvent(QPaintEvent*);
+  void leaveEvent(QEvent*);
 
  private:
   static const int kTextMargin;
