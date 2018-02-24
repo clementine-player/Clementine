@@ -66,11 +66,6 @@ void TrackSliderPopup::paintEvent(QPaintEvent*) {
   p.drawPixmap(0, 0, pixmap_);
 }
 
-void TrackSliderPopup::leaveEvent(QEvent* e) {
-  QWidget::leaveEvent(e);
-  hide();
-}
-
 void TrackSliderPopup::UpdatePixmap() {
   const int text_width =
       qMax(font_metrics_.width(text_), small_font_metrics_.width(small_text_));
