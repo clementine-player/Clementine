@@ -103,6 +103,11 @@ void TrackSliderSlider::enterEvent(QEvent* e) {
   }
 }
 
+void TrackSliderSlider::leaveEvent(QEvent* e) {
+  QSlider::leaveEvent(e);
+  popup_->hide();
+}
+
 void TrackSliderSlider::keyPressEvent(QKeyEvent* event) {
   if (event->key() == Qt::Key_Left || event->key() == Qt::Key_Down) {
     emit SeekBackward();
