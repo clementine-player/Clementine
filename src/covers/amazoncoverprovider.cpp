@@ -63,19 +63,19 @@ bool AmazonCoverProvider::StartSearch(const QString& artist,
                                         "yyyy-MM-ddThh:mm:ss.zzzZ"))
                 << Arg("Version", "2009-11-01");
 
-  EncodedArgList encoded_args;
+  QUrlQuery url_query;
+  QUrl url(kUrl);
   QStringList query_items;
 
   // Encode the arguments
   for (const Arg& arg : args) {
     EncodedArg encoded_arg(QUrl::toPercentEncoding(arg.first),
                            QUrl::toPercentEncoding(arg.second));
-    encoded_args << encoded_arg;
     query_items << QString(encoded_arg.first + "=" + encoded_arg.second);
+    url_query.addQueryItem(encoded_arg.first, encoded_arg.second);
   }
 
   // Sign the request
-  QUrl url(kUrl);
 
   const QByteArray data_to_sign =
       QString("GET\n%1\n%2\n%3")
@@ -85,7 +85,7 @@ bool AmazonCoverProvider::StartSearch(const QString& artist,
       QByteArray::fromBase64(kSecretAccessKeyB64), data_to_sign));
 
   // Add the signature to the request
-  QUrlQuery url_query;
+
   url_query.addQueryItem("Signature", QUrl::toPercentEncoding(signature.toBase64()));
   url.setQuery(url_query);
 
