@@ -23,8 +23,8 @@
 #include <QDateTime>
 #include <QNetworkReply>
 #include <QStringList>
-#include <QXmlStreamReader>
 #include <QUrlQuery>
+#include <QXmlStreamReader>
 
 #include "core/closure.h"
 #include "core/logging.h"
@@ -86,7 +86,8 @@ bool AmazonCoverProvider::StartSearch(const QString& artist,
 
   // Add the signature to the request
 
-  url_query.addQueryItem("Signature", QUrl::toPercentEncoding(signature.toBase64()));
+  url_query.addQueryItem("Signature",
+                         QUrl::toPercentEncoding(signature.toBase64()));
   url.setQuery(url_query);
 
   QNetworkReply* reply = network_->get(QNetworkRequest(url));
