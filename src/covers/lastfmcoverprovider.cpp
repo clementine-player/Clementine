@@ -60,6 +60,7 @@ void LastFmCoverProvider::QueryFinished(QNetworkReply* reply, int id) {
       result.description =
           element["artist"].text() + " - " + element["name"].text();
       result.image_url = QUrl(element["image size=extralarge"].text());
+      if (result.image_url.isEmpty()) continue;
       results << result;
     }
   } else {
