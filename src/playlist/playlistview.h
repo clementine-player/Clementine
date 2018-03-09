@@ -195,15 +195,17 @@ signals:
   bool read_only_settings_;
   int upgrading_from_version_;
 
+  bool background_initialized_;
   BackgroundImageType background_image_type_;
+  // Used if background image is a filemane
+  QString background_image_filename_;
   // Stores the background image to be displayed. As we want this image to be
   // particular (in terms of format, opacity), you should probably use
   // set_background_image_type instead of modifying background_image_ directly
   QImage background_image_;
   int blur_radius_;
   int opacity_level_;
-  // Used if background image is a filemane
-  QString background_image_filename_;
+
   QImage current_song_cover_art_;
   QPixmap cached_scaled_background_image_;
 
