@@ -114,7 +114,6 @@ PlaylistView::PlaylistView(QWidget* parent)
       upgrading_from_version_(-1),
       background_initialized_(false),
       background_image_type_(Default),
-      //background_image_filename_("_"),
       blur_radius_(kDefaultBlurRadius),
       opacity_level_(kDefaultOpacityLevel),
       previous_background_image_opacity_(0.0),
