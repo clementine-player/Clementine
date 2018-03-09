@@ -1412,7 +1412,7 @@ void MainWindow::closeEvent(QCloseEvent* event) {
     event->ignore();
     SetHiddenInTray(true);
   } else {
-    QApplication::quit();
+    Exit();
   }
 }
 
