@@ -185,9 +185,8 @@ bool GstEnginePipeline::ReplaceDecodeBin(const QUrl& url) {
     if (url.scheme() == "cdda") {
       QString str = url.toString();
       str.remove(str.lastIndexOf(QChar('a')), 1);
-      uri = str.toUtf8();;
-    }
-    else {
+      uri = str.toUtf8();
+    } else {
       uri = url.toEncoded();
     }
     new_bin = engine_->CreateElement("uridecodebin");
