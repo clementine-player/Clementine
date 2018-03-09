@@ -190,8 +190,7 @@ bool GstEnginePipeline::ReplaceDecodeBin(const QUrl& url) {
       uri = url.toEncoded();
     }
     new_bin = engine_->CreateElement("uridecodebin");
-    g_object_set(G_OBJECT(new_bin), "uri", uri.constData(),
-                 nullptr);
+    g_object_set(G_OBJECT(new_bin), "uri", uri.constData(), nullptr);
     CHECKED_GCONNECT(G_OBJECT(new_bin), "drained", &SourceDrainedCallback,
                      this);
     CHECKED_GCONNECT(G_OBJECT(new_bin), "pad-added", &NewPadCallback, this);
