@@ -181,8 +181,17 @@ bool GstEnginePipeline::ReplaceDecodeBin(const QUrl& url) {
         spotify_server, "StartPlayback", Qt::QueuedConnection,
         Q_ARG(QString, url.toString()), Q_ARG(quint16, port));
   } else {
+    QByteArray uri;
+    if (url.scheme() == "cdda") {
+      QString str = url.toString();
+      str.remove(str.lastIndexOf(QChar('a')), 1);
+      uri = str.toUtf8();;
+    }
+    else {
+      uri = url.toEncoded();
+    }
     new_bin = engine_->CreateElement("uridecodebin");
-    g_object_set(G_OBJECT(new_bin), "uri", url.toEncoded().constData(),
+    g_object_set(G_OBJECT(new_bin), "uri", uri.constData(),
                  nullptr);
     CHECKED_GCONNECT(G_OBJECT(new_bin), "drained", &SourceDrainedCallback,
                      this);
