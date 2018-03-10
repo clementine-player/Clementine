@@ -38,7 +38,7 @@ const char* DigitallyImportedClient::kAuthUrl =
     "http://api.audioaddict.com/v1/%1/members/authenticate";
 
 const char* DigitallyImportedClient::kChannelListUrl =
-    "http://api.v2.audioaddict.com/v1/%1/mobile/"
+    "http://api.audioaddict.com/v1/%1/mobile/"
     "batch_update?asset_group_key=mobile_icons&stream_set_key=";
 
 DigitallyImportedClient::DigitallyImportedClient(const QString& service_name,
