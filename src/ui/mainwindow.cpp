@@ -1408,7 +1408,7 @@ void MainWindow::closeEvent(QCloseEvent* event) {
   bool keep_running = s.value("keeprunning", tray_icon_->IsVisible()).toBool();
 
   if (keep_running && event->spontaneous()) {
-    event->ignore();
+    event->accept();
     SetHiddenInTray(true);
   } else {
     QApplication::quit();
