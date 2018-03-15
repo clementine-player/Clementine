@@ -19,6 +19,6 @@
 
 #include "coverprovider.h"
 
-CoverProvider::CoverProvider(const QString& name, const bool& fetchall, QObject* parent)
+CoverProvider::CoverProvider(const QString& name, const bool& fetchall,
+                             QObject* parent)
     : QObject(parent), name_(name), fetchall_(fetchall) {}
-

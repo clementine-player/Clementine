@@ -35,7 +35,8 @@ class CoverProvider : public QObject {
   Q_OBJECT
 
  public:
-  explicit CoverProvider(const QString& name, const bool& fetchall, QObject* parent);
+  explicit CoverProvider(const QString& name, const bool& fetchall,
+                         QObject* parent);
 
   // A name (very short description) of this provider, like "last.fm".
   QString name() const { return name_; }
@@ -55,7 +56,6 @@ class CoverProvider : public QObject {
  private:
   QString name_;
   bool fetchall_;
-
 };
 
 #endif  // COVERS_COVERPROVIDER_H_
