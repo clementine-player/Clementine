@@ -53,6 +53,7 @@ quint64 AlbumCoverFetcher::FetchAlbumCover(const QString& artist,
 
 quint64 AlbumCoverFetcher::SearchForCovers(const QString& artist,
                                            const QString& album) {
+  fetchall_ = false;
   CoverSearchRequest request;
   request.artist = artist;
   request.album = album;
@@ -95,6 +96,7 @@ void AlbumCoverFetcher::StartRequests() {
     // deleted with it
     AlbumCoverFetcherSearch* search =
         new AlbumCoverFetcherSearch(request, network_, this);
+    search->fetchall_ = fetchall_;
     active_requests_.insert(request.id, search);
 
     connect(search, SIGNAL(SearchFinished(quint64, CoverSearchResults)),

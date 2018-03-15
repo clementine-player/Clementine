@@ -63,6 +63,10 @@ void AlbumCoverFetcherSearch::TerminateSearch() {
 
 void AlbumCoverFetcherSearch::Start(CoverProviders* cover_providers) {
   for (CoverProvider* provider : cover_providers->List()) {
+    // Skip provider if it does not have fetchall set, and we are doing fetchall - "Fetch Missing Covers".
+    if ((provider->fetchall() == false) && (fetchall_ == true)) {
+	continue;
+    }
     connect(provider, SIGNAL(SearchFinished(int, QList<CoverSearchResult>)),
             SLOT(ProviderSearchFinished(int, QList<CoverSearchResult>)));
     const int id = cover_providers->NextId();

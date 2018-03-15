@@ -91,6 +91,8 @@ class AlbumCoverFetcher : public QObject {
   quint64 FetchAlbumCover(const QString& artist, const QString& album);
 
   void Clear();
+  
+  bool fetchall_ = false;
 
  signals:
   void AlbumCoverFetched(quint64, const QImage& cover,

@@ -29,7 +29,7 @@
 #include "internet/lastfm/lastfmcompat.h"
 
 LastFmCoverProvider::LastFmCoverProvider(QObject* parent)
-    : CoverProvider("last.fm", parent) {}
+    : CoverProvider("last.fm", true, parent) {}
 
 bool LastFmCoverProvider::StartSearch(const QString& artist,
                                       const QString& album, int id) {
