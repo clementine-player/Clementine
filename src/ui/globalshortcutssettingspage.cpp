@@ -24,6 +24,7 @@
 #include "ui/iconloader.h"
 #include "ui/settingsdialog.h"
 
+#include <QAction>
 #include <QKeyEvent>
 #include <QMessageBox>
 #include <QProcess>
