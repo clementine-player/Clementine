@@ -51,6 +51,9 @@ struct CoverSearchRequest {
   // is this only a search request or should we also fetch the first
   // cover that's found?
   bool search;
+  
+  // is the request part of fetchall (fetching all missing covers)
+  bool fetchall;
 };
 
 // This structure represents a single result of some album's cover search
@@ -88,11 +91,9 @@ class AlbumCoverFetcher : public QObject {
   static const int kMaxConcurrentRequests;
 
   quint64 SearchForCovers(const QString& artist, const QString& album);
-  quint64 FetchAlbumCover(const QString& artist, const QString& album);
+  quint64 FetchAlbumCover(const QString& artist, const QString& album, bool fetchall);
 
   void Clear();
-
-  bool fetchall_ = false;
 
  signals:
   void AlbumCoverFetched(quint64, const QImage& cover,

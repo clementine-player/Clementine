@@ -424,14 +424,13 @@ bool AlbumCoverManager::ShouldHide(const QListWidgetItem& item,
 }
 
 void AlbumCoverManager::FetchAlbumCovers() {
-  cover_fetcher_->fetchall_ = true;
   for (int i = 0; i < ui_->albums->count(); ++i) {
     QListWidgetItem* item = ui_->albums->item(i);
     if (item->isHidden()) continue;
     if (ItemHasCover(*item)) continue;
 
     quint64 id = cover_fetcher_->FetchAlbumCover(
-        EffectiveAlbumArtistName(*item), item->data(Role_AlbumName).toString());
+        EffectiveAlbumArtistName(*item), item->data(Role_AlbumName).toString(), true);
     cover_fetching_tasks_[id] = item;
     jobs_++;
   }
@@ -565,10 +564,9 @@ void AlbumCoverManager::ShowCover() {
 }
 
 void AlbumCoverManager::FetchSingleCover() {
-  cover_fetcher_->fetchall_ = false;
   for (QListWidgetItem* item : context_menu_items_) {
     quint64 id = cover_fetcher_->FetchAlbumCover(
-        EffectiveAlbumArtistName(*item), item->data(Role_AlbumName).toString());
+        EffectiveAlbumArtistName(*item), item->data(Role_AlbumName).toString(), false);
     cover_fetching_tasks_[id] = item;
     jobs_++;
   }

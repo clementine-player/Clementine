@@ -51,8 +51,6 @@ class AlbumCoverFetcherSearch : public QObject {
 
   CoverSearchStatistics statistics() const { return statistics_; }
 
-  bool fetchall_ = false;
-
  signals:
   // It's the end of search (when there was no fetch-me-a-cover request).
   void SearchFinished(quint64, const CoverSearchResults& results);

@@ -52,7 +52,7 @@ DiscogsCoverProvider::DiscogsCoverProvider(QObject* parent)
 bool DiscogsCoverProvider::StartSearch(const QString& artist,
                                        const QString& album, int s_id) {
   DiscogsCoverSearchContext* s_ctx = new DiscogsCoverSearchContext;
-  if (s_ctx == nullptr) return false;
+
   s_ctx->id = s_id;
   s_ctx->artist = artist;
   s_ctx->album = album;
@@ -70,7 +70,6 @@ void DiscogsCoverProvider::CancelSearch(int id) {
 bool DiscogsCoverProvider::StartRelease(DiscogsCoverSearchContext* s_ctx,
                                         int r_id, QString resource_url) {
   DiscogsCoverReleaseContext* r_ctx = new DiscogsCoverReleaseContext;
-  if (r_ctx == nullptr) return false;
 
   s_ctx->r_count++;
 
@@ -120,7 +119,7 @@ void DiscogsCoverProvider::SendSearchRequest(DiscogsCoverSearchContext* s_ctx) {
   const QByteArray data_to_sign =
       QString("GET\n%1\n%2\n%3")
           .arg(url.host(), url.path(), query_items.join("&"))
-          .toLatin1();
+          .toUtf8();
   const QByteArray signature(Utilities::HmacSha256(
       QByteArray::fromBase64(kSecretKeyB64), data_to_sign));
 
@@ -167,7 +166,7 @@ void DiscogsCoverProvider::SendReleaseRequest(
   const QByteArray data_to_sign =
       QString("GET\n%1\n%2\n%3")
           .arg(url.host(), url.path(), query_items.join("&"))
-          .toLatin1();
+          .toUtf8();
   const QByteArray signature(Utilities::HmacSha256(
       QByteArray::fromBase64(kSecretKeyB64), data_to_sign));
 
@@ -190,30 +189,19 @@ void DiscogsCoverProvider::SendReleaseRequest(
 void DiscogsCoverProvider::HandleSearchReply(QNetworkReply* reply, int s_id) {
   reply->deleteLater();
 
-  DiscogsCoverSearchContext* s_ctx;
-  if (!requests_search_.contains(s_id)) {
-    return;
-  }
-  s_ctx = requests_search_.value(s_id);
-  if (s_ctx == nullptr) return;
+  if (!requests_search_.contains(s_id)) return;
+  DiscogsCoverSearchContext* s_ctx = requests_search_.value(s_id);
 
-  QString json_string = reply->readAll();
-  QByteArray json_bytes = json_string.toLocal8Bit();
-  auto json_doc = QJsonDocument::fromJson(json_bytes);
-  if (json_doc.isNull()) {
+  QJsonDocument json_doc = QJsonDocument::fromJson(reply->readAll());
+  if ((json_doc.isNull()) || (!json_doc.isObject())) {
     qLog(Error) << "Discogs: Failed to create JSON doc.";
-    EndSearch(s_ctx);
-    return;
-  }
-  if (!json_doc.isObject()) {
-    qLog(Error) << "Discogs: JSON is not an object.";
     EndSearch(s_ctx);
     return;
   }
 
   QJsonObject json_obj = json_doc.object();
   if (json_obj.isEmpty()) {
-    qLog(Error) << "Discogs: JSON object is empty.";
+    qLog(Error) << "Discogs: Failed to create JSON object.";
     EndSearch(s_ctx);
     return;
   }
@@ -226,26 +214,16 @@ void DiscogsCoverProvider::HandleSearchReply(QNetworkReply* reply, int s_id) {
 
   QVariantList results = reply_map["results"].toList();
   int i = 0;
-
   for (const QVariant& result : results) {
     QVariantMap result_map = result.toMap();
-    int r_id = 0;
-    QString title;
-    QString resource_url;
-    if ((!result_map.contains("id")) || (!result_map.contains("resource_url")))
-      continue;
-
-    if (result_map.contains("id")) {
-      r_id = result_map["id"].toInt();
+    if ((result_map.contains("id")) && (result_map.contains("resource_url"))) {
+      int r_id = result_map["id"].toInt();
+      QString title = result_map["title"].toString();
+      QString resource_url = result_map["resource_url"].toString();
+      if (resource_url.isEmpty()) continue;
+      StartRelease(s_ctx, r_id, resource_url);
+      i++;
     }
-    if (result_map.contains("title")) {
-      title = result_map["title"].toString();
-    }
-    if (result_map.contains("resource_url")) {
-      resource_url = result_map["resource_url"].toString();
-    }
-    StartRelease(s_ctx, r_id, resource_url);
-    i++;
   }
   if (i <= 0) EndSearch(s_ctx);
 }
@@ -254,35 +232,21 @@ void DiscogsCoverProvider::HandleReleaseReply(QNetworkReply* reply, int s_id,
                                               int r_id) {
   reply->deleteLater();
 
-  DiscogsCoverReleaseContext* r_ctx;
-  if (!requests_release_.contains(r_id)) {
-    return;
-  }
-  r_ctx = requests_release_.value(r_id);
-  if (r_ctx == nullptr) return;
+  if (!requests_release_.contains(r_id)) return;
+  DiscogsCoverReleaseContext* r_ctx = requests_release_.value(r_id);
 
-  DiscogsCoverSearchContext* s_ctx;
   if (!requests_search_.contains(s_id)) {
     EndSearch(r_ctx);
     return;
   }
-  s_ctx = requests_search_.value(s_id);
-  if (s_ctx == nullptr) return;
+  DiscogsCoverSearchContext* s_ctx = requests_search_.value(s_id);
 
-  QString json_string = reply->readAll();
-  QByteArray json_bytes = json_string.toLocal8Bit();
-  auto json_doc = QJsonDocument::fromJson(json_bytes);
-  if (json_doc.isNull()) {
+  QJsonDocument json_doc = QJsonDocument::fromJson(reply->readAll());
+  if ((json_doc.isNull()) || (!json_doc.isObject())) {
     qLog(Error) << "Discogs: Failed to create JSON doc.";
     EndSearch(s_ctx, r_ctx);
     return;
   }
-  if (!json_doc.isObject()) {
-    qLog(Error) << "Discogs: JSON is not an object.";
-    EndSearch(s_ctx, r_ctx);
-    return;
-  }
-
   QJsonObject json_obj = json_doc.object();
   if (json_obj.isEmpty()) {
     qLog(Error) << "Discogs: JSON object is empty.";
@@ -319,12 +283,8 @@ void DiscogsCoverProvider::HandleReleaseReply(QNetworkReply* reply, int s_id,
 
 void DiscogsCoverProvider::SearchRequestError(QNetworkReply::NetworkError error,
                                               QNetworkReply* reply, int s_id) {
-  DiscogsCoverSearchContext* s_ctx;
-  if (!requests_search_.contains(s_id)) {
-    return;
-  }
-  s_ctx = requests_search_.value(s_id);
-  if (s_ctx == nullptr) return;
+  if (!requests_search_.contains(s_id)) return;
+  DiscogsCoverSearchContext* s_ctx = requests_search_.value(s_id);
 
   EndSearch(s_ctx);
 }
@@ -332,29 +292,21 @@ void DiscogsCoverProvider::SearchRequestError(QNetworkReply::NetworkError error,
 void DiscogsCoverProvider::ReleaseRequestError(
     QNetworkReply::NetworkError error, QNetworkReply* reply, int s_id,
     int r_id) {
-  DiscogsCoverReleaseContext* r_ctx;
-  if (!requests_release_.contains(r_id)) {
-    return;
-  }
-  r_ctx = requests_release_.value(r_id);
-  if (r_ctx == nullptr) return;
 
-  DiscogsCoverSearchContext* s_ctx;
+  if (!requests_release_.contains(r_id)) return;
+  DiscogsCoverReleaseContext* r_ctx = requests_release_.value(r_id);
+
   if (!requests_search_.contains(s_id)) {
     EndSearch(r_ctx);
+    return;
   }
-  s_ctx = requests_search_.value(s_id);
-  if (s_ctx == nullptr) return;
-
+  DiscogsCoverSearchContext* s_ctx = requests_search_.value(s_id);
   EndSearch(s_ctx, r_ctx);
 }
 
 void DiscogsCoverProvider::EndSearch(DiscogsCoverSearchContext* s_ctx,
                                      DiscogsCoverReleaseContext* r_ctx) {
-  (void)requests_release_.remove(r_ctx->id);
-  delete r_ctx;
-
-  if (s_ctx == nullptr) return;
+  delete requests_release_.take(r_ctx->id);
 
   s_ctx->r_count--;
 
@@ -362,12 +314,11 @@ void DiscogsCoverProvider::EndSearch(DiscogsCoverSearchContext* s_ctx,
 }
 
 void DiscogsCoverProvider::EndSearch(DiscogsCoverSearchContext* s_ctx) {
-  (void)requests_search_.remove(s_ctx->id);
+  requests_search_.remove(s_ctx->id);
   emit SearchFinished(s_ctx->id, s_ctx->results);
   delete s_ctx;
 }
 
 void DiscogsCoverProvider::EndSearch(DiscogsCoverReleaseContext* r_ctx) {
-  (void)requests_release_.remove(r_ctx->id);
-  delete r_ctx;
+  delete requests_release_.take(r_ctx->id);
 }

@@ -29,7 +29,6 @@ class QNetworkAccessManager;
 // This struct represents a single search request. It identifies and describes
 // the request.
 struct DiscogsCoverSearchContext {
-  enum State { State_Init, State_Release };
 
   // the unique request identifier
   int id;
@@ -60,12 +59,6 @@ class DiscogsCoverProvider : public CoverProvider {
  public:
   explicit DiscogsCoverProvider(QObject* parent = nullptr);
 
-  static const char* kUrlSearch;
-  static const char* kUrlReleases;
-
-  static const char* kAccessKeyB64;
-  static const char* kSecretKeyB64;
-
   bool StartSearch(const QString& artist, const QString& album, int s_id);
   void CancelSearch(int id);
 
@@ -75,9 +68,14 @@ class DiscogsCoverProvider : public CoverProvider {
   void ReleaseRequestError(QNetworkReply::NetworkError error,
                            QNetworkReply* reply, int s_id, int r_id);
   void HandleSearchReply(QNetworkReply* reply, int s_id);
-  void HandleReleaseReply(QNetworkReply* reply, int sa_id, int si_id);
+  void HandleReleaseReply(QNetworkReply* reply, int s_id, int r_id);
 
  private:
+  static const char* kUrlSearch;
+  static const char* kUrlReleases;
+  static const char* kAccessKeyB64;
+  static const char* kSecretKeyB64;
+
   QNetworkAccessManager* network_;
   QHash<int, DiscogsCoverSearchContext*> requests_search_;
   QHash<int, DiscogsCoverReleaseContext*> requests_release_;
@@ -92,6 +90,7 @@ class DiscogsCoverProvider : public CoverProvider {
                  DiscogsCoverReleaseContext* r_ctx);
   void EndSearch(DiscogsCoverSearchContext* s_ctx);
   void EndSearch(DiscogsCoverReleaseContext* r_ctx);
+
 };
 
 #endif  // COVERS_DISCOGSCOVERPROVIDER_H
