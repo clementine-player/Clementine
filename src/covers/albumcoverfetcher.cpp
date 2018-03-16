@@ -40,7 +40,8 @@ AlbumCoverFetcher::AlbumCoverFetcher(CoverProviders* cover_providers,
 }
 
 quint64 AlbumCoverFetcher::FetchAlbumCover(const QString& artist,
-                                           const QString& album, bool fetchall) {
+                                           const QString& album,
+                                           bool fetchall) {
   CoverSearchRequest request;
   request.artist = artist;
   request.album = album;

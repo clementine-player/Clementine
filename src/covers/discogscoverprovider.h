@@ -29,7 +29,6 @@ class QNetworkAccessManager;
 // This struct represents a single search request. It identifies and describes
 // the request.
 struct DiscogsCoverSearchContext {
-
   // the unique request identifier
   int id;
 
@@ -90,7 +89,6 @@ class DiscogsCoverProvider : public CoverProvider {
                  DiscogsCoverReleaseContext* r_ctx);
   void EndSearch(DiscogsCoverSearchContext* s_ctx);
   void EndSearch(DiscogsCoverReleaseContext* r_ctx);
-
 };
 
 #endif  // COVERS_DISCOGSCOVERPROVIDER_H

@@ -292,7 +292,6 @@ void DiscogsCoverProvider::SearchRequestError(QNetworkReply::NetworkError error,
 void DiscogsCoverProvider::ReleaseRequestError(
     QNetworkReply::NetworkError error, QNetworkReply* reply, int s_id,
     int r_id) {
-
   if (!requests_release_.contains(r_id)) return;
   DiscogsCoverReleaseContext* r_ctx = requests_release_.value(r_id);
 
