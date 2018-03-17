@@ -23,6 +23,7 @@
 #include "playlistparsers/playlistparser.h"
 #include "ui/iconloader.h"
 
+#include <QAction>
 #include <QFileDialog>
 #include <QInputDialog>
 #include <QKeyEvent>
