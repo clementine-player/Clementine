@@ -151,6 +151,18 @@ void Queue::ToggleTracks(const QModelIndexList& source_indexes) {
   }
 }
 
+void Queue::InsertFirst(const QModelIndexList& source_indexes) {
+    const int rows = source_indexes.count();
+    // Enqueue the tracks at the beginning
+    beginInsertRows(QModelIndex(), 0, rows - 1);
+    int offset = 0;
+    for (const QModelIndex& source_index : source_indexes) {
+        source_indexes_.insert(offset, QPersistentModelIndex(source_index));
+        offset++;
+    }
+    endInsertRows();
+}
+
 int Queue::PositionOf(const QModelIndex& source_index) const {
   return mapFromSource(source_index).row();
 }
