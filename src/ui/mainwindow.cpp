@@ -1763,10 +1763,10 @@ void MainWindow::PlaylistRightClick(const QPoint& global_pos,
   else
     playlist_queue_->setText(tr("Toggle queue status"));
 
-  if (in_queue == 0 && not_in_queue == 1)
-      playlist_queue_play_next_->setText(tr("Play next"));
-  else if (in_queue == 0 && not_in_queue > 1)
+   if (all > 1)
       playlist_queue_play_next_->setText(tr("Play selected tracks next"));
+   else
+      playlist_queue_play_next_->setText(tr("Play next"));
 
   if (in_skipped == 1 && not_in_skipped == 0)
     playlist_skip_->setText(tr("Unskip track"));
