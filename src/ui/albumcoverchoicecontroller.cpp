@@ -250,7 +250,7 @@ void AlbumCoverChoiceController::ShowCover(const Song& song) {
 
 void AlbumCoverChoiceController::SearchCoverAutomatically(const Song& song) {
   qint64 id = cover_fetcher_->FetchAlbumCover(song.effective_albumartist(),
-                                              song.effective_album());
+                                              song.effective_album(), false);
   cover_fetching_tasks_[id] = song;
 }
 

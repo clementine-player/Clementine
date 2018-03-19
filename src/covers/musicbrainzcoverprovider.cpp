@@ -37,7 +37,7 @@ static const char* kAlbumCoverUrl =
 }  // namespace
 
 MusicbrainzCoverProvider::MusicbrainzCoverProvider(QObject* parent)
-    : CoverProvider("MusicBrainz", parent),
+    : CoverProvider("MusicBrainz", true, parent),
       network_(new NetworkAccessManager(this)) {}
 
 bool MusicbrainzCoverProvider::StartSearch(const QString& artist,

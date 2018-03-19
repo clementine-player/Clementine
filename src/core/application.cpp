@@ -33,6 +33,7 @@
 #include "covers/amazoncoverprovider.h"
 #include "covers/coverproviders.h"
 #include "covers/currentartloader.h"
+#include "covers/discogscoverprovider.h"
 #include "covers/musicbrainzcoverprovider.h"
 #include "devices/devicemanager.h"
 #include "globalsearch/globalsearch.h"
@@ -43,8 +44,8 @@
 #include "internet/podcasts/podcastdeleter.h"
 #include "internet/podcasts/podcastdownloader.h"
 #include "internet/podcasts/podcastupdater.h"
-#include "library/librarybackend.h"
 #include "library/library.h"
+#include "library/librarybackend.h"
 #include "moodbar/moodbarcontroller.h"
 #include "moodbar/moodbarloader.h"
 #include "networkremote/networkremote.h"
@@ -100,6 +101,7 @@ class ApplicationImpl {
           // Initialize the repository of cover providers.
           cover_providers->AddProvider(new AmazonCoverProvider);
           cover_providers->AddProvider(new MusicbrainzCoverProvider);
+          cover_providers->AddProvider(new DiscogsCoverProvider);
         #ifdef HAVE_LIBLASTFM
           cover_providers->AddProvider(new LastFmCoverProvider(app));
         #endif

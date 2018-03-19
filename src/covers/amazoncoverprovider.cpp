@@ -40,7 +40,7 @@ const char* AmazonCoverProvider::kUrl = "http://ecs.amazonaws.com/onca/xml";
 const char* AmazonCoverProvider::kAssociateTag = "clemmusiplay-20";
 
 AmazonCoverProvider::AmazonCoverProvider(QObject* parent)
-    : CoverProvider("Amazon", parent),
+    : CoverProvider("Amazon", true, parent),
       network_(new NetworkAccessManager(this)) {}
 
 bool AmazonCoverProvider::StartSearch(const QString& artist,
