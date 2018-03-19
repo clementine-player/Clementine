@@ -1782,6 +1782,8 @@ void MainWindow::PlaylistRightClick(const QPoint& global_pos,
   else
     playlist_queue_->setIcon(IconLoader::Load("go-next", IconLoader::Base));
 
+  playlist_queue_play_next_->setIcon(IconLoader::Load("go-next", IconLoader::Base));
+
   if (!index.isValid()) {
     ui_->action_selection_set_value->setVisible(false);
     ui_->action_edit_value->setVisible(false);

@@ -235,18 +235,18 @@ class Playlist : public QAbstractListModel {
 
   // Changing the playlist
   void InsertItems(const PlaylistItemList& items, int pos = -1,
-                   bool play_now = false, bool enqueue = false);
+                   bool play_now = false, bool enqueue = false, bool enqueue_next = false);
   void InsertLibraryItems(const SongList& items, int pos = -1,
-                          bool play_now = false, bool enqueue = false);
+                          bool play_now = false, bool enqueue = false, bool enqueue_next = false);
   void InsertSongs(const SongList& items, int pos = -1, bool play_now = false,
-                   bool enqueue = false);
+                   bool enqueue = false, bool enqueue_next = false);
   void InsertSongsOrLibraryItems(const SongList& items, int pos = -1,
-                                 bool play_now = false, bool enqueue = false);
+                                 bool play_now = false, bool enqueue = false, bool enqueue_next = false);
   void InsertSmartPlaylist(smart_playlists::GeneratorPtr gen, int pos = -1,
-                           bool play_now = false, bool enqueue = false);
+                           bool play_now = false, bool enqueue = false, bool enqueue_next = false);
   void InsertInternetItems(InternetService* service, const SongList& songs,
                            int pos = -1, bool play_now = false,
-                           bool enqueue = false);
+                           bool enqueue = false, bool enqueue_next = false);
   void ReshuffleIndices();
 
   // If this playlist contains the current item, this method will apply the
@@ -335,7 +335,7 @@ class Playlist : public QAbstractListModel {
   void SetColumnAlignment(const ColumnAlignmentMap& alignment);
 
   void InsertUrls(const QList<QUrl>& urls, int pos = -1, bool play_now = false,
-                  bool enqueue = false);
+                  bool enqueue = false, bool enqueue_next = false);
   // Removes items with given indices from the playlist. This operation is not
   // undoable.
   void RemoveItemsWithoutUndo(const QList<int>& indices);
@@ -366,18 +366,18 @@ signals:
 
   void InsertInternetItems(const InternetModel* model,
                            const QModelIndexList& items, int pos, bool play_now,
-                           bool enqueue);
+                           bool enqueue, bool enqueue_next = false);
 
   template <typename T>
   void InsertSongItems(const SongList& songs, int pos, bool play_now,
-                       bool enqueue);
+                       bool enqueue, bool enqueue_next = false);
 
   void InsertDynamicItems(int count);
 
   // Modify the playlist without changing the undo stack.  These are used by
   // our friends in PlaylistUndoCommands
   void InsertItemsWithoutUndo(const PlaylistItemList& items, int pos,
-                              bool enqueue = false);
+                              bool enqueue = false, bool enqueue_next = false);
   PlaylistItemList RemoveItemsWithoutUndo(int pos, int count);
   void MoveItemsWithoutUndo(const QList<int>& source_rows, int pos);
   void MoveItemWithoutUndo(int source, int dest);

@@ -40,7 +40,7 @@ class GeneratorInserter : public QObject {
   GeneratorInserter(TaskManager* task_manager, LibraryBackend* library,
                     QObject* parent);
 
-  void Load(Playlist* destination, int row, bool play_now, bool enqueue,
+  void Load(Playlist* destination, int row, bool play_now, bool enqueue, bool enqueue_next,
             GeneratorPtr generator, int dynamic_count = 0);
 
 signals:
@@ -59,6 +59,7 @@ signals:
   int row_;
   bool play_now_;
   bool enqueue_;
+  bool enqueue_next_;
   bool is_dynamic_;
 };
 
