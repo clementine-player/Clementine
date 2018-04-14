@@ -394,7 +394,7 @@ void LibraryView::contextMenuEvent(QContextMenuEvent* e) {
         SLOT(AddToPlaylistEnqueue()));
     add_to_playlist_enqueue_next_ = context_menu_->addAction(
         IconLoader::Load("go-next", IconLoader::Base), tr("Play next"), this,
-                                                        SLOT(AddToPlaylistEnqueueNext()));
+        SLOT(AddToPlaylistEnqueueNext()));
     context_menu_->addSeparator();
     search_for_this_ = context_menu_->addAction(
         IconLoader::Load("system-search", IconLoader::Base),
@@ -620,11 +620,11 @@ void LibraryView::AddToPlaylistEnqueue() {
 }
 
 void LibraryView::AddToPlaylistEnqueueNext() {
-    QMimeData* data = model()->mimeData(selectedIndexes());
-    if (MimeData* mime_data = qobject_cast<MimeData*>(data)) {
-        mime_data->enqueue_next_now_ = true;
-    }
-    emit AddToPlaylistSignal(data);
+  QMimeData* data = model()->mimeData(selectedIndexes());
+  if (MimeData* mime_data = qobject_cast<MimeData*>(data)) {
+    mime_data->enqueue_next_now_ = true;
+  }
+  emit AddToPlaylistSignal(data);
 }
 
 void LibraryView::OpenInNewPlaylist() {

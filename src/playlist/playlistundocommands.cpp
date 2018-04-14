@@ -24,12 +24,16 @@ Base::Base(Playlist* playlist) : QUndoCommand(0), playlist_(playlist) {}
 
 InsertItems::InsertItems(Playlist* playlist, const PlaylistItemList& items,
                          int pos, bool enqueue, bool enqueue_next)
-    : Base(playlist), items_(items), pos_(pos), enqueue_(enqueue), enqueue_next_(enqueue_next) {
+    : Base(playlist),
+      items_(items),
+      pos_(pos),
+      enqueue_(enqueue),
+      enqueue_next_(enqueue_next) {
   setText(tr("add %n songs", "", items_.count()));
 }
 
 void InsertItems::redo() {
-    playlist_->InsertItemsWithoutUndo(items_, pos_, enqueue_, enqueue_next_);
+  playlist_->InsertItemsWithoutUndo(items_, pos_, enqueue_, enqueue_next_);
 }
 
 void InsertItems::undo() {

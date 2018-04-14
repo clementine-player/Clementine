@@ -677,7 +677,8 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
   playlist_queue_ = playlist_menu_->addAction("", this, SLOT(PlaylistQueue()));
   playlist_queue_->setShortcut(QKeySequence("Ctrl+D"));
   ui_->playlist->addAction(playlist_queue_);
-  playlist_queue_play_next_ = playlist_menu_->addAction("", this, SLOT(PlaylistQueuePlayNext()));
+  playlist_queue_play_next_ =
+      playlist_menu_->addAction("", this, SLOT(PlaylistQueuePlayNext()));
   playlist_queue_play_next_->setShortcut(QKeySequence("Ctrl+Shift+D"));
   ui_->playlist->addAction(playlist_queue_play_next_);
   playlist_skip_ = playlist_menu_->addAction("", this, SLOT(PlaylistSkip()));
@@ -1763,10 +1764,10 @@ void MainWindow::PlaylistRightClick(const QPoint& global_pos,
   else
     playlist_queue_->setText(tr("Toggle queue status"));
 
-   if (all > 1)
-      playlist_queue_play_next_->setText(tr("Play selected tracks next"));
-   else
-      playlist_queue_play_next_->setText(tr("Play next"));
+  if (all > 1)
+    playlist_queue_play_next_->setText(tr("Play selected tracks next"));
+  else
+    playlist_queue_play_next_->setText(tr("Play next"));
 
   if (in_skipped == 1 && not_in_skipped == 0)
     playlist_skip_->setText(tr("Unskip track"));
@@ -1782,7 +1783,8 @@ void MainWindow::PlaylistRightClick(const QPoint& global_pos,
   else
     playlist_queue_->setIcon(IconLoader::Load("go-next", IconLoader::Base));
 
-  playlist_queue_play_next_->setIcon(IconLoader::Load("go-next", IconLoader::Base));
+  playlist_queue_play_next_->setIcon(
+      IconLoader::Load("go-next", IconLoader::Base));
 
   if (!index.isValid()) {
     ui_->action_selection_set_value->setVisible(false);
@@ -2511,14 +2513,14 @@ void MainWindow::PlaylistQueue() {
 }
 
 void MainWindow::PlaylistQueuePlayNext() {
-    QModelIndexList indexes;
-    for (const QModelIndex& proxy_index :
-        ui_->playlist->view()->selectionModel()->selectedRows()) {
-        indexes << app_->playlist_manager()->current()->proxy()->mapToSource(
-            proxy_index);
-        }
+  QModelIndexList indexes;
+  for (const QModelIndex& proxy_index :
+       ui_->playlist->view()->selectionModel()->selectedRows()) {
+    indexes << app_->playlist_manager()->current()->proxy()->mapToSource(
+        proxy_index);
+  }
 
-        app_->playlist_manager()->current()->queue()->InsertFirst(indexes);
+  app_->playlist_manager()->current()->queue()->InsertFirst(indexes);
 }
 
 void MainWindow::PlaylistSkip() {

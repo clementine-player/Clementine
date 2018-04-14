@@ -773,10 +773,12 @@ bool Playlist::dropMimeData(const QMimeData* data, Qt::DropAction action,
                         row, play_now, enqueue_now, enqueue_next_now);
   } else if (const GeneratorMimeData* generator_data =
                  qobject_cast<const GeneratorMimeData*>(data)) {
-    InsertSmartPlaylist(generator_data->generator_, row, play_now, enqueue_now, enqueue_next_now);
+    InsertSmartPlaylist(generator_data->generator_, row, play_now, enqueue_now,
+                        enqueue_next_now);
   } else if (const PlaylistItemMimeData* item_data =
                  qobject_cast<const PlaylistItemMimeData*>(data)) {
-    InsertItems(item_data->items_, row, play_now, enqueue_now, enqueue_next_now);
+    InsertItems(item_data->items_, row, play_now, enqueue_now,
+                enqueue_next_now);
   } else if (data->hasFormat(kRowsMimetype)) {
     // Dragged from the playlist
     // Rearranging it is tricky...
@@ -849,7 +851,8 @@ void Playlist::InsertUrls(const QList<QUrl>& urls, int pos, bool play_now,
 }
 
 void Playlist::InsertSmartPlaylist(GeneratorPtr generator, int pos,
-                                   bool play_now, bool enqueue, bool enqueue_next) {
+                                   bool play_now, bool enqueue,
+                                   bool enqueue_next) {
   // Hack: If the generator hasn't got a library set then use the main one
   if (!generator->library()) {
     generator->set_library(library_);
@@ -1031,8 +1034,8 @@ void Playlist::InsertItems(const PlaylistItemList& itemsIn, int pos,
     InsertItemsWithoutUndo(items, pos, enqueue, enqueue_next);
     undo_stack_->clear();
   } else {
-    undo_stack_->push(
-        new PlaylistUndoCommands::InsertItems(this, items, pos, enqueue, enqueue_next));
+    undo_stack_->push(new PlaylistUndoCommands::InsertItems(
+        this, items, pos, enqueue, enqueue_next));
   }
 
   if (play_now) emit PlayRequested(index(start, 0));
@@ -1077,7 +1080,7 @@ void Playlist::InsertItemsWithoutUndo(const PlaylistItemList& items, int pos,
   if (enqueue_next) {
     QModelIndexList indexes;
     for (int i = start; i <= end; ++i) {
-        indexes << index(i, 0);
+      indexes << index(i, 0);
     }
     queue_->InsertFirst(indexes);
   }
@@ -1088,16 +1091,19 @@ void Playlist::InsertItemsWithoutUndo(const PlaylistItemList& items, int pos,
 
 void Playlist::InsertLibraryItems(const SongList& songs, int pos, bool play_now,
                                   bool enqueue, bool enqueue_next) {
-  InsertSongItems<LibraryPlaylistItem>(songs, pos, play_now, enqueue, enqueue_next);
+  InsertSongItems<LibraryPlaylistItem>(songs, pos, play_now, enqueue,
+                                       enqueue_next);
 }
 
 void Playlist::InsertSongs(const SongList& songs, int pos, bool play_now,
                            bool enqueue, bool enqueue_next) {
-  InsertSongItems<SongPlaylistItem>(songs, pos, play_now, enqueue, enqueue_next);
+  InsertSongItems<SongPlaylistItem>(songs, pos, play_now, enqueue,
+                                    enqueue_next);
 }
 
 void Playlist::InsertSongsOrLibraryItems(const SongList& songs, int pos,
-                                         bool play_now, bool enqueue, bool enqueue_next) {
+                                         bool play_now, bool enqueue,
+                                         bool enqueue_next) {
   PlaylistItemList items;
   for (const Song& song : songs) {
     if (song.is_library_song()) {
@@ -1111,7 +1117,8 @@ void Playlist::InsertSongsOrLibraryItems(const SongList& songs, int pos,
 
 void Playlist::InsertInternetItems(const InternetModel* model,
                                    const QModelIndexList& items, int pos,
-                                   bool play_now, bool enqueue, bool enqueue_next) {
+                                   bool play_now, bool enqueue,
+                                   bool enqueue_next) {
   PlaylistItemList playlist_items;
   QList<QUrl> song_urls;
 
@@ -1139,7 +1146,8 @@ void Playlist::InsertInternetItems(const InternetModel* model,
 
 void Playlist::InsertInternetItems(InternetService* service,
                                    const SongList& songs, int pos,
-                                   bool play_now, bool enqueue, bool enqueue_next) {
+                                   bool play_now, bool enqueue,
+                                   bool enqueue_next) {
   PlaylistItemList playlist_items;
   for (const Song& song : songs) {
     playlist_items << shared_ptr<PlaylistItem>(

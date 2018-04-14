@@ -27,8 +27,8 @@ class MimeData : public QMimeData {
   Q_OBJECT
 
  public:
-  MimeData(bool clear = false, bool play_now = false, bool enqueue = false, bool enqueue_next_now = false,
-           bool open_in_new_playlist = false)
+  MimeData(bool clear = false, bool play_now = false, bool enqueue = false,
+           bool enqueue_next_now = false, bool open_in_new_playlist = false)
       : override_user_settings_(false),
         clear_first_(clear),
         play_now_(play_now),
@@ -54,7 +54,8 @@ class MimeData : public QMimeData {
   // If this is set then the items are added to the queue after being inserted.
   bool enqueue_now_;
 
-  // If this is set then the items are added to the beginning of the queue after being inserted.
+  // If this is set then the items are added to the beginning of the queue after
+  // being inserted.
   bool enqueue_next_now_;
 
   // If this is set then the items are inserted into a newly created playlist.

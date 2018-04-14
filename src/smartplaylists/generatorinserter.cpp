@@ -43,8 +43,8 @@ static PlaylistItemList Generate(GeneratorPtr generator, int dynamic_count) {
 }
 
 void GeneratorInserter::Load(Playlist* destination, int row, bool play_now,
-                             bool enqueue, bool enqueue_next, GeneratorPtr generator,
-                             int dynamic_count) {
+                             bool enqueue, bool enqueue_next,
+                             GeneratorPtr generator, int dynamic_count) {
   task_id_ = task_manager_->StartTask(tr("Loading smart playlist"));
 
   destination_ = destination;

@@ -37,7 +37,8 @@ SongLoaderInserter::SongLoaderInserter(TaskManager* task_manager,
 SongLoaderInserter::~SongLoaderInserter() { qDeleteAll(pending_); }
 
 void SongLoaderInserter::Load(Playlist* destination, int row, bool play_now,
-                              bool enqueue, bool enqueue_next, const QList<QUrl>& urls) {
+                              bool enqueue, bool enqueue_next,
+                              const QList<QUrl>& urls) {
   destination_ = destination;
   row_ = row;
   play_now_ = play_now;
@@ -79,7 +80,8 @@ void SongLoaderInserter::Load(Playlist* destination, int row, bool play_now,
 // In the meantime, MusicBrainz will be queried to get songs' metadata.
 // AudioCDTagsLoaded will be called next, and playlist's items will be updated.
 void SongLoaderInserter::LoadAudioCD(Playlist* destination, int row,
-                                     bool play_now, bool enqueue, bool enqueue_next) {
+                                     bool play_now, bool enqueue,
+                                     bool enqueue_next) {
   destination_ = destination;
   row_ = row;
   play_now_ = play_now;
@@ -121,7 +123,8 @@ void SongLoaderInserter::InsertSongs() {
   // Insert songs (that haven't been completely loaded) to allow user to see
   // and play them while not loaded completely
   if (destination_) {
-    destination_->InsertSongsOrLibraryItems(songs_, row_, play_now_, enqueue_, enqueue_next_);
+    destination_->InsertSongsOrLibraryItems(songs_, row_, play_now_, enqueue_,
+                                            enqueue_next_);
   }
 }
 

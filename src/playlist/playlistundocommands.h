@@ -40,7 +40,8 @@ class Base : public QUndoCommand {
 
 class InsertItems : public Base {
  public:
-  InsertItems(Playlist* playlist, const PlaylistItemList& items, int pos, bool enqueue = false, bool enqueue_next = false);
+  InsertItems(Playlist* playlist, const PlaylistItemList& items, int pos,
+              bool enqueue = false, bool enqueue_next = false);
 
   void undo();
   void redo();

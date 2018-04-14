@@ -235,15 +235,19 @@ class Playlist : public QAbstractListModel {
 
   // Changing the playlist
   void InsertItems(const PlaylistItemList& items, int pos = -1,
-                   bool play_now = false, bool enqueue = false, bool enqueue_next = false);
+                   bool play_now = false, bool enqueue = false,
+                   bool enqueue_next = false);
   void InsertLibraryItems(const SongList& items, int pos = -1,
-                          bool play_now = false, bool enqueue = false, bool enqueue_next = false);
+                          bool play_now = false, bool enqueue = false,
+                          bool enqueue_next = false);
   void InsertSongs(const SongList& items, int pos = -1, bool play_now = false,
                    bool enqueue = false, bool enqueue_next = false);
   void InsertSongsOrLibraryItems(const SongList& items, int pos = -1,
-                                 bool play_now = false, bool enqueue = false, bool enqueue_next = false);
+                                 bool play_now = false, bool enqueue = false,
+                                 bool enqueue_next = false);
   void InsertSmartPlaylist(smart_playlists::GeneratorPtr gen, int pos = -1,
-                           bool play_now = false, bool enqueue = false, bool enqueue_next = false);
+                           bool play_now = false, bool enqueue = false,
+                           bool enqueue_next = false);
   void InsertInternetItems(InternetService* service, const SongList& songs,
                            int pos = -1, bool play_now = false,
                            bool enqueue = false, bool enqueue_next = false);
