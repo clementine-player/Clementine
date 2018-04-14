@@ -121,7 +121,7 @@ void SongLoaderInserter::InsertSongs() {
   // Insert songs (that haven't been completely loaded) to allow user to see
   // and play them while not loaded completely
   if (destination_) {
-    destination_->InsertSongsOrLibraryItems(songs_, row_, play_now_, enqueue_);
+    destination_->InsertSongsOrLibraryItems(songs_, row_, play_now_, enqueue_, enqueue_next_);
   }
 }
 
