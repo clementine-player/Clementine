@@ -29,7 +29,7 @@ ADD_LIBRARY(qxt STATIC
 )
 
 if(WIN32)
-  QT5_USE_MODULES(qxt Core Widgets)
+  target_link_libraries(qxt Qt5::Core Qt5::Widgets)
 else(WIN32)
-  QT5_USE_MODULES(qxt Core Widgets X11Extras)
+  target_link_libraries(qxt Qt5::Core Qt5::Widgets Qt5::X11Extras)
 endif(WIN32)

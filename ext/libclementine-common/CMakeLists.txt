@@ -40,4 +40,4 @@ target_link_libraries(libclementine-common
   ${CMAKE_THREAD_LIBS_INIT}
 )
 
-QT5_USE_MODULES(libclementine-common Core Network)
+target_link_libraries(libclementine-common Qt5::Core Qt5::Network)
