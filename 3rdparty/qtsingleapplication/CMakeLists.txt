@@ -25,4 +25,4 @@ ADD_LIBRARY(qtsingleapplication STATIC
     ${SINGLEAPP-SOURCES-MOC}
 )
 
-QT5_USE_MODULES(qtsingleapplication Core Widgets Network)
+target_link_libraries(qtsingleapplication Qt5::Core Qt5::Widgets Qt5::Network)
