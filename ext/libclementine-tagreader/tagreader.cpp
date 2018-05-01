@@ -52,6 +52,7 @@
 #include <unsynchronizedlyricsframe.h>
 #include <vorbisfile.h>
 #include <wavfile.h>
+#include <wavpackfile.h>
 
 #include <sys/stat.h>
 
@@ -659,6 +660,8 @@ pb::tagreader::SongMetadata_Type TagReader::GuessFileType(
     return pb::tagreader::SongMetadata_Type_WAV;
   if (dynamic_cast<TagLib::TrueAudio::File*>(fileref->file()))
     return pb::tagreader::SongMetadata_Type_TRUEAUDIO;
+  if (dynamic_cast<TagLib::WavPack::File*>(fileref->file()))
+    return pb::tagreader::SongMetadata_Type_WAVPACK;
 
   return pb::tagreader::SongMetadata_Type_UNKNOWN;
 }
