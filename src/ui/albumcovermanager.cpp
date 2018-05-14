@@ -752,7 +752,7 @@ void AlbumCoverManager::LoadSelectedToPlaylist() {
 void AlbumCoverManager::SaveAndSetCover(QListWidgetItem* item,
                                         const QImage& image) {
   const QString artist = item->data(Role_ArtistName).toString();
-  const QString albumartist = item->data(Role_ArtistName).toString();
+  const QString albumartist = item->data(Role_AlbumArtistName).toString();
   const QString album = item->data(Role_AlbumName).toString();
 
   QString path =

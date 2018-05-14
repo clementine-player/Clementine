@@ -964,7 +964,7 @@ void LibraryBackend::UpdateManualAlbumArt(const QString& artist,
   query.SetColumnSpec("ROWID, " + Song::kColumnSpec);
   query.AddWhere("album", album);
 
-  if (!albumartist.isNull()) {
+  if (!albumartist.isNull() && !albumartist.isEmpty()) {
     query.AddWhere("albumartist", albumartist);
   } else if (!artist.isNull()) {
     query.AddWhere("artist", artist);
@@ -984,7 +984,7 @@ void LibraryBackend::UpdateManualAlbumArt(const QString& artist,
       QString(
           "UPDATE %1 SET art_manual = :art"
           " WHERE album = :album AND unavailable = 0").arg(songs_table_));
-  if (!albumartist.isNull()) {
+  if (!albumartist.isNull() && !albumartist.isEmpty()) {
     sql += " AND albumartist = :albumartist";
   } else if (!artist.isNull()) {
     sql += " AND artist = :artist";
@@ -994,7 +994,7 @@ void LibraryBackend::UpdateManualAlbumArt(const QString& artist,
   q.prepare(sql);
   q.bindValue(":art", art);
   q.bindValue(":album", album);
-  if (!albumartist.isNull()) {
+  if (!albumartist.isNull() && !albumartist.isEmpty()) {
     q.bindValue(":albumartist", albumartist);
   } else if (!artist.isNull()) {
     q.bindValue(":artist", artist);

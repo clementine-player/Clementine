@@ -105,7 +105,11 @@ void TrackSliderSlider::enterEvent(QEvent* e) {
 
 void TrackSliderSlider::leaveEvent(QEvent* e) {
   QSlider::leaveEvent(e);
-  popup_->hide();
+  // On some (but not all) systems, displaying the TrackSliderPopup
+  // generates a leaveEvent. Ensure that this leaveEvent is genuine.
+  if (!geometry().contains(mapFromGlobal(QCursor::pos()))) {
+    popup_->hide();
+  }
 }
 
 void TrackSliderSlider::keyPressEvent(QKeyEvent* event) {

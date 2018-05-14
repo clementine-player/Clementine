@@ -427,6 +427,8 @@ QString Song::TextForFiletype(FileType type) {
       return QObject::tr("AIFF");
     case Song::Type_Wav:
       return QObject::tr("Wav");
+    case Song::Type_WavPack:
+      return QObject::tr("WavPack");
     case Song::Type_TrueAudio:
       return QObject::tr("TrueAudio");
     case Song::Type_Cdda:
@@ -447,6 +449,7 @@ bool Song::IsFileLossless() const {
     case Song::Type_Flac:
     case Song::Type_OggFlac:
     case Song::Type_Wav:
+    case Song::Type_WavPack:
       return true;
     default:
       return false;
@@ -673,7 +676,8 @@ void Song::InitFromFilePartial(const QString& filename) {
   if (suffix == "mp3" || suffix == "ogg" || suffix == "flac" ||
       suffix == "mpc" || suffix == "m4a" || suffix == "aac" ||
       suffix == "wma" || suffix == "mp4" || suffix == "spx" ||
-      suffix == "wav" || suffix == "opus" || suffix == "m4b") {
+      suffix == "wav" || suffix == "opus" || suffix == "m4b" ||
+      suffix == "wv") {
     d->valid_ = true;
   } else {
     d->valid_ = false;

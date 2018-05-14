@@ -221,7 +221,7 @@ bool SpotifyBlobDownloader::CheckSignature(
         return false;
       }
     }
-  } catch (std::exception e) {
+  } catch (std::exception& e) {
     // This should only happen if we fail to parse our own key.
     qLog(Debug) << "Verifying spotify blob signature failed:" << e.what();
     return false;
