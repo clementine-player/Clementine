@@ -92,6 +92,7 @@ signals:
   void Load();
   void AddToPlaylist();
   void AddToPlaylistEnqueue();
+  void AddToPlaylistEnqueueNext();
   void OpenInNewPlaylist();
   void Organise();
   void CopyToDevice();
@@ -131,6 +132,7 @@ signals:
   QAction* load_;
   QAction* add_to_playlist_;
   QAction* add_to_playlist_enqueue_;
+  QAction* add_to_playlist_enqueue_next_;
   QAction* open_in_new_playlist_;
   QAction* organise_;
   QAction* copy_to_device_;

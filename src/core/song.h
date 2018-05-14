@@ -101,6 +101,7 @@ class Song {
     Type_TrueAudio = 11,
     Type_Cdda = 12,
     Type_OggOpus = 13,
+    Type_WavPack = 14,
     Type_Stream = 99,
   };
   static QString TextForFiletype(FileType type);

@@ -113,6 +113,7 @@ PlaylistView::PlaylistView(QWidget* parent)
       upgrading_from_qheaderview_(false),
       read_only_settings_(true),
       upgrading_from_version_(-1),
+      background_initialized_(false),
       background_image_type_(Default),
       blur_radius_(kDefaultBlurRadius),
       opacity_level_(kDefaultOpacityLevel),
@@ -1128,10 +1129,12 @@ void PlaylistView::ReloadSettings() {
   // set_background_image when it is not needed, as this will cause the fading
   // animation to start again. This also avoid to do useless
   // "force_background_redraw".
-  if (background_image_filename != background_image_filename_ ||
+  if (background_initialized_ == false ||
+      background_image_filename != background_image_filename_ ||
       background_type != background_image_type_ ||
       blur_radius_ != blur_radius || opacity_level_ != opacity_level) {
     // Store background properties
+    background_initialized_ = true;
     background_image_type_ = background_type;
     background_image_filename_ = background_image_filename;
     blur_radius_ = blur_radius;
