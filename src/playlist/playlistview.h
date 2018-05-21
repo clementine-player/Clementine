@@ -57,6 +57,8 @@ class PlaylistProxyStyle : public QProxyStyle {
 class PlaylistView : public QTreeView {
   Q_OBJECT
  public:
+  ~PlaylistView();
+
   enum BackgroundImageType { Default, None, Custom, AlbumCover };
 
   PlaylistView(QWidget* parent = nullptr);
@@ -194,6 +196,7 @@ signals:
   bool upgrading_from_qheaderview_;
   bool read_only_settings_;
   int upgrading_from_version_;
+  bool header_loaded_;
 
   bool background_initialized_;
   BackgroundImageType background_image_type_;

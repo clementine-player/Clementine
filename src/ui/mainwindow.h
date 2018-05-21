@@ -131,7 +131,6 @@ class MainWindow : public QMainWindow, public PlatformInterface {
 
  protected:
   void keyPressEvent(QKeyEvent* event);
-  void resizeEvent(QResizeEvent* event);
   void closeEvent(QCloseEvent* event);
 
 #ifdef Q_OS_WIN32
