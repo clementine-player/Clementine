@@ -113,6 +113,7 @@ PlaylistView::PlaylistView(QWidget* parent)
       upgrading_from_qheaderview_(false),
       read_only_settings_(true),
       upgrading_from_version_(-1),
+      header_loaded_(false),
       background_initialized_(false),
       background_image_type_(Default),
       blur_radius_(kDefaultBlurRadius),
@@ -148,12 +149,6 @@ PlaylistView::PlaylistView(QWidget* parent)
   currenttrack_pause_ =
       currenttrack_pause.pixmap(currenttrack_pause.actualSize(QSize(32, 32)));
 
-  connect(header_, SIGNAL(sectionResized(int, int, int)), SLOT(SaveGeometry()));
-  connect(header_, SIGNAL(sectionMoved(int, int, int)), SLOT(SaveGeometry()));
-  connect(header_, SIGNAL(sortIndicatorChanged(int, Qt::SortOrder)),
-          SLOT(SaveGeometry()));
-  connect(header_, SIGNAL(SectionVisibilityChanged(int, bool)),
-          SLOT(SaveGeometry()));
   connect(header_, SIGNAL(SectionRatingLockStatusChanged(bool)),
           SLOT(SetRatingLockStatus(bool)));
   connect(header_, SIGNAL(sectionResized(int, int, int)),
@@ -188,6 +183,11 @@ PlaylistView::PlaylistView(QWidget* parent)
   connect(fade_animation_, SIGNAL(valueChanged(qreal)),
           SLOT(FadePreviousBackgroundImage(qreal)));
   fade_animation_->setDirection(QTimeLine::Backward);  // 1.0 -> 0.0
+}
+
+PlaylistView::~PlaylistView() {
+  SaveGeometry();
+  delete style_;
 }
 
 void PlaylistView::SetApplication(Application* app) {
@@ -281,7 +281,7 @@ void PlaylistView::SetPlaylist(Playlist* playlist) {
   }
 
   playlist_ = playlist;
-  LoadGeometry();
+  if (!header_loaded_) LoadGeometry();
   LoadRatingLockStatus();
   ReloadSettings();
   DynamicModeChanged(playlist->is_dynamic());
@@ -326,6 +326,7 @@ void PlaylistView::setModel(QAbstractItemModel* m) {
 
 void PlaylistView::LoadGeometry() {
   QSettings settings;
+  header_loaded_ = true;
   settings.beginGroup(Playlist::kSettingsGroup);
 
   QByteArray state(settings.value("state").toByteArray());
@@ -1177,7 +1178,6 @@ void PlaylistView::SaveSettings() {
 void PlaylistView::StretchChanged(bool stretch) {
   setHorizontalScrollBarPolicy(stretch ? Qt::ScrollBarAlwaysOff
                                        : Qt::ScrollBarAsNeeded);
-  SaveGeometry();
 }
 
 void PlaylistView::DynamicModeChanged(bool dynamic) {

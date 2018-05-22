@@ -865,11 +865,6 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
   connect(global_shortcuts_, SIGNAL(RemoveCurrentSong()),
           app_->playlist_manager(), SLOT(RemoveCurrentSong()));
 
-  // Fancy tabs
-  connect(ui_->tabs, SIGNAL(ModeChanged(FancyTabWidget::Mode)),
-          SLOT(SaveGeometry()));
-  connect(ui_->tabs, SIGNAL(CurrentChanged(int)), SLOT(SaveGeometry()));
-
   // Lyrics
   ConnectInfoView(song_info_view_);
   ConnectInfoView(artist_info_view_);
@@ -1260,8 +1255,6 @@ void MainWindow::ScrobbleButtonVisibilityChanged(bool value) {
     }
   }
 }
-
-void MainWindow::resizeEvent(QResizeEvent*) { SaveGeometry(); }
 
 void MainWindow::SaveGeometry() {
   was_maximized_ = isMaximized();
