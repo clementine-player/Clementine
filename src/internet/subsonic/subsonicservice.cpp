@@ -541,7 +541,10 @@ void SubsonicLibraryScanner::OnGetAlbumFinished(QNetworkReply* reply) {
     qint64 length = reader.attributes().value("duration").toString().toInt();
     length *= kNsecPerSec;
     song.set_length_nanosec(length);
-    QUrl url = QUrl(QString("subsonic://%1").arg(id));
+    QUrl url = QUrl(QString("subsonic://"));
+    QUrlQuery song_query(url.query());
+    song_query.addQueryItem("id", id);
+    url.setQuery(song_query);
     QUrl cover_url = service_->BuildRequestUrl("getCoverArt");
     QUrlQuery cover_url_query(url.query());
     cover_url_query.addQueryItem("id", id);
