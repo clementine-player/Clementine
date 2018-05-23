@@ -195,10 +195,7 @@ void SubsonicService::ReloadSettings() {
   username_ = s.value("username").toString();
   password_ = s.value("password").toString();
   usesslv3_ = s.value("usesslv3").toBool();
-  if (s.contains("verifycert"))
-    verifycert_ = s.value("verifycert").toBool();
-  else
-    verifycert_ = true;
+  verifycert_ = s.value("verifycert", true).toBool();
 
   Login();
 }
