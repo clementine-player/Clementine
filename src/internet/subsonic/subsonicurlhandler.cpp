@@ -30,9 +30,10 @@ UrlHandler::LoadResult SubsonicUrlHandler::StartLoading(const QUrl& url) {
   if (service_->login_state() != SubsonicService::LoginState_Loggedin)
     return LoadResult(url);
 
+  QUrlQuery id(url.query());
   QUrl newurl = service_->BuildRequestUrl("stream");
   QUrlQuery url_query(newurl.query());
-  url_query.addQueryItem("id", url.host());
+  url_query.addQueryItem("id", id.queryItemValue("id"));
   newurl.setQuery(url_query);
   return LoadResult(url, LoadResult::TrackAvailable, newurl);
 }
