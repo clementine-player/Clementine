@@ -69,7 +69,6 @@ void SubsonicSettingsPage::Load() {
   else
     ui_->verifycert->setChecked(true);
 
-
   // If the settings are complete, SubsonicService will have used them already
   // and
   // we can tell the user if they worked
@@ -197,8 +196,7 @@ void SubsonicSettingsPage::ServerEditingFinished() {
 void SubsonicSettingsPage::Login() {
   ui_->login_state->SetLoggedIn(LoginStateWidget::LoginInProgress);
   service_->Login(ui_->server->text(), ui_->username->text(),
-                  ui_->password->text(),
-                  ui_->usesslv3->isChecked(),
+                  ui_->password->text(), ui_->usesslv3->isChecked(),
                   ui_->verifycert->isChecked());
 }
 

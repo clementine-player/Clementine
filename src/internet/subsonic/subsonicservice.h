@@ -97,8 +97,8 @@ class SubsonicService : public InternetService {
 
   void Login();
   void Login(const QString& server, const QString& username,
-             const QString& password,
-             const bool& usesslv3, const bool& verifycert);
+             const QString& password, const bool& usesslv3,
+             const bool& verifycert);
 
   LoginState login_state() const { return login_state_; }
 
