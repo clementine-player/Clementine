@@ -44,17 +44,17 @@
         </property>
        </widget>
       </item>
-      <item row="2" column="1" colspan="2">
+      <item row="2" column="1" colspan="3">
        <widget class="QLineEdit" name="password">
         <property name="echoMode">
          <enum>QLineEdit::Password</enum>
         </property>
        </widget>
       </item>
-      <item row="1" column="1">
+      <item row="1" column="1" colspan="2">
        <widget class="QLineEdit" name="username"/>
       </item>
-      <item row="0" column="1" colspan="2">
+      <item row="0" column="1" colspan="3">
        <widget class="QLineEdit" name="server"/>
       </item>
       <item row="3" column="1">
@@ -64,7 +64,17 @@
         </property>
        </widget>
       </item>
-      <item row="1" column="2">
+      <item row="3" column="2">
+       <widget class="QCheckBox" name="verifycert">
+        <property name="text">
+         <string>Verify Server certificate</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="3">
        <widget class="QPushButton" name="login">
         <property name="text">
          <string>Login</string>

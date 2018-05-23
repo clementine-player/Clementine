@@ -195,6 +195,7 @@ void SubsonicService::ReloadSettings() {
   username_ = s.value("username").toString();
   password_ = s.value("password").toString();
   usesslv3_ = s.value("usesslv3").toBool();
+  verifycert_ = s.value("verifycert", true).toBool();
 
   Login();
 }
@@ -225,11 +226,13 @@ void SubsonicService::Login() {
 }
 
 void SubsonicService::Login(const QString& server, const QString& username,
-                            const QString& password, const bool& usesslv3) {
+                            const QString& password, const bool& usesslv3,
+                            const bool& verifycert) {
   UpdateServer(server);
   username_ = username;
   password_ = password;
   usesslv3_ = usesslv3;
+  verifycert_ = verifycert;
   Login();
 }
 
@@ -263,7 +266,8 @@ QNetworkReply* SubsonicService::Send(const QUrl& url) {
   // Don't try and check the authenticity of the SSL certificate - it'll almost
   // certainly be self-signed.
   QSslConfiguration sslconfig = QSslConfiguration::defaultConfiguration();
-  sslconfig.setPeerVerifyMode(QSslSocket::VerifyNone);
+  sslconfig.setPeerVerifyMode(verifycert_ ? QSslSocket::VerifyPeer
+                                          : QSslSocket::VerifyNone);
   if (usesslv3_) {
     sslconfig.setProtocol(QSsl::SslV3);
   }
