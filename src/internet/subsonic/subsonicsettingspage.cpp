@@ -64,10 +64,7 @@ void SubsonicSettingsPage::Load() {
   ui_->username->setText(s.value("username").toString());
   ui_->password->setText(s.value("password").toString());
   ui_->usesslv3->setChecked(s.value("usesslv3").toBool());
-  if (s.contains("verifycert"))
-    ui_->verifycert->setChecked(s.value("verifycert").toBool());
-  else
-    ui_->verifycert->setChecked(true);
+  ui_->verifycert->setChecked(s.value("verifycert", true).toBool());
 
   // If the settings are complete, SubsonicService will have used them already
   // and
