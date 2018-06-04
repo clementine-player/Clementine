@@ -60,6 +60,34 @@
     <invalidIndicator value="&quot;iTotalRecords&quot;: 0"/>
     <invalidIndicator value="lyrics not available"/>
   </provider>
+  <provider name="genius.com" charset="utf-8" url="https://www.genius.com/{artist}-{title}-lyrics">
+    <urlFormat replace=",._@!#%^*+;\/&quot;'()[]" with=""/>
+    <urlFormat replace=" " with="-"/>
+    <!-- When $ is used as the dollar sign it is ommitted from the url
+         When $ is used instead of 's',
+         in some cases it is replaced by 's'(Too $hort -> too-short)
+         in other cases it is ommited ($uicideboy$ -> uicideboy)
+         I chose to ommit it though, in some cases it's gonna be problematic -->
+    <urlFormat replace="$" with=""/>
+    <urlFormat replace="ÄÂÀÁÃäâàáã" with="a"/>
+    <urlFormat replace="ËÊÈÉëêèé" with="e"/>
+    <urlFormat replace="ÏÌïì" with="i"/>
+    <urlFormat replace="ÖÔÒÓÕöôòóõ" with="o"/>
+    <urlFormat replace="ÜŪÙÚüūùú" with="u"/>
+    <urlFormat replace="ŸÝÿý" with="y"/>
+    <urlFormat replace="Ññ" with="n"/>
+    <urlFormat replace="Çç" with="c"/>
+    <urlFormat replace="ß" with="ss"/>
+    <urlFormat replace="&amp;" with="and"/>
+    <extract>
+      <item tag="&lt;div class=&quot;lyrics&quot;&gt;"/>
+    </extract>
+    <exclude>
+      <item begin="&lt;!--" end="--&gt;"/>
+      <item begin="&lt;a href=" end="&gt;"/>
+      <item begin="&lt;/a" end="&gt;"/>
+    </exclude>
+  </provider>   
   <provider name="hindilyrics.net (Bollywood songs)" title="{title} ({album})" charset="utf-8" url="http://www.hindilyrics.net/lyrics/of-{Title}.html">
     <urlFormat replace=" _@;\/&quot;'()[]" with="%20"/>
     <urlFormat replace="?" with=""/>
