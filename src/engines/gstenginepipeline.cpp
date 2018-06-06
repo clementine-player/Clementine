@@ -157,8 +157,9 @@ bool GstEnginePipeline::ReplaceDecodeBin(const QUrl& url) {
 
     // Create elements
     GstElement* src = engine_->CreateElement("tcpserversrc", new_bin);
+    if (!src) return false;
     GstElement* gdp = engine_->CreateElement("gdpdepay", new_bin);
-    if (!src || !gdp) return false;
+    if (!gdp) return false;
 
     // Pick a port number
     const int port = Utilities::PickUnusedPort();
@@ -182,6 +183,7 @@ bool GstEnginePipeline::ReplaceDecodeBin(const QUrl& url) {
         Q_ARG(QString, url.toString()), Q_ARG(quint16, port));
   } else {
     new_bin = engine_->CreateElement("uridecodebin");
+    if (!new_bin) return false;
     g_object_set(G_OBJECT(new_bin), "uri", url.toEncoded().constData(),
                  nullptr);
     CHECKED_GCONNECT(G_OBJECT(new_bin), "drained", &SourceDrainedCallback,
