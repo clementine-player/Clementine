@@ -77,6 +77,58 @@ public:
 };
 
 ////////////////////////////////////////////////////////////////////////////////
+// static members
+////////////////////////////////////////////////////////////////////////////////
+
+namespace
+{
+  // Dummy file class to make a stream work with MPEG::Header.
+
+  class AdapterFile : public TagLib::File
+  {
+  public:
+    AdapterFile(IOStream *stream) : File(stream) {}
+
+    Tag *tag() const { return 0; }
+    AudioProperties *audioProperties() const { return 0; }
+    bool save() { return false; }
+  };
+}
+
+bool MPEG::File::isSupported(IOStream *stream)
+{
+  if(!stream || !stream->isOpen())
+    return false;
+
+  // An MPEG file has MPEG frame headers. An ID3v2 tag may precede.
+
+  // MPEG frame headers are really confusing with irrelevant binary data.
+  // So we check if a frame header is really valid.
+
+  long headerOffset;
+  const ByteVector buffer = Utils::readHeader(stream, bufferSize(), true, &headerOffset);
+
+  if(buffer.isEmpty())
+	  return false;
+  
+  const long originalPosition = stream->tell();
+  AdapterFile file(stream);
+
+  for(unsigned int i = 0; i < buffer.size() - 1; ++i) {
+    if(isFrameSync(buffer, i)) {
+      const Header header(&file, headerOffset + i, true);
+      if(header.isValid()) {
+        stream->seek(originalPosition);
+        return true;
+      }
+    }
+  }
+
+  stream->seek(originalPosition);
+  return false;
+}
+
+////////////////////////////////////////////////////////////////////////////////
 // public members
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -346,55 +398,50 @@ void MPEG::File::setID3v2FrameFactory(const ID3v2::FrameFactory *factory)
 
 long MPEG::File::nextFrameOffset(long position)
 {
-  bool foundLastSyncPattern = false;
-
-  ByteVector buffer;
+  ByteVector frameSyncBytes(2, '\0');
 
   while(true) {
     seek(position);
-    buffer = readBlock(bufferSize());
-
-    if(buffer.size() <= 0)
+    const ByteVector buffer = readBlock(bufferSize());
+    if(buffer.isEmpty())
       return -1;
 
-    if(foundLastSyncPattern && secondSynchByte(buffer[0]))
-      return position - 1;
-
-    for(unsigned int i = 0; i < buffer.size() - 1; i++) {
-      if(firstSyncByte(buffer[i]) && secondSynchByte(buffer[i + 1]))
-        return position + i;
+    for(unsigned int i = 0; i < buffer.size(); ++i) {
+      frameSyncBytes[0] = frameSyncBytes[1];
+      frameSyncBytes[1] = buffer[i];
+      if(isFrameSync(frameSyncBytes)) {
+        const Header header(this, position + i - 1, true);
+        if(header.isValid())
+          return position + i - 1;
+      }
     }
 
-    foundLastSyncPattern = firstSyncByte(buffer[buffer.size() - 1]);
-    position += buffer.size();
+    position += bufferSize();
   }
 }
 
 long MPEG::File::previousFrameOffset(long position)
 {
-  bool foundFirstSyncPattern = false;
-  ByteVector buffer;
+  ByteVector frameSyncBytes(2, '\0');
 
-  while (position > 0) {
-    long size = std::min<long>(position, bufferSize());
-    position -= size;
+  while(position > 0) {
+    const long bufferLength = std::min<long>(position, bufferSize());
+    position -= bufferLength;
 
     seek(position);
-    buffer = readBlock(size);
+    const ByteVector buffer = readBlock(bufferLength);
 
-    if(buffer.size() <= 0)
-      break;
-
-    if(foundFirstSyncPattern && firstSyncByte(buffer[buffer.size() - 1]))
-      return position + buffer.size() - 1;
-
-    for(int i = buffer.size() - 2; i >= 0; i--) {
-      if(firstSyncByte(buffer[i]) && secondSynchByte(buffer[i + 1]))
-        return position + i;
+    for(int i = buffer.size() - 1; i >= 0; --i) {
+      frameSyncBytes[1] = frameSyncBytes[0];
+      frameSyncBytes[0] = buffer[i];
+      if(isFrameSync(frameSyncBytes)) {
+        const Header header(this, position + i, true);
+        if(header.isValid())
+          return position + i + header.frameLength();
+      }
     }
-
-    foundFirstSyncPattern = secondSynchByte(buffer[0]);
   }
+
   return -1;
 }
 
@@ -488,28 +535,41 @@ long MPEG::File::findID3v2()
   const ByteVector headerID = ID3v2::Header::fileIdentifier();
 
   seek(0);
-
-  const ByteVector data = readBlock(headerID.size());
-  if(data.size() < headerID.size())
-    return -1;
-
-  if(data == headerID)
+  if(readBlock(headerID.size()) == headerID)
     return 0;
 
-  if(firstSyncByte(data[0]) && secondSynchByte(data[1]))
+  const Header firstHeader(this, 0, true);
+  if(firstHeader.isValid())
     return -1;
 
-  // Look for the entire file, if neither an MEPG frame or ID3v2 tag was found
-  // at the beginning of the file.
-  // We don't care about the inefficiency of the code, since this is a seldom case.
+  // Look for an ID3v2 tag until reaching the first valid MPEG frame.
 
-  const long tagOffset = find(headerID);
-  if(tagOffset < 0)
-    return -1;
+  ByteVector frameSyncBytes(2, '\0');
+  ByteVector tagHeaderBytes(3, '\0');
+  long position = 0;
 
-  const long frameOffset = firstFrameOffset();
-  if(frameOffset < tagOffset)
-    return -1;
+  while(true) {
+    seek(position);
+    const ByteVector buffer = readBlock(bufferSize());
+    if(buffer.isEmpty())
+      return -1;
 
-  return tagOffset;
+    for(unsigned int i = 0; i < buffer.size(); ++i) {
+      frameSyncBytes[0] = frameSyncBytes[1];
+      frameSyncBytes[1] = buffer[i];
+      if(isFrameSync(frameSyncBytes)) {
+        const Header header(this, position + i - 1, true);
+        if(header.isValid())
+          return -1;
+      }
+
+      tagHeaderBytes[0] = tagHeaderBytes[1];
+      tagHeaderBytes[1] = tagHeaderBytes[2];
+      tagHeaderBytes[2] = buffer[i];
+      if(tagHeaderBytes == headerID)
+        return position + i - 2;
+    }
+
+    position += bufferSize();
+  }
 }

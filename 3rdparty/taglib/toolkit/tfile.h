@@ -86,7 +86,7 @@ namespace TagLib {
      * format, the returned map's unsupportedData() list will contain one entry identifying
      * that object (e.g. the frame type for ID3v2 tags). Use removeUnsupportedProperties()
      * to remove (a subset of) them.
-     * For files that contain more than one tag (e.g. an MP3 with both an ID3v2 and an ID3v2
+     * For files that contain more than one tag (e.g. an MP3 with both an ID3v1 and an ID3v2
      * tag) only the most "modern" one will be exported (ID3v2 in this case).
      * BIC: Will be made virtual in future releases.
      */
