@@ -1187,6 +1187,12 @@ optional_source(HAVE_LIBPULSE
     engines/pulsedevicefinder.cpp
 )
 
+# ALSA integration
+optional_source(HAVE_ALSA
+  SOURCES
+    engines/alsadevicefinder.cpp
+)
+
 # Hack to add Clementine to the Unity system tray whitelist
 optional_source(LINUX
   SOURCES core/ubuntuunityhack.cpp
@@ -1304,6 +1310,10 @@ endif(HAVE_SPOTIFY_DOWNLOADER)
 if(HAVE_LIBPULSE)
   target_link_libraries(clementine_lib ${LIBPULSE_LIBRARIES})
 endif()
+
+if(HAVE_ALSA)
+  target_link_libraries(clementine_lib ${ALSA_LIBRARIES})
+endif(HAVE_ALSA)
 
 if (APPLE)
   target_link_libraries(clementine_lib

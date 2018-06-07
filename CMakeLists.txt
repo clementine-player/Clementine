@@ -54,6 +54,10 @@ find_package(Gettext REQUIRED)
 find_package(PkgConfig REQUIRED)
 find_package(Protobuf REQUIRED)
 find_package(FFTW3)
+find_package(ALSA)
+if(ALSA_FOUND)
+  set(HAVE_ALSA ON)
+endif()
 
 find_library(PROTOBUF_STATIC_LIBRARY libprotobuf.a libprotobuf)
 
