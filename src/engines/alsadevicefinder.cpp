@@ -50,9 +50,9 @@ QList<DeviceFinder::Device> AlsaDeviceFinder::ListDevices() {
     result = snd_card_next(&card);
     if (result < 0) {
       qLog(Error) << "Unable to get soundcard:" << snd_strerror(result);
-      return ret;
+      break;
     }
-    if (card < 0) return ret;
+    if (card < 0) break;
 
     char name[32];
     sprintf(name, "hw:%d", card);
@@ -103,11 +103,6 @@ QList<DeviceFinder::Device> AlsaDeviceFinder::ListDevices() {
     }
     snd_ctl_close(handle);
   }
-
-  snd_pcm_info_free(pcminfo);
-  snd_ctl_card_info_free(cardinfo);
-
-  snd_config_update_free_global();
 
   return ret;
 }
