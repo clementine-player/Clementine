@@ -165,10 +165,10 @@ void GstEngine::InitialiseGstreamer() {
   DeviceFinder* finder_pulse(nullptr);
 #ifdef HAVE_LIBPULSE
   finder_pulse = new PulseDeviceFinder;
-  if (plugin_names.contains(finder_pulse->gstreamer_sink()) && finder_pulse->Initialise()) {
+  if (plugin_names.contains(finder_pulse->gstreamer_sink()) &&
+      finder_pulse->Initialise()) {
     device_finders_.append(finder_pulse);
-  }
-  else {
+  } else {
     delete finder_pulse;
     finder_pulse = nullptr;
   }

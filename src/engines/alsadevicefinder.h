@@ -30,4 +30,4 @@ class AlsaDeviceFinder : public DeviceFinder {
   virtual QList<Device> ListDevices();
 };
 
-#endif // ALSADEVICEFINDER_H
+#endif  // ALSADEVICEFINDER_H
