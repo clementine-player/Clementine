@@ -104,5 +104,7 @@ QList<DeviceFinder::Device> AlsaDeviceFinder::ListDevices() {
     snd_ctl_close(handle);
   }
 
+  snd_config_update_free_global();
+
   return ret;
 }
