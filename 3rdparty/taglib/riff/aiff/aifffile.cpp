@@ -28,6 +28,7 @@
 #include <id3v2tag.h>
 #include <tstringlist.h>
 #include <tpropertymap.h>
+#include <tagutils.h>
 
 #include "aifffile.h"
 
@@ -52,6 +53,18 @@ public:
 
   bool hasID3v2;
 };
+
+////////////////////////////////////////////////////////////////////////////////
+// static members
+////////////////////////////////////////////////////////////////////////////////
+
+bool RIFF::AIFF::File::isSupported(IOStream *stream)
+{
+  // An AIFF file has to start with "FORM????AIFF" or "FORM????AIFC".
+
+  const ByteVector id = Utils::readHeader(stream, 12, false);
+  return (id.startsWith("FORM") && (id.containsAt("AIFF", 8) || id.containsAt("AIFC", 8)));
+}
 
 ////////////////////////////////////////////////////////////////////////////////
 // public members

@@ -76,7 +76,7 @@ pkg_check_modules(LIBPULSE libpulse)
 pkg_check_modules(LIBXML libxml-2.0)
 pkg_check_modules(QJSON REQUIRED QJson)
 pkg_check_modules(SPOTIFY libspotify>=12.1.45)
-pkg_check_modules(TAGLIB REQUIRED taglib>=1.6)
+pkg_check_modules(TAGLIB taglib)
 
 if (WIN32)
   find_package(ZLIB REQUIRED)
@@ -89,26 +89,30 @@ find_path(LASTFM1_INCLUDE_DIRS lastfm/Track.h)
 
 find_path(SPARSEHASH_INCLUDE_DIRS google/sparsetable)
 
-# Google Drive support needs Taglib 1.8, but this version isn't in old Ubuntu
-# distros.  If the user seems to want Drive support (ie. they have sparsehash
-# installed and haven't disabled drive), and has an old taglib, compile our
-# internal one and use that instead.
-option(USE_BUILTIN_TAGLIB "If the system's version of Taglib is too old, compile our builtin version instead" ON)
-if (USE_BUILTIN_TAGLIB AND TAGLIB_VERSION VERSION_LESS 1.8)
-  message(STATUS "Using builtin taglib because your system's version is too old")
-  set(TAGLIB_VERSION 1.11.0)
-  set(TAGLIB_INCLUDE_DIRS "${CMAKE_BINARY_DIR}/3rdparty/taglib/headers/taglib/;${CMAKE_BINARY_DIR}/3rdparty/taglib/headers/")
-  set(TAGLIB_LIBRARY_DIRS "")
-  set(TAGLIB_LIBRARIES tag)
-  set(TAGLIB_HAS_OPUS ON)
-  add_subdirectory(3rdparty/taglib)
+# Only use system taglib if it's greater than 1.11.1 because of audio file detection by content.
+if (TAGLIB_VERSION VERSION_GREATER 1.11.1 OR WIN32)
+  option(USE_SYSTEM_TAGLIB "Use system taglib" ON)
 else()
+  option(USE_SYSTEM_TAGLIB "Use system taglib" OFF)
+endif()
+
+if (TAGLIB_FOUND AND USE_SYSTEM_TAGLIB)
+  message(STATUS "Using system taglib library")
   set(CMAKE_REQUIRED_INCLUDES "${TAGLIB_INCLUDE_DIRS}")
   set(CMAKE_REQUIRED_LIBRARIES "${TAGLIB_LIBRARIES}")
   check_cxx_source_compiles("#include <opusfile.h>
       int main() { char *s; TagLib::Ogg::Opus::File opusfile(s); return 0;}" TAGLIB_HAS_OPUS)
   set(CMAKE_REQUIRED_INCLUDES)
   set(CMAKE_REQUIRED_LIBRARIES)
+else()
+  message(STATUS "Using builtin taglib because your system's version is too old")
+  set(TAGLIB_VERSION 1.11.1)
+  set(TAGLIB_INCLUDE_DIRS "${CMAKE_BINARY_DIR}/3rdparty/taglib/headers/taglib/;${CMAKE_BINARY_DIR}/3rdparty/taglib/headers/")
+  set(TAGLIB_LIBRARY_DIRS "")
+  set(TAGLIB_LIBRARIES tag)
+  set(TAGLIB_HAS_OPUS ON)
+  add_subdirectory(3rdparty/utf8-cpp)
+  add_subdirectory(3rdparty/taglib)
 endif()
 
 if(LASTFM_INCLUDE_DIRS AND LASTFM1_INCLUDE_DIRS)
