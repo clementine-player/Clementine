@@ -70,6 +70,7 @@
 #include "core/utilities.h"
 #include "covers/albumcoverloader.h"
 #include "engines/enginebase.h"
+#include "gmereader.h"
 #include "library/sqlrow.h"
 #include "tagreadermessages.pb.h"
 #include "widgets/trackslider.h"
@@ -434,6 +435,8 @@ QString Song::TextForFiletype(FileType type) {
       return QObject::tr("TrueAudio");
     case Song::Type_Cdda:
       return QObject::tr("CDDA");
+    case Song::Type_Spc:
+      return QObject::tr("SNES SPC700");
 
     case Song::Type_Stream:
       return QObject::tr("Stream");
@@ -672,12 +675,13 @@ void Song::InitFromFilePartial(const QString& filename) {
   QString suffix = info.suffix().toLower();
 
   TagLib::FileRef fileref(filename.toUtf8().constData());
-  if (fileref.file()) d->valid_ = true;
+  if (fileref.file() || GME::IsSupportedFormat(info))
+    d->valid_ = true;
   else {
     d->valid_ = false;
-    qLog(Error) << "File" << filename << "is not recognized by TagLib as a valid audio file.";
+    qLog(Error) << "File" << filename
+                << "is not recognized by TagLib as a valid audio file.";
   }
-
 }
 
 void Song::InitArtManual() {

@@ -14,6 +14,7 @@ set(MESSAGES
 set(SOURCES
   fmpsparser.cpp
   tagreader.cpp
+  gmereader.cpp
 )
 
 set(HEADERS
