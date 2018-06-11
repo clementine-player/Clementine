@@ -80,6 +80,7 @@
 #endif
 
 using std::shared_ptr;
+using std::unique_ptr;
 using std::vector;
 
 const char* GstEngine::kSettingsGroup = "GstEngine";
@@ -162,7 +163,7 @@ void GstEngine::InitialiseGstreamer() {
     plugin_names.insert(plugin.name);
   }
 
-  std::unique_ptr<DeviceFinder> finder_pulse;
+  unique_ptr<DeviceFinder> finder_pulse;
 #ifdef HAVE_LIBPULSE
   finder_pulse.reset(new PulseDeviceFinder);
   if (plugin_names.contains(finder_pulse->gstreamer_sink()) &&
