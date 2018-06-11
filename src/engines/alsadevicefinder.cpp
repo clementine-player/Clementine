@@ -18,6 +18,7 @@
 #include <alsa/asoundlib.h>
 #include <errno.h>
 #include <stdio.h>
+#include <boost/scope_exit.hpp>
 
 #include <QList>
 #include <QString>
@@ -33,21 +34,13 @@ AlsaDeviceFinder::AlsaDeviceFinder() : DeviceFinder("alsasink") {}
 QList<DeviceFinder::Device> AlsaDeviceFinder::ListDevices() {
   QList<Device> ret;
 
-  int result = -1;
-  int card = -1;
-  int dev = -1;
-
-  snd_ctl_card_info_t* cardinfo;
-  snd_pcm_info_t* pcminfo;
-  snd_ctl_t* handle;
-
-  snd_ctl_card_info_alloca(&cardinfo);
-  snd_pcm_info_alloca(&pcminfo);
-
   snd_pcm_stream_name(SND_PCM_STREAM_PLAYBACK);
 
+  int card = -1;
+  snd_ctl_card_info_t* cardinfo;
+  snd_ctl_card_info_alloca(&cardinfo);
   while (true) {
-    result = snd_card_next(&card);
+    int result = snd_card_next(&card);
     if (result < 0) {
       qLog(Error) << "Unable to get soundcard:" << snd_strerror(result);
       break;
@@ -55,23 +48,29 @@ QList<DeviceFinder::Device> AlsaDeviceFinder::ListDevices() {
     if (card < 0) break;
 
     char name[32];
-    sprintf(name, "hw:%d", card);
+    snprintf(name, 31, "hw:%d", card);
 
+    snd_ctl_t* handle;
     result = snd_ctl_open(&handle, name, 0);
     if (result < 0) {
       qLog(Error) << "Unable to open soundcard" << card << ":"
                   << snd_strerror(result);
       continue;
     }
+
     result = snd_ctl_card_info(handle, cardinfo);
     if (result < 0) {
       qLog(Error) << "Control hardware failure for card" << card << ":"
                   << snd_strerror(result);
-      snd_ctl_close(handle);
+      BOOST_SCOPE_EXIT(&handle) {
+        snd_ctl_close(handle);
+      } BOOST_SCOPE_EXIT_END
       continue;
     }
 
-    dev = -1;
+    int dev = -1;
+    snd_pcm_info_t* pcminfo;
+    snd_pcm_info_alloca(&pcminfo);
     while (true) {
       result = snd_ctl_pcm_next_device(handle, &dev);
       if (result < 0) {
@@ -101,7 +100,9 @@ QList<DeviceFinder::Device> AlsaDeviceFinder::ListDevices() {
       device.icon_name = GuessIconName(device.description);
       ret.append(device);
     }
-    snd_ctl_close(handle);
+    BOOST_SCOPE_EXIT(&handle) {
+      snd_ctl_close(handle);
+    } BOOST_SCOPE_EXIT_END
   }
 
   snd_config_update_free_global();
