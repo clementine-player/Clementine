@@ -162,7 +162,7 @@ void GstEngine::InitialiseGstreamer() {
     plugin_names.insert(plugin.name);
   }
 
-  std::unique_ptr <DeviceFinder> finder_pulse;
+  std::unique_ptr<DeviceFinder> finder_pulse;
 #ifdef HAVE_LIBPULSE
   finder_pulse.reset(new PulseDeviceFinder);
   if (plugin_names.contains(finder_pulse->gstreamer_sink()) &&

@@ -62,9 +62,8 @@ QList<DeviceFinder::Device> AlsaDeviceFinder::ListDevices() {
     if (result < 0) {
       qLog(Error) << "Control hardware failure for card" << card << ":"
                   << snd_strerror(result);
-      BOOST_SCOPE_EXIT(&handle) {
-        snd_ctl_close(handle);
-      } BOOST_SCOPE_EXIT_END
+      BOOST_SCOPE_EXIT(&handle) { snd_ctl_close(handle); }
+      BOOST_SCOPE_EXIT_END
       continue;
     }
 
@@ -100,9 +99,8 @@ QList<DeviceFinder::Device> AlsaDeviceFinder::ListDevices() {
       device.icon_name = GuessIconName(device.description);
       ret.append(device);
     }
-    BOOST_SCOPE_EXIT(&handle) {
-      snd_ctl_close(handle);
-    } BOOST_SCOPE_EXIT_END
+    BOOST_SCOPE_EXIT(&handle) { snd_ctl_close(handle); }
+    BOOST_SCOPE_EXIT_END
   }
 
   snd_config_update_free_global();
