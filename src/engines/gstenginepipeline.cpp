@@ -253,7 +253,8 @@ bool GstEnginePipeline::Init() {
                      device_.toString().toUtf8().constData(), nullptr);
         break;
       case QVariant::ByteArray: {
-	g_object_set(G_OBJECT(audiosink_), "device", device_.toByteArray().constData(), nullptr);
+        g_object_set(G_OBJECT(audiosink_), "device",
+                     device_.toByteArray().constData(), nullptr);
         break;
       }
 
