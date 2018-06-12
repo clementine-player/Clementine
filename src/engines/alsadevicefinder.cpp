@@ -47,23 +47,23 @@ QList<DeviceFinder::Device> AlsaDeviceFinder::ListDevices() {
     }
     if (card < 0) break;
 
-    char name[32];
-    snprintf(name, 31, "hw:%d", card);
+    char str[32];
+    snprintf(str, sizeof(str)-1, "hw:%d", card);
 
     snd_ctl_t* handle;
-    result = snd_ctl_open(&handle, name, 0);
+    result = snd_ctl_open(&handle, str, 0);
     if (result < 0) {
       qLog(Error) << "Unable to open soundcard" << card << ":"
                   << snd_strerror(result);
       continue;
     }
+    BOOST_SCOPE_EXIT(&handle) { snd_ctl_close(handle); }
+    BOOST_SCOPE_EXIT_END
 
     result = snd_ctl_card_info(handle, cardinfo);
     if (result < 0) {
       qLog(Error) << "Control hardware failure for card" << card << ":"
                   << snd_strerror(result);
-      BOOST_SCOPE_EXIT(&handle) { snd_ctl_close(handle); }
-      BOOST_SCOPE_EXIT_END
       continue;
     }
 
@@ -99,8 +99,6 @@ QList<DeviceFinder::Device> AlsaDeviceFinder::ListDevices() {
       device.icon_name = GuessIconName(device.description);
       ret.append(device);
     }
-    BOOST_SCOPE_EXIT(&handle) { snd_ctl_close(handle); }
-    BOOST_SCOPE_EXIT_END
   }
 
   snd_config_update_free_global();
