@@ -536,6 +536,13 @@ namespace TagLib {
     void detach();
 
   private:
+    /*!
+     * \deprecated This variable is no longer used, but NEVER remove this. It
+     * may lead to a linkage error.
+     */
+     // BIC: remove
+    static const Type WCharByteOrder;
+
     class StringPrivate;
     StringPrivate *d;
   };

@@ -586,9 +586,9 @@ void XM::File::read(bool)
     unsigned int count = 4 + instrument.read(*this, instrumentHeaderSize - 4U);
     READ_ASSERT(count == std::min(instrumentHeaderSize, (unsigned long)instrument.size() + 4));
 
-    unsigned long sampleHeaderSize = 0;
     long offset = 0;
     if(sampleCount > 0) {
+      unsigned long sampleHeaderSize = 0;
       sumSampleCount += sampleCount;
       // wouldn't know which header size to assume otherwise:
       READ_ASSERT(instrumentHeaderSize >= count + 4 && readU32L(sampleHeaderSize));

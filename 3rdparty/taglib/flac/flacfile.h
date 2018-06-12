@@ -318,6 +318,15 @@ namespace TagLib {
        */
       bool hasID3v2Tag() const;
 
+      /*!
+       * Returns whether or not the given \a stream can be opened as a FLAC
+       * file.
+       *
+       * \note This method is designed to do a quick check.  The result may
+       * not necessarily be correct.
+       */
+      static bool isSupported(IOStream *stream);
+
     private:
       File(const File &);
       File &operator=(const File &);
