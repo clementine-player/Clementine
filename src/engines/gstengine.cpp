@@ -174,7 +174,8 @@ void GstEngine::InitialiseGstreamer() {
 #endif
 
   QList<DeviceFinder*> device_finders;
-  if (!pa) { // Only add alsa devices if pulseaudio is not enabled to avoid confusion.
+  if (!pa) {  // Only add alsa devices if pulseaudio is not enabled to avoid
+              // confusion.
 #ifdef HAVE_ALSA
     device_finders.append(new AlsaDeviceFinder);
 #endif
