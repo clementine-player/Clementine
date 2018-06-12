@@ -163,23 +163,21 @@ void GstEngine::InitialiseGstreamer() {
     plugin_names.insert(plugin.name);
   }
 
-  unique_ptr<DeviceFinder> finder_pulse;
+  bool pa(false);
 #ifdef HAVE_LIBPULSE
-  finder_pulse.reset(new PulseDeviceFinder);
+  unique_ptr<DeviceFinder> finder_pulse(new PulseDeviceFinder);
   if (plugin_names.contains(finder_pulse->gstreamer_sink()) &&
       finder_pulse->Initialise()) {
-    device_finders_.append(finder_pulse.get());
-  } else {
-    finder_pulse.reset();
+    pa = true;
+    device_finders_.append(finder_pulse.release());
   }
 #endif
 
   QList<DeviceFinder*> device_finders;
 #ifdef HAVE_ALSA
   // Only add alsa devices if pulseaudio is not enabled to avoid confusion.
-  if (!finder_pulse.get()) device_finders.append(new AlsaDeviceFinder);
+  if (!pa) device_finders.append(new AlsaDeviceFinder);
 #endif
-  finder_pulse.release();
 #ifdef Q_OS_DARWIN
   device_finders.append(new OsxDeviceFinder);
 #endif
