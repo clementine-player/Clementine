@@ -48,7 +48,7 @@ QList<DeviceFinder::Device> AlsaDeviceFinder::ListDevices() {
     if (card < 0) break;
 
     char str[32];
-    snprintf(str, sizeof(str)-1, "hw:%d", card);
+    snprintf(str, sizeof(str) - 1, "hw:%d", card);
 
     snd_ctl_t* handle;
     result = snd_ctl_open(&handle, str, 0);
