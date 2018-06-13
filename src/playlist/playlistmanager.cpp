@@ -29,6 +29,7 @@
 #include "library/libraryplaylistitem.h"
 #include "playlistparsers/playlistparser.h"
 #include "smartplaylists/generator.h"
+#include "queue.h"
 
 #include <QFileDialog>
 #include <QFileInfo>
@@ -63,7 +64,7 @@ PlaylistManager::~PlaylistManager() {
 void PlaylistManager::Init(LibraryBackend* library_backend,
                            PlaylistBackend* playlist_backend,
                            PlaylistSequence* sequence,
-                           PlaylistContainer* playlist_container) {
+                           PlaylistContainer* playlist_container) { 
   library_backend_ = library_backend;
   playlist_backend_ = playlist_backend;
   sequence_ = sequence;
@@ -395,6 +396,15 @@ void PlaylistManager::RateCurrentSong(int rating) {
 
 void PlaylistManager::ChangePlaylistOrder(const QList<int>& ids) {
   playlist_backend_->SetPlaylistOrder(ids);
+}
+
+void PlaylistManager::Enque(int id, int i) {
+    QModelIndexList dummyIndexList;
+
+    Q_ASSERT(playlists_.contains(id));
+
+    dummyIndexList.append(playlist(id)->index(i, 0));
+    playlist(id)->queue()->ToggleTracks(dummyIndexList);
 }
 
 void PlaylistManager::UpdateSummaryText() {

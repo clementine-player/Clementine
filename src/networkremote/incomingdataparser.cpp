@@ -32,6 +32,11 @@
 #endif
 
 IncomingDataParser::IncomingDataParser(Application* app) : app_(app) {
+  // load settings initaily and sign up for updates
+  ReloadSettings();
+  connect(app_, SIGNAL(SettingsChanged()), SLOT(ReloadSettings()));
+
+
   // Connect all the signals
   // due the player is in a different thread, we cannot access these functions
   // directly
@@ -47,6 +52,7 @@ IncomingDataParser::IncomingDataParser(Application* app) : app_(app) {
   connect(this, SIGNAL(PlayAt(int, Engine::TrackChangeFlags, bool)),
           app_->player(), SLOT(PlayAt(int, Engine::TrackChangeFlags, bool)));
   connect(this, SIGNAL(SeekTo(int)), app_->player(), SLOT(SeekTo(int)));
+  connect(this, SIGNAL(Enque(int,int)), app_->playlist_manager(), SLOT(Enque(int,int)));
 
   connect(this, SIGNAL(SetActivePlaylist(int)), app_->playlist_manager(),
           SLOT(SetActivePlaylist(int)));
@@ -79,6 +85,12 @@ IncomingDataParser::IncomingDataParser(Application* app) : app_(app) {
 }
 
 IncomingDataParser::~IncomingDataParser() {}
+
+void IncomingDataParser::ReloadSettings() {
+    QSettings s;
+    s.beginGroup(MainWindow::kSettingsGroup);
+    doubleclick_playlist_addmode_ = MainWindow::PlaylistAddBehaviour(s.value("doubleclick_playlist_addmode", MainWindow::PlaylistAddBehaviour_Enqueue).toInt());
+}
 
 bool IncomingDataParser::close_connection() { return close_connection_; }
 
@@ -194,8 +206,24 @@ void IncomingDataParser::ChangeSong(const pb::remote::Message& msg) {
     emit SetActivePlaylist(request.playlist_id());
   }
 
-  // Play the selected song
-  emit PlayAt(request.song_index(), Engine::Manual, false);
+  switch (doubleclick_playlist_addmode_)
+  {
+    // Play the selected song
+    case MainWindow::PlaylistAddBehaviour_Play:
+      emit PlayAt(request.song_index(), Engine::Manual, false);
+      break;
+
+    // Enque the selected song
+    case MainWindow::PlaylistAddBehaviour_Enqueue:
+      emit Enque(request.playlist_id(), request.song_index());
+      if (app_->player()->GetState() != Engine::Playing)
+      {
+          emit PlayAt(request.song_index(), Engine::Manual, false);
+      }
+
+      break;
+  }
+
 }
 
 void IncomingDataParser::SetRepeatMode(const pb::remote::Repeat& repeat) {
