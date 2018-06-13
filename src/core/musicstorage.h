@@ -26,7 +26,7 @@
 #include <memory>
 
 #include <QMetaType>
-
+#include <QTemporaryFile>
 class MusicStorage {
  public:
   MusicStorage();
@@ -56,6 +56,7 @@ class MusicStorage {
     bool mark_as_listened_;
     bool remove_original_;
     ProgressFunction progress_;
+    QList<QTemporaryFile*> *userData;
   };
 
   struct DeleteJob {
