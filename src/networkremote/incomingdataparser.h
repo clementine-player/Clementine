@@ -1,10 +1,10 @@
 #ifndef INCOMINGDATAPARSER_H
 #define INCOMINGDATAPARSER_H
 
-#include "core/player.h"
 #include "core/application.h"
-#include "remotecontrolmessages.pb.h"
+#include "core/player.h"
 #include "remoteclient.h"
+#include "remotecontrolmessages.pb.h"
 #include "ui/mainwindow.h"
 
 class IncomingDataParser : public QObject {
@@ -19,7 +19,7 @@ class IncomingDataParser : public QObject {
   void Parse(const pb::remote::Message& msg);
   void ReloadSettings();
 
-signals:
+ signals:
   void SendClementineInfo();
   void SendFirstData(bool send_playlist_songs);
   void SendAllPlaylists();
