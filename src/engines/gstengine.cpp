@@ -58,6 +58,10 @@
 #include "engines/pulsedevicefinder.h"
 #endif
 
+#ifdef HAVE_ALSA
+#include "engines/alsadevicefinder.h"
+#endif
+
 #ifdef Q_OS_DARWIN
 #include "engines/osxdevicefinder.h"
 #endif
@@ -76,6 +80,7 @@
 #endif
 
 using std::shared_ptr;
+using std::unique_ptr;
 using std::vector;
 
 const char* GstEngine::kSettingsGroup = "GstEngine";
@@ -158,10 +163,23 @@ void GstEngine::InitialiseGstreamer() {
     plugin_names.insert(plugin.name);
   }
 
-  QList<DeviceFinder*> device_finders;
+  bool pa(false);
 #ifdef HAVE_LIBPULSE
-  device_finders.append(new PulseDeviceFinder);
+  unique_ptr<DeviceFinder> finder_pulse(new PulseDeviceFinder);
+  if (plugin_names.contains(finder_pulse->gstreamer_sink()) &&
+      finder_pulse->Initialise()) {
+    pa = true;
+    device_finders_.append(finder_pulse.release());
+  }
 #endif
+
+  QList<DeviceFinder*> device_finders;
+  if (!pa) {  // Only add alsa devices if pulseaudio is not enabled to avoid
+              // confusion.
+#ifdef HAVE_ALSA
+    device_finders.append(new AlsaDeviceFinder);
+#endif
+  }
 #ifdef Q_OS_DARWIN
   device_finders.append(new OsxDeviceFinder);
 #endif
