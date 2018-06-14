@@ -951,6 +951,7 @@ GstEngine::OutputDetailsList GstEngine::GetOutputsList() const {
   OutputDetails default_output;
   default_output.description = tr("Choose automatically");
   default_output.gstreamer_plugin_name = kAutoSink;
+  default_output.device_property_value = QString("");
   ret.append(default_output);
 
   for (DeviceFinder* finder : device_finders_) {
@@ -976,6 +977,7 @@ GstEngine::OutputDetailsList GstEngine::GetOutputsList() const {
       OutputDetails output;
       output.description = tr("Default device on %1").arg(plugin.description);
       output.gstreamer_plugin_name = plugin.name;
+      output.device_property_value = QString("");
       ret.append(output);
     }
   }
