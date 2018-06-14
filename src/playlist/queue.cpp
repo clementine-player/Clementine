@@ -29,7 +29,7 @@ Queue::Queue(QObject* parent)
     : QAbstractProxyModel(parent),
       playlist_(qobject_cast<Playlist*>(parent)),
       total_length_ns_(0) {
-  connect(this, SIGNAL(ItemCountChanged(int)),SLOT(UpdateTotalLength()));
+  connect(this, SIGNAL(ItemCountChanged(int)), SLOT(UpdateTotalLength()));
   connect(this, SIGNAL(TotalLengthChanged(quint64)), SLOT(UpdateSummaryText()));
 
   UpdateSummaryText();
