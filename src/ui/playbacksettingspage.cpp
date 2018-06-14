@@ -91,7 +91,7 @@ void PlaybackSettingsPage::Load() {
 
   s.beginGroup(GstEngine::kSettingsGroup);
   QString sink = s.value("sink", GstEngine::kAutoSink).toString();
-  QString device = s.value("device").toString();
+  QVariant device = s.value("device");
 
   ui_->gst_output->setCurrentIndex(0);
   for (int i = 0; i < ui_->gst_output->count(); ++i) {
