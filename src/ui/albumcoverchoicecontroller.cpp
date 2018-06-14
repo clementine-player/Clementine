@@ -56,7 +56,7 @@ AlbumCoverChoiceController::AlbumCoverChoiceController(QWidget* parent)
       cover_fetcher_(nullptr),
       save_file_dialog_(nullptr),
       cover_from_url_dialog_(nullptr),
-      album_cover_popup_(nullptr){
+      album_cover_popup_(nullptr) {
   cover_from_file_ =
       new QAction(IconLoader::Load("document-open", IconLoader::Base),
                   tr("Load cover from disk..."), this);
@@ -214,7 +214,8 @@ bool AlbumCoverChoiceController::ToogleCover(const Song& song) {
   album_cover_popup_ = ShowCoverPrivate(song);
 
   // keep track of our window to prevent endless stacking
-  connect(album_cover_popup_, SIGNAL(finished(int)), this, SLOT(AlbumCoverPopupClosed()));
+  connect(album_cover_popup_, SIGNAL(finished(int)), this,
+          SLOT(AlbumCoverPopupClosed()));
 
   return true;
 }
