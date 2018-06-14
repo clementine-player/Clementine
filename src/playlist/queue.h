@@ -82,7 +82,7 @@ class Queue : public QAbstractProxyModel {
   void SourceLayoutChanged();
   void UpdateTotalLength();
 
- private:  
+ private:
   QList<QPersistentModelIndex> source_indexes_;
   const Playlist* playlist_;
   quint64 total_length_ns_;

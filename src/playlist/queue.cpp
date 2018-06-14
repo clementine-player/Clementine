@@ -25,14 +25,14 @@
 
 const char* Queue::kRowsMimetype = "application/x-clementine-queue-rows";
 
-Queue::Queue(QObject* parent) :
-  QAbstractProxyModel(parent),
-  playlist_(qobject_cast<Playlist*>(parent)),
-  total_length_ns_(0) {
-    connect(this, SIGNAL(ItemCountChanged(int)),SLOT(UpdateTotalLength()));
-    connect(this, SIGNAL(TotalLengthChanged(quint64)), SLOT(UpdateSummaryText()));
+Queue::Queue(QObject* parent)
+    : QAbstractProxyModel(parent),
+      playlist_(qobject_cast<Playlist*>(parent)),
+      total_length_ns_(0) {
+  connect(this, SIGNAL(ItemCountChanged(int)),SLOT(UpdateTotalLength()));
+  connect(this, SIGNAL(TotalLengthChanged(quint64)), SLOT(UpdateSummaryText()));
 
-    UpdateSummaryText();
+  UpdateSummaryText();
 }
 
 QModelIndex Queue::mapFromSource(const QModelIndex& source_index) const {
@@ -212,7 +212,6 @@ void Queue::UpdateTotalLength() {
 
   emit TotalLengthChanged(total);
 }
-
 
 void Queue::UpdateSummaryText() {
   QString summary;

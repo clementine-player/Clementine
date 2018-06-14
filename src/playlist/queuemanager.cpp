@@ -100,8 +100,7 @@ void QueueManager::CurrentPlaylistChanged(Playlist* playlist) {
           SIGNAL(currentChanged(QModelIndex, QModelIndex)),
           SLOT(UpdateButtonState()));
 
-  QTimer::singleShot(0, current_playlist_->queue(),
-                     SLOT(UpdateSummaryText()));
+  QTimer::singleShot(0, current_playlist_->queue(), SLOT(UpdateSummaryText()));
 }
 
 void QueueManager::MoveUp() {
