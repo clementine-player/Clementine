@@ -25,9 +25,9 @@
 
 const char* Queue::kRowsMimetype = "application/x-clementine-queue-rows";
 
-Queue::Queue(QObject* parent)
+Queue::Queue(Playlist* parent)
     : QAbstractProxyModel(parent),
-      playlist_(qobject_cast<Playlist*>(parent)),
+      playlist_(parent),
       total_length_ns_(0) {
   connect(this, SIGNAL(ItemCountChanged(int)), SLOT(UpdateTotalLength()));
   connect(this, SIGNAL(TotalLengthChanged(quint64)), SLOT(UpdateSummaryText()));

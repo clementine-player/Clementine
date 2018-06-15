@@ -96,7 +96,7 @@ class AlbumCoverChoiceController : public QWidget {
 
   // Shows the cover of given song in it's original size.
   void ShowCover(const Song& song);
-  bool ToogleCover(const Song& song);
+  bool ToggleCover(const Song& song);
 
   // Search for covers automatically
   void SearchCoverAutomatically(const Song& song);

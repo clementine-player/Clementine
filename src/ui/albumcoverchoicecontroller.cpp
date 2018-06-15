@@ -204,7 +204,7 @@ QString AlbumCoverChoiceController::UnsetCover(Song* song) {
   return cover;
 }
 
-bool AlbumCoverChoiceController::ToogleCover(const Song& song) {
+bool AlbumCoverChoiceController::ToggleCover(const Song& song) {
   if (album_cover_popup_ != nullptr) {
     album_cover_popup_->accept();
     album_cover_popup_ = nullptr;
