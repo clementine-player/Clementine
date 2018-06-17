@@ -38,8 +38,7 @@ class LastFMSettingsPage : public SettingsPage {
 
  private slots:
   void Login();
-  void TokenReceived(bool success, const QString& token);
-  void AuthenticationComplete(bool success, const QString& error_message);
+  void AuthenticationComplete(bool success);
   void Logout();
 
  private:

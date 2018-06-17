@@ -17,6 +17,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include <QUrlQuery>
+
 #include "subsonicservice.h"
 #include "subsonicurlhandler.h"
 
@@ -28,7 +30,10 @@ UrlHandler::LoadResult SubsonicUrlHandler::StartLoading(const QUrl& url) {
   if (service_->login_state() != SubsonicService::LoginState_Loggedin)
     return LoadResult(url);
 
+  QUrlQuery id(url.query());
   QUrl newurl = service_->BuildRequestUrl("stream");
-  newurl.addQueryItem("id", url.host());
+  QUrlQuery url_query(newurl.query());
+  url_query.addQueryItem("id", id.queryItemValue("id"));
+  newurl.setQuery(url_query);
   return LoadResult(url, LoadResult::TrackAvailable, newurl);
 }

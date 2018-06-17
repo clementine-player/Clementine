@@ -20,50 +20,38 @@
 /* Original Author:  Melchior FRANZ  <mfranz@kde.org>  2004
 */
 
-#include <math.h>
-#include <string.h>
+#include <cmath>
 #include "fht.h"
 
-FHT::FHT(int n) : buf_(0), tab_(0), log_(0) {
-  if (n < 3) {
-    num_ = 0;
-    exp2_ = -1;
-    return;
-  }
-  exp2_ = n;
-  num_ = 1 << n;
+FHT::FHT(int n) : num_((n < 3) ? 0 : 1 << n), exp2_((n < 3) ? -1 : n) {
   if (n > 3) {
-    buf_ = new float[num_];
-    tab_ = new float[num_ * 2];
+    buf_vector_.resize(num_);
+    tab_vector_.resize(num_ * 2);
     makeCasTable();
   }
 }
 
-FHT::~FHT() {
-  delete[] buf_;
-  delete[] tab_;
-  delete[] log_;
-}
+FHT::~FHT() {}
+
+int FHT::sizeExp() const { return exp2_; }
+int FHT::size() const { return num_; }
+
+float* FHT::buf_() { return buf_vector_.data(); }
+float* FHT::tab_() { return tab_vector_.data(); }
+int* FHT::log_() { return log_vector_.data(); }
 
 void FHT::makeCasTable(void) {
-  float d, *costab, *sintab;
-  int ul, ndiv2 = num_ / 2;
+  float* costab = tab_();
+  float* sintab = tab_() + num_ / 2 + 1;
 
-  for (costab = tab_, sintab = tab_ + num_ / 2 + 1, ul = 0; ul < num_; ul++) {
-    d = M_PI * ul / ndiv2;
+  for (int ul = 0; ul < num_; ul++) {
+    float d = M_PI * ul / (num_ / 2);
     *costab = *sintab = cos(d);
 
-    costab += 2, sintab += 2;
-    if (sintab > tab_ + num_ * 2) sintab = tab_ + 1;
+    costab += 2;
+    sintab += 2;
+    if (sintab > tab_() + num_ * 2) sintab = tab_() + 1;
   }
-}
-
-float* FHT::copy(float* d, float* s) {
-  return static_cast<float*>(memcpy(d, s, num_ * sizeof(float)));
-}
-
-float* FHT::clear(float* d) {
-  return static_cast<float*>(memset(d, 0, num_ * sizeof(float)));
 }
 
 void FHT::scale(float* p, float d) {
@@ -76,17 +64,17 @@ void FHT::ewma(float* d, float* s, float w) {
 
 void FHT::logSpectrum(float* out, float* p) {
   int n = num_ / 2, i, j, k, *r;
-  if (!log_) {
-    log_ = new int[n];
+  if (log_vector_.size() < n) {
+    log_vector_.resize(n);
     float f = n / log10(static_cast<double>(n));
-    for (i = 0, r = log_; i < n; i++, r++) {
+    for (i = 0, r = log_(); i < n; i++, r++) {
       j = static_cast<int>(rint(log10(i + 1.0) * f));
       *r = j >= n ? n - 1 : j;
     }
   }
   semiLogSpectrum(p);
   *out++ = *p = *p / 100;
-  for (k = i = 1, r = log_; i < n; i++) {
+  for (k = i = 1, r = log_(); i < n; i++) {
     j = *r++;
     if (i == j) {
       *out++ = p[i];
@@ -99,10 +87,9 @@ void FHT::logSpectrum(float* out, float* p) {
 }
 
 void FHT::semiLogSpectrum(float* p) {
-  float e;
   power2(p);
   for (int i = 0; i < (num_ / 2); i++, p++) {
-    e = 10.0 * log10(sqrt(*p * .5));
+    float e = 10.0 * log10(sqrt(*p / 2));
     *p = e < 0 ? 0 : e;
   }
 }
@@ -110,23 +97,26 @@ void FHT::semiLogSpectrum(float* p) {
 void FHT::spectrum(float* p) {
   power2(p);
   for (int i = 0; i < (num_ / 2); i++, p++)
-    *p = static_cast<float>(sqrt(*p * .5));
+    *p = static_cast<float>(sqrt(*p / 2));
 }
 
 void FHT::power(float* p) {
   power2(p);
-  for (int i = 0; i < (num_ / 2); i++) *p++ *= .5;
+  for (int i = 0; i < (num_ / 2); i++) *p++ /= 2;
 }
 
 void FHT::power2(float* p) {
-  int i;
-  float* q;
   _transform(p, num_, 0);
 
-  *p = (*p * *p), *p += *p, p++;
+  *p = static_cast<float>(2 * pow(*p, 2));
+  p++;
 
-  for (i = 1, q = p + num_ - 2; i < (num_ / 2); i++, --q)
-    *p = (*p * *p) + (*q * *q), p++;
+  float* q = p + num_ - 2;
+  for (int i = 1; i < (num_ / 2); i++) {
+    *p = static_cast<float>(pow(*p, 2) + pow(*q, 2));
+    p++;
+    q--;
+  }
 }
 
 void FHT::transform(float* p) {
@@ -172,19 +162,19 @@ void FHT::_transform(float* p, int n, int k) {
   int i, j, ndiv2 = n / 2;
   float a, *t1, *t2, *t3, *t4, *ptab, *pp;
 
-  for (i = 0, t1 = buf_, t2 = buf_ + ndiv2, pp = &p[k]; i < ndiv2; i++)
+  for (i = 0, t1 = buf_(), t2 = buf_() + ndiv2, pp = &p[k]; i < ndiv2; i++)
     *t1++ = *pp++, *t2++ = *pp++;
 
-  memcpy(p + k, buf_, sizeof(float) * n);
+  std::copy(buf_(), buf_() + n, p + k);
 
   _transform(p, ndiv2, k);
   _transform(p, ndiv2, k + ndiv2);
 
   j = num_ / ndiv2 - 1;
-  t1 = buf_;
+  t1 = buf_();
   t2 = t1 + ndiv2;
   t3 = p + k + ndiv2;
-  ptab = tab_;
+  ptab = tab_();
   pp = p + k;
 
   a = *ptab++ * *t3++;
@@ -201,5 +191,6 @@ void FHT::_transform(float* p, int n, int k) {
     *t1++ = *pp + a;
     *t2++ = *pp++ - a;
   }
-  memcpy(p + k, buf_, sizeof(float) * n);
+
+  std::copy(buf_(), buf_() + n, p + k);
 }

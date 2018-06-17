@@ -39,6 +39,7 @@
 #include <QtConcurrentRun>
 
 #include <gst/gst.h>
+#include <gst/pbutils/pbutils.h>
 
 #include "config.h"
 #include "devicefinder.h"
@@ -145,6 +146,8 @@ bool GstEngine::Init() {
 
 void GstEngine::InitialiseGstreamer() {
   gst_init(nullptr, nullptr);
+
+  gst_pb_utils_init();
 
 #ifdef HAVE_MOODBAR
   gstfastspectrum_register_static();
@@ -689,6 +692,18 @@ void GstEngine::HandlePipelineError(int pipeline_id, const QString& message,
 
   qLog(Warning) << "Gstreamer error:" << message;
 
+  // try to reload the URL in case of a drop of the connection
+  if (domain == GST_RESOURCE_ERROR && error_code == GST_RESOURCE_ERROR_SEEK) {
+    if (Load(url_, 0, false, 0, 0)) {
+
+      current_pipeline_->SetState(GST_STATE_PLAYING);
+
+      return;
+    }
+
+    qLog(Warning) << "Attempt to reload " << url_ << " failed";
+  }
+
   current_pipeline_.reset();
 
   BufferingFinished();
@@ -737,7 +752,7 @@ GstElement* GstEngine::CreateElement(const QString& factoryName,
   QString name = factoryName + "-" + QString::number(next_element_id_++);
 
   GstElement* element = gst_element_factory_make(
-      factoryName.toAscii().constData(), name.toAscii().constData());
+      factoryName.toLatin1().constData(), name.toLatin1().constData());
 
   if (!element) {
     emit Error(QString(

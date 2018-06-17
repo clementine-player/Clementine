@@ -29,7 +29,7 @@
 #include "internet/lastfm/lastfmcompat.h"
 
 LastFmCoverProvider::LastFmCoverProvider(QObject* parent)
-    : CoverProvider("last.fm", parent) {}
+    : CoverProvider("last.fm", true, parent) {}
 
 bool LastFmCoverProvider::StartSearch(const QString& artist,
                                       const QString& album, int id) {
@@ -60,6 +60,7 @@ void LastFmCoverProvider::QueryFinished(QNetworkReply* reply, int id) {
       result.description =
           element["artist"].text() + " - " + element["name"].text();
       result.image_url = QUrl(element["image size=extralarge"].text());
+      if (result.image_url.isEmpty()) continue;
       results << result;
     }
   } else {

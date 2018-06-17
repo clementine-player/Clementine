@@ -10,7 +10,7 @@ Source0:        %{name}-@CLEMENTINE_VERSION_SPARKLE@.tar.xz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires:  desktop-file-utils liblastfm-devel taglib-devel gettext
-BuildRequires:  qt4-devel boost-devel gcc-c++ glew-devel libgpod-devel
+BuildRequires:  qt5-devel boost-devel gcc-c++ glew-devel libgpod-devel
 BuildRequires:  cmake gstreamer1-devel gstreamer1-plugins-base-devel
 BuildRequires:  libmtp-devel protobuf-devel protobuf-compiler libcdio-devel
 BuildRequires:  qjson-devel cryptopp-devel fftw-devel sparsehash-devel
@@ -83,10 +83,10 @@ make clean
 %{_datadir}/appdata/clementine.appdata.xml
 %{_datadir}/applications/clementine.desktop
 %{_datadir}/clementine/projectm-presets
-%{_datadir}/kde4/services/clementine-itms.protocol
-%{_datadir}/kde4/services/clementine-itpc.protocol
-%{_datadir}/kde4/services/clementine-feed.protocol
-%{_datadir}/kde4/services/clementine-zune.protocol
+%{_datadir}/kservices5/clementine-itms.protocol
+%{_datadir}/kservices5/clementine-itpc.protocol
+%{_datadir}/kservices5/clementine-feed.protocol
+%{_datadir}/kservices5/clementine-zune.protocol
 %{_datadir}/icons/hicolor/64x64/apps/clementine.png
 %{_datadir}/icons/hicolor/128x128/apps/clementine.png
 %{_datadir}/icons/hicolor/scalable/apps/clementine.svg

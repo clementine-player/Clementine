@@ -72,7 +72,7 @@ class GroupedIconView : public QListView {
   void resizeEvent(QResizeEvent* e);
 
   // QAbstractItemView
-  void dataChanged(const QModelIndex& topLeft, const QModelIndex& bottomRight);
+  void dataChanged(const QModelIndex& topLeft, const QModelIndex& bottomRight, const QVector<int>& = QVector<int>());
   QModelIndex indexAt(const QPoint& p) const;
   void rowsInserted(const QModelIndex& parent, int start, int end);
   void setSelection(const QRect& rect,

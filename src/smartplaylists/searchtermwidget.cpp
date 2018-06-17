@@ -120,7 +120,7 @@ SearchTermWidget::SearchTermWidget(LibraryBackend* library, QWidget* parent)
   // Set stylesheet
   QFile stylesheet_file(":/smartplaylistsearchterm.css");
   stylesheet_file.open(QIODevice::ReadOnly);
-  QString stylesheet = QString::fromAscii(stylesheet_file.readAll());
+  QString stylesheet = QString::fromLatin1(stylesheet_file.readAll());
   const QColor base(222, 97, 97, 128);
   stylesheet.replace("%light2", Utilities::ColorToRgba(base.lighter(140)));
   stylesheet.replace("%light", Utilities::ColorToRgba(base.lighter(120)));
@@ -149,6 +149,9 @@ void SearchTermWidget::FieldChanged(int index) {
 
   // Show the correct value editor
   QWidget* page = nullptr;
+  SearchTerm::Operator op = static_cast<SearchTerm::Operator>(
+    ui_->op->itemData(ui_->op->currentIndex()).toInt()
+  );
   switch (type) {
     case SearchTerm::Type_Time:
       page = ui_->page_time;
@@ -163,7 +166,11 @@ void SearchTermWidget::FieldChanged(int index) {
       page = ui_->page_rating;
       break;
     case SearchTerm::Type_Text:
-      page = ui_->page_text;
+      if (op == SearchTerm::Op_Empty || op == SearchTerm::Op_NotEmpty) {
+        page = ui_->page_empty;
+      } else {
+        page = ui_->page_text;
+      }
       break;
     case SearchTerm::Type_Invalid:
       page = nullptr;
@@ -189,20 +196,36 @@ void SearchTermWidget::FieldChanged(int index) {
 }
 
 void SearchTermWidget::OpChanged(int index) {
+  // Determine the currently selected operator
+  SearchTerm::Operator op = static_cast<SearchTerm::Operator>(
+    // This uses the operators’s index in the combobox to get its enum value
+    ui_->op->itemData(ui_->op->currentIndex()).toInt()
+  );
+
   // We need to change the page only in the following case
-  if ((ui_->value_stack->currentWidget() == ui_->page_date) ||
+  if ((ui_->value_stack->currentWidget() == ui_->page_text) ||
+      (ui_->value_stack->currentWidget() == ui_->page_empty)) {
+    QWidget* page = nullptr;
+    if (op == SearchTerm::Op_Empty || op == SearchTerm::Op_NotEmpty) {
+      page = ui_->page_empty;
+    } else {
+      page = ui_->page_text;
+    }
+    ui_->value_stack->setCurrentWidget(page);
+  } else if ((ui_->value_stack->currentWidget() == ui_->page_date) ||
       (ui_->value_stack->currentWidget() == ui_->page_date_numeric) ||
       (ui_->value_stack->currentWidget() == ui_->page_date_relative)) {
     QWidget* page = nullptr;
-    if (index == 4 || index == 5) {
+    if (op == SearchTerm::Op_NumericDate || op == SearchTerm::Op_NumericDateNot) {
       page = ui_->page_date_numeric;
-    } else if (index == 6) {
+    } else if (op == SearchTerm::Op_RelativeDate) {
       page = ui_->page_date_relative;
     } else {
       page = ui_->page_date;
     }
     ui_->value_stack->setCurrentWidget(page);
   }
+
   emit Changed();
 }
 
@@ -267,7 +290,11 @@ void SearchTermWidget::SetTerm(const SearchTerm& term) {
   // The value depends on the data type
   switch (SearchTerm::TypeOf(term.field_)) {
     case SearchTerm::Type_Text:
-      ui_->value_text->setText(term.value_.toString());
+      if (ui_->value_stack->currentWidget() == ui_->page_empty) {
+        ui_->value_text->setText("");
+      } else {
+        ui_->value_text->setText(term.value_.toString());
+      }
       break;
 
     case SearchTerm::Type_Number:
@@ -313,6 +340,8 @@ SearchTerm SearchTermWidget::Term() const {
   const QWidget* value_page = ui_->value_stack->currentWidget();
   if (value_page == ui_->page_text) {
     ret.value_ = ui_->value_text->text();
+  } else if (value_page == ui_->page_empty) {
+    ret.value_ = "";
   } else if (value_page == ui_->page_number) {
     ret.value_ = ui_->value_number->value();
   } else if (value_page == ui_->page_date) {
@@ -368,7 +397,7 @@ void SearchTermWidget::Overlay::Grab() {
   hide();
 
   // Take a "screenshot" of the window
-  QPixmap pixmap = QPixmap::grabWidget(parent_);
+  QPixmap pixmap = parent_->grab();
   QImage image = pixmap.toImage();
 
   // Blur it

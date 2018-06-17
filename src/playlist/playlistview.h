@@ -26,7 +26,7 @@
 
 #include "playlist.h"
 
-class QCleanlooksStyle;
+class QCommonStyle;
 
 class Application;
 class DynamicPlaylistControls;
@@ -40,7 +40,7 @@ class QTimeLine;
 // that uses Gtk to paint row backgrounds, ignoring any custom brush or palette
 // the caller set in the QStyleOption.  That breaks our currently playing track
 // animation, which relies on the background painted by Qt to be transparent.
-// This proxy style uses QCleanlooksStyle to paint the affected elements.
+// This proxy style uses QCommonStyle to paint the affected elements.
 // This class is used by the global search view as well.
 class PlaylistProxyStyle : public QProxyStyle {
  public:
@@ -51,12 +51,14 @@ class PlaylistProxyStyle : public QProxyStyle {
                      QPainter* painter, const QWidget* widget) const;
 
  private:
-  std::unique_ptr<QCleanlooksStyle> cleanlooks_;
+  std::unique_ptr<QCommonStyle> common_style_;
 };
 
 class PlaylistView : public QTreeView {
   Q_OBJECT
  public:
+  ~PlaylistView();
+
   enum BackgroundImageType { Default, None, Custom, AlbumCover };
 
   PlaylistView(QWidget* parent = nullptr);
@@ -74,7 +76,7 @@ class PlaylistView : public QTreeView {
   void SetApplication(Application* app);
   void SetItemDelegates(LibraryBackend* backend);
   void SetPlaylist(Playlist* playlist);
-  void RemoveSelected();
+  void RemoveSelected(bool deleting_from_disk);
 
   void SetReadOnlySettings(bool read_only) { read_only_settings_ = read_only; }
 
@@ -194,16 +196,19 @@ signals:
   bool upgrading_from_qheaderview_;
   bool read_only_settings_;
   int upgrading_from_version_;
+  bool header_loaded_;
 
+  bool background_initialized_;
   BackgroundImageType background_image_type_;
+  // Used if background image is a filemane
+  QString background_image_filename_;
   // Stores the background image to be displayed. As we want this image to be
   // particular (in terms of format, opacity), you should probably use
   // set_background_image_type instead of modifying background_image_ directly
   QImage background_image_;
   int blur_radius_;
   int opacity_level_;
-  // Used if background image is a filemane
-  QString background_image_filename_;
+
   QImage current_song_cover_art_;
   QPixmap cached_scaled_background_image_;
 
@@ -246,7 +251,7 @@ signals:
   int drop_indicator_row_;
   bool drag_over_;
 
-  bool ratings_locked_; // To store Ratings section lock status
+  bool ratings_locked_;  // To store Ratings section lock status
 
   DynamicPlaylistControls* dynamic_controls_;
 

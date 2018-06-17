@@ -47,11 +47,11 @@ void PodcastBackend::Subscribe(Podcast* podcast) {
   ScopedTransaction t(&db);
 
   // Insert the podcast.
-  QSqlQuery q("INSERT INTO podcasts (" + Podcast::kColumnSpec +
+  QSqlQuery q(db);
+  q.prepare("INSERT INTO podcasts (" + Podcast::kColumnSpec +
                   ")"
                   " VALUES (" +
-                  Podcast::kBindSpec + ")",
-              db);
+                  Podcast::kBindSpec + ")");
   podcast->BindToQuery(&q);
 
   q.exec();
@@ -86,13 +86,14 @@ void PodcastBackend::Unsubscribe(const Podcast& podcast) {
   ScopedTransaction t(&db);
 
   // Remove the podcast.
-  QSqlQuery q("DELETE FROM podcasts WHERE ROWID = :id", db);
+  QSqlQuery q(db);
+  q.prepare("DELETE FROM podcasts WHERE ROWID = :id");
   q.bindValue(":id", podcast.database_id());
   q.exec();
   if (db_->CheckErrors(q)) return;
 
   // Remove all episodes in the podcast
-  q = QSqlQuery("DELETE FROM podcast_episodes WHERE podcast_id = :id", db);
+  q.prepare("DELETE FROM podcast_episodes WHERE podcast_id = :id");
   q.bindValue(":id", podcast.database_id());
   q.exec();
   if (db_->CheckErrors(q)) return;
@@ -104,11 +105,11 @@ void PodcastBackend::Unsubscribe(const Podcast& podcast) {
 
 void PodcastBackend::AddEpisodes(PodcastEpisodeList* episodes,
                                  QSqlDatabase* db) {
-  QSqlQuery q("INSERT INTO podcast_episodes (" + PodcastEpisode::kColumnSpec +
+  QSqlQuery q(*db);
+  q.prepare("INSERT INTO podcast_episodes (" + PodcastEpisode::kColumnSpec +
                   ")"
                   " VALUES (" +
-                  PodcastEpisode::kBindSpec + ")",
-              *db);
+                  PodcastEpisode::kBindSpec + ")");
 
   for (auto it = episodes->begin(); it != episodes->end(); ++it) {
     it->BindToQuery(&q);
@@ -136,14 +137,13 @@ void PodcastBackend::UpdateEpisodes(const PodcastEpisodeList& episodes) {
   QSqlDatabase db(db_->Connect());
   ScopedTransaction t(&db);
 
-  QSqlQuery q(
-      "UPDATE podcast_episodes"
+  QSqlQuery q(db);
+  q.prepare("UPDATE podcast_episodes"
       " SET listened = :listened,"
       "     listened_date = :listened_date,"
       "     downloaded = :downloaded,"
       "     local_url = :local_url"
-      " WHERE ROWID = :id",
-      db);
+      " WHERE ROWID = :id");
 
   for (const PodcastEpisode& episode : episodes) {
     q.bindValue(":listened", episode.listened());
@@ -166,7 +166,8 @@ PodcastList PodcastBackend::GetAllSubscriptions() {
   QMutexLocker l(db_->Mutex());
   QSqlDatabase db(db_->Connect());
 
-  QSqlQuery q("SELECT ROWID, " + Podcast::kColumnSpec + " FROM podcasts", db);
+  QSqlQuery q(db);
+  q.prepare("SELECT ROWID, " + Podcast::kColumnSpec + " FROM podcasts");
   q.exec();
   if (db_->CheckErrors(q)) return ret;
 
@@ -185,10 +186,10 @@ Podcast PodcastBackend::GetSubscriptionById(int id) {
   QMutexLocker l(db_->Mutex());
   QSqlDatabase db(db_->Connect());
 
-  QSqlQuery q("SELECT ROWID, " + Podcast::kColumnSpec +
+  QSqlQuery q(db);
+  q.prepare("SELECT ROWID, " + Podcast::kColumnSpec +
                   " FROM podcasts"
-                  " WHERE ROWID = :id",
-              db);
+                  " WHERE ROWID = :id");
   q.bindValue(":id", id);
   q.exec();
   if (!db_->CheckErrors(q) && q.next()) {
@@ -204,10 +205,10 @@ Podcast PodcastBackend::GetSubscriptionByUrl(const QUrl& url) {
   QMutexLocker l(db_->Mutex());
   QSqlDatabase db(db_->Connect());
 
-  QSqlQuery q("SELECT ROWID, " + Podcast::kColumnSpec +
+  QSqlQuery q(db);
+  q.prepare("SELECT ROWID, " + Podcast::kColumnSpec +
                   " FROM podcasts"
-                  " WHERE url = :url",
-              db);
+                  " WHERE url = :url");
   q.bindValue(":url", url.toEncoded());
   q.exec();
   if (!db_->CheckErrors(q) && q.next()) {
@@ -223,12 +224,12 @@ PodcastEpisodeList PodcastBackend::GetEpisodes(int podcast_id) {
   QMutexLocker l(db_->Mutex());
   QSqlDatabase db(db_->Connect());
 
-  QSqlQuery q("SELECT ROWID, " + PodcastEpisode::kColumnSpec +
+  QSqlQuery q(db);
+  q.prepare("SELECT ROWID, " + PodcastEpisode::kColumnSpec +
                   " FROM podcast_episodes"
                   " WHERE podcast_id = :id"
-                  " ORDER BY publication_date DESC",
-              db);
-  q.bindValue(":db", podcast_id);
+                  " ORDER BY publication_date DESC");
+  q.bindValue(":id", podcast_id);
   q.exec();
   if (db_->CheckErrors(q)) return ret;
 
@@ -247,11 +248,11 @@ PodcastEpisode PodcastBackend::GetEpisodeById(int id) {
   QMutexLocker l(db_->Mutex());
   QSqlDatabase db(db_->Connect());
 
-  QSqlQuery q("SELECT ROWID, " + PodcastEpisode::kColumnSpec +
+  QSqlQuery q(db);
+  q.prepare("SELECT ROWID, " + PodcastEpisode::kColumnSpec +
                   " FROM podcast_episodes"
-                  " WHERE ROWID = :id",
-              db);
-  q.bindValue(":db", id);
+                  " WHERE ROWID = :id");
+  q.bindValue(":id", id);
   q.exec();
   if (!db_->CheckErrors(q) && q.next()) {
     ret.InitFromQuery(q);
@@ -266,10 +267,10 @@ PodcastEpisode PodcastBackend::GetEpisodeByUrl(const QUrl& url) {
   QMutexLocker l(db_->Mutex());
   QSqlDatabase db(db_->Connect());
 
-  QSqlQuery q("SELECT ROWID, " + PodcastEpisode::kColumnSpec +
+  QSqlQuery q(db);
+  q.prepare("SELECT ROWID, " + PodcastEpisode::kColumnSpec +
                   " FROM podcast_episodes"
-                  " WHERE url = :url",
-              db);
+                  " WHERE url = :url");
   q.bindValue(":url", url.toEncoded());
   q.exec();
   if (!db_->CheckErrors(q) && q.next()) {
@@ -285,11 +286,11 @@ PodcastEpisode PodcastBackend::GetEpisodeByUrlOrLocalUrl(const QUrl& url) {
   QMutexLocker l(db_->Mutex());
   QSqlDatabase db(db_->Connect());
 
-  QSqlQuery q("SELECT ROWID, " + PodcastEpisode::kColumnSpec +
+  QSqlQuery q(db);
+  q.prepare("SELECT ROWID, " + PodcastEpisode::kColumnSpec +
                   " FROM podcast_episodes"
                   " WHERE url = :url"
-                  "    OR local_url = :url",
-              db);
+                  "    OR local_url = :url");
   q.bindValue(":url", url.toEncoded());
   q.exec();
   if (!db_->CheckErrors(q) && q.next()) {
@@ -306,11 +307,11 @@ PodcastEpisodeList PodcastBackend::GetOldDownloadedEpisodes(
   QMutexLocker l(db_->Mutex());
   QSqlDatabase db(db_->Connect());
 
-  QSqlQuery q("SELECT ROWID, " + PodcastEpisode::kColumnSpec +
+  QSqlQuery q(db);
+  q.prepare("SELECT ROWID, " + PodcastEpisode::kColumnSpec +
                   " FROM podcast_episodes"
                   " WHERE downloaded = 'true'"
-                  "   AND listened_date <= :max_listened_date",
-              db);
+                  "   AND listened_date <= :max_listened_date");
   q.bindValue(":max_listened_date", max_listened_date.toTime_t());
   q.exec();
   if (db_->CheckErrors(q)) return ret;
@@ -330,12 +331,12 @@ PodcastEpisode PodcastBackend::GetOldestDownloadedListenedEpisode() {
   QMutexLocker l(db_->Mutex());
   QSqlDatabase db(db_->Connect());
 
-  QSqlQuery q("SELECT ROWID, " + PodcastEpisode::kColumnSpec +
+  QSqlQuery q(db);
+  q.prepare("SELECT ROWID, " + PodcastEpisode::kColumnSpec +
                   " FROM podcast_episodes"
                   " WHERE downloaded = 'true'"
                   " AND listened = 'true'"
-                  " ORDER BY listened_date ASC",
-              db);
+                  " ORDER BY listened_date ASC");
   q.exec();
   if (db_->CheckErrors(q)) return ret;
   q.next();
@@ -350,11 +351,11 @@ PodcastEpisodeList PodcastBackend::GetNewDownloadedEpisodes() {
   QMutexLocker l(db_->Mutex());
   QSqlDatabase db(db_->Connect());
 
-  QSqlQuery q("SELECT ROWID, " + PodcastEpisode::kColumnSpec +
+  QSqlQuery q(db);
+  q.prepare("SELECT ROWID, " + PodcastEpisode::kColumnSpec +
                   " FROM podcast_episodes"
                   " WHERE downloaded = 'true'"
-                  "   AND listened = 'false'",
-              db);
+                  "   AND listened = 'false'");
   q.exec();
   if (db_->CheckErrors(q)) return ret;
 

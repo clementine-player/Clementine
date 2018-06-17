@@ -47,9 +47,9 @@ TranscoderPreset::TranscoderPreset(Song::FileType type, const QString& name,
 GstElement* Transcoder::CreateElement(const QString& factory_name,
                                       GstElement* bin, const QString& name) {
   GstElement* ret = gst_element_factory_make(
-      factory_name.toAscii().constData(),
-      name.isNull() ? factory_name.toAscii().constData()
-                    : name.toAscii().constData());
+      factory_name.toLatin1().constData(),
+      name.isNull() ? factory_name.toLatin1().constData()
+                    : name.toLatin1().constData());
 
   if (ret && bin) gst_bin_add(GST_BIN(bin), ret);
 
@@ -230,7 +230,7 @@ QList<TranscoderPreset> Transcoder::GetAllPresets() {
 TranscoderPreset Transcoder::PresetForFileType(Song::FileType type) {
   switch (type) {
     case Song::Type_Flac:
-      return TranscoderPreset(type, tr("Flac"), "flac", "audio/x-flac");
+      return TranscoderPreset(type, tr("FLAC"), "flac", "audio/x-flac");
     case Song::Type_Mp4:
       return TranscoderPreset(type, tr("M4A AAC"), "mp4",
                               "audio/mpeg, mpegversion=(int)4", "audio/mp4");

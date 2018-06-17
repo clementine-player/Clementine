@@ -92,6 +92,7 @@ signals:
   void Load();
   void AddToPlaylist();
   void AddToPlaylistEnqueue();
+  void AddToPlaylistEnqueueNext();
   void OpenInNewPlaylist();
   void Organise();
   void CopyToDevice();
@@ -100,6 +101,8 @@ signals:
   void ShowInBrowser();
   void ShowInVarious();
   void NoShowInVarious();
+
+  void SearchForThis();
 
   void NewSmartPlaylist();
   void EditSmartPlaylist();
@@ -129,6 +132,7 @@ signals:
   QAction* load_;
   QAction* add_to_playlist_;
   QAction* add_to_playlist_enqueue_;
+  QAction* add_to_playlist_enqueue_next_;
   QAction* open_in_new_playlist_;
   QAction* organise_;
   QAction* copy_to_device_;
@@ -138,6 +142,8 @@ signals:
   QAction* show_in_browser_;
   QAction* show_in_various_;
   QAction* no_show_in_various_;
+
+  QAction* search_for_this_;
 
   QAction* new_smart_playlist_;
   QAction* edit_smart_playlist_;
@@ -151,6 +157,7 @@ signals:
   // Save focus
   Song last_selected_song_;
   QString last_selected_container_;
+  QString last_selected_text_;
   QSet<QString> last_selected_path_;
 };
 

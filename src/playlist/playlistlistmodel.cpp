@@ -71,6 +71,12 @@ void PlaylistListModel::AddRowMappings(const QModelIndex& begin,
 void PlaylistListModel::AddRowItem(QStandardItem* item,
                                    const QString& parent_path) {
   switch (item->data(Role_Type).toInt()) {
+    case Type_Track: {
+      // const int id = item->data(Role_TrackId).toInt();
+      // TODO
+      break;
+    }
+
     case Type_Playlist: {
       const int id = item->data(Role_PlaylistId).toInt();
       playlists_by_id_[id] = item;
@@ -169,6 +175,16 @@ QStandardItem* PlaylistListModel::NewPlaylist(const QString& name,
   ret->setIcon(playlist_icon_);
   ret->setFlags(Qt::ItemIsDragEnabled | Qt::ItemIsEnabled |
                 Qt::ItemIsSelectable | Qt::ItemIsEditable);
+  return ret;
+}
+
+QStandardItem* PlaylistListModel::NewTrack(const Song& song) const {
+  QStandardItem* ret = new QStandardItem;
+  ret->setText(song.artist() + " - " + song.title());
+  ret->setData(PlaylistListModel::Type_Track, PlaylistListModel::Role_Type);
+  ret->setData(song.id(), PlaylistListModel::Role_TrackId);
+  ret->setIcon(track_icon_);
+  ret->setFlags(Qt::ItemIsDragEnabled | Qt::ItemIsEnabled | Qt::ItemIsSelectable);
   return ret;
 }
 

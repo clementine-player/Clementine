@@ -19,9 +19,11 @@
 #include "playlistmanager.h"
 #include "ui_playlistcontainer.h"
 #include "core/logging.h"
+#include "core/appearance.h"
 #include "playlistparsers/playlistparser.h"
 #include "ui/iconloader.h"
 
+#include <QAction>
 #include <QFileDialog>
 #include <QInputDialog>
 #include <QKeyEvent>
@@ -67,10 +69,15 @@ PlaylistContainer::PlaylistContainer(QWidget* parent)
   no_matches_palette.setColor(QPalette::Inactive, QPalette::WindowText,
                               no_matches_color);
   no_matches_label_->setPalette(no_matches_palette);
-  
+
   // Remove QFrame border
   ui_->toolbar->setStyleSheet("QFrame { border: 0px; }");
-  
+
+  QSettings settings;
+  settings.beginGroup(Appearance::kSettingsGroup);
+  bool hide_toolbar = settings.value("b_hide_filter_toolbar", false).toBool();
+  ui_->toolbar->setVisible(!hide_toolbar);
+
   // Make it bold
   QFont no_matches_font = no_matches_label_->font();
   no_matches_font.setBold(true);
@@ -87,7 +94,6 @@ PlaylistContainer::PlaylistContainer(QWidget* parent)
   ui_->tab_bar->setMaximumHeight(0);
 
   // Connections
-  connect(ui_->tab_bar, SIGNAL(currentChanged(int)), SLOT(Save()));
   connect(ui_->tab_bar, SIGNAL(Save(int)), SLOT(SavePlaylist(int)));
 
   // set up timer for delayed filter updates
@@ -102,7 +108,10 @@ PlaylistContainer::PlaylistContainer(QWidget* parent)
   ui_->filter->installEventFilter(this);
 }
 
-PlaylistContainer::~PlaylistContainer() { delete ui_; }
+PlaylistContainer::~PlaylistContainer() {
+  Save();
+  delete ui_;
+}
 
 PlaylistView* PlaylistContainer::view() const { return ui_->playlist; }
 
@@ -273,9 +282,7 @@ void PlaylistContainer::PlaylistAdded(int id, const QString& name,
   }
 }
 
-void PlaylistContainer::Started() {
-    starting_up_ = false;
-}
+void PlaylistContainer::Started() { starting_up_ = false; }
 
 void PlaylistContainer::PlaylistClosed(int id) {
   ui_->tab_bar->RemoveTab(id);
@@ -436,7 +443,6 @@ bool PlaylistContainer::eventFilter(QObject* objectWatched, QEvent* event) {
     if (event->type() == QEvent::KeyPress) {
       QKeyEvent* e = static_cast<QKeyEvent*>(event);
       switch (e->key()) {
-        case Qt::Key_Up:
         case Qt::Key_Down:
         case Qt::Key_PageUp:
         case Qt::Key_PageDown:
@@ -454,4 +460,11 @@ bool PlaylistContainer::eventFilter(QObject* objectWatched, QEvent* event) {
     }
   }
   return QWidget::eventFilter(objectWatched, event);
+}
+
+void PlaylistContainer::ReloadSettings() {
+  QSettings settings;
+  settings.beginGroup(Appearance::kSettingsGroup);
+  bool hide_toolbar = settings.value("b_hide_filter_toolbar", false).toBool();
+  ui_->toolbar->setVisible(!hide_toolbar);
 }

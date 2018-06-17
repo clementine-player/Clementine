@@ -83,7 +83,6 @@ class SettingsDialog : public QDialog {
     Page_Dropbox,
     Page_Skydrive,
     Page_Box,
-    Page_Vk,
     Page_Seafile,
     Page_InternetShow,
     Page_AmazonCloudDrive,
@@ -116,7 +115,7 @@ class SettingsDialog : public QDialog {
   // QWidget
   void showEvent(QShowEvent* e);
 
-signals:
+ signals:
   void NotificationPreview(OSD::Behaviour, QString, QString);
   void SetWiimotedevInterfaceActived(bool);
 

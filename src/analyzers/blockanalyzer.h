@@ -68,14 +68,13 @@ class BlockAnalyzer : public Analyzer::Base {
   QPixmap topBarPixmap_;
   QPixmap background_;
   QPixmap canvas_;
-  Analyzer::Scope scope_;     // so we don't create a vector every frame
-  std::vector<float> store_;  // current bar kHeights
-  std::vector<float> yscale_;
+  Analyzer::Scope scope_;  // so we don't create a vector every frame
+  QVector<float> store_;   // current bar kHeights
+  QVector<float> yscale_;
 
-  // FIXME why can't I namespace these? c++ issue?
-  std::vector<QPixmap> fade_bars_;
-  std::vector<uint> fade_pos_;
-  std::vector<int> fade_intensity_;
+  QVector<QPixmap> fade_bars_;
+  QVector<uint> fade_pos_;
+  QVector<int> fade_intensity_;
 
   float step_;  // rows to fall per frame
 };

@@ -67,7 +67,8 @@ const char* CommandlineOptions::kHelpText =
     "      --quiet               %29\n"
     "      --verbose             %30\n"
     "      --log-levels <levels> %31\n"
-    "      --version             %32\n";
+    "      --version             %32\n"
+    "  -x, --delete-current      %33\n";
 
 const char* CommandlineOptions::kVersionText = "Clementine %1";
 
@@ -81,6 +82,7 @@ CommandlineOptions::CommandlineOptions(int argc, char** argv)
       seek_to_(-1),
       seek_by_(0),
       play_track_at_(-1),
+      delete_current_track_(false),
       show_osd_(false),
       toggle_pretty_osd_(false),
       log_levels_(logging::kDefaultLogLevels) {
@@ -135,12 +137,13 @@ bool CommandlineOptions::Parse() {
       {"verbose", no_argument, 0, Verbose},
       {"log-levels", required_argument, 0, LogLevels},
       {"version", no_argument, 0, Version},
+      {"delete-current", no_argument, 0, 'x'},
       {0, 0, 0, 0}};
 
   // Parse the arguments
   bool ok = false;
   forever {
-    int c = getopt_long(argc_, argv_, "hptusqrfv:c:alk:oyg:", kOptions, nullptr);
+    int c = getopt_long(argc_, argv_, "xhptusqrfv:c:alk:oyg:", kOptions, nullptr);
 
     // End of the options
     if (c == -1) break;
@@ -158,8 +161,8 @@ bool CommandlineOptions::Parse() {
                 .arg(tr("Skip backwards in playlist"),
                      tr("Skip forwards in playlist"),
                      tr("Set the volume to <value> percent"),
-                     tr("Increase the volume by 4%"),
-                     tr("Decrease the volume by 4%"),
+                     tr("Increase the volume by 4 percent"),
+                     tr("Decrease the volume by 4 percent"),
                      tr("Increase the volume by <value> percent"),
                      tr("Decrease the volume by <value> percent"))
                 .arg(tr("Seek the currently playing track to an absolute "
@@ -179,7 +182,8 @@ bool CommandlineOptions::Parse() {
                      tr("Equivalent to --log-levels *:1"),
                      tr("Equivalent to --log-levels *:3"),
                      tr("Comma separated list of class:level, level is 0-3"))
-                .arg(tr("Print out version information"));
+                .arg(tr("Print out version information"), 
+                     tr("Delete the currently playing song"));
 
         std::cout << translated_help_text.toLocal8Bit().constData();
         return false;
@@ -280,6 +284,10 @@ bool CommandlineOptions::Parse() {
         if (!ok) play_track_at_ = -1;
         break;
 
+      case 'x':
+        delete_current_track_ = true;
+        break;
+
       case '?':
       default:
         return false;
@@ -303,7 +311,8 @@ bool CommandlineOptions::is_empty() const {
   return player_action_ == Player_None && set_volume_ == -1 &&
          volume_modifier_ == 0 && seek_to_ == -1 && seek_by_ == 0 &&
          play_track_at_ == -1 && show_osd_ == false &&
-         toggle_pretty_osd_ == false && urls_.isEmpty();
+         toggle_pretty_osd_ == false && urls_.isEmpty() && 
+         delete_current_track_ == false;
 }
 
 bool CommandlineOptions::contains_play_options() const {
@@ -319,11 +328,11 @@ QByteArray CommandlineOptions::Serialize() const {
   s << *this;
   buf.close();
 
-  return buf.data();
+  return buf.data().toBase64();
 }
 
 void CommandlineOptions::Load(const QByteArray& serialized) {
-  QByteArray copy(serialized);
+  QByteArray copy = QByteArray::fromBase64(serialized);
   QBuffer buf(&copy);
   buf.open(QIODevice::ReadOnly);
 
@@ -338,7 +347,8 @@ QString CommandlineOptions::tr(const char* source_text) {
 QDataStream& operator<<(QDataStream& s, const CommandlineOptions& a) {
   s << qint32(a.player_action_) << qint32(a.url_list_action_) << a.set_volume_
     << a.volume_modifier_ << a.seek_to_ << a.seek_by_ << a.play_track_at_
-    << a.show_osd_ << a.urls_ << a.log_levels_ << a.toggle_pretty_osd_;
+    << a.show_osd_ << a.urls_ << a.log_levels_ << a.toggle_pretty_osd_ 
+    << a.delete_current_track_;
 
   return s;
 }
@@ -348,7 +358,8 @@ QDataStream& operator>>(QDataStream& s, CommandlineOptions& a) {
   quint32 url_list_action = 0;
   s >> player_action >> url_list_action >> a.set_volume_ >>
       a.volume_modifier_ >> a.seek_to_ >> a.seek_by_ >> a.play_track_at_ >>
-      a.show_osd_ >> a.urls_ >> a.log_levels_ >> a.toggle_pretty_osd_;
+      a.show_osd_ >> a.urls_ >> a.log_levels_ >> a.toggle_pretty_osd_ >>
+      a.delete_current_track_;
   a.player_action_ = CommandlineOptions::PlayerAction(player_action);
   a.url_list_action_ = CommandlineOptions::UrlListAction(url_list_action);
 

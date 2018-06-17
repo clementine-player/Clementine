@@ -22,9 +22,9 @@
 
 #include <memory>
 
+#include "core/cachedlist.h"
 #include "digitallyimportedclient.h"
 #include "internet/core/internetservice.h"
-#include "core/cachedlist.h"
 
 class DigitallyImportedClient;
 class DigitallyImportedUrlHandler;
@@ -67,7 +67,7 @@ class DigitallyImportedServiceBase : public InternetService {
  public slots:
   void ShowSettingsDialog();
 
-signals:
+ signals:
   void StreamsChanged();
 
  private slots:
@@ -131,6 +131,12 @@ class RockRadioService : public DigitallyImportedServiceBase {
  public:
   RockRadioService(Application* app, InternetModel* model,
                    QObject* parent = nullptr);
+};
+
+class ClassicalRadioService : public DigitallyImportedServiceBase {
+ public:
+  ClassicalRadioService(Application* app, InternetModel* model,
+                        QObject* parent = nullptr);
 };
 
 #endif  // INTERNET_DIGITALLY_DIGITALLYIMPORTEDSERVICEBASE_H_

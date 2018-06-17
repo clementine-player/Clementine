@@ -1,0 +1,18 @@
+get_filename_component(myDir ${CMAKE_CURRENT_LIST_FILE} PATH) # get the directory where I myself am
+get_filename_component(rootDir ${myDir}/@relInstallDir@ ABSOLUTE) # get the chosen install prefix
+
+# set the version of myself
+set(MYGPO_QT_VERSION_MAJOR @MYGPO_QT_VERSION_MAJOR@)
+set(MYGPO_QT_VERSION_MINOR @MYGPO_QT_VERSION_MINOR@)
+set(MYGPO_QT_VERSION_PATCH @MYGPO_QT_VERSION_PATCH@)
+set(MYGPO_QT_VERSION ${MYGPO_QT_VERSION_MAJOR}.${MYGPO_QT_VERSION_MINOR}.${MYGPO_QT_VERSION_PATCH} )
+
+# what is my include directory
+set(LIBMYGPO_QT_INCLUDE_DIRS "@INCLUDE_INSTALL_DIR@")
+
+# import the exported targets
+include(${myDir}/Mygpo-qtTargets.cmake)
+
+# set the expected library variable
+set(LIBMYGPO_QT_LIBRARIES mygpo-qt )
+set(LIBMYGPO_QT_FOUND "True")

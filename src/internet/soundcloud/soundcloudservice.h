@@ -26,6 +26,7 @@
 class NetworkAccessManager;
 class OAuthenticator;
 class SearchBoxWidget;
+class QJsonDocument;
 
 class QMenu;
 class QNetworkReply;
@@ -103,11 +104,11 @@ class SoundCloudService : public InternetService {
   QNetworkReply* CreateRequest(const QString& ressource_name,
                                const QList<QPair<QString, QString>>& params);
   // Convenient function for extracting result from reply
-  QVariant ExtractResult(QNetworkReply* reply);
+  QJsonDocument ExtractResult(QNetworkReply* reply);
   // Returns items directly, as activities can be playlists or songs
-  QList<QStandardItem*> ExtractActivities(const QVariant& result);
-  SongList ExtractSongs(const QVariant& result);
-  Song ExtractSong(const QVariantMap& result_song);
+  QList<QStandardItem*> ExtractActivities(const QJsonObject &result);
+  SongList ExtractSongs(const QJsonArray &result);
+  Song ExtractSong(const QJsonObject& result_song);
 
   QStandardItem* root_;
   QStandardItem* search_;

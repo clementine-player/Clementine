@@ -17,13 +17,7 @@ if(WIN32)
 endif(WIN32)
 
 # Activate fast QString concatenation
-if (QT_VERSION_MINOR GREATER 5)
-  if (QT_VERSION_MINOR GREATER 7)
-    add_definitions(-DQT_USE_QSTRINGBUILDER)
-  else(QT_VERSION_MINOR GREATER 7)
-    add_definitions(-DQT_USE_FAST_CONCATENATION -DQT_USE_FAST_OPERATOR_PLUS)
-  endif(QT_VERSION_MINOR GREATER 7)
-endif(QT_VERSION_MINOR GREATER 5)
+add_definitions(-DQT_USE_QSTRINGBUILDER)
 add_definitions(-DQT_NO_URL_CAST_FROM_STRING)
 add_definitions(-DBOOST_BIND_NO_PLACEHOLDERS)
 
@@ -37,13 +31,13 @@ include_directories(${QTIOCOMPRESSOR_INCLUDE_DIRS})
 include_directories(${QXT_INCLUDE_DIRS})
 include_directories(${SHA2_INCLUDE_DIRS})
 include_directories(${CHROMAPRINT_INCLUDE_DIRS})
-include_directories(${MYGPOQT_INCLUDE_DIRS})
+include_directories(${MYGPOQT5_INCLUDE_DIRS})
 
 find_package(OpenGL)
 include_directories(${OPENGL_INCLUDE_DIR})
 
 if(HAVE_LIBLASTFM)
-  include_directories(${LASTFM_INCLUDE_DIRS})
+  include_directories(${LASTFM5_INCLUDE_DIRS})
 endif(HAVE_LIBLASTFM)
 
 if(HAVE_BREAKPAD)
@@ -113,6 +107,7 @@ set(SOURCES
   covers/albumcoverfetchersearch.cpp
   covers/albumcoverloader.cpp
   covers/amazoncoverprovider.cpp
+  covers/discogscoverprovider.cpp
   covers/coverexportrunnable.cpp
   covers/coverprovider.cpp
   covers/coverproviders.cpp
@@ -311,6 +306,7 @@ set(SOURCES
   songinfo/songkickconcertwidget.cpp
   songinfo/songplaystats.cpp
   songinfo/spotifyimages.cpp
+  songinfo/streamdiscoverer.cpp
   songinfo/taglyricsinfoprovider.cpp
   songinfo/ultimatelyricslyric.cpp
   songinfo/ultimatelyricsprovider.cpp
@@ -358,6 +354,7 @@ set(SOURCES
   ui/settingsdialog.cpp
   ui/settingspage.cpp
   ui/standarditemiconloader.cpp
+  ui/streamdetailsdialog.cpp
   ui/systemtrayicon.cpp
   ui/trackselectiondialog.cpp
   ui/windows7thumbbar.cpp
@@ -434,6 +431,7 @@ set(HEADERS
   covers/albumcoverfetchersearch.h
   covers/albumcoverloader.h
   covers/amazoncoverprovider.h
+  covers/discogscoverprovider.h
   covers/coverexportrunnable.h
   covers/coverprovider.h
   covers/coverproviders.h
@@ -518,11 +516,11 @@ set(HEADERS
   library/libraryviewcontainer.h
   library/librarywatcher.h
   library/savedgroupingmanager.h
-  
+
   musicbrainz/acoustidclient.h
   musicbrainz/musicbrainzclient.h
   musicbrainz/tagfetcher.h
-  
+
   networkremote/networkremotehelper.h
   networkremote/networkremote.h
   networkremote/incomingdataparser.h
@@ -603,6 +601,7 @@ set(HEADERS
   songinfo/songkickconcertwidget.h
   songinfo/songplaystats.h
   songinfo/spotifyimages.h
+  songinfo/streamdiscoverer.h
   songinfo/taglyricsinfoprovider.h
   songinfo/ultimatelyricslyric.h
   songinfo/ultimatelyricsprovider.h
@@ -641,6 +640,7 @@ set(HEADERS
   ui/settingsdialog.h
   ui/settingspage.h
   ui/standarditemiconloader.h
+  ui/streamdetailsdialog.h
   ui/systemtrayicon.h
   ui/trackselectiondialog.h
   ui/windows7thumbbar.h
@@ -764,6 +764,7 @@ set(UI
   ui/organiseerrordialog.ui
   ui/playbacksettingspage.ui
   ui/settingsdialog.ui
+  ui/streamdetailsdialog.ui
   ui/trackselectiondialog.ui
 
   widgets/equalizerslider.ui
@@ -859,7 +860,6 @@ optional_source(APPLE
     core/macfslistener.mm
     core/macglobalshortcutbackend.mm
     core/mac_startup.mm
-    devices/macdevicelister.mm
     engines/osxdevicefinder.cpp
     networkremote/bonjour.mm
     ui/globalshortcutgrabber.mm
@@ -869,9 +869,17 @@ optional_source(APPLE
   HEADERS
     core/macfslistener.h
     core/macglobalshortcutbackend.h
-    devices/macdevicelister.h
     ui/macsystemtrayicon.h
 )
+
+if(APPLE)
+  optional_source(HAVE_LIBMTP
+   SOURCES
+      devices/macdevicelister.mm
+    HEADERS
+      devices/macdevicelister.h
+  )
+endif()
 
 # Platform specific - Windows
 optional_source(WIN32
@@ -892,28 +900,28 @@ if(HAVE_DBUS)
   file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/dbus)
 
   # MPRIS 2.0 DBUS interfaces
-  qt4_add_dbus_adaptor(SOURCES
+  qt5_add_dbus_adaptor(SOURCES
       dbus/org.mpris.MediaPlayer2.Player.xml
       core/mpris2.h mpris::Mpris2 core/mpris2_player Mpris2Player)
-  qt4_add_dbus_adaptor(SOURCES
+  qt5_add_dbus_adaptor(SOURCES
       dbus/org.mpris.MediaPlayer2.xml
       core/mpris2.h mpris::Mpris2 core/mpris2_root Mpris2Root)
-  qt4_add_dbus_adaptor(SOURCES
+  qt5_add_dbus_adaptor(SOURCES
       dbus/org.mpris.MediaPlayer2.TrackList.xml
       core/mpris2.h mpris::Mpris2 core/mpris2_tracklist Mpris2TrackList)
 
   # MPRIS 2.1 DBUS interfaces
-  qt4_add_dbus_adaptor(SOURCES
+  qt5_add_dbus_adaptor(SOURCES
       dbus/org.mpris.MediaPlayer2.Playlists.xml
       core/mpris2.h mpris::Mpris2 core/mpris2_playlists Mpris2Playlists)
 
   # org.freedesktop.Notifications DBUS interface
-  qt4_add_dbus_interface(SOURCES
+  qt5_add_dbus_interface(SOURCES
       dbus/org.freedesktop.Notifications.xml
       dbus/notification)
 
   # org.gnome.SettingsDaemon interface
-  qt4_add_dbus_interface(SOURCES
+  qt5_add_dbus_interface(SOURCES
       dbus/org.gnome.SettingsDaemon.MediaKeys.xml
       dbus/gnomesettingsdaemon)
 
@@ -951,10 +959,10 @@ if(HAVE_DBUS)
         PROPERTIES NO_NAMESPACE dbus/udisks)
     set_source_files_properties(dbus/org.freedesktop.UDisks.Device.xml
         PROPERTIES NO_NAMESPACE dbus/udisksdevice)
-    qt4_add_dbus_interface(SOURCES
+    qt5_add_dbus_interface(SOURCES
         dbus/org.freedesktop.UDisks.xml
         dbus/udisks)
-    qt4_add_dbus_interface(SOURCES
+    qt5_add_dbus_interface(SOURCES
         dbus/org.freedesktop.UDisks.Device.xml
         dbus/udisksdevice)
   endif(HAVE_DEVICEKIT)
@@ -970,26 +978,26 @@ if(HAVE_DBUS)
           PROPERTIES NO_NAMESPACE dbus/udisks2drive INCLUDE dbus/metatypes.h)
       set_source_files_properties(dbus/org.freedesktop.UDisks2.Job.xml
           PROPERTIES NO_NAMESPACE dbus/udisks2job INCLUDE dbus/metatypes.h)
-      qt4_add_dbus_interface(SOURCES
+      qt5_add_dbus_interface(SOURCES
           dbus/org.freedesktop.DBus.ObjectManager.xml
           dbus/objectmanager)
-      qt4_add_dbus_interface(SOURCES
+      qt5_add_dbus_interface(SOURCES
           dbus/org.freedesktop.UDisks2.Filesystem.xml
           dbus/udisks2filesystem)
-      qt4_add_dbus_interface(SOURCES
+      qt5_add_dbus_interface(SOURCES
           dbus/org.freedesktop.UDisks2.Block.xml
           dbus/udisks2block)
-      qt4_add_dbus_interface(SOURCES
+      qt5_add_dbus_interface(SOURCES
           dbus/org.freedesktop.UDisks2.Drive.xml
           dbus/udisks2drive)
-      qt4_add_dbus_interface(SOURCES
+      qt5_add_dbus_interface(SOURCES
           dbus/org.freedesktop.UDisks2.Job.xml
           dbus/udisks2job)
   endif(HAVE_UDISKS2)
 
   # Wiimotedev interface classes
   if(ENABLE_WIIMOTEDEV)
-    qt4_add_dbus_interface(SOURCES
+    qt5_add_dbus_interface(SOURCES
         dbus/org.wiimotedev.deviceEvents.xml
         dbus/wiimotedev)
   endif(ENABLE_WIIMOTEDEV)
@@ -1151,31 +1159,6 @@ optional_source(HAVE_BOX
     internet/box/boxsettingspage.ui
 )
 
-# Vk.com support
-optional_source(HAVE_VK
-  INCLUDE_DIRECTORIES 
-    ${VREEN_INCLUDE_DIRS}
-  SOURCES
-    globalsearch/vksearchprovider.cpp
-    internet/vk/vkconnection.cpp
-    internet/vk/vkmusiccache.cpp
-    internet/vk/vksearchdialog.cpp
-    internet/vk/vkservice.cpp
-    internet/vk/vksettingspage.cpp
-    internet/vk/vkurlhandler.cpp
-  HEADERS
-    globalsearch/vksearchprovider.h
-    internet/vk/vkconnection.h
-    internet/vk/vkmusiccache.h
-    internet/vk/vksearchdialog.h
-    internet/vk/vkservice.h
-    internet/vk/vksettingspage.h
-    internet/vk/vkurlhandler.h
-  UI
-    internet/vk/vksearchdialog.ui
-    internet/vk/vksettingspage.ui
-)
-
 # Seafile support
 optional_source(HAVE_SEAFILE
   SOURCES
@@ -1212,9 +1195,9 @@ configure_file(${CMAKE_CURRENT_SOURCE_DIR}/config.h.in
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/version.h.in
                ${CMAKE_CURRENT_BINARY_DIR}/version.h)
 
-qt4_wrap_cpp(MOC ${HEADERS})
-qt4_wrap_ui(UIC ${UI})
-qt4_add_resources(QRC ${RESOURCES})
+qt5_wrap_cpp(MOC ${HEADERS})
+qt5_wrap_ui(UIC ${UI})
+qt5_add_resources(QRC ${RESOURCES})
 
 add_pot(POT
   ${CMAKE_CURRENT_SOURCE_DIR}/translations/header
@@ -1237,9 +1220,6 @@ add_library(clementine_lib STATIC
   ${OTHER_UIC_SOURCES}
 )
 
-add_dependencies(clementine_lib pot)
-
-
 target_link_libraries(clementine_lib
   clementine-spotifyblob-messages
   libclementine-common
@@ -1247,19 +1227,18 @@ target_link_libraries(clementine_lib
   libclementine-remote
   ${SHA2_LIBRARIES}
   ${TAGLIB_LIBRARIES}
-  ${MYGPOQT_LIBRARIES}
+  ${MYGPOQT5_LIBRARIES}
   ${CHROMAPRINT_LIBRARIES}
   ${GOBJECT_LIBRARIES}
   ${GLIB_LIBRARIES}
   ${GIO_LIBRARIES}
-  ${QJSON_LIBRARIES}
   ${QT_LIBRARIES}
   ${GSTREAMER_BASE_LIBRARIES}
   ${GSTREAMER_LIBRARIES}
   ${GSTREAMER_APP_LIBRARIES}
   ${GSTREAMER_TAG_LIBRARIES}
+  ${GSTREAMER_PBUTILS_LIBRARIES}
   ${QTSINGLEAPPLICATION_LIBRARIES}
-  ${QTSINGLECOREAPPLICATION_LIBRARIES}
   ${QTIOCOMPRESSOR_LIBRARIES}
   ${CMAKE_THREAD_LIBS_INIT}
   ${SQLITE_LIBRARIES}
@@ -1267,16 +1246,12 @@ target_link_libraries(clementine_lib
   Qocoa
 )
 
-if(HAVE_VK)
-  target_link_libraries(clementine_lib ${VREEN_LIBRARIES})
-endif(HAVE_VK)
-
 if(ENABLE_VISUALISATIONS)
   target_link_libraries(clementine_lib ${LIBPROJECTM_LIBRARIES})
 endif(ENABLE_VISUALISATIONS)
 
 if(HAVE_LIBLASTFM)
-  target_link_libraries(clementine_lib ${LASTFM_LIBRARIES})
+  target_link_libraries(clementine_lib ${LASTFM5_LIBRARIES})
 endif(HAVE_LIBLASTFM)
 
 if(HAVE_LIBGPOD)
@@ -1323,13 +1298,13 @@ endif()
 
 if (APPLE)
   target_link_libraries(clementine_lib
-    /System/Library/Frameworks/AppKit.framework
-    /System/Library/Frameworks/Carbon.framework
-    /System/Library/Frameworks/CoreAudio.framework
-    /System/Library/Frameworks/DiskArbitration.framework
-    /System/Library/Frameworks/Foundation.framework
-    /System/Library/Frameworks/IOKit.framework
-    /System/Library/Frameworks/ScriptingBridge.framework
+    "-framework AppKit"
+    "-framework Carbon"
+    "-framework CoreAudio"
+    "-framework DiskArbitration"
+    "-framework Foundation"
+    "-framework IOKit"
+    "-framework ScriptingBridge"
   )
   target_link_libraries(clementine_lib ${SPMEDIAKEYTAP_LIBRARIES})
   if (HAVE_SPARKLE)

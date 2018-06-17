@@ -100,7 +100,8 @@ QString PrettyTime(int seconds) {
 
   QString ret;
   if (hours)
-    ret.sprintf("%d:%02d:%02d", hours, minutes, seconds);  // NOLINT(runtime/printf)
+    ret.sprintf("%d:%02d:%02d", hours, minutes,
+                seconds);  // NOLINT(runtime/printf)
   else
     ret.sprintf("%d:%02d", minutes, seconds);  // NOLINT(runtime/printf)
 
@@ -112,13 +113,18 @@ QString PrettyTimeNanosec(qint64 nanoseconds) {
 }
 
 QString WordyTime(quint64 seconds) {
-  quint64 days = seconds / (60 * 60 * 24);
+  quint64 days = seconds / (kSecsPerDay);
+  quint64 remaining_hours = (seconds - days * kSecsPerDay) / (60 * 60);
 
   // TODO(David Sansome): Make the plural rules translatable
   QStringList parts;
 
   if (days) parts << (days == 1 ? tr("1 day") : tr("%1 days").arg(days));
-  parts << PrettyTime(seconds - days * 60 * 60 * 24);
+
+  // Since PrettyTime does not return the hour if it is 0, we need to add it
+  // explicitly for durations longer than 1 day.
+  parts << (days && !remaining_hours ? QString("0:") : QString()) +
+               PrettyTime(seconds - days * kSecsPerDay);
 
   return parts.join(" ");
 }
@@ -161,11 +167,15 @@ QString PrettySize(quint64 bytes) {
     if (bytes <= 1000)
       ret = QString::number(bytes) + " bytes";
     else if (bytes <= 1000 * 1000)
-      ret.sprintf("%.1f KB", static_cast<float>(bytes) / 1000);  // NOLINT(runtime/printf)
+      ret.sprintf("%.1f KB",
+                  static_cast<float>(bytes) / 1000);  // NOLINT(runtime/printf)
     else if (bytes <= 1000 * 1000 * 1000)
-      ret.sprintf("%.1f MB", static_cast<float>(bytes) / (1000 * 1000));  // NOLINT(runtime/printf)
+      ret.sprintf("%.1f MB", static_cast<float>(bytes) /
+                                 (1000 * 1000));  // NOLINT(runtime/printf)
     else
-      ret.sprintf("%.1f GB", static_cast<float>(bytes) / (1000 * 1000 * 1000));  // NOLINT(runtime/printf)
+      ret.sprintf("%.1f GB",
+                  static_cast<float>(bytes) /
+                      (1000 * 1000 * 1000));  // NOLINT(runtime/printf)
   }
   return ret;
 }
@@ -229,6 +239,23 @@ QString GetTemporaryFileName() {
   }
 
   return file;
+}
+
+QString SaveToTemporaryFile(const QByteArray& data) {
+  QTemporaryFile tempfile;
+  tempfile.setAutoRemove(false);
+
+  if (!tempfile.open()) {
+    return QString();
+  }
+
+  if (tempfile.write(data) != data.size()) {
+    tempfile.remove();
+    return QString();
+  }
+
+  tempfile.close();
+  return tempfile.fileName();
 }
 
 bool RemoveRecursive(const QString& path) {
@@ -562,19 +589,13 @@ bool ParseUntilElement(QXmlStreamReader* reader, const QString& name) {
 }
 
 QDateTime ParseRFC822DateTime(const QString& text) {
-  QRegExp regexp("(\\d{1,2}) (\\w{3,12}) (\\d+) (\\d{1,2}):(\\d{1,2}):(\\d{1,2})");
+  QRegExp regexp(
+      "(\\d{1,2}) (\\w{3,12}) (\\d+) (\\d{1,2}):(\\d{1,2}):(\\d{1,2})");
   if (regexp.indexIn(text) == -1) {
     return QDateTime();
   }
 
-  enum class MatchNames {
-    DAYS = 1,
-    MONTHS,
-    YEARS,
-    HOURS,
-    MINUTES,
-    SECONDS
-  };
+  enum class MatchNames { DAYS = 1, MONTHS, YEARS, HOURS, MINUTES, SECONDS };
 
   QMap<QString, int> monthmap;
   monthmap["Jan"] = 1;
@@ -610,7 +631,7 @@ QDateTime ParseRFC822DateTime(const QString& text) {
                    regexp.cap(static_cast<int>(MatchNames::MINUTES)).toInt(),
                    regexp.cap(static_cast<int>(MatchNames::SECONDS)).toInt());
 
-  return QDateTime (date, time);
+  return QDateTime(date, time);
 }
 
 const char* EnumToString(const QMetaObject& meta, const char* name, int value) {
@@ -696,16 +717,12 @@ bool IsLaptop() {
 }
 
 QString SystemLanguageName() {
-#if QT_VERSION >= 0x040800
   QString system_language = QLocale::system().uiLanguages().empty()
                                 ? QLocale::system().name()
                                 : QLocale::system().uiLanguages().first();
   // uiLanguages returns strings with "-" as separators for language/region;
   // however QTranslator needs "_" separators
   system_language.replace("-", "_");
-#else
-  QString system_language = QLocale::system().name();
-#endif
 
   return system_language;
 }

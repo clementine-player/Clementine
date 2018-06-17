@@ -219,7 +219,7 @@ bool PlaylistDelegateBase::helpEvent(QHelpEvent* event, QAbstractItemView* view,
 
   // Special case: we want newlines in the comment tooltip
   if (index.column() == Playlist::Column_Comment) {
-    text = Qt::escape(index.data(Qt::ToolTipRole).toString());
+    text = index.data(Qt::ToolTipRole).toString().toHtmlEscaped();
     text.replace("\\r\\n", "<br />");
     text.replace("\\n", "<br />");
     text.replace("\r\n", "<br />");
@@ -427,7 +427,7 @@ QString NativeSeparatorsDelegate::displayText(const QVariant& value,
   if (value.type() == QVariant::Url) {
     url = value.toUrl();
   } else if (string_value.contains("://")) {
-    url = QUrl::fromEncoded(string_value.toAscii());
+    url = QUrl::fromEncoded(string_value.toLatin1());
   } else {
     return QDir::toNativeSeparators(string_value);
   }

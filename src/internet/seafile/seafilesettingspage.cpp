@@ -63,7 +63,7 @@ void SeafileSettingsPage::Load() {
   ui_->server->setText(s.value("server").toString());
   ui_->mail->setText(s.value("mail").toString());
 
-  if (!ui_->server->text().isEmpty() && !ui_->mail->text().isEmpty()) {
+  if (service_->has_credentials()) {
     ui_->login_state->SetLoggedIn(LoginStateWidget::LoggedIn,
                                   ui_->mail->text());
 

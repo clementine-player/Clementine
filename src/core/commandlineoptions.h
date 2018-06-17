@@ -33,7 +33,7 @@ class CommandlineOptions {
   friend QDataStream& operator>>(QDataStream& s, CommandlineOptions& a);
 
  public:
-  explicit CommandlineOptions(int argc = 0, char* *argv = nullptr);
+  explicit CommandlineOptions(int argc = 0, char** argv = nullptr);
 
   static const char* kHelpText;
   static const char* kVersionText;
@@ -70,6 +70,7 @@ class CommandlineOptions {
   int seek_to() const { return seek_to_; }
   int seek_by() const { return seek_by_; }
   int play_track_at() const { return play_track_at_; }
+  bool delete_current_track() const { return delete_current_track_; }
   bool show_osd() const { return show_osd_; }
   bool toggle_pretty_osd() const { return toggle_pretty_osd_; }
   QList<QUrl> urls() const { return urls_; }
@@ -113,6 +114,7 @@ class CommandlineOptions {
   int seek_to_;
   int seek_by_;
   int play_track_at_;
+  bool delete_current_track_;
   bool show_osd_;
   bool toggle_pretty_osd_;
   QString language_;

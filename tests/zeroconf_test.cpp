@@ -21,7 +21,7 @@ static const char kLongMultiByteString[] =
 
 TEST(ZeroconfTest, TruncatesAscii) {
   QByteArray truncated = Zeroconf::TruncateName(
-      QString::fromAscii(k64CharAscii));
+      QString::fromLatin1(k64CharAscii));
   EXPECT_EQ(63, truncated.size());
   EXPECT_TRUE(truncated.endsWith('\0'));
 }
@@ -34,7 +34,7 @@ TEST(ZeroconfTest, DoesNotTruncateShortMultiByteUTF8) {
 
 TEST(ZeroconfTest, TruncatesLongMultiByteUTF8) {
   QByteArray truncated = Zeroconf::TruncateName(
-      QString::fromAscii(kLongMultiByteString));
+      QString::fromLatin1(kLongMultiByteString));
   EXPECT_LE(63, truncated.size());
   EXPECT_TRUE(truncated.endsWith('\0'));
 }

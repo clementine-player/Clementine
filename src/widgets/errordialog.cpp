@@ -18,6 +18,8 @@
 #include "errordialog.h"
 #include "ui_errordialog.h"
 
+#include <QStyle>
+
 ErrorDialog::ErrorDialog(QWidget* parent)
     : QDialog(parent), ui_(new Ui_ErrorDialog) {
   ui_->setupUi(this);
@@ -53,7 +55,7 @@ void ErrorDialog::UpdateContent() {
   QString html;
   for (const QString& message : current_messages_) {
     if (!html.isEmpty()) html += "<hr/>";
-    html += Qt::escape(message);
+    html += message.toHtmlEscaped();
   }
   ui_->messages->setHtml(html);
 }

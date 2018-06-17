@@ -28,22 +28,22 @@
 #include <QMimeData>
 #include <QtDebug>
 
-#include "internet/digitally/digitallyimportedservicebase.h"
-#include "internet/icecast/icecastservice.h"
-#include "internet/core/internetmimedata.h"
-#include "internet/core/internetservice.h"
-#include "internet/jamendo/jamendoservice.h"
-#include "internet/magnatune/magnatuneservice.h"
-#include "internet/internetradio/savedradio.h"
-#include "internet/somafm/somafmservice.h"
-#include "internet/intergalacticfm/intergalacticfmservice.h"
-#include "internet/soundcloud/soundcloudservice.h"
-#include "internet/spotify/spotifyservice.h"
-#include "internet/subsonic/subsonicservice.h"
 #include "core/closure.h"
 #include "core/logging.h"
 #include "core/mergedproxymodel.h"
+#include "internet/core/internetmimedata.h"
+#include "internet/core/internetservice.h"
+#include "internet/digitally/digitallyimportedservicebase.h"
+#include "internet/icecast/icecastservice.h"
+#include "internet/intergalacticfm/intergalacticfmservice.h"
+#include "internet/internetradio/savedradio.h"
+#include "internet/jamendo/jamendoservice.h"
+#include "internet/magnatune/magnatuneservice.h"
 #include "internet/podcasts/podcastservice.h"
+#include "internet/somafm/somafmservice.h"
+#include "internet/soundcloud/soundcloudservice.h"
+#include "internet/spotify/spotifyservice.h"
+#include "internet/subsonic/subsonicservice.h"
 #include "smartplaylists/generatormimedata.h"
 
 #ifdef HAVE_GOOGLE_DRIVE
@@ -57,9 +57,6 @@
 #endif
 #ifdef HAVE_BOX
 #include "internet/box/boxservice.h"
-#endif
-#ifdef HAVE_VK
-#include "internet/vk/vkservice.h"
 #endif
 #ifdef HAVE_SEAFILE
 #include "internet/seafile/seafileservice.h"
@@ -84,6 +81,7 @@ InternetModel::InternetModel(Application* app, QObject* parent)
 
   merged_model_->setSourceModel(this);
 
+  AddService(new ClassicalRadioService(app, this));
   AddService(new DigitallyImportedService(app, this));
   AddService(new IcecastService(app, this));
   AddService(new JamendoService(app, this));
@@ -112,9 +110,6 @@ InternetModel::InternetModel(Application* app, QObject* parent)
 #endif
 #ifdef HAVE_SKYDRIVE
   AddService(new SkydriveService(app, this));
-#endif
-#ifdef HAVE_VK
-  AddService(new VkService(app, this));
 #endif
 
   invisibleRootItem()->sortChildren(0, Qt::AscendingOrder);

@@ -80,7 +80,10 @@ class SearchTerm {
     // For numeric dates (e.g. not in the last X days)
     Op_NumericDateNot = 10,
 
-    // Next value = 11
+    Op_Empty = 11,
+    Op_NotEmpty = 12,
+
+    // Next value = 13
   };
 
   enum Type {

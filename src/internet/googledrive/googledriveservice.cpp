@@ -26,6 +26,7 @@
 #include <QPushButton>
 #include <QScopedPointer>
 #include <QSortFilterProxyModel>
+#include <QUrlQuery>
 
 #include "core/application.h"
 #include "core/closure.h"
@@ -163,7 +164,7 @@ void GoogleDriveService::FilesFound(const QList<google_drive::File>& files) {
 
     QUrl url;
     url.setScheme("googledrive");
-    url.setPath(file.id());
+    url.setPath("/" + file.id());
 
     Song song;
     // Add some extra tags from the Google Drive metadata.
@@ -204,7 +205,9 @@ QUrl GoogleDriveService::GetStreamingUrlFromSongId(const QString& id) {
   loop.exec();
 
   QUrl url(response->file().download_url());
-  url.addQueryItem("access_token", client_->access_token());
+  QUrlQuery url_query(url);
+  url_query.addQueryItem("access_token", client_->access_token());
+  url.setQuery(url_query);
   return url;
 }
 

@@ -39,6 +39,7 @@
 #include <QList>
 #include <QMenu>
 #include <QUrl>
+#include <QMimeData>
 
 const char* AlbumCoverChoiceController::kLoadImageFileFilter = QT_TR_NOOP(
     "Images (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm)");
@@ -56,23 +57,23 @@ AlbumCoverChoiceController::AlbumCoverChoiceController(QWidget* parent)
       cover_fetcher_(nullptr),
       save_file_dialog_(nullptr),
       cover_from_url_dialog_(nullptr) {
-  cover_from_file_ = new QAction(IconLoader::Load("document-open", IconLoader::Base),
-                                 tr("Load cover from disk..."), this);
-  cover_to_file_ = new QAction(IconLoader::Load("document-save", IconLoader::Base),
-                               tr("Save cover to disk..."), this);
+  cover_from_file_ =
+      new QAction(IconLoader::Load("document-open", IconLoader::Base),
+                  tr("Load cover from disk..."), this);
+  cover_to_file_ =
+      new QAction(IconLoader::Load("document-save", IconLoader::Base),
+                  tr("Save cover to disk..."), this);
   cover_from_url_ = new QAction(IconLoader::Load("download", IconLoader::Base),
                                 tr("Load cover from URL..."), this);
-  search_for_cover_ = new QAction(IconLoader::Load("find", IconLoader::Base),
-                                  tr("Search for album covers..."), this);
-  unset_cover_ =
-      new QAction(IconLoader::Load("list-remove", IconLoader::Base), 
-                  tr("Unset cover"), this);
-  show_cover_ =
-      new QAction(IconLoader::Load("zoom-in", IconLoader::Base), 
-                  tr("Show fullsize..."), this);
+  search_for_cover_ =
+      new QAction(IconLoader::Load("edit-find", IconLoader::Base),
+                  tr("Search for album covers..."), this);
+  unset_cover_ = new QAction(IconLoader::Load("list-remove", IconLoader::Base),
+                             tr("Unset cover"), this);
+  show_cover_ = new QAction(IconLoader::Load("zoom-in", IconLoader::Base),
+                            tr("Show fullsize..."), this);
 
-  search_cover_auto_ =
-      new QAction(IconLoader::Load("find", IconLoader::Base), tr("Search automatically"), this);
+  search_cover_auto_ = new QAction(tr("Search automatically"), this);
   search_cover_auto_->setCheckable(true);
   search_cover_auto_->setChecked(false);
 
@@ -123,7 +124,9 @@ QString AlbumCoverChoiceController::LoadCoverFromFile(Song* song) {
 void AlbumCoverChoiceController::SaveCoverToFile(const Song& song,
                                                  const QImage& image) {
   QString initial_file_name =
-      "/" + (song.album().isEmpty() ? tr("Unknown") : song.album()) + ".jpg";
+      "/" + (song.effective_album().isEmpty() ? tr("Unknown")
+                                              : song.effective_album()) +
+      ".jpg";
 
   QString save_filename = QFileDialog::getSaveFileName(
       this, tr("Save album cover"),
@@ -178,8 +181,11 @@ QString AlbumCoverChoiceController::LoadCoverFromURL(Song* song) {
 }
 
 QString AlbumCoverChoiceController::SearchForCover(Song* song) {
-  // Get something sensible to stick in the search box
-  QImage image = cover_searcher_->Exec(song->artist(), song->album());
+  // Get something sensible to stick in the search box.
+  // We search for the 'effective' values, but we cache the covers with the
+  // Song's artist() and album().
+  QImage image = cover_searcher_->Exec(song->effective_albumartist(),
+                                       song->effective_album());
 
   if (!image.isNull()) {
     QString cover = SaveCoverInCache(song->artist(), song->album(), image);
@@ -202,11 +208,10 @@ void AlbumCoverChoiceController::ShowCover(const Song& song) {
   QDialog* dialog = new QDialog(this);
   dialog->setAttribute(Qt::WA_DeleteOnClose, true);
 
-  // Use Artist - Album as the window title
-  QString title_text(song.albumartist());
-  if (title_text.isEmpty()) title_text = song.artist();
-
-  if (!song.album().isEmpty()) title_text += " - " + song.album();
+  // Use (Album)Artist - Album as the window title
+  QString title_text(song.effective_albumartist());
+  if (!song.effective_album().isEmpty())
+    title_text += " - " + song.effective_album();
 
   QLabel* label = new QLabel(dialog);
   label->setPixmap(AlbumCoverLoader::TryLoadPixmap(
@@ -244,7 +249,8 @@ void AlbumCoverChoiceController::ShowCover(const Song& song) {
 }
 
 void AlbumCoverChoiceController::SearchCoverAutomatically(const Song& song) {
-  qint64 id = cover_fetcher_->FetchAlbumCover(song.artist(), song.album());
+  qint64 id = cover_fetcher_->FetchAlbumCover(song.effective_albumartist(),
+                                              song.effective_album(), false);
   cover_fetching_tasks_[id] = song;
 }
 
@@ -266,8 +272,8 @@ void AlbumCoverChoiceController::AlbumCoverFetched(
 void AlbumCoverChoiceController::SaveCover(Song* song, const QString& cover) {
   if (song->is_valid() && song->id() != -1) {
     song->set_art_manual(cover);
-    app_->library_backend()->UpdateManualAlbumArtAsync(song->artist(),
-                                                       song->album(), cover);
+    app_->library_backend()->UpdateManualAlbumArtAsync(
+        song->artist(), song->albumartist(), song->album(), cover);
 
     if (song->url() == app_->current_art_loader()->last_song().url()) {
       app_->current_art_loader()->LoadArt(*song);

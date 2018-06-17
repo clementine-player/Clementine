@@ -181,9 +181,16 @@ bool GstEnginePipeline::ReplaceDecodeBin(const QUrl& url) {
         spotify_server, "StartPlayback", Qt::QueuedConnection,
         Q_ARG(QString, url.toString()), Q_ARG(quint16, port));
   } else {
+    QByteArray uri;
+    if (url.scheme() == "cdda") {
+      QString str = url.toString();
+      str.remove(str.lastIndexOf(QChar('a')), 1);
+      uri = str.toUtf8();
+    } else {
+      uri = url.toEncoded();
+    }
     new_bin = engine_->CreateElement("uridecodebin");
-    g_object_set(G_OBJECT(new_bin), "uri", url.toEncoded().constData(),
-                 nullptr);
+    g_object_set(G_OBJECT(new_bin), "uri", uri.constData(), nullptr);
     CHECKED_GCONNECT(G_OBJECT(new_bin), "drained", &SourceDrainedCallback,
                      this);
     CHECKED_GCONNECT(G_OBJECT(new_bin), "pad-added", &NewPadCallback, this);
@@ -416,9 +423,9 @@ bool GstEnginePipeline::Init() {
                         stereo_panorama_, volume_, audioscale_, convert,
                         nullptr);
 
-  // Ensure that the audio output of the tee does not autonegotiate to 16 bit
-  GstCaps* caps = gst_caps_new_simple("audio/x-raw", "format", G_TYPE_STRING,
-                                      "S32LE", NULL);
+  // We only limit the media type to raw audio.
+  // Let the audio output of the tee autonegotiate the bit depth and format.
+  GstCaps* caps = gst_caps_new_empty_simple("audio/x-raw");
 
   // Add caps for fixed sample rate and mono, but only if requested
   if (sample_rate_ != GstEngine::kAutoSampleRate && sample_rate_ > 0) {
@@ -459,7 +466,7 @@ bool GstEnginePipeline::InitFromString(const QString& pipeline) {
   pipeline_ = gst_pipeline_new("pipeline");
 
   GstElement* new_bin =
-      CreateDecodeBinFromString(pipeline.toAscii().constData());
+      CreateDecodeBinFromString(pipeline.toLatin1().constData());
   if (!new_bin) {
     return false;
   }

@@ -42,6 +42,11 @@
 #ifdef HAVE_CRYPTOPP
 #include <cryptopp/pkcspad.h>
 #include <cryptopp/rsa.h>
+
+// Compatibility with cryptocpp >= 6.0.0
+namespace CryptoPP {
+  typedef unsigned char byte;
+}
 #endif  // HAVE_CRYPTOPP
 
 const char* SpotifyBlobDownloader::kSignatureSuffix = ".sha512";
@@ -189,7 +194,7 @@ bool SpotifyBlobDownloader::CheckSignature(
 
   try {
     CryptoPP::ByteQueue bytes;
-    bytes.Put(reinterpret_cast<const byte*>(public_key_data.constData()),
+    bytes.Put(reinterpret_cast<const CryptoPP::byte*>(public_key_data.constData()),
               public_key_data.size());
     bytes.MessageEnd();
 
@@ -204,9 +209,9 @@ bool SpotifyBlobDownloader::CheckSignature(
       actual_filename.remove(kSignatureSuffix);
 
       const bool result = verifier.VerifyMessage(
-          reinterpret_cast<const byte*>(file_data[actual_filename].constData()),
+          reinterpret_cast<const CryptoPP::byte*>(file_data[actual_filename].constData()),
           file_data[actual_filename].size(),
-          reinterpret_cast<const byte*>(
+          reinterpret_cast<const CryptoPP::byte*>(
               file_data[signature_filename].constData()),
           file_data[signature_filename].size());
       qLog(Debug) << "Verifying" << actual_filename << "against"
@@ -216,7 +221,7 @@ bool SpotifyBlobDownloader::CheckSignature(
         return false;
       }
     }
-  } catch (std::exception e) {
+  } catch (std::exception& e) {
     // This should only happen if we fail to parse our own key.
     qLog(Debug) << "Verifying spotify blob signature failed:" << e.what();
     return false;

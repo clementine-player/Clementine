@@ -64,6 +64,7 @@ class LibraryModel : public SimpleTreeModel<LibraryItem> {
     Role_Type = Qt::UserRole + 1,
     Role_ContainerType,
     Role_SortText,
+    Role_DisplayText,
     Role_Key,
     Role_Artist,
     Role_IsDivider,

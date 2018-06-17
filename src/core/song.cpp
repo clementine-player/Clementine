@@ -45,9 +45,9 @@
 #ifdef HAVE_LIBLASTFM
 #include "internet/lastfm/fixlastfm.h"
 #ifdef HAVE_LIBLASTFM1
-#include <lastfm/Track.h>
+#include <lastfm5/Track.h>
 #else
-#include <lastfm/Track>
+#include <lastfm5/Track>
 #endif
 #endif
 
@@ -130,7 +130,8 @@ const QStringList Song::kFtsColumns = QStringList() << "ftstitle"
                                                     << "ftsperformer"
                                                     << "ftsgrouping"
                                                     << "ftsgenre"
-                                                    << "ftscomment";
+                                                    << "ftscomment"
+                                                    << "ftsyear";
 
 const QString Song::kFtsColumnSpec = Song::kFtsColumns.join(", ");
 const QString Song::kFtsBindSpec =
@@ -273,6 +274,10 @@ bool Song::is_unavailable() const { return d->unavailable_; }
 int Song::id() const { return d->id_; }
 const QString& Song::title() const { return d->title_; }
 const QString& Song::album() const { return d->album_; }
+const QString& Song::effective_album() const {
+  // This value is useful for singles, which are one-track albums on their own.
+  return d->album_.isEmpty() ? d->title_ : d->album_;
+}
 const QString& Song::artist() const { return d->artist_; }
 const QString& Song::albumartist() const { return d->albumartist_; }
 const QString& Song::effective_albumartist() const {
@@ -403,7 +408,7 @@ QString Song::TextForFiletype(FileType type) {
     case Song::Type_Asf:
       return QObject::tr("Windows Media audio");
     case Song::Type_Flac:
-      return QObject::tr("Flac");
+      return QObject::tr("FLAC");
     case Song::Type_Mp4:
       return QObject::tr("MP4 AAC");
     case Song::Type_Mpc:
@@ -411,7 +416,7 @@ QString Song::TextForFiletype(FileType type) {
     case Song::Type_Mpeg:
       return QObject::tr("MP3");  // Not technically correct
     case Song::Type_OggFlac:
-      return QObject::tr("Ogg Flac");
+      return QObject::tr("Ogg FLAC");
     case Song::Type_OggSpeex:
       return QObject::tr("Ogg Speex");
     case Song::Type_OggVorbis:
@@ -422,6 +427,8 @@ QString Song::TextForFiletype(FileType type) {
       return QObject::tr("AIFF");
     case Song::Type_Wav:
       return QObject::tr("Wav");
+    case Song::Type_WavPack:
+      return QObject::tr("WavPack");
     case Song::Type_TrueAudio:
       return QObject::tr("TrueAudio");
     case Song::Type_Cdda:
@@ -442,6 +449,7 @@ bool Song::IsFileLossless() const {
     case Song::Type_Flac:
     case Song::Type_OggFlac:
     case Song::Type_Wav:
+    case Song::Type_WavPack:
       return true;
     default:
       return false;
@@ -577,7 +585,7 @@ void Song::ToProtobuf(pb::tagreader::SongMetadata* pb) const {
   pb->set_filesize(d->filesize_);
   pb->set_suspicious_tags(d->suspicious_tags_);
   pb->set_art_automatic(DataCommaSizeFromQString(d->art_automatic_));
-  pb->set_type(static_cast< ::pb::tagreader::SongMetadata_Type>(d->filetype_));
+  pb->set_type(static_cast<pb::tagreader::SongMetadata_Type>(d->filetype_));
 }
 
 void Song::InitFromQuery(const SqlRow& q, bool reliable_metadata, int col) {
@@ -668,7 +676,8 @@ void Song::InitFromFilePartial(const QString& filename) {
   if (suffix == "mp3" || suffix == "ogg" || suffix == "flac" ||
       suffix == "mpc" || suffix == "m4a" || suffix == "aac" ||
       suffix == "wma" || suffix == "mp4" || suffix == "spx" ||
-      suffix == "wav" || suffix == "opus" || suffix == "m4b") {
+      suffix == "wav" || suffix == "opus" || suffix == "m4b" ||
+      suffix == "wv") {
     d->valid_ = true;
   } else {
     d->valid_ = false;
@@ -932,8 +941,9 @@ void Song::BindToQuery(QSqlQuery* query) const {
 
   if (Application::kIsPortable &&
       Utilities::UrlOnSameDriveAsClementine(d->url_)) {
-    query->bindValue(":filename", Utilities::GetRelativePathToClementineBin(
-                                      d->url_).toEncoded());
+    query->bindValue(
+        ":filename",
+        Utilities::GetRelativePathToClementineBin(d->url_).toEncoded());
   } else {
     query->bindValue(":filename", d->url_.toEncoded());
   }
@@ -973,7 +983,8 @@ void Song::BindToQuery(QSqlQuery* query) const {
   query->bindValue(":grouping", strval(d->grouping_));
   query->bindValue(":lyrics", strval(d->lyrics_));
   query->bindValue(":originalyear", intval(d->originalyear_));
-  query->bindValue(":effective_originalyear", intval(this->effective_originalyear()));
+  query->bindValue(":effective_originalyear",
+                   intval(this->effective_originalyear()));
 
 #undef intval
 #undef notnullintval
@@ -990,6 +1001,7 @@ void Song::BindToFtsQuery(QSqlQuery* query) const {
   query->bindValue(":ftsgrouping", d->grouping_);
   query->bindValue(":ftsgenre", d->genre_);
   query->bindValue(":ftscomment", d->comment_);
+  query->bindValue(":ftsyear", d->year_);
 }
 
 #ifdef HAVE_LIBLASTFM
@@ -1074,9 +1086,9 @@ bool Song::IsMetadataEqual(const Song& other) const {
          d->performer_ == other.d->performer_ &&
          d->grouping_ == other.d->grouping_ && d->track_ == other.d->track_ &&
          d->disc_ == other.d->disc_ && qFuzzyCompare(d->bpm_, other.d->bpm_) &&
-         d->year_ == other.d->year_ && d->originalyear_ == other.d->originalyear_ &&
-         d->genre_ == other.d->genre_ &&
-         d->comment_ == other.d->comment_ &&
+         d->year_ == other.d->year_ &&
+         d->originalyear_ == other.d->originalyear_ &&
+         d->genre_ == other.d->genre_ && d->comment_ == other.d->comment_ &&
          d->compilation_ == other.d->compilation_ &&
          d->beginning_ == other.d->beginning_ &&
          length_nanosec() == other.length_nanosec() &&
@@ -1084,8 +1096,7 @@ bool Song::IsMetadataEqual(const Song& other) const {
          d->samplerate_ == other.d->samplerate_ &&
          d->art_automatic_ == other.d->art_automatic_ &&
          d->art_manual_ == other.d->art_manual_ &&
-         d->rating_ == other.d->rating_ &&
-         d->cue_path_ == other.d->cue_path_ &&
+         d->rating_ == other.d->rating_ && d->cue_path_ == other.d->cue_path_ &&
          d->lyrics_ == other.d->lyrics_;
 }
 
@@ -1123,12 +1134,14 @@ bool Song::IsOnSameAlbum(const Song& other) const {
 
   if (is_compilation() && album() == other.album()) return true;
 
-  return album() == other.album() && artist() == other.artist();
+  return effective_album() == other.effective_album() &&
+         effective_albumartist() == other.effective_albumartist();
 }
 
 QString Song::AlbumKey() const {
-  return QString("%1|%2|%3").arg(is_compilation() ? "_compilation" : artist(),
-                                 has_cue() ? cue_path() : "", album());
+  return QString("%1|%2|%3")
+      .arg(is_compilation() ? "_compilation" : effective_albumartist(),
+           has_cue() ? cue_path() : "", effective_album());
 }
 
 void Song::ToXesam(QVariantMap* map) const {

@@ -23,6 +23,7 @@
 
 #include <QAbstractSocket>
 #include <QLocalSocket>
+#include <QDataStream>
 
 _MessageHandlerBase::_MessageHandlerBase(QIODevice* device, QObject* parent)
     : QObject(parent),

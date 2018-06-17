@@ -39,11 +39,6 @@ StretchHeaderView::StretchHeaderView(Qt::Orientation orientation,
 
 void StretchHeaderView::setModel(QAbstractItemModel* model) {
   QHeaderView::setModel(model);
-
-  if (stretch_enabled_) {
-    column_widths_.resize(count());
-    std::fill(column_widths_.begin(), column_widths_.end(), 1.0 / count());
-  }
 }
 
 void StretchHeaderView::NormaliseWidths(const QList<int>& sections) {

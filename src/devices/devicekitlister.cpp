@@ -122,7 +122,7 @@ QVariantMap DeviceKitLister::DeviceHardwareInfo(const QString& id) {
   if (!device_data_.contains(id)) return ret;
   const DeviceData& data = device_data_[id];
 
-  ret[QT_TR_NOOP("DBus path")] = data.dbus_path;
+  ret[QT_TR_NOOP("D-Bus path")] = data.dbus_path;
   ret[QT_TR_NOOP("Serial number")] = data.drive_serial;
   ret[QT_TR_NOOP("Mount points")] = data.device_mount_paths.join(", ");
   ret[QT_TR_NOOP("Device")] = data.device_file;

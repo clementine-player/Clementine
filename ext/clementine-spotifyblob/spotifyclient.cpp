@@ -433,8 +433,8 @@ void SpotifyClient::SendPlaylistList() {
                 << sp_playlist_name(playlist);
 
     if (!is_loaded) {
-      qLog(Info) << "Playlist is not loaded yet, waiting...";
-      return;
+      qLog(Info) << "Playlist is not loaded yet, jump to the next one...";
+      continue;
     }
 
     if (type != SP_PLAYLIST_TYPE_PLAYLIST) {
@@ -697,7 +697,7 @@ void SpotifyClient::ConvertTrack(sp_track* track, pb::spotify::Track* pb) {
   const QByteArray art_id(reinterpret_cast<const char*>(sp_album_cover(
                               sp_track_album(track), SP_IMAGE_SIZE_LARGE)),
                           kSpotifyImageIDSize);
-  const QString art_id_b64 = QString::fromAscii(art_id.toBase64());
+  const QString art_id_b64 = QString::fromLatin1(art_id.toBase64());
   pb->set_album_art_id(DataCommaSizeFromQString(art_id_b64));
 
   // Artists
@@ -732,7 +732,7 @@ void SpotifyClient::ConvertAlbum(sp_album* album, pb::spotify::Track* pb) {
   const QByteArray art_id(
       reinterpret_cast<const char*>(sp_album_cover(album, SP_IMAGE_SIZE_LARGE)),
       kSpotifyImageIDSize);
-  const QString art_id_b64 = QString::fromAscii(art_id.toBase64());
+  const QString art_id_b64 = QString::fromLatin1(art_id.toBase64());
   pb->set_album_art_id(DataCommaSizeFromQString(art_id_b64));
 
   // URI - Blugh
@@ -979,7 +979,7 @@ void SpotifyClient::SendPlaybackError(const QString& error) {
 }
 
 void SpotifyClient::LoadImage(const QString& id_b64) {
-  QByteArray id = QByteArray::fromBase64(id_b64.toAscii());
+  QByteArray id = QByteArray::fromBase64(id_b64.toLatin1());
   if (id.length() != kSpotifyImageIDSize) {
     qLog(Warning) << "Invalid image ID (did not decode to"
                   << kSpotifyImageIDSize << "bytes):" << id_b64;

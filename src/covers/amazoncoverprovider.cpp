@@ -23,6 +23,7 @@
 #include <QDateTime>
 #include <QNetworkReply>
 #include <QStringList>
+#include <QUrlQuery>
 #include <QXmlStreamReader>
 
 #include "core/closure.h"
@@ -39,7 +40,7 @@ const char* AmazonCoverProvider::kUrl = "http://ecs.amazonaws.com/onca/xml";
 const char* AmazonCoverProvider::kAssociateTag = "clemmusiplay-20";
 
 AmazonCoverProvider::AmazonCoverProvider(QObject* parent)
-    : CoverProvider("Amazon", parent),
+    : CoverProvider("Amazon", true, parent),
       network_(new NetworkAccessManager(this)) {}
 
 bool AmazonCoverProvider::StartSearch(const QString& artist,
@@ -62,31 +63,32 @@ bool AmazonCoverProvider::StartSearch(const QString& artist,
                                         "yyyy-MM-ddThh:mm:ss.zzzZ"))
                 << Arg("Version", "2009-11-01");
 
-  EncodedArgList encoded_args;
+  QUrlQuery url_query;
+  QUrl url(kUrl);
   QStringList query_items;
 
   // Encode the arguments
   for (const Arg& arg : args) {
     EncodedArg encoded_arg(QUrl::toPercentEncoding(arg.first),
                            QUrl::toPercentEncoding(arg.second));
-    encoded_args << encoded_arg;
     query_items << QString(encoded_arg.first + "=" + encoded_arg.second);
+    url_query.addQueryItem(encoded_arg.first, encoded_arg.second);
   }
 
   // Sign the request
-  QUrl url(kUrl);
 
   const QByteArray data_to_sign =
       QString("GET\n%1\n%2\n%3")
           .arg(url.host(), url.path(), query_items.join("&"))
-          .toAscii();
+          .toLatin1();
   const QByteArray signature(Utilities::HmacSha256(
       QByteArray::fromBase64(kSecretAccessKeyB64), data_to_sign));
 
   // Add the signature to the request
-  encoded_args << EncodedArg("Signature",
-                             QUrl::toPercentEncoding(signature.toBase64()));
-  url.setEncodedQueryItems(encoded_args);
+
+  url_query.addQueryItem("Signature",
+                         QUrl::toPercentEncoding(signature.toBase64()));
+  url.setQuery(url_query);
 
   QNetworkReply* reply = network_->get(QNetworkRequest(url));
   NewClosure(reply, SIGNAL(finished()), this,

@@ -100,28 +100,17 @@ const QDBusArgument& operator>>(const QDBusArgument& arg, QImage& image);
 
 // Load sqlite plugin on windows and mac.
 #include <QtPlugin>
-Q_IMPORT_PLUGIN(qsqlite)
+Q_IMPORT_PLUGIN(QSQLiteDriverPlugin)
 
 namespace {
 
 void LoadTranslation(const QString& prefix, const QString& path,
                      const QString& language) {
-#if QT_VERSION < 0x040700
-  // QTranslator::load will try to open and read "clementine" if it exists,
-  // without checking if it's a file first.
-  // This was fixed in Qt 4.7
-  QFileInfo maybe_clementine_directory(path + "/clementine");
-  if (maybe_clementine_directory.exists() &&
-      !maybe_clementine_directory.isFile())
-    return;
-#endif
-
   QTranslator* t = new PoTranslator;
   if (t->load(prefix + "_" + language, path))
     QCoreApplication::installTranslator(t);
   else
     delete t;
-  QTextCodec::setCodecForTr(QTextCodec::codecForLocale());
 }
 
 void IncreaseFDLimit() {
@@ -258,7 +247,7 @@ int main(int argc, char* argv[]) {
 
   if (QSysInfo::MacintoshVersion > QSysInfo::MV_10_8) {
     // Work around 10.9 issue.
-    // https://bugreports.qt-project.org/browse/QTBUG-32789
+    // https://bugreports.qt.io/browse/QTBUG-32789
     QFont::insertSubstitution(".Lucida Grande UI", "Lucida Grande");
   }
 #endif
@@ -303,7 +292,10 @@ int main(int argc, char* argv[]) {
         qLog(Info)
             << "Clementine is already running - activating existing window";
       }
-      if (a.sendMessage(options.Serialize(), 5000)) {
+
+      QByteArray serializedOptions = options.Serialize();
+      if (a.sendMessage(serializedOptions, 5000)) {
+        qLog(Info) << "Options found, sent message to running instance";
         return 0;
       }
       // Couldn't send the message so start anyway
@@ -318,15 +310,9 @@ int main(int argc, char* argv[]) {
       1);
 #endif
 
-#ifdef HAVE_LIBLASTFM
-  lastfm::ws::ApiKey = LastFMService::kApiKey;
-  lastfm::ws::SharedSecret = LastFMService::kSecret;
-  lastfm::setNetworkAccessManager(new NetworkAccessManager);
-#endif
-
   // Output the version, so when people attach log output to bug reports they
   // don't have to tell us which version they're using.
-  qLog(Info) << "Clementine" << CLEMENTINE_VERSION_DISPLAY;
+  qLog(Info) << "Clementine-qt5" << CLEMENTINE_VERSION_DISPLAY;
 
   // Seed the random number generators.
   time_t t = time(nullptr);
@@ -336,6 +322,12 @@ int main(int argc, char* argv[]) {
   IncreaseFDLimit();
 
   QtSingleApplication a(argc, argv);
+
+#ifdef HAVE_LIBLASTFM
+  lastfm::ws::ApiKey = LastFMService::kApiKey;
+  lastfm::ws::SharedSecret = LastFMService::kSecret;
+  lastfm::setNetworkAccessManager(new NetworkAccessManager);
+#endif
 
   // A bug in Qt means the wheel_scroll_lines setting gets ignored and replaced
   // with the default value of 3 in QApplicationPrivate::initialize.
@@ -353,9 +345,9 @@ int main(int argc, char* argv[]) {
 #endif
 
   a.setQuitOnLastWindowClosed(false);
-
   // Do this check again because another instance might have started by now
-  if (a.isRunning() && a.sendMessage(options.Serialize(), 5000)) {
+  if (a.isRunning() &&
+      a.sendMessage(QString::fromLatin1(options.Serialize()), 5000)) {
     return 0;
   }
 
@@ -365,8 +357,6 @@ int main(int argc, char* argv[]) {
   QCoreApplication::setAttribute(Qt::AA_DontShowIconsInMenus, false);
 #else
   QCoreApplication::setAttribute(Qt::AA_DontShowIconsInMenus, true);
-  // Fixes focus issue with NSSearchField, see QTBUG-11401
-  QCoreApplication::setAttribute(Qt::AA_NativeWindows, true);
 #endif
 
   SetGstreamerEnvironment();
@@ -466,8 +456,8 @@ int main(int argc, char* argv[]) {
 #ifdef HAVE_DBUS
   QObject::connect(&mpris, SIGNAL(RaiseMainWindow()), &w, SLOT(Raise()));
 #endif
-  QObject::connect(&a, SIGNAL(messageReceived(QByteArray)), &w,
-                   SLOT(CommandlineOptionsReceived(QByteArray)));
+  QObject::connect(&a, SIGNAL(messageReceived(QString)), &w,
+                   SLOT(CommandlineOptionsReceived(QString)));
 
   int ret = a.exec();
 

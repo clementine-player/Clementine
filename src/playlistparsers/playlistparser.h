@@ -38,12 +38,15 @@ class PlaylistParser : public QObject {
   QStringList file_extensions() const;
   QString filters() const;
 
+  QStringList mime_types() const;
+
   QString default_extension() const;
   QString default_filter() const;
 
   ParserBase* ParserForMagic(const QByteArray& data,
                              const QString& mime_type = QString()) const;
   ParserBase* ParserForExtension(const QString& suffix) const;
+  ParserBase* ParserForMimeType(const QString& mime) const;
 
   SongList LoadFromFile(const QString& filename) const;
   SongList LoadFromDevice(QIODevice* device,

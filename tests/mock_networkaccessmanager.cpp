@@ -18,6 +18,7 @@
 #include "mock_networkaccessmanager.h"
 
 #include <QtDebug>
+#include <QUrlQuery>
 
 #include <algorithm>
 using std::min;
@@ -44,10 +45,11 @@ class RequestForUrlMatcher : public MatcherInterface<const QNetworkRequest&> {
       return false;
     }
 
+    QUrlQuery url_query(url);
     for (QMap<QString, QString>::const_iterator it = expected_params_.constBegin();
          it != expected_params_.constEnd(); ++it) {
-      if (!url.hasQueryItem(it.key()) ||
-          url.queryItemValue(it.key()) != it.value()) {
+      if (!url_query.hasQueryItem(it.key()) ||
+          url_query.queryItemValue(it.key()) != it.value()) {
         return false;
       }
     }

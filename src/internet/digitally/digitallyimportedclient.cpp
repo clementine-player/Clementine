@@ -19,10 +19,11 @@
 
 #include "digitallyimportedclient.h"
 
-#include <qjson/parser.h>
-
 #include <QNetworkReply>
 #include <QNetworkRequest>
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QJsonArray>
 
 #include "core/logging.h"
 #include "core/network.h"
@@ -38,7 +39,7 @@ const char* DigitallyImportedClient::kAuthUrl =
     "http://api.audioaddict.com/v1/%1/members/authenticate";
 
 const char* DigitallyImportedClient::kChannelListUrl =
-    "http://api.v2.audioaddict.com/v1/%1/mobile/"
+    "http://api.audioaddict.com/v1/%1/mobile/"
     "batch_update?asset_group_key=mobile_icons&stream_set_key=";
 
 DigitallyImportedClient::DigitallyImportedClient(const QString& service_name,
@@ -52,7 +53,7 @@ void DigitallyImportedClient::SetAuthorisationHeader(
   req->setRawHeader("Authorization", "Basic " +
                                          QString("%1:%2")
                                              .arg(kApiUsername, kApiPassword)
-                                             .toAscii()
+                                             .toLatin1()
                                              .toBase64());
 }
 
@@ -82,32 +83,30 @@ DigitallyImportedClient::AuthReply DigitallyImportedClient::ParseAuthReply(
     return ret;
   }
 
-  QJson::Parser parser;
-  QVariantMap data = parser.parse(reply).toMap();
+  QJsonObject json_root_object = QJsonDocument::fromJson(reply->readAll()).object();
 
-  if (!data.contains("subscriptions")) {
+  if (json_root_object["subscriptions"].isUndefined()) {
     return ret;
   }
 
-  QVariantList subscriptions =
-      data.value("subscriptions", QVariantList()).toList();
-  if (subscriptions.isEmpty() ||
-      subscriptions[0].toMap().value("status").toString() != "active") {
+  QJsonArray json_subscriptions = json_root_object["subscriptions"].toArray();
+  if (json_subscriptions.isEmpty() ||
+      json_subscriptions[0].toObject()["status"].toString() != "active") {
     ret.error_reason_ = tr("You do not have an active subscription");
     return ret;
   }
 
-  if (!data.contains("first_name") || !data.contains("last_name") ||
-      !subscriptions[0].toMap().contains("expires_on") ||
-      !data.contains("listen_key"))
+  if (json_root_object["first_name"].isUndefined() || json_root_object["last_name"].isUndefined() ||
+      json_subscriptions[0].toObject()["expires_on"].isUndefined() ||
+      json_root_object["listen_key"].isUndefined())
     return ret;
 
   ret.success_ = true;
-  ret.first_name_ = data["first_name"].toString();
-  ret.last_name_ = data["last_name"].toString();
+  ret.first_name_ = json_root_object["first_name"].toString();
+  ret.last_name_ = json_root_object["last_name"].toString();
   ret.expires_ = QDateTime::fromString(
-      subscriptions[0].toMap()["expires_on"].toString(), Qt::ISODate);
-  ret.listen_hash_ = data["listen_key"].toString();
+      json_subscriptions[0].toObject()["expires_on"].toString(), Qt::ISODate);
+  ret.listen_hash_ = json_root_object["listen_key"].toString();
   return ret;
 }
 
@@ -123,30 +122,28 @@ DigitallyImportedClient::ChannelList DigitallyImportedClient::ParseChannelList(
     QNetworkReply* reply) const {
   ChannelList ret;
 
-  QJson::Parser parser;
-  QVariantMap data = parser.parse(reply).toMap();
+  QJsonObject json_root_object = QJsonDocument::fromJson(reply->readAll()).object();
 
-  if (!data.contains("channel_filters")) return ret;
+  if (json_root_object["channel_filters"].isUndefined()) return ret;
 
-  QVariantList filters = data["channel_filters"].toList();
+  QJsonArray json_filters = json_root_object["channel_filters"].toArray();
 
-  for (const QVariant& filter : filters) {
+  for (const QJsonValue & filter: json_filters) {
     // Find the filter called "All"
-    QVariantMap filter_map = filter.toMap();
-    if (filter_map.value("name", QString()).toString() != "All") continue;
+    QJsonObject json_filter = filter.toObject();
+    if (json_filter["name"].toString() != "All") continue;
 
     // Add all its stations to the result
-    QVariantList channels =
-        filter_map.value("channels", QVariantList()).toList();
-    for (const QVariant& channel_var : channels) {
-      QVariantMap channel_map = channel_var.toMap();
+    QJsonArray json_channels = json_filter["channels"].toArray();
+    for (const QJsonValue& channel_var : json_channels) {
+      QJsonObject json_channel = channel_var.toObject();
 
       Channel channel;
-      channel.art_url_ = QUrl(channel_map.value("asset_url").toString());
-      channel.description_ = channel_map.value("description").toString();
-      channel.director_ = channel_map.value("channel_director").toString();
-      channel.key_ = channel_map.value("key").toString();
-      channel.name_ = channel_map.value("name").toString();
+      channel.art_url_ = QUrl(json_channel["asset_url"].toString());
+      channel.description_ = json_channel["description"].toString();
+      channel.director_ = json_channel["channel_director"].toString();
+      channel.key_ = json_channel["key"].toString();
+      channel.name_ = json_channel["name"].toString();
       ret << channel;
     }
 

@@ -1,0 +1,13 @@
+sudo: required
+language: cpp
+
+services:
+  - docker
+
+before_script:
+  - sudo docker pull gcr.io/clementine-data/slave-ubuntu-bionic-64
+
+script:
+  - >
+    sudo docker run --entrypoint=/bin/bash -v ${TRAVIS_BUILD_DIR}:/build gcr.io/clementine-data/slave-ubuntu-bionic-64
+    -c 'cd /build/bin && cmake .. && make'

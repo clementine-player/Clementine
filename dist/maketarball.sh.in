@@ -9,14 +9,15 @@ rootnoslash=`echo $root | sed "s/^\///"`
 
 echo "Creating $name-$version.tar.xz..."
 
-tar -cJf $name-$version.tar.xz "$root" \
+tar -cJf $name-$version.tar.xz \
     --transform "s,^$rootnoslash,$name-$version," \
     --exclude-vcs \
     --exclude "$root/bin/*" \
     --exclude "$root/debian" \
     --exclude "$root/dist/*.tar.gz" \
     --exclude "$root/dist/*.tar.xz" \
-    --exclude "$root/CMakeLists.txt.user"
+    --exclude "$root/CMakeLists.txt.user" \
+    "$root"
 
 echo "Also creating ${name}_${version}~${deb_dist}.orig.tar.xz..."
 cp "$name-$version.tar.xz" "${name}_${version}~${deb_dist}.orig.tar.xz"

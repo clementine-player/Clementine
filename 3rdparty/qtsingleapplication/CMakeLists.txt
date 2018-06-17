@@ -1,8 +1,7 @@
-cmake_minimum_required(VERSION 2.6)
+cmake_minimum_required(VERSION 2.8.11)
 
 set(SINGLEAPP-SOURCES
     qtlocalpeer.cpp
-    qtlockedfile.cpp
     qtsingleapplication.cpp
     qtsinglecoreapplication.cpp
 )
@@ -19,9 +18,11 @@ elseif(WIN32)
   set(SINGLEAPP-SOURCES ${SINGLEAPP-SOURCES} qtlockedfile_unix.cpp)
 endif(WIN32)
 
-QT4_WRAP_CPP(SINGLEAPP-SOURCES-MOC ${SINGLEAPP-MOC-HEADERS})
+QT5_WRAP_CPP(SINGLEAPP-SOURCES-MOC ${SINGLEAPP-MOC-HEADERS})
 
 ADD_LIBRARY(qtsingleapplication STATIC
     ${SINGLEAPP-SOURCES}
     ${SINGLEAPP-SOURCES-MOC}
 )
+
+target_link_libraries(qtsingleapplication Qt5::Core Qt5::Widgets Qt5::Network)

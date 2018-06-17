@@ -27,6 +27,7 @@
 #import <Foundation/NSError.h>
 #import <Foundation/NSFileManager.h>
 #import <Foundation/NSPathUtilities.h>
+#import <Foundation/NSProcessInfo.h>
 #import <Foundation/NSThread.h>
 #import <Foundation/NSTimer.h>
 #import <Foundation/NSURL.h>
@@ -160,10 +161,16 @@ static BreakpadRef InitBreakpad() {
 
 - (void)applicationDidFinishLaunching:(NSNotification*)aNotification {
   key_tap_ = [[SPMediaKeyTap alloc] initWithDelegate:self];
-  if ([SPMediaKeyTap usesGlobalMediaKeyTap])
+  if ([SPMediaKeyTap usesGlobalMediaKeyTap] &&
+      ![[NSProcessInfo processInfo]
+          isOperatingSystemAtLeastVersion:(NSOperatingSystemVersion){
+                                              .majorVersion = 10,
+                                              .minorVersion = 12,
+                                              .patchVersion = 0}]) {
     [key_tap_ startWatchingMediaKeys];
-  else
+  } else {
     qLog(Warning) << "Media key monitoring disabled";
+  }
 }
 
 - (BOOL)application:(NSApplication*)app openFile:(NSString*)filename {

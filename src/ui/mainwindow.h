@@ -31,8 +31,10 @@
 #include "engines/engine_fwd.h"
 #include "library/librarymodel.h"
 #include "playlist/playlistitem.h"
+#include "songinfo/streamdiscoverer.h"
 #include "ui/organisedialog.h"
 #include "ui/settingsdialog.h"
+#include "ui/streamdetailsdialog.h"
 
 class About;
 class AddStreamDialog;
@@ -72,6 +74,7 @@ class RipCDDialog;
 class Song;
 class SongInfoBase;
 class SongInfoView;
+class StreamDetailsDialog;
 class SystemTrayIcon;
 class TagFetcher;
 class TaskManager;
@@ -128,7 +131,6 @@ class MainWindow : public QMainWindow, public PlatformInterface {
 
  protected:
   void keyPressEvent(QKeyEvent* event);
-  void resizeEvent(QResizeEvent* event);
   void closeEvent(QCloseEvent* event);
 
 #ifdef Q_OS_WIN32
@@ -144,7 +146,6 @@ signals:
   void StopAfterToggled(bool stop);
 
   void IntroPointReached();
-
  private slots:
   void FilePathChanged(const QString& path);
 
@@ -160,11 +161,14 @@ signals:
   void PlaylistPlay();
   void PlaylistStopAfter();
   void PlaylistQueue();
+  void PlaylistQueuePlayNext();
   void PlaylistSkip();
   void PlaylistRemoveCurrent();
   void PlaylistEditFinished(const QModelIndex& index);
   void EditTracks();
   void EditTagDialogAccepted();
+  void DiscoverStreamDetails();
+  void ShowStreamDetails(const StreamDetails& details);
   void RenumberTracks();
   void SelectionSetValue();
   void EditValue();
@@ -172,6 +176,9 @@ signals:
   void AutoCompleteTagsAccepted();
   void PlaylistUndoRedoChanged(QAction* undo, QAction* redo);
   void AddFilesToTranscoder();
+
+  void SearchForArtist();
+  void SearchForAlbum();
 
   void PlaylistCopyToLibrary();
   void PlaylistMoveToLibrary();
@@ -231,7 +238,7 @@ signals:
   void AddCDTracks();
   void AddPodcast();
 
-  void CommandlineOptionsReceived(const QByteArray& serialized_options);
+  void CommandlineOptionsReceived(const QString& string_options);
 
   void CheckForUpdates();
 
@@ -252,6 +259,7 @@ signals:
   void ShowVisualisations();
   SettingsDialog* CreateSettingsDialog();
   EditTagDialog* CreateEditTagDialog();
+  StreamDiscoverer* CreateStreamDiscoverer();
   void OpenSettingsDialog();
   void OpenSettingsDialogAtPage(SettingsDialog::Page page);
   void ShowSongInfoConfig();
@@ -299,6 +307,7 @@ signals:
   OSD* osd_;
   Lazy<EditTagDialog> edit_tag_dialog_;
   Lazy<About> about_dialog_;
+  Lazy<StreamDiscoverer> stream_discoverer_;
 
   GlobalShortcuts* global_shortcuts_;
 
@@ -352,11 +361,15 @@ signals:
   QAction* playlist_delete_;
   QAction* playlist_open_in_browser_;
   QAction* playlist_queue_;
+  QAction* playlist_queue_play_next_;
   QAction* playlist_skip_;
   QAction* playlist_add_to_another_;
   QList<QAction*> playlistitem_actions_;
   QAction* playlistitem_actions_separator_;
   QModelIndex playlist_menu_index_;
+
+  QAction* search_for_artist_;
+  QAction* search_for_album_;
 
   QSortFilterProxyModel* library_sort_model_;
 

@@ -75,12 +75,10 @@ BehaviourSettingsPage::BehaviourSettingsPage(SettingsDialog* dialog)
                               .replace("_TW", "_Hant_TW");
     QString language_name =
         QLocale::languageToString(QLocale(lookup_code).language());
-#if QT_VERSION >= 0x040800
     QString native_name = QLocale(lookup_code).nativeLanguageName();
     if (!native_name.isEmpty()) {
       language_name = native_name;
     }
-#endif
     QString name = QString("%1 (%2)").arg(language_name, code);
 
     language_map_[name] = code;
@@ -141,6 +139,8 @@ void BehaviourSettingsPage::Load() {
   s.endGroup();
 
   s.beginGroup(Player::kSettingsGroup);
+  ui_->stop_play_if_fail_->setChecked(
+      s.value("stop_play_if_fail", false).toBool());
   ui_->menu_previousmode->setCurrentIndex(ui_->menu_previousmode->findData(
       s.value("menu_previousmode", Player::PreviousBehaviour_DontRestart)
           .toInt()));
@@ -241,6 +241,8 @@ void BehaviourSettingsPage::Save() {
   s.endGroup();
 
   s.beginGroup(Player::kSettingsGroup);
+  s.setValue("stop_play_if_fail",
+             ui_->stop_play_if_fail_->isChecked());
   s.setValue("menu_previousmode", menu_previousmode);
   s.setValue("seek_step_sec", ui_->seek_step_sec->value());
   s.endGroup();

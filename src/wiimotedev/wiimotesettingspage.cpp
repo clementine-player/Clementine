@@ -27,7 +27,7 @@
 WiimoteSettingsPage::WiimoteSettingsPage(SettingsDialog* dialog)
     : SettingsPage(dialog), ui_(new Ui_WiimoteSettingsPage) {
   ui_->setupUi(this);
-  ui_->list->header()->setResizeMode(QHeaderView::ResizeToContents);
+  ui_->list->header()->setSectionResizeMode(QHeaderView::ResizeToContents);
   setWindowIcon(IconLoader::Load("wiimotedev", IconLoader::Base));
   ui_->wiimotedev_add_action->setIcon(IconLoader::Load("list-add",
                                       IconLoader::Base));
@@ -36,43 +36,43 @@ WiimoteSettingsPage::WiimoteSettingsPage(SettingsDialog* dialog)
   ui_->wiimotedev_reload->setIcon(IconLoader::Load("view-refresh",
                                       IconLoader::Base));
 
-  text_buttons_.insert(WIIMOTE_BTN_1, "Wiiremote 1");
-  text_buttons_.insert(WIIMOTE_BTN_2, "Wiiremote 2");
-  text_buttons_.insert(WIIMOTE_BTN_A, "Wiiremote A");
-  text_buttons_.insert(WIIMOTE_BTN_B, "Wiiremote B");
-  text_buttons_.insert(WIIMOTE_BTN_PLUS, "Wiiremote Plus");
-  text_buttons_.insert(WIIMOTE_BTN_MINUS, "Wiiremote Minus");
-  text_buttons_.insert(WIIMOTE_BTN_HOME, "Wiiremote Home");
-  text_buttons_.insert(WIIMOTE_BTN_UP, "Wiiremote Up");
-  text_buttons_.insert(WIIMOTE_BTN_DOWN, "Wiiremote Down");
-  text_buttons_.insert(WIIMOTE_BTN_LEFT, "Wiiremote Left");
-  text_buttons_.insert(WIIMOTE_BTN_RIGHT, "Wiiremote Right");
-  text_buttons_.insert(WIIMOTE_BTN_SHIFT_UP, "Wiiremote Shift Up");
-  text_buttons_.insert(WIIMOTE_BTN_SHIFT_DOWN, "Wiiremote Shift Down");
-  text_buttons_.insert(WIIMOTE_BTN_SHIFT_LEFT, "Wiiremote Shift Left");
-  text_buttons_.insert(WIIMOTE_BTN_SHIFT_RIGHT, "Wiiremote Shift Right");
-  text_buttons_.insert(WIIMOTE_BTN_SHIFT_FORWARD, "Wiiremote Shift Forward");
-  text_buttons_.insert(WIIMOTE_BTN_SHIFT_BACKWARD, "Wiiremote Shift Backward");
-  text_buttons_.insert(WIIMOTE_BTN_TILT_FRONT, "Wiiremote Tilt Front");
-  text_buttons_.insert(WIIMOTE_BTN_TILT_BACK, "Wiiremote Tilt Back");
-  text_buttons_.insert(WIIMOTE_BTN_TILT_LEFT, "Wiiremote Tilt Left");
-  text_buttons_.insert(WIIMOTE_BTN_TILT_RIGHT, "Wiiremote Tilt Right");
+  text_buttons_.insert(WIIMOTE_BTN_1, "Wii Remote 1");
+  text_buttons_.insert(WIIMOTE_BTN_2, "Wii Remote 2");
+  text_buttons_.insert(WIIMOTE_BTN_A, "Wii Remote A");
+  text_buttons_.insert(WIIMOTE_BTN_B, "Wii Remote B");
+  text_buttons_.insert(WIIMOTE_BTN_PLUS, "Wii Remote ⊕");
+  text_buttons_.insert(WIIMOTE_BTN_MINUS, "Wii Remote ⊖");
+  text_buttons_.insert(WIIMOTE_BTN_HOME, "Wii Remote ⌂");
+  text_buttons_.insert(WIIMOTE_BTN_UP, "Wii Remote ↑");
+  text_buttons_.insert(WIIMOTE_BTN_DOWN, "Wii Remote ↓");
+  text_buttons_.insert(WIIMOTE_BTN_LEFT, "Wii Remote ←");
+  text_buttons_.insert(WIIMOTE_BTN_RIGHT, "Wii Remote →");
+  text_buttons_.insert(WIIMOTE_BTN_SHIFT_UP, "Wii Remote Shift ↑");
+  text_buttons_.insert(WIIMOTE_BTN_SHIFT_DOWN, "Wii Remote Shift ↓");
+  text_buttons_.insert(WIIMOTE_BTN_SHIFT_LEFT, "Wii Remote Shift ←");
+  text_buttons_.insert(WIIMOTE_BTN_SHIFT_RIGHT, "Wii Remote Shift →");
+  text_buttons_.insert(WIIMOTE_BTN_SHIFT_FORWARD, "Wii Remote Shift Forward");
+  text_buttons_.insert(WIIMOTE_BTN_SHIFT_BACKWARD, "Wii Remote Shift Backward");
+  text_buttons_.insert(WIIMOTE_BTN_TILT_FRONT, "Wii Remote Tilt Frontwards");
+  text_buttons_.insert(WIIMOTE_BTN_TILT_BACK, "Wii Remote Tilt Backwards");
+  text_buttons_.insert(WIIMOTE_BTN_TILT_LEFT, "Wii Remote Tilt Leftwards");
+  text_buttons_.insert(WIIMOTE_BTN_TILT_RIGHT, "Wii Remote Tilt Rightwards");
   text_buttons_.insert(NUNCHUK_BTN_Z, "Nunchuk Z");
   text_buttons_.insert(NUNCHUK_BTN_C, "Nunchuk B");
-  text_buttons_.insert(NUNCHUK_BTN_STICK_UP, "Nunchuk Stick Up");
-  text_buttons_.insert(NUNCHUK_BTN_STICK_DOWN, "Nunchuk Stick Down");
-  text_buttons_.insert(NUNCHUK_BTN_STICK_LEFT, "Nunchuk Stick Left");
-  text_buttons_.insert(NUNCHUK_BTN_STICK_RIGHT, "Nunchuk Stick Right");
-  text_buttons_.insert(NUNCHUK_BTN_SHIFT_UP, "Nunchuk Shift Up");
-  text_buttons_.insert(NUNCHUK_BTN_SHIFT_DOWN, "Nunchuk Shift Down");
-  text_buttons_.insert(NUNCHUK_BTN_SHIFT_LEFT, "Nunchuk Shift Left");
-  text_buttons_.insert(NUNCHUK_BTN_SHIFT_RIGHT, "Nunchuk Shift Right");
+  text_buttons_.insert(NUNCHUK_BTN_STICK_UP, "Nunchuk Stick ↑");
+  text_buttons_.insert(NUNCHUK_BTN_STICK_DOWN, "Nunchuk Stick ↓");
+  text_buttons_.insert(NUNCHUK_BTN_STICK_LEFT, "Nunchuk Stick ←");
+  text_buttons_.insert(NUNCHUK_BTN_STICK_RIGHT, "Nunchuk Stick →");
+  text_buttons_.insert(NUNCHUK_BTN_SHIFT_UP, "Nunchuk Shift ↑");
+  text_buttons_.insert(NUNCHUK_BTN_SHIFT_DOWN, "Nunchuk Shift ↓");
+  text_buttons_.insert(NUNCHUK_BTN_SHIFT_LEFT, "Nunchuk Shift ←");
+  text_buttons_.insert(NUNCHUK_BTN_SHIFT_RIGHT, "Nunchuk Shift →");
   text_buttons_.insert(NUNCHUK_BTN_SHIFT_FORWARD, "Nunchuk Shift Forward");
   text_buttons_.insert(NUNCHUK_BTN_SHIFT_BACKWARD, "Nunchuk Shift Backward");
-  text_buttons_.insert(NUNCHUK_BTN_TILT_FRONT, "Nunchuk Tilt Front");
-  text_buttons_.insert(NUNCHUK_BTN_TILT_BACK, "Nunchuk Tilt Back");
-  text_buttons_.insert(NUNCHUK_BTN_TILT_LEFT, "Nunchuk Tilt Left");
-  text_buttons_.insert(NUNCHUK_BTN_TILT_RIGHT, "Nunchuk Tilt Right");
+  text_buttons_.insert(NUNCHUK_BTN_TILT_FRONT, "Nunchuk Tilt Frontwards");
+  text_buttons_.insert(NUNCHUK_BTN_TILT_BACK, "Nunchuk Tilt Backwards");
+  text_buttons_.insert(NUNCHUK_BTN_TILT_LEFT, "Nunchuk Tilt Leftwards");
+  text_buttons_.insert(NUNCHUK_BTN_TILT_RIGHT, "Nunchuk Tilt Rightwards");
   text_buttons_.insert(CLASSIC_BTN_X, "Classic X");
   text_buttons_.insert(CLASSIC_BTN_Y, "Classic Y");
   text_buttons_.insert(CLASSIC_BTN_A, "Classic A");
@@ -81,26 +81,26 @@ WiimoteSettingsPage::WiimoteSettingsPage(SettingsDialog* dialog)
   text_buttons_.insert(CLASSIC_BTN_R, "Classic R");
   text_buttons_.insert(CLASSIC_BTN_ZL, "Classic ZL");
   text_buttons_.insert(CLASSIC_BTN_ZR, "Classic ZR");
-  text_buttons_.insert(CLASSIC_BTN_MINUS, "Classic Minus");
-  text_buttons_.insert(CLASSIC_BTN_PLUS, "Classic Plus");
-  text_buttons_.insert(CLASSIC_BTN_HOME, "Classic Home");
-  text_buttons_.insert(CLASSIC_BTN_UP, "Classic Up");
-  text_buttons_.insert(CLASSIC_BTN_DOWN, "Classic Down");
-  text_buttons_.insert(CLASSIC_BTN_LEFT, "Classic Left");
-  text_buttons_.insert(CLASSIC_BTN_RIGHT, "Classic Right");
-  text_buttons_.insert(CLASSIC_BTN_LSTICK_UP, "Classic Left-Stick Up");
-  text_buttons_.insert(CLASSIC_BTN_LSTICK_DOWN, "Classic Left-Stick Down");
-  text_buttons_.insert(CLASSIC_BTN_LSTICK_LEFT, "Classic Left-Stick Left");
-  text_buttons_.insert(CLASSIC_BTN_LSTICK_RIGHT, "Classic Left-Stick Right");
-  text_buttons_.insert(CLASSIC_BTN_RSTICK_UP, "Classic Right-Stick Up");
-  text_buttons_.insert(CLASSIC_BTN_RSTICK_DOWN, "Classic Right-Stick Down");
-  text_buttons_.insert(CLASSIC_BTN_RSTICK_LEFT, "Classic Right-Stick Left");
-  text_buttons_.insert(CLASSIC_BTN_RSTICK_RIGHT, "Classic Right-Stick Right");
+  text_buttons_.insert(CLASSIC_BTN_MINUS, "Classic ⊖");
+  text_buttons_.insert(CLASSIC_BTN_PLUS, "Classic ⊕");
+  text_buttons_.insert(CLASSIC_BTN_HOME, "Classic ⌂");
+  text_buttons_.insert(CLASSIC_BTN_UP, "Classic ↑");
+  text_buttons_.insert(CLASSIC_BTN_DOWN, "Classic ↓");
+  text_buttons_.insert(CLASSIC_BTN_LEFT, "Classic ←");
+  text_buttons_.insert(CLASSIC_BTN_RIGHT, "Classic →");
+  text_buttons_.insert(CLASSIC_BTN_LSTICK_UP, "Classic Left-Stick ↑");
+  text_buttons_.insert(CLASSIC_BTN_LSTICK_DOWN, "Classic Left-Stick ↓");
+  text_buttons_.insert(CLASSIC_BTN_LSTICK_LEFT, "Classic Left-Stick ←");
+  text_buttons_.insert(CLASSIC_BTN_LSTICK_RIGHT, "Classic Left-Stick →");
+  text_buttons_.insert(CLASSIC_BTN_RSTICK_UP, "Classic Right-Stick ↑");
+  text_buttons_.insert(CLASSIC_BTN_RSTICK_DOWN, "Classic Right-Stick ↓");
+  text_buttons_.insert(CLASSIC_BTN_RSTICK_LEFT, "Classic Right-Stick ←");
+  text_buttons_.insert(CLASSIC_BTN_RSTICK_RIGHT, "Classic Right-Stick →");
   text_buttons_.insert(WIIMOTE_BTN_SHIFT_SHAKE, "Wiiremote Shift Shake");
   text_buttons_.insert(NUNCHUK_BTN_SHIFT_SHAKE, "Nunchuk Shift Shake");
 
   text_actions_.insert(WiimotedevShortcuts::WiimotedevActiveDeactive,
-                       tr("Active/deactive Wiiremote"));
+                       tr("Activate/Deactivate Wii Remote"));
   text_actions_.insert(WiimotedevShortcuts::PlayerNextTrack, tr("Next track"));
   text_actions_.insert(WiimotedevShortcuts::PlayerPreviousTrack,
                        tr("Previous track"));
@@ -243,7 +243,7 @@ QString WiimoteSettingsPage::GetReadableWiiremoteSequence(quint64 value) {
     for (int i = 0; i < (list.count() - 1); ++i) output += list.at(i) + " + ";
     output += list.last();
   } else
-    output = tr("Push Wiiremote button");
+    output = tr("Push Wii Remote button");
 
   return output;
 }

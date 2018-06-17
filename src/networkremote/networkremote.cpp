@@ -197,6 +197,10 @@ bool NetworkRemote::IpIsPrivate(const QHostAddress& address) {
       address.isInSubnet(QHostAddress::parseSubnet("192.168.0.0/16")) ||
       address.isInSubnet(QHostAddress::parseSubnet("172.16.0.0/12")) ||
       address.isInSubnet(QHostAddress::parseSubnet("10.0.0.0/8")) ||
+      // Private v4 range translated to v6
+      address.isInSubnet(QHostAddress::parseSubnet("::ffff:192.168.0.0/112")) ||
+      address.isInSubnet(QHostAddress::parseSubnet("::ffff:172.16.0.0/108")) ||
+      address.isInSubnet(QHostAddress::parseSubnet("::ffff:10.0.0.0/104")) ||
       // Private v6 range
       address.isInSubnet(QHostAddress::parseSubnet("fc00::/7"));
 }

@@ -196,7 +196,7 @@ void PlaylistManager::ItemsLoadedForSavePlaylist(QFuture<SongList> future,
   parser_->Save(future.result(), filename, path_type);
 }
 
-void PlaylistManager::SaveWithUI(int id, const QString& suggested_filename) {
+void PlaylistManager::SaveWithUI(int id, const QString& playlist_name) {
   QSettings settings;
   settings.beginGroup(Playlist::kSettingsGroup);
   QString filename = settings.value("last_save_playlist").toString();
@@ -205,10 +205,13 @@ void PlaylistManager::SaveWithUI(int id, const QString& suggested_filename) {
   QString filter =
       settings.value("last_save_filter", parser()->default_filter()).toString();
 
+  QString suggested_filename = playlist_name;
+  suggested_filename.replace(QRegExp("\\W"), "");
+
   qLog(Debug) << "Using extension:" << extension;
 
-  // We want to use the playlist tab name as a default filename, but in the
-  // same directory as the last saved file.
+  // We want to use the playlist tab name (with disallowed characters removed)
+  // as a default filename, but in the same directory as the last saved file.
 
   // Strip off filename components until we find something that's a folder
   forever {
@@ -233,6 +236,17 @@ void PlaylistManager::SaveWithUI(int id, const QString& suggested_filename) {
     return;
   }
 
+  // Check if the file extension is valid. Fallback to the default if not.
+  QFileInfo info(filename);
+  ParserBase* parser = parser_->ParserForExtension(info.suffix());
+  if (!parser) {
+    qLog(Warning) << "Unknown file extension:" << info.suffix();
+    filename = info.absolutePath() + "/" + info.fileName() + "." +
+               parser_->default_extension();
+    info.setFile(filename);
+    filter = info.suffix();
+  }
+
   int p = settings.value(Playlist::kPathType, Playlist::Path_Automatic).toInt();
   Playlist::Path path = static_cast<Playlist::Path>(p);
   if (path == Playlist::Path_Ask_User) {
@@ -246,7 +260,6 @@ void PlaylistManager::SaveWithUI(int id, const QString& suggested_filename) {
 
   settings.setValue("last_save_playlist", filename);
   settings.setValue("last_save_filter", filter);
-  QFileInfo info(filename);
   settings.setValue("last_save_extension", info.suffix());
 
   Save(id == -1 ? current_id() : id, filename, path);
@@ -479,6 +492,10 @@ void PlaylistManager::RemoveItemsWithoutUndo(int id,
   Q_ASSERT(playlists_.contains(id));
 
   playlists_[id].p->RemoveItemsWithoutUndo(indices);
+}
+
+void PlaylistManager::RemoveCurrentSong() {
+  active()->removeRows(active()->current_index().row(), 1);
 }
 
 void PlaylistManager::InvalidateDeletedSongs() {

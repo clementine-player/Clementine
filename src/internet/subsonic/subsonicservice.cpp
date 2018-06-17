@@ -29,6 +29,7 @@
 #include <QSortFilterProxyModel>
 #include <QSslConfiguration>
 #include <QXmlStreamReader>
+#include <QUrlQuery>
 
 #include "core/application.h"
 #include "core/closure.h"
@@ -241,10 +242,12 @@ void SubsonicService::Ping() {
 
 QUrl SubsonicService::BuildRequestUrl(const QString& view) const {
   QUrl url(working_server_ + "/rest/" + view + ".view");
-  url.addQueryItem("v", kApiVersion);
-  url.addQueryItem("c", kApiClientName);
-  url.addQueryItem("u", username_);
-  url.addQueryItem("p", QString("enc:" + password_.toUtf8().toHex()));
+  QUrlQuery url_query;
+  url_query.addQueryItem("v", kApiVersion);
+  url_query.addQueryItem("c", kApiClientName);
+  url_query.addQueryItem("u", username_);
+  url_query.addQueryItem("p", QString("enc:" + password_.toUtf8().toHex()));
+  url.setQuery(url_query);
   return url;
 }
 
@@ -538,7 +541,15 @@ void SubsonicLibraryScanner::OnGetAlbumFinished(QNetworkReply* reply) {
     qint64 length = reader.attributes().value("duration").toString().toInt();
     length *= kNsecPerSec;
     song.set_length_nanosec(length);
-    QUrl url = QUrl(QString("subsonic://%1").arg(id));
+    QUrl url = QUrl(QString("subsonic://"));
+    QUrlQuery song_query(url.query());
+    song_query.addQueryItem("id", id);
+    url.setQuery(song_query);
+    QUrl cover_url = service_->BuildRequestUrl("getCoverArt");
+    QUrlQuery cover_url_query(url.query());
+    cover_url_query.addQueryItem("id", id);
+    cover_url.setQuery(cover_url_query);
+    song.set_art_automatic(cover_url.toEncoded());
     song.set_url(url);
     song.set_filesize(reader.attributes().value("size").toString().toInt());
     // We need to set these to satisfy the database constraints
@@ -569,9 +580,11 @@ void SubsonicLibraryScanner::OnGetAlbumFinished(QNetworkReply* reply) {
 
 void SubsonicLibraryScanner::GetAlbumList(int offset) {
   QUrl url = service_->BuildRequestUrl("getAlbumList2");
-  url.addQueryItem("type", "alphabeticalByName");
-  url.addQueryItem("size", QString::number(kAlbumChunkSize));
-  url.addQueryItem("offset", QString::number(offset));
+  QUrlQuery url_query(url.query());
+  url_query.addQueryItem("type", "alphabeticalByName");
+  url_query.addQueryItem("size", QString::number(kAlbumChunkSize));
+  url_query.addQueryItem("offset", QString::number(offset));
+  url.setQuery(url_query);
   QNetworkReply* reply = service_->Send(url);
   NewClosure(reply, SIGNAL(finished()), this,
              SLOT(OnGetAlbumListFinished(QNetworkReply*, int)), reply, offset);
@@ -579,10 +592,12 @@ void SubsonicLibraryScanner::GetAlbumList(int offset) {
 
 void SubsonicLibraryScanner::GetAlbum(const QString& id) {
   QUrl url = service_->BuildRequestUrl("getAlbum");
-  url.addQueryItem("id", id);
+  QUrlQuery url_query(url.query());
+  url_query.addQueryItem("id", id);
   if (service_->IsAmpache()) {
-    url.addQueryItem("ampache", "1");
+    url_query.addQueryItem("ampache", "1");
   }
+  url.setQuery(url_query);
   QNetworkReply* reply = service_->Send(url);
   NewClosure(reply, SIGNAL(finished()), this,
              SLOT(OnGetAlbumFinished(QNetworkReply*)), reply);

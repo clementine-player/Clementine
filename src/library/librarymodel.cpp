@@ -109,7 +109,7 @@ LibraryModel::LibraryModel(LibraryBackend* backend, Application* app,
 
   QIcon nocover = IconLoader::Load("nocover", IconLoader::Other);
   no_cover_icon_ = nocover.pixmap(nocover.availableSizes().last()).scaled(
-                           kPrettyCoverSize, kPrettyCoverSize, 
+                           kPrettyCoverSize, kPrettyCoverSize,
                            Qt::KeepAspectRatio,
                            Qt::SmoothTransformation);
 
@@ -163,7 +163,8 @@ void LibraryModel::Init(bool async) {
         new LibraryItem(LibraryItem::Type_LoadingIndicator, root_);
     loading->display_text = tr("Loading...");
     loading->lazy_loaded = true;
-    reset();
+    beginResetModel();
+    endResetModel();
 
     // Show a loading indicator in the status bar too.
     init_task_id_ = app_->task_manager()->StartTask(tr("Loading songs"));
@@ -656,6 +657,9 @@ QVariant LibraryModel::data(const LibraryItem* item, int role) const {
 
     case Role_SortText:
       return item->SortText();
+
+    case Role_DisplayText:
+      return item->DisplayText(); 
   }
   return QVariant();
 }

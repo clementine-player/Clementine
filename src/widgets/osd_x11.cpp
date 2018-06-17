@@ -66,7 +66,7 @@ QDBusArgument& operator<<(QDBusArgument& arg, const QImage& image) {
   int channels = i.isGrayscale() ? 1 : (i.hasAlphaChannel() ? 4 : 3);
   arg << i.depth() / channels;
   arg << channels;
-  arg << QByteArray(reinterpret_cast<const char*>(i.bits()), i.numBytes());
+  arg << QByteArray(reinterpret_cast<const char*>(i.bits()), i.byteCount());
   arg.endStructure();
   return arg;
 }
@@ -110,6 +110,8 @@ void OSD::ShowMessageNative(const QString& summary, const QString& message,
   if (!image.isNull()) {
     hints["image_data"] = QVariant(image);
   }
+
+  hints["transient"] = QVariant(true);
 
   int id = 0;
   if (last_notification_time_.secsTo(QDateTime::currentDateTime()) * 1000 <

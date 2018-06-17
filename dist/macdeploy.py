@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python2
 
 #  This file is part of Clementine.
 #
@@ -15,6 +15,7 @@
 #  You should have received a copy of the GNU General Public License
 #  along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 
+from distutils import spawn
 import logging
 import os
 import re
@@ -22,19 +23,16 @@ import subprocess
 import sys
 import traceback
 
-LOGGER = logging.getLogger("macdeploy")
+LOGGER = logging.getLogger('macdeploy')
 
-FRAMEWORK_SEARCH_PATH=[
-    '/target',
-    '/target/lib',
-    '/Library/Frameworks',
+FRAMEWORK_SEARCH_PATH = [
+    '/target', '/target/lib', '/Library/Frameworks',
     os.path.join(os.environ['HOME'], 'Library/Frameworks')
 ]
 
-LIBRARY_SEARCH_PATH=['/target/lib', '/usr/local/lib', '/sw/lib']
+LIBRARY_SEARCH_PATH = ['/target', '/target/lib', '/usr/local/lib', '/sw/lib']
 
-
-GSTREAMER_PLUGINS=[
+GSTREAMER_PLUGINS = [
     # Core plugins
     'libgstapp.so',
     'libgstaudioconvert.so',
@@ -74,6 +72,7 @@ GSTREAMER_PLUGINS=[
     'libgstvorbis.so',
     'libgstwavpack.so',
     'libgstwavparse.so',
+    'libgstxingmux.so',
 
     # HTTP src support
     'libgstsouphttpsrc.so',
@@ -89,7 +88,7 @@ GSTREAMER_PLUGINS=[
     'libgstrtsp.so',
 ]
 
-GSTREAMER_SEARCH_PATH=[
+GSTREAMER_SEARCH_PATH = [
     '/target/lib/gstreamer-1.0',
     '/target/libexec/gstreamer-1.0',
 ]
@@ -107,15 +106,22 @@ QT_PLUGINS = [
     'imageformats/libqmng.dylib',
     'imageformats/libqsvg.dylib',
 ]
-QT_PLUGINS_SEARCH_PATH=[
+QT_PLUGINS_SEARCH_PATH = [
     '/target/plugins',
     '/usr/local/Trolltech/Qt-4.7.0/plugins',
     '/Developer/Applications/Qt/plugins',
 ]
 
-GIO_MODULES_SEARCH_PATH=[
-    '/target/lib/gio/modules',
-]
+GIO_MODULES_SEARCH_PATH = ['/target/lib/gio/modules',]
+
+INSTALL_NAME_TOOL_APPLE = 'install_name_tool'
+INSTALL_NAME_TOOL_CROSS = 'x86_64-apple-darwin-%s' % INSTALL_NAME_TOOL_APPLE
+INSTALL_NAME_TOOL = INSTALL_NAME_TOOL_CROSS if spawn.find_executable(
+    INSTALL_NAME_TOOL_CROSS) else INSTALL_NAME_TOOL_APPLE
+
+OTOOL_APPLE = 'otool'
+OTOOL_CROSS = 'x86_64-apple-darwin-%s' % OTOOL_APPLE
+OTOOL = OTOOL_CROSS if spawn.find_executable(OTOOL_CROSS) else OTOOL_APPLE
 
 
 class Error(Exception):
@@ -150,7 +156,6 @@ class CouldNotParseFrameworkNameError(Error):
   pass
 
 
-
 if len(sys.argv) < 2:
   print 'Usage: %s <bundle.app>' % sys.argv[0]
 
@@ -170,11 +175,11 @@ binary = os.path.join(bundle_dir, 'Contents', 'MacOS', bundle_name)
 fixed_libraries = set()
 fixed_frameworks = set()
 
+
 def GetBrokenLibraries(binary):
-  output = subprocess.Popen(['otool', '-L', binary], stdout=subprocess.PIPE).communicate()[0]
-  broken_libs = {
-      'frameworks': [],
-      'libs': []}
+  output = subprocess.Popen(
+      [OTOOL, '-L', binary], stdout=subprocess.PIPE).communicate()[0]
+  broken_libs = {'frameworks': [], 'libs': []}
   for line in [x.split(' ')[0].lstrip() for x in output.split('\n')[1:]]:
     if not line:  # skip empty lines
       continue
@@ -186,7 +191,8 @@ def GetBrokenLibraries(binary):
       continue  # unix style system library
     elif re.match(r'Breakpad', line):
       continue  # Manually added by cmake.
-    elif re.match(r'^\s*@executable_path', line) or re.match(r'^\s*@loader_path', line):
+    elif re.match(r'^\s*@executable_path', line) or re.match(
+        r'^\s*@loader_path', line):
       # Potentially already fixed library
       relative_path = os.path.join(*line.split('/')[3:])
       if not os.path.exists(os.path.join(frameworks_dir, relative_path)):
@@ -198,6 +204,7 @@ def GetBrokenLibraries(binary):
 
   return broken_libs
 
+
 def FindFramework(path):
   for search_path in FRAMEWORK_SEARCH_PATH:
     abs_path = os.path.join(search_path, path)
@@ -206,6 +213,7 @@ def FindFramework(path):
       return abs_path
 
   raise CouldNotFindFrameworkError(path)
+
 
 def FindLibrary(path):
   if os.path.exists(path):
@@ -218,11 +226,13 @@ def FindLibrary(path):
 
   raise CouldNotFindFrameworkError(path)
 
+
 def FixAllLibraries(broken_libs):
   for framework in broken_libs['frameworks']:
     FixFramework(framework)
   for lib in broken_libs['libs']:
     FixLibrary(lib)
+
 
 def FixFramework(path):
   if path in fixed_frameworks:
@@ -241,8 +251,10 @@ def FixFramework(path):
   for library in broken_libs['libs']:
     FixLibraryInstallPath(library, new_path)
 
+
 def FixLibrary(path):
-  if path in fixed_libraries or FindSystemLibrary(os.path.basename(path)) is not None:
+  if path in fixed_libraries or FindSystemLibrary(os.path.basename(
+      path)) is not None:
     return
   else:
     fixed_libraries.add(path)
@@ -257,6 +269,7 @@ def FixLibrary(path):
   for library in broken_libs['libs']:
     FixLibraryInstallPath(library, new_path)
 
+
 def FixPlugin(abs_path, subdir):
   broken_libs = GetBrokenLibraries(abs_path)
   FixAllLibraries(broken_libs)
@@ -267,6 +280,7 @@ def FixPlugin(abs_path, subdir):
   for library in broken_libs['libs']:
     FixLibraryInstallPath(library, new_path)
 
+
 def FixBinary(path):
   broken_libs = GetBrokenLibraries(path)
   FixAllLibraries(broken_libs)
@@ -275,26 +289,29 @@ def FixBinary(path):
   for library in broken_libs['libs']:
     FixLibraryInstallPath(library, path)
 
+
 def CopyLibrary(path):
   new_path = os.path.join(frameworks_dir, os.path.basename(path))
-  args = ['ditto', '--arch=x86_64', path, new_path]
+  args = ['cp', path, new_path]
   commands.append(args)
   LOGGER.info("Copying library '%s'", path)
   return new_path
+
 
 def CopyPlugin(path, subdir):
   new_path = os.path.join(plugins_dir, subdir, os.path.basename(path))
   args = ['mkdir', '-p', os.path.dirname(new_path)]
   commands.append(args)
-  args = ['ditto', '--arch=x86_64', path, new_path]
+  args = ['cp', path, new_path]
   commands.append(args)
   LOGGER.info("Copying plugin '%s'", path)
   return new_path
 
+
 def CopyFramework(src_binary):
   while os.path.islink(src_binary):
     src_binary = os.path.realpath(src_binary)
-    
+
   m = re.match(r'(.*/([^/]+)\.framework)/Versions/([^/]+)/.*', src_binary)
   if not m:
     raise CouldNotParseFrameworkNameError(src_binary)
@@ -303,14 +320,14 @@ def CopyFramework(src_binary):
   name = m.group(2)
   version = m.group(3)
 
-  LOGGER.info("Copying framework %s version %s", name, version)
+  LOGGER.info('Copying framework %s version %s', name, version)
 
   dest_base = os.path.join(frameworks_dir, '%s.framework' % name)
   dest_dir = os.path.join(dest_base, 'Versions', version)
   dest_binary = os.path.join(dest_dir, name)
 
   commands.append(['mkdir', '-p', dest_dir])
-  commands.append(['ditto', '--arch=x86_64', src_binary, dest_binary])
+  commands.append(['cp', src_binary, dest_binary])
 
   # Copy special files from various places:
   #   QtCore has Resources/qt_menu.nib (copy to app's Resources)
@@ -334,33 +351,38 @@ def CopyFramework(src_binary):
 
   # Create symlinks in the Framework to make it look like
   # https://developer.apple.com/library/mac/documentation/MacOSX/Conceptual/BPFrameworks/Concepts/FrameworkAnatomy.html
-  commands.append(['ln', '-sfh',
-      'Versions/Current/%s' % name,
-      os.path.join(dest_base, name)])
-  commands.append(['ln', '-sfh',
-      'Versions/Current/Resources',
-      os.path.join(dest_base, 'Resources')])
-  commands.append(['ln', '-sfh',
-      version,
-      os.path.join(dest_base, 'Versions/Current')])
+  commands.append([
+      'ln', '-sf', 'Versions/Current/%s' % name, os.path.join(dest_base, name)
+  ])
+  commands.append([
+      'ln', '-sf', 'Versions/Current/Resources',
+      os.path.join(dest_base, 'Resources')
+  ])
+  commands.append(
+      ['ln', '-sf', version, os.path.join(dest_base, 'Versions/Current')])
 
   return dest_binary
 
+
 def FixId(path, library_name):
   id = '@executable_path/../Frameworks/%s' % library_name
-  args = ['install_name_tool', '-id', id, path]
+  args = [INSTALL_NAME_TOOL, '-id', id, path]
   commands.append(args)
+
 
 def FixLibraryId(path):
   library_name = os.path.basename(path)
   FixId(path, library_name)
 
+
 def FixFrameworkId(path, id):
   FixId(path, id)
 
+
 def FixInstallPath(library_path, library, new_path):
-  args = ['install_name_tool', '-change', library_path, new_path, library]
+  args = [INSTALL_NAME_TOOL, '-change', library_path, new_path, library]
   commands.append(args)
+
 
 def FindSystemLibrary(library_name):
   for path in ['/lib', '/usr/lib']:
@@ -369,13 +391,16 @@ def FindSystemLibrary(library_name):
       return full_path
   return None
 
+
 def FixLibraryInstallPath(library_path, library):
   system_library = FindSystemLibrary(os.path.basename(library_path))
   if system_library is None:
-    new_path = '@executable_path/../Frameworks/%s' % os.path.basename(library_path)
+    new_path = '@executable_path/../Frameworks/%s' % os.path.basename(
+        library_path)
     FixInstallPath(library_path, library, new_path)
   else:
     FixInstallPath(library_path, library, system_library)
+
 
 def FixFrameworkInstallPath(library_path, library):
   parts = library_path.split(os.sep)
@@ -385,6 +410,7 @@ def FixFrameworkInstallPath(library_path, library):
       break
   new_path = '@executable_path/../Frameworks/%s' % full_path
   FixInstallPath(library_path, library, new_path)
+
 
 def FindXinePlugin(name):
   for path in XINEPLUGIN_SEARCH_PATH:
@@ -422,8 +448,10 @@ def FindGioModule(name):
 
 
 def main():
-  logging.basicConfig(filename="macdeploy.log", level=logging.DEBUG,
-                      format='%(asctime)s %(levelname)-8s %(message)s')
+  logging.basicConfig(
+      filename='macdeploy.log',
+      level=logging.DEBUG,
+      format='%(asctime)s %(levelname)-8s %(message)s')
 
   FixBinary(binary)
 

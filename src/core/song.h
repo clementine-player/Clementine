@@ -101,6 +101,7 @@ class Song {
     Type_TrueAudio = 11,
     Type_Cdda = 12,
     Type_OggOpus = 13,
+    Type_WavPack = 14,
     Type_Stream = 99,
   };
   static QString TextForFiletype(FileType type);
@@ -160,6 +161,7 @@ class Song {
 
   const QString& title() const;
   const QString& album() const;
+  const QString& effective_album() const;
   const QString& artist() const;
   const QString& albumartist() const;
   const QString& effective_albumartist() const;
