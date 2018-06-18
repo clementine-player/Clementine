@@ -21,9 +21,17 @@
 #include <QMimeData>
 #include <QtDebug>
 
+#include "core/utilities.h"
+
 const char* Queue::kRowsMimetype = "application/x-clementine-queue-rows";
 
-Queue::Queue(QObject* parent) : QAbstractProxyModel(parent) {}
+Queue::Queue(Playlist* parent)
+    : QAbstractProxyModel(parent), playlist_(parent), total_length_ns_(0) {
+  connect(this, SIGNAL(ItemCountChanged(int)), SLOT(UpdateTotalLength()));
+  connect(this, SIGNAL(TotalLengthChanged(quint64)), SLOT(UpdateSummaryText()));
+
+  UpdateSummaryText();
+}
 
 QModelIndex Queue::mapFromSource(const QModelIndex& source_index) const {
   if (!source_index.isValid()) return QModelIndex();
@@ -77,6 +85,7 @@ void Queue::SourceDataChanged(const QModelIndex& top_left,
 
     emit dataChanged(proxy_index, proxy_index);
   }
+  emit ItemCountChanged(this->ItemCount());
 }
 
 void Queue::SourceLayoutChanged() {
@@ -89,6 +98,7 @@ void Queue::SourceLayoutChanged() {
       --i;
     }
   }
+  emit ItemCountChanged(this->ItemCount());
 }
 
 QModelIndex Queue::index(int row, int column, const QModelIndex& parent) const {
@@ -179,6 +189,41 @@ int Queue::PositionOf(const QModelIndex& source_index) const {
 }
 
 bool Queue::is_empty() const { return source_indexes_.isEmpty(); }
+
+int Queue::ItemCount() const { return source_indexes_.length(); }
+
+quint64 Queue::GetTotalLength() const { return total_length_ns_; }
+
+void Queue::UpdateTotalLength() {
+  quint64 total = 0;
+
+  for (QPersistentModelIndex row : source_indexes_) {
+    int id = row.row();
+
+    Q_ASSERT(playlist_->has_item_at(id));
+
+    quint64 length = playlist_->item_at(id)->Metadata().length_nanosec();
+    if (length > 0) total += length;
+  }
+
+  total_length_ns_ = total;
+
+  emit TotalLengthChanged(total);
+}
+
+void Queue::UpdateSummaryText() {
+  QString summary;
+  int tracks = this->ItemCount();
+  quint64 nanoseconds = this->GetTotalLength();
+
+  // TODO: Make the plurals translatable
+  summary += tracks == 1 ? tr("1 track") : tr("%1 tracks").arg(tracks);
+
+  if (nanoseconds)
+    summary += " - [ " + Utilities::WordyTimeNanosec(nanoseconds) + " ]";
+
+  emit SummaryTextChanged(summary);
+}
 
 void Queue::Clear() {
   if (source_indexes_.isEmpty()) return;

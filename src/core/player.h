@@ -110,7 +110,7 @@ signals:
 
   // The toggle parameter is true when user requests to toggle visibility for
   // Pretty OSD
-  void ForceShowOSD(Song, bool toogle);
+  void ForceShowOSD(Song, bool toggle);
 };
 
 class Player : public PlayerInterface {

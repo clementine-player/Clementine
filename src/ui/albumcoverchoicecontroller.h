@@ -96,6 +96,7 @@ class AlbumCoverChoiceController : public QWidget {
 
   // Shows the cover of given song in it's original size.
   void ShowCover(const Song& song);
+  bool ToggleCover(const Song& song);
 
   // Search for covers automatically
   void SearchCoverAutomatically(const Song& song);
@@ -113,14 +114,16 @@ class AlbumCoverChoiceController : public QWidget {
 
   static bool CanAcceptDrag(const QDragEnterEvent* e);
 
-signals:
+ signals:
   void AutomaticCoverSearchDone();
 
  private slots:
   void AlbumCoverFetched(quint64 id, const QImage& image,
                          const CoverSearchStatistics& statistics);
+  void AlbumCoverPopupClosed();
 
  private:
+  QDialog* ShowCoverPrivate(const Song& song);
   QString GetInitialPathForFileDialog(const Song& song,
                                       const QString& filename);
 
@@ -144,6 +147,8 @@ signals:
   QAction* search_cover_auto_;
 
   QMap<quint64, Song> cover_fetching_tasks_;
+
+  QDialog* album_cover_popup_;
 };
 
 #endif  // ALBUMCOVERCHOICECONTROLLER_H

@@ -641,7 +641,7 @@ void NowPlayingWidget::UnsetCover() {
 }
 
 void NowPlayingWidget::ShowCover() {
-  album_cover_choice_controller_->ShowCover(metadata_);
+  album_cover_choice_controller_->ToggleCover(metadata_);
 }
 
 void NowPlayingWidget::SearchCoverAutomatically() {
