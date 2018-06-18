@@ -437,6 +437,8 @@ QString Song::TextForFiletype(FileType type) {
       return QObject::tr("CDDA");
     case Song::Type_Spc:
       return QObject::tr("SNES SPC700");
+    case Song::Type_VGM:
+      return QObject::tr("VGM");
 
     case Song::Type_Stream:
       return QObject::tr("Stream");
