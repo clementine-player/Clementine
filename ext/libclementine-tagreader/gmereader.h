@@ -46,6 +46,26 @@ void Read(const QFileInfo& file_info, pb::tagreader::SongMetadata* song_info);
 qint16 GetNextMemAddressAlign32bit(qint16 input);
 quint64 ConvertSPCStringToNum(const QByteArray& arr);
 }  // namespace SPC
+
+namespace VGM {
+/* VGM SPEC:
+ * http://www.smspower.org/uploads/Music/vgmspec170.txt?sid=17c810c54633b6dd4982f92f718361c1
+ * GD3 TAG SPEC:
+ * http://www.smspower.org/uploads/Music/gd3spec100.txt */
+const int GD3_TAG_PTR = 0x14;
+const int SAMPLE_COUNT = 0x18;
+const int LOOP_SAMPLE_COUNT = 0x20;
+const int SAMPLE_TIMEBASE = 44100;
+const int GST_GME_LOOP_TIME_MS = 8000;
+
+void Read(const QFileInfo& file_info, pb::tagreader::SongMetadata* song_info);
+/* Takes in two QByteArrays, expected to be 4 bytes long. Desired length
+ * is returned via output parameter out_length. Returns false on error. */
+bool GetPlaybackLength(const QByteArray& sample_count_bytes,
+                       const QByteArray& loop_count_bytes, quint64& out_length);
+
+}  // namespace VGM
+
 }  // namespace GME
 
 #endif
