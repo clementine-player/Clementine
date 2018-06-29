@@ -73,6 +73,8 @@ void QueueManager::CurrentPlaylistChanged(Playlist* playlist) {
                SLOT(UpdateButtonState()));
     disconnect(current_playlist_->queue(), SIGNAL(layoutChanged()), this,
                SLOT(UpdateButtonState()));
+    disconnect(current_playlist_->queue(), SIGNAL(SummaryTextChanged(QString)),
+               ui_->queue_summary, SLOT(setText(QString)));
     disconnect(current_playlist_, SIGNAL(destroyed()), this,
                SLOT(PlaylistDestroyed()));
   }
@@ -87,6 +89,8 @@ void QueueManager::CurrentPlaylistChanged(Playlist* playlist) {
           SLOT(UpdateButtonState()));
   connect(current_playlist_->queue(), SIGNAL(layoutChanged()), this,
           SLOT(UpdateButtonState()));
+  connect(current_playlist_->queue(), SIGNAL(SummaryTextChanged(QString)),
+          ui_->queue_summary, SLOT(setText(QString)));
   connect(current_playlist_, SIGNAL(destroyed()), this,
           SLOT(PlaylistDestroyed()));
 
@@ -95,6 +99,8 @@ void QueueManager::CurrentPlaylistChanged(Playlist* playlist) {
   connect(ui_->list->selectionModel(),
           SIGNAL(currentChanged(QModelIndex, QModelIndex)),
           SLOT(UpdateButtonState()));
+
+  QTimer::singleShot(0, current_playlist_->queue(), SLOT(UpdateSummaryText()));
 }
 
 void QueueManager::MoveUp() {

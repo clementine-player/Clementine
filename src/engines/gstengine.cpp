@@ -58,6 +58,10 @@
 #include "engines/pulsedevicefinder.h"
 #endif
 
+#ifdef HAVE_ALSA
+#include "engines/alsadevicefinder.h"
+#endif
+
 #ifdef Q_OS_DARWIN
 #include "engines/osxdevicefinder.h"
 #endif
@@ -76,6 +80,7 @@
 #endif
 
 using std::shared_ptr;
+using std::unique_ptr;
 using std::vector;
 
 const char* GstEngine::kSettingsGroup = "GstEngine";
@@ -158,10 +163,23 @@ void GstEngine::InitialiseGstreamer() {
     plugin_names.insert(plugin.name);
   }
 
-  QList<DeviceFinder*> device_finders;
+  bool pa(false);
 #ifdef HAVE_LIBPULSE
-  device_finders.append(new PulseDeviceFinder);
+  unique_ptr<DeviceFinder> finder_pulse(new PulseDeviceFinder);
+  if (plugin_names.contains(finder_pulse->gstreamer_sink()) &&
+      finder_pulse->Initialise()) {
+    pa = true;
+    device_finders_.append(finder_pulse.release());
+  }
 #endif
+
+  QList<DeviceFinder*> device_finders;
+  if (!pa) {  // Only add alsa devices if pulseaudio is not enabled to avoid
+              // confusion.
+#ifdef HAVE_ALSA
+    device_finders.append(new AlsaDeviceFinder);
+#endif
+  }
 #ifdef Q_OS_DARWIN
   device_finders.append(new OsxDeviceFinder);
 #endif
@@ -759,7 +777,7 @@ GstElement* GstEngine::CreateElement(const QString& factoryName,
                    "GStreamer could not create the element: %1.  "
                    "Please make sure that you have installed all necessary "
                    "GStreamer plugins (e.g. OGG and MP3)").arg(factoryName));
-    gst_object_unref(GST_OBJECT(bin));
+    if (bin) gst_object_unref(GST_OBJECT(bin));
     return nullptr;
   }
 
@@ -933,6 +951,7 @@ GstEngine::OutputDetailsList GstEngine::GetOutputsList() const {
   OutputDetails default_output;
   default_output.description = tr("Choose automatically");
   default_output.gstreamer_plugin_name = kAutoSink;
+  default_output.device_property_value = QString("");
   ret.append(default_output);
 
   for (DeviceFinder* finder : device_finders_) {
@@ -958,6 +977,7 @@ GstEngine::OutputDetailsList GstEngine::GetOutputsList() const {
       OutputDetails output;
       output.description = tr("Default device on %1").arg(plugin.description);
       output.gstreamer_plugin_name = plugin.name;
+      output.device_property_value = QString("");
       ret.append(output);
     }
   }

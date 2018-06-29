@@ -1,10 +1,11 @@
 #ifndef INCOMINGDATAPARSER_H
 #define INCOMINGDATAPARSER_H
 
-#include "core/player.h"
 #include "core/application.h"
-#include "remotecontrolmessages.pb.h"
+#include "core/player.h"
 #include "remoteclient.h"
+#include "remotecontrolmessages.pb.h"
+#include "ui/mainwindow.h"
 
 class IncomingDataParser : public QObject {
   Q_OBJECT
@@ -16,8 +17,9 @@ class IncomingDataParser : public QObject {
 
  public slots:
   void Parse(const pb::remote::Message& msg);
+  void ReloadSettings();
 
-signals:
+ signals:
   void SendClementineInfo();
   void SendFirstData(bool send_playlist_songs);
   void SendAllPlaylists();
@@ -38,6 +40,7 @@ signals:
   void Previous();
   void SetVolume(int volume);
   void PlayAt(int i, Engine::TrackChangeFlags change, bool reshuffle);
+  void Enque(int id, int i);
   void SetActivePlaylist(int id);
   void ShuffleCurrent();
   void SetRepeatMode(PlaylistSequence::RepeatMode mode);
@@ -56,6 +59,7 @@ signals:
  private:
   Application* app_;
   bool close_connection_;
+  MainWindow::PlaylistAddBehaviour doubleclick_playlist_addmode_;
 
   void GetPlaylistSongs(const pb::remote::Message& msg);
   void ChangeSong(const pb::remote::Message& msg);

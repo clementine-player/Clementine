@@ -97,7 +97,8 @@ class SubsonicService : public InternetService {
 
   void Login();
   void Login(const QString& server, const QString& username,
-             const QString& password, const bool& usesslv3);
+             const QString& password, const bool& usesslv3,
+             const bool& verifycert);
 
   LoginState login_state() const { return login_state_; }
 
@@ -154,6 +155,7 @@ signals:
   QString username_;
   QString password_;
   bool usesslv3_;
+  bool verifycert_;
 
   LoginState login_state_;
   QString working_server_;  // The actual server, possibly post-redirect

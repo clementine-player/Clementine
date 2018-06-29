@@ -84,6 +84,8 @@ class PlaylistManagerInterface : public QObject {
   virtual void Open(int id) = 0;
   virtual void ChangePlaylistOrder(const QList<int>& ids) = 0;
 
+  virtual void Enque(int id, int index) = 0;
+
   virtual void SongChangeRequestProcessed(const QUrl& url, bool valid) = 0;
 
   virtual void SetCurrentPlaylist(int id) = 0;
@@ -191,6 +193,8 @@ class PlaylistManager : public PlaylistManagerInterface {
   bool Close(int id);
   void Open(int id);
   void ChangePlaylistOrder(const QList<int>& ids);
+
+  void Enque(int id, int index);
 
   void SetCurrentPlaylist(int id);
   void SetActivePlaylist(int id);

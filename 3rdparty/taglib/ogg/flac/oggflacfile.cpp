@@ -27,6 +27,7 @@
 #include <tstring.h>
 #include <tdebug.h>
 #include <tpropertymap.h>
+#include <tagutils.h>
 
 #include <xiphcomment.h>
 #include "oggflacfile.h"
@@ -66,21 +67,35 @@ public:
 };
 
 ////////////////////////////////////////////////////////////////////////////////
+// static members
+////////////////////////////////////////////////////////////////////////////////
+
+bool Ogg::FLAC::File::isSupported(IOStream *stream)
+{
+  // An Ogg FLAC file has IDs "OggS" and "fLaC" somewhere.
+
+  const ByteVector buffer = Utils::readHeader(stream, bufferSize(), false);
+  return (buffer.find("OggS") >= 0 && buffer.find("fLaC") >= 0);
+}
+
+////////////////////////////////////////////////////////////////////////////////
 // public members
 ////////////////////////////////////////////////////////////////////////////////
 
 Ogg::FLAC::File::File(FileName file, bool readProperties,
-                      Properties::ReadStyle propertiesStyle) : Ogg::File(file)
+                      Properties::ReadStyle propertiesStyle) :
+  Ogg::File(file),
+  d(new FilePrivate())
 {
-  d = new FilePrivate;
   if(isOpen())
     read(readProperties, propertiesStyle);
 }
 
 Ogg::FLAC::File::File(IOStream *stream, bool readProperties,
-                      Properties::ReadStyle propertiesStyle) : Ogg::File(stream)
+                      Properties::ReadStyle propertiesStyle) :
+  Ogg::File(stream),
+  d(new FilePrivate())
 {
-  d = new FilePrivate;
   if(isOpen())
     read(readProperties, propertiesStyle);
 }
@@ -172,7 +187,7 @@ void Ogg::FLAC::File::read(bool readProperties, Properties::ReadStyle properties
   if(d->hasXiphComment)
     d->comment = new Ogg::XiphComment(xiphCommentData());
   else
-    d->comment = new Ogg::XiphComment;
+    d->comment = new Ogg::XiphComment();
 
 
   if(readProperties)

@@ -21,7 +21,6 @@
 #include <QDir>
 #include <QPair>
 #include <QRegExp>
-#include <QUuid>
 
 #include "bufferconsumer.h"
 #include "config.h"
@@ -157,8 +156,9 @@ bool GstEnginePipeline::ReplaceDecodeBin(const QUrl& url) {
 
     // Create elements
     GstElement* src = engine_->CreateElement("tcpserversrc", new_bin);
+    if (!src) return false;
     GstElement* gdp = engine_->CreateElement("gdpdepay", new_bin);
-    if (!src || !gdp) return false;
+    if (!gdp) return false;
 
     // Pick a port number
     const int port = Utilities::PickUnusedPort();
@@ -190,6 +190,7 @@ bool GstEnginePipeline::ReplaceDecodeBin(const QUrl& url) {
       uri = url.toEncoded();
     }
     new_bin = engine_->CreateElement("uridecodebin");
+    if (!new_bin) return false;
     g_object_set(G_OBJECT(new_bin), "uri", uri.constData(), nullptr);
     CHECKED_GCONNECT(G_OBJECT(new_bin), "drained", &SourceDrainedCallback,
                      this);
@@ -258,14 +259,11 @@ bool GstEnginePipeline::Init() {
         g_object_set(G_OBJECT(audiosink_), "device",
                      device_.toString().toUtf8().constData(), nullptr);
         break;
-
-#ifdef Q_OS_WIN32
       case QVariant::ByteArray: {
-        GUID guid = QUuid(device_.toByteArray());
-        g_object_set(G_OBJECT(audiosink_), "device", &guid, nullptr);
+        g_object_set(G_OBJECT(audiosink_), "device",
+                     device_.toByteArray().constData(), nullptr);
         break;
       }
-#endif  // Q_OS_WIN32
 
       default:
         qLog(Warning) << "Unknown device type" << device_;
