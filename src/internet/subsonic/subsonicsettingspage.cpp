@@ -45,6 +45,7 @@ SubsonicSettingsPage::SubsonicSettingsPage(SettingsDialog* dialog)
   ui_->login_state->AddCredentialField(ui_->username);
   ui_->login_state->AddCredentialField(ui_->password);
   ui_->login_state->AddCredentialField(ui_->usesslv3);
+  ui_->login_state->AddCredentialField(ui_->verifycert);
   ui_->login_state->AddCredentialGroup(ui_->server_group);
 
   ui_->login_state->SetAccountTypeText(
@@ -63,6 +64,7 @@ void SubsonicSettingsPage::Load() {
   ui_->username->setText(s.value("username").toString());
   ui_->password->setText(s.value("password").toString());
   ui_->usesslv3->setChecked(s.value("usesslv3").toBool());
+  ui_->verifycert->setChecked(s.value("verifycert", true).toBool());
 
   // If the settings are complete, SubsonicService will have used them already
   // and
@@ -80,6 +82,7 @@ void SubsonicSettingsPage::Save() {
   s.setValue("username", ui_->username->text());
   s.setValue("password", ui_->password->text());
   s.setValue("usesslv3", ui_->usesslv3->isChecked());
+  s.setValue("verifycert", ui_->verifycert->isChecked());
 }
 
 void SubsonicSettingsPage::LoginStateChanged(
@@ -190,7 +193,8 @@ void SubsonicSettingsPage::ServerEditingFinished() {
 void SubsonicSettingsPage::Login() {
   ui_->login_state->SetLoggedIn(LoginStateWidget::LoginInProgress);
   service_->Login(ui_->server->text(), ui_->username->text(),
-                  ui_->password->text(), ui_->usesslv3->isChecked());
+                  ui_->password->text(), ui_->usesslv3->isChecked(),
+                  ui_->verifycert->isChecked());
 }
 
 void SubsonicSettingsPage::Logout() {

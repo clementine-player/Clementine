@@ -12,7 +12,7 @@ def main():
       description='Reformats C++ source files that have changed from a given '
                   'git ref.')
   parser.add_argument('--url',
-      default='http://clang.clementine-player.org/format',
+      default='https://clang.clementine-player.org/format',
       help='a URL of a Clang-in-the-cloud service')
   parser.add_argument('--ref', default='origin/master',
       help='the git-ref to compare against')

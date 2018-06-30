@@ -15,17 +15,17 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "fileview.h"
-#include "ui_fileview.h"
 #include "core/deletefiles.h"
 #include "core/filesystemmusicstorage.h"
 #include "core/mimedata.h"
+#include "fileview.h"
 #include "ui/iconloader.h"
 #include "ui/mainwindow.h"  // for filter information
 #include "ui/organiseerrordialog.h"
+#include "ui_fileview.h"
 
-#include <QKeyEvent>
 #include <QFileSystemModel>
+#include <QKeyEvent>
 #include <QMessageBox>
 #include <QScrollBar>
 
@@ -33,7 +33,7 @@ const char* FileView::kFileFilter =
     "*.mp3 *.ogg *.flac *.mpc *.m4a *.m4b *.aac *.wma "
     "*.mp4 *.spx *.wav *.m3u *.m3u8 *.pls *.xspf "
     "*.asx *.asxini *.cue *.ape *.wv *.mka *.opus "
-    "*.oga *.mka *.mp2";
+    "*.oga *.mka *.mp2 *.spc *.vgm";
 
 FileView::FileView(QWidget* parent)
     : QWidget(parent),

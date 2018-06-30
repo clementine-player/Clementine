@@ -15,11 +15,6 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "playlistbackend.h"
-#include "playlistcontainer.h"
-#include "playlistmanager.h"
-#include "playlistsaveoptionsdialog.h"
-#include "playlistview.h"
 #include "core/application.h"
 #include "core/logging.h"
 #include "core/player.h"
@@ -27,7 +22,13 @@
 #include "core/utilities.h"
 #include "library/librarybackend.h"
 #include "library/libraryplaylistitem.h"
+#include "playlistbackend.h"
+#include "playlistcontainer.h"
+#include "playlistmanager.h"
 #include "playlistparsers/playlistparser.h"
+#include "playlistsaveoptionsdialog.h"
+#include "playlistview.h"
+#include "queue.h"
 #include "smartplaylists/generator.h"
 
 #include <QFileDialog>
@@ -395,6 +396,15 @@ void PlaylistManager::RateCurrentSong(int rating) {
 
 void PlaylistManager::ChangePlaylistOrder(const QList<int>& ids) {
   playlist_backend_->SetPlaylistOrder(ids);
+}
+
+void PlaylistManager::Enque(int id, int i) {
+  QModelIndexList dummyIndexList;
+
+  Q_ASSERT(playlists_.contains(id));
+
+  dummyIndexList.append(playlist(id)->index(i, 0));
+  playlist(id)->queue()->ToggleTracks(dummyIndexList);
 }
 
 void PlaylistManager::UpdateSummaryText() {

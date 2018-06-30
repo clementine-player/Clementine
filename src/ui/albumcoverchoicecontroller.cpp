@@ -56,7 +56,8 @@ AlbumCoverChoiceController::AlbumCoverChoiceController(QWidget* parent)
       cover_searcher_(nullptr),
       cover_fetcher_(nullptr),
       save_file_dialog_(nullptr),
-      cover_from_url_dialog_(nullptr) {
+      cover_from_url_dialog_(nullptr),
+      album_cover_popup_(nullptr) {
   cover_from_file_ =
       new QAction(IconLoader::Load("document-open", IconLoader::Base),
                   tr("Load cover from disk..."), this);
@@ -204,7 +205,27 @@ QString AlbumCoverChoiceController::UnsetCover(Song* song) {
   return cover;
 }
 
+bool AlbumCoverChoiceController::ToggleCover(const Song& song) {
+  if (album_cover_popup_ != nullptr) {
+    album_cover_popup_->accept();
+    album_cover_popup_ = nullptr;
+    return false;
+  }
+
+  album_cover_popup_ = ShowCoverPrivate(song);
+
+  // keep track of our window to prevent endless stacking
+  connect(album_cover_popup_, SIGNAL(finished(int)), this,
+          SLOT(AlbumCoverPopupClosed()));
+
+  return true;
+}
+
 void AlbumCoverChoiceController::ShowCover(const Song& song) {
+  ShowCoverPrivate(song);
+}
+
+QDialog* AlbumCoverChoiceController::ShowCoverPrivate(const Song& song) {
   QDialog* dialog = new QDialog(this);
   dialog->setAttribute(Qt::WA_DeleteOnClose, true);
 
@@ -246,6 +267,12 @@ void AlbumCoverChoiceController::ShowCover(const Song& song) {
   dialog->setWindowTitle(title_text);
   dialog->setFixedSize(label->pixmap()->size());
   dialog->show();
+
+  return dialog;
+}
+
+void AlbumCoverChoiceController::AlbumCoverPopupClosed() {
+  album_cover_popup_ = nullptr;
 }
 
 void AlbumCoverChoiceController::SearchCoverAutomatically(const Song& song) {

@@ -60,6 +60,7 @@ class ID3v2::Tag::TagPrivate
 {
 public:
   TagPrivate() :
+    factory(0),
     file(0),
     tagOffset(0),
     extendedHeader(0),
@@ -286,7 +287,7 @@ void ID3v2::Tag::setGenre(const String &s)
 
 void ID3v2::Tag::setYear(unsigned int i)
 {
-  if(i <= 0) {
+  if(i == 0) {
     removeFrames("TDRC");
     return;
   }
@@ -295,7 +296,7 @@ void ID3v2::Tag::setYear(unsigned int i)
 
 void ID3v2::Tag::setTrack(unsigned int i)
 {
-  if(i <= 0) {
+  if(i == 0) {
     removeFrames("TRCK");
     return;
   }
@@ -618,7 +619,6 @@ ByteVector ID3v2::Tag::render(int version) const
   }
 
   // Compute the amount of padding, and append that to tagData.
-  // TODO: Should be calculated in long long in taglib2.
 
   long originalSize = d->header.tagSize();
   long paddingSize = originalSize - (tagData.size() - Header::size());
@@ -723,7 +723,7 @@ void ID3v2::Tag::parse(const ByteVector &origData)
 
   if(d->header.extendedHeader()) {
     if(!d->extendedHeader)
-      d->extendedHeader = new ExtendedHeader;
+      d->extendedHeader = new ExtendedHeader();
     d->extendedHeader->setData(data);
     if(d->extendedHeader->size() <= data.size()) {
       frameDataPosition += d->extendedHeader->size();

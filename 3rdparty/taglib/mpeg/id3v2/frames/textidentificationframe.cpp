@@ -45,16 +45,16 @@ public:
 ////////////////////////////////////////////////////////////////////////////////
 
 TextIdentificationFrame::TextIdentificationFrame(const ByteVector &type, String::Type encoding) :
-  Frame(type)
+  Frame(type),
+  d(new TextIdentificationFramePrivate())
 {
-  d = new TextIdentificationFramePrivate;
   d->textEncoding = encoding;
 }
 
 TextIdentificationFrame::TextIdentificationFrame(const ByteVector &data) :
-  Frame(data)
+  Frame(data),
+  d(new TextIdentificationFramePrivate())
 {
-  d = new TextIdentificationFramePrivate;
   setData(data);
 }
 
@@ -252,9 +252,10 @@ ByteVector TextIdentificationFrame::renderFields() const
 // TextIdentificationFrame private members
 ////////////////////////////////////////////////////////////////////////////////
 
-TextIdentificationFrame::TextIdentificationFrame(const ByteVector &data, Header *h) : Frame(h)
+TextIdentificationFrame::TextIdentificationFrame(const ByteVector &data, Header *h) :
+  Frame(h),
+  d(new TextIdentificationFramePrivate())
 {
-  d = new TextIdentificationFramePrivate;
   parseFields(fieldData(data));
 }
 
