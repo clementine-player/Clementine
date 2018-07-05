@@ -27,7 +27,7 @@
 #include "config.h"
 #include "core/logging.h"
 #include "core/tagreaderclient.h"
-#include "core/utilities.h"
+#include "devices/cddasongloader.h"
 #include "ripper/ripper.h"
 #include "ui_ripcddialog.h"
 #include "transcoder/transcoder.h"
@@ -53,7 +53,8 @@ RipCDDialog::RipCDDialog(QWidget* parent)
     : QDialog(parent),
       ui_(new Ui_RipCDDialog),
       ripper_(new Ripper(this)),
-      working_(false) {
+      working_(false),
+      loader_(new CddaSongLoader){
   // Init
   ui_->setupUi(this);
 
@@ -85,6 +86,10 @@ RipCDDialog::RipCDDialog(QWidget* parent)
 
   connect(ui_->options, SIGNAL(clicked()), SLOT(Options()));
   connect(ui_->select, SIGNAL(clicked()), SLOT(AddDestination()));
+
+  connect(loader_, SIGNAL(SongsDurationLoaded(SongList)), SLOT(BuildTrackListTable(SongList)));
+  connect(loader_, SIGNAL(SongsMetadataLoaded(SongList)), SLOT(BuildTrackListTable(SongList)));
+  connect(loader_, SIGNAL(SongsMetadataLoaded(SongList)), SLOT(AddAlbumMetadataFromMusicBrainz(SongList)));
 
   connect(ripper_, SIGNAL(Finished()), SLOT(Finished()));
   connect(ripper_, SIGNAL(Cancelled()), SLOT(Cancelled()));
@@ -124,7 +129,8 @@ RipCDDialog::~RipCDDialog() {}
 bool RipCDDialog::CheckCDIOIsValid() { return ripper_->CheckCDIOIsValid(); }
 
 void RipCDDialog::showEvent(QShowEvent* event) {
-  BuildTrackListTable();
+  ResetDialog();
+  loader_->LoadSongs();
   if (!working_) {
     ui_->progress_group->hide();
   }
@@ -135,10 +141,9 @@ void RipCDDialog::ClickedRipButton() {
     QMessageBox cdio_fail(QMessageBox::Critical, tr("Error Ripping CD"),
                           tr("Media has changed. Reloading"));
     cdio_fail.exec();
+    ResetDialog();
     if (CheckCDIOIsValid()) {
-      BuildTrackListTable();
-    } else {
-      ui_->tableWidget->clearContents();
+      loader_->LoadSongs();
     }
     return;
   }
@@ -241,6 +246,39 @@ void RipCDDialog::UpdateProgressBar(int progress) {
   ui_->progress_bar->setValue(progress);
 }
 
+void RipCDDialog::BuildTrackListTable(const SongList& songs) {
+  checkboxes_.clear();
+  track_names_.clear();
+
+  ui_->tableWidget->setRowCount(songs.length());
+  int current_row = 0;
+  for (const Song& song: songs) {
+    QCheckBox* checkbox = new QCheckBox(ui_->tableWidget);
+    checkbox->setCheckState(Qt::Checked);
+    checkboxes_.append(checkbox);
+    ui_->tableWidget->setCellWidget(current_row, kCheckboxColumn, checkbox);
+    ui_->tableWidget->setCellWidget(current_row, kTrackNumberColumn,
+                                    new QLabel(QString::number(song.track())));
+    QLineEdit* line_edit_track_title =
+        new QLineEdit(song.title(), ui_->tableWidget);
+    track_names_.append(line_edit_track_title);
+    ui_->tableWidget->setCellWidget(current_row, kTrackTitleColumn,
+                                    line_edit_track_title);
+    ui_->tableWidget->setCellWidget(current_row, kTrackDurationColumn,
+                                    new QLabel(song.PrettyLength()));
+    current_row++;
+  }
+}
+
+void RipCDDialog::AddAlbumMetadataFromMusicBrainz(const SongList& songs) {
+  Q_ASSERT(songs.length() > 0);
+
+  const Song& song = songs.first();
+  ui_->albumLineEdit->setText(song.album());
+  ui_->artistLineEdit->setText(song.artist());
+  ui_->yearLineEdit->setText(QString::number(song.year()));
+}
+
 void RipCDDialog::SetWorking(bool working) {
   working_ = working;
   rip_button_->setVisible(!working);
@@ -249,33 +287,6 @@ void RipCDDialog::SetWorking(bool working) {
   ui_->input_group->setEnabled(!working);
   ui_->output_group->setEnabled(!working);
   ui_->progress_group->setVisible(true);
-}
-
-void RipCDDialog::BuildTrackListTable() {
-  checkboxes_.clear();
-  track_names_.clear();
-
-  int tracks = ripper_->TracksOnDisc();
-
-  ui_->tableWidget->setRowCount(tracks);
-  for (int i = 1; i <= tracks; i++) {
-    QCheckBox* checkbox_i = new QCheckBox(ui_->tableWidget);
-    checkbox_i->setCheckState(Qt::Checked);
-    checkboxes_.append(checkbox_i);
-    ui_->tableWidget->setCellWidget(i - 1, kCheckboxColumn, checkbox_i);
-    ui_->tableWidget->setCellWidget(i - 1, kTrackNumberColumn,
-                                    new QLabel(QString::number(i)));
-    QString track_title = QString("Track %1").arg(i);
-    QLineEdit* line_edit_track_title_i =
-        new QLineEdit(track_title, ui_->tableWidget);
-    track_names_.append(line_edit_track_title_i);
-    ui_->tableWidget->setCellWidget(i - 1, kTrackTitleColumn,
-                                    line_edit_track_title_i);
-    QString track_duration =
-        Utilities::PrettyTime(ripper_->TrackDurationSecs(i));
-    ui_->tableWidget->setCellWidget(i - 1, kTrackDurationColumn,
-                                    new QLabel(track_duration));
-  }
 }
 
 QString RipCDDialog::GetOutputFileName(const QString& basename) const {
@@ -300,4 +311,13 @@ QString RipCDDialog::ParseFileFormatString(const QString& file_format,
   to_return.replace(QString("%track"), QString::number(track_no));
 
   return to_return;
+}
+
+void RipCDDialog::ResetDialog() {
+  ui_->tableWidget->setRowCount(0);
+  ui_->albumLineEdit->clear();
+  ui_->artistLineEdit->clear();
+  ui_->genreLineEdit->clear();
+  ui_->yearLineEdit->clear();
+  ui_->discLineEdit->clear();
 }
