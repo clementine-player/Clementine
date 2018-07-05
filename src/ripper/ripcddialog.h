@@ -28,6 +28,7 @@
 class QCheckBox;
 class QLineEdit;
 
+class CddaSongLoader;
 class Ripper;
 class Ui_RipCDDialog;
 
@@ -53,6 +54,8 @@ class RipCDDialog : public QDialog {
   void Cancelled();
   void SetupProgressBarLimits(int min, int max);
   void UpdateProgressBar(int progress);
+  void BuildTrackListTable(const SongList& songs);
+  void AddAlbumMetadataFromMusicBrainz(const SongList& songs);
 
  private:
   static const char* kSettingsGroup;
@@ -62,10 +65,10 @@ class RipCDDialog : public QDialog {
   // from the ui dialog and an extension that corresponds to the audio
   // format chosen in the ui.
   void AddDestinationDirectory(QString dir);
-  void BuildTrackListTable();
   QString GetOutputFileName(const QString& basename) const;
   QString ParseFileFormatString(const QString& file_format, int track_no) const;
   void SetWorking(bool working);
+  void ResetDialog();
 
   QList<QCheckBox*> checkboxes_;
   QList<QLineEdit*> track_names_;
@@ -76,5 +79,6 @@ class RipCDDialog : public QDialog {
   std::unique_ptr<Ui_RipCDDialog> ui_;
   Ripper* ripper_;
   bool working_;
+  CddaSongLoader* loader_;
 };
 #endif  // SRC_RIPPER_RIPCDDIALOG_H_
