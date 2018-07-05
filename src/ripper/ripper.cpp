@@ -206,6 +206,11 @@ void Ripper::WriteWAVHeader(QFile* stream, int32_t i_bytecount) {
 }
 
 void Ripper::Rip() {
+  if (tracks_.isEmpty()) {
+    emit Finished();
+    return;
+  }
+
   temporary_directory_ = Utilities::MakeTempDir() + "/";
   finished_success_ = 0;
   finished_failed_ = 0;
