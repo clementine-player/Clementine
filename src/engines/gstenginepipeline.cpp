@@ -248,6 +248,9 @@ bool GstEnginePipeline::Init() {
       case QVariant::Int:
         g_object_set(G_OBJECT(audiosink_), "device", device_.toInt(), nullptr);
         break;
+      case QVariant::LongLong:
+        g_object_set(G_OBJECT(audiosink_), "device", device_.toLongLong(), nullptr);
+        break;
       case QVariant::String:
         g_object_set(G_OBJECT(audiosink_), "device",
                      device_.toString().toUtf8().constData(), nullptr);
