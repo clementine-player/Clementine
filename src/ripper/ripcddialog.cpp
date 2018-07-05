@@ -29,10 +29,10 @@
 #include "core/tagreaderclient.h"
 #include "devices/cddasongloader.h"
 #include "ripper/ripper.h"
-#include "ui_ripcddialog.h"
 #include "transcoder/transcoder.h"
 #include "transcoder/transcoderoptionsdialog.h"
 #include "ui/iconloader.h"
+#include "ui_ripcddialog.h"
 
 namespace {
 bool ComparePresetsByName(const TranscoderPreset& left,
@@ -54,7 +54,7 @@ RipCDDialog::RipCDDialog(QWidget* parent)
       ui_(new Ui_RipCDDialog),
       ripper_(new Ripper(this)),
       working_(false),
-      loader_(new CddaSongLoader){
+      loader_(new CddaSongLoader) {
   // Init
   ui_->setupUi(this);
 
@@ -87,9 +87,12 @@ RipCDDialog::RipCDDialog(QWidget* parent)
   connect(ui_->options, SIGNAL(clicked()), SLOT(Options()));
   connect(ui_->select, SIGNAL(clicked()), SLOT(AddDestination()));
 
-  connect(loader_, SIGNAL(SongsDurationLoaded(SongList)), SLOT(BuildTrackListTable(SongList)));
-  connect(loader_, SIGNAL(SongsMetadataLoaded(SongList)), SLOT(BuildTrackListTable(SongList)));
-  connect(loader_, SIGNAL(SongsMetadataLoaded(SongList)), SLOT(AddAlbumMetadataFromMusicBrainz(SongList)));
+  connect(loader_, SIGNAL(SongsDurationLoaded(SongList)),
+          SLOT(BuildTrackListTable(SongList)));
+  connect(loader_, SIGNAL(SongsMetadataLoaded(SongList)),
+          SLOT(BuildTrackListTable(SongList)));
+  connect(loader_, SIGNAL(SongsMetadataLoaded(SongList)),
+          SLOT(AddAlbumMetadataFromMusicBrainz(SongList)));
 
   connect(ripper_, SIGNAL(Finished()), SLOT(Finished()));
   connect(ripper_, SIGNAL(Cancelled()), SLOT(Cancelled()));
@@ -252,7 +255,7 @@ void RipCDDialog::BuildTrackListTable(const SongList& songs) {
 
   ui_->tableWidget->setRowCount(songs.length());
   int current_row = 0;
-  for (const Song& song: songs) {
+  for (const Song& song : songs) {
     QCheckBox* checkbox = new QCheckBox(ui_->tableWidget);
     checkbox->setCheckState(Qt::Checked);
     checkboxes_.append(checkbox);
