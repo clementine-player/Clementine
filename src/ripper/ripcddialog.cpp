@@ -23,6 +23,7 @@
 #include <QLineEdit>
 #include <QMessageBox>
 #include <QSettings>
+#include <QUrl>
 
 #include "config.h"
 #include "core/logging.h"
@@ -54,7 +55,7 @@ RipCDDialog::RipCDDialog(QWidget* parent)
       ui_(new Ui_RipCDDialog),
       ripper_(new Ripper(this)),
       working_(false),
-      loader_(new CddaSongLoader) {
+      loader_(new CddaSongLoader(QUrl(), this)) {
   // Init
   ui_->setupUi(this);
 
