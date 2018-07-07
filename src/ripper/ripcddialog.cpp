@@ -18,6 +18,7 @@
 #include "ripper/ripcddialog.h"
 
 #include <QCheckBox>
+#include <QCloseEvent>
 #include <QFileDialog>
 #include <QFileInfo>
 #include <QLineEdit>
@@ -45,7 +46,7 @@ const int kCheckboxColumn = 0;
 const int kTrackNumberColumn = 1;
 const int kTrackTitleColumn = 2;
 const int kTrackDurationColumn = 3;
-}
+}  // namespace
 
 const char* RipCDDialog::kSettingsGroup = "Transcoder";
 const int RipCDDialog::kMaxDestinationItems = 10;
@@ -131,6 +132,12 @@ RipCDDialog::RipCDDialog(QWidget* parent)
 RipCDDialog::~RipCDDialog() {}
 
 bool RipCDDialog::CheckCDIOIsValid() { return ripper_->CheckCDIOIsValid(); }
+
+void RipCDDialog::closeEvent(QCloseEvent* event) {
+  if (working_) {
+    event->ignore();
+  }
+}
 
 void RipCDDialog::showEvent(QShowEvent* event) {
   ResetDialog();

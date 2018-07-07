@@ -19,6 +19,7 @@
 #define SRC_RIPPER_RIPCDDIALOG_H_
 
 #include <memory>
+
 #include <QDialog>
 #include <QFile>
 
@@ -26,7 +27,9 @@
 #include "core/tagreaderclient.h"
 
 class QCheckBox;
+class QCloseEvent;
 class QLineEdit;
+class QShowEvent;
 
 class CddaSongLoader;
 class Ripper;
@@ -41,6 +44,7 @@ class RipCDDialog : public QDialog {
   bool CheckCDIOIsValid();
 
  protected:
+  void closeEvent(QCloseEvent* event);
   void showEvent(QShowEvent* event);
 
  private slots:
