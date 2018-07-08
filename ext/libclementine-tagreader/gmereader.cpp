@@ -6,6 +6,7 @@
 #include <apefile.h>
 #include <tag.h>
 #include <QByteArray>
+#include <QChar>
 #include <QFile>
 #include <QFileInfo>
 #include <QString>
@@ -191,7 +192,7 @@ void GME::VGM::Read(const QFileInfo& file_info,
   QTextStream fileTagStream(gd3Data, QIODevice::ReadOnly);
   // Stored as 16 bit UTF string, two bytes per letter.
   fileTagStream.setCodec("UTF-16");
-  QStringList strings = fileTagStream.readLine(0).split('\0');
+  QStringList strings = fileTagStream.readLine(0).split(QChar('\0'));
   if (strings.count() < 10) return;
 
   /* VGM standard dictates string tag data exist in specific order.
