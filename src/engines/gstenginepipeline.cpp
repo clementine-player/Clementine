@@ -276,7 +276,7 @@ bool GstEnginePipeline::Init() {
   audioconvert_ = engine_->CreateElement("audioconvert", audiobin_);
   tee = engine_->CreateElement("tee", audiobin_);
 
-  probe_queue = engine_->CreateElement("queue", audiobin_);
+  probe_queue = engine_->CreateElement("queue2", audiobin_);
   probe_converter = engine_->CreateElement("audioconvert", audiobin_);
   probe_sink = engine_->CreateElement("fakesink", audiobin_);
 
