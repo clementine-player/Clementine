@@ -33,7 +33,7 @@ void GME::SPC::Read(const QFileInfo& file_info,
   qLog(Debug) << "Reading tags from SPC file: " << file_info.fileName();
 
   // Check for header -- more reliable than file name alone.
-  if (!file.read(33).startsWith(QString("SNES-SPC700").toAscii())) return;
+  if (!file.read(33).startsWith(QString("SNES-SPC700").toLatin1())) return;
 
   /*
    * First order of business -- get any tag values that exist within the core
@@ -48,13 +48,13 @@ void GME::SPC::Read(const QFileInfo& file_info,
   bool has_id6 = (file.read(1)[0] == (char)xID6_STATUS::ON);
 
   file.seek(SONG_TITLE_OFFSET);
-  song_info->set_title(QString::fromAscii(file.read(32)).toStdString());
+  song_info->set_title(QString::fromLatin1(file.read(32)).toStdString());
 
   file.seek(GAME_TITLE_OFFSET);
-  song_info->set_album(QString::fromAscii(file.read(32)).toStdString());
+  song_info->set_album(QString::fromLatin1(file.read(32)).toStdString());
 
   file.seek(ARTIST_OFFSET);
-  song_info->set_artist(QString::fromAscii(file.read(32)).toStdString());
+  song_info->set_artist(QString::fromLatin1(file.read(32)).toStdString());
 
   file.seek(INTRO_LENGTH_OFFSET);
   QByteArray length_bytes = file.read(INTRO_LENGTH_SIZE);
@@ -90,7 +90,7 @@ void GME::SPC::Read(const QFileInfo& file_info,
    * in data from this is ideal before trying to rely on APETAG values. XID6
    * format follows EA's binary file format standard named "IFF" */
   file.seek(XID6_OFFSET);
-  if (has_id6 && file.read(4) == QString("xid6").toAscii()) {
+  if (has_id6 && file.read(4) == QString("xid6").toLatin1()) {
     QByteArray xid6_head_data = file.read(4);
     if (xid6_head_data.size() >= 4) {
       qint64 xid6_size = xid6_head_data[0] | (xid6_head_data[1] << 8) |
@@ -161,7 +161,7 @@ void GME::VGM::Read(const QFileInfo& file_info,
 
   qLog(Debug) << "Reading tags from VGM file: " << file_info.fileName();
 
-  if (!file.read(4).startsWith(QString("Vgm ").toAscii())) return;
+  if (!file.read(4).startsWith(QString("Vgm ").toLatin1())) return;
 
   file.seek(GD3_TAG_PTR);
   QByteArray gd3_head = file.read(4);
