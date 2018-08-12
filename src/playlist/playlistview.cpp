@@ -841,6 +841,10 @@ void PlaylistView::mousePressEvent(QMouseEvent* event) {
       // Update only this item rating
       playlist_->RateSong(playlist_->proxy()->mapToSource(index), new_rating);
     }
+  } else if (event->button() == Qt::XButton1 && index.isValid()) {
+    app_->player()->Previous();
+  } else if (event->button() == Qt::XButton2 && index.isValid()) {
+    app_->player()->Next();
   } else {
     QTreeView::mousePressEvent(event);
   }

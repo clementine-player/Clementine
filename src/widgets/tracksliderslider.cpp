@@ -61,6 +61,12 @@ void TrackSliderSlider::mousePressEvent(QMouseEvent* e) {
 
 void TrackSliderSlider::mouseReleaseEvent(QMouseEvent* e) {
   QSlider::mouseReleaseEvent(e);
+  if (e->button() == Qt::XButton1) {
+    emit Previous();
+  } else if (e->button() == Qt::XButton2) {
+    emit Next();
+  }
+  e->accept();
 }
 
 void TrackSliderSlider::mouseMoveEvent(QMouseEvent* e) {
