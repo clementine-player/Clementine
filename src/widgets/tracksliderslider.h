@@ -32,6 +32,8 @@ class TrackSliderSlider : public QSlider {
 signals:
   void SeekForward();
   void SeekBackward();
+  void Previous();
+  void Next();
 
  protected:
   void mousePressEvent(QMouseEvent* e);

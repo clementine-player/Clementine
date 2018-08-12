@@ -612,6 +612,10 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
   connect(ui_->track_slider, SIGNAL(SeekBackward()), app_->player(),
           SLOT(SeekBackward()));
 
+  connect(ui_->track_slider, SIGNAL(Previous()), app_->player(),
+          SLOT(Previous()));
+  connect(ui_->track_slider, SIGNAL(Next()), app_->player(), SLOT(Next()));
+
   // Library connections
   connect(library_view_->view(), SIGNAL(AddToPlaylistSignal(QMimeData*)),
           SLOT(AddToPlaylist(QMimeData*)));
