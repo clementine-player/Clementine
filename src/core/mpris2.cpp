@@ -131,6 +131,8 @@ void Mpris2::EngineStateChanged(Engine::State newState) {
     EmitNotification("Metadata");
   }
 
+  EmitNotification("CanPlay");
+  EmitNotification("CanPause");
   EmitNotification("PlaybackStatus", PlaybackStatus(newState));
   if (newState == Engine::Playing)
     EmitNotification("CanSeek", CanSeek(newState));
@@ -181,6 +183,10 @@ void Mpris2::EmitNotification(const QString& name) {
     value = CanGoPrevious();
   else if (name == "CanSeek")
     value = CanSeek();
+  else if (name == "CanPlay")
+    value = CanPlay();
+  else if (name == "CanPause")
+    value = CanPause();
 
   if (value.isValid()) EmitNotification(name, value);
 }
@@ -328,6 +334,8 @@ QString Mpris2::current_track_id() const {
 // changing song starts...
 void Mpris2::CurrentSongChanged(const Song& song) {
   ArtLoaded(song, "");
+  EmitNotification("CanPlay");
+  EmitNotification("CanPause");
   EmitNotification("CanGoNext", CanGoNext());
   EmitNotification("CanGoPrevious", CanGoPrevious());
   EmitNotification("CanSeek", CanSeek());
