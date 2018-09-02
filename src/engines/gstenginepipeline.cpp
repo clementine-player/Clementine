@@ -900,7 +900,8 @@ GstPadProbeReturn GstEnginePipeline::HandoffCallback(GstPad*,
 
   if (instance->emit_track_ended_on_time_discontinuity_) {
     if (GST_BUFFER_FLAG_IS_SET(buf, GST_BUFFER_FLAG_DISCONT) ||
-        GST_BUFFER_OFFSET(buf) < instance->last_buffer_offset_) {
+        GST_BUFFER_OFFSET(buf) < instance->last_buffer_offset_ ||
+        !GST_BUFFER_OFFSET_IS_VALID(buf)) {
       qLog(Debug) << "Buffer discontinuity - emitting EOS";
       instance->emit_track_ended_on_time_discontinuity_ = false;
       emit instance->EndOfStreamReached(instance->id(), true);
