@@ -24,6 +24,12 @@
 
 QueryOptions::QueryOptions() : max_age_(-1), query_mode_(QueryMode_All) {}
 
+const QStringList LibraryQuery::kNumericCompOperators = QStringList() << "<="
+                                                                      << ">="
+                                                                      << "<"
+                                                                      << ">"
+                                                                      << "=";
+
 LibraryQuery::LibraryQuery(const QueryOptions& options)
     : include_unavailable_(false), join_with_fts_(false), limit_(-1) {
   if (!options.filter().isEmpty()) {
@@ -32,6 +38,9 @@ LibraryQuery::LibraryQuery(const QueryOptions& options)
     //  1) Append * to all tokens.
     //  2) Prefix "fts" to column names.
     //  3) Remove colons which don't correspond to column names.
+    //
+    // We also allow to search on non-FTS columns, but FTS columns
+    // are higher priority. Non-FTS query parts go to where_clauses
 
     // Split on whitespace
     QStringList tokens(
@@ -44,17 +53,40 @@ LibraryQuery::LibraryQuery(const QueryOptions& options)
       token.replace('-', ' ');
 
       if (token.contains(':')) {
-        // Only prefix fts if the token is a valid column name.
-        if (Song::kFtsColumns.contains("fts" + token.section(':', 0, 0),
-                                       Qt::CaseInsensitive)) {
-          // Account for multiple colons.
-          QString columntoken =
-              token.section(':', 0, 0, QString::SectionIncludeTrailingSep);
-          QString subtoken = token.section(':', 1, -1);
-          subtoken.replace(":", " ");
-          subtoken = subtoken.trimmed();
+        QString columntoken = token.section(':', 0, 0);
+        QString subtoken = token.section(':', 1, -1);
+        subtoken.replace(":", " ");
+        subtoken = subtoken.trimmed();
+
+        if (Song::kFtsColumns.contains("fts" + columntoken,
+                Qt::CaseInsensitive)) { // Is it a FTS column?
           query += "fts" + columntoken + subtoken + "* ";
-        } else {
+        } else if (Song::kColumns.contains(columntoken, Qt::CaseInsensitive)) {
+          // We need to extract the operator and the value from the subtoken
+          QRegExp operatorRe("^(" + kNumericCompOperators.join("|") + ")(.*)");
+          QString op = "="; // default if no operator given
+          QString val = subtoken; // whole subtoken is the value if no operator
+          if (operatorRe.indexIn(subtoken) != -1) {
+            op = operatorRe.cap(1);
+            val = operatorRe.cap(2);
+          }
+
+          if (Song::kIntColumns.contains(columntoken)) {
+            bool ok;
+            int intVal = val.toInt(&ok);
+            if (ok) {
+              AddWhere(columntoken, intVal, op);
+            }
+          } else if (Song::kFloatColumns.contains(columntoken)) {
+            bool ok;
+            double doubleVal = val.toDouble(&ok);
+            if (ok) {
+              AddWhere(columntoken, doubleVal, op);
+            }
+          } else {
+            AddWhere(columntoken, val, op);
+          }
+        } else { // We did't recognize this as a column
           token.replace(":", " ");
           token = token.trimmed();
           query += token + "* ";
@@ -64,9 +96,11 @@ LibraryQuery::LibraryQuery(const QueryOptions& options)
       }
     }
 
-    where_clauses_ << "fts.%fts_table_noprefix MATCH ?";
-    bound_values_ << query;
-    join_with_fts_ = true;
+    if (!query.isEmpty()) {
+        where_clauses_ << "fts.%fts_table_noprefix MATCH ?";
+        bound_values_ << query;
+        join_with_fts_ = true;
+    }
   }
 
   if (options.max_age() != -1) {
