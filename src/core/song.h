@@ -73,6 +73,9 @@ class Song {
   static const QString kBindSpec;
   static const QString kUpdateSpec;
 
+  static const QStringList kIntColumns;
+  static const QStringList kFloatColumns;
+
   static const QStringList kFtsColumns;
   static const QString kFtsColumnSpec;
   static const QString kFtsBindSpec;

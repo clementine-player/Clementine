@@ -118,6 +118,19 @@ const QStringList Song::kColumns = QStringList() << "title"
                                                  << "originalyear"
                                                  << "effective_originalyear";
 
+const QStringList Song::kIntColumns = QStringList() << "track"
+                                                    << "disc"
+                                                    << "year"
+                                                    << "originalyear"
+                                                    << "playcount"
+                                                    << "skipcount"
+                                                    << "score"
+                                                    << "bitrate"
+                                                    << "samplerate";
+
+const QStringList Song::kFloatColumns = QStringList() << "rating" << "bpm";
+
+
 const QString Song::kColumnSpec = Song::kColumns.join(", ");
 const QString Song::kBindSpec =
     Utilities::Prepend(":", Song::kColumns).join(", ");
