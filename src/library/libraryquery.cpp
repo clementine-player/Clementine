@@ -29,6 +29,25 @@ const QStringList LibraryQuery::kNumericCompOperators = QStringList() << "<="
                                                                       << "<"
                                                                       << ">"
                                                                       << "=";
+const QMap<QString, Song::FileType> kFiletypeId = QMap<QString, Song::FileType>(
+    std::map<QString, Song::FileType>{{"asf", Song::Type_Asf},
+                                      {"flac", Song::Type_Flac},
+                                      {"mp4", Song::Type_Mp4},
+                                      {"mpc", Song::Type_Mpc},
+                                      {"mp3", Song::Type_Mpeg},
+                                      {"oggflac", Song::Type_OggFlac},
+                                      {"oggspeex", Song::Type_OggSpeex},
+                                      {"oggvorbis", Song::Type_OggVorbis},
+                                      {"oggopus", Song::Type_OggOpus},
+                                      {"aiff", Song::Type_Aiff},
+                                      {"wav", Song::Type_Wav},
+                                      {"wavpack", Song::Type_WavPack},
+                                      {"trueaudio", Song::Type_TrueAudio},
+                                      {"cdda", Song::Type_Cdda},
+                                      {"spc700", Song::Type_Spc},
+                                      {"vgm", Song::Type_VGM},
+                                      {"stream", Song::Type_Stream},
+                                      {"unknown", Song::Type_Unknown}});
 
 LibraryQuery::LibraryQuery(const QueryOptions& options)
     : include_unavailable_(false), join_with_fts_(false), limit_(-1) {
@@ -58,14 +77,15 @@ LibraryQuery::LibraryQuery(const QueryOptions& options)
         subtoken.replace(":", " ");
         subtoken = subtoken.trimmed();
 
-        if (Song::kFtsColumns.contains("fts" + columntoken,
-                Qt::CaseInsensitive)) { // Is it a FTS column?
+        if (Song::kFtsColumns.contains(
+                "fts" + columntoken,
+                Qt::CaseInsensitive)) {  // Is it a FTS column?
           query += "fts" + columntoken + subtoken + "* ";
         } else if (Song::kColumns.contains(columntoken, Qt::CaseInsensitive)) {
           // We need to extract the operator and the value from the subtoken
           QRegExp operatorRe("^(" + kNumericCompOperators.join("|") + ")(.*)");
-          QString op = "="; // default if no operator given
-          QString val = subtoken; // whole subtoken is the value if no operator
+          QString op = "=";        // default if no operator given
+          QString val = subtoken;  // whole subtoken is the value if no operator
           if (operatorRe.indexIn(subtoken) != -1) {
             op = operatorRe.cap(1);
             val = operatorRe.cap(2);
@@ -83,10 +103,12 @@ LibraryQuery::LibraryQuery(const QueryOptions& options)
             if (ok) {
               AddWhere(columntoken, doubleVal, op);
             }
+          } else if (columntoken == "filetype") {
+            AddWhere(columntoken, kFiletypeId[val]);
           } else {
             AddWhere(columntoken, val, op);
           }
-        } else { // We did't recognize this as a column
+        } else {  // We did't recognize this as a column
           token.replace(":", " ");
           token = token.trimmed();
           query += token + "* ";
@@ -97,9 +119,9 @@ LibraryQuery::LibraryQuery(const QueryOptions& options)
     }
 
     if (!query.isEmpty()) {
-        where_clauses_ << "fts.%fts_table_noprefix MATCH ?";
-        bound_values_ << query;
-        join_with_fts_ = true;
+      where_clauses_ << "fts.%fts_table_noprefix MATCH ?";
+      bound_values_ << query;
+      join_with_fts_ = true;
     }
   }
 

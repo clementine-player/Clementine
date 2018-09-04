@@ -128,8 +128,8 @@ const QStringList Song::kIntColumns = QStringList() << "track"
                                                     << "bitrate"
                                                     << "samplerate";
 
-const QStringList Song::kFloatColumns = QStringList() << "rating" << "bpm";
-
+const QStringList Song::kFloatColumns = QStringList() << "rating"
+                                                      << "bpm";
 
 const QString Song::kColumnSpec = Song::kColumns.join(", ");
 const QString Song::kBindSpec =
