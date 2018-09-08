@@ -112,7 +112,7 @@ LibraryQuery::LibraryQuery(const QueryOptions& options)
             for (QChar c : val) {
               if (c.isDigit()) {
                 tmp.append(c);
-              } else if (allowedChars.contains(c)){
+              } else if (allowedChars.contains(c)) {
                 bool ok;
                 int intVal = tmp.toInt(&ok);
                 tmp = "";
