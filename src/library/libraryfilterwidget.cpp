@@ -46,7 +46,8 @@ LibraryFilterWidget::LibraryFilterWidget(QWidget* parent)
   // Add the available fields to the tooltip here instead of the ui
   // file to prevent that they get translated by mistake.
   QString available_fields =
-      (Song::kFtsColumns + Song::kIntColumns + Song::kFloatColumns)
+      (Song::kFtsColumns + Song::kIntColumns +
+       Song::kFloatColumns + Song::kDateColumns)
           .join(", ").replace(QRegExp("\\bfts"), "");
   ui_->filter->setToolTip(ui_->filter->toolTip().arg(available_fields));
 

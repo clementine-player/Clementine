@@ -105,6 +105,35 @@ LibraryQuery::LibraryQuery(const QueryOptions& options)
             }
           } else if (columntoken == "filetype") {
             AddWhere(columntoken, kFiletypeId[val]);
+          } else if (Song::kDateColumns.contains(columntoken)) {
+            int seconds = 0;
+            QString tmp = "";
+            QString allowedChars = "smhd";
+            for (QChar c : val) {
+              if (c.isDigit()) {
+                tmp.append(c);
+              } else if (allowedChars.contains(c)){
+                bool ok;
+                int intVal = tmp.toInt(&ok);
+                tmp = "";
+                if (ok) {
+                  if (c == 's') {
+                    seconds += intVal;
+                  } else if (c == 'm') {
+                    seconds += intVal * 60;
+                  } else if (c == 'h') {
+                    seconds += intVal * 60 * 60;
+                  } else if (c == 'd') {
+                    seconds += intVal * 60 * 60 * 24;
+                  }
+                }
+              }
+            }
+            if (seconds > 0) {
+              int now = QDateTime::currentDateTime().toTime_t();
+              QString dt = QString("(%1-%2)").arg(now).arg(columntoken);
+              AddWhere(dt, seconds, op);
+            }
           } else {
             AddWhere(columntoken, val, op);
           }

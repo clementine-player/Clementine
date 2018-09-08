@@ -75,6 +75,7 @@ class Song {
 
   static const QStringList kIntColumns;
   static const QStringList kFloatColumns;
+  static const QStringList kDateColumns;
 
   static const QStringList kFtsColumns;
   static const QString kFtsColumnSpec;
