@@ -131,6 +131,10 @@ const QStringList Song::kIntColumns = QStringList() << "track"
 const QStringList Song::kFloatColumns = QStringList() << "rating"
                                                       << "bpm";
 
+const QStringList Song::kDateColumns = QStringList() << "lastplayed"
+                                                     << "mtime"
+                                                     << "ctime";
+
 const QString Song::kColumnSpec = Song::kColumns.join(", ");
 const QString Song::kBindSpec =
     Utilities::Prepend(":", Song::kColumns).join(", ");
