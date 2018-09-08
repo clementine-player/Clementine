@@ -17,13 +17,22 @@
    <property name="spacing">
     <number>0</number>
    </property>
-   <property name="margin">
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
     <number>0</number>
    </property>
    <item>
     <widget class="QSearchField" name="filter" native="true">
      <property name="toolTip">
-      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Prefix a word with a field name to limit the search to that field, e.g. &lt;span style=&quot; font-weight:600;&quot;&gt;artist:&lt;/span&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;Bode&lt;/span&gt; searches the library for all artists that contain the word Bode.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Available fields: &lt;/span&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;%1&lt;/span&gt;.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Prefix a word with a field name to limit the search to that field, e.g. &lt;span style=&quot; font-weight:600;&quot;&gt;artist:&lt;/span&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;Bode&lt;/span&gt; searches the library for all artists that contain the word Bode, &lt;span style=&quot; font-weight:600;&quot;&gt;playcount:&lt;/span&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;&amp;gt;=2&lt;/span&gt; searches the library for songs played at least twice, &lt;span style=&quot; font-weight:600;&quot;&gt;lastplayed:&lt;/span&gt;&amp;lt;&lt;span style=&quot; font-style:italic;&quot;&gt;1h30m&lt;/span&gt; searches the library for songs played in the last 180 minutes.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Available fields: &lt;/span&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;%1&lt;/span&gt;.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
      <property name="placeholderText" stdset="0">
       <string>Enter search terms here</string>
@@ -99,14 +108,14 @@
    </property>
   </action>
   <action name="save_grouping">
-    <property name="text">
-      <string>Save current grouping</string>
-    </property>
+   <property name="text">
+    <string>Save current grouping</string>
+   </property>
   </action>
   <action name="manage_groupings">
-    <property name="text">
-      <string>Manage saved groupings</string>
-    </property>
+   <property name="text">
+    <string>Manage saved groupings</string>
+   </property>
   </action>
  </widget>
  <customwidgets>
