@@ -12,7 +12,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2018-09-17 14:28+0000\n"
+"PO-Revision-Date: 2018-09-17 14:52+0000\n"
 "Last-Translator: Moo\n"
 "Language-Team: Lithuanian (http://www.transifex.com/davidsansome/clementine/language/lt/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -346,7 +346,7 @@ msgid ""
 "played in the last 180 minutes.</p><p><span style=\" font-"
 "weight:600;\">Available fields: </span><span style=\" font-"
 "style:italic;\">%1</span>.</p></body></html>"
-msgstr ""
+msgstr "<html><head/><body><p>Naudokite lauko pavadinimą kaip priešdelį, norėdami apriboti paiešką to lauko reikšme, pvz., <span style=\" font-weight:600;\">artist:</span><span style=\" font-style:italic;\">Rytis</span> ieškos fonotekoje visų atlikėjų su žodžiu Rytis, <span style=\" font-weight:600;\">playcount:</span><span style=\" font-style:italic;\">&gt;=2</span> ieškos fonotekoje visų dainų, kurios buvo atkurtos bent 2 kartus, <span style=\" font-weight:600;\">lastplayed:</span>&lt;<span style=\" font-style:italic;\">1h30m</span> ieškos fonotekoje per paskutinių 180 minučių atkurtų dainų.</p><p><span style=\" font-weight:600;\">Prieinami laukai: </span><span style=\" font-style:italic;\">%1</span>.</p></body></html>"
 
 #: ../bin/src/ui_librarysettingspage.h:198
 msgid ""
@@ -3738,11 +3738,11 @@ msgstr "Groti jei jau kas nors negroja"
 
 #: library/libraryview.cpp:396 ui/mainwindow.cpp:1774
 msgid "Play next"
-msgstr ""
+msgstr "Groti kitą"
 
 #: ui/mainwindow.cpp:1772
 msgid "Play selected tracks next"
-msgstr ""
+msgstr "Toliau groti pasirinktus takelius"
 
 #: core/commandlineoptions.cpp:178
 msgid "Play the <n>th track in the playlist"
@@ -3916,7 +3916,7 @@ msgstr "Psichodelinis"
 
 #: wiimotedev/wiimotesettingspage.cpp:246
 msgid "Push Wii Remote button"
-msgstr ""
+msgstr "Paspauskite Wii pulto mygtuką"
 
 #: ../bin/src/ui_wiimoteshortcutgrabber.h:121
 msgid "Push Wiiremote button"
@@ -4873,7 +4873,7 @@ msgstr "Stabdyti atkūrimą po esamo takelio"
 
 #: ../bin/src/ui_behavioursettingspage.h:334
 msgid "Stop playback if song fails to play"
-msgstr ""
+msgstr "Stabdyti atkūrimą, jei nepavyksta groti dainos"
 
 #: core/globalshortcuts.cpp:55
 msgid "Stop playing after current track"
@@ -5481,7 +5481,7 @@ msgstr "Įvairūs atlikėjai"
 
 #: ../bin/src/ui_subsonicsettingspage.h:136
 msgid "Verify Server certificate"
-msgstr ""
+msgstr "Patvirtinti serverio liudijimą"
 
 #: ui/about.cpp:33
 #, qt-format

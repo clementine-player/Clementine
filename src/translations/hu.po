@@ -4,7 +4,7 @@
 # 
 # Translators:
 # andrewtranslates <andrewtranslates@aol.com>, 2014
-# Balázs Meskó <meskobalazs@gmail.com>, 2015-2017
+# Balázs Meskó <meskobalazs@gmail.com>, 2015-2018
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # gyeben <gyonkibendeguz@gmail.com>, 2012
 # lukibeni <lukacs.bence1@gmail.com>, 2012
@@ -17,8 +17,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2018-09-17 13:31+0000\n"
-"Last-Translator: hatstand <john.maguire@gmail.com>\n"
+"PO-Revision-Date: 2018-09-17 17:54+0000\n"
+"Last-Translator: Balázs Meskó <meskobalazs@gmail.com>\n"
 "Language-Team: Hungarian (http://www.transifex.com/davidsansome/clementine/language/hu/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -351,7 +351,7 @@ msgid ""
 "played in the last 180 minutes.</p><p><span style=\" font-"
 "weight:600;\">Available fields: </span><span style=\" font-"
 "style:italic;\">%1</span>.</p></body></html>"
-msgstr ""
+msgstr "<html><head/><body><p>Írjon a szó elé előtagként egy mezőnevet, hogy arra a mezőre korlátozza a keresést, például <span style=\" font-weight:600;\">artist:</span><span style=\" font-style:italic;\">Bode</span> azon előadókat keresi meg a gyűjteményben, melyek tartalmazzák a Bode szót, a <span style=\" font-weight:600;\">playcount:</span><span style=\" font-style:italic;\">&gt;=2</span> azon számokat keresi meg, melyek legalább kétszer voltak játszva, a <span style=\" font-weight:600;\">lastplayed:</span>&lt;<span style=\" font-style:italic;\">1h30m</span> olyan számokat keres, melyek az elmúlt 180 percben szóltak.</p><p><span style=\" font-weight:600;\">Elérhető mezők: </span><span style=\" font-style:italic;\">%1</span>.</p></body></html>"
 
 #: ../bin/src/ui_librarysettingspage.h:198
 msgid ""
@@ -473,7 +473,7 @@ msgstr "Esemény"
 
 #: wiimotedev/wiimotesettingspage.cpp:103
 msgid "Activate/Deactivate Wii Remote"
-msgstr ""
+msgstr "Wii Remote aktiválása/deaktiválása"
 
 #: internet/soundcloud/soundcloudservice.cpp:128
 msgid "Activities stream"
@@ -1551,11 +1551,11 @@ msgstr "Ctrl+Up"
 
 #: ../bin/src/ui_queuemanager.h:141
 msgid "Ctrl+"
-msgstr ""
+msgstr "Ctrl+"
 
 #: ../bin/src/ui_queuemanager.h:145
 msgid "Ctrl+"
-msgstr ""
+msgstr "Ctrl+"
 
 #: ui/equalizer.cpp:110
 msgid "Custom"
@@ -1606,11 +1606,11 @@ msgstr "&alapértelmezés"
 
 #: core/commandlineoptions.cpp:165
 msgid "Decrease the volume by 4 percent"
-msgstr ""
+msgstr "Hangerő csökkentése 4 százalékkal"
 
 #: core/commandlineoptions.cpp:167
 msgid "Decrease the volume by <value> percent"
-msgstr "Hangerő csökkentése <value> százalékra"
+msgstr "Hangerő csökkentése <value> százalékkal"
 
 #: core/globalshortcuts.cpp:62 wiimotedev/wiimotesettingspage.cpp:112
 msgid "Decrease volume"
@@ -1670,7 +1670,7 @@ msgstr "Intelligens lejátszólista törlése"
 
 #: core/commandlineoptions.cpp:186
 msgid "Delete the currently playing song"
-msgstr ""
+msgstr "Az éppen játszott szám törlése"
 
 #: ../bin/src/ui_organisedialog.h:245
 msgid "Delete the original files"
@@ -2600,7 +2600,7 @@ msgstr "A hardverjellemzők csak csatlakoztatott eszköz esetén tekinthetők me
 
 #: ../bin/src/ui_appearancesettingspage.h:325
 msgid "Hide playlist filter toolbar"
-msgstr ""
+msgstr "A lejátszólista-szűrő eszköztár elrejtése"
 
 #: ../bin/src/ui_transcoderoptionsmp3.h:201
 msgid "High"
@@ -2618,7 +2618,7 @@ msgstr "Magas (1024x1024)"
 
 #: ui/equalizer.cpp:128
 msgid "Hip Hop"
-msgstr ""
+msgstr "Hip Hop"
 
 #: internet/subsonic/subsonicsettingspage.cpp:138
 msgid "Host not found, check server URL. Example: http://localhost:4040/"
@@ -2718,11 +2718,11 @@ msgstr "A beállítás nem teljes, ellenőrizd, hogy minden mező ki van- e töl
 
 #: core/commandlineoptions.cpp:164
 msgid "Increase the volume by 4 percent"
-msgstr ""
+msgstr "Hangerő növelése 4 százalékkal"
 
 #: core/commandlineoptions.cpp:166
 msgid "Increase the volume by <value> percent"
-msgstr "Hangerő növelése <value> százalékra"
+msgstr "Hangerő növelése <value> százalékkal"
 
 #: core/globalshortcuts.cpp:61 wiimotedev/wiimotesettingspage.cpp:110
 msgid "Increase volume"
@@ -3743,11 +3743,11 @@ msgstr "Lejátszás, ha nincs lejátszás folyamatban"
 
 #: library/libraryview.cpp:396 ui/mainwindow.cpp:1774
 msgid "Play next"
-msgstr ""
+msgstr "Következő lejátszása"
 
 #: ui/mainwindow.cpp:1772
 msgid "Play selected tracks next"
-msgstr ""
+msgstr "A kiválasztott számok lejátszása a mostani után"
 
 #: core/commandlineoptions.cpp:178
 msgid "Play the <n>th track in the playlist"
@@ -3921,7 +3921,7 @@ msgstr "Pszichedelikus"
 
 #: wiimotedev/wiimotesettingspage.cpp:246
 msgid "Push Wii Remote button"
-msgstr ""
+msgstr "Nyomja meg a Wii Remote gombot"
 
 #: ../bin/src/ui_wiimoteshortcutgrabber.h:121
 msgid "Push Wiiremote button"
@@ -4214,7 +4214,7 @@ msgstr "Futtatás"
 
 #: core/song.cpp:456
 msgid "SNES SPC700"
-msgstr ""
+msgstr "SNES SPC700"
 
 #: ../bin/src/ui_networkproxysettingspage.h:163
 msgid "SOCKS proxy"
@@ -4878,7 +4878,7 @@ msgstr "Leállítás az aktuális szám után"
 
 #: ../bin/src/ui_behavioursettingspage.h:334
 msgid "Stop playback if song fails to play"
-msgstr ""
+msgstr "Lejátszás leállítása, ha a számot nem lehet lejátszani"
 
 #: core/globalshortcuts.cpp:55
 msgid "Stop playing after current track"
@@ -5473,7 +5473,7 @@ msgstr "VBR MP3"
 
 #: core/song.cpp:458
 msgid "VGM"
-msgstr ""
+msgstr "VGM"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:231
 msgid "Variable bit rate"
@@ -5486,7 +5486,7 @@ msgstr "Különböző előadók"
 
 #: ../bin/src/ui_subsonicsettingspage.h:136
 msgid "Verify Server certificate"
-msgstr ""
+msgstr "Kiszolgáló tanúsítványának ellenőrzése"
 
 #: ui/about.cpp:33
 #, qt-format
@@ -5545,7 +5545,7 @@ msgstr "WAV"
 
 #: core/song.cpp:450
 msgid "WavPack"
-msgstr ""
+msgstr "WavPack"
 
 #: ../bin/src/ui_podcastinfowidget.h:192
 msgid "Website"
@@ -5864,7 +5864,7 @@ msgstr "nem tartalmazza"
 
 #: smartplaylists/searchterm.cpp:263
 msgid "empty"
-msgstr ""
+msgstr "üres"
 
 #: smartplaylists/searchterm.cpp:253
 msgid "ends with"
@@ -5921,7 +5921,7 @@ msgstr "újabb először"
 
 #: smartplaylists/searchterm.cpp:265
 msgid "not empty"
-msgstr ""
+msgstr "nem üres"
 
 #: smartplaylists/searchterm.cpp:261
 msgid "not equals"

@@ -5,12 +5,12 @@
 # Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # Sergii Galashyn <trovich@gmail.com>, 2011-2012
-# Yuri Chornoivan <yurchor@ukr.net>, 2011-2017
+# Yuri Chornoivan <yurchor@ukr.net>, 2011-2018
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2018-09-17 13:31+0000\n"
-"Last-Translator: hatstand <john.maguire@gmail.com>\n"
+"PO-Revision-Date: 2018-09-17 15:45+0000\n"
+"Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian (http://www.transifex.com/davidsansome/clementine/language/uk/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -343,7 +343,7 @@ msgid ""
 "played in the last 180 minutes.</p><p><span style=\" font-"
 "weight:600;\">Available fields: </span><span style=\" font-"
 "style:italic;\">%1</span>.</p></body></html>"
-msgstr ""
+msgstr "<html><head/><body><p>Вкажіть перед словом назву поля, щоб обмежити пошук вмістом вказаного поля. Приклад: <span style=\" font-weight:600;\">artist:</span><span style=\" font-style:italic;\">Руслана</span> призведе до пошуку у бібліотеці усіх виконавців, записи назв яких містять слово «Руслана», <span style=\" font-weight:600;\">playcount:</span><span style=\" font-style:italic;\">&gt;=2</span> надасть вам змогу знайти усі композиції, які відтворювалися принаймні двічі, <span style=\" font-weight:600;\">lastplayed:</span>&lt;<span style=\" font-style:italic;\">1h30m</span> виконає пошук у бібліотеці композицій, які було відтворено протягом попередніх 180 хвилин.</p><p><span style=\" font-weight:600;\">Доступні поля: </span><span style=\" font-style:italic;\">%1</span>.</p></body></html>"
 
 #: ../bin/src/ui_librarysettingspage.h:198
 msgid ""
@@ -465,7 +465,7 @@ msgstr "Дія"
 
 #: wiimotedev/wiimotesettingspage.cpp:103
 msgid "Activate/Deactivate Wii Remote"
-msgstr ""
+msgstr "Активувати або вимкнути пульт Wii"
 
 #: internet/soundcloud/soundcloudservice.cpp:128
 msgid "Activities stream"
@@ -1543,11 +1543,11 @@ msgstr "Ctrl+Вгору"
 
 #: ../bin/src/ui_queuemanager.h:141
 msgid "Ctrl+"
-msgstr ""
+msgstr "Ctrl+"
 
 #: ../bin/src/ui_queuemanager.h:145
 msgid "Ctrl+"
-msgstr ""
+msgstr "Ctrl+"
 
 #: ui/equalizer.cpp:110
 msgid "Custom"
@@ -1598,7 +1598,7 @@ msgstr "Ти&пово"
 
 #: core/commandlineoptions.cpp:165
 msgid "Decrease the volume by 4 percent"
-msgstr ""
+msgstr "Зменшити гучність на 4 відсотки"
 
 #: core/commandlineoptions.cpp:167
 msgid "Decrease the volume by <value> percent"
@@ -1662,7 +1662,7 @@ msgstr "Видалити розумний список відтворення"
 
 #: core/commandlineoptions.cpp:186
 msgid "Delete the currently playing song"
-msgstr ""
+msgstr "Вилучити поточну відтворювану композицію"
 
 #: ../bin/src/ui_organisedialog.h:245
 msgid "Delete the original files"
@@ -2592,7 +2592,7 @@ msgstr "Відомості про обладнання доступні лише
 
 #: ../bin/src/ui_appearancesettingspage.h:325
 msgid "Hide playlist filter toolbar"
-msgstr ""
+msgstr "Приховати панель фільтрування списку"
 
 #: ../bin/src/ui_transcoderoptionsmp3.h:201
 msgid "High"
@@ -2610,7 +2610,7 @@ msgstr "Висока (1024x1024)"
 
 #: ui/equalizer.cpp:128
 msgid "Hip Hop"
-msgstr ""
+msgstr "Хіп-хоп"
 
 #: internet/subsonic/subsonicsettingspage.cpp:138
 msgid "Host not found, check server URL. Example: http://localhost:4040/"
@@ -2710,7 +2710,7 @@ msgstr "Налаштовування не завершено! Переконай
 
 #: core/commandlineoptions.cpp:164
 msgid "Increase the volume by 4 percent"
-msgstr ""
+msgstr "Збільшити гучність на 4 відсотки"
 
 #: core/commandlineoptions.cpp:166
 msgid "Increase the volume by <value> percent"
@@ -3735,11 +3735,11 @@ msgstr "Відтворювати, якщо зараз нічого не відт
 
 #: library/libraryview.cpp:396 ui/mainwindow.cpp:1774
 msgid "Play next"
-msgstr ""
+msgstr "Відтворити наступну"
 
 #: ui/mainwindow.cpp:1772
 msgid "Play selected tracks next"
-msgstr ""
+msgstr "Відтворити наступні позначені композиції"
 
 #: core/commandlineoptions.cpp:178
 msgid "Play the <n>th track in the playlist"
@@ -3913,7 +3913,7 @@ msgstr "Психоделічна музика"
 
 #: wiimotedev/wiimotesettingspage.cpp:246
 msgid "Push Wii Remote button"
-msgstr ""
+msgstr "Натискання кнопки пульту Wii"
 
 #: ../bin/src/ui_wiimoteshortcutgrabber.h:121
 msgid "Push Wiiremote button"
@@ -4206,7 +4206,7 @@ msgstr "Виконати"
 
 #: core/song.cpp:456
 msgid "SNES SPC700"
-msgstr ""
+msgstr "SNES SPC700"
 
 #: ../bin/src/ui_networkproxysettingspage.h:163
 msgid "SOCKS proxy"
@@ -4870,7 +4870,7 @@ msgstr "Зупинити відтворення після поточної ко
 
 #: ../bin/src/ui_behavioursettingspage.h:334
 msgid "Stop playback if song fails to play"
-msgstr ""
+msgstr "Припинити відтворення, якщо не вдасться відтворити композицію"
 
 #: core/globalshortcuts.cpp:55
 msgid "Stop playing after current track"
@@ -5465,7 +5465,7 @@ msgstr "VBR MP3"
 
 #: core/song.cpp:458
 msgid "VGM"
-msgstr ""
+msgstr "VGM"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:231
 msgid "Variable bit rate"
@@ -5478,7 +5478,7 @@ msgstr "Різні виконавці"
 
 #: ../bin/src/ui_subsonicsettingspage.h:136
 msgid "Verify Server certificate"
-msgstr ""
+msgstr "Перевірити сертифікат сервера"
 
 #: ui/about.cpp:33
 #, qt-format
@@ -5537,7 +5537,7 @@ msgstr "Wav"
 
 #: core/song.cpp:450
 msgid "WavPack"
-msgstr ""
+msgstr "WavPack"
 
 #: ../bin/src/ui_podcastinfowidget.h:192
 msgid "Website"
@@ -5856,7 +5856,7 @@ msgstr "не містить"
 
 #: smartplaylists/searchterm.cpp:263
 msgid "empty"
-msgstr ""
+msgstr "порожній"
 
 #: smartplaylists/searchterm.cpp:253
 msgid "ends with"
@@ -5913,7 +5913,7 @@ msgstr "спочатку найновіші"
 
 #: smartplaylists/searchterm.cpp:265
 msgid "not empty"
-msgstr ""
+msgstr "не порожній"
 
 #: smartplaylists/searchterm.cpp:261
 msgid "not equals"

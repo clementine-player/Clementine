@@ -25,8 +25,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2018-09-17 13:31+0000\n"
-"Last-Translator: hatstand <john.maguire@gmail.com>\n"
+"PO-Revision-Date: 2018-09-17 20:02+0000\n"
+"Last-Translator: scootergrisen\n"
 "Language-Team: Danish (http://www.transifex.com/davidsansome/clementine/language/da/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -359,7 +359,7 @@ msgid ""
 "played in the last 180 minutes.</p><p><span style=\" font-"
 "weight:600;\">Available fields: </span><span style=\" font-"
 "style:italic;\">%1</span>.</p></body></html>"
-msgstr ""
+msgstr "<html><head/><body><p>Præfiks et ord med et feltnavn for at begrænse søgningen til det felt, f.eks. <span style=\" font-weight:600;\">kunstner:</span><span style=\" font-style:italic;\">Bode</span> søger i biblioteket efter alle kunstnere som indeholder ordet Bode, <span style=\" font-weight:600;\">afspilninger:</span><span style=\" font-style:italic;\">&gt;=2</span> søger i bibliteket efter sange som er afspillet mindst to gange, <span style=\" font-weight:600;\">sidste afspillet:</span>&lt;<span style=\" font-style:italic;\">1h30m</span> søger i bibiloteket efter sange som er blevet afspillet indenfor de sidste 180 minutter.</p><p><span style=\" font-weight:600;\">Tilgængelige felter: </span><span style=\" font-style:italic;\">%1</span>.</p></body></html>"
 
 #: ../bin/src/ui_librarysettingspage.h:198
 msgid ""
@@ -481,7 +481,7 @@ msgstr "Handling"
 
 #: wiimotedev/wiimotesettingspage.cpp:103
 msgid "Activate/Deactivate Wii Remote"
-msgstr ""
+msgstr "Aktiver/deaktiver Wii Remote"
 
 #: internet/soundcloud/soundcloudservice.cpp:128
 msgid "Activities stream"
@@ -497,7 +497,7 @@ msgstr "Tilføj udsendelse"
 
 #: ../bin/src/ui_notificationssettingspage.h:430
 msgid "Add a new line if supported by the notification type"
-msgstr "Tilføj en nye linje hvis det er undstøttet af notifikations typen"
+msgstr "Tilføj en nye linje hvis det understøttes af notifikationstypen"
 
 #: ../bin/src/ui_wiimotesettingspage.h:183
 msgid "Add action"
@@ -1559,11 +1559,11 @@ msgstr "Ctrl+Op"
 
 #: ../bin/src/ui_queuemanager.h:141
 msgid "Ctrl+"
-msgstr ""
+msgstr "Ctrl+"
 
 #: ../bin/src/ui_queuemanager.h:145
 msgid "Ctrl+"
-msgstr ""
+msgstr "Ctrl+"
 
 #: ui/equalizer.cpp:110
 msgid "Custom"
@@ -1614,15 +1614,15 @@ msgstr "Standard"
 
 #: core/commandlineoptions.cpp:165
 msgid "Decrease the volume by 4 percent"
-msgstr ""
+msgstr "Skru ned for lydstyrken med 4 procent"
 
 #: core/commandlineoptions.cpp:167
 msgid "Decrease the volume by <value> percent"
-msgstr "Nedsæt lydstyrken med <value> procent"
+msgstr "Skru ned for lydstyrken med <value> procent"
 
 #: core/globalshortcuts.cpp:62 wiimotedev/wiimotesettingspage.cpp:112
 msgid "Decrease volume"
-msgstr "Dæmp lydstyrke"
+msgstr "Skru ned for lydstyrken"
 
 #: ../bin/src/ui_appearancesettingspage.h:306
 msgid "Default background image"
@@ -1678,7 +1678,7 @@ msgstr "Slet smart afspilningsliste"
 
 #: core/commandlineoptions.cpp:186
 msgid "Delete the currently playing song"
-msgstr ""
+msgstr "Slet sangen der afspilles"
 
 #: ../bin/src/ui_organisedialog.h:245
 msgid "Delete the original files"
@@ -2608,7 +2608,7 @@ msgstr "Hardwareinformation er kun tilgængelig når enheden er tilsluttet."
 
 #: ../bin/src/ui_appearancesettingspage.h:325
 msgid "Hide playlist filter toolbar"
-msgstr ""
+msgstr "Skjul afspilningslistefilterlinje"
 
 #: ../bin/src/ui_transcoderoptionsmp3.h:201
 msgid "High"
@@ -2626,7 +2626,7 @@ msgstr "Høj (1024x1024)"
 
 #: ui/equalizer.cpp:128
 msgid "Hip Hop"
-msgstr ""
+msgstr "Hiphop"
 
 #: internet/subsonic/subsonicsettingspage.cpp:138
 msgid "Host not found, check server URL. Example: http://localhost:4040/"
@@ -2706,7 +2706,7 @@ msgstr "Indboks"
 
 #: ../bin/src/ui_notificationssettingspage.h:449
 msgid "Include album art in the notification"
-msgstr "Inkluder albumomslag i påmindelsen"
+msgstr "Inkluder albumomslag i notifikationen"
 
 #: ../bin/src/ui_querysearchpage.h:114
 msgid "Include all songs"
@@ -2726,15 +2726,15 @@ msgstr "Ufuldstændig konfiguration, sørg for at alle felter er udfyldt."
 
 #: core/commandlineoptions.cpp:164
 msgid "Increase the volume by 4 percent"
-msgstr ""
+msgstr "Skru op for lydstyrken med 4 procent"
 
 #: core/commandlineoptions.cpp:166
 msgid "Increase the volume by <value> percent"
-msgstr "Skru op for lyden med <value> procent"
+msgstr "Skru op for lydstyrken med <value> procent"
 
 #: core/globalshortcuts.cpp:61 wiimotedev/wiimotesettingspage.cpp:110
 msgid "Increase volume"
-msgstr "Forøg lydstyrke"
+msgstr "Skru op for lydstyrken"
 
 #: internet/core/cloudfileservice.cpp:154
 #, qt-format
@@ -3460,11 +3460,11 @@ msgstr "Ikke monteret - dobbeltklik for at montere"
 
 #: ../bin/src/ui_notificationssettingspage.h:437
 msgid "Notification type"
-msgstr "Påmindelsestype"
+msgstr "Notifikationstype"
 
 #: ../bin/src/ui_notificationssettingspage.h:380
 msgid "Notifications"
-msgstr "Påmindelser"
+msgstr "Notifikationer"
 
 #: ui/macsystemtrayicon.mm:64
 msgid "Now Playing"
@@ -3751,11 +3751,11 @@ msgstr "Afspil hvis der ikke er noget andet som afspilles i øjeblikket"
 
 #: library/libraryview.cpp:396 ui/mainwindow.cpp:1774
 msgid "Play next"
-msgstr ""
+msgstr "Afspil næste"
 
 #: ui/mainwindow.cpp:1772
 msgid "Play selected tracks next"
-msgstr ""
+msgstr "Afspil valgte spor næste gang"
 
 #: core/commandlineoptions.cpp:178
 msgid "Play the <n>th track in the playlist"
@@ -3929,11 +3929,11 @@ msgstr "Psykedelisk"
 
 #: wiimotedev/wiimotesettingspage.cpp:246
 msgid "Push Wii Remote button"
-msgstr ""
+msgstr "Tryk på Wii Remote-knap"
 
 #: ../bin/src/ui_wiimoteshortcutgrabber.h:121
 msgid "Push Wiiremote button"
-msgstr "Tryk på Wiiremote-knap"
+msgstr "Tryk på Wii Remote-knap"
 
 #: ../bin/src/ui_querysortpage.h:138
 msgid "Put songs in a random order"
@@ -4222,7 +4222,7 @@ msgstr "Kør"
 
 #: core/song.cpp:456
 msgid "SNES SPC700"
-msgstr ""
+msgstr "SNES SPC700"
 
 #: ../bin/src/ui_networkproxysettingspage.h:163
 msgid "SOCKS proxy"
@@ -4507,7 +4507,7 @@ msgstr "Sæt %1 til »%2« …"
 
 #: core/commandlineoptions.cpp:163
 msgid "Set the volume to <value> percent"
-msgstr "Sæt lydstyrken til <value> percent"
+msgstr "Sæt lydstyrken til <value> procent"
 
 #: ../bin/src/ui_mainwindow.h:687
 msgid "Set value for all selected tracks..."
@@ -4550,19 +4550,19 @@ msgstr "Vis en stemningslinje i nummerets fremgangsbjælke"
 
 #: ../bin/src/ui_notificationssettingspage.h:439
 msgid "Show a native desktop notification"
-msgstr "Vis en skrivebordspåmindelse"
+msgstr "Vis en skrivebordsnotifikation"
 
 #: ../bin/src/ui_notificationssettingspage.h:447
 msgid "Show a notification when I change the repeat/shuffle mode"
-msgstr "Vis en meddelelse når jeg ændrer gentagelses- og blandings-tilstand"
+msgstr "Vis en notifikation når jeg ændrer gentagelses- og blandings-tilstand"
 
 #: ../bin/src/ui_notificationssettingspage.h:446
 msgid "Show a notification when I change the volume"
-msgstr "Vis en påmindelse når jeg skifter lydstyrke"
+msgstr "Vis en notifikation når jeg ændrer lydstyrken"
 
 #: ../bin/src/ui_notificationssettingspage.h:448
 msgid "Show a notification when I pause playback"
-msgstr "Vis en påmindelse når jeg sætter afspilning på pause"
+msgstr "Vis en notifikation når jeg sætter afspilning på pause"
 
 #: ../bin/src/ui_notificationssettingspage.h:441
 msgid "Show a popup from the system tray"
@@ -4886,7 +4886,7 @@ msgstr "Stop afspilning efter nuværende nummer"
 
 #: ../bin/src/ui_behavioursettingspage.h:334
 msgid "Stop playback if song fails to play"
-msgstr ""
+msgstr "Stop afspilning hvis sangen ikke kan afspilles"
 
 #: core/globalshortcuts.cpp:55
 msgid "Stop playing after current track"
@@ -5408,7 +5408,7 @@ msgstr "Brug et brugerdefineret farvesæt"
 
 #: ../bin/src/ui_notificationssettingspage.h:451
 msgid "Use a custom message for notifications"
-msgstr "Brug en selvvalgt meddelelse til beskeder"
+msgstr "Brug en selvvalgt meddelelse til notifikationer"
 
 #: ../bin/src/ui_networkremotesettingspage.h:222
 msgid "Use a network remote control"
@@ -5428,7 +5428,7 @@ msgstr "Brug dynamisk tilstand"
 
 #: ../bin/src/ui_wiimotesettingspage.h:178
 msgid "Use notifications to report Wii Remote status"
-msgstr "Vis meddelelser om Wii Remote-status"
+msgstr "Brug notifikationer til at rapporterer status af Wii Remote"
 
 #: ../bin/src/ui_appearancesettingspage.h:324
 msgid "Use system icons"
@@ -5452,7 +5452,7 @@ msgstr "Brug standard proxy-indstillinger"
 
 #: ../bin/src/ui_spotifysettingspage.h:217
 msgid "Use volume normalisation"
-msgstr "Brug volumen normalisering"
+msgstr "Brug normalisering af lydstyrken"
 
 #: widgets/freespacebar.cpp:46
 msgid "Used"
@@ -5481,7 +5481,7 @@ msgstr "VBR MP3"
 
 #: core/song.cpp:458
 msgid "VGM"
-msgstr ""
+msgstr "VGM"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:231
 msgid "Variable bit rate"
@@ -5494,7 +5494,7 @@ msgstr "Diverse kunstnere"
 
 #: ../bin/src/ui_subsonicsettingspage.h:136
 msgid "Verify Server certificate"
-msgstr ""
+msgstr "Verificer servercertifikat"
 
 #: ui/about.cpp:33
 #, qt-format
@@ -5553,7 +5553,7 @@ msgstr "Wav"
 
 #: core/song.cpp:450
 msgid "WavPack"
-msgstr ""
+msgstr "WavPack"
 
 #: ../bin/src/ui_podcastinfowidget.h:192
 msgid "Website"
@@ -5872,7 +5872,7 @@ msgstr "indeholder ikke"
 
 #: smartplaylists/searchterm.cpp:263
 msgid "empty"
-msgstr ""
+msgstr "tom"
 
 #: smartplaylists/searchterm.cpp:253
 msgid "ends with"
@@ -5929,7 +5929,7 @@ msgstr "nyeste først"
 
 #: smartplaylists/searchterm.cpp:265
 msgid "not empty"
-msgstr ""
+msgstr "ikke tom"
 
 #: smartplaylists/searchterm.cpp:261
 msgid "not equals"
