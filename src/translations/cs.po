@@ -15,14 +15,14 @@
 # Pavel Fric <fripohled.blogspot.com>, 2010
 # Pavel Fric <fripohled@blogspot.com>, 2004,2010
 # fri, 2011-2012
-# fri, 2013-2017
+# fri, 2013-2018
 # fri, 2011-2012
 # mandarinki <this.mail.sucks@mail.bg>, 2011
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2018-09-17 13:31+0000\n"
-"Last-Translator: hatstand <john.maguire@gmail.com>\n"
+"PO-Revision-Date: 2018-09-18 05:43+0000\n"
+"Last-Translator: fri\n"
 "Language-Team: Czech (http://www.transifex.com/davidsansome/clementine/language/cs/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -355,7 +355,7 @@ msgid ""
 "played in the last 180 minutes.</p><p><span style=\" font-"
 "weight:600;\">Available fields: </span><span style=\" font-"
 "style:italic;\">%1</span>.</p></body></html>"
-msgstr ""
+msgstr "<html><head/><body><p>Dejte před slovo název pole, aby se hledání omezilo na to pole , např. <span style=\" font-weight:600;\">artist:</span><span style=\" font-style:italic;\">Gott</span>, sbírka je prohledána na jména umělců, jež obsahují slovo Gott, <span style=\" font-weight:600;\">playcount:</span><span style=\" font-style:italic;\">&gt;=2</span>, sbírka je prohledána na písně přehrané alespoň dvakrát, <span style=\" font-weight:600;\">lastplayed:</span>&lt;<span style=\" font-style:italic;\">1h30m</span>, sbírka je prohledána na písně hrané alespoň 180 minut.</p><p><span style=\" font-weight:600;\">Dostupná pole: </span><span style=\" font-style:italic;\">%1</span>.</p></body></html>"
 
 #: ../bin/src/ui_librarysettingspage.h:198
 msgid ""
@@ -477,7 +477,7 @@ msgstr "Činnost"
 
 #: wiimotedev/wiimotesettingspage.cpp:103
 msgid "Activate/Deactivate Wii Remote"
-msgstr ""
+msgstr "Zapnout/Vypnout Wii Remote"
 
 #: internet/soundcloud/soundcloudservice.cpp:128
 msgid "Activities stream"
@@ -1555,11 +1555,11 @@ msgstr "Ctrl+Up"
 
 #: ../bin/src/ui_queuemanager.h:141
 msgid "Ctrl+"
-msgstr ""
+msgstr "Ctrl+"
 
 #: ../bin/src/ui_queuemanager.h:145
 msgid "Ctrl+"
-msgstr ""
+msgstr "Ctrl+"
 
 #: ui/equalizer.cpp:110
 msgid "Custom"
@@ -1610,7 +1610,7 @@ msgstr "&Výchozí"
 
 #: core/commandlineoptions.cpp:165
 msgid "Decrease the volume by 4 percent"
-msgstr ""
+msgstr "Snížit hlasitost o 4 procenta"
 
 #: core/commandlineoptions.cpp:167
 msgid "Decrease the volume by <value> percent"
@@ -1674,7 +1674,7 @@ msgstr "Smazat chytrý seznam skladeb"
 
 #: core/commandlineoptions.cpp:186
 msgid "Delete the currently playing song"
-msgstr ""
+msgstr "Smazat nyní přehrávanou píseň"
 
 #: ../bin/src/ui_organisedialog.h:245
 msgid "Delete the original files"
@@ -2604,7 +2604,7 @@ msgstr "Informace o vybavení jsou dostupné pouze tehdy, když je zařízení p
 
 #: ../bin/src/ui_appearancesettingspage.h:325
 msgid "Hide playlist filter toolbar"
-msgstr ""
+msgstr "Skrýt nástrojový pruh pro filtrování seznamu skladeb"
 
 #: ../bin/src/ui_transcoderoptionsmp3.h:201
 msgid "High"
@@ -2622,7 +2622,7 @@ msgstr "Vysoké (1024 x 1024)"
 
 #: ui/equalizer.cpp:128
 msgid "Hip Hop"
-msgstr ""
+msgstr "Hip Hop"
 
 #: internet/subsonic/subsonicsettingspage.cpp:138
 msgid "Host not found, check server URL. Example: http://localhost:4040/"
@@ -2722,7 +2722,7 @@ msgstr "Neúplné nastavení. Zajistěte, prosím, že jsou všechna pole vypln�
 
 #: core/commandlineoptions.cpp:164
 msgid "Increase the volume by 4 percent"
-msgstr ""
+msgstr "Zvýšit hlasitost o 4 procenta"
 
 #: core/commandlineoptions.cpp:166
 msgid "Increase the volume by <value> percent"
@@ -3747,11 +3747,11 @@ msgstr "Hrát, pokud se již něco nepřehrává"
 
 #: library/libraryview.cpp:396 ui/mainwindow.cpp:1774
 msgid "Play next"
-msgstr ""
+msgstr "Přehrát další"
 
 #: ui/mainwindow.cpp:1772
 msgid "Play selected tracks next"
-msgstr ""
+msgstr "Přehrát vybrané skladby jako další"
 
 #: core/commandlineoptions.cpp:178
 msgid "Play the <n>th track in the playlist"
@@ -3925,7 +3925,7 @@ msgstr "Psychedelický"
 
 #: wiimotedev/wiimotesettingspage.cpp:246
 msgid "Push Wii Remote button"
-msgstr ""
+msgstr "Stisknout tlačítko Wii Remote"
 
 #: ../bin/src/ui_wiimoteshortcutgrabber.h:121
 msgid "Push Wiiremote button"
@@ -4218,7 +4218,7 @@ msgstr "Spustit"
 
 #: core/song.cpp:456
 msgid "SNES SPC700"
-msgstr ""
+msgstr "SNES SPC700"
 
 #: ../bin/src/ui_networkproxysettingspage.h:163
 msgid "SOCKS proxy"
@@ -4882,7 +4882,7 @@ msgstr "Zastavit přehrávání po současné skladbě"
 
 #: ../bin/src/ui_behavioursettingspage.h:334
 msgid "Stop playback if song fails to play"
-msgstr ""
+msgstr "Zastavit přehrávání, pokud se píseň nedaří přehrávat"
 
 #: core/globalshortcuts.cpp:55
 msgid "Stop playing after current track"
@@ -5477,7 +5477,7 @@ msgstr "Proměnlivý datový tok MP3"
 
 #: core/song.cpp:458
 msgid "VGM"
-msgstr ""
+msgstr "VGM"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:231
 msgid "Variable bit rate"
@@ -5490,7 +5490,7 @@ msgstr "Různí umělci"
 
 #: ../bin/src/ui_subsonicsettingspage.h:136
 msgid "Verify Server certificate"
-msgstr ""
+msgstr "Ověřit certifikát serveru"
 
 #: ui/about.cpp:33
 #, qt-format
@@ -5549,7 +5549,7 @@ msgstr "WAV"
 
 #: core/song.cpp:450
 msgid "WavPack"
-msgstr ""
+msgstr "WavPack"
 
 #: ../bin/src/ui_podcastinfowidget.h:192
 msgid "Website"
@@ -5868,7 +5868,7 @@ msgstr "neobsahuje"
 
 #: smartplaylists/searchterm.cpp:263
 msgid "empty"
-msgstr ""
+msgstr "prázdný"
 
 #: smartplaylists/searchterm.cpp:253
 msgid "ends with"
@@ -5925,7 +5925,7 @@ msgstr "nejprve nejnovější"
 
 #: smartplaylists/searchterm.cpp:265
 msgid "not empty"
-msgstr ""
+msgstr "není prázdný"
 
 #: smartplaylists/searchterm.cpp:261
 msgid "not equals"

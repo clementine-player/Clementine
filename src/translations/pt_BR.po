@@ -6,7 +6,7 @@
 # Alexandro Casanova <shorterfire@gmail.com>, 2013-2014
 # Amilton Pereira cavalcante <amiltonpc@gmail.com>, 2013
 # bedi1982 <bedi.com@gmail.com>, 2012
-# carlo giusepe tadei valente sasaki <carlo.gt.valente@gmail.com>, 2014-2017
+# carlo giusepe tadei valente sasaki <carlo.gt.valente@gmail.com>, 2014-2018
 # carlo giusepe tadei valente sasaki <carlo.gt.valente@gmail.com>, 2014
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # Gustavo Brito Sampaio <gbritosampaio@gmail.com>, 2014
@@ -19,8 +19,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2018-09-17 13:31+0000\n"
-"Last-Translator: hatstand <john.maguire@gmail.com>\n"
+"PO-Revision-Date: 2018-09-18 02:09+0000\n"
+"Last-Translator: carlo giusepe tadei valente sasaki <carlo.gt.valente@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/davidsansome/clementine/language/pt_BR/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -353,7 +353,7 @@ msgid ""
 "played in the last 180 minutes.</p><p><span style=\" font-"
 "weight:600;\">Available fields: </span><span style=\" font-"
 "style:italic;\">%1</span>.</p></body></html>"
-msgstr ""
+msgstr "<html><head/><body><p>Preceda uma palavra com um nome de campo para limitar a busca a esse campo, por exemplo: <span style=\" font-weight:600;\">artista:</span><span style=\" font-style:italic;\">Barão</span> vasculha a biblioteca por todos os artistas que contenham a palavra Barão, <span style=\" font-weight:600;\">número de reproduções:</span><span style=\" font-style:italic;\">&gt;=2</span> vasculha a biblioteca por músicas que tocaram pelo menos duas vezes, <span style=\" font-weight:600;\">última reprodução:</span>&lt;<span style=\" font-style:italic;\">1h30m</span> vasculha a biblioteca por músicas que tocaram nos últimos 180 minutos.</p><p><span style=\" font-weight:600;\">Campos disponíveis: </span><span style=\" font-style:italic;\">%1</span>.</p></body></html>"
 
 #: ../bin/src/ui_librarysettingspage.h:198
 msgid ""
@@ -475,7 +475,7 @@ msgstr "Ação"
 
 #: wiimotedev/wiimotesettingspage.cpp:103
 msgid "Activate/Deactivate Wii Remote"
-msgstr ""
+msgstr "Ativar/Desativar o Wii Remote"
 
 #: internet/soundcloud/soundcloudservice.cpp:128
 msgid "Activities stream"
@@ -1553,11 +1553,11 @@ msgstr "Ctrl+Up"
 
 #: ../bin/src/ui_queuemanager.h:141
 msgid "Ctrl+"
-msgstr ""
+msgstr "Ctrl+"
 
 #: ../bin/src/ui_queuemanager.h:145
 msgid "Ctrl+"
-msgstr ""
+msgstr "Ctrl+"
 
 #: ui/equalizer.cpp:110
 msgid "Custom"
@@ -1608,7 +1608,7 @@ msgstr "&Padrão"
 
 #: core/commandlineoptions.cpp:165
 msgid "Decrease the volume by 4 percent"
-msgstr ""
+msgstr "Diminui o volume em 4 porcento"
 
 #: core/commandlineoptions.cpp:167
 msgid "Decrease the volume by <value> percent"
@@ -1672,7 +1672,7 @@ msgstr "Apagar lista inteligente"
 
 #: core/commandlineoptions.cpp:186
 msgid "Delete the currently playing song"
-msgstr ""
+msgstr "Deletar a faixa em execução"
 
 #: ../bin/src/ui_organisedialog.h:245
 msgid "Delete the original files"
@@ -2602,7 +2602,7 @@ msgstr "Informação do hardware só está disponível quando o dispositivo est�
 
 #: ../bin/src/ui_appearancesettingspage.h:325
 msgid "Hide playlist filter toolbar"
-msgstr ""
+msgstr "Ocultar a barra de filtro da lista de reprodução"
 
 #: ../bin/src/ui_transcoderoptionsmp3.h:201
 msgid "High"
@@ -2620,7 +2620,7 @@ msgstr "Alta (1024x1024)"
 
 #: ui/equalizer.cpp:128
 msgid "Hip Hop"
-msgstr ""
+msgstr "Hip Hop"
 
 #: internet/subsonic/subsonicsettingspage.cpp:138
 msgid "Host not found, check server URL. Example: http://localhost:4040/"
@@ -2720,7 +2720,7 @@ msgstr "Configuração incompleta, assegure que todos os campos estão preenchid
 
 #: core/commandlineoptions.cpp:164
 msgid "Increase the volume by 4 percent"
-msgstr ""
+msgstr "Aumenta o volume em 4 porcento"
 
 #: core/commandlineoptions.cpp:166
 msgid "Increase the volume by <value> percent"
@@ -3745,11 +3745,11 @@ msgstr "Tocar se não houver nada tocando"
 
 #: library/libraryview.cpp:396 ui/mainwindow.cpp:1774
 msgid "Play next"
-msgstr ""
+msgstr "Reproduzir próxima"
 
 #: ui/mainwindow.cpp:1772
 msgid "Play selected tracks next"
-msgstr ""
+msgstr "Reproduzir as faixas selecionadas depois"
 
 #: core/commandlineoptions.cpp:178
 msgid "Play the <n>th track in the playlist"
@@ -3923,7 +3923,7 @@ msgstr "Psicodélico "
 
 #: wiimotedev/wiimotesettingspage.cpp:246
 msgid "Push Wii Remote button"
-msgstr ""
+msgstr "Aperte o botão do Wii Remote"
 
 #: ../bin/src/ui_wiimoteshortcutgrabber.h:121
 msgid "Push Wiiremote button"
@@ -4216,7 +4216,7 @@ msgstr "Executar"
 
 #: core/song.cpp:456
 msgid "SNES SPC700"
-msgstr ""
+msgstr "SNES SPC700"
 
 #: ../bin/src/ui_networkproxysettingspage.h:163
 msgid "SOCKS proxy"
@@ -4880,7 +4880,7 @@ msgstr "Parar reprodução depois da música atual"
 
 #: ../bin/src/ui_behavioursettingspage.h:334
 msgid "Stop playback if song fails to play"
-msgstr ""
+msgstr "Parar a reprodução se a execução da faixa falhar"
 
 #: core/globalshortcuts.cpp:55
 msgid "Stop playing after current track"
@@ -5475,7 +5475,7 @@ msgstr "MP3 com VBR"
 
 #: core/song.cpp:458
 msgid "VGM"
-msgstr ""
+msgstr "VGM"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:231
 msgid "Variable bit rate"
@@ -5488,7 +5488,7 @@ msgstr "Vários artistas"
 
 #: ../bin/src/ui_subsonicsettingspage.h:136
 msgid "Verify Server certificate"
-msgstr ""
+msgstr "Verificar o certificado do servidor"
 
 #: ui/about.cpp:33
 #, qt-format
@@ -5547,7 +5547,7 @@ msgstr "Wav"
 
 #: core/song.cpp:450
 msgid "WavPack"
-msgstr ""
+msgstr "WavPack"
 
 #: ../bin/src/ui_podcastinfowidget.h:192
 msgid "Website"
@@ -5866,7 +5866,7 @@ msgstr "não contém"
 
 #: smartplaylists/searchterm.cpp:263
 msgid "empty"
-msgstr ""
+msgstr "vazia"
 
 #: smartplaylists/searchterm.cpp:253
 msgid "ends with"
@@ -5923,7 +5923,7 @@ msgstr "mais novas primeiro"
 
 #: smartplaylists/searchterm.cpp:265
 msgid "not empty"
-msgstr ""
+msgstr "não vazia"
 
 #: smartplaylists/searchterm.cpp:261
 msgid "not equals"
