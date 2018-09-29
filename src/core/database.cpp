@@ -265,6 +265,22 @@ QSqlDatabase Database::Connect() {
   StaticInit();
 
   {
+
+#ifdef SQLITE_DBCONFIG_ENABLE_FTS3_TOKENIZER
+    // In case sqlite>=3.12 is compiled without -DSQLITE_ENABLE_FTS3_TOKENIZER (generally a good idea 
+    // due to security reasons) the fts3 support should be enabled explicitly.
+    // see https://github.com/clementine-player/Clementine/issues/5297
+    //
+    // See https://www.sqlite.org/fts3.html#custom_application_defined_tokenizers
+    QVariant v = db.driver()->handle();
+    if (v.isValid() && qstrcmp(v.typeName(), "sqlite3*") == 0) {
+      sqlite3* handle = *static_cast<sqlite3**>(v.data());
+      if (!handle || sqlite3_db_config(handle, SQLITE_DBCONFIG_ENABLE_FTS3_TOKENIZER, 1, nullptr) != SQLITE_OK) {
+        qLog(Fatal) << "Failed to enable FTS3 tokenizer";
+      }
+    }
+#endif
+
     QSqlQuery set_fts_tokenizer("SELECT fts3_tokenizer(:name, :pointer)", db);
     set_fts_tokenizer.bindValue(":name", "unicode");
     set_fts_tokenizer.bindValue(
