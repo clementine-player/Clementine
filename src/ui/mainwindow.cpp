@@ -158,7 +158,7 @@ const char* MainWindow::kSettingsGroup = "MainWindow";
 const char* MainWindow::kAllFilesFilterSpec = QT_TR_NOOP("All Files (*)");
 
 namespace {
-const int kTrackSliderUpdateTimeMs = 40;
+const int kTrackSliderUpdateTimeMs = 500;
 const int kTrackPositionUpdateTimeMs = 1000;
 }
 
@@ -611,6 +611,10 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
           SLOT(SeekForward()));
   connect(ui_->track_slider, SIGNAL(SeekBackward()), app_->player(),
           SLOT(SeekBackward()));
+
+  connect(ui_->track_slider, SIGNAL(Previous()), app_->player(),
+          SLOT(Previous()));
+  connect(ui_->track_slider, SIGNAL(Next()), app_->player(), SLOT(Next()));
 
   // Library connections
   connect(library_view_->view(), SIGNAL(AddToPlaylistSignal(QMimeData*)),

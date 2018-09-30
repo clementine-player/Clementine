@@ -57,6 +57,8 @@ signals:
 
   void SeekForward();
   void SeekBackward();
+  void Next();
+  void Previous();
 
  private slots:
   void ValueMaybeChanged(int value);

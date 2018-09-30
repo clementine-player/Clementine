@@ -50,13 +50,16 @@ class CddaSongLoader : public QObject {
   void SongsLoaded(const SongList& songs);
   void SongsDurationLoaded(const SongList& songs);
   void SongsMetadataLoaded(const SongList& songs);
+  void MusicBrainzDiscIdLoaded(const QString& musicbrainz_discid);
 
  private slots:
+  void LoadAudioCDTags(const QString& musicbrainz_discid) const;
   void AudioCDTagsLoaded(const QString& artist, const QString& album,
       const MusicBrainzClient::ResultList& results);
 
  private:
   QUrl GetUrlFromTrack(int track_number) const;
+  void LoadSongsFromCdda();
 
   QUrl url_;
   GstElement* cdda_;
