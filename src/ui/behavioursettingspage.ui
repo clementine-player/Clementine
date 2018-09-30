@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>516</width>
-    <height>851</height>
+    <height>1081</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -89,81 +89,65 @@
       <item>
        <widget class="QRadioButton" name="b_always_show_">
         <property name="text">
-         <string>Always show the main window</string>
+         <string>Always show &amp;the main window</string>
         </property>
        </widget>
       </item>
       <item>
        <widget class="QRadioButton" name="b_always_hide_">
         <property name="text">
-         <string>Always hide the main window</string>
+         <string>Alwa&amp;ys hide the main window</string>
         </property>
        </widget>
       </item>
       <item>
        <widget class="QRadioButton" name="b_remember_">
         <property name="text">
-         <string>Remember from last time</string>
+         <string>Remember from &amp;last time</string>
         </property>
         <property name="checked">
          <bool>true</bool>
         </property>
        </widget>
       </item>
-      <item>
-       <spacer name="verticalSpacer_6">
-        <property name="orientation">
-         <enum>Qt::Vertical</enum>
-        </property>
-        <property name="sizeType">
-         <enum>QSizePolicy::Fixed</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>20</width>
-          <height>10</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item>
-       <widget class="QCheckBox" name="resume_after_start_">
-        <property name="text">
-         <string>Resume playback on start</string>
-        </property>
-        <property name="checked">
-         <bool>false</bool>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QCheckBox" name="stop_play_if_fail_">
-        <property name="text">
-         <string>Stop playback if song fails to play</string>
-        </property>
-        <property name="checked">
-         <bool>false</bool>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QCheckBox" name="b_grey_out_deleted_">
-        <property name="text">
-         <string>Grey out non existent songs in my playlists</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QCheckBox" name="b_click_edit_inline_">
-        <property name="toolTip">
-         <string>If activated, clicking a selected song in the playlist view will let you edit the tag value directly</string>
-        </property>
-        <property name="text">
-         <string>Enable song metadata inline edition with click</string>
-        </property>
-       </widget>
-      </item>
      </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QCheckBox" name="b_click_edit_inline_">
+     <property name="toolTip">
+      <string>If activated, clicking a selected song in the playlist view will let you edit the tag value directly</string>
+     </property>
+     <property name="text">
+      <string>Enable song metadata inline edition with click</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QCheckBox" name="resume_after_start_">
+     <property name="text">
+      <string>Resume playback on start</string>
+     </property>
+     <property name="checked">
+      <bool>false</bool>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QCheckBox" name="stop_play_if_fail_">
+     <property name="text">
+      <string>Stop playback if song fails to play</string>
+     </property>
+     <property name="checked">
+      <bool>false</bool>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QCheckBox" name="b_grey_out_deleted_">
+     <property name="text">
+      <string>Grey out non existent songs in my playlists</string>
+     </property>
     </widget>
    </item>
    <item>
@@ -364,7 +348,7 @@
       <item>
        <widget class="QRadioButton" name="b_automatic_path">
         <property name="text">
-         <string>Automatic</string>
+         <string>A&amp;utomatic</string>
         </property>
         <property name="checked">
          <bool>true</bool>
@@ -388,7 +372,7 @@
       <item>
        <widget class="QRadioButton" name="b_ask_path">
         <property name="text">
-         <string>Ask when saving</string>
+         <string>As&amp;k when saving</string>
         </property>
        </widget>
       </item>
