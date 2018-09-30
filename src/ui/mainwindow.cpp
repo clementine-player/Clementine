@@ -795,17 +795,17 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
   // Tray icon
   if (tray_icon_) {
     tray_icon_->SetupMenu(ui_->action_previous_track, ui_->action_play_pause,
-                        ui_->action_stop, ui_->action_stop_after_this_track,
-                        ui_->action_next_track, ui_->action_mute,
-                        ui_->action_love, ui_->action_quit);
+                          ui_->action_stop, ui_->action_stop_after_this_track,
+                          ui_->action_next_track, ui_->action_mute,
+                          ui_->action_love, ui_->action_quit);
     connect(tray_icon_, SIGNAL(PlayPause()), app_->player(), SLOT(PlayPause()));
     connect(tray_icon_, SIGNAL(SeekForward()), app_->player(),
-          SLOT(SeekForward()));
+            SLOT(SeekForward()));
     connect(tray_icon_, SIGNAL(SeekBackward()), app_->player(),
-          SLOT(SeekBackward()));
+            SLOT(SeekBackward()));
     connect(tray_icon_, SIGNAL(NextTrack()), app_->player(), SLOT(Next()));
     connect(tray_icon_, SIGNAL(PreviousTrack()), app_->player(),
-          SLOT(Previous()));
+            SLOT(Previous()));
     connect(tray_icon_, SIGNAL(ShowHide()), SLOT(ToggleShowHide()));
     connect(tray_icon_, SIGNAL(ChangeVolume(int)), SLOT(VolumeWheelEvent(int)));
   }
@@ -1040,7 +1040,8 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
 
   // Force the window to show in case somehow the config has tray and window set
   // to hide
-  if (hidden && (!QSystemTrayIcon::isSystemTrayAvailable() || !tray_icon_ || !tray_icon_->IsVisible())) {
+  if (hidden && (!QSystemTrayIcon::isSystemTrayAvailable() || !tray_icon_ ||
+                 !tray_icon_->IsVisible())) {
     settings_.setValue("hidden", false);
     show();
   }
@@ -1074,10 +1075,15 @@ MainWindow::~MainWindow() {
 
 void MainWindow::ReloadSettings() {
 #ifndef Q_OS_DARWIN
-  bool show_tray = settings_.value("showtray", (QSystemTrayIcon::isSystemTrayAvailable() ? true : false)).toBool();
+  bool show_tray =
+      settings_
+          .value("showtray",
+                 (QSystemTrayIcon::isSystemTrayAvailable() ? true : false))
+          .toBool();
 
   if (tray_icon_) tray_icon_->SetVisible(show_tray);
-  if ((!show_tray || !QSystemTrayIcon::isSystemTrayAvailable()) && !isVisible()) show();
+  if ((!show_tray || !QSystemTrayIcon::isSystemTrayAvailable()) && !isVisible())
+    show();
 #endif
 
   QSettings s;
