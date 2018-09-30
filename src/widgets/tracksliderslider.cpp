@@ -32,6 +32,7 @@ TrackSliderSlider::TrackSliderSlider(QWidget* parent)
       mouse_hover_seconds_(0) {
   setMouseTracking(true);
 
+  popup_->hide();
   connect(this, SIGNAL(valueChanged(int)), SLOT(UpdateDeltaTime()));
 }
 
@@ -60,6 +61,12 @@ void TrackSliderSlider::mousePressEvent(QMouseEvent* e) {
 
 void TrackSliderSlider::mouseReleaseEvent(QMouseEvent* e) {
   QSlider::mouseReleaseEvent(e);
+  if (e->button() == Qt::XButton1) {
+    emit Previous();
+  } else if (e->button() == Qt::XButton2) {
+    emit Next();
+  }
+  e->accept();
 }
 
 void TrackSliderSlider::mouseMoveEvent(QMouseEvent* e) {

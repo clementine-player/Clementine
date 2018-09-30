@@ -93,6 +93,8 @@ class LibraryQuery {
 
   operator const QSqlQuery&() const { return query_; }
 
+  static const QStringList kNumericCompOperators;
+
  private:
   QString GetInnerQuery();
 

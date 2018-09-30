@@ -1,0 +1,72 @@
+steps:
+- name: 'gcr.io/cloud-builders/gcloud'
+  args:
+  - kms
+  - decrypt
+  - --ciphertext-file=dist/translations/id_rsa.enc
+  - --plaintext-file=/root/.ssh/id_rsa
+  - --location=global
+  - --keyring=translations
+  - --key=transifex
+  volumes:
+  - name: 'ssh'
+    path: /root/.ssh
+
+- name: 'gcr.io/cloud-builders/git'
+  entrypoint: 'bash'
+  args:
+  - -c
+  - |
+    chmod 600 /root/.ssh/id_rsa
+    cat <<EOF >/root/.ssh/config
+    Hostname github.com
+    IdentityFile /root/.ssh/id_rsa
+    EOF
+    mv dist/translations/known_hosts /root/.ssh/known_hosts
+  volumes:
+  - name: 'ssh'
+    path: /root/.ssh
+
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '-t', 'transifex', '.']
+  dir: 'dist/translations/transifex'
+
+- name: 'transifex'
+  secretEnv: ['TX_TOKEN']
+  args: ['init', '--no-interactive', '--force']
+
+- name: 'transifex'
+  secretEnv: ['TX_TOKEN']
+  args: ['config', 'mapping', '--execute', '-r', 'clementine.clementineplayer', '-s', 'en', '-t', 'PO', 'src/translations/<lang>.po']
+
+- name: 'transifex'
+  secretEnv: ['TX_TOKEN']
+  args: ['pull', '--all', '-f', '--no-interactive']
+
+- name: 'gcr.io/cloud-builders/git'
+  entrypoint: 'bash'
+  args:
+  - -c
+  - |
+    git add src/translations/*.po
+
+- name: 'gcr.io/cloud-builders/git'
+  args:
+  - -c
+  - user.name=Clementine Buildbot
+  - -c
+  - user.email=buildbot@clementine-player.org
+  - commit
+  - --message
+  - Automatic merge of translations from Transifex (https://www.transifex.com/projects/p/clementine/resource/clementineplayer)
+
+- name: 'gcr.io/cloud-builders/git'
+  args: ['push', 'git@github.com:clementine-player/Clementine.git', 'master']
+  volumes:
+  - name: 'ssh'
+    path: /root/.ssh
+
+secrets:
+- kmsKeyName: projects/clementine-data/locations/global/keyRings/translations/cryptoKeys/transifex
+  secretEnv:
+    TX_TOKEN: CiQAmOiGiwceV26v7vX/yvQQXkMJ7+zwH9Y2zy+B4FtwM1iVdj8SVAD+AEzLJXJ6d+hGZlJPYjbbxL6/wiOhQIZLc+yvFznLSIn6dtCAhFecNqYX+cj+nxuZ/uHR9p72kj7PPsqy54WkWRvbG1Xl4CQX67wy3cqnlRHsqQ==

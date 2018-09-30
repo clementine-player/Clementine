@@ -15,6 +15,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include <QtConcurrentRun>
+
 #include <gst/gst.h>
 #include <gst/tag/tag.h>
 
@@ -24,10 +26,10 @@
 #include "cddasongloader.h"
 
 CddaSongLoader::CddaSongLoader(const QUrl& url, QObject* parent)
-  : QObject(parent),
-    url_(url),
-    cdda_(nullptr),
-    cdio_(nullptr) {}
+    : QObject(parent), url_(url), cdda_(nullptr), cdio_(nullptr) {
+  connect(this, SIGNAL(MusicBrainzDiscIdLoaded(const QString&)),
+          SLOT(LoadAudioCDTags(const QString&)));
+}
 
 CddaSongLoader::~CddaSongLoader() {
   if (cdio_) cdio_destroy(cdio_);
@@ -42,6 +44,9 @@ QUrl CddaSongLoader::GetUrlFromTrack(int track_number) const {
 }
 
 void CddaSongLoader::LoadSongs() {
+  QtConcurrent::run(this, &CddaSongLoader::LoadSongsFromCdda);
+}
+void CddaSongLoader::LoadSongsFromCdda() {
   QMutexLocker locker(&mutex_load_);
   cdio_ = cdio_open(url_.path().toLocal8Bit().constData(), DRIVER_DEVICE);
   if (cdio_ == nullptr) {
@@ -101,7 +106,6 @@ void CddaSongLoader::LoadSongs() {
   }
   emit SongsLoaded(songs);
 
-
   gst_tag_register_musicbrainz_tags();
 
   GstElement* pipeline = gst_pipeline_new("pipeline");
@@ -115,8 +119,9 @@ void CddaSongLoader::LoadSongs() {
   GstMessage* msg = nullptr;
   GstMessage* msg_toc = nullptr;
   GstMessage* msg_tag = nullptr;
-  while ((msg = gst_bus_timed_pop_filtered(GST_ELEMENT_BUS(pipeline),
-      GST_SECOND, (GstMessageType)(GST_MESSAGE_TOC | GST_MESSAGE_TAG)))) {
+  while ((msg = gst_bus_timed_pop_filtered(
+              GST_ELEMENT_BUS(pipeline), 2 * GST_SECOND,
+              (GstMessageType)(GST_MESSAGE_TOC | GST_MESSAGE_TAG)))) {
     if (GST_MESSAGE_TYPE(msg) == GST_MESSAGE_TOC) {
       if (msg_toc) gst_message_unref(msg_toc); // Shouldn't happen, but just in case
       msg_toc = msg;
@@ -157,13 +162,8 @@ void CddaSongLoader::LoadSongs() {
                                 &string_mb)) {
       QString musicbrainz_discid(string_mb);
       qLog(Info) << "MusicBrainz discid: " << musicbrainz_discid;
+      emit MusicBrainzDiscIdLoaded(musicbrainz_discid);
 
-      MusicBrainzClient* musicbrainz_client = new MusicBrainzClient;
-      connect(musicbrainz_client, SIGNAL(Finished(const QString&, const QString&,
-                                                  MusicBrainzClient::ResultList)),
-              SLOT(AudioCDTagsLoaded(const QString&, const QString&,
-                                     MusicBrainzClient::ResultList)));
-      musicbrainz_client->StartDiscIdRequest(musicbrainz_discid);
       g_free(string_mb);
       gst_message_unref(msg_tag);
       gst_tag_list_free(tags);
@@ -173,6 +173,17 @@ void CddaSongLoader::LoadSongs() {
   gst_element_set_state(pipeline, GST_STATE_NULL);
   // This will also cause cdda_ to be unref'd.
   gst_object_unref(pipeline);
+}
+
+void CddaSongLoader::LoadAudioCDTags(const QString& musicbrainz_discid) const {
+  MusicBrainzClient* musicbrainz_client = new MusicBrainzClient;
+  connect(musicbrainz_client,
+          SIGNAL(Finished(const QString&, const QString&,
+                          MusicBrainzClient::ResultList)),
+          SLOT(AudioCDTagsLoaded(const QString&, const QString&,
+                                 MusicBrainzClient::ResultList)));
+
+  musicbrainz_client->StartDiscIdRequest(musicbrainz_discid);
 }
 
 void CddaSongLoader::AudioCDTagsLoaded(

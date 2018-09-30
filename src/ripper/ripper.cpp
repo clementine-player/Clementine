@@ -86,19 +86,6 @@ int Ripper::TracksOnDisc() const {
   return number_of_tracks;
 }
 
-int Ripper::TrackDurationSecs(int track) const {
-  Q_ASSERT(track <= TracksOnDisc());
-
-  int first_frame = cdio_get_track_lsn(cdio_, track);
-  int last_frame = cdio_get_track_last_lsn(cdio_, track);
-  if (first_frame != CDIO_INVALID_LSN && last_frame != CDIO_INVALID_LSN) {
-    return (last_frame - first_frame + 1) / CDIO_CD_FRAMES_PER_SEC;
-  } else {
-    qLog(Error) << "Could not compute duration of track" << track;
-    return 0;
-  }
-}
-
 int Ripper::AddedTracks() const { return tracks_.length(); }
 
 void Ripper::ClearTracks() { tracks_.clear(); }
@@ -219,6 +206,11 @@ void Ripper::WriteWAVHeader(QFile* stream, int32_t i_bytecount) {
 }
 
 void Ripper::Rip() {
+  if (tracks_.isEmpty()) {
+    emit Finished();
+    return;
+  }
+
   temporary_directory_ = Utilities::MakeTempDir() + "/";
   finished_success_ = 0;
   finished_failed_ = 0;

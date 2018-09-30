@@ -1,0 +1,32 @@
+steps:
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '-t', 'transifex', '.']
+  dir: 'dist/translations/transifex'
+
+- name: 'transifex'
+  secretEnv: ['TX_TOKEN']
+  args: ['init', '--no-interactive', '--force']
+
+- name: 'gcr.io/clementine-data/slave-ubuntu-zesty-64'
+  entrypoint: 'cmake'
+  dir: 'bin'
+  args: ['..']
+
+- name: 'gcr.io/clementine-data/slave-ubuntu-zesty-64'
+  entrypoint: 'make'
+  dir: 'bin'
+
+- name: 'transifex'
+  secretEnv: ['TX_TOKEN']
+  args: ['config', 'mapping', '--execute', '-r', 'clementine.clementineplayer', '-f', 'src/translations/translations.pot', '-s', 'en', '-t', 'PO', 'src/translations/<lang>.po']
+
+- name: 'transifex'
+  secretEnv: ['TX_TOKEN']
+  args: ['push', '-s']
+
+secrets:
+- kmsKeyName: projects/clementine-data/locations/global/keyRings/translations/cryptoKeys/transifex
+  secretEnv:
+    TX_TOKEN: CiQAmOiGiwceV26v7vX/yvQQXkMJ7+zwH9Y2zy+B4FtwM1iVdj8SVAD+AEzLJXJ6d+hGZlJPYjbbxL6/wiOhQIZLc+yvFznLSIn6dtCAhFecNqYX+cj+nxuZ/uHR9p72kj7PPsqy54WkWRvbG1Xl4CQX67wy3cqnlRHsqQ==
+
+timeout: 1200s
