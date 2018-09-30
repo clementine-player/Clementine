@@ -42,6 +42,7 @@
 #ifdef TAGLIB_HAS_OPUS
 #include <opusfile.h>
 #endif
+#include <apetag.h>
 #include <oggflacfile.h>
 #include <popularimeterframe.h>
 #include <speexfile.h>
@@ -53,7 +54,6 @@
 #include <vorbisfile.h>
 #include <wavfile.h>
 #include <wavpackfile.h>
-#include <apetag.h>
 
 #include <sys/stat.h>
 
@@ -723,9 +723,9 @@ bool TagReader::SaveFile(const QString& filename,
     tag->itemListMap()["aART"] = TagLib::StringList(song.albumartist().c_str());
     tag->itemListMap()["cpil"] =
         TagLib::StringList(song.compilation() ? "1" : "0");
-  }
-  else if (TagLib::WavPack::File *file = dynamic_cast<TagLib::WavPack::File*>(fileref->file())) {
-    TagLib::APE::Tag *tag = file->APETag(true);
+  } else if (TagLib::WavPack::File* file =
+                 dynamic_cast<TagLib::WavPack::File*>(fileref->file())) {
+    TagLib::APE::Tag* tag = file->APETag(true);
     if (!tag) return false;
     tag->setArtist(StdStringToTaglibString(song.artist()));
     tag->setAlbum(StdStringToTaglibString(song.album()));
