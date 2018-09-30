@@ -101,13 +101,11 @@ BehaviourSettingsPage::BehaviourSettingsPage(SettingsDialog* dialog)
   if (QSystemTrayIcon::isSystemTrayAvailable()) {
     ui_->b_show_tray_icon_->setEnabled(true);
     ui_->startup_group_->setEnabled(true);
-  }
-  else {
+  } else {
     ui_->b_show_tray_icon_->setEnabled(false);
     ui_->startup_group_->setEnabled(false);
   }
 #endif
-
 }
 
 BehaviourSettingsPage::~BehaviourSettingsPage() { delete ui_; }
@@ -123,14 +121,16 @@ void BehaviourSettingsPage::Load() {
 #else
   if (QSystemTrayIcon::isSystemTrayAvailable()) {
     ui_->b_show_tray_icon_->setChecked(s.value("showtray", true).toBool());
-    ui_->b_scroll_tray_icon_->setChecked(s.value("scrolltrayicon", ui_->b_show_tray_icon_->isChecked()).toBool());
-    ui_->b_keep_running_->setChecked(s.value("keeprunning", ui_->b_show_tray_icon_->isChecked()).toBool());
-  }
-  else {
+    ui_->b_scroll_tray_icon_->setChecked(
+        s.value("scrolltrayicon", ui_->b_show_tray_icon_->isChecked())
+            .toBool());
+    ui_->b_keep_running_->setChecked(
+        s.value("keeprunning", ui_->b_show_tray_icon_->isChecked()).toBool());
+  } else {
     ui_->b_show_tray_icon_->setChecked(false);
     ui_->b_scroll_tray_icon_->setChecked(false);
     ui_->b_keep_running_->setChecked(false);
- }
+  }
 #endif
 
   ui_->doubleclick_addmode->setCurrentIndex(ui_->doubleclick_addmode->findData(
