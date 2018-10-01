@@ -21,8 +21,9 @@
 
 #include <QApplication>
 #include <QEvent>
-#include <QWheelEvent>
 #include <QPainter>
+#include <QSystemTrayIcon>
+#include <QWheelEvent>
 #include <QWidget>
 #include <QtDebug>
 
@@ -105,6 +106,9 @@ SystemTrayIcon* SystemTrayIcon::CreateSystemTrayIcon(QObject* parent) {
 #ifdef Q_OS_DARWIN
   return new MacSystemTrayIcon(parent);
 #else
-  return new QtSystemTrayIcon(parent);
+  if (QSystemTrayIcon::isSystemTrayAvailable())
+    return new QtSystemTrayIcon(parent);
+  else
+    return nullptr;
 #endif
 }
