@@ -153,7 +153,6 @@ set(SOURCES
   globalsearch/simplesearchprovider.cpp
   globalsearch/somafmsearchprovider.cpp
   globalsearch/intergalacticfmsearchprovider.cpp
-  globalsearch/soundcloudsearchprovider.cpp
   globalsearch/spotifysearchprovider.cpp
   globalsearch/suggestionwidget.cpp
   globalsearch/urlsearchprovider.cpp
@@ -191,8 +190,6 @@ set(SOURCES
   internet/somafm/somafmurlhandler.cpp
   internet/intergalacticfm/intergalacticfmservice.cpp
   internet/intergalacticfm/intergalacticfmurlhandler.cpp
-  internet/soundcloud/soundcloudservice.cpp
-  internet/soundcloud/soundcloudsettingspage.cpp
   internet/spotify/spotifyserver.cpp
   internet/spotify/spotifyservice.cpp
   internet/spotify/spotifysettingspage.cpp
@@ -465,7 +462,6 @@ set(HEADERS
   globalsearch/globalsearchview.h
   globalsearch/searchprovider.h
   globalsearch/simplesearchprovider.h
-  globalsearch/soundcloudsearchprovider.h
   globalsearch/spotifysearchprovider.h
   globalsearch/suggestionwidget.h
 
@@ -499,8 +495,6 @@ set(HEADERS
   internet/somafm/somafmurlhandler.h
   internet/intergalacticfm/intergalacticfmservice.h
   internet/intergalacticfm/intergalacticfmurlhandler.h
-  internet/soundcloud/soundcloudservice.h
-  internet/soundcloud/soundcloudsettingspage.h
   internet/spotify/spotifyserver.h
   internet/spotify/spotifyservice.h
   internet/spotify/spotifysettingspage.h
@@ -701,7 +695,6 @@ set(UI
   internet/magnatune/magnatunedownloaddialog.ui
   internet/magnatune/magnatunesettingspage.ui
   internet/core/searchboxwidget.ui
-  internet/soundcloud/soundcloudsettingspage.ui
   internet/spotify/spotifysettingspage.ui
   internet/subsonic/subsonicsettingspage.ui
 

@@ -34,7 +34,6 @@
 #include "internet/digitally/digitallyimportedsettingspage.h"
 #include "internet/magnatune/magnatunesettingspage.h"
 #include "internet/podcasts/podcastsettingspage.h"
-#include "internet/soundcloud/soundcloudsettingspage.h"
 #include "internet/spotify/spotifysettingspage.h"
 #include "internet/subsonic/subsonicsettingspage.h"
 #include "library/librarysettingspage.h"
@@ -175,7 +174,6 @@ SettingsDialog::SettingsDialog(Application* app, BackgroundStreams* streams,
   AddPage(Page_Skydrive, new SkydriveSettingsPage(this), providers);
 #endif
 
-  AddPage(Page_SoundCloud, new SoundCloudSettingsPage(this), providers);
   AddPage(Page_Spotify, new SpotifySettingsPage(this), providers);
 
 #ifdef HAVE_SEAFILE
