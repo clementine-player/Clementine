@@ -23,6 +23,7 @@
 #include "playlist/playlisttabbar.h"
 
 #include <QDir>
+#include <QSystemTrayIcon>
 
 namespace {
 bool LocaleAwareCompare(const QString& a, const QString& b) {
@@ -94,6 +95,14 @@ BehaviourSettingsPage::BehaviourSettingsPage(SettingsDialog* dialog)
 #ifdef Q_OS_DARWIN
   ui_->b_show_tray_icon_->setEnabled(false);
   ui_->startup_group_->setEnabled(false);
+#else
+  if (QSystemTrayIcon::isSystemTrayAvailable()) {
+    ui_->b_show_tray_icon_->setEnabled(true);
+    ui_->startup_group_->setEnabled(true);
+  } else {
+    ui_->b_show_tray_icon_->setEnabled(false);
+    ui_->startup_group_->setEnabled(false);
+  }
 #endif
 }
 
@@ -103,11 +112,25 @@ void BehaviourSettingsPage::Load() {
   QSettings s;
 
   s.beginGroup(MainWindow::kSettingsGroup);
-  ui_->b_show_tray_icon_->setChecked(s.value("showtray", true).toBool());
-  ui_->b_scroll_tray_icon_->setChecked(
-      s.value("scrolltrayicon", ui_->b_show_tray_icon_->isChecked()).toBool());
-  ui_->b_keep_running_->setChecked(
-      s.value("keeprunning", ui_->b_show_tray_icon_->isChecked()).toBool());
+#ifdef Q_OS_DARWIN
+  ui_->b_show_tray_icon_->setChecked(false);
+  ui_->b_scroll_tray_icon_->setChecked(false);
+  ui_->b_keep_running_->setChecked(false);
+#else
+  if (QSystemTrayIcon::isSystemTrayAvailable()) {
+    ui_->b_show_tray_icon_->setChecked(s.value("showtray", true).toBool());
+    ui_->b_scroll_tray_icon_->setChecked(
+        s.value("scrolltrayicon", ui_->b_show_tray_icon_->isChecked())
+            .toBool());
+    ui_->b_keep_running_->setChecked(
+        s.value("keeprunning", ui_->b_show_tray_icon_->isChecked()).toBool());
+  } else {
+    ui_->b_show_tray_icon_->setChecked(false);
+    ui_->b_scroll_tray_icon_->setChecked(false);
+    ui_->b_keep_running_->setChecked(false);
+  }
+#endif
+
   ui_->doubleclick_addmode->setCurrentIndex(ui_->doubleclick_addmode->findData(
       s.value("doubleclick_addmode", MainWindow::AddBehaviour_Append).toInt()));
   ui_->doubleclick_playmode->setCurrentIndex(

@@ -42,6 +42,7 @@
 #ifdef TAGLIB_HAS_OPUS
 #include <opusfile.h>
 #endif
+#include <apetag.h>
 #include <oggflacfile.h>
 #include <popularimeterframe.h>
 #include <speexfile.h>
@@ -722,6 +723,17 @@ bool TagReader::SaveFile(const QString& filename,
     tag->itemListMap()["aART"] = TagLib::StringList(song.albumartist().c_str());
     tag->itemListMap()["cpil"] =
         TagLib::StringList(song.compilation() ? "1" : "0");
+  } else if (TagLib::WavPack::File* file =
+                 dynamic_cast<TagLib::WavPack::File*>(fileref->file())) {
+    TagLib::APE::Tag* tag = file->APETag(true);
+    if (!tag) return false;
+    tag->setArtist(StdStringToTaglibString(song.artist()));
+    tag->setAlbum(StdStringToTaglibString(song.album()));
+    tag->setTitle(StdStringToTaglibString(song.title()));
+    tag->setGenre(StdStringToTaglibString(song.genre()));
+    tag->setComment(StdStringToTaglibString(song.comment()));
+    tag->setYear(song.year());
+    tag->setTrack(song.track());
   }
 
   // Handle all the files which have VorbisComments (Ogg, OPUS, ...) in the same
