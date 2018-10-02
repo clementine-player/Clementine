@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2018-09-17 13:31+0000\n"
+"PO-Revision-Date: 2018-10-01 17:06+0000\n"
 "Last-Translator: hatstand <john.maguire@gmail.com>\n"
 "Language-Team: Basque (http://www.transifex.com/davidsansome/clementine/language/eu/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -54,7 +54,7 @@ msgstr " ms"
 msgid " pt"
 msgstr " pt"
 
-#: ../bin/src/ui_behavioursettingspage.h:375
+#: ../bin/src/ui_behavioursettingspage.h:370
 msgid " s"
 msgstr ""
 
@@ -396,6 +396,10 @@ msgid ""
 "A song will be included in the playlist if it matches these conditions."
 msgstr "Abestia zerrendan sartuko da baldintza hauek betetzen baditu."
 
+#: ../bin/src/ui_behavioursettingspage.h:373
+msgid "A&utomatic"
+msgstr ""
+
 #: smartplaylists/searchterm.cpp:396
 msgid "A-Z"
 msgstr "A-Z"
@@ -442,7 +446,7 @@ msgid "About Qt..."
 msgstr "Qt-ri buruz..."
 
 #: playlist/playlistsaveoptionsdialog.cpp:34
-#: ../bin/src/ui_behavioursettingspage.h:379
+#: ../bin/src/ui_behavioursettingspage.h:374
 msgid "Absolute"
 msgstr ""
 
@@ -467,10 +471,6 @@ msgstr ""
 
 #: wiimotedev/wiimotesettingspage.cpp:103
 msgid "Activate/Deactivate Wii Remote"
-msgstr ""
-
-#: internet/soundcloud/soundcloudservice.cpp:128
-msgid "Activities stream"
 msgstr ""
 
 #: internet/podcasts/addpodcastdialog.cpp:63
@@ -501,7 +501,7 @@ msgstr "Gehitu beste jario bat..."
 msgid "Add directory..."
 msgstr "Gehitu direktorioa..."
 
-#: ui/mainwindow.cpp:2049
+#: ui/mainwindow.cpp:2062
 msgid "Add file"
 msgstr "Gehitu fitxategia"
 
@@ -521,7 +521,7 @@ msgstr "Gehitu fitxategia..."
 msgid "Add files to transcode"
 msgstr "Gehitu transkodetzeko fitxategiak"
 
-#: transcoder/transcodedialog.cpp:306 ui/mainwindow.cpp:2076
+#: transcoder/transcodedialog.cpp:306 ui/mainwindow.cpp:2089
 #: ripper/ripcddialog.cpp:201
 msgid "Add folder"
 msgstr "Gehitu karpeta"
@@ -626,7 +626,7 @@ msgstr ""
 msgid "Add to Spotify starred"
 msgstr ""
 
-#: ui/mainwindow.cpp:1850
+#: ui/mainwindow.cpp:1863
 msgid "Add to another playlist"
 msgstr "Gehitu beste erreprodukzio-zerrenda batera"
 
@@ -634,8 +634,8 @@ msgstr "Gehitu beste erreprodukzio-zerrenda batera"
 msgid "Add to playlist"
 msgstr "Gehitu erreprodukzio-zerrendara"
 
-#: ../bin/src/ui_behavioursettingspage.h:359
-#: ../bin/src/ui_behavioursettingspage.h:371
+#: ../bin/src/ui_behavioursettingspage.h:354
+#: ../bin/src/ui_behavioursettingspage.h:366
 msgid "Add to the queue"
 msgstr "Gehitu ilarara"
 
@@ -716,7 +716,7 @@ msgstr "Azal gabeko albumak"
 msgid "All"
 msgstr ""
 
-#: ui/mainwindow.cpp:158
+#: ui/mainwindow.cpp:159
 msgid "All Files (*)"
 msgstr "Fitxategi guztiak (*)"
 
@@ -766,16 +766,16 @@ msgstr "Mid/side kodeketa baimendu"
 msgid "Alongside the originals"
 msgstr "Jatorrizkoekin batera"
 
-#: ../bin/src/ui_behavioursettingspage.h:331
-msgid "Always hide the main window"
-msgstr "Leiho nagusia beti ezkutatu"
+#: ../bin/src/ui_behavioursettingspage.h:326
+msgid "Alwa&ys hide the main window"
+msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:330
-msgid "Always show the main window"
-msgstr "Leiho nagusia beti erakutsi"
+#: ../bin/src/ui_behavioursettingspage.h:325
+msgid "Always show &the main window"
+msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:345
-#: ../bin/src/ui_behavioursettingspage.h:365
+#: ../bin/src/ui_behavioursettingspage.h:340
+#: ../bin/src/ui_behavioursettingspage.h:360
 msgid "Always start playing"
 msgstr "Beti hasi erreproduzitzen"
 
@@ -822,7 +822,7 @@ msgstr "Erantsi Fitxategiak/URL-ak erreprodukzio-zerrendari"
 msgid "Append to current playlist"
 msgstr "Erantsi oraingo erreprodukzio-zerrendari"
 
-#: ../bin/src/ui_behavioursettingspage.h:356
+#: ../bin/src/ui_behavioursettingspage.h:351
 msgid "Append to the playlist"
 msgstr "Erantsi erreprodukzio-zerrendari"
 
@@ -854,7 +854,7 @@ msgstr ""
 msgid "Artist"
 msgstr "Artista"
 
-#: ui/mainwindow.cpp:283
+#: ui/mainwindow.cpp:284
 msgid "Artist info"
 msgstr "Artis. infor."
 
@@ -862,8 +862,8 @@ msgstr "Artis. infor."
 msgid "Artist's initial"
 msgstr "Artistaren inizialak"
 
-#: ../bin/src/ui_behavioursettingspage.h:381
-msgid "Ask when saving"
+#: ../bin/src/ui_behavioursettingspage.h:376
+msgid "As&k when saving"
 msgstr ""
 
 #: ../bin/src/ui_transcodedialog.h:225
@@ -897,7 +897,6 @@ msgid "Auto"
 msgstr "Automatikoa"
 
 #: playlist/playlistsaveoptionsdialog.cpp:32
-#: ../bin/src/ui_behavioursettingspage.h:378
 msgid "Automatic"
 msgstr ""
 
@@ -946,7 +945,7 @@ msgstr "Atzeko planoko irudia"
 msgid "Background opacity"
 msgstr "Atzeko planoko opakotasuna"
 
-#: core/database.cpp:648
+#: core/database.cpp:664
 msgid "Backing up database"
 msgstr "Datu-basearen babeskopia burutzen"
 
@@ -970,7 +969,7 @@ msgstr "Oinarrizko urdina"
 msgid "Basic audio type"
 msgstr "Oinarrizko audio mota"
 
-#: ../bin/src/ui_behavioursettingspage.h:318
+#: ../bin/src/ui_behavioursettingspage.h:313
 msgid "Behavior"
 msgstr "Portaera"
 
@@ -1088,7 +1087,7 @@ msgstr "Aldatu laster-tekla..."
 msgid "Change shuffle mode"
 msgstr "Aldatu ausazko modua"
 
-#: ../bin/src/ui_behavioursettingspage.h:370
+#: ../bin/src/ui_behavioursettingspage.h:365
 msgid "Change the currently playing song"
 msgstr ""
 
@@ -1118,7 +1117,7 @@ msgstr "Atal berriak bilatu"
 msgid "Check for updates"
 msgstr ""
 
-#: ui/mainwindow.cpp:820
+#: ui/mainwindow.cpp:823
 msgid "Check for updates..."
 msgstr "Eguneraketak bilatu..."
 
@@ -1260,7 +1259,6 @@ msgstr ""
 msgid "Click to toggle between remaining time and total time"
 msgstr "Egin klik geratzen den denbora eta denbora osoaren artean txandakatzeko"
 
-#: ../bin/src/ui_soundcloudsettingspage.h:103
 #: ../bin/src/ui_lastfmsettingspage.h:133
 #: ../bin/src/ui_googledrivesettingspage.h:102
 #: ../bin/src/ui_dropboxsettingspage.h:102
@@ -1339,10 +1337,6 @@ msgstr "Konfiguratu Magnatune..."
 msgid "Configure Shortcuts"
 msgstr "Konfiguratu laster-teklak"
 
-#: internet/soundcloud/soundcloudservice.cpp:381
-msgid "Configure SoundCloud..."
-msgstr ""
-
 #: internet/spotify/spotifyservice.cpp:927
 msgid "Configure Spotify..."
 msgstr "Konfiguratu Spotify..."
@@ -1355,7 +1349,7 @@ msgstr "Subsonic konfiguratu"
 msgid "Configure global search..."
 msgstr "Bilaketa globala konfiguratu..."
 
-#: ui/mainwindow.cpp:659
+#: ui/mainwindow.cpp:660
 msgid "Configure library..."
 msgstr "Konfiguratu bilduma..."
 
@@ -1427,11 +1421,11 @@ msgid "Copy to clipboard"
 msgstr "Kopiatu arbelean"
 
 #: library/libraryview.cpp:419 internet/podcasts/podcastservice.cpp:438
-#: ui/mainwindow.cpp:719 widgets/fileviewlist.cpp:44
+#: ui/mainwindow.cpp:720 widgets/fileviewlist.cpp:44
 msgid "Copy to device..."
 msgstr "Kopiatu gailura..."
 
-#: devices/deviceview.cpp:228 ui/mainwindow.cpp:709
+#: devices/deviceview.cpp:228 ui/mainwindow.cpp:710
 #: widgets/fileviewlist.cpp:40
 msgid "Copy to library..."
 msgstr "Kopiatu bildumara..."
@@ -1575,7 +1569,7 @@ msgstr ""
 msgid "Dance"
 msgstr "Dance"
 
-#: core/database.cpp:601
+#: core/database.cpp:617
 msgid ""
 "Database corruption detected. Please read https://github.com/clementine-"
 "player/Clementine/wiki/Database-Corruption for instructions on how to "
@@ -1637,7 +1631,7 @@ msgid "Delete downloaded data"
 msgstr "Ezabatu deskargatutako datuak"
 
 #: devices/deviceview.cpp:408 library/libraryview.cpp:678
-#: ui/mainwindow.cpp:2432 widgets/fileview.cpp:188
+#: ui/mainwindow.cpp:2445 widgets/fileview.cpp:188
 msgid "Delete files"
 msgstr "Ezabatu fitxategiak"
 
@@ -1645,7 +1639,7 @@ msgstr "Ezabatu fitxategiak"
 msgid "Delete from device..."
 msgstr "Ezabatu gailutik..."
 
-#: library/libraryview.cpp:422 ui/mainwindow.cpp:722
+#: library/libraryview.cpp:422 ui/mainwindow.cpp:723
 #: widgets/fileviewlist.cpp:47
 msgid "Delete from disk..."
 msgstr "Ezabatu diskotik..."
@@ -1678,11 +1672,11 @@ msgstr "Fitxategiak ezabatzen"
 msgid "Depth"
 msgstr ""
 
-#: ui/mainwindow.cpp:1763
+#: ui/mainwindow.cpp:1776
 msgid "Dequeue selected tracks"
 msgstr "Atera aukeraturiko pistak ilaratik"
 
-#: ui/mainwindow.cpp:1761
+#: ui/mainwindow.cpp:1774
 msgid "Dequeue track"
 msgstr "Atera pista ilaratik"
 
@@ -1711,7 +1705,7 @@ msgstr "Gailuaren izena"
 msgid "Device properties..."
 msgstr "Gailuaren propietateak..."
 
-#: ui/mainwindow.cpp:276
+#: ui/mainwindow.cpp:277
 msgid "Devices"
 msgstr "Gailuak"
 
@@ -1841,11 +1835,11 @@ msgstr ""
 msgid "Double click to open"
 msgstr "Klik bikoitza irekitzeko"
 
-#: ../bin/src/ui_behavioursettingspage.h:367
+#: ../bin/src/ui_behavioursettingspage.h:362
 msgid "Double clicking a song in the playlist will..."
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:353
+#: ../bin/src/ui_behavioursettingspage.h:348
 msgid "Double clicking a song will..."
 msgstr "Abesti batean klik bikoitza eginez gero..."
 
@@ -1954,7 +1948,7 @@ msgstr "Ausazko nahasketa dinamikoa"
 msgid "Edit smart playlist..."
 msgstr "Editatu erreprodukzio-zerrenda adimenduna..."
 
-#: ui/mainwindow.cpp:1813
+#: ui/mainwindow.cpp:1826
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr ""
@@ -2000,7 +1994,7 @@ msgstr "Gaitu ekualizadorea"
 msgid "Enable shortcuts only when Clementine is focused"
 msgstr "Gaitu lasterbideak Clementine fokaturik dagoenean bakarrik"
 
-#: ../bin/src/ui_behavioursettingspage.h:339
+#: ../bin/src/ui_behavioursettingspage.h:331
 msgid "Enable song metadata inline edition with click"
 msgstr ""
 
@@ -2089,8 +2083,8 @@ msgid "Equivalent to --log-levels *:3"
 msgstr "--log-levels *:3-en baliokidea"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:246
-#: library/libraryview.cpp:672 ui/mainwindow.cpp:2105 ui/mainwindow.cpp:2384
-#: ui/mainwindow.cpp:2563
+#: library/libraryview.cpp:672 ui/mainwindow.cpp:2118 ui/mainwindow.cpp:2397
+#: ui/mainwindow.cpp:2576
 msgid "Error"
 msgstr "Errorea"
 
@@ -2236,7 +2230,7 @@ msgstr "Iraungitzea"
 msgid "Fading duration"
 msgstr "Iraungitzearen iraupena"
 
-#: ui/mainwindow.cpp:2106
+#: ui/mainwindow.cpp:2119
 msgid "Failed reading CD drive"
 msgstr ""
 
@@ -2270,10 +2264,6 @@ msgstr ""
 #: ../bin/src/ui_transcoderoptionsmp3.h:199
 msgid "Fast"
 msgstr "Azkarra"
-
-#: internet/soundcloud/soundcloudservice.cpp:141
-msgid "Favorites"
-msgstr ""
 
 #: library/library.cpp:88
 msgid "Favourite tracks"
@@ -2341,7 +2331,7 @@ msgstr "Fitxategi-mota"
 msgid "Filename"
 msgstr "Fitxategi-izena"
 
-#: ui/mainwindow.cpp:266
+#: ui/mainwindow.cpp:267
 msgid "Files"
 msgstr "Fitxategiak"
 
@@ -2454,7 +2444,7 @@ msgstr "Altu osoak"
 msgid "Ge&nre"
 msgstr ""
 
-#: ui/settingsdialog.cpp:133
+#: ui/settingsdialog.cpp:132
 msgid "General"
 msgstr "Orokorra"
 
@@ -2513,7 +2503,7 @@ msgstr "Google Drive"
 msgid "Got %1 covers out of %2 (%3 failed)"
 msgstr "%2-(e)tik %1 azal eskuratu dira (%3-(e)k huts egin dute)"
 
-#: ../bin/src/ui_behavioursettingspage.h:335
+#: ../bin/src/ui_behavioursettingspage.h:334
 msgid "Grey out non existent songs in my playlists"
 msgstr "Existitzen ez diren abestiak ilundu erreprodukzio-zerrendetan"
 
@@ -2642,7 +2632,7 @@ msgstr "Ikonoak goian"
 msgid "Identifying song"
 msgstr "Abestia identifikatzen"
 
-#: ../bin/src/ui_behavioursettingspage.h:337
+#: ../bin/src/ui_behavioursettingspage.h:329
 msgid ""
 "If activated, clicking a selected song in the playlist view will let you "
 "edit the tag value directly"
@@ -2743,15 +2733,15 @@ msgstr "Txertatu"
 msgid "Installed"
 msgstr "Instalatuta"
 
-#: core/database.cpp:585
+#: core/database.cpp:601
 msgid "Integrity check"
 msgstr "Osotasunaren egiaztapena"
 
-#: ui/mainwindow.cpp:272
+#: ui/mainwindow.cpp:273
 msgid "Internet"
 msgstr "Internet"
 
-#: ui/settingsdialog.cpp:156
+#: ui/settingsdialog.cpp:155
 msgid "Internet providers"
 msgstr "Internet hornitzaileak"
 
@@ -2824,7 +2814,7 @@ msgstr "Jamendo-ko asteko kantarik onenak"
 msgid "Jamendo database"
 msgstr "Jamendo datu-basea"
 
-#: ../bin/src/ui_behavioursettingspage.h:350
+#: ../bin/src/ui_behavioursettingspage.h:345
 msgid "Jump to previous song right away"
 msgstr ""
 
@@ -2844,7 +2834,7 @@ msgstr "Sakatu botoiak segundu %1-ez..."
 msgid "Keep buttons for %1 seconds..."
 msgstr "Sakatu botoiak %1 segunduz..."
 
-#: ../bin/src/ui_behavioursettingspage.h:321
+#: ../bin/src/ui_behavioursettingspage.h:316
 msgid "Keep running in the background when the window is closed"
 msgstr "Jarraitu atzealdean exekutatzen leihoa ixten denean"
 
@@ -2861,7 +2851,7 @@ msgstr ""
 msgid "Kuduro"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:323
+#: ../bin/src/ui_behavioursettingspage.h:318
 msgid "Language"
 msgstr "Hizkuntza"
 
@@ -2935,7 +2925,7 @@ msgstr ""
 msgid "Length"
 msgstr "Iraupena"
 
-#: ui/mainwindow.cpp:251 ui/mainwindow.cpp:263
+#: ui/mainwindow.cpp:252 ui/mainwindow.cpp:264
 #: ../bin/src/ui_seafilesettingspage.h:177
 msgid "Library"
 msgstr "Bilduma"
@@ -2944,7 +2934,7 @@ msgstr "Bilduma"
 msgid "Library advanced grouping"
 msgstr "Bildumaren taldekatze aurreratua"
 
-#: ui/mainwindow.cpp:2683
+#: ui/mainwindow.cpp:2696
 msgid "Library rescan notice"
 msgstr "Bildumaren berreskaneoaren abisua"
 
@@ -3031,7 +3021,6 @@ msgstr "Fitxategiak/URLak kargatzen ditu, momentuko erreprodukzio-zerrenda ordez
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:162
 #: ../bin/src/ui_magnatunesettingspage.h:163
-#: ../bin/src/ui_soundcloudsettingspage.h:102
 #: ../bin/src/ui_spotifysettingspage.h:210
 #: ../bin/src/ui_subsonicsettingspage.h:137
 #: ../bin/src/ui_lastfmsettingspage.h:132
@@ -3261,7 +3250,7 @@ msgstr "Muntatze-puntuak"
 msgid "Move down"
 msgstr "Eraman behera"
 
-#: ui/mainwindow.cpp:712 widgets/fileviewlist.cpp:42
+#: ui/mainwindow.cpp:713 widgets/fileviewlist.cpp:42
 msgid "Move to library..."
 msgstr "Eraman bildumara..."
 
@@ -3270,7 +3259,7 @@ msgstr "Eraman bildumara..."
 msgid "Move up"
 msgstr "Eraman gora"
 
-#: transcoder/transcodedialog.cpp:225 ui/mainwindow.cpp:2050
+#: transcoder/transcodedialog.cpp:225 ui/mainwindow.cpp:2063
 msgid "Music"
 msgstr "Musika"
 
@@ -3317,8 +3306,8 @@ msgstr "Inoiz ez"
 msgid "Never played"
 msgstr "Inoiz ez erreproduzituak"
 
-#: ../bin/src/ui_behavioursettingspage.h:343
-#: ../bin/src/ui_behavioursettingspage.h:363
+#: ../bin/src/ui_behavioursettingspage.h:338
+#: ../bin/src/ui_behavioursettingspage.h:358
 msgid "Never start playing"
 msgstr "Inoiz ez hasi erreproduzitzen"
 
@@ -3328,7 +3317,7 @@ msgstr "Inoiz ez hasi erreproduzitzen"
 msgid "New folder"
 msgstr "Karpeta berria"
 
-#: ui/mainwindow.cpp:1867 ../bin/src/ui_mainwindow.h:709
+#: ui/mainwindow.cpp:1880 ../bin/src/ui_mainwindow.h:709
 msgid "New playlist"
 msgstr "Erreprodukzio-zerrenda berria"
 
@@ -3395,7 +3384,7 @@ msgstr "Bloke laburrik ez"
 msgid "None"
 msgstr "Bat ere ez"
 
-#: library/libraryview.cpp:673 ui/mainwindow.cpp:2385 ui/mainwindow.cpp:2564
+#: library/libraryview.cpp:673 ui/mainwindow.cpp:2398 ui/mainwindow.cpp:2577
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Aukeraturiko abestietako bat ere ez zen aproposa gailu batera kopiatzeko"
 
@@ -3524,7 +3513,6 @@ msgstr ""
 #: internet/magnatune/magnatuneservice.cpp:287
 #: internet/somafm/somafmservice.cpp:102
 #: internet/intergalacticfm/intergalacticfmservice.cpp:102
-#: internet/soundcloud/soundcloudservice.cpp:377
 #, qt-format
 msgid "Open %1 in browser"
 msgstr "%1 nabigatzailean ireki"
@@ -3563,7 +3551,7 @@ msgstr "Google Drive-n iriki"
 msgid "Open in new playlist"
 msgstr "Ireki erreprodukzio-zerrenda berrian"
 
-#: ../bin/src/ui_behavioursettingspage.h:358
+#: ../bin/src/ui_behavioursettingspage.h:353
 msgctxt "Refers to behavior settings in Clementine settings page."
 msgid "Open in new playlist"
 msgstr ""
@@ -3603,7 +3591,7 @@ msgstr ""
 msgid "Organise Files"
 msgstr "Antolatu fitxategiak"
 
-#: library/libraryview.cpp:416 ui/mainwindow.cpp:715
+#: library/libraryview.cpp:416 ui/mainwindow.cpp:716
 msgid "Organise files..."
 msgstr "Antolatu fitxategiak..."
 
@@ -3687,7 +3675,7 @@ msgstr "Jaia"
 msgid "Password"
 msgstr "Pasahitza"
 
-#: core/globalshortcuts.cpp:50 ui/mainwindow.cpp:1160 ui/mainwindow.cpp:1663
+#: core/globalshortcuts.cpp:50 ui/mainwindow.cpp:1169 ui/mainwindow.cpp:1676
 #: ui/qtsystemtrayicon.cpp:189 wiimotedev/wiimotesettingspage.cpp:114
 msgid "Pause"
 msgstr "Pausarazi"
@@ -3715,8 +3703,8 @@ msgstr "Pixel"
 msgid "Plain sidebar"
 msgstr "Albo-barra sinplea"
 
-#: core/globalshortcuts.cpp:49 ui/mainwindow.cpp:676 ui/mainwindow.cpp:1126
-#: ui/mainwindow.cpp:1145 ui/mainwindow.cpp:1667 ui/qtsystemtrayicon.cpp:177
+#: core/globalshortcuts.cpp:49 ui/mainwindow.cpp:677 ui/mainwindow.cpp:1133
+#: ui/mainwindow.cpp:1154 ui/mainwindow.cpp:1680 ui/qtsystemtrayicon.cpp:177
 #: ui/qtsystemtrayicon.cpp:203 wiimotedev/wiimotesettingspage.cpp:107
 #: ../bin/src/ui_mainwindow.h:675
 msgid "Play"
@@ -3730,16 +3718,16 @@ msgstr "Erreprodukzio kopurua"
 msgid "Play if stopped, pause if playing"
 msgstr "Erreproduzitu pausatua badago, pausarazi erreproduzitzen ari bada"
 
-#: ../bin/src/ui_behavioursettingspage.h:344
-#: ../bin/src/ui_behavioursettingspage.h:364
+#: ../bin/src/ui_behavioursettingspage.h:339
+#: ../bin/src/ui_behavioursettingspage.h:359
 msgid "Play if there is nothing already playing"
 msgstr "Erreproduzitu ez badago ezer aurretik erreproduzitzen"
 
-#: library/libraryview.cpp:396 ui/mainwindow.cpp:1774
+#: library/libraryview.cpp:396 ui/mainwindow.cpp:1787
 msgid "Play next"
 msgstr ""
 
-#: ui/mainwindow.cpp:1772
+#: ui/mainwindow.cpp:1785
 msgid "Play selected tracks next"
 msgstr ""
 
@@ -3778,7 +3766,7 @@ msgstr "Erreprodukzio-zerrendaren aukerak"
 msgid "Playlist type"
 msgstr "Erreprodukzio-zerrenda mota"
 
-#: internet/soundcloud/soundcloudservice.cpp:133 ui/mainwindow.cpp:269
+#: ui/mainwindow.cpp:270
 msgid "Playlists"
 msgstr "Erreprodukzio-zerrendak"
 
@@ -3869,7 +3857,7 @@ msgstr "Sakatu edozein tekla"
 msgid "Press a key combination to use for %1..."
 msgstr "Sakatu %1 egiteko erabiliko den tekla-konbinazioa..."
 
-#: ../bin/src/ui_behavioursettingspage.h:347
+#: ../bin/src/ui_behavioursettingspage.h:342
 msgid "Pressing \"Previous\" in player will..."
 msgstr ""
 
@@ -3946,12 +3934,12 @@ msgstr "Gailua galdekatzen..."
 msgid "Queue Manager"
 msgstr "Ilara-kudeatzailea"
 
-#: ui/mainwindow.cpp:1767
+#: ui/mainwindow.cpp:1780
 msgid "Queue selected tracks"
 msgstr "Aukeraturiko pistak ilaran jarri"
 
 #: globalsearch/globalsearchview.cpp:464 library/libraryview.cpp:393
-#: ui/mainwindow.cpp:1765
+#: ui/mainwindow.cpp:1778
 msgid "Queue track"
 msgstr "Pista ilaran jarri"
 
@@ -4041,7 +4029,7 @@ msgid "Reggae"
 msgstr "Reggae"
 
 #: playlist/playlistsaveoptionsdialog.cpp:33
-#: ../bin/src/ui_behavioursettingspage.h:380
+#: ../bin/src/ui_behavioursettingspage.h:375
 msgid "Relative"
 msgstr ""
 
@@ -4049,9 +4037,9 @@ msgstr ""
 msgid "Remember Wii remote swing"
 msgstr "Wiimote-aren mugimendua gogoratu"
 
-#: ../bin/src/ui_behavioursettingspage.h:332
-msgid "Remember from last time"
-msgstr "Azken alditik gogoratu"
+#: ../bin/src/ui_behavioursettingspage.h:327
+msgid "Remember from &last time"
+msgstr ""
 
 #: ../bin/src/ui_playlistsaveoptionsdialog.h:99
 msgid "Remember my choice"
@@ -4129,7 +4117,7 @@ msgstr "Errepikatu pista"
 msgid "Replace current playlist"
 msgstr "Ordeztu oraingo erreprodukzio-zerrenda"
 
-#: ../bin/src/ui_behavioursettingspage.h:357
+#: ../bin/src/ui_behavioursettingspage.h:352
 msgid "Replace the playlist"
 msgstr "Ordeztu erreprodukzio-zerrenda"
 
@@ -4161,7 +4149,7 @@ msgstr "Berrezarri"
 msgid "Reset play counts"
 msgstr "Berrezarri erreprodukzio kopurua"
 
-#: ../bin/src/ui_behavioursettingspage.h:351
+#: ../bin/src/ui_behavioursettingspage.h:346
 msgid "Restart song, then jump to previous if pressed again"
 msgstr ""
 
@@ -4174,7 +4162,7 @@ msgstr ""
 msgid "Restrict to ASCII characters"
 msgstr "Mugatu ASCII karaktereetara"
 
-#: ../bin/src/ui_behavioursettingspage.h:333
+#: ../bin/src/ui_behavioursettingspage.h:332
 msgid "Resume playback on start"
 msgstr ""
 
@@ -4316,7 +4304,7 @@ msgstr "Puntuazioa"
 msgid "Scrobble tracks that I listen to"
 msgstr "Entzuten ditudan pistak partekatu"
 
-#: ../bin/src/ui_behavioursettingspage.h:320
+#: ../bin/src/ui_behavioursettingspage.h:315
 msgid "Scroll over icon to change track"
 msgstr ""
 
@@ -4330,7 +4318,7 @@ msgstr ""
 msgid "Search"
 msgstr "Bilatu"
 
-#: ui/mainwindow.cpp:260 ../bin/src/ui_globalsearchsettingspage.h:141
+#: ui/mainwindow.cpp:261 ../bin/src/ui_globalsearchsettingspage.h:141
 msgctxt "Global search settings dialog title."
 msgid "Search"
 msgstr ""
@@ -4355,7 +4343,7 @@ msgstr "Subsonic-en bilatu"
 msgid "Search automatically"
 msgstr ""
 
-#: ui/mainwindow.cpp:696
+#: ui/mainwindow.cpp:697
 msgid "Search for album"
 msgstr ""
 
@@ -4368,7 +4356,7 @@ msgstr "Bilatu albumetako azalak"
 msgid "Search for anything"
 msgstr "Bilatu edozer"
 
-#: ui/mainwindow.cpp:693
+#: ui/mainwindow.cpp:694
 msgid "Search for artist"
 msgstr ""
 
@@ -4392,7 +4380,6 @@ msgstr "Bilaketa-modua"
 msgid "Search options"
 msgstr "Bilaketa-aukerak"
 
-#: internet/soundcloud/soundcloudservice.cpp:119
 #: internet/spotify/spotifyservice.cpp:400
 msgid "Search results"
 msgstr "Bilaketaren emaitzak"
@@ -4426,7 +4413,7 @@ msgstr "Oraingo pistan mugitu posizio erlatibo baten arabera"
 msgid "Seek the currently playing track to an absolute position"
 msgstr "Oraingo pistan mugitu posizio absolutu baten arabera"
 
-#: ../bin/src/ui_behavioursettingspage.h:373
+#: ../bin/src/ui_behavioursettingspage.h:368
 msgid "Seeking using a keyboard shortcut or mouse wheel"
 msgstr ""
 
@@ -4486,7 +4473,7 @@ msgstr "Zerbitzariaren xehetasunak"
 msgid "Service offline"
 msgstr "Zerbitzua lineaz kanpo"
 
-#: ui/mainwindow.cpp:1812
+#: ui/mainwindow.cpp:1825
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr "Ezarri %1 \"%2\"-(e)ra..."
@@ -4562,7 +4549,7 @@ msgstr "Erakutsi OSD itxurosoa"
 msgid "Show above status bar"
 msgstr "Erakutsi egoera-barraren gainean"
 
-#: ui/mainwindow.cpp:643
+#: ui/mainwindow.cpp:644
 msgid "Show all songs"
 msgstr "Erakutsi abesti guztiak"
 
@@ -4582,12 +4569,12 @@ msgstr "Erakutsi zatitzaileak"
 msgid "Show fullsize..."
 msgstr "Erakutsi tamaina osoan..."
 
-#: library/libraryview.cpp:433 ui/mainwindow.cpp:725
+#: library/libraryview.cpp:433 ui/mainwindow.cpp:726
 #: widgets/fileviewlist.cpp:53
 msgid "Show in file browser..."
 msgstr "Erakutsi fitxategi arakatzailean..."
 
-#: ui/mainwindow.cpp:727
+#: ui/mainwindow.cpp:728
 msgid "Show in library..."
 msgstr ""
 
@@ -4599,11 +4586,11 @@ msgstr "Erakutsi hainbat artista"
 msgid "Show moodbar"
 msgstr "Aldarte-barra erakutsi"
 
-#: ui/mainwindow.cpp:645
+#: ui/mainwindow.cpp:646
 msgid "Show only duplicates"
 msgstr "Erakutsi bakarrik errepikapenak"
 
-#: ui/mainwindow.cpp:647
+#: ui/mainwindow.cpp:648
 msgid "Show only untagged"
 msgstr "Erakutsi etiketa gabeak bakarrik"
 
@@ -4627,7 +4614,7 @@ msgstr ""
 msgid "Show the scrobble button in the main window"
 msgstr "Erakutsi partekatu botoia leiho nagusian"
 
-#: ../bin/src/ui_behavioursettingspage.h:319
+#: ../bin/src/ui_behavioursettingspage.h:314
 msgid "Show tray icon"
 msgstr "Erakutsi erretilu-ikonoa"
 
@@ -4695,11 +4682,11 @@ msgstr "Saltatu kontagailua"
 msgid "Skip forwards in playlist"
 msgstr "Saltatu aurrerantz erreprodukzio-zerrendan"
 
-#: ui/mainwindow.cpp:1783
+#: ui/mainwindow.cpp:1796
 msgid "Skip selected tracks"
 msgstr ""
 
-#: ui/mainwindow.cpp:1781
+#: ui/mainwindow.cpp:1794
 msgid "Skip track"
 msgstr ""
 
@@ -4731,7 +4718,7 @@ msgstr "Soft Rock"
 msgid "Song Information"
 msgstr "Abestiaren informazioa"
 
-#: ui/mainwindow.cpp:280
+#: ui/mainwindow.cpp:281
 msgid "Song info"
 msgstr "Abes. infor."
 
@@ -4762,10 +4749,6 @@ msgstr "Ordenatu abestiak honen arabera"
 #: ../bin/src/ui_querysortpage.h:137
 msgid "Sorting"
 msgstr "Ordenatzen"
-
-#: ../bin/src/ui_soundcloudsettingspage.h:100
-msgid "SoundCloud"
-msgstr ""
 
 #: playlist/playlist.cpp:1404
 msgid "Source"
@@ -4825,7 +4808,6 @@ msgstr "Hasi oraingo erreprodukzio-zerrenda"
 msgid "Start transcoding"
 msgstr "Hasi transkodetzen"
 
-#: internet/soundcloud/soundcloudservice.cpp:121
 #: internet/spotify/spotifyservice.cpp:402
 msgid ""
 "Start typing something on the search box above to fill this search results "
@@ -4858,7 +4840,7 @@ msgstr ""
 msgid "Stop after every track"
 msgstr ""
 
-#: ui/mainwindow.cpp:680 ../bin/src/ui_mainwindow.h:679
+#: ui/mainwindow.cpp:681 ../bin/src/ui_mainwindow.h:679
 msgid "Stop after this track"
 msgstr "Gelditu pista honen ondoren"
 
@@ -4870,7 +4852,7 @@ msgstr "Gelditu erreprodukzioa"
 msgid "Stop playback after current track"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:334
+#: ../bin/src/ui_behavioursettingspage.h:333
 msgid "Stop playback if song fails to play"
 msgstr ""
 
@@ -5026,7 +5008,7 @@ msgid ""
 "license key. Visit subsonic.org for details."
 msgstr ""
 
-#: ui/mainwindow.cpp:2674
+#: ui/mainwindow.cpp:2687
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -5068,7 +5050,7 @@ msgid ""
 "continue?"
 msgstr "Fitxategi hauek gailutik ezabatuko dira, jarraitu nahi duzu?"
 
-#: library/libraryview.cpp:679 ui/mainwindow.cpp:2433 widgets/fileview.cpp:189
+#: library/libraryview.cpp:679 ui/mainwindow.cpp:2446 widgets/fileview.cpp:189
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -5148,7 +5130,7 @@ msgstr "Jario hau ordainpeko harpidedunentzat da bakarrik"
 msgid "This type of device is not supported: %1"
 msgstr "Gailu mota hau ez da onartzen :%1"
 
-#: ../bin/src/ui_behavioursettingspage.h:374
+#: ../bin/src/ui_behavioursettingspage.h:369
 msgid "Time step"
 msgstr ""
 
@@ -5171,7 +5153,7 @@ msgstr "Txandakatu OSD itxurosoa"
 msgid "Toggle fullscreen"
 msgstr "Txandakatu pantaila-osoa"
 
-#: ui/mainwindow.cpp:1769
+#: ui/mainwindow.cpp:1782
 msgid "Toggle queue status"
 msgstr "Txandakatu ilara-egoera"
 
@@ -5219,10 +5201,6 @@ msgstr ""
 #: ../bin/src/ui_trackselectiondialog.h:212 ../bin/src/ui_ripcddialog.h:304
 msgid "Track"
 msgstr "Pista"
-
-#: internet/soundcloud/soundcloudservice.cpp:136
-msgid "Tracks"
-msgstr ""
 
 #: ../bin/src/ui_transcodedialog.h:213 ../bin/src/ui_mainwindow.h:706
 msgid "Transcode Music"
@@ -5309,11 +5287,11 @@ msgstr "Errore ezezaguna"
 msgid "Unset cover"
 msgstr "Ezarri gabeko azala"
 
-#: ui/mainwindow.cpp:1779
+#: ui/mainwindow.cpp:1792
 msgid "Unskip selected tracks"
 msgstr ""
 
-#: ui/mainwindow.cpp:1777
+#: ui/mainwindow.cpp:1790
 msgid "Unskip track"
 msgstr ""
 
@@ -5424,7 +5402,7 @@ msgstr ""
 msgid "Use temporal noise shaping"
 msgstr "Erabili zarata karrakaketa behin-behinekoa"
 
-#: ../bin/src/ui_behavioursettingspage.h:326
+#: ../bin/src/ui_behavioursettingspage.h:321
 msgid "Use the system default"
 msgstr "Erabili sistemako lehenetsia"
 
@@ -5444,7 +5422,7 @@ msgstr "Erabili bolumenaren normalizazioa"
 msgid "Used"
 msgstr "Erabilia"
 
-#: ui/settingsdialog.cpp:147
+#: ui/settingsdialog.cpp:146
 msgid "User interface"
 msgstr "Erabiltzaile-interfazea"
 
@@ -5456,7 +5434,7 @@ msgstr "Erabiltzaile-interfazea"
 msgid "Username"
 msgstr "Erabiltzaile-izena"
 
-#: ../bin/src/ui_behavioursettingspage.h:340
+#: ../bin/src/ui_behavioursettingspage.h:335
 msgid "Using the menu to add a song will..."
 msgstr "Abesti bat gehitzeko menua erabiltzeak ondorengoa egingo du..."
 
@@ -5529,7 +5507,7 @@ msgstr "WAV"
 msgid "WMA"
 msgstr "WMA"
 
-#: playlist/playlisttabbar.cpp:192 ../bin/src/ui_behavioursettingspage.h:322
+#: playlist/playlisttabbar.cpp:192 ../bin/src/ui_behavioursettingspage.h:317
 msgid "Warn me when closing a playlist tab"
 msgstr ""
 
@@ -5549,7 +5527,7 @@ msgstr "Webgunea"
 msgid "Weeks"
 msgstr "Aste"
 
-#: ../bin/src/ui_behavioursettingspage.h:329
+#: ../bin/src/ui_behavioursettingspage.h:324
 msgid "When Clementine starts"
 msgstr "Clementine abiaraztean"
 
@@ -5559,7 +5537,7 @@ msgid ""
 "If there are no matches then it will use the largest image in the directory."
 msgstr "Albumetako azalen bilatzean, Clementine-k aurretik honako hitzetako bat duten irudi fitxategiak begiratuko ditu.\n Ez badago bat-etortzerik, direktorioko irudirik handiena erabiliko du orduan."
 
-#: ../bin/src/ui_behavioursettingspage.h:377
+#: ../bin/src/ui_behavioursettingspage.h:372
 msgid "When saving a playlist, file paths should be"
 msgstr ""
 
@@ -5635,7 +5613,7 @@ msgid ""
 "well?"
 msgstr "Beste abestiak ere Hainbat artistara mugitzea nahi duzu?"
 
-#: ui/mainwindow.cpp:2681
+#: ui/mainwindow.cpp:2694
 msgid "Would you like to run a full rescan right now?"
 msgstr "Berreskaneo osoa orain egitea nahi duzu?"
 
@@ -5643,7 +5621,7 @@ msgstr "Berreskaneo osoa orain egitea nahi duzu?"
 msgid "Write all songs statistics into songs' files"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:382
+#: ../bin/src/ui_behavioursettingspage.h:377
 msgid "Write metadata"
 msgstr ""
 
@@ -5729,13 +5707,6 @@ msgstr "Ez daukazu Spotify Premium konturik."
 msgid "You do not have an active subscription"
 msgstr "Ez duzu harpidetza aktiborik"
 
-#: ../bin/src/ui_soundcloudsettingspage.h:101
-msgid ""
-"You don't need to be logged in to search and to listen to music on "
-"SoundCloud. However, you need to login to access your playlists and your "
-"stream."
-msgstr ""
-
 #: internet/spotify/spotifyservice.cpp:205
 msgid ""
 "You have been logged out of Spotify, please re-enter your password in the "
@@ -5757,7 +5728,7 @@ msgid ""
 "shortcuts in Clementine."
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:328
+#: ../bin/src/ui_behavioursettingspage.h:323
 msgid "You will need to restart Clementine if you change the language."
 msgstr "Hizkuntzaz aldatuz gero, Clementine berrabiarazi behar da."
 

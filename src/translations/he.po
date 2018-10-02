@@ -14,7 +14,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2018-09-17 13:31+0000\n"
+"PO-Revision-Date: 2018-10-01 17:06+0000\n"
 "Last-Translator: hatstand <john.maguire@gmail.com>\n"
 "Language-Team: Hebrew (http://www.transifex.com/davidsansome/clementine/language/he/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -57,7 +57,7 @@ msgstr " מילישניות"
 msgid " pt"
 msgstr " נק׳"
 
-#: ../bin/src/ui_behavioursettingspage.h:375
+#: ../bin/src/ui_behavioursettingspage.h:370
 msgid " s"
 msgstr ""
 
@@ -399,6 +399,10 @@ msgid ""
 "A song will be included in the playlist if it matches these conditions."
 msgstr "שיר יכלל ברשימת ההשמעה אם הוא עומד בתנאים אלו."
 
+#: ../bin/src/ui_behavioursettingspage.h:373
+msgid "A&utomatic"
+msgstr ""
+
 #: smartplaylists/searchterm.cpp:396
 msgid "A-Z"
 msgstr "A-Z"
@@ -445,7 +449,7 @@ msgid "About Qt..."
 msgstr "על אודות Qt..."
 
 #: playlist/playlistsaveoptionsdialog.cpp:34
-#: ../bin/src/ui_behavioursettingspage.h:379
+#: ../bin/src/ui_behavioursettingspage.h:374
 msgid "Absolute"
 msgstr ""
 
@@ -470,10 +474,6 @@ msgstr "פעולה"
 
 #: wiimotedev/wiimotesettingspage.cpp:103
 msgid "Activate/Deactivate Wii Remote"
-msgstr ""
-
-#: internet/soundcloud/soundcloudservice.cpp:128
-msgid "Activities stream"
 msgstr ""
 
 #: internet/podcasts/addpodcastdialog.cpp:63
@@ -504,7 +504,7 @@ msgstr "הוספת תזרים אחר..."
 msgid "Add directory..."
 msgstr "הוספת תיקייה..."
 
-#: ui/mainwindow.cpp:2049
+#: ui/mainwindow.cpp:2062
 msgid "Add file"
 msgstr "הוספת קובץ"
 
@@ -524,7 +524,7 @@ msgstr "הוספת קובץ..."
 msgid "Add files to transcode"
 msgstr "הוספת קובצי מוזיקה להמרה"
 
-#: transcoder/transcodedialog.cpp:306 ui/mainwindow.cpp:2076
+#: transcoder/transcodedialog.cpp:306 ui/mainwindow.cpp:2089
 #: ripper/ripcddialog.cpp:201
 msgid "Add folder"
 msgstr "הוספת תיקייה"
@@ -629,7 +629,7 @@ msgstr "הוסף לרשימת ההשמעה של Spotify"
 msgid "Add to Spotify starred"
 msgstr "הוסף למועדפים של Spotify"
 
-#: ui/mainwindow.cpp:1850
+#: ui/mainwindow.cpp:1863
 msgid "Add to another playlist"
 msgstr "הוספה לרשימת השמעה אחרת"
 
@@ -637,8 +637,8 @@ msgstr "הוספה לרשימת השמעה אחרת"
 msgid "Add to playlist"
 msgstr "הוספה לרשימת ההשמעה"
 
-#: ../bin/src/ui_behavioursettingspage.h:359
-#: ../bin/src/ui_behavioursettingspage.h:371
+#: ../bin/src/ui_behavioursettingspage.h:354
+#: ../bin/src/ui_behavioursettingspage.h:366
 msgid "Add to the queue"
 msgstr "הוספה לתור"
 
@@ -719,7 +719,7 @@ msgstr "אלבומים ללא עטיפה"
 msgid "All"
 msgstr "הכל"
 
-#: ui/mainwindow.cpp:158
+#: ui/mainwindow.cpp:159
 msgid "All Files (*)"
 msgstr "כל הקבצים (*)"
 
@@ -769,16 +769,16 @@ msgstr "מתן האפשרות לקידוד mid/side"
 msgid "Alongside the originals"
 msgstr "צמוד למקוריים"
 
-#: ../bin/src/ui_behavioursettingspage.h:331
-msgid "Always hide the main window"
-msgstr "תמיד יש להסתיר את החלון המרכזי"
+#: ../bin/src/ui_behavioursettingspage.h:326
+msgid "Alwa&ys hide the main window"
+msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:330
-msgid "Always show the main window"
-msgstr "תמיד יש להציג את החלון המרכזי"
+#: ../bin/src/ui_behavioursettingspage.h:325
+msgid "Always show &the main window"
+msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:345
-#: ../bin/src/ui_behavioursettingspage.h:365
+#: ../bin/src/ui_behavioursettingspage.h:340
+#: ../bin/src/ui_behavioursettingspage.h:360
 msgid "Always start playing"
 msgstr "תמיד להתחיל לנגן"
 
@@ -825,7 +825,7 @@ msgstr "הוסף קבצים/כתובות לסוף רשימת ההשמעה"
 msgid "Append to current playlist"
 msgstr "הוספה לרשימת ההשמעה הנוכחית"
 
-#: ../bin/src/ui_behavioursettingspage.h:356
+#: ../bin/src/ui_behavioursettingspage.h:351
 msgid "Append to the playlist"
 msgstr "הוספת לרשימת ההשמעה"
 
@@ -857,7 +857,7 @@ msgstr ""
 msgid "Artist"
 msgstr "אמן"
 
-#: ui/mainwindow.cpp:283
+#: ui/mainwindow.cpp:284
 msgid "Artist info"
 msgstr "מידע על האמן"
 
@@ -865,8 +865,8 @@ msgstr "מידע על האמן"
 msgid "Artist's initial"
 msgstr "ראשי תיבות של האמן"
 
-#: ../bin/src/ui_behavioursettingspage.h:381
-msgid "Ask when saving"
+#: ../bin/src/ui_behavioursettingspage.h:376
+msgid "As&k when saving"
 msgstr ""
 
 #: ../bin/src/ui_transcodedialog.h:225
@@ -900,7 +900,6 @@ msgid "Auto"
 msgstr "אוטומטי"
 
 #: playlist/playlistsaveoptionsdialog.cpp:32
-#: ../bin/src/ui_behavioursettingspage.h:378
 msgid "Automatic"
 msgstr ""
 
@@ -949,7 +948,7 @@ msgstr "תמונת רקע"
 msgid "Background opacity"
 msgstr "שקיפות הרקע"
 
-#: core/database.cpp:648
+#: core/database.cpp:664
 msgid "Backing up database"
 msgstr "מסד הנתונים מגובה"
 
@@ -973,7 +972,7 @@ msgstr "כחול בסיסי"
 msgid "Basic audio type"
 msgstr "סוג שמע בסיסי"
 
-#: ../bin/src/ui_behavioursettingspage.h:318
+#: ../bin/src/ui_behavioursettingspage.h:313
 msgid "Behavior"
 msgstr "התנהגות"
 
@@ -1091,7 +1090,7 @@ msgstr "שינוי קיצור הדרך..."
 msgid "Change shuffle mode"
 msgstr "שינוי מצב ערבוב"
 
-#: ../bin/src/ui_behavioursettingspage.h:370
+#: ../bin/src/ui_behavioursettingspage.h:365
 msgid "Change the currently playing song"
 msgstr ""
 
@@ -1121,7 +1120,7 @@ msgstr "בדיקת פרקים חדשים"
 msgid "Check for updates"
 msgstr "בדוק עדכונים"
 
-#: ui/mainwindow.cpp:820
+#: ui/mainwindow.cpp:823
 msgid "Check for updates..."
 msgstr "בדיקת עדכונים..."
 
@@ -1263,7 +1262,6 @@ msgstr ""
 msgid "Click to toggle between remaining time and total time"
 msgstr "יש ללחוץ כאן על מנת לעבור בין הצגת הזמן הנותר לזמן הכולל"
 
-#: ../bin/src/ui_soundcloudsettingspage.h:103
 #: ../bin/src/ui_lastfmsettingspage.h:133
 #: ../bin/src/ui_googledrivesettingspage.h:102
 #: ../bin/src/ui_dropboxsettingspage.h:102
@@ -1342,10 +1340,6 @@ msgstr "הגדרת Magnatune..."
 msgid "Configure Shortcuts"
 msgstr "הגדרת קיצורי מקשים"
 
-#: internet/soundcloud/soundcloudservice.cpp:381
-msgid "Configure SoundCloud..."
-msgstr ""
-
 #: internet/spotify/spotifyservice.cpp:927
 msgid "Configure Spotify..."
 msgstr "הגדרת Spotify..."
@@ -1358,7 +1352,7 @@ msgstr "הגדרת תת קולי"
 msgid "Configure global search..."
 msgstr "מגדיר חיפוש "
 
-#: ui/mainwindow.cpp:659
+#: ui/mainwindow.cpp:660
 msgid "Configure library..."
 msgstr "הגדרת הספרייה..."
 
@@ -1430,11 +1424,11 @@ msgid "Copy to clipboard"
 msgstr "העתקה אל הלוח"
 
 #: library/libraryview.cpp:419 internet/podcasts/podcastservice.cpp:438
-#: ui/mainwindow.cpp:719 widgets/fileviewlist.cpp:44
+#: ui/mainwindow.cpp:720 widgets/fileviewlist.cpp:44
 msgid "Copy to device..."
 msgstr "העתקה להתקן.."
 
-#: devices/deviceview.cpp:228 ui/mainwindow.cpp:709
+#: devices/deviceview.cpp:228 ui/mainwindow.cpp:710
 #: widgets/fileviewlist.cpp:40
 msgid "Copy to library..."
 msgstr "העתקה לספרייה..."
@@ -1578,7 +1572,7 @@ msgstr ""
 msgid "Dance"
 msgstr "דאנס"
 
-#: core/database.cpp:601
+#: core/database.cpp:617
 msgid ""
 "Database corruption detected. Please read https://github.com/clementine-"
 "player/Clementine/wiki/Database-Corruption for instructions on how to "
@@ -1640,7 +1634,7 @@ msgid "Delete downloaded data"
 msgstr "מחיקת מידע שהתקבל"
 
 #: devices/deviceview.cpp:408 library/libraryview.cpp:678
-#: ui/mainwindow.cpp:2432 widgets/fileview.cpp:188
+#: ui/mainwindow.cpp:2445 widgets/fileview.cpp:188
 msgid "Delete files"
 msgstr "מחיקת קבצים"
 
@@ -1648,7 +1642,7 @@ msgstr "מחיקת קבצים"
 msgid "Delete from device..."
 msgstr "מחיקה מתוך התקן..."
 
-#: library/libraryview.cpp:422 ui/mainwindow.cpp:722
+#: library/libraryview.cpp:422 ui/mainwindow.cpp:723
 #: widgets/fileviewlist.cpp:47
 msgid "Delete from disk..."
 msgstr "מחיקה מתוך דיסק..."
@@ -1681,11 +1675,11 @@ msgstr "הקבצים נמחקים"
 msgid "Depth"
 msgstr ""
 
-#: ui/mainwindow.cpp:1763
+#: ui/mainwindow.cpp:1776
 msgid "Dequeue selected tracks"
 msgstr "הסרת הרצועות הנבחרות מהתור"
 
-#: ui/mainwindow.cpp:1761
+#: ui/mainwindow.cpp:1774
 msgid "Dequeue track"
 msgstr "הסרת הרצועה מהתור"
 
@@ -1714,7 +1708,7 @@ msgstr "שם ההתקן"
 msgid "Device properties..."
 msgstr "מאפייני ההתקן..."
 
-#: ui/mainwindow.cpp:276
+#: ui/mainwindow.cpp:277
 msgid "Devices"
 msgstr "התקנים"
 
@@ -1844,11 +1838,11 @@ msgstr "לתרום"
 msgid "Double click to open"
 msgstr "לחיצה כפולה לפתיחה"
 
-#: ../bin/src/ui_behavioursettingspage.h:367
+#: ../bin/src/ui_behavioursettingspage.h:362
 msgid "Double clicking a song in the playlist will..."
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:353
+#: ../bin/src/ui_behavioursettingspage.h:348
 msgid "Double clicking a song will..."
 msgstr "לחיצה כפולה על שיר לביצוע..."
 
@@ -1957,7 +1951,7 @@ msgstr "מיקס דינמי אקראי"
 msgid "Edit smart playlist..."
 msgstr "עריכת רשימת השמעה חכמה..."
 
-#: ui/mainwindow.cpp:1813
+#: ui/mainwindow.cpp:1826
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr ""
@@ -2003,7 +1997,7 @@ msgstr "הפעלת אקולייזר"
 msgid "Enable shortcuts only when Clementine is focused"
 msgstr "הפעלת קיצורי מקלדת רק כאשר המיקוד הוא על Clementine"
 
-#: ../bin/src/ui_behavioursettingspage.h:339
+#: ../bin/src/ui_behavioursettingspage.h:331
 msgid "Enable song metadata inline edition with click"
 msgstr ""
 
@@ -2092,8 +2086,8 @@ msgid "Equivalent to --log-levels *:3"
 msgstr "זהה לאפשרות--log-levels *:3"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:246
-#: library/libraryview.cpp:672 ui/mainwindow.cpp:2105 ui/mainwindow.cpp:2384
-#: ui/mainwindow.cpp:2563
+#: library/libraryview.cpp:672 ui/mainwindow.cpp:2118 ui/mainwindow.cpp:2397
+#: ui/mainwindow.cpp:2576
 msgid "Error"
 msgstr "שגיאה"
 
@@ -2239,7 +2233,7 @@ msgstr "עמעום מוזיקה"
 msgid "Fading duration"
 msgstr "משך זמן עמעום המוזיקה"
 
-#: ui/mainwindow.cpp:2106
+#: ui/mainwindow.cpp:2119
 msgid "Failed reading CD drive"
 msgstr ""
 
@@ -2273,10 +2267,6 @@ msgstr ""
 #: ../bin/src/ui_transcoderoptionsmp3.h:199
 msgid "Fast"
 msgstr "מהר"
-
-#: internet/soundcloud/soundcloudservice.cpp:141
-msgid "Favorites"
-msgstr ""
 
 #: library/library.cpp:88
 msgid "Favourite tracks"
@@ -2344,7 +2334,7 @@ msgstr "סוג הקובץ"
 msgid "Filename"
 msgstr "שם הקובץ"
 
-#: ui/mainwindow.cpp:266
+#: ui/mainwindow.cpp:267
 msgid "Files"
 msgstr "קבצים"
 
@@ -2457,7 +2447,7 @@ msgstr "טרבל מלא"
 msgid "Ge&nre"
 msgstr ""
 
-#: ui/settingsdialog.cpp:133
+#: ui/settingsdialog.cpp:132
 msgid "General"
 msgstr "כללי"
 
@@ -2516,7 +2506,7 @@ msgstr "גוגל דרייב"
 msgid "Got %1 covers out of %2 (%3 failed)"
 msgstr "נמצאו %1 עטיפות מתוך %2 (%3 נכשלו)"
 
-#: ../bin/src/ui_behavioursettingspage.h:335
+#: ../bin/src/ui_behavioursettingspage.h:334
 msgid "Grey out non existent songs in my playlists"
 msgstr "ברשימת ההשמעה, סימון שירים שאינם קיימים באפור"
 
@@ -2645,7 +2635,7 @@ msgstr "צלמיות למעלה"
 msgid "Identifying song"
 msgstr "מזהה שיר"
 
-#: ../bin/src/ui_behavioursettingspage.h:337
+#: ../bin/src/ui_behavioursettingspage.h:329
 msgid ""
 "If activated, clicking a selected song in the playlist view will let you "
 "edit the tag value directly"
@@ -2746,15 +2736,15 @@ msgstr "הוספה..."
 msgid "Installed"
 msgstr "הותקן"
 
-#: core/database.cpp:585
+#: core/database.cpp:601
 msgid "Integrity check"
 msgstr "בדיקת שלמות"
 
-#: ui/mainwindow.cpp:272
+#: ui/mainwindow.cpp:273
 msgid "Internet"
 msgstr "אינטרנט"
 
-#: ui/settingsdialog.cpp:156
+#: ui/settingsdialog.cpp:155
 msgid "Internet providers"
 msgstr "ספקי אינטרנט"
 
@@ -2827,7 +2817,7 @@ msgstr "הרצועות החמות ביותר השבוע ב־Jamendo"
 msgid "Jamendo database"
 msgstr "מסד הנתונים של Jamendo"
 
-#: ../bin/src/ui_behavioursettingspage.h:350
+#: ../bin/src/ui_behavioursettingspage.h:345
 msgid "Jump to previous song right away"
 msgstr ""
 
@@ -2847,7 +2837,7 @@ msgstr "השארת הלחצנים ל־%1 שניות..."
 msgid "Keep buttons for %1 seconds..."
 msgstr "השארת הלחצנים ל-%1 שניות..."
 
-#: ../bin/src/ui_behavioursettingspage.h:321
+#: ../bin/src/ui_behavioursettingspage.h:316
 msgid "Keep running in the background when the window is closed"
 msgstr "להמשיך ולהריץ ברקע כאשר החלון סגור"
 
@@ -2864,7 +2854,7 @@ msgstr ""
 msgid "Kuduro"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:323
+#: ../bin/src/ui_behavioursettingspage.h:318
 msgid "Language"
 msgstr "שפה"
 
@@ -2938,7 +2928,7 @@ msgstr "שמאל"
 msgid "Length"
 msgstr "אורך"
 
-#: ui/mainwindow.cpp:251 ui/mainwindow.cpp:263
+#: ui/mainwindow.cpp:252 ui/mainwindow.cpp:264
 #: ../bin/src/ui_seafilesettingspage.h:177
 msgid "Library"
 msgstr "ספרייה"
@@ -2947,7 +2937,7 @@ msgstr "ספרייה"
 msgid "Library advanced grouping"
 msgstr "קיבוץ מתקדם של הספרייה"
 
-#: ui/mainwindow.cpp:2683
+#: ui/mainwindow.cpp:2696
 msgid "Library rescan notice"
 msgstr "הודעה על סריקה מחודשת של הספרייה"
 
@@ -3034,7 +3024,6 @@ msgstr "טעינת קבצים/כתובות, תוך החלפת רשימת ההש�
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:162
 #: ../bin/src/ui_magnatunesettingspage.h:163
-#: ../bin/src/ui_soundcloudsettingspage.h:102
 #: ../bin/src/ui_spotifysettingspage.h:210
 #: ../bin/src/ui_subsonicsettingspage.h:137
 #: ../bin/src/ui_lastfmsettingspage.h:132
@@ -3264,7 +3253,7 @@ msgstr "נקודות עגינה"
 msgid "Move down"
 msgstr "הזזה מטה"
 
-#: ui/mainwindow.cpp:712 widgets/fileviewlist.cpp:42
+#: ui/mainwindow.cpp:713 widgets/fileviewlist.cpp:42
 msgid "Move to library..."
 msgstr "העברה לספרייה..."
 
@@ -3273,7 +3262,7 @@ msgstr "העברה לספרייה..."
 msgid "Move up"
 msgstr "הזזה מעלה"
 
-#: transcoder/transcodedialog.cpp:225 ui/mainwindow.cpp:2050
+#: transcoder/transcodedialog.cpp:225 ui/mainwindow.cpp:2063
 msgid "Music"
 msgstr "מוזיקה"
 
@@ -3320,8 +3309,8 @@ msgstr "לעולם לא"
 msgid "Never played"
 msgstr "לא נוגן אף פעם"
 
-#: ../bin/src/ui_behavioursettingspage.h:343
-#: ../bin/src/ui_behavioursettingspage.h:363
+#: ../bin/src/ui_behavioursettingspage.h:338
+#: ../bin/src/ui_behavioursettingspage.h:358
 msgid "Never start playing"
 msgstr "אין להתחיל להשמיע אף פעם"
 
@@ -3331,7 +3320,7 @@ msgstr "אין להתחיל להשמיע אף פעם"
 msgid "New folder"
 msgstr "תיקייה חדשה"
 
-#: ui/mainwindow.cpp:1867 ../bin/src/ui_mainwindow.h:709
+#: ui/mainwindow.cpp:1880 ../bin/src/ui_mainwindow.h:709
 msgid "New playlist"
 msgstr "רשימת השמעה חדשה"
 
@@ -3398,7 +3387,7 @@ msgstr "ללא מקטעים קצרים"
 msgid "None"
 msgstr "אין"
 
-#: library/libraryview.cpp:673 ui/mainwindow.cpp:2385 ui/mainwindow.cpp:2564
+#: library/libraryview.cpp:673 ui/mainwindow.cpp:2398 ui/mainwindow.cpp:2577
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "אף אחד מהשירים הנבחרים לא היה ראוי להעתקה להתקן"
 
@@ -3527,7 +3516,6 @@ msgstr "שקיפות"
 #: internet/magnatune/magnatuneservice.cpp:287
 #: internet/somafm/somafmservice.cpp:102
 #: internet/intergalacticfm/intergalacticfmservice.cpp:102
-#: internet/soundcloud/soundcloudservice.cpp:377
 #, qt-format
 msgid "Open %1 in browser"
 msgstr "פתיחת %1 בדפדפן"
@@ -3566,7 +3554,7 @@ msgstr "פתיחה ב "
 msgid "Open in new playlist"
 msgstr "פתיחה ברשימת השמעה חדשה"
 
-#: ../bin/src/ui_behavioursettingspage.h:358
+#: ../bin/src/ui_behavioursettingspage.h:353
 msgctxt "Refers to behavior settings in Clementine settings page."
 msgid "Open in new playlist"
 msgstr ""
@@ -3606,7 +3594,7 @@ msgstr ""
 msgid "Organise Files"
 msgstr "ארגון קבצים"
 
-#: library/libraryview.cpp:416 ui/mainwindow.cpp:715
+#: library/libraryview.cpp:416 ui/mainwindow.cpp:716
 msgid "Organise files..."
 msgstr "ארגון קבצים..."
 
@@ -3690,7 +3678,7 @@ msgstr "מסיבה"
 msgid "Password"
 msgstr "ססמה"
 
-#: core/globalshortcuts.cpp:50 ui/mainwindow.cpp:1160 ui/mainwindow.cpp:1663
+#: core/globalshortcuts.cpp:50 ui/mainwindow.cpp:1169 ui/mainwindow.cpp:1676
 #: ui/qtsystemtrayicon.cpp:189 wiimotedev/wiimotesettingspage.cpp:114
 msgid "Pause"
 msgstr "השהייה"
@@ -3718,8 +3706,8 @@ msgstr "פיקסל"
 msgid "Plain sidebar"
 msgstr "סרגל צד פשוט"
 
-#: core/globalshortcuts.cpp:49 ui/mainwindow.cpp:676 ui/mainwindow.cpp:1126
-#: ui/mainwindow.cpp:1145 ui/mainwindow.cpp:1667 ui/qtsystemtrayicon.cpp:177
+#: core/globalshortcuts.cpp:49 ui/mainwindow.cpp:677 ui/mainwindow.cpp:1133
+#: ui/mainwindow.cpp:1154 ui/mainwindow.cpp:1680 ui/qtsystemtrayicon.cpp:177
 #: ui/qtsystemtrayicon.cpp:203 wiimotedev/wiimotesettingspage.cpp:107
 #: ../bin/src/ui_mainwindow.h:675
 msgid "Play"
@@ -3733,16 +3721,16 @@ msgstr "מונה השמעות"
 msgid "Play if stopped, pause if playing"
 msgstr "ניגון אם מושהה, השהייה אם מנגן"
 
-#: ../bin/src/ui_behavioursettingspage.h:344
-#: ../bin/src/ui_behavioursettingspage.h:364
+#: ../bin/src/ui_behavioursettingspage.h:339
+#: ../bin/src/ui_behavioursettingspage.h:359
 msgid "Play if there is nothing already playing"
 msgstr "השמעה אם אין שום שמושמע כרגע"
 
-#: library/libraryview.cpp:396 ui/mainwindow.cpp:1774
+#: library/libraryview.cpp:396 ui/mainwindow.cpp:1787
 msgid "Play next"
 msgstr ""
 
-#: ui/mainwindow.cpp:1772
+#: ui/mainwindow.cpp:1785
 msgid "Play selected tracks next"
 msgstr ""
 
@@ -3781,7 +3769,7 @@ msgstr "אפשרויות רשימת ההשמעה"
 msgid "Playlist type"
 msgstr "סוג רשימת ההשמעה"
 
-#: internet/soundcloud/soundcloudservice.cpp:133 ui/mainwindow.cpp:269
+#: ui/mainwindow.cpp:270
 msgid "Playlists"
 msgstr "רשימות השמעה"
 
@@ -3872,7 +3860,7 @@ msgstr "יש ללחוץ על מקש כלשהו"
 msgid "Press a key combination to use for %1..."
 msgstr "יש ללחוץ על צירוף מקשים שיוקצה עבור %1..."
 
-#: ../bin/src/ui_behavioursettingspage.h:347
+#: ../bin/src/ui_behavioursettingspage.h:342
 msgid "Pressing \"Previous\" in player will..."
 msgstr ""
 
@@ -3949,12 +3937,12 @@ msgstr "התקן מתושאל..."
 msgid "Queue Manager"
 msgstr "מנהל התור"
 
-#: ui/mainwindow.cpp:1767
+#: ui/mainwindow.cpp:1780
 msgid "Queue selected tracks"
 msgstr "הוספת הרצועות הנבחרות"
 
 #: globalsearch/globalsearchview.cpp:464 library/libraryview.cpp:393
-#: ui/mainwindow.cpp:1765
+#: ui/mainwindow.cpp:1778
 msgid "Queue track"
 msgstr "הוספת הרצועה לתור"
 
@@ -4044,7 +4032,7 @@ msgid "Reggae"
 msgstr "רגאיי"
 
 #: playlist/playlistsaveoptionsdialog.cpp:33
-#: ../bin/src/ui_behavioursettingspage.h:380
+#: ../bin/src/ui_behavioursettingspage.h:375
 msgid "Relative"
 msgstr ""
 
@@ -4052,9 +4040,9 @@ msgstr ""
 msgid "Remember Wii remote swing"
 msgstr "שמירת הנפת ה־Wii remote"
 
-#: ../bin/src/ui_behavioursettingspage.h:332
-msgid "Remember from last time"
-msgstr "שמירה מהפעם הקודמת"
+#: ../bin/src/ui_behavioursettingspage.h:327
+msgid "Remember from &last time"
+msgstr ""
 
 #: ../bin/src/ui_playlistsaveoptionsdialog.h:99
 msgid "Remember my choice"
@@ -4132,7 +4120,7 @@ msgstr "חזרה על הרצועה"
 msgid "Replace current playlist"
 msgstr "החלפת רשימת ההשמעה הנוכחית"
 
-#: ../bin/src/ui_behavioursettingspage.h:357
+#: ../bin/src/ui_behavioursettingspage.h:352
 msgid "Replace the playlist"
 msgstr "החלפת רשימת ההשמעה"
 
@@ -4164,7 +4152,7 @@ msgstr "איפוס"
 msgid "Reset play counts"
 msgstr "איפוס מונה ההשמעות"
 
-#: ../bin/src/ui_behavioursettingspage.h:351
+#: ../bin/src/ui_behavioursettingspage.h:346
 msgid "Restart song, then jump to previous if pressed again"
 msgstr ""
 
@@ -4177,7 +4165,7 @@ msgstr ""
 msgid "Restrict to ASCII characters"
 msgstr "הגבלה לתווי ASCII"
 
-#: ../bin/src/ui_behavioursettingspage.h:333
+#: ../bin/src/ui_behavioursettingspage.h:332
 msgid "Resume playback on start"
 msgstr ""
 
@@ -4319,7 +4307,7 @@ msgstr "ניקוד"
 msgid "Scrobble tracks that I listen to"
 msgstr "עדכון הפרופיל עם הרצועות הנשמעות"
 
-#: ../bin/src/ui_behavioursettingspage.h:320
+#: ../bin/src/ui_behavioursettingspage.h:315
 msgid "Scroll over icon to change track"
 msgstr ""
 
@@ -4333,7 +4321,7 @@ msgstr ""
 msgid "Search"
 msgstr "חיפוש"
 
-#: ui/mainwindow.cpp:260 ../bin/src/ui_globalsearchsettingspage.h:141
+#: ui/mainwindow.cpp:261 ../bin/src/ui_globalsearchsettingspage.h:141
 msgctxt "Global search settings dialog title."
 msgid "Search"
 msgstr ""
@@ -4358,7 +4346,7 @@ msgstr "חיפוש Subsonic"
 msgid "Search automatically"
 msgstr ""
 
-#: ui/mainwindow.cpp:696
+#: ui/mainwindow.cpp:697
 msgid "Search for album"
 msgstr ""
 
@@ -4371,7 +4359,7 @@ msgstr "חיפוש אחר עטיפות אלבום..."
 msgid "Search for anything"
 msgstr "חיפוש הכול"
 
-#: ui/mainwindow.cpp:693
+#: ui/mainwindow.cpp:694
 msgid "Search for artist"
 msgstr ""
 
@@ -4395,7 +4383,6 @@ msgstr "מצב חיפוש"
 msgid "Search options"
 msgstr "אפשרויות חיפוש"
 
-#: internet/soundcloud/soundcloudservice.cpp:119
 #: internet/spotify/spotifyservice.cpp:400
 msgid "Search results"
 msgstr "תוצאות החיפוש"
@@ -4429,7 +4416,7 @@ msgstr "דילוג בתוך הרצועה המתנגנת כעת למיקום יח
 msgid "Seek the currently playing track to an absolute position"
 msgstr "דילוג בתוך הרצועה המתנגנת כעת למיקום מוחלט"
 
-#: ../bin/src/ui_behavioursettingspage.h:373
+#: ../bin/src/ui_behavioursettingspage.h:368
 msgid "Seeking using a keyboard shortcut or mouse wheel"
 msgstr ""
 
@@ -4489,7 +4476,7 @@ msgstr "פרטי שרת"
 msgid "Service offline"
 msgstr "שירות לא מקוון"
 
-#: ui/mainwindow.cpp:1812
+#: ui/mainwindow.cpp:1825
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr "הגדרת %1 בתור „%2“..."
@@ -4565,7 +4552,7 @@ msgstr "הצגת חיווי מסך נאה"
 msgid "Show above status bar"
 msgstr "הצגה מעל לשורת המצב"
 
-#: ui/mainwindow.cpp:643
+#: ui/mainwindow.cpp:644
 msgid "Show all songs"
 msgstr "הצגת כל השירים"
 
@@ -4585,12 +4572,12 @@ msgstr "הצגת חוצצים"
 msgid "Show fullsize..."
 msgstr "הצגה על מסך מלא..."
 
-#: library/libraryview.cpp:433 ui/mainwindow.cpp:725
+#: library/libraryview.cpp:433 ui/mainwindow.cpp:726
 #: widgets/fileviewlist.cpp:53
 msgid "Show in file browser..."
 msgstr "הצגה בסייר הקבצים..."
 
-#: ui/mainwindow.cpp:727
+#: ui/mainwindow.cpp:728
 msgid "Show in library..."
 msgstr ""
 
@@ -4602,11 +4589,11 @@ msgstr "הצגה תחת אמנים שונים"
 msgid "Show moodbar"
 msgstr "הצגת סרגל האווירה"
 
-#: ui/mainwindow.cpp:645
+#: ui/mainwindow.cpp:646
 msgid "Show only duplicates"
 msgstr "הצגת כפילויות בלבד"
 
-#: ui/mainwindow.cpp:647
+#: ui/mainwindow.cpp:648
 msgid "Show only untagged"
 msgstr "הצגת לא מתוייגים בלבד"
 
@@ -4630,7 +4617,7 @@ msgstr ""
 msgid "Show the scrobble button in the main window"
 msgstr "הצגת הכפתור scrobble בחלון הראשי"
 
-#: ../bin/src/ui_behavioursettingspage.h:319
+#: ../bin/src/ui_behavioursettingspage.h:314
 msgid "Show tray icon"
 msgstr "הצגת סמל באזור הדיווחים"
 
@@ -4698,11 +4685,11 @@ msgstr "מונה דילוגים"
 msgid "Skip forwards in playlist"
 msgstr "דילוג קדימה ברשימת ההשמעה"
 
-#: ui/mainwindow.cpp:1783
+#: ui/mainwindow.cpp:1796
 msgid "Skip selected tracks"
 msgstr ""
 
-#: ui/mainwindow.cpp:1781
+#: ui/mainwindow.cpp:1794
 msgid "Skip track"
 msgstr ""
 
@@ -4734,7 +4721,7 @@ msgstr "רוק קל"
 msgid "Song Information"
 msgstr "מידע על השיר"
 
-#: ui/mainwindow.cpp:280
+#: ui/mainwindow.cpp:281
 msgid "Song info"
 msgstr "מידע על השיר"
 
@@ -4765,10 +4752,6 @@ msgstr "מיון שירים על פי"
 #: ../bin/src/ui_querysortpage.h:137
 msgid "Sorting"
 msgstr "מיון"
-
-#: ../bin/src/ui_soundcloudsettingspage.h:100
-msgid "SoundCloud"
-msgstr ""
 
 #: playlist/playlist.cpp:1404
 msgid "Source"
@@ -4828,7 +4811,6 @@ msgstr "התחלת רשימת ההשמעה המתנגנת כעת"
 msgid "Start transcoding"
 msgstr "התחלת ההתמרה"
 
-#: internet/soundcloud/soundcloudservice.cpp:121
 #: internet/spotify/spotifyservice.cpp:402
 msgid ""
 "Start typing something on the search box above to fill this search results "
@@ -4861,7 +4843,7 @@ msgstr ""
 msgid "Stop after every track"
 msgstr ""
 
-#: ui/mainwindow.cpp:680 ../bin/src/ui_mainwindow.h:679
+#: ui/mainwindow.cpp:681 ../bin/src/ui_mainwindow.h:679
 msgid "Stop after this track"
 msgstr "הפסקה אחרי רצועה זו"
 
@@ -4873,7 +4855,7 @@ msgstr "הפסקת הנגינה"
 msgid "Stop playback after current track"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:334
+#: ../bin/src/ui_behavioursettingspage.h:333
 msgid "Stop playback if song fails to play"
 msgstr ""
 
@@ -5029,7 +5011,7 @@ msgid ""
 "license key. Visit subsonic.org for details."
 msgstr "תמה תקופת הניסיון לשרת Subsonic. נא תרומתך לקבלת מפתח רישיון. לפרטים, נא לבקר ב subsonic.org "
 
-#: ui/mainwindow.cpp:2674
+#: ui/mainwindow.cpp:2687
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -5071,7 +5053,7 @@ msgid ""
 "continue?"
 msgstr "קבצים אלו ימחקו מההתקן, האם להמשיך?"
 
-#: library/libraryview.cpp:679 ui/mainwindow.cpp:2433 widgets/fileview.cpp:189
+#: library/libraryview.cpp:679 ui/mainwindow.cpp:2446 widgets/fileview.cpp:189
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -5151,7 +5133,7 @@ msgstr "המדיה הזורמת הזו היא עבור חברות בתשלום �
 msgid "This type of device is not supported: %1"
 msgstr "סוג התקן זה לא נתמך: %1"
 
-#: ../bin/src/ui_behavioursettingspage.h:374
+#: ../bin/src/ui_behavioursettingspage.h:369
 msgid "Time step"
 msgstr ""
 
@@ -5174,7 +5156,7 @@ msgstr "החלפה ל/ממצב חיווי נאה"
 msgid "Toggle fullscreen"
 msgstr "הפעלה או כיבוי של מסך מלא"
 
-#: ui/mainwindow.cpp:1769
+#: ui/mainwindow.cpp:1782
 msgid "Toggle queue status"
 msgstr "החלף מצב התור"
 
@@ -5222,10 +5204,6 @@ msgstr ""
 #: ../bin/src/ui_trackselectiondialog.h:212 ../bin/src/ui_ripcddialog.h:304
 msgid "Track"
 msgstr "רצועה"
-
-#: internet/soundcloud/soundcloudservice.cpp:136
-msgid "Tracks"
-msgstr ""
 
 #: ../bin/src/ui_transcodedialog.h:213 ../bin/src/ui_mainwindow.h:706
 msgid "Transcode Music"
@@ -5312,11 +5290,11 @@ msgstr "שגיאה לא ידועה"
 msgid "Unset cover"
 msgstr "הסרת עטיפה"
 
-#: ui/mainwindow.cpp:1779
+#: ui/mainwindow.cpp:1792
 msgid "Unskip selected tracks"
 msgstr ""
 
-#: ui/mainwindow.cpp:1777
+#: ui/mainwindow.cpp:1790
 msgid "Unskip track"
 msgstr ""
 
@@ -5427,7 +5405,7 @@ msgstr ""
 msgid "Use temporal noise shaping"
 msgstr "שימוש בתצורת רעשים טמפורלית"
 
-#: ../bin/src/ui_behavioursettingspage.h:326
+#: ../bin/src/ui_behavioursettingspage.h:321
 msgid "Use the system default"
 msgstr "שימוש בבררת המחדל של המערכת"
 
@@ -5447,7 +5425,7 @@ msgstr "שימוש בנורמליזציה של עצמת השמע"
 msgid "Used"
 msgstr "בשימוש"
 
-#: ui/settingsdialog.cpp:147
+#: ui/settingsdialog.cpp:146
 msgid "User interface"
 msgstr "מנשק משתמש"
 
@@ -5459,7 +5437,7 @@ msgstr "מנשק משתמש"
 msgid "Username"
 msgstr "שם משתמש"
 
-#: ../bin/src/ui_behavioursettingspage.h:340
+#: ../bin/src/ui_behavioursettingspage.h:335
 msgid "Using the menu to add a song will..."
 msgstr "שימוש בתפריט להוספת שיר יגרום ל..."
 
@@ -5532,7 +5510,7 @@ msgstr "WAV"
 msgid "WMA"
 msgstr "WMA"
 
-#: playlist/playlisttabbar.cpp:192 ../bin/src/ui_behavioursettingspage.h:322
+#: playlist/playlisttabbar.cpp:192 ../bin/src/ui_behavioursettingspage.h:317
 msgid "Warn me when closing a playlist tab"
 msgstr ""
 
@@ -5552,7 +5530,7 @@ msgstr "אתר"
 msgid "Weeks"
 msgstr "שבועות"
 
-#: ../bin/src/ui_behavioursettingspage.h:329
+#: ../bin/src/ui_behavioursettingspage.h:324
 msgid "When Clementine starts"
 msgstr "בהפעלת Clementine"
 
@@ -5562,7 +5540,7 @@ msgid ""
 "If there are no matches then it will use the largest image in the directory."
 msgstr "בחיפוש אחר תמונות אלבום, Clementine יחפש קודם קבצי תמונה המכילים אחת המילים האלו.\nאם לא נמצאו קבצים מתאימים, אז תיבחר התמונה הגדולה ביותר בתיקייה."
 
-#: ../bin/src/ui_behavioursettingspage.h:377
+#: ../bin/src/ui_behavioursettingspage.h:372
 msgid "When saving a playlist, file paths should be"
 msgstr ""
 
@@ -5638,7 +5616,7 @@ msgid ""
 "well?"
 msgstr "האם ברצונך להעביר גם את שאר השירים באלבום לאמנים שונים?"
 
-#: ui/mainwindow.cpp:2681
+#: ui/mainwindow.cpp:2694
 msgid "Would you like to run a full rescan right now?"
 msgstr "האם ברצונך לבצע סריקה חוזרת כעת?"
 
@@ -5646,7 +5624,7 @@ msgstr "האם ברצונך לבצע סריקה חוזרת כעת?"
 msgid "Write all songs statistics into songs' files"
 msgstr "רשום את כל הסטטיסטיקות עבור השירים לתוך קבצי שירים"
 
-#: ../bin/src/ui_behavioursettingspage.h:382
+#: ../bin/src/ui_behavioursettingspage.h:377
 msgid "Write metadata"
 msgstr ""
 
@@ -5732,13 +5710,6 @@ msgstr "אין לך חשבון פרימיום ב־Spotify."
 msgid "You do not have an active subscription"
 msgstr "אינך בעל מנוי פעיל"
 
-#: ../bin/src/ui_soundcloudsettingspage.h:101
-msgid ""
-"You don't need to be logged in to search and to listen to music on "
-"SoundCloud. However, you need to login to access your playlists and your "
-"stream."
-msgstr ""
-
 #: internet/spotify/spotifyservice.cpp:205
 msgid ""
 "You have been logged out of Spotify, please re-enter your password in the "
@@ -5760,7 +5731,7 @@ msgid ""
 "shortcuts in Clementine."
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:328
+#: ../bin/src/ui_behavioursettingspage.h:323
 msgid "You will need to restart Clementine if you change the language."
 msgstr "יש להפעיל מחדש את Clementine לאחר שינוי השפה."
 

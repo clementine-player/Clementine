@@ -12,7 +12,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2018-09-17 13:31+0000\n"
+"PO-Revision-Date: 2018-10-01 17:06+0000\n"
 "Last-Translator: hatstand <john.maguire@gmail.com>\n"
 "Language-Team: Slovak (http://www.transifex.com/davidsansome/clementine/language/sk/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -55,7 +55,7 @@ msgstr " ms"
 msgid " pt"
 msgstr " bodov"
 
-#: ../bin/src/ui_behavioursettingspage.h:375
+#: ../bin/src/ui_behavioursettingspage.h:370
 msgid " s"
 msgstr "s"
 
@@ -397,6 +397,10 @@ msgid ""
 "A song will be included in the playlist if it matches these conditions."
 msgstr "Pieseň bude zahrnutá do playlistu ak spĺňa tieto podmienky."
 
+#: ../bin/src/ui_behavioursettingspage.h:373
+msgid "A&utomatic"
+msgstr ""
+
 #: smartplaylists/searchterm.cpp:396
 msgid "A-Z"
 msgstr "A-Z"
@@ -443,7 +447,7 @@ msgid "About Qt..."
 msgstr "O Qt.."
 
 #: playlist/playlistsaveoptionsdialog.cpp:34
-#: ../bin/src/ui_behavioursettingspage.h:379
+#: ../bin/src/ui_behavioursettingspage.h:374
 msgid "Absolute"
 msgstr "absolútne"
 
@@ -469,10 +473,6 @@ msgstr "Činnosť"
 #: wiimotedev/wiimotesettingspage.cpp:103
 msgid "Activate/Deactivate Wii Remote"
 msgstr ""
-
-#: internet/soundcloud/soundcloudservice.cpp:128
-msgid "Activities stream"
-msgstr "Stream činností"
 
 #: internet/podcasts/addpodcastdialog.cpp:63
 msgid "Add Podcast"
@@ -502,7 +502,7 @@ msgstr "Pridať ďalší stream..."
 msgid "Add directory..."
 msgstr "Pridať priečinok..."
 
-#: ui/mainwindow.cpp:2049
+#: ui/mainwindow.cpp:2062
 msgid "Add file"
 msgstr "Pridať súbor"
 
@@ -522,7 +522,7 @@ msgstr "Pridať súbor..."
 msgid "Add files to transcode"
 msgstr "Pridať súbory na transkódovanie"
 
-#: transcoder/transcodedialog.cpp:306 ui/mainwindow.cpp:2076
+#: transcoder/transcodedialog.cpp:306 ui/mainwindow.cpp:2089
 #: ripper/ripcddialog.cpp:201
 msgid "Add folder"
 msgstr "Pridať priečinok"
@@ -627,7 +627,7 @@ msgstr "Pridať do Spotify playlistov"
 msgid "Add to Spotify starred"
 msgstr "Pridať do S hviezdičkou na Spotify"
 
-#: ui/mainwindow.cpp:1850
+#: ui/mainwindow.cpp:1863
 msgid "Add to another playlist"
 msgstr "Pridať do iného playlistu"
 
@@ -635,8 +635,8 @@ msgstr "Pridať do iného playlistu"
 msgid "Add to playlist"
 msgstr "Pridať do playlistu"
 
-#: ../bin/src/ui_behavioursettingspage.h:359
-#: ../bin/src/ui_behavioursettingspage.h:371
+#: ../bin/src/ui_behavioursettingspage.h:354
+#: ../bin/src/ui_behavioursettingspage.h:366
 msgid "Add to the queue"
 msgstr "ju pridá do poradia"
 
@@ -717,7 +717,7 @@ msgstr "Albumy bez obalov"
 msgid "All"
 msgstr "Všetko"
 
-#: ui/mainwindow.cpp:158
+#: ui/mainwindow.cpp:159
 msgid "All Files (*)"
 msgstr "Všetky súbory (*)"
 
@@ -767,16 +767,16 @@ msgstr "Povoliť stred/kraj enkódovanie"
 msgid "Alongside the originals"
 msgstr "Po boku originálov"
 
-#: ../bin/src/ui_behavioursettingspage.h:331
-msgid "Always hide the main window"
-msgstr "Vždy skryť hlavné okno"
+#: ../bin/src/ui_behavioursettingspage.h:326
+msgid "Alwa&ys hide the main window"
+msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:330
-msgid "Always show the main window"
-msgstr "Vždy zobrazovať hlavné okno"
+#: ../bin/src/ui_behavioursettingspage.h:325
+msgid "Always show &the main window"
+msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:345
-#: ../bin/src/ui_behavioursettingspage.h:365
+#: ../bin/src/ui_behavioursettingspage.h:340
+#: ../bin/src/ui_behavioursettingspage.h:360
 msgid "Always start playing"
 msgstr "Hneď začne hrať"
 
@@ -823,7 +823,7 @@ msgstr "Pridať súbory/URL adresy do playlistu"
 msgid "Append to current playlist"
 msgstr "Pridať do aktuálneho playlistu"
 
-#: ../bin/src/ui_behavioursettingspage.h:356
+#: ../bin/src/ui_behavioursettingspage.h:351
 msgid "Append to the playlist"
 msgstr "ju pridá do playlistu"
 
@@ -855,7 +855,7 @@ msgstr "Ste si istý, že chcete ukladať štatistiky piesní do súboru piesne 
 msgid "Artist"
 msgstr "Interprét"
 
-#: ui/mainwindow.cpp:283
+#: ui/mainwindow.cpp:284
 msgid "Artist info"
 msgstr "Interprét"
 
@@ -863,9 +863,9 @@ msgstr "Interprét"
 msgid "Artist's initial"
 msgstr "Iniciálky interpréta"
 
-#: ../bin/src/ui_behavioursettingspage.h:381
-msgid "Ask when saving"
-msgstr "Opýtať sa pri ukladaní"
+#: ../bin/src/ui_behavioursettingspage.h:376
+msgid "As&k when saving"
+msgstr ""
 
 #: ../bin/src/ui_transcodedialog.h:225
 #: ../bin/src/ui_networkremotesettingspage.h:250
@@ -898,7 +898,6 @@ msgid "Auto"
 msgstr "Automaticky"
 
 #: playlist/playlistsaveoptionsdialog.cpp:32
-#: ../bin/src/ui_behavioursettingspage.h:378
 msgid "Automatic"
 msgstr "Automaticky"
 
@@ -947,7 +946,7 @@ msgstr "Obrázok na pozadí"
 msgid "Background opacity"
 msgstr "Priehľadnosť pozadia"
 
-#: core/database.cpp:648
+#: core/database.cpp:664
 msgid "Backing up database"
 msgstr "Zálohuje sa databáza"
 
@@ -971,7 +970,7 @@ msgstr "Základná modrá"
 msgid "Basic audio type"
 msgstr "Základný typ zvuku"
 
-#: ../bin/src/ui_behavioursettingspage.h:318
+#: ../bin/src/ui_behavioursettingspage.h:313
 msgid "Behavior"
 msgstr "Správanie"
 
@@ -1089,7 +1088,7 @@ msgstr "Zmeniť skratku..."
 msgid "Change shuffle mode"
 msgstr "Zmeniť režim zamiešavania"
 
-#: ../bin/src/ui_behavioursettingspage.h:370
+#: ../bin/src/ui_behavioursettingspage.h:365
 msgid "Change the currently playing song"
 msgstr "zmení práve prehrávanú pieseň"
 
@@ -1119,7 +1118,7 @@ msgstr "Skontrolovať, či sú nové časti"
 msgid "Check for updates"
 msgstr "Skontrolovať aktualizácie"
 
-#: ui/mainwindow.cpp:820
+#: ui/mainwindow.cpp:823
 msgid "Check for updates..."
 msgstr "Skontrolovať aktualizácie..."
 
@@ -1261,7 +1260,6 @@ msgstr "Kliknite sem pre označenie tohto playlitu ako obľúbeného, uloží sa
 msgid "Click to toggle between remaining time and total time"
 msgstr "Kliknite na prepínanie medzi zostávajúcim a celkovým časom"
 
-#: ../bin/src/ui_soundcloudsettingspage.h:103
 #: ../bin/src/ui_lastfmsettingspage.h:133
 #: ../bin/src/ui_googledrivesettingspage.h:102
 #: ../bin/src/ui_dropboxsettingspage.h:102
@@ -1340,10 +1338,6 @@ msgstr "Nastaviť Magnatune..."
 msgid "Configure Shortcuts"
 msgstr "Klávesové skratky"
 
-#: internet/soundcloud/soundcloudservice.cpp:381
-msgid "Configure SoundCloud..."
-msgstr "Nastaviť SoundCloud..."
-
 #: internet/spotify/spotifyservice.cpp:927
 msgid "Configure Spotify..."
 msgstr "Nastaviť Spotify..."
@@ -1356,7 +1350,7 @@ msgstr "Nastaviť Subsonic..."
 msgid "Configure global search..."
 msgstr "Nastaviť globálne vyhľadávanie..."
 
-#: ui/mainwindow.cpp:659
+#: ui/mainwindow.cpp:660
 msgid "Configure library..."
 msgstr "Nastaviť zbierku..."
 
@@ -1428,11 +1422,11 @@ msgid "Copy to clipboard"
 msgstr "Kopírovať do schránky"
 
 #: library/libraryview.cpp:419 internet/podcasts/podcastservice.cpp:438
-#: ui/mainwindow.cpp:719 widgets/fileviewlist.cpp:44
+#: ui/mainwindow.cpp:720 widgets/fileviewlist.cpp:44
 msgid "Copy to device..."
 msgstr "Skopírovať na zariadenie..."
 
-#: devices/deviceview.cpp:228 ui/mainwindow.cpp:709
+#: devices/deviceview.cpp:228 ui/mainwindow.cpp:710
 #: widgets/fileviewlist.cpp:40
 msgid "Copy to library..."
 msgstr "Skopírovať do zbierky..."
@@ -1576,7 +1570,7 @@ msgstr "Cesta zbernice D-Bus"
 msgid "Dance"
 msgstr "Dance"
 
-#: core/database.cpp:601
+#: core/database.cpp:617
 msgid ""
 "Database corruption detected. Please read https://github.com/clementine-"
 "player/Clementine/wiki/Database-Corruption for instructions on how to "
@@ -1638,7 +1632,7 @@ msgid "Delete downloaded data"
 msgstr "Vymazať stiahnuté dáta"
 
 #: devices/deviceview.cpp:408 library/libraryview.cpp:678
-#: ui/mainwindow.cpp:2432 widgets/fileview.cpp:188
+#: ui/mainwindow.cpp:2445 widgets/fileview.cpp:188
 msgid "Delete files"
 msgstr "Vymazať súbory"
 
@@ -1646,7 +1640,7 @@ msgstr "Vymazať súbory"
 msgid "Delete from device..."
 msgstr "Vymazať zo zariadenia..."
 
-#: library/libraryview.cpp:422 ui/mainwindow.cpp:722
+#: library/libraryview.cpp:422 ui/mainwindow.cpp:723
 #: widgets/fileviewlist.cpp:47
 msgid "Delete from disk..."
 msgstr "Vymazať z disku..."
@@ -1679,11 +1673,11 @@ msgstr "Odstraňujú sa súbory"
 msgid "Depth"
 msgstr "Hĺbka"
 
-#: ui/mainwindow.cpp:1763
+#: ui/mainwindow.cpp:1776
 msgid "Dequeue selected tracks"
 msgstr "Vybrať z radu vybrané skladby"
 
-#: ui/mainwindow.cpp:1761
+#: ui/mainwindow.cpp:1774
 msgid "Dequeue track"
 msgstr "Vybrať z radu skladbu"
 
@@ -1712,7 +1706,7 @@ msgstr "Názov zariadenia"
 msgid "Device properties..."
 msgstr "Vlastnosti zariadenia..."
 
-#: ui/mainwindow.cpp:276
+#: ui/mainwindow.cpp:277
 msgid "Devices"
 msgstr "Zariadenia"
 
@@ -1842,11 +1836,11 @@ msgstr "Prispieť"
 msgid "Double click to open"
 msgstr "Otvoríte dvojklikom"
 
-#: ../bin/src/ui_behavioursettingspage.h:367
+#: ../bin/src/ui_behavioursettingspage.h:362
 msgid "Double clicking a song in the playlist will..."
 msgstr "Dvojklik na pieseň v playliste..."
 
-#: ../bin/src/ui_behavioursettingspage.h:353
+#: ../bin/src/ui_behavioursettingspage.h:348
 msgid "Double clicking a song will..."
 msgstr "Dvojklik na pieseň..."
 
@@ -1955,7 +1949,7 @@ msgstr "Dynamicky náhodná zmes"
 msgid "Edit smart playlist..."
 msgstr "Upraviť inteligentný playlist..."
 
-#: ui/mainwindow.cpp:1813
+#: ui/mainwindow.cpp:1826
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr "Upraviť tag \"%1\"..."
@@ -2001,7 +1995,7 @@ msgstr "Povoliť ekvalizér"
 msgid "Enable shortcuts only when Clementine is focused"
 msgstr "Povoliť skratky len keď je Clementine zameraný"
 
-#: ../bin/src/ui_behavioursettingspage.h:339
+#: ../bin/src/ui_behavioursettingspage.h:331
 msgid "Enable song metadata inline edition with click"
 msgstr "Povoliť upravovanie metadát piesní kliknutím na riadok"
 
@@ -2090,8 +2084,8 @@ msgid "Equivalent to --log-levels *:3"
 msgstr "Ekvivalent k --log-levels *:3"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:246
-#: library/libraryview.cpp:672 ui/mainwindow.cpp:2105 ui/mainwindow.cpp:2384
-#: ui/mainwindow.cpp:2563
+#: library/libraryview.cpp:672 ui/mainwindow.cpp:2118 ui/mainwindow.cpp:2397
+#: ui/mainwindow.cpp:2576
 msgid "Error"
 msgstr "Chyba"
 
@@ -2237,7 +2231,7 @@ msgstr "Zoslabovanie"
 msgid "Fading duration"
 msgstr "Trvanie zoslabovania"
 
-#: ui/mainwindow.cpp:2106
+#: ui/mainwindow.cpp:2119
 msgid "Failed reading CD drive"
 msgstr "Zlyhalo čítanie CD v mechanike"
 
@@ -2271,10 +2265,6 @@ msgstr "Zlyhalo zapísanie nových auto-tagov do '%1'"
 #: ../bin/src/ui_transcoderoptionsmp3.h:199
 msgid "Fast"
 msgstr "Rýchla"
-
-#: internet/soundcloud/soundcloudservice.cpp:141
-msgid "Favorites"
-msgstr "Obľúbené"
 
 #: library/library.cpp:88
 msgid "Favourite tracks"
@@ -2342,7 +2332,7 @@ msgstr "Typ súboru"
 msgid "Filename"
 msgstr "Názov súboru"
 
-#: ui/mainwindow.cpp:266
+#: ui/mainwindow.cpp:267
 msgid "Files"
 msgstr "Súbory"
 
@@ -2455,7 +2445,7 @@ msgstr "Plné výšky"
 msgid "Ge&nre"
 msgstr "Žá&ner"
 
-#: ui/settingsdialog.cpp:133
+#: ui/settingsdialog.cpp:132
 msgid "General"
 msgstr "Všeobecné"
 
@@ -2514,7 +2504,7 @@ msgstr "Google Drive"
 msgid "Got %1 covers out of %2 (%3 failed)"
 msgstr "Získaných %1 obalov z %2 (%3 zlyhalo)"
 
-#: ../bin/src/ui_behavioursettingspage.h:335
+#: ../bin/src/ui_behavioursettingspage.h:334
 msgid "Grey out non existent songs in my playlists"
 msgstr "Zošednúť neexistujúce piesne v playlistoch"
 
@@ -2643,7 +2633,7 @@ msgstr "Ikony na vrchu"
 msgid "Identifying song"
 msgstr "Identifikuje sa pieseň"
 
-#: ../bin/src/ui_behavioursettingspage.h:337
+#: ../bin/src/ui_behavioursettingspage.h:329
 msgid ""
 "If activated, clicking a selected song in the playlist view will let you "
 "edit the tag value directly"
@@ -2744,15 +2734,15 @@ msgstr "Vložiť..."
 msgid "Installed"
 msgstr "Nainštalované"
 
-#: core/database.cpp:585
+#: core/database.cpp:601
 msgid "Integrity check"
 msgstr "Kontrola integrity"
 
-#: ui/mainwindow.cpp:272
+#: ui/mainwindow.cpp:273
 msgid "Internet"
 msgstr "Internet"
 
-#: ui/settingsdialog.cpp:156
+#: ui/settingsdialog.cpp:155
 msgid "Internet providers"
 msgstr "Internetoví poskytovatelia"
 
@@ -2825,7 +2815,7 @@ msgstr "Jamendo naj skladby týždňa"
 msgid "Jamendo database"
 msgstr "Jamendo databáza"
 
-#: ../bin/src/ui_behavioursettingspage.h:350
+#: ../bin/src/ui_behavioursettingspage.h:345
 msgid "Jump to previous song right away"
 msgstr "Okamžitý prechod na predchádzajúcu pieseň"
 
@@ -2845,7 +2835,7 @@ msgstr "Držte tlačidlá %1 sekundu..."
 msgid "Keep buttons for %1 seconds..."
 msgstr "Držte tlačidlá %1 sekúnd..."
 
-#: ../bin/src/ui_behavioursettingspage.h:321
+#: ../bin/src/ui_behavioursettingspage.h:316
 msgid "Keep running in the background when the window is closed"
 msgstr "Nechať bežať na pozadí, keď sa zavrie hlavné okno"
 
@@ -2862,7 +2852,7 @@ msgstr "Mačiatka"
 msgid "Kuduro"
 msgstr "Kuduro"
 
-#: ../bin/src/ui_behavioursettingspage.h:323
+#: ../bin/src/ui_behavioursettingspage.h:318
 msgid "Language"
 msgstr "Jazyk"
 
@@ -2936,7 +2926,7 @@ msgstr "Ľavý"
 msgid "Length"
 msgstr "Dĺžka"
 
-#: ui/mainwindow.cpp:251 ui/mainwindow.cpp:263
+#: ui/mainwindow.cpp:252 ui/mainwindow.cpp:264
 #: ../bin/src/ui_seafilesettingspage.h:177
 msgid "Library"
 msgstr "Zbierka"
@@ -2945,7 +2935,7 @@ msgstr "Zbierka"
 msgid "Library advanced grouping"
 msgstr "Pokročilé zoraďovanie zbierky"
 
-#: ui/mainwindow.cpp:2683
+#: ui/mainwindow.cpp:2696
 msgid "Library rescan notice"
 msgstr "Poznámka k preskenovaniu zbierky"
 
@@ -3032,7 +3022,6 @@ msgstr "Načítať súbory/URL adresy, nahradiť nimi aktuálny playlist"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:162
 #: ../bin/src/ui_magnatunesettingspage.h:163
-#: ../bin/src/ui_soundcloudsettingspage.h:102
 #: ../bin/src/ui_spotifysettingspage.h:210
 #: ../bin/src/ui_subsonicsettingspage.h:137
 #: ../bin/src/ui_lastfmsettingspage.h:132
@@ -3262,7 +3251,7 @@ msgstr "Body pripojenia"
 msgid "Move down"
 msgstr "Posunúť nižšie"
 
-#: ui/mainwindow.cpp:712 widgets/fileviewlist.cpp:42
+#: ui/mainwindow.cpp:713 widgets/fileviewlist.cpp:42
 msgid "Move to library..."
 msgstr "Presunúť do zbierky..."
 
@@ -3271,7 +3260,7 @@ msgstr "Presunúť do zbierky..."
 msgid "Move up"
 msgstr "Posunúť vyššie"
 
-#: transcoder/transcodedialog.cpp:225 ui/mainwindow.cpp:2050
+#: transcoder/transcodedialog.cpp:225 ui/mainwindow.cpp:2063
 msgid "Music"
 msgstr "Hudba"
 
@@ -3318,8 +3307,8 @@ msgstr "Nikdy"
 msgid "Never played"
 msgstr "Nikdy nehrané"
 
-#: ../bin/src/ui_behavioursettingspage.h:343
-#: ../bin/src/ui_behavioursettingspage.h:363
+#: ../bin/src/ui_behavioursettingspage.h:338
+#: ../bin/src/ui_behavioursettingspage.h:358
 msgid "Never start playing"
 msgstr "Nezačne sa prehrávať"
 
@@ -3329,7 +3318,7 @@ msgstr "Nezačne sa prehrávať"
 msgid "New folder"
 msgstr "Nový playlist"
 
-#: ui/mainwindow.cpp:1867 ../bin/src/ui_mainwindow.h:709
+#: ui/mainwindow.cpp:1880 ../bin/src/ui_mainwindow.h:709
 msgid "New playlist"
 msgstr "Nový playlist"
 
@@ -3396,7 +3385,7 @@ msgstr "Žiadne krátke bloky"
 msgid "None"
 msgstr "Nijako"
 
-#: library/libraryview.cpp:673 ui/mainwindow.cpp:2385 ui/mainwindow.cpp:2564
+#: library/libraryview.cpp:673 ui/mainwindow.cpp:2398 ui/mainwindow.cpp:2577
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Žiadna z vybratých piesní nieje vhodná na kopírovanie do zariadenia"
 
@@ -3525,7 +3514,6 @@ msgstr "Nepriehľadnosť"
 #: internet/magnatune/magnatuneservice.cpp:287
 #: internet/somafm/somafmservice.cpp:102
 #: internet/intergalacticfm/intergalacticfmservice.cpp:102
-#: internet/soundcloud/soundcloudservice.cpp:377
 #, qt-format
 msgid "Open %1 in browser"
 msgstr "Otvoriť %1 v prehliadači"
@@ -3564,7 +3552,7 @@ msgstr "Otvoriť v Google Drive"
 msgid "Open in new playlist"
 msgstr "ju otvorí v novom playliste"
 
-#: ../bin/src/ui_behavioursettingspage.h:358
+#: ../bin/src/ui_behavioursettingspage.h:353
 msgctxt "Refers to behavior settings in Clementine settings page."
 msgid "Open in new playlist"
 msgstr "ju otvorí v novom playliste"
@@ -3604,7 +3592,7 @@ msgstr "Opus"
 msgid "Organise Files"
 msgstr "Organizovať súbory"
 
-#: library/libraryview.cpp:416 ui/mainwindow.cpp:715
+#: library/libraryview.cpp:416 ui/mainwindow.cpp:716
 msgid "Organise files..."
 msgstr "Spravovať súbory..."
 
@@ -3688,7 +3676,7 @@ msgstr "Party"
 msgid "Password"
 msgstr "Heslo"
 
-#: core/globalshortcuts.cpp:50 ui/mainwindow.cpp:1160 ui/mainwindow.cpp:1663
+#: core/globalshortcuts.cpp:50 ui/mainwindow.cpp:1169 ui/mainwindow.cpp:1676
 #: ui/qtsystemtrayicon.cpp:189 wiimotedev/wiimotesettingspage.cpp:114
 msgid "Pause"
 msgstr "Pozastaviť"
@@ -3716,8 +3704,8 @@ msgstr "Pixel"
 msgid "Plain sidebar"
 msgstr "Obyčajný bočný panel"
 
-#: core/globalshortcuts.cpp:49 ui/mainwindow.cpp:676 ui/mainwindow.cpp:1126
-#: ui/mainwindow.cpp:1145 ui/mainwindow.cpp:1667 ui/qtsystemtrayicon.cpp:177
+#: core/globalshortcuts.cpp:49 ui/mainwindow.cpp:677 ui/mainwindow.cpp:1133
+#: ui/mainwindow.cpp:1154 ui/mainwindow.cpp:1680 ui/qtsystemtrayicon.cpp:177
 #: ui/qtsystemtrayicon.cpp:203 wiimotedev/wiimotesettingspage.cpp:107
 #: ../bin/src/ui_mainwindow.h:675
 msgid "Play"
@@ -3731,16 +3719,16 @@ msgstr "Počet prehraní"
 msgid "Play if stopped, pause if playing"
 msgstr "Hrať ak je zastavené, pozastaviť ak hrá"
 
-#: ../bin/src/ui_behavioursettingspage.h:344
-#: ../bin/src/ui_behavioursettingspage.h:364
+#: ../bin/src/ui_behavioursettingspage.h:339
+#: ../bin/src/ui_behavioursettingspage.h:359
 msgid "Play if there is nothing already playing"
 msgstr "Začne hrať, ak sa nič neprehráva"
 
-#: library/libraryview.cpp:396 ui/mainwindow.cpp:1774
+#: library/libraryview.cpp:396 ui/mainwindow.cpp:1787
 msgid "Play next"
 msgstr ""
 
-#: ui/mainwindow.cpp:1772
+#: ui/mainwindow.cpp:1785
 msgid "Play selected tracks next"
 msgstr ""
 
@@ -3779,7 +3767,7 @@ msgstr "Možnosti playlistu"
 msgid "Playlist type"
 msgstr "Typ playlistu"
 
-#: internet/soundcloud/soundcloudservice.cpp:133 ui/mainwindow.cpp:269
+#: ui/mainwindow.cpp:270
 msgid "Playlists"
 msgstr "Playlisty"
 
@@ -3870,7 +3858,7 @@ msgstr "Stlač tlačítko"
 msgid "Press a key combination to use for %1..."
 msgstr "Stlač kombináciu tlačítok na použitie pre %1..."
 
-#: ../bin/src/ui_behavioursettingspage.h:347
+#: ../bin/src/ui_behavioursettingspage.h:342
 msgid "Pressing \"Previous\" in player will..."
 msgstr "Stlačenie \"Predchádzajúca\" v prehrávači spôsobí..."
 
@@ -3947,12 +3935,12 @@ msgstr "Zaraďuje sa zariadenie..."
 msgid "Queue Manager"
 msgstr "Správca poradia"
 
-#: ui/mainwindow.cpp:1767
+#: ui/mainwindow.cpp:1780
 msgid "Queue selected tracks"
 msgstr "Zaradiť vybrané skladby"
 
 #: globalsearch/globalsearchview.cpp:464 library/libraryview.cpp:393
-#: ui/mainwindow.cpp:1765
+#: ui/mainwindow.cpp:1778
 msgid "Queue track"
 msgstr "Zaradiť skladbu"
 
@@ -4042,7 +4030,7 @@ msgid "Reggae"
 msgstr "Reggae"
 
 #: playlist/playlistsaveoptionsdialog.cpp:33
-#: ../bin/src/ui_behavioursettingspage.h:380
+#: ../bin/src/ui_behavioursettingspage.h:375
 msgid "Relative"
 msgstr "relatívne"
 
@@ -4050,9 +4038,9 @@ msgstr "relatívne"
 msgid "Remember Wii remote swing"
 msgstr "Pamätať si kývnutie Wii diaľkového"
 
-#: ../bin/src/ui_behavioursettingspage.h:332
-msgid "Remember from last time"
-msgstr "Zapamätať z naposledy"
+#: ../bin/src/ui_behavioursettingspage.h:327
+msgid "Remember from &last time"
+msgstr ""
 
 #: ../bin/src/ui_playlistsaveoptionsdialog.h:99
 msgid "Remember my choice"
@@ -4130,7 +4118,7 @@ msgstr "Opakovať skladbu"
 msgid "Replace current playlist"
 msgstr "Nahradiť aktuálny playlist"
 
-#: ../bin/src/ui_behavioursettingspage.h:357
+#: ../bin/src/ui_behavioursettingspage.h:352
 msgid "Replace the playlist"
 msgstr "ňou nahradí playlist"
 
@@ -4162,7 +4150,7 @@ msgstr "Zresetovať"
 msgid "Reset play counts"
 msgstr "Vynulovať počet prehraní"
 
-#: ../bin/src/ui_behavioursettingspage.h:351
+#: ../bin/src/ui_behavioursettingspage.h:346
 msgid "Restart song, then jump to previous if pressed again"
 msgstr "Prehrávať pieseň od začiatku, po ďalšom stlačení prechod na predchádzajúcu pieseň"
 
@@ -4175,7 +4163,7 @@ msgstr "Spustiť znovu prehrávanie skladby, alebo prehrať predchádzajúcu skl
 msgid "Restrict to ASCII characters"
 msgstr "Obmedziť na znaky ASCII"
 
-#: ../bin/src/ui_behavioursettingspage.h:333
+#: ../bin/src/ui_behavioursettingspage.h:332
 msgid "Resume playback on start"
 msgstr "Obnoviť prehrávanie pri spustení"
 
@@ -4317,7 +4305,7 @@ msgstr "Skóre"
 msgid "Scrobble tracks that I listen to"
 msgstr "Skroblovať skladby, ktoré počúvam"
 
-#: ../bin/src/ui_behavioursettingspage.h:320
+#: ../bin/src/ui_behavioursettingspage.h:315
 msgid "Scroll over icon to change track"
 msgstr "Skrolovaním ponad ikonu zmeníte skladbu"
 
@@ -4331,7 +4319,7 @@ msgstr "Seafile"
 msgid "Search"
 msgstr "Hľadať"
 
-#: ui/mainwindow.cpp:260 ../bin/src/ui_globalsearchsettingspage.h:141
+#: ui/mainwindow.cpp:261 ../bin/src/ui_globalsearchsettingspage.h:141
 msgctxt "Global search settings dialog title."
 msgid "Search"
 msgstr "Hľadať"
@@ -4356,7 +4344,7 @@ msgstr "Vyhľadať na Subsonicu"
 msgid "Search automatically"
 msgstr "Hľadať automaticky"
 
-#: ui/mainwindow.cpp:696
+#: ui/mainwindow.cpp:697
 msgid "Search for album"
 msgstr "Vyhľadať album"
 
@@ -4369,7 +4357,7 @@ msgstr "Hľadať obaly albumov..."
 msgid "Search for anything"
 msgstr "Hľadať všetko"
 
-#: ui/mainwindow.cpp:693
+#: ui/mainwindow.cpp:694
 msgid "Search for artist"
 msgstr "Vyhľadať interpreta"
 
@@ -4393,7 +4381,6 @@ msgstr "Režim hľadania"
 msgid "Search options"
 msgstr "Možnosti hľadania"
 
-#: internet/soundcloud/soundcloudservice.cpp:119
 #: internet/spotify/spotifyservice.cpp:400
 msgid "Search results"
 msgstr "Výsledky hľadania"
@@ -4427,7 +4414,7 @@ msgstr "Pretočiť práve prehrávanú skladbu o určitý čas"
 msgid "Seek the currently playing track to an absolute position"
 msgstr "Pretočiť práve prehrávanú skladbu na presnú pozíciu"
 
-#: ../bin/src/ui_behavioursettingspage.h:373
+#: ../bin/src/ui_behavioursettingspage.h:368
 msgid "Seeking using a keyboard shortcut or mouse wheel"
 msgstr "Posúvanie pomocou klávesovej skratky alebo kolieska myši"
 
@@ -4487,7 +4474,7 @@ msgstr "Podrobnosti o serveri"
 msgid "Service offline"
 msgstr "Služba je offline"
 
-#: ui/mainwindow.cpp:1812
+#: ui/mainwindow.cpp:1825
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr "Nastaviť %1 do \"%2\"..."
@@ -4563,7 +4550,7 @@ msgstr "Zobrazovať krásne OSD"
 msgid "Show above status bar"
 msgstr "Zobraziť nad stavovým riadkom"
 
-#: ui/mainwindow.cpp:643
+#: ui/mainwindow.cpp:644
 msgid "Show all songs"
 msgstr "Zobraziť všetky piesne"
 
@@ -4583,12 +4570,12 @@ msgstr "Zobraziť oddeľovače"
 msgid "Show fullsize..."
 msgstr "Zobraziť celú veľkosť..."
 
-#: library/libraryview.cpp:433 ui/mainwindow.cpp:725
+#: library/libraryview.cpp:433 ui/mainwindow.cpp:726
 #: widgets/fileviewlist.cpp:53
 msgid "Show in file browser..."
 msgstr "Zobraziť v prehliadači súborov..."
 
-#: ui/mainwindow.cpp:727
+#: ui/mainwindow.cpp:728
 msgid "Show in library..."
 msgstr "Zobraziť v zbierke..."
 
@@ -4600,11 +4587,11 @@ msgstr "Zobrazovať v rôznych interprétoch"
 msgid "Show moodbar"
 msgstr "Zobraziť panel nálady"
 
-#: ui/mainwindow.cpp:645
+#: ui/mainwindow.cpp:646
 msgid "Show only duplicates"
 msgstr "Zobraziť iba duplikáty"
 
-#: ui/mainwindow.cpp:647
+#: ui/mainwindow.cpp:648
 msgid "Show only untagged"
 msgstr "Zobraziť iba neotagované"
 
@@ -4628,7 +4615,7 @@ msgstr "Zobraziť tlačidlo \"Obľúbené\""
 msgid "Show the scrobble button in the main window"
 msgstr "Zobraziť tlačidlo skroblovania v hlavnom okne"
 
-#: ../bin/src/ui_behavioursettingspage.h:319
+#: ../bin/src/ui_behavioursettingspage.h:314
 msgid "Show tray icon"
 msgstr "Zobrazovať tray ikonu"
 
@@ -4696,11 +4683,11 @@ msgstr "Počet preskočení"
 msgid "Skip forwards in playlist"
 msgstr "Preskočiť dopredu v playliste"
 
-#: ui/mainwindow.cpp:1783
+#: ui/mainwindow.cpp:1796
 msgid "Skip selected tracks"
 msgstr "Preskočiť vybrané skladby"
 
-#: ui/mainwindow.cpp:1781
+#: ui/mainwindow.cpp:1794
 msgid "Skip track"
 msgstr "Preskočiť skladbu"
 
@@ -4732,7 +4719,7 @@ msgstr "Soft Rock"
 msgid "Song Information"
 msgstr "Informácie o piesni"
 
-#: ui/mainwindow.cpp:280
+#: ui/mainwindow.cpp:281
 msgid "Song info"
 msgstr "Pieseň"
 
@@ -4763,10 +4750,6 @@ msgstr "Zoradiť piesne podľa"
 #: ../bin/src/ui_querysortpage.h:137
 msgid "Sorting"
 msgstr "Triedenie"
-
-#: ../bin/src/ui_soundcloudsettingspage.h:100
-msgid "SoundCloud"
-msgstr "SoundCloud"
 
 #: playlist/playlist.cpp:1404
 msgid "Source"
@@ -4826,7 +4809,6 @@ msgstr "Začať playlist práve prehrávanou"
 msgid "Start transcoding"
 msgstr "Začať transkódovanie"
 
-#: internet/soundcloud/soundcloudservice.cpp:121
 #: internet/spotify/spotifyservice.cpp:402
 msgid ""
 "Start typing something on the search box above to fill this search results "
@@ -4859,7 +4841,7 @@ msgstr "Zastaviť po každej skladbe"
 msgid "Stop after every track"
 msgstr "Zastaviť po každej skladbe"
 
-#: ui/mainwindow.cpp:680 ../bin/src/ui_mainwindow.h:679
+#: ui/mainwindow.cpp:681 ../bin/src/ui_mainwindow.h:679
 msgid "Stop after this track"
 msgstr "Zastaviť po tejto skladbe"
 
@@ -4871,7 +4853,7 @@ msgstr "Zastaviť prehrávanie"
 msgid "Stop playback after current track"
 msgstr "Zastaviť prehrávanie po aktuálnej skladbe"
 
-#: ../bin/src/ui_behavioursettingspage.h:334
+#: ../bin/src/ui_behavioursettingspage.h:333
 msgid "Stop playback if song fails to play"
 msgstr ""
 
@@ -5027,7 +5009,7 @@ msgid ""
 "license key. Visit subsonic.org for details."
 msgstr "Skúšobná verzia Subsonic servera uplynula. Prosím prispejte, aby ste získali licenčný kľúč. Navštívte subsonic.org pre detaily."
 
-#: ui/mainwindow.cpp:2674
+#: ui/mainwindow.cpp:2687
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -5069,7 +5051,7 @@ msgid ""
 "continue?"
 msgstr "Tieto súbory budú vymazané zo zariadenia, ste si istý, že chcete pokračovať?"
 
-#: library/libraryview.cpp:679 ui/mainwindow.cpp:2433 widgets/fileview.cpp:189
+#: library/libraryview.cpp:679 ui/mainwindow.cpp:2446 widgets/fileview.cpp:189
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -5149,7 +5131,7 @@ msgstr "Tento stream je len pre platiacich predplatiteľov"
 msgid "This type of device is not supported: %1"
 msgstr "Tento typ zariadení nieje podporovaný: %1"
 
-#: ../bin/src/ui_behavioursettingspage.h:374
+#: ../bin/src/ui_behavioursettingspage.h:369
 msgid "Time step"
 msgstr "Časový krok"
 
@@ -5172,7 +5154,7 @@ msgstr "Prepnúť Krásne OSD"
 msgid "Toggle fullscreen"
 msgstr "Prepnúť na celú obrazovku"
 
-#: ui/mainwindow.cpp:1769
+#: ui/mainwindow.cpp:1782
 msgid "Toggle queue status"
 msgstr "Prepínať stav radu"
 
@@ -5220,10 +5202,6 @@ msgstr "Č&."
 #: ../bin/src/ui_trackselectiondialog.h:212 ../bin/src/ui_ripcddialog.h:304
 msgid "Track"
 msgstr "Č."
-
-#: internet/soundcloud/soundcloudservice.cpp:136
-msgid "Tracks"
-msgstr "Skladby"
 
 #: ../bin/src/ui_transcodedialog.h:213 ../bin/src/ui_mainwindow.h:706
 msgid "Transcode Music"
@@ -5310,11 +5288,11 @@ msgstr "Neznáma chyba"
 msgid "Unset cover"
 msgstr "Nenastavený obal"
 
-#: ui/mainwindow.cpp:1779
+#: ui/mainwindow.cpp:1792
 msgid "Unskip selected tracks"
 msgstr "Nepreskočiť vybraté skladby"
 
-#: ui/mainwindow.cpp:1777
+#: ui/mainwindow.cpp:1790
 msgid "Unskip track"
 msgstr "Nepreskočiť skladbu"
 
@@ -5425,7 +5403,7 @@ msgstr "Použiť systémové ikony"
 msgid "Use temporal noise shaping"
 msgstr "Použiť časové tvarovanie šumu"
 
-#: ../bin/src/ui_behavioursettingspage.h:326
+#: ../bin/src/ui_behavioursettingspage.h:321
 msgid "Use the system default"
 msgstr "Použiť základný systémový"
 
@@ -5445,7 +5423,7 @@ msgstr "Použiť normalizáciu hlasitosti"
 msgid "Used"
 msgstr "Použitých"
 
-#: ui/settingsdialog.cpp:147
+#: ui/settingsdialog.cpp:146
 msgid "User interface"
 msgstr "Používateľské rozhranie"
 
@@ -5457,7 +5435,7 @@ msgstr "Používateľské rozhranie"
 msgid "Username"
 msgstr "Meno používateľa"
 
-#: ../bin/src/ui_behavioursettingspage.h:340
+#: ../bin/src/ui_behavioursettingspage.h:335
 msgid "Using the menu to add a song will..."
 msgstr "Použitie menu na pridanie piesne..."
 
@@ -5530,7 +5508,7 @@ msgstr "WAV"
 msgid "WMA"
 msgstr "WMA"
 
-#: playlist/playlisttabbar.cpp:192 ../bin/src/ui_behavioursettingspage.h:322
+#: playlist/playlisttabbar.cpp:192 ../bin/src/ui_behavioursettingspage.h:317
 msgid "Warn me when closing a playlist tab"
 msgstr "Varovať ma pri zatvorení karty s playlistom"
 
@@ -5550,7 +5528,7 @@ msgstr "Webstránka"
 msgid "Weeks"
 msgstr "Týždne"
 
-#: ../bin/src/ui_behavioursettingspage.h:329
+#: ../bin/src/ui_behavioursettingspage.h:324
 msgid "When Clementine starts"
 msgstr "Pri zapnutí Clementine"
 
@@ -5560,7 +5538,7 @@ msgid ""
 "If there are no matches then it will use the largest image in the directory."
 msgstr "Keď sa hľadá obal albumu, Clementine sa najprv pozrie po súbore, ktorého názov obsahuje jedno z týchto slov.\nAk sa ani jeden nezhoduje, použije sa najväčší obrázok v priečinku."
 
-#: ../bin/src/ui_behavioursettingspage.h:377
+#: ../bin/src/ui_behavioursettingspage.h:372
 msgid "When saving a playlist, file paths should be"
 msgstr "Pri ukladaní playlitu majú byť cesty k súborom"
 
@@ -5636,7 +5614,7 @@ msgid ""
 "well?"
 msgstr "Chceli by ste presunúť tiež ostatné piesne v tomto albume do rôznych interprétov?"
 
-#: ui/mainwindow.cpp:2681
+#: ui/mainwindow.cpp:2694
 msgid "Would you like to run a full rescan right now?"
 msgstr "Chcete teraz spustiť úplné preskenovanie?"
 
@@ -5644,7 +5622,7 @@ msgstr "Chcete teraz spustiť úplné preskenovanie?"
 msgid "Write all songs statistics into songs' files"
 msgstr "Zapísať všetky štatistiky piesní do súborov piesní"
 
-#: ../bin/src/ui_behavioursettingspage.h:382
+#: ../bin/src/ui_behavioursettingspage.h:377
 msgid "Write metadata"
 msgstr "Zapísať metadáta"
 
@@ -5730,13 +5708,6 @@ msgstr "Nemáte Spotify prémium účet."
 msgid "You do not have an active subscription"
 msgstr "Nemáte aktívne predplatné"
 
-#: ../bin/src/ui_soundcloudsettingspage.h:101
-msgid ""
-"You don't need to be logged in to search and to listen to music on "
-"SoundCloud. However, you need to login to access your playlists and your "
-"stream."
-msgstr "Nemusíte byť prihlásený, aby ste mohli hľadať a počúvať hudbu na SoundCloud. Musíte sa ale prihlásiť, ak chcete pristupovať k vašim playlistom a streamom."
-
 #: internet/spotify/spotifyservice.cpp:205
 msgid ""
 "You have been logged out of Spotify, please re-enter your password in the "
@@ -5758,7 +5729,7 @@ msgid ""
 "shortcuts in Clementine."
 msgstr "Potrebujete otvoriť Systémové nastavenia a povoliť Clementine \"<span style=\"font-style:italic\">ovládať váš počítač</span>\" na použitie globálnych skratiek v Clementine."
 
-#: ../bin/src/ui_behavioursettingspage.h:328
+#: ../bin/src/ui_behavioursettingspage.h:323
 msgid "You will need to restart Clementine if you change the language."
 msgstr "Musíte reštartovať Clementine ak chcete zmeniť jazyk."
 

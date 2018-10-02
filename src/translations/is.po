@@ -13,7 +13,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2018-09-17 13:31+0000\n"
+"PO-Revision-Date: 2018-10-01 17:06+0000\n"
 "Last-Translator: hatstand <john.maguire@gmail.com>\n"
 "Language-Team: Icelandic (http://www.transifex.com/davidsansome/clementine/language/is/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -56,7 +56,7 @@ msgstr " msek"
 msgid " pt"
 msgstr " pt"
 
-#: ../bin/src/ui_behavioursettingspage.h:375
+#: ../bin/src/ui_behavioursettingspage.h:370
 msgid " s"
 msgstr " sek"
 
@@ -398,6 +398,10 @@ msgid ""
 "A song will be included in the playlist if it matches these conditions."
 msgstr "Lag birtist á lagalista að ákveðnum skilyrðum uppfylltum"
 
+#: ../bin/src/ui_behavioursettingspage.h:373
+msgid "A&utomatic"
+msgstr ""
+
 #: smartplaylists/searchterm.cpp:396
 msgid "A-Z"
 msgstr "A-Z"
@@ -444,7 +448,7 @@ msgid "About Qt..."
 msgstr "Um Qt..."
 
 #: playlist/playlistsaveoptionsdialog.cpp:34
-#: ../bin/src/ui_behavioursettingspage.h:379
+#: ../bin/src/ui_behavioursettingspage.h:374
 msgid "Absolute"
 msgstr "Algildar"
 
@@ -470,10 +474,6 @@ msgstr "Aðgerð"
 #: wiimotedev/wiimotesettingspage.cpp:103
 msgid "Activate/Deactivate Wii Remote"
 msgstr ""
-
-#: internet/soundcloud/soundcloudservice.cpp:128
-msgid "Activities stream"
-msgstr "Virknistreymi"
 
 #: internet/podcasts/addpodcastdialog.cpp:63
 msgid "Add Podcast"
@@ -503,7 +503,7 @@ msgstr "Bæta við öðru streymi..."
 msgid "Add directory..."
 msgstr "Bæta við möppu..."
 
-#: ui/mainwindow.cpp:2049
+#: ui/mainwindow.cpp:2062
 msgid "Add file"
 msgstr "Bæta við skrá"
 
@@ -523,7 +523,7 @@ msgstr "Bæta við skrá..."
 msgid "Add files to transcode"
 msgstr "Bæta við skrá til að millikóða"
 
-#: transcoder/transcodedialog.cpp:306 ui/mainwindow.cpp:2076
+#: transcoder/transcodedialog.cpp:306 ui/mainwindow.cpp:2089
 #: ripper/ripcddialog.cpp:201
 msgid "Add folder"
 msgstr "Bæta við möppu"
@@ -628,7 +628,7 @@ msgstr "Bæta við Spotify-spilunarlista"
 msgid "Add to Spotify starred"
 msgstr "Bæta við Spotify-stjörnumerkt"
 
-#: ui/mainwindow.cpp:1850
+#: ui/mainwindow.cpp:1863
 msgid "Add to another playlist"
 msgstr "Bæta við öðrum spilunarlista"
 
@@ -636,8 +636,8 @@ msgstr "Bæta við öðrum spilunarlista"
 msgid "Add to playlist"
 msgstr "Bæta við lagalista"
 
-#: ../bin/src/ui_behavioursettingspage.h:359
-#: ../bin/src/ui_behavioursettingspage.h:371
+#: ../bin/src/ui_behavioursettingspage.h:354
+#: ../bin/src/ui_behavioursettingspage.h:366
 msgid "Add to the queue"
 msgstr "Bæta við biðröð"
 
@@ -718,7 +718,7 @@ msgstr "Hljómplötur án umslaga"
 msgid "All"
 msgstr "Allt"
 
-#: ui/mainwindow.cpp:158
+#: ui/mainwindow.cpp:159
 msgid "All Files (*)"
 msgstr "Allar skrár (*)"
 
@@ -768,16 +768,16 @@ msgstr ""
 msgid "Alongside the originals"
 msgstr "Samhliða upprunalegum"
 
-#: ../bin/src/ui_behavioursettingspage.h:331
-msgid "Always hide the main window"
-msgstr "Alltaf að fela aðalglugga"
+#: ../bin/src/ui_behavioursettingspage.h:326
+msgid "Alwa&ys hide the main window"
+msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:330
-msgid "Always show the main window"
-msgstr "Alltaf að sýna aðalglugga"
+#: ../bin/src/ui_behavioursettingspage.h:325
+msgid "Always show &the main window"
+msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:345
-#: ../bin/src/ui_behavioursettingspage.h:365
+#: ../bin/src/ui_behavioursettingspage.h:340
+#: ../bin/src/ui_behavioursettingspage.h:360
 msgid "Always start playing"
 msgstr "Alltaf hefja spilun"
 
@@ -824,7 +824,7 @@ msgstr "Bæta skrám/slóðum í lagalista"
 msgid "Append to current playlist"
 msgstr "Bæta við núverandi lagalista"
 
-#: ../bin/src/ui_behavioursettingspage.h:356
+#: ../bin/src/ui_behavioursettingspage.h:351
 msgid "Append to the playlist"
 msgstr "Bæta við lagalistann"
 
@@ -856,7 +856,7 @@ msgstr "Ertu viss að þú viljir skrifa tölfræði allra laga í safninu í vi
 msgid "Artist"
 msgstr "Flytjandi"
 
-#: ui/mainwindow.cpp:283
+#: ui/mainwindow.cpp:284
 msgid "Artist info"
 msgstr "Upplýsingar um höfund"
 
@@ -864,9 +864,9 @@ msgstr "Upplýsingar um höfund"
 msgid "Artist's initial"
 msgstr "Upphafsstafir flytjanda"
 
-#: ../bin/src/ui_behavioursettingspage.h:381
-msgid "Ask when saving"
-msgstr "Spyrja við vistun"
+#: ../bin/src/ui_behavioursettingspage.h:376
+msgid "As&k when saving"
+msgstr ""
 
 #: ../bin/src/ui_transcodedialog.h:225
 #: ../bin/src/ui_networkremotesettingspage.h:250
@@ -899,7 +899,6 @@ msgid "Auto"
 msgstr "Sjálfgefið"
 
 #: playlist/playlistsaveoptionsdialog.cpp:32
-#: ../bin/src/ui_behavioursettingspage.h:378
 msgid "Automatic"
 msgstr "Sjálfvirkt"
 
@@ -948,7 +947,7 @@ msgstr "Bakgrunnsmynd"
 msgid "Background opacity"
 msgstr "Gegnsæi bakgrunns"
 
-#: core/database.cpp:648
+#: core/database.cpp:664
 msgid "Backing up database"
 msgstr "Tek öryggisafrit af gagnagrunni"
 
@@ -972,7 +971,7 @@ msgstr "Einfalt-blátt"
 msgid "Basic audio type"
 msgstr "Grunngerð hljóðs"
 
-#: ../bin/src/ui_behavioursettingspage.h:318
+#: ../bin/src/ui_behavioursettingspage.h:313
 msgid "Behavior"
 msgstr "Hegðun"
 
@@ -1090,7 +1089,7 @@ msgstr "Skipta um flýtilykil..."
 msgid "Change shuffle mode"
 msgstr "Breyta stokkunarham"
 
-#: ../bin/src/ui_behavioursettingspage.h:370
+#: ../bin/src/ui_behavioursettingspage.h:365
 msgid "Change the currently playing song"
 msgstr "Skipta um lag sem núna er í spilun"
 
@@ -1120,7 +1119,7 @@ msgstr "Leita að nýjum þáttum"
 msgid "Check for updates"
 msgstr "Athuga með uppfærslur"
 
-#: ui/mainwindow.cpp:820
+#: ui/mainwindow.cpp:823
 msgid "Check for updates..."
 msgstr "Athuga með uppfærslur..."
 
@@ -1262,7 +1261,6 @@ msgstr ""
 msgid "Click to toggle between remaining time and total time"
 msgstr "Smelltu til að víxla á milli heildartíma og tíma sem er eftir"
 
-#: ../bin/src/ui_soundcloudsettingspage.h:103
 #: ../bin/src/ui_lastfmsettingspage.h:133
 #: ../bin/src/ui_googledrivesettingspage.h:102
 #: ../bin/src/ui_dropboxsettingspage.h:102
@@ -1341,10 +1339,6 @@ msgstr "Stilla Magnatune..."
 msgid "Configure Shortcuts"
 msgstr "Stilla flýtilykla"
 
-#: internet/soundcloud/soundcloudservice.cpp:381
-msgid "Configure SoundCloud..."
-msgstr "Stilla SoundCloud..."
-
 #: internet/spotify/spotifyservice.cpp:927
 msgid "Configure Spotify..."
 msgstr "Stilla Spotify..."
@@ -1357,7 +1351,7 @@ msgstr "Stilla Subsonic..."
 msgid "Configure global search..."
 msgstr "Stilla altæka leit..."
 
-#: ui/mainwindow.cpp:659
+#: ui/mainwindow.cpp:660
 msgid "Configure library..."
 msgstr "Stilla safn..."
 
@@ -1429,11 +1423,11 @@ msgid "Copy to clipboard"
 msgstr "Afrita á klippispjald"
 
 #: library/libraryview.cpp:419 internet/podcasts/podcastservice.cpp:438
-#: ui/mainwindow.cpp:719 widgets/fileviewlist.cpp:44
+#: ui/mainwindow.cpp:720 widgets/fileviewlist.cpp:44
 msgid "Copy to device..."
 msgstr "Afrita til tæki..."
 
-#: devices/deviceview.cpp:228 ui/mainwindow.cpp:709
+#: devices/deviceview.cpp:228 ui/mainwindow.cpp:710
 #: widgets/fileviewlist.cpp:40
 msgid "Copy to library..."
 msgstr "Afrita í safn..."
@@ -1577,7 +1571,7 @@ msgstr "D-Bus slóð"
 msgid "Dance"
 msgstr "Dans"
 
-#: core/database.cpp:601
+#: core/database.cpp:617
 msgid ""
 "Database corruption detected. Please read https://github.com/clementine-"
 "player/Clementine/wiki/Database-Corruption for instructions on how to "
@@ -1639,7 +1633,7 @@ msgid "Delete downloaded data"
 msgstr "Eyða sóttum gögnum"
 
 #: devices/deviceview.cpp:408 library/libraryview.cpp:678
-#: ui/mainwindow.cpp:2432 widgets/fileview.cpp:188
+#: ui/mainwindow.cpp:2445 widgets/fileview.cpp:188
 msgid "Delete files"
 msgstr "Eyða skrám"
 
@@ -1647,7 +1641,7 @@ msgstr "Eyða skrám"
 msgid "Delete from device..."
 msgstr "Eyða frá tæki..."
 
-#: library/libraryview.cpp:422 ui/mainwindow.cpp:722
+#: library/libraryview.cpp:422 ui/mainwindow.cpp:723
 #: widgets/fileviewlist.cpp:47
 msgid "Delete from disk..."
 msgstr "Eyða frá diski..."
@@ -1680,11 +1674,11 @@ msgstr "Eyði gögnum"
 msgid "Depth"
 msgstr "Dýpt"
 
-#: ui/mainwindow.cpp:1763
+#: ui/mainwindow.cpp:1776
 msgid "Dequeue selected tracks"
 msgstr "Taka valin lög úr biðröð"
 
-#: ui/mainwindow.cpp:1761
+#: ui/mainwindow.cpp:1774
 msgid "Dequeue track"
 msgstr "Taka lag úr biðröð"
 
@@ -1713,7 +1707,7 @@ msgstr "Heiti tækis"
 msgid "Device properties..."
 msgstr "Eiginleikar tækis..."
 
-#: ui/mainwindow.cpp:276
+#: ui/mainwindow.cpp:277
 msgid "Devices"
 msgstr "Tæki"
 
@@ -1843,11 +1837,11 @@ msgstr "Styrkja"
 msgid "Double click to open"
 msgstr "Tvísmella til að opna"
 
-#: ../bin/src/ui_behavioursettingspage.h:367
+#: ../bin/src/ui_behavioursettingspage.h:362
 msgid "Double clicking a song in the playlist will..."
 msgstr "Tvísmellur á lag í spilunarlistanum mun..."
 
-#: ../bin/src/ui_behavioursettingspage.h:353
+#: ../bin/src/ui_behavioursettingspage.h:348
 msgid "Double clicking a song will..."
 msgstr "Tvísmellur á lag mun..."
 
@@ -1956,7 +1950,7 @@ msgstr "Breytilegt slembið mix"
 msgid "Edit smart playlist..."
 msgstr "Sýsla með snjallan spilunarlista..."
 
-#: ui/mainwindow.cpp:1813
+#: ui/mainwindow.cpp:1826
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr "Breyta merki \"%1\"..."
@@ -2002,7 +1996,7 @@ msgstr "Virkja tónjafnara"
 msgid "Enable shortcuts only when Clementine is focused"
 msgstr "Einungis virkja flýtilykla þegar Clementine er í forgrunni"
 
-#: ../bin/src/ui_behavioursettingspage.h:339
+#: ../bin/src/ui_behavioursettingspage.h:331
 msgid "Enable song metadata inline edition with click"
 msgstr "Virkja innfelldar breytingar á lýsigögnum lags með smelli"
 
@@ -2091,8 +2085,8 @@ msgid "Equivalent to --log-levels *:3"
 msgstr "Samsvarar --log-levels *:3"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:246
-#: library/libraryview.cpp:672 ui/mainwindow.cpp:2105 ui/mainwindow.cpp:2384
-#: ui/mainwindow.cpp:2563
+#: library/libraryview.cpp:672 ui/mainwindow.cpp:2118 ui/mainwindow.cpp:2397
+#: ui/mainwindow.cpp:2576
 msgid "Error"
 msgstr "Villa"
 
@@ -2238,7 +2232,7 @@ msgstr "Deyfing"
 msgid "Fading duration"
 msgstr "Tímalengd dofnunar"
 
-#: ui/mainwindow.cpp:2106
+#: ui/mainwindow.cpp:2119
 msgid "Failed reading CD drive"
 msgstr "Mistókst að lesa CD-drif"
 
@@ -2272,10 +2266,6 @@ msgstr "Mistókst að skrifa ný sjálfvirk merki í '%1'"
 #: ../bin/src/ui_transcoderoptionsmp3.h:199
 msgid "Fast"
 msgstr "Hratt"
-
-#: internet/soundcloud/soundcloudservice.cpp:141
-msgid "Favorites"
-msgstr "Eftirlæti"
 
 #: library/library.cpp:88
 msgid "Favourite tracks"
@@ -2343,7 +2333,7 @@ msgstr "Tegund skráar"
 msgid "Filename"
 msgstr "Skráarheiti"
 
-#: ui/mainwindow.cpp:266
+#: ui/mainwindow.cpp:267
 msgid "Files"
 msgstr "Gögn"
 
@@ -2456,7 +2446,7 @@ msgstr "Þéttur diskant"
 msgid "Ge&nre"
 msgstr "Tó&nlistarstefna"
 
-#: ui/settingsdialog.cpp:133
+#: ui/settingsdialog.cpp:132
 msgid "General"
 msgstr "Almennt"
 
@@ -2515,7 +2505,7 @@ msgstr "Google Drive"
 msgid "Got %1 covers out of %2 (%3 failed)"
 msgstr "Náði í %1 umslag af %2 (%3 mistókust)"
 
-#: ../bin/src/ui_behavioursettingspage.h:335
+#: ../bin/src/ui_behavioursettingspage.h:334
 msgid "Grey out non existent songs in my playlists"
 msgstr "Gráma lög í spilunarlistum sem ekki eru til staðar"
 
@@ -2644,7 +2634,7 @@ msgstr "Táknmyndir efst"
 msgid "Identifying song"
 msgstr "Greini lag"
 
-#: ../bin/src/ui_behavioursettingspage.h:337
+#: ../bin/src/ui_behavioursettingspage.h:329
 msgid ""
 "If activated, clicking a selected song in the playlist view will let you "
 "edit the tag value directly"
@@ -2745,15 +2735,15 @@ msgstr "Setja inn..."
 msgid "Installed"
 msgstr "Uppsett"
 
-#: core/database.cpp:585
+#: core/database.cpp:601
 msgid "Integrity check"
 msgstr "Athugun á áreiðanleika"
 
-#: ui/mainwindow.cpp:272
+#: ui/mainwindow.cpp:273
 msgid "Internet"
 msgstr "Internet"
 
-#: ui/settingsdialog.cpp:156
+#: ui/settingsdialog.cpp:155
 msgid "Internet providers"
 msgstr "Netþjónustuveitur"
 
@@ -2826,7 +2816,7 @@ msgstr "Topplög vikunnar í Jamendo"
 msgid "Jamendo database"
 msgstr "Jamendo gagnagrunnur"
 
-#: ../bin/src/ui_behavioursettingspage.h:350
+#: ../bin/src/ui_behavioursettingspage.h:345
 msgid "Jump to previous song right away"
 msgstr "Hoppa strax í fyrra lag"
 
@@ -2846,7 +2836,7 @@ msgstr "Halda hnöppum í %1 sekúndu..."
 msgid "Keep buttons for %1 seconds..."
 msgstr "Halda hnöppum í %1 sekúndur..."
 
-#: ../bin/src/ui_behavioursettingspage.h:321
+#: ../bin/src/ui_behavioursettingspage.h:316
 msgid "Keep running in the background when the window is closed"
 msgstr "Halda opnu í bakgrunni þegar glugganum er lokað"
 
@@ -2863,7 +2853,7 @@ msgstr "Kettlingar"
 msgid "Kuduro"
 msgstr "Kuduro"
 
-#: ../bin/src/ui_behavioursettingspage.h:323
+#: ../bin/src/ui_behavioursettingspage.h:318
 msgid "Language"
 msgstr "Tungumál"
 
@@ -2937,7 +2927,7 @@ msgstr "Vinstri"
 msgid "Length"
 msgstr "Lengd"
 
-#: ui/mainwindow.cpp:251 ui/mainwindow.cpp:263
+#: ui/mainwindow.cpp:252 ui/mainwindow.cpp:264
 #: ../bin/src/ui_seafilesettingspage.h:177
 msgid "Library"
 msgstr "Safn"
@@ -2946,7 +2936,7 @@ msgstr "Safn"
 msgid "Library advanced grouping"
 msgstr "Þróuð flokkun safns"
 
-#: ui/mainwindow.cpp:2683
+#: ui/mainwindow.cpp:2696
 msgid "Library rescan notice"
 msgstr "Tilkynning um skönnun á tónlistarsafni"
 
@@ -3033,7 +3023,6 @@ msgstr "Hleður inn skrám/slóðum, skiptir út núverandi lagalista"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:162
 #: ../bin/src/ui_magnatunesettingspage.h:163
-#: ../bin/src/ui_soundcloudsettingspage.h:102
 #: ../bin/src/ui_spotifysettingspage.h:210
 #: ../bin/src/ui_subsonicsettingspage.h:137
 #: ../bin/src/ui_lastfmsettingspage.h:132
@@ -3263,7 +3252,7 @@ msgstr "Tengipunktar"
 msgid "Move down"
 msgstr "Færa niður"
 
-#: ui/mainwindow.cpp:712 widgets/fileviewlist.cpp:42
+#: ui/mainwindow.cpp:713 widgets/fileviewlist.cpp:42
 msgid "Move to library..."
 msgstr "Flytja í safn..."
 
@@ -3272,7 +3261,7 @@ msgstr "Flytja í safn..."
 msgid "Move up"
 msgstr "Færa upp"
 
-#: transcoder/transcodedialog.cpp:225 ui/mainwindow.cpp:2050
+#: transcoder/transcodedialog.cpp:225 ui/mainwindow.cpp:2063
 msgid "Music"
 msgstr "Tónlist"
 
@@ -3319,8 +3308,8 @@ msgstr "Aldrei"
 msgid "Never played"
 msgstr "Aldrei spilað"
 
-#: ../bin/src/ui_behavioursettingspage.h:343
-#: ../bin/src/ui_behavioursettingspage.h:363
+#: ../bin/src/ui_behavioursettingspage.h:338
+#: ../bin/src/ui_behavioursettingspage.h:358
 msgid "Never start playing"
 msgstr "Aldrei hefja spilun"
 
@@ -3330,7 +3319,7 @@ msgstr "Aldrei hefja spilun"
 msgid "New folder"
 msgstr "Ný mappa"
 
-#: ui/mainwindow.cpp:1867 ../bin/src/ui_mainwindow.h:709
+#: ui/mainwindow.cpp:1880 ../bin/src/ui_mainwindow.h:709
 msgid "New playlist"
 msgstr "Nýr lagalisti"
 
@@ -3397,7 +3386,7 @@ msgstr "Engar stuttar blokkir"
 msgid "None"
 msgstr "Ekkert"
 
-#: library/libraryview.cpp:673 ui/mainwindow.cpp:2385 ui/mainwindow.cpp:2564
+#: library/libraryview.cpp:673 ui/mainwindow.cpp:2398 ui/mainwindow.cpp:2577
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Ekkert af völdu lögunum henta til að afrita yfir á tæki"
 
@@ -3526,7 +3515,6 @@ msgstr "Ógegnsæi"
 #: internet/magnatune/magnatuneservice.cpp:287
 #: internet/somafm/somafmservice.cpp:102
 #: internet/intergalacticfm/intergalacticfmservice.cpp:102
-#: internet/soundcloud/soundcloudservice.cpp:377
 #, qt-format
 msgid "Open %1 in browser"
 msgstr "Opna %1 í vafra"
@@ -3565,7 +3553,7 @@ msgstr "Opna í Google Drive"
 msgid "Open in new playlist"
 msgstr "Opna í nýjum spilunarlista"
 
-#: ../bin/src/ui_behavioursettingspage.h:358
+#: ../bin/src/ui_behavioursettingspage.h:353
 msgctxt "Refers to behavior settings in Clementine settings page."
 msgid "Open in new playlist"
 msgstr "Opna í nýjum spilunarlista"
@@ -3605,7 +3593,7 @@ msgstr "Opus"
 msgid "Organise Files"
 msgstr "Skipuleggja skrár"
 
-#: library/libraryview.cpp:416 ui/mainwindow.cpp:715
+#: library/libraryview.cpp:416 ui/mainwindow.cpp:716
 msgid "Organise files..."
 msgstr "Skipuleggja skrár..."
 
@@ -3689,7 +3677,7 @@ msgstr "Partý"
 msgid "Password"
 msgstr "Lykilorð"
 
-#: core/globalshortcuts.cpp:50 ui/mainwindow.cpp:1160 ui/mainwindow.cpp:1663
+#: core/globalshortcuts.cpp:50 ui/mainwindow.cpp:1169 ui/mainwindow.cpp:1676
 #: ui/qtsystemtrayicon.cpp:189 wiimotedev/wiimotesettingspage.cpp:114
 msgid "Pause"
 msgstr "Í bið"
@@ -3717,8 +3705,8 @@ msgstr "Mynddíll"
 msgid "Plain sidebar"
 msgstr "Einfalt hliðarspjald"
 
-#: core/globalshortcuts.cpp:49 ui/mainwindow.cpp:676 ui/mainwindow.cpp:1126
-#: ui/mainwindow.cpp:1145 ui/mainwindow.cpp:1667 ui/qtsystemtrayicon.cpp:177
+#: core/globalshortcuts.cpp:49 ui/mainwindow.cpp:677 ui/mainwindow.cpp:1133
+#: ui/mainwindow.cpp:1154 ui/mainwindow.cpp:1680 ui/qtsystemtrayicon.cpp:177
 #: ui/qtsystemtrayicon.cpp:203 wiimotedev/wiimotesettingspage.cpp:107
 #: ../bin/src/ui_mainwindow.h:675
 msgid "Play"
@@ -3732,16 +3720,16 @@ msgstr "Hversu oft spilað"
 msgid "Play if stopped, pause if playing"
 msgstr "Spila ef stöðvað, setja í hlé ef spilandi"
 
-#: ../bin/src/ui_behavioursettingspage.h:344
-#: ../bin/src/ui_behavioursettingspage.h:364
+#: ../bin/src/ui_behavioursettingspage.h:339
+#: ../bin/src/ui_behavioursettingspage.h:359
 msgid "Play if there is nothing already playing"
 msgstr "Spila ef ekkert er þegar í afspilun"
 
-#: library/libraryview.cpp:396 ui/mainwindow.cpp:1774
+#: library/libraryview.cpp:396 ui/mainwindow.cpp:1787
 msgid "Play next"
 msgstr ""
 
-#: ui/mainwindow.cpp:1772
+#: ui/mainwindow.cpp:1785
 msgid "Play selected tracks next"
 msgstr ""
 
@@ -3780,7 +3768,7 @@ msgstr "Valkostir spilunarlista"
 msgid "Playlist type"
 msgstr "Gerð spilunarlista"
 
-#: internet/soundcloud/soundcloudservice.cpp:133 ui/mainwindow.cpp:269
+#: ui/mainwindow.cpp:270
 msgid "Playlists"
 msgstr "Lagalisti"
 
@@ -3871,7 +3859,7 @@ msgstr "Ýttu á lykil"
 msgid "Press a key combination to use for %1..."
 msgstr "Ýttu á lyklasamsetningu til að nota fyrir %1..."
 
-#: ../bin/src/ui_behavioursettingspage.h:347
+#: ../bin/src/ui_behavioursettingspage.h:342
 msgid "Pressing \"Previous\" in player will..."
 msgstr "Þegar ýtt er á \"Fyrra\" í spilaranum mun..."
 
@@ -3948,12 +3936,12 @@ msgstr "Skoða tæki..."
 msgid "Queue Manager"
 msgstr "Biðraðastjóri"
 
-#: ui/mainwindow.cpp:1767
+#: ui/mainwindow.cpp:1780
 msgid "Queue selected tracks"
 msgstr "Setja valin lög í biðröð"
 
 #: globalsearch/globalsearchview.cpp:464 library/libraryview.cpp:393
-#: ui/mainwindow.cpp:1765
+#: ui/mainwindow.cpp:1778
 msgid "Queue track"
 msgstr "Setja í biðröð"
 
@@ -4043,7 +4031,7 @@ msgid "Reggae"
 msgstr "Reggí"
 
 #: playlist/playlistsaveoptionsdialog.cpp:33
-#: ../bin/src/ui_behavioursettingspage.h:380
+#: ../bin/src/ui_behavioursettingspage.h:375
 msgid "Relative"
 msgstr "Afstæðar"
 
@@ -4051,9 +4039,9 @@ msgstr "Afstæðar"
 msgid "Remember Wii remote swing"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:332
-msgid "Remember from last time"
-msgstr "Muna frá því síðast"
+#: ../bin/src/ui_behavioursettingspage.h:327
+msgid "Remember from &last time"
+msgstr ""
 
 #: ../bin/src/ui_playlistsaveoptionsdialog.h:99
 msgid "Remember my choice"
@@ -4131,7 +4119,7 @@ msgstr "Endurtaka lag"
 msgid "Replace current playlist"
 msgstr "Skipta út núverandi spilunarlista"
 
-#: ../bin/src/ui_behavioursettingspage.h:357
+#: ../bin/src/ui_behavioursettingspage.h:352
 msgid "Replace the playlist"
 msgstr "Skipta út spilunarlistanum"
 
@@ -4163,7 +4151,7 @@ msgstr "Endurstilla"
 msgid "Reset play counts"
 msgstr "Núllstilla spilunarfjölda"
 
-#: ../bin/src/ui_behavioursettingspage.h:351
+#: ../bin/src/ui_behavioursettingspage.h:346
 msgid "Restart song, then jump to previous if pressed again"
 msgstr "Endurræsa lag, síðan hoppa í fyrra lag ef ýtt er aftur"
 
@@ -4176,7 +4164,7 @@ msgstr ""
 msgid "Restrict to ASCII characters"
 msgstr "Takmarka við ASCII-stafi"
 
-#: ../bin/src/ui_behavioursettingspage.h:333
+#: ../bin/src/ui_behavioursettingspage.h:332
 msgid "Resume playback on start"
 msgstr "Halda afspilun áfram við ræsingu"
 
@@ -4318,7 +4306,7 @@ msgstr "Stig"
 msgid "Scrobble tracks that I listen to"
 msgstr "Skrá hlustunarvenjur fyrir lög sem ég hlusta á"
 
-#: ../bin/src/ui_behavioursettingspage.h:320
+#: ../bin/src/ui_behavioursettingspage.h:315
 msgid "Scroll over icon to change track"
 msgstr "Skruna yfir táknmynd til að skipta um lag"
 
@@ -4332,7 +4320,7 @@ msgstr "Seafile"
 msgid "Search"
 msgstr "Leita"
 
-#: ui/mainwindow.cpp:260 ../bin/src/ui_globalsearchsettingspage.h:141
+#: ui/mainwindow.cpp:261 ../bin/src/ui_globalsearchsettingspage.h:141
 msgctxt "Global search settings dialog title."
 msgid "Search"
 msgstr "Leita"
@@ -4357,7 +4345,7 @@ msgstr "Leita á Subsonic"
 msgid "Search automatically"
 msgstr "Leita sjálfvirkt"
 
-#: ui/mainwindow.cpp:696
+#: ui/mainwindow.cpp:697
 msgid "Search for album"
 msgstr "Leita að hljómplötu"
 
@@ -4370,7 +4358,7 @@ msgstr "Leita að plötuumslögum..."
 msgid "Search for anything"
 msgstr "Leita að einhverju"
 
-#: ui/mainwindow.cpp:693
+#: ui/mainwindow.cpp:694
 msgid "Search for artist"
 msgstr "Leita að flytjanda"
 
@@ -4394,7 +4382,6 @@ msgstr "Leitarhamur"
 msgid "Search options"
 msgstr "Valkostir leitar"
 
-#: internet/soundcloud/soundcloudservice.cpp:119
 #: internet/spotify/spotifyservice.cpp:400
 msgid "Search results"
 msgstr "Leitarniðurstöður"
@@ -4428,7 +4415,7 @@ msgstr "Hoppa hlutfallslega í laginu sem nú er í spilun"
 msgid "Seek the currently playing track to an absolute position"
 msgstr "Hoppa á ákveðinn stað í laginu sem nú er í spilun"
 
-#: ../bin/src/ui_behavioursettingspage.h:373
+#: ../bin/src/ui_behavioursettingspage.h:368
 msgid "Seeking using a keyboard shortcut or mouse wheel"
 msgstr "Leita með flýtilykli eða músarhjóli"
 
@@ -4488,7 +4475,7 @@ msgstr "Nánar um þjón "
 msgid "Service offline"
 msgstr "Þjónusta ekki á neti"
 
-#: ui/mainwindow.cpp:1812
+#: ui/mainwindow.cpp:1825
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr "Setja %1 sem \"%2\"..."
@@ -4564,7 +4551,7 @@ msgstr "Birta fegraðan OSD-stjórntexta"
 msgid "Show above status bar"
 msgstr "Birta fyrir ofan stöðustiku"
 
-#: ui/mainwindow.cpp:643
+#: ui/mainwindow.cpp:644
 msgid "Show all songs"
 msgstr "Birta öll lög"
 
@@ -4584,12 +4571,12 @@ msgstr "Sýna aðgreina"
 msgid "Show fullsize..."
 msgstr "Sýna fulla stærð..."
 
-#: library/libraryview.cpp:433 ui/mainwindow.cpp:725
+#: library/libraryview.cpp:433 ui/mainwindow.cpp:726
 #: widgets/fileviewlist.cpp:53
 msgid "Show in file browser..."
 msgstr "Sýna í skráavafra..."
 
-#: ui/mainwindow.cpp:727
+#: ui/mainwindow.cpp:728
 msgid "Show in library..."
 msgstr "Sýna í safni..."
 
@@ -4601,11 +4588,11 @@ msgstr "Birta undir ýmsum flytjendum"
 msgid "Show moodbar"
 msgstr "Birta skapbrigðastiku"
 
-#: ui/mainwindow.cpp:645
+#: ui/mainwindow.cpp:646
 msgid "Show only duplicates"
 msgstr "Aðeins birta tvítekningar"
 
-#: ui/mainwindow.cpp:647
+#: ui/mainwindow.cpp:648
 msgid "Show only untagged"
 msgstr "Aðeins birta ómerkt"
 
@@ -4629,7 +4616,7 @@ msgstr "Birta 'Líkar þetta' hnappinn"
 msgid "Show the scrobble button in the main window"
 msgstr "Birta hnappinn fyrir hlustunarvenjur í aðalglugga"
 
-#: ../bin/src/ui_behavioursettingspage.h:319
+#: ../bin/src/ui_behavioursettingspage.h:314
 msgid "Show tray icon"
 msgstr "Birta táknmynd í kerfisbakka"
 
@@ -4697,11 +4684,11 @@ msgstr "Sleppa talningu"
 msgid "Skip forwards in playlist"
 msgstr "Fara áfram í spilunarlista"
 
-#: ui/mainwindow.cpp:1783
+#: ui/mainwindow.cpp:1796
 msgid "Skip selected tracks"
 msgstr "Sleppa völdum lögum"
 
-#: ui/mainwindow.cpp:1781
+#: ui/mainwindow.cpp:1794
 msgid "Skip track"
 msgstr "Sleppa lagi"
 
@@ -4733,7 +4720,7 @@ msgstr "Mjúkt rokk"
 msgid "Song Information"
 msgstr "Upplýsingar um lag"
 
-#: ui/mainwindow.cpp:280
+#: ui/mainwindow.cpp:281
 msgid "Song info"
 msgstr "Um lagið"
 
@@ -4764,10 +4751,6 @@ msgstr "Raða lögum eftir"
 #: ../bin/src/ui_querysortpage.h:137
 msgid "Sorting"
 msgstr "Röðun"
-
-#: ../bin/src/ui_soundcloudsettingspage.h:100
-msgid "SoundCloud"
-msgstr "SoundCloud"
 
 #: playlist/playlist.cpp:1404
 msgid "Source"
@@ -4827,7 +4810,6 @@ msgstr ""
 msgid "Start transcoding"
 msgstr "Hefja umkóðun"
 
-#: internet/soundcloud/soundcloudservice.cpp:121
 #: internet/spotify/spotifyservice.cpp:402
 msgid ""
 "Start typing something on the search box above to fill this search results "
@@ -4860,7 +4842,7 @@ msgstr "Stoppa eftir hvert lag"
 msgid "Stop after every track"
 msgstr "Stoppa eftir öll lög"
 
-#: ui/mainwindow.cpp:680 ../bin/src/ui_mainwindow.h:679
+#: ui/mainwindow.cpp:681 ../bin/src/ui_mainwindow.h:679
 msgid "Stop after this track"
 msgstr "Stoppa eftir þetta lag"
 
@@ -4872,7 +4854,7 @@ msgstr "Stöðva afspilun"
 msgid "Stop playback after current track"
 msgstr "Stöðva afspilun eftir núverandi lag"
 
-#: ../bin/src/ui_behavioursettingspage.h:334
+#: ../bin/src/ui_behavioursettingspage.h:333
 msgid "Stop playback if song fails to play"
 msgstr ""
 
@@ -5028,7 +5010,7 @@ msgid ""
 "license key. Visit subsonic.org for details."
 msgstr ""
 
-#: ui/mainwindow.cpp:2674
+#: ui/mainwindow.cpp:2687
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -5070,7 +5052,7 @@ msgid ""
 "continue?"
 msgstr "Þessum skrám verður eytt af tækinu, ertu viss um að þú viljir halda áfram?"
 
-#: library/libraryview.cpp:679 ui/mainwindow.cpp:2433 widgets/fileview.cpp:189
+#: library/libraryview.cpp:679 ui/mainwindow.cpp:2446 widgets/fileview.cpp:189
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -5150,7 +5132,7 @@ msgstr "Þetta streymi er einungis fyrir borgandi áskrifendur"
 msgid "This type of device is not supported: %1"
 msgstr "Þessi gerð tækis er ekki studd: %1"
 
-#: ../bin/src/ui_behavioursettingspage.h:374
+#: ../bin/src/ui_behavioursettingspage.h:369
 msgid "Time step"
 msgstr "Tímaþrepun"
 
@@ -5173,7 +5155,7 @@ msgstr "Víxla af/á fegruðum OSD-stjórntexta"
 msgid "Toggle fullscreen"
 msgstr "Víxla heilskjá"
 
-#: ui/mainwindow.cpp:1769
+#: ui/mainwindow.cpp:1782
 msgid "Toggle queue status"
 msgstr "Víxla stöðu biðraðar"
 
@@ -5221,10 +5203,6 @@ msgstr "La&g"
 #: ../bin/src/ui_trackselectiondialog.h:212 ../bin/src/ui_ripcddialog.h:304
 msgid "Track"
 msgstr "Lag"
-
-#: internet/soundcloud/soundcloudservice.cpp:136
-msgid "Tracks"
-msgstr "Lög"
 
 #: ../bin/src/ui_transcodedialog.h:213 ../bin/src/ui_mainwindow.h:706
 msgid "Transcode Music"
@@ -5311,11 +5289,11 @@ msgstr "Óþekkt villa"
 msgid "Unset cover"
 msgstr "Aftengja umslag"
 
-#: ui/mainwindow.cpp:1779
+#: ui/mainwindow.cpp:1792
 msgid "Unskip selected tracks"
 msgstr "Hætta við að sleppa völdum lögum"
 
-#: ui/mainwindow.cpp:1777
+#: ui/mainwindow.cpp:1790
 msgid "Unskip track"
 msgstr "Hætta við að sleppa lagi"
 
@@ -5426,7 +5404,7 @@ msgstr "Nota kerfistáknmyndir"
 msgid "Use temporal noise shaping"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:326
+#: ../bin/src/ui_behavioursettingspage.h:321
 msgid "Use the system default"
 msgstr "Nota sjálfgefnar stillingar kerfisins"
 
@@ -5446,7 +5424,7 @@ msgstr "Nota jöfnun hljóðstyrks"
 msgid "Used"
 msgstr "Notað"
 
-#: ui/settingsdialog.cpp:147
+#: ui/settingsdialog.cpp:146
 msgid "User interface"
 msgstr "Notandaviðmót"
 
@@ -5458,7 +5436,7 @@ msgstr "Notandaviðmót"
 msgid "Username"
 msgstr "Notandanafn"
 
-#: ../bin/src/ui_behavioursettingspage.h:340
+#: ../bin/src/ui_behavioursettingspage.h:335
 msgid "Using the menu to add a song will..."
 msgstr "Ef notuð er valmynd til að bæta við lagi mun..."
 
@@ -5531,7 +5509,7 @@ msgstr "WAV"
 msgid "WMA"
 msgstr "WMA"
 
-#: playlist/playlisttabbar.cpp:192 ../bin/src/ui_behavioursettingspage.h:322
+#: playlist/playlisttabbar.cpp:192 ../bin/src/ui_behavioursettingspage.h:317
 msgid "Warn me when closing a playlist tab"
 msgstr "Vara mig við þegar spilunarlistaflipa er lokað"
 
@@ -5551,7 +5529,7 @@ msgstr "Vefsvæði"
 msgid "Weeks"
 msgstr "Vikur"
 
-#: ../bin/src/ui_behavioursettingspage.h:329
+#: ../bin/src/ui_behavioursettingspage.h:324
 msgid "When Clementine starts"
 msgstr "Þegar Clementine ræsist"
 
@@ -5561,7 +5539,7 @@ msgid ""
 "If there are no matches then it will use the largest image in the directory."
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:377
+#: ../bin/src/ui_behavioursettingspage.h:372
 msgid "When saving a playlist, file paths should be"
 msgstr "Þegar spilunarlisti er vistaður, ættu skráaslóðir að vera"
 
@@ -5637,7 +5615,7 @@ msgid ""
 "well?"
 msgstr ""
 
-#: ui/mainwindow.cpp:2681
+#: ui/mainwindow.cpp:2694
 msgid "Would you like to run a full rescan right now?"
 msgstr "Viltu láta endurskanna allt safnið núna?"
 
@@ -5645,7 +5623,7 @@ msgstr "Viltu láta endurskanna allt safnið núna?"
 msgid "Write all songs statistics into songs' files"
 msgstr "Skrifa alla tölfræði inn í tónlistarskrár"
 
-#: ../bin/src/ui_behavioursettingspage.h:382
+#: ../bin/src/ui_behavioursettingspage.h:377
 msgid "Write metadata"
 msgstr "Skrifa lýsigögn"
 
@@ -5731,13 +5709,6 @@ msgstr "Þú ert ekki með Spotify Premium aðgang."
 msgid "You do not have an active subscription"
 msgstr "Þú ert ekki með virka áskrift"
 
-#: ../bin/src/ui_soundcloudsettingspage.h:101
-msgid ""
-"You don't need to be logged in to search and to listen to music on "
-"SoundCloud. However, you need to login to access your playlists and your "
-"stream."
-msgstr ""
-
 #: internet/spotify/spotifyservice.cpp:205
 msgid ""
 "You have been logged out of Spotify, please re-enter your password in the "
@@ -5759,7 +5730,7 @@ msgid ""
 "shortcuts in Clementine."
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:328
+#: ../bin/src/ui_behavioursettingspage.h:323
 msgid "You will need to restart Clementine if you change the language."
 msgstr "Þú verður að endurræsa Clementine ef þú skiptir um tungumál."
 

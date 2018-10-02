@@ -12,7 +12,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2018-09-17 19:07+0000\n"
+"PO-Revision-Date: 2018-10-01 19:12+0000\n"
 "Last-Translator: Vincenzo Reale <vinx.reale@gmail.com>\n"
 "Language-Team: Italian (http://www.transifex.com/davidsansome/clementine/language/it/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -55,7 +55,7 @@ msgstr " ms"
 msgid " pt"
 msgstr " punti"
 
-#: ../bin/src/ui_behavioursettingspage.h:375
+#: ../bin/src/ui_behavioursettingspage.h:370
 msgid " s"
 msgstr " s"
 
@@ -397,6 +397,10 @@ msgid ""
 "A song will be included in the playlist if it matches these conditions."
 msgstr "Un brano sarà incluso nella scaletta se verifica queste condizioni."
 
+#: ../bin/src/ui_behavioursettingspage.h:373
+msgid "A&utomatic"
+msgstr "A&utomatico"
+
 #: smartplaylists/searchterm.cpp:396
 msgid "A-Z"
 msgstr "A-Z"
@@ -443,7 +447,7 @@ msgid "About Qt..."
 msgstr "Informazioni su Qt..."
 
 #: playlist/playlistsaveoptionsdialog.cpp:34
-#: ../bin/src/ui_behavioursettingspage.h:379
+#: ../bin/src/ui_behavioursettingspage.h:374
 msgid "Absolute"
 msgstr "Assoluto"
 
@@ -469,10 +473,6 @@ msgstr "Azione"
 #: wiimotedev/wiimotesettingspage.cpp:103
 msgid "Activate/Deactivate Wii Remote"
 msgstr "Attiva/disattiva Wiiremote"
-
-#: internet/soundcloud/soundcloudservice.cpp:128
-msgid "Activities stream"
-msgstr "Flussi di attività"
 
 #: internet/podcasts/addpodcastdialog.cpp:63
 msgid "Add Podcast"
@@ -502,7 +502,7 @@ msgstr "Aggiungi un altro flusso..."
 msgid "Add directory..."
 msgstr "Aggiungi cartella..."
 
-#: ui/mainwindow.cpp:2049
+#: ui/mainwindow.cpp:2062
 msgid "Add file"
 msgstr "Aggiungi file"
 
@@ -522,7 +522,7 @@ msgstr "Aggiungi file..."
 msgid "Add files to transcode"
 msgstr "Aggiungi file da transcodificare"
 
-#: transcoder/transcodedialog.cpp:306 ui/mainwindow.cpp:2076
+#: transcoder/transcodedialog.cpp:306 ui/mainwindow.cpp:2089
 #: ripper/ripcddialog.cpp:201
 msgid "Add folder"
 msgstr "Aggiungi cartella"
@@ -627,7 +627,7 @@ msgstr "Aggiungi alle scalette di Spotify"
 msgid "Add to Spotify starred"
 msgstr "Aggiungi ai preferiti di Spotify"
 
-#: ui/mainwindow.cpp:1850
+#: ui/mainwindow.cpp:1863
 msgid "Add to another playlist"
 msgstr "Aggiungi a un'altra scaletta"
 
@@ -635,8 +635,8 @@ msgstr "Aggiungi a un'altra scaletta"
 msgid "Add to playlist"
 msgstr "Aggiungi alla scaletta"
 
-#: ../bin/src/ui_behavioursettingspage.h:359
-#: ../bin/src/ui_behavioursettingspage.h:371
+#: ../bin/src/ui_behavioursettingspage.h:354
+#: ../bin/src/ui_behavioursettingspage.h:366
 msgid "Add to the queue"
 msgstr "Aggiungi alla coda"
 
@@ -717,7 +717,7 @@ msgstr "Album senza copertina"
 msgid "All"
 msgstr "Tutto"
 
-#: ui/mainwindow.cpp:158
+#: ui/mainwindow.cpp:159
 msgid "All Files (*)"
 msgstr "Tutti i file (*)"
 
@@ -767,16 +767,16 @@ msgstr "Consenti codifica mid/side"
 msgid "Alongside the originals"
 msgstr "Insieme agli originali"
 
-#: ../bin/src/ui_behavioursettingspage.h:331
-msgid "Always hide the main window"
-msgstr "Nascondi sempre la finestra principale"
+#: ../bin/src/ui_behavioursettingspage.h:326
+msgid "Alwa&ys hide the main window"
+msgstr "&Nascondi sempre la finestra principale"
 
-#: ../bin/src/ui_behavioursettingspage.h:330
-msgid "Always show the main window"
-msgstr "Mostra sempre la finestra principale"
+#: ../bin/src/ui_behavioursettingspage.h:325
+msgid "Always show &the main window"
+msgstr "Mos&tra sempre la finestra principale"
 
-#: ../bin/src/ui_behavioursettingspage.h:345
-#: ../bin/src/ui_behavioursettingspage.h:365
+#: ../bin/src/ui_behavioursettingspage.h:340
+#: ../bin/src/ui_behavioursettingspage.h:360
 msgid "Always start playing"
 msgstr "Inizia sempre la riproduzione"
 
@@ -823,7 +823,7 @@ msgstr "Aggiungi file/URL alla scaletta"
 msgid "Append to current playlist"
 msgstr "Aggiungi alla scaletta attuale"
 
-#: ../bin/src/ui_behavioursettingspage.h:356
+#: ../bin/src/ui_behavioursettingspage.h:351
 msgid "Append to the playlist"
 msgstr "Aggiungi alla scaletta"
 
@@ -855,7 +855,7 @@ msgstr "Sei sicuro di voler scrivere le statistiche nei file dei brani della tua
 msgid "Artist"
 msgstr "Artista"
 
-#: ui/mainwindow.cpp:283
+#: ui/mainwindow.cpp:284
 msgid "Artist info"
 msgstr "Info artista"
 
@@ -863,9 +863,9 @@ msgstr "Info artista"
 msgid "Artist's initial"
 msgstr "Iniziale dell'artista"
 
-#: ../bin/src/ui_behavioursettingspage.h:381
-msgid "Ask when saving"
-msgstr "Chiedi durante il salvataggio"
+#: ../bin/src/ui_behavioursettingspage.h:376
+msgid "As&k when saving"
+msgstr "&Chiedi durante il salvataggio"
 
 #: ../bin/src/ui_transcodedialog.h:225
 #: ../bin/src/ui_networkremotesettingspage.h:250
@@ -898,7 +898,6 @@ msgid "Auto"
 msgstr "Automatica"
 
 #: playlist/playlistsaveoptionsdialog.cpp:32
-#: ../bin/src/ui_behavioursettingspage.h:378
 msgid "Automatic"
 msgstr "Automatico"
 
@@ -947,7 +946,7 @@ msgstr "Immagine di sfondo"
 msgid "Background opacity"
 msgstr "Opacità dello sfondo"
 
-#: core/database.cpp:648
+#: core/database.cpp:664
 msgid "Backing up database"
 msgstr "Copia di sicurezza del database"
 
@@ -971,7 +970,7 @@ msgstr "Blu di base"
 msgid "Basic audio type"
 msgstr "Tipo audio Base"
 
-#: ../bin/src/ui_behavioursettingspage.h:318
+#: ../bin/src/ui_behavioursettingspage.h:313
 msgid "Behavior"
 msgstr "Comportamento"
 
@@ -1089,7 +1088,7 @@ msgstr "Cambia la scorciatoia..."
 msgid "Change shuffle mode"
 msgstr "Cambia la modalità di mescolamento"
 
-#: ../bin/src/ui_behavioursettingspage.h:370
+#: ../bin/src/ui_behavioursettingspage.h:365
 msgid "Change the currently playing song"
 msgstr "Cambierà la traccia in riproduzione"
 
@@ -1119,7 +1118,7 @@ msgstr "Verifica la presenza di nuove puntate"
 msgid "Check for updates"
 msgstr "Controllo aggiornamenti"
 
-#: ui/mainwindow.cpp:820
+#: ui/mainwindow.cpp:823
 msgid "Check for updates..."
 msgstr "Controlla aggiornamenti..."
 
@@ -1261,7 +1260,6 @@ msgstr "Fai clic qui per aggiungere questa scaletta alle preferite in modo da sa
 msgid "Click to toggle between remaining time and total time"
 msgstr "Clic per passare dal tempo rimanente al tempo totale"
 
-#: ../bin/src/ui_soundcloudsettingspage.h:103
 #: ../bin/src/ui_lastfmsettingspage.h:133
 #: ../bin/src/ui_googledrivesettingspage.h:102
 #: ../bin/src/ui_dropboxsettingspage.h:102
@@ -1340,10 +1338,6 @@ msgstr "Configura Magnatune..."
 msgid "Configure Shortcuts"
 msgstr "Configura scorciatoie"
 
-#: internet/soundcloud/soundcloudservice.cpp:381
-msgid "Configure SoundCloud..."
-msgstr "Configura SoundCloud..."
-
 #: internet/spotify/spotifyservice.cpp:927
 msgid "Configure Spotify..."
 msgstr "Configura Spotify..."
@@ -1356,7 +1350,7 @@ msgstr "Configura Subsonic..."
 msgid "Configure global search..."
 msgstr "Configura la ricerca globale..."
 
-#: ui/mainwindow.cpp:659
+#: ui/mainwindow.cpp:660
 msgid "Configure library..."
 msgstr "Configura raccolta..."
 
@@ -1428,11 +1422,11 @@ msgid "Copy to clipboard"
 msgstr "Copia negli appunti"
 
 #: library/libraryview.cpp:419 internet/podcasts/podcastservice.cpp:438
-#: ui/mainwindow.cpp:719 widgets/fileviewlist.cpp:44
+#: ui/mainwindow.cpp:720 widgets/fileviewlist.cpp:44
 msgid "Copy to device..."
 msgstr "Copia su dispositivo..."
 
-#: devices/deviceview.cpp:228 ui/mainwindow.cpp:709
+#: devices/deviceview.cpp:228 ui/mainwindow.cpp:710
 #: widgets/fileviewlist.cpp:40
 msgid "Copy to library..."
 msgstr "Copia nella raccolta..."
@@ -1576,7 +1570,7 @@ msgstr "Percorso D-Bus"
 msgid "Dance"
 msgstr "Dance"
 
-#: core/database.cpp:601
+#: core/database.cpp:617
 msgid ""
 "Database corruption detected. Please read https://github.com/clementine-"
 "player/Clementine/wiki/Database-Corruption for instructions on how to "
@@ -1638,7 +1632,7 @@ msgid "Delete downloaded data"
 msgstr "Elimina i dati scaricati"
 
 #: devices/deviceview.cpp:408 library/libraryview.cpp:678
-#: ui/mainwindow.cpp:2432 widgets/fileview.cpp:188
+#: ui/mainwindow.cpp:2445 widgets/fileview.cpp:188
 msgid "Delete files"
 msgstr "Elimina i file"
 
@@ -1646,7 +1640,7 @@ msgstr "Elimina i file"
 msgid "Delete from device..."
 msgstr "Elimina da dispositivo..."
 
-#: library/libraryview.cpp:422 ui/mainwindow.cpp:722
+#: library/libraryview.cpp:422 ui/mainwindow.cpp:723
 #: widgets/fileviewlist.cpp:47
 msgid "Delete from disk..."
 msgstr "Elimina dal disco..."
@@ -1679,11 +1673,11 @@ msgstr "Eliminazione dei file"
 msgid "Depth"
 msgstr "Profondità"
 
-#: ui/mainwindow.cpp:1763
+#: ui/mainwindow.cpp:1776
 msgid "Dequeue selected tracks"
 msgstr "Rimuovi le tracce selezionate dalla coda"
 
-#: ui/mainwindow.cpp:1761
+#: ui/mainwindow.cpp:1774
 msgid "Dequeue track"
 msgstr "Rimuovi tracce dalla coda"
 
@@ -1712,7 +1706,7 @@ msgstr "Nome del dispositivo"
 msgid "Device properties..."
 msgstr "Proprietà del dispositivo..."
 
-#: ui/mainwindow.cpp:276
+#: ui/mainwindow.cpp:277
 msgid "Devices"
 msgstr "Dispositivi"
 
@@ -1842,11 +1836,11 @@ msgstr "Donazione"
 msgid "Double click to open"
 msgstr "Doppio clic per aprire"
 
-#: ../bin/src/ui_behavioursettingspage.h:367
+#: ../bin/src/ui_behavioursettingspage.h:362
 msgid "Double clicking a song in the playlist will..."
 msgstr "Il doppio clic su un brano nella scaletta..."
 
-#: ../bin/src/ui_behavioursettingspage.h:353
+#: ../bin/src/ui_behavioursettingspage.h:348
 msgid "Double clicking a song will..."
 msgstr "Al doppio clic su un brano..."
 
@@ -1955,7 +1949,7 @@ msgstr "Misto casuale dinamico"
 msgid "Edit smart playlist..."
 msgstr "Modifica la scaletta veloce..."
 
-#: ui/mainwindow.cpp:1813
+#: ui/mainwindow.cpp:1826
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr "Modifica tag \"%1\"..."
@@ -2001,7 +1995,7 @@ msgstr "Abilita equalizzatore"
 msgid "Enable shortcuts only when Clementine is focused"
 msgstr "Abilita le scorciatoie solo quando Clementine è in primo piano"
 
-#: ../bin/src/ui_behavioursettingspage.h:339
+#: ../bin/src/ui_behavioursettingspage.h:331
 msgid "Enable song metadata inline edition with click"
 msgstr "Abilita la modifica in linea dei metadati di un brano con un clic"
 
@@ -2090,8 +2084,8 @@ msgid "Equivalent to --log-levels *:3"
 msgstr "Equivalente a --log-levels *:3"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:246
-#: library/libraryview.cpp:672 ui/mainwindow.cpp:2105 ui/mainwindow.cpp:2384
-#: ui/mainwindow.cpp:2563
+#: library/libraryview.cpp:672 ui/mainwindow.cpp:2118 ui/mainwindow.cpp:2397
+#: ui/mainwindow.cpp:2576
 msgid "Error"
 msgstr "Errore"
 
@@ -2237,7 +2231,7 @@ msgstr "Dissolvenza"
 msgid "Fading duration"
 msgstr "Durata della dissolvenza"
 
-#: ui/mainwindow.cpp:2106
+#: ui/mainwindow.cpp:2119
 msgid "Failed reading CD drive"
 msgstr "Lettura del CD non riuscita"
 
@@ -2271,10 +2265,6 @@ msgstr "Scrittura dei nuovi tag automatici su '%1' non riuscita"
 #: ../bin/src/ui_transcoderoptionsmp3.h:199
 msgid "Fast"
 msgstr "Veloce"
-
-#: internet/soundcloud/soundcloudservice.cpp:141
-msgid "Favorites"
-msgstr "Preferiti"
 
 #: library/library.cpp:88
 msgid "Favourite tracks"
@@ -2342,7 +2332,7 @@ msgstr "Tipo file"
 msgid "Filename"
 msgstr "Nome file"
 
-#: ui/mainwindow.cpp:266
+#: ui/mainwindow.cpp:267
 msgid "Files"
 msgstr "File"
 
@@ -2455,7 +2445,7 @@ msgstr "Alti al massimo"
 msgid "Ge&nre"
 msgstr "Ge&nere"
 
-#: ui/settingsdialog.cpp:133
+#: ui/settingsdialog.cpp:132
 msgid "General"
 msgstr "Generale"
 
@@ -2514,7 +2504,7 @@ msgstr "Google Drive"
 msgid "Got %1 covers out of %2 (%3 failed)"
 msgstr "Ottenute %1 copertine di %2 (%3 non riuscito)"
 
-#: ../bin/src/ui_behavioursettingspage.h:335
+#: ../bin/src/ui_behavioursettingspage.h:334
 msgid "Grey out non existent songs in my playlists"
 msgstr "Colora di grigio i brani della scaletta non esistenti"
 
@@ -2643,7 +2633,7 @@ msgstr "Icone in alto"
 msgid "Identifying song"
 msgstr "Identificazione del brano in corso"
 
-#: ../bin/src/ui_behavioursettingspage.h:337
+#: ../bin/src/ui_behavioursettingspage.h:329
 msgid ""
 "If activated, clicking a selected song in the playlist view will let you "
 "edit the tag value directly"
@@ -2744,15 +2734,15 @@ msgstr "Inserisci..."
 msgid "Installed"
 msgstr "Installati"
 
-#: core/database.cpp:585
+#: core/database.cpp:601
 msgid "Integrity check"
 msgstr "Controllo d'integrità"
 
-#: ui/mainwindow.cpp:272
+#: ui/mainwindow.cpp:273
 msgid "Internet"
 msgstr "Internet"
 
-#: ui/settingsdialog.cpp:156
+#: ui/settingsdialog.cpp:155
 msgid "Internet providers"
 msgstr "Fornitori Internet"
 
@@ -2825,7 +2815,7 @@ msgstr "Tracce preferite della settimana di Jamendo"
 msgid "Jamendo database"
 msgstr "Database di Jamendo"
 
-#: ../bin/src/ui_behavioursettingspage.h:350
+#: ../bin/src/ui_behavioursettingspage.h:345
 msgid "Jump to previous song right away"
 msgstr "Salta subito al brano precedente"
 
@@ -2845,7 +2835,7 @@ msgstr "Trattieni i pulsanti per %1 secondo..."
 msgid "Keep buttons for %1 seconds..."
 msgstr "Trattieni i pulsanti per %1 secondi..."
 
-#: ../bin/src/ui_behavioursettingspage.h:321
+#: ../bin/src/ui_behavioursettingspage.h:316
 msgid "Keep running in the background when the window is closed"
 msgstr "Mantieni l'esecuzione sullo sfondo quando la finestra è chiusa"
 
@@ -2862,7 +2852,7 @@ msgstr "Gattini"
 msgid "Kuduro"
 msgstr "Kuduro"
 
-#: ../bin/src/ui_behavioursettingspage.h:323
+#: ../bin/src/ui_behavioursettingspage.h:318
 msgid "Language"
 msgstr "Lingua"
 
@@ -2936,7 +2926,7 @@ msgstr "Sinistra"
 msgid "Length"
 msgstr "Durata"
 
-#: ui/mainwindow.cpp:251 ui/mainwindow.cpp:263
+#: ui/mainwindow.cpp:252 ui/mainwindow.cpp:264
 #: ../bin/src/ui_seafilesettingspage.h:177
 msgid "Library"
 msgstr "Raccolta"
@@ -2945,7 +2935,7 @@ msgstr "Raccolta"
 msgid "Library advanced grouping"
 msgstr "Raggruppamento avanzato della raccolta"
 
-#: ui/mainwindow.cpp:2683
+#: ui/mainwindow.cpp:2696
 msgid "Library rescan notice"
 msgstr "Notifica nuova scansione della raccolta"
 
@@ -3032,7 +3022,6 @@ msgstr "Carica file/URL, sostituendo la scaletta attuale"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:162
 #: ../bin/src/ui_magnatunesettingspage.h:163
-#: ../bin/src/ui_soundcloudsettingspage.h:102
 #: ../bin/src/ui_spotifysettingspage.h:210
 #: ../bin/src/ui_subsonicsettingspage.h:137
 #: ../bin/src/ui_lastfmsettingspage.h:132
@@ -3262,7 +3251,7 @@ msgstr "Punti di mount"
 msgid "Move down"
 msgstr "Sposta in basso"
 
-#: ui/mainwindow.cpp:712 widgets/fileviewlist.cpp:42
+#: ui/mainwindow.cpp:713 widgets/fileviewlist.cpp:42
 msgid "Move to library..."
 msgstr "Sposta nella raccolta..."
 
@@ -3271,7 +3260,7 @@ msgstr "Sposta nella raccolta..."
 msgid "Move up"
 msgstr "Sposta in alto"
 
-#: transcoder/transcodedialog.cpp:225 ui/mainwindow.cpp:2050
+#: transcoder/transcodedialog.cpp:225 ui/mainwindow.cpp:2063
 msgid "Music"
 msgstr "Musica"
 
@@ -3318,8 +3307,8 @@ msgstr "Mai"
 msgid "Never played"
 msgstr "Mai riprodotte"
 
-#: ../bin/src/ui_behavioursettingspage.h:343
-#: ../bin/src/ui_behavioursettingspage.h:363
+#: ../bin/src/ui_behavioursettingspage.h:338
+#: ../bin/src/ui_behavioursettingspage.h:358
 msgid "Never start playing"
 msgstr "Non iniziare mai la riproduzione"
 
@@ -3329,7 +3318,7 @@ msgstr "Non iniziare mai la riproduzione"
 msgid "New folder"
 msgstr "Nuova cartella"
 
-#: ui/mainwindow.cpp:1867 ../bin/src/ui_mainwindow.h:709
+#: ui/mainwindow.cpp:1880 ../bin/src/ui_mainwindow.h:709
 msgid "New playlist"
 msgstr "Nuova scaletta"
 
@@ -3396,7 +3385,7 @@ msgstr "Nessun blocco corto"
 msgid "None"
 msgstr "Nessuna"
 
-#: library/libraryview.cpp:673 ui/mainwindow.cpp:2385 ui/mainwindow.cpp:2564
+#: library/libraryview.cpp:673 ui/mainwindow.cpp:2398 ui/mainwindow.cpp:2577
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Nessuna delle canzoni selezionate era adatta alla copia su un dispositivo"
 
@@ -3525,7 +3514,6 @@ msgstr "Opacità"
 #: internet/magnatune/magnatuneservice.cpp:287
 #: internet/somafm/somafmservice.cpp:102
 #: internet/intergalacticfm/intergalacticfmservice.cpp:102
-#: internet/soundcloud/soundcloudservice.cpp:377
 #, qt-format
 msgid "Open %1 in browser"
 msgstr "Apri %1 nel browser"
@@ -3564,7 +3552,7 @@ msgstr "Apri in Google Drive"
 msgid "Open in new playlist"
 msgstr "Apri in nuova scaletta"
 
-#: ../bin/src/ui_behavioursettingspage.h:358
+#: ../bin/src/ui_behavioursettingspage.h:353
 msgctxt "Refers to behavior settings in Clementine settings page."
 msgid "Open in new playlist"
 msgstr "Apri in una nuova scaletta"
@@ -3604,7 +3592,7 @@ msgstr "Opus"
 msgid "Organise Files"
 msgstr "Organizza file"
 
-#: library/libraryview.cpp:416 ui/mainwindow.cpp:715
+#: library/libraryview.cpp:416 ui/mainwindow.cpp:716
 msgid "Organise files..."
 msgstr "Organizza file..."
 
@@ -3688,7 +3676,7 @@ msgstr "Festa"
 msgid "Password"
 msgstr "Password"
 
-#: core/globalshortcuts.cpp:50 ui/mainwindow.cpp:1160 ui/mainwindow.cpp:1663
+#: core/globalshortcuts.cpp:50 ui/mainwindow.cpp:1169 ui/mainwindow.cpp:1676
 #: ui/qtsystemtrayicon.cpp:189 wiimotedev/wiimotesettingspage.cpp:114
 msgid "Pause"
 msgstr "Pausa"
@@ -3716,8 +3704,8 @@ msgstr "Pixel"
 msgid "Plain sidebar"
 msgstr "Barra laterale semplice"
 
-#: core/globalshortcuts.cpp:49 ui/mainwindow.cpp:676 ui/mainwindow.cpp:1126
-#: ui/mainwindow.cpp:1145 ui/mainwindow.cpp:1667 ui/qtsystemtrayicon.cpp:177
+#: core/globalshortcuts.cpp:49 ui/mainwindow.cpp:677 ui/mainwindow.cpp:1133
+#: ui/mainwindow.cpp:1154 ui/mainwindow.cpp:1680 ui/qtsystemtrayicon.cpp:177
 #: ui/qtsystemtrayicon.cpp:203 wiimotedev/wiimotesettingspage.cpp:107
 #: ../bin/src/ui_mainwindow.h:675
 msgid "Play"
@@ -3731,16 +3719,16 @@ msgstr "Contatore di riproduzione"
 msgid "Play if stopped, pause if playing"
 msgstr "Riproduci se fermata, sospendi se in riproduzione"
 
-#: ../bin/src/ui_behavioursettingspage.h:344
-#: ../bin/src/ui_behavioursettingspage.h:364
+#: ../bin/src/ui_behavioursettingspage.h:339
+#: ../bin/src/ui_behavioursettingspage.h:359
 msgid "Play if there is nothing already playing"
 msgstr "Riproduci se non c'è altro in riproduzione"
 
-#: library/libraryview.cpp:396 ui/mainwindow.cpp:1774
+#: library/libraryview.cpp:396 ui/mainwindow.cpp:1787
 msgid "Play next"
 msgstr "Riproduci successivo"
 
-#: ui/mainwindow.cpp:1772
+#: ui/mainwindow.cpp:1785
 msgid "Play selected tracks next"
 msgstr "Riproduci successivamente le tracce riprodotte"
 
@@ -3779,7 +3767,7 @@ msgstr "Opzioni della scaletta"
 msgid "Playlist type"
 msgstr "Tipo di scaletta"
 
-#: internet/soundcloud/soundcloudservice.cpp:133 ui/mainwindow.cpp:269
+#: ui/mainwindow.cpp:270
 msgid "Playlists"
 msgstr "Scalette"
 
@@ -3870,7 +3858,7 @@ msgstr "Premi un tasto"
 msgid "Press a key combination to use for %1..."
 msgstr "Premi una combinazione di tasto da utilizzare per %1..."
 
-#: ../bin/src/ui_behavioursettingspage.h:347
+#: ../bin/src/ui_behavioursettingspage.h:342
 msgid "Pressing \"Previous\" in player will..."
 msgstr "La pressione di \"Precedente\" nel lettore..."
 
@@ -3947,12 +3935,12 @@ msgstr "Interrogazione dispositivo..."
 msgid "Queue Manager"
 msgstr "Gestore della coda"
 
-#: ui/mainwindow.cpp:1767
+#: ui/mainwindow.cpp:1780
 msgid "Queue selected tracks"
 msgstr "Accoda le tracce selezionate"
 
 #: globalsearch/globalsearchview.cpp:464 library/libraryview.cpp:393
-#: ui/mainwindow.cpp:1765
+#: ui/mainwindow.cpp:1778
 msgid "Queue track"
 msgstr "Accoda la traccia"
 
@@ -4042,7 +4030,7 @@ msgid "Reggae"
 msgstr "Reggae"
 
 #: playlist/playlistsaveoptionsdialog.cpp:33
-#: ../bin/src/ui_behavioursettingspage.h:380
+#: ../bin/src/ui_behavioursettingspage.h:375
 msgid "Relative"
 msgstr "Relativo"
 
@@ -4050,9 +4038,9 @@ msgstr "Relativo"
 msgid "Remember Wii remote swing"
 msgstr "Ricorda il movimento del Wii remote"
 
-#: ../bin/src/ui_behavioursettingspage.h:332
-msgid "Remember from last time"
-msgstr "Ricorda l'ultima sessione"
+#: ../bin/src/ui_behavioursettingspage.h:327
+msgid "Remember from &last time"
+msgstr "Ricorda &l'ultima sessione"
 
 #: ../bin/src/ui_playlistsaveoptionsdialog.h:99
 msgid "Remember my choice"
@@ -4130,7 +4118,7 @@ msgstr "Ripeti traccia"
 msgid "Replace current playlist"
 msgstr "Sostituisci la scaletta attuale"
 
-#: ../bin/src/ui_behavioursettingspage.h:357
+#: ../bin/src/ui_behavioursettingspage.h:352
 msgid "Replace the playlist"
 msgstr "Sostituisci la scaletta"
 
@@ -4162,7 +4150,7 @@ msgstr "Azzera"
 msgid "Reset play counts"
 msgstr "Azzera i contatori"
 
-#: ../bin/src/ui_behavioursettingspage.h:351
+#: ../bin/src/ui_behavioursettingspage.h:346
 msgid "Restart song, then jump to previous if pressed again"
 msgstr "Riavvia il brano, poi salta alla precedente se premuto ancora"
 
@@ -4175,7 +4163,7 @@ msgstr "Riavvia la traccia, o riproduci la traccia precedente se entro 8 secondi
 msgid "Restrict to ASCII characters"
 msgstr "Limita ai caratteri ASCII"
 
-#: ../bin/src/ui_behavioursettingspage.h:333
+#: ../bin/src/ui_behavioursettingspage.h:332
 msgid "Resume playback on start"
 msgstr "Riprendi la riproduzione all'avvio"
 
@@ -4317,7 +4305,7 @@ msgstr "Punteggio"
 msgid "Scrobble tracks that I listen to"
 msgstr "Scrobbling delle tracce ascoltate"
 
-#: ../bin/src/ui_behavioursettingspage.h:320
+#: ../bin/src/ui_behavioursettingspage.h:315
 msgid "Scroll over icon to change track"
 msgstr "Scorri sull'icona per cambiare traccia"
 
@@ -4331,7 +4319,7 @@ msgstr "Seafile"
 msgid "Search"
 msgstr "Cerca"
 
-#: ui/mainwindow.cpp:260 ../bin/src/ui_globalsearchsettingspage.h:141
+#: ui/mainwindow.cpp:261 ../bin/src/ui_globalsearchsettingspage.h:141
 msgctxt "Global search settings dialog title."
 msgid "Search"
 msgstr "Cerca"
@@ -4356,7 +4344,7 @@ msgstr "Cerca su Subsonic"
 msgid "Search automatically"
 msgstr "Cerca automaticamente"
 
-#: ui/mainwindow.cpp:696
+#: ui/mainwindow.cpp:697
 msgid "Search for album"
 msgstr "Cerca album"
 
@@ -4369,7 +4357,7 @@ msgstr "Cerca copertine degli album..."
 msgid "Search for anything"
 msgstr "Cerca qualsiasi cosa"
 
-#: ui/mainwindow.cpp:693
+#: ui/mainwindow.cpp:694
 msgid "Search for artist"
 msgstr "Cerca artista"
 
@@ -4393,7 +4381,6 @@ msgstr "Modalità di ricerca"
 msgid "Search options"
 msgstr "Opzioni di ricerca"
 
-#: internet/soundcloud/soundcloudservice.cpp:119
 #: internet/spotify/spotifyservice.cpp:400
 msgid "Search results"
 msgstr "Cerca risultati"
@@ -4427,7 +4414,7 @@ msgstr "Sposta la traccia in riproduzione di una quantità relativa"
 msgid "Seek the currently playing track to an absolute position"
 msgstr "Sposta la traccia in riproduzione su una posizione assoluta"
 
-#: ../bin/src/ui_behavioursettingspage.h:373
+#: ../bin/src/ui_behavioursettingspage.h:368
 msgid "Seeking using a keyboard shortcut or mouse wheel"
 msgstr "Posizionamento utilizzando una scorciatoia da tastiera o la rotella del mouse"
 
@@ -4487,7 +4474,7 @@ msgstr "Dettagli del server"
 msgid "Service offline"
 msgstr "Servizio non in linea"
 
-#: ui/mainwindow.cpp:1812
+#: ui/mainwindow.cpp:1825
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr "Imposta %1 a \"%2\"..."
@@ -4563,7 +4550,7 @@ msgstr "Mostra un OSD gradevole"
 msgid "Show above status bar"
 msgstr "Mostra la barra di stato superiore"
 
-#: ui/mainwindow.cpp:643
+#: ui/mainwindow.cpp:644
 msgid "Show all songs"
 msgstr "Mostra tutti i brani"
 
@@ -4583,12 +4570,12 @@ msgstr "Mostra separatori"
 msgid "Show fullsize..."
 msgstr "Mostra a dimensioni originali..."
 
-#: library/libraryview.cpp:433 ui/mainwindow.cpp:725
+#: library/libraryview.cpp:433 ui/mainwindow.cpp:726
 #: widgets/fileviewlist.cpp:53
 msgid "Show in file browser..."
 msgstr "Mostra nel navigatore file..."
 
-#: ui/mainwindow.cpp:727
+#: ui/mainwindow.cpp:728
 msgid "Show in library..."
 msgstr "Mostra nella raccolta..."
 
@@ -4600,11 +4587,11 @@ msgstr "Mostra in artisti vari"
 msgid "Show moodbar"
 msgstr "Mostra la barra dell'atmosfera"
 
-#: ui/mainwindow.cpp:645
+#: ui/mainwindow.cpp:646
 msgid "Show only duplicates"
 msgstr "Mostra solo i duplicati"
 
-#: ui/mainwindow.cpp:647
+#: ui/mainwindow.cpp:648
 msgid "Show only untagged"
 msgstr "Mostra solo i brani senza tag"
 
@@ -4628,7 +4615,7 @@ msgstr "Mostra il pulsante \"Mi piace\""
 msgid "Show the scrobble button in the main window"
 msgstr "Mostra il pulsante di scrobble nella finestra principale"
 
-#: ../bin/src/ui_behavioursettingspage.h:319
+#: ../bin/src/ui_behavioursettingspage.h:314
 msgid "Show tray icon"
 msgstr "Mostra icona nel vassoio"
 
@@ -4696,11 +4683,11 @@ msgstr "Salta il conteggio"
 msgid "Skip forwards in playlist"
 msgstr "Salta in avanti nella scaletta"
 
-#: ui/mainwindow.cpp:1783
+#: ui/mainwindow.cpp:1796
 msgid "Skip selected tracks"
 msgstr "Salta le tracce selezionate"
 
-#: ui/mainwindow.cpp:1781
+#: ui/mainwindow.cpp:1794
 msgid "Skip track"
 msgstr "Salta la traccia"
 
@@ -4732,7 +4719,7 @@ msgstr "Rock leggero"
 msgid "Song Information"
 msgstr "Informazioni brano"
 
-#: ui/mainwindow.cpp:280
+#: ui/mainwindow.cpp:281
 msgid "Song info"
 msgstr "Info brano"
 
@@ -4763,10 +4750,6 @@ msgstr "Ordina i brani per"
 #: ../bin/src/ui_querysortpage.h:137
 msgid "Sorting"
 msgstr "Ordinamento"
-
-#: ../bin/src/ui_soundcloudsettingspage.h:100
-msgid "SoundCloud"
-msgstr "SoundCloud"
 
 #: playlist/playlist.cpp:1404
 msgid "Source"
@@ -4826,7 +4809,6 @@ msgstr "Avvia la scaletta attualmente in riproduzione"
 msgid "Start transcoding"
 msgstr "Avvia transcodifica"
 
-#: internet/soundcloud/soundcloudservice.cpp:121
 #: internet/spotify/spotifyservice.cpp:402
 msgid ""
 "Start typing something on the search box above to fill this search results "
@@ -4859,7 +4841,7 @@ msgstr "Ferma dopo ogni traccia"
 msgid "Stop after every track"
 msgstr "Ferma dopo tutte le tracce"
 
-#: ui/mainwindow.cpp:680 ../bin/src/ui_mainwindow.h:679
+#: ui/mainwindow.cpp:681 ../bin/src/ui_mainwindow.h:679
 msgid "Stop after this track"
 msgstr "Ferma dopo questa traccia"
 
@@ -4871,7 +4853,7 @@ msgstr "Ferma riproduzione"
 msgid "Stop playback after current track"
 msgstr "Ferma la riproduzione dopo la traccia corrente"
 
-#: ../bin/src/ui_behavioursettingspage.h:334
+#: ../bin/src/ui_behavioursettingspage.h:333
 msgid "Stop playback if song fails to play"
 msgstr "Ferma la riproduzione se il brano non può essere eseguito"
 
@@ -5027,7 +5009,7 @@ msgid ""
 "license key. Visit subsonic.org for details."
 msgstr "Il periodo di prova per il server Subsonic è scaduto. Effettua una donazione per ottenere una chiave di licenza. Visita subsonic.org per i dettagli."
 
-#: ui/mainwindow.cpp:2674
+#: ui/mainwindow.cpp:2687
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -5069,7 +5051,7 @@ msgid ""
 "continue?"
 msgstr "Questi file saranno eliminati dal dispositivo, sei sicuro di voler continuare?"
 
-#: library/libraryview.cpp:679 ui/mainwindow.cpp:2433 widgets/fileview.cpp:189
+#: library/libraryview.cpp:679 ui/mainwindow.cpp:2446 widgets/fileview.cpp:189
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -5149,7 +5131,7 @@ msgstr "Questo flusso è riservato ai soli abbonati"
 msgid "This type of device is not supported: %1"
 msgstr "Questi tipo di dispositivo non è supportato: %1"
 
-#: ../bin/src/ui_behavioursettingspage.h:374
+#: ../bin/src/ui_behavioursettingspage.h:369
 msgid "Time step"
 msgstr "Intervallo di tempo"
 
@@ -5172,7 +5154,7 @@ msgstr "Commuta Pretty OSD"
 msgid "Toggle fullscreen"
 msgstr "Attiva la modalità a schermo intero"
 
-#: ui/mainwindow.cpp:1769
+#: ui/mainwindow.cpp:1782
 msgid "Toggle queue status"
 msgstr "Cambia lo stato della coda"
 
@@ -5220,10 +5202,6 @@ msgstr "Trac&cia"
 #: ../bin/src/ui_trackselectiondialog.h:212 ../bin/src/ui_ripcddialog.h:304
 msgid "Track"
 msgstr "Traccia"
-
-#: internet/soundcloud/soundcloudservice.cpp:136
-msgid "Tracks"
-msgstr "Tracce"
 
 #: ../bin/src/ui_transcodedialog.h:213 ../bin/src/ui_mainwindow.h:706
 msgid "Transcode Music"
@@ -5310,11 +5288,11 @@ msgstr "Errore sconosciuto"
 msgid "Unset cover"
 msgstr "Rimuovi copertina"
 
-#: ui/mainwindow.cpp:1779
+#: ui/mainwindow.cpp:1792
 msgid "Unskip selected tracks"
 msgstr "Ripristina le tracce selezionate"
 
-#: ui/mainwindow.cpp:1777
+#: ui/mainwindow.cpp:1790
 msgid "Unskip track"
 msgstr "Ripristina la traccia"
 
@@ -5425,7 +5403,7 @@ msgstr "Utilizza le icone di sistema"
 msgid "Use temporal noise shaping"
 msgstr "Usa modellazione temporale del rumore"
 
-#: ../bin/src/ui_behavioursettingspage.h:326
+#: ../bin/src/ui_behavioursettingspage.h:321
 msgid "Use the system default"
 msgstr "Usa i valori predefiniti di sistema"
 
@@ -5445,7 +5423,7 @@ msgstr "Usa la normalizzazione del volume"
 msgid "Used"
 msgstr "Utilizzato"
 
-#: ui/settingsdialog.cpp:147
+#: ui/settingsdialog.cpp:146
 msgid "User interface"
 msgstr "Interfaccia utente"
 
@@ -5457,7 +5435,7 @@ msgstr "Interfaccia utente"
 msgid "Username"
 msgstr "Nome utente"
 
-#: ../bin/src/ui_behavioursettingspage.h:340
+#: ../bin/src/ui_behavioursettingspage.h:335
 msgid "Using the menu to add a song will..."
 msgstr "L'utilizzo del menu per aggiungere un brano..."
 
@@ -5530,7 +5508,7 @@ msgstr "WAV"
 msgid "WMA"
 msgstr "WMA"
 
-#: playlist/playlisttabbar.cpp:192 ../bin/src/ui_behavioursettingspage.h:322
+#: playlist/playlisttabbar.cpp:192 ../bin/src/ui_behavioursettingspage.h:317
 msgid "Warn me when closing a playlist tab"
 msgstr "Avvisami alla chiusura di una scheda della scaletta"
 
@@ -5550,7 +5528,7 @@ msgstr "Sito web"
 msgid "Weeks"
 msgstr "Settimane"
 
-#: ../bin/src/ui_behavioursettingspage.h:329
+#: ../bin/src/ui_behavioursettingspage.h:324
 msgid "When Clementine starts"
 msgstr "All'avvio di Clementine"
 
@@ -5560,7 +5538,7 @@ msgid ""
 "If there are no matches then it will use the largest image in the directory."
 msgstr "Quando cercherà la copertina di un album, Clementine analizzerà prima le immagini che contengono di una queste parole nel nome del file.\nSe non ci saranno corrispondenze, utilizzerà l'immagine più grande che si trova nella cartella."
 
-#: ../bin/src/ui_behavioursettingspage.h:377
+#: ../bin/src/ui_behavioursettingspage.h:372
 msgid "When saving a playlist, file paths should be"
 msgstr "Quando salvi una scaletta, i percorsi dei file dovrebbero essere"
 
@@ -5636,7 +5614,7 @@ msgid ""
 "well?"
 msgstr "Vuoi spostare anche gli altri brani di questo album in Artisti vari?"
 
-#: ui/mainwindow.cpp:2681
+#: ui/mainwindow.cpp:2694
 msgid "Would you like to run a full rescan right now?"
 msgstr "Vuoi eseguire subito una nuova scansione completa?"
 
@@ -5644,7 +5622,7 @@ msgstr "Vuoi eseguire subito una nuova scansione completa?"
 msgid "Write all songs statistics into songs' files"
 msgstr "Scrivi le statistiche dei brani nei file"
 
-#: ../bin/src/ui_behavioursettingspage.h:382
+#: ../bin/src/ui_behavioursettingspage.h:377
 msgid "Write metadata"
 msgstr "Scrivi i metadati"
 
@@ -5730,13 +5708,6 @@ msgstr "Non hai un account Premium Spotify."
 msgid "You do not have an active subscription"
 msgstr "Non hai una sottoscrizione attiva"
 
-#: ../bin/src/ui_soundcloudsettingspage.h:101
-msgid ""
-"You don't need to be logged in to search and to listen to music on "
-"SoundCloud. However, you need to login to access your playlists and your "
-"stream."
-msgstr "Non è necessario effettuare l'accesso per cercare e ascoltare musica su SoundCloud. Tuttavia, bisogna autenticarsi per accedere alle scalette e al flusso."
-
 #: internet/spotify/spotifyservice.cpp:205
 msgid ""
 "You have been logged out of Spotify, please re-enter your password in the "
@@ -5758,7 +5729,7 @@ msgid ""
 "shortcuts in Clementine."
 msgstr "Devi eseguire le preferenze di sistema e consentire a Clementine di \"<span style=\"font-style:italic\">controllare il tuo computer</span>\" per utilizzare le scorciatoie globali in Clementine."
 
-#: ../bin/src/ui_behavioursettingspage.h:328
+#: ../bin/src/ui_behavioursettingspage.h:323
 msgid "You will need to restart Clementine if you change the language."
 msgstr "Dovrai riavviare Clementine se cambi la lingua."
 

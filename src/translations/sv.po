@@ -30,7 +30,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2018-09-17 13:31+0000\n"
+"PO-Revision-Date: 2018-10-01 17:06+0000\n"
 "Last-Translator: hatstand <john.maguire@gmail.com>\n"
 "Language-Team: Swedish (http://www.transifex.com/davidsansome/clementine/language/sv/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -73,7 +73,7 @@ msgstr " ms"
 msgid " pt"
 msgstr " pt"
 
-#: ../bin/src/ui_behavioursettingspage.h:375
+#: ../bin/src/ui_behavioursettingspage.h:370
 msgid " s"
 msgstr "s"
 
@@ -415,6 +415,10 @@ msgid ""
 "A song will be included in the playlist if it matches these conditions."
 msgstr "En låt kommer att inkluderas i spellistan om den matchar dessa villkor."
 
+#: ../bin/src/ui_behavioursettingspage.h:373
+msgid "A&utomatic"
+msgstr ""
+
 #: smartplaylists/searchterm.cpp:396
 msgid "A-Z"
 msgstr "A-Ö"
@@ -461,7 +465,7 @@ msgid "About Qt..."
 msgstr "Om Qt..."
 
 #: playlist/playlistsaveoptionsdialog.cpp:34
-#: ../bin/src/ui_behavioursettingspage.h:379
+#: ../bin/src/ui_behavioursettingspage.h:374
 msgid "Absolute"
 msgstr "Absolut"
 
@@ -487,10 +491,6 @@ msgstr "Åtgärd"
 #: wiimotedev/wiimotesettingspage.cpp:103
 msgid "Activate/Deactivate Wii Remote"
 msgstr ""
-
-#: internet/soundcloud/soundcloudservice.cpp:128
-msgid "Activities stream"
-msgstr "Aktivitetsström"
 
 #: internet/podcasts/addpodcastdialog.cpp:63
 msgid "Add Podcast"
@@ -520,7 +520,7 @@ msgstr "Lägg till en annan ström..."
 msgid "Add directory..."
 msgstr "Lägg till katalog..."
 
-#: ui/mainwindow.cpp:2049
+#: ui/mainwindow.cpp:2062
 msgid "Add file"
 msgstr "Lägg till fil"
 
@@ -540,7 +540,7 @@ msgstr "Lägg till fil..."
 msgid "Add files to transcode"
 msgstr "Lägg till filer för omkodning"
 
-#: transcoder/transcodedialog.cpp:306 ui/mainwindow.cpp:2076
+#: transcoder/transcodedialog.cpp:306 ui/mainwindow.cpp:2089
 #: ripper/ripcddialog.cpp:201
 msgid "Add folder"
 msgstr "Lägg till mapp"
@@ -645,7 +645,7 @@ msgstr "Lägg till i Spotifys spellistor"
 msgid "Add to Spotify starred"
 msgstr "Lägg till under Spotifys stjärnmärkta"
 
-#: ui/mainwindow.cpp:1850
+#: ui/mainwindow.cpp:1863
 msgid "Add to another playlist"
 msgstr "Lägg till i en annan spellista"
 
@@ -653,8 +653,8 @@ msgstr "Lägg till i en annan spellista"
 msgid "Add to playlist"
 msgstr "Lägg till i spellistan"
 
-#: ../bin/src/ui_behavioursettingspage.h:359
-#: ../bin/src/ui_behavioursettingspage.h:371
+#: ../bin/src/ui_behavioursettingspage.h:354
+#: ../bin/src/ui_behavioursettingspage.h:366
 msgid "Add to the queue"
 msgstr "Lägg till i spelkön"
 
@@ -735,7 +735,7 @@ msgstr "Album utan omslag"
 msgid "All"
 msgstr "Alla"
 
-#: ui/mainwindow.cpp:158
+#: ui/mainwindow.cpp:159
 msgid "All Files (*)"
 msgstr "Alla filer (*)"
 
@@ -785,16 +785,16 @@ msgstr "Tillåt mellan-/sidokodning"
 msgid "Alongside the originals"
 msgstr "Tillsammans med originalen"
 
-#: ../bin/src/ui_behavioursettingspage.h:331
-msgid "Always hide the main window"
-msgstr "Dölj alltid huvudfönstret"
+#: ../bin/src/ui_behavioursettingspage.h:326
+msgid "Alwa&ys hide the main window"
+msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:330
-msgid "Always show the main window"
-msgstr "Visa alltid huvudfönstret"
+#: ../bin/src/ui_behavioursettingspage.h:325
+msgid "Always show &the main window"
+msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:345
-#: ../bin/src/ui_behavioursettingspage.h:365
+#: ../bin/src/ui_behavioursettingspage.h:340
+#: ../bin/src/ui_behavioursettingspage.h:360
 msgid "Always start playing"
 msgstr "Alltid starta uppspelning"
 
@@ -841,7 +841,7 @@ msgstr "Lägg till filer/webbadresser till spellistan"
 msgid "Append to current playlist"
 msgstr "Lägg till i den aktuella spellistan"
 
-#: ../bin/src/ui_behavioursettingspage.h:356
+#: ../bin/src/ui_behavioursettingspage.h:351
 msgid "Append to the playlist"
 msgstr "Lägg till i spellistan"
 
@@ -873,7 +873,7 @@ msgstr "Är du säker på att du vill skriva låtstatistik till låtfilerna på 
 msgid "Artist"
 msgstr "Artist"
 
-#: ui/mainwindow.cpp:283
+#: ui/mainwindow.cpp:284
 msgid "Artist info"
 msgstr "Artistinfo"
 
@@ -881,9 +881,9 @@ msgstr "Artistinfo"
 msgid "Artist's initial"
 msgstr "Artistens initialer"
 
-#: ../bin/src/ui_behavioursettingspage.h:381
-msgid "Ask when saving"
-msgstr "Fråga vid sparande"
+#: ../bin/src/ui_behavioursettingspage.h:376
+msgid "As&k when saving"
+msgstr ""
 
 #: ../bin/src/ui_transcodedialog.h:225
 #: ../bin/src/ui_networkremotesettingspage.h:250
@@ -916,7 +916,6 @@ msgid "Auto"
 msgstr "Auto"
 
 #: playlist/playlistsaveoptionsdialog.cpp:32
-#: ../bin/src/ui_behavioursettingspage.h:378
 msgid "Automatic"
 msgstr "Automatisk"
 
@@ -965,7 +964,7 @@ msgstr "Bakgrundsbild"
 msgid "Background opacity"
 msgstr "Bakgrundsopacitet"
 
-#: core/database.cpp:648
+#: core/database.cpp:664
 msgid "Backing up database"
 msgstr "Säkerhetskopiera databasen"
 
@@ -989,7 +988,7 @@ msgstr "Basblå"
 msgid "Basic audio type"
 msgstr "Grundläggande ljudtyp"
 
-#: ../bin/src/ui_behavioursettingspage.h:318
+#: ../bin/src/ui_behavioursettingspage.h:313
 msgid "Behavior"
 msgstr "Beteende"
 
@@ -1107,7 +1106,7 @@ msgstr "Ändra snabbtangent..."
 msgid "Change shuffle mode"
 msgstr "Ändra blandningsläge"
 
-#: ../bin/src/ui_behavioursettingspage.h:370
+#: ../bin/src/ui_behavioursettingspage.h:365
 msgid "Change the currently playing song"
 msgstr "Byta ut låten som spelas för tillfället"
 
@@ -1137,7 +1136,7 @@ msgstr "Kolla efter nya avsnitt"
 msgid "Check for updates"
 msgstr "Sök efter uppdateringar"
 
-#: ui/mainwindow.cpp:820
+#: ui/mainwindow.cpp:823
 msgid "Check for updates..."
 msgstr "Leta efter uppdateringar..."
 
@@ -1279,7 +1278,6 @@ msgstr "Klicka här för att favorisera denna spellista så att den sparas och f
 msgid "Click to toggle between remaining time and total time"
 msgstr "Klicka för att växla mellan återstående tid och total tid"
 
-#: ../bin/src/ui_soundcloudsettingspage.h:103
 #: ../bin/src/ui_lastfmsettingspage.h:133
 #: ../bin/src/ui_googledrivesettingspage.h:102
 #: ../bin/src/ui_dropboxsettingspage.h:102
@@ -1358,10 +1356,6 @@ msgstr "Konfigurera Magnatune..."
 msgid "Configure Shortcuts"
 msgstr "Konfigurera snabbtangenter"
 
-#: internet/soundcloud/soundcloudservice.cpp:381
-msgid "Configure SoundCloud..."
-msgstr "Konfigurera SoundCloud"
-
 #: internet/spotify/spotifyservice.cpp:927
 msgid "Configure Spotify..."
 msgstr "Anpassa Spotify..."
@@ -1374,7 +1368,7 @@ msgstr "Konfigurera Subsonic..."
 msgid "Configure global search..."
 msgstr "Ställ in Global sökning..."
 
-#: ui/mainwindow.cpp:659
+#: ui/mainwindow.cpp:660
 msgid "Configure library..."
 msgstr "Konfigurera biblioteket..."
 
@@ -1446,11 +1440,11 @@ msgid "Copy to clipboard"
 msgstr "Kopiera till klippbordet"
 
 #: library/libraryview.cpp:419 internet/podcasts/podcastservice.cpp:438
-#: ui/mainwindow.cpp:719 widgets/fileviewlist.cpp:44
+#: ui/mainwindow.cpp:720 widgets/fileviewlist.cpp:44
 msgid "Copy to device..."
 msgstr "Kopiera till enhet..."
 
-#: devices/deviceview.cpp:228 ui/mainwindow.cpp:709
+#: devices/deviceview.cpp:228 ui/mainwindow.cpp:710
 #: widgets/fileviewlist.cpp:40
 msgid "Copy to library..."
 msgstr "Kopiera till biblioteket..."
@@ -1594,7 +1588,7 @@ msgstr "D-Bus sökväg"
 msgid "Dance"
 msgstr "Dans"
 
-#: core/database.cpp:601
+#: core/database.cpp:617
 msgid ""
 "Database corruption detected. Please read https://github.com/clementine-"
 "player/Clementine/wiki/Database-Corruption for instructions on how to "
@@ -1656,7 +1650,7 @@ msgid "Delete downloaded data"
 msgstr "Ta bort nedladdad data"
 
 #: devices/deviceview.cpp:408 library/libraryview.cpp:678
-#: ui/mainwindow.cpp:2432 widgets/fileview.cpp:188
+#: ui/mainwindow.cpp:2445 widgets/fileview.cpp:188
 msgid "Delete files"
 msgstr "Ta bort filer"
 
@@ -1664,7 +1658,7 @@ msgstr "Ta bort filer"
 msgid "Delete from device..."
 msgstr "Ta bort från enhet..."
 
-#: library/libraryview.cpp:422 ui/mainwindow.cpp:722
+#: library/libraryview.cpp:422 ui/mainwindow.cpp:723
 #: widgets/fileviewlist.cpp:47
 msgid "Delete from disk..."
 msgstr "Ta bort från disk..."
@@ -1697,11 +1691,11 @@ msgstr "Tar bort filer"
 msgid "Depth"
 msgstr "Djup"
 
-#: ui/mainwindow.cpp:1763
+#: ui/mainwindow.cpp:1776
 msgid "Dequeue selected tracks"
 msgstr "Avköa valda spår"
 
-#: ui/mainwindow.cpp:1761
+#: ui/mainwindow.cpp:1774
 msgid "Dequeue track"
 msgstr "Avköa spår"
 
@@ -1730,7 +1724,7 @@ msgstr "Enhetsnamn"
 msgid "Device properties..."
 msgstr "Enhetsinställningar..."
 
-#: ui/mainwindow.cpp:276
+#: ui/mainwindow.cpp:277
 msgid "Devices"
 msgstr "Enheter"
 
@@ -1860,11 +1854,11 @@ msgstr "Donera"
 msgid "Double click to open"
 msgstr "Dubbelklicka för att öppna"
 
-#: ../bin/src/ui_behavioursettingspage.h:367
+#: ../bin/src/ui_behavioursettingspage.h:362
 msgid "Double clicking a song in the playlist will..."
 msgstr "Att dubbelklicka på en låt i spellistan kommer att..."
 
-#: ../bin/src/ui_behavioursettingspage.h:353
+#: ../bin/src/ui_behavioursettingspage.h:348
 msgid "Double clicking a song will..."
 msgstr "Att dubbelklicka på en låt kommer att..."
 
@@ -1973,7 +1967,7 @@ msgstr "Dynamisk slumpmässig blandning"
 msgid "Edit smart playlist..."
 msgstr "Redigera smart spellista..."
 
-#: ui/mainwindow.cpp:1813
+#: ui/mainwindow.cpp:1826
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr "Redigera etikett \"%1\"..."
@@ -2019,7 +2013,7 @@ msgstr "Aktivera utjämnare"
 msgid "Enable shortcuts only when Clementine is focused"
 msgstr "Aktivera endast snabbknappar när Clementine är fokuserat"
 
-#: ../bin/src/ui_behavioursettingspage.h:339
+#: ../bin/src/ui_behavioursettingspage.h:331
 msgid "Enable song metadata inline edition with click"
 msgstr "Aktivera låt metadata radversion genom att klicka"
 
@@ -2108,8 +2102,8 @@ msgid "Equivalent to --log-levels *:3"
 msgstr "Motsvarar --log-levels *:3"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:246
-#: library/libraryview.cpp:672 ui/mainwindow.cpp:2105 ui/mainwindow.cpp:2384
-#: ui/mainwindow.cpp:2563
+#: library/libraryview.cpp:672 ui/mainwindow.cpp:2118 ui/mainwindow.cpp:2397
+#: ui/mainwindow.cpp:2576
 msgid "Error"
 msgstr "Fel"
 
@@ -2255,7 +2249,7 @@ msgstr "Toning"
 msgid "Fading duration"
 msgstr "Toningslängd"
 
-#: ui/mainwindow.cpp:2106
+#: ui/mainwindow.cpp:2119
 msgid "Failed reading CD drive"
 msgstr "Fel vid läsning av CD-enhet"
 
@@ -2289,10 +2283,6 @@ msgstr "Misslyckades skriva auto-taggar till '%1'"
 #: ../bin/src/ui_transcoderoptionsmp3.h:199
 msgid "Fast"
 msgstr "Snabb"
-
-#: internet/soundcloud/soundcloudservice.cpp:141
-msgid "Favorites"
-msgstr "Favoriter"
 
 #: library/library.cpp:88
 msgid "Favourite tracks"
@@ -2360,7 +2350,7 @@ msgstr "Filtyp"
 msgid "Filename"
 msgstr "Filnamn"
 
-#: ui/mainwindow.cpp:266
+#: ui/mainwindow.cpp:267
 msgid "Files"
 msgstr "Filer"
 
@@ -2473,7 +2463,7 @@ msgstr "Full diskant"
 msgid "Ge&nre"
 msgstr "Ge&nre"
 
-#: ui/settingsdialog.cpp:133
+#: ui/settingsdialog.cpp:132
 msgid "General"
 msgstr "Allmänt"
 
@@ -2532,7 +2522,7 @@ msgstr "Google Drive"
 msgid "Got %1 covers out of %2 (%3 failed)"
 msgstr "Erhöll %1 omslagsbild utav %2 (%3 misslyckades)"
 
-#: ../bin/src/ui_behavioursettingspage.h:335
+#: ../bin/src/ui_behavioursettingspage.h:334
 msgid "Grey out non existent songs in my playlists"
 msgstr "Gråa ut icke-existerande låtar i mina spellistor"
 
@@ -2661,7 +2651,7 @@ msgstr "Ikoner längst upp"
 msgid "Identifying song"
 msgstr "Identifierar låt"
 
-#: ../bin/src/ui_behavioursettingspage.h:337
+#: ../bin/src/ui_behavioursettingspage.h:329
 msgid ""
 "If activated, clicking a selected song in the playlist view will let you "
 "edit the tag value directly"
@@ -2762,15 +2752,15 @@ msgstr "Infoga..."
 msgid "Installed"
 msgstr "Installerad"
 
-#: core/database.cpp:585
+#: core/database.cpp:601
 msgid "Integrity check"
 msgstr "Integritetskontroll"
 
-#: ui/mainwindow.cpp:272
+#: ui/mainwindow.cpp:273
 msgid "Internet"
 msgstr "Internet"
 
-#: ui/settingsdialog.cpp:156
+#: ui/settingsdialog.cpp:155
 msgid "Internet providers"
 msgstr "Internetoperatörer"
 
@@ -2843,7 +2833,7 @@ msgstr "Jamendos favoritspår för veckan"
 msgid "Jamendo database"
 msgstr "Jamendos databas"
 
-#: ../bin/src/ui_behavioursettingspage.h:350
+#: ../bin/src/ui_behavioursettingspage.h:345
 msgid "Jump to previous song right away"
 msgstr "Hoppa till föregående låt direkt"
 
@@ -2863,7 +2853,7 @@ msgstr "Behåll knappar i %1 sekund..."
 msgid "Keep buttons for %1 seconds..."
 msgstr "Behåll knappar i %1 sekunder..."
 
-#: ../bin/src/ui_behavioursettingspage.h:321
+#: ../bin/src/ui_behavioursettingspage.h:316
 msgid "Keep running in the background when the window is closed"
 msgstr "Fortsätt köra i bakgrunden när fönstret är stängt"
 
@@ -2880,7 +2870,7 @@ msgstr "Kattungar"
 msgid "Kuduro"
 msgstr "Kuduro"
 
-#: ../bin/src/ui_behavioursettingspage.h:323
+#: ../bin/src/ui_behavioursettingspage.h:318
 msgid "Language"
 msgstr "Språk"
 
@@ -2954,7 +2944,7 @@ msgstr "Vänster"
 msgid "Length"
 msgstr "Speltid"
 
-#: ui/mainwindow.cpp:251 ui/mainwindow.cpp:263
+#: ui/mainwindow.cpp:252 ui/mainwindow.cpp:264
 #: ../bin/src/ui_seafilesettingspage.h:177
 msgid "Library"
 msgstr "Bibliotek"
@@ -2963,7 +2953,7 @@ msgstr "Bibliotek"
 msgid "Library advanced grouping"
 msgstr "Avancerad bibliotekgruppering"
 
-#: ui/mainwindow.cpp:2683
+#: ui/mainwindow.cpp:2696
 msgid "Library rescan notice"
 msgstr "Notis om omsökning av biblioteket"
 
@@ -3050,7 +3040,6 @@ msgstr "Läser in filer/webbadresser, ersätter aktuell spellista"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:162
 #: ../bin/src/ui_magnatunesettingspage.h:163
-#: ../bin/src/ui_soundcloudsettingspage.h:102
 #: ../bin/src/ui_spotifysettingspage.h:210
 #: ../bin/src/ui_subsonicsettingspage.h:137
 #: ../bin/src/ui_lastfmsettingspage.h:132
@@ -3280,7 +3269,7 @@ msgstr "Monteringspunkter"
 msgid "Move down"
 msgstr "Flytta nedåt"
 
-#: ui/mainwindow.cpp:712 widgets/fileviewlist.cpp:42
+#: ui/mainwindow.cpp:713 widgets/fileviewlist.cpp:42
 msgid "Move to library..."
 msgstr "Flytta till biblioteket..."
 
@@ -3289,7 +3278,7 @@ msgstr "Flytta till biblioteket..."
 msgid "Move up"
 msgstr "Flytta uppåt"
 
-#: transcoder/transcodedialog.cpp:225 ui/mainwindow.cpp:2050
+#: transcoder/transcodedialog.cpp:225 ui/mainwindow.cpp:2063
 msgid "Music"
 msgstr "Musik"
 
@@ -3336,8 +3325,8 @@ msgstr "Aldrig"
 msgid "Never played"
 msgstr "Aldrig spelade"
 
-#: ../bin/src/ui_behavioursettingspage.h:343
-#: ../bin/src/ui_behavioursettingspage.h:363
+#: ../bin/src/ui_behavioursettingspage.h:338
+#: ../bin/src/ui_behavioursettingspage.h:358
 msgid "Never start playing"
 msgstr "Aldrig starta uppspelning"
 
@@ -3347,7 +3336,7 @@ msgstr "Aldrig starta uppspelning"
 msgid "New folder"
 msgstr "Ny mapp"
 
-#: ui/mainwindow.cpp:1867 ../bin/src/ui_mainwindow.h:709
+#: ui/mainwindow.cpp:1880 ../bin/src/ui_mainwindow.h:709
 msgid "New playlist"
 msgstr "Ny spellista"
 
@@ -3414,7 +3403,7 @@ msgstr "Inga korta block"
 msgid "None"
 msgstr "Inga"
 
-#: library/libraryview.cpp:673 ui/mainwindow.cpp:2385 ui/mainwindow.cpp:2564
+#: library/libraryview.cpp:673 ui/mainwindow.cpp:2398 ui/mainwindow.cpp:2577
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Ingen av de valda låtarna lämpar sig för kopiering till en enhet"
 
@@ -3543,7 +3532,6 @@ msgstr "Opacitet"
 #: internet/magnatune/magnatuneservice.cpp:287
 #: internet/somafm/somafmservice.cpp:102
 #: internet/intergalacticfm/intergalacticfmservice.cpp:102
-#: internet/soundcloud/soundcloudservice.cpp:377
 #, qt-format
 msgid "Open %1 in browser"
 msgstr "Öppna %1 i webbläsare"
@@ -3582,7 +3570,7 @@ msgstr "Öppna i Google Drive"
 msgid "Open in new playlist"
 msgstr "Öppna i en ny spellista"
 
-#: ../bin/src/ui_behavioursettingspage.h:358
+#: ../bin/src/ui_behavioursettingspage.h:353
 msgctxt "Refers to behavior settings in Clementine settings page."
 msgid "Open in new playlist"
 msgstr "Öppna i en ny spellista"
@@ -3622,7 +3610,7 @@ msgstr "Opus"
 msgid "Organise Files"
 msgstr "Organisera filer"
 
-#: library/libraryview.cpp:416 ui/mainwindow.cpp:715
+#: library/libraryview.cpp:416 ui/mainwindow.cpp:716
 msgid "Organise files..."
 msgstr "Organisera filer..."
 
@@ -3706,7 +3694,7 @@ msgstr "Party"
 msgid "Password"
 msgstr "Lösenord"
 
-#: core/globalshortcuts.cpp:50 ui/mainwindow.cpp:1160 ui/mainwindow.cpp:1663
+#: core/globalshortcuts.cpp:50 ui/mainwindow.cpp:1169 ui/mainwindow.cpp:1676
 #: ui/qtsystemtrayicon.cpp:189 wiimotedev/wiimotesettingspage.cpp:114
 msgid "Pause"
 msgstr "Gör paus"
@@ -3734,8 +3722,8 @@ msgstr "Pixel"
 msgid "Plain sidebar"
 msgstr "Vanlig sidorad"
 
-#: core/globalshortcuts.cpp:49 ui/mainwindow.cpp:676 ui/mainwindow.cpp:1126
-#: ui/mainwindow.cpp:1145 ui/mainwindow.cpp:1667 ui/qtsystemtrayicon.cpp:177
+#: core/globalshortcuts.cpp:49 ui/mainwindow.cpp:677 ui/mainwindow.cpp:1133
+#: ui/mainwindow.cpp:1154 ui/mainwindow.cpp:1680 ui/qtsystemtrayicon.cpp:177
 #: ui/qtsystemtrayicon.cpp:203 wiimotedev/wiimotesettingspage.cpp:107
 #: ../bin/src/ui_mainwindow.h:675
 msgid "Play"
@@ -3749,16 +3737,16 @@ msgstr "Antal uppspelningar"
 msgid "Play if stopped, pause if playing"
 msgstr "Spela upp om stoppad, gör paus vid uppspelning"
 
-#: ../bin/src/ui_behavioursettingspage.h:344
-#: ../bin/src/ui_behavioursettingspage.h:364
+#: ../bin/src/ui_behavioursettingspage.h:339
+#: ../bin/src/ui_behavioursettingspage.h:359
 msgid "Play if there is nothing already playing"
 msgstr "Spela om ingenting redan spelas"
 
-#: library/libraryview.cpp:396 ui/mainwindow.cpp:1774
+#: library/libraryview.cpp:396 ui/mainwindow.cpp:1787
 msgid "Play next"
 msgstr ""
 
-#: ui/mainwindow.cpp:1772
+#: ui/mainwindow.cpp:1785
 msgid "Play selected tracks next"
 msgstr ""
 
@@ -3797,7 +3785,7 @@ msgstr "Alternativ för spellista"
 msgid "Playlist type"
 msgstr "Spellistetyp"
 
-#: internet/soundcloud/soundcloudservice.cpp:133 ui/mainwindow.cpp:269
+#: ui/mainwindow.cpp:270
 msgid "Playlists"
 msgstr "Spellistor"
 
@@ -3888,7 +3876,7 @@ msgstr "Tryck en tangent"
 msgid "Press a key combination to use for %1..."
 msgstr "Tryck en tangentkombination till att använda för %1"
 
-#: ../bin/src/ui_behavioursettingspage.h:347
+#: ../bin/src/ui_behavioursettingspage.h:342
 msgid "Pressing \"Previous\" in player will..."
 msgstr "Att klicka på \"Föregående spår\" i spelaren kommer att..."
 
@@ -3965,12 +3953,12 @@ msgstr "Förfrågar enhet..."
 msgid "Queue Manager"
 msgstr "Köhanterare"
 
-#: ui/mainwindow.cpp:1767
+#: ui/mainwindow.cpp:1780
 msgid "Queue selected tracks"
 msgstr "Kölägg valda spår"
 
 #: globalsearch/globalsearchview.cpp:464 library/libraryview.cpp:393
-#: ui/mainwindow.cpp:1765
+#: ui/mainwindow.cpp:1778
 msgid "Queue track"
 msgstr "Kölägg spår"
 
@@ -4060,7 +4048,7 @@ msgid "Reggae"
 msgstr "Reggae"
 
 #: playlist/playlistsaveoptionsdialog.cpp:33
-#: ../bin/src/ui_behavioursettingspage.h:380
+#: ../bin/src/ui_behavioursettingspage.h:375
 msgid "Relative"
 msgstr "Relativ"
 
@@ -4068,9 +4056,9 @@ msgstr "Relativ"
 msgid "Remember Wii remote swing"
 msgstr "Kom ihåg Wii-kontrollens rörelse"
 
-#: ../bin/src/ui_behavioursettingspage.h:332
-msgid "Remember from last time"
-msgstr "Kom ihåg från förra gången"
+#: ../bin/src/ui_behavioursettingspage.h:327
+msgid "Remember from &last time"
+msgstr ""
 
 #: ../bin/src/ui_playlistsaveoptionsdialog.h:99
 msgid "Remember my choice"
@@ -4148,7 +4136,7 @@ msgstr "Upprepa spår"
 msgid "Replace current playlist"
 msgstr "Ersätt den aktuella spellistan"
 
-#: ../bin/src/ui_behavioursettingspage.h:357
+#: ../bin/src/ui_behavioursettingspage.h:352
 msgid "Replace the playlist"
 msgstr "Ersätta spellistan"
 
@@ -4180,7 +4168,7 @@ msgstr "Återställ"
 msgid "Reset play counts"
 msgstr "Återställ låtstatistik"
 
-#: ../bin/src/ui_behavioursettingspage.h:351
+#: ../bin/src/ui_behavioursettingspage.h:346
 msgid "Restart song, then jump to previous if pressed again"
 msgstr "Starta om låten, hoppa till föregående låt vid dubbelklickning"
 
@@ -4193,7 +4181,7 @@ msgstr "Starta om spåret, eller spela föregående spår om inom 8 sekunder sed
 msgid "Restrict to ASCII characters"
 msgstr "Begränsa till ASCII-tecken"
 
-#: ../bin/src/ui_behavioursettingspage.h:333
+#: ../bin/src/ui_behavioursettingspage.h:332
 msgid "Resume playback on start"
 msgstr "Fortsätt uppspelning vid start"
 
@@ -4335,7 +4323,7 @@ msgstr "Poäng"
 msgid "Scrobble tracks that I listen to"
 msgstr "Skrobbla låtar som jag lyssnar på"
 
-#: ../bin/src/ui_behavioursettingspage.h:320
+#: ../bin/src/ui_behavioursettingspage.h:315
 msgid "Scroll over icon to change track"
 msgstr "Skrolla över ikonen för att byta spår"
 
@@ -4349,7 +4337,7 @@ msgstr "Seafile"
 msgid "Search"
 msgstr "Sök"
 
-#: ui/mainwindow.cpp:260 ../bin/src/ui_globalsearchsettingspage.h:141
+#: ui/mainwindow.cpp:261 ../bin/src/ui_globalsearchsettingspage.h:141
 msgctxt "Global search settings dialog title."
 msgid "Search"
 msgstr "Sök"
@@ -4374,7 +4362,7 @@ msgstr "Sök Subsonic"
 msgid "Search automatically"
 msgstr "Sök automatiskt"
 
-#: ui/mainwindow.cpp:696
+#: ui/mainwindow.cpp:697
 msgid "Search for album"
 msgstr "Sök efter album"
 
@@ -4387,7 +4375,7 @@ msgstr "Sök efter albumomslag..."
 msgid "Search for anything"
 msgstr "Sök efter vad som helst"
 
-#: ui/mainwindow.cpp:693
+#: ui/mainwindow.cpp:694
 msgid "Search for artist"
 msgstr "Sök efter artist"
 
@@ -4411,7 +4399,6 @@ msgstr "Sökläge"
 msgid "Search options"
 msgstr "Sökalternativ"
 
-#: internet/soundcloud/soundcloudservice.cpp:119
 #: internet/spotify/spotifyservice.cpp:400
 msgid "Search results"
 msgstr "Sökresultat"
@@ -4445,7 +4432,7 @@ msgstr "Hoppa till en relativ position i spåret som spelas för närvarande"
 msgid "Seek the currently playing track to an absolute position"
 msgstr "Hoppa till en absolut position i spåret som spelas för närvarande"
 
-#: ../bin/src/ui_behavioursettingspage.h:373
+#: ../bin/src/ui_behavioursettingspage.h:368
 msgid "Seeking using a keyboard shortcut or mouse wheel"
 msgstr "Tidshopp vid sökning med tangentbordsgenväg eller mushjul"
 
@@ -4505,7 +4492,7 @@ msgstr "Serverdetaljer"
 msgid "Service offline"
 msgstr "Tjänst inte tillgänglig"
 
-#: ui/mainwindow.cpp:1812
+#: ui/mainwindow.cpp:1825
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr "Ställ in %1 till \"%2\"..."
@@ -4581,7 +4568,7 @@ msgstr "Visa en skön avisering"
 msgid "Show above status bar"
 msgstr "Visa ovanför statusraden"
 
-#: ui/mainwindow.cpp:643
+#: ui/mainwindow.cpp:644
 msgid "Show all songs"
 msgstr "Visa alla låtar"
 
@@ -4601,12 +4588,12 @@ msgstr "Visa avdelare"
 msgid "Show fullsize..."
 msgstr "Visa full storlek..."
 
-#: library/libraryview.cpp:433 ui/mainwindow.cpp:725
+#: library/libraryview.cpp:433 ui/mainwindow.cpp:726
 #: widgets/fileviewlist.cpp:53
 msgid "Show in file browser..."
 msgstr "Visa i filhanterare..."
 
-#: ui/mainwindow.cpp:727
+#: ui/mainwindow.cpp:728
 msgid "Show in library..."
 msgstr "Visa i biblioteket"
 
@@ -4618,11 +4605,11 @@ msgstr "Visa i diverse artister"
 msgid "Show moodbar"
 msgstr "Visa stämningsdiagram"
 
-#: ui/mainwindow.cpp:645
+#: ui/mainwindow.cpp:646
 msgid "Show only duplicates"
 msgstr "Visa endast dubbletter"
 
-#: ui/mainwindow.cpp:647
+#: ui/mainwindow.cpp:648
 msgid "Show only untagged"
 msgstr "Visa otaggade endast"
 
@@ -4646,7 +4633,7 @@ msgstr "Visa knappen \"Älska\""
 msgid "Show the scrobble button in the main window"
 msgstr "Visa skrobbelknappen i huvudfönstret"
 
-#: ../bin/src/ui_behavioursettingspage.h:319
+#: ../bin/src/ui_behavioursettingspage.h:314
 msgid "Show tray icon"
 msgstr "Visa aviseringsikon"
 
@@ -4714,11 +4701,11 @@ msgstr "Antal överhoppningar"
 msgid "Skip forwards in playlist"
 msgstr "Gå framåt i spellista"
 
-#: ui/mainwindow.cpp:1783
+#: ui/mainwindow.cpp:1796
 msgid "Skip selected tracks"
 msgstr "Hoppa över valda spår"
 
-#: ui/mainwindow.cpp:1781
+#: ui/mainwindow.cpp:1794
 msgid "Skip track"
 msgstr "Hoppa över spår"
 
@@ -4750,7 +4737,7 @@ msgstr "Soft Rock"
 msgid "Song Information"
 msgstr "Låtinformation"
 
-#: ui/mainwindow.cpp:280
+#: ui/mainwindow.cpp:281
 msgid "Song info"
 msgstr "Låtinfo"
 
@@ -4781,10 +4768,6 @@ msgstr "Ordna låtar efter"
 #: ../bin/src/ui_querysortpage.h:137
 msgid "Sorting"
 msgstr "Sortering"
-
-#: ../bin/src/ui_soundcloudsettingspage.h:100
-msgid "SoundCloud"
-msgstr "SoundCloud"
 
 #: playlist/playlist.cpp:1404
 msgid "Source"
@@ -4844,7 +4827,6 @@ msgstr "Starta spellistan som spelas för närvarande"
 msgid "Start transcoding"
 msgstr "Starta omkodning"
 
-#: internet/soundcloud/soundcloudservice.cpp:121
 #: internet/spotify/spotifyservice.cpp:402
 msgid ""
 "Start typing something on the search box above to fill this search results "
@@ -4877,7 +4859,7 @@ msgstr "Stoppa efter varje låt"
 msgid "Stop after every track"
 msgstr "Stoppa efter varje låt"
 
-#: ui/mainwindow.cpp:680 ../bin/src/ui_mainwindow.h:679
+#: ui/mainwindow.cpp:681 ../bin/src/ui_mainwindow.h:679
 msgid "Stop after this track"
 msgstr "Stoppa efter detta spår"
 
@@ -4889,7 +4871,7 @@ msgstr "Stoppa uppspelning"
 msgid "Stop playback after current track"
 msgstr "Stoppa uppspelning efter aktuellt spår"
 
-#: ../bin/src/ui_behavioursettingspage.h:334
+#: ../bin/src/ui_behavioursettingspage.h:333
 msgid "Stop playback if song fails to play"
 msgstr ""
 
@@ -5045,7 +5027,7 @@ msgid ""
 "license key. Visit subsonic.org for details."
 msgstr "Testperioden för Subsonics server är över. Var vänlig och donera för att få en licensnyckel. Besök subsonic.org  för mer detaljer."
 
-#: ui/mainwindow.cpp:2674
+#: ui/mainwindow.cpp:2687
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -5087,7 +5069,7 @@ msgid ""
 "continue?"
 msgstr "Filerna kommer att tas bort från enheten, är du säker på att du vill fortsätta?"
 
-#: library/libraryview.cpp:679 ui/mainwindow.cpp:2433 widgets/fileview.cpp:189
+#: library/libraryview.cpp:679 ui/mainwindow.cpp:2446 widgets/fileview.cpp:189
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -5167,7 +5149,7 @@ msgstr "Denna ström är endast för betalkunder"
 msgid "This type of device is not supported: %1"
 msgstr "Denna typ av enhet är inte stödd: %1"
 
-#: ../bin/src/ui_behavioursettingspage.h:374
+#: ../bin/src/ui_behavioursettingspage.h:369
 msgid "Time step"
 msgstr "Tidssteg"
 
@@ -5190,7 +5172,7 @@ msgstr "Växla Pretty OSD"
 msgid "Toggle fullscreen"
 msgstr "Växla fullskärm"
 
-#: ui/mainwindow.cpp:1769
+#: ui/mainwindow.cpp:1782
 msgid "Toggle queue status"
 msgstr "Växla köstatus"
 
@@ -5237,10 +5219,6 @@ msgstr "Spå&r"
 #: playlist/playlist.cpp:1353 ui/organisedialog.cpp:72
 #: ../bin/src/ui_trackselectiondialog.h:212 ../bin/src/ui_ripcddialog.h:304
 msgid "Track"
-msgstr "Spår"
-
-#: internet/soundcloud/soundcloudservice.cpp:136
-msgid "Tracks"
 msgstr "Spår"
 
 #: ../bin/src/ui_transcodedialog.h:213 ../bin/src/ui_mainwindow.h:706
@@ -5328,11 +5306,11 @@ msgstr "Okänt fel"
 msgid "Unset cover"
 msgstr "Ta bort omslag"
 
-#: ui/mainwindow.cpp:1779
+#: ui/mainwindow.cpp:1792
 msgid "Unskip selected tracks"
 msgstr "Hoppa inte över valda spår"
 
-#: ui/mainwindow.cpp:1777
+#: ui/mainwindow.cpp:1790
 msgid "Unskip track"
 msgstr "Hoppa inte över valt spår"
 
@@ -5443,7 +5421,7 @@ msgstr "Använd systemikoner"
 msgid "Use temporal noise shaping"
 msgstr "Använd tidsbaserad brusformning"
 
-#: ../bin/src/ui_behavioursettingspage.h:326
+#: ../bin/src/ui_behavioursettingspage.h:321
 msgid "Use the system default"
 msgstr "Använd systemets standard"
 
@@ -5463,7 +5441,7 @@ msgstr "Använd ljudnormalisering"
 msgid "Used"
 msgstr "Använd"
 
-#: ui/settingsdialog.cpp:147
+#: ui/settingsdialog.cpp:146
 msgid "User interface"
 msgstr "Användargränssnitt"
 
@@ -5475,7 +5453,7 @@ msgstr "Användargränssnitt"
 msgid "Username"
 msgstr "Användarnamn"
 
-#: ../bin/src/ui_behavioursettingspage.h:340
+#: ../bin/src/ui_behavioursettingspage.h:335
 msgid "Using the menu to add a song will..."
 msgstr "Att använda menyn för att lägga till en låt kommer att..."
 
@@ -5548,7 +5526,7 @@ msgstr "WAV"
 msgid "WMA"
 msgstr "WMA"
 
-#: playlist/playlisttabbar.cpp:192 ../bin/src/ui_behavioursettingspage.h:322
+#: playlist/playlisttabbar.cpp:192 ../bin/src/ui_behavioursettingspage.h:317
 msgid "Warn me when closing a playlist tab"
 msgstr "Varna mig när jag stänger en spellistsflik"
 
@@ -5568,7 +5546,7 @@ msgstr "Webbsida"
 msgid "Weeks"
 msgstr "Veckor"
 
-#: ../bin/src/ui_behavioursettingspage.h:329
+#: ../bin/src/ui_behavioursettingspage.h:324
 msgid "When Clementine starts"
 msgstr "När Clementine startar"
 
@@ -5578,7 +5556,7 @@ msgid ""
 "If there are no matches then it will use the largest image in the directory."
 msgstr "När Clementine letar efter albumomslag söker den först efter bildfiler som innehåller något av dessa ord.\nOm det inte finns några matchande så kommer den att använda den största bilden i katalogen."
 
-#: ../bin/src/ui_behavioursettingspage.h:377
+#: ../bin/src/ui_behavioursettingspage.h:372
 msgid "When saving a playlist, file paths should be"
 msgstr "När en spellista sparas ska sökvägen vara"
 
@@ -5654,7 +5632,7 @@ msgid ""
 "well?"
 msgstr "Vill du flytta på 'andra låtar' i det här albumet till Blandade Artister också?"
 
-#: ui/mainwindow.cpp:2681
+#: ui/mainwindow.cpp:2694
 msgid "Would you like to run a full rescan right now?"
 msgstr "Vill du köra en fullständig omsökning nu?"
 
@@ -5662,7 +5640,7 @@ msgstr "Vill du köra en fullständig omsökning nu?"
 msgid "Write all songs statistics into songs' files"
 msgstr "Skriv all låtstatistik till låtfilerna"
 
-#: ../bin/src/ui_behavioursettingspage.h:382
+#: ../bin/src/ui_behavioursettingspage.h:377
 msgid "Write metadata"
 msgstr "Skriv metadata"
 
@@ -5748,13 +5726,6 @@ msgstr "Du har inget Spotify Premium konto"
 msgid "You do not have an active subscription"
 msgstr "Du har inte någon aktiv prenumeration"
 
-#: ../bin/src/ui_soundcloudsettingspage.h:101
-msgid ""
-"You don't need to be logged in to search and to listen to music on "
-"SoundCloud. However, you need to login to access your playlists and your "
-"stream."
-msgstr "Du behöver inte vara inloggad för att söka och lyssna till musik på SoundCloud. Men om du vill komma åt dina spellistor och strömmar krävs inloggning."
-
 #: internet/spotify/spotifyservice.cpp:205
 msgid ""
 "You have been logged out of Spotify, please re-enter your password in the "
@@ -5776,7 +5747,7 @@ msgid ""
 "shortcuts in Clementine."
 msgstr "Du behöver starta Systeminställningar och tillåta Clementine att \"<span style=\"font-style:italic\">kontrollera din dator</span>\" för att använda globala snabbtangenter i Clementine."
 
-#: ../bin/src/ui_behavioursettingspage.h:328
+#: ../bin/src/ui_behavioursettingspage.h:323
 msgid "You will need to restart Clementine if you change the language."
 msgstr "Du måste starta om Clementine om du ändrar språket."
 

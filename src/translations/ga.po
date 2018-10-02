@@ -8,8 +8,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2018-09-19 12:16+0000\n"
-"Last-Translator: Coinneach Donáll Mac Ocslaigh <coinneachoxley@gmail.com>\n"
+"PO-Revision-Date: 2018-10-01 17:06+0000\n"
+"Last-Translator: hatstand <john.maguire@gmail.com>\n"
 "Language-Team: Irish (http://www.transifex.com/davidsansome/clementine/language/ga/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -51,7 +51,7 @@ msgstr " ms"
 msgid " pt"
 msgstr " pt"
 
-#: ../bin/src/ui_behavioursettingspage.h:375
+#: ../bin/src/ui_behavioursettingspage.h:370
 msgid " s"
 msgstr "s"
 
@@ -393,6 +393,10 @@ msgid ""
 "A song will be included in the playlist if it matches these conditions."
 msgstr ""
 
+#: ../bin/src/ui_behavioursettingspage.h:373
+msgid "A&utomatic"
+msgstr ""
+
 #: smartplaylists/searchterm.cpp:396
 msgid "A-Z"
 msgstr "A-Z"
@@ -439,7 +443,7 @@ msgid "About Qt..."
 msgstr "Maidir le Qt..."
 
 #: playlist/playlistsaveoptionsdialog.cpp:34
-#: ../bin/src/ui_behavioursettingspage.h:379
+#: ../bin/src/ui_behavioursettingspage.h:374
 msgid "Absolute"
 msgstr ""
 
@@ -464,10 +468,6 @@ msgstr ""
 
 #: wiimotedev/wiimotesettingspage.cpp:103
 msgid "Activate/Deactivate Wii Remote"
-msgstr ""
-
-#: internet/soundcloud/soundcloudservice.cpp:128
-msgid "Activities stream"
 msgstr ""
 
 #: internet/podcasts/addpodcastdialog.cpp:63
@@ -498,7 +498,7 @@ msgstr "Cuir sruth eile leis..."
 msgid "Add directory..."
 msgstr "Cuir comhadlann leis..."
 
-#: ui/mainwindow.cpp:2049
+#: ui/mainwindow.cpp:2062
 msgid "Add file"
 msgstr "Cuir comhad leis"
 
@@ -518,7 +518,7 @@ msgstr "Cuir comhad leis..."
 msgid "Add files to transcode"
 msgstr ""
 
-#: transcoder/transcodedialog.cpp:306 ui/mainwindow.cpp:2076
+#: transcoder/transcodedialog.cpp:306 ui/mainwindow.cpp:2089
 #: ripper/ripcddialog.cpp:201
 msgid "Add folder"
 msgstr "Cuir fillteán leis"
@@ -623,7 +623,7 @@ msgstr ""
 msgid "Add to Spotify starred"
 msgstr ""
 
-#: ui/mainwindow.cpp:1850
+#: ui/mainwindow.cpp:1863
 msgid "Add to another playlist"
 msgstr ""
 
@@ -631,8 +631,8 @@ msgstr ""
 msgid "Add to playlist"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:359
-#: ../bin/src/ui_behavioursettingspage.h:371
+#: ../bin/src/ui_behavioursettingspage.h:354
+#: ../bin/src/ui_behavioursettingspage.h:366
 msgid "Add to the queue"
 msgstr "Cuir leis an scuaine"
 
@@ -713,7 +713,7 @@ msgstr "Albaim gan clúdaigh"
 msgid "All"
 msgstr ""
 
-#: ui/mainwindow.cpp:158
+#: ui/mainwindow.cpp:159
 msgid "All Files (*)"
 msgstr "Gach Comhad (*)"
 
@@ -763,16 +763,16 @@ msgstr ""
 msgid "Alongside the originals"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:331
-msgid "Always hide the main window"
-msgstr "Folaigh an phríomhfhuinneog i gcónaí"
+#: ../bin/src/ui_behavioursettingspage.h:326
+msgid "Alwa&ys hide the main window"
+msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:330
-msgid "Always show the main window"
-msgstr "Taispeáin an phríomhfhuinneog i gcónaí"
+#: ../bin/src/ui_behavioursettingspage.h:325
+msgid "Always show &the main window"
+msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:345
-#: ../bin/src/ui_behavioursettingspage.h:365
+#: ../bin/src/ui_behavioursettingspage.h:340
+#: ../bin/src/ui_behavioursettingspage.h:360
 msgid "Always start playing"
 msgstr "Tosaigh ag seinm i gcónaí"
 
@@ -819,7 +819,7 @@ msgstr ""
 msgid "Append to current playlist"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:356
+#: ../bin/src/ui_behavioursettingspage.h:351
 msgid "Append to the playlist"
 msgstr ""
 
@@ -851,7 +851,7 @@ msgstr ""
 msgid "Artist"
 msgstr "Ealaíontóir"
 
-#: ui/mainwindow.cpp:283
+#: ui/mainwindow.cpp:284
 msgid "Artist info"
 msgstr ""
 
@@ -859,8 +859,8 @@ msgstr ""
 msgid "Artist's initial"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:381
-msgid "Ask when saving"
+#: ../bin/src/ui_behavioursettingspage.h:376
+msgid "As&k when saving"
 msgstr ""
 
 #: ../bin/src/ui_transcodedialog.h:225
@@ -894,7 +894,6 @@ msgid "Auto"
 msgstr "Uathoibríoch"
 
 #: playlist/playlistsaveoptionsdialog.cpp:32
-#: ../bin/src/ui_behavioursettingspage.h:378
 msgid "Automatic"
 msgstr ""
 
@@ -943,7 +942,7 @@ msgstr "Íomhá an chúlra"
 msgid "Background opacity"
 msgstr "Teimhneacht an chúlra"
 
-#: core/database.cpp:648
+#: core/database.cpp:664
 msgid "Backing up database"
 msgstr ""
 
@@ -967,7 +966,7 @@ msgstr ""
 msgid "Basic audio type"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:318
+#: ../bin/src/ui_behavioursettingspage.h:313
 msgid "Behavior"
 msgstr "Iompar"
 
@@ -1085,7 +1084,7 @@ msgstr "Athraigh an t-aicearra"
 msgid "Change shuffle mode"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:370
+#: ../bin/src/ui_behavioursettingspage.h:365
 msgid "Change the currently playing song"
 msgstr ""
 
@@ -1115,7 +1114,7 @@ msgstr "Lorg cláir nua"
 msgid "Check for updates"
 msgstr ""
 
-#: ui/mainwindow.cpp:820
+#: ui/mainwindow.cpp:823
 msgid "Check for updates..."
 msgstr "Lorg nuashonruithe..."
 
@@ -1257,7 +1256,6 @@ msgstr ""
 msgid "Click to toggle between remaining time and total time"
 msgstr ""
 
-#: ../bin/src/ui_soundcloudsettingspage.h:103
 #: ../bin/src/ui_lastfmsettingspage.h:133
 #: ../bin/src/ui_googledrivesettingspage.h:102
 #: ../bin/src/ui_dropboxsettingspage.h:102
@@ -1336,10 +1334,6 @@ msgstr "Cumraigh Magnatune..."
 msgid "Configure Shortcuts"
 msgstr "Cumraigh Aicearraí"
 
-#: internet/soundcloud/soundcloudservice.cpp:381
-msgid "Configure SoundCloud..."
-msgstr ""
-
 #: internet/spotify/spotifyservice.cpp:927
 msgid "Configure Spotify..."
 msgstr "Cumraigh Spotify..."
@@ -1352,7 +1346,7 @@ msgstr ""
 msgid "Configure global search..."
 msgstr ""
 
-#: ui/mainwindow.cpp:659
+#: ui/mainwindow.cpp:660
 msgid "Configure library..."
 msgstr "Cumraigh leabharlann..."
 
@@ -1424,11 +1418,11 @@ msgid "Copy to clipboard"
 msgstr "Macasamhlaigh go dtí an ngearrthaisce"
 
 #: library/libraryview.cpp:419 internet/podcasts/podcastservice.cpp:438
-#: ui/mainwindow.cpp:719 widgets/fileviewlist.cpp:44
+#: ui/mainwindow.cpp:720 widgets/fileviewlist.cpp:44
 msgid "Copy to device..."
 msgstr "Macasamhlaigh go gléas..."
 
-#: devices/deviceview.cpp:228 ui/mainwindow.cpp:709
+#: devices/deviceview.cpp:228 ui/mainwindow.cpp:710
 #: widgets/fileviewlist.cpp:40
 msgid "Copy to library..."
 msgstr "Macasamhlaigh go leabharlann..."
@@ -1572,7 +1566,7 @@ msgstr ""
 msgid "Dance"
 msgstr "Damhsa"
 
-#: core/database.cpp:601
+#: core/database.cpp:617
 msgid ""
 "Database corruption detected. Please read https://github.com/clementine-"
 "player/Clementine/wiki/Database-Corruption for instructions on how to "
@@ -1634,7 +1628,7 @@ msgid "Delete downloaded data"
 msgstr "Scrios sonraí íosluchtaithe"
 
 #: devices/deviceview.cpp:408 library/libraryview.cpp:678
-#: ui/mainwindow.cpp:2432 widgets/fileview.cpp:188
+#: ui/mainwindow.cpp:2445 widgets/fileview.cpp:188
 msgid "Delete files"
 msgstr "Scrios comhaid"
 
@@ -1642,7 +1636,7 @@ msgstr "Scrios comhaid"
 msgid "Delete from device..."
 msgstr "Scrios ón ngléas..."
 
-#: library/libraryview.cpp:422 ui/mainwindow.cpp:722
+#: library/libraryview.cpp:422 ui/mainwindow.cpp:723
 #: widgets/fileviewlist.cpp:47
 msgid "Delete from disk..."
 msgstr "Scrios ón ndiosca..."
@@ -1675,11 +1669,11 @@ msgstr "Ag scriosadh comhaid"
 msgid "Depth"
 msgstr ""
 
-#: ui/mainwindow.cpp:1763
+#: ui/mainwindow.cpp:1776
 msgid "Dequeue selected tracks"
 msgstr ""
 
-#: ui/mainwindow.cpp:1761
+#: ui/mainwindow.cpp:1774
 msgid "Dequeue track"
 msgstr "Bain an rian as an scuaine"
 
@@ -1708,7 +1702,7 @@ msgstr "Ainm an ghléis"
 msgid "Device properties..."
 msgstr "Airíonna an ghléis..."
 
-#: ui/mainwindow.cpp:276
+#: ui/mainwindow.cpp:277
 msgid "Devices"
 msgstr "Gléasanna"
 
@@ -1838,11 +1832,11 @@ msgstr ""
 msgid "Double click to open"
 msgstr "Brúigh faoi dhó chun é a oscailt"
 
-#: ../bin/src/ui_behavioursettingspage.h:367
+#: ../bin/src/ui_behavioursettingspage.h:362
 msgid "Double clicking a song in the playlist will..."
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:353
+#: ../bin/src/ui_behavioursettingspage.h:348
 msgid "Double clicking a song will..."
 msgstr ""
 
@@ -1951,7 +1945,7 @@ msgstr ""
 msgid "Edit smart playlist..."
 msgstr ""
 
-#: ui/mainwindow.cpp:1813
+#: ui/mainwindow.cpp:1826
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr ""
@@ -1997,7 +1991,7 @@ msgstr "Cumasaigh cothromóir"
 msgid "Enable shortcuts only when Clementine is focused"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:339
+#: ../bin/src/ui_behavioursettingspage.h:331
 msgid "Enable song metadata inline edition with click"
 msgstr ""
 
@@ -2086,8 +2080,8 @@ msgid "Equivalent to --log-levels *:3"
 msgstr ""
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:246
-#: library/libraryview.cpp:672 ui/mainwindow.cpp:2105 ui/mainwindow.cpp:2384
-#: ui/mainwindow.cpp:2563
+#: library/libraryview.cpp:672 ui/mainwindow.cpp:2118 ui/mainwindow.cpp:2397
+#: ui/mainwindow.cpp:2576
 msgid "Error"
 msgstr "Botún"
 
@@ -2233,7 +2227,7 @@ msgstr ""
 msgid "Fading duration"
 msgstr ""
 
-#: ui/mainwindow.cpp:2106
+#: ui/mainwindow.cpp:2119
 msgid "Failed reading CD drive"
 msgstr ""
 
@@ -2267,10 +2261,6 @@ msgstr ""
 #: ../bin/src/ui_transcoderoptionsmp3.h:199
 msgid "Fast"
 msgstr "Gasta"
-
-#: internet/soundcloud/soundcloudservice.cpp:141
-msgid "Favorites"
-msgstr ""
 
 #: library/library.cpp:88
 msgid "Favourite tracks"
@@ -2338,7 +2328,7 @@ msgstr "Cineál comhad"
 msgid "Filename"
 msgstr "Comhadainm"
 
-#: ui/mainwindow.cpp:266
+#: ui/mainwindow.cpp:267
 msgid "Files"
 msgstr "Comhaid"
 
@@ -2451,7 +2441,7 @@ msgstr ""
 msgid "Ge&nre"
 msgstr ""
 
-#: ui/settingsdialog.cpp:133
+#: ui/settingsdialog.cpp:132
 msgid "General"
 msgstr "Coiteann"
 
@@ -2510,7 +2500,7 @@ msgstr ""
 msgid "Got %1 covers out of %2 (%3 failed)"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:335
+#: ../bin/src/ui_behavioursettingspage.h:334
 msgid "Grey out non existent songs in my playlists"
 msgstr ""
 
@@ -2639,7 +2629,7 @@ msgstr "Deilbhíní ar barr"
 msgid "Identifying song"
 msgstr "Ag aithint an t-amhrán"
 
-#: ../bin/src/ui_behavioursettingspage.h:337
+#: ../bin/src/ui_behavioursettingspage.h:329
 msgid ""
 "If activated, clicking a selected song in the playlist view will let you "
 "edit the tag value directly"
@@ -2740,15 +2730,15 @@ msgstr "Ionsáigh..."
 msgid "Installed"
 msgstr "Suiteáilte"
 
-#: core/database.cpp:585
+#: core/database.cpp:601
 msgid "Integrity check"
 msgstr "Dearbháil sláine"
 
-#: ui/mainwindow.cpp:272
+#: ui/mainwindow.cpp:273
 msgid "Internet"
 msgstr "Idirlíon"
 
-#: ui/settingsdialog.cpp:156
+#: ui/settingsdialog.cpp:155
 msgid "Internet providers"
 msgstr "Soláthraithe idirlín"
 
@@ -2821,7 +2811,7 @@ msgstr ""
 msgid "Jamendo database"
 msgstr "Bunachar sonraí Jamendo"
 
-#: ../bin/src/ui_behavioursettingspage.h:350
+#: ../bin/src/ui_behavioursettingspage.h:345
 msgid "Jump to previous song right away"
 msgstr ""
 
@@ -2841,7 +2831,7 @@ msgstr ""
 msgid "Keep buttons for %1 seconds..."
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:321
+#: ../bin/src/ui_behavioursettingspage.h:316
 msgid "Keep running in the background when the window is closed"
 msgstr ""
 
@@ -2858,7 +2848,7 @@ msgstr ""
 msgid "Kuduro"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:323
+#: ../bin/src/ui_behavioursettingspage.h:318
 msgid "Language"
 msgstr "Teanga"
 
@@ -2932,7 +2922,7 @@ msgstr ""
 msgid "Length"
 msgstr "Aga"
 
-#: ui/mainwindow.cpp:251 ui/mainwindow.cpp:263
+#: ui/mainwindow.cpp:252 ui/mainwindow.cpp:264
 #: ../bin/src/ui_seafilesettingspage.h:177
 msgid "Library"
 msgstr "Leabharlann"
@@ -2941,7 +2931,7 @@ msgstr "Leabharlann"
 msgid "Library advanced grouping"
 msgstr ""
 
-#: ui/mainwindow.cpp:2683
+#: ui/mainwindow.cpp:2696
 msgid "Library rescan notice"
 msgstr ""
 
@@ -3028,7 +3018,6 @@ msgstr ""
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:162
 #: ../bin/src/ui_magnatunesettingspage.h:163
-#: ../bin/src/ui_soundcloudsettingspage.h:102
 #: ../bin/src/ui_spotifysettingspage.h:210
 #: ../bin/src/ui_subsonicsettingspage.h:137
 #: ../bin/src/ui_lastfmsettingspage.h:132
@@ -3258,7 +3247,7 @@ msgstr ""
 msgid "Move down"
 msgstr "Bog síos"
 
-#: ui/mainwindow.cpp:712 widgets/fileviewlist.cpp:42
+#: ui/mainwindow.cpp:713 widgets/fileviewlist.cpp:42
 msgid "Move to library..."
 msgstr "Bog go dtí an leabharlann..."
 
@@ -3267,7 +3256,7 @@ msgstr "Bog go dtí an leabharlann..."
 msgid "Move up"
 msgstr "Bog suas"
 
-#: transcoder/transcodedialog.cpp:225 ui/mainwindow.cpp:2050
+#: transcoder/transcodedialog.cpp:225 ui/mainwindow.cpp:2063
 msgid "Music"
 msgstr "Ceol"
 
@@ -3314,8 +3303,8 @@ msgstr "Choíche"
 msgid "Never played"
 msgstr "Nár seinneadh riamh"
 
-#: ../bin/src/ui_behavioursettingspage.h:343
-#: ../bin/src/ui_behavioursettingspage.h:363
+#: ../bin/src/ui_behavioursettingspage.h:338
+#: ../bin/src/ui_behavioursettingspage.h:358
 msgid "Never start playing"
 msgstr "Ná tosaigh ag seinm riamh"
 
@@ -3325,7 +3314,7 @@ msgstr "Ná tosaigh ag seinm riamh"
 msgid "New folder"
 msgstr ""
 
-#: ui/mainwindow.cpp:1867 ../bin/src/ui_mainwindow.h:709
+#: ui/mainwindow.cpp:1880 ../bin/src/ui_mainwindow.h:709
 msgid "New playlist"
 msgstr ""
 
@@ -3392,7 +3381,7 @@ msgstr ""
 msgid "None"
 msgstr "Dada"
 
-#: library/libraryview.cpp:673 ui/mainwindow.cpp:2385 ui/mainwindow.cpp:2564
+#: library/libraryview.cpp:673 ui/mainwindow.cpp:2398 ui/mainwindow.cpp:2577
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr ""
 
@@ -3521,7 +3510,6 @@ msgstr ""
 #: internet/magnatune/magnatuneservice.cpp:287
 #: internet/somafm/somafmservice.cpp:102
 #: internet/intergalacticfm/intergalacticfmservice.cpp:102
-#: internet/soundcloud/soundcloudservice.cpp:377
 #, qt-format
 msgid "Open %1 in browser"
 msgstr "Oscail %1 i líonléitheoir"
@@ -3560,7 +3548,7 @@ msgstr ""
 msgid "Open in new playlist"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:358
+#: ../bin/src/ui_behavioursettingspage.h:353
 msgctxt "Refers to behavior settings in Clementine settings page."
 msgid "Open in new playlist"
 msgstr ""
@@ -3600,7 +3588,7 @@ msgstr ""
 msgid "Organise Files"
 msgstr "Eagraigh comhaid"
 
-#: library/libraryview.cpp:416 ui/mainwindow.cpp:715
+#: library/libraryview.cpp:416 ui/mainwindow.cpp:716
 msgid "Organise files..."
 msgstr "Eagraigh comhaid..."
 
@@ -3684,7 +3672,7 @@ msgstr "Cóisir"
 msgid "Password"
 msgstr "Focal faire"
 
-#: core/globalshortcuts.cpp:50 ui/mainwindow.cpp:1160 ui/mainwindow.cpp:1663
+#: core/globalshortcuts.cpp:50 ui/mainwindow.cpp:1169 ui/mainwindow.cpp:1676
 #: ui/qtsystemtrayicon.cpp:189 wiimotedev/wiimotesettingspage.cpp:114
 msgid "Pause"
 msgstr "Cuir ar sos"
@@ -3712,8 +3700,8 @@ msgstr ""
 msgid "Plain sidebar"
 msgstr ""
 
-#: core/globalshortcuts.cpp:49 ui/mainwindow.cpp:676 ui/mainwindow.cpp:1126
-#: ui/mainwindow.cpp:1145 ui/mainwindow.cpp:1667 ui/qtsystemtrayicon.cpp:177
+#: core/globalshortcuts.cpp:49 ui/mainwindow.cpp:677 ui/mainwindow.cpp:1133
+#: ui/mainwindow.cpp:1154 ui/mainwindow.cpp:1680 ui/qtsystemtrayicon.cpp:177
 #: ui/qtsystemtrayicon.cpp:203 wiimotedev/wiimotesettingspage.cpp:107
 #: ../bin/src/ui_mainwindow.h:675
 msgid "Play"
@@ -3727,16 +3715,16 @@ msgstr ""
 msgid "Play if stopped, pause if playing"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:344
-#: ../bin/src/ui_behavioursettingspage.h:364
+#: ../bin/src/ui_behavioursettingspage.h:339
+#: ../bin/src/ui_behavioursettingspage.h:359
 msgid "Play if there is nothing already playing"
 msgstr "Seinn mura bhfuil aon rud eile ag seinm cheana féin"
 
-#: library/libraryview.cpp:396 ui/mainwindow.cpp:1774
+#: library/libraryview.cpp:396 ui/mainwindow.cpp:1787
 msgid "Play next"
 msgstr ""
 
-#: ui/mainwindow.cpp:1772
+#: ui/mainwindow.cpp:1785
 msgid "Play selected tracks next"
 msgstr ""
 
@@ -3775,7 +3763,7 @@ msgstr ""
 msgid "Playlist type"
 msgstr ""
 
-#: internet/soundcloud/soundcloudservice.cpp:133 ui/mainwindow.cpp:269
+#: ui/mainwindow.cpp:270
 msgid "Playlists"
 msgstr ""
 
@@ -3866,7 +3854,7 @@ msgstr "Brúigh cnaipe"
 msgid "Press a key combination to use for %1..."
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:347
+#: ../bin/src/ui_behavioursettingspage.h:342
 msgid "Pressing \"Previous\" in player will..."
 msgstr ""
 
@@ -3943,12 +3931,12 @@ msgstr ""
 msgid "Queue Manager"
 msgstr "Bainisteoir na Scuaine"
 
-#: ui/mainwindow.cpp:1767
+#: ui/mainwindow.cpp:1780
 msgid "Queue selected tracks"
 msgstr "Cuir na rianta roghnaithe i scuaine"
 
 #: globalsearch/globalsearchview.cpp:464 library/libraryview.cpp:393
-#: ui/mainwindow.cpp:1765
+#: ui/mainwindow.cpp:1778
 msgid "Queue track"
 msgstr "Cuir an rian i scuaine"
 
@@ -4038,7 +4026,7 @@ msgid "Reggae"
 msgstr "Reggae"
 
 #: playlist/playlistsaveoptionsdialog.cpp:33
-#: ../bin/src/ui_behavioursettingspage.h:380
+#: ../bin/src/ui_behavioursettingspage.h:375
 msgid "Relative"
 msgstr ""
 
@@ -4046,8 +4034,8 @@ msgstr ""
 msgid "Remember Wii remote swing"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:332
-msgid "Remember from last time"
+#: ../bin/src/ui_behavioursettingspage.h:327
+msgid "Remember from &last time"
 msgstr ""
 
 #: ../bin/src/ui_playlistsaveoptionsdialog.h:99
@@ -4126,7 +4114,7 @@ msgstr "Athsheinn an rian"
 msgid "Replace current playlist"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:357
+#: ../bin/src/ui_behavioursettingspage.h:352
 msgid "Replace the playlist"
 msgstr ""
 
@@ -4158,7 +4146,7 @@ msgstr "Athshocraigh"
 msgid "Reset play counts"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:351
+#: ../bin/src/ui_behavioursettingspage.h:346
 msgid "Restart song, then jump to previous if pressed again"
 msgstr ""
 
@@ -4171,7 +4159,7 @@ msgstr ""
 msgid "Restrict to ASCII characters"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:333
+#: ../bin/src/ui_behavioursettingspage.h:332
 msgid "Resume playback on start"
 msgstr ""
 
@@ -4313,7 +4301,7 @@ msgstr ""
 msgid "Scrobble tracks that I listen to"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:320
+#: ../bin/src/ui_behavioursettingspage.h:315
 msgid "Scroll over icon to change track"
 msgstr ""
 
@@ -4327,7 +4315,7 @@ msgstr ""
 msgid "Search"
 msgstr "Cuardaigh"
 
-#: ui/mainwindow.cpp:260 ../bin/src/ui_globalsearchsettingspage.h:141
+#: ui/mainwindow.cpp:261 ../bin/src/ui_globalsearchsettingspage.h:141
 msgctxt "Global search settings dialog title."
 msgid "Search"
 msgstr ""
@@ -4352,7 +4340,7 @@ msgstr ""
 msgid "Search automatically"
 msgstr ""
 
-#: ui/mainwindow.cpp:696
+#: ui/mainwindow.cpp:697
 msgid "Search for album"
 msgstr ""
 
@@ -4365,7 +4353,7 @@ msgstr ""
 msgid "Search for anything"
 msgstr "Cuardaigh i gcomhair aon rud"
 
-#: ui/mainwindow.cpp:693
+#: ui/mainwindow.cpp:694
 msgid "Search for artist"
 msgstr ""
 
@@ -4389,7 +4377,6 @@ msgstr ""
 msgid "Search options"
 msgstr "Roghanna cuardaithe"
 
-#: internet/soundcloud/soundcloudservice.cpp:119
 #: internet/spotify/spotifyservice.cpp:400
 msgid "Search results"
 msgstr ""
@@ -4423,7 +4410,7 @@ msgstr ""
 msgid "Seek the currently playing track to an absolute position"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:373
+#: ../bin/src/ui_behavioursettingspage.h:368
 msgid "Seeking using a keyboard shortcut or mouse wheel"
 msgstr ""
 
@@ -4483,7 +4470,7 @@ msgstr ""
 msgid "Service offline"
 msgstr ""
 
-#: ui/mainwindow.cpp:1812
+#: ui/mainwindow.cpp:1825
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr "Socraigh %1 go \"%2\"..."
@@ -4559,7 +4546,7 @@ msgstr ""
 msgid "Show above status bar"
 msgstr ""
 
-#: ui/mainwindow.cpp:643
+#: ui/mainwindow.cpp:644
 msgid "Show all songs"
 msgstr "Taispeáin gach amhrán"
 
@@ -4579,12 +4566,12 @@ msgstr "Taispeáin roinnteoirí"
 msgid "Show fullsize..."
 msgstr "Taispeáin lánmhéid..."
 
-#: library/libraryview.cpp:433 ui/mainwindow.cpp:725
+#: library/libraryview.cpp:433 ui/mainwindow.cpp:726
 #: widgets/fileviewlist.cpp:53
 msgid "Show in file browser..."
 msgstr "Taispeáin i siortaitheoir na gcomhad..."
 
-#: ui/mainwindow.cpp:727
+#: ui/mainwindow.cpp:728
 msgid "Show in library..."
 msgstr ""
 
@@ -4596,11 +4583,11 @@ msgstr ""
 msgid "Show moodbar"
 msgstr ""
 
-#: ui/mainwindow.cpp:645
+#: ui/mainwindow.cpp:646
 msgid "Show only duplicates"
 msgstr ""
 
-#: ui/mainwindow.cpp:647
+#: ui/mainwindow.cpp:648
 msgid "Show only untagged"
 msgstr "Taispeáin na cinn nach bhfuil clib orthu amháin"
 
@@ -4624,7 +4611,7 @@ msgstr ""
 msgid "Show the scrobble button in the main window"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:319
+#: ../bin/src/ui_behavioursettingspage.h:314
 msgid "Show tray icon"
 msgstr "Táispeáin deilbhín an tráidire"
 
@@ -4692,11 +4679,11 @@ msgstr ""
 msgid "Skip forwards in playlist"
 msgstr ""
 
-#: ui/mainwindow.cpp:1783
+#: ui/mainwindow.cpp:1796
 msgid "Skip selected tracks"
 msgstr ""
 
-#: ui/mainwindow.cpp:1781
+#: ui/mainwindow.cpp:1794
 msgid "Skip track"
 msgstr ""
 
@@ -4728,7 +4715,7 @@ msgstr "Rac bog"
 msgid "Song Information"
 msgstr "Faisnéis an amhráin"
 
-#: ui/mainwindow.cpp:280
+#: ui/mainwindow.cpp:281
 msgid "Song info"
 msgstr "Faisnéis an amhráin"
 
@@ -4758,10 +4745,6 @@ msgstr "Togh na hamhráin de réir"
 
 #: ../bin/src/ui_querysortpage.h:137
 msgid "Sorting"
-msgstr ""
-
-#: ../bin/src/ui_soundcloudsettingspage.h:100
-msgid "SoundCloud"
 msgstr ""
 
 #: playlist/playlist.cpp:1404
@@ -4822,7 +4805,6 @@ msgstr ""
 msgid "Start transcoding"
 msgstr ""
 
-#: internet/soundcloud/soundcloudservice.cpp:121
 #: internet/spotify/spotifyservice.cpp:402
 msgid ""
 "Start typing something on the search box above to fill this search results "
@@ -4855,7 +4837,7 @@ msgstr ""
 msgid "Stop after every track"
 msgstr ""
 
-#: ui/mainwindow.cpp:680 ../bin/src/ui_mainwindow.h:679
+#: ui/mainwindow.cpp:681 ../bin/src/ui_mainwindow.h:679
 msgid "Stop after this track"
 msgstr "Stad i ndiaidh an rian seo"
 
@@ -4867,7 +4849,7 @@ msgstr "Stad an athsheinm"
 msgid "Stop playback after current track"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:334
+#: ../bin/src/ui_behavioursettingspage.h:333
 msgid "Stop playback if song fails to play"
 msgstr ""
 
@@ -5023,7 +5005,7 @@ msgid ""
 "license key. Visit subsonic.org for details."
 msgstr ""
 
-#: ui/mainwindow.cpp:2674
+#: ui/mainwindow.cpp:2687
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -5065,7 +5047,7 @@ msgid ""
 "continue?"
 msgstr "Scriosfar na comhaid seo ón ngléas, an bhfuil tú cinnte gur mian leat leanúint ar aghaidh?"
 
-#: library/libraryview.cpp:679 ui/mainwindow.cpp:2433 widgets/fileview.cpp:189
+#: library/libraryview.cpp:679 ui/mainwindow.cpp:2446 widgets/fileview.cpp:189
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -5145,7 +5127,7 @@ msgstr ""
 msgid "This type of device is not supported: %1"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:374
+#: ../bin/src/ui_behavioursettingspage.h:369
 msgid "Time step"
 msgstr ""
 
@@ -5168,7 +5150,7 @@ msgstr ""
 msgid "Toggle fullscreen"
 msgstr "Scoránaigh lánscáileán"
 
-#: ui/mainwindow.cpp:1769
+#: ui/mainwindow.cpp:1782
 msgid "Toggle queue status"
 msgstr ""
 
@@ -5216,10 +5198,6 @@ msgstr ""
 #: ../bin/src/ui_trackselectiondialog.h:212 ../bin/src/ui_ripcddialog.h:304
 msgid "Track"
 msgstr "Rian"
-
-#: internet/soundcloud/soundcloudservice.cpp:136
-msgid "Tracks"
-msgstr ""
 
 #: ../bin/src/ui_transcodedialog.h:213 ../bin/src/ui_mainwindow.h:706
 msgid "Transcode Music"
@@ -5306,11 +5284,11 @@ msgstr "Botún anaithnid"
 msgid "Unset cover"
 msgstr "Díshocraigh an clúdach"
 
-#: ui/mainwindow.cpp:1779
+#: ui/mainwindow.cpp:1792
 msgid "Unskip selected tracks"
 msgstr ""
 
-#: ui/mainwindow.cpp:1777
+#: ui/mainwindow.cpp:1790
 msgid "Unskip track"
 msgstr ""
 
@@ -5421,7 +5399,7 @@ msgstr ""
 msgid "Use temporal noise shaping"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:326
+#: ../bin/src/ui_behavioursettingspage.h:321
 msgid "Use the system default"
 msgstr "Bain feidhm as réamhshocrú an chórais"
 
@@ -5441,7 +5419,7 @@ msgstr ""
 msgid "Used"
 msgstr "Caite"
 
-#: ui/settingsdialog.cpp:147
+#: ui/settingsdialog.cpp:146
 msgid "User interface"
 msgstr "Comhéadan"
 
@@ -5453,7 +5431,7 @@ msgstr "Comhéadan"
 msgid "Username"
 msgstr "Ainm úsáideora"
 
-#: ../bin/src/ui_behavioursettingspage.h:340
+#: ../bin/src/ui_behavioursettingspage.h:335
 msgid "Using the menu to add a song will..."
 msgstr ""
 
@@ -5526,7 +5504,7 @@ msgstr "WAV"
 msgid "WMA"
 msgstr "WMA"
 
-#: playlist/playlisttabbar.cpp:192 ../bin/src/ui_behavioursettingspage.h:322
+#: playlist/playlisttabbar.cpp:192 ../bin/src/ui_behavioursettingspage.h:317
 msgid "Warn me when closing a playlist tab"
 msgstr ""
 
@@ -5546,7 +5524,7 @@ msgstr "Láithreán gréasáin"
 msgid "Weeks"
 msgstr "Seachtainí"
 
-#: ../bin/src/ui_behavioursettingspage.h:329
+#: ../bin/src/ui_behavioursettingspage.h:324
 msgid "When Clementine starts"
 msgstr "Nuair a thosaíonn Clementine"
 
@@ -5556,7 +5534,7 @@ msgid ""
 "If there are no matches then it will use the largest image in the directory."
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:377
+#: ../bin/src/ui_behavioursettingspage.h:372
 msgid "When saving a playlist, file paths should be"
 msgstr ""
 
@@ -5632,7 +5610,7 @@ msgid ""
 "well?"
 msgstr ""
 
-#: ui/mainwindow.cpp:2681
+#: ui/mainwindow.cpp:2694
 msgid "Would you like to run a full rescan right now?"
 msgstr ""
 
@@ -5640,7 +5618,7 @@ msgstr ""
 msgid "Write all songs statistics into songs' files"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:382
+#: ../bin/src/ui_behavioursettingspage.h:377
 msgid "Write metadata"
 msgstr ""
 
@@ -5726,13 +5704,6 @@ msgstr "Níl cuntas Spotify Premium agat."
 msgid "You do not have an active subscription"
 msgstr ""
 
-#: ../bin/src/ui_soundcloudsettingspage.h:101
-msgid ""
-"You don't need to be logged in to search and to listen to music on "
-"SoundCloud. However, you need to login to access your playlists and your "
-"stream."
-msgstr ""
-
 #: internet/spotify/spotifyservice.cpp:205
 msgid ""
 "You have been logged out of Spotify, please re-enter your password in the "
@@ -5754,7 +5725,7 @@ msgid ""
 "shortcuts in Clementine."
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:328
+#: ../bin/src/ui_behavioursettingspage.h:323
 msgid "You will need to restart Clementine if you change the language."
 msgstr "Caithfear Clementine a atosú chun an teanga a athrú."
 

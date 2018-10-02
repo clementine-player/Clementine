@@ -15,7 +15,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2018-09-17 13:31+0000\n"
+"PO-Revision-Date: 2018-10-01 17:06+0000\n"
 "Last-Translator: hatstand <john.maguire@gmail.com>\n"
 "Language-Team: Bulgarian (http://www.transifex.com/davidsansome/clementine/language/bg/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -58,7 +58,7 @@ msgstr " ms"
 msgid " pt"
 msgstr " точки"
 
-#: ../bin/src/ui_behavioursettingspage.h:375
+#: ../bin/src/ui_behavioursettingspage.h:370
 msgid " s"
 msgstr ""
 
@@ -400,6 +400,10 @@ msgid ""
 "A song will be included in the playlist if it matches these conditions."
 msgstr "Една песен ще бъде включена в списъка с песни, ако отговаря на тези критерии."
 
+#: ../bin/src/ui_behavioursettingspage.h:373
+msgid "A&utomatic"
+msgstr ""
+
 #: smartplaylists/searchterm.cpp:396
 msgid "A-Z"
 msgstr "А-Я"
@@ -446,7 +450,7 @@ msgid "About Qt..."
 msgstr "Относно QT..."
 
 #: playlist/playlistsaveoptionsdialog.cpp:34
-#: ../bin/src/ui_behavioursettingspage.h:379
+#: ../bin/src/ui_behavioursettingspage.h:374
 msgid "Absolute"
 msgstr "Абосолютен"
 
@@ -472,10 +476,6 @@ msgstr "Действие"
 #: wiimotedev/wiimotesettingspage.cpp:103
 msgid "Activate/Deactivate Wii Remote"
 msgstr ""
-
-#: internet/soundcloud/soundcloudservice.cpp:128
-msgid "Activities stream"
-msgstr "Поток от действия"
 
 #: internet/podcasts/addpodcastdialog.cpp:63
 msgid "Add Podcast"
@@ -505,7 +505,7 @@ msgstr "Добавяне на друг поток..."
 msgid "Add directory..."
 msgstr "Добавяне на папка..."
 
-#: ui/mainwindow.cpp:2049
+#: ui/mainwindow.cpp:2062
 msgid "Add file"
 msgstr "Добавяне на файл"
 
@@ -525,7 +525,7 @@ msgstr "Добавяне на файл..."
 msgid "Add files to transcode"
 msgstr "Добавяне на файлове за прекодиране"
 
-#: transcoder/transcodedialog.cpp:306 ui/mainwindow.cpp:2076
+#: transcoder/transcodedialog.cpp:306 ui/mainwindow.cpp:2089
 #: ripper/ripcddialog.cpp:201
 msgid "Add folder"
 msgstr "Добавяне на папка"
@@ -630,7 +630,7 @@ msgstr "Добавяне към списъците с песни от Spotify"
 msgid "Add to Spotify starred"
 msgstr "Добавяне към оценените песни от Spotify"
 
-#: ui/mainwindow.cpp:1850
+#: ui/mainwindow.cpp:1863
 msgid "Add to another playlist"
 msgstr "Добави в друг списък с песни"
 
@@ -638,8 +638,8 @@ msgstr "Добави в друг списък с песни"
 msgid "Add to playlist"
 msgstr "Добавяне към списъка с песни"
 
-#: ../bin/src/ui_behavioursettingspage.h:359
-#: ../bin/src/ui_behavioursettingspage.h:371
+#: ../bin/src/ui_behavioursettingspage.h:354
+#: ../bin/src/ui_behavioursettingspage.h:366
 msgid "Add to the queue"
 msgstr "Добави към опашката"
 
@@ -720,7 +720,7 @@ msgstr "Албуми без обложки"
 msgid "All"
 msgstr "Всички"
 
-#: ui/mainwindow.cpp:158
+#: ui/mainwindow.cpp:159
 msgid "All Files (*)"
 msgstr "Всички файлове (*)"
 
@@ -770,16 +770,16 @@ msgstr "Позволи mid/side кодиране"
 msgid "Alongside the originals"
 msgstr "Заедно с оригиналите"
 
-#: ../bin/src/ui_behavioursettingspage.h:331
-msgid "Always hide the main window"
-msgstr "Винаги скриване на основния прозорец"
+#: ../bin/src/ui_behavioursettingspage.h:326
+msgid "Alwa&ys hide the main window"
+msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:330
-msgid "Always show the main window"
-msgstr "Винаги показвай основния прозорец"
+#: ../bin/src/ui_behavioursettingspage.h:325
+msgid "Always show &the main window"
+msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:345
-#: ../bin/src/ui_behavioursettingspage.h:365
+#: ../bin/src/ui_behavioursettingspage.h:340
+#: ../bin/src/ui_behavioursettingspage.h:360
 msgid "Always start playing"
 msgstr "Винаги започвай възпроизвеждането"
 
@@ -826,7 +826,7 @@ msgstr "Добавяне на файлове/URL адреси към списъ�
 msgid "Append to current playlist"
 msgstr "Добавяне към текущия списък с песни"
 
-#: ../bin/src/ui_behavioursettingspage.h:356
+#: ../bin/src/ui_behavioursettingspage.h:351
 msgid "Append to the playlist"
 msgstr "Добавяне към списъка с песни"
 
@@ -858,7 +858,7 @@ msgstr "Сигурни ли сте, че искате да запишете ст
 msgid "Artist"
 msgstr "Изпълнител"
 
-#: ui/mainwindow.cpp:283
+#: ui/mainwindow.cpp:284
 msgid "Artist info"
 msgstr "Информация за изпълнителя"
 
@@ -866,9 +866,9 @@ msgstr "Информация за изпълнителя"
 msgid "Artist's initial"
 msgstr "Инициали на изпълнителя"
 
-#: ../bin/src/ui_behavioursettingspage.h:381
-msgid "Ask when saving"
-msgstr "Питай при запис"
+#: ../bin/src/ui_behavioursettingspage.h:376
+msgid "As&k when saving"
+msgstr ""
 
 #: ../bin/src/ui_transcodedialog.h:225
 #: ../bin/src/ui_networkremotesettingspage.h:250
@@ -901,7 +901,6 @@ msgid "Auto"
 msgstr "Автоматично"
 
 #: playlist/playlistsaveoptionsdialog.cpp:32
-#: ../bin/src/ui_behavioursettingspage.h:378
 msgid "Automatic"
 msgstr "Автоматично"
 
@@ -950,7 +949,7 @@ msgstr "Фоново изображение"
 msgid "Background opacity"
 msgstr "Прозрачност на фона"
 
-#: core/database.cpp:648
+#: core/database.cpp:664
 msgid "Backing up database"
 msgstr "Архивиране на базата данни"
 
@@ -974,7 +973,7 @@ msgstr "Основно синьо"
 msgid "Basic audio type"
 msgstr "Обикновен тип на звука"
 
-#: ../bin/src/ui_behavioursettingspage.h:318
+#: ../bin/src/ui_behavioursettingspage.h:313
 msgid "Behavior"
 msgstr "Поведение"
 
@@ -1092,7 +1091,7 @@ msgstr "Промяна на бърз клавиш..."
 msgid "Change shuffle mode"
 msgstr "Смени режим разбъркване"
 
-#: ../bin/src/ui_behavioursettingspage.h:370
+#: ../bin/src/ui_behavioursettingspage.h:365
 msgid "Change the currently playing song"
 msgstr ""
 
@@ -1122,7 +1121,7 @@ msgstr "Провери за нови епизоди"
 msgid "Check for updates"
 msgstr "Проверка за обновления"
 
-#: ui/mainwindow.cpp:820
+#: ui/mainwindow.cpp:823
 msgid "Check for updates..."
 msgstr "Проверка за обновления..."
 
@@ -1264,7 +1263,6 @@ msgstr "Щракнете тук, за да добавите списък с пе
 msgid "Click to toggle between remaining time and total time"
 msgstr "Цъкнете за да превключите между оставащо и пълно време"
 
-#: ../bin/src/ui_soundcloudsettingspage.h:103
 #: ../bin/src/ui_lastfmsettingspage.h:133
 #: ../bin/src/ui_googledrivesettingspage.h:102
 #: ../bin/src/ui_dropboxsettingspage.h:102
@@ -1343,10 +1341,6 @@ msgstr "Настройване на Magnatune..."
 msgid "Configure Shortcuts"
 msgstr "Настройване на бързите клавиши"
 
-#: internet/soundcloud/soundcloudservice.cpp:381
-msgid "Configure SoundCloud..."
-msgstr ""
-
 #: internet/spotify/spotifyservice.cpp:927
 msgid "Configure Spotify..."
 msgstr "Настройване на Spotify..."
@@ -1359,7 +1353,7 @@ msgstr "Конфигурация на Subsonic..."
 msgid "Configure global search..."
 msgstr "Конфигурирай глобално търсене"
 
-#: ui/mainwindow.cpp:659
+#: ui/mainwindow.cpp:660
 msgid "Configure library..."
 msgstr "Настройване на библиотека..."
 
@@ -1431,11 +1425,11 @@ msgid "Copy to clipboard"
 msgstr "Копиране в буфера"
 
 #: library/libraryview.cpp:419 internet/podcasts/podcastservice.cpp:438
-#: ui/mainwindow.cpp:719 widgets/fileviewlist.cpp:44
+#: ui/mainwindow.cpp:720 widgets/fileviewlist.cpp:44
 msgid "Copy to device..."
 msgstr "Копирай в устройство..."
 
-#: devices/deviceview.cpp:228 ui/mainwindow.cpp:709
+#: devices/deviceview.cpp:228 ui/mainwindow.cpp:710
 #: widgets/fileviewlist.cpp:40
 msgid "Copy to library..."
 msgstr "Копиране в библиотека..."
@@ -1579,7 +1573,7 @@ msgstr ""
 msgid "Dance"
 msgstr "Денс"
 
-#: core/database.cpp:601
+#: core/database.cpp:617
 msgid ""
 "Database corruption detected. Please read https://github.com/clementine-"
 "player/Clementine/wiki/Database-Corruption for instructions on how to "
@@ -1641,7 +1635,7 @@ msgid "Delete downloaded data"
 msgstr "Изтрий свалените данни"
 
 #: devices/deviceview.cpp:408 library/libraryview.cpp:678
-#: ui/mainwindow.cpp:2432 widgets/fileview.cpp:188
+#: ui/mainwindow.cpp:2445 widgets/fileview.cpp:188
 msgid "Delete files"
 msgstr "Изтриване на файлове"
 
@@ -1649,7 +1643,7 @@ msgstr "Изтриване на файлове"
 msgid "Delete from device..."
 msgstr "Изтриване от устройство"
 
-#: library/libraryview.cpp:422 ui/mainwindow.cpp:722
+#: library/libraryview.cpp:422 ui/mainwindow.cpp:723
 #: widgets/fileviewlist.cpp:47
 msgid "Delete from disk..."
 msgstr "Изтриване от диска..."
@@ -1682,11 +1676,11 @@ msgstr "Изтриване на файлове"
 msgid "Depth"
 msgstr ""
 
-#: ui/mainwindow.cpp:1763
+#: ui/mainwindow.cpp:1776
 msgid "Dequeue selected tracks"
 msgstr "Махни от опашката избраните парчета"
 
-#: ui/mainwindow.cpp:1761
+#: ui/mainwindow.cpp:1774
 msgid "Dequeue track"
 msgstr "Махни от опашката парчето"
 
@@ -1715,7 +1709,7 @@ msgstr "Име на устройство"
 msgid "Device properties..."
 msgstr "Свойства на устройство..."
 
-#: ui/mainwindow.cpp:276
+#: ui/mainwindow.cpp:277
 msgid "Devices"
 msgstr "Устройства"
 
@@ -1845,11 +1839,11 @@ msgstr "Дарете"
 msgid "Double click to open"
 msgstr "Двойно цъкване за отваряне"
 
-#: ../bin/src/ui_behavioursettingspage.h:367
+#: ../bin/src/ui_behavioursettingspage.h:362
 msgid "Double clicking a song in the playlist will..."
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:353
+#: ../bin/src/ui_behavioursettingspage.h:348
 msgid "Double clicking a song will..."
 msgstr "Двойното цъкване върху песен ще..."
 
@@ -1958,7 +1952,7 @@ msgstr "Динамичен случаен микс"
 msgid "Edit smart playlist..."
 msgstr "Редактиране умен списък с песни..."
 
-#: ui/mainwindow.cpp:1813
+#: ui/mainwindow.cpp:1826
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr "Редактиране на етикет \"%1\"..."
@@ -2004,7 +1998,7 @@ msgstr "Разреши еквалазйзера"
 msgid "Enable shortcuts only when Clementine is focused"
 msgstr "Разреши бързите клавиши, само когато Clementine е активен прозорец"
 
-#: ../bin/src/ui_behavioursettingspage.h:339
+#: ../bin/src/ui_behavioursettingspage.h:331
 msgid "Enable song metadata inline edition with click"
 msgstr "Позволи директна поправка на метаданните за песента при щракане"
 
@@ -2093,8 +2087,8 @@ msgid "Equivalent to --log-levels *:3"
 msgstr "Еквивалентно на --log-levels *:3"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:246
-#: library/libraryview.cpp:672 ui/mainwindow.cpp:2105 ui/mainwindow.cpp:2384
-#: ui/mainwindow.cpp:2563
+#: library/libraryview.cpp:672 ui/mainwindow.cpp:2118 ui/mainwindow.cpp:2397
+#: ui/mainwindow.cpp:2576
 msgid "Error"
 msgstr "Грешка"
 
@@ -2240,7 +2234,7 @@ msgstr "Заглушаване"
 msgid "Fading duration"
 msgstr "Продължителност на заглушаване"
 
-#: ui/mainwindow.cpp:2106
+#: ui/mainwindow.cpp:2119
 msgid "Failed reading CD drive"
 msgstr "Не успях да прочета CD устройството"
 
@@ -2274,10 +2268,6 @@ msgstr ""
 #: ../bin/src/ui_transcoderoptionsmp3.h:199
 msgid "Fast"
 msgstr "Бързо"
-
-#: internet/soundcloud/soundcloudservice.cpp:141
-msgid "Favorites"
-msgstr ""
 
 #: library/library.cpp:88
 msgid "Favourite tracks"
@@ -2345,7 +2335,7 @@ msgstr "Тип на файла"
 msgid "Filename"
 msgstr "Име на файл"
 
-#: ui/mainwindow.cpp:266
+#: ui/mainwindow.cpp:267
 msgid "Files"
 msgstr "Файлове"
 
@@ -2458,7 +2448,7 @@ msgstr "Пълни високи"
 msgid "Ge&nre"
 msgstr ""
 
-#: ui/settingsdialog.cpp:133
+#: ui/settingsdialog.cpp:132
 msgid "General"
 msgstr "Общи"
 
@@ -2517,7 +2507,7 @@ msgstr "Google Drive"
 msgid "Got %1 covers out of %2 (%3 failed)"
 msgstr "Успешно изтегляне на %1 от общо %2 обложки (неуспешно на %3)"
 
-#: ../bin/src/ui_behavioursettingspage.h:335
+#: ../bin/src/ui_behavioursettingspage.h:334
 msgid "Grey out non existent songs in my playlists"
 msgstr "Посивяване на песните, които не съществуват в моят списък с песни"
 
@@ -2646,7 +2636,7 @@ msgstr "Иконите отгоре"
 msgid "Identifying song"
 msgstr "Идентифициране на песента"
 
-#: ../bin/src/ui_behavioursettingspage.h:337
+#: ../bin/src/ui_behavioursettingspage.h:329
 msgid ""
 "If activated, clicking a selected song in the playlist view will let you "
 "edit the tag value directly"
@@ -2747,15 +2737,15 @@ msgstr "Вмъкване..."
 msgid "Installed"
 msgstr "Инсталирани"
 
-#: core/database.cpp:585
+#: core/database.cpp:601
 msgid "Integrity check"
 msgstr "Проверка на интегритета"
 
-#: ui/mainwindow.cpp:272
+#: ui/mainwindow.cpp:273
 msgid "Internet"
 msgstr "Интернет"
 
-#: ui/settingsdialog.cpp:156
+#: ui/settingsdialog.cpp:155
 msgid "Internet providers"
 msgstr "Интернет доставчици"
 
@@ -2828,7 +2818,7 @@ msgstr "Най-високо класираните парчета в Jamendo т�
 msgid "Jamendo database"
 msgstr "Jamendo база от данни"
 
-#: ../bin/src/ui_behavioursettingspage.h:350
+#: ../bin/src/ui_behavioursettingspage.h:345
 msgid "Jump to previous song right away"
 msgstr "Премини към предната песен веднага"
 
@@ -2848,7 +2838,7 @@ msgstr "Пази бутоните за %1 секундa..."
 msgid "Keep buttons for %1 seconds..."
 msgstr "Пази бутоните за %1 секунди..."
 
-#: ../bin/src/ui_behavioursettingspage.h:321
+#: ../bin/src/ui_behavioursettingspage.h:316
 msgid "Keep running in the background when the window is closed"
 msgstr "Продължи ипзълнението и във фонов режим, дори когато прозореца е затворен"
 
@@ -2865,7 +2855,7 @@ msgstr "Котенца"
 msgid "Kuduro"
 msgstr "Kuduro"
 
-#: ../bin/src/ui_behavioursettingspage.h:323
+#: ../bin/src/ui_behavioursettingspage.h:318
 msgid "Language"
 msgstr "Език"
 
@@ -2939,7 +2929,7 @@ msgstr "Ляво"
 msgid "Length"
 msgstr "Дължина"
 
-#: ui/mainwindow.cpp:251 ui/mainwindow.cpp:263
+#: ui/mainwindow.cpp:252 ui/mainwindow.cpp:264
 #: ../bin/src/ui_seafilesettingspage.h:177
 msgid "Library"
 msgstr "Библиотека"
@@ -2948,7 +2938,7 @@ msgstr "Библиотека"
 msgid "Library advanced grouping"
 msgstr "Разширено групиране на Библиотеката"
 
-#: ui/mainwindow.cpp:2683
+#: ui/mainwindow.cpp:2696
 msgid "Library rescan notice"
 msgstr "Известие за повторно сканиране на библиотеката"
 
@@ -3035,7 +3025,6 @@ msgstr "Зареждане на файлове/URL адреси, заместв�
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:162
 #: ../bin/src/ui_magnatunesettingspage.h:163
-#: ../bin/src/ui_soundcloudsettingspage.h:102
 #: ../bin/src/ui_spotifysettingspage.h:210
 #: ../bin/src/ui_subsonicsettingspage.h:137
 #: ../bin/src/ui_lastfmsettingspage.h:132
@@ -3265,7 +3254,7 @@ msgstr "Точки за монтиране"
 msgid "Move down"
 msgstr "Преместване надолу"
 
-#: ui/mainwindow.cpp:712 widgets/fileviewlist.cpp:42
+#: ui/mainwindow.cpp:713 widgets/fileviewlist.cpp:42
 msgid "Move to library..."
 msgstr "Преместване в библиотека..."
 
@@ -3274,7 +3263,7 @@ msgstr "Преместване в библиотека..."
 msgid "Move up"
 msgstr "Преместване нагоре"
 
-#: transcoder/transcodedialog.cpp:225 ui/mainwindow.cpp:2050
+#: transcoder/transcodedialog.cpp:225 ui/mainwindow.cpp:2063
 msgid "Music"
 msgstr "Музика"
 
@@ -3321,8 +3310,8 @@ msgstr "Никога"
 msgid "Never played"
 msgstr "Никога пускани"
 
-#: ../bin/src/ui_behavioursettingspage.h:343
-#: ../bin/src/ui_behavioursettingspage.h:363
+#: ../bin/src/ui_behavioursettingspage.h:338
+#: ../bin/src/ui_behavioursettingspage.h:358
 msgid "Never start playing"
 msgstr "Никога да не се пуска възпроизвеждането"
 
@@ -3332,7 +3321,7 @@ msgstr "Никога да не се пуска възпроизвежданет�
 msgid "New folder"
 msgstr "Нова папка"
 
-#: ui/mainwindow.cpp:1867 ../bin/src/ui_mainwindow.h:709
+#: ui/mainwindow.cpp:1880 ../bin/src/ui_mainwindow.h:709
 msgid "New playlist"
 msgstr "Нов списък с песни"
 
@@ -3399,7 +3388,7 @@ msgstr "No short blocks"
 msgid "None"
 msgstr "Никаква"
 
-#: library/libraryview.cpp:673 ui/mainwindow.cpp:2385 ui/mainwindow.cpp:2564
+#: library/libraryview.cpp:673 ui/mainwindow.cpp:2398 ui/mainwindow.cpp:2577
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Никоя от избраните песни бяха сподобни да бъдат копирани на устройството"
 
@@ -3528,7 +3517,6 @@ msgstr "Непрозрачност"
 #: internet/magnatune/magnatuneservice.cpp:287
 #: internet/somafm/somafmservice.cpp:102
 #: internet/intergalacticfm/intergalacticfmservice.cpp:102
-#: internet/soundcloud/soundcloudservice.cpp:377
 #, qt-format
 msgid "Open %1 in browser"
 msgstr "Отвори %1 в браузъра"
@@ -3567,7 +3555,7 @@ msgstr "Отвори в Google Drive"
 msgid "Open in new playlist"
 msgstr "Отворяне в нов списък с песни"
 
-#: ../bin/src/ui_behavioursettingspage.h:358
+#: ../bin/src/ui_behavioursettingspage.h:353
 msgctxt "Refers to behavior settings in Clementine settings page."
 msgid "Open in new playlist"
 msgstr "Отваряне в нов списък с песни"
@@ -3607,7 +3595,7 @@ msgstr "Opus"
 msgid "Organise Files"
 msgstr "Организиране на Файлове"
 
-#: library/libraryview.cpp:416 ui/mainwindow.cpp:715
+#: library/libraryview.cpp:416 ui/mainwindow.cpp:716
 msgid "Organise files..."
 msgstr "Организиране на файлове..."
 
@@ -3691,7 +3679,7 @@ msgstr "Парти"
 msgid "Password"
 msgstr "Парола"
 
-#: core/globalshortcuts.cpp:50 ui/mainwindow.cpp:1160 ui/mainwindow.cpp:1663
+#: core/globalshortcuts.cpp:50 ui/mainwindow.cpp:1169 ui/mainwindow.cpp:1676
 #: ui/qtsystemtrayicon.cpp:189 wiimotedev/wiimotesettingspage.cpp:114
 msgid "Pause"
 msgstr "Пауза"
@@ -3719,8 +3707,8 @@ msgstr "Пиксел"
 msgid "Plain sidebar"
 msgstr "Стандартна странична лента"
 
-#: core/globalshortcuts.cpp:49 ui/mainwindow.cpp:676 ui/mainwindow.cpp:1126
-#: ui/mainwindow.cpp:1145 ui/mainwindow.cpp:1667 ui/qtsystemtrayicon.cpp:177
+#: core/globalshortcuts.cpp:49 ui/mainwindow.cpp:677 ui/mainwindow.cpp:1133
+#: ui/mainwindow.cpp:1154 ui/mainwindow.cpp:1680 ui/qtsystemtrayicon.cpp:177
 #: ui/qtsystemtrayicon.cpp:203 wiimotedev/wiimotesettingspage.cpp:107
 #: ../bin/src/ui_mainwindow.h:675
 msgid "Play"
@@ -3734,16 +3722,16 @@ msgstr "Брой изпълнения"
 msgid "Play if stopped, pause if playing"
 msgstr "Продължаване ако е спряно и обратно"
 
-#: ../bin/src/ui_behavioursettingspage.h:344
-#: ../bin/src/ui_behavioursettingspage.h:364
+#: ../bin/src/ui_behavioursettingspage.h:339
+#: ../bin/src/ui_behavioursettingspage.h:359
 msgid "Play if there is nothing already playing"
 msgstr "Възпроизвеждане, ако има песен, която вече се изпълнява"
 
-#: library/libraryview.cpp:396 ui/mainwindow.cpp:1774
+#: library/libraryview.cpp:396 ui/mainwindow.cpp:1787
 msgid "Play next"
 msgstr ""
 
-#: ui/mainwindow.cpp:1772
+#: ui/mainwindow.cpp:1785
 msgid "Play selected tracks next"
 msgstr ""
 
@@ -3782,7 +3770,7 @@ msgstr "Настройки на списъка с песни"
 msgid "Playlist type"
 msgstr "Тип на списъка с песни"
 
-#: internet/soundcloud/soundcloudservice.cpp:133 ui/mainwindow.cpp:269
+#: ui/mainwindow.cpp:270
 msgid "Playlists"
 msgstr "Списъци с песни"
 
@@ -3873,7 +3861,7 @@ msgstr "Натиснете клавиш"
 msgid "Press a key combination to use for %1..."
 msgstr "Натиснете клавишна комбинация, която да използвате за %1..."
 
-#: ../bin/src/ui_behavioursettingspage.h:347
+#: ../bin/src/ui_behavioursettingspage.h:342
 msgid "Pressing \"Previous\" in player will..."
 msgstr "Натискане на \"Предишна\" в плейъра ще..."
 
@@ -3950,12 +3938,12 @@ msgstr "Заявящо устойство..."
 msgid "Queue Manager"
 msgstr "Мениджър на опашката"
 
-#: ui/mainwindow.cpp:1767
+#: ui/mainwindow.cpp:1780
 msgid "Queue selected tracks"
 msgstr "Пратете избраните песни на опашката"
 
 #: globalsearch/globalsearchview.cpp:464 library/libraryview.cpp:393
-#: ui/mainwindow.cpp:1765
+#: ui/mainwindow.cpp:1778
 msgid "Queue track"
 msgstr "Прати избрана песен на опашката"
 
@@ -4045,7 +4033,7 @@ msgid "Reggae"
 msgstr "Реге"
 
 #: playlist/playlistsaveoptionsdialog.cpp:33
-#: ../bin/src/ui_behavioursettingspage.h:380
+#: ../bin/src/ui_behavioursettingspage.h:375
 msgid "Relative"
 msgstr "Релативен"
 
@@ -4053,9 +4041,9 @@ msgstr "Релативен"
 msgid "Remember Wii remote swing"
 msgstr "Запомни Wiiremote суинг"
 
-#: ../bin/src/ui_behavioursettingspage.h:332
-msgid "Remember from last time"
-msgstr "Помни от предния път"
+#: ../bin/src/ui_behavioursettingspage.h:327
+msgid "Remember from &last time"
+msgstr ""
 
 #: ../bin/src/ui_playlistsaveoptionsdialog.h:99
 msgid "Remember my choice"
@@ -4133,7 +4121,7 @@ msgstr "Повтаряне на песента"
 msgid "Replace current playlist"
 msgstr "Заместване на текущия списък с песни"
 
-#: ../bin/src/ui_behavioursettingspage.h:357
+#: ../bin/src/ui_behavioursettingspage.h:352
 msgid "Replace the playlist"
 msgstr "Заместване на списъка с песни"
 
@@ -4165,7 +4153,7 @@ msgstr "Възстановяване"
 msgid "Reset play counts"
 msgstr "Изчистване на броя възпроизвеждания"
 
-#: ../bin/src/ui_behavioursettingspage.h:351
+#: ../bin/src/ui_behavioursettingspage.h:346
 msgid "Restart song, then jump to previous if pressed again"
 msgstr "Започни песента отначало, после премини към предната, ако се натисне още веднъж"
 
@@ -4178,7 +4166,7 @@ msgstr "Рестартиране на песента, или свирене на
 msgid "Restrict to ASCII characters"
 msgstr "Само ASCII символи"
 
-#: ../bin/src/ui_behavioursettingspage.h:333
+#: ../bin/src/ui_behavioursettingspage.h:332
 msgid "Resume playback on start"
 msgstr "Продължаване на възпроизвеждането при стартиране"
 
@@ -4320,7 +4308,7 @@ msgstr "Резултат"
 msgid "Scrobble tracks that I listen to"
 msgstr "Запази песните, които слушам"
 
-#: ../bin/src/ui_behavioursettingspage.h:320
+#: ../bin/src/ui_behavioursettingspage.h:315
 msgid "Scroll over icon to change track"
 msgstr ""
 
@@ -4334,7 +4322,7 @@ msgstr "Seafile"
 msgid "Search"
 msgstr "Търсене"
 
-#: ui/mainwindow.cpp:260 ../bin/src/ui_globalsearchsettingspage.h:141
+#: ui/mainwindow.cpp:261 ../bin/src/ui_globalsearchsettingspage.h:141
 msgctxt "Global search settings dialog title."
 msgid "Search"
 msgstr "Търсене"
@@ -4359,7 +4347,7 @@ msgstr "Търсене в Subsonic"
 msgid "Search automatically"
 msgstr "Автоматично търсене"
 
-#: ui/mainwindow.cpp:696
+#: ui/mainwindow.cpp:697
 msgid "Search for album"
 msgstr ""
 
@@ -4372,7 +4360,7 @@ msgstr "Търси за обложки"
 msgid "Search for anything"
 msgstr "Търсене из всички"
 
-#: ui/mainwindow.cpp:693
+#: ui/mainwindow.cpp:694
 msgid "Search for artist"
 msgstr ""
 
@@ -4396,7 +4384,6 @@ msgstr "Режим \"Търсене\""
 msgid "Search options"
 msgstr "Опции при търсене"
 
-#: internet/soundcloud/soundcloudservice.cpp:119
 #: internet/spotify/spotifyservice.cpp:400
 msgid "Search results"
 msgstr "Резултати от търсенето"
@@ -4430,7 +4417,7 @@ msgstr "Следене на текущата песен с относителн�
 msgid "Seek the currently playing track to an absolute position"
 msgstr "Следене на текущата песен с абсолютно позиция"
 
-#: ../bin/src/ui_behavioursettingspage.h:373
+#: ../bin/src/ui_behavioursettingspage.h:368
 msgid "Seeking using a keyboard shortcut or mouse wheel"
 msgstr ""
 
@@ -4490,7 +4477,7 @@ msgstr "Подробности за сървъра"
 msgid "Service offline"
 msgstr "Услугата е недостъпна"
 
-#: ui/mainwindow.cpp:1812
+#: ui/mainwindow.cpp:1825
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr "Задай %1 да е %2\"..."
@@ -4566,7 +4553,7 @@ msgstr "Показване на красиво OSD"
 msgid "Show above status bar"
 msgstr "Покажи над status bar-а"
 
-#: ui/mainwindow.cpp:643
+#: ui/mainwindow.cpp:644
 msgid "Show all songs"
 msgstr "Показвай всички песни"
 
@@ -4586,12 +4573,12 @@ msgstr "Покажи разделители"
 msgid "Show fullsize..."
 msgstr "Покажи в пълен размер..."
 
-#: library/libraryview.cpp:433 ui/mainwindow.cpp:725
+#: library/libraryview.cpp:433 ui/mainwindow.cpp:726
 #: widgets/fileviewlist.cpp:53
 msgid "Show in file browser..."
 msgstr "Покажи във файловия мениджър..."
 
-#: ui/mainwindow.cpp:727
+#: ui/mainwindow.cpp:728
 msgid "Show in library..."
 msgstr "Показване в библиотеката..."
 
@@ -4603,11 +4590,11 @@ msgstr "Показване в смесени изпълнители"
 msgid "Show moodbar"
 msgstr "Показване на лента по настроение"
 
-#: ui/mainwindow.cpp:645
+#: ui/mainwindow.cpp:646
 msgid "Show only duplicates"
 msgstr "Показвай само дубликати"
 
-#: ui/mainwindow.cpp:647
+#: ui/mainwindow.cpp:648
 msgid "Show only untagged"
 msgstr "Показване само на неотбелязани"
 
@@ -4631,7 +4618,7 @@ msgstr "Показване на бутона \"харесвам\""
 msgid "Show the scrobble button in the main window"
 msgstr "Показване на бутона скроблинг в главния прозорец"
 
-#: ../bin/src/ui_behavioursettingspage.h:319
+#: ../bin/src/ui_behavioursettingspage.h:314
 msgid "Show tray icon"
 msgstr "Показване на икона в областта за уведомяване"
 
@@ -4699,11 +4686,11 @@ msgstr "Презключи броя"
 msgid "Skip forwards in playlist"
 msgstr "Прескачане напред в списъка с песни"
 
-#: ui/mainwindow.cpp:1783
+#: ui/mainwindow.cpp:1796
 msgid "Skip selected tracks"
 msgstr "Прескачане на избраните песни"
 
-#: ui/mainwindow.cpp:1781
+#: ui/mainwindow.cpp:1794
 msgid "Skip track"
 msgstr "Прескачане на песента"
 
@@ -4735,7 +4722,7 @@ msgstr "Лек рок"
 msgid "Song Information"
 msgstr "Информация за песен"
 
-#: ui/mainwindow.cpp:280
+#: ui/mainwindow.cpp:281
 msgid "Song info"
 msgstr "Информация за песен"
 
@@ -4766,10 +4753,6 @@ msgstr "Сортиране на песните по"
 #: ../bin/src/ui_querysortpage.h:137
 msgid "Sorting"
 msgstr "Сортиране"
-
-#: ../bin/src/ui_soundcloudsettingspage.h:100
-msgid "SoundCloud"
-msgstr "SoundCloud"
 
 #: playlist/playlist.cpp:1404
 msgid "Source"
@@ -4829,7 +4812,6 @@ msgstr "Стартиране на текущо възпроизвеждания 
 msgid "Start transcoding"
 msgstr "Начало на прекодирането"
 
-#: internet/soundcloud/soundcloudservice.cpp:121
 #: internet/spotify/spotifyservice.cpp:402
 msgid ""
 "Start typing something on the search box above to fill this search results "
@@ -4862,7 +4844,7 @@ msgstr ""
 msgid "Stop after every track"
 msgstr ""
 
-#: ui/mainwindow.cpp:680 ../bin/src/ui_mainwindow.h:679
+#: ui/mainwindow.cpp:681 ../bin/src/ui_mainwindow.h:679
 msgid "Stop after this track"
 msgstr "Спри след тази песен"
 
@@ -4874,7 +4856,7 @@ msgstr "Спиране на възпроизвеждането"
 msgid "Stop playback after current track"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:334
+#: ../bin/src/ui_behavioursettingspage.h:333
 msgid "Stop playback if song fails to play"
 msgstr ""
 
@@ -5030,7 +5012,7 @@ msgid ""
 "license key. Visit subsonic.org for details."
 msgstr "Пробния период на Subsonic сървъра изтече. Моля дайте дарение за да получите ключ за лиценз. Посетете subsonic.org за подробности."
 
-#: ui/mainwindow.cpp:2674
+#: ui/mainwindow.cpp:2687
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -5072,7 +5054,7 @@ msgid ""
 "continue?"
 msgstr "Тези файлове ще бъдат изтрити от устройството,сигурни ли сте че искате да продължите?"
 
-#: library/libraryview.cpp:679 ui/mainwindow.cpp:2433 widgets/fileview.cpp:189
+#: library/libraryview.cpp:679 ui/mainwindow.cpp:2446 widgets/fileview.cpp:189
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -5152,7 +5134,7 @@ msgstr "Този поток е само за платени регистраци
 msgid "This type of device is not supported: %1"
 msgstr "Този тип устройство не е подържано:%1"
 
-#: ../bin/src/ui_behavioursettingspage.h:374
+#: ../bin/src/ui_behavioursettingspage.h:369
 msgid "Time step"
 msgstr ""
 
@@ -5175,7 +5157,7 @@ msgstr "Вкл./Изкл. на красиво екранно меню"
 msgid "Toggle fullscreen"
 msgstr "Превключване на пълен екран"
 
-#: ui/mainwindow.cpp:1769
+#: ui/mainwindow.cpp:1782
 msgid "Toggle queue status"
 msgstr "Покажи статус на опашката"
 
@@ -5223,10 +5205,6 @@ msgstr ""
 #: ../bin/src/ui_trackselectiondialog.h:212 ../bin/src/ui_ripcddialog.h:304
 msgid "Track"
 msgstr "Песен"
-
-#: internet/soundcloud/soundcloudservice.cpp:136
-msgid "Tracks"
-msgstr "Песни"
 
 #: ../bin/src/ui_transcodedialog.h:213 ../bin/src/ui_mainwindow.h:706
 msgid "Transcode Music"
@@ -5313,11 +5291,11 @@ msgstr "Неизвестна грешка"
 msgid "Unset cover"
 msgstr "Махни обложката"
 
-#: ui/mainwindow.cpp:1779
+#: ui/mainwindow.cpp:1792
 msgid "Unskip selected tracks"
 msgstr "Не прескачай избраните песни"
 
-#: ui/mainwindow.cpp:1777
+#: ui/mainwindow.cpp:1790
 msgid "Unskip track"
 msgstr "Не прескачай песента"
 
@@ -5428,7 +5406,7 @@ msgstr ""
 msgid "Use temporal noise shaping"
 msgstr "Използване на оформяне на звук по време"
 
-#: ../bin/src/ui_behavioursettingspage.h:326
+#: ../bin/src/ui_behavioursettingspage.h:321
 msgid "Use the system default"
 msgstr "Използвай подразбиращия се за систмета"
 
@@ -5448,7 +5426,7 @@ msgstr "Използване на нормализация на звука"
 msgid "Used"
 msgstr "Използван"
 
-#: ui/settingsdialog.cpp:147
+#: ui/settingsdialog.cpp:146
 msgid "User interface"
 msgstr "Потребителски интерфейс"
 
@@ -5460,7 +5438,7 @@ msgstr "Потребителски интерфейс"
 msgid "Username"
 msgstr "Потребителско име"
 
-#: ../bin/src/ui_behavioursettingspage.h:340
+#: ../bin/src/ui_behavioursettingspage.h:335
 msgid "Using the menu to add a song will..."
 msgstr "Използването на менюто за добавяне на песен ще..."
 
@@ -5533,7 +5511,7 @@ msgstr "WAV"
 msgid "WMA"
 msgstr "WMA"
 
-#: playlist/playlisttabbar.cpp:192 ../bin/src/ui_behavioursettingspage.h:322
+#: playlist/playlisttabbar.cpp:192 ../bin/src/ui_behavioursettingspage.h:317
 msgid "Warn me when closing a playlist tab"
 msgstr "Предупреди ме, преди да се затвори подпрозорец със списък от песни"
 
@@ -5553,7 +5531,7 @@ msgstr "Уебсайт"
 msgid "Weeks"
 msgstr "Седмици"
 
-#: ../bin/src/ui_behavioursettingspage.h:329
+#: ../bin/src/ui_behavioursettingspage.h:324
 msgid "When Clementine starts"
 msgstr "При стартиране на Clementine"
 
@@ -5563,7 +5541,7 @@ msgid ""
 "If there are no matches then it will use the largest image in the directory."
 msgstr "Когато Clementine търси обложки първо ще потърси за картинки съдържащи една от тези думи.\nАко няма свъпадения тогава ще използва най-големите изображения в директорията,"
 
-#: ../bin/src/ui_behavioursettingspage.h:377
+#: ../bin/src/ui_behavioursettingspage.h:372
 msgid "When saving a playlist, file paths should be"
 msgstr "При запис на списъци с песни, пътищата на файла трябва да са"
 
@@ -5639,7 +5617,7 @@ msgid ""
 "well?"
 msgstr "Искате ли да преместим другите песни от този албум в Различни изпълнители?"
 
-#: ui/mainwindow.cpp:2681
+#: ui/mainwindow.cpp:2694
 msgid "Would you like to run a full rescan right now?"
 msgstr "Искате ли да изпълните пълно повторно сканиране сега?"
 
@@ -5647,7 +5625,7 @@ msgstr "Искате ли да изпълните пълно повторно с
 msgid "Write all songs statistics into songs' files"
 msgstr "Записване на всички статистики за песните във файловете на песните"
 
-#: ../bin/src/ui_behavioursettingspage.h:382
+#: ../bin/src/ui_behavioursettingspage.h:377
 msgid "Write metadata"
 msgstr "Запиши метадата"
 
@@ -5733,13 +5711,6 @@ msgstr "Нямате Spotify Premium акаунт."
 msgid "You do not have an active subscription"
 msgstr "Нямате активен абонамент"
 
-#: ../bin/src/ui_soundcloudsettingspage.h:101
-msgid ""
-"You don't need to be logged in to search and to listen to music on "
-"SoundCloud. However, you need to login to access your playlists and your "
-"stream."
-msgstr "Не е нужно да сте логнати, за да слушате музика от SoundCloud. Но е нужно за да имате достъп до плейлистите си и потока си."
-
 #: internet/spotify/spotifyservice.cpp:205
 msgid ""
 "You have been logged out of Spotify, please re-enter your password in the "
@@ -5761,7 +5732,7 @@ msgid ""
 "shortcuts in Clementine."
 msgstr "Трябва да влезете в Системните Настройки и да позволите на Clementine да \"<span style=\" font-style:italic;\">контролира вашия компютър</span>\" за да изпозлвате глобалните клавишни комбинации в Clementine."
 
-#: ../bin/src/ui_behavioursettingspage.h:328
+#: ../bin/src/ui_behavioursettingspage.h:323
 msgid "You will need to restart Clementine if you change the language."
 msgstr "Трябва да рестартирате Clementine, ако смените езика."
 

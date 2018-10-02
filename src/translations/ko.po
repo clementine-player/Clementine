@@ -22,7 +22,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2018-09-17 13:31+0000\n"
+"PO-Revision-Date: 2018-10-01 17:06+0000\n"
 "Last-Translator: hatstand <john.maguire@gmail.com>\n"
 "Language-Team: Korean (http://www.transifex.com/davidsansome/clementine/language/ko/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -65,7 +65,7 @@ msgstr " ms"
 msgid " pt"
 msgstr " pt"
 
-#: ../bin/src/ui_behavioursettingspage.h:375
+#: ../bin/src/ui_behavioursettingspage.h:370
 msgid " s"
 msgstr " "
 
@@ -407,6 +407,10 @@ msgid ""
 "A song will be included in the playlist if it matches these conditions."
 msgstr "노래가 이러한 조건과 일치하면 재생 목록에 포함됩니다."
 
+#: ../bin/src/ui_behavioursettingspage.h:373
+msgid "A&utomatic"
+msgstr ""
+
 #: smartplaylists/searchterm.cpp:396
 msgid "A-Z"
 msgstr "A-Z"
@@ -453,7 +457,7 @@ msgid "About Qt..."
 msgstr "Qt 정보"
 
 #: playlist/playlistsaveoptionsdialog.cpp:34
-#: ../bin/src/ui_behavioursettingspage.h:379
+#: ../bin/src/ui_behavioursettingspage.h:374
 msgid "Absolute"
 msgstr "절대경로"
 
@@ -479,10 +483,6 @@ msgstr "동작"
 #: wiimotedev/wiimotesettingspage.cpp:103
 msgid "Activate/Deactivate Wii Remote"
 msgstr ""
-
-#: internet/soundcloud/soundcloudservice.cpp:128
-msgid "Activities stream"
-msgstr "활동 스트림"
 
 #: internet/podcasts/addpodcastdialog.cpp:63
 msgid "Add Podcast"
@@ -512,7 +512,7 @@ msgstr "다른 스트림 추가..."
 msgid "Add directory..."
 msgstr "디렉토리 추가..."
 
-#: ui/mainwindow.cpp:2049
+#: ui/mainwindow.cpp:2062
 msgid "Add file"
 msgstr "파일 추가"
 
@@ -532,7 +532,7 @@ msgstr "파일 추가..."
 msgid "Add files to transcode"
 msgstr "변환할 파일 추가"
 
-#: transcoder/transcodedialog.cpp:306 ui/mainwindow.cpp:2076
+#: transcoder/transcodedialog.cpp:306 ui/mainwindow.cpp:2089
 #: ripper/ripcddialog.cpp:201
 msgid "Add folder"
 msgstr "폴더 추가"
@@ -637,7 +637,7 @@ msgstr "Spotify 재색목록에 추가"
 msgid "Add to Spotify starred"
 msgstr "Spotify 별점에 추가"
 
-#: ui/mainwindow.cpp:1850
+#: ui/mainwindow.cpp:1863
 msgid "Add to another playlist"
 msgstr "다른 재생목록에 추가"
 
@@ -645,8 +645,8 @@ msgstr "다른 재생목록에 추가"
 msgid "Add to playlist"
 msgstr "재생목록에 추가"
 
-#: ../bin/src/ui_behavioursettingspage.h:359
-#: ../bin/src/ui_behavioursettingspage.h:371
+#: ../bin/src/ui_behavioursettingspage.h:354
+#: ../bin/src/ui_behavioursettingspage.h:366
 msgid "Add to the queue"
 msgstr "대기열에 추가"
 
@@ -727,7 +727,7 @@ msgstr "앨범 표지가 없는 앨범"
 msgid "All"
 msgstr "전체"
 
-#: ui/mainwindow.cpp:158
+#: ui/mainwindow.cpp:159
 msgid "All Files (*)"
 msgstr "모든 파일 (*)"
 
@@ -777,16 +777,16 @@ msgstr "미드/사이드 인코딩 적용"
 msgid "Alongside the originals"
 msgstr "원본과 함께"
 
-#: ../bin/src/ui_behavioursettingspage.h:331
-msgid "Always hide the main window"
-msgstr "항상 메인 창 숨기기"
+#: ../bin/src/ui_behavioursettingspage.h:326
+msgid "Alwa&ys hide the main window"
+msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:330
-msgid "Always show the main window"
-msgstr "항상 메인 창 표시함"
+#: ../bin/src/ui_behavioursettingspage.h:325
+msgid "Always show &the main window"
+msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:345
-#: ../bin/src/ui_behavioursettingspage.h:365
+#: ../bin/src/ui_behavioursettingspage.h:340
+#: ../bin/src/ui_behavioursettingspage.h:360
 msgid "Always start playing"
 msgstr "항상 재생 시작"
 
@@ -833,7 +833,7 @@ msgstr "재생목록에 파일/URL 추가"
 msgid "Append to current playlist"
 msgstr "현재 재생목록에 추가"
 
-#: ../bin/src/ui_behavioursettingspage.h:356
+#: ../bin/src/ui_behavioursettingspage.h:351
 msgid "Append to the playlist"
 msgstr "재생목록에 추가"
 
@@ -865,7 +865,7 @@ msgstr "라이브러리의 모든 곡의 해당하는 음악 파일에 음악 �
 msgid "Artist"
 msgstr "음악가"
 
-#: ui/mainwindow.cpp:283
+#: ui/mainwindow.cpp:284
 msgid "Artist info"
 msgstr "음악가 정보"
 
@@ -873,9 +873,9 @@ msgstr "음악가 정보"
 msgid "Artist's initial"
 msgstr "음악가 이니셜"
 
-#: ../bin/src/ui_behavioursettingspage.h:381
-msgid "Ask when saving"
-msgstr "저장할 때 묻기"
+#: ../bin/src/ui_behavioursettingspage.h:376
+msgid "As&k when saving"
+msgstr ""
 
 #: ../bin/src/ui_transcodedialog.h:225
 #: ../bin/src/ui_networkremotesettingspage.h:250
@@ -908,7 +908,6 @@ msgid "Auto"
 msgstr "자동"
 
 #: playlist/playlistsaveoptionsdialog.cpp:32
-#: ../bin/src/ui_behavioursettingspage.h:378
 msgid "Automatic"
 msgstr "자동"
 
@@ -957,7 +956,7 @@ msgstr "배경 그림"
 msgid "Background opacity"
 msgstr "배경 투명도"
 
-#: core/database.cpp:648
+#: core/database.cpp:664
 msgid "Backing up database"
 msgstr "데이터베이스 백업"
 
@@ -981,7 +980,7 @@ msgstr "기본 파랑"
 msgid "Basic audio type"
 msgstr "기본 오디오 형식"
 
-#: ../bin/src/ui_behavioursettingspage.h:318
+#: ../bin/src/ui_behavioursettingspage.h:313
 msgid "Behavior"
 msgstr "행동"
 
@@ -1099,7 +1098,7 @@ msgstr "단축키 바꾸기..."
 msgid "Change shuffle mode"
 msgstr "셔플 모드 "
 
-#: ../bin/src/ui_behavioursettingspage.h:370
+#: ../bin/src/ui_behavioursettingspage.h:365
 msgid "Change the currently playing song"
 msgstr "지금 재생 중인 음악 바꾸기"
 
@@ -1129,7 +1128,7 @@ msgstr "새로운 에피소드 확인"
 msgid "Check for updates"
 msgstr "업데이트 확인"
 
-#: ui/mainwindow.cpp:820
+#: ui/mainwindow.cpp:823
 msgid "Check for updates..."
 msgstr "업데이트 확인..."
 
@@ -1271,7 +1270,6 @@ msgstr "여기를 클릭하여 즐겨찾기에 추가하세요, 창 왼쪽 \"재
 msgid "Click to toggle between remaining time and total time"
 msgstr "남은 시간과 전체 시간을 바꾸려면 클릭하세요"
 
-#: ../bin/src/ui_soundcloudsettingspage.h:103
 #: ../bin/src/ui_lastfmsettingspage.h:133
 #: ../bin/src/ui_googledrivesettingspage.h:102
 #: ../bin/src/ui_dropboxsettingspage.h:102
@@ -1350,10 +1348,6 @@ msgstr "Magnatune 설정..."
 msgid "Configure Shortcuts"
 msgstr "단축키 설정"
 
-#: internet/soundcloud/soundcloudservice.cpp:381
-msgid "Configure SoundCloud..."
-msgstr "SoundCloud 설정..."
-
 #: internet/spotify/spotifyservice.cpp:927
 msgid "Configure Spotify..."
 msgstr "Spotify 설정..."
@@ -1366,7 +1360,7 @@ msgstr "Subsonic 설정"
 msgid "Configure global search..."
 msgstr "글로벌 검색 설정..."
 
-#: ui/mainwindow.cpp:659
+#: ui/mainwindow.cpp:660
 msgid "Configure library..."
 msgstr "라이브러리 설정..."
 
@@ -1438,11 +1432,11 @@ msgid "Copy to clipboard"
 msgstr "클립보드로 복사"
 
 #: library/libraryview.cpp:419 internet/podcasts/podcastservice.cpp:438
-#: ui/mainwindow.cpp:719 widgets/fileviewlist.cpp:44
+#: ui/mainwindow.cpp:720 widgets/fileviewlist.cpp:44
 msgid "Copy to device..."
 msgstr "장치에 복사..."
 
-#: devices/deviceview.cpp:228 ui/mainwindow.cpp:709
+#: devices/deviceview.cpp:228 ui/mainwindow.cpp:710
 #: widgets/fileviewlist.cpp:40
 msgid "Copy to library..."
 msgstr "라이브러리에 복사..."
@@ -1586,7 +1580,7 @@ msgstr "D-Bus 패스"
 msgid "Dance"
 msgstr "댄스"
 
-#: core/database.cpp:601
+#: core/database.cpp:617
 msgid ""
 "Database corruption detected. Please read https://github.com/clementine-"
 "player/Clementine/wiki/Database-Corruption for instructions on how to "
@@ -1648,7 +1642,7 @@ msgid "Delete downloaded data"
 msgstr "다운로드된 데이터 삭제"
 
 #: devices/deviceview.cpp:408 library/libraryview.cpp:678
-#: ui/mainwindow.cpp:2432 widgets/fileview.cpp:188
+#: ui/mainwindow.cpp:2445 widgets/fileview.cpp:188
 msgid "Delete files"
 msgstr "파일 삭제"
 
@@ -1656,7 +1650,7 @@ msgstr "파일 삭제"
 msgid "Delete from device..."
 msgstr "장치에서 삭제..."
 
-#: library/libraryview.cpp:422 ui/mainwindow.cpp:722
+#: library/libraryview.cpp:422 ui/mainwindow.cpp:723
 #: widgets/fileviewlist.cpp:47
 msgid "Delete from disk..."
 msgstr "디스크에서 삭제..."
@@ -1689,11 +1683,11 @@ msgstr "파일 삭제 중"
 msgid "Depth"
 msgstr "깊이"
 
-#: ui/mainwindow.cpp:1763
+#: ui/mainwindow.cpp:1776
 msgid "Dequeue selected tracks"
 msgstr "선택한 트랙을 대기열에서 해제"
 
-#: ui/mainwindow.cpp:1761
+#: ui/mainwindow.cpp:1774
 msgid "Dequeue track"
 msgstr "트랙을 대기열에서 해제"
 
@@ -1722,7 +1716,7 @@ msgstr "장치 이름"
 msgid "Device properties..."
 msgstr "장치 속성..."
 
-#: ui/mainwindow.cpp:276
+#: ui/mainwindow.cpp:277
 msgid "Devices"
 msgstr "장치"
 
@@ -1852,11 +1846,11 @@ msgstr "기부"
 msgid "Double click to open"
 msgstr "열려면 더블클릭하세요"
 
-#: ../bin/src/ui_behavioursettingspage.h:367
+#: ../bin/src/ui_behavioursettingspage.h:362
 msgid "Double clicking a song in the playlist will..."
 msgstr "음악을 더블클릭하면 재생목록으로..."
 
-#: ../bin/src/ui_behavioursettingspage.h:353
+#: ../bin/src/ui_behavioursettingspage.h:348
 msgid "Double clicking a song will..."
 msgstr "노래를 더블클릭하면..."
 
@@ -1965,7 +1959,7 @@ msgstr "다이나믹 랜덤 믹스"
 msgid "Edit smart playlist..."
 msgstr "스마트 재생목록 편집..."
 
-#: ui/mainwindow.cpp:1813
+#: ui/mainwindow.cpp:1826
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr "태그 수정 \"%1\"..."
@@ -2011,7 +2005,7 @@ msgstr "이퀄라이저 사용"
 msgid "Enable shortcuts only when Clementine is focused"
 msgstr "Clementine이 활성화 되었을 때에만 단축키 허용"
 
-#: ../bin/src/ui_behavioursettingspage.h:339
+#: ../bin/src/ui_behavioursettingspage.h:331
 msgid "Enable song metadata inline edition with click"
 msgstr "클릭으로 음악 메타데이터 인라인판 사용"
 
@@ -2100,8 +2094,8 @@ msgid "Equivalent to --log-levels *:3"
 msgstr "동등한 --log-level *:3"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:246
-#: library/libraryview.cpp:672 ui/mainwindow.cpp:2105 ui/mainwindow.cpp:2384
-#: ui/mainwindow.cpp:2563
+#: library/libraryview.cpp:672 ui/mainwindow.cpp:2118 ui/mainwindow.cpp:2397
+#: ui/mainwindow.cpp:2576
 msgid "Error"
 msgstr "오류"
 
@@ -2247,7 +2241,7 @@ msgstr "페이드 아웃"
 msgid "Fading duration"
 msgstr "페이드 아웃 시간"
 
-#: ui/mainwindow.cpp:2106
+#: ui/mainwindow.cpp:2119
 msgid "Failed reading CD drive"
 msgstr "CD 드라이브 읽기 실패"
 
@@ -2281,10 +2275,6 @@ msgstr "새 자동 태그를 '%1'에 쓰는데 실패하였음"
 #: ../bin/src/ui_transcoderoptionsmp3.h:199
 msgid "Fast"
 msgstr "빠른"
-
-#: internet/soundcloud/soundcloudservice.cpp:141
-msgid "Favorites"
-msgstr "즐겨찾기"
 
 #: library/library.cpp:88
 msgid "Favourite tracks"
@@ -2352,7 +2342,7 @@ msgstr "파일 형태"
 msgid "Filename"
 msgstr "파일 "
 
-#: ui/mainwindow.cpp:266
+#: ui/mainwindow.cpp:267
 msgid "Files"
 msgstr "파일"
 
@@ -2465,7 +2455,7 @@ msgstr "고음 강화"
 msgid "Ge&nre"
 msgstr "장르(&N)"
 
-#: ui/settingsdialog.cpp:133
+#: ui/settingsdialog.cpp:132
 msgid "General"
 msgstr "일반 "
 
@@ -2524,7 +2514,7 @@ msgstr "Google Drive"
 msgid "Got %1 covers out of %2 (%3 failed)"
 msgstr "%2 중 %1개 커버 가져옴 (%3 실패 됨)"
 
-#: ../bin/src/ui_behavioursettingspage.h:335
+#: ../bin/src/ui_behavioursettingspage.h:334
 msgid "Grey out non existent songs in my playlists"
 msgstr "내 재생목록에서 존재하지 않는 음악 회색화"
 
@@ -2653,7 +2643,7 @@ msgstr "상단에 아이콘"
 msgid "Identifying song"
 msgstr "음악을 식별하는 "
 
-#: ../bin/src/ui_behavioursettingspage.h:337
+#: ../bin/src/ui_behavioursettingspage.h:329
 msgid ""
 "If activated, clicking a selected song in the playlist view will let you "
 "edit the tag value directly"
@@ -2754,15 +2744,15 @@ msgstr "추가..."
 msgid "Installed"
 msgstr "설치 됨"
 
-#: core/database.cpp:585
+#: core/database.cpp:601
 msgid "Integrity check"
 msgstr "무결성 검사"
 
-#: ui/mainwindow.cpp:272
+#: ui/mainwindow.cpp:273
 msgid "Internet"
 msgstr "인터넷"
 
-#: ui/settingsdialog.cpp:156
+#: ui/settingsdialog.cpp:155
 msgid "Internet providers"
 msgstr "인터넷 "
 
@@ -2835,7 +2825,7 @@ msgstr "Jamendo 금주의 최그 트랙"
 msgid "Jamendo database"
 msgstr "Jamendo 데이터베이스"
 
-#: ../bin/src/ui_behavioursettingspage.h:350
+#: ../bin/src/ui_behavioursettingspage.h:345
 msgid "Jump to previous song right away"
 msgstr "바로 이전 곡으로 이동"
 
@@ -2855,7 +2845,7 @@ msgstr "%1 초 동안 버튼 유지..."
 msgid "Keep buttons for %1 seconds..."
 msgstr "%1 초 동안 버튼 유지..."
 
-#: ../bin/src/ui_behavioursettingspage.h:321
+#: ../bin/src/ui_behavioursettingspage.h:316
 msgid "Keep running in the background when the window is closed"
 msgstr "창을 닫을 때 백그라운드에서 계속 실행"
 
@@ -2872,7 +2862,7 @@ msgstr "고양이"
 msgid "Kuduro"
 msgstr "쿠두루"
 
-#: ../bin/src/ui_behavioursettingspage.h:323
+#: ../bin/src/ui_behavioursettingspage.h:318
 msgid "Language"
 msgstr "언어"
 
@@ -2946,7 +2936,7 @@ msgstr "왼쪽"
 msgid "Length"
 msgstr "길이"
 
-#: ui/mainwindow.cpp:251 ui/mainwindow.cpp:263
+#: ui/mainwindow.cpp:252 ui/mainwindow.cpp:264
 #: ../bin/src/ui_seafilesettingspage.h:177
 msgid "Library"
 msgstr "라이브러리 "
@@ -2955,7 +2945,7 @@ msgstr "라이브러리 "
 msgid "Library advanced grouping"
 msgstr "향상된 그룹 "
 
-#: ui/mainwindow.cpp:2683
+#: ui/mainwindow.cpp:2696
 msgid "Library rescan notice"
 msgstr "라이브러리 재탐색 알림"
 
@@ -3042,7 +3032,6 @@ msgstr "현재 재생목록을 교체할 파일/URL 불러오기"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:162
 #: ../bin/src/ui_magnatunesettingspage.h:163
-#: ../bin/src/ui_soundcloudsettingspage.h:102
 #: ../bin/src/ui_spotifysettingspage.h:210
 #: ../bin/src/ui_subsonicsettingspage.h:137
 #: ../bin/src/ui_lastfmsettingspage.h:132
@@ -3272,7 +3261,7 @@ msgstr "마운트 지점"
 msgid "Move down"
 msgstr "아래로 이동"
 
-#: ui/mainwindow.cpp:712 widgets/fileviewlist.cpp:42
+#: ui/mainwindow.cpp:713 widgets/fileviewlist.cpp:42
 msgid "Move to library..."
 msgstr "라이브러리로 이동..."
 
@@ -3281,7 +3270,7 @@ msgstr "라이브러리로 이동..."
 msgid "Move up"
 msgstr "위로 이동"
 
-#: transcoder/transcodedialog.cpp:225 ui/mainwindow.cpp:2050
+#: transcoder/transcodedialog.cpp:225 ui/mainwindow.cpp:2063
 msgid "Music"
 msgstr "음악"
 
@@ -3328,8 +3317,8 @@ msgstr "없음"
 msgid "Never played"
 msgstr "재생한 적 없음"
 
-#: ../bin/src/ui_behavioursettingspage.h:343
-#: ../bin/src/ui_behavioursettingspage.h:363
+#: ../bin/src/ui_behavioursettingspage.h:338
+#: ../bin/src/ui_behavioursettingspage.h:358
 msgid "Never start playing"
 msgstr "재생을 시작하지 않음"
 
@@ -3339,7 +3328,7 @@ msgstr "재생을 시작하지 않음"
 msgid "New folder"
 msgstr "새 폴더"
 
-#: ui/mainwindow.cpp:1867 ../bin/src/ui_mainwindow.h:709
+#: ui/mainwindow.cpp:1880 ../bin/src/ui_mainwindow.h:709
 msgid "New playlist"
 msgstr "새로운 재생목록"
 
@@ -3406,7 +3395,7 @@ msgstr "짧은 블록 "
 msgid "None"
 msgstr "없음"
 
-#: library/libraryview.cpp:673 ui/mainwindow.cpp:2385 ui/mainwindow.cpp:2564
+#: library/libraryview.cpp:673 ui/mainwindow.cpp:2398 ui/mainwindow.cpp:2577
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "선택된 음악들이 장치에 복사되기 적합하지 않음"
 
@@ -3535,7 +3524,6 @@ msgstr "투명도"
 #: internet/magnatune/magnatuneservice.cpp:287
 #: internet/somafm/somafmservice.cpp:102
 #: internet/intergalacticfm/intergalacticfmservice.cpp:102
-#: internet/soundcloud/soundcloudservice.cpp:377
 #, qt-format
 msgid "Open %1 in browser"
 msgstr "브라우저에서 %1 열기"
@@ -3574,7 +3562,7 @@ msgstr "Google Drive에서 열기"
 msgid "Open in new playlist"
 msgstr "새로운 재생목록에서 열기"
 
-#: ../bin/src/ui_behavioursettingspage.h:358
+#: ../bin/src/ui_behavioursettingspage.h:353
 msgctxt "Refers to behavior settings in Clementine settings page."
 msgid "Open in new playlist"
 msgstr "새로운 재생목록에서 열기"
@@ -3614,7 +3602,7 @@ msgstr "Opus"
 msgid "Organise Files"
 msgstr "파일 정리"
 
-#: library/libraryview.cpp:416 ui/mainwindow.cpp:715
+#: library/libraryview.cpp:416 ui/mainwindow.cpp:716
 msgid "Organise files..."
 msgstr "파일 정리..."
 
@@ -3698,7 +3686,7 @@ msgstr "파티"
 msgid "Password"
 msgstr "비밀번호"
 
-#: core/globalshortcuts.cpp:50 ui/mainwindow.cpp:1160 ui/mainwindow.cpp:1663
+#: core/globalshortcuts.cpp:50 ui/mainwindow.cpp:1169 ui/mainwindow.cpp:1676
 #: ui/qtsystemtrayicon.cpp:189 wiimotedev/wiimotesettingspage.cpp:114
 msgid "Pause"
 msgstr "일시중지"
@@ -3726,8 +3714,8 @@ msgstr "픽셀"
 msgid "Plain sidebar"
 msgstr "일반 사이드바"
 
-#: core/globalshortcuts.cpp:49 ui/mainwindow.cpp:676 ui/mainwindow.cpp:1126
-#: ui/mainwindow.cpp:1145 ui/mainwindow.cpp:1667 ui/qtsystemtrayicon.cpp:177
+#: core/globalshortcuts.cpp:49 ui/mainwindow.cpp:677 ui/mainwindow.cpp:1133
+#: ui/mainwindow.cpp:1154 ui/mainwindow.cpp:1680 ui/qtsystemtrayicon.cpp:177
 #: ui/qtsystemtrayicon.cpp:203 wiimotedev/wiimotesettingspage.cpp:107
 #: ../bin/src/ui_mainwindow.h:675
 msgid "Play"
@@ -3741,16 +3729,16 @@ msgstr "재생 횟수"
 msgid "Play if stopped, pause if playing"
 msgstr "중지중일때 재생, 재생중일때 중지"
 
-#: ../bin/src/ui_behavioursettingspage.h:344
-#: ../bin/src/ui_behavioursettingspage.h:364
+#: ../bin/src/ui_behavioursettingspage.h:339
+#: ../bin/src/ui_behavioursettingspage.h:359
 msgid "Play if there is nothing already playing"
 msgstr "이미 재생되는 곡이 없다면 재생"
 
-#: library/libraryview.cpp:396 ui/mainwindow.cpp:1774
+#: library/libraryview.cpp:396 ui/mainwindow.cpp:1787
 msgid "Play next"
 msgstr ""
 
-#: ui/mainwindow.cpp:1772
+#: ui/mainwindow.cpp:1785
 msgid "Play selected tracks next"
 msgstr ""
 
@@ -3789,7 +3777,7 @@ msgstr "재생목록 옵션"
 msgid "Playlist type"
 msgstr "재생목록 종류"
 
-#: internet/soundcloud/soundcloudservice.cpp:133 ui/mainwindow.cpp:269
+#: ui/mainwindow.cpp:270
 msgid "Playlists"
 msgstr "재생목록"
 
@@ -3880,7 +3868,7 @@ msgstr "a키를 누르세요"
 msgid "Press a key combination to use for %1..."
 msgstr "%1에 사용하기 위한 키조합을 누르세요..."
 
-#: ../bin/src/ui_behavioursettingspage.h:347
+#: ../bin/src/ui_behavioursettingspage.h:342
 msgid "Pressing \"Previous\" in player will..."
 msgstr "\"이전 트랙\"을 누르면..."
 
@@ -3957,12 +3945,12 @@ msgstr "장치 질의..."
 msgid "Queue Manager"
 msgstr "대기열 관리자"
 
-#: ui/mainwindow.cpp:1767
+#: ui/mainwindow.cpp:1780
 msgid "Queue selected tracks"
 msgstr "선택한 트랙을 큐에 추가"
 
 #: globalsearch/globalsearchview.cpp:464 library/libraryview.cpp:393
-#: ui/mainwindow.cpp:1765
+#: ui/mainwindow.cpp:1778
 msgid "Queue track"
 msgstr "대기열 트랙"
 
@@ -4052,7 +4040,7 @@ msgid "Reggae"
 msgstr "레게"
 
 #: playlist/playlistsaveoptionsdialog.cpp:33
-#: ../bin/src/ui_behavioursettingspage.h:380
+#: ../bin/src/ui_behavioursettingspage.h:375
 msgid "Relative"
 msgstr "상대경로"
 
@@ -4060,9 +4048,9 @@ msgstr "상대경로"
 msgid "Remember Wii remote swing"
 msgstr "Wii 리모콘 스윙 기억하기"
 
-#: ../bin/src/ui_behavioursettingspage.h:332
-msgid "Remember from last time"
-msgstr "마지막 기억"
+#: ../bin/src/ui_behavioursettingspage.h:327
+msgid "Remember from &last time"
+msgstr ""
 
 #: ../bin/src/ui_playlistsaveoptionsdialog.h:99
 msgid "Remember my choice"
@@ -4140,7 +4128,7 @@ msgstr "한 곡 반복"
 msgid "Replace current playlist"
 msgstr "현재 재생목록 교체"
 
-#: ../bin/src/ui_behavioursettingspage.h:357
+#: ../bin/src/ui_behavioursettingspage.h:352
 msgid "Replace the playlist"
 msgstr "재생목록 교체"
 
@@ -4172,7 +4160,7 @@ msgstr "초기화"
 msgid "Reset play counts"
 msgstr "재생 횟수 초기화"
 
-#: ../bin/src/ui_behavioursettingspage.h:351
+#: ../bin/src/ui_behavioursettingspage.h:346
 msgid "Restart song, then jump to previous if pressed again"
 msgstr "음악을 다시 시작한 다음 다시 누르면 이전으로 건너 뜁니다."
 
@@ -4185,7 +4173,7 @@ msgstr "트랙을 다시 시작하거나 시작한 지 8 초 이내에는 이전
 msgid "Restrict to ASCII characters"
 msgstr "ASCII 문자로 제한"
 
-#: ../bin/src/ui_behavioursettingspage.h:333
+#: ../bin/src/ui_behavioursettingspage.h:332
 msgid "Resume playback on start"
 msgstr "시작할 때 재생목록 일시정지"
 
@@ -4327,7 +4315,7 @@ msgstr "점수"
 msgid "Scrobble tracks that I listen to"
 msgstr "내가 들은 청취 기록 트랙"
 
-#: ../bin/src/ui_behavioursettingspage.h:320
+#: ../bin/src/ui_behavioursettingspage.h:315
 msgid "Scroll over icon to change track"
 msgstr "트랙을 변경하려면 아이콘을 스크롤하세요"
 
@@ -4341,7 +4329,7 @@ msgstr "Seafile"
 msgid "Search"
 msgstr "검색"
 
-#: ui/mainwindow.cpp:260 ../bin/src/ui_globalsearchsettingspage.h:141
+#: ui/mainwindow.cpp:261 ../bin/src/ui_globalsearchsettingspage.h:141
 msgctxt "Global search settings dialog title."
 msgid "Search"
 msgstr "검색"
@@ -4366,7 +4354,7 @@ msgstr "Subsonic 검색"
 msgid "Search automatically"
 msgstr "자동적으로 찾기"
 
-#: ui/mainwindow.cpp:696
+#: ui/mainwindow.cpp:697
 msgid "Search for album"
 msgstr "앨범 검색"
 
@@ -4379,7 +4367,7 @@ msgstr "앨범 표지 검색..."
 msgid "Search for anything"
 msgstr "검색"
 
-#: ui/mainwindow.cpp:693
+#: ui/mainwindow.cpp:694
 msgid "Search for artist"
 msgstr "음악가 검색"
 
@@ -4403,7 +4391,6 @@ msgstr "모드 검색"
 msgid "Search options"
 msgstr "옵션 검색"
 
-#: internet/soundcloud/soundcloudservice.cpp:119
 #: internet/spotify/spotifyservice.cpp:400
 msgid "Search results"
 msgstr "검색 결과"
@@ -4437,7 +4424,7 @@ msgstr "현재 재생중인 트랙을 상대 양으로 탐색"
 msgid "Seek the currently playing track to an absolute position"
 msgstr "현재 재생중인 트랙을 절대 위치로 탐색"
 
-#: ../bin/src/ui_behavioursettingspage.h:373
+#: ../bin/src/ui_behavioursettingspage.h:368
 msgid "Seeking using a keyboard shortcut or mouse wheel"
 msgstr "키보드 단축키 또는 마우스 휠을 사용하여 탐색"
 
@@ -4497,7 +4484,7 @@ msgstr "서버 자세히"
 msgid "Service offline"
 msgstr "서비스 오프라인"
 
-#: ui/mainwindow.cpp:1812
+#: ui/mainwindow.cpp:1825
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr "%1을 \"%2\"로 설정..."
@@ -4573,7 +4560,7 @@ msgstr "예쁜 OSD 보기"
 msgid "Show above status bar"
 msgstr "상태 표시 줄 위에 보기"
 
-#: ui/mainwindow.cpp:643
+#: ui/mainwindow.cpp:644
 msgid "Show all songs"
 msgstr "모든 음악 보기"
 
@@ -4593,12 +4580,12 @@ msgstr "분할 표시"
 msgid "Show fullsize..."
 msgstr "전체화면 보기..."
 
-#: library/libraryview.cpp:433 ui/mainwindow.cpp:725
+#: library/libraryview.cpp:433 ui/mainwindow.cpp:726
 #: widgets/fileviewlist.cpp:53
 msgid "Show in file browser..."
 msgstr "파일 브라우져에서 보기..."
 
-#: ui/mainwindow.cpp:727
+#: ui/mainwindow.cpp:728
 msgid "Show in library..."
 msgstr "라이브러리에서 보기..."
 
@@ -4610,11 +4597,11 @@ msgstr "다양한 음악가에서 보기"
 msgid "Show moodbar"
 msgstr "분위기 막대 보여주기"
 
-#: ui/mainwindow.cpp:645
+#: ui/mainwindow.cpp:646
 msgid "Show only duplicates"
 msgstr "복사본만 보기"
 
-#: ui/mainwindow.cpp:647
+#: ui/mainwindow.cpp:648
 msgid "Show only untagged"
 msgstr "태그되지 않은 것만 보기"
 
@@ -4638,7 +4625,7 @@ msgstr "\"좋아요\" 버튼 보기"
 msgid "Show the scrobble button in the main window"
 msgstr "메인 창에서 청취기록 버튼 보이기"
 
-#: ../bin/src/ui_behavioursettingspage.h:319
+#: ../bin/src/ui_behavioursettingspage.h:314
 msgid "Show tray icon"
 msgstr "트레이 아이콘 보기"
 
@@ -4706,11 +4693,11 @@ msgstr "넘긴 회수"
 msgid "Skip forwards in playlist"
 msgstr "재생목록에서 앞으로 넘기기"
 
-#: ui/mainwindow.cpp:1783
+#: ui/mainwindow.cpp:1796
 msgid "Skip selected tracks"
 msgstr "선택된 트랙들 "
 
-#: ui/mainwindow.cpp:1781
+#: ui/mainwindow.cpp:1794
 msgid "Skip track"
 msgstr "트랙 "
 
@@ -4742,7 +4729,7 @@ msgstr "소프트 록"
 msgid "Song Information"
 msgstr "음악 정보"
 
-#: ui/mainwindow.cpp:280
+#: ui/mainwindow.cpp:281
 msgid "Song info"
 msgstr "음악 정보"
 
@@ -4773,10 +4760,6 @@ msgstr "음악 정렬"
 #: ../bin/src/ui_querysortpage.h:137
 msgid "Sorting"
 msgstr "정렬"
-
-#: ../bin/src/ui_soundcloudsettingspage.h:100
-msgid "SoundCloud"
-msgstr "SoundCloud"
 
 #: playlist/playlist.cpp:1404
 msgid "Source"
@@ -4836,7 +4819,6 @@ msgstr "현재 재생중인 재생목록 시작"
 msgid "Start transcoding"
 msgstr "변환 시작"
 
-#: internet/soundcloud/soundcloudservice.cpp:121
 #: internet/spotify/spotifyservice.cpp:402
 msgid ""
 "Start typing something on the search box above to fill this search results "
@@ -4869,7 +4851,7 @@ msgstr "현재 트랙이 끝난 후 정지"
 msgid "Stop after every track"
 msgstr "모든 트랙 이후에 종료"
 
-#: ui/mainwindow.cpp:680 ../bin/src/ui_mainwindow.h:679
+#: ui/mainwindow.cpp:681 ../bin/src/ui_mainwindow.h:679
 msgid "Stop after this track"
 msgstr "이번 트랙 이후 정지"
 
@@ -4881,7 +4863,7 @@ msgstr "재생 "
 msgid "Stop playback after current track"
 msgstr "현재 트랙 이후에 재생 중지"
 
-#: ../bin/src/ui_behavioursettingspage.h:334
+#: ../bin/src/ui_behavioursettingspage.h:333
 msgid "Stop playback if song fails to play"
 msgstr ""
 
@@ -5037,7 +5019,7 @@ msgid ""
 "license key. Visit subsonic.org for details."
 msgstr "Subsonic의 시험 기간이 끝났습니다. 라이센스 키를 얻기위한 기부를 해주세요. 자세한 사항은 subsonic.org 에서 확인하세요."
 
-#: ui/mainwindow.cpp:2674
+#: ui/mainwindow.cpp:2687
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -5079,7 +5061,7 @@ msgid ""
 "continue?"
 msgstr "파일들이 장치로 부터 삭제 될 것 입니다. 계속 진행 하시겠습니까?"
 
-#: library/libraryview.cpp:679 ui/mainwindow.cpp:2433 widgets/fileview.cpp:189
+#: library/libraryview.cpp:679 ui/mainwindow.cpp:2446 widgets/fileview.cpp:189
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -5159,7 +5141,7 @@ msgstr "이 스트림은 유료 subscribers만 사용할 수 있습니다"
 msgid "This type of device is not supported: %1"
 msgstr "이 장치의 형태는 지원되지 않습니다: %1"
 
-#: ../bin/src/ui_behavioursettingspage.h:374
+#: ../bin/src/ui_behavioursettingspage.h:369
 msgid "Time step"
 msgstr "시간 간격"
 
@@ -5182,7 +5164,7 @@ msgstr "예쁜 OSD 토글"
 msgid "Toggle fullscreen"
 msgstr "전체화면 토글"
 
-#: ui/mainwindow.cpp:1769
+#: ui/mainwindow.cpp:1782
 msgid "Toggle queue status"
 msgstr "대기열 상황 토글"
 
@@ -5229,10 +5211,6 @@ msgstr "트랙(&K)"
 #: playlist/playlist.cpp:1353 ui/organisedialog.cpp:72
 #: ../bin/src/ui_trackselectiondialog.h:212 ../bin/src/ui_ripcddialog.h:304
 msgid "Track"
-msgstr "트랙"
-
-#: internet/soundcloud/soundcloudservice.cpp:136
-msgid "Tracks"
 msgstr "트랙"
 
 #: ../bin/src/ui_transcodedialog.h:213 ../bin/src/ui_mainwindow.h:706
@@ -5320,11 +5298,11 @@ msgstr "알 수 없는 오류"
 msgid "Unset cover"
 msgstr "커버 해제"
 
-#: ui/mainwindow.cpp:1779
+#: ui/mainwindow.cpp:1792
 msgid "Unskip selected tracks"
 msgstr "선택된 트랙들 넘기기 "
 
-#: ui/mainwindow.cpp:1777
+#: ui/mainwindow.cpp:1790
 msgid "Unskip track"
 msgstr "트랙 넘기기 "
 
@@ -5435,7 +5413,7 @@ msgstr "시스템 아이콘 사용"
 msgid "Use temporal noise shaping"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:326
+#: ../bin/src/ui_behavioursettingspage.h:321
 msgid "Use the system default"
 msgstr "시스템 기본 값 사용"
 
@@ -5455,7 +5433,7 @@ msgstr "음량 표준화 사용"
 msgid "Used"
 msgstr "사용 됨"
 
-#: ui/settingsdialog.cpp:147
+#: ui/settingsdialog.cpp:146
 msgid "User interface"
 msgstr "사용자 인터페이스"
 
@@ -5467,7 +5445,7 @@ msgstr "사용자 인터페이스"
 msgid "Username"
 msgstr "사용자명"
 
-#: ../bin/src/ui_behavioursettingspage.h:340
+#: ../bin/src/ui_behavioursettingspage.h:335
 msgid "Using the menu to add a song will..."
 msgstr "음악 추가를 하였을 때..."
 
@@ -5540,7 +5518,7 @@ msgstr "WAV"
 msgid "WMA"
 msgstr "WMA"
 
-#: playlist/playlisttabbar.cpp:192 ../bin/src/ui_behavioursettingspage.h:322
+#: playlist/playlisttabbar.cpp:192 ../bin/src/ui_behavioursettingspage.h:317
 msgid "Warn me when closing a playlist tab"
 msgstr "재생목록 탭을 닫으면 알림"
 
@@ -5560,7 +5538,7 @@ msgstr "웹 사이트"
 msgid "Weeks"
 msgstr "주"
 
-#: ../bin/src/ui_behavioursettingspage.h:329
+#: ../bin/src/ui_behavioursettingspage.h:324
 msgid "When Clementine starts"
 msgstr "Clementine이 시작할 때"
 
@@ -5570,7 +5548,7 @@ msgid ""
 "If there are no matches then it will use the largest image in the directory."
 msgstr "앨범아트를 찾을 때, Clementine은 이 단어들이 포함된 그림파일을 먼저 찾게 됩니다.\n일치하는 항목이 없으면 디렉토리에서 가장 큰 이미지를 사용합니다."
 
-#: ../bin/src/ui_behavioursettingspage.h:377
+#: ../bin/src/ui_behavioursettingspage.h:372
 msgid "When saving a playlist, file paths should be"
 msgstr "재생목록을 저장할 때, 파일경로 처리 방식"
 
@@ -5646,7 +5624,7 @@ msgid ""
 "well?"
 msgstr "이 앨범의 다른 곡도 다양한 음악가로 옮기겠습니까?"
 
-#: ui/mainwindow.cpp:2681
+#: ui/mainwindow.cpp:2694
 msgid "Would you like to run a full rescan right now?"
 msgstr "지금 전부 다시 검색해도 좋습니까?"
 
@@ -5654,7 +5632,7 @@ msgstr "지금 전부 다시 검색해도 좋습니까?"
 msgid "Write all songs statistics into songs' files"
 msgstr "모든 음악에 통계를 작성"
 
-#: ../bin/src/ui_behavioursettingspage.h:382
+#: ../bin/src/ui_behavioursettingspage.h:377
 msgid "Write metadata"
 msgstr "메타데이터 작성"
 
@@ -5740,13 +5718,6 @@ msgstr "당신은 Spotify 프리미엄 계정이 아닙니다."
 msgid "You do not have an active subscription"
 msgstr "활성화된 구독이 없습니다."
 
-#: ../bin/src/ui_soundcloudsettingspage.h:101
-msgid ""
-"You don't need to be logged in to search and to listen to music on "
-"SoundCloud. However, you need to login to access your playlists and your "
-"stream."
-msgstr "SoundCloud에 있는 노래를 듣기위해 로그인할 필요는 없습니다. 하지만 당신의 플레이리스트와 음악을 스트리밍 하기 위해서는 로그인이 필요합니다."
-
 #: internet/spotify/spotifyservice.cpp:205
 msgid ""
 "You have been logged out of Spotify, please re-enter your password in the "
@@ -5768,7 +5739,7 @@ msgid ""
 "shortcuts in Clementine."
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:328
+#: ../bin/src/ui_behavioursettingspage.h:323
 msgid "You will need to restart Clementine if you change the language."
 msgstr "언어를 변경을 하였다면 Clementine을 재시작 해야합니다."
 
