@@ -89,12 +89,25 @@ const char* Playlist::kSettingsGroup = "Playlist";
 
 const char* Playlist::kPathType = "path_type";
 const char* Playlist::kWriteMetadata = "write_metadata";
+const char* Playlist::kSortIgnorePrefix = "sort_ignore_prefix";
+const char* Playlist::kSortIgnorePrefixList = "sort_ignore_prefix_list";
 
 const int Playlist::kUndoStackSize = 20;
 const int Playlist::kUndoItemLimit = 500;
 
 const qint64 Playlist::kMinScrobblePointNsecs = 31ll * kNsecPerSec;
 const qint64 Playlist::kMaxScrobblePointNsecs = 240ll * kNsecPerSec;
+
+namespace {
+QString removePrefix(const QString& a, const QStringList& prefixes) {
+  for (const QString& prefix : prefixes) {
+    if (a.startsWith(prefix)) {
+      return a.mid(prefix.size());
+    }
+  }
+  return a;
+}
+}  // namespace
 
 Playlist::Playlist(PlaylistBackend* backend, TaskManager* task_manager,
                    LibraryBackend* library, int id, const QString& special_type,
@@ -1246,14 +1259,16 @@ QMimeData* Playlist::mimeData(const QModelIndexList& indexes) const {
 
 bool Playlist::CompareItems(int column, Qt::SortOrder order,
                             shared_ptr<PlaylistItem> _a,
-                            shared_ptr<PlaylistItem> _b) {
+                            shared_ptr<PlaylistItem> _b,
+                            const QStringList& prefixes) {
   shared_ptr<PlaylistItem> a = order == Qt::AscendingOrder ? _a : _b;
   shared_ptr<PlaylistItem> b = order == Qt::AscendingOrder ? _b : _a;
 
 #define cmp(field) return a->Metadata().field() < b->Metadata().field()
 #define strcmp(field)                                                 \
-  return QString::localeAwareCompare(a->Metadata().field().toLower(), \
-                                     b->Metadata().field().toLower()) < 0;
+  return QString::localeAwareCompare(                                 \
+             removePrefix(a->Metadata().field().toLower(), prefixes), \
+             removePrefix(b->Metadata().field().toLower(), prefixes)) < 0;
 
   switch (column) {
     case Column_Title:
@@ -1431,25 +1446,44 @@ void Playlist::sort(int column, Qt::SortOrder order) {
   if (dynamic_playlist_ && current_item_index_.isValid())
     begin += current_item_index_.row() + 1;
 
+  QSettings s;
+  s.beginGroup(Playlist::kSettingsGroup);
+  QStringList prefixes;
+  if ((column == Column_Album || column == Column_Artist ||
+       column == Column_Title) &&
+      s.value(Playlist::kSortIgnorePrefix, false).toBool()) {
+    prefixes = s.value(Playlist::kSortIgnorePrefixList, QString())
+                   .toString()
+                   .split(',');
+    for (QString& prefix : prefixes) {
+      prefix = prefix.trimmed() + ' ';
+    }
+  }
+  s.endGroup();
+
   if (column == Column_Album) {
     // When sorting by album, also take into account discs and tracks.
-    qStableSort(begin, new_items.end(), std::bind(&Playlist::CompareItems,
-                                                  Column_Track, order, _1, _2));
     qStableSort(begin, new_items.end(),
-                std::bind(&Playlist::CompareItems, Column_Disc, order, _1, _2));
-    qStableSort(begin, new_items.end(), std::bind(&Playlist::CompareItems,
-                                                  Column_Album, order, _1, _2));
+                std::bind(&Playlist::CompareItems, Column_Track, order, _1, _2,
+                          prefixes));
+    qStableSort(begin, new_items.end(),
+                std::bind(&Playlist::CompareItems, Column_Disc, order, _1, _2,
+                          prefixes));
+    qStableSort(begin, new_items.end(),
+                std::bind(&Playlist::CompareItems, Column_Album, order, _1, _2,
+                          prefixes));
   } else if (column == Column_Filename) {
     // When sorting by full paths we also expect a hierarchical order. This
     // returns a breath-first ordering of paths.
-    qStableSort(
-        begin, new_items.end(),
-        std::bind(&Playlist::CompareItems, Column_Filename, order, _1, _2));
+    qStableSort(begin, new_items.end(),
+                std::bind(&Playlist::CompareItems, Column_Filename, order, _1,
+                          _2, prefixes));
     qStableSort(begin, new_items.end(),
                 std::bind(&Playlist::ComparePathDepths, order, _1, _2));
   } else {
-    qStableSort(begin, new_items.end(),
-                std::bind(&Playlist::CompareItems, column, order, _1, _2));
+    qStableSort(
+        begin, new_items.end(),
+        std::bind(&Playlist::CompareItems, column, order, _1, _2, prefixes));
   }
 
   undo_stack_->push(
