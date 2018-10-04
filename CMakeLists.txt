@@ -49,6 +49,7 @@ if(APPLE)
   endif(NOT QT_MAC_USE_COCOA)
 endif(APPLE)
 
+set(OpenGL_GL_PREFERENCE LEGACY)
 find_package(OpenGL REQUIRED)
 find_package(Boost REQUIRED)
 find_package(Gettext REQUIRED)
