@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>516</width>
-    <height>792</height>
+    <height>1081</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -415,6 +415,29 @@
         </property>
         <property name="checked">
          <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="groupBox_sort_ignore">
+     <property name="title">
+      <string>When sorting artists, albums and titles</string>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <widget class="QCheckBox" name="sort_ignore_prefix">
+        <property name="text">
+         <string>Ignore prefix word(s)</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="sort_ignore_prefix_list">
+        <property name="toolTip">
+         <string>Comma seperated list of prefix words to ignore when sorting</string>
         </property>
        </widget>
       </item>

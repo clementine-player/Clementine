@@ -37,6 +37,7 @@ class TaskManager;
 
 class QSortFilterProxyModel;
 class QUndoStack;
+class QStringList;
 
 namespace PlaylistUndoCommands {
 class InsertItems;
@@ -157,6 +158,8 @@ class Playlist : public QAbstractListModel {
 
   static const char* kPathType;
   static const char* kWriteMetadata;
+  static const char* kSortIgnorePrefix;
+  static const char* kSortIgnorePrefixList;
 
   static const int kUndoStackSize;
   static const int kUndoItemLimit;
@@ -165,7 +168,7 @@ class Playlist : public QAbstractListModel {
   static const qint64 kMaxScrobblePointNsecs;
 
   static bool CompareItems(int column, Qt::SortOrder order, PlaylistItemPtr a,
-                           PlaylistItemPtr b);
+                           PlaylistItemPtr b, const QStringList& prefixes = {});
 
   static QString column_name(Column column);
   static QString abbreviated_column_name(Column column);
