@@ -406,6 +406,29 @@
     </widget>
    </item>
    <item>
+    <widget class="QGroupBox" name="groupBox_sort_ignore">
+     <property name="title">
+      <string>When sorting artists, albums and titles</string>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <widget class="QCheckBox" name="sort_ignore_prefix">
+        <property name="text">
+         <string>Ignore prefix word(s)</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="sort_ignore_prefix_list">
+        <property name="toolTip">
+         <string>Comma seperated list of prefix words to ignore when sorting</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
     <spacer name="verticalSpacer_2">
      <property name="orientation">
       <enum>Qt::Vertical</enum>

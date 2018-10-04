@@ -203,6 +203,12 @@ void BehaviourSettingsPage::Load() {
   }
   ui_->b_write_metadata->setChecked(
       s.value(Playlist::kWriteMetadata, true).toBool());
+
+  ui_->sort_ignore_prefix->setChecked(
+      s.value(Playlist::kSortIgnorePrefix, true).toBool());
+  ui_->sort_ignore_prefix_list->setText(
+      s.value(Playlist::kSortIgnorePrefixList, QStringLiteral("a, the"))
+          .toString());
   s.endGroup();
 
   s.beginGroup(PlaylistTabBar::kSettingsGroup);
@@ -283,6 +289,9 @@ void BehaviourSettingsPage::Save() {
   s.setValue("click_edit_inline", ui_->b_click_edit_inline_->isChecked());
   s.setValue(Playlist::kPathType, static_cast<int>(path));
   s.setValue(Playlist::kWriteMetadata, ui_->b_write_metadata->isChecked());
+  s.setValue(Playlist::kSortIgnorePrefix, ui_->sort_ignore_prefix->isChecked());
+  s.setValue(Playlist::kSortIgnorePrefixList,
+             ui_->sort_ignore_prefix_list->text());
   s.endGroup();
 
   s.beginGroup(PlaylistTabBar::kSettingsGroup);
