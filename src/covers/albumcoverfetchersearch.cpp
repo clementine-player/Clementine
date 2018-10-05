@@ -20,6 +20,7 @@
 
 #include "albumcoverfetchersearch.h"
 
+#include <algorithm>
 #include <cmath>
 
 #include <QMutexLocker>
@@ -133,7 +134,7 @@ void AlbumCoverFetcherSearch::AllProvidersFinished() {
   // from each category and use some heuristics to score them.  If no images
   // are good enough we'll keep loading more images until we find one that is
   // or we run out of results.
-  qStableSort(results_.begin(), results_.end(), CompareProviders);
+  std::stable_sort(results_.begin(), results_.end(), CompareProviders);
   FetchMoreImages();
 }
 

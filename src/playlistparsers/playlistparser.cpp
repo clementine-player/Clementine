@@ -25,6 +25,8 @@
 #include "xspfparser.h"
 #include "core/logging.h"
 
+#include <algorithm>
+
 #include <QtDebug>
 
 const int PlaylistParser::kMagicSize = 512;
@@ -49,7 +51,7 @@ QStringList PlaylistParser::file_extensions() const {
     ret << parser->file_extensions();
   }
 
-  qStableSort(ret);
+  std::stable_sort(ret.begin(), ret.end());
   return ret;
 }
 
@@ -60,7 +62,7 @@ QStringList PlaylistParser::mime_types() const {
     if (!parser->mime_type().isEmpty()) ret << parser->mime_type();
   }
 
-  qStableSort(ret);
+  std::stable_sort(ret.begin(), ret.end());
   return ret;
 }
 

@@ -17,6 +17,8 @@
 
 #include "acoustidclient.h"
 
+#include <algorithm>
+
 #include <QCoreApplication>
 #include <QNetworkReply>
 #include <QStringList>
@@ -131,7 +133,7 @@ void AcoustidClient::RequestFinished(QNetworkReply* reply, int request_id) {
     }
   }
 
-  qStableSort(id_source_list);
+  std::stable_sort(id_source_list.begin(), id_source_list.end());
 
   QList<QString> id_list;
   for (const IdSource& is : id_source_list) {

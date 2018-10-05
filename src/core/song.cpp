@@ -486,7 +486,7 @@ int CompareSongsName(const Song& song1, const Song& song2) {
 
 void Song::SortSongsListAlphabetically(SongList* songs) {
   Q_ASSERT(songs);
-  qSort(songs->begin(), songs->end(), CompareSongsName);
+  std::sort(songs->begin(), songs->end(), CompareSongsName);
 }
 
 void Song::Init(const QString& title, const QString& artist,

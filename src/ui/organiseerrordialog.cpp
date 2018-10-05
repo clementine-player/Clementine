@@ -18,6 +18,8 @@
 #include "organiseerrordialog.h"
 #include "ui_organiseerrordialog.h"
 
+#include <algorithm>
+
 #include <QUrl>
 
 OrganiseErrorDialog::OrganiseErrorDialog(QWidget* parent)
@@ -45,7 +47,7 @@ void OrganiseErrorDialog::Show(OperationType type,
 void OrganiseErrorDialog::Show(OperationType type,
                                const QStringList& files_with_errors) {
   QStringList sorted_files = files_with_errors;
-  qStableSort(sorted_files);
+  std::stable_sort(sorted_files.begin(), sorted_files.end());
 
   switch (type) {
     case Type_Copy:

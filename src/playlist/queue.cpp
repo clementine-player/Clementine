@@ -17,6 +17,8 @@
 
 #include "queue.h"
 
+#include <algorithm>
+
 #include <QBuffer>
 #include <QMimeData>
 #include <QtDebug>
@@ -317,7 +319,8 @@ bool Queue::dropMimeData(const QMimeData* data, Qt::DropAction action, int row,
     QList<int> proxy_rows;
     QDataStream stream(data->data(kRowsMimetype));
     stream >> proxy_rows;
-    qStableSort(proxy_rows);  // Make sure we take them in order
+    // Make sure we take them in order
+    std::stable_sort(proxy_rows.begin(), proxy_rows.end());
 
     Move(proxy_rows, row);
   } else if (data->hasFormat(Playlist::kRowsMimetype)) {
@@ -388,7 +391,7 @@ QVariant Queue::headerData(int section, Qt::Orientation orientation,
 
 void Queue::Remove(QList<int>& proxy_rows) {
   // order the rows
-  qStableSort(proxy_rows);
+  std::stable_sort(proxy_rows.begin(), proxy_rows.end());
 
   // reflects immediately changes in the playlist
   layoutAboutToBeChanged();

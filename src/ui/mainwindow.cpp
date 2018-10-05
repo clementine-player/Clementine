@@ -148,6 +148,7 @@
 #include "moodbar/moodbarproxystyle.h"
 #endif
 
+#include <algorithm>
 #include <cmath>
 
 #ifdef Q_OS_DARWIN
@@ -1962,7 +1963,7 @@ void MainWindow::RenumberTracks() {
   int track = 1;
 
   // Get the index list in order
-  qStableSort(indexes);
+  std::stable_sort(indexes.begin(), indexes.end());
 
   // if first selected song has a track number set, start from that offset
   if (!indexes.isEmpty()) {
@@ -2187,7 +2188,7 @@ void MainWindow::CommandlineOptionsReceived(
 
 void MainWindow::CommandlineOptionsReceived(const CommandlineOptions& options) {
   qLog(Debug) << "command line options received";
-  
+
   switch (options.player_action()) {
     case CommandlineOptions::Player_Play:
       if (options.urls().empty()) {
@@ -2269,21 +2270,21 @@ void MainWindow::CommandlineOptionsReceived(const CommandlineOptions& options) {
 
   qLog(Debug) << options.delete_current_track();
 
-  // Just pass the url of the currently playing 
+  // Just pass the url of the currently playing
   if (options.delete_current_track()) {
     qLog(Debug) << "deleting current track";
-    
+
     Playlist* activePlaylist = app_->playlist_manager()->active();
     PlaylistItemPtr playlistItemPtr = activePlaylist->current_item();
 
     if (playlistItemPtr) {
       const QUrl& url = playlistItemPtr->Url();
       qLog(Debug) << url;
-      
-      std::shared_ptr<MusicStorage> storage(new FilesystemMusicStorage("/"));  
-      
+
+      std::shared_ptr<MusicStorage> storage(new FilesystemMusicStorage("/"));
+
       app_->player()->Next();
-        
+
       DeleteFiles* delete_files = new DeleteFiles(app_->task_manager(), storage);
       connect(delete_files, SIGNAL(Finished(SongList)),
               SLOT(DeleteFinished(SongList)));
@@ -2293,7 +2294,7 @@ void MainWindow::CommandlineOptionsReceived(const CommandlineOptions& options) {
       qLog(Debug) << "no currently playing track to delete";
     }
   }
-  
+
   if (options.show_osd()) app_->player()->ShowOSD();
 
   if (options.toggle_pretty_osd()) app_->player()->TogglePrettyOSD();
@@ -2509,9 +2510,9 @@ void MainWindow::DeleteFinished(const SongList& songs_with_errors) {
       activePlaylist->RemoveUnavailableSongs();
       qLog(Debug) << "Found active playlist and removed unavailable songs";
     }
-    
+
     return;
-  } 
+  }
 
   OrganiseErrorDialog* dialog = new OrganiseErrorDialog(this);
   dialog->Show(OrganiseErrorDialog::Type_Delete, songs_with_errors);

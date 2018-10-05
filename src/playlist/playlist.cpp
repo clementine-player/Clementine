@@ -812,7 +812,8 @@ bool Playlist::dropMimeData(const QMimeData* data, Qt::DropAction action,
       pid = !own_pid;
     }
 
-    qStableSort(source_rows);  // Make sure we take them in order
+    std::stable_sort(source_rows.begin(),
+                     source_rows.end());  // Make sure we take them in order
 
     if (source_playlist == this) {
       // Dragged from this playlist - rearrange the items
@@ -1464,25 +1465,25 @@ void Playlist::sort(int column, Qt::SortOrder order) {
 
   if (column == Column_Album) {
     // When sorting by album, also take into account discs and tracks.
-    qStableSort(begin, new_items.end(),
-                std::bind(&Playlist::CompareItems, Column_Track, order, _1, _2,
-                          prefixes));
-    qStableSort(begin, new_items.end(),
-                std::bind(&Playlist::CompareItems, Column_Disc, order, _1, _2,
-                          prefixes));
-    qStableSort(begin, new_items.end(),
-                std::bind(&Playlist::CompareItems, Column_Album, order, _1, _2,
-                          prefixes));
+    std::stable_sort(begin, new_items.end(),
+                     std::bind(&Playlist::CompareItems, Column_Track, order, _1,
+                               _2, prefixes));
+    std::stable_sort(begin, new_items.end(),
+                     std::bind(&Playlist::CompareItems, Column_Disc, order, _1,
+                               _2, prefixes));
+    std::stable_sort(begin, new_items.end(),
+                     std::bind(&Playlist::CompareItems, Column_Album, order, _1,
+                               _2, prefixes));
   } else if (column == Column_Filename) {
     // When sorting by full paths we also expect a hierarchical order. This
     // returns a breath-first ordering of paths.
-    qStableSort(begin, new_items.end(),
-                std::bind(&Playlist::CompareItems, Column_Filename, order, _1,
-                          _2, prefixes));
-    qStableSort(begin, new_items.end(),
-                std::bind(&Playlist::ComparePathDepths, order, _1, _2));
+    std::stable_sort(begin, new_items.end(),
+                     std::bind(&Playlist::CompareItems, Column_Filename, order,
+                               _1, _2, prefixes));
+    std::stable_sort(begin, new_items.end(),
+                     std::bind(&Playlist::ComparePathDepths, order, _1, _2));
   } else {
-    qStableSort(
+    std::stable_sort(
         begin, new_items.end(),
         std::bind(&Playlist::CompareItems, column, order, _1, _2, prefixes));
   }
@@ -1618,7 +1619,7 @@ void Playlist::RemoveItemsWithoutUndo(const QList<int>& indicesIn) {
   // Sort the indices descending because removing elements 'backwards'
   // is easier - indices don't 'move' in the process.
   QList<int> indices = indicesIn;
-  qSort(indices.begin(), indices.end(), DescendingIntLessThan);
+  std::sort(indices.begin(), indices.end(), DescendingIntLessThan);
 
   for (int j = 0; j < indices.count(); j++) {
     int beginning = indices[j], end = indices[j];
@@ -1661,7 +1662,7 @@ bool Playlist::removeRows(QList<int>& rows) {
 
   // start from the end to be sure that indices won't 'move' during
   // the removal process
-  qSort(rows.begin(), rows.end(), qGreater<int>());
+  std::sort(rows.begin(), rows.end(), std::greater<int>());
 
   QList<int> part;
   while (!rows.isEmpty()) {

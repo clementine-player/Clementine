@@ -21,6 +21,8 @@
 #include "ui_coversearchstatisticsdialog.h"
 #include "core/utilities.h"
 
+#include <algorithm>
+
 CoverSearchStatisticsDialog::CoverSearchStatisticsDialog(QWidget* parent)
     : QDialog(parent), ui_(new Ui_CoverSearchStatisticsDialog) {
   ui_->setupUi(this);
@@ -47,7 +49,7 @@ CoverSearchStatisticsDialog::~CoverSearchStatisticsDialog() { delete ui_; }
 void CoverSearchStatisticsDialog::Show(
     const CoverSearchStatistics& statistics) {
   QStringList providers(statistics.total_images_by_provider_.keys());
-  qSort(providers);
+  std::sort(providers.begin(), providers.end());
 
   ui_->summary->setText(
       tr("Got %1 covers out of %2 (%3 failed)")

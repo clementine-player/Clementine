@@ -17,6 +17,8 @@
 
 #include "songinfo/songinfoview.h"
 
+#include <algorithm>
+
 #include <QFuture>
 #include <QSettings>
 #include <QtConcurrentRun>
@@ -159,6 +161,6 @@ QList<const UltimateLyricsProvider*> SongInfoView::lyric_providers() const {
       ret << lyrics;
     }
   }
-  qSort(ret.begin(), ret.end(), CompareLyricProviders);
+  std::sort(ret.begin(), ret.end(), CompareLyricProviders);
   return ret;
 }
