@@ -22,6 +22,8 @@
 #include "ui/settingsdialog.h"
 #include "ui_globalsearchsettingspage.h"
 
+#include <algorithm>
+
 #include <QSettings>
 
 GlobalSearchSettingsPage::GlobalSearchSettingsPage(SettingsDialog* dialog)
@@ -57,7 +59,7 @@ void GlobalSearchSettingsPage::Load() {
 
   // Sort the list of providers alphabetically (by id) initially, so any that
   // aren't in the provider_order list will take this order.
-  qSort(providers.begin(), providers.end(), CompareProviderId);
+  std::sort(providers.begin(), providers.end(), CompareProviderId);
 
   // Add the ones in the configured list first
   ui_->sources->clear();

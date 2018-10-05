@@ -20,6 +20,8 @@
 #ifndef CORE_CACHEDLIST_H_
 #define CORE_CACHEDLIST_H_
 
+#include <algorithm>
+
 #include <QDateTime>
 #include <QSettings>
 
@@ -81,7 +83,7 @@ class CachedList {
                cache_duration_secs_;
   }
 
-  void Sort() { qSort(data_); }
+  void Sort() { std::sort(data_.begin(), data_.end()); }
 
   const ListType& Data() const { return data_; }
   operator ListType() const { return data_; }

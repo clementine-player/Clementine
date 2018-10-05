@@ -22,6 +22,7 @@
 
 #include "songloader.h"
 
+#include <algorithm>
 #include <memory>
 
 #include <QBuffer>
@@ -311,7 +312,7 @@ void SongLoader::LoadLocalDirectory(const QString& filename) {
     LoadLocalPartial(it.next());
   }
 
-  qStableSort(songs_.begin(), songs_.end(), CompareSongs);
+  std::stable_sort(songs_.begin(), songs_.end(), CompareSongs);
 
   // Load the first song: all songs will be loaded async, but we want the first
   // one in our list to be fully loaded, so if the user has the "Start playing

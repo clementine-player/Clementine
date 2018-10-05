@@ -22,6 +22,8 @@
 #include "playlist/playlist.h"
 #include "playlist/playlisttabbar.h"
 
+#include <algorithm>
+
 #include <QDir>
 #include <QSystemTrayIcon>
 
@@ -91,7 +93,7 @@ BehaviourSettingsPage::BehaviourSettingsPage(SettingsDialog* dialog)
 
   // Sort the names and show them in the UI
   QStringList names = language_map_.keys();
-  qStableSort(names.begin(), names.end(), LocaleAwareCompare);
+  std::stable_sort(names.begin(), names.end(), LocaleAwareCompare);
   ui_->language->addItems(names);
 
 #ifdef Q_OS_DARWIN

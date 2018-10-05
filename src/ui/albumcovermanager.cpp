@@ -36,6 +36,8 @@
 #include "ui/albumcoverexport.h"
 #include "ui/iconloader.h"
 
+#include <algorithm>
+
 #include <QActionGroup>
 #include <QPushButton>
 #include <QContextMenuEvent>
@@ -265,7 +267,7 @@ void AlbumCoverManager::Reset() {
                       Various_Artists);
 
   QStringList artists(library_backend_->GetAllArtistsWithAlbums());
-  qStableSort(artists.begin(), artists.end(), CompareNocase);
+  std::stable_sort(artists.begin(), artists.end(), CompareNocase);
 
   for (const QString& artist : artists) {
     if (artist.isEmpty()) continue;
@@ -313,7 +315,7 @@ void AlbumCoverManager::ArtistChanged(QListWidgetItem* current) {
 
   // Sort by album name.  The list is already sorted by sqlite but it was done
   // case sensitively.
-  qStableSort(albums.begin(), albums.end(), CompareAlbumNameNocase);
+  std::stable_sort(albums.begin(), albums.end(), CompareAlbumNameNocase);
 
   for (const LibraryBackend::Album& info : albums) {
     // Don't show songs without an album, obviously

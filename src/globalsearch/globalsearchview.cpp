@@ -22,6 +22,7 @@
 #include <QStandardItem>
 #include <QTimer>
 
+#include <algorithm>
 #include <functional>
 
 #include "globalsearch.h"
@@ -224,8 +225,8 @@ void GlobalSearchView::ReloadSettings() {
   if (show_providers_) {
     // Sort the list of providers
     QList<SearchProvider*> providers = engine_->providers();
-    qSort(providers.begin(), providers.end(),
-          std::bind(&CompareProvider, std::cref(provider_order), _1, _2));
+    std::sort(providers.begin(), providers.end(),
+              std::bind(&CompareProvider, std::cref(provider_order), _1, _2));
 
     bool any_disabled = false;
 
@@ -307,8 +308,8 @@ void GlobalSearchView::AddResults(int id,
 void GlobalSearchView::SwapModels() {
   art_requests_.clear();
 
-  qSwap(front_model_, back_model_);
-  qSwap(front_proxy_, back_proxy_);
+  std::swap(front_model_, back_model_);
+  std::swap(front_proxy_, back_proxy_);
 
   ui_->results->setModel(front_proxy_);
 
