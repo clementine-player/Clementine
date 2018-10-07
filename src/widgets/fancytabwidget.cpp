@@ -22,15 +22,16 @@
 
 #include <QDebug>
 
+#include <QMap>
 #include <QMenu>
 #include <QMouseEvent>
 #include <QPainter>
+#include <QSettings>
 #include <QSignalMapper>
-#include <QTabBar>
 #include <QStylePainter>
+#include <QTabBar>
 #include <QTimer>
 #include <QVBoxLayout>
-#include <QSettings>
 
 const QSize FancyTabWidget::IconSize_LargeSidebar = QSize(24,24);
 const QSize FancyTabWidget::IconSize_SmallSidebar = QSize(22,22);
@@ -42,8 +43,9 @@ class FancyTabBar: public QTabBar {
 private:
     int mouseHoverTabIndex = -1;
     QMap<QWidget*,QString> labelCache;
+    QMap<int, QWidget*> spacers;
 
-public:
+   public:
     explicit FancyTabBar(QWidget* parent=0) : QTabBar(parent) {
         setMouseTracking(true);
     }
@@ -101,6 +103,27 @@ protected:
 
         if(tabWidget->mode() == FancyTabWidget::Mode_SmallSidebar)
             verticalTextTabs = true;
+
+        // if LargeSidebar, restore spacers
+        if (spacers.count() > 0 &&
+            tabWidget->mode() == FancyTabWidget::Mode_LargeSidebar) {
+          for (int index : spacers.keys()) {
+            tabWidget->insertTab(index, spacers[index], QIcon(), QString());
+            tabWidget->setTabEnabled(index, false);
+          }
+          spacers.clear();
+        }
+        if (tabWidget->mode() != FancyTabWidget::Mode_LargeSidebar) {
+          // traverse in the opposite order to save indices of spacers
+          for (int i = count() - 1; i >= 0; --i) {
+            // spacers are disabled tabs
+            if (!isTabEnabled(i) && !spacers.contains(i)) {
+              spacers[i] = tabWidget->widget(i);
+              tabWidget->removeTab(i);
+              --i;
+            }
+          }
+        }
 
         // Restore any label text that was hidden/cached for the IconOnlyTabs mode
         if(labelCache.count() > 0 && tabWidget->mode() != FancyTabWidget::Mode_IconOnlyTabs) {
