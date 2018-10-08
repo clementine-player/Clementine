@@ -207,8 +207,7 @@ void BehaviourSettingsPage::Load() {
   ui_->sort_ignore_prefix->setChecked(
       s.value(Playlist::kSortIgnorePrefix, true).toBool());
   ui_->sort_ignore_prefix_list->setText(
-      s.value(Playlist::kSortIgnorePrefixList, QStringLiteral("a, the"))
-          .toString());
+      s.value(Playlist::kSortIgnorePrefixList, QString("a, the")).toString());
   s.endGroup();
 
   s.beginGroup(PlaylistTabBar::kSettingsGroup);
