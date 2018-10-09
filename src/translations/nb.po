@@ -12,7 +12,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2018-10-01 17:06+0000\n"
+"PO-Revision-Date: 2018-10-08 15:43+0000\n"
 "Last-Translator: hatstand <john.maguire@gmail.com>\n"
 "Language-Team: Norwegian Bokmål (http://www.transifex.com/davidsansome/clementine/language/nb/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -55,7 +55,7 @@ msgstr "Normaliseringsmodus"
 msgid " pt"
 msgstr "pkt"
 
-#: ../bin/src/ui_behavioursettingspage.h:370
+#: ../bin/src/ui_behavioursettingspage.h:392
 msgid " s"
 msgstr " s"
 
@@ -397,7 +397,7 @@ msgid ""
 "A song will be included in the playlist if it matches these conditions."
 msgstr "Sanger som passer med disse kriteriene blir med på spillelista."
 
-#: ../bin/src/ui_behavioursettingspage.h:373
+#: ../bin/src/ui_behavioursettingspage.h:395
 msgid "A&utomatic"
 msgstr ""
 
@@ -447,7 +447,7 @@ msgid "About Qt..."
 msgstr "Om Qt…"
 
 #: playlist/playlistsaveoptionsdialog.cpp:34
-#: ../bin/src/ui_behavioursettingspage.h:374
+#: ../bin/src/ui_behavioursettingspage.h:396
 msgid "Absolute"
 msgstr "Absolutt"
 
@@ -635,8 +635,8 @@ msgstr "Legg til i annen spilleliste"
 msgid "Add to playlist"
 msgstr "Legg til i spilleliste"
 
-#: ../bin/src/ui_behavioursettingspage.h:354
-#: ../bin/src/ui_behavioursettingspage.h:366
+#: ../bin/src/ui_behavioursettingspage.h:376
+#: ../bin/src/ui_behavioursettingspage.h:388
 msgid "Add to the queue"
 msgstr "Legg i kø"
 
@@ -677,7 +677,7 @@ msgstr "Etter"
 msgid "After copying..."
 msgstr "Etter kopiering…"
 
-#: library/savedgroupingmanager.cpp:65 playlist/playlist.cpp:1349
+#: library/savedgroupingmanager.cpp:65 playlist/playlist.cpp:1364
 #: ui/organisedialog.cpp:64 ui/qtsystemtrayicon.cpp:251
 #: ../bin/src/ui_groupbydialog.h:128 ../bin/src/ui_groupbydialog.h:147
 #: ../bin/src/ui_groupbydialog.h:166 ../bin/src/ui_albumcoversearcher.h:110
@@ -690,7 +690,7 @@ msgstr "Album"
 msgid "Album (ideal loudness for all tracks)"
 msgstr "Album (ideell lydstyrkeutgjevning for alle spor)"
 
-#: library/savedgroupingmanager.cpp:80 playlist/playlist.cpp:1363
+#: library/savedgroupingmanager.cpp:80 playlist/playlist.cpp:1378
 #: ui/organisedialog.cpp:67 ../bin/src/ui_groupbydialog.h:130
 #: ../bin/src/ui_groupbydialog.h:149 ../bin/src/ui_groupbydialog.h:168
 #: ../bin/src/ui_edittagdialog.h:725
@@ -767,16 +767,16 @@ msgstr "Tillat midt/side-koding"
 msgid "Alongside the originals"
 msgstr "Sammen med originalene"
 
-#: ../bin/src/ui_behavioursettingspage.h:326
+#: ../bin/src/ui_behavioursettingspage.h:348
 msgid "Alwa&ys hide the main window"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:325
+#: ../bin/src/ui_behavioursettingspage.h:347
 msgid "Always show &the main window"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:340
-#: ../bin/src/ui_behavioursettingspage.h:360
+#: ../bin/src/ui_behavioursettingspage.h:362
+#: ../bin/src/ui_behavioursettingspage.h:382
 msgid "Always start playing"
 msgstr "Alltid start avspilling"
 
@@ -790,7 +790,7 @@ msgstr "Det trengs et programtillegg for å bruke Spotify i Clementine. Ønsker 
 msgid "An error occurred loading the iTunes database"
 msgstr "En feil oppsto ved innlasting av iTunes-databasen"
 
-#: playlist/playlist.cpp:424 ui/edittagdialog.cpp:703
+#: playlist/playlist.cpp:437 ui/edittagdialog.cpp:703
 #, qt-format
 msgid "An error occurred writing metadata to '%1'"
 msgstr "Det oppstod en feil når metadata skulle skrives til '%1'"
@@ -823,7 +823,7 @@ msgstr "Tilføy filer/URLer til spillelista"
 msgid "Append to current playlist"
 msgstr "Legg til i gjeldende spilleliste"
 
-#: ../bin/src/ui_behavioursettingspage.h:351
+#: ../bin/src/ui_behavioursettingspage.h:373
 msgid "Append to the playlist"
 msgstr "Legg til i spillelista"
 
@@ -846,7 +846,7 @@ msgid ""
 "the songs of your library?"
 msgstr "Er du sikker på at du ønsker å skrive sangstatistikk inn i alle filene i biblioteket?"
 
-#: library/savedgroupingmanager.cpp:62 playlist/playlist.cpp:1347
+#: library/savedgroupingmanager.cpp:62 playlist/playlist.cpp:1362
 #: ui/organisedialog.cpp:65 ui/qtsystemtrayicon.cpp:249
 #: ../bin/src/ui_groupbydialog.h:129 ../bin/src/ui_groupbydialog.h:148
 #: ../bin/src/ui_groupbydialog.h:167 ../bin/src/ui_albumcoversearcher.h:106
@@ -863,7 +863,7 @@ msgstr "Artistinfo"
 msgid "Artist's initial"
 msgstr "Artistens initialer"
 
-#: ../bin/src/ui_behavioursettingspage.h:376
+#: ../bin/src/ui_behavioursettingspage.h:398
 msgid "As&k when saving"
 msgstr ""
 
@@ -925,7 +925,7 @@ msgstr "Gjennomsittlig billedstørrelse"
 msgid "BBC Podcasts"
 msgstr "Nettradioopptak fra BBC"
 
-#: playlist/playlist.cpp:1383 ui/organisedialog.cpp:74
+#: playlist/playlist.cpp:1398 ui/organisedialog.cpp:74
 #: ../bin/src/ui_edittagdialog.h:704
 msgid "BPM"
 msgstr "BPM"
@@ -970,7 +970,7 @@ msgstr "Blå"
 msgid "Basic audio type"
 msgstr "Grunnleggende lydtype"
 
-#: ../bin/src/ui_behavioursettingspage.h:313
+#: ../bin/src/ui_behavioursettingspage.h:335
 msgid "Behavior"
 msgstr "Adferd"
 
@@ -982,7 +982,7 @@ msgstr "Best"
 msgid "Biography"
 msgstr "Biografi"
 
-#: playlist/playlist.cpp:1385 ../bin/src/ui_edittagdialog.h:706
+#: playlist/playlist.cpp:1400 ../bin/src/ui_edittagdialog.h:706
 #: ../bin/src/ui_streamdetailsdialog.h:139
 msgid "Bit rate"
 msgstr "Bitrate"
@@ -1088,7 +1088,7 @@ msgstr "Endre snarvei…"
 msgid "Change shuffle mode"
 msgstr "Endre stokkings-modus"
 
-#: ../bin/src/ui_behavioursettingspage.h:365
+#: ../bin/src/ui_behavioursettingspage.h:387
 msgid "Change the currently playing song"
 msgstr "Bytt låten som spilles"
 
@@ -1306,7 +1306,11 @@ msgstr "Farger"
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Komma-separert liste av klasse:level, level er 0-3"
 
-#: playlist/playlist.cpp:1402 smartplaylists/searchterm.cpp:384
+#: ../bin/src/ui_behavioursettingspage.h:403
+msgid "Comma seperated list of prefix words to ignore when sorting"
+msgstr ""
+
+#: playlist/playlist.cpp:1417 smartplaylists/searchterm.cpp:384
 #: ui/organisedialog.cpp:78 ../bin/src/ui_edittagdialog.h:718
 msgid "Comment"
 msgstr "Kommentar"
@@ -1319,7 +1323,7 @@ msgstr "Fyll ut etiketter automatisk"
 msgid "Complete tags automatically..."
 msgstr "Full ut etiketter automatisk…"
 
-#: library/savedgroupingmanager.cpp:74 playlist/playlist.cpp:1365
+#: library/savedgroupingmanager.cpp:74 playlist/playlist.cpp:1380
 #: ui/organisedialog.cpp:68 ../bin/src/ui_groupbydialog.h:131
 #: ../bin/src/ui_groupbydialog.h:150 ../bin/src/ui_groupbydialog.h:169
 msgid "Composer"
@@ -1577,11 +1581,11 @@ msgid ""
 "recover your database"
 msgstr "Oppdaget feil i databasen. Les https://github.com/clementine-player/Clementine/wiki/Database-Corruption for å finne ut hvordan du kan gjenopprette den."
 
-#: playlist/playlist.cpp:1399 ../bin/src/ui_edittagdialog.h:715
+#: playlist/playlist.cpp:1414 ../bin/src/ui_edittagdialog.h:715
 msgid "Date created"
 msgstr "Opprettelsesdato"
 
-#: playlist/playlist.cpp:1397 ../bin/src/ui_edittagdialog.h:714
+#: playlist/playlist.cpp:1412 ../bin/src/ui_edittagdialog.h:714
 msgid "Date modified"
 msgstr "Endringsdato"
 
@@ -1757,7 +1761,7 @@ msgctxt "Refers to search provider's status."
 msgid "Disabled"
 msgstr "Avskrudd"
 
-#: library/savedgroupingmanager.cpp:95 playlist/playlist.cpp:1355
+#: library/savedgroupingmanager.cpp:95 playlist/playlist.cpp:1370
 #: ui/organisedialog.cpp:73 ../bin/src/ui_groupbydialog.h:139
 #: ../bin/src/ui_groupbydialog.h:158 ../bin/src/ui_groupbydialog.h:177
 #: ../bin/src/ui_edittagdialog.h:722 ../bin/src/ui_ripcddialog.h:313
@@ -1836,11 +1840,11 @@ msgstr "Doner"
 msgid "Double click to open"
 msgstr "Dobbelklikk for å åpne"
 
-#: ../bin/src/ui_behavioursettingspage.h:362
+#: ../bin/src/ui_behavioursettingspage.h:384
 msgid "Double clicking a song in the playlist will..."
 msgstr "Dobbeltklikking på vilkårlig sang i spillelisten vil…"
 
-#: ../bin/src/ui_behavioursettingspage.h:348
+#: ../bin/src/ui_behavioursettingspage.h:370
 msgid "Double clicking a song will..."
 msgstr "Dobbeltklikking på en sang vil…"
 
@@ -1995,7 +1999,7 @@ msgstr "Slå på tonekontroll (EQ)"
 msgid "Enable shortcuts only when Clementine is focused"
 msgstr "Kun bruk hurtigtaster når Clementine er i fokus"
 
-#: ../bin/src/ui_behavioursettingspage.h:331
+#: ../bin/src/ui_behavioursettingspage.h:353
 msgid "Enable song metadata inline edition with click"
 msgstr "Slå på direkteredigering med ett klikk"
 
@@ -2306,11 +2310,11 @@ msgstr "Filendelse"
 msgid "File formats"
 msgstr "Filformat"
 
-#: playlist/playlist.cpp:1389 ../bin/src/ui_edittagdialog.h:716
+#: playlist/playlist.cpp:1404 ../bin/src/ui_edittagdialog.h:716
 msgid "File name"
 msgstr "Filnavn"
 
-#: playlist/playlist.cpp:1391
+#: playlist/playlist.cpp:1406
 msgid "File name (without path)"
 msgstr "Filnavn (uten sti)"
 
@@ -2318,11 +2322,11 @@ msgstr "Filnavn (uten sti)"
 msgid "File paths"
 msgstr "Filstier"
 
-#: playlist/playlist.cpp:1393 ../bin/src/ui_edittagdialog.h:710
+#: playlist/playlist.cpp:1408 ../bin/src/ui_edittagdialog.h:710
 msgid "File size"
 msgstr "Filstørrelse"
 
-#: library/savedgroupingmanager.cpp:83 playlist/playlist.cpp:1395
+#: library/savedgroupingmanager.cpp:83 playlist/playlist.cpp:1410
 #: ../bin/src/ui_groupbydialog.h:132 ../bin/src/ui_groupbydialog.h:151
 #: ../bin/src/ui_groupbydialog.h:170 ../bin/src/ui_edittagdialog.h:712
 msgid "File type"
@@ -2453,7 +2457,7 @@ msgstr "Generelt"
 msgid "General settings"
 msgstr "Generelle innstillinger"
 
-#: library/savedgroupingmanager.cpp:77 playlist/playlist.cpp:1361
+#: library/savedgroupingmanager.cpp:77 playlist/playlist.cpp:1376
 #: ui/organisedialog.cpp:77 ../bin/src/ui_groupbydialog.h:133
 #: ../bin/src/ui_groupbydialog.h:152 ../bin/src/ui_groupbydialog.h:171
 #: ../bin/src/ui_ripcddialog.h:316
@@ -2504,7 +2508,7 @@ msgstr "Google Disk"
 msgid "Got %1 covers out of %2 (%3 failed)"
 msgstr "Hentet %1 av %2 omslag (%3 feilet)"
 
-#: ../bin/src/ui_behavioursettingspage.h:334
+#: ../bin/src/ui_behavioursettingspage.h:356
 msgid "Grey out non existent songs in my playlists"
 msgstr "Merk ikke-eksisterende sanger med grått i mine spillelister"
 
@@ -2544,7 +2548,7 @@ msgstr "Grupper etter sjanger/album"
 msgid "Group by Genre/Artist/Album"
 msgstr "Grupper etter sjanger/artist/album"
 
-#: library/savedgroupingmanager.cpp:89 playlist/playlist.cpp:1369
+#: library/savedgroupingmanager.cpp:89 playlist/playlist.cpp:1384
 #: ui/organisedialog.cpp:70 ../bin/src/ui_groupbydialog.h:141
 #: ../bin/src/ui_groupbydialog.h:160 ../bin/src/ui_groupbydialog.h:179
 msgid "Grouping"
@@ -2633,7 +2637,7 @@ msgstr "Ikoner øverst"
 msgid "Identifying song"
 msgstr "Identifiserer sangen"
 
-#: ../bin/src/ui_behavioursettingspage.h:329
+#: ../bin/src/ui_behavioursettingspage.h:351
 msgid ""
 "If activated, clicking a selected song in the playlist view will let you "
 "edit the tag value directly"
@@ -2652,6 +2656,10 @@ msgstr "Hvis du vet URL-en til en nettradioopptak, skriv den inn nedenfor og try
 #: ../bin/src/ui_organisedialog.h:255
 msgid "Ignore \"The\" in artist names"
 msgstr "Ignorer \"The\" i artistnavn"
+
+#: ../bin/src/ui_behavioursettingspage.h:401
+msgid "Ignore prefix word(s)"
+msgstr ""
 
 #: ui/albumcoverchoicecontroller.cpp:44
 msgid "Images (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm)"
@@ -2815,7 +2823,7 @@ msgstr "Ukas topplåter på Jamendo"
 msgid "Jamendo database"
 msgstr "Jamendo-database"
 
-#: ../bin/src/ui_behavioursettingspage.h:345
+#: ../bin/src/ui_behavioursettingspage.h:367
 msgid "Jump to previous song right away"
 msgstr "Gå til forrige sang nå"
 
@@ -2835,7 +2843,7 @@ msgstr "Hold nede knappen i %1 sekund…"
 msgid "Keep buttons for %1 seconds..."
 msgstr "Hold nede knappen i %1 sekunder…"
 
-#: ../bin/src/ui_behavioursettingspage.h:316
+#: ../bin/src/ui_behavioursettingspage.h:338
 msgid "Keep running in the background when the window is closed"
 msgstr "Fortsett i bakgrunnen selv om vinduet lukkes"
 
@@ -2852,7 +2860,7 @@ msgstr "Småpuser"
 msgid "Kuduro"
 msgstr "Kuduro"
 
-#: ../bin/src/ui_behavioursettingspage.h:318
+#: ../bin/src/ui_behavioursettingspage.h:340
 msgid "Language"
 msgstr "Språk"
 
@@ -2884,7 +2892,7 @@ msgstr "Stort sidefelt"
 msgid "Last played"
 msgstr "Sist spilt"
 
-#: playlist/playlist.cpp:1378 ../bin/src/ui_edittagdialog.h:707
+#: playlist/playlist.cpp:1393 ../bin/src/ui_edittagdialog.h:707
 msgctxt "A playlist's tag."
 msgid "Last played"
 msgstr "Sist spilt"
@@ -2921,7 +2929,7 @@ msgstr "Spor med ferrest stemmer"
 msgid "Left"
 msgstr "Venstre"
 
-#: playlist/playlist.cpp:1351 ui/organisedialog.cpp:79
+#: playlist/playlist.cpp:1366 ui/organisedialog.cpp:79
 #: ui/qtsystemtrayicon.cpp:254 ../bin/src/ui_edittagdialog.h:702
 msgid "Length"
 msgstr "Lengde"
@@ -3221,7 +3229,7 @@ msgstr "Spill av i mono"
 msgid "Months"
 msgstr "Måneder"
 
-#: playlist/playlist.cpp:1406
+#: playlist/playlist.cpp:1421
 msgid "Mood"
 msgstr "Stemning"
 
@@ -3307,8 +3315,8 @@ msgstr "Aldri"
 msgid "Never played"
 msgstr "Aldri spilt"
 
-#: ../bin/src/ui_behavioursettingspage.h:338
-#: ../bin/src/ui_behavioursettingspage.h:358
+#: ../bin/src/ui_behavioursettingspage.h:360
+#: ../bin/src/ui_behavioursettingspage.h:380
 msgid "Never start playing"
 msgstr "Aldri begynn avspilling"
 
@@ -3552,7 +3560,7 @@ msgstr "Åpne i Google Disk"
 msgid "Open in new playlist"
 msgstr "Åpne i ny spilleliste"
 
-#: ../bin/src/ui_behavioursettingspage.h:353
+#: ../bin/src/ui_behavioursettingspage.h:375
 msgctxt "Refers to behavior settings in Clementine settings page."
 msgid "Open in new playlist"
 msgstr "Åpne i ny spilleliste"
@@ -3604,7 +3612,7 @@ msgstr "Organiserer filer"
 msgid "Original tags"
 msgstr "Opprinnelige tagger"
 
-#: library/savedgroupingmanager.cpp:101 playlist/playlist.cpp:1359
+#: library/savedgroupingmanager.cpp:101 playlist/playlist.cpp:1374
 #: ui/organisedialog.cpp:76 ../bin/src/ui_groupbydialog.h:135
 #: ../bin/src/ui_groupbydialog.h:154 ../bin/src/ui_groupbydialog.h:173
 msgid "Original year"
@@ -3689,7 +3697,7 @@ msgstr "Sett avspilling på pause"
 msgid "Paused"
 msgstr "På pause"
 
-#: library/savedgroupingmanager.cpp:86 playlist/playlist.cpp:1367
+#: library/savedgroupingmanager.cpp:86 playlist/playlist.cpp:1382
 #: ui/organisedialog.cpp:69 ../bin/src/ui_groupbydialog.h:140
 #: ../bin/src/ui_groupbydialog.h:159 ../bin/src/ui_groupbydialog.h:178
 #: ../bin/src/ui_edittagdialog.h:727
@@ -3711,7 +3719,7 @@ msgstr "Enkelt sidefelt"
 msgid "Play"
 msgstr "Spill"
 
-#: playlist/playlist.cpp:1374 ../bin/src/ui_edittagdialog.h:703
+#: playlist/playlist.cpp:1389 ../bin/src/ui_edittagdialog.h:703
 msgid "Play count"
 msgstr "Antall avspillinger"
 
@@ -3719,8 +3727,8 @@ msgstr "Antall avspillinger"
 msgid "Play if stopped, pause if playing"
 msgstr "Hvis stoppet: Spill av. Hvis spiller: pause"
 
-#: ../bin/src/ui_behavioursettingspage.h:339
-#: ../bin/src/ui_behavioursettingspage.h:359
+#: ../bin/src/ui_behavioursettingspage.h:361
+#: ../bin/src/ui_behavioursettingspage.h:381
 msgid "Play if there is nothing already playing"
 msgstr "Spill hvis det ikke er noe annet som spilles av for øyeblikket"
 
@@ -3858,7 +3866,7 @@ msgstr "Trykk en tast"
 msgid "Press a key combination to use for %1..."
 msgstr "Trykk en tastekombinasjon å bruke til %1…"
 
-#: ../bin/src/ui_behavioursettingspage.h:342
+#: ../bin/src/ui_behavioursettingspage.h:364
 msgid "Pressing \"Previous\" in player will..."
 msgstr "Når du trykker \"Forrige\" i spilleren vil…"
 
@@ -3989,7 +3997,7 @@ msgstr "Gi sangen fire stjerner"
 msgid "Rate the current song 5 stars"
 msgstr "Gi sangen fem stjerner"
 
-#: playlist/playlist.cpp:1372 ../bin/src/ui_edittagdialog.h:711
+#: playlist/playlist.cpp:1387 ../bin/src/ui_edittagdialog.h:711
 msgid "Rating"
 msgstr "Poenggiving"
 
@@ -4030,7 +4038,7 @@ msgid "Reggae"
 msgstr "Reggae"
 
 #: playlist/playlistsaveoptionsdialog.cpp:33
-#: ../bin/src/ui_behavioursettingspage.h:375
+#: ../bin/src/ui_behavioursettingspage.h:397
 msgid "Relative"
 msgstr "Relativ"
 
@@ -4038,7 +4046,7 @@ msgstr "Relativ"
 msgid "Remember Wii remote swing"
 msgstr "Husk Wii-kontroller-bevegelse"
 
-#: ../bin/src/ui_behavioursettingspage.h:327
+#: ../bin/src/ui_behavioursettingspage.h:349
 msgid "Remember from &last time"
 msgstr ""
 
@@ -4118,7 +4126,7 @@ msgstr "Gjenta spor"
 msgid "Replace current playlist"
 msgstr "Erstatt gjeldende spilleliste"
 
-#: ../bin/src/ui_behavioursettingspage.h:352
+#: ../bin/src/ui_behavioursettingspage.h:374
 msgid "Replace the playlist"
 msgstr "Erstatt spillelista"
 
@@ -4150,7 +4158,7 @@ msgstr "Tilbakestill"
 msgid "Reset play counts"
 msgstr "Tilbakestill avspillingsteller"
 
-#: ../bin/src/ui_behavioursettingspage.h:346
+#: ../bin/src/ui_behavioursettingspage.h:368
 msgid "Restart song, then jump to previous if pressed again"
 msgstr "Omstart av sang eller tilbake til forrige ved ytterligere trykk"
 
@@ -4163,7 +4171,7 @@ msgstr "Start sporet igjen, eller spill forrige spor hvis du er innen de første
 msgid "Restrict to ASCII characters"
 msgstr "Begrens til ASCII-tegn"
 
-#: ../bin/src/ui_behavioursettingspage.h:332
+#: ../bin/src/ui_behavioursettingspage.h:354
 msgid "Resume playback on start"
 msgstr "Gjenoppta avspilling etter oppstart"
 
@@ -4217,7 +4225,7 @@ msgstr "Trygg fjerning av enhet"
 msgid "Safely remove the device after copying"
 msgstr "Kjør trygg fjerning av enhet etter kopiering"
 
-#: playlist/playlist.cpp:1387 ../bin/src/ui_edittagdialog.h:708
+#: playlist/playlist.cpp:1402 ../bin/src/ui_edittagdialog.h:708
 #: ../bin/src/ui_playbacksettingspage.h:371
 #: ../bin/src/ui_streamdetailsdialog.h:141
 msgid "Sample rate"
@@ -4297,7 +4305,7 @@ msgstr "Skalerbar samplingsrate-profil (SSR)"
 msgid "Scale size"
 msgstr "Skaler størrelse"
 
-#: playlist/playlist.cpp:1380 ../bin/src/ui_edittagdialog.h:709
+#: playlist/playlist.cpp:1395 ../bin/src/ui_edittagdialog.h:709
 msgid "Score"
 msgstr "Poengsum"
 
@@ -4305,7 +4313,7 @@ msgstr "Poengsum"
 msgid "Scrobble tracks that I listen to"
 msgstr "Meld fra om mine lyttevaner"
 
-#: ../bin/src/ui_behavioursettingspage.h:315
+#: ../bin/src/ui_behavioursettingspage.h:337
 msgid "Scroll over icon to change track"
 msgstr "Rull over ikon for å endre spor"
 
@@ -4414,7 +4422,7 @@ msgstr "Gå frem-/bakover en del av sporlengden"
 msgid "Seek the currently playing track to an absolute position"
 msgstr "Gå til et bestemt tidspunkt i sporet"
 
-#: ../bin/src/ui_behavioursettingspage.h:368
+#: ../bin/src/ui_behavioursettingspage.h:390
 msgid "Seeking using a keyboard shortcut or mouse wheel"
 msgstr "Gå frem-/bakover ved bruk av en tastatursnarvei eller musehjulet"
 
@@ -4615,7 +4623,7 @@ msgstr "Vis «elsker»-knappen"
 msgid "Show the scrobble button in the main window"
 msgstr "Vis knappen for rapportering av lyttevaner i hovedvinduet"
 
-#: ../bin/src/ui_behavioursettingspage.h:314
+#: ../bin/src/ui_behavioursettingspage.h:336
 msgid "Show tray icon"
 msgstr "Vis systemkurvikon"
 
@@ -4675,7 +4683,7 @@ msgstr "Ska"
 msgid "Skip backwards in playlist"
 msgstr "Gå bakover i spillelista"
 
-#: playlist/playlist.cpp:1376 ../bin/src/ui_edittagdialog.h:705
+#: playlist/playlist.cpp:1391 ../bin/src/ui_edittagdialog.h:705
 msgid "Skip count"
 msgstr "Antall ganger hoppet over"
 
@@ -4751,7 +4759,7 @@ msgstr "Sorter sanger etter"
 msgid "Sorting"
 msgstr "Sortering"
 
-#: playlist/playlist.cpp:1404
+#: playlist/playlist.cpp:1419
 msgid "Source"
 msgstr "Kilde"
 
@@ -4853,7 +4861,7 @@ msgstr "Stopp avspilling"
 msgid "Stop playback after current track"
 msgstr "Stopp avspilling etter dette sporet"
 
-#: ../bin/src/ui_behavioursettingspage.h:333
+#: ../bin/src/ui_behavioursettingspage.h:355
 msgid "Stop playback if song fails to play"
 msgstr ""
 
@@ -5131,11 +5139,11 @@ msgstr "Denne strømmen er kun for betalende kunder"
 msgid "This type of device is not supported: %1"
 msgstr "Denne enhetstypen (%1) støttes ikke."
 
-#: ../bin/src/ui_behavioursettingspage.h:369
+#: ../bin/src/ui_behavioursettingspage.h:391
 msgid "Time step"
 msgstr "Tidstrinn"
 
-#: playlist/playlist.cpp:1345 ui/organisedialog.cpp:63
+#: playlist/playlist.cpp:1360 ui/organisedialog.cpp:63
 #: ui/qtsystemtrayicon.cpp:247 ../bin/src/ui_about.h:141
 #: ../bin/src/ui_edittagdialog.h:719 ../bin/src/ui_trackselectiondialog.h:210
 #: ../bin/src/ui_ripcddialog.h:306
@@ -5198,7 +5206,7 @@ msgstr "Antall nettverksforespørsler totalt"
 msgid "Trac&k"
 msgstr "&Spor"
 
-#: playlist/playlist.cpp:1353 ui/organisedialog.cpp:72
+#: playlist/playlist.cpp:1368 ui/organisedialog.cpp:72
 #: ../bin/src/ui_trackselectiondialog.h:212 ../bin/src/ui_ripcddialog.h:304
 msgid "Track"
 msgstr "Spor"
@@ -5403,7 +5411,7 @@ msgstr "Bruk systemikoner"
 msgid "Use temporal noise shaping"
 msgstr "Bruk midlertidig støyforming"
 
-#: ../bin/src/ui_behavioursettingspage.h:321
+#: ../bin/src/ui_behavioursettingspage.h:343
 msgid "Use the system default"
 msgstr "Bruk systemforvalg"
 
@@ -5435,7 +5443,7 @@ msgstr "Brukergrensesnit"
 msgid "Username"
 msgstr "Brukernavn"
 
-#: ../bin/src/ui_behavioursettingspage.h:335
+#: ../bin/src/ui_behavioursettingspage.h:357
 msgid "Using the menu to add a song will..."
 msgstr "Bruk av menyen for å legge til et spor vil…"
 
@@ -5508,7 +5516,7 @@ msgstr "WAV"
 msgid "WMA"
 msgstr "WMA"
 
-#: playlist/playlisttabbar.cpp:192 ../bin/src/ui_behavioursettingspage.h:317
+#: playlist/playlisttabbar.cpp:192 ../bin/src/ui_behavioursettingspage.h:339
 msgid "Warn me when closing a playlist tab"
 msgstr "Advarsel når jeg lukker en spilleliste-fane"
 
@@ -5528,7 +5536,7 @@ msgstr "Nettside"
 msgid "Weeks"
 msgstr "Uker"
 
-#: ../bin/src/ui_behavioursettingspage.h:324
+#: ../bin/src/ui_behavioursettingspage.h:346
 msgid "When Clementine starts"
 msgstr "Når Clementine starter"
 
@@ -5538,9 +5546,13 @@ msgid ""
 "If there are no matches then it will use the largest image in the directory."
 msgstr "Clementine søker først etter billedfiler som inneholder ett av disse ordene.\nHvis ingen ord passer, blir det største bildet i mappa brukt."
 
-#: ../bin/src/ui_behavioursettingspage.h:372
+#: ../bin/src/ui_behavioursettingspage.h:394
 msgid "When saving a playlist, file paths should be"
 msgstr "Når du lagrer spillelisten, skal filplasseringen"
+
+#: ../bin/src/ui_behavioursettingspage.h:400
+msgid "When sorting artists, albums and titles"
+msgstr ""
 
 #: ../bin/src/ui_globalsearchsettingspage.h:147
 msgid "When the list is empty..."
@@ -5622,7 +5634,7 @@ msgstr "Vil du søke gjennom hele biblioteket på ny nå?"
 msgid "Write all songs statistics into songs' files"
 msgstr "Skriv all statistikk til sangfilene"
 
-#: ../bin/src/ui_behavioursettingspage.h:377
+#: ../bin/src/ui_behavioursettingspage.h:399
 msgid "Write metadata"
 msgstr "Skriv metadata"
 
@@ -5630,7 +5642,7 @@ msgstr "Skriv metadata"
 msgid "Wrong username or password."
 msgstr "Ugyldig brukernavn og/eller passord"
 
-#: library/savedgroupingmanager.cpp:71 playlist/playlist.cpp:1357
+#: library/savedgroupingmanager.cpp:71 playlist/playlist.cpp:1372
 #: ui/organisedialog.cpp:75 ../bin/src/ui_groupbydialog.h:134
 #: ../bin/src/ui_groupbydialog.h:153 ../bin/src/ui_groupbydialog.h:172
 #: ../bin/src/ui_trackselectiondialog.h:211 ../bin/src/ui_ripcddialog.h:312
@@ -5729,7 +5741,7 @@ msgid ""
 "shortcuts in Clementine."
 msgstr "Du må åpne Systemvalg og gi Clementine tilgang til \"<span style=\"font-style:italic\">styre datamaskinen din</span>\" for å bruke globale snarveier i Clementine."
 
-#: ../bin/src/ui_behavioursettingspage.h:323
+#: ../bin/src/ui_behavioursettingspage.h:345
 msgid "You will need to restart Clementine if you change the language."
 msgstr "Du må starte Clementine på nytt for å bytte språk."
 
