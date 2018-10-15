@@ -571,6 +571,7 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
 
   connect(app_->player(), SIGNAL(Paused()), osd_, SLOT(Paused()));
   connect(app_->player(), SIGNAL(Stopped()), osd_, SLOT(Stopped()));
+  connect(app_->player(), SIGNAL(Playing()), osd_, SLOT(ResumedPlayback()));
   connect(app_->player(), SIGNAL(PlaylistFinished()), osd_,
           SLOT(PlaylistFinished()));
   connect(app_->player(), SIGNAL(VolumeChanged(int)), osd_,

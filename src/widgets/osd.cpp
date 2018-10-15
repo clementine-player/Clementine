@@ -50,6 +50,7 @@ OSD::OSD(SystemTrayIcon* tray_icon, Application* app, QObject* parent)
       preview_mode_(false),
       force_show_next_(false),
       ignore_next_stopped_(false),
+      is_player_paused_(false),
       pretty_popup_(new OSDPretty(OSDPretty::Mode_Popup)) {
   connect(app_->current_art_loader(),
           SIGNAL(ThumbnailLoaded(Song, QString, QImage)),
@@ -152,8 +153,18 @@ void OSD::AlbumArtLoaded(const Song& song, const QString& uri,
   }
 }
 
+void OSD::ResumedPlayback() {
+  if (show_on_pause_) {
+    if (is_player_paused_) {
+      ReshowCurrentSong();
+    }
+    is_player_paused_ = false;
+  }
+}
+
 void OSD::Paused() {
   if (show_on_pause_) {
+    is_player_paused_ = true;
     ShowMessage(QCoreApplication::applicationName(), tr("Paused"));
   }
 }
