@@ -172,6 +172,14 @@ void BehaviourSettingsPage::Load() {
       s.value("menu_previousmode", Player::PreviousBehaviour_DontRestart)
           .toInt()));
   ui_->seek_step_sec->setValue(s.value("seek_step_sec", 10).toInt());
+
+  if (s.value("play_count_short_duration", false).toBool()) {
+    ui_->b_play_count_short_duration->setChecked(true);
+    ui_->b_play_count_normal_duration->setChecked(false);
+  } else {
+    ui_->b_play_count_short_duration->setChecked(false);
+    ui_->b_play_count_normal_duration->setChecked(true);
+  }
   s.endGroup();
 
   s.beginGroup("General");
@@ -277,6 +285,13 @@ void BehaviourSettingsPage::Save() {
              ui_->stop_play_if_fail_->isChecked());
   s.setValue("menu_previousmode", menu_previousmode);
   s.setValue("seek_step_sec", ui_->seek_step_sec->value());
+
+  if (ui_->b_play_count_short_duration->isChecked()) {
+    s.setValue("play_count_short_duration", true);
+  } else {
+    s.setValue("play_count_short_duration", false);
+  }
+
   s.endGroup();
 
   s.beginGroup("General");

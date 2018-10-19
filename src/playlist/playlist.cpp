@@ -35,37 +35,38 @@
 #include <QtConcurrentRun>
 #include <QtDebug>
 
+#include "core/application.h"
+#include "core/closure.h"
+#include "core/logging.h"
+#include "core/player.h"
+#include "core/qhash_qurl.h"
+#include "core/tagreaderclient.h"
+#include "core/timeconstants.h"
+#include "internet/core/internetmimedata.h"
+#include "internet/core/internetmodel.h"
+#include "internet/core/internetplaylistitem.h"
+#include "internet/core/internetsongmimedata.h"
+#include "internet/internetradio/savedradio.h"
+#include "internet/jamendo/jamendoplaylistitem.h"
+#include "internet/jamendo/jamendoservice.h"
+#include "internet/magnatune/magnatuneplaylistitem.h"
+#include "internet/magnatune/magnatuneservice.h"
+#include "library/library.h"
+#include "library/librarybackend.h"
+#include "library/librarymodel.h"
+#include "library/libraryplaylistitem.h"
 #include "playlistbackend.h"
 #include "playlistfilter.h"
 #include "playlistitemmimedata.h"
 #include "playlistundocommands.h"
 #include "playlistview.h"
 #include "queue.h"
-#include "songloaderinserter.h"
-#include "songmimedata.h"
-#include "songplaylistitem.h"
-#include "core/application.h"
-#include "core/closure.h"
-#include "core/logging.h"
-#include "core/qhash_qurl.h"
-#include "core/tagreaderclient.h"
-#include "core/timeconstants.h"
-#include "internet/jamendo/jamendoplaylistitem.h"
-#include "internet/jamendo/jamendoservice.h"
-#include "internet/magnatune/magnatuneplaylistitem.h"
-#include "internet/magnatune/magnatuneservice.h"
-#include "internet/core/internetmimedata.h"
-#include "internet/core/internetmodel.h"
-#include "internet/core/internetplaylistitem.h"
-#include "internet/core/internetsongmimedata.h"
-#include "internet/internetradio/savedradio.h"
-#include "library/library.h"
-#include "library/librarybackend.h"
-#include "library/librarymodel.h"
-#include "library/libraryplaylistitem.h"
 #include "smartplaylists/generator.h"
 #include "smartplaylists/generatorinserter.h"
 #include "smartplaylists/generatormimedata.h"
+#include "songloaderinserter.h"
+#include "songmimedata.h"
+#include "songplaylistitem.h"
 
 using std::placeholders::_1;
 using std::placeholders::_2;
@@ -156,6 +157,22 @@ Playlist::Playlist(PlaylistBackend* backend, TaskManager* task_manager,
   connect(queue_, SIGNAL(layoutChanged()), SLOT(QueueLayoutChanged()));
 
   column_alignments_ = PlaylistView::DefaultColumnAlignment();
+
+  min_play_count_point_nsecs_ = (31ll * kNsecPerSec);  // 30 seconds
+
+  QSettings settings;
+  settings.beginGroup(Player::kSettingsGroup);
+
+  if (settings.value("play_count_short_duration").toBool()) {
+    max_play_count_point_nsecs_ = (60ll * kNsecPerSec);  // 1 minute
+  } else {
+    max_play_count_point_nsecs_ = (240ll * kNsecPerSec);  // 4 minutes
+  }
+
+  settings.endGroup();
+
+  qLog(Debug) << "k_max_scrobble_point"
+              << (max_play_count_point_nsecs_ / kNsecPerSec);
 }
 
 Playlist::~Playlist() {
@@ -1803,6 +1820,15 @@ Song Playlist::current_item_metadata() const {
   return current_item()->Metadata();
 }
 
+/**
+ * Last.fm defines a track to be scrobbled when
+ * - the track is longer than 30 seconds
+ * - the track has been played for at least half its duration, or for 4 minutes
+ * (whichever occurs earlier.)
+ *
+ * If you seek a track, the scrobble point is recalculated from the point seeked
+ * to (as 50% or 4 minutes).
+ */
 void Playlist::UpdateScrobblePoint(qint64 seek_point_nanosec) {
   const qint64 length = current_item_metadata().length_nanosec();
 
@@ -1825,6 +1851,41 @@ void Playlist::UpdateScrobblePoint(qint64 seek_point_nanosec) {
   }
 
   set_lastfm_status(LastFM_New);
+  UpdatePlayCountPoint(seek_point_nanosec);
+}
+
+/**
+ * Initially the play count tracking and scrobbling went hand in hand.
+ * However, it is is possible that someone's preferences for tracking play
+ * counts are more relaxed than that of scrobbling. For those cases, we use
+ * the following algorithm to track whether a song should increment it's play
+ * count or not.
+ *
+ * Note that that this is very similar to the scrobbling algorithm with the only
+ * difference that the requirement of 4 mins worth of listening is now
+ * configurable via the `max_play_count_point_nsecs_` parameter.
+ */
+void Playlist::UpdatePlayCountPoint(qint64 seek_point_nanosec) {
+  const qint64 length = current_item_metadata().length_nanosec();
+
+  if (seek_point_nanosec == 0) {
+    if (length == 0) {
+      play_count_point_ = max_play_count_point_nsecs_;  // 4 minutes
+    } else {
+      play_count_point_ = qBound(min_play_count_point_nsecs_, length / 2,
+                                 max_play_count_point_nsecs_);
+    }
+  } else {
+    if (length == 0) {
+      play_count_point_ = seek_point_nanosec + max_play_count_point_nsecs_;
+    } else {
+      play_count_point_ =
+          qBound(seek_point_nanosec + min_play_count_point_nsecs_,
+                 seek_point_nanosec + (length / 2),
+                 seek_point_nanosec + max_play_count_point_nsecs_);
+    }
+  }
+
   have_incremented_playcount_ = false;
 }
 

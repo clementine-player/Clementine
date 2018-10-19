@@ -15,13 +15,15 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "core/appearance.h"
+#include "core/logging.h"
+#include "core/player.h"
+#include "core/timeconstants.h"
 #include "playlistcontainer.h"
 #include "playlistmanager.h"
-#include "ui_playlistcontainer.h"
-#include "core/logging.h"
-#include "core/appearance.h"
 #include "playlistparsers/playlistparser.h"
 #include "ui/iconloader.h"
+#include "ui_playlistcontainer.h"
 
 #include <QFileDialog>
 #include <QInputDialog>
@@ -464,4 +466,16 @@ void PlaylistContainer::ReloadSettings() {
   settings.beginGroup(Appearance::kSettingsGroup);
   bool hide_toolbar = settings.value("b_hide_filter_toolbar", false).toBool();
   ui_->toolbar->setVisible(!hide_toolbar);
+  settings.endGroup();
+
+  settings.beginGroup(Player::kSettingsGroup);
+  if (settings.value("play_count_short_duration").toBool()) {
+    playlist_->set_max_play_count_point_nsecs(60ll * kNsecPerSec);
+  } else {
+    playlist_->set_max_play_count_point_nsecs(240ll * kNsecPerSec);
+  }
+  settings.endGroup();
+
+  qLog(Debug) << "new max scrobble point:"
+              << (playlist_->get_max_play_count_point_nsecs() / kNsecPerSec);
 }
