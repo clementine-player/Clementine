@@ -348,23 +348,12 @@ if(NOT QTIOCOMPRESSOR_INCLUDE_DIRS OR NOT QTIOCOMPRESSOR_LIBRARIES)
   set(QTIOCOMPRESSOR_LIBRARIES qtiocompressor)
 endif(NOT QTIOCOMPRESSOR_INCLUDE_DIRS OR NOT QTIOCOMPRESSOR_LIBRARIES)
 
-# When/if upstream accepts our or reimplement our patches then these options can be
-# used to link to system installed qxt instead.
-option(USE_SYSTEM_QXT "Don't set this option unless your system Qxt library has been compiled with the Clementine patches in 3rdparty" OFF)
-if (USE_SYSTEM_QXT)
-  find_path(QXTCORE_INCLUDE_DIRS qxtglobal.h PATH_SUFFIXES qt5/QxtCore)
-  find_path(QXTGUI_INCLUDE_DIRS qxtglobalshortcut.h PATH_SUFFIXES qt5/QxtWidgets)
-  set(QXT_INCLUDE_DIRS ${QXTCORE_INCLUDE_DIRS} ${QXTGUI_INCLUDE_DIRS})
-  # We only need its header. We don't need to link to QxtCore.
-  find_library(QXT_LIBRARIES QxtWidgets-qt5)
-else (USE_SYSTEM_QXT)
-  add_definitions(-DQXT_STATIC -DBUILD_QXT_GUI -DBUILD_QXT_CORE)
-  set(QXT_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/qxt)
-  set(QXT_LIBRARIES qxt)
-  if (NOT APPLE)
-    add_subdirectory(3rdparty/qxt)
-  endif (NOT APPLE)
-endif (USE_SYSTEM_QXT)
+add_definitions(-DQXT_STATIC -DBUILD_QXT_GUI -DBUILD_QXT_CORE)
+set(QXT_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/qxt)
+set(QXT_LIBRARIES qxt)
+if (NOT APPLE)
+  add_subdirectory(3rdparty/qxt)
+endif (NOT APPLE)
 
 # Use system gmock if it's available
 # We need to look for both gmock and gtest
