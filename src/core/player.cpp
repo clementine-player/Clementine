@@ -622,8 +622,7 @@ void Player::InvalidSongRequested(const QUrl& url) {
 
   if (stop_playback) {
     Stop();
-  }
-  else {
+  } else {
     NextItem(Engine::Auto);
   }
 }
