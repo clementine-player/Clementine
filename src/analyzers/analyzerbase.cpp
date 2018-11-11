@@ -120,7 +120,7 @@ void Analyzer::Base::paintEvent(QPaintEvent* e) {
       transform(lastScope_);
       analyze(p, lastScope_, new_frame_);
 
-      // scope.resize( fht_->size() );
+      lastScope_.resize(fht_->size());
 
       break;
     }
