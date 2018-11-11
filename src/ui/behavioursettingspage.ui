@@ -429,6 +429,32 @@
     </widget>
    </item>
    <item>
+    <widget class="QGroupBox" name="groupBox_play_count">
+     <property name="title">
+      <string>When calculating play counts, use</string>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_3">
+      <item>
+       <widget class="QRadioButton" name="b_play_count_normal_duration">
+        <property name="text">
+         <string>Normal duration (at least 4 minutes or half the track length)</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QRadioButton" name="b_play_count_short_duration">
+        <property name="text">
+         <string>Short duration (at least 1 minute or half the track length)</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
     <spacer name="verticalSpacer_2">
      <property name="orientation">
       <enum>Qt::Vertical</enum>

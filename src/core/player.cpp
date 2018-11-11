@@ -620,7 +620,9 @@ void Player::InvalidSongRequested(const QUrl& url) {
   bool stop_playback = s.value("stop_play_if_fail", 0).toBool();
   s.endGroup();
 
-  if (!stop_playback) {
+  if (stop_playback) {
+    Stop();
+  } else {
     NextItem(Engine::Auto);
   }
 }

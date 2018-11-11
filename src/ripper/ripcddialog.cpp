@@ -17,6 +17,8 @@
 
 #include "ripper/ripcddialog.h"
 
+#include <algorithm>
+
 #include <QCheckBox>
 #include <QCloseEvent>
 #include <QFileDialog>
@@ -107,7 +109,7 @@ RipCDDialog::RipCDDialog(QWidget* parent)
 
   // Get presets
   QList<TranscoderPreset> presets = Transcoder::GetAllPresets();
-  qSort(presets.begin(), presets.end(), ComparePresetsByName);
+  std::sort(presets.begin(), presets.end(), ComparePresetsByName);
   for (const TranscoderPreset& preset : presets) {
     ui_->format->addItem(
         QString("%1 (.%2)").arg(preset.name_).arg(preset.extension_),

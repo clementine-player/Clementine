@@ -17,6 +17,8 @@
 
 #include "musicbrainzclient.h"
 
+#include <algorithm>
+
 #include <QCoreApplication>
 #include <QNetworkReply>
 #include <QSet>
@@ -212,7 +214,7 @@ void MusicBrainzClient::RequestFinished(QNetworkReply* reply, int id,
     // Merge the results we have
     ResultList ret;
     QList<PendingResults> result_list_list = pending_results_.take(id);
-    qSort(result_list_list);
+    std::sort(result_list_list.begin(), result_list_list.end());
     for (const PendingResults& result_list : result_list_list) {
       ret << result_list.results_;
     }
@@ -317,7 +319,7 @@ MusicBrainzClient::ResultList MusicBrainzClient::ParseTrack(
   if (releases.isEmpty()) {
     ret << result;
   } else {
-    qStableSort(releases);
+    std::stable_sort(releases.begin(), releases.end());
     for (const Release& release : releases) {
       ret << release.CopyAndMergeInto(result);
     }
@@ -386,7 +388,7 @@ MusicBrainzClient::ResultList MusicBrainzClient::UniqueResults(
   ResultList ret;
   if (opt == SortResults) {
     ret = QSet<Result>::fromList(results).toList();
-    qSort(ret);
+    std::sort(ret.begin(), ret.end());
   } else {  // KeepOriginalOrder
     // Qt doesn't provide a ordered set (QSet "stores values in an unspecified
     // order" according to Qt documentation).

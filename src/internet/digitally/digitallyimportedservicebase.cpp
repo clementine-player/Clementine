@@ -20,6 +20,8 @@
 
 #include "digitallyimportedservicebase.h"
 
+#include <algorithm>
+
 #include <QDesktopServices>
 #include <QMenu>
 #include <QNetworkReply>
@@ -112,7 +114,7 @@ void DigitallyImportedServiceBase::RefreshStreamsFinished(QNetworkReply* reply,
   // Parse the list and sort by name
   DigitallyImportedClient::ChannelList channels =
       api_client_->ParseChannelList(reply);
-  qSort(channels);
+  std::sort(channels.begin(), channels.end());
 
   saved_channels_.Update(channels);
 

@@ -17,6 +17,7 @@
 
 #include "librarymodel.h"
 
+#include <algorithm>
 #include <functional>
 
 #include <QFuture>
@@ -659,7 +660,7 @@ QVariant LibraryModel::data(const LibraryItem* item, int role) const {
       return item->SortText();
 
     case Role_DisplayText:
-      return item->DisplayText(); 
+      return item->DisplayText();
   }
   return QVariant();
 }
@@ -1269,8 +1270,8 @@ void LibraryModel::GetChildSongs(LibraryItem* item, QList<QUrl>* urls,
       const_cast<LibraryModel*>(this)->LazyPopulate(item);
 
       QList<LibraryItem*> children = item->children;
-      qSort(children.begin(), children.end(),
-            std::bind(&LibraryModel::CompareItems, this, _1, _2));
+      std::sort(children.begin(), children.end(),
+                std::bind(&LibraryModel::CompareItems, this, _1, _2));
 
       for (LibraryItem* child : children)
         GetChildSongs(child, urls, songs, song_ids);

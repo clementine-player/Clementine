@@ -231,11 +231,21 @@ void Ogg::FLAC::File::scan()
 
   if(!metadataHeader.startsWith("fLaC"))  {
     // FLAC 1.1.2+
+    // See https://xiph.org/flac/ogg_mapping.html for the header specification.
+    if(metadataHeader.size() < 13)
+      return;
+
+    if(metadataHeader[0] != 0x7f)
+      return;
+
     if(metadataHeader.mid(1, 4) != "FLAC")
       return;
 
-    if(metadataHeader[5] != 1)
-      return; // not version 1
+    if(metadataHeader[5] != 1 && metadataHeader[6] != 0)
+      return; // not version 1.0
+
+    if(metadataHeader.mid(9, 4) != "fLaC")
+      return;
 
     metadataHeader = metadataHeader.mid(13);
   }

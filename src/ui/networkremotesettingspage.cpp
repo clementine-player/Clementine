@@ -18,6 +18,8 @@
 #include "networkremotesettingspage.h"
 #include "ui_networkremotesettingspage.h"
 
+#include <algorithm>
+
 #include <QDesktopServices>
 #include <QFile>
 #include <QHostInfo>
@@ -52,7 +54,7 @@ NetworkRemoteSettingsPage::NetworkRemoteSettingsPage(SettingsDialog* dialog)
 
   // Get presets
   QList<TranscoderPreset> presets = Transcoder::GetAllPresets();
-  qSort(presets.begin(), presets.end(), ComparePresetsByName);
+  std::sort(presets.begin(), presets.end(), ComparePresetsByName);
   for (const TranscoderPreset& preset : presets) {
     ui_->format->addItem(
         QString("%1 (.%2)").arg(preset.name_, preset.extension_),

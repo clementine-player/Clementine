@@ -17,6 +17,7 @@
 
 #include "transcoder.h"
 
+#include <algorithm>
 #include <memory>
 
 #include <QCoreApplication>
@@ -138,7 +139,7 @@ GstElement* Transcoder::CreateElementForMimeType(const QString& element_type,
   if (suitable_elements_.isEmpty()) return nullptr;
 
   // Sort by rank
-  qSort(suitable_elements_);
+  std::sort(suitable_elements_.begin(), suitable_elements_.end());
   const SuitableElement& best = suitable_elements_.last();
 
   LogLine(QString("Using '%1' (rank %2)").arg(best.name_).arg(best.rank_));

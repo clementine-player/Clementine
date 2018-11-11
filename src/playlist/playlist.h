@@ -236,6 +236,16 @@ class Playlist : public QAbstractListModel {
   void set_have_incremented_playcount() { have_incremented_playcount_ = true; }
   void UpdateScrobblePoint(qint64 seek_point_nanosec = 0);
 
+  // play count tracking
+  qint64 play_count_point_nanosec() const { return play_count_point_; }
+  void set_max_play_count_point_nsecs(qint64 max_play_count_point_nsecs) {
+    max_play_count_point_nsecs_ = max_play_count_point_nsecs;
+  }
+  qint64 get_max_play_count_point_nsecs() const {
+    return max_play_count_point_nsecs_;
+  }
+  void UpdatePlayCountPoint(qint64 seek_point_nanosec = 0);
+
   // Changing the playlist
   void InsertItems(const PlaylistItemList& items, int pos = -1,
                    bool play_now = false, bool enqueue = false,
@@ -440,6 +450,8 @@ signals:
   LastFMStatus lastfm_status_;
   bool have_incremented_playcount_;
 
+  qint64 play_count_point_;
+
   PlaylistSequence* playlist_sequence_;
 
   // Hack to stop QTreeView::setModel sorting the playlist
@@ -453,6 +465,9 @@ signals:
   QList<SongInsertVetoListener*> veto_listeners_;
 
   QString special_type_;
+
+  qint64 min_play_count_point_nsecs_;
+  qint64 max_play_count_point_nsecs_;
 
   // Cancel async restore if songs are already replaced
   bool cancel_restore_;
