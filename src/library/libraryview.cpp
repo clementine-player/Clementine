@@ -175,8 +175,8 @@ LibraryView::LibraryView(QWidget* parent)
       total_song_count_(-1),
       context_menu_(nullptr),
       is_in_keyboard_search_(false) {
-  QIcon nocover = IconLoader::Load("nocover", IconLoader::Other);
-  nomusic_ = nocover.pixmap(nocover.availableSizes().last());
+  QIcon nomusic = IconLoader::Load("nomusic", IconLoader::Other);
+  nomusic_ = nomusic.pixmap(nomusic.availableSizes().last());
   setItemDelegate(new LibraryItemDelegate(this));
   setAttribute(Qt::WA_MacShowFocusRect, false);
   setHeaderHidden(true);
