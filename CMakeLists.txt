@@ -93,7 +93,13 @@ find_path(LASTFM1_INCLUDE_DIRS lastfm/Track.h)
 
 find_path(SPARSEHASH_INCLUDE_DIRS google/sparsetable)
 
-# Only use system taglib if it's greater than 1.11.1 because of audio file detection by content.
+# Only use system taglib if it's greater than 1.11.1
+# There is a bug in version 1.11.1 corrupting Ogg files, see: https://github.com/taglib/taglib/issues/864
+# If you decide to use the systems taglib, make sure it has been patched with the following commit:
+# https://github.com/taglib/taglib/commit/9336c82da3a04552168f208cd7a5fa4646701ea4
+# The current taglib in 3rdparty also has the following features used by Clementine:
+# - Audio file detection by content.
+#
 if (TAGLIB_VERSION VERSION_GREATER 1.11.1 OR WIN32)
   option(USE_SYSTEM_TAGLIB "Use system taglib" ON)
 else()
@@ -101,7 +107,11 @@ else()
 endif()
 
 if (TAGLIB_FOUND AND USE_SYSTEM_TAGLIB)
-  message(STATUS "Using system taglib library")
+  if (TAGLIB_VERSION VERSION_GREATER 1.11.1 OR WIN32)
+    message(STATUS "Using system taglib library")
+  else()
+    message(WARNING "Using system taglib library. Version 1.11.1 or less has a bug corrupting Ogg files, make sure your systems version has been patched!")
+  endif()
   set(CMAKE_REQUIRED_INCLUDES "${TAGLIB_INCLUDE_DIRS}")
   set(CMAKE_REQUIRED_LIBRARIES "${TAGLIB_LIBRARIES}")
   check_cxx_source_compiles("#include <opusfile.h>
@@ -109,7 +119,7 @@ if (TAGLIB_FOUND AND USE_SYSTEM_TAGLIB)
   set(CMAKE_REQUIRED_INCLUDES)
   set(CMAKE_REQUIRED_LIBRARIES)
 else()
-  message(STATUS "Using builtin taglib because your system's version is too old")
+  message(STATUS "Using builtin taglib library")
   set(TAGLIB_VERSION 1.11.1)
   set(TAGLIB_INCLUDE_DIRS "${CMAKE_BINARY_DIR}/3rdparty/taglib/headers/taglib/;${CMAKE_BINARY_DIR}/3rdparty/taglib/headers/")
   set(TAGLIB_LIBRARY_DIRS "")
