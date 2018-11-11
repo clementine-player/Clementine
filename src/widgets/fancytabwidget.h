@@ -66,7 +66,7 @@ class FancyTabWidget : public QTabWidget {
         void ModeChanged(FancyTabWidget::Mode mode);
         void CurrentChanged(int);
 
-    public slots:
+       public slots:
         void setCurrentIndex(int index);
         void SetMode(Mode mode);
         // Mapper mapped signal needs this convenience function 
