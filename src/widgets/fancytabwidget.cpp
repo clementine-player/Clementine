@@ -274,6 +274,7 @@ void FancyTabWidget::currentTabChanged(int index) {
     QLayout *layout = currentPage->layout();
     if(bottom_widget_ != nullptr)
         layout->addWidget(bottom_widget_);
+    emit CurrentChanged(index);
 }
 
 FancyTabWidget::FancyTabWidget(QWidget* parent) : QTabWidget(parent), 
