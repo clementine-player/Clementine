@@ -30,6 +30,7 @@
 #include <QScopedPointer>
 
 class AddPodcastDialog;
+class PodcastInfoDialog;
 class OrganiseDialog;
 class Podcast;
 class PodcastBackend;
@@ -76,6 +77,7 @@ class PodcastService : public InternetService {
   void ReloadPodcast(const Podcast& podcast);
   void RemoveSelectedPodcast();
   void DownloadSelectedEpisode();
+  void PodcastInfo();
   void DeleteDownloadedData();
   void SetNew();
   void SetListened();
@@ -148,6 +150,7 @@ class PodcastService : public InternetService {
   QAction* update_selected_action_;
   QAction* remove_selected_action_;
   QAction* download_selected_action_;
+  QAction* info_selected_action_;
   QAction* delete_downloaded_action_;
   QAction* set_new_action_;
   QAction* set_listened_action_;
@@ -164,6 +167,7 @@ class PodcastService : public InternetService {
   QMap<int, QStandardItem*> episodes_by_database_id_;
 
   std::unique_ptr<AddPodcastDialog> add_podcast_dialog_;
+  std::unique_ptr<PodcastInfoDialog> podcast_info_dialog_;
 };
 
 #endif  // INTERNET_PODCASTS_PODCASTSERVICE_H_

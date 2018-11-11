@@ -26,6 +26,7 @@
 #include <QtConcurrentRun>
 
 #include "addpodcastdialog.h"
+#include "podcastinfodialog.h"
 #include "core/application.h"
 #include "core/logging.h"
 #include "core/mergedproxymodel.h"
@@ -430,6 +431,11 @@ void PodcastService::ShowContextMenu(const QPoint& global_pos) {
     download_selected_action_ =
         context_menu_->addAction(IconLoader::Load("download", IconLoader::Base),
                                  "", this, SLOT(DownloadSelectedEpisode()));
+    info_selected_action_ =
+        context_menu_->addAction(IconLoader::Load("about-info",
+                                                  IconLoader::Base),
+                                 tr("Podcast information"), this,
+                                 SLOT(PodcastInfo()));
     delete_downloaded_action_ = context_menu_->addAction(
         IconLoader::Load("edit-delete", IconLoader::Base),
         tr("Delete downloaded data"), this, SLOT(DeleteDownloadedData()));
@@ -519,6 +525,12 @@ void PodcastService::ShowContextMenu(const QPoint& global_pos) {
   } else {
     download_selected_action_->setEnabled(episodes);
     delete_downloaded_action_->setEnabled(episodes);
+  }
+
+  if (selected_podcasts_.count() == 1) {
+    info_selected_action_->setEnabled(true);
+  } else {
+    info_selected_action_->setEnabled(false);
   }
 
   if (explicitly_selected_podcasts_.isEmpty() && selected_episodes_.isEmpty()) {
@@ -683,6 +695,15 @@ void PodcastService::DownloadSelectedEpisode() {
   for (const QModelIndex& index : selected_episodes_) {
     app_->podcast_downloader()->DownloadEpisode(
         index.data(Role_Episode).value<PodcastEpisode>());
+  }
+}
+
+void PodcastService::PodcastInfo() {
+  if (selected_podcasts_.count() > 0) {
+    const Podcast podcast =
+        selected_podcasts_[0].data(Role_Podcast).value<Podcast>();
+    podcast_info_dialog_.reset(new PodcastInfoDialog(app_));
+    podcast_info_dialog_->ShowPodcast(podcast);
   }
 }
 
