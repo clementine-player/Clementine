@@ -64,6 +64,7 @@ class FancyTabWidget : public QTabWidget {
 
     signals:
         void ModeChanged(FancyTabWidget::Mode mode);
+        void CurrentChanged(int);
 
     public slots:
         void setCurrentIndex(int index);
