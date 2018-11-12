@@ -24,6 +24,8 @@
 #include "ui/mainwindow.h"
 #include "widgets/fileview.h"
 
+#include <algorithm>
+
 #include <QPushButton>
 #include <QFileDialog>
 #include <QDirIterator>
@@ -63,7 +65,7 @@ TranscodeDialog::TranscodeDialog(QWidget* parent)
 
   // Get presets
   QList<TranscoderPreset> presets = Transcoder::GetAllPresets();
-  qSort(presets.begin(), presets.end(), ComparePresetsByName);
+  std::sort(presets.begin(), presets.end(), ComparePresetsByName);
   for (const TranscoderPreset& preset : presets) {
     ui_->format->addItem(
         QString("%1 (.%2)").arg(preset.name_, preset.extension_),

@@ -23,6 +23,8 @@
 #include "ui_queuemanager.h"
 #include "ui/iconloader.h"
 
+#include <algorithm>
+
 #include <QKeySequence>
 #include <QShortcut>
 
@@ -105,7 +107,7 @@ void QueueManager::CurrentPlaylistChanged(Playlist* playlist) {
 
 void QueueManager::MoveUp() {
   QModelIndexList indexes = ui_->list->selectionModel()->selectedRows();
-  qStableSort(indexes);
+  std::stable_sort(indexes.begin(), indexes.end());
 
   if (indexes.isEmpty() || indexes.first().row() == 0) return;
 
@@ -116,7 +118,7 @@ void QueueManager::MoveUp() {
 
 void QueueManager::MoveDown() {
   QModelIndexList indexes = ui_->list->selectionModel()->selectedRows();
-  qStableSort(indexes);
+  std::stable_sort(indexes.begin(), indexes.end());
 
   if (indexes.isEmpty() ||
       indexes.last().row() == current_playlist_->queue()->rowCount() - 1)

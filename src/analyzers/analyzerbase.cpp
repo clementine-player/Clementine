@@ -24,6 +24,7 @@
 
 #include "analyzerbase.h"
 
+#include <algorithm>
 #include <cmath>
 #include <cstdint>
 
@@ -87,9 +88,9 @@ void Analyzer::Base::transform(Scope& scope) {
 
   QVector<float> aux(fht_->size());
   if (aux.size() >= scope.size()) {
-    qCopy(scope.begin(), scope.end(), aux.begin());
+    std::copy(scope.begin(), scope.end(), aux.begin());
   } else {
-    qCopy(scope.begin(), scope.begin() + aux.size(), aux.begin());
+    std::copy(scope.begin(), scope.begin() + aux.size(), aux.begin());
   }
 
   fht_->logSpectrum(scope.data(), aux.data());
@@ -119,7 +120,7 @@ void Analyzer::Base::paintEvent(QPaintEvent* e) {
       transform(lastScope_);
       analyze(p, lastScope_, new_frame_);
 
-      // scope.resize( fht_->size() );
+      lastScope_.resize(fht_->size());
 
       break;
     }

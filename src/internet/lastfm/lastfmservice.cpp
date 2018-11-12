@@ -32,6 +32,8 @@
 
 #include "lastfmservice.h"
 
+#include <algorithm>
+
 #include <QCryptographicHash>
 #include <QDesktopServices>
 #include <QMenu>
@@ -132,7 +134,7 @@ bool LastFMService::IsSubscriber() const {
 
 namespace {
 QByteArray SignApiRequest(QList<QPair<QString, QString>> params) {
-  qSort(params);
+  std::sort(params.begin(), params.end());
   QString to_sign;
   for (const auto& p : params) {
     to_sign += p.first;

@@ -148,6 +148,7 @@
 #include "moodbar/moodbarproxystyle.h"
 #endif
 
+#include <algorithm>
 #include <cmath>
 
 #ifdef Q_OS_DARWIN
@@ -1460,6 +1461,9 @@ void MainWindow::Seeked(qlonglong microseconds) {
   if (ui_->action_toggle_scrobbling->isVisible()) SetToggleScrobblingIcon(true);
 }
 
+/**
+ * Update track position, tray icon, playcount
+ */
 void MainWindow::UpdateTrackPosition() {
   // Track position in seconds
   Playlist* playlist = app_->playlist_manager()->active();
@@ -1469,29 +1473,32 @@ void MainWindow::UpdateTrackPosition() {
       float(app_->player()->engine()->position_nanosec()) / kNsecPerSec + 0.5);
   const int length = app_->player()->engine()->length_nanosec() / kNsecPerSec;
   const int scrobble_point = playlist->scrobble_point_nanosec() / kNsecPerSec;
+  const int play_count_point =
+      playlist->play_count_point_nanosec() / kNsecPerSec;
 
   if (length <= 0) {
     // Probably a stream that we don't know the length of
     return;
   }
+
 #ifdef HAVE_LIBLASTFM
+  // Time to scrobble?
   const bool last_fm_enabled = ui_->action_toggle_scrobbling->isVisible() &&
                                app_->scrobbler()->IsScrobblingEnabled() &&
                                app_->scrobbler()->IsAuthenticated();
-#endif
 
-  // Time to scrobble?
   if (position >= scrobble_point) {
     if (playlist->get_lastfm_status() == Playlist::LastFM_New) {
-#ifdef HAVE_LIBLASTFM
       if (app_->scrobbler()->IsScrobblingEnabled() &&
           app_->scrobbler()->IsAuthenticated()) {
         qLog(Info) << "Scrobbling at" << scrobble_point;
         app_->scrobbler()->Scrobble();
       }
-#endif
     }
+  }
+#endif
 
+  if (position >= play_count_point) {
     // Update the play count for the song if it's from the library
     if (!playlist->have_incremented_playcount() && item->IsLocalLibraryItem() &&
         item->Metadata().id() != -1 &&
@@ -1511,8 +1518,14 @@ void MainWindow::UpdateTrackPosition() {
 
   // Update the tray icon every 10 seconds
   if (position % 10 == 0) {
-    qLog(Debug) << "position" << position << "scrobble point" << scrobble_point
-                << "status" << playlist->get_lastfm_status();
+    qLog(Debug) << "position:" << position
+                << ", scrobble point:" << scrobble_point
+                << ", lastfm status:" << playlist->get_lastfm_status()
+                << ", play count point:" << play_count_point
+                << ", is local libary item:" << item->IsLocalLibraryItem()
+                << ", playlist have incremented playcount: "
+                << playlist->have_incremented_playcount();
+
     if (tray_icon_) tray_icon_->SetProgress(double(position) / length * 100);
 
 // if we're waiting for the scrobble point, update the icon
@@ -1955,7 +1968,7 @@ void MainWindow::RenumberTracks() {
   int track = 1;
 
   // Get the index list in order
-  qStableSort(indexes);
+  std::stable_sort(indexes.begin(), indexes.end());
 
   // if first selected song has a track number set, start from that offset
   if (!indexes.isEmpty()) {
@@ -2174,7 +2187,7 @@ void MainWindow::CommandlineOptionsReceived(const QString& string_options) {
 
 void MainWindow::CommandlineOptionsReceived(const CommandlineOptions& options) {
   qLog(Debug) << "command line options received";
-  
+
   switch (options.player_action()) {
     case CommandlineOptions::Player_Play:
       if (options.urls().empty()) {
@@ -2256,21 +2269,21 @@ void MainWindow::CommandlineOptionsReceived(const CommandlineOptions& options) {
 
   qLog(Debug) << options.delete_current_track();
 
-  // Just pass the url of the currently playing 
+  // Just pass the url of the currently playing
   if (options.delete_current_track()) {
     qLog(Debug) << "deleting current track";
-    
+
     Playlist* activePlaylist = app_->playlist_manager()->active();
     PlaylistItemPtr playlistItemPtr = activePlaylist->current_item();
 
     if (playlistItemPtr) {
       const QUrl& url = playlistItemPtr->Url();
       qLog(Debug) << url;
-      
-      std::shared_ptr<MusicStorage> storage(new FilesystemMusicStorage("/"));  
-      
+
+      std::shared_ptr<MusicStorage> storage(new FilesystemMusicStorage("/"));
+
       app_->player()->Next();
-        
+
       DeleteFiles* delete_files = new DeleteFiles(app_->task_manager(), storage);
       connect(delete_files, SIGNAL(Finished(SongList)),
               SLOT(DeleteFinished(SongList)));
@@ -2280,7 +2293,7 @@ void MainWindow::CommandlineOptionsReceived(const CommandlineOptions& options) {
       qLog(Debug) << "no currently playing track to delete";
     }
   }
-  
+
   if (options.show_osd()) app_->player()->ShowOSD();
 
   if (options.toggle_pretty_osd()) app_->player()->TogglePrettyOSD();
@@ -2496,9 +2509,9 @@ void MainWindow::DeleteFinished(const SongList& songs_with_errors) {
       activePlaylist->RemoveUnavailableSongs();
       qLog(Debug) << "Found active playlist and removed unavailable songs";
     }
-    
+
     return;
-  } 
+  }
 
   OrganiseErrorDialog* dialog = new OrganiseErrorDialog(this);
   dialog->Show(OrganiseErrorDialog::Type_Delete, songs_with_errors);

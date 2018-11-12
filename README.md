@@ -22,7 +22,7 @@ Please:
 
 Please:
  
- * Try the latest developer build (http://builds.clementine-player.org/) to see if the bug is still present (**Attention**, those builds aren't stable so they might not work well and could sometimes break things like user settings). If it works like a charm even though you see an open issue, please comment on it and explain that the issue has been fixed
+ * Try the latest developer build (http://builds.clementine-player.org/) to see if any bug is still present (**Attention**, those builds aren't stable so they might not work well and could sometimes break things like user settings). If it works fine even though you see an open issue, please comment on it and explain that the issue has been fixed
  * Check if another person has already opened the same issue to avoid duplicates
  * If there already is an open issue you could comment on it to add precisions about the problem or confirm it
  * In case there isn't, you can open a new issue with an explicit title and as much information as possible (OS, Clementine version, how to reproduce the problem...)

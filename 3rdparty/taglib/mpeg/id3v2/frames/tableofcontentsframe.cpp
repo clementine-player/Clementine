@@ -216,7 +216,23 @@ void TableOfContentsFrame::removeEmbeddedFrames(const ByteVector &id)
 
 String TableOfContentsFrame::toString() const
 {
-  return String();
+  String s = String(d->elementID) +
+             ": top level: " + (d->isTopLevel ? "true" : "false") +
+             ", ordered: " + (d->isOrdered ? "true" : "false");
+
+  if(!d->childElements.isEmpty()) {
+    s+= ", chapters: [ " + String(d->childElements.toByteVector(", ")) + " ]";
+  }
+
+  if(!d->embeddedFrameList.isEmpty()) {
+    StringList frameIDs;
+    for(FrameList::ConstIterator it = d->embeddedFrameList.begin();
+        it != d->embeddedFrameList.end(); ++it)
+      frameIDs.append((*it)->frameID());
+    s += ", sub-frames: [ " + frameIDs.toString(", ") + " ]";
+  }
+
+  return s;
 }
 
 PropertyMap TableOfContentsFrame::asProperties() const

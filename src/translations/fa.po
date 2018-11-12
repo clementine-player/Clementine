@@ -13,7 +13,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2018-09-17 13:31+0000\n"
+"PO-Revision-Date: 2018-10-20 12:14+0000\n"
 "Last-Translator: hatstand <john.maguire@gmail.com>\n"
 "Language-Team: Persian (http://www.transifex.com/davidsansome/clementine/language/fa/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -56,7 +56,7 @@ msgstr " م.ث"
 msgid " pt"
 msgstr " پوینت"
 
-#: ../bin/src/ui_behavioursettingspage.h:375
+#: ../bin/src/ui_behavioursettingspage.h:414
 msgid " s"
 msgstr ""
 
@@ -95,7 +95,7 @@ msgstr "%1 روز پیش"
 msgid "%1 on %2"
 msgstr "%1 در %2"
 
-#: playlistparsers/playlistparser.cpp:87
+#: playlistparsers/playlistparser.cpp:89
 #, qt-format
 msgid "%1 playlists (%2)"
 msgstr "%1 لیست‌پخش (%2)"
@@ -125,12 +125,12 @@ msgstr "%1 آهنگ پیدا شد"
 msgid "%1 songs found (showing %2)"
 msgstr "%1 آهنگ پیدا شد (نمایش %2)"
 
-#: playlist/playlistmanager.cpp:435 playlist/queue.cpp:220
+#: playlist/playlistmanager.cpp:435 playlist/queue.cpp:222
 #, qt-format
 msgid "%1 tracks"
 msgstr "%1 ترک"
 
-#: ui/albumcovermanager.cpp:472
+#: ui/albumcovermanager.cpp:474
 #, qt-format
 msgid "%1 transferred"
 msgstr "%1 ترابرده شد"
@@ -155,19 +155,19 @@ msgstr "%L1 همه‌ی پخش‌ها"
 msgid "%filename%"
 msgstr "%filename%"
 
-#: transcoder/transcodedialog.cpp:214
+#: transcoder/transcodedialog.cpp:216
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n failed"
 msgstr "%n ناکام ماند"
 
-#: transcoder/transcodedialog.cpp:209
+#: transcoder/transcodedialog.cpp:211
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n finished"
 msgstr "%n پایان یافت"
 
-#: transcoder/transcodedialog.cpp:203
+#: transcoder/transcodedialog.cpp:205
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n remaining"
@@ -266,7 +266,7 @@ msgstr "(متفاوت میان چند آهنگ)"
 msgid ", by "
 msgstr "، توسط"
 
-#: ui/about.cpp:84
+#: ui/about.cpp:86
 msgid "...and all the Amarok contributors"
 msgstr "...و دیگر گسترش‌دهنده‌های آماروک"
 
@@ -286,7 +286,7 @@ msgstr "0px"
 msgid "1 day"
 msgstr "۱ روز"
 
-#: playlist/playlistmanager.cpp:435 playlist/queue.cpp:220
+#: playlist/playlistmanager.cpp:435 playlist/queue.cpp:222
 msgid "1 track"
 msgstr "۱ ترک"
 
@@ -398,6 +398,10 @@ msgid ""
 "A song will be included in the playlist if it matches these conditions."
 msgstr "آهنگ‌هایی به این لیست‌پخش افزوده می‌شوند که این ویژگیها را داشته باشند."
 
+#: ../bin/src/ui_behavioursettingspage.h:417
+msgid "A&utomatic"
+msgstr ""
+
 #: smartplaylists/searchterm.cpp:396
 msgid "A-Z"
 msgstr "الف-ی"
@@ -426,11 +430,11 @@ msgstr "AIFF"
 msgid "ALL GLORY TO THE HYPNOTOAD"
 msgstr "همه‌ی افتخار برای HYPNOTOAD"
 
-#: ui/albumcovermanager.cpp:105 ui/albumcoversearcher.cpp:158
+#: ui/albumcovermanager.cpp:107 ui/albumcoversearcher.cpp:158
 msgid "Abort"
 msgstr "لغو"
 
-#: ui/about.cpp:30
+#: ui/about.cpp:32
 #, qt-format
 msgid "About %1"
 msgstr "درباره‌ی %1"
@@ -444,7 +448,7 @@ msgid "About Qt..."
 msgstr "درباره‌ی کیو‌ت..."
 
 #: playlist/playlistsaveoptionsdialog.cpp:34
-#: ../bin/src/ui_behavioursettingspage.h:379
+#: ../bin/src/ui_behavioursettingspage.h:418
 msgid "Absolute"
 msgstr "مطلق"
 
@@ -469,10 +473,6 @@ msgstr "کنش"
 
 #: wiimotedev/wiimotesettingspage.cpp:103
 msgid "Activate/Deactivate Wii Remote"
-msgstr ""
-
-#: internet/soundcloud/soundcloudservice.cpp:128
-msgid "Activities stream"
 msgstr ""
 
 #: internet/podcasts/addpodcastdialog.cpp:63
@@ -503,7 +503,7 @@ msgstr "افزودن جریان دیگر..."
 msgid "Add directory..."
 msgstr "افزودن پوشه..."
 
-#: ui/mainwindow.cpp:2049
+#: ui/mainwindow.cpp:2075
 msgid "Add file"
 msgstr "افزودن پرونده"
 
@@ -519,12 +519,12 @@ msgstr ""
 msgid "Add file..."
 msgstr "افزودن پرونده..."
 
-#: transcoder/transcodedialog.cpp:224
+#: transcoder/transcodedialog.cpp:226
 msgid "Add files to transcode"
 msgstr "افزودن پرونده‌ها به تراکد"
 
-#: transcoder/transcodedialog.cpp:306 ui/mainwindow.cpp:2076
-#: ripper/ripcddialog.cpp:201
+#: transcoder/transcodedialog.cpp:308 ui/mainwindow.cpp:2102
+#: ripper/ripcddialog.cpp:203
 msgid "Add folder"
 msgstr "افزودن پوشه"
 
@@ -628,7 +628,7 @@ msgstr "افزودن به فهرست پخش Spotify"
 msgid "Add to Spotify starred"
 msgstr "افزودن به ستاره‌دارهای Spotify"
 
-#: ui/mainwindow.cpp:1850
+#: ui/mainwindow.cpp:1876
 msgid "Add to another playlist"
 msgstr "افزودن به لیست‌پخش دیگر"
 
@@ -636,8 +636,8 @@ msgstr "افزودن به لیست‌پخش دیگر"
 msgid "Add to playlist"
 msgstr "افزودن به لیست‌پخش"
 
-#: ../bin/src/ui_behavioursettingspage.h:359
-#: ../bin/src/ui_behavioursettingspage.h:371
+#: ../bin/src/ui_behavioursettingspage.h:398
+#: ../bin/src/ui_behavioursettingspage.h:410
 msgid "Add to the queue"
 msgstr "افزودن به صف"
 
@@ -678,8 +678,8 @@ msgstr "پس از"
 msgid "After copying..."
 msgstr "پس از کپی‌کردن..."
 
-#: library/savedgroupingmanager.cpp:65 playlist/playlist.cpp:1349
-#: ui/organisedialog.cpp:64 ui/qtsystemtrayicon.cpp:251
+#: library/savedgroupingmanager.cpp:65 playlist/playlist.cpp:1382
+#: ui/organisedialog.cpp:65 ui/qtsystemtrayicon.cpp:251
 #: ../bin/src/ui_groupbydialog.h:128 ../bin/src/ui_groupbydialog.h:147
 #: ../bin/src/ui_groupbydialog.h:166 ../bin/src/ui_albumcoversearcher.h:110
 #: ../bin/src/ui_albumcoversearcher.h:112 ../bin/src/ui_edittagdialog.h:723
@@ -691,8 +691,8 @@ msgstr "آلبوم"
 msgid "Album (ideal loudness for all tracks)"
 msgstr "آلبوم (بلندی صدای ایده‌آل برای همه‌ی ترک‌ها)"
 
-#: library/savedgroupingmanager.cpp:80 playlist/playlist.cpp:1363
-#: ui/organisedialog.cpp:67 ../bin/src/ui_groupbydialog.h:130
+#: library/savedgroupingmanager.cpp:80 playlist/playlist.cpp:1396
+#: ui/organisedialog.cpp:68 ../bin/src/ui_groupbydialog.h:130
 #: ../bin/src/ui_groupbydialog.h:149 ../bin/src/ui_groupbydialog.h:168
 #: ../bin/src/ui_edittagdialog.h:725
 msgid "Album artist"
@@ -706,11 +706,11 @@ msgstr "جلد آلبوم"
 msgid "Album info on jamendo.com..."
 msgstr "دانستنی‌های آلبوم در جامندو..."
 
-#: ui/albumcovermanager.cpp:129
+#: ui/albumcovermanager.cpp:131
 msgid "Albums with covers"
 msgstr "آلبوم‌های با جلد"
 
-#: ui/albumcovermanager.cpp:130
+#: ui/albumcovermanager.cpp:132
 msgid "Albums without covers"
 msgstr "آلبوم‌های بدون جلد"
 
@@ -718,7 +718,7 @@ msgstr "آلبوم‌های بدون جلد"
 msgid "All"
 msgstr "همه"
 
-#: ui/mainwindow.cpp:158
+#: ui/mainwindow.cpp:160
 msgid "All Files (*)"
 msgstr "همه‌ی پرونده‌ها(*)"
 
@@ -727,11 +727,11 @@ msgctxt "Label for button to enable/disable Hypnotoad background sound."
 msgid "All Glory to the Hypnotoad!"
 msgstr ""
 
-#: ui/albumcovermanager.cpp:128
+#: ui/albumcovermanager.cpp:130
 msgid "All albums"
 msgstr "همه‌ی آلبوم‌ها"
 
-#: ui/albumcovermanager.cpp:262
+#: ui/albumcovermanager.cpp:264
 msgid "All artists"
 msgstr "همه‌ی هنرمندان"
 
@@ -739,12 +739,12 @@ msgstr "همه‌ی هنرمندان"
 msgid "All files (*)"
 msgstr "همه‌ی پرونده‌ها (*)"
 
-#: playlistparsers/playlistparser.cpp:74
+#: playlistparsers/playlistparser.cpp:76
 #, qt-format
 msgid "All playlists (%1)"
 msgstr "همه‌ی لیست‌پخش‌ها (%1)"
 
-#: ui/about.cpp:80
+#: ui/about.cpp:82
 msgid "All the translators"
 msgstr "همه‌ی برگردانان"
 
@@ -768,16 +768,16 @@ msgstr "کدگذاری میانه/کنار"
 msgid "Alongside the originals"
 msgstr "در کنار اصلی‌ها"
 
-#: ../bin/src/ui_behavioursettingspage.h:331
-msgid "Always hide the main window"
-msgstr "پنجره اصلی را همواره بپنهان"
+#: ../bin/src/ui_behavioursettingspage.h:370
+msgid "Alwa&ys hide the main window"
+msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:330
-msgid "Always show the main window"
-msgstr "پنجره اصلی را همواره بنمایان"
+#: ../bin/src/ui_behavioursettingspage.h:369
+msgid "Always show &the main window"
+msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:345
-#: ../bin/src/ui_behavioursettingspage.h:365
+#: ../bin/src/ui_behavioursettingspage.h:384
+#: ../bin/src/ui_behavioursettingspage.h:404
 msgid "Always start playing"
 msgstr "همواره آغاز به پخش می‌کند"
 
@@ -791,7 +791,7 @@ msgstr "کلمنتاین به افزونه‌ی  دیگری برای استفا�
 msgid "An error occurred loading the iTunes database"
 msgstr "مشکلی هنگام  فراخوانی پایگاه داده‌ی آی‌تیون پیش آمد"
 
-#: playlist/playlist.cpp:424 ui/edittagdialog.cpp:703
+#: playlist/playlist.cpp:454 ui/edittagdialog.cpp:703
 #, qt-format
 msgid "An error occurred writing metadata to '%1'"
 msgstr "مشکلی در نوشتن ابرداده در '%1' پیش آمد"
@@ -800,7 +800,7 @@ msgstr "مشکلی در نوشتن ابرداده در '%1' پیش آمد"
 msgid "An unspecified error occurred."
 msgstr "خطای ناشناخته‌ای پدید آمد."
 
-#: ui/about.cpp:85
+#: ui/about.cpp:87
 msgid "And:"
 msgstr "و:"
 
@@ -818,13 +818,13 @@ msgstr "شمایل"
 msgid "Append files/URLs to the playlist"
 msgstr "پیوست پرونده/نشانی اینترنتی به لیست‌پخش"
 
-#: devices/deviceview.cpp:218 globalsearch/globalsearchview.cpp:454
+#: devices/deviceview.cpp:218 globalsearch/globalsearchview.cpp:455
 #: internet/core/internetservice.cpp:48 library/libraryview.cpp:383
 #: widgets/fileviewlist.cpp:31
 msgid "Append to current playlist"
 msgstr "پیوست به لیست‌پخش جاری"
 
-#: ../bin/src/ui_behavioursettingspage.h:356
+#: ../bin/src/ui_behavioursettingspage.h:395
 msgid "Append to the playlist"
 msgstr "پیوست به لیست‌پخش"
 
@@ -847,8 +847,8 @@ msgid ""
 "the songs of your library?"
 msgstr ""
 
-#: library/savedgroupingmanager.cpp:62 playlist/playlist.cpp:1347
-#: ui/organisedialog.cpp:65 ui/qtsystemtrayicon.cpp:249
+#: library/savedgroupingmanager.cpp:62 playlist/playlist.cpp:1380
+#: ui/organisedialog.cpp:66 ui/qtsystemtrayicon.cpp:249
 #: ../bin/src/ui_groupbydialog.h:129 ../bin/src/ui_groupbydialog.h:148
 #: ../bin/src/ui_groupbydialog.h:167 ../bin/src/ui_albumcoversearcher.h:106
 #: ../bin/src/ui_albumcoversearcher.h:108 ../bin/src/ui_edittagdialog.h:721
@@ -856,17 +856,17 @@ msgstr ""
 msgid "Artist"
 msgstr "هنرمند"
 
-#: ui/mainwindow.cpp:283
+#: ui/mainwindow.cpp:285
 msgid "Artist info"
 msgstr "اطلاعات هنرمند"
 
-#: ui/organisedialog.cpp:66
+#: ui/organisedialog.cpp:67
 msgid "Artist's initial"
 msgstr "حرف اول هنرمند"
 
-#: ../bin/src/ui_behavioursettingspage.h:381
-msgid "Ask when saving"
-msgstr "پرسش هنگتم ذخیره سازی"
+#: ../bin/src/ui_behavioursettingspage.h:420
+msgid "As&k when saving"
+msgstr ""
 
 #: ../bin/src/ui_transcodedialog.h:225
 #: ../bin/src/ui_networkremotesettingspage.h:250
@@ -880,7 +880,7 @@ msgstr "خروجی صدا"
 
 #: internet/digitally/digitallyimportedsettingspage.cpp:82
 #: internet/magnatune/magnatunesettingspage.cpp:117
-#: internet/lastfm/lastfmservice.cpp:268
+#: internet/lastfm/lastfmservice.cpp:270
 #: internet/lastfm/lastfmsettingspage.cpp:76
 msgid "Authentication failed"
 msgstr "ناکامی در شناسایی"
@@ -889,7 +889,7 @@ msgstr "ناکامی در شناسایی"
 msgid "Author"
 msgstr "نویسنده"
 
-#: ui/about.cpp:68
+#: ui/about.cpp:70
 msgid "Authors"
 msgstr "نویسندگان‌"
 
@@ -899,7 +899,6 @@ msgid "Auto"
 msgstr "خودکار"
 
 #: playlist/playlistsaveoptionsdialog.cpp:32
-#: ../bin/src/ui_behavioursettingspage.h:378
 msgid "Automatic"
 msgstr "اتوماتیک"
 
@@ -919,7 +918,7 @@ msgstr "در دسترس"
 msgid "Average bitrate"
 msgstr "میانگین ضرباهنگ"
 
-#: covers/coversearchstatisticsdialog.cpp:69
+#: covers/coversearchstatisticsdialog.cpp:71
 msgid "Average image size"
 msgstr "میانگین اندازه‌ی فرتور"
 
@@ -927,7 +926,7 @@ msgstr "میانگین اندازه‌ی فرتور"
 msgid "BBC Podcasts"
 msgstr "پادکست بی‌بی‌سی"
 
-#: playlist/playlist.cpp:1383 ui/organisedialog.cpp:74
+#: playlist/playlist.cpp:1416 ui/organisedialog.cpp:75
 #: ../bin/src/ui_edittagdialog.h:704
 msgid "BPM"
 msgstr "ض.د.د"
@@ -948,7 +947,7 @@ msgstr "فرتور پس‌زمینه"
 msgid "Background opacity"
 msgstr "تاری پس‌زمینه"
 
-#: core/database.cpp:648
+#: core/database.cpp:664
 msgid "Backing up database"
 msgstr "پشتیبان‌گیری از پایگاه داده"
 
@@ -972,7 +971,7 @@ msgstr "آبی ابتدایی"
 msgid "Basic audio type"
 msgstr "گونه‌ی ابتدایی آوا"
 
-#: ../bin/src/ui_behavioursettingspage.h:318
+#: ../bin/src/ui_behavioursettingspage.h:357
 msgid "Behavior"
 msgstr "رفتار"
 
@@ -984,7 +983,7 @@ msgstr "بهترین"
 msgid "Biography"
 msgstr "بیوگرافی"
 
-#: playlist/playlist.cpp:1385 ../bin/src/ui_edittagdialog.h:706
+#: playlist/playlist.cpp:1418 ../bin/src/ui_edittagdialog.h:706
 #: ../bin/src/ui_streamdetailsdialog.h:139
 msgid "Bit rate"
 msgstr "ضرب آهنگ"
@@ -999,7 +998,7 @@ msgstr "ضرب آهنگ"
 msgid "Bitrate"
 msgstr "ضرباهنگ"
 
-#: ui/organisedialog.cpp:80
+#: ui/organisedialog.cpp:81
 msgctxt "Refers to bitrate in file organise dialog."
 msgid "Bitrate"
 msgstr "میزان ارسال بیت"
@@ -1090,7 +1089,7 @@ msgstr "تغییر میانبر..."
 msgid "Change shuffle mode"
 msgstr "تغییر سبک درهم"
 
-#: ../bin/src/ui_behavioursettingspage.h:370
+#: ../bin/src/ui_behavioursettingspage.h:409
 msgid "Change the currently playing song"
 msgstr "تغییر آهنگ در حال پخش"
 
@@ -1120,7 +1119,7 @@ msgstr "بررسی برای داستان‌های تازه"
 msgid "Check for updates"
 msgstr "بررسی بروز رسانی"
 
-#: ui/mainwindow.cpp:820
+#: ui/mainwindow.cpp:824
 msgid "Check for updates..."
 msgstr "بررسی به‌روز رسانی..."
 
@@ -1169,7 +1168,7 @@ msgstr "کلاسیک"
 msgid "Cleaning up"
 msgstr "پالایش"
 
-#: transcoder/transcodedialog.cpp:61 widgets/lineedit.cpp:41
+#: transcoder/transcodedialog.cpp:63 widgets/lineedit.cpp:41
 #: ../bin/src/ui_queuemanager.h:151
 msgid "Clear"
 msgstr "پاک کن"
@@ -1262,7 +1261,6 @@ msgstr ""
 msgid "Click to toggle between remaining time and total time"
 msgstr "برای سویچ بین زمان رفته و زمان باقیمانده، اینجا را کلیک کنید"
 
-#: ../bin/src/ui_soundcloudsettingspage.h:103
 #: ../bin/src/ui_lastfmsettingspage.h:133
 #: ../bin/src/ui_googledrivesettingspage.h:102
 #: ../bin/src/ui_dropboxsettingspage.h:102
@@ -1289,7 +1287,7 @@ msgstr "بستن فرتورسازی"
 msgid "Closing this window will cancel the download."
 msgstr "بستن این پنجره، بارگیری را کنسل می‌کند."
 
-#: ui/albumcovermanager.cpp:213
+#: ui/albumcovermanager.cpp:215
 msgid "Closing this window will stop searching for album covers."
 msgstr "بستن این پنجره، جستجوی جلد آلبوم‌ها را کنسل می‌کند."
 
@@ -1309,8 +1307,12 @@ msgstr "رنگ"
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "لیست مجزا بوسیله‌ی ویرگول از کلاس:طبقه، طبقه ۰-۳ است"
 
-#: playlist/playlist.cpp:1402 smartplaylists/searchterm.cpp:384
-#: ui/organisedialog.cpp:78 ../bin/src/ui_edittagdialog.h:718
+#: ../bin/src/ui_behavioursettingspage.h:425
+msgid "Comma seperated list of prefix words to ignore when sorting"
+msgstr ""
+
+#: playlist/playlist.cpp:1435 smartplaylists/searchterm.cpp:384
+#: ui/organisedialog.cpp:79 ../bin/src/ui_edittagdialog.h:718
 msgid "Comment"
 msgstr "توضیح"
 
@@ -1322,8 +1324,8 @@ msgstr "تکمیل خودکار برچسب‌ها"
 msgid "Complete tags automatically..."
 msgstr "تکمیل خودکار برچسب‌ها..."
 
-#: library/savedgroupingmanager.cpp:74 playlist/playlist.cpp:1365
-#: ui/organisedialog.cpp:68 ../bin/src/ui_groupbydialog.h:131
+#: library/savedgroupingmanager.cpp:74 playlist/playlist.cpp:1398
+#: ui/organisedialog.cpp:69 ../bin/src/ui_groupbydialog.h:131
 #: ../bin/src/ui_groupbydialog.h:150 ../bin/src/ui_groupbydialog.h:169
 msgid "Composer"
 msgstr "تنظیم‌کننده"
@@ -1341,10 +1343,6 @@ msgstr "پیکربندی مگناتیون..."
 msgid "Configure Shortcuts"
 msgstr "پیکربندی میان‌برها"
 
-#: internet/soundcloud/soundcloudservice.cpp:381
-msgid "Configure SoundCloud..."
-msgstr "پیکربندی soundCloud..."
-
 #: internet/spotify/spotifyservice.cpp:927
 msgid "Configure Spotify..."
 msgstr "پیکربندی اسپاتیفای..."
@@ -1353,11 +1351,11 @@ msgstr "پیکربندی اسپاتیفای..."
 msgid "Configure Subsonic..."
 msgstr "پیکربندی ساب‌سونیک..."
 
-#: globalsearch/globalsearchview.cpp:151 globalsearch/globalsearchview.cpp:480
+#: globalsearch/globalsearchview.cpp:152 globalsearch/globalsearchview.cpp:481
 msgid "Configure global search..."
 msgstr "پیکربندی جستجوی سراسری..."
 
-#: ui/mainwindow.cpp:659
+#: ui/mainwindow.cpp:661
 msgid "Configure library..."
 msgstr "پیکربندی کتابخانه..."
 
@@ -1367,7 +1365,7 @@ msgid "Configure podcasts..."
 msgstr "پیکربندی پادکست..."
 
 #: internet/core/cloudfileservice.cpp:107
-#: internet/digitally/digitallyimportedservicebase.cpp:182
+#: internet/digitally/digitallyimportedservicebase.cpp:184
 #: internet/googledrive/googledriveservice.cpp:231
 #: ../bin/src/ui_globalsearchsettingspage.h:146
 msgid "Configure..."
@@ -1429,11 +1427,11 @@ msgid "Copy to clipboard"
 msgstr "کپی به کلیپ‌بورد"
 
 #: library/libraryview.cpp:419 internet/podcasts/podcastservice.cpp:438
-#: ui/mainwindow.cpp:719 widgets/fileviewlist.cpp:44
+#: ui/mainwindow.cpp:721 widgets/fileviewlist.cpp:44
 msgid "Copy to device..."
 msgstr "کپی‌کردن در دستگاه..."
 
-#: devices/deviceview.cpp:228 ui/mainwindow.cpp:709
+#: devices/deviceview.cpp:228 ui/mainwindow.cpp:711
 #: widgets/fileviewlist.cpp:40
 msgid "Copy to library..."
 msgstr "کپی‌کردن در کتابخانه..."
@@ -1448,7 +1446,7 @@ msgid ""
 "http://localhost:4040/"
 msgstr "نمی‌توانم به ساب‌سونیک بپیوندم، نشانی سرور را بررسی کنید. نمونه: http://localhost:4040/"
 
-#: transcoder/transcoder.cpp:58
+#: transcoder/transcoder.cpp:59
 #, qt-format
 msgid ""
 "Could not create the GStreamer element \"%1\" - make sure you have all the "
@@ -1472,14 +1470,14 @@ msgstr ""
 msgid "Couldn't create playlist"
 msgstr ""
 
-#: transcoder/transcoder.cpp:425
+#: transcoder/transcoder.cpp:426
 #, qt-format
 msgid ""
 "Couldn't find a muxer for %1, check you have the correct GStreamer plugins "
 "installed"
 msgstr "نمی‌توانم موکسر را برای %1 پیدا کنم، بررسی کنید که افزونه‌ی مناسب GStream را نصب کرده‌اید"
 
-#: transcoder/transcoder.cpp:419
+#: transcoder/transcoder.cpp:420
 #, qt-format
 msgid ""
 "Couldn't find an encoder for %1, check you have the correct GStreamer "
@@ -1520,7 +1518,7 @@ msgstr "جلد هنری نشانده نشد"
 msgid "Cover art set from %1"
 msgstr "جلد هنری از %1 نشانده شد"
 
-#: covers/coversearchstatisticsdialog.cpp:59 ui/albumcoversearcher.cpp:100
+#: covers/coversearchstatisticsdialog.cpp:61 ui/albumcoversearcher.cpp:100
 #, qt-format
 msgid "Covers from %1"
 msgstr "جلدها از %1"
@@ -1577,18 +1575,18 @@ msgstr ""
 msgid "Dance"
 msgstr "رقص"
 
-#: core/database.cpp:601
+#: core/database.cpp:617
 msgid ""
 "Database corruption detected. Please read https://github.com/clementine-"
 "player/Clementine/wiki/Database-Corruption for instructions on how to "
 "recover your database"
 msgstr ""
 
-#: playlist/playlist.cpp:1399 ../bin/src/ui_edittagdialog.h:715
+#: playlist/playlist.cpp:1432 ../bin/src/ui_edittagdialog.h:715
 msgid "Date created"
 msgstr "تاریخ ساخت"
 
-#: playlist/playlist.cpp:1397 ../bin/src/ui_edittagdialog.h:714
+#: playlist/playlist.cpp:1430 ../bin/src/ui_edittagdialog.h:714
 msgid "Date modified"
 msgstr "تاریخ بازسازی"
 
@@ -1639,7 +1637,7 @@ msgid "Delete downloaded data"
 msgstr "پاک‌کردن دانستنی‌های بارگیری شده"
 
 #: devices/deviceview.cpp:408 library/libraryview.cpp:678
-#: ui/mainwindow.cpp:2432 widgets/fileview.cpp:188
+#: ui/mainwindow.cpp:2458 widgets/fileview.cpp:188
 msgid "Delete files"
 msgstr "پاک کردن پرونده‌ها"
 
@@ -1647,7 +1645,7 @@ msgstr "پاک کردن پرونده‌ها"
 msgid "Delete from device..."
 msgstr "پاک کردن از دستگاه..."
 
-#: library/libraryview.cpp:422 ui/mainwindow.cpp:722
+#: library/libraryview.cpp:422 ui/mainwindow.cpp:724
 #: widgets/fileviewlist.cpp:47
 msgid "Delete from disk..."
 msgstr "پاک کردن از دیسک..."
@@ -1680,11 +1678,11 @@ msgstr "پاک کردن پرونده‌ها"
 msgid "Depth"
 msgstr "عمق"
 
-#: ui/mainwindow.cpp:1763
+#: ui/mainwindow.cpp:1789
 msgid "Dequeue selected tracks"
 msgstr "صف‌بندی دوباره‌ی ترک‌های برگزیده"
 
-#: ui/mainwindow.cpp:1761
+#: ui/mainwindow.cpp:1787
 msgid "Dequeue track"
 msgstr "صف‌بندی دوباره‌ی ترک"
 
@@ -1713,7 +1711,7 @@ msgstr "نام دستگاه"
 msgid "Device properties..."
 msgstr "ویژگی‌های دستگاه..."
 
-#: ui/mainwindow.cpp:276
+#: ui/mainwindow.cpp:278
 msgid "Devices"
 msgstr "‌دستگاه‌ها"
 
@@ -1764,8 +1762,8 @@ msgctxt "Refers to search provider's status."
 msgid "Disabled"
 msgstr "غرفعال"
 
-#: library/savedgroupingmanager.cpp:95 playlist/playlist.cpp:1355
-#: ui/organisedialog.cpp:73 ../bin/src/ui_groupbydialog.h:139
+#: library/savedgroupingmanager.cpp:95 playlist/playlist.cpp:1388
+#: ui/organisedialog.cpp:74 ../bin/src/ui_groupbydialog.h:139
 #: ../bin/src/ui_groupbydialog.h:158 ../bin/src/ui_groupbydialog.h:177
 #: ../bin/src/ui_edittagdialog.h:722 ../bin/src/ui_ripcddialog.h:313
 msgid "Disc"
@@ -1830,7 +1828,7 @@ msgid "Don't shuffle"
 msgstr "پخش مرتب"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:312
-#: ui/albumcovermanager.cpp:215
+#: ui/albumcovermanager.cpp:217
 msgid "Don't stop!"
 msgstr "نایست!"
 
@@ -1843,11 +1841,11 @@ msgstr "اهدا کردن"
 msgid "Double click to open"
 msgstr "برای گشودن دو بار کلیک کنید"
 
-#: ../bin/src/ui_behavioursettingspage.h:367
+#: ../bin/src/ui_behavioursettingspage.h:406
 msgid "Double clicking a song in the playlist will..."
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:353
+#: ../bin/src/ui_behavioursettingspage.h:392
 msgid "Double clicking a song will..."
 msgstr "دو بار کلیک یک آهنگ باعث..."
 
@@ -1956,7 +1954,7 @@ msgstr "درهم‌ریختن تصادفی دینامیک"
 msgid "Edit smart playlist..."
 msgstr "ویرایش لیست‌پخش هوشمند..."
 
-#: ui/mainwindow.cpp:1813
+#: ui/mainwindow.cpp:1839
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr ""
@@ -2002,7 +2000,7 @@ msgstr "پویاسازی برابرساز"
 msgid "Enable shortcuts only when Clementine is focused"
 msgstr "پویاسازی میان‌برها تنها زمانی که کلمنتاین در کانون است"
 
-#: ../bin/src/ui_behavioursettingspage.h:339
+#: ../bin/src/ui_behavioursettingspage.h:375
 msgid "Enable song metadata inline edition with click"
 msgstr ""
 
@@ -2091,12 +2089,12 @@ msgid "Equivalent to --log-levels *:3"
 msgstr "برابر است با --log-levels *:3"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:246
-#: library/libraryview.cpp:672 ui/mainwindow.cpp:2105 ui/mainwindow.cpp:2384
-#: ui/mainwindow.cpp:2563
+#: library/libraryview.cpp:672 ui/mainwindow.cpp:2131 ui/mainwindow.cpp:2410
+#: ui/mainwindow.cpp:2589
 msgid "Error"
 msgstr "خطا"
 
-#: ripper/ripcddialog.cpp:152
+#: ripper/ripcddialog.cpp:154
 msgid "Error Ripping CD"
 msgstr ""
 
@@ -2104,11 +2102,11 @@ msgstr ""
 msgid "Error connecting MTP device"
 msgstr "خطا در اتصال به دستگاه MTP"
 
-#: ui/organiseerrordialog.cpp:52
+#: ui/organiseerrordialog.cpp:54
 msgid "Error copying songs"
 msgstr "خطا در کپی کردن آهنگ‌ها"
 
-#: ui/organiseerrordialog.cpp:59
+#: ui/organiseerrordialog.cpp:61
 msgid "Error deleting songs"
 msgstr "خطا در پاک کردن آهنگ‌ها"
 
@@ -2126,12 +2124,12 @@ msgstr "خطا در بارگیری افزونه‌ی Spotify"
 msgid "Error loading %1"
 msgstr "خطا در فراخوانی %1"
 
-#: internet/digitally/digitallyimportedservicebase.cpp:200
+#: internet/digitally/digitallyimportedservicebase.cpp:202
 #: internet/digitally/digitallyimportedurlhandler.cpp:96
 msgid "Error loading di.fm playlist"
 msgstr "خطا در بارگیری لیست پخش di.fm"
 
-#: transcoder/transcoder.cpp:390
+#: transcoder/transcoder.cpp:391
 #, qt-format
 msgid "Error processing %1: %2"
 msgstr "خطای پردازش %1:%2"
@@ -2205,16 +2203,16 @@ msgstr "خروجی گرفتن از پوشش‌های بارگیری شده"
 msgid "Export embedded covers"
 msgstr "خروجی گرفتن از پوشش‌های توکار"
 
-#: ui/albumcovermanager.cpp:799 ui/albumcovermanager.cpp:823
+#: ui/albumcovermanager.cpp:801 ui/albumcovermanager.cpp:825
 msgid "Export finished"
 msgstr "خروجی گرفتن به پایان رسید"
 
-#: ui/albumcovermanager.cpp:808
+#: ui/albumcovermanager.cpp:810
 #, qt-format
 msgid "Exported %1 covers out of %2 (%3 skipped)"
 msgstr ""
 
-#: core/song.cpp:430 transcoder/transcoder.cpp:233
+#: core/song.cpp:430 transcoder/transcoder.cpp:234
 #: ../bin/src/ui_magnatunedownloaddialog.h:136
 #: ../bin/src/ui_magnatunesettingspage.h:170
 #: ../bin/src/ui_transcodersettingspage.h:176
@@ -2238,7 +2236,7 @@ msgstr "پژمردن"
 msgid "Fading duration"
 msgstr "زمان پژمردن"
 
-#: ui/mainwindow.cpp:2106
+#: ui/mainwindow.cpp:2132
 msgid "Failed reading CD drive"
 msgstr ""
 
@@ -2273,10 +2271,6 @@ msgstr ""
 msgid "Fast"
 msgstr "تند"
 
-#: internet/soundcloud/soundcloudservice.cpp:141
-msgid "Favorites"
-msgstr "دلخواه"
-
 #: library/library.cpp:88
 msgid "Favourite tracks"
 msgstr "ترک‌های برگزیده"
@@ -2309,7 +2303,7 @@ msgstr "خطای واکشی جلد"
 msgid "File Format"
 msgstr "فرمت فایل"
 
-#: ui/organisedialog.cpp:82
+#: ui/organisedialog.cpp:83
 msgid "File extension"
 msgstr "پسوند پرونده"
 
@@ -2317,11 +2311,11 @@ msgstr "پسوند پرونده"
 msgid "File formats"
 msgstr "گونه‌ی پرونده"
 
-#: playlist/playlist.cpp:1389 ../bin/src/ui_edittagdialog.h:716
+#: playlist/playlist.cpp:1422 ../bin/src/ui_edittagdialog.h:716
 msgid "File name"
 msgstr "نام پرونده"
 
-#: playlist/playlist.cpp:1391
+#: playlist/playlist.cpp:1424
 msgid "File name (without path)"
 msgstr "نام پرونده (بدون مسیر)"
 
@@ -2329,11 +2323,11 @@ msgstr "نام پرونده (بدون مسیر)"
 msgid "File paths"
 msgstr "مسیرفایل"
 
-#: playlist/playlist.cpp:1393 ../bin/src/ui_edittagdialog.h:710
+#: playlist/playlist.cpp:1426 ../bin/src/ui_edittagdialog.h:710
 msgid "File size"
 msgstr "اندازه پرونده"
 
-#: library/savedgroupingmanager.cpp:83 playlist/playlist.cpp:1395
+#: library/savedgroupingmanager.cpp:83 playlist/playlist.cpp:1428
 #: ../bin/src/ui_groupbydialog.h:132 ../bin/src/ui_groupbydialog.h:151
 #: ../bin/src/ui_groupbydialog.h:170 ../bin/src/ui_edittagdialog.h:712
 msgid "File type"
@@ -2343,7 +2337,7 @@ msgstr "گونه‌ی پرونده"
 msgid "Filename"
 msgstr "نام‌پرونده"
 
-#: ui/mainwindow.cpp:266
+#: ui/mainwindow.cpp:268
 msgid "Files"
 msgstr "پرونده‌ها"
 
@@ -2456,7 +2450,7 @@ msgstr "لرزش کامل"
 msgid "Ge&nre"
 msgstr ""
 
-#: ui/settingsdialog.cpp:133
+#: ui/settingsdialog.cpp:132
 msgid "General"
 msgstr "عمومی"
 
@@ -2464,8 +2458,8 @@ msgstr "عمومی"
 msgid "General settings"
 msgstr "تنظیم‌های عمومی"
 
-#: library/savedgroupingmanager.cpp:77 playlist/playlist.cpp:1361
-#: ui/organisedialog.cpp:77 ../bin/src/ui_groupbydialog.h:133
+#: library/savedgroupingmanager.cpp:77 playlist/playlist.cpp:1394
+#: ui/organisedialog.cpp:78 ../bin/src/ui_groupbydialog.h:133
 #: ../bin/src/ui_groupbydialog.h:152 ../bin/src/ui_groupbydialog.h:171
 #: ../bin/src/ui_ripcddialog.h:316
 msgid "Genre"
@@ -2485,7 +2479,7 @@ msgstr ""
 msgid "Getting channels"
 msgstr "دریافت کانال"
 
-#: internet/digitally/digitallyimportedservicebase.cpp:100
+#: internet/digitally/digitallyimportedservicebase.cpp:102
 msgid "Getting streams"
 msgstr "گرفتن جریان‌ها"
 
@@ -2509,13 +2503,13 @@ msgstr "برو به نوار پیشین لیست‌پخش"
 msgid "Google Drive"
 msgstr "درایو گوگل"
 
-#: covers/coversearchstatisticsdialog.cpp:53 ui/albumcovermanager.cpp:465
+#: covers/coversearchstatisticsdialog.cpp:55 ui/albumcovermanager.cpp:467
 #: ../bin/src/ui_coversearchstatisticsdialog.h:75
 #, qt-format
 msgid "Got %1 covers out of %2 (%3 failed)"
 msgstr "%1 از %2 جلدها دریافت شد (%3 ناموفق)"
 
-#: ../bin/src/ui_behavioursettingspage.h:335
+#: ../bin/src/ui_behavioursettingspage.h:378
 msgid "Grey out non existent songs in my playlists"
 msgstr "آهنگ‌های ناموجود لیست‌پخش‌های من را خاکستری کن"
 
@@ -2523,7 +2517,7 @@ msgstr "آهنگ‌های ناموجود لیست‌پخش‌های من را خ
 msgid "Group Library by..."
 msgstr "کتابخانه را گروه‌بندی کن برپایه‌ی..."
 
-#: globalsearch/globalsearchview.cpp:477 library/libraryfilterwidget.cpp:100
+#: globalsearch/globalsearchview.cpp:478 library/libraryfilterwidget.cpp:100
 msgid "Group by"
 msgstr "گروه‌بندی برپایه‌ی"
 
@@ -2555,8 +2549,8 @@ msgstr "ژانر/آلبوم"
 msgid "Group by Genre/Artist/Album"
 msgstr "ژانر/هنرمند/آلبوم"
 
-#: library/savedgroupingmanager.cpp:89 playlist/playlist.cpp:1369
-#: ui/organisedialog.cpp:70 ../bin/src/ui_groupbydialog.h:141
+#: library/savedgroupingmanager.cpp:89 playlist/playlist.cpp:1402
+#: ui/organisedialog.cpp:71 ../bin/src/ui_groupbydialog.h:141
 #: ../bin/src/ui_groupbydialog.h:160 ../bin/src/ui_groupbydialog.h:179
 msgid "Grouping"
 msgstr "گروه بندی"
@@ -2644,7 +2638,7 @@ msgstr "آیکون در بالا"
 msgid "Identifying song"
 msgstr "تشخیص آهنگ"
 
-#: ../bin/src/ui_behavioursettingspage.h:337
+#: ../bin/src/ui_behavioursettingspage.h:373
 msgid ""
 "If activated, clicking a selected song in the playlist view will let you "
 "edit the tag value directly"
@@ -2663,6 +2657,10 @@ msgstr "اگر نشانی اینترنتی یک پادکست را می‌دان�
 #: ../bin/src/ui_organisedialog.h:255
 msgid "Ignore \"The\" in artist names"
 msgstr "صرف نظر از «The» در نام هنرمندان"
+
+#: ../bin/src/ui_behavioursettingspage.h:423
+msgid "Ignore prefix word(s)"
+msgstr ""
 
 #: ui/albumcoverchoicecontroller.cpp:44
 msgid "Images (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm)"
@@ -2745,15 +2743,15 @@ msgstr "قرار دادن..."
 msgid "Installed"
 msgstr "نصب شد"
 
-#: core/database.cpp:585
+#: core/database.cpp:601
 msgid "Integrity check"
 msgstr "بررسی درستی"
 
-#: ui/mainwindow.cpp:272
+#: ui/mainwindow.cpp:274
 msgid "Internet"
 msgstr "اینترنت"
 
-#: ui/settingsdialog.cpp:156
+#: ui/settingsdialog.cpp:155
 msgid "Internet providers"
 msgstr "فراهم‌کنندگان اینترنت"
 
@@ -2766,7 +2764,7 @@ msgstr "سرویس‌های انترنت"
 msgid "Intro tracks"
 msgstr ""
 
-#: internet/lastfm/lastfmservice.cpp:280
+#: internet/lastfm/lastfmservice.cpp:282
 msgid "Invalid API key"
 msgstr "کلید API نامعتبر"
 
@@ -2774,27 +2772,27 @@ msgstr "کلید API نامعتبر"
 msgid "Invalid URL"
 msgstr "آدرس نا معتبر"
 
-#: internet/lastfm/lastfmservice.cpp:270
+#: internet/lastfm/lastfmservice.cpp:272
 msgid "Invalid format"
 msgstr "قالب نامعتبر"
 
-#: internet/lastfm/lastfmservice.cpp:266
+#: internet/lastfm/lastfmservice.cpp:268
 msgid "Invalid method"
 msgstr "روش نامعتبر"
 
-#: internet/lastfm/lastfmservice.cpp:272
+#: internet/lastfm/lastfmservice.cpp:274
 msgid "Invalid parameters"
 msgstr "پارامترهای نامعتبر"
 
-#: internet/lastfm/lastfmservice.cpp:274
+#: internet/lastfm/lastfmservice.cpp:276
 msgid "Invalid resource specified"
 msgstr "منابع مشخص‌شده نامعتبرند"
 
-#: internet/lastfm/lastfmservice.cpp:264
+#: internet/lastfm/lastfmservice.cpp:266
 msgid "Invalid service"
 msgstr "سرویس نامعتبر"
 
-#: internet/lastfm/lastfmservice.cpp:278
+#: internet/lastfm/lastfmservice.cpp:280
 msgid "Invalid session key"
 msgstr "کلید جلسه‌ی نامعتبر"
 
@@ -2826,7 +2824,7 @@ msgstr "ترک‌های برتر هفته‌ی جامندو"
 msgid "Jamendo database"
 msgstr "پایگاه داده‌ی جامندو"
 
-#: ../bin/src/ui_behavioursettingspage.h:350
+#: ../bin/src/ui_behavioursettingspage.h:389
 msgid "Jump to previous song right away"
 msgstr ""
 
@@ -2846,7 +2844,7 @@ msgstr "دکمه‌ها را %1 ثانیه نگه دار..."
 msgid "Keep buttons for %1 seconds..."
 msgstr "دکمه‌ها را %1 ثانیه نگه دار..."
 
-#: ../bin/src/ui_behavioursettingspage.h:321
+#: ../bin/src/ui_behavioursettingspage.h:360
 msgid "Keep running in the background when the window is closed"
 msgstr "پخش را در پس‌زمینه ادامه بده زمانی که پنجره بسته می‌شود"
 
@@ -2863,7 +2861,7 @@ msgstr "توله گربه‌ها"
 msgid "Kuduro"
 msgstr "کودورو"
 
-#: ../bin/src/ui_behavioursettingspage.h:323
+#: ../bin/src/ui_behavioursettingspage.h:362
 msgid "Language"
 msgstr "زبان"
 
@@ -2895,7 +2893,7 @@ msgstr "میله‌ی کناری بزرگ"
 msgid "Last played"
 msgstr "پخش پایانی"
 
-#: playlist/playlist.cpp:1378 ../bin/src/ui_edittagdialog.h:707
+#: playlist/playlist.cpp:1411 ../bin/src/ui_edittagdialog.h:707
 msgctxt "A playlist's tag."
 msgid "Last played"
 msgstr ""
@@ -2904,11 +2902,11 @@ msgstr ""
 msgid "Last.fm"
 msgstr "لست‌‌اف‌ام"
 
-#: internet/lastfm/lastfmservice.cpp:178
+#: internet/lastfm/lastfmservice.cpp:180
 msgid "Last.fm Authentication"
 msgstr ""
 
-#: internet/lastfm/lastfmservice.cpp:287
+#: internet/lastfm/lastfmservice.cpp:289
 msgid "Last.fm is currently busy, please try again in a few minutes"
 msgstr "لست‌‌اف‌ام در حال پخش است، پس از چند دقیقه دوباره تلاش کنید"
 
@@ -2932,12 +2930,12 @@ msgstr "ترک‌های کمتر برگزیده"
 msgid "Left"
 msgstr "چپ"
 
-#: playlist/playlist.cpp:1351 ui/organisedialog.cpp:79
+#: playlist/playlist.cpp:1384 ui/organisedialog.cpp:80
 #: ui/qtsystemtrayicon.cpp:254 ../bin/src/ui_edittagdialog.h:702
 msgid "Length"
 msgstr "طول"
 
-#: ui/mainwindow.cpp:251 ui/mainwindow.cpp:263
+#: ui/mainwindow.cpp:253 ui/mainwindow.cpp:265
 #: ../bin/src/ui_seafilesettingspage.h:177
 msgid "Library"
 msgstr "کتابخانه"
@@ -2946,7 +2944,7 @@ msgstr "کتابخانه"
 msgid "Library advanced grouping"
 msgstr "گروه‌بندی پیشرفته‌ی کتابخانه"
 
-#: ui/mainwindow.cpp:2683
+#: ui/mainwindow.cpp:2709
 msgid "Library rescan notice"
 msgstr "آگاه‌سازی پویش دوباره‌ی کتابخانه"
 
@@ -2982,7 +2980,7 @@ msgstr "بارگیری جلد از دیسک"
 msgid "Load cover from disk..."
 msgstr "بارگیری جلدها از دیسک"
 
-#: playlist/playlistcontainer.cpp:298
+#: playlist/playlistcontainer.cpp:300
 msgid "Load playlist"
 msgstr "بارگیری لیست‌پخش"
 
@@ -3002,7 +3000,7 @@ msgstr "بارگیری پایگاه داده‌ی آی‌پاد"
 msgid "Loading smart playlist"
 msgstr "بارگیری لیست‌پخش هوشمند"
 
-#: library/librarymodel.cpp:169
+#: library/librarymodel.cpp:170
 msgid "Loading songs"
 msgstr "بارگیری آهنگ‌ها"
 
@@ -3020,7 +3018,7 @@ msgstr "بارگیری ترک"
 msgid "Loading tracks info"
 msgstr "بارگیری اطلاعات ترک‌ها"
 
-#: library/librarymodel.cpp:164
+#: library/librarymodel.cpp:165
 #: internet/podcasts/podcastdiscoverymodel.cpp:105 widgets/prettyimage.cpp:168
 #: widgets/widgetfadehelper.cpp:96 ../bin/src/ui_addpodcastdialog.h:179
 #: ../bin/src/ui_searchpreview.h:105 ../bin/src/ui_organisedialog.h:261
@@ -3033,7 +3031,6 @@ msgstr "بارگیری پرونده‌ها/نشانی‌ها، جانشانی د
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:162
 #: ../bin/src/ui_magnatunesettingspage.h:163
-#: ../bin/src/ui_soundcloudsettingspage.h:102
 #: ../bin/src/ui_spotifysettingspage.h:210
 #: ../bin/src/ui_subsonicsettingspage.h:137
 #: ../bin/src/ui_lastfmsettingspage.h:132
@@ -3074,7 +3071,7 @@ msgstr "پایین (256x256)"
 msgid "Low complexity profile (LC)"
 msgstr "نمایه‌ی با پیچیدگی کم (LC)"
 
-#: ui/organisedialog.cpp:71 ../bin/src/ui_songinfosettingspage.h:158
+#: ui/organisedialog.cpp:72 ../bin/src/ui_songinfosettingspage.h:158
 msgid "Lyrics"
 msgstr "متن آهنگ"
 
@@ -3087,11 +3084,11 @@ msgstr "متن آهنگ از %1"
 msgid "Lyrics from the tag"
 msgstr ""
 
-#: transcoder/transcoder.cpp:235
+#: transcoder/transcoder.cpp:236
 msgid "M4A AAC"
 msgstr ""
 
-#: core/song.cpp:436 transcoder/transcoder.cpp:238
+#: core/song.cpp:436 transcoder/transcoder.cpp:239
 #: ../bin/src/ui_transcodersettingspage.h:174
 msgid "MP3"
 msgstr "MP3"
@@ -3142,7 +3139,7 @@ msgstr "این کار رو بکنید!"
 msgid "Make playlist available offline"
 msgstr "لیست‌پخش را بیرون‌خط در دسترس بگذار"
 
-#: internet/lastfm/lastfmservice.cpp:299
+#: internet/lastfm/lastfmservice.cpp:301
 msgid "Malformed response"
 msgstr "پاسخ ناهنجار"
 
@@ -3183,7 +3180,7 @@ msgstr "همخوانی یک یا بیشتر از یک واژه‌ی جستجو (
 msgid "Maximum bitrate"
 msgstr "بیشترین ضرباهنگ"
 
-#: ripper/ripcddialog.cpp:153
+#: ripper/ripcddialog.cpp:155
 msgid "Media has changed. Reloading"
 msgstr ""
 
@@ -3233,7 +3230,7 @@ msgstr "پخش مونو"
 msgid "Months"
 msgstr "ماه"
 
-#: playlist/playlist.cpp:1406
+#: playlist/playlist.cpp:1439
 msgid "Mood"
 msgstr "مود"
 
@@ -3263,7 +3260,7 @@ msgstr "سوارگاه‌ها"
 msgid "Move down"
 msgstr "پایین بردن"
 
-#: ui/mainwindow.cpp:712 widgets/fileviewlist.cpp:42
+#: ui/mainwindow.cpp:714 widgets/fileviewlist.cpp:42
 msgid "Move to library..."
 msgstr "جابه‌جایی به کتابخانه..."
 
@@ -3272,7 +3269,7 @@ msgstr "جابه‌جایی به کتابخانه..."
 msgid "Move up"
 msgstr "بالا بردن"
 
-#: transcoder/transcodedialog.cpp:225 ui/mainwindow.cpp:2050
+#: transcoder/transcodedialog.cpp:227 ui/mainwindow.cpp:2076
 msgid "Music"
 msgstr "آهنگ"
 
@@ -3319,8 +3316,8 @@ msgstr "هرگز"
 msgid "Never played"
 msgstr "هرگز پخش‌نشده"
 
-#: ../bin/src/ui_behavioursettingspage.h:343
-#: ../bin/src/ui_behavioursettingspage.h:363
+#: ../bin/src/ui_behavioursettingspage.h:382
+#: ../bin/src/ui_behavioursettingspage.h:402
 msgid "Never start playing"
 msgstr "هرگز آغاز به پخش نمی‌کند"
 
@@ -3330,7 +3327,7 @@ msgstr "هرگز آغاز به پخش نمی‌کند"
 msgid "New folder"
 msgstr "پوشه‌ی تازه"
 
-#: ui/mainwindow.cpp:1867 ../bin/src/ui_mainwindow.h:709
+#: ui/mainwindow.cpp:1893 ../bin/src/ui_mainwindow.h:709
 msgid "New playlist"
 msgstr "لیست‌پخش تازه"
 
@@ -3375,7 +3372,7 @@ msgstr "بدون آنالیزور"
 msgid "No background image"
 msgstr "بدون فرتور پس‌زمینه"
 
-#: ui/albumcovermanager.cpp:800
+#: ui/albumcovermanager.cpp:802
 msgid "No covers to export."
 msgstr ""
 
@@ -3383,7 +3380,7 @@ msgstr ""
 msgid "No long blocks"
 msgstr "بدون بلوک‌های بلند"
 
-#: playlist/playlistcontainer.cpp:383
+#: playlist/playlistcontainer.cpp:385
 msgid ""
 "No matches found.  Clear the search box to show the whole playlist again."
 msgstr "همخوانیی پیدا نشد. جعبه‌های جستجو را پاک کنید تا همه‌ی لیست‌پخش‌ها دوباره نمایش داده شوند."
@@ -3397,7 +3394,7 @@ msgstr "بدون بلوک‌های کوتاه"
 msgid "None"
 msgstr "هیچ‌کدام"
 
-#: library/libraryview.cpp:673 ui/mainwindow.cpp:2385 ui/mainwindow.cpp:2564
+#: library/libraryview.cpp:673 ui/mainwindow.cpp:2411 ui/mainwindow.cpp:2590
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "هیچ‌کدام از آهنگ‌های برگزیده مناسب کپی کردن در دستگاه نیستند"
 
@@ -3409,6 +3406,10 @@ msgstr "نرمال"
 msgid "Normal block type"
 msgstr "گونه‌ی بلوک نرمال"
 
+#: ../bin/src/ui_behavioursettingspage.h:428
+msgid "Normal duration (at least 4 minutes or half the track length)"
+msgstr ""
+
 #: playlist/playlistsequence.cpp:203
 msgid "Not available while using a dynamic playlist"
 msgstr "مهیا نیست زمانی که از یک لیست‌پخش دینامیک استفاده می‌کنید"
@@ -3417,19 +3418,19 @@ msgstr "مهیا نیست زمانی که از یک لیست‌پخش دینام
 msgid "Not connected"
 msgstr "متصل نیست"
 
-#: internet/lastfm/lastfmservice.cpp:290
+#: internet/lastfm/lastfmservice.cpp:292
 msgid "Not enough content"
 msgstr "بدون محتوای کافی"
 
-#: internet/lastfm/lastfmservice.cpp:294
+#: internet/lastfm/lastfmservice.cpp:296
 msgid "Not enough fans"
 msgstr "بدون هوادار کافی"
 
-#: internet/lastfm/lastfmservice.cpp:292
+#: internet/lastfm/lastfmservice.cpp:294
 msgid "Not enough members"
 msgstr "بدون عضو کافی"
 
-#: internet/lastfm/lastfmservice.cpp:296
+#: internet/lastfm/lastfmservice.cpp:298
 msgid "Not enough neighbors"
 msgstr "بدون همسایه‌ی کافی"
 
@@ -3437,7 +3438,7 @@ msgstr "بدون همسایه‌ی کافی"
 msgid "Not installed"
 msgstr "نصب نشده"
 
-#: globalsearch/globalsearchsettingspage.cpp:120
+#: globalsearch/globalsearchsettingspage.cpp:122
 #: globalsearch/searchproviderstatuswidget.cpp:47
 msgid "Not logged in"
 msgstr "وارد نشده‌اید"
@@ -3474,19 +3475,19 @@ msgstr "خاموش"
 msgid "Ogg FLAC"
 msgstr ""
 
-#: transcoder/transcoder.cpp:244
+#: transcoder/transcoder.cpp:245
 msgid "Ogg Flac"
 msgstr "Ogg Flac"
 
-#: core/song.cpp:444 transcoder/transcoder.cpp:250
+#: core/song.cpp:444 transcoder/transcoder.cpp:251
 msgid "Ogg Opus"
 msgstr "Ogg Opus"
 
-#: core/song.cpp:440 transcoder/transcoder.cpp:247
+#: core/song.cpp:440 transcoder/transcoder.cpp:248
 msgid "Ogg Speex"
 msgstr "Ogg Speex"
 
-#: core/song.cpp:442 transcoder/transcoder.cpp:241
+#: core/song.cpp:442 transcoder/transcoder.cpp:242
 #: ../bin/src/ui_magnatunedownloaddialog.h:135
 #: ../bin/src/ui_magnatunesettingspage.h:169
 msgid "Ogg Vorbis"
@@ -3520,13 +3521,12 @@ msgstr "تنها ابتدا را نمایش بده"
 msgid "Opacity"
 msgstr "تاری"
 
-#: internet/digitally/digitallyimportedservicebase.cpp:175
+#: internet/digitally/digitallyimportedservicebase.cpp:177
 #: internet/icecast/icecastservice.cpp:298
 #: internet/jamendo/jamendoservice.cpp:427
 #: internet/magnatune/magnatuneservice.cpp:287
 #: internet/somafm/somafmservice.cpp:102
 #: internet/intergalacticfm/intergalacticfmservice.cpp:102
-#: internet/soundcloud/soundcloudservice.cpp:377
 #, qt-format
 msgid "Open %1 in browser"
 msgstr "گشودن %1 در مرورگر"
@@ -3543,7 +3543,7 @@ msgstr "گشودن پرونده‌ی اوپی‌ام‌ال"
 msgid "Open OPML file..."
 msgstr "گشودن پرونده‌ی اوپی‌ام‌ال..."
 
-#: transcoder/transcodedialog.cpp:240
+#: transcoder/transcodedialog.cpp:242
 msgid "Open a directory to import music from"
 msgstr ""
 
@@ -3559,13 +3559,13 @@ msgstr "گشودن پرونده..."
 msgid "Open in Google Drive"
 msgstr "گشوده در درایو گوگل"
 
-#: devices/deviceview.cpp:224 globalsearch/globalsearchview.cpp:460
+#: devices/deviceview.cpp:224 globalsearch/globalsearchview.cpp:461
 #: internet/core/internetservice.cpp:62 library/libraryview.cpp:389
 #: widgets/fileviewlist.cpp:36
 msgid "Open in new playlist"
 msgstr "گشودن در لیست‌پخش تازه شود"
 
-#: ../bin/src/ui_behavioursettingspage.h:358
+#: ../bin/src/ui_behavioursettingspage.h:397
 msgctxt "Refers to behavior settings in Clementine settings page."
 msgid "Open in new playlist"
 msgstr "گشودن در فهرست پخش تازه"
@@ -3579,7 +3579,7 @@ msgstr "گشودن در مرورگر شما"
 msgid "Open..."
 msgstr "گشودن..."
 
-#: internet/lastfm/lastfmservice.cpp:276
+#: internet/lastfm/lastfmservice.cpp:278
 msgid "Operation failed"
 msgstr "شکست عملیات"
 
@@ -3605,7 +3605,7 @@ msgstr "Opus"
 msgid "Organise Files"
 msgstr "سازماندهی پرونده‌ها"
 
-#: library/libraryview.cpp:416 ui/mainwindow.cpp:715
+#: library/libraryview.cpp:416 ui/mainwindow.cpp:717
 msgid "Organise files..."
 msgstr "سازماندهی پرونده‌ها..."
 
@@ -3617,8 +3617,8 @@ msgstr "پرونده‌های سازماندهی شونده"
 msgid "Original tags"
 msgstr "برچسب‌های اصلی"
 
-#: library/savedgroupingmanager.cpp:101 playlist/playlist.cpp:1359
-#: ui/organisedialog.cpp:76 ../bin/src/ui_groupbydialog.h:135
+#: library/savedgroupingmanager.cpp:101 playlist/playlist.cpp:1392
+#: ui/organisedialog.cpp:77 ../bin/src/ui_groupbydialog.h:135
 #: ../bin/src/ui_groupbydialog.h:154 ../bin/src/ui_groupbydialog.h:173
 msgid "Original year"
 msgstr "سال اصلی"
@@ -3689,7 +3689,7 @@ msgstr "مهمانی"
 msgid "Password"
 msgstr "گذرواژه"
 
-#: core/globalshortcuts.cpp:50 ui/mainwindow.cpp:1160 ui/mainwindow.cpp:1663
+#: core/globalshortcuts.cpp:50 ui/mainwindow.cpp:1170 ui/mainwindow.cpp:1689
 #: ui/qtsystemtrayicon.cpp:189 wiimotedev/wiimotesettingspage.cpp:114
 msgid "Pause"
 msgstr "درنگ"
@@ -3702,8 +3702,8 @@ msgstr "درنگ پخش"
 msgid "Paused"
 msgstr "درنگ‌شده"
 
-#: library/savedgroupingmanager.cpp:86 playlist/playlist.cpp:1367
-#: ui/organisedialog.cpp:69 ../bin/src/ui_groupbydialog.h:140
+#: library/savedgroupingmanager.cpp:86 playlist/playlist.cpp:1400
+#: ui/organisedialog.cpp:70 ../bin/src/ui_groupbydialog.h:140
 #: ../bin/src/ui_groupbydialog.h:159 ../bin/src/ui_groupbydialog.h:178
 #: ../bin/src/ui_edittagdialog.h:727
 msgid "Performer"
@@ -3717,14 +3717,14 @@ msgstr "پیکسل"
 msgid "Plain sidebar"
 msgstr "میله‌کنار ساده"
 
-#: core/globalshortcuts.cpp:49 ui/mainwindow.cpp:676 ui/mainwindow.cpp:1126
-#: ui/mainwindow.cpp:1145 ui/mainwindow.cpp:1667 ui/qtsystemtrayicon.cpp:177
+#: core/globalshortcuts.cpp:49 ui/mainwindow.cpp:678 ui/mainwindow.cpp:1134
+#: ui/mainwindow.cpp:1155 ui/mainwindow.cpp:1693 ui/qtsystemtrayicon.cpp:177
 #: ui/qtsystemtrayicon.cpp:203 wiimotedev/wiimotesettingspage.cpp:107
 #: ../bin/src/ui_mainwindow.h:675
 msgid "Play"
 msgstr "پخش"
 
-#: playlist/playlist.cpp:1374 ../bin/src/ui_edittagdialog.h:703
+#: playlist/playlist.cpp:1407 ../bin/src/ui_edittagdialog.h:703
 msgid "Play count"
 msgstr "شمار پخش"
 
@@ -3732,16 +3732,16 @@ msgstr "شمار پخش"
 msgid "Play if stopped, pause if playing"
 msgstr "پخش در صورت ایست، درنگ در صورت پخش"
 
-#: ../bin/src/ui_behavioursettingspage.h:344
-#: ../bin/src/ui_behavioursettingspage.h:364
+#: ../bin/src/ui_behavioursettingspage.h:383
+#: ../bin/src/ui_behavioursettingspage.h:403
 msgid "Play if there is nothing already playing"
 msgstr "آغاز به پخش می‌کند اگر چیزی در حال پخش نیست"
 
-#: library/libraryview.cpp:396 ui/mainwindow.cpp:1774
+#: library/libraryview.cpp:396 ui/mainwindow.cpp:1800
 msgid "Play next"
 msgstr ""
 
-#: ui/mainwindow.cpp:1772
+#: ui/mainwindow.cpp:1798
 msgid "Play selected tracks next"
 msgstr ""
 
@@ -3761,7 +3761,7 @@ msgstr "بازپخش"
 msgid "Player options"
 msgstr "گزینه‌های پخش‌کننده"
 
-#: playlist/playlistcontainer.cpp:294 playlist/playlistlistcontainer.cpp:325
+#: playlist/playlistcontainer.cpp:296 playlist/playlistlistcontainer.cpp:325
 #: playlist/playlistmanager.cpp:87 playlist/playlistmanager.cpp:156
 #: playlist/playlistmanager.cpp:525 playlist/playlisttabbar.cpp:366
 msgid "Playlist"
@@ -3780,7 +3780,7 @@ msgstr "گزینه‌های لیست‌پخش"
 msgid "Playlist type"
 msgstr "سبک لیست‌پخش"
 
-#: internet/soundcloud/soundcloudservice.cpp:133 ui/mainwindow.cpp:269
+#: ui/mainwindow.cpp:271
 msgid "Playlists"
 msgstr "لیست‌های پخش"
 
@@ -3788,7 +3788,7 @@ msgstr "لیست‌های پخش"
 msgid "Please close your browser and return to Clementine."
 msgstr "خواهشمندم مرورگر را ببندید و به کلمنتاین بازگردید."
 
-#: internet/lastfm/lastfmservice.cpp:178
+#: internet/lastfm/lastfmservice.cpp:180
 #, qt-format
 msgid "Please open this URL in your browser: <a href=\"%1\">%1</a>"
 msgstr ""
@@ -3871,7 +3871,7 @@ msgstr "کلیدی را فشار دهید"
 msgid "Press a key combination to use for %1..."
 msgstr "یک ترکیب از دکمه‌ها را فشار دهید برای استفاده در %1..."
 
-#: ../bin/src/ui_behavioursettingspage.h:347
+#: ../bin/src/ui_behavioursettingspage.h:386
 msgid "Pressing \"Previous\" in player will..."
 msgstr ""
 
@@ -3948,12 +3948,12 @@ msgstr "جستجوی دستگاه..."
 msgid "Queue Manager"
 msgstr "مدیر به‌خط کردن"
 
-#: ui/mainwindow.cpp:1767
+#: ui/mainwindow.cpp:1793
 msgid "Queue selected tracks"
 msgstr "به‌خط کردن ترک‌های گزیده"
 
-#: globalsearch/globalsearchview.cpp:464 library/libraryview.cpp:393
-#: ui/mainwindow.cpp:1765
+#: globalsearch/globalsearchview.cpp:465 library/libraryview.cpp:393
+#: ui/mainwindow.cpp:1791
 msgid "Queue track"
 msgstr "به‌خط کردن ترک"
 
@@ -4002,12 +4002,12 @@ msgstr "رتبه‌ی آهنگ جاری را چهار ستاره کن"
 msgid "Rate the current song 5 stars"
 msgstr "رتبه‌ی آهنگ جاری را پنج ستاره کن"
 
-#: playlist/playlist.cpp:1372 ../bin/src/ui_edittagdialog.h:711
+#: playlist/playlist.cpp:1405 ../bin/src/ui_edittagdialog.h:711
 msgid "Rating"
 msgstr "رتبه‌بندی"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:309
-#: ui/albumcovermanager.cpp:212
+#: ui/albumcovermanager.cpp:214
 msgid "Really cancel?"
 msgstr "واقعا کنسل شود؟"
 
@@ -4034,7 +4034,7 @@ msgstr "بازخوانی کانالها"
 msgid "Refresh station list"
 msgstr "بازخوانی لیست ایستگاه‌ها"
 
-#: internet/digitally/digitallyimportedservicebase.cpp:178
+#: internet/digitally/digitallyimportedservicebase.cpp:180
 msgid "Refresh streams"
 msgstr "نوسازی جریان‌ها"
 
@@ -4043,7 +4043,7 @@ msgid "Reggae"
 msgstr "رگه"
 
 #: playlist/playlistsaveoptionsdialog.cpp:33
-#: ../bin/src/ui_behavioursettingspage.h:380
+#: ../bin/src/ui_behavioursettingspage.h:419
 msgid "Relative"
 msgstr ""
 
@@ -4051,9 +4051,9 @@ msgstr ""
 msgid "Remember Wii remote swing"
 msgstr "دورکنترل تابی Wii را به‌یاد بیاور"
 
-#: ../bin/src/ui_behavioursettingspage.h:332
-msgid "Remember from last time"
-msgstr "از بار پایانی به‌یاد بیاور"
+#: ../bin/src/ui_behavioursettingspage.h:371
+msgid "Remember from &last time"
+msgstr ""
 
 #: ../bin/src/ui_playlistsaveoptionsdialog.h:99
 msgid "Remember my choice"
@@ -4125,13 +4125,13 @@ msgstr "تکرار لیست‌پخش"
 msgid "Repeat track"
 msgstr "تکرار ترک"
 
-#: devices/deviceview.cpp:221 globalsearch/globalsearchview.cpp:457
+#: devices/deviceview.cpp:221 globalsearch/globalsearchview.cpp:458
 #: internet/core/internetservice.cpp:55 library/libraryview.cpp:386
 #: widgets/fileviewlist.cpp:34
 msgid "Replace current playlist"
 msgstr "دوباره جانشانی لیست‌پخش جاری"
 
-#: ../bin/src/ui_behavioursettingspage.h:357
+#: ../bin/src/ui_behavioursettingspage.h:396
 msgid "Replace the playlist"
 msgstr "دوباره جانشانی لیست‌پخش شود"
 
@@ -4163,7 +4163,7 @@ msgstr "بازنشانی"
 msgid "Reset play counts"
 msgstr "بازنشانی شمار پخش"
 
-#: ../bin/src/ui_behavioursettingspage.h:351
+#: ../bin/src/ui_behavioursettingspage.h:390
 msgid "Restart song, then jump to previous if pressed again"
 msgstr ""
 
@@ -4176,7 +4176,7 @@ msgstr ""
 msgid "Restrict to ASCII characters"
 msgstr "محدود به حروف اَسکی کن"
 
-#: ../bin/src/ui_behavioursettingspage.h:333
+#: ../bin/src/ui_behavioursettingspage.h:376
 msgid "Resume playback on start"
 msgstr ""
 
@@ -4192,7 +4192,7 @@ msgstr "راست"
 msgid "Rip"
 msgstr "برش دادن"
 
-#: ripper/ripcddialog.cpp:105
+#: ripper/ripcddialog.cpp:107
 msgid "Rip CD"
 msgstr ""
 
@@ -4230,13 +4230,13 @@ msgstr "دستگاه را با امنیت پاک کن"
 msgid "Safely remove the device after copying"
 msgstr "دستگاه را پس از کپی، با امنیت پاک کن"
 
-#: playlist/playlist.cpp:1387 ../bin/src/ui_edittagdialog.h:708
+#: playlist/playlist.cpp:1420 ../bin/src/ui_edittagdialog.h:708
 #: ../bin/src/ui_playbacksettingspage.h:371
 #: ../bin/src/ui_streamdetailsdialog.h:141
 msgid "Sample rate"
 msgstr "الگوی ضرباهنگ"
 
-#: ui/organisedialog.cpp:81
+#: ui/organisedialog.cpp:82
 msgid "Samplerate"
 msgstr "ضرباهنگ‌الگو"
 
@@ -4310,7 +4310,7 @@ msgstr "نمایه‌ی الگوی ضرباهنگ سنجه‌پذیر (SSR)"
 msgid "Scale size"
 msgstr ""
 
-#: playlist/playlist.cpp:1380 ../bin/src/ui_edittagdialog.h:709
+#: playlist/playlist.cpp:1413 ../bin/src/ui_edittagdialog.h:709
 msgid "Score"
 msgstr "امتیاز"
 
@@ -4318,7 +4318,7 @@ msgstr "امتیاز"
 msgid "Scrobble tracks that I listen to"
 msgstr "وارانی ترک‌هایی که گوش می‌دهم"
 
-#: ../bin/src/ui_behavioursettingspage.h:320
+#: ../bin/src/ui_behavioursettingspage.h:359
 msgid "Scroll over icon to change track"
 msgstr ""
 
@@ -4332,7 +4332,7 @@ msgstr ""
 msgid "Search"
 msgstr "جستجو"
 
-#: ui/mainwindow.cpp:260 ../bin/src/ui_globalsearchsettingspage.h:141
+#: ui/mainwindow.cpp:262 ../bin/src/ui_globalsearchsettingspage.h:141
 msgctxt "Global search settings dialog title."
 msgid "Search"
 msgstr "جستجو"
@@ -4357,7 +4357,7 @@ msgstr "جستجوی ساب‌سونیک"
 msgid "Search automatically"
 msgstr ""
 
-#: ui/mainwindow.cpp:696
+#: ui/mainwindow.cpp:698
 msgid "Search for album"
 msgstr ""
 
@@ -4370,11 +4370,11 @@ msgstr "جستجوی جلد آلبوم..."
 msgid "Search for anything"
 msgstr "جستجو برای هرچیزی"
 
-#: ui/mainwindow.cpp:693
+#: ui/mainwindow.cpp:695
 msgid "Search for artist"
 msgstr ""
 
-#: globalsearch/globalsearchview.cpp:473 library/libraryview.cpp:401
+#: globalsearch/globalsearchview.cpp:474 library/libraryview.cpp:401
 msgid "Search for this"
 msgstr ""
 
@@ -4394,7 +4394,6 @@ msgstr "سبک جستجو"
 msgid "Search options"
 msgstr "گزینه‌های جستجو"
 
-#: internet/soundcloud/soundcloudservice.cpp:119
 #: internet/spotify/spotifyservice.cpp:400
 msgid "Search results"
 msgstr "دستاورد جستجو"
@@ -4428,7 +4427,7 @@ msgstr "جستجوی ترک در حال پخش بوسیله‌ی مقداری ن
 msgid "Seek the currently playing track to an absolute position"
 msgstr "جستجوی ترک در حال پخش به یک جایگاه ویژه"
 
-#: ../bin/src/ui_behavioursettingspage.h:373
+#: ../bin/src/ui_behavioursettingspage.h:412
 msgid "Seeking using a keyboard shortcut or mouse wheel"
 msgstr ""
 
@@ -4484,11 +4483,11 @@ msgstr "نشانی سرور"
 msgid "Server details"
 msgstr "جزئیات سرور"
 
-#: internet/lastfm/lastfmservice.cpp:282
+#: internet/lastfm/lastfmservice.cpp:284
 msgid "Service offline"
 msgstr "سرویس برون‌خط"
 
-#: ui/mainwindow.cpp:1812
+#: ui/mainwindow.cpp:1838
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr "%1 را برابر \"%2‌\"قرار بده..."
@@ -4504,6 +4503,10 @@ msgstr "این مقدار را برای همه‌ی ترک‌های گزیده �
 #: ../bin/src/ui_networkremotesettingspage.h:223
 msgid "Settings"
 msgstr "تنظیمات‌"
+
+#: ../bin/src/ui_behavioursettingspage.h:429
+msgid "Short duration (at least 1 minute or half the track length)"
+msgstr ""
 
 #: ../bin/src/ui_globalshortcutssettingspage.h:172
 msgid "Shortcut"
@@ -4564,7 +4567,7 @@ msgstr "نمایش یک OSD زیبا"
 msgid "Show above status bar"
 msgstr "نمایش در بالای میله‌ی وضعیت"
 
-#: ui/mainwindow.cpp:643
+#: ui/mainwindow.cpp:645
 msgid "Show all songs"
 msgstr "نمایش همه‌ی آهنگ‌ها"
 
@@ -4584,12 +4587,12 @@ msgstr "نمایش جداسازها"
 msgid "Show fullsize..."
 msgstr "نمایش اندازه‌ی کامل..."
 
-#: library/libraryview.cpp:433 ui/mainwindow.cpp:725
+#: library/libraryview.cpp:433 ui/mainwindow.cpp:727
 #: widgets/fileviewlist.cpp:53
 msgid "Show in file browser..."
 msgstr "نمایش در مرورگر پرونده..."
 
-#: ui/mainwindow.cpp:727
+#: ui/mainwindow.cpp:729
 msgid "Show in library..."
 msgstr ""
 
@@ -4601,11 +4604,11 @@ msgstr "نمایش در هنرمندان گوناگون"
 msgid "Show moodbar"
 msgstr "نمایش میله‌مود"
 
-#: ui/mainwindow.cpp:645
+#: ui/mainwindow.cpp:647
 msgid "Show only duplicates"
 msgstr "نمایش تنها تکراری‌ها"
 
-#: ui/mainwindow.cpp:647
+#: ui/mainwindow.cpp:649
 msgid "Show only untagged"
 msgstr "نمایش تنها بی‌برچسب‌ها"
 
@@ -4629,7 +4632,7 @@ msgstr ""
 msgid "Show the scrobble button in the main window"
 msgstr "نمایش  دکمه‌ی واکشی در پنجره اصلی"
 
-#: ../bin/src/ui_behavioursettingspage.h:319
+#: ../bin/src/ui_behavioursettingspage.h:358
 msgid "Show tray icon"
 msgstr "نمایش آیکون سینی"
 
@@ -4689,7 +4692,7 @@ msgstr "Ska"
 msgid "Skip backwards in playlist"
 msgstr "پرش پس در لیست‌پخش"
 
-#: playlist/playlist.cpp:1376 ../bin/src/ui_edittagdialog.h:705
+#: playlist/playlist.cpp:1409 ../bin/src/ui_edittagdialog.h:705
 msgid "Skip count"
 msgstr "پرش شمار"
 
@@ -4697,11 +4700,11 @@ msgstr "پرش شمار"
 msgid "Skip forwards in playlist"
 msgstr "پرش پیش در لیست‌پخش"
 
-#: ui/mainwindow.cpp:1783
+#: ui/mainwindow.cpp:1809
 msgid "Skip selected tracks"
 msgstr ""
 
-#: ui/mainwindow.cpp:1781
+#: ui/mainwindow.cpp:1807
 msgid "Skip track"
 msgstr ""
 
@@ -4717,7 +4720,7 @@ msgstr "میله‌ی کنار کوچک"
 msgid "Smart playlist"
 msgstr "لیست‌پخش هوشمند"
 
-#: library/librarymodel.cpp:1367
+#: library/librarymodel.cpp:1368
 msgid "Smart playlists"
 msgstr "لیست‌پخش‌های هوشمند"
 
@@ -4733,7 +4736,7 @@ msgstr "راک ملایم"
 msgid "Song Information"
 msgstr "اطلاعات آهنگ"
 
-#: ui/mainwindow.cpp:280
+#: ui/mainwindow.cpp:282
 msgid "Song info"
 msgstr "اطلاعات آهنگ"
 
@@ -4765,11 +4768,7 @@ msgstr "مرتب‌سازی آهنگ‌ها برپایه‌ی"
 msgid "Sorting"
 msgstr "مرتب‌سازی"
 
-#: ../bin/src/ui_soundcloudsettingspage.h:100
-msgid "SoundCloud"
-msgstr ""
-
-#: playlist/playlist.cpp:1404
+#: playlist/playlist.cpp:1437
 msgid "Source"
 msgstr "سرچشمه"
 
@@ -4815,7 +4814,7 @@ msgstr "استاندارد"
 msgid "Starred"
 msgstr "ستاره‌دار"
 
-#: ripper/ripcddialog.cpp:72
+#: ripper/ripcddialog.cpp:74
 msgid "Start ripping"
 msgstr ""
 
@@ -4823,18 +4822,17 @@ msgstr ""
 msgid "Start the playlist currently playing"
 msgstr "شروع لیست‌پخش در حال پخش"
 
-#: transcoder/transcodedialog.cpp:90
+#: transcoder/transcodedialog.cpp:92
 msgid "Start transcoding"
 msgstr "آغاز تراکد"
 
-#: internet/soundcloud/soundcloudservice.cpp:121
 #: internet/spotify/spotifyservice.cpp:402
 msgid ""
 "Start typing something on the search box above to fill this search results "
 "list"
 msgstr "چیزی در جعبه‌ی جستجوی بالا بنویسید تا این لیست دستاوردهای جستجو را پرکنید"
 
-#: transcoder/transcoder.cpp:397
+#: transcoder/transcoder.cpp:398
 #, qt-format
 msgid "Starting %1"
 msgstr "شروع %1"
@@ -4860,7 +4858,7 @@ msgstr ""
 msgid "Stop after every track"
 msgstr ""
 
-#: ui/mainwindow.cpp:680 ../bin/src/ui_mainwindow.h:679
+#: ui/mainwindow.cpp:682 ../bin/src/ui_mainwindow.h:679
 msgid "Stop after this track"
 msgstr "ایست پس از این آهنگ"
 
@@ -4872,7 +4870,7 @@ msgstr "ایست پخش"
 msgid "Stop playback after current track"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:334
+#: ../bin/src/ui_behavioursettingspage.h:377
 msgid "Stop playback if song fails to play"
 msgstr ""
 
@@ -4920,7 +4918,7 @@ msgstr "ساب‌سونیک"
 msgid "Success!"
 msgstr "کامیاب!"
 
-#: transcoder/transcoder.cpp:189
+#: transcoder/transcoder.cpp:190
 #, qt-format
 msgid "Successfully written %1"
 msgstr "%1 با موفقیت نوشته شد"
@@ -4988,7 +4986,7 @@ msgstr "تکنو"
 msgid "Text options"
 msgstr "گزینه‌های متن"
 
-#: ui/about.cpp:74
+#: ui/about.cpp:76
 msgid "Thanks to"
 msgstr "تشکر از"
 
@@ -5028,7 +5026,7 @@ msgid ""
 "license key. Visit subsonic.org for details."
 msgstr "زمان آزمایشی سرور ساب‌سونیک پایان یافته است. خواهش می‌کنیم هزینه‌ای را کمک کنید تا کلید پروانه را دریافت کنید. برای راهنمایی انجام کار تارنمای subsonic.org را ببینید."
 
-#: ui/mainwindow.cpp:2674
+#: ui/mainwindow.cpp:2700
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -5052,13 +5050,13 @@ msgstr "مشکلی در واکشی ابرداده‌ها از مگناتیون �
 msgid "There was a problem parsing the response from the iTunes Store"
 msgstr "مشکلی در موشکافی پاسخ فروشگاه آی‌تیون پدید آمد"
 
-#: ui/organiseerrordialog.cpp:54
+#: ui/organiseerrordialog.cpp:56
 msgid ""
 "There were problems copying some songs.  The following files could not be "
 "copied:"
 msgstr "مشکلی در کپی کردن تعدادی از آهنگ‌‌ها وجود داشت. پرونده‌های زیر کپی نشدند:"
 
-#: ui/organiseerrordialog.cpp:61
+#: ui/organiseerrordialog.cpp:63
 msgid ""
 "There were problems deleting some songs.  The following files could not be "
 "deleted:"
@@ -5070,7 +5068,7 @@ msgid ""
 "continue?"
 msgstr "این پرونده‌ها از دستگاه پاک خواهند شد، آیا مطمئنید که می‌خواهید ادامه دهید؟"
 
-#: library/libraryview.cpp:679 ui/mainwindow.cpp:2433 widgets/fileview.cpp:189
+#: library/libraryview.cpp:679 ui/mainwindow.cpp:2459 widgets/fileview.cpp:189
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -5141,7 +5139,7 @@ msgstr "این اولین باری است که این دستگاه را وصل �
 msgid "This option can be changed in the \"Behavior\" preferences"
 msgstr ""
 
-#: internet/lastfm/lastfmservice.cpp:284
+#: internet/lastfm/lastfmservice.cpp:286
 msgid "This stream is for paid subscribers only"
 msgstr "این جریان تنها برای مشترکان پولی است"
 
@@ -5150,11 +5148,11 @@ msgstr "این جریان تنها برای مشترکان پولی است"
 msgid "This type of device is not supported: %1"
 msgstr "این گونه از دستگاه پشتیبانی نمی‌شود: %1"
 
-#: ../bin/src/ui_behavioursettingspage.h:374
+#: ../bin/src/ui_behavioursettingspage.h:413
 msgid "Time step"
 msgstr ""
 
-#: playlist/playlist.cpp:1345 ui/organisedialog.cpp:63
+#: playlist/playlist.cpp:1378 ui/organisedialog.cpp:64
 #: ui/qtsystemtrayicon.cpp:247 ../bin/src/ui_about.h:141
 #: ../bin/src/ui_edittagdialog.h:719 ../bin/src/ui_trackselectiondialog.h:210
 #: ../bin/src/ui_ripcddialog.h:306
@@ -5173,7 +5171,7 @@ msgstr "تبدیل به OSD زیبا"
 msgid "Toggle fullscreen"
 msgstr "تبدیل به تمام‌صفحه"
 
-#: ui/mainwindow.cpp:1769
+#: ui/mainwindow.cpp:1795
 msgid "Toggle queue status"
 msgstr "تبدیل به وضعیت صف"
 
@@ -5205,11 +5203,11 @@ msgstr "ترک‌های برتر"
 msgid "Total albums:"
 msgstr ""
 
-#: covers/coversearchstatisticsdialog.cpp:70
+#: covers/coversearchstatisticsdialog.cpp:72
 msgid "Total bytes transferred"
 msgstr "همه‌ی بایت‌های ارسال شده"
 
-#: covers/coversearchstatisticsdialog.cpp:67
+#: covers/coversearchstatisticsdialog.cpp:69
 msgid "Total network requests made"
 msgstr "همه‌ی درخواست‌های شبکه انجام شد"
 
@@ -5217,14 +5215,10 @@ msgstr "همه‌ی درخواست‌های شبکه انجام شد"
 msgid "Trac&k"
 msgstr ""
 
-#: playlist/playlist.cpp:1353 ui/organisedialog.cpp:72
+#: playlist/playlist.cpp:1386 ui/organisedialog.cpp:73
 #: ../bin/src/ui_trackselectiondialog.h:212 ../bin/src/ui_ripcddialog.h:304
 msgid "Track"
 msgstr "ترک"
-
-#: internet/soundcloud/soundcloudservice.cpp:136
-msgid "Tracks"
-msgstr "ترک ها"
 
 #: ../bin/src/ui_transcodedialog.h:213 ../bin/src/ui_mainwindow.h:706
 msgid "Transcode Music"
@@ -5238,7 +5232,7 @@ msgstr "صورت عملیات تراکدگر"
 msgid "Transcoding"
 msgstr "تراکدکردن"
 
-#: transcoder/transcoder.cpp:317
+#: transcoder/transcoder.cpp:318
 #, qt-format
 msgid "Transcoding %1 files using %2 threads"
 msgstr "تراکدکردن فایلهای %1 با استفاده از سرنخ‌های %2"
@@ -5289,8 +5283,8 @@ msgstr ""
 msgid "Unable to download %1 (%2)"
 msgstr "ناکام در باگیری %1 (%2)"
 
-#: core/song.cpp:465 library/librarymodel.cpp:374 library/librarymodel.cpp:379
-#: library/librarymodel.cpp:383 library/librarymodel.cpp:1159
+#: core/song.cpp:465 library/librarymodel.cpp:375 library/librarymodel.cpp:380
+#: library/librarymodel.cpp:384 library/librarymodel.cpp:1160
 #: library/savedgroupingmanager.cpp:103 playlist/playlistdelegates.cpp:305
 #: playlist/playlistmanager.cpp:532 playlist/playlistmanager.cpp:533
 #: songinfo/streamdiscoverer.cpp:87 ui/albumcoverchoicecontroller.cpp:127
@@ -5303,7 +5297,7 @@ msgid "Unknown content-type"
 msgstr "سبک محتوای ناشناخته"
 
 #: internet/digitally/digitallyimportedclient.cpp:74
-#: internet/lastfm/lastfmservice.cpp:303
+#: internet/lastfm/lastfmservice.cpp:305
 msgid "Unknown error"
 msgstr "خطای ناشناخته"
 
@@ -5311,11 +5305,11 @@ msgstr "خطای ناشناخته"
 msgid "Unset cover"
 msgstr "قرار ندادن جلد"
 
-#: ui/mainwindow.cpp:1779
+#: ui/mainwindow.cpp:1805
 msgid "Unskip selected tracks"
 msgstr ""
 
-#: ui/mainwindow.cpp:1777
+#: ui/mainwindow.cpp:1803
 msgid "Unskip track"
 msgstr ""
 
@@ -5426,7 +5420,7 @@ msgstr ""
 msgid "Use temporal noise shaping"
 msgstr "بکاربردن شکل زمانی پارازیت"
 
-#: ../bin/src/ui_behavioursettingspage.h:326
+#: ../bin/src/ui_behavioursettingspage.h:365
 msgid "Use the system default"
 msgstr "بکاربردن پیش‌نشان‌های سیستم"
 
@@ -5446,7 +5440,7 @@ msgstr "استفاده از نرمال‌سازی صدا"
 msgid "Used"
 msgstr "استفاده‌شده"
 
-#: ui/settingsdialog.cpp:147
+#: ui/settingsdialog.cpp:146
 msgid "User interface"
 msgstr "رابط کاربری"
 
@@ -5458,7 +5452,7 @@ msgstr "رابط کاربری"
 msgid "Username"
 msgstr "شناسه"
 
-#: ../bin/src/ui_behavioursettingspage.h:340
+#: ../bin/src/ui_behavioursettingspage.h:379
 msgid "Using the menu to add a song will..."
 msgstr "بکاربردن منو برای افزودن آهنگ..."
 
@@ -5475,8 +5469,8 @@ msgstr ""
 msgid "Variable bit rate"
 msgstr "آهنگ ضرب متغیر"
 
-#: globalsearch/globalsearchmodel.cpp:109 library/librarymodel.cpp:300
-#: playlist/playlistmanager.cpp:544 ui/albumcovermanager.cpp:264
+#: globalsearch/globalsearchmodel.cpp:109 library/librarymodel.cpp:301
+#: playlist/playlistmanager.cpp:544 ui/albumcovermanager.cpp:266
 msgid "Various artists"
 msgstr "هنرمندان گوناگون"
 
@@ -5484,7 +5478,7 @@ msgstr "هنرمندان گوناگون"
 msgid "Verify Server certificate"
 msgstr ""
 
-#: ui/about.cpp:33
+#: ui/about.cpp:35
 #, qt-format
 msgid "Version %1"
 msgstr "ویرایش %1"
@@ -5531,11 +5525,11 @@ msgstr "WAV"
 msgid "WMA"
 msgstr "WMA"
 
-#: playlist/playlisttabbar.cpp:192 ../bin/src/ui_behavioursettingspage.h:322
+#: playlist/playlisttabbar.cpp:192 ../bin/src/ui_behavioursettingspage.h:361
 msgid "Warn me when closing a playlist tab"
 msgstr ""
 
-#: core/song.cpp:448 transcoder/transcoder.cpp:256
+#: core/song.cpp:448 transcoder/transcoder.cpp:257
 msgid "Wav"
 msgstr "Wav"
 
@@ -5551,9 +5545,13 @@ msgstr "تارنما"
 msgid "Weeks"
 msgstr "هفته"
 
-#: ../bin/src/ui_behavioursettingspage.h:329
+#: ../bin/src/ui_behavioursettingspage.h:368
 msgid "When Clementine starts"
 msgstr "زمانی که کلمنتاین شروع می‌شود"
+
+#: ../bin/src/ui_behavioursettingspage.h:427
+msgid "When calculating play counts, use"
+msgstr ""
 
 #: ../bin/src/ui_librarysettingspage.h:203
 msgid ""
@@ -5561,8 +5559,12 @@ msgid ""
 "If there are no matches then it will use the largest image in the directory."
 msgstr "زمانی که کلمنتاین بدنبال آلبوم هنری می‌گردد، ابتدا بدنبال پرونده‌های فرتوری می‌گردد که شامل یکی از کلمات زیر باشد.\nاگر چیزی پیدا نشد، آنگاه بزرگترین فرتور در پوشه را بکار می‌برد."
 
-#: ../bin/src/ui_behavioursettingspage.h:377
+#: ../bin/src/ui_behavioursettingspage.h:416
 msgid "When saving a playlist, file paths should be"
+msgstr ""
+
+#: ../bin/src/ui_behavioursettingspage.h:422
+msgid "When sorting artists, albums and titles"
 msgstr ""
 
 #: ../bin/src/ui_globalsearchsettingspage.h:147
@@ -5623,7 +5625,7 @@ msgstr "Windows Media 40k"
 msgid "Windows Media 64k"
 msgstr "Windows Media 64k"
 
-#: core/song.cpp:428 transcoder/transcoder.cpp:253
+#: core/song.cpp:428 transcoder/transcoder.cpp:254
 msgid "Windows Media audio"
 msgstr "فرمت آوایی مدیای ویندوز"
 
@@ -5637,7 +5639,7 @@ msgid ""
 "well?"
 msgstr "آیا می‌خواهید آهنگ‌های دیگر در این آلبوم را به «هنرمندان گوناگون» تراببرید؟"
 
-#: ui/mainwindow.cpp:2681
+#: ui/mainwindow.cpp:2707
 msgid "Would you like to run a full rescan right now?"
 msgstr "آیا مایل هستید که الان بازبینی کامل انجام دهید؟"
 
@@ -5645,7 +5647,7 @@ msgstr "آیا مایل هستید که الان بازبینی کامل انج�
 msgid "Write all songs statistics into songs' files"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:382
+#: ../bin/src/ui_behavioursettingspage.h:421
 msgid "Write metadata"
 msgstr ""
 
@@ -5653,8 +5655,8 @@ msgstr ""
 msgid "Wrong username or password."
 msgstr "شناسه و گذرواژه‌ی نادرست"
 
-#: library/savedgroupingmanager.cpp:71 playlist/playlist.cpp:1357
-#: ui/organisedialog.cpp:75 ../bin/src/ui_groupbydialog.h:134
+#: library/savedgroupingmanager.cpp:71 playlist/playlist.cpp:1390
+#: ui/organisedialog.cpp:76 ../bin/src/ui_groupbydialog.h:134
 #: ../bin/src/ui_groupbydialog.h:153 ../bin/src/ui_groupbydialog.h:172
 #: ../bin/src/ui_trackselectiondialog.h:211 ../bin/src/ui_ripcddialog.h:312
 msgid "Year"
@@ -5731,13 +5733,6 @@ msgstr "شما اکانت برجسته‌ی اسپاتیفای ندارید."
 msgid "You do not have an active subscription"
 msgstr "شما هیچ هموندی پویایی ندارید"
 
-#: ../bin/src/ui_soundcloudsettingspage.h:101
-msgid ""
-"You don't need to be logged in to search and to listen to music on "
-"SoundCloud. However, you need to login to access your playlists and your "
-"stream."
-msgstr ""
-
 #: internet/spotify/spotifyservice.cpp:205
 msgid ""
 "You have been logged out of Spotify, please re-enter your password in the "
@@ -5759,7 +5754,7 @@ msgid ""
 "shortcuts in Clementine."
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:328
+#: ../bin/src/ui_behavioursettingspage.h:367
 msgid "You will need to restart Clementine if you change the language."
 msgstr "اگر زبان را تغییر دهید باید کلمنتاین را دوباره بارگذاری کنید."
 
@@ -5835,7 +5830,7 @@ msgstr "بین"
 msgid "biggest first"
 msgstr "بزرگترین اول"
 
-#: playlist/playlistview.cpp:241 ui/edittagdialog.cpp:500
+#: playlist/playlistview.cpp:242 ui/edittagdialog.cpp:500
 msgid "bpm"
 msgstr "ض.د.د"
 
@@ -5892,7 +5887,7 @@ msgstr "در پایان"
 
 #: internet/spotify/spotifysettingspage.cpp:62
 #: internet/spotify/spotifysettingspage.cpp:63
-#: internet/spotify/spotifysettingspage.cpp:64 playlist/playlistview.cpp:245
+#: internet/spotify/spotifysettingspage.cpp:64 playlist/playlistview.cpp:246
 #: ui/edittagdialog.cpp:502
 msgid "kbps"
 msgstr "ک.ب.د.ث"

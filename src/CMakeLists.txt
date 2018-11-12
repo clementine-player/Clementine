@@ -270,6 +270,7 @@ set(SOURCES
   internet/podcasts/podcastdeleter.cpp
   internet/podcasts/podcastdownloader.cpp
   internet/podcasts/podcastepisode.cpp
+  internet/podcasts/podcastinfodialog.cpp
   internet/podcasts/podcastinfowidget.cpp
   internet/podcasts/podcastservice.cpp
   internet/podcasts/podcastservicemodel.cpp
@@ -565,6 +566,7 @@ set(HEADERS
   internet/podcasts/podcastdiscoverymodel.h
   internet/podcasts/podcastdeleter.h
   internet/podcasts/podcastdownloader.h
+  internet/podcasts/podcastinfodialog.h
   internet/podcasts/podcastinfowidget.h
   internet/podcasts/podcastservice.h
   internet/podcasts/podcastservicemodel.h
@@ -711,6 +713,7 @@ set(UI
   internet/podcasts/addpodcastdialog.ui
   internet/podcasts/gpoddersearchpage.ui
   internet/podcasts/itunessearchpage.ui
+  internet/podcasts/podcastinfodialog.ui
   internet/podcasts/podcastinfowidget.ui
   internet/podcasts/podcastsettingspage.ui
 

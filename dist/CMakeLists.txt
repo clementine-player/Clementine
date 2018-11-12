@@ -66,7 +66,7 @@ if (NOT APPLE)
   )
 
   install(FILES clementine.appdata.xml
-    DESTINATION share/appdata
+    DESTINATION share/metainfo
   )
 
   if(INSTALL_UBUNTU_ICONS)

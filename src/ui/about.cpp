@@ -19,6 +19,8 @@
 #include "config.h"
 #include "ui_about.h"
 
+#include <algorithm>
+
 #include <QCoreApplication>
 #include <QPushButton>
 
@@ -53,8 +55,8 @@ About::About(QWidget* parent) : QDialog(parent) {
              << Person("Andreas Muttscheller", "asfa194@gmail.com")
              << Person("Mark Furneaux", "mark@furneaux.ca");
 
-  qSort(authors_);
-  qSort(thanks_to_);
+  std::sort(authors_.begin(), authors_.end());
+  std::sort(thanks_to_.begin(), thanks_to_.end());
 
   ui_.content->setHtml(MakeHtml());
 

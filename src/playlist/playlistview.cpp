@@ -43,6 +43,7 @@
 #include <QMimeData>
 
 #include <math.h>
+#include <algorithm>
 
 #ifdef HAVE_MOODBAR
 #include "moodbar/moodbaritemdelegate.h"
@@ -657,7 +658,7 @@ void PlaylistView::RemoveSelected(bool deleting_from_disk) {
 
   // Sort the selection so we remove the items at the *bottom* first, ensuring
   // we don't have to mess around with changing row numbers
-  qSort(selection.begin(), selection.end(), CompareSelectionRanges);
+  std::sort(selection.begin(), selection.end(), CompareSelectionRanges);
 
   for (const QItemSelectionRange& range : selection) {
     if (range.top() < last_row) rows_removed += range.height();
@@ -700,7 +701,7 @@ QList<int> PlaylistView::GetEditableColumns() {
     QModelIndex index = model()->index(0, col);
     if (index.flags() & Qt::ItemIsEditable) columns << h->visualIndex(col);
   }
-  qSort(columns);
+  std::sort(columns.begin(), columns.end());
   return columns;
 }
 
