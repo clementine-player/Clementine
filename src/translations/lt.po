@@ -12,7 +12,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2018-10-20 15:29+0000\n"
+"PO-Revision-Date: 2018-11-12 21:48+0000\n"
 "Last-Translator: Moo\n"
 "Language-Team: Lithuanian (http://www.transifex.com/davidsansome/clementine/language/lt/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -476,7 +476,7 @@ msgstr "Aktyvuoti/Pasyvinti Wii pultą"
 
 #: internet/podcasts/addpodcastdialog.cpp:63
 msgid "Add Podcast"
-msgstr "Pridėti srautą"
+msgstr "Pridėti tinklalaidę"
 
 #: ../bin/src/ui_addstreamdialog.h:112
 msgid "Add Stream"
@@ -537,11 +537,11 @@ msgstr "Pridėti naują aplanką..."
 
 #: ../bin/src/ui_addpodcastdialog.h:178
 msgid "Add podcast"
-msgstr "Pridėti srautą"
+msgstr "Pridėti tinklalaidę"
 
-#: internet/podcasts/podcastservice.cpp:418 ../bin/src/ui_mainwindow.h:722
+#: internet/podcasts/podcastservice.cpp:419 ../bin/src/ui_mainwindow.h:722
 msgid "Add podcast..."
-msgstr "Pridėti srautą..."
+msgstr "Pridėti tinklalaidę..."
 
 #: smartplaylists/searchtermwidget.cpp:385
 msgid "Add search term"
@@ -923,7 +923,7 @@ msgstr "Vidutinis paveikslo dydis"
 
 #: internet/podcasts/addpodcastdialog.cpp:91
 msgid "BBC Podcasts"
-msgstr "BBC srautas"
+msgstr "BBC tinklalaidės"
 
 #: playlist/playlist.cpp:1416 ui/organisedialog.cpp:75
 #: ../bin/src/ui_edittagdialog.h:704
@@ -1064,7 +1064,7 @@ msgstr "\"CUE sheet\" palaikymas"
 msgid "Cancel"
 msgstr "Atšaukti"
 
-#: internet/podcasts/podcastservice.cpp:441
+#: internet/podcasts/podcastservice.cpp:447
 msgid "Cancel download"
 msgstr "Atšaukti atsiuntimą"
 
@@ -1148,7 +1148,7 @@ msgstr "Pasirinkite kaip grojaraštis bus rikiuojamas ir kiek dainų turės"
 
 #: internet/podcasts/podcastsettingspage.cpp:143
 msgid "Choose podcast download directory"
-msgstr "Pasirinkite srauto siutimo vietą"
+msgstr "Pasirinkite tinklalaidės atsiuntimo katalogą"
 
 #: ../bin/src/ui_internetshowsettingspage.h:85
 msgid "Choose the internet services you want to show."
@@ -1226,7 +1226,7 @@ msgid ""
 "Clementine can synchronize your subscription list with your other computers "
 "and podcast applications.  <a href=\"https://gpodder.net/register/\">Create "
 "an account</a>."
-msgstr "Clementine gali sinchronizuoti jūsų fonoteką su kitais jūsų kompiuteriais ir srauto aplikacijomis. <a href=\"https://gpodder.net/register/\">Sukurti sąskaitą</a>."
+msgstr "Clementine gali sinchronizuoti jūsų prenumeratų sąrašą su kitais jūsų kompiuteriais ir tinklalaidžių programomis. <a href=\"https://gpodder.net/register/\">Sukurti paskyrą</a>."
 
 #: visualisations/projectmvisualisation.cpp:132
 msgid ""
@@ -1359,9 +1359,9 @@ msgid "Configure library..."
 msgstr "Konfigūruoti fonoteką..."
 
 #: internet/podcasts/addpodcastdialog.cpp:77
-#: internet/podcasts/podcastservice.cpp:455
+#: internet/podcasts/podcastservice.cpp:461
 msgid "Configure podcasts..."
-msgstr "Konfigūruojamas srautas... "
+msgstr "Konfigūruoti tinklalaides... "
 
 #: internet/core/cloudfileservice.cpp:107
 #: internet/digitally/digitallyimportedservicebase.cpp:184
@@ -1425,7 +1425,7 @@ msgstr "Konvertuoti nenuostolingus failus"
 msgid "Copy to clipboard"
 msgstr "Kopijuoti į atmintinę"
 
-#: library/libraryview.cpp:419 internet/podcasts/podcastservice.cpp:438
+#: library/libraryview.cpp:419 internet/podcasts/podcastservice.cpp:444
 #: ui/mainwindow.cpp:721 widgets/fileviewlist.cpp:44
 msgid "Copy to device..."
 msgstr "Kopijuoti į įrenginį..."
@@ -1631,7 +1631,7 @@ msgstr "Delsa tarp vizualizacijų"
 msgid "Delete"
 msgstr "Trinti"
 
-#: internet/podcasts/podcastservice.cpp:435
+#: internet/podcasts/podcastservice.cpp:441
 msgid "Delete downloaded data"
 msgstr "Naikinti atsiųstus duomenis"
 
@@ -1848,7 +1848,7 @@ msgstr "Du kartus spustelėjus dainą grojaraštyje..."
 msgid "Double clicking a song will..."
 msgstr "Du kartus spūstelėjus dainą..."
 
-#: internet/podcasts/podcastservice.cpp:531
+#: internet/podcasts/podcastservice.cpp:543
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "Download %n episodes"
@@ -1870,8 +1870,8 @@ msgstr "Atsiųsti narystę"
 msgid "Download new episodes automatically"
 msgstr "Atsisiųsti naujus epizodus automatiškai"
 
-#: internet/podcasts/podcastservice.cpp:293
-#: internet/podcasts/podcastservice.cpp:332
+#: internet/podcasts/podcastservice.cpp:294
+#: internet/podcasts/podcastservice.cpp:333
 msgid "Download queued"
 msgstr "Atsiuntimas eilėje"
 
@@ -1891,7 +1891,7 @@ msgstr "Atsisiųsti šį albumą"
 msgid "Download this album..."
 msgstr "Atsisiunčiamas šis albumas"
 
-#: internet/podcasts/podcastservice.cpp:533
+#: internet/podcasts/podcastservice.cpp:545
 msgid "Download this episode"
 msgstr "Atsiųsti šį epizodą"
 
@@ -1899,8 +1899,8 @@ msgstr "Atsiųsti šį epizodą"
 msgid "Download..."
 msgstr "Atsisiųsti..."
 
-#: internet/podcasts/podcastservice.cpp:301
-#: internet/podcasts/podcastservice.cpp:341
+#: internet/podcasts/podcastservice.cpp:302
+#: internet/podcasts/podcastservice.cpp:342
 #, qt-format
 msgid "Downloading (%1%)..."
 msgstr "Atsiunčiama (%1%)..."
@@ -2048,11 +2048,11 @@ msgstr "Įrašykite paieškos kriterijus žemiau, kad rasti muziką kompiuteryje
 
 #: ../bin/src/ui_itunessearchpage.h:73
 msgid "Enter search terms below to find podcasts in the iTunes Store"
-msgstr "Įrašykite paieškos kriterijus žemiau, kad rasti transliacijas itunes parduotuvėje"
+msgstr "Įrašykite paieškos kriterijus žemiau, kad rastumėte tinklalaides iTunes parduotuvėje"
 
 #: ../bin/src/ui_gpoddersearchpage.h:73
 msgid "Enter search terms below to find podcasts on gpodder.net"
-msgstr "Įrašykite paieškos kriterijus žemiau, kad rasti transliacijas gpodder.net svetainėje"
+msgstr "Įrašykite paieškos kriterijus žemiau, kad rastumėte tinklalaides gpodder.net svetainėje"
 
 #: ../bin/src/ui_libraryfilterwidget.h:106
 #: ../bin/src/ui_albumcovermanager.h:224
@@ -2249,12 +2249,12 @@ msgstr "Nepavyko atsiųsti direktorijos"
 #: internet/podcasts/itunessearchpage.cpp:78
 #: internet/podcasts/itunessearchpage.cpp:85
 msgid "Failed to fetch podcasts"
-msgstr "Nepavyko atsiųsti garso prenumeratos"
+msgstr "Nepavyko gauti tinklalaidžių"
 
 #: internet/podcasts/addpodcastbyurl.cpp:71
 #: internet/podcasts/fixedopmlpage.cpp:55
 msgid "Failed to load podcast"
-msgstr "Nepavyko įkelti garso prenumeratos"
+msgstr "Nepavyko įkelti tinklalaidės"
 
 #: internet/podcasts/podcasturlloader.cpp:175
 msgid "Failed to parse the XML for this RSS feed"
@@ -2629,7 +2629,7 @@ msgstr "Aš neturiu Magnatune paskyros"
 msgid "Icon"
 msgstr "Piktograma"
 
-#: widgets/fancytabwidget.cpp:441
+#: widgets/fancytabwidget.cpp:442
 msgid "Icons on top"
 msgstr "Piktogramos viršuje"
 
@@ -2651,7 +2651,7 @@ msgstr "Jei tęsite, šis įrenginys dirbs lėtai ir nukopijuotos dainos gali ne
 
 #: ../bin/src/ui_addpodcastbyurl.h:73
 msgid "If you know the URL of a podcast, enter it below and press Go."
-msgstr "Jei žinote garso prenumeratos URL, įveskite jį ir spauskite „Eiti“."
+msgstr "Jei žinote tinklalaidės URL, įveskite jį ir spauskite „Eiti“."
 
 #: ../bin/src/ui_organisedialog.h:255
 msgid "Ignore \"The\" in artist names"
@@ -2884,7 +2884,7 @@ msgstr "Dideli albumų viršeliai (išsamiau žr. žemiau)"
 msgid "Large album cover (no details)"
 msgstr "Didelis albumo viršelis (be detalių)"
 
-#: widgets/fancytabwidget.cpp:437
+#: widgets/fancytabwidget.cpp:438
 msgid "Large sidebar"
 msgstr "Didelė šoninė juosta"
 
@@ -3159,11 +3159,11 @@ msgstr "Rankiniu būdu"
 msgid "Manufacturer"
 msgstr "Gamintojas"
 
-#: internet/podcasts/podcastservice.cpp:450 ../bin/src/ui_organisedialog.h:259
+#: internet/podcasts/podcastservice.cpp:456 ../bin/src/ui_organisedialog.h:259
 msgid "Mark as listened"
 msgstr "Pažymėti kaip klausytą"
 
-#: internet/podcasts/podcastservice.cpp:449
+#: internet/podcasts/podcastservice.cpp:455
 msgid "Mark as new"
 msgstr "Pažymėti kaip naują"
 
@@ -3712,7 +3712,7 @@ msgstr "Atlikėjas"
 msgid "Pixel"
 msgstr "Pikselis"
 
-#: widgets/fancytabwidget.cpp:439
+#: widgets/fancytabwidget.cpp:440
 msgid "Plain sidebar"
 msgstr "Paprasta šoninė juosta"
 
@@ -3796,10 +3796,18 @@ msgstr "Atverkite savo naršyklėje šį url: <a href=\"%1\">%1</a>"
 msgid "Plugin status:"
 msgstr "Plėtinio būklė:"
 
-#: internet/podcasts/podcastservice.cpp:132
+#: ../bin/src/ui_podcastinfodialog.h:77
+msgid "Podcast Information"
+msgstr "Tinklalaidės informacija"
+
+#: internet/podcasts/podcastservice.cpp:437
+msgid "Podcast information"
+msgstr "Tinklalaidės informacija"
+
+#: internet/podcasts/podcastservice.cpp:133
 #: ../bin/src/ui_podcastsettingspage.h:250
 msgid "Podcasts"
-msgstr "Podcast"
+msgstr "Tinklalaidės"
 
 #: ui/equalizer.cpp:141
 msgid "Pop"
@@ -4711,7 +4719,7 @@ msgstr "Praleisti takelį"
 msgid "Small album cover"
 msgstr "Mažas albumo viršelio paveikslėlis"
 
-#: widgets/fancytabwidget.cpp:438
+#: widgets/fancytabwidget.cpp:439
 msgid "Small sidebar"
 msgstr "Maža šoninė juosta"
 
@@ -4965,7 +4973,7 @@ msgstr "Atnaujinama Spotify pažymėti kūriniai"
 msgid "System colors"
 msgstr "Sistemos spalvos"
 
-#: widgets/fancytabwidget.cpp:440
+#: widgets/fancytabwidget.cpp:441
 msgid "Tabs on top"
 msgstr "Kortelės viršuje"
 
@@ -5313,7 +5321,7 @@ msgid "Unskip track"
 msgstr "Nepraleisti takelio"
 
 #: internet/podcasts/addpodcastdialog.cpp:70
-#: internet/podcasts/podcastservice.cpp:444
+#: internet/podcasts/podcastservice.cpp:450
 msgid "Unsubscribe"
 msgstr "Nebeprenumeruoti"
 
@@ -5321,9 +5329,9 @@ msgstr "Nebeprenumeruoti"
 msgid "Upcoming Concerts"
 msgstr "Artėjantys koncertai"
 
-#: internet/podcasts/podcastservice.cpp:420
+#: internet/podcasts/podcastservice.cpp:421
 msgid "Update all podcasts"
-msgstr "Atnaujinti visas garso prenumeratas"
+msgstr "Atnaujinti visas tinklalaides"
 
 #: ../bin/src/ui_mainwindow.h:714
 msgid "Update changed library folders"
@@ -5333,9 +5341,9 @@ msgstr "Atnaujinti pakeistus fonotekos katalogus"
 msgid "Update the library when Clementine starts"
 msgstr "Atnaujinti fonoteką paleidžiant Clementine"
 
-#: internet/podcasts/podcastservice.cpp:429
+#: internet/podcasts/podcastservice.cpp:430
 msgid "Update this podcast"
-msgstr "Atnaujinti šią garso prenumeratą"
+msgstr "Atnaujinti šią tinklalaidę"
 
 #: ../bin/src/ui_podcastsettingspage.h:251
 msgid "Updating"

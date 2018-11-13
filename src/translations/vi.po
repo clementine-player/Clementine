@@ -13,7 +13,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2018-10-20 12:14+0000\n"
+"PO-Revision-Date: 2018-11-11 21:10+0000\n"
 "Last-Translator: hatstand <john.maguire@gmail.com>\n"
 "Language-Team: Vietnamese (http://www.transifex.com/davidsansome/clementine/language/vi/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -540,7 +540,7 @@ msgstr "Thêm thư mục mới..."
 msgid "Add podcast"
 msgstr "Thêm podcast"
 
-#: internet/podcasts/podcastservice.cpp:418 ../bin/src/ui_mainwindow.h:722
+#: internet/podcasts/podcastservice.cpp:419 ../bin/src/ui_mainwindow.h:722
 msgid "Add podcast..."
 msgstr "Thêm podcast..."
 
@@ -1065,7 +1065,7 @@ msgstr "Hỗ trợ danh sách CUE"
 msgid "Cancel"
 msgstr "Hủy bỏ"
 
-#: internet/podcasts/podcastservice.cpp:441
+#: internet/podcasts/podcastservice.cpp:447
 msgid "Cancel download"
 msgstr "Hủy tải về"
 
@@ -1360,7 +1360,7 @@ msgid "Configure library..."
 msgstr "Cấu hình thư viện..."
 
 #: internet/podcasts/addpodcastdialog.cpp:77
-#: internet/podcasts/podcastservice.cpp:455
+#: internet/podcasts/podcastservice.cpp:461
 msgid "Configure podcasts..."
 msgstr "Cấu hình podcast..."
 
@@ -1426,7 +1426,7 @@ msgstr "Chuyển đổi tập tin lossless"
 msgid "Copy to clipboard"
 msgstr "Chép vào bộ đệm"
 
-#: library/libraryview.cpp:419 internet/podcasts/podcastservice.cpp:438
+#: library/libraryview.cpp:419 internet/podcasts/podcastservice.cpp:444
 #: ui/mainwindow.cpp:721 widgets/fileviewlist.cpp:44
 msgid "Copy to device..."
 msgstr "Chép vào thiết bị..."
@@ -1632,7 +1632,7 @@ msgstr "Độ trễ giữa các hiệu ứng hình ảnh ảo"
 msgid "Delete"
 msgstr "Xóa"
 
-#: internet/podcasts/podcastservice.cpp:435
+#: internet/podcasts/podcastservice.cpp:441
 msgid "Delete downloaded data"
 msgstr "Xóa dữ liệu đã tải về"
 
@@ -1849,7 +1849,7 @@ msgstr "Nhấn đúp chuột vào bài hát trong danh sách sẽ..."
 msgid "Double clicking a song will..."
 msgstr "Nhấn đúp chuột vào một bài hát sẽ..."
 
-#: internet/podcasts/podcastservice.cpp:531
+#: internet/podcasts/podcastservice.cpp:543
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "Download %n episodes"
@@ -1871,8 +1871,8 @@ msgstr "Tải với tư cách thành viên"
 msgid "Download new episodes automatically"
 msgstr "Tự động tải về các tập mới"
 
-#: internet/podcasts/podcastservice.cpp:293
-#: internet/podcasts/podcastservice.cpp:332
+#: internet/podcasts/podcastservice.cpp:294
+#: internet/podcasts/podcastservice.cpp:333
 msgid "Download queued"
 msgstr "Đợi tải về"
 
@@ -1892,7 +1892,7 @@ msgstr "Tải album này"
 msgid "Download this album..."
 msgstr "Tải album này..."
 
-#: internet/podcasts/podcastservice.cpp:533
+#: internet/podcasts/podcastservice.cpp:545
 msgid "Download this episode"
 msgstr "Tải tập này"
 
@@ -1900,8 +1900,8 @@ msgstr "Tải tập này"
 msgid "Download..."
 msgstr "Tải về..."
 
-#: internet/podcasts/podcastservice.cpp:301
-#: internet/podcasts/podcastservice.cpp:341
+#: internet/podcasts/podcastservice.cpp:302
+#: internet/podcasts/podcastservice.cpp:342
 #, qt-format
 msgid "Downloading (%1%)..."
 msgstr "Đang tải (%1%)..."
@@ -2630,7 +2630,7 @@ msgstr "Không có tài khoản Magnatune"
 msgid "Icon"
 msgstr "Biểu tượng"
 
-#: widgets/fancytabwidget.cpp:441
+#: widgets/fancytabwidget.cpp:442
 msgid "Icons on top"
 msgstr "Biểu tượng trên cùng"
 
@@ -2885,7 +2885,7 @@ msgstr "Ảnh lớn (hiện thông tin phía dưới)"
 msgid "Large album cover (no details)"
 msgstr "Ảnh lớn (không có thông tin)"
 
-#: widgets/fancytabwidget.cpp:437
+#: widgets/fancytabwidget.cpp:438
 msgid "Large sidebar"
 msgstr "Thanh bên cỡ lớn"
 
@@ -3160,11 +3160,11 @@ msgstr "Thủ công"
 msgid "Manufacturer"
 msgstr "Nhà sản xuất"
 
-#: internet/podcasts/podcastservice.cpp:450 ../bin/src/ui_organisedialog.h:259
+#: internet/podcasts/podcastservice.cpp:456 ../bin/src/ui_organisedialog.h:259
 msgid "Mark as listened"
 msgstr "Đánh dấu là đã nghe"
 
-#: internet/podcasts/podcastservice.cpp:449
+#: internet/podcasts/podcastservice.cpp:455
 msgid "Mark as new"
 msgstr "Đánh dấu mới"
 
@@ -3713,7 +3713,7 @@ msgstr "Biểu diễn"
 msgid "Pixel"
 msgstr "Điểm ảnh"
 
-#: widgets/fancytabwidget.cpp:439
+#: widgets/fancytabwidget.cpp:440
 msgid "Plain sidebar"
 msgstr "Thanh bên đơn giản"
 
@@ -3797,7 +3797,15 @@ msgstr ""
 msgid "Plugin status:"
 msgstr "Trạng thái phần mở rộng:"
 
-#: internet/podcasts/podcastservice.cpp:132
+#: ../bin/src/ui_podcastinfodialog.h:77
+msgid "Podcast Information"
+msgstr ""
+
+#: internet/podcasts/podcastservice.cpp:437
+msgid "Podcast information"
+msgstr ""
+
+#: internet/podcasts/podcastservice.cpp:133
 #: ../bin/src/ui_podcastsettingspage.h:250
 msgid "Podcasts"
 msgstr "Podcast"
@@ -4712,7 +4720,7 @@ msgstr "Bỏ qua bài hát"
 msgid "Small album cover"
 msgstr "Ảnh bìa nhỏ"
 
-#: widgets/fancytabwidget.cpp:438
+#: widgets/fancytabwidget.cpp:439
 msgid "Small sidebar"
 msgstr "Thanh bên nhỏ"
 
@@ -4966,7 +4974,7 @@ msgstr "Đang đồng bộ các bài hát được đánh dấu sao của Spotif
 msgid "System colors"
 msgstr "Màu hệ thống"
 
-#: widgets/fancytabwidget.cpp:440
+#: widgets/fancytabwidget.cpp:441
 msgid "Tabs on top"
 msgstr "Các thẻ ở phía trên"
 
@@ -5314,7 +5322,7 @@ msgid "Unskip track"
 msgstr "Hủy bỏ qua bài hát"
 
 #: internet/podcasts/addpodcastdialog.cpp:70
-#: internet/podcasts/podcastservice.cpp:444
+#: internet/podcasts/podcastservice.cpp:450
 msgid "Unsubscribe"
 msgstr "Hủy đăng kí"
 
@@ -5322,7 +5330,7 @@ msgstr "Hủy đăng kí"
 msgid "Upcoming Concerts"
 msgstr "Các buổi hòa nhạc sắp diễn ra"
 
-#: internet/podcasts/podcastservice.cpp:420
+#: internet/podcasts/podcastservice.cpp:421
 msgid "Update all podcasts"
 msgstr "Cập nhật tất cả podcast"
 
@@ -5334,7 +5342,7 @@ msgstr "Cập nhập thư mục thư viện đã thay đổi"
 msgid "Update the library when Clementine starts"
 msgstr "Cập nhật thư viện khi Clementine khởi động"
 
-#: internet/podcasts/podcastservice.cpp:429
+#: internet/podcasts/podcastservice.cpp:430
 msgid "Update this podcast"
 msgstr "Cập nhật podcast này"
 

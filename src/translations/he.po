@@ -14,7 +14,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2018-10-20 12:14+0000\n"
+"PO-Revision-Date: 2018-11-11 21:10+0000\n"
 "Last-Translator: hatstand <john.maguire@gmail.com>\n"
 "Language-Team: Hebrew (http://www.transifex.com/davidsansome/clementine/language/he/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -541,7 +541,7 @@ msgstr "הוספת תיקייה חדשה..."
 msgid "Add podcast"
 msgstr "הוספת פודקאסט"
 
-#: internet/podcasts/podcastservice.cpp:418 ../bin/src/ui_mainwindow.h:722
+#: internet/podcasts/podcastservice.cpp:419 ../bin/src/ui_mainwindow.h:722
 msgid "Add podcast..."
 msgstr "הוספת פודקאסט..."
 
@@ -1066,7 +1066,7 @@ msgstr "תמיכה ב־CUE sheet"
 msgid "Cancel"
 msgstr "ביטול"
 
-#: internet/podcasts/podcastservice.cpp:441
+#: internet/podcasts/podcastservice.cpp:447
 msgid "Cancel download"
 msgstr "בטל הורדה"
 
@@ -1361,7 +1361,7 @@ msgid "Configure library..."
 msgstr "הגדרת הספרייה..."
 
 #: internet/podcasts/addpodcastdialog.cpp:77
-#: internet/podcasts/podcastservice.cpp:455
+#: internet/podcasts/podcastservice.cpp:461
 msgid "Configure podcasts..."
 msgstr "הגדרת פודקאסטים..."
 
@@ -1427,7 +1427,7 @@ msgstr ""
 msgid "Copy to clipboard"
 msgstr "העתקה אל הלוח"
 
-#: library/libraryview.cpp:419 internet/podcasts/podcastservice.cpp:438
+#: library/libraryview.cpp:419 internet/podcasts/podcastservice.cpp:444
 #: ui/mainwindow.cpp:721 widgets/fileviewlist.cpp:44
 msgid "Copy to device..."
 msgstr "העתקה להתקן.."
@@ -1633,7 +1633,7 @@ msgstr "הפסקה בין אפקטים חזותיים"
 msgid "Delete"
 msgstr "מחיקה"
 
-#: internet/podcasts/podcastservice.cpp:435
+#: internet/podcasts/podcastservice.cpp:441
 msgid "Delete downloaded data"
 msgstr "מחיקת מידע שהתקבל"
 
@@ -1850,7 +1850,7 @@ msgstr ""
 msgid "Double clicking a song will..."
 msgstr "לחיצה כפולה על שיר לביצוע..."
 
-#: internet/podcasts/podcastservice.cpp:531
+#: internet/podcasts/podcastservice.cpp:543
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "Download %n episodes"
@@ -1872,8 +1872,8 @@ msgstr "חברות המאפשרת הורדה"
 msgid "Download new episodes automatically"
 msgstr "הורדת פרקים חדשים אוטומטית"
 
-#: internet/podcasts/podcastservice.cpp:293
-#: internet/podcasts/podcastservice.cpp:332
+#: internet/podcasts/podcastservice.cpp:294
+#: internet/podcasts/podcastservice.cpp:333
 msgid "Download queued"
 msgstr "ההורדה נכנסה לתור"
 
@@ -1893,7 +1893,7 @@ msgstr "הורדת האלבום הזה"
 msgid "Download this album..."
 msgstr "הורדת האלבום הזה..."
 
-#: internet/podcasts/podcastservice.cpp:533
+#: internet/podcasts/podcastservice.cpp:545
 msgid "Download this episode"
 msgstr "הורדת הפרק הזה"
 
@@ -1901,8 +1901,8 @@ msgstr "הורדת הפרק הזה"
 msgid "Download..."
 msgstr "בהורדה..."
 
-#: internet/podcasts/podcastservice.cpp:301
-#: internet/podcasts/podcastservice.cpp:341
+#: internet/podcasts/podcastservice.cpp:302
+#: internet/podcasts/podcastservice.cpp:342
 #, qt-format
 msgid "Downloading (%1%)..."
 msgstr "בהורדה (%1%)..."
@@ -2631,7 +2631,7 @@ msgstr "אין לי חשבון Magnatune"
 msgid "Icon"
 msgstr "צלמית"
 
-#: widgets/fancytabwidget.cpp:441
+#: widgets/fancytabwidget.cpp:442
 msgid "Icons on top"
 msgstr "צלמיות למעלה"
 
@@ -2886,7 +2886,7 @@ msgstr ""
 msgid "Large album cover (no details)"
 msgstr ""
 
-#: widgets/fancytabwidget.cpp:437
+#: widgets/fancytabwidget.cpp:438
 msgid "Large sidebar"
 msgstr "סרגל צד גדול"
 
@@ -3161,11 +3161,11 @@ msgstr "ידני"
 msgid "Manufacturer"
 msgstr "יצרן"
 
-#: internet/podcasts/podcastservice.cpp:450 ../bin/src/ui_organisedialog.h:259
+#: internet/podcasts/podcastservice.cpp:456 ../bin/src/ui_organisedialog.h:259
 msgid "Mark as listened"
 msgstr "סימון כהושמע"
 
-#: internet/podcasts/podcastservice.cpp:449
+#: internet/podcasts/podcastservice.cpp:455
 msgid "Mark as new"
 msgstr "סימון כחדש"
 
@@ -3714,7 +3714,7 @@ msgstr "מבצע"
 msgid "Pixel"
 msgstr "פיקסל"
 
-#: widgets/fancytabwidget.cpp:439
+#: widgets/fancytabwidget.cpp:440
 msgid "Plain sidebar"
 msgstr "סרגל צד פשוט"
 
@@ -3798,7 +3798,15 @@ msgstr ""
 msgid "Plugin status:"
 msgstr "מצב התוסף:"
 
-#: internet/podcasts/podcastservice.cpp:132
+#: ../bin/src/ui_podcastinfodialog.h:77
+msgid "Podcast Information"
+msgstr ""
+
+#: internet/podcasts/podcastservice.cpp:437
+msgid "Podcast information"
+msgstr ""
+
+#: internet/podcasts/podcastservice.cpp:133
 #: ../bin/src/ui_podcastsettingspage.h:250
 msgid "Podcasts"
 msgstr "פודקאסטים"
@@ -4713,7 +4721,7 @@ msgstr ""
 msgid "Small album cover"
 msgstr "עטיפת אלבום קטנה"
 
-#: widgets/fancytabwidget.cpp:438
+#: widgets/fancytabwidget.cpp:439
 msgid "Small sidebar"
 msgstr "סרגל צד קטן"
 
@@ -4967,7 +4975,7 @@ msgstr "השירים המסומנים בכוכב ב‏־Spotify מסונכרני
 msgid "System colors"
 msgstr "צבעי המערכת"
 
-#: widgets/fancytabwidget.cpp:440
+#: widgets/fancytabwidget.cpp:441
 msgid "Tabs on top"
 msgstr "לשוניות למעלה"
 
@@ -5315,7 +5323,7 @@ msgid "Unskip track"
 msgstr ""
 
 #: internet/podcasts/addpodcastdialog.cpp:70
-#: internet/podcasts/podcastservice.cpp:444
+#: internet/podcasts/podcastservice.cpp:450
 msgid "Unsubscribe"
 msgstr "הסרת מינוי"
 
@@ -5323,7 +5331,7 @@ msgstr "הסרת מינוי"
 msgid "Upcoming Concerts"
 msgstr "קונצרטים צפויים"
 
-#: internet/podcasts/podcastservice.cpp:420
+#: internet/podcasts/podcastservice.cpp:421
 msgid "Update all podcasts"
 msgstr "עדכון כל הפודקאסטים"
 
@@ -5335,7 +5343,7 @@ msgstr "עדכון תיקיות שהשתנו בספרייה"
 msgid "Update the library when Clementine starts"
 msgstr "עדכון הספרייה בזמן הפעלת Clementine"
 
-#: internet/podcasts/podcastservice.cpp:429
+#: internet/podcasts/podcastservice.cpp:430
 msgid "Update this podcast"
 msgstr "עדכון פודקאסט זה"
 

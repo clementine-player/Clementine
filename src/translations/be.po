@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2018-10-20 12:14+0000\n"
+"PO-Revision-Date: 2018-11-11 21:10+0000\n"
 "Last-Translator: hatstand <john.maguire@gmail.com>\n"
 "Language-Team: Belarusian (http://www.transifex.com/davidsansome/clementine/language/be/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -538,7 +538,7 @@ msgstr "Дадаць новы каталёг..."
 msgid "Add podcast"
 msgstr "Дадаць подкаст"
 
-#: internet/podcasts/podcastservice.cpp:418 ../bin/src/ui_mainwindow.h:722
+#: internet/podcasts/podcastservice.cpp:419 ../bin/src/ui_mainwindow.h:722
 msgid "Add podcast..."
 msgstr "Дадаць подкаст..."
 
@@ -1063,7 +1063,7 @@ msgstr "Падтрымка CUE"
 msgid "Cancel"
 msgstr "Адмена"
 
-#: internet/podcasts/podcastservice.cpp:441
+#: internet/podcasts/podcastservice.cpp:447
 msgid "Cancel download"
 msgstr ""
 
@@ -1358,7 +1358,7 @@ msgid "Configure library..."
 msgstr "Наладзіць калекцыю..."
 
 #: internet/podcasts/addpodcastdialog.cpp:77
-#: internet/podcasts/podcastservice.cpp:455
+#: internet/podcasts/podcastservice.cpp:461
 msgid "Configure podcasts..."
 msgstr "Наладзіць подкасты..."
 
@@ -1424,7 +1424,7 @@ msgstr ""
 msgid "Copy to clipboard"
 msgstr "Скапіяваць у буфэр"
 
-#: library/libraryview.cpp:419 internet/podcasts/podcastservice.cpp:438
+#: library/libraryview.cpp:419 internet/podcasts/podcastservice.cpp:444
 #: ui/mainwindow.cpp:721 widgets/fileviewlist.cpp:44
 msgid "Copy to device..."
 msgstr "Капіяваць на прыладу..."
@@ -1630,7 +1630,7 @@ msgstr "Затрымка паміж візуалізацыямі"
 msgid "Delete"
 msgstr "Выдаліць"
 
-#: internet/podcasts/podcastservice.cpp:435
+#: internet/podcasts/podcastservice.cpp:441
 msgid "Delete downloaded data"
 msgstr "Выдаліць спампаваныя дадзеныя"
 
@@ -1847,7 +1847,7 @@ msgstr ""
 msgid "Double clicking a song will..."
 msgstr "Двайны клік на песьні"
 
-#: internet/podcasts/podcastservice.cpp:531
+#: internet/podcasts/podcastservice.cpp:543
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "Download %n episodes"
@@ -1869,8 +1869,8 @@ msgstr "\"Download\" падпіска"
 msgid "Download new episodes automatically"
 msgstr "Пампаваць новыя выпускі аўтаматычна"
 
-#: internet/podcasts/podcastservice.cpp:293
-#: internet/podcasts/podcastservice.cpp:332
+#: internet/podcasts/podcastservice.cpp:294
+#: internet/podcasts/podcastservice.cpp:333
 msgid "Download queued"
 msgstr "Запампоўка даданая ў чаргу"
 
@@ -1890,7 +1890,7 @@ msgstr "Загрузіць гэты альбом"
 msgid "Download this album..."
 msgstr "Спампаваць гэты альбом..."
 
-#: internet/podcasts/podcastservice.cpp:533
+#: internet/podcasts/podcastservice.cpp:545
 msgid "Download this episode"
 msgstr "Спампаваць гэтую сэрыю"
 
@@ -1898,8 +1898,8 @@ msgstr "Спампаваць гэтую сэрыю"
 msgid "Download..."
 msgstr "Спампаваць..."
 
-#: internet/podcasts/podcastservice.cpp:301
-#: internet/podcasts/podcastservice.cpp:341
+#: internet/podcasts/podcastservice.cpp:302
+#: internet/podcasts/podcastservice.cpp:342
 #, qt-format
 msgid "Downloading (%1%)..."
 msgstr "Пампаваньне (%1%)..."
@@ -2628,7 +2628,7 @@ msgstr "У мяне няма акаўнту Magnatune"
 msgid "Icon"
 msgstr "Іконка"
 
-#: widgets/fancytabwidget.cpp:441
+#: widgets/fancytabwidget.cpp:442
 msgid "Icons on top"
 msgstr "Іконкі ўверсе"
 
@@ -2883,7 +2883,7 @@ msgstr ""
 msgid "Large album cover (no details)"
 msgstr ""
 
-#: widgets/fancytabwidget.cpp:437
+#: widgets/fancytabwidget.cpp:438
 msgid "Large sidebar"
 msgstr "Шырокая бакавая панэль"
 
@@ -3158,11 +3158,11 @@ msgstr "Самастойна"
 msgid "Manufacturer"
 msgstr "Вытворца"
 
-#: internet/podcasts/podcastservice.cpp:450 ../bin/src/ui_organisedialog.h:259
+#: internet/podcasts/podcastservice.cpp:456 ../bin/src/ui_organisedialog.h:259
 msgid "Mark as listened"
 msgstr "Пазначыць як праслуханае"
 
-#: internet/podcasts/podcastservice.cpp:449
+#: internet/podcasts/podcastservice.cpp:455
 msgid "Mark as new"
 msgstr "Пазначыць як новае"
 
@@ -3711,7 +3711,7 @@ msgstr ""
 msgid "Pixel"
 msgstr ""
 
-#: widgets/fancytabwidget.cpp:439
+#: widgets/fancytabwidget.cpp:440
 msgid "Plain sidebar"
 msgstr "Нармальная бакавая панэль"
 
@@ -3795,7 +3795,15 @@ msgstr ""
 msgid "Plugin status:"
 msgstr "Статус плагіну:"
 
-#: internet/podcasts/podcastservice.cpp:132
+#: ../bin/src/ui_podcastinfodialog.h:77
+msgid "Podcast Information"
+msgstr ""
+
+#: internet/podcasts/podcastservice.cpp:437
+msgid "Podcast information"
+msgstr ""
+
+#: internet/podcasts/podcastservice.cpp:133
 #: ../bin/src/ui_podcastsettingspage.h:250
 msgid "Podcasts"
 msgstr "Подкасты"
@@ -4710,7 +4718,7 @@ msgstr ""
 msgid "Small album cover"
 msgstr "Маленькая вокладка альбому"
 
-#: widgets/fancytabwidget.cpp:438
+#: widgets/fancytabwidget.cpp:439
 msgid "Small sidebar"
 msgstr "Вузкая бакавая панэль"
 
@@ -4964,7 +4972,7 @@ msgstr "Сынхранізацыя рэйтынгавых трэкаў Spotify"
 msgid "System colors"
 msgstr "Сыстэмныя колеры"
 
-#: widgets/fancytabwidget.cpp:440
+#: widgets/fancytabwidget.cpp:441
 msgid "Tabs on top"
 msgstr "Укладкі ўверсе"
 
@@ -5312,7 +5320,7 @@ msgid "Unskip track"
 msgstr ""
 
 #: internet/podcasts/addpodcastdialog.cpp:70
-#: internet/podcasts/podcastservice.cpp:444
+#: internet/podcasts/podcastservice.cpp:450
 msgid "Unsubscribe"
 msgstr "Адпісацца"
 
@@ -5320,7 +5328,7 @@ msgstr "Адпісацца"
 msgid "Upcoming Concerts"
 msgstr "Канцэрты, якія маюць адбыцца"
 
-#: internet/podcasts/podcastservice.cpp:420
+#: internet/podcasts/podcastservice.cpp:421
 msgid "Update all podcasts"
 msgstr "Абнавіць усе подкасты"
 
@@ -5332,7 +5340,7 @@ msgstr "Абнавіць зьмененыя тэчкі бібліятэкі"
 msgid "Update the library when Clementine starts"
 msgstr "Абнаўляць бібліятэку пры старце Clementine"
 
-#: internet/podcasts/podcastservice.cpp:429
+#: internet/podcasts/podcastservice.cpp:430
 msgid "Update this podcast"
 msgstr "Абнавіць гэты подкаст"
 

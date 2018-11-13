@@ -19,7 +19,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2018-10-20 12:14+0000\n"
+"PO-Revision-Date: 2018-11-11 21:10+0000\n"
 "Last-Translator: hatstand <john.maguire@gmail.com>\n"
 "Language-Team: Romanian (http://www.transifex.com/davidsansome/clementine/language/ro/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -546,7 +546,7 @@ msgstr "Adaugă dosar nou..."
 msgid "Add podcast"
 msgstr "Adaugă podcast"
 
-#: internet/podcasts/podcastservice.cpp:418 ../bin/src/ui_mainwindow.h:722
+#: internet/podcasts/podcastservice.cpp:419 ../bin/src/ui_mainwindow.h:722
 msgid "Add podcast..."
 msgstr "Adaugă podcast..."
 
@@ -1071,7 +1071,7 @@ msgstr "Suport jurnal CUE"
 msgid "Cancel"
 msgstr "Anulare"
 
-#: internet/podcasts/podcastservice.cpp:441
+#: internet/podcasts/podcastservice.cpp:447
 msgid "Cancel download"
 msgstr "Anulează descărcarea"
 
@@ -1366,7 +1366,7 @@ msgid "Configure library..."
 msgstr "Configurați colecția..."
 
 #: internet/podcasts/addpodcastdialog.cpp:77
-#: internet/podcasts/podcastservice.cpp:455
+#: internet/podcasts/podcastservice.cpp:461
 msgid "Configure podcasts..."
 msgstr "Configurați podcasturi..."
 
@@ -1432,7 +1432,7 @@ msgstr "Convertește fișiere fără pierdere"
 msgid "Copy to clipboard"
 msgstr "Copiază în memoria temporară"
 
-#: library/libraryview.cpp:419 internet/podcasts/podcastservice.cpp:438
+#: library/libraryview.cpp:419 internet/podcasts/podcastservice.cpp:444
 #: ui/mainwindow.cpp:721 widgets/fileviewlist.cpp:44
 msgid "Copy to device..."
 msgstr "Copiază pe dispozitiv..."
@@ -1638,7 +1638,7 @@ msgstr "Întârziere între vizualizări"
 msgid "Delete"
 msgstr "Șterge"
 
-#: internet/podcasts/podcastservice.cpp:435
+#: internet/podcasts/podcastservice.cpp:441
 msgid "Delete downloaded data"
 msgstr "Șterge datele descărcate"
 
@@ -1855,7 +1855,7 @@ msgstr "Clicul dublu pe o melodie din lista de redare va..."
 msgid "Double clicking a song will..."
 msgstr "Clicul dublu pe o melodie va..."
 
-#: internet/podcasts/podcastservice.cpp:531
+#: internet/podcasts/podcastservice.cpp:543
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "Download %n episodes"
@@ -1877,8 +1877,8 @@ msgstr "Descarcă membru"
 msgid "Download new episodes automatically"
 msgstr "Descarcă automat noile episoade"
 
-#: internet/podcasts/podcastservice.cpp:293
-#: internet/podcasts/podcastservice.cpp:332
+#: internet/podcasts/podcastservice.cpp:294
+#: internet/podcasts/podcastservice.cpp:333
 msgid "Download queued"
 msgstr "Descarcă coada"
 
@@ -1898,7 +1898,7 @@ msgstr "Descarcă acest album"
 msgid "Download this album..."
 msgstr "Descarcă acest album..."
 
-#: internet/podcasts/podcastservice.cpp:533
+#: internet/podcasts/podcastservice.cpp:545
 msgid "Download this episode"
 msgstr "Descarcă acest episod"
 
@@ -1906,8 +1906,8 @@ msgstr "Descarcă acest episod"
 msgid "Download..."
 msgstr "Descărcare..."
 
-#: internet/podcasts/podcastservice.cpp:301
-#: internet/podcasts/podcastservice.cpp:341
+#: internet/podcasts/podcastservice.cpp:302
+#: internet/podcasts/podcastservice.cpp:342
 #, qt-format
 msgid "Downloading (%1%)..."
 msgstr "Se descarcă (%1%)..."
@@ -2636,7 +2636,7 @@ msgstr "Nu am un cont Magnatune"
 msgid "Icon"
 msgstr "Pictogramă"
 
-#: widgets/fancytabwidget.cpp:441
+#: widgets/fancytabwidget.cpp:442
 msgid "Icons on top"
 msgstr "Pictograme sus"
 
@@ -2891,7 +2891,7 @@ msgstr "Copertă mare album (detalii dedesubt)"
 msgid "Large album cover (no details)"
 msgstr "Copertă mare album (fără detalii)"
 
-#: widgets/fancytabwidget.cpp:437
+#: widgets/fancytabwidget.cpp:438
 msgid "Large sidebar"
 msgstr "Bară laterală mare"
 
@@ -3166,11 +3166,11 @@ msgstr "Manual"
 msgid "Manufacturer"
 msgstr "Producător"
 
-#: internet/podcasts/podcastservice.cpp:450 ../bin/src/ui_organisedialog.h:259
+#: internet/podcasts/podcastservice.cpp:456 ../bin/src/ui_organisedialog.h:259
 msgid "Mark as listened"
 msgstr "Marchează ca ascultat"
 
-#: internet/podcasts/podcastservice.cpp:449
+#: internet/podcasts/podcastservice.cpp:455
 msgid "Mark as new"
 msgstr "Marchează ca nou"
 
@@ -3719,7 +3719,7 @@ msgstr "Interpret"
 msgid "Pixel"
 msgstr "Pixel"
 
-#: widgets/fancytabwidget.cpp:439
+#: widgets/fancytabwidget.cpp:440
 msgid "Plain sidebar"
 msgstr "Bară laterală simplă"
 
@@ -3803,7 +3803,15 @@ msgstr "Deschideți acest URL în navigatorul dumneavoastră: <a href=\"%1\">%1<
 msgid "Plugin status:"
 msgstr "Stare modul:"
 
-#: internet/podcasts/podcastservice.cpp:132
+#: ../bin/src/ui_podcastinfodialog.h:77
+msgid "Podcast Information"
+msgstr ""
+
+#: internet/podcasts/podcastservice.cpp:437
+msgid "Podcast information"
+msgstr ""
+
+#: internet/podcasts/podcastservice.cpp:133
 #: ../bin/src/ui_podcastsettingspage.h:250
 msgid "Podcasts"
 msgstr "Podcasturi"
@@ -4718,7 +4726,7 @@ msgstr "Omite piesa"
 msgid "Small album cover"
 msgstr "Copertă mică album"
 
-#: widgets/fancytabwidget.cpp:438
+#: widgets/fancytabwidget.cpp:439
 msgid "Small sidebar"
 msgstr "Bară laterală mică"
 
@@ -4972,7 +4980,7 @@ msgstr "Se sincronizează piesele cu stea Spotify"
 msgid "System colors"
 msgstr "Culori sistem"
 
-#: widgets/fancytabwidget.cpp:440
+#: widgets/fancytabwidget.cpp:441
 msgid "Tabs on top"
 msgstr "File sus"
 
@@ -5320,7 +5328,7 @@ msgid "Unskip track"
 msgstr "Nu omite piesa"
 
 #: internet/podcasts/addpodcastdialog.cpp:70
-#: internet/podcasts/podcastservice.cpp:444
+#: internet/podcasts/podcastservice.cpp:450
 msgid "Unsubscribe"
 msgstr "Dezabonare"
 
@@ -5328,7 +5336,7 @@ msgstr "Dezabonare"
 msgid "Upcoming Concerts"
 msgstr "Concerte viitoare"
 
-#: internet/podcasts/podcastservice.cpp:420
+#: internet/podcasts/podcastservice.cpp:421
 msgid "Update all podcasts"
 msgstr "Actualizează toate podcasturile"
 
@@ -5340,7 +5348,7 @@ msgstr "Actualizează dosarele modificate ale colecției"
 msgid "Update the library when Clementine starts"
 msgstr "Actualizează colecția atunci când pornește Clementine"
 
-#: internet/podcasts/podcastservice.cpp:429
+#: internet/podcasts/podcastservice.cpp:430
 msgid "Update this podcast"
 msgstr "Actualizează acest podcast"
 

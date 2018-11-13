@@ -28,7 +28,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2018-10-20 12:14+0000\n"
+"PO-Revision-Date: 2018-11-11 21:10+0000\n"
 "Last-Translator: hatstand <john.maguire@gmail.com>\n"
 "Language-Team: Indonesian (http://www.transifex.com/davidsansome/clementine/language/id/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -555,7 +555,7 @@ msgstr "Tambah folder baru..."
 msgid "Add podcast"
 msgstr "Tambah podcast"
 
-#: internet/podcasts/podcastservice.cpp:418 ../bin/src/ui_mainwindow.h:722
+#: internet/podcasts/podcastservice.cpp:419 ../bin/src/ui_mainwindow.h:722
 msgid "Add podcast..."
 msgstr "Tambah podcast..."
 
@@ -1080,7 +1080,7 @@ msgstr "Dukungan lembar CUE"
 msgid "Cancel"
 msgstr "Batal"
 
-#: internet/podcasts/podcastservice.cpp:441
+#: internet/podcasts/podcastservice.cpp:447
 msgid "Cancel download"
 msgstr "Batalkan unduhan"
 
@@ -1375,7 +1375,7 @@ msgid "Configure library..."
 msgstr "Konfigurasi pustaka..."
 
 #: internet/podcasts/addpodcastdialog.cpp:77
-#: internet/podcasts/podcastservice.cpp:455
+#: internet/podcasts/podcastservice.cpp:461
 msgid "Configure podcasts..."
 msgstr "Konfigurasi podcast..."
 
@@ -1441,7 +1441,7 @@ msgstr "Konversi berkas nirsusut"
 msgid "Copy to clipboard"
 msgstr "Salin ke papan klip"
 
-#: library/libraryview.cpp:419 internet/podcasts/podcastservice.cpp:438
+#: library/libraryview.cpp:419 internet/podcasts/podcastservice.cpp:444
 #: ui/mainwindow.cpp:721 widgets/fileviewlist.cpp:44
 msgid "Copy to device..."
 msgstr "Salin ke perangkat..."
@@ -1647,7 +1647,7 @@ msgstr "Tundaan diantara visualisasi"
 msgid "Delete"
 msgstr "Hapus"
 
-#: internet/podcasts/podcastservice.cpp:435
+#: internet/podcasts/podcastservice.cpp:441
 msgid "Delete downloaded data"
 msgstr "Hapus data yang sudah diunduh"
 
@@ -1864,7 +1864,7 @@ msgstr "Klik ganda pada lagu dalam daftar-putar akan..."
 msgid "Double clicking a song will..."
 msgstr "Klik ganda pada lagu akan..."
 
-#: internet/podcasts/podcastservice.cpp:531
+#: internet/podcasts/podcastservice.cpp:543
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "Download %n episodes"
@@ -1886,8 +1886,8 @@ msgstr "Anggota unduh"
 msgid "Download new episodes automatically"
 msgstr "Unduh episode baru secara otomatis"
 
-#: internet/podcasts/podcastservice.cpp:293
-#: internet/podcasts/podcastservice.cpp:332
+#: internet/podcasts/podcastservice.cpp:294
+#: internet/podcasts/podcastservice.cpp:333
 msgid "Download queued"
 msgstr "Antrean unduh"
 
@@ -1907,7 +1907,7 @@ msgstr "Unduh album ini"
 msgid "Download this album..."
 msgstr "Unduh album ini..."
 
-#: internet/podcasts/podcastservice.cpp:533
+#: internet/podcasts/podcastservice.cpp:545
 msgid "Download this episode"
 msgstr "Unduh episode ini"
 
@@ -1915,8 +1915,8 @@ msgstr "Unduh episode ini"
 msgid "Download..."
 msgstr "Unduh..."
 
-#: internet/podcasts/podcastservice.cpp:301
-#: internet/podcasts/podcastservice.cpp:341
+#: internet/podcasts/podcastservice.cpp:302
+#: internet/podcasts/podcastservice.cpp:342
 #, qt-format
 msgid "Downloading (%1%)..."
 msgstr "Mengunduh (%1%)..."
@@ -2645,7 +2645,7 @@ msgstr "Saya tidak memiliki akun Magnatune"
 msgid "Icon"
 msgstr "Ikon"
 
-#: widgets/fancytabwidget.cpp:441
+#: widgets/fancytabwidget.cpp:442
 msgid "Icons on top"
 msgstr "Ikon di atas"
 
@@ -2900,7 +2900,7 @@ msgstr "Sampul album besar (detail di bawah)"
 msgid "Large album cover (no details)"
 msgstr "Sampul album besar (tanpa detail)"
 
-#: widgets/fancytabwidget.cpp:437
+#: widgets/fancytabwidget.cpp:438
 msgid "Large sidebar"
 msgstr "Bilah sisi besar"
 
@@ -3175,11 +3175,11 @@ msgstr "Secara manual"
 msgid "Manufacturer"
 msgstr "Produsen"
 
-#: internet/podcasts/podcastservice.cpp:450 ../bin/src/ui_organisedialog.h:259
+#: internet/podcasts/podcastservice.cpp:456 ../bin/src/ui_organisedialog.h:259
 msgid "Mark as listened"
 msgstr "Tandai sudah didengar"
 
-#: internet/podcasts/podcastservice.cpp:449
+#: internet/podcasts/podcastservice.cpp:455
 msgid "Mark as new"
 msgstr "Tandai sebagai baru"
 
@@ -3728,7 +3728,7 @@ msgstr "Penampil"
 msgid "Pixel"
 msgstr "Piksel"
 
-#: widgets/fancytabwidget.cpp:439
+#: widgets/fancytabwidget.cpp:440
 msgid "Plain sidebar"
 msgstr "Bilah sisi polos"
 
@@ -3812,7 +3812,15 @@ msgstr ""
 msgid "Plugin status:"
 msgstr "Status plugin:"
 
-#: internet/podcasts/podcastservice.cpp:132
+#: ../bin/src/ui_podcastinfodialog.h:77
+msgid "Podcast Information"
+msgstr ""
+
+#: internet/podcasts/podcastservice.cpp:437
+msgid "Podcast information"
+msgstr ""
+
+#: internet/podcasts/podcastservice.cpp:133
 #: ../bin/src/ui_podcastsettingspage.h:250
 msgid "Podcasts"
 msgstr "Podcast"
@@ -4727,7 +4735,7 @@ msgstr "Lewati trek"
 msgid "Small album cover"
 msgstr "Sampul album kecil"
 
-#: widgets/fancytabwidget.cpp:438
+#: widgets/fancytabwidget.cpp:439
 msgid "Small sidebar"
 msgstr "Bilah sisi kecil"
 
@@ -4981,7 +4989,7 @@ msgstr "Melaraskan trek bintang Spotify"
 msgid "System colors"
 msgstr "Warna sistem"
 
-#: widgets/fancytabwidget.cpp:440
+#: widgets/fancytabwidget.cpp:441
 msgid "Tabs on top"
 msgstr "Tab di puncak"
 
@@ -5329,7 +5337,7 @@ msgid "Unskip track"
 msgstr "Taklewati trek"
 
 #: internet/podcasts/addpodcastdialog.cpp:70
-#: internet/podcasts/podcastservice.cpp:444
+#: internet/podcasts/podcastservice.cpp:450
 msgid "Unsubscribe"
 msgstr "Taklangganan"
 
@@ -5337,7 +5345,7 @@ msgstr "Taklangganan"
 msgid "Upcoming Concerts"
 msgstr "Konser Mendatang"
 
-#: internet/podcasts/podcastservice.cpp:420
+#: internet/podcasts/podcastservice.cpp:421
 msgid "Update all podcasts"
 msgstr "Perbarui semua podcast"
 
@@ -5349,7 +5357,7 @@ msgstr "Perbarui perubahan folder pustaka "
 msgid "Update the library when Clementine starts"
 msgstr "Perbarui pustaka ketika memulai Clementine"
 
-#: internet/podcasts/podcastservice.cpp:429
+#: internet/podcasts/podcastservice.cpp:430
 msgid "Update this podcast"
 msgstr "Perbarui podcast ini"
 

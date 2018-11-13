@@ -43,8 +43,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2018-11-01 07:44+0000\n"
-"Last-Translator: meda <ademcal@yahoo.com>\n"
+"PO-Revision-Date: 2018-11-11 21:10+0000\n"
+"Last-Translator: hatstand <john.maguire@gmail.com>\n"
 "Language-Team: Turkish (Turkey) (http://www.transifex.com/davidsansome/clementine/language/tr_TR/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -570,7 +570,7 @@ msgstr "Yeni klasör ekle..."
 msgid "Add podcast"
 msgstr "Podcast ekle"
 
-#: internet/podcasts/podcastservice.cpp:418 ../bin/src/ui_mainwindow.h:722
+#: internet/podcasts/podcastservice.cpp:419 ../bin/src/ui_mainwindow.h:722
 msgid "Add podcast..."
 msgstr "Podcast ekle..."
 
@@ -1095,7 +1095,7 @@ msgstr "CUE desteği"
 msgid "Cancel"
 msgstr "İptal et"
 
-#: internet/podcasts/podcastservice.cpp:441
+#: internet/podcasts/podcastservice.cpp:447
 msgid "Cancel download"
 msgstr "İndirmeyi iptal et"
 
@@ -1390,7 +1390,7 @@ msgid "Configure library..."
 msgstr "Kütüphaneyi düzenle..."
 
 #: internet/podcasts/addpodcastdialog.cpp:77
-#: internet/podcasts/podcastservice.cpp:455
+#: internet/podcasts/podcastservice.cpp:461
 msgid "Configure podcasts..."
 msgstr "Podcastları ayarla..."
 
@@ -1456,7 +1456,7 @@ msgstr "Kayıpsız dosyaları dönüştür"
 msgid "Copy to clipboard"
 msgstr "Panoya kopyala"
 
-#: library/libraryview.cpp:419 internet/podcasts/podcastservice.cpp:438
+#: library/libraryview.cpp:419 internet/podcasts/podcastservice.cpp:444
 #: ui/mainwindow.cpp:721 widgets/fileviewlist.cpp:44
 msgid "Copy to device..."
 msgstr "Aygıta kopyala..."
@@ -1662,7 +1662,7 @@ msgstr "Görselleştirmeler arasındaki gecikme"
 msgid "Delete"
 msgstr "Sil"
 
-#: internet/podcasts/podcastservice.cpp:435
+#: internet/podcasts/podcastservice.cpp:441
 msgid "Delete downloaded data"
 msgstr "İndirilmiş veriyi sil"
 
@@ -1879,7 +1879,7 @@ msgstr "Çalma listesindeki bir şarkıya çift tıklamak..."
 msgid "Double clicking a song will..."
 msgstr "Bir şarkıyı çift tıklamak..."
 
-#: internet/podcasts/podcastservice.cpp:531
+#: internet/podcasts/podcastservice.cpp:543
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "Download %n episodes"
@@ -1901,8 +1901,8 @@ msgstr "İndirme üyeliği"
 msgid "Download new episodes automatically"
 msgstr "Yeni bölümleri otomatik olarak indir"
 
-#: internet/podcasts/podcastservice.cpp:293
-#: internet/podcasts/podcastservice.cpp:332
+#: internet/podcasts/podcastservice.cpp:294
+#: internet/podcasts/podcastservice.cpp:333
 msgid "Download queued"
 msgstr "Sıradakileri indir"
 
@@ -1922,7 +1922,7 @@ msgstr "Bu albümü indir"
 msgid "Download this album..."
 msgstr "Bu albümü indirin..."
 
-#: internet/podcasts/podcastservice.cpp:533
+#: internet/podcasts/podcastservice.cpp:545
 msgid "Download this episode"
 msgstr "Bu bölümü indir"
 
@@ -1930,8 +1930,8 @@ msgstr "Bu bölümü indir"
 msgid "Download..."
 msgstr "İndir..."
 
-#: internet/podcasts/podcastservice.cpp:301
-#: internet/podcasts/podcastservice.cpp:341
+#: internet/podcasts/podcastservice.cpp:302
+#: internet/podcasts/podcastservice.cpp:342
 #, qt-format
 msgid "Downloading (%1%)..."
 msgstr "İndiriyor (%1%)..."
@@ -2660,7 +2660,7 @@ msgstr "Magnatune hesabım yok"
 msgid "Icon"
 msgstr "Simge"
 
-#: widgets/fancytabwidget.cpp:441
+#: widgets/fancytabwidget.cpp:442
 msgid "Icons on top"
 msgstr "Üstteki simgeler"
 
@@ -2915,7 +2915,7 @@ msgstr "Büyük albüm kapağı (ayrıntılar aşağıda)"
 msgid "Large album cover (no details)"
 msgstr "Büyük albüm kapağı (ayrıntı yok)"
 
-#: widgets/fancytabwidget.cpp:437
+#: widgets/fancytabwidget.cpp:438
 msgid "Large sidebar"
 msgstr "Büyük kenar çubuğu"
 
@@ -3190,11 +3190,11 @@ msgstr "El ile"
 msgid "Manufacturer"
 msgstr "Üretici"
 
-#: internet/podcasts/podcastservice.cpp:450 ../bin/src/ui_organisedialog.h:259
+#: internet/podcasts/podcastservice.cpp:456 ../bin/src/ui_organisedialog.h:259
 msgid "Mark as listened"
 msgstr "Dinlenmiş olarak işaretle"
 
-#: internet/podcasts/podcastservice.cpp:449
+#: internet/podcasts/podcastservice.cpp:455
 msgid "Mark as new"
 msgstr "Yeni olarak işaretle"
 
@@ -3743,7 +3743,7 @@ msgstr "Sanatçı"
 msgid "Pixel"
 msgstr "Piksel"
 
-#: widgets/fancytabwidget.cpp:439
+#: widgets/fancytabwidget.cpp:440
 msgid "Plain sidebar"
 msgstr "Düz kenar çubuğu"
 
@@ -3827,7 +3827,15 @@ msgstr "Lütfen bu URL'yi tarayıcınızda açın: <a href=\"%1\">%1</a>"
 msgid "Plugin status:"
 msgstr "Eklenti durumu:"
 
-#: internet/podcasts/podcastservice.cpp:132
+#: ../bin/src/ui_podcastinfodialog.h:77
+msgid "Podcast Information"
+msgstr ""
+
+#: internet/podcasts/podcastservice.cpp:437
+msgid "Podcast information"
+msgstr ""
+
+#: internet/podcasts/podcastservice.cpp:133
 #: ../bin/src/ui_podcastsettingspage.h:250
 msgid "Podcasts"
 msgstr "Podcastlar"
@@ -4742,7 +4750,7 @@ msgstr "Parçayı atla"
 msgid "Small album cover"
 msgstr "Küçük albüm kapağı"
 
-#: widgets/fancytabwidget.cpp:438
+#: widgets/fancytabwidget.cpp:439
 msgid "Small sidebar"
 msgstr "Küçük kenar çubuğu"
 
@@ -4996,7 +5004,7 @@ msgstr "Spotify yıldızlı şarkılar eşleniyor"
 msgid "System colors"
 msgstr "Sistem renkleri"
 
-#: widgets/fancytabwidget.cpp:440
+#: widgets/fancytabwidget.cpp:441
 msgid "Tabs on top"
 msgstr "Üstteki sekmeler"
 
@@ -5344,7 +5352,7 @@ msgid "Unskip track"
 msgstr "Parçayı atlama"
 
 #: internet/podcasts/addpodcastdialog.cpp:70
-#: internet/podcasts/podcastservice.cpp:444
+#: internet/podcasts/podcastservice.cpp:450
 msgid "Unsubscribe"
 msgstr "Abonelikten çık"
 
@@ -5352,7 +5360,7 @@ msgstr "Abonelikten çık"
 msgid "Upcoming Concerts"
 msgstr "Yaklaşan Konserler"
 
-#: internet/podcasts/podcastservice.cpp:420
+#: internet/podcasts/podcastservice.cpp:421
 msgid "Update all podcasts"
 msgstr "Bütün podcastları güncelle"
 
@@ -5364,7 +5372,7 @@ msgstr "Değişen kütüphane klasörlerini güncelle"
 msgid "Update the library when Clementine starts"
 msgstr "Clementine başladığında kütüphaneyi güncelle"
 
-#: internet/podcasts/podcastservice.cpp:429
+#: internet/podcasts/podcastservice.cpp:430
 msgid "Update this podcast"
 msgstr "Bu podcast'ı güncelle"
 

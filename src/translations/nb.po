@@ -12,7 +12,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2018-10-20 12:14+0000\n"
+"PO-Revision-Date: 2018-11-11 21:10+0000\n"
 "Last-Translator: hatstand <john.maguire@gmail.com>\n"
 "Language-Team: Norwegian Bokmål (http://www.transifex.com/davidsansome/clementine/language/nb/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -539,7 +539,7 @@ msgstr "Legg til mappe…"
 msgid "Add podcast"
 msgstr "Legg til nettradioopptak"
 
-#: internet/podcasts/podcastservice.cpp:418 ../bin/src/ui_mainwindow.h:722
+#: internet/podcasts/podcastservice.cpp:419 ../bin/src/ui_mainwindow.h:722
 msgid "Add podcast..."
 msgstr "Legg til nettradioopptak…"
 
@@ -1064,7 +1064,7 @@ msgstr "Støtte for CUE-filer"
 msgid "Cancel"
 msgstr "Avbryt"
 
-#: internet/podcasts/podcastservice.cpp:441
+#: internet/podcasts/podcastservice.cpp:447
 msgid "Cancel download"
 msgstr "Avbryt nedlasting"
 
@@ -1359,7 +1359,7 @@ msgid "Configure library..."
 msgstr "Sett opp bibliotek…"
 
 #: internet/podcasts/addpodcastdialog.cpp:77
-#: internet/podcasts/podcastservice.cpp:455
+#: internet/podcasts/podcastservice.cpp:461
 msgid "Configure podcasts..."
 msgstr "Sett opp nettradioopptak…"
 
@@ -1425,7 +1425,7 @@ msgstr "Konverter tapsfrie filer"
 msgid "Copy to clipboard"
 msgstr "Kopier til utklippstavla"
 
-#: library/libraryview.cpp:419 internet/podcasts/podcastservice.cpp:438
+#: library/libraryview.cpp:419 internet/podcasts/podcastservice.cpp:444
 #: ui/mainwindow.cpp:721 widgets/fileviewlist.cpp:44
 msgid "Copy to device..."
 msgstr "Kopier til enhet…"
@@ -1631,7 +1631,7 @@ msgstr "Forsinkelse mellom visualiseringer"
 msgid "Delete"
 msgstr "Slett"
 
-#: internet/podcasts/podcastservice.cpp:435
+#: internet/podcasts/podcastservice.cpp:441
 msgid "Delete downloaded data"
 msgstr "Slett nedlastet data"
 
@@ -1848,7 +1848,7 @@ msgstr "Dobbeltklikking på vilkårlig sang i spillelisten vil…"
 msgid "Double clicking a song will..."
 msgstr "Dobbeltklikking på en sang vil…"
 
-#: internet/podcasts/podcastservice.cpp:531
+#: internet/podcasts/podcastservice.cpp:543
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "Download %n episodes"
@@ -1870,8 +1870,8 @@ msgstr "Last ned medlemskap"
 msgid "Download new episodes automatically"
 msgstr "Last ned nye episoder automatisk"
 
-#: internet/podcasts/podcastservice.cpp:293
-#: internet/podcasts/podcastservice.cpp:332
+#: internet/podcasts/podcastservice.cpp:294
+#: internet/podcasts/podcastservice.cpp:333
 msgid "Download queued"
 msgstr "Lagt til i nedlastingskøen"
 
@@ -1891,7 +1891,7 @@ msgstr "Last ned dette albumet"
 msgid "Download this album..."
 msgstr "Last ned dette albumet…"
 
-#: internet/podcasts/podcastservice.cpp:533
+#: internet/podcasts/podcastservice.cpp:545
 msgid "Download this episode"
 msgstr "Last ned denne episoden"
 
@@ -1899,8 +1899,8 @@ msgstr "Last ned denne episoden"
 msgid "Download..."
 msgstr "Last ned…"
 
-#: internet/podcasts/podcastservice.cpp:301
-#: internet/podcasts/podcastservice.cpp:341
+#: internet/podcasts/podcastservice.cpp:302
+#: internet/podcasts/podcastservice.cpp:342
 #, qt-format
 msgid "Downloading (%1%)..."
 msgstr "Laster ned (%1%)…"
@@ -2629,7 +2629,7 @@ msgstr "Jeg har ikke noen Magnatune-konto"
 msgid "Icon"
 msgstr "Ikon"
 
-#: widgets/fancytabwidget.cpp:441
+#: widgets/fancytabwidget.cpp:442
 msgid "Icons on top"
 msgstr "Ikoner øverst"
 
@@ -2884,7 +2884,7 @@ msgstr "Stort omslag (detaljer under)"
 msgid "Large album cover (no details)"
 msgstr "Stort omslag (uten detaljer)"
 
-#: widgets/fancytabwidget.cpp:437
+#: widgets/fancytabwidget.cpp:438
 msgid "Large sidebar"
 msgstr "Stort sidefelt"
 
@@ -3159,11 +3159,11 @@ msgstr "Manuelt"
 msgid "Manufacturer"
 msgstr "Fabrikant"
 
-#: internet/podcasts/podcastservice.cpp:450 ../bin/src/ui_organisedialog.h:259
+#: internet/podcasts/podcastservice.cpp:456 ../bin/src/ui_organisedialog.h:259
 msgid "Mark as listened"
 msgstr "Merk som hørt"
 
-#: internet/podcasts/podcastservice.cpp:449
+#: internet/podcasts/podcastservice.cpp:455
 msgid "Mark as new"
 msgstr "Merk som ny"
 
@@ -3712,7 +3712,7 @@ msgstr "Utøver"
 msgid "Pixel"
 msgstr "Piksel"
 
-#: widgets/fancytabwidget.cpp:439
+#: widgets/fancytabwidget.cpp:440
 msgid "Plain sidebar"
 msgstr "Enkelt sidefelt"
 
@@ -3796,7 +3796,15 @@ msgstr "Åpne denne nettadressen i nettleseren din: <a href=\"%1\">%1</a>"
 msgid "Plugin status:"
 msgstr "Programtilleggsstatus:"
 
-#: internet/podcasts/podcastservice.cpp:132
+#: ../bin/src/ui_podcastinfodialog.h:77
+msgid "Podcast Information"
+msgstr ""
+
+#: internet/podcasts/podcastservice.cpp:437
+msgid "Podcast information"
+msgstr ""
+
+#: internet/podcasts/podcastservice.cpp:133
 #: ../bin/src/ui_podcastsettingspage.h:250
 msgid "Podcasts"
 msgstr "Nettradioopptak"
@@ -4711,7 +4719,7 @@ msgstr "Hopp over spor"
 msgid "Small album cover"
 msgstr "Lite albumomslag"
 
-#: widgets/fancytabwidget.cpp:438
+#: widgets/fancytabwidget.cpp:439
 msgid "Small sidebar"
 msgstr "Lite sidefelt"
 
@@ -4965,7 +4973,7 @@ msgstr "Synkroniserer spor med stjerner mot Spotify"
 msgid "System colors"
 msgstr "Systemfarger"
 
-#: widgets/fancytabwidget.cpp:440
+#: widgets/fancytabwidget.cpp:441
 msgid "Tabs on top"
 msgstr "Faner på toppen"
 
@@ -5313,7 +5321,7 @@ msgid "Unskip track"
 msgstr "Ikke hopp over sporet"
 
 #: internet/podcasts/addpodcastdialog.cpp:70
-#: internet/podcasts/podcastservice.cpp:444
+#: internet/podcasts/podcastservice.cpp:450
 msgid "Unsubscribe"
 msgstr "Avmeld"
 
@@ -5321,7 +5329,7 @@ msgstr "Avmeld"
 msgid "Upcoming Concerts"
 msgstr "Fremtidige konserter"
 
-#: internet/podcasts/podcastservice.cpp:420
+#: internet/podcasts/podcastservice.cpp:421
 msgid "Update all podcasts"
 msgstr "Oppdater alle nettradioopptak"
 
@@ -5333,7 +5341,7 @@ msgstr "Oppdater endrede bibliotekmapper"
 msgid "Update the library when Clementine starts"
 msgstr "Oppdater biblioteket når Clementine starter"
 
-#: internet/podcasts/podcastservice.cpp:429
+#: internet/podcasts/podcastservice.cpp:430
 msgid "Update this podcast"
 msgstr "Oppdater dette nettradioopptaket"
 

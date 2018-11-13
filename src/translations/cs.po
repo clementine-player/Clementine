@@ -21,7 +21,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2018-10-20 15:33+0000\n"
+"PO-Revision-Date: 2018-11-12 06:42+0000\n"
 "Last-Translator: fri\n"
 "Language-Team: Czech (http://www.transifex.com/davidsansome/clementine/language/cs/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -548,7 +548,7 @@ msgstr "Přidat novou složku..."
 msgid "Add podcast"
 msgstr "Přidat záznam"
 
-#: internet/podcasts/podcastservice.cpp:418 ../bin/src/ui_mainwindow.h:722
+#: internet/podcasts/podcastservice.cpp:419 ../bin/src/ui_mainwindow.h:722
 msgid "Add podcast..."
 msgstr "Přidat zvukový záznam..."
 
@@ -1073,7 +1073,7 @@ msgstr "Podpora pro list CUE"
 msgid "Cancel"
 msgstr "Zrušit"
 
-#: internet/podcasts/podcastservice.cpp:441
+#: internet/podcasts/podcastservice.cpp:447
 msgid "Cancel download"
 msgstr "Zrušit stahování"
 
@@ -1368,7 +1368,7 @@ msgid "Configure library..."
 msgstr "Nastavit sbírku..."
 
 #: internet/podcasts/addpodcastdialog.cpp:77
-#: internet/podcasts/podcastservice.cpp:455
+#: internet/podcasts/podcastservice.cpp:461
 msgid "Configure podcasts..."
 msgstr "Nastavit záznamy..."
 
@@ -1434,7 +1434,7 @@ msgstr "Převést soubory v bezztrátovém formátu"
 msgid "Copy to clipboard"
 msgstr "Kopírovat do schránky"
 
-#: library/libraryview.cpp:419 internet/podcasts/podcastservice.cpp:438
+#: library/libraryview.cpp:419 internet/podcasts/podcastservice.cpp:444
 #: ui/mainwindow.cpp:721 widgets/fileviewlist.cpp:44
 msgid "Copy to device..."
 msgstr "Zkopírovat do zařízení..."
@@ -1640,7 +1640,7 @@ msgstr "Prodleva mezi vizualizacemi"
 msgid "Delete"
 msgstr "Smazat"
 
-#: internet/podcasts/podcastservice.cpp:435
+#: internet/podcasts/podcastservice.cpp:441
 msgid "Delete downloaded data"
 msgstr "Smazat stažená data"
 
@@ -1857,7 +1857,7 @@ msgstr "Dvojité klepnutí na píseň v seznamu skladeb způsobí..."
 msgid "Double clicking a song will..."
 msgstr "Dvojité klepnutí na píseň..."
 
-#: internet/podcasts/podcastservice.cpp:531
+#: internet/podcasts/podcastservice.cpp:543
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "Download %n episodes"
@@ -1879,8 +1879,8 @@ msgstr "Stáhnout členství"
 msgid "Download new episodes automatically"
 msgstr "Stáhnout nové díly automaticky"
 
-#: internet/podcasts/podcastservice.cpp:293
-#: internet/podcasts/podcastservice.cpp:332
+#: internet/podcasts/podcastservice.cpp:294
+#: internet/podcasts/podcastservice.cpp:333
 msgid "Download queued"
 msgstr "Stahování zařazeno"
 
@@ -1900,7 +1900,7 @@ msgstr "Stáhnout toto album"
 msgid "Download this album..."
 msgstr "Stáhnout toto album..."
 
-#: internet/podcasts/podcastservice.cpp:533
+#: internet/podcasts/podcastservice.cpp:545
 msgid "Download this episode"
 msgstr "Stáhnout tento díl"
 
@@ -1908,8 +1908,8 @@ msgstr "Stáhnout tento díl"
 msgid "Download..."
 msgstr "Stáhnout..."
 
-#: internet/podcasts/podcastservice.cpp:301
-#: internet/podcasts/podcastservice.cpp:341
+#: internet/podcasts/podcastservice.cpp:302
+#: internet/podcasts/podcastservice.cpp:342
 #, qt-format
 msgid "Downloading (%1%)..."
 msgstr "Stahuje se (%1%)..."
@@ -2638,7 +2638,7 @@ msgstr "U Magnatune nemám účet"
 msgid "Icon"
 msgstr "Ikona"
 
-#: widgets/fancytabwidget.cpp:441
+#: widgets/fancytabwidget.cpp:442
 msgid "Icons on top"
 msgstr "Ikony nahoře"
 
@@ -2893,7 +2893,7 @@ msgstr "Velký obal alba (podrobnosti níže)"
 msgid "Large album cover (no details)"
 msgstr "Velký obal alba (žádné podrobnosti)"
 
-#: widgets/fancytabwidget.cpp:437
+#: widgets/fancytabwidget.cpp:438
 msgid "Large sidebar"
 msgstr "Velký postranní panel"
 
@@ -3168,11 +3168,11 @@ msgstr "Ručně"
 msgid "Manufacturer"
 msgstr "Výrobce"
 
-#: internet/podcasts/podcastservice.cpp:450 ../bin/src/ui_organisedialog.h:259
+#: internet/podcasts/podcastservice.cpp:456 ../bin/src/ui_organisedialog.h:259
 msgid "Mark as listened"
 msgstr "Označit jako poslechnuté"
 
-#: internet/podcasts/podcastservice.cpp:449
+#: internet/podcasts/podcastservice.cpp:455
 msgid "Mark as new"
 msgstr "Označit jako nové"
 
@@ -3721,7 +3721,7 @@ msgstr "Účinkující"
 msgid "Pixel"
 msgstr "Pixel"
 
-#: widgets/fancytabwidget.cpp:439
+#: widgets/fancytabwidget.cpp:440
 msgid "Plain sidebar"
 msgstr "Prostý postranní panel"
 
@@ -3805,7 +3805,15 @@ msgstr "Otevřete, prosím, tuto adresu (URL) ve svém prohlížeči: <a href=\"
 msgid "Plugin status:"
 msgstr "Stav přídavného modulu:"
 
-#: internet/podcasts/podcastservice.cpp:132
+#: ../bin/src/ui_podcastinfodialog.h:77
+msgid "Podcast Information"
+msgstr "Informace o záznamu"
+
+#: internet/podcasts/podcastservice.cpp:437
+msgid "Podcast information"
+msgstr "Informace o záznamu"
+
+#: internet/podcasts/podcastservice.cpp:133
 #: ../bin/src/ui_podcastsettingspage.h:250
 msgid "Podcasts"
 msgstr "Zvukové záznamy"
@@ -4720,7 +4728,7 @@ msgstr "Přeskočit skladbu"
 msgid "Small album cover"
 msgstr "Malý obal alba"
 
-#: widgets/fancytabwidget.cpp:438
+#: widgets/fancytabwidget.cpp:439
 msgid "Small sidebar"
 msgstr "Malý postranní panel"
 
@@ -4974,7 +4982,7 @@ msgstr "Synchronizují se skladby označené hvězdičkou na Spotify"
 msgid "System colors"
 msgstr "Systémové barvy"
 
-#: widgets/fancytabwidget.cpp:440
+#: widgets/fancytabwidget.cpp:441
 msgid "Tabs on top"
 msgstr "Karty nahoře"
 
@@ -5322,7 +5330,7 @@ msgid "Unskip track"
 msgstr "Zrušit přeskočení skladby"
 
 #: internet/podcasts/addpodcastdialog.cpp:70
-#: internet/podcasts/podcastservice.cpp:444
+#: internet/podcasts/podcastservice.cpp:450
 msgid "Unsubscribe"
 msgstr "Zrušit odběr"
 
@@ -5330,7 +5338,7 @@ msgstr "Zrušit odběr"
 msgid "Upcoming Concerts"
 msgstr "Připravované koncerty"
 
-#: internet/podcasts/podcastservice.cpp:420
+#: internet/podcasts/podcastservice.cpp:421
 msgid "Update all podcasts"
 msgstr "Obnovit všechny zvukovové záznamy"
 
@@ -5342,7 +5350,7 @@ msgstr "Obnovit změněné složky sbírky"
 msgid "Update the library when Clementine starts"
 msgstr "Při spuštění Clementine obnovit hudební sbírku"
 
-#: internet/podcasts/podcastservice.cpp:429
+#: internet/podcasts/podcastservice.cpp:430
 msgid "Update this podcast"
 msgstr "Obnovit tento zvukový záznam"
 
