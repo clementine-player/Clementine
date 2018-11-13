@@ -263,6 +263,7 @@ set(SOURCES
   internet/podcasts/addpodcastbyurl.cpp
   internet/podcasts/addpodcastdialog.cpp
   internet/podcasts/addpodcastpage.cpp
+  internet/podcasts/episodeinfowidget.cpp
   internet/podcasts/fixedopmlpage.cpp
   internet/podcasts/gpoddersearchpage.cpp
   internet/podcasts/gpoddersync.cpp
@@ -560,6 +561,7 @@ set(HEADERS
   internet/podcasts/addpodcastbyurl.h
   internet/podcasts/addpodcastdialog.h
   internet/podcasts/addpodcastpage.h
+  internet/podcasts/episodeinfowidget.h
   internet/podcasts/fixedopmlpage.h
   internet/podcasts/gpoddersearchpage.h
   internet/podcasts/gpoddersync.h
@@ -715,6 +717,7 @@ set(UI
 
   internet/podcasts/addpodcastbyurl.ui
   internet/podcasts/addpodcastdialog.ui
+  internet/podcasts/episodeinfowidget.ui
   internet/podcasts/gpoddersearchpage.ui
   internet/podcasts/itunessearchpage.ui
   internet/podcasts/podcastinfodialog.ui
