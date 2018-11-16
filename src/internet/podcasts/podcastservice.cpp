@@ -711,7 +711,7 @@ void PodcastService::PodcastInfo() {
     return;
   }
   const Podcast podcast =
-    selected_podcasts_[0].data(Role_Podcast).value<Podcast>();
+      selected_podcasts_[0].data(Role_Podcast).value<Podcast>();
   podcast_info_dialog_.reset(new PodcastInfoDialog(app_));
 
   if (selected_episodes_.count() == 1) {

@@ -43,4 +43,4 @@ class EpisodeInfoWidget : public QWidget {
   PodcastEpisode episode_;
 };
 
-#endif // INTERNET_PODCASTS_EPISODEINFOWIDGET_H_
+#endif  // INTERNET_PODCASTS_EPISODEINFOWIDGET_H_

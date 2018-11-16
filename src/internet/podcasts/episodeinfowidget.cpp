@@ -15,25 +15,20 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "core/utilities.h"
 #include "episodeinfowidget.h"
 #include "ui_episodeinfowidget.h"
-#include "core/utilities.h"
 
 #include <QTime>
 
 EpisodeInfoWidget::EpisodeInfoWidget(QWidget* parent)
-    : QWidget(parent),
-      ui_(new Ui_EpisodeInfoWidget),
-      app_(nullptr)
-{
+    : QWidget(parent), ui_(new Ui_EpisodeInfoWidget), app_(nullptr) {
   ui_->setupUi(this);
 }
 
 EpisodeInfoWidget::~EpisodeInfoWidget() { delete ui_; }
 
-void EpisodeInfoWidget::SetApplication(Application* app) {
-  app_ = app;
-}
+void EpisodeInfoWidget::SetApplication(Application* app) { app_ = app; }
 
 void EpisodeInfoWidget::SetEpisode(const PodcastEpisode& episode) {
   episode_ = episode;
