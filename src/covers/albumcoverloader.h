@@ -21,8 +21,8 @@
 #ifndef COVERS_ALBUMCOVERLOADER_H_
 #define COVERS_ALBUMCOVERLOADER_H_
 
-#include "config.h"
 #include "albumcoverloaderoptions.h"
+#include "config.h"
 #include "core/song.h"
 
 #include <QImage>

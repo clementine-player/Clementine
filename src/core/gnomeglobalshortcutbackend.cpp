@@ -18,10 +18,10 @@
 */
 
 #include "config.h"
-#include "gnomeglobalshortcutbackend.h"
-#include "globalshortcuts.h"
 #include "core/closure.h"
 #include "core/logging.h"
+#include "globalshortcuts.h"
+#include "gnomeglobalshortcutbackend.h"
 
 #ifdef HAVE_DBUS
 #include <dbus/gnomesettingsdaemon.h>
