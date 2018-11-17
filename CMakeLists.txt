@@ -48,16 +48,12 @@ find_package(Gettext REQUIRED)
 find_package(PkgConfig REQUIRED)
 find_package(Protobuf REQUIRED)
 find_package(FFTW3)
+find_package(ALSA)
 if(LINUX)
-  find_package(ALSA REQUIRED)
   pkg_check_modules(DBUS REQUIRED dbus-1)
 else(LINUX)
-  find_package(ALSA)
   pkg_check_modules(DBUS dbus-1)
 endif(LINUX)
-if(ALSA_FOUND)
-  set(HAVE_ALSA ON)
-endif()
 if (NOT APPLE)
   find_package(X11)
 endif()
@@ -327,6 +323,10 @@ optional_component(MOODBAR ON "Moodbar support"
 optional_component(SPARKLE ON "Sparkle integration"
   DEPENDS "Mac OS X" APPLE
   DEPENDS "Sparkle" SPARKLE
+)
+
+optional_component(ALSA ON "ALSA integration"
+  DEPENDS "ALSA" ALSA_FOUND
 )
 
 optional_component(LIBPULSE ON "Pulse audio integration"
