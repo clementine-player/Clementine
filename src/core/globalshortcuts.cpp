@@ -19,6 +19,7 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "config.h"
 #include "globalshortcuts.h"
 #include "gnomeglobalshortcutbackend.h"
 #include "macglobalshortcutbackend.h"
@@ -31,7 +32,7 @@
 #include <QSignalMapper>
 #include <QtDebug>
 
-#ifdef QT_DBUS_LIB
+#ifdef HAVE_DBUS
 #include <QtDBus>
 #endif
 
@@ -147,10 +148,10 @@ GlobalShortcuts::Shortcut GlobalShortcuts::AddShortcut(
 }
 
 bool GlobalShortcuts::IsGsdAvailable() const {
-#ifdef QT_DBUS_LIB
+#ifdef HAVE_DBUS
   return QDBusConnection::sessionBus().interface()->isServiceRegistered(
       GnomeGlobalShortcutBackend::kGsdService);
-#else  // QT_DBUS_LIB
+#else  // HAVE_DBUS
   return false;
 #endif
 }

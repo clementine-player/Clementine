@@ -9,15 +9,52 @@ URL:            http://www.clementine-player.org/
 Source0:        %{name}-@CLEMENTINE_VERSION_SPARKLE@.tar.xz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
-BuildRequires:  desktop-file-utils liblastfm-devel taglib-devel gettext
-BuildRequires:  qt5-devel boost-devel gcc-c++ glew-devel libgpod-devel
-BuildRequires:  cmake gstreamer1-devel gstreamer1-plugins-base-devel
-BuildRequires:  libmtp-devel protobuf-devel protobuf-compiler libcdio-devel
-BuildRequires:  qjson-devel cryptopp-devel fftw-devel sparsehash-devel
-BuildRequires:  sqlite-devel pulseaudio-libs-devel libechonest-devel
-BuildRequires:  libchromaprint-devel
-
-Requires:       libgpod protobuf-lite libcdio qjson sqlite
+BuildRequires:  cmake
+BuildRequires:  make
+BuildRequires:  git
+BuildRequires:  gettext
+BuildRequires:  gcc-c++
+BuildRequires:  boost-devel
+BuildRequires:  sparsehash-devel
+BuildRequires:  liblastfm-qt5-devel
+BuildRequires:  desktop-file-utils
+BuildRequires:  hicolor-icon-theme
+BuildRequires:  libappstream-glib
+BuildRequires:  pkgconfig
+BuildRequires:  pkgconfig(glib-2.0)
+BuildRequires:  pkgconfig(gio-2.0)
+BuildRequires:  pkgconfig(gio-unix-2.0)
+BuildRequires:  pkgconfig(gthread-2.0)
+BuildRequires:  pkgconfig(dbus-1)
+BuildRequires:  pkgconfig(alsa)
+BuildRequires:  pkgconfig(protobuf)
+BuildRequires:  pkgconfig(sqlite3) >= 3.7
+BuildRequires:  pkgconfig(taglib) >= 1.11
+BuildRequires:  pkgconfig(glew)
+BuildRequires:  pkgconfig(cryptopp)
+BuildRequires:  pkgconfig(Qt5Core)
+BuildRequires:  pkgconfig(Qt5Gui)
+BuildRequires:  pkgconfig(Qt5Widgets)
+BuildRequires:  pkgconfig(Qt5Concurrent)
+BuildRequires:  pkgconfig(Qt5Sql)
+BuildRequires:  pkgconfig(Qt5Network)
+BuildRequires:  pkgconfig(Qt5Xml)
+BuildRequires:  pkgconfig(Qt5X11Extras)
+BuildRequires:  pkgconfig(Qt5OpenGL)
+BuildRequires:  pkgconfig(Qt5DBus)
+BuildRequires:  pkgconfig(Qt5Test)
+BuildRequires:  pkgconfig(gstreamer-1.0)
+BuildRequires:  pkgconfig(gstreamer-app-1.0)
+BuildRequires:  pkgconfig(gstreamer-audio-1.0)
+BuildRequires:  pkgconfig(gstreamer-base-1.0)
+BuildRequires:  pkgconfig(gstreamer-tag-1.0)
+BuildRequires:  pkgconfig(libpulse)
+BuildRequires:  pkgconfig(libcdio)
+BuildRequires:  pkgconfig(libchromaprint)
+BuildRequires:  pkgconfig(libgpod-1.0)
+BuildRequires:  pkgconfig(libmtp)
+BuildRequires:  pkgconfig(libnotify)
+BuildRequires:  pkgconfig(libudf)
 
 # GStreamer codec dependencies
 Requires:       gstreamer1-plugins-ugly
@@ -80,7 +117,8 @@ make clean
 %doc
 %{_bindir}/clementine
 %{_bindir}/clementine-tagreader
-%{_datadir}/appdata/clementine.appdata.xml
+%dir %{_datadir}/metainfo/
+%{_datadir}/metainfo/clementine.appdata.xml
 %{_datadir}/applications/clementine.desktop
 %{_datadir}/clementine/projectm-presets
 %{_datadir}/kservices5/clementine-itms.protocol

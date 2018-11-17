@@ -54,14 +54,12 @@ static PProcessIdToSessionId pProcessIdToSessionId = 0;
 #include <time.h>
 #endif
 
-namespace QtLP_Private {
 #include "qtlockedfile.cpp"
 #if defined(Q_OS_WIN)
 #include "qtlockedfile_win.cpp"
 #else
 #include "qtlockedfile_unix.cpp"
 #endif
-}
 
 const char* QtLocalPeer::ack = "ack";
 
@@ -113,7 +111,7 @@ bool QtLocalPeer::isClient()
     if (lockFile.isLocked())
         return false;
 
-    if (!lockFile.lock(QtLP_Private::QtLockedFile::WriteLock, false))
+    if (!lockFile.lock(QtLockedFile::WriteLock, false))
         return true;
 
     bool res = server->listen(socketName);
@@ -149,7 +147,7 @@ bool QtLocalPeer::sendMessage(const QString &message, int timeout)
         Sleep(DWORD(ms));
 #else
         struct timespec ts = { ms / 1000, (ms % 1000) * 1000 * 1000 };
-        nanosleep(&ts, NULL);
+        nanosleep(&ts, nullptr);
 #endif
     }
     if (!connOk)

@@ -3,9 +3,8 @@ set( MYGPO_QT_VERSION_MAJOR "1" )
 set( MYGPO_QT_VERSION_MINOR "0" )
 set( MYGPO_QT_VERSION_PATCH "9" )
 configure_file( Version.h.in ${CMAKE_CURRENT_BINARY_DIR}/Version.h )
-include_directories("${QJSON_INCLUDEDIR}/qjson")
 
-include_directories( ${QJSON_INCLUDE_DIR} ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR} )
+include_directories( ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR} )
 
 set ( LIBMYGPO_QT_SRC
         Config.cpp
@@ -86,4 +85,4 @@ QT_WRAP_CPP(LIBMYGPO_QT_MOC_SRC ${LIBMYGPO_QT_MOC_H} )
 add_library( ${MYGPO_QT_TARGET_NAME} STATIC ${LIBMYGPO_QT_SRC} ${LIBMYGPO_QT_MOC_SRC} )
 
 target_link_libraries( ${MYGPO_QT_TARGET_NAME} ${QJSON_LIBRARIES} ${QT_QTCORE_LIBRARY} ${QT_QTNETWORK_LIBRARY}  )
-qt5_use_modules( ${MYGPO_QT_TARGET_NAME} Core Network )
+target_link_libraries( ${MYGPO_QT_TARGET_NAME} Qt5::Core Qt5::Network )

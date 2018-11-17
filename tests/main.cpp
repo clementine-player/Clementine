@@ -23,7 +23,7 @@
 #include "metatypes_env.h"
 #include "resources_env.h"
 
-#ifndef Q_WS_X11
+#if defined(Q_OS_WIN32) || defined(Q_OS_DARWIN)
 # include <QtPlugin>
   Q_IMPORT_PLUGIN(QSQLiteDriverPlugin)
 #endif

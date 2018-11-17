@@ -12,9 +12,6 @@ endif(BUILD_WERROR)
 
 include_directories(${CMAKE_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR} ${CMAKE_CURRENT_SOURCE_DIR})
 include_directories(../3rdparty/gmock/gtest/include)
-if(WIN32)
-  include_directories(../3rdparty/qtwin)
-endif(WIN32)
 
 # Activate fast QString concatenation
 add_definitions(-DQT_USE_QSTRINGBUILDER)
@@ -33,7 +30,7 @@ include_directories(${SHA2_INCLUDE_DIRS})
 include_directories(${CHROMAPRINT_INCLUDE_DIRS})
 include_directories(${MYGPOQT5_INCLUDE_DIRS})
 
-find_package(OpenGL)
+find_package(OpenGL REQUIRED)
 include_directories(${OPENGL_INCLUDE_DIR})
 
 if(HAVE_LIBLASTFM)
@@ -49,12 +46,17 @@ include_directories(${CMAKE_SOURCE_DIR}/ext/libclementine-tagreader)
 include_directories(${CMAKE_BINARY_DIR}/ext/libclementine-tagreader)
 include_directories(${CMAKE_SOURCE_DIR}/ext/libclementine-remote)
 include_directories(${CMAKE_BINARY_DIR}/ext/libclementine-remote)
-include_directories(${CMAKE_SOURCE_DIR}/ext/libclementine-spotifyblob)
-include_directories(${CMAKE_BINARY_DIR}/ext/libclementine-spotifyblob)
+if(HAVE_SPOTIFY)
+  include_directories(${CMAKE_SOURCE_DIR}/ext/libclementine-spotifyblob)
+  include_directories(${CMAKE_BINARY_DIR}/ext/libclementine-spotifyblob)
+endif(HAVE_SPOTIFY)
 
 cmake_policy(SET CMP0011 NEW)
 include(../cmake/ParseArguments.cmake)
-include(../cmake/Translations.cmake)
+
+if(HAVE_TRANSLATIONS)
+  include(../cmake/Translations.cmake)
+endif(HAVE_TRANSLATIONS)
 
 set(SOURCES
   analyzers/analyzerbase.cpp
@@ -148,7 +150,6 @@ set(SOURCES
   globalsearch/simplesearchprovider.cpp
   globalsearch/somafmsearchprovider.cpp
   globalsearch/intergalacticfmsearchprovider.cpp
-  globalsearch/spotifysearchprovider.cpp
   globalsearch/suggestionwidget.cpp
   globalsearch/urlsearchprovider.cpp
 
@@ -185,9 +186,6 @@ set(SOURCES
   internet/somafm/somafmurlhandler.cpp
   internet/intergalacticfm/intergalacticfmservice.cpp
   internet/intergalacticfm/intergalacticfmurlhandler.cpp
-  internet/spotify/spotifyserver.cpp
-  internet/spotify/spotifyservice.cpp
-  internet/spotify/spotifysettingspage.cpp
   internet/subsonic/subsonicservice.cpp
   internet/subsonic/subsonicsettingspage.cpp
   internet/subsonic/subsonicurlhandler.cpp
@@ -303,7 +301,6 @@ set(SOURCES
   songinfo/songkickconcerts.cpp
   songinfo/songkickconcertwidget.cpp
   songinfo/songplaystats.cpp
-  songinfo/spotifyimages.cpp
   songinfo/streamdiscoverer.cpp
   songinfo/taglyricsinfoprovider.cpp
   songinfo/ultimatelyricslyric.cpp
@@ -459,7 +456,6 @@ set(HEADERS
   globalsearch/globalsearchview.h
   globalsearch/searchprovider.h
   globalsearch/simplesearchprovider.h
-  globalsearch/spotifysearchprovider.h
   globalsearch/suggestionwidget.h
 
   internet/core/cloudfileservice.h
@@ -492,9 +488,6 @@ set(HEADERS
   internet/somafm/somafmurlhandler.h
   internet/intergalacticfm/intergalacticfmservice.h
   internet/intergalacticfm/intergalacticfmurlhandler.h
-  internet/spotify/spotifyserver.h
-  internet/spotify/spotifyservice.h
-  internet/spotify/spotifysettingspage.h
   internet/subsonic/subsonicservice.h
   internet/subsonic/subsonicsettingspage.h
   internet/subsonic/subsonicurlhandler.h
@@ -596,7 +589,6 @@ set(HEADERS
   songinfo/songkickconcerts.h
   songinfo/songkickconcertwidget.h
   songinfo/songplaystats.h
-  songinfo/spotifyimages.h
   songinfo/streamdiscoverer.h
   songinfo/taglyricsinfoprovider.h
   songinfo/ultimatelyricslyric.h
@@ -693,7 +685,6 @@ set(UI
   internet/magnatune/magnatunedownloaddialog.ui
   internet/magnatune/magnatunesettingspage.ui
   internet/core/searchboxwidget.ui
-  internet/spotify/spotifysettingspage.ui
   internet/subsonic/subsonicsettingspage.ui
 
   library/groupbydialog.ui
@@ -780,22 +771,24 @@ set(RESOURCES
 
 set(OTHER_SOURCES)
 
-set(LINGUAS "All" CACHE STRING "A space-seperated list of translations to compile in to Clementine, or \"None\".")
-if (LINGUAS STREQUAL "All")
-  # build LANGUAGES from all existing .po files
-  file(GLOB pofiles translations/*.po)
-  foreach(pofile ${pofiles})
-    get_filename_component(lang ${pofile} NAME_WE)
-    list(APPEND LANGUAGES ${lang})
-  endforeach(pofile)
-else (LINGUAS STREQUAL "All")
-  if (NOT LINGUAS OR LINGUAS STREQUAL "None")
-    set (LANGUAGES "")
-  else (NOT LINGUAS OR LINGUAS STREQUAL "None")
-    string(REGEX MATCHALL [a-zA-Z_@]+
+if (HAVE_TRANSLATIONS)
+  set(LINGUAS "All" CACHE STRING "A space-seperated list of translations to compile in to Clementine, or \"None\".")
+  if (LINGUAS STREQUAL "All")
+    # build LANGUAGES from all existing .po files
+    file(GLOB pofiles translations/*.po)
+    foreach(pofile ${pofiles})
+      get_filename_component(lang ${pofile} NAME_WE)
+      list(APPEND LANGUAGES ${lang})
+    endforeach(pofile)
+  else (LINGUAS STREQUAL "All")
+    if (NOT LINGUAS OR LINGUAS STREQUAL "None")
+      set (LANGUAGES "")
+    else (NOT LINGUAS OR LINGUAS STREQUAL "None")
+      string(REGEX MATCHALL [a-zA-Z_@]+
            LANGUAGES ${LINGUAS})
-  endif (NOT LINGUAS OR LINGUAS STREQUAL "None")
-endif (LINGUAS STREQUAL "All")
+    endif (NOT LINGUAS OR LINGUAS STREQUAL "None")
+  endif (LINGUAS STREQUAL "All")
+endif(HAVE_TRANSLATIONS)
 
 option(USE_INSTALL_PREFIX "Look for data in CMAKE_INSTALL_PREFIX" ON)
 
@@ -838,15 +831,34 @@ optional_source(HAVE_LIBLASTFM
     internet/lastfm/lastfmsettingspage.ui
 )
 
-
-optional_source(HAVE_SPOTIFY_DOWNLOADER
+# Spotify support
+optional_source(HAVE_SPOTIFY
   SOURCES
-    internet/spotify/spotifyblobdownloader.cpp
+    internet/spotify/spotifyserver.cpp
+    internet/spotify/spotifyservice.cpp
+    internet/spotify/spotifysettingspage.cpp
+    globalsearch/spotifysearchprovider.cpp
+    songinfo/spotifyimages.cpp
   HEADERS
-    internet/spotify/spotifyblobdownloader.h
-  INCLUDE_DIRECTORIES
-    ${CRYPTOPP_INCLUDE_DIRS}
+    globalsearch/spotifysearchprovider.h
+    internet/spotify/spotifyserver.h
+    internet/spotify/spotifyservice.h
+    internet/spotify/spotifysettingspage.h
+    songinfo/spotifyimages.h
+  UI
+    internet/spotify/spotifysettingspage.ui
 )
+
+if(HAVE_SPOTIFY)
+  optional_source(HAVE_SPOTIFY_DOWNLOADER
+    SOURCES
+      internet/spotify/spotifyblobdownloader.cpp
+    HEADERS
+      internet/spotify/spotifyblobdownloader.h
+    INCLUDE_DIRECTORIES
+      ${CRYPTOPP_INCLUDE_DIRS}
+  )
+endif(HAVE_SPOTIFY)
 
 # Platform specific - OS X
 optional_source(APPLE
@@ -889,10 +901,10 @@ optional_source(WIN32
 )
 
 # Platform specific - X11
-optional_source(LINUX SOURCES widgets/osd_x11.cpp)
+optional_source(HAVE_X11 SOURCES widgets/osd_x11.cpp)
 
-# DBUS and MPRIS - Linux specific
-if(HAVE_DBUS)
+# DBUS and MPRIS - Unix specific
+if(UNIX AND HAVE_DBUS)
   file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/dbus)
 
   # MPRIS 2.0 DBUS interfaces
@@ -997,7 +1009,7 @@ if(HAVE_DBUS)
         dbus/org.wiimotedev.deviceEvents.xml
         dbus/wiimotedev)
   endif(ENABLE_WIIMOTEDEV)
-endif(HAVE_DBUS)
+endif(UNIX AND HAVE_DBUS)
 
 optional_source(HAVE_DBUS
   SOURCES
@@ -1201,16 +1213,18 @@ qt5_wrap_cpp(MOC ${HEADERS})
 qt5_wrap_ui(UIC ${UI})
 qt5_add_resources(QRC ${RESOURCES})
 
-add_pot(POT
-  ${CMAKE_CURRENT_SOURCE_DIR}/translations/header
-  ${CMAKE_CURRENT_SOURCE_DIR}/translations/translations.pot
-  ${SOURCES} ${MOC} ${UIC} ${OTHER_SOURCES}
-  ../data/oauthsuccess.html
-)
-add_po(PO clementine_
-  LANGUAGES ${LANGUAGES}
-  DIRECTORY translations
-)
+if(HAVE_TRANSLATIONS)
+  add_pot(POT
+    ${CMAKE_CURRENT_SOURCE_DIR}/translations/header
+    ${CMAKE_CURRENT_SOURCE_DIR}/translations/translations.pot
+    ${SOURCES} ${MOC} ${UIC} ${OTHER_SOURCES}
+    ../data/oauthsuccess.html
+  )
+  add_po(PO clementine_
+    LANGUAGES ${LANGUAGES}
+    DIRECTORY translations
+  )
+endif(HAVE_TRANSLATIONS)
 
 add_library(clementine_lib STATIC
   ${SOURCES}
@@ -1223,7 +1237,6 @@ add_library(clementine_lib STATIC
 )
 
 target_link_libraries(clementine_lib
-  clementine-spotifyblob-messages
   libclementine-common
   libclementine-tagreader
   libclementine-remote
@@ -1288,6 +1301,10 @@ if(HAVE_BREAKPAD)
   endif (LINUX)
 endif(HAVE_BREAKPAD)
 
+if(HAVE_SPOTIFY)
+  target_link_libraries(clementine_lib clementine-spotifyblob-messages)
+endif(HAVE_SPOTIFY)
+
 if(HAVE_SPOTIFY_DOWNLOADER)
   target_link_libraries(clementine_lib
     ${CRYPTOPP_LIBRARIES}
@@ -1327,10 +1344,10 @@ target_link_libraries(clementine_lib qsqlite)
 
 if (WIN32)
   target_link_libraries(clementine_lib
+    protobuf
     ${ZLIB_LIBRARIES}
     ${QTSPARKLE_LIBRARIES}
     tinysvcmdns
-    qtwin
     dsound
     ${QT_QTGUI_LIBRARY}
   )
@@ -1343,7 +1360,7 @@ if (UNIX AND NOT APPLE)
   # they end up getting ignored.  This appends them to the very end of the link
   # line, ensuring they're always used.
   find_package(X11)
-  if (${CMAKE_SYSTEM_NAME} MATCHES "FreeBSD")
+  if (FREEBSD)
     target_link_libraries(clementine_lib ${X11_X11_LIB})
   else ()
     target_link_libraries(clementine_lib ${X11_X11_LIB} ${CMAKE_DL_LIBS})
@@ -1376,9 +1393,9 @@ add_executable(clementine
   main.cpp
 )
 
-if (${CMAKE_SYSTEM_NAME} MATCHES "FreeBSD")
+if (FREEBSD)
   target_link_libraries(clementine execinfo)
-endif (${CMAKE_SYSTEM_NAME} MATCHES "FreeBSD")
+endif (FREEBSD)
 
 target_link_libraries(clementine
   clementine_lib
@@ -1420,12 +1437,14 @@ if (APPLE)
                                                   WORLD_READ WORLD_EXECUTE)
   endif (HAVE_BREAKPAD)
 
-  add_custom_command(TARGET clementine
-    POST_BUILD
-    COMMAND
-    ${CMAKE_CURRENT_SOURCE_DIR}/../dist/macdeploy.py ${PROJECT_BINARY_DIR}/clementine.app -f
-    WORKING_DIRECTORY ${PROJECT_BINARY_DIR}
-  )
+  if (USE_BUNDLE)
+    add_custom_command(TARGET clementine
+      POST_BUILD
+      COMMAND
+      ${CMAKE_CURRENT_SOURCE_DIR}/../dist/macdeploy.py ${PROJECT_BINARY_DIR}/clementine.app -f
+      WORKING_DIRECTORY ${PROJECT_BINARY_DIR}
+    )
+  endif(USE_BUNDLE)
 
   add_custom_command(OUTPUT ${PROJECT_BINARY_DIR}/clementine.breakpad
     COMMAND

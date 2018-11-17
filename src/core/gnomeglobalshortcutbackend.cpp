@@ -17,13 +17,14 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "config.h"
 #include "gnomeglobalshortcutbackend.h"
 #include "globalshortcuts.h"
 #include "core/closure.h"
 #include "core/logging.h"
 
-#ifdef QT_DBUS_LIB
-#include "dbus/gnomesettingsdaemon.h"
+#ifdef HAVE_DBUS
+#include <dbus/gnomesettingsdaemon.h>
 #endif
 
 #include <QAction>
@@ -31,7 +32,7 @@
 #include <QDateTime>
 #include <QtDebug>
 
-#ifdef QT_DBUS_LIB
+#ifdef HAVE_DBUS
 #include <QtDBus>
 #endif
 
@@ -48,7 +49,7 @@ GnomeGlobalShortcutBackend::GnomeGlobalShortcutBackend(GlobalShortcuts* parent)
       is_connected_(false) {}
 
 bool GnomeGlobalShortcutBackend::DoRegister() {
-#ifdef QT_DBUS_LIB
+#ifdef HAVE_DBUS
   qLog(Debug) << "registering";
   // Check if the GSD service is available
   if (!QDBusConnection::sessionBus().interface()->isServiceRegistered(
@@ -71,7 +72,7 @@ bool GnomeGlobalShortcutBackend::DoRegister() {
              SLOT(RegisterFinished(QDBusPendingCallWatcher*)), watcher);
 
   return true;
-#else  // QT_DBUS_LIB
+#else  // HAVE_DBUS
   qLog(Warning) << "dbus not available";
   return false;
 #endif
@@ -79,7 +80,7 @@ bool GnomeGlobalShortcutBackend::DoRegister() {
 
 void GnomeGlobalShortcutBackend::RegisterFinished(
     QDBusPendingCallWatcher* watcher) {
-#ifdef QT_DBUS_LIB
+#ifdef HAVE_DBUS
   QDBusMessage reply = watcher->reply();
   watcher->deleteLater();
 
@@ -94,12 +95,12 @@ void GnomeGlobalShortcutBackend::RegisterFinished(
   is_connected_ = true;
 
   qLog(Debug) << "registered";
-#endif  // QT_DBUS_LIB
+#endif  // HAVE_DBUS
 }
 
 void GnomeGlobalShortcutBackend::DoUnregister() {
   qLog(Debug) << "unregister";
-#ifdef QT_DBUS_LIB
+#ifdef HAVE_DBUS
   // Check if the GSD service is available
   if (!QDBusConnection::sessionBus().interface()->isServiceRegistered(
            kGsdService))

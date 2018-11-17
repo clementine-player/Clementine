@@ -37,7 +37,9 @@ public:
         switch(bezelStyle) {
             case QButton::Disclosure:
             case QButton::Circular:
+#ifdef __MAC_10_7
             case QButton::Inline:
+#endif
             case QButton::RoundedDisclosure:
             case QButton::HelpButton:
                 [nsButton setTitle:@""];
@@ -55,7 +57,7 @@ public:
                 font = [NSFont fontWithName:@"Lucida Grande Bold" size:12];
                 break;
 
-#ifdef MAC_OS_X_VERSION_10_7
+#ifdef __MAC_10_7
             case QButton::Inline:
                 font = [NSFont boldSystemFontOfSize:[NSFont systemFontSizeForControlSize:NSSmallControlSize]];
                 break;
@@ -112,7 +114,7 @@ public:
                 qButton->setFixedHeight(22);
                 qButton->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Fixed);
                 break;
-#ifdef MAC_OS_X_VERSION_10_7
+#ifdef __MAC_10_7
             case QButton::Inline:
                 qButton->setMinimumWidth(10);
                 qButton->setFixedHeight(16);
@@ -130,7 +132,7 @@ public:
                 [nsButton setButtonType:NSMomentaryPushInButton];
         }
 
-        [nsButton setBezelStyle:bezelStyle];
+        [nsButton setBezelStyle:(__bridge NSBezelStyle)bezelStyle];
     }
 
     void clicked()

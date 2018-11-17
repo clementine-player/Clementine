@@ -38,6 +38,7 @@ class QDBusPendingCallWatcher;
 
 #ifdef HAVE_DBUS
 #include <QDBusArgument>
+#include <QDBusPendingCall>
 
 QDBusArgument& operator<<(QDBusArgument& arg, const QImage& image);
 const QDBusArgument& operator>>(const QDBusArgument& arg, QImage& image);
@@ -81,14 +82,12 @@ class OSD : public QObject {
 
   void ReshowCurrentSong();
 
-#ifdef HAVE_WIIMOTEDEV
   void WiiremoteActived(int id);
   void WiiremoteDeactived(int id);
   void WiiremoteConnected(int id);
   void WiiremoteDisconnected(int id);
   void WiiremoteLowBattery(int id, int live);
   void WiiremoteCriticalBattery(int id, int live);
-#endif
 
   void ShowPreview(const Behaviour type, const QString& line1,
                    const QString& line2, const Song& song);
@@ -106,7 +105,9 @@ class OSD : public QObject {
   QString ReplaceVariable(const QString& variable, const Song& song);
 
  private slots:
+#if defined(HAVE_DBUS)
   void CallFinished(QDBusPendingCallWatcher* watcher);
+#endif
   void AlbumArtLoaded(const Song& song, const QString& uri,
                       const QImage& image);
 

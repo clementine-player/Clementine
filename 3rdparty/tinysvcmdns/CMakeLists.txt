@@ -7,7 +7,7 @@ set(TINYSVCMDNS-SOURCES
 )
 
 find_library(PTHREAD
-  pthreadGC2
+  pthread
 )
 
 add_library(tinysvcmdns STATIC

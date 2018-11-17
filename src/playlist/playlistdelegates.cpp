@@ -182,7 +182,7 @@ void PlaylistDelegateBase::paint(QPainter* painter,
   }
 }
 
-QStyleOptionViewItemV4 PlaylistDelegateBase::Adjusted(
+QStyleOptionViewItem PlaylistDelegateBase::Adjusted(
     const QStyleOptionViewItem& option, const QModelIndex& index) const {
   if (!view_) return option;
 
@@ -192,7 +192,7 @@ QStyleOptionViewItemV4 PlaylistDelegateBase::Adjusted(
   if (view_->header()->logicalIndexAt(top_left) != index.column())
     return option;
 
-  QStyleOptionViewItemV4 ret(option);
+  QStyleOptionViewItem ret(option);
 
   if (index.data(Playlist::Role_IsCurrent).toBool()) {
     // Move the text in a bit on the first column for the song that's currently
@@ -320,10 +320,8 @@ void RatingItemDelegate::paint(QPainter* painter,
                                const QStyleOptionViewItem& option,
                                const QModelIndex& index) const {
   // Draw the background
-  const QStyleOptionViewItemV3* vopt =
-      qstyleoption_cast<const QStyleOptionViewItemV3*>(&option);
-  vopt->widget->style()->drawPrimitive(QStyle::PE_PanelItemViewItem, vopt,
-                                       painter, vopt->widget);
+  option.widget->style()->drawPrimitive(QStyle::PE_PanelItemViewItem, &option,
+                                       painter, option.widget);
 
   // Don't draw anything else if the user can't set the rating of this item
   if (!index.data(Playlist::Role_CanSetRating).toBool()) return;
