@@ -35,7 +35,7 @@
 #include "core/utilities.h"
 #include "internet/core/internetmodel.h"
 #ifdef HAVE_SPOTIFY
-#  include "internet/spotify/spotifyservice.h"
+#include "internet/spotify/spotifyservice.h"
 #endif
 
 AlbumCoverLoader::AlbumCoverLoader(QObject* parent)

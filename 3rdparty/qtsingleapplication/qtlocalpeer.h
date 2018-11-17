@@ -69,7 +69,7 @@ protected:
     QLocalServer* server;
     QtLockedFile lockFile;
 
-private:
+   private:
     static const char* ack;
 };
 
