@@ -22,10 +22,12 @@
 #include <QtDebug>
 
 #ifdef Q_OS_WIN32
-#define _WIN32_WINNT 0x0600
-#include <windows.h>
-#include <commctrl.h>
-#include <shobjidl.h>
+#  ifndef _WIN32_WINNT
+#    define _WIN32_WINNT 0x0600
+#  endif
+#  include <windows.h>
+#  include <commctrl.h>
+#  include <shobjidl.h>
 #endif  // Q_OS_WIN32
 
 const int Windows7ThumbBar::kIconSize = 16;

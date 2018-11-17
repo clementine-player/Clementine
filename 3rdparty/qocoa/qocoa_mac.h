@@ -20,9 +20,11 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
+#include <AppKit/NSImage.h>
 #include <Foundation/NSString.h>
 #include <QString>
 #include <QVBoxLayout>
+#include <QtMacExtras>
 #include <QMacCocoaViewContainer>
 
 static inline NSString* fromQString(const QString &string)
@@ -41,11 +43,11 @@ static inline QString toQString(NSString *string)
 
 static inline NSImage* fromQPixmap(const QPixmap &pixmap)
 {
-    CGImageRef cgImage = pixmap.toMacCGImageRef();
+    CGImageRef cgImage = QtMac::toCGImageRef(pixmap);
     return [[NSImage alloc] initWithCGImage:cgImage size:NSZeroSize];
 }
 
-static inline void setupLayout(void *cocoaView, QWidget *parent)
+static inline void setupLayout(NSView *cocoaView, QWidget *parent)
 {
     parent->setAttribute(Qt::WA_NativeWindow);
     QVBoxLayout *layout = new QVBoxLayout(parent);

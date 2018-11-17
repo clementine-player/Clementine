@@ -42,11 +42,12 @@
 
 #include <libmtp.h>
 
-#include <QtDebug>
-
-#include <QMutex>
 #include <QString>
 #include <QStringList>
+#include <QUrl>
+#include <QUrlQuery>
+#include <QMutex>
+#include <QtDebug>
 
 #ifndef kUSBSerialNumberString
 #define kUSBSerialNumberString "USB Serial Number"
@@ -118,9 +119,9 @@ void MacDeviceLister::Init() {
       for (int i = 0; i < num; ++i) {
         LIBMTP_device_entry_t device = devices[i];
         MTPDevice d;
-        d.vendor = QString::fromAscii(device.vendor);
+        d.vendor = QString::fromLatin1(device.vendor);
         d.vendor_id = device.vendor_id;
-        d.product = QString::fromAscii(device.product);
+        d.product = QString::fromLatin1(device.product);
         d.product_id = device.product_id;
         d.quirks = device.device_flags;
         sMTPDeviceList << d;
@@ -305,7 +306,7 @@ QString GetSerialForMTPDevice(io_object_t device) {
 QString FindDeviceProperty(const QString& bsd_name, CFStringRef property) {
   ScopedCFTypeRef<DASessionRef> session(DASessionCreate(kCFAllocatorDefault));
   ScopedCFTypeRef<DADiskRef> disk(DADiskCreateFromBSDName(
-      kCFAllocatorDefault, session.get(), bsd_name.toAscii().constData()));
+      kCFAllocatorDefault, session.get(), bsd_name.toLatin1().constData()));
 
   ScopedIOObject device(DADiskCopyIOMedia(disk.get()));
   QString ret = GetUSBRegistryEntryString(device.get(), property);
@@ -358,7 +359,7 @@ void MacDeviceLister::DiskAddedCallback(DADiskRef disk, void* context) {
 #ifdef HAVE_AUDIOCD
   if (kind && strcmp([kind UTF8String], kIOCDMediaClass) == 0) {
     // CD inserted.
-    QString bsd_name = QString::fromAscii(DADiskGetBSDName(disk));
+    QString bsd_name = QString::fromLatin1(DADiskGetBSDName(disk));
     me->cd_devices_ << bsd_name;
     emit me->DeviceAdded(bsd_name);
     return;
@@ -402,7 +403,7 @@ void MacDeviceLister::DiskRemovedCallback(DADiskRef disk, void* context) {
   // We cannot access the USB tree when the disk is removed but we still get
   // the BSD disk name.
 
-  QString bsd_name = QString::fromAscii(DADiskGetBSDName(disk));
+  QString bsd_name = QString::fromLatin1(DADiskGetBSDName(disk));
   if (me->cd_devices_.remove(bsd_name)) {
     emit me->DeviceRemoved(bsd_name);
     return;
@@ -579,7 +580,7 @@ void MacDeviceLister::USBDeviceAddedCallback(void* refcon, io_iterator_t it) {
                             4, 256, &data);
         if (!ret || data.at(0) != 0x28) continue;
 
-        if (QString::fromAscii(data.data() + 0x12, 3) != "MTP") {
+        if (QString::fromLatin1(data.data() + 0x12, 3) != "MTP") {
           // Not quite.
           continue;
         }
@@ -590,7 +591,7 @@ void MacDeviceLister::USBDeviceAddedCallback(void* refcon, io_iterator_t it) {
           continue;
         }
 
-        if (QString::fromAscii(data.data() + 0x12, 3) != "MTP") {
+        if (QString::fromLatin1(data.data() + 0x12, 3) != "MTP") {
           // Not quite.
           continue;
         }
@@ -671,7 +672,7 @@ QString MacDeviceLister::MakeFriendlyName(const QString& serial) {
       IsCDDevice(serial) ? *cd_devices_.find(serial) : current_devices_[serial];
   ScopedCFTypeRef<DASessionRef> session(DASessionCreate(kCFAllocatorDefault));
   ScopedCFTypeRef<DADiskRef> disk(DADiskCreateFromBSDName(
-      kCFAllocatorDefault, session.get(), bsd_name.toAscii().constData()));
+      kCFAllocatorDefault, session.get(), bsd_name.toLatin1().constData()));
 
   if (IsCDDevice(serial)) {
     scoped_nsobject<NSDictionary> properties(
@@ -700,12 +701,14 @@ QList<QUrl> MacDeviceLister::MakeDeviceUrls(const QString& serial) {
     const MTPDevice& device = mtp_devices_[serial];
     QString str;
     str.sprintf("gphoto2://usb-%d-%d/", device.bus, device.address);
+    QUrlQuery url_query;
+    url_query.addQueryItem("vendor", device.vendor);
+    url_query.addQueryItem("vendor_id", QString::number(device.vendor_id));
+    url_query.addQueryItem("product", device.product);
+    url_query.addQueryItem("product_id", QString::number(device.product_id));
+    url_query.addQueryItem("quirks", QString::number(device.quirks));
     QUrl url(str);
-    url.addQueryItem("vendor", device.vendor);
-    url.addQueryItem("vendor_id", QString::number(device.vendor_id));
-    url.addQueryItem("product", device.product);
-    url.addQueryItem("product_id", QString::number(device.product_id));
-    url.addQueryItem("quirks", QString::number(device.quirks));
+    url.setQuery(url_query);
     return QList<QUrl>() << url;
   }
 
@@ -716,7 +719,7 @@ QList<QUrl> MacDeviceLister::MakeDeviceUrls(const QString& serial) {
   QString bsd_name = current_devices_[serial];
   ScopedCFTypeRef<DASessionRef> session(DASessionCreate(kCFAllocatorDefault));
   ScopedCFTypeRef<DADiskRef> disk(DADiskCreateFromBSDName(
-      kCFAllocatorDefault, session.get(), bsd_name.toAscii().constData()));
+      kCFAllocatorDefault, session.get(), bsd_name.toLatin1().constData()));
 
   scoped_nsobject<NSDictionary> properties(
       (NSDictionary*)DADiskCopyDescription(disk.get()));
@@ -745,7 +748,7 @@ QVariantList MacDeviceLister::DeviceIcons(const QString& serial) {
   QString bsd_name = current_devices_[serial];
   ScopedCFTypeRef<DASessionRef> session(DASessionCreate(kCFAllocatorDefault));
   ScopedCFTypeRef<DADiskRef> disk(DADiskCreateFromBSDName(
-      kCFAllocatorDefault, session.get(), bsd_name.toAscii().constData()));
+      kCFAllocatorDefault, session.get(), bsd_name.toLatin1().constData()));
 
   ScopedIOObject device(DADiskCopyIOMedia(disk.get()));
   QString icon = GetIconForDevice(device.get());
@@ -788,7 +791,7 @@ quint64 MacDeviceLister::DeviceCapacity(const QString& serial) {
   QString bsd_name = current_devices_[serial];
   ScopedCFTypeRef<DASessionRef> session(DASessionCreate(kCFAllocatorDefault));
   ScopedCFTypeRef<DADiskRef> disk(DADiskCreateFromBSDName(
-      kCFAllocatorDefault, session.get(), bsd_name.toAscii().constData()));
+      kCFAllocatorDefault, session.get(), bsd_name.toLatin1().constData()));
 
   io_object_t device = DADiskCopyIOMedia(disk);
 
@@ -809,7 +812,7 @@ quint64 MacDeviceLister::DeviceFreeSpace(const QString& serial) {
   QString bsd_name = current_devices_[serial];
   ScopedCFTypeRef<DASessionRef> session(DASessionCreate(kCFAllocatorDefault));
   ScopedCFTypeRef<DADiskRef> disk(DADiskCreateFromBSDName(
-      kCFAllocatorDefault, session.get(), bsd_name.toAscii().constData()));
+      kCFAllocatorDefault, session.get(), bsd_name.toLatin1().constData()));
 
   scoped_nsobject<NSDictionary> properties(
       (NSDictionary*)DADiskCopyDescription(disk));
@@ -840,7 +843,7 @@ void MacDeviceLister::UnmountDevice(const QString& serial) {
 
   QString bsd_name = current_devices_[serial];
   ScopedCFTypeRef<DADiskRef> disk(DADiskCreateFromBSDName(
-      kCFAllocatorDefault, loop_session_, bsd_name.toAscii().constData()));
+      kCFAllocatorDefault, loop_session_, bsd_name.toLatin1().constData()));
 
   DADiskUnmount(disk, kDADiskUnmountOptionDefault, &DiskUnmountCallback, this);
 }

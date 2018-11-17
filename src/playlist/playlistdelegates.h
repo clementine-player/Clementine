@@ -63,7 +63,7 @@ class PlaylistDelegateBase : public QueuedItemDelegate {
   QSize sizeHint(const QStyleOptionViewItem& option,
                  const QModelIndex& index) const;
 
-  QStyleOptionViewItemV4 Adjusted(const QStyleOptionViewItem& option,
+  QStyleOptionViewItem Adjusted(const QStyleOptionViewItem& option,
                                   const QModelIndex& index) const;
 
   static const int kMinHeight;

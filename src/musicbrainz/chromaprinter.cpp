@@ -29,6 +29,10 @@
 #include "core/logging.h"
 #include "core/signalchecker.h"
 
+#ifndef u_int32_t
+typedef unsigned int u_int32_t;
+#endif
+
 static const int kDecodeRate = 11025;
 static const int kDecodeChannels = 1;
 static const int kPlayLengthSecs = 30;

@@ -59,7 +59,7 @@ public:
     bool unsetShortcut();
 
     static bool error;
-#ifndef Q_WS_MAC
+#ifndef Q_OS_MAC
     static int ref;
 #if QT_VERSION < QT_VERSION_CHECK(5,0,0)
     static QAbstractEventDispatcher::EventFilter prevEventFilter;
@@ -67,7 +67,7 @@ public:
 #else
     virtual bool nativeEventFilter(const QByteArray & eventType, void * message, long * result);
 #endif // QT_VERSION < QT_VERSION_CHECK(5,0,0)
-#endif // Q_WS_MAC
+#endif // Q_OS_MAC
 
     static void activateShortcut(quint32 nativeKey, quint32 nativeMods);
 

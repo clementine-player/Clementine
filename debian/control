@@ -3,41 +3,42 @@ Section: sound
 Priority: optional
 Maintainer: David Sansome <me@davidsansome.com>
 Build-Depends: debhelper (>= 7),
-               liblastfm-dev,
-               libtag1-dev,
-               libboost1.38-dev |
-               libboost1.40-dev |
-               libboost1.42-dev |
-               libboost-dev,
-               libboost-serialization1.38-dev |
-               libboost-serialization1.40-dev |
-               libboost-serialization1.42-dev |
-               libboost-serialization-dev,
-               libcdio-cdda1,
-               libchromaprint-dev,
-               libcrypto++-dev,
-               libechonest-dev,
-               libglew1.5-dev |
-               libglew-dev,
-               libqt4-dev,
-               qt4-dev-tools,
-               libqt4-opengl-dev,
+               make,
                cmake,
+               gcc,
+               protobuf-compiler,
+               libglib2.0-dev,
+               libdbus-1-dev,
+               libprotobuf-dev,
+               libboost-dev,
+               libsqlite3-dev,
+               libasound2-dev,
+               libpulse-dev,
+               libtag1-dev,
+               libqt5-dev,
+               qt5-dev-tools,
+               qtbase5-dev,
+               qtbase5-dev-tools,
+               qtbase5-private-dev,
+               libqt5x11extras5-dev,
+               libqt5opengl5-dev,
                libgstreamer1.0-dev,
                libgstreamer-plugins-base1.0-dev,
+               libcdio-dev,
                libgpod-dev,
+               libimobiledevice-dev,
+               libmtp-dev,
                libplist-dev,
                libusbmuxd-dev,
-               libmtp-dev,
-               libqjson-dev,
-               protobuf-compiler,
-               libprotobuf-dev,
+               libchromaprint-dev,
+               liblastfm5-dev,
+               libcrypto++-dev,
+               libglew-dev,
                libfftw3-dev,
                libsparsehash-dev,
-               libsqlite3-dev,
-               libpulse-dev,
-               libmygpo-qt-dev (>= 1.0.7)
-Standards-Version: 3.8.1
+               libmygpo-qt-dev (>= 1.0.7),
+               libprojectm-dev (>= 2.0.1+dfsg-6)
+Standards-Version: 3.9.8
 Homepage: http://www.clementine-player.org/
 
 Package: clementine
@@ -47,6 +48,7 @@ Depends: ${shlibs:Depends}, ${misc:Depends},
          gstreamer1.0-plugins-base,
          gstreamer1.0-plugins-good,
          gstreamer1.0-plugins-ugly,
+         gstreamer1.0-alsa,
          gstreamer1.0-pulseaudio,
          libprojectm-data | projectm-data
 Description: Modern music player and library organiser inspired by Amarok 1.4

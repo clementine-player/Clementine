@@ -164,7 +164,7 @@ signals:
  private:
   void ReloadBarPixmaps();
   QList<QPixmap> LoadBarPixmap(const QString& filename);
-  void UpdateCachedCurrentRowPixmap(QStyleOptionViewItemV4 option,
+  void UpdateCachedCurrentRowPixmap(QStyleOptionViewItem option,
                                     const QModelIndex& index);
 
   void set_background_image_type(BackgroundImageType bg) {

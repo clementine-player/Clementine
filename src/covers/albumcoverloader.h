@@ -21,6 +21,7 @@
 #ifndef COVERS_ALBUMCOVERLOADER_H_
 #define COVERS_ALBUMCOVERLOADER_H_
 
+#include "config.h"
 #include "albumcoverloaderoptions.h"
 #include "core/song.h"
 
@@ -66,7 +67,9 @@ class AlbumCoverLoader : public QObject {
  protected slots:
   void ProcessTasks();
   void RemoteFetchFinished(QNetworkReply* reply);
+#ifdef HAVE_SPOTIFY
   void SpotifyImageLoaded(const QString& url, const QImage& image);
+#endif
 
  protected:
   enum State { State_TryingManual, State_TryingAuto, };

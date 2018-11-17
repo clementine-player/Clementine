@@ -39,7 +39,7 @@
 #include <QtDebug>
 
 #ifdef Q_OS_WIN32
-#include <qtsparkle/Updater>
+#include <qtsparkle-qt5/Updater>
 #endif
 
 #include "core/appearance.h"

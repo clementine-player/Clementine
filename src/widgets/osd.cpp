@@ -233,11 +233,9 @@ void OSD::ShowMessage(const QString& summary, const QString& message,
   }
 }
 
-#ifndef HAVE_DBUS
+#if !defined(HAVE_X11) && defined(HAVE_DBUS)
 void OSD::CallFinished(QDBusPendingCallWatcher*) {}
 #endif
-
-#ifdef HAVE_WIIMOTEDEV
 
 void OSD::WiiremoteActived(int id) {
   ShowMessage(QString(tr("%1: Wiimotedev module"))
@@ -276,8 +274,6 @@ void OSD::WiiremoteCriticalBattery(int id, int live) {
               tr("Wii Remote %1: critical battery (%2%) ")
                   .arg(QString::number(id), QString::number(live)));
 }
-
-#endif
 
 void OSD::ShuffleModeChanged(PlaylistSequence::ShuffleMode mode) {
   if (show_on_play_mode_change_) {

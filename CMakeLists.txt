@@ -28,20 +28,12 @@ if (CCACHE_EXECUTABLE)
   SET_PROPERTY(GLOBAL PROPERTY RULE_LAUNCH_LINK ${CCACHE_EXECUTABLE})
 endif ()
 
-if (UNIX AND NOT APPLE)
-  set(LINUX 1)
-endif (UNIX AND NOT APPLE)
-
-set(QT_MIN_VERSION 5.6.0)
-
-find_package(Qt5 ${QT_MIN_VERSION} REQUIRED COMPONENTS Core OpenGL Sql Network Xml Widgets Concurrent Test)
-find_package(X11)
-if(X11_FOUND)
-  find_package(Qt5 ${QT_MIN_VERSION} REQUIRED COMPONENTS X11Extras)
+if (${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
+  set(LINUX ON)
 endif()
-
-find_package(Qt5LinguistTools CONFIG REQUIRED)
-set(QT_LCONVERT_EXECUTABLE Qt5::lconvert)
+if (${CMAKE_SYSTEM_NAME} STREQUAL "FreeBSD")
+  set(FREEBSD ON)
+endif()
 
 if(APPLE)
   if(NOT QT_MAC_USE_COCOA)
@@ -56,9 +48,21 @@ find_package(Gettext REQUIRED)
 find_package(PkgConfig REQUIRED)
 find_package(Protobuf REQUIRED)
 find_package(FFTW3)
-find_package(ALSA)
+if(LINUX)
+  find_package(ALSA REQUIRED)
+  pkg_check_modules(DBUS REQUIRED dbus-1)
+else(LINUX)
+  find_package(ALSA)
+  pkg_check_modules(DBUS dbus-1)
+endif(LINUX)
 if(ALSA_FOUND)
   set(HAVE_ALSA ON)
+endif()
+if (NOT APPLE)
+  find_package(X11)
+endif()
+if(X11_FOUND)
+  set(HAVE_X11 ON)
 endif()
 
 find_library(PROTOBUF_STATIC_LIBRARY libprotobuf.a libprotobuf)
@@ -80,7 +84,7 @@ pkg_check_modules(LIBMTP libmtp>=1.0)
 pkg_check_modules(LIBMYGPO_QT5 libmygpo-qt5>=1.0.9)
 pkg_check_modules(LIBPULSE libpulse)
 pkg_check_modules(LIBXML libxml-2.0)
-pkg_check_modules(SPOTIFY libspotify>=12.1.45)
+pkg_check_modules(LIBSPOTIFY libspotify>=12.1.45)
 pkg_check_modules(TAGLIB taglib)
 
 if (WIN32)
@@ -93,6 +97,44 @@ find_path(LASTFM5_INCLUDE_DIRS lastfm5/ws.h)
 find_path(LASTFM51_INCLUDE_DIRS lastfm5/Track.h)
 
 find_path(SPARSEHASH_INCLUDE_DIRS google/sparsetable)
+
+# QT
+set(QT_MIN_VERSION 5.6.0)
+find_package(Qt5 ${QT_MIN_VERSION} REQUIRED COMPONENTS Core Concurrent Widgets Network Sql Xml OpenGL Test)
+if(X11_FOUND)
+  find_package(Qt5 ${QT_MIN_VERSION} REQUIRED COMPONENTS X11Extras)
+endif()
+if(DBUS_FOUND)
+  find_package(Qt5 ${QT_MIN_VERSION} REQUIRED COMPONENTS DBus)
+  get_target_property(QT_DBUSXML2CPP_EXECUTABLE Qt5::qdbusxml2cpp LOCATION)
+endif()
+if(APPLE)
+  find_package(Qt5 REQUIRED COMPONENTS MacExtras)
+endif()
+if(WIN32)
+  find_package(Qt5 REQUIRED COMPONENTS WinExtras)
+endif()
+
+set(QT_LIBRARIES Qt5::Core Qt5::Concurrent Qt5::Widgets Qt5::Network Qt5::Sql Qt5::Xml Qt5::OpenGL Qt5::Test)
+
+if(DBUS_FOUND)
+  set(QT_LIBRARIES ${QT_LIBRARIES} Qt5::DBus)
+endif()
+if(X11_FOUND)
+  set(QT_LIBRARIES ${QT_LIBRARIES} Qt5::X11Extras)
+endif()
+if(APPLE)
+  set(QT_LIBRARIES ${QT_LIBRARIES} Qt5::MacExtras)
+endif()
+if(WIN32)
+  set(QT_LIBRARIES ${QT_LIBRARIES} Qt5::WinExtras)
+endif()
+
+find_package(Qt5LinguistTools CONFIG)
+if (Qt5LinguistTools_FOUND)
+  set(QT_LCONVERT_EXECUTABLE Qt5::lconvert)
+endif()
+
 
 # Only use system taglib if it's greater than 1.11.1
 # There is a bug in version 1.11.1 corrupting Ogg files, see: https://github.com/taglib/taglib/issues/864
@@ -136,13 +178,11 @@ endif()
 
 if (APPLE)
   find_library(SPARKLE Sparkle)
-
-  find_library(SPOTIFY libspotify)
-  if (SPOTIFY)
-    set (SPOTIFY_FOUND ON)
-    set (SPOTIFY_INCLUDE_DIRS ${SPOTIFY})
-    set (SPOTIFY_LIBRARIES ${SPOTIFY})
-  endif (SPOTIFY)
+  find_library(LIBSPOTIFY libspotify)
+  if(LIBSPOTIFY_FOUND)
+    set(LIBSPOTIFY_INCLUDE_DIRS ${LIBSPOTIFY})
+    set(LIBSPOTIFY_LIBRARIES ${LIBSPOTIFY})
+  endif(LIBSPOTIFY_FOUND)
 
   add_subdirectory(3rdparty/SPMediaKeyTap)
   set(SPMEDIAKEYTAP_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/SPMediaKeyTap)
@@ -251,22 +291,31 @@ optional_component(LIBLASTFM ON "Last.fm support"
 )
 
 optional_component(DBUS ON "D-Bus support"
-  DEPENDS "Linux" LINUX
+  DEPENDS "D-Bus" DBUS_FOUND
 )
 
 optional_component(WIIMOTEDEV ON "Wiimote support"
-  DEPENDS "D-Bus support" HAVE_DBUS
+  DEPENDS "D-Bus support" DBUS_FOUND
 )
 
 optional_component(DEVICEKIT ON "Devices: DeviceKit backend"
-  DEPENDS "D-Bus support" HAVE_DBUS
+  DEPENDS "D-Bus support" DBUS_FOUND
 )
 
 optional_component(UDISKS2 ON "Devices: UDisks2 backend"
-  DEPENDS "D-Bus support" HAVE_DBUS
+  DEPENDS "D-Bus support" DBUS_FOUND
+)
+
+if (CRYPTOPP_FOUND OR HAVE_SPOTIFY_BLOB)
+  set(CRYPTOPP_OR_HAVE_SPOTIFY_BLOB ON)
+endif()
+
+optional_component(SPOTIFY ON "Spotify support"
+  DEPENDS "cryptopp or spotify blob" CRYPTOPP_OR_HAVE_SPOTIFY_BLOB
 )
 
 optional_component(SPOTIFY_BLOB ON "Spotify support: non-GPL binary helper"
+  DEPENDS "spotify support" HAVE_SPOTIFY
   DEPENDS "protobuf" PROTOBUF_FOUND PROTOBUF_PROTOC_EXECUTABLE
   DEPENDS "libspotify" SPOTIFY_FOUND
 )
@@ -286,26 +335,22 @@ optional_component(LIBPULSE ON "Pulse audio integration"
 
 optional_component(VISUALISATIONS ON "Visualisations")
 
-if(NOT HAVE_SPOTIFY_BLOB AND NOT CRYPTOPP_FOUND)
-  message(FATAL_ERROR "Either crypto++ must be available or the non-GPL Spotify "
-          "code must be compiled in")
-elseif(CRYPTOPP_FOUND)
-  set(HAVE_CRYPTOPP ON)
-  set(HAVE_SPOTIFY_DOWNLOADER ON)
+optional_component(TRANSLATIONS ON "Translations"
+  DEPENDS "gettext" GETTEXT_XGETTEXT_EXECUTABLE
+  DEPENDS "Qt5LinguistTools" Qt5LinguistTools_FOUND
+)
+
+option(USE_BUNDLE "Bundle macos/windows dependencies" ON)
+if (APPLE AND USE_BUNDLE AND NOT USE_BUNDLE_DIR)
+  set(USE_BUNDLE_DIR "../PlugIns")
 endif()
 
-# Find DBus if it's enabled
-if (HAVE_DBUS)
-  find_package(Qt5 COMPONENTS DBus)
-  get_target_property(QT_DBUSXML2CPP_EXECUTABLE Qt5::qdbusxml2cpp LOCATION)
-endif ()
-
-# We can include the Qt definitions now
-if(WIN32)
-  set(QT_LIBRARIES Qt5::Core Qt5::OpenGL Qt5::Sql Qt5::Network Qt5::Xml Qt5::Widgets Qt5::Concurrent)
-else(WIN32)
-  set(QT_LIBRARIES Qt5::Core Qt5::OpenGL Qt5::Sql Qt5::Network Qt5::Xml Qt5::Widgets Qt5::Concurrent Qt5::X11Extras Qt5::DBus)
-endif(WIN32)
+if(CRYPTOPP_FOUND)
+  set(HAVE_CRYPTOPP ON)
+  if(HAVE_SPOTIFY)
+    set(HAVE_SPOTIFY_DOWNLOADER ON)
+  endif(HAVE_SPOTIFY)
+endif(CRYPTOPP_FOUND)
 
 # Remove GLU and GL from the link line - they're not really required
 # and don't exist on my mingw toolchain
@@ -420,7 +465,6 @@ add_subdirectory(3rdparty/qocoa)
 # Subdirectories
 add_subdirectory(src)
 if (WIN32)
-  add_subdirectory(3rdparty/qtwin)
   add_subdirectory(3rdparty/tinysvcmdns)
 endif (WIN32)
 add_subdirectory(tests)
@@ -430,7 +474,9 @@ add_subdirectory(ext/libclementine-common)
 add_subdirectory(ext/libclementine-tagreader)
 add_subdirectory(ext/clementine-tagreader)
 add_subdirectory(ext/libclementine-remote)
-add_subdirectory(ext/libclementine-spotifyblob)
+if(HAVE_SPOTIFY)
+  add_subdirectory(ext/libclementine-spotifyblob)
+endif(HAVE_SPOTIFY)
 
 option(WITH_DEBIAN OFF)
 if(WITH_DEBIAN)

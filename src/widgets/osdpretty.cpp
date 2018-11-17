@@ -15,6 +15,7 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "config.h"
 #include "osdpretty.h"
 #include "ui_osdpretty.h"
 
@@ -31,12 +32,14 @@
 
 #include <QtDebug>
 
-#ifdef Q_WS_X11
+#ifdef HAVE_X11
 #include <QX11Info>
+#endif
+#ifdef Q_OS_WIN32
+# include <QtWin>
 #endif
 
 #ifdef Q_OS_WIN32
-#include "qtwin.h"
 #include <windows.h>
 #endif
 
@@ -137,7 +140,7 @@ OSDPretty::OSDPretty(Mode mode, QWidget* parent)
 OSDPretty::~OSDPretty() { delete ui_; }
 
 bool OSDPretty::IsTransparencyAvailable() {
-#ifdef Q_WS_X11
+#if defined(HAVE_X11) && (QT_VERSION >= QT_VERSION_CHECK(5, 7, 0))
   return QX11Info::isCompositingManagerRunning();
 #endif
   return true;
@@ -346,7 +349,7 @@ void OSDPretty::Reposition() {
 
 #ifdef Q_OS_WIN32
   // On windows, enable blurbehind on the masked area
-  QtWin::enableBlurBehindWindow(this, true, QRegion(mask));
+  QtWin::enableBlurBehindWindow(this, QRegion(mask));
 #endif
 }
 

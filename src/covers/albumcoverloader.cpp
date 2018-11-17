@@ -34,7 +34,9 @@
 #include "core/tagreaderclient.h"
 #include "core/utilities.h"
 #include "internet/core/internetmodel.h"
-#include "internet/spotify/spotifyservice.h"
+#ifdef HAVE_SPOTIFY
+#  include "internet/spotify/spotifyservice.h"
+#endif
 
 AlbumCoverLoader::AlbumCoverLoader(QObject* parent)
     : QObject(parent),
@@ -176,7 +178,9 @@ AlbumCoverLoader::TryLoadResult AlbumCoverLoader::TryLoadImage(
 
     remote_tasks_.insert(reply, task);
     return TryLoadResult(true, false, QImage());
-  } else if (filename.toLower().startsWith("spotify://image/")) {
+  }
+#ifdef HAVE_SPOTIFY
+  else if (filename.toLower().startsWith("spotify://image/")) {
     // HACK: we should add generic image URL handlers
     SpotifyService* spotify = InternetModel::Service<SpotifyService>();
 
@@ -196,7 +200,9 @@ AlbumCoverLoader::TryLoadResult AlbumCoverLoader::TryLoadImage(
     QMetaObject::invokeMethod(spotify, "LoadImage", Qt::QueuedConnection,
                               Q_ARG(QString, id));
     return TryLoadResult(true, false, QImage());
-  } else if (filename.isEmpty()) {
+  }
+#endif
+  else if (filename.isEmpty()) {
     // Avoid "QFSFileEngine::open: No file name specified" messages if we know that the filename is empty
     return TryLoadResult(false, false, task.options.default_output_image_);
   }
@@ -207,6 +213,7 @@ AlbumCoverLoader::TryLoadResult AlbumCoverLoader::TryLoadImage(
       image.isNull() ? task.options.default_output_image_ : image);
 }
 
+#ifdef HAVE_SPOTIFY
 void AlbumCoverLoader::SpotifyImageLoaded(const QString& id,
                                           const QImage& image) {
   if (!remote_spotify_tasks_.contains(id)) return;
@@ -216,6 +223,7 @@ void AlbumCoverLoader::SpotifyImageLoaded(const QString& id,
   emit ImageLoaded(task.id, scaled);
   emit ImageLoaded(task.id, scaled, image);
 }
+#endif
 
 void AlbumCoverLoader::RemoteFetchFinished(QNetworkReply* reply) {
   reply->deleteLater();
