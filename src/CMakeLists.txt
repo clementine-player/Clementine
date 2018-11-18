@@ -301,6 +301,7 @@ set(SOURCES
   songinfo/songkickconcerts.cpp
   songinfo/songkickconcertwidget.cpp
   songinfo/songplaystats.cpp
+  songinfo/spotifyimages.cpp
   songinfo/streamdiscoverer.cpp
   songinfo/taglyricsinfoprovider.cpp
   songinfo/ultimatelyricslyric.cpp
@@ -589,6 +590,7 @@ set(HEADERS
   songinfo/songkickconcerts.h
   songinfo/songkickconcertwidget.h
   songinfo/songplaystats.h
+  songinfo/spotifyimages.h
   songinfo/streamdiscoverer.h
   songinfo/taglyricsinfoprovider.h
   songinfo/ultimatelyricslyric.h
@@ -838,13 +840,11 @@ optional_source(HAVE_SPOTIFY
     internet/spotify/spotifyservice.cpp
     internet/spotify/spotifysettingspage.cpp
     globalsearch/spotifysearchprovider.cpp
-    songinfo/spotifyimages.cpp
   HEADERS
     globalsearch/spotifysearchprovider.h
     internet/spotify/spotifyserver.h
     internet/spotify/spotifyservice.h
     internet/spotify/spotifysettingspage.h
-    songinfo/spotifyimages.h
   UI
     internet/spotify/spotifysettingspage.ui
 )
