@@ -309,7 +309,7 @@ optional_component(SPOTIFY ON "Spotify support"
 optional_component(SPOTIFY_BLOB ON "Spotify support: non-GPL binary helper"
   DEPENDS "spotify support" HAVE_SPOTIFY
   DEPENDS "protobuf" PROTOBUF_FOUND PROTOBUF_PROTOC_EXECUTABLE
-  DEPENDS "libspotify" SPOTIFY_FOUND
+  DEPENDS "libspotify" LIBSPOTIFY_FOUND
 )
 
 optional_component(MOODBAR ON "Moodbar support"
