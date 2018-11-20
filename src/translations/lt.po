@@ -12,7 +12,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2018-11-12 21:48+0000\n"
+"PO-Revision-Date: 2018-11-17 20:29+0000\n"
 "Last-Translator: Moo\n"
 "Language-Team: Lithuanian (http://www.transifex.com/davidsansome/clementine/language/lt/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -884,7 +884,7 @@ msgstr "Garso išvestis"
 msgid "Authentication failed"
 msgstr "Atpažinimas nepavyko"
 
-#: ../bin/src/ui_podcastinfowidget.h:191
+#: ../bin/src/ui_episodeinfowidget.h:132 ../bin/src/ui_podcastinfowidget.h:191
 msgid "Author"
 msgstr "Autorius"
 
@@ -1581,6 +1581,10 @@ msgid ""
 "recover your database"
 msgstr "Aptiktas duomenų bazės pažeidimas. Norėdami gauti nurodymus kaip atkurti savo duomenų bazę, skaitykite https://github.com/clementine-player/Clementine/wiki/Database-Corruption"
 
+#: ../bin/src/ui_episodeinfowidget.h:133
+msgid "Date"
+msgstr "Data"
+
 #: playlist/playlist.cpp:1432 ../bin/src/ui_edittagdialog.h:715
 msgid "Date created"
 msgstr "Sukūrimo data"
@@ -1848,7 +1852,7 @@ msgstr "Du kartus spustelėjus dainą grojaraštyje..."
 msgid "Double clicking a song will..."
 msgstr "Du kartus spūstelėjus dainą..."
 
-#: internet/podcasts/podcastservice.cpp:543
+#: internet/podcasts/podcastservice.cpp:550
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "Download %n episodes"
@@ -1891,7 +1895,7 @@ msgstr "Atsisiųsti šį albumą"
 msgid "Download this album..."
 msgstr "Atsisiunčiamas šis albumas"
 
-#: internet/podcasts/podcastservice.cpp:545
+#: internet/podcasts/podcastservice.cpp:552
 msgid "Download this episode"
 msgstr "Atsiųsti šį epizodą"
 
@@ -1937,7 +1941,7 @@ msgstr "Dropbox"
 msgid "Dubstep"
 msgstr "Dubstep"
 
-#: ../bin/src/ui_ripcddialog.h:308
+#: ../bin/src/ui_episodeinfowidget.h:134 ../bin/src/ui_ripcddialog.h:308
 msgid "Duration"
 msgstr "Trukmė"
 
@@ -2074,6 +2078,10 @@ msgstr "Programoje įveskite šį adresą ir prisijungsite prie Clementine."
 #: ../bin/src/ui_libraryfilterwidget.h:92
 msgid "Entire collection"
 msgstr "Visa kolekcija"
+
+#: internet/podcasts/podcastservice.cpp:532
+msgid "Episode information"
+msgstr "Epizodo informacija"
 
 #: ../bin/src/ui_equalizer.h:162 ../bin/src/ui_mainwindow.h:705
 msgid "Equalizer"
@@ -2395,9 +2403,10 @@ msgstr "Pamirštant, įrenginys bus pašalintas iš šio sąrašo ir Clementine 
 #: ../bin/src/ui_libraryviewcontainer.h:58
 #: ../bin/src/ui_playlistcontainer.h:134
 #: ../bin/src/ui_playlistlistcontainer.h:126
-#: ../bin/src/ui_podcastinfowidget.h:190 ../bin/src/ui_querysearchpage.h:108
-#: ../bin/src/ui_querysortpage.h:136 ../bin/src/ui_searchpreview.h:103
-#: ../bin/src/ui_searchtermwidget.h:276 ../bin/src/ui_wizardfinishpage.h:82
+#: ../bin/src/ui_episodeinfowidget.h:131 ../bin/src/ui_podcastinfowidget.h:190
+#: ../bin/src/ui_querysearchpage.h:108 ../bin/src/ui_querysortpage.h:136
+#: ../bin/src/ui_searchpreview.h:103 ../bin/src/ui_searchtermwidget.h:276
+#: ../bin/src/ui_wizardfinishpage.h:82
 #: ../bin/src/ui_songkickconcertwidget.h:99
 #: ../bin/src/ui_transcoderoptionsaac.h:127
 #: ../bin/src/ui_transcoderoptionsflac.h:79
@@ -3796,11 +3805,13 @@ msgstr "Atverkite savo naršyklėje šį url: <a href=\"%1\">%1</a>"
 msgid "Plugin status:"
 msgstr "Plėtinio būklė:"
 
-#: ../bin/src/ui_podcastinfodialog.h:77
+#: ../bin/src/ui_podcastinfodialog.h:93
 msgid "Podcast Information"
 msgstr "Tinklalaidės informacija"
 
 #: internet/podcasts/podcastservice.cpp:437
+#: internet/podcasts/podcastservice.cpp:535
+#: internet/podcasts/podcastservice.cpp:539
 msgid "Podcast information"
 msgstr "Tinklalaidės informacija"
 

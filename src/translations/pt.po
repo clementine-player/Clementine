@@ -14,7 +14,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2018-11-12 13:15+0000\n"
+"PO-Revision-Date: 2018-11-17 16:00+0000\n"
 "Last-Translator: Sérgio Marques <smarquespt@gmail.com>\n"
 "Language-Team: Portuguese (http://www.transifex.com/davidsansome/clementine/language/pt/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -886,7 +886,7 @@ msgstr "Dispositivo áudio"
 msgid "Authentication failed"
 msgstr "Falha ao autenticar"
 
-#: ../bin/src/ui_podcastinfowidget.h:191
+#: ../bin/src/ui_episodeinfowidget.h:132 ../bin/src/ui_podcastinfowidget.h:191
 msgid "Author"
 msgstr "Autor"
 
@@ -1583,6 +1583,10 @@ msgid ""
 "recover your database"
 msgstr "Base de dados danificada. Consulte a página https://github.com/clementine-player/Clementine/wiki/Database-Corruption para obter instruções sobre como recuperar a sua base de dados"
 
+#: ../bin/src/ui_episodeinfowidget.h:133
+msgid "Date"
+msgstr "Data"
+
 #: playlist/playlist.cpp:1432 ../bin/src/ui_edittagdialog.h:715
 msgid "Date created"
 msgstr "Data de criação"
@@ -1850,7 +1854,7 @@ msgstr "Ao clicar duas vezes na faixa da lista de reprodução..."
 msgid "Double clicking a song will..."
 msgstr "Ao clicar duas vezes na faixa..."
 
-#: internet/podcasts/podcastservice.cpp:543
+#: internet/podcasts/podcastservice.cpp:550
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "Download %n episodes"
@@ -1893,7 +1897,7 @@ msgstr "Descarregar este álbum"
 msgid "Download this album..."
 msgstr "Descarregar este álbum..."
 
-#: internet/podcasts/podcastservice.cpp:545
+#: internet/podcasts/podcastservice.cpp:552
 msgid "Download this episode"
 msgstr "Descarregar este episódio"
 
@@ -1939,7 +1943,7 @@ msgstr "Dropbox"
 msgid "Dubstep"
 msgstr "Dub"
 
-#: ../bin/src/ui_ripcddialog.h:308
+#: ../bin/src/ui_episodeinfowidget.h:134 ../bin/src/ui_ripcddialog.h:308
 msgid "Duration"
 msgstr "Duração"
 
@@ -2076,6 +2080,10 @@ msgstr "Introduza este IP na aplicação para se ligar ao Clementine"
 #: ../bin/src/ui_libraryfilterwidget.h:92
 msgid "Entire collection"
 msgstr "Toda a coleção"
+
+#: internet/podcasts/podcastservice.cpp:532
+msgid "Episode information"
+msgstr "Informações do episódio"
 
 #: ../bin/src/ui_equalizer.h:162 ../bin/src/ui_mainwindow.h:705
 msgid "Equalizer"
@@ -2397,9 +2405,10 @@ msgstr "Se optar por ignorar um dispositivo, este será removido da lista e na p
 #: ../bin/src/ui_libraryviewcontainer.h:58
 #: ../bin/src/ui_playlistcontainer.h:134
 #: ../bin/src/ui_playlistlistcontainer.h:126
-#: ../bin/src/ui_podcastinfowidget.h:190 ../bin/src/ui_querysearchpage.h:108
-#: ../bin/src/ui_querysortpage.h:136 ../bin/src/ui_searchpreview.h:103
-#: ../bin/src/ui_searchtermwidget.h:276 ../bin/src/ui_wizardfinishpage.h:82
+#: ../bin/src/ui_episodeinfowidget.h:131 ../bin/src/ui_podcastinfowidget.h:190
+#: ../bin/src/ui_querysearchpage.h:108 ../bin/src/ui_querysortpage.h:136
+#: ../bin/src/ui_searchpreview.h:103 ../bin/src/ui_searchtermwidget.h:276
+#: ../bin/src/ui_wizardfinishpage.h:82
 #: ../bin/src/ui_songkickconcertwidget.h:99
 #: ../bin/src/ui_transcoderoptionsaac.h:127
 #: ../bin/src/ui_transcoderoptionsflac.h:79
@@ -3798,11 +3807,13 @@ msgstr "Abra este URL no seu navegador web: <a href=\"%1\">%1</a>"
 msgid "Plugin status:"
 msgstr "Estado:"
 
-#: ../bin/src/ui_podcastinfodialog.h:77
+#: ../bin/src/ui_podcastinfodialog.h:93
 msgid "Podcast Information"
 msgstr "Informações do podcast"
 
 #: internet/podcasts/podcastservice.cpp:437
+#: internet/podcasts/podcastservice.cpp:535
+#: internet/podcasts/podcastservice.cpp:539
 msgid "Podcast information"
 msgstr "Informações do podcast"
 

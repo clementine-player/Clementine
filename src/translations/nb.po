@@ -12,7 +12,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2018-11-11 21:10+0000\n"
+"PO-Revision-Date: 2018-11-17 13:46+0000\n"
 "Last-Translator: hatstand <john.maguire@gmail.com>\n"
 "Language-Team: Norwegian Bokmål (http://www.transifex.com/davidsansome/clementine/language/nb/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -884,7 +884,7 @@ msgstr "Lyd-utenhet"
 msgid "Authentication failed"
 msgstr "Identitetsbekreftelse feilet"
 
-#: ../bin/src/ui_podcastinfowidget.h:191
+#: ../bin/src/ui_episodeinfowidget.h:132 ../bin/src/ui_podcastinfowidget.h:191
 msgid "Author"
 msgstr "Utvikler"
 
@@ -1581,6 +1581,10 @@ msgid ""
 "recover your database"
 msgstr "Oppdaget feil i databasen. Les https://github.com/clementine-player/Clementine/wiki/Database-Corruption for å finne ut hvordan du kan gjenopprette den."
 
+#: ../bin/src/ui_episodeinfowidget.h:133
+msgid "Date"
+msgstr ""
+
 #: playlist/playlist.cpp:1432 ../bin/src/ui_edittagdialog.h:715
 msgid "Date created"
 msgstr "Opprettelsesdato"
@@ -1848,7 +1852,7 @@ msgstr "Dobbeltklikking på vilkårlig sang i spillelisten vil…"
 msgid "Double clicking a song will..."
 msgstr "Dobbeltklikking på en sang vil…"
 
-#: internet/podcasts/podcastservice.cpp:543
+#: internet/podcasts/podcastservice.cpp:550
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "Download %n episodes"
@@ -1891,7 +1895,7 @@ msgstr "Last ned dette albumet"
 msgid "Download this album..."
 msgstr "Last ned dette albumet…"
 
-#: internet/podcasts/podcastservice.cpp:545
+#: internet/podcasts/podcastservice.cpp:552
 msgid "Download this episode"
 msgstr "Last ned denne episoden"
 
@@ -1937,7 +1941,7 @@ msgstr "Dropbox"
 msgid "Dubstep"
 msgstr "Dubstep"
 
-#: ../bin/src/ui_ripcddialog.h:308
+#: ../bin/src/ui_episodeinfowidget.h:134 ../bin/src/ui_ripcddialog.h:308
 msgid "Duration"
 msgstr "Varighet"
 
@@ -2074,6 +2078,10 @@ msgstr "Skriv in denne IP-en i programmet for å koble til Clementine."
 #: ../bin/src/ui_libraryfilterwidget.h:92
 msgid "Entire collection"
 msgstr "Hele samlingen"
+
+#: internet/podcasts/podcastservice.cpp:532
+msgid "Episode information"
+msgstr ""
 
 #: ../bin/src/ui_equalizer.h:162 ../bin/src/ui_mainwindow.h:705
 msgid "Equalizer"
@@ -2395,9 +2403,10 @@ msgstr "Hvis du glemmer enheten, forsvinner den fra denne listen, og Clementine 
 #: ../bin/src/ui_libraryviewcontainer.h:58
 #: ../bin/src/ui_playlistcontainer.h:134
 #: ../bin/src/ui_playlistlistcontainer.h:126
-#: ../bin/src/ui_podcastinfowidget.h:190 ../bin/src/ui_querysearchpage.h:108
-#: ../bin/src/ui_querysortpage.h:136 ../bin/src/ui_searchpreview.h:103
-#: ../bin/src/ui_searchtermwidget.h:276 ../bin/src/ui_wizardfinishpage.h:82
+#: ../bin/src/ui_episodeinfowidget.h:131 ../bin/src/ui_podcastinfowidget.h:190
+#: ../bin/src/ui_querysearchpage.h:108 ../bin/src/ui_querysortpage.h:136
+#: ../bin/src/ui_searchpreview.h:103 ../bin/src/ui_searchtermwidget.h:276
+#: ../bin/src/ui_wizardfinishpage.h:82
 #: ../bin/src/ui_songkickconcertwidget.h:99
 #: ../bin/src/ui_transcoderoptionsaac.h:127
 #: ../bin/src/ui_transcoderoptionsflac.h:79
@@ -3796,11 +3805,13 @@ msgstr "Åpne denne nettadressen i nettleseren din: <a href=\"%1\">%1</a>"
 msgid "Plugin status:"
 msgstr "Programtilleggsstatus:"
 
-#: ../bin/src/ui_podcastinfodialog.h:77
+#: ../bin/src/ui_podcastinfodialog.h:93
 msgid "Podcast Information"
 msgstr ""
 
 #: internet/podcasts/podcastservice.cpp:437
+#: internet/podcasts/podcastservice.cpp:535
+#: internet/podcasts/podcastservice.cpp:539
 msgid "Podcast information"
 msgstr ""
 

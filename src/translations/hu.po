@@ -17,8 +17,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2018-11-11 21:10+0000\n"
-"Last-Translator: hatstand <john.maguire@gmail.com>\n"
+"PO-Revision-Date: 2018-11-17 16:07+0000\n"
+"Last-Translator: Balázs Meskó <meskobalazs@gmail.com>\n"
 "Language-Team: Hungarian (http://www.transifex.com/davidsansome/clementine/language/hu/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -889,7 +889,7 @@ msgstr "Hang kimenet"
 msgid "Authentication failed"
 msgstr "A hitelesítés meghiúsult"
 
-#: ../bin/src/ui_podcastinfowidget.h:191
+#: ../bin/src/ui_episodeinfowidget.h:132 ../bin/src/ui_podcastinfowidget.h:191
 msgid "Author"
 msgstr "Szerző"
 
@@ -1586,6 +1586,10 @@ msgid ""
 "recover your database"
 msgstr "Adatbázis sérülés található. Kérjük olvassa el a https://github.com/clementine-player/Clementine/wiki/Database-Corruption honlapot további információkért, hogy hogyan állítsa vissza adatbázisát."
 
+#: ../bin/src/ui_episodeinfowidget.h:133
+msgid "Date"
+msgstr "Dátum"
+
 #: playlist/playlist.cpp:1432 ../bin/src/ui_edittagdialog.h:715
 msgid "Date created"
 msgstr "Létrehozás dátuma"
@@ -1853,7 +1857,7 @@ msgstr "Dupla kattintásra egy számon…"
 msgid "Double clicking a song will..."
 msgstr "Dupla kattintásra egy számon..."
 
-#: internet/podcasts/podcastservice.cpp:543
+#: internet/podcasts/podcastservice.cpp:550
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "Download %n episodes"
@@ -1896,7 +1900,7 @@ msgstr "Album letöltése"
 msgid "Download this album..."
 msgstr "Album letöltése..."
 
-#: internet/podcasts/podcastservice.cpp:545
+#: internet/podcasts/podcastservice.cpp:552
 msgid "Download this episode"
 msgstr "Epizód letöltése"
 
@@ -1942,7 +1946,7 @@ msgstr "Dropbox"
 msgid "Dubstep"
 msgstr "Dubstep"
 
-#: ../bin/src/ui_ripcddialog.h:308
+#: ../bin/src/ui_episodeinfowidget.h:134 ../bin/src/ui_ripcddialog.h:308
 msgid "Duration"
 msgstr "Időtartam"
 
@@ -2079,6 +2083,10 @@ msgstr "Írd be a megadott IP -t a Clementine kapcsolódásához"
 #: ../bin/src/ui_libraryfilterwidget.h:92
 msgid "Entire collection"
 msgstr "A teljes kollekció"
+
+#: internet/podcasts/podcastservice.cpp:532
+msgid "Episode information"
+msgstr "Epizód információk"
 
 #: ../bin/src/ui_equalizer.h:162 ../bin/src/ui_mainwindow.h:705
 msgid "Equalizer"
@@ -2400,9 +2408,10 @@ msgstr "Egy eszköz elfelejtésekor a Clementine törli erről a listáról és 
 #: ../bin/src/ui_libraryviewcontainer.h:58
 #: ../bin/src/ui_playlistcontainer.h:134
 #: ../bin/src/ui_playlistlistcontainer.h:126
-#: ../bin/src/ui_podcastinfowidget.h:190 ../bin/src/ui_querysearchpage.h:108
-#: ../bin/src/ui_querysortpage.h:136 ../bin/src/ui_searchpreview.h:103
-#: ../bin/src/ui_searchtermwidget.h:276 ../bin/src/ui_wizardfinishpage.h:82
+#: ../bin/src/ui_episodeinfowidget.h:131 ../bin/src/ui_podcastinfowidget.h:190
+#: ../bin/src/ui_querysearchpage.h:108 ../bin/src/ui_querysortpage.h:136
+#: ../bin/src/ui_searchpreview.h:103 ../bin/src/ui_searchtermwidget.h:276
+#: ../bin/src/ui_wizardfinishpage.h:82
 #: ../bin/src/ui_songkickconcertwidget.h:99
 #: ../bin/src/ui_transcoderoptionsaac.h:127
 #: ../bin/src/ui_transcoderoptionsflac.h:79
@@ -3801,13 +3810,15 @@ msgstr "Nyissa meg ezt az URL-t a böngészőjében: <a href=\"%1\">%1</a>"
 msgid "Plugin status:"
 msgstr "Beépülő állapot:"
 
-#: ../bin/src/ui_podcastinfodialog.h:77
+#: ../bin/src/ui_podcastinfodialog.h:93
 msgid "Podcast Information"
-msgstr ""
+msgstr "Podcast információk"
 
 #: internet/podcasts/podcastservice.cpp:437
+#: internet/podcasts/podcastservice.cpp:535
+#: internet/podcasts/podcastservice.cpp:539
 msgid "Podcast information"
-msgstr ""
+msgstr "Podcast információk"
 
 #: internet/podcasts/podcastservice.cpp:133
 #: ../bin/src/ui_podcastsettingspage.h:250

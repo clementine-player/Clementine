@@ -35,7 +35,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2018-11-12 06:24+0000\n"
+"PO-Revision-Date: 2018-11-17 15:49+0000\n"
 "Last-Translator: Andrei Stepanov <adem4ik@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/davidsansome/clementine/language/ru/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -907,7 +907,7 @@ msgstr "Вывод звука"
 msgid "Authentication failed"
 msgstr "Ошибка аутентификации"
 
-#: ../bin/src/ui_podcastinfowidget.h:191
+#: ../bin/src/ui_episodeinfowidget.h:132 ../bin/src/ui_podcastinfowidget.h:191
 msgid "Author"
 msgstr "Автор"
 
@@ -1604,6 +1604,10 @@ msgid ""
 "recover your database"
 msgstr "Обнаружен сбой в базе данных. Инструкции по восстановлению можно прочитать по адресу https://github.com/clementine-player/Clementine/wiki/Database-Corruption"
 
+#: ../bin/src/ui_episodeinfowidget.h:133
+msgid "Date"
+msgstr "Дата"
+
 #: playlist/playlist.cpp:1432 ../bin/src/ui_edittagdialog.h:715
 msgid "Date created"
 msgstr "Дата создания"
@@ -1871,7 +1875,7 @@ msgstr "Двойной щелчок по плейлисту…"
 msgid "Double clicking a song will..."
 msgstr "Двойной щелчок по песне…"
 
-#: internet/podcasts/podcastservice.cpp:543
+#: internet/podcasts/podcastservice.cpp:550
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "Download %n episodes"
@@ -1914,7 +1918,7 @@ msgstr "Загрузить этот альбом"
 msgid "Download this album..."
 msgstr "Загрузить этот альбом"
 
-#: internet/podcasts/podcastservice.cpp:545
+#: internet/podcasts/podcastservice.cpp:552
 msgid "Download this episode"
 msgstr "Загрузить этот выпуск"
 
@@ -1960,7 +1964,7 @@ msgstr "Dropbox"
 msgid "Dubstep"
 msgstr "Дабстеп"
 
-#: ../bin/src/ui_ripcddialog.h:308
+#: ../bin/src/ui_episodeinfowidget.h:134 ../bin/src/ui_ripcddialog.h:308
 msgid "Duration"
 msgstr "Длительность"
 
@@ -2097,6 +2101,10 @@ msgstr "Введите этот IP-адрес в приложении для п�
 #: ../bin/src/ui_libraryfilterwidget.h:92
 msgid "Entire collection"
 msgstr "Вся коллекция"
+
+#: internet/podcasts/podcastservice.cpp:532
+msgid "Episode information"
+msgstr "Информация об эпизоде"
 
 #: ../bin/src/ui_equalizer.h:162 ../bin/src/ui_mainwindow.h:705
 msgid "Equalizer"
@@ -2418,9 +2426,10 @@ msgstr "Команда «Забыть носитель», удалит носи�
 #: ../bin/src/ui_libraryviewcontainer.h:58
 #: ../bin/src/ui_playlistcontainer.h:134
 #: ../bin/src/ui_playlistlistcontainer.h:126
-#: ../bin/src/ui_podcastinfowidget.h:190 ../bin/src/ui_querysearchpage.h:108
-#: ../bin/src/ui_querysortpage.h:136 ../bin/src/ui_searchpreview.h:103
-#: ../bin/src/ui_searchtermwidget.h:276 ../bin/src/ui_wizardfinishpage.h:82
+#: ../bin/src/ui_episodeinfowidget.h:131 ../bin/src/ui_podcastinfowidget.h:190
+#: ../bin/src/ui_querysearchpage.h:108 ../bin/src/ui_querysortpage.h:136
+#: ../bin/src/ui_searchpreview.h:103 ../bin/src/ui_searchtermwidget.h:276
+#: ../bin/src/ui_wizardfinishpage.h:82
 #: ../bin/src/ui_songkickconcertwidget.h:99
 #: ../bin/src/ui_transcoderoptionsaac.h:127
 #: ../bin/src/ui_transcoderoptionsflac.h:79
@@ -3819,11 +3828,13 @@ msgstr "Пожалуйста, откройте эту ссылку в вашем
 msgid "Plugin status:"
 msgstr "Статус модуля:"
 
-#: ../bin/src/ui_podcastinfodialog.h:77
+#: ../bin/src/ui_podcastinfodialog.h:93
 msgid "Podcast Information"
 msgstr "Информация о подкасте"
 
 #: internet/podcasts/podcastservice.cpp:437
+#: internet/podcasts/podcastservice.cpp:535
+#: internet/podcasts/podcastservice.cpp:539
 msgid "Podcast information"
 msgstr "Информация о подкасте"
 

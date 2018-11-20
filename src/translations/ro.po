@@ -19,7 +19,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2018-11-11 21:10+0000\n"
+"PO-Revision-Date: 2018-11-17 13:46+0000\n"
 "Last-Translator: hatstand <john.maguire@gmail.com>\n"
 "Language-Team: Romanian (http://www.transifex.com/davidsansome/clementine/language/ro/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -891,7 +891,7 @@ msgstr "Ieșire audio"
 msgid "Authentication failed"
 msgstr "Autentificarea a eșuat"
 
-#: ../bin/src/ui_podcastinfowidget.h:191
+#: ../bin/src/ui_episodeinfowidget.h:132 ../bin/src/ui_podcastinfowidget.h:191
 msgid "Author"
 msgstr "Autor"
 
@@ -1588,6 +1588,10 @@ msgid ""
 "recover your database"
 msgstr "S-a detectat alterarea bazei de date. Citiți https://github.com/clementine-player/Clementine/wiki/Database-Corruption pentru instrucțiuni pentru recuperarea bazei de date."
 
+#: ../bin/src/ui_episodeinfowidget.h:133
+msgid "Date"
+msgstr ""
+
 #: playlist/playlist.cpp:1432 ../bin/src/ui_edittagdialog.h:715
 msgid "Date created"
 msgstr "Data creării"
@@ -1855,7 +1859,7 @@ msgstr "Clicul dublu pe o melodie din lista de redare va..."
 msgid "Double clicking a song will..."
 msgstr "Clicul dublu pe o melodie va..."
 
-#: internet/podcasts/podcastservice.cpp:543
+#: internet/podcasts/podcastservice.cpp:550
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "Download %n episodes"
@@ -1898,7 +1902,7 @@ msgstr "Descarcă acest album"
 msgid "Download this album..."
 msgstr "Descarcă acest album..."
 
-#: internet/podcasts/podcastservice.cpp:545
+#: internet/podcasts/podcastservice.cpp:552
 msgid "Download this episode"
 msgstr "Descarcă acest episod"
 
@@ -1944,7 +1948,7 @@ msgstr "Dropbox"
 msgid "Dubstep"
 msgstr "Dubstep"
 
-#: ../bin/src/ui_ripcddialog.h:308
+#: ../bin/src/ui_episodeinfowidget.h:134 ../bin/src/ui_ripcddialog.h:308
 msgid "Duration"
 msgstr "Durată"
 
@@ -2081,6 +2085,10 @@ msgstr "Introduceți acest IP în aplicație pentru conectarea la Clementine."
 #: ../bin/src/ui_libraryfilterwidget.h:92
 msgid "Entire collection"
 msgstr "Toată colecția"
+
+#: internet/podcasts/podcastservice.cpp:532
+msgid "Episode information"
+msgstr ""
 
 #: ../bin/src/ui_equalizer.h:162 ../bin/src/ui_mainwindow.h:705
 msgid "Equalizer"
@@ -2402,9 +2410,10 @@ msgstr "Omiterea unui dispozitiv va determina eliminarea lui din aceasta listă,
 #: ../bin/src/ui_libraryviewcontainer.h:58
 #: ../bin/src/ui_playlistcontainer.h:134
 #: ../bin/src/ui_playlistlistcontainer.h:126
-#: ../bin/src/ui_podcastinfowidget.h:190 ../bin/src/ui_querysearchpage.h:108
-#: ../bin/src/ui_querysortpage.h:136 ../bin/src/ui_searchpreview.h:103
-#: ../bin/src/ui_searchtermwidget.h:276 ../bin/src/ui_wizardfinishpage.h:82
+#: ../bin/src/ui_episodeinfowidget.h:131 ../bin/src/ui_podcastinfowidget.h:190
+#: ../bin/src/ui_querysearchpage.h:108 ../bin/src/ui_querysortpage.h:136
+#: ../bin/src/ui_searchpreview.h:103 ../bin/src/ui_searchtermwidget.h:276
+#: ../bin/src/ui_wizardfinishpage.h:82
 #: ../bin/src/ui_songkickconcertwidget.h:99
 #: ../bin/src/ui_transcoderoptionsaac.h:127
 #: ../bin/src/ui_transcoderoptionsflac.h:79
@@ -3803,11 +3812,13 @@ msgstr "Deschideți acest URL în navigatorul dumneavoastră: <a href=\"%1\">%1<
 msgid "Plugin status:"
 msgstr "Stare modul:"
 
-#: ../bin/src/ui_podcastinfodialog.h:77
+#: ../bin/src/ui_podcastinfodialog.h:93
 msgid "Podcast Information"
 msgstr ""
 
 #: internet/podcasts/podcastservice.cpp:437
+#: internet/podcasts/podcastservice.cpp:535
+#: internet/podcasts/podcastservice.cpp:539
 msgid "Podcast information"
 msgstr ""
 

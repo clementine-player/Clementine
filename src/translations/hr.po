@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2018-11-11 21:10+0000\n"
+"PO-Revision-Date: 2018-11-17 13:46+0000\n"
 "Last-Translator: hatstand <john.maguire@gmail.com>\n"
 "Language-Team: Croatian (http://www.transifex.com/davidsansome/clementine/language/hr/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -883,7 +883,7 @@ msgstr "Zvučni izlaz"
 msgid "Authentication failed"
 msgstr "Provjera autentičnosti nije uspjela"
 
-#: ../bin/src/ui_podcastinfowidget.h:191
+#: ../bin/src/ui_episodeinfowidget.h:132 ../bin/src/ui_podcastinfowidget.h:191
 msgid "Author"
 msgstr "Autor"
 
@@ -1580,6 +1580,10 @@ msgid ""
 "recover your database"
 msgstr "Baza podataka je oštećena. Pročitajte na https://github.com/clementine-player/Clementine/wiki/Database-Corruption upute kako obnoviti bazu podataka"
 
+#: ../bin/src/ui_episodeinfowidget.h:133
+msgid "Date"
+msgstr ""
+
 #: playlist/playlist.cpp:1432 ../bin/src/ui_edittagdialog.h:715
 msgid "Date created"
 msgstr "Izrađeno datuma"
@@ -1847,7 +1851,7 @@ msgstr "Dvostruk klik na pjesmu u popisu izvođenja će..."
 msgid "Double clicking a song will..."
 msgstr "Dvostrukim klikom pjesma će..."
 
-#: internet/podcasts/podcastservice.cpp:543
+#: internet/podcasts/podcastservice.cpp:550
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "Download %n episodes"
@@ -1890,7 +1894,7 @@ msgstr "Preuzmi ovaj album"
 msgid "Download this album..."
 msgstr "Preuzmi ovaj album..."
 
-#: internet/podcasts/podcastservice.cpp:545
+#: internet/podcasts/podcastservice.cpp:552
 msgid "Download this episode"
 msgstr "Preuzmi ovaj nastavak"
 
@@ -1936,7 +1940,7 @@ msgstr "Dropbox"
 msgid "Dubstep"
 msgstr "Udvostručen korak"
 
-#: ../bin/src/ui_ripcddialog.h:308
+#: ../bin/src/ui_episodeinfowidget.h:134 ../bin/src/ui_ripcddialog.h:308
 msgid "Duration"
 msgstr "Trajanje"
 
@@ -2073,6 +2077,10 @@ msgstr "Upišite ovu IP adresu u aplikaciju za spajanje na Clementine."
 #: ../bin/src/ui_libraryfilterwidget.h:92
 msgid "Entire collection"
 msgstr "Cijelu kolekciju"
+
+#: internet/podcasts/podcastservice.cpp:532
+msgid "Episode information"
+msgstr ""
 
 #: ../bin/src/ui_equalizer.h:162 ../bin/src/ui_mainwindow.h:705
 msgid "Equalizer"
@@ -2394,9 +2402,10 @@ msgstr "Zaboravljanje uređaja uklonit će ga s ovog popisa i Clementine će mor
 #: ../bin/src/ui_libraryviewcontainer.h:58
 #: ../bin/src/ui_playlistcontainer.h:134
 #: ../bin/src/ui_playlistlistcontainer.h:126
-#: ../bin/src/ui_podcastinfowidget.h:190 ../bin/src/ui_querysearchpage.h:108
-#: ../bin/src/ui_querysortpage.h:136 ../bin/src/ui_searchpreview.h:103
-#: ../bin/src/ui_searchtermwidget.h:276 ../bin/src/ui_wizardfinishpage.h:82
+#: ../bin/src/ui_episodeinfowidget.h:131 ../bin/src/ui_podcastinfowidget.h:190
+#: ../bin/src/ui_querysearchpage.h:108 ../bin/src/ui_querysortpage.h:136
+#: ../bin/src/ui_searchpreview.h:103 ../bin/src/ui_searchtermwidget.h:276
+#: ../bin/src/ui_wizardfinishpage.h:82
 #: ../bin/src/ui_songkickconcertwidget.h:99
 #: ../bin/src/ui_transcoderoptionsaac.h:127
 #: ../bin/src/ui_transcoderoptionsflac.h:79
@@ -3795,11 +3804,13 @@ msgstr "Otvorite ovaj URL u vašem pregledniku: <a href=\"%1\">%1</a>"
 msgid "Plugin status:"
 msgstr "Status dodatka:"
 
-#: ../bin/src/ui_podcastinfodialog.h:77
+#: ../bin/src/ui_podcastinfodialog.h:93
 msgid "Podcast Information"
 msgstr ""
 
 #: internet/podcasts/podcastservice.cpp:437
+#: internet/podcasts/podcastservice.cpp:535
+#: internet/podcasts/podcastservice.cpp:539
 msgid "Podcast information"
 msgstr ""
 
