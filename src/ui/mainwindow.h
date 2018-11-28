@@ -131,7 +131,8 @@ class MainWindow : public QMainWindow, public PlatformInterface {
 
  protected:
   void keyPressEvent(QKeyEvent* event);
-  void resizeEvent(QResizeEvent* event);
+  void changeEvent(QEvent*);
+  void resizeEvent(QResizeEvent*);
   void closeEvent(QCloseEvent* event);
 
 #ifdef Q_OS_WIN32
@@ -378,6 +379,7 @@ signals:
   QTimer* track_slider_timer_;
   QSettings settings_;
 
+  bool initialized_;
   bool was_maximized_;
   int saved_playback_position_;
   Engine::State saved_playback_state_;
