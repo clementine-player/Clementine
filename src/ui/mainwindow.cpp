@@ -1071,7 +1071,6 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
   SaveGeometry();
 
   qLog(Debug) << "Started";
-
 }
 
 MainWindow::~MainWindow() {
@@ -1283,7 +1282,7 @@ void MainWindow::ScrobbleButtonVisibilityChanged(bool value) {
   }
 }
 
-void MainWindow::changeEvent(QEvent *) {
+void MainWindow::changeEvent(QEvent*) {
   if (!initialized_) return;
   SaveGeometry();
 }
