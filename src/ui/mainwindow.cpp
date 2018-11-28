@@ -221,6 +221,7 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
       library_sort_model_(new QSortFilterProxyModel(this)),
       track_position_timer_(new QTimer(this)),
       track_slider_timer_(new QTimer(this)),
+      initialized_(false),
       saved_playback_position_(0),
       saved_playback_state_(Engine::Empty),
       doubleclick_addmode_(AddBehaviour_Append),
@@ -1066,6 +1067,9 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
 
   if (!options.contains_play_options()) LoadPlaybackStatus();
 
+  initialized_ = true;
+  SaveGeometry();
+
   qLog(Debug) << "Started";
 }
 
@@ -1278,9 +1282,19 @@ void MainWindow::ScrobbleButtonVisibilityChanged(bool value) {
   }
 }
 
-void MainWindow::resizeEvent(QResizeEvent*) { SaveGeometry(); }
+void MainWindow::changeEvent(QEvent*) {
+  if (!initialized_) return;
+  SaveGeometry();
+}
+
+void MainWindow::resizeEvent(QResizeEvent*) {
+  if (!initialized_) return;
+  SaveGeometry();
+}
 
 void MainWindow::SaveGeometry() {
+  if (!initialized_) return;
+
   was_maximized_ = isMaximized();
   settings_.setValue("maximized", was_maximized_);
   // Save the geometry only when mainwindow is not in maximized state
@@ -2790,6 +2804,7 @@ bool MainWindow::winEvent(MSG* msg, long*) {
 #endif  // Q_OS_WIN32
 
 void MainWindow::Exit() {
+  SaveGeometry();
   SavePlaybackStatus();
   settings_.setValue("show_sidebar",
                      ui_->action_toggle_show_sidebar->isChecked());
