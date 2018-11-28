@@ -47,7 +47,7 @@ void GPodDevice::Init() {
                            shared_from_this());
   loader_->moveToThread(loader_thread_);
 
-  connect(loader_, SIGNAL(Error(QString)), SIGNAL(Error(QString)));
+  connect(loader_, SIGNAL(Error(QString)), SLOT(LoaderError(QString)));
   connect(loader_, SIGNAL(TaskStarted(int)), SIGNAL(TaskStarted(int)));
   connect(loader_, SIGNAL(LoadFinished(Itdb_iTunesDB*)),
           SLOT(LoadFinished(Itdb_iTunesDB*)));
@@ -221,6 +221,10 @@ bool GPodDevice::DeleteFromStorage(const DeleteJob& job) {
 void GPodDevice::FinishDelete(bool success) {
   WriteDatabase(success);
   ConnectedDevice::FinishDelete(success);
+}
+
+void GPodDevice::LoaderError(const QString& message) {
+  app_->AddError(message);
 }
 
 bool GPodDevice::GetSupportedFiletypes(QList<Song::FileType>* ret) {
