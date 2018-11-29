@@ -12,7 +12,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2018-10-20 12:14+0000\n"
+"PO-Revision-Date: 2018-11-17 13:46+0000\n"
 "Last-Translator: hatstand <john.maguire@gmail.com>\n"
 "Language-Team: Afrikaans (http://www.transifex.com/davidsansome/clementine/language/af/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -539,7 +539,7 @@ msgstr "Voeg nuwe gids by..."
 msgid "Add podcast"
 msgstr "Voeg potgooi by"
 
-#: internet/podcasts/podcastservice.cpp:418 ../bin/src/ui_mainwindow.h:722
+#: internet/podcasts/podcastservice.cpp:419 ../bin/src/ui_mainwindow.h:722
 msgid "Add podcast..."
 msgstr "Voeg potgooi by..."
 
@@ -884,7 +884,7 @@ msgstr "Oudio uitset"
 msgid "Authentication failed"
 msgstr "Aanteken onsuksesvol"
 
-#: ../bin/src/ui_podcastinfowidget.h:191
+#: ../bin/src/ui_episodeinfowidget.h:132 ../bin/src/ui_podcastinfowidget.h:191
 msgid "Author"
 msgstr "Outeur"
 
@@ -1064,7 +1064,7 @@ msgstr "Seinlys ondersteuning"
 msgid "Cancel"
 msgstr "Kanselleer"
 
-#: internet/podcasts/podcastservice.cpp:441
+#: internet/podcasts/podcastservice.cpp:447
 msgid "Cancel download"
 msgstr "Kanselleer aflaai"
 
@@ -1359,7 +1359,7 @@ msgid "Configure library..."
 msgstr "Stel my versameling op..."
 
 #: internet/podcasts/addpodcastdialog.cpp:77
-#: internet/podcasts/podcastservice.cpp:455
+#: internet/podcasts/podcastservice.cpp:461
 msgid "Configure podcasts..."
 msgstr "Stel potgooie op..."
 
@@ -1425,7 +1425,7 @@ msgstr "Omskep verlieslose lêers"
 msgid "Copy to clipboard"
 msgstr "Kopiëer na knipbord"
 
-#: library/libraryview.cpp:419 internet/podcasts/podcastservice.cpp:438
+#: library/libraryview.cpp:419 internet/podcasts/podcastservice.cpp:444
 #: ui/mainwindow.cpp:721 widgets/fileviewlist.cpp:44
 msgid "Copy to device..."
 msgstr "Kopiëer na die toestel..."
@@ -1581,6 +1581,10 @@ msgid ""
 "recover your database"
 msgstr ""
 
+#: ../bin/src/ui_episodeinfowidget.h:133
+msgid "Date"
+msgstr ""
+
 #: playlist/playlist.cpp:1432 ../bin/src/ui_edittagdialog.h:715
 msgid "Date created"
 msgstr "Datum geskep"
@@ -1631,7 +1635,7 @@ msgstr "Wagperiode tussen visualisasies"
 msgid "Delete"
 msgstr "Skrap"
 
-#: internet/podcasts/podcastservice.cpp:435
+#: internet/podcasts/podcastservice.cpp:441
 msgid "Delete downloaded data"
 msgstr "Vee afgelaaide data uit"
 
@@ -1848,7 +1852,7 @@ msgstr "As jy 'n liedjie in die snitlys tweemaal klik sal..."
 msgid "Double clicking a song will..."
 msgstr "Dubbelkliek op 'n liedjie sal..."
 
-#: internet/podcasts/podcastservice.cpp:531
+#: internet/podcasts/podcastservice.cpp:550
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "Download %n episodes"
@@ -1870,8 +1874,8 @@ msgstr "Laai lidmaatskap af"
 msgid "Download new episodes automatically"
 msgstr "Laai nuwe episodes outomaties af"
 
-#: internet/podcasts/podcastservice.cpp:293
-#: internet/podcasts/podcastservice.cpp:332
+#: internet/podcasts/podcastservice.cpp:294
+#: internet/podcasts/podcastservice.cpp:333
 msgid "Download queued"
 msgstr "Aflaai tou"
 
@@ -1891,7 +1895,7 @@ msgstr "Laai hierdie album af"
 msgid "Download this album..."
 msgstr "Laai hierdie album af..."
 
-#: internet/podcasts/podcastservice.cpp:533
+#: internet/podcasts/podcastservice.cpp:552
 msgid "Download this episode"
 msgstr "Laai hierdie episode af"
 
@@ -1899,8 +1903,8 @@ msgstr "Laai hierdie episode af"
 msgid "Download..."
 msgstr "Laai af..."
 
-#: internet/podcasts/podcastservice.cpp:301
-#: internet/podcasts/podcastservice.cpp:341
+#: internet/podcasts/podcastservice.cpp:302
+#: internet/podcasts/podcastservice.cpp:342
 #, qt-format
 msgid "Downloading (%1%)..."
 msgstr "Besig met aflaai (%1%)..."
@@ -1937,7 +1941,7 @@ msgstr "Dropbox"
 msgid "Dubstep"
 msgstr "Dubstep"
 
-#: ../bin/src/ui_ripcddialog.h:308
+#: ../bin/src/ui_episodeinfowidget.h:134 ../bin/src/ui_ripcddialog.h:308
 msgid "Duration"
 msgstr "Tydsduur"
 
@@ -2074,6 +2078,10 @@ msgstr "Voer hierdie IP-adres in die programetjie in om met Clementine te verbin
 #: ../bin/src/ui_libraryfilterwidget.h:92
 msgid "Entire collection"
 msgstr "Hele versameling"
+
+#: internet/podcasts/podcastservice.cpp:532
+msgid "Episode information"
+msgstr ""
 
 #: ../bin/src/ui_equalizer.h:162 ../bin/src/ui_mainwindow.h:705
 msgid "Equalizer"
@@ -2395,9 +2403,10 @@ msgstr "Deur van 'n toestel te vergeet sal dit uit hierdie lys verwyder word. Cl
 #: ../bin/src/ui_libraryviewcontainer.h:58
 #: ../bin/src/ui_playlistcontainer.h:134
 #: ../bin/src/ui_playlistlistcontainer.h:126
-#: ../bin/src/ui_podcastinfowidget.h:190 ../bin/src/ui_querysearchpage.h:108
-#: ../bin/src/ui_querysortpage.h:136 ../bin/src/ui_searchpreview.h:103
-#: ../bin/src/ui_searchtermwidget.h:276 ../bin/src/ui_wizardfinishpage.h:82
+#: ../bin/src/ui_episodeinfowidget.h:131 ../bin/src/ui_podcastinfowidget.h:190
+#: ../bin/src/ui_querysearchpage.h:108 ../bin/src/ui_querysortpage.h:136
+#: ../bin/src/ui_searchpreview.h:103 ../bin/src/ui_searchtermwidget.h:276
+#: ../bin/src/ui_wizardfinishpage.h:82
 #: ../bin/src/ui_songkickconcertwidget.h:99
 #: ../bin/src/ui_transcoderoptionsaac.h:127
 #: ../bin/src/ui_transcoderoptionsflac.h:79
@@ -2629,7 +2638,7 @@ msgstr "Ek het nie 'n Magnatune rekening nie"
 msgid "Icon"
 msgstr "Ikoon"
 
-#: widgets/fancytabwidget.cpp:441
+#: widgets/fancytabwidget.cpp:442
 msgid "Icons on top"
 msgstr "Ikone bo"
 
@@ -2884,7 +2893,7 @@ msgstr "Groot album omslag (besonderhede benede)"
 msgid "Large album cover (no details)"
 msgstr "Groot album omslag (geen besonderhede)"
 
-#: widgets/fancytabwidget.cpp:437
+#: widgets/fancytabwidget.cpp:438
 msgid "Large sidebar"
 msgstr "Groot kantlyn-kieslys"
 
@@ -3159,11 +3168,11 @@ msgstr "Handmatig"
 msgid "Manufacturer"
 msgstr "Vervaardiger"
 
-#: internet/podcasts/podcastservice.cpp:450 ../bin/src/ui_organisedialog.h:259
+#: internet/podcasts/podcastservice.cpp:456 ../bin/src/ui_organisedialog.h:259
 msgid "Mark as listened"
 msgstr "Merk as geluister"
 
-#: internet/podcasts/podcastservice.cpp:449
+#: internet/podcasts/podcastservice.cpp:455
 msgid "Mark as new"
 msgstr "Merk as nuut"
 
@@ -3712,7 +3721,7 @@ msgstr "Kunstenaar"
 msgid "Pixel"
 msgstr "Pixel"
 
-#: widgets/fancytabwidget.cpp:439
+#: widgets/fancytabwidget.cpp:440
 msgid "Plain sidebar"
 msgstr "Gewone sykieslys"
 
@@ -3796,7 +3805,17 @@ msgstr ""
 msgid "Plugin status:"
 msgstr "Uitbreiding toestand:"
 
-#: internet/podcasts/podcastservice.cpp:132
+#: ../bin/src/ui_podcastinfodialog.h:93
+msgid "Podcast Information"
+msgstr ""
+
+#: internet/podcasts/podcastservice.cpp:437
+#: internet/podcasts/podcastservice.cpp:535
+#: internet/podcasts/podcastservice.cpp:539
+msgid "Podcast information"
+msgstr ""
+
+#: internet/podcasts/podcastservice.cpp:133
 #: ../bin/src/ui_podcastsettingspage.h:250
 msgid "Podcasts"
 msgstr "Potgooie"
@@ -4711,7 +4730,7 @@ msgstr "Spring snit"
 msgid "Small album cover"
 msgstr "Klein omslag"
 
-#: widgets/fancytabwidget.cpp:438
+#: widgets/fancytabwidget.cpp:439
 msgid "Small sidebar"
 msgstr "Klein kantbalk"
 
@@ -4965,7 +4984,7 @@ msgstr "Gegradeerde Spotify snitte word gesinkroniseer"
 msgid "System colors"
 msgstr "Standaard kleure"
 
-#: widgets/fancytabwidget.cpp:440
+#: widgets/fancytabwidget.cpp:441
 msgid "Tabs on top"
 msgstr "Oortjies bo"
 
@@ -5313,7 +5332,7 @@ msgid "Unskip track"
 msgstr "Moet nie snit spring nie"
 
 #: internet/podcasts/addpodcastdialog.cpp:70
-#: internet/podcasts/podcastservice.cpp:444
+#: internet/podcasts/podcastservice.cpp:450
 msgid "Unsubscribe"
 msgstr "Teken uit"
 
@@ -5321,7 +5340,7 @@ msgstr "Teken uit"
 msgid "Upcoming Concerts"
 msgstr "Komende opvoerings"
 
-#: internet/podcasts/podcastservice.cpp:420
+#: internet/podcasts/podcastservice.cpp:421
 msgid "Update all podcasts"
 msgstr "Dateer alle potgooie op"
 
@@ -5333,7 +5352,7 @@ msgstr "Gaan versameling na vir veranderinge"
 msgid "Update the library when Clementine starts"
 msgstr "Gaan die versameling vir veranderings na elke keer as Clementine oopgemaak word"
 
-#: internet/podcasts/podcastservice.cpp:429
+#: internet/podcasts/podcastservice.cpp:430
 msgid "Update this podcast"
 msgstr "Dateer hierdie potgooi op"
 

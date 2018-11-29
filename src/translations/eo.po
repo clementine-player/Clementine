@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2018-10-21 06:54+0000\n"
+"PO-Revision-Date: 2018-11-18 11:42+0000\n"
 "Last-Translator: Adolfo Jayme-Barrientos\n"
 "Language-Team: Esperanto (http://www.transifex.com/davidsansome/clementine/language/eo/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -538,7 +538,7 @@ msgstr "Aldoni novan dosierujon..."
 msgid "Add podcast"
 msgstr ""
 
-#: internet/podcasts/podcastservice.cpp:418 ../bin/src/ui_mainwindow.h:722
+#: internet/podcasts/podcastservice.cpp:419 ../bin/src/ui_mainwindow.h:722
 msgid "Add podcast..."
 msgstr ""
 
@@ -883,7 +883,7 @@ msgstr ""
 msgid "Authentication failed"
 msgstr ""
 
-#: ../bin/src/ui_podcastinfowidget.h:191
+#: ../bin/src/ui_episodeinfowidget.h:132 ../bin/src/ui_podcastinfowidget.h:191
 msgid "Author"
 msgstr "Aŭtoro"
 
@@ -979,12 +979,12 @@ msgstr ""
 
 #: songinfo/artistbiography.cpp:90 songinfo/artistbiography.cpp:255
 msgid "Biography"
-msgstr ""
+msgstr "Biografio"
 
 #: playlist/playlist.cpp:1418 ../bin/src/ui_edittagdialog.h:706
 #: ../bin/src/ui_streamdetailsdialog.h:139
 msgid "Bit rate"
-msgstr ""
+msgstr "Bitrapido"
 
 #: library/savedgroupingmanager.cpp:92 ../bin/src/ui_groupbydialog.h:138
 #: ../bin/src/ui_groupbydialog.h:157 ../bin/src/ui_groupbydialog.h:176
@@ -994,12 +994,12 @@ msgstr ""
 #: ../bin/src/ui_transcoderoptionsspeex.h:217
 #: ../bin/src/ui_transcoderoptionswma.h:78
 msgid "Bitrate"
-msgstr ""
+msgstr "Bitrapido"
 
 #: ui/organisedialog.cpp:81
 msgctxt "Refers to bitrate in file organise dialog."
 msgid "Bitrate"
-msgstr ""
+msgstr "Bitrapido"
 
 #: analyzers/blockanalyzer.cpp:44
 msgid "Block analyzer"
@@ -1063,7 +1063,7 @@ msgstr ""
 msgid "Cancel"
 msgstr ""
 
-#: internet/podcasts/podcastservice.cpp:441
+#: internet/podcasts/podcastservice.cpp:447
 msgid "Cancel download"
 msgstr ""
 
@@ -1358,7 +1358,7 @@ msgid "Configure library..."
 msgstr ""
 
 #: internet/podcasts/addpodcastdialog.cpp:77
-#: internet/podcasts/podcastservice.cpp:455
+#: internet/podcasts/podcastservice.cpp:461
 msgid "Configure podcasts..."
 msgstr ""
 
@@ -1424,7 +1424,7 @@ msgstr ""
 msgid "Copy to clipboard"
 msgstr ""
 
-#: library/libraryview.cpp:419 internet/podcasts/podcastservice.cpp:438
+#: library/libraryview.cpp:419 internet/podcasts/podcastservice.cpp:444
 #: ui/mainwindow.cpp:721 widgets/fileviewlist.cpp:44
 msgid "Copy to device..."
 msgstr ""
@@ -1580,6 +1580,10 @@ msgid ""
 "recover your database"
 msgstr ""
 
+#: ../bin/src/ui_episodeinfowidget.h:133
+msgid "Date"
+msgstr ""
+
 #: playlist/playlist.cpp:1432 ../bin/src/ui_edittagdialog.h:715
 msgid "Date created"
 msgstr ""
@@ -1630,7 +1634,7 @@ msgstr ""
 msgid "Delete"
 msgstr "Forigi"
 
-#: internet/podcasts/podcastservice.cpp:435
+#: internet/podcasts/podcastservice.cpp:441
 msgid "Delete downloaded data"
 msgstr "Forigi elŝutintajn datumojn"
 
@@ -1847,7 +1851,7 @@ msgstr ""
 msgid "Double clicking a song will..."
 msgstr ""
 
-#: internet/podcasts/podcastservice.cpp:531
+#: internet/podcasts/podcastservice.cpp:550
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "Download %n episodes"
@@ -1869,8 +1873,8 @@ msgstr ""
 msgid "Download new episodes automatically"
 msgstr ""
 
-#: internet/podcasts/podcastservice.cpp:293
-#: internet/podcasts/podcastservice.cpp:332
+#: internet/podcasts/podcastservice.cpp:294
+#: internet/podcasts/podcastservice.cpp:333
 msgid "Download queued"
 msgstr ""
 
@@ -1890,7 +1894,7 @@ msgstr ""
 msgid "Download this album..."
 msgstr ""
 
-#: internet/podcasts/podcastservice.cpp:533
+#: internet/podcasts/podcastservice.cpp:552
 msgid "Download this episode"
 msgstr ""
 
@@ -1898,8 +1902,8 @@ msgstr ""
 msgid "Download..."
 msgstr "Elŝuti…"
 
-#: internet/podcasts/podcastservice.cpp:301
-#: internet/podcasts/podcastservice.cpp:341
+#: internet/podcasts/podcastservice.cpp:302
+#: internet/podcasts/podcastservice.cpp:342
 #, qt-format
 msgid "Downloading (%1%)..."
 msgstr ""
@@ -1936,7 +1940,7 @@ msgstr "Dropbox"
 msgid "Dubstep"
 msgstr ""
 
-#: ../bin/src/ui_ripcddialog.h:308
+#: ../bin/src/ui_episodeinfowidget.h:134 ../bin/src/ui_ripcddialog.h:308
 msgid "Duration"
 msgstr "Daŭro"
 
@@ -1955,15 +1959,15 @@ msgstr ""
 #: ui/mainwindow.cpp:1839
 #, qt-format
 msgid "Edit tag \"%1\"..."
-msgstr ""
+msgstr "Redakti etikedon „%1”…"
 
 #: ../bin/src/ui_mainwindow.h:688
 msgid "Edit tag..."
-msgstr ""
+msgstr "Redakti etikedon…"
 
 #: ../bin/src/ui_edittagdialog.h:732
 msgid "Edit tags"
-msgstr ""
+msgstr "Redakti etikedojn"
 
 #: ../bin/src/ui_edittagdialog.h:698
 msgid "Edit track information"
@@ -2073,6 +2077,10 @@ msgstr ""
 #: ../bin/src/ui_libraryfilterwidget.h:92
 msgid "Entire collection"
 msgstr ""
+
+#: internet/podcasts/podcastservice.cpp:532
+msgid "Episode information"
+msgstr "Informoj pri la epizodo"
 
 #: ../bin/src/ui_equalizer.h:162 ../bin/src/ui_mainwindow.h:705
 msgid "Equalizer"
@@ -2394,9 +2402,10 @@ msgstr ""
 #: ../bin/src/ui_libraryviewcontainer.h:58
 #: ../bin/src/ui_playlistcontainer.h:134
 #: ../bin/src/ui_playlistlistcontainer.h:126
-#: ../bin/src/ui_podcastinfowidget.h:190 ../bin/src/ui_querysearchpage.h:108
-#: ../bin/src/ui_querysortpage.h:136 ../bin/src/ui_searchpreview.h:103
-#: ../bin/src/ui_searchtermwidget.h:276 ../bin/src/ui_wizardfinishpage.h:82
+#: ../bin/src/ui_episodeinfowidget.h:131 ../bin/src/ui_podcastinfowidget.h:190
+#: ../bin/src/ui_querysearchpage.h:108 ../bin/src/ui_querysortpage.h:136
+#: ../bin/src/ui_searchpreview.h:103 ../bin/src/ui_searchtermwidget.h:276
+#: ../bin/src/ui_wizardfinishpage.h:82
 #: ../bin/src/ui_songkickconcertwidget.h:99
 #: ../bin/src/ui_transcoderoptionsaac.h:127
 #: ../bin/src/ui_transcoderoptionsflac.h:79
@@ -2628,7 +2637,7 @@ msgstr ""
 msgid "Icon"
 msgstr "Ikono"
 
-#: widgets/fancytabwidget.cpp:441
+#: widgets/fancytabwidget.cpp:442
 msgid "Icons on top"
 msgstr ""
 
@@ -2883,7 +2892,7 @@ msgstr ""
 msgid "Large album cover (no details)"
 msgstr ""
 
-#: widgets/fancytabwidget.cpp:437
+#: widgets/fancytabwidget.cpp:438
 msgid "Large sidebar"
 msgstr ""
 
@@ -3158,11 +3167,11 @@ msgstr ""
 msgid "Manufacturer"
 msgstr ""
 
-#: internet/podcasts/podcastservice.cpp:450 ../bin/src/ui_organisedialog.h:259
+#: internet/podcasts/podcastservice.cpp:456 ../bin/src/ui_organisedialog.h:259
 msgid "Mark as listened"
 msgstr ""
 
-#: internet/podcasts/podcastservice.cpp:449
+#: internet/podcasts/podcastservice.cpp:455
 msgid "Mark as new"
 msgstr ""
 
@@ -3711,7 +3720,7 @@ msgstr ""
 msgid "Pixel"
 msgstr "Bildero"
 
-#: widgets/fancytabwidget.cpp:439
+#: widgets/fancytabwidget.cpp:440
 msgid "Plain sidebar"
 msgstr ""
 
@@ -3795,7 +3804,17 @@ msgstr ""
 msgid "Plugin status:"
 msgstr ""
 
-#: internet/podcasts/podcastservice.cpp:132
+#: ../bin/src/ui_podcastinfodialog.h:93
+msgid "Podcast Information"
+msgstr ""
+
+#: internet/podcasts/podcastservice.cpp:437
+#: internet/podcasts/podcastservice.cpp:535
+#: internet/podcasts/podcastservice.cpp:539
+msgid "Podcast information"
+msgstr ""
+
+#: internet/podcasts/podcastservice.cpp:133
 #: ../bin/src/ui_podcastsettingspage.h:250
 msgid "Podcasts"
 msgstr "Podkastoj"
@@ -4710,7 +4729,7 @@ msgstr ""
 msgid "Small album cover"
 msgstr ""
 
-#: widgets/fancytabwidget.cpp:438
+#: widgets/fancytabwidget.cpp:439
 msgid "Small sidebar"
 msgstr ""
 
@@ -4964,7 +4983,7 @@ msgstr ""
 msgid "System colors"
 msgstr ""
 
-#: widgets/fancytabwidget.cpp:440
+#: widgets/fancytabwidget.cpp:441
 msgid "Tabs on top"
 msgstr ""
 
@@ -5312,7 +5331,7 @@ msgid "Unskip track"
 msgstr ""
 
 #: internet/podcasts/addpodcastdialog.cpp:70
-#: internet/podcasts/podcastservice.cpp:444
+#: internet/podcasts/podcastservice.cpp:450
 msgid "Unsubscribe"
 msgstr ""
 
@@ -5320,7 +5339,7 @@ msgstr ""
 msgid "Upcoming Concerts"
 msgstr ""
 
-#: internet/podcasts/podcastservice.cpp:420
+#: internet/podcasts/podcastservice.cpp:421
 msgid "Update all podcasts"
 msgstr ""
 
@@ -5332,7 +5351,7 @@ msgstr ""
 msgid "Update the library when Clementine starts"
 msgstr ""
 
-#: internet/podcasts/podcastservice.cpp:429
+#: internet/podcasts/podcastservice.cpp:430
 msgid "Update this podcast"
 msgstr ""
 

@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2018-10-20 12:14+0000\n"
+"PO-Revision-Date: 2018-11-17 13:46+0000\n"
 "Last-Translator: hatstand <john.maguire@gmail.com>\n"
 "Language-Team: Basque (http://www.transifex.com/davidsansome/clementine/language/eu/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -538,7 +538,7 @@ msgstr "Gehitu karpeta berria..."
 msgid "Add podcast"
 msgstr "Podcast-a gehitu"
 
-#: internet/podcasts/podcastservice.cpp:418 ../bin/src/ui_mainwindow.h:722
+#: internet/podcasts/podcastservice.cpp:419 ../bin/src/ui_mainwindow.h:722
 msgid "Add podcast..."
 msgstr "Podcast-a gehitu..."
 
@@ -883,7 +883,7 @@ msgstr ""
 msgid "Authentication failed"
 msgstr "Autentifikazioak huts egin du..."
 
-#: ../bin/src/ui_podcastinfowidget.h:191
+#: ../bin/src/ui_episodeinfowidget.h:132 ../bin/src/ui_podcastinfowidget.h:191
 msgid "Author"
 msgstr "Egilea"
 
@@ -1063,7 +1063,7 @@ msgstr "CUE orriaren euskarria"
 msgid "Cancel"
 msgstr "Utzi"
 
-#: internet/podcasts/podcastservice.cpp:441
+#: internet/podcasts/podcastservice.cpp:447
 msgid "Cancel download"
 msgstr ""
 
@@ -1358,7 +1358,7 @@ msgid "Configure library..."
 msgstr "Konfiguratu bilduma..."
 
 #: internet/podcasts/addpodcastdialog.cpp:77
-#: internet/podcasts/podcastservice.cpp:455
+#: internet/podcasts/podcastservice.cpp:461
 msgid "Configure podcasts..."
 msgstr "Podcast-ak konfiguratu"
 
@@ -1424,7 +1424,7 @@ msgstr ""
 msgid "Copy to clipboard"
 msgstr "Kopiatu arbelean"
 
-#: library/libraryview.cpp:419 internet/podcasts/podcastservice.cpp:438
+#: library/libraryview.cpp:419 internet/podcasts/podcastservice.cpp:444
 #: ui/mainwindow.cpp:721 widgets/fileviewlist.cpp:44
 msgid "Copy to device..."
 msgstr "Kopiatu gailura..."
@@ -1580,6 +1580,10 @@ msgid ""
 "recover your database"
 msgstr ""
 
+#: ../bin/src/ui_episodeinfowidget.h:133
+msgid "Date"
+msgstr ""
+
 #: playlist/playlist.cpp:1432 ../bin/src/ui_edittagdialog.h:715
 msgid "Date created"
 msgstr "Sorrera-data"
@@ -1630,7 +1634,7 @@ msgstr "Bistaratzeen arteko atzerapena"
 msgid "Delete"
 msgstr "Ezabatu"
 
-#: internet/podcasts/podcastservice.cpp:435
+#: internet/podcasts/podcastservice.cpp:441
 msgid "Delete downloaded data"
 msgstr "Ezabatu deskargatutako datuak"
 
@@ -1847,7 +1851,7 @@ msgstr ""
 msgid "Double clicking a song will..."
 msgstr "Abesti batean klik bikoitza eginez gero..."
 
-#: internet/podcasts/podcastservice.cpp:531
+#: internet/podcasts/podcastservice.cpp:550
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "Download %n episodes"
@@ -1869,8 +1873,8 @@ msgstr "Deskargarako bazkidetza"
 msgid "Download new episodes automatically"
 msgstr "Atal berriak automatikoki deskargatu"
 
-#: internet/podcasts/podcastservice.cpp:293
-#: internet/podcasts/podcastservice.cpp:332
+#: internet/podcasts/podcastservice.cpp:294
+#: internet/podcasts/podcastservice.cpp:333
 msgid "Download queued"
 msgstr "Deskarga zerrendaren zain"
 
@@ -1890,7 +1894,7 @@ msgstr "Deskargatu album hau"
 msgid "Download this album..."
 msgstr "Deskargatu album hau..."
 
-#: internet/podcasts/podcastservice.cpp:533
+#: internet/podcasts/podcastservice.cpp:552
 msgid "Download this episode"
 msgstr "Atal hau deskargatu"
 
@@ -1898,8 +1902,8 @@ msgstr "Atal hau deskargatu"
 msgid "Download..."
 msgstr "Deskargatu..."
 
-#: internet/podcasts/podcastservice.cpp:301
-#: internet/podcasts/podcastservice.cpp:341
+#: internet/podcasts/podcastservice.cpp:302
+#: internet/podcasts/podcastservice.cpp:342
 #, qt-format
 msgid "Downloading (%1%)..."
 msgstr "Deskargatzen (%%1)..."
@@ -1936,7 +1940,7 @@ msgstr "Dropbox"
 msgid "Dubstep"
 msgstr ""
 
-#: ../bin/src/ui_ripcddialog.h:308
+#: ../bin/src/ui_episodeinfowidget.h:134 ../bin/src/ui_ripcddialog.h:308
 msgid "Duration"
 msgstr ""
 
@@ -2073,6 +2077,10 @@ msgstr ""
 #: ../bin/src/ui_libraryfilterwidget.h:92
 msgid "Entire collection"
 msgstr "Bilduma osoa"
+
+#: internet/podcasts/podcastservice.cpp:532
+msgid "Episode information"
+msgstr ""
 
 #: ../bin/src/ui_equalizer.h:162 ../bin/src/ui_mainwindow.h:705
 msgid "Equalizer"
@@ -2394,9 +2402,10 @@ msgstr "Gailua ahazteak berau zerrenda honetatik ezabatuko du eta Clementine-k a
 #: ../bin/src/ui_libraryviewcontainer.h:58
 #: ../bin/src/ui_playlistcontainer.h:134
 #: ../bin/src/ui_playlistlistcontainer.h:126
-#: ../bin/src/ui_podcastinfowidget.h:190 ../bin/src/ui_querysearchpage.h:108
-#: ../bin/src/ui_querysortpage.h:136 ../bin/src/ui_searchpreview.h:103
-#: ../bin/src/ui_searchtermwidget.h:276 ../bin/src/ui_wizardfinishpage.h:82
+#: ../bin/src/ui_episodeinfowidget.h:131 ../bin/src/ui_podcastinfowidget.h:190
+#: ../bin/src/ui_querysearchpage.h:108 ../bin/src/ui_querysortpage.h:136
+#: ../bin/src/ui_searchpreview.h:103 ../bin/src/ui_searchtermwidget.h:276
+#: ../bin/src/ui_wizardfinishpage.h:82
 #: ../bin/src/ui_songkickconcertwidget.h:99
 #: ../bin/src/ui_transcoderoptionsaac.h:127
 #: ../bin/src/ui_transcoderoptionsflac.h:79
@@ -2628,7 +2637,7 @@ msgstr "Ez daukat Magnatune-ko konturik"
 msgid "Icon"
 msgstr "Ikonoa"
 
-#: widgets/fancytabwidget.cpp:441
+#: widgets/fancytabwidget.cpp:442
 msgid "Icons on top"
 msgstr "Ikonoak goian"
 
@@ -2883,7 +2892,7 @@ msgstr ""
 msgid "Large album cover (no details)"
 msgstr ""
 
-#: widgets/fancytabwidget.cpp:437
+#: widgets/fancytabwidget.cpp:438
 msgid "Large sidebar"
 msgstr "Albo-barra handia"
 
@@ -3158,11 +3167,11 @@ msgstr "Eskuz"
 msgid "Manufacturer"
 msgstr "Fabrikatzailea"
 
-#: internet/podcasts/podcastservice.cpp:450 ../bin/src/ui_organisedialog.h:259
+#: internet/podcasts/podcastservice.cpp:456 ../bin/src/ui_organisedialog.h:259
 msgid "Mark as listened"
 msgstr "Entzunda bezala markatu"
 
-#: internet/podcasts/podcastservice.cpp:449
+#: internet/podcasts/podcastservice.cpp:455
 msgid "Mark as new"
 msgstr "Berri bezala markatu"
 
@@ -3711,7 +3720,7 @@ msgstr "Aktuatzailea"
 msgid "Pixel"
 msgstr "Pixel"
 
-#: widgets/fancytabwidget.cpp:439
+#: widgets/fancytabwidget.cpp:440
 msgid "Plain sidebar"
 msgstr "Albo-barra sinplea"
 
@@ -3795,7 +3804,17 @@ msgstr ""
 msgid "Plugin status:"
 msgstr "Pluginaren egoera:"
 
-#: internet/podcasts/podcastservice.cpp:132
+#: ../bin/src/ui_podcastinfodialog.h:93
+msgid "Podcast Information"
+msgstr ""
+
+#: internet/podcasts/podcastservice.cpp:437
+#: internet/podcasts/podcastservice.cpp:535
+#: internet/podcasts/podcastservice.cpp:539
+msgid "Podcast information"
+msgstr ""
+
+#: internet/podcasts/podcastservice.cpp:133
 #: ../bin/src/ui_podcastsettingspage.h:250
 msgid "Podcasts"
 msgstr "Podcast-ak"
@@ -4710,7 +4729,7 @@ msgstr ""
 msgid "Small album cover"
 msgstr "Albumaren azal txikia"
 
-#: widgets/fancytabwidget.cpp:438
+#: widgets/fancytabwidget.cpp:439
 msgid "Small sidebar"
 msgstr "Albo-barra txikia"
 
@@ -4964,7 +4983,7 @@ msgstr "Spotify-ko pista izardunak sinkronizatzen"
 msgid "System colors"
 msgstr "Sistemako koloreak"
 
-#: widgets/fancytabwidget.cpp:440
+#: widgets/fancytabwidget.cpp:441
 msgid "Tabs on top"
 msgstr "Fitxak goian"
 
@@ -5312,7 +5331,7 @@ msgid "Unskip track"
 msgstr ""
 
 #: internet/podcasts/addpodcastdialog.cpp:70
-#: internet/podcasts/podcastservice.cpp:444
+#: internet/podcasts/podcastservice.cpp:450
 msgid "Unsubscribe"
 msgstr "Harpidetza kendu"
 
@@ -5320,7 +5339,7 @@ msgstr "Harpidetza kendu"
 msgid "Upcoming Concerts"
 msgstr "Hurrengo Kontzertuak"
 
-#: internet/podcasts/podcastservice.cpp:420
+#: internet/podcasts/podcastservice.cpp:421
 msgid "Update all podcasts"
 msgstr "Eguneratu podcast guztiak"
 
@@ -5332,7 +5351,7 @@ msgstr "Eguneratu bildumako aldatutako karpetak"
 msgid "Update the library when Clementine starts"
 msgstr "Eguneratu bilduma Clementine abiaraztean"
 
-#: internet/podcasts/podcastservice.cpp:429
+#: internet/podcasts/podcastservice.cpp:430
 msgid "Update this podcast"
 msgstr "Podcast hau eguneratu"
 

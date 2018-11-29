@@ -22,7 +22,6 @@ include_directories(${CMAKE_BINARY_DIR})
 include_directories(${GLIB_INCLUDE_DIRS})
 include_directories(${LIBXML_INCLUDE_DIRS})
 include_directories(${GOBJECT_INCLUDE_DIRS})
-include_directories(${LIBPROJECTM_INCLUDE_DIRS})
 include_directories(${QTSINGLEAPPLICATION_INCLUDE_DIRS})
 include_directories(${QTIOCOMPRESSOR_INCLUDE_DIRS})
 include_directories(${QXT_INCLUDE_DIRS})
@@ -30,8 +29,11 @@ include_directories(${SHA2_INCLUDE_DIRS})
 include_directories(${CHROMAPRINT_INCLUDE_DIRS})
 include_directories(${MYGPOQT5_INCLUDE_DIRS})
 
-find_package(OpenGL REQUIRED)
-include_directories(${OPENGL_INCLUDE_DIR})
+if (HAVE_VISUALISATIONS)
+  find_package(OpenGL REQUIRED)
+  include_directories(${OPENGL_INCLUDE_DIR})
+  include_directories(${LIBPROJECTM_INCLUDE_DIRS})
+endif(HAVE_VISUALISATIONS)
 
 if(HAVE_LIBLASTFM)
   include_directories(${LASTFM5_INCLUDE_DIRS})
@@ -256,6 +258,7 @@ set(SOURCES
   internet/podcasts/addpodcastbyurl.cpp
   internet/podcasts/addpodcastdialog.cpp
   internet/podcasts/addpodcastpage.cpp
+  internet/podcasts/episodeinfowidget.cpp
   internet/podcasts/fixedopmlpage.cpp
   internet/podcasts/gpoddersearchpage.cpp
   internet/podcasts/gpoddersync.cpp
@@ -550,6 +553,7 @@ set(HEADERS
   internet/podcasts/addpodcastbyurl.h
   internet/podcasts/addpodcastdialog.h
   internet/podcasts/addpodcastpage.h
+  internet/podcasts/episodeinfowidget.h
   internet/podcasts/fixedopmlpage.h
   internet/podcasts/gpoddersearchpage.h
   internet/podcasts/gpoddersync.h
@@ -704,6 +708,7 @@ set(UI
 
   internet/podcasts/addpodcastbyurl.ui
   internet/podcasts/addpodcastdialog.ui
+  internet/podcasts/episodeinfowidget.ui
   internet/podcasts/gpoddersearchpage.ui
   internet/podcasts/itunessearchpage.ui
   internet/podcasts/podcastinfodialog.ui
@@ -795,7 +800,7 @@ endif(HAVE_TRANSLATIONS)
 option(USE_INSTALL_PREFIX "Look for data in CMAKE_INSTALL_PREFIX" ON)
 
 # Visualisations
-optional_source(ENABLE_VISUALISATIONS
+optional_source(HAVE_VISUALISATIONS
   SOURCES
     visualisations/projectmpresetmodel.cpp
     visualisations/projectmvisualisation.cpp
@@ -1262,9 +1267,9 @@ target_link_libraries(clementine_lib
   Qocoa
 )
 
-if(ENABLE_VISUALISATIONS)
+if(HAVE_VISUALISATIONS)
   target_link_libraries(clementine_lib ${LIBPROJECTM_LIBRARIES})
-endif(ENABLE_VISUALISATIONS)
+endif(HAVE_VISUALISATIONS)
 
 if(HAVE_LIBLASTFM)
   target_link_libraries(clementine_lib ${LASTFM5_LIBRARIES})

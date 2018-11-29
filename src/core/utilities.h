@@ -39,9 +39,9 @@ class QXmlStreamReader;
 struct QMetaObject;
 
 namespace Utilities {
-QString PrettyTime(int seconds);
+QString PrettyTime(int seconds, bool always_show_hours = false);
 QString PrettyTimeDelta(int seconds);
-QString PrettyTimeNanosec(qint64 nanoseconds);
+QString PrettyTimeNanosec(qint64 nanoseconds, bool always_show_hours = false);
 QString PrettySize(quint64 bytes);
 QString PrettySize(const QSize& size);
 QString WordyTime(quint64 seconds);

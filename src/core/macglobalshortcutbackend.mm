@@ -24,6 +24,7 @@
 #include <AppKit/NSWorkspace.h>
 #include <Foundation/NSString.h>
 #include <IOKit/hidsystem/ev_keymap.h>
+#include <ApplicationServices/ApplicationServices.h>
 
 #include <QAction>
 #include <QList>
@@ -128,7 +129,14 @@ bool MacGlobalShortcutBackend::KeyPressed(const QKeySequence& sequence) {
 }
 
 bool MacGlobalShortcutBackend::IsAccessibilityEnabled() const {
-  return AXAPIEnabled();
+  bool accessibilityEnabled;
+  try{
+    accessibilityEnabled = AXAPIEnabled();
+  }catch(...){
+    NSDictionary *options = @{(id)kAXTrustedCheckOptionPrompt: @YES};
+    accessibilityEnabled = AXIsProcessTrustedWithOptions((CFDictionaryRef)options);
+  }
+  return accessibilityEnabled;
 }
 
 void MacGlobalShortcutBackend::ShowAccessibilityDialog() {

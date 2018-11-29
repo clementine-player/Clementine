@@ -20,7 +20,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2018-10-20 12:14+0000\n"
+"PO-Revision-Date: 2018-11-17 13:46+0000\n"
 "Last-Translator: hatstand <john.maguire@gmail.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/davidsansome/clementine/language/zh_CN/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -547,7 +547,7 @@ msgstr "添加新文件夹..."
 msgid "Add podcast"
 msgstr "添加播客"
 
-#: internet/podcasts/podcastservice.cpp:418 ../bin/src/ui_mainwindow.h:722
+#: internet/podcasts/podcastservice.cpp:419 ../bin/src/ui_mainwindow.h:722
 msgid "Add podcast..."
 msgstr "添加播客..."
 
@@ -892,7 +892,7 @@ msgstr "音频输出"
 msgid "Authentication failed"
 msgstr "认证失败"
 
-#: ../bin/src/ui_podcastinfowidget.h:191
+#: ../bin/src/ui_episodeinfowidget.h:132 ../bin/src/ui_podcastinfowidget.h:191
 msgid "Author"
 msgstr "作者"
 
@@ -1072,7 +1072,7 @@ msgstr "CUE 支持"
 msgid "Cancel"
 msgstr "取消"
 
-#: internet/podcasts/podcastservice.cpp:441
+#: internet/podcasts/podcastservice.cpp:447
 msgid "Cancel download"
 msgstr "取消下载"
 
@@ -1367,7 +1367,7 @@ msgid "Configure library..."
 msgstr "配置媒体库..."
 
 #: internet/podcasts/addpodcastdialog.cpp:77
-#: internet/podcasts/podcastservice.cpp:455
+#: internet/podcasts/podcastservice.cpp:461
 msgid "Configure podcasts..."
 msgstr "正在设置播客..."
 
@@ -1433,7 +1433,7 @@ msgstr "转换无损文件"
 msgid "Copy to clipboard"
 msgstr "复制到剪切板"
 
-#: library/libraryview.cpp:419 internet/podcasts/podcastservice.cpp:438
+#: library/libraryview.cpp:419 internet/podcasts/podcastservice.cpp:444
 #: ui/mainwindow.cpp:721 widgets/fileviewlist.cpp:44
 msgid "Copy to device..."
 msgstr "复制到设备..."
@@ -1589,6 +1589,10 @@ msgid ""
 "recover your database"
 msgstr "检测到数据库损坏。恢复数据库的方法请参考 https://github.com/clementine-player/Clementine/wiki/Database-Corruption "
 
+#: ../bin/src/ui_episodeinfowidget.h:133
+msgid "Date"
+msgstr ""
+
 #: playlist/playlist.cpp:1432 ../bin/src/ui_edittagdialog.h:715
 msgid "Date created"
 msgstr "创建日期"
@@ -1639,7 +1643,7 @@ msgstr "在两个视觉化效果间延迟切换"
 msgid "Delete"
 msgstr "删除"
 
-#: internet/podcasts/podcastservice.cpp:435
+#: internet/podcasts/podcastservice.cpp:441
 msgid "Delete downloaded data"
 msgstr "删除已下载的数据"
 
@@ -1856,7 +1860,7 @@ msgstr "双击播放列表中的歌曲将..."
 msgid "Double clicking a song will..."
 msgstr "双击歌曲将..."
 
-#: internet/podcasts/podcastservice.cpp:531
+#: internet/podcasts/podcastservice.cpp:550
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "Download %n episodes"
@@ -1878,8 +1882,8 @@ msgstr "下载会员"
 msgid "Download new episodes automatically"
 msgstr "自动下载新的节目"
 
-#: internet/podcasts/podcastservice.cpp:293
-#: internet/podcasts/podcastservice.cpp:332
+#: internet/podcasts/podcastservice.cpp:294
+#: internet/podcasts/podcastservice.cpp:333
 msgid "Download queued"
 msgstr "下载队列"
 
@@ -1899,7 +1903,7 @@ msgstr "下载此专辑"
 msgid "Download this album..."
 msgstr "下载此专辑..."
 
-#: internet/podcasts/podcastservice.cpp:533
+#: internet/podcasts/podcastservice.cpp:552
 msgid "Download this episode"
 msgstr "下载此节目"
 
@@ -1907,8 +1911,8 @@ msgstr "下载此节目"
 msgid "Download..."
 msgstr "下载..."
 
-#: internet/podcasts/podcastservice.cpp:301
-#: internet/podcasts/podcastservice.cpp:341
+#: internet/podcasts/podcastservice.cpp:302
+#: internet/podcasts/podcastservice.cpp:342
 #, qt-format
 msgid "Downloading (%1%)..."
 msgstr "下载中 (%1%)..."
@@ -1945,7 +1949,7 @@ msgstr "Dropbox"
 msgid "Dubstep"
 msgstr "回响贝斯"
 
-#: ../bin/src/ui_ripcddialog.h:308
+#: ../bin/src/ui_episodeinfowidget.h:134 ../bin/src/ui_ripcddialog.h:308
 msgid "Duration"
 msgstr "长度"
 
@@ -2082,6 +2086,10 @@ msgstr "在应用中输入此 IP 来连接上 Clementine。"
 #: ../bin/src/ui_libraryfilterwidget.h:92
 msgid "Entire collection"
 msgstr "整个集合"
+
+#: internet/podcasts/podcastservice.cpp:532
+msgid "Episode information"
+msgstr ""
 
 #: ../bin/src/ui_equalizer.h:162 ../bin/src/ui_mainwindow.h:705
 msgid "Equalizer"
@@ -2403,9 +2411,10 @@ msgstr "忘记设备将从列表删除该设备.如果下次您再次插入该�
 #: ../bin/src/ui_libraryviewcontainer.h:58
 #: ../bin/src/ui_playlistcontainer.h:134
 #: ../bin/src/ui_playlistlistcontainer.h:126
-#: ../bin/src/ui_podcastinfowidget.h:190 ../bin/src/ui_querysearchpage.h:108
-#: ../bin/src/ui_querysortpage.h:136 ../bin/src/ui_searchpreview.h:103
-#: ../bin/src/ui_searchtermwidget.h:276 ../bin/src/ui_wizardfinishpage.h:82
+#: ../bin/src/ui_episodeinfowidget.h:131 ../bin/src/ui_podcastinfowidget.h:190
+#: ../bin/src/ui_querysearchpage.h:108 ../bin/src/ui_querysortpage.h:136
+#: ../bin/src/ui_searchpreview.h:103 ../bin/src/ui_searchtermwidget.h:276
+#: ../bin/src/ui_wizardfinishpage.h:82
 #: ../bin/src/ui_songkickconcertwidget.h:99
 #: ../bin/src/ui_transcoderoptionsaac.h:127
 #: ../bin/src/ui_transcoderoptionsflac.h:79
@@ -2637,7 +2646,7 @@ msgstr "我没有 Magnatune 帐号"
 msgid "Icon"
 msgstr "图标"
 
-#: widgets/fancytabwidget.cpp:441
+#: widgets/fancytabwidget.cpp:442
 msgid "Icons on top"
 msgstr "图标在上"
 
@@ -2892,7 +2901,7 @@ msgstr "大专辑封面(详情如下)"
 msgid "Large album cover (no details)"
 msgstr "大专辑封面(无详情)"
 
-#: widgets/fancytabwidget.cpp:437
+#: widgets/fancytabwidget.cpp:438
 msgid "Large sidebar"
 msgstr "大侧边栏"
 
@@ -3167,11 +3176,11 @@ msgstr "手动"
 msgid "Manufacturer"
 msgstr "生产商"
 
-#: internet/podcasts/podcastservice.cpp:450 ../bin/src/ui_organisedialog.h:259
+#: internet/podcasts/podcastservice.cpp:456 ../bin/src/ui_organisedialog.h:259
 msgid "Mark as listened"
 msgstr "标记为已听"
 
-#: internet/podcasts/podcastservice.cpp:449
+#: internet/podcasts/podcastservice.cpp:455
 msgid "Mark as new"
 msgstr "标记为新的"
 
@@ -3720,7 +3729,7 @@ msgstr "表演者"
 msgid "Pixel"
 msgstr "像素"
 
-#: widgets/fancytabwidget.cpp:439
+#: widgets/fancytabwidget.cpp:440
 msgid "Plain sidebar"
 msgstr "普通侧边栏"
 
@@ -3804,7 +3813,17 @@ msgstr ""
 msgid "Plugin status:"
 msgstr "插件状态:"
 
-#: internet/podcasts/podcastservice.cpp:132
+#: ../bin/src/ui_podcastinfodialog.h:93
+msgid "Podcast Information"
+msgstr ""
+
+#: internet/podcasts/podcastservice.cpp:437
+#: internet/podcasts/podcastservice.cpp:535
+#: internet/podcasts/podcastservice.cpp:539
+msgid "Podcast information"
+msgstr ""
+
+#: internet/podcasts/podcastservice.cpp:133
 #: ../bin/src/ui_podcastsettingspage.h:250
 msgid "Podcasts"
 msgstr "播客"
@@ -4719,7 +4738,7 @@ msgstr "跳过曲目"
 msgid "Small album cover"
 msgstr "小专辑封面"
 
-#: widgets/fancytabwidget.cpp:438
+#: widgets/fancytabwidget.cpp:439
 msgid "Small sidebar"
 msgstr "小侧边栏"
 
@@ -4973,7 +4992,7 @@ msgstr "同步 Spotify 星号标记的曲目"
 msgid "System colors"
 msgstr "系统颜色"
 
-#: widgets/fancytabwidget.cpp:440
+#: widgets/fancytabwidget.cpp:441
 msgid "Tabs on top"
 msgstr "标签在上"
 
@@ -5321,7 +5340,7 @@ msgid "Unskip track"
 msgstr "取消掠过曲目"
 
 #: internet/podcasts/addpodcastdialog.cpp:70
-#: internet/podcasts/podcastservice.cpp:444
+#: internet/podcasts/podcastservice.cpp:450
 msgid "Unsubscribe"
 msgstr "取消订阅"
 
@@ -5329,7 +5348,7 @@ msgstr "取消订阅"
 msgid "Upcoming Concerts"
 msgstr "近期音乐会"
 
-#: internet/podcasts/podcastservice.cpp:420
+#: internet/podcasts/podcastservice.cpp:421
 msgid "Update all podcasts"
 msgstr "更新所有播客"
 
@@ -5341,7 +5360,7 @@ msgstr "更新改变的媒体库文件夹"
 msgid "Update the library when Clementine starts"
 msgstr "Clementine 启动时更新媒体库"
 
-#: internet/podcasts/podcastservice.cpp:429
+#: internet/podcasts/podcastservice.cpp:430
 msgid "Update this podcast"
 msgstr "更新此播客"
 

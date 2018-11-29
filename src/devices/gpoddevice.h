@@ -53,6 +53,7 @@ class GPodDevice : public ConnectedDevice, public virtual MusicStorage {
 
  protected slots:
   void LoadFinished(Itdb_iTunesDB* db);
+  void LoaderError(const QString& message);
 
  protected:
   Itdb_Track* AddTrackToITunesDb(const Song& metadata);

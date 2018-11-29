@@ -60,6 +60,7 @@ class MtpDevice : public ConnectedDevice {
 
  private slots:
   void LoadFinished();
+  void LoaderError(const QString& message);
 
  private:
   bool GetSupportedFiletypes(QList<Song::FileType>* ret,
