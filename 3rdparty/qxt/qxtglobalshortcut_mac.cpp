@@ -50,7 +50,8 @@ bool QxtGlobalShortcutPrivate::eventFilter(void* message)
     if (GetEventClass(event) == kEventClassKeyboard && GetEventKind(event) == kEventHotKeyPressed)
     {
         EventHotKeyID keyID;
-        GetEventParameter(event, kEventParamDirectObject, typeEventHotKeyID, NULL, sizeof(keyID), NULL, &keyID);
+        GetEventParameter(event, kEventParamDirectObject, typeEventHotKeyID,
+                          nullptr, sizeof(keyID), nullptr, &keyID);
         Identifier id = keyIDs.key(keyID.id);
         activateShortcut(id.second, id.first);
     }
@@ -178,7 +179,8 @@ bool QxtGlobalShortcutPrivate::registerShortcut(quint32 nativeKey, quint32 nativ
         EventTypeSpec t;
         t.eventClass = kEventClassKeyboard;
         t.eventKind = kEventHotKeyPressed;
-        InstallApplicationEventHandler(&qxt_mac_handle_hot_key, 1, &t, NULL, NULL);
+        InstallApplicationEventHandler(&qxt_mac_handle_hot_key, 1, &t, nullptr,
+                                       nullptr);
     }
 
     EventHotKeyID keyID;
