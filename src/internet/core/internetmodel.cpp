@@ -41,7 +41,6 @@
 #include "internet/magnatune/magnatuneservice.h"
 #include "internet/podcasts/podcastservice.h"
 #include "internet/somafm/somafmservice.h"
-#include "internet/spotify/spotifyservice.h"
 #include "internet/subsonic/subsonicservice.h"
 #include "smartplaylists/generatormimedata.h"
 
@@ -59,6 +58,9 @@
 #endif
 #ifdef HAVE_SEAFILE
 #include "internet/seafile/seafileservice.h"
+#endif
+#ifdef HAVE_SPOTIFY
+#include "internet/spotify/spotifyservice.h"
 #endif
 
 using smart_playlists::Generator;
@@ -92,7 +94,9 @@ InternetModel::InternetModel(Application* app, QObject* parent)
   AddService(new RadioTunesService(app, this));
   AddService(new SomaFMService(app, this));
   AddService(new IntergalacticFMService(app, this));
+#ifdef HAVE_SPOTIFY
   AddService(new SpotifyService(app, this));
+#endif
   AddService(new SubsonicService(app, this));
 #ifdef HAVE_BOX
   AddService(new BoxService(app, this));

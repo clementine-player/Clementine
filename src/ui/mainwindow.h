@@ -339,7 +339,7 @@ signals:
   std::unique_ptr<TrackSelectionDialog> track_selection_dialog_;
   PlaylistItemList autocomplete_tag_items_;
 
-#ifdef ENABLE_VISUALISATIONS
+#ifdef HAVE_VISUALISATIONS
   std::unique_ptr<VisualisationContainer> visualisation_;
 #endif
 

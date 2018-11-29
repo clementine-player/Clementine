@@ -37,6 +37,7 @@
 #include <QTimer>
 #include <QUndoStack>
 #include <QtDebug>
+#include <QPainter>
 
 #ifdef Q_OS_WIN32
 #include <qtsparkle/Updater>
@@ -139,7 +140,7 @@
 #include "wiimotedev/shortcuts.h"
 #endif
 
-#ifdef ENABLE_VISUALISATIONS
+#ifdef HAVE_VISUALISATIONS
 #include "visualisations/visualisationcontainer.h"
 #endif
 
@@ -526,7 +527,7 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
       ui_->action_next_playlist, /* These two actions aren't associated */
       ui_->action_previous_playlist /* to a button but to the main window */);
 
-#ifdef ENABLE_VISUALISATIONS
+#ifdef HAVE_VISUALISATIONS
   connect(ui_->action_visualisations, SIGNAL(triggered()),
           SLOT(ShowVisualisations()));
 #else
@@ -2731,7 +2732,7 @@ void MainWindow::CheckFullRescanRevisions() {
 void MainWindow::ShowQueueManager() { queue_manager_->show(); }
 
 void MainWindow::ShowVisualisations() {
-#ifdef ENABLE_VISUALISATIONS
+#ifdef HAVE_VISUALISATIONS
   if (!visualisation_) {
     visualisation_.reset(new VisualisationContainer);
 
@@ -2750,7 +2751,7 @@ void MainWindow::ShowVisualisations() {
   }
 
   visualisation_->show();
-#endif  // ENABLE_VISUALISATIONS
+#endif  // HAVE_VISUALISATIONS
 }
 
 void MainWindow::ConnectInfoView(SongInfoBase* view) {

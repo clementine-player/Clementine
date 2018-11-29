@@ -38,6 +38,7 @@ class QDBusPendingCallWatcher;
 
 #ifdef HAVE_DBUS
 #include <QDBusArgument>
+#include <QDBusPendingCall>
 
 QDBusArgument& operator<<(QDBusArgument& arg, const QImage& image);
 const QDBusArgument& operator>>(const QDBusArgument& arg, QImage& image);
@@ -106,7 +107,9 @@ class OSD : public QObject {
   QString ReplaceVariable(const QString& variable, const Song& song);
 
  private slots:
+#if defined(HAVE_DBUS)
   void CallFinished(QDBusPendingCallWatcher* watcher);
+#endif
   void AlbumArtLoaded(const Song& song, const QString& uri,
                       const QImage& image);
 

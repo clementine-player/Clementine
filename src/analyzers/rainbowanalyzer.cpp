@@ -26,7 +26,9 @@
 #include <cmath>
 
 #include <QTimerEvent>
+#include <QPainter>
 #include <QBrush>
+#include <QPen>
 
 #include "core/arraysize.h"
 #include "core/logging.h"

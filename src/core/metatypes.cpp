@@ -113,7 +113,6 @@ void RegisterMetaTypes() {
   qRegisterMetaType<QFileInfo>("QFileInfo");
 
 #ifdef HAVE_DBUS
-  qDBusRegisterMetaType<QImage>();
   qDBusRegisterMetaType<TrackMetadata>();
   qDBusRegisterMetaType<TrackIds>();
   qDBusRegisterMetaType<QList<QByteArray>>();
@@ -123,5 +122,8 @@ void RegisterMetaTypes() {
 
   qDBusRegisterMetaType<InterfacesAndProperties>();
   qDBusRegisterMetaType<ManagedObjectList>();
+#ifdef HAVE_X11
+  qDBusRegisterMetaType<QImage>();
+#endif
 #endif
 }
