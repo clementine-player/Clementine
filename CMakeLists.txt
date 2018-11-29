@@ -346,11 +346,6 @@ if (APPLE AND USE_BUNDLE AND NOT USE_BUNDLE_DIR)
   set(USE_BUNDLE_DIR "../PlugIns")
 endif()
 
-option(USE_BUNDLE "Bundle macos/windows dependencies" ON)
-if (APPLE AND USE_BUNDLE AND NOT USE_BUNDLE_DIR)
-  set(USE_BUNDLE_DIR "../PlugIns")
-endif()
-
 if(CRYPTOPP_FOUND)
   set(HAVE_CRYPTOPP ON)
   if(HAVE_SPOTIFY)
