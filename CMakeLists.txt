@@ -28,19 +28,12 @@ if (CCACHE_EXECUTABLE)
   SET_PROPERTY(GLOBAL PROPERTY RULE_LAUNCH_LINK ${CCACHE_EXECUTABLE})
 endif ()
 
-if (UNIX AND NOT APPLE)
-  set(LINUX 1)
-endif (UNIX AND NOT APPLE)
-
-find_package(Qt4 4.8.1 REQUIRED QtCore QtGui QtOpenGL QtSql QtNetwork QtXml)
-
-if(NOT APPLE)
-  find_package(Qt4 COMPONENTS QtWebKit)
-endif(NOT APPLE)
-
-# Find Qt's lconvert binary.  Try qt's binary dir first, fall back to looking in PATH
-find_program(QT_LCONVERT_EXECUTABLE NAMES lconvert lconvert-qt4 PATHS ${QT_BINARY_DIR} NO_DEFAULT_PATH)
-find_program(QT_LCONVERT_EXECUTABLE NAMES lconvert lconvert-qt4)
+if (${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
+  set(LINUX ON)
+endif()
+if (${CMAKE_SYSTEM_NAME} STREQUAL "FreeBSD")
+  set(FREEBSD ON)
+endif()
 
 if(APPLE)
   if(NOT QT_MAC_USE_COCOA)
@@ -48,15 +41,23 @@ if(APPLE)
   endif(NOT QT_MAC_USE_COCOA)
 endif(APPLE)
 
-find_package(OpenGL REQUIRED)
+set(OpenGL_GL_PREFERENCE LEGACY)
+find_package(OpenGL)
+if(OPENGL_FOUND)
+  set(HAVE_OPENGL ON)
+endif(OPENGL_FOUND)
 find_package(Boost REQUIRED)
 find_package(Gettext REQUIRED)
 find_package(PkgConfig REQUIRED)
 find_package(Protobuf REQUIRED)
 find_package(FFTW3)
 find_package(ALSA)
-if(ALSA_FOUND)
-  set(HAVE_ALSA ON)
+pkg_check_modules(DBUS dbus-1)
+if (NOT APPLE)
+  find_package(X11)
+endif()
+if(X11_FOUND)
+  set(HAVE_X11 ON)
 endif()
 
 find_library(PROTOBUF_STATIC_LIBRARY libprotobuf.a libprotobuf)
@@ -79,7 +80,7 @@ pkg_check_modules(LIBMYGPO_QT libmygpo-qt>=1.0.9)
 pkg_check_modules(LIBPULSE libpulse)
 pkg_check_modules(LIBXML libxml-2.0)
 pkg_check_modules(QJSON REQUIRED QJson)
-pkg_check_modules(SPOTIFY libspotify>=12.1.45)
+pkg_check_modules(LIBSPOTIFY libspotify>=12.1.45)
 pkg_check_modules(TAGLIB taglib)
 
 if (WIN32)
@@ -92,6 +93,22 @@ find_path(LASTFM_INCLUDE_DIRS lastfm/ws.h)
 find_path(LASTFM1_INCLUDE_DIRS lastfm/Track.h)
 
 find_path(SPARSEHASH_INCLUDE_DIRS google/sparsetable)
+
+# QT
+find_package(Qt4 4.8.1 REQUIRED QtCore QtGui QtSql QtNetwork QtXml)
+if (DBUS_FOUND)
+  find_package(Qt4 REQUIRED QtDbus)
+endif ()
+if (OPENGL_FOUND)
+  find_package(Qt4 REQUIRED QtOpenGL)
+endif(OPENGL_FOUND)
+
+# We can include the Qt definitions now
+include(${QT_USE_FILE})
+
+# Find Qt's lconvert binary.  Try qt's binary dir first, fall back to looking in PATH
+find_program(QT_LCONVERT_EXECUTABLE NAMES lconvert lconvert-qt4 PATHS ${QT_BINARY_DIR} NO_DEFAULT_PATH)
+find_program(QT_LCONVERT_EXECUTABLE NAMES lconvert lconvert-qt4)
 
 # Only use system taglib if it's greater than 1.11.1
 # There is a bug in version 1.11.1 corrupting Ogg files, see: https://github.com/taglib/taglib/issues/864
@@ -135,13 +152,11 @@ endif()
 
 if (APPLE)
   find_library(SPARKLE Sparkle)
-
-  find_library(SPOTIFY libspotify)
-  if (SPOTIFY)
-    set (SPOTIFY_FOUND ON)
-    set (SPOTIFY_INCLUDE_DIRS ${SPOTIFY})
-    set (SPOTIFY_LIBRARIES ${SPOTIFY})
-  endif (SPOTIFY)
+  find_library(LIBSPOTIFY libspotify)
+  if(LIBSPOTIFY_FOUND)
+    set(LIBSPOTIFY_INCLUDE_DIRS ${LIBSPOTIFY})
+    set(LIBSPOTIFY_LIBRARIES ${LIBSPOTIFY})
+  endif(LIBSPOTIFY_FOUND)
 
   add_subdirectory(3rdparty/SPMediaKeyTap)
   set(SPMEDIAKEYTAP_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/SPMediaKeyTap)
@@ -160,11 +175,6 @@ add_definitions(${QT_DEFINITIONS})
 link_directories(${TAGLIB_LIBRARY_DIRS})
 link_directories(${QJSON_LIBRARY_DIRS})
 link_directories(${GSTREAMER_LIBRARY_DIRS})
-
-# Don't try to use webkit if their include directories couldn't be found.
-if (NOT QT_QTWEBKIT_INCLUDE_DIR)
-  set (QT_USE_QTWEBKIT 0)
-endif (NOT QT_QTWEBKIT_INCLUDE_DIR)
 
 include_directories(${Boost_INCLUDE_DIRS})
 include_directories(${TAGLIB_INCLUDE_DIRS})
@@ -256,24 +266,33 @@ optional_component(LIBLASTFM ON "Last.fm support"
 )
 
 optional_component(DBUS ON "D-Bus support"
-  DEPENDS "Linux" LINUX
+  DEPENDS "D-Bus" DBUS_FOUND
 )
 
 optional_component(WIIMOTEDEV ON "Wiimote support"
-  DEPENDS "D-Bus support" HAVE_DBUS
+  DEPENDS "D-Bus support" DBUS_FOUND
 )
 
 optional_component(DEVICEKIT ON "Devices: DeviceKit backend"
-  DEPENDS "D-Bus support" HAVE_DBUS
+  DEPENDS "D-Bus support" DBUS_FOUND
 )
 
 optional_component(UDISKS2 ON "Devices: UDisks2 backend"
-  DEPENDS "D-Bus support" HAVE_DBUS
+  DEPENDS "D-Bus support" DBUS_FOUND
+)
+
+if (CRYPTOPP_FOUND OR HAVE_SPOTIFY_BLOB)
+  set(CRYPTOPP_OR_HAVE_SPOTIFY_BLOB ON)
+endif()
+
+optional_component(SPOTIFY ON "Spotify support"
+  DEPENDS "cryptopp or spotify blob" CRYPTOPP_OR_HAVE_SPOTIFY_BLOB
 )
 
 optional_component(SPOTIFY_BLOB ON "Spotify support: non-GPL binary helper"
+  DEPENDS "spotify support" HAVE_SPOTIFY
   DEPENDS "protobuf" PROTOBUF_FOUND PROTOBUF_PROTOC_EXECUTABLE
-  DEPENDS "libspotify" SPOTIFY_FOUND
+  DEPENDS "libspotify" LIBSPOTIFY_FOUND
 )
 
 optional_component(MOODBAR ON "Moodbar support"
@@ -281,42 +300,49 @@ optional_component(MOODBAR ON "Moodbar support"
 )
 
 optional_component(SPARKLE ON "Sparkle integration"
-  DEPENDS "Mac OS X" APPLE
+  DEPENDS "macOS" APPLE
   DEPENDS "Sparkle" SPARKLE
+)
+
+optional_component(ALSA ON "ALSA integration"
+  DEPENDS "ALSA" ALSA_FOUND
 )
 
 optional_component(LIBPULSE ON "Pulse audio integration"
   DEPENDS "libpulse" LIBPULSE_FOUND
 )
 
-optional_component(VISUALISATIONS ON "Visualisations")
+optional_component(VISUALISATIONS ON "Visualisations"
+  DEPENDS "opengl" OPENGL_FOUND
+)
 
-if(NOT HAVE_SPOTIFY_BLOB AND NOT CRYPTOPP_FOUND)
-  message(FATAL_ERROR "Either crypto++ must be available or the non-GPL Spotify "
-          "code must be compiled in")
-elseif(CRYPTOPP_FOUND)
-  set(HAVE_CRYPTOPP ON)
-  set(HAVE_SPOTIFY_DOWNLOADER ON)
+optional_component(TRANSLATIONS ON "Translations"
+  DEPENDS "gettext" GETTEXT_XGETTEXT_EXECUTABLE
+  DEPENDS "lconvert" QT_LCONVERT_EXECUTABLE
+)
+
+option(USE_BUNDLE "Bundle macos/windows dependencies" ON)
+if (APPLE AND USE_BUNDLE AND NOT USE_BUNDLE_DIR)
+  set(USE_BUNDLE_DIR "../PlugIns")
 endif()
 
-# Find DBus if it's enabled
-if (HAVE_DBUS)
-  find_package(Qt4 REQUIRED QtDbus)
-endif ()
-
-# We can include the Qt definitions now
-include(${QT_USE_FILE})
+if(CRYPTOPP_FOUND)
+  set(HAVE_CRYPTOPP ON)
+  if(HAVE_SPOTIFY)
+    set(HAVE_SPOTIFY_DOWNLOADER ON)
+  endif(HAVE_SPOTIFY)
+endif(CRYPTOPP_FOUND)
 
 # Remove GLU and GL from the link line - they're not really required
 # and don't exist on my mingw toolchain
 list(REMOVE_ITEM QT_LIBRARIES "-lGLU -lGL")
 
+option(USE_SYSTEM_PROJECTM "Don't set this option unless your system projectM library has been compiled with the Clementine patches in 3rdparty" OFF)
 option(BUNDLE_PROJECTM_PRESETS "Install Clementine's own copies of libprojectm presets - disable this if you want to use a system package instead" ON)
 
-if(ENABLE_VISUALISATIONS)
+if(HAVE_VISUALISATIONS)
   # When/if upstream accepts our patches then these options can be used to link
   # to system installed projectM instead.
-  option(USE_SYSTEM_PROJECTM "Don't set this option unless your system projectM library has been compiled with the Clementine patches in 3rdparty" OFF)
   if(USE_SYSTEM_PROJECTM)
     pkg_check_modules(LIBPROJECTM libprojectM)
   else(USE_SYSTEM_PROJECTM)
@@ -324,7 +350,7 @@ if(ENABLE_VISUALISATIONS)
     set(LIBPROJECTM_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/libprojectm)
     set(LIBPROJECTM_LIBRARIES projectM)
   endif(USE_SYSTEM_PROJECTM)
-endif(ENABLE_VISUALISATIONS)
+endif(HAVE_VISUALISATIONS)
 
 
 # Build our copy of QSqlLiteDriver.

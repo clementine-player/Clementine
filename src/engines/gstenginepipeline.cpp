@@ -15,6 +15,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "config.h"
+
 #include <limits>
 
 #include <QCoreApplication>
@@ -33,8 +35,10 @@
 #include "core/signalchecker.h"
 #include "core/utilities.h"
 #include "internet/core/internetmodel.h"
+#ifdef HAVE_SPOTIFY
 #include "internet/spotify/spotifyserver.h"
 #include "internet/spotify/spotifyservice.h"
+#endif
 
 const int GstEnginePipeline::kGstStateTimeoutNanosecs = 10000000;
 const int GstEnginePipeline::kFaderFudgeMsec = 2000;
@@ -151,6 +155,7 @@ bool GstEnginePipeline::ReplaceDecodeBin(GstElement* new_bin) {
 bool GstEnginePipeline::ReplaceDecodeBin(const QUrl& url) {
   GstElement* new_bin = nullptr;
 
+#ifdef HAVE_SPOTIFY
   if (url.scheme() == "spotify") {
     new_bin = gst_bin_new("spotify_bin");
 
@@ -181,6 +186,7 @@ bool GstEnginePipeline::ReplaceDecodeBin(const QUrl& url) {
         spotify_server, "StartPlayback", Qt::QueuedConnection,
         Q_ARG(QString, url.toString()), Q_ARG(quint16, port));
   } else {
+#endif
     new_bin = engine_->CreateElement("uridecodebin");
     if (!new_bin) return false;
     g_object_set(G_OBJECT(new_bin), "uri", url.toEncoded().constData(),
@@ -190,7 +196,9 @@ bool GstEnginePipeline::ReplaceDecodeBin(const QUrl& url) {
     CHECKED_GCONNECT(G_OBJECT(new_bin), "pad-added", &NewPadCallback, this);
     CHECKED_GCONNECT(G_OBJECT(new_bin), "notify::source", &SourceSetupCallback,
                      this);
+#ifdef HAVE_SPOTIFY
   }
+#endif
 
   return ReplaceDecodeBin(new_bin);
 }
@@ -1043,6 +1051,7 @@ GstState GstEnginePipeline::state() const {
 }
 
 QFuture<GstStateChangeReturn> GstEnginePipeline::SetState(GstState state) {
+#ifdef HAVE_SPOTIFY
   if (url_.scheme() == "spotify" && !buffering_) {
     const GstState current_state = this->state();
 
@@ -1061,6 +1070,7 @@ QFuture<GstStateChangeReturn> GstEnginePipeline::SetState(GstState state) {
                                 Q_ARG(bool, false));
     }
   }
+#endif
   return ConcurrentRun::Run<GstStateChangeReturn, GstElement*, GstState>(
       &set_state_threadpool_, &gst_element_set_state, pipeline_, state);
 }

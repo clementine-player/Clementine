@@ -34,7 +34,6 @@
 #include "internet/digitally/digitallyimportedsettingspage.h"
 #include "internet/magnatune/magnatunesettingspage.h"
 #include "internet/podcasts/podcastsettingspage.h"
-#include "internet/spotify/spotifysettingspage.h"
 #include "internet/subsonic/subsonicsettingspage.h"
 #include "library/librarysettingspage.h"
 #include "mainwindow.h"
@@ -76,6 +75,10 @@
 
 #ifdef HAVE_SEAFILE
 #include "internet/seafile/seafilesettingspage.h"
+#endif
+
+#ifdef HAVE_SPOTIFY
+#include "internet/spotify/spotifysettingspage.h"
 #endif
 
 #include <QAbstractButton>
@@ -174,7 +177,9 @@ SettingsDialog::SettingsDialog(Application* app, BackgroundStreams* streams,
   AddPage(Page_Skydrive, new SkydriveSettingsPage(this), providers);
 #endif
 
+#ifdef HAVE_SPOTIFY
   AddPage(Page_Spotify, new SpotifySettingsPage(this), providers);
+#endif
 
 #ifdef HAVE_SEAFILE
   AddPage(Page_Seafile, new SeafileSettingsPage(this), providers);

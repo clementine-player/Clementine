@@ -26,6 +26,8 @@
 #ifndef ANALYZERS_ANALYZERBASE_H_
 #define ANALYZERS_ANALYZERBASE_H_
 
+#include "config.h"
+
 #ifdef __FreeBSD__
 #include <sys/types.h>
 #endif
@@ -38,6 +40,7 @@
 #include <QWidget>
 #include <vector>
 
+#ifdef HAVE_OPENGL
 #include <QGLWidget>
 #ifdef Q_WS_MACX
 #include <OpenGL/gl.h>
@@ -45,6 +48,7 @@
 #else
 #include <GL/gl.h>
 #include <GL/glu.h>
+#endif
 #endif
 
 class QEvent;

@@ -162,13 +162,15 @@ void SetGstreamerEnvironment() {
   QString registry_filename;
 
 // On windows and mac we bundle the gstreamer plugins with clementine
+#ifdef USE_BUNDLE
 #if defined(Q_OS_DARWIN)
-  scanner_path =
-      QCoreApplication::applicationDirPath() + "/../PlugIns/gst-plugin-scanner";
-  plugin_path =
-      QCoreApplication::applicationDirPath() + "/../PlugIns/gstreamer";
+  scanner_path = QCoreApplication::applicationDirPath() + "/" + USE_BUNDLE_DIR +
+                 "/gst-plugin-scanner";
+  plugin_path = QCoreApplication::applicationDirPath() + "/" + USE_BUNDLE_DIR +
+                "/gstreamer";
 #elif defined(Q_OS_WIN32)
   plugin_path = QCoreApplication::applicationDirPath() + "/gstreamer-plugins";
+#endif
 #endif
 
 #if defined(Q_OS_WIN32) || defined(Q_OS_DARWIN)
@@ -188,9 +190,9 @@ void SetGstreamerEnvironment() {
     SetEnv("GST_REGISTRY", registry_filename);
   }
 
-#ifdef Q_OS_DARWIN
-  SetEnv("GIO_EXTRA_MODULES",
-         QCoreApplication::applicationDirPath() + "/../PlugIns/gio-modules");
+#if defined(Q_OS_DARWIN) && defined(USE_BUNDLE)
+  SetEnv("GIO_EXTRA_MODULES", QCoreApplication::applicationDirPath() + "/" +
+                                  USE_BUNDLE_DIR + "/gio-modules");
 #endif
 
   SetEnv("PULSE_PROP_media.role", "music");
@@ -350,9 +352,13 @@ int main(int argc, char* argv[]) {
             .toInt());
   }
 
-#ifdef Q_OS_DARWIN
-  QCoreApplication::setLibraryPaths(
-      QStringList() << QCoreApplication::applicationDirPath() + "/../PlugIns");
+#if defined(Q_OS_DARWIN) && defined(USE_BUNDLE)
+  qLog(Debug) << "Looking for resources in" +
+                     QCoreApplication::applicationDirPath() + "/" +
+                     USE_BUNDLE_DIR;
+  QCoreApplication::setLibraryPaths(QStringList()
+                                    << QCoreApplication::applicationDirPath() +
+                                           "/" + USE_BUNDLE_DIR);
 #endif
 
   a.setQuitOnLastWindowClosed(false);
@@ -394,7 +400,9 @@ int main(int argc, char* argv[]) {
 
   // Resources
   Q_INIT_RESOURCE(data);
+#ifdef HAVE_TRANSLATIONS
   Q_INIT_RESOURCE(translations);
+#endif
 
   // Add root CA cert for SoundCloud, whose certificate is missing on OS X.
   QSslSocket::addDefaultCaCertificates(

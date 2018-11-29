@@ -20,13 +20,14 @@
 #define CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}"
 #define CMAKE_EXECUTABLE_SUFFIX "${CMAKE_EXECUTABLE_SUFFIX}"
 
-#cmakedefine ENABLE_VISUALISATIONS
+#cmakedefine HAVE_VISUALISATIONS
 #cmakedefine HAVE_AMAZON_CLOUD_DRIVE
 #cmakedefine HAVE_AUDIOCD
 #cmakedefine HAVE_BOX
 #cmakedefine HAVE_BREAKPAD
 #cmakedefine HAVE_CRYPTOPP
 #cmakedefine HAVE_DBUS
+#cmakedefine HAVE_X11
 #cmakedefine HAVE_DEVICEKIT
 #cmakedefine HAVE_DROPBOX
 #cmakedefine HAVE_GIO
@@ -44,9 +45,15 @@
 #cmakedefine HAVE_SPOTIFY_DOWNLOADER
 #cmakedefine HAVE_UDISKS2
 #cmakedefine HAVE_WIIMOTEDEV
+#cmakedefine HAVE_OPENGL
+#cmakedefine HAVE_TRANSLATIONS
+#cmakedefine HAVE_SPOTIFY
 #cmakedefine TAGLIB_HAS_OPUS
 #cmakedefine USE_INSTALL_PREFIX
 #cmakedefine USE_SYSTEM_PROJECTM
 #cmakedefine USE_SYSTEM_SHA2
+#cmakedefine USE_BUNDLE
+
+#define USE_BUNDLE_DIR "${USE_BUNDLE_DIR}"
 
 #endif  // CONFIG_H_IN

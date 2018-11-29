@@ -26,7 +26,9 @@
 
 #include "analyzerbase.h"
 
-#include <QDateTime> 
+#include <QDateTime>
+#include <QPainter>
+#include <QPen>
 
 namespace Rainbow {
 class RainbowAnalyzer : public Analyzer::Base {
