@@ -90,7 +90,7 @@ SpotifyService::SpotifyService(Application* app, InternetModel* parent)
 // Build the search path for the binary blob.
 // Look for one distributed alongside clementine first, then check in the
 // user's home directory for any that have been downloaded.
-#if defined(Q_OS_MACOS) && defined(USE_BUNDLE)
+#if defined(Q_OS_MAC) && defined(USE_BUNDLE)
   system_blob_path_ = QCoreApplication::applicationDirPath() + "/" +
                       USE_BUNDLE_DIR + "/clementine-spotifyblob";
 #else
