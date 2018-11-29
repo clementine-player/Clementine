@@ -164,10 +164,10 @@ void SetGstreamerEnvironment() {
 // On windows and mac we bundle the gstreamer plugins with clementine
 #ifdef USE_BUNDLE
 #if defined(Q_OS_DARWIN)
-  scanner_path =
-      QCoreApplication::applicationDirPath() + "/" + USE_BUNDLE_DIR + "/gst-plugin-scanner";
-  plugin_path =
-      QCoreApplication::applicationDirPath() + "/" + USE_BUNDLE_DIR + "/gstreamer";
+  scanner_path = QCoreApplication::applicationDirPath() + "/" + USE_BUNDLE_DIR +
+                 "/gst-plugin-scanner";
+  plugin_path = QCoreApplication::applicationDirPath() + "/" + USE_BUNDLE_DIR +
+                "/gstreamer";
 #elif defined(Q_OS_WIN32)
   plugin_path = QCoreApplication::applicationDirPath() + "/gstreamer-plugins";
 #endif
@@ -191,8 +191,8 @@ void SetGstreamerEnvironment() {
   }
 
 #if defined(Q_OS_DARWIN) && defined(USE_BUNDLE)
-  SetEnv("GIO_EXTRA_MODULES",
-         QCoreApplication::applicationDirPath() + "/" + USE_BUNDLE_DIR + "/gio-modules");
+  SetEnv("GIO_EXTRA_MODULES", QCoreApplication::applicationDirPath() + "/" +
+                                  USE_BUNDLE_DIR + "/gio-modules");
 #endif
 
   SetEnv("PULSE_PROP_media.role", "music");
@@ -353,9 +353,12 @@ int main(int argc, char* argv[]) {
   }
 
 #if defined(Q_OS_DARWIN) && defined(USE_BUNDLE)
-  qLog(Debug) << "Looking for resources in" + QCoreApplication::applicationDirPath() + "/" + USE_BUNDLE_DIR;
-  QCoreApplication::setLibraryPaths(
-      QStringList() << QCoreApplication::applicationDirPath() + "/" + USE_BUNDLE_DIR);
+  qLog(Debug) << "Looking for resources in" +
+                     QCoreApplication::applicationDirPath() + "/" +
+                     USE_BUNDLE_DIR;
+  QCoreApplication::setLibraryPaths(QStringList()
+                                    << QCoreApplication::applicationDirPath() +
+                                           "/" + USE_BUNDLE_DIR);
 #endif
 
   a.setQuitOnLastWindowClosed(false);

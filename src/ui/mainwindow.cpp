@@ -28,6 +28,7 @@
 #include <QLinearGradient>
 #include <QMenu>
 #include <QMessageBox>
+#include <QPainter>
 #include <QSettings>
 #include <QShortcut>
 #include <QSignalMapper>
@@ -37,7 +38,6 @@
 #include <QTimer>
 #include <QUndoStack>
 #include <QtDebug>
-#include <QPainter>
 
 #ifdef Q_OS_WIN32
 #include <qtsparkle/Updater>

@@ -36,8 +36,8 @@
 #include "core/utilities.h"
 #include "internet/core/internetmodel.h"
 #ifdef HAVE_SPOTIFY
-#  include "internet/spotify/spotifyserver.h"
-#  include "internet/spotify/spotifyservice.h"
+#include "internet/spotify/spotifyserver.h"
+#include "internet/spotify/spotifyservice.h"
 #endif
 
 const int GstEnginePipeline::kGstStateTimeoutNanosecs = 10000000;

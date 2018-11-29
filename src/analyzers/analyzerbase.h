@@ -41,14 +41,14 @@
 #include <vector>
 
 #ifdef HAVE_OPENGL
-#  include <QGLWidget>
-#  ifdef Q_WS_MACX
-#    include <OpenGL/gl.h>
-#    include <OpenGL/glu.h>
-#  else
-#    include <GL/gl.h>
-#  include <GL/glu.h>
-#  endif
+#include <QGLWidget>
+#ifdef Q_WS_MACX
+#include <OpenGL/gl.h>
+#include <OpenGL/glu.h>
+#else
+#include <GL/gl.h>
+#include <GL/glu.h>
+#endif
 #endif
 
 class QEvent;

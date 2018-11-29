@@ -91,8 +91,8 @@ SpotifyService::SpotifyService(Application* app, InternetModel* parent)
 // Look for one distributed alongside clementine first, then check in the
 // user's home directory for any that have been downloaded.
 #if defined(Q_OS_MACOS) && defined(USE_BUNDLE)
-  system_blob_path_ = QCoreApplication::applicationDirPath() +
-                      "/" + USE_BUNDLE_DIR + "/clementine-spotifyblob";
+  system_blob_path_ = QCoreApplication::applicationDirPath() + "/" +
+                      USE_BUNDLE_DIR + "/clementine-spotifyblob";
 #else
   system_blob_path_ = QCoreApplication::applicationDirPath() +
                       "/clementine-spotifyblob" CMAKE_EXECUTABLE_SUFFIX;
