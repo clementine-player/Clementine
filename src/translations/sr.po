@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2018-10-20 12:14+0000\n"
+"PO-Revision-Date: 2018-11-17 13:46+0000\n"
 "Last-Translator: hatstand <john.maguire@gmail.com>\n"
 "Language-Team: Serbian (http://www.transifex.com/davidsansome/clementine/language/sr/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -537,7 +537,7 @@ msgstr "Додај нову фасциклу..."
 msgid "Add podcast"
 msgstr "Додавање подкаста"
 
-#: internet/podcasts/podcastservice.cpp:418 ../bin/src/ui_mainwindow.h:722
+#: internet/podcasts/podcastservice.cpp:419 ../bin/src/ui_mainwindow.h:722
 msgid "Add podcast..."
 msgstr "Додај подкаст..."
 
@@ -882,7 +882,7 @@ msgstr "Излаз звука"
 msgid "Authentication failed"
 msgstr "Аутентификација није успела"
 
-#: ../bin/src/ui_podcastinfowidget.h:191
+#: ../bin/src/ui_episodeinfowidget.h:132 ../bin/src/ui_podcastinfowidget.h:191
 msgid "Author"
 msgstr "Аутор"
 
@@ -1062,7 +1062,7 @@ msgstr "Подршка за ЦУЕ лист"
 msgid "Cancel"
 msgstr "Одустани"
 
-#: internet/podcasts/podcastservice.cpp:441
+#: internet/podcasts/podcastservice.cpp:447
 msgid "Cancel download"
 msgstr "Прекини преузимање"
 
@@ -1357,7 +1357,7 @@ msgid "Configure library..."
 msgstr "Подеси библиотеку..."
 
 #: internet/podcasts/addpodcastdialog.cpp:77
-#: internet/podcasts/podcastservice.cpp:455
+#: internet/podcasts/podcastservice.cpp:461
 msgid "Configure podcasts..."
 msgstr "Подеси подкасте..."
 
@@ -1423,7 +1423,7 @@ msgstr "Претвори безгубитне фајлове"
 msgid "Copy to clipboard"
 msgstr "Копирај на клипборд"
 
-#: library/libraryview.cpp:419 internet/podcasts/podcastservice.cpp:438
+#: library/libraryview.cpp:419 internet/podcasts/podcastservice.cpp:444
 #: ui/mainwindow.cpp:721 widgets/fileviewlist.cpp:44
 msgid "Copy to device..."
 msgstr "Копирај на уређај...."
@@ -1579,6 +1579,10 @@ msgid ""
 "recover your database"
 msgstr "Откривено оштећење базе података. Погледајте https://github.com/clementine-player/Clementine/wiki/Database-Corruption за упутства како да повратите вашу базу података"
 
+#: ../bin/src/ui_episodeinfowidget.h:133
+msgid "Date"
+msgstr ""
+
 #: playlist/playlist.cpp:1432 ../bin/src/ui_edittagdialog.h:715
 msgid "Date created"
 msgstr "направљен"
@@ -1629,7 +1633,7 @@ msgstr "Застој између визуелизација"
 msgid "Delete"
 msgstr "Обриши"
 
-#: internet/podcasts/podcastservice.cpp:435
+#: internet/podcasts/podcastservice.cpp:441
 msgid "Delete downloaded data"
 msgstr "Обриши преузете податке"
 
@@ -1846,7 +1850,7 @@ msgstr "Двоклик на песму са листе..."
 msgid "Double clicking a song will..."
 msgstr "Двоклик на песму ће да је..."
 
-#: internet/podcasts/podcastservice.cpp:531
+#: internet/podcasts/podcastservice.cpp:550
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "Download %n episodes"
@@ -1868,8 +1872,8 @@ msgstr "преузимања садржаја"
 msgid "Download new episodes automatically"
 msgstr "Преузимај нове епизоде аутоматски"
 
-#: internet/podcasts/podcastservice.cpp:293
-#: internet/podcasts/podcastservice.cpp:332
+#: internet/podcasts/podcastservice.cpp:294
+#: internet/podcasts/podcastservice.cpp:333
 msgid "Download queued"
 msgstr "Преузимање је на чекању"
 
@@ -1889,7 +1893,7 @@ msgstr "Преузми овај албум"
 msgid "Download this album..."
 msgstr "Преузми овај албум..."
 
-#: internet/podcasts/podcastservice.cpp:533
+#: internet/podcasts/podcastservice.cpp:552
 msgid "Download this episode"
 msgstr "Преузми ову епизоду"
 
@@ -1897,8 +1901,8 @@ msgstr "Преузми ову епизоду"
 msgid "Download..."
 msgstr "Преузми..."
 
-#: internet/podcasts/podcastservice.cpp:301
-#: internet/podcasts/podcastservice.cpp:341
+#: internet/podcasts/podcastservice.cpp:302
+#: internet/podcasts/podcastservice.cpp:342
 #, qt-format
 msgid "Downloading (%1%)..."
 msgstr "Преузимам (%1%)..."
@@ -1935,7 +1939,7 @@ msgstr "Дропбокс"
 msgid "Dubstep"
 msgstr "дабстеп"
 
-#: ../bin/src/ui_ripcddialog.h:308
+#: ../bin/src/ui_episodeinfowidget.h:134 ../bin/src/ui_ripcddialog.h:308
 msgid "Duration"
 msgstr "Трајање"
 
@@ -2072,6 +2076,10 @@ msgstr "Унесите овај ИП у апликацију да бисте ј�
 #: ../bin/src/ui_libraryfilterwidget.h:92
 msgid "Entire collection"
 msgstr "читаву колекцију"
+
+#: internet/podcasts/podcastservice.cpp:532
+msgid "Episode information"
+msgstr ""
 
 #: ../bin/src/ui_equalizer.h:162 ../bin/src/ui_mainwindow.h:705
 msgid "Equalizer"
@@ -2393,9 +2401,10 @@ msgstr "Заборављањем уређаја уклонићете га са �
 #: ../bin/src/ui_libraryviewcontainer.h:58
 #: ../bin/src/ui_playlistcontainer.h:134
 #: ../bin/src/ui_playlistlistcontainer.h:126
-#: ../bin/src/ui_podcastinfowidget.h:190 ../bin/src/ui_querysearchpage.h:108
-#: ../bin/src/ui_querysortpage.h:136 ../bin/src/ui_searchpreview.h:103
-#: ../bin/src/ui_searchtermwidget.h:276 ../bin/src/ui_wizardfinishpage.h:82
+#: ../bin/src/ui_episodeinfowidget.h:131 ../bin/src/ui_podcastinfowidget.h:190
+#: ../bin/src/ui_querysearchpage.h:108 ../bin/src/ui_querysortpage.h:136
+#: ../bin/src/ui_searchpreview.h:103 ../bin/src/ui_searchtermwidget.h:276
+#: ../bin/src/ui_wizardfinishpage.h:82
 #: ../bin/src/ui_songkickconcertwidget.h:99
 #: ../bin/src/ui_transcoderoptionsaac.h:127
 #: ../bin/src/ui_transcoderoptionsflac.h:79
@@ -2627,7 +2636,7 @@ msgstr "немам налог на Магнатјуну"
 msgid "Icon"
 msgstr "Икона"
 
-#: widgets/fancytabwidget.cpp:441
+#: widgets/fancytabwidget.cpp:442
 msgid "Icons on top"
 msgstr "Иконе на врху"
 
@@ -2882,7 +2891,7 @@ msgstr "Велики омот албума (детаљи испод)"
 msgid "Large album cover (no details)"
 msgstr "Велики омот албума (без детаља)"
 
-#: widgets/fancytabwidget.cpp:437
+#: widgets/fancytabwidget.cpp:438
 msgid "Large sidebar"
 msgstr "Широка трака"
 
@@ -3157,11 +3166,11 @@ msgstr "ручно"
 msgid "Manufacturer"
 msgstr "Произвођач"
 
-#: internet/podcasts/podcastservice.cpp:450 ../bin/src/ui_organisedialog.h:259
+#: internet/podcasts/podcastservice.cpp:456 ../bin/src/ui_organisedialog.h:259
 msgid "Mark as listened"
 msgstr "Означи као преслушано"
 
-#: internet/podcasts/podcastservice.cpp:449
+#: internet/podcasts/podcastservice.cpp:455
 msgid "Mark as new"
 msgstr "Означи као ново"
 
@@ -3710,7 +3719,7 @@ msgstr "извођач"
 msgid "Pixel"
 msgstr "пиксела"
 
-#: widgets/fancytabwidget.cpp:439
+#: widgets/fancytabwidget.cpp:440
 msgid "Plain sidebar"
 msgstr "Обична трака"
 
@@ -3794,7 +3803,17 @@ msgstr "Отворите овај УРЛ у вашем прегледачу: <a 
 msgid "Plugin status:"
 msgstr "Стање прикључка:"
 
-#: internet/podcasts/podcastservice.cpp:132
+#: ../bin/src/ui_podcastinfodialog.h:93
+msgid "Podcast Information"
+msgstr ""
+
+#: internet/podcasts/podcastservice.cpp:437
+#: internet/podcasts/podcastservice.cpp:535
+#: internet/podcasts/podcastservice.cpp:539
+msgid "Podcast information"
+msgstr ""
+
+#: internet/podcasts/podcastservice.cpp:133
 #: ../bin/src/ui_podcastsettingspage.h:250
 msgid "Podcasts"
 msgstr "Подкасти"
@@ -4709,7 +4728,7 @@ msgstr "Прескочи нумеру"
 msgid "Small album cover"
 msgstr "Мали омот"
 
-#: widgets/fancytabwidget.cpp:438
+#: widgets/fancytabwidget.cpp:439
 msgid "Small sidebar"
 msgstr "Уска трака"
 
@@ -4963,7 +4982,7 @@ msgstr "Синхронизовање Спотифај оцењених нуме�
 msgid "System colors"
 msgstr "системске боје"
 
-#: widgets/fancytabwidget.cpp:440
+#: widgets/fancytabwidget.cpp:441
 msgid "Tabs on top"
 msgstr "Језичци на врху"
 
@@ -5311,7 +5330,7 @@ msgid "Unskip track"
 msgstr "Уклони прескакање"
 
 #: internet/podcasts/addpodcastdialog.cpp:70
-#: internet/podcasts/podcastservice.cpp:444
+#: internet/podcasts/podcastservice.cpp:450
 msgid "Unsubscribe"
 msgstr "Уклони претплату"
 
@@ -5319,7 +5338,7 @@ msgstr "Уклони претплату"
 msgid "Upcoming Concerts"
 msgstr "Предстојећи концерти"
 
-#: internet/podcasts/podcastservice.cpp:420
+#: internet/podcasts/podcastservice.cpp:421
 msgid "Update all podcasts"
 msgstr "Ажурирај све подкасте"
 
@@ -5331,7 +5350,7 @@ msgstr "Ажурирај измењене фасцикле библиотеке"
 msgid "Update the library when Clementine starts"
 msgstr "Ажурирај библиотеку при покретању Клементине"
 
-#: internet/podcasts/podcastservice.cpp:429
+#: internet/podcasts/podcastservice.cpp:430
 msgid "Update this podcast"
 msgstr "Ажурирај овај подкаст"
 

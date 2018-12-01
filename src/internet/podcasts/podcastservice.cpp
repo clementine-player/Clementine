@@ -528,8 +528,15 @@ void PodcastService::ShowContextMenu(const QPoint& global_pos) {
   }
 
   if (selected_podcasts_.count() == 1) {
-    info_selected_action_->setEnabled(true);
+    if (selected_episodes_.count() == 1) {
+      info_selected_action_->setText(tr("Episode information"));
+      info_selected_action_->setEnabled(true);
+    } else {
+      info_selected_action_->setText(tr("Podcast information"));
+      info_selected_action_->setEnabled(true);
+    }
   } else {
+    info_selected_action_->setText(tr("Podcast information"));
     info_selected_action_->setEnabled(false);
   }
 
@@ -699,10 +706,19 @@ void PodcastService::DownloadSelectedEpisode() {
 }
 
 void PodcastService::PodcastInfo() {
-  if (selected_podcasts_.count() > 0) {
-    const Podcast podcast =
-        selected_podcasts_[0].data(Role_Podcast).value<Podcast>();
-    podcast_info_dialog_.reset(new PodcastInfoDialog(app_));
+  if (selected_podcasts_.isEmpty()) {
+    // Should never happen.
+    return;
+  }
+  const Podcast podcast =
+      selected_podcasts_[0].data(Role_Podcast).value<Podcast>();
+  podcast_info_dialog_.reset(new PodcastInfoDialog(app_));
+
+  if (selected_episodes_.count() == 1) {
+    const PodcastEpisode episode =
+        selected_episodes_[0].data(Role_Episode).value<PodcastEpisode>();
+    podcast_info_dialog_->ShowEpisode(episode, podcast);
+  } else {
     podcast_info_dialog_->ShowPodcast(podcast);
   }
 }

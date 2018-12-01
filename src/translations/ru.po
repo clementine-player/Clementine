@@ -35,7 +35,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2018-10-20 14:20+0000\n"
+"PO-Revision-Date: 2018-11-17 15:49+0000\n"
 "Last-Translator: Andrei Stepanov <adem4ik@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/davidsansome/clementine/language/ru/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -562,7 +562,7 @@ msgstr "Добавить новую папку"
 msgid "Add podcast"
 msgstr "Добавить подкаст"
 
-#: internet/podcasts/podcastservice.cpp:418 ../bin/src/ui_mainwindow.h:722
+#: internet/podcasts/podcastservice.cpp:419 ../bin/src/ui_mainwindow.h:722
 msgid "Add podcast..."
 msgstr "Добавить подкаст…"
 
@@ -907,7 +907,7 @@ msgstr "Вывод звука"
 msgid "Authentication failed"
 msgstr "Ошибка аутентификации"
 
-#: ../bin/src/ui_podcastinfowidget.h:191
+#: ../bin/src/ui_episodeinfowidget.h:132 ../bin/src/ui_podcastinfowidget.h:191
 msgid "Author"
 msgstr "Автор"
 
@@ -1087,7 +1087,7 @@ msgstr "Поддержка файлов разметки CUE"
 msgid "Cancel"
 msgstr "Отмена"
 
-#: internet/podcasts/podcastservice.cpp:441
+#: internet/podcasts/podcastservice.cpp:447
 msgid "Cancel download"
 msgstr "Отменить загрузку"
 
@@ -1382,7 +1382,7 @@ msgid "Configure library..."
 msgstr "Настроить фонотеку…"
 
 #: internet/podcasts/addpodcastdialog.cpp:77
-#: internet/podcasts/podcastservice.cpp:455
+#: internet/podcasts/podcastservice.cpp:461
 msgid "Configure podcasts..."
 msgstr "Настроить подкасты…"
 
@@ -1448,7 +1448,7 @@ msgstr "Конвертировать файлы, сжатые без потер�
 msgid "Copy to clipboard"
 msgstr "Скопировать в буфер"
 
-#: library/libraryview.cpp:419 internet/podcasts/podcastservice.cpp:438
+#: library/libraryview.cpp:419 internet/podcasts/podcastservice.cpp:444
 #: ui/mainwindow.cpp:721 widgets/fileviewlist.cpp:44
 msgid "Copy to device..."
 msgstr "Копировать на носитель"
@@ -1604,6 +1604,10 @@ msgid ""
 "recover your database"
 msgstr "Обнаружен сбой в базе данных. Инструкции по восстановлению можно прочитать по адресу https://github.com/clementine-player/Clementine/wiki/Database-Corruption"
 
+#: ../bin/src/ui_episodeinfowidget.h:133
+msgid "Date"
+msgstr "Дата"
+
 #: playlist/playlist.cpp:1432 ../bin/src/ui_edittagdialog.h:715
 msgid "Date created"
 msgstr "Дата создания"
@@ -1654,7 +1658,7 @@ msgstr "Задержка между визуализациями"
 msgid "Delete"
 msgstr "Удалить"
 
-#: internet/podcasts/podcastservice.cpp:435
+#: internet/podcasts/podcastservice.cpp:441
 msgid "Delete downloaded data"
 msgstr "Удалить загруженные данные"
 
@@ -1871,7 +1875,7 @@ msgstr "Двойной щелчок по плейлисту…"
 msgid "Double clicking a song will..."
 msgstr "Двойной щелчок по песне…"
 
-#: internet/podcasts/podcastservice.cpp:531
+#: internet/podcasts/podcastservice.cpp:550
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "Download %n episodes"
@@ -1893,8 +1897,8 @@ msgstr "Подписка для загрузки"
 msgid "Download new episodes automatically"
 msgstr "Загружать новые выпуски автоматически"
 
-#: internet/podcasts/podcastservice.cpp:293
-#: internet/podcasts/podcastservice.cpp:332
+#: internet/podcasts/podcastservice.cpp:294
+#: internet/podcasts/podcastservice.cpp:333
 msgid "Download queued"
 msgstr "Загрузка добавлена в очередь"
 
@@ -1914,7 +1918,7 @@ msgstr "Загрузить этот альбом"
 msgid "Download this album..."
 msgstr "Загрузить этот альбом"
 
-#: internet/podcasts/podcastservice.cpp:533
+#: internet/podcasts/podcastservice.cpp:552
 msgid "Download this episode"
 msgstr "Загрузить этот выпуск"
 
@@ -1922,8 +1926,8 @@ msgstr "Загрузить этот выпуск"
 msgid "Download..."
 msgstr "Загрузить…"
 
-#: internet/podcasts/podcastservice.cpp:301
-#: internet/podcasts/podcastservice.cpp:341
+#: internet/podcasts/podcastservice.cpp:302
+#: internet/podcasts/podcastservice.cpp:342
 #, qt-format
 msgid "Downloading (%1%)..."
 msgstr "Загрузка (%1%)…"
@@ -1960,7 +1964,7 @@ msgstr "Dropbox"
 msgid "Dubstep"
 msgstr "Дабстеп"
 
-#: ../bin/src/ui_ripcddialog.h:308
+#: ../bin/src/ui_episodeinfowidget.h:134 ../bin/src/ui_ripcddialog.h:308
 msgid "Duration"
 msgstr "Длительность"
 
@@ -2097,6 +2101,10 @@ msgstr "Введите этот IP-адрес в приложении для п�
 #: ../bin/src/ui_libraryfilterwidget.h:92
 msgid "Entire collection"
 msgstr "Вся коллекция"
+
+#: internet/podcasts/podcastservice.cpp:532
+msgid "Episode information"
+msgstr "Информация об эпизоде"
 
 #: ../bin/src/ui_equalizer.h:162 ../bin/src/ui_mainwindow.h:705
 msgid "Equalizer"
@@ -2418,9 +2426,10 @@ msgstr "Команда «Забыть носитель», удалит носи�
 #: ../bin/src/ui_libraryviewcontainer.h:58
 #: ../bin/src/ui_playlistcontainer.h:134
 #: ../bin/src/ui_playlistlistcontainer.h:126
-#: ../bin/src/ui_podcastinfowidget.h:190 ../bin/src/ui_querysearchpage.h:108
-#: ../bin/src/ui_querysortpage.h:136 ../bin/src/ui_searchpreview.h:103
-#: ../bin/src/ui_searchtermwidget.h:276 ../bin/src/ui_wizardfinishpage.h:82
+#: ../bin/src/ui_episodeinfowidget.h:131 ../bin/src/ui_podcastinfowidget.h:190
+#: ../bin/src/ui_querysearchpage.h:108 ../bin/src/ui_querysortpage.h:136
+#: ../bin/src/ui_searchpreview.h:103 ../bin/src/ui_searchtermwidget.h:276
+#: ../bin/src/ui_wizardfinishpage.h:82
 #: ../bin/src/ui_songkickconcertwidget.h:99
 #: ../bin/src/ui_transcoderoptionsaac.h:127
 #: ../bin/src/ui_transcoderoptionsflac.h:79
@@ -2652,7 +2661,7 @@ msgstr "У меня нет учётной записи Magnatune"
 msgid "Icon"
 msgstr "Значок"
 
-#: widgets/fancytabwidget.cpp:441
+#: widgets/fancytabwidget.cpp:442
 msgid "Icons on top"
 msgstr "Значки сверху"
 
@@ -2907,7 +2916,7 @@ msgstr "Большая обложка альбома (сведения сниз�
 msgid "Large album cover (no details)"
 msgstr "Большая обложка альбома (без сведений)"
 
-#: widgets/fancytabwidget.cpp:437
+#: widgets/fancytabwidget.cpp:438
 msgid "Large sidebar"
 msgstr "Широкая боковая панель"
 
@@ -3182,11 +3191,11 @@ msgstr "Вручную"
 msgid "Manufacturer"
 msgstr "Производитель"
 
-#: internet/podcasts/podcastservice.cpp:450 ../bin/src/ui_organisedialog.h:259
+#: internet/podcasts/podcastservice.cpp:456 ../bin/src/ui_organisedialog.h:259
 msgid "Mark as listened"
 msgstr "Пометить как прослушанное"
 
-#: internet/podcasts/podcastservice.cpp:449
+#: internet/podcasts/podcastservice.cpp:455
 msgid "Mark as new"
 msgstr "Пометить как новое"
 
@@ -3735,7 +3744,7 @@ msgstr "Исполнитель"
 msgid "Pixel"
 msgstr "Пиксель"
 
-#: widgets/fancytabwidget.cpp:439
+#: widgets/fancytabwidget.cpp:440
 msgid "Plain sidebar"
 msgstr "Нормальная боковая панель"
 
@@ -3819,7 +3828,17 @@ msgstr "Пожалуйста, откройте эту ссылку в вашем
 msgid "Plugin status:"
 msgstr "Статус модуля:"
 
-#: internet/podcasts/podcastservice.cpp:132
+#: ../bin/src/ui_podcastinfodialog.h:93
+msgid "Podcast Information"
+msgstr "Информация о подкасте"
+
+#: internet/podcasts/podcastservice.cpp:437
+#: internet/podcasts/podcastservice.cpp:535
+#: internet/podcasts/podcastservice.cpp:539
+msgid "Podcast information"
+msgstr "Информация о подкасте"
+
+#: internet/podcasts/podcastservice.cpp:133
 #: ../bin/src/ui_podcastsettingspage.h:250
 msgid "Podcasts"
 msgstr "Подкасты"
@@ -4734,7 +4753,7 @@ msgstr "Пропустить трек"
 msgid "Small album cover"
 msgstr "Маленькая обложка альбома"
 
-#: widgets/fancytabwidget.cpp:438
+#: widgets/fancytabwidget.cpp:439
 msgid "Small sidebar"
 msgstr "Узкая боковая панель"
 
@@ -4988,7 +5007,7 @@ msgstr "Синхронизация оцененных треков Spotify"
 msgid "System colors"
 msgstr "Системные цвета"
 
-#: widgets/fancytabwidget.cpp:440
+#: widgets/fancytabwidget.cpp:441
 msgid "Tabs on top"
 msgstr "Вкладки вверху"
 
@@ -5336,7 +5355,7 @@ msgid "Unskip track"
 msgstr "Не пропускать трек"
 
 #: internet/podcasts/addpodcastdialog.cpp:70
-#: internet/podcasts/podcastservice.cpp:444
+#: internet/podcasts/podcastservice.cpp:450
 msgid "Unsubscribe"
 msgstr "Отписаться"
 
@@ -5344,7 +5363,7 @@ msgstr "Отписаться"
 msgid "Upcoming Concerts"
 msgstr "Предстоящие концерты"
 
-#: internet/podcasts/podcastservice.cpp:420
+#: internet/podcasts/podcastservice.cpp:421
 msgid "Update all podcasts"
 msgstr "Обновить все подкасты"
 
@@ -5356,7 +5375,7 @@ msgstr "Сканировать обновлённые папки"
 msgid "Update the library when Clementine starts"
 msgstr "Обновлять фонотеку при запуске Clementine"
 
-#: internet/podcasts/podcastservice.cpp:429
+#: internet/podcasts/podcastservice.cpp:430
 msgid "Update this podcast"
 msgstr "Обновить этот подкаст"
 

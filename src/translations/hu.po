@@ -17,7 +17,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2018-11-04 09:26+0000\n"
+"PO-Revision-Date: 2018-11-17 16:07+0000\n"
 "Last-Translator: Balázs Meskó <meskobalazs@gmail.com>\n"
 "Language-Team: Hungarian (http://www.transifex.com/davidsansome/clementine/language/hu/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -544,7 +544,7 @@ msgstr "Új mappa hozzáadása…"
 msgid "Add podcast"
 msgstr "Podcast hozzáadása"
 
-#: internet/podcasts/podcastservice.cpp:418 ../bin/src/ui_mainwindow.h:722
+#: internet/podcasts/podcastservice.cpp:419 ../bin/src/ui_mainwindow.h:722
 msgid "Add podcast..."
 msgstr "Podcast hozzáadása..."
 
@@ -889,7 +889,7 @@ msgstr "Hang kimenet"
 msgid "Authentication failed"
 msgstr "A hitelesítés meghiúsult"
 
-#: ../bin/src/ui_podcastinfowidget.h:191
+#: ../bin/src/ui_episodeinfowidget.h:132 ../bin/src/ui_podcastinfowidget.h:191
 msgid "Author"
 msgstr "Szerző"
 
@@ -1069,7 +1069,7 @@ msgstr "CUE fájl támogatás"
 msgid "Cancel"
 msgstr "Mégsem"
 
-#: internet/podcasts/podcastservice.cpp:441
+#: internet/podcasts/podcastservice.cpp:447
 msgid "Cancel download"
 msgstr "Letöltés abbahagyása"
 
@@ -1364,7 +1364,7 @@ msgid "Configure library..."
 msgstr "Zenetár beállítása..."
 
 #: internet/podcasts/addpodcastdialog.cpp:77
-#: internet/podcasts/podcastservice.cpp:455
+#: internet/podcasts/podcastservice.cpp:461
 msgid "Configure podcasts..."
 msgstr "Podcastok beállítása…"
 
@@ -1430,7 +1430,7 @@ msgstr "Veszteségmentes fájlok kovertálása"
 msgid "Copy to clipboard"
 msgstr "Másolás vágólapra"
 
-#: library/libraryview.cpp:419 internet/podcasts/podcastservice.cpp:438
+#: library/libraryview.cpp:419 internet/podcasts/podcastservice.cpp:444
 #: ui/mainwindow.cpp:721 widgets/fileviewlist.cpp:44
 msgid "Copy to device..."
 msgstr "Másolás eszközre..."
@@ -1586,6 +1586,10 @@ msgid ""
 "recover your database"
 msgstr "Adatbázis sérülés található. Kérjük olvassa el a https://github.com/clementine-player/Clementine/wiki/Database-Corruption honlapot további információkért, hogy hogyan állítsa vissza adatbázisát."
 
+#: ../bin/src/ui_episodeinfowidget.h:133
+msgid "Date"
+msgstr "Dátum"
+
 #: playlist/playlist.cpp:1432 ../bin/src/ui_edittagdialog.h:715
 msgid "Date created"
 msgstr "Létrehozás dátuma"
@@ -1636,7 +1640,7 @@ msgstr "Megjelenítések között váltás ideje"
 msgid "Delete"
 msgstr "Törlés"
 
-#: internet/podcasts/podcastservice.cpp:435
+#: internet/podcasts/podcastservice.cpp:441
 msgid "Delete downloaded data"
 msgstr "Letöltött adatok törlése"
 
@@ -1853,7 +1857,7 @@ msgstr "Dupla kattintásra egy számon…"
 msgid "Double clicking a song will..."
 msgstr "Dupla kattintásra egy számon..."
 
-#: internet/podcasts/podcastservice.cpp:531
+#: internet/podcasts/podcastservice.cpp:550
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "Download %n episodes"
@@ -1875,8 +1879,8 @@ msgstr "Tagsági információk betöltése"
 msgid "Download new episodes automatically"
 msgstr "Új epizódok automatikus letöltése"
 
-#: internet/podcasts/podcastservice.cpp:293
-#: internet/podcasts/podcastservice.cpp:332
+#: internet/podcasts/podcastservice.cpp:294
+#: internet/podcasts/podcastservice.cpp:333
 msgid "Download queued"
 msgstr "Letöltés sorba állítva"
 
@@ -1896,7 +1900,7 @@ msgstr "Album letöltése"
 msgid "Download this album..."
 msgstr "Album letöltése..."
 
-#: internet/podcasts/podcastservice.cpp:533
+#: internet/podcasts/podcastservice.cpp:552
 msgid "Download this episode"
 msgstr "Epizód letöltése"
 
@@ -1904,8 +1908,8 @@ msgstr "Epizód letöltése"
 msgid "Download..."
 msgstr "Letöltés…"
 
-#: internet/podcasts/podcastservice.cpp:301
-#: internet/podcasts/podcastservice.cpp:341
+#: internet/podcasts/podcastservice.cpp:302
+#: internet/podcasts/podcastservice.cpp:342
 #, qt-format
 msgid "Downloading (%1%)..."
 msgstr "Letöltés (%1%)..."
@@ -1942,7 +1946,7 @@ msgstr "Dropbox"
 msgid "Dubstep"
 msgstr "Dubstep"
 
-#: ../bin/src/ui_ripcddialog.h:308
+#: ../bin/src/ui_episodeinfowidget.h:134 ../bin/src/ui_ripcddialog.h:308
 msgid "Duration"
 msgstr "Időtartam"
 
@@ -2079,6 +2083,10 @@ msgstr "Írd be a megadott IP -t a Clementine kapcsolódásához"
 #: ../bin/src/ui_libraryfilterwidget.h:92
 msgid "Entire collection"
 msgstr "A teljes kollekció"
+
+#: internet/podcasts/podcastservice.cpp:532
+msgid "Episode information"
+msgstr "Epizód információk"
 
 #: ../bin/src/ui_equalizer.h:162 ../bin/src/ui_mainwindow.h:705
 msgid "Equalizer"
@@ -2400,9 +2408,10 @@ msgstr "Egy eszköz elfelejtésekor a Clementine törli erről a listáról és 
 #: ../bin/src/ui_libraryviewcontainer.h:58
 #: ../bin/src/ui_playlistcontainer.h:134
 #: ../bin/src/ui_playlistlistcontainer.h:126
-#: ../bin/src/ui_podcastinfowidget.h:190 ../bin/src/ui_querysearchpage.h:108
-#: ../bin/src/ui_querysortpage.h:136 ../bin/src/ui_searchpreview.h:103
-#: ../bin/src/ui_searchtermwidget.h:276 ../bin/src/ui_wizardfinishpage.h:82
+#: ../bin/src/ui_episodeinfowidget.h:131 ../bin/src/ui_podcastinfowidget.h:190
+#: ../bin/src/ui_querysearchpage.h:108 ../bin/src/ui_querysortpage.h:136
+#: ../bin/src/ui_searchpreview.h:103 ../bin/src/ui_searchtermwidget.h:276
+#: ../bin/src/ui_wizardfinishpage.h:82
 #: ../bin/src/ui_songkickconcertwidget.h:99
 #: ../bin/src/ui_transcoderoptionsaac.h:127
 #: ../bin/src/ui_transcoderoptionsflac.h:79
@@ -2634,7 +2643,7 @@ msgstr "Nincs Magnatune fiókom"
 msgid "Icon"
 msgstr "Ikon"
 
-#: widgets/fancytabwidget.cpp:441
+#: widgets/fancytabwidget.cpp:442
 msgid "Icons on top"
 msgstr "Ikonok felül"
 
@@ -2889,7 +2898,7 @@ msgstr "Nagy albumborító (részletek alább)"
 msgid "Large album cover (no details)"
 msgstr "Nagy albumborító (részletek nélkül)"
 
-#: widgets/fancytabwidget.cpp:437
+#: widgets/fancytabwidget.cpp:438
 msgid "Large sidebar"
 msgstr "Nagy oldalsáv"
 
@@ -3164,11 +3173,11 @@ msgstr "Manuálisan"
 msgid "Manufacturer"
 msgstr "Gyártó"
 
-#: internet/podcasts/podcastservice.cpp:450 ../bin/src/ui_organisedialog.h:259
+#: internet/podcasts/podcastservice.cpp:456 ../bin/src/ui_organisedialog.h:259
 msgid "Mark as listened"
 msgstr "Megjelölés meghallgatottként"
 
-#: internet/podcasts/podcastservice.cpp:449
+#: internet/podcasts/podcastservice.cpp:455
 msgid "Mark as new"
 msgstr "Megjelölés újként"
 
@@ -3717,7 +3726,7 @@ msgstr "Előadó"
 msgid "Pixel"
 msgstr "Pixel"
 
-#: widgets/fancytabwidget.cpp:439
+#: widgets/fancytabwidget.cpp:440
 msgid "Plain sidebar"
 msgstr "Egyszerű oldalsáv"
 
@@ -3801,7 +3810,17 @@ msgstr "Nyissa meg ezt az URL-t a böngészőjében: <a href=\"%1\">%1</a>"
 msgid "Plugin status:"
 msgstr "Beépülő állapot:"
 
-#: internet/podcasts/podcastservice.cpp:132
+#: ../bin/src/ui_podcastinfodialog.h:93
+msgid "Podcast Information"
+msgstr "Podcast információk"
+
+#: internet/podcasts/podcastservice.cpp:437
+#: internet/podcasts/podcastservice.cpp:535
+#: internet/podcasts/podcastservice.cpp:539
+msgid "Podcast information"
+msgstr "Podcast információk"
+
+#: internet/podcasts/podcastservice.cpp:133
 #: ../bin/src/ui_podcastsettingspage.h:250
 msgid "Podcasts"
 msgstr "Podcastok"
@@ -4716,7 +4735,7 @@ msgstr "Szám kihagyása"
 msgid "Small album cover"
 msgstr "Kis albumborító"
 
-#: widgets/fancytabwidget.cpp:438
+#: widgets/fancytabwidget.cpp:439
 msgid "Small sidebar"
 msgstr "Kis oldalsáv"
 
@@ -4970,7 +4989,7 @@ msgstr "Spotify csillagozott számok szinronizálása"
 msgid "System colors"
 msgstr "Rendszer színek"
 
-#: widgets/fancytabwidget.cpp:440
+#: widgets/fancytabwidget.cpp:441
 msgid "Tabs on top"
 msgstr "Lapfülek felül"
 
@@ -5318,7 +5337,7 @@ msgid "Unskip track"
 msgstr "Szám lejátszása"
 
 #: internet/podcasts/addpodcastdialog.cpp:70
-#: internet/podcasts/podcastservice.cpp:444
+#: internet/podcasts/podcastservice.cpp:450
 msgid "Unsubscribe"
 msgstr "Leiratkozás"
 
@@ -5326,7 +5345,7 @@ msgstr "Leiratkozás"
 msgid "Upcoming Concerts"
 msgstr "Következő koncertek"
 
-#: internet/podcasts/podcastservice.cpp:420
+#: internet/podcasts/podcastservice.cpp:421
 msgid "Update all podcasts"
 msgstr "Összes podcast frissítése"
 
@@ -5338,7 +5357,7 @@ msgstr "Megváltozott zenetárbeli könyvtárak frissítése"
 msgid "Update the library when Clementine starts"
 msgstr "Zenetár frissítése a Clementine indításakor"
 
-#: internet/podcasts/podcastservice.cpp:429
+#: internet/podcasts/podcastservice.cpp:430
 msgid "Update this podcast"
 msgstr "Podcast frissítése"
 

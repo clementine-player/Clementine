@@ -89,7 +89,7 @@ QString PrettyTimeDelta(int seconds) {
   return (seconds >= 0 ? "+" : "-") + PrettyTime(seconds);
 }
 
-QString PrettyTime(int seconds) {
+QString PrettyTime(int seconds, bool always_show_hours) {
   // last.fm sometimes gets the track length wrong, so you end up with
   // negative times.
   seconds = qAbs(seconds);
@@ -99,7 +99,7 @@ QString PrettyTime(int seconds) {
   seconds %= 60;
 
   QString ret;
-  if (hours)
+  if (hours || always_show_hours)
     ret.sprintf("%d:%02d:%02d", hours, minutes,
                 seconds);  // NOLINT(runtime/printf)
   else
@@ -108,8 +108,8 @@ QString PrettyTime(int seconds) {
   return ret;
 }
 
-QString PrettyTimeNanosec(qint64 nanoseconds) {
-  return PrettyTime(nanoseconds / kNsecPerSec);
+QString PrettyTimeNanosec(qint64 nanoseconds, bool always_show_hours) {
+  return PrettyTime(nanoseconds / kNsecPerSec, always_show_hours);
 }
 
 QString WordyTime(quint64 seconds) {
