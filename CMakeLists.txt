@@ -52,7 +52,6 @@ find_package(PkgConfig REQUIRED)
 find_package(Protobuf REQUIRED)
 find_package(FFTW3)
 find_package(ALSA)
-pkg_check_modules(DBUS dbus-1)
 if (NOT APPLE)
   find_package(X11)
 endif()
@@ -96,12 +95,9 @@ find_path(SPARSEHASH_INCLUDE_DIRS google/sparsetable)
 # QT
 set(QT_MIN_VERSION 5.6.0)
 find_package(Qt5 ${QT_MIN_VERSION} REQUIRED COMPONENTS Core Concurrent Widgets Network Sql Xml OpenGL Test)
+find_package(Qt5DBus ${QT_MIN_VERSION})
 if(X11_FOUND)
   find_package(Qt5 ${QT_MIN_VERSION} REQUIRED COMPONENTS X11Extras)
-endif()
-if(DBUS_FOUND)
-  find_package(Qt5 ${QT_MIN_VERSION} REQUIRED COMPONENTS DBus)
-  get_target_property(QT_DBUSXML2CPP_EXECUTABLE Qt5::qdbusxml2cpp LOCATION)
 endif()
 if(APPLE)
   find_package(Qt5 REQUIRED COMPONENTS MacExtras)
@@ -112,8 +108,9 @@ endif()
 
 set(QT_LIBRARIES Qt5::Core Qt5::Concurrent Qt5::Widgets Qt5::Network Qt5::Sql Qt5::Xml Qt5::OpenGL)
 
-if(DBUS_FOUND)
+if(Qt5DBus_FOUND)
   set(QT_LIBRARIES ${QT_LIBRARIES} Qt5::DBus)
+  get_target_property(QT_DBUSXML2CPP_EXECUTABLE Qt5::qdbusxml2cpp LOCATION)
 endif()
 if(X11_FOUND)
   set(QT_LIBRARIES ${QT_LIBRARIES} Qt5::X11Extras)
@@ -286,19 +283,19 @@ optional_component(LIBLASTFM ON "Last.fm support"
 )
 
 optional_component(DBUS ON "D-Bus support"
-  DEPENDS "D-Bus" DBUS_FOUND
+  DEPENDS "Qt5DBus" Qt5DBus_FOUND
 )
 
 optional_component(WIIMOTEDEV ON "Wiimote support"
-  DEPENDS "D-Bus support" DBUS_FOUND
+  DEPENDS "D-Bus support" Qt5DBus_FOUND
 )
 
 optional_component(DEVICEKIT ON "Devices: DeviceKit backend"
-  DEPENDS "D-Bus support" DBUS_FOUND
+  DEPENDS "D-Bus support" Qt5DBus_FOUND
 )
 
 optional_component(UDISKS2 ON "Devices: UDisks2 backend"
-  DEPENDS "D-Bus support" DBUS_FOUND
+  DEPENDS "D-Bus support" Qt5DBus_FOUND
 )
 
 if (CRYPTOPP_FOUND OR HAVE_SPOTIFY_BLOB)
