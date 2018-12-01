@@ -110,7 +110,7 @@ if(WIN32)
   find_package(Qt5 REQUIRED COMPONENTS WinExtras)
 endif()
 
-set(QT_LIBRARIES Qt5::Core Qt5::Concurrent Qt5::Widgets Qt5::Network Qt5::Sql Qt5::Xml Qt5::OpenGL Qt5::Test)
+set(QT_LIBRARIES Qt5::Core Qt5::Concurrent Qt5::Widgets Qt5::Network Qt5::Sql Qt5::Xml Qt5::OpenGL)
 
 if(DBUS_FOUND)
   set(QT_LIBRARIES ${QT_LIBRARIES} Qt5::DBus)
