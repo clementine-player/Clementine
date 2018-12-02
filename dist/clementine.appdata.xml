@@ -1,35 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Copyright 2014 David Sansome <me@davidsansome.com> -->
 <application>
-  <id type="desktop">clementine.desktop</id>
-  <metadata_license>CC0-1.0</metadata_license>
-  <project_license>GPL-3.0+</project_license>
-  <name>Clementine Music Player</name>
-  <summary>Plays music files and internet radio</summary>
-  <description>
-    <p>
-      Clementine is a multiplatform music player focusing on a fast and
-      easy-to-use interface for searching and playing your music.
-    </p>
-    <p>Summary of included features:</p>
-    <ul>
-      <li>Search and play your local music library</li>
-      <li>Listen to internet radio from Last.fm, SomaFM, IntergalacticFM, Magnatune, Jamendo and Icecast</li>
-      <li>Tabbed playlists, import and export M3U, XSPF, PLS and ASX</li>
-      <li>Visualisations from projectM</li>
-      <li>Transcode music into MP3, Ogg Vorbis, Ogg Speex, FLAC or AA</li>
-      <li>Edit tags on MP3 and OGG files, organise your music</li>
-      <li>Download missing album cover art from Last.fm</li>
-      <li>Native desktop notifications using libnotify</li>
-      <li>Supports MPRIS, or remote control using the command-line</li>
-      <li>Remote control using a Wii Remote, MPRIS or the command-line</li>
-      <li>Copy music to your iPod, iPhone, MTP or mass-storage USB player</li>
-    </ul>
-  </description>
-  <screenshots>
-    <screenshot type="default" width="1139" height="724">https://clementine-player.github.io/pages/images/screenshots/clementine-1.2-1.png</screenshot>
-    <screenshot width="1080" height="724">https://clementine-player.github.io/pages/images/screenshots/clementine-1.2-2.png</screenshot>
-  </screenshots>
-  <url type="homepage">https://www.clementine-player.org</url>
-  <updatecontact>me@davidsansome.com</updatecontact>
+	<id>org.clementine_player.Clementine</id>
+	<id type="desktop">clementine.desktop</id>
+	<metadata_license>CC0-1.0</metadata_license>
+	<project_license>GPL-3.0+</project_license>
+	<name>Clementine Music Player</name>
+	<summary>Plays music files and internet radio</summary>
+	<description>
+		<p>
+			Clementine is a multiplatform music player focusing on a fast and
+			easy-to-use interface for searching and playing your music.
+		</p>
+		<p>Summary of included features:</p>
+		<ul>
+			<li>Search and play your local music library</li>
+			<li>Listen to internet radio from Spotify, Grooveshark, SomaFM, Magnatune, Jamendo, SKY.fm, Digitally Imported, JAZZRADIO.com, Soundcloud, Icecast and Subsonic servers.</li>
+			<li>Search and play songs you've uploaded to Box, Dropbox, Google Drive, and OneDrive</li>
+			<li>Create smart playlists and dynamic playlists.</li>
+			<li>Tabbed playlists, import and export M3U, XSPF, PLS and ASX.</li>
+			<li>CUE sheet support.</li>
+			<li>Play audio CDs.</li>
+			<li>Visualisations from projectM.</li>
+			<li>Lyrics and artist biographies and photos.</li>
+			<li>Transcode music into MP3, Ogg Vorbis, Ogg Speex, FLAC or AAC.</li>
+			<li>Edit tags on MP3 and OGG files, organise your music.</li>
+			<li>Fetch missing tags from MusicBrainz.</li>
+			<li>Discover and download Podcasts.</li>
+			<li>Download missing album cover art from Last.fm and Amazon.</li>
+			<li>Cross-platform - works on Windows, Mac OS X and Linux.</li>
+			<li>Native desktop notifications on Linux (libnotify) and Mac OS X (Growl).</li>
+			<li>Remote control using an Android device, a Wii Remote, MPRIS or the command-line.</li>
+			<li>Copy music to your iPod, iPhone, MTP or mass-storage USB player.</li>
+			<li>Queue manager.</li>
+		</ul>
+	</description>
+	<screenshots>
+		<screenshot type="default" width="1139" height="724">https://clementine-player.github.io/pages/images/screenshots/clementine-1.2-1.png</screenshot>
+		<screenshot width="1080" height="724">https://clementine-player.github.io/pages/images/screenshots/clementine-1.2-2.png</screenshot>
+	</screenshots>
+	<releases>
+		<release version="1.3.1" date="2016-04-19"/>
+			<description>
+				<p>Fixes a bug where ratings are deleted when upgrading from older versions.</p>
+			</description>
+		</release>
+	</releases>
+	<content_rating type="oars-1.1"></content_rating>
+	<url type="homepage">https://www.clementine-player.org/</url>
+	<url type="bugtracker">https://github.com/clementine-player/Clementine/issues</url>
+	<url type="translate">https://www.transifex.com/davidsansome/clementine/</url>
+	<url type="faq">https://github.com/clementine-player/Clementine/wiki/Frequently-asked-questions</url>
+	<updatecontact>me@davidsansome.com</updatecontact>
 </application>
