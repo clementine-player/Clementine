@@ -56,7 +56,7 @@ void CddaSongLoader::LoadSongsFromCdda() {
   GError* error = nullptr;
   cdda_ = gst_element_make_from_uri(GST_URI_SRC, "cdda://", nullptr, &error);
   if (error) {
-    qLog(Error) << error->code << error->message;
+    qLog(Error) << error->code << QString::fromLocal8Bit(error->message);
   }
   if (cdda_ == nullptr) {
     return;

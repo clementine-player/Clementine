@@ -53,7 +53,8 @@ void GPodLoader::LoadDatabase() {
   // Check for errors
   if (!db) {
     if (error) {
-      qLog(Error) << "loading database failed:" << error->message;
+      qLog(Error) << "loading database failed:"
+                  << QString::fromUtf8(error->message);
       emit Error(QString::fromUtf8(error->message));
       g_error_free(error);
     } else {
