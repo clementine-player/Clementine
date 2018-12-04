@@ -510,7 +510,7 @@ msgstr "添加其他流媒体..."
 msgid "Add directory..."
 msgstr "添加目录..."
 
-#: ui/mainwindow.cpp:2075
+#: ui/mainwindow.cpp:2090
 msgid "Add file"
 msgstr "添加文件"
 
@@ -530,7 +530,7 @@ msgstr "添加文件..."
 msgid "Add files to transcode"
 msgstr "添加需转码文件"
 
-#: transcoder/transcodedialog.cpp:308 ui/mainwindow.cpp:2102
+#: transcoder/transcodedialog.cpp:308 ui/mainwindow.cpp:2117
 #: ripper/ripcddialog.cpp:203
 msgid "Add folder"
 msgstr "添加文件夹"
@@ -635,7 +635,7 @@ msgstr "添加到 Spotify 播放列表"
 msgid "Add to Spotify starred"
 msgstr "添加到 Spotify 收藏"
 
-#: ui/mainwindow.cpp:1876
+#: ui/mainwindow.cpp:1891
 msgid "Add to another playlist"
 msgstr "添加到另一播放列表"
 
@@ -725,7 +725,7 @@ msgstr "无封面的专辑"
 msgid "All"
 msgstr "所有"
 
-#: ui/mainwindow.cpp:160
+#: ui/mainwindow.cpp:161
 msgid "All Files (*)"
 msgstr "全部文件 (*)"
 
@@ -794,7 +794,7 @@ msgid ""
 "like to download and install it now?"
 msgstr "Clementine 需要安装额外的插件才能使用 Spotify。现在就下载并安装吗?"
 
-#: devices/gpodloader.cpp:60
+#: devices/gpodloader.cpp:61
 msgid "An error occurred loading the iTunes database"
 msgstr "加载 iTunes 数据库时出错"
 
@@ -863,7 +863,7 @@ msgstr "您确定要将媒体库中所有歌曲的统计信息写入相应的歌
 msgid "Artist"
 msgstr "歌手"
 
-#: ui/mainwindow.cpp:285
+#: ui/mainwindow.cpp:287
 msgid "Artist info"
 msgstr "歌手信息"
 
@@ -962,7 +962,7 @@ msgstr "备份数据库"
 msgid "Balance"
 msgstr "均衡"
 
-#: core/globalshortcuts.cpp:80
+#: core/globalshortcuts.cpp:81
 msgid "Ban (Last.fm scrobbling)"
 msgstr "Ban (Last.fm 音乐记录)"
 
@@ -1084,7 +1084,7 @@ msgstr "更改封面"
 msgid "Change font size..."
 msgstr "更改字号..."
 
-#: core/globalshortcuts.cpp:73
+#: core/globalshortcuts.cpp:74
 msgid "Change repeat mode"
 msgstr "改变重复模式"
 
@@ -1092,7 +1092,7 @@ msgstr "改变重复模式"
 msgid "Change shortcut..."
 msgstr "更改快捷键..."
 
-#: core/globalshortcuts.cpp:71
+#: core/globalshortcuts.cpp:72
 msgid "Change shuffle mode"
 msgstr "更改乱序模式"
 
@@ -1126,7 +1126,7 @@ msgstr "检测新节目"
 msgid "Check for updates"
 msgstr "检查更新"
 
-#: ui/mainwindow.cpp:824
+#: ui/mainwindow.cpp:826
 msgid "Check for updates..."
 msgstr "检查更新..."
 
@@ -1362,7 +1362,7 @@ msgstr "配置 Subsonic..."
 msgid "Configure global search..."
 msgstr "配置全局搜索…"
 
-#: ui/mainwindow.cpp:661
+#: ui/mainwindow.cpp:663
 msgid "Configure library..."
 msgstr "配置媒体库..."
 
@@ -1434,11 +1434,11 @@ msgid "Copy to clipboard"
 msgstr "复制到剪切板"
 
 #: library/libraryview.cpp:419 internet/podcasts/podcastservice.cpp:444
-#: ui/mainwindow.cpp:721 widgets/fileviewlist.cpp:44
+#: ui/mainwindow.cpp:723 widgets/fileviewlist.cpp:44
 msgid "Copy to device..."
 msgstr "复制到设备..."
 
-#: devices/deviceview.cpp:228 ui/mainwindow.cpp:711
+#: devices/deviceview.cpp:228 ui/mainwindow.cpp:713
 #: widgets/fileviewlist.cpp:40
 msgid "Copy to library..."
 msgstr "复制到媒体库..."
@@ -1617,7 +1617,7 @@ msgstr ""
 msgid "Decrease the volume by <value> percent"
 msgstr "降低音量 <value> %"
 
-#: core/globalshortcuts.cpp:62 wiimotedev/wiimotesettingspage.cpp:112
+#: core/globalshortcuts.cpp:63 wiimotedev/wiimotesettingspage.cpp:112
 msgid "Decrease volume"
 msgstr "降低音量"
 
@@ -1648,7 +1648,7 @@ msgid "Delete downloaded data"
 msgstr "删除已下载的数据"
 
 #: devices/deviceview.cpp:408 library/libraryview.cpp:678
-#: ui/mainwindow.cpp:2458 widgets/fileview.cpp:188
+#: ui/mainwindow.cpp:2473 widgets/fileview.cpp:188
 msgid "Delete files"
 msgstr "删除文件"
 
@@ -1656,7 +1656,7 @@ msgstr "删除文件"
 msgid "Delete from device..."
 msgstr "从设备删除..."
 
-#: library/libraryview.cpp:422 ui/mainwindow.cpp:724
+#: library/libraryview.cpp:422 ui/mainwindow.cpp:726
 #: widgets/fileviewlist.cpp:47
 msgid "Delete from disk..."
 msgstr "从硬盘删除..."
@@ -1689,11 +1689,11 @@ msgstr "删除文件"
 msgid "Depth"
 msgstr "深度"
 
-#: ui/mainwindow.cpp:1789
+#: ui/mainwindow.cpp:1804
 msgid "Dequeue selected tracks"
 msgstr "移除选定曲目"
 
-#: ui/mainwindow.cpp:1787
+#: ui/mainwindow.cpp:1802
 msgid "Dequeue track"
 msgstr "移除曲目"
 
@@ -1706,7 +1706,7 @@ msgstr "目标"
 msgid "Details..."
 msgstr "详情..."
 
-#: devices/devicekitlister.cpp:128 devices/giolister.cpp:163
+#: devices/giolister.cpp:164 devices/devicekitlister.cpp:128
 msgid "Device"
 msgstr "设备"
 
@@ -1722,7 +1722,7 @@ msgstr "设备名称"
 msgid "Device properties..."
 msgstr "设备属性..."
 
-#: ui/mainwindow.cpp:278
+#: ui/mainwindow.cpp:280
 msgid "Devices"
 msgstr "设备"
 
@@ -1965,7 +1965,7 @@ msgstr "动态随机混音"
 msgid "Edit smart playlist..."
 msgstr "编辑智能播放列表..."
 
-#: ui/mainwindow.cpp:1839
+#: ui/mainwindow.cpp:1854
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr "编辑标签 \"%1\"..."
@@ -2021,7 +2021,7 @@ msgid ""
 "displayed in this order."
 msgstr "在搜索结果中启用以下来源。结果将按以下顺序显示。"
 
-#: core/globalshortcuts.cpp:76
+#: core/globalshortcuts.cpp:77
 msgid "Enable/disable Last.fm scrobbling"
 msgstr "启用/禁用 Last.fm 的音乐记录"
 
@@ -2104,8 +2104,8 @@ msgid "Equivalent to --log-levels *:3"
 msgstr "相当于 --log-levels *:3"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:246
-#: library/libraryview.cpp:672 ui/mainwindow.cpp:2131 ui/mainwindow.cpp:2410
-#: ui/mainwindow.cpp:2589
+#: library/libraryview.cpp:672 ui/mainwindow.cpp:2146 ui/mainwindow.cpp:2425
+#: ui/mainwindow.cpp:2604
 msgid "Error"
 msgstr "错误"
 
@@ -2251,7 +2251,7 @@ msgstr "淡出"
 msgid "Fading duration"
 msgstr "淡出时长"
 
-#: ui/mainwindow.cpp:2132
+#: ui/mainwindow.cpp:2147
 msgid "Failed reading CD drive"
 msgstr "读取 CD 失败"
 
@@ -2352,7 +2352,7 @@ msgstr "文件类型"
 msgid "Filename"
 msgstr "文件名"
 
-#: ui/mainwindow.cpp:268
+#: ui/mainwindow.cpp:270
 msgid "Files"
 msgstr "文件"
 
@@ -2466,7 +2466,7 @@ msgstr "高音"
 msgid "Ge&nre"
 msgstr "流派(&n)"
 
-#: ui/settingsdialog.cpp:132
+#: ui/settingsdialog.cpp:135
 msgid "General"
 msgstr "一般"
 
@@ -2734,7 +2734,7 @@ msgstr ""
 msgid "Increase the volume by <value> percent"
 msgstr "提升音量 <value>%"
 
-#: core/globalshortcuts.cpp:61 wiimotedev/wiimotesettingspage.cpp:110
+#: core/globalshortcuts.cpp:62 wiimotedev/wiimotesettingspage.cpp:110
 msgid "Increase volume"
 msgstr "增大音量"
 
@@ -2743,7 +2743,7 @@ msgstr "增大音量"
 msgid "Indexing %1"
 msgstr "正在索引 %1"
 
-#: wiimotedev/wiimotesettingspage.cpp:139 ../bin/src/ui_deviceproperties.h:372
+#: ../bin/src/ui_deviceproperties.h:372 wiimotedev/wiimotesettingspage.cpp:139
 msgid "Information"
 msgstr "信息"
 
@@ -2763,11 +2763,11 @@ msgstr "已安装"
 msgid "Integrity check"
 msgstr "完整性检验"
 
-#: ui/mainwindow.cpp:274
+#: ui/mainwindow.cpp:276
 msgid "Internet"
 msgstr "互联网"
 
-#: ui/settingsdialog.cpp:155
+#: ui/settingsdialog.cpp:158
 msgid "Internet providers"
 msgstr "互联网提供商"
 
@@ -2853,9 +2853,9 @@ msgstr "跳转到当前播放的曲目"
 msgid "Keep buttons for %1 second..."
 msgstr "保持按钮 %1 秒..."
 
+#: ../bin/src/ui_wiimoteshortcutgrabber.h:123
 #: wiimotedev/wiimoteshortcutgrabber.cpp:75
 #: wiimotedev/wiimoteshortcutgrabber.cpp:117
-#: ../bin/src/ui_wiimoteshortcutgrabber.h:123
 #, qt-format
 msgid "Keep buttons for %1 seconds..."
 msgstr "保持按钮 %1 秒..."
@@ -2951,7 +2951,7 @@ msgstr "左"
 msgid "Length"
 msgstr "长度"
 
-#: ui/mainwindow.cpp:253 ui/mainwindow.cpp:265
+#: ui/mainwindow.cpp:255 ui/mainwindow.cpp:267
 #: ../bin/src/ui_seafilesettingspage.h:177
 msgid "Library"
 msgstr "媒体库"
@@ -2960,7 +2960,7 @@ msgstr "媒体库"
 msgid "Library advanced grouping"
 msgstr "媒体库高级分组"
 
-#: ui/mainwindow.cpp:2709
+#: ui/mainwindow.cpp:2724
 msgid "Library rescan notice"
 msgstr "重新扫描媒体库提示"
 
@@ -3047,9 +3047,9 @@ msgstr "载入文件或URL，替换当前播放列表"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:162
 #: ../bin/src/ui_magnatunesettingspage.h:163
-#: ../bin/src/ui_spotifysettingspage.h:210
 #: ../bin/src/ui_subsonicsettingspage.h:137
 #: ../bin/src/ui_lastfmsettingspage.h:132
+#: ../bin/src/ui_spotifysettingspage.h:210
 #: ../bin/src/ui_googledrivesettingspage.h:101
 #: ../bin/src/ui_dropboxsettingspage.h:101
 #: ../bin/src/ui_skydrivesettingspage.h:101
@@ -3069,7 +3069,7 @@ msgstr "长期预测 (LTP)"
 msgid "Love"
 msgstr "喜爱"
 
-#: core/globalshortcuts.cpp:78
+#: core/globalshortcuts.cpp:79
 msgid "Love (Last.fm scrobbling)"
 msgstr "喜欢(Last.fm 音乐记录)"
 
@@ -3263,7 +3263,7 @@ msgstr "心情指示条"
 msgid "Most played"
 msgstr "最常播放"
 
-#: devices/giolister.cpp:162
+#: devices/giolister.cpp:163
 msgid "Mount point"
 msgstr "挂载点"
 
@@ -3276,7 +3276,7 @@ msgstr "挂载点"
 msgid "Move down"
 msgstr "下移"
 
-#: ui/mainwindow.cpp:714 widgets/fileviewlist.cpp:42
+#: ui/mainwindow.cpp:716 widgets/fileviewlist.cpp:42
 msgid "Move to library..."
 msgstr "移动至媒体库..."
 
@@ -3285,7 +3285,7 @@ msgstr "移动至媒体库..."
 msgid "Move up"
 msgstr "上移"
 
-#: transcoder/transcodedialog.cpp:227 ui/mainwindow.cpp:2076
+#: transcoder/transcodedialog.cpp:227 ui/mainwindow.cpp:2091
 msgid "Music"
 msgstr "音乐"
 
@@ -3293,8 +3293,8 @@ msgstr "音乐"
 msgid "Music Library"
 msgstr "媒体库"
 
-#: core/globalshortcuts.cpp:63 wiimotedev/wiimotesettingspage.cpp:113
-#: ../bin/src/ui_mainwindow.h:718
+#: core/globalshortcuts.cpp:64 ../bin/src/ui_mainwindow.h:718
+#: wiimotedev/wiimotesettingspage.cpp:113
 msgid "Mute"
 msgstr "静音"
 
@@ -3343,7 +3343,7 @@ msgstr "从未播放"
 msgid "New folder"
 msgstr "创建新文件夹"
 
-#: ui/mainwindow.cpp:1893 ../bin/src/ui_mainwindow.h:709
+#: ui/mainwindow.cpp:1908 ../bin/src/ui_mainwindow.h:709
 msgid "New playlist"
 msgstr "新建播放列表"
 
@@ -3371,8 +3371,8 @@ msgstr "最新曲目"
 msgid "Next"
 msgstr "下一首"
 
-#: core/globalshortcuts.cpp:57 wiimotedev/wiimotesettingspage.cpp:104
-#: ../bin/src/ui_mainwindow.h:677
+#: core/globalshortcuts.cpp:58 ../bin/src/ui_mainwindow.h:677
+#: wiimotedev/wiimotesettingspage.cpp:104
 msgid "Next track"
 msgstr "下一个曲目"
 
@@ -3410,7 +3410,7 @@ msgstr "无短块"
 msgid "None"
 msgstr "无"
 
-#: library/libraryview.cpp:673 ui/mainwindow.cpp:2411 ui/mainwindow.cpp:2590
+#: library/libraryview.cpp:673 ui/mainwindow.cpp:2426 ui/mainwindow.cpp:2605
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "已选择的曲目均不适合复制到设备"
 
@@ -3621,7 +3621,7 @@ msgstr "Opus"
 msgid "Organise Files"
 msgstr "组织文件"
 
-#: library/libraryview.cpp:416 ui/mainwindow.cpp:717
+#: library/libraryview.cpp:416 ui/mainwindow.cpp:719
 msgid "Organise files..."
 msgstr "组织文件..."
 
@@ -3697,15 +3697,15 @@ msgid "Party"
 msgstr "晚会"
 
 #: ../bin/src/ui_magnatunesettingspage.h:164
-#: ../bin/src/ui_spotifysettingspage.h:209
 #: ../bin/src/ui_subsonicsettingspage.h:134
 #: ../bin/src/ui_podcastsettingspage.h:281
 #: ../bin/src/ui_networkproxysettingspage.h:168
+#: ../bin/src/ui_spotifysettingspage.h:209
 #: ../bin/src/ui_seafilesettingspage.h:169
 msgid "Password"
 msgstr "密码"
 
-#: core/globalshortcuts.cpp:50 ui/mainwindow.cpp:1170 ui/mainwindow.cpp:1689
+#: core/globalshortcuts.cpp:51 ui/mainwindow.cpp:1175 ui/mainwindow.cpp:1704
 #: ui/qtsystemtrayicon.cpp:189 wiimotedev/wiimotesettingspage.cpp:114
 msgid "Pause"
 msgstr "暂停"
@@ -3733,10 +3733,10 @@ msgstr "像素"
 msgid "Plain sidebar"
 msgstr "普通侧边栏"
 
-#: core/globalshortcuts.cpp:49 ui/mainwindow.cpp:678 ui/mainwindow.cpp:1134
-#: ui/mainwindow.cpp:1155 ui/mainwindow.cpp:1693 ui/qtsystemtrayicon.cpp:177
-#: ui/qtsystemtrayicon.cpp:203 wiimotedev/wiimotesettingspage.cpp:107
-#: ../bin/src/ui_mainwindow.h:675
+#: core/globalshortcuts.cpp:50 ui/mainwindow.cpp:680 ui/mainwindow.cpp:1139
+#: ui/mainwindow.cpp:1160 ui/mainwindow.cpp:1708 ui/qtsystemtrayicon.cpp:177
+#: ui/qtsystemtrayicon.cpp:203 ../bin/src/ui_mainwindow.h:675
+#: wiimotedev/wiimotesettingspage.cpp:107
 msgid "Play"
 msgstr "播放"
 
@@ -3753,11 +3753,11 @@ msgstr "若停止则播放，若播放则停止"
 msgid "Play if there is nothing already playing"
 msgstr "如无歌曲播放则自动播放添加的歌曲"
 
-#: library/libraryview.cpp:396 ui/mainwindow.cpp:1800
+#: library/libraryview.cpp:396 ui/mainwindow.cpp:1815
 msgid "Play next"
 msgstr ""
 
-#: ui/mainwindow.cpp:1798
+#: ui/mainwindow.cpp:1813
 msgid "Play selected tracks next"
 msgstr ""
 
@@ -3765,7 +3765,7 @@ msgstr ""
 msgid "Play the <n>th track in the playlist"
 msgstr "播放列表中的第<n>首"
 
-#: core/globalshortcuts.cpp:51 wiimotedev/wiimotesettingspage.cpp:116
+#: core/globalshortcuts.cpp:52 wiimotedev/wiimotesettingspage.cpp:116
 msgid "Play/Pause"
 msgstr "播放/暂停"
 
@@ -3796,7 +3796,7 @@ msgstr "播放列表选项"
 msgid "Playlist type"
 msgstr "播放列表类型"
 
-#: ui/mainwindow.cpp:271
+#: ui/mainwindow.cpp:273
 msgid "Playlists"
 msgstr "播放列表"
 
@@ -3851,8 +3851,8 @@ msgstr "首选项"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:165
 #: ../bin/src/ui_magnatunesettingspage.h:165
-#: ../bin/src/ui_spotifysettingspage.h:215 ../bin/src/ui_settingsdialog.h:115
-#: ../bin/src/ui_lastfmsettingspage.h:134
+#: ../bin/src/ui_settingsdialog.h:115 ../bin/src/ui_lastfmsettingspage.h:134
+#: ../bin/src/ui_spotifysettingspage.h:215
 msgid "Preferences"
 msgstr "首选项"
 
@@ -3915,8 +3915,8 @@ msgstr "预览"
 msgid "Previous"
 msgstr "上一首"
 
-#: core/globalshortcuts.cpp:59 wiimotedev/wiimotesettingspage.cpp:106
-#: ../bin/src/ui_mainwindow.h:674
+#: core/globalshortcuts.cpp:60 ../bin/src/ui_mainwindow.h:674
+#: wiimotedev/wiimotesettingspage.cpp:106
 msgid "Previous track"
 msgstr "上一个曲目"
 
@@ -3974,12 +3974,12 @@ msgstr "正在查询设备..."
 msgid "Queue Manager"
 msgstr "队列管理器"
 
-#: ui/mainwindow.cpp:1793
+#: ui/mainwindow.cpp:1808
 msgid "Queue selected tracks"
 msgstr "将选定曲目加入队列"
 
 #: globalsearch/globalsearchview.cpp:465 library/libraryview.cpp:393
-#: ui/mainwindow.cpp:1791
+#: ui/mainwindow.cpp:1806
 msgid "Queue track"
 msgstr "加入队列"
 
@@ -4004,27 +4004,27 @@ msgstr "随机"
 msgid "Random visualization"
 msgstr "随机视觉效果"
 
-#: core/globalshortcuts.cpp:86
+#: core/globalshortcuts.cpp:87
 msgid "Rate the current song 0 stars"
 msgstr "给当前曲目评级为零星"
 
-#: core/globalshortcuts.cpp:88
+#: core/globalshortcuts.cpp:89
 msgid "Rate the current song 1 star"
 msgstr "给当前曲目评级为一星"
 
-#: core/globalshortcuts.cpp:90
+#: core/globalshortcuts.cpp:91
 msgid "Rate the current song 2 stars"
 msgstr "给当前曲目评级为两星"
 
-#: core/globalshortcuts.cpp:92
+#: core/globalshortcuts.cpp:93
 msgid "Rate the current song 3 stars"
 msgstr "给当前曲目评级为三星"
 
-#: core/globalshortcuts.cpp:94
+#: core/globalshortcuts.cpp:95
 msgid "Rate the current song 4 stars"
 msgstr "给当前曲目评级为四星"
 
-#: core/globalshortcuts.cpp:96
+#: core/globalshortcuts.cpp:97
 msgid "Rate the current song 5 stars"
 msgstr "给当前曲目评级为五星"
 
@@ -4095,7 +4095,7 @@ msgstr "删除"
 msgid "Remove action"
 msgstr "删除操作"
 
-#: core/globalshortcuts.cpp:83
+#: core/globalshortcuts.cpp:84
 msgid "Remove current song from playlist"
 msgstr "从播放列表中移除此曲"
 
@@ -4358,7 +4358,7 @@ msgstr "Seafile"
 msgid "Search"
 msgstr "搜索"
 
-#: ui/mainwindow.cpp:262 ../bin/src/ui_globalsearchsettingspage.h:141
+#: ui/mainwindow.cpp:264 ../bin/src/ui_globalsearchsettingspage.h:141
 msgctxt "Global search settings dialog title."
 msgid "Search"
 msgstr "搜索"
@@ -4383,7 +4383,7 @@ msgstr "搜索 Subsonic"
 msgid "Search automatically"
 msgstr "自动搜索"
 
-#: ui/mainwindow.cpp:698
+#: ui/mainwindow.cpp:700
 msgid "Search for album"
 msgstr ""
 
@@ -4396,7 +4396,7 @@ msgstr "搜索专辑封面..."
 msgid "Search for anything"
 msgstr "搜索一切"
 
-#: ui/mainwindow.cpp:695
+#: ui/mainwindow.cpp:697
 msgid "Search for artist"
 msgstr ""
 
@@ -4437,11 +4437,11 @@ msgstr "第二等级"
 msgid "Second level"
 msgstr "第二阶段"
 
-#: core/globalshortcuts.cpp:65 wiimotedev/wiimotesettingspage.cpp:118
+#: core/globalshortcuts.cpp:66 wiimotedev/wiimotesettingspage.cpp:118
 msgid "Seek backward"
 msgstr "快退"
 
-#: core/globalshortcuts.cpp:64 wiimotedev/wiimotesettingspage.cpp:120
+#: core/globalshortcuts.cpp:65 wiimotedev/wiimotesettingspage.cpp:120
 msgid "Seek forward"
 msgstr "快进"
 
@@ -4513,7 +4513,7 @@ msgstr "服务器详情"
 msgid "Service offline"
 msgstr "服务离线"
 
-#: ui/mainwindow.cpp:1838
+#: ui/mainwindow.cpp:1853
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr "将 %1 设置为 %2..."
@@ -4553,7 +4553,7 @@ msgstr "已存在 %1 的快捷键"
 msgid "Show"
 msgstr "显示"
 
-#: core/globalshortcuts.cpp:67 wiimotedev/wiimotesettingspage.cpp:122
+#: core/globalshortcuts.cpp:68 wiimotedev/wiimotesettingspage.cpp:122
 msgid "Show OSD"
 msgstr "显示 OSD"
 
@@ -4593,7 +4593,7 @@ msgstr "显示漂亮的 OSD"
 msgid "Show above status bar"
 msgstr "在状态栏之上显示"
 
-#: ui/mainwindow.cpp:645
+#: ui/mainwindow.cpp:647
 msgid "Show all songs"
 msgstr "显示所有歌曲"
 
@@ -4613,12 +4613,12 @@ msgstr "显示分频器"
 msgid "Show fullsize..."
 msgstr "显示完整尺寸..."
 
-#: library/libraryview.cpp:433 ui/mainwindow.cpp:727
+#: library/libraryview.cpp:433 ui/mainwindow.cpp:729
 #: widgets/fileviewlist.cpp:53
 msgid "Show in file browser..."
 msgstr "在文件管理器中打开..."
 
-#: ui/mainwindow.cpp:729
+#: ui/mainwindow.cpp:731
 msgid "Show in library..."
 msgstr "在媒体库中显示"
 
@@ -4630,11 +4630,11 @@ msgstr "在群星中显示"
 msgid "Show moodbar"
 msgstr "显示心情指示条"
 
-#: ui/mainwindow.cpp:647
+#: ui/mainwindow.cpp:649
 msgid "Show only duplicates"
 msgstr "只显示重复"
 
-#: ui/mainwindow.cpp:649
+#: ui/mainwindow.cpp:651
 msgid "Show only untagged"
 msgstr "只显示未加标签的"
 
@@ -4666,7 +4666,7 @@ msgstr "显示托盘图标"
 msgid "Show which sources are enabled and disabled"
 msgstr "显示来源启用/禁用状态"
 
-#: core/globalshortcuts.cpp:66
+#: core/globalshortcuts.cpp:67
 msgid "Show/Hide"
 msgstr "显示/隐藏"
 
@@ -4726,11 +4726,11 @@ msgstr "跳过计数"
 msgid "Skip forwards in playlist"
 msgstr "在播放列表中前进"
 
-#: ui/mainwindow.cpp:1809
+#: ui/mainwindow.cpp:1824
 msgid "Skip selected tracks"
 msgstr "跳过所选择的曲目"
 
-#: ui/mainwindow.cpp:1807
+#: ui/mainwindow.cpp:1822
 msgid "Skip track"
 msgstr "跳过曲目"
 
@@ -4762,7 +4762,7 @@ msgstr "Soft Rock"
 msgid "Song Information"
 msgstr "曲目信息"
 
-#: ui/mainwindow.cpp:282
+#: ui/mainwindow.cpp:284
 msgid "Song info"
 msgstr "曲目信息"
 
@@ -4835,8 +4835,8 @@ msgstr "Spotify 歌曲地址"
 msgid "Standard"
 msgstr "标准"
 
-#: internet/spotify/spotifyservice.cpp:409
 #: internet/subsonic/subsonicservice.cpp:115
+#: internet/spotify/spotifyservice.cpp:409
 msgid "Starred"
 msgstr "用星号标记"
 
@@ -4867,8 +4867,8 @@ msgstr "正在开始 %1"
 msgid "Starting..."
 msgstr "正在开始..."
 
-#: core/globalshortcuts.cpp:53 wiimotedev/wiimotesettingspage.cpp:108
-#: ../bin/src/ui_mainwindow.h:676
+#: core/globalshortcuts.cpp:54 ../bin/src/ui_mainwindow.h:676
+#: wiimotedev/wiimotesettingspage.cpp:108
 msgid "Stop"
 msgstr "停止"
 
@@ -4884,7 +4884,7 @@ msgstr "播放完每个曲目后停止"
 msgid "Stop after every track"
 msgstr "播放每个曲目前停止"
 
-#: ui/mainwindow.cpp:682 ../bin/src/ui_mainwindow.h:679
+#: ui/mainwindow.cpp:684 ../bin/src/ui_mainwindow.h:679
 msgid "Stop after this track"
 msgstr "在此曲目后停止"
 
@@ -4900,7 +4900,7 @@ msgstr "播放完此曲目后停止"
 msgid "Stop playback if song fails to play"
 msgstr ""
 
-#: core/globalshortcuts.cpp:55
+#: core/globalshortcuts.cpp:56
 msgid "Stop playing after current track"
 msgstr "播放完此曲目后停止"
 
@@ -5052,7 +5052,7 @@ msgid ""
 "license key. Visit subsonic.org for details."
 msgstr "Subsonic 服务器的试用期已过。请捐助来获得许可文件。详情请访问 subsonic.org 。"
 
-#: ui/mainwindow.cpp:2700
+#: ui/mainwindow.cpp:2715
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -5094,7 +5094,7 @@ msgid ""
 "continue?"
 msgstr "将从设备中删除这些文件.确定删除吗?"
 
-#: library/libraryview.cpp:679 ui/mainwindow.cpp:2459 widgets/fileview.cpp:189
+#: library/libraryview.cpp:679 ui/mainwindow.cpp:2474 widgets/fileview.cpp:189
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -5189,7 +5189,7 @@ msgstr "标题"
 msgid "Today"
 msgstr "今日"
 
-#: core/globalshortcuts.cpp:69
+#: core/globalshortcuts.cpp:70
 msgid "Toggle Pretty OSD"
 msgstr "切换漂亮的 OSD"
 
@@ -5197,7 +5197,7 @@ msgstr "切换漂亮的 OSD"
 msgid "Toggle fullscreen"
 msgstr "切换全屏"
 
-#: ui/mainwindow.cpp:1795
+#: ui/mainwindow.cpp:1810
 msgid "Toggle queue status"
 msgstr "切换队列状态"
 
@@ -5279,7 +5279,7 @@ msgstr "Turbine"
 msgid "Turn off"
 msgstr "关闭"
 
-#: devices/giolister.cpp:164
+#: devices/giolister.cpp:165
 msgid "URI"
 msgstr "URI"
 
@@ -5331,11 +5331,11 @@ msgstr "未知错误"
 msgid "Unset cover"
 msgstr "撤销封面"
 
-#: ui/mainwindow.cpp:1805
+#: ui/mainwindow.cpp:1820
 msgid "Unskip selected tracks"
 msgstr "取消略过的选定曲目"
 
-#: ui/mainwindow.cpp:1803
+#: ui/mainwindow.cpp:1818
 msgid "Unskip track"
 msgstr "取消掠过曲目"
 
@@ -5466,15 +5466,15 @@ msgstr "使用音量标准化"
 msgid "Used"
 msgstr "已使用"
 
-#: ui/settingsdialog.cpp:146
+#: ui/settingsdialog.cpp:149
 msgid "User interface"
 msgstr "用户界面"
 
 #: ../bin/src/ui_magnatunesettingspage.h:162
-#: ../bin/src/ui_spotifysettingspage.h:208
 #: ../bin/src/ui_subsonicsettingspage.h:133
 #: ../bin/src/ui_podcastsettingspage.h:279
 #: ../bin/src/ui_networkproxysettingspage.h:167
+#: ../bin/src/ui_spotifysettingspage.h:208
 msgid "Username"
 msgstr "用户名"
 
@@ -5521,7 +5521,7 @@ msgstr "查看流详情"
 msgid "Visualization mode"
 msgstr "视觉效果模式"
 
-#: ui/dbusscreensaver.cpp:33 ../bin/src/ui_mainwindow.h:715
+#: ../bin/src/ui_mainwindow.h:715 ui/dbusscreensaver.cpp:33
 msgid "Visualizations"
 msgstr "视觉效果"
 
@@ -5665,7 +5665,7 @@ msgid ""
 "well?"
 msgstr "您想要把此专辑的其它歌曲移动到 群星?"
 
-#: ui/mainwindow.cpp:2707
+#: ui/mainwindow.cpp:2722
 msgid "Would you like to run a full rescan right now?"
 msgstr "您要立即做个全部重新扫描？"
 
@@ -5911,10 +5911,10 @@ msgstr "iPod 和 USB 设备目前在Windows 中无法使用。抱歉！"
 msgid "in the last"
 msgstr "最后"
 
+#: playlist/playlistview.cpp:246 ui/edittagdialog.cpp:502
 #: internet/spotify/spotifysettingspage.cpp:62
 #: internet/spotify/spotifysettingspage.cpp:63
-#: internet/spotify/spotifysettingspage.cpp:64 playlist/playlistview.cpp:246
-#: ui/edittagdialog.cpp:502
+#: internet/spotify/spotifysettingspage.cpp:64
 msgid "kbps"
 msgstr "kbps"
 
