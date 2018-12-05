@@ -84,5 +84,4 @@ QT_WRAP_CPP(LIBMYGPO_QT_MOC_SRC ${LIBMYGPO_QT_MOC_H} )
 
 add_library( ${MYGPO_QT_TARGET_NAME} STATIC ${LIBMYGPO_QT_SRC} ${LIBMYGPO_QT_MOC_SRC} )
 
-target_link_libraries( ${MYGPO_QT_TARGET_NAME} ${QJSON_LIBRARIES} ${QT_QTCORE_LIBRARY} ${QT_QTNETWORK_LIBRARY}  )
-target_link_libraries( ${MYGPO_QT_TARGET_NAME} Qt5::Core Qt5::Network )
+target_link_libraries( ${MYGPO_QT_TARGET_NAME} ${QJSON_LIBRARIES} Qt5::Core Qt5::Network )
