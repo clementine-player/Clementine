@@ -12,7 +12,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2018-10-20 12:14+0000\n"
+"PO-Revision-Date: 2018-11-17 13:46+0000\n"
 "Last-Translator: hatstand <john.maguire@gmail.com>\n"
 "Language-Team: Latvian (http://www.transifex.com/davidsansome/clementine/language/lv/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -539,7 +539,7 @@ msgstr "Pievienot jaunu mapi..."
 msgid "Add podcast"
 msgstr "Pievienot podraidi"
 
-#: internet/podcasts/podcastservice.cpp:418 ../bin/src/ui_mainwindow.h:722
+#: internet/podcasts/podcastservice.cpp:419 ../bin/src/ui_mainwindow.h:722
 msgid "Add podcast..."
 msgstr "Pievienot podraidi..."
 
@@ -884,7 +884,7 @@ msgstr "Audio izvade"
 msgid "Authentication failed"
 msgstr "Autentifikācija neizdevās"
 
-#: ../bin/src/ui_podcastinfowidget.h:191
+#: ../bin/src/ui_episodeinfowidget.h:132 ../bin/src/ui_podcastinfowidget.h:191
 msgid "Author"
 msgstr "Autors"
 
@@ -1064,7 +1064,7 @@ msgstr ""
 msgid "Cancel"
 msgstr "Atcelt"
 
-#: internet/podcasts/podcastservice.cpp:441
+#: internet/podcasts/podcastservice.cpp:447
 msgid "Cancel download"
 msgstr "Atcelt lejupielādi"
 
@@ -1359,7 +1359,7 @@ msgid "Configure library..."
 msgstr "Konfigurēt bibliotēku..."
 
 #: internet/podcasts/addpodcastdialog.cpp:77
-#: internet/podcasts/podcastservice.cpp:455
+#: internet/podcasts/podcastservice.cpp:461
 msgid "Configure podcasts..."
 msgstr "Konfigurēt podraides..."
 
@@ -1425,7 +1425,7 @@ msgstr ""
 msgid "Copy to clipboard"
 msgstr "Kopēt starpliktuvē"
 
-#: library/libraryview.cpp:419 internet/podcasts/podcastservice.cpp:438
+#: library/libraryview.cpp:419 internet/podcasts/podcastservice.cpp:444
 #: ui/mainwindow.cpp:721 widgets/fileviewlist.cpp:44
 msgid "Copy to device..."
 msgstr "Kopēt uz ierīci..."
@@ -1581,6 +1581,10 @@ msgid ""
 "recover your database"
 msgstr ""
 
+#: ../bin/src/ui_episodeinfowidget.h:133
+msgid "Date"
+msgstr ""
+
 #: playlist/playlist.cpp:1432 ../bin/src/ui_edittagdialog.h:715
 msgid "Date created"
 msgstr "Izveides datums"
@@ -1631,7 +1635,7 @@ msgstr "Aizture starp vizualizācijām"
 msgid "Delete"
 msgstr "Dzēst"
 
-#: internet/podcasts/podcastservice.cpp:435
+#: internet/podcasts/podcastservice.cpp:441
 msgid "Delete downloaded data"
 msgstr "Dzēst lejuplādētos datus"
 
@@ -1848,7 +1852,7 @@ msgstr ""
 msgid "Double clicking a song will..."
 msgstr "Dubultklikšķis uz dziesmas..."
 
-#: internet/podcasts/podcastservice.cpp:531
+#: internet/podcasts/podcastservice.cpp:550
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "Download %n episodes"
@@ -1870,8 +1874,8 @@ msgstr "Lejupielādēt dalību"
 msgid "Download new episodes automatically"
 msgstr "Automātiski lejuplādēt jaunās sērijas"
 
-#: internet/podcasts/podcastservice.cpp:293
-#: internet/podcasts/podcastservice.cpp:332
+#: internet/podcasts/podcastservice.cpp:294
+#: internet/podcasts/podcastservice.cpp:333
 msgid "Download queued"
 msgstr "Lejupielāde ierindota"
 
@@ -1891,7 +1895,7 @@ msgstr "Lejupielādēt šo albumu"
 msgid "Download this album..."
 msgstr "Lejupielādēt šo albumu..."
 
-#: internet/podcasts/podcastservice.cpp:533
+#: internet/podcasts/podcastservice.cpp:552
 msgid "Download this episode"
 msgstr "Lejuplādēt šo sēriju"
 
@@ -1899,8 +1903,8 @@ msgstr "Lejuplādēt šo sēriju"
 msgid "Download..."
 msgstr "Lejupielādēt..."
 
-#: internet/podcasts/podcastservice.cpp:301
-#: internet/podcasts/podcastservice.cpp:341
+#: internet/podcasts/podcastservice.cpp:302
+#: internet/podcasts/podcastservice.cpp:342
 #, qt-format
 msgid "Downloading (%1%)..."
 msgstr "Lejuplādē (%1%)..."
@@ -1937,7 +1941,7 @@ msgstr "Dropbox"
 msgid "Dubstep"
 msgstr "Dabsteps"
 
-#: ../bin/src/ui_ripcddialog.h:308
+#: ../bin/src/ui_episodeinfowidget.h:134 ../bin/src/ui_ripcddialog.h:308
 msgid "Duration"
 msgstr ""
 
@@ -2074,6 +2078,10 @@ msgstr ""
 #: ../bin/src/ui_libraryfilterwidget.h:92
 msgid "Entire collection"
 msgstr "Visa kolekcija"
+
+#: internet/podcasts/podcastservice.cpp:532
+msgid "Episode information"
+msgstr ""
 
 #: ../bin/src/ui_equalizer.h:162 ../bin/src/ui_mainwindow.h:705
 msgid "Equalizer"
@@ -2395,9 +2403,10 @@ msgstr ""
 #: ../bin/src/ui_libraryviewcontainer.h:58
 #: ../bin/src/ui_playlistcontainer.h:134
 #: ../bin/src/ui_playlistlistcontainer.h:126
-#: ../bin/src/ui_podcastinfowidget.h:190 ../bin/src/ui_querysearchpage.h:108
-#: ../bin/src/ui_querysortpage.h:136 ../bin/src/ui_searchpreview.h:103
-#: ../bin/src/ui_searchtermwidget.h:276 ../bin/src/ui_wizardfinishpage.h:82
+#: ../bin/src/ui_episodeinfowidget.h:131 ../bin/src/ui_podcastinfowidget.h:190
+#: ../bin/src/ui_querysearchpage.h:108 ../bin/src/ui_querysortpage.h:136
+#: ../bin/src/ui_searchpreview.h:103 ../bin/src/ui_searchtermwidget.h:276
+#: ../bin/src/ui_wizardfinishpage.h:82
 #: ../bin/src/ui_songkickconcertwidget.h:99
 #: ../bin/src/ui_transcoderoptionsaac.h:127
 #: ../bin/src/ui_transcoderoptionsflac.h:79
@@ -2629,7 +2638,7 @@ msgstr "Man nav Magnatune konta"
 msgid "Icon"
 msgstr "Ikona"
 
-#: widgets/fancytabwidget.cpp:441
+#: widgets/fancytabwidget.cpp:442
 msgid "Icons on top"
 msgstr "Ikonas pa virsu"
 
@@ -2884,7 +2893,7 @@ msgstr ""
 msgid "Large album cover (no details)"
 msgstr ""
 
-#: widgets/fancytabwidget.cpp:437
+#: widgets/fancytabwidget.cpp:438
 msgid "Large sidebar"
 msgstr "Liela sānjosla"
 
@@ -3159,11 +3168,11 @@ msgstr ""
 msgid "Manufacturer"
 msgstr "Ražotājs"
 
-#: internet/podcasts/podcastservice.cpp:450 ../bin/src/ui_organisedialog.h:259
+#: internet/podcasts/podcastservice.cpp:456 ../bin/src/ui_organisedialog.h:259
 msgid "Mark as listened"
 msgstr "Atzīmēt kā dzirdētu"
 
-#: internet/podcasts/podcastservice.cpp:449
+#: internet/podcasts/podcastservice.cpp:455
 msgid "Mark as new"
 msgstr "Atzīmēt kā jaunu"
 
@@ -3712,7 +3721,7 @@ msgstr ""
 msgid "Pixel"
 msgstr "Pikselis"
 
-#: widgets/fancytabwidget.cpp:439
+#: widgets/fancytabwidget.cpp:440
 msgid "Plain sidebar"
 msgstr "Parasta sānjosla"
 
@@ -3796,7 +3805,17 @@ msgstr ""
 msgid "Plugin status:"
 msgstr "Spraudņa statuss:"
 
-#: internet/podcasts/podcastservice.cpp:132
+#: ../bin/src/ui_podcastinfodialog.h:93
+msgid "Podcast Information"
+msgstr ""
+
+#: internet/podcasts/podcastservice.cpp:437
+#: internet/podcasts/podcastservice.cpp:535
+#: internet/podcasts/podcastservice.cpp:539
+msgid "Podcast information"
+msgstr ""
+
+#: internet/podcasts/podcastservice.cpp:133
 #: ../bin/src/ui_podcastsettingspage.h:250
 msgid "Podcasts"
 msgstr "Podraides"
@@ -4711,7 +4730,7 @@ msgstr ""
 msgid "Small album cover"
 msgstr "Mazs vāka attēls"
 
-#: widgets/fancytabwidget.cpp:438
+#: widgets/fancytabwidget.cpp:439
 msgid "Small sidebar"
 msgstr "Maza sānjosla"
 
@@ -4965,7 +4984,7 @@ msgstr ""
 msgid "System colors"
 msgstr "Systēmas krāsas"
 
-#: widgets/fancytabwidget.cpp:440
+#: widgets/fancytabwidget.cpp:441
 msgid "Tabs on top"
 msgstr "Cilnes pa virsu"
 
@@ -5313,7 +5332,7 @@ msgid "Unskip track"
 msgstr ""
 
 #: internet/podcasts/addpodcastdialog.cpp:70
-#: internet/podcasts/podcastservice.cpp:444
+#: internet/podcasts/podcastservice.cpp:450
 msgid "Unsubscribe"
 msgstr "Atabonēt"
 
@@ -5321,7 +5340,7 @@ msgstr "Atabonēt"
 msgid "Upcoming Concerts"
 msgstr "Tuvākie koncerti"
 
-#: internet/podcasts/podcastservice.cpp:420
+#: internet/podcasts/podcastservice.cpp:421
 msgid "Update all podcasts"
 msgstr ""
 
@@ -5333,7 +5352,7 @@ msgstr "Atjaunot mainītās bibliotēkas mapes"
 msgid "Update the library when Clementine starts"
 msgstr "Atjaunot bibliotēku ieslēdzot Clementine"
 
-#: internet/podcasts/podcastservice.cpp:429
+#: internet/podcasts/podcastservice.cpp:430
 msgid "Update this podcast"
 msgstr "Atjaunot šo podraidi"
 

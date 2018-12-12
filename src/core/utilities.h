@@ -39,9 +39,9 @@ class QXmlStreamReader;
 struct QMetaObject;
 
 namespace Utilities {
-QString PrettyTime(int seconds);
+QString PrettyTime(int seconds, bool always_show_hours = false);
 QString PrettyTimeDelta(int seconds);
-QString PrettyTimeNanosec(qint64 nanoseconds);
+QString PrettyTimeNanosec(qint64 nanoseconds, bool always_show_hours = false);
 QString PrettySize(quint64 bytes);
 QString PrettySize(const QSize& size);
 QString WordyTime(quint64 seconds);
@@ -74,7 +74,6 @@ QByteArray Hmac(const QByteArray& key, const QByteArray& data,
 QByteArray HmacMd5(const QByteArray& key, const QByteArray& data);
 QByteArray HmacSha256(const QByteArray& key, const QByteArray& data);
 QByteArray HmacSha1(const QByteArray& key, const QByteArray& data);
-QByteArray Sha256(const QByteArray& data);
 QByteArray Sha1File(QFile& file);
 QByteArray Sha1CoverHash(const QString& artist, const QString& album);
 

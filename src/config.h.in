@@ -20,7 +20,7 @@
 #define CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}"
 #define CMAKE_EXECUTABLE_SUFFIX "${CMAKE_EXECUTABLE_SUFFIX}"
 
-#cmakedefine ENABLE_VISUALISATIONS
+#cmakedefine HAVE_VISUALISATIONS
 #cmakedefine HAVE_AMAZON_CLOUD_DRIVE
 #cmakedefine HAVE_AUDIOCD
 #cmakedefine HAVE_BOX
@@ -45,6 +45,7 @@
 #cmakedefine HAVE_SPOTIFY_DOWNLOADER
 #cmakedefine HAVE_UDISKS2
 #cmakedefine HAVE_WIIMOTEDEV
+#cmakedefine HAVE_OPENGL
 #cmakedefine HAVE_TRANSLATIONS
 #cmakedefine HAVE_SPOTIFY
 #cmakedefine TAGLIB_HAS_OPUS

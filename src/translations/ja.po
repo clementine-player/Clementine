@@ -21,7 +21,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2018-10-20 12:14+0000\n"
+"PO-Revision-Date: 2018-11-17 13:46+0000\n"
 "Last-Translator: hatstand <john.maguire@gmail.com>\n"
 "Language-Team: Japanese (http://www.transifex.com/davidsansome/clementine/language/ja/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -548,7 +548,7 @@ msgstr "新しいフォルダーを追加..."
 msgid "Add podcast"
 msgstr "ポッドキャストを追加"
 
-#: internet/podcasts/podcastservice.cpp:418 ../bin/src/ui_mainwindow.h:722
+#: internet/podcasts/podcastservice.cpp:419 ../bin/src/ui_mainwindow.h:722
 msgid "Add podcast..."
 msgstr "ポッドキャストを追加..."
 
@@ -893,7 +893,7 @@ msgstr "オーディオ出力"
 msgid "Authentication failed"
 msgstr "認証に失敗しました"
 
-#: ../bin/src/ui_podcastinfowidget.h:191
+#: ../bin/src/ui_episodeinfowidget.h:132 ../bin/src/ui_podcastinfowidget.h:191
 msgid "Author"
 msgstr "作者"
 
@@ -1073,7 +1073,7 @@ msgstr "CUE シートのサポート"
 msgid "Cancel"
 msgstr "キャンセル"
 
-#: internet/podcasts/podcastservice.cpp:441
+#: internet/podcasts/podcastservice.cpp:447
 msgid "Cancel download"
 msgstr "ダウンロードをキャンセル"
 
@@ -1368,7 +1368,7 @@ msgid "Configure library..."
 msgstr "ライブラリの設定..."
 
 #: internet/podcasts/addpodcastdialog.cpp:77
-#: internet/podcasts/podcastservice.cpp:455
+#: internet/podcasts/podcastservice.cpp:461
 msgid "Configure podcasts..."
 msgstr "ポッドキャストの設定..."
 
@@ -1434,7 +1434,7 @@ msgstr "ロスレスファイルを変換する"
 msgid "Copy to clipboard"
 msgstr "クリップボードにコピー"
 
-#: library/libraryview.cpp:419 internet/podcasts/podcastservice.cpp:438
+#: library/libraryview.cpp:419 internet/podcasts/podcastservice.cpp:444
 #: ui/mainwindow.cpp:721 widgets/fileviewlist.cpp:44
 msgid "Copy to device..."
 msgstr "デバイスへコピー..."
@@ -1590,6 +1590,10 @@ msgid ""
 "recover your database"
 msgstr "データベースの破損が見つかりました。データベースの復旧方法については https://github.com/clementine-player/Clementine/wiki/Database-Corruption をお読みください"
 
+#: ../bin/src/ui_episodeinfowidget.h:133
+msgid "Date"
+msgstr ""
+
 #: playlist/playlist.cpp:1432 ../bin/src/ui_edittagdialog.h:715
 msgid "Date created"
 msgstr "作成日時"
@@ -1640,7 +1644,7 @@ msgstr "ビジュアライゼーションの間の遅延"
 msgid "Delete"
 msgstr "削除"
 
-#: internet/podcasts/podcastservice.cpp:435
+#: internet/podcasts/podcastservice.cpp:441
 msgid "Delete downloaded data"
 msgstr "ダウンロード済みデータを削除"
 
@@ -1857,7 +1861,7 @@ msgstr "プレイリスト上の曲をダブルクリックした場合..."
 msgid "Double clicking a song will..."
 msgstr "曲をダブルクリックした場合..."
 
-#: internet/podcasts/podcastservice.cpp:531
+#: internet/podcasts/podcastservice.cpp:550
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "Download %n episodes"
@@ -1879,8 +1883,8 @@ msgstr "メンバーシップのダウンロード"
 msgid "Download new episodes automatically"
 msgstr "新しいエピソードを自動的にダウンロードする"
 
-#: internet/podcasts/podcastservice.cpp:293
-#: internet/podcasts/podcastservice.cpp:332
+#: internet/podcasts/podcastservice.cpp:294
+#: internet/podcasts/podcastservice.cpp:333
 msgid "Download queued"
 msgstr "ダウンロードがキューに追加されました"
 
@@ -1900,7 +1904,7 @@ msgstr "このアルバムのダウンロード"
 msgid "Download this album..."
 msgstr "このアルバムをダウンロード..."
 
-#: internet/podcasts/podcastservice.cpp:533
+#: internet/podcasts/podcastservice.cpp:552
 msgid "Download this episode"
 msgstr "このエピソードをダウンロード"
 
@@ -1908,8 +1912,8 @@ msgstr "このエピソードをダウンロード"
 msgid "Download..."
 msgstr "ダウンロード..."
 
-#: internet/podcasts/podcastservice.cpp:301
-#: internet/podcasts/podcastservice.cpp:341
+#: internet/podcasts/podcastservice.cpp:302
+#: internet/podcasts/podcastservice.cpp:342
 #, qt-format
 msgid "Downloading (%1%)..."
 msgstr "ダウンロード中 (%1%)..."
@@ -1946,7 +1950,7 @@ msgstr "Dropbox"
 msgid "Dubstep"
 msgstr "ダブステップ"
 
-#: ../bin/src/ui_ripcddialog.h:308
+#: ../bin/src/ui_episodeinfowidget.h:134 ../bin/src/ui_ripcddialog.h:308
 msgid "Duration"
 msgstr "長さ"
 
@@ -2083,6 +2087,10 @@ msgstr "この IP アドレスをアプリケーションに入力して Clement
 #: ../bin/src/ui_libraryfilterwidget.h:92
 msgid "Entire collection"
 msgstr "コレクション全体"
+
+#: internet/podcasts/podcastservice.cpp:532
+msgid "Episode information"
+msgstr ""
 
 #: ../bin/src/ui_equalizer.h:162 ../bin/src/ui_mainwindow.h:705
 msgid "Equalizer"
@@ -2404,9 +2412,10 @@ msgstr "デバイスを忘れるとこの一覧から削除して Clementine は
 #: ../bin/src/ui_libraryviewcontainer.h:58
 #: ../bin/src/ui_playlistcontainer.h:134
 #: ../bin/src/ui_playlistlistcontainer.h:126
-#: ../bin/src/ui_podcastinfowidget.h:190 ../bin/src/ui_querysearchpage.h:108
-#: ../bin/src/ui_querysortpage.h:136 ../bin/src/ui_searchpreview.h:103
-#: ../bin/src/ui_searchtermwidget.h:276 ../bin/src/ui_wizardfinishpage.h:82
+#: ../bin/src/ui_episodeinfowidget.h:131 ../bin/src/ui_podcastinfowidget.h:190
+#: ../bin/src/ui_querysearchpage.h:108 ../bin/src/ui_querysortpage.h:136
+#: ../bin/src/ui_searchpreview.h:103 ../bin/src/ui_searchtermwidget.h:276
+#: ../bin/src/ui_wizardfinishpage.h:82
 #: ../bin/src/ui_songkickconcertwidget.h:99
 #: ../bin/src/ui_transcoderoptionsaac.h:127
 #: ../bin/src/ui_transcoderoptionsflac.h:79
@@ -2638,7 +2647,7 @@ msgstr "Magnatune アカウントなし"
 msgid "Icon"
 msgstr "アイコン"
 
-#: widgets/fancytabwidget.cpp:441
+#: widgets/fancytabwidget.cpp:442
 msgid "Icons on top"
 msgstr "アイコンを上に配置"
 
@@ -2893,7 +2902,7 @@ msgstr "大きいアルバムカバー (詳細は以下)"
 msgid "Large album cover (no details)"
 msgstr "大きいアルバムカバー(詳細なし)"
 
-#: widgets/fancytabwidget.cpp:437
+#: widgets/fancytabwidget.cpp:438
 msgid "Large sidebar"
 msgstr "大きいサイドバー"
 
@@ -3168,11 +3177,11 @@ msgstr "手動"
 msgid "Manufacturer"
 msgstr "製造元"
 
-#: internet/podcasts/podcastservice.cpp:450 ../bin/src/ui_organisedialog.h:259
+#: internet/podcasts/podcastservice.cpp:456 ../bin/src/ui_organisedialog.h:259
 msgid "Mark as listened"
 msgstr "視聴済みマークを付ける"
 
-#: internet/podcasts/podcastservice.cpp:449
+#: internet/podcasts/podcastservice.cpp:455
 msgid "Mark as new"
 msgstr "新曲マークを付ける"
 
@@ -3721,7 +3730,7 @@ msgstr "出演者"
 msgid "Pixel"
 msgstr "ピクセル"
 
-#: widgets/fancytabwidget.cpp:439
+#: widgets/fancytabwidget.cpp:440
 msgid "Plain sidebar"
 msgstr "プレーンサイドバー"
 
@@ -3805,7 +3814,17 @@ msgstr ""
 msgid "Plugin status:"
 msgstr "プラグインの状態:"
 
-#: internet/podcasts/podcastservice.cpp:132
+#: ../bin/src/ui_podcastinfodialog.h:93
+msgid "Podcast Information"
+msgstr ""
+
+#: internet/podcasts/podcastservice.cpp:437
+#: internet/podcasts/podcastservice.cpp:535
+#: internet/podcasts/podcastservice.cpp:539
+msgid "Podcast information"
+msgstr ""
+
+#: internet/podcasts/podcastservice.cpp:133
 #: ../bin/src/ui_podcastsettingspage.h:250
 msgid "Podcasts"
 msgstr "ポッドキャスト"
@@ -4720,7 +4739,7 @@ msgstr "トラックをスキップする"
 msgid "Small album cover"
 msgstr "小さいアルバムカバー"
 
-#: widgets/fancytabwidget.cpp:438
+#: widgets/fancytabwidget.cpp:439
 msgid "Small sidebar"
 msgstr "小さいサイドバー"
 
@@ -4974,7 +4993,7 @@ msgstr "Spotify の星付きトラックを同期中"
 msgid "System colors"
 msgstr "システムの色"
 
-#: widgets/fancytabwidget.cpp:440
+#: widgets/fancytabwidget.cpp:441
 msgid "Tabs on top"
 msgstr "タブを上に配置"
 
@@ -5322,7 +5341,7 @@ msgid "Unskip track"
 msgstr "トラックをスキップしない"
 
 #: internet/podcasts/addpodcastdialog.cpp:70
-#: internet/podcasts/podcastservice.cpp:444
+#: internet/podcasts/podcastservice.cpp:450
 msgid "Unsubscribe"
 msgstr "購読解除"
 
@@ -5330,7 +5349,7 @@ msgstr "購読解除"
 msgid "Upcoming Concerts"
 msgstr "次のコンサート"
 
-#: internet/podcasts/podcastservice.cpp:420
+#: internet/podcasts/podcastservice.cpp:421
 msgid "Update all podcasts"
 msgstr "すべてのポッドキャストを更新"
 
@@ -5342,7 +5361,7 @@ msgstr "変更されたライブラリフォルダーを更新"
 msgid "Update the library when Clementine starts"
 msgstr "Clementine の起動時にライブラリを更新する"
 
-#: internet/podcasts/podcastservice.cpp:429
+#: internet/podcasts/podcastservice.cpp:430
 msgid "Update this podcast"
 msgstr "このポッドキャストを更新"
 

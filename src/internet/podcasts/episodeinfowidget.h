@@ -15,30 +15,32 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef INTERNET_PODCASTS_PODCASTINFODIALOG_H_
-#define INTERNET_PODCASTS_PODCASTINFODIALOG_H_
+#ifndef INTERNET_PODCASTS_EPISODEINFOWIDGET_H_
+#define INTERNET_PODCASTS_EPISODEINFOWIDGET_H_
 
-#include <QDialog>
+#include "podcastepisode.h"
+
+#include <QFrame>
 
 class Application;
-class Podcast;
-class PodcastEpisode;
-class Ui_PodcastInfoDialog;
+class Ui_EpisodeInfoWidget;
 
-class PodcastInfoDialog : public QDialog {
+class EpisodeInfoWidget : public QWidget {
   Q_OBJECT
 
  public:
-  explicit PodcastInfoDialog(Application* app, QWidget* parent = nullptr);
-  ~PodcastInfoDialog();
+  explicit EpisodeInfoWidget(QWidget* parent = nullptr);
+  ~EpisodeInfoWidget();
 
-  void ShowPodcast(const Podcast& podcast);
-  void ShowEpisode(const PodcastEpisode& episode, const Podcast& podcast);
+  void SetApplication(Application* app);
+
+  void SetEpisode(const PodcastEpisode& episode);
 
  private:
-  Application* app_;
+  Ui_EpisodeInfoWidget* ui_;
 
-  Ui_PodcastInfoDialog* ui_;
+  Application* app_;
+  PodcastEpisode episode_;
 };
 
-#endif  // INTERNET_PODCASTS_PODCASTINFODIALOG_H_
+#endif  // INTERNET_PODCASTS_EPISODEINFOWIDGET_H_

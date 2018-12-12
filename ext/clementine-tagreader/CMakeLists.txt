@@ -29,8 +29,8 @@ target_link_libraries(clementine-tagreader
   ${TAGLIB_LIBRARIES}
   libclementine-common
   libclementine-tagreader
-  ${QT_QTCORE_LIBRARY}
-  ${QT_QTNETWORK_LIBRARY}
+  Qt5::Core
+  Qt5::Network
   z
 )
 

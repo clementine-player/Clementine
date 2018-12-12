@@ -35,9 +35,8 @@ add_library(libclementine-common STATIC
 )
 
 target_link_libraries(libclementine-common
-  ${QT_LIBRARIES}
+  Qt5::Core
+  Qt5::Network
   ${TAGLIB_LIBRARIES}
   ${CMAKE_THREAD_LIBS_INIT}
 )
-
-target_link_libraries(libclementine-common Qt5::Core Qt5::Network)

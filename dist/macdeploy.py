@@ -30,6 +30,11 @@ FRAMEWORK_SEARCH_PATH = [
     os.path.join(os.environ['HOME'], 'Library/Frameworks')
 ]
 
+STRIP_PREFIX = [
+    '@@HOMEBREW_PREFIX@@/opt/qt5/lib/',
+    '@@HOMEBREW_CELLAR@@/qt5/5.8.0_1/lib/',
+]
+
 LIBRARY_SEARCH_PATH = ['/target', '/target/lib', '/usr/local/lib', '/sw/lib']
 
 GSTREAMER_PLUGINS = [
@@ -54,7 +59,7 @@ GSTREAMER_PLUGINS = [
     'libgstapetag.so',
     'libgstasf.so',
     'libgstaudioparsers.so',
-    'libgstfaac.so',
+    #'libgstfaac.so',
     'libgstfaad.so',
     'libgstflac.so',
     'libgstid3demux.so',
@@ -94,16 +99,16 @@ GSTREAMER_SEARCH_PATH = [
 ]
 
 QT_PLUGINS = [
-    'accessible/libqtaccessiblewidgets.dylib',
-    'codecs/libqcncodecs.dylib',
-    'codecs/libqjpcodecs.dylib',
-    'codecs/libqkrcodecs.dylib',
-    'codecs/libqtwcodecs.dylib',
+    #'accessible/libqtaccessiblewidgets.dylib',
+    #'codecs/libqcncodecs.dylib',
+    #'codecs/libqjpcodecs.dylib',
+    #'codecs/libqkrcodecs.dylib',
+    #'codecs/libqtwcodecs.dylib',
     'iconengines/libqsvgicon.dylib',
     'imageformats/libqgif.dylib',
     'imageformats/libqico.dylib',
     'imageformats/libqjpeg.dylib',
-    'imageformats/libqmng.dylib',
+    #'imageformats/libqmng.dylib',
     'imageformats/libqsvg.dylib',
 ]
 QT_PLUGINS_SEARCH_PATH = [
@@ -206,6 +211,10 @@ def GetBrokenLibraries(binary):
 
 
 def FindFramework(path):
+  for prefix in STRIP_PREFIX:
+    if path.startswith(prefix):
+      path = path[len(prefix):]
+      break
   for search_path in FRAMEWORK_SEARCH_PATH:
     abs_path = os.path.join(search_path, path)
     if os.path.exists(abs_path):

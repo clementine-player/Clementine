@@ -131,6 +131,8 @@ class MainWindow : public QMainWindow, public PlatformInterface {
 
  protected:
   void keyPressEvent(QKeyEvent* event);
+  void changeEvent(QEvent*);
+  void resizeEvent(QResizeEvent*);
   void closeEvent(QCloseEvent* event);
 
 #ifdef Q_OS_WIN32
@@ -337,7 +339,7 @@ signals:
   std::unique_ptr<TrackSelectionDialog> track_selection_dialog_;
   PlaylistItemList autocomplete_tag_items_;
 
-#ifdef ENABLE_VISUALISATIONS
+#ifdef HAVE_VISUALISATIONS
   std::unique_ptr<VisualisationContainer> visualisation_;
 #endif
 
@@ -377,6 +379,7 @@ signals:
   QTimer* track_slider_timer_;
   QSettings settings_;
 
+  bool initialized_;
   bool was_maximized_;
   int saved_playback_position_;
   Engine::State saved_playback_state_;

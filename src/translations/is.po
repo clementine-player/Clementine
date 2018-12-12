@@ -13,7 +13,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2018-10-20 12:14+0000\n"
+"PO-Revision-Date: 2018-11-17 13:46+0000\n"
 "Last-Translator: hatstand <john.maguire@gmail.com>\n"
 "Language-Team: Icelandic (http://www.transifex.com/davidsansome/clementine/language/is/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -540,7 +540,7 @@ msgstr "Bæta við nýrri möppu..."
 msgid "Add podcast"
 msgstr "Bæta við hlaðvarpi"
 
-#: internet/podcasts/podcastservice.cpp:418 ../bin/src/ui_mainwindow.h:722
+#: internet/podcasts/podcastservice.cpp:419 ../bin/src/ui_mainwindow.h:722
 msgid "Add podcast..."
 msgstr "Bæta við hlaðvarpi..."
 
@@ -885,7 +885,7 @@ msgstr "Hljóðúttak"
 msgid "Authentication failed"
 msgstr "Auðkenning mistókst"
 
-#: ../bin/src/ui_podcastinfowidget.h:191
+#: ../bin/src/ui_episodeinfowidget.h:132 ../bin/src/ui_podcastinfowidget.h:191
 msgid "Author"
 msgstr "Höfundur"
 
@@ -1065,7 +1065,7 @@ msgstr "Stuðningur við CUE-blöð"
 msgid "Cancel"
 msgstr "Hætta við"
 
-#: internet/podcasts/podcastservice.cpp:441
+#: internet/podcasts/podcastservice.cpp:447
 msgid "Cancel download"
 msgstr "Hætta við niðurhal"
 
@@ -1360,7 +1360,7 @@ msgid "Configure library..."
 msgstr "Stilla safn..."
 
 #: internet/podcasts/addpodcastdialog.cpp:77
-#: internet/podcasts/podcastservice.cpp:455
+#: internet/podcasts/podcastservice.cpp:461
 msgid "Configure podcasts..."
 msgstr "Stilla hlaðvörp..."
 
@@ -1426,7 +1426,7 @@ msgstr "Umbreyta taplausum skrám"
 msgid "Copy to clipboard"
 msgstr "Afrita á klippispjald"
 
-#: library/libraryview.cpp:419 internet/podcasts/podcastservice.cpp:438
+#: library/libraryview.cpp:419 internet/podcasts/podcastservice.cpp:444
 #: ui/mainwindow.cpp:721 widgets/fileviewlist.cpp:44
 msgid "Copy to device..."
 msgstr "Afrita til tæki..."
@@ -1582,6 +1582,10 @@ msgid ""
 "recover your database"
 msgstr "Fann skemmdir í gagnagrunni. Endilega lestu leiðbeiningar á https://github.com/clementine-player/Clementine/wiki/Database-Corruption til að sjá hvernig hægt sé að endurheimta gagnagrunninn þinn"
 
+#: ../bin/src/ui_episodeinfowidget.h:133
+msgid "Date"
+msgstr ""
+
 #: playlist/playlist.cpp:1432 ../bin/src/ui_edittagdialog.h:715
 msgid "Date created"
 msgstr "Búið til þann"
@@ -1632,7 +1636,7 @@ msgstr "Töf milli sjóngervinga"
 msgid "Delete"
 msgstr "Eyða"
 
-#: internet/podcasts/podcastservice.cpp:435
+#: internet/podcasts/podcastservice.cpp:441
 msgid "Delete downloaded data"
 msgstr "Eyða sóttum gögnum"
 
@@ -1849,7 +1853,7 @@ msgstr "Tvísmellur á lag í spilunarlistanum mun..."
 msgid "Double clicking a song will..."
 msgstr "Tvísmellur á lag mun..."
 
-#: internet/podcasts/podcastservice.cpp:531
+#: internet/podcasts/podcastservice.cpp:550
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "Download %n episodes"
@@ -1871,8 +1875,8 @@ msgstr "Sækja aðild"
 msgid "Download new episodes automatically"
 msgstr "Ná sjálfkrafa í nýja þætti"
 
-#: internet/podcasts/podcastservice.cpp:293
-#: internet/podcasts/podcastservice.cpp:332
+#: internet/podcasts/podcastservice.cpp:294
+#: internet/podcasts/podcastservice.cpp:333
 msgid "Download queued"
 msgstr "Sækja það sem er í biðröð"
 
@@ -1892,7 +1896,7 @@ msgstr "Sækja þessa hljómplötu"
 msgid "Download this album..."
 msgstr "Sækja þessa hljómplötu..."
 
-#: internet/podcasts/podcastservice.cpp:533
+#: internet/podcasts/podcastservice.cpp:552
 msgid "Download this episode"
 msgstr "Sækja þennan þátt"
 
@@ -1900,8 +1904,8 @@ msgstr "Sækja þennan þátt"
 msgid "Download..."
 msgstr "Sækja..."
 
-#: internet/podcasts/podcastservice.cpp:301
-#: internet/podcasts/podcastservice.cpp:341
+#: internet/podcasts/podcastservice.cpp:302
+#: internet/podcasts/podcastservice.cpp:342
 #, qt-format
 msgid "Downloading (%1%)..."
 msgstr "Sæki (%1%)..."
@@ -1938,7 +1942,7 @@ msgstr "Dropbox"
 msgid "Dubstep"
 msgstr "Dubstep"
 
-#: ../bin/src/ui_ripcddialog.h:308
+#: ../bin/src/ui_episodeinfowidget.h:134 ../bin/src/ui_ripcddialog.h:308
 msgid "Duration"
 msgstr "Tímalengd"
 
@@ -2075,6 +2079,10 @@ msgstr "Settu þetta IP-vistfang inn í appið til að tengjast við Clementine.
 #: ../bin/src/ui_libraryfilterwidget.h:92
 msgid "Entire collection"
 msgstr "Allt safnið"
+
+#: internet/podcasts/podcastservice.cpp:532
+msgid "Episode information"
+msgstr ""
 
 #: ../bin/src/ui_equalizer.h:162 ../bin/src/ui_mainwindow.h:705
 msgid "Equalizer"
@@ -2396,9 +2404,10 @@ msgstr "Að gleyma tæki þýðir að það er tekið af þessum lista og þarf 
 #: ../bin/src/ui_libraryviewcontainer.h:58
 #: ../bin/src/ui_playlistcontainer.h:134
 #: ../bin/src/ui_playlistlistcontainer.h:126
-#: ../bin/src/ui_podcastinfowidget.h:190 ../bin/src/ui_querysearchpage.h:108
-#: ../bin/src/ui_querysortpage.h:136 ../bin/src/ui_searchpreview.h:103
-#: ../bin/src/ui_searchtermwidget.h:276 ../bin/src/ui_wizardfinishpage.h:82
+#: ../bin/src/ui_episodeinfowidget.h:131 ../bin/src/ui_podcastinfowidget.h:190
+#: ../bin/src/ui_querysearchpage.h:108 ../bin/src/ui_querysortpage.h:136
+#: ../bin/src/ui_searchpreview.h:103 ../bin/src/ui_searchtermwidget.h:276
+#: ../bin/src/ui_wizardfinishpage.h:82
 #: ../bin/src/ui_songkickconcertwidget.h:99
 #: ../bin/src/ui_transcoderoptionsaac.h:127
 #: ../bin/src/ui_transcoderoptionsflac.h:79
@@ -2630,7 +2639,7 @@ msgstr "Ég er ekki með Magnatune-aðgang"
 msgid "Icon"
 msgstr "Táknmynd"
 
-#: widgets/fancytabwidget.cpp:441
+#: widgets/fancytabwidget.cpp:442
 msgid "Icons on top"
 msgstr "Táknmyndir efst"
 
@@ -2885,7 +2894,7 @@ msgstr "Stórt plötuumslag (ítarupplýsingar fyrir neðan)"
 msgid "Large album cover (no details)"
 msgstr "Stórt plötuumslag (engar ítarupplýsingar)"
 
-#: widgets/fancytabwidget.cpp:437
+#: widgets/fancytabwidget.cpp:438
 msgid "Large sidebar"
 msgstr "Stórt hliðarspjald"
 
@@ -3160,11 +3169,11 @@ msgstr "Handvirkt"
 msgid "Manufacturer"
 msgstr "Framleiðandi"
 
-#: internet/podcasts/podcastservice.cpp:450 ../bin/src/ui_organisedialog.h:259
+#: internet/podcasts/podcastservice.cpp:456 ../bin/src/ui_organisedialog.h:259
 msgid "Mark as listened"
 msgstr "Merkja sem heyrt"
 
-#: internet/podcasts/podcastservice.cpp:449
+#: internet/podcasts/podcastservice.cpp:455
 msgid "Mark as new"
 msgstr "Merkja sem nýtt"
 
@@ -3713,7 +3722,7 @@ msgstr "Flytjandi"
 msgid "Pixel"
 msgstr "Mynddíll"
 
-#: widgets/fancytabwidget.cpp:439
+#: widgets/fancytabwidget.cpp:440
 msgid "Plain sidebar"
 msgstr "Einfalt hliðarspjald"
 
@@ -3797,7 +3806,17 @@ msgstr "Opnaðu þessa slóð í vafranum þínum: <a href=\"%1\">%1</a>"
 msgid "Plugin status:"
 msgstr "Staða viðbótar:"
 
-#: internet/podcasts/podcastservice.cpp:132
+#: ../bin/src/ui_podcastinfodialog.h:93
+msgid "Podcast Information"
+msgstr ""
+
+#: internet/podcasts/podcastservice.cpp:437
+#: internet/podcasts/podcastservice.cpp:535
+#: internet/podcasts/podcastservice.cpp:539
+msgid "Podcast information"
+msgstr ""
+
+#: internet/podcasts/podcastservice.cpp:133
 #: ../bin/src/ui_podcastsettingspage.h:250
 msgid "Podcasts"
 msgstr "Hlaðvörp (podcasts)"
@@ -4712,7 +4731,7 @@ msgstr "Sleppa lagi"
 msgid "Small album cover"
 msgstr "Lítið plötuumslag"
 
-#: widgets/fancytabwidget.cpp:438
+#: widgets/fancytabwidget.cpp:439
 msgid "Small sidebar"
 msgstr "Lítið hliðarspjald"
 
@@ -4966,7 +4985,7 @@ msgstr "Samstilli stjörnumerkt lög í Spotify"
 msgid "System colors"
 msgstr "Kerfislitir"
 
-#: widgets/fancytabwidget.cpp:440
+#: widgets/fancytabwidget.cpp:441
 msgid "Tabs on top"
 msgstr "Flipar efst"
 
@@ -5314,7 +5333,7 @@ msgid "Unskip track"
 msgstr "Hætta við að sleppa lagi"
 
 #: internet/podcasts/addpodcastdialog.cpp:70
-#: internet/podcasts/podcastservice.cpp:444
+#: internet/podcasts/podcastservice.cpp:450
 msgid "Unsubscribe"
 msgstr "Segja upp áskrift"
 
@@ -5322,7 +5341,7 @@ msgstr "Segja upp áskrift"
 msgid "Upcoming Concerts"
 msgstr "Tónleikar á næstunni"
 
-#: internet/podcasts/podcastservice.cpp:420
+#: internet/podcasts/podcastservice.cpp:421
 msgid "Update all podcasts"
 msgstr "Uppfæra öll hlaðvörp"
 
@@ -5334,7 +5353,7 @@ msgstr "Uppfæra breyttar möppur í safni"
 msgid "Update the library when Clementine starts"
 msgstr "Uppfæra safn þegar Clementine ræsist"
 
-#: internet/podcasts/podcastservice.cpp:429
+#: internet/podcasts/podcastservice.cpp:430
 msgid "Update this podcast"
 msgstr "Uppfæra þetta hlaðvarp"
 

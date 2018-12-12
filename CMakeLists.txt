@@ -37,14 +37,11 @@ if (${CMAKE_SYSTEM_NAME} STREQUAL "FreeBSD")
   set(FREEBSD ON)
 endif()
 
-if(APPLE)
-  if(NOT QT_MAC_USE_COCOA)
-    message(FATAL_ERROR "Cocoa support is required")
-  endif(NOT QT_MAC_USE_COCOA)
-endif(APPLE)
-
 set(OpenGL_GL_PREFERENCE LEGACY)
-find_package(OpenGL REQUIRED)
+find_package(OpenGL)
+if(OPENGL_FOUND)
+  set(HAVE_OPENGL ON)
+endif(OPENGL_FOUND)
 find_package(Boost REQUIRED)
 find_package(Gettext REQUIRED)
 find_package(PkgConfig REQUIRED)
@@ -311,7 +308,7 @@ optional_component(SPOTIFY ON "Spotify support"
 optional_component(SPOTIFY_BLOB ON "Spotify support: non-GPL binary helper"
   DEPENDS "spotify support" HAVE_SPOTIFY
   DEPENDS "protobuf" PROTOBUF_FOUND PROTOBUF_PROTOC_EXECUTABLE
-  DEPENDS "libspotify" SPOTIFY_FOUND
+  DEPENDS "libspotify" LIBSPOTIFY_FOUND
 )
 
 optional_component(MOODBAR ON "Moodbar support"
@@ -319,7 +316,7 @@ optional_component(MOODBAR ON "Moodbar support"
 )
 
 optional_component(SPARKLE ON "Sparkle integration"
-  DEPENDS "Mac OS X" APPLE
+  DEPENDS "macOS" APPLE
   DEPENDS "Sparkle" SPARKLE
 )
 
@@ -331,7 +328,9 @@ optional_component(LIBPULSE ON "Pulse audio integration"
   DEPENDS "libpulse" LIBPULSE_FOUND
 )
 
-optional_component(VISUALISATIONS ON "Visualisations")
+optional_component(VISUALISATIONS ON "Visualisations"
+  DEPENDS "opengl" OPENGL_FOUND
+)
 
 optional_component(TRANSLATIONS ON "Translations"
   DEPENDS "gettext" GETTEXT_XGETTEXT_EXECUTABLE
@@ -354,12 +353,12 @@ endif(CRYPTOPP_FOUND)
 # and don't exist on my mingw toolchain
 list(REMOVE_ITEM QT_LIBRARIES "-lGLU -lGL")
 
+option(USE_SYSTEM_PROJECTM "Don't set this option unless your system projectM library has been compiled with the Clementine patches in 3rdparty" OFF)
 option(BUNDLE_PROJECTM_PRESETS "Install Clementine's own copies of libprojectm presets - disable this if you want to use a system package instead" ON)
 
-if(ENABLE_VISUALISATIONS)
+if(HAVE_VISUALISATIONS)
   # When/if upstream accepts our patches then these options can be used to link
   # to system installed projectM instead.
-  option(USE_SYSTEM_PROJECTM "Don't set this option unless your system projectM library has been compiled with the Clementine patches in 3rdparty" OFF)
   if(USE_SYSTEM_PROJECTM)
     pkg_check_modules(LIBPROJECTM libprojectM)
   else(USE_SYSTEM_PROJECTM)
@@ -367,7 +366,7 @@ if(ENABLE_VISUALISATIONS)
     set(LIBPROJECTM_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/libprojectm)
     set(LIBPROJECTM_LIBRARIES projectM)
   endif(USE_SYSTEM_PROJECTM)
-endif(ENABLE_VISUALISATIONS)
+endif(HAVE_VISUALISATIONS)
 
 
 # Build our copy of QSqlLiteDriver.
@@ -431,20 +430,6 @@ if(GMOCK_INCLUDE_DIRS)
     set(GMOCK_LIBRARIES ${GMOCK_LIBRARIES} ${GTEST_LIBRARIES})
   endif(GTEST_INCLUDE_DIRS)
 endif(GMOCK_INCLUDE_DIRS)
-
-# Use the system's sha2 if it's available.
-find_path(SHA2_INCLUDE_DIRS sha2.h)
-find_library(SHA2_LIBRARIES sha2)
-if(SHA2_LIBRARIES AND SHA2_INCLUDE_DIRS)
-  message(STATUS "Using system sha2 library")
-  set(USE_SYSTEM_SHA2 ON)
-else()
-  message(STATUS "Using builtin sha2 library")
-  set(USE_SYSTEM_SHA2 OFF)
-  add_subdirectory(3rdparty/sha2)
-  set(SHA2_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/sha2)
-  set(SHA2_LIBRARIES sha2)
-endif()
 
 # Use the system libmygpo-qt5 if a recent enough version was found
 if(LIBMYGPO_QT5_FOUND)

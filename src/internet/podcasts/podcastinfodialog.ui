@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>493</width>
-    <height>395</height>
+    <height>415</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -18,7 +18,36 @@
     <widget class="QLineEdit" name="podcast_url"/>
    </item>
    <item>
-    <widget class="QScrollArea" name="details_scroll_area">
+    <widget class="QScrollArea" name="episode_info_scroll_area">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>250</width>
+       <height>100</height>
+      </size>
+     </property>
+     <property name="horizontalScrollBarPolicy">
+      <enum>Qt::ScrollBarAlwaysOff</enum>
+     </property>
+     <property name="widgetResizable">
+      <bool>true</bool>
+     </property>
+     <widget class="EpisodeInfoWidget" name="episode_details">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>473</width>
+        <height>163</height>
+       </rect>
+      </property>
+     </widget>
+    </widget>
+   </item>
+   <item>
+    <widget class="QScrollArea" name="podcast_info_scroll_area">
      <property name="minimumSize">
       <size>
        <width>250</width>
@@ -37,13 +66,13 @@
      <property name="widgetResizable">
       <bool>true</bool>
      </property>
-     <widget class="PodcastInfoWidget" name="details">
+     <widget class="PodcastInfoWidget" name="podcast_details">
       <property name="geometry">
        <rect>
         <x>0</x>
         <y>0</y>
         <width>473</width>
-        <height>313</height>
+        <height>162</height>
        </rect>
       </property>
      </widget>
@@ -66,6 +95,12 @@
    <class>PodcastInfoWidget</class>
    <extends>QWidget</extends>
    <header>internet/podcasts/podcastinfowidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>EpisodeInfoWidget</class>
+   <extends>QWidget</extends>
+   <header location="global">internet/podcasts/episodeinfowidget.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

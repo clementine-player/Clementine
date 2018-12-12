@@ -47,7 +47,7 @@ PodcastInfoWidget::PodcastInfoWidget(QWidget* parent)
   }
 }
 
-PodcastInfoWidget::~PodcastInfoWidget() {}
+PodcastInfoWidget::~PodcastInfoWidget() { delete ui_; }
 
 void PodcastInfoWidget::SetApplication(Application* app) {
   app_ = app;

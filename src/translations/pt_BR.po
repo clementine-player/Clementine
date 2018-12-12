@@ -19,7 +19,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2018-10-21 14:19+0000\n"
+"PO-Revision-Date: 2018-11-17 21:47+0000\n"
 "Last-Translator: carlo giusepe tadei valente sasaki <carlo.gt.valente@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/davidsansome/clementine/language/pt_BR/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -546,7 +546,7 @@ msgstr "Adicionar nova pasta..."
 msgid "Add podcast"
 msgstr "Adicionar podcast"
 
-#: internet/podcasts/podcastservice.cpp:418 ../bin/src/ui_mainwindow.h:722
+#: internet/podcasts/podcastservice.cpp:419 ../bin/src/ui_mainwindow.h:722
 msgid "Add podcast..."
 msgstr "Adicionar podcast..."
 
@@ -891,7 +891,7 @@ msgstr "Saída de áudio"
 msgid "Authentication failed"
 msgstr "Falha na autenticação"
 
-#: ../bin/src/ui_podcastinfowidget.h:191
+#: ../bin/src/ui_episodeinfowidget.h:132 ../bin/src/ui_podcastinfowidget.h:191
 msgid "Author"
 msgstr "Autor"
 
@@ -1071,7 +1071,7 @@ msgstr "Suporte a lista CUE"
 msgid "Cancel"
 msgstr "Cancelar"
 
-#: internet/podcasts/podcastservice.cpp:441
+#: internet/podcasts/podcastservice.cpp:447
 msgid "Cancel download"
 msgstr "Cancelar o download"
 
@@ -1366,7 +1366,7 @@ msgid "Configure library..."
 msgstr "Configurar biblioteca..."
 
 #: internet/podcasts/addpodcastdialog.cpp:77
-#: internet/podcasts/podcastservice.cpp:455
+#: internet/podcasts/podcastservice.cpp:461
 msgid "Configure podcasts..."
 msgstr "Configurar podcasts"
 
@@ -1432,7 +1432,7 @@ msgstr "Converter arquivos sem perda"
 msgid "Copy to clipboard"
 msgstr "Copiar para a área de transferência"
 
-#: library/libraryview.cpp:419 internet/podcasts/podcastservice.cpp:438
+#: library/libraryview.cpp:419 internet/podcasts/podcastservice.cpp:444
 #: ui/mainwindow.cpp:721 widgets/fileviewlist.cpp:44
 msgid "Copy to device..."
 msgstr "Copiar para o dispositivo..."
@@ -1588,6 +1588,10 @@ msgid ""
 "recover your database"
 msgstr "Banco de dados corrompido detectado. Por favor leia https://github.com/clementine-player/Clementine/wiki/Database-Corruption para instruções de como recuperar seu banco de dados"
 
+#: ../bin/src/ui_episodeinfowidget.h:133
+msgid "Date"
+msgstr "Data"
+
 #: playlist/playlist.cpp:1432 ../bin/src/ui_edittagdialog.h:715
 msgid "Date created"
 msgstr "Data de criação"
@@ -1638,7 +1642,7 @@ msgstr "Intervalo entre visualizações"
 msgid "Delete"
 msgstr "Apagar"
 
-#: internet/podcasts/podcastservice.cpp:435
+#: internet/podcasts/podcastservice.cpp:441
 msgid "Delete downloaded data"
 msgstr "Apagar dados baixados"
 
@@ -1855,7 +1859,7 @@ msgstr "Clique duplo numa música da lista de reprodução irá..."
 msgid "Double clicking a song will..."
 msgstr "Clique duplo em uma música irá..."
 
-#: internet/podcasts/podcastservice.cpp:531
+#: internet/podcasts/podcastservice.cpp:550
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "Download %n episodes"
@@ -1877,8 +1881,8 @@ msgstr "Conta de download"
 msgid "Download new episodes automatically"
 msgstr "Baixar automaticamente novos episódios"
 
-#: internet/podcasts/podcastservice.cpp:293
-#: internet/podcasts/podcastservice.cpp:332
+#: internet/podcasts/podcastservice.cpp:294
+#: internet/podcasts/podcastservice.cpp:333
 msgid "Download queued"
 msgstr "Download na fila"
 
@@ -1898,7 +1902,7 @@ msgstr "Baixar este álbum"
 msgid "Download this album..."
 msgstr "Baixar este álbum..."
 
-#: internet/podcasts/podcastservice.cpp:533
+#: internet/podcasts/podcastservice.cpp:552
 msgid "Download this episode"
 msgstr "Baixar este episódio"
 
@@ -1906,8 +1910,8 @@ msgstr "Baixar este episódio"
 msgid "Download..."
 msgstr "Baixar..."
 
-#: internet/podcasts/podcastservice.cpp:301
-#: internet/podcasts/podcastservice.cpp:341
+#: internet/podcasts/podcastservice.cpp:302
+#: internet/podcasts/podcastservice.cpp:342
 #, qt-format
 msgid "Downloading (%1%)..."
 msgstr "Baixando (%1%)"
@@ -1944,7 +1948,7 @@ msgstr "Dropbox"
 msgid "Dubstep"
 msgstr "Dubstep"
 
-#: ../bin/src/ui_ripcddialog.h:308
+#: ../bin/src/ui_episodeinfowidget.h:134 ../bin/src/ui_ripcddialog.h:308
 msgid "Duration"
 msgstr "Duração"
 
@@ -2081,6 +2085,10 @@ msgstr "Digite este IP no Aplicativo para conectar ao Clementine."
 #: ../bin/src/ui_libraryfilterwidget.h:92
 msgid "Entire collection"
 msgstr "Toda a coletânia"
+
+#: internet/podcasts/podcastservice.cpp:532
+msgid "Episode information"
+msgstr "Informações sobre o episódio"
 
 #: ../bin/src/ui_equalizer.h:162 ../bin/src/ui_mainwindow.h:705
 msgid "Equalizer"
@@ -2402,9 +2410,10 @@ msgstr "Esquecer um dispositivo irá removê-lo desta lista e o Clementine terá
 #: ../bin/src/ui_libraryviewcontainer.h:58
 #: ../bin/src/ui_playlistcontainer.h:134
 #: ../bin/src/ui_playlistlistcontainer.h:126
-#: ../bin/src/ui_podcastinfowidget.h:190 ../bin/src/ui_querysearchpage.h:108
-#: ../bin/src/ui_querysortpage.h:136 ../bin/src/ui_searchpreview.h:103
-#: ../bin/src/ui_searchtermwidget.h:276 ../bin/src/ui_wizardfinishpage.h:82
+#: ../bin/src/ui_episodeinfowidget.h:131 ../bin/src/ui_podcastinfowidget.h:190
+#: ../bin/src/ui_querysearchpage.h:108 ../bin/src/ui_querysortpage.h:136
+#: ../bin/src/ui_searchpreview.h:103 ../bin/src/ui_searchtermwidget.h:276
+#: ../bin/src/ui_wizardfinishpage.h:82
 #: ../bin/src/ui_songkickconcertwidget.h:99
 #: ../bin/src/ui_transcoderoptionsaac.h:127
 #: ../bin/src/ui_transcoderoptionsflac.h:79
@@ -2636,7 +2645,7 @@ msgstr "Eu não tenho uma conta no Magnatune"
 msgid "Icon"
 msgstr "Ícone"
 
-#: widgets/fancytabwidget.cpp:441
+#: widgets/fancytabwidget.cpp:442
 msgid "Icons on top"
 msgstr "Ícones acima"
 
@@ -2891,7 +2900,7 @@ msgstr "Capa grande de disco (detalhes abaixo)"
 msgid "Large album cover (no details)"
 msgstr "Capa grande do disco (sem detalhes)"
 
-#: widgets/fancytabwidget.cpp:437
+#: widgets/fancytabwidget.cpp:438
 msgid "Large sidebar"
 msgstr "Barra lateral grande"
 
@@ -3166,11 +3175,11 @@ msgstr "Manualmente"
 msgid "Manufacturer"
 msgstr "Fabricante"
 
-#: internet/podcasts/podcastservice.cpp:450 ../bin/src/ui_organisedialog.h:259
+#: internet/podcasts/podcastservice.cpp:456 ../bin/src/ui_organisedialog.h:259
 msgid "Mark as listened"
 msgstr "Marcar como ouvida"
 
-#: internet/podcasts/podcastservice.cpp:449
+#: internet/podcasts/podcastservice.cpp:455
 msgid "Mark as new"
 msgstr "Marcar como nova"
 
@@ -3719,7 +3728,7 @@ msgstr "Artista"
 msgid "Pixel"
 msgstr "Pixel"
 
-#: widgets/fancytabwidget.cpp:439
+#: widgets/fancytabwidget.cpp:440
 msgid "Plain sidebar"
 msgstr "Barra lateral simples"
 
@@ -3803,7 +3812,17 @@ msgstr "Por favor abra esse endereço em seu navegador: <a href=\"%1\">%1</a>"
 msgid "Plugin status:"
 msgstr "Status do plugin:"
 
-#: internet/podcasts/podcastservice.cpp:132
+#: ../bin/src/ui_podcastinfodialog.h:93
+msgid "Podcast Information"
+msgstr "Informações do podcast"
+
+#: internet/podcasts/podcastservice.cpp:437
+#: internet/podcasts/podcastservice.cpp:535
+#: internet/podcasts/podcastservice.cpp:539
+msgid "Podcast information"
+msgstr "Informações do podcast"
+
+#: internet/podcasts/podcastservice.cpp:133
 #: ../bin/src/ui_podcastsettingspage.h:250
 msgid "Podcasts"
 msgstr "Podcasts"
@@ -4718,7 +4737,7 @@ msgstr "Pular faixa"
 msgid "Small album cover"
 msgstr "Capa pequena de álbum"
 
-#: widgets/fancytabwidget.cpp:438
+#: widgets/fancytabwidget.cpp:439
 msgid "Small sidebar"
 msgstr "Barra lateral compacta"
 
@@ -4972,7 +4991,7 @@ msgstr "Sincronizando faixas favoritas do Spotify"
 msgid "System colors"
 msgstr "Cores do Sistema"
 
-#: widgets/fancytabwidget.cpp:440
+#: widgets/fancytabwidget.cpp:441
 msgid "Tabs on top"
 msgstr "Mostrar abas no topo"
 
@@ -5320,7 +5339,7 @@ msgid "Unskip track"
 msgstr "Não pular faixa"
 
 #: internet/podcasts/addpodcastdialog.cpp:70
-#: internet/podcasts/podcastservice.cpp:444
+#: internet/podcasts/podcastservice.cpp:450
 msgid "Unsubscribe"
 msgstr "Desinscrever"
 
@@ -5328,7 +5347,7 @@ msgstr "Desinscrever"
 msgid "Upcoming Concerts"
 msgstr "Próximos shows"
 
-#: internet/podcasts/podcastservice.cpp:420
+#: internet/podcasts/podcastservice.cpp:421
 msgid "Update all podcasts"
 msgstr "Atualizar todos os podcasts"
 
@@ -5340,7 +5359,7 @@ msgstr "Atualizar pastas da biblioteca modificadas"
 msgid "Update the library when Clementine starts"
 msgstr "Atualizar a biblioteca quando o Clementine iniciar"
 
-#: internet/podcasts/podcastservice.cpp:429
+#: internet/podcasts/podcastservice.cpp:430
 msgid "Update this podcast"
 msgstr "Atualizar este podcast"
 

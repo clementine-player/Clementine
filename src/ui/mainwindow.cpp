@@ -28,6 +28,7 @@
 #include <QLinearGradient>
 #include <QMenu>
 #include <QMessageBox>
+#include <QPainter>
 #include <QSettings>
 #include <QShortcut>
 #include <QSignalMapper>
@@ -139,7 +140,7 @@
 #include "wiimotedev/shortcuts.h"
 #endif
 
-#ifdef ENABLE_VISUALISATIONS
+#ifdef HAVE_VISUALISATIONS
 #include "visualisations/visualisationcontainer.h"
 #endif
 
@@ -221,6 +222,7 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
       library_sort_model_(new QSortFilterProxyModel(this)),
       track_position_timer_(new QTimer(this)),
       track_slider_timer_(new QTimer(this)),
+      initialized_(false),
       saved_playback_position_(0),
       saved_playback_state_(Engine::Empty),
       doubleclick_addmode_(AddBehaviour_Append),
@@ -525,7 +527,7 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
       ui_->action_next_playlist, /* These two actions aren't associated */
       ui_->action_previous_playlist /* to a button but to the main window */);
 
-#ifdef ENABLE_VISUALISATIONS
+#ifdef HAVE_VISUALISATIONS
   connect(ui_->action_visualisations, SIGNAL(triggered()),
           SLOT(ShowVisualisations()));
 #else
@@ -1061,6 +1063,9 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
 
   if (!options.contains_play_options()) LoadPlaybackStatus();
 
+  initialized_ = true;
+  SaveGeometry();
+
   qLog(Debug) << "Started";
 }
 
@@ -1273,7 +1278,19 @@ void MainWindow::ScrobbleButtonVisibilityChanged(bool value) {
   }
 }
 
+void MainWindow::changeEvent(QEvent*) {
+  if (!initialized_) return;
+  SaveGeometry();
+}
+
+void MainWindow::resizeEvent(QResizeEvent*) {
+  if (!initialized_) return;
+  SaveGeometry();
+}
+
 void MainWindow::SaveGeometry() {
+  if (!initialized_) return;
+
   was_maximized_ = isMaximized();
   settings_.setValue("maximized", was_maximized_);
   // Save the geometry only when mainwindow is not in maximized state
@@ -2704,7 +2721,7 @@ void MainWindow::CheckFullRescanRevisions() {
 void MainWindow::ShowQueueManager() { queue_manager_->show(); }
 
 void MainWindow::ShowVisualisations() {
-#ifdef ENABLE_VISUALISATIONS
+#ifdef HAVE_VISUALISATIONS
   if (!visualisation_) {
     visualisation_.reset(new VisualisationContainer);
 
@@ -2723,7 +2740,7 @@ void MainWindow::ShowVisualisations() {
   }
 
   visualisation_->show();
-#endif  // ENABLE_VISUALISATIONS
+#endif  // HAVE_VISUALISATIONS
 }
 
 void MainWindow::ConnectInfoView(SongInfoBase* view) {
@@ -2777,6 +2794,7 @@ bool MainWindow::winEvent(MSG* msg, long*) {
 #endif  // Q_OS_WIN32
 
 void MainWindow::Exit() {
+  SaveGeometry();
   SavePlaybackStatus();
   settings_.setValue("show_sidebar",
                      ui_->action_toggle_show_sidebar->isChecked());

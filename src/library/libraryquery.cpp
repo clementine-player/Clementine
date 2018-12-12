@@ -80,7 +80,7 @@ LibraryQuery::LibraryQuery(const QueryOptions& options)
         if (Song::kFtsColumns.contains(
                 "fts" + columntoken,
                 Qt::CaseInsensitive)) {  // Is it a FTS column?
-          query += "fts" + columntoken + subtoken + "* ";
+          query += "fts" + columntoken + ":" + subtoken + "* ";
         } else if (Song::kColumns.contains(columntoken, Qt::CaseInsensitive)) {
           // We need to extract the operator and the value from the subtoken
           QRegExp operatorRe("^(" + kNumericCompOperators.join("|") + ")(.*)");

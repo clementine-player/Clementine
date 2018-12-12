@@ -24,7 +24,8 @@ PodcastInfoDialog::PodcastInfoDialog(Application* app, QWidget* parent)
       app_(app),
       ui_(new Ui_PodcastInfoDialog) {
   ui_->setupUi(this);
-  ui_->details->SetApplication(app);
+  ui_->podcast_details->SetApplication(app);
+  ui_->episode_details->SetApplication(app);
 }
 
 PodcastInfoDialog::~PodcastInfoDialog() {
@@ -32,8 +33,19 @@ PodcastInfoDialog::~PodcastInfoDialog() {
 }
 
 void PodcastInfoDialog::ShowPodcast(const Podcast& podcast) {
-  show();
+  ui_->episode_info_scroll_area->hide();
   ui_->podcast_url->setText(podcast.url().toString());
   ui_->podcast_url->setReadOnly(true);
-  ui_->details->SetPodcast(podcast);
+  ui_->podcast_details->SetPodcast(podcast);
+  show();
+}
+
+void PodcastInfoDialog::ShowEpisode(const PodcastEpisode& episode,
+                                    const Podcast& podcast) {
+  ui_->episode_info_scroll_area->show();
+  ui_->podcast_url->setText(episode.url().toString());
+  ui_->podcast_url->setReadOnly(true);
+  ui_->podcast_details->SetPodcast(podcast);
+  ui_->episode_details->SetEpisode(episode);
+  show();
 }

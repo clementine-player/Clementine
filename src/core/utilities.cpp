@@ -52,8 +52,6 @@
 #include "config.h"
 #include "timeconstants.h"
 
-#include "sha2.h"
-
 #if defined(Q_OS_UNIX)
 #include <sys/statvfs.h>
 #elif defined(Q_OS_WIN32)
@@ -89,7 +87,7 @@ QString PrettyTimeDelta(int seconds) {
   return (seconds >= 0 ? "+" : "-") + PrettyTime(seconds);
 }
 
-QString PrettyTime(int seconds) {
+QString PrettyTime(int seconds, bool always_show_hours) {
   // last.fm sometimes gets the track length wrong, so you end up with
   // negative times.
   seconds = qAbs(seconds);
@@ -99,7 +97,7 @@ QString PrettyTime(int seconds) {
   seconds %= 60;
 
   QString ret;
-  if (hours)
+  if (hours || always_show_hours)
     ret.sprintf("%d:%02d:%02d", hours, minutes,
                 seconds);  // NOLINT(runtime/printf)
   else
@@ -108,8 +106,8 @@ QString PrettyTime(int seconds) {
   return ret;
 }
 
-QString PrettyTimeNanosec(qint64 nanoseconds) {
-  return PrettyTime(nanoseconds / kNsecPerSec);
+QString PrettyTimeNanosec(qint64 nanoseconds, bool always_show_hours) {
+  return PrettyTime(nanoseconds / kNsecPerSec, always_show_hours);
 }
 
 QString WordyTime(quint64 seconds) {
@@ -469,7 +467,10 @@ QByteArray Hmac(const QByteArray& key, const QByteArray& data,
                                                  QCryptographicHash::Sha1),
         QCryptographicHash::Sha1);
   } else {  // Sha256_Algo, currently default
-    return Sha256(outer_padding + Sha256(inner_padding + data));
+    return QCryptographicHash::hash(
+        outer_padding + QCryptographicHash::hash(inner_padding + data,
+                                                 QCryptographicHash::Sha256),
+        QCryptographicHash::Sha256);
   }
 }
 
@@ -483,26 +484,6 @@ QByteArray HmacMd5(const QByteArray& key, const QByteArray& data) {
 
 QByteArray HmacSha1(const QByteArray& key, const QByteArray& data) {
   return Hmac(key, data, Sha1_Algo);
-}
-
-QByteArray Sha256(const QByteArray& data) {
-#ifndef USE_SYSTEM_SHA2
-  using clementine_sha2::SHA256_CTX;
-  using clementine_sha2::SHA256_Init;
-  using clementine_sha2::SHA256_Update;
-  using clementine_sha2::SHA256_Final;
-  using clementine_sha2::SHA256_DIGEST_LENGTH;
-#endif
-
-  SHA256_CTX context;
-  SHA256_Init(&context);
-  SHA256_Update(&context, reinterpret_cast<const quint8*>(data.constData()),
-                data.length());
-
-  QByteArray ret(SHA256_DIGEST_LENGTH, '\0');
-  SHA256_Final(reinterpret_cast<quint8*>(ret.data()), &context);
-
-  return ret;
 }
 
 // File must not be open and will be closed afterwards!

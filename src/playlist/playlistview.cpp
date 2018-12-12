@@ -150,6 +150,12 @@ PlaylistView::PlaylistView(QWidget* parent)
   currenttrack_pause_ =
       currenttrack_pause.pixmap(currenttrack_pause.actualSize(QSize(32, 32)));
 
+  connect(header_, SIGNAL(sectionResized(int, int, int)), SLOT(SaveGeometry()));
+  connect(header_, SIGNAL(sectionMoved(int, int, int)), SLOT(SaveGeometry()));
+  connect(header_, SIGNAL(sortIndicatorChanged(int, Qt::SortOrder)),
+          SLOT(SaveGeometry()));
+  connect(header_, SIGNAL(SectionVisibilityChanged(int, bool)),
+          SLOT(SaveGeometry()));
   connect(header_, SIGNAL(SectionRatingLockStatusChanged(bool)),
           SLOT(SetRatingLockStatus(bool)));
   connect(header_, SIGNAL(sectionResized(int, int, int)),
@@ -282,7 +288,7 @@ void PlaylistView::SetPlaylist(Playlist* playlist) {
   }
 
   playlist_ = playlist;
-  if (!header_loaded_) LoadGeometry();
+  LoadGeometry();
   LoadRatingLockStatus();
   ReloadSettings();
   DynamicModeChanged(playlist->is_dynamic());
@@ -408,7 +414,7 @@ void PlaylistView::LoadRatingLockStatus() {
 }
 
 void PlaylistView::SaveGeometry() {
-  if (read_only_settings_) return;
+  if (read_only_settings_ || !header_loaded_) return;
 
   QSettings settings;
   settings.beginGroup(Playlist::kSettingsGroup);
@@ -1183,6 +1189,7 @@ void PlaylistView::SaveSettings() {
 void PlaylistView::StretchChanged(bool stretch) {
   setHorizontalScrollBarPolicy(stretch ? Qt::ScrollBarAlwaysOff
                                        : Qt::ScrollBarAsNeeded);
+  SaveGeometry();
 }
 
 void PlaylistView::DynamicModeChanged(bool dynamic) {
