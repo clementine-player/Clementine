@@ -35,7 +35,7 @@ class FilesystemDevice : public ConnectedDevice,
                                bool first_time);
   ~FilesystemDevice();
 
-  void Init();
+  bool Init();
 
   static QStringList url_schemes() { return QStringList() << "file"; }
 

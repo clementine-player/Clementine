@@ -26,6 +26,7 @@
 class ConnectedDevice;
 class LibraryBackend;
 class TaskManager;
+class MtpConnection;
 
 class MtpLoader : public QObject {
   Q_OBJECT
@@ -35,6 +36,7 @@ class MtpLoader : public QObject {
             std::shared_ptr<ConnectedDevice> device);
   ~MtpLoader();
 
+  bool Init();
  public slots:
   void LoadDatabase();
 
@@ -53,6 +55,7 @@ signals:
   QUrl url_;
   TaskManager* task_manager_;
   LibraryBackend* backend_;
+  MtpConnection* connection_;
 };
 
 #endif  // MTPLOADER_H

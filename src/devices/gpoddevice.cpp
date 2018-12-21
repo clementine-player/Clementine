@@ -39,7 +39,7 @@ GPodDevice::GPodDevice(const QUrl& url, DeviceLister* lister,
       loader_(nullptr),
       db_(nullptr) {}
 
-void GPodDevice::Init() {
+bool GPodDevice::Init() {
   InitBackendDirectory(url_.path(), first_time_);
   model_->Init();
 
@@ -53,6 +53,7 @@ void GPodDevice::Init() {
           SLOT(LoadFinished(Itdb_iTunesDB*)));
   connect(loader_thread_, SIGNAL(started()), loader_, SLOT(LoadDatabase()));
   loader_thread_->start();
+  return true;
 }
 
 GPodDevice::~GPodDevice() {}

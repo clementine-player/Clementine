@@ -613,9 +613,11 @@ std::shared_ptr<ConnectedDevice> DeviceManager::Connect(int row) {
 
   if (!ret) {
     qLog(Warning) << "Could not create device for" << device_url.toString();
+  } else if (!ret->Init()) {
+    app_->AddError(
+        tr("Could not connect to device: %1").arg(device_url.toString()));
+    ret.reset();
   } else {
-    ret->Init();
-
     info.device_ = ret;
     emit dataChanged(index(row), index(row));
     connect(info.device_.get(), SIGNAL(TaskStarted(int)),

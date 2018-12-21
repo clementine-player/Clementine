@@ -40,9 +40,10 @@ CddaDevice::CddaDevice(const QUrl& url, DeviceLister* lister,
 
 CddaDevice::~CddaDevice() {}
 
-void CddaDevice::Init() {
+bool CddaDevice::Init() {
   song_count_ = 0;  // Reset song count, in case it was already set
   cdda_song_loader_.LoadSongs();
+  return true;
 }
 
 void CddaDevice::Refresh() {

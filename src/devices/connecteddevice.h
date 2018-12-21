@@ -45,7 +45,7 @@ class ConnectedDevice : public QObject,
                   Application* app, int database_id, bool first_time);
   ~ConnectedDevice();
 
-  virtual void Init() = 0;
+  virtual bool Init() = 0;
   // For some devices (e.g. CD devices) we don't have callbacks to be notified
   // when something change: we can call this method to refresh device's state
   virtual void Refresh() {}
