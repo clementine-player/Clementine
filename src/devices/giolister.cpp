@@ -169,10 +169,12 @@ QVariantMap GioLister::DeviceHardwareInfo(const QString& id) {
 QList<QUrl> GioLister::MakeDeviceUrls(const QString& id) {
   QString mount_point;
   QString uri;
+  QString unix_device;
   {
     QMutexLocker l(&mutex_);
     mount_point = devices_[id].mount_path;
     uri = devices_[id].mount_uri;
+    unix_device = devices_[id].volume_unix_device;
   }
 
   // gphoto2 gives invalid hostnames with []:, characters in
@@ -182,12 +184,20 @@ QList<QUrl> GioLister::MakeDeviceUrls(const QString& id) {
 
   QList<QUrl> ret;
 
-  // Special case for file:// GIO URIs - we have to check whether they point
-  // to an ipod.
-  if (url.isValid() && url.scheme() == "file") {
-    ret << MakeUrlFromLocalPath(url.path());
-  } else {
-    ret << url;
+  if (url.isValid()) {
+    QRegExp device_re("usb/(\\d+)/(\\d+)");
+    if (device_re.indexIn(unix_device) >= 0) {
+      url.addQueryItem("busnum", device_re.cap(1));
+      url.addQueryItem("devnum", device_re.cap(2));
+    }
+
+    // Special case for file:// GIO URIs - we have to check whether they point
+    // to an ipod.
+    if (url.scheme() == "file") {
+      ret << MakeUrlFromLocalPath(url.path());
+    } else {
+      ret << url;
+    }
   }
 
   ret << MakeUrlFromLocalPath(mount_point);
