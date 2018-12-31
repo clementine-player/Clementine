@@ -4,6 +4,10 @@ language: cpp
 services:
   - docker
 
+branches:
+  only:
+  - qt5
+
 before_script:
   - sudo docker pull gcr.io/clementine-data/slave-ubuntu-bionic-64
 
