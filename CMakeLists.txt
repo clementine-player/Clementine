@@ -14,7 +14,7 @@ set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)
 
 if (CMAKE_CXX_COMPILER MATCHES ".*clang")
   set(CMAKE_COMPILER_IS_CLANGXX 1)
-  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-uninitialized")
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-uninitialized -std=c++11")
 endif ()
 
 if (APPLE)
@@ -30,6 +30,7 @@ endif ()
 
 if (${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
   set(LINUX ON)
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-uninitialized -g -std=c++11 -DNDEBUG")
 endif()
 if (${CMAKE_SYSTEM_NAME} STREQUAL "FreeBSD")
   set(FREEBSD ON)
@@ -88,7 +89,7 @@ find_path(LASTFM51_INCLUDE_DIRS lastfm5/Track.h)
 find_path(SPARSEHASH_INCLUDE_DIRS google/sparsetable)
 
 # QT
-set(QT_MIN_VERSION 5.6.0)
+set(QT_MIN_VERSION 5.5.0)
 find_package(Qt5 ${QT_MIN_VERSION} REQUIRED COMPONENTS Core Concurrent Widgets Network Sql Xml OpenGL Test)
 if(X11_FOUND)
   find_package(Qt5 ${QT_MIN_VERSION} REQUIRED COMPONENTS X11Extras)
@@ -104,7 +105,7 @@ if(WIN32)
   find_package(Qt5 REQUIRED COMPONENTS WinExtras)
 endif()
 
-set(QT_LIBRARIES Qt5::Core Qt5::Concurrent Qt5::Widgets Qt5::Network Qt5::Sql Qt5::Xml Qt5::OpenGL Qt5::Test)
+set(QT_LIBRARIES Qt5::Core Qt5::Concurrent Qt5::Widgets Qt5::Network Qt5::Sql Qt5::Xml Qt5::OpenGL Qt5::Test Qt5::DBus)
 
 if(DBUS_FOUND)
   set(QT_LIBRARIES ${QT_LIBRARIES} Qt5::DBus)

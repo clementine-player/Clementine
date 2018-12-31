@@ -1253,6 +1253,7 @@ target_link_libraries(clementine_lib
   Qt5::Sql
   Qt5::Widgets
   Qt5::Xml
+  Qt5::DBus
 
   ${TAGLIB_LIBRARIES}
   ${MYGPOQT5_LIBRARIES}

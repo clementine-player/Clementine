@@ -29,4 +29,7 @@ endif()
 add_library(Qocoa STATIC
     ${SOURCES} ${MOC_SOURCES} ${RESOURCES_SOURCES}
 )
-target_link_libraries(Qocoa Qt5::Widgets Qt5::MacExtras)
+if(APPLE)
+  target_link_libraries(Qt5::MacExtras)
+endif(APPLE)
+target_link_libraries(Qocoa Qt5::Widgets)

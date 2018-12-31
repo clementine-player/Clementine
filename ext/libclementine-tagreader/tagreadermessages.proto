@@ -1,3 +1,4 @@
+syntax = "proto2";
 package pb.tagreader;
 
 message SongMetadata {
@@ -138,10 +139,10 @@ message Message {
 
   optional ReadCloudFileRequest read_cloud_file_request = 10;
   optional ReadCloudFileResponse read_cloud_file_response = 11;
-  
+
   optional SaveSongStatisticsToFileRequest save_song_statistics_to_file_request = 12;
   optional SaveSongStatisticsToFileResponse save_song_statistics_to_file_response = 13;
-  
+
   optional SaveSongRatingToFileRequest save_song_rating_to_file_request = 14;
   optional SaveSongRatingToFileResponse save_song_rating_to_file_response = 15;
 }

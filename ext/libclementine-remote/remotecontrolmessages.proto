@@ -15,9 +15,10 @@
    limitations under the License.
 */
 
-// Note: this file is licensed under the Apache License instead of GPL, so 
+// Note: this file is licensed under the Apache License instead of GPL, so
 // 3rd party applications or libraries can use another license besides GPL.
 
+syntax = "proto2";
 package pb.remote;
 
 // The supported message types
@@ -212,7 +213,7 @@ message ResponsePlaylists {
 // A list of songs in a playlist
 message ResponsePlaylistSongs {
   optional Playlist requested_playlist = 1;
-  
+
   // The songs that are in the playlist
   repeated SongMetadata songs = 2;
 }
@@ -223,7 +224,7 @@ message ResponseEngineStateChanged {
 }
 
 // Sends the current position of the track
-message ResponseUpdateTrackPosition {  
+message ResponseUpdateTrackPosition {
   optional int32 position = 1;
 }
 
@@ -382,10 +383,10 @@ message Message {
   optional RequestDownloadSongs request_download_songs = 31;
   optional RequestRateSong request_rate_song = 35;
   optional RequestGlobalSearch request_global_search = 37;
-  
+
   optional Repeat repeat = 13;
   optional Shuffle shuffle = 14;
-  
+
   optional ResponseClementineInfo response_clementine_info = 15;
   optional ResponseCurrentMetadata response_current_metadata = 16;
   optional ResponsePlaylists response_playlists = 17;
