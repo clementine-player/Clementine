@@ -1363,7 +1363,6 @@ if (UNIX AND NOT APPLE)
   # command but they're actually used by libraries that appear after them, so
   # they end up getting ignored.  This appends them to the very end of the link
   # line, ensuring they're always used.
-  find_package(X11)
   if (FREEBSD)
     target_link_libraries(clementine_lib ${X11_X11_LIB})
   else ()

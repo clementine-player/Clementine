@@ -10,7 +10,6 @@ set(QXT-MOC-HEADERS
   qxtglobalshortcut.h
 )
 
-find_package(X11)
 include_directories(${X11_INCLUDE_DIR})
 include_directories(${Qt5Gui_PRIVATE_INCLUDE_DIRS})
 
