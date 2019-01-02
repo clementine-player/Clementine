@@ -1245,21 +1245,13 @@ target_link_libraries(clementine_lib
   libclementine-tagreader
   libclementine-remote
 
-  Qt5::Concurrent
-  Qt5::Core
-  Qt5::Network
-  Qt5::OpenGL
-  Qt5::OpenGL
-  Qt5::Sql
-  Qt5::Widgets
-  Qt5::Xml
-
   ${TAGLIB_LIBRARIES}
   ${MYGPOQT5_LIBRARIES}
   ${CHROMAPRINT_LIBRARIES}
   ${GOBJECT_LIBRARIES}
   ${GLIB_LIBRARIES}
   ${GIO_LIBRARIES}
+  ${QT_LIBRARIES}
   ${GSTREAMER_BASE_LIBRARIES}
   ${GSTREAMER_LIBRARIES}
   ${GSTREAMER_APP_LIBRARIES}
