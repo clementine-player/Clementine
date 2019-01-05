@@ -231,6 +231,7 @@ class PlaylistManager : public PlaylistManagerInterface {
   void SetSongTracking(bool track);
   // Remove the current playing song
   void RemoveCurrentSong();
+  void Enque(int id, int i);
 
  private slots:
   void SetActivePlaying();
