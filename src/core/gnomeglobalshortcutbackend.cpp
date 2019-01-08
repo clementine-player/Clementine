@@ -37,11 +37,11 @@
 #endif
 
 const char* GnomeGlobalShortcutBackend::kGsdService =
+    "org.gnome.SettingsDaemon.MediaKeys";
+const char* GnomeGlobalShortcutBackend::kGsdService2 =
     "org.gnome.SettingsDaemon";
 const char* GnomeGlobalShortcutBackend::kGsdPath =
     "/org/gnome/SettingsDaemon/MediaKeys";
-const char* GnomeGlobalShortcutBackend::kGsdInterface =
-    "org.gnome.SettingsDaemon.MediaKeys";
 
 GnomeGlobalShortcutBackend::GnomeGlobalShortcutBackend(GlobalShortcuts* parent)
     : GlobalShortcutBackend(parent),
@@ -50,17 +50,22 @@ GnomeGlobalShortcutBackend::GnomeGlobalShortcutBackend(GlobalShortcuts* parent)
 
 bool GnomeGlobalShortcutBackend::DoRegister() {
 #ifdef HAVE_DBUS
+
   qLog(Debug) << "registering";
-  // Check if the GSD service is available
-  if (!QDBusConnection::sessionBus().interface()->isServiceRegistered(
-           kGsdService)) {
-    qLog(Warning) << "gnome settings daemon not registered";
-    return false;
+
+  if (!interface_) {
+    // Check if the GSD service is available
+    if (QDBusConnection::sessionBus().interface()->isServiceRegistered(kGsdService)) {
+      interface_ = new OrgGnomeSettingsDaemonMediaKeysInterface(kGsdService, kGsdPath, QDBusConnection::sessionBus(), this);
+    }
+    else if (QDBusConnection::sessionBus().interface()->isServiceRegistered(kGsdService2)) {
+      interface_ = new OrgGnomeSettingsDaemonMediaKeysInterface(kGsdService2, kGsdPath, QDBusConnection::sessionBus(), this);
+    }
   }
 
   if (!interface_) {
-    interface_ = new OrgGnomeSettingsDaemonMediaKeysInterface(
-        kGsdService, kGsdPath, QDBusConnection::sessionBus(), this);
+    qLog(Warning) << "gnome settings daemon not registered";
+    return false;
   }
 
   QDBusPendingReply<> reply =
