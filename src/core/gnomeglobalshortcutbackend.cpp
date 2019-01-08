@@ -55,11 +55,14 @@ bool GnomeGlobalShortcutBackend::DoRegister() {
 
   if (!interface_) {
     // Check if the GSD service is available
-    if (QDBusConnection::sessionBus().interface()->isServiceRegistered(kGsdService)) {
-      interface_ = new OrgGnomeSettingsDaemonMediaKeysInterface(kGsdService, kGsdPath, QDBusConnection::sessionBus(), this);
-    }
-    else if (QDBusConnection::sessionBus().interface()->isServiceRegistered(kGsdService2)) {
-      interface_ = new OrgGnomeSettingsDaemonMediaKeysInterface(kGsdService2, kGsdPath, QDBusConnection::sessionBus(), this);
+    if (QDBusConnection::sessionBus().interface()->isServiceRegistered(
+            kGsdService)) {
+      interface_ = new OrgGnomeSettingsDaemonMediaKeysInterface(
+          kGsdService, kGsdPath, QDBusConnection::sessionBus(), this);
+    } else if (QDBusConnection::sessionBus().interface()->isServiceRegistered(
+                   kGsdService2)) {
+      interface_ = new OrgGnomeSettingsDaemonMediaKeysInterface(
+          kGsdService2, kGsdPath, QDBusConnection::sessionBus(), this);
     }
   }
 
