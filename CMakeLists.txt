@@ -21,8 +21,6 @@ if (APPLE)
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --stdlib=libc++")
 endif ()
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --std=c++0x")
-
 find_program(CCACHE_EXECUTABLE NAMES ccache)
 if (CCACHE_EXECUTABLE)
   message(STATUS "ccache found: will be used for compilation and linkage")
