@@ -42,12 +42,12 @@ void MtpLoader::LoadDatabase() {
   int task_id = task_manager_->StartTask(tr("Loading MTP device"));
   emit TaskStarted(task_id);
 
-  TryLoad();
+  bool success = TryLoad();
 
   moveToThread(original_thread_);
 
   task_manager_->SetTaskFinished(task_id);
-  emit LoadFinished();
+  emit LoadFinished(success);
 }
 
 bool MtpLoader::TryLoad() {
