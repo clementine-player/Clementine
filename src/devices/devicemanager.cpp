@@ -622,11 +622,23 @@ std::shared_ptr<ConnectedDevice> DeviceManager::Connect(int row) {
             SLOT(DeviceTaskStarted(int)));
     connect(info.device_.get(), SIGNAL(SongCountUpdated(int)),
             SLOT(DeviceSongCountUpdated(int)));
+    connect(info.device_.get(), SIGNAL(ConnectFinished(const QString&, bool)),
+            SLOT(DeviceConnectFinished(const QString&, bool)));
+    ret->ConnectAsync();
   }
 
-  emit DeviceConnected(row);
-
   return ret;
+}
+
+void DeviceManager::DeviceConnectFinished(const QString& id, bool success) {
+  int row = FindDeviceById(id);
+  if (row != -1) {
+    if (success) {
+      emit DeviceConnected(row);
+    } else {
+      devices_[row].device_.reset();
+    }
+  }
 }
 
 std::shared_ptr<ConnectedDevice> DeviceManager::GetConnectedDevice(

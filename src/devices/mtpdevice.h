@@ -45,6 +45,7 @@ class MtpDevice : public ConnectedDevice {
   }
 
   void Init();
+  void ConnectAsync();
 
   bool GetSupportedFiletypes(QList<Song::FileType>* ret);
   int GetFreeSpace();
@@ -59,7 +60,7 @@ class MtpDevice : public ConnectedDevice {
   void FinishDelete(bool success);
 
  private slots:
-  void LoadFinished();
+  void LoadFinished(bool success);
   void LoaderError(const QString& message);
 
  private:
