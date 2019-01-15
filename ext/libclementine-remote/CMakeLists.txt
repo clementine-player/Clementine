@@ -1,5 +1,7 @@
 include_directories(${PROTOBUF_INCLUDE_DIRS})
 
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --std=c++0x")
+
 set(MESSAGES
   remotecontrolmessages.proto
 )
