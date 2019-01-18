@@ -29,8 +29,11 @@
 ** <http://libqxt.org>  <foundation@libqxt.org>
 *****************************************************************************/
 
-#if QT_VERSION < QT_VERSION_CHECK(5,0,0)
+#if QT_VERSION < QT_VERSION_CHECK(5,0,0) || QT_VERSION > QT_VERSION_CHECK(5,6,0) 
 #   include <QX11Info>
+#if QT_VERSION > QT_VERSION_CHECK(5,6,0)
+#   include <xcb/xcb.h>
+#endif
 #else
 #   include <QApplication>
 #   include <qpa/qplatformnativeinterface.h>
@@ -92,7 +95,7 @@ class QxtX11Data {
 public:
     QxtX11Data()
     {
-#if QT_VERSION < QT_VERSION_CHECK(5,0,0)
+#if QT_VERSION < QT_VERSION_CHECK(5,0,0) || QT_VERSION > QT_VERSION_CHECK(5,6,0)
         m_display = QX11Info::display();
 #else
         QPlatformNativeInterface *native = qApp->platformNativeInterface();
