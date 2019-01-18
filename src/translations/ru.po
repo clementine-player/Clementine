@@ -11,6 +11,7 @@
 # Andrei Stepanov <adem4ik@gmail.com>, 2014-2018
 # Andy Dufrane <>, 2012
 # arnaudbienner <arnaud.bienner@gmail.com>, 2011
+# Camellan <camellan@yandex.ru>, 2018
 # Максим Дронь <dronmax@gmail.com>, 2013
 # Eugene Sharygin <eush77@gmail.com>, 2014
 # Just a baka <justabaka@gmail.com>, 2013
@@ -35,8 +36,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2018-11-17 15:49+0000\n"
-"Last-Translator: Andrei Stepanov <adem4ik@gmail.com>\n"
+"PO-Revision-Date: 2018-12-29 16:05+0000\n"
+"Last-Translator: Camellan <camellan@yandex.ru>\n"
 "Language-Team: Russian (http://www.transifex.com/davidsansome/clementine/language/ru/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -343,7 +344,7 @@ msgstr "96 000 Гц"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:164
 msgid "<a href=\"http://www.di.fm/premium/\">Upgrade to Premium now</a>"
-msgstr "<a href=\"http://www.di.fm/premium/\">Обновить до Premium-версии сейчас</a>"
+msgstr "<a href=\"http://www.di.fm/premium/\">Обновить до Premium-версии</a>"
 
 #: ../bin/src/ui_librarysettingspage.h:194
 msgid ""
@@ -525,7 +526,7 @@ msgstr "Добавить другой поток…"
 msgid "Add directory..."
 msgstr "Добавить каталог…"
 
-#: ui/mainwindow.cpp:2075
+#: ui/mainwindow.cpp:2090
 msgid "Add file"
 msgstr "Добавить файл"
 
@@ -545,7 +546,7 @@ msgstr "Добавить файл…"
 msgid "Add files to transcode"
 msgstr "Конвертировать файлы"
 
-#: transcoder/transcodedialog.cpp:308 ui/mainwindow.cpp:2102
+#: transcoder/transcodedialog.cpp:308 ui/mainwindow.cpp:2117
 #: ripper/ripcddialog.cpp:203
 msgid "Add folder"
 msgstr "Добавить папку"
@@ -650,7 +651,7 @@ msgstr "Добавить в плейлисты Spotify"
 msgid "Add to Spotify starred"
 msgstr "Добавить в оценённые Spotify"
 
-#: ui/mainwindow.cpp:1876
+#: ui/mainwindow.cpp:1891
 msgid "Add to another playlist"
 msgstr "Добавить в другой плейлист"
 
@@ -740,7 +741,7 @@ msgstr "Альбомы без обложек"
 msgid "All"
 msgstr "Все"
 
-#: ui/mainwindow.cpp:160
+#: ui/mainwindow.cpp:161
 msgid "All Files (*)"
 msgstr "Все файлы (*)"
 
@@ -809,7 +810,7 @@ msgid ""
 "like to download and install it now?"
 msgstr "Требуется дополнительный модуль для использования Spotify в Clementine. Скачать и установить его?"
 
-#: devices/gpodloader.cpp:60
+#: devices/gpodloader.cpp:61
 msgid "An error occurred loading the iTunes database"
 msgstr "Произошла ошибка при загрузке данных iTunes"
 
@@ -878,7 +879,7 @@ msgstr "Вы действительно хотите записывать ста
 msgid "Artist"
 msgstr "Исполнитель"
 
-#: ui/mainwindow.cpp:285
+#: ui/mainwindow.cpp:287
 msgid "Artist info"
 msgstr "Артист"
 
@@ -977,7 +978,7 @@ msgstr "Резервное копирование базы данных"
 msgid "Balance"
 msgstr "Баланс"
 
-#: core/globalshortcuts.cpp:80
+#: core/globalshortcuts.cpp:81
 msgid "Ban (Last.fm scrobbling)"
 msgstr "Запретить (в скорбблере Last.fm)"
 
@@ -1099,7 +1100,7 @@ msgstr "Сменить обложку"
 msgid "Change font size..."
 msgstr "Изменить размер шрифта…"
 
-#: core/globalshortcuts.cpp:73
+#: core/globalshortcuts.cpp:74
 msgid "Change repeat mode"
 msgstr "Изменить режим повтора"
 
@@ -1107,7 +1108,7 @@ msgstr "Изменить режим повтора"
 msgid "Change shortcut..."
 msgstr "Изменить клавиши…"
 
-#: core/globalshortcuts.cpp:71
+#: core/globalshortcuts.cpp:72
 msgid "Change shuffle mode"
 msgstr "Изменить режим перемешивания"
 
@@ -1141,7 +1142,7 @@ msgstr "Проверять новые выпуски"
 msgid "Check for updates"
 msgstr "Проверить обновления"
 
-#: ui/mainwindow.cpp:824
+#: ui/mainwindow.cpp:826
 msgid "Check for updates..."
 msgstr "Проверить обновления…"
 
@@ -1377,7 +1378,7 @@ msgstr "Настроить Subsonic…"
 msgid "Configure global search..."
 msgstr "Настроить глобальный поиск…"
 
-#: ui/mainwindow.cpp:661
+#: ui/mainwindow.cpp:663
 msgid "Configure library..."
 msgstr "Настроить фонотеку…"
 
@@ -1449,11 +1450,11 @@ msgid "Copy to clipboard"
 msgstr "Скопировать в буфер"
 
 #: library/libraryview.cpp:419 internet/podcasts/podcastservice.cpp:444
-#: ui/mainwindow.cpp:721 widgets/fileviewlist.cpp:44
+#: ui/mainwindow.cpp:723 widgets/fileviewlist.cpp:44
 msgid "Copy to device..."
 msgstr "Копировать на носитель"
 
-#: devices/deviceview.cpp:228 ui/mainwindow.cpp:711
+#: devices/deviceview.cpp:228 ui/mainwindow.cpp:713
 #: widgets/fileviewlist.cpp:40
 msgid "Copy to library..."
 msgstr "Копировать в фонотеку…"
@@ -1632,7 +1633,7 @@ msgstr "Уменьшить громкость на 4 процента"
 msgid "Decrease the volume by <value> percent"
 msgstr "Уменьшить громкость на <value> процентов"
 
-#: core/globalshortcuts.cpp:62 wiimotedev/wiimotesettingspage.cpp:112
+#: core/globalshortcuts.cpp:63 wiimotedev/wiimotesettingspage.cpp:112
 msgid "Decrease volume"
 msgstr "Уменьшить громкость"
 
@@ -1663,7 +1664,7 @@ msgid "Delete downloaded data"
 msgstr "Удалить загруженные данные"
 
 #: devices/deviceview.cpp:408 library/libraryview.cpp:678
-#: ui/mainwindow.cpp:2458 widgets/fileview.cpp:188
+#: ui/mainwindow.cpp:2473 widgets/fileview.cpp:188
 msgid "Delete files"
 msgstr "Удалить файлы"
 
@@ -1671,7 +1672,7 @@ msgstr "Удалить файлы"
 msgid "Delete from device..."
 msgstr "Удалить с носителя"
 
-#: library/libraryview.cpp:422 ui/mainwindow.cpp:724
+#: library/libraryview.cpp:422 ui/mainwindow.cpp:726
 #: widgets/fileviewlist.cpp:47
 msgid "Delete from disk..."
 msgstr "Удалить с диска…"
@@ -1704,11 +1705,11 @@ msgstr "Удаление файлов"
 msgid "Depth"
 msgstr "Глубина"
 
-#: ui/mainwindow.cpp:1789
+#: ui/mainwindow.cpp:1804
 msgid "Dequeue selected tracks"
 msgstr "Убрать выбранные треки из очереди"
 
-#: ui/mainwindow.cpp:1787
+#: ui/mainwindow.cpp:1802
 msgid "Dequeue track"
 msgstr "Убрать трек из очереди"
 
@@ -1721,7 +1722,7 @@ msgstr "Назначение"
 msgid "Details..."
 msgstr "Подробнее…"
 
-#: devices/devicekitlister.cpp:128 devices/giolister.cpp:163
+#: devices/giolister.cpp:164 devices/devicekitlister.cpp:128
 msgid "Device"
 msgstr "Носитель"
 
@@ -1737,7 +1738,7 @@ msgstr "Имя носителя"
 msgid "Device properties..."
 msgstr "Свойства носителя…"
 
-#: ui/mainwindow.cpp:278
+#: ui/mainwindow.cpp:280
 msgid "Devices"
 msgstr "Носители"
 
@@ -1980,7 +1981,7 @@ msgstr "Случайный динамичный микс"
 msgid "Edit smart playlist..."
 msgstr "Изменить умный плейлист…"
 
-#: ui/mainwindow.cpp:1839
+#: ui/mainwindow.cpp:1854
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr "Изменить тег «%1»…"
@@ -2036,7 +2037,7 @@ msgid ""
 "displayed in this order."
 msgstr "Укажите источники, включаемые в результаты поиска. Результаты будут отображаться в данном порядке."
 
-#: core/globalshortcuts.cpp:76
+#: core/globalshortcuts.cpp:77
 msgid "Enable/disable Last.fm scrobbling"
 msgstr "Включить/отключить скробблер Last.fm"
 
@@ -2119,8 +2120,8 @@ msgid "Equivalent to --log-levels *:3"
 msgstr "Аналогично --log-levels *:3"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:246
-#: library/libraryview.cpp:672 ui/mainwindow.cpp:2131 ui/mainwindow.cpp:2410
-#: ui/mainwindow.cpp:2589
+#: library/libraryview.cpp:672 ui/mainwindow.cpp:2146 ui/mainwindow.cpp:2425
+#: ui/mainwindow.cpp:2604
 msgid "Error"
 msgstr "Ошибка"
 
@@ -2266,7 +2267,7 @@ msgstr "Затухание звука"
 msgid "Fading duration"
 msgstr "Длительность затухания"
 
-#: ui/mainwindow.cpp:2132
+#: ui/mainwindow.cpp:2147
 msgid "Failed reading CD drive"
 msgstr "Не удалось прочесть CD-привод"
 
@@ -2367,7 +2368,7 @@ msgstr "Тип файла"
 msgid "Filename"
 msgstr "Имя файла"
 
-#: ui/mainwindow.cpp:268
+#: ui/mainwindow.cpp:270
 msgid "Files"
 msgstr "Файлы"
 
@@ -2481,7 +2482,7 @@ msgstr "Высокие частоты"
 msgid "Ge&nre"
 msgstr "&Жанр"
 
-#: ui/settingsdialog.cpp:132
+#: ui/settingsdialog.cpp:135
 msgid "General"
 msgstr "Общие"
 
@@ -2749,7 +2750,7 @@ msgstr "Увеличить громкость на 4 процента"
 msgid "Increase the volume by <value> percent"
 msgstr "Увеличить громкость на <value> процентов"
 
-#: core/globalshortcuts.cpp:61 wiimotedev/wiimotesettingspage.cpp:110
+#: core/globalshortcuts.cpp:62 wiimotedev/wiimotesettingspage.cpp:110
 msgid "Increase volume"
 msgstr "Увеличить громкость"
 
@@ -2758,7 +2759,7 @@ msgstr "Увеличить громкость"
 msgid "Indexing %1"
 msgstr "Индексация %1"
 
-#: wiimotedev/wiimotesettingspage.cpp:139 ../bin/src/ui_deviceproperties.h:372
+#: ../bin/src/ui_deviceproperties.h:372 wiimotedev/wiimotesettingspage.cpp:139
 msgid "Information"
 msgstr "Информация"
 
@@ -2778,11 +2779,11 @@ msgstr "Установлен"
 msgid "Integrity check"
 msgstr "Проверка целостности"
 
-#: ui/mainwindow.cpp:274
+#: ui/mainwindow.cpp:276
 msgid "Internet"
 msgstr "Интернет"
 
-#: ui/settingsdialog.cpp:155
+#: ui/settingsdialog.cpp:158
 msgid "Internet providers"
 msgstr "Службы интернет"
 
@@ -2868,9 +2869,9 @@ msgstr "Перейти к текущему треку"
 msgid "Keep buttons for %1 second..."
 msgstr "Показывать кнопки в течении %1 секунды…"
 
+#: ../bin/src/ui_wiimoteshortcutgrabber.h:123
 #: wiimotedev/wiimoteshortcutgrabber.cpp:75
 #: wiimotedev/wiimoteshortcutgrabber.cpp:117
-#: ../bin/src/ui_wiimoteshortcutgrabber.h:123
 #, qt-format
 msgid "Keep buttons for %1 seconds..."
 msgstr "Показывать кнопки в течении %1 секунд…"
@@ -2966,7 +2967,7 @@ msgstr "Левый канал"
 msgid "Length"
 msgstr "Длина"
 
-#: ui/mainwindow.cpp:253 ui/mainwindow.cpp:265
+#: ui/mainwindow.cpp:255 ui/mainwindow.cpp:267
 #: ../bin/src/ui_seafilesettingspage.h:177
 msgid "Library"
 msgstr "Фонотека"
@@ -2975,7 +2976,7 @@ msgstr "Фонотека"
 msgid "Library advanced grouping"
 msgstr "Расширенная группировка фонотеки"
 
-#: ui/mainwindow.cpp:2709
+#: ui/mainwindow.cpp:2724
 msgid "Library rescan notice"
 msgstr "Уведомление о сканировании фонотеки"
 
@@ -3062,9 +3063,9 @@ msgstr "Загрузка файлов или ссылок с заменой те
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:162
 #: ../bin/src/ui_magnatunesettingspage.h:163
-#: ../bin/src/ui_spotifysettingspage.h:210
 #: ../bin/src/ui_subsonicsettingspage.h:137
 #: ../bin/src/ui_lastfmsettingspage.h:132
+#: ../bin/src/ui_spotifysettingspage.h:210
 #: ../bin/src/ui_googledrivesettingspage.h:101
 #: ../bin/src/ui_dropboxsettingspage.h:101
 #: ../bin/src/ui_skydrivesettingspage.h:101
@@ -3084,7 +3085,7 @@ msgstr "Профиль Long term prediction (LTP)"
 msgid "Love"
 msgstr "В любимые"
 
-#: core/globalshortcuts.cpp:78
+#: core/globalshortcuts.cpp:79
 msgid "Love (Last.fm scrobbling)"
 msgstr "В любимые (скорбблер Last.fm)"
 
@@ -3278,7 +3279,7 @@ msgstr "Индикатор тона"
 msgid "Most played"
 msgstr "Наиболее прослушиваемые"
 
-#: devices/giolister.cpp:162
+#: devices/giolister.cpp:163
 msgid "Mount point"
 msgstr "Точка монтирования"
 
@@ -3291,7 +3292,7 @@ msgstr "Точки монтирования"
 msgid "Move down"
 msgstr "Переместить вниз"
 
-#: ui/mainwindow.cpp:714 widgets/fileviewlist.cpp:42
+#: ui/mainwindow.cpp:716 widgets/fileviewlist.cpp:42
 msgid "Move to library..."
 msgstr "Переместить в фонотеку…"
 
@@ -3300,7 +3301,7 @@ msgstr "Переместить в фонотеку…"
 msgid "Move up"
 msgstr "Переместить вверх"
 
-#: transcoder/transcodedialog.cpp:227 ui/mainwindow.cpp:2076
+#: transcoder/transcodedialog.cpp:227 ui/mainwindow.cpp:2091
 msgid "Music"
 msgstr "Музыка"
 
@@ -3308,8 +3309,8 @@ msgstr "Музыка"
 msgid "Music Library"
 msgstr "Фонотека"
 
-#: core/globalshortcuts.cpp:63 wiimotedev/wiimotesettingspage.cpp:113
-#: ../bin/src/ui_mainwindow.h:718
+#: core/globalshortcuts.cpp:64 ../bin/src/ui_mainwindow.h:718
+#: wiimotedev/wiimotesettingspage.cpp:113
 msgid "Mute"
 msgstr "Приглушить звук"
 
@@ -3358,7 +3359,7 @@ msgstr "Никогда не начинать воспроизведение"
 msgid "New folder"
 msgstr "Новая папка"
 
-#: ui/mainwindow.cpp:1893 ../bin/src/ui_mainwindow.h:709
+#: ui/mainwindow.cpp:1908 ../bin/src/ui_mainwindow.h:709
 msgid "New playlist"
 msgstr "Новый плейлист"
 
@@ -3386,8 +3387,8 @@ msgstr "Последние треки"
 msgid "Next"
 msgstr "Дальше"
 
-#: core/globalshortcuts.cpp:57 wiimotedev/wiimotesettingspage.cpp:104
-#: ../bin/src/ui_mainwindow.h:677
+#: core/globalshortcuts.cpp:58 ../bin/src/ui_mainwindow.h:677
+#: wiimotedev/wiimotesettingspage.cpp:104
 msgid "Next track"
 msgstr "Следующий трек"
 
@@ -3425,7 +3426,7 @@ msgstr "Без коротких блоков"
 msgid "None"
 msgstr "Ничего"
 
-#: library/libraryview.cpp:673 ui/mainwindow.cpp:2411 ui/mainwindow.cpp:2590
+#: library/libraryview.cpp:673 ui/mainwindow.cpp:2426 ui/mainwindow.cpp:2605
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Ни одна из выбранных песен не была скопирована на устройство"
 
@@ -3636,7 +3637,7 @@ msgstr "Opus"
 msgid "Organise Files"
 msgstr "Упорядочить файлы"
 
-#: library/libraryview.cpp:416 ui/mainwindow.cpp:717
+#: library/libraryview.cpp:416 ui/mainwindow.cpp:719
 msgid "Organise files..."
 msgstr "Упорядочить файлы…"
 
@@ -3712,15 +3713,15 @@ msgid "Party"
 msgstr "Вечеринка"
 
 #: ../bin/src/ui_magnatunesettingspage.h:164
-#: ../bin/src/ui_spotifysettingspage.h:209
 #: ../bin/src/ui_subsonicsettingspage.h:134
 #: ../bin/src/ui_podcastsettingspage.h:281
 #: ../bin/src/ui_networkproxysettingspage.h:168
+#: ../bin/src/ui_spotifysettingspage.h:209
 #: ../bin/src/ui_seafilesettingspage.h:169
 msgid "Password"
 msgstr "Пароль"
 
-#: core/globalshortcuts.cpp:50 ui/mainwindow.cpp:1170 ui/mainwindow.cpp:1689
+#: core/globalshortcuts.cpp:51 ui/mainwindow.cpp:1175 ui/mainwindow.cpp:1704
 #: ui/qtsystemtrayicon.cpp:189 wiimotedev/wiimotesettingspage.cpp:114
 msgid "Pause"
 msgstr "Пауза"
@@ -3748,10 +3749,10 @@ msgstr "Пиксель"
 msgid "Plain sidebar"
 msgstr "Нормальная боковая панель"
 
-#: core/globalshortcuts.cpp:49 ui/mainwindow.cpp:678 ui/mainwindow.cpp:1134
-#: ui/mainwindow.cpp:1155 ui/mainwindow.cpp:1693 ui/qtsystemtrayicon.cpp:177
-#: ui/qtsystemtrayicon.cpp:203 wiimotedev/wiimotesettingspage.cpp:107
-#: ../bin/src/ui_mainwindow.h:675
+#: core/globalshortcuts.cpp:50 ui/mainwindow.cpp:680 ui/mainwindow.cpp:1139
+#: ui/mainwindow.cpp:1160 ui/mainwindow.cpp:1708 ui/qtsystemtrayicon.cpp:177
+#: ui/qtsystemtrayicon.cpp:203 ../bin/src/ui_mainwindow.h:675
+#: wiimotedev/wiimotesettingspage.cpp:107
 msgid "Play"
 msgstr "Воспроизвести"
 
@@ -3768,11 +3769,11 @@ msgstr "Воспроизвести если остановлено, приост
 msgid "Play if there is nothing already playing"
 msgstr "Проиграть, если ничего не проигрывается"
 
-#: library/libraryview.cpp:396 ui/mainwindow.cpp:1800
+#: library/libraryview.cpp:396 ui/mainwindow.cpp:1815
 msgid "Play next"
 msgstr "Воспроизвести следующий"
 
-#: ui/mainwindow.cpp:1798
+#: ui/mainwindow.cpp:1813
 msgid "Play selected tracks next"
 msgstr "Проиграть выбранные треки следующими"
 
@@ -3780,7 +3781,7 @@ msgstr "Проиграть выбранные треки следующими"
 msgid "Play the <n>th track in the playlist"
 msgstr "Воспроизвести <n>-ную композицию в плейлисте"
 
-#: core/globalshortcuts.cpp:51 wiimotedev/wiimotesettingspage.cpp:116
+#: core/globalshortcuts.cpp:52 wiimotedev/wiimotesettingspage.cpp:116
 msgid "Play/Pause"
 msgstr "Воспроизведение/Пауза"
 
@@ -3811,7 +3812,7 @@ msgstr "Настройки плейлиста"
 msgid "Playlist type"
 msgstr "Тип плейлиста"
 
-#: ui/mainwindow.cpp:271
+#: ui/mainwindow.cpp:273
 msgid "Playlists"
 msgstr "Списки"
 
@@ -3866,8 +3867,8 @@ msgstr "Настройки"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:165
 #: ../bin/src/ui_magnatunesettingspage.h:165
-#: ../bin/src/ui_spotifysettingspage.h:215 ../bin/src/ui_settingsdialog.h:115
-#: ../bin/src/ui_lastfmsettingspage.h:134
+#: ../bin/src/ui_settingsdialog.h:115 ../bin/src/ui_lastfmsettingspage.h:134
+#: ../bin/src/ui_spotifysettingspage.h:215
 msgid "Preferences"
 msgstr "Настройки"
 
@@ -3930,8 +3931,8 @@ msgstr "Предпросмотр"
 msgid "Previous"
 msgstr "Предыдущий"
 
-#: core/globalshortcuts.cpp:59 wiimotedev/wiimotesettingspage.cpp:106
-#: ../bin/src/ui_mainwindow.h:674
+#: core/globalshortcuts.cpp:60 ../bin/src/ui_mainwindow.h:674
+#: wiimotedev/wiimotesettingspage.cpp:106
 msgid "Previous track"
 msgstr "Предыдущий трек"
 
@@ -3989,12 +3990,12 @@ msgstr "Опрашиваем устройство…"
 msgid "Queue Manager"
 msgstr "Управление очередью"
 
-#: ui/mainwindow.cpp:1793
+#: ui/mainwindow.cpp:1808
 msgid "Queue selected tracks"
 msgstr "Выбранные треки в очередь"
 
 #: globalsearch/globalsearchview.cpp:465 library/libraryview.cpp:393
-#: ui/mainwindow.cpp:1791
+#: ui/mainwindow.cpp:1806
 msgid "Queue track"
 msgstr "Трек в очередь"
 
@@ -4019,27 +4020,27 @@ msgstr "Случайные"
 msgid "Random visualization"
 msgstr "Случайная визуализация"
 
-#: core/globalshortcuts.cpp:86
+#: core/globalshortcuts.cpp:87
 msgid "Rate the current song 0 stars"
 msgstr "Оценка текущей песни 0 звёзд"
 
-#: core/globalshortcuts.cpp:88
+#: core/globalshortcuts.cpp:89
 msgid "Rate the current song 1 star"
 msgstr "Оценка текущей песни 1 звезда"
 
-#: core/globalshortcuts.cpp:90
+#: core/globalshortcuts.cpp:91
 msgid "Rate the current song 2 stars"
 msgstr "Оценка текущей песни 2 звезды"
 
-#: core/globalshortcuts.cpp:92
+#: core/globalshortcuts.cpp:93
 msgid "Rate the current song 3 stars"
 msgstr "Оценка текущей песни 3 звезды"
 
-#: core/globalshortcuts.cpp:94
+#: core/globalshortcuts.cpp:95
 msgid "Rate the current song 4 stars"
 msgstr "Оценка текущей песни 4 звезды"
 
-#: core/globalshortcuts.cpp:96
+#: core/globalshortcuts.cpp:97
 msgid "Rate the current song 5 stars"
 msgstr "Оценка текущей песни 5 звёзд"
 
@@ -4110,7 +4111,7 @@ msgstr "Удалить"
 msgid "Remove action"
 msgstr "Удалить действие"
 
-#: core/globalshortcuts.cpp:83
+#: core/globalshortcuts.cpp:84
 msgid "Remove current song from playlist"
 msgstr "Удалить текущую песню из плейлиста"
 
@@ -4373,7 +4374,7 @@ msgstr "Seafile"
 msgid "Search"
 msgstr "Поиск"
 
-#: ui/mainwindow.cpp:262 ../bin/src/ui_globalsearchsettingspage.h:141
+#: ui/mainwindow.cpp:264 ../bin/src/ui_globalsearchsettingspage.h:141
 msgctxt "Global search settings dialog title."
 msgid "Search"
 msgstr "Поиск"
@@ -4398,7 +4399,7 @@ msgstr "Поиск в Subsonic"
 msgid "Search automatically"
 msgstr "Искать автоматически"
 
-#: ui/mainwindow.cpp:698
+#: ui/mainwindow.cpp:700
 msgid "Search for album"
 msgstr "Поиск альбома"
 
@@ -4411,7 +4412,7 @@ msgstr "Поиск обложек альбомов…"
 msgid "Search for anything"
 msgstr "Поиск чего-либо"
 
-#: ui/mainwindow.cpp:695
+#: ui/mainwindow.cpp:697
 msgid "Search for artist"
 msgstr "Поиск исполнителя"
 
@@ -4452,11 +4453,11 @@ msgstr "Второй уровень"
 msgid "Second level"
 msgstr "Второй уровень"
 
-#: core/globalshortcuts.cpp:65 wiimotedev/wiimotesettingspage.cpp:118
+#: core/globalshortcuts.cpp:66 wiimotedev/wiimotesettingspage.cpp:118
 msgid "Seek backward"
 msgstr "Перемотка назад"
 
-#: core/globalshortcuts.cpp:64 wiimotedev/wiimotesettingspage.cpp:120
+#: core/globalshortcuts.cpp:65 wiimotedev/wiimotesettingspage.cpp:120
 msgid "Seek forward"
 msgstr "Перемотка вперед"
 
@@ -4528,7 +4529,7 @@ msgstr "Информация о сервере"
 msgid "Service offline"
 msgstr "Служба недоступна"
 
-#: ui/mainwindow.cpp:1838
+#: ui/mainwindow.cpp:1853
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr "Установить %1 в «%2»…"
@@ -4568,7 +4569,7 @@ msgstr "Сочетание клавиш «%1» уже существует"
 msgid "Show"
 msgstr "Показать"
 
-#: core/globalshortcuts.cpp:67 wiimotedev/wiimotesettingspage.cpp:122
+#: core/globalshortcuts.cpp:68 wiimotedev/wiimotesettingspage.cpp:122
 msgid "Show OSD"
 msgstr "Показывать OSD"
 
@@ -4608,7 +4609,7 @@ msgstr "Показывать OSD"
 msgid "Show above status bar"
 msgstr "Показать над строкой состояния"
 
-#: ui/mainwindow.cpp:645
+#: ui/mainwindow.cpp:647
 msgid "Show all songs"
 msgstr "Показать все композиции"
 
@@ -4628,12 +4629,12 @@ msgstr "Показывать разделители"
 msgid "Show fullsize..."
 msgstr "Показать в полный размер…"
 
-#: library/libraryview.cpp:433 ui/mainwindow.cpp:727
+#: library/libraryview.cpp:433 ui/mainwindow.cpp:729
 #: widgets/fileviewlist.cpp:53
 msgid "Show in file browser..."
 msgstr "Открыть в диспетчере файлов"
 
-#: ui/mainwindow.cpp:729
+#: ui/mainwindow.cpp:731
 msgid "Show in library..."
 msgstr "Показать в фонотеке…"
 
@@ -4645,11 +4646,11 @@ msgstr "Показать в «Различных исполнителях»"
 msgid "Show moodbar"
 msgstr "Показывать индикатор тона"
 
-#: ui/mainwindow.cpp:647
+#: ui/mainwindow.cpp:649
 msgid "Show only duplicates"
 msgstr "Показывать только повторяющиеся"
 
-#: ui/mainwindow.cpp:649
+#: ui/mainwindow.cpp:651
 msgid "Show only untagged"
 msgstr "Показывать только без тегов"
 
@@ -4681,7 +4682,7 @@ msgstr "Показывать значок в системном лотке"
 msgid "Show which sources are enabled and disabled"
 msgstr "Показать включённые и отключённые источники"
 
-#: core/globalshortcuts.cpp:66
+#: core/globalshortcuts.cpp:67
 msgid "Show/Hide"
 msgstr "Показать/Скрыть"
 
@@ -4741,11 +4742,11 @@ msgstr "Пропустить подсчёт"
 msgid "Skip forwards in playlist"
 msgstr "Переместить вперед в плейлисте"
 
-#: ui/mainwindow.cpp:1809
+#: ui/mainwindow.cpp:1824
 msgid "Skip selected tracks"
 msgstr "Пропустить выбранные треки"
 
-#: ui/mainwindow.cpp:1807
+#: ui/mainwindow.cpp:1822
 msgid "Skip track"
 msgstr "Пропустить трек"
 
@@ -4777,7 +4778,7 @@ msgstr "Софт-рок"
 msgid "Song Information"
 msgstr "Тексты песен"
 
-#: ui/mainwindow.cpp:282
+#: ui/mainwindow.cpp:284
 msgid "Song info"
 msgstr "Песня"
 
@@ -4850,8 +4851,8 @@ msgstr "Адрес песни Spotify"
 msgid "Standard"
 msgstr "Стандартнoe"
 
-#: internet/spotify/spotifyservice.cpp:409
 #: internet/subsonic/subsonicservice.cpp:115
+#: internet/spotify/spotifyservice.cpp:409
 msgid "Starred"
 msgstr "Оцененные"
 
@@ -4882,8 +4883,8 @@ msgstr "Запуск %1"
 msgid "Starting..."
 msgstr "Запуск…"
 
-#: core/globalshortcuts.cpp:53 wiimotedev/wiimotesettingspage.cpp:108
-#: ../bin/src/ui_mainwindow.h:676
+#: core/globalshortcuts.cpp:54 ../bin/src/ui_mainwindow.h:676
+#: wiimotedev/wiimotesettingspage.cpp:108
 msgid "Stop"
 msgstr "Остановить"
 
@@ -4899,7 +4900,7 @@ msgstr "Останавливать после каждого трека"
 msgid "Stop after every track"
 msgstr "Останавливать после каждого трека"
 
-#: ui/mainwindow.cpp:682 ../bin/src/ui_mainwindow.h:679
+#: ui/mainwindow.cpp:684 ../bin/src/ui_mainwindow.h:679
 msgid "Stop after this track"
 msgstr "Остановить после этого трека"
 
@@ -4915,7 +4916,7 @@ msgstr "Остановить после текущего трека"
 msgid "Stop playback if song fails to play"
 msgstr "Остановить воспроизведение при ошибке трека"
 
-#: core/globalshortcuts.cpp:55
+#: core/globalshortcuts.cpp:56
 msgid "Stop playing after current track"
 msgstr "Остановить после текущего трека"
 
@@ -5067,7 +5068,7 @@ msgid ""
 "license key. Visit subsonic.org for details."
 msgstr "Пробный период для сервера Subsonic закончен. Пожалуйста, поддержите разработчика, чтобы получить лицензионный ключ. Посетите subsonic.org для подробной информации."
 
-#: ui/mainwindow.cpp:2700
+#: ui/mainwindow.cpp:2715
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -5109,7 +5110,7 @@ msgid ""
 "continue?"
 msgstr "Эти файлы будут удалены с устройства. Вы действительно хотите продолжить?"
 
-#: library/libraryview.cpp:679 ui/mainwindow.cpp:2459 widgets/fileview.cpp:189
+#: library/libraryview.cpp:679 ui/mainwindow.cpp:2474 widgets/fileview.cpp:189
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -5204,7 +5205,7 @@ msgstr "Название"
 msgid "Today"
 msgstr "Сегодня"
 
-#: core/globalshortcuts.cpp:69
+#: core/globalshortcuts.cpp:70
 msgid "Toggle Pretty OSD"
 msgstr "Включить OSD"
 
@@ -5212,7 +5213,7 @@ msgstr "Включить OSD"
 msgid "Toggle fullscreen"
 msgstr "Развернуть на весь экран"
 
-#: ui/mainwindow.cpp:1795
+#: ui/mainwindow.cpp:1810
 msgid "Toggle queue status"
 msgstr "Переключить состояние очереди"
 
@@ -5294,7 +5295,7 @@ msgstr "Турбина"
 msgid "Turn off"
 msgstr "Выключить"
 
-#: devices/giolister.cpp:164
+#: devices/giolister.cpp:165
 msgid "URI"
 msgstr "URI"
 
@@ -5346,11 +5347,11 @@ msgstr "Неизвестная ошибка"
 msgid "Unset cover"
 msgstr "Удалить обложку"
 
-#: ui/mainwindow.cpp:1805
+#: ui/mainwindow.cpp:1820
 msgid "Unskip selected tracks"
 msgstr "Не пропускать выбранные треки"
 
-#: ui/mainwindow.cpp:1803
+#: ui/mainwindow.cpp:1818
 msgid "Unskip track"
 msgstr "Не пропускать трек"
 
@@ -5481,15 +5482,15 @@ msgstr "Использовать нормализацию громкости"
 msgid "Used"
 msgstr "Использовано"
 
-#: ui/settingsdialog.cpp:146
+#: ui/settingsdialog.cpp:149
 msgid "User interface"
 msgstr "Интерфейс"
 
 #: ../bin/src/ui_magnatunesettingspage.h:162
-#: ../bin/src/ui_spotifysettingspage.h:208
 #: ../bin/src/ui_subsonicsettingspage.h:133
 #: ../bin/src/ui_podcastsettingspage.h:279
 #: ../bin/src/ui_networkproxysettingspage.h:167
+#: ../bin/src/ui_spotifysettingspage.h:208
 msgid "Username"
 msgstr "Имя пользователя"
 
@@ -5536,7 +5537,7 @@ msgstr "Информация о потоке"
 msgid "Visualization mode"
 msgstr "Режим визуализации"
 
-#: ui/dbusscreensaver.cpp:33 ../bin/src/ui_mainwindow.h:715
+#: ../bin/src/ui_mainwindow.h:715 ui/dbusscreensaver.cpp:33
 msgid "Visualizations"
 msgstr "Визуализации"
 
@@ -5680,7 +5681,7 @@ msgid ""
 "well?"
 msgstr "Хотите ли вы переместить и другие песни из этого альбома в «Различные исполнители»?"
 
-#: ui/mainwindow.cpp:2707
+#: ui/mainwindow.cpp:2722
 msgid "Would you like to run a full rescan right now?"
 msgstr "Желаете запустить повторное сканирование?"
 
@@ -5926,10 +5927,10 @@ msgstr "Носители типа iPod и USB временно не поддер
 msgid "in the last"
 msgstr "в последние"
 
+#: playlist/playlistview.cpp:246 ui/edittagdialog.cpp:502
 #: internet/spotify/spotifysettingspage.cpp:62
 #: internet/spotify/spotifysettingspage.cpp:63
-#: internet/spotify/spotifysettingspage.cpp:64 playlist/playlistview.cpp:246
-#: ui/edittagdialog.cpp:502
+#: internet/spotify/spotifysettingspage.cpp:64
 msgid "kbps"
 msgstr "кбит/с"
 

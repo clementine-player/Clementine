@@ -62,6 +62,11 @@ void GPodDevice::LoadFinished(Itdb_iTunesDB* db) {
   db_ = db;
   db_wait_cond_.wakeAll();
 
+  loader_thread_->quit();
+  loader_thread_->wait(1000);
+  loader_thread_->deleteLater();
+  loader_thread_ = nullptr;
+
   loader_->deleteLater();
   loader_ = nullptr;
 }
@@ -113,7 +118,7 @@ bool GPodDevice::CopyToStorage(const CopyJob& job) {
       track, QDir::toNativeSeparators(job.source_).toLocal8Bit().constData(),
       &error);
   if (error) {
-    qLog(Error) << "copying failed:" << error->message;
+    qLog(Error) << "copying failed:" << QString::fromUtf8(error->message);
     app_->AddError(QString::fromUtf8(error->message));
     g_error_free(error);
 
@@ -138,7 +143,8 @@ void GPodDevice::WriteDatabase(bool success) {
     GError* error = nullptr;
     itdb_write(db_, &error);
     if (error) {
-      qLog(Error) << "writing database failed:" << error->message;
+      qLog(Error) << "writing database failed:"
+                  << QString::fromUtf8(error->message);
       app_->AddError(QString::fromUtf8(error->message));
       g_error_free(error);
     } else {

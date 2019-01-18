@@ -109,6 +109,7 @@ signals:
   void TasksChanged();
   void DeviceSongCountUpdated(int count);
   void LoadAllDevices();
+  void DeviceConnectFinished(const QString& id, bool success);
 
  private:
   // Devices can be in three different states:

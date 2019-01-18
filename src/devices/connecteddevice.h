@@ -46,6 +46,7 @@ class ConnectedDevice : public QObject,
   ~ConnectedDevice();
 
   virtual void Init() = 0;
+  virtual void ConnectAsync();
   // For some devices (e.g. CD devices) we don't have callbacks to be notified
   // when something change: we can call this method to refresh device's state
   virtual void Refresh() {}
@@ -67,6 +68,7 @@ class ConnectedDevice : public QObject,
 signals:
   void TaskStarted(int id);
   void SongCountUpdated(int count);
+  void ConnectFinished(const QString& id, bool success);
 
  protected:
   void InitBackendDirectory(const QString& mount_point, bool first_time,

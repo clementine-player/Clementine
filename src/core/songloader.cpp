@@ -520,8 +520,8 @@ void SongLoader::ErrorMessageReceived(GstMessage* msg) {
   gchar* debugs;
 
   gst_message_parse_error(msg, &error, &debugs);
-  qLog(Error) << error->message;
-  qLog(Error) << debugs;
+  qLog(Error) << QString::fromLocal8Bit(error->message);
+  qLog(Error) << QString::fromLocal8Bit(debugs);
 
   QString message_str = error->message;
 

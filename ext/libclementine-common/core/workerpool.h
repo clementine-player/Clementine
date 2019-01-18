@@ -229,7 +229,7 @@ void WorkerPool<HandlerType>::DoStart() {
 
   QStringList search_path;
   search_path << qApp->applicationDirPath();
-#if defined(Q_OS_MACOS) && defined(USE_BUNDLE)
+#if defined(Q_OS_MAC) && defined(USE_BUNDLE)
   search_path << qApp->applicationDirPath() + "/" + USE_BUNDLE_DIR;
 #endif
 
