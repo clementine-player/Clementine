@@ -22,8 +22,8 @@
 
 #include <QFile>
 #include <QStringList>
-#include <QtDebug>
 #include <QUrlQuery>
+#include <QtDebug>
 
 #include "giolister.h"
 #include "core/logging.h"
