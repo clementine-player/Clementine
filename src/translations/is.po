@@ -503,7 +503,7 @@ msgstr "Bæta við öðru streymi..."
 msgid "Add directory..."
 msgstr "Bæta við möppu..."
 
-#: ui/mainwindow.cpp:2075
+#: ui/mainwindow.cpp:2090
 msgid "Add file"
 msgstr "Bæta við skrá"
 
@@ -523,7 +523,7 @@ msgstr "Bæta við skrá..."
 msgid "Add files to transcode"
 msgstr "Bæta við skrá til að millikóða"
 
-#: transcoder/transcodedialog.cpp:308 ui/mainwindow.cpp:2102
+#: transcoder/transcodedialog.cpp:308 ui/mainwindow.cpp:2117
 #: ripper/ripcddialog.cpp:203
 msgid "Add folder"
 msgstr "Bæta við möppu"
@@ -628,7 +628,7 @@ msgstr "Bæta við Spotify-spilunarlista"
 msgid "Add to Spotify starred"
 msgstr "Bæta við Spotify-stjörnumerkt"
 
-#: ui/mainwindow.cpp:1876
+#: ui/mainwindow.cpp:1891
 msgid "Add to another playlist"
 msgstr "Bæta við öðrum spilunarlista"
 
@@ -718,7 +718,7 @@ msgstr "Hljómplötur án umslaga"
 msgid "All"
 msgstr "Allt"
 
-#: ui/mainwindow.cpp:160
+#: ui/mainwindow.cpp:161
 msgid "All Files (*)"
 msgstr "Allar skrár (*)"
 
@@ -787,7 +787,7 @@ msgid ""
 "like to download and install it now?"
 msgstr "Viðbótar hjálparforrit er nauðsynlegt til að geta notað Spotify í Clementine. Viltu sækja það og setja upp núna?"
 
-#: devices/gpodloader.cpp:60
+#: devices/gpodloader.cpp:61
 msgid "An error occurred loading the iTunes database"
 msgstr "Villa kom upp við hleðslu iTunes gagnagrunns"
 
@@ -856,7 +856,7 @@ msgstr "Ertu viss að þú viljir skrifa tölfræði allra laga í safninu í vi
 msgid "Artist"
 msgstr "Flytjandi"
 
-#: ui/mainwindow.cpp:285
+#: ui/mainwindow.cpp:287
 msgid "Artist info"
 msgstr "Upplýsingar um höfund"
 
@@ -955,7 +955,7 @@ msgstr "Tek öryggisafrit af gagnagrunni"
 msgid "Balance"
 msgstr "Jafnvægi"
 
-#: core/globalshortcuts.cpp:80
+#: core/globalshortcuts.cpp:81
 msgid "Ban (Last.fm scrobbling)"
 msgstr "Banna (skráningu Last.fm á hlustunarvenjum)"
 
@@ -1077,7 +1077,7 @@ msgstr "Skipta um umslagsmynd"
 msgid "Change font size..."
 msgstr "Breyta leturstærð..."
 
-#: core/globalshortcuts.cpp:73
+#: core/globalshortcuts.cpp:74
 msgid "Change repeat mode"
 msgstr "Breyta endurtekningarham"
 
@@ -1085,7 +1085,7 @@ msgstr "Breyta endurtekningarham"
 msgid "Change shortcut..."
 msgstr "Skipta um flýtilykil..."
 
-#: core/globalshortcuts.cpp:71
+#: core/globalshortcuts.cpp:72
 msgid "Change shuffle mode"
 msgstr "Breyta stokkunarham"
 
@@ -1119,7 +1119,7 @@ msgstr "Leita að nýjum þáttum"
 msgid "Check for updates"
 msgstr "Athuga með uppfærslur"
 
-#: ui/mainwindow.cpp:824
+#: ui/mainwindow.cpp:826
 msgid "Check for updates..."
 msgstr "Athuga með uppfærslur..."
 
@@ -1355,7 +1355,7 @@ msgstr "Stilla Subsonic..."
 msgid "Configure global search..."
 msgstr "Stilla altæka leit..."
 
-#: ui/mainwindow.cpp:661
+#: ui/mainwindow.cpp:663
 msgid "Configure library..."
 msgstr "Stilla safn..."
 
@@ -1427,11 +1427,11 @@ msgid "Copy to clipboard"
 msgstr "Afrita á klippispjald"
 
 #: library/libraryview.cpp:419 internet/podcasts/podcastservice.cpp:444
-#: ui/mainwindow.cpp:721 widgets/fileviewlist.cpp:44
+#: ui/mainwindow.cpp:723 widgets/fileviewlist.cpp:44
 msgid "Copy to device..."
 msgstr "Afrita til tæki..."
 
-#: devices/deviceview.cpp:228 ui/mainwindow.cpp:711
+#: devices/deviceview.cpp:228 ui/mainwindow.cpp:713
 #: widgets/fileviewlist.cpp:40
 msgid "Copy to library..."
 msgstr "Afrita í safn..."
@@ -1610,7 +1610,7 @@ msgstr ""
 msgid "Decrease the volume by <value> percent"
 msgstr "Draga úr hljóðstyrk um <value> prósent"
 
-#: core/globalshortcuts.cpp:62 wiimotedev/wiimotesettingspage.cpp:112
+#: core/globalshortcuts.cpp:63 wiimotedev/wiimotesettingspage.cpp:112
 msgid "Decrease volume"
 msgstr "Minnka hljóðstyrk"
 
@@ -1641,7 +1641,7 @@ msgid "Delete downloaded data"
 msgstr "Eyða sóttum gögnum"
 
 #: devices/deviceview.cpp:408 library/libraryview.cpp:678
-#: ui/mainwindow.cpp:2458 widgets/fileview.cpp:188
+#: ui/mainwindow.cpp:2473 widgets/fileview.cpp:188
 msgid "Delete files"
 msgstr "Eyða skrám"
 
@@ -1649,7 +1649,7 @@ msgstr "Eyða skrám"
 msgid "Delete from device..."
 msgstr "Eyða frá tæki..."
 
-#: library/libraryview.cpp:422 ui/mainwindow.cpp:724
+#: library/libraryview.cpp:422 ui/mainwindow.cpp:726
 #: widgets/fileviewlist.cpp:47
 msgid "Delete from disk..."
 msgstr "Eyða frá diski..."
@@ -1682,11 +1682,11 @@ msgstr "Eyði gögnum"
 msgid "Depth"
 msgstr "Dýpt"
 
-#: ui/mainwindow.cpp:1789
+#: ui/mainwindow.cpp:1804
 msgid "Dequeue selected tracks"
 msgstr "Taka valin lög úr biðröð"
 
-#: ui/mainwindow.cpp:1787
+#: ui/mainwindow.cpp:1802
 msgid "Dequeue track"
 msgstr "Taka lag úr biðröð"
 
@@ -1699,7 +1699,7 @@ msgstr "Áfangastaður"
 msgid "Details..."
 msgstr "Nánar..."
 
-#: devices/devicekitlister.cpp:128 devices/giolister.cpp:163
+#: devices/giolister.cpp:164 devices/devicekitlister.cpp:128
 msgid "Device"
 msgstr "Tæki"
 
@@ -1715,7 +1715,7 @@ msgstr "Heiti tækis"
 msgid "Device properties..."
 msgstr "Eiginleikar tækis..."
 
-#: ui/mainwindow.cpp:278
+#: ui/mainwindow.cpp:280
 msgid "Devices"
 msgstr "Tæki"
 
@@ -1958,7 +1958,7 @@ msgstr "Breytilegt slembið mix"
 msgid "Edit smart playlist..."
 msgstr "Sýsla með snjallan spilunarlista..."
 
-#: ui/mainwindow.cpp:1839
+#: ui/mainwindow.cpp:1854
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr "Breyta merki \"%1\"..."
@@ -2014,7 +2014,7 @@ msgid ""
 "displayed in this order."
 msgstr "Virkjaðu efnisveitur hér fyrir neðan til að hafa þær með í leitarniðurstöðum. Niðurstöður verða birtar í þessari röð."
 
-#: core/globalshortcuts.cpp:76
+#: core/globalshortcuts.cpp:77
 msgid "Enable/disable Last.fm scrobbling"
 msgstr "Gera virka/óvirka skráningu Last.fm á hlustunarvenjum"
 
@@ -2097,8 +2097,8 @@ msgid "Equivalent to --log-levels *:3"
 msgstr "Samsvarar --log-levels *:3"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:246
-#: library/libraryview.cpp:672 ui/mainwindow.cpp:2131 ui/mainwindow.cpp:2410
-#: ui/mainwindow.cpp:2589
+#: library/libraryview.cpp:672 ui/mainwindow.cpp:2146 ui/mainwindow.cpp:2425
+#: ui/mainwindow.cpp:2604
 msgid "Error"
 msgstr "Villa"
 
@@ -2244,7 +2244,7 @@ msgstr "Deyfing"
 msgid "Fading duration"
 msgstr "Tímalengd dofnunar"
 
-#: ui/mainwindow.cpp:2132
+#: ui/mainwindow.cpp:2147
 msgid "Failed reading CD drive"
 msgstr "Mistókst að lesa CD-drif"
 
@@ -2345,7 +2345,7 @@ msgstr "Tegund skráar"
 msgid "Filename"
 msgstr "Skráarheiti"
 
-#: ui/mainwindow.cpp:268
+#: ui/mainwindow.cpp:270
 msgid "Files"
 msgstr "Gögn"
 
@@ -2459,7 +2459,7 @@ msgstr "Þéttur diskant"
 msgid "Ge&nre"
 msgstr "Tó&nlistarstefna"
 
-#: ui/settingsdialog.cpp:132
+#: ui/settingsdialog.cpp:135
 msgid "General"
 msgstr "Almennt"
 
@@ -2727,7 +2727,7 @@ msgstr ""
 msgid "Increase the volume by <value> percent"
 msgstr "Auka hljóðstyrk um <value> prósent"
 
-#: core/globalshortcuts.cpp:61 wiimotedev/wiimotesettingspage.cpp:110
+#: core/globalshortcuts.cpp:62 wiimotedev/wiimotesettingspage.cpp:110
 msgid "Increase volume"
 msgstr "Auka hljóðstyrk"
 
@@ -2736,7 +2736,7 @@ msgstr "Auka hljóðstyrk"
 msgid "Indexing %1"
 msgstr "Geri skráayfirlit í %1"
 
-#: wiimotedev/wiimotesettingspage.cpp:139 ../bin/src/ui_deviceproperties.h:372
+#: ../bin/src/ui_deviceproperties.h:372 wiimotedev/wiimotesettingspage.cpp:139
 msgid "Information"
 msgstr "Upplýsingar"
 
@@ -2756,11 +2756,11 @@ msgstr "Uppsett"
 msgid "Integrity check"
 msgstr "Athugun á áreiðanleika"
 
-#: ui/mainwindow.cpp:274
+#: ui/mainwindow.cpp:276
 msgid "Internet"
 msgstr "Internet"
 
-#: ui/settingsdialog.cpp:155
+#: ui/settingsdialog.cpp:158
 msgid "Internet providers"
 msgstr "Netþjónustuveitur"
 
@@ -2846,9 +2846,9 @@ msgstr "Hoppa í lagið sem nú er í spilun"
 msgid "Keep buttons for %1 second..."
 msgstr "Halda hnöppum í %1 sekúndu..."
 
+#: ../bin/src/ui_wiimoteshortcutgrabber.h:123
 #: wiimotedev/wiimoteshortcutgrabber.cpp:75
 #: wiimotedev/wiimoteshortcutgrabber.cpp:117
-#: ../bin/src/ui_wiimoteshortcutgrabber.h:123
 #, qt-format
 msgid "Keep buttons for %1 seconds..."
 msgstr "Halda hnöppum í %1 sekúndur..."
@@ -2944,7 +2944,7 @@ msgstr "Vinstri"
 msgid "Length"
 msgstr "Lengd"
 
-#: ui/mainwindow.cpp:253 ui/mainwindow.cpp:265
+#: ui/mainwindow.cpp:255 ui/mainwindow.cpp:267
 #: ../bin/src/ui_seafilesettingspage.h:177
 msgid "Library"
 msgstr "Safn"
@@ -2953,7 +2953,7 @@ msgstr "Safn"
 msgid "Library advanced grouping"
 msgstr "Þróuð flokkun safns"
 
-#: ui/mainwindow.cpp:2709
+#: ui/mainwindow.cpp:2724
 msgid "Library rescan notice"
 msgstr "Tilkynning um skönnun á tónlistarsafni"
 
@@ -3040,9 +3040,9 @@ msgstr "Hleður inn skrám/slóðum, skiptir út núverandi lagalista"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:162
 #: ../bin/src/ui_magnatunesettingspage.h:163
-#: ../bin/src/ui_spotifysettingspage.h:210
 #: ../bin/src/ui_subsonicsettingspage.h:137
 #: ../bin/src/ui_lastfmsettingspage.h:132
+#: ../bin/src/ui_spotifysettingspage.h:210
 #: ../bin/src/ui_googledrivesettingspage.h:101
 #: ../bin/src/ui_dropboxsettingspage.h:101
 #: ../bin/src/ui_skydrivesettingspage.h:101
@@ -3062,7 +3062,7 @@ msgstr "Langtíma spásnið (LTP)"
 msgid "Love"
 msgstr "Líkar þetta"
 
-#: core/globalshortcuts.cpp:78
+#: core/globalshortcuts.cpp:79
 msgid "Love (Last.fm scrobbling)"
 msgstr "Leyfa (skráningu Last.fm á hlustunarvenjum)"
 
@@ -3256,7 +3256,7 @@ msgstr "Skapbrigðastikur"
 msgid "Most played"
 msgstr "Mest spilað"
 
-#: devices/giolister.cpp:162
+#: devices/giolister.cpp:163
 msgid "Mount point"
 msgstr "Tengipunktur"
 
@@ -3269,7 +3269,7 @@ msgstr "Tengipunktar"
 msgid "Move down"
 msgstr "Færa niður"
 
-#: ui/mainwindow.cpp:714 widgets/fileviewlist.cpp:42
+#: ui/mainwindow.cpp:716 widgets/fileviewlist.cpp:42
 msgid "Move to library..."
 msgstr "Flytja í safn..."
 
@@ -3278,7 +3278,7 @@ msgstr "Flytja í safn..."
 msgid "Move up"
 msgstr "Færa upp"
 
-#: transcoder/transcodedialog.cpp:227 ui/mainwindow.cpp:2076
+#: transcoder/transcodedialog.cpp:227 ui/mainwindow.cpp:2091
 msgid "Music"
 msgstr "Tónlist"
 
@@ -3286,8 +3286,8 @@ msgstr "Tónlist"
 msgid "Music Library"
 msgstr "Tónlistarsafn"
 
-#: core/globalshortcuts.cpp:63 wiimotedev/wiimotesettingspage.cpp:113
-#: ../bin/src/ui_mainwindow.h:718
+#: core/globalshortcuts.cpp:64 ../bin/src/ui_mainwindow.h:718
+#: wiimotedev/wiimotesettingspage.cpp:113
 msgid "Mute"
 msgstr "Þagga"
 
@@ -3336,7 +3336,7 @@ msgstr "Aldrei hefja spilun"
 msgid "New folder"
 msgstr "Ný mappa"
 
-#: ui/mainwindow.cpp:1893 ../bin/src/ui_mainwindow.h:709
+#: ui/mainwindow.cpp:1908 ../bin/src/ui_mainwindow.h:709
 msgid "New playlist"
 msgstr "Nýr lagalisti"
 
@@ -3364,8 +3364,8 @@ msgstr "Nýjustu lögin"
 msgid "Next"
 msgstr "Næst"
 
-#: core/globalshortcuts.cpp:57 wiimotedev/wiimotesettingspage.cpp:104
-#: ../bin/src/ui_mainwindow.h:677
+#: core/globalshortcuts.cpp:58 ../bin/src/ui_mainwindow.h:677
+#: wiimotedev/wiimotesettingspage.cpp:104
 msgid "Next track"
 msgstr "Næsta lag"
 
@@ -3403,7 +3403,7 @@ msgstr "Engar stuttar blokkir"
 msgid "None"
 msgstr "Ekkert"
 
-#: library/libraryview.cpp:673 ui/mainwindow.cpp:2411 ui/mainwindow.cpp:2590
+#: library/libraryview.cpp:673 ui/mainwindow.cpp:2426 ui/mainwindow.cpp:2605
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Ekkert af völdu lögunum henta til að afrita yfir á tæki"
 
@@ -3614,7 +3614,7 @@ msgstr "Opus"
 msgid "Organise Files"
 msgstr "Skipuleggja skrár"
 
-#: library/libraryview.cpp:416 ui/mainwindow.cpp:717
+#: library/libraryview.cpp:416 ui/mainwindow.cpp:719
 msgid "Organise files..."
 msgstr "Skipuleggja skrár..."
 
@@ -3690,15 +3690,15 @@ msgid "Party"
 msgstr "Partý"
 
 #: ../bin/src/ui_magnatunesettingspage.h:164
-#: ../bin/src/ui_spotifysettingspage.h:209
 #: ../bin/src/ui_subsonicsettingspage.h:134
 #: ../bin/src/ui_podcastsettingspage.h:281
 #: ../bin/src/ui_networkproxysettingspage.h:168
+#: ../bin/src/ui_spotifysettingspage.h:209
 #: ../bin/src/ui_seafilesettingspage.h:169
 msgid "Password"
 msgstr "Lykilorð"
 
-#: core/globalshortcuts.cpp:50 ui/mainwindow.cpp:1170 ui/mainwindow.cpp:1689
+#: core/globalshortcuts.cpp:51 ui/mainwindow.cpp:1175 ui/mainwindow.cpp:1704
 #: ui/qtsystemtrayicon.cpp:189 wiimotedev/wiimotesettingspage.cpp:114
 msgid "Pause"
 msgstr "Í bið"
@@ -3726,10 +3726,10 @@ msgstr "Mynddíll"
 msgid "Plain sidebar"
 msgstr "Einfalt hliðarspjald"
 
-#: core/globalshortcuts.cpp:49 ui/mainwindow.cpp:678 ui/mainwindow.cpp:1134
-#: ui/mainwindow.cpp:1155 ui/mainwindow.cpp:1693 ui/qtsystemtrayicon.cpp:177
-#: ui/qtsystemtrayicon.cpp:203 wiimotedev/wiimotesettingspage.cpp:107
-#: ../bin/src/ui_mainwindow.h:675
+#: core/globalshortcuts.cpp:50 ui/mainwindow.cpp:680 ui/mainwindow.cpp:1139
+#: ui/mainwindow.cpp:1160 ui/mainwindow.cpp:1708 ui/qtsystemtrayicon.cpp:177
+#: ui/qtsystemtrayicon.cpp:203 ../bin/src/ui_mainwindow.h:675
+#: wiimotedev/wiimotesettingspage.cpp:107
 msgid "Play"
 msgstr "Spila"
 
@@ -3746,11 +3746,11 @@ msgstr "Spila ef stöðvað, setja í hlé ef spilandi"
 msgid "Play if there is nothing already playing"
 msgstr "Spila ef ekkert er þegar í afspilun"
 
-#: library/libraryview.cpp:396 ui/mainwindow.cpp:1800
+#: library/libraryview.cpp:396 ui/mainwindow.cpp:1815
 msgid "Play next"
 msgstr ""
 
-#: ui/mainwindow.cpp:1798
+#: ui/mainwindow.cpp:1813
 msgid "Play selected tracks next"
 msgstr ""
 
@@ -3758,7 +3758,7 @@ msgstr ""
 msgid "Play the <n>th track in the playlist"
 msgstr "Spila lag númer <n> á spilunarlistanum"
 
-#: core/globalshortcuts.cpp:51 wiimotedev/wiimotesettingspage.cpp:116
+#: core/globalshortcuts.cpp:52 wiimotedev/wiimotesettingspage.cpp:116
 msgid "Play/Pause"
 msgstr "Spila/bíða"
 
@@ -3789,7 +3789,7 @@ msgstr "Valkostir spilunarlista"
 msgid "Playlist type"
 msgstr "Gerð spilunarlista"
 
-#: ui/mainwindow.cpp:271
+#: ui/mainwindow.cpp:273
 msgid "Playlists"
 msgstr "Lagalisti"
 
@@ -3844,8 +3844,8 @@ msgstr "Kjörstilling"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:165
 #: ../bin/src/ui_magnatunesettingspage.h:165
-#: ../bin/src/ui_spotifysettingspage.h:215 ../bin/src/ui_settingsdialog.h:115
-#: ../bin/src/ui_lastfmsettingspage.h:134
+#: ../bin/src/ui_settingsdialog.h:115 ../bin/src/ui_lastfmsettingspage.h:134
+#: ../bin/src/ui_spotifysettingspage.h:215
 msgid "Preferences"
 msgstr "Kjörstillingar"
 
@@ -3908,8 +3908,8 @@ msgstr "Forskoða"
 msgid "Previous"
 msgstr "Fyrri"
 
-#: core/globalshortcuts.cpp:59 wiimotedev/wiimotesettingspage.cpp:106
-#: ../bin/src/ui_mainwindow.h:674
+#: core/globalshortcuts.cpp:60 ../bin/src/ui_mainwindow.h:674
+#: wiimotedev/wiimotesettingspage.cpp:106
 msgid "Previous track"
 msgstr "Fyrra lag"
 
@@ -3967,12 +3967,12 @@ msgstr "Skoða tæki..."
 msgid "Queue Manager"
 msgstr "Biðraðastjóri"
 
-#: ui/mainwindow.cpp:1793
+#: ui/mainwindow.cpp:1808
 msgid "Queue selected tracks"
 msgstr "Setja valin lög í biðröð"
 
 #: globalsearch/globalsearchview.cpp:465 library/libraryview.cpp:393
-#: ui/mainwindow.cpp:1791
+#: ui/mainwindow.cpp:1806
 msgid "Queue track"
 msgstr "Setja í biðröð"
 
@@ -3997,27 +3997,27 @@ msgstr "Handahóf"
 msgid "Random visualization"
 msgstr "Tilviljunarkenndar sjónbrellur"
 
-#: core/globalshortcuts.cpp:86
+#: core/globalshortcuts.cpp:87
 msgid "Rate the current song 0 stars"
 msgstr "Gefa núverandi lagi einkunnina 0"
 
-#: core/globalshortcuts.cpp:88
+#: core/globalshortcuts.cpp:89
 msgid "Rate the current song 1 star"
 msgstr "Gefa núverandi lagi einkunnina 1"
 
-#: core/globalshortcuts.cpp:90
+#: core/globalshortcuts.cpp:91
 msgid "Rate the current song 2 stars"
 msgstr "Gefa núverandi lagi einkunnina 2"
 
-#: core/globalshortcuts.cpp:92
+#: core/globalshortcuts.cpp:93
 msgid "Rate the current song 3 stars"
 msgstr "Gefa núverandi lagi einkunnina 3"
 
-#: core/globalshortcuts.cpp:94
+#: core/globalshortcuts.cpp:95
 msgid "Rate the current song 4 stars"
 msgstr "Gefa núverandi lagi einkunnina 4"
 
-#: core/globalshortcuts.cpp:96
+#: core/globalshortcuts.cpp:97
 msgid "Rate the current song 5 stars"
 msgstr "Gefa núverandi lagi einkunnina 5"
 
@@ -4088,7 +4088,7 @@ msgstr "Fjarlægja"
 msgid "Remove action"
 msgstr "Fjarlægja aðgerð"
 
-#: core/globalshortcuts.cpp:83
+#: core/globalshortcuts.cpp:84
 msgid "Remove current song from playlist"
 msgstr "Fjarlægja þetta lag af spilunarlistanum"
 
@@ -4351,7 +4351,7 @@ msgstr "Seafile"
 msgid "Search"
 msgstr "Leita"
 
-#: ui/mainwindow.cpp:262 ../bin/src/ui_globalsearchsettingspage.h:141
+#: ui/mainwindow.cpp:264 ../bin/src/ui_globalsearchsettingspage.h:141
 msgctxt "Global search settings dialog title."
 msgid "Search"
 msgstr "Leita"
@@ -4376,7 +4376,7 @@ msgstr "Leita á Subsonic"
 msgid "Search automatically"
 msgstr "Leita sjálfvirkt"
 
-#: ui/mainwindow.cpp:698
+#: ui/mainwindow.cpp:700
 msgid "Search for album"
 msgstr "Leita að hljómplötu"
 
@@ -4389,7 +4389,7 @@ msgstr "Leita að plötuumslögum..."
 msgid "Search for anything"
 msgstr "Leita að einhverju"
 
-#: ui/mainwindow.cpp:695
+#: ui/mainwindow.cpp:697
 msgid "Search for artist"
 msgstr "Leita að flytjanda"
 
@@ -4430,11 +4430,11 @@ msgstr "Annað stig"
 msgid "Second level"
 msgstr "Annað stig"
 
-#: core/globalshortcuts.cpp:65 wiimotedev/wiimotesettingspage.cpp:118
+#: core/globalshortcuts.cpp:66 wiimotedev/wiimotesettingspage.cpp:118
 msgid "Seek backward"
 msgstr "Leita afturábak"
 
-#: core/globalshortcuts.cpp:64 wiimotedev/wiimotesettingspage.cpp:120
+#: core/globalshortcuts.cpp:65 wiimotedev/wiimotesettingspage.cpp:120
 msgid "Seek forward"
 msgstr "Leita áfram"
 
@@ -4506,7 +4506,7 @@ msgstr "Nánar um þjón "
 msgid "Service offline"
 msgstr "Þjónusta ekki á neti"
 
-#: ui/mainwindow.cpp:1838
+#: ui/mainwindow.cpp:1853
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr "Setja %1 sem \"%2\"..."
@@ -4546,7 +4546,7 @@ msgstr "Flýtilykill fyrir %1 er þegar til"
 msgid "Show"
 msgstr "Birta"
 
-#: core/globalshortcuts.cpp:67 wiimotedev/wiimotesettingspage.cpp:122
+#: core/globalshortcuts.cpp:68 wiimotedev/wiimotesettingspage.cpp:122
 msgid "Show OSD"
 msgstr "Birta OSD-stjórntexta á skjá"
 
@@ -4586,7 +4586,7 @@ msgstr "Birta fegraðan OSD-stjórntexta"
 msgid "Show above status bar"
 msgstr "Birta fyrir ofan stöðustiku"
 
-#: ui/mainwindow.cpp:645
+#: ui/mainwindow.cpp:647
 msgid "Show all songs"
 msgstr "Birta öll lög"
 
@@ -4606,12 +4606,12 @@ msgstr "Sýna aðgreina"
 msgid "Show fullsize..."
 msgstr "Sýna fulla stærð..."
 
-#: library/libraryview.cpp:433 ui/mainwindow.cpp:727
+#: library/libraryview.cpp:433 ui/mainwindow.cpp:729
 #: widgets/fileviewlist.cpp:53
 msgid "Show in file browser..."
 msgstr "Sýna í skráavafra..."
 
-#: ui/mainwindow.cpp:729
+#: ui/mainwindow.cpp:731
 msgid "Show in library..."
 msgstr "Sýna í safni..."
 
@@ -4623,11 +4623,11 @@ msgstr "Birta undir ýmsum flytjendum"
 msgid "Show moodbar"
 msgstr "Birta skapbrigðastiku"
 
-#: ui/mainwindow.cpp:647
+#: ui/mainwindow.cpp:649
 msgid "Show only duplicates"
 msgstr "Aðeins birta tvítekningar"
 
-#: ui/mainwindow.cpp:649
+#: ui/mainwindow.cpp:651
 msgid "Show only untagged"
 msgstr "Aðeins birta ómerkt"
 
@@ -4659,7 +4659,7 @@ msgstr "Birta táknmynd í kerfisbakka"
 msgid "Show which sources are enabled and disabled"
 msgstr "Sýna hvaða efnisveitur eru virkar eða óvirkar"
 
-#: core/globalshortcuts.cpp:66
+#: core/globalshortcuts.cpp:67
 msgid "Show/Hide"
 msgstr "Birta/Fela"
 
@@ -4719,11 +4719,11 @@ msgstr "Sleppa talningu"
 msgid "Skip forwards in playlist"
 msgstr "Fara áfram í spilunarlista"
 
-#: ui/mainwindow.cpp:1809
+#: ui/mainwindow.cpp:1824
 msgid "Skip selected tracks"
 msgstr "Sleppa völdum lögum"
 
-#: ui/mainwindow.cpp:1807
+#: ui/mainwindow.cpp:1822
 msgid "Skip track"
 msgstr "Sleppa lagi"
 
@@ -4755,7 +4755,7 @@ msgstr "Mjúkt rokk"
 msgid "Song Information"
 msgstr "Upplýsingar um lag"
 
-#: ui/mainwindow.cpp:282
+#: ui/mainwindow.cpp:284
 msgid "Song info"
 msgstr "Um lagið"
 
@@ -4828,8 +4828,8 @@ msgstr "Slóð á lag í Spotify"
 msgid "Standard"
 msgstr "Staðlað"
 
-#: internet/spotify/spotifyservice.cpp:409
 #: internet/subsonic/subsonicservice.cpp:115
+#: internet/spotify/spotifyservice.cpp:409
 msgid "Starred"
 msgstr "Stjörnumerkt"
 
@@ -4860,8 +4860,8 @@ msgstr "Ræsi %1"
 msgid "Starting..."
 msgstr "Byrja..."
 
-#: core/globalshortcuts.cpp:53 wiimotedev/wiimotesettingspage.cpp:108
-#: ../bin/src/ui_mainwindow.h:676
+#: core/globalshortcuts.cpp:54 ../bin/src/ui_mainwindow.h:676
+#: wiimotedev/wiimotesettingspage.cpp:108
 msgid "Stop"
 msgstr "Stöðva"
 
@@ -4877,7 +4877,7 @@ msgstr "Stoppa eftir hvert lag"
 msgid "Stop after every track"
 msgstr "Stoppa eftir öll lög"
 
-#: ui/mainwindow.cpp:682 ../bin/src/ui_mainwindow.h:679
+#: ui/mainwindow.cpp:684 ../bin/src/ui_mainwindow.h:679
 msgid "Stop after this track"
 msgstr "Stoppa eftir þetta lag"
 
@@ -4893,7 +4893,7 @@ msgstr "Stöðva afspilun eftir núverandi lag"
 msgid "Stop playback if song fails to play"
 msgstr ""
 
-#: core/globalshortcuts.cpp:55
+#: core/globalshortcuts.cpp:56
 msgid "Stop playing after current track"
 msgstr "Stöðva afspilun eftir núverandi lag"
 
@@ -5045,7 +5045,7 @@ msgid ""
 "license key. Visit subsonic.org for details."
 msgstr ""
 
-#: ui/mainwindow.cpp:2700
+#: ui/mainwindow.cpp:2715
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -5087,7 +5087,7 @@ msgid ""
 "continue?"
 msgstr "Þessum skrám verður eytt af tækinu, ertu viss um að þú viljir halda áfram?"
 
-#: library/libraryview.cpp:679 ui/mainwindow.cpp:2459 widgets/fileview.cpp:189
+#: library/libraryview.cpp:679 ui/mainwindow.cpp:2474 widgets/fileview.cpp:189
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -5182,7 +5182,7 @@ msgstr "Titill"
 msgid "Today"
 msgstr "Í dag"
 
-#: core/globalshortcuts.cpp:69
+#: core/globalshortcuts.cpp:70
 msgid "Toggle Pretty OSD"
 msgstr "Víxla af/á fegruðum OSD-stjórntexta"
 
@@ -5190,7 +5190,7 @@ msgstr "Víxla af/á fegruðum OSD-stjórntexta"
 msgid "Toggle fullscreen"
 msgstr "Víxla heilskjá"
 
-#: ui/mainwindow.cpp:1795
+#: ui/mainwindow.cpp:1810
 msgid "Toggle queue status"
 msgstr "Víxla stöðu biðraðar"
 
@@ -5272,7 +5272,7 @@ msgstr "Túrbína"
 msgid "Turn off"
 msgstr "Slökkva"
 
-#: devices/giolister.cpp:164
+#: devices/giolister.cpp:165
 msgid "URI"
 msgstr "Slóð (URI)"
 
@@ -5324,11 +5324,11 @@ msgstr "Óþekkt villa"
 msgid "Unset cover"
 msgstr "Aftengja umslag"
 
-#: ui/mainwindow.cpp:1805
+#: ui/mainwindow.cpp:1820
 msgid "Unskip selected tracks"
 msgstr "Hætta við að sleppa völdum lögum"
 
-#: ui/mainwindow.cpp:1803
+#: ui/mainwindow.cpp:1818
 msgid "Unskip track"
 msgstr "Hætta við að sleppa lagi"
 
@@ -5459,15 +5459,15 @@ msgstr "Nota jöfnun hljóðstyrks"
 msgid "Used"
 msgstr "Notað"
 
-#: ui/settingsdialog.cpp:146
+#: ui/settingsdialog.cpp:149
 msgid "User interface"
 msgstr "Notandaviðmót"
 
 #: ../bin/src/ui_magnatunesettingspage.h:162
-#: ../bin/src/ui_spotifysettingspage.h:208
 #: ../bin/src/ui_subsonicsettingspage.h:133
 #: ../bin/src/ui_podcastsettingspage.h:279
 #: ../bin/src/ui_networkproxysettingspage.h:167
+#: ../bin/src/ui_spotifysettingspage.h:208
 msgid "Username"
 msgstr "Notandanafn"
 
@@ -5514,7 +5514,7 @@ msgstr "Sjá nánari upplýsingar um streymi"
 msgid "Visualization mode"
 msgstr "Sjóngervingahamur"
 
-#: ui/dbusscreensaver.cpp:33 ../bin/src/ui_mainwindow.h:715
+#: ../bin/src/ui_mainwindow.h:715 ui/dbusscreensaver.cpp:33
 msgid "Visualizations"
 msgstr "Sjóngervingar"
 
@@ -5658,7 +5658,7 @@ msgid ""
 "well?"
 msgstr ""
 
-#: ui/mainwindow.cpp:2707
+#: ui/mainwindow.cpp:2722
 msgid "Would you like to run a full rescan right now?"
 msgstr "Viltu láta endurskanna allt safnið núna?"
 
@@ -5904,10 +5904,10 @@ msgstr "iPod- og USB-tæki virka ekki í augnablikinu á Windows. Því miður!"
 msgid "in the last"
 msgstr "í seinustu"
 
+#: playlist/playlistview.cpp:246 ui/edittagdialog.cpp:502
 #: internet/spotify/spotifysettingspage.cpp:62
 #: internet/spotify/spotifysettingspage.cpp:63
-#: internet/spotify/spotifysettingspage.cpp:64 playlist/playlistview.cpp:246
-#: ui/edittagdialog.cpp:502
+#: internet/spotify/spotifysettingspage.cpp:64
 msgid "kbps"
 msgstr "kbps"
 

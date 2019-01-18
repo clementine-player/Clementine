@@ -80,7 +80,7 @@ AppearanceSettingsPage::AppearanceSettingsPage(SettingsDialog* dialog)
           SLOT(DisableBlurAndOpacitySliders(bool)));
   connect(ui_->use_no_background, SIGNAL(toggled(bool)),
           SLOT(DisableBlurAndOpacitySliders(bool)));
-#if !defined (Q_OS_UNIX) || defined (Q_OS_MACOS)
+#if !defined(Q_OS_UNIX) || defined(Q_OS_MAC)
   ui_->b_use_sys_icons->setDisabled(true);
 #endif
 }

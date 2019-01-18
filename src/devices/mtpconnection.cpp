@@ -27,15 +27,22 @@ MtpConnection::MtpConnection(const QUrl& url) : device_(nullptr) {
   // Parse the URL
   QRegExp host_re("^usb-(\\d+)-(\\d+)$");
 
-  if (host_re.indexIn(hostname) == -1) {
+  unsigned int bus_location;
+  unsigned int device_num;
+
+  QUrlQuery url_query(url);
+
+  if (host_re.indexIn(hostname) >= 0) {
+    bus_location = host_re.cap(1).toUInt();
+    device_num = host_re.cap(2).toUInt();
+  } else if (url_query.hasQueryItem("busnum")) {
+    bus_location = url_query.queryItemValue("busnum").toUInt();
+    device_num = url_query.queryItemValue("devnum").toUInt();
+  } else {
     qLog(Warning) << "Invalid MTP device:" << hostname;
     return;
   }
 
-  const unsigned int bus_location = host_re.cap(1).toInt();
-  const unsigned int device_num = host_re.cap(2).toInt();
-
-  QUrlQuery url_query(url);
   if (url_query.hasQueryItem("vendor")) {
     LIBMTP_raw_device_t* raw_device =
         (LIBMTP_raw_device_t*)malloc(sizeof(LIBMTP_raw_device_t));
