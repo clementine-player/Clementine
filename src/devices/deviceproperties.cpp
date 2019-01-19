@@ -97,7 +97,7 @@ void DeviceProperties::ShowDevice(int row) {
     ui_->transcode_format->model()->sort(0);
   }
 
-  index_ = manager_->index(row);
+  index_ = manager_->index(row, 0, QModelIndex());
 
   // Basic information
   ui_->name->setText(index_.data(DeviceManager::Role_FriendlyName).toString());

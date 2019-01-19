@@ -137,6 +137,7 @@ set(SOURCES
   devices/deviceview.cpp
   devices/deviceviewcontainer.cpp
   devices/filesystemdevice.cpp
+  devices/deviceinfo.cpp
 
   engines/devicefinder.cpp
   engines/enginebase.cpp
@@ -454,6 +455,7 @@ set(HEADERS
   devices/deviceview.h
   devices/deviceviewcontainer.h
   devices/filesystemdevice.h
+  devices/deviceinfo.h
 
   engines/enginebase.h
   engines/gstengine.h
