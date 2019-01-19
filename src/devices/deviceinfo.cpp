@@ -19,19 +19,19 @@
 
 #include <memory>
 
-#include <QVariant>
-#include <QString>
-#include <QStringList>
 #include <QIcon>
 #include <QPixmap>
+#include <QString>
+#include <QStringList>
+#include <QVariant>
 
 #include "config.h"
 #include "core/logging.h"
 #include "core/simpletreemodel.h"
 #include "ui/iconloader.h"
 
-#include "deviceinfo.h"
 #include "devicedatabasebackend.h"
+#include "deviceinfo.h"
 #include "devicelister.h"
 
 DeviceDatabaseBackend::Device DeviceInfo::SaveToDb() const {
@@ -52,8 +52,7 @@ DeviceDatabaseBackend::Device DeviceInfo::SaveToDb() const {
   return ret;
 }
 
-void DeviceInfo::InitFromDb(
-    const DeviceDatabaseBackend::Device& dev) {
+void DeviceInfo::InitFromDb(const DeviceDatabaseBackend::Device& dev) {
   database_id_ = dev.id_;
   friendly_name_ = dev.friendly_name_;
   size_ = dev.size_;
@@ -74,8 +73,7 @@ void DeviceInfo::InitFromDb(
   }
 }
 
-const DeviceInfo::Backend*
-DeviceInfo::BestBackend() const {
+const DeviceInfo::Backend* DeviceInfo::BestBackend() const {
   int best_priority = -1;
   const Backend* ret = nullptr;
 
@@ -91,9 +89,7 @@ DeviceInfo::BestBackend() const {
   return ret;
 }
 
-
-void DeviceInfo::LoadIcon(const QVariantList& icons,
-                                         const QString& name_hint) {
+void DeviceInfo::LoadIcon(const QVariantList& icons, const QString& name_hint) {
   if (icons.isEmpty()) {
     icon_name_ = "drive-removable-media-usb-pendrive";
     icon_ = IconLoader::Load(icon_name_, IconLoader::Base);

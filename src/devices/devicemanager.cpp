@@ -34,13 +34,13 @@
 #include "core/database.h"
 #include "core/logging.h"
 #include "core/musicstorage.h"
+#include "core/simpletreemodel.h"
 #include "core/taskmanager.h"
 #include "core/utilities.h"
-#include "core/simpletreemodel.h"
 #include "devicedatabasebackend.h"
+#include "deviceinfo.h"
 #include "devicekitlister.h"
 #include "devicestatefiltermodel.h"
-#include "deviceinfo.h"
 #include "filesystemdevice.h"
 #include "ui/iconloader.h"
 
@@ -372,7 +372,7 @@ void DeviceManager::PhysicalDeviceRemoved(const QString& id) {
     return;
   }
 
-  DeviceInfo *info = devices_[i];
+  DeviceInfo* info = devices_[i];
 
   if (info->database_id_ != -1) {
     // Keep the structure around, but just "disconnect" it
@@ -384,7 +384,8 @@ void DeviceManager::PhysicalDeviceRemoved(const QString& id) {
       }
     }
 
-    if (info->device_ && info->device_->lister() == lister) info->device_.reset();
+    if (info->device_ && info->device_->lister() == lister)
+      info->device_.reset();
 
     if (!info->device_) emit DeviceDisconnected(i);
 
@@ -569,7 +570,6 @@ void DeviceManager::Disconnect(int row) {
   QModelIndex index = ItemToIndex(info);
   if (!index.isValid()) return;
   emit dataChanged(index, index);
-
 }
 
 void DeviceManager::Forget(int row) {
@@ -601,7 +601,7 @@ void DeviceManager::Forget(int row) {
 
     info->friendly_name_ = info->BestBackend()->lister_->MakeFriendlyName(id);
     info->LoadIcon(info->BestBackend()->lister_->DeviceIcons(id),
-                  info->friendly_name_);
+                   info->friendly_name_);
 
     dataChanged(index(row, 0), index(row, 0));
   }
@@ -682,7 +682,8 @@ void DeviceManager::Unmount(int row) {
   if (info->device_) Disconnect(row);
 
   if (info->BestBackend()->lister_)
-    info->BestBackend()->lister_->UnmountDevice(info->BestBackend()->unique_id_);
+    info->BestBackend()->lister_->UnmountDevice(
+        info->BestBackend()->unique_id_);
 }
 
 void DeviceManager::DeviceSongCountUpdated(int count) {
@@ -696,10 +697,9 @@ void DeviceManager::DeviceSongCountUpdated(int count) {
   if (!index.isValid()) return;
 
   emit dataChanged(index, index);
-
 }
 
-void DeviceManager::LazyPopulate(DeviceInfo *parent, bool signal) {
+void DeviceManager::LazyPopulate(DeviceInfo* parent, bool signal) {
   if (parent->lazy_loaded) return;
   parent->lazy_loaded = true;
 }

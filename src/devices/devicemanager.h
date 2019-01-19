@@ -27,8 +27,8 @@
 #include <QThreadPool>
 
 #include "core/simpletreemodel.h"
-#include "library/librarymodel.h"
 #include "deviceinfo.h"
+#include "library/librarymodel.h"
 
 class Application;
 class ConnectedDevice;

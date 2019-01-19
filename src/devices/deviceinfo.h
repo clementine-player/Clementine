@@ -20,17 +20,17 @@
 
 #include <memory>
 
-#include <QList>
-#include <QVariant>
-#include <QString>
 #include <QIcon>
+#include <QList>
+#include <QString>
+#include <QVariant>
 
-#include "core/simpletreemodel.h"
-#include "core/simpletreeitem.h"
-#include "core/song.h"
 #include "core/musicstorage.h"
-#include "library/librarymodel.h"
+#include "core/simpletreeitem.h"
+#include "core/simpletreemodel.h"
+#include "core/song.h"
 #include "devicedatabasebackend.h"
+#include "library/librarymodel.h"
 
 class ConnectedDevice;
 class DeviceLister;
@@ -45,14 +45,13 @@ class DeviceLister;
 //     database_id valid, lister valid, device valid
 // Devices in all states will have a unique_id.
 class DeviceInfo : public SimpleTreeItem<DeviceInfo> {
-
  public:
   enum Type {
     Type_Root,
     Type_Device,
   };
 
-  DeviceInfo(SimpleTreeModel<DeviceInfo> *model)
+  DeviceInfo(SimpleTreeModel<DeviceInfo>* model)
       : SimpleTreeItem<DeviceInfo>(Type_Root, model),
         database_id_(-1),
         size_(0),
@@ -60,7 +59,7 @@ class DeviceInfo : public SimpleTreeItem<DeviceInfo> {
         transcode_format_(Song::Type_Unknown),
         task_percentage_(-1) {}
 
-  DeviceInfo(Type type, DeviceInfo *parent = nullptr)
+  DeviceInfo(Type type, DeviceInfo* parent = nullptr)
       : SimpleTreeItem<DeviceInfo>(type, parent),
         database_id_(-1),
         size_(0),
@@ -73,7 +72,7 @@ class DeviceInfo : public SimpleTreeItem<DeviceInfo> {
   // the device will have multiple "backends".
   struct Backend {
     Backend(DeviceLister* lister = nullptr, const QString& id = QString())
-      : lister_(lister), unique_id_(id) {}
+        : lister_(lister), unique_id_(id) {}
 
     DeviceLister* lister_;  // nullptr if not physically connected
     QString unique_id_;
@@ -91,7 +90,7 @@ class DeviceInfo : public SimpleTreeItem<DeviceInfo> {
 
   int database_id_;  // -1 if not remembered in the database
   std::shared_ptr<ConnectedDevice>
-    device_;  // nullptr if not connected to clementine
+      device_;  // nullptr if not connected to clementine
   QList<Backend> backends_;
 
   QString friendly_name_;
