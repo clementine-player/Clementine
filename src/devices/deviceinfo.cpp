@@ -122,4 +122,3 @@ void DeviceInfo::LoadIcon(const QVariantList& icons, const QString& name_hint) {
     icon_name_ = "drive-removable-media-usb-pendrive";
   icon_ = IconLoader::Load(icon_name_, IconLoader::Base);
 }
-
