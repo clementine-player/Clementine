@@ -127,6 +127,10 @@
     <extract>
       <item tag="&lt;div id=&quot;lyrics&quot; class=&quot;SCREENONLY&quot;&gt;"/>
     </extract>
+    <exclude>
+      <item begin="&lt;br&gt;&lt;br&gt;&lt;a target='_blank'" end="&gt;&lt;/a&gt;"/>
+    </exclude>
+    <invalidIndicator value="Click to search for the Lyrics on Lyrics.com"/>
     <invalidIndicator value="we do not have the lyric for this song"/>
   </provider>
   <provider name="lyrics.wikia.com" title="{artist}:{title} Lyrics - " charset="utf-8" url="http://lyrics.wikia.com/{Artist}:{Title}">
