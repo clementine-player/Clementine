@@ -30,7 +30,6 @@
 #include "core/tagreaderclient.h"
 #include "core/taskmanager.h"
 #include "covers/albumcoverloader.h"
-#include "covers/amazoncoverprovider.h"
 #include "covers/coverproviders.h"
 #include "covers/currentartloader.h"
 #include "covers/musicbrainzcoverprovider.h"
@@ -98,7 +97,6 @@ class ApplicationImpl {
         cover_providers_([=]() {
           CoverProviders* cover_providers = new CoverProviders(app);
           // Initialize the repository of cover providers.
-          cover_providers->AddProvider(new AmazonCoverProvider);
           cover_providers->AddProvider(new MusicbrainzCoverProvider);
         #ifdef HAVE_LIBLASTFM
           cover_providers->AddProvider(new LastFmCoverProvider(app));

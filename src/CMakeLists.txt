@@ -118,7 +118,6 @@ set(SOURCES
   covers/albumcoverfetcher.cpp
   covers/albumcoverfetchersearch.cpp
   covers/albumcoverloader.cpp
-  covers/amazoncoverprovider.cpp
   covers/coverexportrunnable.cpp
   covers/coverprovider.cpp
   covers/coverproviders.cpp
@@ -437,7 +436,6 @@ set(HEADERS
   covers/albumcoverfetcher.h
   covers/albumcoverfetchersearch.h
   covers/albumcoverloader.h
-  covers/amazoncoverprovider.h
   covers/coverexportrunnable.h
   covers/coverprovider.h
   covers/coverproviders.h
