@@ -105,13 +105,16 @@ void ConnectedDevice::FinishDelete(bool) {
 MusicStorage::TranscodeMode ConnectedDevice::GetTranscodeMode() const {
   int index = manager_->FindDeviceById(unique_id_);
   return MusicStorage::TranscodeMode(
-      manager_->index(index).data(DeviceManager::Role_TranscodeMode).toInt());
+      manager_->index(index, 0, QModelIndex())
+          .data(DeviceManager::Role_TranscodeMode)
+          .toInt());
 }
 
 Song::FileType ConnectedDevice::GetTranscodeFormat() const {
   int index = manager_->FindDeviceById(unique_id_);
-  return Song::FileType(
-      manager_->index(index).data(DeviceManager::Role_TranscodeFormat).toInt());
+  return Song::FileType(manager_->index(index, 0, QModelIndex())
+                            .data(DeviceManager::Role_TranscodeFormat)
+                            .toInt());
 }
 
 void ConnectedDevice::BackendTotalSongCountUpdated(int count) {

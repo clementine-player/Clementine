@@ -304,7 +304,7 @@ void DeviceView::DeviceConnected(int row) {
   if (!device) return;
 
   QModelIndex sort_idx =
-      sort_model_->mapFromSource(app_->device_manager()->index(row));
+      sort_model_->mapFromSource(app_->device_manager()->index(row, 0));
 
   QSortFilterProxyModel* sort_model =
       new QSortFilterProxyModel(device->model());
@@ -319,7 +319,7 @@ void DeviceView::DeviceConnected(int row) {
 
 void DeviceView::DeviceDisconnected(int row) {
   merged_model_->RemoveSubModel(
-      sort_model_->mapFromSource(app_->device_manager()->index(row)));
+      sort_model_->mapFromSource(app_->device_manager()->index(row, 0)));
 }
 
 void DeviceView::Forget() {
