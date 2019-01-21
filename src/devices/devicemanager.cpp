@@ -414,7 +414,7 @@ void DeviceManager::PhysicalDeviceChanged(const QString& id) {
   DeviceLister* lister = qobject_cast<DeviceLister*>(sender());
   Q_UNUSED(lister);
 
-  DeviceInfo *info = FindDeviceById(id);
+  DeviceInfo* info = FindDeviceById(id);
   if (!info) {
     // Shouldn't happen
     return;
@@ -424,23 +424,21 @@ void DeviceManager::PhysicalDeviceChanged(const QString& id) {
 }
 
 std::shared_ptr<ConnectedDevice> DeviceManager::Connect(QModelIndex idx) {
-
   DeviceInfo* info = IndexToItem(idx);
   if (!info) return std::shared_ptr<ConnectedDevice>();
 
   return Connect(info);
-
 }
 
 std::shared_ptr<ConnectedDevice> DeviceManager::Connect(DeviceInfo* info) {
-
   std::shared_ptr<ConnectedDevice> ret;
 
   if (!info) return ret;
   if (info->device_)  // Already connected
     return info->device_;
 
-  if (!info->BestBackend() || !info->BestBackend()->lister_)  // Not physically connected
+  if (!info->BestBackend() ||
+      !info->BestBackend()->lister_)  // Not physically connected
     return ret;
 
   if (info->BestBackend()->lister_->DeviceNeedsMount(
@@ -549,8 +547,7 @@ void DeviceManager::DeviceConnectFinished(const QString& id, bool success) {
 
   if (success) {
     emit DeviceConnected(idx);
-  }
-  else {
+  } else {
     info->device_.reset();
   }
 }
@@ -562,14 +559,15 @@ std::shared_ptr<ConnectedDevice> DeviceManager::GetConnectedDevice(
   return info->device_;
 }
 
-std::shared_ptr<ConnectedDevice> DeviceManager::GetConnectedDevice(DeviceInfo* info) const {
+std::shared_ptr<ConnectedDevice> DeviceManager::GetConnectedDevice(
+    DeviceInfo* info) const {
   if (!info) return std::shared_ptr<ConnectedDevice>();
   return info->device_;
 }
 
-int DeviceManager::GetDatabaseId(const QModelIndex &idx) const {
+int DeviceManager::GetDatabaseId(const QModelIndex& idx) const {
   if (!idx.isValid()) return -1;
-  DeviceInfo *info = IndexToItem(idx);
+  DeviceInfo* info = IndexToItem(idx);
   if (!info) return -1;
   return info->database_id_;
 }
@@ -584,7 +582,7 @@ DeviceLister* DeviceManager::GetLister(QModelIndex idx) const {
 
 void DeviceManager::Disconnect(QModelIndex idx) {
   if (!idx.isValid()) return;
-  DeviceInfo *info = IndexToItem(idx);
+  DeviceInfo* info = IndexToItem(idx);
   if (!info || !info->device_)  // Already disconnected
     return;
 
@@ -595,7 +593,7 @@ void DeviceManager::Disconnect(QModelIndex idx) {
 
 void DeviceManager::Forget(QModelIndex idx) {
   if (!idx.isValid()) return;
-  DeviceInfo *info = IndexToItem(idx);
+  DeviceInfo* info = IndexToItem(idx);
   if (!info) return;
   if (info->database_id_ == -1) return;
 
@@ -604,7 +602,8 @@ void DeviceManager::Forget(QModelIndex idx) {
   backend_->RemoveDevice(info->database_id_);
   info->database_id_ = -1;
 
-  if (!info->BestBackend() || (info->BestBackend() && !info->BestBackend()->lister_)) {
+  if (!info->BestBackend() ||
+      (info->BestBackend() && !info->BestBackend()->lister_)) {
     // It's not attached any more so remove it from the list
     beginRemoveRows(ItemToIndex(root_), idx.row(), idx.row());
     devices_.removeAll(info);
@@ -623,7 +622,8 @@ void DeviceManager::Forget(QModelIndex idx) {
   }
 }
 
-void DeviceManager::SetDeviceOptions(QModelIndex idx, const QString& friendly_name,
+void DeviceManager::SetDeviceOptions(QModelIndex idx,
+                                     const QString& friendly_name,
                                      const QString& icon_name,
                                      MusicStorage::TranscodeMode mode,
                                      Song::FileType format) {

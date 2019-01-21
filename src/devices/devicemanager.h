@@ -72,16 +72,16 @@ class DeviceManager : public SimpleTreeModel<DeviceInfo> {
   }
 
   // Get info about devices
-  int GetDatabaseId(const QModelIndex &idx) const;
+  int GetDatabaseId(const QModelIndex& idx) const;
   DeviceLister* GetLister(QModelIndex idx) const;
   std::shared_ptr<ConnectedDevice> GetConnectedDevice(QModelIndex idx) const;
-  std::shared_ptr<ConnectedDevice> GetConnectedDevice(DeviceInfo *info) const;
+  std::shared_ptr<ConnectedDevice> GetConnectedDevice(DeviceInfo* info) const;
 
   DeviceInfo* FindDeviceById(const QString& id) const;
   DeviceInfo* FindDeviceByUrl(const QList<QUrl>& url) const;
 
   // Actions on devices
-  std::shared_ptr<ConnectedDevice> Connect(DeviceInfo *info);
+  std::shared_ptr<ConnectedDevice> Connect(DeviceInfo* info);
   std::shared_ptr<ConnectedDevice> Connect(QModelIndex idx);
   void Disconnect(QModelIndex idx);
   void Forget(QModelIndex idx);
@@ -98,7 +98,7 @@ class DeviceManager : public SimpleTreeModel<DeviceInfo> {
  public slots:
   void Unmount(QModelIndex idx);
 
-signals:
+ signals:
   void DeviceConnected(QModelIndex idx);
   void DeviceDisconnected(QModelIndex idx);
 

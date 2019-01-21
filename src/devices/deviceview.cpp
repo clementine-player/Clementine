@@ -239,8 +239,7 @@ void DeviceView::contextMenuEvent(QContextMenuEvent* e) {
   const QModelIndex library_index = MapToLibrary(menu_index_);
 
   if (device_index.isValid()) {
-    const bool is_plugged_in =
-        app_->device_manager()->GetLister(device_index);
+    const bool is_plugged_in = app_->device_manager()->GetLister(device_index);
     const bool is_remembered =
         app_->device_manager()->GetDatabaseId(device_index) != -1;
 
@@ -303,8 +302,7 @@ void DeviceView::DeviceConnected(QModelIndex idx) {
       app_->device_manager()->GetConnectedDevice(idx);
   if (!device) return;
 
-  QModelIndex sort_idx =
-      sort_model_->mapFromSource(idx);
+  QModelIndex sort_idx = sort_model_->mapFromSource(idx);
 
   QSortFilterProxyModel* sort_model =
       new QSortFilterProxyModel(device->model());
@@ -327,8 +325,7 @@ void DeviceView::Forget() {
                           ->data(device_idx, DeviceManager::Role_UniqueId)
                           .toString();
   if (app_->device_manager()->GetLister(device_idx) &&
-      app_->device_manager()->GetLister(device_idx)->AskForScan(
-          unique_id)) {
+      app_->device_manager()->GetLister(device_idx)->AskForScan(unique_id)) {
     std::unique_ptr<QMessageBox> dialog(new QMessageBox(
         QMessageBox::Question, tr("Forget device"),
         tr("Forgetting a device will remove it from this list and Clementine "
