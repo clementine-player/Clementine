@@ -167,10 +167,10 @@ void DeviceView::SetApplication(Application* app) {
   Q_ASSERT(app_ == nullptr);
   app_ = app;
 
-  connect(app_->device_manager(), SIGNAL(DeviceConnected(int)),
-          SLOT(DeviceConnected(int)));
-  connect(app_->device_manager(), SIGNAL(DeviceDisconnected(int)),
-          SLOT(DeviceDisconnected(int)));
+  connect(app_->device_manager(), SIGNAL(DeviceConnected(QModelIndex)),
+          SLOT(DeviceConnected(QModelIndex)));
+  connect(app_->device_manager(), SIGNAL(DeviceDisconnected(QModelIndex)),
+          SLOT(DeviceDisconnected(QModelIndex)));
 
   sort_model_ = new QSortFilterProxyModel(this);
   sort_model_->setSourceModel(app_->device_manager());
@@ -239,10 +239,9 @@ void DeviceView::contextMenuEvent(QContextMenuEvent* e) {
   const QModelIndex library_index = MapToLibrary(menu_index_);
 
   if (device_index.isValid()) {
-    const bool is_plugged_in =
-        app_->device_manager()->GetLister(device_index.row());
+    const bool is_plugged_in = app_->device_manager()->GetLister(device_index);
     const bool is_remembered =
-        app_->device_manager()->GetDatabaseId(device_index.row()) != -1;
+        app_->device_manager()->GetDatabaseId(device_index) != -1;
 
     forget_action_->setEnabled(is_remembered);
     eject_action_->setEnabled(is_plugged_in);
@@ -254,7 +253,7 @@ void DeviceView::contextMenuEvent(QContextMenuEvent* e) {
     bool is_filesystem_device = false;
     if (parent_device_index.isValid()) {
       std::shared_ptr<ConnectedDevice> device =
-          app_->device_manager()->GetConnectedDevice(parent_device_index.row());
+          app_->device_manager()->GetConnectedDevice(parent_device_index);
       if (device && !device->LocalPath().isEmpty()) is_filesystem_device = true;
     }
 
@@ -298,13 +297,12 @@ void DeviceView::Connect() {
                                MusicStorage::Role_StorageForceConnect);
 }
 
-void DeviceView::DeviceConnected(int row) {
+void DeviceView::DeviceConnected(QModelIndex idx) {
   std::shared_ptr<ConnectedDevice> device =
-      app_->device_manager()->GetConnectedDevice(row);
+      app_->device_manager()->GetConnectedDevice(idx);
   if (!device) return;
 
-  QModelIndex sort_idx =
-      sort_model_->mapFromSource(app_->device_manager()->index(row, 0));
+  QModelIndex sort_idx = sort_model_->mapFromSource(idx);
 
   QSortFilterProxyModel* sort_model =
       new QSortFilterProxyModel(device->model());
@@ -317,9 +315,8 @@ void DeviceView::DeviceConnected(int row) {
   expand(menu_index_);
 }
 
-void DeviceView::DeviceDisconnected(int row) {
-  merged_model_->RemoveSubModel(
-      sort_model_->mapFromSource(app_->device_manager()->index(row, 0)));
+void DeviceView::DeviceDisconnected(QModelIndex idx) {
+  merged_model_->RemoveSubModel(sort_model_->mapFromSource(idx));
 }
 
 void DeviceView::Forget() {
@@ -327,9 +324,8 @@ void DeviceView::Forget() {
   QString unique_id = app_->device_manager()
                           ->data(device_idx, DeviceManager::Role_UniqueId)
                           .toString();
-  if (app_->device_manager()->GetLister(device_idx.row()) &&
-      app_->device_manager()->GetLister(device_idx.row())->AskForScan(
-          unique_id)) {
+  if (app_->device_manager()->GetLister(device_idx) &&
+      app_->device_manager()->GetLister(device_idx)->AskForScan(unique_id)) {
     std::unique_ptr<QMessageBox> dialog(new QMessageBox(
         QMessageBox::Question, tr("Forget device"),
         tr("Forgetting a device will remove it from this list and Clementine "
@@ -342,11 +338,11 @@ void DeviceView::Forget() {
     if (dialog->clickedButton() != forget) return;
   }
 
-  app_->device_manager()->Forget(device_idx.row());
+  app_->device_manager()->Forget(device_idx);
 }
 
 void DeviceView::Properties() {
-  properties_dialog_->ShowDevice(MapToDevice(menu_index_).row());
+  properties_dialog_->ShowDevice(MapToDevice(menu_index_));
 }
 
 void DeviceView::mouseDoubleClickEvent(QMouseEvent* event) {
@@ -355,7 +351,7 @@ void DeviceView::mouseDoubleClickEvent(QMouseEvent* event) {
   QModelIndex merged_index = indexAt(event->pos());
   QModelIndex device_index = MapToDevice(merged_index);
   if (device_index.isValid()) {
-    if (!app_->device_manager()->GetConnectedDevice(device_index.row())) {
+    if (!app_->device_manager()->GetConnectedDevice(device_index)) {
       menu_index_ = merged_index;
       Connect();
     }
@@ -436,7 +432,7 @@ void DeviceView::Organise() {
 
 void DeviceView::Unmount() {
   QModelIndex device_idx = MapToDevice(menu_index_);
-  app_->device_manager()->Unmount(device_idx.row());
+  app_->device_manager()->Unmount(device_idx);
 }
 
 void DeviceView::DeleteFinished(const SongList& songs_with_errors) {

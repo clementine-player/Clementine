@@ -91,7 +91,11 @@ void ConnectedDevice::InitBackendDirectory(const QString& mount_point,
 void ConnectedDevice::ConnectAsync() { emit ConnectFinished(unique_id_, true); }
 
 void ConnectedDevice::Eject() {
-  manager_->UnmountAsync(manager_->FindDeviceById(unique_id_));
+  DeviceInfo* info = manager_->FindDeviceById(unique_id_);
+  if (!info) return;
+  QModelIndex idx = manager_->ItemToIndex(info);
+  if (!idx.isValid()) return;
+  manager_->UnmountAsync(idx);
 }
 
 void ConnectedDevice::FinishCopy(bool) {
@@ -103,18 +107,24 @@ void ConnectedDevice::FinishDelete(bool) {
 }
 
 MusicStorage::TranscodeMode ConnectedDevice::GetTranscodeMode() const {
-  int index = manager_->FindDeviceById(unique_id_);
+  DeviceInfo* info = manager_->FindDeviceById(unique_id_);
+  if (!info) return MusicStorage::TranscodeMode();
+
+  QModelIndex idx = manager_->ItemToIndex(info);
+  if (!idx.isValid()) return MusicStorage::TranscodeMode();
+
   return MusicStorage::TranscodeMode(
-      manager_->index(index, 0, QModelIndex())
-          .data(DeviceManager::Role_TranscodeMode)
-          .toInt());
+      idx.data(DeviceManager::Role_TranscodeMode).toInt());
 }
 
 Song::FileType ConnectedDevice::GetTranscodeFormat() const {
-  int index = manager_->FindDeviceById(unique_id_);
-  return Song::FileType(manager_->index(index, 0, QModelIndex())
-                            .data(DeviceManager::Role_TranscodeFormat)
-                            .toInt());
+  DeviceInfo* info = manager_->FindDeviceById(unique_id_);
+  if (!info) return Song::Type_Unknown;
+
+  QModelIndex idx = manager_->ItemToIndex(info);
+  if (!idx.isValid()) return Song::Type_Unknown;
+
+  return Song::FileType(idx.data(DeviceManager::Role_TranscodeFormat).toInt());
 }
 
 void ConnectedDevice::BackendTotalSongCountUpdated(int count) {

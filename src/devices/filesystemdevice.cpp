@@ -40,7 +40,7 @@ FilesystemDevice::FilesystemDevice(const QUrl& url, DeviceLister* lister,
 
   watcher_->set_device_name(
       manager
-          ->data(manager->index(manager->FindDeviceById(unique_id), 0),
+          ->data(manager->ItemToIndex(manager->FindDeviceById(unique_id)),
                  DeviceManager::Role_FriendlyName)
           .toString());
   watcher_->set_backend(backend_);

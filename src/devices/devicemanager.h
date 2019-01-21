@@ -72,33 +72,35 @@ class DeviceManager : public SimpleTreeModel<DeviceInfo> {
   }
 
   // Get info about devices
-  int GetDatabaseId(int row) const;
-  DeviceLister* GetLister(int row) const;
-  std::shared_ptr<ConnectedDevice> GetConnectedDevice(int row) const;
+  int GetDatabaseId(const QModelIndex& idx) const;
+  DeviceLister* GetLister(QModelIndex idx) const;
+  std::shared_ptr<ConnectedDevice> GetConnectedDevice(QModelIndex idx) const;
+  std::shared_ptr<ConnectedDevice> GetConnectedDevice(DeviceInfo* info) const;
 
-  int FindDeviceById(const QString& id) const;
-  int FindDeviceByUrl(const QList<QUrl>& url) const;
+  DeviceInfo* FindDeviceById(const QString& id) const;
+  DeviceInfo* FindDeviceByUrl(const QList<QUrl>& url) const;
 
   // Actions on devices
-  std::shared_ptr<ConnectedDevice> Connect(int row);
-  void Disconnect(int row);
-  void Forget(int row);
-  void UnmountAsync(int row);
+  std::shared_ptr<ConnectedDevice> Connect(DeviceInfo* info);
+  std::shared_ptr<ConnectedDevice> Connect(QModelIndex idx);
+  void Disconnect(QModelIndex idx);
+  void Forget(QModelIndex idx);
+  void UnmountAsync(QModelIndex idx);
 
-  void SetDeviceOptions(int row, const QString& friendly_name,
+  void SetDeviceOptions(QModelIndex idx, const QString& friendly_name,
                         const QString& icon_name,
                         MusicStorage::TranscodeMode mode,
                         Song::FileType format);
 
   // QAbstractItemModel
-  QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const;
+  QVariant data(const QModelIndex& idx, int role = Qt::DisplayRole) const;
 
  public slots:
-  void Unmount(int row);
+  void Unmount(QModelIndex idx);
 
-signals:
-  void DeviceConnected(int row);
-  void DeviceDisconnected(int row);
+ signals:
+  void DeviceConnected(QModelIndex idx);
+  void DeviceDisconnected(QModelIndex idx);
 
  private slots:
   void PhysicalDeviceAdded(const QString& id);
