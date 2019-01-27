@@ -1392,7 +1392,7 @@ msgstr "Konfigurera..."
 msgid "Connect Wii Remotes using active/deactive action"
 msgstr "Anslut Wii-kontroller med åtgärden aktivera/inaktivera"
 
-#: devices/devicemanager.cpp:330 devices/devicemanager.cpp:335
+#: devices/devicemanager.cpp:234 devices/devicemanager.cpp:239
 msgid "Connect device"
 msgstr "Anslut enhet"
 
@@ -1657,7 +1657,7 @@ msgstr "Ta bort"
 msgid "Delete downloaded data"
 msgstr "Ta bort nedladdad data"
 
-#: devices/deviceview.cpp:408 library/libraryview.cpp:678
+#: devices/deviceview.cpp:404 library/libraryview.cpp:678
 #: ui/mainwindow.cpp:2473 widgets/fileview.cpp:188
 msgid "Delete files"
 msgstr "Ta bort filer"
@@ -2402,12 +2402,12 @@ msgstr "Av licensskäl finns Spotify-stöd i ett separat insticksprogram."
 msgid "Force mono encoding"
 msgstr "Tvinga enkanalskodning"
 
-#: devices/deviceview.cpp:208 devices/deviceview.cpp:334
-#: devices/deviceview.cpp:339
+#: devices/deviceview.cpp:208 devices/deviceview.cpp:330
+#: devices/deviceview.cpp:335
 msgid "Forget device"
 msgstr "Glöm enhet"
 
-#: devices/deviceview.cpp:335
+#: devices/deviceview.cpp:331
 msgid ""
 "Forgetting a device will remove it from this list and Clementine will have "
 "to rescan all the songs again next time you connect it."
@@ -2670,7 +2670,7 @@ msgid ""
 "edit the tag value directly"
 msgstr "Om aktiverad så kan du klicka på en markerad sång i spellistan för att ändra taggvärdet direkt"
 
-#: devices/devicemanager.cpp:575 devices/devicemanager.cpp:586
+#: devices/devicemanager.cpp:481 devices/devicemanager.cpp:492
 msgid ""
 "If you continue, this device will work slowly and songs copied to it may not"
 " work."
@@ -5098,7 +5098,7 @@ msgid ""
 "deleted:"
 msgstr "Fel uppstod vid borttagning av några låtar. Följande filer kunde inte kopieras:"
 
-#: devices/deviceview.cpp:409
+#: devices/deviceview.cpp:405
 msgid ""
 "These files will be deleted from the device, are you sure you want to "
 "continue?"
@@ -5152,20 +5152,20 @@ msgstr "Denna enhet måste vara ansluten och öppnad före Clementine kan se vil
 msgid "This device supports the following file formats:"
 msgstr "Denna enhet stöder följande filformat:"
 
-#: devices/devicemanager.cpp:572 devices/devicemanager.cpp:583
+#: devices/devicemanager.cpp:478 devices/devicemanager.cpp:489
 msgid "This device will not work properly"
 msgstr "Denna enhet kommer inte att fungera ordentligt"
 
-#: devices/devicemanager.cpp:573
+#: devices/devicemanager.cpp:479
 msgid ""
 "This is an MTP device, but you compiled Clementine without libmtp support."
 msgstr "Detta är en MTP-enhet, men du kompilerade Clementine utan stöd av libmtp."
 
-#: devices/devicemanager.cpp:584
+#: devices/devicemanager.cpp:490
 msgid "This is an iPod, but you compiled Clementine without libgpod support."
 msgstr "Detta är en iPod, men du kompilerade Clementine utan stöd av libgpod."
 
-#: devices/devicemanager.cpp:331
+#: devices/devicemanager.cpp:235
 msgid ""
 "This is the first time you have connected this device.  Clementine will now "
 "scan the device to find music files - this may take some time."
@@ -5179,7 +5179,7 @@ msgstr "Detta alternativ kan ändras i \"Beteende\"  i Inställningar"
 msgid "This stream is for paid subscribers only"
 msgstr "Denna ström är endast för betalkunder"
 
-#: devices/devicemanager.cpp:600
+#: devices/devicemanager.cpp:506
 #, qt-format
 msgid "This type of device is not supported: %1"
 msgstr "Denna typ av enhet är inte stödd: %1"

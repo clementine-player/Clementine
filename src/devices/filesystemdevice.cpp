@@ -39,8 +39,10 @@ FilesystemDevice::FilesystemDevice(const QUrl& url, DeviceLister* lister,
   watcher_thread_->start(QThread::IdlePriority);
 
   watcher_->set_device_name(
-      manager->data(manager->index(manager->FindDeviceById(unique_id)),
-                    DeviceManager::Role_FriendlyName).toString());
+      manager
+          ->data(manager->ItemToIndex(manager->FindDeviceById(unique_id)),
+                 DeviceManager::Role_FriendlyName)
+          .toString());
   watcher_->set_backend(backend_);
   watcher_->set_task_manager(app_->task_manager());
 

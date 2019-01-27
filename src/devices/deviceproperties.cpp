@@ -59,7 +59,7 @@ void DeviceProperties::SetDeviceManager(DeviceManager* manager) {
           SLOT(ModelChanged()));
 }
 
-void DeviceProperties::ShowDevice(int row) {
+void DeviceProperties::ShowDevice(QModelIndex idx) {
   if (ui_->icon->count() == 0) {
     // Only load the icons the first time the dialog is shown
     QStringList icon_names = QStringList()
@@ -97,7 +97,7 @@ void DeviceProperties::ShowDevice(int row) {
     ui_->transcode_format->model()->sort(0);
   }
 
-  index_ = manager_->index(row);
+  index_ = idx;
 
   // Basic information
   ui_->name->setText(index_.data(DeviceManager::Role_FriendlyName).toString());
@@ -137,7 +137,7 @@ void DeviceProperties::ModelChanged() {
 void DeviceProperties::UpdateHardwareInfo() {
   // Hardware information
   QString id = index_.data(DeviceManager::Role_UniqueId).toString();
-  if (DeviceLister* lister = manager_->GetLister(index_.row())) {
+  if (DeviceLister* lister = manager_->GetLister(index_)) {
     QVariantMap info = lister->DeviceHardwareInfo(id);
 
     // Remove empty items
@@ -180,9 +180,9 @@ void DeviceProperties::UpdateHardwareInfo() {
 
 void DeviceProperties::UpdateFormats() {
   QString id = index_.data(DeviceManager::Role_UniqueId).toString();
-  DeviceLister* lister = manager_->GetLister(index_.row());
+  DeviceLister* lister = manager_->GetLister(index_);
   std::shared_ptr<ConnectedDevice> device =
-      manager_->GetConnectedDevice(index_.row());
+      manager_->GetConnectedDevice(index_);
 
   // Transcode mode
   MusicStorage::TranscodeMode mode = MusicStorage::TranscodeMode(
@@ -255,11 +255,11 @@ void DeviceProperties::accept() {
     icon_name = ui_->icon->currentItem()->data(Qt::UserRole).toString();
   }
 
-  manager_->SetDeviceOptions(index_.row(), ui_->name->text(), icon_name, mode,
+  manager_->SetDeviceOptions(index_, ui_->name->text(), icon_name, mode,
                              format);
 }
 
-void DeviceProperties::OpenDevice() { manager_->Connect(index_.row()); }
+void DeviceProperties::OpenDevice() { manager_->Connect(index_); }
 
 void DeviceProperties::UpdateFormatsFinished(QFuture<bool> future) {
   updating_formats_ = false;

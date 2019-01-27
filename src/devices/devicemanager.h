@@ -22,20 +22,20 @@
 
 #include <memory>
 
-#include <QAbstractListModel>
+#include <QAbstractItemModel>
 #include <QIcon>
 #include <QThreadPool>
 
+#include "core/simpletreemodel.h"
+#include "deviceinfo.h"
 #include "library/librarymodel.h"
 
 class Application;
 class ConnectedDevice;
-class Database;
 class DeviceLister;
 class DeviceStateFilterModel;
-class TaskManager;
 
-class DeviceManager : public QAbstractListModel {
+class DeviceManager : public SimpleTreeModel<DeviceInfo> {
   Q_OBJECT
 
  public:
@@ -72,34 +72,35 @@ class DeviceManager : public QAbstractListModel {
   }
 
   // Get info about devices
-  int GetDatabaseId(int row) const;
-  DeviceLister* GetLister(int row) const;
-  std::shared_ptr<ConnectedDevice> GetConnectedDevice(int row) const;
+  int GetDatabaseId(const QModelIndex& idx) const;
+  DeviceLister* GetLister(QModelIndex idx) const;
+  std::shared_ptr<ConnectedDevice> GetConnectedDevice(QModelIndex idx) const;
+  std::shared_ptr<ConnectedDevice> GetConnectedDevice(DeviceInfo* info) const;
 
-  int FindDeviceById(const QString& id) const;
-  int FindDeviceByUrl(const QList<QUrl>& url) const;
+  DeviceInfo* FindDeviceById(const QString& id) const;
+  DeviceInfo* FindDeviceByUrl(const QList<QUrl>& url) const;
 
   // Actions on devices
-  std::shared_ptr<ConnectedDevice> Connect(int row);
-  void Disconnect(int row);
-  void Forget(int row);
-  void UnmountAsync(int row);
+  std::shared_ptr<ConnectedDevice> Connect(DeviceInfo* info);
+  std::shared_ptr<ConnectedDevice> Connect(QModelIndex idx);
+  void Disconnect(QModelIndex idx);
+  void Forget(QModelIndex idx);
+  void UnmountAsync(QModelIndex idx);
 
-  void SetDeviceOptions(int row, const QString& friendly_name,
+  void SetDeviceOptions(QModelIndex idx, const QString& friendly_name,
                         const QString& icon_name,
                         MusicStorage::TranscodeMode mode,
                         Song::FileType format);
 
-  // QAbstractListModel
-  int rowCount(const QModelIndex& parent) const;
-  QVariant data(const QModelIndex& index, int role) const;
+  // QAbstractItemModel
+  QVariant data(const QModelIndex& idx, int role = Qt::DisplayRole) const;
 
  public slots:
-  void Unmount(int row);
+  void Unmount(QModelIndex idx);
 
-signals:
-  void DeviceConnected(int row);
-  void DeviceDisconnected(int row);
+ signals:
+  void DeviceConnected(QModelIndex idx);
+  void DeviceDisconnected(QModelIndex idx);
 
  private slots:
   void PhysicalDeviceAdded(const QString& id);
@@ -111,56 +112,11 @@ signals:
   void LoadAllDevices();
   void DeviceConnectFinished(const QString& id, bool success);
 
+ protected:
+  void LazyPopulate(DeviceInfo* item) { LazyPopulate(item, true); }
+  void LazyPopulate(DeviceInfo* item, bool signal);
+
  private:
-  // Devices can be in three different states:
-  //  1) Remembered in the database but not physically connected at the moment.
-  //     database_id valid, lister null, device null
-  //  2) Physically connected but the user hasn't "connected" it to Clementine
-  //     yet.
-  //     database_id == -1, lister valid, device null
-  //  3) Physically connected and connected to Clementine
-  //     database_id valid, lister valid, device valid
-  // Devices in all states will have a unique_id.
-  struct DeviceInfo {
-    DeviceInfo();
-
-    // A device can be discovered in different ways (devicekit, gio, etc.)
-    // Sometimes the same device is discovered more than once.  In this case
-    // the device will have multiple "backends".
-    struct Backend {
-      Backend(DeviceLister* lister = nullptr, const QString& id = QString())
-          : lister_(lister), unique_id_(id) {}
-
-      DeviceLister* lister_;  // nullptr if not physically connected
-      QString unique_id_;
-    };
-
-    // Serialising to the database
-    void InitFromDb(const DeviceDatabaseBackend::Device& dev);
-    DeviceDatabaseBackend::Device SaveToDb() const;
-
-    // Tries to load a good icon for the device.  Sets icon_name_ and icon_.
-    void LoadIcon(const QVariantList& icons, const QString& name_hint);
-
-    // Gets the best backend available (the one with the highest priority)
-    const Backend* BestBackend() const;
-
-    int database_id_;  // -1 if not remembered in the database
-    std::shared_ptr<ConnectedDevice>
-        device_;  // nullptr if not connected to clementine
-    QList<Backend> backends_;
-
-    QString friendly_name_;
-    quint64 size_;
-
-    QString icon_name_;
-    QIcon icon_;
-
-    MusicStorage::TranscodeMode transcode_mode_;
-    Song::FileType transcode_format_;
-
-    int task_percentage_;
-  };
 
   void AddLister(DeviceLister* lister);
   template <typename T>
@@ -178,7 +134,7 @@ signals:
   QIcon not_connected_overlay_;
 
   QList<DeviceLister*> listers_;
-  QList<DeviceInfo> devices_;
+  QList<DeviceInfo*> devices_;
 
   QMultiMap<QString, QMetaObject> device_classes_;
 

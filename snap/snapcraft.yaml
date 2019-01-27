@@ -33,14 +33,13 @@ parts:
     # See 'snapcraft plugins'
     build-packages:
 
-       [libgpm2,liblastfm-dev,libtag1-dev,gettext,libboost-dev,libboost-serialization-dev,libqt4-dev,qt4-dev-tools,libqt4-opengl-dev,cmake,libgstreamer1.0-dev,libgstreamer-plugins-base1.0-dev,libglew1.5-dev,libqjson-dev,libgpod-dev,libplist-dev,libusbmuxd-dev,libmtp-dev,libcdio-dev,protobuf-compiler,libprotobuf-dev,libcrypto++-dev,libfftw3-dev,libsparsehash-dev,libsqlite3-dev,libpulse-dev,libqtwebkit-dev,libechonest-dev,libchromaprint-dev,libqca2-dev]
+       [libgpm2,liblastfm-dev,libtag1-dev,gettext,libboost-dev,libboost-serialization-dev,libqt4-dev,qt4-dev-tools,libqt4-opengl-dev,cmake,libgstreamer1.0-dev,libgstreamer-plugins-base1.0-dev,libglew1.5-dev,libqjson-dev,libgpod-dev,libplist-dev,libusbmuxd-dev,libmtp-dev,libcdio-dev,protobuf-compiler,libprotobuf-dev,libcrypto++-dev,libfftw3-dev,libsparsehash-dev,libsqlite3-dev,libpulse-dev,libqtwebkit-dev,libchromaprint-dev,libqca2-dev]
   
     stage-packages: 
       - libc6
       - libcdio13
       - libchromaprint0
       - libcrypto++9v5
-      - libechonest2.3
       - libfftw3-double3
       - libgcc1 
       - libgl1-mesa-glx

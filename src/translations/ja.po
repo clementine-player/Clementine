@@ -1383,7 +1383,7 @@ msgstr "設定..."
 msgid "Connect Wii Remotes using active/deactive action"
 msgstr "アクティブ・非アクティブの切り替えアクションを使用して Wii リモコンを接続する"
 
-#: devices/devicemanager.cpp:330 devices/devicemanager.cpp:335
+#: devices/devicemanager.cpp:234 devices/devicemanager.cpp:239
 msgid "Connect device"
 msgstr "デバイスの接続"
 
@@ -1648,7 +1648,7 @@ msgstr "削除"
 msgid "Delete downloaded data"
 msgstr "ダウンロード済みデータを削除"
 
-#: devices/deviceview.cpp:408 library/libraryview.cpp:678
+#: devices/deviceview.cpp:404 library/libraryview.cpp:678
 #: ui/mainwindow.cpp:2473 widgets/fileview.cpp:188
 msgid "Delete files"
 msgstr "ファイルの削除"
@@ -2393,12 +2393,12 @@ msgstr "ライセンス上の理由で Spotify サポートは別プラグイン
 msgid "Force mono encoding"
 msgstr "モノラルエンコーディングを強制する"
 
-#: devices/deviceview.cpp:208 devices/deviceview.cpp:334
-#: devices/deviceview.cpp:339
+#: devices/deviceview.cpp:208 devices/deviceview.cpp:330
+#: devices/deviceview.cpp:335
 msgid "Forget device"
 msgstr "デバイスを忘れる"
 
-#: devices/deviceview.cpp:335
+#: devices/deviceview.cpp:331
 msgid ""
 "Forgetting a device will remove it from this list and Clementine will have "
 "to rescan all the songs again next time you connect it."
@@ -2661,7 +2661,7 @@ msgid ""
 "edit the tag value directly"
 msgstr "有効にすると、プレイリストの選択された曲をクリックすることでタグの値を直接編集できるようになります"
 
-#: devices/devicemanager.cpp:575 devices/devicemanager.cpp:586
+#: devices/devicemanager.cpp:481 devices/devicemanager.cpp:492
 msgid ""
 "If you continue, this device will work slowly and songs copied to it may not"
 " work."
@@ -5089,7 +5089,7 @@ msgid ""
 "deleted:"
 msgstr "曲の削除に問題がありました。次のファイルは削除できませんでした:"
 
-#: devices/deviceview.cpp:409
+#: devices/deviceview.cpp:405
 msgid ""
 "These files will be deleted from the device, are you sure you want to "
 "continue?"
@@ -5143,20 +5143,20 @@ msgstr "Clementine がこのデバイスのサポートするファイル形式�
 msgid "This device supports the following file formats:"
 msgstr "このデバイスは次のファイル形式をサポートしています:"
 
-#: devices/devicemanager.cpp:572 devices/devicemanager.cpp:583
+#: devices/devicemanager.cpp:478 devices/devicemanager.cpp:489
 msgid "This device will not work properly"
 msgstr "このデバイスは適切に動作しません"
 
-#: devices/devicemanager.cpp:573
+#: devices/devicemanager.cpp:479
 msgid ""
 "This is an MTP device, but you compiled Clementine without libmtp support."
 msgstr "これは MTP デバイスですが、Clementine は libmtp サポートなしでコンパイルされています。"
 
-#: devices/devicemanager.cpp:584
+#: devices/devicemanager.cpp:490
 msgid "This is an iPod, but you compiled Clementine without libgpod support."
 msgstr "これは iPod ですが、Clementine は libgpod サポートなしでコンパイルされています。"
 
-#: devices/devicemanager.cpp:331
+#: devices/devicemanager.cpp:235
 msgid ""
 "This is the first time you have connected this device.  Clementine will now "
 "scan the device to find music files - this may take some time."
@@ -5170,7 +5170,7 @@ msgstr "このオプションは設定の「動作」で変更できます。"
 msgid "This stream is for paid subscribers only"
 msgstr "このストリームは有料会員専用です"
 
-#: devices/devicemanager.cpp:600
+#: devices/devicemanager.cpp:506
 #, qt-format
 msgid "This type of device is not supported: %1"
 msgstr "この種類のデバイスはサポートされていません: %1"

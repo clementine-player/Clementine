@@ -1369,7 +1369,7 @@ msgstr "Баптау..."
 msgid "Connect Wii Remotes using active/deactive action"
 msgstr ""
 
-#: devices/devicemanager.cpp:330 devices/devicemanager.cpp:335
+#: devices/devicemanager.cpp:234 devices/devicemanager.cpp:239
 msgid "Connect device"
 msgstr ""
 
@@ -1634,7 +1634,7 @@ msgstr "Өшіру"
 msgid "Delete downloaded data"
 msgstr ""
 
-#: devices/deviceview.cpp:408 library/libraryview.cpp:678
+#: devices/deviceview.cpp:404 library/libraryview.cpp:678
 #: ui/mainwindow.cpp:2473 widgets/fileview.cpp:188
 msgid "Delete files"
 msgstr "Файлдарды өшіру"
@@ -2379,12 +2379,12 @@ msgstr ""
 msgid "Force mono encoding"
 msgstr ""
 
-#: devices/deviceview.cpp:208 devices/deviceview.cpp:334
-#: devices/deviceview.cpp:339
+#: devices/deviceview.cpp:208 devices/deviceview.cpp:330
+#: devices/deviceview.cpp:335
 msgid "Forget device"
 msgstr ""
 
-#: devices/deviceview.cpp:335
+#: devices/deviceview.cpp:331
 msgid ""
 "Forgetting a device will remove it from this list and Clementine will have "
 "to rescan all the songs again next time you connect it."
@@ -2647,7 +2647,7 @@ msgid ""
 "edit the tag value directly"
 msgstr ""
 
-#: devices/devicemanager.cpp:575 devices/devicemanager.cpp:586
+#: devices/devicemanager.cpp:481 devices/devicemanager.cpp:492
 msgid ""
 "If you continue, this device will work slowly and songs copied to it may not"
 " work."
@@ -5075,7 +5075,7 @@ msgid ""
 "deleted:"
 msgstr ""
 
-#: devices/deviceview.cpp:409
+#: devices/deviceview.cpp:405
 msgid ""
 "These files will be deleted from the device, are you sure you want to "
 "continue?"
@@ -5129,20 +5129,20 @@ msgstr ""
 msgid "This device supports the following file formats:"
 msgstr ""
 
-#: devices/devicemanager.cpp:572 devices/devicemanager.cpp:583
+#: devices/devicemanager.cpp:478 devices/devicemanager.cpp:489
 msgid "This device will not work properly"
 msgstr ""
 
-#: devices/devicemanager.cpp:573
+#: devices/devicemanager.cpp:479
 msgid ""
 "This is an MTP device, but you compiled Clementine without libmtp support."
 msgstr ""
 
-#: devices/devicemanager.cpp:584
+#: devices/devicemanager.cpp:490
 msgid "This is an iPod, but you compiled Clementine without libgpod support."
 msgstr ""
 
-#: devices/devicemanager.cpp:331
+#: devices/devicemanager.cpp:235
 msgid ""
 "This is the first time you have connected this device.  Clementine will now "
 "scan the device to find music files - this may take some time."
@@ -5156,7 +5156,7 @@ msgstr ""
 msgid "This stream is for paid subscribers only"
 msgstr ""
 
-#: devices/devicemanager.cpp:600
+#: devices/devicemanager.cpp:506
 #, qt-format
 msgid "This type of device is not supported: %1"
 msgstr ""

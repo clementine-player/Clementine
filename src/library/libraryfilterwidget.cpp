@@ -258,7 +258,8 @@ void LibraryFilterWidget::SetLibraryModel(LibraryModel* model) {
     s.beginGroup(settings_group_);
     model_->SetGroupBy(LibraryModel::Grouping(
         LibraryModel::GroupBy(
-            s.value("group_by1", int(LibraryModel::GroupBy_Artist)).toInt()),
+            s.value("group_by1", int(LibraryModel::GroupBy_AlbumArtist))
+                .toInt()),
         LibraryModel::GroupBy(
             s.value("group_by2", int(LibraryModel::GroupBy_Album)).toInt()),
         LibraryModel::GroupBy(
