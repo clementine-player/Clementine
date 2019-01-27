@@ -53,7 +53,10 @@ About::About(QWidget* parent) : QDialog(parent) {
              << Person("Alexander Peitz")
              << Person("Artur Rona", "artur.rona@gmail.com")
              << Person("Andreas Muttscheller", "asfa194@gmail.com")
-             << Person("Mark Furneaux", "mark@furneaux.ca");
+             << Person("Mark Furneaux", "mark@furneaux.ca")
+             << Person("Mattias Andersson", "mandersson444@gmail.com")
+             << Person("Vikram Ambrose", "ambroseworks@gmail.com")
+             << Person("Jonas Kvinge", "jonas@jkvinge.net");
 
   std::sort(authors_.begin(), authors_.end());
   std::sort(thanks_to_.begin(), thanks_to_.end());
