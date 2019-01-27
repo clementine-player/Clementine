@@ -71,8 +71,8 @@ class DeviceView : public AutoExpandingTreeView {
   void Organise();
   void Delete();
 
-  void DeviceConnected(int row);
-  void DeviceDisconnected(int row);
+  void DeviceConnected(QModelIndex idx);
+  void DeviceDisconnected(QModelIndex idx);
 
   void DeleteFinished(const SongList& songs_with_errors);
 

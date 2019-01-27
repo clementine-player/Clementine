@@ -1374,7 +1374,7 @@ msgstr "Stel op"
 msgid "Connect Wii Remotes using active/deactive action"
 msgstr "Verbind Wii-afstandbehere met aktiveer/deaktiveer aksie"
 
-#: devices/devicemanager.cpp:330 devices/devicemanager.cpp:335
+#: devices/devicemanager.cpp:234 devices/devicemanager.cpp:239
 msgid "Connect device"
 msgstr "Verbind toestel"
 
@@ -1639,7 +1639,7 @@ msgstr "Skrap"
 msgid "Delete downloaded data"
 msgstr "Vee afgelaaide data uit"
 
-#: devices/deviceview.cpp:408 library/libraryview.cpp:678
+#: devices/deviceview.cpp:404 library/libraryview.cpp:678
 #: ui/mainwindow.cpp:2473 widgets/fileview.cpp:188
 msgid "Delete files"
 msgstr "Skrap lêers"
@@ -2384,12 +2384,12 @@ msgstr "Vir lisensiëringsredes word 'n aparte uitbreing vir Spotify ondersteuni
 msgid "Force mono encoding"
 msgstr "Dwing mono-enkodering"
 
-#: devices/deviceview.cpp:208 devices/deviceview.cpp:334
-#: devices/deviceview.cpp:339
+#: devices/deviceview.cpp:208 devices/deviceview.cpp:330
+#: devices/deviceview.cpp:335
 msgid "Forget device"
 msgstr "Vergeet van toestel"
 
-#: devices/deviceview.cpp:335
+#: devices/deviceview.cpp:331
 msgid ""
 "Forgetting a device will remove it from this list and Clementine will have "
 "to rescan all the songs again next time you connect it."
@@ -2652,7 +2652,7 @@ msgid ""
 "edit the tag value directly"
 msgstr "Indien aangeskakel, sal die kliek van 'n liedjie in die speellys direkte redigering van die etiket toelaat."
 
-#: devices/devicemanager.cpp:575 devices/devicemanager.cpp:586
+#: devices/devicemanager.cpp:481 devices/devicemanager.cpp:492
 msgid ""
 "If you continue, this device will work slowly and songs copied to it may not"
 " work."
@@ -5080,7 +5080,7 @@ msgid ""
 "deleted:"
 msgstr "Daar was 'n probleem met die verwydering van sommige liedjies.  Die volgende lêers kan nie verwyder word nie:"
 
-#: devices/deviceview.cpp:409
+#: devices/deviceview.cpp:405
 msgid ""
 "These files will be deleted from the device, are you sure you want to "
 "continue?"
@@ -5134,20 +5134,20 @@ msgstr "Hierdie toestel moet eers gekoppel en oopgemaak word voordat Clememntine
 msgid "This device supports the following file formats:"
 msgstr "Die toestel ondersteun die volgende lêer formate:"
 
-#: devices/devicemanager.cpp:572 devices/devicemanager.cpp:583
+#: devices/devicemanager.cpp:478 devices/devicemanager.cpp:489
 msgid "This device will not work properly"
 msgstr "Hierdie toestel sal nie goed werk nie"
 
-#: devices/devicemanager.cpp:573
+#: devices/devicemanager.cpp:479
 msgid ""
 "This is an MTP device, but you compiled Clementine without libmtp support."
 msgstr "Hierdie is 'n MTP toestel, maar jy het Clementine sonder libmtp ondersteuning gekompileer."
 
-#: devices/devicemanager.cpp:584
+#: devices/devicemanager.cpp:490
 msgid "This is an iPod, but you compiled Clementine without libgpod support."
 msgstr "Hierdie is 'n iPos, maar jy het Clementine sonder libgpod ondersteuning gekompileer."
 
-#: devices/devicemanager.cpp:331
+#: devices/devicemanager.cpp:235
 msgid ""
 "This is the first time you have connected this device.  Clementine will now "
 "scan the device to find music files - this may take some time."
@@ -5161,7 +5161,7 @@ msgstr "Die opsie kan in die \"Gedrag\" opstellinge verander word"
 msgid "This stream is for paid subscribers only"
 msgstr "Hierdie stroom is slegs vir betalende lede."
 
-#: devices/devicemanager.cpp:600
+#: devices/devicemanager.cpp:506
 #, qt-format
 msgid "This type of device is not supported: %1"
 msgstr "Hierdie tipe toestel word nie ondersteun nie: %1"

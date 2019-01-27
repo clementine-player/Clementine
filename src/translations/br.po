@@ -1376,7 +1376,7 @@ msgstr "Kefluniañ..."
 msgid "Connect Wii Remotes using active/deactive action"
 msgstr "Kennaskañ Wii Remote en ur implij an oberenn gweredekaat/diweredekaat"
 
-#: devices/devicemanager.cpp:330 devices/devicemanager.cpp:335
+#: devices/devicemanager.cpp:234 devices/devicemanager.cpp:239
 msgid "Connect device"
 msgstr "An drobarzhell a zo o kennaskañ"
 
@@ -1641,7 +1641,7 @@ msgstr "Diverkañ"
 msgid "Delete downloaded data"
 msgstr "Diverkañ ar roadennoù pellgarget"
 
-#: devices/deviceview.cpp:408 library/libraryview.cpp:678
+#: devices/deviceview.cpp:404 library/libraryview.cpp:678
 #: ui/mainwindow.cpp:2473 widgets/fileview.cpp:188
 msgid "Delete files"
 msgstr "Diverkañ restroù"
@@ -2386,12 +2386,12 @@ msgstr "Dre abegoù lañvaz ez eo meret Spotify gant un enlugellad distag."
 msgid "Force mono encoding"
 msgstr "Forsiñ an enkodiñ mono"
 
-#: devices/deviceview.cpp:208 devices/deviceview.cpp:334
-#: devices/deviceview.cpp:339
+#: devices/deviceview.cpp:208 devices/deviceview.cpp:330
+#: devices/deviceview.cpp:335
 msgid "Forget device"
 msgstr "Disonjal an drobarzhell"
 
-#: devices/deviceview.cpp:335
+#: devices/deviceview.cpp:331
 msgid ""
 "Forgetting a device will remove it from this list and Clementine will have "
 "to rescan all the songs again next time you connect it."
@@ -2654,7 +2654,7 @@ msgid ""
 "edit the tag value directly"
 msgstr "M'eo gweredekaet e vo tu deoc'h embann klavioù an tonioù er roll-seniñ war-eeun"
 
-#: devices/devicemanager.cpp:575 devices/devicemanager.cpp:586
+#: devices/devicemanager.cpp:481 devices/devicemanager.cpp:492
 msgid ""
 "If you continue, this device will work slowly and songs copied to it may not"
 " work."
@@ -5082,7 +5082,7 @@ msgid ""
 "deleted:"
 msgstr "Ur gudenn a zo evit diverkan tonioù 'zo. Ar restroù-mañ n'int ket bet diverket :"
 
-#: devices/deviceview.cpp:409
+#: devices/deviceview.cpp:405
 msgid ""
 "These files will be deleted from the device, are you sure you want to "
 "continue?"
@@ -5136,20 +5136,20 @@ msgstr "An drobarzhell-mañ a rank bezañ liammet ha digoret a-raok ma c'hallfe 
 msgid "This device supports the following file formats:"
 msgstr "An drobarzhell a c'hell lenn ar mentrezhoù restroù mañ :"
 
-#: devices/devicemanager.cpp:572 devices/devicemanager.cpp:583
+#: devices/devicemanager.cpp:478 devices/devicemanager.cpp:489
 msgid "This device will not work properly"
 msgstr "An drobarzhell ne ze ket en-dro evel ma zere"
 
-#: devices/devicemanager.cpp:573
+#: devices/devicemanager.cpp:479
 msgid ""
 "This is an MTP device, but you compiled Clementine without libmtp support."
 msgstr "Un drobarzhell MTP eo, met komplet eo bet Clementine hep al levraoueg libmtp."
 
-#: devices/devicemanager.cpp:584
+#: devices/devicemanager.cpp:490
 msgid "This is an iPod, but you compiled Clementine without libgpod support."
 msgstr "Un iPod eo, met komplet eo bet Clementine hep al levraoueg libgpod."
 
-#: devices/devicemanager.cpp:331
+#: devices/devicemanager.cpp:235
 msgid ""
 "This is the first time you have connected this device.  Clementine will now "
 "scan the device to find music files - this may take some time."
@@ -5163,7 +5163,7 @@ msgstr "Ar arventenn-mañ a c'hell bezañ kemmet e rann \"Emzalc'h\" ar gwellvez
 msgid "This stream is for paid subscribers only"
 msgstr "Al lanv-mañ a zo evit an izili o deus paet."
 
-#: devices/devicemanager.cpp:600
+#: devices/devicemanager.cpp:506
 #, qt-format
 msgid "This type of device is not supported: %1"
 msgstr "An doare trobarzhell-mañ n'eo ket meret :%1"

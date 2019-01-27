@@ -1388,7 +1388,7 @@ msgstr "Yapılandır..."
 msgid "Connect Wii Remotes using active/deactive action"
 msgstr "Etkinleştir/devre dışı bırak eylemiyle Wii Kumandalarına bağlan"
 
-#: devices/devicemanager.cpp:330 devices/devicemanager.cpp:335
+#: devices/devicemanager.cpp:234 devices/devicemanager.cpp:239
 msgid "Connect device"
 msgstr "Aygıtı bağla"
 
@@ -1653,7 +1653,7 @@ msgstr "Sil"
 msgid "Delete downloaded data"
 msgstr "İndirilmiş veriyi sil"
 
-#: devices/deviceview.cpp:408 library/libraryview.cpp:678
+#: devices/deviceview.cpp:404 library/libraryview.cpp:678
 #: ui/mainwindow.cpp:2473 widgets/fileview.cpp:188
 msgid "Delete files"
 msgstr "Dosyaları sil"
@@ -2398,12 +2398,12 @@ msgstr "Lisans sebepleri dolayısıyla Spotify desteği ayrı bir eklentidir."
 msgid "Force mono encoding"
 msgstr "Mono kodlamaya zorla"
 
-#: devices/deviceview.cpp:208 devices/deviceview.cpp:334
-#: devices/deviceview.cpp:339
+#: devices/deviceview.cpp:208 devices/deviceview.cpp:330
+#: devices/deviceview.cpp:335
 msgid "Forget device"
 msgstr "Aygıtı unut"
 
-#: devices/deviceview.cpp:335
+#: devices/deviceview.cpp:331
 msgid ""
 "Forgetting a device will remove it from this list and Clementine will have "
 "to rescan all the songs again next time you connect it."
@@ -2666,7 +2666,7 @@ msgid ""
 "edit the tag value directly"
 msgstr "Etkinleştirildiğinde, çalma listesi içerisinde bir şarkı seçmek doğrudan etiket değerini düzenlemenizi sağlayacak"
 
-#: devices/devicemanager.cpp:575 devices/devicemanager.cpp:586
+#: devices/devicemanager.cpp:481 devices/devicemanager.cpp:492
 msgid ""
 "If you continue, this device will work slowly and songs copied to it may not"
 " work."
@@ -5094,7 +5094,7 @@ msgid ""
 "deleted:"
 msgstr "Bazı şarkılar silinirken hata oluştu. Şu dosyalar silinemedi:"
 
-#: devices/deviceview.cpp:409
+#: devices/deviceview.cpp:405
 msgid ""
 "These files will be deleted from the device, are you sure you want to "
 "continue?"
@@ -5148,20 +5148,20 @@ msgstr "Bu aygıt Clementine başlamadan önce bağlanmalı ve açılmalıdır a
 msgid "This device supports the following file formats:"
 msgstr "Bu aygıt aşağıdaki dosya biçimlerini destekler:"
 
-#: devices/devicemanager.cpp:572 devices/devicemanager.cpp:583
+#: devices/devicemanager.cpp:478 devices/devicemanager.cpp:489
 msgid "This device will not work properly"
 msgstr "Bu aygıt düzgün çalışmayacak"
 
-#: devices/devicemanager.cpp:573
+#: devices/devicemanager.cpp:479
 msgid ""
 "This is an MTP device, but you compiled Clementine without libmtp support."
 msgstr "Bu bir MTP aygıtı fakat Clementine libmtp desteği olmadan derlenmiş."
 
-#: devices/devicemanager.cpp:584
+#: devices/devicemanager.cpp:490
 msgid "This is an iPod, but you compiled Clementine without libgpod support."
 msgstr "Bu bir iPod fakat Clementine libgpod desteği olmadan derlenmiş."
 
-#: devices/devicemanager.cpp:331
+#: devices/devicemanager.cpp:235
 msgid ""
 "This is the first time you have connected this device.  Clementine will now "
 "scan the device to find music files - this may take some time."
@@ -5175,7 +5175,7 @@ msgstr "Bu seçenek \"Davranış\" tercihlerinden değiştirilebilir"
 msgid "This stream is for paid subscribers only"
 msgstr "Bu yayın sadece abone olan kullanıcılar içindir"
 
-#: devices/devicemanager.cpp:600
+#: devices/devicemanager.cpp:506
 #, qt-format
 msgid "This type of device is not supported: %1"
 msgstr "Bu tür bir aygıt desteklenmiyor: %1"

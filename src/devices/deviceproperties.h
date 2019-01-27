@@ -35,7 +35,7 @@ class DeviceProperties : public QDialog {
   ~DeviceProperties();
 
   void SetDeviceManager(DeviceManager* manager);
-  void ShowDevice(int row);
+  void ShowDevice(QModelIndex idx);
 
  public slots:
   void accept();

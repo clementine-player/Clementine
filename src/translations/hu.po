@@ -1379,7 +1379,7 @@ msgstr "Beállítás..."
 msgid "Connect Wii Remotes using active/deactive action"
 msgstr "Wii távvezérlő csatlakoztatása az aktiválás/deaktiválás esemény használatával"
 
-#: devices/devicemanager.cpp:330 devices/devicemanager.cpp:335
+#: devices/devicemanager.cpp:234 devices/devicemanager.cpp:239
 msgid "Connect device"
 msgstr "Eszköz csatlakoztatása"
 
@@ -1644,7 +1644,7 @@ msgstr "Törlés"
 msgid "Delete downloaded data"
 msgstr "Letöltött adatok törlése"
 
-#: devices/deviceview.cpp:408 library/libraryview.cpp:678
+#: devices/deviceview.cpp:404 library/libraryview.cpp:678
 #: ui/mainwindow.cpp:2473 widgets/fileview.cpp:188
 msgid "Delete files"
 msgstr "Fájlok törlése"
@@ -2389,12 +2389,12 @@ msgstr "Licencelési okok miatt a Spotify támogatást külön beépülőben kel
 msgid "Force mono encoding"
 msgstr "Mono kódolás kényszerítése"
 
-#: devices/deviceview.cpp:208 devices/deviceview.cpp:334
-#: devices/deviceview.cpp:339
+#: devices/deviceview.cpp:208 devices/deviceview.cpp:330
+#: devices/deviceview.cpp:335
 msgid "Forget device"
 msgstr "Eszköz elfelejtése"
 
-#: devices/deviceview.cpp:335
+#: devices/deviceview.cpp:331
 msgid ""
 "Forgetting a device will remove it from this list and Clementine will have "
 "to rescan all the songs again next time you connect it."
@@ -2657,7 +2657,7 @@ msgid ""
 "edit the tag value directly"
 msgstr "Aktiválásakor a kiválasztott szám címkéje szerkeszthető lesz kiválasztáskor"
 
-#: devices/devicemanager.cpp:575 devices/devicemanager.cpp:586
+#: devices/devicemanager.cpp:481 devices/devicemanager.cpp:492
 msgid ""
 "If you continue, this device will work slowly and songs copied to it may not"
 " work."
@@ -5085,7 +5085,7 @@ msgid ""
 "deleted:"
 msgstr "Néhány szám törlése közben hiba lépett fel. Az alábbi fájlokat nem sikerült törölni:"
 
-#: devices/deviceview.cpp:409
+#: devices/deviceview.cpp:405
 msgid ""
 "These files will be deleted from the device, are you sure you want to "
 "continue?"
@@ -5139,20 +5139,20 @@ msgstr "A Clementine csak az eszköz csatlakoztatása és megnyitása után kép
 msgid "This device supports the following file formats:"
 msgstr "Ez az eszköz az alábbi fájlformátumokat támogatja:"
 
-#: devices/devicemanager.cpp:572 devices/devicemanager.cpp:583
+#: devices/devicemanager.cpp:478 devices/devicemanager.cpp:489
 msgid "This device will not work properly"
 msgstr "Az eszköz nem fog megfelelően működni"
 
-#: devices/devicemanager.cpp:573
+#: devices/devicemanager.cpp:479
 msgid ""
 "This is an MTP device, but you compiled Clementine without libmtp support."
 msgstr "Ez egy MTP eszköz, de a Clementine libmtp támogatás nélkül lett fordítva."
 
-#: devices/devicemanager.cpp:584
+#: devices/devicemanager.cpp:490
 msgid "This is an iPod, but you compiled Clementine without libgpod support."
 msgstr "Ez az eszköz egy iPod, de a Clementine libgpod támogatás nélkül lett fordítva."
 
-#: devices/devicemanager.cpp:331
+#: devices/devicemanager.cpp:235
 msgid ""
 "This is the first time you have connected this device.  Clementine will now "
 "scan the device to find music files - this may take some time."
@@ -5166,7 +5166,7 @@ msgstr "Ez a beállítás változtatható a \"Viselkedés\" menüben"
 msgid "This stream is for paid subscribers only"
 msgstr "Ez az adatfolyam csak előfizetőknek érhető el"
 
-#: devices/devicemanager.cpp:600
+#: devices/devicemanager.cpp:506
 #, qt-format
 msgid "This type of device is not supported: %1"
 msgstr "A %1 eszköztípus nem támogatott"
