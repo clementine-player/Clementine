@@ -121,10 +121,7 @@ void DeviceItemDelegate::paint(QPainter* p, const QStyleOptionViewItem& opt,
         QVariant song_count = index.data(DeviceManager::Role_SongCount);
         if (song_count.isValid()) {
           int count = song_count.toInt();
-          if (count == 1)  // TODO: Fix this properly
-            status_text = tr("%1 song").arg(count);
-          else
-            status_text = tr("%1 songs").arg(count);
+          status_text = tr("%1 song%2").arg(count).arg(count == 1 ? "" : "s");
         } else {
           status_text = index.data(DeviceManager::Role_MountPath).toString();
         }
