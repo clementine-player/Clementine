@@ -38,6 +38,7 @@
 #include <mp4file.h>
 #include <mp4tag.h>
 #include <mpcfile.h>
+#include <apefile.h>
 #include <mpegfile.h>
 #include <oggfile.h>
 #ifdef TAGLIB_HAS_OPUS
