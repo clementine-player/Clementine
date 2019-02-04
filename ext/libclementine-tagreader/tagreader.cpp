@@ -37,6 +37,7 @@
 #include <mp4file.h>
 #include <mp4tag.h>
 #include <mpcfile.h>
+#include <apefile.h>
 #include <mpegfile.h>
 #include <oggfile.h>
 #ifdef TAGLIB_HAS_OPUS
@@ -160,6 +161,80 @@ void TagReader::ReadFile(const QString& filename,
   QString disc;
   QString compilation;
   QString lyrics;
+
+  auto parseApeTag = [&] (TagLib::APE::Tag* tag) {
+    const TagLib::APE::ItemListMap& items = tag->itemListMap();
+
+    // Find album artists
+    TagLib::APE::ItemListMap::ConstIterator it = items.find("ALBUM ARTIST");
+    if (it != items.end()) {
+      TagLib::StringList album_artists = it->second.toStringList();
+      if (!album_artists.isEmpty()) {
+        Decode(album_artists.front(), nullptr, song->mutable_albumartist());
+      }
+    }
+
+    // Find album cover art
+    if (items.find("COVER ART (FRONT)") != items.end()) {
+      song->set_art_automatic(kEmbeddedCover);
+    }
+
+    if (items.contains("DISC")) {
+      disc = TStringToQString(
+          TagLib::String::number(items["DISC"].toString().toInt()));
+    }
+
+    if (items.contains("FMPS_RATING")) {
+      float rating =
+          TStringToQString(items["FMPS_RATING"].toString()).toFloat();
+      if (song->rating() <= 0 && rating > 0) {
+        song->set_rating(rating);
+      }
+    }
+    if (items.contains("FMPS_PLAYCOUNT")) {
+      int playcount =
+          TStringToQString(
+             items["FMPS_PLAYCOUNT"].toString()).toFloat();
+      if (song->playcount() <= 0 && playcount > 0) {
+        song->set_playcount(playcount);
+      }
+    }
+    if (items.contains("FMPS_RATING_AMAROK_SCORE")) {
+      int score = TStringToQString(
+                      items["FMPS_RATING_AMAROK_SCORE"].toString()).toFloat()
+                  * 100;
+      if (song->score() <= 0 && score > 0) {
+        song->set_score(score);
+      }
+    }
+
+    if (items.contains("BPM")) {
+      Decode(items["BPM"].toStringList().toString(", "), nullptr,
+             song->mutable_performer());
+    }
+
+    if (items.contains("PERFORMER")) {
+      Decode(items["PERFORMER"].toStringList().toString(", "), nullptr,
+             song->mutable_performer());
+    }
+
+    if (items.contains("COMPOSER")) {
+      Decode(items["COMPOSER"].toStringList().toString(", "), nullptr,
+             song->mutable_composer());
+    }
+
+    if (items.contains("GROUPING")) {
+      Decode(items["GROUPING"].toStringList().toString(" "), nullptr,
+             song->mutable_grouping());
+    }
+
+    if (items.contains("LYRICS")) {
+      Decode(items["LYRICS"].toString(), nullptr,
+             song->mutable_lyrics());
+    }
+
+    Decode(tag->comment(), nullptr, song->mutable_comment());
+  };
 
   // Handle all the files which have VorbisComments (Ogg, OPUS, ...) in the same
   // way;
@@ -350,6 +425,21 @@ void TagReader::ReadFile(const QString& filename,
       }
 
       Decode(mp4_tag->comment(), nullptr, song->mutable_comment());
+    }
+  } else if (TagLib::APE::File* file =
+                 dynamic_cast<TagLib::APE::File*>(fileref->file())) {
+    if (file->tag()) {
+      parseApeTag(file->APETag());
+    }
+  } else if (TagLib::MPC::File* file =
+                 dynamic_cast<TagLib::MPC::File*>(fileref->file())) {
+    if (file->tag()) {
+      parseApeTag(file->APETag());
+    }
+  } else if (TagLib::WavPack::File* file =
+                 dynamic_cast<TagLib::WavPack::File*>(fileref->file())) {
+    if (file->tag()) {
+      parseApeTag(file->APETag());
     }
   }
 #ifdef TAGLIB_WITH_ASF
@@ -668,6 +758,8 @@ pb::tagreader::SongMetadata_Type TagReader::GuessFileType(
     return pb::tagreader::SongMetadata_Type_TRUEAUDIO;
   if (dynamic_cast<TagLib::WavPack::File*>(fileref->file()))
     return pb::tagreader::SongMetadata_Type_WAVPACK;
+  if (dynamic_cast<TagLib::APE::File*>(fileref->file()))
+    return pb::tagreader::SongMetadata_Type_APE;
 
   return pb::tagreader::SongMetadata_Type_UNKNOWN;
 }
@@ -690,6 +782,25 @@ bool TagReader::SaveFile(const QString& filename,
   fileref->tag()->setComment(StdStringToTaglibString(song.comment()));
   fileref->tag()->setYear(song.year());
   fileref->tag()->setTrack(song.track());
+
+  auto saveApeTag = [&] (TagLib::APE::Tag* tag) {
+    tag->setItem("disc", TagLib::APE::Item(
+        "disc", TagLib::String::number(song.disc() <= 0 - 1 ? 0 : song.disc())));
+    tag->setItem("bpm", TagLib::APE::Item(
+        "bpm", TagLib::StringList(song.bpm() <= 0 - 1 ? "0" : TagLib::String::number(song.bpm()))));
+    tag->setItem("composer", TagLib::APE::Item(
+        "composer", TagLib::StringList(song.composer().c_str())));
+    tag->setItem("grouping", TagLib::APE::Item(
+        "grouping", TagLib::StringList(song.grouping().c_str())));
+    tag->setItem("performer", TagLib::APE::Item(
+        "performer", TagLib::StringList(song.performer().c_str())));
+    tag->setItem("album artist", TagLib::APE::Item(
+        "album artist", TagLib::StringList(song.albumartist().c_str())));
+    tag->setItem("lyrics", TagLib::APE::Item(
+        "lyrics", TagLib::String(song.lyrics())));
+    tag->setItem("compilation", TagLib::APE::Item(
+        "compilation", TagLib::StringList(song.compilation() ? "1" : "0")));
+  };
 
   if (TagLib::MPEG::File* file =
           dynamic_cast<TagLib::MPEG::File*>(fileref->file())) {
@@ -723,17 +834,15 @@ bool TagReader::SaveFile(const QString& filename,
     tag->itemListMap()["aART"] = TagLib::StringList(song.albumartist().c_str());
     tag->itemListMap()["cpil"] =
         TagLib::StringList(song.compilation() ? "1" : "0");
+  } else if (TagLib::APE::File* file =
+                 dynamic_cast<TagLib::APE::File*>(fileref->file())) {
+    saveApeTag(file->APETag(true));
+  } else if (TagLib::MPC::File* file =
+                 dynamic_cast<TagLib::MPC::File*>(fileref->file())) {
+    saveApeTag(file->APETag(true));
   } else if (TagLib::WavPack::File* file =
                  dynamic_cast<TagLib::WavPack::File*>(fileref->file())) {
-    TagLib::APE::Tag* tag = file->APETag(true);
-    if (!tag) return false;
-    tag->setArtist(StdStringToTaglibString(song.artist()));
-    tag->setAlbum(StdStringToTaglibString(song.album()));
-    tag->setTitle(StdStringToTaglibString(song.title()));
-    tag->setGenre(StdStringToTaglibString(song.genre()));
-    tag->setComment(StdStringToTaglibString(song.comment()));
-    tag->setYear(song.year());
-    tag->setTrack(song.track());
+    saveApeTag(file->APETag(true));
   }
 
   // Handle all the files which have VorbisComments (Ogg, OPUS, ...) in the same
@@ -767,6 +876,13 @@ bool TagReader::SaveSongStatisticsToFile(
 
   if (!fileref || fileref->isNull())  // The file probably doesn't exist
     return false;
+
+  auto saveApeSongStats = [&] (TagLib::APE::Tag* tag) {
+    tag->setItem("FMPS_Rating_Amarok_Score", TagLib::APE::Item(
+        "FMPS_Rating_Amarok_Score", TagLib::StringList(QStringToTaglibString(QString::number(song.score() / 100.0)))));
+    tag->setItem("FMPS_PlayCount", TagLib::APE::Item(
+        "FMPS_PlayCount", TagLib::StringList(TagLib::String::number(song.playcount()))));
+  };
 
   if (TagLib::MPEG::File* file =
           dynamic_cast<TagLib::MPEG::File*>(fileref->file())) {
@@ -806,6 +922,15 @@ bool TagReader::SaveSongStatisticsToFile(
         QStringToTaglibString(QString::number(song.score() / 100.0)));
     tag->itemListMap()[kMP4_FMPS_Playcount_ID] =
         TagLib::StringList(TagLib::String::number(song.playcount()));
+  } else if (TagLib::APE::File* file =
+               dynamic_cast<TagLib::APE::File*>(fileref->file())) {
+      saveApeSongStats(file->APETag(true));
+  } else if (TagLib::MPC::File* file =
+               dynamic_cast<TagLib::MPC::File*>(fileref->file())) {
+      saveApeSongStats(file->APETag(true));
+  } else if (TagLib::WavPack::File* file =
+               dynamic_cast<TagLib::WavPack::File*>(fileref->file())) {
+      saveApeSongStats(file->APETag(true));
   } else {
     // Nothing to save: stop now
     return true;
@@ -841,6 +966,11 @@ bool TagReader::SaveSongRatingToFile(
   if (!fileref || fileref->isNull())  // The file probably doesn't exist
     return false;
 
+  auto saveApeSongRating = [&] (TagLib::APE::Tag* tag) {
+    tag->setItem("FMPS_Rating", TagLib::APE::Item(
+        "FMPS_Rating", TagLib::StringList(QStringToTaglibString(QString::number(song.rating())))));
+  };
+
   if (TagLib::MPEG::File* file =
           dynamic_cast<TagLib::MPEG::File*>(fileref->file())) {
     TagLib::ID3v2::Tag* tag = file->ID3v2Tag(true);
@@ -873,6 +1003,15 @@ bool TagReader::SaveSongRatingToFile(
     TagLib::MP4::Tag* tag = file->tag();
     tag->itemListMap()[kMP4_FMPS_Rating_ID] = TagLib::StringList(
         QStringToTaglibString(QString::number(song.rating())));
+  } else if (TagLib::APE::File* file =
+               dynamic_cast<TagLib::APE::File*>(fileref->file())) {
+      saveApeSongRating(file->APETag(true));
+  } else if (TagLib::MPC::File* file =
+               dynamic_cast<TagLib::MPC::File*>(fileref->file())) {
+      saveApeSongRating(file->APETag(true));
+  } else if (TagLib::WavPack::File* file =
+               dynamic_cast<TagLib::WavPack::File*>(fileref->file())) {
+      saveApeSongRating(file->APETag(true));
   } else {
     // Nothing to save: stop now
     return true;
@@ -1108,6 +1247,36 @@ QByteArray TagReader::LoadEmbeddedArt(const QString& filename) const {
         return QByteArray(art.data().data(), art.data().size());
       }
     }
+  }
+
+  // APE formats
+  auto apeTagCover = [&] (TagLib::APE::Tag* tag) {
+    QByteArray cover;
+    const TagLib::APE::ItemListMap& items = tag->itemListMap();
+    TagLib::APE::ItemListMap::ConstIterator it = items.find("COVER ART (FRONT)");
+    if (it != items.end()) {
+      TagLib::ByteVector data = it->second.binaryData();
+
+      int pos = data.find('\0') + 1;
+      cover = QByteArray(data.data() + pos, data.size() - pos);
+    }
+
+    return cover;
+  };
+
+  TagLib::APE::File* ape_file = dynamic_cast<TagLib::APE::File*>(ref.file());
+  if (ape_file) {
+    return apeTagCover(ape_file->APETag());
+  }
+
+  TagLib::MPC::File* mpc_file = dynamic_cast<TagLib::MPC::File*>(ref.file());
+  if (mpc_file) {
+    return apeTagCover(mpc_file->APETag());
+  }
+
+  TagLib::WavPack::File* wavPack_file = dynamic_cast<TagLib::WavPack::File*>(ref.file());
+  if (wavPack_file) {
+    return apeTagCover(wavPack_file->APETag());
   }
 
   return QByteArray();
