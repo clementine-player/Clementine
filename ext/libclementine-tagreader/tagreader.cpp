@@ -899,7 +899,7 @@ bool TagReader::SaveSongStatisticsToFile(
         TagLib::APE::Item(
             "FMPS_PlayCount",
             TagLib::StringList(TagLib::String::number(song.playcount()))));
-};
+  };
 
   if (TagLib::MPEG::File* file =
           dynamic_cast<TagLib::MPEG::File*>(fileref->file())) {
@@ -1023,14 +1023,14 @@ bool TagReader::SaveSongRatingToFile(
     tag->itemListMap()[kMP4_FMPS_Rating_ID] = TagLib::StringList(
         QStringToTaglibString(QString::number(song.rating())));
   } else if (TagLib::APE::File* file =
-               dynamic_cast<TagLib::APE::File*>(fileref->file())) {
-      saveApeSongRating(file->APETag(true));
+                 dynamic_cast<TagLib::APE::File*>(fileref->file())) {
+    saveApeSongRating(file->APETag(true));
   } else if (TagLib::MPC::File* file =
-               dynamic_cast<TagLib::MPC::File*>(fileref->file())) {
-      saveApeSongRating(file->APETag(true));
+                 dynamic_cast<TagLib::MPC::File*>(fileref->file())) {
+    saveApeSongRating(file->APETag(true));
   } else if (TagLib::WavPack::File* file =
-               dynamic_cast<TagLib::WavPack::File*>(fileref->file())) {
-      saveApeSongRating(file->APETag(true));
+                 dynamic_cast<TagLib::WavPack::File*>(fileref->file())) {
+    saveApeSongRating(file->APETag(true));
   } else {
     // Nothing to save: stop now
     return true;
