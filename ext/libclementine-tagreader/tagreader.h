@@ -79,17 +79,6 @@ class TagReader {
 
   void ParseFMPSFrame(const QString& name, const QString& value,
                       pb::tagreader::SongMetadata* song) const;
-  void ParseOggTag(const TagLib::Ogg::FieldListMap& map,
-                   const QTextCodec* codec, QString* disc, QString* compilation,
-                   pb::tagreader::SongMetadata* song) const;
-  void SetVorbisComments(TagLib::Ogg::XiphComment* vorbis_comments,
-                         const pb::tagreader::SongMetadata& song) const;
-  void SetFMPSStatisticsVorbisComments(
-      TagLib::Ogg::XiphComment* vorbis_comments,
-      const pb::tagreader::SongMetadata& song) const;
-  void SetFMPSRatingVorbisComments(
-      TagLib::Ogg::XiphComment* vorbis_comments,
-      const pb::tagreader::SongMetadata& song) const;
 
   pb::tagreader::SongMetadata_Type GuessFileType(
       TagLib::FileRef* fileref) const;
