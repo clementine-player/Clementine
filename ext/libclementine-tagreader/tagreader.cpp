@@ -179,6 +179,11 @@ void TagReader::ReadFile(const QString& filename,
       song->set_art_automatic(kEmbeddedCover);
     }
 
+    if (items.contains("COMPILATION")) {
+      compilation = TStringToQString(
+          TagLib::String::number(items["COMPILATION"].toString().toInt()));
+    }
+
     if (items.contains("DISC")) {
       disc = TStringToQString(
           TagLib::String::number(items["DISC"].toString().toInt()));
