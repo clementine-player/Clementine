@@ -29,13 +29,8 @@
 ** <http://libqxt.org>  <foundation@libqxt.org>
 *****************************************************************************/
 
-#if QT_VERSION < QT_VERSION_CHECK(5,0,0)
-#   include <QX11Info>
-#else
-#   include <QApplication>
-#   include <qpa/qplatformnativeinterface.h>
-#   include <xcb/xcb.h>
-#endif
+#include <QX11Info>
+#include <xcb/xcb.h>
 #include <QVector>
 #include <X11/Xlib.h>
 #include "keymapper_x11.h"
@@ -92,14 +87,7 @@ class QxtX11Data {
 public:
     QxtX11Data()
     {
-#if QT_VERSION < QT_VERSION_CHECK(5,0,0)
         m_display = QX11Info::display();
-#else
-        QPlatformNativeInterface *native = qApp->platformNativeInterface();
-        void *display = native->nativeResourceForScreen(QByteArray("display"),
-                                                        QGuiApplication::primaryScreen());
-        m_display = reinterpret_cast<Display *>(display);
-#endif
     }
 
     bool isValid()
