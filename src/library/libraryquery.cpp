@@ -46,6 +46,7 @@ const QMap<QString, Song::FileType> kFiletypeId = QMap<QString, Song::FileType>(
                                       {"cdda", Song::Type_Cdda},
                                       {"spc700", Song::Type_Spc},
                                       {"vgm", Song::Type_VGM},
+                                      {"ape", Song::Type_APE},
                                       {"stream", Song::Type_Stream},
                                       {"unknown", Song::Type_Unknown}});
 

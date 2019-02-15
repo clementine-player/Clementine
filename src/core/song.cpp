@@ -456,6 +456,8 @@ QString Song::TextForFiletype(FileType type) {
       return QObject::tr("SNES SPC700");
     case Song::Type_VGM:
       return QObject::tr("VGM");
+    case Song::Type_APE:
+      return QObject::tr("Monkey's Audio");
 
     case Song::Type_Stream:
       return QObject::tr("Stream");
@@ -469,6 +471,7 @@ QString Song::TextForFiletype(FileType type) {
 bool Song::IsFileLossless() const {
   switch (filetype()) {
     case Song::Type_Aiff:
+    case Song::Type_APE:
     case Song::Type_Flac:
     case Song::Type_OggFlac:
     case Song::Type_Wav:
