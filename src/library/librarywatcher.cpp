@@ -678,6 +678,8 @@ QString LibraryWatcher::PickBestImage(const QStringList& images) {
   QString biggest_path;
 
   for (const QString& path : filtered) {
+    if (stop_requested_) return "";
+
     QImage image(path);
     if (image.isNull()) continue;
 
