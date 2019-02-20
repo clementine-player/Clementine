@@ -95,6 +95,8 @@ NowPlayingWidget::NowPlayingWidget(QWidget* parent)
   QActionGroup* mode_group = new QActionGroup(this);
   QSignalMapper* mode_mapper = new QSignalMapper(this);
   connect(mode_mapper, SIGNAL(mapped(int)), SLOT(SetMode(int)));
+  CreateModeAction(SmallSongDetailsNoCover, tr("No cover"), mode_group,
+                   mode_mapper);
   CreateModeAction(SmallSongDetails, tr("Small album cover"), mode_group,
                    mode_mapper);
   CreateModeAction(LargeSongDetails, tr("Large album cover"), mode_group,
@@ -110,8 +112,8 @@ NowPlayingWidget::NowPlayingWidget(QWidget* parent)
   fit_cover_width_action_ = menu_->addAction(tr("Fit cover to width"));
 
   fit_cover_width_action_->setCheckable(true);
-  fit_cover_width_action_->setEnabled((mode_ != SmallSongDetails) ? true
-                                                                  : false);
+  fit_cover_width_action_->setEnabled(ModeAllowsResizing(mode_));
+
   connect(fit_cover_width_action_, SIGNAL(toggled(bool)),
           SLOT(FitCoverWidth(bool)));
   fit_cover_width_action_->setChecked(fit_width_);
@@ -209,6 +211,7 @@ QSize NowPlayingWidget::sizeHint() const {
 
 void NowPlayingWidget::UpdateHeight() {
   switch (mode_) {
+    case SmallSongDetailsNoCover:
     case SmallSongDetails:
       cover_loader_options_.desired_height_ = small_ideal_height_;
       total_height_ = small_ideal_height_;
@@ -256,6 +259,7 @@ void NowPlayingWidget::UpdateDetailsText() {
   QString html;
 
   switch (mode_) {
+    case SmallSongDetailsNoCover:
     case SmallSongDetails:
     case LargeNoSongDetails:
       details_->setTextWidth(-1);
@@ -382,6 +386,10 @@ void NowPlayingWidget::paintEvent(QPaintEvent* e) {
 
 void NowPlayingWidget::DrawContents(QPainter* p) {
   switch (mode_) {
+    case SmallSongDetailsNoCover:
+      details_->drawContents(p);
+      break;
+
     case SmallSongDetails:
       if (hypnotoad_) {
         p->drawPixmap(0, 0, small_ideal_height_, small_ideal_height_,
@@ -514,11 +522,7 @@ void NowPlayingWidget::FadePreviousTrack(qreal value) {
 void NowPlayingWidget::SetMode(int mode) {
   mode_ = Mode(mode);
 
-  if (mode_ == SmallSongDetails) {
-    fit_cover_width_action_->setEnabled(false);
-  } else {
-    fit_cover_width_action_->setEnabled(true);
-  }
+  fit_cover_width_action_->setEnabled(ModeAllowsResizing(mode_));
 
   UpdateHeight();
   UpdateDetailsText();
@@ -706,4 +710,8 @@ void NowPlayingWidget::AutomaticCoverSearchDone() {
   downloading_covers_ = false;
   spinner_animation_.reset();
   update();
+}
+
+bool NowPlayingWidget::ModeAllowsResizing(Mode m) {
+  return (m != SmallSongDetailsNoCover) && (m != SmallSongDetails);
 }
