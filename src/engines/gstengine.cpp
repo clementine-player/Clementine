@@ -85,6 +85,7 @@ using std::vector;
 
 const char* GstEngine::kSettingsGroup = "GstEngine";
 const char* GstEngine::kAutoSink = "autoaudiosink";
+const char* GstEngine::kProxySettingsGroup = "Proxy";
 const char* GstEngine::kHypnotoadPipeline =
     "audiotestsrc wave=6 ! "
     "audioecho intensity=1 delay=50000000 ! "
@@ -111,6 +112,9 @@ GstEngine::GstEngine(TaskManager* task_manager)
       buffer_min_fill_(33),
       mono_playback_(false),
       sample_rate_(kAutoSampleRate),
+      proxy_url_(QString::null),
+      proxy_user_(QString::null),
+      proxy_passwd_(QString::null),
       seek_timer_(new QTimer(this)),
       timer_id_(-1),
       next_element_id_(0),
@@ -228,6 +232,44 @@ void GstEngine::ReloadSettings() {
 
   mono_playback_ = s.value("monoplayback", false).toBool();
   sample_rate_ = s.value("samplerate", kAutoSampleRate).toInt();
+
+  s.endGroup();
+
+  s.beginGroup(kProxySettingsGroup);
+  const int mode = s.value("mode", 0).toInt();
+  proxy_url_.clear(); // make it null, assume no proxy
+
+  if (mode == 2) {
+    // 2 = manual config, we need to do something
+    const int type = s.value("type", 0).toInt(); // 1 = SOCKS, 3 = HTTP
+    if (type == 1) {
+      // See https://bugzilla.gnome.org/show_bug.cgi?id=783012
+      // When that bug is resoved we can append socks:// here
+      qLog(Warning) << "GStreamer doesn't currently support socks proxies." <<
+        " Will not use proxy for gstreamer streams";
+    } else if (type == 3) {
+      proxy_url_.append("http://");
+    } else {
+      qLog(Warning) << "Unknown proxy type: "
+                    << type
+                    << ". Will not use proxy for gstreamer streams";
+    }
+    if (!proxy_url_.isEmpty()) {
+      proxy_url_.append(s.value("hostname").toString());
+      proxy_url_.append(":");
+      proxy_url_.append(s.value("port").toString());
+    }
+
+    QString user = s.value("username").toString();
+    QString pass = s.value("password").toString();
+    if (!user.isEmpty() && !pass.isEmpty()) {
+      proxy_user_ = user;
+      proxy_passwd_ = pass;
+    } else {
+      proxy_user_.clear();
+      proxy_passwd_.clear();
+    }
+  }
 }
 
 qint64 GstEngine::position_nanosec() const {
@@ -821,6 +863,8 @@ shared_ptr<GstEnginePipeline> GstEngine::CreatePipeline() {
   ret->set_buffer_min_fill(buffer_min_fill_);
   ret->set_mono_playback(mono_playback_);
   ret->set_sample_rate(sample_rate_);
+  ret->set_proxy_url(proxy_url_);
+  ret->set_proxy_login(proxy_user_, proxy_passwd_);
 
   ret->AddBufferConsumer(this);
   for (BufferConsumer* consumer : buffer_consumers_) {

@@ -73,6 +73,7 @@ class GstEngine : public Engine::Base, public BufferConsumer {
   static const int kAutoSampleRate = -1;
   static const char* kSettingsGroup;
   static const char* kAutoSink;
+  static const char* kProxySettingsGroup;
 
   bool Init();
   void EnsureInitialised() { initialising_.waitForFinished(); }
@@ -212,6 +213,11 @@ class GstEngine : public Engine::Base, public BufferConsumer {
 
   bool mono_playback_;
   int sample_rate_;
+
+  // proxy_url_.isNull => no proxy
+  QString proxy_url_;
+  QString proxy_user_;
+  QString proxy_passwd_;
 
   mutable bool can_decode_success_;
   mutable bool can_decode_last_;

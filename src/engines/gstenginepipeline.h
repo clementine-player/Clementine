@@ -56,6 +56,8 @@ class GstEnginePipeline : public QObject {
   void set_buffer_min_fill(int percent);
   void set_mono_playback(bool enabled);
   void set_sample_rate(int rate);
+  void set_proxy_url(const QString& url);
+  void set_proxy_login(const QString& user, const QString& pass);
 
   // Creates the pipeline, returns false on error
   bool InitFromUrl(const QUrl& url, qint64 end_nanosec);
@@ -105,6 +107,10 @@ class GstEnginePipeline : public QObject {
   QUrl redirect_url() const { return redirect_url_; }
 
   QString source_device() const { return source_device_; }
+
+  QString proxy_url() const { return proxy_url_; }
+  QString proxy_user() const { return proxy_user_; }
+  QString proxy_passwd() const { return proxy_passwd_; }
 
  public slots:
   void SetVolumeModifier(qreal mod);
@@ -252,6 +258,11 @@ signals:
 
   // When we need to specify the device to use as source (for CD device)
   QString source_device_;
+
+  // Proxy settings
+  QString proxy_url_;
+  QString proxy_user_;
+  QString proxy_passwd_;
 
   // Seeking while the pipeline is in the READY state doesn't work, so we have
   // to wait until it goes to PAUSED or PLAYING.

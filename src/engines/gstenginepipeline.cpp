@@ -78,6 +78,9 @@ GstEnginePipeline::GstEnginePipeline(GstEngine* engine)
       next_end_offset_nanosec_(-1),
       ignore_next_seek_(false),
       ignore_tags_(false),
+      proxy_url_(QString::null),
+      proxy_user_(QString::null),
+      proxy_passwd_(QString::null),
       pipeline_is_initialised_(false),
       pipeline_is_connected_(false),
       pending_seek_nanosec_(-1),
@@ -132,6 +135,15 @@ void GstEnginePipeline::set_mono_playback(bool enabled) {
 }
 
 void GstEnginePipeline::set_sample_rate(int rate) { sample_rate_ = rate; }
+
+void GstEnginePipeline::set_proxy_url(const QString& url) {
+  proxy_url_ = url;
+}
+
+void GstEnginePipeline::set_proxy_login(const QString& user, const QString& pass) {
+  proxy_user_ = user;
+  proxy_passwd_ = pass;
+}
 
 bool GstEnginePipeline::ReplaceDecodeBin(GstElement* new_bin) {
   if (!new_bin) return false;
@@ -996,6 +1008,24 @@ void GstEnginePipeline::SourceSetupCallback(GstURIDecodeBin* bin,
     g_object_set(element, "ssl-use-system-ca-file", false, nullptr);
     g_object_set(element, "ssl-strict", TRUE, nullptr);
 #endif
+  }
+
+  const QString proxy_url = instance->proxy_url();
+  if (!proxy_url.isNull() && g_object_class_find_property(G_OBJECT_GET_CLASS(element), "proxy")) {
+    qLog(Debug) << "Setting proxy on stream to: " << proxy_url;
+    g_object_set(element, "proxy", proxy_url.toLocal8Bit().constData(), nullptr);
+
+    const QString user = instance->proxy_user();
+    const QString passwd = instance->proxy_passwd();
+    if (!user.isEmpty() && // we set them together so only check one
+        g_object_class_find_property(G_OBJECT_GET_CLASS(element), "proxy-id") &&
+        g_object_class_find_property(G_OBJECT_GET_CLASS(element), "proxy-pw")) {
+      qLog(Debug) << "Setting proxy login to: " << user << " (password redacted)";
+      g_object_set (element,
+                    "proxy-id", user.toLocal8Bit().constData(),
+                    "proxy-pw", passwd.toLocal8Bit().constData(),
+                    NULL);
+    }
   }
 }
 
