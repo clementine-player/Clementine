@@ -310,9 +310,8 @@ bool CommandlineOptions::Parse() {
 bool CommandlineOptions::is_empty() const {
   return player_action_ == Player_None && set_volume_ == -1 &&
          volume_modifier_ == 0 && seek_to_ == -1 && seek_by_ == 0 &&
-         play_track_at_ == -1 && show_osd_ == false &&
-         toggle_pretty_osd_ == false && urls_.isEmpty() && 
-         delete_current_track_ == false;
+         play_track_at_ == -1 && !show_osd_ && !toggle_pretty_osd_ &&
+         urls_.isEmpty() && !delete_current_track_;
 }
 
 bool CommandlineOptions::contains_play_options() const {

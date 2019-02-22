@@ -505,10 +505,8 @@ void MergedProxyModel::LayoutChanged() {
 }
 
 bool MergedProxyModel::IsKnownModel(const QAbstractItemModel* model) const {
-  if (model == this || model == sourceModel() ||
-      merge_points_.contains(const_cast<QAbstractItemModel*>(model)))
-    return true;
-  return false;
+  return model == this || model == sourceModel() ||
+         merge_points_.contains(const_cast<QAbstractItemModel*>(model));
 }
 
 QModelIndexList MergedProxyModel::mapFromSource(

@@ -50,7 +50,7 @@ void InternetShowSettingsPage::Load() {
     item->setIcon(0, service_it.value().item->icon());
 
     Qt::CheckState check_state =
-        service_it.value().shown == true ? Qt::Checked : Qt::Unchecked;
+        service_it.value().shown ? Qt::Checked : Qt::Unchecked;
     item->setData(0, Qt::CheckStateRole, check_state);
     /* We have to store the constant name of the service */
     item->setData(1, Qt::UserRole, service_it.key()->name());
