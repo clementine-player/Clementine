@@ -104,7 +104,7 @@ void SongSender::SendSongs(const pb::remote::RequestDownloadSongs& request) {
 }
 
 void SongSender::TranscodeLosslessFiles() {
-  for (DownloadItem item : download_queue_) {
+  for (const DownloadItem& item : download_queue_) {
     // Check only lossless files
     if (!item.song_.IsFileLossless()) continue;
 
@@ -170,7 +170,7 @@ void SongSender::SendTotalFileSize() {
   response->set_file_count(download_queue_.size());
 
   int total = 0;
-  for (DownloadItem item : download_queue_) {
+  for (const DownloadItem& item : download_queue_) {
     QString local_file = item.song_.url().toLocalFile();
     bool is_transcoded = transcoder_map_.contains(local_file);
 
@@ -315,7 +315,7 @@ void SongSender::SendAlbum(const Song& song) {
 
   SongList album = app_->library_backend()->GetSongsByAlbum(song.album());
 
-  for (Song s : album) {
+  for (const Song& s : album) {
     DownloadItem item(s, album.indexOf(s) + 1, album.size());
     download_queue_.append(item);
   }
@@ -331,13 +331,13 @@ void SongSender::SendPlaylist(int playlist_id) {
 
   // Count the local songs
   int count = 0;
-  for (Song s : song_list) {
+  for (const Song& s : song_list) {
     if (s.url().scheme() == "file") {
       count++;
     }
   }
 
-  for (Song s : song_list) {
+  for (const Song& s : song_list) {
     // Only local files!
     if (s.url().scheme() == "file") {
       DownloadItem item(s, song_list.indexOf(s) + 1, count);
@@ -362,7 +362,7 @@ void SongSender::SendUrls(const pb::remote::RequestDownloadSongs& request) {
   }
 
   // Then send them to Clementine Remote
-  for (Song s : song_list) {
+  for (const Song& s : song_list) {
     DownloadItem item(s, song_list.indexOf(s) + 1, song_list.count());
     download_queue_.append(item);
   }

@@ -119,7 +119,7 @@ QStringList ExtractImageTitles(const QVariantMap& json) {
       ret.append(ExtractImageTitles(it.value().toMap()));
     } else if (it.key() == "images" && it.value().type() == QVariant::List) {
       QVariantList images = it.value().toList();
-      for (QVariant i : images) {
+      for (const QVariant& i : images) {
         QVariantMap image = i.toMap();
         QString image_title = image["title"].toString();
         if (!image_title.isEmpty() &&

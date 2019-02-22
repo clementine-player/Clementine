@@ -1667,7 +1667,7 @@ void MainWindow::AddToPlaylist(QAction* action) {
   }
 
   SongList songs;
-  for (PlaylistItemPtr item : items) {
+  for (const PlaylistItemPtr& item : items) {
     songs << item->Metadata();
   }
 
@@ -1953,7 +1953,7 @@ void MainWindow::EditTracks() {
 }
 
 void MainWindow::EditTagDialogAccepted() {
-  for (PlaylistItemPtr item : edit_tag_dialog_->playlist_items()) {
+  for (const PlaylistItemPtr& item : edit_tag_dialog_->playlist_items()) {
     item->Reload();
   }
 
@@ -2497,7 +2497,7 @@ void MainWindow::PlaylistDelete() {
         selected_songs.length()) {
       app_->player()->Stop();
     } else {
-      for (Song x : selected_songs) {
+      for (const Song& x : selected_songs) {
         if (x == app_->player()->GetCurrentItem()->Metadata()) {
           app_->player()->Next();
         }
@@ -2870,7 +2870,7 @@ void MainWindow::AutoCompleteTags() {
 }
 
 void MainWindow::AutoCompleteTagsAccepted() {
-  for (PlaylistItemPtr item : autocomplete_tag_items_) {
+  for (const PlaylistItemPtr& item : autocomplete_tag_items_) {
     item->Reload();
   }
 

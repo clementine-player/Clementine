@@ -67,7 +67,7 @@ class PlaylistListFilterProxyModel : public QSortFilterProxyModel {
 
   void refreshExpanded(QTreeView *tree) {
     tree->collapseAll();
-    for(QModelIndex sourceIndex : expandList ) {
+    for (const QModelIndex& sourceIndex : expandList) {
       QModelIndex mappedIndex = mapFromSource( sourceIndex );
       tree->setExpanded( mappedIndex, true );
     }
@@ -284,7 +284,7 @@ void PlaylistListContainer::AddPlaylist(int id, const QString& name,
   QStandardItem* playlist_item = model_->NewPlaylist(name, id);
   QStandardItem* parent_folder = model_->FolderByPath(*ui_path);
   parent_folder->appendRow(playlist_item);
-  for (const Song s : app_->playlist_backend()->GetPlaylistSongs(id)) {
+  for (const Song& s : app_->playlist_backend()->GetPlaylistSongs(id)) {
     QStandardItem* track_item = model_->NewTrack(s);
     track_item->setDragEnabled(false);
     playlist_item->appendRow(track_item);

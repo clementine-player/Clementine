@@ -319,7 +319,7 @@ void PlaylistBackend::SavePlaylist(int playlist, const PlaylistItemList& items,
   if (db_->CheckErrors(clear)) return;
 
   // Save the new ones
-  for (PlaylistItemPtr item : items) {
+  for (const PlaylistItemPtr& item : items) {
     insert.bindValue(":playlist", playlist);
     item->BindToQuery(&insert);
 

@@ -242,7 +242,7 @@ void PodcastDownloader::EpisodesAdded(const PodcastEpisodeList& episodes) {
 PodcastEpisodeList PodcastDownloader::EpisodesDownloading(const PodcastEpisodeList& episodes) {
   PodcastEpisodeList ret;
   for (Task* tas : list_tasks_) {
-    for (PodcastEpisode episode : episodes) {
+    for (const PodcastEpisode& episode : episodes) {
       if (tas->episode().database_id() == episode.database_id()) {
         ret << episode;
       }
@@ -254,7 +254,7 @@ PodcastEpisodeList PodcastDownloader::EpisodesDownloading(const PodcastEpisodeLi
 void PodcastDownloader::cancelDownload(const PodcastEpisodeList& episodes) {
   QList<Task*> ta;
   for (Task* tas : list_tasks_) {
-    for (PodcastEpisode episode : episodes) {
+    for (const PodcastEpisode& episode : episodes) {
       if (tas->episode().database_id() == episode.database_id()) {
         ta << tas;
       }

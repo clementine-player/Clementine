@@ -1388,7 +1388,7 @@ void LibraryModel::CreateSmartPlaylists() {
     s.beginWriteArray(backend_->songs_table(),
                       playlist_index + unwritten_defaults);
     for (; version < default_smart_playlists_.count(); ++version) {
-      for (smart_playlists::GeneratorPtr gen :
+      for (const smart_playlists::GeneratorPtr& gen :
            default_smart_playlists_[version]) {
         SaveGenerator(&s, playlist_index++, gen);
       }

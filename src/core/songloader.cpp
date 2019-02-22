@@ -246,7 +246,7 @@ void SongLoader::LoadLocalAsync(const QString& filename) {
 
     SongList song_list = cue_parser_->Load(&cue, matching_cue,
                                            QDir(filename.section('/', 0, -2)));
-    for (Song song : song_list) {
+    for (const Song& song : song_list) {
       if (song.is_valid()) songs_ << song;
     }
     return;

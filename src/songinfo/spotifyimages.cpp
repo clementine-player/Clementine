@@ -42,7 +42,7 @@ void SpotifyImages::FetchInfo(int id, const Song& metadata) {
 
     QVariantList results = result.toList();
     QList<QPair<QUrl, QSize>> image_candidates;
-    for (QVariant v : results) {
+    for (const QVariant& v : results) {
       QVariantMap image = v.toMap();
       QUrl url = image["url"].toUrl();
       int height = image["height"].toInt();
