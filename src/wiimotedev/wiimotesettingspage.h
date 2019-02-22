@@ -62,7 +62,7 @@ signals:
   QMap<quint64, QString> text_buttons_;
   QMap<quint32, QString> text_actions_;
 
-  QTreeWidgetItem* selected_item_;
+  QTreeWidgetItem* selected_item_ = nullptr;
 };
 
 #endif  // WIIMOTESETTINGSPAGE_H

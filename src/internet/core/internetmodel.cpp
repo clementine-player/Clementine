@@ -133,7 +133,7 @@ void InternetModel::AddService(InternetService* service) {
   qLog(Debug) << "Adding internet service:" << service->name();
   sServices->insert(service->name(), service);
 
-  ServiceItem service_item;
+  ServiceItem service_item{};
   service_item.item = root;
   service_item.shown = true;
 

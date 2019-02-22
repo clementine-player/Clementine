@@ -48,9 +48,9 @@ class BarAnalyzer : public Analyzer::Base {
   void resizeEvent(QResizeEvent* e);
   void colorChanged();
 
-  uint band_count_;
-  int max_down_;
-  int max_up_;
+  uint band_count_{};
+  int max_down_{};
+  int max_up_{};
   static const uint kRoofHoldTime = 48;
   static const int kRoofVelocityReductionFactor = 32;
   static const uint kNumRoofs = 16;
@@ -64,7 +64,7 @@ class BarAnalyzer : public Analyzer::Base {
 
   // Scope m_bands; //copy of the Scope to prevent creating/destroying a Scope
   // every iteration
-  uint lvlMapper_[256];
+  uint lvlMapper_[256]{};
   std::vector<aroofMemVec> roofMem_;
   std::vector<uint> barVector_;           // positions of bars
   std::vector<int> roofVector_;           // positions of roofs

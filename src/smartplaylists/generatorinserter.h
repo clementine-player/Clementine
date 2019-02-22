@@ -55,11 +55,11 @@ class GeneratorInserter : public QObject {
   LibraryBackend* library_;
   int task_id_;
 
-  Playlist* destination_;
-  int row_;
-  bool play_now_;
-  bool enqueue_;
-  bool enqueue_next_;
+  Playlist* destination_ = nullptr;
+  int row_{};
+  bool play_now_{};
+  bool enqueue_{};
+  bool enqueue_next_{};
   bool is_dynamic_;
 };
 

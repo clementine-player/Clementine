@@ -87,15 +87,15 @@ class OutgoingDataCreator : public QObject {
 
  private:
   Application* app_;
-  QList<RemoteClient*>* clients_;
+  QList<RemoteClient*>* clients_ = nullptr;
   Song current_song_;
   QString current_uri_;
   QImage current_image_;
   Engine::State last_state_;
   QTimer* keep_alive_timer_;
-  QTimer* track_position_timer_;
+  QTimer* track_position_timer_ = nullptr;
   int keep_alive_timeout_;
-  int last_track_position_;
+  int last_track_position_{};
   bool aww_;
 
   std::unique_ptr<UltimateLyricsReader> ultimate_reader_;

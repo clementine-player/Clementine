@@ -35,7 +35,7 @@ class DBusScreensaver : public Screensaver {
   QString path_;
   QString interface_;
 
-  quint32 cookie_;
+  quint32 cookie_{};
 };
 
 #endif

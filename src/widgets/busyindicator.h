@@ -42,8 +42,8 @@ class BusyIndicator : public QWidget {
   void Init(const QString& text);
 
  private:
-  QMovie* movie_;
-  QLabel* label_;
+  QMovie* movie_ = nullptr;
+  QLabel* label_ = nullptr;
 };
 
 #endif  // BUSYINDICATOR_H

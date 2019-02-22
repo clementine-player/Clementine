@@ -129,25 +129,25 @@ signals:
 
   QMenu* context_menu_;
   QModelIndex context_menu_index_;
-  QAction* load_;
-  QAction* add_to_playlist_;
-  QAction* add_to_playlist_enqueue_;
-  QAction* add_to_playlist_enqueue_next_;
-  QAction* open_in_new_playlist_;
-  QAction* organise_;
-  QAction* copy_to_device_;
-  QAction* delete_;
-  QAction* edit_track_;
-  QAction* edit_tracks_;
-  QAction* show_in_browser_;
-  QAction* show_in_various_;
-  QAction* no_show_in_various_;
+  QAction* load_ = nullptr;
+  QAction* add_to_playlist_ = nullptr;
+  QAction* add_to_playlist_enqueue_ = nullptr;
+  QAction* add_to_playlist_enqueue_next_ = nullptr;
+  QAction* open_in_new_playlist_ = nullptr;
+  QAction* organise_ = nullptr;
+  QAction* copy_to_device_ = nullptr;
+  QAction* delete_ = nullptr;
+  QAction* edit_track_ = nullptr;
+  QAction* edit_tracks_ = nullptr;
+  QAction* show_in_browser_ = nullptr;
+  QAction* show_in_various_ = nullptr;
+  QAction* no_show_in_various_ = nullptr;
 
-  QAction* search_for_this_;
+  QAction* search_for_this_ = nullptr;
 
-  QAction* new_smart_playlist_;
-  QAction* edit_smart_playlist_;
-  QAction* delete_smart_playlist_;
+  QAction* new_smart_playlist_ = nullptr;
+  QAction* edit_smart_playlist_ = nullptr;
+  QAction* delete_smart_playlist_ = nullptr;
 
   std::unique_ptr<OrganiseDialog> organise_dialog_;
   std::unique_ptr<EditTagDialog> edit_tag_dialog_;

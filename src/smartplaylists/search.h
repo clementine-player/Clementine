@@ -45,11 +45,11 @@ class Search {
   TermList terms_;
   SortType sort_type_;
   SearchTerm::Field sort_field_;
-  int limit_;
+  int limit_{};
 
   // Not persisted, used to alter the behaviour of the query
   QList<int> id_not_in_;
-  int first_item_;
+  int first_item_{};
 
   void Reset();
   QString ToSql(const QString& songs_table) const;

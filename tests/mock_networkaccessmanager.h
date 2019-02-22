@@ -52,7 +52,7 @@ class MockNetworkReply : public QNetworkReply {
   virtual qint64 writeData(const char* data, qint64);
 
   QByteArray data_;
-  qint64 pos_;
+  qint64 pos_{};
 };
 
 

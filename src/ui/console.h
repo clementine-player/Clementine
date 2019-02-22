@@ -16,7 +16,7 @@ class Console : public QDialog {
   void RunQuery();
 
  private:
-  Ui::Console ui_;
+  Ui::Console ui_{};
   Application* app_;
 };
 

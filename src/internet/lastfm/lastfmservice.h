@@ -116,9 +116,9 @@ signals:
   QUrl last_url_;
 
   bool scrobbling_enabled_;
-  bool buttons_visible_;
-  bool scrobble_button_visible_;
-  bool prefer_albumartist_;
+  bool buttons_visible_ = false;
+  bool scrobble_button_visible_ = false;
+  bool prefer_albumartist_ = false;
 
   QHash<lastfm::Track, QString> art_urls_;
 

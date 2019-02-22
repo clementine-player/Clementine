@@ -154,9 +154,9 @@ signals:
 
   AlbumCoverChoiceController* album_cover_choice_controller_;
 
-  QAction* filter_all_;
-  QAction* filter_with_covers_;
-  QAction* filter_without_covers_;
+  QAction* filter_all_ = nullptr;
+  QAction* filter_with_covers_ = nullptr;
+  QAction* filter_without_covers_ = nullptr;
 
   AlbumCoverLoaderOptions cover_loader_options_;
   QMap<quint64, QListWidgetItem*> cover_loading_tasks_;

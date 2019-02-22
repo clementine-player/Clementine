@@ -60,7 +60,7 @@ class DeviceDatabaseBackend : public QObject {
                         Song::FileType format);
 
  private:
-  Database* db_;
+  Database* db_ = nullptr;
 };
 
 #endif  // DEVICEDATABASEBACKEND_H

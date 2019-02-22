@@ -47,7 +47,7 @@ signals:
   void UpdateText();
 
  private:
-  TaskManager* task_manager_;
+  TaskManager* task_manager_{};
 
   BusyIndicator* spinner_;
   QString text_;

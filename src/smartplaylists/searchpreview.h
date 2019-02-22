@@ -56,7 +56,7 @@ class SearchPreview : public QWidget {
   Ui_SmartPlaylistSearchPreview* ui_;
   QList<SearchTerm::Field> fields_;
 
-  LibraryBackend* backend_;
+  LibraryBackend* backend_ = nullptr;
   Playlist* model_;
 
   Search pending_search_;

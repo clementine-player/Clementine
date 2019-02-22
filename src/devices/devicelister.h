@@ -84,7 +84,7 @@ signals:
 
  protected:
   QThread* thread_;
-  int next_mount_request_id_;
+  int next_mount_request_id_{};
 
  private slots:
   void ThreadStarted();

@@ -138,7 +138,7 @@ class SettingsDialog : public QDialog {
  private:
   Application* app_;
   LibraryDirectoryModel* model_;
-  GlobalShortcuts* manager_;
+  GlobalShortcuts* manager_ = nullptr;
   const GstEngine* gst_engine_;
   SongInfoView* song_info_view_;
   BackgroundStreams* streams_;

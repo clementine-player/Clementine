@@ -76,7 +76,7 @@ void InternetViewContainer::ServiceChanged(const QModelIndex& index) {
     ui_->header_container->layout()->addWidget(header);
     header->show();
 
-    HeaderData d;
+    HeaderData d{};
     d.visible_ = false;
     d.animation_ = new QTimeLine(kAnimationDuration, this);
     d.animation_->setFrameRange(0, header->sizeHint().height());

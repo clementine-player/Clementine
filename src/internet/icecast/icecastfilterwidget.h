@@ -56,7 +56,7 @@ class IcecastFilterWidget : public QWidget {
 
  private:
   Ui_IcecastFilterWidget* ui_;
-  IcecastModel* model_;
+  IcecastModel* model_ = nullptr;
   QMenu* menu_;
 
   QSignalMapper* sort_mode_mapper_;

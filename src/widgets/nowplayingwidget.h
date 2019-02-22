@@ -134,7 +134,7 @@ signals:
   bool visible_;
   int small_ideal_height_;
   AlbumCoverLoaderOptions cover_loader_options_;
-  int total_height_;
+  int total_height_{};
   bool fit_width_;
   QTimeLine* show_hide_animation_;
   QTimeLine* fade_animation_;

@@ -56,7 +56,7 @@ class GlobalShortcutGrabber : public QDialog {
 
   QList<int> modifier_keys_;
 
-  MacMonitorWrapper* wrapper_;
+  MacMonitorWrapper* wrapper_{};
 };
 
 #endif  // GLOBALSHORTCUTGRABBER_H

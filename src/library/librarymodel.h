@@ -280,7 +280,7 @@ signals:
   QMap<QString, LibraryItem*> divider_nodes_;
 
   // Only applies if smart playlists are set to on
-  LibraryItem* smart_playlist_node_;
+  LibraryItem* smart_playlist_node_ = nullptr;
 
   QIcon artist_icon_;
   QIcon album_icon_;

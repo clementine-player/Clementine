@@ -40,7 +40,7 @@ int main(int argc, char** argv) {
   }
 
   // Seed random number generator
-  timeval time;
+  timeval time{};
   gettimeofday(&time, nullptr);
   qsrand((time.tv_sec * 1000) + (time.tv_usec / 1000));
 

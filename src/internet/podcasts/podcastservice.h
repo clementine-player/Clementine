@@ -147,15 +147,15 @@ class PodcastService : public InternetService {
   QSortFilterProxyModel* proxy_;
 
   QMenu* context_menu_;
-  QAction* update_selected_action_;
-  QAction* remove_selected_action_;
-  QAction* download_selected_action_;
-  QAction* info_selected_action_;
-  QAction* delete_downloaded_action_;
-  QAction* set_new_action_;
-  QAction* set_listened_action_;
-  QAction* copy_to_device_;
-  QAction* cancel_download_;
+  QAction* update_selected_action_ = nullptr;
+  QAction* remove_selected_action_ = nullptr;
+  QAction* download_selected_action_ = nullptr;
+  QAction* info_selected_action_ = nullptr;
+  QAction* delete_downloaded_action_ = nullptr;
+  QAction* set_new_action_ = nullptr;
+  QAction* set_listened_action_ = nullptr;
+  QAction* copy_to_device_ = nullptr;
+  QAction* cancel_download_ = nullptr;
   QStandardItem* root_;
   std::unique_ptr<OrganiseDialog> organise_dialog_;
 

@@ -47,7 +47,7 @@ signals:
 
   QTcpSocket* client_;
   bool reading_protobuf_;
-  quint32 expected_length_;
+  quint32 expected_length_{};
   QBuffer buffer_;
   SongSender* song_sender_;
 };

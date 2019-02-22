@@ -39,7 +39,7 @@ class Mpris : public QObject {
   void RaiseMainWindow();
 
  private:
-  Mpris1* mpris1_;
+  Mpris1* mpris1_ = nullptr;
   Mpris2* mpris2_;
 };
 

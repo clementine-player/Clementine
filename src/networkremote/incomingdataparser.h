@@ -58,7 +58,7 @@ class IncomingDataParser : public QObject {
 
  private:
   Application* app_;
-  bool close_connection_;
+  bool close_connection_{};
   MainWindow::PlaylistAddBehaviour doubleclick_playlist_addmode_;
 
   void GetPlaylistSongs(const pb::remote::Message& msg);

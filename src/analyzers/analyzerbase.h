@@ -114,7 +114,7 @@ class Base : public QWidget {
   bool is_playing_;
 
   QVector<uint> barkband_table_;
-  double prev_colors_[10][3];
+  double prev_colors_[10][3]{};
   int prev_color_index_;
   int bands_;
   bool psychedelic_enabled_;

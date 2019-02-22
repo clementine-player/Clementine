@@ -76,7 +76,7 @@ class BlockAnalyzer : public Analyzer::Base {
   QVector<uint> fade_pos_;
   QVector<int> fade_intensity_;
 
-  float step_;  // rows to fall per frame
+  float step_{};  // rows to fall per frame
 };
 
 #endif  // ANALYZERS_BLOCKANALYZER_H_

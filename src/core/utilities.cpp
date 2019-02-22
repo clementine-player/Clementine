@@ -182,7 +182,7 @@ QString PrettySize(quint64 bytes) {
 
 quint64 FileSystemCapacity(const QString& path) {
 #if defined(Q_OS_UNIX)
-  struct statvfs fs_info;
+  struct statvfs fs_info{};
   if (statvfs(path.toLocal8Bit().constData(), &fs_info) == 0)
     return quint64(fs_info.f_blocks) * quint64(fs_info.f_bsize);
 #elif defined(Q_OS_WIN32)
@@ -198,7 +198,7 @@ quint64 FileSystemCapacity(const QString& path) {
 
 quint64 FileSystemFreeSpace(const QString& path) {
 #if defined(Q_OS_UNIX)
-  struct statvfs fs_info;
+  struct statvfs fs_info{};
   if (statvfs(path.toLocal8Bit().constData(), &fs_info) == 0)
     return quint64(fs_info.f_bavail) * quint64(fs_info.f_bsize);
 #elif defined(Q_OS_WIN32)

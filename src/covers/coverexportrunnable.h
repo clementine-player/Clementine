@@ -52,7 +52,7 @@ class CoverExportRunnable : public QObject, public QRunnable {
 
   AlbumCoverExport::DialogResult dialog_result_;
   Song song_;
-  AlbumCoverExporter* album_cover_exporter_;
+  AlbumCoverExporter* album_cover_exporter_ = nullptr;
 };
 
 #endif  // COVERS_COVEREXPORTRUNNABLE_H_

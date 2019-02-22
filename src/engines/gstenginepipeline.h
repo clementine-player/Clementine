@@ -272,7 +272,7 @@ signals:
 
   std::unique_ptr<QTimeLine> fader_;
   QBasicTimer fader_fudge_timer_;
-  bool use_fudge_timer_;
+  bool use_fudge_timer_{};
 
   GstElement* pipeline_;
 
@@ -287,18 +287,18 @@ signals:
   GstElement* rgvolume_;
   GstElement* rglimiter_;
   GstElement* audioconvert2_;
-  GstElement* equalizer_preamp_;
+  GstElement* equalizer_preamp_ = nullptr;
   GstElement* equalizer_;
   GstElement* stereo_panorama_;
   GstElement* volume_;
   GstElement* audioscale_;
   GstElement* audiosink_;
 
-  uint bus_cb_id_;
+  uint bus_cb_id_{};
 
   QThreadPool set_state_threadpool_;
 
-  GstSegment last_decodebin_segment_;
+  GstSegment last_decodebin_segment_{};
 };
 
 #endif  // GSTENGINEPIPELINE_H

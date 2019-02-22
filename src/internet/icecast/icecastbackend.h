@@ -64,7 +64,7 @@ class IcecastBackend : public QObject {
   void DatabaseReset();
 
  private:
-  Database* db_;
+  Database* db_ = nullptr;
 };
 
 #endif  // INTERNET_ICECAST_ICECASTBACKEND_H_

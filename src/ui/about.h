@@ -44,7 +44,7 @@ class About : public QDialog {
   QString MakeHtml(const Person& person) const;
 
  private:
-  Ui::About ui_;
+  Ui::About ui_{};
 
   QList<Person> authors_;
   QList<Person> thanks_to_;

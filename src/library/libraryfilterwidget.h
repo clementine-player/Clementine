@@ -103,7 +103,7 @@ signals:
 
   std::unique_ptr<GroupByDialog> group_by_dialog_;
   std::unique_ptr<SavedGroupingManager> groupings_manager_;
-  SettingsDialog* settings_dialog_;
+  SettingsDialog* settings_dialog_ = nullptr;
 
   QMenu* filter_age_menu_;
   QMenu* group_by_menu_;

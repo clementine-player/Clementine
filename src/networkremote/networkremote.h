@@ -39,9 +39,9 @@ class NetworkRemote : public QObject {
   std::unique_ptr<IncomingDataParser> incoming_data_parser_;
   std::unique_ptr<OutgoingDataCreator> outgoing_data_creator_;
 
-  quint16 port_;
-  bool use_remote_;
-  bool only_non_public_ip_;
+  quint16 port_{};
+  bool use_remote_ = false;
+  bool only_non_public_ip_ = false;
   bool signals_connected_;
   Application* app_;
 

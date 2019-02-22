@@ -107,8 +107,8 @@ class JamendoService : public InternetService {
 
   QMenu* context_menu_;
 
-  QAction* album_info_;
-  QAction* download_album_;
+  QAction* album_info_ = nullptr;
+  QAction* download_album_ = nullptr;
 
   LibraryBackend* library_backend_;
   LibraryFilterWidget* library_filter_;

@@ -53,7 +53,7 @@ signals:
  private:
   PlaylistView* view_;
 
-  int menu_section_;
+  int menu_section_{};
   QMenu* menu_;
   QAction* hide_action_;
   QAction* rating_lock_;

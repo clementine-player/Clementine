@@ -183,8 +183,8 @@ class SpotifyService : public InternetService {
 
   QTimer* search_delay_;
 
-  int inbox_sync_id_;
-  int starred_sync_id_;
+  int inbox_sync_id_{};
+  int starred_sync_id_{};
   QMap<int, int> playlist_sync_ids_;
 
   LoginState login_state_;

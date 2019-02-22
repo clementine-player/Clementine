@@ -138,7 +138,7 @@ class OSD : public QObject {
 
 #ifdef HAVE_DBUS
   std::unique_ptr<OrgFreedesktopNotificationsInterface> interface_;
-  uint notification_id_;
+  uint notification_id_{};
   QDateTime last_notification_time_;
 #endif
 };

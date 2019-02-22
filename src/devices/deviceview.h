@@ -94,16 +94,16 @@ class DeviceView : public AutoExpandingTreeView {
   std::unique_ptr<OrganiseDialog> organise_dialog_;
 
   QMenu* device_menu_;
-  QAction* eject_action_;
-  QAction* forget_action_;
-  QAction* properties_action_;
+  QAction* eject_action_ = nullptr;
+  QAction* forget_action_ = nullptr;
+  QAction* properties_action_ = nullptr;
 
   QMenu* library_menu_;
-  QAction* load_action_;
-  QAction* add_to_playlist_action_;
-  QAction* open_in_new_playlist_;
-  QAction* organise_action_;
-  QAction* delete_action_;
+  QAction* load_action_ = nullptr;
+  QAction* add_to_playlist_action_ = nullptr;
+  QAction* open_in_new_playlist_ = nullptr;
+  QAction* organise_action_ = nullptr;
+  QAction* delete_action_ = nullptr;
 
   QModelIndex menu_index_;
 };

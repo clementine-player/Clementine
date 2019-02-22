@@ -197,7 +197,7 @@ class GstEngine : public Engine::Base, public BufferConsumer {
   GstBuffer* latest_buffer_;
 
   bool equalizer_enabled_;
-  int equalizer_preamp_;
+  int equalizer_preamp_{};
   QList<int> equalizer_gains_;
   float stereo_balance_;
 
@@ -213,13 +213,13 @@ class GstEngine : public Engine::Base, public BufferConsumer {
   bool mono_playback_;
   int sample_rate_;
 
-  mutable bool can_decode_success_;
-  mutable bool can_decode_last_;
+  mutable bool can_decode_success_ = false;
+  mutable bool can_decode_last_ = false;
 
   // Hack to stop seeks happening too often
   QTimer* seek_timer_;
-  bool waiting_to_seek_;
-  quint64 seek_pos_;
+  bool waiting_to_seek_ = false;
+  quint64 seek_pos_{};
 
   int timer_id_;
   int next_element_id_;
@@ -231,7 +231,7 @@ class GstEngine : public Engine::Base, public BufferConsumer {
 
   int scope_chunk_;
   bool have_new_buffer_;
-  int scope_chunks_;
+  int scope_chunks_{};
 
   QList<DeviceFinder*> device_finders_;
 

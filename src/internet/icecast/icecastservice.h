@@ -71,7 +71,7 @@ class IcecastService : public InternetService {
   IcecastBackend::StationList ParseDirectory(QIODevice* device) const;
   IcecastBackend::Station ReadStation(QXmlStreamReader* reader) const;
 
-  QStandardItem* root_;
+  QStandardItem* root_ = nullptr;
   NetworkAccessManager* network_;
   QMenu* context_menu_;
 

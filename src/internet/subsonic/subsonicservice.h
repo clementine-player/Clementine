@@ -154,8 +154,8 @@ signals:
   QString configured_server_;
   QString username_;
   QString password_;
-  bool usesslv3_;
-  bool verifycert_;
+  bool usesslv3_ = false;
+  bool verifycert_ = false;
 
   LoginState login_state_;
   QString working_server_;  // The actual server, possibly post-redirect

@@ -111,7 +111,7 @@ class MagnatuneService : public InternetService {
   QMenu* context_menu_;
   QStandardItem* root_;
 
-  QAction* download_;
+  QAction* download_ = nullptr;
 
   LibraryBackend* library_backend_;
   LibraryModel* library_model_;

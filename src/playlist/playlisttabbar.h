@@ -92,13 +92,13 @@ signals:
 
   QMenu* menu_;
   int menu_index_;
-  QAction* new_;
+  QAction* new_ = nullptr;
   QAction* rename_;
   QAction* close_;
   QAction* save_;
 
   QBasicTimer drag_hover_timer_;
-  int drag_hover_tab_;
+  int drag_hover_tab_{};
 
   bool suppress_current_changed_;
   bool initialized_;

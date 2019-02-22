@@ -261,7 +261,7 @@ void SettingsDialog::AddPage(Page id, SettingsPage* page,
   ui_->stacked_widget->addWidget(area);
 
   // Remember where the page is
-  PageData data;
+  PageData data{};
   data.item_ = item;
   data.scroll_area_ = area;
   data.page_ = page;

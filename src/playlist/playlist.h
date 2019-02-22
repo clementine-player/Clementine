@@ -450,7 +450,7 @@ signals:
   LastFMStatus lastfm_status_;
   bool have_incremented_playcount_;
 
-  qint64 play_count_point_;
+  qint64 play_count_point_{};
 
   PlaylistSequence* playlist_sequence_;
 

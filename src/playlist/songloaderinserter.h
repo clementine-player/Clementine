@@ -65,7 +65,7 @@ class SongLoaderInserter : public QObject {
   int row_;
   bool play_now_;
   bool enqueue_;
-  bool enqueue_next_;
+  bool enqueue_next_{};
 
   SongList songs_;
 

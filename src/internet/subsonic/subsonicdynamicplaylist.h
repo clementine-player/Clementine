@@ -87,7 +87,7 @@ class SubsonicDynamicPlaylist : public smart_playlists::Generator {
  private:
   QueryStat stat_;
   int offset_;
-  SubsonicService* service_;
+  SubsonicService* service_ = nullptr;
 };
 
 QDataStream& operator<<(QDataStream& s, const SubsonicDynamicPlaylist& p);

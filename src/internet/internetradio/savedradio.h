@@ -81,8 +81,8 @@ class SavedRadio : public InternetService {
   QMenu* context_menu_;
   QStandardItem* root_;
 
-  QAction* remove_action_;
-  QAction* edit_action_;
+  QAction* remove_action_ = nullptr;
+  QAction* edit_action_ = nullptr;
 
   StreamList streams_;
 

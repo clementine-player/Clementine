@@ -46,11 +46,11 @@ class QueryWizardPlugin::SearchPage : public QWizardPage {
     return true;
   }
 
-  QVBoxLayout* layout_;
+  QVBoxLayout* layout_ = nullptr;
   QList<SearchTermWidget*> terms_;
-  SearchTermWidget* new_term_;
+  SearchTermWidget* new_term_ = nullptr;
 
-  SearchPreview* preview_;
+  SearchPreview* preview_ = nullptr;
 
   std::unique_ptr<Ui_SmartPlaylistQuerySearchPage> ui_;
 };

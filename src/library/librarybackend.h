@@ -260,7 +260,7 @@ signals:
   SongList GetSongsById(const QStringList& ids, QSqlDatabase& db);
 
  private:
-  Database* db_;
+  Database* db_ = nullptr;
   QString songs_table_;
   QString dirs_table_;
   QString subdirs_table_;

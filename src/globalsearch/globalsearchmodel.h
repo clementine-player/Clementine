@@ -79,7 +79,7 @@ class GlobalSearchModel : public QStandardItemModel {
   LibraryModel::Grouping group_by_;
 
   QMap<SearchProvider*, int> provider_sort_indices_;
-  int next_provider_sort_index_;
+  int next_provider_sort_index_{};
   QMap<ContainerKey, QStandardItem*> containers_;
 
   QStringList provider_order_;
