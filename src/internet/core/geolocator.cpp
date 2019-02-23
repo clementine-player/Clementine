@@ -97,9 +97,10 @@ void Geolocator::RequestFinished(QNetworkReply* reply) {
     return;
   }
 
+  QByteArray reply_data = reply->readAll();
   QJson::Parser parser;
   bool ok = false;
-  QVariant result = parser.parse(reply, &ok);
+  QVariant result = parser.parse(reply_data, &ok);
   if (!ok) {
     emit Finished(LatLng());
     return;
