@@ -101,6 +101,7 @@ class DeviceManager : public SimpleTreeModel<DeviceInfo> {
  signals:
   void DeviceConnected(QModelIndex idx);
   void DeviceDisconnected(QModelIndex idx);
+  void DeviceCreatedFromDb(DeviceInfo* info);
 
  private slots:
   void PhysicalDeviceAdded(const QString& id);
@@ -111,6 +112,7 @@ class DeviceManager : public SimpleTreeModel<DeviceInfo> {
   void DeviceSongCountUpdated(int count);
   void LoadAllDevices();
   void DeviceConnectFinished(const QString& id, bool success);
+  void AddDeviceFromDb(DeviceInfo* info);
 
  protected:
   void LazyPopulate(DeviceInfo* item) { LazyPopulate(item, true); }

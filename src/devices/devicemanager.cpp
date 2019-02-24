@@ -83,6 +83,8 @@ DeviceManager::DeviceManager(Application* app, QObject* parent)
   backend_->moveToThread(app_->database()->thread());
   backend_->Init(app_->database());
 
+  connect(this, SIGNAL(DeviceCreatedFromDb(DeviceInfo*)),
+          SLOT(AddDeviceFromDb(DeviceInfo*)));
   // This reads from the database and contends on the database mutex, which can
   // be very slow on startup.
   ConcurrentRun::Run<void>(&thread_pool_,
@@ -140,11 +142,25 @@ void DeviceManager::LoadAllDevices() {
   for (const DeviceDatabaseBackend::Device& device : devices) {
     DeviceInfo* info = new DeviceInfo(DeviceInfo::Type_Device, root_);
     info->InitFromDb(device);
-
-    beginInsertRows(ItemToIndex(root_), devices_.count(), devices_.count());
-    devices_ << info;
-    endInsertRows();
+    // Use of QPixMap and device insertion should only be done on the main
+    // thread. Send a signal to finish the device addition.
+    emit DeviceCreatedFromDb(info);
   }
+}
+
+void DeviceManager::AddDeviceFromDb(DeviceInfo* info) {
+  // At this point, icon_name_ contains the value from the database where the
+  // value is allowed to be a comma delimited list.
+  QStringList icon_names = info->icon_name_.split(',');
+  QVariantList icons;
+  for (const QString& icon_name : icon_names) {
+    icons << icon_name;
+  }
+  info->LoadIcon(icons, info->friendly_name_);
+
+  beginInsertRows(ItemToIndex(root_), devices_.count(), devices_.count());
+  devices_ << info;
+  endInsertRows();
 }
 
 QVariant DeviceManager::data(const QModelIndex& idx, int role) const {
