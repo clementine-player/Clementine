@@ -79,6 +79,7 @@ class DeviceManager : public SimpleTreeModel<DeviceInfo> {
 
   DeviceInfo* FindDeviceById(const QString& id) const;
   DeviceInfo* FindDeviceByUrl(const QList<QUrl>& url) const;
+  DeviceInfo* FindEquivalentDevice(DeviceInfo* info) const;
 
   // Actions on devices
   std::shared_ptr<ConnectedDevice> Connect(DeviceInfo* info);

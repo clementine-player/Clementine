@@ -158,9 +158,22 @@ void DeviceManager::AddDeviceFromDb(DeviceInfo* info) {
   }
   info->LoadIcon(icons, info->friendly_name_);
 
-  beginInsertRows(ItemToIndex(root_), devices_.count(), devices_.count());
-  devices_ << info;
-  endInsertRows();
+  DeviceInfo* existing = FindEquivalentDevice(info);
+  if (existing) {
+    qLog(Info) << "Found existing device: " << info->friendly_name_;
+    // Update user configuration from the database.
+    existing->icon_name_ = info->icon_name_;
+    existing->icon_ = info->icon_;
+    QModelIndex idx = ItemToIndex(existing);
+    if (idx.isValid()) emit dataChanged(idx, idx);
+    // Discard the info loaded from the database.
+    delete info;
+  } else {
+    qLog(Info) << "Device added from database: " << info->friendly_name_;
+    beginInsertRows(ItemToIndex(root_), devices_.count(), devices_.count());
+    devices_ << info;
+    endInsertRows();
+  }
 }
 
 QVariant DeviceManager::data(const QModelIndex& idx, int role) const {
@@ -324,6 +337,14 @@ DeviceInfo* DeviceManager::FindDeviceByUrl(const QList<QUrl>& urls) const {
         if (urls.contains(url)) return devices_[i];
       }
     }
+  }
+  return nullptr;
+}
+
+DeviceInfo* DeviceManager::FindEquivalentDevice(DeviceInfo* info) const {
+  for (const DeviceInfo::Backend& backend : info->backends_) {
+    DeviceInfo* match = FindDeviceById(backend.unique_id_);
+    if (match) return match;
   }
   return nullptr;
 }
