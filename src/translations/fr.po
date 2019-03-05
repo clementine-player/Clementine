@@ -16,6 +16,7 @@
 # Clément Jonglez <clement.jonglez@isae.fr>, 2015
 # djabal <djabal@eastblue.net>, 2013
 # djabal <djabal@eastblue.net>, 2013
+# Doryan R, 2019
 # Etienne G <etn2010@gmail.com>, 2013
 # evangeneer <mathieu@evangeneer.net>, 2012
 # Faketag Fakenick <>, 2012
@@ -52,8 +53,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2018-11-17 13:46+0000\n"
-"Last-Translator: hatstand <john.maguire@gmail.com>\n"
+"PO-Revision-Date: 2019-03-03 15:54+0000\n"
+"Last-Translator: Doryan R\n"
 "Language-Team: French (http://www.transifex.com/davidsansome/clementine/language/fr/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -386,7 +387,7 @@ msgid ""
 "played in the last 180 minutes.</p><p><span style=\" font-"
 "weight:600;\">Available fields: </span><span style=\" font-"
 "style:italic;\">%1</span>.</p></body></html>"
-msgstr ""
+msgstr "<html><head/><body><p>Préfixez un mot avec un nom de champ pour limiter la recherche à ce champ, par ex. <span style=\" font-weight:600;\">artist:</span><span style=\" font-style:italic;\"> Bode</span> recherche dans la bibliothèque tous les artistes contenant le mot Bode. playcount:<span style=\" font-weight:600;\"><span style=\" font-style:italic;\">&gt;=2</span>recherche dans la bibliothèque les chansons lues au moins deux fois. <span style=\" font-weight:600;\">La dernière fois:</span> &lt; <span style=\" font-style:italic;\">1h30m</span> recherche dans la bibliothèque les chansons lues au cours des 180 dernières minutes.</p><p><span style=\" font-weight:600;\">Filtres disponibles :</span><span style=\" font-style:italic;\"> %1</span>.</p></body></html>"
 
 #: ../bin/src/ui_librarysettingspage.h:198
 msgid ""
@@ -439,7 +440,7 @@ msgstr "Un morceau sera inclus dans la liste de lecture s'il correspond à ces c
 
 #: ../bin/src/ui_behavioursettingspage.h:417
 msgid "A&utomatic"
-msgstr ""
+msgstr "Automatique"
 
 #: smartplaylists/searchterm.cpp:396
 msgid "A-Z"
@@ -512,7 +513,7 @@ msgstr "Action"
 
 #: wiimotedev/wiimotesettingspage.cpp:103
 msgid "Activate/Deactivate Wii Remote"
-msgstr ""
+msgstr "Activer / désactiver la télécommande Wii"
 
 #: internet/podcasts/addpodcastdialog.cpp:63
 msgid "Add Podcast"
@@ -809,11 +810,11 @@ msgstr "A côté des originaux"
 
 #: ../bin/src/ui_behavioursettingspage.h:370
 msgid "Alwa&ys hide the main window"
-msgstr ""
+msgstr "Toujours cacher la fenêtre principale"
 
 #: ../bin/src/ui_behavioursettingspage.h:369
 msgid "Always show &the main window"
-msgstr ""
+msgstr "Toujours afficher et la fenêtre principale"
 
 #: ../bin/src/ui_behavioursettingspage.h:384
 #: ../bin/src/ui_behavioursettingspage.h:404
@@ -905,7 +906,7 @@ msgstr "Initiale de l'artiste"
 
 #: ../bin/src/ui_behavioursettingspage.h:420
 msgid "As&k when saving"
-msgstr ""
+msgstr "Comme & k lors de la sauvegarde"
 
 #: ../bin/src/ui_transcodedialog.h:225
 #: ../bin/src/ui_networkremotesettingspage.h:250
@@ -1348,7 +1349,7 @@ msgstr "Liste séparée par une virgule des classes:niveau, le niveau étant ent
 
 #: ../bin/src/ui_behavioursettingspage.h:425
 msgid "Comma seperated list of prefix words to ignore when sorting"
-msgstr ""
+msgstr "Liste de mots de préfixe à ignorer lors du tri, séparés par des virgules"
 
 #: playlist/playlist.cpp:1435 smartplaylists/searchterm.cpp:384
 #: ui/organisedialog.cpp:79 ../bin/src/ui_edittagdialog.h:718
@@ -1414,7 +1415,7 @@ msgstr "Configurer..."
 msgid "Connect Wii Remotes using active/deactive action"
 msgstr "Connecter Wii Remote en utilisant l'action activer/désactiver"
 
-#: devices/devicemanager.cpp:234 devices/devicemanager.cpp:239
+#: devices/devicemanager.cpp:263 devices/devicemanager.cpp:268
 msgid "Connect device"
 msgstr "Connexion du périphérique"
 
@@ -1584,11 +1585,11 @@ msgstr "Ctrl+Up"
 
 #: ../bin/src/ui_queuemanager.h:141
 msgid "Ctrl+"
-msgstr ""
+msgstr "Ctrl+"
 
 #: ../bin/src/ui_queuemanager.h:145
 msgid "Ctrl+"
-msgstr ""
+msgstr "Ctrl+"
 
 #: ui/equalizer.cpp:110
 msgid "Custom"
@@ -1623,7 +1624,7 @@ msgstr "Une corruption de la base de données a été détectée. Veuillez lire 
 
 #: ../bin/src/ui_episodeinfowidget.h:133
 msgid "Date"
-msgstr ""
+msgstr "Date"
 
 #: playlist/playlist.cpp:1432 ../bin/src/ui_edittagdialog.h:715
 msgid "Date created"
@@ -1643,7 +1644,7 @@ msgstr "Dé&faut"
 
 #: core/commandlineoptions.cpp:165
 msgid "Decrease the volume by 4 percent"
-msgstr ""
+msgstr "Diminuer le volume de 4%"
 
 #: core/commandlineoptions.cpp:167
 msgid "Decrease the volume by <value> percent"
@@ -1707,7 +1708,7 @@ msgstr "Supprimer la liste de lecture intelligente"
 
 #: core/commandlineoptions.cpp:186
 msgid "Delete the currently playing song"
-msgstr ""
+msgstr "Supprimer la chanson en cours de lecture"
 
 #: ../bin/src/ui_organisedialog.h:245
 msgid "Delete the original files"
@@ -2121,7 +2122,7 @@ msgstr "Collection complète"
 
 #: internet/podcasts/podcastservice.cpp:532
 msgid "Episode information"
-msgstr ""
+msgstr "Informations sur l'épisode"
 
 #: ../bin/src/ui_equalizer.h:162 ../bin/src/ui_mainwindow.h:705
 msgid "Equalizer"
@@ -2638,7 +2639,7 @@ msgstr "Les informations sur le matériel sont disponibles uniquement lorsque le
 
 #: ../bin/src/ui_appearancesettingspage.h:325
 msgid "Hide playlist filter toolbar"
-msgstr ""
+msgstr "Masquer la barre d'outils du filtre de playlist"
 
 #: ../bin/src/ui_transcoderoptionsmp3.h:201
 msgid "High"
@@ -2656,7 +2657,7 @@ msgstr "Élevé (1024x1024)"
 
 #: ui/equalizer.cpp:128
 msgid "Hip Hop"
-msgstr ""
+msgstr "Hip Hop"
 
 #: internet/subsonic/subsonicsettingspage.cpp:138
 msgid "Host not found, check server URL. Example: http://localhost:4040/"
@@ -2692,7 +2693,7 @@ msgid ""
 "edit the tag value directly"
 msgstr "Si cette option est activée, cliquer sur un morceau sélectionné dans la liste de lecture vous permettra d'éditer directement la valeur du tag"
 
-#: devices/devicemanager.cpp:481 devices/devicemanager.cpp:492
+#: devices/devicemanager.cpp:518 devices/devicemanager.cpp:529
 msgid ""
 "If you continue, this device will work slowly and songs copied to it may not"
 " work."
@@ -2708,7 +2709,7 @@ msgstr "Ignorer « The » dans les noms d'artiste"
 
 #: ../bin/src/ui_behavioursettingspage.h:423
 msgid "Ignore prefix word(s)"
-msgstr ""
+msgstr "Ignorer les mots de préfixe"
 
 #: ui/albumcoverchoicecontroller.cpp:44
 msgid "Images (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm)"
@@ -2760,7 +2761,7 @@ msgstr "Configuration incomplète. Veuillez vérifier que tous les champs sont r
 
 #: core/commandlineoptions.cpp:164
 msgid "Increase the volume by 4 percent"
-msgstr ""
+msgstr "Augmenter le volume de 4 pourcent"
 
 #: core/commandlineoptions.cpp:166
 msgid "Increase the volume by <value> percent"
@@ -3456,7 +3457,7 @@ msgstr "Type de bloc normal"
 
 #: ../bin/src/ui_behavioursettingspage.h:428
 msgid "Normal duration (at least 4 minutes or half the track length)"
-msgstr ""
+msgstr "Durée normale (au moins 4 minutes ou la moitié de la piste)"
 
 #: playlist/playlistsequence.cpp:203
 msgid "Not available while using a dynamic playlist"
@@ -3787,11 +3788,11 @@ msgstr "Lire s'il n'y a rien d'autre en cours de lecture"
 
 #: library/libraryview.cpp:396 ui/mainwindow.cpp:1815
 msgid "Play next"
-msgstr ""
+msgstr "Lire le suivant"
 
 #: ui/mainwindow.cpp:1813
 msgid "Play selected tracks next"
-msgstr ""
+msgstr "Lire les pistes sélectionnées ensuite"
 
 #: core/commandlineoptions.cpp:178
 msgid "Play the <n>th track in the playlist"
@@ -3847,13 +3848,13 @@ msgstr "État du module externe :"
 
 #: ../bin/src/ui_podcastinfodialog.h:93
 msgid "Podcast Information"
-msgstr ""
+msgstr "Informations sur le podcast"
 
 #: internet/podcasts/podcastservice.cpp:437
 #: internet/podcasts/podcastservice.cpp:535
 #: internet/podcasts/podcastservice.cpp:539
 msgid "Podcast information"
-msgstr ""
+msgstr "Informations sur le podcast"
 
 #: internet/podcasts/podcastservice.cpp:133
 #: ../bin/src/ui_podcastsettingspage.h:250
@@ -3975,7 +3976,7 @@ msgstr "Psychédélique"
 
 #: wiimotedev/wiimotesettingspage.cpp:246
 msgid "Push Wii Remote button"
-msgstr ""
+msgstr "Appuyez sur le bouton de la télécommande Wii"
 
 #: ../bin/src/ui_wiimoteshortcutgrabber.h:121
 msgid "Push Wiiremote button"
@@ -4111,7 +4112,7 @@ msgstr "Mémoriser le mouvement de la Wiimote"
 
 #: ../bin/src/ui_behavioursettingspage.h:371
 msgid "Remember from &last time"
-msgstr ""
+msgstr "Souvenir de la dernière fois"
 
 #: ../bin/src/ui_playlistsaveoptionsdialog.h:99
 msgid "Remember my choice"
@@ -4268,7 +4269,7 @@ msgstr "Lancer"
 
 #: core/song.cpp:456
 msgid "SNES SPC700"
-msgstr ""
+msgstr "SNES SPC700"
 
 #: ../bin/src/ui_networkproxysettingspage.h:163
 msgid "SOCKS proxy"
@@ -4564,7 +4565,7 @@ msgstr "Paramètres"
 
 #: ../bin/src/ui_behavioursettingspage.h:429
 msgid "Short duration (at least 1 minute or half the track length)"
-msgstr ""
+msgstr "Courte durée (au moins 1 minute ou la moitié de la piste)"
 
 #: ../bin/src/ui_globalshortcutssettingspage.h:172
 msgid "Shortcut"
@@ -4930,7 +4931,7 @@ msgstr "Arrêter la lecture après ce morceau"
 
 #: ../bin/src/ui_behavioursettingspage.h:377
 msgid "Stop playback if song fails to play"
-msgstr ""
+msgstr "Arrêter la lecture si la chanson ne parvient pas à jouer"
 
 #: core/globalshortcuts.cpp:56
 msgid "Stop playing after current track"
@@ -5174,20 +5175,20 @@ msgstr "Ce périphérique doit être connecté et ouvert pour que Clementine pui
 msgid "This device supports the following file formats:"
 msgstr "Ce périphérique supporte les formats suivant :"
 
-#: devices/devicemanager.cpp:478 devices/devicemanager.cpp:489
+#: devices/devicemanager.cpp:515 devices/devicemanager.cpp:526
 msgid "This device will not work properly"
 msgstr "Ce périphérique ne fonctionne pas correctement"
 
-#: devices/devicemanager.cpp:479
+#: devices/devicemanager.cpp:516
 msgid ""
 "This is an MTP device, but you compiled Clementine without libmtp support."
 msgstr "Ceci est un périphérique MTP, mais vous avez compilé Clementine sans le support libmtp."
 
-#: devices/devicemanager.cpp:490
+#: devices/devicemanager.cpp:527
 msgid "This is an iPod, but you compiled Clementine without libgpod support."
 msgstr "Ceci est un iPod, mais vous avez compilé Clementine sans le support libgpod."
 
-#: devices/devicemanager.cpp:235
+#: devices/devicemanager.cpp:264
 msgid ""
 "This is the first time you have connected this device.  Clementine will now "
 "scan the device to find music files - this may take some time."
@@ -5201,7 +5202,7 @@ msgstr "Cette option peut être modifiée dans les préférences de « Comportem
 msgid "This stream is for paid subscribers only"
 msgstr "Ce flux n'est accessible qu'aux abonnés ayant payé"
 
-#: devices/devicemanager.cpp:506
+#: devices/devicemanager.cpp:543
 #, qt-format
 msgid "This type of device is not supported: %1"
 msgstr "Ce type de périphérique n'est pas supporté : %1"
@@ -5521,7 +5522,7 @@ msgstr "MP3 VBR"
 
 #: core/song.cpp:458
 msgid "VGM"
-msgstr ""
+msgstr "VGM"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:231
 msgid "Variable bit rate"
@@ -5534,7 +5535,7 @@ msgstr "Compilations d'artistes"
 
 #: ../bin/src/ui_subsonicsettingspage.h:136
 msgid "Verify Server certificate"
-msgstr ""
+msgstr "Vérifier le certificat du serveur"
 
 #: ui/about.cpp:35
 #, qt-format
@@ -5593,7 +5594,7 @@ msgstr "Wav"
 
 #: core/song.cpp:450
 msgid "WavPack"
-msgstr ""
+msgstr "WavPack"
 
 #: ../bin/src/ui_podcastinfowidget.h:192
 msgid "Website"
@@ -5609,7 +5610,7 @@ msgstr "Quand Clementine démarre"
 
 #: ../bin/src/ui_behavioursettingspage.h:427
 msgid "When calculating play counts, use"
-msgstr ""
+msgstr "Lorsque vous calculez le nombre de parties, utilisez"
 
 #: ../bin/src/ui_librarysettingspage.h:203
 msgid ""
@@ -5623,7 +5624,7 @@ msgstr "Emplacement des fichiers lors de la sauvegarde d'une liste de lecture"
 
 #: ../bin/src/ui_behavioursettingspage.h:422
 msgid "When sorting artists, albums and titles"
-msgstr ""
+msgstr "Lors du tri des artistes, des albums et des titres"
 
 #: ../bin/src/ui_globalsearchsettingspage.h:147
 msgid "When the list is empty..."
@@ -5913,7 +5914,7 @@ msgstr "ne contient pas"
 
 #: smartplaylists/searchterm.cpp:263
 msgid "empty"
-msgstr ""
+msgstr "Vide"
 
 #: smartplaylists/searchterm.cpp:253
 msgid "ends with"
@@ -5970,7 +5971,7 @@ msgstr "le plus récent en premier"
 
 #: smartplaylists/searchterm.cpp:265
 msgid "not empty"
-msgstr ""
+msgstr "pas vide"
 
 #: smartplaylists/searchterm.cpp:261
 msgid "not equals"
