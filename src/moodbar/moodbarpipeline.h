@@ -71,6 +71,7 @@ class MoodbarPipeline : public QObject {
   std::unique_ptr<MoodbarBuilder> builder_;
 
   bool success_;
+  bool running_;
   QByteArray data_;
 };
 
