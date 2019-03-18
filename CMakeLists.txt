@@ -153,6 +153,7 @@ endif()
 if (APPLE)
   find_library(SPARKLE Sparkle)
   find_library(LIBSPOTIFY libspotify)
+
   if(LIBSPOTIFY_FOUND)
     set(LIBSPOTIFY_INCLUDE_DIRS ${LIBSPOTIFY})
     set(LIBSPOTIFY_LIBRARIES ${LIBSPOTIFY})
@@ -281,18 +282,17 @@ optional_component(UDISKS2 ON "Devices: UDisks2 backend"
   DEPENDS "D-Bus support" DBUS_FOUND
 )
 
+optional_component(SPOTIFY_BLOB ON "Spotify support: non-GPL binary helper"
+  DEPENDS "protobuf" PROTOBUF_FOUND PROTOBUF_PROTOC_EXECUTABLE
+  DEPENDS "libspotify" LIBSPOTIFY_FOUND
+)
+
 if (CRYPTOPP_FOUND OR HAVE_SPOTIFY_BLOB)
   set(CRYPTOPP_OR_HAVE_SPOTIFY_BLOB ON)
 endif()
 
 optional_component(SPOTIFY ON "Spotify support"
   DEPENDS "cryptopp or spotify blob" CRYPTOPP_OR_HAVE_SPOTIFY_BLOB
-)
-
-optional_component(SPOTIFY_BLOB ON "Spotify support: non-GPL binary helper"
-  DEPENDS "spotify support" HAVE_SPOTIFY
-  DEPENDS "protobuf" PROTOBUF_FOUND PROTOBUF_PROTOC_EXECUTABLE
-  DEPENDS "libspotify" LIBSPOTIFY_FOUND
 )
 
 optional_component(MOODBAR ON "Moodbar support"

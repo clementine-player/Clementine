@@ -41,7 +41,7 @@ add_executable(clementine-spotifyblob
 )
 
 target_link_libraries(clementine-spotifyblob
-  ${SPOTIFY_LIBRARIES} ${SPOTIFY_LDFLAGS}
+  ${LIBSPOTIFY_LIBRARIES} ${LIBSPOTIFY_LDFLAGS}
   ${QT_QTCORE_LIBRARY}
   ${QT_QTNETWORK_LIBRARY}
   ${GSTREAMER_BASE_LIBRARIES}
