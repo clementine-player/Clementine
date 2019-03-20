@@ -1004,7 +1004,10 @@ void GstEnginePipeline::TransitionToNext() {
 
   ignore_tags_ = true;
 
-  ReplaceDecodeBin(next_url_);
+  if (!ReplaceDecodeBin(next_url_)) {
+    qLog(Error) << "ReplaceDecodeBin failed with " << next_url_;
+    return;
+  }
   gst_element_set_state(uridecodebin_, GST_STATE_PLAYING);
   MaybeLinkDecodeToAudio();
 
