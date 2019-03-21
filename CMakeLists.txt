@@ -35,12 +35,6 @@ if (${CMAKE_SYSTEM_NAME} STREQUAL "FreeBSD")
   set(FREEBSD ON)
 endif()
 
-if(APPLE)
-  if(NOT QT_MAC_USE_COCOA)
-    message(FATAL_ERROR "Cocoa support is required")
-  endif(NOT QT_MAC_USE_COCOA)
-endif(APPLE)
-
 set(OpenGL_GL_PREFERENCE LEGACY)
 find_package(OpenGL)
 if(OPENGL_FOUND)
