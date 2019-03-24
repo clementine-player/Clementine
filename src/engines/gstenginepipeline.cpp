@@ -153,17 +153,28 @@ bool GstEnginePipeline::ReplaceDecodeBin(GstElement* new_bin) {
 }
 
 bool GstEnginePipeline::ReplaceDecodeBin(const QUrl& url) {
-  GstElement* new_bin = nullptr;
+  GstElement* new_bin = CreateDecodeBinFromUrl(url);
+  return ReplaceDecodeBin(new_bin);
+}
 
+GstElement* GstEnginePipeline::CreateDecodeBinFromUrl(const QUrl& url) {
+  GstElement* new_bin = nullptr;
 #ifdef HAVE_SPOTIFY
   if (url.scheme() == "spotify") {
     new_bin = gst_bin_new("spotify_bin");
+    if (!new_bin) return nullptr; 
 
     // Create elements
     GstElement* src = engine_->CreateElement("tcpserversrc", new_bin);
-    if (!src) return false;
+    if (!src) {
+      gst_object_unref(GST_OBJECT(new_bin));
+      return nullptr;
+    }
     GstElement* gdp = engine_->CreateElement("gdpdepay", new_bin);
-    if (!gdp) return false;
+    if (!gdp) {
+      gst_object_unref(GST_OBJECT(new_bin));
+      return nullptr;
+    }
 
     // Pick a port number
     const int port = Utilities::PickUnusedPort();
@@ -188,7 +199,7 @@ bool GstEnginePipeline::ReplaceDecodeBin(const QUrl& url) {
   } else {
 #endif
     new_bin = engine_->CreateElement("uridecodebin");
-    if (!new_bin) return false;
+    if (!new_bin) return nullptr; 
     g_object_set(G_OBJECT(new_bin), "uri", url.toEncoded().constData(),
                  nullptr);
     CHECKED_GCONNECT(G_OBJECT(new_bin), "drained", &SourceDrainedCallback,
@@ -200,7 +211,7 @@ bool GstEnginePipeline::ReplaceDecodeBin(const QUrl& url) {
   }
 #endif
 
-  return ReplaceDecodeBin(new_bin);
+  return new_bin;
 }
 
 GstElement* GstEnginePipeline::CreateDecodeBinFromString(const char* pipeline) {
@@ -474,7 +485,10 @@ bool GstEnginePipeline::InitFromString(const QString& pipeline) {
     return false;
   }
 
-  if (!ReplaceDecodeBin(new_bin)) return false;
+  if (!ReplaceDecodeBin(new_bin)) {
+    gst_object_unref(GST_OBJECT(new_bin));
+    return false;
+  }
 
   if (!Init()) return false;
   return gst_element_link(new_bin, audiobin_);
