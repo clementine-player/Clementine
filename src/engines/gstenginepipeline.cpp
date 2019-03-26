@@ -417,10 +417,13 @@ bool GstEnginePipeline::Init() {
   gst_element_link(probe_converter, probe_sink);
 
   // Link the outputs of tee to the queues on each path.
-  gst_pad_link(gst_element_get_request_pad(tee, "src_%u"),
-               gst_element_get_static_pad(probe_queue, "sink"));
-  gst_pad_link(gst_element_get_request_pad(tee, "src_%u"),
-               gst_element_get_static_pad(audio_queue, "sink"));
+  pad = gst_element_get_static_pad(probe_queue, "sink");
+  gst_pad_link(gst_element_get_request_pad(tee, "src_%u"), pad);
+  gst_object_unref(pad);
+
+  pad = gst_element_get_static_pad(audio_queue, "sink");
+  gst_pad_link(gst_element_get_request_pad(tee, "src_%u"), pad);
+  gst_object_unref(pad);
 
   // Link replaygain elements if enabled.
   if (rg_enabled_) {
@@ -454,12 +457,14 @@ bool GstEnginePipeline::Init() {
   gst_caps_unref(caps);
 
   // Add probes and handlers.
-  gst_pad_add_probe(gst_element_get_static_pad(probe_converter, "src"),
-                    GST_PAD_PROBE_TYPE_BUFFER, HandoffCallback, this, nullptr);
-  gst_bus_set_sync_handler(gst_pipeline_get_bus(GST_PIPELINE(pipeline_)),
-                           BusCallbackSync, this, nullptr);
-  bus_cb_id_ = gst_bus_add_watch(gst_pipeline_get_bus(GST_PIPELINE(pipeline_)),
-                                 BusCallback, this);
+  pad = gst_element_get_static_pad(probe_converter, "src");
+  gst_pad_add_probe(pad, GST_PAD_PROBE_TYPE_BUFFER, HandoffCallback, this,
+                    nullptr);
+  gst_object_unref(pad);
+  GstBus *bus = gst_pipeline_get_bus(GST_PIPELINE(pipeline_));
+  gst_bus_set_sync_handler(bus, BusCallbackSync, this, nullptr);
+  bus_cb_id_ = gst_bus_add_watch(bus, BusCallback, this);
+  gst_object_unref(bus);
 
   MaybeLinkDecodeToAudio();
 
@@ -519,8 +524,10 @@ bool GstEnginePipeline::InitFromUrl(const QUrl& url, qint64 end_nanosec) {
 
 GstEnginePipeline::~GstEnginePipeline() {
   if (pipeline_) {
-    gst_bus_set_sync_handler(gst_pipeline_get_bus(GST_PIPELINE(pipeline_)),
-                             nullptr, nullptr, nullptr);
+    GstBus *bus = gst_pipeline_get_bus(GST_PIPELINE(pipeline_));
+    gst_bus_set_sync_handler(bus, nullptr, nullptr, nullptr);
+    gst_object_unref(bus);
+
     g_source_remove(bus_cb_id_);
     gst_element_set_state(pipeline_, GST_STATE_NULL);
     gst_object_unref(GST_OBJECT(pipeline_));
@@ -1011,6 +1018,7 @@ void GstEnginePipeline::SourceSetupCallback(GstURIDecodeBin* bin,
     g_object_set(element, "ssl-strict", TRUE, nullptr);
 #endif
   }
+  g_object_unref(element);
 }
 
 void GstEnginePipeline::TransitionToNext() {
