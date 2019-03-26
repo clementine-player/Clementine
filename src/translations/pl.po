@@ -11,6 +11,7 @@
 # Wojciech <duxetlg@gmail.com>, 2014
 # Kacper Banasik <mattrick@jabster.pl>, 2012-2014
 # Kacper Banasik <mattrick@jabster.pl>, 2012
+# Maciej Bator, 2019
 # Marcin Lawniczak <marcin.safmb@wp.pl>, 2016
 # Marcin Wu <marcin.wu85@gmail.com>, 2018
 # Mateusz Żochowski <matizochol@gmail.com>, 2017
@@ -26,8 +27,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2018-11-17 13:46+0000\n"
-"Last-Translator: hatstand <john.maguire@gmail.com>\n"
+"PO-Revision-Date: 2019-03-20 23:33+0000\n"
+"Last-Translator: Maciej Bator\n"
 "Language-Team: Polish (http://www.transifex.com/davidsansome/clementine/language/pl/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -111,7 +112,7 @@ msgstr "%1 na %2"
 #: playlistparsers/playlistparser.cpp:89
 #, qt-format
 msgid "%1 playlists (%2)"
-msgstr "%1 list odtwarzania (%2)"
+msgstr "%1 playlist (%2)"
 
 #: playlist/playlistmanager.cpp:429
 #, qt-format
@@ -241,7 +242,7 @@ msgstr "&Brak"
 
 #: ../bin/src/ui_mainwindow.h:737
 msgid "&Playlist"
-msgstr "Lista odtwarzania"
+msgstr "&Playlista"
 
 #: ../bin/src/ui_mainwindow.h:678
 msgid "&Quit"
@@ -360,7 +361,7 @@ msgid ""
 "played in the last 180 minutes.</p><p><span style=\" font-"
 "weight:600;\">Available fields: </span><span style=\" font-"
 "style:italic;\">%1</span>.</p></body></html>"
-msgstr ""
+msgstr "<html><head/><body><p>Wstawiaj nazwy pól, aby ograniczyć wyszukiwanie wg tego pola, np.<span style=\" font-weight:600;\">artist:</span><span style=\" font-style:italic;\">Bode</span> przeszukuje bibliotekę, żeby znaleźć wszystkich artystów zawierających słowo Bode, <span style=\" font-weight:600;\">playcount:</span><span style=\" font-style:italic;\">&gt;=2</span> przeszukuje bibliotekę w poszukiwaniu utworów odtworzonych co najmniej dwa razy, <span style=\" font-weight:600;\">lastplayed:</span>&lt;<span style=\" font-style:italic;\">1h30m</span> przeszukuje bibliotekę w poszukiwaniu utworów odtworzonych w ostatnich 180 minutach.</p><p><span style=\" font-weight:600;\">Dostępne pola: </span><span style=\" font-style:italic;\">%1</span>.</p></body></html>"
 
 #: ../bin/src/ui_librarysettingspage.h:198
 msgid ""
@@ -404,16 +405,16 @@ msgid ""
 "A smart playlist is a dynamic list of songs that come from your library.  "
 "There are different types of smart playlist that offer different ways of "
 "selecting songs."
-msgstr "Inteligentna lista odtwarzania to dynamiczna lista utworów pochodzących z twojej biblioteki. Istnieją różne rodzaje inteligentnych list odtwarzania oferujące różne sposoby wyboru utworów."
+msgstr "Inteligentna playlista to dynamiczna lista utworów pochodzących z twojej biblioteki. Istnieją różne rodzaje inteligentnych playlist oferujące różne sposoby wyboru utworów."
 
 #: smartplaylists/querywizardplugin.cpp:157
 msgid ""
 "A song will be included in the playlist if it matches these conditions."
-msgstr "Utwór zostanie uwzględniony w liście odtwarzania, jeśli spełni następujące kryteria."
+msgstr "Utwór zostanie uwzględniony w playliście, jeśli spełni następujące kryteria."
 
 #: ../bin/src/ui_behavioursettingspage.h:417
 msgid "A&utomatic"
-msgstr ""
+msgstr "A&utomatycznie"
 
 #: smartplaylists/searchterm.cpp:396
 msgid "A-Z"
@@ -486,7 +487,7 @@ msgstr "Akcja"
 
 #: wiimotedev/wiimotesettingspage.cpp:103
 msgid "Activate/Deactivate Wii Remote"
-msgstr ""
+msgstr "Aktywuj/Deaktywuj Pilota Wii"
 
 #: internet/podcasts/addpodcastdialog.cpp:63
 msgid "Add Podcast"
@@ -635,7 +636,7 @@ msgstr "Dodaj strumień..."
 
 #: internet/spotify/spotifyservice.cpp:626
 msgid "Add to Spotify playlists"
-msgstr "Dodaj do list odtwarzania Spotify"
+msgstr "Dodaj do playlist Spotify"
 
 #: internet/spotify/spotifyservice.cpp:618
 msgid "Add to Spotify starred"
@@ -643,11 +644,11 @@ msgstr "Dodaj do śledzonych w Spotify"
 
 #: ui/mainwindow.cpp:1891
 msgid "Add to another playlist"
-msgstr "Dodaj do innej listy odtwarzania"
+msgstr "Dodaj do innej playlisty"
 
 #: ../bin/src/ui_albumcovermanager.h:223
 msgid "Add to playlist"
-msgstr "Dodaj do listy odtwarzania"
+msgstr "Dodaj do playlisty"
 
 #: ../bin/src/ui_behavioursettingspage.h:398
 #: ../bin/src/ui_behavioursettingspage.h:410
@@ -755,7 +756,7 @@ msgstr "Wszystkie pliki (*)"
 #: playlistparsers/playlistparser.cpp:76
 #, qt-format
 msgid "All playlists (%1)"
-msgstr "Wszystkie listy odtwarzania (%1)"
+msgstr "Wszystkie playlisty (%1)"
 
 #: ui/about.cpp:85
 msgid "All the translators"
@@ -783,11 +784,11 @@ msgstr "Wraz z oryginałami"
 
 #: ../bin/src/ui_behavioursettingspage.h:370
 msgid "Alwa&ys hide the main window"
-msgstr ""
+msgstr "Zawsze ukrywaj okno główne"
 
 #: ../bin/src/ui_behavioursettingspage.h:369
 msgid "Always show &the main window"
-msgstr ""
+msgstr "Zawsze wyświetlaj okno główne"
 
 #: ../bin/src/ui_behavioursettingspage.h:384
 #: ../bin/src/ui_behavioursettingspage.h:404
@@ -829,17 +830,17 @@ msgstr "Wygląd"
 
 #: core/commandlineoptions.cpp:176
 msgid "Append files/URLs to the playlist"
-msgstr "Dodaj pliki/adresy URL do listy odtwarzania"
+msgstr "Dodaj pliki/adresy URL do playlisty"
 
 #: devices/deviceview.cpp:218 globalsearch/globalsearchview.cpp:455
 #: internet/core/internetservice.cpp:48 library/libraryview.cpp:383
 #: widgets/fileviewlist.cpp:31
 msgid "Append to current playlist"
-msgstr "Dołącz do aktualnej listy odtwarzania"
+msgstr "Dołącz do bieżącej playlisty"
 
 #: ../bin/src/ui_behavioursettingspage.h:395
 msgid "Append to the playlist"
-msgstr "Dołącz do listy odtwarzania"
+msgstr "Dołącz do playlisty"
 
 #: ../bin/src/ui_playbacksettingspage.h:360
 msgid "Apply compression to prevent clipping"
@@ -867,7 +868,7 @@ msgstr "Czy na pewno chcesz zapisać w plikach wszystkie statystyki każdego utw
 #: ../bin/src/ui_albumcoversearcher.h:108 ../bin/src/ui_edittagdialog.h:721
 #: ../bin/src/ui_trackselectiondialog.h:209 ../bin/src/ui_ripcddialog.h:315
 msgid "Artist"
-msgstr "Wykonawca"
+msgstr "Artysta"
 
 #: ui/mainwindow.cpp:287
 msgid "Artist info"
@@ -879,7 +880,7 @@ msgstr "Inicjały wykonawcy"
 
 #: ../bin/src/ui_behavioursettingspage.h:420
 msgid "As&k when saving"
-msgstr ""
+msgstr "Pytaj podczas zapisywania"
 
 #: ../bin/src/ui_transcodedialog.h:225
 #: ../bin/src/ui_networkremotesettingspage.h:250
@@ -1048,7 +1049,7 @@ msgstr "Przeglądaj..."
 
 #: ../bin/src/ui_playbacksettingspage.h:363
 msgid "Buffer duration"
-msgstr "Długość bufora"
+msgstr "Wielkość bufora"
 
 #: engines/gstengine.cpp:931
 msgid "Buffering"
@@ -1138,7 +1139,7 @@ msgstr "Sprawdź aktualizacje..."
 
 #: smartplaylists/wizard.cpp:84
 msgid "Choose a name for your smart playlist"
-msgstr "Wprowadź nazwę dla inteligentnej listy odtwarzania"
+msgstr "Wprowadź nazwę dla inteligentnej playlisty"
 
 #: engines/gstengine.cpp:952
 msgid "Choose automatically"
@@ -1158,7 +1159,7 @@ msgstr "Wybierz z listy"
 
 #: smartplaylists/querywizardplugin.cpp:161
 msgid "Choose how the playlist is sorted and how many songs it will contain."
-msgstr "Wybierz w jaki sposób jest sortowana lista odtwarzania i ile ścieżek będzie zawierać"
+msgstr "Wybierz sposób sortowania playlisty i ilość utworów."
 
 #: internet/podcasts/podcastsettingspage.cpp:143
 msgid "Choose podcast download directory"
@@ -1188,7 +1189,7 @@ msgstr "Wyczyść"
 
 #: ../bin/src/ui_mainwindow.h:681 ../bin/src/ui_mainwindow.h:683
 msgid "Clear playlist"
-msgstr "Wyczyść listę odtwarzania"
+msgstr "Wyczyść playlistę"
 
 #: smartplaylists/searchtermwidget.cpp:374
 #: visualisations/visualisationcontainer.cpp:215
@@ -1290,7 +1291,7 @@ msgstr "Zamknij"
 
 #: playlist/playlisttabbar.cpp:55
 msgid "Close playlist"
-msgstr "Zamknij listę odtwarzania"
+msgstr "Zamknij playlistę"
 
 #: visualisations/visualisationcontainer.cpp:135
 msgid "Close visualization"
@@ -1322,7 +1323,7 @@ msgstr "Rozdzielona przecinkami lista klasa:poziom, gdzie poziom wynosi 0-3"
 
 #: ../bin/src/ui_behavioursettingspage.h:425
 msgid "Comma seperated list of prefix words to ignore when sorting"
-msgstr ""
+msgstr "Oddzielona przecinkami lista prefiksów ignorowana podczas sortowania"
 
 #: playlist/playlist.cpp:1435 smartplaylists/searchterm.cpp:384
 #: ui/organisedialog.cpp:79 ../bin/src/ui_edittagdialog.h:718
@@ -1481,7 +1482,7 @@ msgstr "Nie można połączyć się w tej chwili z Last.fm. Proszę spróbować 
 
 #: playlist/playlistmanager.cpp:167
 msgid "Couldn't create playlist"
-msgstr "Nie można utworzyć listy odtwarzania"
+msgstr "Nie można utworzyć playlisty"
 
 #: transcoder/transcoder.cpp:426
 #, qt-format
@@ -1538,7 +1539,7 @@ msgstr "Okładki z %1"
 
 #: core/commandlineoptions.cpp:175
 msgid "Create a new playlist with files/URLs"
-msgstr "Utwórz nową playlistę za pomocą plików/linku"
+msgstr "Utwórz nową playlistę za pomocą plików/linków"
 
 #: ../bin/src/ui_playbacksettingspage.h:344
 msgid "Cross-fade when changing tracks automatically"
@@ -1558,11 +1559,11 @@ msgstr "Ctrl+Up"
 
 #: ../bin/src/ui_queuemanager.h:141
 msgid "Ctrl+"
-msgstr ""
+msgstr "Ctrl+"
 
 #: ../bin/src/ui_queuemanager.h:145
 msgid "Ctrl+"
-msgstr ""
+msgstr "Ctrl+"
 
 #: ui/equalizer.cpp:110
 msgid "Custom"
@@ -1597,7 +1598,7 @@ msgstr "Wykryto uszkodzenie bazy danych. Zapoznaj się z https://github.com/clem
 
 #: ../bin/src/ui_episodeinfowidget.h:133
 msgid "Date"
-msgstr ""
+msgstr "Data"
 
 #: playlist/playlist.cpp:1432 ../bin/src/ui_edittagdialog.h:715
 msgid "Date created"
@@ -1617,7 +1618,7 @@ msgstr "&Domyślny"
 
 #: core/commandlineoptions.cpp:165
 msgid "Decrease the volume by 4 percent"
-msgstr ""
+msgstr "Zmniejsz głośność o 4 procent"
 
 #: core/commandlineoptions.cpp:167
 msgid "Decrease the volume by <value> percent"
@@ -1669,7 +1670,7 @@ msgstr "Usuń z dysku..."
 
 #: ../bin/src/ui_podcastsettingspage.h:268
 msgid "Delete played episodes"
-msgstr "Usuń odtworzone odcinki"
+msgstr "Usuń odtworzone audycje"
 
 #: ui/equalizer.cpp:221 ../bin/src/ui_equalizer.h:168
 msgid "Delete preset"
@@ -1677,11 +1678,11 @@ msgstr "Usuń ustawienie korektora"
 
 #: library/libraryview.cpp:411
 msgid "Delete smart playlist"
-msgstr "Usuń inteligentną listę odtwarzania"
+msgstr "Usuń inteligentną playlistę"
 
 #: core/commandlineoptions.cpp:186
 msgid "Delete the currently playing song"
-msgstr ""
+msgstr "Usuń odtwarzany utwór"
 
 #: ../bin/src/ui_organisedialog.h:245
 msgid "Delete the original files"
@@ -1838,7 +1839,7 @@ msgstr "Nie pokazuj w różni wykonawcy"
 
 #: ../bin/src/ui_podcastsettingspage.h:274
 msgid "Don't show listened episodes"
-msgstr "Nie pokazuj odsłuchanych epizodów"
+msgstr "Nie wyświetlaj odsłuchanych odcinków"
 
 #: widgets/osd.cpp:287 ../bin/src/ui_playlistsequence.h:116
 msgid "Don't shuffle"
@@ -1860,7 +1861,7 @@ msgstr "Kliknij podwójnie, by otworzyć"
 
 #: ../bin/src/ui_behavioursettingspage.h:406
 msgid "Double clicking a song in the playlist will..."
-msgstr "Podwójne kliknięcie utworu na liście odtwarzania spowoduje..."
+msgstr "Podwójne kliknięcie utworu na playliście spowoduje..."
 
 #: ../bin/src/ui_behavioursettingspage.h:392
 msgid "Double clicking a song will..."
@@ -1870,7 +1871,7 @@ msgstr "Podwójne kliknięcie utworu spowoduje..."
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "Download %n episodes"
-msgstr "Ściągnij epizody (%n)"
+msgstr "Pobierz odcinki (%n)"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:272
 msgid "Download directory"
@@ -1886,7 +1887,7 @@ msgstr "Pobierz członkostwo"
 
 #: ../bin/src/ui_podcastsettingspage.h:265
 msgid "Download new episodes automatically"
-msgstr "Pobierz nowe odcinki automatycznie"
+msgstr "Automatycznie pobieraj nowe odcinki"
 
 #: internet/podcasts/podcastservice.cpp:294
 #: internet/podcasts/podcastservice.cpp:333
@@ -1969,7 +1970,7 @@ msgstr "Dynamiczny, losowy miks"
 
 #: library/libraryview.cpp:408
 msgid "Edit smart playlist..."
-msgstr "Edytuj inteligentną listę odtwarzania..."
+msgstr "Edytuj inteligentną playlistę..."
 
 #: ui/mainwindow.cpp:1854
 #, qt-format
@@ -2057,7 +2058,7 @@ msgstr "Wpisz nazwę dla eksportowanych okładek (bez rozszerzenia):"
 
 #: playlist/playlisttabbar.cpp:147
 msgid "Enter a new name for this playlist"
-msgstr "Wpisz nową nazwę dla listy odtwarzania"
+msgstr "Wpisz nową nazwę dla tej playlisty"
 
 #: ../bin/src/ui_globalsearchview.h:208
 msgid ""
@@ -2095,7 +2096,7 @@ msgstr "Cała kolekcja"
 
 #: internet/podcasts/podcastservice.cpp:532
 msgid "Episode information"
-msgstr ""
+msgstr "Informacje o odcinku"
 
 #: ../bin/src/ui_equalizer.h:162 ../bin/src/ui_mainwindow.h:705
 msgid "Equalizer"
@@ -2148,7 +2149,7 @@ msgstr "Błąd wczytywania %1"
 #: internet/digitally/digitallyimportedservicebase.cpp:202
 #: internet/digitally/digitallyimportedurlhandler.cpp:96
 msgid "Error loading di.fm playlist"
-msgstr "Problem podczas ładowania listy odtwarzania di.fm"
+msgstr "Błąd podczas ładowania playlisty di.fm"
 
 #: transcoder/transcoder.cpp:391
 #, qt-format
@@ -2310,7 +2311,7 @@ msgstr "Pobieranie ukończone"
 
 #: internet/subsonic/subsonicdynamicplaylist.cpp:88
 msgid "Fetching Playlist Items"
-msgstr "Pobieranie Elementów Listy Odtwarzania"
+msgstr "Pobieranie elementów playlisty"
 
 #: internet/subsonic/subsonicservice.cpp:286
 msgid "Fetching Subsonic library"
@@ -2515,11 +2516,11 @@ msgstr "Idź"
 
 #: ../bin/src/ui_mainwindow.h:712
 msgid "Go to next playlist tab"
-msgstr "Przejdź do kolejnej karty z listą odtwarzania"
+msgstr "Przejdź do karty kolejnej playlisty"
 
 #: ../bin/src/ui_mainwindow.h:713
 msgid "Go to previous playlist tab"
-msgstr "Przejdź do poprzedniej karty z listą odtwarzania"
+msgstr "Przejdź do karty poprzedniej playlisty"
 
 #: ../bin/src/ui_googledrivesettingspage.h:99
 msgid "Google Drive"
@@ -2533,7 +2534,7 @@ msgstr "Uzyskano %1 okładek z %2 (%3 nieudane)"
 
 #: ../bin/src/ui_behavioursettingspage.h:378
 msgid "Grey out non existent songs in my playlists"
-msgstr "Usunięte utwory zostaną wyszarzone w listach odtwarzania"
+msgstr "Oznaczaj brakujące utwory w playlistach"
 
 #: ../bin/src/ui_groupbydialog.h:123
 msgid "Group Library by..."
@@ -2612,7 +2613,7 @@ msgstr "Informacja o urządzeniu jest widoczna tylko, gdy urządzenie jest podł
 
 #: ../bin/src/ui_appearancesettingspage.h:325
 msgid "Hide playlist filter toolbar"
-msgstr ""
+msgstr "Ukryj pasek narzędzi filtrów playlist"
 
 #: ../bin/src/ui_transcoderoptionsmp3.h:201
 msgid "High"
@@ -2630,7 +2631,7 @@ msgstr "Wysoka (1024x1024)"
 
 #: ui/equalizer.cpp:128
 msgid "Hip Hop"
-msgstr ""
+msgstr "Hip Hop"
 
 #: internet/subsonic/subsonicsettingspage.cpp:138
 msgid "Host not found, check server URL. Example: http://localhost:4040/"
@@ -2664,7 +2665,7 @@ msgstr "Identyfikowanie utworu"
 msgid ""
 "If activated, clicking a selected song in the playlist view will let you "
 "edit the tag value directly"
-msgstr "Jeżeli zaznaczone, kliknięcie zaznaczonej piosenki na liście odtwarzania pozwoli na bezpośrednią edycje znaczników"
+msgstr "Jeżeli zaznaczone, kliknięcie zaznaczonego utworu playlisty pozwoli na bezpośrednią edycję znaczników"
 
 #: devices/devicemanager.cpp:518 devices/devicemanager.cpp:529
 msgid ""
@@ -2682,7 +2683,7 @@ msgstr "Ignoruj \"The\" w nazwach artystów"
 
 #: ../bin/src/ui_behavioursettingspage.h:423
 msgid "Ignore prefix word(s)"
-msgstr ""
+msgstr "Ignoruj prefiksy"
 
 #: ui/albumcoverchoicecontroller.cpp:44
 msgid "Images (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm)"
@@ -2706,7 +2707,7 @@ msgstr "W ciągu następnych %1 tygodni"
 msgid ""
 "In dynamic mode new tracks will be chosen and added to the playlist every "
 "time a song finishes."
-msgstr "W trybie dynamicznym nowe utwory będą wybierane i dodawane do playlisty za każdym razem gdy skończy się odtwarzanie bieżącego utworu."
+msgstr "W trybie dynamicznym nowe utwory będą wybierane i dodawane do playlisty za każdym razem, gdy skończy się odtwarzanie bieżącego utworu."
 
 #: internet/spotify/spotifyservice.cpp:417
 msgid "Inbox"
@@ -2734,7 +2735,7 @@ msgstr "Niekompletna konfiguracja, upewnij się, że wszystkie pola zostały wyp
 
 #: core/commandlineoptions.cpp:164
 msgid "Increase the volume by 4 percent"
-msgstr ""
+msgstr "Zwiększ głośność o 4 procent"
 
 #: core/commandlineoptions.cpp:166
 msgid "Increase the volume by <value> percent"
@@ -2955,7 +2956,7 @@ msgstr "Lewy"
 #: playlist/playlist.cpp:1384 ui/organisedialog.cpp:80
 #: ui/qtsystemtrayicon.cpp:254 ../bin/src/ui_edittagdialog.h:702
 msgid "Length"
-msgstr "Długość"
+msgstr "Czas"
 
 #: ui/mainwindow.cpp:255 ui/mainwindow.cpp:267
 #: ../bin/src/ui_seafilesettingspage.h:177
@@ -3004,11 +3005,11 @@ msgstr "Wczytaj okładkę z dysku..."
 
 #: playlist/playlistcontainer.cpp:300
 msgid "Load playlist"
-msgstr "Wczytaj listę odtwarzania"
+msgstr "Wczytaj playlistę"
 
 #: ../bin/src/ui_mainwindow.h:711
 msgid "Load playlist..."
-msgstr "Wczytaj listę odtwarzania..."
+msgstr "Wczytaj playlistę..."
 
 #: devices/mtploader.cpp:42
 msgid "Loading MTP device"
@@ -3020,7 +3021,7 @@ msgstr "Wczytywanie bazy danych iPoda"
 
 #: smartplaylists/generatorinserter.cpp:48
 msgid "Loading smart playlist"
-msgstr "Wczytywanie inteligentnej listy odtwarzania"
+msgstr "Wczytywanie inteligentnej playlisty"
 
 #: library/librarymodel.cpp:170
 msgid "Loading songs"
@@ -3049,7 +3050,7 @@ msgstr "Wczytywanie..."
 
 #: core/commandlineoptions.cpp:177
 msgid "Loads files/URLs, replacing current playlist"
-msgstr "Wczytuje pliki/adresy URL, zastępując obecną listę odtwarzania"
+msgstr "Wczytuje pliki/adresy URL, zastępując bieżącą playlistę"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:162
 #: ../bin/src/ui_magnatunesettingspage.h:163
@@ -3351,11 +3352,11 @@ msgstr "Nowy folder"
 
 #: ui/mainwindow.cpp:1908 ../bin/src/ui_mainwindow.h:709
 msgid "New playlist"
-msgstr "Nowa lista odtwarzania"
+msgstr "Nowa playlista"
 
 #: library/libraryview.cpp:405
 msgid "New smart playlist..."
-msgstr "Nowa inteligentna lista odtwarzania..."
+msgstr "Nowa inteligentna playlista..."
 
 #: widgets/freespacebar.cpp:45
 msgid "New songs"
@@ -3405,7 +3406,7 @@ msgstr "Bez długich bloków"
 #: playlist/playlistcontainer.cpp:385
 msgid ""
 "No matches found.  Clear the search box to show the whole playlist again."
-msgstr "Nie znaleziono wyników. Wyczyść pole wyszukiwania, by wyświetlić listę odtwarzania"
+msgstr "Nie znaleziono wyników. Wyczyść pole wyszukiwania, by ponownie wyświetlić pełną playlistę."
 
 #: ../bin/src/ui_transcoderoptionsaac.h:144
 msgid "No short blocks"
@@ -3430,11 +3431,11 @@ msgstr "Zwykły typ bloku"
 
 #: ../bin/src/ui_behavioursettingspage.h:428
 msgid "Normal duration (at least 4 minutes or half the track length)"
-msgstr ""
+msgstr "Przeciętny czas (co najmniej 4 minuty lub połowa długości ścieżki)"
 
 #: playlist/playlistsequence.cpp:203
 msgid "Not available while using a dynamic playlist"
-msgstr "Niedostępne podczas używania inteligentnej listy odtwarzania"
+msgstr "Niedostępne podczas używania inteligentnej playlisty"
 
 #: devices/deviceview.cpp:109
 msgid "Not connected"
@@ -3483,7 +3484,7 @@ msgstr "Teraz odtwarzane"
 
 #: ../bin/src/ui_podcastsettingspage.h:276
 msgid "Number of episodes to show"
-msgstr "Liczba epizodów do pokazania"
+msgstr "Liczba wyświetlanych odcinków"
 
 #: ui/notificationssettingspage.cpp:38
 msgid "OSD Preview"
@@ -3585,12 +3586,12 @@ msgstr "Otwórz w Dysku Google"
 #: internet/core/internetservice.cpp:62 library/libraryview.cpp:389
 #: widgets/fileviewlist.cpp:36
 msgid "Open in new playlist"
-msgstr "Otwórz w nowej liście odtwarzania"
+msgstr "Otwórz w nowej playliście"
 
 #: ../bin/src/ui_behavioursettingspage.h:397
 msgctxt "Refers to behavior settings in Clementine settings page."
 msgid "Open in new playlist"
-msgstr "Otwórz w nowej liście odtwarzania"
+msgstr "Otwórz w nowej playliście"
 
 #: songinfo/artistbiography.cpp:94 songinfo/artistbiography.cpp:261
 msgid "Open in your browser"
@@ -3761,15 +3762,15 @@ msgstr "Odtwarzaj jeśli nic nie jest aktualnie odtwarzane"
 
 #: library/libraryview.cpp:396 ui/mainwindow.cpp:1815
 msgid "Play next"
-msgstr ""
+msgstr "Odtwórz po bieżącym utworze"
 
 #: ui/mainwindow.cpp:1813
 msgid "Play selected tracks next"
-msgstr ""
+msgstr "Odtwórz zaznaczone ścieżki po bieżącym utworze"
 
 #: core/commandlineoptions.cpp:178
 msgid "Play the <n>th track in the playlist"
-msgstr "Odtwórz <n> ścieżkę na liście odtwarzania"
+msgstr "Odtwórz <n> ścieżkę playlisty"
 
 #: core/globalshortcuts.cpp:52 wiimotedev/wiimotesettingspage.cpp:116
 msgid "Play/Pause"
@@ -3787,24 +3788,24 @@ msgstr "Opcje odtwarzacza"
 #: playlist/playlistmanager.cpp:87 playlist/playlistmanager.cpp:156
 #: playlist/playlistmanager.cpp:525 playlist/playlisttabbar.cpp:366
 msgid "Playlist"
-msgstr "Lista odtwarzania"
+msgstr "Playlista"
 
 #: widgets/osd.cpp:181
 msgid "Playlist finished"
-msgstr "Lista odtwarzania zakończona"
+msgstr "Playlista zakończona"
 
 #: core/commandlineoptions.cpp:174
 #: ../bin/src/ui_playlistsaveoptionsdialog.h:94
 msgid "Playlist options"
-msgstr "Opcje listy odtwarzania"
+msgstr "Opcje playlisty"
 
 #: smartplaylists/wizard.cpp:72
 msgid "Playlist type"
-msgstr "Typ listy odtwarzania"
+msgstr "Typ playlisty"
 
 #: ui/mainwindow.cpp:273
 msgid "Playlists"
-msgstr "Listy odtwarzania"
+msgstr "Playlisty"
 
 #: ../data/oauthsuccess.html:38
 msgid "Please close your browser and return to Clementine."
@@ -3821,13 +3822,13 @@ msgstr "Stan wtyczki:"
 
 #: ../bin/src/ui_podcastinfodialog.h:93
 msgid "Podcast Information"
-msgstr ""
+msgstr "Informacje o podkascie"
 
 #: internet/podcasts/podcastservice.cpp:437
 #: internet/podcasts/podcastservice.cpp:535
 #: internet/podcasts/podcastservice.cpp:539
 msgid "Podcast information"
-msgstr ""
+msgstr "Informacje o podkaście"
 
 #: internet/podcasts/podcastservice.cpp:133
 #: ../bin/src/ui_podcastsettingspage.h:250
@@ -3949,7 +3950,7 @@ msgstr "Psychodeliczna"
 
 #: wiimotedev/wiimotesettingspage.cpp:246
 msgid "Push Wii Remote button"
-msgstr ""
+msgstr "Naciśnij klawisz pilota Wii"
 
 #: ../bin/src/ui_wiimoteshortcutgrabber.h:121
 msgid "Push Wiiremote button"
@@ -4085,7 +4086,7 @@ msgstr "Pamiętaj ruchy pilota"
 
 #: ../bin/src/ui_behavioursettingspage.h:371
 msgid "Remember from &last time"
-msgstr ""
+msgstr "Pamiętaj ostatni stan"
 
 #: ../bin/src/ui_playlistsaveoptionsdialog.h:99
 msgid "Remember my choice"
@@ -4103,7 +4104,7 @@ msgstr "Usuń akcję"
 
 #: core/globalshortcuts.cpp:84
 msgid "Remove current song from playlist"
-msgstr "Usuń bieżącą ścieżkę z listy odtwarzania"
+msgstr "Usuń bieżącą ścieżkę z playlisty"
 
 #: ../bin/src/ui_mainwindow.h:723
 msgid "Remove duplicates from playlist"
@@ -4115,27 +4116,27 @@ msgstr "Usuń katalog"
 
 #: internet/spotify/spotifyservice.cpp:684 ../bin/src/ui_mainwindow.h:704
 msgid "Remove from playlist"
-msgstr "Usuń z listy odtwarzania"
+msgstr "Usuń z playlisty"
 
 #: playlist/playlisttabbar.cpp:183
 msgid "Remove playlist"
-msgstr "Usuń listę odtwrzania"
+msgstr "Usuń playlistę"
 
 #: playlist/playlistlistcontainer.cpp:427
 msgid "Remove playlists"
-msgstr "Usuń listy odtwarzania"
+msgstr "Usuń playlisty"
 
 #: ../bin/src/ui_mainwindow.h:729
 msgid "Remove unavailable tracks from playlist"
-msgstr "Usuń niedostępne ścieżki z listy odtwarzania"
+msgstr "Usuń niedostępne ścieżki z playlisty"
 
 #: playlist/playlisttabbar.cpp:146
 msgid "Rename playlist"
-msgstr "Zmień nazwę listy odtwarzania"
+msgstr "Zmień nazwę playlisty"
 
 #: playlist/playlisttabbar.cpp:57
 msgid "Rename playlist..."
-msgstr "Zmień nazwę listy odtwarzania..."
+msgstr "Zmień nazwę playlisty..."
 
 #: ../bin/src/ui_mainwindow.h:686
 msgid "Renumber tracks in this order..."
@@ -4151,7 +4152,7 @@ msgstr "Powtarzaj album"
 
 #: widgets/osd.cpp:317 ../bin/src/ui_playlistsequence.h:113
 msgid "Repeat playlist"
-msgstr "Powtarzaj listę odtwarzania"
+msgstr "Powtarzaj playlistę"
 
 #: widgets/osd.cpp:311 ../bin/src/ui_playlistsequence.h:111
 msgid "Repeat track"
@@ -4161,11 +4162,11 @@ msgstr "Powtarzaj utwór"
 #: internet/core/internetservice.cpp:55 library/libraryview.cpp:386
 #: widgets/fileviewlist.cpp:34
 msgid "Replace current playlist"
-msgstr "Zastąp aktualną listę odtwarzania"
+msgstr "Zastąp bieżącą playlistę"
 
 #: ../bin/src/ui_behavioursettingspage.h:396
 msgid "Replace the playlist"
-msgstr "Zastąp listę odtwarzania"
+msgstr "Zastąp playlistę"
 
 #: ../bin/src/ui_organisedialog.h:256
 msgid "Replaces spaces with underscores"
@@ -4202,7 +4203,7 @@ msgstr "Rozpocznij piosenkę od nowa, przeskocz przy kolejnym wciśnięciu"
 #: core/commandlineoptions.cpp:172
 msgid ""
 "Restart the track, or play the previous track if within 8 seconds of start."
-msgstr "Odtwarzaj od początku lub odtwórz poprzedni utwór jeżeli nie minęło 8 sekund aktualnego utworu"
+msgstr "Odtwarzaj od początku lub odtwórz poprzedni utwór jeżeli nie minęło 8 sekund bieżącego utworu"
 
 #: ../bin/src/ui_organisedialog.h:257
 msgid "Restrict to ASCII characters"
@@ -4242,7 +4243,7 @@ msgstr "Uruchom"
 
 #: core/song.cpp:456
 msgid "SNES SPC700"
-msgstr ""
+msgstr "SNES SPC700"
 
 #: ../bin/src/ui_networkproxysettingspage.h:163
 msgid "SOCKS proxy"
@@ -4295,16 +4296,16 @@ msgstr "Zapisz obraz"
 #: playlist/playlistlistcontainer.cpp:158
 msgctxt "Save playlist menu action."
 msgid "Save playlist"
-msgstr "Zapisz listę odtwarzania"
+msgstr "Zapisz playlistę"
 
 #: playlist/playlistmanager.cpp:233
 msgctxt "Title of the playlist save dialog."
 msgid "Save playlist"
-msgstr "Zapisz listę odtwarzania"
+msgstr "Zapisz playlistę"
 
 #: playlist/playlisttabbar.cpp:59 ../bin/src/ui_mainwindow.h:710
 msgid "Save playlist..."
-msgstr "Zapisz listę odtwarzania..."
+msgstr "Zapisz playlistę..."
 
 #: ui/equalizer.cpp:205 ../bin/src/ui_equalizer.h:165
 msgid "Save preset"
@@ -4538,7 +4539,7 @@ msgstr "Ustawienia"
 
 #: ../bin/src/ui_behavioursettingspage.h:429
 msgid "Short duration (at least 1 minute or half the track length)"
-msgstr ""
+msgstr "Krótki czas (co najmniej 1 minuta lub pół długości ścieżki)"
 
 #: ../bin/src/ui_globalshortcutssettingspage.h:172
 msgid "Shortcut"
@@ -4690,7 +4691,7 @@ msgstr "Losuj wszystko"
 
 #: ../bin/src/ui_mainwindow.h:691
 msgid "Shuffle playlist"
-msgstr "Wymieszaj listę odtwarzania"
+msgstr "Wymieszaj playlistę"
 
 #: widgets/osd.cpp:293 ../bin/src/ui_playlistsequence.h:117
 msgid "Shuffle tracks in this album"
@@ -4722,7 +4723,7 @@ msgstr "Ska"
 
 #: core/commandlineoptions.cpp:161
 msgid "Skip backwards in playlist"
-msgstr "Przeskocz wstecz w liście odtwarzania"
+msgstr "Przeskocz wstecz w playliście"
 
 #: playlist/playlist.cpp:1409 ../bin/src/ui_edittagdialog.h:705
 msgid "Skip count"
@@ -4730,7 +4731,7 @@ msgstr "Ilość przeskoczeń utworu"
 
 #: core/commandlineoptions.cpp:162
 msgid "Skip forwards in playlist"
-msgstr "Przeskocz w przód w liście odtwarzania"
+msgstr "Przeskocz do przodu w playliście"
 
 #: ui/mainwindow.cpp:1824
 msgid "Skip selected tracks"
@@ -4750,11 +4751,11 @@ msgstr "Mały pasek boczny"
 
 #: smartplaylists/wizard.cpp:63
 msgid "Smart playlist"
-msgstr "Inteligentna lista odtwarzania"
+msgstr "Inteligentna playlista"
 
 #: library/librarymodel.cpp:1368
 msgid "Smart playlists"
-msgstr "Inteligentne listy odtwarzania"
+msgstr "Inteligentne playlisty"
 
 #: ui/equalizer.cpp:150
 msgid "Soft"
@@ -4852,7 +4853,7 @@ msgstr "Zacznij zgrywanie"
 
 #: core/commandlineoptions.cpp:157
 msgid "Start the playlist currently playing"
-msgstr "Rozpocznij aktualnie odtwarzaną listę"
+msgstr "Rozpocznij aktualnie odtwarzaną playlistę"
 
 #: transcoder/transcodedialog.cpp:92
 msgid "Start transcoding"
@@ -4904,7 +4905,7 @@ msgstr "Zatrzymaj odtwarzanie po obecnym utworze"
 
 #: ../bin/src/ui_behavioursettingspage.h:377
 msgid "Stop playback if song fails to play"
-msgstr ""
+msgstr "Zatrzymuj odtwarzanie, jeśli nie można odtworzyć utworu"
 
 #: core/globalshortcuts.cpp:56
 msgid "Stop playing after current track"
@@ -5189,7 +5190,7 @@ msgstr "Krok czasu"
 #: ../bin/src/ui_edittagdialog.h:719 ../bin/src/ui_trackselectiondialog.h:210
 #: ../bin/src/ui_ripcddialog.h:306
 msgid "Title"
-msgstr "Nazwa"
+msgstr "Tytuł"
 
 #: core/utilities.cpp:143 core/utilities.cpp:155
 msgid "Today"
@@ -5495,7 +5496,7 @@ msgstr "VBR MP3"
 
 #: core/song.cpp:458
 msgid "VGM"
-msgstr ""
+msgstr "VGM"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:231
 msgid "Variable bit rate"
@@ -5508,7 +5509,7 @@ msgstr "Różni wykonawcy"
 
 #: ../bin/src/ui_subsonicsettingspage.h:136
 msgid "Verify Server certificate"
-msgstr ""
+msgstr "Sprawdź certyfikat serwera"
 
 #: ui/about.cpp:35
 #, qt-format
@@ -5559,7 +5560,7 @@ msgstr "WMA"
 
 #: playlist/playlisttabbar.cpp:192 ../bin/src/ui_behavioursettingspage.h:361
 msgid "Warn me when closing a playlist tab"
-msgstr "Ostrzeż mnie kiedy zamknę zakładkę listy odtwarzania"
+msgstr "Ostrzegaj podczas zamykania karty playlisty"
 
 #: core/song.cpp:448 transcoder/transcoder.cpp:257
 msgid "Wav"
@@ -5567,7 +5568,7 @@ msgstr "Wav"
 
 #: core/song.cpp:450
 msgid "WavPack"
-msgstr ""
+msgstr "WavPack"
 
 #: ../bin/src/ui_podcastinfowidget.h:192
 msgid "Website"
@@ -5583,7 +5584,7 @@ msgstr "Podczas startu Clementine"
 
 #: ../bin/src/ui_behavioursettingspage.h:427
 msgid "When calculating play counts, use"
-msgstr ""
+msgstr "Podczas obliczania ilości odtworzeń, używaj"
 
 #: ../bin/src/ui_librarysettingspage.h:203
 msgid ""
@@ -5593,11 +5594,11 @@ msgstr "Szukając okładki, Clementine w pierwszej kolejności przeszuka pliki o
 
 #: ../bin/src/ui_behavioursettingspage.h:416
 msgid "When saving a playlist, file paths should be"
-msgstr "Podczas zapisywania listy odtwarzania, ścieżki plików mają być"
+msgstr "Podczas zapisywania playlisty, ścieżki plików mają być"
 
 #: ../bin/src/ui_behavioursettingspage.h:422
 msgid "When sorting artists, albums and titles"
-msgstr ""
+msgstr "Podczas sortowania wg artystów, albumów i tytułów"
 
 #: ../bin/src/ui_globalsearchsettingspage.h:147
 msgid "When the list is empty..."
@@ -5715,13 +5716,13 @@ msgstr "Zaraz pobierzesz następujące albumy"
 #, qt-format
 msgid ""
 "You are about to remove %1 playlists from your favorites, are you sure?"
-msgstr "Czy na pewno chcesz usunąć listy odtwarzania (%1) z ulubionych??"
+msgstr "Czy na pewno chcesz usunąć playlisty (%1) z ulubionych??"
 
 #: playlist/playlisttabbar.cpp:186
 msgid ""
 "You are about to remove a playlist which is not part of your favorite playlists: the playlist will be deleted (this action cannot be undone). \n"
 "Are you sure you want to continue?"
-msgstr "Zamierzasz usunąć listę odtwarzania nienależącą do list ulubionych. Ta lista zostanie NIEODWRACALNIE usunięta (po usunięciu nie da się jej przywrócić).\nCzy jesteś pewien?"
+msgstr "Zamierzasz usunąć playlistę nienależącą do ulubionych. Ta lista zostanie NIEODWRACALNIE usunięta (po usunięciu nie da się jej przywrócić).\nCzy jesteś pewien?"
 
 #: ../bin/src/ui_loginstatewidget.h:168
 msgid "You are not signed in."
@@ -5887,7 +5888,7 @@ msgstr "nie zawiera"
 
 #: smartplaylists/searchterm.cpp:263
 msgid "empty"
-msgstr ""
+msgstr "pusty"
 
 #: smartplaylists/searchterm.cpp:253
 msgid "ends with"
@@ -5944,7 +5945,7 @@ msgstr "najpierw najnowsze"
 
 #: smartplaylists/searchterm.cpp:265
 msgid "not empty"
-msgstr ""
+msgstr "niepusty"
 
 #: smartplaylists/searchterm.cpp:261
 msgid "not equals"
