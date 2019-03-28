@@ -18,6 +18,7 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "player.h"
 #include "tagreaderclient.h"
 
 #include <QCoreApplication>
@@ -34,8 +35,14 @@ TagReaderClient::TagReaderClient(QObject* parent)
     : QObject(parent), worker_pool_(new WorkerPool<HandlerType>(this)) {
   sInstance = this;
 
+  QSettings s;
+  s.beginGroup(Player::kSettingsGroup);
+
+  int max_workers = QThread::idealThreadCount();
+  int num_workers = s.value("max_numprocs_tagclients", max_workers).toInt();
+
   worker_pool_->SetExecutableName(kWorkerExecutableName);
-  worker_pool_->SetWorkerCount(QThread::idealThreadCount());
+  worker_pool_->SetWorkerCount(num_workers);
   connect(worker_pool_, SIGNAL(WorkerFailedToStart()),
           SLOT(WorkerFailedToStart()));
 }

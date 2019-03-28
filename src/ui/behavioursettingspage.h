@@ -36,6 +36,7 @@ class BehaviourSettingsPage : public SettingsPage {
 
  private slots:
   void ShowTrayIconToggled(bool on);
+  void MaxNumProcsTagClientsChanged(int value);
 
  private:
   Ui_BehaviourSettingsPage* ui_;
