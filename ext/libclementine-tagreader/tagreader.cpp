@@ -162,8 +162,10 @@ void TagReader::ReadFile(const QString& filename,
   QString compilation;
   QString lyrics;
 
-  auto parseOggTag = [&](const TagLib::Ogg::FieldListMap& map,
+  auto parseOggTag = [&](const TagLib::Ogg::XiphComment* tag,
                          const QTextCodec* codec) {
+    const TagLib::Ogg::FieldListMap& map = tag->fieldListMap();
+
     if (!map["COMPOSER"].isEmpty())
       Decode(map["COMPOSER"].front(), codec, song->mutable_composer());
     if (!map["PERFORMER"].isEmpty())
@@ -302,7 +304,7 @@ void TagReader::ReadFile(const QString& filename,
   if (TagLib::FLAC::File* file =
                  dynamic_cast<TagLib::FLAC::File*>(fileref->file())) {
     if (file->xiphComment()) {
-      parseOggTag(file->xiphComment()->fieldListMap(), nullptr);
+      parseOggTag(file->xiphComment(), nullptr);
 #ifdef TAGLIB_HAS_FLAC_PICTURELIST
       if (!file->pictureList().isEmpty()) {
         song->set_art_automatic(kEmbeddedCover);
@@ -312,7 +314,7 @@ void TagReader::ReadFile(const QString& filename,
     Decode(tag->comment(), nullptr, song->mutable_comment());
   } else if (TagLib::Ogg::XiphComment* tag =
           dynamic_cast<TagLib::Ogg::XiphComment*>(fileref->file()->tag())) {
-    parseOggTag(tag->fieldListMap(), nullptr);
+    parseOggTag(tag, nullptr);
 #if TAGLIB_MAJOR_VERSION >= 1 && TAGLIB_MINOR_VERSION >= 11
     if (!tag->pictureList().isEmpty()) song->set_art_automatic(kEmbeddedCover);
 #endif
