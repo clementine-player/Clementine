@@ -299,13 +299,7 @@ void TagReader::ReadFile(const QString& filename,
   // way;
   // apart, so we keep specific behavior for some formats by adding another
   // "else if" block below.
-  if (TagLib::Ogg::XiphComment* tag =
-          dynamic_cast<TagLib::Ogg::XiphComment*>(fileref->file()->tag())) {
-    parseOggTag(tag->fieldListMap(), nullptr);
-#if TAGLIB_MAJOR_VERSION >= 1 && TAGLIB_MINOR_VERSION >= 11
-    if (!tag->pictureList().isEmpty()) song->set_art_automatic(kEmbeddedCover);
-#endif
-  } else if (TagLib::FLAC::File* file =
+  if (TagLib::FLAC::File* file =
                  dynamic_cast<TagLib::FLAC::File*>(fileref->file())) {
     if (file->xiphComment()) {
       parseOggTag(file->xiphComment()->fieldListMap(), nullptr);
@@ -316,6 +310,12 @@ void TagReader::ReadFile(const QString& filename,
 #endif
     }
     Decode(tag->comment(), nullptr, song->mutable_comment());
+  } else if (TagLib::Ogg::XiphComment* tag =
+          dynamic_cast<TagLib::Ogg::XiphComment*>(fileref->file()->tag())) {
+    parseOggTag(tag->fieldListMap(), nullptr);
+#if TAGLIB_MAJOR_VERSION >= 1 && TAGLIB_MINOR_VERSION >= 11
+    if (!tag->pictureList().isEmpty()) song->set_art_automatic(kEmbeddedCover);
+#endif
   }
 
   if (TagLib::MPEG::File* file =
