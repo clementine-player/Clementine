@@ -72,7 +72,7 @@ class SongLoader : public QObject {
   // Loads the files with only filenames. When finished, songs() contains a
   // complete list of all Song objects, but without metadata. This method is
   // blocking, do not call it from the UI thread.
-  void LoadFilenamesBlocking();
+  Result LoadFilenamesBlocking();
   // Completely load songs previously loaded with LoadFilenamesBlocking(). When
   // finished, the Song objects in songs() contain metadata now. This method is
   // blocking, do not call it from the UI thread.
@@ -101,7 +101,7 @@ signals:
   };
 
   Result LoadLocal(const QString& filename);
-  void LoadLocalAsync(const QString& filename);
+  Result LoadLocalAsync(const QString& filename);
   void EffectiveSongLoad(Song* song);
   Result LoadLocalPartial(const QString& filename);
   void LoadLocalDirectory(const QString& filename);
@@ -109,7 +109,7 @@ signals:
 
   void AddAsRawStream();
 
-  void LoadRemote();
+  Result LoadRemote();
   bool LoadRemotePlaylist(const QUrl& url);
 
   // GStreamer callbacks
@@ -138,7 +138,7 @@ signals:
   CueParser* cue_parser_;
 
   // For async loads
-  std::function<void()> preload_func_;
+  std::function<Result()> preload_func_;
   int timeout_;
   State state_;
   bool success_;
