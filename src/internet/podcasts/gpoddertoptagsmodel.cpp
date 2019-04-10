@@ -40,7 +40,7 @@ bool GPodderTopTagsModel::hasChildren(const QModelIndex& parent) const {
 
 bool GPodderTopTagsModel::canFetchMore(const QModelIndex& parent) const {
   if (parent.isValid() && parent.data(Role_Type).toInt() == Type_Folder &&
-      parent.data(Role_HasLazyLoaded).toBool() == false) {
+      !parent.data(Role_HasLazyLoaded).toBool()) {
     return true;
   }
 

@@ -1133,7 +1133,7 @@ void PlaylistView::ReloadSettings() {
   // set_background_image when it is not needed, as this will cause the fading
   // animation to start again. This also avoid to do useless
   // "force_background_redraw".
-  if (background_initialized_ == false ||
+  if (!background_initialized_ ||
       background_image_filename != background_image_filename_ ||
       background_type != background_image_type_ ||
       blur_radius_ != blur_radius || opacity_level_ != opacity_level) {

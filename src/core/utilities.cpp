@@ -270,9 +270,7 @@ bool RemoveRecursive(const QString& path) {
     if (!QFile::remove(path + "/" + child)) return false;
   }
 
-  if (!dir.rmdir(path)) return false;
-
-  return true;
+  return dir.rmdir(path);
 }
 
 bool CopyRecursive(const QString& source, const QString& destination) {

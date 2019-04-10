@@ -110,8 +110,7 @@ NowPlayingWidget::NowPlayingWidget(QWidget* parent)
   fit_cover_width_action_ = menu_->addAction(tr("Fit cover to width"));
 
   fit_cover_width_action_->setCheckable(true);
-  fit_cover_width_action_->setEnabled((mode_ != SmallSongDetails) ? true
-                                                                  : false);
+  fit_cover_width_action_->setEnabled(mode_ != SmallSongDetails);
   connect(fit_cover_width_action_, SIGNAL(toggled(bool)),
           SLOT(FitCoverWidth(bool)));
   fit_cover_width_action_->setChecked(fit_width_);
