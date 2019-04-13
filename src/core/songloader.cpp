@@ -130,9 +130,12 @@ SongLoader::Result SongLoader::Load(const QUrl& url) {
   return BlockingLoadRequired;
 }
 
-void SongLoader::LoadFilenamesBlocking() {
+SongLoader::Result SongLoader::LoadFilenamesBlocking() {
   if (preload_func_) {
-    preload_func_();
+    return preload_func_();
+  } else {
+    qLog(Error) << "Preload function was not set for blocking operation";
+    return Error;
   }
 }
 
@@ -207,18 +210,21 @@ SongLoader::Result SongLoader::LoadLocal(const QString& filename) {
   return BlockingLoadRequired;
 }
 
-void SongLoader::LoadLocalAsync(const QString& filename) {
+SongLoader::Result SongLoader::LoadLocalAsync(const QString& filename) {
   // First check to see if it's a directory - if so we will load all the songs
   // inside right away.
   if (QFileInfo(filename).isDir()) {
     LoadLocalDirectory(filename);
-    return;
+    return Success;
   }
 
   // It's a local file, so check if it looks like a playlist.
   // Read the first few bytes.
   QFile file(filename);
-  if (!file.open(QIODevice::ReadOnly)) return;
+  if (!file.open(QIODevice::ReadOnly)) {
+    qLog(Error) << "Could not open file " << filename;
+    return Error;
+  }
   QByteArray data(file.read(PlaylistParser::kMagicSize));
 
   ParserBase* parser = playlist_parser_->ParserForMagic(data);
@@ -234,7 +240,7 @@ void SongLoader::LoadLocalAsync(const QString& filename) {
 
     // It's a playlist!
     LoadPlaylist(parser, filename);
-    return;
+    return Success;
   }
 
   // Check if it's a cue file
@@ -249,7 +255,7 @@ void SongLoader::LoadLocalAsync(const QString& filename) {
     for (Song song : song_list) {
       if (song.is_valid()) songs_ << song;
     }
-    return;
+    return Success;
   }
 
   // Assume it's just a normal file
@@ -257,6 +263,9 @@ void SongLoader::LoadLocalAsync(const QString& filename) {
   song.InitFromFilePartial(filename);
   if (song.is_valid()) {
     songs_ << song;
+    return Success;
+  } else {
+    return Error;
   }
 }
 
@@ -374,7 +383,7 @@ void SongLoader::StopTypefind() {
   emit LoadRemoteFinished();
 }
 
-void SongLoader::LoadRemote() {
+SongLoader::Result SongLoader::LoadRemote() {
   qLog(Debug) << "Loading remote file" << url_;
 
   // It's not a local file so we have to fetch it to see what it is.  We use
@@ -399,7 +408,7 @@ void SongLoader::LoadRemote() {
   if (!source) {
     qLog(Warning) << "Couldn't create gstreamer source element for"
                   << url_.toString();
-    return;
+    return Error;
   }
 
   // Create the other elements and link them up
@@ -430,6 +439,7 @@ void SongLoader::LoadRemote() {
 
   // Wait until loading is finished
   loop.exec();
+  return Success;
 }
 
 void SongLoader::TypeFound(GstElement*, uint, GstCaps* caps, void* self) {
