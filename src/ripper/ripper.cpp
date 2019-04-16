@@ -104,10 +104,7 @@ bool Ripper::CheckCDIOIsValid() {
 }
 
 bool Ripper::MediaChanged() const {
-  if (cdio_ && cdio_get_media_changed(cdio_))
-    return true;
-  else
-    return false;
+  return cdio_ && cdio_get_media_changed(cdio_);
 }
 
 void Ripper::Start() {

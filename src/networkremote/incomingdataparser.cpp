@@ -268,7 +268,7 @@ void IncomingDataParser::InsertUrls(const pb::remote::Message& msg) {
   const pb::remote::RequestInsertUrls& request = msg.request_insert_urls();
 
   // Insert plain urls without metadata
-  if (request.urls().size() > 0) {
+  if (!request.urls().empty()) {
     QList<QUrl> urls;
     for (auto it = request.urls().begin(); it != request.urls().end(); ++it) {
       std::string s = *it;
@@ -281,7 +281,7 @@ void IncomingDataParser::InsertUrls(const pb::remote::Message& msg) {
   }
 
   // Add songs with metadata if present
-  if (request.songs().size() > 0) {
+  if (!request.songs().empty()) {
     SongList songs;
     for (int i = 0; i < request.songs().size(); i++) {
       songs << CreateSongFromProtobuf(request.songs(i));

@@ -128,11 +128,7 @@ class PlaylistListFilterProxyModel : public QSortFilterProxyModel {
     }
 
     //accept if any of the children is accepted on it's own merits
-    if (hasAcceptedChildren(source_row, source_parent)) {
-      return true;
-    }
-
-    return false;
+    return hasAcceptedChildren(source_row, source_parent);
   }
 };
 

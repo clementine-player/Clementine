@@ -238,6 +238,7 @@ QStringList Mpris2::SupportedMimeTypes() const {
                                          << "audio/ogg"
                                          << "audio/vnd.rn-realaudio"
                                          << "audio/vorbis"
+                                         << "audio/x-ape"
                                          << "audio/x-flac"
                                          << "audio/x-mp3"
                                          << "audio/x-mpeg"
