@@ -480,7 +480,11 @@ int main(int argc, char* argv[]) {
   QFile self_maps("/proc/self/maps");
   if (self_maps.open(QIODevice::ReadOnly)) {
     QByteArray data = self_maps.readAll();
-    if (data.contains("libnvidia-tls.so.")) {
+    if (data.contains("libnvidia-tls.so.304.37") ||
+        data.contains("libnvidia-tls.so.285.03") ||
+        data.contains("libnvidia-tls.so.280.13") ||
+        data.contains("libnvidia-tls.so.275.28") ||
+        data.contains("libnvidia-tls.so.275.19")) {
       qLog(Warning) << "Exiting immediately to work around NVIDIA driver bug";
       _exit(ret);
     }
