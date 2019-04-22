@@ -138,6 +138,9 @@ PlaylistView::PlaylistView(QWidget* parent)
       dynamic_controls_(new DynamicPlaylistControls(this)) {
   setHeader(header_);
   header_->setSectionsMovable(true);
+#if QT_VERSION >= QT_VERSION_CHECK(5, 11, 0)
+  header_->setFirstSectionMovable(true);
+#endif
   setStyle(style_);
   setMouseTracking(true);
 
