@@ -9,7 +9,7 @@
 # AzuraMeta <azura.meta@gmail.com>, 2011
 # 8266d4ce42d3694fffc0e46575c7e44a, 2013
 # CD <cstl@vivaldi.net>, 2015-2016
-# Daniel Șerbănescu <daniel@serbanescu.dk>, 2014,2017
+# Daniel Șerbănescu <daniel@serbanescu.dk>, 2014,2017,2019
 # Daniel Șerbănescu <daniel@serbanescu.dk>, 2014
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # ilixandr <ilixandr@gmail.com>, 2014
@@ -19,8 +19,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2019-04-10 10:30+0000\n"
-"Last-Translator: hatstand <john.maguire@gmail.com>\n"
+"PO-Revision-Date: 2019-04-18 08:58+0000\n"
+"Last-Translator: Daniel Șerbănescu <daniel@serbanescu.dk>\n"
 "Language-Team: Romanian (http://www.transifex.com/davidsansome/clementine/language/ro/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -353,7 +353,7 @@ msgid ""
 "played in the last 180 minutes.</p><p><span style=\" font-"
 "weight:600;\">Available fields: </span><span style=\" font-"
 "style:italic;\">%1</span>.</p></body></html>"
-msgstr ""
+msgstr "<html><head/><body><p>Utilizați numele câmpului ca prefix pentru a limita căutarea în acel câmp, de exemplu <span style=\" font-weight:600;\">artist:</span><span style=\" font-style:italic;\">Bode</span> va căuta în bibliotecă după toți artiștii ce conțin cuvântul Bode, <span style=\" font-weight:600;\">playcount:</span><span style=\" font-style:italic;\">&gt;=2</span> va căuta în bibliotecă după melodii redate de cel puțin două ori, <span style=\" font-weight:600;\">lastplayed:</span>&lt;<span style=\" font-style:italic;\">1h30m</span> va căuta în bibliotecă după melodii redate în intervalul de 180 de minute.</p><p><span style=\" font-weight:600;\">Câmpuri disponibile</span><span style=\" font-style:italic;\">%1</span>.</p></body></html>"
 
 #: ../bin/src/ui_librarysettingspage.h:198
 msgid ""
@@ -406,7 +406,7 @@ msgstr "O melodie va fi inclusă în lista de redare dacă îndeplinește aceste
 
 #: ../bin/src/ui_behavioursettingspage.h:417
 msgid "A&utomatic"
-msgstr ""
+msgstr "A&utomat"
 
 #: smartplaylists/searchterm.cpp:396
 msgid "A-Z"
@@ -479,7 +479,7 @@ msgstr "Acțiune"
 
 #: wiimotedev/wiimotesettingspage.cpp:103
 msgid "Activate/Deactivate Wii Remote"
-msgstr ""
+msgstr "Activează/Deactivează Telecomanda Wii"
 
 #: internet/podcasts/addpodcastdialog.cpp:63
 msgid "Add Podcast"
@@ -776,11 +776,11 @@ msgstr "Lângă originale"
 
 #: ../bin/src/ui_behavioursettingspage.h:370
 msgid "Alwa&ys hide the main window"
-msgstr ""
+msgstr "A&scunde întotdeauna fereastra principală"
 
 #: ../bin/src/ui_behavioursettingspage.h:369
 msgid "Always show &the main window"
-msgstr ""
+msgstr "Ara&tă întotdeauna fereastra principală"
 
 #: ../bin/src/ui_behavioursettingspage.h:384
 #: ../bin/src/ui_behavioursettingspage.h:404
@@ -872,7 +872,7 @@ msgstr "Inițială artist"
 
 #: ../bin/src/ui_behavioursettingspage.h:420
 msgid "As&k when saving"
-msgstr ""
+msgstr "Întrea&bă când se salvează"
 
 #: ../bin/src/ui_transcodedialog.h:225
 #: ../bin/src/ui_networkremotesettingspage.h:250
@@ -1315,7 +1315,7 @@ msgstr "Listă separată prin virgulă de clasă:nivel, nivelul este 0-3"
 
 #: ../bin/src/ui_behavioursettingspage.h:425
 msgid "Comma seperated list of prefix words to ignore when sorting"
-msgstr ""
+msgstr "Listă separată prin virgulă de cuvinte prefix de ignorat la sortare"
 
 #: playlist/playlist.cpp:1435 smartplaylists/searchterm.cpp:384
 #: ui/organisedialog.cpp:79 ../bin/src/ui_edittagdialog.h:718
@@ -1551,11 +1551,11 @@ msgstr "Ctrl+Up"
 
 #: ../bin/src/ui_queuemanager.h:141
 msgid "Ctrl+"
-msgstr ""
+msgstr "Ctrl+"
 
 #: ../bin/src/ui_queuemanager.h:145
 msgid "Ctrl+"
-msgstr ""
+msgstr "Ctrl+"
 
 #: ui/equalizer.cpp:110
 msgid "Custom"
@@ -1590,7 +1590,7 @@ msgstr "S-a detectat alterarea bazei de date. Citiți https://github.com/clement
 
 #: ../bin/src/ui_episodeinfowidget.h:133
 msgid "Date"
-msgstr ""
+msgstr "Dată"
 
 #: playlist/playlist.cpp:1432 ../bin/src/ui_edittagdialog.h:715
 msgid "Date created"
@@ -1610,7 +1610,7 @@ msgstr "Im&plicit"
 
 #: core/commandlineoptions.cpp:165
 msgid "Decrease the volume by 4 percent"
-msgstr ""
+msgstr "Scade volumul cu 4 procente"
 
 #: core/commandlineoptions.cpp:167
 msgid "Decrease the volume by <value> percent"
@@ -1674,7 +1674,7 @@ msgstr "Șterge lista de redare inteligentă"
 
 #: core/commandlineoptions.cpp:186
 msgid "Delete the currently playing song"
-msgstr ""
+msgstr "Șterge melodia redată în prezent"
 
 #: ../bin/src/ui_organisedialog.h:245
 msgid "Delete the original files"
@@ -2088,7 +2088,7 @@ msgstr "Toată colecția"
 
 #: internet/podcasts/podcastservice.cpp:532
 msgid "Episode information"
-msgstr ""
+msgstr "Informații episod"
 
 #: ../bin/src/ui_equalizer.h:162 ../bin/src/ui_mainwindow.h:705
 msgid "Equalizer"
@@ -2605,7 +2605,7 @@ msgstr "Informația hardware este disponibilă numai în timp ce dispozitivul es
 
 #: ../bin/src/ui_appearancesettingspage.h:325
 msgid "Hide playlist filter toolbar"
-msgstr ""
+msgstr "Ascunde bara de filtrare a listei de redare"
 
 #: ../bin/src/ui_transcoderoptionsmp3.h:201
 msgid "High"
@@ -2623,7 +2623,7 @@ msgstr "Înalt (1024x1024)"
 
 #: ui/equalizer.cpp:128
 msgid "Hip Hop"
-msgstr ""
+msgstr "Hip Hop"
 
 #: internet/subsonic/subsonicsettingspage.cpp:138
 msgid "Host not found, check server URL. Example: http://localhost:4040/"
@@ -2675,7 +2675,7 @@ msgstr "Ignoră \"The\" în numele artiștilor"
 
 #: ../bin/src/ui_behavioursettingspage.h:423
 msgid "Ignore prefix word(s)"
-msgstr ""
+msgstr "Ignoră cuvântul (cuvintele) prefix"
 
 #: ui/albumcoverchoicecontroller.cpp:44
 msgid "Images (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm)"
@@ -2727,7 +2727,7 @@ msgstr "Configurație incompletă, asigurați-vă că toate câmpurile sunt popu
 
 #: core/commandlineoptions.cpp:164
 msgid "Increase the volume by 4 percent"
-msgstr ""
+msgstr "Crește volumul cu 4 procente"
 
 #: core/commandlineoptions.cpp:166
 msgid "Increase the volume by <value> percent"
@@ -3239,7 +3239,7 @@ msgstr "Monitorizează colecția pentru schimbări"
 
 #: core/song.cpp:460
 msgid "Monkey's Audio"
-msgstr ""
+msgstr "Monkey's Audio"
 
 #: ../bin/src/ui_playbacksettingspage.h:372
 msgid "Mono playback"
@@ -3427,7 +3427,7 @@ msgstr "Tip bloc normal"
 
 #: ../bin/src/ui_behavioursettingspage.h:428
 msgid "Normal duration (at least 4 minutes or half the track length)"
-msgstr ""
+msgstr "Durată normală (cel puțin 4 minute sau jumătate din lungimea piesei)"
 
 #: playlist/playlistsequence.cpp:203
 msgid "Not available while using a dynamic playlist"
@@ -3758,11 +3758,11 @@ msgstr "Redă numai dacă nu se redă deja ceva"
 
 #: library/libraryview.cpp:396 ui/mainwindow.cpp:1815
 msgid "Play next"
-msgstr ""
+msgstr "Redă următoarea"
 
 #: ui/mainwindow.cpp:1813
 msgid "Play selected tracks next"
-msgstr ""
+msgstr "Redă piesele selectate"
 
 #: core/commandlineoptions.cpp:178
 msgid "Play the <n>th track in the playlist"
@@ -3818,13 +3818,13 @@ msgstr "Stare modul:"
 
 #: ../bin/src/ui_podcastinfodialog.h:93
 msgid "Podcast Information"
-msgstr ""
+msgstr "Informații podcast"
 
 #: internet/podcasts/podcastservice.cpp:437
 #: internet/podcasts/podcastservice.cpp:535
 #: internet/podcasts/podcastservice.cpp:539
 msgid "Podcast information"
-msgstr ""
+msgstr "Informații podcast"
 
 #: internet/podcasts/podcastservice.cpp:133
 #: ../bin/src/ui_podcastsettingspage.h:250
@@ -3946,7 +3946,7 @@ msgstr "Psihedelic"
 
 #: wiimotedev/wiimotesettingspage.cpp:246
 msgid "Push Wii Remote button"
-msgstr ""
+msgstr "Apăsați butonul telecomenzii Wii"
 
 #: ../bin/src/ui_wiimoteshortcutgrabber.h:121
 msgid "Push Wiiremote button"
@@ -4082,7 +4082,7 @@ msgstr "Ține minte balansarea telecomenzii Wii"
 
 #: ../bin/src/ui_behavioursettingspage.h:371
 msgid "Remember from &last time"
-msgstr ""
+msgstr "Ține minte de u&ltima dată"
 
 #: ../bin/src/ui_playlistsaveoptionsdialog.h:99
 msgid "Remember my choice"
@@ -4239,7 +4239,7 @@ msgstr "Rulează"
 
 #: core/song.cpp:456
 msgid "SNES SPC700"
-msgstr ""
+msgstr "SNES SPC700"
 
 #: ../bin/src/ui_networkproxysettingspage.h:163
 msgid "SOCKS proxy"
@@ -4535,7 +4535,7 @@ msgstr "Setări"
 
 #: ../bin/src/ui_behavioursettingspage.h:429
 msgid "Short duration (at least 1 minute or half the track length)"
-msgstr ""
+msgstr "Durată scurtă (cel puțin un minut sau jumătate din lungimea piesei)"
 
 #: ../bin/src/ui_globalshortcutssettingspage.h:172
 msgid "Shortcut"
@@ -4901,7 +4901,7 @@ msgstr "Oprește redarea după piesa curentă"
 
 #: ../bin/src/ui_behavioursettingspage.h:377
 msgid "Stop playback if song fails to play"
-msgstr ""
+msgstr "Oprește redarea dacă redarea melodiei eșuează"
 
 #: core/globalshortcuts.cpp:56
 msgid "Stop playing after current track"
@@ -5492,7 +5492,7 @@ msgstr "VBR MP3"
 
 #: core/song.cpp:458
 msgid "VGM"
-msgstr ""
+msgstr "VGM"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:231
 msgid "Variable bit rate"
@@ -5505,7 +5505,7 @@ msgstr "Artiști diferiți"
 
 #: ../bin/src/ui_subsonicsettingspage.h:136
 msgid "Verify Server certificate"
-msgstr ""
+msgstr "Verifică certificatul serverului"
 
 #: ui/about.cpp:35
 #, qt-format
@@ -5564,7 +5564,7 @@ msgstr "Wav"
 
 #: core/song.cpp:450
 msgid "WavPack"
-msgstr ""
+msgstr "WavPack"
 
 #: ../bin/src/ui_podcastinfowidget.h:192
 msgid "Website"
@@ -5580,7 +5580,7 @@ msgstr "Când pornește Clementine"
 
 #: ../bin/src/ui_behavioursettingspage.h:427
 msgid "When calculating play counts, use"
-msgstr ""
+msgstr "Când se calculează numărul redărilor, utilizează"
 
 #: ../bin/src/ui_librarysettingspage.h:203
 msgid ""
@@ -5594,7 +5594,7 @@ msgstr "La salvarea unei liste de redare, căile fișierului ar trebui să fie"
 
 #: ../bin/src/ui_behavioursettingspage.h:422
 msgid "When sorting artists, albums and titles"
-msgstr ""
+msgstr "Când se sortează artiști, albume și titluri"
 
 #: ../bin/src/ui_globalsearchsettingspage.h:147
 msgid "When the list is empty..."
@@ -5884,7 +5884,7 @@ msgstr "nu conține"
 
 #: smartplaylists/searchterm.cpp:263
 msgid "empty"
-msgstr ""
+msgstr "gol"
 
 #: smartplaylists/searchterm.cpp:253
 msgid "ends with"
@@ -5941,7 +5941,7 @@ msgstr "întâi cele mai noi"
 
 #: smartplaylists/searchterm.cpp:265
 msgid "not empty"
-msgstr ""
+msgstr "ne-gol"
 
 #: smartplaylists/searchterm.cpp:261
 msgid "not equals"
