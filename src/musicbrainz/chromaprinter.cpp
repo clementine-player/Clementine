@@ -204,12 +204,16 @@ GstFlowReturn Chromaprinter::NewBufferCallback(GstAppSink* app_sink,
   Chromaprinter* me = reinterpret_cast<Chromaprinter*>(self);
 
   GstSample* sample = gst_app_sink_pull_sample(app_sink);
+  if (!sample) return GST_FLOW_ERROR;
   GstBuffer* buffer = gst_sample_get_buffer(sample);
-  GstMapInfo map;
-  gst_buffer_map(buffer, &map, GST_MAP_READ);
-  me->buffer_.write(reinterpret_cast<const char*>(map.data), map.size);
-  gst_buffer_unmap(buffer, &map);
-  gst_buffer_unref(buffer);
+  if (buffer) {
+    GstMapInfo map;
+    if (gst_buffer_map(buffer, &map, GST_MAP_READ)) {
+      me->buffer_.write(reinterpret_cast<const char*>(map.data), map.size);
+      gst_buffer_unmap(buffer, &map);
+    }
+  }
+  gst_sample_unref(sample);
 
   return GST_FLOW_OK;
 }
