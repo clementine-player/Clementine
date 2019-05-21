@@ -15,13 +15,14 @@
 # Xinkai Chen <yeled.nova@gmail.com>, 2012
 # Xinkai Chen <yeled.nova@gmail.com>, 2012
 # zhangmin <zm1990s@gmail.com>, 2013-2016
+# zhineng404 <zhinengge@gmail.com>, 2019
 # zhangmin <zm1990s@gmail.com>, 2013-2014
 # 吴宇龙 <popolovenono@outlook.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2019-04-10 10:30+0000\n"
-"Last-Translator: hatstand <john.maguire@gmail.com>\n"
+"PO-Revision-Date: 2019-05-18 13:57+0000\n"
+"Last-Translator: zhineng404 <zhinengge@gmail.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/davidsansome/clementine/language/zh_CN/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -160,7 +161,7 @@ msgstr "%L1 合计播放"
 
 #: ../bin/src/ui_notificationssettingspage.h:432
 msgid "%filename%"
-msgstr "%filename%"
+msgstr "%f文件名%"
 
 #: transcoder/transcodedialog.cpp:216
 #, c-format, qt-plural-format
@@ -354,7 +355,7 @@ msgid ""
 "played in the last 180 minutes.</p><p><span style=\" font-"
 "weight:600;\">Available fields: </span><span style=\" font-"
 "style:italic;\">%1</span>.</p></body></html>"
-msgstr ""
+msgstr "<html><head/><body><p>在搜索关键词前加分类前缀进行搜索，例如：<span style=\" font-weight:600;\">artist:<span style=\" font-style:italic;\">Bode</span> 在音乐库中搜索包含该词\"Bode\"的所有艺术家, <span style=\" font-weight:600;\">playcount:</span><span style=\" font-style:italic;\">&gt;=2</span>在音乐库中搜索至少播放两次的歌曲, <span style=\" font-weight:600;\">lastplayed:</span>&lt;<span style=\" font-style:italic;\">1h30m</span>在音乐库中搜索此前1小时30分钟内播放的歌曲.</p><p><span style=\" font-weight:600;\">Available fields: </span><span style=\" font-style:italic;\">%1</span>.</p></body></html>"
 
 #: ../bin/src/ui_librarysettingspage.h:198
 msgid ""
@@ -407,7 +408,7 @@ msgstr "一首歌如果满足这些条件就会被加入此播放列表。"
 
 #: ../bin/src/ui_behavioursettingspage.h:417
 msgid "A&utomatic"
-msgstr ""
+msgstr "自动"
 
 #: smartplaylists/searchterm.cpp:396
 msgid "A-Z"
@@ -480,7 +481,7 @@ msgstr "操作"
 
 #: wiimotedev/wiimotesettingspage.cpp:103
 msgid "Activate/Deactivate Wii Remote"
-msgstr ""
+msgstr "启用/禁用 Wii 遥控器"
 
 #: internet/podcasts/addpodcastdialog.cpp:63
 msgid "Add Podcast"
@@ -777,11 +778,11 @@ msgstr "原始歌曲同一目录下"
 
 #: ../bin/src/ui_behavioursettingspage.h:370
 msgid "Alwa&ys hide the main window"
-msgstr ""
+msgstr "总是隐藏主窗口"
 
 #: ../bin/src/ui_behavioursettingspage.h:369
 msgid "Always show &the main window"
-msgstr ""
+msgstr "总是显示主窗口"
 
 #: ../bin/src/ui_behavioursettingspage.h:384
 #: ../bin/src/ui_behavioursettingspage.h:404
@@ -873,7 +874,7 @@ msgstr "歌手名字的首字母"
 
 #: ../bin/src/ui_behavioursettingspage.h:420
 msgid "As&k when saving"
-msgstr ""
+msgstr "保存时询问"
 
 #: ../bin/src/ui_transcodedialog.h:225
 #: ../bin/src/ui_networkremotesettingspage.h:250
@@ -1316,7 +1317,7 @@ msgstr "class:level 列表用逗号分隔，level 范围 0-3"
 
 #: ../bin/src/ui_behavioursettingspage.h:425
 msgid "Comma seperated list of prefix words to ignore when sorting"
-msgstr ""
+msgstr "在排序时忽略逗号前缀的列表"
 
 #: playlist/playlist.cpp:1435 smartplaylists/searchterm.cpp:384
 #: ui/organisedialog.cpp:79 ../bin/src/ui_edittagdialog.h:718
@@ -1471,7 +1472,7 @@ msgstr "不能获取详情"
 
 #: internet/lastfm/lastfmsettingspage.cpp:75
 msgid "Could not log in to Last.fm. Please try again."
-msgstr ""
+msgstr "无法登录Last.fm.请再试一次。"
 
 #: playlist/playlistmanager.cpp:167
 msgid "Couldn't create playlist"
@@ -1552,11 +1553,11 @@ msgstr "Ctrl+Up"
 
 #: ../bin/src/ui_queuemanager.h:141
 msgid "Ctrl+"
-msgstr ""
+msgstr "Ctrl+"
 
 #: ../bin/src/ui_queuemanager.h:145
 msgid "Ctrl+"
-msgstr ""
+msgstr "Ctrl+"
 
 #: ui/equalizer.cpp:110
 msgid "Custom"
@@ -1576,7 +1577,7 @@ msgstr "自定义..."
 
 #: devices/devicekitlister.cpp:125 devices/udisks2lister.cpp:76
 msgid "D-Bus path"
-msgstr ""
+msgstr "D-Bus 路径"
 
 #: ui/equalizer.cpp:116
 msgid "Dance"
@@ -1591,7 +1592,7 @@ msgstr "检测到数据库损坏。恢复数据库的方法请参考 https://git
 
 #: ../bin/src/ui_episodeinfowidget.h:133
 msgid "Date"
-msgstr ""
+msgstr "日期"
 
 #: playlist/playlist.cpp:1432 ../bin/src/ui_edittagdialog.h:715
 msgid "Date created"
@@ -1611,7 +1612,7 @@ msgstr "默认(&F)"
 
 #: core/commandlineoptions.cpp:165
 msgid "Decrease the volume by 4 percent"
-msgstr ""
+msgstr "将音量调低4％"
 
 #: core/commandlineoptions.cpp:167
 msgid "Decrease the volume by <value> percent"
@@ -1675,7 +1676,7 @@ msgstr "删除智能播放列表"
 
 #: core/commandlineoptions.cpp:186
 msgid "Delete the currently playing song"
-msgstr ""
+msgstr "删除当前播放的歌曲"
 
 #: ../bin/src/ui_organisedialog.h:245
 msgid "Delete the original files"
@@ -2089,7 +2090,7 @@ msgstr "整个集合"
 
 #: internet/podcasts/podcastservice.cpp:532
 msgid "Episode information"
-msgstr ""
+msgstr "歌集信息"
 
 #: ../bin/src/ui_equalizer.h:162 ../bin/src/ui_mainwindow.h:705
 msgid "Equalizer"
@@ -2606,7 +2607,7 @@ msgstr "硬件信息仅在设备连接上后可用。"
 
 #: ../bin/src/ui_appearancesettingspage.h:325
 msgid "Hide playlist filter toolbar"
-msgstr ""
+msgstr "隐藏播放列表筛选栏"
 
 #: ../bin/src/ui_transcoderoptionsmp3.h:201
 msgid "High"
@@ -2624,7 +2625,7 @@ msgstr "高(1024x1024)"
 
 #: ui/equalizer.cpp:128
 msgid "Hip Hop"
-msgstr ""
+msgstr "嘻哈"
 
 #: internet/subsonic/subsonicsettingspage.cpp:138
 msgid "Host not found, check server URL. Example: http://localhost:4040/"
@@ -2676,7 +2677,7 @@ msgstr "忽略艺人名称中的“The”"
 
 #: ../bin/src/ui_behavioursettingspage.h:423
 msgid "Ignore prefix word(s)"
-msgstr ""
+msgstr "忽略前缀(符号)"
 
 #: ui/albumcoverchoicecontroller.cpp:44
 msgid "Images (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm)"
@@ -2728,7 +2729,7 @@ msgstr "配置不完整，请确认所有字段都已填好。"
 
 #: core/commandlineoptions.cpp:164
 msgid "Increase the volume by 4 percent"
-msgstr ""
+msgstr "将音量调高4％"
 
 #: core/commandlineoptions.cpp:166
 msgid "Increase the volume by <value> percent"
@@ -2920,7 +2921,7 @@ msgstr "Last.fm"
 
 #: internet/lastfm/lastfmservice.cpp:180
 msgid "Last.fm Authentication"
-msgstr ""
+msgstr "Last.fm 验证"
 
 #: internet/lastfm/lastfmservice.cpp:289
 msgid "Last.fm is currently busy, please try again in a few minutes"
@@ -3149,7 +3150,7 @@ msgstr "就这样吧！"
 #: ../bin/src/ui_mainwindow.h:699
 msgctxt "Label for button to enable/disable Enterprise background sound."
 msgid "Make it so!"
-msgstr "努力去实现它！"
+msgstr "定时响铃！"
 
 #: internet/spotify/spotifyservice.cpp:672
 msgid "Make playlist available offline"
@@ -3240,7 +3241,7 @@ msgstr "监控媒体库的更改"
 
 #: core/song.cpp:460
 msgid "Monkey's Audio"
-msgstr ""
+msgstr "猴子音频"
 
 #: ../bin/src/ui_playbacksettingspage.h:372
 msgid "Mono playback"
@@ -3428,7 +3429,7 @@ msgstr "普通块类型"
 
 #: ../bin/src/ui_behavioursettingspage.h:428
 msgid "Normal duration (at least 4 minutes or half the track length)"
-msgstr ""
+msgstr "正常持续时间（至少4分钟或音轨长度的一半）"
 
 #: playlist/playlistsequence.cpp:203
 msgid "Not available while using a dynamic playlist"
@@ -3493,7 +3494,7 @@ msgstr "关闭"
 
 #: core/song.cpp:438
 msgid "Ogg FLAC"
-msgstr ""
+msgstr "Ogg FLAC"
 
 #: transcoder/transcoder.cpp:245
 msgid "Ogg Flac"
@@ -3759,11 +3760,11 @@ msgstr "如无歌曲播放则自动播放添加的歌曲"
 
 #: library/libraryview.cpp:396 ui/mainwindow.cpp:1815
 msgid "Play next"
-msgstr ""
+msgstr "播放下一首"
 
 #: ui/mainwindow.cpp:1813
 msgid "Play selected tracks next"
-msgstr ""
+msgstr "在下一首播放所选曲目"
 
 #: core/commandlineoptions.cpp:178
 msgid "Play the <n>th track in the playlist"
@@ -3811,7 +3812,7 @@ msgstr "请关闭你的浏览器，回到 Clementine。"
 #: internet/lastfm/lastfmservice.cpp:180
 #, qt-format
 msgid "Please open this URL in your browser: <a href=\"%1\">%1</a>"
-msgstr ""
+msgstr "请在您的浏览器打开这个网址: <a href=\"%1\">%1</a>"
 
 #: ../bin/src/ui_spotifysettingspage.h:213
 msgid "Plugin status:"
@@ -3819,13 +3820,13 @@ msgstr "插件状态:"
 
 #: ../bin/src/ui_podcastinfodialog.h:93
 msgid "Podcast Information"
-msgstr ""
+msgstr "播客信息"
 
 #: internet/podcasts/podcastservice.cpp:437
 #: internet/podcasts/podcastservice.cpp:535
 #: internet/podcasts/podcastservice.cpp:539
 msgid "Podcast information"
-msgstr ""
+msgstr "播客信息"
 
 #: internet/podcasts/podcastservice.cpp:133
 #: ../bin/src/ui_podcastsettingspage.h:250
@@ -3947,7 +3948,7 @@ msgstr "迷幻"
 
 #: wiimotedev/wiimotesettingspage.cpp:246
 msgid "Push Wii Remote button"
-msgstr ""
+msgstr "按Wii遥控按钮"
 
 #: ../bin/src/ui_wiimoteshortcutgrabber.h:121
 msgid "Push Wiiremote button"
@@ -4070,7 +4071,7 @@ msgstr "刷新流"
 
 #: ui/equalizer.cpp:146
 msgid "Reggae"
-msgstr "Reggae"
+msgstr "雷鬼"
 
 #: playlist/playlistsaveoptionsdialog.cpp:33
 #: ../bin/src/ui_behavioursettingspage.h:419
@@ -4083,7 +4084,7 @@ msgstr "记住 Wii遥控器 节奏"
 
 #: ../bin/src/ui_behavioursettingspage.h:371
 msgid "Remember from &last time"
-msgstr ""
+msgstr "记住上一次"
 
 #: ../bin/src/ui_playlistsaveoptionsdialog.h:99
 msgid "Remember my choice"
@@ -4240,7 +4241,7 @@ msgstr "运行"
 
 #: core/song.cpp:456
 msgid "SNES SPC700"
-msgstr ""
+msgstr "SNES SPC700"
 
 #: ../bin/src/ui_networkproxysettingspage.h:163
 msgid "SOCKS proxy"
@@ -4389,7 +4390,7 @@ msgstr "自动搜索"
 
 #: ui/mainwindow.cpp:700
 msgid "Search for album"
-msgstr ""
+msgstr "搜索专辑"
 
 #: ui/albumcoverchoicecontroller.cpp:70
 msgid "Search for album covers..."
@@ -4402,11 +4403,11 @@ msgstr "搜索一切"
 
 #: ui/mainwindow.cpp:697
 msgid "Search for artist"
-msgstr ""
+msgstr "搜索艺术家"
 
 #: globalsearch/globalsearchview.cpp:474 library/libraryview.cpp:401
 msgid "Search for this"
-msgstr ""
+msgstr "搜索此处"
 
 #: ../bin/src/ui_gpoddersearchpage.h:72
 msgid "Search gpodder.net"
@@ -4536,7 +4537,7 @@ msgstr "设置"
 
 #: ../bin/src/ui_behavioursettingspage.h:429
 msgid "Short duration (at least 1 minute or half the track length)"
-msgstr ""
+msgstr "短持续时间(至少1分钟或音轨长度一半)"
 
 #: ../bin/src/ui_globalshortcutssettingspage.h:172
 msgid "Shortcut"
@@ -4756,11 +4757,11 @@ msgstr "智能播放列表"
 
 #: ui/equalizer.cpp:150
 msgid "Soft"
-msgstr "Soft"
+msgstr "柔和"
 
 #: ui/equalizer.cpp:154
 msgid "Soft Rock"
-msgstr "Soft Rock"
+msgstr "慢摇滚"
 
 #: ../bin/src/ui_songinfosettingspage.h:153
 msgid "Song Information"
@@ -4902,7 +4903,7 @@ msgstr "播放完此曲目后停止"
 
 #: ../bin/src/ui_behavioursettingspage.h:377
 msgid "Stop playback if song fails to play"
-msgstr ""
+msgstr "如果歌曲无法播放将停止播放"
 
 #: core/globalshortcuts.cpp:56
 msgid "Stop playing after current track"
@@ -5493,7 +5494,7 @@ msgstr "VBR MP3"
 
 #: core/song.cpp:458
 msgid "VGM"
-msgstr ""
+msgstr "VGM"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:231
 msgid "Variable bit rate"
@@ -5506,7 +5507,7 @@ msgstr "群星"
 
 #: ../bin/src/ui_subsonicsettingspage.h:136
 msgid "Verify Server certificate"
-msgstr ""
+msgstr "验证服务器证书"
 
 #: ui/about.cpp:35
 #, qt-format
@@ -5565,7 +5566,7 @@ msgstr "Wav"
 
 #: core/song.cpp:450
 msgid "WavPack"
-msgstr ""
+msgstr "WavPack"
 
 #: ../bin/src/ui_podcastinfowidget.h:192
 msgid "Website"
@@ -5581,7 +5582,7 @@ msgstr "Clementine 启动时"
 
 #: ../bin/src/ui_behavioursettingspage.h:427
 msgid "When calculating play counts, use"
-msgstr ""
+msgstr "计算播放次数时使用"
 
 #: ../bin/src/ui_librarysettingspage.h:203
 msgid ""
@@ -5595,7 +5596,7 @@ msgstr "保存播放列表时，保存路径应该为"
 
 #: ../bin/src/ui_behavioursettingspage.h:422
 msgid "When sorting artists, albums and titles"
-msgstr ""
+msgstr "排序艺术家，专辑和标题时"
 
 #: ../bin/src/ui_globalsearchsettingspage.h:147
 msgid "When the list is empty..."
@@ -5753,7 +5754,7 @@ msgid ""
 "You can use your Wii Remote as a remote control for Clementine.  <a "
 "href=\"http://www.clementine-player.org/wiimote\">See the page on the "
 "Clementine wiki</a> for more information.\n"
-msgstr "您可以使用Wii遥控器来控制 Clementine。<a href=\"http://www.clementine-player.org/wiimote\">参见 Clementine Wiki</a> for more information。\n"
+msgstr "您可以使用Wii遥控器来控制 Clementine。<a href=\"http://www.clementine-player.org/wiimote\">参见 Clementine Wiki</a> 获取详细信息。\n"
 
 #: internet/spotify/spotifysettingspage.cpp:149
 msgid "You do not have a Spotify Premium account."
@@ -5885,7 +5886,7 @@ msgstr "不包含"
 
 #: smartplaylists/searchterm.cpp:263
 msgid "empty"
-msgstr ""
+msgstr "空空如也"
 
 #: smartplaylists/searchterm.cpp:253
 msgid "ends with"
@@ -5942,7 +5943,7 @@ msgstr "最新优先"
 
 #: smartplaylists/searchterm.cpp:265
 msgid "not empty"
-msgstr ""
+msgstr "非空"
 
 #: smartplaylists/searchterm.cpp:261
 msgid "not equals"
