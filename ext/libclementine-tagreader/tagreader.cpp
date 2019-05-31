@@ -691,11 +691,13 @@ void TagReader::SetVorbisComments(
       true);
   vorbis_comments->addField(
       "DISCNUMBER",
-      QStringToTaglibString(
-          song.disc() <= 0 ? QString() : QString::number(song.disc())),
+      QStringToTaglibString(song.disc() <= 0 ? QString()
+                                             : QString::number(song.disc())),
       true);
   vorbis_comments->addField(
-      "COMPILATION", QStringToTaglibString(song.compilation() ? QString::number(1) : QString()),
+      "COMPILATION",
+      QStringToTaglibString(song.compilation() ? QString::number(1)
+                                               : QString()),
       true);
 
   // Try to be coherent, the two forms are used but the first one is preferred
@@ -713,19 +715,20 @@ void TagReader::SetFMPSStatisticsVorbisComments(
     TagLib::Ogg::XiphComment* vorbis_comments,
     const pb::tagreader::SongMetadata& song) const {
   if (song.playcount())
-      vorbis_comments->addField(
-          "FMPS_PLAYCOUNT", TagLib::String::number(song.playcount()), true);
+    vorbis_comments->addField("FMPS_PLAYCOUNT",
+                              TagLib::String::number(song.playcount()), true);
   if (song.score())
-      vorbis_comments->addField(
-          "FMPS_RATING_AMAROK_SCORE", QStringToTaglibString(
-              QString::number(song.score() / 100.0)), true);
+    vorbis_comments->addField(
+        "FMPS_RATING_AMAROK_SCORE",
+        QStringToTaglibString(QString::number(song.score() / 100.0)), true);
 }
 
 void TagReader::SetFMPSRatingVorbisComments(
     TagLib::Ogg::XiphComment* vorbis_comments,
     const pb::tagreader::SongMetadata& song) const {
   vorbis_comments->addField(
-      "FMPS_RATING", QStringToTaglibString(QString::number(song.rating())), true);
+      "FMPS_RATING", QStringToTaglibString(QString::number(song.rating())),
+      true);
 }
 
 pb::tagreader::SongMetadata_Type TagReader::GuessFileType(
@@ -784,14 +787,20 @@ bool TagReader::SaveFile(const QString& filename,
   fileref->tag()->setAlbum(StdStringToTaglibString(song.album()));
   fileref->tag()->setGenre(StdStringToTaglibString(song.genre()));
   fileref->tag()->setComment(StdStringToTaglibString(song.comment()));
-  fileref->tag()->setYear(song.year() <= 0 - 1 ? 0: song.year());
-  fileref->tag()->setTrack(song.track() <= 0 - 1 ? 0: song.track());
+  fileref->tag()->setYear(song.year() <= 0 - 1 ? 0 : song.year());
+  fileref->tag()->setTrack(song.track() <= 0 - 1 ? 0 : song.track());
 
   auto saveApeTag = [&](TagLib::APE::Tag* tag) {
-    tag->addValue("disc", QStringToTaglibString(
-        song.disc() <= 0 ? QString() : QString::number(song.disc())), true);
-    tag->addValue("bpm", QStringToTaglibString(
-        song.bpm() <= 0 - 1 ? QString() : QString::number(song.bpm())), true);
+    tag->addValue(
+        "disc",
+        QStringToTaglibString(song.disc() <= 0 ? QString()
+                                               : QString::number(song.disc())),
+        true);
+    tag->addValue("bpm",
+                  QStringToTaglibString(song.bpm() <= 0 - 1
+                                            ? QString()
+                                            : QString::number(song.bpm())),
+                  true);
     tag->setItem("composer",
                  TagLib::APE::Item(
                      "composer", TagLib::StringList(song.composer().c_str())));
@@ -807,15 +816,18 @@ bool TagReader::SaveFile(const QString& filename,
                           TagLib::StringList(song.albumartist().c_str())));
     tag->setItem("lyrics",
                  TagLib::APE::Item("lyrics", TagLib::String(song.lyrics())));
-    tag->addValue("compilation", QStringToTaglibString(song.compilation() ? QString::number(1) : QString()), true);
+    tag->addValue("compilation",
+                  QStringToTaglibString(song.compilation() ? QString::number(1)
+                                                           : QString()),
+                  true);
   };
 
   if (TagLib::MPEG::File* file =
           dynamic_cast<TagLib::MPEG::File*>(fileref->file())) {
     TagLib::ID3v2::Tag* tag = file->ID3v2Tag(true);
-    SetTextFrame(
-        "TPOS", song.disc() <= 0 ? QString() : QString::number(song.disc()),
-        tag);
+    SetTextFrame("TPOS",
+                 song.disc() <= 0 ? QString() : QString::number(song.disc()),
+                 tag);
     SetTextFrame("TBPM",
                  song.bpm() <= 0 - 1 ? QString() : QString::number(song.bpm()),
                  tag);
@@ -825,7 +837,8 @@ bool TagReader::SaveFile(const QString& filename,
     SetUnsyncLyricsFrame(song.lyrics(), tag);
     // Skip TPE1 (which is the artist) here because we already set it
     SetTextFrame("TPE2", song.albumartist(), tag);
-    SetTextFrame("TCMP", song.compilation() ? QString::number(1) : QString(), tag);
+    SetTextFrame("TCMP", song.compilation() ? QString::number(1) : QString(),
+                 tag);
   } else if (TagLib::FLAC::File* file =
                  dynamic_cast<TagLib::FLAC::File*>(fileref->file())) {
     TagLib::Ogg::XiphComment* tag = file->xiphComment();
@@ -889,11 +902,13 @@ bool TagReader::SaveSongStatisticsToFile(
     if (song.score())
       tag->setItem(
           "FMPS_Rating_Amarok_Score",
-          TagLib::APE::Item("FMPS_Rating_Amarok_Score", QStringToTaglibString(
-              QString::number(song.score() / 100.0))));
+          TagLib::APE::Item(
+              "FMPS_Rating_Amarok_Score",
+              QStringToTaglibString(QString::number(song.score() / 100.0))));
     if (song.playcount())
-      tag->setItem("FMPS_PlayCount", TagLib::APE::Item(
-          "FMPS_PlayCount", TagLib::String::number(song.playcount())));
+      tag->setItem("FMPS_PlayCount",
+                   TagLib::APE::Item("FMPS_PlayCount",
+                                     TagLib::String::number(song.playcount())));
   };
 
   if (TagLib::MPEG::File* file =
@@ -902,8 +917,8 @@ bool TagReader::SaveSongStatisticsToFile(
 
     if (song.playcount()) {
       // Save as FMPS
-      SetUserTextFrame("FMPS_PlayCount", QString::number(
-          song.playcount()), tag);
+      SetUserTextFrame("FMPS_PlayCount", QString::number(song.playcount()),
+                       tag);
 
       // Also save as POPM
       TagLib::ID3v2::PopularimeterFrame* frame = GetPOPMFrameFromTag(tag);
@@ -928,8 +943,8 @@ bool TagReader::SaveSongStatisticsToFile(
                dynamic_cast<TagLib::ASF::File*>(fileref->file())) {
     TagLib::ASF::Tag* tag = file->tag();
     if (song.playcount())
-      tag->addAttribute("FMPS/Playcount", NumberToASFAttribute(
-          song.playcount()));
+      tag->addAttribute("FMPS/Playcount",
+                        NumberToASFAttribute(song.playcount()));
     if (song.score())
       tag->addAttribute("FMPS/Rating_Amarok_Score",
                         NumberToASFAttribute(song.score() / 100.0));
@@ -942,8 +957,8 @@ bool TagReader::SaveSongStatisticsToFile(
       tag->itemListMap()[kMP4_FMPS_Score_ID] = TagLib::MP4::Item(
           QStringToTaglibString(QString::number(song.score() / 100.0)));
     if (song.playcount())
-      tag->itemListMap()[kMP4_FMPS_Playcount_ID] = TagLib::MP4::Item(
-          TagLib::String::number(song.playcount()));
+      tag->itemListMap()[kMP4_FMPS_Playcount_ID] =
+          TagLib::MP4::Item(TagLib::String::number(song.playcount()));
   } else if (TagLib::APE::File* file =
                  dynamic_cast<TagLib::APE::File*>(fileref->file())) {
     saveApeSongStats(file->APETag(true));
