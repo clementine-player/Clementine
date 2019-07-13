@@ -1441,7 +1441,7 @@ void MainWindow::closeEvent(QCloseEvent* event) {
     keep_running = s.value("keeprunning", tray_icon_->IsVisible()).toBool();
 
   if (keep_running && event->spontaneous()) {
-	event->ignore();
+    event->ignore();
     SetHiddenInTray(true);
   } else {
     Exit();
