@@ -1441,7 +1441,7 @@ void MainWindow::closeEvent(QCloseEvent* event) {
     keep_running = s.value("keeprunning", tray_icon_->IsVisible()).toBool();
 
   if (keep_running && event->spontaneous()) {
-    event->accept();
+    event->ignore();
     SetHiddenInTray(true);
   } else {
     Exit();
@@ -1454,7 +1454,7 @@ void MainWindow::SetHiddenInTray(bool hidden) {
   // Some window managers don't remember maximized state between calls to
   // hide() and show(), so we have to remember it ourself.
   if (hidden) {
-    hide();
+    QTimer::singleShot(0, this, &QWidget::hide);
   } else {
     if (was_maximized_)
       showMaximized();
