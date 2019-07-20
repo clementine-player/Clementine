@@ -6,13 +6,13 @@
 # gogo <trebelnik2@gmail.com>, 2010
 # gogo <trebelnik2@gmail.com>, 2010
 # PyroCMS HR <info@printheos.com>, 2013
-# gogo <trebelnik2@gmail.com>, 2013-2017
+# gogo <trebelnik2@gmail.com>, 2013-2017,2019
 # gogo <trebelnik2@gmail.com>, 2012
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2019-04-10 10:30+0000\n"
-"Last-Translator: hatstand <john.maguire@gmail.com>\n"
+"PO-Revision-Date: 2019-07-18 19:29+0000\n"
+"Last-Translator: gogo <trebelnik2@gmail.com>\n"
 "Language-Team: Croatian (http://www.transifex.com/davidsansome/clementine/language/hr/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -345,7 +345,7 @@ msgid ""
 "played in the last 180 minutes.</p><p><span style=\" font-"
 "weight:600;\">Available fields: </span><span style=\" font-"
 "style:italic;\">%1</span>.</p></body></html>"
-msgstr ""
+msgstr "<html><head/><body><p>Prefiks riječi s nazivom polja za ograničavanje pretraživanja na tom polju, npr. <span style=\" font-weight:600;\">izvođač:</span><span style=\" font-style:italic;\">Boje</span> pretražuje fonoteku za sve izvođače koji sadrže riječ  Boje, <span style=\" font-weight:600;\">broj izvođenja:</span><span style=\" font-style:italic;\">&gt;=2</span> pretražuje pjesme u fonoteci koje su se reproducirale najmanje  dva puta, <span style=\" font-weight:600;\">zadnje reproducirano:</span>&lt;<span style=\" font-style:italic;\">1h30m</span> pretražuje u fonoteci pjesme koje su se reproducirale u posljednjih 180 minuta.</p><p><span style=\" font-weight:600;\">Dostupna polja: </span><span style=\" font-style:italic;\">%1</span>.</p></body></html>"
 
 #: ../bin/src/ui_librarysettingspage.h:198
 msgid ""
@@ -398,7 +398,7 @@ msgstr "Pjesma će biti odabrana u popisu izvođenja ako se podudara s ovim uvje
 
 #: ../bin/src/ui_behavioursettingspage.h:417
 msgid "A&utomatic"
-msgstr ""
+msgstr "A&utomatski"
 
 #: smartplaylists/searchterm.cpp:396
 msgid "A-Z"
@@ -471,7 +471,7 @@ msgstr "Radnja"
 
 #: wiimotedev/wiimotesettingspage.cpp:103
 msgid "Activate/Deactivate Wii Remote"
-msgstr ""
+msgstr "Aktiviraj/Deaktiviraj Wii Daljinski upravljač"
 
 #: internet/podcasts/addpodcastdialog.cpp:63
 msgid "Add Podcast"
@@ -768,11 +768,11 @@ msgstr "Pokraj izvornika"
 
 #: ../bin/src/ui_behavioursettingspage.h:370
 msgid "Alwa&ys hide the main window"
-msgstr ""
+msgstr "Uvij&ek sakrij glavni prozor"
 
 #: ../bin/src/ui_behavioursettingspage.h:369
 msgid "Always show &the main window"
-msgstr ""
+msgstr "Uvijek prikaži &glavni prozor"
 
 #: ../bin/src/ui_behavioursettingspage.h:384
 #: ../bin/src/ui_behavioursettingspage.h:404
@@ -864,7 +864,7 @@ msgstr "Prvi izvođač"
 
 #: ../bin/src/ui_behavioursettingspage.h:420
 msgid "As&k when saving"
-msgstr ""
+msgstr "Pita&j prilikom spremanja"
 
 #: ../bin/src/ui_transcodedialog.h:225
 #: ../bin/src/ui_networkremotesettingspage.h:250
@@ -881,7 +881,7 @@ msgstr "Zvučni izlaz"
 #: internet/lastfm/lastfmservice.cpp:270
 #: internet/lastfm/lastfmsettingspage.cpp:76
 msgid "Authentication failed"
-msgstr "Provjera autentičnosti nije uspjela"
+msgstr "Ovjera nije uspjela"
 
 #: ../bin/src/ui_episodeinfowidget.h:132 ../bin/src/ui_podcastinfowidget.h:191
 msgid "Author"
@@ -1111,7 +1111,7 @@ msgstr "Kanali"
 
 #: ../bin/src/ui_podcastsettingspage.h:252
 msgid "Check for new episodes"
-msgstr "Provjeri za nove nastavke"
+msgstr "Provjeri za nove epizode"
 
 #: internet/googledrive/googledriveservice.cpp:221
 msgid "Check for updates"
@@ -1307,7 +1307,7 @@ msgstr "Zarezom odvojen popis klasa:razina, razina je 0-3"
 
 #: ../bin/src/ui_behavioursettingspage.h:425
 msgid "Comma seperated list of prefix words to ignore when sorting"
-msgstr ""
+msgstr "Zarezom odvojeni popis riječi prefiksa za zanemarivanje prilikom razvrstavanja"
 
 #: playlist/playlist.cpp:1435 smartplaylists/searchterm.cpp:384
 #: ui/organisedialog.cpp:79 ../bin/src/ui_edittagdialog.h:718
@@ -1543,11 +1543,11 @@ msgstr "Ctrl+Up"
 
 #: ../bin/src/ui_queuemanager.h:141
 msgid "Ctrl+"
-msgstr ""
+msgstr "Ctrl+"
 
 #: ../bin/src/ui_queuemanager.h:145
 msgid "Ctrl+"
-msgstr ""
+msgstr "Ctrl+"
 
 #: ui/equalizer.cpp:110
 msgid "Custom"
@@ -1582,7 +1582,7 @@ msgstr "Baza podataka je oštećena. Pročitajte na https://github.com/clementin
 
 #: ../bin/src/ui_episodeinfowidget.h:133
 msgid "Date"
-msgstr ""
+msgstr "Datum"
 
 #: playlist/playlist.cpp:1432 ../bin/src/ui_edittagdialog.h:715
 msgid "Date created"
@@ -1602,11 +1602,11 @@ msgstr "Za&dano"
 
 #: core/commandlineoptions.cpp:165
 msgid "Decrease the volume by 4 percent"
-msgstr ""
+msgstr "Smanji glasnoću zvuka za 4 posto"
 
 #: core/commandlineoptions.cpp:167
 msgid "Decrease the volume by <value> percent"
-msgstr "Smanji glanoću zvuka za <value> posto"
+msgstr "Smanji glasnoću zvuka za <value> posto"
 
 #: core/globalshortcuts.cpp:63 wiimotedev/wiimotesettingspage.cpp:112
 msgid "Decrease volume"
@@ -1654,7 +1654,7 @@ msgstr "Obrišite s diska..."
 
 #: ../bin/src/ui_podcastsettingspage.h:268
 msgid "Delete played episodes"
-msgstr "Obriši reproducirane nastavke"
+msgstr "Obriši reproducirane epizode"
 
 #: ui/equalizer.cpp:221 ../bin/src/ui_equalizer.h:168
 msgid "Delete preset"
@@ -1666,7 +1666,7 @@ msgstr "Obrišite pametni popis izvođenja"
 
 #: core/commandlineoptions.cpp:186
 msgid "Delete the currently playing song"
-msgstr ""
+msgstr "Obriši trenutno reproduciranu pjesmu"
 
 #: ../bin/src/ui_organisedialog.h:245
 msgid "Delete the original files"
@@ -1823,7 +1823,7 @@ msgstr "Ne prikazuj u različitim izvođačima"
 
 #: ../bin/src/ui_podcastsettingspage.h:274
 msgid "Don't show listened episodes"
-msgstr "Ne prikazuj odslušane nastavke"
+msgstr "Ne prikazuj odslušane epizode"
 
 #: widgets/osd.cpp:287 ../bin/src/ui_playlistsequence.h:116
 msgid "Don't shuffle"
@@ -1863,7 +1863,7 @@ msgstr "Preuzmi direktorij"
 
 #: ../bin/src/ui_podcastsettingspage.h:264
 msgid "Download episodes to"
-msgstr "Preuzmi nastavke u"
+msgstr "Preuzmi epizode u"
 
 #: ../bin/src/ui_magnatunesettingspage.h:160
 msgid "Download membership"
@@ -1871,7 +1871,7 @@ msgstr "Učlani se"
 
 #: ../bin/src/ui_podcastsettingspage.h:265
 msgid "Download new episodes automatically"
-msgstr "Preuzmi automatski nove nastavke"
+msgstr "Preuzmi automatski nove epizode"
 
 #: internet/podcasts/podcastservice.cpp:294
 #: internet/podcasts/podcastservice.cpp:333
@@ -2080,7 +2080,7 @@ msgstr "Cijelu kolekciju"
 
 #: internet/podcasts/podcastservice.cpp:532
 msgid "Episode information"
-msgstr ""
+msgstr "Informacije epizode"
 
 #: ../bin/src/ui_equalizer.h:162 ../bin/src/ui_mainwindow.h:705
 msgid "Equalizer"
@@ -2577,7 +2577,7 @@ msgstr "HTML stranica ne sadrži niti jedan RSS izvor"
 #: internet/subsonic/subsonicsettingspage.cpp:166
 msgid ""
 "HTTP 3xx status code received without URL, verify server configuration."
-msgstr "HTTP 3xx status kôd je primljen bez URL-a, potvrdite podešavanje poslužitelja."
+msgstr "HTTP 3xx kôd stanja je primljen bez URL-a, potvrdite podešavanje poslužitelja."
 
 #: ../bin/src/ui_networkproxysettingspage.h:162
 msgid "HTTP proxy"
@@ -2597,7 +2597,7 @@ msgstr "Informacije o hardveru samo su dostupne dok je uređaj spojen"
 
 #: ../bin/src/ui_appearancesettingspage.h:325
 msgid "Hide playlist filter toolbar"
-msgstr ""
+msgstr "Sakrij alatnu traku filtra popisa izvođenja"
 
 #: ../bin/src/ui_transcoderoptionsmp3.h:201
 msgid "High"
@@ -2615,7 +2615,7 @@ msgstr "Visoka (1024x1024)"
 
 #: ui/equalizer.cpp:128
 msgid "Hip Hop"
-msgstr ""
+msgstr "Hip Hop"
 
 #: internet/subsonic/subsonicsettingspage.cpp:138
 msgid "Host not found, check server URL. Example: http://localhost:4040/"
@@ -2663,11 +2663,11 @@ msgstr "Ako vam je poznat URL podcasta, upišite ga ispod i pritisnite Idi."
 
 #: ../bin/src/ui_organisedialog.h:255
 msgid "Ignore \"The\" in artist names"
-msgstr "Ignoriraj \"The\" u nazivu izvođača"
+msgstr "Zanemari \"The\" u nazivu izvođača"
 
 #: ../bin/src/ui_behavioursettingspage.h:423
 msgid "Ignore prefix word(s)"
-msgstr ""
+msgstr "Zanemari riječ(i) prefiksa"
 
 #: ui/albumcoverchoicecontroller.cpp:44
 msgid "Images (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm)"
@@ -2719,11 +2719,11 @@ msgstr "Nepotpuno podešavanje, pobrinite se da su sva polja popunjena."
 
 #: core/commandlineoptions.cpp:164
 msgid "Increase the volume by 4 percent"
-msgstr ""
+msgstr "Pojačaj glasnoću zvuka za 4 posto"
 
 #: core/commandlineoptions.cpp:166
 msgid "Increase the volume by <value> percent"
-msgstr "Povećaj glanoću zvuka za <value> posto"
+msgstr "Pojačaj glasnoću zvuka za <value> posto"
 
 #: core/globalshortcuts.cpp:62 wiimotedev/wiimotesettingspage.cpp:110
 msgid "Increase volume"
@@ -3419,7 +3419,7 @@ msgstr "Normalna vrsta blokova"
 
 #: ../bin/src/ui_behavioursettingspage.h:428
 msgid "Normal duration (at least 4 minutes or half the track length)"
-msgstr ""
+msgstr "Normalno trajanje (najmanje 4 minute ili polovina trajanja pjesme)"
 
 #: playlist/playlistsequence.cpp:203
 msgid "Not available while using a dynamic playlist"
@@ -3750,11 +3750,11 @@ msgstr "Reproduciraj glazbu ako se trenutno ništa ne reproducira"
 
 #: library/libraryview.cpp:396 ui/mainwindow.cpp:1815
 msgid "Play next"
-msgstr ""
+msgstr "Reproduciraj sljedeće"
 
 #: ui/mainwindow.cpp:1813
 msgid "Play selected tracks next"
-msgstr ""
+msgstr "Reproduciraj sljedeće odabranu pjesmu"
 
 #: core/commandlineoptions.cpp:178
 msgid "Play the <n>th track in the playlist"
@@ -3806,17 +3806,17 @@ msgstr "Otvorite ovaj URL u vašem pregledniku: <a href=\"%1\">%1</a>"
 
 #: ../bin/src/ui_spotifysettingspage.h:213
 msgid "Plugin status:"
-msgstr "Status dodatka:"
+msgstr "Stanje dodatka:"
 
 #: ../bin/src/ui_podcastinfodialog.h:93
 msgid "Podcast Information"
-msgstr ""
+msgstr "Informacije podcasta"
 
 #: internet/podcasts/podcastservice.cpp:437
 #: internet/podcasts/podcastservice.cpp:535
 #: internet/podcasts/podcastservice.cpp:539
 msgid "Podcast information"
-msgstr ""
+msgstr "Informacije podcasta"
 
 #: internet/podcasts/podcastservice.cpp:133
 #: ../bin/src/ui_podcastsettingspage.h:250
@@ -3938,7 +3938,7 @@ msgstr "Psihodelično"
 
 #: wiimotedev/wiimotesettingspage.cpp:246
 msgid "Push Wii Remote button"
-msgstr ""
+msgstr "Pritisni tipku Wii daljinskog upravljača"
 
 #: ../bin/src/ui_wiimoteshortcutgrabber.h:121
 msgid "Push Wiiremote button"
@@ -4074,7 +4074,7 @@ msgstr "Zapamti wiiremote zamah"
 
 #: ../bin/src/ui_behavioursettingspage.h:371
 msgid "Remember from &last time"
-msgstr ""
+msgstr "Zapamti od prošlog &pokretanja"
 
 #: ../bin/src/ui_playlistsaveoptionsdialog.h:99
 msgid "Remember my choice"
@@ -4174,7 +4174,7 @@ msgstr "Izmješajte pjesme"
 
 #: ../bin/src/ui_networkremotesettingspage.h:235
 msgid "Require authentication code"
-msgstr "Potreban je kôd autentifikacije"
+msgstr "Potreban je kôd ovjere"
 
 #: widgets/lineedit.cpp:52
 msgid "Reset"
@@ -4231,7 +4231,7 @@ msgstr "Pokreni"
 
 #: core/song.cpp:456
 msgid "SNES SPC700"
-msgstr ""
+msgstr "SNES SPC700"
 
 #: ../bin/src/ui_networkproxysettingspage.h:163
 msgid "SOCKS proxy"
@@ -4527,7 +4527,7 @@ msgstr "Postavke"
 
 #: ../bin/src/ui_behavioursettingspage.h:429
 msgid "Short duration (at least 1 minute or half the track length)"
-msgstr ""
+msgstr "Kratko trajanje (najmanje 1 minute ili polovina trajanja pjesme)"
 
 #: ../bin/src/ui_globalshortcutssettingspage.h:172
 msgid "Shortcut"
@@ -4586,7 +4586,7 @@ msgstr "Prikaži ljepši OSD"
 
 #: widgets/nowplayingwidget.cpp:141
 msgid "Show above status bar"
-msgstr "Prikaži iznad statusne trake"
+msgstr "Prikaži iznad trake stanja"
 
 #: ui/mainwindow.cpp:647
 msgid "Show all songs"
@@ -4893,7 +4893,7 @@ msgstr "Zaustavi reprodukciju nakon trenutne pjesme"
 
 #: ../bin/src/ui_behavioursettingspage.h:377
 msgid "Stop playback if song fails to play"
-msgstr ""
+msgstr "Zaustavi reprodukciju uslijed neuspjele reprodukcije pjesme"
 
 #: core/globalshortcuts.cpp:56
 msgid "Stop playing after current track"
@@ -4973,15 +4973,15 @@ msgstr "Uskaldi statistiku s datotekama odmah"
 
 #: internet/spotify/spotifyservice.cpp:710
 msgid "Syncing Spotify inbox"
-msgstr "Sinkronizacija Spotify ulaznog spremnika"
+msgstr "Usklađivanje Spotify ulaznog spremnika"
 
 #: internet/spotify/spotifyservice.cpp:704
 msgid "Syncing Spotify playlist"
-msgstr "Sinkroniziranje Spotify popisa izvođenja"
+msgstr "Usklađivanje Spotify popisa izvođenja"
 
 #: internet/spotify/spotifyservice.cpp:715
 msgid "Syncing Spotify starred tracks"
-msgstr "Sinkronizacija Spotify pjesama označenim zvjezdicama"
+msgstr "Usklađivanje Spotify pjesama označenim zvjezdicama"
 
 #: moodbar/moodbarrenderer.cpp:177
 msgid "System colors"
@@ -5419,7 +5419,7 @@ msgstr "Koristi mrežni daljinski upravljač"
 
 #: ../bin/src/ui_networkproxysettingspage.h:166
 msgid "Use authentication"
-msgstr "Koristite autentifikaciju"
+msgstr "Koristite ovjeru"
 
 #: ../bin/src/ui_transcoderoptionsvorbis.h:202
 msgid "Use bitrate management engine"
@@ -5431,7 +5431,7 @@ msgstr "Koristi dinamički mod"
 
 #: ../bin/src/ui_wiimotesettingspage.h:178
 msgid "Use notifications to report Wii Remote status"
-msgstr "Koristi obavijesti za prijavu statusa Wii Daljinskog upravljača"
+msgstr "Koristi obavijesti za prijavu stanja Wii Daljinskog upravljača"
 
 #: ../bin/src/ui_appearancesettingspage.h:324
 msgid "Use system icons"
@@ -5484,7 +5484,7 @@ msgstr "VBR MP3"
 
 #: core/song.cpp:458
 msgid "VGM"
-msgstr ""
+msgstr "VGM"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:231
 msgid "Variable bit rate"
@@ -5497,7 +5497,7 @@ msgstr "Razni izvođači"
 
 #: ../bin/src/ui_subsonicsettingspage.h:136
 msgid "Verify Server certificate"
-msgstr ""
+msgstr "Provjeri vjerodajnice poslužitelja"
 
 #: ui/about.cpp:35
 #, qt-format
@@ -5556,7 +5556,7 @@ msgstr "Wav"
 
 #: core/song.cpp:450
 msgid "WavPack"
-msgstr ""
+msgstr "WavPack"
 
 #: ../bin/src/ui_podcastinfowidget.h:192
 msgid "Website"
@@ -5572,7 +5572,7 @@ msgstr "Kada je Clementine pokrenut"
 
 #: ../bin/src/ui_behavioursettingspage.h:427
 msgid "When calculating play counts, use"
-msgstr ""
+msgstr "Kada se izračunava broj reprodukcije, koristi"
 
 #: ../bin/src/ui_librarysettingspage.h:203
 msgid ""
@@ -5586,7 +5586,7 @@ msgstr "Prilikom spremanja popisa izvođenja, putanje datoteke trebale bi biti"
 
 #: ../bin/src/ui_behavioursettingspage.h:422
 msgid "When sorting artists, albums and titles"
-msgstr ""
+msgstr "Prilikom razvrstavanja albuma, izvođača i naslova"
 
 #: ../bin/src/ui_globalsearchsettingspage.h:147
 msgid "When the list is empty..."
@@ -5876,7 +5876,7 @@ msgstr "ne sadrži"
 
 #: smartplaylists/searchterm.cpp:263
 msgid "empty"
-msgstr ""
+msgstr "prazno"
 
 #: smartplaylists/searchterm.cpp:253
 msgid "ends with"
@@ -5933,7 +5933,7 @@ msgstr "najnovije prvo"
 
 #: smartplaylists/searchterm.cpp:265
 msgid "not empty"
-msgstr ""
+msgstr "nije prazno"
 
 #: smartplaylists/searchterm.cpp:261
 msgid "not equals"
