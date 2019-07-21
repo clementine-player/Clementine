@@ -162,7 +162,7 @@ GstElement* GstEnginePipeline::CreateDecodeBinFromUrl(const QUrl& url) {
 #ifdef HAVE_SPOTIFY
   if (url.scheme() == "spotify") {
     new_bin = gst_bin_new("spotify_bin");
-    if (!new_bin) return nullptr; 
+    if (!new_bin) return nullptr;
 
     // Create elements
     GstElement* src = engine_->CreateElement("tcpserversrc", new_bin);
@@ -207,7 +207,7 @@ GstElement* GstEnginePipeline::CreateDecodeBinFromUrl(const QUrl& url) {
       uri = url.toEncoded();
     }
     new_bin = engine_->CreateElement("uridecodebin");
-    if (!new_bin) return nullptr; 
+    if (!new_bin) return nullptr;
     g_object_set(G_OBJECT(new_bin), "uri", uri.constData(), nullptr);
     CHECKED_GCONNECT(G_OBJECT(new_bin), "drained", &SourceDrainedCallback,
                      this);
@@ -468,7 +468,7 @@ bool GstEnginePipeline::Init() {
   gst_pad_add_probe(pad, GST_PAD_PROBE_TYPE_BUFFER, HandoffCallback, this,
                     nullptr);
   gst_object_unref(pad);
-  GstBus *bus = gst_pipeline_get_bus(GST_PIPELINE(pipeline_));
+  GstBus* bus = gst_pipeline_get_bus(GST_PIPELINE(pipeline_));
   gst_bus_set_sync_handler(bus, BusCallbackSync, this, nullptr);
   bus_cb_id_ = gst_bus_add_watch(bus, BusCallback, this);
   gst_object_unref(bus);
@@ -531,7 +531,7 @@ bool GstEnginePipeline::InitFromUrl(const QUrl& url, qint64 end_nanosec) {
 
 GstEnginePipeline::~GstEnginePipeline() {
   if (pipeline_) {
-    GstBus *bus = gst_pipeline_get_bus(GST_PIPELINE(pipeline_));
+    GstBus* bus = gst_pipeline_get_bus(GST_PIPELINE(pipeline_));
     gst_bus_set_sync_handler(bus, nullptr, nullptr, nullptr);
     gst_object_unref(bus);
 
