@@ -19,7 +19,12 @@ else()
   add_definitions(-DSYSTEM_BYTEORDER=2)
 endif()
 
+include(ConfigureChecks.cmake)
+configure_file(config.h.cmake "${CMAKE_CURRENT_BINARY_DIR}/config.h")
 configure_file(taglib_config.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/taglib_config.h)
+
+add_definitions(-DHAVE_CONFIG_H)
+add_definitions(-DTAGLIB_STATIC)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 include_directories(
