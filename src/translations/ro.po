@@ -9,7 +9,7 @@
 # AzuraMeta <azura.meta@gmail.com>, 2011
 # 8266d4ce42d3694fffc0e46575c7e44a, 2013
 # CD <cstl@vivaldi.net>, 2015-2016
-# Daniel Șerbănescu <daniel@serbanescu.dk>, 2014,2017
+# Daniel Șerbănescu <daniel@serbanescu.dk>, 2014,2017,2019
 # Daniel Șerbănescu <daniel@serbanescu.dk>, 2014
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # ilixandr <ilixandr@gmail.com>, 2014
@@ -19,8 +19,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2018-11-17 13:46+0000\n"
-"Last-Translator: hatstand <john.maguire@gmail.com>\n"
+"PO-Revision-Date: 2019-04-18 08:58+0000\n"
+"Last-Translator: Daniel Șerbănescu <daniel@serbanescu.dk>\n"
 "Language-Team: Romanian (http://www.transifex.com/davidsansome/clementine/language/ro/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -52,9 +52,9 @@ msgstr "zile"
 msgid " kbps"
 msgstr "kbps"
 
-#: ../bin/src/ui_playbacksettingspage.h:347
-#: ../bin/src/ui_playbacksettingspage.h:350
-#: ../bin/src/ui_playbacksettingspage.h:364
+#: ../bin/src/ui_playbacksettingspage.h:349
+#: ../bin/src/ui_playbacksettingspage.h:352
+#: ../bin/src/ui_playbacksettingspage.h:366
 msgid " ms"
 msgstr "ms"
 
@@ -272,7 +272,7 @@ msgstr "(diferit în cadrul mai multor melodii)"
 msgid ", by "
 msgstr ", de "
 
-#: ui/about.cpp:86
+#: ui/about.cpp:89
 msgid "...and all the Amarok contributors"
 msgstr "...și tuturor colaboratorilor Amarok"
 
@@ -301,7 +301,7 @@ msgstr "1 piesă"
 msgid "128k MP3"
 msgstr "128k MP3"
 
-#: ../bin/src/ui_playbacksettingspage.h:378
+#: ../bin/src/ui_playbacksettingspage.h:380
 msgid "192,000Hz"
 msgstr "192,000Hz"
 
@@ -309,11 +309,11 @@ msgstr "192,000Hz"
 msgid "40%"
 msgstr "40%"
 
-#: ../bin/src/ui_playbacksettingspage.h:375
+#: ../bin/src/ui_playbacksettingspage.h:377
 msgid "44,100Hz"
 msgstr "44,100Hz"
 
-#: ../bin/src/ui_playbacksettingspage.h:376
+#: ../bin/src/ui_playbacksettingspage.h:378
 msgid "48,000Hz"
 msgstr "48,000Hz"
 
@@ -321,7 +321,7 @@ msgstr "48,000Hz"
 msgid "50 random tracks"
 msgstr "50 de piese aleatorii"
 
-#: ../bin/src/ui_playbacksettingspage.h:377
+#: ../bin/src/ui_playbacksettingspage.h:379
 msgid "96,000Hz"
 msgstr "96,000Hz"
 
@@ -353,7 +353,7 @@ msgid ""
 "played in the last 180 minutes.</p><p><span style=\" font-"
 "weight:600;\">Available fields: </span><span style=\" font-"
 "style:italic;\">%1</span>.</p></body></html>"
-msgstr ""
+msgstr "<html><head/><body><p>Utilizați numele câmpului ca prefix pentru a limita căutarea în acel câmp, de exemplu <span style=\" font-weight:600;\">artist:</span><span style=\" font-style:italic;\">Bode</span> va căuta în bibliotecă după toți artiștii ce conțin cuvântul Bode, <span style=\" font-weight:600;\">playcount:</span><span style=\" font-style:italic;\">&gt;=2</span> va căuta în bibliotecă după melodii redate de cel puțin două ori, <span style=\" font-weight:600;\">lastplayed:</span>&lt;<span style=\" font-style:italic;\">1h30m</span> va căuta în bibliotecă după melodii redate în intervalul de 180 de minute.</p><p><span style=\" font-weight:600;\">Câmpuri disponibile</span><span style=\" font-style:italic;\">%1</span>.</p></body></html>"
 
 #: ../bin/src/ui_librarysettingspage.h:198
 msgid ""
@@ -406,7 +406,7 @@ msgstr "O melodie va fi inclusă în lista de redare dacă îndeplinește aceste
 
 #: ../bin/src/ui_behavioursettingspage.h:417
 msgid "A&utomatic"
-msgstr ""
+msgstr "A&utomat"
 
 #: smartplaylists/searchterm.cpp:396
 msgid "A-Z"
@@ -432,7 +432,7 @@ msgstr "AAC 64k"
 msgid "AIFF"
 msgstr "AIFF"
 
-#: widgets/nowplayingwidget.cpp:151
+#: widgets/nowplayingwidget.cpp:150
 msgid "ALL GLORY TO THE HYPNOTOAD"
 msgstr "GLORIE HYPNOTOADULUI"
 
@@ -479,7 +479,7 @@ msgstr "Acțiune"
 
 #: wiimotedev/wiimotesettingspage.cpp:103
 msgid "Activate/Deactivate Wii Remote"
-msgstr ""
+msgstr "Activează/Deactivează Telecomanda Wii"
 
 #: internet/podcasts/addpodcastdialog.cpp:63
 msgid "Add Podcast"
@@ -693,7 +693,7 @@ msgstr "După copiere..."
 msgid "Album"
 msgstr "Album"
 
-#: ../bin/src/ui_playbacksettingspage.h:357
+#: ../bin/src/ui_playbacksettingspage.h:359
 msgid "Album (ideal loudness for all tracks)"
 msgstr "Album (intensitate sunet ideală pentru toate piesele)"
 
@@ -750,7 +750,7 @@ msgstr "Toate fișierele (*)"
 msgid "All playlists (%1)"
 msgstr "Toate listele de redare (%1)"
 
-#: ui/about.cpp:82
+#: ui/about.cpp:85
 msgid "All the translators"
 msgstr "Toți traducătorii"
 
@@ -776,11 +776,11 @@ msgstr "Lângă originale"
 
 #: ../bin/src/ui_behavioursettingspage.h:370
 msgid "Alwa&ys hide the main window"
-msgstr ""
+msgstr "A&scunde întotdeauna fereastra principală"
 
 #: ../bin/src/ui_behavioursettingspage.h:369
 msgid "Always show &the main window"
-msgstr ""
+msgstr "Ara&tă întotdeauna fereastra principală"
 
 #: ../bin/src/ui_behavioursettingspage.h:384
 #: ../bin/src/ui_behavioursettingspage.h:404
@@ -806,7 +806,7 @@ msgstr "A apărut o eroare la scrierea metadatei la '%1'"
 msgid "An unspecified error occurred."
 msgstr "A intervenit o eroare neașteptată."
 
-#: ui/about.cpp:87
+#: ui/about.cpp:90
 msgid "And:"
 msgstr "Și:"
 
@@ -834,7 +834,7 @@ msgstr "Adaugă în lista de redare curentă"
 msgid "Append to the playlist"
 msgstr "Adăuga în lista de redare"
 
-#: ../bin/src/ui_playbacksettingspage.h:360
+#: ../bin/src/ui_playbacksettingspage.h:362
 msgid "Apply compression to prevent clipping"
 msgstr "Aplicați compresia pentru a preveni tăierea"
 
@@ -872,7 +872,7 @@ msgstr "Inițială artist"
 
 #: ../bin/src/ui_behavioursettingspage.h:420
 msgid "As&k when saving"
-msgstr ""
+msgstr "Întrea&bă când se salvează"
 
 #: ../bin/src/ui_transcodedialog.h:225
 #: ../bin/src/ui_networkremotesettingspage.h:250
@@ -880,7 +880,7 @@ msgstr ""
 msgid "Audio format"
 msgstr "Format audio"
 
-#: ../bin/src/ui_playbacksettingspage.h:361
+#: ../bin/src/ui_playbacksettingspage.h:363
 msgid "Audio output"
 msgstr "Ieșire audio"
 
@@ -895,12 +895,12 @@ msgstr "Autentificarea a eșuat"
 msgid "Author"
 msgstr "Autor"
 
-#: ui/about.cpp:70
+#: ui/about.cpp:73
 msgid "Authors"
 msgstr "Autori"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:226
-#: ../bin/src/ui_playbacksettingspage.h:374
+#: ../bin/src/ui_playbacksettingspage.h:376
 msgid "Auto"
 msgstr "Automat"
 
@@ -1039,7 +1039,7 @@ msgstr "Box"
 msgid "Browse..."
 msgstr "Navighează..."
 
-#: ../bin/src/ui_playbacksettingspage.h:363
+#: ../bin/src/ui_playbacksettingspage.h:365
 msgid "Buffer duration"
 msgstr "Durată memorie tampon"
 
@@ -1103,11 +1103,11 @@ msgstr "Schimba melodia redată în prezent"
 msgid "Change the language"
 msgstr "Schimbă limba"
 
-#: ../bin/src/ui_playbacksettingspage.h:381
+#: ../bin/src/ui_playbacksettingspage.h:383
 msgid "Changes will take place when the next song starts playing"
 msgstr "Schimbările vor fi efectuate când începe redarea următoarei melodii"
 
-#: ../bin/src/ui_playbacksettingspage.h:368
+#: ../bin/src/ui_playbacksettingspage.h:370
 msgid ""
 "Changing mono playback preference will be effective for the next playing "
 "songs"
@@ -1315,7 +1315,7 @@ msgstr "Listă separată prin virgulă de clasă:nivel, nivelul este 0-3"
 
 #: ../bin/src/ui_behavioursettingspage.h:425
 msgid "Comma seperated list of prefix words to ignore when sorting"
-msgstr ""
+msgstr "Listă separată prin virgulă de cuvinte prefix de ignorat la sortare"
 
 #: playlist/playlist.cpp:1435 smartplaylists/searchterm.cpp:384
 #: ui/organisedialog.cpp:79 ../bin/src/ui_edittagdialog.h:718
@@ -1381,7 +1381,7 @@ msgstr "Configurați..."
 msgid "Connect Wii Remotes using active/deactive action"
 msgstr "Conectează Wii Remote folosind acțiunea activ/inactiv"
 
-#: devices/devicemanager.cpp:234 devices/devicemanager.cpp:239
+#: devices/devicemanager.cpp:263 devices/devicemanager.cpp:268
 msgid "Connect device"
 msgstr "Conectează dispozitiv"
 
@@ -1533,11 +1533,11 @@ msgstr "Coperți de la %1"
 msgid "Create a new playlist with files/URLs"
 msgstr "Creează o nouă listă de redare cu fișierele/URL-urile"
 
-#: ../bin/src/ui_playbacksettingspage.h:344
+#: ../bin/src/ui_playbacksettingspage.h:346
 msgid "Cross-fade when changing tracks automatically"
 msgstr "Estompare-încrucișată când se schimbă automat piesele"
 
-#: ../bin/src/ui_playbacksettingspage.h:343
+#: ../bin/src/ui_playbacksettingspage.h:345
 msgid "Cross-fade when changing tracks manually"
 msgstr "Estompare-încrucișată când se schimbă manual piesele"
 
@@ -1551,11 +1551,11 @@ msgstr "Ctrl+Up"
 
 #: ../bin/src/ui_queuemanager.h:141
 msgid "Ctrl+"
-msgstr ""
+msgstr "Ctrl+"
 
 #: ../bin/src/ui_queuemanager.h:145
 msgid "Ctrl+"
-msgstr ""
+msgstr "Ctrl+"
 
 #: ui/equalizer.cpp:110
 msgid "Custom"
@@ -1590,7 +1590,7 @@ msgstr "S-a detectat alterarea bazei de date. Citiți https://github.com/clement
 
 #: ../bin/src/ui_episodeinfowidget.h:133
 msgid "Date"
-msgstr ""
+msgstr "Dată"
 
 #: playlist/playlist.cpp:1432 ../bin/src/ui_edittagdialog.h:715
 msgid "Date created"
@@ -1610,7 +1610,7 @@ msgstr "Im&plicit"
 
 #: core/commandlineoptions.cpp:165
 msgid "Decrease the volume by 4 percent"
-msgstr ""
+msgstr "Scade volumul cu 4 procente"
 
 #: core/commandlineoptions.cpp:167
 msgid "Decrease the volume by <value> percent"
@@ -1637,7 +1637,7 @@ msgstr "Implicite"
 msgid "Delay between visualizations"
 msgstr "Întârziere între vizualizări"
 
-#: playlist/playlistlistcontainer.cpp:156
+#: playlist/playlistlistcontainer.cpp:152
 #: ../bin/src/ui_playlistlistcontainer.h:132
 msgid "Delete"
 msgstr "Șterge"
@@ -1674,7 +1674,7 @@ msgstr "Șterge lista de redare inteligentă"
 
 #: core/commandlineoptions.cpp:186
 msgid "Delete the currently playing song"
-msgstr ""
+msgstr "Șterge melodia redată în prezent"
 
 #: ../bin/src/ui_organisedialog.h:245
 msgid "Delete the original files"
@@ -2074,7 +2074,7 @@ msgstr "Introduceți aici termeni de căutare"
 msgid "Enter the URL of an internet radio stream:"
 msgstr "Introduceți adresa URL a unui flux radio de pe internet:"
 
-#: playlist/playlistlistcontainer.cpp:259
+#: playlist/playlistlistcontainer.cpp:255
 msgid "Enter the name of the folder"
 msgstr "Introduceți numele dosarului"
 
@@ -2088,7 +2088,7 @@ msgstr "Toată colecția"
 
 #: internet/podcasts/podcastservice.cpp:532
 msgid "Episode information"
-msgstr ""
+msgstr "Informații episod"
 
 #: ../bin/src/ui_equalizer.h:162 ../bin/src/ui_mainwindow.h:705
 msgid "Equalizer"
@@ -2133,7 +2133,7 @@ msgstr "Eroare la descoperirea %1: %2"
 msgid "Error downloading Spotify plugin"
 msgstr "Eroare la descărcarea modulului Spotify"
 
-#: playlist/songloaderinserter.cpp:66
+#: playlist/songloaderinserter.cpp:66 playlist/songloaderinserter.cpp:145
 #, qt-format
 msgid "Error loading %1"
 msgstr "Eroare încărcare %1"
@@ -2184,7 +2184,7 @@ msgstr "La fiecare 6 ore"
 msgid "Every hour"
 msgstr "La fiecare oră"
 
-#: ../bin/src/ui_playbacksettingspage.h:345
+#: ../bin/src/ui_playbacksettingspage.h:347
 msgid "Except between tracks on the same album or in the same CUE sheet"
 msgstr "Excepție între piesle de pe același album sau în aceeași filă CUE"
 
@@ -2233,20 +2233,20 @@ msgstr "S-au exportat %1 coperți din %2 (%3 omise)"
 msgid "FLAC"
 msgstr "FLAC"
 
-#: ../bin/src/ui_playbacksettingspage.h:348
+#: ../bin/src/ui_playbacksettingspage.h:350
 msgid "Fade out on pause / fade in on resume"
 msgstr "Estompare ieșire la întrerupere / estompare la reluare"
 
-#: ../bin/src/ui_playbacksettingspage.h:342
+#: ../bin/src/ui_playbacksettingspage.h:344
 msgid "Fade out when stopping a track"
 msgstr "Estompare ieșire la oprirea unei piese"
 
-#: ../bin/src/ui_playbacksettingspage.h:341
+#: ../bin/src/ui_playbacksettingspage.h:343
 msgid "Fading"
 msgstr "Se estompează"
 
-#: ../bin/src/ui_playbacksettingspage.h:346
-#: ../bin/src/ui_playbacksettingspage.h:349
+#: ../bin/src/ui_playbacksettingspage.h:348
+#: ../bin/src/ui_playbacksettingspage.h:351
 msgid "Fading duration"
 msgstr "Durata estompării"
 
@@ -2605,7 +2605,7 @@ msgstr "Informația hardware este disponibilă numai în timp ce dispozitivul es
 
 #: ../bin/src/ui_appearancesettingspage.h:325
 msgid "Hide playlist filter toolbar"
-msgstr ""
+msgstr "Ascunde bara de filtrare a listei de redare"
 
 #: ../bin/src/ui_transcoderoptionsmp3.h:201
 msgid "High"
@@ -2623,7 +2623,7 @@ msgstr "Înalt (1024x1024)"
 
 #: ui/equalizer.cpp:128
 msgid "Hip Hop"
-msgstr ""
+msgstr "Hip Hop"
 
 #: internet/subsonic/subsonicsettingspage.cpp:138
 msgid "Host not found, check server URL. Example: http://localhost:4040/"
@@ -2659,7 +2659,7 @@ msgid ""
 "edit the tag value directly"
 msgstr "Dacă această opțiune este activă, un clic pe melodia selectată în lista de redare va permite editarea directă a valorii etichetei"
 
-#: devices/devicemanager.cpp:481 devices/devicemanager.cpp:492
+#: devices/devicemanager.cpp:518 devices/devicemanager.cpp:529
 msgid ""
 "If you continue, this device will work slowly and songs copied to it may not"
 " work."
@@ -2675,7 +2675,7 @@ msgstr "Ignoră \"The\" în numele artiștilor"
 
 #: ../bin/src/ui_behavioursettingspage.h:423
 msgid "Ignore prefix word(s)"
-msgstr ""
+msgstr "Ignoră cuvântul (cuvintele) prefix"
 
 #: ui/albumcoverchoicecontroller.cpp:44
 msgid "Images (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm)"
@@ -2727,7 +2727,7 @@ msgstr "Configurație incompletă, asigurați-vă că toate câmpurile sunt popu
 
 #: core/commandlineoptions.cpp:164
 msgid "Increase the volume by 4 percent"
-msgstr ""
+msgstr "Crește volumul cu 4 procente"
 
 #: core/commandlineoptions.cpp:166
 msgid "Increase the volume by <value> percent"
@@ -3029,12 +3029,12 @@ msgstr "Se încarcă flux"
 msgid "Loading tracks"
 msgstr "Se încarcă piese"
 
-#: playlist/songloaderinserter.cpp:154
+#: playlist/songloaderinserter.cpp:162
 msgid "Loading tracks info"
 msgstr "Se încarcă informațiile pieselor"
 
 #: library/librarymodel.cpp:165
-#: internet/podcasts/podcastdiscoverymodel.cpp:105 widgets/prettyimage.cpp:168
+#: internet/podcasts/podcastdiscoverymodel.cpp:104 widgets/prettyimage.cpp:168
 #: widgets/widgetfadehelper.cpp:96 ../bin/src/ui_addpodcastdialog.h:179
 #: ../bin/src/ui_searchpreview.h:105 ../bin/src/ui_organisedialog.h:261
 msgid "Loading..."
@@ -3217,7 +3217,7 @@ msgstr "Tip abonare"
 msgid "Minimum bitrate"
 msgstr "Rată de biți minimă"
 
-#: ../bin/src/ui_playbacksettingspage.h:365
+#: ../bin/src/ui_playbacksettingspage.h:367
 msgid "Minimum buffer fill"
 msgstr "Umplere minimă a memoriei tampon"
 
@@ -3237,7 +3237,11 @@ msgstr "Model"
 msgid "Monitor the library for changes"
 msgstr "Monitorizează colecția pentru schimbări"
 
-#: ../bin/src/ui_playbacksettingspage.h:370
+#: core/song.cpp:460
+msgid "Monkey's Audio"
+msgstr "Monkey's Audio"
+
+#: ../bin/src/ui_playbacksettingspage.h:372
 msgid "Mono playback"
 msgstr "Redare mono"
 
@@ -3336,8 +3340,8 @@ msgstr "Niciodată redate"
 msgid "Never start playing"
 msgstr "Nu va începe redarea niciodată"
 
-#: playlist/playlistlistcontainer.cpp:155
-#: playlist/playlistlistcontainer.cpp:258
+#: playlist/playlistlistcontainer.cpp:151
+#: playlist/playlistlistcontainer.cpp:254
 #: ../bin/src/ui_playlistlistcontainer.h:129
 msgid "New folder"
 msgstr "Dosar nou"
@@ -3423,7 +3427,7 @@ msgstr "Tip bloc normal"
 
 #: ../bin/src/ui_behavioursettingspage.h:428
 msgid "Normal duration (at least 4 minutes or half the track length)"
-msgstr ""
+msgstr "Durată normală (cel puțin 4 minute sau jumătate din lungimea piesei)"
 
 #: playlist/playlistsequence.cpp:203
 msgid "Not available while using a dynamic playlist"
@@ -3659,7 +3663,7 @@ msgstr "Alte opțiuni"
 msgid "Output"
 msgstr "Ieșire"
 
-#: ../bin/src/ui_playbacksettingspage.h:362
+#: ../bin/src/ui_playbacksettingspage.h:364
 msgid "Output device"
 msgstr "Dispozitiv de ieșire"
 
@@ -3754,11 +3758,11 @@ msgstr "Redă numai dacă nu se redă deja ceva"
 
 #: library/libraryview.cpp:396 ui/mainwindow.cpp:1815
 msgid "Play next"
-msgstr ""
+msgstr "Redă următoarea"
 
 #: ui/mainwindow.cpp:1813
 msgid "Play selected tracks next"
-msgstr ""
+msgstr "Redă piesele selectate"
 
 #: core/commandlineoptions.cpp:178
 msgid "Play the <n>th track in the playlist"
@@ -3768,7 +3772,7 @@ msgstr "Redă piesa a <n>a din lista de redare"
 msgid "Play/Pause"
 msgstr "Redare/Pauză"
 
-#: ../bin/src/ui_playbacksettingspage.h:339
+#: ../bin/src/ui_playbacksettingspage.h:341
 msgid "Playback"
 msgstr "Redare"
 
@@ -3776,7 +3780,7 @@ msgstr "Redare"
 msgid "Player options"
 msgstr "Opțiuni player"
 
-#: playlist/playlistcontainer.cpp:296 playlist/playlistlistcontainer.cpp:325
+#: playlist/playlistcontainer.cpp:296 playlist/playlistlistcontainer.cpp:321
 #: playlist/playlistmanager.cpp:87 playlist/playlistmanager.cpp:156
 #: playlist/playlistmanager.cpp:525 playlist/playlisttabbar.cpp:366
 msgid "Playlist"
@@ -3814,13 +3818,13 @@ msgstr "Stare modul:"
 
 #: ../bin/src/ui_podcastinfodialog.h:93
 msgid "Podcast Information"
-msgstr ""
+msgstr "Informații podcast"
 
 #: internet/podcasts/podcastservice.cpp:437
 #: internet/podcasts/podcastservice.cpp:535
 #: internet/podcasts/podcastservice.cpp:539
 msgid "Podcast information"
-msgstr ""
+msgstr "Informații podcast"
 
 #: internet/podcasts/podcastservice.cpp:133
 #: ../bin/src/ui_podcastsettingspage.h:250
@@ -3840,7 +3844,7 @@ msgstr "Durată afișare "
 msgid "Port"
 msgstr "Port"
 
-#: ui/equalizer.cpp:44 ../bin/src/ui_playbacksettingspage.h:359
+#: ui/equalizer.cpp:44 ../bin/src/ui_playbacksettingspage.h:361
 msgid "Pre-amp"
 msgstr "Preamplificare"
 
@@ -3942,7 +3946,7 @@ msgstr "Psihedelic"
 
 #: wiimotedev/wiimotesettingspage.cpp:246
 msgid "Push Wii Remote button"
-msgstr ""
+msgstr "Apăsați butonul telecomenzii Wii"
 
 #: ../bin/src/ui_wiimoteshortcutgrabber.h:121
 msgid "Push Wiiremote button"
@@ -3982,7 +3986,7 @@ msgstr "Adaugă în coadă piesele selectate"
 msgid "Queue track"
 msgstr "Adaugă în coadă piesa"
 
-#: ../bin/src/ui_playbacksettingspage.h:356
+#: ../bin/src/ui_playbacksettingspage.h:358
 msgid "Radio (equal loudness for all tracks)"
 msgstr "Radio (egalizare loudness pentru toate piesele)"
 
@@ -4078,7 +4082,7 @@ msgstr "Ține minte balansarea telecomenzii Wii"
 
 #: ../bin/src/ui_behavioursettingspage.h:371
 msgid "Remember from &last time"
-msgstr ""
+msgstr "Ține minte de u&ltima dată"
 
 #: ../bin/src/ui_playlistsaveoptionsdialog.h:99
 msgid "Remember my choice"
@@ -4114,7 +4118,7 @@ msgstr "Elimină din lista de redare"
 msgid "Remove playlist"
 msgstr "Elimină lista de redare"
 
-#: playlist/playlistlistcontainer.cpp:427
+#: playlist/playlistlistcontainer.cpp:423
 msgid "Remove playlists"
 msgstr "Elimină listele de redare"
 
@@ -4164,11 +4168,11 @@ msgstr "Înlocui lista de redare"
 msgid "Replaces spaces with underscores"
 msgstr "Înlocuiește spațiul cu subliniere"
 
-#: ../bin/src/ui_playbacksettingspage.h:351
+#: ../bin/src/ui_playbacksettingspage.h:353
 msgid "Replay Gain"
 msgstr "Redă Gain"
 
-#: ../bin/src/ui_playbacksettingspage.h:353
+#: ../bin/src/ui_playbacksettingspage.h:355
 msgid "Replay Gain mode"
 msgstr "Redă modul Gain"
 
@@ -4235,7 +4239,7 @@ msgstr "Rulează"
 
 #: core/song.cpp:456
 msgid "SNES SPC700"
-msgstr ""
+msgstr "SNES SPC700"
 
 #: ../bin/src/ui_networkproxysettingspage.h:163
 msgid "SOCKS proxy"
@@ -4256,7 +4260,7 @@ msgid "Safely remove the device after copying"
 msgstr "Scoate în siguranță dispozitivul după copiere"
 
 #: playlist/playlist.cpp:1420 ../bin/src/ui_edittagdialog.h:708
-#: ../bin/src/ui_playbacksettingspage.h:371
+#: ../bin/src/ui_playbacksettingspage.h:373
 #: ../bin/src/ui_streamdetailsdialog.h:141
 msgid "Sample rate"
 msgstr "Rată de eșantionare"
@@ -4285,7 +4289,7 @@ msgstr "Salvează gruparea curentă"
 msgid "Save image"
 msgstr "Salvează imaginea"
 
-#: playlist/playlistlistcontainer.cpp:158
+#: playlist/playlistlistcontainer.cpp:154
 msgctxt "Save playlist menu action."
 msgid "Save playlist"
 msgstr "Salvează lista de redare"
@@ -4319,7 +4323,7 @@ msgstr "Salvează acest flux în fila Internet"
 msgid "Saved Grouping Manager"
 msgstr "Administrator grupări salvate"
 
-#: library/library.cpp:194
+#: library/library.cpp:195
 msgid "Saving songs statistics into songs files"
 msgstr "Se salvează statisticile melodiilor în fișierele melodiilor"
 
@@ -4531,7 +4535,7 @@ msgstr "Setări"
 
 #: ../bin/src/ui_behavioursettingspage.h:429
 msgid "Short duration (at least 1 minute or half the track length)"
-msgstr ""
+msgstr "Durată scurtă (cel puțin un minut sau jumătate din lungimea piesei)"
 
 #: ../bin/src/ui_globalshortcutssettingspage.h:172
 msgid "Shortcut"
@@ -4556,7 +4560,7 @@ msgstr "Arată"
 msgid "Show OSD"
 msgstr "Arată OSD"
 
-#: ../bin/src/ui_playbacksettingspage.h:340
+#: ../bin/src/ui_playbacksettingspage.h:342
 msgid "Show a glowing animation on the current track"
 msgstr "Arată o animație luminoasă pe piesa curentă"
 
@@ -4588,7 +4592,7 @@ msgstr "Arată o notificare în zona de notificare"
 msgid "Show a pretty OSD"
 msgstr "Arată un OSD simpatic"
 
-#: widgets/nowplayingwidget.cpp:142
+#: widgets/nowplayingwidget.cpp:141
 msgid "Show above status bar"
 msgstr "Arată deasupra barei de stare"
 
@@ -4897,7 +4901,7 @@ msgstr "Oprește redarea după piesa curentă"
 
 #: ../bin/src/ui_behavioursettingspage.h:377
 msgid "Stop playback if song fails to play"
-msgstr ""
+msgstr "Oprește redarea dacă redarea melodiei eșuează"
 
 #: core/globalshortcuts.cpp:56
 msgid "Stop playing after current track"
@@ -4912,7 +4916,7 @@ msgstr "Oprește redarea după piesa: %1"
 msgid "Stopped"
 msgstr "Oprit"
 
-#: core/song.cpp:461
+#: core/song.cpp:463
 msgid "Stream"
 msgstr "Flux"
 
@@ -5011,7 +5015,7 @@ msgstr "Techno"
 msgid "Text options"
 msgstr "Opțiuni text"
 
-#: ui/about.cpp:76
+#: ui/about.cpp:79
 msgid "Thanks to"
 msgstr "Mulțumiri către"
 
@@ -5141,20 +5145,20 @@ msgstr "Dispozitivul trebuie conectat și deschis înainte ca Clementine să poa
 msgid "This device supports the following file formats:"
 msgstr "Dispozitivul suportă următoarele formate de fișiere:"
 
-#: devices/devicemanager.cpp:478 devices/devicemanager.cpp:489
+#: devices/devicemanager.cpp:515 devices/devicemanager.cpp:526
 msgid "This device will not work properly"
 msgstr "Acest dispozitiv nu funcționează corespunzător"
 
-#: devices/devicemanager.cpp:479
+#: devices/devicemanager.cpp:516
 msgid ""
 "This is an MTP device, but you compiled Clementine without libmtp support."
 msgstr "Acesta este un dispozitiv MTP, dar ați compilat Clementine fără suport libmtp."
 
-#: devices/devicemanager.cpp:490
+#: devices/devicemanager.cpp:527
 msgid "This is an iPod, but you compiled Clementine without libgpod support."
 msgstr "Acesta este un iPod, dar ați compilat Clementine fără suport libgpod."
 
-#: devices/devicemanager.cpp:235
+#: devices/devicemanager.cpp:264
 msgid ""
 "This is the first time you have connected this device.  Clementine will now "
 "scan the device to find music files - this may take some time."
@@ -5168,7 +5172,7 @@ msgstr "Această opțiune poate fi modificată în „Comportament”"
 msgid "This stream is for paid subscribers only"
 msgstr "Acest flux este numai pentru abonații cu plată"
 
-#: devices/devicemanager.cpp:506
+#: devices/devicemanager.cpp:543
 #, qt-format
 msgid "This type of device is not supported: %1"
 msgstr "Acest tip de dispozitiv nu este suportat: %1"
@@ -5308,7 +5312,7 @@ msgstr "Nu se poate conecta"
 msgid "Unable to download %1 (%2)"
 msgstr "Nu se poate descărca %1 (%2)"
 
-#: core/song.cpp:465 library/librarymodel.cpp:375 library/librarymodel.cpp:380
+#: core/song.cpp:467 library/librarymodel.cpp:375 library/librarymodel.cpp:380
 #: library/librarymodel.cpp:384 library/librarymodel.cpp:1160
 #: library/savedgroupingmanager.cpp:103 playlist/playlistdelegates.cpp:305
 #: playlist/playlistmanager.cpp:532 playlist/playlistmanager.cpp:533
@@ -5397,7 +5401,7 @@ msgstr "Utilizați scurtăturile pe tastatură Gnome"
 msgid "Use Psychedelic Colors"
 msgstr "Utilizează culori psihedelice"
 
-#: ../bin/src/ui_playbacksettingspage.h:352
+#: ../bin/src/ui_playbacksettingspage.h:354
 msgid "Use Replay Gain metadata if it is available"
 msgstr "Utilizează metadate Replay Gain când sunt disponibile"
 
@@ -5488,7 +5492,7 @@ msgstr "VBR MP3"
 
 #: core/song.cpp:458
 msgid "VGM"
-msgstr ""
+msgstr "VGM"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:231
 msgid "Variable bit rate"
@@ -5501,7 +5505,7 @@ msgstr "Artiști diferiți"
 
 #: ../bin/src/ui_subsonicsettingspage.h:136
 msgid "Verify Server certificate"
-msgstr ""
+msgstr "Verifică certificatul serverului"
 
 #: ui/about.cpp:35
 #, qt-format
@@ -5560,7 +5564,7 @@ msgstr "Wav"
 
 #: core/song.cpp:450
 msgid "WavPack"
-msgstr ""
+msgstr "WavPack"
 
 #: ../bin/src/ui_podcastinfowidget.h:192
 msgid "Website"
@@ -5576,7 +5580,7 @@ msgstr "Când pornește Clementine"
 
 #: ../bin/src/ui_behavioursettingspage.h:427
 msgid "When calculating play counts, use"
-msgstr ""
+msgstr "Când se calculează numărul redărilor, utilizează"
 
 #: ../bin/src/ui_librarysettingspage.h:203
 msgid ""
@@ -5590,7 +5594,7 @@ msgstr "La salvarea unei liste de redare, căile fișierului ar trebui să fie"
 
 #: ../bin/src/ui_behavioursettingspage.h:422
 msgid "When sorting artists, albums and titles"
-msgstr ""
+msgstr "Când se sortează artiști, albume și titluri"
 
 #: ../bin/src/ui_globalsearchsettingspage.h:147
 msgid "When the list is empty..."
@@ -5704,7 +5708,7 @@ msgstr "Ieri"
 msgid "You are about to download the following albums"
 msgstr "Sunteți pe cale să descărcați următoarele albume"
 
-#: playlist/playlistlistcontainer.cpp:428
+#: playlist/playlistlistcontainer.cpp:424
 #, qt-format
 msgid ""
 "You are about to remove %1 playlists from your favorites, are you sure?"
@@ -5880,7 +5884,7 @@ msgstr "nu conține"
 
 #: smartplaylists/searchterm.cpp:263
 msgid "empty"
-msgstr ""
+msgstr "gol"
 
 #: smartplaylists/searchterm.cpp:253
 msgid "ends with"
@@ -5937,7 +5941,7 @@ msgstr "întâi cele mai noi"
 
 #: smartplaylists/searchterm.cpp:265
 msgid "not empty"
-msgstr ""
+msgstr "ne-gol"
 
 #: smartplaylists/searchterm.cpp:261
 msgid "not equals"

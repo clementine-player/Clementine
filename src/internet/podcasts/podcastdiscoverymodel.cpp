@@ -38,8 +38,7 @@ PodcastDiscoveryModel::PodcastDiscoveryModel(Application* app, QObject* parent)
 
 QVariant PodcastDiscoveryModel::data(const QModelIndex& index, int role) const {
   if (index.isValid() && role == Qt::DecorationRole &&
-      QStandardItemModel::data(index, Role_StartedLoadingImage).toBool() ==
-          false) {
+      !QStandardItemModel::data(index, Role_StartedLoadingImage).toBool()) {
     const QUrl image_url =
         QStandardItemModel::data(index, Role_ImageUrl).toUrl();
     if (image_url.isValid()) {

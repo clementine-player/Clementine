@@ -351,11 +351,9 @@ void InternetModel::UpdateServices() {
     bool setting_val = s.value(service_name).toBool();
 
     // Only update if values are different
-    if (setting_val == true &&
-        shown_services_[internet_service].shown == false) {
+    if (setting_val && !shown_services_[internet_service].shown) {
       ShowService(internet_service);
-    } else if (setting_val == false &&
-               shown_services_[internet_service].shown == true) {
+    } else if (!setting_val && shown_services_[internet_service].shown) {
       HideService(internet_service);
     }
   }
@@ -378,7 +376,7 @@ int InternetModel::FindItemPosition(const QString& text) {
 }
 
 void InternetModel::ShowService(InternetService* service) {
-  if (shown_services_[service].shown != true) {
+  if (!shown_services_[service].shown) {
     QStandardItem* item = shown_services_[service].item;
     int pos = FindItemPosition(item->text());
     invisibleRootItem()->insertRow(pos, item);

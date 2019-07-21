@@ -348,10 +348,7 @@ bool AlbumCoverChoiceController::CanAcceptDrag(const QDragEnterEvent* e) {
     const QString suffix = QFileInfo(url.toLocalFile()).suffix().toLower();
     if (IsKnownImageExtension(suffix)) return true;
   }
-  if (e->mimeData()->hasImage()) {
-    return true;
-  }
-  return false;
+  return e->mimeData()->hasImage();
 }
 
 QString AlbumCoverChoiceController::SaveCover(Song* song, const QDropEvent* e) {
