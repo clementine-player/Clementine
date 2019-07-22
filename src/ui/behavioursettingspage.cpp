@@ -40,6 +40,15 @@ BehaviourSettingsPage::BehaviourSettingsPage(SettingsDialog* dialog)
   connect(ui_->b_show_tray_icon_, SIGNAL(toggled(bool)),
           SLOT(ShowTrayIconToggled(bool)));
 
+  connect(ui_->max_numprocs_tagclients, SIGNAL(valueChanged(int)),
+          SLOT(MaxNumProcsTagClientsChanged(int)));
+  ui_->max_numprocs_tagclients_value_label->setMinimumWidth(
+      QFontMetrics(ui_->max_numprocs_tagclients_value_label->font())
+          .width("WWW"));
+
+  // Limit max tag clients to number of CPU cores.
+  ui_->max_numprocs_tagclients->setMaximum(QThread::idealThreadCount());
+
   ui_->doubleclick_addmode->setItemData(0, MainWindow::AddBehaviour_Append);
   ui_->doubleclick_addmode->setItemData(1, MainWindow::AddBehaviour_Load);
   ui_->doubleclick_addmode->setItemData(2, MainWindow::AddBehaviour_OpenInNew);
@@ -171,6 +180,12 @@ void BehaviourSettingsPage::Load() {
           .toInt()));
   ui_->seek_step_sec->setValue(s.value("seek_step_sec", 10).toInt());
 
+  int max_numprocs_tagclients =
+      s.value("max_numprocs_tagclients", QThread::idealThreadCount()).toInt();
+  ui_->max_numprocs_tagclients->setValue(max_numprocs_tagclients);
+  ui_->max_numprocs_tagclients_value_label->setText(
+      QString::number(max_numprocs_tagclients));
+
   if (s.value("play_count_short_duration", false).toBool()) {
     ui_->b_play_count_short_duration->setChecked(true);
     ui_->b_play_count_normal_duration->setChecked(false);
@@ -283,6 +298,7 @@ void BehaviourSettingsPage::Save() {
              ui_->stop_play_if_fail_->isChecked());
   s.setValue("menu_previousmode", menu_previousmode);
   s.setValue("seek_step_sec", ui_->seek_step_sec->value());
+  s.setValue("max_numprocs_tagclients", ui_->max_numprocs_tagclients->value());
 
   if (ui_->b_play_count_short_duration->isChecked()) {
     s.setValue("play_count_short_duration", true);
@@ -320,4 +336,8 @@ void BehaviourSettingsPage::ShowTrayIconToggled(bool on) {
   ui_->b_keep_running_->setEnabled(on);
   ui_->b_keep_running_->setChecked(on);
   ui_->b_scroll_tray_icon_->setEnabled(on);
+}
+
+void BehaviourSettingsPage::MaxNumProcsTagClientsChanged(int value) {
+  ui_->max_numprocs_tagclients_value_label->setText(QString::number(value));
 }
