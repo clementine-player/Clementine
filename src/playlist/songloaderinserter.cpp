@@ -134,15 +134,23 @@ void SongLoaderInserter::AsyncLoad() {
   int async_load_id = task_manager_->StartTask(tr("Loading tracks"));
   task_manager_->SetTaskProgress(async_load_id, async_progress,
                                  pending_.count());
+  bool first_loaded = false;
   for (int i = 0; i < pending_.count(); ++i) {
     SongLoader* loader = pending_[i];
-    loader->LoadFilenamesBlocking();
+    SongLoader::Result res = loader->LoadFilenamesBlocking();
+
     task_manager_->SetTaskProgress(async_load_id, ++async_progress);
-    if (i == 0) {
+
+    if (res == SongLoader::Error) {
+      emit Error(tr("Error loading %1").arg(loader->url().toString()));
+      continue;
+    }
+    if (!first_loaded) {
       // Load everything from the first song.  It'll start playing as soon as
       // we emit PreloadFinished, so it needs to have the duration set to show
       // properly in the UI.
       loader->LoadMetadataBlocking();
+      first_loaded = true;
     }
     songs_ << loader->songs();
   }

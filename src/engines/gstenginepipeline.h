@@ -151,6 +151,7 @@ signals:
 
   bool Init();
   GstElement* CreateDecodeBinFromString(const char* pipeline);
+  GstElement* CreateDecodeBinFromUrl(const QUrl& url);
 
   void UpdateVolume();
   void UpdateEqualizer();
