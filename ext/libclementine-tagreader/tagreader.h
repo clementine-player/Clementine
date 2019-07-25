@@ -50,6 +50,7 @@ class FileRefFactory;
 class TagReader {
  public:
   TagReader();
+  ~TagReader();
 
   void ReadFile(const QString& filename,
                 pb::tagreader::SongMetadata* song) const;

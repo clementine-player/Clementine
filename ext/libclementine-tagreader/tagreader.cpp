@@ -125,6 +125,11 @@ TagReader::TagReader()
       network_(new QNetworkAccessManager),
       kEmbeddedCover("(embedded)") {}
 
+TagReader::~TagReader() {
+  delete network_;
+  delete factory_;
+}
+
 void TagReader::ReadFile(const QString& filename,
                          pb::tagreader::SongMetadata* song) const {
   const QByteArray url(QUrl::fromLocalFile(filename).toEncoded());
