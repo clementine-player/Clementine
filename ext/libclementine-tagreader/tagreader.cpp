@@ -22,7 +22,6 @@
 #include <QCoreApplication>
 #include <QDateTime>
 #include <QFileInfo>
-#include <QNetworkAccessManager>
 #include <QTextCodec>
 #include <QUrl>
 #include <QVector>
@@ -122,11 +121,9 @@ const char* kASF_OriginalYear_ID = "WM/OriginalReleaseYear";
 
 TagReader::TagReader()
     : factory_(new TagLibFileRefFactory),
-      network_(new QNetworkAccessManager),
       kEmbeddedCover("(embedded)") {}
 
 TagReader::~TagReader() {
-  delete network_;
   delete factory_;
 }
 
@@ -1338,7 +1335,7 @@ bool TagReader::ReadCloudFile(const QUrl& download_url, const QString& title,
   qLog(Debug) << "Loading tags from" << title;
 
   std::unique_ptr<CloudStream> stream(new CloudStream(
-      download_url, title, size, authorisation_header, network_));
+      download_url, title, size, authorisation_header));
   stream->Precache();
   std::unique_ptr<TagLib::File> tag;
   if (mime_type == "audio/mpeg" &&

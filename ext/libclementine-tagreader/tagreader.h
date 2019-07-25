@@ -25,7 +25,6 @@
 #include "config.h"
 #include "tagreadermessages.pb.h"
 
-class QNetworkAccessManager;
 class QString;
 class QTextCodec;
 class QUrl;
@@ -121,7 +120,6 @@ class TagReader {
       TagLib::ID3v2::Tag* tag);
 
   FileRefFactory* factory_;
-  QNetworkAccessManager* network_;
 
   const std::string kEmbeddedCover;
 };

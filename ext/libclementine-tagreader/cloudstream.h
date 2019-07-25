@@ -22,17 +22,16 @@
 #include <QList>
 #include <QSslError>
 #include <QUrl>
+#include <QNetworkAccessManager>
 
 #include <google/sparsetable>
 #include <taglib/tiostream.h>
-
-class QNetworkAccessManager;
 
 class CloudStream : public QObject, public TagLib::IOStream {
   Q_OBJECT
  public:
   CloudStream(const QUrl& url, const QString& filename, const long length,
-              const QString& auth, QNetworkAccessManager* network);
+              const QString& auth);
 
   // Taglib::IOStream
   virtual TagLib::FileName name() const;
@@ -73,7 +72,7 @@ class CloudStream : public QObject, public TagLib::IOStream {
   const QString auth_;
 
   int cursor_;
-  QNetworkAccessManager* network_;
+  std::unique_ptr<QNetworkAccessManager> network_;
 
   google::sparsetable<char> cache_;
   int num_requests_;
