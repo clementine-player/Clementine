@@ -123,9 +123,7 @@ TagReader::TagReader()
     : factory_(new TagLibFileRefFactory),
       kEmbeddedCover("(embedded)") {}
 
-TagReader::~TagReader() {
-  delete factory_;
-}
+TagReader::~TagReader() { delete factory_; }
 
 void TagReader::ReadFile(const QString& filename,
                          pb::tagreader::SongMetadata* song) const {
@@ -1334,8 +1332,8 @@ bool TagReader::ReadCloudFile(const QUrl& download_url, const QString& title,
                               pb::tagreader::SongMetadata* song) const {
   qLog(Debug) << "Loading tags from" << title;
 
-  std::unique_ptr<CloudStream> stream(new CloudStream(
-      download_url, title, size, authorisation_header));
+  std::unique_ptr<CloudStream> stream(
+      new CloudStream(download_url, title, size, authorisation_header));
   stream->Precache();
   std::unique_ptr<TagLib::File> tag;
   if (mime_type == "audio/mpeg" &&

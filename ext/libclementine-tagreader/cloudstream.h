@@ -18,11 +18,11 @@
 #ifndef GOOGLEDRIVESTREAM_H
 #define GOOGLEDRIVESTREAM_H
 
-#include <QObject>
 #include <QList>
+#include <QNetworkAccessManager>
+#include <QObject>
 #include <QSslError>
 #include <QUrl>
-#include <QNetworkAccessManager>
 
 #include <google/sparsetable>
 #include <taglib/tiostream.h>
