@@ -20,8 +20,8 @@
 
 #include <QByteArray>
 
-#include <memory>
 #include <taglib/xiphcomment.h>
+#include <memory>
 
 #include "config.h"
 #include "tagreadermessages.pb.h"
