@@ -20,6 +20,7 @@
 
 #include <QByteArray>
 
+#include <memory>
 #include <taglib/xiphcomment.h>
 
 #include "config.h"
@@ -39,7 +40,11 @@ class PopularimeterFrame;
 }
 }
 
-class FileRefFactory;
+class FileRefFactory {
+ public:
+  virtual ~FileRefFactory() {}
+  virtual TagLib::FileRef* GetFileRef(const QString& filename) = 0;
+};
 
 /**
  * This class holds all useful methods to read and write tags from/to files.
@@ -49,7 +54,6 @@ class FileRefFactory;
 class TagReader {
  public:
   TagReader();
-  ~TagReader();
 
   void ReadFile(const QString& filename,
                 pb::tagreader::SongMetadata* song) const;
@@ -119,7 +123,7 @@ class TagReader {
   static TagLib::ID3v2::PopularimeterFrame* GetPOPMFrameFromTag(
       TagLib::ID3v2::Tag* tag);
 
-  FileRefFactory* factory_;
+  std::unique_ptr<FileRefFactory> factory_;
 
   const std::string kEmbeddedCover;
 };

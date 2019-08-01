@@ -76,12 +76,6 @@
 #define NumberToASFAttribute(x) \
   TagLib::ASF::Attribute(QStringToTaglibString(QString::number(x)))
 
-class FileRefFactory {
- public:
-  virtual ~FileRefFactory() {}
-  virtual TagLib::FileRef* GetFileRef(const QString& filename) = 0;
-};
-
 class TagLibFileRefFactory : public FileRefFactory {
  public:
   virtual TagLib::FileRef* GetFileRef(const QString& filename) {
@@ -122,8 +116,6 @@ const char* kASF_OriginalYear_ID = "WM/OriginalReleaseYear";
 TagReader::TagReader()
     : factory_(new TagLibFileRefFactory),
       kEmbeddedCover("(embedded)") {}
-
-TagReader::~TagReader() { delete factory_; }
 
 void TagReader::ReadFile(const QString& filename,
                          pb::tagreader::SongMetadata* song) const {
