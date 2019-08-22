@@ -347,7 +347,7 @@ void SubsonicService::OnPingFinished(QNetworkReply* reply) {
         login_state_ = LoginState_RedirectNoUrl;
       } else {
         redirect_count_++;
-        qLog(Debug) << "Redirect receieved to "
+        qLog(Debug) << "Redirect received to "
                     << redirect_url.toString(QUrl::RemoveQuery)
                     << ", current redirect count is " << redirect_count_;
         if (redirect_count_ <= kMaxRedirects) {

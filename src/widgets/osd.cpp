@@ -242,7 +242,7 @@ void OSD::CallFinished(QDBusPendingCallWatcher*) {}
 void OSD::WiiremoteActived(int id) {
   ShowMessage(QString(tr("%1: Wiimotedev module"))
                   .arg(QCoreApplication::applicationName()),
-              tr("Wii Remote %1: actived").arg(QString::number(id)));
+              tr("Wii Remote %1: activated").arg(QString::number(id)));
 }
 
 void OSD::WiiremoteDeactived(int id) {

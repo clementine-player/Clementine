@@ -1152,7 +1152,7 @@
       <doc:doc>
         <doc:description>
           <doc:para>
-            Detachs the device by e.g. powering down the physical port
+            Detaches the device by e.g. powering down the physical port
             it is connected to. Note that not all devices or ports are
             capable of this. Check the
             <doc:ref type="property" to="Device:DriveCanDetach">DriveCanDetach</doc:ref>
@@ -2408,7 +2408,7 @@
             <quote>BAD_ATTRIBUTE_NOW</quote> (At least one pre-fail attribute is exceeding its threshold now),
             <quote>BAD_SECTOR_MANY</quote> (Many bad sectors)),
             <quote>BAD_STATUS</quote> (Smart Self Assessment negative)
-            or empty if some error occured trying to determine the result.
+            or empty if some error occurred trying to determine the result.
             This property is only valid if
             <doc:ref type="property" to="Device:DriveAtaSmartTimeCollected">DriveAtaSmartTimeCollected</doc:ref>
             is greater than zero.

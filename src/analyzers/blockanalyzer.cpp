@@ -284,7 +284,7 @@ QColor ensureContrast(const QColor& bg, const QColor& fg, uint _amount = 150) {
   int dh = abs(bh - fh);
 
   if (dh > 120) {
-    // a third of the colour wheel automatically guarentees contrast
+    // a third of the colour wheel automatically guarantees contrast
     // but only if the values are high enough and saturations significant enough
     // to allow the colours to be visible and not be shades of grey or black
 

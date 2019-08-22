@@ -32,7 +32,7 @@
 #endif
 
 IncomingDataParser::IncomingDataParser(Application* app) : app_(app) {
-  // load settings initaily and sign up for updates
+  // load settings initially and sign up for updates
   ReloadSettings();
   connect(app_, SIGNAL(SettingsChanged()), SLOT(ReloadSettings()));
 

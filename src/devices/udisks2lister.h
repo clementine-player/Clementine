@@ -96,7 +96,7 @@ class Udisks2Lister : public DeviceLister {
     quint64 capacity;
     QString dbus_drive_path;
 
-    // Paritition
+    // Partition
     QString label;
     QString uuid;
     quint64 free_space;
