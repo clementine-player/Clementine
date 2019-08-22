@@ -97,7 +97,7 @@ void Task::finishedInternal() {
 
   emit ProgressChanged(episode_, PodcastDownload::Finished, 0);
 
-  // I didn't ecountered even a single podcast with a corect metadata
+  // I didn't ecountered even a single podcast with a correct metadata
   TagReaderClient::Instance()->SaveFileBlocking(file_->fileName(), song);
   emit finished(this);
 }

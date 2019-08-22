@@ -750,7 +750,7 @@ void PlaylistView::closeEditor(QWidget* editor,
 }
 
 void PlaylistView::mouseMoveEvent(QMouseEvent* event) {
-  // Check wheather rating section is locked by user or not
+  // Check whether rating section is locked by user or not
   if (!ratings_locked_) {
     QModelIndex index = indexAt(event->pos());
     if (index.isValid() && index.data(Playlist::Role_CanSetRating).toBool()) {

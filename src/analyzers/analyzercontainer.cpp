@@ -163,7 +163,7 @@ void AnalyzerContainer::ChangeAnalyzer(int id) {
       analyzer_types_[id]->newInstance(Q_ARG(QWidget*, this));
 
   if (!instance) {
-    qLog(Warning) << "Couldn't intialise a new"
+    qLog(Warning) << "Couldn't initialise a new"
                   << analyzer_types_[id]->className();
     return;
   }

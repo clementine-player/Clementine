@@ -23,7 +23,7 @@ def main():
       help='edit files inplace instead of showing a diff')
   parser.add_argument('--files', nargs='*', metavar='FIL',
       default=[],
-      help='get files as arguments insted of git')
+      help='get files as arguments instead of git')
   args = parser.parse_args()
 
   try:

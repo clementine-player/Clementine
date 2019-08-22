@@ -61,7 +61,7 @@ class Base : public QObject {
   virtual qint64 length_nanosec() const = 0;
 
   // Subclasses should respect given markers (beginning and end) which are
-  // in miliseconds.
+  // in milliseconds.
   virtual bool Load(const QUrl& url, TrackChangeFlags change,
                     bool force_stop_at_end, quint64 beginning_nanosec,
                     qint64 end_nanosec);

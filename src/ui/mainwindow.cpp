@@ -937,7 +937,7 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
 
   // Load theme
   // This is tricky: we need to save the default/system palette now, before
-  // loading user preferred theme (which will overide it), to be able to restore
+  // loading user preferred theme (which will override it), to be able to restore
   // it later
   const_cast<QPalette&>(Appearance::kDefaultPalette) = QApplication::palette();
   app_->appearance()->LoadUserTheme();
@@ -1544,7 +1544,7 @@ void MainWindow::UpdateTrackPosition() {
                 << ", scrobble point:" << scrobble_point
                 << ", lastfm status:" << playlist->get_lastfm_status()
                 << ", play count point:" << play_count_point
-                << ", is local libary item:" << item->IsLocalLibraryItem()
+                << ", is local library item:" << item->IsLocalLibraryItem()
                 << ", playlist have incremented playcount: "
                 << playlist->have_incremented_playcount();
 

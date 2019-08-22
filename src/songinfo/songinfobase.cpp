@@ -75,7 +75,7 @@ void SongInfoBase::Clear() {
   delete section_container_;
   sections_.clear();
 
-  // Container for collapsable sections goes below
+  // Container for collapsible sections goes below
   section_container_ = new QWidget;
   section_container_->setLayout(new QVBoxLayout);
   section_container_->layout()->setContentsMargins(0, 0, 0, 0);
@@ -161,7 +161,7 @@ void SongInfoBase::CollapseSections() {
 
   // Sections are already sorted by type and relevance, so the algorithm we use
   // to determine which ones to show by default is:
-  //   * In the absense of any user preference, show the first (highest
+  //   * In the absence of any user preference, show the first (highest
   //     relevance section of each type and hide the rest)
   //   * If one or more sections in a type have been explicitly hidden/shown
   //     by the user before then hide all sections in that type and show only

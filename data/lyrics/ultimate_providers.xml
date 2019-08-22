@@ -63,11 +63,11 @@
   <provider name="genius.com" charset="utf-8" url="https://www.genius.com/{artist}-{title}-lyrics">
     <urlFormat replace=",._@!#%^*+;\/&quot;'()[]" with=""/>
     <urlFormat replace=" :" with="-"/>
-    <!-- When $ is used as the dollar sign it is ommitted from the url
+    <!-- When $ is used as the dollar sign it is omitted from the url
          When $ is used instead of 's',
          in some cases it is replaced by 's'(Too $hort -> too-short)
-         in other cases it is ommited ($uicideboy$ -> uicideboy)
-         I chose to ommit it though, in some cases it's gonna be problematic -->
+         in other cases it is omitted ($uicideboy$ -> uicideboy)
+         I chose to omit it though, in some cases it's gonna be problematic -->
     <urlFormat replace="$" with=""/>
     <urlFormat replace="ÄÂÀÁÃäâàáã" with="a"/>
     <urlFormat replace="ËÊÈÉëêèé" with="e"/>
