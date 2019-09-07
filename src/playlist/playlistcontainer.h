@@ -23,6 +23,7 @@
 
 class Ui_PlaylistContainer;
 
+class Application;
 class LineEditInterface;
 class Playlist;
 class PlaylistManager;
@@ -41,6 +42,7 @@ class PlaylistContainer : public QWidget {
 
   static const char* kSettingsGroup;
 
+  void SetApplication(Application* app);
   void SetActions(QAction* new_playlist, QAction* load_playlist,
                   QAction* save_playlist, QAction* next_playlist,
                   QAction* previous_playlist);
@@ -83,7 +85,8 @@ signals:
   void ActivePaused();
   void ActiveStopped();
 
-  void Save();
+  void DirtyTabBar();
+  void Save(QSettings* settings_);
 
   void SetTabBarVisible(bool visible);
   void SetTabBarHeight(int height);
@@ -103,6 +106,7 @@ signals:
   static const int kFilterDelayMs;
   static const int kFilterDelayPlaylistSizeThreshold;
 
+  Application* app_;
   Ui_PlaylistContainer* ui_;
 
   PlaylistManager* manager_;
@@ -119,6 +123,8 @@ signals:
   QLabel* no_matches_label_;
 
   QTimer* filter_timer_;
+
+  bool dirty_;
 };
 
 #endif  // PLAYLISTCONTAINER_H
