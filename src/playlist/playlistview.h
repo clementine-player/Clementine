@@ -145,7 +145,9 @@ signals:
  private slots:
   void LoadGeometry();
   void LoadRatingLockStatus();
-  void SaveGeometry();
+  void DirtyGeometry();
+  void DirtySettings();
+  void SaveGeometry(QSettings* settings);
   void SetRatingLockStatus(bool state);
   void GlowIntensityChanged();
   void InhibitAutoscrollTimeout();
@@ -153,7 +155,7 @@ signals:
   void InvalidateCachedCurrentPixmap();
   void PlaylistDestroyed();
 
-  void SaveSettings();
+  void SaveSettings(QSettings* s);
   void StretchChanged(bool stretch);
 
   void RatingHoverIn(const QModelIndex& index, const QPoint& pos);
@@ -250,6 +252,9 @@ signals:
   QPixmap cached_tree_;
   int drop_indicator_row_;
   bool drag_over_;
+
+  bool dirty_geometry_;
+  bool dirty_settings_;
 
   bool ratings_locked_;  // To store Ratings section lock status
 

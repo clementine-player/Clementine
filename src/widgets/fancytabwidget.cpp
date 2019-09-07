@@ -307,16 +307,13 @@ void FancyTabWidget::loadSettings(const char *kSettingsGroup) {
     }
 }
 
-void FancyTabWidget::saveSettings(const char *kSettingsGroup) {
-    QSettings settings;
-    settings.beginGroup(kSettingsGroup);
+void FancyTabWidget::saveSettings(QSettings* settings) {
+  for (int i = 0; i < count(); i++) {
+    int originalIndex = tabBar()->tabData(i).toInt();
+    std::string k = "tab_index_" + std::to_string(originalIndex);
 
-    for(int i =0;i<count();i++) {
-        int originalIndex = tabBar()->tabData(i).toInt();
-        std::string k = "tab_index_" + std::to_string(originalIndex);
-
-        settings.setValue(QString::fromStdString(k), i);
-    }
+    settings->setValue(QString::fromStdString(k), i);
+  }
 }
 
 
