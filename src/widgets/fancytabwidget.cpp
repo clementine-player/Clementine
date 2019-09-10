@@ -290,10 +290,7 @@ FancyTabWidget::FancyTabWidget(QWidget* parent) : QTabWidget(parent),
     connect(tabBar, SIGNAL(currentChanged(int)), this, SLOT(currentTabChanged(int)));
 }
 
-void FancyTabWidget::loadSettings(const char *kSettingsGroup) {
-    QSettings settings;
-    settings.beginGroup(kSettingsGroup);
-
+void FancyTabWidget::loadSettings(const QSettings& settings) {
   for (int i = 0; i < count(); i++) {
     int originalIndex = tabBar()->tabData(i).toInt();
     QString k = "tab_index_" + QString::number(originalIndex);
