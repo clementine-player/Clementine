@@ -118,7 +118,7 @@ QString SongTracker::GetFingerprint(const QString& filename) {
       chromaprinter.CreateFingerprint(kChromaPlayLengthSecs, false);
   const qint32 length_msec = chromaprinter.GetLength();
   if (!chroma_print.isEmpty() && length_msec >= kMinStreamLengthMSecs) {
-    hash.addData(chroma_print.toAscii());
+    hash.addData(chroma_print.toLatin1());
   } else {
     // Fallback
     QFile file(filename);
@@ -134,7 +134,7 @@ QString SongTracker::GetFingerprint(const QString& filename) {
 
   // Add length
   if (length_msec > 0) {
-    hash.addData(QString::number(length_msec).toAscii());
+    hash.addData(QString::number(length_msec).toLatin1());
   }
 
   const QString& fingerprint(hash.result().toBase64());
