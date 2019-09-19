@@ -25,6 +25,7 @@
 
 class QActionGroup;
 class QMenu;
+class QSettings;
 class QSignalMapper;
 
 namespace Core {
@@ -43,8 +44,8 @@ class FancyTabWidget : public QTabWidget {
         void setBackgroundPixmap(const QPixmap& pixmap);
         void addSpacer();
 
-        void loadSettings(const char *);
-        void saveSettings(const char *);
+        void loadSettings(const QSettings&);
+        void saveSettings(QSettings*);
         // Values are persisted - only add to the end
         enum Mode {
             Mode_None = 0,

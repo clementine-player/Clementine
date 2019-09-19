@@ -223,6 +223,8 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
       track_position_timer_(new QTimer(this)),
       track_slider_timer_(new QTimer(this)),
       initialized_(false),
+      dirty_geometry_(false),
+      dirty_playback_(false),
       saved_playback_position_(0),
       saved_playback_state_(Engine::Empty),
       doubleclick_addmode_(AddBehaviour_Append),
@@ -258,6 +260,9 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
   connect(global_search_view_, SIGNAL(AddToPlaylist(QMimeData*)),
           SLOT(AddToPlaylist(QMimeData*)));
 
+  // Set up the settings group early
+  settings_.beginGroup(kSettingsGroup);
+
   // Add tabs to the fancy tab widget
   ui_->tabs->addTab(global_search_view_,
                     IconLoader::Load("search", IconLoader::Base),
@@ -292,7 +297,7 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
   ui_->tabs->setBackgroundPixmap(QPixmap(":/sidebar_background.png"));
 
   // Do this only after all default tabs have been added
-  ui_->tabs->loadSettings(kSettingsGroup);
+  ui_->tabs->loadSettings(settings_);
 
   track_position_timer_->setInterval(kTrackPositionUpdateTimeMs);
   connect(track_position_timer_, SIGNAL(timeout()),
@@ -300,6 +305,9 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
   track_slider_timer_->setInterval(kTrackSliderUpdateTimeMs);
   connect(track_slider_timer_, SIGNAL(timeout()),
           SLOT(UpdateTrackSliderPosition()));
+
+  connect(app_, SIGNAL(SaveSettings(QSettings*)),
+          SLOT(SaveSettings(QSettings*)));
 
   // Start initialising the player
   qLog(Debug) << "Initialising player";
@@ -317,8 +325,7 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
 
   connect(ui_->playlist, SIGNAL(ViewSelectionModelChanged()),
           SLOT(PlaylistViewSelectionModelChanged()));
-  ui_->playlist->SetManager(app_->playlist_manager());
-  ui_->playlist->view()->SetApplication(app_);
+  ui_->playlist->SetApplication(app_);
 
   library_view_->view()->setModel(library_sort_model_);
   library_view_->view()->SetApplication(app_);
@@ -977,7 +984,6 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
 
   // Load settings
   qLog(Debug) << "Loading settings";
-  settings_.beginGroup(kSettingsGroup);
 
   // Set last used geometry to position window on the correct monitor
   // Set window state only if the window was last maximized
@@ -1064,13 +1070,11 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
   if (!options.contains_play_options()) LoadPlaybackStatus();
 
   initialized_ = true;
-  SaveGeometry();
 
   qLog(Debug) << "Started";
 }
 
 MainWindow::~MainWindow() {
-  SaveGeometry();
   delete ui_;
 }
 
@@ -1085,18 +1089,15 @@ void MainWindow::ReloadSettings() {
     show();
 #endif
 
-  QSettings s;
-  s.beginGroup(kSettingsGroup);
-
-  doubleclick_addmode_ =
-      AddBehaviour(s.value("doubleclick_addmode", AddBehaviour_Append).toInt());
+  doubleclick_addmode_ = AddBehaviour(
+      settings_.value("doubleclick_addmode", AddBehaviour_Append).toInt());
   doubleclick_playmode_ = PlayBehaviour(
-      s.value("doubleclick_playmode", PlayBehaviour_IfStopped).toInt());
-  doubleclick_playlist_addmode_ =
-      PlaylistAddBehaviour(s.value("doubleclick_playlist_addmode",
-                                   PlaylistAddBehaviour_Play).toInt());
-  menu_playmode_ =
-      PlayBehaviour(s.value("menu_playmode", PlayBehaviour_IfStopped).toInt());
+      settings_.value("doubleclick_playmode", PlayBehaviour_IfStopped).toInt());
+  doubleclick_playlist_addmode_ = PlaylistAddBehaviour(
+      settings_.value("doubleclick_playlist_addmode", PlaylistAddBehaviour_Play)
+          .toInt());
+  menu_playmode_ = PlayBehaviour(
+      settings_.value("menu_playmode", PlayBehaviour_IfStopped).toInt());
 
   bool show_sidebar = settings_.value("show_sidebar", true).toBool();
   ui_->sidebar_layout->setVisible(show_sidebar);
@@ -1278,54 +1279,61 @@ void MainWindow::ScrobbleButtonVisibilityChanged(bool value) {
   }
 }
 
-void MainWindow::changeEvent(QEvent*) {
+void MainWindow::SaveSettings(QSettings* settings) {
   if (!initialized_) return;
-  SaveGeometry();
+  settings->beginGroup(kSettingsGroup);
+  if (dirty_geometry_) SaveGeometry(settings);
+  if (dirty_playback_) SavePlaybackStatus(settings);
+  settings->endGroup();
+}
+
+void MainWindow::changeEvent(QEvent*) {
+  dirty_geometry_ = true;
+  app_->DirtySettings();
 }
 
 void MainWindow::resizeEvent(QResizeEvent*) {
-  if (!initialized_) return;
-  SaveGeometry();
+  dirty_geometry_ = true;
+  app_->DirtySettings();
 }
 
-void MainWindow::SaveGeometry() {
+void MainWindow::SaveGeometry(QSettings* settings) {
   if (!initialized_) return;
+  dirty_geometry_ = false;
 
   was_maximized_ = isMaximized();
-  settings_.setValue("maximized", was_maximized_);
+  settings->setValue("maximized", was_maximized_);
   // Save the geometry only when mainwindow is not in maximized state
   if (!was_maximized_) {
-    settings_.setValue("geometry", saveGeometry());
+    settings->setValue("geometry", saveGeometry());
   }
-  settings_.setValue("splitter_state", ui_->splitter->saveState());
-  settings_.setValue("current_tab", ui_->tabs->currentIndex());
-  settings_.setValue("tab_mode", ui_->tabs->mode());
+  settings->setValue("splitter_state", ui_->splitter->saveState());
+  settings->setValue("current_tab", ui_->tabs->currentIndex());
+  settings->setValue("tab_mode", ui_->tabs->mode());
 
-  ui_->tabs->saveSettings(kSettingsGroup);
+  // Leaving this here for now
+  ui_->tabs->saveSettings(settings);
 }
 
-void MainWindow::SavePlaybackStatus() {
-  QSettings settings;
-  settings.beginGroup(MainWindow::kSettingsGroup);
-  settings.setValue("playback_state", app_->player()->GetState());
+void MainWindow::SavePlaybackStatus(QSettings* settings) {
+  dirty_playback_ = false;
+  settings->setValue("playback_state", app_->player()->GetState());
   if (app_->player()->GetState() == Engine::Playing ||
       app_->player()->GetState() == Engine::Paused) {
-    settings.setValue(
+    settings->setValue(
         "playback_position",
         app_->player()->engine()->position_nanosec() / kNsecPerSec);
   } else {
-    settings.setValue("playback_position", 0);
+    settings->setValue("playback_position", 0);
   }
 }
 
 void MainWindow::LoadPlaybackStatus() {
-  QSettings settings;
-  settings.beginGroup(MainWindow::kSettingsGroup);
   bool resume_playback =
-      settings.value("resume_playback_after_start", false).toBool();
+      settings_.value("resume_playback_after_start", false).toBool();
   saved_playback_state_ = static_cast<Engine::State>(
-      settings.value("playback_state", Engine::Empty).toInt());
-  saved_playback_position_ = settings.value("playback_position", 0).toDouble();
+      settings_.value("playback_state", Engine::Empty).toInt());
+  saved_playback_position_ = settings_.value("playback_position", 0).toDouble();
   if (!resume_playback || saved_playback_state_ == Engine::Empty ||
       saved_playback_state_ == Engine::Idle) {
     return;
@@ -1433,12 +1441,10 @@ void MainWindow::StopAfterCurrent() {
 }
 
 void MainWindow::closeEvent(QCloseEvent* event) {
-  QSettings s;
-  s.beginGroup(kSettingsGroup);
-
   bool keep_running(false);
   if (tray_icon_)
-    keep_running = s.value("keeprunning", tray_icon_->IsVisible()).toBool();
+    keep_running =
+        settings_.value("keeprunning", tray_icon_->IsVisible()).toBool();
 
   if (keep_running && event->spontaneous()) {
     event->ignore();
@@ -2794,10 +2800,13 @@ bool MainWindow::winEvent(MSG* msg, long*) {
 #endif  // Q_OS_WIN32
 
 void MainWindow::Exit() {
-  SaveGeometry();
-  SavePlaybackStatus();
+  // FIXME: This may add an extra write.
+  dirty_playback_ = true;
   settings_.setValue("show_sidebar",
                      ui_->action_toggle_show_sidebar->isChecked());
+  settings_.endGroup();
+  SaveSettings(&settings_);
+  settings_.sync();
 
   if (app_->player()->engine()->is_fadeout_enabled()) {
     // To shut down the application when fadeout will be finished

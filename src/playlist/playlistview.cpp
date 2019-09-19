@@ -135,6 +135,8 @@ PlaylistView::PlaylistView(QWidget* parent)
       cached_current_row_row_(-1),
       drop_indicator_row_(-1),
       drag_over_(false),
+      dirty_geometry_(false),
+      dirty_settings_(false),
       dynamic_controls_(new DynamicPlaylistControls(this)) {
   setHeader(header_);
   header_->setSectionsMovable(true);
@@ -153,12 +155,13 @@ PlaylistView::PlaylistView(QWidget* parent)
   currenttrack_pause_ =
       currenttrack_pause.pixmap(currenttrack_pause.actualSize(QSize(32, 32)));
 
-  connect(header_, SIGNAL(sectionResized(int, int, int)), SLOT(SaveGeometry()));
-  connect(header_, SIGNAL(sectionMoved(int, int, int)), SLOT(SaveGeometry()));
+  connect(header_, SIGNAL(sectionResized(int, int, int)),
+          SLOT(DirtyGeometry()));
+  connect(header_, SIGNAL(sectionMoved(int, int, int)), SLOT(DirtyGeometry()));
   connect(header_, SIGNAL(sortIndicatorChanged(int, Qt::SortOrder)),
-          SLOT(SaveGeometry()));
+          SLOT(DirtyGeometry()));
   connect(header_, SIGNAL(SectionVisibilityChanged(int, bool)),
-          SLOT(SaveGeometry()));
+          SLOT(DirtyGeometry()));
   connect(header_, SIGNAL(SectionRatingLockStatusChanged(bool)),
           SLOT(SetRatingLockStatus(bool)));
   connect(header_, SIGNAL(sectionResized(int, int, int)),
@@ -167,7 +170,7 @@ PlaylistView::PlaylistView(QWidget* parent)
           SLOT(InvalidateCachedCurrentPixmap()));
   connect(header_, SIGNAL(SectionVisibilityChanged(int, bool)),
           SLOT(InvalidateCachedCurrentPixmap()));
-  connect(header_, SIGNAL(StretchEnabledChanged(bool)), SLOT(SaveSettings()));
+  connect(header_, SIGNAL(StretchEnabledChanged(bool)), SLOT(DirtySettings()));
   connect(header_, SIGNAL(StretchEnabledChanged(bool)),
           SLOT(StretchChanged(bool)));
   connect(header_, SIGNAL(MouseEntered()), SLOT(RatingHoverOut()));
@@ -196,7 +199,6 @@ PlaylistView::PlaylistView(QWidget* parent)
 }
 
 PlaylistView::~PlaylistView() {
-  SaveGeometry();
   delete style_;
 }
 
@@ -210,6 +212,10 @@ void PlaylistView::SetApplication(Application* app) {
   connect(app_->player(), SIGNAL(Playing()), SLOT(StartGlowing()));
   connect(app_->player(), SIGNAL(Stopped()), SLOT(StopGlowing()));
   connect(app_->player(), SIGNAL(Stopped()), SLOT(PlayerStopped()));
+  connect(app_, SIGNAL(SaveSettings(QSettings*)),
+          SLOT(SaveGeometry(QSettings*)));
+  connect(app_, SIGNAL(SaveSettings(QSettings*)),
+          SLOT(SaveSettings(QSettings*)));
 }
 
 void PlaylistView::SetItemDelegates(LibraryBackend* backend) {
@@ -416,13 +422,19 @@ void PlaylistView::LoadRatingLockStatus() {
   ratings_locked_ = s.value("RatingLocked", false).toBool();
 }
 
-void PlaylistView::SaveGeometry() {
-  if (read_only_settings_ || !header_loaded_) return;
+void PlaylistView::DirtyGeometry() {
+  dirty_geometry_ = true;
+  app_->DirtySettings();
+}
 
-  QSettings settings;
-  settings.beginGroup(Playlist::kSettingsGroup);
-  settings.setValue("state", header_->SaveState());
-  settings.setValue("state_version", kStateVersion);
+void PlaylistView::SaveGeometry(QSettings* settings) {
+  if (!dirty_geometry_ || read_only_settings_ || !header_loaded_) return;
+  dirty_geometry_ = false;
+
+  settings->beginGroup(Playlist::kSettingsGroup);
+  settings->setValue("state", header_->SaveState());
+  settings->setValue("state_version", kStateVersion);
+  settings->endGroup();
 }
 
 void PlaylistView::SetRatingLockStatus(bool state) {
@@ -1179,20 +1191,28 @@ void PlaylistView::ReloadSettings() {
     setEditTriggers(editTriggers() | QAbstractItemView::SelectedClicked);
 }
 
-void PlaylistView::SaveSettings() {
-  if (read_only_settings_) return;
+void PlaylistView::DirtySettings() {
+  dirty_settings_ = true;
+  app_->DirtySettings();
+}
 
-  QSettings s;
-  s.beginGroup(Playlist::kSettingsGroup);
-  s.setValue("glow_effect", glow_enabled_);
-  s.setValue("column_alignments", QVariant::fromValue(column_alignment_));
-  s.setValue(kSettingBackgroundImageType, background_image_type_);
+void PlaylistView::SaveSettings(QSettings* settings) {
+  if (!dirty_settings_ || read_only_settings_) return;
+  dirty_settings_ = false;
+
+  settings->beginGroup(Playlist::kSettingsGroup);
+  settings->setValue("glow_effect", glow_enabled_);
+  settings->setValue("column_alignments",
+                     QVariant::fromValue(column_alignment_));
+  settings->setValue(kSettingBackgroundImageType, background_image_type_);
+  settings->endGroup();
 }
 
 void PlaylistView::StretchChanged(bool stretch) {
   setHorizontalScrollBarPolicy(stretch ? Qt::ScrollBarAlwaysOff
                                        : Qt::ScrollBarAsNeeded);
-  SaveGeometry();
+  dirty_geometry_ = true;
+  app_->DirtySettings();
 }
 
 void PlaylistView::DynamicModeChanged(bool dynamic) {
@@ -1261,7 +1281,8 @@ void PlaylistView::SetColumnAlignment(int section, Qt::Alignment alignment) {
 
   column_alignment_[section] = alignment;
   emit ColumnAlignmentChanged(column_alignment_);
-  SaveSettings();
+  dirty_settings_ = true;
+  app_->DirtySettings();
 }
 
 Qt::Alignment PlaylistView::column_alignment(int section) const {

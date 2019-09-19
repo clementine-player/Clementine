@@ -430,6 +430,7 @@ int main(int argc, char* argv[]) {
   QtConcurrent::run(&ParseAProto);
 
   Application app;
+  QObject::connect(&a, SIGNAL(aboutToQuit()), &app, SLOT(SaveSettings_()));
   app.set_language_name(language);
 
   // Network proxy
