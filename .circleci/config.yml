@@ -262,7 +262,7 @@ jobs:
       - run:
           name: Google Cloud Auth
           command: |
-            echo $GCLOUD_SERVICE_KEY | gcloud auth activate-service-account --key-file=-
+            echo $GCLOUD_SERVICE_KEY | gcloud auth activate-service-account circleci-uploader@clementine-data.iam.gserviceaccount.com --key-file=-
             gcloud --quiet config set project clementine-data
       - attach_workspace:
           at: /tmp/artifacts
