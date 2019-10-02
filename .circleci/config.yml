@@ -178,7 +178,7 @@ jobs:
       - make_deb
       - copy_artifacts
       - store_artifacts:
-          path: /tmp/artifacts/ubuntu-xenial
+          path: /tmp/artifacts/ubuntu-disco
 
   build_disco_32:
     docker:
@@ -193,7 +193,7 @@ jobs:
       - make_deb
       - copy_artifacts
       - store_artifacts:
-          path: /tmp/artifacts/ubuntu-xenial
+          path: /tmp/artifacts/ubuntu-disco
 
   build_bionic_64:
     docker:
