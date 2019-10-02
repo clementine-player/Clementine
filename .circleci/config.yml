@@ -36,7 +36,7 @@ commands:
     steps:
       - run:
           name: Create artifact output directory
-          command: mkdir -p /tmp/artifacts
+          command: mkdir -p /tmp/artifacts/<< parameters.build >>
       - run:
           name: Copy deb to artifacts directory
           command: cp bin/clementine_*.deb /tmp/artifacts/<< parameters.build >>/
