@@ -2,13 +2,55 @@ version: 2
 jobs:
   build:
     docker:
-      - image: gcr.io/clementine-data/slave-ubuntu-bionic-64
+      - image: ubuntu:xenial
 
     steps:
+      - run:
+          name: Install Dependencies
+          command: >
+            apt-get update && apt-get install
+            cmake
+            fakeroot
+            gettext
+            libboost-dev
+            libboost-serialization-dev
+            libcdio-cdda1
+            libcdio-dev
+            libchromaprint-dev
+            libcrypto++-dev
+            libfftw3-dev
+            libglew1.5-dev
+            libgpod-dev
+            libgstreamer-plugins-base1.0-dev
+            libgstreamer1.0-dev
+            liblastfm-dev
+            libmtp-dev
+            libmygpo-qt-dev
+            libplist-dev
+            libprotobuf-dev
+            libpulse-dev
+            libqca2-dev
+            libqca2-plugin-ossl
+            libqjson-dev
+            libqt4-dev
+            libqt4-opengl-dev
+            libqtwebkit-dev
+            libsparsehash-dev
+            libsqlite3-dev
+            libtag1-dev
+            libusbmuxd-dev
+            protobuf-compiler
+            qt4-dev-tools
       - checkout
       - run:
           name: cmake
-          command: cmake ..
+          command: >
+            cmake ..
+            -DWITH_DEBIAN=ON
+            -DDEB_ARCH=amd64
+            -DDEB_DIST=xenial
+            -DFORCE_GIT_VERSION=
+            -DENABLE_SPOTIFY_BLOB=OFF
           working_directory: bin
       - run:
           name: make
