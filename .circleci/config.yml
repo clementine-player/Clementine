@@ -39,7 +39,13 @@ commands:
           command: mkdir -p /tmp/artifacts
       - run:
           name: Copy deb to artifacts directory
-          command: cp bin/clementine_*.deb /tmp/artifacts
+          command: cp bin/clementine_*.deb /tmp/artifacts/<< parameters.build >>/
+      - persist_to_workspace:
+          root: /tmp/artifacts/<< parameters.build >>
+          paths:
+            - "*"
+      - store_artifacts:
+          path: /tmp/artifacts/<< parameters.build >>
   install_xenial_dependencies:
     description: Install Xenial dependencies
     steps:
@@ -176,9 +182,8 @@ jobs:
           distribution: disco
           arch: amd64
       - make_deb
-      - copy_artifacts
-      - store_artifacts:
-          path: /tmp/artifacts/ubuntu-disco
+      - copy_artifacts:
+          build: ubuntu-disco
 
   build_disco_32:
     docker:
@@ -191,9 +196,8 @@ jobs:
           distribution: disco
           arch: i386
       - make_deb
-      - copy_artifacts
-      - store_artifacts:
-          path: /tmp/artifacts/ubuntu-disco
+      - copy_artifacts:
+          build: ubuntu-disco
 
   build_bionic_64:
     docker:
@@ -206,9 +210,8 @@ jobs:
           distribution: bionic
           arch: amd64
       - make_deb
-      - copy_artifacts
-      - store_artifacts:
-          path: /tmp/artifacts/ubuntu-bionic
+      - copy_artifacts:
+          build: ubuntu-bionic
 
   build_bionic_32:
     docker:
@@ -221,9 +224,8 @@ jobs:
           distribution: bionic
           arch: i386
       - make_deb
-      - copy_artifacts
-      - store_artifacts:
-          path: /tmp/artifacts/ubuntu-bionic
+      - copy_artifacts:
+          build: ubuntu-bionic
 
   build_xenial_64:
     docker:
@@ -236,9 +238,8 @@ jobs:
           distribution: xenial
           arch: amd64
       - make_deb
-      - copy_artifacts
-      - store_artifacts:
-          path: /tmp/artifacts/ubuntu-xenial
+      - copy_artifacts:
+          build: ubuntu-xenial
 
   build_xenial_32:
     docker:
@@ -251,9 +252,8 @@ jobs:
           distribution: xenial
           arch: i386
       - make_deb
-      - copy_artifacts
-      - store_artifacts:
-          path: /tmp/artifacts/ubuntu-xenial
+      - copy_artifacts:
+          build: ubuntu-xenial
 
   upload_artifacts:
     docker:
@@ -264,6 +264,8 @@ jobs:
           command: |
             echo $GCLOUD_SERVICE_KEY | gcloud auth activate-service-account --key-file=-
             gcloud --quiet config set project clementine-data
+      - attach_workspace:
+          at: /tmp/artifacts
       - run:
           name: Upload Artifact to Google Cloud
           command: gsutil rsync -r /tmp/artifacts gs://builds.clementine-player.org/
