@@ -29,6 +29,10 @@ commands:
           working_directory: bin
   copy_artifacts:
     description: Copy build artifacts
+    parameters:
+      build:
+        type: string
+        default: ubuntu-xenial
     steps:
       - run:
           name: Create artifact output directory
@@ -36,22 +40,6 @@ commands:
       - run:
           name: Copy deb to artifacts directory
           command: cp bin/clementine_*.deb /tmp/artifacts
-  upload_artifacts:
-    docker:
-      - image: google/cloud-sdk
-    parameters:
-      build:
-        type: string
-        default: ubuntu-xenial
-    steps:
-      - run:
-          name: Google Cloud Auth
-          command: |
-            echo $GCLOUD_SERVICE_KEY | gcloud auth activate-service-account --key-file=-
-            gcloud --quiet config set project clementine-data
-      - run:
-          name: Upload Artifact to Google Cloud
-          command: gsutil rsync -r /tmp/artifacts gs://builds.clementine-player.org/<< parameters.build >>
   install_xenial_dependencies:
     description: Install Xenial dependencies
     steps:
@@ -190,9 +178,7 @@ jobs:
       - make_deb
       - copy_artifacts
       - store_artifacts:
-          path: /tmp/artifacts
-      - upload_artifacts:
-          build: ubuntu-disco
+          path: /tmp/artifacts/ubuntu-xenial
 
   build_disco_32:
     docker:
@@ -207,9 +193,7 @@ jobs:
       - make_deb
       - copy_artifacts
       - store_artifacts:
-          path: /tmp/artifacts
-      - upload_artifacts:
-          build: ubuntu-disco
+          path: /tmp/artifacts/ubuntu-xenial
 
   build_bionic_64:
     docker:
@@ -224,9 +208,7 @@ jobs:
       - make_deb
       - copy_artifacts
       - store_artifacts:
-          path: /tmp/artifacts
-      - upload_artifacts:
-          build: ubuntu-bionic
+          path: /tmp/artifacts/ubuntu-bionic
 
   build_bionic_32:
     docker:
@@ -241,9 +223,7 @@ jobs:
       - make_deb
       - copy_artifacts
       - store_artifacts:
-          path: /tmp/artifacts
-      - upload_artifacts:
-          build: ubuntu-bionic
+          path: /tmp/artifacts/ubuntu-bionic
 
   build_xenial_64:
     docker:
@@ -258,9 +238,7 @@ jobs:
       - make_deb
       - copy_artifacts
       - store_artifacts:
-          path: /tmp/artifacts
-      - upload_artifacts:
-          build: ubuntu-xenial
+          path: /tmp/artifacts/ubuntu-xenial
 
   build_xenial_32:
     docker:
@@ -275,9 +253,20 @@ jobs:
       - make_deb
       - copy_artifacts
       - store_artifacts:
-          path: /tmp/artifacts
-      - upload_artifacts:
-          build: ubuntu-xenial
+          path: /tmp/artifacts/ubuntu-xenial
+
+  upload_artifacts:
+    docker:
+      - image: google/cloud-sdk
+    steps:
+      - run:
+          name: Google Cloud Auth
+          command: |
+            echo $GCLOUD_SERVICE_KEY | gcloud auth activate-service-account --key-file=-
+            gcloud --quiet config set project clementine-data
+      - run:
+          name: Upload Artifact to Google Cloud
+          command: gsutil rsync -r /tmp/artifacts gs://builds.clementine-player.org/
 
 workflows:
   version: 2
@@ -289,3 +278,12 @@ workflows:
       - build_bionic_64
       - build_disco_32
       - build_disco_64
+
+      - upload_artifacts:
+          requires:
+            - build_xenial_32
+            - build_xenial_64
+            - build_bionic_32
+            - build_bionic_64
+            - build_disco_32
+            - build_disco_64
