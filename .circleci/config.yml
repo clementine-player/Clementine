@@ -255,6 +255,79 @@ jobs:
       - copy_artifacts:
           build: ubuntu-xenial
 
+  build_mac:
+    macos:
+      xcode: "11.0.0"
+      environment:
+        Qt5_DIR: /usr/local/opt/qt5/lib/cmake
+        Qt5LinguistTools_DIR: /usr/local/Cellar/qt/5.11.2/lib/cmake/Qt5LinguistTools
+        GST_SCANNER_PATH: /usr/local/Cellar/gstreamer/1.14.4/libexec/gstreamer-1.0/gst-plugin-scanner
+        GST_PLUGIN_PATH: /usr/local/lib/gstreamer-1.0
+    steps:
+      - run:
+          name: Setup PATH
+          command: |
+            echo 'export PATH=/usr/local/opt/gettext/bin:$PATH' >> $BASH_ENV
+            source $BASH_ENV
+      - run:
+          name: Install dependencies from homebrew
+          command: >
+            brew install
+            boost
+            chromaprint
+            cmake
+            cryptopp
+            gettext
+            glib
+            liblastfm
+            pkgconfig
+            protobuf
+            protobuf-c
+            qt
+      - run:
+          name: Install sqlite
+          command: brew install sqlite --with-fts
+      - run:
+          name: Install gstreamer
+          command: brew install gstreamer gst-plugins-base
+      - run:
+          name: Install gst-plugins-good
+          command: brew install gst-plugins-good --with-flac
+      - run:
+          name: Install gst-plugins
+          command: brew install gst-plugins-bad gst-plugins-ugly
+      - run:
+          name: Install other dependencies
+          command: brew install chromaprint liblastfm
+      - checkout
+      - run:
+          name: Checkout qt5 branch
+          command: git checkout qt5
+      - run:
+          name: cmake
+          command: cmake .. -DUSE_VISUALISATIONS=OFF
+          working_directory: bin
+      - run:
+          name: make
+          command: make
+          working_directory: bin
+      - run:
+          name: Build DMG
+          command: make dmg
+          working_directory: bin
+      - run:
+          name: Create artifact output directory
+          command: mkdir -p /tmp/artifacts/mac
+      - run:
+          name: Copy dmg to artifacts directory
+          command: cp bin/clementine*.dmg /tmp/artifacts/mac
+      - persist_to_workspace:
+          root: /tmp/artifacts/mac
+          paths:
+            - "*"
+      - store_artifacts:
+          path: /tmp/artifacts/mac
+
   upload_artifacts:
     docker:
       - image: google/cloud-sdk
@@ -280,6 +353,7 @@ workflows:
       - build_bionic_64
       - build_disco_32
       - build_disco_64
+      - build_mac
 
       - upload_artifacts:
           requires:
@@ -289,3 +363,4 @@ workflows:
             - build_bionic_64
             - build_disco_32
             - build_disco_64
+            - build_mac
