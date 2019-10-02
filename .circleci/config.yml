@@ -359,6 +359,7 @@ workflows:
       - build_mac
 
       - upload_artifacts:
+          context: gcp
           requires:
             - build_xenial_32
             - build_xenial_64
