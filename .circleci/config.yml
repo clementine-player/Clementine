@@ -1,0 +1,16 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: gcr.io/clementine-data/slave-ubuntu-bionic-64
+
+    steps:
+      - checkout
+      - run:
+          name: cmake
+          command: cmake ..
+          working_directory: bin
+      - run:
+          name: make
+          command: make
+          working_directory: bin
