@@ -312,6 +312,10 @@ jobs:
           command: make
           working_directory: bin
       - run:
+          name: Copy icon file and resources
+          command: make install
+          working_directory: bin
+      - run:
           name: Build DMG
           command: make dmg
           working_directory: bin
