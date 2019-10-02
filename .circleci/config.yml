@@ -86,7 +86,7 @@ jobs:
     steps:
       - install_xenial_dependencies
       - checkout
-      - cmake_linux:
+      - cmake_debian:
           distribution: xenial
           arch: amd64
       - make_deb
@@ -101,7 +101,7 @@ jobs:
     steps:
       - install_xenial_dependencies
       - checkout
-      - cmake_linux:
+      - cmake_debian:
           distribution: xenial
           arch: i386
       - make_deb
