@@ -58,3 +58,11 @@ jobs:
           name: make
           command: make
           working_directory: bin
+      - run:
+          name: Create artifact output directory
+          command: mkdir -p /tmp/artifacts
+      - run:
+          name: Copy deb to artifacts directory
+          command: cp bin/clementine_*.deb /tmp/artifacts
+      - store_artifacts:
+          path: /tmp/artifacts
