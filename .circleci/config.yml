@@ -79,6 +79,66 @@ commands:
             ssh
 
 jobs:
+  build_disco_64:
+    docker:
+      - image: ubuntu:disco
+
+    steps:
+      - install_xenial_dependencies
+      - checkout
+      - cmake_debian:
+          distribution: disco
+          arch: amd64
+      - make_deb
+      - copy_artifacts
+      - store_artifacts:
+          path: /tmp/artifacts
+
+  build_disco_32:
+    docker:
+      - image: i386/ubuntu:disco
+
+    steps:
+      - install_xenial_dependencies
+      - checkout
+      - cmake_debian:
+          distribution: disco
+          arch: i386
+      - make_deb
+      - copy_artifacts
+      - store_artifacts:
+          path: /tmp/artifacts
+
+  build_bionic_64:
+    docker:
+      - image: ubuntu:bionic
+
+    steps:
+      - install_xenial_dependencies
+      - checkout
+      - cmake_debian:
+          distribution: bionic
+          arch: amd64
+      - make_deb
+      - copy_artifacts
+      - store_artifacts:
+          path: /tmp/artifacts
+
+  build_bionic_32:
+    docker:
+      - image: i386/ubuntu:bionic
+
+    steps:
+      - install_xenial_dependencies
+      - checkout
+      - cmake_debian:
+          distribution: bionic
+          arch: i386
+      - make_deb
+      - copy_artifacts
+      - store_artifacts:
+          path: /tmp/artifacts
+
   build_xenial_64:
     docker:
       - image: ubuntu:xenial
