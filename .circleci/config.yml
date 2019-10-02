@@ -1,9 +1,43 @@
 version: 2
-jobs:
-  build:
-    docker:
-      - image: ubuntu:xenial
-
+commands:
+  cmake_debian:
+    description: Configure build
+    parameters:
+      distribution:
+        type: string
+        default: xenial
+      arch:
+        type: string
+        default: amd64
+    steps:
+      - run:
+          name: cmake
+          command: >
+            cmake ..
+            -DWITH_DEBIAN=ON
+            -DDEB_ARCH=<< parameters.arch >>
+            -DDEB_DIST=<< parameters.distribution >>
+            -DFORCE_GIT_VERSION=
+            -DENABLE_SPOTIFY_BLOB=OFF
+          working_directory: bin
+  make_deb:
+    description: Build deb
+    steps:
+      - run:
+          name: make deb
+          command: make deb
+          working_directory: bin
+  copy_artifacts:
+    description: Copy build artifacts
+    steps:
+      - run:
+          name: Create artifact output directory
+          command: mkdir -p /tmp/artifacts
+      - run:
+          name: Copy deb to artifacts directory
+          command: cp bin/clementine_*.deb /tmp/artifacts
+  install_xenial_dependencies:
+    description: Install Xenial dependencies
     steps:
       - run:
           name: Install Dependencies
@@ -43,26 +77,41 @@ jobs:
             protobuf-compiler
             qt4-dev-tools
             ssh
+
+jobs:
+  build_xenial_64:
+    docker:
+      - image: ubuntu:xenial
+
+    steps:
+      - install_xenial_dependencies
       - checkout
-      - run:
-          name: cmake
-          command: >
-            cmake ..
-            -DWITH_DEBIAN=ON
-            -DDEB_ARCH=amd64
-            -DDEB_DIST=xenial
-            -DFORCE_GIT_VERSION=
-            -DENABLE_SPOTIFY_BLOB=OFF
-          working_directory: bin
-      - run:
-          name: make
-          command: make
-          working_directory: bin
-      - run:
-          name: Create artifact output directory
-          command: mkdir -p /tmp/artifacts
-      - run:
-          name: Copy deb to artifacts directory
-          command: cp bin/clementine_*.deb /tmp/artifacts
+      - cmake_linux:
+          distribution: xenial
+          arch: amd64
+      - make_deb
+      - copy_artifacts
       - store_artifacts:
           path: /tmp/artifacts
+
+  build_xenial_32:
+    docker:
+      - image: i386/ubuntu:xenial
+
+    steps:
+      - install_xenial_dependencies
+      - checkout
+      - cmake_linux:
+          distribution: xenial
+          arch: i386
+      - make_deb
+      - copy_artifacts
+      - store_artifacts:
+          path: /tmp/artifacts
+
+workflows:
+  version: 2
+  build_all:
+    jobs:
+      - build_xenial_32
+      - build_xenial_64
