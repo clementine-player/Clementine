@@ -329,7 +329,7 @@ jobs:
           command: mkdir -p /tmp/artifacts/fedora-29
       - run:
           name: Copy deb to artifacts directory
-          command: cp ~/rpmbuilds/RPMS/*/clementine-*.rpm /tmp/artifacts/fedora-29
+          command: cp ~/rpmbuild/RPMS/*/clementine-*.rpm /tmp/artifacts/fedora-29
       - persist_to_workspace:
           root: /tmp/artifacts/fedora-29
           paths:
