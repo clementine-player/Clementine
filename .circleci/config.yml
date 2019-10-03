@@ -434,7 +434,6 @@ workflows:
       - build_disco_32
       - build_disco_64
       - build_fedora_29_64
-      - build_mac
 
       - upload_artifacts:
           context: gcp
