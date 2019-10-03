@@ -1,5 +1,34 @@
 version: 2.1
 commands:
+  cmake:
+    description: Configure build
+    steps:
+      - run:
+          name: cmake
+          command: cmake ..
+          working_directory: bin
+  build_source_tarball:
+    description: Build source tarball
+    steps:
+      - run:
+          name: Build source tarball
+          command: ../dist/maketarball.sh
+          working_directory: bin
+
+  build_rpm:
+    description: Build RPM
+    steps:
+      - run:
+          name: Create rpmbuild directory
+          command: mkdir -p ~/rpmbuild/SOURCES
+      - run:
+          name: Move source tarball
+          command: mv clementine-*.tar.xz ~/rpmbuild/SOURCES
+          working_directory: bin
+      - run:
+          name: Build RPM
+          command: rpmbuild -ba ../dist/clementine.spec
+          working_directory: bin
   cmake_debian:
     description: Configure build
     parameters:
@@ -40,6 +69,25 @@ commands:
       - run:
           name: Copy deb to artifacts directory
           command: cp bin/clementine_*.deb /tmp/artifacts/<< parameters.build >>/
+      - persist_to_workspace:
+          root: /tmp/artifacts/<< parameters.build >>
+          paths:
+            - "*"
+      - store_artifacts:
+          path: /tmp/artifacts/<< parameters.build >>
+  copy_rpm_artifacts:
+    description: Copy build artifcats
+    parameters:
+      build:
+        type: string
+        default: fedora-29
+    steps:
+      - run:
+          name: Create artifact output directory
+          command: mkdir -p /tmp/artifacts/<< parameters.build >>
+      - run:
+          name: Copy RPM to artifacts directory
+          command: cp ~/rpmbuild/RPMS/*/clementine-*.rpm /tmp/artifacts/<< parameters.build >>
       - persist_to_workspace:
           root: /tmp/artifacts/<< parameters.build >>
           paths:
@@ -176,6 +224,46 @@ commands:
             qt4-dev-tools
             ssh
 
+  install_fedora_dependencies:
+    description: Install Fedora Dependencies
+    steps:
+      - run:
+          name: Install Dependencies
+          command: >
+            dnf install --assumeyes
+            @development-tools
+            boost-devel
+            cmake
+            cryptopp-devel
+            desktop-file-utils
+            fftw-devel
+            gcc-c++
+            gettext
+            git
+            glew-devel
+            gstreamer1-devel
+            gstreamer1-plugins-base-devel
+            libcdio-devel
+            libchromaprint-devel
+            libgpod-devel
+            liblastfm-devel
+            libmtp-devel
+            openssh
+            protobuf-compiler
+            protobuf-devel
+            pulseaudio-libs-devel
+            qca-devel
+            qca-ossl
+            qjson-devel
+            qt-devel
+            qtwebkit-devel
+            rpmdevtools
+            sha2-devel
+            sparsehash-devel
+            sqlite-devel
+            taglib-devel
+            tar
+
 jobs:
   build_disco_64:
     docker:
@@ -265,77 +353,31 @@ jobs:
     docker:
       - image: fedora:29
     environment:
-      RPM_BUILD_NCPUS: 1
+      RPM_BUILD_NCPUS: "1"
 
     steps:
-      - run:
-          name: Install Dependencies
-          command: >
-            dnf install --assumeyes
-            @development-tools
-            boost-devel
-            cmake
-            cryptopp-devel
-            desktop-file-utils
-            fftw-devel
-            gcc-c++
-            gettext
-            git
-            glew-devel
-            gstreamer1-devel
-            gstreamer1-plugins-base-devel
-            libcdio-devel
-            libchromaprint-devel
-            libgpod-devel
-            liblastfm-devel
-            libmtp-devel
-            openssh
-            protobuf-compiler
-            protobuf-devel
-            pulseaudio-libs-devel
-            qca-devel
-            qca-ossl
-            qjson-devel
-            qt-devel
-            qtwebkit-devel
-            rpmdevtools
-            sha2-devel
-            sparsehash-devel
-            sqlite-devel
-            taglib-devel
-            tar
+      - install_fedora_dependencies
       - checkout
-      - run:
-          name: cmake
-          command: cmake ..
-          working_directory: bin
-      - run:
-          name: Build source tarball
-          command: ../dist/maketarball.sh
-          working_directory: bin
-      - run:
-          name: Create rpmbuild directory
-          command: mkdir -p ~/rpmbuild/SOURCES
-      - run:
-          name: Move source tarball
-          command: mv clementine-*.tar.xz ~/rpmbuild/SOURCES
-          working_directory: bin
-      - run:
-          name: Build RPM
-          command: rpmbuild -ba ../dist/clementine.spec
-          working_directory: bin
-      - run:
-          name: Create artifact output directory
-          command: mkdir -p /tmp/artifacts/fedora-29
-      - run:
-          name: Copy deb to artifacts directory
-          command: cp ~/rpmbuild/RPMS/*/clementine-*.rpm /tmp/artifacts/fedora-29
-      - persist_to_workspace:
-          root: /tmp/artifacts/fedora-29
-          paths:
-            - "*"
-      - store_artifacts:
-          path: /tmp/artifacts/fedora-29
+      - cmake
+      - build_source_tarball
+      - build_rpm
+      - copy_rpm_artifacts:
+          - build: fedora-29
+
+  build_fedora_30_64:
+    docker:
+      - image: fedora:30
+    environment:
+      RPM_BUILD_NCPUS: "1"
+
+    steps:
+      - install_fedora_dependencies
+      - checkout
+      - cmake
+      - build_source_tarball
+      - build_rpm
+      - copy_rpm_artifacts:
+          - build: fedora-30
 
   build_mac:
     macos:
