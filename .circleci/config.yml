@@ -362,7 +362,7 @@ jobs:
       - build_source_tarball
       - build_rpm
       - copy_rpm_artifacts:
-          - build: fedora-29
+          build: fedora-29
 
   build_fedora_30_64:
     docker:
@@ -377,7 +377,7 @@ jobs:
       - build_source_tarball
       - build_rpm
       - copy_rpm_artifacts:
-          - build: fedora-30
+          build: fedora-30
 
   build_mac:
     macos:
