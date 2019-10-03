@@ -255,6 +255,76 @@ jobs:
       - copy_artifacts:
           build: ubuntu-xenial
 
+  build_fedora_29_64:
+    docker:
+      - image: fedora:29
+
+    steps:
+      - run:
+          name: Install Dependencies
+          command: >
+            dnf install --assumeyes
+            boost-devel
+            cmake
+            cryptopp-devel
+            desktop-file-utils
+            fftw-devel
+            gcc-c++
+            gettext
+            git
+            glew-devel
+            gstreamer1-devel
+            gstreamer1-plugins-base-devel
+            libcdio-devel
+            libchromaprint-devel
+            libgpod-devel
+            liblastfm-devel
+            libmtp-devel
+            openssh
+            protobuf-compiler
+            protobuf-devel
+            pulseaudio-libs-devel
+            qca-devel
+            qca-ossl
+            qjson-devel
+            qt-devel
+            qtwebkit-devel
+            rpmdevtools
+            sha2-devel
+            sparsehash-devel
+            sqlite-devel
+            taglib-devel
+            tar
+      - run:
+          name: cmake
+          command: cmake ..
+          working_directory: bin
+      - run:
+          name: Build source tarball
+          command: ../dist/maketarball.sh
+          working_directory: bin
+      - run:
+          name: Move source tarball
+          command: mv clementine-*.tar.xz ~/rpmbuild/SOURCES
+          working_directory: bin
+      - run:
+          name: Build RPM
+          command: rpmbuild -ba ../dist/clementine.spec
+          working_directory: bin
+      - run:
+          name: Create artifact output directory
+          command: mkdir -p /tmp/artifacts/fedora-29
+      - run:
+          name: Copy deb to artifacts directory
+          command: cp ~/rpmbuilds/RPMS/*/clementine-*.rpm /tmp/artifacts/fedora-29
+      - persist_to_workspace:
+          root: /tmp/artifacts/fedora-29
+          paths:
+            - "*"
+      - store_artifacts:
+          path: /tmp/artifacts/fedora-29
+
+
   build_mac:
     macos:
       xcode: "11.0.0"
@@ -367,3 +437,4 @@ workflows:
             - build_bionic_64
             - build_disco_32
             - build_disco_64
+            - build_fedora_29
