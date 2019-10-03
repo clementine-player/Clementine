@@ -481,6 +481,7 @@ workflows:
       - build_disco_32
       - build_disco_64
       - build_fedora_29_64
+      - build_fedora_30_64
 
       - upload_artifacts:
           context: gcp
@@ -492,6 +493,7 @@ workflows:
             - build_disco_32
             - build_disco_64
             - build_fedora_29_64
+            - build_fedora_30_64
           filters:
             branches:
               only: master
