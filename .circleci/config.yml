@@ -306,6 +306,9 @@ jobs:
           command: ../dist/maketarball.sh
           working_directory: bin
       - run:
+          name: Create rpmbuild directory
+          command: mkdir -p ~/rpmbuild/SOURCES
+      - run:
           name: Move source tarball
           command: mv clementine-*.tar.xz ~/rpmbuild/SOURCES
           working_directory: bin
