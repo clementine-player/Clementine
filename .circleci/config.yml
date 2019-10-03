@@ -426,6 +426,7 @@ workflows:
       - build_bionic_64
       - build_disco_32
       - build_disco_64
+      - build_fedora_29_64
       - build_mac
 
       - upload_artifacts:
@@ -437,4 +438,4 @@ workflows:
             - build_bionic_64
             - build_disco_32
             - build_disco_64
-            - build_fedora_29
+            - build_fedora_29_64
