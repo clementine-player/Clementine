@@ -295,6 +295,7 @@ jobs:
             sqlite-devel
             taglib-devel
             tar
+      - checkout
       - run:
           name: cmake
           command: cmake ..
