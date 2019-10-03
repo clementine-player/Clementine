@@ -337,7 +337,6 @@ jobs:
       - store_artifacts:
           path: /tmp/artifacts/fedora-29
 
-
   build_mac:
     macos:
       xcode: "11.0.0"
@@ -451,3 +450,6 @@ workflows:
             - build_disco_32
             - build_disco_64
             - build_fedora_29_64
+          filters:
+            branches:
+              only: master
