@@ -264,6 +264,7 @@ jobs:
           name: Install Dependencies
           command: >
             dnf install --assumeyes
+            @development-tools
             boost-devel
             cmake
             cryptopp-devel
