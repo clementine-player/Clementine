@@ -258,8 +258,8 @@ jobs:
   build_fedora_29_64:
     docker:
       - image: fedora:29
-      - environment:
-          RPM_BUILD_NCPUS: 1
+    environment:
+      RPM_BUILD_NCPUS: 1
 
     steps:
       - run:
