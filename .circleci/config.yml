@@ -264,8 +264,8 @@ commands:
             taglib-devel
             tar
 
-  install_buster_dependencies:
-    description: Install Buster dependencies
+  install_debian_dependencies:
+    description: Install Debian dependencies
     steps:
       - run:
           name: Install Dependencies
@@ -391,7 +391,7 @@ jobs:
     docker:
       - image: debian:buster
     steps:
-      - install_buster_dependencies
+      - install_debian_dependencies
       - checkout
       - cmake_debian:
           distribution: buster
@@ -399,6 +399,19 @@ jobs:
       - make_deb
       - copy_artifacts:
           build: debian-buster
+
+  build_stretch_64:
+    docker:
+      - image: debian:stretch
+    steps:
+      - install_debian_dependencies
+      - checkout
+      - cmake_debian:
+          distribution: stretch
+          arch: amd64
+      - make_deb
+      - copy_artifacts:
+          build: debian-stretch
 
   build_fedora_29_64:
     docker:
