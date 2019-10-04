@@ -132,7 +132,7 @@ void PodcastUpdater::PodcastLoaded(PodcastUrlLoaderReply* reply,
   if (one_of_many) {
     if (--pending_replies_ == 0) {
       // This was the last reply we were waiting for.  Save this time as being
-      // the last sucessful update and restart the timer.
+      // the last successful update and restart the timer.
       last_full_update_ = QDateTime::currentDateTime();
       SaveSettings();
       RestartTimer();

@@ -3,15 +3,15 @@
 # This file is distributed under the same license as the Clementine package.
 # 
 # Translators:
-# Andi Chandler <andi@gowling.com>, 2015-2017
+# Andi Chandler <andi@gowling.com>, 2015-2017,2019
 # davidsansome <me@davidsansome.com>, 2010
 # Eilidh Martin <maxqueue93+github@gmail.com>, 2017
 # Luke Hollins <luke@farcry.ca>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2019-04-10 10:30+0000\n"
-"Last-Translator: hatstand <john.maguire@gmail.com>\n"
+"PO-Revision-Date: 2019-09-13 12:07+0000\n"
+"Last-Translator: Andi Chandler <andi@gowling.com>\n"
 "Language-Team: English (United Kingdom) (http://www.transifex.com/davidsansome/clementine/language/en_GB/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -344,7 +344,7 @@ msgid ""
 "played in the last 180 minutes.</p><p><span style=\" font-"
 "weight:600;\">Available fields: </span><span style=\" font-"
 "style:italic;\">%1</span>.</p></body></html>"
-msgstr ""
+msgstr "<html><head/><body><p>Prefix a word with a field name to limit the search to that field, e.g. <span style=\" font-weight:600;\">artist:</span><span style=\" font-style:italic;\">Bode</span> searches the library for all artists that contain the word Bode, <span style=\" font-weight:600;\">playcount:</span><span style=\" font-style:italic;\">&gt;=2</span> searches the library for songs played at least twice, <span style=\" font-weight:600;\">lastplayed:</span>&lt;<span style=\" font-style:italic;\">1h30m</span> searches the library for songs played in the last 180 minutes.</p><p><span style=\" font-weight:600;\">Available fields: </span><span style=\" font-style:italic;\">%1</span>.</p></body></html>"
 
 #: ../bin/src/ui_librarysettingspage.h:198
 msgid ""
@@ -397,7 +397,7 @@ msgstr "A song will be included in the playlist if it matches these conditions."
 
 #: ../bin/src/ui_behavioursettingspage.h:417
 msgid "A&utomatic"
-msgstr ""
+msgstr "A&utomatic"
 
 #: smartplaylists/searchterm.cpp:396
 msgid "A-Z"
@@ -470,7 +470,7 @@ msgstr "Action"
 
 #: wiimotedev/wiimotesettingspage.cpp:103
 msgid "Activate/Deactivate Wii Remote"
-msgstr ""
+msgstr "Activate/Deactivate Wii Remote"
 
 #: internet/podcasts/addpodcastdialog.cpp:63
 msgid "Add Podcast"
@@ -767,11 +767,11 @@ msgstr "Alongside the originals"
 
 #: ../bin/src/ui_behavioursettingspage.h:370
 msgid "Alwa&ys hide the main window"
-msgstr ""
+msgstr "Alwa&ys hide the main window"
 
 #: ../bin/src/ui_behavioursettingspage.h:369
 msgid "Always show &the main window"
-msgstr ""
+msgstr "Always show &the main window"
 
 #: ../bin/src/ui_behavioursettingspage.h:384
 #: ../bin/src/ui_behavioursettingspage.h:404
@@ -863,7 +863,7 @@ msgstr "Artist's initial"
 
 #: ../bin/src/ui_behavioursettingspage.h:420
 msgid "As&k when saving"
-msgstr ""
+msgstr "As&k when saving"
 
 #: ../bin/src/ui_transcodedialog.h:225
 #: ../bin/src/ui_networkremotesettingspage.h:250
@@ -1305,8 +1305,8 @@ msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Comma separated list of class:level, level is 0-3"
 
 #: ../bin/src/ui_behavioursettingspage.h:425
-msgid "Comma seperated list of prefix words to ignore when sorting"
-msgstr ""
+msgid "Comma separated list of prefix words to ignore when sorting"
+msgstr "Comma separated list of prefix words to ignore when sorting"
 
 #: playlist/playlist.cpp:1435 smartplaylists/searchterm.cpp:384
 #: ui/organisedialog.cpp:79 ../bin/src/ui_edittagdialog.h:718
@@ -1542,11 +1542,11 @@ msgstr "Ctrl+Up"
 
 #: ../bin/src/ui_queuemanager.h:141
 msgid "Ctrl+"
-msgstr ""
+msgstr "Ctrl+"
 
 #: ../bin/src/ui_queuemanager.h:145
 msgid "Ctrl+"
-msgstr ""
+msgstr "Ctrl+"
 
 #: ui/equalizer.cpp:110
 msgid "Custom"
@@ -1581,7 +1581,7 @@ msgstr "Database corruption detected. Please read https://github.com/clementine-
 
 #: ../bin/src/ui_episodeinfowidget.h:133
 msgid "Date"
-msgstr ""
+msgstr "Date"
 
 #: playlist/playlist.cpp:1432 ../bin/src/ui_edittagdialog.h:715
 msgid "Date created"
@@ -1601,7 +1601,7 @@ msgstr "De&fault"
 
 #: core/commandlineoptions.cpp:165
 msgid "Decrease the volume by 4 percent"
-msgstr ""
+msgstr "Decrease the volume by 4 percent"
 
 #: core/commandlineoptions.cpp:167
 msgid "Decrease the volume by <value> percent"
@@ -1665,7 +1665,7 @@ msgstr "Delete smart playlist"
 
 #: core/commandlineoptions.cpp:186
 msgid "Delete the currently playing song"
-msgstr ""
+msgstr "Delete the currently playing song"
 
 #: ../bin/src/ui_organisedialog.h:245
 msgid "Delete the original files"
@@ -2079,7 +2079,7 @@ msgstr "Entire collection"
 
 #: internet/podcasts/podcastservice.cpp:532
 msgid "Episode information"
-msgstr ""
+msgstr "Episode information"
 
 #: ../bin/src/ui_equalizer.h:162 ../bin/src/ui_mainwindow.h:705
 msgid "Equalizer"
@@ -2596,7 +2596,7 @@ msgstr "Hardware information is only available while the device is connected."
 
 #: ../bin/src/ui_appearancesettingspage.h:325
 msgid "Hide playlist filter toolbar"
-msgstr ""
+msgstr "Hide playlist filter toolbar"
 
 #: ../bin/src/ui_transcoderoptionsmp3.h:201
 msgid "High"
@@ -2614,7 +2614,7 @@ msgstr "High (1024x1024)"
 
 #: ui/equalizer.cpp:128
 msgid "Hip Hop"
-msgstr ""
+msgstr "Hip Hop"
 
 #: internet/subsonic/subsonicsettingspage.cpp:138
 msgid "Host not found, check server URL. Example: http://localhost:4040/"
@@ -2666,7 +2666,7 @@ msgstr "Ignore \"The\" in artist names"
 
 #: ../bin/src/ui_behavioursettingspage.h:423
 msgid "Ignore prefix word(s)"
-msgstr ""
+msgstr "Ignore prefix word(s)"
 
 #: ui/albumcoverchoicecontroller.cpp:44
 msgid "Images (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm)"
@@ -2718,7 +2718,7 @@ msgstr "Incomplete configuration, please ensure all fields are populated."
 
 #: core/commandlineoptions.cpp:164
 msgid "Increase the volume by 4 percent"
-msgstr ""
+msgstr "Increase the volume by 4 percent"
 
 #: core/commandlineoptions.cpp:166
 msgid "Increase the volume by <value> percent"
@@ -3230,7 +3230,7 @@ msgstr "Monitor the library for changes"
 
 #: core/song.cpp:460
 msgid "Monkey's Audio"
-msgstr ""
+msgstr "Monkey's Audio"
 
 #: ../bin/src/ui_playbacksettingspage.h:372
 msgid "Mono playback"
@@ -3418,7 +3418,7 @@ msgstr "Normal block type"
 
 #: ../bin/src/ui_behavioursettingspage.h:428
 msgid "Normal duration (at least 4 minutes or half the track length)"
-msgstr ""
+msgstr "Normal duration (at least 4 minutes or half the track length)"
 
 #: playlist/playlistsequence.cpp:203
 msgid "Not available while using a dynamic playlist"
@@ -3749,11 +3749,11 @@ msgstr "Play if there is nothing already playing"
 
 #: library/libraryview.cpp:396 ui/mainwindow.cpp:1815
 msgid "Play next"
-msgstr ""
+msgstr "Play next"
 
 #: ui/mainwindow.cpp:1813
 msgid "Play selected tracks next"
-msgstr ""
+msgstr "Play selected tracks next"
 
 #: core/commandlineoptions.cpp:178
 msgid "Play the <n>th track in the playlist"
@@ -3809,13 +3809,13 @@ msgstr "Plugin status:"
 
 #: ../bin/src/ui_podcastinfodialog.h:93
 msgid "Podcast Information"
-msgstr ""
+msgstr "Podcast Information"
 
 #: internet/podcasts/podcastservice.cpp:437
 #: internet/podcasts/podcastservice.cpp:535
 #: internet/podcasts/podcastservice.cpp:539
 msgid "Podcast information"
-msgstr ""
+msgstr "Podcast information"
 
 #: internet/podcasts/podcastservice.cpp:133
 #: ../bin/src/ui_podcastsettingspage.h:250
@@ -3937,7 +3937,7 @@ msgstr "Psychedelic"
 
 #: wiimotedev/wiimotesettingspage.cpp:246
 msgid "Push Wii Remote button"
-msgstr ""
+msgstr "Push Wii Remote button"
 
 #: ../bin/src/ui_wiimoteshortcutgrabber.h:121
 msgid "Push Wiiremote button"
@@ -4073,7 +4073,7 @@ msgstr "Remember Wii remote swing"
 
 #: ../bin/src/ui_behavioursettingspage.h:371
 msgid "Remember from &last time"
-msgstr ""
+msgstr "Remember from &last time"
 
 #: ../bin/src/ui_playlistsaveoptionsdialog.h:99
 msgid "Remember my choice"
@@ -4230,7 +4230,7 @@ msgstr "Run"
 
 #: core/song.cpp:456
 msgid "SNES SPC700"
-msgstr ""
+msgstr "SNES SPC700"
 
 #: ../bin/src/ui_networkproxysettingspage.h:163
 msgid "SOCKS proxy"
@@ -4526,7 +4526,7 @@ msgstr "Settings"
 
 #: ../bin/src/ui_behavioursettingspage.h:429
 msgid "Short duration (at least 1 minute or half the track length)"
-msgstr ""
+msgstr "Short duration (at least 1 minute or half the track length)"
 
 #: ../bin/src/ui_globalshortcutssettingspage.h:172
 msgid "Shortcut"
@@ -4892,7 +4892,7 @@ msgstr "Stop playback after current track"
 
 #: ../bin/src/ui_behavioursettingspage.h:377
 msgid "Stop playback if song fails to play"
-msgstr ""
+msgstr "Stop playback if song fails to play"
 
 #: core/globalshortcuts.cpp:56
 msgid "Stop playing after current track"
@@ -5483,7 +5483,7 @@ msgstr "VBR MP3"
 
 #: core/song.cpp:458
 msgid "VGM"
-msgstr ""
+msgstr "VGM"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:231
 msgid "Variable bit rate"
@@ -5496,7 +5496,7 @@ msgstr "Various artists"
 
 #: ../bin/src/ui_subsonicsettingspage.h:136
 msgid "Verify Server certificate"
-msgstr ""
+msgstr "Verify Server certificate"
 
 #: ui/about.cpp:35
 #, qt-format
@@ -5555,7 +5555,7 @@ msgstr "Wav"
 
 #: core/song.cpp:450
 msgid "WavPack"
-msgstr ""
+msgstr "WavPack"
 
 #: ../bin/src/ui_podcastinfowidget.h:192
 msgid "Website"
@@ -5571,7 +5571,7 @@ msgstr "When Clementine starts"
 
 #: ../bin/src/ui_behavioursettingspage.h:427
 msgid "When calculating play counts, use"
-msgstr ""
+msgstr "When calculating play counts, use"
 
 #: ../bin/src/ui_librarysettingspage.h:203
 msgid ""
@@ -5585,7 +5585,7 @@ msgstr "When saving a playlist, file paths should be"
 
 #: ../bin/src/ui_behavioursettingspage.h:422
 msgid "When sorting artists, albums and titles"
-msgstr ""
+msgstr "When sorting artists, albums and titles"
 
 #: ../bin/src/ui_globalsearchsettingspage.h:147
 msgid "When the list is empty..."
@@ -5601,7 +5601,7 @@ msgstr "Wide band (WB)"
 
 #: widgets/osd.cpp:245
 #, qt-format
-msgid "Wii Remote %1: actived"
+msgid "Wii Remote %1: activated"
 msgstr "Wii Remote %1: activated"
 
 #: widgets/osd.cpp:257
@@ -5875,7 +5875,7 @@ msgstr "does not contain"
 
 #: smartplaylists/searchterm.cpp:263
 msgid "empty"
-msgstr ""
+msgstr "empty"
 
 #: smartplaylists/searchterm.cpp:253
 msgid "ends with"
@@ -5932,7 +5932,7 @@ msgstr "newest first"
 
 #: smartplaylists/searchterm.cpp:265
 msgid "not empty"
-msgstr ""
+msgstr "not empty"
 
 #: smartplaylists/searchterm.cpp:261
 msgid "not equals"

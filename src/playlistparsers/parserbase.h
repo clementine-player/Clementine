@@ -40,7 +40,7 @@ class ParserBase : public QObject {
 
   // Loads all songs from playlist found at path 'playlist_path' in directory
   // 'dir'.
-  // The 'device' argument is an opened and ready to read from represantation of
+  // The 'device' argument is an opened and ready to read from representation of
   // this playlist.
   // This method might not return all of the songs found in the playlist. Any
   // playlist

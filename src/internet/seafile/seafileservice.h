@@ -27,7 +27,7 @@
  *  - Seafile stores files in libraries (or repositories) so variable with the
  *name "library" corresponds to the
  *     Seafile library, not to the Clementine library
- *  - The authentification of Seafile's API is simply a token (REST API)
+ *  - The authentication of Seafile's API is simply a token (REST API)
  *  - Seafile stores a hash for each entry. This hash changes when the entry is
  *modified.
  *     This is the reason why we just have to compare the local hash with the

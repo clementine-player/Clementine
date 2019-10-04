@@ -128,7 +128,7 @@ PlaylistItemList SubsonicDynamicPlaylist::GenerateMore(int count) {
   if (reader.attributes().value("status") != "ok") {
     reader.readNextStartElement();
     int error = reader.attributes().value("code").toString().toInt();
-    qLog(Warning) << "An error occured fetching data.  Code: " << error
+    qLog(Warning) << "An error occurred fetching data.  Code: " << error
                   << " Message: "
                   << reader.attributes().value("message").toString();
   }

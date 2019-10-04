@@ -49,7 +49,7 @@ void NetworkRemoteHelper::StartServer() {
 
 void NetworkRemoteHelper::ReloadSettings() { emit ReloadSettingsSig(); }
 
-// For using in Settingsdialog, we haven't the appication there
+// For using in Settingsdialog, we haven't the application there
 NetworkRemoteHelper* NetworkRemoteHelper::Instance() {
   if (!sInstance) {
     // normally he shouldn't go here. Only for safety

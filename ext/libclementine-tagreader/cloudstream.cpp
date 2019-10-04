@@ -33,15 +33,14 @@ static const int kTaglibSuffixCacheBytes = 8 * 1024;
 }
 
 CloudStream::CloudStream(const QUrl& url, const QString& filename,
-                         const long length, const QString& auth,
-                         QNetworkAccessManager* network)
+                         const long length, const QString& auth)
     : url_(url),
       filename_(filename),
       encoded_filename_(filename_.toUtf8()),
       length_(length),
       auth_(auth),
       cursor_(0),
-      network_(network),
+      network_(new QNetworkAccessManager),
       cache_(length),
       num_requests_(0) {}
 

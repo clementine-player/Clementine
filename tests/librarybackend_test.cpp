@@ -288,7 +288,7 @@ TEST_F(SingleSong, DeleteSongs) {
   EXPECT_EQ("Title", songs_deleted[0].title());
   EXPECT_EQ(1, songs_deleted[0].id());
 
-  // Check we can't retreive that song any more
+  // Check we can't retrieve that song any more
   Song song = backend_->GetSongById(1);
   EXPECT_FALSE(song.is_valid());
   EXPECT_EQ(-1, song.id());

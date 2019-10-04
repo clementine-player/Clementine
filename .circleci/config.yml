@@ -1,0 +1,499 @@
+version: 2.1
+commands:
+  cmake:
+    description: Configure build
+    steps:
+      - run:
+          name: cmake
+          command: cmake ..
+          working_directory: bin
+  build_source_tarball:
+    description: Build source tarball
+    steps:
+      - run:
+          name: Build source tarball
+          command: ../dist/maketarball.sh
+          working_directory: bin
+
+  build_rpm:
+    description: Build RPM
+    steps:
+      - run:
+          name: Create rpmbuild directory
+          command: mkdir -p ~/rpmbuild/SOURCES
+      - run:
+          name: Move source tarball
+          command: mv clementine-*.tar.xz ~/rpmbuild/SOURCES
+          working_directory: bin
+      - run:
+          name: Build RPM
+          command: rpmbuild -ba ../dist/clementine.spec
+          working_directory: bin
+  cmake_debian:
+    description: Configure build
+    parameters:
+      distribution:
+        type: string
+        default: xenial
+      arch:
+        type: string
+        default: amd64
+    steps:
+      - run:
+          name: cmake
+          command: >
+            cmake ..
+            -DWITH_DEBIAN=ON
+            -DDEB_ARCH=<< parameters.arch >>
+            -DDEB_DIST=<< parameters.distribution >>
+            -DFORCE_GIT_VERSION=
+            -DENABLE_SPOTIFY_BLOB=OFF
+          working_directory: bin
+  make_deb:
+    description: Build deb
+    steps:
+      - run:
+          name: make deb
+          command: make deb
+          working_directory: bin
+  copy_artifacts:
+    description: Copy build artifacts
+    parameters:
+      build:
+        type: string
+        default: ubuntu-xenial
+    steps:
+      - run:
+          name: Create artifact output directory
+          command: mkdir -p /tmp/artifacts/<< parameters.build >>
+      - run:
+          name: Copy deb to artifacts directory
+          command: cp bin/clementine_*.deb /tmp/artifacts/<< parameters.build >>/
+      - persist_to_workspace:
+          root: /tmp/artifacts/<< parameters.build >>
+          paths:
+            - "*"
+      - store_artifacts:
+          path: /tmp/artifacts/<< parameters.build >>
+  copy_rpm_artifacts:
+    description: Copy build artifcats
+    parameters:
+      build:
+        type: string
+        default: fedora-29
+    steps:
+      - run:
+          name: Create artifact output directory
+          command: mkdir -p /tmp/artifacts/<< parameters.build >>
+      - run:
+          name: Copy RPM to artifacts directory
+          command: cp ~/rpmbuild/RPMS/*/clementine-*.rpm /tmp/artifacts/<< parameters.build >>
+      - persist_to_workspace:
+          root: /tmp/artifacts/<< parameters.build >>
+          paths:
+            - "*"
+      - store_artifacts:
+          path: /tmp/artifacts/<< parameters.build >>
+  install_xenial_dependencies:
+    description: Install Xenial dependencies
+    steps:
+      - run:
+          name: Install Dependencies
+          command: >
+            apt-get update && apt-get install -y
+            cmake
+            fakeroot
+            gettext
+            git
+            libasound2-dev
+            libboost-dev
+            libboost-serialization-dev
+            libcdio-cdda1
+            libcdio-dev
+            libchromaprint-dev
+            libcrypto++-dev
+            libdbus-1-dev
+            libfftw3-dev
+            libglew1.5-dev
+            libgpod-dev
+            libgstreamer-plugins-base1.0-dev
+            libgstreamer1.0-dev
+            liblastfm-dev
+            libmtp-dev
+            libmygpo-qt-dev
+            libplist-dev
+            libprotobuf-dev
+            libpulse-dev
+            libqca2-dev
+            libqca2-plugin-ossl
+            libqjson-dev
+            libqt4-dev
+            libqt4-opengl-dev
+            libqtwebkit-dev
+            libsparsehash-dev
+            libsqlite3-dev
+            libtag1-dev
+            libusbmuxd-dev
+            protobuf-compiler
+            qt4-dev-tools
+            ssh
+  install_bionic_dependencies:
+    description: Install Bionic dependencies
+    steps:
+      - run:
+          name: Install Dependencies
+          command: >
+            apt-get update && apt-get install -y
+            cmake
+            fakeroot
+            gettext
+            git
+            libasound2-dev
+            libboost-dev
+            libboost-serialization-dev
+            libcdio-cdda2
+            libcdio-dev
+            libchromaprint-dev
+            libcrypto++-dev
+            libdbus-1-dev
+            libfftw3-dev
+            libglew1.5-dev
+            libgpod-dev
+            libgstreamer-plugins-base1.0-dev
+            libgstreamer1.0-dev
+            liblastfm-dev
+            libmtp-dev
+            libmygpo-qt-dev
+            libplist-dev
+            libprotobuf-dev
+            libpulse-dev
+            libqca2-dev
+            libqca2-plugins
+            libqjson-dev
+            libqt4-dev
+            libqt4-opengl-dev
+            libqtwebkit-dev
+            libsparsehash-dev
+            libsqlite3-dev
+            libtag1-dev
+            libusbmuxd-dev
+            protobuf-compiler
+            qt4-dev-tools
+            ssh
+  install_disco_dependencies:
+    description: Install Disco dependencies
+    steps:
+      - run:
+          name: Install Dependencies
+          command: >
+            apt-get update && apt-get install -y
+            cmake
+            fakeroot
+            gettext
+            git
+            libasound2-dev
+            libboost-dev
+            libboost-serialization-dev
+            libcdio-cdda2
+            libcdio-dev
+            libchromaprint-dev
+            libcrypto++-dev
+            libdbus-1-dev
+            libfftw3-dev
+            libglew1.5-dev
+            libgpod-dev
+            libgstreamer-plugins-base1.0-dev
+            libgstreamer1.0-dev
+            liblastfm-dev
+            libmtp-dev
+            libmygpo-qt-dev
+            libplist-dev
+            libprotobuf-dev
+            libpulse-dev
+            libqca2-dev
+            libqca2-plugins
+            libqjson-dev
+            libqt4-dev
+            libqt4-opengl-dev
+            libqtwebkit-dev
+            libsparsehash-dev
+            libsqlite3-dev
+            libtag1-dev
+            libusbmuxd-dev
+            protobuf-compiler
+            qt4-dev-tools
+            ssh
+
+  install_fedora_dependencies:
+    description: Install Fedora Dependencies
+    steps:
+      - run:
+          name: Install Dependencies
+          command: >
+            dnf install --assumeyes
+            @development-tools
+            boost-devel
+            cmake
+            cryptopp-devel
+            desktop-file-utils
+            fftw-devel
+            gcc-c++
+            gettext
+            git
+            glew-devel
+            gstreamer1-devel
+            gstreamer1-plugins-base-devel
+            libcdio-devel
+            libchromaprint-devel
+            libgpod-devel
+            liblastfm-devel
+            libmtp-devel
+            openssh
+            protobuf-compiler
+            protobuf-devel
+            pulseaudio-libs-devel
+            qca-devel
+            qca-ossl
+            qjson-devel
+            qt-devel
+            qtwebkit-devel
+            rpmdevtools
+            sha2-devel
+            sparsehash-devel
+            sqlite-devel
+            taglib-devel
+            tar
+
+jobs:
+  build_disco_64:
+    docker:
+      - image: ubuntu:disco
+
+    steps:
+      - install_disco_dependencies
+      - checkout
+      - cmake_debian:
+          distribution: disco
+          arch: amd64
+      - make_deb
+      - copy_artifacts:
+          build: ubuntu-disco
+
+  build_disco_32:
+    docker:
+      - image: i386/ubuntu:disco
+
+    steps:
+      - install_disco_dependencies
+      - checkout
+      - cmake_debian:
+          distribution: disco
+          arch: i386
+      - make_deb
+      - copy_artifacts:
+          build: ubuntu-disco
+
+  build_bionic_64:
+    docker:
+      - image: ubuntu:bionic
+
+    steps:
+      - install_bionic_dependencies
+      - checkout
+      - cmake_debian:
+          distribution: bionic
+          arch: amd64
+      - make_deb
+      - copy_artifacts:
+          build: ubuntu-bionic
+
+  build_bionic_32:
+    docker:
+      - image: i386/ubuntu:bionic
+
+    steps:
+      - install_bionic_dependencies
+      - checkout
+      - cmake_debian:
+          distribution: bionic
+          arch: i386
+      - make_deb
+      - copy_artifacts:
+          build: ubuntu-bionic
+
+  build_xenial_64:
+    docker:
+      - image: ubuntu:xenial
+
+    steps:
+      - install_xenial_dependencies
+      - checkout
+      - cmake_debian:
+          distribution: xenial
+          arch: amd64
+      - make_deb
+      - copy_artifacts:
+          build: ubuntu-xenial
+
+  build_xenial_32:
+    docker:
+      - image: i386/ubuntu:xenial
+
+    steps:
+      - install_xenial_dependencies
+      - checkout
+      - cmake_debian:
+          distribution: xenial
+          arch: i386
+      - make_deb
+      - copy_artifacts:
+          build: ubuntu-xenial
+
+  build_fedora_29_64:
+    docker:
+      - image: fedora:29
+    environment:
+      RPM_BUILD_NCPUS: "1"
+
+    steps:
+      - install_fedora_dependencies
+      - checkout
+      - cmake
+      - build_source_tarball
+      - build_rpm
+      - copy_rpm_artifacts:
+          build: fedora-29
+
+  build_fedora_30_64:
+    docker:
+      - image: fedora:30
+    environment:
+      RPM_BUILD_NCPUS: "1"
+
+    steps:
+      - install_fedora_dependencies
+      - checkout
+      - cmake
+      - build_source_tarball
+      - build_rpm
+      - copy_rpm_artifacts:
+          build: fedora-30
+
+  build_mac:
+    macos:
+      xcode: "11.0.0"
+    steps:
+      - run:
+          name: Setup PATH
+          command: |
+            echo 'export Qt5_DIR=/usr/local/opt/qt5/lib/cmake' >> $BASH_ENV
+            echo 'export Qt5LinguistTools_DIR=/usr/local/Cellar/qt/5.11.2/lib/cmake/Qt5LinguistTools' >> $BASH_ENV
+            echo 'export GST_SCANNER_PATH=/usr/local/Cellar/gstreamer/1.14.4/libexec/gstreamer-1.0/gst-plugin-scanner' >> $BASH_ENV
+            echo 'export GST_PLUGIN_PATH=/usr/local/lib/gstreamer-1.0' >> $BASH_ENV
+            echo 'export PATH=/usr/local/opt/gettext/bin:$PATH' >> $BASH_ENV
+            source $BASH_ENV
+      - run:
+          name: Install dependencies from homebrew
+          command: >
+            brew install
+            boost
+            chromaprint
+            cmake
+            cryptopp
+            gettext
+            glib
+            liblastfm
+            pkgconfig
+            protobuf
+            protobuf-c
+            qt
+      - run:
+          name: Install sqlite
+          command: brew install sqlite --with-fts
+      - run:
+          name: Install gstreamer
+          command: brew install gstreamer gst-plugins-base
+      - run:
+          name: Install gst-plugins-good
+          command: brew install gst-plugins-good --with-flac
+      - run:
+          name: Install gst-plugins
+          command: brew install gst-plugins-bad gst-plugins-ugly
+      - run:
+          name: Install other dependencies
+          command: brew install chromaprint liblastfm
+      - checkout
+      - run:
+          name: Checkout qt5 branch
+          command: git checkout qt5
+      - run:
+          name: cmake
+          command: cmake .. -DUSE_VISUALISATIONS=OFF
+          working_directory: bin
+      - run:
+          name: make
+          command: make
+          working_directory: bin
+      - run:
+          name: Copy icon file and resources
+          command: make install
+          working_directory: bin
+      - run:
+          name: Build DMG
+          command: make dmg
+          working_directory: bin
+      - run:
+          name: Create artifact output directory
+          command: mkdir -p /tmp/artifacts/mac
+      - run:
+          name: Copy dmg to artifacts directory
+          command: cp bin/clementine*.dmg /tmp/artifacts/mac
+      - persist_to_workspace:
+          root: /tmp/artifacts/mac
+          paths:
+            - "*"
+      - store_artifacts:
+          path: /tmp/artifacts/mac
+
+  upload_artifacts:
+    docker:
+      - image: google/cloud-sdk
+    steps:
+      - run:
+          name: Google Cloud Auth
+          command: |
+            echo $GCLOUD_SERVICE_KEY | gcloud auth activate-service-account circleci-uploader@clementine-data.iam.gserviceaccount.com --key-file=-
+            gcloud --quiet config set project clementine-data
+      - attach_workspace:
+          at: /tmp/artifacts
+      - run:
+          name: Upload Artifact to Google Cloud
+          command: gsutil rsync -r /tmp/artifacts gs://builds.clementine-player.org/
+
+workflows:
+  version: 2
+  build_all:
+    jobs:
+      - build_xenial_32
+      - build_xenial_64
+      - build_bionic_32
+      - build_bionic_64
+      - build_disco_32
+      - build_disco_64
+      - build_fedora_29_64
+      - build_fedora_30_64
+
+      - upload_artifacts:
+          context: gcp
+          requires:
+            - build_xenial_32
+            - build_xenial_64
+            - build_bionic_32
+            - build_bionic_64
+            - build_disco_32
+            - build_disco_64
+            - build_fedora_29_64
+            - build_fedora_30_64
+          filters:
+            branches:
+              only: master

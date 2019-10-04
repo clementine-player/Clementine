@@ -22,7 +22,6 @@
 #include <QCoreApplication>
 #include <QDateTime>
 #include <QFileInfo>
-#include <QNetworkAccessManager>
 #include <QTextCodec>
 #include <QUrl>
 #include <QVector>
@@ -77,12 +76,6 @@
 #define NumberToASFAttribute(x) \
   TagLib::ASF::Attribute(QStringToTaglibString(QString::number(x)))
 
-class FileRefFactory {
- public:
-  virtual ~FileRefFactory() {}
-  virtual TagLib::FileRef* GetFileRef(const QString& filename) = 0;
-};
-
 class TagLibFileRefFactory : public FileRefFactory {
  public:
   virtual TagLib::FileRef* GetFileRef(const QString& filename) {
@@ -122,7 +115,6 @@ const char* kASF_OriginalYear_ID = "WM/OriginalReleaseYear";
 
 TagReader::TagReader()
     : factory_(new TagLibFileRefFactory),
-      network_(new QNetworkAccessManager),
       kEmbeddedCover("(embedded)") {}
 
 void TagReader::ReadFile(const QString& filename,
@@ -989,7 +981,7 @@ bool TagReader::SaveSongRatingToFile(
   if (filename.isNull()) return false;
 
   qLog(Debug) << "Saving song rating tags to" << filename;
-  if (song.rating()) {
+  if (song.rating() < 0) {
     // The FMPS spec says unrated == "tag not present". For us, no rating
     // results in rating being -1, so don't write anything in that case.
     // Actually, we should also remove tag set in this case, but in
@@ -1332,8 +1324,8 @@ bool TagReader::ReadCloudFile(const QUrl& download_url, const QString& title,
                               pb::tagreader::SongMetadata* song) const {
   qLog(Debug) << "Loading tags from" << title;
 
-  std::unique_ptr<CloudStream> stream(new CloudStream(
-      download_url, title, size, authorisation_header, network_));
+  std::unique_ptr<CloudStream> stream(
+      new CloudStream(download_url, title, size, authorisation_header));
   stream->Precache();
   std::unique_ptr<TagLib::File> tag;
   if (mime_type == "audio/mpeg" &&

@@ -262,7 +262,7 @@ QSqlDatabase Database::Connect() {
   }
 
   // Find Sqlite3 functions in the Qt plugin.
-  StaticInit();
+  if (!sFTSTokenizer) StaticInit();
 
   {
 
@@ -670,7 +670,7 @@ void Database::BackupFile(const QString& filename) {
   sqlite3* source_connection = nullptr;
   sqlite3* dest_connection = nullptr;
 
-  BOOST_SCOPE_EXIT((source_connection)(dest_connection)(task_id)(app_)) {
+  BOOST_SCOPE_EXIT((&source_connection)(&dest_connection)(task_id)(app_)) {
     // Harmless to call sqlite3_close() with a nullptr pointer.
     sqlite3_close(source_connection);
     sqlite3_close(dest_connection);

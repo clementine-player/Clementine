@@ -511,7 +511,7 @@ bool GstEnginePipeline::InitFromUrl(const QUrl& url, qint64 end_nanosec) {
 
   if (url.scheme() == "cdda" && !url.path().isEmpty()) {
     // Currently, Gstreamer can't handle input CD devices inside cdda URL. So
-    // we handle them ourselve: we extract the track number and re-create an
+    // we handle them ourself: we extract the track number and re-create an
     // URL with only cdda:// + the track number (which can be handled by
     // Gstreamer). We keep the device in mind, and we will set it later using
     // SourceSetupCallback
@@ -1003,7 +1003,7 @@ void GstEnginePipeline::SourceSetupCallback(GstURIDecodeBin* bin,
 
   if (g_object_class_find_property(G_OBJECT_GET_CLASS(element), "device") &&
       !instance->source_device().isEmpty()) {
-    // Gstreamer is not able to handle device in URL (refering to Gstreamer
+    // Gstreamer is not able to handle device in URL (referring to Gstreamer
     // documentation, this might be added in the future). Despite that, for now
     // we include device inside URL: we decompose it during Init and set device
     // here, when this callback is called.
@@ -1228,7 +1228,7 @@ void GstEnginePipeline::FaderTimelineFinished() {
   fader_.reset();
 
   // Wait a little while longer before emitting the finished signal (and
-  // probably distroying the pipeline) to account for delays in the audio
+  // probably destroying the pipeline) to account for delays in the audio
   // server/driver.
   if (use_fudge_timer_) {
     fader_fudge_timer_.start(kFaderFudgeMsec, this);
