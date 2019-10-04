@@ -264,6 +264,44 @@ commands:
             taglib-devel
             tar
 
+  install_buster_dependencies:
+    description: Install Buster dependencies
+    steps:
+      - run:
+          name: Install Dependencies
+          command: >
+            apt-get update && apt-get install -y
+            build-essential
+            cmake
+            gettext
+            git
+            libasound2-dev
+            libboost-dev
+            libcdio-dev
+            libchromaprint-dev
+            libcrypto++-dev
+            libdbus-1-dev
+            libfftw3-dev
+            libglew1.5-dev
+            libglib2.0-dev
+            libgpod-dev
+            libgstreamer-plugins-base1.0-dev
+            libgstreamer1.0-dev
+            liblastfm-dev
+            libmtp-dev
+            libmygpo-qt-dev
+            libprotobuf-dev
+            libpulse-dev
+            libqjson-dev
+            libqt4-dev
+            libsparsehash-dev
+            libsqlite3-dev
+            libtag1-dev
+            pkg-config
+            protobuf-compiler
+            qt4-dev-tools
+            ssh
+
 jobs:
   build_disco_64:
     docker:
@@ -348,6 +386,19 @@ jobs:
       - make_deb
       - copy_artifacts:
           build: ubuntu-xenial
+
+  build_buster_64:
+    docker:
+      - image: debian:buster
+    steps:
+      - install_buster_dependencies
+      - checkout
+      - cmake_debian:
+          distribution: buster
+          arch: amd64
+      - make_deb
+      - copy_artifacts:
+          build: debian-buster
 
   build_fedora_29_64:
     docker:
