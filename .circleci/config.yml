@@ -70,9 +70,9 @@ commands:
           name: Copy deb to artifacts directory
           command: cp bin/clementine_*.deb /tmp/artifacts/<< parameters.build >>/
       - persist_to_workspace:
-          root: /tmp/artifacts/<< parameters.build >>
+          root: /tmp/artifacts
           paths:
-            - "*"
+            - << parameters.build >>/*
       - store_artifacts:
           path: /tmp/artifacts/<< parameters.build >>
   copy_rpm_artifacts:
@@ -89,9 +89,9 @@ commands:
           name: Copy RPM to artifacts directory
           command: cp ~/rpmbuild/RPMS/*/clementine-*.rpm /tmp/artifacts/<< parameters.build >>
       - persist_to_workspace:
-          root: /tmp/artifacts/<< parameters.build >>
+          root: /tmp/artifacts
           paths:
-            - "*"
+            - << parameters.build >>/*
       - store_artifacts:
           path: /tmp/artifacts/<< parameters.build >>
   install_xenial_dependencies:
@@ -513,9 +513,9 @@ jobs:
           name: Copy dmg to artifacts directory
           command: cp bin/clementine*.dmg /tmp/artifacts/mac
       - persist_to_workspace:
-          root: /tmp/artifacts/mac
+          root: /tmp/artifacts
           paths:
-            - "*"
+            - mac/*
       - store_artifacts:
           path: /tmp/artifacts/mac
 
