@@ -533,26 +533,13 @@ workflows:
   version: 2
   build_all:
     jobs:
-      # - build_xenial_32
-      # - build_xenial_64
-      # - build_bionic_32
       - build_bionic_64
       - build_mac
-      # - build_disco_32
-      # - build_disco_64
-      # - build_fedora_29_64
-      # - build_fedora_30_64
-      # - upload_artifacts:
-      #     context: gcp
-      #     requires:
-      #       - build_xenial_32
-      #       - build_xenial_64
-      #       - build_bionic_32
-      #       - build_bionic_64
-      #       - build_disco_32
-      #       - build_disco_64
-      #       - build_fedora_29_64
-      #       - build_fedora_30_64
-      #     filters:
-      #       branches:
-      #         only: master
+      - upload_artifacts:
+          context: gcp
+          requires:
+            - build_bionic_64
+            - build_mac
+          filters:
+            branches:
+              only: qt5
