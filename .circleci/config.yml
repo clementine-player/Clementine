@@ -512,6 +512,10 @@ jobs:
           paths:
             - mac/*
       - store_artifacts:
+          path: bin/CMakeCache.txt
+      - store_artifacts:
+          path: bin/src/CMakeFiles/clementine.dir
+      - store_artifacts:
           path: /tmp/artifacts/mac
 
   upload_artifacts:
