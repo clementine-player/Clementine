@@ -447,7 +447,6 @@ jobs:
             echo 'export Qt5LinguistTools_DIR=/usr/local/Cellar/qt/5.13.1/lib/cmake/Qt5LinguistTools' >> $BASH_ENV
             echo 'export GST_SCANNER_PATH=/usr/local/Cellar/gstreamer/1.16.1/libexec/gstreamer-1.0/gst-plugin-scanner' >> $BASH_ENV
             echo 'export GST_PLUGIN_PATH=/usr/local/lib/gstreamer-1.0' >> $BASH_ENV
-            echo 'export PATH=/usr/local/opt/gettext/bin:$PATH' >> $BASH_ENV
             source $BASH_ENV
       - run:
           name: Install dependencies from homebrew
@@ -491,7 +490,7 @@ jobs:
           working_directory: bin
       - run:
           name: make
-          command: make
+          command: make -j2
           working_directory: bin
       - run:
           name: Copy icon file and resources
