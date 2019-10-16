@@ -474,9 +474,6 @@ jobs:
             sqlite
       - checkout
       - run:
-          name: Checkout qt5 branch
-          command: git checkout qt5
-      - run:
           name: cmake
           command: >
             cmake
