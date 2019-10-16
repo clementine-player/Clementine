@@ -1267,6 +1267,12 @@ target_link_libraries(clementine_lib
   z
 )
 
+link_directories(
+  ${CHROMAPRINT_LIBRARY_DIRS}
+  ${GSTREAMER_APP_LIBRARY_DIRS}
+  ${GLEW_LIBRARY_DIRS}
+)
+
 if(HAVE_VISUALISATIONS)
   target_link_libraries(clementine_lib ${LIBPROJECTM_LIBRARIES})
 endif(HAVE_VISUALISATIONS)
@@ -1422,9 +1428,6 @@ if (APPLE)
   install(FILES ../dist/sparkle_pub.pem
     DESTINATION "${CMAKE_BINARY_DIR}/clementine.app/Contents/Resources")
   install(FILES ../dist/cacert.pem
-    DESTINATION "${CMAKE_BINARY_DIR}/clementine.app/Contents/Resources")
-
-  install(DIRECTORY "${QT_QTGUI_LIBRARY_RELEASE}/Versions/Current/Resources/"
     DESTINATION "${CMAKE_BINARY_DIR}/clementine.app/Contents/Resources")
 
   if (HAVE_BREAKPAD)

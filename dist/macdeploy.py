@@ -1,4 +1,4 @@
-#!/usr/bin/python2
+#!/usr/bin/python
 
 #  This file is part of Clementine.
 #
@@ -66,7 +66,6 @@ GSTREAMER_PLUGINS = [
     'libgstisomp4.so',
     'libgstlame.so',
     'libgstlibav.so',
-    'libgstmad.so',
     'libgstmms.so',
     # TODO: Bring back Musepack support.
     'libgstogg.so',
@@ -75,18 +74,14 @@ GSTREAMER_PLUGINS = [
     'libgstspeex.so',
     'libgsttaglib.so',
     'libgstvorbis.so',
-    'libgstwavpack.so',
     'libgstwavparse.so',
     'libgstxingmux.so',
 
     # HTTP src support
-    'libgstsouphttpsrc.so',
+    'libgstsoup.so',
 
     # Icecast support
     'libgsticydemux.so',
-
-    # CD support
-    'libgstcdio.so',
 
     # RTSP streaming
     'libgstrtp.so',
@@ -94,8 +89,10 @@ GSTREAMER_PLUGINS = [
 ]
 
 GSTREAMER_SEARCH_PATH = [
+    '/usr/local/lib/gstreamer-1.0',
     '/target/lib/gstreamer-1.0',
     '/target/libexec/gstreamer-1.0',
+    '/usr/local/Cellar/gstreamer/1.16.1/libexec/gstreamer-1.0',
 ]
 
 QT_PLUGINS = [
@@ -110,14 +107,19 @@ QT_PLUGINS = [
     'imageformats/libqjpeg.dylib',
     #'imageformats/libqmng.dylib',
     'imageformats/libqsvg.dylib',
+    'platforms/libqcocoa.dylib',
 ]
 QT_PLUGINS_SEARCH_PATH = [
+    '/usr/local/Cellar/qt/5.13.1/plugins',
     '/target/plugins',
     '/usr/local/Trolltech/Qt-4.7.0/plugins',
     '/Developer/Applications/Qt/plugins',
 ]
 
-GIO_MODULES_SEARCH_PATH = ['/target/lib/gio/modules',]
+GIO_MODULES_SEARCH_PATH = [
+  '/usr/local/lib/gio/modules',
+  '/target/lib/gio/modules',
+]
 
 INSTALL_NAME_TOOL_APPLE = 'install_name_tool'
 INSTALL_NAME_TOOL_CROSS = 'x86_64-apple-darwin-%s' % INSTALL_NAME_TOOL_APPLE
@@ -303,6 +305,7 @@ def CopyLibrary(path):
   new_path = os.path.join(frameworks_dir, os.path.basename(path))
   args = ['cp', path, new_path]
   commands.append(args)
+  commands.append(['chmod', '+w', new_path])
   LOGGER.info("Copying library '%s'", path)
   return new_path
 
@@ -313,6 +316,7 @@ def CopyPlugin(path, subdir):
   commands.append(args)
   args = ['cp', path, new_path]
   commands.append(args)
+  commands.append(['chmod', '+w', new_path])
   LOGGER.info("Copying plugin '%s'", path)
   return new_path
 
@@ -337,6 +341,7 @@ def CopyFramework(src_binary):
 
   commands.append(['mkdir', '-p', dest_dir])
   commands.append(['cp', src_binary, dest_binary])
+  commands.append(['chmod', '+w', dest_binary])
 
   # Copy special files from various places:
   #   QtCore has Resources/qt_menu.nib (copy to app's Resources)
@@ -469,7 +474,6 @@ def main():
 
   FixPlugin(FindGstreamerPlugin('gst-plugin-scanner'), '.')
   FixPlugin(FindGioModule('libgiognutls.so'), 'gio-modules')
-  FixPlugin(FindGioModule('libgiolibproxy.so'), 'gio-modules')
 
   try:
     FixPlugin('clementine-spotifyblob', '.')

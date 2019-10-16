@@ -442,9 +442,10 @@ jobs:
       - run:
           name: Setup PATH
           command: |
-            echo 'export Qt5_DIR=/usr/local/opt/qt5/lib/cmake' >> $BASH_ENV
-            echo 'export Qt5LinguistTools_DIR=/usr/local/Cellar/qt/5.11.2/lib/cmake/Qt5LinguistTools' >> $BASH_ENV
-            echo 'export GST_SCANNER_PATH=/usr/local/Cellar/gstreamer/1.14.4/libexec/gstreamer-1.0/gst-plugin-scanner' >> $BASH_ENV
+            echo 'export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig' >> $BASH_ENV
+            echo 'export Qt5_DIR=/usr/local/Cellar/qt/5.13.1/lib/cmake/Qt5' >> $BASH_ENV
+            echo 'export Qt5LinguistTools_DIR=/usr/local/Cellar/qt/5.13.1/lib/cmake/Qt5LinguistTools' >> $BASH_ENV
+            echo 'export GST_SCANNER_PATH=/usr/local/Cellar/gstreamer/1.16.1/libexec/gstreamer-1.0/gst-plugin-scanner' >> $BASH_ENV
             echo 'export GST_PLUGIN_PATH=/usr/local/lib/gstreamer-1.0' >> $BASH_ENV
             echo 'export PATH=/usr/local/opt/gettext/bin:$PATH' >> $BASH_ENV
             source $BASH_ENV
@@ -456,35 +457,37 @@ jobs:
             chromaprint
             cmake
             cryptopp
+            fftw
             gettext
+            glew
             glib
-            liblastfm
+            google-sparsehash
+            gst-libav
+            gst-plugins-bad
+            gst-plugins-base
+            gst-plugins-good
+            gst-plugins-ugly
+            gstreamer
             pkgconfig
             protobuf
             protobuf-c
             qt
-      - run:
-          name: Install sqlite
-          command: brew install sqlite --with-fts
-      - run:
-          name: Install gstreamer
-          command: brew install gstreamer gst-plugins-base
-      - run:
-          name: Install gst-plugins-good
-          command: brew install gst-plugins-good --with-flac
-      - run:
-          name: Install gst-plugins
-          command: brew install gst-plugins-bad gst-plugins-ugly
-      - run:
-          name: Install other dependencies
-          command: brew install chromaprint liblastfm
+            sqlite
       - checkout
       - run:
           name: Checkout qt5 branch
           command: git checkout qt5
       - run:
           name: cmake
-          command: cmake .. -DUSE_VISUALISATIONS=OFF
+          command: >
+            cmake
+            ..
+            -Wno-dev
+            -DCMAKE_BUILD_TYPE=Release
+            -DCMAKE_OSX_ARCHITECTURES=x86_64
+            -DGETTEXT_MSGMERGE_EXECUTABLE=/usr/local/Cellar/gettext/0.20.1/bin/msgmerge
+            -DGETTEXT_MSGFMT_EXECUTABLE=/usr/local/Cellar/gettext/0.20.1/bin/msgfmt
+            -DGETTEXT_XGETTEXT_EXECUTABLE=/usr/local/Cellar/gettext/0.20.1/bin/xgettext
           working_directory: bin
       - run:
           name: make
