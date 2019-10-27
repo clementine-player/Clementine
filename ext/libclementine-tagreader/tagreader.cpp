@@ -122,13 +122,34 @@ void TagReader::ReadFile(const QString& filename,
   const QByteArray url(QUrl::fromLocalFile(filename).toEncoded());
   const QFileInfo info(filename);
 
-  qLog(Debug) << "Reading tags from" << filename;
-
   song->set_basefilename(DataCommaSizeFromQString(info.fileName()));
   song->set_url(url.constData(), url.size());
   song->set_filesize(info.size());
-  song->set_mtime(info.lastModified().toTime_t());
-  song->set_ctime(info.created().toTime_t());
+
+#if QT_VERSION >= 0x051000
+  qint64 mtime = info.lastModified().toSecsSinceEpoch();
+  qint64 btime = info.birthtime().toSecsSinceEpoch();
+#elif QT_VERSION >= 0x050800
+  qint64 mtime = info.lastModified().toSecsSinceEpoch();
+  qint64 btime = info.created().toSecsSinceEpoch();
+#else
+  // Legacy 32bit API.
+  uint mtime = info.lastModified().toTime_t();
+  uint btime = info.created().toTime_t();
+#endif
+
+  song->set_mtime(mtime);
+  // NOTE: birthtime isn't supported by all filesystems or NFS implementations.
+  // -1 is often returned if not supported. Note further that for the
+  // toTime_t() call this returns an unsigned int, i.e. UINT_MAX.
+  if (btime == -1) {
+    btime = mtime;
+  }
+  song->set_ctime(btime);
+
+  qLog(Debug) << "Reading tags from" << filename << ". Got tags:"
+              << "size=" << info.size() << "; mtime=" << mtime
+              << "; birthtime=" << btime;
 
   std::unique_ptr<TagLib::FileRef> fileref(factory_->GetFileRef(filename));
   if (fileref->isNull()) {
