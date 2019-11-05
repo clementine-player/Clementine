@@ -11,6 +11,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # Hoven1 <thomas.hofverberg@tavelsjo.se>, 2012
 # Jonatan Nyberg, 2017
+# Jonatan Nyberg, 2019
 # Kristian <kristianm24@gmail.com>, 2012-2017
 # Kristian <kristianm24@gmail.com>, 2012
 # Kristoffer Grundström <hamnisdude@gmail.com>, 2014,2017
@@ -30,8 +31,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2019-08-22 10:45+0000\n"
-"Last-Translator: hatstand <john.maguire@gmail.com>\n"
+"PO-Revision-Date: 2019-11-01 17:28+0000\n"
+"Last-Translator: Jonatan Nyberg\n"
 "Language-Team: Swedish (http://www.transifex.com/davidsansome/clementine/language/sv/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -364,7 +365,7 @@ msgid ""
 "played in the last 180 minutes.</p><p><span style=\" font-"
 "weight:600;\">Available fields: </span><span style=\" font-"
 "style:italic;\">%1</span>.</p></body></html>"
-msgstr ""
+msgstr "<html><head/><body><p>Förstavelse på ett ord med ett fältnamn för att begränsa sökningen till det fältet, t.ex. <span style=\" font-weight:600;\">artist:</span><span style=\" font-style:italic;\">Bode</span> söker i biblioteket efter alla artister som innehåller ordet Bode, <span style=\" font-weight:600;\">playcount:</span><span style=\" font-style:italic;\">&gt;=2</span> söker i biblioteket efter låtar som spelas minst två gånger, <span style=\" font-weight:600;\">lastplayed:</span>&lt;<span style=\" font-style:italic;\">1h30m</span> söker i biblioteket efter låtar som spelats under de senaste 180 minuterna.</p><p><span style=\" font-weight:600;\">Available fields: </span><span style=\" font-style:italic;\">%1</span>.</p></body></html>"
 
 #: ../bin/src/ui_librarysettingspage.h:198
 msgid ""
@@ -417,7 +418,7 @@ msgstr "En låt kommer att inkluderas i spellistan om den matchar dessa villkor.
 
 #: ../bin/src/ui_behavioursettingspage.h:417
 msgid "A&utomatic"
-msgstr ""
+msgstr "A&utomatisk"
 
 #: smartplaylists/searchterm.cpp:396
 msgid "A-Z"
@@ -490,7 +491,7 @@ msgstr "Åtgärd"
 
 #: wiimotedev/wiimotesettingspage.cpp:103
 msgid "Activate/Deactivate Wii Remote"
-msgstr ""
+msgstr "Aktivera/Inaktivera Wii-fjärrkontroll"
 
 #: internet/podcasts/addpodcastdialog.cpp:63
 msgid "Add Podcast"
@@ -771,11 +772,11 @@ msgstr "Alla spår"
 
 #: ../bin/src/ui_networkremotesettingspage.h:242
 msgid "Allow a client to download music from this computer."
-msgstr "Tillåt en klient att ladda ner musik från denna dator."
+msgstr "Tillåt en klient att hämta musik från denna dator."
 
 #: ../bin/src/ui_networkremotesettingspage.h:244
 msgid "Allow downloads"
-msgstr "Tillåt nedladdningar"
+msgstr "Tillåt hämtningar"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:139
 msgid "Allow mid/side encoding"
@@ -787,11 +788,11 @@ msgstr "Tillsammans med originalen"
 
 #: ../bin/src/ui_behavioursettingspage.h:370
 msgid "Alwa&ys hide the main window"
-msgstr ""
+msgstr "Dö&lj alltid huvudfönstret"
 
 #: ../bin/src/ui_behavioursettingspage.h:369
 msgid "Always show &the main window"
-msgstr ""
+msgstr "Visa alltid &huvudfönstret"
 
 #: ../bin/src/ui_behavioursettingspage.h:384
 #: ../bin/src/ui_behavioursettingspage.h:404
@@ -802,7 +803,7 @@ msgstr "Alltid starta uppspelning"
 msgid ""
 "An additional plugin is required to use Spotify in Clementine.  Would you "
 "like to download and install it now?"
-msgstr "Ett ytterligare insticksprogram krävs för att använda Spotify i Clementine.  Vill du ladda ner och installera det nu?"
+msgstr "Ett ytterligare insticksmodul krävs för att använda Spotify i Clementine.  Vill du hämta och installera den nu?"
 
 #: devices/gpodloader.cpp:61
 msgid "An error occurred loading the iTunes database"
@@ -811,7 +812,7 @@ msgstr "Ett fel uppstod vid inläsning av iTunes-databasen"
 #: playlist/playlist.cpp:454 ui/edittagdialog.cpp:703
 #, qt-format
 msgid "An error occurred writing metadata to '%1'"
-msgstr "Ett fel uppstod när metadata skulle skrivas till '%1'"
+msgstr "Ett fel uppstod när metadata skulle skrivas till \"%1\""
 
 #: internet/subsonic/subsonicsettingspage.cpp:127
 msgid "An unspecified error occurred."
@@ -883,7 +884,7 @@ msgstr "Artistens initialer"
 
 #: ../bin/src/ui_behavioursettingspage.h:420
 msgid "As&k when saving"
-msgstr ""
+msgstr "Frå&ga när du sparar"
 
 #: ../bin/src/ui_transcodedialog.h:225
 #: ../bin/src/ui_networkremotesettingspage.h:250
@@ -1084,7 +1085,7 @@ msgstr "Avbryt"
 
 #: internet/podcasts/podcastservice.cpp:447
 msgid "Cancel download"
-msgstr "Avbryt nedladdning"
+msgstr "Avbryt hämtning"
 
 #: ../bin/src/ui_edittagdialog.h:700
 msgid "Change cover art"
@@ -1166,7 +1167,7 @@ msgstr "Välj hur spellistan ska sorteras och hur många låtar den ska innehål
 
 #: internet/podcasts/podcastsettingspage.cpp:143
 msgid "Choose podcast download directory"
-msgstr "Välj nedladdningsmapp för podsändningar"
+msgstr "Välj hämtningsmapp för podsändningar"
 
 #: ../bin/src/ui_internetshowsettingspage.h:85
 msgid "Choose the internet services you want to show."
@@ -1326,7 +1327,7 @@ msgstr "Lista, separerad med komma, över class:level; level är 0-3"
 
 #: ../bin/src/ui_behavioursettingspage.h:425
 msgid "Comma separated list of prefix words to ignore when sorting"
-msgstr ""
+msgstr "Kommaseparerad lista över förstavelseord att ignorera vid sortering"
 
 #: playlist/playlist.cpp:1435 smartplaylists/searchterm.cpp:384
 #: ui/organisedialog.cpp:79 ../bin/src/ui_edittagdialog.h:718
@@ -1404,7 +1405,7 @@ msgstr "Ansluter till Spotify"
 msgid ""
 "Connection refused by server, check server URL. Example: "
 "http://localhost:4040/"
-msgstr "Uppkoppling vägrad av servern, Kontrollera serverns URL. Exempel:http://localhost:4040/"
+msgstr "Uppkoppling vägrad av servern, Kontrollera serverns webbadress. Exempel:http://localhost:4040/"
 
 #: songinfo/streamdiscoverer.cpp:116
 msgid "Connection timed out"
@@ -1413,7 +1414,7 @@ msgstr "Anslutningens tidsgräns nåddes"
 #: internet/subsonic/subsonicsettingspage.cpp:144
 msgid ""
 "Connection timed out, check server URL. Example: http://localhost:4040/"
-msgstr "Uppkopplingen har avbrutits, kontrollera serverns URL. Exempel: http://localhost:4040/"
+msgstr "Uppkopplingen har avbrutits, kontrollera serverns webbadress. Exempel: http://localhost:4040/"
 
 #: ../bin/src/ui_console.h:79 ../bin/src/ui_mainwindow.h:701
 msgid "Console"
@@ -1461,14 +1462,14 @@ msgstr "Copyright"
 msgid ""
 "Could not connect to Subsonic, check server URL. Example: "
 "http://localhost:4040/"
-msgstr "Kunde inte ansluta till Subsonic, kontrollera serverns URL. Exampel: http://localhost:4040/"
+msgstr "Kunde inte ansluta till Subsonic, kontrollera serverns webbadress. Exampel: http://localhost:4040/"
 
 #: transcoder/transcoder.cpp:59
 #, qt-format
 msgid ""
 "Could not create the GStreamer element \"%1\" - make sure you have all the "
 "required GStreamer plugins installed"
-msgstr "Kunde inte skapa GStreamer-elementet \"%1\" - kontrollera att du har alla GStreamer-insticken som krävs installerade"
+msgstr "Kunde inte skapa GStreamer-elementet \"%1\" - kontrollera att du har alla GStreamer-insticksmoduler som krävs installerade"
 
 #: songinfo/streamdiscoverer.cpp:97
 #, qt-format
@@ -1492,14 +1493,14 @@ msgstr "Kunde inte skapa spellista"
 msgid ""
 "Couldn't find a muxer for %1, check you have the correct GStreamer plugins "
 "installed"
-msgstr "Kunde inte hitta en muxer för %1, kontrollera att du har de korrekta GStreamer-insticken installerade"
+msgstr "Kunde inte hitta en muxer för %1, kontrollera att du har de korrekta GStreamer-insticksmodulerna installerade"
 
 #: transcoder/transcoder.cpp:420
 #, qt-format
 msgid ""
 "Couldn't find an encoder for %1, check you have the correct GStreamer "
 "plugins installed"
-msgstr "Kunde inte hitta en kodare för %1, kontrollera att du har de korrekta GStreamer-insticken installerade"
+msgstr "Kunde inte hitta en kodare för %1, kontrollera att du har de korrekta GStreamer-insticksmodulerna installerade"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:224
 #, qt-format
@@ -1520,7 +1521,7 @@ msgstr "Omslagsbilder från inbäddad bild"
 #: ui/edittagdialog.cpp:487
 #, qt-format
 msgid "Cover art loaded automatically from %1"
-msgstr "Omslagsbild laddas automatiskt från %1"
+msgstr "Omslagsbild läses in automatiskt från %1"
 
 #: ui/edittagdialog.cpp:479
 msgid "Cover art manually unset"
@@ -1542,7 +1543,7 @@ msgstr "Omslagsbilder från %1"
 
 #: core/commandlineoptions.cpp:175
 msgid "Create a new playlist with files/URLs"
-msgstr "Skapa en ny spellista med filer/URLer"
+msgstr "Skapa en ny spellista med filer/webbadresser"
 
 #: ../bin/src/ui_playbacksettingspage.h:346
 msgid "Cross-fade when changing tracks automatically"
@@ -1562,11 +1563,11 @@ msgstr "Ctrl+Up"
 
 #: ../bin/src/ui_queuemanager.h:141
 msgid "Ctrl+"
-msgstr ""
+msgstr "Ctrl+"
 
 #: ../bin/src/ui_queuemanager.h:145
 msgid "Ctrl+"
-msgstr ""
+msgstr "Ctrl+"
 
 #: ui/equalizer.cpp:110
 msgid "Custom"
@@ -1601,7 +1602,7 @@ msgstr "Databas-korruption upptäckt. Läs https://github.com/clementine-player/
 
 #: ../bin/src/ui_episodeinfowidget.h:133
 msgid "Date"
-msgstr ""
+msgstr "Datum"
 
 #: playlist/playlist.cpp:1432 ../bin/src/ui_edittagdialog.h:715
 msgid "Date created"
@@ -1621,7 +1622,7 @@ msgstr "S&tandard"
 
 #: core/commandlineoptions.cpp:165
 msgid "Decrease the volume by 4 percent"
-msgstr ""
+msgstr "Minska volymen med 4 procent"
 
 #: core/commandlineoptions.cpp:167
 msgid "Decrease the volume by <value> percent"
@@ -1655,7 +1656,7 @@ msgstr "Ta bort"
 
 #: internet/podcasts/podcastservice.cpp:441
 msgid "Delete downloaded data"
-msgstr "Ta bort nedladdad data"
+msgstr "Ta bort hämtade data"
 
 #: devices/deviceview.cpp:404 library/libraryview.cpp:678
 #: ui/mainwindow.cpp:2473 widgets/fileview.cpp:188
@@ -1685,7 +1686,7 @@ msgstr "Radera smart spellista"
 
 #: core/commandlineoptions.cpp:186
 msgid "Delete the currently playing song"
-msgstr ""
+msgstr "Ta bort låten som spelas för närvarande"
 
 #: ../bin/src/ui_organisedialog.h:245
 msgid "Delete the original files"
@@ -1874,15 +1875,15 @@ msgstr "Att dubbelklicka på en låt kommer att..."
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "Download %n episodes"
-msgstr "Ladda ner %n avsnitt"
+msgstr "Hämta %n avsnitt"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:272
 msgid "Download directory"
-msgstr "Nedladdningskatalog"
+msgstr "Hämtningsmapp"
 
 #: ../bin/src/ui_podcastsettingspage.h:264
 msgid "Download episodes to"
-msgstr "Ladda ner avsnitt till"
+msgstr "Hämta avsnitt till"
 
 #: ../bin/src/ui_magnatunesettingspage.h:160
 msgid "Download membership"
@@ -1890,20 +1891,20 @@ msgstr "Hämta medlemskap"
 
 #: ../bin/src/ui_podcastsettingspage.h:265
 msgid "Download new episodes automatically"
-msgstr "Ladda ner nya avsnitt automatiskt"
+msgstr "Hämta nya avsnitt automatiskt"
 
 #: internet/podcasts/podcastservice.cpp:294
 #: internet/podcasts/podcastservice.cpp:333
 msgid "Download queued"
-msgstr "Nedladdning köad"
+msgstr "Hämtning köad"
 
 #: ../bin/src/ui_networkremotesettingspage.h:245
 msgid "Download settings"
-msgstr "Ladda ner inställningar"
+msgstr "Hämta inställningar"
 
 #: ../bin/src/ui_networkremotesettingspage.h:252
 msgid "Download the Android app"
-msgstr "Ladda ner Android appen"
+msgstr "Hämta Android-appen"
 
 #: internet/magnatune/magnatuneservice.cpp:283
 msgid "Download this album"
@@ -1911,29 +1912,29 @@ msgstr "Hämta detta album"
 
 #: internet/jamendo/jamendoservice.cpp:424
 msgid "Download this album..."
-msgstr "Ladda ner det här albumet ..."
+msgstr "Hämta det här albumet ..."
 
 #: internet/podcasts/podcastservice.cpp:552
 msgid "Download this episode"
-msgstr "Ladda ner detta avsnitt"
+msgstr "Hämta detta avsnitt"
 
 #: ../bin/src/ui_spotifysettingspage.h:214
 msgid "Download..."
-msgstr "Ladda ner..."
+msgstr "Hämta..."
 
 #: internet/podcasts/podcastservice.cpp:302
 #: internet/podcasts/podcastservice.cpp:342
 #, qt-format
 msgid "Downloading (%1%)..."
-msgstr "Laddar ner (%1%)..."
+msgstr "Hämtar (%1%)..."
 
 #: internet/icecast/icecastservice.cpp:102
 msgid "Downloading Icecast directory"
-msgstr "Ladda ner Icecast-katalog"
+msgstr "Hämta Icecast-katalog"
 
 #: internet/jamendo/jamendoservice.cpp:199
 msgid "Downloading Jamendo catalogue"
-msgstr "Ladda ner Jamendo-katalog"
+msgstr "Hämta Jamendo-katalog"
 
 #: internet/magnatune/magnatuneservice.cpp:162
 msgid "Downloading Magnatune catalogue"
@@ -1941,7 +1942,7 @@ msgstr "Hämtar katalog från Magnatune"
 
 #: internet/spotify/spotifyblobdownloader.cpp:61
 msgid "Downloading Spotify plugin"
-msgstr "Laddar ner Spotify-insticket"
+msgstr "Hämtar Spotify-insticksmodulen"
 
 #: musicbrainz/tagfetcher.cpp:107
 msgid "Downloading metadata"
@@ -2049,11 +2050,11 @@ msgstr "Kodningsläge"
 
 #: ../bin/src/ui_addpodcastbyurl.h:72
 msgid "Enter a URL"
-msgstr "Ange en adress"
+msgstr "Ange en webbadress"
 
 #: ../bin/src/ui_coverfromurldialog.h:102
 msgid "Enter a URL to download a cover from the Internet:"
-msgstr "Ange en URL för att ladda ner ett omslag från Internet:"
+msgstr "Ange en webbadress för att hämta ett omslag från Internet:"
 
 #: ../bin/src/ui_albumcoverexport.h:204
 msgid "Enter a filename for exported covers (no extension):"
@@ -2087,7 +2088,7 @@ msgstr "Skriv in webbadressen till en radiostation på Internet:"
 
 #: playlist/playlistlistcontainer.cpp:255
 msgid "Enter the name of the folder"
-msgstr "Ange katalogens namn"
+msgstr "Ange mappens namn"
 
 #: ../bin/src/ui_networkremotesettingspage.h:238
 msgid "Enter this IP in the App to connect to Clementine."
@@ -2099,7 +2100,7 @@ msgstr "Hela samlingen"
 
 #: internet/podcasts/podcastservice.cpp:532
 msgid "Episode information"
-msgstr ""
+msgstr "Episodinformation"
 
 #: ../bin/src/ui_equalizer.h:162 ../bin/src/ui_mainwindow.h:705
 msgid "Equalizer"
@@ -2142,7 +2143,7 @@ msgstr "Fel vid upptäckning %1:%2"
 
 #: internet/spotify/spotifyblobdownloader.cpp:265
 msgid "Error downloading Spotify plugin"
-msgstr "Fel vid hämtning av Spotify-insticket"
+msgstr "Fel vid hämtning av Spotify-insticksmodulen"
 
 #: playlist/songloaderinserter.cpp:66 playlist/songloaderinserter.cpp:145
 #, qt-format
@@ -2222,7 +2223,7 @@ msgstr "Exportera omslag"
 
 #: ../bin/src/ui_albumcoverexport.h:205
 msgid "Export downloaded covers"
-msgstr "Exportera nedladdade omslag"
+msgstr "Exportera hämtade omslag"
 
 #: ../bin/src/ui_albumcoverexport.h:206
 msgid "Export embedded covers"
@@ -2280,7 +2281,7 @@ msgstr "Misslyckades att hämta podsändning"
 #: internet/podcasts/addpodcastbyurl.cpp:71
 #: internet/podcasts/fixedopmlpage.cpp:55
 msgid "Failed to load podcast"
-msgstr "Misslyckades att ladda podsändning"
+msgstr "Misslyckades att läsa in podsändning"
 
 #: internet/podcasts/podcasturlloader.cpp:175
 msgid "Failed to parse the XML for this RSS feed"
@@ -2289,7 +2290,7 @@ msgstr "Misslyckades att tolka XML för denna RSS-flöde"
 #: ui/trackselectiondialog.cpp:247
 #, qt-format
 msgid "Failed to write new auto-tags to '%1'"
-msgstr "Misslyckades skriva auto-taggar till '%1'"
+msgstr "Misslyckades skriva nya auto-taggar till \"%1\""
 
 #: ../bin/src/ui_transcoderoptionsflac.h:81
 #: ../bin/src/ui_transcoderoptionsmp3.h:199
@@ -2396,7 +2397,7 @@ msgstr "Typsnittsstorlek"
 
 #: ../bin/src/ui_spotifysettingspage.h:212
 msgid "For licensing reasons Spotify support is in a separate plugin."
-msgstr "Av licensskäl finns Spotify-stöd i ett separat insticksprogram."
+msgstr "Av licensskäl finns Spotify-stöd i en separat insticksmodul."
 
 #: ../bin/src/ui_transcoderoptionsmp3.h:203
 msgid "Force mono encoding"
@@ -2494,11 +2495,11 @@ msgstr "Genre"
 #: internet/spotify/spotifyservice.cpp:642
 #: internet/spotify/spotifyservice.cpp:685
 msgid "Get a URL to share this Spotify song"
-msgstr "Hämta en URL för att dela Spotify låt"
+msgstr "Hämta en webbadress för att dela Spotify låt"
 
 #: internet/spotify/spotifyservice.cpp:674
 msgid "Get a URL to share this playlist"
-msgstr "Hämta en URL för delning av denna spellista"
+msgstr "Hämta en webbadress för delning av denna spellista"
 
 #: internet/somafm/somafmservice.cpp:120
 #: internet/intergalacticfm/intergalacticfmservice.cpp:120
@@ -2596,7 +2597,7 @@ msgstr "HTML-sida inehöll inget RSS-flöde"
 #: internet/subsonic/subsonicsettingspage.cpp:166
 msgid ""
 "HTTP 3xx status code received without URL, verify server configuration."
-msgstr "HTTP 3xx statuskod mottagen utan URL, verifiera serverkonfiguration."
+msgstr "HTTP 3xx statuskod mottagen utan webbadress, verifiera serverkonfiguration."
 
 #: ../bin/src/ui_networkproxysettingspage.h:162
 msgid "HTTP proxy"
@@ -2616,7 +2617,7 @@ msgstr "Hårdvaruinformation är endast tillgänglig när enheten är ansluten."
 
 #: ../bin/src/ui_appearancesettingspage.h:325
 msgid "Hide playlist filter toolbar"
-msgstr ""
+msgstr "Dölj verktygsfältets spellistsfilter"
 
 #: ../bin/src/ui_transcoderoptionsmp3.h:201
 msgid "High"
@@ -2634,11 +2635,11 @@ msgstr "Hög (1024x1024)"
 
 #: ui/equalizer.cpp:128
 msgid "Hip Hop"
-msgstr ""
+msgstr "Hip Hop"
 
 #: internet/subsonic/subsonicsettingspage.cpp:138
 msgid "Host not found, check server URL. Example: http://localhost:4040/"
-msgstr "Hittade ingen värd, Kontrollera serverns URL. Exempel: http://localhost:4040/"
+msgstr "Hittade ingen värd, Kontrollera serverns webbadress. Exempel: http://localhost:4040/"
 
 #: smartplaylists/searchterm.cpp:417
 msgid "Hours"
@@ -2686,7 +2687,7 @@ msgstr "Ignorera \"The\" i artistnamn"
 
 #: ../bin/src/ui_behavioursettingspage.h:423
 msgid "Ignore prefix word(s)"
-msgstr ""
+msgstr "Ignorera förstavelseord"
 
 #: ui/albumcoverchoicecontroller.cpp:44
 msgid "Images (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm)"
@@ -2738,7 +2739,7 @@ msgstr "Ej komplett konfiguration, var vänlig och kontrollera att alla fält ä
 
 #: core/commandlineoptions.cpp:164
 msgid "Increase the volume by 4 percent"
-msgstr ""
+msgstr "Öka volymen med 4 procent"
 
 #: core/commandlineoptions.cpp:166
 msgid "Increase the volume by <value> percent"
@@ -2796,7 +2797,7 @@ msgstr "Felaktig API-nyckel"
 
 #: songinfo/streamdiscoverer.cpp:114
 msgid "Invalid URL"
-msgstr "Ogiltig URL"
+msgstr "Ogiltig webbadress"
 
 #: internet/lastfm/lastfmservice.cpp:272
 msgid "Invalid format"
@@ -2992,15 +2993,15 @@ msgstr "Läs in"
 
 #: ../bin/src/ui_coverfromurldialog.h:101
 msgid "Load cover from URL"
-msgstr "Ladda omslag från URL"
+msgstr "Läs in omslag från webbadress"
 
 #: ui/albumcoverchoicecontroller.cpp:67
 msgid "Load cover from URL..."
-msgstr "Ladda omslag från URL..."
+msgstr "Läs in omslag från webbadress..."
 
 #: ui/albumcoverchoicecontroller.cpp:107
 msgid "Load cover from disk"
-msgstr "Ladda omslag från hårddisk"
+msgstr "Läs in omslag från hårddisk"
 
 #: ui/albumcoverchoicecontroller.cpp:62
 msgid "Load cover from disk..."
@@ -3028,7 +3029,7 @@ msgstr "Läser in smart spellista"
 
 #: library/librarymodel.cpp:170
 msgid "Loading songs"
-msgstr "Laddar låtar"
+msgstr "Läser in låtar"
 
 #: internet/digitally/digitallyimportedurlhandler.cpp:74
 #: internet/somafm/somafmurlhandler.cpp:53
@@ -3042,7 +3043,7 @@ msgstr "Läser in spår"
 
 #: playlist/songloaderinserter.cpp:162
 msgid "Loading tracks info"
-msgstr "Laddar låtinformation"
+msgstr "Läser in låtinformation"
 
 #: library/librarymodel.cpp:165
 #: internet/podcasts/podcastdiscoverymodel.cpp:104 widgets/prettyimage.cpp:168
@@ -3250,7 +3251,7 @@ msgstr "Övervaka förändringar i biblioteket"
 
 #: core/song.cpp:460
 msgid "Monkey's Audio"
-msgstr ""
+msgstr "Apans ljud"
 
 #: ../bin/src/ui_playbacksettingspage.h:372
 msgid "Mono playback"
@@ -3438,7 +3439,7 @@ msgstr "Normal blocktyp"
 
 #: ../bin/src/ui_behavioursettingspage.h:428
 msgid "Normal duration (at least 4 minutes or half the track length)"
-msgstr ""
+msgstr "Normal varaktighet (minst 4 minuter eller halva spårlängden)"
 
 #: playlist/playlistsequence.cpp:203
 msgid "Not available while using a dynamic playlist"
@@ -3769,11 +3770,11 @@ msgstr "Spela om ingenting redan spelas"
 
 #: library/libraryview.cpp:396 ui/mainwindow.cpp:1815
 msgid "Play next"
-msgstr ""
+msgstr "Spela nästa"
 
 #: ui/mainwindow.cpp:1813
 msgid "Play selected tracks next"
-msgstr ""
+msgstr "Spela upp valda spår som nästa"
 
 #: core/commandlineoptions.cpp:178
 msgid "Play the <n>th track in the playlist"
@@ -3821,21 +3822,21 @@ msgstr "Var god och stäng din webbläsare och återgå till Clementine."
 #: internet/lastfm/lastfmservice.cpp:180
 #, qt-format
 msgid "Please open this URL in your browser: <a href=\"%1\">%1</a>"
-msgstr "Vänligen öppna denna URL i din webbläsare: <a href=\"%1\">%1</a>"
+msgstr "Vänligen öppna denna webbadress i din webbläsare: <a href=\"%1\">%1</a>"
 
 #: ../bin/src/ui_spotifysettingspage.h:213
 msgid "Plugin status:"
-msgstr "Instickstatus:"
+msgstr "Insticksmodulsstatus:"
 
 #: ../bin/src/ui_podcastinfodialog.h:93
 msgid "Podcast Information"
-msgstr ""
+msgstr "Podcast-information"
 
 #: internet/podcasts/podcastservice.cpp:437
 #: internet/podcasts/podcastservice.cpp:535
 #: internet/podcasts/podcastservice.cpp:539
 msgid "Podcast information"
-msgstr ""
+msgstr "Podcast-information"
 
 #: internet/podcasts/podcastservice.cpp:133
 #: ../bin/src/ui_podcastsettingspage.h:250
@@ -3957,7 +3958,7 @@ msgstr "Psykadelisk"
 
 #: wiimotedev/wiimotesettingspage.cpp:246
 msgid "Push Wii Remote button"
-msgstr ""
+msgstr "Tryck på Wii-fjärrkontroll-knappen"
 
 #: ../bin/src/ui_wiimoteshortcutgrabber.h:121
 msgid "Push Wiiremote button"
@@ -4093,7 +4094,7 @@ msgstr "Kom ihåg Wii-kontrollens rörelse"
 
 #: ../bin/src/ui_behavioursettingspage.h:371
 msgid "Remember from &last time"
-msgstr ""
+msgstr "Kom ihåg från &förra gången"
 
 #: ../bin/src/ui_playlistsaveoptionsdialog.h:99
 msgid "Remember my choice"
@@ -4250,7 +4251,7 @@ msgstr "Kör"
 
 #: core/song.cpp:456
 msgid "SNES SPC700"
-msgstr ""
+msgstr "SNES SPC700"
 
 #: ../bin/src/ui_networkproxysettingspage.h:163
 msgid "SOCKS proxy"
@@ -4517,7 +4518,7 @@ msgstr "Server"
 
 #: ../bin/src/ui_subsonicsettingspage.h:132
 msgid "Server URL"
-msgstr "Server URL"
+msgstr "Serverns webbadress"
 
 #: ../bin/src/ui_subsonicsettingspage.h:131
 msgid "Server details"
@@ -4546,7 +4547,7 @@ msgstr "Inställningar"
 
 #: ../bin/src/ui_behavioursettingspage.h:429
 msgid "Short duration (at least 1 minute or half the track length)"
-msgstr ""
+msgstr "Kort varaktighet (minst 1 minut eller halva spårlängden)"
 
 #: ../bin/src/ui_globalshortcutssettingspage.h:172
 msgid "Shortcut"
@@ -4831,19 +4832,19 @@ msgstr "Fel vid inloggning på Spotify"
 
 #: internet/spotify/spotifyservice.cpp:850
 msgid "Spotify playlist's URL"
-msgstr "URL för Spotify's spellistor"
+msgstr "Webbadress för Spotifys spellistor"
 
 #: ../bin/src/ui_spotifysettingspage.h:211
 msgid "Spotify plugin"
-msgstr "Spotify-insticksprogram"
+msgstr "Spotify-insticksmodul"
 
 #: internet/spotify/spotifyblobdownloader.cpp:76
 msgid "Spotify plugin not installed"
-msgstr "Spotify-insticksprogrammet är inte installerat"
+msgstr "Spotify-insticksmodulen är inte installerad"
 
 #: internet/spotify/spotifyservice.cpp:841
 msgid "Spotify song's URL"
-msgstr "URL för Spotify's låtar"
+msgstr "Webbadress för Spotifys låtar"
 
 #: ../bin/src/ui_transcoderoptionsmp3.h:200
 msgid "Standard"
@@ -4912,7 +4913,7 @@ msgstr "Stoppa uppspelning efter aktuellt spår"
 
 #: ../bin/src/ui_behavioursettingspage.h:377
 msgid "Stop playback if song fails to play"
-msgstr ""
+msgstr "Stoppa uppspelningen om låten misslyckas med att spela"
 
 #: core/globalshortcuts.cpp:56
 msgid "Stop playing after current track"
@@ -5299,7 +5300,7 @@ msgstr "URI"
 
 #: ../bin/src/ui_streamdetailsdialog.h:134
 msgid "URL"
-msgstr "URL"
+msgstr "Webbadress"
 
 #: core/commandlineoptions.cpp:155
 msgid "URL(s)"
@@ -5368,7 +5369,7 @@ msgstr "Uppdatera alla podsändningar"
 
 #: ../bin/src/ui_mainwindow.h:714
 msgid "Update changed library folders"
-msgstr "Uppdatera ändrade bibliotekskataloger"
+msgstr "Uppdatera ändrade biblioteksmappar"
 
 #: ../bin/src/ui_librarysettingspage.h:190
 msgid "Update the library when Clementine starts"
@@ -5406,7 +5407,7 @@ msgstr "Använd om möjligt album artist tagg"
 
 #: ../bin/src/ui_globalshortcutssettingspage.h:167
 msgid "Use Gnome's shortcut keys"
-msgstr "Använd GNOMEs snabbtangenter"
+msgstr "Använd GNOMEs kortkommandon"
 
 #: analyzers/analyzercontainer.cpp:93
 msgid "Use Psychedelic Colors"
@@ -5434,7 +5435,7 @@ msgstr "Använd ett eget meddelande för aviseringar"
 
 #: ../bin/src/ui_networkremotesettingspage.h:222
 msgid "Use a network remote control"
-msgstr "Använd en nätverks fjärrkontroll"
+msgstr "Använd en nätverksfjärrkontroll"
 
 #: ../bin/src/ui_networkproxysettingspage.h:166
 msgid "Use authentication"
@@ -5503,7 +5504,7 @@ msgstr "VBR MP3"
 
 #: core/song.cpp:458
 msgid "VGM"
-msgstr ""
+msgstr "VGM"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:231
 msgid "Variable bit rate"
@@ -5516,7 +5517,7 @@ msgstr "Diverse artister"
 
 #: ../bin/src/ui_subsonicsettingspage.h:136
 msgid "Verify Server certificate"
-msgstr ""
+msgstr "Verifiera servercertifikat"
 
 #: ui/about.cpp:35
 #, qt-format
@@ -5575,7 +5576,7 @@ msgstr "WAV"
 
 #: core/song.cpp:450
 msgid "WavPack"
-msgstr ""
+msgstr "WavPack"
 
 #: ../bin/src/ui_podcastinfowidget.h:192
 msgid "Website"
@@ -5591,7 +5592,7 @@ msgstr "När Clementine startar"
 
 #: ../bin/src/ui_behavioursettingspage.h:427
 msgid "When calculating play counts, use"
-msgstr ""
+msgstr "Vid beräkning av spelantal, använd"
 
 #: ../bin/src/ui_librarysettingspage.h:203
 msgid ""
@@ -5605,7 +5606,7 @@ msgstr "När en spellista sparas ska sökvägen vara"
 
 #: ../bin/src/ui_behavioursettingspage.h:422
 msgid "When sorting artists, albums and titles"
-msgstr ""
+msgstr "Vid sortering av artister, album och titlar"
 
 #: ../bin/src/ui_globalsearchsettingspage.h:147
 msgid "When the list is empty..."
@@ -5622,7 +5623,7 @@ msgstr "Bredband (WB)"
 #: widgets/osd.cpp:245
 #, qt-format
 msgid "Wii Remote %1: activated"
-msgstr ""
+msgstr "Wii-fjärrkontroll %1: aktiverad"
 
 #: widgets/osd.cpp:257
 #, qt-format
@@ -5895,7 +5896,7 @@ msgstr "som inte innehåller"
 
 #: smartplaylists/searchterm.cpp:263
 msgid "empty"
-msgstr ""
+msgstr "tom"
 
 #: smartplaylists/searchterm.cpp:253
 msgid "ends with"
@@ -5952,7 +5953,7 @@ msgstr "nyaste först"
 
 #: smartplaylists/searchterm.cpp:265
 msgid "not empty"
-msgstr ""
+msgstr "inte tom"
 
 #: smartplaylists/searchterm.cpp:261
 msgid "not equals"
