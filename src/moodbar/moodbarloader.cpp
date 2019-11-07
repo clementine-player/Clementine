@@ -31,7 +31,6 @@
 #include "core/application.h"
 #include "core/closure.h"
 #include "core/logging.h"
-#include "core/qhash_qurl.h"
 #include "core/utilities.h"
 
 #ifdef Q_OS_WIN32

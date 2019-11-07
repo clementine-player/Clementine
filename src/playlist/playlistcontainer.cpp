@@ -16,6 +16,7 @@
 */
 
 #include "core/appearance.h"
+#include "core/application.h"
 #include "core/logging.h"
 #include "core/player.h"
 #include "core/timeconstants.h"
@@ -25,6 +26,7 @@
 #include "ui/iconloader.h"
 #include "ui_playlistcontainer.h"
 
+#include <QAction>
 #include <QFileDialog>
 #include <QInputDialog>
 #include <QKeyEvent>
@@ -42,6 +44,7 @@ const int PlaylistContainer::kFilterDelayPlaylistSizeThreshold = 5000;
 
 PlaylistContainer::PlaylistContainer(QWidget* parent)
     : QWidget(parent),
+      app_(nullptr),
       ui_(new Ui_PlaylistContainer),
       manager_(nullptr),
       undo_(nullptr),
@@ -51,7 +54,8 @@ PlaylistContainer::PlaylistContainer(QWidget* parent)
       tab_bar_visible_(false),
       tab_bar_animation_(new QTimeLine(500, this)),
       no_matches_label_(nullptr),
-      filter_timer_(new QTimer(this)) {
+      filter_timer_(new QTimer(this)),
+      dirty_(false) {
   ui_->setupUi(this);
 
   no_matches_label_ = new QLabel(ui_->playlist);
@@ -95,7 +99,7 @@ PlaylistContainer::PlaylistContainer(QWidget* parent)
   ui_->tab_bar->setMaximumHeight(0);
 
   // Connections
-  connect(ui_->tab_bar, SIGNAL(currentChanged(int)), SLOT(Save()));
+  connect(ui_->tab_bar, SIGNAL(currentChanged(int)), SLOT(DirtyTabBar()));
   connect(ui_->tab_bar, SIGNAL(Save(int)), SLOT(SavePlaylist(int)));
 
   // set up timer for delayed filter updates
@@ -110,7 +114,17 @@ PlaylistContainer::PlaylistContainer(QWidget* parent)
   ui_->filter->installEventFilter(this);
 }
 
-PlaylistContainer::~PlaylistContainer() { delete ui_; }
+PlaylistContainer::~PlaylistContainer() {
+  delete ui_;
+}
+
+void PlaylistContainer::SetApplication(Application* app) {
+  Q_ASSERT(app);
+  app_ = app;
+  SetManager(app_->playlist_manager());
+  ui_->playlist->SetApplication(app_);
+  connect(app_, SIGNAL(SaveSettings(QSettings*)), SLOT(Save(QSettings*)));
+}
 
 PlaylistView* PlaylistContainer::view() const { return ui_->playlist; }
 
@@ -331,10 +345,18 @@ void PlaylistContainer::GoToPreviousPlaylistTab() {
   manager_->SetCurrentPlaylist(id_previous);
 }
 
-void PlaylistContainer::Save() {
-  if (starting_up_) return;
+void PlaylistContainer::DirtyTabBar() {
+  dirty_ = true;
+  app_->DirtySettings();
+}
 
-  settings_.setValue("current_playlist", ui_->tab_bar->current_id());
+void PlaylistContainer::Save(QSettings* settings_) {
+  if (starting_up_ || !dirty_) return;
+  dirty_ = false;
+
+  settings_->beginGroup(kSettingsGroup);
+  settings_->setValue("current_playlist", ui_->tab_bar->current_id());
+  settings_->endGroup();
 }
 
 void PlaylistContainer::SetTabBarVisible(bool visible) {

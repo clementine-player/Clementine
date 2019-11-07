@@ -281,13 +281,14 @@ QSqlDatabase Database::Connect() {
     }
 #endif
 
-    QSqlQuery set_fts_tokenizer("SELECT fts3_tokenizer(:name, :pointer)", db);
+    QSqlQuery set_fts_tokenizer(db);
+    set_fts_tokenizer.prepare("SELECT fts3_tokenizer(:name, :pointer)");
     set_fts_tokenizer.bindValue(":name", "unicode");
     set_fts_tokenizer.bindValue(
         ":pointer", QByteArray(reinterpret_cast<const char*>(&sFTSTokenizer),
                                sizeof(&sFTSTokenizer)));
     if (!set_fts_tokenizer.exec()) {
-      qLog(Warning) << "Couldn't register FTS3 tokenizer";
+      qLog(Warning) << "Couldn't register FTS3 tokenizer : " << set_fts_tokenizer.lastError();
     }
     // Implicit invocation of ~QSqlQuery() when leaving the scope
     // to release any remaining database locks!
@@ -306,12 +307,13 @@ QSqlDatabase Database::Connect() {
     if (!injected_database_name_.isNull()) filename = injected_database_name_;
 
     // Attach the db
-    QSqlQuery q("ATTACH DATABASE :filename AS :alias", db);
+    QSqlQuery q(db);
+    q.prepare("ATTACH DATABASE :filename AS :alias");
     q.bindValue(":filename", filename);
     q.bindValue(":alias", key);
     if (!q.exec()) {
       qFatal("Couldn't attach external database '%s'",
-             key.toAscii().constData());
+             key.toLatin1().constData());
     }
   }
 
@@ -326,10 +328,10 @@ QSqlDatabase Database::Connect() {
         attached_databases_[key].schema_.isEmpty())
       continue;
     // Find out if there are any tables in this database
-    QSqlQuery q(QString(
+    QSqlQuery q(db);
+    q.prepare(QString(
                     "SELECT ROWID FROM %1.sqlite_master"
-                    " WHERE type='table'").arg(key),
-                db);
+                    " WHERE type='table'").arg(key));
     if (!q.exec() || !q.next()) {
       q.finish();
       ExecSchemaCommandsFromFile(db, attached_databases_[key].schema_, 0);
@@ -376,7 +378,8 @@ void Database::RecreateAttachedDb(const QString& database_name) {
   {
     QSqlDatabase db(Connect());
 
-    QSqlQuery q("DETACH DATABASE :alias", db);
+    QSqlQuery q(db);
+    q.prepare("DETACH DATABASE :alias");
     q.bindValue(":alias", database_name);
     if (!q.exec()) {
       qLog(Warning) << "Failed to detach database" << database_name;
@@ -407,12 +410,13 @@ void Database::AttachDatabaseOnDbConnection(const QString& database_name,
   AttachDatabase(database_name, database);
 
   // Attach the db
-  QSqlQuery q("ATTACH DATABASE :filename AS :alias", db);
+  QSqlQuery q(db);
+  q.prepare("ATTACH DATABASE :filename AS :alias");
   q.bindValue(":filename", database.filename_);
   q.bindValue(":alias", database_name);
   if (!q.exec()) {
     qFatal("Couldn't attach external database '%s'",
-           database_name.toAscii().constData());
+           database_name.toLatin1().constData());
   }
 }
 
@@ -421,7 +425,8 @@ void Database::DetachDatabase(const QString& database_name) {
   {
     QSqlDatabase db(Connect());
 
-    QSqlQuery q("DETACH DATABASE :alias", db);
+    QSqlQuery q(db);
+    q.prepare("DETACH DATABASE :alias");
     q.bindValue(":alias", database_name);
     if (!q.exec()) {
       qLog(Warning) << "Failed to detach database" << database_name;
@@ -464,10 +469,10 @@ void Database::UpdateDatabaseSchema(int version, QSqlDatabase& db) {
 }
 
 void Database::UrlEncodeFilenameColumn(const QString& table, QSqlDatabase& db) {
-  QSqlQuery select(QString("SELECT ROWID, filename FROM %1").arg(table), db);
-  QSqlQuery update(
-      QString("UPDATE %1 SET filename=:filename WHERE ROWID=:id").arg(table),
-      db);
+  QSqlQuery select(db);
+  select.prepare(QString("SELECT ROWID, filename FROM %1").arg(table));
+  QSqlQuery update(db);
+  update.prepare(QString("UPDATE %1 SET filename=:filename WHERE ROWID=:id").arg(table));
   select.exec();
   if (CheckErrors(select)) return;
   while (select.next()) {
@@ -561,12 +566,11 @@ QStringList Database::SongsTables(QSqlDatabase& db, int schema_version) const {
 
   // look for the tables in attached dbs
   for (const QString& key : attached_databases_.keys()) {
-    QSqlQuery q(
-        QString(
+    QSqlQuery q(db);
+    q.prepare(QString(
             "SELECT NAME FROM %1.sqlite_master"
             " WHERE type='table' AND name='songs' OR name LIKE '%songs'")
-            .arg(key),
-        db);
+            .arg(key));
     if (q.exec()) {
       while (q.next()) {
         QString tab_name = key + "." + q.value(0).toString();
@@ -603,7 +607,7 @@ bool Database::IntegrityCheck(QSqlDatabase db) {
   bool ok = false;
   bool error_reported = false;
   // Ask for 10 error messages at most.
-  QSqlQuery q(QString("PRAGMA integrity_check(10)"), db);
+  QSqlQuery q("PRAGMA integrity_check(10)", db);
   while (q.next()) {
     QString message = q.value(0).toString();
 

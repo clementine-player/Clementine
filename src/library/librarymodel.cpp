@@ -164,7 +164,8 @@ void LibraryModel::Init(bool async) {
         new LibraryItem(LibraryItem::Type_LoadingIndicator, root_);
     loading->display_text = tr("Loading...");
     loading->lazy_loaded = true;
-    reset();
+    beginResetModel();
+    endResetModel();
 
     // Show a loading indicator in the status bar too.
     init_task_id_ = app_->task_manager()->StartTask(tr("Loading songs"));

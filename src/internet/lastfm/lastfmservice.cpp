@@ -28,14 +28,7 @@
 // some functions in their includes files, which aren't compatible with
 // QStringBuilder, we undef it here
 #include <QtGlobal>
-#if QT_VERSION >= 0x040600
-#if QT_VERSION >= 0x040800
 #undef QT_USE_QSTRINGBUILDER
-#else
-#undef QT_USE_FAST_CONCATENATION
-#undef QT_USE_FAST_OPERATOR_PLUS
-#endif  // QT_VERSION >= 0x040800
-#endif  // QT_VERSION >= 0x040600
 
 #include "lastfmservice.h"
 
@@ -46,11 +39,12 @@
 #include <QMenu>
 #include <QMessageBox>
 #include <QSettings>
+#include <QUrlQuery>
 
 #ifdef HAVE_LIBLASTFM1
-#include <lastfm/RadioStation.h>
+#include <lastfm5/RadioStation.h>
 #else
-#include <lastfm/RadioStation>
+#include <lastfm5/RadioStation>
 #endif
 
 #include "lastfmcompat.h"
@@ -153,24 +147,28 @@ QByteArray SignApiRequest(QList<QPair<QString, QString>> params) {
 
 void LastFMService::Authenticate() {
   QUrl url("https://www.last.fm/api/auth/");
-  url.addQueryItem("api_key", kApiKey);
 
   LocalRedirectServer* server = new LocalRedirectServer(this);
   server->Listen();
 
-  url.addQueryItem("cb", server->url().toString());
+  QUrlQuery url_query;
+  url_query.addQueryItem("api_key", kApiKey);
+  url_query.addQueryItem("cb", server->url().toString());
+  url.setQuery(url_query);
 
   NewClosure(server, SIGNAL(Finished()), [this, server]() {
     server->deleteLater();
 
     const QUrl& url = server->request_url();
-    QString token = url.queryItemValue("token");
+    QString token = QUrlQuery(url).queryItemValue("token");
 
     QUrl session_url("https://ws.audioscrobbler.com/2.0/");
-    session_url.addQueryItem("api_key", kApiKey);
-    session_url.addQueryItem("method", "auth.getSession");
-    session_url.addQueryItem("token", token);
-    session_url.addQueryItem("api_sig", SignApiRequest(session_url.queryItems()));
+    QUrlQuery session_url_query;
+    session_url_query.addQueryItem("api_key", kApiKey);
+    session_url_query.addQueryItem("method", "auth.getSession");
+    session_url_query.addQueryItem("token", token);
+    session_url_query.addQueryItem("api_sig", SignApiRequest(session_url_query.queryItems()));
+    session_url.setQuery(session_url_query);
 
     QNetworkReply* reply = network_->get(QNetworkRequest(session_url));
     NewClosure(reply, SIGNAL(finished()), this, SLOT(AuthenticateReplyFinished(QNetworkReply*)), reply);
@@ -255,7 +253,7 @@ void LastFMService::UpdateSubscriberStatusFinished(QNetworkReply* reply) {
 
 QUrl LastFMService::FixupUrl(const QUrl& url) {
   QUrl ret;
-  ret.setEncodedUrl(url.toEncoded().replace(
+  ret.setUrl(url.toEncoded().replace(
       "USERNAME", QUrl::toPercentEncoding(lastfm::ws::Username)));
   return ret;
 }

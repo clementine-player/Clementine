@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.6)
+cmake_minimum_required(VERSION 2.8.11)
 set(CMAKE_CXX_STANDARD 11)
 
 set(QXT-SOURCES
@@ -10,8 +10,8 @@ set(QXT-MOC-HEADERS
   qxtglobalshortcut.h
 )
 
-find_package(X11)
 include_directories(${X11_INCLUDE_DIR})
+include_directories(${Qt5Gui_PRIVATE_INCLUDE_DIRS})
 
 if(WIN32)
   set(QXT-SOURCES ${QXT-SOURCES} qxtglobalshortcut_win.cpp)
@@ -21,9 +21,15 @@ else(WIN32)
   set(QXT-SOURCES ${QXT-SOURCES} qxtglobalshortcut_x11.cpp)
 endif(WIN32)
 
-QT4_WRAP_CPP(QXT-SOURCES-MOC ${QXT-MOC-HEADERS})
+QT5_WRAP_CPP(QXT-SOURCES-MOC ${QXT-MOC-HEADERS})
 
 ADD_LIBRARY(qxt STATIC
   ${QXT-SOURCES}
   ${QXT-SOURCES-MOC}
 )
+
+if(WIN32)
+  target_link_libraries(qxt Qt5::Core Qt5::Widgets)
+else(WIN32)
+  target_link_libraries(qxt Qt5::Core Qt5::Widgets Qt5::X11Extras)
+endif(WIN32)

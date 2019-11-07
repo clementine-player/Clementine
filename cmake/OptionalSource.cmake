@@ -15,7 +15,7 @@ macro(optional_source TOGGLE)
     list(APPEND OTHER_SOURCES ${OPTIONAL_SOURCE_HEADERS})
 
     set(_uic_sources)
-    qt4_wrap_ui(_uic_sources ${OPTIONAL_SOURCE_UI})
+    qt5_wrap_ui(_uic_sources ${OPTIONAL_SOURCE_UI})
     list(APPEND OTHER_SOURCES ${_uic_sources})
     list(APPEND OTHER_UIC_SOURCES ${_uic_sources})
   endif(${TOGGLE})

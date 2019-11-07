@@ -22,6 +22,7 @@
 
 #include <QFile>
 #include <QStringList>
+#include <QUrlQuery>
 #include <QtDebug>
 
 #include "giolister.h"
@@ -187,8 +188,10 @@ QList<QUrl> GioLister::MakeDeviceUrls(const QString& id) {
   if (url.isValid()) {
     QRegExp device_re("usb/(\\d+)/(\\d+)");
     if (device_re.indexIn(unix_device) >= 0) {
-      url.addQueryItem("busnum", device_re.cap(1));
-      url.addQueryItem("devnum", device_re.cap(2));
+      QUrlQuery url_query(url);
+      url_query.addQueryItem("busnum", device_re.cap(1));
+      url_query.addQueryItem("devnum", device_re.cap(2));
+      url.setQuery(url_query);
     }
 
     // Special case for file:// GIO URIs - we have to check whether they point

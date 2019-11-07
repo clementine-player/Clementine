@@ -22,8 +22,11 @@
 
 #include <cmath>
 
-#include <qjson/parser.h>
 #include <QTimer>
+#include <QUrlQuery>
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QJsonArray>
 
 #include "core/application.h"
 #include "core/taskmanager.h"
@@ -86,7 +89,7 @@ bool SeafileService::has_credentials() const {
 
 void SeafileService::AddAuthorizationHeader(QNetworkRequest* request) const {
   request->setRawHeader("Authorization",
-                        QString("Token %1").arg(access_token_).toAscii());
+                        QString("Token %1").arg(access_token_).toLatin1());
 }
 
 void SeafileService::ForgetCredentials() {
@@ -104,13 +107,15 @@ void SeafileService::ForgetCredentials() {
 bool SeafileService::GetToken(const QString& mail, const QString& password,
                               const QString& server) {
   QUrl url(server + kAuthTokenUrl);
+  QUrlQuery url_query;
+
+  url_query.addQueryItem("username", mail);
+  url_query.addQueryItem("password", password);
+
   QNetworkRequest request(url);
   AddAuthorizationHeader(&request);
 
-  url.addQueryItem("username", mail);
-  url.addQueryItem("password", password);
-
-  QNetworkReply* reply = network_->post(request, url.encodedQuery());
+  QNetworkReply* reply = network_->post(request, url_query.toString().toLatin1());
   WaitForSignal(reply, SIGNAL(finished()));
 
   if (!CheckReply(&reply)) {
@@ -120,11 +125,10 @@ bool SeafileService::GetToken(const QString& mail, const QString& password,
 
   reply->deleteLater();
 
-  QJson::Parser parser;
-  QVariantMap response = parser.parse(reply->readAll()).toMap();
+  QJsonObject json_response = QJsonDocument::fromJson(reply->readAll()).object();
 
   // Because the server responds "token"
-  access_token_ = response["token"].toString().replace("\"", "");
+  access_token_ = json_response["token"].toString().replace("\"", "");
 
   if (access_token_.isEmpty()) {
     return false;
@@ -162,11 +166,11 @@ void SeafileService::GetLibrariesFinished(QNetworkReply* reply) {
   // key : id, value : name
   QMap<QString, QString> libraries;
   QByteArray data = reply->readAll();
-  QJson::Parser parser;
-  QList<QVariant> repos = parser.parse(data).toList();
 
-  for (int i = 0; i < repos.size(); ++i) {
-    QVariantMap repo = repos.at(i).toMap();
+  QJsonArray json_repos = QJsonDocument::fromJson(data).array();
+
+  for (const QJsonValue & json_repo: json_repos) {
+    QJsonObject repo = json_repo.toObject();
     QString repo_name = repo["name"].toString(),
             repo_id = repo["id"].toString();
 
@@ -289,7 +293,9 @@ void SeafileService::UpdateLibrariesInProgress(
 QNetworkReply* SeafileService::PrepareFetchFolderItems(const QString& library,
                                                        const QString& path) {
   QUrl url(server_ + QString(kFolderItemsUrl).arg(library));
-  url.addQueryItem("p", path);
+  QUrlQuery url_query;
+  url_query.addQueryItem("p", path);
+  url.setQuery(url_query);
 
   QNetworkRequest request(url);
   AddAuthorizationHeader(&request);
@@ -323,12 +329,11 @@ void SeafileService::FetchAndCheckFolderItemsFinished(
 
   QByteArray data = reply->readAll();
 
-  QJson::Parser parser;
-  QList<QVariant> variant_entries = parser.parse(data).toList();
+  QJsonArray json_entries = QJsonDocument::fromJson(data).array();
 
   SeafileTree::Entries entries;
-  for (const QVariant& e : variant_entries) {
-    QVariantMap entry = e.toMap();
+  for (const QJsonValue& e : json_entries) {
+    QJsonObject entry = e.toObject();
     SeafileTree::Entry::Type entry_type =
         SeafileTree::Entry::StringToType(entry["type"].toString());
     QString entry_name = entry["name"].toString();
@@ -373,14 +378,13 @@ void SeafileService::AddRecursivelyFolderItemsFinished(QNetworkReply* reply,
   reply->deleteLater();
 
   QByteArray data = reply->readAll();
-  QJson::Parser parser;
-  QList<QVariant> entries = parser.parse(data).toList();
+  QJsonArray json_entries = QJsonDocument::fromJson(data).array();
 
-  for (const QVariant& e : entries) {
-    QVariantMap entry_map = e.toMap();
+  for (const QJsonValue& e : json_entries) {
+    QJsonObject json_entry = e.toObject();
     SeafileTree::Entry::Type entry_type =
-        SeafileTree::Entry::StringToType(entry_map["type"].toString());
-    QString entry_name = entry_map["name"].toString();
+        SeafileTree::Entry::StringToType(json_entry["type"].toString());
+    QString entry_name = json_entry["name"].toString();
 
     // We just want libraries/directories and files which could be songs.
     if (entry_type == SeafileTree::Entry::NONE) {
@@ -390,7 +394,7 @@ void SeafileService::AddRecursivelyFolderItemsFinished(QNetworkReply* reply,
       continue;
     }
 
-    SeafileTree::Entry entry(entry_name, entry_map["id"].toString(),
+    SeafileTree::Entry entry(entry_name, json_entry["id"].toString(),
                              entry_type);
 
     // If AddEntry was not successful we stop
@@ -412,7 +416,9 @@ void SeafileService::AddRecursivelyFolderItemsFinished(QNetworkReply* reply,
 QNetworkReply* SeafileService::PrepareFetchContentForFile(
     const QString& library, const QString& filepath) {
   QUrl content_url(server_ + QString(kFileContentUrl).arg(library));
-  content_url.addQueryItem("p", filepath);
+  QUrlQuery content_url_query;
+  content_url_query.addQueryItem("p", filepath);
+  content_url.setQuery(content_url_query);
 
   QNetworkRequest request(content_url);
   AddAuthorizationHeader(&request);
@@ -449,23 +455,22 @@ void SeafileService::MaybeAddFileEntryInProgress(QNetworkReply* reply,
 
   QByteArray data = reply->readAll();
 
-  QJson::Parser parser;
-  QVariantMap entry_detail_map = parser.parse(data).toMap();
+  QJsonObject json_entry_detail = QJsonDocument::fromJson(data).object();
 
   QUrl url;
   url.setScheme("seafile");
-  url.setPath("/" + library + path + entry_detail_map["name"].toString());
+  url.setPath("/" + library + path + json_entry_detail["name"].toString());
 
   Song song;
   song.set_url(url);
   song.set_ctime(0);
-  song.set_mtime(entry_detail_map["mtime"].toInt());
-  song.set_filesize(entry_detail_map["size"].toInt());
-  song.set_title(entry_detail_map["name"].toString());
+  song.set_mtime(json_entry_detail["mtime"].toInt());
+  song.set_filesize(json_entry_detail["size"].toInt());
+  song.set_title(json_entry_detail["name"].toString());
 
   // Get the download url of the entry
   reply = PrepareFetchContentUrlForFile(
-      library, path + entry_detail_map["name"].toString());
+      library, path + json_entry_detail["name"].toString());
   NewClosure(
       reply, SIGNAL(finished()), this,
       SLOT(FetchContentUrlForFileFinished(QNetworkReply*, Song, QString)),
@@ -475,9 +480,11 @@ void SeafileService::MaybeAddFileEntryInProgress(QNetworkReply* reply,
 QNetworkReply* SeafileService::PrepareFetchContentUrlForFile(
     const QString& library, const QString& filepath) {
   QUrl content_url(server_ + QString(kFileUrl).arg(library));
-  content_url.addQueryItem("p", filepath);
+  QUrlQuery content_url_query;
+  content_url_query.addQueryItem("p", filepath);
   // See https://github.com/haiwen/seahub/issues/677
-  content_url.addQueryItem("reuse", "1");
+  content_url_query.addQueryItem("reuse", "1");
+  content_url.setQuery(content_url_query);
 
   QNetworkRequest request(content_url);
   AddAuthorizationHeader(&request);
@@ -643,7 +650,7 @@ bool SeafileService::CheckReply(QNetworkReply** reply, int tries) {
 
   // Unknown, 404 ...
   (*reply)->deleteLater();
-  qLog(Warning) << "Error for reply : " << status_code_variant.toInt();
+  qLog(Warning) << "Error with the reply : " << status_code_variant.toInt();
   return false;
 }
 

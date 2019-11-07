@@ -29,6 +29,10 @@
 #include "core/logging.h"
 #include "core/signalchecker.h"
 
+#ifndef u_int32_t
+typedef unsigned int u_int32_t;
+#endif
+
 static const int kDecodeRate = 11025;
 static const int kDecodeChannels = 1;
 static const int kPlayLengthSecs = 30;
@@ -42,7 +46,7 @@ Chromaprinter::~Chromaprinter() {}
 GstElement* Chromaprinter::CreateElement(const QString& factory_name,
                                          GstElement* bin) {
   GstElement* ret = gst_element_factory_make(
-      factory_name.toAscii().constData(), factory_name.toAscii().constData());
+      factory_name.toLatin1().constData(), factory_name.toLatin1().constData());
 
   if (ret && bin) gst_bin_add(GST_BIN(bin), ret);
 

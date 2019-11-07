@@ -229,7 +229,7 @@ Song MagnatuneService::ReadTrack(QXmlStreamReader& reader) {
       if (name == "url") {
         QUrl url;
         // Magnatune's URLs are already encoded
-        url.setEncodedUrl(value.toLocal8Bit());
+        url.setUrl(value.toLocal8Bit());
         url.setScheme("magnatune");
         song.set_url(url);
       }

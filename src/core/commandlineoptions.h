@@ -33,7 +33,7 @@ class CommandlineOptions {
   friend QDataStream& operator>>(QDataStream& s, CommandlineOptions& a);
 
  public:
-  explicit CommandlineOptions(int argc = 0, char* *argv = nullptr);
+  explicit CommandlineOptions(int argc = 0, char** argv = nullptr);
 
   static const char* kHelpText;
   static const char* kVersionText;

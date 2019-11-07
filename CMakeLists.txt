@@ -1,5 +1,6 @@
-cmake_minimum_required(VERSION 2.6)
+cmake_minimum_required(VERSION 2.8.11)
 cmake_policy(SET CMP0011 OLD)
+cmake_policy(SET CMP0053 OLD)
 
 include(CheckCXXCompilerFlag)
 include(FindPkgConfig)
@@ -46,7 +47,6 @@ find_package(PkgConfig REQUIRED)
 find_package(Protobuf REQUIRED)
 find_package(FFTW3)
 find_package(ALSA)
-pkg_check_modules(DBUS dbus-1)
 if (NOT APPLE)
   find_package(X11)
 endif()
@@ -70,39 +70,58 @@ pkg_check_modules(GSTREAMER_TAG REQUIRED gstreamer-tag-1.0)
 pkg_check_modules(GSTREAMER_PBUTILS REQUIRED gstreamer-pbutils-1.0)
 pkg_check_modules(LIBGPOD libgpod-1.0>=0.7.92)
 pkg_check_modules(LIBMTP libmtp>=1.0)
-pkg_check_modules(LIBMYGPO_QT libmygpo-qt>=1.0.9)
+pkg_check_modules(LIBMYGPO_QT5 libmygpo-qt5>=1.0.9)
 pkg_check_modules(LIBPULSE libpulse)
 pkg_check_modules(LIBXML libxml-2.0)
-pkg_check_modules(QJSON REQUIRED QJson)
 pkg_check_modules(LIBSPOTIFY libspotify>=12.1.45)
 pkg_check_modules(TAGLIB taglib)
 
 if (WIN32)
   find_package(ZLIB REQUIRED)
-  find_library(QTSPARKLE_LIBRARIES qtsparkle)
+  find_library(QTSPARKLE_LIBRARIES qtsparkle-qt5)
 endif (WIN32)
 
-find_library(LASTFM_LIBRARIES lastfm)
-find_path(LASTFM_INCLUDE_DIRS lastfm/ws.h)
-find_path(LASTFM1_INCLUDE_DIRS lastfm/Track.h)
+find_library(LASTFM5_LIBRARIES lastfm5)
+find_path(LASTFM5_INCLUDE_DIRS lastfm5/ws.h)
+find_path(LASTFM51_INCLUDE_DIRS lastfm5/Track.h)
 
 find_path(SPARSEHASH_INCLUDE_DIRS google/sparsetable)
 
 # QT
-find_package(Qt4 4.8.1 REQUIRED QtCore QtGui QtSql QtNetwork QtXml)
-if (DBUS_FOUND)
-  find_package(Qt4 REQUIRED QtDbus)
-endif ()
-if (OPENGL_FOUND)
-  find_package(Qt4 REQUIRED QtOpenGL)
-endif(OPENGL_FOUND)
+set(QT_MIN_VERSION 5.6.0)
+find_package(Qt5 ${QT_MIN_VERSION} REQUIRED COMPONENTS Core Concurrent Widgets Network Sql Xml OpenGL Test)
+find_package(Qt5DBus ${QT_MIN_VERSION})
+if(HAVE_X11)
+  find_package(Qt5 ${QT_MIN_VERSION} REQUIRED COMPONENTS X11Extras)
+endif()
+if(APPLE)
+  find_package(Qt5 REQUIRED COMPONENTS MacExtras)
+endif()
+if(WIN32)
+  find_package(Qt5 REQUIRED COMPONENTS WinExtras)
+endif()
 
-# We can include the Qt definitions now
-include(${QT_USE_FILE})
+set(QT_LIBRARIES Qt5::Core Qt5::Concurrent Qt5::Widgets Qt5::Network Qt5::Sql Qt5::Xml Qt5::OpenGL)
 
-# Find Qt's lconvert binary.  Try qt's binary dir first, fall back to looking in PATH
-find_program(QT_LCONVERT_EXECUTABLE NAMES lconvert lconvert-qt4 PATHS ${QT_BINARY_DIR} NO_DEFAULT_PATH)
-find_program(QT_LCONVERT_EXECUTABLE NAMES lconvert lconvert-qt4)
+if(Qt5DBus_FOUND)
+  set(QT_LIBRARIES ${QT_LIBRARIES} Qt5::DBus)
+  get_target_property(QT_DBUSXML2CPP_EXECUTABLE Qt5::qdbusxml2cpp LOCATION)
+endif()
+if(HAVE_X11)
+  set(QT_LIBRARIES ${QT_LIBRARIES} Qt5::X11Extras)
+endif()
+if(APPLE)
+  set(QT_LIBRARIES ${QT_LIBRARIES} Qt5::MacExtras)
+endif()
+if(WIN32)
+  set(QT_LIBRARIES ${QT_LIBRARIES} Qt5::WinExtras)
+endif()
+
+find_package(Qt5LinguistTools CONFIG)
+if (Qt5LinguistTools_FOUND)
+  set(QT_LCONVERT_EXECUTABLE Qt5::lconvert)
+endif()
+
 
 # Only use system taglib if it's greater than 1.11.1
 # There is a bug in version 1.11.1 corrupting Ogg files, see: https://github.com/taglib/taglib/issues/864
@@ -140,7 +159,7 @@ else()
   add_subdirectory(3rdparty/taglib)
 endif()
 
-if(LASTFM_INCLUDE_DIRS AND LASTFM1_INCLUDE_DIRS)
+if(LASTFM5_INCLUDE_DIRS AND LASTFM51_INCLUDE_DIRS)
   set(HAVE_LIBLASTFM1 ON)
 endif()
 
@@ -163,17 +182,16 @@ find_package(Threads)
 if(${CMAKE_BUILD_TYPE} MATCHES "Release")
   add_definitions(-DNDEBUG)
   add_definitions(-DQT_NO_DEBUG_OUTPUT)
+  add_definitions(-DQT_NO_WARNING_OUTPUT)
 endif(${CMAKE_BUILD_TYPE} MATCHES "Release")
 
 # Set up definitions and paths
 add_definitions(${QT_DEFINITIONS})
 link_directories(${TAGLIB_LIBRARY_DIRS})
-link_directories(${QJSON_LIBRARY_DIRS})
 link_directories(${GSTREAMER_LIBRARY_DIRS})
 
 include_directories(${Boost_INCLUDE_DIRS})
 include_directories(${TAGLIB_INCLUDE_DIRS})
-include_directories(${QJSON_INCLUDE_DIRS})
 include_directories(${GSTREAMER_INCLUDE_DIRS})
 include_directories(${GSTREAMER_APP_INCLUDE_DIRS})
 include_directories(${GSTREAMER_AUDIO_INCLUDE_DIRS})
@@ -257,23 +275,23 @@ optional_component(LIBMTP ON "Devices: MTP support"
 )
 
 optional_component(LIBLASTFM ON "Last.fm support"
-  DEPENDS "liblastfm" LASTFM_LIBRARIES LASTFM_INCLUDE_DIRS
+  DEPENDS "liblastfm" LASTFM5_LIBRARIES LASTFM5_INCLUDE_DIRS
 )
 
 optional_component(DBUS ON "D-Bus support"
-  DEPENDS "D-Bus" DBUS_FOUND
+  DEPENDS "Qt5DBus" Qt5DBus_FOUND
 )
 
 optional_component(WIIMOTEDEV ON "Wiimote support"
-  DEPENDS "D-Bus support" DBUS_FOUND
+  DEPENDS "D-Bus support" Qt5DBus_FOUND
 )
 
 optional_component(DEVICEKIT ON "Devices: DeviceKit backend"
-  DEPENDS "D-Bus support" DBUS_FOUND
+  DEPENDS "D-Bus support" Qt5DBus_FOUND
 )
 
 optional_component(UDISKS2 ON "Devices: UDisks2 backend"
-  DEPENDS "D-Bus support" DBUS_FOUND
+  DEPENDS "D-Bus support" Qt5DBus_FOUND
 )
 
 optional_component(SPOTIFY_BLOB ON "Spotify support: non-GPL binary helper"
@@ -312,7 +330,7 @@ optional_component(VISUALISATIONS ON "Visualisations"
 
 optional_component(TRANSLATIONS ON "Translations"
   DEPENDS "gettext" GETTEXT_XGETTEXT_EXECUTABLE
-  DEPENDS "lconvert" QT_LCONVERT_EXECUTABLE
+  DEPENDS "Qt5LinguistTools" Qt5LinguistTools_FOUND
 )
 
 option(USE_BUNDLE "Bundle macos/windows dependencies" ON)
@@ -359,9 +377,9 @@ include_directories("3rdparty/qsqlite")
 # to system installed qtsingleapplication instead.
 option(USE_SYSTEM_QTSINGLEAPPLICATION "Don't set this option unless your system QtSingleApplication library has been compiled with the Clementine patches in 3rdparty" OFF)
 if(USE_SYSTEM_QTSINGLEAPPLICATION)
-  find_path(QTSINGLEAPPLICATION_INCLUDE_DIRS qtsingleapplication.h PATH_SUFFIXES QtSolutions)
-  find_library(QTSINGLEAPPLICATION_LIBRARIES QtSolutions_SingleApplication-2.6)
-  find_library(QTSINGLECOREAPPLICATION_LIBRARIES QtSolutions_SingleCoreApplication-2.6)
+  find_path(QTSINGLEAPPLICATION_INCLUDE_DIRS qtsingleapplication.h PATH_SUFFIXES qt5/QtSolutions)
+  find_library(QTSINGLEAPPLICATION_LIBRARIES Qt5Solutions_SingleApplication-2.6)
+  find_library(QTSINGLECOREAPPLICATION_LIBRARIES Qt5Solutions_SingleCoreApplication-2.6)
 else(USE_SYSTEM_QTSINGLEAPPLICATION)
   add_subdirectory(3rdparty/qtsingleapplication)
   set(QTSINGLEAPPLICATION_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/qtsingleapplication)
@@ -382,11 +400,11 @@ endif(NOT QTIOCOMPRESSOR_INCLUDE_DIRS OR NOT QTIOCOMPRESSOR_LIBRARIES)
 # used to link to system installed qxt instead.
 option(USE_SYSTEM_QXT "Don't set this option unless your system Qxt library has been compiled with the Clementine patches in 3rdparty" OFF)
 if (USE_SYSTEM_QXT)
-  find_path(QXTCORE_INCLUDE_DIRS qxtglobal.h PATH_SUFFIXES QxtCore)
-  find_path(QXTGUI_INCLUDE_DIRS qxtglobalshortcut.h PATH_SUFFIXES QxtGui)
+  find_path(QXTCORE_INCLUDE_DIRS qxtglobal.h PATH_SUFFIXES qt5/QxtCore)
+  find_path(QXTGUI_INCLUDE_DIRS qxtglobalshortcut.h PATH_SUFFIXES qt5/QxtWidgets)
   set(QXT_INCLUDE_DIRS ${QXTCORE_INCLUDE_DIRS} ${QXTGUI_INCLUDE_DIRS})
   # We only need its header. We don't need to link to QxtCore.
-  find_library(QXT_LIBRARIES QxtGui)
+  find_library(QXT_LIBRARIES QxtWidgets-qt5)
 else (USE_SYSTEM_QXT)
   add_definitions(-DQXT_STATIC -DBUILD_QXT_GUI -DBUILD_QXT_CORE)
   set(QXT_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/qxt)
@@ -409,29 +427,15 @@ if(GMOCK_INCLUDE_DIRS)
   endif(GTEST_INCLUDE_DIRS)
 endif(GMOCK_INCLUDE_DIRS)
 
-# Use the system's sha2 if it's available.
-find_path(SHA2_INCLUDE_DIRS sha2.h)
-find_library(SHA2_LIBRARIES sha2)
-if(SHA2_LIBRARIES AND SHA2_INCLUDE_DIRS)
-  message(STATUS "Using system sha2 library")
-  set(USE_SYSTEM_SHA2 ON)
+# Use the system libmygpo-qt5 if a recent enough version was found
+if(LIBMYGPO_QT5_FOUND)
+  set(MYGPOQT5_LIBRARIES ${LIBMYGPO_QT5_LIBRARIES})
+  set(MYGPOQT5_INCLUDE_DIRS ${LIBMYGPO_QT5_INCLUDE_DIRS})
 else()
-  message(STATUS "Using builtin sha2 library")
-  set(USE_SYSTEM_SHA2 OFF)
-  add_subdirectory(3rdparty/sha2)
-  set(SHA2_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/sha2)
-  set(SHA2_LIBRARIES sha2)
-endif()
-
-# Use the system libmygpo-qt if a recent enough version was found
-if(LIBMYGPO_QT_FOUND)
-  set(MYGPOQT_LIBRARIES ${LIBMYGPO_QT_LIBRARIES})
-  set(MYGPOQT_INCLUDE_DIRS ${LIBMYGPO_QT_INCLUDE_DIRS})
-else()
-  add_definitions(-DMYGPO_EXPORT=)
-  add_subdirectory(3rdparty/libmygpo-qt)
-  set(MYGPOQT_LIBRARIES mygpo-qt)
-  set(MYGPOQT_INCLUDE_DIRS ${CMAKE_SOURCE_DIR}/3rdparty/libmygpo-qt/)
+  add_definitions(-DMYGPO_STATIC)
+  add_subdirectory(3rdparty/libmygpo-qt5)
+  set(MYGPOQT5_LIBRARIES mygpo-qt5)
+  set(MYGPOQT5_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/libmygpo-qt5/src)
 endif()
 
 # Qocoa
@@ -440,7 +444,6 @@ add_subdirectory(3rdparty/qocoa)
 # Subdirectories
 add_subdirectory(src)
 if (WIN32)
-  add_subdirectory(3rdparty/qtwin)
   add_subdirectory(3rdparty/tinysvcmdns)
 endif (WIN32)
 add_subdirectory(tests)
@@ -449,7 +452,9 @@ add_subdirectory(ext/libclementine-common)
 add_subdirectory(ext/libclementine-tagreader)
 add_subdirectory(ext/clementine-tagreader)
 add_subdirectory(ext/libclementine-remote)
-add_subdirectory(ext/libclementine-spotifyblob)
+if(HAVE_SPOTIFY)
+  add_subdirectory(ext/libclementine-spotifyblob)
+endif(HAVE_SPOTIFY)
 
 option(WITH_DEBIAN OFF)
 if(WITH_DEBIAN)

@@ -56,9 +56,7 @@ void DeviceItemDelegate::paint(QPainter* p, const QStyleOptionViewItem& opt,
   }
 
   // Draw the background
-  const QStyleOptionViewItemV3* vopt =
-      qstyleoption_cast<const QStyleOptionViewItemV3*>(&opt);
-  const QWidget* widget = vopt->widget;
+  const QWidget* widget = opt.widget;
   QStyle* style = widget->style() ? widget->style() : QApplication::style();
   style->drawPrimitive(QStyle::PE_PanelItemViewItem, &opt, p, widget);
 

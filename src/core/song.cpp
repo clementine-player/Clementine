@@ -45,9 +45,9 @@
 #ifdef HAVE_LIBLASTFM
 #include "internet/lastfm/fixlastfm.h"
 #ifdef HAVE_LIBLASTFM1
-#include <lastfm/Track.h>
+#include <lastfm5/Track.h>
 #else
-#include <lastfm/Track>
+#include <lastfm5/Track>
 #endif
 #endif
 

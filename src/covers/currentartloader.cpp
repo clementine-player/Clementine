@@ -61,7 +61,7 @@ void CurrentArtLoader::TempArtLoaded(quint64 id, const QImage& image) {
   QString thumbnail_uri;
   QImage thumbnail;
 
-  if (!image.isNull()) {
+  if (image != options_.default_output_image_) {
     temp_art_.reset(new QTemporaryFile(temp_file_pattern_));
     temp_art_->setAutoRemove(true);
     temp_art_->open();

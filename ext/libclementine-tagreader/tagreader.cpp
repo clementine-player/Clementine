@@ -1312,7 +1312,7 @@ QByteArray TagReader::LoadEmbeddedArt(const QString& filename) const {
 
       int pos = data.find('\0') + 1;
       if ((pos > 0) && (pos < data.size())) {
-          cover = QByteArray(data.data() + pos, data.size() - pos);
+        cover = QByteArray(data.data() + pos, data.size() - pos);
       }
     }
 

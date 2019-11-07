@@ -252,7 +252,8 @@ QSqlQuery LibraryQuery::Exec(QSqlDatabase db, const QString& songs_table,
   sql.replace("%fts_table_noprefix", fts_table.section('.', -1, -1));
   sql.replace("%fts_table", fts_table);
 
-  query_ = QSqlQuery(sql, db);
+  query_ = QSqlQuery(db);
+  query_.prepare(sql);
 
   // Bind values
   for (const QVariant& value : bound_values_) {

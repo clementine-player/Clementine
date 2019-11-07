@@ -20,9 +20,11 @@
 #include <QtGlobal>
 
 #ifdef Q_OS_WIN32
-#define _WIN32_WINNT 0x0600
-#include <windows.h>
-#include <iostream>
+#  ifndef _WIN32_WINNT
+#    define _WIN32_WINNT 0x0600
+#  endif
+#  include <windows.h>
+#  include <iostream>
 #endif  // Q_OS_WIN32
 
 #ifdef Q_OS_UNIX
@@ -95,33 +97,22 @@ const QDBusArgument& operator>>(const QDBusArgument& arg, QImage& image);
 #endif
 
 #ifdef Q_OS_WIN32
-#include <qtsparkle/Updater>
+#include <qtsparkle-qt5/Updater>
 #endif
 
 // Load sqlite plugin on windows and mac.
 #include <QtPlugin>
-Q_IMPORT_PLUGIN(qsqlite)
+Q_IMPORT_PLUGIN(QSQLiteDriverPlugin)
 
 namespace {
 
 void LoadTranslation(const QString& prefix, const QString& path,
                      const QString& language) {
-#if QT_VERSION < 0x040700
-  // QTranslator::load will try to open and read "clementine" if it exists,
-  // without checking if it's a file first.
-  // This was fixed in Qt 4.7
-  QFileInfo maybe_clementine_directory(path + "/clementine");
-  if (maybe_clementine_directory.exists() &&
-      !maybe_clementine_directory.isFile())
-    return;
-#endif
-
   QTranslator* t = new PoTranslator;
   if (t->load(prefix + "_" + language, path))
     QCoreApplication::installTranslator(t);
   else
     delete t;
-  QTextCodec::setCodecForTr(QTextCodec::codecForLocale());
 }
 
 void IncreaseFDLimit() {
@@ -164,10 +155,10 @@ void SetGstreamerEnvironment() {
 // On windows and mac we bundle the gstreamer plugins with clementine
 #ifdef USE_BUNDLE
 #if defined(Q_OS_DARWIN)
-  scanner_path = QCoreApplication::applicationDirPath() + "/" + USE_BUNDLE_DIR +
-                 "/gst-plugin-scanner";
-  plugin_path = QCoreApplication::applicationDirPath() + "/" + USE_BUNDLE_DIR +
-                "/gstreamer";
+  scanner_path =
+      QCoreApplication::applicationDirPath() + "/" + USE_BUNDLE_DIR + "/gst-plugin-scanner";
+  plugin_path =
+      QCoreApplication::applicationDirPath() + "/" + USE_BUNDLE_DIR + "/gstreamer";
 #elif defined(Q_OS_WIN32)
   plugin_path = QCoreApplication::applicationDirPath() + "/gstreamer-plugins";
 #endif
@@ -191,8 +182,8 @@ void SetGstreamerEnvironment() {
   }
 
 #if defined(Q_OS_DARWIN) && defined(USE_BUNDLE)
-  SetEnv("GIO_EXTRA_MODULES", QCoreApplication::applicationDirPath() + "/" +
-                                  USE_BUNDLE_DIR + "/gio-modules");
+  SetEnv("GIO_EXTRA_MODULES",
+         QCoreApplication::applicationDirPath() + "/" + USE_BUNDLE_DIR + "/gio-modules");
 #endif
 
   SetEnv("PULSE_PROP_media.role", "music");
@@ -325,7 +316,7 @@ int main(int argc, char* argv[]) {
 
   // Output the version, so when people attach log output to bug reports they
   // don't have to tell us which version they're using.
-  qLog(Info) << "Clementine" << CLEMENTINE_VERSION_DISPLAY;
+  qLog(Info) << "Clementine-qt5" << CLEMENTINE_VERSION_DISPLAY;
 
   // Seed the random number generators.
   time_t t = time(nullptr);
@@ -353,18 +344,15 @@ int main(int argc, char* argv[]) {
   }
 
 #if defined(Q_OS_DARWIN) && defined(USE_BUNDLE)
-  qLog(Debug) << "Looking for resources in" +
-                     QCoreApplication::applicationDirPath() + "/" +
-                     USE_BUNDLE_DIR;
-  QCoreApplication::setLibraryPaths(QStringList()
-                                    << QCoreApplication::applicationDirPath() +
-                                           "/" + USE_BUNDLE_DIR);
+  qLog(Debug) << "Looking for resources in" + QCoreApplication::applicationDirPath() + "/" + USE_BUNDLE_DIR;
+  QCoreApplication::setLibraryPaths(
+      QStringList() << QCoreApplication::applicationDirPath() + "/" + USE_BUNDLE_DIR);
 #endif
 
   a.setQuitOnLastWindowClosed(false);
-
   // Do this check again because another instance might have started by now
-  if (a.isRunning() && a.sendMessage(options.Serialize(), 5000)) {
+  if (a.isRunning() &&
+      a.sendMessage(QString::fromLatin1(options.Serialize()), 5000)) {
     return 0;
   }
 
@@ -374,8 +362,6 @@ int main(int argc, char* argv[]) {
   QCoreApplication::setAttribute(Qt::AA_DontShowIconsInMenus, false);
 #else
   QCoreApplication::setAttribute(Qt::AA_DontShowIconsInMenus, true);
-  // Fixes focus issue with NSSearchField, see QTBUG-11401
-  QCoreApplication::setAttribute(Qt::AA_NativeWindows, true);
 #endif
 
   SetGstreamerEnvironment();
@@ -444,6 +430,7 @@ int main(int argc, char* argv[]) {
   QtConcurrent::run(&ParseAProto);
 
   Application app;
+  QObject::connect(&a, SIGNAL(aboutToQuit()), &app, SLOT(SaveSettings_()));
   app.set_language_name(language);
 
   // Network proxy
@@ -477,8 +464,8 @@ int main(int argc, char* argv[]) {
 #ifdef HAVE_DBUS
   QObject::connect(&mpris, SIGNAL(RaiseMainWindow()), &w, SLOT(Raise()));
 #endif
-  QObject::connect(&a, SIGNAL(messageReceived(QByteArray)), &w,
-                   SLOT(CommandlineOptionsReceived(QByteArray)));
+  QObject::connect(&a, SIGNAL(messageReceived(QString)), &w,
+                   SLOT(CommandlineOptionsReceived(QString)));
 
   int ret = a.exec();
 
@@ -494,7 +481,11 @@ int main(int argc, char* argv[]) {
   QFile self_maps("/proc/self/maps");
   if (self_maps.open(QIODevice::ReadOnly)) {
     QByteArray data = self_maps.readAll();
-    if (data.contains("libnvidia-tls.so.")) {
+    if (data.contains("libnvidia-tls.so.304.37") ||
+        data.contains("libnvidia-tls.so.285.03") ||
+        data.contains("libnvidia-tls.so.280.13") ||
+        data.contains("libnvidia-tls.so.275.28") ||
+        data.contains("libnvidia-tls.so.275.19")) {
       qLog(Warning) << "Exiting immediately to work around NVIDIA driver bug";
       _exit(ret);
     }

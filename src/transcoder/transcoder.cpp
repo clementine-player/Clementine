@@ -48,9 +48,9 @@ TranscoderPreset::TranscoderPreset(Song::FileType type, const QString& name,
 GstElement* Transcoder::CreateElement(const QString& factory_name,
                                       GstElement* bin, const QString& name) {
   GstElement* ret = gst_element_factory_make(
-      factory_name.toAscii().constData(),
-      name.isNull() ? factory_name.toAscii().constData()
-                    : name.toAscii().constData());
+      factory_name.toLatin1().constData(),
+      name.isNull() ? factory_name.toLatin1().constData()
+                    : name.toLatin1().constData());
 
   if (ret && bin) gst_bin_add(GST_BIN(bin), ret);
 

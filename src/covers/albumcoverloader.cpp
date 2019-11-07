@@ -202,6 +202,10 @@ AlbumCoverLoader::TryLoadResult AlbumCoverLoader::TryLoadImage(
     return TryLoadResult(true, false, QImage());
   }
 #endif
+  else if (filename.isEmpty()) {
+    // Avoid "QFSFileEngine::open: No file name specified" messages if we know that the filename is empty
+    return TryLoadResult(false, false, task.options.default_output_image_);
+  }
 
   QImage image(filename);
   return TryLoadResult(

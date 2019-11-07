@@ -26,7 +26,7 @@
 
 #include "playlist.h"
 
-class QCleanlooksStyle;
+class QCommonStyle;
 
 class Application;
 class DynamicPlaylistControls;
@@ -40,7 +40,7 @@ class QTimeLine;
 // that uses Gtk to paint row backgrounds, ignoring any custom brush or palette
 // the caller set in the QStyleOption.  That breaks our currently playing track
 // animation, which relies on the background painted by Qt to be transparent.
-// This proxy style uses QCleanlooksStyle to paint the affected elements.
+// This proxy style uses QCommonStyle to paint the affected elements.
 // This class is used by the global search view as well.
 class PlaylistProxyStyle : public QProxyStyle {
  public:
@@ -51,12 +51,14 @@ class PlaylistProxyStyle : public QProxyStyle {
                      QPainter* painter, const QWidget* widget) const;
 
  private:
-  std::unique_ptr<QCleanlooksStyle> cleanlooks_;
+  std::unique_ptr<QCommonStyle> common_style_;
 };
 
 class PlaylistView : public QTreeView {
   Q_OBJECT
  public:
+  ~PlaylistView();
+
   enum BackgroundImageType { Default, None, Custom, AlbumCover };
 
   PlaylistView(QWidget* parent = nullptr);
@@ -143,7 +145,9 @@ signals:
  private slots:
   void LoadGeometry();
   void LoadRatingLockStatus();
-  void SaveGeometry();
+  void DirtyGeometry();
+  void DirtySettings();
+  void SaveGeometry(QSettings* settings);
   void SetRatingLockStatus(bool state);
   void GlowIntensityChanged();
   void InhibitAutoscrollTimeout();
@@ -151,7 +155,7 @@ signals:
   void InvalidateCachedCurrentPixmap();
   void PlaylistDestroyed();
 
-  void SaveSettings();
+  void SaveSettings(QSettings* s);
   void StretchChanged(bool stretch);
 
   void RatingHoverIn(const QModelIndex& index, const QPoint& pos);
@@ -162,7 +166,7 @@ signals:
  private:
   void ReloadBarPixmaps();
   QList<QPixmap> LoadBarPixmap(const QString& filename);
-  void UpdateCachedCurrentRowPixmap(QStyleOptionViewItemV4 option,
+  void UpdateCachedCurrentRowPixmap(QStyleOptionViewItem option,
                                     const QModelIndex& index);
 
   void set_background_image_type(BackgroundImageType bg) {
@@ -194,6 +198,7 @@ signals:
   bool upgrading_from_qheaderview_;
   bool read_only_settings_;
   int upgrading_from_version_;
+  bool header_loaded_;
 
   bool background_initialized_;
   BackgroundImageType background_image_type_;
@@ -247,6 +252,9 @@ signals:
   QPixmap cached_tree_;
   int drop_indicator_row_;
   bool drag_over_;
+
+  bool dirty_geometry_;
+  bool dirty_settings_;
 
   bool ratings_locked_;  // To store Ratings section lock status
 

@@ -23,6 +23,7 @@
 #include <QNetworkReply>
 #include <QSet>
 #include <QXmlStreamReader>
+#include <QUrlQuery>
 
 #include "core/closure.h"
 #include "core/logging.h"
@@ -52,7 +53,9 @@ void MusicBrainzClient::Start(int id, const QStringList& mbid_list) {
     parameters << Param("inc", "artists+releases+media");
 
     QUrl url(kTrackUrl + mbid);
-    url.setQueryItems(parameters);
+    QUrlQuery url_query;
+    url_query.setQueryItems(parameters);
+    url.setQuery(url_query);
     QNetworkRequest req(url);
 
     QNetworkReply* reply = network_->get(req);
@@ -76,7 +79,9 @@ void MusicBrainzClient::StartDiscIdRequest(const QString& discid) {
   parameters << Param("inc", "artists+recordings");
 
   QUrl url(kDiscUrl + discid);
-  url.setQueryItems(parameters);
+  QUrlQuery url_query;
+  url_query.setQueryItems(parameters);
+  url.setQuery(url_query);
   QNetworkRequest req(url);
 
   QNetworkReply* reply = network_->get(req);

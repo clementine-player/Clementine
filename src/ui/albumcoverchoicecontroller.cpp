@@ -39,6 +39,7 @@
 #include <QList>
 #include <QMenu>
 #include <QUrl>
+#include <QMimeData>
 
 const char* AlbumCoverChoiceController::kLoadImageFileFilter = QT_TR_NOOP(
     "Images (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm)");
@@ -276,7 +277,7 @@ void AlbumCoverChoiceController::AlbumCoverPopupClosed() {
 
 void AlbumCoverChoiceController::SearchCoverAutomatically(const Song& song) {
   qint64 id = cover_fetcher_->FetchAlbumCover(song.effective_albumartist(),
-                                              song.effective_album());
+                                              song.effective_album(), false);
   cover_fetching_tasks_[id] = song;
 }
 

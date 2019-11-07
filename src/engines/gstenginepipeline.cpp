@@ -36,8 +36,8 @@
 #include "core/utilities.h"
 #include "internet/core/internetmodel.h"
 #ifdef HAVE_SPOTIFY
-#include "internet/spotify/spotifyserver.h"
-#include "internet/spotify/spotifyservice.h"
+#  include "internet/spotify/spotifyserver.h"
+#  include "internet/spotify/spotifyservice.h"
 #endif
 
 const int GstEnginePipeline::kGstStateTimeoutNanosecs = 10000000;
@@ -162,7 +162,7 @@ GstElement* GstEnginePipeline::CreateDecodeBinFromUrl(const QUrl& url) {
 #ifdef HAVE_SPOTIFY
   if (url.scheme() == "spotify") {
     new_bin = gst_bin_new("spotify_bin");
-    if (!new_bin) return nullptr; 
+    if (!new_bin) return nullptr;
 
     // Create elements
     GstElement* src = engine_->CreateElement("tcpserversrc", new_bin);
@@ -198,10 +198,17 @@ GstElement* GstEnginePipeline::CreateDecodeBinFromUrl(const QUrl& url) {
         Q_ARG(QString, url.toString()), Q_ARG(quint16, port));
   } else {
 #endif
+    QByteArray uri;
+    if (url.scheme() == "cdda") {
+      QString str = url.toString();
+      str.remove(str.lastIndexOf(QChar('a')), 1);
+      uri = str.toUtf8();
+    } else {
+      uri = url.toEncoded();
+    }
     new_bin = engine_->CreateElement("uridecodebin");
-    if (!new_bin) return nullptr; 
-    g_object_set(G_OBJECT(new_bin), "uri", url.toEncoded().constData(),
-                 nullptr);
+    if (!new_bin) return nullptr;
+    g_object_set(G_OBJECT(new_bin), "uri", uri.constData(), nullptr);
     CHECKED_GCONNECT(G_OBJECT(new_bin), "drained", &SourceDrainedCallback,
                      this);
     CHECKED_GCONNECT(G_OBJECT(new_bin), "pad-added", &NewPadCallback, this);
@@ -295,7 +302,7 @@ bool GstEnginePipeline::Init() {
   audioconvert_ = engine_->CreateElement("audioconvert", audiobin_);
   tee = engine_->CreateElement("tee", audiobin_);
 
-  probe_queue = engine_->CreateElement("queue2", audiobin_);
+  probe_queue = engine_->CreateElement("queue", audiobin_);
   probe_converter = engine_->CreateElement("audioconvert", audiobin_);
   probe_sink = engine_->CreateElement("fakesink", audiobin_);
 
@@ -461,7 +468,7 @@ bool GstEnginePipeline::Init() {
   gst_pad_add_probe(pad, GST_PAD_PROBE_TYPE_BUFFER, HandoffCallback, this,
                     nullptr);
   gst_object_unref(pad);
-  GstBus *bus = gst_pipeline_get_bus(GST_PIPELINE(pipeline_));
+  GstBus* bus = gst_pipeline_get_bus(GST_PIPELINE(pipeline_));
   gst_bus_set_sync_handler(bus, BusCallbackSync, this, nullptr);
   bus_cb_id_ = gst_bus_add_watch(bus, BusCallback, this);
   gst_object_unref(bus);
@@ -485,7 +492,7 @@ bool GstEnginePipeline::InitFromString(const QString& pipeline) {
   pipeline_ = gst_pipeline_new("pipeline");
 
   GstElement* new_bin =
-      CreateDecodeBinFromString(pipeline.toAscii().constData());
+      CreateDecodeBinFromString(pipeline.toLatin1().constData());
   if (!new_bin) {
     return false;
   }
@@ -524,7 +531,7 @@ bool GstEnginePipeline::InitFromUrl(const QUrl& url, qint64 end_nanosec) {
 
 GstEnginePipeline::~GstEnginePipeline() {
   if (pipeline_) {
-    GstBus *bus = gst_pipeline_get_bus(GST_PIPELINE(pipeline_));
+    GstBus* bus = gst_pipeline_get_bus(GST_PIPELINE(pipeline_));
     gst_bus_set_sync_handler(bus, nullptr, nullptr, nullptr);
     gst_object_unref(bus);
 

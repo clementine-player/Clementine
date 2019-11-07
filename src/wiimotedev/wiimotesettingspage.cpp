@@ -27,7 +27,7 @@
 WiimoteSettingsPage::WiimoteSettingsPage(SettingsDialog* dialog)
     : SettingsPage(dialog), ui_(new Ui_WiimoteSettingsPage) {
   ui_->setupUi(this);
-  ui_->list->header()->setResizeMode(QHeaderView::ResizeToContents);
+  ui_->list->header()->setSectionResizeMode(QHeaderView::ResizeToContents);
   setWindowIcon(IconLoader::Load("wiimotedev", IconLoader::Base));
   ui_->wiimotedev_add_action->setIcon(IconLoader::Load("list-add",
                                       IconLoader::Base));

@@ -144,41 +144,33 @@ commands:
           name: Install Dependencies
           command: >
             apt-get update && apt-get install -y
+            build-essential
             cmake
-            fakeroot
             gettext
             git
             libasound2-dev
             libboost-dev
-            libboost-serialization-dev
-            libcdio-cdda2
             libcdio-dev
             libchromaprint-dev
-            libcrypto++-dev
             libdbus-1-dev
             libfftw3-dev
             libglew1.5-dev
+            libglib2.0-dev
             libgpod-dev
             libgstreamer-plugins-base1.0-dev
             libgstreamer1.0-dev
-            liblastfm-dev
             libmtp-dev
-            libmygpo-qt-dev
-            libplist-dev
             libprotobuf-dev
             libpulse-dev
-            libqca2-dev
-            libqca2-plugins
-            libqjson-dev
-            libqt4-dev
-            libqt4-opengl-dev
-            libqtwebkit-dev
-            libsparsehash-dev
+            libqt5x11extras5-dev
             libsqlite3-dev
             libtag1-dev
-            libusbmuxd-dev
+            pkg-config
             protobuf-compiler
-            qt4-dev-tools
+            qtbase5-dev
+            qttools5-dev-tools
+            qttools5-dev
+            libsparsehash-dev
             ssh
   install_disco_dependencies:
     description: Install Disco dependencies
@@ -450,11 +442,11 @@ jobs:
       - run:
           name: Setup PATH
           command: |
-            echo 'export Qt5_DIR=/usr/local/opt/qt5/lib/cmake' >> $BASH_ENV
-            echo 'export Qt5LinguistTools_DIR=/usr/local/Cellar/qt/5.11.2/lib/cmake/Qt5LinguistTools' >> $BASH_ENV
-            echo 'export GST_SCANNER_PATH=/usr/local/Cellar/gstreamer/1.14.4/libexec/gstreamer-1.0/gst-plugin-scanner' >> $BASH_ENV
+            echo 'export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig' >> $BASH_ENV
+            echo 'export Qt5_DIR=/usr/local/Cellar/qt/5.13.1/lib/cmake/Qt5' >> $BASH_ENV
+            echo 'export Qt5LinguistTools_DIR=/usr/local/Cellar/qt/5.13.1/lib/cmake/Qt5LinguistTools' >> $BASH_ENV
+            echo 'export GST_SCANNER_PATH=/usr/local/Cellar/gstreamer/1.16.1/libexec/gstreamer-1.0/gst-plugin-scanner' >> $BASH_ENV
             echo 'export GST_PLUGIN_PATH=/usr/local/lib/gstreamer-1.0' >> $BASH_ENV
-            echo 'export PATH=/usr/local/opt/gettext/bin:$PATH' >> $BASH_ENV
             source $BASH_ENV
       - run:
           name: Install dependencies from homebrew
@@ -464,39 +456,38 @@ jobs:
             chromaprint
             cmake
             cryptopp
+            fftw
             gettext
+            glew
             glib
-            liblastfm
+            google-sparsehash
+            gst-libav
+            gst-plugins-bad
+            gst-plugins-base
+            gst-plugins-good
+            gst-plugins-ugly
+            gstreamer
             pkgconfig
             protobuf
             protobuf-c
             qt
-      - run:
-          name: Install sqlite
-          command: brew install sqlite --with-fts
-      - run:
-          name: Install gstreamer
-          command: brew install gstreamer gst-plugins-base
-      - run:
-          name: Install gst-plugins-good
-          command: brew install gst-plugins-good --with-flac
-      - run:
-          name: Install gst-plugins
-          command: brew install gst-plugins-bad gst-plugins-ugly
-      - run:
-          name: Install other dependencies
-          command: brew install chromaprint liblastfm
+            sqlite
       - checkout
       - run:
-          name: Checkout qt5 branch
-          command: git checkout qt5
-      - run:
           name: cmake
-          command: cmake .. -DUSE_VISUALISATIONS=OFF
+          command: >
+            cmake
+            ..
+            -Wno-dev
+            -DCMAKE_BUILD_TYPE=Release
+            -DCMAKE_OSX_ARCHITECTURES=x86_64
+            -DGETTEXT_MSGMERGE_EXECUTABLE=/usr/local/Cellar/gettext/0.20.1/bin/msgmerge
+            -DGETTEXT_MSGFMT_EXECUTABLE=/usr/local/Cellar/gettext/0.20.1/bin/msgfmt
+            -DGETTEXT_XGETTEXT_EXECUTABLE=/usr/local/Cellar/gettext/0.20.1/bin/xgettext
           working_directory: bin
       - run:
           name: make
-          command: make
+          command: make -j2
           working_directory: bin
       - run:
           name: Copy icon file and resources
@@ -516,6 +507,10 @@ jobs:
           root: /tmp/artifacts
           paths:
             - mac/*
+      - store_artifacts:
+          path: bin/CMakeCache.txt
+      - store_artifacts:
+          path: bin/src/CMakeFiles/clementine.dir
       - store_artifacts:
           path: /tmp/artifacts/mac
 
@@ -538,30 +533,13 @@ workflows:
   version: 2
   build_all:
     jobs:
-      - build_xenial_32
-      - build_xenial_64
-      - build_bionic_32
       - build_bionic_64
-      - build_disco_32
-      - build_disco_64
-      - build_fedora_29_64
-      - build_fedora_30_64
-      - build_buster_64
-      - build_stretch_64
-
+      - build_mac
       - upload_artifacts:
           context: gcp
           requires:
-            - build_xenial_32
-            - build_xenial_64
-            - build_bionic_32
             - build_bionic_64
-            - build_disco_32
-            - build_disco_64
-            - build_fedora_29_64
-            - build_fedora_30_64
-            - build_buster_64
-            - build_stretch_64
+            - build_mac
           filters:
             branches:
-              only: master
+              only: qt5

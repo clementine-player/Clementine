@@ -25,7 +25,6 @@
 #include "core/application.h"
 #include "core/closure.h"
 #include "core/logging.h"
-#include "core/qhash_qurl.h"
 #include "core/timeconstants.h"
 #include "podcastbackend.h"
 #include "podcasturlloader.h"

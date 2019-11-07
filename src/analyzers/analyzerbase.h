@@ -42,7 +42,7 @@
 
 #ifdef HAVE_OPENGL
 #include <QGLWidget>
-#ifdef Q_WS_MACX
+#ifdef Q_OS_MACX
 #include <OpenGL/gl.h>
 #include <OpenGL/glu.h>
 #else

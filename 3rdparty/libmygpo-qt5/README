@@ -1,0 +1,52 @@
+==========  README ==========
+
+=== What is libmygpo-qt ===
+
+libmygpo-qt is a Qt Library that wraps the gpodder.net Web API (http://wiki.gpodder.org/wiki/Web_Services/API_2)
+
+=== Copyright & License ===
+
+Copyright 2010 - 2014 Stefan Derkits (stefan@derkits.at) , Christian Wagner (christian.wagner86@gmx.at) & Felix Winter (ixos01@gmail.com)
+
+See COPYING File for License
+
+=== Maintainer ===
+
+Current Maintainer: Stefan Derkits (HorusHorrendus @ irc.freenode.net)
+
+=== Requirements ===
+
+-) Qt 4.6 or higher
+-) Cmake 2.6 or higher
+-) QJson
+
+=== Qt5 Support ===
+
+libmygpo-qt version 1.0.8 supports also building the library with Qt5. The API is the same as in the Qt4 library. To build the library with Qt5 add "-DBUILD_WITH_QT4=OFF" to your CMake
+command line. Please note that Qt5 support is still experimental. If you find anything to not work with Qt5, please report a bug.
+
+==== Qt5 Requirements ===
+
+-) CMake 2.8.9 or higher
+-) Qt 5.2 or higher
+
+=== Links ===
+
+Homepage:                http://wiki.gpodder.org/wiki/Libmygpo-qt
+Git Repo:                https://github.com/gpodder/libmygpo-qt
+Doxygen Documentation:   http://stefan.derkits.at/libmygpo-doc/ 
+Bugreports:              http://bugs.gpodder.org
+Contact:                 gpodder@freelists.org
+IRC Channel:             #gpodder on FreeNode (irc.freenode.net)
+
+=== How to Install ===
+
+-) Create Directory "build"
+-) change into build and run "cmake .. -DCMAKE_BUILD_TYPE=Debug"
+-) make
+-) make install (might need root)
+
+To use libmygpo-qt include the Header "ApiRequest.h" into your Code. You can find the cflags & linker flags for libmygpo-qt either via pkg-config (.pc file will be installed to your System)
+or via cmake (Mygpo-qtConfig.cmake will be installed to your system).
+
+You can check the Example Application to see how you can use libmygpo-qt in your Application

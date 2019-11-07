@@ -636,7 +636,7 @@
 
     <method name="FilesystemListOpenFiles">
       <annotation name="org.freedesktop.DBus.GLib.Async" value=""/>
-      <annotation name="com.trolltech.QtDBus.QtTypeName.Out0" value="QVariantList" />
+      <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="QVariantList" />
       <arg name="processes" direction="out" type="a(uus)">
         <doc:doc><doc:summary>
             An array of triples (<doc:tt>pid</doc:tt>, <doc:tt>uid</doc:tt>, command line for the process
@@ -1355,9 +1355,9 @@
 
     <method name="DriveBenchmark">
       <annotation name="org.freedesktop.DBus.GLib.Async" value=""/>
-      <annotation name="com.trolltech.QtDBus.QtTypeName.Out0" value="QVariantList" />
-      <annotation name="com.trolltech.QtDBus.QtTypeName.Out1" value="QVariantList" />
-      <annotation name="com.trolltech.QtDBus.QtTypeName.Out2" value="QVariantList" />
+      <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="QVariantList" />
+      <annotation name="org.qtproject.QtDBus.QtTypeName.Out1" value="QVariantList" />
+      <annotation name="org.qtproject.QtDBus.QtTypeName.Out2" value="QVariantList" />
 
       <arg name="do_write_benchmark" direction="in" type="b">
         <doc:doc><doc:summary>

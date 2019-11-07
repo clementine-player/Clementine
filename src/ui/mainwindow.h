@@ -151,6 +151,7 @@ signals:
  private slots:
   void FilePathChanged(const QString& path);
 
+  void SaveSettings(QSettings* settings);
   void MediaStopped();
   void MediaPaused();
   void MediaPlaying();
@@ -240,7 +241,7 @@ signals:
   void AddCDTracks();
   void AddPodcast();
 
-  void CommandlineOptionsReceived(const QByteArray& serialized_options);
+  void CommandlineOptionsReceived(const QString& string_options);
 
   void CheckForUpdates();
 
@@ -266,8 +267,8 @@ signals:
   void OpenSettingsDialogAtPage(SettingsDialog::Page page);
   void ShowSongInfoConfig();
 
-  void SaveGeometry();
-  void SavePlaybackStatus();
+  void SaveGeometry(QSettings* settings);
+  void SavePlaybackStatus(QSettings* settings);
   void LoadPlaybackStatus();
   void ResumePlayback();
 
@@ -380,6 +381,10 @@ signals:
   QSettings settings_;
 
   bool initialized_;
+
+  bool dirty_geometry_;
+  bool dirty_playback_;
+
   bool was_maximized_;
   int saved_playback_position_;
   Engine::State saved_playback_state_;

@@ -21,9 +21,8 @@
 #include "jamendodynamicplaylist.h"
 
 #include <QEventLoop>
-#include <QHttp>
-#include <QHttpRequestHeader>
 #include <QtDebug>
+#include <QUrlQuery>
 
 #include "core/logging.h"
 #include "core/network.h"
@@ -119,35 +118,36 @@ QString JamendoDynamicPlaylist::OrderSpec(OrderBy by, OrderDirection dir) {
 
 void JamendoDynamicPlaylist::Fetch() {
   QUrl url(kUrl);
-  url.addQueryItem("pn", QString::number(current_page_++));
-  url.addQueryItem("n", QString::number(kPageSize));
-  url.addQueryItem("order", OrderSpec(order_by_, order_direction_));
+  QUrlQuery url_query;
+  url_query.addQueryItem("pn", QString::number(current_page_++));
+  url_query.addQueryItem("n", QString::number(kPageSize));
+  url_query.addQueryItem("order", OrderSpec(order_by_, order_direction_));
+  url.setQuery(url_query);
 
+  // TODO
   // We have to use QHttp here because there's no way to disable Keep-Alive
   // with QNetworkManager.
-  QHttpRequestHeader header(
-      "GET", QString(url.encodedPath() + "?" + url.encodedQuery()));
-  header.setValue("Host", url.encodedHost());
-
-  QHttp http(url.host());
-  http.request(header);
+  QNetworkAccessManager network(this);
+  QNetworkRequest req(url);
+  QNetworkReply *reply = network.get(req);
 
   // Wait for the reply
   {
     QEventLoop event_loop;
-    connect(&http, SIGNAL(requestFinished(int, bool)), &event_loop,
-            SLOT(quit()));
+    connect(reply, SIGNAL(finished()), &event_loop, SLOT(quit()));
     event_loop.exec();
   }
 
-  if (http.error() != QHttp::NoError) {
-    qLog(Warning) << "HTTP error returned from Jamendo:" << http.errorString()
+  reply->deleteLater();
+
+  if (reply->error() != QNetworkReply::NoError) {
+    qLog(Warning) << "HTTP error returned from Jamendo:" << reply->errorString()
                   << ", url:" << url.toString();
     return;
   }
 
   // The reply will contain one track ID per line
-  QStringList lines = QString::fromAscii(http.readAll()).split('\n');
+  QStringList lines = QString::fromLatin1(reply->readAll()).split('\n');
 
   // Get the songs from the database
   SongList songs = backend_->GetSongsByForeignId(

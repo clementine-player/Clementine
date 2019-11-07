@@ -28,6 +28,8 @@
 
 #include "ui/settingsdialog.h"
 
+class QSettings;
+
 class AlbumCoverLoader;
 class Appearance;
 class ApplicationImpl;
@@ -98,6 +100,8 @@ class Application : public QObject {
   TagReaderClient* tag_reader_client() const;
   TaskManager* task_manager() const;
 
+  void DirtySettings();
+
   void MoveToNewThread(QObject* object);
   void MoveToThread(QObject* object, QThread* thread);
 
@@ -109,7 +113,11 @@ class Application : public QObject {
 signals:
   void ErrorAdded(const QString& message);
   void SettingsChanged();
+  void SaveSettings(QSettings* settings);
   void SettingsDialogRequested(SettingsDialog::Page page);
+
+ private slots:
+  void SaveSettings_();
 
  private:
   QString language_name_;

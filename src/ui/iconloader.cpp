@@ -110,13 +110,10 @@ QIcon IconLoader::Load(const QString& name, const IconType& icontype) {
     // Should never be reached
     qLog(Warning) << "Couldn't recognize IconType" << name;
   }
-
     // Load icon from system theme only if it hasn't been found
   if (ret.isNull()) {
-#if QT_VERSION >= 0x040600
     ret = QIcon::fromTheme(name);
     if (!ret.isNull()) return ret;
-#endif
     qLog(Warning) << "Couldn't load icon" << name;
   }
 

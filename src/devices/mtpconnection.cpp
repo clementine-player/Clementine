@@ -20,6 +20,7 @@
 
 #include <QRegExp>
 #include <QtDebug>
+#include <QUrlQuery>
 
 MtpConnection::MtpConnection(const QUrl& url) : device_(nullptr) {
   QString hostname = url.host();
@@ -29,30 +30,32 @@ MtpConnection::MtpConnection(const QUrl& url) : device_(nullptr) {
   unsigned int bus_location;
   unsigned int device_num;
 
+  QUrlQuery url_query(url);
+
   if (host_re.indexIn(hostname) >= 0) {
     bus_location = host_re.cap(1).toUInt();
     device_num = host_re.cap(2).toUInt();
-  } else if (url.hasQueryItem("busnum")) {
-    bus_location = url.queryItemValue("busnum").toUInt();
-    device_num = url.queryItemValue("devnum").toUInt();
+  } else if (url_query.hasQueryItem("busnum")) {
+    bus_location = url_query.queryItemValue("busnum").toUInt();
+    device_num = url_query.queryItemValue("devnum").toUInt();
   } else {
     qLog(Warning) << "Invalid MTP device:" << hostname;
     return;
   }
 
-  if (url.hasQueryItem("vendor")) {
+  if (url_query.hasQueryItem("vendor")) {
     LIBMTP_raw_device_t* raw_device =
         (LIBMTP_raw_device_t*)malloc(sizeof(LIBMTP_raw_device_t));
     raw_device->device_entry.vendor =
-        url.queryItemValue("vendor").toAscii().data();
+        url_query.queryItemValue("vendor").toLatin1().data();
     raw_device->device_entry.product =
-        url.queryItemValue("product").toAscii().data();
+        url_query.queryItemValue("product").toLatin1().data();
     raw_device->device_entry.vendor_id =
-        url.queryItemValue("vendor_id").toUShort();
+        url_query.queryItemValue("vendor_id").toUShort();
     raw_device->device_entry.product_id =
-        url.queryItemValue("product_id").toUShort();
+        url_query.queryItemValue("product_id").toUShort();
     raw_device->device_entry.device_flags =
-        url.queryItemValue("quirks").toUInt();
+        url_query.queryItemValue("quirks").toUInt();
 
     raw_device->bus_location = bus_location;
     raw_device->devnum = device_num;

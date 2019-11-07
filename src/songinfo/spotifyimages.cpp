@@ -2,9 +2,12 @@
 
 #include <algorithm>
 
-#include <qjson/parser.h>
-
 #include <QPair>
+#include <QJsonArray>
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QUrl>
+#include <QUrlQuery>
 
 #include "core/closure.h"
 #include "core/logging.h"
@@ -25,26 +28,31 @@ void SpotifyImages::FetchInfo(int id, const Song& metadata) {
     return;
   }
 
+  // Fetch artist id.
   QUrl url(kSpotifyImagesUrl);
-  url.addQueryItem("artist", metadata.artist());
+  QUrlQuery url_query;
+  url_query.addQueryItem("artist", metadata.artist());
+  url.setQuery(url_query);
+
+  qLog(Debug) << "Fetching artist:" << url;
 
   QNetworkRequest request(url);
   QNetworkReply* reply = network_->get(request);
   NewClosure(reply, SIGNAL(finished()), [this, id, reply]() {
     reply->deleteLater();
-    QJson::Parser parser;
-    bool ok = false;
-    QVariant result = parser.parse(reply, &ok);
-    if (!ok || result.type() != QVariant::List) {
+
+    QJsonParseError error;
+    QJsonDocument json_document = QJsonDocument::fromJson(reply->readAll(), &error);
+    if (error.error != QJsonParseError::NoError) {
       emit Finished(id);
       return;
     }
 
-    QVariantList results = result.toList();
+    QJsonArray results = json_document.array();
     QList<QPair<QUrl, QSize>> image_candidates;
-    for (QVariant v : results) {
-      QVariantMap image = v.toMap();
-      QUrl url = image["url"].toUrl();
+    for (const QJsonValue &v : results) {
+      QJsonObject image = v.toObject();
+      QUrl url = image["url"].toVariant().toUrl();
       int height = image["height"].toInt();
       int width = image["width"].toInt();
       image_candidates.append(qMakePair(url, QSize(width, height)));

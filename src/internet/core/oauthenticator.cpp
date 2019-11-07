@@ -24,8 +24,10 @@
 #include <QSslError>
 #include <QStringList>
 #include <QUrl>
-
-#include <qjson/parser.h>
+#include <QUrlQuery>
+#include <QJsonParseError>
+#include <QJsonDocument>
+#include <QJsonObject>
 
 #include "core/closure.h"
 #include "core/logging.h"
@@ -50,26 +52,31 @@ void OAuthenticator::StartAuthorisation(const QString& oauth_endpoint,
   server->Listen();
 
   QUrl url = QUrl(oauth_endpoint);
-  url.addQueryItem("response_type", "code");
-  url.addQueryItem("client_id", client_id_);
+  QUrlQuery url_query;
+  url_query.addQueryItem("response_type", "code");
+  url_query.addQueryItem("client_id", client_id_);
   QUrl redirect_url;
+  QUrlQuery redirect_url_query;
 
   const QString port = QString::number(server->url().port());
 
   if (redirect_style_ == RedirectStyle::REMOTE) {
     redirect_url = QUrl(kRemoteURL);
-    redirect_url.addQueryItem("port", port);
+    redirect_url_query.addQueryItem("port", port);
   } else if (redirect_style_ == RedirectStyle::REMOTE_WITH_STATE) {
     redirect_url = QUrl(kRemoteURL);
-    url.addQueryItem("state", port);
+    url_query.addQueryItem("state", port);
   } else {
     redirect_url = server->url();
   }
 
-  url.addQueryItem("redirect_uri", redirect_url.toString());
+  url_query.addQueryItem("redirect_uri", redirect_url.toString());
   if (!scope.isEmpty()) {  // Empty scope is valid for Dropbox.
-    url.addQueryItem("scope", scope);
+    url_query.addQueryItem("scope", scope);
   }
+
+  url.setQuery(url_query);
+  redirect_url.setQuery(redirect_url_query);
 
   NewClosure(server, SIGNAL(Finished()), this, &OAuthenticator::RedirectArrived,
              server, redirect_url);
@@ -80,7 +87,7 @@ void OAuthenticator::StartAuthorisation(const QString& oauth_endpoint,
 void OAuthenticator::RedirectArrived(LocalRedirectServer* server, QUrl url) {
   server->deleteLater();
   QUrl request_url = server->request_url();
-  RequestAccessToken(request_url.queryItemValue("code").toUtf8(), url);
+  RequestAccessToken(QUrlQuery(request_url).queryItemValue("code").toUtf8(), url);
 }
 
 QByteArray OAuthenticator::ParseHttpRequest(const QByteArray& request) const {
@@ -130,14 +137,15 @@ void OAuthenticator::FetchAccessTokenFinished(QNetworkReply* reply) {
     return;
   }
 
-  QJson::Parser parser;
-  bool ok = false;
-  QVariantMap result = parser.parse(reply, &ok).toMap();
-  if (!ok) {
+  QJsonParseError error;
+  QJsonDocument json_document = QJsonDocument::fromJson(reply->readAll(), &error);
+
+  if (error.error != QJsonParseError::NoError) {
     qLog(Error) << "Failed to parse oauth reply";
     return;
   }
 
+  QJsonObject result = json_document.object();
   access_token_ = result["access_token"].toString();
   refresh_token_ = result["refresh_token"].toString();
   SetExpiryTime(result["expires_in"].toInt());
@@ -180,15 +188,14 @@ void OAuthenticator::SetExpiryTime(int expires_in_seconds) {
 
 void OAuthenticator::RefreshAccessTokenFinished(QNetworkReply* reply) {
   reply->deleteLater();
-  QJson::Parser parser;
-  bool ok = false;
 
-  QVariantMap result = parser.parse(reply, &ok).toMap();
-  access_token_ = result["access_token"].toString();
-  if (result.contains("refresh_token")) {
-    refresh_token_ = result["refresh_token"].toString();
+  QJsonObject json_result = QJsonDocument::fromJson(reply->readAll()).object();
+
+  access_token_ = json_result["access_token"].toString();
+  if (json_result.contains("refresh_token")) {
+    refresh_token_ = json_result["refresh_token"].toString();
   }
-  SetExpiryTime(result["expires_in"].toInt());
+  SetExpiryTime(json_result["expires_in"].toInt());
   emit Finished();
 }
 

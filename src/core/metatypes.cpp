@@ -30,6 +30,7 @@
 #include "covers/albumcoverfetcher.h"
 #include "engines/enginebase.h"
 #include "engines/gstengine.h"
+#include "engines/gstenginepipeline.h"
 #include "globalsearch/searchprovider.h"
 #include "internet/core/geolocator.h"
 #include "internet/digitally/digitallyimportedclient.h"
@@ -53,7 +54,6 @@ class QNetworkReply;
 
 void RegisterMetaTypes() {
   qRegisterMetaType<CollapsibleInfoPane::Data>("CollapsibleInfoPane::Data");
-  qRegisterMetaType<ColumnAlignmentMap>("ColumnAlignmentMap");
   qRegisterMetaType<const char*>("const char*");
   qRegisterMetaType<CoverSearchResult>("CoverSearchResult");
   qRegisterMetaType<CoverSearchResults>("CoverSearchResults");
@@ -110,6 +110,7 @@ void RegisterMetaTypes() {
   qRegisterMetaType<SubdirectoryList>("SubdirectoryList");
   qRegisterMetaType<Subdirectory>("Subdirectory");
   qRegisterMetaType<QList<QUrl>>("QList<QUrl>");
+  qRegisterMetaType<QAbstractSocket::SocketState>();
   qRegisterMetaType<QFileInfo>("QFileInfo");
 
 #ifdef HAVE_DBUS

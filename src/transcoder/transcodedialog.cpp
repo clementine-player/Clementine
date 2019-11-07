@@ -56,7 +56,7 @@ TranscodeDialog::TranscodeDialog(QWidget* parent)
       finished_success_(0),
       finished_failed_(0) {
   ui_->setupUi(this);
-  ui_->files->header()->setResizeMode(QHeaderView::ResizeToContents);
+  ui_->files->header()->setSectionResizeMode(QHeaderView::ResizeToContents);
 
   log_ui_->setupUi(log_dialog_);
   QPushButton* clear_button =

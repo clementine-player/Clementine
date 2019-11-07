@@ -292,8 +292,8 @@ void NowPlayingWidget::UpdateDetailsText() {
 
   // TODO: Make this configurable
   html += QString("<i>%1</i><br/>%2<br/>%3").arg(
-      Qt::escape(metadata_.PrettyTitle()), Qt::escape(metadata_.artist()),
-      Qt::escape(metadata_.album()));
+      metadata_.PrettyTitle().toHtmlEscaped(), metadata_.artist().toHtmlEscaped(),
+      metadata_.album().toHtmlEscaped());
 
   html += "</p>";
   details_->setHtml(html);

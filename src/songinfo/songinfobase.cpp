@@ -59,7 +59,7 @@ SongInfoBase::SongInfoBase(QWidget* parent)
   // Set stylesheet
   QFile stylesheet(":/songinfo.css");
   stylesheet.open(QIODevice::ReadOnly);
-  setStyleSheet(QString::fromAscii(stylesheet.readAll()));
+  setStyleSheet(QString::fromLatin1(stylesheet.readAll()));
 
   connect(fetcher_, SIGNAL(ResultReady(int, SongInfoFetcher::Result)),
           SLOT(ResultReady(int, SongInfoFetcher::Result)));

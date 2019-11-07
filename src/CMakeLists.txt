@@ -12,18 +12,9 @@ endif(BUILD_WERROR)
 
 include_directories(${CMAKE_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR} ${CMAKE_CURRENT_SOURCE_DIR})
 include_directories(../3rdparty/gmock/gtest/include)
-if(WIN32)
-  include_directories(../3rdparty/qtwin)
-endif(WIN32)
 
 # Activate fast QString concatenation
-if (QT_VERSION_MINOR GREATER 5)
-  if (QT_VERSION_MINOR GREATER 7)
-    add_definitions(-DQT_USE_QSTRINGBUILDER)
-  else(QT_VERSION_MINOR GREATER 7)
-    add_definitions(-DQT_USE_FAST_CONCATENATION -DQT_USE_FAST_OPERATOR_PLUS)
-  endif(QT_VERSION_MINOR GREATER 7)
-endif(QT_VERSION_MINOR GREATER 5)
+add_definitions(-DQT_USE_QSTRINGBUILDER)
 add_definitions(-DQT_NO_URL_CAST_FROM_STRING)
 add_definitions(-DBOOST_BIND_NO_PLACEHOLDERS)
 
@@ -34,9 +25,8 @@ include_directories(${GOBJECT_INCLUDE_DIRS})
 include_directories(${QTSINGLEAPPLICATION_INCLUDE_DIRS})
 include_directories(${QTIOCOMPRESSOR_INCLUDE_DIRS})
 include_directories(${QXT_INCLUDE_DIRS})
-include_directories(${SHA2_INCLUDE_DIRS})
 include_directories(${CHROMAPRINT_INCLUDE_DIRS})
-include_directories(${MYGPOQT_INCLUDE_DIRS})
+include_directories(${MYGPOQT5_INCLUDE_DIRS})
 
 if (HAVE_VISUALISATIONS)
   find_package(OpenGL REQUIRED)
@@ -45,7 +35,7 @@ if (HAVE_VISUALISATIONS)
 endif(HAVE_VISUALISATIONS)
 
 if(HAVE_LIBLASTFM)
-  include_directories(${LASTFM_INCLUDE_DIRS})
+  include_directories(${LASTFM5_INCLUDE_DIRS})
 endif(HAVE_LIBLASTFM)
 
 if(HAVE_BREAKPAD)
@@ -64,6 +54,7 @@ endif(HAVE_SPOTIFY)
 
 cmake_policy(SET CMP0011 NEW)
 include(../cmake/ParseArguments.cmake)
+
 if(HAVE_TRANSLATIONS)
   include(../cmake/Translations.cmake)
 endif(HAVE_TRANSLATIONS)
@@ -118,6 +109,7 @@ set(SOURCES
   covers/albumcoverfetcher.cpp
   covers/albumcoverfetchersearch.cpp
   covers/albumcoverloader.cpp
+  covers/discogscoverprovider.cpp
   covers/coverexportrunnable.cpp
   covers/coverprovider.cpp
   covers/coverproviders.cpp
@@ -436,6 +428,7 @@ set(HEADERS
   covers/albumcoverfetcher.h
   covers/albumcoverfetchersearch.h
   covers/albumcoverloader.h
+  covers/discogscoverprovider.h
   covers/coverexportrunnable.h
   covers/coverprovider.h
   covers/coverproviders.h
@@ -919,28 +912,28 @@ if(UNIX AND HAVE_DBUS)
   file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/dbus)
 
   # MPRIS 2.0 DBUS interfaces
-  qt4_add_dbus_adaptor(SOURCES
+  qt5_add_dbus_adaptor(SOURCES
       dbus/org.mpris.MediaPlayer2.Player.xml
       core/mpris2.h mpris::Mpris2 core/mpris2_player Mpris2Player)
-  qt4_add_dbus_adaptor(SOURCES
+  qt5_add_dbus_adaptor(SOURCES
       dbus/org.mpris.MediaPlayer2.xml
       core/mpris2.h mpris::Mpris2 core/mpris2_root Mpris2Root)
-  qt4_add_dbus_adaptor(SOURCES
+  qt5_add_dbus_adaptor(SOURCES
       dbus/org.mpris.MediaPlayer2.TrackList.xml
       core/mpris2.h mpris::Mpris2 core/mpris2_tracklist Mpris2TrackList)
 
   # MPRIS 2.1 DBUS interfaces
-  qt4_add_dbus_adaptor(SOURCES
+  qt5_add_dbus_adaptor(SOURCES
       dbus/org.mpris.MediaPlayer2.Playlists.xml
       core/mpris2.h mpris::Mpris2 core/mpris2_playlists Mpris2Playlists)
 
   # org.freedesktop.Notifications DBUS interface
-  qt4_add_dbus_interface(SOURCES
+  qt5_add_dbus_interface(SOURCES
       dbus/org.freedesktop.Notifications.xml
       dbus/notification)
 
   # org.gnome.SettingsDaemon interface
-  qt4_add_dbus_interface(SOURCES
+  qt5_add_dbus_interface(SOURCES
       dbus/org.gnome.SettingsDaemon.MediaKeys.xml
       dbus/gnomesettingsdaemon)
 
@@ -978,10 +971,10 @@ if(UNIX AND HAVE_DBUS)
         PROPERTIES NO_NAMESPACE dbus/udisks)
     set_source_files_properties(dbus/org.freedesktop.UDisks.Device.xml
         PROPERTIES NO_NAMESPACE dbus/udisksdevice)
-    qt4_add_dbus_interface(SOURCES
+    qt5_add_dbus_interface(SOURCES
         dbus/org.freedesktop.UDisks.xml
         dbus/udisks)
-    qt4_add_dbus_interface(SOURCES
+    qt5_add_dbus_interface(SOURCES
         dbus/org.freedesktop.UDisks.Device.xml
         dbus/udisksdevice)
   endif(HAVE_DEVICEKIT)
@@ -997,26 +990,26 @@ if(UNIX AND HAVE_DBUS)
           PROPERTIES NO_NAMESPACE dbus/udisks2drive INCLUDE dbus/metatypes.h)
       set_source_files_properties(dbus/org.freedesktop.UDisks2.Job.xml
           PROPERTIES NO_NAMESPACE dbus/udisks2job INCLUDE dbus/metatypes.h)
-      qt4_add_dbus_interface(SOURCES
+      qt5_add_dbus_interface(SOURCES
           dbus/org.freedesktop.DBus.ObjectManager.xml
           dbus/objectmanager)
-      qt4_add_dbus_interface(SOURCES
+      qt5_add_dbus_interface(SOURCES
           dbus/org.freedesktop.UDisks2.Filesystem.xml
           dbus/udisks2filesystem)
-      qt4_add_dbus_interface(SOURCES
+      qt5_add_dbus_interface(SOURCES
           dbus/org.freedesktop.UDisks2.Block.xml
           dbus/udisks2block)
-      qt4_add_dbus_interface(SOURCES
+      qt5_add_dbus_interface(SOURCES
           dbus/org.freedesktop.UDisks2.Drive.xml
           dbus/udisks2drive)
-      qt4_add_dbus_interface(SOURCES
+      qt5_add_dbus_interface(SOURCES
           dbus/org.freedesktop.UDisks2.Job.xml
           dbus/udisks2job)
   endif(HAVE_UDISKS2)
 
   # Wiimotedev interface classes
   if(ENABLE_WIIMOTEDEV)
-    qt4_add_dbus_interface(SOURCES
+    qt5_add_dbus_interface(SOURCES
         dbus/org.wiimotedev.deviceEvents.xml
         dbus/wiimotedev)
   endif(ENABLE_WIIMOTEDEV)
@@ -1220,9 +1213,9 @@ configure_file(${CMAKE_CURRENT_SOURCE_DIR}/config.h.in
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/version.h.in
                ${CMAKE_CURRENT_BINARY_DIR}/version.h)
 
-qt4_wrap_cpp(MOC ${HEADERS} OPTIONS "-D_SYS_SYSMACROS_H_OUTER")
-qt4_wrap_ui(UIC ${UI})
-qt4_add_resources(QRC ${RESOURCES})
+qt5_wrap_cpp(MOC ${HEADERS})
+qt5_wrap_ui(UIC ${UI})
+qt5_add_resources(QRC ${RESOURCES})
 
 if(HAVE_TRANSLATIONS)
   add_pot(POT
@@ -1251,14 +1244,13 @@ target_link_libraries(clementine_lib
   libclementine-common
   libclementine-tagreader
   libclementine-remote
-  ${SHA2_LIBRARIES}
+
   ${TAGLIB_LIBRARIES}
-  ${MYGPOQT_LIBRARIES}
+  ${MYGPOQT5_LIBRARIES}
   ${CHROMAPRINT_LIBRARIES}
   ${GOBJECT_LIBRARIES}
   ${GLIB_LIBRARIES}
   ${GIO_LIBRARIES}
-  ${QJSON_LIBRARIES}
   ${QT_LIBRARIES}
   ${GSTREAMER_BASE_LIBRARIES}
   ${GSTREAMER_LIBRARIES}
@@ -1270,8 +1262,15 @@ target_link_libraries(clementine_lib
   ${QTIOCOMPRESSOR_LIBRARIES}
   ${CMAKE_THREAD_LIBS_INIT}
   ${SQLITE_LIBRARIES}
-  z
+
   Qocoa
+  z
+)
+
+link_directories(
+  ${CHROMAPRINT_LIBRARY_DIRS}
+  ${GSTREAMER_APP_LIBRARY_DIRS}
+  ${GLEW_LIBRARY_DIRS}
 )
 
 if(HAVE_VISUALISATIONS)
@@ -1279,7 +1278,7 @@ if(HAVE_VISUALISATIONS)
 endif(HAVE_VISUALISATIONS)
 
 if(HAVE_LIBLASTFM)
-  target_link_libraries(clementine_lib ${LASTFM_LIBRARIES})
+  target_link_libraries(clementine_lib ${LASTFM5_LIBRARIES})
 endif(HAVE_LIBLASTFM)
 
 if(HAVE_LIBGPOD)
@@ -1356,12 +1355,11 @@ target_link_libraries(clementine_lib qsqlite)
 
 if (WIN32)
   target_link_libraries(clementine_lib
+    protobuf
     ${ZLIB_LIBRARIES}
     ${QTSPARKLE_LIBRARIES}
     tinysvcmdns
-    qtwin
     dsound
-    ${QT_QTGUI_LIBRARY}
   )
 endif (WIN32)
 
@@ -1371,7 +1369,6 @@ if (UNIX AND NOT APPLE)
   # command but they're actually used by libraries that appear after them, so
   # they end up getting ignored.  This appends them to the very end of the link
   # line, ensuring they're always used.
-  find_package(X11)
   if (FREEBSD)
     target_link_libraries(clementine_lib ${X11_X11_LIB})
   else ()
@@ -1431,9 +1428,6 @@ if (APPLE)
   install(FILES ../dist/sparkle_pub.pem
     DESTINATION "${CMAKE_BINARY_DIR}/clementine.app/Contents/Resources")
   install(FILES ../dist/cacert.pem
-    DESTINATION "${CMAKE_BINARY_DIR}/clementine.app/Contents/Resources")
-
-  install(DIRECTORY "${QT_QTGUI_LIBRARY_RELEASE}/Versions/Current/Resources/"
     DESTINATION "${CMAKE_BINARY_DIR}/clementine.app/Contents/Resources")
 
   if (HAVE_BREAKPAD)

@@ -770,7 +770,7 @@ GstElement* GstEngine::CreateElement(const QString& factoryName,
   QString name = factoryName + "-" + QString::number(next_element_id_++);
 
   GstElement* element = gst_element_factory_make(
-      factoryName.toAscii().constData(), name.toAscii().constData());
+      factoryName.toLatin1().constData(), name.toLatin1().constData());
 
   if (!element) {
     emit Error(QString(

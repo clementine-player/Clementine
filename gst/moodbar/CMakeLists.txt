@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.6)
+cmake_minimum_required(VERSION 2.8.11)
 
 set(CMAKE_C_FLAGS "-Wall")
 set(CMAKE_CXX_FLAGS "-Woverloaded-virtual -Wall --std=c++0x")
@@ -27,3 +27,5 @@ target_link_libraries(gstmoodbar
   ${GSTREAMER_BASE_LIBRARIES}
   ${FFTW3_FFTW_LIBRARY}
 )
+
+target_link_libraries(gstmoodbar Qt5::Core)
