@@ -87,8 +87,7 @@ void BoxService::Connect() {
   if (!refresh_token().isEmpty()) {
     oauth->RefreshAuthorisation(kOAuthTokenEndpoint, refresh_token());
   } else {
-    oauth->StartAuthorisation(kOAuthEndpoint, kOAuthTokenEndpoint,
-                              QString());
+    oauth->StartAuthorisation(kOAuthEndpoint, kOAuthTokenEndpoint, QString());
   }
 
   NewClosure(oauth, SIGNAL(Finished()), this,
