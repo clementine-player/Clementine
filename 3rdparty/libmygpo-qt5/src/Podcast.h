@@ -79,6 +79,6 @@ typedef QSharedPointer<Podcast> PodcastPtr;
 
 }
 
-Q_DECLARE_METATYPE( mygpo::PodcastPtr )
+Q_DECLARE_METATYPE(mygpo::PodcastPtr)
 
 #endif // LIBMYGPO_QT_PODCAST_H

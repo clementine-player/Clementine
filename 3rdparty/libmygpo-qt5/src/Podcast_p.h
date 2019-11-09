@@ -66,6 +66,6 @@ private slots:
     void error( QNetworkReply::NetworkError error );
 };
 
-}
+}  // namespace mygpo
 
 #endif // PODCAST_PRIVATE_H

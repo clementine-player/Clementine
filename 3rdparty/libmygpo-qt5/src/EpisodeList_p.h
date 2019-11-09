@@ -52,6 +52,6 @@ private slots:
 
 };
 
-}
+}  // namespace mygpo
 
 #endif // EPISODELIST_PRIVATE_H

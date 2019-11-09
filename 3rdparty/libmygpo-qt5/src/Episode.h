@@ -91,6 +91,6 @@ typedef QSharedPointer<Episode> EpisodePtr;
 
 }
 
-Q_DECLARE_METATYPE( mygpo::EpisodePtr )
+Q_DECLARE_METATYPE(mygpo::EpisodePtr)
 
 #endif // LIBMYGPO_QT_EPISODE_H
