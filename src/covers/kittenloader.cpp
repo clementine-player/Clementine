@@ -45,7 +45,7 @@ quint64 KittenLoader::LoadKitten(const AlbumCoverLoaderOptions& options) {
   if (!kitten_urls_.isEmpty()) {
     QUrl url = kitten_urls_.dequeue();
     return AlbumCoverLoader::LoadImageAsync(
-        options, QString::null, url.toString(), QString::null, QImage());
+        options, QString(), url.toString(), QString(), QImage());
   }
 
   Task task;

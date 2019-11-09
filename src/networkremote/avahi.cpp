@@ -52,7 +52,7 @@ void AddService(const QString domain, const QString type, const QByteArray name,
       QString::fromUtf8(name.constData(), name.size()),
       type,                  // Service type, eg. _clementine._tcp
       domain,                // Domain, eg. local
-      QString::null,         // Hostname (filled in by Avahi)
+      QString(),             // Hostname (filled in by Avahi)
       port,                  // Port our service is running on
       QList<QByteArray>());  // TXT record
   QDBusPendingCallWatcher* watcher = new QDBusPendingCallWatcher(reply);

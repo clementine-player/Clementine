@@ -26,7 +26,7 @@ BusyIndicator::BusyIndicator(const QString& text, QWidget* parent)
 }
 
 BusyIndicator::BusyIndicator(QWidget* parent) : QWidget(parent) {
-  Init(QString::null);
+  Init(QString());
 }
 
 void BusyIndicator::Init(const QString& text) {

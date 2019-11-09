@@ -259,7 +259,7 @@ void DropboxService::FetchContentUrlFinished(QNetworkReply* reply,
 
   MaybeAddFileToDatabase(song, GuessMimeTypeForFile(url.toString()),
                          QUrl::fromEncoded(json_response["link"].toVariant().toByteArray()),
-                         QString::null);
+                         QString());
 }
 
 QUrl DropboxService::GetStreamingUrlFromSongId(const QUrl& url) {

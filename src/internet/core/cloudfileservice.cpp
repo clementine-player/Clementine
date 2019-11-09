@@ -58,8 +58,8 @@ CloudFileService::CloudFileService(Application* app, InternetModel* parent,
   QString songs_table = service_id + "_songs";
   QString songs_fts_table = service_id + "_songs_fts";
 
-  library_backend_->Init(app->database(), songs_table, QString::null,
-                         QString::null, songs_fts_table);
+  library_backend_->Init(app->database(), songs_table, QString(),
+                         QString(), songs_fts_table);
   library_model_ = new LibraryModel(library_backend_, app_, this);
 
   library_sort_model_->setSourceModel(library_model_);
@@ -232,7 +232,7 @@ QString CloudFileService::GuessMimeTypeForFile(const QString& filename) const {
   } else if (filename.endsWith(".wma", Qt::CaseInsensitive)) {
     return "audio/x-ms-wma";
   }
-  return QString::null;
+  return QString();
 }
 
 void CloudFileService::AbortReadTagsReplies() {

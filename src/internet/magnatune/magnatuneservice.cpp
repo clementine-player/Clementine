@@ -91,8 +91,8 @@ MagnatuneService::MagnatuneService(Application* app, InternetModel* parent)
   // Create the library backend in the database thread
   library_backend_ = new LibraryBackend;
   library_backend_->moveToThread(app_->database()->thread());
-  library_backend_->Init(app_->database(), kSongsTable, QString::null,
-                         QString::null, kFtsTable);
+  library_backend_->Init(app_->database(), kSongsTable, QString(),
+                         QString(), kFtsTable);
   library_model_ = new LibraryModel(library_backend_, app_, this);
 
   connect(library_backend_, SIGNAL(TotalSongCountUpdated(int)),

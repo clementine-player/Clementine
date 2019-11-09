@@ -264,7 +264,7 @@ QString LengthItemDelegate::displayText(const QVariant& value,
   qint64 nanoseconds = value.toLongLong(&ok);
 
   if (ok && nanoseconds > 0) return Utilities::PrettyTimeNanosec(nanoseconds);
-  return QString::null;
+  return QString();
 }
 
 QString SizeItemDelegate::displayText(const QVariant& value,
@@ -281,7 +281,7 @@ QString DateItemDelegate::displayText(const QVariant& value,
   bool ok = false;
   int time = value.toInt(&ok);
 
-  if (!ok || time == -1) return QString::null;
+  if (!ok || time == -1) return QString();
 
   return QDateTime::fromTime_t(time)
       .toString(QLocale::system().dateTimeFormat(QLocale::ShortFormat));

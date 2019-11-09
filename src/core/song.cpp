@@ -618,7 +618,7 @@ void Song::InitFromQuery(const SqlRow& q, bool reliable_metadata, int col) {
   d->valid_ = true;
   d->init_from_file_ = reliable_metadata;
 
-#define tostr(n) (q.value(n).isNull() ? QString::null : q.value(n).toString())
+#define tostr(n) (q.value(n).isNull() ? QString() : q.value(n).toString())
 #define toint(n) (q.value(n).isNull() ? -1 : q.value(n).toInt())
 #define tolonglong(n) (q.value(n).isNull() ? -1 : q.value(n).toLongLong())
 #define tofloat(n) (q.value(n).isNull() ? -1 : q.value(n).toDouble())
@@ -1077,13 +1077,13 @@ QString Song::PrettyTitleWithArtist() const {
 }
 
 QString Song::PrettyLength() const {
-  if (length_nanosec() == -1) return QString::null;
+  if (length_nanosec() == -1) return QString();
 
   return Utilities::PrettyTimeNanosec(length_nanosec());
 }
 
 QString Song::PrettyYear() const {
-  if (d->year_ == -1) return QString::null;
+  if (d->year_ == -1) return QString();
 
   return QString::number(d->year_);
 }

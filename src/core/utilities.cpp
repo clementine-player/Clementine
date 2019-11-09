@@ -396,7 +396,7 @@ QString GetConfigPath(ConfigPath config) {
 
     default:
       qFatal("%s", Q_FUNC_INFO);
-      return QString::null;
+      return QString();
   }
 }
 
