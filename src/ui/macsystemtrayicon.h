@@ -52,7 +52,7 @@ class MacSystemTrayIcon : public SystemTrayIcon {
   QPixmap orange_icon_;
   QPixmap grey_icon_;
   std::unique_ptr<MacSystemTrayIconPrivate> p_;
-  Q_DISABLE_COPY(MacSystemTrayIcon);
+  Q_DISABLE_COPY(MacSystemTrayIcon)
 };
 
 #endif  // MACSYSTEMTRAYICON_H

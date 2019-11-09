@@ -58,7 +58,7 @@
 #include "spotifyblobdownloader.h"
 #endif
 
-Q_DECLARE_METATYPE(QStandardItem*);
+Q_DECLARE_METATYPE(QStandardItem*)
 
 const char* SpotifyService::kServiceName = "Spotify";
 const char* SpotifyService::kSettingsGroup = "Spotify";

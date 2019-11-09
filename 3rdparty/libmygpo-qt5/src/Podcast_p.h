@@ -66,6 +66,6 @@ private slots:
     void error( QNetworkReply::NetworkError error );
 };
 
-};
+}
 
 #endif // PODCAST_PRIVATE_H

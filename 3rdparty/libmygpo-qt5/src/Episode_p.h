@@ -66,6 +66,6 @@ private slots:
 
 };
 
-};
+}
 
 #endif // EPISODE_PRIVATE_H

@@ -41,7 +41,7 @@ struct TranscoderPreset {
   QString codec_mimetype_;
   QString muxer_mimetype_;
 };
-Q_DECLARE_METATYPE(TranscoderPreset);
+Q_DECLARE_METATYPE(TranscoderPreset)
 
 class Transcoder : public QObject {
   Q_OBJECT

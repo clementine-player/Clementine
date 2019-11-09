@@ -42,14 +42,14 @@ struct MprisPlaylist {
   QString icon;  // Uri
 };
 typedef QList<MprisPlaylist> MprisPlaylistList;
-Q_DECLARE_METATYPE(MprisPlaylist);
-Q_DECLARE_METATYPE(MprisPlaylistList);
+Q_DECLARE_METATYPE(MprisPlaylist)
+Q_DECLARE_METATYPE(MprisPlaylistList)
 
 struct MaybePlaylist {
   bool valid;
   MprisPlaylist playlist;
 };
-Q_DECLARE_METATYPE(MaybePlaylist);
+Q_DECLARE_METATYPE(MaybePlaylist)
 
 QDBusArgument& operator<<(QDBusArgument& arg, const MprisPlaylist& playlist);
 const QDBusArgument& operator>>(const QDBusArgument& arg,

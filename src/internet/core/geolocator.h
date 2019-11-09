@@ -63,6 +63,6 @@ class Geolocator : public QObject {
 };
 
 QDebug operator<<(QDebug dbg, const Geolocator::LatLng& ll);
-Q_DECLARE_METATYPE(Geolocator::LatLng);
+Q_DECLARE_METATYPE(Geolocator::LatLng)
 
 #endif  // INTERNET_CORE_GEOLOCATOR_H_

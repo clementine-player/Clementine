@@ -41,7 +41,7 @@ class XMLParser : public ParserBase {
 
    private:
     QXmlStreamWriter* stream_;
-    Q_DISABLE_COPY(StreamElement);
+    Q_DISABLE_COPY(StreamElement)
   };
 };
 

@@ -53,7 +53,7 @@ class CoverProviders : public QObject {
   void ProviderDestroyed();
 
  private:
-  Q_DISABLE_COPY(CoverProviders);
+  Q_DISABLE_COPY(CoverProviders)
 
   QMap<CoverProvider*, QString> cover_providers_;
   QMutex mutex_;

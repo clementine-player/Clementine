@@ -25,7 +25,7 @@ class QPropertyAnimation;
 
 class CollapsibleInfoHeader : public QWidget {
   Q_OBJECT
-  Q_PROPERTY(float opacity READ opacity WRITE set_opacity);
+  Q_PROPERTY(float opacity READ opacity WRITE set_opacity)
 
  public:
   CollapsibleInfoHeader(QWidget* parent = nullptr);

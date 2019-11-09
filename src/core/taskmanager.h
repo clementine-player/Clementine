@@ -50,7 +50,7 @@ class TaskManager : public QObject {
     const int task_id_;
     TaskManager* task_manager_;
 
-    Q_DISABLE_COPY(ScopedTask);
+    Q_DISABLE_COPY(ScopedTask)
   };
 
   // Everything here is thread safe
@@ -74,7 +74,7 @@ class TaskManager : public QObject {
   QMap<int, Task> tasks_;
   int next_task_id_;
 
-  Q_DISABLE_COPY(TaskManager);
+  Q_DISABLE_COPY(TaskManager)
 };
 
 #endif  // CORE_TASKMANAGER_H_

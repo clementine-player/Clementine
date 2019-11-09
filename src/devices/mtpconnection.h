@@ -31,7 +31,7 @@ class MtpConnection {
   LIBMTP_mtpdevice_t* device() const { return device_; }
 
  private:
-  Q_DISABLE_COPY(MtpConnection);
+  Q_DISABLE_COPY(MtpConnection)
 
   LIBMTP_mtpdevice_t* device_;
 };

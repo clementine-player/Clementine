@@ -52,6 +52,6 @@ private slots:
 
 };
 
-};
+}
 
 #endif // EPISODELIST_PRIVATE_H

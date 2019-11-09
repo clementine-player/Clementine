@@ -30,7 +30,7 @@ class QPropertyAnimation;
 class TagWidgetTag : public QWidget {
   Q_OBJECT
   Q_PROPERTY(float background_opacity READ background_opacity WRITE
-                 set_background_opacity);
+                 set_background_opacity)
 
  public:
   TagWidgetTag(const QIcon& icon, const QString& text, QWidget* parent);
