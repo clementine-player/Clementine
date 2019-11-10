@@ -27,8 +27,6 @@
 
 class SongInfoProvider;
 
-class QSignalMapper;
-
 class SongInfoFetcher : public QObject {
   Q_OBJECT
 
@@ -64,7 +62,6 @@ signals:
   QMap<int, QList<SongInfoProvider*> > waiting_for_;
   QMap<int, QTimer*> timeout_timers_;
 
-  QSignalMapper* timeout_timer_mapper_;
   int timeout_duration_;
 
   int next_id_;

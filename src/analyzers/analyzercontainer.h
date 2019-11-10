@@ -25,7 +25,6 @@
 
 #include <QWidget>
 #include <QMenu>
-#include <QSignalMapper>
 
 #include "analyzerbase.h"
 #include "engines/engine_fwd.h"
@@ -76,8 +75,6 @@ signals:
   QMenu* context_menu_framerate_;
   QActionGroup* group_;
   QActionGroup* group_framerate_;
-  QSignalMapper* mapper_;
-  QSignalMapper* mapper_framerate_;
 
   QList<const QMetaObject*> analyzer_types_;
   QList<int> framerate_list_;
@@ -100,11 +97,12 @@ void AnalyzerContainer::AddAnalyzerType() {
   int id = analyzer_types_.count();
   analyzer_types_ << &T::staticMetaObject;
   QAction* action =
-    context_menu_->addAction(tr(T::kName), mapper_, SLOT(map()));
+    context_menu_->addAction(tr(T::kName));
   group_->addAction(action);
-  mapper_->setMapping(action, id);
   action->setCheckable(true);
   actions_ << action;
+  connect(action, &QAction::triggered, [this, id]() { ChangeAnalyzer(id); } );
+
 }
 
 #endif  // ANALYZERS_ANALYZERCONTAINER_H_

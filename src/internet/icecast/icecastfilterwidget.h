@@ -29,7 +29,6 @@ class Ui_IcecastFilterWidget;
 
 class QActionGroup;
 class QMenu;
-class QSignalMapper;
 
 class IcecastFilterWidget : public QWidget {
   Q_OBJECT
@@ -58,8 +57,6 @@ class IcecastFilterWidget : public QWidget {
   Ui_IcecastFilterWidget* ui_;
   IcecastModel* model_;
   QMenu* menu_;
-
-  QSignalMapper* sort_mode_mapper_;
 };
 
 #endif  // INTERNET_ICECAST_ICECASTFILTERWIDGET_H_

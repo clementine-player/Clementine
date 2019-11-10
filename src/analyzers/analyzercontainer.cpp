@@ -51,8 +51,6 @@ AnalyzerContainer::AnalyzerContainer(QWidget* parent)
       context_menu_framerate_(new QMenu(tr("Framerate"), this)),
       group_(new QActionGroup(this)),
       group_framerate_(new QActionGroup(this)),
-      mapper_(new QSignalMapper(this)),
-      mapper_framerate_(new QSignalMapper(this)),
       visualisation_action_(nullptr),
       double_click_timer_(new QTimer(this)),
       ignore_next_click_(false),
@@ -69,7 +67,6 @@ AnalyzerContainer::AnalyzerContainer(QWidget* parent)
   AddFramerate(tr("High (%1 fps)").arg(kHighFramerate), kHighFramerate);
   AddFramerate(tr("Super high (%1 fps)").arg(kSuperHighFramerate),
                kSuperHighFramerate);
-  connect(mapper_framerate_, SIGNAL(mapped(int)), SLOT(ChangeFramerate(int)));
 
   context_menu_->addMenu(context_menu_framerate_);
   context_menu_->addSeparator();
@@ -82,7 +79,6 @@ AnalyzerContainer::AnalyzerContainer(QWidget* parent)
   AddAnalyzerType<Rainbow::NyanCatAnalyzer>();
   AddAnalyzerType<Rainbow::RainbowDashAnalyzer>();
 
-  connect(mapper_, SIGNAL(mapped(int)), SLOT(ChangeAnalyzer(int)));
   disable_action_ = context_menu_->addAction(tr("No analyzer"), this,
                                              SLOT(DisableAnalyzer()));
   disable_action_->setCheckable(true);
@@ -255,10 +251,10 @@ void AnalyzerContainer::SavePsychedelic() {
 
 void AnalyzerContainer::AddFramerate(const QString& name, int framerate) {
   QAction* action =
-      context_menu_framerate_->addAction(name, mapper_framerate_, SLOT(map()));
-  mapper_framerate_->setMapping(action, framerate);
+      context_menu_framerate_->addAction(name);
   group_framerate_->addAction(action);
   framerate_list_ << framerate;
   action->setCheckable(true);
+  connect(action, &QAction::triggered, [this, framerate]() { ChangeFramerate(framerate); } );
 }
 

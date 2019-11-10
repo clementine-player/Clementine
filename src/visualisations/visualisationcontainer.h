@@ -29,7 +29,6 @@ class VisualisationOverlay;
 class VisualisationSelector;
 
 class QMenu;
-class QSignalMapper;
 class QActionGroup;
 
 class VisualisationContainer : public QGraphicsView {
@@ -74,8 +73,8 @@ class VisualisationContainer : public QGraphicsView {
   void Init();
 
   void SizeChanged();
-  void AddMenuItem(const QString& name, int value, int def, QActionGroup* group,
-                   QSignalMapper* mapper);
+  void AddFramerateMenuItem(const QString& name, int value, int def, QActionGroup* group);
+  void AddQualityMenuItem(const QString& name, int value, int def, QActionGroup* group);
 
  private slots:
   void ChangeOverlayOpacity(qreal value);

@@ -32,7 +32,6 @@ class QAction;
 class QShortcut;
 
 class GlobalShortcutBackend;
-class QSignalMapper;
 
 class GlobalShortcuts : public QWidget {
   Q_OBJECT
@@ -87,8 +86,7 @@ signals:
  private:
   void AddShortcut(const QString& id, const QString& name, const char* signal,
                    const QKeySequence& default_key = QKeySequence(0));
-  void AddRatingShortcut(const QString& id, const QString& name,
-                         QSignalMapper* mapper, int rating,
+  void AddRatingShortcut(const QString& id, const QString& name, int rating,
                          const QKeySequence& default_key = QKeySequence(0));
   Shortcut AddShortcut(const QString& id, const QString& name,
                        const QKeySequence& default_key);
@@ -101,7 +99,6 @@ signals:
   QSettings settings_;
 
   bool use_gnome_;
-  QSignalMapper* rating_signals_mapper_;
 };
 
 #endif  // CORE_GLOBALSHORTCUTS_H_

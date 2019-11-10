@@ -26,7 +26,6 @@
 class QActionGroup;
 class QMenu;
 class QSettings;
-class QSignalMapper;
 
 namespace Core {
 namespace Internal {
@@ -81,7 +80,7 @@ class FancyTabWidget : public QTabWidget {
         void paintEvent(QPaintEvent *);
         void contextMenuEvent(QContextMenuEvent* e);
     private:
-        void addMenuItem(QSignalMapper* mapper, QActionGroup* group,
+        void addMenuItem(QActionGroup* group,
                                  const QString& text, Mode mode);
 
         QPixmap background_pixmap_;

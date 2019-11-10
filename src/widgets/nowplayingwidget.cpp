@@ -23,7 +23,6 @@
 #include <QPainter>
 #include <QPaintEvent>
 #include <QSettings>
-#include <QSignalMapper>
 #include <QTextDocument>
 #include <QTimeLine>
 #include <QtDebug>
@@ -93,17 +92,10 @@ NowPlayingWidget::NowPlayingWidget(QWidget* parent)
 
   // Context menu
   QActionGroup* mode_group = new QActionGroup(this);
-  QSignalMapper* mode_mapper = new QSignalMapper(this);
-  connect(mode_mapper, SIGNAL(mapped(int)), SLOT(SetMode(int)));
-  CreateModeAction(SmallSongDetails, tr("Small album cover"), mode_group,
-                   mode_mapper);
-  CreateModeAction(LargeSongDetails, tr("Large album cover"), mode_group,
-                   mode_mapper);
-  CreateModeAction(LargeSongDetailsBelow,
-                   tr("Large album cover (details below)"), mode_group,
-                   mode_mapper);
-  CreateModeAction(LargeNoSongDetails, tr("Large album cover (no details)"),
-                   mode_group, mode_mapper);
+  CreateModeAction(SmallSongDetails, tr("Small album cover"), mode_group);
+  CreateModeAction(LargeSongDetails, tr("Large album cover"), mode_group);
+  CreateModeAction(LargeSongDetailsBelow, tr("Large album cover (details below)"), mode_group);
+  CreateModeAction(LargeNoSongDetails, tr("Large album cover (no details)"), mode_group);
 
   menu_->addActions(mode_group->actions());
 
@@ -187,12 +179,10 @@ void NowPlayingWidget::SetApplication(Application* app) {
 }
 
 void NowPlayingWidget::CreateModeAction(Mode mode, const QString& text,
-                                        QActionGroup* group,
-                                        QSignalMapper* mapper) {
+                                        QActionGroup* group) {
   QAction* action = new QAction(text, group);
   action->setCheckable(true);
-  mapper->setMapping(action, mode);
-  connect(action, SIGNAL(triggered()), mapper, SLOT(map()));
+  connect(action, &QAction::triggered, [this, mode]() { SetMode(mode); } );
 
   if (mode == mode_) action->setChecked(true);
 }

@@ -19,16 +19,12 @@
 #include "songinfoprovider.h"
 #include "core/logging.h"
 
-#include <QSignalMapper>
 #include <QTimer>
 
 SongInfoFetcher::SongInfoFetcher(QObject* parent)
     : QObject(parent),
-      timeout_timer_mapper_(new QSignalMapper(this)),
       timeout_duration_(kDefaultTimeoutDuration),
-      next_id_(1) {
-  connect(timeout_timer_mapper_, SIGNAL(mapped(int)), SLOT(Timeout(int)));
-}
+      next_id_(1) {}
 
 void SongInfoFetcher::AddProvider(SongInfoProvider* provider) {
   providers_ << provider;
@@ -49,9 +45,7 @@ int SongInfoFetcher::FetchInfo(const Song& metadata) {
   timeout_timers_[id]->setInterval(timeout_duration_);
   timeout_timers_[id]->start();
 
-  timeout_timer_mapper_->setMapping(timeout_timers_[id], id);
-  connect(timeout_timers_[id], SIGNAL(timeout()), timeout_timer_mapper_,
-          SLOT(map()));
+  connect(timeout_timers_[id], &QTimer::timeout, [this, id]() { Timeout(id); } );
 
   for (SongInfoProvider* provider : providers_) {
     if (provider->is_enabled()) {
@@ -91,6 +85,7 @@ void SongInfoFetcher::ProviderFinished(int id) {
 }
 
 void SongInfoFetcher::Timeout(int id) {
+
   if (!results_.contains(id)) return;
   if (!waiting_for_.contains(id)) return;
 
