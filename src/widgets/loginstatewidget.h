@@ -46,7 +46,7 @@ class LoginStateWidget : public QWidget {
  public slots:
   // Changes the "You are logged in/out" label, shows/hides any QGroupBoxes
   // added with AddCredentialGroup.
-  void SetLoggedIn(State state, const QString& account_name = QString::null);
+  void SetLoggedIn(State state, const QString& account_name = QString());
 
   // Hides the "You are logged in/out" label completely.
   void HideLoggedInState();

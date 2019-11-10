@@ -162,7 +162,7 @@ void SkydriveService::ListFilesFinished(QNetworkReply* reply) {
       // HTTPS appears to be broken somehow between Qt & Skydrive downloads.
       // Fortunately, just changing the scheme to HTTP works.
       download_url.setScheme("http");
-      MaybeAddFileToDatabase(song, mime_type, download_url, QString::null);
+      MaybeAddFileToDatabase(song, mime_type, download_url, QString());
     }
   }
 }

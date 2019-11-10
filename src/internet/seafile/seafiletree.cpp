@@ -264,7 +264,7 @@ QString SeafileTree::Entry::TypeToString(const Type& type) {
     case LIBRARY:
       return "library";
     default:
-      return QString::null;
+      return QString();
   }
 }
 

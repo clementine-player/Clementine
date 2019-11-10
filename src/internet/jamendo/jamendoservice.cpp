@@ -92,8 +92,8 @@ JamendoService::JamendoService(Application* app, InternetModel* parent)
       accepted_download_(false) {
   library_backend_ = new LibraryBackend;
   library_backend_->moveToThread(app_->database()->thread());
-  library_backend_->Init(app_->database(), kSongsTable, QString::null,
-                         QString::null, kFtsTable);
+  library_backend_->Init(app_->database(), kSongsTable, QString(), QString(),
+                         kFtsTable);
   connect(library_backend_, SIGNAL(TotalSongCountUpdated(int)),
           SLOT(UpdateTotalSongCount(int)));
 

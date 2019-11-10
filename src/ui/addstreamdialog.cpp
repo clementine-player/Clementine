@@ -32,7 +32,7 @@ AddStreamDialog::AddStreamDialog(QWidget* parent)
   ui_->setupUi(this);
 
   connect(ui_->url, SIGNAL(textChanged(QString)), SLOT(TextChanged(QString)));
-  TextChanged(QString::null);
+  TextChanged(QString());
 
   // Restore settings
   QSettings s;

@@ -173,7 +173,7 @@ QString ExtractExtract(const QJsonObject& json) {
       return it.value().toString();
     }
   }
-  return QString::null;
+  return QString();
 }
 
 }  // namespace
