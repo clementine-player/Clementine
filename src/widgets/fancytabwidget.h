@@ -86,7 +86,6 @@ class FancyTabWidget : public QTabWidget {
      QMenu* menu_;
      Mode mode_;
      QWidget* bottom_widget_;
-
 };
 
 }  // namespace Internal

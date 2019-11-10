@@ -250,11 +250,10 @@ void AnalyzerContainer::SavePsychedelic() {
 }
 
 void AnalyzerContainer::AddFramerate(const QString& name, int framerate) {
-  QAction* action =
-      context_menu_framerate_->addAction(name);
+  QAction* action = context_menu_framerate_->addAction(name);
   group_framerate_->addAction(action);
   framerate_list_ << framerate;
   action->setCheckable(true);
-  connect(action, &QAction::triggered, [this, framerate]() { ChangeFramerate(framerate); } );
+  connect(action, &QAction::triggered,
+          [this, framerate]() { ChangeFramerate(framerate); });
 }
-
