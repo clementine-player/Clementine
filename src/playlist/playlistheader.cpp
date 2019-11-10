@@ -112,8 +112,8 @@ void PlaylistHeader::AddColumnAction(int index) {
   action->setChecked(!isSectionHidden(index));
   show_actions_ << action;
 
-  connect(action, &QAction::triggered, [this, index]() { ToggleVisible(index); } );
-
+  connect(action, &QAction::triggered,
+          [this, index]() { ToggleVisible(index); });
 }
 
 void PlaylistHeader::HideCurrent() {

@@ -121,7 +121,8 @@ void Wizard::AddPlugin(WizardPlugin* plugin) {
   type_page_->layout()->addWidget(radio_button);
   type_page_->layout()->addWidget(description);
 
-  connect(radio_button, &QRadioButton::clicked, [this, index]() { TypeChanged(index); } );
+  connect(radio_button, &QRadioButton::clicked,
+          [this, index]() { TypeChanged(index); });
 
   if (index == 0) {
     radio_button->setChecked(true);

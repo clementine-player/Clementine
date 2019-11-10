@@ -108,10 +108,12 @@ void GlobalShortcuts::AddShortcut(const QString& id, const QString& name,
   connect(shortcut.action, SIGNAL(triggered()), this, signal);
 }
 
-void GlobalShortcuts::AddRatingShortcut(const QString& id, const QString& name, int rating,
+void GlobalShortcuts::AddRatingShortcut(const QString& id, const QString& name,
+                                        int rating,
                                         const QKeySequence& default_key) {
   Shortcut shortcut = AddShortcut(id, name, default_key);
-  connect(shortcut.action, &QAction::triggered, [this, rating]() { RateCurrentSong(rating); } );
+  connect(shortcut.action, &QAction::triggered,
+          [this, rating]() { RateCurrentSong(rating); });
 }
 
 GlobalShortcuts::Shortcut GlobalShortcuts::AddShortcut(

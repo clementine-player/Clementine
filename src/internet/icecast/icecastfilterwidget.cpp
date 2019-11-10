@@ -56,7 +56,8 @@ IcecastFilterWidget::IcecastFilterWidget(QWidget* parent)
 void IcecastFilterWidget::AddAction(QActionGroup* group, QAction* action,
                                     IcecastModel::SortMode mode) {
   group->addAction(action);
-  connect(action, &QAction::triggered, [this, mode]() { SortModeChanged(mode); } );
+  connect(action, &QAction::triggered,
+          [this, mode]() { SortModeChanged(mode); });
 }
 
 IcecastFilterWidget::~IcecastFilterWidget() { delete ui_; }

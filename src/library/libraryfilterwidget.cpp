@@ -233,9 +233,10 @@ void LibraryFilterWidget::SetLibraryModel(LibraryModel* model) {
   connect(group_by_dialog_.get(), SIGNAL(Accepted(LibraryModel::Grouping)),
           model_, SLOT(SetGroupBy(LibraryModel::Grouping)));
 
-  for (QAction *action : filter_ages_.keys()) {
+  for (QAction* action : filter_ages_.keys()) {
     int age = filter_ages_[action];
-    connect(action, &QAction::triggered, [this, age]() { model_->SetFilterAge(age); } );
+    connect(action, &QAction::triggered,
+            [this, age]() { model_->SetFilterAge(age); });
   }
 
   // Load settings

@@ -96,13 +96,11 @@ template <typename T>
 void AnalyzerContainer::AddAnalyzerType() {
   int id = analyzer_types_.count();
   analyzer_types_ << &T::staticMetaObject;
-  QAction* action =
-    context_menu_->addAction(tr(T::kName));
+  QAction* action = context_menu_->addAction(tr(T::kName));
   group_->addAction(action);
   action->setCheckable(true);
   actions_ << action;
-  connect(action, &QAction::triggered, [this, id]() { ChangeAnalyzer(id); } );
-
+  connect(action, &QAction::triggered, [this, id]() { ChangeAnalyzer(id); });
 }
 
 #endif  // ANALYZERS_ANALYZERCONTAINER_H_

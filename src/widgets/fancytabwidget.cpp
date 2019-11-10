@@ -411,10 +411,11 @@ void FancyTabWidget::SetMode(FancyTabWidget::Mode mode) {
     emit ModeChanged(mode);
 }
 
-void FancyTabWidget::addMenuItem(QActionGroup* group, const QString& text, Mode mode) {
+void FancyTabWidget::addMenuItem(QActionGroup* group, const QString& text,
+                                 Mode mode) {
   QAction* action = group->addAction(text);
   action->setCheckable(true);
-  connect(action, &QAction::triggered, [this, mode]() { SetMode(mode); } );
+  connect(action, &QAction::triggered, [this, mode]() { SetMode(mode); });
 
   if (mode == mode_) action->setChecked(true);
 }

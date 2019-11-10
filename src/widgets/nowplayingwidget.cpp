@@ -94,8 +94,10 @@ NowPlayingWidget::NowPlayingWidget(QWidget* parent)
   QActionGroup* mode_group = new QActionGroup(this);
   CreateModeAction(SmallSongDetails, tr("Small album cover"), mode_group);
   CreateModeAction(LargeSongDetails, tr("Large album cover"), mode_group);
-  CreateModeAction(LargeSongDetailsBelow, tr("Large album cover (details below)"), mode_group);
-  CreateModeAction(LargeNoSongDetails, tr("Large album cover (no details)"), mode_group);
+  CreateModeAction(LargeSongDetailsBelow,
+                   tr("Large album cover (details below)"), mode_group);
+  CreateModeAction(LargeNoSongDetails, tr("Large album cover (no details)"),
+                   mode_group);
 
   menu_->addActions(mode_group->actions());
 
@@ -182,7 +184,7 @@ void NowPlayingWidget::CreateModeAction(Mode mode, const QString& text,
                                         QActionGroup* group) {
   QAction* action = new QAction(text, group);
   action->setCheckable(true);
-  connect(action, &QAction::triggered, [this, mode]() { SetMode(mode); } );
+  connect(action, &QAction::triggered, [this, mode]() { SetMode(mode); });
 
   if (mode == mode_) action->setChecked(true);
 }

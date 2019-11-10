@@ -20,8 +20,8 @@
 
 #include <memory>
 
-#include <QWidget>
 #include <QMap>
+#include <QWidget>
 
 #include "librarymodel.h"
 #include "savedgroupingmanager.h"

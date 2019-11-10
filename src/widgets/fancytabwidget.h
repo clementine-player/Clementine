@@ -80,13 +80,12 @@ class FancyTabWidget : public QTabWidget {
         void paintEvent(QPaintEvent *);
         void contextMenuEvent(QContextMenuEvent* e);
     private:
-        void addMenuItem(QActionGroup* group,
-                                 const QString& text, Mode mode);
+     void addMenuItem(QActionGroup* group, const QString& text, Mode mode);
 
-        QPixmap background_pixmap_;
-        QMenu* menu_;
-        Mode mode_;
-        QWidget *bottom_widget_;
+     QPixmap background_pixmap_;
+     QMenu* menu_;
+     Mode mode_;
+     QWidget* bottom_widget_;
 
 };
 

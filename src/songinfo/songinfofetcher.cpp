@@ -45,7 +45,7 @@ int SongInfoFetcher::FetchInfo(const Song& metadata) {
   timeout_timers_[id]->setInterval(timeout_duration_);
   timeout_timers_[id]->start();
 
-  connect(timeout_timers_[id], &QTimer::timeout, [this, id]() { Timeout(id); } );
+  connect(timeout_timers_[id], &QTimer::timeout, [this, id]() { Timeout(id); });
 
   for (SongInfoProvider* provider : providers_) {
     if (provider->is_enabled()) {
@@ -85,7 +85,6 @@ void SongInfoFetcher::ProviderFinished(int id) {
 }
 
 void SongInfoFetcher::Timeout(int id) {
-
   if (!results_.contains(id)) return;
   if (!waiting_for_.contains(id)) return;
 

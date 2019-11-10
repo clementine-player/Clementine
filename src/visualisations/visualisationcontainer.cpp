@@ -102,14 +102,14 @@ void VisualisationContainer::Init() {
 
   QMenu* fps_menu = menu_->addMenu(tr("Framerate"));
   QActionGroup* fps_group = new QActionGroup(this);
-  AddFramerateMenuItem(tr("Low (%1 fps)").arg(kLowFramerate), kLowFramerate, fps_,
-              fps_group);
-  AddFramerateMenuItem(tr("Medium (%1 fps)").arg(kMediumFramerate), kMediumFramerate,
-              fps_, fps_group);
-  AddFramerateMenuItem(tr("High (%1 fps)").arg(kHighFramerate), kHighFramerate, fps_,
-              fps_group);
+  AddFramerateMenuItem(tr("Low (%1 fps)").arg(kLowFramerate), kLowFramerate,
+                       fps_, fps_group);
+  AddFramerateMenuItem(tr("Medium (%1 fps)").arg(kMediumFramerate),
+                       kMediumFramerate, fps_, fps_group);
+  AddFramerateMenuItem(tr("High (%1 fps)").arg(kHighFramerate), kHighFramerate,
+                       fps_, fps_group);
   AddFramerateMenuItem(tr("Super high (%1 fps)").arg(kSuperHighFramerate),
-              kSuperHighFramerate, fps_, fps_group);
+                       kSuperHighFramerate, fps_, fps_group);
   fps_menu->addActions(fps_group->actions());
 
   QMenu* quality_menu = menu_->addMenu(tr("Quality", "Visualisation quality"));
@@ -127,22 +127,21 @@ void VisualisationContainer::Init() {
                    tr("Close visualization"), this, SLOT(hide()));
 }
 
-void VisualisationContainer::AddFramerateMenuItem(const QString& name, int value, int def, QActionGroup* group) {
-
+void VisualisationContainer::AddFramerateMenuItem(const QString& name,
+                                                  int value, int def,
+                                                  QActionGroup* group) {
   QAction* action = group->addAction(name);
   action->setCheckable(true);
   action->setChecked(value == def);
-  connect(action, &QAction::triggered, [this, value]() { SetFps(value); } );
-
+  connect(action, &QAction::triggered, [this, value]() { SetFps(value); });
 }
 
-void VisualisationContainer::AddQualityMenuItem(const QString& name, int value, int def, QActionGroup* group) {
-
+void VisualisationContainer::AddQualityMenuItem(const QString& name, int value,
+                                                int def, QActionGroup* group) {
   QAction* action = group->addAction(name);
   action->setCheckable(true);
   action->setChecked(value == def);
-  connect(action, &QAction::triggered, [this, value]() { SetQuality(value); } );
-
+  connect(action, &QAction::triggered, [this, value]() { SetQuality(value); });
 }
 
 void VisualisationContainer::SetEngine(GstEngine* engine) {

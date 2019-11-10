@@ -100,7 +100,7 @@ OrganiseDialog::OrganiseDialog(
   for (const QString& title : tag_titles) {
     QAction* action = tag_menu->addAction(title);
     QString tag = tags[title];
-    connect(action, &QAction::triggered, [this, tag]() { InsertTag(tag); } );
+    connect(action, &QAction::triggered, [this, tag]() { InsertTag(tag); });
   }
 
   ui_->insert->setMenu(tag_menu);

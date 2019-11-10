@@ -73,8 +73,10 @@ class VisualisationContainer : public QGraphicsView {
   void Init();
 
   void SizeChanged();
-  void AddFramerateMenuItem(const QString& name, int value, int def, QActionGroup* group);
-  void AddQualityMenuItem(const QString& name, int value, int def, QActionGroup* group);
+  void AddFramerateMenuItem(const QString& name, int value, int def,
+                            QActionGroup* group);
+  void AddQualityMenuItem(const QString& name, int value, int def,
+                          QActionGroup* group);
 
  private slots:
   void ChangeOverlayOpacity(qreal value);
