@@ -29,7 +29,7 @@ namespace PlaylistUndoCommands {
 enum Types { Type_RemoveItems = 0, };
 
 class Base : public QUndoCommand {
-  Q_DECLARE_TR_FUNCTIONS(PlaylistUndoCommands);
+  Q_DECLARE_TR_FUNCTIONS(PlaylistUndoCommands)
 
  public:
   Base(Playlist* playlist);

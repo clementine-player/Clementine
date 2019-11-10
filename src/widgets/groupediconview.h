@@ -37,7 +37,7 @@ class GroupedIconView : public QListView {
   Q_PROPERTY(int item_indent READ item_indent WRITE set_item_indent)
 
   // The text of each group's header.  Must contain "%1".
-  Q_PROPERTY(QString header_text READ header_text WRITE set_header_text);
+  Q_PROPERTY(QString header_text READ header_text WRITE set_header_text)
 
  public:
   GroupedIconView(QWidget* parent = nullptr);

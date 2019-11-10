@@ -38,7 +38,7 @@ class RatingPainter {
 
 class RatingWidget : public QWidget {
   Q_OBJECT
-  Q_PROPERTY(float rating READ rating WRITE set_rating);
+  Q_PROPERTY(float rating READ rating WRITE set_rating)
 
  public:
   RatingWidget(QWidget* parent = nullptr);

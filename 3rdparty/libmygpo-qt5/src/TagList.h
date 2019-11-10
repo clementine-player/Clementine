@@ -61,6 +61,6 @@ typedef QSharedPointer<TagList> TagListPtr;
 
 }
 
-Q_DECLARE_METATYPE( mygpo::TagListPtr );
+Q_DECLARE_METATYPE(mygpo::TagListPtr)
 
 #endif // LIBMYGPO_QT_TAGLIST_H

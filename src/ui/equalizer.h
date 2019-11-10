@@ -89,7 +89,7 @@ signals:
 
   QMap<QString, Params> presets_;
 };
-Q_DECLARE_METATYPE(Equalizer::Params);
+Q_DECLARE_METATYPE(Equalizer::Params)
 
 QDataStream& operator<<(QDataStream& s, const Equalizer::Params& p);
 QDataStream& operator>>(QDataStream& s, Equalizer::Params& p);

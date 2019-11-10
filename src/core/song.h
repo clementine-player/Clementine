@@ -318,10 +318,10 @@ class Song {
   struct Private;
   QSharedDataPointer<Private> d;
 };
-Q_DECLARE_METATYPE(Song);
+Q_DECLARE_METATYPE(Song)
 
 typedef QList<Song> SongList;
-Q_DECLARE_METATYPE(QList<Song>);
+Q_DECLARE_METATYPE(QList<Song>)
 
 uint qHash(const Song& song);
 // Hash function using field checked in IsSimilar function

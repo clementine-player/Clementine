@@ -143,6 +143,6 @@ signals:
   Lazy<QAction> separator_;
 };
 
-Q_DECLARE_METATYPE(InternetService*);
+Q_DECLARE_METATYPE(InternetService*)
 
 #endif  // INTERNET_CORE_INTERNETSERVICE_H_

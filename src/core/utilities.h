@@ -172,7 +172,7 @@ class ScopedWCharArray {
   int bytes() const { return (chars_ + 1) * sizeof(wchar_t); }
 
  private:
-  Q_DISABLE_COPY(ScopedWCharArray);
+  Q_DISABLE_COPY(ScopedWCharArray)
 
   int chars_;
   std::unique_ptr<wchar_t[]> data_;

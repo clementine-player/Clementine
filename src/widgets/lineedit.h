@@ -92,13 +92,13 @@ class ExtendedEditor : public LineEditInterface {
 
 class LineEdit : public QLineEdit, public ExtendedEditor {
   Q_OBJECT
-  Q_PROPERTY(QString hint READ hint WRITE set_hint);
+  Q_PROPERTY(QString hint READ hint WRITE set_hint)
   Q_PROPERTY(qreal font_point_size READ font_point_size WRITE
-                 set_font_point_size);
+                 set_font_point_size)
   Q_PROPERTY(bool has_clear_button READ has_clear_button WRITE
-                 set_clear_button);
+                 set_clear_button)
   Q_PROPERTY(bool has_reset_button READ has_reset_button WRITE
-                 set_reset_button);
+                 set_reset_button)
 
  public:
   LineEdit(QWidget* parent = nullptr);
@@ -126,11 +126,11 @@ signals:
 
 class TextEdit : public QPlainTextEdit, public ExtendedEditor {
   Q_OBJECT
-  Q_PROPERTY(QString hint READ hint WRITE set_hint);
+  Q_PROPERTY(QString hint READ hint WRITE set_hint)
   Q_PROPERTY(bool has_clear_button READ has_clear_button WRITE
-                 set_clear_button);
+                 set_clear_button)
   Q_PROPERTY(bool has_reset_button READ has_reset_button WRITE
-                 set_reset_button);
+                 set_reset_button)
 
  public:
   TextEdit(QWidget* parent = nullptr);
@@ -151,11 +151,11 @@ signals:
 
 class SpinBox : public QSpinBox, public ExtendedEditor {
   Q_OBJECT
-  Q_PROPERTY(QString hint READ hint WRITE set_hint);
+  Q_PROPERTY(QString hint READ hint WRITE set_hint)
   Q_PROPERTY(bool has_clear_button READ has_clear_button WRITE
-                 set_clear_button);
+                 set_clear_button)
   Q_PROPERTY(bool has_reset_button READ has_reset_button WRITE
-                 set_reset_button);
+                 set_reset_button)
 
  public:
   SpinBox(QWidget* parent = nullptr);

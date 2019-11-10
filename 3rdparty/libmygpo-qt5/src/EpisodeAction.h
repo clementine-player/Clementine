@@ -75,6 +75,6 @@ typedef QSharedPointer<EpisodeAction> EpisodeActionPtr;
 
 }
 
-Q_DECLARE_METATYPE( mygpo::EpisodeActionPtr );
+Q_DECLARE_METATYPE(mygpo::EpisodeActionPtr)
 
 #endif // LIBMYGPO_QT_EPISODEACTION_H

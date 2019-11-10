@@ -58,7 +58,7 @@ class CrashReporting {
                       void* context, bool succeeded);
 
  private:
-  Q_DISABLE_COPY(CrashReporting);
+  Q_DISABLE_COPY(CrashReporting)
 
   static const char* kSendCrashReportOption;
   static char* sPath;

@@ -33,7 +33,7 @@ namespace smart_playlists {
 class SearchTermWidget : public QWidget {
   Q_OBJECT
   Q_PROPERTY(float overlay_opacity READ overlay_opacity WRITE
-                 set_overlay_opacity);
+                 set_overlay_opacity)
 
  public:
   SearchTermWidget(LibraryBackend* library, QWidget* parent);

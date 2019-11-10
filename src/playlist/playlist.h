@@ -49,8 +49,8 @@ class ShuffleItems;
 }
 
 typedef QMap<int, Qt::Alignment> ColumnAlignmentMap;
-Q_DECLARE_METATYPE(Qt::Alignment);
-Q_DECLARE_METATYPE(ColumnAlignmentMap);
+Q_DECLARE_METATYPE(Qt::Alignment)
+Q_DECLARE_METATYPE(ColumnAlignmentMap)
 
 // Objects that may prevent a song being added to the playlist. When there
 // is something about to be inserted into it, Playlist notifies all of it's

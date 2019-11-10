@@ -66,6 +66,6 @@ private slots:
 
 };
 
-};
+}  // namespace mygpo
 
 #endif // EPISODE_PRIVATE_H

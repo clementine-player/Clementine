@@ -45,7 +45,7 @@ class QSettings;
 
 class LibraryModel : public SimpleTreeModel<LibraryItem> {
   Q_OBJECT
-  Q_ENUMS(GroupBy);
+  Q_ENUMS(GroupBy)
 
  public:
   LibraryModel(LibraryBackend* backend, Application* app,
@@ -304,7 +304,7 @@ signals:
   QSet<QString> pending_cache_keys_;
 };
 
-Q_DECLARE_METATYPE(LibraryModel::Grouping);
+Q_DECLARE_METATYPE(LibraryModel::Grouping)
 
 QDataStream& operator<<(QDataStream& s, const LibraryModel::Grouping& g);
 QDataStream& operator>>(QDataStream& s, LibraryModel::Grouping& g);

@@ -85,7 +85,7 @@ class MusicStorage {
   virtual void Eject() {}
 };
 
-Q_DECLARE_METATYPE(MusicStorage*);
-Q_DECLARE_METATYPE(std::shared_ptr<MusicStorage>);
+Q_DECLARE_METATYPE(MusicStorage*)
+Q_DECLARE_METATYPE(std::shared_ptr<MusicStorage>)
 
 #endif  // CORE_MUSICSTORAGE_H_
