@@ -22,7 +22,6 @@
 
 #include <QLabel>
 #include <QRadioButton>
-#include <QSignalMapper>
 #include <QVBoxLayout>
 
 namespace smart_playlists {
@@ -57,8 +56,7 @@ Wizard::Wizard(Application* app, LibraryBackend* library, QWidget* parent)
       library_(library),
       type_page_(new TypePage(this)),
       finish_page_(new FinishPage(this)),
-      type_index_(-1),
-      type_mapper_(new QSignalMapper(this)) {
+      type_index_(-1) {
   setWindowIcon(QIcon(":/icon.png"));
   setWindowTitle(tr("Smart playlist"));
   resize(788, 628);
@@ -83,8 +81,6 @@ Wizard::Wizard(Application* app, LibraryBackend* library, QWidget* parent)
   finish_page_->setTitle(tr("Finish"));
   finish_page_->setSubTitle(tr("Choose a name for your smart playlist"));
   finish_id_ = addPage(finish_page_);
-
-  connect(type_mapper_, SIGNAL(mapped(int)), SLOT(TypeChanged(int)));
 
   new QVBoxLayout(type_page_);
   AddPlugin(new QueryWizardPlugin(app_, library_, this));
@@ -125,8 +121,8 @@ void Wizard::AddPlugin(WizardPlugin* plugin) {
   type_page_->layout()->addWidget(radio_button);
   type_page_->layout()->addWidget(description);
 
-  type_mapper_->setMapping(radio_button, index);
-  connect(radio_button, SIGNAL(clicked()), type_mapper_, SLOT(map()));
+  connect(radio_button, &QRadioButton::clicked,
+          [this, index]() { TypeChanged(index); });
 
   if (index == 0) {
     radio_button->setChecked(true);

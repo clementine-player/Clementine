@@ -25,7 +25,6 @@
 #include <QMenu>
 #include <QMouseEvent>
 #include <QPainter>
-#include <QSignalMapper>
 #include <QTabBar>
 #include <QStylePainter>
 #include <QTimer>
@@ -412,12 +411,11 @@ void FancyTabWidget::SetMode(FancyTabWidget::Mode mode) {
     emit ModeChanged(mode);
 }
 
-void FancyTabWidget::addMenuItem(QSignalMapper* mapper, QActionGroup* group,
-                                 const QString& text, Mode mode) {
+void FancyTabWidget::addMenuItem(QActionGroup* group, const QString& text,
+                                 Mode mode) {
   QAction* action = group->addAction(text);
   action->setCheckable(true);
-  mapper->setMapping(action, mode);
-  connect(action, SIGNAL(triggered()), mapper, SLOT(map()));
+  connect(action, &QAction::triggered, [this, mode]() { SetMode(mode); });
 
   if (mode == mode_) action->setChecked(true);
 }
@@ -427,16 +425,13 @@ void FancyTabWidget::contextMenuEvent(QContextMenuEvent* e) {
   if (!menu_) {
     menu_ = new QMenu(this);
 
-    QSignalMapper* mapper = new QSignalMapper(this);
     QActionGroup* group = new QActionGroup(this);
-    addMenuItem(mapper, group, tr("Large sidebar"), Mode_LargeSidebar);
-    addMenuItem(mapper, group, tr("Small sidebar"), Mode_SmallSidebar);
-    addMenuItem(mapper, group, tr("Plain sidebar"), Mode_PlainSidebar);
-    addMenuItem(mapper, group, tr("Tabs on top"), Mode_Tabs);
-    addMenuItem(mapper, group, tr("Icons on top"), Mode_IconOnlyTabs);
+    addMenuItem(group, tr("Large sidebar"), Mode_LargeSidebar);
+    addMenuItem(group, tr("Small sidebar"), Mode_SmallSidebar);
+    addMenuItem(group, tr("Plain sidebar"), Mode_PlainSidebar);
+    addMenuItem(group, tr("Tabs on top"), Mode_Tabs);
+    addMenuItem(group, tr("Icons on top"), Mode_IconOnlyTabs);
     menu_->addActions(group->actions());
-
-    connect(mapper, SIGNAL(mapped(int)), SLOT(SetMode(int)));
   }
 
   menu_->popup(e->globalPos());

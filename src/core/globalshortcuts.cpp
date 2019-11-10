@@ -29,7 +29,6 @@
 
 #include <QAction>
 #include <QShortcut>
-#include <QSignalMapper>
 #include <QtDebug>
 
 #ifdef HAVE_DBUS
@@ -42,8 +41,7 @@ GlobalShortcuts::GlobalShortcuts(QWidget* parent)
     : QWidget(parent),
       gnome_backend_(nullptr),
       system_backend_(nullptr),
-      use_gnome_(false),
-      rating_signals_mapper_(new QSignalMapper(this)) {
+      use_gnome_(false) {
   settings_.beginGroup(kSettingsGroup);
 
   // Create actions
@@ -84,21 +82,12 @@ GlobalShortcuts::GlobalShortcuts(QWidget* parent)
               tr("Remove current song from playlist"),
               SIGNAL(RemoveCurrentSong()));
 
-  AddRatingShortcut("rate_zero_star", tr("Rate the current song 0 stars"),
-                    rating_signals_mapper_, 0);
-  AddRatingShortcut("rate_one_star", tr("Rate the current song 1 star"),
-                    rating_signals_mapper_, 1);
-  AddRatingShortcut("rate_two_star", tr("Rate the current song 2 stars"),
-                    rating_signals_mapper_, 2);
-  AddRatingShortcut("rate_three_star", tr("Rate the current song 3 stars"),
-                    rating_signals_mapper_, 3);
-  AddRatingShortcut("rate_four_star", tr("Rate the current song 4 stars"),
-                    rating_signals_mapper_, 4);
-  AddRatingShortcut("rate_five_star", tr("Rate the current song 5 stars"),
-                    rating_signals_mapper_, 5);
-
-  connect(rating_signals_mapper_, SIGNAL(mapped(int)),
-          SIGNAL(RateCurrentSong(int)));
+  AddRatingShortcut("rate_zero_star", tr("Rate the current song 0 stars"), 0);
+  AddRatingShortcut("rate_one_star", tr("Rate the current song 1 star"), 1);
+  AddRatingShortcut("rate_two_star", tr("Rate the current song 2 stars"), 2);
+  AddRatingShortcut("rate_three_star", tr("Rate the current song 3 stars"), 3);
+  AddRatingShortcut("rate_four_star", tr("Rate the current song 4 stars"), 4);
+  AddRatingShortcut("rate_five_star", tr("Rate the current song 5 stars"), 5);
 
   // Create backends - these do the actual shortcut registration
   gnome_backend_ = new GnomeGlobalShortcutBackend(this);
@@ -120,11 +109,11 @@ void GlobalShortcuts::AddShortcut(const QString& id, const QString& name,
 }
 
 void GlobalShortcuts::AddRatingShortcut(const QString& id, const QString& name,
-                                        QSignalMapper* mapper, int rating,
+                                        int rating,
                                         const QKeySequence& default_key) {
   Shortcut shortcut = AddShortcut(id, name, default_key);
-  connect(shortcut.action, SIGNAL(triggered()), mapper, SLOT(map()));
-  mapper->setMapping(shortcut.action, rating);
+  connect(shortcut.action, &QAction::triggered,
+          [this, rating]() { RateCurrentSong(rating); });
 }
 
 GlobalShortcuts::Shortcut GlobalShortcuts::AddShortcut(

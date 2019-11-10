@@ -26,8 +26,6 @@ class Application;
 class LibraryBackend;
 class Ui_SmartPlaylistWizardFinishPage;
 
-class QSignalMapper;
-
 namespace smart_playlists {
 
 class WizardPlugin;
@@ -63,7 +61,6 @@ class Wizard : public QWizard {
 
   int type_index_;
   QList<WizardPlugin*> plugins_;
-  QSignalMapper* type_mapper_;
 };
 
 }  // namespace

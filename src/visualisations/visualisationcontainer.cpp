@@ -32,7 +32,6 @@
 #include <QMessageBox>
 #include <QSettings>
 #include <QShortcut>
-#include <QSignalMapper>
 #include <QtDebug>
 
 // Framerates
@@ -102,31 +101,24 @@ void VisualisationContainer::Init() {
                    tr("Toggle fullscreen"), this, SLOT(ToggleFullscreen()));
 
   QMenu* fps_menu = menu_->addMenu(tr("Framerate"));
-  QSignalMapper* fps_mapper = new QSignalMapper(this);
   QActionGroup* fps_group = new QActionGroup(this);
-  AddMenuItem(tr("Low (%1 fps)").arg(kLowFramerate), kLowFramerate, fps_,
-              fps_group, fps_mapper);
-  AddMenuItem(tr("Medium (%1 fps)").arg(kMediumFramerate), kMediumFramerate,
-              fps_, fps_group, fps_mapper);
-  AddMenuItem(tr("High (%1 fps)").arg(kHighFramerate), kHighFramerate, fps_,
-              fps_group, fps_mapper);
-  AddMenuItem(tr("Super high (%1 fps)").arg(kSuperHighFramerate),
-              kSuperHighFramerate, fps_, fps_group, fps_mapper);
+  AddFramerateMenuItem(tr("Low (%1 fps)").arg(kLowFramerate), kLowFramerate,
+                       fps_, fps_group);
+  AddFramerateMenuItem(tr("Medium (%1 fps)").arg(kMediumFramerate),
+                       kMediumFramerate, fps_, fps_group);
+  AddFramerateMenuItem(tr("High (%1 fps)").arg(kHighFramerate), kHighFramerate,
+                       fps_, fps_group);
+  AddFramerateMenuItem(tr("Super high (%1 fps)").arg(kSuperHighFramerate),
+                       kSuperHighFramerate, fps_, fps_group);
   fps_menu->addActions(fps_group->actions());
-  connect(fps_mapper, SIGNAL(mapped(int)), SLOT(SetFps(int)));
 
   QMenu* quality_menu = menu_->addMenu(tr("Quality", "Visualisation quality"));
-  QSignalMapper* quality_mapper = new QSignalMapper(this);
   QActionGroup* quality_group = new QActionGroup(this);
-  AddMenuItem(tr("Low (256x256)"), 256, size_, quality_group, quality_mapper);
-  AddMenuItem(tr("Medium (512x512)"), 512, size_, quality_group,
-              quality_mapper);
-  AddMenuItem(tr("High (1024x1024)"), 1024, size_, quality_group,
-              quality_mapper);
-  AddMenuItem(tr("Super high (2048x2048)"), 2048, size_, quality_group,
-              quality_mapper);
+  AddQualityMenuItem(tr("Low (256x256)"), 256, size_, quality_group);
+  AddQualityMenuItem(tr("Medium (512x512)"), 512, size_, quality_group);
+  AddQualityMenuItem(tr("High (1024x1024)"), 1024, size_, quality_group);
+  AddQualityMenuItem(tr("Super high (2048x2048)"), 2048, size_, quality_group);
   quality_menu->addActions(quality_group->actions());
-  connect(quality_mapper, SIGNAL(mapped(int)), SLOT(SetQuality(int)));
 
   menu_->addAction(tr("Select visualizations..."), selector_, SLOT(show()));
 
@@ -135,14 +127,21 @@ void VisualisationContainer::Init() {
                    tr("Close visualization"), this, SLOT(hide()));
 }
 
-void VisualisationContainer::AddMenuItem(const QString& name, int value,
-                                         int def, QActionGroup* group,
-                                         QSignalMapper* mapper) {
+void VisualisationContainer::AddFramerateMenuItem(const QString& name,
+                                                  int value, int def,
+                                                  QActionGroup* group) {
   QAction* action = group->addAction(name);
   action->setCheckable(true);
   action->setChecked(value == def);
-  mapper->setMapping(action, value);
-  connect(action, SIGNAL(triggered()), mapper, SLOT(map()));
+  connect(action, &QAction::triggered, [this, value]() { SetFps(value); });
+}
+
+void VisualisationContainer::AddQualityMenuItem(const QString& name, int value,
+                                                int def, QActionGroup* group) {
+  QAction* action = group->addAction(name);
+  action->setCheckable(true);
+  action->setChecked(value == def);
+  connect(action, &QAction::triggered, [this, value]() { SetQuality(value); });
 }
 
 void VisualisationContainer::SetEngine(GstEngine* engine) {

@@ -20,6 +20,7 @@
 
 #include <memory>
 
+#include <QMap>
 #include <QWidget>
 
 #include "librarymodel.h"
@@ -33,7 +34,6 @@ struct QueryOptions;
 
 class QMenu;
 class QActionGroup;
-class QSignalMapper;
 
 class LibraryFilterWidget : public QWidget {
   Q_OBJECT
@@ -109,7 +109,7 @@ signals:
   QMenu* group_by_menu_;
   QMenu* library_menu_;
   QActionGroup* group_by_group_;
-  QSignalMapper* filter_age_mapper_;
+  QMap<QAction*, int> filter_ages_;
 
   QTimer* filter_delay_;
 

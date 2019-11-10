@@ -22,7 +22,6 @@
 #include <QKeyEvent>
 #include <QMenu>
 #include <QSettings>
-#include <QSignalMapper>
 
 #include "icecastmodel.h"
 #include "ui_icecastfilterwidget.h"
@@ -33,8 +32,7 @@ const char* IcecastFilterWidget::kSettingsGroup = "Icecast";
 IcecastFilterWidget::IcecastFilterWidget(QWidget* parent)
     : QWidget(parent),
       ui_(new Ui_IcecastFilterWidget),
-      menu_(new QMenu(tr("Display options"), this)),
-      sort_mode_mapper_(new QSignalMapper(this)) {
+      menu_(new QMenu(tr("Display options"), this)) {
   ui_->setupUi(this);
 
   // Icons
@@ -53,15 +51,13 @@ IcecastFilterWidget::IcecastFilterWidget(QWidget* parent)
   menu_->setIcon(ui_->options->icon());
   menu_->addActions(group->actions());
   ui_->options->setMenu(menu_);
-
-  connect(sort_mode_mapper_, SIGNAL(mapped(int)), SLOT(SortModeChanged(int)));
 }
 
 void IcecastFilterWidget::AddAction(QActionGroup* group, QAction* action,
                                     IcecastModel::SortMode mode) {
   group->addAction(action);
-  sort_mode_mapper_->setMapping(action, mode);
-  connect(action, SIGNAL(triggered()), sort_mode_mapper_, SLOT(map()));
+  connect(action, &QAction::triggered,
+          [this, mode]() { SortModeChanged(mode); });
 }
 
 IcecastFilterWidget::~IcecastFilterWidget() { delete ui_; }

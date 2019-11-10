@@ -23,7 +23,6 @@
 class PlaylistView;
 
 class QMenu;
-class QSignalMapper;
 
 class PlaylistHeader : public StretchHeaderView {
   Q_OBJECT
@@ -63,7 +62,6 @@ signals:
   QAction* align_right_action_;
   QList<QAction*> show_actions_;
 
-  QSignalMapper* show_mapper_;
 };
 
 #endif  // PLAYLISTHEADER_H

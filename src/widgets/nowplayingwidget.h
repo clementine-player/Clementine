@@ -34,7 +34,6 @@ class QAction;
 class QActionGroup;
 class QMenu;
 class QMovie;
-class QSignalMapper;
 class QTextDocument;
 class QTimeLine;
 
@@ -111,8 +110,7 @@ signals:
   void AutomaticCoverSearchDone();
 
  private:
-  void CreateModeAction(Mode mode, const QString& text, QActionGroup* group,
-                        QSignalMapper* mapper);
+  void CreateModeAction(Mode mode, const QString& text, QActionGroup* group);
   void UpdateDetailsText();
   void UpdateHeight();
   void DrawContents(QPainter* p);

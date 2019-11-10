@@ -31,7 +31,6 @@
 #include <QPainter>
 #include <QSettings>
 #include <QShortcut>
-#include <QSignalMapper>
 #include <QSortFilterProxyModel>
 #include <QStatusBar>
 #include <QSystemTrayIcon>
