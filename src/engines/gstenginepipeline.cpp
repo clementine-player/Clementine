@@ -302,7 +302,7 @@ bool GstEnginePipeline::Init() {
   audioconvert_ = engine_->CreateElement("audioconvert", audiobin_);
   tee = engine_->CreateElement("tee", audiobin_);
 
-  probe_queue = engine_->CreateElement("queue", audiobin_);
+  probe_queue = engine_->CreateElement("queue2", audiobin_);
   probe_converter = engine_->CreateElement("audioconvert", audiobin_);
   probe_sink = engine_->CreateElement("fakesink", audiobin_);
 
@@ -419,6 +419,10 @@ bool GstEnginePipeline::Init() {
   if (buffer_duration_nanosec_ > 0) {
     g_object_set(G_OBJECT(queue_), "use-buffering", true, nullptr);
   }
+
+  g_object_set(G_OBJECT(probe_queue), "max-size-buffers", 0, nullptr);
+  g_object_set(G_OBJECT(probe_queue), "max-size-bytes", 0, nullptr);
+  g_object_set(G_OBJECT(probe_queue), "max-size-time", 0, nullptr);
 
   gst_element_link_many(queue_, audioconvert_, convert_sink, nullptr);
   gst_element_link(probe_converter, probe_sink);
