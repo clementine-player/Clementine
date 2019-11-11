@@ -443,9 +443,9 @@ jobs:
           name: Setup PATH
           command: |
             echo 'export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig' >> $BASH_ENV
-            echo 'export Qt5_DIR=/usr/local/Cellar/qt/5.13.1/lib/cmake/Qt5' >> $BASH_ENV
-            echo 'export Qt5LinguistTools_DIR=/usr/local/Cellar/qt/5.13.1/lib/cmake/Qt5LinguistTools' >> $BASH_ENV
-            echo 'export GST_SCANNER_PATH=/usr/local/Cellar/gstreamer/1.16.1/libexec/gstreamer-1.0/gst-plugin-scanner' >> $BASH_ENV
+            echo 'export Qt5_DIR=/usr/local/opt/qt5/lib/cmake/Qt5' >> $BASH_ENV
+            echo 'export Qt5LinguistTools_DIR=/usr/local/opt/qt5/lib/cmake/Qt5LinguistTools' >> $BASH_ENV
+            echo 'export GST_SCANNER_PATH=/usr/local/opt/gstreamer/libexec/gstreamer-1.0/gst-plugin-scanner' >> $BASH_ENV
             echo 'export GST_PLUGIN_PATH=/usr/local/lib/gstreamer-1.0' >> $BASH_ENV
             source $BASH_ENV
       - run:
@@ -481,9 +481,9 @@ jobs:
             -Wno-dev
             -DCMAKE_BUILD_TYPE=Release
             -DCMAKE_OSX_ARCHITECTURES=x86_64
-            -DGETTEXT_MSGMERGE_EXECUTABLE=/usr/local/Cellar/gettext/0.20.1/bin/msgmerge
-            -DGETTEXT_MSGFMT_EXECUTABLE=/usr/local/Cellar/gettext/0.20.1/bin/msgfmt
-            -DGETTEXT_XGETTEXT_EXECUTABLE=/usr/local/Cellar/gettext/0.20.1/bin/xgettext
+            -DGETTEXT_MSGMERGE_EXECUTABLE=/usr/local/opt/gettext/bin/msgmerge
+            -DGETTEXT_MSGFMT_EXECUTABLE=/usr/local/opt/gettext/bin/msgfmt
+            -DGETTEXT_XGETTEXT_EXECUTABLE=/usr/local/opt/gettext/bin/xgettext
           working_directory: bin
       - run:
           name: make
@@ -534,7 +534,10 @@ workflows:
   build_all:
     jobs:
       - build_bionic_64
-      - build_mac
+      - build_mac:
+          filters:
+            branches:
+              only: master
       - upload_artifacts:
           context: gcp
           requires:

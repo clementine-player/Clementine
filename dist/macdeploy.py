@@ -92,7 +92,7 @@ GSTREAMER_SEARCH_PATH = [
     '/usr/local/lib/gstreamer-1.0',
     '/target/lib/gstreamer-1.0',
     '/target/libexec/gstreamer-1.0',
-    '/usr/local/Cellar/gstreamer/1.16.1/libexec/gstreamer-1.0',
+    '/usr/local/opt/gstreamer/libexec/gstreamer-1.0',
 ]
 
 QT_PLUGINS = [
@@ -110,7 +110,7 @@ QT_PLUGINS = [
     'platforms/libqcocoa.dylib',
 ]
 QT_PLUGINS_SEARCH_PATH = [
-    '/usr/local/Cellar/qt/5.13.1/plugins',
+    '/usr/local/opt/qt5/plugins',
     '/target/plugins',
     '/usr/local/Trolltech/Qt-4.7.0/plugins',
     '/Developer/Applications/Qt/plugins',
