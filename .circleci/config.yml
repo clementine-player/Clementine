@@ -552,8 +552,6 @@ workflows:
       - build_disco_32
       - build_bionic_64
       - build_bionic_32
-      - build_xenial_64
-      - build_xenial_32
       - build_buster_64
       - build_stretch_64
       - build_fedora_29_64
@@ -569,8 +567,6 @@ workflows:
             - build_disco_32
             - build_bionic_64
             - build_bionic_32
-            - build_xenial_64
-            - build_xenial_32
             - build_buster_64
             - build_stretch_64
             - build_fedora_29_64
