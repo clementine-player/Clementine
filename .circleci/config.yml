@@ -534,7 +534,10 @@ workflows:
   build_all:
     jobs:
       - build_bionic_64
-      - build_mac
+      - build_mac:
+          filters:
+            branches:
+              only: master
       - upload_artifacts:
           context: gcp
           requires:
