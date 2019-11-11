@@ -224,9 +224,11 @@ commands:
           command: >
             dnf install --assumeyes
             @development-tools
+            alsa-lib-devel
             boost-devel
             cmake
             cryptopp-devel
+            dbus-devel
             desktop-file-utils
             fftw-devel
             gcc-c++
@@ -242,6 +244,7 @@ commands:
             libgpod-devel
             liblastfm-qt5-devel
             libmtp-devel
+            libnotify-devel
             openssh
             pkgconfig
             protobuf-compiler
