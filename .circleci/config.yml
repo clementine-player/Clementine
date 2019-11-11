@@ -98,6 +98,11 @@ commands:
     description: Install Xenial dependencies
     steps:
       - run:
+          name: Setup ENV
+          command: |
+            echo 'export DEBIAN_FRONTEND=noninteractive' >> $BASH_ENV
+            source $BASH_ENV
+      - run:
           name: Install Dependencies
           command: >
             apt-get update && apt-get install -y
@@ -126,16 +131,16 @@ commands:
             libpulse-dev
             libqca2-dev
             libqca2-plugin-ossl
-            libqjson-dev
-            libqt4-dev
-            libqt4-opengl-dev
+            libqt5x11extras5-dev
             libqtwebkit-dev
             libsparsehash-dev
             libsqlite3-dev
             libtag1-dev
             libusbmuxd-dev
             protobuf-compiler
-            qt4-dev-tools
+            qtbase5-dev
+            qttools5-dev-tools
+            qttools5-dev
             ssh
   install_bionic_dependencies:
     description: Install Bionic dependencies
@@ -176,6 +181,11 @@ commands:
     description: Install Disco dependencies
     steps:
       - run:
+          name: Setup ENV
+          command: |
+            echo 'export DEBIAN_FRONTEND=noninteractive' >> $BASH_ENV
+            source $BASH_ENV
+      - run:
           name: Install Dependencies
           command: >
             apt-get update && apt-get install -y
@@ -204,16 +214,16 @@ commands:
             libpulse-dev
             libqca2-dev
             libqca2-plugins
-            libqjson-dev
-            libqt4-dev
-            libqt4-opengl-dev
+            libqt5x11extras5-dev
             libqtwebkit-dev
             libsparsehash-dev
             libsqlite3-dev
             libtag1-dev
             libusbmuxd-dev
             protobuf-compiler
-            qt4-dev-tools
+            qtbase5-dev
+            qttools5-dev-tools
+            qttools5-dev
             ssh
 
   install_fedora_dependencies:
@@ -224,9 +234,11 @@ commands:
           command: >
             dnf install --assumeyes
             @development-tools
+            alsa-lib-devel
             boost-devel
             cmake
             cryptopp-devel
+            dbus-devel
             desktop-file-utils
             fftw-devel
             gcc-c++
@@ -235,20 +247,22 @@ commands:
             glew-devel
             gstreamer1-devel
             gstreamer1-plugins-base-devel
+            hicolor-icon-theme
+            libappstream-glib
             libcdio-devel
             libchromaprint-devel
             libgpod-devel
-            liblastfm-devel
+            liblastfm-qt5-devel
             libmtp-devel
+            libnotify-devel
             openssh
+            pkgconfig
             protobuf-compiler
             protobuf-devel
             pulseaudio-libs-devel
-            qca-devel
-            qca-ossl
-            qjson-devel
-            qt-devel
-            qtwebkit-devel
+            qca-qt5-devel
+            qca-qt5-ossl
+            qt5-devel
             rpmdevtools
             sha2-devel
             sparsehash-devel
@@ -284,14 +298,15 @@ commands:
             libmygpo-qt-dev
             libprotobuf-dev
             libpulse-dev
-            libqjson-dev
-            libqt4-dev
+            libqt5x11extras5-dev
             libsparsehash-dev
             libsqlite3-dev
             libtag1-dev
             pkg-config
             protobuf-compiler
-            qt4-dev-tools
+            qtbase5-dev
+            qttools5-dev-tools
+            qttools5-dev
             ssh
 
 jobs:
@@ -533,7 +548,14 @@ workflows:
   version: 2
   build_all:
     jobs:
+      - build_disco_64
+      - build_disco_32
       - build_bionic_64
+      - build_bionic_32
+      - build_buster_64
+      - build_stretch_64
+      - build_fedora_29_64
+      - build_fedora_30_64
       - build_mac:
           filters:
             branches:
@@ -541,7 +563,14 @@ workflows:
       - upload_artifacts:
           context: gcp
           requires:
+            - build_disco_64
+            - build_disco_32
             - build_bionic_64
+            - build_bionic_32
+            - build_buster_64
+            - build_stretch_64
+            - build_fedora_29_64
+            - build_fedora_30_64
             - build_mac
           filters:
             branches:
