@@ -126,16 +126,16 @@ commands:
             libpulse-dev
             libqca2-dev
             libqca2-plugin-ossl
-            libqjson-dev
-            libqt4-dev
-            libqt4-opengl-dev
+            libqt5x11extras5-dev
             libqtwebkit-dev
             libsparsehash-dev
             libsqlite3-dev
             libtag1-dev
             libusbmuxd-dev
             protobuf-compiler
-            qt4-dev-tools
+            qtbase5-dev
+            qttools5-dev-tools
+            qttools5-dev
             ssh
   install_bionic_dependencies:
     description: Install Bionic dependencies
@@ -204,16 +204,16 @@ commands:
             libpulse-dev
             libqca2-dev
             libqca2-plugins
-            libqjson-dev
-            libqt4-dev
-            libqt4-opengl-dev
+            libqt5x11extras5-dev
             libqtwebkit-dev
             libsparsehash-dev
             libsqlite3-dev
             libtag1-dev
             libusbmuxd-dev
             protobuf-compiler
-            qt4-dev-tools
+            qtbase5-dev
+            qttools5-dev-tools
+            qttools5-dev
             ssh
 
   install_fedora_dependencies:
@@ -244,10 +244,9 @@ commands:
             protobuf-compiler
             protobuf-devel
             pulseaudio-libs-devel
-            qca-devel
-            qca-ossl
-            qjson-devel
-            qt-devel
+            qca-qt5-devel
+            qca-qt5-ossl
+            qt5-devel
             qtwebkit-devel
             rpmdevtools
             sha2-devel
@@ -284,14 +283,15 @@ commands:
             libmygpo-qt-dev
             libprotobuf-dev
             libpulse-dev
-            libqjson-dev
-            libqt4-dev
+            libqt5x11extras5-dev
             libsparsehash-dev
             libsqlite3-dev
             libtag1-dev
             pkg-config
             protobuf-compiler
-            qt4-dev-tools
+            qtbase5-dev
+            qttools5-dev-tools
+            qttools5-dev
             ssh
 
 jobs:
@@ -533,7 +533,16 @@ workflows:
   version: 2
   build_all:
     jobs:
+      - build_disco_64
+      - build_disco_32
       - build_bionic_64
+      - build_bionic_32
+      - build_xenial_64
+      - build_xenial_32
+      - build_buster_64
+      - build_stretch_64
+      - build_fedora_29_64
+      - build_fedora_30_64
       - build_mac:
           filters:
             branches:
@@ -541,7 +550,16 @@ workflows:
       - upload_artifacts:
           context: gcp
           requires:
+            - build_disco_64
+            - build_disco_32
             - build_bionic_64
+            - build_bionic_32
+            - build_xenial_64
+            - build_xenial_32
+            - build_buster_64
+            - build_stretch_64
+            - build_fedora_29_64
+            - build_fedora_30_64
             - build_mac
           filters:
             branches:
