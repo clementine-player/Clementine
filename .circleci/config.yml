@@ -98,6 +98,11 @@ commands:
     description: Install Xenial dependencies
     steps:
       - run:
+          name: Setup ENV
+          command: |
+            echo 'export DEBIAN_FRONTEND=noninteractive' >> $BASH_ENV
+            source $BASH_ENV
+      - run:
           name: Install Dependencies
           command: >
             apt-get update && apt-get install -y
@@ -175,6 +180,11 @@ commands:
   install_disco_dependencies:
     description: Install Disco dependencies
     steps:
+      - run:
+          name: Setup ENV
+          command: |
+            echo 'export DEBIAN_FRONTEND=noninteractive' >> $BASH_ENV
+            source $BASH_ENV
       - run:
           name: Install Dependencies
           command: >
