@@ -524,6 +524,21 @@ jobs:
       - copy_rpm_artifacts:
           build: fedora-30
 
+  build_fedora_31_64:
+    docker:
+      - image: fedora:31
+    environment:
+      RPM_BUILD_NCPUS: "1"
+
+    steps:
+      - install_fedora_dependencies
+      - checkout
+      - cmake
+      - build_source_tarball
+      - build_rpm
+      - copy_rpm_artifacts:
+          build: fedora-31
+
   build_mac:
     macos:
       xcode: "11.0.0"
@@ -632,6 +647,7 @@ workflows:
       - build_stretch_64
       - build_fedora_29_64
       - build_fedora_30_64
+      - build_fedora_31_64
       - build_mac:
           filters:
             branches:
@@ -649,6 +665,7 @@ workflows:
             - build_stretch_64
             - build_fedora_29_64
             - build_fedora_30_64
+            - build_fedora_31_64
             - build_mac
           filters:
             branches:
