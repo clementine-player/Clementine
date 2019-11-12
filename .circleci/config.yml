@@ -54,7 +54,7 @@ commands:
     steps:
       - run:
           name: make deb
-          command: make deb
+          command: make -j2 deb
           working_directory: bin
   copy_artifacts:
     description: Copy build artifacts
@@ -498,7 +498,7 @@ jobs:
     docker:
       - image: fedora:29
     environment:
-      RPM_BUILD_NCPUS: "1"
+      RPM_BUILD_NCPUS: "2"
 
     steps:
       - install_fedora_dependencies
@@ -513,7 +513,7 @@ jobs:
     docker:
       - image: fedora:30
     environment:
-      RPM_BUILD_NCPUS: "1"
+      RPM_BUILD_NCPUS: "2"
 
     steps:
       - install_fedora_dependencies
@@ -591,7 +591,7 @@ jobs:
           working_directory: bin
       - run:
           name: make
-          command: make -j2
+          command: make -j4
           working_directory: bin
       - run:
           name: Copy icon file and resources
