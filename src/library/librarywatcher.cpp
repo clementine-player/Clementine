@@ -119,7 +119,7 @@ LibraryWatcher::ScanTransaction::~ScanTransaction() {
 
   watcher_->task_manager_->SetTaskFinished(task_id_);
 
-  for (const Subdirectory &subdir : deleted_subdirs) {
+  for (const Subdirectory& subdir : deleted_subdirs) {
     if (watcher_->watched_dirs_.contains(dir_)) {
       watcher_->RemoveWatch(watcher_->watched_dirs_[dir_], subdir);
     }
@@ -417,7 +417,8 @@ void LibraryWatcher::ScanSubdirectory(const QString& path,
   else
     t->touched_subdirs << updated_subdir;
 
-  if (updated_subdir.mtime == 0) { // Subdirectory deleted, mark it for removal from the watcher.
+  if (updated_subdir.mtime ==
+      0) {  // Subdirectory deleted, mark it for removal from the watcher.
     t->deleted_subdirs << updated_subdir;
   }
 
@@ -595,15 +596,14 @@ void LibraryWatcher::AddWatch(const Directory& dir, const QString& path) {
   subdir_mapping_[path] = dir;
 }
 
-void LibraryWatcher::RemoveWatch(const Directory &dir, const Subdirectory &subdir) {
-
-  for (const QString &subdir_path : subdir_mapping_.keys(dir)) {
+void LibraryWatcher::RemoveWatch(const Directory& dir,
+                                 const Subdirectory& subdir) {
+  for (const QString& subdir_path : subdir_mapping_.keys(dir)) {
     if (subdir_path != subdir.path) continue;
     fs_watcher_->RemovePath(subdir_path);
     subdir_mapping_.remove(subdir_path);
     break;
   }
-
 }
 
 void LibraryWatcher::RemoveDirectory(const Directory& dir) {

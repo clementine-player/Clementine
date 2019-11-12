@@ -156,7 +156,7 @@ signals:
   QString ImageForSong(const QString& path,
                        QMap<QString, QStringList>& album_art);
   void AddWatch(const Directory& dir, const QString& path);
-  void RemoveWatch(const Directory &dir, const Subdirectory &subdir);
+  void RemoveWatch(const Directory& dir, const Subdirectory& subdir);
   uint GetMtimeForCue(const QString& cue_path);
   void PerformScan(bool incremental, bool ignore_mtimes);
 
