@@ -409,7 +409,8 @@ void LibraryModel::SongsDeleted(const SongList& songs) {
       const QString cache_key = AlbumIconPixmapCacheKey(idx);
       QPixmapCache::remove(cache_key);
       icon_cache_->remove(QUrl(cache_key));
-      if (pending_cache_keys_.contains(cache_key)) pending_cache_keys_.remove(cache_key);
+      if (pending_cache_keys_.contains(cache_key))
+        pending_cache_keys_.remove(cache_key);
 
       // Remove from pending art loading
       QMapIterator<quint64, ItemAndCacheKey> i(pending_art_);
