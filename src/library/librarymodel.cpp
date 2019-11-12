@@ -803,8 +803,6 @@ void LibraryModel::BeginReset() {
   divider_nodes_.clear();
   pending_art_.clear();
   pending_cache_keys_.clear();
-  QPixmapCache::clear();
-  icon_cache_->clear();
   smart_playlist_node_ = nullptr;
 
   root_ = new LibraryItem(this);
