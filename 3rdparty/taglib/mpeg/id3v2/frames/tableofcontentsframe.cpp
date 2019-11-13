@@ -54,17 +54,15 @@ public:
 
 namespace {
 
-  // These functions are needed to try to aim for backward compatibility with
-  // an API that previously (unreasonably) required null bytes to be appended
-  // at the end of identifiers explicitly by the API user.
+// These functions are needed to try to aim for backward compatibility with
+// an API that previously (unreasonably) required null bytes to be appended
+// at the end of identifiers explicitly by the API user.
 
-  // BIC: remove these
+// BIC: remove these
 
-  ByteVector &strip(ByteVector &b)
-  {
-    if(b.endsWith('\0'))
-      b.resize(b.size() - 1);
-    return b;
+ByteVector& strip(ByteVector& b) {
+  if (b.endsWith('\0')) b.resize(b.size() - 1);
+  return b;
   }
 
   ByteVectorList &strip(ByteVectorList &l)
@@ -304,7 +302,8 @@ void TableOfContentsFrame::parseFields(const ByteVector &data)
     return;
 
   while(embPos < size - header()->size()) {
-    Frame *frame = FrameFactory::instance()->createFrame(data.mid(pos + embPos), d->tagHeader);
+    Frame* frame = FrameFactory::instance()->createFrame(data.mid(pos + embPos),
+                                                         d->tagHeader);
 
     if(!frame)
       return;

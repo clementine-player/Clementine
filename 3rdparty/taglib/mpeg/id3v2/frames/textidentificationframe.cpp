@@ -277,7 +277,8 @@ PropertyMap TextIdentificationFrame::makeTIPLProperties() const
         break;
       }
     if(!found){
-      // invalid involved role -> mark whole frame as unsupported in order to be consistent with writing
+      // invalid involved role -> mark whole frame as unsupported in order to be
+      // consistent with writing
       map.clear();
       map.unsupportedData().append(frameID());
       return map;
