@@ -264,7 +264,7 @@ void FileStream::insert(const ByteVector &data, unsigned long start, unsigned lo
   // Now I'll explain the steps in this ugliness:
 
   // First, make sure that we're working with a buffer that is longer than
-  // the *difference* in the tag sizes.  We want to avoid overwriting parts
+  // the *differnce* in the tag sizes.  We want to avoid overwriting parts
   // that aren't yet in memory, so this is necessary.
 
   unsigned long bufferLength = bufferSize();
@@ -493,7 +493,6 @@ void FileStream::truncate(long length)
 
 #else
 
-  fflush(d->file);
   const int error = ftruncate(fileno(d->file), length);
   if(error != 0)
     debug("FileStream::truncate() -- Coundn't truncate the file.");

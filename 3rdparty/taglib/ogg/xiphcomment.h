@@ -186,7 +186,7 @@ namespace TagLib {
        * \deprecated Using this method may lead to a linkage error.
        */
       // BIC: remove and merge with below
-      TAGLIB_DEPRECATED void removeField(const String &key, const String &value = String());
+      void removeField(const String &key, const String &value = String::null);
 
       /*!
        * Remove all the fields specified by \a key.
