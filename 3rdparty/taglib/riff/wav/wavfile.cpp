@@ -152,6 +152,13 @@ bool RIFF::WAV::File::save()
 
 bool RIFF::WAV::File::save(TagTypes tags, bool stripOthers, int id3v2Version)
 {
+  return save(tags,
+              stripOthers ? StripOthers : StripNone,
+              id3v2Version == 3 ? ID3v2::v3 : ID3v2::v4);
+}
+
+bool RIFF::WAV::File::save(TagTypes tags, StripTags strip, ID3v2::Version version)
+{
   if(readOnly()) {
     debug("RIFF::WAV::File::save() -- File is read only.");
     return false;
@@ -162,14 +169,14 @@ bool RIFF::WAV::File::save(TagTypes tags, bool stripOthers, int id3v2Version)
     return false;
   }
 
-  if(stripOthers)
-    strip(static_cast<TagTypes>(AllTags & ~tags));
+  if(strip == StripOthers)
+    File::strip(static_cast<TagTypes>(AllTags & ~tags));
 
   if(tags & ID3v2) {
     removeTagChunks(ID3v2);
 
     if(ID3v2Tag() && !ID3v2Tag()->isEmpty()) {
-      setChunkData("ID3 ", ID3v2Tag()->render(id3v2Version));
+      setChunkData("ID3 ", ID3v2Tag()->render(version));
       d->hasID3v2 = true;
     }
   }

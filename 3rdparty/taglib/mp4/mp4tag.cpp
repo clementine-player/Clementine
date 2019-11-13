@@ -74,8 +74,19 @@ MP4::Tag::Tag(TagLib::File *file, MP4::Atoms *atoms) :
             atom->name == "hdvd" || atom->name == "shwm") {
       parseBool(atom);
     }
-    else if(atom->name == "tmpo" || atom->name == "rate" || atom->name == "\251mvi" || atom->name == "\251mvc") {
+    else if(atom->name == "tmpo" || atom->name == "\251mvi" || atom->name == "\251mvc") {
       parseInt(atom);
+    }
+    else if(atom->name == "rate") {
+      AtomDataList data = parseData2(atom);
+      if(!data.isEmpty()) {
+        AtomData val = data[0];
+        if (val.type == TypeUTF8) {
+          addItem(atom->name, StringList(String(val.data, String::UTF8)));
+        } else {
+          addItem(atom->name, (int)(val.data.toShort()));
+        }
+      }
     }
     else if(atom->name == "tvsn" || atom->name == "tves" || atom->name == "cnID" ||
             atom->name == "sfID" || atom->name == "atID" || atom->name == "geID" ||
@@ -480,8 +491,18 @@ MP4::Tag::save()
             name == "shwm") {
       data.append(renderBool(name.data(String::Latin1), it->second));
     }
-    else if(name == "tmpo" || name == "rate" || name == "\251mvi" || name == "\251mvc") {
+    else if(name == "tmpo" || name == "\251mvi" || name == "\251mvc") {
       data.append(renderInt(name.data(String::Latin1), it->second));
+    }
+    else if (name == "rate") {
+      const MP4::Item& item = it->second;
+      StringList value = item.toStringList();
+      if (value.isEmpty()) {
+        data.append(renderInt(name.data(String::Latin1), item));
+      }
+      else {
+        data.append(renderText(name.data(String::Latin1), item));
+      }
     }
     else if(name == "tvsn" || name == "tves" || name == "cnID" ||
             name == "sfID" || name == "atID" || name == "geID" ||
@@ -784,13 +805,23 @@ MP4::Tag::setGenre(const String &value)
 void
 MP4::Tag::setYear(unsigned int value)
 {
-  d->items["\251day"] = StringList(String::number(value));
+  if (value == 0) {
+    d->items.erase("\251day");
+  }
+  else {
+    d->items["\251day"] = StringList(String::number(value));
+  }
 }
 
 void
 MP4::Tag::setTrack(unsigned int value)
 {
-  d->items["trkn"] = MP4::Item(value, 0);
+  if (value == 0) {
+    d->items.erase("trkn");
+  }
+  else {
+    d->items["trkn"] = MP4::Item(value, 0);
+  }
 }
 
 bool MP4::Tag::isEmpty() const

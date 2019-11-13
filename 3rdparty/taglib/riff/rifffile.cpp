@@ -325,9 +325,20 @@ void RIFF::File::read()
     if(offset & 1) {
       seek(offset);
       const ByteVector iByte = readBlock(1);
-      if(iByte.size() == 1 && iByte[0] == '\0') {
-        chunk.padding = 1;
-        offset++;
+      if(iByte.size() == 1) {
+        bool skipPadding = iByte[0] == '\0';
+        if(!skipPadding) {
+          // Padding byte is not zero, check if it is good to ignore it
+          const ByteVector fourCcAfterPadding = readBlock(4);
+          if(isValidChunkName(fourCcAfterPadding)) {
+            // Use the padding, it is followed by a valid chunk name.
+            skipPadding = true;
+          }
+        }
+        if(skipPadding) {
+          chunk.padding = 1;
+          offset++;
+        }
       }
     }
 

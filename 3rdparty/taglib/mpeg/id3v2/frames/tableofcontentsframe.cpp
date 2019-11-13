@@ -55,7 +55,7 @@ public:
 namespace {
 
   // These functions are needed to try to aim for backward compatibility with
-  // an API that previously (unreasonably) required null bytes to be appeneded
+  // an API that previously (unreasonably) required null bytes to be appended
   // at the end of identifiers explicitly by the API user.
 
   // BIC: remove these
@@ -304,7 +304,7 @@ void TableOfContentsFrame::parseFields(const ByteVector &data)
     return;
 
   while(embPos < size - header()->size()) {
-    Frame *frame = FrameFactory::instance()->createFrame(data.mid(pos + embPos), (d->tagHeader != 0));
+    Frame *frame = FrameFactory::instance()->createFrame(data.mid(pos + embPos), d->tagHeader);
 
     if(!frame)
       return;

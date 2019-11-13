@@ -118,6 +118,11 @@ RIFF::AIFF::Properties *RIFF::AIFF::File::audioProperties() const
 
 bool RIFF::AIFF::File::save()
 {
+    return save(ID3v2::v4);
+}
+
+bool RIFF::AIFF::File::save(ID3v2::Version version)
+{
   if(readOnly()) {
     debug("RIFF::AIFF::File::save() -- File is read only.");
     return false;
@@ -135,7 +140,7 @@ bool RIFF::AIFF::File::save()
   }
 
   if(tag() && !tag()->isEmpty()) {
-    setChunkData("ID3 ", d->tag->render());
+    setChunkData("ID3 ", d->tag->render(version));
     d->hasID3v2 = true;
   }
 
