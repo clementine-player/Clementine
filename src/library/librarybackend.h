@@ -237,20 +237,20 @@ signals:
 
  private:
   struct CompilationInfo {
-    CompilationInfo() : has_samplers(false), has_not_samplers(false) {}
+    CompilationInfo() : has_samplers(0), has_not_samplers(0) {}
 
-    QSet<QString> artists;
-    QSet<QString> directories;
+    QList<QUrl> urls;
+    QStringList artists;
 
-    bool has_samplers;
-    bool has_not_samplers;
+    int has_samplers;
+    int has_not_samplers;
   };
 
   static const char* kNewScoreSql;
 
-  void UpdateCompilations(QSqlQuery& find_songs, QSqlQuery& update,
+  void UpdateCompilations(const QSqlDatabase& db,
                           SongList& deleted_songs, SongList& added_songs,
-                          const QString& album, int sampler);
+                          const QUrl& url, const bool sampler);
   AlbumList GetAlbums(const QString& artist, const QString& album_artist,
                       bool compilation = false,
                       const QueryOptions& opt = QueryOptions());

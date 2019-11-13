@@ -769,34 +769,20 @@ void LibraryBackend::UpdateCompilations() {
     if (album.isEmpty()) continue;
 
     // Find the directory the song is in
-    int last_separator = filename.lastIndexOf('/');
-    if (last_separator == -1) continue;
+    QUrl url = QUrl::fromEncoded(filename.toUtf8());
+    QString directory = url.toString(QUrl::PreferLocalFile|QUrl::RemoveFilename);
 
-    CompilationInfo& info = compilation_info[album];
-    info.artists.insert(artist);
-    info.directories.insert(filename.left(last_separator));
+    CompilationInfo& info = compilation_info[directory + album];
+    info.urls << url;
+    if (!info.artists.contains(artist))
+      info.artists << artist;
     if (sampler)
-      info.has_samplers = true;
+      ++info.has_samplers;
     else
-      info.has_not_samplers = true;
+      ++info.has_not_samplers;
   }
 
   // Now mark the songs that we think are in compilations
-  QSqlQuery update(db);
-  update.prepare(
-      QString(
-          "UPDATE %1"
-          " SET sampler = :sampler,"
-          "     effective_compilation = ((compilation OR :sampler OR "
-          "forced_compilation_on) AND NOT forced_compilation_off) + 0"
-          " WHERE album = :album AND unavailable = 0").arg(songs_table_));
-  QSqlQuery find_songs(db);
-  find_songs.prepare(
-      QString(
-          "SELECT ROWID, " + Song::kColumnSpec +
-          " FROM %1"
-          " WHERE album = :album AND sampler = :sampler AND unavailable = 0")
-          .arg(songs_table_));
 
   SongList deleted_songs;
   SongList added_songs;
@@ -807,20 +793,19 @@ void LibraryBackend::UpdateCompilations() {
       compilation_info.constBegin();
   for (; it != compilation_info.constEnd(); ++it) {
     const CompilationInfo& info = it.value();
-    QString album(it.key());
 
-    // If there were more 'effective album artists' than there were directories
-    // for this album,
+    // If there were more then one 'effective album artist' for this album directory
     // then it's a compilation
 
-    if (info.artists.count() > info.directories.count()) {
-      if (info.has_not_samplers)
-        UpdateCompilations(find_songs, update, deleted_songs, added_songs,
-                           album, 1);
-    } else {
-      if (info.has_samplers)
-        UpdateCompilations(find_songs, update, deleted_songs, added_songs,
-                           album, 0);
+    for (const QUrl &url : info.urls) {
+      if (info.artists.count() > 1) { // This directory+album is a compilation.
+        if (info.has_not_samplers > 0)
+          UpdateCompilations(db, deleted_songs, added_songs, url, true);
+      }
+      else {
+        if (info.has_samplers > 0)
+          UpdateCompilations(db, deleted_songs, added_songs, url, false);
+      }
     }
   }
 
@@ -832,29 +817,44 @@ void LibraryBackend::UpdateCompilations() {
   }
 }
 
-void LibraryBackend::UpdateCompilations(QSqlQuery& find_songs,
-                                        QSqlQuery& update,
-                                        SongList& deleted_songs,
-                                        SongList& added_songs,
-                                        const QString& album, int sampler) {
-  // Get songs that were already in that album, so we can tell the model
-  // they've been updated
-  find_songs.bindValue(":album", album);
-  find_songs.bindValue(":sampler", int(!sampler));
-  find_songs.exec();
-  while (find_songs.next()) {
+void LibraryBackend::UpdateCompilations(const QSqlDatabase& db,
+                                        SongList& deleted_songs, SongList& added_songs,
+                                        const QUrl& url, const bool sampler) {
+
+  QSqlQuery find_song(db);
+  find_song.prepare(
+      QString(
+          "SELECT ROWID, " + Song::kColumnSpec +
+          " FROM %1"
+          " WHERE filename = :filename AND sampler = :sampler AND unavailable = 0")
+          .arg(songs_table_));
+
+  QSqlQuery update_song(db);
+  update_song.prepare(
+      QString(
+          "UPDATE %1"
+          " SET sampler = :sampler,"
+          "     effective_compilation = ((compilation OR :sampler OR "
+          "forced_compilation_on) AND NOT forced_compilation_off) + 0"
+          " WHERE filename = :filename AND unavailable = 0").arg(songs_table_));
+
+  // Get song, so we can tell the model its updated
+  find_song.bindValue(":filename", url.toEncoded());
+  find_song.bindValue(":sampler", int(!sampler));
+  find_song.exec();
+  while (find_song.next()) {
     Song song;
-    song.InitFromQuery(find_songs, true);
+    song.InitFromQuery(find_song, true);
     deleted_songs << song;
-    song.set_sampler(true);
+    song.set_sampler(sampler);
     added_songs << song;
   }
 
-  // Mark this album
-  update.bindValue(":sampler", sampler);
-  update.bindValue(":album", album);
-  update.exec();
-  db_->CheckErrors(update);
+  // Update the song
+  update_song.bindValue(":sampler", int(sampler));
+  update_song.bindValue(":filename", url.toEncoded());
+  update_song.exec();
+  db_->CheckErrors(update_song);
 }
 
 LibraryBackend::AlbumList LibraryBackend::GetAlbums(const QString& artist,
