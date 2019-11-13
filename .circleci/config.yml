@@ -94,57 +94,14 @@ commands:
             - << parameters.build >>/*
       - store_artifacts:
           path: /tmp/artifacts/<< parameters.build >>
-  install_xenial_dependencies:
-    description: Install Xenial dependencies
-    steps:
-      - run:
-          name: Setup ENV
-          command: |
-            echo 'export DEBIAN_FRONTEND=noninteractive' >> $BASH_ENV
-            source $BASH_ENV
-      - run:
-          name: Install Dependencies
-          command: >
-            apt-get update && apt-get install -y
-            cmake
-            fakeroot
-            gettext
-            git
-            libasound2-dev
-            libboost-dev
-            libboost-serialization-dev
-            libcdio-cdda1
-            libcdio-dev
-            libchromaprint-dev
-            libcrypto++-dev
-            libdbus-1-dev
-            libfftw3-dev
-            libglew1.5-dev
-            libgpod-dev
-            libgstreamer-plugins-base1.0-dev
-            libgstreamer1.0-dev
-            liblastfm-dev
-            libmtp-dev
-            libmygpo-qt-dev
-            libplist-dev
-            libprotobuf-dev
-            libpulse-dev
-            libqca2-dev
-            libqca2-plugin-ossl
-            libqt5x11extras5-dev
-            libqtwebkit-dev
-            libsparsehash-dev
-            libsqlite3-dev
-            libtag1-dev
-            libusbmuxd-dev
-            protobuf-compiler
-            qtbase5-dev
-            qttools5-dev-tools
-            qttools5-dev
-            ssh
   install_bionic_dependencies:
     description: Install Bionic dependencies
     steps:
+      - run:
+          name: Use AWS Ubuntu mirror
+          command: >
+            sed -i /etc/apt/sources.list
+            -e 's#archive.ubuntu.com#us-east-2.ec2.archive.ubuntu.com#'
       - run:
           name: Install Dependencies
           command: >
@@ -413,34 +370,6 @@ jobs:
       - make_deb
       - copy_artifacts:
           build: ubuntu-bionic
-
-  build_xenial_64:
-    docker:
-      - image: ubuntu:xenial
-
-    steps:
-      - install_xenial_dependencies
-      - checkout
-      - cmake_debian:
-          distribution: xenial
-          arch: amd64
-      - make_deb
-      - copy_artifacts:
-          build: ubuntu-xenial
-
-  build_xenial_32:
-    docker:
-      - image: i386/ubuntu:xenial
-
-    steps:
-      - install_xenial_dependencies
-      - checkout
-      - cmake_debian:
-          distribution: xenial
-          arch: i386
-      - make_deb
-      - copy_artifacts:
-          build: ubuntu-xenial
 
   build_eoan_64:
     docker:
