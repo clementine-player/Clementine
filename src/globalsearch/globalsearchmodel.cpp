@@ -29,7 +29,7 @@ GlobalSearchModel::GlobalSearchModel(GlobalSearch* engine, QObject* parent)
       use_pretty_covers_(true),
       artist_icon_(IconLoader::Load("x-clementine-artist", IconLoader::Base)),
       album_icon_(IconLoader::Load("x-clementine-album", IconLoader::Base)) {
-  group_by_[0] = LibraryModel::GroupBy_Artist;
+  group_by_[0] = LibraryModel::GroupBy_AlbumArtist;
   group_by_[1] = LibraryModel::GroupBy_Album;
   group_by_[2] = LibraryModel::GroupBy_None;
 
