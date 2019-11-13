@@ -126,10 +126,13 @@ void TagReader::ReadFile(const QString& filename,
   song->set_url(url.constData(), url.size());
   song->set_filesize(info.size());
 
-#if QT_VERSION >= 0x051000
+#if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
   qint64 mtime = info.lastModified().toSecsSinceEpoch();
-  qint64 btime = info.birthtime().toSecsSinceEpoch();
-#elif QT_VERSION >= 0x050800
+  qint64 btime = mtime;
+  if (info.birthTime().isValid()) {
+    btime = info.birthTime().toSecsSinceEpoch();
+  }
+#elif QT_VERSION >= QT_VERSION_CHECK(5, 8, 0)
   qint64 mtime = info.lastModified().toSecsSinceEpoch();
   qint64 btime = info.created().toSecsSinceEpoch();
 #else
