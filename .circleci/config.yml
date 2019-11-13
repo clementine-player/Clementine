@@ -143,6 +143,11 @@ commands:
             echo 'export DEBIAN_FRONTEND=noninteractive' >> $BASH_ENV
             source $BASH_ENV
       - run:
+          name: Use AWS Ubuntu mirror
+          command: >
+            sed -i /etc/apt/sources.list
+            -e 's#archive.ubuntu.com#us-east-2.ec2.archive.ubuntu.com#'
+      - run:
           name: Install Dependencies
           command: >
             apt-get update && apt-get install -y
@@ -191,6 +196,11 @@ commands:
           command: |
             echo 'export DEBIAN_FRONTEND=noninteractive' >> $BASH_ENV
             source $BASH_ENV
+      - run:
+          name: Use AWS Ubuntu mirror
+          command: >
+            sed -i /etc/apt/sources.list
+            -e 's#archive.ubuntu.com#us-east-2.ec2.archive.ubuntu.com#'
       - run:
           name: Install Dependencies
           command: >
