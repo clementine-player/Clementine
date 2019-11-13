@@ -248,9 +248,9 @@ signals:
 
   static const char* kNewScoreSql;
 
-  void UpdateCompilations(const QSqlDatabase& db,
-                          SongList& deleted_songs, SongList& added_songs,
-                          const QUrl& url, const bool sampler);
+  void UpdateCompilations(const QSqlDatabase& db, SongList& deleted_songs,
+                          SongList& added_songs, const QUrl& url,
+                          const bool sampler);
   AlbumList GetAlbums(const QString& artist, const QString& album_artist,
                       bool compilation = false,
                       const QueryOptions& opt = QueryOptions());
