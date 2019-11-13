@@ -63,6 +63,8 @@
 #include "itfile.h"
 #include "xmfile.h"
 #include "mp4file.h"
+#include "dsffile.h"
+#include "dsdifffile.h"
 
 using namespace TagLib;
 
@@ -148,6 +150,10 @@ PropertyMap File::properties() const
     return dynamic_cast<const MP4::File* >(this)->properties();
   if(dynamic_cast<const ASF::File* >(this))
     return dynamic_cast<const ASF::File* >(this)->properties();
+  if(dynamic_cast<const DSF::File* >(this))
+    return dynamic_cast<const DSF::File* >(this)->properties();
+  if(dynamic_cast<const DSDIFF::File* >(this))
+    return dynamic_cast<const DSDIFF::File* >(this)->properties();
   return tag()->properties();
 }
 
@@ -177,6 +183,10 @@ void File::removeUnsupportedProperties(const StringList &properties)
     dynamic_cast<MP4::File* >(this)->removeUnsupportedProperties(properties);
   else if(dynamic_cast<ASF::File* >(this))
     dynamic_cast<ASF::File* >(this)->removeUnsupportedProperties(properties);
+  else if(dynamic_cast<DSF::File* >(this))
+    dynamic_cast<DSF::File* >(this)->removeUnsupportedProperties(properties);
+  else if(dynamic_cast<DSDIFF::File* >(this))
+    dynamic_cast<DSDIFF::File* >(this)->removeUnsupportedProperties(properties);
   else
     tag()->removeUnsupportedProperties(properties);
 }
@@ -219,6 +229,10 @@ PropertyMap File::setProperties(const PropertyMap &properties)
     return dynamic_cast<MP4::File* >(this)->setProperties(properties);
   else if(dynamic_cast<ASF::File* >(this))
     return dynamic_cast<ASF::File* >(this)->setProperties(properties);
+  else if(dynamic_cast<DSF::File* >(this))
+    return dynamic_cast<DSF::File* >(this)->setProperties(properties);
+  else if(dynamic_cast<DSDIFF::File* >(this))
+    return dynamic_cast<DSDIFF::File* >(this)->setProperties(properties);
   else
     return tag()->setProperties(properties);
 }

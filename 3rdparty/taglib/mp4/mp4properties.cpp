@@ -175,11 +175,11 @@ MP4::Properties::read(File *file, Atoms *atoms)
       debug("MP4: Atom 'trak.mdia.mdhd' is smaller than expected");
       return;
     }
-    unit = data.toUInt(28U);
-    length = data.toLongLong(32U);
+    unit   = data.toLongLong(28U);
+    length = data.toLongLong(36U);
   }
   else {
-    if (data.size() < 24 + 8) {
+    if(data.size() < 24 + 4) {
       debug("MP4: Atom 'trak.mdia.mdhd' is smaller than expected");
       return;
     }

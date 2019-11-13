@@ -281,7 +281,7 @@ namespace TagLib {
      * \deprecated
      */
      // BIC: remove
-    TAGLIB_DEPRECATED bool isNull() const;
+    bool isNull() const;
 
     /*!
      * Returns true if the ByteVector is empty.
@@ -595,7 +595,7 @@ namespace TagLib {
      * \deprecated
      */
     // BIC: remove
-    TAGLIB_DEPRECATED static ByteVector null;
+    static ByteVector null;
 
     /*!
      * Returns a hex-encoded copy of the byte vector.

@@ -74,7 +74,7 @@ namespace TagLib {
        * \deprecated Please use the method below that accepts a ID3v2::Header
        * instance in new code.
        */
-      TAGLIB_DEPRECATED Frame *createFrame(const ByteVector &data, bool synchSafeInts) const;
+      Frame *createFrame(const ByteVector &data, bool synchSafeInts) const;
 
       /*!
        * Create a frame based on \a data.  \a version should indicate the ID3v2
@@ -84,19 +84,14 @@ namespace TagLib {
        * \deprecated Please use the method below that accepts a ID3v2::Header
        * instance in new code.
        */
-      TAGLIB_DEPRECATED Frame *createFrame(const ByteVector &data, unsigned int version = 4) const;
+      Frame *createFrame(const ByteVector &data, unsigned int version = 4) const;
 
-      /*!
-       * \deprecated
-       */
-      // BIC: remove
-      Frame *createFrame(const ByteVector &data, Header *tagHeader) const;
       /*!
        * Create a frame based on \a data.  \a tagHeader should be a valid
        * ID3v2::Header instance.
        */
       // BIC: make virtual
-      Frame *createFrame(const ByteVector &data, const Header *tagHeader) const;
+      Frame *createFrame(const ByteVector &data, Header *tagHeader) const;
 
       /*!
        * After a tag has been read, this tries to rebuild some of them

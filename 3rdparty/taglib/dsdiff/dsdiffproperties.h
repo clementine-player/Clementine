@@ -1,7 +1,7 @@
-/**************************************************************************
-    copyright            : (C) 2007 by Lukáš Lalinský
-    email                : lalinsky@gmail.com
- **************************************************************************/
+/***************************************************************************
+    copyright            : (C) 2016 by Damien Plisson, Audirvana
+    email                : damien78@audirvana.com
+***************************************************************************/
 
 /***************************************************************************
  *   This library is free software; you can redistribute it and/or modify  *
@@ -23,98 +23,61 @@
  *   http://www.mozilla.org/MPL/                                           *
  ***************************************************************************/
 
-#ifndef TAGLIB_MP4PROPERTIES_H
-#define TAGLIB_MP4PROPERTIES_H
+#ifndef TAGLIB_DSDIFFPROPERTIES_H
+#define TAGLIB_DSDIFFPROPERTIES_H
 
-#include "taglib_export.h"
 #include "audioproperties.h"
 
 namespace TagLib {
 
-  namespace MP4 {
+  namespace DSDIFF {
 
-    class Atoms;
     class File;
 
-    //! An implementation of MP4 audio properties
+    //! An implementation of audio property reading for DSDIFF
+
+    /*!
+     * This reads the data from an DSDIFF stream found in the AudioProperties
+     * API.
+     */
+
     class TAGLIB_EXPORT Properties : public AudioProperties
     {
     public:
-      enum Codec {
-        Unknown = 0,
-        AAC,
-        ALAC
-      };
+      /*!
+       * Create an instance of DSDIFF::Properties with the data read from the
+       * ByteVector \a data.
+       */
+      Properties(const unsigned int sampleRate, const unsigned short channels,
+                 const unsigned long long samplesCount, const int bitrate,
+                 ReadStyle style);
 
-      Properties(File *file, Atoms *atoms, ReadStyle style = Average);
+      /*!
+       * Destroys this DSDIFF::Properties instance.
+       */
       virtual ~Properties();
 
-      /*!
-       * Returns the length of the file in seconds.  The length is rounded down to
-       * the nearest whole second.
-       *
-       * \note This method is just an alias of lengthInSeconds().
-       *
-       * \deprecated
-       */
+      // Reimplementations.
+
       virtual int length() const;
-
-      /*!
-       * Returns the length of the file in seconds.  The length is rounded down to
-       * the nearest whole second.
-       *
-       * \see lengthInMilliseconds()
-       */
-      // BIC: make virtual
-      int lengthInSeconds() const;
-
-      /*!
-       * Returns the length of the file in milliseconds.
-       *
-       * \see lengthInSeconds()
-       */
-      // BIC: make virtual
-      int lengthInMilliseconds() const;
-
-      /*!
-       * Returns the average bit rate of the file in kb/s.
-       */
+      virtual int lengthInSeconds() const;
+      virtual int lengthInMilliseconds() const;
       virtual int bitrate() const;
-
-      /*!
-       * Returns the sample rate in Hz.
-       */
       virtual int sampleRate() const;
-
-      /*!
-       * Returns the number of audio channels.
-       */
       virtual int channels() const;
 
-      /*!
-       * Returns the number of bits per audio sample.
-       */
-      virtual int bitsPerSample() const;
-
-      /*!
-       * Returns whether or not the file is encrypted.
-       */
-      bool isEncrypted() const;
-
-      /*!
-       * Returns the codec used in the file.
-       */
-      Codec codec() const;
+      int bitsPerSample() const;
+      long long sampleCount() const;
 
     private:
-      void read(File *file, Atoms *atoms);
+      Properties(const Properties &);
+      Properties &operator=(const Properties &);
 
       class PropertiesPrivate;
       PropertiesPrivate *d;
     };
-
   }
-
 }
 
 #endif
+

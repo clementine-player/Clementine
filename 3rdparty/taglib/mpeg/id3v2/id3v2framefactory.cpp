@@ -127,11 +127,6 @@ Frame *FrameFactory::createFrame(const ByteVector &data, unsigned int version) c
 
 Frame *FrameFactory::createFrame(const ByteVector &origData, Header *tagHeader) const
 {
-    return createFrame(origData, const_cast<const Header *>(tagHeader));
-}
-
-Frame *FrameFactory::createFrame(const ByteVector &origData, const Header *tagHeader) const
-{
   ByteVector data = origData;
   unsigned int version = tagHeader->majorVersion();
   Frame::Header *header = new Frame::Header(data, version);
@@ -203,8 +198,8 @@ Frame *FrameFactory::createFrame(const ByteVector &origData, const Header *tagHe
 
   // Text Identification (frames 4.2)
 
-  // Apple proprietary WFED (Podcast URL), MVNM (Movement Name), MVIN (Movement Number), GRP1 (Grouping) are in fact text frames.
-  if(frameID.startsWith("T") || frameID == "WFED" || frameID == "MVNM" || frameID == "MVIN" || frameID == "GRP1") {
+  // Apple proprietary WFED (Podcast URL), MVNM (Movement Name), MVIN (Movement Number) are in fact text frames.
+  if(frameID.startsWith("T") || frameID == "WFED" || frameID == "MVNM" || frameID == "MVIN") {
 
     TextIdentificationFrame *f = frameID != "TXXX"
       ? new TextIdentificationFrame(data, header)
@@ -464,7 +459,6 @@ namespace
     { "WFD", "WFED" },
     { "MVN", "MVNM" },
     { "MVI", "MVIN" },
-    { "GP1", "GRP1" },
   };
   const size_t frameConversion2Size = sizeof(frameConversion2) / sizeof(frameConversion2[0]);
 

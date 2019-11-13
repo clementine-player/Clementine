@@ -93,7 +93,7 @@ namespace TagLib {
        *
        * \deprecated Always returns null.
        */
-      TAGLIB_DEPRECATED Page *getCopyWithNewPageSequenceNumber(int sequenceNumber);
+      Page* getCopyWithNewPageSequenceNumber(int sequenceNumber);
 
       /*!
        * Returns the index of the first packet wholly or partially contained in

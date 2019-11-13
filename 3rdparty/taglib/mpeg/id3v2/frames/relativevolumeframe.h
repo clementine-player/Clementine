@@ -131,12 +131,12 @@ namespace TagLib {
       /*!
        * \deprecated Always returns master volume.
        */
-      TAGLIB_DEPRECATED ChannelType channelType() const;
+      ChannelType channelType() const;
 
       /*!
        * \deprecated This method no longer has any effect.
        */
-      TAGLIB_DEPRECATED void setChannelType(ChannelType t);
+      void setChannelType(ChannelType t);
 
       /*
        * There was a terrible API goof here, and while this can't be changed to

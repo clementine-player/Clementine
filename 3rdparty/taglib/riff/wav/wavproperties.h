@@ -55,7 +55,7 @@ namespace TagLib {
          *
          * \deprecated
          */
-        TAGLIB_DEPRECATED Properties(const ByteVector &data, ReadStyle style);
+        Properties(const ByteVector &data, ReadStyle style);
 
         /*!
          * Create an instance of WAV::Properties with the data read from the
@@ -63,7 +63,7 @@ namespace TagLib {
          *
          * \deprecated
          */
-        TAGLIB_DEPRECATED Properties(const ByteVector &data, unsigned int streamLength, ReadStyle style);
+        Properties(const ByteVector &data, unsigned int streamLength, ReadStyle style);
 
         /*!
          * Create an instance of WAV::Properties with the data read from the
@@ -84,7 +84,7 @@ namespace TagLib {
          *
          * \deprecated
          */
-        TAGLIB_DEPRECATED virtual int length() const;
+        virtual int length() const;
 
         /*!
          * Returns the length of the file in seconds.  The length is rounded down to
@@ -130,7 +130,7 @@ namespace TagLib {
          *
          * \deprecated
          */
-        TAGLIB_DEPRECATED int sampleWidth() const;
+        int sampleWidth() const;
 
         /*!
          * Returns the number of sample frames.

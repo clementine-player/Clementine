@@ -28,7 +28,6 @@
 
 #include "tbytevector.h"
 #include "taglib_export.h"
-#include "id3v2.h"
 
 namespace TagLib {
 
