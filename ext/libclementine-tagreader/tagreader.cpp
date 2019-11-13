@@ -128,7 +128,10 @@ void TagReader::ReadFile(const QString& filename,
 
 #if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
   qint64 mtime = info.lastModified().toSecsSinceEpoch();
-  qint64 btime = info.birthTime().toSecsSinceEpoch();
+  qint64 btime = mtime;
+  if (info.birthTime().isValid()) {
+    btime = info.birthTime().toSecsSinceEpoch();
+  }
 #elif QT_VERSION >= QT_VERSION_CHECK(5, 8, 0)
   qint64 mtime = info.lastModified().toSecsSinceEpoch();
   qint64 btime = info.created().toSecsSinceEpoch();
