@@ -326,7 +326,7 @@ void LibraryView::SetApplication(Application* app) {
 void LibraryView::SetFilter(LibraryFilterWidget* filter) { filter_ = filter; }
 
 void LibraryView::TotalSongCountUpdated(int count) {
-  bool old = total_song_count_;
+  int old = total_song_count_;
   total_song_count_ = count;
   if (old != total_song_count_) update();
 
