@@ -52,8 +52,6 @@
 #include "s3mfile.h"
 #include "itfile.h"
 #include "xmfile.h"
-#include "dsffile.h"
-#include "dsdifffile.h"
 
 using namespace TagLib;
 
@@ -137,10 +135,6 @@ namespace
       return new IT::File(stream, readAudioProperties, audioPropertiesStyle);
     if(ext == "XM")
       return new XM::File(stream, readAudioProperties, audioPropertiesStyle);
-    if(ext == "DFF" || ext == "DSDIFF")
-      return new DSDIFF::File(stream, readAudioProperties, audioPropertiesStyle);
-    if(ext == "DSF")
-      return new DSF::File(stream, readAudioProperties, audioPropertiesStyle);
 
     return 0;
   }
@@ -180,10 +174,6 @@ namespace
       file = new RIFF::WAV::File(stream, readAudioProperties, audioPropertiesStyle);
     else if(APE::File::isSupported(stream))
       file = new APE::File(stream, readAudioProperties, audioPropertiesStyle);
-    else if(DSDIFF::File::isSupported(stream))
-      file = new DSDIFF::File(stream, readAudioProperties, audioPropertiesStyle);
-    else if(DSF::File::isSupported(stream))
-      file = new DSF::File(stream, readAudioProperties, audioPropertiesStyle);
 
     // isSupported() only does a quick check, so double check the file here.
 
@@ -265,10 +255,6 @@ namespace
       return new IT::File(fileName, readAudioProperties, audioPropertiesStyle);
     if(ext == "XM")
       return new XM::File(fileName, readAudioProperties, audioPropertiesStyle);
-    if(ext == "DFF" || ext == "DSDIFF")
-      return new DSDIFF::File(fileName, readAudioProperties, audioPropertiesStyle);
-    if(ext == "DSF")
-      return new DSF::File(fileName, readAudioProperties, audioPropertiesStyle);
 
     return 0;
   }
@@ -401,9 +387,6 @@ StringList FileRef::defaultFileExtensions()
   l.append("s3m");
   l.append("it");
   l.append("xm");
-  l.append("dsf");
-  l.append("dff");
-  l.append("dsdiff"); // alias for "dff"
 
   return l;
 }

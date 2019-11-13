@@ -120,6 +120,11 @@ namespace TagLib {
         virtual bool save();
 
         /*!
+         * Save using a specific ID3v2 version (e.g. v3)
+         */
+        bool save(ID3v2::Version version);
+
+        /*!
          * Returns whether or not the file on disk actually has an ID3v2 tag.
          *
          * \see ID3v2Tag()

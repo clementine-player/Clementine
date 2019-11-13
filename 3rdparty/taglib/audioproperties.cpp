@@ -38,8 +38,6 @@
 #include "vorbisproperties.h"
 #include "wavproperties.h"
 #include "wavpackproperties.h"
-#include "dsfproperties.h"
-#include "dsdiffproperties.h"
 
 #include "audioproperties.h"
 
@@ -75,10 +73,6 @@ using namespace TagLib;
     return dynamic_cast<const Vorbis::Properties*>(this)->function_name();      \
   else if(dynamic_cast<const WavPack::Properties*>(this))                       \
     return dynamic_cast<const WavPack::Properties*>(this)->function_name();     \
-  else if(dynamic_cast<const DSF::Properties*>(this))                           \
-    return dynamic_cast<const DSF::Properties*>(this)->function_name();         \
-  else if(dynamic_cast<const DSDIFF::Properties*>(this))                        \
-    return dynamic_cast<const DSDIFF::Properties*>(this)->function_name();      \
   else                                                                          \
     return (default_value);
 

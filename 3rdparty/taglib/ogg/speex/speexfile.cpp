@@ -131,6 +131,7 @@ void Speex::File::read(bool readProperties)
 
   if(!speexHeaderData.startsWith("Speex   ")) {
     debug("Speex::File::read() -- invalid Speex identification header");
+    setValid(false);
     return;
   }
 

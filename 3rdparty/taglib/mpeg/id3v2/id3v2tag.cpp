@@ -462,7 +462,7 @@ PropertyMap ID3v2::Tag::setProperties(const PropertyMap &origProps)
 
 ByteVector ID3v2::Tag::render() const
 {
-  return render(4);
+  return render(ID3v2::v4);
 }
 
 void ID3v2::Tag::downgradeFrames(FrameList *frames, FrameList *newFrames) const
@@ -569,15 +569,15 @@ void ID3v2::Tag::downgradeFrames(FrameList *frames, FrameList *newFrames) const
 
 ByteVector ID3v2::Tag::render(int version) const
 {
+  return render(version == 3 ? v3 : v4);
+}
+
+ByteVector ID3v2::Tag::render(Version version) const
+{
   // We need to render the "tag data" first so that we have to correct size to
   // render in the tag's header.  The "tag data" -- everything that is included
   // in ID3v2::Header::tagSize() -- includes the extended header, frames and
   // padding, but does not include the tag's header or footer.
-
-  if(version != 3 && version != 4) {
-    debug("Unknown ID3v2 version, using ID3v2.4");
-    version = 4;
-  }
 
   // TODO: Render the extended header.
 
@@ -587,7 +587,7 @@ ByteVector ID3v2::Tag::render(int version) const
   newFrames.setAutoDelete(true);
 
   FrameList frameList;
-  if(version == 4) {
+  if(version == v4) {
     frameList = d->frameList;
   }
   else {
@@ -601,7 +601,7 @@ ByteVector ID3v2::Tag::render(int version) const
   // Loop through the frames rendering them and adding them to the tagData.
 
   for(FrameList::ConstIterator it = frameList.begin(); it != frameList.end(); it++) {
-    (*it)->header()->setVersion(version);
+    (*it)->header()->setVersion(version == v3 ? 3 : 4);
     if((*it)->header()->frameID().size() != 4) {
       debug("An ID3v2 frame of unsupported or unknown type \'"
           + String((*it)->header()->frameID()) + "\' has been discarded");
