@@ -467,7 +467,7 @@ jobs:
     docker:
       - image: fedora:31
     environment:
-      RPM_BUILD_NCPUS: "1"
+      RPM_BUILD_NCPUS: "2"
 
     steps:
       - install_fedora_dependencies
