@@ -506,6 +506,7 @@ jobs:
             cp
             /usr/lib/gcc/i686-w64-mingw32/*-posix/libgcc_s_sjlj-1.dll
             /usr/lib/gcc/i686-w64-mingw32/*-posix/libstdc++-6.dll
+            /usr/i686-w64-mingw32/lib/libwinpthread-1.dll
             $CIRCLE_WORKING_DIRECTORY/dist/windows
       - run:
           name: Copy DLL dependencies
