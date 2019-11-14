@@ -38,10 +38,6 @@
 #include <QUndoStack>
 #include <QtDebug>
 
-#ifdef Q_OS_WIN32
-#include <qtsparkle-qt5/Updater>
-#endif
-
 #include "core/appearance.h"
 #include "core/application.h"
 #include "core/backgroundstreams.h"
@@ -832,15 +828,6 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
       ui_->menu_tools->addAction(tr("Check for updates..."));
   check_updates->setMenuRole(QAction::ApplicationSpecificRole);
   connect(check_updates, SIGNAL(triggered(bool)), SLOT(CheckForUpdates()));
-#endif
-
-#ifdef Q_OS_WIN32
-  qLog(Debug) << "Creating sparkle updater";
-  qtsparkle::Updater* updater = new qtsparkle::Updater(
-      QUrl("https://clementine-data.appspot.com/sparkle-windows"), this);
-  updater->SetNetworkAccessManager(new NetworkAccessManager(this));
-  updater->SetVersion(CLEMENTINE_VERSION_SPARKLE);
-  connect(check_updates, SIGNAL(triggered()), updater, SLOT(CheckNow()));
 #endif
 
   // Global shortcuts

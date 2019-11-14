@@ -78,7 +78,6 @@ pkg_check_modules(TAGLIB taglib)
 
 if (WIN32)
   find_package(ZLIB REQUIRED)
-  find_library(QTSPARKLE_LIBRARIES qtsparkle-qt5)
 endif (WIN32)
 
 find_library(LASTFM5_LIBRARIES lastfm5)

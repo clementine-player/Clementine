@@ -96,10 +96,6 @@ QDBusArgument& operator<<(QDBusArgument& arg, const QImage& image);
 const QDBusArgument& operator>>(const QDBusArgument& arg, QImage& image);
 #endif
 
-#ifdef Q_OS_WIN32
-#include <qtsparkle-qt5/Updater>
-#endif
-
 // Load sqlite plugin on windows and mac.
 #include <QtPlugin>
 Q_IMPORT_PLUGIN(QSQLiteDriverPlugin)
@@ -414,11 +410,6 @@ int main(int argc, char* argv[]) {
   LoadTranslation("clementine", ":/translations", language);
   LoadTranslation("clementine", a.applicationDirPath(), language);
   LoadTranslation("clementine", QDir::currentPath(), language);
-
-#ifdef Q_OS_WIN32
-  // Set the language for qtsparkle
-  qtsparkle::LoadTranslations(language);
-#endif
 
   // Icons
   IconLoader::Init();

@@ -1357,7 +1357,6 @@ if (WIN32)
   target_link_libraries(clementine_lib
     protobuf
     ${ZLIB_LIBRARIES}
-    ${QTSPARKLE_LIBRARIES}
     tinysvcmdns
     dsound
   )
