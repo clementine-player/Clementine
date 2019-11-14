@@ -94,6 +94,23 @@ commands:
             - << parameters.build >>/*
       - store_artifacts:
           path: /tmp/artifacts/<< parameters.build >>
+
+  copy_windows_artifacts:
+    description: Copy build artifacts
+    steps:
+      - run:
+          name: Create artifact output directory
+          command: mkdir -p /tmp/artifacts/windows
+      - run:
+          name: Copy exe to artifacts directory
+          command: cp dist/windows/ClementineSetup*.exe /tmp/artifacts/windows
+      - persist_to_workspace:
+          root: /tmp/artifacts
+          paths:
+            - windows/*
+      - store_artifacts:
+          path: /tmp/artifacts/windows
+
   install_bionic_dependencies:
     description: Install Bionic dependencies
     steps:
@@ -652,6 +669,7 @@ jobs:
           name: Build windows installer
           working_directory: dist/windows
           command: makensis clementine.nsi
+      - copy_windows_artifacts
 
   build_mac:
     macos:
@@ -781,6 +799,7 @@ workflows:
             - build_fedora_29_64
             - build_fedora_30_64
             - build_fedora_31_64
+            - build_mingw
             - build_mac
           filters:
             branches:
