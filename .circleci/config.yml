@@ -588,13 +588,21 @@ jobs:
             $CIRCLE_WORKING_DIRECTORY/dist/windows
       - run: mkdir dist/windows/imageformats
       - run:
-          name: Copy Qt plugin DLLs
+          name: Copy Qt imageformat plugin DLLs
           working_directory: /target/plugins
           command: >
             cp
             imageformats/qgif.dll
             imageformats/qjpeg.dll
             $CIRCLE_WORKING_DIRECTORY/dist/windows/imageformats
+      - run: mkdir dist/windows/platforms
+      - run:
+          name: Copy Qt platforms plugin DLLs
+          working_directory: /target/plugins
+          command: >
+            cp
+            platforms/qwindows.dll
+            $CIRCLE_WORKING_DIRECTORY/dist/windows/platforms
       - run: mkdir dist/windows/gio-modules
       - run:
           name: Copy GIO modules

@@ -407,6 +407,12 @@ Section "Qt image format plugins" imageformats
   File "/oname=qjpeg.dll" "imageformats\qjpeg.dll"
 SectionEnd
 
+Section "Qt platform plugins" platforms
+  SetOutPath "$INSTDIR\platforms"
+
+  File "/oname=qwindows.dll" "platforms\qwindows.dll"
+SectionEnd
+
 Section "GIO modules" gio-modules
   SetOutPath "$INSTDIR\gio-modules"
 
