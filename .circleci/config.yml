@@ -478,6 +478,25 @@ jobs:
       - copy_rpm_artifacts:
           build: fedora-31
 
+  build_mingw:
+    docker:
+      - image: eu.gcr.io/clementine-data/mingw-w64:latest
+    environment:
+      PKG_CONFIG_PATH: /target/lib/pkgconfig
+    steps:
+      - checkout
+      - run:
+          name: CMake
+          working_directory: bin
+          command: >
+            cmake ..
+            -DCMAKE_TOOLCHAIN_FILE=../Toolchain-mingw32.cmake
+            -DCMAKE_BUILD_TYPE=Release
+      - run:
+          name: Make
+          working_directory: bin
+          command: make -j2
+
   build_mac:
     macos:
       xcode: "11.0.0"
