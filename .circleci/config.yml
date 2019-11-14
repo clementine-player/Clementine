@@ -606,6 +606,7 @@ workflows:
       - build_fedora_29_64
       - build_fedora_30_64
       - build_fedora_31_64
+      - build_mingw
       - build_mac:
           filters:
             branches:
