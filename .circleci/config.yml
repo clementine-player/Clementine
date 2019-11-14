@@ -524,7 +524,7 @@ jobs:
             /usr/lib/gcc/i686-w64-mingw32/*-posix/libgcc_s_sjlj-1.dll
             /usr/lib/gcc/i686-w64-mingw32/*-posix/libstdc++-6.dll
             /usr/i686-w64-mingw32/lib/libwinpthread-1.dll
-            $CIRCLE_WORKING_DIRECTORY/dist/windows
+            ~/project/dist/windows
       - run:
           name: Copy DLL dependencies
           working_directory: /target/bin
@@ -602,7 +602,7 @@ jobs:
             Qt5XmlPatterns.dll
             ssleay32.dll
             zlib1.dll
-            $CIRCLE_WORKING_DIRECTORY/dist/windows
+            ~/project/dist/windows
       - run: mkdir dist/windows/imageformats
       - run:
           name: Copy Qt imageformat plugin DLLs
@@ -611,7 +611,7 @@ jobs:
             cp
             imageformats/qgif.dll
             imageformats/qjpeg.dll
-            $CIRCLE_WORKING_DIRECTORY/dist/windows/imageformats
+            ~/project/dist/windows/imageformats
       - run: mkdir dist/windows/platforms
       - run:
           name: Copy Qt platforms plugin DLLs
@@ -619,7 +619,7 @@ jobs:
           command: >
             cp
             platforms/qwindows.dll
-            $CIRCLE_WORKING_DIRECTORY/dist/windows/platforms
+            ~/project/dist/windows/platforms
       - run: mkdir dist/windows/gio-modules
       - run:
           name: Copy GIO modules
@@ -664,7 +664,7 @@ jobs:
             libgstvolume.dll
             libgstvorbis.dll
             libgstwaveparse.dll
-            $CIRCLE_WORKING_DIRECTORY/dist/windows/gstreamer-plugins
+            ~/project/dist/windows/gstreamer-plugins
       - run:
           name: Build windows installer
           working_directory: dist/windows
