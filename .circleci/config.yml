@@ -636,7 +636,7 @@ jobs:
             libgstaudioresample.dll
             libgstaudiotestsrc.dll
             libgstcdio.dll
-            libgstcorelements.dll
+            libgstcoreelements.dll
             libgstequalizer.dll
             libgstfaad.dll
             libgstflac.dll
@@ -661,7 +661,7 @@ jobs:
             libgstudp.dll
             libgstvolume.dll
             libgstvorbis.dll
-            libgstwaveparse.dll
+            libgstwavparse.dll
             ~/project/dist/windows/gstreamer-plugins
       - run:
           name: Build windows installer
