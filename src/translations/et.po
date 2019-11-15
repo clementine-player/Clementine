@@ -4,14 +4,15 @@
 # 
 # Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
+# n/a n/a <transifex@lend.ee>, 2019
 # Rivo Zängov <eraser@eraser.ee>, 2011-2012,2018
 # spil <spil99@hotmail.com>, 2013
 # Руслан <nasretdinov.r.r@ya.ru>, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2019-08-22 10:45+0000\n"
-"Last-Translator: hatstand <john.maguire@gmail.com>\n"
+"PO-Revision-Date: 2019-11-15 11:35+0000\n"
+"Last-Translator: n/a n/a <transifex@lend.ee>\n"
 "Language-Team: Estonian (http://www.transifex.com/davidsansome/clementine/language/et/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -95,7 +96,7 @@ msgstr ""
 #: playlistparsers/playlistparser.cpp:89
 #, qt-format
 msgid "%1 playlists (%2)"
-msgstr "%1 плейлист (%2)"
+msgstr "%1 lugude nimekirja (%2)"
 
 #: playlist/playlistmanager.cpp:429
 #, qt-format
@@ -115,12 +116,12 @@ msgstr "%1 lugu"
 #: smartplaylists/searchpreview.cpp:123
 #, qt-format
 msgid "%1 songs found"
-msgstr "Leiti %1 lugu"
+msgstr "Leidsime %1 lugu"
 
 #: smartplaylists/searchpreview.cpp:119
 #, qt-format
 msgid "%1 songs found (showing %2)"
-msgstr "Найдено %1 записей (показано %2)"
+msgstr "Leidsime %1 lugu (näitasime %2)"
 
 #: playlist/playlistmanager.cpp:435 playlist/queue.cpp:222
 #, qt-format
@@ -172,7 +173,7 @@ msgstr "jäänud %n"
 
 #: playlist/playlistheader.cpp:45
 msgid "&Align text"
-msgstr ""
+msgstr "&Joonda tekst"
 
 #: playlist/playlistheader.cpp:48
 msgid "&Center"
@@ -225,7 +226,7 @@ msgstr "&Puudub"
 
 #: ../bin/src/ui_mainwindow.h:737
 msgid "&Playlist"
-msgstr "Lugude nimekiri"
+msgstr "Esitusloend"
 
 #: ../bin/src/ui_mainwindow.h:678
 msgid "&Quit"
@@ -245,7 +246,7 @@ msgstr "Segatud režiim"
 
 #: playlist/playlistheader.cpp:34
 msgid "&Stretch columns to fit window"
-msgstr "Растянуть столбцы по размеру окна"
+msgstr "Venita veerud akna laiuse järgi"
 
 #: ../bin/src/ui_mainwindow.h:740
 msgid "&Tools"
@@ -257,7 +258,7 @@ msgstr "&Aasta"
 
 #: ui/edittagdialog.cpp:50
 msgid "(different across multiple songs)"
-msgstr ""
+msgstr "(erinev erinevatel lugudel)"
 
 #: internet/spotify/spotifyservice.cpp:472
 msgid ", by "
@@ -310,7 +311,7 @@ msgstr "48,000Hz"
 
 #: library/library.cpp:64
 msgid "50 random tracks"
-msgstr "50 случайных треков"
+msgstr "50 juhuslikku lugu"
 
 #: ../bin/src/ui_playbacksettingspage.h:379
 msgid "96,000Hz"
@@ -318,7 +319,7 @@ msgstr "96,000Hz"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:164
 msgid "<a href=\"http://www.di.fm/premium/\">Upgrade to Premium now</a>"
-msgstr "<a href=\"http://www.di.fm/premium/\">Купить Премиум</a>"
+msgstr "<a href=\"http://www.di.fm/premium/\">Osta Premium-toode</a>"
 
 #: ../bin/src/ui_librarysettingspage.h:194
 msgid ""
@@ -388,12 +389,12 @@ msgid ""
 "A smart playlist is a dynamic list of songs that come from your library.  "
 "There are different types of smart playlist that offer different ways of "
 "selecting songs."
-msgstr "Интеллектуальный плейлист - это динамический список аудиозаписей, который приходит из вашей бибилиотеки. Существуют разные типы интеллектуальных плейлистов с различными способами выбора записей."
+msgstr "Nutikas esitlusloend (lugude nimekiri) on dünaamiline loend,  mis põhineb sinu muusikakataloogil. On olemas mitu erinevat tüüpi nutikat esitlusloendist (lugude nimekirja), ning neil on erinevad aluspõhimõtted."
 
 #: smartplaylists/querywizardplugin.cpp:157
 msgid ""
 "A song will be included in the playlist if it matches these conditions."
-msgstr ""
+msgstr "Lugu lisatakse sellesse nimekirja kui ta vastab nendele tingimustele."
 
 #: ../bin/src/ui_behavioursettingspage.h:417
 msgid "A&utomatic"
@@ -457,7 +458,7 @@ msgstr "Konto üksikasjad"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:160
 msgid "Account details (Premium)"
-msgstr "Банковские реквизиты (Премиум)"
+msgstr "Pangarekvisiidid (Premium toote seadistamiseks)"
 
 #: ../bin/src/ui_wiimotesettingspage.h:181
 msgid "Action"
@@ -470,7 +471,7 @@ msgstr "Tegevus"
 
 #: wiimotedev/wiimotesettingspage.cpp:103
 msgid "Activate/Deactivate Wii Remote"
-msgstr ""
+msgstr "Aktiveeri/deaktiveeri Wii pult"
 
 #: internet/podcasts/addpodcastdialog.cpp:63
 msgid "Add Podcast"
@@ -619,7 +620,7 @@ msgstr "Lisa raadiovoog..."
 
 #: internet/spotify/spotifyservice.cpp:626
 msgid "Add to Spotify playlists"
-msgstr ""
+msgstr "Lisa Spotify esitusloendisse"
 
 #: internet/spotify/spotifyservice.cpp:618
 msgid "Add to Spotify starred"
@@ -627,11 +628,11 @@ msgstr ""
 
 #: ui/mainwindow.cpp:1891
 msgid "Add to another playlist"
-msgstr ""
+msgstr "Lisa teise esitusloendisse"
 
 #: ../bin/src/ui_albumcovermanager.h:223
 msgid "Add to playlist"
-msgstr "Lisa esitusnimekirja"
+msgstr "Lisa esitusloendisse"
 
 #: ../bin/src/ui_behavioursettingspage.h:398
 #: ../bin/src/ui_behavioursettingspage.h:410
@@ -709,7 +710,7 @@ msgstr "Album koos kaanega"
 
 #: ui/albumcovermanager.cpp:132
 msgid "Albums without covers"
-msgstr ""
+msgstr "Kaanepildita albumid"
 
 #: ../bin/src/ui_podcastsettingspage.h:275
 msgid "All"
@@ -739,7 +740,7 @@ msgstr "Kõik failid (*)"
 #: playlistparsers/playlistparser.cpp:76
 #, qt-format
 msgid "All playlists (%1)"
-msgstr ""
+msgstr "Kõik esitusloendid (%1)"
 
 #: ui/about.cpp:85
 msgid "All the translators"
@@ -813,17 +814,17 @@ msgstr "Väljanägemine"
 
 #: core/commandlineoptions.cpp:176
 msgid "Append files/URLs to the playlist"
-msgstr ""
+msgstr "Lisa faile/urle oma esitusloendisse"
 
 #: devices/deviceview.cpp:218 globalsearch/globalsearchview.cpp:455
 #: internet/core/internetservice.cpp:48 library/libraryview.cpp:383
 #: widgets/fileviewlist.cpp:31
 msgid "Append to current playlist"
-msgstr ""
+msgstr "Lisa käesolevasse esitusloendisse"
 
 #: ../bin/src/ui_behavioursettingspage.h:395
 msgid "Append to the playlist"
-msgstr ""
+msgstr "Lisa esitusloendisse"
 
 #: ../bin/src/ui_playbacksettingspage.h:362
 msgid "Apply compression to prevent clipping"
@@ -873,7 +874,7 @@ msgstr "Heli vorming"
 
 #: ../bin/src/ui_playbacksettingspage.h:363
 msgid "Audio output"
-msgstr ""
+msgstr "Heliväljund"
 
 #: internet/digitally/digitallyimportedsettingspage.cpp:82
 #: internet/magnatune/magnatunesettingspage.cpp:117
@@ -1084,7 +1085,7 @@ msgstr ""
 
 #: core/globalshortcuts.cpp:72
 msgid "Change shuffle mode"
-msgstr ""
+msgstr "Muuda segamise viisi"
 
 #: ../bin/src/ui_behavioursettingspage.h:409
 msgid "Change the currently playing song"
@@ -1122,7 +1123,7 @@ msgstr "Kontrolli uuendusi..."
 
 #: smartplaylists/wizard.cpp:84
 msgid "Choose a name for your smart playlist"
-msgstr ""
+msgstr "Vali nimi oma nutika esitlusloendi jaoks"
 
 #: engines/gstengine.cpp:952
 msgid "Choose automatically"
@@ -1142,7 +1143,7 @@ msgstr "Vali nimekirjast"
 
 #: smartplaylists/querywizardplugin.cpp:161
 msgid "Choose how the playlist is sorted and how many songs it will contain."
-msgstr ""
+msgstr "Vali kuidas esitlusloend on sorteeritud ja mitu lugu seal peaks sisalduma."
 
 #: internet/podcasts/podcastsettingspage.cpp:143
 msgid "Choose podcast download directory"
@@ -1286,7 +1287,7 @@ msgstr ""
 
 #: ui/albumcovermanager.cpp:215
 msgid "Closing this window will stop searching for album covers."
-msgstr ""
+msgstr "Sulgedes selle akna lõpetad albumite kaanepiltide otsingu."
 
 #: ui/equalizer.cpp:114
 msgid "Club"
@@ -1330,11 +1331,11 @@ msgstr "Helilooja"
 #: internet/core/searchboxwidget.cpp:45
 #, qt-format
 msgid "Configure %1..."
-msgstr ""
+msgstr "Seadista %1..."
 
 #: internet/magnatune/magnatuneservice.cpp:293
 msgid "Configure Magnatune..."
-msgstr ""
+msgstr "Magnatune seadistamine..."
 
 #: ../bin/src/ui_globalshortcutssettingspage.h:166
 msgid "Configure Shortcuts"
@@ -1350,7 +1351,7 @@ msgstr "Subsonicu seadistamine..."
 
 #: globalsearch/globalsearchview.cpp:152 globalsearch/globalsearchview.cpp:481
 msgid "Configure global search..."
-msgstr ""
+msgstr "Üldotsingu seadistamine..."
 
 #: ui/mainwindow.cpp:663
 msgid "Configure library..."
@@ -1388,7 +1389,7 @@ msgstr ""
 
 #: songinfo/streamdiscoverer.cpp:116
 msgid "Connection timed out"
-msgstr ""
+msgstr "Ühendus aegus"
 
 #: internet/subsonic/subsonicsettingspage.cpp:144
 msgid ""
@@ -1465,7 +1466,7 @@ msgstr ""
 
 #: playlist/playlistmanager.cpp:167
 msgid "Couldn't create playlist"
-msgstr ""
+msgstr "Ei suutnud luua esitlusloendit"
 
 #: transcoder/transcoder.cpp:426
 #, qt-format
@@ -1522,7 +1523,7 @@ msgstr ""
 
 #: core/commandlineoptions.cpp:175
 msgid "Create a new playlist with files/URLs"
-msgstr ""
+msgstr "Loo failidest/urlidest uus esitlusloend"
 
 #: ../bin/src/ui_playbacksettingspage.h:346
 msgid "Cross-fade when changing tracks automatically"
@@ -1661,11 +1662,11 @@ msgstr "Kustuta valmisseadistus."
 
 #: library/libraryview.cpp:411
 msgid "Delete smart playlist"
-msgstr ""
+msgstr "Kustuta nutikas esitlusloend"
 
 #: core/commandlineoptions.cpp:186
 msgid "Delete the currently playing song"
-msgstr ""
+msgstr "Kustuta parasjagu esitamisel olev lugu"
 
 #: ../bin/src/ui_organisedialog.h:245
 msgid "Delete the original files"
@@ -1681,11 +1682,11 @@ msgstr "Sügavus"
 
 #: ui/mainwindow.cpp:1804
 msgid "Dequeue selected tracks"
-msgstr ""
+msgstr "Eemalda valitud lood järjekorrast"
 
 #: ui/mainwindow.cpp:1802
 msgid "Dequeue track"
-msgstr ""
+msgstr "Eemalda järjekorrast"
 
 #: ../bin/src/ui_transcodedialog.h:227 ../bin/src/ui_organisedialog.h:240
 #: ../bin/src/ui_ripcddialog.h:320
@@ -1949,16 +1950,16 @@ msgstr ""
 
 #: internet/jamendo/jamendoservice.cpp:125 library/library.cpp:111
 msgid "Dynamic random mix"
-msgstr ""
+msgstr "Dünaamiline juhuslik valik"
 
 #: library/libraryview.cpp:408
 msgid "Edit smart playlist..."
-msgstr ""
+msgstr "Muuda nutikat esitlusloendit..."
 
 #: ui/mainwindow.cpp:1854
 #, qt-format
 msgid "Edit tag \"%1\"..."
-msgstr ""
+msgstr "Muuda silti \"%1\"..."
 
 #: ../bin/src/ui_mainwindow.h:688
 msgid "Edit tag..."
@@ -2041,7 +2042,7 @@ msgstr ""
 
 #: playlist/playlisttabbar.cpp:147
 msgid "Enter a new name for this playlist"
-msgstr ""
+msgstr "Sisesta uus nimi selle esitlusloendi jaoks"
 
 #: ../bin/src/ui_globalsearchview.h:208
 msgid ""
@@ -2269,7 +2270,7 @@ msgstr ""
 #: ui/trackselectiondialog.cpp:247
 #, qt-format
 msgid "Failed to write new auto-tags to '%1'"
-msgstr ""
+msgstr "Ei õnnestunud salvestada automaatselt koostatud silte siia '%1'"
 
 #: ../bin/src/ui_transcoderoptionsflac.h:81
 #: ../bin/src/ui_transcoderoptionsmp3.h:199
@@ -2533,7 +2534,7 @@ msgstr "Rühmita albumite järgi"
 
 #: library/libraryfilterwidget.cpp:152
 msgid "Group by Album artist/Album"
-msgstr ""
+msgstr "Rühmita albumi esitaja/albumi järgi"
 
 #: library/libraryfilterwidget.cpp:145
 msgid "Group by Artist"
@@ -2541,25 +2542,25 @@ msgstr "Rühmita esitajate järgi"
 
 #: library/libraryfilterwidget.cpp:148
 msgid "Group by Artist/Album"
-msgstr "Grupeeri esitaja/albumi järgi"
+msgstr "Rühmita esitaja/albumi järgi"
 
 #: library/libraryfilterwidget.cpp:156
 msgid "Group by Artist/Year - Album"
-msgstr "Grupeeri esitaja/aasta albumi järgi"
+msgstr "Rühmita esitaja/aasta albumi järgi"
 
 #: library/libraryfilterwidget.cpp:163
 msgid "Group by Genre/Album"
-msgstr "Grupeeri zanri/albumi järgi"
+msgstr "Rühmita žanri/albumi järgi"
 
 #: library/libraryfilterwidget.cpp:167
 msgid "Group by Genre/Artist/Album"
-msgstr "Grupeeri zanri/esitaja/albumi järgi"
+msgstr "Rühmita žanri/esitaja/albumi järgi"
 
 #: library/savedgroupingmanager.cpp:89 playlist/playlist.cpp:1402
 #: ui/organisedialog.cpp:71 ../bin/src/ui_groupbydialog.h:141
 #: ../bin/src/ui_groupbydialog.h:160 ../bin/src/ui_groupbydialog.h:179
 msgid "Grouping"
-msgstr ""
+msgstr "Rühmitamine"
 
 #: library/libraryfilterwidget.cpp:213
 msgid "Grouping Name"
@@ -2571,7 +2572,7 @@ msgstr ""
 
 #: internet/podcasts/podcasturlloader.cpp:206
 msgid "HTML page did not contain any RSS feeds"
-msgstr ""
+msgstr "HTML lehel ei leidunud ühtegi RSS uudisvoogu"
 
 #: internet/subsonic/subsonicsettingspage.cpp:166
 msgid ""
@@ -2702,7 +2703,7 @@ msgstr ""
 
 #: ../bin/src/ui_querysearchpage.h:114
 msgid "Include all songs"
-msgstr ""
+msgstr "Kaasa kõik lood"
 
 #: internet/subsonic/subsonicsettingspage.cpp:110
 msgid "Incompatible Subsonic REST protocol version. Client must upgrade."
@@ -2731,7 +2732,7 @@ msgstr "Heli valjemaks"
 #: internet/core/cloudfileservice.cpp:154
 #, qt-format
 msgid "Indexing %1"
-msgstr ""
+msgstr "Indekseerin %1"
 
 #: ../bin/src/ui_deviceproperties.h:372 wiimotedev/wiimotesettingspage.cpp:139
 msgid "Information"
@@ -2776,7 +2777,7 @@ msgstr "Vigane API võti"
 
 #: songinfo/streamdiscoverer.cpp:114
 msgid "Invalid URL"
-msgstr ""
+msgstr "Vigane URL"
 
 #: internet/lastfm/lastfmservice.cpp:272
 msgid "Invalid format"
@@ -2865,7 +2866,7 @@ msgstr ""
 
 #: ui/equalizer.cpp:131
 msgid "Kuduro"
-msgstr ""
+msgstr "Kuduro"
 
 #: ../bin/src/ui_behavioursettingspage.h:362
 msgid "Language"
@@ -2881,15 +2882,15 @@ msgstr "Suur ruum"
 
 #: widgets/nowplayingwidget.cpp:100
 msgid "Large album cover"
-msgstr "Suur albumi kaanepilt"
+msgstr "Albumi suur kaanepilt"
 
 #: widgets/nowplayingwidget.cpp:103
 msgid "Large album cover (details below)"
-msgstr ""
+msgstr "Lae albumi kaanepilti (lisateabega)"
 
 #: widgets/nowplayingwidget.cpp:105
 msgid "Large album cover (no details)"
-msgstr ""
+msgstr "Lae albumi kaanepilti (ilma lisateabeta)"
 
 #: widgets/fancytabwidget.cpp:438
 msgid "Large sidebar"
@@ -2902,7 +2903,7 @@ msgstr "Viimati esitatud"
 #: playlist/playlist.cpp:1411 ../bin/src/ui_edittagdialog.h:707
 msgctxt "A playlist's tag."
 msgid "Last played"
-msgstr ""
+msgstr "Viimati esitatud"
 
 #: ../bin/src/ui_lastfmsettingspage.h:131
 msgid "Last.fm"
@@ -2918,7 +2919,7 @@ msgstr ""
 
 #: songinfo/lastfmtrackinfoprovider.cpp:76
 msgid "Last.fm play counts"
-msgstr ""
+msgstr "Esitluskordi Last.fm saidis"
 
 #: songinfo/lastfmtrackinfoprovider.cpp:130
 msgid "Last.fm tags"
@@ -2976,7 +2977,7 @@ msgstr ""
 
 #: ui/albumcoverchoicecontroller.cpp:67
 msgid "Load cover from URL..."
-msgstr "Lae ümbris URL-ilt---"
+msgstr "Lae ümbris URL-ilt.."
 
 #: ui/albumcoverchoicecontroller.cpp:107
 msgid "Load cover from disk"
@@ -3004,7 +3005,7 @@ msgstr ""
 
 #: smartplaylists/generatorinserter.cpp:48
 msgid "Loading smart playlist"
-msgstr ""
+msgstr "Laen nutikat esitlusloendit"
 
 #: library/librarymodel.cpp:170
 msgid "Loading songs"
@@ -3018,7 +3019,7 @@ msgstr "Voo laadimine"
 
 #: playlist/songloaderinserter.cpp:134 ui/edittagdialog.cpp:251
 msgid "Loading tracks"
-msgstr ""
+msgstr "Laen lugusid"
 
 #: playlist/songloaderinserter.cpp:162
 msgid "Loading tracks info"
@@ -3335,7 +3336,7 @@ msgstr ""
 #: playlist/playlistlistcontainer.cpp:254
 #: ../bin/src/ui_playlistlistcontainer.h:129
 msgid "New folder"
-msgstr ""
+msgstr "Uus kaust"
 
 #: ui/mainwindow.cpp:1908 ../bin/src/ui_mainwindow.h:709
 msgid "New playlist"
@@ -3343,7 +3344,7 @@ msgstr "Uus esitusnimekiri"
 
 #: library/libraryview.cpp:405
 msgid "New smart playlist..."
-msgstr ""
+msgstr "Uus nutikas esitlusloend"
 
 #: widgets/freespacebar.cpp:45
 msgid "New songs"
@@ -3355,7 +3356,7 @@ msgstr ""
 
 #: internet/subsonic/subsonicservice.cpp:100
 msgid "Newest"
-msgstr ""
+msgstr "Uusim"
 
 #: library/library.cpp:92
 msgid "Newest tracks"
@@ -3483,7 +3484,7 @@ msgstr ""
 
 #: core/song.cpp:438
 msgid "Ogg FLAC"
-msgstr ""
+msgstr "Ogg FLAC"
 
 #: transcoder/transcoder.cpp:245
 msgid "Ogg Flac"
@@ -3491,7 +3492,7 @@ msgstr "Ogg Flac"
 
 #: core/song.cpp:444 transcoder/transcoder.cpp:251
 msgid "Ogg Opus"
-msgstr ""
+msgstr "Ogg Opus"
 
 #: core/song.cpp:440 transcoder/transcoder.cpp:248
 msgid "Ogg Speex"
@@ -3573,12 +3574,12 @@ msgstr ""
 #: internet/core/internetservice.cpp:62 library/libraryview.cpp:389
 #: widgets/fileviewlist.cpp:36
 msgid "Open in new playlist"
-msgstr ""
+msgstr "Ava uues esitusloendis"
 
 #: ../bin/src/ui_behavioursettingspage.h:397
 msgctxt "Refers to behavior settings in Clementine settings page."
 msgid "Open in new playlist"
-msgstr ""
+msgstr "Ava uues esitusloendis"
 
 #: songinfo/artistbiography.cpp:94 songinfo/artistbiography.cpp:261
 msgid "Open in your browser"
@@ -3788,11 +3789,11 @@ msgstr "Esitusnimekirja valikud"
 
 #: smartplaylists/wizard.cpp:72
 msgid "Playlist type"
-msgstr ""
+msgstr "Esitusloendi tüüp"
 
 #: ui/mainwindow.cpp:273
 msgid "Playlists"
-msgstr ""
+msgstr "Esitusloendid"
 
 #: ../data/oauthsuccess.html:38
 msgid "Please close your browser and return to Clementine."
@@ -3945,7 +3946,7 @@ msgstr ""
 
 #: ../bin/src/ui_querysortpage.h:138
 msgid "Put songs in a random order"
-msgstr ""
+msgstr "Pane lood juhuslikku järjekorda"
 
 #: ../bin/src/ui_transcoderoptionsflac.h:80
 #: ../bin/src/ui_transcoderoptionsmp3.h:191
@@ -3992,11 +3993,11 @@ msgstr ""
 
 #: internet/subsonic/subsonicservice.cpp:103
 msgid "Random"
-msgstr ""
+msgstr "Juhuslik"
 
 #: ../bin/src/ui_visualisationselector.h:111
 msgid "Random visualization"
-msgstr ""
+msgstr "Juhuslik visualiseerimine"
 
 #: core/globalshortcuts.cpp:87
 msgid "Rate the current song 0 stars"
@@ -4060,7 +4061,7 @@ msgstr ""
 
 #: ui/equalizer.cpp:146
 msgid "Reggae"
-msgstr "Regemuusika"
+msgstr "Reggae"
 
 #: playlist/playlistsaveoptionsdialog.cpp:33
 #: ../bin/src/ui_behavioursettingspage.h:419
@@ -4091,11 +4092,11 @@ msgstr "Eemalda toiming"
 
 #: core/globalshortcuts.cpp:84
 msgid "Remove current song from playlist"
-msgstr ""
+msgstr "Eemalda see lugu esitlusloendist"
 
 #: ../bin/src/ui_mainwindow.h:723
 msgid "Remove duplicates from playlist"
-msgstr ""
+msgstr "Eemalda topeltlood esitlusloendist"
 
 #: ../bin/src/ui_librarysettingspage.h:188
 msgid "Remove folder"
@@ -4103,27 +4104,27 @@ msgstr "Eemalda kaust"
 
 #: internet/spotify/spotifyservice.cpp:684 ../bin/src/ui_mainwindow.h:704
 msgid "Remove from playlist"
-msgstr "Eemalda esitusnimekirjast"
+msgstr "Eemalda esitlusloendist"
 
 #: playlist/playlisttabbar.cpp:183
 msgid "Remove playlist"
-msgstr ""
+msgstr "Eemalda esitlusloend"
 
 #: playlist/playlistlistcontainer.cpp:423
 msgid "Remove playlists"
-msgstr ""
+msgstr "Eemalda esitlusloendid"
 
 #: ../bin/src/ui_mainwindow.h:729
 msgid "Remove unavailable tracks from playlist"
-msgstr ""
+msgstr "Eemalda kadunud lood esitlusloendist"
 
 #: playlist/playlisttabbar.cpp:146
 msgid "Rename playlist"
-msgstr "Nimeta lugude nimekiri ümber"
+msgstr "Nimeta esitlusloend ümber"
 
 #: playlist/playlisttabbar.cpp:57
 msgid "Rename playlist..."
-msgstr ""
+msgstr "Nimeta esitlusloend ümber..."
 
 #: ../bin/src/ui_mainwindow.h:686
 msgid "Renumber tracks in this order..."
@@ -4135,25 +4136,25 @@ msgstr "Korda"
 
 #: widgets/osd.cpp:314 ../bin/src/ui_playlistsequence.h:112
 msgid "Repeat album"
-msgstr ""
+msgstr "Korda albumit"
 
 #: widgets/osd.cpp:317 ../bin/src/ui_playlistsequence.h:113
 msgid "Repeat playlist"
-msgstr ""
+msgstr "Korda esitlusloendit"
 
 #: widgets/osd.cpp:311 ../bin/src/ui_playlistsequence.h:111
 msgid "Repeat track"
-msgstr ""
+msgstr "Korda lugu"
 
 #: devices/deviceview.cpp:221 globalsearch/globalsearchview.cpp:458
 #: internet/core/internetservice.cpp:55 library/libraryview.cpp:386
 #: widgets/fileviewlist.cpp:34
 msgid "Replace current playlist"
-msgstr ""
+msgstr "Asenda praegune esitlusloend"
 
 #: ../bin/src/ui_behavioursettingspage.h:396
 msgid "Replace the playlist"
-msgstr ""
+msgstr "Asenda esitlusloend"
 
 #: ../bin/src/ui_organisedialog.h:256
 msgid "Replaces spaces with underscores"
@@ -4266,7 +4267,7 @@ msgstr ""
 
 #: ui/albumcoverchoicecontroller.cpp:132
 msgid "Save album cover"
-msgstr ""
+msgstr "Salvesta albumi kaanepilt"
 
 #: ui/albumcoverchoicecontroller.cpp:65
 msgid "Save cover to disk..."
@@ -4283,16 +4284,16 @@ msgstr "Pildi salvestamine"
 #: playlist/playlistlistcontainer.cpp:154
 msgctxt "Save playlist menu action."
 msgid "Save playlist"
-msgstr ""
+msgstr "Salvesta esitlusloend"
 
 #: playlist/playlistmanager.cpp:233
 msgctxt "Title of the playlist save dialog."
 msgid "Save playlist"
-msgstr ""
+msgstr "Salvesta esitlusloend"
 
 #: playlist/playlisttabbar.cpp:59 ../bin/src/ui_mainwindow.h:710
 msgid "Save playlist..."
-msgstr "Salvesta esitusnimekiri..."
+msgstr "Salvesta esitlusloend..."
 
 #: ui/equalizer.cpp:205 ../bin/src/ui_equalizer.h:165
 msgid "Save preset"
@@ -4355,7 +4356,7 @@ msgstr "Otsing"
 #: ui/mainwindow.cpp:264 ../bin/src/ui_globalsearchsettingspage.h:141
 msgctxt "Global search settings dialog title."
 msgid "Search"
-msgstr ""
+msgstr "Otsing"
 
 #: ../bin/src/ui_icecastfilterwidget.h:77
 msgid "Search Icecast stations"
@@ -4379,16 +4380,16 @@ msgstr ""
 
 #: ui/mainwindow.cpp:700
 msgid "Search for album"
-msgstr ""
+msgstr "Otsi albumit"
 
 #: ui/albumcoverchoicecontroller.cpp:70
 msgid "Search for album covers..."
-msgstr ""
+msgstr "Otsi albumi kaanepilti"
 
 #: ../bin/src/ui_globalsearchview.h:207
 #: ../bin/src/ui_playlistlistcontainer.h:127
 msgid "Search for anything"
-msgstr ""
+msgstr "Otsi mida iganes vaja"
 
 #: ui/mainwindow.cpp:697
 msgid "Search for artist"
@@ -4565,7 +4566,7 @@ msgstr ""
 
 #: ../bin/src/ui_notificationssettingspage.h:447
 msgid "Show a notification when I change the repeat/shuffle mode"
-msgstr ""
+msgstr "Näita teadet kui ma muudan korduse või segamise viisi"
 
 #: ../bin/src/ui_notificationssettingspage.h:446
 msgid "Show a notification when I change the volume"
@@ -4630,7 +4631,7 @@ msgstr ""
 
 #: ui/mainwindow.cpp:651
 msgid "Show only untagged"
-msgstr ""
+msgstr "Näita vaid sildistamata lugusid"
 
 #: ../bin/src/ui_mainwindow.h:733
 msgid "Show or hide the sidebar"
@@ -4670,7 +4671,7 @@ msgstr "Sega"
 
 #: widgets/osd.cpp:296 ../bin/src/ui_playlistsequence.h:119
 msgid "Shuffle albums"
-msgstr ""
+msgstr "Sega kõik albumid"
 
 #: widgets/osd.cpp:290 ../bin/src/ui_playlistsequence.h:118
 msgid "Shuffle all"
@@ -4678,11 +4679,11 @@ msgstr "Sega kõik"
 
 #: ../bin/src/ui_mainwindow.h:691
 msgid "Shuffle playlist"
-msgstr "Sega esitusnimistu"
+msgstr "Sega esitlusloend"
 
 #: widgets/osd.cpp:293 ../bin/src/ui_playlistsequence.h:117
 msgid "Shuffle tracks in this album"
-msgstr ""
+msgstr "Sega kõik lood selles albumis"
 
 #: ../bin/src/ui_podcastsettingspage.h:280
 msgid "Sign in"
@@ -4722,7 +4723,7 @@ msgstr "Lugude nimekirjas edasi"
 
 #: ui/mainwindow.cpp:1824
 msgid "Skip selected tracks"
-msgstr ""
+msgstr "Jäta valituid lood vahele"
 
 #: ui/mainwindow.cpp:1822
 msgid "Skip track"
@@ -4730,7 +4731,7 @@ msgstr ""
 
 #: widgets/nowplayingwidget.cpp:98
 msgid "Small album cover"
-msgstr ""
+msgstr "Albumi väike kaanepilt"
 
 #: widgets/fancytabwidget.cpp:439
 msgid "Small sidebar"
@@ -4738,11 +4739,11 @@ msgstr "Väike külgriba"
 
 #: smartplaylists/wizard.cpp:63
 msgid "Smart playlist"
-msgstr ""
+msgstr "Nutikas esitlusloend"
 
 #: library/librarymodel.cpp:1368
 msgid "Smart playlists"
-msgstr ""
+msgstr "Nutikad esitlusloendid"
 
 #: ui/equalizer.cpp:150
 msgid "Soft"
@@ -4945,7 +4946,7 @@ msgstr ""
 
 #: ui/trackselectiondialog.cpp:167
 msgid "Suggested tags"
-msgstr ""
+msgstr "Soovituslikud sildid"
 
 #: ../bin/src/ui_edittagdialog.h:717
 #: ../bin/src/ui_notificationssettingspage.h:454
@@ -5017,7 +5018,7 @@ msgstr ""
 
 #: ../bin/src/ui_appearancesettingspage.h:308
 msgid "The album cover of the currently playing song"
-msgstr ""
+msgstr "Parasjagu esitatava loo albumi kaanepilt"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:98
 #, qt-format
@@ -5106,7 +5107,7 @@ msgstr ""
 
 #: library/savedgroupingmanager.cpp:38
 msgid "Third Level"
-msgstr ""
+msgstr "Kolmas tase"
 
 #: ../bin/src/ui_groupbydialog.h:162
 msgid "Third level"
@@ -5970,7 +5971,7 @@ msgstr ""
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "remove %n songs"
-msgstr ""
+msgstr "eemalda %n laulu"
 
 #: smartplaylists/searchterm.cpp:401
 msgid "shortest first"
@@ -5978,7 +5979,7 @@ msgstr ""
 
 #: playlist/playlistundocommands.cpp:110
 msgid "shuffle songs"
-msgstr ""
+msgstr "sega lood"
 
 #: smartplaylists/searchterm.cpp:405
 msgid "smallest first"
@@ -5999,4 +6000,4 @@ msgstr "peata"
 #: widgets/osd.cpp:114
 #, qt-format
 msgid "track %1"
-msgstr ""
+msgstr "lugu %1"
