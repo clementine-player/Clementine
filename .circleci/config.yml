@@ -94,6 +94,23 @@ commands:
             - << parameters.build >>/*
       - store_artifacts:
           path: /tmp/artifacts/<< parameters.build >>
+
+  copy_windows_artifacts:
+    description: Copy build artifacts
+    steps:
+      - run:
+          name: Create artifact output directory
+          command: mkdir -p /tmp/artifacts/windows
+      - run:
+          name: Copy exe to artifacts directory
+          command: cp dist/windows/ClementineSetup*.exe /tmp/artifacts/windows
+      - persist_to_workspace:
+          root: /tmp/artifacts
+          paths:
+            - windows/*
+      - store_artifacts:
+          path: /tmp/artifacts/windows
+
   install_bionic_dependencies:
     description: Install Bionic dependencies
     steps:
@@ -478,6 +495,184 @@ jobs:
       - copy_rpm_artifacts:
           build: fedora-31
 
+  build_mingw:
+    docker:
+      - image: eu.gcr.io/clementine-data/mingw-w64:latest
+    environment:
+      PKG_CONFIG_PATH: /target/lib/pkgconfig
+    steps:
+      - checkout
+      - run:
+          name: CMake
+          working_directory: bin
+          command: >
+            cmake ..
+            -DCMAKE_TOOLCHAIN_FILE=../Toolchain-mingw32.cmake
+            -DCMAKE_BUILD_TYPE=Release
+      - run:
+          name: Make
+          working_directory: bin
+          command: make -j2
+      - run:
+          name: Copy output exes
+          working_directory: dist/windows
+          command: cp ../../bin/*.exe .
+      - run:
+          name: Copy base runtime DLLs
+          command: >
+            cp
+            /usr/lib/gcc/i686-w64-mingw32/*-posix/libgcc_s_sjlj-1.dll
+            /usr/lib/gcc/i686-w64-mingw32/*-posix/libstdc++-6.dll
+            /usr/i686-w64-mingw32/lib/libwinpthread-1.dll
+            ~/project/dist/windows
+      - run:
+          name: Copy DLL dependencies
+          working_directory: /target/bin
+          command: >
+            cp
+            glew32.dll
+            libcdio-16.dll
+            libchromaprint.dll
+            libeay32.dll
+            libfaad.dll
+            libffi-6.dll
+            libfftw3-3.dll
+            libFLAC-8.dll
+            libgcrypt-20.dll
+            libgio-2.0-0.dll
+            libglib-2.0-0.dll
+            libgmodule-2.0-0.dll
+            libgmp-10.dll
+            libgnutls-30.dll
+            libgobject-2.0-0.dll
+            libgpg-error-0.dll
+            libgpod.dll
+            libgstapp-1.0-0.dll
+            libgstaudio-1.0-0.dll
+            libgstbase-1.0-0.dll
+            libgstcontroller-1.0-0.dll
+            libgstfft-1.0-0.dll
+            libgstnet-1.0-0.dll
+            libgstpbutils-1.0-0.dll
+            libgstreamer-1.0-0.dll
+            libgstriff-1.0-0.dll
+            libgstrtp-1.0-0.dll
+            libgstrtsp-1.0-0.dll
+            libgstsdp-1.0-0.dll
+            libgsttag-1.0-0.dll
+            libgstvideo-1.0-0.dll
+            libgthread-2.0-0.dll
+            libhogweed-4.dll
+            libiconv-2.dll
+            libid3tag.dll
+            libintl-8.dll
+            libmad.dll
+            libmms-0.dll
+            libmp3lame-0.dll
+            libnettle-6.dll
+            libogg-0.dll
+            liboil-0.3-0.dll
+            liborc-0.4-0.dll
+            liborc-test-0.4-0.dll
+            libp11-kit-0.dll
+            libplist.dll
+            libpsl-5.dll
+            libprotobuf-17.dll
+            libsoup-2.4-1.dll
+            libspeex-1.dll
+            libspotify.dll
+            libsqlite3-0.dll
+            libtag.dll
+            libtasn1-6.dll
+            libvorbis-0.dll
+            libvorbisenc-2.dll
+            libxml2-2.dll
+            Qt5Concurrent.dll
+            Qt5Core.dll
+            Qt5Gui.dll
+            Qt5Network.dll
+            Qt5NetworkAuth.dll
+            Qt5OpenGL.dll
+            Qt5Sql.dll
+            Qt5Svg.dll
+            Qt5Widgets.dll
+            Qt5WinExtras.dll
+            Qt5Xml.dll
+            Qt5XmlPatterns.dll
+            ssleay32.dll
+            zlib1.dll
+            ~/project/dist/windows
+      - run: mkdir dist/windows/imageformats
+      - run:
+          name: Copy Qt imageformat plugin DLLs
+          working_directory: /target/plugins
+          command: >
+            cp
+            imageformats/qgif.dll
+            imageformats/qjpeg.dll
+            ~/project/dist/windows/imageformats
+      - run: mkdir dist/windows/platforms
+      - run:
+          name: Copy Qt platforms plugin DLLs
+          working_directory: /target/plugins
+          command: >
+            cp
+            platforms/qwindows.dll
+            ~/project/dist/windows/platforms
+      - run: mkdir dist/windows/gio-modules
+      - run:
+          name: Copy GIO modules
+          command: cp /target/lib/gio/modules/libgiognutls.dll dist/windows/gio-modules
+      - run: mkdir dist/windows/gstreamer-plugins
+      - run:
+          name: Copy gstreamer plugins
+          working_directory: /target/lib/gstreamer-1.0
+          command: >
+            cp
+            libgstapetag.dll
+            libgstapp.dll
+            libgstasf.dll
+            libgstaudioconvert.dll
+            libgstaudiofx.dll
+            libgstaudioparsers.dll
+            libgstaudioresample.dll
+            libgstaudiotestsrc.dll
+            libgstautodetect.dll
+            libgstcdio.dll
+            libgstcoreelements.dll
+            libgstdirectsoundsink.dll
+            libgstequalizer.dll
+            libgstfaad.dll
+            libgstflac.dll
+            libgstgdp.dll
+            libgstgio.dll
+            libgsticydemux.dll
+            libgstid3demux.dll
+            libgstisomp4.dll
+            libgstlame.dll
+            libgstlibav.dll
+            libgstmad.dll
+            libgstmms.dll
+            libgstogg.dll
+            libgstplayback.dll
+            libgstreplaygain.dll
+            libgstsouphttpsrc.dll
+            libgstspectrum.dll
+            libgstspeex.dll
+            libgsttaglib.dll
+            libgsttcp.dll
+            libgsttypefindfunctions.dll
+            libgstudp.dll
+            libgstvolume.dll
+            libgstvorbis.dll
+            libgstwavparse.dll
+            ~/project/dist/windows/gstreamer-plugins
+      - run:
+          name: Build windows installer
+          working_directory: dist/windows
+          command: makensis clementine.nsi
+      - copy_windows_artifacts
+
   build_mac:
     macos:
       xcode: "11.0.0"
@@ -587,6 +782,7 @@ workflows:
       - build_fedora_29_64
       - build_fedora_30_64
       - build_fedora_31_64
+      - build_mingw
       - build_mac:
           filters:
             branches:
@@ -605,6 +801,7 @@ workflows:
             - build_fedora_29_64
             - build_fedora_30_64
             - build_fedora_31_64
+            - build_mingw
             - build_mac
           filters:
             branches:

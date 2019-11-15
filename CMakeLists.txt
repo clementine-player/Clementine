@@ -78,7 +78,6 @@ pkg_check_modules(TAGLIB taglib)
 
 if (WIN32)
   find_package(ZLIB REQUIRED)
-  find_library(QTSPARKLE_LIBRARIES qtsparkle-qt5)
 endif (WIN32)
 
 find_library(LASTFM5_LIBRARIES lastfm5)
@@ -90,9 +89,9 @@ find_path(SPARSEHASH_INCLUDE_DIRS google/sparsetable)
 # QT
 set(QT_MIN_VERSION 5.6.0)
 find_package(Qt5 ${QT_MIN_VERSION} REQUIRED COMPONENTS Core Concurrent Widgets Network Sql Xml OpenGL Test)
-find_package(Qt5DBus ${QT_MIN_VERSION})
 if(HAVE_X11)
   find_package(Qt5 ${QT_MIN_VERSION} REQUIRED COMPONENTS X11Extras)
+  find_package(Qt5DBus ${QT_MIN_VERSION})
 endif()
 if(APPLE)
   find_package(Qt5 REQUIRED COMPONENTS MacExtras)
