@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2019-11-15 14:37+0000\n"
+"PO-Revision-Date: 2019-11-16 21:52+0000\n"
 "Last-Translator: n/a n/a <transifex@lend.ee>\n"
 "Language-Team: Estonian (http://www.transifex.com/davidsansome/clementine/language/et/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -101,7 +101,7 @@ msgstr "%1 lugude nimekirja (%2)"
 #: playlist/playlistmanager.cpp:429
 #, qt-format
 msgid "%1 selected of"
-msgstr "выбрано %1 из"
+msgstr "Valitud %1  / "
 
 #: devices/deviceview.cpp:125
 #, qt-format
@@ -142,16 +142,16 @@ msgstr "%1: moodul Wiimotedev"
 #: songinfo/lastfmtrackinfoprovider.cpp:95
 #, qt-format
 msgid "%L1 other listeners"
-msgstr ""
+msgstr "%L1 muud kuulajat"
 
 #: songinfo/lastfmtrackinfoprovider.cpp:92
 #, qt-format
 msgid "%L1 total plays"
-msgstr ""
+msgstr "Kokku %L1 esituskorda"
 
 #: ../bin/src/ui_notificationssettingspage.h:432
 msgid "%filename%"
-msgstr ""
+msgstr "%failinimi%"
 
 #: transcoder/transcodedialog.cpp:216
 #, c-format, qt-plural-format
@@ -382,7 +382,7 @@ msgstr ""
 #: internet/digitally/digitallyimportedsettingspage.cpp:48
 #: internet/digitally/digitallyimportedurlhandler.cpp:60
 msgid "A premium account is required"
-msgstr ""
+msgstr "Premoum-konto on vajalik"
 
 #: smartplaylists/wizard.cpp:74
 msgid ""
@@ -398,7 +398,7 @@ msgstr "Lugu lisatakse sellesse nimekirja kui ta vastab nendele tingimustele."
 
 #: ../bin/src/ui_behavioursettingspage.h:417
 msgid "A&utomatic"
-msgstr ""
+msgstr "A&utomaatne"
 
 #: smartplaylists/searchterm.cpp:396
 msgid "A-Z"
@@ -483,7 +483,7 @@ msgstr "Raadiovoo lisamine"
 
 #: ../bin/src/ui_notificationssettingspage.h:430
 msgid "Add a new line if supported by the notification type"
-msgstr ""
+msgstr "Lisa uus rida kui teadete tüüp seda võimaldab"
 
 #: ../bin/src/ui_wiimotesettingspage.h:183
 msgid "Add action"
@@ -1103,7 +1103,7 @@ msgstr ""
 msgid ""
 "Changing mono playback preference will be effective for the next playing "
 "songs"
-msgstr ""
+msgstr "Mono taasesituse seadistuse muutmine jõustub alates järgmisest mängitavast loost"
 
 #: ../bin/src/ui_streamdetailsdialog.h:137
 msgid "Channels"
@@ -1231,7 +1231,7 @@ msgstr ""
 msgid ""
 "Clementine could not load any projectM visualisations.  Check that you have "
 "installed Clementine properly."
-msgstr ""
+msgstr "Clementine ei suutnud laadida mitte ühtegi projectM visualiseerimist. Palun kontrolli et oleksid Clementine paigaldanud korrektselt."
 
 #: widgets/prettyimage.cpp:200
 msgid "Clementine image viewer"
@@ -1627,7 +1627,7 @@ msgstr "Vaikeväärtused"
 
 #: ../bin/src/ui_visualisationselector.h:114
 msgid "Delay between visualizations"
-msgstr ""
+msgstr "Viivitus visualiseerimiste vahel"
 
 #: playlist/playlistlistcontainer.cpp:152
 #: ../bin/src/ui_playlistlistcontainer.h:132
@@ -1752,7 +1752,7 @@ msgstr "Näita kestust"
 
 #: ../bin/src/ui_appearancesettingspage.h:322
 msgid "Disable moodbar generation"
-msgstr ""
+msgstr "Lülita välja meeleoluribade loomine"
 
 #: ../bin/src/ui_notificationssettingspage.h:438
 msgctxt "Refers to a disabled notification type in Notification settings."
@@ -1787,7 +1787,7 @@ msgstr ""
 
 #: ../bin/src/ui_mainwindow.h:719
 msgid "Do a full library rescan"
-msgstr ""
+msgstr "Tee uus helikogu täisanalüüs"
 
 #: internet/googledrive/googledriveservice.cpp:270
 #: internet/googledrive/googledriveservice.cpp:276
@@ -2353,7 +2353,7 @@ msgstr "Transkodeerida failid"
 
 #: smartplaylists/querywizardplugin.cpp:82
 msgid "Find songs in your library that match the criteria you specify."
-msgstr ""
+msgstr "Otsi lugusid oma helikogust, mis vastavad sinu valitud tingimustele."
 
 #: musicbrainz/tagfetcher.cpp:58
 msgid "Fingerprinting song"
@@ -2439,7 +2439,7 @@ msgstr ""
 
 #: moodbar/moodbarrenderer.cpp:173
 msgid "Frozen"
-msgstr ""
+msgstr "Jäätunud"
 
 #: ui/equalizer.cpp:121
 msgid "Full Bass"
@@ -2522,7 +2522,7 @@ msgstr ""
 
 #: ../bin/src/ui_groupbydialog.h:123
 msgid "Group Library by..."
-msgstr ""
+msgstr "Rühmita helikogu järgnevalt..."
 
 #: globalsearch/globalsearchview.cpp:478 library/libraryfilterwidget.cpp:100
 msgid "Group by"
@@ -2585,7 +2585,7 @@ msgstr "HTTP-puhverserver"
 
 #: moodbar/moodbarrenderer.cpp:175
 msgid "Happy"
-msgstr ""
+msgstr "Rõõmus"
 
 #: ../bin/src/ui_deviceproperties.h:370
 msgid "Hardware information"
@@ -2699,7 +2699,7 @@ msgstr "Sisendkaust"
 
 #: ../bin/src/ui_notificationssettingspage.h:449
 msgid "Include album art in the notification"
-msgstr ""
+msgstr "Näita teavituses albumi kaanepilti"
 
 #: ../bin/src/ui_querysearchpage.h:114
 msgid "Include all songs"
@@ -2813,7 +2813,7 @@ msgstr "Jamendo"
 
 #: internet/jamendo/jamendoservice.cpp:122
 msgid "Jamendo Most Listened Tracks"
-msgstr ""
+msgstr "Jamendo kuulatumad lood"
 
 #: internet/jamendo/jamendoservice.cpp:119
 msgid "Jamendo Top Tracks"
@@ -2837,7 +2837,7 @@ msgstr ""
 
 #: ../bin/src/ui_mainwindow.h:708
 msgid "Jump to the currently playing track"
-msgstr ""
+msgstr "Mine hetkel esitatava loo juurde"
 
 #: wiimotedev/wiimoteshortcutgrabber.cpp:72
 #, qt-format
@@ -2949,15 +2949,15 @@ msgstr "Helikogu"
 
 #: ../bin/src/ui_groupbydialog.h:121
 msgid "Library advanced grouping"
-msgstr ""
+msgstr "Helikogu täpsem rühmitamine"
 
 #: ui/mainwindow.cpp:2724
 msgid "Library rescan notice"
-msgstr ""
+msgstr "Helikogu täisanalüüsi teade"
 
 #: smartplaylists/querywizardplugin.cpp:79
 msgid "Library search"
-msgstr ""
+msgstr "Otsing helikogust"
 
 #: ../bin/src/ui_querysortpage.h:140
 msgid "Limits"
@@ -3023,7 +3023,7 @@ msgstr "Laen lugusid"
 
 #: playlist/songloaderinserter.cpp:162
 msgid "Loading tracks info"
-msgstr ""
+msgstr "Laen lugude teavet"
 
 #: library/librarymodel.cpp:165
 #: internet/podcasts/podcastdiscoverymodel.cpp:104 widgets/prettyimage.cpp:168
@@ -3227,7 +3227,7 @@ msgstr "Mudel"
 
 #: ../bin/src/ui_librarysettingspage.h:191
 msgid "Monitor the library for changes"
-msgstr ""
+msgstr "Jälgi muutusi helikogus"
 
 #: core/song.cpp:460
 msgid "Monkey's Audio"
@@ -3235,7 +3235,7 @@ msgstr ""
 
 #: ../bin/src/ui_playbacksettingspage.h:372
 msgid "Mono playback"
-msgstr ""
+msgstr "Mono taasesitus"
 
 #: smartplaylists/searchterm.cpp:423
 msgid "Months"
@@ -3248,11 +3248,11 @@ msgstr ""
 #: moodbar/moodbarproxystyle.cpp:361
 #: ../bin/src/ui_appearancesettingspage.h:320
 msgid "Moodbar style"
-msgstr ""
+msgstr "Meeleoluribade stiil"
 
 #: ../bin/src/ui_appearancesettingspage.h:318
 msgid "Moodbars"
-msgstr ""
+msgstr "Meeleoluribad"
 
 #: library/library.cpp:84
 msgid "Most played"
@@ -3273,7 +3273,7 @@ msgstr "Liiguta alla"
 
 #: ui/mainwindow.cpp:716 widgets/fileviewlist.cpp:42
 msgid "Move to library..."
-msgstr ""
+msgstr "Tõsta helikogusse..."
 
 #: ../bin/src/ui_globalsearchsettingspage.h:144
 #: ../bin/src/ui_queuemanager.h:139 ../bin/src/ui_songinfosettingspage.h:160
@@ -3286,7 +3286,7 @@ msgstr ""
 
 #: ../bin/src/ui_librarysettingspage.h:185
 msgid "Music Library"
-msgstr "Muusika kogu"
+msgstr "Muusikakogu"
 
 #: core/globalshortcuts.cpp:64 ../bin/src/ui_mainwindow.h:718
 #: wiimotedev/wiimotesettingspage.cpp:113
@@ -3352,7 +3352,7 @@ msgstr "Uued laulud"
 
 #: ../bin/src/ui_dynamicplaylistcontrols.h:109
 msgid "New tracks will be added automatically."
-msgstr ""
+msgstr "Uued lood lisatakse automaatselt"
 
 #: internet/subsonic/subsonicservice.cpp:100
 msgid "Newest"
@@ -3411,7 +3411,7 @@ msgstr ""
 
 #: moodbar/moodbarrenderer.cpp:169
 msgid "Normal"
-msgstr ""
+msgstr "Tavaline"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:143
 msgid "Normal block type"
@@ -3460,7 +3460,7 @@ msgstr ""
 
 #: ../bin/src/ui_notificationssettingspage.h:437
 msgid "Notification type"
-msgstr ""
+msgstr "Teavituse tüüp"
 
 #: ../bin/src/ui_notificationssettingspage.h:380
 msgid "Notifications"
@@ -3754,11 +3754,11 @@ msgstr ""
 
 #: ui/mainwindow.cpp:1813
 msgid "Play selected tracks next"
-msgstr ""
+msgstr "Esita valitud lood järgmisena"
 
 #: core/commandlineoptions.cpp:178
 msgid "Play the <n>th track in the playlist"
-msgstr ""
+msgstr "Esita nimekirjast lugu #<n>"
 
 #: core/globalshortcuts.cpp:52 wiimotedev/wiimotesettingspage.cpp:116
 msgid "Play/Pause"
@@ -3971,7 +3971,7 @@ msgstr "Järjekorrahaldur"
 
 #: ui/mainwindow.cpp:1808
 msgid "Queue selected tracks"
-msgstr ""
+msgstr "Lisa valitud lood järjekorda"
 
 #: globalsearch/globalsearchview.cpp:465 library/libraryview.cpp:393
 #: ui/mainwindow.cpp:1806
@@ -4128,7 +4128,7 @@ msgstr "Nimeta esitlusloend ümber..."
 
 #: ../bin/src/ui_mainwindow.h:686
 msgid "Renumber tracks in this order..."
-msgstr ""
+msgstr "Muuda lugude nummerdust selles järjekorras..."
 
 #: playlist/playlistsequence.cpp:207 ../bin/src/ui_playlistsequence.h:121
 msgid "Repeat"
@@ -4199,7 +4199,7 @@ msgstr ""
 
 #: ../bin/src/ui_behavioursettingspage.h:376
 msgid "Resume playback on start"
-msgstr ""
+msgstr "Jätka loo esitamist programmi käivitusel"
 
 #: ../data/oauthsuccess.html:5
 msgid "Return to Clementine"
@@ -4263,7 +4263,7 @@ msgstr "Diskreetimissagedus"
 
 #: ../bin/src/ui_appearancesettingspage.h:321
 msgid "Save .mood files in your music library"
-msgstr ""
+msgstr "Salvesta .mood failid oma helikogusse"
 
 #: ui/albumcoverchoicecontroller.cpp:132
 msgid "Save album cover"
@@ -4321,7 +4321,7 @@ msgstr ""
 
 #: ui/edittagdialog.cpp:711 ui/trackselectiondialog.cpp:255
 msgid "Saving tracks"
-msgstr ""
+msgstr "Salvestan lugusid"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:135
 msgid "Scalable sampling rate profile (SSR)"
@@ -4360,23 +4360,23 @@ msgstr "Otsing"
 
 #: ../bin/src/ui_icecastfilterwidget.h:77
 msgid "Search Icecast stations"
-msgstr ""
+msgstr "Otsi Icecast'i veebiraadiojaamu"
 
 #: internet/jamendo/jamendoservice.cpp:437
 msgid "Search Jamendo"
-msgstr ""
+msgstr "Otsi Jamendo'st"
 
 #: internet/magnatune/magnatuneservice.cpp:299
 msgid "Search Magnatune"
-msgstr ""
+msgstr "Otsi Magnatune'st"
 
 #: internet/subsonic/subsonicservice.cpp:122
 msgid "Search Subsonic"
-msgstr ""
+msgstr "Otsi Subsonic'ust"
 
 #: ui/albumcoverchoicecontroller.cpp:76
 msgid "Search automatically"
-msgstr ""
+msgstr "Otsi automaatselt"
 
 #: ui/mainwindow.cpp:700
 msgid "Search for album"
@@ -4393,23 +4393,23 @@ msgstr "Otsi mida iganes vaja"
 
 #: ui/mainwindow.cpp:697
 msgid "Search for artist"
-msgstr ""
+msgstr "Otsi esitajat"
 
 #: globalsearch/globalsearchview.cpp:474 library/libraryview.cpp:401
 msgid "Search for this"
-msgstr ""
+msgstr "Otsi seda"
 
 #: ../bin/src/ui_gpoddersearchpage.h:72
 msgid "Search gpodder.net"
-msgstr ""
+msgstr "Otsi gpodder.net'ist"
 
 #: ../bin/src/ui_itunessearchpage.h:72
 msgid "Search iTunes"
-msgstr ""
+msgstr "Otsi iTunes'ist"
 
 #: ../bin/src/ui_querysearchpage.h:109
 msgid "Search mode"
-msgstr ""
+msgstr "Otsingurežiim"
 
 #: smartplaylists/querywizardplugin.cpp:159
 msgid "Search options"
@@ -4417,12 +4417,12 @@ msgstr "Otsingu valikud"
 
 #: internet/spotify/spotifyservice.cpp:400
 msgid "Search results"
-msgstr ""
+msgstr "Otsingutulemused"
 
 #: smartplaylists/querywizardplugin.cpp:155
 #: ../bin/src/ui_querysearchpage.h:116
 msgid "Search terms"
-msgstr ""
+msgstr "Otsisõnad"
 
 #: library/savedgroupingmanager.cpp:37
 msgid "Second Level"
@@ -4478,11 +4478,11 @@ msgstr ""
 
 #: ../bin/src/ui_visualisationselector.h:107
 msgid "Select visualizations"
-msgstr ""
+msgstr "Vali visualiseerimisi"
 
 #: visualisations/visualisationcontainer.cpp:131
 msgid "Select visualizations..."
-msgstr ""
+msgstr "Vali visualiseerimisi..."
 
 #: ../bin/src/ui_transcodedialog.h:232 ../bin/src/ui_ripcddialog.h:318
 msgid "Select..."
@@ -4558,27 +4558,27 @@ msgstr ""
 
 #: ../bin/src/ui_appearancesettingspage.h:319
 msgid "Show a moodbar in the track progress bar"
-msgstr ""
+msgstr "Näita edenemisribal meeleolusid"
 
 #: ../bin/src/ui_notificationssettingspage.h:439
 msgid "Show a native desktop notification"
-msgstr ""
+msgstr "Näita töölauakeskkonnale omaseid teavitusi"
 
 #: ../bin/src/ui_notificationssettingspage.h:447
 msgid "Show a notification when I change the repeat/shuffle mode"
-msgstr "Näita teadet kui ma muudan korduse või segamise viisi"
+msgstr "Näita teavitust kui ma muudan korduse või segamise viisi"
 
 #: ../bin/src/ui_notificationssettingspage.h:446
 msgid "Show a notification when I change the volume"
-msgstr ""
+msgstr "Näita teavitust kui ma muudan heli tugevust"
 
 #: ../bin/src/ui_notificationssettingspage.h:448
 msgid "Show a notification when I pause playback"
-msgstr ""
+msgstr "Näita teavitust kui ma peatan esitamise"
 
 #: ../bin/src/ui_notificationssettingspage.h:441
 msgid "Show a popup from the system tray"
-msgstr ""
+msgstr "Näita süsteemisalvest hüpikaknaid"
 
 #: ../bin/src/ui_notificationssettingspage.h:440
 msgid "Show a pretty OSD"
@@ -4598,7 +4598,7 @@ msgstr "Näita kõiki laule"
 
 #: ../bin/src/ui_librarysettingspage.h:208
 msgid "Show cover art in library"
-msgstr ""
+msgstr "Näita kaanepilte helikogus"
 
 #: ../bin/src/ui_librarysettingspage.h:209
 msgid "Show dividers"
@@ -4615,7 +4615,7 @@ msgstr ""
 
 #: ui/mainwindow.cpp:731
 msgid "Show in library..."
-msgstr ""
+msgstr "Näita helikogus..."
 
 #: library/libraryview.cpp:436
 msgid "Show in various artists"
@@ -4623,7 +4623,7 @@ msgstr ""
 
 #: moodbar/moodbarproxystyle.cpp:356
 msgid "Show moodbar"
-msgstr ""
+msgstr "Näita meeleoluribasid"
 
 #: ui/mainwindow.cpp:649
 msgid "Show only duplicates"
@@ -4639,7 +4639,7 @@ msgstr ""
 
 #: ../bin/src/ui_globalsearchsettingspage.h:149
 msgid "Show search suggestions"
-msgstr ""
+msgstr "Näita otsingusoovitusi"
 
 #: ../bin/src/ui_mainwindow.h:731
 msgid "Show sidebar"
@@ -4727,7 +4727,7 @@ msgstr "Jäta valituid lood vahele"
 
 #: ui/mainwindow.cpp:1822
 msgid "Skip track"
-msgstr ""
+msgstr "Jäta lugu vahele"
 
 #: widgets/nowplayingwidget.cpp:98
 msgid "Small album cover"
@@ -4869,19 +4869,19 @@ msgstr "Peata"
 
 #: wiimotedev/wiimotesettingspage.cpp:121
 msgid "Stop after"
-msgstr ""
+msgstr "Peata peale"
 
 #: ../bin/src/ui_playlistsequence.h:114
 msgid "Stop after each track"
-msgstr ""
+msgstr "Peata pärast iga lugu"
 
 #: widgets/osd.cpp:320
 msgid "Stop after every track"
-msgstr ""
+msgstr "Peata pärast iga lugu"
 
 #: ui/mainwindow.cpp:684 ../bin/src/ui_mainwindow.h:679
 msgid "Stop after this track"
-msgstr ""
+msgstr "Peata pärast seda lugu"
 
 #: core/commandlineoptions.cpp:159
 msgid "Stop playback"
@@ -4889,20 +4889,20 @@ msgstr "Esitamise lõpetamine"
 
 #: core/commandlineoptions.cpp:160
 msgid "Stop playback after current track"
-msgstr ""
+msgstr "Peata esitamine peale käesolevat lugu"
 
 #: ../bin/src/ui_behavioursettingspage.h:377
 msgid "Stop playback if song fails to play"
-msgstr ""
+msgstr "Peata esitamine kui lugu on katki või pole saadaval"
 
 #: core/globalshortcuts.cpp:56
 msgid "Stop playing after current track"
-msgstr ""
+msgstr "Peata pärast käesolevat lugu"
 
 #: widgets/osd.cpp:174
 #, qt-format
 msgid "Stop playing after track: %1"
-msgstr ""
+msgstr "Peata pärast lugu: %1"
 
 #: widgets/osd.cpp:168
 msgid "Stopped"
@@ -4985,7 +4985,7 @@ msgstr ""
 
 #: moodbar/moodbarrenderer.cpp:177
 msgid "System colors"
-msgstr ""
+msgstr "Süsteemi värvid"
 
 #: widgets/fancytabwidget.cpp:441
 msgid "Tabs on top"
@@ -5239,7 +5239,7 @@ msgstr ""
 #: playlist/playlist.cpp:1386 ui/organisedialog.cpp:73
 #: ../bin/src/ui_trackselectiondialog.h:212 ../bin/src/ui_ripcddialog.h:304
 msgid "Track"
-msgstr "Rada"
+msgstr "Lugu"
 
 #: ../bin/src/ui_transcodedialog.h:213 ../bin/src/ui_mainwindow.h:706
 msgid "Transcode Music"
@@ -5353,7 +5353,7 @@ msgstr ""
 
 #: ../bin/src/ui_librarysettingspage.h:190
 msgid "Update the library when Clementine starts"
-msgstr ""
+msgstr "Clementine käivitumisel täienda helikogu"
 
 #: internet/podcasts/podcastservice.cpp:430
 msgid "Update this podcast"
@@ -5411,7 +5411,7 @@ msgstr ""
 
 #: ../bin/src/ui_notificationssettingspage.h:451
 msgid "Use a custom message for notifications"
-msgstr ""
+msgstr "Kasuta teavitustes kohandatud sõnumit"
 
 #: ../bin/src/ui_networkremotesettingspage.h:222
 msgid "Use a network remote control"
@@ -5431,11 +5431,11 @@ msgstr ""
 
 #: ../bin/src/ui_wiimotesettingspage.h:178
 msgid "Use notifications to report Wii Remote status"
-msgstr ""
+msgstr "Kasuta teavitusi Wii Remote oleku kuvamiseks"
 
 #: ../bin/src/ui_appearancesettingspage.h:324
 msgid "Use system icons"
-msgstr ""
+msgstr "Kasuta süsteemi ikoone"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:138
 msgid "Use temporal noise shaping"
@@ -5443,15 +5443,15 @@ msgstr ""
 
 #: ../bin/src/ui_behavioursettingspage.h:365
 msgid "Use the system default"
-msgstr ""
+msgstr "Kasuta süsteemi vaikeseadeid"
 
 #: ../bin/src/ui_appearancesettingspage.h:299
 msgid "Use the system default color set"
-msgstr ""
+msgstr "Kasuta süsteemi vaikimisi värviseadeid"
 
 #: ../bin/src/ui_networkproxysettingspage.h:157
 msgid "Use the system proxy settings"
-msgstr ""
+msgstr "Kasuta süsteemset puhverserveri seadistust"
 
 #: ../bin/src/ui_spotifysettingspage.h:217
 msgid "Use volume normalisation"
@@ -5514,7 +5514,7 @@ msgstr ""
 
 #: ../bin/src/ui_visualisationselector.h:108
 msgid "Visualization mode"
-msgstr ""
+msgstr "Visualiseerimise režiim"
 
 #: ../bin/src/ui_mainwindow.h:715 ui/dbusscreensaver.cpp:33
 msgid "Visualizations"
@@ -5766,7 +5766,7 @@ msgstr ""
 
 #: songinfo/lastfmtrackinfoprovider.cpp:85
 msgid "You love this track"
-msgstr ""
+msgstr "Sulle meeldib see lugu"
 
 #: ../bin/src/ui_globalshortcutssettingspage.h:169
 msgid ""
@@ -5803,7 +5803,7 @@ msgstr ""
 
 #: visualisations/visualisationcontainer.cpp:159
 msgid "Your system is missing OpenGL support, visualizations are unavailable."
-msgstr ""
+msgstr "Sinu arvutis puudub OpenGL tugi ja visualiseerimine pole kasutatav."
 
 #: internet/spotify/spotifysettingspage.cpp:155
 msgid "Your username or password was incorrect."
