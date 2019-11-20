@@ -39,6 +39,7 @@
 #include <QMenu>
 #include <QMessageBox>
 #include <QSettings>
+#include <QTextCodec>
 #include <QUrlQuery>
 
 #ifdef HAVE_LIBLASTFM1
@@ -76,7 +77,7 @@ const char* LastFMService::kAudioscrobblerClientId = "tng";
 const char* LastFMService::kApiKey = "75d20fb472be99275392aefa2760ea09";
 const char* LastFMService::kSecret = "d3072b60ae626be12be69448f5c46e70";
 const char* LastFMService::kAuthLoginUrl =
-    "https://www.last.fm/api/auth/?api_key=%1&token=%2";
+    "https://www.last.fm/api/auth?api_key=%1&token=%2";
 
 LastFMService::LastFMService(Application* app, QObject* parent)
     : Scrobbler(parent),
@@ -146,7 +147,7 @@ QByteArray SignApiRequest(QList<QPair<QString, QString>> params) {
 }  // namespace
 
 void LastFMService::Authenticate() {
-  QUrl url("https://www.last.fm/api/auth/");
+  QUrl url("https://www.last.fm/api/auth");
 
   LocalRedirectServer* server = new LocalRedirectServer(this);
   server->Listen();
@@ -174,10 +175,10 @@ void LastFMService::Authenticate() {
     NewClosure(reply, SIGNAL(finished()), this, SLOT(AuthenticateReplyFinished(QNetworkReply*)), reply);
   });
 
+  qLog(Debug) << "auth URL:" << url.toString();
   if (!QDesktopServices::openUrl(url)) {
     QMessageBox box(QMessageBox::NoIcon, tr("Last.fm Authentication"), tr("Please open this URL in your browser: <a href=\"%1\">%1</a>").arg(url.toString()), QMessageBox::Ok);
     box.setTextFormat(Qt::RichText);
-    qLog(Debug) << "Last.fm authentication URL: " << url.toString();
     box.exec();
   }
 }
@@ -185,9 +186,17 @@ void LastFMService::Authenticate() {
 void LastFMService::AuthenticateReplyFinished(QNetworkReply* reply) {
   reply->deleteLater();
 
+  if (reply->error() != QNetworkReply::NoError) {
+    qLog(Debug) << "request error:" << reply->errorString();
+  }
+
+  const QByteArray resp = reply->readAll();
+  QTextCodec* codec = QTextCodec::codecForName("UTF-8");
+  qLog(Debug) << "auth reply:" << codec->toUnicode(resp);
+
   // Parse the reply
   lastfm::XmlQuery lfm(lastfm::compat::EmptyXmlQuery());
-  if (lastfm::compat::ParseQuery(reply->readAll(), &lfm)) {
+  if (!resp.isEmpty() && lastfm::compat::ParseQuery(resp, &lfm)) {
     lastfm::ws::Username = lfm["session"]["name"].text();
     lastfm::ws::SessionKey = lfm["session"]["key"].text();
     QString subscribed = lfm["session"]["subscriber"].text();
