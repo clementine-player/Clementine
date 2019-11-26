@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2019-11-16 21:52+0000\n"
+"PO-Revision-Date: 2019-11-25 19:28+0000\n"
 "Last-Translator: n/a n/a <transifex@lend.ee>\n"
 "Language-Team: Estonian (http://www.transifex.com/davidsansome/clementine/language/et/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -329,7 +329,7 @@ msgid ""
 "directly into the file each time they changed.</p><p>Please note it might "
 "not work for every format and, as there is no standard for doing so, other "
 "music players might not be able to read them.</p></body></html>"
-msgstr ""
+msgstr "<html><head/><body><p>Kui see valik pole aktiivne, siis Clementine püüab salvestada sinu antud lugude hindeid ja muud statistikat eraldi andmebaasi ning ei muuda sinu faile.</p><p>Kui see valik on aktiivne, siis ta salvestab statistikat nii andmebaasi kui faili niipea, kui selles osas on muutusi.</p><p>Aga palun arvesta et selline funktsionaalsus ei pruugi toimida kõikide failivormingutega ning kuna puuduvad vastavad avalikud standardid, siis muud meediamängijad ei pruugi osata seda infot lugeda ja kasutada.</p></body></html> "
 
 #: ../bin/src/ui_libraryfilterwidget.h:104
 #, qt-format
@@ -548,71 +548,71 @@ msgstr ""
 
 #: ../bin/src/ui_notificationssettingspage.h:385
 msgid "Add song album tag"
-msgstr ""
+msgstr "Lisa loole albumi silt"
 
 #: ../bin/src/ui_notificationssettingspage.h:391
 msgid "Add song albumartist tag"
-msgstr ""
+msgstr "Lisa loole albumi esitaja silt"
 
 #: ../bin/src/ui_notificationssettingspage.h:382
 msgid "Add song artist tag"
-msgstr ""
+msgstr "Lisa loole esitaja silt"
 
 #: ../bin/src/ui_notificationssettingspage.h:427
 msgid "Add song auto score"
-msgstr ""
+msgstr "Lisa loole automaatse hinnangu silt"
 
 #: ../bin/src/ui_notificationssettingspage.h:397
 msgid "Add song composer tag"
-msgstr ""
+msgstr "Lisa loole helilooja silt"
 
 #: ../bin/src/ui_notificationssettingspage.h:406
 msgid "Add song disc tag"
-msgstr ""
+msgstr "Lisa loole plaadi numbri silt"
 
 #: ../bin/src/ui_notificationssettingspage.h:434
 msgid "Add song filename"
-msgstr ""
+msgstr "Lisa loo failinimi"
 
 #: ../bin/src/ui_notificationssettingspage.h:412
 msgid "Add song genre tag"
-msgstr ""
+msgstr "LIsa loo žanri silt"
 
 #: ../bin/src/ui_notificationssettingspage.h:403
 msgid "Add song grouping tag"
-msgstr ""
+msgstr "Lisa loole rühmitamise silt"
 
 #: ../bin/src/ui_notificationssettingspage.h:415
 msgid "Add song length tag"
-msgstr ""
+msgstr "Lisa loo pikkuse silt"
 
 #: ../bin/src/ui_notificationssettingspage.h:400
 msgid "Add song performer tag"
-msgstr ""
+msgstr "Lisa loo artisti silt"
 
 #: ../bin/src/ui_notificationssettingspage.h:418
 msgid "Add song play count"
-msgstr ""
+msgstr "Lisa loo esituskorrad"
 
 #: ../bin/src/ui_notificationssettingspage.h:424
 msgid "Add song rating"
-msgstr ""
+msgstr "Lisa loo hinnang"
 
 #: ../bin/src/ui_notificationssettingspage.h:421
 msgid "Add song skip count"
-msgstr ""
+msgstr "Lisa loo vahelejätmiskorrad"
 
 #: ../bin/src/ui_notificationssettingspage.h:388
 msgid "Add song title tag"
-msgstr ""
+msgstr "Lisa loole pealkirja silt"
 
 #: ../bin/src/ui_notificationssettingspage.h:409
 msgid "Add song track tag"
-msgstr ""
+msgstr "Lisa loole plaadijärjekorra silt"
 
 #: ../bin/src/ui_notificationssettingspage.h:394
 msgid "Add song year tag"
-msgstr ""
+msgstr "Lisa loole aasta silt"
 
 #: ../bin/src/ui_mainwindow.h:693
 msgid "Add stream..."
@@ -787,7 +787,7 @@ msgstr ""
 
 #: devices/gpodloader.cpp:61
 msgid "An error occurred loading the iTunes database"
-msgstr ""
+msgstr "iTunes'i andmebaasi laadimisel tekkis viga"
 
 #: playlist/playlist.cpp:454 ui/edittagdialog.cpp:703
 #, qt-format
@@ -843,7 +843,7 @@ msgstr "Kas sa kindlasti soovid nullida selle loo statistika?"
 msgid ""
 "Are you sure you want to write song's statistics into song's file for all "
 "the songs of your library?"
-msgstr ""
+msgstr "Kas sa oled kindel, et soovid kõikidesse muusikakogu lugude failidesse salvestada lugude statistikat?"
 
 #: library/savedgroupingmanager.cpp:62 playlist/playlist.cpp:1380
 #: ui/organisedialog.cpp:66 ui/qtsystemtrayicon.cpp:249
@@ -947,7 +947,7 @@ msgstr "Tausta läbipaistvus"
 
 #: core/database.cpp:664
 msgid "Backing up database"
-msgstr ""
+msgstr "Varundan andmebaasi"
 
 #: ../bin/src/ui_equalizer.h:172
 msgid "Balance"
@@ -1089,7 +1089,7 @@ msgstr "Muuda segamise viisi"
 
 #: ../bin/src/ui_behavioursettingspage.h:409
 msgid "Change the currently playing song"
-msgstr ""
+msgstr "Muuda hetkel esitatavat lugu"
 
 #: core/commandlineoptions.cpp:181
 msgid "Change the language"
@@ -1097,7 +1097,7 @@ msgstr "Muuda keelt"
 
 #: ../bin/src/ui_playbacksettingspage.h:383
 msgid "Changes will take place when the next song starts playing"
-msgstr ""
+msgstr "Muutused jõustuvad kui järgmise loo esitamine algab"
 
 #: ../bin/src/ui_playbacksettingspage.h:370
 msgid ""
@@ -1198,7 +1198,7 @@ msgstr ""
 msgid ""
 "Clementine can automatically convert the music you copy to this device into "
 "a format that it can play."
-msgstr ""
+msgstr "Clementine võib automaatselt teisendada kopeeritava muusika vormingu selliseks, mida see seade suudab mängida."
 
 #: ../bin/src/ui_boxsettingspage.h:100
 msgid "Clementine can play music that you have uploaded to Box"
@@ -1578,7 +1578,7 @@ msgid ""
 "Database corruption detected. Please read https://github.com/clementine-"
 "player/Clementine/wiki/Database-Corruption for instructions on how to "
 "recover your database"
-msgstr ""
+msgstr "Tuvastasime et andmebaas on vigane. Meie juhend andmebaasi parandamiseks asub https://github.com/clementine-player/Clementine/wiki/Database-Corruption lehel."
 
 #: ../bin/src/ui_episodeinfowidget.h:133
 msgid "Date"
@@ -1845,11 +1845,11 @@ msgstr "Avamiseks tee topeltklikk"
 
 #: ../bin/src/ui_behavioursettingspage.h:406
 msgid "Double clicking a song in the playlist will..."
-msgstr ""
+msgstr "Topeltklõps esitusloendis loo peal..."
 
 #: ../bin/src/ui_behavioursettingspage.h:392
 msgid "Double clicking a song will..."
-msgstr ""
+msgstr "Topeltklõps loo peal..."
 
 #: internet/podcasts/podcastservice.cpp:550
 #, c-format, qt-plural-format
@@ -2004,7 +2004,7 @@ msgstr ""
 
 #: ../bin/src/ui_behavioursettingspage.h:375
 msgid "Enable song metadata inline edition with click"
-msgstr ""
+msgstr "Võimalda loo metainfo muutmist klõpsuga"
 
 #: ../bin/src/ui_globalsearchsettingspage.h:143
 msgid ""
@@ -2080,7 +2080,7 @@ msgstr ""
 
 #: internet/podcasts/podcastservice.cpp:532
 msgid "Episode information"
-msgstr ""
+msgstr "Andmed episoodi kohta"
 
 #: ../bin/src/ui_equalizer.h:162 ../bin/src/ui_mainwindow.h:705
 msgid "Equalizer"
@@ -2110,11 +2110,11 @@ msgstr ""
 
 #: ui/organiseerrordialog.cpp:54
 msgid "Error copying songs"
-msgstr "Viga laulude kopeerimisel"
+msgstr "Viga lugude kopeerimisel"
 
 #: ui/organiseerrordialog.cpp:61
 msgid "Error deleting songs"
-msgstr ""
+msgstr "Viga lugude kustutamisel"
 
 #: songinfo/streamdiscoverer.cpp:56
 #, qt-format
@@ -2357,7 +2357,7 @@ msgstr "Otsi lugusid oma helikogust, mis vastavad sinu valitud tingimustele."
 
 #: musicbrainz/tagfetcher.cpp:58
 msgid "Fingerprinting song"
-msgstr ""
+msgstr "Teen loost sõrmejälje"
 
 #: smartplaylists/wizard.cpp:83
 msgid "Finish"
@@ -2475,7 +2475,7 @@ msgstr "Žanr"
 #: internet/spotify/spotifyservice.cpp:642
 #: internet/spotify/spotifyservice.cpp:685
 msgid "Get a URL to share this Spotify song"
-msgstr ""
+msgstr "Loo URL selle Spotify loo jagamiseks"
 
 #: internet/spotify/spotifyservice.cpp:674
 msgid "Get a URL to share this playlist"
@@ -2500,11 +2500,11 @@ msgstr "Mine"
 
 #: ../bin/src/ui_mainwindow.h:712
 msgid "Go to next playlist tab"
-msgstr ""
+msgstr "Mine järgmise esitusloendi kaardi juurde"
 
 #: ../bin/src/ui_mainwindow.h:713
 msgid "Go to previous playlist tab"
-msgstr ""
+msgstr "Mine eelmise esitusloendi kaardi juurde"
 
 #: ../bin/src/ui_googledrivesettingspage.h:99
 msgid "Google Drive"
@@ -2518,7 +2518,7 @@ msgstr ""
 
 #: ../bin/src/ui_behavioursettingspage.h:378
 msgid "Grey out non existent songs in my playlists"
-msgstr ""
+msgstr "Märgi esitusloendis need lood halliks, mida enam ei leidu"
 
 #: ../bin/src/ui_groupbydialog.h:123
 msgid "Group Library by..."
@@ -2643,7 +2643,7 @@ msgstr "ikoonid üleval"
 
 #: musicbrainz/tagfetcher.cpp:90
 msgid "Identifying song"
-msgstr ""
+msgstr "Identifitseerin lugu"
 
 #: ../bin/src/ui_behavioursettingspage.h:373
 msgid ""
@@ -2833,7 +2833,7 @@ msgstr "Jamendo andmebaas"
 
 #: ../bin/src/ui_behavioursettingspage.h:389
 msgid "Jump to previous song right away"
-msgstr ""
+msgstr "Liigu kohe eelmise loo juurde"
 
 #: ../bin/src/ui_mainwindow.h:708
 msgid "Jump to the currently playing track"
@@ -3001,7 +3001,7 @@ msgstr ""
 
 #: devices/gpodloader.cpp:45
 msgid "Loading iPod database"
-msgstr ""
+msgstr "Laen iPod'i andmebaasi"
 
 #: smartplaylists/generatorinserter.cpp:48
 msgid "Loading smart playlist"
@@ -3009,7 +3009,7 @@ msgstr "Laen nutikat esitlusloendit"
 
 #: library/librarymodel.cpp:170
 msgid "Loading songs"
-msgstr ""
+msgstr "Laen lugusid"
 
 #: internet/digitally/digitallyimportedurlhandler.cpp:74
 #: internet/somafm/somafmurlhandler.cpp:53
@@ -3407,7 +3407,7 @@ msgstr "Puudub"
 
 #: library/libraryview.cpp:673 ui/mainwindow.cpp:2426 ui/mainwindow.cpp:2605
 msgid "None of the selected songs were suitable for copying to a device"
-msgstr ""
+msgstr "Valitud lood ei olnud sobilikud seadmesse kopeerimiseks"
 
 #: moodbar/moodbarrenderer.cpp:169
 msgid "Normal"
@@ -3810,13 +3810,13 @@ msgstr ""
 
 #: ../bin/src/ui_podcastinfodialog.h:93
 msgid "Podcast Information"
-msgstr ""
+msgstr "Teave podcast'i kohta"
 
 #: internet/podcasts/podcastservice.cpp:437
 #: internet/podcasts/podcastservice.cpp:535
 #: internet/podcasts/podcastservice.cpp:539
 msgid "Podcast information"
-msgstr ""
+msgstr "Teave podcast'i kohta"
 
 #: internet/podcasts/podcastservice.cpp:133
 #: ../bin/src/ui_podcastsettingspage.h:250
@@ -3917,7 +3917,7 @@ msgstr "Eelmine lugu"
 
 #: core/commandlineoptions.cpp:185
 msgid "Print out version information"
-msgstr ""
+msgstr "Trüki teave käesoleva versiooni kohta"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:130
 msgid "Profile"
@@ -4001,27 +4001,27 @@ msgstr "Juhuslik visualiseerimine"
 
 #: core/globalshortcuts.cpp:87
 msgid "Rate the current song 0 stars"
-msgstr ""
+msgstr "Hinda seda lugu 0 tärniga"
 
 #: core/globalshortcuts.cpp:89
 msgid "Rate the current song 1 star"
-msgstr ""
+msgstr "Hinda seda lugu 1 tärniga"
 
 #: core/globalshortcuts.cpp:91
 msgid "Rate the current song 2 stars"
-msgstr ""
+msgstr "Hinda seda lugu 2 tärniga"
 
 #: core/globalshortcuts.cpp:93
 msgid "Rate the current song 3 stars"
-msgstr ""
+msgstr "Hinda seda lugu 3 tärniga"
 
 #: core/globalshortcuts.cpp:95
 msgid "Rate the current song 4 stars"
-msgstr ""
+msgstr "Hinda seda lugu 4 tärniga"
 
 #: core/globalshortcuts.cpp:97
 msgid "Rate the current song 5 stars"
-msgstr ""
+msgstr "Hinda seda lugu 5 tärniga"
 
 #: playlist/playlist.cpp:1405 ../bin/src/ui_edittagdialog.h:711
 msgid "Rating"
@@ -4092,7 +4092,7 @@ msgstr "Eemalda toiming"
 
 #: core/globalshortcuts.cpp:84
 msgid "Remove current song from playlist"
-msgstr "Eemalda see lugu esitlusloendist"
+msgstr "Eemalda see lugu esitusloendist"
 
 #: ../bin/src/ui_mainwindow.h:723
 msgid "Remove duplicates from playlist"
@@ -4309,7 +4309,7 @@ msgstr ""
 
 #: ../bin/src/ui_addstreamdialog.h:114
 msgid "Save this stream in the Internet tab"
-msgstr ""
+msgstr "Salvesta see helivoog internetiallikate kaardile"
 
 #: ../bin/src/ui_savedgroupingmanager.h:101
 msgid "Saved Grouping Manager"
@@ -4590,11 +4590,11 @@ msgstr ""
 
 #: ui/mainwindow.cpp:647
 msgid "Show all songs"
-msgstr ""
+msgstr "Näita kõiki lugusid"
 
 #: ../bin/src/ui_querysortpage.h:141
 msgid "Show all the songs"
-msgstr "Näita kõiki laule"
+msgstr "Näita kõiki lugusid"
 
 #: ../bin/src/ui_librarysettingspage.h:208
 msgid "Show cover art in library"
@@ -4755,11 +4755,11 @@ msgstr ""
 
 #: ../bin/src/ui_songinfosettingspage.h:153
 msgid "Song Information"
-msgstr "Laulu andmed"
+msgstr "Loo andmed"
 
 #: ui/mainwindow.cpp:284
 msgid "Song info"
-msgstr ""
+msgstr "Loo andmed"
 
 #: analyzers/sonogram.cpp:32
 msgid "Sonogram"
@@ -4824,7 +4824,7 @@ msgstr ""
 
 #: internet/spotify/spotifyservice.cpp:841
 msgid "Spotify song's URL"
-msgstr ""
+msgstr "Loo URL Spotify's"
 
 #: ../bin/src/ui_transcoderoptionsmp3.h:200
 msgid "Standard"
@@ -4989,7 +4989,7 @@ msgstr "Süsteemi värvid"
 
 #: widgets/fancytabwidget.cpp:441
 msgid "Tabs on top"
-msgstr ""
+msgstr "Kaardid asuvad üleval"
 
 #: ../bin/src/ui_trackselectiondialog.h:203
 msgid "Tag fetcher"
@@ -5055,7 +5055,7 @@ msgstr ""
 
 #: library/libraryview.cpp:585
 msgid "There are other songs in this album"
-msgstr ""
+msgstr "Selles albumis on veel lugusid"
 
 #: internet/podcasts/gpoddersearchpage.cpp:78
 #: internet/podcasts/gpoddertoptagsmodel.cpp:104
@@ -5117,11 +5117,11 @@ msgstr "Kolmas tase"
 msgid ""
 "This action will create a database which could be as big as 150 MB.\n"
 "Do you want to continue anyway?"
-msgstr ""
+msgstr "See toiming loob andmebaasi, mis võib kasvada kuni 150 MB suuruseks. \nKas kindlasti soovid jätkata?"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:194
 msgid "This album is not available in the requested format"
-msgstr ""
+msgstr "Album ei ole saadaval soovitud vormingus"
 
 #: ../bin/src/ui_playlistsaveoptionsdialog.h:97
 msgid "This can be changed later through the preferences"
@@ -5131,11 +5131,11 @@ msgstr ""
 msgid ""
 "This device must be connected and opened before Clementine can see what file"
 " formats it supports."
-msgstr ""
+msgstr "Selleks et Clementine saaks kindlaks teha, mis vorminguid ta toetab, peab seade olema ühendatud ja avatud"
 
 #: ../bin/src/ui_deviceproperties.h:374
 msgid "This device supports the following file formats:"
-msgstr ""
+msgstr "Seade toetab järgnevaid vorminguid:"
 
 #: devices/devicemanager.cpp:515 devices/devicemanager.cpp:526
 msgid "This device will not work properly"
@@ -5548,7 +5548,7 @@ msgstr ""
 
 #: playlist/playlisttabbar.cpp:192 ../bin/src/ui_behavioursettingspage.h:361
 msgid "Warn me when closing a playlist tab"
-msgstr ""
+msgstr "Hoiata mind kui peaksin esitusloendi kaardi sulgema"
 
 #: core/song.cpp:448 transcoder/transcoder.cpp:257
 msgid "Wav"
@@ -5987,7 +5987,7 @@ msgstr ""
 
 #: playlist/playlistundocommands.cpp:104
 msgid "sort songs"
-msgstr ""
+msgstr "sordi lood"
 
 #: smartplaylists/searchterm.cpp:251
 msgid "starts with"
