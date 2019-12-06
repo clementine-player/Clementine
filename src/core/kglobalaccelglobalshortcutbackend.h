@@ -1,7 +1,9 @@
 #ifndef CORE_KGLOBALACCELGLOBALSHORTCUTBACKEND_H_
 #define CORE_KGLOBALACCELGLOBALSHORTCUTBACKEND_H_
 
+#include "config.h"
 #include "globalshortcutbackend.h"
+#include "globalshortcuts.h"
 
 #include <QSet>
 #include <QStringList>
@@ -12,60 +14,54 @@ class OrgKdeKGlobalAccelInterface;
 
 class OrgKdeKglobalaccelComponentInterface;
 
-
 class KGlobalAccelShortcutBackend : public GlobalShortcutBackend {
   Q_OBJECT
 
-  public:
-    explicit KGlobalAccelShortcutBackend(GlobalShortcuts *parent);
+public:
+  explicit KGlobalAccelShortcutBackend(GlobalShortcuts *parent);
 
+  static bool isKGlobalAccelAvailable();
 
-    static bool isKGlobalAccelAvailable();
+protected:
+  bool DoRegister() override;
 
-  protected:
-    bool DoRegister() override;
+  void DoUnregister() override;
 
-    void DoUnregister() override;
-
-  private:
+private:
 #ifdef HAVE_DBUS
-    enum SetShortcutFlag {
-      SetPresent = 2,
-      NoAutoloading = 4,
-      IsDefault = 8
-    };
+  enum SetShortcutFlag { SetPresent = 2, NoAutoloading = 4, IsDefault = 8 };
 
-    bool acquireComponent();
+  bool acquireComponent();
 
-    bool acquireInterface();
+  bool acquireInterface();
 
-    static QStringList id(const QString &name, const QAction *action);
+  static QStringList id(const QString &name, const QAction *action);
 
-    static QList<int> intList(const QList<QKeySequence> &seq);
+  static QList<int> intList(const QList<QKeySequence> &seq);
 
-    bool registerAction(const QString &name, QAction *action,
-                        QStringList &actionId);
+  bool registerAction(const QString &name, QAction *action,
+                      QStringList &actionId);
 
-    bool registerShortcut(const GlobalShortcuts::Shortcut &shortcut);
+  bool registerShortcut(const GlobalShortcuts::Shortcut &shortcut);
 
-    static QList<QKeySequence> shortcutList(const QList<int> &seq);
+  static QList<QKeySequence> shortcutList(const QList<int> &seq);
 
-    void unregisterAction(const QString &name, QAction *action);
+  void unregisterAction(const QString &name, QAction *action);
 
-  private slots:
+private slots:
 
-    void onShortcutPressed(const QString &componentUnique,
-                           const QString &actionUnique,
-                           qlonglong timestamp) const;
+  void onShortcutPressed(const QString &componentUnique,
+                         const QString &actionUnique,
+                         qlonglong timestamp) const;
 
-  private:
-    static const char *Service;
-    static const char *Path;
+private:
+  static const char *Service;
+  static const char *Path;
 
-    OrgKdeKGlobalAccelInterface *iface_;
-    OrgKdeKglobalaccelComponentInterface *component_;
-    QMultiHash<QString, QAction *> nameToAction_;
+  OrgKdeKGlobalAccelInterface *iface_;
+  OrgKdeKglobalaccelComponentInterface *component_;
+  QMultiHash<QString, QAction *> nameToAction_;
 #endif // HAVE_DBUS
 };
 
-#endif //CORE_KGLOBALACCELGLOBALSHORTCUTBACKEND_H_
+#endif // CORE_KGLOBALACCELGLOBALSHORTCUTBACKEND_H_
