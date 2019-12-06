@@ -15,6 +15,7 @@
 // (https://phabricator.kde.org/source/kglobalaccel)
 
 namespace {
+#ifdef HAVE_DBUS
 QString compDisplayName() {
   if (!QGuiApplication::applicationDisplayName().isEmpty()) {
     return QGuiApplication::applicationDisplayName();
@@ -39,6 +40,7 @@ bool isCorrectMediaKeyShortcut(const GlobalShortcuts::Shortcut &shortcut) {
     return false;
   }
 }
+#endif // HAVE_DBUS
 } // namespace
 
 #ifdef HAVE_DBUS
@@ -95,6 +97,7 @@ bool KGlobalAccelShortcutBackend::DoRegister() {
 }
 
 void KGlobalAccelShortcutBackend::DoUnregister() {
+#ifdef HAVE_DBUS
   if (!acquireInterface())
     return;
 
@@ -103,6 +106,7 @@ void KGlobalAccelShortcutBackend::DoUnregister() {
 
   for (const GlobalShortcuts::Shortcut &shortcut : manager_->shortcuts())
     unregisterAction(shortcut.id, shortcut.action);
+#endif // HAVE_DBUS
 }
 
 #ifdef HAVE_DBUS
