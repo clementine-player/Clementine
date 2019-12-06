@@ -1,0 +1,32 @@
+<!DOCTYPE node PUBLIC "-//freedesktop//DTD D-BUS Object Introspection 1.0//EN"
+        "http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
+<node>
+    <interface name="org.kde.kglobalaccel.Component">
+        <property name="friendlyName" type="s" access="read"/>
+        <property name="uniqueName" type="s" access="read"/>
+        <signal name="globalShortcutPressed">
+            <arg name="componentUnique" type="s" direction="out"/>
+            <arg name="actionUnique" type="s" direction="out"/>
+            <arg name="timestamp" type="x" direction="out"/>
+        </signal>
+        <method name="cleanUp">
+            <arg type="b" direction="out"/>
+        </method>
+        <method name="isActive">
+            <arg type="b" direction="out"/>
+        </method>
+        <method name="shortcutNames">
+            <arg type="as" direction="out"/>
+            <arg name="context" type="s" direction="in"/>
+        </method>
+        <method name="shortcutNames">
+            <arg type="as" direction="out"/>
+        </method>
+        <method name="getShortcutContexts">
+            <arg type="as" direction="out"/>
+        </method>
+        <method name="invokeShortcut">
+            <arg name="actionName" type="s" direction="in"/>
+        </method>
+    </interface>
+</node>

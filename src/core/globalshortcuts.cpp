@@ -22,6 +22,7 @@
 #include "config.h"
 #include "globalshortcuts.h"
 #include "gnomeglobalshortcutbackend.h"
+#include "kglobalaccelglobalshortcutbackend.h"
 #include "macglobalshortcutbackend.h"
 #include "qxtglobalshortcutbackend.h"
 
@@ -41,7 +42,8 @@ GlobalShortcuts::GlobalShortcuts(QWidget* parent)
     : QWidget(parent),
       gnome_backend_(nullptr),
       system_backend_(nullptr),
-      use_gnome_(false) {
+      use_gnome_(false),
+      have_kglobalaccel_(KGlobalAccelShortcutBackend::isKGlobalAccelAvailable()) {
   settings_.beginGroup(kSettingsGroup);
 
   // Create actions
@@ -91,6 +93,7 @@ GlobalShortcuts::GlobalShortcuts(QWidget* parent)
 
   // Create backends - these do the actual shortcut registration
   gnome_backend_ = new GnomeGlobalShortcutBackend(this);
+  kglobalaccel_backend_ = new KGlobalAccelShortcutBackend(this);
 
 #ifndef Q_OS_DARWIN
   system_backend_ = new QxtGlobalShortcutBackend(this);
@@ -158,10 +161,12 @@ void GlobalShortcuts::ReloadSettings() {
 
 void GlobalShortcuts::Unregister() {
   if (gnome_backend_->is_active()) gnome_backend_->Unregister();
+  if (kglobalaccel_backend_->is_active()) kglobalaccel_backend_->Unregister();
   if (system_backend_->is_active()) system_backend_->Unregister();
 }
 
 void GlobalShortcuts::Register() {
+  if(have_kglobalaccel_ && kglobalaccel_backend_->Register()) return;
   if (use_gnome_ && gnome_backend_->Register()) return;
   system_backend_->Register();
 }
