@@ -43,7 +43,8 @@ GlobalShortcuts::GlobalShortcuts(QWidget* parent)
       gnome_backend_(nullptr),
       system_backend_(nullptr),
       use_gnome_(false),
-      have_kglobalaccel_(KGlobalAccelShortcutBackend::isKGlobalAccelAvailable()) {
+      have_kglobalaccel_(
+          KGlobalAccelShortcutBackend::isKGlobalAccelAvailable()) {
   settings_.beginGroup(kSettingsGroup);
 
   // Create actions
@@ -166,7 +167,7 @@ void GlobalShortcuts::Unregister() {
 }
 
 void GlobalShortcuts::Register() {
-  if(have_kglobalaccel_ && kglobalaccel_backend_->Register()) return;
+  if (have_kglobalaccel_ && kglobalaccel_backend_->Register()) return;
   if (use_gnome_ && gnome_backend_->Register()) return;
   system_backend_->Register();
 }

@@ -1,5 +1,5 @@
-#include "kglobalaccelglobalshortcutbackend.h"
 #include "core/logging.h"
+#include "kglobalaccelglobalshortcutbackend.h"
 
 #include <QAction>
 #include <QGuiApplication>
@@ -25,9 +25,9 @@ QString compDisplayName() {
 
 QString compUniqueName() { return QCoreApplication::applicationName(); }
 
-const QString &id_ActionUnique(const QStringList &id) { return id.at(1); }
+const QString& id_ActionUnique(const QStringList& id) { return id.at(1); }
 
-bool isCorrectMediaKeyShortcut(const GlobalShortcuts::Shortcut &shortcut) {
+bool isCorrectMediaKeyShortcut(const GlobalShortcuts::Shortcut& shortcut) {
   if (shortcut.id == QStringLiteral("play_pause")) {
     return shortcut.action->shortcut() == QKeySequence(Qt::Key_MediaPlay);
   } else if (shortcut.id == QStringLiteral("stop")) {
@@ -40,79 +40,75 @@ bool isCorrectMediaKeyShortcut(const GlobalShortcuts::Shortcut &shortcut) {
     return false;
   }
 }
-#endif // HAVE_DBUS
-} // namespace
+#endif  // HAVE_DBUS
+}  // namespace
 
 #ifdef HAVE_DBUS
 
 KGlobalAccelShortcutBackend::KGlobalAccelShortcutBackend(
-    GlobalShortcuts *parent)
-    : GlobalShortcutBackend(parent), iface_(nullptr), component_(nullptr),
+    GlobalShortcuts* parent)
+    : GlobalShortcutBackend(parent),
+      iface_(nullptr),
+      component_(nullptr),
       nameToAction_() {}
 
-#else  // HAVE_DBUS
+#else   // HAVE_DBUS
 KGlobalAccelShortcutBackend::KGlobalAccelShortcutBackend(
-    GlobalShortcuts *parent)
+    GlobalShortcuts* parent)
     : GlobalShortcutBackend(parent) {}
-#endif // HAVE_DBUS
+#endif  // HAVE_DBUS
 
 bool KGlobalAccelShortcutBackend::isKGlobalAccelAvailable() {
 #ifdef HAVE_DBUS
   return QDBusConnection::sessionBus().interface()->isServiceRegistered(
       Service);
-#else  // HAVE_DBUS
+#else   // HAVE_DBUS
   return false;
-#endif // HAVE_DBUS
+#endif  // HAVE_DBUS
 }
 
 bool KGlobalAccelShortcutBackend::DoRegister() {
 #ifdef HAVE_DBUS
   qLog(Debug) << "Registering shortcuts";
 
-  if (!acquireInterface())
-    return false;
+  if (!acquireInterface()) return false;
 
   bool complete = true;
-  for (const GlobalShortcuts::Shortcut &shortcut :
+  for (const GlobalShortcuts::Shortcut& shortcut :
        manager_->shortcuts().values()) {
-    if (shortcut.action->shortcut().isEmpty())
-      continue;
+    if (shortcut.action->shortcut().isEmpty()) continue;
 
-    if (!registerShortcut(shortcut))
-      complete = false;
+    if (!registerShortcut(shortcut)) complete = false;
   }
 
-  if (!acquireComponent())
-    return false;
+  if (!acquireComponent()) return false;
 
   QObject::connect(component_,
                    &OrgKdeKglobalaccelComponentInterface::globalShortcutPressed,
                    this, &KGlobalAccelShortcutBackend::onShortcutPressed);
 
   return complete;
-#else  // HAVE_DBUS
+#else   // HAVE_DBUS
   qLog(Warning) << "dbus not available";
   return false;
-#endif // HAVE_DBUS
+#endif  // HAVE_DBUS
 }
 
 void KGlobalAccelShortcutBackend::DoUnregister() {
 #ifdef HAVE_DBUS
-  if (!acquireInterface())
-    return;
+  if (!acquireInterface()) return;
 
-  if (!acquireComponent())
-    return;
+  if (!acquireComponent()) return;
 
-  for (const GlobalShortcuts::Shortcut &shortcut : manager_->shortcuts())
+  for (const GlobalShortcuts::Shortcut& shortcut : manager_->shortcuts())
     unregisterAction(shortcut.id, shortcut.action);
-#endif // HAVE_DBUS
+#endif  // HAVE_DBUS
 }
 
 #ifdef HAVE_DBUS
 
-const char *KGlobalAccelShortcutBackend::Service = "org.kde.kglobalaccel";
-const char *KGlobalAccelShortcutBackend::Path = "/kglobalaccel";
+const char* KGlobalAccelShortcutBackend::Service = "org.kde.kglobalaccel";
+const char* KGlobalAccelShortcutBackend::Path = "/kglobalaccel";
 
 bool KGlobalAccelShortcutBackend::acquireComponent() {
   Q_ASSERT(iface_ && iface_->isValid());
@@ -143,16 +139,14 @@ bool KGlobalAccelShortcutBackend::acquireComponent() {
 }
 
 bool KGlobalAccelShortcutBackend::acquireInterface() {
-  if (iface_ && iface_->isValid())
-    return true;
+  if (iface_ && iface_->isValid()) return true;
 
   if (isKGlobalAccelAvailable()) {
     iface_ = new OrgKdeKGlobalAccelInterface(
         Service, Path, QDBusConnection::sessionBus(), this);
   }
 
-  if (iface_ && iface_->isValid())
-    return true;
+  if (iface_ && iface_->isValid()) return true;
 
   if (!iface_)
     qLog(Warning) << "KGlobalAccel daemon not registered";
@@ -161,8 +155,8 @@ bool KGlobalAccelShortcutBackend::acquireInterface() {
   return false;
 }
 
-QStringList KGlobalAccelShortcutBackend::id(const QString &name,
-                                            const QAction *action) {
+QStringList KGlobalAccelShortcutBackend::id(const QString& name,
+                                            const QAction* action) {
   Q_ASSERT(action);
 
   QStringList ret;
@@ -170,15 +164,14 @@ QStringList KGlobalAccelShortcutBackend::id(const QString &name,
   ret << name;
   ret << compDisplayName();
   ret << action->text().replace(QLatin1Char('&'), QStringLiteral(""));
-  if (ret.back().isEmpty())
-    ret.back() = name;
+  if (ret.back().isEmpty()) ret.back() = name;
   return ret;
 }
 
-QList<int>
-KGlobalAccelShortcutBackend::intList(const QList<QKeySequence> &seq) {
+QList<int> KGlobalAccelShortcutBackend::intList(
+    const QList<QKeySequence>& seq) {
   QList<int> ret;
-  for (const QKeySequence &sequence : seq) {
+  for (const QKeySequence& sequence : seq) {
     ret.append(sequence[0]);
   }
   while (!ret.isEmpty() && ret.last() == 0) {
@@ -187,9 +180,9 @@ KGlobalAccelShortcutBackend::intList(const QList<QKeySequence> &seq) {
   return ret;
 }
 
-bool KGlobalAccelShortcutBackend::registerAction(const QString &name,
-                                                 QAction *action,
-                                                 QStringList &actionId) {
+bool KGlobalAccelShortcutBackend::registerAction(const QString& name,
+                                                 QAction* action,
+                                                 QStringList& actionId) {
   Q_ASSERT(action);
 
   if (name.isEmpty() &&
@@ -207,10 +200,9 @@ bool KGlobalAccelShortcutBackend::registerAction(const QString &name,
 }
 
 bool KGlobalAccelShortcutBackend::registerShortcut(
-    const GlobalShortcuts::Shortcut &shortcut) {
+    const GlobalShortcuts::Shortcut& shortcut) {
   QStringList actionId;
-  if (!registerAction(shortcut.id, shortcut.action, actionId))
-    return false;
+  if (!registerAction(shortcut.id, shortcut.action, actionId)) return false;
 
   QList<QKeySequence> activeShortcut;
   activeShortcut << shortcut.action->shortcut();
@@ -239,8 +231,8 @@ bool KGlobalAccelShortcutBackend::registerShortcut(
   return true;
 }
 
-QList<QKeySequence>
-KGlobalAccelShortcutBackend::shortcutList(const QList<int> &seq) {
+QList<QKeySequence> KGlobalAccelShortcutBackend::shortcutList(
+    const QList<int>& seq) {
   QList<QKeySequence> ret;
   for (int i : seq) {
     ret.append(i);
@@ -248,8 +240,8 @@ KGlobalAccelShortcutBackend::shortcutList(const QList<int> &seq) {
   return ret;
 }
 
-void KGlobalAccelShortcutBackend::unregisterAction(const QString &name,
-                                                   QAction *action) {
+void KGlobalAccelShortcutBackend::unregisterAction(const QString& name,
+                                                   QAction* action) {
   Q_ASSERT(action);
 
   QStringList actionId = id(name, action);
@@ -258,18 +250,17 @@ void KGlobalAccelShortcutBackend::unregisterAction(const QString &name,
 }
 
 void KGlobalAccelShortcutBackend::onShortcutPressed(
-    const QString &componentUnique, const QString &actionUnique,
+    const QString& componentUnique, const QString& actionUnique,
     qlonglong timestamp) const {
-  QAction *action = nullptr;
-  const QList<QAction *> candidates = nameToAction_.values(actionUnique);
-  for (QAction *a : candidates) {
+  QAction* action = nullptr;
+  const QList<QAction*> candidates = nameToAction_.values(actionUnique);
+  for (QAction* a : candidates) {
     if (compUniqueName() == componentUnique) {
       action = a;
     }
   }
 
-  if (action && action->isEnabled())
-    action->trigger();
+  if (action && action->isEnabled()) action->trigger();
 }
 
-#endif // HAVE_DBUS
+#endif  // HAVE_DBUS
