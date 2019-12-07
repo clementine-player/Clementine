@@ -376,6 +376,9 @@ QString GetConfigPath(ConfigPath config) {
     case Path_MoodbarCache:
       return GetConfigPath(Path_CacheRoot) + "/moodbarcache";
 
+    case Path_PixmapCache:
+      return GetConfigPath(Path_CacheRoot) + "/pixmapcache";
+
     case Path_GstreamerRegistry:
       return GetConfigPath(Path_Root) +
              QString("/gst-registry-%1-bin")

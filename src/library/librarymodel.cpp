@@ -105,7 +105,7 @@ LibraryModel::LibraryModel(LibraryBackend* backend, Application* app,
           SLOT(AlbumArtLoaded(quint64, QImage)));
 
   icon_cache_->setCacheDirectory(
-      Utilities::GetConfigPath(Utilities::Path_CacheRoot) + "/pixmapcache");
+      Utilities::GetConfigPath(Utilities::Path_PixmapCache));
   icon_cache_->setMaximumCacheSize(LibraryModel::kIconCacheSize);
 
   QIcon nocover = IconLoader::Load("nocover", IconLoader::Other);
