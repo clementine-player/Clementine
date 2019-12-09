@@ -18,8 +18,8 @@ namespace {
 #ifdef HAVE_DBUS
 QString ComponentDisplayName() {
   return QGuiApplication::applicationDisplayName().isEmpty()
-         ? QCoreApplication::applicationName()
-         : QGuiApplication::applicationDisplayName();
+             ? QCoreApplication::applicationName()
+             : QGuiApplication::applicationDisplayName();
 }
 
 QString ComponentUniqueName() { return QCoreApplication::applicationName(); }
@@ -46,9 +46,7 @@ bool IsCorrectMediaKeyShortcut(const GlobalShortcuts::Shortcut& shortcut) {
 
 KGlobalAccelShortcutBackend::KGlobalAccelShortcutBackend(
     GlobalShortcuts* parent)
-    : GlobalShortcutBackend(parent),
-      iface_(nullptr),
-      component_(nullptr) {}
+    : GlobalShortcutBackend(parent), iface_(nullptr), component_(nullptr) {}
 
 #else   // HAVE_DBUS
 KGlobalAccelShortcutBackend::KGlobalAccelShortcutBackend(
@@ -102,9 +100,9 @@ void KGlobalAccelShortcutBackend::DoUnregister() {
   for (const GlobalShortcuts::Shortcut& shortcut : manager_->shortcuts())
     UnregisterAction(shortcut.id, shortcut.action);
 
-  QObject::disconnect(component_,
-                      &OrgKdeKglobalaccelComponentInterface::globalShortcutPressed,
-                      this, &KGlobalAccelShortcutBackend::OnShortcutPressed);
+  QObject::disconnect(
+      component_, &OrgKdeKglobalaccelComponentInterface::globalShortcutPressed,
+      this, &KGlobalAccelShortcutBackend::OnShortcutPressed);
 #endif  // HAVE_DBUS
 }
 
@@ -118,7 +116,8 @@ bool KGlobalAccelShortcutBackend::AcquireComponent() {
 
   if (component_) return true;
 
-  QDBusReply<QDBusObjectPath> reply = iface_->getComponent(ComponentUniqueName());
+  QDBusReply<QDBusObjectPath> reply =
+      iface_->getComponent(ComponentUniqueName());
   if (!reply.isValid()) {
     if (reply.error().name() ==
         QLatin1String("org.kde.kglobalaccel.NoSuchComponent"))
