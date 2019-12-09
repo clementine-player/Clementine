@@ -20,7 +20,7 @@ class KGlobalAccelShortcutBackend : public GlobalShortcutBackend {
  public:
   explicit KGlobalAccelShortcutBackend(GlobalShortcuts* parent);
 
-  static bool isKGlobalAccelAvailable();
+  static bool IsKGlobalAccelAvailable();
 
  protected:
   bool DoRegister() override;
@@ -31,36 +31,35 @@ class KGlobalAccelShortcutBackend : public GlobalShortcutBackend {
 #ifdef HAVE_DBUS
   enum SetShortcutFlag { SetPresent = 2, NoAutoloading = 4, IsDefault = 8 };
 
-  bool acquireComponent();
+  bool AcquireComponent();
 
-  bool acquireInterface();
+  bool AcquireInterface();
 
-  static QStringList id(const QString& name, const QAction* action);
+  static QStringList GetId(const QString& name, const QAction* action);
 
-  static QList<int> intList(const QList<QKeySequence>& seq);
+  static QList<int> ToIntList(const QList<QKeySequence>& seq);
 
-  bool registerAction(const QString& name, QAction* action,
-                      QStringList& actionId);
+  bool RegisterAction(const QString& name, QAction* action);
 
-  bool registerShortcut(const GlobalShortcuts::Shortcut& shortcut);
+  bool RegisterShortcut(const GlobalShortcuts::Shortcut& shortcut);
 
-  static QList<QKeySequence> shortcutList(const QList<int>& seq);
+  static QList<QKeySequence> ToKeySequenceList(const QList<int>& seq);
 
-  void unregisterAction(const QString& name, QAction* action);
+  void UnregisterAction(const QString& name, QAction* action);
 
  private slots:
 
-  void onShortcutPressed(const QString& componentUnique,
-                         const QString& actionUnique,
+  void OnShortcutPressed(const QString& component_unique,
+                         const QString& action_unique,
                          qlonglong timestamp) const;
 
  private:
-  static const char* Service;
-  static const char* Path;
+  static const char* kService;
+  static const char* kPath;
 
   OrgKdeKGlobalAccelInterface* iface_;
   OrgKdeKglobalaccelComponentInterface* component_;
-  QMultiHash<QString, QAction*> nameToAction_;
+  QMultiHash<QString, QAction*> name_to_action_;
 #endif  // HAVE_DBUS
 };
 

@@ -16,18 +16,17 @@
 
 namespace {
 #ifdef HAVE_DBUS
-QString compDisplayName() {
-  if (!QGuiApplication::applicationDisplayName().isEmpty()) {
-    return QGuiApplication::applicationDisplayName();
-  }
-  return QCoreApplication::applicationName();
+QString ComponentDisplayName() {
+  return QGuiApplication::applicationDisplayName().isEmpty()
+         ? QCoreApplication::applicationName()
+         : QGuiApplication::applicationDisplayName();
 }
 
-QString compUniqueName() { return QCoreApplication::applicationName(); }
+QString ComponentUniqueName() { return QCoreApplication::applicationName(); }
 
-const QString& id_ActionUnique(const QStringList& id) { return id.at(1); }
+const QString& IdActionUniqueName(const QStringList& id) { return id.at(1); }
 
-bool isCorrectMediaKeyShortcut(const GlobalShortcuts::Shortcut& shortcut) {
+bool IsCorrectMediaKeyShortcut(const GlobalShortcuts::Shortcut& shortcut) {
   if (shortcut.id == QStringLiteral("play_pause")) {
     return shortcut.action->shortcut() == QKeySequence(Qt::Key_MediaPlay);
   } else if (shortcut.id == QStringLiteral("stop")) {
@@ -49,8 +48,7 @@ KGlobalAccelShortcutBackend::KGlobalAccelShortcutBackend(
     GlobalShortcuts* parent)
     : GlobalShortcutBackend(parent),
       iface_(nullptr),
-      component_(nullptr),
-      nameToAction_() {}
+      component_(nullptr) {}
 
 #else   // HAVE_DBUS
 KGlobalAccelShortcutBackend::KGlobalAccelShortcutBackend(
@@ -58,10 +56,10 @@ KGlobalAccelShortcutBackend::KGlobalAccelShortcutBackend(
     : GlobalShortcutBackend(parent) {}
 #endif  // HAVE_DBUS
 
-bool KGlobalAccelShortcutBackend::isKGlobalAccelAvailable() {
+bool KGlobalAccelShortcutBackend::IsKGlobalAccelAvailable() {
 #ifdef HAVE_DBUS
   return QDBusConnection::sessionBus().interface()->isServiceRegistered(
-      Service);
+      kService);
 #else   // HAVE_DBUS
   return false;
 #endif  // HAVE_DBUS
@@ -71,21 +69,21 @@ bool KGlobalAccelShortcutBackend::DoRegister() {
 #ifdef HAVE_DBUS
   qLog(Debug) << "Registering shortcuts";
 
-  if (!acquireInterface()) return false;
+  if (!AcquireInterface()) return false;
 
   bool complete = true;
   for (const GlobalShortcuts::Shortcut& shortcut :
        manager_->shortcuts().values()) {
     if (shortcut.action->shortcut().isEmpty()) continue;
 
-    if (!registerShortcut(shortcut)) complete = false;
+    if (!RegisterShortcut(shortcut)) complete = false;
   }
 
-  if (!acquireComponent()) return false;
+  if (!AcquireComponent()) return false;
 
   QObject::connect(component_,
                    &OrgKdeKglobalaccelComponentInterface::globalShortcutPressed,
-                   this, &KGlobalAccelShortcutBackend::onShortcutPressed);
+                   this, &KGlobalAccelShortcutBackend::OnShortcutPressed);
 
   return complete;
 #else   // HAVE_DBUS
@@ -96,25 +94,24 @@ bool KGlobalAccelShortcutBackend::DoRegister() {
 
 void KGlobalAccelShortcutBackend::DoUnregister() {
 #ifdef HAVE_DBUS
-  if (!acquireInterface()) return;
+  if (!AcquireInterface()) return;
 
-  if (!acquireComponent()) return;
+  if (!AcquireComponent()) return;
 
   for (const GlobalShortcuts::Shortcut& shortcut : manager_->shortcuts())
-    unregisterAction(shortcut.id, shortcut.action);
+    UnregisterAction(shortcut.id, shortcut.action);
 #endif  // HAVE_DBUS
 }
 
 #ifdef HAVE_DBUS
 
-const char* KGlobalAccelShortcutBackend::Service = "org.kde.kglobalaccel";
-const char* KGlobalAccelShortcutBackend::Path = "/kglobalaccel";
+const char* KGlobalAccelShortcutBackend::kService = "org.kde.kglobalaccel";
+const char* KGlobalAccelShortcutBackend::kPath = "/kglobalaccel";
 
-bool KGlobalAccelShortcutBackend::acquireComponent() {
+bool KGlobalAccelShortcutBackend::AcquireComponent() {
   Q_ASSERT(iface_ && iface_->isValid());
 
-  QString componentName = compUniqueName();
-  QDBusReply<QDBusObjectPath> reply = iface_->getComponent(compUniqueName());
+  QDBusReply<QDBusObjectPath> reply = iface_->getComponent(ComponentUniqueName());
   if (!reply.isValid()) {
     if (reply.error().name() ==
         QLatin1String("org.kde.kglobalaccel.NoSuchComponent"))
@@ -125,12 +122,12 @@ bool KGlobalAccelShortcutBackend::acquireComponent() {
   }
 
   component_ = new org::kde::kglobalaccel::Component(
-      Service, reply.value().path(), QDBusConnection::sessionBus(), iface_);
+      kService, reply.value().path(), QDBusConnection::sessionBus(), iface_);
 
   if (!component_->isValid()) {
     qLog(Warning) << "Failed to get KGlobalAccel component:"
                   << QDBusConnection::sessionBus().lastError();
-    delete component_;
+    component_->deleteLater();
     component_ = nullptr;
     return false;
   }
@@ -138,12 +135,12 @@ bool KGlobalAccelShortcutBackend::acquireComponent() {
   return true;
 }
 
-bool KGlobalAccelShortcutBackend::acquireInterface() {
+bool KGlobalAccelShortcutBackend::AcquireInterface() {
   if (iface_ && iface_->isValid()) return true;
 
-  if (isKGlobalAccelAvailable()) {
+  if (IsKGlobalAccelAvailable()) {
     iface_ = new OrgKdeKGlobalAccelInterface(
-        Service, Path, QDBusConnection::sessionBus(), this);
+        kService, kPath, QDBusConnection::sessionBus(), this);
   }
 
   if (iface_ && iface_->isValid()) return true;
@@ -155,20 +152,20 @@ bool KGlobalAccelShortcutBackend::acquireInterface() {
   return false;
 }
 
-QStringList KGlobalAccelShortcutBackend::id(const QString& name,
-                                            const QAction* action) {
+QStringList KGlobalAccelShortcutBackend::GetId(const QString& name,
+                                               const QAction* action) {
   Q_ASSERT(action);
 
   QStringList ret;
-  ret << compUniqueName();
+  ret << ComponentUniqueName();
   ret << name;
-  ret << compDisplayName();
+  ret << ComponentDisplayName();
   ret << action->text().replace(QLatin1Char('&'), QStringLiteral(""));
   if (ret.back().isEmpty()) ret.back() = name;
   return ret;
 }
 
-QList<int> KGlobalAccelShortcutBackend::intList(
+QList<int> KGlobalAccelShortcutBackend::ToIntList(
     const QList<QKeySequence>& seq) {
   QList<int> ret;
   for (const QKeySequence& sequence : seq) {
@@ -180,9 +177,8 @@ QList<int> KGlobalAccelShortcutBackend::intList(
   return ret;
 }
 
-bool KGlobalAccelShortcutBackend::registerAction(const QString& name,
-                                                 QAction* action,
-                                                 QStringList& actionId) {
+bool KGlobalAccelShortcutBackend::RegisterAction(const QString& name,
+                                                 QAction* action) {
   Q_ASSERT(action);
 
   if (name.isEmpty() &&
@@ -192,34 +188,34 @@ bool KGlobalAccelShortcutBackend::registerAction(const QString& name,
     return false;
   }
 
-  actionId = id(name, action);
-  nameToAction_.insertMulti(id_ActionUnique(actionId), action);
-  iface_->doRegister(actionId);
+  QStringList action_id = GetId(name, action);
+  name_to_action_.insertMulti(IdActionUniqueName(action_id), action);
+  iface_->doRegister(action_id);
 
   return true;
 }
 
-bool KGlobalAccelShortcutBackend::registerShortcut(
+bool KGlobalAccelShortcutBackend::RegisterShortcut(
     const GlobalShortcuts::Shortcut& shortcut) {
-  QStringList actionId;
-  if (!registerAction(shortcut.id, shortcut.action, actionId)) return false;
+  if (!RegisterAction(shortcut.id, shortcut.action)) return false;
 
-  QList<QKeySequence> activeShortcut;
-  activeShortcut << shortcut.action->shortcut();
+  QList<QKeySequence> active_shortcut;
+  active_shortcut << shortcut.action->shortcut();
 
+  QStringList action_id = GetId(shortcut.id, shortcut.action);
   const QList<int> result = iface_->setShortcut(
-      actionId, intList(activeShortcut), SetShortcutFlag::SetPresent);
+      action_id, ToIntList(active_shortcut), SetShortcutFlag::SetPresent);
 
-  const QList<QKeySequence> resultSequence = shortcutList(result);
-  if (resultSequence != activeShortcut) {
-    qLog(Warning) << "Tried setting global shortcut" << activeShortcut
-                  << "but KGlobalAccel returned" << resultSequence;
+  const QList<QKeySequence> result_sequence = ToKeySequenceList(result);
+  if (result_sequence != active_shortcut) {
+    qLog(Warning) << "Tried setting global shortcut" << active_shortcut
+                  << "but KGlobalAccel returned" << result_sequence;
 
-    if (!resultSequence.isEmpty()) {
-      if (!isCorrectMediaKeyShortcut(shortcut)) {
+    if (!result_sequence.isEmpty()) {
+      if (!IsCorrectMediaKeyShortcut(shortcut)) {
         // there is some conflict with our preferred shortcut so we use
         // the new shortcut that kglobalaccel suggests
-        shortcut.action->setShortcut(resultSequence[0]);
+        shortcut.action->setShortcut(result_sequence[0]);
       } else {
         // media keys are properly handled by plasma through the
         // media player plasmoid so we don't do anything in those cases
@@ -231,7 +227,7 @@ bool KGlobalAccelShortcutBackend::registerShortcut(
   return true;
 }
 
-QList<QKeySequence> KGlobalAccelShortcutBackend::shortcutList(
+QList<QKeySequence> KGlobalAccelShortcutBackend::ToKeySequenceList(
     const QList<int>& seq) {
   QList<QKeySequence> ret;
   for (int i : seq) {
@@ -240,22 +236,22 @@ QList<QKeySequence> KGlobalAccelShortcutBackend::shortcutList(
   return ret;
 }
 
-void KGlobalAccelShortcutBackend::unregisterAction(const QString& name,
+void KGlobalAccelShortcutBackend::UnregisterAction(const QString& name,
                                                    QAction* action) {
   Q_ASSERT(action);
 
-  QStringList actionId = id(name, action);
-  nameToAction_.remove(id_ActionUnique(actionId), action);
-  iface_->unRegister(actionId);
+  QStringList action_id = GetId(name, action);
+  name_to_action_.remove(IdActionUniqueName(action_id), action);
+  iface_->unRegister(action_id);
 }
 
-void KGlobalAccelShortcutBackend::onShortcutPressed(
-    const QString& componentUnique, const QString& actionUnique,
+void KGlobalAccelShortcutBackend::OnShortcutPressed(
+    const QString& component_unique, const QString& action_unique,
     qlonglong timestamp) const {
   QAction* action = nullptr;
-  const QList<QAction*> candidates = nameToAction_.values(actionUnique);
+  const QList<QAction*> candidates = name_to_action_.values(action_unique);
   for (QAction* a : candidates) {
-    if (compUniqueName() == componentUnique) {
+    if (ComponentUniqueName() == component_unique) {
       action = a;
     }
   }
