@@ -83,7 +83,8 @@ bool KGlobalAccelShortcutBackend::DoRegister() {
 
   QObject::connect(component_,
                    &OrgKdeKglobalaccelComponentInterface::globalShortcutPressed,
-                   this, &KGlobalAccelShortcutBackend::OnShortcutPressed);
+                   this, &KGlobalAccelShortcutBackend::OnShortcutPressed,
+                   Qt::UniqueConnection);
 
   return complete;
 #else   // HAVE_DBUS
@@ -100,6 +101,10 @@ void KGlobalAccelShortcutBackend::DoUnregister() {
 
   for (const GlobalShortcuts::Shortcut& shortcut : manager_->shortcuts())
     UnregisterAction(shortcut.id, shortcut.action);
+
+  QObject::disconnect(component_,
+                      &OrgKdeKglobalaccelComponentInterface::globalShortcutPressed,
+                      this, &KGlobalAccelShortcutBackend::OnShortcutPressed);
 #endif  // HAVE_DBUS
 }
 
@@ -110,6 +115,8 @@ const char* KGlobalAccelShortcutBackend::kPath = "/kglobalaccel";
 
 bool KGlobalAccelShortcutBackend::AcquireComponent() {
   Q_ASSERT(iface_ && iface_->isValid());
+
+  if (component_) return true;
 
   QDBusReply<QDBusObjectPath> reply = iface_->getComponent(ComponentUniqueName());
   if (!reply.isValid()) {
