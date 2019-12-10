@@ -345,9 +345,9 @@ QString GetConfigPath(ConfigPath config) {
       return mac::GetApplicationSupportPath() + "/" +
              QCoreApplication::organizationName();
 #else
-      return QString("%1/%2")
-          .arg(QStandardPaths::writableLocation(QStandardPaths::ConfigLocation),
-               QCoreApplication::organizationName());
+      return QString("%1/%2").arg(
+          QStandardPaths::writableLocation(QStandardPaths::ConfigLocation),
+          QCoreApplication::organizationName());
 #endif
     } break;
 
@@ -356,9 +356,9 @@ QString GetConfigPath(ConfigPath config) {
         return GetConfigPath(Path_Root) + "/cache";
       }
 #if defined(Q_OS_UNIX) && !defined(Q_OS_DARWIN)
-      return QString("%1/%2")
-          .arg(QStandardPaths::writableLocation(QStandardPaths::GenericCacheLocation),
-               QCoreApplication::organizationName());
+      return QString("%1/%2").arg(QStandardPaths::writableLocation(
+                                      QStandardPaths::GenericCacheLocation),
+                                  QCoreApplication::organizationName());
 #else
       return GetConfigPath(Path_Root);
 #endif
