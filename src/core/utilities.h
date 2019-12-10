@@ -132,6 +132,7 @@ enum ConfigPath {
   Path_DefaultMusicLibrary,
   Path_LocalSpotifyBlob,
   Path_MoodbarCache,
+  Path_PixmapCache,
   Path_CacheRoot,
 };
 QString GetConfigPath(ConfigPath config);

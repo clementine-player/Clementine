@@ -345,8 +345,9 @@ QString GetConfigPath(ConfigPath config) {
       return mac::GetApplicationSupportPath() + "/" +
              QCoreApplication::organizationName();
 #else
-      return QString("%1/.config/%2")
-          .arg(QDir::homePath(), QCoreApplication::organizationName());
+      return QString("%1/%2").arg(
+          QStandardPaths::writableLocation(QStandardPaths::ConfigLocation),
+          QCoreApplication::organizationName());
 #endif
     } break;
 
@@ -355,13 +356,9 @@ QString GetConfigPath(ConfigPath config) {
         return GetConfigPath(Path_Root) + "/cache";
       }
 #if defined(Q_OS_UNIX) && !defined(Q_OS_DARWIN)
-      char* xdg = getenv("XDG_CACHE_HOME");
-      if (!xdg || !*xdg) {
-        return QString("%1/.cache/%2")
-            .arg(QDir::homePath(), QCoreApplication::organizationName());
-      } else {
-        return QString("%1/%2").arg(xdg, QCoreApplication::organizationName());
-      }
+      return QString("%1/%2").arg(QStandardPaths::writableLocation(
+                                      QStandardPaths::GenericCacheLocation),
+                                  QCoreApplication::organizationName());
 #else
       return GetConfigPath(Path_Root);
 #endif
@@ -378,6 +375,9 @@ QString GetConfigPath(ConfigPath config) {
 
     case Path_MoodbarCache:
       return GetConfigPath(Path_CacheRoot) + "/moodbarcache";
+
+    case Path_PixmapCache:
+      return GetConfigPath(Path_CacheRoot) + "/pixmapcache";
 
     case Path_GstreamerRegistry:
       return GetConfigPath(Path_Root) +
