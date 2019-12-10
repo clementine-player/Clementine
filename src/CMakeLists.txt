@@ -82,6 +82,7 @@ set(SOURCES
   core/globalshortcutbackend.cpp
   core/globalshortcuts.cpp
   core/gnomeglobalshortcutbackend.cpp
+  core/kglobalaccelglobalshortcutbackend.cpp
   core/mergedproxymodel.cpp
   core/metatypes.cpp
   core/multisortfilterproxy.cpp
@@ -413,6 +414,7 @@ set(HEADERS
   core/globalshortcuts.h
   core/globalshortcutbackend.h
   core/gnomeglobalshortcutbackend.h
+  core/kglobalaccelglobalshortcutbackend.h
   core/mergedproxymodel.h
   core/mimedata.h
   core/network.h
@@ -936,6 +938,15 @@ if(UNIX AND HAVE_DBUS)
   qt5_add_dbus_interface(SOURCES
       dbus/org.gnome.SettingsDaemon.MediaKeys.xml
       dbus/gnomesettingsdaemon)
+
+  # org.kde.KGlobalAccel interfaces
+  # these are taken from the KGlobalAccel sources (LGPL 2.1)
+  qt5_add_dbus_interface(SOURCES
+          dbus/org.kde.KGlobalAccel.xml
+          dbus/kglobalaccel)
+  qt5_add_dbus_interface(SOURCES
+          dbus/org.kde.kglobalaccel.Component.xml
+          dbus/kglobalaccelcomponent)
 
   # org.freedesktop.Avahi.Server interface
   add_custom_command(

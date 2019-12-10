@@ -1,0 +1,72 @@
+<!DOCTYPE node PUBLIC "-//freedesktop//DTD D-BUS Object Introspection 1.0//EN"
+        "http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
+<node>
+    <interface name="org.kde.KGlobalAccel">
+        <signal name="yourShortcutGotChanged">
+            <arg name="actionId" type="as" direction="out"/>
+            <arg name="newKeys" type="ai" direction="out"/>
+            <annotation name="org.qtproject.QtDBus.QtTypeName.Out1" value="QList&lt;int&gt;"/>
+        </signal>
+        <method name="allComponents">
+            <arg type="ao" direction="out"/>
+        </method>
+        <method name="allMainComponents">
+            <arg type="aas" direction="out"/>
+            <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="QList&lt;QStringList&gt;"/>
+        </method>
+        <method name="allActionsForComponent">
+            <arg type="aas" direction="out"/>
+            <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="QList&lt;QStringList&gt;"/>
+            <arg name="actionId" type="as" direction="in"/>
+        </method>
+        <method name="action">
+            <arg type="as" direction="out"/>
+            <arg name="key" type="i" direction="in"/>
+        </method>
+        <method name="getComponent">
+            <arg type="o" direction="out"/>
+            <arg name="componentUnique" type="s" direction="in"/>
+        </method>
+        <method name="shortcut">
+            <arg type="ai" direction="out"/>
+            <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="QList&lt;int&gt;"/>
+            <arg name="actionId" type="as" direction="in"/>
+        </method>
+        <method name="defaultShortcut">
+            <arg type="ai" direction="out"/>
+            <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="QList&lt;int&gt;"/>
+            <arg name="actionId" type="as" direction="in"/>
+        </method>
+        <method name="setShortcut">
+            <arg type="ai" direction="out"/>
+            <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="QList&lt;int&gt;"/>
+            <arg name="actionId" type="as" direction="in"/>
+            <arg name="keys" type="ai" direction="in"/>
+            <annotation name="org.qtproject.QtDBus.QtTypeName.In1" value="QList&lt;int&gt;"/>
+            <arg name="flags" type="u" direction="in"/>
+        </method>
+        <method name="setForeignShortcut">
+            <arg name="actionId" type="as" direction="in"/>
+            <arg name="keys" type="ai" direction="in"/>
+            <annotation name="org.qtproject.QtDBus.QtTypeName.In1" value="QList&lt;int&gt;"/>
+        </method>
+        <method name="setInactive">
+            <arg name="actionId" type="as" direction="in"/>
+        </method>
+        <method name="doRegister">
+            <arg name="actionId" type="as" direction="in"/>
+        </method>
+        <method name="unRegister">
+            <arg name="actionId" type="as" direction="in"/>
+        </method>
+        <method name="activateGlobalShortcutContext">
+            <arg name="component" type="s" direction="in"/>
+            <arg name="context" type="s" direction="in"/>
+        </method>
+        <method name="isGlobalShortcutAvailable">
+            <arg type="b" direction="out"/>
+            <arg name="key" type="i" direction="in"/>
+            <arg name="component" type="s" direction="in"/>
+        </method>
+    </interface>
+</node>

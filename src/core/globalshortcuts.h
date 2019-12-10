@@ -93,12 +93,14 @@ signals:
 
  private:
   GlobalShortcutBackend* gnome_backend_;
+  GlobalShortcutBackend* kglobalaccel_backend_;
   GlobalShortcutBackend* system_backend_;
 
   QMap<QString, Shortcut> shortcuts_;
   QSettings settings_;
 
   bool use_gnome_;
+  bool have_kglobalaccel_;
 };
 
 #endif  // CORE_GLOBALSHORTCUTS_H_
