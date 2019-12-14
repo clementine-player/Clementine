@@ -1342,7 +1342,19 @@ void MainWindow::ResumePlayback() {
 
   app_->player()->Play();
 
-  app_->player()->SeekTo(saved_playback_position_);
+  connect(track_position_timer_, SIGNAL(timeout()),
+          SLOT(ResumePlaybackPosition()));
+}
+
+void MainWindow::ResumePlaybackPosition() {
+  // We must wait until the song has a length because
+  // seeking a song without length does not work
+  if (app_->player()->engine()->length_nanosec() > 0) {
+    disconnect(track_position_timer_, SIGNAL(timeout()), this,
+               SLOT(ResumePlaybackPosition()));
+
+    app_->player()->SeekTo(saved_playback_position_);
+  }
 }
 
 void MainWindow::PlayIndex(const QModelIndex& index) {

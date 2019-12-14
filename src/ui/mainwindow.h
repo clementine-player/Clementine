@@ -271,6 +271,7 @@ signals:
   void SavePlaybackStatus(QSettings* settings);
   void LoadPlaybackStatus();
   void ResumePlayback();
+  void ResumePlaybackPosition();
 
   void AddSongInfoGenerator(smart_playlists::GeneratorPtr gen);
 
