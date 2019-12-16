@@ -5,7 +5,6 @@ Clementine is a modern music player and library organizer for Windows, Linux and
 
 - Website: http://www.clementine-player.org/
 - Github: https://github.com/clementine-player/Clementine
-- Buildbot: http://buildbot.clementine-player.org/grid
 - Latest developer builds: http://builds.clementine-player.org/
 
 Opening an issue
