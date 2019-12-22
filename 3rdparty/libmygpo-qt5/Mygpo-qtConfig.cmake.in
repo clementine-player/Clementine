@@ -11,8 +11,8 @@ set(MYGPO_QT_VERSION ${MYGPO_QT_VERSION_MAJOR}.${MYGPO_QT_VERSION_MINOR}.${MYGPO
 set(LIBMYGPO_QT_INCLUDE_DIRS "@INCLUDE_INSTALL_DIR@")
 
 # import the exported targets
-include(${myDir}/Mygpo-qtTargets.cmake)
+include(${myDir}/Mygpo-qt@MYGPO_QT_VERSION_SUFFIX@Targets.cmake)
 
 # set the expected library variable
-set(LIBMYGPO_QT_LIBRARIES mygpo-qt )
+set(LIBMYGPO_QT_LIBRARIES mygpo-qt@MYGPO_QT_VERSION_SUFFIX@ )
 set(LIBMYGPO_QT_FOUND "True")

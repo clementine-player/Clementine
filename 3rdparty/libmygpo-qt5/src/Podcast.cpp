@@ -145,9 +145,12 @@ bool PodcastPrivate::parse( const QVariant& data )
         return false;
     QVariantMap podcastMap = data.toMap();
     QVariant v = podcastMap.value( QLatin1String( "url" ) );
-    if ( !v.canConvert( QVariant::Url ) )
+    if ( !v.canConvert( QVariant::ByteArray ) )
         return false;
-    m_url = v.toUrl();
+    m_url = QUrl::fromEncoded(v.toByteArray(), QUrl::StrictMode);
+    if (!m_url.isValid()) { 
+        return false;
+    }
     v = podcastMap.value( QLatin1String( "title" ) );
     if ( !v.canConvert( QVariant::String ) )
         return false;

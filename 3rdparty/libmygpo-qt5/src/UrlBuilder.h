@@ -137,7 +137,6 @@ public:
 private:
     UrlBuilder() {};
     UrlBuilder( const UrlBuilder& ) {};
-    static const QString s_server;
     static const QString s_api2;
     static const QString s_api1;
 };
