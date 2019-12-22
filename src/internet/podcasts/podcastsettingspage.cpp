@@ -44,6 +44,8 @@ PodcastSettingsPage::PodcastSettingsPage(SettingsDialog* dialog)
   connect(ui_->login_state, SIGNAL(LogoutClicked()), SLOT(LogoutClicked()));
   connect(ui_->download_dir_browse, SIGNAL(clicked()),
           SLOT(DownloadDirBrowse()));
+  connect(ui_->gpodder_advanced, SIGNAL(stateChanged(int)),
+          SLOT(GpodderAdvancedChanged(int)));
 
   GPodderSync* gsync = dialog->app()->gpodder_sync();
   connect(gsync, SIGNAL(LoginSuccess()), SLOT(GpodderLoginSuccess()));
@@ -89,6 +91,16 @@ void PodcastSettingsPage::Load() {
       s.value("gpodder_device_name", GPodderSync::DefaultDeviceName())
           .toString());
 
+  QUrl base_url = s.value("gpodder_base_url").toUrl();
+  if (base_url.isEmpty()) {
+    ui_->gpodder_advanced->setCheckState(Qt::Unchecked);
+    GpodderAdvancedChanged(Qt::Unchecked);
+  } else {
+    ui_->gpodder_advanced->setCheckState(Qt::Checked);
+    GpodderAdvancedChanged(Qt::Checked);
+  }
+  ui_->gpodder_base_url->setText(base_url.toString());
+
   if (dialog()->app()->gpodder_sync()->is_logged_in()) {
     ui_->login_state->SetLoggedIn(LoginStateWidget::LoggedIn,
                                   ui_->username->text());
@@ -115,8 +127,19 @@ void PodcastSettingsPage::Save() {
 void PodcastSettingsPage::LoginClicked() {
   ui_->login_state->SetLoggedIn(LoginStateWidget::LoginInProgress);
 
-  dialog()->app()->gpodder_sync()->Login(
-      ui_->username->text(), ui_->password->text(), ui_->device_name->text());
+  if (ui_->gpodder_advanced->checkState()) {
+    QUrl url(ui_->gpodder_base_url->text());
+    if (url.isEmpty() || !url.isValid()) {
+      GpodderLoginFailure("Invalid URL");
+      return;
+    }
+    dialog()->app()->gpodder_sync()->Login(ui_->username->text(),
+                                           ui_->password->text(),
+                                           ui_->device_name->text(), url);
+  } else {
+    dialog()->app()->gpodder_sync()->Login(
+        ui_->username->text(), ui_->password->text(), ui_->device_name->text());
+  }
 }
 
 void PodcastSettingsPage::GpodderLoginSuccess() {
@@ -144,4 +167,11 @@ void PodcastSettingsPage::DownloadDirBrowse() {
   if (directory.isEmpty()) return;
 
   ui_->download_dir->setText(QDir::toNativeSeparators(directory));
+}
+
+void PodcastSettingsPage::GpodderAdvancedChanged(int state) {
+  if (state)
+    ui_->gpodder_advanced_group->setEnabled(true);
+  else
+    ui_->gpodder_advanced_group->setEnabled(false);
 }

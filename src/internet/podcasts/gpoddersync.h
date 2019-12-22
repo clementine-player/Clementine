@@ -64,6 +64,9 @@ class GPodderSync : public QObject {
   void Login(const QString& username, const QString& password,
              const QString& device_name);
 
+  void Login(const QString& username, const QString& password,
+             const QString& device_name, const QUrl& custom_url);
+
   // Clears any saved username and password from QSettings.
   void Logout();
 
@@ -77,7 +80,7 @@ class GPodderSync : public QObject {
  private slots:
   void ReloadSettings();
   void LoginFinished(QNetworkReply* reply, const QString& username,
-                     const QString& password);
+                     const QString& password, const QUrl& custom_url);
 
   void DeviceUpdatesFinished(mygpo::DeviceUpdatesPtr reply);
   void DeviceUpdatesParseError();
@@ -104,6 +107,8 @@ class GPodderSync : public QObject {
 
   void DoInitialSync();
 
+  void UpdateBaseUrl(const QUrl& custom_base_url);
+
  private:
   Application* app_;
   QNetworkAccessManager* network_;
@@ -116,6 +121,7 @@ class GPodderSync : public QObject {
   QString password_;
   QDateTime last_successful_get_;
   QTimer* get_updates_timer_;
+  QUrl default_base_url_;
 
   QTimer* flush_queue_timer_;
   QSet<QUrl> queued_add_subscriptions_;
