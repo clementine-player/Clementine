@@ -19,6 +19,7 @@
 
 #include "gpoddersync.h"
 
+#include <Config.h>
 #include <QCoreApplication>
 #include <QHostInfo>
 #include <QNetworkAccessManager>
@@ -50,6 +51,11 @@ GPodderSync::GPodderSync(Application* app, QObject* parent)
       get_updates_timer_(new QTimer(this)),
       flush_queue_timer_(new QTimer(this)),
       flushing_queue_(false) {
+  // Store the base URL in case we need to reset it. The config instance is a
+  // singleton and this is assuming that the configuration hasn't been modified
+  // before now.
+  default_base_url_ = mygpo::Config::instance()->mygpoBaseUrl();
+
   ReloadSettings();
   LoadQueue();
 
@@ -97,26 +103,38 @@ void GPodderSync::ReloadSettings() {
   username_ = s.value("gpodder_username").toString();
   password_ = s.value("gpodder_password").toString();
   last_successful_get_ = s.value("gpodder_last_get").toDateTime();
+  UpdateBaseUrl(s.value("gpodder_base_url").toUrl());
 
   if (!username_.isEmpty() && !password_.isEmpty()) {
+    qLog(Debug) << "Using gpodder base URL"
+                << mygpo::Config::instance()->mygpoBaseUrl();
     api_.reset(new mygpo::ApiRequest(username_, password_, network_));
   }
 }
 
 void GPodderSync::Login(const QString& username, const QString& password,
                         const QString& device_name) {
+  Login(username, password, device_name, QUrl());
+}
+
+void GPodderSync::Login(const QString& username, const QString& password,
+                        const QString& device_name, const QUrl& custom_url) {
+  UpdateBaseUrl(custom_url);
+  qLog(Debug) << "Using gpodder base URL"
+              << mygpo::Config::instance()->mygpoBaseUrl();
   api_.reset(new mygpo::ApiRequest(username, password, network_));
 
   QNetworkReply* reply = api_->renameDevice(
       username, DeviceId(), device_name,
       Utilities::IsLaptop() ? mygpo::Device::LAPTOP : mygpo::Device::DESKTOP);
   NewClosure(reply, SIGNAL(finished()), this,
-             SLOT(LoginFinished(QNetworkReply*, QString, QString)), reply,
-             username, password);
+             SLOT(LoginFinished(QNetworkReply*, QString, QString, QUrl)), reply,
+             username, password, custom_url);
 }
 
 void GPodderSync::LoginFinished(QNetworkReply* reply, const QString& username,
-                                const QString& password) {
+                                const QString& password,
+                                const QUrl& custom_url) {
   reply->deleteLater();
 
   if (reply->error() == QNetworkReply::NoError) {
@@ -127,12 +145,22 @@ void GPodderSync::LoginFinished(QNetworkReply* reply, const QString& username,
     s.beginGroup(kSettingsGroup);
     s.setValue("gpodder_username", username);
     s.setValue("gpodder_password", password);
+    s.setValue("gpodder_base_url", custom_url);
 
     DoInitialSync();
     emit LoginSuccess();
   } else {
     api_.reset();
     emit LoginFailure(reply->errorString());
+  }
+}
+
+void GPodderSync::UpdateBaseUrl(const QUrl& custom_base_url) {
+  // If the custom URL is empty, use the default.
+  if (!custom_base_url.isEmpty()) {
+    mygpo::Config::instance()->setMygpoBaseUrl(custom_base_url);
+  } else {
+    mygpo::Config::instance()->setMygpoBaseUrl(default_base_url_);
   }
 }
 
@@ -347,7 +375,7 @@ void GPodderSync::FlushUpdateQueue() {
       username_, DeviceId(), queued_add_subscriptions_.toList(),
       queued_remove_subscriptions_.toList()));
 
-  qLog(Info) << "Sending" << all_urls.count() << "changes to gpodder.net";
+  qLog(Info) << "Sending" << all_urls.count() << "changes to gpodder service";
 
   NewClosure(reply, SIGNAL(finished()), this,
              SLOT(AddRemoveFinished(mygpo::AddRemoveResultPtr, QList<QUrl>)),
