@@ -51,10 +51,12 @@ class NetworkAccessManager : public QNetworkAccessManager {
 
  public:
   explicit NetworkAccessManager(QObject* parent = nullptr);
+  explicit NetworkAccessManager(int timeout, QObject* parent = nullptr);
 
  protected:
   QNetworkReply* createRequest(Operation op, const QNetworkRequest& request,
                                QIODevice* outgoingData);
+  int timeout_msec_;
 };
 
 class RedirectFollower : public QObject {

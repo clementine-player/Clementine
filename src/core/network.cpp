@@ -84,7 +84,12 @@ void ThreadSafeNetworkDiskCache::clear() {
 }
 
 NetworkAccessManager::NetworkAccessManager(QObject* parent)
-    : QNetworkAccessManager(parent) {
+    : QNetworkAccessManager(parent), timeout_msec_(0) {
+  setCache(new ThreadSafeNetworkDiskCache(this));
+}
+
+NetworkAccessManager::NetworkAccessManager(int timeout, QObject* parent)
+    : QNetworkAccessManager(parent), timeout_msec_(timeout) {
   setCache(new ThreadSafeNetworkDiskCache(this));
 }
 
@@ -117,7 +122,15 @@ QNetworkReply* NetworkAccessManager::createRequest(
                              QNetworkRequest::PreferCache);
   }
 
-  return QNetworkAccessManager::createRequest(op, new_request, outgoingData);
+  QNetworkReply* reply =
+      QNetworkAccessManager::createRequest(op, new_request, outgoingData);
+  if (timeout_msec_ > 0) {
+    // Since the parent is the reply, this object will be destroyed when the
+    // reply is destroyed.
+    NetworkTimeouts* timeout = new NetworkTimeouts(timeout_msec_, reply);
+    timeout->AddReply(reply);
+  }
+  return reply;
 }
 
 NetworkTimeouts::NetworkTimeouts(int timeout_msec, QObject* parent)

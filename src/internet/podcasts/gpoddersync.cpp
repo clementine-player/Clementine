@@ -38,11 +38,12 @@ const char* GPodderSync::kSettingsGroup = "Podcasts";
 const int GPodderSync::kFlushUpdateQueueDelay = 30 * kMsecPerSec;  // 30 seconds
 const int GPodderSync::kGetUpdatesInterval =
     30 * 60 * kMsecPerSec;  // 30 minutes
+const int GPodderSync::kRequestTimeout = 30 * kMsecPerSec;  // 30 seconds
 
 GPodderSync::GPodderSync(Application* app, QObject* parent)
     : QObject(parent),
       app_(app),
-      network_(new NetworkAccessManager(this)),
+      network_(new NetworkAccessManager(kRequestTimeout, this)),
       backend_(app_->podcast_backend()),
       loader_(new PodcastUrlLoader(this)),
       get_updates_timer_(new QTimer(this)),

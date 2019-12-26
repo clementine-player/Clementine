@@ -51,6 +51,7 @@ class GPodderSync : public QObject {
   static const char* kSettingsGroup;
   static const int kFlushUpdateQueueDelay;
   static const int kGetUpdatesInterval;
+  static const int kRequestTimeout;
 
   static QString DefaultDeviceName();
   static QString DeviceId();
