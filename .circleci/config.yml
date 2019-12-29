@@ -753,6 +753,25 @@ jobs:
       - store_artifacts:
           path: /tmp/artifacts/mac
 
+  build_source_tarball:
+    docker:
+      - image: ubuntu:eoan
+    steps:
+      - checkout
+      - install_eoan_dependencies
+      - cmake
+      - build_source_tarball
+      - run:
+          name: Create artifacts directory
+          command: mkdir -p /tmp/artifacts/source
+      - run:
+          name: Copy artifact
+          command: cp bin/clementine-*.tar.xz /tmp/artifacts/source
+      - persist_to_workspace:
+          root: /tmp/artifacts
+          paths:
+            - source/*
+
   upload_artifacts:
     docker:
       - image: google/cloud-sdk
@@ -826,6 +845,10 @@ workflows:
               only: master
             tags:
               only: /.*/
+      - build_source_tarball:
+          filters:
+            tags:
+              only: /.*/
       - upload_artifacts:
           context: gcp
           requires:
@@ -842,6 +865,7 @@ workflows:
             - build_fedora_31_64
             - build_mingw
             - build_mac
+            - build_source_tarball
           filters:
             branches:
               only: master
