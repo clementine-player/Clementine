@@ -758,6 +758,7 @@ jobs:
       - image: ubuntu:eoan
     steps:
       - checkout
+      - install_eoan_dependencies
       - cmake
       - build_source_tarball
       - run:
