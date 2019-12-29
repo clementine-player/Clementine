@@ -755,7 +755,7 @@ jobs:
 
   build_source_tarball:
     docker:
-      - image: ubuntu/eoan
+      - image: ubuntu:eoan
     steps:
       - checkout
       - cmake
