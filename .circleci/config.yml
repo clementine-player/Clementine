@@ -763,15 +763,14 @@ jobs:
       - build_source_tarball
       - run:
           name: Create artifacts directory
-          command: mkdir -p /tmp/artifacts
+          command: mkdir -p /tmp/artifacts/source
       - run:
           name: Copy artifact
-          command: cp clementine-*.tar.xz /tmp/artifacts
-          working_directory: bin
+          command: cp bin/clementine-*.tar.xz /tmp/artifacts/source
       - persist_to_workspace:
           root: /tmp/artifacts
           paths:
-            - '*'
+            - source/*
 
   upload_artifacts:
     docker:
