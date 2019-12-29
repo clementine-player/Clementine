@@ -157,14 +157,17 @@ void GPodderSync::GetUpdatesNow() {
       api_->deviceUpdates(username_, DeviceId(), timestamp));
   NewClosure(reply, SIGNAL(finished()), this,
              SLOT(DeviceUpdatesFinished(mygpo::DeviceUpdatesPtr)), reply);
-  NewClosure(reply, SIGNAL(parseError()), this,
-             SLOT(DeviceUpdatesFailed(mygpo::DeviceUpdatesPtr)), reply);
-  NewClosure(reply, SIGNAL(requestError(QNetworkReply::NetworkError)), this,
-             SLOT(DeviceUpdatesFailed(mygpo::DeviceUpdatesPtr)), reply);
+  connect(reply.data(), SIGNAL(parseError()), SLOT(DeviceUpdatesParseError()));
+  connect(reply.data(), SIGNAL(requestError(QNetworkReply::NetworkError)),
+          SLOT(DeviceUpdatesRequestError(QNetworkReply::NetworkError)));
 }
 
-void GPodderSync::DeviceUpdatesFailed(mygpo::DeviceUpdatesPtr reply) {
-  qLog(Warning) << "Failed to get gpodder.net device updates";
+void GPodderSync::DeviceUpdatesParseError() {
+  qLog(Warning) << "Failed to get gpodder device updates: parse error";
+}
+
+void GPodderSync::DeviceUpdatesRequestError(QNetworkReply::NetworkError error) {
+  qLog(Warning) << "Failed to get gpodder device updates:" << error;
 }
 
 void GPodderSync::DeviceUpdatesFinished(mygpo::DeviceUpdatesPtr reply) {
@@ -344,15 +347,19 @@ void GPodderSync::FlushUpdateQueue() {
   NewClosure(reply, SIGNAL(finished()), this,
              SLOT(AddRemoveFinished(mygpo::AddRemoveResultPtr, QList<QUrl>)),
              reply, all_urls.toList());
-  NewClosure(reply, SIGNAL(parseError()), this,
-             SLOT(AddRemoveFailed(mygpo::AddRemoveResultPtr)), reply);
-  NewClosure(reply, SIGNAL(requestError(QNetworkReply::NetworkError)), this,
-             SLOT(AddRemoveFailed(mygpo::AddRemoveResultPtr)), reply);
+  connect(reply.data(), SIGNAL(parseError()), SLOT(AddRemoveParseError()));
+  connect(reply.data(), SIGNAL(requestError(QNetworkReply::NetworkError)),
+          SLOT(AddRemoveRequestError(QNetworkReply::NetworkError)));
 }
 
-void GPodderSync::AddRemoveFailed(mygpo::AddRemoveResultPtr reply) {
+void GPodderSync::AddRemoveParseError() {
   flushing_queue_ = false;
-  qLog(Warning) << "Failed to update gpodder.net subscriptions";
+  qLog(Warning) << "Failed to update gpodder subscriptions: parse error";
+}
+
+void GPodderSync::AddRemoveRequestError(QNetworkReply::NetworkError err) {
+  flushing_queue_ = false;
+  qLog(Warning) << "Failed to update gpodder subscriptions:" << err;
 }
 
 void GPodderSync::AddRemoveFinished(mygpo::AddRemoveResultPtr reply,
