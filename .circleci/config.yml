@@ -687,6 +687,9 @@ jobs:
             echo 'export GST_PLUGIN_PATH=/usr/local/lib/gstreamer-1.0' >> $BASH_ENV
             source $BASH_ENV
       - run:
+          name: Unlink Python 2
+          command: brew unlink python@2
+      - run:
           name: Install dependencies from homebrew
           command: >
             brew install
