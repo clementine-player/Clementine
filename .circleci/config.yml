@@ -771,22 +771,60 @@ workflows:
   version: 2
   build_all:
     jobs:
-      - build_eoan_64
-      - build_eoan_32
-      - build_disco_64
-      - build_disco_32
-      - build_bionic_64
-      - build_bionic_32
-      - build_buster_64
-      - build_stretch_64
-      - build_fedora_29_64
-      - build_fedora_30_64
-      - build_fedora_31_64
-      - build_mingw
+      - build_eoan_64:
+          filters:
+            tags:
+              only: /.*/
+      - build_eoan_32:
+          filters:
+            tags:
+              only: /.*/
+      - build_disco_64:
+          filters:
+            tags:
+              only: /.*/
+      - build_disco_32:
+          filters:
+            tags:
+              only: /.*/
+      - build_bionic_64:
+          filters:
+            tags:
+              only: /.*/
+      - build_bionic_32:
+          filters:
+            tags:
+              only: /.*/
+      - build_buster_64:
+          filters:
+            tags:
+              only: /.*/
+      - build_stretch_64:
+          filters:
+            tags:
+              only: /.*/
+      - build_fedora_29_64:
+          filters:
+            tags:
+              only: /.*/
+      - build_fedora_30_64:
+          filters:
+            tags:
+              only: /.*/
+      - build_fedora_31_64:
+          filters:
+            tags:
+              only: /.*/
+      - build_mingw:
+          filters:
+            tags:
+              only: /.*/
       - build_mac:
           filters:
             branches:
               only: master
+            tags:
+              only: /.*/
       - upload_artifacts:
           context: gcp
           requires:
@@ -806,3 +844,5 @@ workflows:
           filters:
             branches:
               only: master
+            tags:
+              only: /.*/
