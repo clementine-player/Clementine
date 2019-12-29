@@ -77,7 +77,8 @@ class GPodderSync : public QObject {
                      const QString& password);
 
   void DeviceUpdatesFinished(mygpo::DeviceUpdatesPtr reply);
-  void DeviceUpdatesFailed(mygpo::DeviceUpdatesPtr reply);
+  void DeviceUpdatesParseError();
+  void DeviceUpdatesRequestError(QNetworkReply::NetworkError error);
 
   void NewPodcastLoaded(PodcastUrlLoaderReply* reply, const QUrl& url,
                         const QList<mygpo::EpisodePtr>& actions);
@@ -91,7 +92,8 @@ class GPodderSync : public QObject {
 
   void AddRemoveFinished(mygpo::AddRemoveResultPtr reply,
                          const QList<QUrl>& affected_urls);
-  void AddRemoveFailed(mygpo::AddRemoveResultPtr reply);
+  void AddRemoveParseError();
+  void AddRemoveRequestError(QNetworkReply::NetworkError error);
 
  private:
   void LoadQueue();
