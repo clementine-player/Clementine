@@ -695,7 +695,6 @@ jobs:
             cmake
             cryptopp
             fftw
-            gettext
             glew
             glib
             google-sparsehash
@@ -709,7 +708,6 @@ jobs:
             protobuf
             protobuf-c
             qt
-            sqlite
       - checkout
       - run:
           name: cmake
