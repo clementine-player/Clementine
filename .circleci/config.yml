@@ -787,6 +787,19 @@ jobs:
           name: Upload Artifact to Google Cloud
           command: gsutil rsync -r /tmp/artifacts gs://builds.clementine-player.org/
 
+  create_release:
+    docker:
+      - image: circleci/golang:1.8
+    steps:
+      - attach_workspace:
+          at: /tmp/artifacts
+      - run:
+          name: Publish Release on GitHub
+          command: |
+            go get github.com/tcnksm/ghr
+            VERSION=${CIRCLE_TAG}
+            ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -delete ${VERSION} /tmp/artifacts
+
 workflows:
   version: 2
   build_all:
@@ -849,6 +862,28 @@ workflows:
           filters:
             tags:
               only: /.*/
+      - create_release:
+          filters:
+            tags:
+              only: /.*/
+            branches:
+              ignore: /.*/
+          context: github
+          requires:
+            - build_eoan_64
+            - build_eoan_32
+            - build_disco_64
+            - build_disco_32
+            - build_bionic_64
+            - build_bionic_32
+            - build_buster_64
+            - build_stretch_64
+            - build_fedora_29_64
+            - build_fedora_30_64
+            - build_fedora_31_64
+            - build_mingw
+            - build_mac
+            - build_source_tarball
       - upload_artifacts:
           context: gcp
           requires:
