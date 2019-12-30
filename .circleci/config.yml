@@ -757,8 +757,8 @@ jobs:
     docker:
       - image: ubuntu:eoan
     steps:
-      - checkout
       - install_eoan_dependencies
+      - checkout
       - cmake
       - build_source_tarball
       - run:
