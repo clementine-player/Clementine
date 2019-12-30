@@ -22,6 +22,7 @@
 #include <QCoreApplication>
 #include <QHostInfo>
 #include <QNetworkAccessManager>
+#include <QNetworkCookieJar>
 #include <QSettings>
 #include <QTimer>
 
@@ -143,6 +144,10 @@ void GPodderSync::Logout() {
   s.remove("gpodder_last_get");
 
   api_.reset();
+
+  // Remove session cookies. QNetworkAccessManager takes ownership of the new
+  // object and frees the previous.
+  network_->setCookieJar(new QNetworkCookieJar());
 }
 
 void GPodderSync::GetUpdatesNow() {
