@@ -21,11 +21,9 @@
 #include "ui_podcastsettingspage.h"
 
 #include <QFileDialog>
-#include <QNetworkReply>
 #include <QSettings>
 
 #include "core/application.h"
-#include "core/closure.h"
 #include "core/timeconstants.h"
 #include "gpoddersync.h"
 #include "library/librarydirectorymodel.h"
@@ -46,6 +44,11 @@ PodcastSettingsPage::PodcastSettingsPage(SettingsDialog* dialog)
   connect(ui_->login_state, SIGNAL(LogoutClicked()), SLOT(LogoutClicked()));
   connect(ui_->download_dir_browse, SIGNAL(clicked()),
           SLOT(DownloadDirBrowse()));
+
+  GPodderSync* gsync = dialog->app()->gpodder_sync();
+  connect(gsync, SIGNAL(LoginSuccess()), SLOT(GpodderLoginSuccess()));
+  connect(gsync, SIGNAL(LoginFailure(const QString&)),
+          SLOT(GpodderLoginFailure(const QString&)));
 
   ui_->login_state->AddCredentialField(ui_->username);
   ui_->login_state->AddCredentialField(ui_->device_name);
@@ -112,24 +115,21 @@ void PodcastSettingsPage::Save() {
 void PodcastSettingsPage::LoginClicked() {
   ui_->login_state->SetLoggedIn(LoginStateWidget::LoginInProgress);
 
-  QNetworkReply* reply = dialog()->app()->gpodder_sync()->Login(
+  dialog()->app()->gpodder_sync()->Login(
       ui_->username->text(), ui_->password->text(), ui_->device_name->text());
-
-  NewClosure(reply, SIGNAL(finished()), this,
-             SLOT(LoginFinished(QNetworkReply*)), reply);
 }
 
-void PodcastSettingsPage::LoginFinished(QNetworkReply* reply) {
-  const bool success = reply->error() == QNetworkReply::NoError;
-  ui_->login_state->SetLoggedIn(
-      success ? LoginStateWidget::LoggedIn : LoginStateWidget::LoggedOut,
-      ui_->username->text());
+void PodcastSettingsPage::GpodderLoginSuccess() {
+  ui_->login_state->SetLoggedIn(LoginStateWidget::LoggedIn,
+                                ui_->username->text());
+  ui_->login_state->SetAccountTypeVisible(false);
+}
 
-  ui_->login_state->SetAccountTypeVisible(!success);
-  if (!success) {
-    ui_->login_state->SetAccountTypeText(tr("Login failed") + ": " +
-                                         reply->errorString());
-  }
+void PodcastSettingsPage::GpodderLoginFailure(const QString& error) {
+  ui_->login_state->SetLoggedIn(LoginStateWidget::LoggedOut,
+                                ui_->username->text());
+  ui_->login_state->SetAccountTypeVisible(true);
+  ui_->login_state->SetAccountTypeText(tr("Login failed") + ": " + error);
 }
 
 void PodcastSettingsPage::LogoutClicked() {

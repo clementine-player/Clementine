@@ -103,9 +103,8 @@ void GPodderSync::ReloadSettings() {
   }
 }
 
-QNetworkReply* GPodderSync::Login(const QString& username,
-                                  const QString& password,
-                                  const QString& device_name) {
+void GPodderSync::Login(const QString& username, const QString& password,
+                        const QString& device_name) {
   api_.reset(new mygpo::ApiRequest(username, password, network_));
 
   QNetworkReply* reply = api_->renameDevice(
@@ -114,7 +113,6 @@ QNetworkReply* GPodderSync::Login(const QString& username,
   NewClosure(reply, SIGNAL(finished()), this,
              SLOT(LoginFinished(QNetworkReply*, QString, QString)), reply,
              username, password);
-  return reply;
 }
 
 void GPodderSync::LoginFinished(QNetworkReply* reply, const QString& username,
@@ -131,8 +129,10 @@ void GPodderSync::LoginFinished(QNetworkReply* reply, const QString& username,
     s.setValue("gpodder_password", password);
 
     DoInitialSync();
+    emit LoginSuccess();
   } else {
     api_.reset();
+    emit LoginFailure(reply->errorString());
   }
 }
 
