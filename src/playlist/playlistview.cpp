@@ -62,8 +62,8 @@ const char* PlaylistView::kSettingBackgroundImageFilename =
 const int PlaylistView::kDefaultBlurRadius = 0;
 const int PlaylistView::kDefaultOpacityLevel = 40;
 
-PlaylistProxyStyle::PlaylistProxyStyle(QStyle* base)
-    : QProxyStyle(base), common_style_(new QCommonStyle) {}
+PlaylistProxyStyle::PlaylistProxyStyle()
+    : QProxyStyle(), common_style_(new QCommonStyle) {}
 
 void PlaylistProxyStyle::drawControl(ControlElement element,
                                      const QStyleOption* option,
@@ -107,7 +107,7 @@ void PlaylistProxyStyle::drawPrimitive(PrimitiveElement element,
 PlaylistView::PlaylistView(QWidget* parent)
     : QTreeView(parent),
       app_(nullptr),
-      style_(new PlaylistProxyStyle(style())),
+      style_(new PlaylistProxyStyle),
       playlist_(nullptr),
       header_(new PlaylistHeader(Qt::Horizontal, this, this)),
       setting_initial_header_layout_(false),

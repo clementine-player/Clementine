@@ -44,7 +44,7 @@ class QTimeLine;
 // This class is used by the global search view as well.
 class PlaylistProxyStyle : public QProxyStyle {
  public:
-  PlaylistProxyStyle(QStyle* base);
+  PlaylistProxyStyle();
   void drawControl(ControlElement element, const QStyleOption* option,
                    QPainter* painter, const QWidget* widget) const;
   void drawPrimitive(PrimitiveElement element, const QStyleOption* option,
