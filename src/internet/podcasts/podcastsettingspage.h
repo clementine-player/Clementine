@@ -24,8 +24,6 @@
 
 class Ui_PodcastSettingsPage;
 
-class QNetworkReply;
-
 class PodcastSettingsPage : public SettingsPage {
   Q_OBJECT
 
@@ -40,8 +38,10 @@ class PodcastSettingsPage : public SettingsPage {
 
  private slots:
   void LoginClicked();
-  void LoginFinished(QNetworkReply* reply);
   void LogoutClicked();
+
+  void GpodderLoginSuccess();
+  void GpodderLoginFailure(const QString& error);
 
   void DownloadDirBrowse();
 

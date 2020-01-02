@@ -59,14 +59,17 @@ class GPodderSync : public QObject {
   bool is_logged_in() const;
 
   // Tries to login using the given username and password.  Also sets the
-  // device name and type on gpodder.net.  You do NOT need to deleteLater()
-  // the QNetworkReply returned from this function.
+  // device name and type on gpodder.net.
   // If login succeeds the username and password will be saved in QSettings.
-  QNetworkReply* Login(const QString& username, const QString& password,
-                       const QString& device_name);
+  void Login(const QString& username, const QString& password,
+             const QString& device_name);
 
   // Clears any saved username and password from QSettings.
   void Logout();
+
+ signals:
+  void LoginSuccess();
+  void LoginFailure(const QString& error);
 
  public slots:
   void GetUpdatesNow();
