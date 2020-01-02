@@ -794,12 +794,16 @@ jobs:
       - attach_workspace:
           at: /tmp/artifacts
       - run:
+          name: Aggregate artifacts
+          command: |
+            mkdir -p release_artifacts
+            cp /tmp/artifacts/**/* release_artifacts/
+      - run:
           name: Publish Release on GitHub
           command: |
             go get github.com/tcnksm/ghr
             VERSION=${CIRCLE_TAG}
-            ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -delete ${VERSION} /tmp/artifacts/**/*
-
+            ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -delete ${VERSION} release_artifacts/
 workflows:
   version: 2
   build_all:
