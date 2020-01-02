@@ -15,10 +15,11 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "core/logging.h"
 #include "querywizardplugin.h"
+#include "ui_wizardfinishpage.h"
 #include "wizard.h"
 #include "wizardplugin.h"
-#include "ui_wizardfinishpage.h"
 
 #include <QLabel>
 #include <QRadioButton>
@@ -105,6 +106,11 @@ void Wizard::SetGenerator(GeneratorPtr gen) {
   // Set the name
   finish_page_->ui_->name->setText(gen->name());
   finish_page_->ui_->dynamic->setChecked(gen->is_dynamic());
+
+  if (type_index_ == -1) {
+    qLog(Error) << "Plugin was not found for generator type" << gen->type();
+    return;
+  }
 
   // Tell the plugin to load
   plugins_[type_index_]->SetGenerator(gen);
