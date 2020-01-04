@@ -455,8 +455,7 @@ void LibraryModel::SongsDeleted(const SongList& songs) {
       while (i != pending_art_.end()) {
         if (i.value().first == node) {
           i = pending_art_.erase(i);
-        }
-        else {
+        } else {
           ++i;
         }
       }
