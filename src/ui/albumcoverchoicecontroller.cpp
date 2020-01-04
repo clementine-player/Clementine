@@ -29,8 +29,10 @@
 #include "ui/coverfromurldialog.h"
 #include "ui/iconloader.h"
 
+#include <QGuiApplication>
+#include <QScreen>
+#include <QWindow>
 #include <QAction>
-#include <QDesktopWidget>
 #include <QDialog>
 #include <QDragEnterEvent>
 #include <QFileDialog>
@@ -244,10 +246,15 @@ QDialog* AlbumCoverChoiceController::ShowCoverPrivate(const Song& song) {
 
   // if the cover is larger than the screen, resize the window
   // 85% seems to be enough to account for title bar and taskbar etc.
-  QDesktopWidget desktop;
-  int current_screen = desktop.screenNumber(this);
-  int desktop_height = desktop.screenGeometry(current_screen).height();
-  int desktop_width = desktop.screenGeometry(current_screen).width();
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 14, 0))
+  QScreen *screen = screen();
+#else
+  QScreen *screen = (window() && window()->windowHandle() ? window()->windowHandle()->screen() : QGuiApplication::primaryScreen());
+#endif
+
+  QRect screenGeometry = screen->availableGeometry();
+  int desktop_height = screenGeometry.height();
+  int desktop_width = screenGeometry.width();
 
   // resize differently if monitor is in portrait mode
   if (desktop_width < desktop_height) {

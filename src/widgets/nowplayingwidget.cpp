@@ -17,7 +17,9 @@
 
 #include "nowplayingwidget.h"
 
-#include <QDesktopWidget>
+#include <QGuiApplication>
+#include <QScreen>
+#include <QWindow>
 #include <QMenu>
 #include <QMovie>
 #include <QPainter>
@@ -647,10 +649,13 @@ void NowPlayingWidget::SearchCoverAutomatically() {
 }
 
 void NowPlayingWidget::Bask() {
-  QDesktopWidget desktop;
-  int current_screen = desktop.screenNumber(this);
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 14, 0))
+  QScreen *screen = screen();
+#else
+  QScreen *screen = (window() && window()->windowHandle() ? window()->windowHandle()->screen() : QGuiApplication::primaryScreen());
+#endif
   big_hypnotoad_.reset(new FullscreenHypnotoad);
-  big_hypnotoad_->setGeometry(desktop.screenGeometry(current_screen));
+  if (screen) big_hypnotoad_->setGeometry(screen->availableGeometry());
   big_hypnotoad_->showFullScreen();
 }
 

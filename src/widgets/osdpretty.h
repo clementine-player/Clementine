@@ -19,9 +19,11 @@
 #define OSDPRETTY_H
 
 #include <QWidget>
+#include <QMap>
 
 class Ui_OSDPretty;
 
+class QScreen;
 class QTimeLine;
 
 class OSDPretty : public QWidget {
@@ -66,7 +68,7 @@ class OSDPretty : public QWidget {
   QRgb foreground_color() const { return foreground_color_.rgb(); }
   QRgb background_color() const { return background_color_.rgb(); }
   qreal background_opacity() const { return background_opacity_; }
-  int popup_display() const { return popup_display_; }
+  QString popup_screen() const { return popup_screen_name_; }
   QPoint popup_pos() const { return popup_pos_; }
   QFont font() const { return font_; }
   bool disable_duration() const { return disable_duration_; }
@@ -74,7 +76,7 @@ class OSDPretty : public QWidget {
   // When the user has been moving the popup, use these to get its current
   // position and screen.  Note that these return invalid values if the popup
   // is hidden.
-  int current_display() const;
+  QScreen *current_screen() const;
   QPoint current_pos() const;
 
   // QWidget
@@ -104,6 +106,8 @@ class OSDPretty : public QWidget {
  private slots:
   void FaderValueChanged(qreal value);
   void FaderFinished();
+  void ScreenAdded(QScreen* screen);
+  void ScreenRemoved(QScreen* screen);
 
  private:
   Ui_OSDPretty* ui_;
@@ -114,8 +118,9 @@ class OSDPretty : public QWidget {
   QColor foreground_color_;
   QColor background_color_;
   float background_opacity_;
-  int popup_display_;  // -1 for default
+  QString popup_screen_name_;
   QPoint popup_pos_;
+  QScreen* popup_screen_;
   QFont font_;
   // The OSD is kept always on top until you click (no timer)
   bool disable_duration_;
@@ -138,6 +143,9 @@ class OSDPretty : public QWidget {
 
   // Toggling requested, we have to show or hide the OSD
   bool toggle_mode_;
+
+  QMap<QString, QScreen*> screens_;
+
 };
 
 #endif  // OSDPRETTY_H

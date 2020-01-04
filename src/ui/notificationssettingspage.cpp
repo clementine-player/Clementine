@@ -220,7 +220,7 @@ void NotificationsSettingsPage::Save() {
   s.setValue("foreground_color", pretty_popup_->foreground_color());
   s.setValue("background_color", pretty_popup_->background_color());
   s.setValue("background_opacity", pretty_popup_->background_opacity());
-  s.setValue("popup_display", pretty_popup_->popup_display());
+  s.setValue("popup_screen", pretty_popup_->popup_screen());
   s.setValue("popup_pos", pretty_popup_->popup_pos());
   s.setValue("font", pretty_popup_->font().toString());
   s.setValue("disable_duration",

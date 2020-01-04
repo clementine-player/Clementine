@@ -81,8 +81,9 @@
 #include "internet/spotify/spotifysettingspage.h"
 #endif
 
+#include <QScreen>
+#include <QWindow>
 #include <QAbstractButton>
-#include <QDesktopWidget>
 #include <QPainter>
 #include <QPushButton>
 #include <QScrollArea>
@@ -304,10 +305,16 @@ void SettingsDialog::showEvent(QShowEvent* e) {
   loading_settings_ = false;
 
   // Resize the dialog if it's too big
-  const QSize available =
-      QApplication::desktop()->availableGeometry(this).size();
-  if (available.height() < height()) {
-    resize(width(), sizeHint().height());
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 14, 0))
+    QScreen *screen = screen();
+#else
+    QScreen *screen = (window() && window()->windowHandle() ? window()->windowHandle()->screen() : QGuiApplication::primaryScreen());
+#endif
+  if (screen) {
+    const QRect available = screen->availableGeometry();
+    if (available.height() < height()) {
+      resize(width(), sizeHint().height());
+    }
   }
 
   QDialog::showEvent(e);
