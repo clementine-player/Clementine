@@ -22,10 +22,10 @@ THE SOFTWARE.
 
 #include <AppKit/NSImage.h>
 #include <Foundation/NSString.h>
-#include <QMacCocoaViewContainer>
-#include <QString>
 #include <QImage>
+#include <QMacCocoaViewContainer>
 #include <QPixmap>
+#include <QString>
 #include <QVBoxLayout>
 
 static inline NSString* fromQString(const QString &string)
