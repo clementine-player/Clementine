@@ -329,7 +329,7 @@ void NowPlayingWidget::SetImage(const QImage& image) {
   if (visible_) {
     // Cache the current pixmap so we can fade between them
     previous_track_ = QPixmap(size());
-    previous_track_.fill(palette().background().color());
+    previous_track_.fill(palette().window().color());
     previous_track_opacity_ = 1.0;
     QPainter p(&previous_track_);
     DrawContents(&p);
