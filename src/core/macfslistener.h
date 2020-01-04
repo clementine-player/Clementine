@@ -57,7 +57,7 @@ class MacFSListener : public FileSystemWatcherInterface {
   FSEventStreamRef stream_;
 
   QSet<QString> paths_;
-  QTimer *update_timer_;
+  QTimer* update_timer_;
 };
 
 #endif  // CORE_MACFSLISTENER_H_
