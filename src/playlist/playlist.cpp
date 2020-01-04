@@ -2093,7 +2093,7 @@ void Playlist::ReshuffleIndices() {
       }
 
       // Shuffle them
-      QStringList shuffled_album_keys = album_key_set.toList();
+      QStringList shuffled_album_keys = album_key_set.values();
       std::random_shuffle(shuffled_album_keys.begin(),
                           shuffled_album_keys.end());
 

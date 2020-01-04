@@ -547,7 +547,7 @@ QString PlaylistManager::GetNameForNewPlaylist(const SongList& songs) {
   }
 
   if (!various_artists && albums.size() == 1) {
-    result += " - " + albums.toList().first();
+    result += " - " + albums.values().first();
   }
 
   return result;

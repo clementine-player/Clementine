@@ -387,7 +387,7 @@ MusicBrainzClient::ResultList MusicBrainzClient::UniqueResults(
     const ResultList& results, UniqueResultsSortOption opt) {
   ResultList ret;
   if (opt == SortResults) {
-    ret = QSet<Result>::fromList(results).toList();
+    ret = QSet<Result>::fromList(results).values();
     std::sort(ret.begin(), ret.end());
   } else {  // KeepOriginalOrder
     // Qt doesn't provide a ordered set (QSet "stores values in an unspecified
