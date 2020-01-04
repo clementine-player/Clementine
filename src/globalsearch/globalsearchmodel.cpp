@@ -145,20 +145,25 @@ QStandardItem* GlobalSearchModel::BuildContainers(const Song& s,
 
     case LibraryModel::GroupBy_Composer:
       display_text = s.composer();
+      // fallthrough
     case LibraryModel::GroupBy_Performer:
       display_text = s.performer();
+      // fallthrough
     case LibraryModel::GroupBy_Disc:
       display_text = s.disc();
+      // fallthrough
     case LibraryModel::GroupBy_Grouping:
       display_text = s.grouping();
+      // fallthrough
     case LibraryModel::GroupBy_Genre:
       if (display_text.isNull()) display_text = s.genre();
+      // fallthrough
     case LibraryModel::GroupBy_Album:
       unique_tag = s.album_id();
       if (display_text.isNull()) {
         display_text = s.album();
       }
-    // fallthrough
+      // fallthrough
     case LibraryModel::GroupBy_AlbumArtist:
       if (display_text.isNull()) display_text = s.effective_albumartist();
       display_text = LibraryModel::TextOrUnknown(display_text);
