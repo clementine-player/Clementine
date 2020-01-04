@@ -20,17 +20,17 @@
 #include "ui_osdpretty.h"
 
 #include <QApplication>
-#include <QGuiApplication>
-#include <QScreen>
-#include <QWindow>
 #include <QBitmap>
 #include <QColor>
+#include <QGuiApplication>
 #include <QLayout>
 #include <QMouseEvent>
 #include <QPainter>
+#include <QScreen>
 #include <QSettings>
-#include <QTimer>
 #include <QTimeLine>
+#include <QTimer>
+#include <QWindow>
 
 #ifdef HAVE_X11
 #include <QX11Info>
@@ -125,25 +125,23 @@ OSDPretty::OSDPretty(Mode mode, QWidget* parent)
   int margin = l->margin() + kDropShadowSize;
   l->setMargin(margin);
 
-  connect(qApp, SIGNAL(screenAdded(QScreen*)), this, SLOT(ScreenAdded(QScreen*)));
-  connect(qApp, SIGNAL(screenRemoved(QScreen*)), this, SLOT(ScreenRemoved(QScreen*)));
+  connect(qApp, SIGNAL(screenAdded(QScreen*)), this,
+          SLOT(ScreenAdded(QScreen*)));
+  connect(qApp, SIGNAL(screenRemoved(QScreen*)), this,
+          SLOT(ScreenRemoved(QScreen*)));
 
   // Don't load settings here, they will be reloaded anyway on creation
 }
 
 OSDPretty::~OSDPretty() { delete ui_; }
 
-void OSDPretty::ScreenAdded(QScreen *screen) {
-
+void OSDPretty::ScreenAdded(QScreen* screen) {
   screens_.insert(screen->name(), screen);
-
 }
 
-void OSDPretty::ScreenRemoved(QScreen *screen) {
-
+void OSDPretty::ScreenRemoved(QScreen* screen) {
   if (screens_.contains(screen->name())) screens_.remove(screen->name());
   if (screen == popup_screen_) popup_screen_ = current_screen();
-
 }
 
 bool OSDPretty::IsTransparencyAvailable() {
@@ -154,7 +152,6 @@ bool OSDPretty::IsTransparencyAvailable() {
 }
 
 void OSDPretty::Load() {
-
   QSettings s;
   s.beginGroup(kSettingsGroup);
   foreground_color_ = QColor(s.value("foreground_color", 0).toInt());
@@ -167,28 +164,26 @@ void OSDPretty::Load() {
     popup_screen_name_ = s.value("popup_screen").toString();
     if (screens_.contains(popup_screen_name_)) {
       popup_screen_ = screens_[popup_screen_name_];
-    }
-    else {
+    } else {
       popup_screen_ = current_screen();
-      if (current_screen()) popup_screen_name_ = current_screen()->name();
-      else popup_screen_name_.clear();
+      if (current_screen())
+        popup_screen_name_ = current_screen()->name();
+      else
+        popup_screen_name_.clear();
     }
-  }
-  else {
+  } else {
     popup_screen_ = current_screen();
     if (current_screen()) popup_screen_name_ = current_screen()->name();
   }
 
   if (s.contains("popup_pos")) {
     popup_pos_ = s.value("popup_pos").toPoint();
-  }
-  else {
+  } else {
     if (popup_screen_) {
       QRect geometry = popup_screen_->availableGeometry();
       popup_pos_.setX(geometry.width() - width());
       popup_pos_.setY(0);
-    }
-    else {
+    } else {
       popup_pos_.setX(0);
       popup_pos_.setY(0);
     }
@@ -198,7 +193,6 @@ void OSDPretty::Load() {
   set_foreground_color(foreground_color());
 
   s.endGroup();
-
 }
 
 void OSDPretty::ReloadSettings() {
@@ -307,9 +301,9 @@ void OSDPretty::ShowMessage(const QString& summary, const QString& message,
   }
 }
 
-void OSDPretty::showEvent(QShowEvent *e) {
+void OSDPretty::showEvent(QShowEvent* e) {
   screens_.clear();
-  for(QScreen *screen : qApp->screens()) {
+  for (QScreen* screen : qApp->screens()) {
     screens_.insert(screen->name(), screen);
   }
 
@@ -368,11 +362,10 @@ void OSDPretty::Reposition() {
   // Work out where to place the OSD.  -1 for x or y means "on the right or
   // bottom edge".
   if (popup_screen_) {
-
     QRect geometry = popup_screen_->availableGeometry();
 
     int x = popup_pos_.x() < 0 ? geometry.right() - width()
-                             : geometry.left() + popup_pos_.x();
+                               : geometry.left() + popup_pos_.x();
     int y = popup_pos_.y() < 0 ? geometry.bottom() - height()
                                : geometry.top() + popup_pos_.y();
 
@@ -431,9 +424,11 @@ void OSDPretty::mouseMoveEvent(QMouseEvent* e) {
 
     // Keep it to the bounds of the desktop
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 10, 0))
-    QScreen *screen = QGuiApplication::screenAt(e->globalPos());
+    QScreen* screen = QGuiApplication::screenAt(e->globalPos());
 #else
-    QScreen *screen = (window() && window()->windowHandle() ? window()->windowHandle()->screen() : QGuiApplication::primaryScreen());
+    QScreen* screen = (window() && window()->windowHandle()
+                           ? window()->windowHandle()->screen()
+                           : QGuiApplication::primaryScreen());
 #endif
     if (!screen) return;
     QRect geometry = screen->availableGeometry();
@@ -455,32 +450,33 @@ void OSDPretty::mouseMoveEvent(QMouseEvent* e) {
     popup_screen_ = screen;
     popup_screen_name_ = screen->name();
   }
-
 }
 
-QScreen *OSDPretty::current_screen() const {
+QScreen* OSDPretty::current_screen() const {
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 10, 0))
   return QGuiApplication::screenAt(pos());
 #else
-  return (window() && window()->windowHandle() ? window()->windowHandle()->screen() : QGuiApplication::primaryScreen());
+  return (window() && window()->windowHandle()
+              ? window()->windowHandle()->screen()
+              : QGuiApplication::primaryScreen());
 #endif
 }
 
 QPoint OSDPretty::current_pos() const {
-
   if (current_screen()) {
     QRect geometry = current_screen()->availableGeometry();
 
-    int x = pos().x() >= geometry.right() - width() ? -1
-                                                  : pos().x() - geometry.left();
-    int y = pos().y() >= geometry.bottom() - height() ? -1 : pos().y() -
-                                                               geometry.top();
+    int x = pos().x() >= geometry.right() - width()
+                ? -1
+                : pos().x() - geometry.left();
+    int y = pos().y() >= geometry.bottom() - height()
+                ? -1
+                : pos().y() - geometry.top();
 
     return QPoint(x, y);
   }
 
   return QPoint(0, 0);
-
 }
 
 void OSDPretty::set_background_color(QRgb color) {

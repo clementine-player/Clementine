@@ -18,8 +18,6 @@
 #include "prettyimage.h"
 
 #include <QApplication>
-#include <QScreen>
-#include <QWindow>
 #include <QContextMenuEvent>
 #include <QDir>
 #include <QFileDialog>
@@ -29,8 +27,10 @@
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
 #include <QPainter>
+#include <QScreen>
 #include <QScrollArea>
 #include <QSettings>
+#include <QWindow>
 #include <QtConcurrentRun>
 
 #include "core/closure.h"
@@ -198,9 +198,11 @@ void PrettyImage::ShowFullsize() {
 
   // Work out how large to make the window, based on the size of the screen
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 14, 0))
-    QScreen *screen = screen();
+  QScreen* screen = screen();
 #else
-    QScreen *screen = (window() && window()->windowHandle() ? window()->windowHandle()->screen() : QGuiApplication::primaryScreen());
+  QScreen* screen =
+      (window() && window()->windowHandle() ? window()->windowHandle()->screen()
+                                            : QGuiApplication::primaryScreen());
 #endif
   if (screen) {
     QRect desktop_rect(screen->availableGeometry());

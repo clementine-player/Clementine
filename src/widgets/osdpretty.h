@@ -18,8 +18,8 @@
 #ifndef OSDPRETTY_H
 #define OSDPRETTY_H
 
-#include <QWidget>
 #include <QMap>
+#include <QWidget>
 
 class Ui_OSDPretty;
 
@@ -76,7 +76,7 @@ class OSDPretty : public QWidget {
   // When the user has been moving the popup, use these to get its current
   // position and screen.  Note that these return invalid values if the popup
   // is hidden.
-  QScreen *current_screen() const;
+  QScreen* current_screen() const;
   QPoint current_pos() const;
 
   // QWidget
@@ -145,7 +145,6 @@ class OSDPretty : public QWidget {
   bool toggle_mode_;
 
   QMap<QString, QScreen*> screens_;
-
 };
 
 #endif  // OSDPRETTY_H

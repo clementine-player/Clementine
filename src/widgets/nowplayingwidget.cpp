@@ -18,15 +18,15 @@
 #include "nowplayingwidget.h"
 
 #include <QGuiApplication>
-#include <QScreen>
-#include <QWindow>
 #include <QMenu>
 #include <QMovie>
-#include <QPainter>
 #include <QPaintEvent>
+#include <QPainter>
+#include <QScreen>
 #include <QSettings>
 #include <QTextDocument>
 #include <QTimeLine>
+#include <QWindow>
 #include <QtDebug>
 
 #include "fullscreenhypnotoad.h"
@@ -650,9 +650,11 @@ void NowPlayingWidget::SearchCoverAutomatically() {
 
 void NowPlayingWidget::Bask() {
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 14, 0))
-  QScreen *screen = screen();
+  QScreen* screen = screen();
 #else
-  QScreen *screen = (window() && window()->windowHandle() ? window()->windowHandle()->screen() : QGuiApplication::primaryScreen());
+  QScreen* screen =
+      (window() && window()->windowHandle() ? window()->windowHandle()->screen()
+                                            : QGuiApplication::primaryScreen());
 #endif
   big_hypnotoad_.reset(new FullscreenHypnotoad);
   if (screen) big_hypnotoad_->setGeometry(screen->availableGeometry());

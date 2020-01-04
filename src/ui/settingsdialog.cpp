@@ -81,12 +81,12 @@
 #include "internet/spotify/spotifysettingspage.h"
 #endif
 
-#include <QScreen>
-#include <QWindow>
 #include <QAbstractButton>
 #include <QPainter>
 #include <QPushButton>
+#include <QScreen>
 #include <QScrollArea>
+#include <QWindow>
 
 SettingsItemDelegate::SettingsItemDelegate(QObject* parent)
     : QStyledItemDelegate(parent) {}
@@ -306,9 +306,11 @@ void SettingsDialog::showEvent(QShowEvent* e) {
 
   // Resize the dialog if it's too big
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 14, 0))
-    QScreen *screen = screen();
+  QScreen* screen = screen();
 #else
-    QScreen *screen = (window() && window()->windowHandle() ? window()->windowHandle()->screen() : QGuiApplication::primaryScreen());
+  QScreen* screen =
+      (window() && window()->windowHandle() ? window()->windowHandle()->screen()
+                                            : QGuiApplication::primaryScreen());
 #endif
   if (screen) {
     const QRect available = screen->availableGeometry();
