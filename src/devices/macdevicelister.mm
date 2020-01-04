@@ -700,7 +700,7 @@ QList<QUrl> MacDeviceLister::MakeDeviceUrls(const QString& serial) {
   if (IsMTPSerial(serial)) {
     const MTPDevice& device = mtp_devices_[serial];
     QString str;
-    str.sprintf("gphoto2://usb-%d-%d/", device.bus, device.address);
+    str = QString::asprintf("gphoto2://usb-%d-%d/", device.bus, device.address);
     QUrlQuery url_query;
     url_query.addQueryItem("vendor", device.vendor);
     url_query.addQueryItem("vendor_id", QString::number(device.vendor_id));
