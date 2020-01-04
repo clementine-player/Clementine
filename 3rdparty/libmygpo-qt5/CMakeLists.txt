@@ -19,8 +19,8 @@ set(MYGPO_QT4_QJSON_DEP "")
 # set(QT_USE_IMPORTED_TARGETS TRUE)
 
 set( MYGPO_QT_VERSION_MAJOR "1" )
-set( MYGPO_QT_VERSION_MINOR "0" )
-set( MYGPO_QT_VERSION_PATCH "8" )
+set( MYGPO_QT_VERSION_MINOR "1" )
+set( MYGPO_QT_VERSION_PATCH "0" )
 set( MYGPO_QT_VERSION "${MYGPO_QT_VERSION_MAJOR}.${MYGPO_QT_VERSION_MINOR}.${MYGPO_QT_VERSION_PATCH}" )
 
 #Configure Version.h.in with the actual version number
@@ -43,7 +43,6 @@ if (CMAKE_COMPILER_IS_GNUCXX)
         add_definitions( -Wlogical-op )
     endif()
 endif(CMAKE_COMPILER_IS_GNUCXX)
-
 
 set(MYGPO_QT_TARGET_NAME mygpo-qt${MYGPO_QT_VERSION_SUFFIX} CACHE INTERNAL "" FORCE )
 

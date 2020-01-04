@@ -116,7 +116,12 @@ toJson( const QVariant &variant, bool* ok )
     return doc.toJson( QJsonDocument::Compact );
 #else
     QJson::Serializer serializer;
-    return serializer.serialize( variant, ok );
+    QByteArray ret = serializer.serialize( variant );
+    if ( ok != NULL )
+    {
+        *ok = !ret.isNull();
+    }
+    return ret;
 #endif
 }
 
