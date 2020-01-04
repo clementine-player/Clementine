@@ -1,3 +1,5 @@
+project(clementine)
+
 cmake_minimum_required(VERSION 2.8.11)
 cmake_policy(SET CMP0011 OLD)
 cmake_policy(SET CMP0053 OLD)
