@@ -36,8 +36,8 @@ class SeafileTree : public QObject {
   Q_OBJECT
 
  public:
-  SeafileTree();
-  SeafileTree(const SeafileTree& copy);
+  explicit SeafileTree(QObject* parent = nullptr);
+  explicit SeafileTree(const SeafileTree& copy, QObject* parent = nullptr);
   ~SeafileTree();
 
   class Entry {

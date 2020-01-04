@@ -62,7 +62,7 @@ class SeafileService : public CloudFileService {
  public:
   enum ApiError { NO_ERROR = 200, NOT_FOUND = 404, TOO_MANY_REQUESTS = 429 };
 
-  SeafileService(Application* app, InternetModel* parent);
+  explicit SeafileService(Application* app, InternetModel* parent);
   ~SeafileService();
 
   static const char* kServiceName;
