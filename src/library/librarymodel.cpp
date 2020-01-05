@@ -1104,14 +1104,19 @@ LibraryItem* LibraryModel::ItemFromSong(GroupBy type, bool signal,
 
     case GroupBy_Composer:
       item->key = s.composer();
+      // fallthrough
     case GroupBy_Performer:
       item->key = s.performer();
+      // fallthrough
     case GroupBy_Grouping:
       item->key = s.grouping();
+      // fallthrough
     case GroupBy_Genre:
       if (item->key.isNull()) item->key = s.genre();
+      // fallthrough
     case GroupBy_Album:
       if (item->key.isNull()) item->key = s.album();
+      // fallthrough
     case GroupBy_AlbumArtist:
       if (item->key.isNull()) item->key = s.effective_albumartist();
       item->display_text = TextOrUnknown(item->key);
