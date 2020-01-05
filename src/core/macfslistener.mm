@@ -22,14 +22,16 @@
 #include <Foundation/NSArray.h>
 #include <Foundation/NSString.h>
 
+#include <QTimer>
+
 #include "core/logging.h"
 #include "core/scoped_nsobject.h"
 
 MacFSListener::MacFSListener(QObject* parent)
-    : FileSystemWatcherInterface(parent), run_loop_(nullptr), stream_(nullptr) {
-  update_timer_.setSingleShot(true);
-  update_timer_.setInterval(2000);
-  connect(&update_timer_, SIGNAL(timeout()), SLOT(UpdateStream()));
+    : FileSystemWatcherInterface(parent), run_loop_(nullptr), stream_(nullptr), update_timer_(new QTimer(this)) {
+  update_timer_->setSingleShot(true);
+  update_timer_->setInterval(2000);
+  connect(update_timer_, SIGNAL(timeout()), SLOT(UpdateStream()));
 }
 
 void MacFSListener::Init() { run_loop_ = CFRunLoopGetCurrent(); }
@@ -67,7 +69,7 @@ void MacFSListener::Clear() {
   UpdateStreamAsync();
 }
 
-void MacFSListener::UpdateStreamAsync() { update_timer_.start(); }
+void MacFSListener::UpdateStreamAsync() { update_timer_->start(); }
 
 void MacFSListener::UpdateStream() {
   if (stream_) {

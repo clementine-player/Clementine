@@ -24,9 +24,10 @@
 
 #include <QObject>
 #include <QSet>
-#include <QTimer>
 
 #include "filesystemwatcherinterface.h"
+
+class QTimer;
 
 class MacFSListener : public FileSystemWatcherInterface {
   Q_OBJECT
@@ -56,7 +57,7 @@ class MacFSListener : public FileSystemWatcherInterface {
   FSEventStreamRef stream_;
 
   QSet<QString> paths_;
-  QTimer update_timer_;
+  QTimer* update_timer_;
 };
 
 #endif  // CORE_MACFSLISTENER_H_
