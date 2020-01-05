@@ -19,10 +19,10 @@
 
 #include <QCoreApplication>
 #include <QDir>
+#include <QElapsedTimer>
 #include <QEventLoop>
 #include <QThread>
 #include <QtDebug>
-#include <QElapsedTimer>
 
 #include <chromaprint.h>
 
