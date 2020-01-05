@@ -19,7 +19,6 @@
 
 #include <QApplication>
 #include <QContextMenuEvent>
-#include <QDesktopWidget>
 #include <QDir>
 #include <QFileDialog>
 #include <QFuture>
@@ -28,8 +27,10 @@
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
 #include <QPainter>
+#include <QScreen>
 #include <QScrollArea>
 #include <QSettings>
+#include <QWindow>
 #include <QtConcurrentRun>
 
 #include "core/closure.h"
@@ -189,25 +190,35 @@ void PrettyImage::contextMenuEvent(QContextMenuEvent* e) {
 }
 
 void PrettyImage::ShowFullsize() {
-  // Work out how large to make the window, based on the size of the screen
-  QRect desktop_rect(QApplication::desktop()->availableGeometry(this));
-  QSize window_size(qMin(desktop_rect.width() - 20, image_.width()),
-                    qMin(desktop_rect.height() - 20, image_.height()));
 
   // Create the window
-  QScrollArea* window = new QScrollArea;
-  window->setAttribute(Qt::WA_DeleteOnClose, true);
-  window->setWindowTitle(tr("Clementine image viewer"));
-  window->resize(window_size);
+  QScrollArea* pwindow = new QScrollArea;
+  pwindow->setAttribute(Qt::WA_DeleteOnClose, true);
+  pwindow->setWindowTitle(tr("Clementine image viewer"));
+
+  // Work out how large to make the window, based on the size of the screen
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 14, 0))
+  QScreen* screen = screen();
+#else
+  QScreen* screen =
+      (window() && window()->windowHandle() ? window()->windowHandle()->screen()
+                                            : QGuiApplication::primaryScreen());
+#endif
+  if (screen) {
+    QRect desktop_rect(screen->availableGeometry());
+    QSize window_size(qMin(desktop_rect.width() - 20, image_.width()),
+                      qMin(desktop_rect.height() - 20, image_.height()));
+    pwindow->resize(window_size);
+  }
 
   // Create the label that displays the image
-  QLabel* label = new QLabel(window);
+  QLabel* label = new QLabel(pwindow);
   label->setPixmap(QPixmap::fromImage(image_));
 
   // Show the label in the window
-  window->setWidget(label);
-  window->setFrameShape(QFrame::NoFrame);
-  window->show();
+  pwindow->setWidget(label);
+  pwindow->setFrameShape(QFrame::NoFrame);
+  pwindow->show();
 }
 
 void PrettyImage::SaveAs() {
