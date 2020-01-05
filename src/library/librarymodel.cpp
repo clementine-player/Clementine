@@ -403,26 +403,7 @@ void LibraryModel::SongsDeleted(const SongList& songs) {
 
       if (node->parent != root_) parents << node->parent;
 
-      QModelIndex idx = ItemToIndex(node->parent);
-
-      // Remove from pixmap cache
-      const QString cache_key = AlbumIconPixmapCacheKey(idx);
-      QPixmapCache::remove(cache_key);
-      icon_cache_->remove(QUrl(cache_key));
-      if (pending_cache_keys_.contains(cache_key))
-        pending_cache_keys_.remove(cache_key);
-
-      // Remove from pending art loading
-      QMapIterator<quint64, ItemAndCacheKey> i(pending_art_);
-      while (i.hasNext()) {
-        i.next();
-        if (i.value().first == node) {
-          pending_art_.remove(i.key());
-          break;
-        }
-      }
-
-      beginRemoveRows(idx, node->row, node->row);
+      beginRemoveRows(ItemToIndex(node->parent), node->row, node->row);
       node->parent->Delete(node->row);
       song_nodes_.remove(song.id());
       endRemoveRows();
@@ -460,6 +441,24 @@ void LibraryModel::SongsDeleted(const SongList& songs) {
         node->parent->compilation_artist_node_ = nullptr;
       else
         container_nodes_[node->container_level].remove(node->key);
+
+      // Remove from pixmap cache
+      const QString cache_key = AlbumIconPixmapCacheKey(ItemToIndex(node));
+      QPixmapCache::remove(cache_key);
+      icon_cache_->remove(QUrl(cache_key));
+      if (pending_cache_keys_.contains(cache_key)) {
+        pending_cache_keys_.remove(cache_key);
+      }
+
+      // Remove from pending art loading
+      QMap<quint64, ItemAndCacheKey>::iterator i = pending_art_.begin();
+      while (i != pending_art_.end()) {
+        if (i.value().first == node) {
+          i = pending_art_.erase(i);
+        } else {
+          ++i;
+        }
+      }
 
       // It was empty - delete it
       beginRemoveRows(ItemToIndex(node->parent), node->row, node->row);
