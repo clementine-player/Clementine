@@ -45,6 +45,8 @@ class PodcastSettingsPage : public SettingsPage {
 
   void DownloadDirBrowse();
 
+  void GpodderAdvancedChanged(int state);
+
  private:
   Ui_PodcastSettingsPage* ui_;
 };
