@@ -18,7 +18,7 @@
 #include "ratingwidget.h"
 
 #include <QMouseEvent>
-#include <QStyleOptionFrameV3>
+#include <QStyleOptionFrame>
 #include <QStylePainter>
 #include <QtDebug>
 
@@ -120,7 +120,7 @@ void RatingWidget::paintEvent(QPaintEvent* e) {
   QStylePainter p(this);
 
   // Draw the background
-  QStyleOptionFrameV3 opt;
+  QStyleOptionFrame opt;
   opt.initFrom(this);
   opt.state |= QStyle::State_Sunken;
   opt.frameShape = QFrame::StyledPanel;
