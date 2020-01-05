@@ -24,9 +24,10 @@
 
 #include "core/logging.h"
 
-SeafileTree::SeafileTree() {}
+SeafileTree::SeafileTree(QObject* parent) : QObject(parent) {}
 
-SeafileTree::SeafileTree(const SeafileTree& copy) {
+SeafileTree::SeafileTree(const SeafileTree& copy, QObject* parent)
+    : QObject(parent) {
   libraries_ = copy.libraries();
 }
 
