@@ -273,7 +273,6 @@ QMimeData* InternetModel::mimeData(const QModelIndexList& indexes) const {
 
   QModelIndex last_valid_index;
   for (const QModelIndex& index : indexes) {
-
     if (!IsPlayable(index)) continue;
 
     last_valid_index = index;
