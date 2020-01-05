@@ -22,7 +22,7 @@
 #include <QEventLoop>
 #include <QThread>
 #include <QtDebug>
-#include <QTime>
+#include <QElapsedTimer>
 
 #include <chromaprint.h>
 
@@ -109,7 +109,7 @@ QString Chromaprinter::CreateFingerprint() {
                    GST_SEEK_TYPE_SET, 0 * GST_SECOND, GST_SEEK_TYPE_SET,
                    kPlayLengthSecs * GST_SECOND);
 
-  QTime time;
+  QElapsedTimer time;
   time.start();
 
   // Start playing
