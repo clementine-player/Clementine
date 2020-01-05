@@ -650,7 +650,7 @@ void NowPlayingWidget::SearchCoverAutomatically() {
 
 void NowPlayingWidget::Bask() {
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 14, 0))
-  QScreen* screen = screen();
+  QScreen* screen = QWidget::screen();
 #else
   QScreen* screen =
       (window() && window()->windowHandle() ? window()->windowHandle()->screen()

@@ -306,7 +306,7 @@ void SettingsDialog::showEvent(QShowEvent* e) {
 
   // Resize the dialog if it's too big
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 14, 0))
-  QScreen* screen = screen();
+  QScreen* screen = QWidget::screen();
 #else
   QScreen* screen =
       (window() && window()->windowHandle() ? window()->windowHandle()->screen()

@@ -247,7 +247,7 @@ QDialog* AlbumCoverChoiceController::ShowCoverPrivate(const Song& song) {
   // if the cover is larger than the screen, resize the window
   // 85% seems to be enough to account for title bar and taskbar etc.
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 14, 0))
-  QScreen* screen = screen();
+  QScreen* screen = QWidget::screen();
 #else
   QScreen* screen =
       (window() && window()->windowHandle() ? window()->windowHandle()->screen()
