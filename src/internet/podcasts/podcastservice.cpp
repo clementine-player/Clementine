@@ -170,7 +170,7 @@ void PodcastService::CopyToDevice(const QModelIndexList& episode_indexes,
 
   for (const QModelIndex& podcast : podcast_indexes) {
     for (int i = 0; i < podcast.model()->rowCount(podcast); ++i) {
-      const QModelIndex& index = podcast.child(i, 0);
+      const QModelIndex& index = podcast.model()->index(i, 0, podcast);
       episode_tmp = index.data(Role_Episode).value<PodcastEpisode>();
       if (episode_tmp.downloaded() && !episode_tmp.listened())
         episodes << episode_tmp;
@@ -204,7 +204,7 @@ void PodcastService::CancelDownload(const QModelIndexList& episode_indexes,
 
   for (const QModelIndex& podcast : podcast_indexes) {
     for (int i = 0; i < podcast.model()->rowCount(podcast); ++i) {
-      const QModelIndex& index = podcast.child(i, 0);
+      const QModelIndex& index = podcast.model()->index(i, 0, podcast);
       episode_tmp = index.data(Role_Episode).value<PodcastEpisode>();
       episodes << episode_tmp;
     }
@@ -803,7 +803,7 @@ void PodcastService::SetListened(const QModelIndexList& episode_indexes,
 
   for (const QModelIndex& podcast : podcast_indexes) {
     for (int i = 0; i < podcast.model()->rowCount(podcast); ++i) {
-      const QModelIndex& index = podcast.child(i, 0);
+      const QModelIndex& index = podcast.model()->index(i, 0, podcast);
       episodes << index.data(Role_Episode).value<PodcastEpisode>();
     }
   }

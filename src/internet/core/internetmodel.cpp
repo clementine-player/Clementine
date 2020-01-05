@@ -273,6 +273,7 @@ QMimeData* InternetModel::mimeData(const QModelIndexList& indexes) const {
 
   QModelIndex last_valid_index;
   for (const QModelIndex& index : indexes) {
+
     if (!IsPlayable(index)) continue;
 
     last_valid_index = index;
@@ -280,11 +281,12 @@ QMimeData* InternetModel::mimeData(const QModelIndexList& indexes) const {
       // Get children
       int row = 0;
       int column = 0;
-      QModelIndex child = index.child(row, column);
+      QModelIndex child = index.model()->index(row, column, index);
       while (child.isValid()) {
         new_indexes << child;
         urls << child.data(Role_Url).toUrl();
-        child = index.child(++row, column);
+        QModelIndex child_prev = child;
+        child = index.model()->index(++row, column, child_prev);
       }
     } else {
       new_indexes = indexes;
