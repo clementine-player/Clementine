@@ -344,14 +344,14 @@ void GPodderSync::FlushUpdateQueue() {
 
   flushing_queue_ = true;
   mygpo::AddRemoveResultPtr reply(api_->addRemoveSubscriptions(
-      username_, DeviceId(), queued_add_subscriptions_.toList(),
-      queued_remove_subscriptions_.toList()));
+      username_, DeviceId(), queued_add_subscriptions_.values(),
+      queued_remove_subscriptions_.values()));
 
   qLog(Info) << "Sending" << all_urls.count() << "changes to gpodder.net";
 
   NewClosure(reply, SIGNAL(finished()), this,
              SLOT(AddRemoveFinished(mygpo::AddRemoveResultPtr, QList<QUrl>)),
-             reply, all_urls.toList());
+             reply, all_urls.values());
   connect(reply.data(), SIGNAL(parseError()), SLOT(AddRemoveParseError()));
   connect(reply.data(), SIGNAL(requestError(QNetworkReply::NetworkError)),
           SLOT(AddRemoveRequestError(QNetworkReply::NetworkError)));

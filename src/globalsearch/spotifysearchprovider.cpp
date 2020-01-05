@@ -264,7 +264,7 @@ QStringList SpotifySearchProvider::GetSuggestions(int count) {
     return QStringList();
   }
 
-  QStringList all_suggestions = suggestions_.toList();
+  QStringList all_suggestions = suggestions_.values();
 
   std::mt19937 gen(std::time(0));
   std::uniform_int_distribution<> random(0, all_suggestions.size() - 1);
