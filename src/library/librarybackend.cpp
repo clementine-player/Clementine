@@ -823,8 +823,7 @@ void LibraryBackend::UpdateCompilations(const QSqlDatabase& db,
   QSqlQuery find_song(db);
   find_song.prepare(QString("SELECT ROWID, " + Song::kColumnSpec +
                             " FROM %1"
-                            " WHERE filename = :filename AND sampler = "
-                            ":sampler AND unavailable = 0")
+                            " WHERE filename = :filename AND unavailable = 0")
                         .arg(songs_table_));
 
   QSqlQuery update_song(db);
@@ -838,7 +837,6 @@ void LibraryBackend::UpdateCompilations(const QSqlDatabase& db,
 
   // Get song, so we can tell the model its updated
   find_song.bindValue(":filename", url.toEncoded());
-  find_song.bindValue(":sampler", int(!sampler));
   find_song.exec();
   while (find_song.next()) {
     Song song;
