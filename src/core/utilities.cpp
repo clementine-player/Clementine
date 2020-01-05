@@ -98,10 +98,11 @@ QString PrettyTime(int seconds, bool always_show_hours) {
 
   QString ret;
   if (hours || always_show_hours)
-    ret.sprintf("%d:%02d:%02d", hours, minutes,
-                seconds);  // NOLINT(runtime/printf)
+    ret = QString::asprintf("%d:%02d:%02d", hours, minutes,
+                            seconds);  // NOLINT(runtime/printf)
   else
-    ret.sprintf("%d:%02d", minutes, seconds);  // NOLINT(runtime/printf)
+    ret = QString::asprintf("%d:%02d", minutes,
+                            seconds);  // NOLINT(runtime/printf)
 
   return ret;
 }
@@ -165,15 +166,18 @@ QString PrettySize(quint64 bytes) {
     if (bytes <= 1000)
       ret = QString::number(bytes) + " bytes";
     else if (bytes <= 1000 * 1000)
-      ret.sprintf("%.1f KB",
-                  static_cast<float>(bytes) / 1000);  // NOLINT(runtime/printf)
+      ret = QString::asprintf(
+          "%.1f KB",
+          static_cast<float>(bytes) / 1000);  // NOLINT(runtime/printf)
     else if (bytes <= 1000 * 1000 * 1000)
-      ret.sprintf("%.1f MB", static_cast<float>(bytes) /
-                                 (1000 * 1000));  // NOLINT(runtime/printf)
+      ret = QString::asprintf(
+          "%.1f MB",
+          static_cast<float>(bytes) / (1000 * 1000));  // NOLINT(runtime/printf)
     else
-      ret.sprintf("%.1f GB",
-                  static_cast<float>(bytes) /
-                      (1000 * 1000 * 1000));  // NOLINT(runtime/printf)
+      ret = QString::asprintf(
+          "%.1f GB",
+          static_cast<float>(bytes) /
+              (1000 * 1000 * 1000));  // NOLINT(runtime/printf)
   }
   return ret;
 }

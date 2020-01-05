@@ -159,7 +159,7 @@ void PlaybackSettingsPage::Save() {
 void PlaybackSettingsPage::RgPreampChanged(int value) {
   float db = float(value) / 10 - 15;
   QString db_str;
-  db_str.sprintf("%+.1f dB", db);
+  db_str = QString::asprintf("%+.1f dB", db);
   ui_->replaygain_preamp_label->setText(db_str);
 }
 
