@@ -2288,8 +2288,6 @@ void MainWindow::CommandlineOptionsReceived(const CommandlineOptions& options) {
   if (options.play_track_at() != -1)
     app_->player()->PlayAt(options.play_track_at(), Engine::Manual, true);
 
-  qLog(Debug) << options.delete_current_track();
-
   // Just pass the url of the currently playing
   if (options.delete_current_track()) {
     qLog(Debug) << "deleting current track";
