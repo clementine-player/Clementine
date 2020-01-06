@@ -452,7 +452,7 @@ void PlaylistListContainer::RecursivelyFindPlaylists(const QModelIndex& parent,
 
     case PlaylistListModel::Type_Folder:
       for (int i = 0; i < parent.model()->rowCount(parent); ++i) {
-        RecursivelyFindPlaylists(parent.child(i, 0), ids);
+        RecursivelyFindPlaylists(parent.model()->index(i, 0, parent), ids);
       }
       break;
   }

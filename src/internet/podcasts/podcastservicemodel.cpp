@@ -79,7 +79,7 @@ void PodcastServiceModel::MimeDataForPodcast(const QModelIndex& index,
   const int children = index.model()->rowCount(index);
   for (int i = 0; i < children; ++i) {
     QVariant episode_variant =
-        index.child(i, 0).data(PodcastService::Role_Episode);
+        index.model()->index(i, 0, index).data(PodcastService::Role_Episode);
     if (!episode_variant.isValid()) continue;
 
     PodcastEpisode episode(episode_variant.value<PodcastEpisode>());
