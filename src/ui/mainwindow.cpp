@@ -955,8 +955,8 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
           SLOT(ShuffleModeChanged(PlaylistSequence::ShuffleMode)));
 
 #ifdef HAVE_LIBLASTFM
-  connect(app_->scrobbler(), SIGNAL(ScrobbleSubmitted()),
-          SLOT(ScrobbleSubmitted()));
+  connect(app_->scrobbler(), SIGNAL(CachedToScrobble()),
+          SLOT(CachedToScrobble()));
   connect(app_->scrobbler(), SIGNAL(ScrobbleError(int)),
           SLOT(ScrobbleError(int)));
 
@@ -1512,8 +1512,7 @@ void MainWindow::UpdateTrackPosition() {
     if (playlist->get_lastfm_status() == Playlist::LastFM_New) {
       if (app_->scrobbler()->IsScrobblingEnabled() &&
           app_->scrobbler()->IsAuthenticated()) {
-        qLog(Info) << "Scrobbling at" << scrobble_point;
-        app_->scrobbler()->Scrobble();
+        app_->scrobbler()->CacheSong(scrobble_point);
       }
     }
   }
@@ -2911,7 +2910,7 @@ void MainWindow::SetToggleScrobblingIcon(bool value) {
 }
 
 #ifdef HAVE_LIBLASTFM
-void MainWindow::ScrobbleSubmitted() {
+void MainWindow::CachedToScrobble() {
   const bool last_fm_enabled = ui_->action_toggle_scrobbling->isVisible() &&
                                app_->scrobbler()->IsScrobblingEnabled() &&
                                app_->scrobbler()->IsAuthenticated();

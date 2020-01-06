@@ -296,6 +296,10 @@ void Player::RestartOrPrevious() {
 }
 
 void Player::Stop(bool stop_after) {
+#ifdef HAVE_LIBLASTFM
+  lastfm_->Scrobble();
+#endif
+
   engine_->Stop(stop_after);
   app_->playlist_manager()->active()->set_current_row(-1);
   current_item_.reset();
@@ -432,6 +436,7 @@ void Player::CurrentMetadataChanged(const Song& metadata) {
   engine_->RefreshMarkers(metadata.beginning_nanosec(), metadata.end_nanosec());
 
 #ifdef HAVE_LIBLASTFM
+  lastfm_->Scrobble();
   lastfm_->NowPlaying(metadata);
 #endif
 }

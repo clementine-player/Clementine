@@ -41,6 +41,7 @@ class Scrobbler : public QObject {
   virtual void Love() = 0;
   virtual void ToggleScrobbling() = 0;
   virtual void ShowConfig() = 0;
+  virtual void CacheSong(int scrobble_point) = 0;
 
  signals:
   void AuthenticationComplete(bool success, const QString& error_message);

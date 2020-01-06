@@ -75,6 +75,7 @@ class LastFMService : public Scrobbler {
 
  public slots:
   void NowPlaying(const Song& song);
+  void CacheSong(int scrobble_point);
   void Scrobble();
   void Love();
   void Ban();
@@ -87,7 +88,7 @@ signals:
   void ButtonVisibilityChanged(bool value);
   void ScrobbleButtonVisibilityChanged(bool value);
   void PreferAlbumArtistChanged(bool value);
-  void ScrobbleSubmitted();
+  void CachedToScrobble();
   void ScrobbleError(int value);
   void UpdatedSubscriberStatus(bool is_subscriber);
   void ScrobbledRadioStream();
@@ -111,7 +112,7 @@ signals:
   std::unique_ptr<lastfm::Audioscrobbler> scrobbler_;
   lastfm::Track last_track_;
   lastfm::Track next_metadata_;
-  bool already_scrobbled_;
+  bool already_cached_to_scrobble_{false};
 
   QUrl last_url_;
 
