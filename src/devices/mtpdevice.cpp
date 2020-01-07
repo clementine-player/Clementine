@@ -69,6 +69,7 @@ void MtpDevice::LoadFinished(bool success) {
   loader_->deleteLater();
   loader_ = nullptr;
   db_busy_.unlock();
+  loader_thread_->quit();
   emit ConnectFinished(unique_id_, success);
 }
 
