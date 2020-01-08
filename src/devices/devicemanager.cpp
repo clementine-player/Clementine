@@ -586,6 +586,7 @@ void DeviceManager::DeviceConnectFinished(const QString& id, bool success) {
     emit DeviceConnected(idx);
   } else {
     info->device_.reset();
+    emit dataChanged(idx, idx);
   }
 }
 

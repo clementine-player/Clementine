@@ -264,6 +264,13 @@ void DeviceProperties::OpenDevice() { manager_->Connect(index_); }
 void DeviceProperties::UpdateFormatsFinished(QFuture<bool> future) {
   updating_formats_ = false;
 
+  // Check if the device was disconnected while the thread was running. In that
+  // case, ModelChanged would be called and the not connected page would be
+  // shown.
+  if (!manager_->IsConnected(index_)) {
+    return;
+  }
+
   if (!future.result()) {
     supported_formats_.clear();
   }

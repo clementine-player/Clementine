@@ -87,6 +87,9 @@ class DeviceManager : public SimpleTreeModel<DeviceInfo> {
   void Disconnect(QModelIndex idx);
   void Forget(QModelIndex idx);
   void UnmountAsync(QModelIndex idx);
+  bool IsConnected(QModelIndex idx) {
+    return GetConnectedDevice(idx) != nullptr;
+  }
 
   void SetDeviceOptions(QModelIndex idx, const QString& friendly_name,
                         const QString& icon_name,
