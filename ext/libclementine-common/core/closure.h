@@ -58,10 +58,14 @@ class ObjectHelper : public QObject {
  public:
   ObjectHelper(QObject* parent, const char* signal, ClosureBase* closure);
 
+ public slots:
+  void TearDown();
+
  private slots:
   void Invoked();
 
  private:
+  QMetaObject::Connection connection_;
   std::unique_ptr<ClosureBase> closure_;
   Q_DISABLE_COPY(ObjectHelper)
 };
@@ -97,8 +101,11 @@ class Closure : public ClosureBase {
     const int index = meta_receiver->indexOfSlot(normalised_slot.constData());
     Q_ASSERT(index != -1);
     slot_ = meta_receiver->method(index);
-    QObject::connect(receiver_, SIGNAL(destroyed()), helper_,
-                     SLOT(deleteLater()));
+    // Use a direct connection to insure that this is called immediately when
+    // the sender is destroyed. This will run on the signal thread, so TearDown
+    // must be thread safe.
+    QObject::connect(receiver_, SIGNAL(destroyed()), helper_, SLOT(TearDown()),
+                     Qt::DirectConnection);
   }
 
   virtual void Invoke() { function_(); }
