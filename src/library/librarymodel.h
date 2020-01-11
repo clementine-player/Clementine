@@ -21,6 +21,7 @@
 #include <QAbstractItemModel>
 #include <QIcon>
 #include <QNetworkDiskCache>
+#include <QThreadPool>
 
 #include "libraryitem.h"
 #include "libraryquery.h"
@@ -291,6 +292,8 @@ signals:
   QIcon playlist_icon_;
 
   QNetworkDiskCache* icon_cache_;
+
+  QThreadPool thread_pool_;
 
   int init_task_id_;
 
