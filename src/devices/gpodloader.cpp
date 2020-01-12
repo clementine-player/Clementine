@@ -28,7 +28,7 @@
 #include <QtDebug>
 
 GPodLoader::GPodLoader(const QString& mount_point, TaskManager* task_manager,
-                       LibraryBackend* backend,
+                       std::shared_ptr<LibraryBackend> backend,
                        std::shared_ptr<ConnectedDevice> device)
     : QObject(nullptr),
       device_(device),

@@ -90,11 +90,12 @@ JamendoService::JamendoService(Application* app, InternetModel* parent)
       load_database_task_id_(0),
       total_song_count_(0),
       accepted_download_(false) {
-  library_backend_ = new LibraryBackend;
+  library_backend_.reset(new LibraryBackend,
+                         [](QObject* obj) { obj->deleteLater(); });
   library_backend_->moveToThread(app_->database()->thread());
   library_backend_->Init(app_->database(), kSongsTable, QString(), QString(),
                          kFtsTable);
-  connect(library_backend_, SIGNAL(TotalSongCountUpdated(int)),
+  connect(library_backend_.get(), SIGNAL(TotalSongCountUpdated(int)),
           SLOT(UpdateTotalSongCount(int)));
 
   using smart_playlists::Generator;
@@ -134,7 +135,7 @@ JamendoService::JamendoService(Application* app, InternetModel* parent)
   library_sort_model_->sort(0);
 
   search_provider_ = new LibrarySearchProvider(
-      library_backend_, tr("Jamendo"), "jamendo",
+      library_backend_.get(), tr("Jamendo"), "jamendo",
       IconLoader::Load("jamendo", IconLoader::Provider), false, app_, this);
   app_->global_search()->AddProvider(search_provider_);
   connect(app_->global_search(),
@@ -234,9 +235,9 @@ void JamendoService::ParseDirectory(QIODevice* device) const {
   int total_count = 0;
 
   // Bit of a hack: don't update the model while we're parsing the xml
-  disconnect(library_backend_, SIGNAL(SongsDiscovered(SongList)),
+  disconnect(library_backend_.get(), SIGNAL(SongsDiscovered(SongList)),
              library_model_, SLOT(SongsDiscovered(SongList)));
-  disconnect(library_backend_, SIGNAL(TotalSongCountUpdated(int)), this,
+  disconnect(library_backend_.get(), SIGNAL(TotalSongCountUpdated(int)), this,
              SLOT(UpdateTotalSongCount(int)));
 
   // Delete the database and recreate it.  This is faster than dropping tables
@@ -271,9 +272,9 @@ void JamendoService::ParseDirectory(QIODevice* device) const {
   library_backend_->AddOrUpdateSongs(songs);
   InsertTrackIds(track_ids);
 
-  connect(library_backend_, SIGNAL(SongsDiscovered(SongList)), library_model_,
-          SLOT(SongsDiscovered(SongList)));
-  connect(library_backend_, SIGNAL(TotalSongCountUpdated(int)),
+  connect(library_backend_.get(), SIGNAL(SongsDiscovered(SongList)),
+          library_model_, SLOT(SongsDiscovered(SongList)));
+  connect(library_backend_.get(), SIGNAL(TotalSongCountUpdated(int)),
           SLOT(UpdateTotalSongCount(int)));
 
   library_backend_->UpdateTotalSongCount();

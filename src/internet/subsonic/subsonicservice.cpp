@@ -81,11 +81,12 @@ SubsonicService::SubsonicService(Application* app, InternetModel* parent)
 
   connect(scanner_, SIGNAL(ScanFinished()), SLOT(ReloadDatabaseFinished()));
 
-  library_backend_ = new LibraryBackend;
+  library_backend_.reset(new LibraryBackend,
+                         [](QObject* obj) { obj->deleteLater(); });
   library_backend_->moveToThread(app_->database()->thread());
   library_backend_->Init(app_->database(), kSongsTable, QString(), QString(),
                          kFtsTable);
-  connect(library_backend_, SIGNAL(TotalSongCountUpdated(int)),
+  connect(library_backend_.get(), SIGNAL(TotalSongCountUpdated(int)),
           SLOT(UpdateTotalSongCount(int)));
 
   using smart_playlists::Generator;
@@ -147,7 +148,7 @@ SubsonicService::SubsonicService(Application* app, InternetModel* parent)
   library_filter_->AddMenuAction(config_action);
 
   app_->global_search()->AddProvider(new LibrarySearchProvider(
-      library_backend_, tr("Subsonic"), "subsonic",
+      library_backend_.get(), tr("Subsonic"), "subsonic",
       IconLoader::Load("subsonic", IconLoader::Provider), true, app_, this));
 }
 

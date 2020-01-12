@@ -79,7 +79,7 @@ signals:
   QStandardItem* root_;
   NetworkAccessManager* network_;
 
-  LibraryBackend* library_backend_;
+  std::shared_ptr<LibraryBackend> library_backend_;
   LibraryModel* library_model_;
   QSortFilterProxyModel* library_sort_model_;
 

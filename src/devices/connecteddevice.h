@@ -84,7 +84,7 @@ signals:
   int database_id_;
   DeviceManager* manager_;
 
-  LibraryBackend* backend_;
+  std::shared_ptr<LibraryBackend> backend_;
   LibraryModel* model_;
 
   int song_count_;

@@ -18,6 +18,8 @@
 #ifndef LIBRARYMODEL_H
 #define LIBRARYMODEL_H
 
+#include <memory>
+
 #include <QAbstractItemModel>
 #include <QIcon>
 #include <QNetworkDiskCache>
@@ -49,7 +51,7 @@ class LibraryModel : public SimpleTreeModel<LibraryItem> {
   Q_ENUMS(GroupBy)
 
  public:
-  LibraryModel(LibraryBackend* backend, Application* app,
+  LibraryModel(std::shared_ptr<LibraryBackend> backend, Application* app,
                QObject* parent = nullptr);
   ~LibraryModel();
 
@@ -117,7 +119,7 @@ class LibraryModel : public SimpleTreeModel<LibraryItem> {
     bool create_va;
   };
 
-  LibraryBackend* backend() const { return backend_; }
+  LibraryBackend* backend() const { return backend_.get(); }
   LibraryDirectoryModel* directory_model() const { return dir_model_; }
 
   typedef QList<smart_playlists::GeneratorPtr> GeneratorList;
@@ -259,7 +261,7 @@ signals:
   bool CompareItems(const LibraryItem* a, const LibraryItem* b) const;
 
  private:
-  LibraryBackend* backend_;
+  std::shared_ptr<LibraryBackend> backend_;
   Application* app_;
   LibraryDirectoryModel* dir_model_;
   bool show_smart_playlists_;

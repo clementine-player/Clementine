@@ -22,6 +22,8 @@
 #ifndef INTERNET_SUBSONIC_SUBSONICSERVICE_H_
 #define INTERNET_SUBSONIC_SUBSONICSERVICE_H_
 
+#include <memory>
+
 #include <QQueue>
 
 #include "internet/core/internetmodel.h"
@@ -143,7 +145,7 @@ signals:
   QMenu* context_menu_;
   QStandardItem* root_;
 
-  LibraryBackend* library_backend_;
+  std::shared_ptr<LibraryBackend> library_backend_;
   LibraryModel* library_model_;
   LibraryFilterWidget* library_filter_;
   QSortFilterProxyModel* library_sort_model_;
