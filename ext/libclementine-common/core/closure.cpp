@@ -37,8 +37,15 @@ ObjectHelper* ClosureBase::helper() const { return helper_; }
 ObjectHelper::ObjectHelper(QObject* sender, const char* signal,
                            ClosureBase* closure)
     : closure_(closure) {
-  connect(sender, signal, SLOT(Invoked()));
-  connect(sender, SIGNAL(destroyed()), SLOT(deleteLater()));
+  connection_ = connect(sender, signal, SLOT(Invoked()));
+  connect(sender, SIGNAL(destroyed()), SLOT(TearDown()));
+}
+
+void ObjectHelper::TearDown() {
+  // For the case that the receiver has been destroyed, disconnect the signal
+  // so that Invoke isn't called.
+  disconnect(connection_);
+  deleteLater();
 }
 
 void ObjectHelper::Invoked() {
