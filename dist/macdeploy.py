@@ -108,6 +108,7 @@ QT_PLUGINS = [
     #'imageformats/libqmng.dylib',
     'imageformats/libqsvg.dylib',
     'platforms/libqcocoa.dylib',
+    'styles/libqmacstyle.dylib',
 ]
 QT_PLUGINS_SEARCH_PATH = [
     '/usr/local/opt/qt5/plugins',
