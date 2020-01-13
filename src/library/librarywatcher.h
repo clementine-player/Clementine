@@ -68,6 +68,8 @@ signals:
 
   void ScanStarted(int task_id);
 
+  void Error(const QString& message);
+
  public slots:
   void ReloadSettings();
   void AddDirectory(const Directory& dir, const SubdirectoryList& subdirs);

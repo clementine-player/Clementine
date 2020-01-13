@@ -588,11 +588,34 @@ uint LibraryWatcher::GetMtimeForCue(const QString& cue_path) {
 }
 
 void LibraryWatcher::AddWatch(const Directory& dir, const QString& path) {
-  if (!QFile::exists(path)) return;
+  QFileInfo info(path);
+  if (!info.exists() || !info.isReadable()) return;
 
   connect(fs_watcher_, SIGNAL(PathChanged(const QString&)), this,
           SLOT(DirectoryChanged(const QString&)), Qt::UniqueConnection);
-  fs_watcher_->AddPath(path);
+  if (!fs_watcher_->AddPath(path)) {
+    // Since this may be a system error, don't spam the user.
+    static int errCount = 0;
+    if (errCount++ == 0) {
+#ifdef Q_OS_LINUX
+      // The Linux implementation of QFileSystemWatcher utilizes inotify, so
+      // the limit in /proc/sys/fs/inotify/max_user_watches may be a problem
+      // in large libraries.
+      const char* fmt =
+          "Failed to watch %1\n"
+          "On a Linux system, this may be due to the inotify max_user_watches "
+          "limit.\n\n"
+          "This error will not be shown again during this session.";
+#else
+      const char* fmt =
+          "Failed to watch %1 for unknown reasons.\n\n"
+          "This error will not be shown again during this session.";
+#endif
+      emit Error(tr(fmt).arg(path));
+    }
+    return;
+  }
+
   subdir_mapping_[path] = dir;
 }
 

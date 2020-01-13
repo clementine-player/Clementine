@@ -161,6 +161,7 @@ void Library::Init() {
           backend_.get(), SLOT(AddOrUpdateSubdirs(SubdirectoryList)));
   connect(watcher_, SIGNAL(CompilationsNeedUpdating()), backend_.get(),
           SLOT(UpdateCompilations()));
+  connect(watcher_, &LibraryWatcher::Error, app_, &Application::AddError);
   connect(app_->playlist_manager(), SIGNAL(CurrentSongChanged(Song)),
           SLOT(CurrentSongChanged(Song)));
   connect(app_->player(), SIGNAL(Stopped()), SLOT(Stopped()));
