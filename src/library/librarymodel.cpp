@@ -88,6 +88,7 @@ LibraryModel::LibraryModel(LibraryBackend* backend, Application* app,
       playlists_dir_icon_(IconLoader::Load("folder-sound", IconLoader::Base)),
       playlist_icon_(IconLoader::Load("x-clementine-albums", IconLoader::Base)),
       icon_cache_(new QNetworkDiskCache(this)),
+      thread_pool_(this),
       init_task_id_(-1),
       use_pretty_covers_(false),
       show_dividers_(true) {
@@ -129,7 +130,10 @@ LibraryModel::LibraryModel(LibraryBackend* backend, Application* app,
   backend_->UpdateTotalSongCountAsync();
 }
 
-LibraryModel::~LibraryModel() { delete root_; }
+LibraryModel::~LibraryModel() {
+  thread_pool_.waitForDone();
+  delete root_;
+}
 
 void LibraryModel::set_pretty_covers(bool use_pretty_covers) {
   if (use_pretty_covers != use_pretty_covers_) {
@@ -769,7 +773,7 @@ void LibraryModel::LazyPopulate(LibraryItem* parent, bool signal) {
 
 void LibraryModel::ResetAsync() {
   QFuture<LibraryModel::QueryResult> future =
-      QtConcurrent::run(this, &LibraryModel::RunQuery, root_);
+      QtConcurrent::run(&thread_pool_, this, &LibraryModel::RunQuery, root_);
   NewClosure(future, this,
              SLOT(ResetAsyncQueryFinished(QFuture<LibraryModel::QueryResult>)),
              future);
