@@ -53,7 +53,7 @@ class JamendoService : public InternetService {
 
   QWidget* HeaderWidget() const;
 
-  LibraryBackend* library_backend() const { return library_backend_; }
+  LibraryBackend* library_backend() const { return library_backend_.get(); }
 
   static const char* kServiceName;
   static const char* kDirectoryUrl;
@@ -110,7 +110,7 @@ class JamendoService : public InternetService {
   QAction* album_info_;
   QAction* download_album_;
 
-  LibraryBackend* library_backend_;
+  std::shared_ptr<LibraryBackend> library_backend_;
   LibraryFilterWidget* library_filter_;
   LibraryModel* library_model_;
   QSortFilterProxyModel* library_sort_model_;

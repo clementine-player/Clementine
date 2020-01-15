@@ -31,7 +31,8 @@ class MtpLoader : public QObject {
   Q_OBJECT
 
  public:
-  MtpLoader(const QUrl& url, TaskManager* task_manager, LibraryBackend* backend,
+  MtpLoader(const QUrl& url, TaskManager* task_manager,
+            std::shared_ptr<LibraryBackend> backend,
             std::shared_ptr<ConnectedDevice> device);
   ~MtpLoader();
 
@@ -52,7 +53,7 @@ signals:
 
   QUrl url_;
   TaskManager* task_manager_;
-  LibraryBackend* backend_;
+  std::shared_ptr<LibraryBackend> backend_;
 };
 
 #endif  // MTPLOADER_H

@@ -89,13 +89,14 @@ MagnatuneService::MagnatuneService(Application* app, InternetModel* parent)
       total_song_count_(0),
       network_(new NetworkAccessManager(this)) {
   // Create the library backend in the database thread
-  library_backend_ = new LibraryBackend;
+  library_backend_.reset(new LibraryBackend,
+                         [](QObject* obj) { obj->deleteLater(); });
   library_backend_->moveToThread(app_->database()->thread());
   library_backend_->Init(app_->database(), kSongsTable, QString(), QString(),
                          kFtsTable);
   library_model_ = new LibraryModel(library_backend_, app_, this);
 
-  connect(library_backend_, SIGNAL(TotalSongCountUpdated(int)),
+  connect(library_backend_.get(), SIGNAL(TotalSongCountUpdated(int)),
           SLOT(UpdateTotalSongCount(int)));
 
   library_sort_model_->setSourceModel(library_model_);
@@ -106,9 +107,8 @@ MagnatuneService::MagnatuneService(Application* app, InternetModel* parent)
 
   app_->player()->RegisterUrlHandler(url_handler_);
   app_->global_search()->AddProvider(new LibrarySearchProvider(
-      library_backend_, tr("Magnatune"), "magnatune",
-      IconLoader::Load("magnatune", IconLoader::Provider), 
-      true, app_, this));
+      library_backend_.get(), tr("Magnatune"), "magnatune",
+      IconLoader::Load("magnatune", IconLoader::Provider), true, app_, this));
 }
 
 MagnatuneService::~MagnatuneService() { delete context_menu_; }

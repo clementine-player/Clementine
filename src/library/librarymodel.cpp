@@ -74,12 +74,12 @@ static bool IsCompilationArtistNode(const LibraryItem* node) {
   return node == node->parent->compilation_artist_node_;
 }
 
-LibraryModel::LibraryModel(LibraryBackend* backend, Application* app,
-                           QObject* parent)
+LibraryModel::LibraryModel(std::shared_ptr<LibraryBackend> backend,
+                           Application* app, QObject* parent)
     : SimpleTreeModel<LibraryItem>(new LibraryItem(this), parent),
       backend_(backend),
       app_(app),
-      dir_model_(new LibraryDirectoryModel(backend, this)),
+      dir_model_(new LibraryDirectoryModel(backend.get(), this)),
       show_smart_playlists_(false),
       show_various_artists_(true),
       total_song_count_(0),
@@ -115,16 +115,16 @@ LibraryModel::LibraryModel(LibraryBackend* backend, Application* app,
                            Qt::KeepAspectRatio,
                            Qt::SmoothTransformation);
 
-  connect(backend_, SIGNAL(SongsDiscovered(SongList)),
+  connect(backend_.get(), SIGNAL(SongsDiscovered(SongList)),
           SLOT(SongsDiscovered(SongList)));
-  connect(backend_, SIGNAL(SongsDeleted(SongList)),
+  connect(backend_.get(), SIGNAL(SongsDeleted(SongList)),
           SLOT(SongsDeleted(SongList)));
-  connect(backend_, SIGNAL(SongsStatisticsChanged(SongList)),
+  connect(backend_.get(), SIGNAL(SongsStatisticsChanged(SongList)),
           SLOT(SongsSlightlyChanged(SongList)));
-  connect(backend_, SIGNAL(SongsRatingChanged(SongList)),
+  connect(backend_.get(), SIGNAL(SongsRatingChanged(SongList)),
           SLOT(SongsSlightlyChanged(SongList)));
-  connect(backend_, SIGNAL(DatabaseReset()), SLOT(Reset()));
-  connect(backend_, SIGNAL(TotalSongCountUpdated(int)),
+  connect(backend_.get(), SIGNAL(DatabaseReset()), SLOT(Reset()));
+  connect(backend_.get(), SIGNAL(TotalSongCountUpdated(int)),
           SLOT(TotalSongCountUpdatedSlot(int)));
 
   backend_->UpdateTotalSongCountAsync();
@@ -1269,7 +1269,7 @@ QMimeData* LibraryModel::mimeData(const QModelIndexList& indexes) const {
   QList<QUrl> urls;
   QSet<int> song_ids;
 
-  data->backend = backend_;
+  data->backend = backend_.get();
 
   for (const QModelIndex& index : indexes) {
     GetChildSongs(IndexToItem(index), &urls, &data->songs, &song_ids);

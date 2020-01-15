@@ -18,6 +18,8 @@
 #ifndef LIBRARY_H
 #define LIBRARY_H
 
+#include <memory>
+
 #include <QHash>
 #include <QObject>
 #include <QUrl>
@@ -46,7 +48,7 @@ class Library : public QObject {
 
   void Init();
 
-  LibraryBackend* backend() const { return backend_; }
+  LibraryBackend* backend() const { return backend_.get(); }
   LibraryModel* model() const { return model_; }
 
   QString full_rescan_reason(int schema_version) const {
@@ -76,7 +78,7 @@ class Library : public QObject {
 
  private:
   Application* app_;
-  LibraryBackend* backend_;
+  std::shared_ptr<LibraryBackend> backend_;
   LibraryModel* model_;
 
   LibraryWatcher* watcher_;

@@ -26,7 +26,7 @@
 #include "library/librarybackend.h"
 
 MtpLoader::MtpLoader(const QUrl& url, TaskManager* task_manager,
-                     LibraryBackend* backend,
+                     std::shared_ptr<LibraryBackend> backend,
                      std::shared_ptr<ConnectedDevice> device)
     : QObject(nullptr),
       device_(device),

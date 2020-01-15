@@ -43,7 +43,7 @@ Library::Library(Application* app, QObject* parent)
       watcher_thread_(nullptr),
       save_statistics_in_files_(false),
       save_ratings_in_files_(false) {
-  backend_ = new LibraryBackend;
+  backend_.reset(new LibraryBackend);
   backend()->moveToThread(app->database()->thread());
 
   backend_->Init(app->database(), kSongsTable, kDirsTable, kSubdirsTable,
@@ -135,30 +135,31 @@ void Library::Init() {
   watcher_->moveToThread(watcher_thread_);
   watcher_thread_->start(QThread::IdlePriority);
 
-  watcher_->set_backend(backend_);
+  watcher_->set_backend(backend_.get());
   watcher_->set_task_manager(app_->task_manager());
 
-  connect(backend_, SIGNAL(DirectoryDiscovered(Directory, SubdirectoryList)),
-          watcher_, SLOT(AddDirectory(Directory, SubdirectoryList)));
-  connect(backend_, SIGNAL(DirectoryDeleted(Directory)), watcher_,
+  connect(backend_.get(),
+          SIGNAL(DirectoryDiscovered(Directory, SubdirectoryList)), watcher_,
+          SLOT(AddDirectory(Directory, SubdirectoryList)));
+  connect(backend_.get(), SIGNAL(DirectoryDeleted(Directory)), watcher_,
           SLOT(RemoveDirectory(Directory)));
-  connect(backend_, SIGNAL(SongsRatingChanged(SongList)),
+  connect(backend_.get(), SIGNAL(SongsRatingChanged(SongList)),
           SLOT(SongsRatingChanged(SongList)));
-  connect(backend_, SIGNAL(SongsStatisticsChanged(SongList)),
+  connect(backend_.get(), SIGNAL(SongsStatisticsChanged(SongList)),
           SLOT(SongsStatisticsChanged(SongList)));
-  connect(watcher_, SIGNAL(NewOrUpdatedSongs(SongList)), backend_,
+  connect(watcher_, SIGNAL(NewOrUpdatedSongs(SongList)), backend_.get(),
           SLOT(AddOrUpdateSongs(SongList)));
-  connect(watcher_, SIGNAL(SongsMTimeUpdated(SongList)), backend_,
+  connect(watcher_, SIGNAL(SongsMTimeUpdated(SongList)), backend_.get(),
           SLOT(UpdateMTimesOnly(SongList)));
-  connect(watcher_, SIGNAL(SongsDeleted(SongList)), backend_,
+  connect(watcher_, SIGNAL(SongsDeleted(SongList)), backend_.get(),
           SLOT(MarkSongsUnavailable(SongList)));
-  connect(watcher_, SIGNAL(SongsReadded(SongList, bool)), backend_,
+  connect(watcher_, SIGNAL(SongsReadded(SongList, bool)), backend_.get(),
           SLOT(MarkSongsUnavailable(SongList, bool)));
-  connect(watcher_, SIGNAL(SubdirsDiscovered(SubdirectoryList)), backend_,
+  connect(watcher_, SIGNAL(SubdirsDiscovered(SubdirectoryList)), backend_.get(),
           SLOT(AddOrUpdateSubdirs(SubdirectoryList)));
-  connect(watcher_, SIGNAL(SubdirsMTimeUpdated(SubdirectoryList)), backend_,
-          SLOT(AddOrUpdateSubdirs(SubdirectoryList)));
-  connect(watcher_, SIGNAL(CompilationsNeedUpdating()), backend_,
+  connect(watcher_, SIGNAL(SubdirsMTimeUpdated(SubdirectoryList)),
+          backend_.get(), SLOT(AddOrUpdateSubdirs(SubdirectoryList)));
+  connect(watcher_, SIGNAL(CompilationsNeedUpdating()), backend_.get(),
           SLOT(UpdateCompilations()));
   connect(app_->playlist_manager(), SIGNAL(CurrentSongChanged(Song)),
           SLOT(CurrentSongChanged(Song)));

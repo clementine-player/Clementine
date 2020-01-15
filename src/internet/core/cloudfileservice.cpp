@@ -52,7 +52,8 @@ CloudFileService::CloudFileService(Application* app, InternetModel* parent,
       indexing_task_id_(-1),
       indexing_task_progress_(0),
       indexing_task_max_(0) {
-  library_backend_ = new LibraryBackend;
+  library_backend_.reset(new LibraryBackend,
+                         [](QObject* obj) { obj->deleteLater(); });
   library_backend_->moveToThread(app_->database()->thread());
 
   QString songs_table = service_id + "_songs";
@@ -68,8 +69,8 @@ CloudFileService::CloudFileService(Application* app, InternetModel* parent,
   library_sort_model_->setSortLocaleAware(true);
   library_sort_model_->sort(0);
 
-  app->global_search()->AddProvider(
-      new CloudFileSearchProvider(library_backend_, service_id, icon_, this));
+  app->global_search()->AddProvider(new CloudFileSearchProvider(
+      library_backend_.get(), service_id, icon_, this));
 }
 
 QStandardItem* CloudFileService::CreateRootItem() {
@@ -112,7 +113,7 @@ void CloudFileService::ShowContextMenu(const QPoint& global_pos) {
 
 void CloudFileService::ShowCoverManager() {
   if (!cover_manager_) {
-    cover_manager_.reset(new AlbumCoverManager(app_, library_backend_));
+    cover_manager_.reset(new AlbumCoverManager(app_, library_backend_.get()));
     cover_manager_->Init();
     connect(cover_manager_.get(), SIGNAL(AddToPlaylist(QMimeData*)),
             SLOT(AddToPlaylist(QMimeData*)));

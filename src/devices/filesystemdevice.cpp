@@ -43,24 +43,25 @@ FilesystemDevice::FilesystemDevice(const QUrl& url, DeviceLister* lister,
           ->data(manager->ItemToIndex(manager->FindDeviceById(unique_id)),
                  DeviceManager::Role_FriendlyName)
           .toString());
-  watcher_->set_backend(backend_);
+  watcher_->set_backend(backend_.get());
   watcher_->set_task_manager(app_->task_manager());
 
-  connect(backend_, SIGNAL(DirectoryDiscovered(Directory, SubdirectoryList)),
-          watcher_, SLOT(AddDirectory(Directory, SubdirectoryList)));
-  connect(backend_, SIGNAL(DirectoryDeleted(Directory)), watcher_,
+  connect(backend_.get(),
+          SIGNAL(DirectoryDiscovered(Directory, SubdirectoryList)), watcher_,
+          SLOT(AddDirectory(Directory, SubdirectoryList)));
+  connect(backend_.get(), SIGNAL(DirectoryDeleted(Directory)), watcher_,
           SLOT(RemoveDirectory(Directory)));
-  connect(watcher_, SIGNAL(NewOrUpdatedSongs(SongList)), backend_,
+  connect(watcher_, SIGNAL(NewOrUpdatedSongs(SongList)), backend_.get(),
           SLOT(AddOrUpdateSongs(SongList)));
-  connect(watcher_, SIGNAL(SongsMTimeUpdated(SongList)), backend_,
+  connect(watcher_, SIGNAL(SongsMTimeUpdated(SongList)), backend_.get(),
           SLOT(UpdateMTimesOnly(SongList)));
-  connect(watcher_, SIGNAL(SongsDeleted(SongList)), backend_,
+  connect(watcher_, SIGNAL(SongsDeleted(SongList)), backend_.get(),
           SLOT(DeleteSongs(SongList)));
-  connect(watcher_, SIGNAL(SubdirsDiscovered(SubdirectoryList)), backend_,
+  connect(watcher_, SIGNAL(SubdirsDiscovered(SubdirectoryList)), backend_.get(),
           SLOT(AddOrUpdateSubdirs(SubdirectoryList)));
-  connect(watcher_, SIGNAL(SubdirsMTimeUpdated(SubdirectoryList)), backend_,
-          SLOT(AddOrUpdateSubdirs(SubdirectoryList)));
-  connect(watcher_, SIGNAL(CompilationsNeedUpdating()), backend_,
+  connect(watcher_, SIGNAL(SubdirsMTimeUpdated(SubdirectoryList)),
+          backend_.get(), SLOT(AddOrUpdateSubdirs(SubdirectoryList)));
+  connect(watcher_, SIGNAL(CompilationsNeedUpdating()), backend_.get(),
           SLOT(UpdateCompilations()));
   connect(watcher_, SIGNAL(ScanStarted(int)), SIGNAL(TaskStarted(int)));
 }

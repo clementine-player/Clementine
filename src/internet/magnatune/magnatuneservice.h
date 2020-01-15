@@ -20,6 +20,8 @@
 #ifndef INTERNET_MAGNATUNE_MAGNATUNESERVICE_H_
 #define INTERNET_MAGNATUNE_MAGNATUNESERVICE_H_
 
+#include <memory>
+
 #include <QXmlStreamReader>
 
 #include "internet/core/internetservice.h"
@@ -84,7 +86,7 @@ class MagnatuneService : public InternetService {
   PreferredFormat preferred_format() const { return format_; }
   QString username() const { return username_; }
   QString password() const { return password_; }
-  LibraryBackend* library_backend() const { return library_backend_; }
+  LibraryBackend* library_backend() const { return library_backend_.get(); }
 
   QUrl ModifyUrl(const QUrl& url) const;
 
@@ -113,7 +115,7 @@ class MagnatuneService : public InternetService {
 
   QAction* download_;
 
-  LibraryBackend* library_backend_;
+  std::shared_ptr<LibraryBackend> library_backend_;
   LibraryModel* library_model_;
   LibraryFilterWidget* library_filter_;
   QSortFilterProxyModel* library_sort_model_;
