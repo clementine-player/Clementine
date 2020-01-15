@@ -352,6 +352,12 @@ QString GioLister::DeviceInfo::ConvertAndFree(char* str) {
   return ret;
 }
 
+QString GioLister::DeviceInfo::DecodeAndFree(char* str) {
+  QString ret = QByteArray::fromPercentEncoding(str);
+  g_free(str);
+  return ret;
+}
+
 void GioLister::DeviceInfo::ReadMountInfo(GMount* mount) {
   // Get basic information
   this->mount.reset_without_add(mount);
@@ -374,7 +380,7 @@ void GioLister::DeviceInfo::ReadMountInfo(GMount* mount) {
 
   // Get the mount path
   mount_path = ConvertAndFree(g_file_get_path(root));
-  mount_uri = ConvertAndFree(g_file_get_uri(root));
+  mount_uri = DecodeAndFree(g_file_get_uri(root));
 
   // Do a sanity check to make sure the root is actually this mount - when a
   // device is unmounted GIO sends a changed signal before the removed signal,

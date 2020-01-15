@@ -72,7 +72,11 @@ class GioLister : public DeviceLister {
     QString unique_id() const;
     bool is_suitable() const;
 
+    // Convert a gio property string to a QString and free the original.
     static QString ConvertAndFree(char* str);
+    // Like ConvertAndFree, but perform url decoding.
+    static QString DecodeAndFree(char* str);
+
     void ReadDriveInfo(GDrive* drive);
     void ReadVolumeInfo(GVolume* volume);
     void ReadMountInfo(GMount* mount);
