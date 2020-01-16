@@ -73,6 +73,15 @@ void GioLister::VolumeMountFinished(GObject* object, GAsyncResult* result,
                              object, result);
 }
 
+GioLister::GioLister() {
+  // Direct usage of libmtp and libgphoto2 conflicts with gvfs's usage as both
+  // attempt to claim the interface via libusb. When these devices are mounted
+  // by gvfs, ignore the URIs with those schemes and use the file scheme
+  // instead.
+  scheme_blacklist_ << "mtp";
+  scheme_blacklist_ << "gphoto2";
+}
+
 void GioLister::Init() {
   monitor_.reset_without_add(g_volume_monitor_get());
 
@@ -198,7 +207,7 @@ QList<QUrl> GioLister::MakeDeviceUrls(const QString& id) {
     // to an ipod.
     if (url.scheme() == "file") {
       ret << MakeUrlFromLocalPath(url.path());
-    } else {
+    } else if (!scheme_blacklist_.contains(url.scheme())) {
       ret << url;
     }
   }
@@ -352,6 +361,12 @@ QString GioLister::DeviceInfo::ConvertAndFree(char* str) {
   return ret;
 }
 
+QString GioLister::DeviceInfo::DecodeAndFree(char* str) {
+  QString ret = QByteArray::fromPercentEncoding(str);
+  g_free(str);
+  return ret;
+}
+
 void GioLister::DeviceInfo::ReadMountInfo(GMount* mount) {
   // Get basic information
   this->mount.reset_without_add(mount);
@@ -374,7 +389,7 @@ void GioLister::DeviceInfo::ReadMountInfo(GMount* mount) {
 
   // Get the mount path
   mount_path = ConvertAndFree(g_file_get_path(root));
-  mount_uri = ConvertAndFree(g_file_get_uri(root));
+  mount_uri = DecodeAndFree(g_file_get_uri(root));
 
   // Do a sanity check to make sure the root is actually this mount - when a
   // device is unmounted GIO sends a changed signal before the removed signal,
