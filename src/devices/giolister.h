@@ -35,7 +35,7 @@ class GioLister : public DeviceLister {
   Q_OBJECT
 
  public:
-  GioLister() {}
+  GioLister();
   ~GioLister();
 
   int priority() const { return 50; }
@@ -146,6 +146,8 @@ class GioLister : public DeviceLister {
 
   QMutex mutex_;
   QMap<QString, DeviceInfo> devices_;
+
+  QStringList scheme_blacklist_;
 };
 
 template <typename T>

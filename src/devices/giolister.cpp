@@ -73,6 +73,15 @@ void GioLister::VolumeMountFinished(GObject* object, GAsyncResult* result,
                              object, result);
 }
 
+GioLister::GioLister() {
+  // Direct usage of libmtp and libgphoto2 conflicts with gvfs's usage as both
+  // attempt to claim the interface via libusb. When these devices are mounted
+  // by gvfs, ignore the URIs with those schemes and use the file scheme
+  // instead.
+  scheme_blacklist_ << "mtp";
+  scheme_blacklist_ << "gphoto2";
+}
+
 void GioLister::Init() {
   monitor_.reset_without_add(g_volume_monitor_get());
 
@@ -198,7 +207,7 @@ QList<QUrl> GioLister::MakeDeviceUrls(const QString& id) {
     // to an ipod.
     if (url.scheme() == "file") {
       ret << MakeUrlFromLocalPath(url.path());
-    } else {
+    } else if (!scheme_blacklist_.contains(url.scheme())) {
       ret << url;
     }
   }
