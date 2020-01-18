@@ -27,7 +27,9 @@ QtFSListener::QtFSListener(QObject* parent)
           SIGNAL(PathChanged(const QString&)));
 }
 
-void QtFSListener::AddPath(const QString& path) { watcher_.addPath(path); }
+bool QtFSListener::AddPath(const QString& path) {
+  return watcher_.addPath(path);
+}
 
 void QtFSListener::RemovePath(const QString& path) {
   watcher_.removePath(path);

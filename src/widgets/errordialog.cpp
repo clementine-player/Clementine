@@ -55,7 +55,7 @@ void ErrorDialog::UpdateContent() {
   QString html;
   for (const QString& message : current_messages_) {
     if (!html.isEmpty()) html += "<hr/>";
-    html += message.toHtmlEscaped();
+    html += message.toHtmlEscaped().replace("\n", "<br>");
   }
   ui_->messages->setHtml(html);
 }

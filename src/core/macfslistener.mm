@@ -52,10 +52,11 @@ void MacFSListener::EventStreamCallback(
   }
 }
 
-void MacFSListener::AddPath(const QString& path) {
+bool MacFSListener::AddPath(const QString& path) {
   Q_ASSERT(run_loop_);
   paths_.insert(path);
   UpdateStreamAsync();
+  return true;
 }
 
 void MacFSListener::RemovePath(const QString& path) {

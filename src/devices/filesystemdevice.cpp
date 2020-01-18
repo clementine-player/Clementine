@@ -64,6 +64,7 @@ FilesystemDevice::FilesystemDevice(const QUrl& url, DeviceLister* lister,
   connect(watcher_, SIGNAL(CompilationsNeedUpdating()), backend_.get(),
           SLOT(UpdateCompilations()));
   connect(watcher_, SIGNAL(ScanStarted(int)), SIGNAL(TaskStarted(int)));
+  connect(watcher_, &LibraryWatcher::Error, app, &Application::AddError);
 }
 
 void FilesystemDevice::Init() {
