@@ -102,7 +102,10 @@ LibraryWatcher::ScanTransaction::ScanTransaction(LibraryWatcher* watcher,
 
 LibraryWatcher::ScanTransaction::~ScanTransaction() {
   // If we're stopping then don't commit the transaction
-  if (watcher_->stop_requested_) return;
+  if (watcher_->stop_requested_) {
+    watcher_->task_manager_->SetTaskFinished(task_id_);
+    return;
+  }
 
   if (!new_songs.isEmpty()) emit watcher_->NewOrUpdatedSongs(new_songs);
 
