@@ -48,6 +48,8 @@ static const char *kNoMediaFile = ".nomedia";
 static const char *kNoMusicFile   = ".nomusic";
 }
 
+static const int kUnfilteredImageLimit = 10;
+
 QStringList LibraryWatcher::sValidImages;
 
 const char* LibraryWatcher::kSettingsGroup = "LibraryWatcher";
@@ -714,6 +716,15 @@ QString LibraryWatcher::PickBestImage(const QStringList& images) {
   }
 
   if (filtered.isEmpty()) {
+    // If we're scanning a device, we may hit a directory that contains
+    // multiple types of media. An example is a camera directory on a smart
+    // phone that contains JPG and MP4. We don't want to cycle through hundreds
+    // of images for each audio file found, so we've set a threshold to try to
+    // detect this case.
+    if (images.count() > kUnfilteredImageLimit) {
+      return "";
+    }
+
     // the filter was too restrictive, just use the original list
     filtered = images;
   }
