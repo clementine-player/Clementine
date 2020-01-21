@@ -663,6 +663,12 @@ void LibraryWatcher::RemoveWatch(const Directory& dir,
 }
 
 void LibraryWatcher::RemoveDirectory(const Directory& dir) {
+  watched_dirs_.Stop(dir);
+  // Invoke the DoRemoveDirectory slot on the watcher's thread.
+  QMetaObject::invokeMethod(this, "DoRemoveDirectory", Q_ARG(Directory, dir));
+}
+
+void LibraryWatcher::DoRemoveDirectory(const Directory& dir) {
   rescan_queue_.remove(dir.id);
   watched_dirs_.Remove(dir.id);
 

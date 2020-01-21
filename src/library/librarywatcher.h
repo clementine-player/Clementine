@@ -55,6 +55,10 @@ class LibraryWatcher : public QObject {
   void FullScanAsync();
   void SetRescanPausedAsync(bool pause);
   void ReloadSettingsAsync();
+  // This thread-safe method will cause a scan of this directory to cancel to
+  // unblock the watcher thread. It will then invoke the DoRemoveDirectory on
+  // the watcher's thread to complete the removal.
+  void RemoveDirectory(const Directory& dir);
 
   void Stop() { watched_dirs_.StopAll(); }
 
@@ -74,7 +78,6 @@ class LibraryWatcher : public QObject {
  public slots:
   void ReloadSettings();
   void AddDirectory(const Directory& dir, const SubdirectoryList& subdirs);
-  void RemoveDirectory(const Directory& dir);
   void SetRescanPaused(bool pause);
 
  private:
@@ -158,6 +161,7 @@ class LibraryWatcher : public QObject {
   void RescanPathsNow();
   void ScanSubdirectory(const QString& path, const Subdirectory& subdir,
                         ScanTransaction* t, bool force_noincremental = false);
+  void DoRemoveDirectory(const Directory& dir);
 
  private:
   static bool FindSongByPath(const SongList& list, const QString& path,
