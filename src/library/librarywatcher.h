@@ -88,8 +88,8 @@ signals:
   // LibraryBackend::FindSongsInDirectory.
   class ScanTransaction {
    public:
-    ScanTransaction(LibraryWatcher* watcher, int dir, bool incremental,
-                    bool ignores_mtime = false);
+    ScanTransaction(LibraryWatcher* watcher, const Directory& dir,
+                    bool incremental, bool ignores_mtime = false);
     ~ScanTransaction();
 
     SongList FindSongsInSubdirectory(const QString& path);
@@ -101,7 +101,7 @@ signals:
     void AddToProgress(int n = 1);
     void AddToProgressMax(int n);
 
-    int dir() const { return dir_; }
+    int dir_id() const { return dir_.id; }
     bool is_incremental() const { return incremental_; }
     bool ignores_mtime() const { return ignores_mtime_; }
 
@@ -114,14 +114,13 @@ signals:
     SubdirectoryList deleted_subdirs;
 
    private:
-    ScanTransaction(const ScanTransaction&) {}
     ScanTransaction& operator=(const ScanTransaction&) { return *this; }
 
     int task_id_;
     int progress_;
     int progress_max_;
 
-    int dir_;
+    const Directory& dir_;
     // Incremental scan enters a directory only if it has changed since the
     // last scan.
     bool incremental_;
