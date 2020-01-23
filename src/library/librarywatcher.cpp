@@ -382,7 +382,7 @@ void LibraryWatcher::ScanSubdirectory(const QString& path,
           cue_deleted || cue_added;
 
       // Also want to look to see whether the album art has changed
-      QString image = ImageForSong(file, album_art, t);
+      QString image = ImageForSong(file, &album_art, t);
       if ((matching_song.art_automatic().isEmpty() && !image.isEmpty()) ||
           (!matching_song.art_automatic().isEmpty() &&
            !matching_song.has_embedded_cover() &&
@@ -418,7 +418,7 @@ void LibraryWatcher::ScanSubdirectory(const QString& path,
 
       qLog(Debug) << file << "created";
       // choose an image for the song(s)
-      QString image = ImageForSong(file, album_art, t);
+      QString image = ImageForSong(file, &album_art, t);
 
       for (Song song : song_list) {
         song.set_directory_id(t->dir_id());
@@ -788,16 +788,16 @@ QString LibraryWatcher::PickBestImage(const QStringList& images,
 }
 
 QString LibraryWatcher::ImageForSong(const QString& path,
-                                     QMap<QString, QStringList>& album_art,
+                                     QMap<QString, QStringList>* album_art,
                                      ScanTransaction* t) {
   QString dir(DirectoryPart(path));
 
-  if (album_art.contains(dir)) {
-    if (album_art[dir].count() == 1)
-      return album_art[dir][0];
+  if (album_art->contains(dir)) {
+    if (album_art->value(dir).count() == 1)
+      return album_art->value(dir)[0];
     else {
-      QString best_image = PickBestImage(album_art[dir], t);
-      album_art[dir] = QStringList() << best_image;
+      QString best_image = PickBestImage(album_art->value(dir), t);
+      album_art->insert(dir, QStringList() << best_image);
       return best_image;
     }
   }

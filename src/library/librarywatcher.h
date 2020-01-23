@@ -167,7 +167,7 @@ class LibraryWatcher : public QObject {
   inline static QString DirectoryPart(const QString& fileName);
   QString PickBestImage(const QStringList& images, ScanTransaction* t);
   QString ImageForSong(const QString& path,
-                       QMap<QString, QStringList>& album_art,
+                       QMap<QString, QStringList>* album_art,
                        ScanTransaction* t);
   void AddWatch(const Directory& dir, const QString& path);
   void RemoveWatch(const Directory& dir, const Subdirectory& subdir);
