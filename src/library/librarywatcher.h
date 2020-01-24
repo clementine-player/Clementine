@@ -22,9 +22,10 @@
 #include "core/song.h"
 
 #include <QHash>
+#include <QMap>
+#include <QMutex>
 #include <QObject>
 #include <QStringList>
-#include <QMap>
 
 class QFileSystemWatcher;
 class QTimer;
@@ -55,9 +56,9 @@ class LibraryWatcher : public QObject {
   void SetRescanPausedAsync(bool pause);
   void ReloadSettingsAsync();
 
-  void Stop() { stop_requested_ = true; }
+  void Stop() { watched_dirs_.StopAll(); }
 
-signals:
+ signals:
   void NewOrUpdatedSongs(const SongList& songs);
   void SongsMTimeUpdated(const SongList& songs);
   void SongsDeleted(const SongList& songs);
@@ -77,6 +78,14 @@ signals:
   void SetRescanPaused(bool pause);
 
  private:
+  class WatchedDir : public Directory {
+   public:
+    WatchedDir() : active_(true) {}
+    WatchedDir(const Directory& dir) : Directory(dir), active_(true) {}
+
+    bool active_;
+  };
+
   // This class encapsulates a full or partial scan of a directory.
   // Each directory has one or more subdirectories, and any number of
   // subdirectories can be scanned during one transaction.  ScanSubdirectory()
@@ -88,8 +97,9 @@ signals:
   // LibraryBackend::FindSongsInDirectory.
   class ScanTransaction {
    public:
-    ScanTransaction(LibraryWatcher* watcher, const Directory& dir,
-                    bool incremental, bool ignores_mtime = false);
+    ScanTransaction(LibraryWatcher* watcher,
+                    const LibraryWatcher::WatchedDir& dir, bool incremental,
+                    bool ignores_mtime = false);
     ~ScanTransaction();
 
     SongList FindSongsInSubdirectory(const QString& path);
@@ -104,6 +114,8 @@ signals:
     int dir_id() const { return dir_.id; }
     bool is_incremental() const { return incremental_; }
     bool ignores_mtime() const { return ignores_mtime_; }
+
+    bool aborted() { return !dir_.active_; }
 
     SongList deleted_songs;
     SongList readded_songs;
@@ -120,7 +132,7 @@ signals:
     int progress_;
     int progress_max_;
 
-    const Directory& dir_;
+    const WatchedDir& dir_;
     // Incremental scan enters a directory only if it has changed since the
     // last scan.
     bool incremental_;
@@ -153,9 +165,10 @@ signals:
   inline static QString NoExtensionPart(const QString& fileName);
   inline static QString ExtensionPart(const QString& fileName);
   inline static QString DirectoryPart(const QString& fileName);
-  QString PickBestImage(const QStringList& images);
+  QString PickBestImage(const QStringList& images, ScanTransaction* t);
   QString ImageForSong(const QString& path,
-                       QMap<QString, QStringList>& album_art);
+                       QMap<QString, QStringList>* album_art,
+                       ScanTransaction* t);
   void AddWatch(const Directory& dir, const QString& path);
   void RemoveWatch(const Directory& dir, const Subdirectory& subdir);
   uint GetMtimeForCue(const QString& cue_path);
@@ -200,11 +213,30 @@ signals:
    */
   QStringList best_image_filters_;
 
-  bool stop_requested_;
   bool scan_on_startup_;
   bool monitor_;
 
-  QMap<int, Directory> watched_dirs_;
+  // All methods of QMap are reentrant We should only need to worry about
+  // syncronizing methods that remove directories on the watcher thread and
+  // methods that modify directories called from other threads.
+  class WatchList {
+   public:
+    // These may be called from a different thread.
+    void StopAll();
+    void Stop(const Directory& dir);
+
+    // This should only be called on the watcher thread.
+    void Remove(int id);
+
+    void Add(const Directory& dir);
+
+    QMap<int, WatchedDir> list_;
+
+   private:
+    QMutex mutex_;
+  };
+
+  WatchList watched_dirs_;
   QTimer* rescan_timer_;
   QMap<int, QStringList>
       rescan_queue_;  // dir id -> list of subdirs to be scanned

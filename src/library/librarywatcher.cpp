@@ -27,13 +27,13 @@
 
 #include <QDateTime>
 #include <QDirIterator>
-#include <QtDebug>
-#include <QThread>
-#include <QDateTime>
 #include <QHash>
+#include <QMutexLocker>
 #include <QSet>
 #include <QSettings>
+#include <QThread>
 #include <QTimer>
+#include <QtDebug>
 
 #include <fileref.h>
 #include <tag.h>
@@ -59,7 +59,6 @@ LibraryWatcher::LibraryWatcher(QObject* parent)
       backend_(nullptr),
       task_manager_(nullptr),
       fs_watcher_(FileSystemWatcherInterface::Create(this)),
-      stop_requested_(false),
       scan_on_startup_(true),
       monitor_(true),
       rescan_timer_(new QTimer(this)),
@@ -85,10 +84,9 @@ LibraryWatcher::LibraryWatcher(QObject* parent)
 // is only created on a stack and the removal of a directory from the watch
 // list only occurs as a result of a signal and happens on the  watcher's
 // thread. So the Directory object will not be deleted out from under us.
-LibraryWatcher::ScanTransaction::ScanTransaction(LibraryWatcher* watcher,
-                                                 const Directory& dir,
-                                                 bool incremental,
-                                                 bool ignores_mtime)
+LibraryWatcher::ScanTransaction::ScanTransaction(
+    LibraryWatcher* watcher, const LibraryWatcher::WatchedDir& dir,
+    bool incremental, bool ignores_mtime)
     : progress_(0),
       progress_max_(0),
       dir_(dir),
@@ -109,7 +107,7 @@ LibraryWatcher::ScanTransaction::ScanTransaction(LibraryWatcher* watcher,
 
 LibraryWatcher::ScanTransaction::~ScanTransaction() {
   // If we're stopping then don't commit the transaction
-  if (watcher_->stop_requested_) {
+  if (aborted()) {
     watcher_->task_manager_->SetTaskFinished(task_id_);
     return;
   }
@@ -204,12 +202,36 @@ SubdirectoryList LibraryWatcher::ScanTransaction::GetAllSubdirs() {
   return known_subdirs_;
 }
 
+void LibraryWatcher::WatchList::StopAll() {
+  QMutexLocker l(&mutex_);
+  for (WatchedDir& wdir : list_) {
+    wdir.active_ = false;
+  }
+}
+
+void LibraryWatcher::WatchList::Stop(const Directory& dir) {
+  QMutexLocker l(&mutex_);
+  if (list_.contains(dir.id)) {
+    list_[dir.id].active_ = false;
+  }
+}
+
+void LibraryWatcher::WatchList::Remove(int id) {
+  QMutexLocker l(&mutex_);
+  list_.remove(id);
+}
+
+void LibraryWatcher::WatchList::Add(const Directory& dir) {
+  // Lock is not really necessary here, but it's also not going to block
+  // anything, so include it for sanity and completeness.
+  QMutexLocker l(&mutex_);
+  list_[dir.id] = WatchedDir(dir);
+}
+
 void LibraryWatcher::AddDirectory(const Directory& dir,
                                   const SubdirectoryList& subdirs) {
-  watched_dirs_[dir.id] = dir;
-  // Use a reference to our copy of the directory, not the reference to the
-  // caller's instance.
-  Directory& new_dir = watched_dirs_[dir.id];
+  watched_dirs_.Add(dir);
+  const WatchedDir& new_dir = watched_dirs_.list_[dir.id];
 
   if (subdirs.isEmpty()) {
     // This is a new directory that we've never seen before.
@@ -225,7 +247,7 @@ void LibraryWatcher::AddDirectory(const Directory& dir,
     transaction.SetKnownSubdirs(subdirs);
     transaction.AddToProgressMax(subdirs.count());
     for (const Subdirectory& subdir : subdirs) {
-      if (stop_requested_) return;
+      if (transaction.aborted()) return;
 
       if (scan_on_startup_) ScanSubdirectory(subdir.path, subdir, &transaction);
 
@@ -246,7 +268,7 @@ void LibraryWatcher::ScanSubdirectory(const QString& path,
   // Do not scan symlinked dirs that are already in collection
   if (path_info.isSymLink()) {
     QString real_path = path_info.symLinkTarget();
-    for (const Directory& dir : watched_dirs_) {
+    for (const Directory& dir : watched_dirs_.list_) {
       if (real_path.startsWith(dir.path)) {
         t->AddToProgress(1);
         return;
@@ -290,7 +312,7 @@ void LibraryWatcher::ScanSubdirectory(const QString& path,
   QDirIterator it(
       path, QDir::Dirs | QDir::Files | QDir::Hidden | QDir::NoDotAndDotDot);
   while (it.hasNext()) {
-    if (stop_requested_) return;
+    if (t->aborted()) return;
 
     QString child(it.next());
     QFileInfo child_info(child);
@@ -316,7 +338,7 @@ void LibraryWatcher::ScanSubdirectory(const QString& path,
     }
   }
 
-  if (stop_requested_) return;
+  if (t->aborted()) return;
 
   // Ask the database for a list of files in this directory
   SongList songs_in_db = t->FindSongsInSubdirectory(path);
@@ -325,7 +347,7 @@ void LibraryWatcher::ScanSubdirectory(const QString& path,
 
   // Now compare the list from the database with the list of files on disk
   for (const QString& file : files_on_disk) {
-    if (stop_requested_) return;
+    if (t->aborted()) return;
 
     // associated cue
     QString matching_cue = NoExtensionPart(file) + ".cue";
@@ -360,7 +382,7 @@ void LibraryWatcher::ScanSubdirectory(const QString& path,
           cue_deleted || cue_added;
 
       // Also want to look to see whether the album art has changed
-      QString image = ImageForSong(file, album_art);
+      QString image = ImageForSong(file, &album_art, t);
       if ((matching_song.art_automatic().isEmpty() && !image.isEmpty()) ||
           (!matching_song.art_automatic().isEmpty() &&
            !matching_song.has_embedded_cover() &&
@@ -396,7 +418,7 @@ void LibraryWatcher::ScanSubdirectory(const QString& path,
 
       qLog(Debug) << file << "created";
       // choose an image for the song(s)
-      QString image = ImageForSong(file, album_art);
+      QString image = ImageForSong(file, &album_art, t);
 
       for (Song song : song_list) {
         song.set_directory_id(t->dir_id());
@@ -438,7 +460,7 @@ void LibraryWatcher::ScanSubdirectory(const QString& path,
   // Recurse into the new subdirs that we found
   t->AddToProgressMax(my_new_subdirs.count());
   for (const Subdirectory& my_new_subdir : my_new_subdirs) {
-    if (stop_requested_) return;
+    if (t->aborted()) return;
     ScanSubdirectory(my_new_subdir.path, my_new_subdir, t, true);
   }
 }
@@ -642,7 +664,7 @@ void LibraryWatcher::RemoveWatch(const Directory& dir,
 
 void LibraryWatcher::RemoveDirectory(const Directory& dir) {
   rescan_queue_.remove(dir.id);
-  watched_dirs_.remove(dir.id);
+  watched_dirs_.Remove(dir.id);
 
   // Stop watching the directory's subdirectories
   for (const QString& subdir_path : subdir_mapping_.keys(dir)) {
@@ -682,21 +704,22 @@ void LibraryWatcher::DirectoryChanged(const QString& subdir) {
 }
 
 void LibraryWatcher::RescanPathsNow() {
-  for (int dir : rescan_queue_.keys()) {
-    if (stop_requested_) return;
-
-    if (!watched_dirs_.contains(dir)) {
-      qLog(Warning) << "Rescan id" << dir << "not in watch list.";
+  for (int id : rescan_queue_.keys()) {
+    if (!watched_dirs_.list_.contains(id)) {
+      qLog(Warning) << "Rescan id" << id << "not in watch list.";
       continue;
     }
+    const WatchedDir& dir = watched_dirs_.list_[id];
 
-    ScanTransaction transaction(this, watched_dirs_[dir], false);
-    transaction.AddToProgressMax(rescan_queue_[dir].count());
+    if (!dir.active_) continue;
 
-    for (const QString& path : rescan_queue_[dir]) {
-      if (stop_requested_) return;
+    ScanTransaction transaction(this, dir, false);
+    transaction.AddToProgressMax(rescan_queue_[id].count());
+
+    for (const QString& path : rescan_queue_[id]) {
+      if (transaction.aborted()) return;
       Subdirectory subdir;
-      subdir.directory_id = dir;
+      subdir.directory_id = id;
       subdir.mtime = 0;
       subdir.path = path;
       ScanSubdirectory(path, subdir, &transaction);
@@ -708,7 +731,8 @@ void LibraryWatcher::RescanPathsNow() {
   emit CompilationsNeedUpdating();
 }
 
-QString LibraryWatcher::PickBestImage(const QStringList& images) {
+QString LibraryWatcher::PickBestImage(const QStringList& images,
+                                      ScanTransaction* t) {
   // This is used when there is more than one image in a directory.
   // Pick the biggest image that matches the most important filter
 
@@ -748,7 +772,7 @@ QString LibraryWatcher::PickBestImage(const QStringList& images) {
   QString biggest_path;
 
   for (const QString& path : filtered) {
-    if (stop_requested_) return "";
+    if (t->aborted()) return "";
 
     QImage image(path);
     if (image.isNull()) continue;
@@ -764,15 +788,16 @@ QString LibraryWatcher::PickBestImage(const QStringList& images) {
 }
 
 QString LibraryWatcher::ImageForSong(const QString& path,
-                                     QMap<QString, QStringList>& album_art) {
+                                     QMap<QString, QStringList>* album_art,
+                                     ScanTransaction* t) {
   QString dir(DirectoryPart(path));
 
-  if (album_art.contains(dir)) {
-    if (album_art[dir].count() == 1)
-      return album_art[dir][0];
+  if (album_art->contains(dir)) {
+    if (album_art->value(dir).count() == 1)
+      return album_art->value(dir)[0];
     else {
-      QString best_image = PickBestImage(album_art[dir]);
-      album_art[dir] = QStringList() << best_image;
+      QString best_image = PickBestImage(album_art->value(dir), t);
+      album_art->insert(dir, QStringList() << best_image);
       return best_image;
     }
   }
@@ -804,7 +829,7 @@ void LibraryWatcher::ReloadSettings() {
     fs_watcher_->Clear();
   } else if (monitor_ && !was_monitoring_before) {
     // Add all directories to all QFileSystemWatchers again
-    for (const Directory& dir : watched_dirs_.values()) {
+    for (const Directory& dir : watched_dirs_.list_.values()) {
       SubdirectoryList subdirs = backend_->SubdirsInDirectory(dir.id);
       for (const Subdirectory& subdir : subdirs) {
         AddWatch(dir, subdir.path);
@@ -836,13 +861,13 @@ void LibraryWatcher::IncrementalScanNow() { PerformScan(true, false); }
 void LibraryWatcher::FullScanNow() { PerformScan(false, true); }
 
 void LibraryWatcher::PerformScan(bool incremental, bool ignore_mtimes) {
-  for (const Directory& dir : watched_dirs_.values()) {
+  for (const WatchedDir& dir : watched_dirs_.list_.values()) {
     ScanTransaction transaction(this, dir, incremental, ignore_mtimes);
     SubdirectoryList subdirs(transaction.GetAllSubdirs());
     transaction.AddToProgressMax(subdirs.count());
 
     for (const Subdirectory& subdir : subdirs) {
-      if (stop_requested_) return;
+      if (transaction.aborted()) return;
 
       ScanSubdirectory(subdir.path, subdir, &transaction);
     }
