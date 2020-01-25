@@ -33,6 +33,7 @@ class DeviceLister;
 class DeviceManager;
 class LibraryBackend;
 class LibraryModel;
+struct MountInfo;
 
 class ConnectedDevice : public QObject,
                         public virtual MusicStorage,
@@ -85,6 +86,7 @@ signals:
   DeviceManager* manager_;
 
   std::shared_ptr<LibraryBackend> backend_;
+  std::shared_ptr<MountInfo> mount_info_;
   LibraryModel* model_;
 
   int song_count_;

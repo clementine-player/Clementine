@@ -17,14 +17,15 @@
 
 #include "library.h"
 
-#include "librarymodel.h"
-#include "librarybackend.h"
 #include "core/application.h"
 #include "core/database.h"
 #include "core/player.h"
 #include "core/tagreaderclient.h"
 #include "core/taskmanager.h"
 #include "core/thread.h"
+#include "librarybackend.h"
+#include "librarydirectorymodel.h"
+#include "librarymodel.h"
 #include "smartplaylists/generator.h"
 #include "smartplaylists/querygenerator.h"
 #include "smartplaylists/search.h"
@@ -38,6 +39,7 @@ Library::Library(Application* app, QObject* parent)
     : QObject(parent),
       app_(app),
       backend_(nullptr),
+      mount_info_(new MountInfo),
       model_(nullptr),
       watcher_(nullptr),
       watcher_thread_(nullptr),
@@ -56,6 +58,7 @@ Library::Library(Application* app, QObject* parent)
   using smart_playlists::SearchTerm;
 
   model_ = new LibraryModel(backend_, app_, this);
+  model_->directory_model()->SetMountInfo(mount_info_);
   model_->set_show_smart_playlists(true);
   model_->set_default_smart_playlists(
       LibraryModel::DefaultGenerators()
@@ -168,7 +171,7 @@ void Library::Init() {
   connect(app_->player(), SIGNAL(Stopped()), SLOT(Stopped()));
 
   // This will start the watcher checking for updates
-  backend_->LoadDirectoriesAsync();
+  backend_->LoadDirectoriesAsync(mount_info_.get());
 }
 
 void Library::IncrementalScan() { watcher_->IncrementalScanAsync(); }

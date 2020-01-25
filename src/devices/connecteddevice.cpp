@@ -16,13 +16,14 @@
 */
 
 #include "connecteddevice.h"
-#include "devicelister.h"
-#include "devicemanager.h"
 #include "core/application.h"
 #include "core/database.h"
 #include "core/logging.h"
+#include "devicelister.h"
+#include "devicemanager.h"
 #include "library/library.h"
 #include "library/librarybackend.h"
+#include "library/librarydirectorymodel.h"
 #include "library/librarymodel.h"
 
 #include <QtDebug>
@@ -39,9 +40,12 @@ ConnectedDevice::ConnectedDevice(const QUrl& url, DeviceLister* lister,
       unique_id_(unique_id),
       database_id_(database_id),
       manager_(manager),
+      mount_info_(new MountInfo),
       model_(nullptr),
       song_count_(0) {
   qLog(Info) << "connected" << url << unique_id << first_time;
+
+  mount_info_->removable_ = true;
 
   // Create the backend in the database thread.
   backend_.reset(new LibraryBackend(), [](QObject* obj) { delete obj; });
@@ -57,14 +61,15 @@ ConnectedDevice::ConnectedDevice(const QUrl& url, DeviceLister* lister,
 
   // Create the model
   model_ = new LibraryModel(backend_, app_, this);
+  model_->directory_model()->SetMountInfo(mount_info_);
 }
 
 ConnectedDevice::~ConnectedDevice() {}
 
 void ConnectedDevice::InitBackendDirectory(const QString& mount_point,
                                            bool first_time, bool rewrite_path) {
-  if (first_time || backend_->GetAllDirectories().isEmpty()) {
-    backend_->AddDirectory(mount_point);
+  if (first_time || backend_->GetAllDirectories(mount_info_.get()).isEmpty()) {
+    backend_->AddDirectory(mount_info_.get(), mount_point);
   } else {
     if (rewrite_path) {
       // This is a bit of a hack.  The device might not be mounted at the same
@@ -74,7 +79,7 @@ void ConnectedDevice::InitBackendDirectory(const QString& mount_point,
 
       // Get the directory it was mounted at last time.  Devices only have one
       // directory (the root).
-      Directory dir = backend_->GetAllDirectories()[0];
+      Directory dir = backend_->GetAllDirectories(mount_info_.get())[0];
       if (dir.path != mount_point) {
         // The directory is different, commence the munging.
         qLog(Info) << "Changing path from" << dir.path << "to" << mount_point;
@@ -83,7 +88,7 @@ void ConnectedDevice::InitBackendDirectory(const QString& mount_point,
     }
 
     // Load the directory properly now
-    backend_->LoadDirectoriesAsync();
+    backend_->LoadDirectoriesAsync(mount_info_.get());
   }
 }
 

@@ -69,14 +69,14 @@ class LibraryBackendInterface : public QObject {
   virtual QString songs_table() const = 0;
 
   // Get a list of directories in the library.  Emits DirectoriesDiscovered.
-  virtual void LoadDirectoriesAsync() = 0;
+  virtual void LoadDirectoriesAsync(const MountInfo* mount_info) = 0;
 
   // Counts the songs in the library.  Emits TotalSongCountUpdated
   virtual void UpdateTotalSongCountAsync() = 0;
 
   virtual SongList FindSongsInDirectory(int id) = 0;
   virtual SubdirectoryList SubdirsInDirectory(int id) = 0;
-  virtual DirectoryList GetAllDirectories() = 0;
+  virtual DirectoryList GetAllDirectories(const MountInfo* info) = 0;
   virtual void ChangeDirPath(int id, const QString& old_path,
                              const QString& new_path) = 0;
 
@@ -118,7 +118,8 @@ class LibraryBackendInterface : public QObject {
   // songs.
   virtual Song GetSongByUrl(const QUrl& url, qint64 beginning = 0) = 0;
 
-  virtual void AddDirectory(const QString& path) = 0;
+  virtual void AddDirectory(const MountInfo* mount_info,
+                            const QString& path) = 0;
   virtual void RemoveDirectory(const Directory& dir) = 0;
 
   virtual bool ExecQuery(LibraryQuery* q) = 0;
@@ -141,14 +142,14 @@ class LibraryBackend : public LibraryBackendInterface {
   QString subdirs_table() const { return subdirs_table_; }
 
   // Get a list of directories in the library.  Emits DirectoriesDiscovered.
-  void LoadDirectoriesAsync();
+  void LoadDirectoriesAsync(const MountInfo* mount_info);
 
   // Counts the songs in the library.  Emits TotalSongCountUpdated
   void UpdateTotalSongCountAsync();
 
   SongList FindSongsInDirectory(int id);
   SubdirectoryList SubdirsInDirectory(int id);
-  DirectoryList GetAllDirectories();
+  DirectoryList GetAllDirectories(const MountInfo* info);
   void ChangeDirPath(int id, const QString& old_path, const QString& new_path);
 
   QStringList GetAll(const QString& column,
@@ -185,7 +186,7 @@ class LibraryBackend : public LibraryBackendInterface {
   SongList GetSongsByUrl(const QUrl& url);
   Song GetSongByUrl(const QUrl& url, qint64 beginning = 0);
 
-  void AddDirectory(const QString& path);
+  void AddDirectory(const MountInfo* mount_info, const QString& path);
   void RemoveDirectory(const Directory& dir);
 
   bool ExecQuery(LibraryQuery* q);
@@ -202,7 +203,7 @@ class LibraryBackend : public LibraryBackendInterface {
   void DeleteAll();
 
  public slots:
-  void LoadDirectories();
+  void LoadDirectories(const MountInfo* mount_info);
   void UpdateTotalSongCount();
   void AddOrUpdateSongs(const SongList& songs);
   void UpdateMTimesOnly(const SongList& songs);

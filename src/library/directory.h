@@ -24,13 +24,21 @@
 
 class QSqlQuery;
 
+struct MountInfo {
+  MountInfo() : removable_(false) {}
+  bool removable_;
+};
+Q_DECLARE_METATYPE(MountInfo)
+
 struct Directory {
   Directory() : id(-1) {}
+  Directory(const MountInfo& info) : mount_info_(info), id(-1) {}
 
   bool operator==(const Directory& other) const {
     return path == other.path && id == other.id;
   }
 
+  MountInfo mount_info_;
   QString path;
   int id;
 };

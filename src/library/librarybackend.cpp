@@ -57,8 +57,9 @@ void LibraryBackend::Init(Database* db, const QString& songs_table,
   fts_table_ = fts_table;
 }
 
-void LibraryBackend::LoadDirectoriesAsync() {
-  metaObject()->invokeMethod(this, "LoadDirectories", Qt::QueuedConnection);
+void LibraryBackend::LoadDirectoriesAsync(const MountInfo* mount_info) {
+  metaObject()->invokeMethod(this, "LoadDirectories", Qt::QueuedConnection,
+                             Q_ARG(const MountInfo*, mount_info));
 }
 
 void LibraryBackend::UpdateTotalSongCountAsync() {
@@ -93,8 +94,8 @@ void LibraryBackend::UpdateSongsRatingAsync(const QList<int>& ids,
                              Q_ARG(float, rating));
 }
 
-void LibraryBackend::LoadDirectories() {
-  DirectoryList dirs = GetAllDirectories();
+void LibraryBackend::LoadDirectories(const MountInfo* info) {
+  DirectoryList dirs = GetAllDirectories(info);
 
   QMutexLocker l(db_->Mutex());
   QSqlDatabase db(db_->Connect());
@@ -150,7 +151,8 @@ void LibraryBackend::ChangeDirPath(int id, const QString& old_path,
   t.Commit();
 }
 
-DirectoryList LibraryBackend::GetAllDirectories() {
+DirectoryList LibraryBackend::GetAllDirectories(const MountInfo* mount_info) {
+  Q_ASSERT(mount_info);
   QMutexLocker l(db_->Mutex());
   QSqlDatabase db(db_->Connect());
 
@@ -162,7 +164,7 @@ DirectoryList LibraryBackend::GetAllDirectories() {
   if (db_->CheckErrors(q)) return ret;
 
   while (q.next()) {
-    Directory dir;
+    Directory dir(*mount_info);
     dir.id = q.value(0).toInt();
     dir.path = q.value(1).toString();
 
@@ -212,7 +214,9 @@ void LibraryBackend::UpdateTotalSongCount() {
   emit TotalSongCountUpdated(q.value(0).toInt());
 }
 
-void LibraryBackend::AddDirectory(const QString& path) {
+void LibraryBackend::AddDirectory(const MountInfo* mount_info,
+                                  const QString& path) {
+  Q_ASSERT(mount_info);
   QString canonical_path = QFileInfo(path).canonicalFilePath();
   QString db_path = canonical_path;
 
@@ -234,7 +238,7 @@ void LibraryBackend::AddDirectory(const QString& path) {
   q.exec();
   if (db_->CheckErrors(q)) return;
 
-  Directory dir;
+  Directory dir(*mount_info);
   dir.path = canonical_path;
   dir.id = q.lastInsertId().toInt();
 

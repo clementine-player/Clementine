@@ -65,7 +65,7 @@ void LibraryDirectoryModel::DirectoryDeleted(const Directory& dir) {
 void LibraryDirectoryModel::AddDirectory(const QString& path) {
   if (!backend_) return;
 
-  backend_->AddDirectory(path);
+  backend_->AddDirectory(mount_info_.get(), path);
 }
 
 void LibraryDirectoryModel::RemoveDirectory(const QModelIndex& index) {
