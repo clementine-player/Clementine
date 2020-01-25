@@ -30,6 +30,7 @@ class Application;
 class Database;
 class DeviceLister;
 class DeviceManager;
+class DirectoryManager;
 class LibraryBackend;
 class LibraryModel;
 
@@ -42,7 +43,7 @@ class ConnectedDevice : public QObject,
   ConnectedDevice(const QUrl& url, DeviceLister* lister,
                   const QString& unique_id, DeviceManager* manager,
                   Application* app, int database_id, bool first_time);
-  ~ConnectedDevice();
+  virtual ~ConnectedDevice();
 
   virtual void Init() = 0;
   virtual void ConnectAsync();
@@ -84,6 +85,7 @@ class ConnectedDevice : public QObject,
   DeviceManager* manager_;
 
   std::shared_ptr<LibraryBackend> backend_;
+  DirectoryManager* directory_manager_;
   LibraryModel* model_;
 
   int song_count_;

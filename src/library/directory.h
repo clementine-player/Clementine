@@ -39,6 +39,17 @@ Q_DECLARE_METATYPE(Directory)
 typedef QList<Directory> DirectoryList;
 Q_DECLARE_METATYPE(DirectoryList)
 
+struct DirectoryManager {
+  DirectoryManager() {}
+  virtual ~DirectoryManager() {}
+  virtual Directory GetDirectory(const QString& path) const {
+    Directory dir;
+    dir.path = path;
+    return dir;
+  }
+};
+Q_DECLARE_METATYPE(DirectoryManager)
+
 struct Subdirectory {
   Subdirectory() : directory_id(-1), mtime(0) {}
 
