@@ -429,6 +429,15 @@ void LibraryWatcher::ScanSubdirectory(const QString& path,
     }
   }
 
+  // If this is a removable device, make sure the directory still exists before
+  // assembling a delete list.
+  if (t->dir().mount_info_.removable_) {
+    if (!QFileInfo::exists(t->dir().path)) {
+      qLog(Debug) << t->dir().path << "no longer exists.";
+      return;
+    }
+  }
+
   // Look for deleted songs
   for (const Song& song : songs_in_db) {
     if (!song.is_unavailable() &&
