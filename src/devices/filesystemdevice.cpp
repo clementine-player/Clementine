@@ -49,8 +49,9 @@ FilesystemDevice::FilesystemDevice(const QUrl& url, DeviceLister* lister,
   connect(backend_.get(),
           SIGNAL(DirectoryDiscovered(Directory, SubdirectoryList)), watcher_,
           SLOT(AddDirectory(Directory, SubdirectoryList)));
-  connect(backend_.get(), SIGNAL(DirectoryDeleted(Directory)), watcher_,
-          SLOT(RemoveDirectory(Directory)));
+  // RemoveDirectory should be called from the sender's thread.
+  connect(backend_.get(), &LibraryBackend::DirectoryDeleted, watcher_,
+          &LibraryWatcher::RemoveDirectory, Qt::DirectConnection);
   connect(watcher_, SIGNAL(NewOrUpdatedSongs(SongList)), backend_.get(),
           SLOT(AddOrUpdateSongs(SongList)));
   connect(watcher_, SIGNAL(SongsMTimeUpdated(SongList)), backend_.get(),
