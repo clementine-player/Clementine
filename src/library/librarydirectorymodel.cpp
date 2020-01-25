@@ -30,8 +30,7 @@ LibraryDirectoryModel::LibraryDirectoryModel(LibraryBackend* backend,
       backend_(backend) {
   connect(backend_, SIGNAL(DirectoryDiscovered(Directory, SubdirectoryList)),
           SLOT(DirectoryDiscovered(Directory)));
-  connect(backend_, SIGNAL(DirectoryDeleted(Directory)),
-          SLOT(DirectoryDeleted(Directory)));
+  connect(backend_, SIGNAL(DirectoryDeleted(int)), SLOT(DirectoryDeleted(int)));
 }
 
 LibraryDirectoryModel::~LibraryDirectoryModel() {}
@@ -52,9 +51,9 @@ void LibraryDirectoryModel::DirectoryDiscovered(const Directory& dir) {
   appendRow(item);
 }
 
-void LibraryDirectoryModel::DirectoryDeleted(const Directory& dir) {
+void LibraryDirectoryModel::DirectoryDeleted(int dir_id) {
   for (int i = 0; i < rowCount(); ++i) {
-    if (item(i, 0)->data(kIdRole).toInt() == dir.id) {
+    if (item(i, 0)->data(kIdRole).toInt() == dir_id) {
       removeRow(i);
       storage_.removeAt(i);
       break;
@@ -71,11 +70,9 @@ void LibraryDirectoryModel::AddDirectory(const QString& path) {
 void LibraryDirectoryModel::RemoveDirectory(const QModelIndex& index) {
   if (!backend_ || !index.isValid()) return;
 
-  Directory dir;
-  dir.path = index.data().toString();
-  dir.id = index.data(kIdRole).toInt();
+  int dir_id = index.data(kIdRole).toInt();
 
-  backend_->RemoveDirectory(dir);
+  backend_->RemoveDirectory(dir_id);
 }
 
 QVariant LibraryDirectoryModel::data(const QModelIndex& index, int role) const {

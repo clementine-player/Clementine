@@ -209,10 +209,10 @@ void LibraryWatcher::WatchList::StopAll() {
   }
 }
 
-void LibraryWatcher::WatchList::Stop(const Directory& dir) {
+void LibraryWatcher::WatchList::Stop(int dir_id) {
   QMutexLocker l(&mutex_);
-  if (list_.contains(dir.id)) {
-    list_[dir.id].active_ = false;
+  if (list_.contains(dir_id)) {
+    list_[dir_id].active_ = false;
   }
 }
 
@@ -662,21 +662,22 @@ void LibraryWatcher::RemoveWatch(const Directory& dir,
   }
 }
 
-void LibraryWatcher::RemoveDirectory(const Directory& dir) {
-  watched_dirs_.Stop(dir);
+void LibraryWatcher::RemoveDirectory(int dir_id) {
+  watched_dirs_.Stop(dir_id);
   // Invoke the DoRemoveDirectory slot on the watcher's thread.
-  QMetaObject::invokeMethod(this, "DoRemoveDirectory", Q_ARG(Directory, dir));
+  QMetaObject::invokeMethod(this, "DoRemoveDirectory", Q_ARG(int, dir_id));
 }
 
-void LibraryWatcher::DoRemoveDirectory(const Directory& dir) {
-  rescan_queue_.remove(dir.id);
-  watched_dirs_.Remove(dir.id);
+void LibraryWatcher::DoRemoveDirectory(int dir_id) {
+  rescan_queue_.remove(dir_id);
 
+  const WatchedDir& dir = watched_dirs_.list_[dir_id];
   // Stop watching the directory's subdirectories
   for (const QString& subdir_path : subdir_mapping_.keys(dir)) {
     fs_watcher_->RemovePath(subdir_path);
     subdir_mapping_.remove(subdir_path);
   }
+  watched_dirs_.Remove(dir_id);
 }
 
 bool LibraryWatcher::FindSongByPath(const SongList& list, const QString& path,

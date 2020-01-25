@@ -119,7 +119,7 @@ class LibraryBackendInterface : public QObject {
   virtual Song GetSongByUrl(const QUrl& url, qint64 beginning = 0) = 0;
 
   virtual void AddDirectory(const QString& path) = 0;
-  virtual void RemoveDirectory(const Directory& dir) = 0;
+  virtual void RemoveDirectory(int dir_id) = 0;
 
   virtual bool ExecQuery(LibraryQuery* q) = 0;
 };
@@ -186,7 +186,7 @@ class LibraryBackend : public LibraryBackendInterface {
   Song GetSongByUrl(const QUrl& url, qint64 beginning = 0);
 
   void AddDirectory(const QString& path);
-  void RemoveDirectory(const Directory& dir);
+  void RemoveDirectory(int dir_id);
 
   bool ExecQuery(LibraryQuery* q);
   SongList ExecLibraryQuery(LibraryQuery* query);
@@ -225,7 +225,7 @@ class LibraryBackend : public LibraryBackendInterface {
 signals:
   void DirectoryDiscovered(const Directory& dir,
                            const SubdirectoryList& subdirs);
-  void DirectoryDeleted(const Directory& dir);
+  void DirectoryDeleted(int dir_id);
 
   void SongsDiscovered(const SongList& songs);
   void SongsDeleted(const SongList& songs);
