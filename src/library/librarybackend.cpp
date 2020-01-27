@@ -241,30 +241,30 @@ void LibraryBackend::AddDirectory(const QString& path) {
   emit DirectoryDiscovered(dir, SubdirectoryList());
 }
 
-void LibraryBackend::RemoveDirectory(const Directory& dir) {
+void LibraryBackend::RemoveDirectory(int dir_id) {
   QMutexLocker l(db_->Mutex());
   QSqlDatabase db(db_->Connect());
 
   // Remove songs first
-  DeleteSongs(FindSongsInDirectory(dir.id));
+  DeleteSongs(FindSongsInDirectory(dir_id));
 
   ScopedTransaction transaction(&db);
 
   // Delete the subdirs that were in this directory
   QSqlQuery q(db);
   q.prepare(QString("DELETE FROM %1 WHERE directory = :id").arg(subdirs_table_));
-  q.bindValue(":id", dir.id);
+  q.bindValue(":id", dir_id);
   q.exec();
   if (db_->CheckErrors(q)) return;
 
   // Now remove the directory itself
   q = QSqlQuery(db);
   q.prepare(QString("DELETE FROM %1 WHERE ROWID = :id").arg(dirs_table_));
-  q.bindValue(":id", dir.id);
+  q.bindValue(":id", dir_id);
   q.exec();
   if (db_->CheckErrors(q)) return;
 
-  emit DirectoryDeleted(dir);
+  emit DirectoryDeleted(dir_id);
 
   transaction.Commit();
 }
