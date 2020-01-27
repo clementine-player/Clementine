@@ -34,7 +34,7 @@
 #include "core/timeconstants.h"
 
 const char* AcoustidClient::kClientId = "qsZGpeLx";
-const char* AcoustidClient::kUrl = "http://api.acoustid.org/v2/lookup";
+const char* AcoustidClient::kUrl = "https://api.acoustid.org/v2/lookup";
 const int AcoustidClient::kDefaultTimeout = 5000;  // msec
 
 AcoustidClient::AcoustidClient(QObject* parent)

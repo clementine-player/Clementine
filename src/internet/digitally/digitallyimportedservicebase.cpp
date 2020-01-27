@@ -67,11 +67,11 @@ DigitallyImportedServiceBase::DigitallyImportedServiceBase(
   model->app()->global_search()->AddProvider(
       new DigitallyImportedSearchProvider(this, app_, this));
 
-  premium_playlists_ << "http://%1/premium_high/%2.pls?hash=%3"
-                     << "http://%1/premium_medium/%2.pls?hash=%3"
-                     << "http://%1/premium/%2.pls?hash=%3"
-                     << "http://%1/premium_wma_low/%2.asx?hash=%3"
-                     << "http://%1/premium_wma/%2.asx?hash=%3";
+  premium_playlists_ << "https://%1/premium_high/%2.pls?hash=%3"
+                     << "https://%1/premium_medium/%2.pls?hash=%3"
+                     << "https://%1/premium/%2.pls?hash=%3"
+                     << "https://%1/premium_wma_low/%2.asx?hash=%3"
+                     << "https://%1/premium_wma/%2.asx?hash=%3";
 }
 
 DigitallyImportedServiceBase::~DigitallyImportedServiceBase() {}
