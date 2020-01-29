@@ -741,6 +741,17 @@ QString FiddleFileExtension(const QString& filename,
   return PathWithoutFilenameExtension(filename) + "." + new_extension;
 }
 
+QByteArray GetUriForGstreamer(const QUrl& url) {
+  if (url.scheme() == "file") {
+    QString local_file = url.toLocalFile();
+    if (local_file.indexOf("//") == 0) {
+      // Exclude / from encoding.
+      return QByteArray("file://") + QUrl::toPercentEncoding(local_file, "/");
+    }
+  }
+  return url.toEncoded();
+}
+
 }  // namespace Utilities
 
 ScopedWCharArray::ScopedWCharArray(const QString& str)

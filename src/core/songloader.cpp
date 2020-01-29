@@ -404,7 +404,8 @@ SongLoader::Result SongLoader::LoadRemote() {
 
   // Create the source element automatically based on the URL
   GstElement* source = gst_element_make_from_uri(
-      GST_URI_SRC, url_.toEncoded().constData(), nullptr, nullptr);
+      GST_URI_SRC, Utilities::GetUriForGstreamer(url_).constData(),
+      nullptr, nullptr);
   if (!source) {
     qLog(Warning) << "Couldn't create gstreamer source element for"
                   << url_.toString();
