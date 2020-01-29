@@ -169,8 +169,6 @@ class GstEngine : public Engine::Base, public BufferConsumer {
 
   int AddBackgroundStream(std::shared_ptr<GstEnginePipeline> pipeline);
 
-  static QUrl FixupUrl(const QUrl& url);
-
  private:
   static const qint64 kTimerIntervalNanosec = 1000 * kNsecPerMsec;  // 1s
   static const qint64 kPreloadGapNanosec = 2000 * kNsecPerMsec;     // 2s

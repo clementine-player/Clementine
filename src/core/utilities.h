@@ -123,6 +123,10 @@ QString PathWithoutFilenameExtension(const QString& filename);
 QString FiddleFileExtension(const QString& filename,
                             const QString& new_extension);
 
+// Fix URLs for Gstreamer, specifically those for network file paths that begin
+// with //.
+QByteArray GetUriForGstreamer(const QUrl& url);
+
 enum ConfigPath {
   Path_Root,
   Path_Icons,

@@ -368,27 +368,11 @@ void GstEngine::StartPreloading(const QUrl& url, bool force_stop_at_end,
                                 qint64 beginning_nanosec, qint64 end_nanosec) {
   EnsureInitialised();
 
-  QUrl gst_url = FixupUrl(url);
-
   // No crossfading, so we can just queue the new URL in the existing
   // pipeline and get gapless playback (hopefully)
   if (current_pipeline_)
-    current_pipeline_->SetNextUrl(gst_url, beginning_nanosec,
+    current_pipeline_->SetNextUrl(url, beginning_nanosec,
                                   force_stop_at_end ? end_nanosec : 0);
-}
-
-QUrl GstEngine::FixupUrl(const QUrl& url) {
-  QUrl copy = url;
-
-  // It's a file:// url with a hostname set.  QUrl::fromLocalFile does this
-  // when given a \\host\share\file path on Windows.  Munge it back into a
-  // path that gstreamer will recognise.
-  if (url.scheme() == "file" && !url.host().isEmpty()) {
-    copy.setPath("//" + copy.host() + copy.path());
-    copy.setHost(QString());
-  }
-
-  return copy;
 }
 
 bool GstEngine::Load(const QUrl& url, Engine::TrackChangeFlags change,
@@ -398,8 +382,6 @@ bool GstEngine::Load(const QUrl& url, Engine::TrackChangeFlags change,
 
   Engine::Base::Load(url, change, force_stop_at_end, beginning_nanosec,
                      end_nanosec);
-
-  QUrl gst_url = FixupUrl(url);
 
   bool crossfade =
       current_pipeline_ && ((crossfade_enabled_ && change & Engine::Manual) ||
@@ -411,7 +393,7 @@ bool GstEngine::Load(const QUrl& url, Engine::TrackChangeFlags change,
       !crossfade_same_album_)
     crossfade = false;
 
-  if (!crossfade && current_pipeline_ && current_pipeline_->url() == gst_url &&
+  if (!crossfade && current_pipeline_ && current_pipeline_->url() == url &&
       change & Engine::Auto) {
     // We're not crossfading, and the pipeline is already playing the URI we
     // want, so just do nothing.
@@ -419,7 +401,7 @@ bool GstEngine::Load(const QUrl& url, Engine::TrackChangeFlags change,
   }
 
   shared_ptr<GstEnginePipeline> pipeline =
-      CreatePipeline(gst_url, force_stop_at_end ? end_nanosec : 0);
+      CreatePipeline(url, force_stop_at_end ? end_nanosec : 0);
   if (!pipeline) return false;
 
   if (crossfade) StartFadeout();

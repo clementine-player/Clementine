@@ -204,7 +204,7 @@ GstElement* GstEnginePipeline::CreateDecodeBinFromUrl(const QUrl& url) {
       str.remove(str.lastIndexOf(QChar('a')), 1);
       uri = str.toUtf8();
     } else {
-      uri = url.toEncoded();
+      uri = Utilities::GetUriForGstreamer(url);
     }
     new_bin = engine_->CreateElement("uridecodebin");
     if (!new_bin) return nullptr;

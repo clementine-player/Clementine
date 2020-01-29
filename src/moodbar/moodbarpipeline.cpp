@@ -103,8 +103,8 @@ void MoodbarPipeline::Start() {
   builder_.reset(new MoodbarBuilder);
 
   // Set properties
-  g_object_set(decodebin, "uri", local_filename_.toEncoded().constData(),
-               nullptr);
+  QByteArray uri = Utilities::GetUriForGstreamer(local_filename_);
+  g_object_set(decodebin, "uri", uri.constData(), nullptr);
   g_object_set(spectrum, "bands", kBands, nullptr);
 
   GstFastSpectrum* fast_spectrum = GST_FASTSPECTRUM(spectrum);
