@@ -54,18 +54,18 @@ void GLog(const char* domain, int level, const char* message, void* user_data) {
     case G_LOG_FLAG_FATAL:
     case G_LOG_LEVEL_ERROR:
     case G_LOG_LEVEL_CRITICAL:
-      qLog(Error) << message;
+      qLogCat(Error, domain) << message;
       break;
     case G_LOG_LEVEL_WARNING:
-      qLog(Warning) << message;
+      qLogCat(Warning, domain) << message;
       break;
     case G_LOG_LEVEL_MESSAGE:
     case G_LOG_LEVEL_INFO:
-      qLog(Info) << message;
+      qLogCat(Info, domain) << message;
       break;
     case G_LOG_LEVEL_DEBUG:
     default:
-      qLog(Debug) << message;
+      qLogCat(Debug, domain) << message;
       break;
   }
 }
