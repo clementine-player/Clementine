@@ -271,21 +271,31 @@ void DumpStackTrace() {
 #endif
 }
 
-QDebug CreateLoggerFatal(int line, const char *class_name) { return qCreateLogger(line, class_name, Fatal); }
-QDebug CreateLoggerError(int line, const char *class_name) { return qCreateLogger(line, class_name, Error); }
+QDebug CreateLoggerFatal(int line, const char* pretty_function) {
+  return qCreateLogger(line, pretty_function, Fatal);
+}
+QDebug CreateLoggerError(int line, const char* pretty_function) {
+  return qCreateLogger(line, pretty_function, Error);
+}
 
 #ifdef QT_NO_WARNING_OUTPUT
 QNoDebug CreateLoggerWarning(int, const char*) { return QNoDebug(); }
 #else
-QDebug CreateLoggerWarning(int line, const char *class_name) { return qCreateLogger(line, class_name, Warning); }
+QDebug CreateLoggerWarning(int line, const char* pretty_function) {
+  return qCreateLogger(line, pretty_function, Warning);
+}
 #endif // QT_NO_WARNING_OUTPUT
 
 #ifdef QT_NO_DEBUG_OUTPUT
 QNoDebug CreateLoggerInfo(int, const char*) { return QNoDebug(); }
 QNoDebug CreateLoggerDebug(int, const char*) { return QNoDebug(); }
 #else
-QDebug CreateLoggerInfo(int line, const char *class_name) { return qCreateLogger(line, class_name, Info); }
-QDebug CreateLoggerDebug(int line, const char *class_name) { return qCreateLogger(line, class_name, Debug); }
+QDebug CreateLoggerInfo(int line, const char* pretty_function) {
+  return qCreateLogger(line, pretty_function, Info);
+}
+QDebug CreateLoggerDebug(int line, const char* pretty_function) {
+  return qCreateLogger(line, pretty_function, Debug);
+}
 #endif // QT_NO_DEBUG_OUTPUT
 
 }  // namespace logging

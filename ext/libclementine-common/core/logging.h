@@ -34,10 +34,9 @@
 #define qLog(level) \
   logging::CreateLogger##level(__LINE__, __PRETTY_FUNCTION__)
 
-#define qCreateLogger(line, class_name, level) \
-  logging::CreateLogger(logging::Level_##level,                            \
-                        logging::ParsePrettyFunction(class_name), \
-                        line)
+#define qCreateLogger(line, pretty_function, level) \
+  logging::CreateLogger(logging::Level_##level,     \
+                        logging::ParsePrettyFunction(pretty_function), line)
 
 #endif // QT_NO_DEBUG_STREAM
 
@@ -64,21 +63,21 @@ void DumpStackTrace();
 QString ParsePrettyFunction(const char* pretty_function);
 QDebug CreateLogger(Level level, const QString& class_name, int line);
 
-QDebug CreateLoggerFatal(int line, const char* class_name);
-QDebug CreateLoggerError(int line, const char* class_name);
+QDebug CreateLoggerFatal(int line, const char* pretty_function);
+QDebug CreateLoggerError(int line, const char* pretty_function);
 
 #ifdef QT_NO_WARNING_OUTPUT
 QNoDebug CreateLoggerWarning(int, const char*);
 #else
-QDebug CreateLoggerWarning(int line, const char* class_name);
+QDebug CreateLoggerWarning(int line, const char* pretty_function);
 #endif // QT_NO_WARNING_OUTPUT
 
 #ifdef QT_NO_DEBUG_OUTPUT
 QNoDebug CreateLoggerInfo(int, const char*);
 QNoDebug CreateLoggerDebug(int, const char*);
 #else
-QDebug CreateLoggerInfo(int line, const char* class_name);
-QDebug CreateLoggerDebug(int line, const char* class_name);
+QDebug CreateLoggerInfo(int line, const char* pretty_function);
+QDebug CreateLoggerDebug(int line, const char* pretty_function);
 #endif // QT_NO_DEBUG_OUTPUT
 
 
