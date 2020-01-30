@@ -549,7 +549,8 @@ gboolean GstEnginePipeline::BusCallback(GstBus*, GstMessage* msg,
                                         gpointer self) {
   GstEnginePipeline* instance = reinterpret_cast<GstEnginePipeline*>(self);
 
-  qLog(Debug) << instance->id() << "bus message" << GST_MESSAGE_TYPE_NAME(msg);
+  qLogCat(Debug, "GstEnginePipelineCallbacks")
+      << instance->id() << "bus message" << GST_MESSAGE_TYPE_NAME(msg);
 
   switch (GST_MESSAGE_TYPE(msg)) {
     case GST_MESSAGE_ERROR:
@@ -575,8 +576,8 @@ GstBusSyncReply GstEnginePipeline::BusCallbackSync(GstBus*, GstMessage* msg,
                                                    gpointer self) {
   GstEnginePipeline* instance = reinterpret_cast<GstEnginePipeline*>(self);
 
-  qLog(Debug) << instance->id() << "sync bus message"
-              << GST_MESSAGE_TYPE_NAME(msg);
+  qLogCat(Debug, "GstEnginePipelineCallbacks")
+      << instance->id() << "sync bus message" << GST_MESSAGE_TYPE_NAME(msg);
 
   switch (GST_MESSAGE_TYPE(msg)) {
     case GST_MESSAGE_EOS:
@@ -959,7 +960,8 @@ GstPadProbeReturn GstEnginePipeline::EventHandoffCallback(GstPad*,
   GstEnginePipeline* instance = reinterpret_cast<GstEnginePipeline*>(self);
   GstEvent* e = gst_pad_probe_info_get_event(info);
 
-  qLog(Debug) << instance->id() << "event" << GST_EVENT_TYPE_NAME(e);
+  qLogCat(Debug, "GstEnginePipelineCallbacks")
+      << instance->id() << "event" << GST_EVENT_TYPE_NAME(e);
 
   switch (GST_EVENT_TYPE(e)) {
     case GST_EVENT_SEGMENT:
