@@ -54,18 +54,18 @@ void GLog(const char* domain, int level, const char* message, void* user_data) {
     case G_LOG_FLAG_FATAL:
     case G_LOG_LEVEL_ERROR:
     case G_LOG_LEVEL_CRITICAL:
-      qLog(Error) << message;
+      qLogCat(Error, domain) << message;
       break;
     case G_LOG_LEVEL_WARNING:
-      qLog(Warning) << message;
+      qLogCat(Warning, domain) << message;
       break;
     case G_LOG_LEVEL_MESSAGE:
     case G_LOG_LEVEL_INFO:
-      qLog(Info) << message;
+      qLogCat(Info, domain) << message;
       break;
     case G_LOG_LEVEL_DEBUG:
     default:
-      qLog(Debug) << message;
+      qLogCat(Debug, domain) << message;
       break;
   }
 }
@@ -92,7 +92,8 @@ static void MessageHandler(QtMsgType type, const QMessageLogContext &context, co
   }
 
   for (const QString& line : message.split('\n')) {
-    CreateLogger(level, "unknown", -1) << line.toLocal8Bit().constData();
+    CreateLogger(level, "unknown", -1, nullptr)
+        << line.toLocal8Bit().constData();
   }
 
   if (type == QtFatalMsg) {
@@ -164,7 +165,8 @@ QString ParsePrettyFunction(const char* pretty_function) {
   return class_name;
 }
 
-QDebug CreateLogger(Level level, const QString& class_name, int line) {
+QDebug CreateLogger(Level level, const QString& class_name, int line,
+                    const char* category) {
   // Map the level to a string
   const char* level_name = nullptr;
   switch (level) {
@@ -185,10 +187,11 @@ QDebug CreateLogger(Level level, const QString& class_name, int line) {
       break;
   }
 
+  QString filter_category = (category != nullptr) ? category : class_name;
   // Check the settings to see if we're meant to show or hide this message.
   Level threshold_level = sDefaultLevel;
-  if (sClassLevels && sClassLevels->contains(class_name)) {
-    threshold_level = sClassLevels->value(class_name);
+  if (sClassLevels && sClassLevels->contains(filter_category)) {
+    threshold_level = sClassLevels->value(filter_category);
   }
 
   if (level > threshold_level) {
@@ -198,6 +201,9 @@ QDebug CreateLogger(Level level, const QString& class_name, int line) {
   QString function_line = class_name;
   if (line != -1) {
     function_line += ":" + QString::number(line);
+  }
+  if (category) {
+    function_line += "(" + QString(category) + ")";
   }
 
   QtMsgType type = QtDebugMsg;
@@ -271,32 +277,39 @@ void DumpStackTrace() {
 #endif
 }
 
-QDebug CreateLoggerFatal(int line, const char* pretty_function) {
-  return qCreateLogger(line, pretty_function, Fatal);
+QDebug CreateLoggerFatal(int line, const char* pretty_function,
+                         const char* category) {
+  return qCreateLogger(line, pretty_function, category, Fatal);
 }
-QDebug CreateLoggerError(int line, const char* pretty_function) {
-  return qCreateLogger(line, pretty_function, Error);
+QDebug CreateLoggerError(int line, const char* pretty_function,
+                         const char* category) {
+  return qCreateLogger(line, pretty_function, category, Error);
 }
 
 #ifdef QT_NO_WARNING_OUTPUT
-QNoDebug CreateLoggerWarning(int, const char*) { return QNoDebug(); }
-#else
-QDebug CreateLoggerWarning(int line, const char* pretty_function) {
-  return qCreateLogger(line, pretty_function, Warning);
+QNoDebug CreateLoggerWarning(int, const char*, const char*) {
+  return QNoDebug();
 }
-#endif // QT_NO_WARNING_OUTPUT
+#else
+QDebug CreateLoggerWarning(int line, const char* pretty_function,
+                           const char* category) {
+  return qCreateLogger(line, pretty_function, category, Warning);
+}
+#endif  // QT_NO_WARNING_OUTPUT
 
 #ifdef QT_NO_DEBUG_OUTPUT
-QNoDebug CreateLoggerInfo(int, const char*) { return QNoDebug(); }
-QNoDebug CreateLoggerDebug(int, const char*) { return QNoDebug(); }
+QNoDebug CreateLoggerInfo(int, const char*, const char*) { return QNoDebug(); }
+QNoDebug CreateLoggerDebug(int, const char*, const char*) { return QNoDebug(); }
 #else
-QDebug CreateLoggerInfo(int line, const char* pretty_function) {
-  return qCreateLogger(line, pretty_function, Info);
+QDebug CreateLoggerInfo(int line, const char* pretty_function,
+                        const char* category) {
+  return qCreateLogger(line, pretty_function, category, Info);
 }
-QDebug CreateLoggerDebug(int line, const char* pretty_function) {
-  return qCreateLogger(line, pretty_function, Debug);
+QDebug CreateLoggerDebug(int line, const char* pretty_function,
+                         const char* category) {
+  return qCreateLogger(line, pretty_function, category, Debug);
 }
-#endif // QT_NO_DEBUG_OUTPUT
+#endif  // QT_NO_DEBUG_OUTPUT
 
 }  // namespace logging
 
