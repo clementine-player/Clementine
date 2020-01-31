@@ -103,7 +103,7 @@ static QSqlError qMakeError(sqlite3 *access, const QString &descr, QSqlError::Er
 {
     return QSqlError(descr,
                      QString(reinterpret_cast<const QChar *>(sqlite3_errmsg16(access))),
-                     type, errorCode);
+                     type, QString(errorCode));
 }
 
 class QSQLiteDriverPrivate
