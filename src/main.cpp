@@ -96,10 +96,6 @@ QDBusArgument& operator<<(QDBusArgument& arg, const QImage& image);
 const QDBusArgument& operator>>(const QDBusArgument& arg, QImage& image);
 #endif
 
-// Load sqlite plugin on windows and mac.
-#include <QtPlugin>
-Q_IMPORT_PLUGIN(QSQLiteDriverPlugin)
-
 namespace {
 
 void LoadTranslation(const QString& prefix, const QString& path,

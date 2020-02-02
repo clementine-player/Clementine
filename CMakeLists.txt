@@ -366,14 +366,6 @@ if(HAVE_VISUALISATIONS)
 endif(HAVE_VISUALISATIONS)
 
 
-# Build our copy of QSqlLiteDriver.
-# We do this because we can't guarantee that the driver shipped with Qt exposes the
-# raw sqlite3_ functions required for FTS support. This way we know that those symbols
-# exist at compile-time and that our code links to the same sqlite library as the
-# Qt driver.
-add_subdirectory(3rdparty/qsqlite)
-include_directories("3rdparty/qsqlite")
-
 # When/if upstream accepts our patches then these options can be used to link
 # to system installed qtsingleapplication instead.
 option(USE_SYSTEM_QTSINGLEAPPLICATION "Don't set this option unless your system QtSingleApplication library has been compiled with the Clementine patches in 3rdparty" OFF)
@@ -427,6 +419,19 @@ if(GMOCK_INCLUDE_DIRS)
     set(GMOCK_LIBRARIES ${GMOCK_LIBRARIES} ${GTEST_LIBRARIES})
   endif(GTEST_INCLUDE_DIRS)
 endif(GMOCK_INCLUDE_DIRS)
+
+find_path(SQLITE_INCLUDE_DIRS sqlite3.h)
+find_library(SQLITE_LIBRARIES sqlite3)
+
+if (SQLITE_INCLUDE_DIRS AND SQLITE_LIBRARIES)
+  set(SQLITE_FOUND true)
+endif()
+
+if (NOT SQLITE_FOUND)
+  message(SEND_ERROR "Could not find sqlite3")
+endif()
+
+include_directories(${SQLITE_INCLUDE_DIRS})
 
 # Use the system libmygpo-qt5 if a recent enough version was found
 if(LIBMYGPO_QT5_FOUND)

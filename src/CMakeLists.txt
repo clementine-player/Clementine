@@ -1361,9 +1361,6 @@ else (APPLE)
   target_link_libraries(clementine_lib ${QXT_LIBRARIES})
 endif (APPLE)
 
-set(3RDPARTY_SQLITE_LIBRARY qsqlite)
-target_link_libraries(clementine_lib qsqlite)
-
 if (WIN32)
   target_link_libraries(clementine_lib
     protobuf
