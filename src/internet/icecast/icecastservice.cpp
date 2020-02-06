@@ -125,6 +125,14 @@ void IcecastService::DownloadDirectoryFinished(QNetworkReply* reply,
     return;
   }
 
+  if (reply->error() != QNetworkReply::NoError) {
+    app_->task_manager()->SetTaskFinished(task_id);
+    app_->AddError(tr("Failed to update icecast directory:\n%1")
+                       .arg(reply->errorString()));
+    reply->deleteLater();
+    return;
+  }
+
   QFuture<IcecastBackend::StationList> future =
       QtConcurrent::run(this, &IcecastService::ParseDirectory, reply);
   NewClosure(future, this, SLOT(ParseDirectoryFinished(
