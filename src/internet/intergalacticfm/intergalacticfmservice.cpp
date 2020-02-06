@@ -129,8 +129,8 @@ void IntergalacticFMServiceBase::RefreshStreamsFinished(QNetworkReply* reply,
   reply->deleteLater();
 
   if (reply->error() != QNetworkReply::NoError) {
-    // TODO(David Sansome): Error handling
-    qLog(Error) << reply->errorString();
+    app_->AddError(
+        tr("Failed to get channel list:\n%1").arg(reply->errorString()));
     return;
   }
 
