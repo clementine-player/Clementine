@@ -122,7 +122,7 @@ SettingsDialog::SettingsDialog(Application* app, BackgroundStreams* streams,
                                QWidget* parent)
     : QDialog(parent),
       app_(app),
-      model_(app_->library_model()->directory_model()),
+      model_(app_->directory_model()),
       gst_engine_(qobject_cast<GstEngine*>(app_->player()->engine())),
       song_info_view_(nullptr),
       streams_(streams),

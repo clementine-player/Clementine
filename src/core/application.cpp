@@ -286,6 +286,10 @@ LibraryBackend* Application::library_backend() const {
   return library()->backend();
 }
 
+LibraryDirectoryModel* Application::directory_model() const {
+  return library()->model()->directory_model();
+}
+
 LibraryModel* Application::library_model() const { return library()->model(); }
 
 MoodbarController* Application::moodbar_controller() const {

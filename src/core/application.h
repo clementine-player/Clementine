@@ -84,6 +84,7 @@ class Application : public QObject {
   InternetModel* internet_model() const;
   Library* library() const;
   LibraryBackend* library_backend() const;
+  LibraryDirectoryModel* directory_model() const;
   LibraryModel* library_model() const;
   MoodbarController* moodbar_controller() const;
   MoodbarLoader* moodbar_loader() const;

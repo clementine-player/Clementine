@@ -187,8 +187,7 @@ void DeviceView::SetApplication(Application* app) {
   properties_dialog_->SetDeviceManager(app_->device_manager());
 
   organise_dialog_.reset(new OrganiseDialog(app_->task_manager()));
-  organise_dialog_->SetDestinationModel(
-      app_->library_model()->directory_model());
+  organise_dialog_->SetDestinationModel(app_->directory_model());
 }
 
 void DeviceView::contextMenuEvent(QContextMenuEvent* e) {

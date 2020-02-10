@@ -662,8 +662,7 @@ void LibraryView::Organise() {
     organise_dialog_.reset(new OrganiseDialog(app_->task_manager(),
                                               app_->library_backend()));
 
-  organise_dialog_->SetDestinationModel(
-      app_->library_model()->directory_model());
+  organise_dialog_->SetDestinationModel(app_->directory_model());
   organise_dialog_->SetCopy(false);
   if (organise_dialog_->SetSongs(GetSelectedSongs()))
     organise_dialog_->show();
@@ -686,8 +685,7 @@ void LibraryView::Delete() {
   // they'll all be FilesystemMusicStorage in a library and deleting doesn't
   // check the actual directory.
   std::shared_ptr<MusicStorage> storage =
-      app_->library_model()
-          ->directory_model()
+      app_->directory_model()
           ->index(0, 0)
           .data(MusicStorage::Role_Storage)
           .value<std::shared_ptr<MusicStorage>>();
