@@ -130,7 +130,7 @@ PodcastDownloader::PodcastDownloader(Application* app, QObject* parent)
 QString PodcastDownloader::DefaultDownloadDir() const {
   QString prefix = QDir::homePath();
 
-  LibraryDirectoryModel* model = app_->library_model()->directory_model();
+  LibraryDirectoryModel* model = app_->directory_model();
   if (model->rowCount() > 0) {
     // Download to the first library directory if there is one set
     prefix = model->index(0, 0).data().toString();

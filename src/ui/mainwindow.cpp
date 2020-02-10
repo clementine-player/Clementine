@@ -203,7 +203,7 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
       organise_dialog_([=]() {
         OrganiseDialog* dialog = new OrganiseDialog(app->task_manager(),
                                                     app->library_backend());
-        dialog->SetDestinationModel(app->library()->model()->directory_model());
+        dialog->SetDestinationModel(app->directory_model());
         return dialog;
       }),
       queue_manager_([=]() {
@@ -2389,16 +2389,14 @@ void MainWindow::NowPlayingWidgetPositionChanged(bool above_status_bar) {
 }
 
 void MainWindow::CopyFilesToLibrary(const QList<QUrl>& urls) {
-  organise_dialog_->SetDestinationModel(
-      app_->library_model()->directory_model());
+  organise_dialog_->SetDestinationModel(app_->directory_model());
   organise_dialog_->SetUrls(urls);
   organise_dialog_->SetCopy(true);
   organise_dialog_->show();
 }
 
 void MainWindow::MoveFilesToLibrary(const QList<QUrl>& urls) {
-  organise_dialog_->SetDestinationModel(
-      app_->library_model()->directory_model());
+  organise_dialog_->SetDestinationModel(app_->directory_model());
   organise_dialog_->SetUrls(urls);
   organise_dialog_->SetCopy(false);
   organise_dialog_->show();
@@ -2450,8 +2448,7 @@ void MainWindow::PlaylistOrganiseSelected(bool copy) {
                  ->Metadata();
   }
 
-  organise_dialog_->SetDestinationModel(
-      app_->library_model()->directory_model());
+  organise_dialog_->SetDestinationModel(app_->directory_model());
   organise_dialog_->SetSongs(songs);
   organise_dialog_->SetCopy(copy);
   organise_dialog_->show();
