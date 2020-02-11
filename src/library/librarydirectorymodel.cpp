@@ -23,14 +23,16 @@
 #include "core/utilities.h"
 #include "ui/iconloader.h"
 
-LibraryDirectoryModel::LibraryDirectoryModel(LibraryBackend* backend,
-                                             QObject* parent)
+LibraryDirectoryModel::LibraryDirectoryModel(
+    std::shared_ptr<LibraryBackend> backend, QObject* parent)
     : QStandardItemModel(parent),
       dir_icon_(IconLoader::Load("document-open-folder", IconLoader::Base)),
       backend_(backend) {
-  connect(backend_, SIGNAL(DirectoryDiscovered(Directory, SubdirectoryList)),
+  connect(backend_.get(),
+          SIGNAL(DirectoryDiscovered(Directory, SubdirectoryList)),
           SLOT(DirectoryDiscovered(Directory)));
-  connect(backend_, SIGNAL(DirectoryDeleted(int)), SLOT(DirectoryDeleted(int)));
+  connect(backend_.get(), SIGNAL(DirectoryDeleted(int)),
+          SLOT(DirectoryDeleted(int)));
 }
 
 LibraryDirectoryModel::~LibraryDirectoryModel() {}
