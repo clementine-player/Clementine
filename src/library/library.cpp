@@ -57,7 +57,7 @@ Library::Library(Application* app, QObject* parent)
   using smart_playlists::SearchTerm;
 
   model_ = new LibraryModel(backend_, app_, this);
-  dir_model_ = new LibraryDirectoryModel(backend_.get(), this);
+  dir_model_ = new LibraryDirectoryModel(backend_, this);
   model_->set_show_smart_playlists(true);
   model_->set_default_smart_playlists(
       LibraryModel::DefaultGenerators()
