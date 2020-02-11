@@ -33,7 +33,6 @@
 
 #include "librarybackend.h"
 #include "libraryitem.h"
-#include "librarydirectorymodel.h"
 #include "libraryview.h"
 #include "sqlrow.h"
 #include "core/application.h"
@@ -79,7 +78,6 @@ LibraryModel::LibraryModel(std::shared_ptr<LibraryBackend> backend,
     : SimpleTreeModel<LibraryItem>(new LibraryItem(this), parent),
       backend_(backend),
       app_(app),
-      dir_model_(new LibraryDirectoryModel(backend.get(), this)),
       show_smart_playlists_(false),
       show_various_artists_(true),
       total_song_count_(0),

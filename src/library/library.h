@@ -30,6 +30,7 @@ class Application;
 class Database;
 class LibraryBackend;
 class LibraryModel;
+class LibraryDirectoryModel;
 class LibraryWatcher;
 class TaskManager;
 class Thread;
@@ -50,6 +51,7 @@ class Library : public QObject {
 
   LibraryBackend* backend() const { return backend_.get(); }
   LibraryModel* model() const { return model_; }
+  LibraryDirectoryModel* directory_model() const { return dir_model_; }
 
   QString full_rescan_reason(int schema_version) const {
     return full_rescan_revisions_.value(schema_version, QString());
@@ -80,6 +82,7 @@ class Library : public QObject {
   Application* app_;
   std::shared_ptr<LibraryBackend> backend_;
   LibraryModel* model_;
+  LibraryDirectoryModel* dir_model_;
 
   LibraryWatcher* watcher_;
   Thread* watcher_thread_;

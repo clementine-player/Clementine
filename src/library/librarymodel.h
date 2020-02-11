@@ -38,7 +38,6 @@
 
 class Application;
 class AlbumCoverLoader;
-class LibraryDirectoryModel;
 class LibraryBackend;
 namespace smart_playlists {
 class Search;
@@ -120,7 +119,6 @@ class LibraryModel : public SimpleTreeModel<LibraryItem> {
   };
 
   LibraryBackend* backend() const { return backend_.get(); }
-  LibraryDirectoryModel* directory_model() const { return dir_model_; }
 
   typedef QList<smart_playlists::GeneratorPtr> GeneratorList;
   typedef QList<GeneratorList> DefaultGenerators;
@@ -263,7 +261,6 @@ signals:
  private:
   std::shared_ptr<LibraryBackend> backend_;
   Application* app_;
-  LibraryDirectoryModel* dir_model_;
   bool show_smart_playlists_;
   DefaultGenerators default_smart_playlists_;
   bool show_various_artists_;
