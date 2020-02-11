@@ -287,7 +287,7 @@ LibraryBackend* Application::library_backend() const {
 }
 
 LibraryDirectoryModel* Application::directory_model() const {
-  return library()->model()->directory_model();
+  return library()->directory_model();
 }
 
 LibraryModel* Application::library_model() const { return library()->model(); }
