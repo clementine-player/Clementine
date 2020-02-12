@@ -88,7 +88,7 @@ void ITunesSearchPage::SearchFinished(QNetworkReply* reply) {
   QJsonObject json_data = json_document.object();
 
   // Was there an error message in the JSON?
-  if (!json_data["errorMessage"].isUndefined()) {
+  if (json_data.contains("errorMessage")) {
     QMessageBox::warning(this, tr("Failed to fetch podcasts"),
                          json_data["errorMessage"].toString());
     return;
