@@ -218,8 +218,7 @@ void LibraryBackend::AddDirectory(const QString& path) {
 
   if (Application::kIsPortable && Utilities::UrlOnSameDriveAsClementine(
                                       QUrl::fromLocalFile(canonical_path))) {
-    db_path = Utilities::GetRelativePathToClementineBin(
-                  QUrl::fromLocalFile(db_path)).toLocalFile();
+    db_path = Utilities::GetRelativePathToClementineBin(db_path);
     qLog(Debug) << "db_path" << db_path;
   }
 

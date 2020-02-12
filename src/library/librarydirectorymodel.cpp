@@ -41,8 +41,8 @@ void LibraryDirectoryModel::DirectoryDiscovered(const Directory& dir) {
   QStandardItem* item;
   if (Application::kIsPortable &&
       Utilities::UrlOnSameDriveAsClementine(QUrl::fromLocalFile(dir.path))) {
-    item = new QStandardItem(Utilities::GetRelativePathToClementineBin(
-                                 QUrl::fromLocalFile(dir.path)).toLocalFile());
+    item =
+        new QStandardItem(Utilities::GetRelativePathToClementineBin(dir.path));
   } else {
     item = new QStandardItem(dir.path);
   }
