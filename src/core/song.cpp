@@ -406,7 +406,7 @@ void Song::set_unavailable(bool v) { d->unavailable_ = v; }
 void Song::set_etag(const QString& etag) { d->etag_ = etag; }
 
 void Song::set_url(const QUrl& v) {
-  if (Application::kIsPortable) {
+  if (Application::kIsPortable && v.isRelative()) {
     QUrl base =
         QUrl::fromLocalFile(QCoreApplication::applicationDirPath() + "/");
     d->url_ = base.resolved(v);
