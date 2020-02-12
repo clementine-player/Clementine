@@ -726,8 +726,13 @@ bool UrlOnSameDriveAsClementine(const QUrl& url) {
 }
 
 QUrl GetRelativePathToClementineBin(const QUrl& url) {
+  QString relPath = GetRelativePathToClementineBin(url.toLocalFile());
+  return QUrl::fromLocalFile(relPath);
+}
+
+QString GetRelativePathToClementineBin(const QString& abspath) {
   QDir appPath(QCoreApplication::applicationDirPath());
-  return QUrl::fromLocalFile(appPath.relativeFilePath(url.toLocalFile()));
+  return appPath.relativeFilePath(abspath);
 }
 
 QString PathWithoutFilenameExtension(const QString& filename) {

@@ -118,6 +118,8 @@ bool UrlOnSameDriveAsClementine(const QUrl& url);
 // Get relative path to clementine binary
 QUrl GetRelativePathToClementineBin(const QUrl& url);
 
+QString GetRelativePathToClementineBin(const QString& abspath);
+
 // Get the path without the filename extension
 QString PathWithoutFilenameExtension(const QString& filename);
 QString FiddleFileExtension(const QString& filename,
