@@ -727,7 +727,10 @@ bool UrlOnSameDriveAsClementine(const QUrl& url) {
 
 QUrl GetRelativePathToClementineBin(const QUrl& url) {
   QString relPath = GetRelativePathToClementineBin(url.toLocalFile());
-  return QUrl::fromLocalFile(relPath);
+  QUrl rel_url = QUrl::fromLocalFile(relPath);
+  // QUrl considers a URL relative if the schema is omitted.
+  rel_url.setScheme(QString());
+  return rel_url;
 }
 
 QString GetRelativePathToClementineBin(const QString& abspath) {
