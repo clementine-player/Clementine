@@ -26,7 +26,6 @@
 #include <QUrl>
 #include <QUrlQuery>
 
-#include "core/closure.h"
 #include "core/logging.h"
 #include "songkickconcertwidget.h"
 #include "ui/iconloader.h"
@@ -62,8 +61,8 @@ void SongkickConcerts::FetchInfo(int id, const Song& metadata) {
 
   QNetworkRequest request(url);
   QNetworkReply* reply = network_.get(request);
-  NewClosure(reply, SIGNAL(finished()), this,
-             SLOT(ArtistSearchFinished(QNetworkReply*, int)), reply, id);
+  connect(reply, &QNetworkReply::finished,
+          [=] { this->ArtistSearchFinished(reply, id); });
 }
 
 void SongkickConcerts::ArtistSearchFinished(QNetworkReply* reply, int id) {
@@ -111,8 +110,8 @@ void SongkickConcerts::FetchSongkickCalendar(const QString& artist_id, int id) {
   url.setQuery(url_query);
   qLog(Debug) << url;
   QNetworkReply* reply = network_.get(QNetworkRequest(url));
-  NewClosure(reply, SIGNAL(finished()), this,
-             SLOT(CalendarRequestFinished(QNetworkReply*, int)), reply, id);
+  connect(reply, &QNetworkReply::finished,
+          [=] { this->CalendarRequestFinished(reply, id); });
 }
 
 void SongkickConcerts::CalendarRequestFinished(QNetworkReply* reply, int id) {
