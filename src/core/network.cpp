@@ -17,6 +17,7 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "core/logging.h"
 #include "network.h"
 
 #include <QCoreApplication>
@@ -95,6 +96,7 @@ NetworkAccessManager::NetworkAccessManager(int timeout, QObject* parent)
 
 QNetworkReply* NetworkAccessManager::createRequest(
     Operation op, const QNetworkRequest& request, QIODevice* outgoingData) {
+  qLogCat(Debug, "NetworkRequests") << request.url();
   QByteArray user_agent = QString("%1 %2")
                               .arg(QCoreApplication::applicationName(),
                                    QCoreApplication::applicationVersion())
