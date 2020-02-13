@@ -129,11 +129,11 @@ void AcoustidClient::RequestFinished(QNetworkReply* reply, int request_id) {
 
   for (const QJsonValue& v : json_results) {
     QJsonObject r = v.toObject();
-    if (!r["recordings"].isUndefined()) {
+    if (r.contains("recordings")) {
       QJsonArray json_recordings = r["recordings"].toArray();
       for (const QJsonValue& recording : json_recordings) {
         QJsonObject o = recording.toObject();
-        if (!o["id"].isUndefined()) {
+        if (o.contains("id")) {
           id_source_list << IdSource(o["id"].toString(), o["sources"].toInt());
         }
       }

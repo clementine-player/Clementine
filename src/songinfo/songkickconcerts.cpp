@@ -133,7 +133,8 @@ void SongkickConcerts::CalendarRequestFinished(QNetworkReply* reply, int id) {
 
     // Try to get the lat/lng coordinates of the venue.
     QJsonObject json_venue = json_event["venue"].toObject();
-    const bool valid_latlng = !json_venue["lng"].isUndefined() && !json_venue["lat"].isUndefined();
+    const bool valid_latlng =
+        json_venue.contains("lng") && json_venue.contains("lat");
 
     if (valid_latlng && latlng_.IsValid()) {
       static const int kFilterDistanceMetres = 250 * 1e3;  // 250km

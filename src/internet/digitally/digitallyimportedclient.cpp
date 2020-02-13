@@ -85,7 +85,7 @@ DigitallyImportedClient::AuthReply DigitallyImportedClient::ParseAuthReply(
 
   QJsonObject json_root_object = QJsonDocument::fromJson(reply->readAll()).object();
 
-  if (json_root_object["subscriptions"].isUndefined()) {
+  if (!json_root_object.contains("subscriptions")) {
     return ret;
   }
 
@@ -96,9 +96,10 @@ DigitallyImportedClient::AuthReply DigitallyImportedClient::ParseAuthReply(
     return ret;
   }
 
-  if (json_root_object["first_name"].isUndefined() || json_root_object["last_name"].isUndefined() ||
-      json_subscriptions[0].toObject()["expires_on"].isUndefined() ||
-      json_root_object["listen_key"].isUndefined())
+  if (!json_root_object.contains("first_name") ||
+      !json_root_object.contains("last_name") ||
+      !json_subscriptions[0].toObject().contains("expires_on") ||
+      !json_root_object.contains("listen_key"))
     return ret;
 
   ret.success_ = true;
@@ -124,7 +125,7 @@ DigitallyImportedClient::ChannelList DigitallyImportedClient::ParseChannelList(
 
   QJsonObject json_root_object = QJsonDocument::fromJson(reply->readAll()).object();
 
-  if (json_root_object["channel_filters"].isUndefined()) return ret;
+  if (!json_root_object.contains("channel_filters")) return ret;
 
   QJsonArray json_filters = json_root_object["channel_filters"].toArray();
 
