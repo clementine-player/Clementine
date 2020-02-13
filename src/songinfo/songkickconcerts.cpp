@@ -69,7 +69,21 @@ void SongkickConcerts::FetchInfo(int id, const Song& metadata) {
 void SongkickConcerts::ArtistSearchFinished(QNetworkReply* reply, int id) {
   reply->deleteLater();
 
-  QJsonDocument document = QJsonDocument::fromBinaryData(reply->readAll());
+  if (reply->error() != QNetworkReply::NoError) {
+    qLog(Debug) << "Songkick request error" << reply->errorString();
+    emit Finished(id);
+    return;
+  }
+
+  QJsonParseError error;
+  QJsonDocument document = QJsonDocument::fromJson(reply->readAll(), &error);
+  if (error.error != QJsonParseError::NoError) {
+    qLog(Error) << "Error parsing Songkick artist reply:"
+                << error.errorString();
+    emit Finished(id);
+    return;
+  }
+
   QJsonObject json = document.object();
 
   QJsonObject results_page = json["resultsPage"].toObject();
@@ -77,13 +91,15 @@ void SongkickConcerts::ArtistSearchFinished(QNetworkReply* reply, int id) {
   QJsonArray artists = results["artist"].toArray();
 
   if (artists.isEmpty()) {
+    qLog(Debug) << "No artist found in songkick results.";
     emit Finished(id);
     return;
   }
 
   QJsonObject artist = artists.first().toObject();
-  QString artist_id = artist["id"].toString();
-
+  // Calling toString on a value that is not a string type will return an empty
+  // string. But QVariant will do the formatting.
+  QString artist_id = artist["id"].toVariant().toString();
   FetchSongkickCalendar(artist_id, id);
 }
 
@@ -102,11 +118,18 @@ void SongkickConcerts::FetchSongkickCalendar(const QString& artist_id, int id) {
 void SongkickConcerts::CalendarRequestFinished(QNetworkReply* reply, int id) {
   reply->deleteLater();
 
+  if (reply->error() != QNetworkReply::NoError) {
+    qLog(Debug) << "Songkick request error" << reply->errorString();
+    emit Finished(id);
+    return;
+  }
+
   QJsonParseError error;
   QJsonDocument json_document = QJsonDocument::fromJson(reply->readAll(), &error);
 
   if (error.error != QJsonParseError::NoError) {
-    qLog(Error) << "Error parsing Songkick reply";
+    qLog(Error) << "Error parsing Songkick calendar reply:"
+                << error.errorString();
     emit Finished(id);
     return;
   }
@@ -117,6 +140,7 @@ void SongkickConcerts::CalendarRequestFinished(QNetworkReply* reply, int id) {
   QJsonArray json_events = json_results["event"].toArray();
 
   if (json_events.isEmpty()) {
+    qLog(Debug) << "No events found in songkick results.";
     emit Finished(id);
     return;
   }
@@ -130,22 +154,27 @@ void SongkickConcerts::CalendarRequestFinished(QNetworkReply* reply, int id) {
     QString start_date = json_event["start"].toObject()["date"].toString();
     QString city = json_event["location"].toObject()["city"].toString();
     QString uri = json_event["uri"].toString();
+    QString lat;
+    QString lng;
 
     // Try to get the lat/lng coordinates of the venue.
     QJsonObject json_venue = json_event["venue"].toObject();
     const bool valid_latlng =
         json_venue.contains("lng") && json_venue.contains("lat");
 
-    if (valid_latlng && latlng_.IsValid()) {
-      static const int kFilterDistanceMetres = 250 * 1e3;  // 250km
-      Geolocator::LatLng latlng(json_venue["lat"].toString(),
-                                json_venue["lng"].toString());
-      if (latlng_.IsValid() && latlng.IsValid()) {
-        int distance_metres = latlng_.Distance(latlng);
-        if (distance_metres > kFilterDistanceMetres) {
-          qLog(Debug) << "Filtered concert:" << display_name
-                      << "as too far away:" << distance_metres;
-          continue;
+    if (valid_latlng) {
+      lat = json_venue["lat"].toVariant().toString();
+      lng = json_venue["lng"].toVariant().toString();
+      if (latlng_.IsValid()) {
+        static const int kFilterDistanceMetres = 250 * 1e3;  // 250km
+        Geolocator::LatLng latlng(lat, lng);
+        if (latlng_.IsValid() && latlng.IsValid()) {
+          int distance_metres = latlng_.Distance(latlng);
+          if (distance_metres > kFilterDistanceMetres) {
+            qLog(Debug) << "Filtered concert:" << display_name
+                        << "as too far away:" << distance_metres;
+            continue;
+          }
         }
       }
     }
@@ -154,8 +183,7 @@ void SongkickConcerts::CalendarRequestFinished(QNetworkReply* reply, int id) {
     widget->Init(display_name, uri, start_date, city);
 
     if (valid_latlng) {
-      widget->SetMap(json_venue["lat"].toString(), json_venue["lng"].toString(),
-                     json_venue["displayName"].toString());
+      widget->SetMap(lat, lng, json_venue["displayName"].toString());
     }
 
     layout->addWidget(widget);
