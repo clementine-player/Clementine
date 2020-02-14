@@ -137,7 +137,9 @@ void DropboxService::RequestFileList() {
 void DropboxService::RequestFileListFinished(QNetworkReply* reply) {
   reply->deleteLater();
 
-  QJsonDocument document = QJsonDocument::fromBinaryData(reply->readAll());
+  QJsonDocument document = ParseJsonReply(reply);
+  if (document.isNull()) return;
+
   QJsonObject json_response = document.object();
 
   if (json_response.contains("reset") && json_response["reset"].toBool()) {
@@ -213,7 +215,11 @@ void DropboxService::LongPollDelta() {
 
 void DropboxService::LongPollFinished(QNetworkReply* reply) {
   reply->deleteLater();
-  QJsonObject json_response = QJsonDocument::fromBinaryData(reply->readAll()).object();
+
+  QJsonDocument document = ParseJsonReply(reply);
+  if (document.isNull()) return;
+
+  QJsonObject json_response = document.object();
   if (json_response["changes"].toBool()) {
     // New changes, we should request deltas again.
     qLog(Debug) << "Detected new dropbox changes; fetching...";
@@ -241,7 +247,11 @@ QNetworkReply* DropboxService::FetchContentUrl(const QUrl& url) {
 void DropboxService::FetchContentUrlFinished(QNetworkReply* reply,
                                              const QVariantMap& data) {
   reply->deleteLater();
-  QJsonObject json_response = QJsonDocument::fromBinaryData(reply->readAll()).object();
+
+  QJsonDocument document = ParseJsonReply(reply);
+  if (document.isNull()) return;
+
+  QJsonObject json_response = document.object();
   QFileInfo info(data["path_lower"].toString());
 
   QUrl url;
@@ -267,6 +277,9 @@ QUrl DropboxService::GetStreamingUrlFromSongId(const QUrl& url) {
   QNetworkReply* reply = FetchContentUrl(url);
   WaitForSignal(reply, SIGNAL(finished()));
 
-  QJsonObject json_response = QJsonDocument::fromJson(reply->readAll()).object();
+  QJsonDocument document = ParseJsonReply(reply);
+  if (document.isNull()) return QUrl();
+
+  QJsonObject json_response = document.object();
   return QUrl::fromEncoded(json_response["link"].toVariant().toByteArray());
 }
