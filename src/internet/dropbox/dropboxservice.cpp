@@ -178,7 +178,7 @@ void DropboxService::RequestFileListFinished(QNetworkReply* reply) {
       QNetworkReply* reply = FetchContentUrl(url);
       NewClosure(reply, SIGNAL(finished()), this,
                  SLOT(FetchContentUrlFinished(QNetworkReply*, QVariantMap)),
-                 reply, item);
+                 reply, item.toVariantMap());
     }
   }
 
