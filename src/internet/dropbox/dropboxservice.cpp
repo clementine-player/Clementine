@@ -118,8 +118,8 @@ void DropboxService::RequestFileList() {
 
     QJsonDocument document(json);
     QNetworkReply* reply = network_->post(request, document.toJson());
-    NewClosure(reply, SIGNAL(finished()), this,
-               SLOT(RequestFileListFinished(QNetworkReply*)), reply);
+    connect(reply, &QNetworkReply::finished,
+            [=] { this->RequestFileListFinished(reply); });
   } else {
     QUrl url = QUrl(kListFolderContinueEndpoint);
     QJsonObject json;
@@ -129,8 +129,8 @@ void DropboxService::RequestFileList() {
     request.setRawHeader("Authorization", GenerateAuthorisationHeader());
     request.setRawHeader("Content-Type", "application/json; charset=utf-8");
     QNetworkReply* reply = network_->post(request, document.toJson());
-    NewClosure(reply, SIGNAL(finished()), this,
-               SLOT(RequestFileListFinished(QNetworkReply*)), reply);
+    connect(reply, &QNetworkReply::finished,
+            [=] { this->RequestFileListFinished(reply); });
   }
 }
 
@@ -176,9 +176,9 @@ void DropboxService::RequestFileListFinished(QNetworkReply* reply) {
 
     if (ShouldIndexFile(url, GuessMimeTypeForFile(url.toString()))) {
       QNetworkReply* reply = FetchContentUrl(url);
-      NewClosure(reply, SIGNAL(finished()), this,
-                 SLOT(FetchContentUrlFinished(QNetworkReply*, QVariantMap)),
-                 reply, item.toVariantMap());
+      connect(reply, &QNetworkReply::finished, [=] {
+        this->FetchContentUrlFinished(reply, item.toVariantMap());
+      });
     }
   }
 
@@ -209,8 +209,8 @@ void DropboxService::LongPollDelta() {
   request.setRawHeader("Content-Type", "application/json; charset=utf-8");
   QJsonDocument document(json);
   QNetworkReply* reply = network_->post(request, document.toJson());
-  NewClosure(reply, SIGNAL(finished()), this,
-             SLOT(LongPollFinished(QNetworkReply*)), reply);
+  connect(reply, &QNetworkReply::finished,
+          [=] { this->LongPollFinished(reply); });
 }
 
 void DropboxService::LongPollFinished(QNetworkReply* reply) {
