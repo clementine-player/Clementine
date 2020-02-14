@@ -38,6 +38,8 @@
 class Application;
 class InternetModel;
 class LibraryFilterWidget;
+class QJsonDocument;
+class QNetworkReply;
 class QStandardItem;
 
 class InternetService : public QObject {
@@ -110,6 +112,11 @@ signals:
   QAction* GetReplacePlaylistAction();
   // Returns the 'open in new playlist' QAction.
   QAction* GetOpenInNewPlaylistAction();
+
+  // Check network reply for error, read, then parse. Will display errors if
+  // they occur. Returns a valid QJsonDocument on success, a null document on
+  // failure.
+  QJsonDocument ParseJsonReply(QNetworkReply* reply);
 
   // Describes how songs should be added to playlist.
   enum AddMode {

@@ -25,15 +25,18 @@
 #include <QApplication>
 #include <QClipboard>
 #include <QIcon>
+#include <QJsonDocument>
 #include <QMenu>
 #include <QMessageBox>
+#include <QNetworkReply>
 #include <QPushButton>
 #include <QStandardItem>
 
-#include "internet/core/internetmodel.h"
+#include "core/application.h"
 #include "core/logging.h"
 #include "core/mergedproxymodel.h"
 #include "core/mimedata.h"
+#include "internet/core/internetmodel.h"
 #include "ui/iconloader.h"
 
 InternetService::InternetService(const QString& name, Application* app,
@@ -140,4 +143,23 @@ QStandardItem* InternetService::CreateSongItem(const Song& song) {
   item->setData(song.url(), InternetModel::Role_Url);
 
   return item;
+}
+
+QJsonDocument InternetService::ParseJsonReply(QNetworkReply* reply) {
+  if (reply->error() != QNetworkReply::NoError) {
+    app_->AddError(
+        tr("%1 request failed:\n%2").arg(name_).arg(reply->errorString()));
+    return QJsonDocument();
+  }
+
+  QJsonParseError error;
+  QJsonDocument document = QJsonDocument::fromJson(reply->readAll(), &error);
+  if (error.error != QJsonParseError::NoError) {
+    app_->AddError(tr("Failed to parse %1 response:\n%2")
+                       .arg(name_)
+                       .arg(error.errorString()));
+    return QJsonDocument();
+  }
+
+  return document;
 }
