@@ -164,6 +164,9 @@ int GetThreadId();
 bool IsLaptop();
 
 QString SystemLanguageName();
+
+// Scrub messages for to remove queries, which may include auth info, from URLs.
+QString ScrubUrlQueries(const QString& str);
 }  // namespace Utilities
 
 class ScopedWCharArray {
