@@ -72,7 +72,7 @@ QStringList File::parent_ids() const {
 ConnectResponse::ConnectResponse(QObject* parent) : QObject(parent) {}
 
 GetFileResponse::GetFileResponse(const QString& file_id, QObject* parent)
-    : QObject(parent), file_id_(file_id) {}
+    : QObject(parent), file_id_(file_id), had_error_(false) {}
 
 ListChangesResponse::ListChangesResponse(const QString& cursor, QObject* parent)
     : QObject(parent), cursor_(cursor) {}
@@ -165,6 +165,7 @@ void Client::GetFileFinished(GetFileResponse* response, QNetworkReply* reply) {
   QJsonDocument document = QJsonDocument::fromJson(reply->readAll(), &error);
   if (error.error != QJsonParseError::NoError) {
     qLog(Error) << "Failed to fetch file with ID" << response->file_id_;
+    response->had_error_ = true;
     emit response->Finished();
     return;
   }
