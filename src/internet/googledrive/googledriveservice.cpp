@@ -204,6 +204,11 @@ QUrl GoogleDriveService::GetStreamingUrlFromSongId(const QString& id) {
   connect(response.data(), SIGNAL(Finished()), &loop, SLOT(quit()));
   loop.exec();
 
+  if (response->had_error()) {
+    app_->AddError(tr("Could not find Google Drive file."));
+    return QUrl();
+  }
+
   QUrl url(response->file().download_url());
   QUrlQuery url_query(url);
   url_query.addQueryItem("access_token", client_->access_token());

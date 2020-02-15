@@ -103,6 +103,7 @@ class GetFileResponse : public QObject {
  public:
   const QString& file_id() const { return file_id_; }
   const File& file() const { return file_; }
+  bool had_error() { return had_error_; }
 
  signals:
   void Finished();
@@ -111,6 +112,7 @@ class GetFileResponse : public QObject {
   GetFileResponse(const QString& file_id, QObject* parent);
   QString file_id_;
   File file_;
+  bool had_error_;
 };
 
 class ListChangesResponse : public QObject {
