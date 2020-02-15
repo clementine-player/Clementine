@@ -25,7 +25,7 @@ GoogleDriveUrlHandler::GoogleDriveUrlHandler(GoogleDriveService* service,
     : UrlHandler(parent), service_(service) {}
 
 UrlHandler::LoadResult GoogleDriveUrlHandler::StartLoading(const QUrl& url) {
-  QString file_id = url.path();
+  QString file_id = url.path().remove(QChar('/'));
   QUrl real_url = service_->GetStreamingUrlFromSongId(file_id);
   LoadResult::Type type = real_url.isValid() ? LoadResult::TrackAvailable
                                              : LoadResult::NoMoreTracks;
