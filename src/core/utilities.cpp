@@ -760,6 +760,13 @@ QByteArray GetUriForGstreamer(const QUrl& url) {
   return url.toEncoded();
 }
 
+QString ScrubUrlQueries(const QString& str) {
+  // If the URL isn't followed by whitespace, this will eat extra characters.
+  QRegExp rx("((?:http|https)://\\S*\\?)\\S*");
+  // QString::replace is non const, so operate on a copy.
+  return QString(str).replace(rx, "\\1 (query removed)");
+}
+
 }  // namespace Utilities
 
 ScopedWCharArray::ScopedWCharArray(const QString& str)
