@@ -126,9 +126,7 @@ void Client::FetchUserInfoFinished(ConnectResponse* response,
       return;
     }
 
-    qLog(Debug) << document;
     response->user_email_ = document.object()["email"].toString();
-    qLog(Debug) << response->user_email_;
   }
   emit response->Finished();
   emit Authenticated();
