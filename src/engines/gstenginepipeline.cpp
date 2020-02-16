@@ -685,7 +685,10 @@ void GstEnginePipeline::ErrorMessageReceived(GstMessage* msg) {
     return;
   }
 
-  qLog(Error) << id() << debugstr;
+  for (const QString& l : debugstr.split("\n")) {
+    // Messages may contain URLs with auth info in query strings.
+    qLog(Error) << id() << Utilities::ScrubUrlQueries(l);
+  }
 
   emit Error(id(), message, domain, code);
 }
