@@ -132,8 +132,10 @@ void Player::HandleLoadResult(const UrlHandler::LoadResult& result) {
       break;
 
     case UrlHandler::LoadResult::TrackAvailable: {
+      // The media URL may contain an auth token.
       qLog(Debug) << "URL handler for" << result.original_url_ << "returned"
-                  << result.media_url_;
+                  << result.media_url_.toString(QUrl::RemoveQuery)
+                  << "(query removed)";
 
       // If there was no length info in song's metadata, use the one provided by
       // URL handler, if there is one
