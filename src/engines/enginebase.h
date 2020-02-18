@@ -32,6 +32,7 @@
 #include <QUrl>
 
 #include "engine_fwd.h"
+#include "playbackrequest.h"
 
 namespace Engine {
 
@@ -45,7 +46,8 @@ class Base : public QObject {
 
   virtual bool Init() = 0;
 
-  virtual void StartPreloading(const QUrl&, bool, qint64, qint64) {}
+  virtual void StartPreloading(const MediaPlaybackRequest&, bool, qint64,
+                               qint64) {}
   virtual bool Play(quint64 offset_nanosec) = 0;
   virtual void Stop(bool stop_after = false) = 0;
   virtual void Pause() = 0;
@@ -62,7 +64,7 @@ class Base : public QObject {
 
   // Subclasses should respect given markers (beginning and end) which are
   // in milliseconds.
-  virtual bool Load(const QUrl& url, TrackChangeFlags change,
+  virtual bool Load(const MediaPlaybackRequest& req, TrackChangeFlags change,
                     bool force_stop_at_end, quint64 beginning_nanosec,
                     qint64 end_nanosec);
   // Sets new values for the beginning and end markers of the currently playing
@@ -78,8 +80,9 @@ class Base : public QObject {
   // to the given 'end' (usually from 0 to a song's length). Both markers
   // should be passed in nanoseconds. 'end' can be negative, indicating that the
   // real length of 'u' stream is unknown.
-  bool Play(const QUrl& u, TrackChangeFlags c, bool force_stop_at_end,
-            quint64 beginning_nanosec, qint64 end_nanosec);
+  bool Play(const MediaPlaybackRequest& req, TrackChangeFlags c,
+            bool force_stop_at_end, quint64 beginning_nanosec,
+            qint64 end_nanosec);
 
   void SetVolume(uint value);
 
@@ -139,7 +142,7 @@ signals:
   uint volume_;
   quint64 beginning_nanosec_;
   qint64 end_nanosec_;
-  QUrl url_;
+  MediaPlaybackRequest playback_req_;
   Scope scope_;
 
   bool fadeout_enabled_;

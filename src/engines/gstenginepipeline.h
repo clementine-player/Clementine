@@ -31,6 +31,7 @@
 #include <gst/gst.h>
 
 #include "engine_fwd.h"
+#include "playbackrequest.h"
 
 class GstElementDeleter;
 class GstEngine;
@@ -58,7 +59,7 @@ class GstEnginePipeline : public QObject {
   void set_sample_rate(int rate);
 
   // Creates the pipeline, returns false on error
-  bool InitFromUrl(const QUrl& url, qint64 end_nanosec);
+  bool InitFromReq(const MediaPlaybackRequest& req, qint64 end_nanosec);
   bool InitFromString(const QString& pipeline);
 
   // BufferConsumers get fed audio data.  Thread-safe.
@@ -80,12 +81,12 @@ class GstEnginePipeline : public QObject {
 
   // If this is set then it will be loaded automatically when playback finishes
   // for gapless playback
-  void SetNextUrl(const QUrl& url, qint64 beginning_nanosec,
+  void SetNextReq(const MediaPlaybackRequest& req, qint64 beginning_nanosec,
                   qint64 end_nanosec);
-  bool has_next_valid_url() const { return next_url_.isValid(); }
+  bool has_next_valid_url() const { return next_.url_.isValid(); }
 
   // Get information about the music playback
-  QUrl url() const { return url_; }
+  QUrl url() const { return current_.url_; }
   bool is_valid() const { return valid_; }
   // Please note that this method (unlike GstEngine's.position()) is
   // multiple-section media unaware.
@@ -226,8 +227,8 @@ signals:
 
   // The URL that is currently playing, and the URL that is to be preloaded
   // when the current track is close to finishing.
-  QUrl url_;
-  QUrl next_url_;
+  MediaPlaybackRequest current_;
+  MediaPlaybackRequest next_;
 
   // If this is > 0 then the pipeline will be forced to stop when playback goes
   // past this position.

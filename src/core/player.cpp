@@ -146,9 +146,10 @@ void Player::HandleLoadResult(const UrlHandler::LoadResult& result) {
         item->SetTemporaryMetadata(song);
         app_->playlist_manager()->active()->InformOfCurrentSongChange();
       }
-      engine_->Play(
-          result.media_url_, stream_change_type_, item->Metadata().has_cue(),
-          item->Metadata().beginning_nanosec(), item->Metadata().end_nanosec());
+      MediaPlaybackRequest req(result.media_url_);
+      engine_->Play(req, stream_change_type_, item->Metadata().has_cue(),
+                    item->Metadata().beginning_nanosec(),
+                    item->Metadata().end_nanosec());
 
       current_item_ = item;
       loading_async_ = QUrl();
@@ -420,8 +421,8 @@ void Player::PlayAt(int index, Engine::TrackChangeFlags change,
     HandleLoadResult(url_handlers_[url.scheme()]->StartLoading(url));
   } else {
     loading_async_ = QUrl();
-    engine_->Play(current_item_->Url(), change,
-                  current_item_->Metadata().has_cue(),
+    MediaPlaybackRequest req(current_item_->Url());
+    engine_->Play(req, change, current_item_->Metadata().has_cue(),
                   current_item_->Metadata().beginning_nanosec(),
                   current_item_->Metadata().end_nanosec());
 
@@ -604,7 +605,8 @@ void Player::TrackAboutToEnd() {
         break;
     }
   }
-  engine_->StartPreloading(url, next_item->Metadata().has_cue(),
+  MediaPlaybackRequest req(url);
+  engine_->StartPreloading(req, next_item->Metadata().has_cue(),
                            next_item->Metadata().beginning_nanosec(),
                            next_item->Metadata().end_nanosec());
 }
