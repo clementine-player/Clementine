@@ -510,25 +510,25 @@ bool GstEnginePipeline::InitFromString(const QString& pipeline) {
   return gst_element_link(new_bin, audiobin_);
 }
 
-bool GstEnginePipeline::InitFromUrl(const QUrl& url, qint64 end_nanosec) {
+bool GstEnginePipeline::InitFromReq(const MediaPlaybackRequest& req,
+                                    qint64 end_nanosec) {
   pipeline_ = gst_pipeline_new("pipeline");
 
-  if (url.scheme() == "cdda" && !url.path().isEmpty()) {
+  current_ = req;
+  if (current_.url_.scheme() == "cdda" && !current_.url_.path().isEmpty()) {
     // Currently, Gstreamer can't handle input CD devices inside cdda URL. So
     // we handle them ourself: we extract the track number and re-create an
     // URL with only cdda:// + the track number (which can be handled by
     // Gstreamer). We keep the device in mind, and we will set it later using
     // SourceSetupCallback
-    QStringList path = url.path().split('/');
-    url_ = QUrl(QString("cdda://%1").arg(path.takeLast()));
+    QStringList path = current_.url_.path().split('/');
+    current_.url_ = QUrl(QString("cdda://%1").arg(path.takeLast()));
     source_device_ = path.join("/");
-  } else {
-    url_ = url;
   }
   end_offset_nanosec_ = end_nanosec;
 
   // Decode bin
-  if (!ReplaceDecodeBin(url_)) return false;
+  if (!ReplaceDecodeBin(current_.url_)) return false;
 
   return Init();
 }
@@ -917,13 +917,13 @@ GstPadProbeReturn GstEnginePipeline::HandoffCallback(GstPad*,
 
     if (end_time > instance->end_offset_nanosec_) {
       if (instance->has_next_valid_url()) {
-        if (instance->next_url_ == instance->url_ &&
+        if (instance->next_.url_ == instance->current_.url_ &&
             instance->next_beginning_offset_nanosec_ ==
                 instance->end_offset_nanosec_) {
           // The "next" song is actually the next segment of this file - so
           // cheat and keep on playing, but just tell the Engine we've moved on.
           instance->end_offset_nanosec_ = instance->next_end_offset_nanosec_;
-          instance->next_url_ = QUrl();
+          instance->next_ = MediaPlaybackRequest();
           instance->next_beginning_offset_nanosec_ = 0;
           instance->next_end_offset_nanosec_ = 0;
 
@@ -995,8 +995,8 @@ void GstEnginePipeline::SourceDrainedCallback(GstURIDecodeBin* bin,
       // not start or with some offset. So just do nothing here: when the song
       // finished, EndOfStreamReached/TrackEnded will be emitted anyway so
       // NextItem will be called.
-      !(instance->url_.scheme() != "spotify" &&
-        instance->next_url_.scheme() == "spotify")) {
+      !(instance->current_.url_.scheme() != "spotify" &&
+        instance->next_.url_.scheme() == "spotify")) {
     instance->TransitionToNext();
   }
 }
@@ -1042,16 +1042,16 @@ void GstEnginePipeline::TransitionToNext() {
 
   ignore_tags_ = true;
 
-  if (!ReplaceDecodeBin(next_url_)) {
-    qLog(Error) << "ReplaceDecodeBin failed with " << next_url_;
+  if (!ReplaceDecodeBin(next_.url_)) {
+    qLog(Error) << "ReplaceDecodeBin failed with " << next_.url_;
     return;
   }
   gst_element_set_state(uridecodebin_, GST_STATE_PLAYING);
   MaybeLinkDecodeToAudio();
 
-  url_ = next_url_;
+  current_ = next_;
   end_offset_nanosec_ = next_end_offset_nanosec_;
-  next_url_ = QUrl();
+  next_ = MediaPlaybackRequest();
   next_beginning_offset_nanosec_ = 0;
   next_end_offset_nanosec_ = 0;
 
@@ -1093,7 +1093,7 @@ GstState GstEnginePipeline::state() const {
 
 QFuture<GstStateChangeReturn> GstEnginePipeline::SetState(GstState state) {
 #ifdef HAVE_SPOTIFY
-  if (url_.scheme() == "spotify" && !buffering_) {
+  if (current_.url_.scheme() == "spotify" && !buffering_) {
     const GstState current_state = this->state();
 
     if (state == GST_STATE_PAUSED && current_state == GST_STATE_PLAYING) {
@@ -1275,9 +1275,10 @@ void GstEnginePipeline::RemoveAllBufferConsumers() {
   buffer_consumers_.clear();
 }
 
-void GstEnginePipeline::SetNextUrl(const QUrl& url, qint64 beginning_nanosec,
+void GstEnginePipeline::SetNextReq(const MediaPlaybackRequest& req,
+                                   qint64 beginning_nanosec,
                                    qint64 end_nanosec) {
-  next_url_ = url;
+  next_ = req;
   next_beginning_offset_nanosec_ = beginning_nanosec;
   next_end_offset_nanosec_ = end_nanosec;
 }

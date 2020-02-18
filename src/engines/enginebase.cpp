@@ -43,12 +43,12 @@ Engine::Base::Base()
 
 Engine::Base::~Base() {}
 
-bool Engine::Base::Load(const QUrl& url, TrackChangeFlags,
+bool Engine::Base::Load(const MediaPlaybackRequest& req, TrackChangeFlags,
                         bool force_stop_at_end, quint64 beginning_nanosec,
                         qint64 end_nanosec) {
   Q_UNUSED(force_stop_at_end);
 
-  url_ = url;
+  playback_req_ = req;
   beginning_nanosec_ = beginning_nanosec;
   end_nanosec_ = end_nanosec;
 
@@ -92,10 +92,10 @@ void Engine::Base::EmitAboutToEnd() {
 
 int Engine::Base::AddBackgroundStream(const QUrl& url) { return -1; }
 
-bool Engine::Base::Play(const QUrl& u, TrackChangeFlags c,
+bool Engine::Base::Play(const MediaPlaybackRequest& req, TrackChangeFlags c,
                         bool force_stop_at_end, quint64 beginning_nanosec,
                         qint64 end_nanosec) {
-  if (!Load(u, c, force_stop_at_end, beginning_nanosec, end_nanosec))
+  if (!Load(req, c, force_stop_at_end, beginning_nanosec, end_nanosec))
     return false;
 
   return Play(0);
