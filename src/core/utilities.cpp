@@ -342,8 +342,9 @@ QString ColorToRgba(const QColor& c) {
 QString GetConfigPath(ConfigPath config) {
   switch (config) {
     case Path_Root: {
-      if (Application::kIsPortable) {
-        return QString("%1/data").arg(QCoreApplication::applicationDirPath());
+      if (Application::IsPortable()) {
+        QDir d(QCoreApplication::applicationDirPath());
+        return d.filePath(Application::kPortableDataDir);
       }
 #ifdef Q_OS_DARWIN
       return mac::GetApplicationSupportPath() + "/" +
