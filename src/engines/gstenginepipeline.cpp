@@ -920,21 +920,18 @@ GstPadProbeReturn GstEnginePipeline::HandoffCallback(GstPad*,
         if (instance->next_url_ == instance->url_ &&
             instance->next_beginning_offset_nanosec_ ==
                 instance->end_offset_nanosec_) {
-          // The "next" song is actually the next segment of this file - so
-          // cheat and keep on playing, but just tell the Engine we've moved on.
-          instance->end_offset_nanosec_ = instance->next_end_offset_nanosec_;
-          instance->next_url_ = QUrl();
-          instance->next_beginning_offset_nanosec_ = 0;
-          instance->next_end_offset_nanosec_ = 0;
-
           // GstEngine will try to seek to the start of the new section, but
           // we're already there so ignore it.
           instance->ignore_next_seek_ = true;
-          emit instance->EndOfStreamReached(instance->id(), true);
         } else {
           // We have a next song but we can't cheat, so move to it normally.
-          instance->TransitionToNext();
+          instance->ignore_next_seek_ = false;
         }
+        instance->end_offset_nanosec_ = instance->next_end_offset_nanosec_;
+        instance->next_url_ = QUrl();
+        instance->next_beginning_offset_nanosec_ = 0;
+        instance->next_end_offset_nanosec_ = 0;
+        emit instance->EndOfStreamReached(instance->id(), true);
       } else {
         // There's no next song
         emit instance->EndOfStreamReached(instance->id(), false);
