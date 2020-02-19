@@ -197,15 +197,33 @@ void ParseAProto() {
 }
 
 void CheckPortable() {
-  QFile f(QApplication::applicationDirPath() + QDir::separator() + "data");
-  if (f.exists()) {
+  QDir appDir(QApplication::applicationDirPath());
+  // First look for legacy data location.
+  QDir d(appDir.filePath(Application::kLegacyPortableDataDir));
+  // Key off of database file since config name may vary depending on platform.
+  if (d.exists("clementine.db")) {
     // We are portable. Set the bool and change the qsettings path
+    qLog(Info) << "Using legacy portable data location:" << d.path();
     Application::kIsPortable = true;
+    Application::kPortableDataDir = Application::kLegacyPortableDataDir;
 
     QSettings::setDefaultFormat(QSettings::IniFormat);
-    QSettings::setPath(QSettings::IniFormat, QSettings::UserScope,
-                       f.fileName());
+    QSettings::setPath(QSettings::IniFormat, QSettings::UserScope, d.path());
+    return;
   }
+
+  d = appDir.filePath(Application::kDefaultPortableDataDir);
+  if (d.exists()) {
+    // We are portable. Set the bool and change the qsettings path
+    qLog(Info) << "Using portable data location:" << d.path();
+    Application::kIsPortable = true;
+    Application::kPortableDataDir = Application::kDefaultPortableDataDir;
+
+    QSettings::setDefaultFormat(QSettings::IniFormat);
+    QSettings::setPath(QSettings::IniFormat, QSettings::UserScope, d.path());
+    return;
+  }
+  qLog(Info) << "Using default config locations.";
 }
 
 }  // namespace

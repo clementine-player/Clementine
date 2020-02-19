@@ -66,6 +66,9 @@
 #endif
 
 bool Application::kIsPortable = false;
+const char* Application::kLegacyPortableDataDir = "data";
+const char* Application::kDefaultPortableDataDir = "clementine-data";
+const char* Application::kPortableDataDir = nullptr;
 
 class ApplicationImpl {
  public:
