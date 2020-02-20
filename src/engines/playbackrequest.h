@@ -18,6 +18,7 @@
 #ifndef ENGINES_PLAYBACKREQUEST_H_
 #define ENGINES_PLAYBACKREQUEST_H_
 
+#include <QMap>
 #include <QUrl>
 
 class MediaPlaybackRequest {
@@ -26,6 +27,9 @@ class MediaPlaybackRequest {
   MediaPlaybackRequest() {}
 
   QUrl url_;
+
+  typedef QMap<QByteArray, QByteArray> HeaderList;
+  HeaderList headers_;
 };
 
 #endif  // ENGINES_PLAYBACKREQUEST_H_
