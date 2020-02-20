@@ -147,6 +147,8 @@ void Player::HandleLoadResult(const UrlHandler::LoadResult& result) {
         app_->playlist_manager()->active()->InformOfCurrentSongChange();
       }
       MediaPlaybackRequest req(result.media_url_);
+      if (!result.auth_header_.isEmpty())
+        req.headers_["Authorization"] = result.auth_header_;
       engine_->Play(req, stream_change_type_, item->Metadata().has_cue(),
                     item->Metadata().beginning_nanosec(),
                     item->Metadata().end_nanosec());
