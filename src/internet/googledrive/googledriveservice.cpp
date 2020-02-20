@@ -209,11 +209,7 @@ QUrl GoogleDriveService::GetStreamingUrlFromSongId(const QString& id) {
     return QUrl();
   }
 
-  QUrl url(response->file().download_url());
-  QUrlQuery url_query(url);
-  url_query.addQueryItem("access_token", client_->access_token());
-  url.setQuery(url_query);
-  return url;
+  return QUrl(response->file().download_url());
 }
 
 void GoogleDriveService::ShowContextMenu(const QPoint& global_pos) {

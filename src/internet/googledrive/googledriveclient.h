@@ -149,6 +149,8 @@ class Client : public QObject {
   GetFileResponse* GetFile(const QString& file_id);
   ListChangesResponse* ListChanges(const QString& cursor);
 
+  QByteArray GetAuthHeader() const;
+
  signals:
   void Authenticated();
 

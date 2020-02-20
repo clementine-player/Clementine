@@ -18,6 +18,7 @@
 
 #include "googledriveurlhandler.h"
 
+#include "googledriveclient.h"
 #include "googledriveservice.h"
 
 GoogleDriveUrlHandler::GoogleDriveUrlHandler(GoogleDriveService* service,
@@ -29,5 +30,7 @@ UrlHandler::LoadResult GoogleDriveUrlHandler::StartLoading(const QUrl& url) {
   QUrl real_url = service_->GetStreamingUrlFromSongId(file_id);
   LoadResult::Type type = real_url.isValid() ? LoadResult::TrackAvailable
                                              : LoadResult::NoMoreTracks;
-  return LoadResult(url, type, real_url);
+  LoadResult res(url, type, real_url);
+  res.auth_header_ = service_->client()->GetAuthHeader();
+  return res;
 }
