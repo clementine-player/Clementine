@@ -1034,6 +1034,23 @@ void GstEnginePipeline::SourceSetupCallback(GstURIDecodeBin* bin,
     g_object_set(element, "ssl-strict", TRUE, nullptr);
 #endif
   }
+
+  if (g_object_class_find_property(G_OBJECT_GET_CLASS(element),
+                                   "extra-headers")) {
+    if (!instance->current_.headers_.empty()) {
+      GstStructure* gheaders = gst_structure_new_empty("headers");
+      QMapIterator<QByteArray, QByteArray> i(instance->current_.headers_);
+      while (i.hasNext()) {
+        i.next();
+        qLog(Debug) << "Adding header" << i.key();
+        gst_structure_set(gheaders, i.key().constData(), G_TYPE_STRING,
+                          i.value().constData(), nullptr);
+      }
+      g_object_set(element, "extra-headers", gheaders, nullptr);
+      gst_structure_free(gheaders);
+    }
+  }
+
   g_object_unref(element);
 }
 
