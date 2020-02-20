@@ -66,6 +66,9 @@ class UrlHandler : public QObject {
 
     // Track length, if we are able to get it only now
     qint64 length_nanosec_;
+
+    // If non-empty, value for an Authorization header.
+    QByteArray auth_header_;
   };
 
   // Called by the Player when a song starts loading - gives the handler
