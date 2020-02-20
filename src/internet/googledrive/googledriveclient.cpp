@@ -132,9 +132,12 @@ void Client::FetchUserInfoFinished(ConnectResponse* response,
   emit Authenticated();
 }
 
+QByteArray Client::GetAuthHeader() const {
+  return QString("Bearer %1").arg(access_token_).toUtf8();
+}
+
 void Client::AddAuthorizationHeader(QNetworkRequest* request) const {
-  request->setRawHeader("Authorization",
-                        QString("Bearer %1").arg(access_token_).toUtf8());
+  request->setRawHeader("Authorization", GetAuthHeader());
 }
 
 GetFileResponse* Client::GetFile(const QString& file_id) {
