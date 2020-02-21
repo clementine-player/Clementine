@@ -244,12 +244,6 @@ int main(int argc, char* argv[]) {
   // Do Mac specific startup to get media keys working.
   // This must go before QApplication initialisation.
   mac::MacMain();
-
-  if (QSysInfo::MacintoshVersion > QSysInfo::MV_10_8) {
-    // Work around 10.9 issue.
-    // https://bugreports.qt.io/browse/QTBUG-32789
-    QFont::insertSubstitution(".Lucida Grande UI", "Lucida Grande");
-  }
 #endif
 
   QCoreApplication::setApplicationName("Clementine");
@@ -378,12 +372,6 @@ int main(int argc, char* argv[]) {
   Q_INIT_RESOURCE(translations);
 #endif
 
-  // Add root CA cert for SoundCloud, whose certificate is missing on OS X.
-  QSslSocket::addDefaultCaCertificates(
-      QSslCertificate::fromPath(":/soundcloud-ca.pem", QSsl::Pem));
-  QSslSocket::addDefaultCaCertificates(QSslCertificate::fromPath(
-      ":/Equifax_Secure_Certificate_Authority.pem", QSsl::Pem));
-
   // Has the user forced a different language?
   QString override_language = options.language();
   if (override_language.isEmpty()) {
@@ -451,30 +439,6 @@ int main(int argc, char* argv[]) {
                    SLOT(CommandlineOptionsReceived(QString)));
 
   int ret = a.exec();
-
-#ifdef Q_OS_LINUX
-  // The nvidia driver would cause Clementine (or any application that used
-  // opengl) to use 100% cpu on shutdown.  See:
-  //   http://code.google.com/p/clementine-player/issues/detail?id=2088
-  //   https://bugs.gentoo.org/show_bug.cgi?id=375615
-  // Work around this problem by exiting immediately (and not running the buggy
-  // nvidia atexit shutdown handler) if we're using one of the affected versions
-  // of the nvidia driver.
-
-  QFile self_maps("/proc/self/maps");
-  if (self_maps.open(QIODevice::ReadOnly)) {
-    QByteArray data = self_maps.readAll();
-    if (data.contains("libnvidia-tls.so.304.37") ||
-        data.contains("libnvidia-tls.so.285.03") ||
-        data.contains("libnvidia-tls.so.280.13") ||
-        data.contains("libnvidia-tls.so.275.28") ||
-        data.contains("libnvidia-tls.so.275.19")) {
-      qLog(Warning) << "Exiting immediately to work around NVIDIA driver bug";
-      _exit(ret);
-    }
-    self_maps.close();
-  }
-#endif
 
   return ret;
 }
