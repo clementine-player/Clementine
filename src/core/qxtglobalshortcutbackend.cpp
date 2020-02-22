@@ -23,12 +23,17 @@
 #include "core/logging.h"
 
 #include <QAction>
+#include <QGuiApplication>
 #include <QtDebug>
 
 QxtGlobalShortcutBackend::QxtGlobalShortcutBackend(GlobalShortcuts* parent)
     : GlobalShortcutBackend(parent) {}
 
 bool QxtGlobalShortcutBackend::DoRegister() {
+  if (QGuiApplication::platformName() == "wayland") {
+    qLog(Warning) << "No support for Wayland in qxt.";
+    return false;
+  }
   qLog(Debug) << "registering";
   for (const GlobalShortcuts::Shortcut& shortcut :
        manager_->shortcuts().values()) {
