@@ -44,7 +44,7 @@ class GlobalShortcutsSettingsPage : public SettingsPage {
   void Save();
 
  private slots:
-  void ItemClicked(QTreeWidgetItem*);
+  void CurrentItemChanged(QTreeWidgetItem*);
   void NoneClicked();
   void DefaultClicked();
   void ChangeClicked();
