@@ -47,7 +47,7 @@ GlobalShortcutsSettingsPage::GlobalShortcutsSettingsPage(SettingsDialog* dialog)
 
   connect(ui_->list,
           SIGNAL(currentItemChanged(QTreeWidgetItem*, QTreeWidgetItem*)),
-          SLOT(ItemClicked(QTreeWidgetItem*)));
+          SLOT(CurrentItemChanged(QTreeWidgetItem*)));
   connect(ui_->radio_none, SIGNAL(clicked()), SLOT(NoneClicked()));
   connect(ui_->radio_default, SIGNAL(clicked()), SLOT(DefaultClicked()));
   connect(ui_->radio_custom, SIGNAL(clicked()), SLOT(ChangeClicked()));
@@ -86,7 +86,7 @@ void GlobalShortcutsSettingsPage::Load() {
     }
 
     ui_->list->sortItems(0, Qt::AscendingOrder);
-    ItemClicked(ui_->list->topLevelItem(0));
+    ui_->list->setCurrentItem(ui_->list->topLevelItem(0));
   }
 
   for (const Shortcut& s : shortcuts_.values()) {
@@ -121,7 +121,7 @@ void GlobalShortcutsSettingsPage::Save() {
   dialog()->global_shortcuts_manager()->ReloadSettings();
 }
 
-void GlobalShortcutsSettingsPage::ItemClicked(QTreeWidgetItem* item) {
+void GlobalShortcutsSettingsPage::CurrentItemChanged(QTreeWidgetItem* item) {
   current_id_ = item->data(0, Qt::UserRole).toString();
   Shortcut& shortcut = shortcuts_[current_id_];
 
