@@ -266,6 +266,8 @@ int main(int argc, char* argv[]) {
 
   QCoreApplication::setApplicationName("Clementine");
   QCoreApplication::setApplicationVersion(CLEMENTINE_VERSION_DISPLAY);
+  QCoreApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);
+  QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
   QCoreApplication::setOrganizationName("Clementine");
   QCoreApplication::setOrganizationDomain("clementine-player.org");
 
