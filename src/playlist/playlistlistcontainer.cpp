@@ -67,7 +67,13 @@ class PlaylistListFilterProxyModel : public QSortFilterProxyModel {
 
   void refreshExpanded(QTreeView *tree) {
     tree->collapseAll();
-    for(QModelIndex sourceIndex : expandList ) {
+    // The call to setExpanded causes expendList to be appended via
+    // the filterAcceptsRow overload. Since QList's implementation is an array,
+    // when the reserved space is exhausted, it must be reallocated. When this
+    // happens, iterators are likely to break. But because of this implemention,
+    // indexing is safe and efficient.
+    for (int i = 0; i < expandList.count(); i++) {
+      const QModelIndex& sourceIndex = expandList[i];
       QModelIndex mappedIndex = mapFromSource( sourceIndex );
       tree->setExpanded( mappedIndex, true );
     }
