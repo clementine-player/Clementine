@@ -1734,11 +1734,16 @@ void MainWindow::PlaylistRightClick(const QPoint& global_pos,
   int not_in_queue = 0;
   int in_skipped = 0;
   int not_in_skipped = 0;
-  for (const QModelIndex& index : selection) {
-    if (index.column() != 0) continue;
+  for (const QModelIndex& idx : selection) {
+    if (idx.column() != 0) continue;
+
+    const QModelIndex src_idx =
+        app_->playlist_manager()->current()->proxy()->mapToSource(idx);
+    if (!src_idx.isValid()) continue;
 
     PlaylistItemPtr item =
-        app_->playlist_manager()->current()->item_at(index.row());
+        app_->playlist_manager()->current()->item_at(src_idx.row());
+
     if (item->Metadata().has_cue()) {
       cue_selected = true;
     } else if (item->Metadata().IsEditable()) {
@@ -1749,7 +1754,7 @@ void MainWindow::PlaylistRightClick(const QPoint& global_pos,
       streams++;
     }
 
-    if (index.data(Playlist::Role_QueuePosition).toInt() == -1)
+    if (src_idx.data(Playlist::Role_QueuePosition).toInt() == -1)
       not_in_queue++;
     else
       in_queue++;
