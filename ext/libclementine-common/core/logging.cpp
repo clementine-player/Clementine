@@ -51,8 +51,9 @@ static const char* kMessageHandlerMagic = "__logging_message__";
 static const int kMessageHandlerMagicLength = strlen(kMessageHandlerMagic);
 static QtMessageHandler sOriginalMessageHandler = nullptr;
 
-static QDebug CreateLogger(Level level, const QString& class_name, int line,
-                           const char* category);
+template <class T>
+static T CreateLogger(Level level, const QString& class_name, int line,
+                      const char* category);
 
 void GLog(const char* domain, int level, const char* message, void* user_data) {
   switch (level) {
@@ -98,7 +99,7 @@ static void MessageHandler(QtMsgType type, const QMessageLogContext &context, co
   }
 
   for (const QString& line : message.split('\n')) {
-    CreateLogger(level, "unknown", -1, nullptr)
+    CreateLogger<QDebug>(level, "unknown", -1, nullptr)
         << line.toLocal8Bit().constData();
   }
 
@@ -171,8 +172,9 @@ static QString ParsePrettyFunction(const char* pretty_function) {
   return class_name;
 }
 
-static QDebug CreateLogger(Level level, const QString& class_name, int line,
-                           const char* category) {
+template <class T>
+static T CreateLogger(Level level, const QString& class_name, int line,
+                      const char* category) {
   // Map the level to a string
   const char* level_name = nullptr;
   switch (level) {
@@ -201,7 +203,7 @@ static QDebug CreateLogger(Level level, const QString& class_name, int line,
   }
 
   if (level > threshold_level) {
-    return QDebug(sNullDevice);
+    return T(sNullDevice);
   }
 
   QString function_line = class_name;
@@ -217,7 +219,7 @@ static QDebug CreateLogger(Level level, const QString& class_name, int line,
     type = QtFatalMsg;
   }
 
-  QDebug ret(type);
+  T ret(type);
   ret.nospace() << kMessageHandlerMagic
                 << QDateTime::currentDateTime()
                        .toString("hh:mm:ss.zzz")
@@ -283,10 +285,10 @@ void DumpStackTrace() {
 #endif
 }
 
-#define qCreateLogger(line, pretty_function, category, level)                \
-  logging::CreateLogger(logging::Level_##level,                              \
-                        logging::ParsePrettyFunction(pretty_function), line, \
-                        category)
+#define qCreateLogger(line, pretty_function, category, level)                  \
+  logging::CreateLogger<QDebug>(logging::Level_##level,                        \
+                                logging::ParsePrettyFunction(pretty_function), \
+                                line, category)
 
 QDebug CreateLoggerFatal(int line, const char* pretty_function,
                          const char* category) {
