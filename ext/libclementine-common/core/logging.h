@@ -44,11 +44,6 @@
 #define qLogCat(level, category) \
   logging::CreateLogger##level(__LINE__, __PRETTY_FUNCTION__, category)
 
-#define qCreateLogger(line, pretty_function, category, level)                \
-  logging::CreateLogger(logging::Level_##level,                              \
-                        logging::ParsePrettyFunction(pretty_function), line, \
-                        category)
-
 #endif  // QT_NO_DEBUG_STREAM
 
 namespace logging {
@@ -70,10 +65,6 @@ void Init();
 void SetLevels(const QString& levels);
 
 void DumpStackTrace();
-
-QString ParsePrettyFunction(const char* pretty_function);
-QDebug CreateLogger(Level level, const QString& class_name, int line,
-                    const char* category);
 
 QDebug CreateLoggerFatal(int line, const char* pretty_function,
                          const char* category);

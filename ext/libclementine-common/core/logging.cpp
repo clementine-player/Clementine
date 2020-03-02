@@ -51,6 +51,9 @@ static const char* kMessageHandlerMagic = "__logging_message__";
 static const int kMessageHandlerMagicLength = strlen(kMessageHandlerMagic);
 static QtMessageHandler sOriginalMessageHandler = nullptr;
 
+static QDebug CreateLogger(Level level, const QString& class_name, int line,
+                           const char* category);
+
 void GLog(const char* domain, int level, const char* message, void* user_data) {
   switch (level) {
     case G_LOG_FLAG_RECURSION:
@@ -147,7 +150,7 @@ void SetLevels(const QString& levels) {
   }
 }
 
-QString ParsePrettyFunction(const char* pretty_function) {
+static QString ParsePrettyFunction(const char* pretty_function) {
   // Get the class name out of the function name.
   QString class_name = pretty_function;
   const int paren = class_name.indexOf('(');
@@ -168,8 +171,8 @@ QString ParsePrettyFunction(const char* pretty_function) {
   return class_name;
 }
 
-QDebug CreateLogger(Level level, const QString& class_name, int line,
-                    const char* category) {
+static QDebug CreateLogger(Level level, const QString& class_name, int line,
+                           const char* category) {
   // Map the level to a string
   const char* level_name = nullptr;
   switch (level) {
@@ -279,6 +282,11 @@ void DumpStackTrace() {
   qLog(Debug) << "FIXME: Implement printing stack traces on this platform";
 #endif
 }
+
+#define qCreateLogger(line, pretty_function, category, level)                \
+  logging::CreateLogger(logging::Level_##level,                              \
+                        logging::ParsePrettyFunction(pretty_function), line, \
+                        category)
 
 QDebug CreateLoggerFatal(int line, const char* pretty_function,
                          const char* category) {
