@@ -26,11 +26,14 @@
 #endif
 
 #include <iostream>
+#include <memory>
 
+#include <QBuffer>
 #include <QCoreApplication>
 #include <QDateTime>
 #include <QStringList>
 #include <QtMessageHandler>
+#include <QTextStream>
 
 #include <glib.h>
 
@@ -77,6 +80,43 @@ void GLog(const char* domain, int level, const char* message, void* user_data) {
   }
 }
 
+template <class T>
+class DebugBase : public QDebug {
+ public:
+  DebugBase() : QDebug(sNullDevice) {}
+  DebugBase(QtMsgType t) : QDebug(t) {}
+  T& space() { return static_cast<T&>(QDebug::space()); }
+  T& noSpace() { return static_cast<T&>(QDebug::nospace()); }
+};
+
+// Debug message will be store in a buffer.
+class BufferedDebug : public DebugBase<BufferedDebug> {
+ public:
+  BufferedDebug() : DebugBase() {}
+  BufferedDebug(QtMsgType t) : DebugBase(), buf_(new QBuffer, later_deleter) {
+    buf_->open(QIODevice::WriteOnly);
+
+    // QDebug doesn't have a method to set a new io device, but swap() allows
+    // the devices to be swapped between two instances.
+    QDebug other(buf_.get());
+    swap(other);
+  }
+
+  // Delete function for the buffer. Since a base class is holding a reference
+  // to the raw pointer, it shouldn't be deleted until after the deletion of
+  // this object is complete.
+  static void later_deleter(QBuffer* b) { b->deleteLater(); }
+
+  std::shared_ptr<QBuffer> buf_;
+};
+
+// Debug message will be logged immediately.
+class LoggedDebug : public DebugBase<LoggedDebug> {
+ public:
+  LoggedDebug() : DebugBase() {}
+  LoggedDebug(QtMsgType t) : DebugBase(t) { nospace() << kMessageHandlerMagic; }
+};
+
 static void MessageHandler(QtMsgType type, const QMessageLogContext &context, const QString &message) {
   if (strncmp(kMessageHandlerMagic, message.toLocal8Bit().data(), kMessageHandlerMagicLength) == 0) {
     fprintf(stderr, "%s\n", message.toLocal8Bit().data() + kMessageHandlerMagicLength);
@@ -99,8 +139,13 @@ static void MessageHandler(QtMsgType type, const QMessageLogContext &context, co
   }
 
   for (const QString& line : message.split('\n')) {
-    CreateLogger<QDebug>(level, "unknown", -1, nullptr)
-        << line.toLocal8Bit().constData();
+    BufferedDebug d =
+        CreateLogger<BufferedDebug>(level, "unknown", -1, nullptr);
+    d << line.toLocal8Bit().constData();
+    if (d.buf_) {
+      d.buf_->close();
+      fprintf(stderr, "%s\n", d.buf_->buffer().data());
+    }
   }
 
   if (type == QtFatalMsg) {
@@ -203,7 +248,7 @@ static T CreateLogger(Level level, const QString& class_name, int line,
   }
 
   if (level > threshold_level) {
-    return T(sNullDevice);
+    return T();
   }
 
   QString function_line = class_name;
@@ -220,11 +265,11 @@ static T CreateLogger(Level level, const QString& class_name, int line,
   }
 
   T ret(type);
-  ret.nospace() << kMessageHandlerMagic
-                << QDateTime::currentDateTime()
+  ret.nospace() << QDateTime::currentDateTime()
                        .toString("hh:mm:ss.zzz")
                        .toLatin1()
-                       .constData() << level_name
+                       .constData()
+                << level_name
                 << function_line.leftJustified(32).toLatin1().constData();
 
   return ret.space();
@@ -285,10 +330,13 @@ void DumpStackTrace() {
 #endif
 }
 
-#define qCreateLogger(line, pretty_function, category, level)                  \
-  logging::CreateLogger<QDebug>(logging::Level_##level,                        \
-                                logging::ParsePrettyFunction(pretty_function), \
-                                line, category)
+// These are the functions that create loggers for the rest of Clementine.
+// It's okay that the LoggedDebug instance is copied to a QDebug in these. It
+// doesn't override any behavior that should be needed after return.
+#define qCreateLogger(line, pretty_function, category, level)                \
+  logging::CreateLogger<LoggedDebug>(                                        \
+      logging::Level_##level, logging::ParsePrettyFunction(pretty_function), \
+      line, category)
 
 QDebug CreateLoggerFatal(int line, const char* pretty_function,
                          const char* category) {
