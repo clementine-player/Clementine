@@ -277,8 +277,12 @@ void GstEngine::ConsumeBuffer(GstBuffer* buffer, int pipeline_id) {
   }
 }
 
+bool GstEngine::IsCurrentPipeline(int id) {
+  return current_pipeline_.get() && current_pipeline_->id() == id;
+}
+
 void GstEngine::AddBufferToScope(GstBuffer* buf, int pipeline_id) {
-  if (!current_pipeline_ || current_pipeline_->id() != pipeline_id) {
+  if (!IsCurrentPipeline(pipeline_id)) {
     gst_buffer_unref(buf);
     return;
   }
@@ -473,9 +477,7 @@ void GstEngine::PlayDone(QFuture<GstStateChangeReturn> future,
                          const quint64 offset_nanosec, const int pipeline_id) {
   GstStateChangeReturn ret = future.result();
 
-  if (!current_pipeline_ || pipeline_id != current_pipeline_->id()) {
-    return;
-  }
+  if (!IsCurrentPipeline(pipeline_id)) return;
 
   if (ret == GST_STATE_CHANGE_FAILURE) {
     // Failure, but we got a redirection URL - try loading that instead
@@ -687,8 +689,7 @@ void GstEngine::timerEvent(QTimerEvent* e) {
 
 void GstEngine::HandlePipelineError(int pipeline_id, const QString& message,
                                     int domain, int error_code) {
-  if (!current_pipeline_.get() || current_pipeline_->id() != pipeline_id)
-    return;
+  if (!IsCurrentPipeline(pipeline_id)) return;
 
   qLog(Warning) << "Gstreamer error:" << message;
 
@@ -728,8 +729,7 @@ void GstEngine::HandlePipelineError(int pipeline_id, const QString& message,
 }
 
 void GstEngine::EndOfStreamReached(int pipeline_id, bool has_next_track) {
-  if (!current_pipeline_.get() || current_pipeline_->id() != pipeline_id)
-    return;
+  if (!IsCurrentPipeline(pipeline_id)) return;
 
   if (!has_next_track) {
     current_pipeline_.reset();
@@ -740,8 +740,7 @@ void GstEngine::EndOfStreamReached(int pipeline_id, bool has_next_track) {
 
 void GstEngine::NewMetaData(int pipeline_id,
                             const Engine::SimpleMetaBundle& bundle) {
-  if (!current_pipeline_.get() || current_pipeline_->id() != pipeline_id)
-    return;
+  if (!IsCurrentPipeline(pipeline_id)) return;
 
   emit MetaData(bundle);
 }
