@@ -486,7 +486,10 @@ void GstEngine::PlayDone(QFuture<GstStateChangeReturn> future,
     QUrl redirect_url = current_pipeline_->redirect_url();
     if (!redirect_url.isEmpty() && redirect_url != current_pipeline_->url()) {
       qLog(Info) << "Redirecting to" << redirect_url;
-      current_pipeline_ = CreatePipeline(redirect_url, end_nanosec_);
+      // Keep original request intact so it can be used for notification.
+      MediaPlaybackRequest new_req = playback_req_;
+      new_req.url_ = redirect_url;
+      current_pipeline_ = CreatePipeline(new_req, end_nanosec_);
       Play(offset_nanosec);
       return;
     }
