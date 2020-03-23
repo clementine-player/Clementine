@@ -47,14 +47,19 @@ LibraryBackend::LibraryBackend(QObject* parent)
       save_ratings_in_file_(false) {}
 
 void LibraryBackend::Init(Database* db, const QString& songs_table,
-                          const QString& dirs_table,
-                          const QString& subdirs_table,
                           const QString& fts_table) {
   db_ = db;
   songs_table_ = songs_table;
+  fts_table_ = fts_table;
+}
+
+void LibraryBackend::Init(Database* db, const QString& songs_table,
+                          const QString& dirs_table,
+                          const QString& subdirs_table,
+                          const QString& fts_table) {
+  Init(db, songs_table, fts_table);
   dirs_table_ = dirs_table;
   subdirs_table_ = subdirs_table;
-  fts_table_ = fts_table;
 }
 
 void LibraryBackend::LoadDirectoriesAsync() {
