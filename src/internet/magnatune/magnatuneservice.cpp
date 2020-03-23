@@ -92,8 +92,7 @@ MagnatuneService::MagnatuneService(Application* app, InternetModel* parent)
   library_backend_.reset(new LibraryBackend,
                          [](QObject* obj) { obj->deleteLater(); });
   library_backend_->moveToThread(app_->database()->thread());
-  library_backend_->Init(app_->database(), kSongsTable, QString(), QString(),
-                         kFtsTable);
+  library_backend_->Init(app_->database(), kSongsTable, kFtsTable);
   library_model_ = new LibraryModel(library_backend_, app_, this);
 
   connect(library_backend_.get(), SIGNAL(TotalSongCountUpdated(int)),
