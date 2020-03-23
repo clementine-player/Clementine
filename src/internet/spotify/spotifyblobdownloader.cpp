@@ -97,9 +97,9 @@ void SpotifyBlobDownloader::Start() {
 
     QNetworkRequest req(url);
     // This policy will work as long as there isn't a redirect from https to
-    // http.
-    req.setAttribute(QNetworkRequest::RedirectPolicyAttribute,
-                     QNetworkRequest::NoLessSafeRedirectPolicy);
+    // http. This is a legacy attribute that should be changed to use
+    // RedirectPolicyAttribute when Qt 5.9 is the lowest supported version.
+    req.setAttribute(QNetworkRequest::FollowRedirectsAttribute, true);
 
     QNetworkReply* reply = network_->get(req);
     connect(reply, SIGNAL(finished()), SLOT(ReplyFinished()));
