@@ -95,7 +95,13 @@ void SpotifyBlobDownloader::Start() {
                    filename);
     qLog(Info) << "Downloading" << url;
 
-    QNetworkReply* reply = network_->get(QNetworkRequest(url));
+    QNetworkRequest req(url);
+    // This policy will work as long as there isn't a redirect from https to
+    // http.
+    req.setAttribute(QNetworkRequest::RedirectPolicyAttribute,
+                     QNetworkRequest::NoLessSafeRedirectPolicy);
+
+    QNetworkReply* reply = network_->get(req);
     connect(reply, SIGNAL(finished()), SLOT(ReplyFinished()));
     connect(reply, SIGNAL(downloadProgress(qint64, qint64)),
             SLOT(ReplyProgress()));
