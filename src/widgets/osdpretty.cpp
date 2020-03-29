@@ -447,13 +447,15 @@ void OSDPretty::mouseMoveEvent(QMouseEvent* e) {
 }
 
 QScreen* OSDPretty::current_screen(const QPoint& pos) const {
+  QScreen* screen = nullptr;
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 10, 0))
-  return QGuiApplication::screenAt(pos);
+  screen = QGuiApplication::screenAt(pos);
 #else
-  return (window() && window()->windowHandle()
-              ? window()->windowHandle()->screen()
-              : QGuiApplication::primaryScreen());
+  if (window() && window()->windowHandle())
+    screen = window()->windowHandle()->screen();
 #endif
+  if (screen == nullptr) screen = QGuiApplication::primaryScreen();
+  return screen;
 }
 
 QScreen* OSDPretty::current_screen() const { return current_screen(pos()); }
