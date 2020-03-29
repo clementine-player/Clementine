@@ -423,13 +423,7 @@ void OSDPretty::mouseMoveEvent(QMouseEvent* e) {
     QPoint new_pos = original_window_pos_ + delta;
 
     // Keep it to the bounds of the desktop
-#if (QT_VERSION >= QT_VERSION_CHECK(5, 10, 0))
-    QScreen* screen = QGuiApplication::screenAt(e->globalPos());
-#else
-    QScreen* screen = (window() && window()->windowHandle()
-                           ? window()->windowHandle()->screen()
-                           : QGuiApplication::primaryScreen());
-#endif
+    QScreen* screen = current_screen(e->globalPos());
     if (!screen) return;
     QRect geometry = screen->availableGeometry();
 
@@ -452,15 +446,17 @@ void OSDPretty::mouseMoveEvent(QMouseEvent* e) {
   }
 }
 
-QScreen* OSDPretty::current_screen() const {
+QScreen* OSDPretty::current_screen(const QPoint& pos) const {
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 10, 0))
-  return QGuiApplication::screenAt(pos());
+  return QGuiApplication::screenAt(pos);
 #else
   return (window() && window()->windowHandle()
               ? window()->windowHandle()->screen()
               : QGuiApplication::primaryScreen());
 #endif
 }
+
+QScreen* OSDPretty::current_screen() const { return current_screen(pos()); }
 
 QPoint OSDPretty::current_pos() const {
   if (current_screen()) {
