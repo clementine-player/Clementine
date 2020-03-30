@@ -18,6 +18,7 @@
 #include "config.h"
 #include "osdpretty.h"
 #include "ui_osdpretty.h"
+#include "core/logging.h"
 
 #include <QApplication>
 #include <QBitmap>
@@ -308,7 +309,12 @@ void OSDPretty::showEvent(QShowEvent* e) {
   }
 
   // Get current screen resolution
-  QRect screenResolution = current_screen()->availableGeometry();
+  QScreen* screen = current_screen();
+  if (screen == nullptr) {
+    qLog(Error) << "Could not get current screen.";
+    return;
+  }
+  QRect screenResolution = screen->availableGeometry();
 
   // Leave 200 px for icon
   ui_->summary->setMaximumWidth(screenResolution.width() - 200);
