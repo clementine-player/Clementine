@@ -709,7 +709,7 @@ jobs:
             go get github.com/tcnksm/ghr
             VERSION=${CIRCLE_TAG}
             ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -delete ${VERSION} release_artifacts/
-  create_draft_release:
+  create_pre_release:
     docker:
       - image: circleci/golang:1.12
     steps:
@@ -725,7 +725,7 @@ jobs:
           command: |
             go get github.com/tcnksm/ghr
             VERSION=$(echo release_artifacts/*.tar.xz | sed -e 's/.*clementine-\(.*\).tar.xz/\1/')
-            ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -draft ${VERSION} release_artifacts/
+            ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -prerelease ${VERSION} release_artifacts/
 workflows:
   version: 2
   build_all:
@@ -795,7 +795,7 @@ workflows:
             - build_mingw
             - build_mac
             - build_source_tarball
-      - create_draft_release:
+      - create_pre_release:
           filters:
             branches:
               only: master
