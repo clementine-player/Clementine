@@ -114,7 +114,8 @@ class SubsonicService : public InternetService {
   // boilerplate.
   QNetworkReply* Send(const QUrl& url);
 
-  friend PlaylistItemList SubsonicDynamicPlaylist::GenerateMore(int);
+  friend PlaylistItemList SubsonicDynamicPlaylist::GenerateMoreAlbums(int);
+  friend PlaylistItemList SubsonicDynamicPlaylist::GenerateMoreSongs(int);
 
   static const char* kServiceName;
   static const char* kSettingsGroup;

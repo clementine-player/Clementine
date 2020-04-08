@@ -98,23 +98,33 @@ SubsonicService::SubsonicService(Application* app, InternetModel* parent)
     LibraryModel::DefaultGenerators()
     << (LibraryModel::GeneratorList()
         << GeneratorPtr(new SubsonicDynamicPlaylist(
-                          tr("Newest"),
+                          tr("Newest Albums"),
+                          SubsonicDynamicPlaylist::QueryType_Album,
                           SubsonicDynamicPlaylist::QueryStat_Newest))
         << GeneratorPtr(new SubsonicDynamicPlaylist(
-                          tr("Random"),
+                          tr("Random Albums"),
+                          SubsonicDynamicPlaylist::QueryType_Album,
                           SubsonicDynamicPlaylist::QueryStat_Random))
         << GeneratorPtr(new SubsonicDynamicPlaylist(
-                          tr("Frequently Played"),
+                          tr("Frequently Played Albums"),
+                          SubsonicDynamicPlaylist::QueryType_Album,
                           SubsonicDynamicPlaylist::QueryStat_Frequent))
         << GeneratorPtr(new SubsonicDynamicPlaylist(
-                          tr("Top Rated"),
+                          tr("Top Rated Albums"),
+                          SubsonicDynamicPlaylist::QueryType_Album,
                           SubsonicDynamicPlaylist::QueryStat_Highest))
         << GeneratorPtr(new SubsonicDynamicPlaylist(
-                          tr("Recently Played"),
+                          tr("Recently Played Albums"),
+                          SubsonicDynamicPlaylist::QueryType_Album,
                           SubsonicDynamicPlaylist::QueryStat_Recent))
         << GeneratorPtr(new SubsonicDynamicPlaylist(
-                          tr("Starred"),
+                          tr("Starred Albums"),
+                          SubsonicDynamicPlaylist::QueryType_Album,
                           SubsonicDynamicPlaylist::QueryStat_Starred))
+        << GeneratorPtr(new SubsonicDynamicPlaylist(
+                          tr("Random Songs"),
+                          SubsonicDynamicPlaylist::QueryType_Song,
+                          SubsonicDynamicPlaylist::QueryStat_Random))
       ));
 
   library_filter_ = new LibraryFilterWidget(0);
