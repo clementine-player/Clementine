@@ -21,6 +21,7 @@
 #include "smartplaylists/generator.h"
 
 #include <QNetworkAccessManager>
+#include <QXmlStreamReader>
 
 class SubsonicService;
 
@@ -41,8 +42,13 @@ class SubsonicDynamicPlaylist : public smart_playlists::Generator {
     QueryStat_Random = 5,
   };
 
+  enum QueryType {
+      QueryType_Album = 0,
+      QueryType_Song = 1,
+  };
+
   SubsonicDynamicPlaylist();
-  SubsonicDynamicPlaylist(const QString& name, QueryStat stat);
+  SubsonicDynamicPlaylist(const QString& name, QueryType type, QueryStat stat);
 
   QString type() const { return "Subsonic"; }
 
@@ -53,10 +59,14 @@ class SubsonicDynamicPlaylist : public smart_playlists::Generator {
   PlaylistItemList Generate();
 
   bool is_dynamic() const { return true; }
-  PlaylistItemList GenerateMore(int count);
+  PlaylistItemList GenerateMoreAlbums(int count);
+  PlaylistItemList GenerateMoreSongs(int count);
+
+  Song ReadSong(SubsonicService* service, QXmlStreamReader& reader);
 
   static const int kMaxCount;
-  static const int kDefaultCount;
+  static const int kDefaultAlbumCount;
+  static const int kDefaultSongCount;
   static const int kDefaultOffset;
 
  private:
@@ -85,6 +95,7 @@ class SubsonicDynamicPlaylist : public smart_playlists::Generator {
   }
 
  private:
+  QueryType type_;
   QueryStat stat_;
   int offset_;
   SubsonicService* service_;

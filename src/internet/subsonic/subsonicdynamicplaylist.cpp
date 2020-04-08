@@ -22,7 +22,6 @@
 #include <QFileInfo>
 #include <QSslConfiguration>
 #include <QUrlQuery>
-#include <QXmlStreamReader>
 
 #include "core/application.h"
 #include "core/logging.h"
@@ -36,15 +35,17 @@
 
 // 500 limit per subsonic api
 const int SubsonicDynamicPlaylist::kMaxCount = 500;
-const int SubsonicDynamicPlaylist::kDefaultCount = 10;
+const int SubsonicDynamicPlaylist::kDefaultAlbumCount = 10;
+const int SubsonicDynamicPlaylist::kDefaultSongCount = 20;
 const int SubsonicDynamicPlaylist::kDefaultOffset = 0;
 
 SubsonicDynamicPlaylist::SubsonicDynamicPlaylist()
-  : stat_(QueryStat_Newest), offset_(kDefaultOffset) {}
+  : type_(QueryType_Album), stat_(QueryStat_Newest), offset_(kDefaultOffset) {}
 
 SubsonicDynamicPlaylist::SubsonicDynamicPlaylist(const QString& name,
+                                                 QueryType type,
                                                  QueryStat stat)
-    : stat_(stat), offset_(kDefaultOffset) {
+    : type_(type), stat_(stat), offset_(kDefaultOffset) {
   set_name(name);
 }
 
@@ -80,10 +81,87 @@ QNetworkReply* SubsonicDynamicPlaylist::Send(QNetworkAccessManager& network,
 }
 
 PlaylistItemList SubsonicDynamicPlaylist::Generate() {
-  return GenerateMore(kDefaultCount);
+  switch (type_) {
+    case QueryType_Album:
+      return GenerateMoreAlbums(kDefaultAlbumCount);
+    case QueryType_Song:
+      return GenerateMoreSongs(kDefaultSongCount);
+    default:
+      return GenerateMoreAlbums(kDefaultAlbumCount);
+  }
 }
 
-PlaylistItemList SubsonicDynamicPlaylist::GenerateMore(int count) {
+PlaylistItemList SubsonicDynamicPlaylist::GenerateMoreSongs(int count) {
+  SubsonicService* service = InternetModel::Service<SubsonicService>();
+  const int task_id =
+      service->app_->task_manager()->StartTask(tr("Fetching Playlist Items"));
+
+  BOOST_SCOPE_EXIT((service)(task_id)) {
+        // stop task when we're done
+        service->app_->task_manager()->SetTaskFinished(task_id);
+      }
+  BOOST_SCOPE_EXIT_END
+
+  QUrl url = service->BuildRequestUrl("getRandomSongs");
+  QNetworkAccessManager network;
+
+  if (count > kMaxCount) count = kMaxCount;
+
+  QUrlQuery url_query(url.query());
+  url_query.addQueryItem("size", QString::number(count));
+  url.setQuery(url_query);
+
+  PlaylistItemList items;
+
+  QNetworkReply* reply = Send(network, url, service->usesslv3_);
+  WaitForSignal(reply, SIGNAL(finished()));
+
+  reply->deleteLater();
+
+  if (reply->error() != QNetworkReply::NoError) {
+    qLog(Warning) << "HTTP error returned from Subsonic:"
+                  << reply->errorString() << ", url:" << url.toString();
+    return items;  // empty
+  }
+
+  QXmlStreamReader reader(reply);
+  reader.readNextStartElement();
+  if (reader.name() != "subsonic-response") {
+    qLog(Warning) << "Not a subsonic-response, aboring playlist fetch";
+    return items;
+  }
+
+  if (reader.attributes().value("status") != "ok") {
+    reader.readNextStartElement();
+    int error = reader.attributes().value("code").toString().toInt();
+    qLog(Warning) << "An error occurred fetching data.  Code: " << error
+                  << " Message: "
+                  << reader.attributes().value("message").toString();
+  }
+
+  reader.readNextStartElement();
+  if (reader.name() != "randomSongs") {
+    qLog(Warning) << "randomSongs tag expected.  Aborting playlist fetch";
+    return items;
+  }
+
+  while (reader.readNextStartElement()) {
+    if (reader.name() != "song") {
+      qLog(Warning) << "song tag expected. Aborting playlist fetch";
+      return items;
+    }
+
+    Song song = ReadSong(service, reader);
+
+    items << std::shared_ptr<PlaylistItem>(
+        new InternetPlaylistItem(service, song));
+
+    reader.skipCurrentElement();
+  }
+  return items;
+}
+
+PlaylistItemList SubsonicDynamicPlaylist::GenerateMoreAlbums(int count) {
   SubsonicService* service = InternetModel::Service<SubsonicService>();
   const int task_id =
       service->app_->task_manager()->StartTask(tr("Fetching Playlist Items"));
@@ -205,42 +283,8 @@ void SubsonicDynamicPlaylist::GetAlbum(SubsonicService* service,
       return;
     }
 
-    Song song;
-    QString id = reader.attributes().value("id").toString();
-    song.set_title(reader.attributes().value("title").toString());
-    song.set_album(reader.attributes().value("album").toString());
-    song.set_track(reader.attributes().value("track").toString().toInt());
-    song.set_disc(reader.attributes().value("discNumber").toString().toInt());
-    song.set_artist(reader.attributes().value("artist").toString());
+    Song song = ReadSong(service, reader);
     song.set_albumartist(album_artist);
-    song.set_bitrate(reader.attributes().value("bitRate").toString().toInt());
-    song.set_year(reader.attributes().value("year").toString().toInt());
-    song.set_genre(reader.attributes().value("genre").toString());
-    qint64 length = reader.attributes().value("duration").toString().toInt();
-    length *= kNsecPerSec;
-    song.set_length_nanosec(length);
-    QUrl url = QUrl(QString("subsonic://"));
-    QUrlQuery song_query(url.query());
-    song_query.addQueryItem("id", id);
-    url.setQuery(song_query);
-    QUrl cover_url = service->BuildRequestUrl("getCoverArt");
-    QUrlQuery cover_url_query(cover_url.query());
-    cover_url_query.addQueryItem("id", id);
-    cover_url.setQuery(cover_url_query);
-    song.set_art_automatic(cover_url.toEncoded());
-    song.set_url(url);
-    song.set_filesize(reader.attributes().value("size").toString().toInt());
-    QFileInfo fi(reader.attributes().value("path").toString());
-    song.set_basefilename(fi.fileName());
-    // We need to set these to satisfy the database constraints
-    song.set_directory_id(0);
-    song.set_mtime(0);
-    song.set_ctime(0);
-
-    if (reader.attributes().hasAttribute("playCount")) {
-      song.set_playcount(
-          reader.attributes().value("playCount").toString().toInt());
-    }
 
     list << std::shared_ptr<PlaylistItem>(
         new InternetPlaylistItem(service, song));
@@ -249,14 +293,56 @@ void SubsonicDynamicPlaylist::GetAlbum(SubsonicService* service,
   }
 }
 
+Song SubsonicDynamicPlaylist::ReadSong(SubsonicService* service,
+                                       QXmlStreamReader &reader) {
+  Song song;
+  QString id = reader.attributes().value("id").toString();
+  song.set_title(reader.attributes().value("title").toString());
+  song.set_album(reader.attributes().value("album").toString());
+  song.set_track(reader.attributes().value("track").toString().toInt());
+  song.set_disc(reader.attributes().value("discNumber").toString().toInt());
+  song.set_artist(reader.attributes().value("artist").toString());
+  song.set_bitrate(reader.attributes().value("bitRate").toString().toInt());
+  song.set_year(reader.attributes().value("year").toString().toInt());
+  song.set_genre(reader.attributes().value("genre").toString());
+  qint64 length = reader.attributes().value("duration").toString().toInt();
+  length *= kNsecPerSec;
+  song.set_length_nanosec(length);
+  QUrl url = QUrl(QString("subsonic://"));
+  QUrlQuery song_query(url.query());
+  song_query.addQueryItem("id", id);
+  url.setQuery(song_query);
+  QUrl cover_url = service->BuildRequestUrl("getCoverArt");
+  QUrlQuery cover_url_query(cover_url.query());
+  cover_url_query.addQueryItem("id", id);
+  cover_url.setQuery(cover_url_query);
+  song.set_art_automatic(cover_url.toEncoded());
+  song.set_url(url);
+  song.set_filesize(reader.attributes().value("size").toString().toInt());
+  QFileInfo fi(reader.attributes().value("path").toString());
+  song.set_basefilename(fi.fileName());
+  // We need to set these to satisfy the database constraints
+  song.set_directory_id(0);
+  song.set_mtime(0);
+  song.set_ctime(0);
+
+  if (reader.attributes().hasAttribute("playCount")) {
+    song.set_playcount(
+        reader.attributes().value("playCount").toString().toInt());
+  }
+
+  return song;
+}
+
 QDataStream& operator<<(QDataStream& s, const SubsonicDynamicPlaylist& p) {
-  s << quint8(p.stat_);
+  s << quint8(p.stat_) << quint8(p.type_);
   return s;
 }
 
 QDataStream& operator>>(QDataStream& s, SubsonicDynamicPlaylist& p) {
-  quint8 stat;
-  s >> stat;
+  quint8 stat, type;
+  s >> stat >> type;
   p.stat_ = SubsonicDynamicPlaylist::QueryStat(stat);
+  p.type_ = SubsonicDynamicPlaylist::QueryType(type);
   return s;
 }
