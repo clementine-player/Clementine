@@ -137,6 +137,7 @@ PlaylistItemList SubsonicDynamicPlaylist::GenerateMoreSongs(int count) {
     qLog(Warning) << "An error occurred fetching data.  Code: " << error
                   << " Message: "
                   << reader.attributes().value("message").toString();
+    return items;
   }
 
   reader.readNextStartElement();
@@ -147,8 +148,9 @@ PlaylistItemList SubsonicDynamicPlaylist::GenerateMoreSongs(int count) {
 
   while (reader.readNextStartElement()) {
     if (reader.name() != "song") {
-      qLog(Warning) << "song tag expected. Aborting playlist fetch";
-      return items;
+      qLog(Warning) << "song tag expected. Skipping song";
+      reader.skipCurrentElement();
+      continue;
     }
 
     Song song = ReadSong(service, reader);
@@ -209,6 +211,7 @@ PlaylistItemList SubsonicDynamicPlaylist::GenerateMoreAlbums(int count) {
     qLog(Warning) << "An error occurred fetching data.  Code: " << error
                   << " Message: "
                   << reader.attributes().value("message").toString();
+    return items;
   }
 
   reader.readNextStartElement();
@@ -219,8 +222,9 @@ PlaylistItemList SubsonicDynamicPlaylist::GenerateMoreAlbums(int count) {
 
   while (reader.readNextStartElement()) {
     if (reader.name() != "album") {
-      qLog(Warning) << "album tag expected. Aboring playlist fetch";
-      return items;
+      qLog(Warning) << "album tag expected. Skipping album";
+      reader.skipCurrentElement();
+      continue;
     }
 
     qLog(Debug) << "Getting album: "
@@ -279,8 +283,9 @@ void SubsonicDynamicPlaylist::GetAlbum(SubsonicService* service,
   // Read song information
   while (reader.readNextStartElement()) {
     if (reader.name() != "song") {
-      qLog(Warning) << "song tag expected. Aborting playlist fetch.";
-      return;
+      qLog(Warning) << "song tag expected. Skipping song";
+      reader.skipCurrentElement();
+      continue;
     }
 
     Song song = ReadSong(service, reader);
