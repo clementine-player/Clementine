@@ -40,13 +40,16 @@ const int SubsonicDynamicPlaylist::kDefaultSongCount = 20;
 const int SubsonicDynamicPlaylist::kDefaultOffset = 0;
 
 SubsonicDynamicPlaylist::SubsonicDynamicPlaylist()
-  : type_(QueryType_Album), stat_(QueryStat_Newest), offset_(kDefaultOffset) {}
+  : type_(QueryType_Album), stat_(QueryStat_Newest), offset_(kDefaultOffset) {
+  service_ = InternetModel::Service<SubsonicService>();
+}
 
 SubsonicDynamicPlaylist::SubsonicDynamicPlaylist(const QString& name,
                                                  QueryType type,
                                                  QueryStat stat)
     : type_(type), stat_(stat), offset_(kDefaultOffset) {
   set_name(name);
+  service_ = InternetModel::Service<SubsonicService>();
 }
 
 void SubsonicDynamicPlaylist::Load(const QByteArray& data) {
@@ -93,9 +96,7 @@ PlaylistItemList SubsonicDynamicPlaylist::Generate() {
 }
 
 PlaylistItemList SubsonicDynamicPlaylist::GenerateMoreSongs(int count) {
-  SubsonicService* service = InternetModel::Service<SubsonicService>();
-
-  QUrl url = service->BuildRequestUrl("getRandomSongs");
+  QUrl url = service_->BuildRequestUrl("getRandomSongs");
   QNetworkAccessManager network;
 
   if (count > kMaxCount) count = kMaxCount;
@@ -106,7 +107,7 @@ PlaylistItemList SubsonicDynamicPlaylist::GenerateMoreSongs(int count) {
 
   PlaylistItemList items;
 
-  QNetworkReply* reply = Send(network, url, service->usesslv3_);
+  QNetworkReply* reply = Send(network, url, service_->usesslv3_);
   WaitForSignal(reply, SIGNAL(finished()));
 
   reply->deleteLater();
@@ -146,10 +147,10 @@ PlaylistItemList SubsonicDynamicPlaylist::GenerateMoreSongs(int count) {
       continue;
     }
 
-    Song song = ReadSong(service, reader);
+    Song song = ReadSong(reader);
 
     items << std::shared_ptr<PlaylistItem>(
-        new InternetPlaylistItem(service, song));
+        new InternetPlaylistItem(service_, song));
 
     reader.skipCurrentElement();
   }
@@ -157,9 +158,7 @@ PlaylistItemList SubsonicDynamicPlaylist::GenerateMoreSongs(int count) {
 }
 
 PlaylistItemList SubsonicDynamicPlaylist::GenerateMoreAlbums(int count) {
-  SubsonicService* service = InternetModel::Service<SubsonicService>();
-
-  QUrl url = service->BuildRequestUrl("getAlbumList");
+  QUrl url = service_->BuildRequestUrl("getAlbumList");
   QNetworkAccessManager network;
 
   if (count > kMaxCount) count = kMaxCount;
@@ -172,7 +171,7 @@ PlaylistItemList SubsonicDynamicPlaylist::GenerateMoreAlbums(int count) {
 
   PlaylistItemList items;
 
-  QNetworkReply* reply = Send(network, url, service->usesslv3_);
+  QNetworkReply* reply = Send(network, url, service_->usesslv3_);
   WaitForSignal(reply, SIGNAL(finished()));
 
   reply->deleteLater();
@@ -214,22 +213,21 @@ PlaylistItemList SubsonicDynamicPlaylist::GenerateMoreAlbums(int count) {
 
     qLog(Debug) << "Getting album: "
                 << reader.attributes().value("album").toString();
-    GetAlbum(service, items, reader.attributes().value("id").toString(),
-             network, service->usesslv3_);
+    GetAlbum(items, reader.attributes().value("id").toString(), network,
+             service_->usesslv3_);
     reader.skipCurrentElement();
   }
   offset_ += count;
   return items;
 }
 
-void SubsonicDynamicPlaylist::GetAlbum(SubsonicService* service,
-                                       PlaylistItemList& list, QString id,
+void SubsonicDynamicPlaylist::GetAlbum(PlaylistItemList& list, QString id,
                                        QNetworkAccessManager& network,
                                        const bool usesslv3) {
-  QUrl url = service->BuildRequestUrl("getAlbum");
+  QUrl url = service_->BuildRequestUrl("getAlbum");
   QUrlQuery url_query(url.query());
   url_query.addQueryItem("id", id);
-  if (service->IsAmpache()) {
+  if (service_->IsAmpache()) {
     url_query.addQueryItem("ampache", "1");
   }
   url.setQuery(url_query);
@@ -273,18 +271,17 @@ void SubsonicDynamicPlaylist::GetAlbum(SubsonicService* service,
       continue;
     }
 
-    Song song = ReadSong(service, reader);
+    Song song = ReadSong(reader);
     song.set_albumartist(album_artist);
 
     list << std::shared_ptr<PlaylistItem>(
-        new InternetPlaylistItem(service, song));
+        new InternetPlaylistItem(service_, song));
 
     reader.skipCurrentElement();
   }
 }
 
-Song SubsonicDynamicPlaylist::ReadSong(SubsonicService* service,
-                                       QXmlStreamReader &reader) {
+Song SubsonicDynamicPlaylist::ReadSong(QXmlStreamReader &reader) {
   Song song;
   QString id = reader.attributes().value("id").toString();
   song.set_title(reader.attributes().value("title").toString());
@@ -302,7 +299,7 @@ Song SubsonicDynamicPlaylist::ReadSong(SubsonicService* service,
   QUrlQuery song_query(url.query());
   song_query.addQueryItem("id", id);
   url.setQuery(song_query);
-  QUrl cover_url = service->BuildRequestUrl("getCoverArt");
+  QUrl cover_url = service_->BuildRequestUrl("getCoverArt");
   QUrlQuery cover_url_query(cover_url.query());
   cover_url_query.addQueryItem("id", id);
   cover_url.setQuery(cover_url_query);

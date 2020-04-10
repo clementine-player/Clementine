@@ -62,7 +62,7 @@ class SubsonicDynamicPlaylist : public smart_playlists::Generator {
   PlaylistItemList GenerateMoreAlbums(int count);
   PlaylistItemList GenerateMoreSongs(int count);
 
-  Song ReadSong(SubsonicService* service, QXmlStreamReader& reader);
+  Song ReadSong(QXmlStreamReader& reader);
 
   static const int kMaxCount;
   static const int kDefaultAlbumCount;
@@ -70,8 +70,8 @@ class SubsonicDynamicPlaylist : public smart_playlists::Generator {
   static const int kDefaultOffset;
 
  private:
-  void GetAlbum(SubsonicService* service, PlaylistItemList& list, QString id,
-                QNetworkAccessManager& network, const bool usesslv3);
+  void GetAlbum(PlaylistItemList& list, QString id, QNetworkAccessManager& network,
+                const bool usesslv3);
   // need our own one since we run in a different thread from service
   QNetworkReply* Send(QNetworkAccessManager& network, const QUrl& url,
                       const bool usesslv3);
