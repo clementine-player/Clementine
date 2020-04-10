@@ -93,14 +93,6 @@ PlaylistItemList SubsonicDynamicPlaylist::Generate() {
 
 PlaylistItemList SubsonicDynamicPlaylist::GenerateMoreSongs(int count) {
   SubsonicService* service = InternetModel::Service<SubsonicService>();
-  const int task_id =
-      service->app_->task_manager()->StartTask(tr("Fetching Playlist Items"));
-
-  BOOST_SCOPE_EXIT((service)(task_id)) {
-        // stop task when we're done
-        service->app_->task_manager()->SetTaskFinished(task_id);
-      }
-  BOOST_SCOPE_EXIT_END
 
   QUrl url = service->BuildRequestUrl("getRandomSongs");
   QNetworkAccessManager network;
@@ -165,14 +157,6 @@ PlaylistItemList SubsonicDynamicPlaylist::GenerateMoreSongs(int count) {
 
 PlaylistItemList SubsonicDynamicPlaylist::GenerateMoreAlbums(int count) {
   SubsonicService* service = InternetModel::Service<SubsonicService>();
-  const int task_id =
-      service->app_->task_manager()->StartTask(tr("Fetching Playlist Items"));
-
-  BOOST_SCOPE_EXIT((service)(task_id)) {
-    // stop task when we're done
-    service->app_->task_manager()->SetTaskFinished(task_id);
-  }
-  BOOST_SCOPE_EXIT_END
 
   QUrl url = service->BuildRequestUrl("getAlbumList");
   QNetworkAccessManager network;
