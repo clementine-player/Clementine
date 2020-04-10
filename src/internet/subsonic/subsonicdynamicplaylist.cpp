@@ -87,7 +87,8 @@ PlaylistItemList SubsonicDynamicPlaylist::Generate() {
     case QueryType_Song:
       return GenerateMoreSongs(kDefaultSongCount);
     default:
-      return GenerateMoreAlbums(kDefaultAlbumCount);
+      qLog(Warning) << "Invalid playlist type";
+      return PlaylistItemList();
   }
 }
 
