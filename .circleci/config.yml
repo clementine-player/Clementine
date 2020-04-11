@@ -733,53 +733,53 @@ workflows:
       - build_eoan_64:
           filters:
             tags:
-              only: /.*/
+              only: /\d+\.\d+\.\d+(rc\d+)?$/
       - build_eoan_32:
           filters:
             tags:
-              only: /.*/
+              only: /\d+\.\d+\.\d+(rc\d+)?$/
       - build_bionic_64:
           filters:
             tags:
-              only: /.*/
+              only: /\d+\.\d+\.\d+(rc\d+)?$/
       - build_bionic_32:
           filters:
             tags:
-              only: /.*/
+              only: /\d+\.\d+\.\d+(rc\d+)?$/
       - build_buster_64:
           filters:
             tags:
-              only: /.*/
+              only: /\d+\.\d+\.\d+(rc\d+)?$/
       - build_stretch_64:
           filters:
             tags:
-              only: /.*/
+              only: /\d+\.\d+\.\d+(rc\d+)?$/
       - build_fedora_30_64:
           filters:
             tags:
-              only: /.*/
+              only: /\d+\.\d+\.\d+(rc\d+)?$/
       - build_fedora_31_64:
           filters:
             tags:
-              only: /.*/
+              only: /\d+\.\d+\.\d+(rc\d+)?$/
       - build_mingw:
           filters:
             tags:
-              only: /.*/
+              only: /\d+\.\d+\.\d+(rc\d+)?$/
       - build_mac:
           filters:
             branches:
               only: master
             tags:
-              only: /.*/
+              only: /\d+\.\d+\.\d+(rc\d+)?$/
       - build_source_tarball:
           filters:
             tags:
-              only: /.*/
+              only: /\d+\.\d+\.\d+(rc\d+)?$/
       - create_release:
           filters:
             tags:
-              only: /.*/
+              only: /\d+\.\d+\.\d+(rc\d+)?$/
             branches:
               ignore: /.*/
           context: github
