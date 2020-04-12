@@ -524,6 +524,14 @@ jobs:
             cp
             platforms/qwindows.dll
             ~/project/dist/windows/platforms
+      - run: mkdir dist/windows/styles
+      - run:
+          name: Copy Qt style plugin DLLs
+          working_directory: /target/plugins
+          command: >
+            cp
+            styles/qwindowsvistastyle.dll
+            ~/project/dist/windows/styles
       - run: mkdir dist/windows/gio-modules
       - run:
           name: Copy GIO modules
