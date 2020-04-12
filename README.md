@@ -1,6 +1,5 @@
 Clementine [![CircleCI](https://circleci.com/gh/clementine-player/Clementine.svg?style=svg)](https://circleci.com/gh/clementine-player/Clementine)
-
-==========
+----------------
 
 Clementine is a modern music player and library organizer for Windows, Linux and macOS.
 
