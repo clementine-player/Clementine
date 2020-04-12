@@ -413,6 +413,12 @@ Section "Qt platform plugins" platforms
   File "/oname=qwindows.dll" "platforms\qwindows.dll"
 SectionEnd
 
+Section "Qt style plugins" styles
+  SetOutPath "$INSTDIR\styles"
+
+  File "/oname=qwindowsvistastyle.dll" "styles\qwindowsvistastyle.dll"
+SectionEnd
+
 Section "GIO modules" gio-modules
   SetOutPath "$INSTDIR\gio-modules"
 
