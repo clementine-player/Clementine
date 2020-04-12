@@ -96,6 +96,10 @@ PlaylistItemList SubsonicDynamicPlaylist::Generate() {
 }
 
 PlaylistItemList SubsonicDynamicPlaylist::GenerateMoreSongs(int count) {
+  const int task_id =
+      service_->app_->task_manager()->StartTask(tr("Fetching playlist items"));
+  TaskManager::ScopedTask task(task_id, service_->app_->task_manager());
+
   QUrl url = service_->BuildRequestUrl("getRandomSongs");
   QNetworkAccessManager network;
 
@@ -158,6 +162,10 @@ PlaylistItemList SubsonicDynamicPlaylist::GenerateMoreSongs(int count) {
 }
 
 PlaylistItemList SubsonicDynamicPlaylist::GenerateMoreAlbums(int count) {
+  const int task_id =
+      service_->app_->task_manager()->StartTask(tr("Fetching playlist items"));
+  TaskManager::ScopedTask task(task_id, service_->app_->task_manager());
+
   QUrl url = service_->BuildRequestUrl("getAlbumList");
   QNetworkAccessManager network;
 
