@@ -29,8 +29,8 @@ TEST(Translations, Basic) {
   PoTranslator t;
   t.load("clementine_es.qm", ":/translations");
 
-  EXPECT_EQ(QString::fromUtf8("Colección"),
+  EXPECT_EQ(QString::fromUtf8("Fonoteca"),
             t.translate("MainWindow", "Library"));
-  EXPECT_EQ(QString::fromUtf8("Colección"),
+  EXPECT_EQ(QString::fromUtf8("Fonoteca"),
             t.translate("", "Library"));
 }
