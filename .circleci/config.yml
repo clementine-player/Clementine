@@ -624,6 +624,12 @@ jobs:
             protobuf
             protobuf-c
             qt
+      - run:
+          name: Install liblastfm
+          command: brew install https://raw.githubusercontent.com/tomahawk-player/homebrew-tomahawkqt5/master/liblastfm.rb
+      - run:
+          name: Fix liblastfm includes
+          command: ln -s /usr/local/include/lastfm /usr/local/include/lastfm5
       - checkout
       - run:
           name: cmake
