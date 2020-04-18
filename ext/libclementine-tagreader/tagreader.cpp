@@ -434,6 +434,10 @@ void TagReader::ReadFile(const QString& filename,
         Decode(items["\251grp"].toStringList().toString(" "), nullptr,
                song->mutable_grouping());
       }
+      if (items.contains("\251lyr")) {
+        Decode(items["\251lyr"].toStringList().toString(" "), nullptr,
+               song->mutable_lyrics());
+      }
 
       if (items.contains(kMP4_OriginalYear_ID)) {
         song->set_originalyear(
@@ -868,6 +872,7 @@ bool TagReader::SaveFile(const QString& filename,
         song.bpm() <= 0 - 1 ? "0" : TagLib::String::number(song.bpm()));
     tag->itemListMap()["\251wrt"] = TagLib::StringList(song.composer().c_str());
     tag->itemListMap()["\251grp"] = TagLib::StringList(song.grouping().c_str());
+    tag->itemListMap()["\251lyr"] = TagLib::StringList(song.lyrics().c_str());
     tag->itemListMap()["aART"] = TagLib::StringList(song.albumartist().c_str());
     tag->itemListMap()["cpil"] =
         TagLib::StringList(song.compilation() ? "1" : "0");
