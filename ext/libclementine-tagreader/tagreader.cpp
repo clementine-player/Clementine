@@ -47,6 +47,7 @@
 #include <popularimeterframe.h>
 #include <speexfile.h>
 #include <tag.h>
+#include <tdebuglistener.h>
 #include <textidentificationframe.h>
 #include <trueaudiofile.h>
 #include <tstring.h>
@@ -86,6 +87,22 @@ class TagLibFileRefFactory : public FileRefFactory {
 #endif
   }
 };
+
+// Handler to push TagLib messages to qLog instead of printing to stderr.
+class TagReaderDebugListener : public TagLib::DebugListener {
+ private:
+  TagReaderDebugListener() {
+    // Install handler.
+    TagLib::setDebugListener(this);
+  }
+  
+  virtual void printMessage(const TagLib::String &msg) override {
+    // Remove trailing newline.
+    qLog(Debug).noquote() << TStringToQString(msg).trimmed();
+  }
+  static TagReaderDebugListener listener_;
+};
+TagReaderDebugListener TagReaderDebugListener::listener_;
 
 namespace {
 
