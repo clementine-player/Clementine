@@ -408,6 +408,9 @@ jobs:
     steps:
       - checkout
       - run:
+          name: Fix liblastfm includes
+          command: ln -s /target/include/lastfm /target/include/lastfm5
+      - run:
           name: CMake
           working_directory: bin
           command: >
@@ -471,6 +474,7 @@ jobs:
             libiconv-2.dll
             libid3tag.dll
             libintl-8.dll
+            liblastfm5.dll
             libmad.dll
             libmms-0.dll
             libmp3lame-0.dll
