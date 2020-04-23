@@ -331,19 +331,6 @@ jobs:
       - copy_artifacts:
           build: ubuntu-focal
 
-  build_focal_32:
-    docker:
-      - image: i386/ubuntu:focal
-    steps:
-      - install_eoan_dependencies
-      - checkout
-      - cmake_debian:
-          distribution: focal
-          arch: i386
-      - make_deb
-      - copy_artifacts:
-          build: ubuntu-focal
-
   build_eoan_64:
     docker:
       - image: ubuntu:eoan
@@ -778,10 +765,6 @@ workflows:
           filters:
             tags:
               only: /\d+\.\d+\.\d+(rc\d+)?$/
-      - build_focal_32:
-          filters:
-            tags:
-              only: /\d+\.\d+\.\d+(rc\d+)?$/
       - build_eoan_64:
           filters:
             tags:
@@ -837,7 +820,6 @@ workflows:
           context: github
           requires:
             - build_focal_64
-            - build_focal_32
             - build_eoan_64
             - build_eoan_32
             - build_bionic_64
@@ -858,7 +840,6 @@ workflows:
           context: github
           requires:
             - build_focal_64
-            - build_focal_32
             - build_eoan_64
             - build_eoan_32
             - build_bionic_64
@@ -874,7 +855,6 @@ workflows:
           context: gcp
           requires:
             - build_focal_64
-            - build_focal_32
             - build_eoan_64
             - build_eoan_32
             - build_bionic_64
