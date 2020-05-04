@@ -26,7 +26,7 @@
 class AlbumCoverLoader;
 class Song;
 
-class QAbstractItemModel;
+class QStandardItemModel;
 class QModelIndex;
 class QStandardItem;
 
@@ -40,7 +40,7 @@ class StandardItemIconLoader : public QObject {
 
   AlbumCoverLoaderOptions* options() { return &cover_options_; }
 
-  void SetModel(QAbstractItemModel* model);
+  void SetModel(QStandardItemModel* model);
 
   void LoadIcon(const QString& art_automatic, const QString& art_manual,
                 QStandardItem* for_item);
@@ -55,7 +55,7 @@ class StandardItemIconLoader : public QObject {
   AlbumCoverLoader* cover_loader_;
   AlbumCoverLoaderOptions cover_options_;
 
-  QAbstractItemModel* model_;
+  QStandardItemModel* model_;
 
   QMap<quint64, QStandardItem*> pending_covers_;
 };

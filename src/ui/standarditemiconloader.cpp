@@ -18,7 +18,7 @@
 #include "standarditemiconloader.h"
 #include "covers/albumcoverloader.h"
 
-#include <QAbstractItemModel>
+#include <QStandardItemModel>
 #include <QSet>
 #include <QStandardItem>
 
@@ -31,7 +31,7 @@ StandardItemIconLoader::StandardItemIconLoader(AlbumCoverLoader* cover_loader,
           SLOT(ImageLoaded(quint64, QImage)));
 }
 
-void StandardItemIconLoader::SetModel(QAbstractItemModel* model) {
+void StandardItemIconLoader::SetModel(QStandardItemModel* model) {
   if (model_) {
     disconnect(model_, SIGNAL(rowsAboutToBeRemoved(QModelIndex, int, int)),
                this, SLOT(RowsAboutToBeRemoved(QModelIndex, int, int)));
