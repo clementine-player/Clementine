@@ -60,12 +60,16 @@ void StandardItemIconLoader::LoadIcon(const Song& song,
 
 void StandardItemIconLoader::RowsAboutToBeRemoved(const QModelIndex& parent,
                                                   int begin, int end) {
+  // For QStandardItemModel, the invisible root item does not have a valid index.
+  bool is_top = !parent.isValid();
+
   for (QMap<quint64, QStandardItem*>::iterator it = pending_covers_.begin();
        it != pending_covers_.end();) {
     const QStandardItem* item = it.value();
     const QStandardItem* item_parent = item->parent();
 
-    if (item_parent && item_parent->index() == parent &&
+    if (((is_top && item_parent == nullptr) ||
+         (item_parent != nullptr && item_parent->index() == parent)) &&
         item->index().row() >= begin && item->index().row() <= end) {
       cover_loader_->CancelTask(it.key());
       it = pending_covers_.erase(it);
