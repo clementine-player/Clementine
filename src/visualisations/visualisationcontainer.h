@@ -60,6 +60,7 @@ class VisualisationContainer : public QGraphicsView {
   // QWidget
   void showEvent(QShowEvent* e);
   void hideEvent(QHideEvent* e);
+  void closeEvent(QCloseEvent* e);
   void resizeEvent(QResizeEvent* e);
   void timerEvent(QTimerEvent* e);
   void mouseMoveEvent(QMouseEvent* e);
