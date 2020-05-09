@@ -21,6 +21,7 @@
 #include "visualisationoverlay.h"
 #include "visualisationselector.h"
 #include "engines/gstengine.h"
+#include "core/logging.h"
 #include "ui/iconloader.h"
 #include "ui/screensaver.h"
 
@@ -151,6 +152,7 @@ void VisualisationContainer::SetEngine(GstEngine* engine) {
 }
 
 void VisualisationContainer::showEvent(QShowEvent* e) {
+  qLog(Debug) << "Showing visualization";
   if (!initialised_) {
     if (!QGLFormat::hasOpenGL()) {
       hide();
@@ -171,10 +173,17 @@ void VisualisationContainer::showEvent(QShowEvent* e) {
 }
 
 void VisualisationContainer::hideEvent(QHideEvent* e) {
+  qLog(Debug) << "Hiding visualization";
   QGraphicsView::hideEvent(e);
   update_timer_.stop();
 
   if (engine_) engine_->RemoveBufferConsumer(vis_);
+}
+
+void VisualisationContainer::closeEvent(QCloseEvent* e) {
+  // Don't close the window. Just hide it.
+  e->ignore();
+  hide();
 }
 
 void VisualisationContainer::resizeEvent(QResizeEvent* e) {
