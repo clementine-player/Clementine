@@ -17,18 +17,35 @@
 
 #include "settingsdialog.h"
 #include "settingspage.h"
+#include "core/logging.h"
 
 SettingsPage::SettingsPage(SettingsDialog* dialog)
-    : QWidget(dialog), dialog_(dialog) {}
+    : QWidget(dialog), maybe_changed_(false), dialog_(dialog) {}
+
+void SettingsPage::showEvent(QShowEvent* event) {
+  QWidget::showEvent(event);
+  maybe_changed_ = true;
+}
 
 void SettingsPage::Apply() {
-  Save();
+  if (maybe_changed_) {
+    qLog(Debug) << "Saving" << windowTitle();
+    Save();
+    if (!isVisible())
+      // Don't expect additional changes until the page is visible again.
+      maybe_changed_ = false;
+  }
 }
 
 void SettingsPage::Accept() {
-  Save();
+  if (maybe_changed_) {
+    qLog(Debug) << "Saving" << windowTitle();
+    Save();
+    maybe_changed_ = false;
+  }
 }
 
 void SettingsPage::Reject() {
   Cancel();
+  maybe_changed_ = false;
 }
