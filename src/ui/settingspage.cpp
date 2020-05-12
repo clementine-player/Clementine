@@ -20,3 +20,15 @@
 
 SettingsPage::SettingsPage(SettingsDialog* dialog)
     : QWidget(dialog), dialog_(dialog) {}
+
+void SettingsPage::Apply() {
+  Save();
+}
+
+void SettingsPage::Accept() {
+  Save();
+}
+
+void SettingsPage::Reject() {
+  Cancel();
+}
