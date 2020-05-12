@@ -269,21 +269,17 @@ void SettingsDialog::AddPage(Page id, SettingsPage* page,
   pages_[id] = data;
 }
 
-void SettingsDialog::Save() {
-  for (const PageData& data : pages_.values()) {
-    data.page_->Save();
-  }
-}
-
 void SettingsDialog::accept() {
-  Save();
+  for (const PageData& data : pages_.values()) {
+    data.page_->Accept();
+  }
   QDialog::accept();
 }
 
 void SettingsDialog::reject() {
   // Notify each page that user clicks on Cancel
   for (const PageData& data : pages_.values()) {
-    data.page_->Cancel();
+    data.page_->Reject();
   }
 
   QDialog::reject();
@@ -292,7 +288,9 @@ void SettingsDialog::reject() {
 void SettingsDialog::DialogButtonClicked(QAbstractButton* button) {
   // While we only connect Apply at the moment, this might change in the future
   if (ui_->buttonBox->button(QDialogButtonBox::Apply) == button) {
-    Save();
+    for (const PageData& data : pages_.values()) {
+      data.page_->Apply();
+    }
   }
 }
 
