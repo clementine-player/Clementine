@@ -45,9 +45,14 @@ class SettingsPage : public QWidget {
   // The dialog that this page belongs to.
   SettingsDialog* dialog() const { return dialog_; }
 
-signals:
+ signals:
   void NotificationPreview(OSD::Behaviour, QString, QString);
   void SetWiimotedevInterfaceActived(bool);
+
+ protected:
+  void showEvent(QShowEvent* event);
+
+  bool maybe_changed_;
 
  private:
   virtual void Save() = 0;
