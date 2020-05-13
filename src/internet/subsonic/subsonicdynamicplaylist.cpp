@@ -151,7 +151,7 @@ PlaylistItemList SubsonicDynamicPlaylist::GenerateMoreSongs(int count) {
       continue;
     }
 
-    Song song = ReadSong(reader);
+    Song song = service_->ReadSong(reader);
 
     items << std::shared_ptr<PlaylistItem>(
         new InternetPlaylistItem(service_, song));
@@ -279,7 +279,7 @@ void SubsonicDynamicPlaylist::GetAlbum(PlaylistItemList& list, QString id,
       continue;
     }
 
-    Song song = ReadSong(reader);
+    Song song = service_->ReadSong(reader);
     song.set_albumartist(album_artist);
 
     list << std::shared_ptr<PlaylistItem>(
@@ -287,46 +287,6 @@ void SubsonicDynamicPlaylist::GetAlbum(PlaylistItemList& list, QString id,
 
     reader.skipCurrentElement();
   }
-}
-
-Song SubsonicDynamicPlaylist::ReadSong(QXmlStreamReader &reader) {
-  Song song;
-  QString id = reader.attributes().value("id").toString();
-  song.set_title(reader.attributes().value("title").toString());
-  song.set_album(reader.attributes().value("album").toString());
-  song.set_track(reader.attributes().value("track").toString().toInt());
-  song.set_disc(reader.attributes().value("discNumber").toString().toInt());
-  song.set_artist(reader.attributes().value("artist").toString());
-  song.set_bitrate(reader.attributes().value("bitRate").toString().toInt());
-  song.set_year(reader.attributes().value("year").toString().toInt());
-  song.set_genre(reader.attributes().value("genre").toString());
-  qint64 length = reader.attributes().value("duration").toString().toInt();
-  length *= kNsecPerSec;
-  song.set_length_nanosec(length);
-  QUrl url = QUrl(QString("subsonic://"));
-  QUrlQuery song_query(url.query());
-  song_query.addQueryItem("id", id);
-  url.setQuery(song_query);
-  QUrl cover_url = service_->BuildRequestUrl("getCoverArt");
-  QUrlQuery cover_url_query(cover_url.query());
-  cover_url_query.addQueryItem("id", id);
-  cover_url.setQuery(cover_url_query);
-  song.set_art_automatic(cover_url.toEncoded());
-  song.set_url(url);
-  song.set_filesize(reader.attributes().value("size").toString().toInt());
-  QFileInfo fi(reader.attributes().value("path").toString());
-  song.set_basefilename(fi.fileName());
-  // We need to set these to satisfy the database constraints
-  song.set_directory_id(0);
-  song.set_mtime(0);
-  song.set_ctime(0);
-
-  if (reader.attributes().hasAttribute("playCount")) {
-    song.set_playcount(
-        reader.attributes().value("playCount").toString().toInt());
-  }
-
-  return song;
 }
 
 QDataStream& operator<<(QDataStream& s, const SubsonicDynamicPlaylist& p) {
