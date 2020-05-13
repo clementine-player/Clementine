@@ -99,7 +99,6 @@ class OutgoingDataCreator : public QObject {
   bool aww_;
 
   std::unique_ptr<UltimateLyricsReader> ultimate_reader_;
-  ProviderList provider_list_;
   QMap<int, SongInfoFetcher::Result> results_;
   SongInfoFetcher* fetcher_;
 

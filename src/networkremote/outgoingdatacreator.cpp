@@ -59,13 +59,14 @@ void OutgoingDataCreator::SetClients(QList<RemoteClient*>* clients) {
 
   // Parse the ultimate lyrics xml file
   ultimate_reader_->SetThread(this->thread());
-  provider_list_ = ultimate_reader_->Parse(":lyrics/ultimate_providers.xml");
+  ProviderList provider_list =
+    ultimate_reader_->Parse(":lyrics/ultimate_providers.xml");
 
   // Set up the lyrics parser
   connect(fetcher_, SIGNAL(ResultReady(int, SongInfoFetcher::Result)),
           SLOT(SendLyrics(int, SongInfoFetcher::Result)));
 
-  for (SongInfoProvider* provider : provider_list_) {
+  for (SongInfoProvider* provider : provider_list) {
     fetcher_->AddProvider(provider);
   }
 
