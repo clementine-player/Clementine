@@ -2,6 +2,189 @@ name: all
 on: [push]
 
 jobs:
+  build_mingw:
+    name: Build Windows Installer
+    runs-on: ubuntu-18.04
+    container:
+      image: eu.gcr.io/clementine-data/mingw-w64:latest
+    env:
+      PKG_CONFIG_PATH: /target/lib/pkgconfig
+    steps:
+      - name: Fix liblastfm includes
+        run: ln -s /target/include/lastfm /target/include/lastfm5
+      - uses: actions/checkout@v2
+      - name: cmake
+        working-directory: bin
+        run: >
+          cmake ..
+          -DCMAKE_TOOLCHAIN_FILE=../Toolchain-mingw32.cmake
+          -DCMAKE_BUILD_TYPE=Release
+      - name: make
+        working-directory: bin
+        run: make -j2
+      - name: Copy output exes
+        working-directory: dist/windows
+        run: cp ../../bin/*.exe .
+      - name: Copy base runtime DLLs
+        run: >
+          cp
+          /usr/lib/gcc/i686-w64-mingw32/*-posix/libgcc_s_sjlj-1.dll
+          /usr/lib/gcc/i686-w64-mingw32/*-posix/libstdc++-6.dll
+          /usr/i686-w64-mingw32/lib/libwinpthread-1.dll
+          dist/windows
+      - name: Copy DLL depdendencies
+        working-directory: /target/bin
+        run: >
+            cp
+            glew32.dll
+            libcdio-16.dll
+            libchromaprint.dll
+            libeay32.dll
+            libfaad.dll
+            libffi-6.dll
+            libfftw3-3.dll
+            libFLAC-8.dll
+            libgcrypt-20.dll
+            libgio-2.0-0.dll
+            libglib-2.0-0.dll
+            libgmodule-2.0-0.dll
+            libgmp-10.dll
+            libgnutls-30.dll
+            libgobject-2.0-0.dll
+            libgpg-error-0.dll
+            libgpod.dll
+            libgstapp-1.0-0.dll
+            libgstaudio-1.0-0.dll
+            libgstbase-1.0-0.dll
+            libgstcontroller-1.0-0.dll
+            libgstfft-1.0-0.dll
+            libgstnet-1.0-0.dll
+            libgstpbutils-1.0-0.dll
+            libgstreamer-1.0-0.dll
+            libgstriff-1.0-0.dll
+            libgstrtp-1.0-0.dll
+            libgstrtsp-1.0-0.dll
+            libgstsdp-1.0-0.dll
+            libgsttag-1.0-0.dll
+            libgstvideo-1.0-0.dll
+            libgthread-2.0-0.dll
+            libhogweed-4.dll
+            libiconv-2.dll
+            libid3tag.dll
+            libintl-8.dll
+            liblastfm5.dll
+            libmad.dll
+            libmms-0.dll
+            libmp3lame-0.dll
+            libnettle-6.dll
+            libogg-0.dll
+            liboil-0.3-0.dll
+            liborc-0.4-0.dll
+            liborc-test-0.4-0.dll
+            libp11-kit-0.dll
+            libplist.dll
+            libpsl-5.dll
+            libprotobuf-17.dll
+            libsoup-2.4-1.dll
+            libspeex-1.dll
+            libspotify.dll
+            libsqlite3-0.dll
+            libtag.dll
+            libtasn1-6.dll
+            libvorbis-0.dll
+            libvorbisenc-2.dll
+            libxml2-2.dll
+            Qt5Concurrent.dll
+            Qt5Core.dll
+            Qt5Gui.dll
+            Qt5Network.dll
+            Qt5NetworkAuth.dll
+            Qt5OpenGL.dll
+            Qt5Sql.dll
+            Qt5Svg.dll
+            Qt5Widgets.dll
+            Qt5WinExtras.dll
+            Qt5Xml.dll
+            Qt5XmlPatterns.dll
+            ssleay32.dll
+            zlib1.dll
+            ${GITHUB_WORKSPACE}/dist/windows
+      - run: mkdir dist/windows/imageformats
+      - name: Copy Qt imageformat plugin DLLs
+        working-directory: /target/plugins
+        run: >
+          cp
+          imageformats/qgif.dll
+          imageformats/qjpeg.dll
+          ${GITHUB_WORKSPACE}/dist/windows/imageformats
+      - run: mkdir dist/windows/platforms
+      - name: Copy Qt platforms plugin DLLs
+        working-directory: /target/plugins
+        run: >
+          cp
+          platforms/qwindows.dll
+          ${GITHUB_WORKSPACE}/dist/windows/platforms
+      - run: mkdir dist/windows/styles
+      - name: Copy Qt style plugin DLLs
+        working-directory: /target/plugins
+        run: >
+          cp
+          styles/qwindowsvistastyle.dll
+          ${GITHUB_WORKSPACE}/dist/windows/styles
+      - run: mkdir dist/windows/gio-modules
+      - name: Copy GIO modules
+        run: cp /target/lib/gio/modules/libgiognutls.dll dist/windows/gio-modules
+      - run: mkdir dist/windows/gstreamer-plugins
+      - name: Copy gstreamer plugins
+        working-directory: /target/lib/gstreamer-1.0
+        run: >
+          cp
+          libgstapetag.dll
+          libgstapp.dll
+          libgstasf.dll
+          libgstaudioconvert.dll
+          libgstaudiofx.dll
+          libgstaudioparsers.dll
+          libgstaudioresample.dll
+          libgstaudiotestsrc.dll
+          libgstautodetect.dll
+          libgstcdio.dll
+          libgstcoreelements.dll
+          libgstdirectsoundsink.dll
+          libgstequalizer.dll
+          libgstfaad.dll
+          libgstflac.dll
+          libgstgdp.dll
+          libgstgio.dll
+          libgsticydemux.dll
+          libgstid3demux.dll
+          libgstisomp4.dll
+          libgstlame.dll
+          libgstlibav.dll
+          libgstmad.dll
+          libgstmms.dll
+          libgstogg.dll
+          libgstplayback.dll
+          libgstreplaygain.dll
+          libgstsouphttpsrc.dll
+          libgstspectrum.dll
+          libgstspeex.dll
+          libgsttaglib.dll
+          libgsttcp.dll
+          libgsttypefindfunctions.dll
+          libgstudp.dll
+          libgstvolume.dll
+          libgstvorbis.dll
+          libgstwavparse.dll
+          ${GITHUB_WORKSPACE}/dist/windows/gstreamer-plugins
+      - name: Build Windows installer
+        working-directory: dist/windows
+        run: makensis clementine.nsi
+      - uses: actions/upload-artifact@v2
+        with:
+          name: release_mingw
+          path: dist/windows/ClementineSetup*.exe
+
   build_focal_64:
     name: Build Ubuntu Focal 64-bit deb
     runs-on: ubuntu-18.04
@@ -51,7 +234,7 @@ jobs:
       - uses: actions/checkout@v2
       - name: cmake
         working-directory: bin
-        run : >
+        run: >
           cmake ..
           -DWITH_DEBIAN=ON
           -DDEB_ARCH=amd64
