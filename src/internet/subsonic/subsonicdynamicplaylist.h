@@ -62,8 +62,6 @@ class SubsonicDynamicPlaylist : public smart_playlists::Generator {
   PlaylistItemList GenerateMoreAlbums(int count);
   PlaylistItemList GenerateMoreSongs(int count);
 
-  Song ReadSong(QXmlStreamReader& reader);
-
   static const int kMaxCount;
   static const int kDefaultAlbumCount;
   static const int kDefaultSongCount;

@@ -623,3 +623,45 @@ void SubsonicLibraryScanner::ParsingError(const QString& message) {
   scanning_ = false;
   emit ScanFinished();
 }
+
+Song SubsonicService::ReadSong(QXmlStreamReader& reader) {
+  Song song;
+  QString id = reader.attributes().value("id").toString();
+  song.set_title(reader.attributes().value("title").toString());
+  song.set_album(reader.attributes().value("album").toString());
+  song.set_track(reader.attributes().value("track").toString().toInt());
+  song.set_disc(reader.attributes().value("discNumber").toString().toInt());
+  song.set_artist(reader.attributes().value("artist").toString());
+  song.set_bitrate(reader.attributes().value("bitRate").toString().toInt());
+  song.set_year(reader.attributes().value("year").toString().toInt());
+  song.set_genre(reader.attributes().value("genre").toString());
+  qint64 length = reader.attributes().value("duration").toString().toInt();
+  length *= kNsecPerSec;
+  song.set_length_nanosec(length);
+  QUrl url = QUrl(QString("subsonic://"));
+  QUrlQuery song_query(url.query());
+  song_query.addQueryItem("id", id);
+  url.setQuery(song_query);
+
+  QUrl cover_url = BuildRequestUrl("getCoverArt");
+  QUrlQuery cover_url_query(cover_url.query());
+  cover_url_query.addQueryItem("id", id);
+  cover_url.setQuery(cover_url_query);
+  song.set_art_automatic(cover_url.toEncoded());
+
+  song.set_url(url);
+  song.set_filesize(reader.attributes().value("size").toString().toInt());
+  QFileInfo fi(reader.attributes().value("path").toString());
+  song.set_basefilename(fi.fileName());
+  // We need to set these to satisfy the database constraints
+  song.set_directory_id(0);
+  song.set_mtime(0);
+  song.set_ctime(0);
+
+  if (reader.attributes().hasAttribute("playCount")) {
+    song.set_playcount(
+        reader.attributes().value("playCount").toString().toInt());
+  }
+
+  return song;
+}
