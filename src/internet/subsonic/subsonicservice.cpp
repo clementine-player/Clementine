@@ -560,7 +560,7 @@ void SubsonicLibraryScanner::OnGetAlbumFinished(QNetworkReply* reply) {
     song_query.addQueryItem("id", id);
     url.setQuery(song_query);
     QUrl cover_url = service_->BuildRequestUrl("getCoverArt");
-    QUrlQuery cover_url_query(url.query());
+    QUrlQuery cover_url_query(cover_url.query());
     cover_url_query.addQueryItem("id", id);
     cover_url.setQuery(cover_url_query);
     song.set_art_automatic(cover_url.toEncoded());
