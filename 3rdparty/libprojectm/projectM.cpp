@@ -46,6 +46,8 @@
 #include "PCM.hpp"                    //Sound data handler (buffering, FFT, etc.)
 
 #include <map>
+#include <utility>
+
 
 #include "Renderer.hpp"
 #include "PresetChooser.hpp"
@@ -415,7 +417,7 @@ static void *thread_callback(void *prjm) {
             if ( timeKeeper->IsSmoothing() && timeKeeper->SmoothRatio() > 1.0 )
             {
                 //printf("End Smooth\n");
-                m_activePreset = m_activePreset2;
+                m_activePreset = std::move(m_activePreset2);
                 timeKeeper->EndSmoothing();
             }
             //printf("Normal\n");
@@ -789,7 +791,7 @@ void projectM::selectNext(const bool hardCut) {
  * 
  * @param targetPreset 
  */
-void projectM::switchPreset(std::auto_ptr<Preset> & targetPreset) {
+void projectM::switchPreset(std::unique_ptr<Preset> & targetPreset) {
 
 	#ifdef SYNC_PRESET_SWITCHES	
 	pthread_mutex_lock(&preset_mutex);	
