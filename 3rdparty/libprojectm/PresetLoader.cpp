@@ -130,7 +130,7 @@ void PresetLoader::rescan()
 }
 
 
-std::auto_ptr<Preset> PresetLoader::loadPreset ( unsigned int index )  const
+std::unique_ptr<Preset> PresetLoader::loadPreset ( unsigned int index )  const
 {
 
 	// Check that index isn't insane
@@ -146,7 +146,7 @@ std::auto_ptr<Preset> PresetLoader::loadPreset ( unsigned int index )  const
 }
 
 
-std::auto_ptr<Preset> PresetLoader::loadPreset ( const std::string & url )  const
+std::unique_ptr<Preset> PresetLoader::loadPreset ( const std::string & url )  const
 {
 
 	// Return a new autopointer to a preset

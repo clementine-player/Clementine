@@ -1451,7 +1451,7 @@ InitCond * Parser::parse_init_cond(std::istream &  fs, char * name, MilkdropPres
   if (PARSE_DEBUG) printf("parsed_init_cond: parsing initial condition value... (LINE %d)\n", line_count);
 
   /* integer value (boolean is an integer in C) */
-  if ( (param->type == P_TYPE_BOOL))
+  if ( param->type == P_TYPE_BOOL)
   {
     int bool_test;
     if ((parse_int(fs, &bool_test)) == PROJECTM_PARSE_ERROR)
@@ -1462,7 +1462,7 @@ InitCond * Parser::parse_init_cond(std::istream &  fs, char * name, MilkdropPres
     init_val.bool_val = bool_test;
   }
 
-  else if ((param->type == P_TYPE_INT))
+  else if (param->type == P_TYPE_INT)
   {
     if ((parse_int(fs, (int*)&init_val.int_val)) == PROJECTM_PARSE_ERROR)
     {
@@ -1578,7 +1578,7 @@ InitCond * Parser::parse_per_frame_init_eqn(std::istream &  fs, MilkdropPreset *
     init_val.bool_val = (bool)val;
   }
 
-  else if ((param->type == P_TYPE_INT))
+  else if (param->type == P_TYPE_INT)
   {
     init_val.int_val = (int)val;
   }
@@ -1771,7 +1771,7 @@ int Parser::parse_wavecode(char * token, std::istream &  fs, MilkdropPreset * pr
 
   /* integer value (boolean is an integer in C) */
 
-  if ((param->type == P_TYPE_BOOL))
+  if (param->type == P_TYPE_BOOL)
   {
     int bool_test;
     if ((parse_int(fs, &bool_test)) == PROJECTM_PARSE_ERROR)
@@ -1782,7 +1782,7 @@ int Parser::parse_wavecode(char * token, std::istream &  fs, MilkdropPreset * pr
     }
     init_val.bool_val = bool_test;
   }
-  else if ((param->type == P_TYPE_INT))
+  else if (param->type == P_TYPE_INT)
   {
     if ((parse_int(fs, (int*)&init_val.int_val)) == PROJECTM_PARSE_ERROR)
     {
@@ -1897,7 +1897,7 @@ int Parser::parse_shapecode(char * token, std::istream &  fs, MilkdropPreset * p
   /* integer value (boolean is an integer in C) */
 
 
-  if ((param->type == P_TYPE_BOOL))
+  if (param->type == P_TYPE_BOOL)
   {
     int bool_test;
     if ((parse_int(fs, &bool_test)) == PROJECTM_PARSE_ERROR)
@@ -1907,7 +1907,7 @@ int Parser::parse_shapecode(char * token, std::istream &  fs, MilkdropPreset * p
     }
     init_val.bool_val = bool_test;
   }
-  else if ((param->type == P_TYPE_INT))
+  else if (param->type == P_TYPE_INT)
   {
     if ((parse_int(fs, (int*)&init_val.int_val)) == PROJECTM_PARSE_ERROR)
     {
