@@ -296,6 +296,11 @@ signals:
   GstElement* audioscale_;
   GstElement* audiosink_;
 
+  // tee and request pads.
+  GstElement* tee_;
+  GstPad* tee_probe_pad_;
+  GstPad* tee_audio_pad_;
+
   uint bus_cb_id_;
 
   QThreadPool set_state_threadpool_;

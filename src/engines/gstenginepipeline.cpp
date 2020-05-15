@@ -96,7 +96,10 @@ GstEnginePipeline::GstEnginePipeline(GstEngine* engine)
       stereo_panorama_(nullptr),
       volume_(nullptr),
       audioscale_(nullptr),
-      audiosink_(nullptr) {
+      audiosink_(nullptr),
+      tee_(nullptr),
+      tee_probe_pad_(nullptr),
+      tee_audio_pad_(nullptr) {
   if (!sElementDeleter) {
     sElementDeleter = new GstElementDeleter;
   }
@@ -266,7 +269,10 @@ bool GstEnginePipeline::Init() {
   gst_bin_add(GST_BIN(pipeline_), audiobin_);
 
   // Create the sink
-  if (!(audiosink_ = engine_->CreateElement(sink_, audiobin_))) return false;
+  if (!(audiosink_ = engine_->CreateElement(sink_, audiobin_))) {
+    qLog(Error) << "Failed to create audio sink";
+    return false;
+  }
 
   if (g_object_class_find_property(G_OBJECT_GET_CLASS(audiosink_), "device") &&
       !device_.toString().isEmpty()) {
@@ -295,12 +301,12 @@ bool GstEnginePipeline::Init() {
   }
 
   // Create all the other elements
-  GstElement* tee, *probe_queue, *probe_converter, *probe_sink, *audio_queue,
+  GstElement *probe_queue, *probe_converter, *probe_sink, *audio_queue,
       *convert;
 
   queue_ = engine_->CreateElement("queue2", audiobin_);
   audioconvert_ = engine_->CreateElement("audioconvert", audiobin_);
-  tee = engine_->CreateElement("tee", audiobin_);
+  tee_ = engine_->CreateElement("tee", audiobin_);
 
   probe_queue = engine_->CreateElement("queue2", audiobin_);
   probe_converter = engine_->CreateElement("audioconvert", audiobin_);
@@ -314,9 +320,10 @@ bool GstEnginePipeline::Init() {
   audioscale_ = engine_->CreateElement("audioresample", audiobin_);
   convert = engine_->CreateElement("audioconvert", audiobin_);
 
-  if (!queue_ || !audioconvert_ || !tee || !probe_queue || !probe_converter ||
+  if (!queue_ || !audioconvert_ || !tee_ || !probe_queue || !probe_converter ||
       !probe_sink || !audio_queue || !equalizer_preamp_ || !equalizer_ ||
       !stereo_panorama_ || !volume_ || !audioscale_ || !convert) {
+    qLog(Error) << "Failed to create elements";
     return false;
   }
 
@@ -325,7 +332,7 @@ bool GstEnginePipeline::Init() {
   // on whether replaygain is enabled.  convert_sink is the element after the
   // first audioconvert, which again will change.
   GstElement* event_probe = audioconvert_;
-  GstElement* convert_sink = tee;
+  GstElement* convert_sink = tee_;
 
   if (rg_enabled_) {
     rgvolume_ = engine_->CreateElement("rgvolume", audiobin_);
@@ -335,6 +342,7 @@ bool GstEnginePipeline::Init() {
     convert_sink = rgvolume_;
 
     if (!rgvolume_ || !rglimiter_ || !audioconvert2_) {
+      qLog(Error) << "Failed to create rg elements";
       return false;
     }
 
@@ -429,16 +437,18 @@ bool GstEnginePipeline::Init() {
 
   // Link the outputs of tee to the queues on each path.
   pad = gst_element_get_static_pad(probe_queue, "sink");
-  gst_pad_link(gst_element_get_request_pad(tee, "src_%u"), pad);
+  tee_probe_pad_ = gst_element_get_request_pad(tee_, "src_%u");
+  gst_pad_link(tee_probe_pad_, pad);
   gst_object_unref(pad);
 
   pad = gst_element_get_static_pad(audio_queue, "sink");
-  gst_pad_link(gst_element_get_request_pad(tee, "src_%u"), pad);
+  tee_audio_pad_ = gst_element_get_request_pad(tee_, "src_%u");
+  gst_pad_link(tee_audio_pad_, pad);
   gst_object_unref(pad);
 
   // Link replaygain elements if enabled.
   if (rg_enabled_) {
-    gst_element_link_many(rgvolume_, rglimiter_, audioconvert2_, tee, nullptr);
+    gst_element_link_many(rgvolume_, rglimiter_, audioconvert2_, tee_, nullptr);
   }
 
   // Link the analyzer output of the tee and force 16 bit caps
@@ -541,6 +551,20 @@ GstEnginePipeline::~GstEnginePipeline() {
 
     g_source_remove(bus_cb_id_);
     gst_element_set_state(pipeline_, GST_STATE_NULL);
+
+    if (tee_) {
+      // Request pads are not automatically released and dereferenced. They
+      // should only be released when the pipeline is in a null or ready state.
+      if (tee_probe_pad_) {
+        gst_element_release_request_pad(tee_, tee_probe_pad_);
+        gst_object_unref(tee_probe_pad_);
+      }
+      if (tee_audio_pad_) {
+        gst_element_release_request_pad(tee_, tee_audio_pad_);
+        gst_object_unref(tee_audio_pad_);
+      }
+    }
+
     gst_object_unref(GST_OBJECT(pipeline_));
   }
 }
