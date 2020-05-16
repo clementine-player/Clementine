@@ -20,6 +20,7 @@ jobs:
       - build_focal_64
       - build_mac
       - build_mingw
+      - build_source
       - build_stretch_64
     steps:
       - uses: actions/download-artifact@v2
@@ -39,6 +40,63 @@ jobs:
           done
           hub release create -d -p "${assets[@]}" -m "$VERSION" "$VERSION"
 
+  build_source:
+    name: Build source tarball
+    runs-on: ubuntu-18.04
+    container:
+      image: ubuntu:eoan
+    steps:
+      - name: Install dependencies
+        env:
+          DEBIAN_FRONTEND: noninteractive
+        run: >
+          apt-get update && apt-get install -y
+          cmake
+          fakeroot
+          gettext
+          git
+          libasound2-dev
+          libboost-dev
+          libboost-serialization-dev
+          libcdio-cdda2
+          libcdio-dev
+          libchromaprint-dev
+          libcrypto++-dev
+          libdbus-1-dev
+          libfftw3-dev
+          libglew1.5-dev
+          libgpod-dev
+          libgstreamer-plugins-base1.0-dev
+          libgstreamer1.0-dev
+          liblastfm5-dev
+          libmtp-dev
+          libmygpo-qt-dev
+          libplist-dev
+          libprotobuf-dev
+          libpulse-dev
+          libqca-qt5-2-dev
+          libqca-qt5-2-plugins
+          libqt5x11extras5-dev
+          libsparsehash-dev
+          libsqlite3-dev
+          libtag1-dev
+          libusbmuxd-dev
+          protobuf-compiler
+          qtbase5-dev
+          qttools5-dev-tools
+          qttools5-dev
+          ssh
+      - uses: actions/checkout@v1.2.0
+      - name: cmake
+        working-directory: bin
+        run: cmake ..
+      - name: Build source tarball
+        working-directory: bin
+        run: ../dist/maketarball.sh
+      - uses: actions/upload-artifact@v2
+        with:
+          name: release_source
+          path: bin/clementine-*.tar.xz
 
   build_fedora_32:
     name: Build Fedora 32 RPM
