@@ -8,6 +8,38 @@ on:
       - master
 
 jobs:
+  create_release:
+    name: Create GitHub Release
+    runs-on: ubuntu-18.04
+    needs:
+      - build_bionic_64
+      - build_buster_64
+      - build_eoan_64
+      - build_fedora_31
+      - build_fedora_32
+      - build_focal_64
+      - build_mac
+      - build_mingw
+      - build_stretch_64
+    steps:
+      - uses: actions/download-artifact@v2
+        with:
+          path: release_artifacts
+      - name: Create draft pre-release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -x
+          VERSION=$(echo release_artifacts/**/*.tar.xz | sed -e 's/.*clementine-\(.*\).tar.xz/\1/')
+          echo "Version: ${VERSION}"
+          assets=()
+          for asset in release_artifacts/**/*; do
+            echo "Adding asset: ${asset}"
+            assets+=("-a" "$asset")
+          done
+          hub release create -d -p "${assets[@]}" -m "$VERSION" "$VERSION"
+
+
   build_fedora_32:
     name: Build Fedora 32 RPM
     runs-on: ubuntu-18.04
