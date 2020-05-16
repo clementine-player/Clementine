@@ -23,6 +23,7 @@ jobs:
       - build_source
       - build_stretch_64
     steps:
+      - uses: actions/checkout@v1.2.0
       - uses: actions/download-artifact@v2
         with:
           path: release_artifacts
@@ -34,7 +35,7 @@ jobs:
           VERSION=$(echo release_artifacts/**/*.tar.xz | sed -e 's/.*clementine-\(.*\).tar.xz/\1/')
           echo "Version: ${VERSION}"
           assets=()
-          for asset in release_artifacts/**/*; do
+          for asset in $(find release_artifacts -type f); do
             echo "Adding asset: ${asset}"
             assets+=("-a" "$asset")
           done
