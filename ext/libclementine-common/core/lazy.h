@@ -22,15 +22,25 @@
 #include <memory>
 
 // Helper for lazy initialisation of objects.
-// Usage:
+// Usage1:
 //    Lazy<Foo> my_lazy_object([]() { return new Foo; });
+// Usage2:
+//    Lazy<Foo> my_lazy_object([]() { return new Foo; },
+//                             [](Foo *foo) { delete foo; });
+// Note: the Lazy::default_deleter just deletes the object. The default
+//       unique_ptr would have a specialization for arrays. The second usage
+//       should be used with arrays.
+//
 template <typename T>
 class Lazy {
  public:
-  explicit Lazy(std::function<T*()> init) : init_(init) {}
+  explicit Lazy(std::function<T*()> init,
+                std::function<void(T*)> deleter = Lazy::default_deleter)
+      : init_(init), ptr_(nullptr, deleter) {}
 
   // Convenience constructor that will lazily default construct the object.
-  Lazy() : init_([]() { return new T; }) {}
+  Lazy()
+      : init_([]() { return new T; }), ptr_(nullptr, Lazy::default_deleter) {}
 
   T* get() const {
     CheckInitialised();
@@ -51,6 +61,8 @@ class Lazy {
   // if the object is requested again.
   void reset() { ptr_.reset(nullptr); }
 
+  static void default_deleter(T* obj) { delete obj; }
+
  private:
   void CheckInitialised() const {
     if (!ptr_) {
@@ -59,7 +71,7 @@ class Lazy {
   }
 
   const std::function<T*()> init_;
-  mutable std::unique_ptr<T> ptr_;
+  mutable std::unique_ptr<T, std::function<void(T*)>> ptr_;
 };
 
 #endif  // LAZY_H
