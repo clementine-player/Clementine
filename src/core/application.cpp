@@ -142,11 +142,15 @@ class ApplicationImpl {
           return nullptr;
 #endif
         }),
-        network_remote_([=]() {
-          NetworkRemote* remote = new NetworkRemote(app);
-          app->MoveToNewThread(remote);
-          return remote;
-        }),
+        // Since NetworkRemote is moved to a different thread and creates
+        // timers there, it should also be deleted on that thread.
+        network_remote_(
+            [=]() {
+              NetworkRemote* remote = new NetworkRemote(app);
+              app->MoveToNewThread(remote);
+              return remote;
+            },
+            [=](NetworkRemote* remote) { remote->deleteLater(); }),
         network_remote_helper_([=]() { return new NetworkRemoteHelper(app); }),
         scrobbler_([=]() {
 #ifdef HAVE_LIBLASTFM
