@@ -20,11 +20,12 @@
 #ifndef INTERNET_ICECAST_ICECASTMODEL_H_
 #define INTERNET_ICECAST_ICECASTMODEL_H_
 
-#include "icecastitem.h"
-#include "core/simpletreemodel.h"
-#include "library/librarymodel.h"
-
 #include <QIcon>
+#include <memory>
+
+#include "core/simpletreemodel.h"
+#include "icecastitem.h"
+#include "library/librarymodel.h"
 
 class IcecastBackend;
 
@@ -32,7 +33,8 @@ class IcecastModel : public SimpleTreeModel<IcecastItem> {
   Q_OBJECT
 
  public:
-  explicit IcecastModel(IcecastBackend* backend, QObject* parent = nullptr);
+  explicit IcecastModel(std::shared_ptr<IcecastBackend> backend,
+                        QObject* parent = nullptr);
   ~IcecastModel();
 
   // These values get saved in QSettings - don't change them
@@ -45,8 +47,6 @@ class IcecastModel : public SimpleTreeModel<IcecastItem> {
   enum Role {
     Role_IsDivider = LibraryModel::Role_IsDivider,
   };
-
-  IcecastBackend* backend() const { return backend_; }
 
   Song GetSong(const QModelIndex& index) const;
 
@@ -76,7 +76,7 @@ class IcecastModel : public SimpleTreeModel<IcecastItem> {
   static QString DividerDisplayText(const QChar& key);
 
  private:
-  IcecastBackend* backend_;
+  std::shared_ptr<IcecastBackend> backend_;
 
   QString filter_;
   SortMode sort_mode_;

@@ -57,10 +57,9 @@ IcecastService::IcecastService(Application* app, InternetModel* parent)
     : InternetService(kServiceName, app, parent, parent),
       network_(new NetworkAccessManager(this)),
       context_menu_(nullptr),
-      backend_(nullptr),
+      backend_(new IcecastBackend),
       model_(nullptr),
       filter_(new IcecastFilterWidget(0)) {
-  backend_ = new IcecastBackend;
   backend_->moveToThread(app_->database()->thread());
   backend_->Init(app_->database());
 

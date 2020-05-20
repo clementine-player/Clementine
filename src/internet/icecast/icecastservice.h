@@ -23,6 +23,7 @@
 
 #include "internet/core/internetservice.h"
 
+#include <memory>
 #include <QXmlStreamReader>
 
 #include "icecastbackend.h"
@@ -75,7 +76,7 @@ class IcecastService : public InternetService {
   NetworkAccessManager* network_;
   QMenu* context_menu_;
 
-  IcecastBackend* backend_;
+  std::shared_ptr<IcecastBackend> backend_;
   IcecastModel* model_;
   IcecastFilterWidget* filter_;
 };
