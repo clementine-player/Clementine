@@ -1,5 +1,5 @@
 name: all
-on: [push]
+on: [push, pull_request]
 
 jobs:
   build_fedora_32:
