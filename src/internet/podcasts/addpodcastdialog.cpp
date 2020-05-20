@@ -38,6 +38,9 @@
 const char* AddPodcastDialog::kBbcOpmlUrl =
     "http://www.bbc.co.uk/podcasts.opml";
 
+const char* AddPodcastDialog::kCbcOpmlUrl =
+    "http://cbc.ca/podcasts.opml";
+
 AddPodcastDialog::AddPodcastDialog(Application* app, QWidget* parent)
     : QDialog(parent),
       app_(app),
@@ -90,6 +93,9 @@ AddPodcastDialog::AddPodcastDialog(Application* app, QWidget* parent)
   AddPage(by_url_page_);
   AddPage(new FixedOpmlPage(QUrl(kBbcOpmlUrl), tr("BBC Podcasts"),
                             IconLoader::Load("bbc", IconLoader::Provider), 
+                            app, this));
+  AddPage(new FixedOpmlPage(QUrl(kCbcOpmlUrl), tr("CBC Podcasts"),
+                            IconLoader::Load("cbc", IconLoader::Provider), 
                             app, this));
   AddPage(new GPodderTopTagsPage(app, this));
   AddPage(new GPodderSearchPage(app, this));
