@@ -16,11 +16,12 @@
 */
 
 #include "icecastsearchprovider.h"
+
 #include "internet/icecast/icecastbackend.h"
 #include "ui/iconloader.h"
 
-IcecastSearchProvider::IcecastSearchProvider(IcecastBackend* backend,
-                                             Application* app, QObject* parent)
+IcecastSearchProvider::IcecastSearchProvider(
+    std::shared_ptr<IcecastBackend> backend, Application* app, QObject* parent)
     : BlockingSearchProvider(app, parent), backend_(backend) {
   Init("Icecast", "icecast", IconLoader::Load("icon_radio", IconLoader::Lastfm),
        DisabledByDefault);

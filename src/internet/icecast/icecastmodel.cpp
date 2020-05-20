@@ -23,7 +23,8 @@
 #include "playlist/songmimedata.h"
 #include "ui/iconloader.h"
 
-IcecastModel::IcecastModel(IcecastBackend* backend, QObject* parent)
+IcecastModel::IcecastModel(std::shared_ptr<IcecastBackend> backend,
+                           QObject* parent)
     : SimpleTreeModel<IcecastItem>(new IcecastItem(this), parent),
       backend_(backend),
       sort_mode_(SortMode_GenreByPopularity),
@@ -35,7 +36,7 @@ IcecastModel::IcecastModel(IcecastBackend* backend, QObject* parent)
 IcecastModel::~IcecastModel() { delete root_; }
 
 void IcecastModel::Init() {
-  connect(backend_, SIGNAL(DatabaseReset()), SLOT(Reset()));
+  connect(backend_.get(), SIGNAL(DatabaseReset()), SLOT(Reset()));
 
   Reset();
 }

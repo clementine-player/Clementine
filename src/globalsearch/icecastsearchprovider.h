@@ -18,19 +18,21 @@
 #ifndef ICECASTSEARCHPROVIDER_H
 #define ICECASTSEARCHPROVIDER_H
 
+#include <memory>
+
 #include "searchprovider.h"
 
 class IcecastBackend;
 
 class IcecastSearchProvider : public BlockingSearchProvider {
  public:
-  IcecastSearchProvider(IcecastBackend* backend, Application* app,
-                        QObject* parent);
+  IcecastSearchProvider(std::shared_ptr<IcecastBackend> backend,
+                        Application* app, QObject* parent);
 
   ResultList Search(int id, const QString& query);
 
  private:
-  IcecastBackend* backend_;
+  std::shared_ptr<IcecastBackend> backend_;
 };
 
 #endif  // ICECASTSEARCHPROVIDER_H
