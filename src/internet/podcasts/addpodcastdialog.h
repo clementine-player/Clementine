@@ -41,6 +41,7 @@ class AddPodcastDialog : public QDialog {
   ~AddPodcastDialog();
 
   static const char* kBbcOpmlUrl;
+  static const char* kCbcOpmlUrl;
 
   // Convenience methods that open the dialog at the Add By Url page and fill
   // it with either a URL (which is then fetched), or a pre-fetched OPML
