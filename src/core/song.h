@@ -241,6 +241,7 @@ class Song {
   // Pretty accessors
   QString PrettyRating() const;
   QString PrettyTitle() const;
+  QString PrettyArtist() const;
   QString PrettyTitleWithArtist() const;
   QString PrettyLength() const;
   QString PrettyYear() const;

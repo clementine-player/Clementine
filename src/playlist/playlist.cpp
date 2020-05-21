@@ -303,7 +303,7 @@ QVariant Playlist::data(const QModelIndex& index, int role) const {
         case Column_Title:
           return song.PrettyTitle();
         case Column_Artist:
-          return song.artist();
+          return song.PrettyArtist();
         case Column_Album:
           return song.album();
         case Column_Length:

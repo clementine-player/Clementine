@@ -41,6 +41,7 @@
 #include <QTime>
 #include <QVariant>
 #include <QtConcurrentRun>
+#include <QRegExp>
 
 #ifdef HAVE_LIBLASTFM
 #include "internet/lastfm/fixlastfm.h"
@@ -1059,19 +1060,64 @@ QString Song::PrettyRating() const {
   return QString::number(static_cast<int>(rating * 100));
 }
 
+static QString RemoveExtension(QString &s) {
+  QRegExp rxExt("\\.\\w{3}$");
+  const int j = rxExt.indexIn(s);
+  if (j > 0) {
+	  s = s.left(j).trimmed();
+  }
+  return s;
+}
+
+static QString ChangeUnderscores(QString &s) {
+  return s.replace("_", " ").trimmed();
+}
+
 QString Song::PrettyTitle() const {
   QString title(d->title_);
 
+  if (!title.isEmpty()) return title;
   if (title.isEmpty()) title = d->basefilename_;
   if (title.isEmpty()) title = d->url_.toString();
+
+  // Take the text to the right of " - " or "_-_"
+  QRegExp rx("[\\s_]\\-[\\s_]");
+  const int i = rx.indexIn(title);
+  if (i > 0) {
+	  title = title.mid(i + 3).trimmed();
+  }
+
+  title = RemoveExtension(title);
+  title = ChangeUnderscores(title);
 
   return title;
 }
 
+QString Song::PrettyArtist() const {
+  QString artist(d->artist_);
+
+  if (!artist.isEmpty()) return artist;
+  if (artist.isEmpty()) artist = d->basefilename_;
+  if (artist.isEmpty()) artist = d->url_.toString();
+
+  // Take the text to the left of " - " or "_-_"
+  QRegExp rx("[\\s_]\\-[\\s_]");
+  const int i = rx.indexIn(artist);
+  if (i > 0) {
+	  artist = artist.left(i).trimmed();
+  }
+
+  artist = RemoveExtension(artist);
+  artist = ChangeUnderscores(artist);
+
+  return artist;
+}
+
 QString Song::PrettyTitleWithArtist() const {
+  QString artist(PrettyArtist());
   QString title(PrettyTitle());
 
-  if (!d->artist_.isEmpty()) title = d->artist_ + " - " + title;
+  if (!artist.isEmpty()) title = artist + " - " + title;
 
   return title;
 }

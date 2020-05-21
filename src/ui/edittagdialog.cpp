@@ -299,8 +299,8 @@ void EditTagDialog::SetSongListVisibility(bool visible) {
 }
 
 QVariant EditTagDialog::Data::value(const Song& song, const QString& id) {
-  if (id == "title") return song.title();
-  if (id == "artist") return song.artist();
+  if (id == "title") return song.PrettyTitle();
+  if (id == "artist") return song.PrettyArtist();
   if (id == "album") return song.album();
   if (id == "albumartist") return song.albumartist();
   if (id == "composer") return song.composer();
