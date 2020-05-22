@@ -18,6 +18,7 @@
 #include "tagreader.h"
 
 #include <memory>
+#include <algorithm>
 
 #include <QCoreApplication>
 #include <QDateTime>
@@ -130,49 +131,50 @@ const char* kASF_OriginalDate_ID = "WM/OriginalReleaseTime";
 const char* kASF_OriginalYear_ID = "WM/OriginalReleaseYear";
 }  // namespace
 
-void TagReader::RemoveExtension(std::string* s) const {
-  if (s->empty()) return;
-  const int i = s->find_last_of('.');
+// Helper for GuessArtistAndTitle()
+static void removeExtension(std::string& s) {
+  if (s.empty()) return;
+  const int i = s.find_last_of('.');
   if (i == std::string::npos) return;
-  s->assign(s->substr(0, i));
+  s.assign(s.substr(0, i));
 }
 
-void TagReader::ChangeUnderscores(std::string* s) const {
-  for (int i = 0; i < s->size(); i++) {
-    if (s->at(i) == '_') s->at(i) = ' ';
-  }
+static void changeUnderscores(std::string& s) {
+  std::replace(s.begin(), s.end(), '_', ' ');
 }
 
-std::string& TagReader::ltrim(std::string& str, const std::string& chars) const {
-    str.erase(0, str.find_first_not_of(chars));
-    return str;
+static std::string& ltrim(std::string& str, const std::string& chars = "\t\n\v\f\r ") {
+  str.erase(0, str.find_first_not_of(chars));
+  return str;
 }
 
-std::string& TagReader::rtrim(std::string& str, const std::string& chars) const {
-    str.erase(str.find_last_not_of(chars) + 1);
-    return str;
+static std::string& rtrim(std::string& str, const std::string& chars = "\t\n\v\f\r ") {
+  str.erase(str.find_last_not_of(chars) + 1);
+  return str;
 }
 
-std::string& TagReader::trim(std::string& str, const std::string& chars) const {
-    return ltrim(rtrim(str, chars), chars);
+static std::string& trim(std::string& str, const std::string& chars = "\t\n\v\f\r ") {
+  return ltrim(rtrim(str, chars), chars);
 }
 
 void TagReader::GuessArtistAndTitle(pb::tagreader::SongMetadata *song) const {
+  std::string artist = song->artist();
+  std::string title = song->title();
   const std::string bn = song->basefilename();
-  std::string *artist = song->mutable_artist();
-  std::string *title = song->mutable_title();
-  if (!artist->empty() || !title->empty()) return;
+  if (!artist.empty() || !title.empty()) return;
   if (bn.empty()) return;
   int i = bn.find(" - ");
   if (i == std::string::npos) i = bn.find("_-_");
   if (i == std::string::npos) return;
-  artist->assign(bn.substr(0, i));
-  title->assign(bn.substr(i + 3));
-  RemoveExtension(title);
-  ChangeUnderscores(artist);
-  ChangeUnderscores(title);
-  trim(*artist);
-  trim(*title);
+  artist.assign(bn.substr(0, i));
+  title.assign(bn.substr(i + 3));
+  removeExtension(title);
+  changeUnderscores(artist);
+  changeUnderscores(title);
+  trim(artist);
+  trim(title);
+  if (!artist.empty()) { song->mutable_artist()->assign(artist); }
+  if (!title.empty()) { song->mutable_title()->assign(title); }
 }
 
 TagReader::TagReader()
