@@ -95,6 +95,14 @@ class TagReader {
       TagLib::Ogg::XiphComment* vorbis_comments,
       const pb::tagreader::SongMetadata& song) const;
 
+  // Helpers for GuessArtistAndTitle()
+  void RemoveExtension(std::string*) const;
+  void ChangeUnderscores(std::string*) const;
+  std::string& ltrim(std::string&, const std::string &chars = "\t\n\v\f\r ") const;
+  std::string& rtrim(std::string&, const std::string &chars = "\t\n\v\f\r ") const;
+  std::string& trim(std::string&, const std::string &chars = "\t\n\v\f\r ") const;
+  void GuessArtistAndTitle(pb::tagreader::SongMetadata* song) const;
+
   pb::tagreader::SongMetadata_Type GuessFileType(
       TagLib::FileRef* fileref) const;
 
