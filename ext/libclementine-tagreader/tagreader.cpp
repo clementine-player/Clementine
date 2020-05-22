@@ -130,6 +130,51 @@ const char* kASF_OriginalDate_ID = "WM/OriginalReleaseTime";
 const char* kASF_OriginalYear_ID = "WM/OriginalReleaseYear";
 }  // namespace
 
+void TagReader::RemoveExtension(std::string* s) const {
+  if (s->empty()) return;
+  const int i = s->find_last_of('.');
+  if (i == std::string::npos) return;
+  s->assign(s->substr(0, i));
+}
+
+void TagReader::ChangeUnderscores(std::string* s) const {
+  for (int i = 0; i < s->size(); i++) {
+    if (s->at(i) == '_') s->at(i) = ' ';
+  }
+}
+
+std::string& TagReader::ltrim(std::string& str, const std::string& chars) const {
+    str.erase(0, str.find_first_not_of(chars));
+    return str;
+}
+
+std::string& TagReader::rtrim(std::string& str, const std::string& chars) const {
+    str.erase(str.find_last_not_of(chars) + 1);
+    return str;
+}
+
+std::string& TagReader::trim(std::string& str, const std::string& chars) const {
+    return ltrim(rtrim(str, chars), chars);
+}
+
+void TagReader::GuessArtistAndTitle(pb::tagreader::SongMetadata *song) const {
+  const std::string bn = song->basefilename();
+  std::string *artist = song->mutable_artist();
+  std::string *title = song->mutable_title();
+  if (!artist->empty() || !title->empty()) return;
+  if (bn.empty()) return;
+  int i = bn.find(" - ");
+  if (i == std::string::npos) i = bn.find("_-_");
+  if (i == std::string::npos) return;
+  artist->assign(bn.substr(0, i));
+  title->assign(bn.substr(i + 3));
+  RemoveExtension(title);
+  ChangeUnderscores(artist);
+  ChangeUnderscores(title);
+  trim(*artist);
+  trim(*title);
+}
+
 TagReader::TagReader()
     : factory_(new TagLibFileRefFactory),
       kEmbeddedCover("(embedded)") {}
@@ -177,6 +222,7 @@ void TagReader::ReadFile(const QString& filename,
 
     // Try fallback -- GME filetypes
     GME::ReadFile(info, song);
+    GuessArtistAndTitle(song);
     return;
   }
 
@@ -190,6 +236,7 @@ void TagReader::ReadFile(const QString& filename,
     song->set_track(tag->track());
     song->set_valid(true);
   }
+  GuessArtistAndTitle(song);
 
   QString disc;
   QString compilation;
