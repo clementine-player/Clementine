@@ -137,8 +137,10 @@ QString WithoutExtension(const QString& s) {
   return s.left(i);
 }
 
-void ReplaceUnderscoresWithSpaces(QString &s) {
-  s.replace('_', ' ');
+QString ReplaceUnderscoresWithSpaces(const QString &s) {
+  QString ret(s);
+  ret.replace('_', ' ');
+  return ret;
 }
 
 }  // namespace
@@ -159,8 +161,8 @@ void TagReader::GuessArtistAndTitle(pb::tagreader::SongMetadata *song) const {
     title = WithoutExtension(bn);
   }
 
-  ReplaceUnderscoresWithSpaces(artist);
-  ReplaceUnderscoresWithSpaces(title);
+  artist = ReplaceUnderscoresWithSpaces(artist);
+  title = ReplaceUnderscoresWithSpaces(title);
   artist = artist.trimmed();
   title = title.trimmed();
   if (!artist.isEmpty()) { song->set_artist(artist.toUtf8().data()); }
