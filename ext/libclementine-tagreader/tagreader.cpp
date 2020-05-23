@@ -166,7 +166,7 @@ void TagReader::GuessArtistAndTitle(pb::tagreader::SongMetadata *song) const {
   artist = artist.trimmed();
   title = title.trimmed();
   if (!artist.isEmpty()) { song->set_artist(artist.toUtf8().data()); }
- if (!title.isEmpty()) { song->set_title(title.toUtf8().data()); }
+  if (!title.isEmpty()) { song->set_title(title.toUtf8().data()); }
 }
 
 TagReader::TagReader()
