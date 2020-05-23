@@ -275,6 +275,7 @@ void GstEngine::ConsumeBuffer(GstBuffer* buffer, int pipeline_id) {
                                  Q_ARG(GstBuffer*, buffer),
                                  Q_ARG(int, pipeline_id))) {
     qLog(Warning) << "Failed to invoke AddBufferToScope on GstEngine";
+    gst_buffer_unref(buffer);
   }
 }
 
@@ -339,6 +340,7 @@ void GstEngine::UpdateScope(int chunk_length) {
   // in case a buffer doesn't arrive in time
   if (scope_chunk_ >= scope_chunks_) {
     scope_chunk_ = 0;
+    gst_buffer_unmap(latest_buffer_, &map);
     return;
   }
 
