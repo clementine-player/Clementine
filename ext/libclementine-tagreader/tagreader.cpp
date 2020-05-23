@@ -128,19 +128,20 @@ namespace {
 const char* kMP4_OriginalYear_ID = "----:com.apple.iTunes:ORIGINAL YEAR";
 const char* kASF_OriginalDate_ID = "WM/OriginalReleaseTime";
 const char* kASF_OriginalYear_ID = "WM/OriginalReleaseYear";
-}  // namespace
 
 // Helpers for GuessArtistAndTitle()
-static QString withoutExtension(const QString  s) {
+QString WithoutExtension(const QString& s) {
   if (s.isEmpty()) return s;
   const int i = s.lastIndexOf('.');
   if (i  < 0) return s;
   return s.left(i);
 }
 
-static inline void changeUnderscores(QString &s) {
+void ReplaceUnderscoresWithSpaces(QString &s) {
   s.replace('_', ' ');
 }
+
+}  // namespace
 
 void TagReader::GuessArtistAndTitle(pb::tagreader::SongMetadata *song) const {
   QString artist = QString::fromStdString(song->artist());
@@ -149,22 +150,21 @@ void TagReader::GuessArtistAndTitle(pb::tagreader::SongMetadata *song) const {
   if (!artist.isEmpty() || !title.isEmpty()) return;
   if (bn.isEmpty()) return;
 
-  static QRegExp rx("^(.*)[\\s_]\\-[\\s_](.*)\\.\\w*$");
-  int pos = 0;
-  if ((rx.indexIn(bn, pos)) >= 0) {
+  QRegExp rx("^(.*)[\\s_]\\-[\\s_](.*)\\.\\w*$");
+  if (rx.indexIn(bn) >= 0) {
     artist = rx.cap(1);
     title = rx.cap(2);
   }
   else {
-    title = withoutExtension(bn);
+    title = WithoutExtension(bn);
   }
 
-  changeUnderscores(artist);
-  changeUnderscores(title);
+  ReplaceUnderscoresWithSpaces(artist);
+  ReplaceUnderscoresWithSpaces(title);
   artist = artist.trimmed();
   title = title.trimmed();
-  if (!artist.isEmpty()) { song->mutable_artist()->assign(artist.toUtf8().data()); }
- if (!title.isEmpty()) { song->mutable_title()->assign(title.toUtf8().data()); }
+  if (!artist.isEmpty()) { song->set_artist(artist.toUtf8().data()); }
+ if (!title.isEmpty()) { song->set_title(title.toUtf8().data()); }
 }
 
 TagReader::TagReader()
