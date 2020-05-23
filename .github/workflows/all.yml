@@ -11,6 +11,7 @@ jobs:
   create_release:
     name: Create GitHub Release
     runs-on: ubuntu-18.04
+    if: github.ref == 'refs/heads/master'
     needs:
       - build_bionic_64
       - build_buster_64
