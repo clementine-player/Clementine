@@ -19,6 +19,7 @@
 
 #include <memory>
 #include <algorithm>
+#include <regex>
 
 #include <QCoreApplication>
 #include <QDateTime>
@@ -131,12 +132,12 @@ const char* kASF_OriginalDate_ID = "WM/OriginalReleaseTime";
 const char* kASF_OriginalYear_ID = "WM/OriginalReleaseYear";
 }  // namespace
 
-// Helper for GuessArtistAndTitle()
-static void removeExtension(std::string& s) {
-  if (s.empty()) return;
+// Helpers for GuessArtistAndTitle()
+static std::string withoutExtension(const std::string  s) {
+  if (s.empty()) return s;
   const int i = s.find_last_of('.');
-  if (i == std::string::npos) return;
-  s.assign(s.substr(0, i));
+  if (i == std::string::npos) return s;
+  return s.substr(0, i);
 }
 
 static void changeUnderscores(std::string& s) {
@@ -163,12 +164,17 @@ void TagReader::GuessArtistAndTitle(pb::tagreader::SongMetadata *song) const {
   const std::string bn = song->basefilename();
   if (!artist.empty() || !title.empty()) return;
   if (bn.empty()) return;
-  int i = bn.find(" - ");
-  if (i == std::string::npos) i = bn.find("_-_");
-  if (i == std::string::npos) return;
-  artist.assign(bn.substr(0, i));
-  title.assign(bn.substr(i + 3));
-  removeExtension(title);
+
+  static std::regex rx("^(.*)[\\s_]\\-[\\s_](.*)\\.\\w*$");
+  std::smatch match;
+  if (std::regex_search(bn.begin(), bn.end(), match, rx)) {
+    artist = match[1];
+    title = match[2];
+  }
+  else {
+    title = withoutExtension(bn);
+  }
+
   changeUnderscores(artist);
   changeUnderscores(title);
   trim(artist);
