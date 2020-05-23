@@ -18,7 +18,6 @@
 #include "tagreader.h"
 
 #include <memory>
-#include <algorithm>
 
 #include <QCoreApplication>
 #include <QDateTime>
