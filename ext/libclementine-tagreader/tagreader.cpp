@@ -19,7 +19,6 @@
 
 #include <memory>
 #include <algorithm>
-#include <regex>
 
 #include <QCoreApplication>
 #include <QDateTime>
@@ -133,43 +132,29 @@ const char* kASF_OriginalYear_ID = "WM/OriginalReleaseYear";
 }  // namespace
 
 // Helpers for GuessArtistAndTitle()
-static std::string withoutExtension(const std::string  s) {
-  if (s.empty()) return s;
-  const int i = s.find_last_of('.');
-  if (i == std::string::npos) return s;
-  return s.substr(0, i);
+static QString withoutExtension(const QString  s) {
+  if (s.isEmpty()) return s;
+  const int i = s.lastIndexOf('.');
+  if (i  < 0) return s;
+  return s.left(i);
 }
 
-static void changeUnderscores(std::string& s) {
-  std::replace(s.begin(), s.end(), '_', ' ');
-}
-
-static std::string& ltrim(std::string& str, const std::string& chars = "\t\n\v\f\r ") {
-  str.erase(0, str.find_first_not_of(chars));
-  return str;
-}
-
-static std::string& rtrim(std::string& str, const std::string& chars = "\t\n\v\f\r ") {
-  str.erase(str.find_last_not_of(chars) + 1);
-  return str;
-}
-
-static std::string& trim(std::string& str, const std::string& chars = "\t\n\v\f\r ") {
-  return ltrim(rtrim(str, chars), chars);
+static inline void changeUnderscores(QString &s) {
+  s.replace('_', ' ');
 }
 
 void TagReader::GuessArtistAndTitle(pb::tagreader::SongMetadata *song) const {
-  std::string artist = song->artist();
-  std::string title = song->title();
-  const std::string bn = song->basefilename();
-  if (!artist.empty() || !title.empty()) return;
-  if (bn.empty()) return;
+  QString artist = QString::fromStdString(song->artist());
+  QString title = QString::fromStdString(song->title());
+  const QString bn = QString::fromStdString(song->basefilename());
+  if (!artist.isEmpty() || !title.isEmpty()) return;
+  if (bn.isEmpty()) return;
 
-  static std::regex rx("^(.*)[\\s_]\\-[\\s_](.*)\\.\\w*$");
-  std::smatch match;
-  if (std::regex_search(bn.begin(), bn.end(), match, rx)) {
-    artist = match[1];
-    title = match[2];
+  static QRegExp rx("^(.*)[\\s_]\\-[\\s_](.*)\\.\\w*$");
+  int pos = 0;
+  if ((rx.indexIn(bn, pos)) >= 0) {
+    artist = rx.cap(1);
+    title = rx.cap(2);
   }
   else {
     title = withoutExtension(bn);
@@ -177,10 +162,10 @@ void TagReader::GuessArtistAndTitle(pb::tagreader::SongMetadata *song) const {
 
   changeUnderscores(artist);
   changeUnderscores(title);
-  trim(artist);
-  trim(title);
-  if (!artist.empty()) { song->mutable_artist()->assign(artist); }
-  if (!title.empty()) { song->mutable_title()->assign(title); }
+  artist = artist.trimmed();
+  title = title.trimmed();
+  if (!artist.isEmpty()) { song->mutable_artist()->assign(artist.toUtf8().data()); }
+ if (!title.isEmpty()) { song->mutable_title()->assign(title.toUtf8().data()); }
 }
 
 TagReader::TagReader()
