@@ -697,7 +697,7 @@ void GstEnginePipeline::ErrorMessageReceived(GstMessage* msg) {
   int domain = error->domain;
   int code = error->code;
   g_error_free(error);
-  free(debugs);
+  g_free(debugs);
 
   if (!redirect_url_.isEmpty() &&
       debugstr.contains(
