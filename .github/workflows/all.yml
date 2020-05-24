@@ -15,7 +15,7 @@ jobs:
       - name: clang-format
         uses: DoozyX/clang-format-lint-action@v0.6
         with:
-          style: "{BasedOnStyle: Google, DerivePointerBinding: false, Standard: Cpp11}"
+          style: "'{BasedOnStyle: Google, DerivePointerBinding: false, Standard: Cpp11}'"
           source: ./src
           clangFormatVersion: 9
 
