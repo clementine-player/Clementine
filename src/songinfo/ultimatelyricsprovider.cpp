@@ -55,18 +55,11 @@ void UltimateLyricsProvider::FetchInfo(int id, const Song& metadata) {
   metadata_ = metadata;
   redirect_count_ = 0;
   QNetworkReply* reply = network_->get(QNetworkRequest(url));
-  requests_[reply] = id;
-  connect(reply, SIGNAL(finished()), SLOT(LyricsFetched()));
+  connect(reply, &QNetworkReply::finished,
+          [=] { this->RequestFinished(reply, id); });
 }
 
-void UltimateLyricsProvider::LyricsFetched() {
-  QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
-  if (!reply) {
-    url_hop_ = false;
-    return;
-  }
-
-  int id = requests_.take(reply);
+void UltimateLyricsProvider::RequestFinished(QNetworkReply* reply, int id) {
   reply->deleteLater();
 
   if (reply->error() != QNetworkReply::NoError) {
@@ -94,8 +87,8 @@ void UltimateLyricsProvider::LyricsFetched() {
 
     redirect_count_++;
     QNetworkReply* reply = network_->get(QNetworkRequest(target));
-    requests_[reply] = id;
-    connect(reply, SIGNAL(finished()), SLOT(LyricsFetched()));
+    connect(reply, &QNetworkReply::finished,
+            [=] { this->RequestFinished(reply, id); });
     return;
   }
 
@@ -129,8 +122,8 @@ void UltimateLyricsProvider::LyricsFetched() {
         QUrl url(content);
         qLog(Debug) << "Next url hop: " << url;
         QNetworkReply* reply = network_->get(QNetworkRequest(url));
-        requests_[reply] = id;
-        connect(reply, SIGNAL(finished()), SLOT(LyricsFetched()));
+        connect(reply, &QNetworkReply::finished,
+                [=] { this->RequestFinished(reply, id); });
         return;
       }
 
