@@ -1,0 +1,50 @@
+name: translations
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  pull_translations:
+    name: Pull translations from Transifex
+    runs-on: ubuntu-18.04
+    container:
+      image: ubuntu:bionic
+    steps:
+      - name: Install dependencies
+        env:
+          DEBIAN_FRONTEND: noninteractive
+        run: >
+          apt-get update && apt-get install -y
+          git
+          python-pip
+          ssh
+      - name: Install tx
+        run: pip install transifex-client==0.13.9
+      - name: Checkout
+        uses: actions/checkout@v1.2.0
+      - name: Switch to master
+        run: git checkout master
+      - name: tx init
+        env:
+          TX_TOKEN: ${{ secrets.TX_TOKEN }}
+        run: tx init --no-interactive --force
+      - name: tx config
+        env:
+          TX_TOKEN: ${{ secrets.TX_TOKEN }}
+        run: tx config mapping --execute -r clementine.clementineplayer -s en -t PO --expression 'src/translations/<lang>.po'
+      - name: tx pull
+        env:
+          TX_TOKEN: ${{ secrets.TX_TOKEN }}
+        run: tx pull --all -f --no-interactive
+      - name: Setup git SSH
+        uses: webfactory/ssh-agent@v0.3.0
+        with:
+          ssh-private-key: ${{ secrets.TX_KEY }}
+      - name: git add
+        run: git add src/translations/*
+      - name: git commit and push
+        env:
+          GIT_SSH_COMMAND: "ssh -o StrictHostKeyChecking=no"
+        run: |
+          [ -z "$(git status --porcelain)" ] || git -c 'user.name=Clementine Buildbot' -c 'user.email=buildbot@clementine-player.org' commit -m 'Automatic merge of translations from Transifex' && git push 'git@github.com:clementine-player/Clementine.git' master
