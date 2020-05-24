@@ -62,7 +62,7 @@ class UltimateLyricsProvider : public SongInfoProvider {
   void FetchInfo(int id, const Song& metadata);
 
  private slots:
-  void LyricsFetched();
+  void RequestFinished(QNetworkReply* reply, int id);
 
  private:
   bool ApplyExtractRule(const Rule& rule, QString* content) const;
@@ -86,7 +86,6 @@ class UltimateLyricsProvider : public SongInfoProvider {
 
  private:
   NetworkAccessManager* network_;
-  QMap<QNetworkReply*, int> requests_;
 
   QString name_;
   QString title_;
