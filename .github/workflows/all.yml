@@ -8,6 +8,71 @@ on:
       - master
 
 jobs:
+  push_translations:
+    name: Push translation sources to Transifex
+    if: github.ref == 'refs/heads/master'
+    runs-on: ubuntu-18.04
+    container:
+      image: ubuntu:bionic
+    steps:
+      - name: Install dependencies
+        env:
+          DEBIAN_FRONTEND: noninteractive
+        run: >
+          apt-get update && apt-get install -y
+          build-essential
+          cmake
+          gettext
+          git
+          libasound2-dev
+          libboost-dev
+          libcdio-dev
+          libchromaprint-dev
+          libdbus-1-dev
+          libfftw3-dev
+          libglew1.5-dev
+          libglib2.0-dev
+          libgpod-dev
+          libgstreamer-plugins-base1.0-dev
+          libgstreamer1.0-dev
+          liblastfm5-dev
+          libmtp-dev
+          libprotobuf-dev
+          libpulse-dev
+          libqt5x11extras5-dev
+          libsqlite3-dev
+          libtag1-dev
+          pkg-config
+          protobuf-compiler
+          python-pip
+          qtbase5-dev
+          qttools5-dev-tools
+          qttools5-dev
+          libsparsehash-dev
+          ssh
+      - name: Install tx
+        run: pip install transifex-client==0.13.9
+      - name: Checkout
+        uses: actions/checkout@v1.2.0
+      - name: tx init
+        env:
+          TX_TOKEN: ${{ secrets.TX_TOKEN }}
+        run: tx init --no-interactive --force
+      - name: cmake
+        working-directory: bin
+        run: cmake ..
+      - name: make
+        working-directory: bin
+        run: make -j2
+      - name: tx config
+        env:
+          TX_TOKEN: ${{ secrets.TX_TOKEN }}
+        run: tx config mapping --execute -r clementine.clementineplayer -f src/translations/translations.pot -s en -t PO --expression 'src/translations/<lang>.po'
+      - name: tx push
+        env:
+          TX_TOKEN: ${{ secrets.TX_TOKEN }}
+        run: tx push -s
+
   create_release:
     name: Create GitHub Release
     runs-on: ubuntu-18.04
