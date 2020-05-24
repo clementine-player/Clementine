@@ -8,6 +8,18 @@ on:
       - master
 
 jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-18.04
+    steps:
+      - name: clang-format
+        uses: DoozyX/clang-format-lint-action@v0.6
+        with:
+          style: "{BasedOnStyle: Google, DerivePointerBinding: false, Standard: Cpp11}"
+          source: ./src
+          clangFormatVersion: 9
+
+
   push_translations:
     name: Push translation sources to Transifex
     if: github.ref == 'refs/heads/master'
