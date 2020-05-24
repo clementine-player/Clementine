@@ -105,7 +105,7 @@ jobs:
             echo "Adding asset: ${asset}"
             assets+=("-a" "$asset")
           done
-          hub release create -p "${assets[@]}" -m "$VERSION" "$VERSION"
+          hub release create -p "${assets[@]}" -m "$VERSION" -t "$GITHUB_SHA" "$VERSION"
 
   build_source:
     name: Build source tarball
