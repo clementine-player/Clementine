@@ -25,6 +25,7 @@
 #include "songinfoprovider.h"
 
 class NetworkAccessManager;
+class NetworkTimeouts;
 
 class QNetworkReply;
 
@@ -86,6 +87,7 @@ class UltimateLyricsProvider : public SongInfoProvider {
 
  private:
   NetworkAccessManager* network_;
+  NetworkTimeouts* timeouts_;
 
   QString name_;
   QString title_;

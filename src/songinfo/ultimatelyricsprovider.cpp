@@ -30,6 +30,7 @@ const int UltimateLyricsProvider::kRedirectLimit = 5;
 
 UltimateLyricsProvider::UltimateLyricsProvider()
     : network_(new NetworkAccessManager(this)),
+      timeouts_(new NetworkTimeouts(30000, this)),  // 30s
       relevance_(0),
       redirect_count_(0),
       url_hop_(false) {}
@@ -57,6 +58,7 @@ void UltimateLyricsProvider::FetchInfo(int id, const Song& metadata) {
   QNetworkReply* reply = network_->get(QNetworkRequest(url));
   connect(reply, &QNetworkReply::finished,
           [=] { this->RequestFinished(reply, url_text, id); });
+  timeouts_->AddReply(reply);
 }
 
 void UltimateLyricsProvider::RequestFinished(QNetworkReply* reply,
@@ -93,6 +95,7 @@ void UltimateLyricsProvider::RequestFinished(QNetworkReply* reply,
     QNetworkReply* reply = network_->get(QNetworkRequest(target));
     connect(reply, &QNetworkReply::finished,
             [=] { this->RequestFinished(reply, orig_url, id); });
+    timeouts_->AddReply(reply);
     return;
   }
 
@@ -128,6 +131,7 @@ void UltimateLyricsProvider::RequestFinished(QNetworkReply* reply,
         QNetworkReply* reply = network_->get(QNetworkRequest(url));
         connect(reply, &QNetworkReply::finished,
                 [=] { this->RequestFinished(reply, orig_url, id); });
+        timeouts_->AddReply(reply);
         return;
       }
 
