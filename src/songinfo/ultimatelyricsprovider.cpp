@@ -49,20 +49,22 @@ void UltimateLyricsProvider::FetchInfo(int id, const Song& metadata) {
   ReplaceFields(metadata, &url_text);
 
   QUrl url(url_text);
-  qLog(Debug) << "Fetching lyrics from" << url;
+  qLog(Debug) << "Fetching lyrics from" << url_text;
 
   // Fetch the URL, follow redirects
   metadata_ = metadata;
   redirect_count_ = 0;
   QNetworkReply* reply = network_->get(QNetworkRequest(url));
   connect(reply, &QNetworkReply::finished,
-          [=] { this->RequestFinished(reply, id); });
+          [=] { this->RequestFinished(reply, url_text, id); });
 }
 
-void UltimateLyricsProvider::RequestFinished(QNetworkReply* reply, int id) {
+void UltimateLyricsProvider::RequestFinished(QNetworkReply* reply,
+                                             const QString& orig_url, int id) {
   reply->deleteLater();
 
   if (reply->error() != QNetworkReply::NoError) {
+    qLog(Debug) << "Reply error" << reply->errorString();
     url_hop_ = false;
     emit Finished(id);
     return;
@@ -73,6 +75,8 @@ void UltimateLyricsProvider::RequestFinished(QNetworkReply* reply, int id) {
       reply->attribute(QNetworkRequest::RedirectionTargetAttribute);
   if (redirect_target.isValid()) {
     if (redirect_count_ >= kRedirectLimit) {
+      qLog(Debug) << "Too many redirects from" << orig_url << "to"
+                  << reply->url().toString();
       url_hop_ = false;
       emit Finished(id);
       return;
@@ -88,7 +92,7 @@ void UltimateLyricsProvider::RequestFinished(QNetworkReply* reply, int id) {
     redirect_count_++;
     QNetworkReply* reply = network_->get(QNetworkRequest(target));
     connect(reply, &QNetworkReply::finished,
-            [=] { this->RequestFinished(reply, id); });
+            [=] { this->RequestFinished(reply, orig_url, id); });
     return;
   }
 
@@ -123,7 +127,7 @@ void UltimateLyricsProvider::RequestFinished(QNetworkReply* reply, int id) {
         qLog(Debug) << "Next url hop: " << url;
         QNetworkReply* reply = network_->get(QNetworkRequest(url));
         connect(reply, &QNetworkReply::finished,
-                [=] { this->RequestFinished(reply, id); });
+                [=] { this->RequestFinished(reply, orig_url, id); });
         return;
       }
 
