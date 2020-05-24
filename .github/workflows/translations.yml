@@ -1,8 +1,7 @@
 name: translations
 on:
-  push:
-    branches:
-      - master
+  schedule:
+    - cron: '23 2 * * *'
 
 jobs:
   pull_translations:
