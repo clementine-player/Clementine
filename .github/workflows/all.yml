@@ -12,6 +12,8 @@ jobs:
     name: Lint
     runs-on: ubuntu-18.04
     steps:
+      - name: Checkout
+        uses: actions/checkout@v2
       - name: clang-format
         uses: DoozyX/clang-format-lint-action@v0.6
         with:
