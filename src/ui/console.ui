@@ -13,35 +13,45 @@
   <property name="windowTitle">
    <string>Console</string>
   </property>
-  <layout class="QGridLayout" name="gridLayout">
-   <item row="0" column="0">
-    <layout class="QVBoxLayout" name="verticalLayout">
-     <item>
-      <widget class="QTextBrowser" name="output"/>
-     </item>
-     <item>
-      <layout class="QHBoxLayout" name="horizontalLayout">
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QTabWidget" name="tabWidget">
+     <property name="currentIndex">
+      <number>0</number>
+     </property>
+     <widget class="QWidget" name="database_tab">
+      <attribute name="title">
+       <string>Database</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_3">
        <item>
-        <widget class="QLineEdit" name="query"/>
+        <widget class="QTextBrowser" name="database_output"/>
        </item>
        <item>
-        <widget class="QPushButton" name="run">
-         <property name="text">
-          <string>Run</string>
+        <widget class="QGroupBox" name="database_command_group">
+         <property name="title">
+          <string>Command</string>
          </property>
+         <layout class="QHBoxLayout" name="horizontalLayout_4">
+          <item>
+           <widget class="QLineEdit" name="database_query"/>
+          </item>
+          <item>
+           <widget class="QPushButton" name="database_run">
+            <property name="text">
+             <string>Run</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
         </widget>
        </item>
       </layout>
-     </item>
-    </layout>
+     </widget>
+    </widget>
    </item>
   </layout>
  </widget>
- <tabstops>
-  <tabstop>query</tabstop>
-  <tabstop>run</tabstop>
-  <tabstop>output</tabstop>
- </tabstops>
  <resources/>
  <connections/>
 </ui>

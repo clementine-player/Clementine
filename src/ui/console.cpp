@@ -12,21 +12,21 @@
 Console::Console(Application* app, QWidget* parent)
     : QDialog(parent), app_(app) {
   ui_.setupUi(this);
-  connect(ui_.run, SIGNAL(clicked()), SLOT(RunQuery()));
+  connect(ui_.database_run, SIGNAL(clicked()), SLOT(RunQuery()));
 
   QFont font("Monospace");
   font.setStyleHint(QFont::TypeWriter);
 
-  ui_.output->setFont(font);
-  ui_.query->setFont(font);
+  ui_.database_output->setFont(font);
+  ui_.database_query->setFont(font);
 }
 
 void Console::RunQuery() {
   QSqlDatabase db = app_->database()->Connect();
-  QSqlQuery query = db.exec(ui_.query->text());
-  ui_.query->clear();
+  QSqlQuery query = db.exec(ui_.database_query->text());
+  ui_.database_query->clear();
 
-  ui_.output->append("<b>&gt; " + query.executedQuery() + "</b>");
+  ui_.database_output->append("<b>&gt; " + query.executedQuery() + "</b>");
 
   query.next();
 
@@ -37,11 +37,11 @@ void Console::RunQuery() {
       values.append(record.value(i).toString());
     }
 
-    ui_.output->append(values.join("|"));
+    ui_.database_output->append(values.join("|"));
 
     query.next();
   }
 
-  ui_.output->verticalScrollBar()->setValue(
-      ui_.output->verticalScrollBar()->maximum());
+  ui_.database_output->verticalScrollBar()->setValue(
+      ui_.database_output->verticalScrollBar()->maximum());
 }
