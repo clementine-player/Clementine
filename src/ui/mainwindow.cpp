@@ -154,6 +154,7 @@ void qt_mac_set_dock_menu(QMenu*);
 
 const char* MainWindow::kSettingsGroup = "MainWindow";
 const char* MainWindow::kAllFilesFilterSpec = QT_TR_NOOP("All Files (*)");
+const char* MainWindow::kShowDebugConsoleKey = "CLEMENTINE_DEBUG_CONSOLE";
 
 namespace {
 const int kTrackSliderUpdateTimeMs = 500;
@@ -919,8 +920,12 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
           SLOT(EnableKittens(bool)));
   connect(ui_->action_kittens, SIGNAL(toggled(bool)), app_->network_remote(),
           SLOT(EnableKittens(bool)));
-  // Hide the console
-  // connect(ui_->action_console, SIGNAL(triggered()), SLOT(ShowConsole()));
+  QString showConsole =
+      QProcessEnvironment::systemEnvironment().value(kShowDebugConsoleKey, "0");
+  if (showConsole == "1")
+    connect(ui_->action_console, SIGNAL(triggered()), SLOT(ShowConsole()));
+  else
+    ui_->action_console->setVisible(false);
   NowPlayingWidgetPositionChanged(ui_->now_playing->show_above_status_bar());
 
   // Load theme
