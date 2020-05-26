@@ -152,24 +152,6 @@ int QueryWizardPlugin::CreatePages(QWizard* wizard, int finish_page_id) {
           SLOT(UpdateSortPreview()));
   connect(sort_ui_->random, SIGNAL(toggled(bool)), SLOT(UpdateSortPreview()));
 
-  // Adjust height, if necessary
-  /*
-  QScreen *scn = QGuiApplication::primaryScreen();
-  QRect scnGeo = scn->availableGeometry();
-  const int scnHeight = scnGeo.height();
-  //QRect pgeGeo = search_page_->geometry();
-  const int pgeHeight = search_page_->height();
-  printf("djm: pgeHeight=%d, scnHeight=%d\n", pgeHeight, scnHeight);
-  if (pgeHeight > scnHeight) {
-     printf("djm: too tall\n");
-     const int pgeWidth = search_page_->width();
-     search_page_->resize(pgeWidth, scnHeight);
-  }
-  else {
-     printf("djm: OK tall\n");
-  }
-  */
-
   // Configure the page text
   search_page_->setTitle(tr("Search terms"));
   search_page_->setSubTitle(
