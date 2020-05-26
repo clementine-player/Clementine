@@ -192,6 +192,7 @@ class ApplicationImpl {
 
 Application::Application(QObject* parent)
     : QObject(parent), p_(new ApplicationImpl(this)) {
+  setObjectName("Clementine Application");
   // This must be before library_->Init();
   // In the constructor the helper waits for the signal
   // PlaylistManagerInitialized
