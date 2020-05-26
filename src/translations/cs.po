@@ -15,14 +15,14 @@
 # Pavel Fric <fripohled.blogspot.com>, 2010
 # Pavel Fric <fripohled@blogspot.com>, 2004,2010
 # fri, 2011-2012
-# fri, 2013-2019
+# fri, 2013-2020
 # fri, 2011-2012
 # mandarinki <this.mail.sucks@mail.bg>, 2011
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2019-08-24 11:05+0000\n"
-"Last-Translator: fri\n"
+"PO-Revision-Date: 2020-05-26 18:18+0000\n"
+"Last-Translator: John Maguire <john.maguire@gmail.com>\n"
 "Language-Team: Czech (http://www.transifex.com/davidsansome/clementine/language/cs/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -64,7 +64,7 @@ msgstr " ms"
 msgid " pt"
 msgstr " bodů"
 
-#: ../bin/src/ui_behavioursettingspage.h:414
+#: ../bin/src/ui_behavioursettingspage.h:447
 msgid " s"
 msgstr " s"
 
@@ -88,17 +88,17 @@ msgstr "%1 alb"
 msgid "%1 dB"
 msgstr "%1 dB"
 
-#: core/utilities.cpp:122
+#: core/utilities.cpp:121
 #, qt-format
 msgid "%1 days"
 msgstr "%1 dnů"
 
-#: core/utilities.cpp:145
+#: core/utilities.cpp:144
 #, qt-format
 msgid "%1 days ago"
 msgstr "před %1 dny"
 
-#: internet/podcasts/gpoddersync.cpp:84
+#: internet/podcasts/gpoddersync.cpp:85
 #, qt-format
 msgid "%1 on %2"
 msgstr "%1 na %2"
@@ -108,17 +108,24 @@ msgstr "%1 na %2"
 msgid "%1 playlists (%2)"
 msgstr "%1 seznamů skladeb (%2)"
 
+#: internet/core/internetservice.cpp:151
+#, qt-format
+msgid ""
+"%1 request failed:\n"
+"%2"
+msgstr ""
+
 #: playlist/playlistmanager.cpp:429
 #, qt-format
 msgid "%1 selected of"
 msgstr "%1 vybráno z"
 
-#: devices/deviceview.cpp:125
+#: devices/deviceview.cpp:123
 #, qt-format
 msgid "%1 song"
 msgstr "%1 píseň"
 
-#: devices/deviceview.cpp:127
+#: devices/deviceview.cpp:125
 #, qt-format
 msgid "%1 songs"
 msgstr "%1 písní"
@@ -133,18 +140,18 @@ msgstr "Bylo nalezeno %1 písní"
 msgid "%1 songs found (showing %2)"
 msgstr "Bylo nalezeno %1 písní (zobrazeno %2)"
 
-#: playlist/playlistmanager.cpp:435 playlist/queue.cpp:222
+#: playlist/playlistmanager.cpp:435 playlist/queue.cpp:229
 #, qt-format
 msgid "%1 tracks"
 msgstr "%1 skladeb"
 
-#: ui/albumcovermanager.cpp:474
+#: ui/albumcovermanager.cpp:475
 #, qt-format
 msgid "%1 transferred"
 msgstr "%1 přeneseno"
 
-#: widgets/osd.cpp:243 widgets/osd.cpp:249 widgets/osd.cpp:255
-#: widgets/osd.cpp:261 widgets/osd.cpp:267 widgets/osd.cpp:274
+#: widgets/osd.cpp:241 widgets/osd.cpp:247 widgets/osd.cpp:253
+#: widgets/osd.cpp:259 widgets/osd.cpp:265 widgets/osd.cpp:272
 #, qt-format
 msgid "%1: Wiimotedev module"
 msgstr "%1: modul Wiimotedev"
@@ -181,88 +188,88 @@ msgctxt ""
 msgid "%n remaining"
 msgstr "zůstávají %n"
 
-#: playlist/playlistheader.cpp:45
+#: playlist/playlistheader.cpp:43
 msgid "&Align text"
 msgstr "&Zarovnat text"
 
-#: playlist/playlistheader.cpp:48
+#: playlist/playlistheader.cpp:46
 msgid "&Center"
 msgstr "&Na střed"
 
-#: ../bin/src/ui_globalshortcutssettingspage.h:177
+#: ../bin/src/ui_globalshortcutssettingspage.h:189
 msgid "&Custom"
 msgstr "Vl&astní"
 
-#: ../bin/src/ui_mainwindow.h:739
+#: ../bin/src/ui_mainwindow.h:784
 msgid "&Extras"
 msgstr "Doplňky"
 
-#: ../bin/src/ui_edittagdialog.h:728
+#: ../bin/src/ui_edittagdialog.h:729
 msgid "&Grouping"
 msgstr "&Seskupení"
 
-#: ../bin/src/ui_mainwindow.h:738
+#: ../bin/src/ui_mainwindow.h:783
 msgid "&Help"
 msgstr "Nápo&věda"
 
-#: playlist/playlistheader.cpp:81
+#: playlist/playlistheader.cpp:78
 #, qt-format
 msgid "&Hide %1"
 msgstr "Skrýt %1"
 
-#: playlist/playlistheader.cpp:33
+#: playlist/playlistheader.cpp:31
 msgid "&Hide..."
 msgstr "Skrýt..."
 
-#: playlist/playlistheader.cpp:47
+#: playlist/playlistheader.cpp:45
 msgid "&Left"
 msgstr "&Vlevo"
 
-#: playlist/playlistheader.cpp:36
+#: playlist/playlistheader.cpp:34
 msgid "&Lock Rating"
 msgstr "&Zamknout hodnocení"
 
-#: ../bin/src/ui_edittagdialog.h:731
+#: ../bin/src/ui_edittagdialog.h:732
 msgid "&Lyrics"
 msgstr "&Texty písní"
 
-#: ../bin/src/ui_mainwindow.h:736
+#: ../bin/src/ui_mainwindow.h:781
 msgid "&Music"
 msgstr "Hudba"
 
-#: ../bin/src/ui_globalshortcutssettingspage.h:175
+#: ../bin/src/ui_globalshortcutssettingspage.h:187
 msgid "&None"
 msgstr "Žád&né"
 
-#: ../bin/src/ui_mainwindow.h:737
+#: ../bin/src/ui_mainwindow.h:782
 msgid "&Playlist"
 msgstr "Seznam skladeb"
 
-#: ../bin/src/ui_mainwindow.h:678
+#: ../bin/src/ui_mainwindow.h:723
 msgid "&Quit"
 msgstr "&Ukončit"
 
-#: ../bin/src/ui_mainwindow.h:703
+#: ../bin/src/ui_mainwindow.h:748
 msgid "&Repeat mode"
 msgstr "Režim opakování"
 
-#: playlist/playlistheader.cpp:49
+#: playlist/playlistheader.cpp:47
 msgid "&Right"
 msgstr "&Vpravo"
 
-#: ../bin/src/ui_mainwindow.h:702
+#: ../bin/src/ui_mainwindow.h:747
 msgid "&Shuffle mode"
 msgstr "Režim míchání"
 
-#: playlist/playlistheader.cpp:34
+#: playlist/playlistheader.cpp:32
 msgid "&Stretch columns to fit window"
 msgstr "Roztáhnout sloupce tak, aby se vešly do okna"
 
-#: ../bin/src/ui_mainwindow.h:740
+#: ../bin/src/ui_mainwindow.h:785
 msgid "&Tools"
 msgstr "Nástroje"
 
-#: ../bin/src/ui_edittagdialog.h:724
+#: ../bin/src/ui_edittagdialog.h:725
 msgid "&Year"
 msgstr "&Rok"
 
@@ -290,11 +297,11 @@ msgstr "0:00:00"
 msgid "0px"
 msgstr "0 px"
 
-#: core/utilities.cpp:122
+#: core/utilities.cpp:121
 msgid "1 day"
 msgstr "1 den"
 
-#: playlist/playlistmanager.cpp:435 playlist/queue.cpp:222
+#: playlist/playlistmanager.cpp:435 playlist/queue.cpp:229
 msgid "1 track"
 msgstr "1 stopa"
 
@@ -319,7 +326,7 @@ msgstr "44,100 Hz"
 msgid "48,000Hz"
 msgstr "48,000 Hz"
 
-#: library/library.cpp:64
+#: library/library.cpp:66
 msgid "50 random tracks"
 msgstr "50 náhodných skladeb"
 
@@ -365,7 +372,7 @@ msgid ""
 "activated.</p></body></html>"
 msgstr "<html><head/><body><p>Toto bude zapisovat hodnocení písní a statistiky do značek písní u všech písní ve vaší sbírce.</p><p>Není to potřeba, pokud byla volba &quot;Ukládat  hodnocení písní a statistiky do značek písní&quot;vždy zapnuta.</p></body></html>"
 
-#: songinfo/artistbiography.cpp:265
+#: songinfo/artistbiography.cpp:277
 #, qt-format
 msgid ""
 "<p>This article uses material from the Wikipedia article <a "
@@ -394,7 +401,7 @@ msgstr "Klient se může připojit jen tehdy, když byl zadán správný kód."
 msgid "A premium account is required"
 msgstr "Je požadován účet Premium."
 
-#: smartplaylists/wizard.cpp:74
+#: smartplaylists/wizard.cpp:73
 msgid ""
 "A smart playlist is a dynamic list of songs that come from your library.  "
 "There are different types of smart playlist that offer different ways of "
@@ -406,7 +413,7 @@ msgid ""
 "A song will be included in the playlist if it matches these conditions."
 msgstr "Píseň bude zařazena do seznamu skladeb, pokud bude odpovídat těmto podmínkám."
 
-#: ../bin/src/ui_behavioursettingspage.h:417
+#: ../bin/src/ui_behavioursettingspage.h:453
 msgid "A&utomatic"
 msgstr "A&utomaticky"
 
@@ -434,7 +441,7 @@ msgstr "AAC 64k"
 msgid "AIFF"
 msgstr "AIFF"
 
-#: widgets/nowplayingwidget.cpp:150
+#: widgets/nowplayingwidget.cpp:146
 msgid "ALL GLORY TO THE HYPNOTOAD"
 msgstr "VŠECHNU SLÁVU HYPNOŽÁBĚ"
 
@@ -447,22 +454,22 @@ msgstr "Přerušit"
 msgid "About %1"
 msgstr "O %1"
 
-#: ../bin/src/ui_mainwindow.h:690
+#: ../bin/src/ui_mainwindow.h:735
 msgid "About Clementine..."
 msgstr "O Clementine..."
 
-#: ../bin/src/ui_mainwindow.h:717
+#: ../bin/src/ui_mainwindow.h:762
 msgid "About Qt..."
 msgstr "O Qt..."
 
 #: playlist/playlistsaveoptionsdialog.cpp:34
-#: ../bin/src/ui_behavioursettingspage.h:418
+#: ../bin/src/ui_behavioursettingspage.h:454
 msgid "Absolute"
 msgstr "Absolutní"
 
 #: ../bin/src/ui_magnatunesettingspage.h:154
-#: ../bin/src/ui_spotifysettingspage.h:207
 #: ../bin/src/ui_seafilesettingspage.h:168
+#: ../bin/src/ui_spotifysettingspage.h:207
 msgid "Account details"
 msgstr "Podrobnosti o účtu"
 
@@ -474,7 +481,7 @@ msgstr "Podrobnosti k účtu (Premium)"
 msgid "Action"
 msgstr "Činnost"
 
-#: ../bin/src/ui_globalshortcutssettingspage.h:173
+#: ../bin/src/ui_globalshortcutssettingspage.h:185
 msgctxt "Category label"
 msgid "Action"
 msgstr "Činnost"
@@ -483,7 +490,7 @@ msgstr "Činnost"
 msgid "Activate/Deactivate Wii Remote"
 msgstr "Zapnout/Vypnout Wii Remote"
 
-#: internet/podcasts/addpodcastdialog.cpp:63
+#: internet/podcasts/addpodcastdialog.cpp:66
 msgid "Add Podcast"
 msgstr "Přidat zvukový záznam"
 
@@ -511,19 +518,19 @@ msgstr "Přidat další proud..."
 msgid "Add directory..."
 msgstr "Přidat složku..."
 
-#: ui/mainwindow.cpp:2090
+#: ui/mainwindow.cpp:2098
 msgid "Add file"
 msgstr "Přidat soubor"
 
-#: ../bin/src/ui_mainwindow.h:726
+#: ../bin/src/ui_mainwindow.h:771
 msgid "Add file to transcoder"
 msgstr "Přidat soubor k překódování"
 
-#: ../bin/src/ui_mainwindow.h:724
+#: ../bin/src/ui_mainwindow.h:769
 msgid "Add file(s) to transcoder"
 msgstr "Přidat soubor(y) k překódování"
 
-#: ../bin/src/ui_transcodedialog.h:218 ../bin/src/ui_mainwindow.h:692
+#: ../bin/src/ui_transcodedialog.h:218 ../bin/src/ui_mainwindow.h:737
 msgid "Add file..."
 msgstr "Přidat soubor..."
 
@@ -531,12 +538,12 @@ msgstr "Přidat soubor..."
 msgid "Add files to transcode"
 msgstr "Přidat soubory pro překódování"
 
-#: transcoder/transcodedialog.cpp:308 ui/mainwindow.cpp:2117
+#: transcoder/transcodedialog.cpp:308 ui/mainwindow.cpp:2125
 #: ripper/ripcddialog.cpp:203
 msgid "Add folder"
 msgstr "Přidat složku"
 
-#: ../bin/src/ui_mainwindow.h:707
+#: ../bin/src/ui_mainwindow.h:752
 msgid "Add folder..."
 msgstr "Přidat složku..."
 
@@ -548,7 +555,7 @@ msgstr "Přidat novou složku..."
 msgid "Add podcast"
 msgstr "Přidat záznam"
 
-#: internet/podcasts/podcastservice.cpp:419 ../bin/src/ui_mainwindow.h:722
+#: internet/podcasts/podcastservice.cpp:419 ../bin/src/ui_mainwindow.h:767
 msgid "Add podcast..."
 msgstr "Přidat zvukový záznam..."
 
@@ -624,7 +631,7 @@ msgstr "Přidat značku pořadí písně"
 msgid "Add song year tag"
 msgstr "Přidat značku rok písně"
 
-#: ../bin/src/ui_mainwindow.h:693
+#: ../bin/src/ui_mainwindow.h:738
 msgid "Add stream..."
 msgstr "Přidat proud..."
 
@@ -636,7 +643,7 @@ msgstr "Přidat do seznamů skladeb Spotify"
 msgid "Add to Spotify starred"
 msgstr "Přidat do Spotify s hvězdičkou"
 
-#: ui/mainwindow.cpp:1891
+#: ui/mainwindow.cpp:1899
 msgid "Add to another playlist"
 msgstr "Přidat do jiného seznamu skladeb"
 
@@ -644,8 +651,8 @@ msgstr "Přidat do jiného seznamu skladeb"
 msgid "Add to playlist"
 msgstr "Přidat do seznamu skladeb"
 
-#: ../bin/src/ui_behavioursettingspage.h:398
-#: ../bin/src/ui_behavioursettingspage.h:410
+#: ../bin/src/ui_behavioursettingspage.h:431
+#: ../bin/src/ui_behavioursettingspage.h:443
 msgid "Add to the queue"
 msgstr "Přidat do řady"
 
@@ -674,7 +681,7 @@ msgstr "Přidána dnes"
 msgid "Added within three months"
 msgstr "Přidána během tří měsíců"
 
-#: library/libraryfilterwidget.cpp:192
+#: library/libraryfilterwidget.cpp:176
 msgid "Advanced grouping..."
 msgstr "Pokročilé seskupování..."
 
@@ -686,11 +693,11 @@ msgstr "Po "
 msgid "After copying..."
 msgstr "Po zkopírování..."
 
-#: library/savedgroupingmanager.cpp:65 playlist/playlist.cpp:1382
-#: ui/organisedialog.cpp:65 ui/qtsystemtrayicon.cpp:251
+#: library/savedgroupingmanager.cpp:65 playlist/playlist.cpp:1381
+#: ui/organisedialog.cpp:64 ui/qtsystemtrayicon.cpp:251
 #: ../bin/src/ui_groupbydialog.h:128 ../bin/src/ui_groupbydialog.h:147
 #: ../bin/src/ui_groupbydialog.h:166 ../bin/src/ui_albumcoversearcher.h:110
-#: ../bin/src/ui_albumcoversearcher.h:112 ../bin/src/ui_edittagdialog.h:723
+#: ../bin/src/ui_albumcoversearcher.h:112 ../bin/src/ui_edittagdialog.h:724
 #: ../bin/src/ui_trackselectiondialog.h:208 ../bin/src/ui_ripcddialog.h:314
 msgid "Album"
 msgstr "Album"
@@ -699,10 +706,10 @@ msgstr "Album"
 msgid "Album (ideal loudness for all tracks)"
 msgstr "Album (ideální hlasitost pro všechny skladby)"
 
-#: library/savedgroupingmanager.cpp:80 playlist/playlist.cpp:1396
-#: ui/organisedialog.cpp:68 ../bin/src/ui_groupbydialog.h:130
+#: library/savedgroupingmanager.cpp:80 playlist/playlist.cpp:1395
+#: ui/organisedialog.cpp:67 ../bin/src/ui_groupbydialog.h:130
 #: ../bin/src/ui_groupbydialog.h:149 ../bin/src/ui_groupbydialog.h:168
-#: ../bin/src/ui_edittagdialog.h:725
+#: ../bin/src/ui_edittagdialog.h:726
 msgid "Album artist"
 msgstr "Umělec alba"
 
@@ -726,11 +733,11 @@ msgstr "Alba bez obalů"
 msgid "All"
 msgstr "Vše"
 
-#: ui/mainwindow.cpp:161
+#: ui/mainwindow.cpp:156
 msgid "All Files (*)"
 msgstr "Všechny soubory (*)"
 
-#: ../bin/src/ui_mainwindow.h:698
+#: ../bin/src/ui_mainwindow.h:743
 msgctxt "Label for button to enable/disable Hypnotoad background sound."
 msgid "All Glory to the Hypnotoad!"
 msgstr "Sláva hypnožábě!"
@@ -743,7 +750,7 @@ msgstr "Všechna alba"
 msgid "All artists"
 msgstr "Všichni umělci"
 
-#: ui/albumcoverchoicecontroller.cpp:48
+#: ui/albumcoverchoicecontroller.cpp:51
 msgid "All files (*)"
 msgstr "Všechny soubory (*)"
 
@@ -756,7 +763,7 @@ msgstr "Všechny seznamy skladeb (%1)"
 msgid "All the translators"
 msgstr "Všichni překladatelé"
 
-#: library/library.cpp:98
+#: library/library.cpp:100
 msgid "All tracks"
 msgstr "Všechny skladby"
 
@@ -776,30 +783,24 @@ msgstr "Povolit kódování střed/kraj"
 msgid "Alongside the originals"
 msgstr "Vedle původních"
 
-#: ../bin/src/ui_behavioursettingspage.h:370
+#: ../bin/src/ui_behavioursettingspage.h:403
 msgid "Alwa&ys hide the main window"
 msgstr "Vždy &skrýt hlavní okno"
 
-#: ../bin/src/ui_behavioursettingspage.h:369
+#: ../bin/src/ui_behavioursettingspage.h:402
 msgid "Always show &the main window"
 msgstr "Vždy &zobrazit hlavní okno"
 
-#: ../bin/src/ui_behavioursettingspage.h:384
-#: ../bin/src/ui_behavioursettingspage.h:404
+#: ../bin/src/ui_behavioursettingspage.h:417
+#: ../bin/src/ui_behavioursettingspage.h:437
 msgid "Always start playing"
 msgstr "Vždy začít přehrávat"
-
-#: internet/spotify/spotifyblobdownloader.cpp:77
-msgid ""
-"An additional plugin is required to use Spotify in Clementine.  Would you "
-"like to download and install it now?"
-msgstr "Pro používání Spotify v Clementine je vyžadován přídavný modul. Chcete jej stáhnout a nainstalovat nyní?"
 
 #: devices/gpodloader.cpp:61
 msgid "An error occurred loading the iTunes database"
 msgstr "Při nahrávání databáze iTunes nastala chyba"
 
-#: playlist/playlist.cpp:454 ui/edittagdialog.cpp:703
+#: playlist/playlist.cpp:453 ui/edittagdialog.cpp:702
 #, qt-format
 msgid "An error occurred writing metadata to '%1'"
 msgstr "Při zápisu údajů do '%1' se vyskytla chyba"
@@ -826,13 +827,13 @@ msgstr "Vzhled"
 msgid "Append files/URLs to the playlist"
 msgstr "Přidat soubory/adresy do seznamu skladeb"
 
-#: devices/deviceview.cpp:218 globalsearch/globalsearchview.cpp:455
-#: internet/core/internetservice.cpp:48 library/libraryview.cpp:383
+#: devices/deviceview.cpp:215 globalsearch/globalsearchview.cpp:455
+#: internet/core/internetservice.cpp:51 library/libraryview.cpp:383
 #: widgets/fileviewlist.cpp:31
 msgid "Append to current playlist"
 msgstr "Přidat do současného seznamu skladeb"
 
-#: ../bin/src/ui_behavioursettingspage.h:395
+#: ../bin/src/ui_behavioursettingspage.h:428
 msgid "Append to the playlist"
 msgstr "Přidat do seznamu skladeb"
 
@@ -845,7 +846,7 @@ msgstr "Použít kompresi, aby se zabránilo ořezávání zvuku (clippingu)"
 msgid "Are you sure you want to delete the \"%1\" preset?"
 msgstr "Opravdu chcete smazat nastavení \"%1\"?"
 
-#: ui/edittagdialog.cpp:803
+#: ui/edittagdialog.cpp:802
 msgid "Are you sure you want to reset this song's statistics?"
 msgstr "Opravdu chcete nastavit statistiku této písně znovu?"
 
@@ -855,24 +856,24 @@ msgid ""
 "the songs of your library?"
 msgstr "Opravdu chcete ukládat statistiky písní do souboru písně u všech písní ve vaší sbírce?"
 
-#: library/savedgroupingmanager.cpp:62 playlist/playlist.cpp:1380
-#: ui/organisedialog.cpp:66 ui/qtsystemtrayicon.cpp:249
+#: library/savedgroupingmanager.cpp:62 playlist/playlist.cpp:1379
+#: ui/organisedialog.cpp:65 ui/qtsystemtrayicon.cpp:249
 #: ../bin/src/ui_groupbydialog.h:129 ../bin/src/ui_groupbydialog.h:148
 #: ../bin/src/ui_groupbydialog.h:167 ../bin/src/ui_albumcoversearcher.h:106
-#: ../bin/src/ui_albumcoversearcher.h:108 ../bin/src/ui_edittagdialog.h:721
+#: ../bin/src/ui_albumcoversearcher.h:108 ../bin/src/ui_edittagdialog.h:722
 #: ../bin/src/ui_trackselectiondialog.h:209 ../bin/src/ui_ripcddialog.h:315
 msgid "Artist"
 msgstr "Umělec"
 
-#: ui/mainwindow.cpp:287
+#: ui/mainwindow.cpp:288
 msgid "Artist info"
 msgstr "Umělec"
 
-#: ui/organisedialog.cpp:67
+#: ui/organisedialog.cpp:66
 msgid "Artist's initial"
 msgstr "Začáteční písmena umělce"
 
-#: ../bin/src/ui_behavioursettingspage.h:420
+#: ../bin/src/ui_behavioursettingspage.h:456
 msgid "As&k when saving"
 msgstr "Ze&ptat se při ukládání"
 
@@ -888,7 +889,7 @@ msgstr "Zvukový výstup"
 
 #: internet/digitally/digitallyimportedsettingspage.cpp:82
 #: internet/magnatune/magnatunesettingspage.cpp:117
-#: internet/lastfm/lastfmservice.cpp:270
+#: internet/lastfm/lastfmservice.cpp:267
 #: internet/lastfm/lastfmsettingspage.cpp:76
 msgid "Authentication failed"
 msgstr "Ověření selhalo"
@@ -930,12 +931,12 @@ msgstr "Průměrný datový tok"
 msgid "Average image size"
 msgstr "Průměrná velikost obrázku"
 
-#: internet/podcasts/addpodcastdialog.cpp:91
+#: internet/podcasts/addpodcastdialog.cpp:94
 msgid "BBC Podcasts"
 msgstr "Záznamy BBC"
 
-#: playlist/playlist.cpp:1416 ui/organisedialog.cpp:75
-#: ../bin/src/ui_edittagdialog.h:704
+#: playlist/playlist.cpp:1415 ui/organisedialog.cpp:74
+#: ../bin/src/ui_edittagdialog.h:705
 msgid "BPM"
 msgstr "ÚZM"
 
@@ -955,7 +956,7 @@ msgstr "Obrázek na pozadí"
 msgid "Background opacity"
 msgstr "Neprůhlednost pozadí"
 
-#: core/database.cpp:664
+#: core/database.cpp:668
 msgid "Backing up database"
 msgstr "Záloha databáze"
 
@@ -963,7 +964,7 @@ msgstr "Záloha databáze"
 msgid "Balance"
 msgstr "Vyvážení"
 
-#: core/globalshortcuts.cpp:81
+#: core/globalshortcuts.cpp:82
 msgid "Ban (Last.fm scrobbling)"
 msgstr "Zakázat (odesílání informací o přehrávání na Last.fm)"
 
@@ -979,7 +980,7 @@ msgstr "Jednoduchá modrá"
 msgid "Basic audio type"
 msgstr "Základní typ zvuku"
 
-#: ../bin/src/ui_behavioursettingspage.h:357
+#: ../bin/src/ui_behavioursettingspage.h:390
 msgid "Behavior"
 msgstr "Chování"
 
@@ -987,11 +988,11 @@ msgstr "Chování"
 msgid "Best"
 msgstr "Nejlepší"
 
-#: songinfo/artistbiography.cpp:90 songinfo/artistbiography.cpp:255
+#: songinfo/artistbiography.cpp:96 songinfo/artistbiography.cpp:267
 msgid "Biography"
 msgstr "Životopis"
 
-#: playlist/playlist.cpp:1418 ../bin/src/ui_edittagdialog.h:706
+#: playlist/playlist.cpp:1417 ../bin/src/ui_edittagdialog.h:707
 #: ../bin/src/ui_streamdetailsdialog.h:139
 msgid "Bit rate"
 msgstr "Datový tok"
@@ -1006,7 +1007,7 @@ msgstr "Datový tok"
 msgid "Bitrate"
 msgstr "Datový tok"
 
-#: ui/organisedialog.cpp:81
+#: ui/organisedialog.cpp:80
 msgctxt "Refers to bitrate in file organise dialog."
 msgid "Bitrate"
 msgstr "Datový tok"
@@ -1045,11 +1046,11 @@ msgstr "Procházet…"
 msgid "Buffer duration"
 msgstr "Délka vyrovnávací paměti"
 
-#: engines/gstengine.cpp:931
+#: engines/gstengine.cpp:919
 msgid "Buffering"
 msgstr "Ukládá se do vyrovnávací paměti"
 
-#: internet/seafile/seafileservice.cpp:227
+#: internet/seafile/seafileservice.cpp:231
 msgid "Building Seafile index..."
 msgstr "Sestavuje se index Seafile..."
 
@@ -1061,23 +1062,23 @@ msgstr "Ale tyto zdroje jsou zakázány:"
 msgid "Buttons"
 msgstr "Tlačítka"
 
+#: internet/podcasts/addpodcastdialog.cpp:97
+msgid "CBC Podcasts"
+msgstr ""
+
 #: core/song.cpp:454
 msgid "CDDA"
 msgstr "CDDA"
 
-#: library/library.cpp:117
+#: library/library.cpp:119
 msgid "CUE sheet support"
 msgstr "Podpora pro list CUE"
-
-#: internet/spotify/spotifyblobdownloader.cpp:62
-msgid "Cancel"
-msgstr "Zrušit"
 
 #: internet/podcasts/podcastservice.cpp:447
 msgid "Cancel download"
 msgstr "Zrušit stahování"
 
-#: ../bin/src/ui_edittagdialog.h:700
+#: ../bin/src/ui_edittagdialog.h:701
 msgid "Change cover art"
 msgstr "Změnit obal"
 
@@ -1085,19 +1086,19 @@ msgstr "Změnit obal"
 msgid "Change font size..."
 msgstr "Změnit velikost písma..."
 
-#: core/globalshortcuts.cpp:74
+#: core/globalshortcuts.cpp:75
 msgid "Change repeat mode"
 msgstr "Změnit režim opakování"
 
-#: ../bin/src/ui_globalshortcutssettingspage.h:178
+#: ../bin/src/ui_globalshortcutssettingspage.h:190
 msgid "Change shortcut..."
 msgstr "Změnit klávesovou zkratku..."
 
-#: core/globalshortcuts.cpp:72
+#: core/globalshortcuts.cpp:73
 msgid "Change shuffle mode"
 msgstr "Změnit režim míchání"
 
-#: ../bin/src/ui_behavioursettingspage.h:409
+#: ../bin/src/ui_behavioursettingspage.h:442
 msgid "Change the currently playing song"
 msgstr "Změnit nyní přehrávanou píseň"
 
@@ -1123,19 +1124,19 @@ msgstr "Kanály"
 msgid "Check for new episodes"
 msgstr "Podívat se po nových dílech"
 
-#: internet/googledrive/googledriveservice.cpp:221
+#: internet/googledrive/googledriveservice.cpp:225
 msgid "Check for updates"
 msgstr "Podívat se po aktualizacích"
 
-#: ui/mainwindow.cpp:826
+#: ui/mainwindow.cpp:829
 msgid "Check for updates..."
 msgstr "Zkontrolovat aktualizace"
 
-#: smartplaylists/wizard.cpp:84
+#: smartplaylists/wizard.cpp:83
 msgid "Choose a name for your smart playlist"
 msgstr "Vyberte název pro svůj chytrý seznam skladeb"
 
-#: engines/gstengine.cpp:952
+#: engines/gstengine.cpp:940
 msgid "Choose automatically"
 msgstr "Vybrat automaticky"
 
@@ -1177,17 +1178,17 @@ msgid "Cleaning up"
 msgstr "Úklid"
 
 #: transcoder/transcodedialog.cpp:63 widgets/lineedit.cpp:41
-#: ../bin/src/ui_queuemanager.h:151
+#: ../bin/src/ui_queuemanager.h:155
 msgid "Clear"
 msgstr "Smazat"
 
-#: ../bin/src/ui_mainwindow.h:681 ../bin/src/ui_mainwindow.h:683
+#: ../bin/src/ui_mainwindow.h:726 ../bin/src/ui_mainwindow.h:728
 msgid "Clear playlist"
 msgstr "Vyprázdnit seznam skladeb"
 
 #: smartplaylists/searchtermwidget.cpp:374
-#: visualisations/visualisationcontainer.cpp:215
-#: ../bin/src/ui_mainwindow.h:673 ../bin/src/ui_visualisationoverlay.h:182
+#: visualisations/visualisationcontainer.cpp:223
+#: ../bin/src/ui_mainwindow.h:718 ../bin/src/ui_visualisationoverlay.h:182
 msgid "Clementine"
 msgstr "Clementine"
 
@@ -1200,7 +1201,7 @@ msgid "Clementine Orange"
 msgstr "Mandarinka klementina"
 
 #: visualisations/visualisationcontainer.cpp:76
-#: visualisations/visualisationcontainer.cpp:158
+#: visualisations/visualisationcontainer.cpp:159
 msgid "Clementine Visualization"
 msgstr "Vizualizace Clementine"
 
@@ -1243,7 +1244,7 @@ msgid ""
 "installed Clementine properly."
 msgstr "Clementine se nepodařilo nahrát žádné vizualizace z projectM. Ověřte, že jste Clementine nainstalovali správně."
 
-#: widgets/prettyimage.cpp:200
+#: widgets/prettyimage.cpp:197
 msgid "Clementine image viewer"
 msgstr "Prohlížeč obrázků pro Clementine"
 
@@ -1287,11 +1288,11 @@ msgstr "Zavřít"
 msgid "Close playlist"
 msgstr "Zavřít seznam skladeb"
 
-#: visualisations/visualisationcontainer.cpp:135
+#: visualisations/visualisationcontainer.cpp:128
 msgid "Close visualization"
 msgstr "Zavřít vizualizaci"
 
-#: internet/magnatune/magnatunedownloaddialog.cpp:310
+#: internet/magnatune/magnatunedownloaddialog.cpp:313
 msgid "Closing this window will cancel the download."
 msgstr "Zavření tohoto okna zruší stahování."
 
@@ -1303,7 +1304,7 @@ msgstr "Zavření tohoto okna zastaví hledání obalů alb."
 msgid "Club"
 msgstr "Klub"
 
-#: ../bin/src/ui_edittagdialog.h:726
+#: ../bin/src/ui_edittagdialog.h:727
 msgid "Co&mposer"
 msgstr "S&kladatel"
 
@@ -1315,25 +1316,29 @@ msgstr "Barvy"
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Čárkou oddělený seznam class:level, level je 0-3"
 
-#: ../bin/src/ui_behavioursettingspage.h:425
+#: ../bin/src/ui_behavioursettingspage.h:461
 msgid "Comma separated list of prefix words to ignore when sorting"
 msgstr "Seznam slov (předpon) oddělených čárkou, která se při řazení mají přehlížet"
 
-#: playlist/playlist.cpp:1435 smartplaylists/searchterm.cpp:384
-#: ui/organisedialog.cpp:79 ../bin/src/ui_edittagdialog.h:718
+#: ../bin/src/ui_console.h:129
+msgid "Command"
+msgstr ""
+
+#: playlist/playlist.cpp:1434 smartplaylists/searchterm.cpp:384
+#: ui/organisedialog.cpp:78 ../bin/src/ui_edittagdialog.h:719
 msgid "Comment"
 msgstr "Poznámka"
 
-#: ../bin/src/ui_edittagdialog.h:730
+#: ../bin/src/ui_edittagdialog.h:731
 msgid "Complete tags automatically"
 msgstr "Doplnit značky automaticky"
 
-#: ../bin/src/ui_mainwindow.h:720
+#: ../bin/src/ui_mainwindow.h:765
 msgid "Complete tags automatically..."
 msgstr "Doplnit značky automaticky..."
 
-#: library/savedgroupingmanager.cpp:74 playlist/playlist.cpp:1398
-#: ui/organisedialog.cpp:69 ../bin/src/ui_groupbydialog.h:131
+#: library/savedgroupingmanager.cpp:74 playlist/playlist.cpp:1397
+#: ui/organisedialog.cpp:68 ../bin/src/ui_groupbydialog.h:131
 #: ../bin/src/ui_groupbydialog.h:150 ../bin/src/ui_groupbydialog.h:169
 msgid "Composer"
 msgstr "Skladatel"
@@ -1343,11 +1348,11 @@ msgstr "Skladatel"
 msgid "Configure %1..."
 msgstr "Nastavit %1..."
 
-#: internet/magnatune/magnatuneservice.cpp:293
+#: internet/magnatune/magnatuneservice.cpp:292
 msgid "Configure Magnatune..."
 msgstr "Nastavit Magnatune..."
 
-#: ../bin/src/ui_globalshortcutssettingspage.h:166
+#: ../bin/src/ui_globalshortcutssettingspage.h:178
 msgid "Configure Shortcuts"
 msgstr "Nastavit klávesové zkratky"
 
@@ -1355,7 +1360,7 @@ msgstr "Nastavit klávesové zkratky"
 msgid "Configure Spotify..."
 msgstr "Nastavit Spotify..."
 
-#: internet/subsonic/subsonicservice.cpp:141
+#: internet/subsonic/subsonicservice.cpp:152
 msgid "Configure Subsonic..."
 msgstr "Nastavit Subsonic..."
 
@@ -1363,18 +1368,18 @@ msgstr "Nastavit Subsonic..."
 msgid "Configure global search..."
 msgstr "Nastavit celkové hledání..."
 
-#: ui/mainwindow.cpp:663
+#: ui/mainwindow.cpp:666
 msgid "Configure library..."
 msgstr "Nastavit sbírku..."
 
-#: internet/podcasts/addpodcastdialog.cpp:77
+#: internet/podcasts/addpodcastdialog.cpp:80
 #: internet/podcasts/podcastservice.cpp:461
 msgid "Configure podcasts..."
 msgstr "Nastavit záznamy..."
 
 #: internet/core/cloudfileservice.cpp:107
 #: internet/digitally/digitallyimportedservicebase.cpp:184
-#: internet/googledrive/googledriveservice.cpp:231
+#: internet/googledrive/googledriveservice.cpp:235
 #: ../bin/src/ui_globalsearchsettingspage.h:146
 msgid "Configure..."
 msgstr "Nastavit..."
@@ -1406,7 +1411,7 @@ msgid ""
 "Connection timed out, check server URL. Example: http://localhost:4040/"
 msgstr "Spojení vypršelo, prověřte adresu serveru (URL). Příklad: http://localhost:4040/"
 
-#: ../bin/src/ui_console.h:79 ../bin/src/ui_mainwindow.h:701
+#: ../bin/src/ui_console.h:128 ../bin/src/ui_mainwindow.h:746
 msgid "Console"
 msgstr "Konzole"
 
@@ -1430,16 +1435,16 @@ msgstr "Převést zvukové soubory v bezztrátovém formátu, před jejich odesl
 msgid "Convert lossless files"
 msgstr "Převést soubory v bezztrátovém formátu"
 
-#: internet/core/internetservice.cpp:79
+#: internet/core/internetservice.cpp:82
 msgid "Copy to clipboard"
 msgstr "Kopírovat do schránky"
 
 #: library/libraryview.cpp:419 internet/podcasts/podcastservice.cpp:444
-#: ui/mainwindow.cpp:723 widgets/fileviewlist.cpp:44
+#: ui/mainwindow.cpp:726 widgets/fileviewlist.cpp:44
 msgid "Copy to device..."
 msgstr "Zkopírovat do zařízení..."
 
-#: devices/deviceview.cpp:228 ui/mainwindow.cpp:713
+#: devices/deviceview.cpp:225 ui/mainwindow.cpp:716
 #: widgets/fileviewlist.cpp:40
 msgid "Copy to library..."
 msgstr "Zkopírovat do sbírky..."
@@ -1465,6 +1470,10 @@ msgstr "Nepodařilo se vytvořit prvek GStreamer \"%1\" - ujistěte se, že mát
 #, qt-format
 msgid "Could not detect an audio stream in %1"
 msgstr "Nepodařilo se zjistit zvukový proud v %1"
+
+#: internet/googledrive/googledriveservice.cpp:208
+msgid "Could not find Google Drive file."
+msgstr ""
 
 #: songinfo/streamdiscoverer.cpp:123
 msgid "Could not get details"
@@ -1492,15 +1501,15 @@ msgid ""
 "plugins installed"
 msgstr "Nepodařilo se najít kodér \"%1\" - ujistěte se, že máte nainstalovány správné přídavné moduly GStreamer"
 
-#: internet/magnatune/magnatunedownloaddialog.cpp:224
+#: internet/magnatune/magnatunedownloaddialog.cpp:227
 #, qt-format
 msgid "Couldn't open output file %1"
 msgstr "Nepodařilo se otevřít výstupní soubor %1"
 
 #: internet/core/cloudfileservice.cpp:103
-#: internet/googledrive/googledriveservice.cpp:228
+#: internet/googledrive/googledriveservice.cpp:232
 #: ../bin/src/ui_albumcovermanager.h:220
-#: ../bin/src/ui_albumcoversearcher.h:104 ../bin/src/ui_mainwindow.h:696
+#: ../bin/src/ui_albumcoversearcher.h:104 ../bin/src/ui_mainwindow.h:741
 msgid "Cover Manager"
 msgstr "Správce obalů"
 
@@ -1508,7 +1517,7 @@ msgstr "Správce obalů"
 msgid "Cover art from embedded image"
 msgstr "Obal z vloženého obrázku"
 
-#: ui/edittagdialog.cpp:487
+#: ui/edittagdialog.cpp:486
 #, qt-format
 msgid "Cover art loaded automatically from %1"
 msgstr "Obal nahraný automaticky z %1"
@@ -1517,7 +1526,7 @@ msgstr "Obal nahraný automaticky z %1"
 msgid "Cover art manually unset"
 msgstr "Obal zrušený ručně"
 
-#: ui/edittagdialog.cpp:489
+#: ui/edittagdialog.cpp:488
 msgid "Cover art not set"
 msgstr "Obal nenastaven"
 
@@ -1543,19 +1552,19 @@ msgstr "Prolínání při automatické změně skladby"
 msgid "Cross-fade when changing tracks manually"
 msgstr "Prolínání při ruční změně skladby"
 
-#: ../bin/src/ui_queuemanager.h:153
+#: ../bin/src/ui_queuemanager.h:158
 msgid "Ctrl+K"
 msgstr "Ctrl+K"
 
-#: ../bin/src/ui_savedgroupingmanager.h:105
+#: ../bin/src/ui_savedgroupingmanager.h:106
 msgid "Ctrl+Up"
 msgstr "Ctrl+Up"
 
-#: ../bin/src/ui_queuemanager.h:141
+#: ../bin/src/ui_queuemanager.h:142
 msgid "Ctrl+"
 msgstr "Ctrl+"
 
-#: ../bin/src/ui_queuemanager.h:145
+#: ../bin/src/ui_queuemanager.h:148
 msgid "Ctrl+"
 msgstr "Ctrl+"
 
@@ -1583,7 +1592,11 @@ msgstr "Cesta k D-Bus"
 msgid "Dance"
 msgstr "Taneční hudba"
 
-#: core/database.cpp:617
+#: ../bin/src/ui_console.h:131
+msgid "Database"
+msgstr ""
+
+#: core/database.cpp:621
 msgid ""
 "Database corruption detected. Please read https://github.com/clementine-"
 "player/Clementine/wiki/Database-Corruption for instructions on how to "
@@ -1594,11 +1607,11 @@ msgstr "Zjištěno poškození databáze. Přečtěte si, prosím,  https://gith
 msgid "Date"
 msgstr "Datum"
 
-#: playlist/playlist.cpp:1432 ../bin/src/ui_edittagdialog.h:715
+#: playlist/playlist.cpp:1431 ../bin/src/ui_edittagdialog.h:716
 msgid "Date created"
 msgstr "Datum vytvoření"
 
-#: playlist/playlist.cpp:1430 ../bin/src/ui_edittagdialog.h:714
+#: playlist/playlist.cpp:1429 ../bin/src/ui_edittagdialog.h:715
 msgid "Date modified"
 msgstr "Datum změny"
 
@@ -1606,7 +1619,7 @@ msgstr "Datum změny"
 msgid "Days"
 msgstr "Dny"
 
-#: ../bin/src/ui_globalshortcutssettingspage.h:176
+#: ../bin/src/ui_globalshortcutssettingspage.h:188
 msgid "De&fault"
 msgstr "&Výchozí"
 
@@ -1618,7 +1631,7 @@ msgstr "Snížit hlasitost o 4 procenta"
 msgid "Decrease the volume by <value> percent"
 msgstr "Snížit hlasitost o <value> procent"
 
-#: core/globalshortcuts.cpp:63 wiimotedev/wiimotesettingspage.cpp:112
+#: core/globalshortcuts.cpp:64 wiimotedev/wiimotesettingspage.cpp:112
 msgid "Decrease volume"
 msgstr "Snížit hlasitost"
 
@@ -1626,7 +1639,7 @@ msgstr "Snížit hlasitost"
 msgid "Default background image"
 msgstr "Výchozí obrázek na pozadí"
 
-#: engines/gstengine.cpp:978
+#: engines/gstengine.cpp:966
 #, qt-format
 msgid "Default device on %1"
 msgstr "Výchozí zařízení na %1"
@@ -1639,7 +1652,7 @@ msgstr "Výchozí"
 msgid "Delay between visualizations"
 msgstr "Prodleva mezi vizualizacemi"
 
-#: playlist/playlistlistcontainer.cpp:152
+#: playlist/playlistlistcontainer.cpp:158
 #: ../bin/src/ui_playlistlistcontainer.h:132
 msgid "Delete"
 msgstr "Smazat"
@@ -1648,16 +1661,16 @@ msgstr "Smazat"
 msgid "Delete downloaded data"
 msgstr "Smazat stažená data"
 
-#: devices/deviceview.cpp:404 library/libraryview.cpp:678
-#: ui/mainwindow.cpp:2473 widgets/fileview.cpp:188
+#: devices/deviceview.cpp:401 library/libraryview.cpp:677
+#: ui/mainwindow.cpp:2470 widgets/fileview.cpp:188
 msgid "Delete files"
 msgstr "Smazat soubory"
 
-#: devices/deviceview.cpp:232
+#: devices/deviceview.cpp:229
 msgid "Delete from device..."
 msgstr "Smazat ze zařízení..."
 
-#: library/libraryview.cpp:422 ui/mainwindow.cpp:726
+#: library/libraryview.cpp:422 ui/mainwindow.cpp:729
 #: widgets/fileviewlist.cpp:47
 msgid "Delete from disk..."
 msgstr "Smazat z disku..."
@@ -1690,11 +1703,11 @@ msgstr "Probíhá mazání souborů"
 msgid "Depth"
 msgstr "Hloubka"
 
-#: ui/mainwindow.cpp:1804
+#: ui/mainwindow.cpp:1812
 msgid "Dequeue selected tracks"
 msgstr "Odstranit vybrané skladby z řady"
 
-#: ui/mainwindow.cpp:1802
+#: ui/mainwindow.cpp:1810
 msgid "Dequeue track"
 msgstr "Odstranit skladbu z řady"
 
@@ -1707,7 +1720,7 @@ msgstr "Cíl"
 msgid "Details..."
 msgstr "Podrobnosti..."
 
-#: devices/giolister.cpp:164 devices/devicekitlister.cpp:128
+#: devices/devicekitlister.cpp:128 devices/giolister.cpp:174
 msgid "Device"
 msgstr "Zařízení"
 
@@ -1719,11 +1732,11 @@ msgstr "Vlastnosti zařízení"
 msgid "Device name"
 msgstr "Název zařízení"
 
-#: devices/deviceview.cpp:212
+#: devices/deviceview.cpp:209
 msgid "Device properties..."
 msgstr "Vlastnosti zařízení..."
 
-#: ui/mainwindow.cpp:280
+#: ui/mainwindow.cpp:281
 msgid "Devices"
 msgstr "Zařízení"
 
@@ -1774,10 +1787,10 @@ msgctxt "Refers to search provider's status."
 msgid "Disabled"
 msgstr "Zakázáno"
 
-#: library/savedgroupingmanager.cpp:95 playlist/playlist.cpp:1388
-#: ui/organisedialog.cpp:74 ../bin/src/ui_groupbydialog.h:139
+#: library/savedgroupingmanager.cpp:95 playlist/playlist.cpp:1387
+#: ui/organisedialog.cpp:73 ../bin/src/ui_groupbydialog.h:139
 #: ../bin/src/ui_groupbydialog.h:158 ../bin/src/ui_groupbydialog.h:177
-#: ../bin/src/ui_edittagdialog.h:722 ../bin/src/ui_ripcddialog.h:313
+#: ../bin/src/ui_edittagdialog.h:723 ../bin/src/ui_ripcddialog.h:313
 msgid "Disc"
 msgstr "Disk"
 
@@ -1785,8 +1798,8 @@ msgstr "Disk"
 msgid "Discontinuous transmission"
 msgstr "Nesouvislý přenos"
 
-#: internet/icecast/icecastfilterwidget.cpp:36
-#: internet/core/searchboxwidget.cpp:34 library/libraryfilterwidget.cpp:111
+#: internet/icecast/icecastfilterwidget.cpp:35
+#: internet/core/searchboxwidget.cpp:34 library/libraryfilterwidget.cpp:95
 #: ../bin/src/ui_librarysettingspage.h:206
 msgid "Display options"
 msgstr "Volby zobrazení"
@@ -1795,16 +1808,16 @@ msgstr "Volby zobrazení"
 msgid "Display the on-screen-display"
 msgstr "Zobrazovat informace na obrazovce (OSD)"
 
-#: ../bin/src/ui_mainwindow.h:719
+#: ../bin/src/ui_mainwindow.h:764
 msgid "Do a full library rescan"
 msgstr "Znovu kompletně prohledat sbírku"
 
-#: internet/googledrive/googledriveservice.cpp:270
-#: internet/googledrive/googledriveservice.cpp:276
+#: internet/googledrive/googledriveservice.cpp:274
+#: internet/googledrive/googledriveservice.cpp:280
 msgid "Do a full rescan"
 msgstr "Znovu úplně prohledat"
 
-#: internet/googledrive/googledriveservice.cpp:225
+#: internet/googledrive/googledriveservice.cpp:229
 msgid "Do a full rescan..."
 msgstr "Znovu úplně prohledat..."
 
@@ -1816,14 +1829,14 @@ msgstr "Nepřevádět žádnou hudbu"
 msgid "Do not overwrite"
 msgstr "Nepřepisovat"
 
-#: internet/googledrive/googledriveservice.cpp:271
+#: internet/googledrive/googledriveservice.cpp:275
 msgid ""
 "Doing a full rescan will lose any metadata you've saved in Clementine such "
 "as cover art, play counts and ratings.  Clementine will rescan all your "
 "music in Google Drive which may take some time."
 msgstr "Úplné znovuprohledání povede ke ztrátě popisných dat uložených vámi v Clementine, např. obrázků obalů, počtů přehrání skladeb a hodnocení. Clementine znovu prohledá všechnu vaši hudbu v Google Drive, což může chvíli trvat."
 
-#: widgets/osd.cpp:308 ../bin/src/ui_playlistsequence.h:110
+#: widgets/osd.cpp:304 ../bin/src/ui_playlistsequence.h:110
 msgid "Don't repeat"
 msgstr "Neopakovat"
 
@@ -1835,11 +1848,11 @@ msgstr "Nezobrazovat pod různými umělci"
 msgid "Don't show listened episodes"
 msgstr "Neukazovat poslechnuté díly"
 
-#: widgets/osd.cpp:287 ../bin/src/ui_playlistsequence.h:116
+#: widgets/osd.cpp:283 ../bin/src/ui_playlistsequence.h:116
 msgid "Don't shuffle"
 msgstr "Nemíchat"
 
-#: internet/magnatune/magnatunedownloaddialog.cpp:312
+#: internet/magnatune/magnatunedownloaddialog.cpp:315
 #: ui/albumcovermanager.cpp:217
 msgid "Don't stop!"
 msgstr "Nezastavovat!"
@@ -1849,15 +1862,15 @@ msgstr "Nezastavovat!"
 msgid "Donate"
 msgstr "Darovat"
 
-#: devices/deviceview.cpp:117
+#: devices/deviceview.cpp:115
 msgid "Double click to open"
 msgstr "Klepnout dvakrát pro otevření"
 
-#: ../bin/src/ui_behavioursettingspage.h:406
+#: ../bin/src/ui_behavioursettingspage.h:439
 msgid "Double clicking a song in the playlist will..."
 msgstr "Dvojité klepnutí na píseň v seznamu skladeb způsobí..."
 
-#: ../bin/src/ui_behavioursettingspage.h:392
+#: ../bin/src/ui_behavioursettingspage.h:425
 msgid "Double clicking a song will..."
 msgstr "Dvojité klepnutí na píseň..."
 
@@ -1867,7 +1880,7 @@ msgctxt ""
 msgid "Download %n episodes"
 msgstr "Stáhnout %n dílů"
 
-#: internet/magnatune/magnatunedownloaddialog.cpp:272
+#: internet/magnatune/magnatunedownloaddialog.cpp:275
 msgid "Download directory"
 msgstr "Stáhnout složku"
 
@@ -1896,7 +1909,7 @@ msgstr "Nastavení stahování"
 msgid "Download the Android app"
 msgstr "Stáhnout aplikaci pro Android"
 
-#: internet/magnatune/magnatuneservice.cpp:283
+#: internet/magnatune/magnatuneservice.cpp:282
 msgid "Download this album"
 msgstr "Stáhnout toto album"
 
@@ -1918,7 +1931,7 @@ msgstr "Stáhnout..."
 msgid "Downloading (%1%)..."
 msgstr "Stahuje se (%1%)..."
 
-#: internet/icecast/icecastservice.cpp:102
+#: internet/icecast/icecastservice.cpp:101
 msgid "Downloading Icecast directory"
 msgstr "Stahuje se adresář Icecast"
 
@@ -1926,13 +1939,9 @@ msgstr "Stahuje se adresář Icecast"
 msgid "Downloading Jamendo catalogue"
 msgstr "Stahuje se katalog Jamendo"
 
-#: internet/magnatune/magnatuneservice.cpp:162
+#: internet/magnatune/magnatuneservice.cpp:161
 msgid "Downloading Magnatune catalogue"
 msgstr "Stahuje se katalog Magnatune"
-
-#: internet/spotify/spotifyblobdownloader.cpp:61
-msgid "Downloading Spotify plugin"
-msgstr "Stahuje se přídavný modul Spotify"
 
 #: musicbrainz/tagfetcher.cpp:107
 msgid "Downloading metadata"
@@ -1950,6 +1959,10 @@ msgstr "Dropbox"
 msgid "Dubstep"
 msgstr "Dubstep"
 
+#: ../bin/src/ui_console.h:132
+msgid "Dump To Logs"
+msgstr ""
+
 #: ../bin/src/ui_episodeinfowidget.h:134 ../bin/src/ui_ripcddialog.h:308
 msgid "Duration"
 msgstr "Doba trvání"
@@ -1958,7 +1971,7 @@ msgstr "Doba trvání"
 msgid "Dynamic mode is on"
 msgstr "Je zapnut dynamický režim"
 
-#: internet/jamendo/jamendoservice.cpp:125 library/library.cpp:111
+#: internet/jamendo/jamendoservice.cpp:125 library/library.cpp:113
 msgid "Dynamic random mix"
 msgstr "Dynamický náhodný výběr"
 
@@ -1966,25 +1979,25 @@ msgstr "Dynamický náhodný výběr"
 msgid "Edit smart playlist..."
 msgstr "Upravit chytrý seznam skladeb..."
 
-#: ui/mainwindow.cpp:1854
+#: ui/mainwindow.cpp:1862
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr "Upravit značku \"%1\"..."
 
-#: ../bin/src/ui_mainwindow.h:688
+#: ../bin/src/ui_mainwindow.h:733
 msgid "Edit tag..."
 msgstr "Upravit značku..."
 
-#: ../bin/src/ui_edittagdialog.h:732
+#: ../bin/src/ui_edittagdialog.h:733
 msgid "Edit tags"
 msgstr "Upravit značky"
 
-#: ../bin/src/ui_edittagdialog.h:698
+#: ../bin/src/ui_edittagdialog.h:699
 msgid "Edit track information"
 msgstr "Upravit informace o skladbě"
 
 #: library/libraryview.cpp:427 widgets/fileviewlist.cpp:51
-#: ../bin/src/ui_mainwindow.h:685
+#: ../bin/src/ui_mainwindow.h:730
 msgid "Edit track information..."
 msgstr "Upravit informace o skladbě..."
 
@@ -2012,7 +2025,7 @@ msgstr "Povolit ekvalizér"
 msgid "Enable shortcuts only when Clementine is focused"
 msgstr "Povolit zkratky jen když je Clementine zaměřen"
 
-#: ../bin/src/ui_behavioursettingspage.h:375
+#: ../bin/src/ui_behavioursettingspage.h:408
 msgid "Enable song metadata inline edition with click"
 msgstr "Povolit upravování popisných dat písně klepnutím v řádku"
 
@@ -2022,7 +2035,7 @@ msgid ""
 "displayed in this order."
 msgstr "Povolit zdroje níže pro jejich zahrnutí ve výsledcích hledání.  Výsledky budou zobrazeny v tomto pořadí"
 
-#: core/globalshortcuts.cpp:77
+#: core/globalshortcuts.cpp:78
 msgid "Enable/disable Last.fm scrobbling"
 msgstr "Povolit/zakázat odesílání informací o přehrávání na Last.fm"
 
@@ -2076,7 +2089,7 @@ msgstr "Zde zadejte hledané výrazy"
 msgid "Enter the URL of an internet radio stream:"
 msgstr "Zadejte adresu (URL) proudu internetového rádia:"
 
-#: playlist/playlistlistcontainer.cpp:255
+#: playlist/playlistlistcontainer.cpp:261
 msgid "Enter the name of the folder"
 msgstr "Zadejte název složky"
 
@@ -2092,7 +2105,7 @@ msgstr "Celá sbírka"
 msgid "Episode information"
 msgstr "Informace o dílu"
 
-#: ../bin/src/ui_equalizer.h:162 ../bin/src/ui_mainwindow.h:705
+#: ../bin/src/ui_equalizer.h:162 ../bin/src/ui_mainwindow.h:750
 msgid "Equalizer"
 msgstr "Ekvalizér"
 
@@ -2104,9 +2117,9 @@ msgstr "Rovnocenné s --log-levels *:1"
 msgid "Equivalent to --log-levels *:3"
 msgstr "Rovnocenné s --log-levels *:3"
 
-#: internet/magnatune/magnatunedownloaddialog.cpp:246
-#: library/libraryview.cpp:672 ui/mainwindow.cpp:2146 ui/mainwindow.cpp:2425
-#: ui/mainwindow.cpp:2604
+#: internet/magnatune/magnatunedownloaddialog.cpp:249
+#: library/libraryview.cpp:671 ui/mainwindow.cpp:2154 ui/mainwindow.cpp:2423
+#: ui/mainwindow.cpp:2601
 msgid "Error"
 msgstr "Chyba"
 
@@ -2131,10 +2144,6 @@ msgstr "Chyba při mazání písní"
 msgid "Error discovering %1: %2"
 msgstr "Chyba při objevování %1: %2"
 
-#: internet/spotify/spotifyblobdownloader.cpp:265
-msgid "Error downloading Spotify plugin"
-msgstr "Chyba při stahování přídavného modulu Spotify"
-
 #: playlist/songloaderinserter.cpp:66 playlist/songloaderinserter.cpp:145
 #, qt-format
 msgid "Error loading %1"
@@ -2154,7 +2163,7 @@ msgstr "Chyba při zpracovávání %1: %2"
 msgid "Error while loading audio CD"
 msgstr "Chyba  při nahrávání zvukového CD"
 
-#: library/library.cpp:68
+#: library/library.cpp:70
 msgid "Ever played"
 msgstr "Přehrané skladby"
 
@@ -2219,11 +2228,11 @@ msgstr "Uložit stažené obaly"
 msgid "Export embedded covers"
 msgstr "Uložit vložené obaly"
 
-#: ui/albumcovermanager.cpp:801 ui/albumcovermanager.cpp:825
+#: ui/albumcovermanager.cpp:803 ui/albumcovermanager.cpp:827
 msgid "Export finished"
 msgstr "Uložení dokončeno"
 
-#: ui/albumcovermanager.cpp:810
+#: ui/albumcovermanager.cpp:812
 #, qt-format
 msgid "Exported %1 covers out of %2 (%3 skipped)"
 msgstr "Uloženo %1 obalů z %2 (%3 přeskočeno)"
@@ -2252,7 +2261,7 @@ msgstr "Slábnutí"
 msgid "Fading duration"
 msgstr "Doba slábnutí"
 
-#: ui/mainwindow.cpp:2147
+#: ui/mainwindow.cpp:2155
 msgid "Failed reading CD drive"
 msgstr "Nepodařilo se číst z CD v mechanice"
 
@@ -2262,20 +2271,41 @@ msgstr "Nepodařilo se natáhnout adresář"
 
 #: internet/podcasts/gpoddersearchpage.cpp:77
 #: internet/podcasts/gpoddertoptagsmodel.cpp:103
-#: internet/podcasts/itunessearchpage.cpp:67
-#: internet/podcasts/itunessearchpage.cpp:78
-#: internet/podcasts/itunessearchpage.cpp:85
+#: internet/podcasts/itunessearchpage.cpp:73
+#: internet/podcasts/itunessearchpage.cpp:83
+#: internet/podcasts/itunessearchpage.cpp:92
 msgid "Failed to fetch podcasts"
 msgstr "Nepodařilo se natáhnout zvukové záznamy (podcasty)"
+
+#: internet/intergalacticfm/intergalacticfmservice.cpp:133
+#, qt-format
+msgid ""
+"Failed to get channel list:\n"
+"%1"
+msgstr ""
 
 #: internet/podcasts/addpodcastbyurl.cpp:71
 #: internet/podcasts/fixedopmlpage.cpp:55
 msgid "Failed to load podcast"
 msgstr "Nepodařilo se nahrát zvukový záznam (podcast)"
 
-#: internet/podcasts/podcasturlloader.cpp:175
+#: internet/core/internetservice.cpp:158
+#, qt-format
+msgid ""
+"Failed to parse %1 response:\n"
+"%2"
+msgstr ""
+
+#: internet/podcasts/podcasturlloader.cpp:177
 msgid "Failed to parse the XML for this RSS feed"
 msgstr "Nepodařilo se zpracovat XML pro tento kanál RSS"
+
+#: internet/icecast/icecastservice.cpp:129
+#, qt-format
+msgid ""
+"Failed to update icecast directory:\n"
+"%1"
+msgstr ""
 
 #: ui/trackselectiondialog.cpp:247
 #, qt-format
@@ -2287,7 +2317,7 @@ msgstr "Nepodařilo se zapsat nové automatické značky do '%1'"
 msgid "Fast"
 msgstr "Rychlý"
 
-#: library/library.cpp:88
+#: library/library.cpp:90
 msgid "Favourite tracks"
 msgstr "Oblíbené skladby"
 
@@ -2303,11 +2333,7 @@ msgstr "Stáhnout automaticky"
 msgid "Fetch completed"
 msgstr "Stahování dokončeno"
 
-#: internet/subsonic/subsonicdynamicplaylist.cpp:88
-msgid "Fetching Playlist Items"
-msgstr "Natahují se položky seznamu skladeb"
-
-#: internet/subsonic/subsonicservice.cpp:286
+#: internet/subsonic/subsonicservice.cpp:299
 msgid "Fetching Subsonic library"
 msgstr "Natahuje se knihovna Subsonic"
 
@@ -2315,11 +2341,16 @@ msgstr "Natahuje se knihovna Subsonic"
 msgid "Fetching cover error"
 msgstr "Chyba při stahování obalu"
 
+#: internet/subsonic/subsonicdynamicplaylist.cpp:100
+#: internet/subsonic/subsonicdynamicplaylist.cpp:166
+msgid "Fetching playlist items"
+msgstr ""
+
 #: ../bin/src/ui_ripcddialog.h:319
 msgid "File Format"
 msgstr "Souborový formát"
 
-#: ui/organisedialog.cpp:83
+#: ui/organisedialog.cpp:82
 msgid "File extension"
 msgstr "Přípona souboru"
 
@@ -2327,11 +2358,11 @@ msgstr "Přípona souboru"
 msgid "File formats"
 msgstr "Formáty souborů"
 
-#: playlist/playlist.cpp:1422 ../bin/src/ui_edittagdialog.h:716
+#: playlist/playlist.cpp:1421 ../bin/src/ui_edittagdialog.h:717
 msgid "File name"
 msgstr "Název souboru"
 
-#: playlist/playlist.cpp:1424
+#: playlist/playlist.cpp:1423
 msgid "File name (without path)"
 msgstr "Název souboru bez cesty"
 
@@ -2339,13 +2370,13 @@ msgstr "Název souboru bez cesty"
 msgid "File paths"
 msgstr "Souborové cesty"
 
-#: playlist/playlist.cpp:1426 ../bin/src/ui_edittagdialog.h:710
+#: playlist/playlist.cpp:1425 ../bin/src/ui_edittagdialog.h:711
 msgid "File size"
 msgstr "Velikost souboru"
 
-#: library/savedgroupingmanager.cpp:83 playlist/playlist.cpp:1428
+#: library/savedgroupingmanager.cpp:83 playlist/playlist.cpp:1427
 #: ../bin/src/ui_groupbydialog.h:132 ../bin/src/ui_groupbydialog.h:151
-#: ../bin/src/ui_groupbydialog.h:170 ../bin/src/ui_edittagdialog.h:712
+#: ../bin/src/ui_groupbydialog.h:170 ../bin/src/ui_edittagdialog.h:713
 msgid "File type"
 msgstr "Typ souboru"
 
@@ -2353,7 +2384,7 @@ msgstr "Typ souboru"
 msgid "Filename"
 msgstr "Název souboru"
 
-#: ui/mainwindow.cpp:270
+#: ui/mainwindow.cpp:271
 msgid "Files"
 msgstr "Soubory"
 
@@ -2369,7 +2400,7 @@ msgstr "Nalézt ve sbírce písně odpovídající vámi zadaným kritériím."
 msgid "Fingerprinting song"
 msgstr "Určení písně"
 
-#: smartplaylists/wizard.cpp:83
+#: smartplaylists/wizard.cpp:82
 msgid "Finish"
 msgstr "Dokončit"
 
@@ -2377,7 +2408,7 @@ msgstr "Dokončit"
 msgid "First level"
 msgstr "První úroveň"
 
-#: widgets/nowplayingwidget.cpp:110
+#: widgets/nowplayingwidget.cpp:106
 msgid "Fit cover to width"
 msgstr "Přizpůsobit obal šířce"
 
@@ -2393,12 +2424,12 @@ msgstr "Z licenčních důvodů je podpora pro Spotify v odděleném přídavné
 msgid "Force mono encoding"
 msgstr "Vynutit jednokanálové kódování"
 
-#: devices/deviceview.cpp:208 devices/deviceview.cpp:330
-#: devices/deviceview.cpp:335
+#: devices/deviceview.cpp:205 devices/deviceview.cpp:327
+#: devices/deviceview.cpp:332
 msgid "Forget device"
 msgstr "Zapomenout zařízení"
 
-#: devices/deviceview.cpp:331
+#: devices/deviceview.cpp:328
 msgid ""
 "Forgetting a device will remove it from this list and Clementine will have "
 "to rescan all the songs again next time you connect it."
@@ -2414,7 +2445,7 @@ msgstr "Zařízení bude odstraněno z tohoto seznamu. Po opětovném připojen�
 #: ../bin/src/ui_playlistlistcontainer.h:126
 #: ../bin/src/ui_episodeinfowidget.h:131 ../bin/src/ui_podcastinfowidget.h:190
 #: ../bin/src/ui_querysearchpage.h:108 ../bin/src/ui_querysortpage.h:136
-#: ../bin/src/ui_searchpreview.h:103 ../bin/src/ui_searchtermwidget.h:276
+#: ../bin/src/ui_searchpreview.h:103 ../bin/src/ui_searchtermwidget.h:274
 #: ../bin/src/ui_wizardfinishpage.h:82
 #: ../bin/src/ui_songkickconcertwidget.h:99
 #: ../bin/src/ui_transcoderoptionsaac.h:127
@@ -2443,9 +2474,9 @@ msgstr "Počet snímků"
 msgid "Frames per buffer"
 msgstr "Snímků na vyrovnávací paměť"
 
-#: internet/subsonic/subsonicservice.cpp:106
-msgid "Frequently Played"
-msgstr "Často hráno"
+#: internet/subsonic/subsonicservice.cpp:109
+msgid "Frequently Played Albums"
+msgstr ""
 
 #: moodbar/moodbarrenderer.cpp:173
 msgid "Frozen"
@@ -2463,11 +2494,11 @@ msgstr "Plné basy + výšky"
 msgid "Full Treble"
 msgstr "Plné výšky"
 
-#: ../bin/src/ui_edittagdialog.h:729
+#: ../bin/src/ui_edittagdialog.h:730
 msgid "Ge&nre"
 msgstr "Žá&nr"
 
-#: ui/settingsdialog.cpp:135
+#: ui/settingsdialog.cpp:136
 msgid "General"
 msgstr "Obecné"
 
@@ -2475,8 +2506,8 @@ msgstr "Obecné"
 msgid "General settings"
 msgstr "Obecná nastavení"
 
-#: library/savedgroupingmanager.cpp:77 playlist/playlist.cpp:1394
-#: ui/organisedialog.cpp:78 ../bin/src/ui_groupbydialog.h:133
+#: library/savedgroupingmanager.cpp:77 playlist/playlist.cpp:1393
+#: ui/organisedialog.cpp:77 ../bin/src/ui_groupbydialog.h:133
 #: ../bin/src/ui_groupbydialog.h:152 ../bin/src/ui_groupbydialog.h:171
 #: ../bin/src/ui_ripcddialog.h:316
 msgid "Genre"
@@ -2508,11 +2539,11 @@ msgstr "Pojmenujte to:"
 msgid "Go"
 msgstr "Jít"
 
-#: ../bin/src/ui_mainwindow.h:712
+#: ../bin/src/ui_mainwindow.h:757
 msgid "Go to next playlist tab"
 msgstr "Jít na další kartu seznamu skladeb"
 
-#: ../bin/src/ui_mainwindow.h:713
+#: ../bin/src/ui_mainwindow.h:758
 msgid "Go to previous playlist tab"
 msgstr "Jít na předchozí kartu seznamu skladeb"
 
@@ -2520,13 +2551,13 @@ msgstr "Jít na předchozí kartu seznamu skladeb"
 msgid "Google Drive"
 msgstr "Google Drive"
 
-#: covers/coversearchstatisticsdialog.cpp:55 ui/albumcovermanager.cpp:467
+#: covers/coversearchstatisticsdialog.cpp:55 ui/albumcovermanager.cpp:468
 #: ../bin/src/ui_coversearchstatisticsdialog.h:75
 #, qt-format
 msgid "Got %1 covers out of %2 (%3 failed)"
 msgstr "Získáno %1 obalů z %2 (%3 nezískáno)"
 
-#: ../bin/src/ui_behavioursettingspage.h:378
+#: ../bin/src/ui_behavioursettingspage.h:411
 msgid "Grey out non existent songs in my playlists"
 msgstr "Nechat zešedivět neexistující písně v mých seznamech skladeb"
 
@@ -2534,53 +2565,53 @@ msgstr "Nechat zešedivět neexistující písně v mých seznamech skladeb"
 msgid "Group Library by..."
 msgstr "Seskupovat v hudební sbírce podle..."
 
-#: globalsearch/globalsearchview.cpp:478 library/libraryfilterwidget.cpp:100
+#: globalsearch/globalsearchview.cpp:478 library/libraryfilterwidget.cpp:84
 msgid "Group by"
 msgstr "Seskupovat podle"
 
-#: library/libraryfilterwidget.cpp:160
+#: library/libraryfilterwidget.cpp:144
 msgid "Group by Album"
 msgstr "Seskupovat podle alba"
 
-#: library/libraryfilterwidget.cpp:152
+#: library/libraryfilterwidget.cpp:136
 msgid "Group by Album artist/Album"
 msgstr "Seskupovat podle umělce alba/alba"
 
-#: library/libraryfilterwidget.cpp:145
+#: library/libraryfilterwidget.cpp:129
 msgid "Group by Artist"
 msgstr "Seskupovat podle umělce"
 
-#: library/libraryfilterwidget.cpp:148
+#: library/libraryfilterwidget.cpp:132
 msgid "Group by Artist/Album"
 msgstr "Seskupovat podle umělce/alba"
 
-#: library/libraryfilterwidget.cpp:156
+#: library/libraryfilterwidget.cpp:140
 msgid "Group by Artist/Year - Album"
 msgstr "Seskupovat podle umělce/roku - alba"
 
-#: library/libraryfilterwidget.cpp:163
+#: library/libraryfilterwidget.cpp:147
 msgid "Group by Genre/Album"
 msgstr "Seskupovat podle žánru/alba"
 
-#: library/libraryfilterwidget.cpp:167
+#: library/libraryfilterwidget.cpp:151
 msgid "Group by Genre/Artist/Album"
 msgstr "Seskupovat podle žánru/umělce/alba"
 
-#: library/savedgroupingmanager.cpp:89 playlist/playlist.cpp:1402
-#: ui/organisedialog.cpp:71 ../bin/src/ui_groupbydialog.h:141
+#: library/savedgroupingmanager.cpp:89 playlist/playlist.cpp:1401
+#: ui/organisedialog.cpp:70 ../bin/src/ui_groupbydialog.h:141
 #: ../bin/src/ui_groupbydialog.h:160 ../bin/src/ui_groupbydialog.h:179
 msgid "Grouping"
 msgstr "Seskupení"
 
-#: library/libraryfilterwidget.cpp:213
+#: library/libraryfilterwidget.cpp:197
 msgid "Grouping Name"
 msgstr "Název seskupení"
 
-#: library/libraryfilterwidget.cpp:213
+#: library/libraryfilterwidget.cpp:197
 msgid "Grouping name:"
 msgstr "Název seskupení:"
 
-#: internet/podcasts/podcasturlloader.cpp:206
+#: internet/podcasts/podcasturlloader.cpp:208
 msgid "HTML page did not contain any RSS feeds"
 msgstr "Stránka HTML neobsahuje žádný kanál RSS"
 
@@ -2613,13 +2644,13 @@ msgstr "Skrýt nástrojový pruh pro filtrování seznamu skladeb"
 msgid "High"
 msgstr "Vysoká"
 
-#: analyzers/analyzercontainer.cpp:69
-#: visualisations/visualisationcontainer.cpp:111
+#: analyzers/analyzercontainer.cpp:67
+#: visualisations/visualisationcontainer.cpp:110
 #, qt-format
 msgid "High (%1 fps)"
 msgstr "Vysoký (%1 fps)"
 
-#: visualisations/visualisationcontainer.cpp:124
+#: visualisations/visualisationcontainer.cpp:120
 msgid "High (1024x1024)"
 msgstr "Vysoké (1024 x 1024)"
 
@@ -2647,7 +2678,7 @@ msgstr "U Magnatune nemám účet"
 msgid "Icon"
 msgstr "Ikona"
 
-#: widgets/fancytabwidget.cpp:442
+#: widgets/fancytabwidget.cpp:433
 msgid "Icons on top"
 msgstr "Ikony nahoře"
 
@@ -2655,7 +2686,7 @@ msgstr "Ikony nahoře"
 msgid "Identifying song"
 msgstr "Určuje se píseň"
 
-#: ../bin/src/ui_behavioursettingspage.h:373
+#: ../bin/src/ui_behavioursettingspage.h:406
 msgid ""
 "If activated, clicking a selected song in the playlist view will let you "
 "edit the tag value directly"
@@ -2675,24 +2706,24 @@ msgstr "Pokud znáte adresu (URL) zvukového záznamu, zadejte ji níže a stisk
 msgid "Ignore \"The\" in artist names"
 msgstr "Nevšímat si 'The' ve jménech umělců"
 
-#: ../bin/src/ui_behavioursettingspage.h:423
+#: ../bin/src/ui_behavioursettingspage.h:459
 msgid "Ignore prefix word(s)"
 msgstr "Přehlížet slova (předpony)"
 
-#: ui/albumcoverchoicecontroller.cpp:44
+#: ui/albumcoverchoicecontroller.cpp:47
 msgid "Images (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm)"
 msgstr "Obrázky (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm)"
 
-#: ui/albumcoverchoicecontroller.cpp:46
+#: ui/albumcoverchoicecontroller.cpp:49
 msgid "Images (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 msgstr "Obrázky (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 
-#: core/utilities.cpp:157
+#: core/utilities.cpp:156
 #, qt-format
 msgid "In %1 days"
 msgstr "Za %1 dny(ů)"
 
-#: core/utilities.cpp:160
+#: core/utilities.cpp:159
 #, qt-format
 msgid "In %1 weeks"
 msgstr "Za %1 týdny(ů)"
@@ -2735,7 +2766,7 @@ msgstr "Zvýšit hlasitost o 4 procenta"
 msgid "Increase the volume by <value> percent"
 msgstr "Zvýšit hlasitost o <value> procent"
 
-#: core/globalshortcuts.cpp:62 wiimotedev/wiimotesettingspage.cpp:110
+#: core/globalshortcuts.cpp:63 wiimotedev/wiimotesettingspage.cpp:110
 msgid "Increase volume"
 msgstr "Zvýšit hlasitost"
 
@@ -2744,7 +2775,7 @@ msgstr "Zvýšit hlasitost"
 msgid "Indexing %1"
 msgstr "Rejstříkování %1"
 
-#: ../bin/src/ui_deviceproperties.h:372 wiimotedev/wiimotesettingspage.cpp:139
+#: wiimotedev/wiimotesettingspage.cpp:139 ../bin/src/ui_deviceproperties.h:372
 msgid "Information"
 msgstr "Informace"
 
@@ -2760,15 +2791,15 @@ msgstr "Vložit..."
 msgid "Installed"
 msgstr "Nainstalován"
 
-#: core/database.cpp:601
+#: core/database.cpp:605
 msgid "Integrity check"
 msgstr "Ověření celistvosti"
 
-#: ui/mainwindow.cpp:276
+#: ui/mainwindow.cpp:277
 msgid "Internet"
 msgstr "Internet"
 
-#: ui/settingsdialog.cpp:158
+#: ui/settingsdialog.cpp:159
 msgid "Internet providers"
 msgstr "Internetoví poskytovatelé"
 
@@ -2777,11 +2808,11 @@ msgctxt "Global search settings dialog title."
 msgid "Internet services"
 msgstr "Internetové služby"
 
-#: widgets/osd.cpp:323 ../bin/src/ui_playlistsequence.h:115
+#: widgets/osd.cpp:319 ../bin/src/ui_playlistsequence.h:115
 msgid "Intro tracks"
 msgstr "Skladby úvodu"
 
-#: internet/lastfm/lastfmservice.cpp:282
+#: internet/lastfm/lastfmservice.cpp:279
 msgid "Invalid API key"
 msgstr "Neplatný klíč API"
 
@@ -2789,27 +2820,27 @@ msgstr "Neplatný klíč API"
 msgid "Invalid URL"
 msgstr "Neplatná adresa (URL)"
 
-#: internet/lastfm/lastfmservice.cpp:272
+#: internet/lastfm/lastfmservice.cpp:269
 msgid "Invalid format"
 msgstr "Neplatný formát"
 
-#: internet/lastfm/lastfmservice.cpp:268
+#: internet/lastfm/lastfmservice.cpp:265
 msgid "Invalid method"
 msgstr "Neplatná metoda"
 
-#: internet/lastfm/lastfmservice.cpp:274
+#: internet/lastfm/lastfmservice.cpp:271
 msgid "Invalid parameters"
 msgstr "Neplatné parametry"
 
-#: internet/lastfm/lastfmservice.cpp:276
+#: internet/lastfm/lastfmservice.cpp:273
 msgid "Invalid resource specified"
 msgstr "Zadán neplatný zdroj"
 
-#: internet/lastfm/lastfmservice.cpp:266
+#: internet/lastfm/lastfmservice.cpp:263
 msgid "Invalid service"
 msgstr "Neplatná služba"
 
-#: internet/lastfm/lastfmservice.cpp:280
+#: internet/lastfm/lastfmservice.cpp:277
 msgid "Invalid session key"
 msgstr "Neplatný klíč sezení"
 
@@ -2841,11 +2872,11 @@ msgstr "Nejlepší skladby týdne na Jamendu"
 msgid "Jamendo database"
 msgstr "Databáze Jamendo"
 
-#: ../bin/src/ui_behavioursettingspage.h:389
+#: ../bin/src/ui_behavioursettingspage.h:422
 msgid "Jump to previous song right away"
 msgstr "Skočit ihned na předchozí píseň"
 
-#: ../bin/src/ui_mainwindow.h:708
+#: ../bin/src/ui_mainwindow.h:753
 msgid "Jump to the currently playing track"
 msgstr "Skočit na nyní přehrávanou skladbu"
 
@@ -2854,14 +2885,14 @@ msgstr "Skočit na nyní přehrávanou skladbu"
 msgid "Keep buttons for %1 second..."
 msgstr "Držet tlačítka po %1 sekundy..."
 
-#: ../bin/src/ui_wiimoteshortcutgrabber.h:123
 #: wiimotedev/wiimoteshortcutgrabber.cpp:75
 #: wiimotedev/wiimoteshortcutgrabber.cpp:117
+#: ../bin/src/ui_wiimoteshortcutgrabber.h:123
 #, qt-format
 msgid "Keep buttons for %1 seconds..."
 msgstr "Držet tlačítka po %1 sekund..."
 
-#: ../bin/src/ui_behavioursettingspage.h:360
+#: ../bin/src/ui_behavioursettingspage.h:393
 msgid "Keep running in the background when the window is closed"
 msgstr "Při zavření okna nechat běžet na pozadí"
 
@@ -2869,7 +2900,7 @@ msgstr "Při zavření okna nechat běžet na pozadí"
 msgid "Keep the original files"
 msgstr "Zachovat původní soubory"
 
-#: ../bin/src/ui_mainwindow.h:700
+#: ../bin/src/ui_mainwindow.h:745
 msgctxt "Label for buton to enable/disable kittens in the now playing widget"
 msgid "Kittens"
 msgstr "Koťátka"
@@ -2878,7 +2909,7 @@ msgstr "Koťátka"
 msgid "Kuduro"
 msgstr "Kuduro"
 
-#: ../bin/src/ui_behavioursettingspage.h:362
+#: ../bin/src/ui_behavioursettingspage.h:395
 msgid "Language"
 msgstr "Jazyk"
 
@@ -2890,27 +2921,27 @@ msgstr "Přenosný počítač/Sluchátka"
 msgid "Large Hall"
 msgstr "Velký sál"
 
-#: widgets/nowplayingwidget.cpp:100
+#: widgets/nowplayingwidget.cpp:98
 msgid "Large album cover"
 msgstr "Velký obal alba"
 
-#: widgets/nowplayingwidget.cpp:103
+#: widgets/nowplayingwidget.cpp:100
 msgid "Large album cover (details below)"
 msgstr "Velký obal alba (podrobnosti níže)"
 
-#: widgets/nowplayingwidget.cpp:105
+#: widgets/nowplayingwidget.cpp:101
 msgid "Large album cover (no details)"
 msgstr "Velký obal alba (žádné podrobnosti)"
 
-#: widgets/fancytabwidget.cpp:438
+#: widgets/fancytabwidget.cpp:429
 msgid "Large sidebar"
 msgstr "Velký postranní panel"
 
-#: library/library.cpp:80
+#: library/library.cpp:82
 msgid "Last played"
 msgstr "Naposledy hrané"
 
-#: playlist/playlist.cpp:1411 ../bin/src/ui_edittagdialog.h:707
+#: playlist/playlist.cpp:1410 ../bin/src/ui_edittagdialog.h:708
 msgctxt "A playlist's tag."
 msgid "Last played"
 msgstr "Naposledy hráno"
@@ -2919,11 +2950,11 @@ msgstr "Naposledy hráno"
 msgid "Last.fm"
 msgstr "Last.fm"
 
-#: internet/lastfm/lastfmservice.cpp:180
+#: internet/lastfm/lastfmservice.cpp:177
 msgid "Last.fm Authentication"
 msgstr "Ověření u Last.fm"
 
-#: internet/lastfm/lastfmservice.cpp:289
+#: internet/lastfm/lastfmservice.cpp:286
 msgid "Last.fm is currently busy, please try again in a few minutes"
 msgstr "Last.fm je nyní zaneprázdněno, prosím, zkuste to za pár minut znovu"
 
@@ -2939,7 +2970,7 @@ msgstr "Značky Last.fm"
 msgid "Last.fm wiki"
 msgstr "Wiki pro Last.fm"
 
-#: library/library.cpp:102
+#: library/library.cpp:104
 msgid "Least favourite tracks"
 msgstr "Nejméně oblíbené skladby"
 
@@ -2947,12 +2978,12 @@ msgstr "Nejméně oblíbené skladby"
 msgid "Left"
 msgstr "Vlevo"
 
-#: playlist/playlist.cpp:1384 ui/organisedialog.cpp:80
-#: ui/qtsystemtrayicon.cpp:254 ../bin/src/ui_edittagdialog.h:702
+#: playlist/playlist.cpp:1383 ui/organisedialog.cpp:79
+#: ui/qtsystemtrayicon.cpp:254 ../bin/src/ui_edittagdialog.h:703
 msgid "Length"
 msgstr "Délka"
 
-#: ui/mainwindow.cpp:255 ui/mainwindow.cpp:267
+#: ui/mainwindow.cpp:253 ui/mainwindow.cpp:268
 #: ../bin/src/ui_seafilesettingspage.h:177
 msgid "Library"
 msgstr "Sbírka"
@@ -2961,7 +2992,7 @@ msgstr "Sbírka"
 msgid "Library advanced grouping"
 msgstr "Pokročilé seskupování sbírky"
 
-#: ui/mainwindow.cpp:2724
+#: ui/mainwindow.cpp:2721
 msgid "Library rescan notice"
 msgstr "Zpráva o prohledání sbírky"
 
@@ -2985,23 +3016,23 @@ msgstr "Načíst"
 msgid "Load cover from URL"
 msgstr "Nahrát obal z adresy (URL)"
 
-#: ui/albumcoverchoicecontroller.cpp:67
+#: ui/albumcoverchoicecontroller.cpp:70
 msgid "Load cover from URL..."
 msgstr "Nahrát obal z adresy (URL)..."
 
-#: ui/albumcoverchoicecontroller.cpp:107
+#: ui/albumcoverchoicecontroller.cpp:110
 msgid "Load cover from disk"
 msgstr "Nahrát obal z disku"
 
-#: ui/albumcoverchoicecontroller.cpp:62
+#: ui/albumcoverchoicecontroller.cpp:65
 msgid "Load cover from disk..."
 msgstr "Nahrát obal na disku..."
 
-#: playlist/playlistcontainer.cpp:300
+#: playlist/playlistcontainer.cpp:314
 msgid "Load playlist"
 msgstr "Nahrát seznam skladeb"
 
-#: ../bin/src/ui_mainwindow.h:711
+#: ../bin/src/ui_mainwindow.h:756
 msgid "Load playlist..."
 msgstr "Nahrát seznam skladeb..."
 
@@ -3017,7 +3048,7 @@ msgstr "Nahrává se databáze iPod"
 msgid "Loading smart playlist"
 msgstr "Nahrává se chytrý seznam skladeb"
 
-#: library/librarymodel.cpp:170
+#: library/librarymodel.cpp:173
 msgid "Loading songs"
 msgstr "Nahrávají se písně"
 
@@ -3035,8 +3066,8 @@ msgstr "Nahrávají se skladby"
 msgid "Loading tracks info"
 msgstr "Nahrávají se informace o skladbě"
 
-#: library/librarymodel.cpp:165
-#: internet/podcasts/podcastdiscoverymodel.cpp:104 widgets/prettyimage.cpp:168
+#: library/librarymodel.cpp:167
+#: internet/podcasts/podcastdiscoverymodel.cpp:104 widgets/prettyimage.cpp:169
 #: widgets/widgetfadehelper.cpp:96 ../bin/src/ui_addpodcastdialog.h:179
 #: ../bin/src/ui_searchpreview.h:105 ../bin/src/ui_organisedialog.h:261
 msgid "Loading..."
@@ -3050,15 +3081,15 @@ msgstr "Nahraje soubory/adresy (URL), nahradí současný seznam skladeb"
 #: ../bin/src/ui_magnatunesettingspage.h:163
 #: ../bin/src/ui_subsonicsettingspage.h:137
 #: ../bin/src/ui_lastfmsettingspage.h:132
-#: ../bin/src/ui_spotifysettingspage.h:210
 #: ../bin/src/ui_googledrivesettingspage.h:101
 #: ../bin/src/ui_dropboxsettingspage.h:101
 #: ../bin/src/ui_skydrivesettingspage.h:101
 #: ../bin/src/ui_boxsettingspage.h:101 ../bin/src/ui_seafilesettingspage.h:172
+#: ../bin/src/ui_spotifysettingspage.h:210
 msgid "Login"
 msgstr "Přihlášení"
 
-#: internet/podcasts/podcastsettingspage.cpp:130
+#: internet/podcasts/podcastsettingspage.cpp:132
 msgid "Login failed"
 msgstr "Přihlášení se nezdařilo"
 
@@ -3066,21 +3097,21 @@ msgstr "Přihlášení se nezdařilo"
 msgid "Long term prediction profile (LTP)"
 msgstr "Dlouhodobý předpověďní profil"
 
-#: ../bin/src/ui_mainwindow.h:680
+#: ../bin/src/ui_mainwindow.h:725
 msgid "Love"
-msgstr "Oblíbit"
+msgstr "Líbí se"
 
-#: core/globalshortcuts.cpp:79
+#: core/globalshortcuts.cpp:80
 msgid "Love (Last.fm scrobbling)"
 msgstr "Líbí se mi (odesílání informací o přehrávání na Last.fm)"
 
-#: analyzers/analyzercontainer.cpp:67
-#: visualisations/visualisationcontainer.cpp:107
+#: analyzers/analyzercontainer.cpp:65
+#: visualisations/visualisationcontainer.cpp:106
 #, qt-format
 msgid "Low (%1 fps)"
 msgstr "Nízký (%1 fps)"
 
-#: visualisations/visualisationcontainer.cpp:121
+#: visualisations/visualisationcontainer.cpp:118
 msgid "Low (256x256)"
 msgstr "Nízké (256x256)"
 
@@ -3088,11 +3119,11 @@ msgstr "Nízké (256x256)"
 msgid "Low complexity profile (LC)"
 msgstr "Nízkosložitostní profil"
 
-#: ui/organisedialog.cpp:72 ../bin/src/ui_songinfosettingspage.h:158
+#: ui/organisedialog.cpp:71 ../bin/src/ui_songinfosettingspage.h:158
 msgid "Lyrics"
 msgstr "Texty písní"
 
-#: songinfo/ultimatelyricsprovider.cpp:154
+#: songinfo/ultimatelyricsprovider.cpp:155
 #, qt-format
 msgid "Lyrics from %1"
 msgstr "Texty písní z %1"
@@ -3147,7 +3178,7 @@ msgstr "Hlavní profil"
 msgid "Make it so!"
 msgstr "Proveďte!"
 
-#: ../bin/src/ui_mainwindow.h:699
+#: ../bin/src/ui_mainwindow.h:744
 msgctxt "Label for button to enable/disable Enterprise background sound."
 msgid "Make it so!"
 msgstr "Proveďte!"
@@ -3156,7 +3187,7 @@ msgstr "Proveďte!"
 msgid "Make playlist available offline"
 msgstr "Zajistit, že seznam skladeb bude dostupný, i když počítač nebude připojen k internetu"
 
-#: internet/lastfm/lastfmservice.cpp:301
+#: internet/lastfm/lastfmservice.cpp:298
 msgid "Malformed response"
 msgstr "Poškozená odpověď"
 
@@ -3197,17 +3228,21 @@ msgstr "Porovnat jeden nebo více hledaných výrazů (OR)"
 msgid "Maximum bitrate"
 msgstr "Nejvyšší datový tok"
 
+#: ../bin/src/ui_behavioursettingspage.h:449
+msgid "Maximum number of child processes for tag handling (requires restart)"
+msgstr ""
+
 #: ripper/ripcddialog.cpp:155
 msgid "Media has changed. Reloading"
 msgstr "Médium se změnilo. Načítá se znovu."
 
-#: analyzers/analyzercontainer.cpp:68
-#: visualisations/visualisationcontainer.cpp:109
+#: analyzers/analyzercontainer.cpp:66
+#: visualisations/visualisationcontainer.cpp:108
 #, qt-format
 msgid "Medium (%1 fps)"
 msgstr "Střední (%1 fps)"
 
-#: visualisations/visualisationcontainer.cpp:122
+#: visualisations/visualisationcontainer.cpp:119
 msgid "Medium (512x512)"
 msgstr "Střední (512x512)"
 
@@ -3251,7 +3286,7 @@ msgstr "Jednokanálové přehrávání"
 msgid "Months"
 msgstr "Měsíce"
 
-#: playlist/playlist.cpp:1439
+#: playlist/playlist.cpp:1438
 msgid "Mood"
 msgstr "Nálada"
 
@@ -3264,11 +3299,11 @@ msgstr "Styl náladového proužku"
 msgid "Moodbars"
 msgstr "Náladové proužky"
 
-#: library/library.cpp:84
+#: library/library.cpp:86
 msgid "Most played"
 msgstr "Nejvíce hráno"
 
-#: devices/giolister.cpp:163
+#: devices/giolister.cpp:173
 msgid "Mount point"
 msgstr "Přípojný bod"
 
@@ -3277,11 +3312,11 @@ msgid "Mount points"
 msgstr "Přípojné body"
 
 #: ../bin/src/ui_globalsearchsettingspage.h:145
-#: ../bin/src/ui_queuemanager.h:143 ../bin/src/ui_songinfosettingspage.h:161
+#: ../bin/src/ui_queuemanager.h:145 ../bin/src/ui_songinfosettingspage.h:161
 msgid "Move down"
 msgstr "Posunout dolů"
 
-#: ui/mainwindow.cpp:716 widgets/fileviewlist.cpp:42
+#: ui/mainwindow.cpp:719 widgets/fileviewlist.cpp:42
 msgid "Move to library..."
 msgstr "Přesunout do sbírky..."
 
@@ -3290,7 +3325,7 @@ msgstr "Přesunout do sbírky..."
 msgid "Move up"
 msgstr "Posunout nahoru"
 
-#: transcoder/transcodedialog.cpp:227 ui/mainwindow.cpp:2091
+#: transcoder/transcodedialog.cpp:227 ui/mainwindow.cpp:2099
 msgid "Music"
 msgstr "Hudba"
 
@@ -3298,8 +3333,8 @@ msgstr "Hudba"
 msgid "Music Library"
 msgstr "Hudební sbírka"
 
-#: core/globalshortcuts.cpp:64 ../bin/src/ui_mainwindow.h:718
-#: wiimotedev/wiimotesettingspage.cpp:113
+#: core/globalshortcuts.cpp:65 wiimotedev/wiimotesettingspage.cpp:113
+#: ../bin/src/ui_mainwindow.h:763
 msgid "Mute"
 msgstr "Ztlumit"
 
@@ -3329,26 +3364,26 @@ msgstr "Síťová proxy"
 msgid "Network Remote"
 msgstr "Síťové vzdálené ovládání"
 
-#: playlist/playlistdelegates.cpp:295 ui/edittagdialog.cpp:531
+#: playlist/playlistdelegates.cpp:295 ui/edittagdialog.cpp:530
 msgid "Never"
 msgstr "Nikdy"
 
-#: library/library.cpp:74
+#: library/library.cpp:76
 msgid "Never played"
 msgstr "Nikdy nehráno"
 
-#: ../bin/src/ui_behavioursettingspage.h:382
-#: ../bin/src/ui_behavioursettingspage.h:402
+#: ../bin/src/ui_behavioursettingspage.h:415
+#: ../bin/src/ui_behavioursettingspage.h:435
 msgid "Never start playing"
 msgstr "Nikdy nezačít přehrávání"
 
-#: playlist/playlistlistcontainer.cpp:151
-#: playlist/playlistlistcontainer.cpp:254
+#: playlist/playlistlistcontainer.cpp:157
+#: playlist/playlistlistcontainer.cpp:260
 #: ../bin/src/ui_playlistlistcontainer.h:129
 msgid "New folder"
 msgstr "Nová složka"
 
-#: ui/mainwindow.cpp:1908 ../bin/src/ui_mainwindow.h:709
+#: ui/mainwindow.cpp:1916 ../bin/src/ui_mainwindow.h:754
 msgid "New playlist"
 msgstr "Nový seznam skladeb"
 
@@ -3364,11 +3399,11 @@ msgstr "Nové písně"
 msgid "New tracks will be added automatically."
 msgstr "Nové písně budou přidány automaticky."
 
-#: internet/subsonic/subsonicservice.cpp:100
-msgid "Newest"
-msgstr "Nejnovější"
+#: internet/subsonic/subsonicservice.cpp:101
+msgid "Newest Albums"
+msgstr ""
 
-#: library/library.cpp:92
+#: library/library.cpp:94
 msgid "Newest tracks"
 msgstr "Nejnovější skladby"
 
@@ -3376,16 +3411,16 @@ msgstr "Nejnovější skladby"
 msgid "Next"
 msgstr "Další"
 
-#: core/globalshortcuts.cpp:58 ../bin/src/ui_mainwindow.h:677
-#: wiimotedev/wiimotesettingspage.cpp:104
+#: core/globalshortcuts.cpp:59 wiimotedev/wiimotesettingspage.cpp:104
+#: ../bin/src/ui_mainwindow.h:722
 msgid "Next track"
 msgstr "Další skladba"
 
-#: core/utilities.cpp:158
+#: core/utilities.cpp:157
 msgid "Next week"
 msgstr "Příští týden"
 
-#: analyzers/analyzercontainer.cpp:86
+#: analyzers/analyzercontainer.cpp:82
 msgid "No analyzer"
 msgstr "Žádný analyzátor"
 
@@ -3393,7 +3428,7 @@ msgstr "Žádný analyzátor"
 msgid "No background image"
 msgstr "Žádný obrázek na pozadí"
 
-#: ui/albumcovermanager.cpp:802
+#: ui/albumcovermanager.cpp:804
 msgid "No covers to export."
 msgstr "Žádné obaly k uložení"
 
@@ -3401,7 +3436,7 @@ msgstr "Žádné obaly k uložení"
 msgid "No long blocks"
 msgstr "Žádné dlouhé bloky"
 
-#: playlist/playlistcontainer.cpp:385
+#: playlist/playlistcontainer.cpp:407
 msgid ""
 "No matches found.  Clear the search box to show the whole playlist again."
 msgstr "Nebyly nalezeny žádné shody. Smažte obsah vyhledávacího pole, aby se znovu zobrazil celý seznam skladeb."
@@ -3415,7 +3450,7 @@ msgstr "Žádné krátké bloky"
 msgid "None"
 msgstr "Žádná"
 
-#: library/libraryview.cpp:673 ui/mainwindow.cpp:2426 ui/mainwindow.cpp:2605
+#: library/libraryview.cpp:672 ui/mainwindow.cpp:2424 ui/mainwindow.cpp:2602
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Žádná z vybraných písní nebyla vhodná ke zkopírování do zařízení"
 
@@ -3427,7 +3462,7 @@ msgstr "Normální"
 msgid "Normal block type"
 msgstr "Běžný typ bloku"
 
-#: ../bin/src/ui_behavioursettingspage.h:428
+#: ../bin/src/ui_behavioursettingspage.h:464
 msgid "Normal duration (at least 4 minutes or half the track length)"
 msgstr "Běžná doba trvání (alespoň 4 minuty nebo polovina délky skladby)"
 
@@ -3435,23 +3470,23 @@ msgstr "Běžná doba trvání (alespoň 4 minuty nebo polovina délky skladby)"
 msgid "Not available while using a dynamic playlist"
 msgstr "Není dostupné během používání dynamického seznamu skladeb"
 
-#: devices/deviceview.cpp:109
+#: devices/deviceview.cpp:107
 msgid "Not connected"
 msgstr "Nepřipojeno"
 
-#: internet/lastfm/lastfmservice.cpp:292
+#: internet/lastfm/lastfmservice.cpp:289
 msgid "Not enough content"
 msgstr "Nedostatek obsahu"
 
-#: internet/lastfm/lastfmservice.cpp:296
+#: internet/lastfm/lastfmservice.cpp:293
 msgid "Not enough fans"
 msgstr "Nedostatek nadšených obdivovatelů"
 
-#: internet/lastfm/lastfmservice.cpp:294
+#: internet/lastfm/lastfmservice.cpp:291
 msgid "Not enough members"
 msgstr "Nedostatek členů"
 
-#: internet/lastfm/lastfmservice.cpp:298
+#: internet/lastfm/lastfmservice.cpp:295
 msgid "Not enough neighbors"
 msgstr "Nedostatek sousedů"
 
@@ -3464,7 +3499,7 @@ msgstr "Nenainstalován"
 msgid "Not logged in"
 msgstr "Nepřihlášen"
 
-#: devices/deviceview.cpp:113
+#: devices/deviceview.cpp:111
 msgid "Not mounted - double click to mount"
 msgstr "Nepřipojeno - dvojitým klepnutím připojíte"
 
@@ -3483,6 +3518,10 @@ msgstr "Právě se přehrává"
 #: ../bin/src/ui_podcastsettingspage.h:276
 msgid "Number of episodes to show"
 msgstr "Čísla dílů k ukázání"
+
+#: ../bin/src/ui_behavioursettingspage.h:450
+msgid "Number of processes:"
+msgstr ""
 
 #: ui/notificationssettingspage.cpp:38
 msgid "OSD Preview"
@@ -3543,24 +3582,24 @@ msgid "Opacity"
 msgstr "Neprůhlednost"
 
 #: internet/digitally/digitallyimportedservicebase.cpp:177
-#: internet/icecast/icecastservice.cpp:298
+#: internet/icecast/icecastservice.cpp:305
 #: internet/jamendo/jamendoservice.cpp:427
-#: internet/magnatune/magnatuneservice.cpp:287
+#: internet/magnatune/magnatuneservice.cpp:286
 #: internet/somafm/somafmservice.cpp:102
 #: internet/intergalacticfm/intergalacticfmservice.cpp:102
 #, qt-format
 msgid "Open %1 in browser"
 msgstr "Otevřít %1 v prohlížeči"
 
-#: ../bin/src/ui_mainwindow.h:695
+#: ../bin/src/ui_mainwindow.h:740
 msgid "Open &audio CD..."
 msgstr "Otevřít &zvukové CD..."
 
-#: internet/podcasts/addpodcastdialog.cpp:243
+#: internet/podcasts/addpodcastdialog.cpp:249
 msgid "Open OPML file"
 msgstr "Otevřít soubor OPML"
 
-#: internet/podcasts/addpodcastdialog.cpp:84
+#: internet/podcasts/addpodcastdialog.cpp:87
 msgid "Open OPML file..."
 msgstr "Otevřít soubor OPML..."
 
@@ -3572,35 +3611,35 @@ msgstr "Otevřít adresář a zavést hudbu v něm"
 msgid "Open device"
 msgstr "Otevřít zařízení"
 
-#: ../bin/src/ui_mainwindow.h:694
+#: ../bin/src/ui_mainwindow.h:739
 msgid "Open file..."
 msgstr "Otevřít soubor"
 
-#: internet/googledrive/googledriveservice.cpp:217
+#: internet/googledrive/googledriveservice.cpp:221
 msgid "Open in Google Drive"
 msgstr "Otevřít v Google Drive"
 
-#: devices/deviceview.cpp:224 globalsearch/globalsearchview.cpp:461
-#: internet/core/internetservice.cpp:62 library/libraryview.cpp:389
+#: devices/deviceview.cpp:221 globalsearch/globalsearchview.cpp:461
+#: internet/core/internetservice.cpp:65 library/libraryview.cpp:389
 #: widgets/fileviewlist.cpp:36
 msgid "Open in new playlist"
 msgstr "Otevřít v novém seznamu skladeb"
 
-#: ../bin/src/ui_behavioursettingspage.h:397
+#: ../bin/src/ui_behavioursettingspage.h:430
 msgctxt "Refers to behavior settings in Clementine settings page."
 msgid "Open in new playlist"
 msgstr "Otevřít v novém seznamu skladeb"
 
-#: songinfo/artistbiography.cpp:94 songinfo/artistbiography.cpp:261
+#: songinfo/artistbiography.cpp:100 songinfo/artistbiography.cpp:273
 msgid "Open in your browser"
 msgstr "Otevřít v prohlížeči"
 
-#: ../bin/src/ui_globalshortcutssettingspage.h:168
-#: ../bin/src/ui_globalshortcutssettingspage.h:170
+#: ../bin/src/ui_globalshortcutssettingspage.h:180
+#: ../bin/src/ui_globalshortcutssettingspage.h:182
 msgid "Open..."
 msgstr "Otevřít..."
 
-#: internet/lastfm/lastfmservice.cpp:278
+#: internet/lastfm/lastfmservice.cpp:275
 msgid "Operation failed"
 msgstr "Operace se nezdařila"
 
@@ -3626,7 +3665,7 @@ msgstr "Opus"
 msgid "Organise Files"
 msgstr "Uspořádat soubory"
 
-#: library/libraryview.cpp:416 ui/mainwindow.cpp:719
+#: library/libraryview.cpp:416 ui/mainwindow.cpp:722
 msgid "Organise files..."
 msgstr "Uspořádat soubory..."
 
@@ -3638,8 +3677,8 @@ msgstr "Uspořádávají se soubory"
 msgid "Original tags"
 msgstr "Původní značky"
 
-#: library/savedgroupingmanager.cpp:101 playlist/playlist.cpp:1392
-#: ui/organisedialog.cpp:77 ../bin/src/ui_groupbydialog.h:135
+#: library/savedgroupingmanager.cpp:101 playlist/playlist.cpp:1391
+#: ui/organisedialog.cpp:76 ../bin/src/ui_groupbydialog.h:135
 #: ../bin/src/ui_groupbydialog.h:154 ../bin/src/ui_groupbydialog.h:173
 msgid "Original year"
 msgstr "Původní rok"
@@ -3649,7 +3688,7 @@ msgstr "Původní rok"
 msgid "Original year - Album"
 msgstr "Původní rok - Album"
 
-#: library/library.cpp:118
+#: library/library.cpp:120
 msgid "Original year tag support"
 msgstr "Podpora pro značku Původní rok"
 
@@ -3705,12 +3744,12 @@ msgstr "Oslava"
 #: ../bin/src/ui_subsonicsettingspage.h:134
 #: ../bin/src/ui_podcastsettingspage.h:281
 #: ../bin/src/ui_networkproxysettingspage.h:168
-#: ../bin/src/ui_spotifysettingspage.h:209
 #: ../bin/src/ui_seafilesettingspage.h:169
+#: ../bin/src/ui_spotifysettingspage.h:209
 msgid "Password"
 msgstr "Heslo"
 
-#: core/globalshortcuts.cpp:51 ui/mainwindow.cpp:1175 ui/mainwindow.cpp:1704
+#: core/globalshortcuts.cpp:52 ui/mainwindow.cpp:1162 ui/mainwindow.cpp:1707
 #: ui/qtsystemtrayicon.cpp:189 wiimotedev/wiimotesettingspage.cpp:114
 msgid "Pause"
 msgstr "Pozastavit"
@@ -3723,10 +3762,10 @@ msgstr "Pozastavit přehrávání"
 msgid "Paused"
 msgstr "Pozastaveno"
 
-#: library/savedgroupingmanager.cpp:86 playlist/playlist.cpp:1400
-#: ui/organisedialog.cpp:70 ../bin/src/ui_groupbydialog.h:140
+#: library/savedgroupingmanager.cpp:86 playlist/playlist.cpp:1399
+#: ui/organisedialog.cpp:69 ../bin/src/ui_groupbydialog.h:140
 #: ../bin/src/ui_groupbydialog.h:159 ../bin/src/ui_groupbydialog.h:178
-#: ../bin/src/ui_edittagdialog.h:727
+#: ../bin/src/ui_edittagdialog.h:728
 msgid "Performer"
 msgstr "Účinkující"
 
@@ -3734,18 +3773,18 @@ msgstr "Účinkující"
 msgid "Pixel"
 msgstr "Pixel"
 
-#: widgets/fancytabwidget.cpp:440
+#: widgets/fancytabwidget.cpp:431
 msgid "Plain sidebar"
 msgstr "Prostý postranní panel"
 
-#: core/globalshortcuts.cpp:50 ui/mainwindow.cpp:680 ui/mainwindow.cpp:1139
-#: ui/mainwindow.cpp:1160 ui/mainwindow.cpp:1708 ui/qtsystemtrayicon.cpp:177
-#: ui/qtsystemtrayicon.cpp:203 ../bin/src/ui_mainwindow.h:675
-#: wiimotedev/wiimotesettingspage.cpp:107
+#: core/globalshortcuts.cpp:51 ui/mainwindow.cpp:683 ui/mainwindow.cpp:1126
+#: ui/mainwindow.cpp:1147 ui/mainwindow.cpp:1711 ui/qtsystemtrayicon.cpp:177
+#: ui/qtsystemtrayicon.cpp:203 wiimotedev/wiimotesettingspage.cpp:107
+#: ../bin/src/ui_mainwindow.h:720
 msgid "Play"
 msgstr "Přehrát"
 
-#: playlist/playlist.cpp:1407 ../bin/src/ui_edittagdialog.h:703
+#: playlist/playlist.cpp:1406 ../bin/src/ui_edittagdialog.h:704
 msgid "Play count"
 msgstr "Počet přehrání"
 
@@ -3753,16 +3792,16 @@ msgstr "Počet přehrání"
 msgid "Play if stopped, pause if playing"
 msgstr "Přehrát, pokud je zastaveno, pozastavit, pokud je přehráváno"
 
-#: ../bin/src/ui_behavioursettingspage.h:383
-#: ../bin/src/ui_behavioursettingspage.h:403
+#: ../bin/src/ui_behavioursettingspage.h:416
+#: ../bin/src/ui_behavioursettingspage.h:436
 msgid "Play if there is nothing already playing"
 msgstr "Hrát, pokud se již něco nepřehrává"
 
-#: library/libraryview.cpp:396 ui/mainwindow.cpp:1815
+#: library/libraryview.cpp:396 ui/mainwindow.cpp:1823
 msgid "Play next"
 msgstr "Přehrát další"
 
-#: ui/mainwindow.cpp:1813
+#: ui/mainwindow.cpp:1821
 msgid "Play selected tracks next"
 msgstr "Přehrát vybrané skladby jako další"
 
@@ -3770,7 +3809,7 @@ msgstr "Přehrát vybrané skladby jako další"
 msgid "Play the <n>th track in the playlist"
 msgstr "Přehrát <n>. skladbu v seznamu se skladbami"
 
-#: core/globalshortcuts.cpp:52 wiimotedev/wiimotesettingspage.cpp:116
+#: core/globalshortcuts.cpp:53 wiimotedev/wiimotesettingspage.cpp:116
 msgid "Play/Pause"
 msgstr "Přehrát/Pozastavit"
 
@@ -3782,7 +3821,7 @@ msgstr "Přehrávání"
 msgid "Player options"
 msgstr "Nastavení přehrávače"
 
-#: playlist/playlistcontainer.cpp:296 playlist/playlistlistcontainer.cpp:321
+#: playlist/playlistcontainer.cpp:310 playlist/playlistlistcontainer.cpp:327
 #: playlist/playlistmanager.cpp:87 playlist/playlistmanager.cpp:156
 #: playlist/playlistmanager.cpp:525 playlist/playlisttabbar.cpp:366
 msgid "Playlist"
@@ -3797,11 +3836,11 @@ msgstr "Seznam skladeb dokončen"
 msgid "Playlist options"
 msgstr "Nastavení seznamu skladeb"
 
-#: smartplaylists/wizard.cpp:72
+#: smartplaylists/wizard.cpp:71
 msgid "Playlist type"
 msgstr "Typ seznamu skladeb"
 
-#: ui/mainwindow.cpp:273
+#: ui/mainwindow.cpp:274
 msgid "Playlists"
 msgstr "Seznamy"
 
@@ -3809,7 +3848,7 @@ msgstr "Seznamy"
 msgid "Please close your browser and return to Clementine."
 msgstr "Zavřete, prosím, svůj prohlížeč a vraťte se do Clementine."
 
-#: internet/lastfm/lastfmservice.cpp:180
+#: internet/lastfm/lastfmservice.cpp:177
 #, qt-format
 msgid "Please open this URL in your browser: <a href=\"%1\">%1</a>"
 msgstr "Otevřete, prosím, tuto adresu (URL) ve svém prohlížeči: <a href=\"%1\">%1</a>"
@@ -3861,7 +3900,7 @@ msgstr "Nastavení"
 msgid "Preferences"
 msgstr "Nastavení"
 
-#: ../bin/src/ui_mainwindow.h:689
+#: ../bin/src/ui_mainwindow.h:734
 msgid "Preferences..."
 msgstr "Nastavení..."
 
@@ -3902,7 +3941,7 @@ msgstr "Stiskněte klávesu"
 msgid "Press a key combination to use for %1..."
 msgstr "Stiskněte klávesovou zkratku, která se použije pro %1..."
 
-#: ../bin/src/ui_behavioursettingspage.h:386
+#: ../bin/src/ui_behavioursettingspage.h:419
 msgid "Pressing \"Previous\" in player will..."
 msgstr "Po stisknutí Předchozí v přehrávači nastane..."
 
@@ -3920,8 +3959,8 @@ msgstr "Náhled"
 msgid "Previous"
 msgstr "Předchozí"
 
-#: core/globalshortcuts.cpp:60 ../bin/src/ui_mainwindow.h:674
-#: wiimotedev/wiimotesettingspage.cpp:106
+#: core/globalshortcuts.cpp:61 wiimotedev/wiimotesettingspage.cpp:106
+#: ../bin/src/ui_mainwindow.h:719
 msgid "Previous track"
 msgstr "Předchozí skladba"
 
@@ -3958,6 +3997,10 @@ msgstr "Stisknout tlačítko Wiiremote"
 msgid "Put songs in a random order"
 msgstr "Seřadit skladby náhodně"
 
+#: ../bin/src/ui_console.h:134
+msgid "Qt"
+msgstr ""
+
 #: ../bin/src/ui_transcoderoptionsflac.h:80
 #: ../bin/src/ui_transcoderoptionsmp3.h:191
 #: ../bin/src/ui_transcoderoptionsspeex.h:216
@@ -3966,7 +4009,7 @@ msgctxt "Sound quality"
 msgid "Quality"
 msgstr "Kvalita"
 
-#: visualisations/visualisationcontainer.cpp:118
+#: visualisations/visualisationcontainer.cpp:116
 msgctxt "Visualisation quality"
 msgid "Quality"
 msgstr "Kvalita"
@@ -3975,16 +4018,16 @@ msgstr "Kvalita"
 msgid "Querying device..."
 msgstr "Dotazování se zařízení..."
 
-#: ../bin/src/ui_queuemanager.h:137 ../bin/src/ui_mainwindow.h:716
+#: ../bin/src/ui_queuemanager.h:137 ../bin/src/ui_mainwindow.h:761
 msgid "Queue Manager"
 msgstr "Správce řady"
 
-#: ui/mainwindow.cpp:1808
+#: ui/mainwindow.cpp:1816
 msgid "Queue selected tracks"
 msgstr "Přidat vybrané skladby do řady"
 
 #: globalsearch/globalsearchview.cpp:465 library/libraryview.cpp:393
-#: ui/mainwindow.cpp:1806
+#: ui/mainwindow.cpp:1814
 msgid "Queue track"
 msgstr "Přidat skladbu do řady"
 
@@ -3996,20 +4039,24 @@ msgstr "Rádio (shodná hlasitost pro všechny skladby)"
 msgid "Rain"
 msgstr "Déšť"
 
-#: ../bin/src/ui_mainwindow.h:697
+#: ../bin/src/ui_mainwindow.h:742
 msgctxt "Label for button to enable/disable rain background sound."
 msgid "Rain"
 msgstr "Déšť"
 
-#: internet/subsonic/subsonicservice.cpp:103
-msgid "Random"
-msgstr "Náhodné"
+#: internet/subsonic/subsonicservice.cpp:105
+msgid "Random Albums"
+msgstr ""
+
+#: internet/subsonic/subsonicservice.cpp:125
+msgid "Random Songs"
+msgstr ""
 
 #: ../bin/src/ui_visualisationselector.h:111
 msgid "Random visualization"
 msgstr "Náhodná vizualizace"
 
-#: core/globalshortcuts.cpp:87
+#: core/globalshortcuts.cpp:88
 msgid "Rate the current song 0 stars"
 msgstr "Ohodnotit současnou píseň nulou hvězdiček"
 
@@ -4017,42 +4064,42 @@ msgstr "Ohodnotit současnou píseň nulou hvězdiček"
 msgid "Rate the current song 1 star"
 msgstr "Ohodnotit současnou píseň jednou hvězdičkou"
 
-#: core/globalshortcuts.cpp:91
+#: core/globalshortcuts.cpp:90
 msgid "Rate the current song 2 stars"
 msgstr "Ohodnotit současnou píseň dvěma hvězdičkami"
 
-#: core/globalshortcuts.cpp:93
+#: core/globalshortcuts.cpp:91
 msgid "Rate the current song 3 stars"
 msgstr "Ohodnotit současnou píseň třemi hvězdičkami"
 
-#: core/globalshortcuts.cpp:95
+#: core/globalshortcuts.cpp:92
 msgid "Rate the current song 4 stars"
 msgstr "Ohodnotit současnou píseň čtyřmi hvězdičkami"
 
-#: core/globalshortcuts.cpp:97
+#: core/globalshortcuts.cpp:93
 msgid "Rate the current song 5 stars"
 msgstr "Ohodnotit současnou píseň pěti hvězdičkami"
 
-#: playlist/playlist.cpp:1405 ../bin/src/ui_edittagdialog.h:711
+#: playlist/playlist.cpp:1404 ../bin/src/ui_edittagdialog.h:712
 msgid "Rating"
 msgstr "Hodnocení"
 
-#: internet/magnatune/magnatunedownloaddialog.cpp:309
+#: internet/magnatune/magnatunedownloaddialog.cpp:312
 #: ui/albumcovermanager.cpp:214
 msgid "Really cancel?"
 msgstr "Opravdu zrušit?"
 
-#: internet/subsonic/subsonicservice.cpp:112
-msgid "Recently Played"
-msgstr "Nedávno hráno"
+#: internet/subsonic/subsonicservice.cpp:117
+msgid "Recently Played Albums"
+msgstr ""
 
 #: internet/subsonic/subsonicsettingspage.cpp:161
 msgid "Redirect limit exceeded, verify server configuration."
 msgstr "Krajní mez na přesměrování překročena, ověřte nastavení serveru."
 
 #: internet/jamendo/jamendoservice.cpp:430
-#: internet/magnatune/magnatuneservice.cpp:290
-#: internet/subsonic/subsonicservice.cpp:138
+#: internet/magnatune/magnatuneservice.cpp:289
+#: internet/subsonic/subsonicservice.cpp:149
 msgid "Refresh catalogue"
 msgstr "Obnovit katalog"
 
@@ -4061,7 +4108,7 @@ msgstr "Obnovit katalog"
 msgid "Refresh channels"
 msgstr "Obnovit kanály"
 
-#: internet/icecast/icecastservice.cpp:301
+#: internet/icecast/icecastservice.cpp:308
 msgid "Refresh station list"
 msgstr "Obnovit seznam stanic"
 
@@ -4074,7 +4121,7 @@ msgid "Reggae"
 msgstr "Reggae"
 
 #: playlist/playlistsaveoptionsdialog.cpp:33
-#: ../bin/src/ui_behavioursettingspage.h:419
+#: ../bin/src/ui_behavioursettingspage.h:455
 msgid "Relative"
 msgstr "Relativní"
 
@@ -4082,7 +4129,7 @@ msgstr "Relativní"
 msgid "Remember Wii remote swing"
 msgstr "Zapamatovat si výkyv vzdáleného ovládání Wii"
 
-#: ../bin/src/ui_behavioursettingspage.h:371
+#: ../bin/src/ui_behavioursettingspage.h:404
 msgid "Remember from &last time"
 msgstr "&Obnovit předchozí stav"
 
@@ -4091,7 +4138,7 @@ msgid "Remember my choice"
 msgstr "Zapamatovat si moji volbu"
 
 #: internet/internetradio/savedradio.cpp:107
-#: ../bin/src/ui_savedgroupingmanager.h:103 ../bin/src/ui_queuemanager.h:147
+#: ../bin/src/ui_savedgroupingmanager.h:103 ../bin/src/ui_queuemanager.h:151
 #: ../bin/src/ui_transcodedialog.h:223
 msgid "Remove"
 msgstr "Odstranit"
@@ -4100,11 +4147,11 @@ msgstr "Odstranit"
 msgid "Remove action"
 msgstr "Odstranit činnost"
 
-#: core/globalshortcuts.cpp:84
+#: core/globalshortcuts.cpp:85
 msgid "Remove current song from playlist"
 msgstr "Odstranit nynější píseň ze seznamu skladeb"
 
-#: ../bin/src/ui_mainwindow.h:723
+#: ../bin/src/ui_mainwindow.h:768
 msgid "Remove duplicates from playlist"
 msgstr "Odstranit zdvojené ze seznamu skladeb"
 
@@ -4112,7 +4159,7 @@ msgstr "Odstranit zdvojené ze seznamu skladeb"
 msgid "Remove folder"
 msgstr "Odstranit složku"
 
-#: internet/spotify/spotifyservice.cpp:684 ../bin/src/ui_mainwindow.h:704
+#: ../bin/src/ui_mainwindow.h:749 internet/spotify/spotifyservice.cpp:684
 msgid "Remove from playlist"
 msgstr "Odstranit ze seznamu skladeb"
 
@@ -4120,11 +4167,11 @@ msgstr "Odstranit ze seznamu skladeb"
 msgid "Remove playlist"
 msgstr "Odstranit seznam skladeb"
 
-#: playlist/playlistlistcontainer.cpp:423
+#: playlist/playlistlistcontainer.cpp:429
 msgid "Remove playlists"
 msgstr "Odstranit seznamy skladeb"
 
-#: ../bin/src/ui_mainwindow.h:729
+#: ../bin/src/ui_mainwindow.h:774
 msgid "Remove unavailable tracks from playlist"
 msgstr "Odstranit nedostupné skladby ze seznamu skladeb"
 
@@ -4136,7 +4183,7 @@ msgstr "Přejmenovat seznam skladeb"
 msgid "Rename playlist..."
 msgstr "Přejmenovat seznam skladeb..."
 
-#: ../bin/src/ui_mainwindow.h:686
+#: ../bin/src/ui_mainwindow.h:731
 msgid "Renumber tracks in this order..."
 msgstr "Přečíslovat skladby v tomto pořadí..."
 
@@ -4144,25 +4191,25 @@ msgstr "Přečíslovat skladby v tomto pořadí..."
 msgid "Repeat"
 msgstr "Opakovat"
 
-#: widgets/osd.cpp:314 ../bin/src/ui_playlistsequence.h:112
+#: widgets/osd.cpp:310 ../bin/src/ui_playlistsequence.h:112
 msgid "Repeat album"
 msgstr "Opakovat album"
 
-#: widgets/osd.cpp:317 ../bin/src/ui_playlistsequence.h:113
+#: widgets/osd.cpp:313 ../bin/src/ui_playlistsequence.h:113
 msgid "Repeat playlist"
 msgstr "Opakovat seznam skladeb"
 
-#: widgets/osd.cpp:311 ../bin/src/ui_playlistsequence.h:111
+#: widgets/osd.cpp:307 ../bin/src/ui_playlistsequence.h:111
 msgid "Repeat track"
 msgstr "Opakovat skladbu"
 
-#: devices/deviceview.cpp:221 globalsearch/globalsearchview.cpp:458
-#: internet/core/internetservice.cpp:55 library/libraryview.cpp:386
+#: devices/deviceview.cpp:218 globalsearch/globalsearchview.cpp:458
+#: internet/core/internetservice.cpp:58 library/libraryview.cpp:386
 #: widgets/fileviewlist.cpp:34
 msgid "Replace current playlist"
 msgstr "Nahradit současný seznam skladeb"
 
-#: ../bin/src/ui_behavioursettingspage.h:396
+#: ../bin/src/ui_behavioursettingspage.h:429
 msgid "Replace the playlist"
 msgstr "Nahradit seznam skladeb"
 
@@ -4190,11 +4237,11 @@ msgstr "Vyžadovat ověřovací kód"
 msgid "Reset"
 msgstr "Obnovit výchozí"
 
-#: ui/edittagdialog.cpp:802 ../bin/src/ui_edittagdialog.h:701
+#: ui/edittagdialog.cpp:801 ../bin/src/ui_edittagdialog.h:702
 msgid "Reset play counts"
 msgstr "Vynulovat počty přehrání"
 
-#: ../bin/src/ui_behavioursettingspage.h:390
+#: ../bin/src/ui_behavioursettingspage.h:423
 msgid "Restart song, then jump to previous if pressed again"
 msgstr "Spustit píseň znovu, potom, v případě že je tlačítko opět stisknuto, skočit na předchozí"
 
@@ -4207,7 +4254,7 @@ msgstr "Spustit znovu přehrávání skladby, nebo přehrávat předchozí sklad
 msgid "Restrict to ASCII characters"
 msgstr "Omezit na znaky &ASCII"
 
-#: ../bin/src/ui_behavioursettingspage.h:376
+#: ../bin/src/ui_behavioursettingspage.h:409
 msgid "Resume playback on start"
 msgstr "Obnovit přehrávání při spuštění"
 
@@ -4227,7 +4274,7 @@ msgstr "Vytáhnout"
 msgid "Rip CD"
 msgstr "Vytáhnout skladby z CD"
 
-#: ../bin/src/ui_mainwindow.h:728
+#: ../bin/src/ui_mainwindow.h:773
 msgid "Rip audio CD"
 msgstr "Vytáhnout skladby ze zvukového CD"
 
@@ -4235,7 +4282,7 @@ msgstr "Vytáhnout skladby ze zvukového CD"
 msgid "Rock"
 msgstr "Rock"
 
-#: ../bin/src/ui_console.h:80
+#: ../bin/src/ui_console.h:130
 msgid "Run"
 msgstr "Spustit"
 
@@ -4253,7 +4300,7 @@ msgid ""
 "workaround some issues."
 msgstr "Chyba inicializace SSL, ověřte nastavení serveru. Volba SSLv3 níže může některé potíže dočasně vyřešit."
 
-#: devices/deviceview.cpp:204
+#: devices/deviceview.cpp:201
 msgid "Safely remove device"
 msgstr "Bezpečně odebrat zařízení"
 
@@ -4261,13 +4308,13 @@ msgstr "Bezpečně odebrat zařízení"
 msgid "Safely remove the device after copying"
 msgstr "Po dokončení kopírování bezpečně odebrat zařízení"
 
-#: playlist/playlist.cpp:1420 ../bin/src/ui_edittagdialog.h:708
+#: playlist/playlist.cpp:1419 ../bin/src/ui_edittagdialog.h:709
 #: ../bin/src/ui_playbacksettingspage.h:373
 #: ../bin/src/ui_streamdetailsdialog.h:141
 msgid "Sample rate"
 msgstr "Vzorkovací kmitočet"
 
-#: ui/organisedialog.cpp:82
+#: ui/organisedialog.cpp:81
 msgid "Samplerate"
 msgstr "Vzorkovací frekvence"
 
@@ -4275,11 +4322,11 @@ msgstr "Vzorkovací frekvence"
 msgid "Save .mood files in your music library"
 msgstr "Uložit soubory .mood v hudební sbírce"
 
-#: ui/albumcoverchoicecontroller.cpp:132
+#: ui/albumcoverchoicecontroller.cpp:135
 msgid "Save album cover"
 msgstr "Uložit obal alba"
 
-#: ui/albumcoverchoicecontroller.cpp:65
+#: ui/albumcoverchoicecontroller.cpp:68
 msgid "Save cover to disk..."
 msgstr "Uložit obal na disk..."
 
@@ -4287,11 +4334,11 @@ msgstr "Uložit obal na disk..."
 msgid "Save current grouping"
 msgstr "Uložit nynější seskupení"
 
-#: widgets/prettyimage.cpp:185 widgets/prettyimage.cpp:230
+#: widgets/prettyimage.cpp:186 widgets/prettyimage.cpp:241
 msgid "Save image"
 msgstr "Uložit obrázek"
 
-#: playlist/playlistlistcontainer.cpp:154
+#: playlist/playlistlistcontainer.cpp:160
 msgctxt "Save playlist menu action."
 msgid "Save playlist"
 msgstr "Uložit seznam skladeb"
@@ -4301,7 +4348,7 @@ msgctxt "Title of the playlist save dialog."
 msgid "Save playlist"
 msgstr "Uložit seznam skladeb"
 
-#: playlist/playlisttabbar.cpp:59 ../bin/src/ui_mainwindow.h:710
+#: playlist/playlisttabbar.cpp:59 ../bin/src/ui_mainwindow.h:755
 msgid "Save playlist..."
 msgstr "Uložit seznam skladeb..."
 
@@ -4325,11 +4372,11 @@ msgstr "Uložit tento proud na kartě Internet"
 msgid "Saved Grouping Manager"
 msgstr "Spravce uložených seskupení"
 
-#: library/library.cpp:195
+#: library/library.cpp:200
 msgid "Saving songs statistics into songs files"
 msgstr "Ukládání statistiky písní do souborů písní"
 
-#: ui/edittagdialog.cpp:711 ui/trackselectiondialog.cpp:255
+#: ui/edittagdialog.cpp:710 ui/trackselectiondialog.cpp:255
 msgid "Saving tracks"
 msgstr "Ukládají se skladby"
 
@@ -4341,7 +4388,7 @@ msgstr "Profil škálovatelného vzorkovacího kmitočtu"
 msgid "Scale size"
 msgstr "Velikost měřítka"
 
-#: playlist/playlist.cpp:1413 ../bin/src/ui_edittagdialog.h:709
+#: playlist/playlist.cpp:1412 ../bin/src/ui_edittagdialog.h:710
 msgid "Score"
 msgstr "Výsledek"
 
@@ -4349,7 +4396,7 @@ msgstr "Výsledek"
 msgid "Scrobble tracks that I listen to"
 msgstr "Odesílat informace o přehrávaných skladbách"
 
-#: ../bin/src/ui_behavioursettingspage.h:359
+#: ../bin/src/ui_behavioursettingspage.h:392
 msgid "Scroll over icon to change track"
 msgstr "Pohybováním kolečkem myši nad ikonou změníte skladbu"
 
@@ -4363,7 +4410,7 @@ msgstr "Seafile"
 msgid "Search"
 msgstr "Hledat"
 
-#: ui/mainwindow.cpp:264 ../bin/src/ui_globalsearchsettingspage.h:141
+#: ui/mainwindow.cpp:265 ../bin/src/ui_globalsearchsettingspage.h:141
 msgctxt "Global search settings dialog title."
 msgid "Search"
 msgstr "Hledat"
@@ -4376,23 +4423,23 @@ msgstr "Hledat stanice s Icecastem"
 msgid "Search Jamendo"
 msgstr "Hledat na Jamendu"
 
-#: internet/magnatune/magnatuneservice.cpp:299
+#: internet/magnatune/magnatuneservice.cpp:298
 msgid "Search Magnatune"
 msgstr "Hledat na Magnatune"
 
-#: internet/subsonic/subsonicservice.cpp:122
+#: internet/subsonic/subsonicservice.cpp:133
 msgid "Search Subsonic"
 msgstr "Vyhledat Subsonic"
 
-#: ui/albumcoverchoicecontroller.cpp:76
+#: ui/albumcoverchoicecontroller.cpp:79
 msgid "Search automatically"
 msgstr "Hledat automaticky"
 
-#: ui/mainwindow.cpp:700
+#: ui/mainwindow.cpp:703
 msgid "Search for album"
 msgstr "Hledat album"
 
-#: ui/albumcoverchoicecontroller.cpp:70
+#: ui/albumcoverchoicecontroller.cpp:73
 msgid "Search for album covers..."
 msgstr "Hledat obaly alb..."
 
@@ -4401,7 +4448,7 @@ msgstr "Hledat obaly alb..."
 msgid "Search for anything"
 msgstr "Hledat vše"
 
-#: ui/mainwindow.cpp:697
+#: ui/mainwindow.cpp:700
 msgid "Search for artist"
 msgstr "Hledat umělce"
 
@@ -4442,11 +4489,11 @@ msgstr "Druhá úroveň"
 msgid "Second level"
 msgstr "Druhá úroveň"
 
-#: core/globalshortcuts.cpp:66 wiimotedev/wiimotesettingspage.cpp:118
+#: core/globalshortcuts.cpp:67 wiimotedev/wiimotesettingspage.cpp:118
 msgid "Seek backward"
 msgstr "Přetočit zpět"
 
-#: core/globalshortcuts.cpp:65 wiimotedev/wiimotesettingspage.cpp:120
+#: core/globalshortcuts.cpp:66 wiimotedev/wiimotesettingspage.cpp:120
 msgid "Seek forward"
 msgstr "Přetočit vpřed"
 
@@ -4458,7 +4505,7 @@ msgstr "Přetočit v nyní přehrávané skladbě"
 msgid "Seek the currently playing track to an absolute position"
 msgstr "Skočit v nyní přehrávané skladbě na určité místo"
 
-#: ../bin/src/ui_behavioursettingspage.h:412
+#: ../bin/src/ui_behavioursettingspage.h:445
 msgid "Seeking using a keyboard shortcut or mouse wheel"
 msgstr "Posunování pomocí klávesové zkratky nebo kolečka myši"
 
@@ -4490,7 +4537,7 @@ msgstr "Vybrat barvu popředí:"
 msgid "Select visualizations"
 msgstr "Vybrat vizualizace"
 
-#: visualisations/visualisationcontainer.cpp:131
+#: visualisations/visualisationcontainer.cpp:124
 msgid "Select visualizations..."
 msgstr "Vybrat vizualizace..."
 
@@ -4514,11 +4561,11 @@ msgstr "Adresa serveru (URL)"
 msgid "Server details"
 msgstr "Podrobnosti o serveru"
 
-#: internet/lastfm/lastfmservice.cpp:284
+#: internet/lastfm/lastfmservice.cpp:281
 msgid "Service offline"
 msgstr "Služba není dostupná"
 
-#: ui/mainwindow.cpp:1853
+#: ui/mainwindow.cpp:1861
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr "Nastavit %1 na \"%2\"..."
@@ -4527,7 +4574,7 @@ msgstr "Nastavit %1 na \"%2\"..."
 msgid "Set the volume to <value> percent"
 msgstr "Nastavit hlasitost na <value> procent"
 
-#: ../bin/src/ui_mainwindow.h:687
+#: ../bin/src/ui_mainwindow.h:732
 msgid "Set value for all selected tracks..."
 msgstr "Nastavit hodnotu pro vybrané skladby..."
 
@@ -4535,16 +4582,16 @@ msgstr "Nastavit hodnotu pro vybrané skladby..."
 msgid "Settings"
 msgstr "Nastavení"
 
-#: ../bin/src/ui_behavioursettingspage.h:429
+#: ../bin/src/ui_behavioursettingspage.h:465
 msgid "Short duration (at least 1 minute or half the track length)"
 msgstr "Krátká doba trvání (alespoň 1 minuta nebo polovina délky skladby)"
 
-#: ../bin/src/ui_globalshortcutssettingspage.h:172
+#: ../bin/src/ui_globalshortcutssettingspage.h:184
 msgid "Shortcut"
 msgstr "Klávesová zkratka"
 
-#: ui/globalshortcutssettingspage.cpp:130
-#: ../bin/src/ui_globalshortcutssettingspage.h:174
+#: ui/globalshortcutssettingspage.cpp:131
+#: ../bin/src/ui_globalshortcutssettingspage.h:186
 #, qt-format
 msgid "Shortcut for %1"
 msgstr "Klávesová zkratka pro %1"
@@ -4554,11 +4601,11 @@ msgstr "Klávesová zkratka pro %1"
 msgid "Shortcut for %1 already exists"
 msgstr "Klávesová zkratka pro %1 již existuje"
 
-#: library/libraryfilterwidget.cpp:72
+#: library/libraryfilterwidget.cpp:71
 msgid "Show"
 msgstr "Ukázat"
 
-#: core/globalshortcuts.cpp:68 wiimotedev/wiimotesettingspage.cpp:122
+#: core/globalshortcuts.cpp:69 wiimotedev/wiimotesettingspage.cpp:122
 msgid "Show OSD"
 msgstr "Ukázat OSD"
 
@@ -4594,11 +4641,11 @@ msgstr "Ukazovat okno vyskakující z oznamovací části panelu"
 msgid "Show a pretty OSD"
 msgstr "Ukazovat OSD"
 
-#: widgets/nowplayingwidget.cpp:141
+#: widgets/nowplayingwidget.cpp:137
 msgid "Show above status bar"
 msgstr "Ukazovat nad stavovým řádkem"
 
-#: ui/mainwindow.cpp:647
+#: ui/mainwindow.cpp:650
 msgid "Show all songs"
 msgstr "Ukázat všechny písně"
 
@@ -4614,16 +4661,16 @@ msgstr "Ukazovat obal ve sbírce"
 msgid "Show dividers"
 msgstr "Ukazovat oddělovače"
 
-#: ui/albumcoverchoicecontroller.cpp:74 widgets/prettyimage.cpp:183
+#: ui/albumcoverchoicecontroller.cpp:77 widgets/prettyimage.cpp:184
 msgid "Show fullsize..."
 msgstr "Ukázat v plné velikosti..."
 
-#: library/libraryview.cpp:433 ui/mainwindow.cpp:729
+#: library/libraryview.cpp:433 ui/mainwindow.cpp:732
 #: widgets/fileviewlist.cpp:53
 msgid "Show in file browser..."
 msgstr "Ukázat v prohlížeči souborů..."
 
-#: ui/mainwindow.cpp:731
+#: ui/mainwindow.cpp:734
 msgid "Show in library..."
 msgstr "Ukazovat ve sbírce..."
 
@@ -4635,15 +4682,15 @@ msgstr "Ukázat pod různými umělci"
 msgid "Show moodbar"
 msgstr "Ukázat náladový proužek"
 
-#: ui/mainwindow.cpp:649
+#: ui/mainwindow.cpp:652
 msgid "Show only duplicates"
 msgstr "Ukázat pouze zdvojené"
 
-#: ui/mainwindow.cpp:651
+#: ui/mainwindow.cpp:654
 msgid "Show only untagged"
 msgstr "Ukázat pouze neoznačené"
 
-#: ../bin/src/ui_mainwindow.h:733
+#: ../bin/src/ui_mainwindow.h:778
 msgid "Show or hide the sidebar"
 msgstr "Ukázat nebo skrýt postranní panel"
 
@@ -4651,19 +4698,19 @@ msgstr "Ukázat nebo skrýt postranní panel"
 msgid "Show search suggestions"
 msgstr "Ukázat návrhy hledání"
 
-#: ../bin/src/ui_mainwindow.h:731
+#: ../bin/src/ui_mainwindow.h:776
 msgid "Show sidebar"
 msgstr "Ukázat postranní panel"
 
 #: ../bin/src/ui_lastfmsettingspage.h:136
 msgid "Show the \"love\" button"
-msgstr "Zobrazovat tlačítko \"Oblíbit\""
+msgstr "Zobrazovat tlačítko \"Líbí se\""
 
 #: ../bin/src/ui_lastfmsettingspage.h:137
 msgid "Show the scrobble button in the main window"
 msgstr "Ukazovat v hlavním okně tlačítko pro odesílání informací o přehrávání"
 
-#: ../bin/src/ui_behavioursettingspage.h:358
+#: ../bin/src/ui_behavioursettingspage.h:391
 msgid "Show tray icon"
 msgstr "Ukazovat ikonu v oznamovací oblasti"
 
@@ -4671,7 +4718,7 @@ msgstr "Ukazovat ikonu v oznamovací oblasti"
 msgid "Show which sources are enabled and disabled"
 msgstr "Ukázat, které zdroje jsou povoleny a které zakázány"
 
-#: core/globalshortcuts.cpp:67
+#: core/globalshortcuts.cpp:68
 msgid "Show/Hide"
 msgstr "Ukázat/Skrýt"
 
@@ -4679,19 +4726,19 @@ msgstr "Ukázat/Skrýt"
 msgid "Shuffle"
 msgstr "Zamíchat"
 
-#: widgets/osd.cpp:296 ../bin/src/ui_playlistsequence.h:119
+#: widgets/osd.cpp:292 ../bin/src/ui_playlistsequence.h:119
 msgid "Shuffle albums"
 msgstr "Zamíchat alba"
 
-#: widgets/osd.cpp:290 ../bin/src/ui_playlistsequence.h:118
+#: widgets/osd.cpp:286 ../bin/src/ui_playlistsequence.h:118
 msgid "Shuffle all"
 msgstr "Zamíchat vše"
 
-#: ../bin/src/ui_mainwindow.h:691
+#: ../bin/src/ui_mainwindow.h:736
 msgid "Shuffle playlist"
 msgstr "Zamíchat seznam skladeb"
 
-#: widgets/osd.cpp:293 ../bin/src/ui_playlistsequence.h:117
+#: widgets/osd.cpp:289 ../bin/src/ui_playlistsequence.h:117
 msgid "Shuffle tracks in this album"
 msgstr "Zamíchat skladby na tomto albu"
 
@@ -4723,7 +4770,7 @@ msgstr "Ska"
 msgid "Skip backwards in playlist"
 msgstr "Předchozí skladba v seznamu skladeb"
 
-#: playlist/playlist.cpp:1409 ../bin/src/ui_edittagdialog.h:705
+#: playlist/playlist.cpp:1408 ../bin/src/ui_edittagdialog.h:706
 msgid "Skip count"
 msgstr "Počet přeskočení"
 
@@ -4731,27 +4778,27 @@ msgstr "Počet přeskočení"
 msgid "Skip forwards in playlist"
 msgstr "Další skladba v seznamu skladeb"
 
-#: ui/mainwindow.cpp:1824
+#: ui/mainwindow.cpp:1832
 msgid "Skip selected tracks"
 msgstr "Přeskočit vybrané skladby"
 
-#: ui/mainwindow.cpp:1822
+#: ui/mainwindow.cpp:1830
 msgid "Skip track"
 msgstr "Přeskočit skladbu"
 
-#: widgets/nowplayingwidget.cpp:98
+#: widgets/nowplayingwidget.cpp:97
 msgid "Small album cover"
 msgstr "Malý obal alba"
 
-#: widgets/fancytabwidget.cpp:439
+#: widgets/fancytabwidget.cpp:430
 msgid "Small sidebar"
 msgstr "Malý postranní panel"
 
-#: smartplaylists/wizard.cpp:63
+#: smartplaylists/wizard.cpp:62
 msgid "Smart playlist"
 msgstr "Chytrý seznam skladeb"
 
-#: library/librarymodel.cpp:1368
+#: library/librarymodel.cpp:1395
 msgid "Smart playlists"
 msgstr "Chytré seznamy skladeb"
 
@@ -4767,7 +4814,7 @@ msgstr "Soft rock"
 msgid "Song Information"
 msgstr "Informace o písni"
 
-#: ui/mainwindow.cpp:284
+#: ui/mainwindow.cpp:285
 msgid "Song info"
 msgstr "Píseň"
 
@@ -4799,7 +4846,7 @@ msgstr "Řadit písně podle"
 msgid "Sorting"
 msgstr "Řazení"
 
-#: playlist/playlist.cpp:1437
+#: playlist/playlist.cpp:1436
 msgid "Source"
 msgstr "Zdroj"
 
@@ -4828,10 +4875,6 @@ msgstr "Adresa seznamu skladeb Spotify"
 msgid "Spotify plugin"
 msgstr "Přídavný modul Spotify"
 
-#: internet/spotify/spotifyblobdownloader.cpp:76
-msgid "Spotify plugin not installed"
-msgstr "Přídavný modul Spotify není nainstalován"
-
 #: internet/spotify/spotifyservice.cpp:841
 msgid "Spotify song's URL"
 msgstr "Adresa písně Spotify"
@@ -4840,10 +4883,13 @@ msgstr "Adresa písně Spotify"
 msgid "Standard"
 msgstr "Obvyklý"
 
-#: internet/subsonic/subsonicservice.cpp:115
 #: internet/spotify/spotifyservice.cpp:409
 msgid "Starred"
 msgstr "S hvězdičkou"
+
+#: internet/subsonic/subsonicservice.cpp:121
+msgid "Starred Albums"
+msgstr ""
 
 #: ripper/ripcddialog.cpp:74
 msgid "Start ripping"
@@ -4868,12 +4914,12 @@ msgstr "Začněte něco psát do vyhledávacího pole výše, abyste naplnil ten
 msgid "Starting %1"
 msgstr "Spouští se %1"
 
-#: internet/magnatune/magnatunedownloaddialog.cpp:128
+#: internet/magnatune/magnatunedownloaddialog.cpp:129
 msgid "Starting..."
 msgstr "Spouští se..."
 
-#: core/globalshortcuts.cpp:54 ../bin/src/ui_mainwindow.h:676
-#: wiimotedev/wiimotesettingspage.cpp:108
+#: core/globalshortcuts.cpp:55 wiimotedev/wiimotesettingspage.cpp:108
+#: ../bin/src/ui_mainwindow.h:721
 msgid "Stop"
 msgstr "Zastavit"
 
@@ -4885,11 +4931,11 @@ msgstr "Zastavit po"
 msgid "Stop after each track"
 msgstr "Zastavit po každé skladbě"
 
-#: widgets/osd.cpp:320
+#: widgets/osd.cpp:316
 msgid "Stop after every track"
 msgstr "Zastavit po každé skladbě"
 
-#: ui/mainwindow.cpp:684 ../bin/src/ui_mainwindow.h:679
+#: ui/mainwindow.cpp:687 ../bin/src/ui_mainwindow.h:724
 msgid "Stop after this track"
 msgstr "Zastavit po této skladbě"
 
@@ -4901,11 +4947,11 @@ msgstr "Zastavit přehrávání"
 msgid "Stop playback after current track"
 msgstr "Zastavit přehrávání po současné skladbě"
 
-#: ../bin/src/ui_behavioursettingspage.h:377
+#: ../bin/src/ui_behavioursettingspage.h:410
 msgid "Stop playback if song fails to play"
 msgstr "Zastavit přehrávání, pokud se píseň nedaří přehrávat"
 
-#: core/globalshortcuts.cpp:56
+#: core/globalshortcuts.cpp:57
 msgid "Stop playing after current track"
 msgstr "Zastavit po současné skladbě"
 
@@ -4940,7 +4986,7 @@ msgstr "bez stahování (pouze přehrávání)"
 msgid "Subscribers"
 msgstr "Předplatitelé"
 
-#: internet/subsonic/subsonicservice.cpp:149
+#: internet/subsonic/subsonicservice.cpp:160
 #: ../bin/src/ui_subsonicsettingspage.h:130
 msgid "Subsonic"
 msgstr "Subsonic"
@@ -4958,18 +5004,18 @@ msgstr "%1 úspěšně zapsán"
 msgid "Suggested tags"
 msgstr "Navrhované značky"
 
-#: ../bin/src/ui_edittagdialog.h:717
+#: ../bin/src/ui_edittagdialog.h:718
 #: ../bin/src/ui_notificationssettingspage.h:454
 msgid "Summary"
 msgstr "Shrnutí"
 
-#: analyzers/analyzercontainer.cpp:70
-#: visualisations/visualisationcontainer.cpp:113
+#: analyzers/analyzercontainer.cpp:68
+#: visualisations/visualisationcontainer.cpp:112
 #, qt-format
 msgid "Super high (%1 fps)"
 msgstr "Nadmíru vysoké (%1 fps)"
 
-#: visualisations/visualisationcontainer.cpp:126
+#: visualisations/visualisationcontainer.cpp:121
 msgid "Super high (2048x2048)"
 msgstr "Hodně velké (2048x2048)"
 
@@ -4997,7 +5043,7 @@ msgstr "Synchronizují se skladby označené hvězdičkou na Spotify"
 msgid "System colors"
 msgstr "Systémové barvy"
 
-#: widgets/fancytabwidget.cpp:441
+#: widgets/fancytabwidget.cpp:432
 msgid "Tabs on top"
 msgstr "Karty nahoře"
 
@@ -5021,7 +5067,7 @@ msgstr "Volby pro text"
 msgid "Thanks to"
 msgstr "Poděkování"
 
-#: ui/globalshortcutssettingspage.cpp:170
+#: ui/globalshortcutssettingspage.cpp:171
 #, qt-format
 msgid "The \"%1\" command could not be started."
 msgstr "Příkaz \"%1\" se nepodařilo provést."
@@ -5030,7 +5076,7 @@ msgstr "Příkaz \"%1\" se nepodařilo provést."
 msgid "The album cover of the currently playing song"
 msgstr "Obal alba nyní přehrávané písně"
 
-#: internet/magnatune/magnatunedownloaddialog.cpp:98
+#: internet/magnatune/magnatunedownloaddialog.cpp:99
 #, qt-format
 msgid "The directory %1 is not valid"
 msgstr "Adresář \"%1\" je neplatný"
@@ -5057,7 +5103,7 @@ msgid ""
 "license key. Visit subsonic.org for details."
 msgstr "Lhůta na vyzkoušení serveru Subsonic uplynula. Dejte, prosím, dar, abyste dostali licenční klíč. Navštivte subsonic.org kvůli podrobnostem."
 
-#: ui/mainwindow.cpp:2715
+#: ui/mainwindow.cpp:2712
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -5073,11 +5119,11 @@ msgstr "Na tomto albu jsou další písně"
 msgid "There was a problem communicating with gpodder.net"
 msgstr "Nastaly potíže se spojením s gpodder.net"
 
-#: internet/magnatune/magnatunedownloaddialog.cpp:167
+#: internet/magnatune/magnatunedownloaddialog.cpp:170
 msgid "There was a problem fetching the metadata from Magnatune"
 msgstr "Při stahování popisných dat z Magnatune se vyskytly potíže."
 
-#: internet/podcasts/itunessearchpage.cpp:79
+#: internet/podcasts/itunessearchpage.cpp:84
 msgid "There was a problem parsing the response from the iTunes Store"
 msgstr "Nastaly potíže se zpracováním odpovědi od obchodu iTunes"
 
@@ -5093,13 +5139,13 @@ msgid ""
 "deleted:"
 msgstr "Při mazání některých písní nastaly potíže. Nepodařilo se smazat následující soubory:"
 
-#: devices/deviceview.cpp:405
+#: devices/deviceview.cpp:402
 msgid ""
 "These files will be deleted from the device, are you sure you want to "
 "continue?"
 msgstr "Tyto soubory budou smazány ze zařízení. Opravdu chcete pokračovat?"
 
-#: library/libraryview.cpp:679 ui/mainwindow.cpp:2474 widgets/fileview.cpp:189
+#: library/libraryview.cpp:678 ui/mainwindow.cpp:2471 widgets/fileview.cpp:189
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -5129,7 +5175,7 @@ msgid ""
 "Do you want to continue anyway?"
 msgstr "Tento krok vytvoří databázi, která může být velká až 150 MB.\nPřesto chcete pokračovat?"
 
-#: internet/magnatune/magnatunedownloaddialog.cpp:194
+#: internet/magnatune/magnatunedownloaddialog.cpp:197
 msgid "This album is not available in the requested format"
 msgstr "Album není v požadovaném formátu dostupné"
 
@@ -5170,7 +5216,7 @@ msgstr "Toto zařízení bylo připojeno poprvé. Clementine na něm nyní hled�
 msgid "This option can be changed in the \"Behavior\" preferences"
 msgstr "Tuto volbu lze změnit v nastavení Chování"
 
-#: internet/lastfm/lastfmservice.cpp:286
+#: internet/lastfm/lastfmservice.cpp:283
 msgid "This stream is for paid subscribers only"
 msgstr "Tento proud je pouze pro předplatitele"
 
@@ -5179,22 +5225,22 @@ msgstr "Tento proud je pouze pro předplatitele"
 msgid "This type of device is not supported: %1"
 msgstr "Tento typ zařízení není podporován: %1"
 
-#: ../bin/src/ui_behavioursettingspage.h:413
+#: ../bin/src/ui_behavioursettingspage.h:446
 msgid "Time step"
 msgstr "Časový krok"
 
-#: playlist/playlist.cpp:1378 ui/organisedialog.cpp:64
+#: playlist/playlist.cpp:1377 ui/organisedialog.cpp:63
 #: ui/qtsystemtrayicon.cpp:247 ../bin/src/ui_about.h:141
-#: ../bin/src/ui_edittagdialog.h:719 ../bin/src/ui_trackselectiondialog.h:210
+#: ../bin/src/ui_edittagdialog.h:720 ../bin/src/ui_trackselectiondialog.h:210
 #: ../bin/src/ui_ripcddialog.h:306
 msgid "Title"
 msgstr "Název"
 
-#: core/utilities.cpp:143 core/utilities.cpp:155
+#: core/utilities.cpp:142 core/utilities.cpp:154
 msgid "Today"
 msgstr "Dnes"
 
-#: core/globalshortcuts.cpp:70
+#: core/globalshortcuts.cpp:71
 msgid "Toggle Pretty OSD"
 msgstr "Přepnout OSD"
 
@@ -5202,11 +5248,11 @@ msgstr "Přepnout OSD"
 msgid "Toggle fullscreen"
 msgstr "Zapnout/Vypnout zobrazení na celou obrazovku"
 
-#: ui/mainwindow.cpp:1810
+#: ui/mainwindow.cpp:1818
 msgid "Toggle queue status"
 msgstr "Přepnout stav řady"
 
-#: ../bin/src/ui_mainwindow.h:721
+#: ../bin/src/ui_mainwindow.h:766
 msgid "Toggle scrobbling"
 msgstr "Přepnout odesílání informací o přehrávání"
 
@@ -5214,17 +5260,17 @@ msgstr "Přepnout odesílání informací o přehrávání"
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "Přepnout viditelnost hezkých oznámení na obrazovce (OSD)"
 
-#: core/utilities.cpp:156
+#: core/utilities.cpp:155
 msgid "Tomorrow"
 msgstr "Zítra"
 
-#: internet/podcasts/podcasturlloader.cpp:117
+#: internet/podcasts/podcasturlloader.cpp:119
 msgid "Too many redirects"
 msgstr "Příliš mnoho přesměrování"
 
-#: internet/subsonic/subsonicservice.cpp:109
-msgid "Top Rated"
-msgstr "Nejoceňovanější"
+#: internet/subsonic/subsonicservice.cpp:113
+msgid "Top Rated Albums"
+msgstr ""
 
 #: internet/spotify/spotifyservice.cpp:423
 msgid "Top tracks"
@@ -5242,16 +5288,16 @@ msgstr "Celkem přeneseno bajtů"
 msgid "Total network requests made"
 msgstr "Celkem uskutečněno síťových požadavků"
 
-#: ../bin/src/ui_edittagdialog.h:720
+#: ../bin/src/ui_edittagdialog.h:721
 msgid "Trac&k"
 msgstr "Skla&dby"
 
-#: playlist/playlist.cpp:1386 ui/organisedialog.cpp:73
+#: playlist/playlist.cpp:1385 ui/organisedialog.cpp:72
 #: ../bin/src/ui_trackselectiondialog.h:212 ../bin/src/ui_ripcddialog.h:304
 msgid "Track"
 msgstr "Skladba"
 
-#: ../bin/src/ui_transcodedialog.h:213 ../bin/src/ui_mainwindow.h:706
+#: ../bin/src/ui_transcodedialog.h:213 ../bin/src/ui_mainwindow.h:751
 msgid "Transcode Music"
 msgstr "Převést hudbu"
 
@@ -5284,7 +5330,7 @@ msgstr "Turbína"
 msgid "Turn off"
 msgstr "Vypnout"
 
-#: devices/giolister.cpp:165
+#: devices/giolister.cpp:175
 msgid "URI"
 msgstr "URI"
 
@@ -5309,47 +5355,47 @@ msgstr "Ultra široké pásmo"
 msgid "Unable to connect"
 msgstr "Nelze se připojit"
 
-#: internet/magnatune/magnatunedownloaddialog.cpp:153
+#: internet/magnatune/magnatunedownloaddialog.cpp:156
 #, qt-format
 msgid "Unable to download %1 (%2)"
 msgstr "Nepodařilo se stáhnout %1 (%2)"
 
-#: core/song.cpp:467 library/librarymodel.cpp:375 library/librarymodel.cpp:380
-#: library/librarymodel.cpp:384 library/librarymodel.cpp:1160
+#: core/song.cpp:467 library/librarymodel.cpp:378 library/librarymodel.cpp:383
+#: library/librarymodel.cpp:387 library/librarymodel.cpp:1187
 #: library/savedgroupingmanager.cpp:103 playlist/playlistdelegates.cpp:305
 #: playlist/playlistmanager.cpp:532 playlist/playlistmanager.cpp:533
-#: songinfo/streamdiscoverer.cpp:87 ui/albumcoverchoicecontroller.cpp:127
-#: ui/edittagdialog.cpp:463 ui/edittagdialog.cpp:507
+#: songinfo/streamdiscoverer.cpp:87 ui/albumcoverchoicecontroller.cpp:130
+#: ui/edittagdialog.cpp:463 ui/edittagdialog.cpp:506
 msgid "Unknown"
 msgstr "Neznámý"
 
-#: internet/podcasts/podcasturlloader.cpp:208
+#: internet/podcasts/podcasturlloader.cpp:210
 msgid "Unknown content-type"
 msgstr "Neznámý typ obsahu"
 
-#: internet/digitally/digitallyimportedclient.cpp:74
-#: internet/lastfm/lastfmservice.cpp:305
+#: internet/digitally/digitallyimportedclient.cpp:75
+#: internet/lastfm/lastfmservice.cpp:302
 msgid "Unknown error"
 msgstr "Neznámá chyba"
 
-#: ui/albumcoverchoicecontroller.cpp:72
+#: ui/albumcoverchoicecontroller.cpp:75
 msgid "Unset cover"
 msgstr "Odebrat obal"
 
-#: ui/mainwindow.cpp:1820
+#: ui/mainwindow.cpp:1828
 msgid "Unskip selected tracks"
 msgstr "Zrušit přeskočení vybraných skladeb"
 
-#: ui/mainwindow.cpp:1818
+#: ui/mainwindow.cpp:1826
 msgid "Unskip track"
 msgstr "Zrušit přeskočení skladby"
 
-#: internet/podcasts/addpodcastdialog.cpp:70
+#: internet/podcasts/addpodcastdialog.cpp:73
 #: internet/podcasts/podcastservice.cpp:450
 msgid "Unsubscribe"
 msgstr "Zrušit odběr"
 
-#: songinfo/songkickconcerts.cpp:158
+#: songinfo/songkickconcerts.cpp:194
 msgid "Upcoming Concerts"
 msgstr "Připravované koncerty"
 
@@ -5357,7 +5403,7 @@ msgstr "Připravované koncerty"
 msgid "Update all podcasts"
 msgstr "Obnovit všechny zvukovové záznamy"
 
-#: ../bin/src/ui_mainwindow.h:714
+#: ../bin/src/ui_mainwindow.h:759
 msgid "Update changed library folders"
 msgstr "Obnovit změněné složky sbírky"
 
@@ -5373,17 +5419,17 @@ msgstr "Obnovit tento zvukový záznam"
 msgid "Updating"
 msgstr "Obnovení"
 
-#: library/librarywatcher.cpp:97
+#: library/librarywatcher.cpp:102
 #, qt-format
 msgid "Updating %1"
 msgstr "Obnovuje se %1"
 
-#: devices/deviceview.cpp:105
+#: devices/deviceview.cpp:103
 #, qt-format
 msgid "Updating %1%..."
 msgstr "Obnovuje se %1%..."
 
-#: library/librarywatcher.cpp:95
+#: library/librarywatcher.cpp:100
 msgid "Updating library"
 msgstr "Obnovuje se hudební sbírka"
 
@@ -5395,11 +5441,11 @@ msgstr "Zacházení"
 msgid "Use Album Artist tag when available"
 msgstr "Použít značku Umělec alba, když je dostupná"
 
-#: ../bin/src/ui_globalshortcutssettingspage.h:167
+#: ../bin/src/ui_globalshortcutssettingspage.h:179
 msgid "Use Gnome's shortcut keys"
 msgstr "Používat klávesové zkratky GNOME"
 
-#: analyzers/analyzercontainer.cpp:93
+#: analyzers/analyzercontainer.cpp:89
 msgid "Use Psychedelic Colors"
 msgstr "Použít pestré barvy"
 
@@ -5451,7 +5497,7 @@ msgstr "Použít systémové ikony"
 msgid "Use temporal noise shaping"
 msgstr "Použít časové tvarování šumu"
 
-#: ../bin/src/ui_behavioursettingspage.h:365
+#: ../bin/src/ui_behavioursettingspage.h:398
 msgid "Use the system default"
 msgstr "Použít výchozí nastavení systému"
 
@@ -5471,7 +5517,7 @@ msgstr "Použít normalizaci hlasitosti"
 msgid "Used"
 msgstr "Použito"
 
-#: ui/settingsdialog.cpp:149
+#: ui/settingsdialog.cpp:150
 msgid "User interface"
 msgstr "Uživatelské rozhraní"
 
@@ -5483,7 +5529,7 @@ msgstr "Uživatelské rozhraní"
 msgid "Username"
 msgstr "Uživatelské jméno"
 
-#: ../bin/src/ui_behavioursettingspage.h:379
+#: ../bin/src/ui_behavioursettingspage.h:412
 msgid "Using the menu to add a song will..."
 msgstr "Použití nabídky pro přidání písně..."
 
@@ -5500,7 +5546,7 @@ msgstr "VGM"
 msgid "Variable bit rate"
 msgstr "Proměnlivý datový tok"
 
-#: globalsearch/globalsearchmodel.cpp:109 library/librarymodel.cpp:301
+#: globalsearch/globalsearchmodel.cpp:109 library/librarymodel.cpp:304
 #: playlist/playlistmanager.cpp:544 ui/albumcovermanager.cpp:266
 msgid "Various artists"
 msgstr "Různí umělci"
@@ -5518,7 +5564,7 @@ msgstr "Verze %1"
 msgid "View"
 msgstr "Pohled"
 
-#: ../bin/src/ui_mainwindow.h:730
+#: ../bin/src/ui_mainwindow.h:775
 msgid "View Stream Details"
 msgstr "Zobrazit podrobnosti o proudu"
 
@@ -5526,7 +5572,7 @@ msgstr "Zobrazit podrobnosti o proudu"
 msgid "Visualization mode"
 msgstr "Režim vizualizací"
 
-#: ../bin/src/ui_mainwindow.h:715 ui/dbusscreensaver.cpp:33
+#: ui/dbusscreensaver.cpp:33 ../bin/src/ui_mainwindow.h:760
 msgid "Visualizations"
 msgstr "Vizualizace"
 
@@ -5556,7 +5602,7 @@ msgstr "WAV"
 msgid "WMA"
 msgstr "WMA"
 
-#: playlist/playlisttabbar.cpp:192 ../bin/src/ui_behavioursettingspage.h:361
+#: playlist/playlisttabbar.cpp:192 ../bin/src/ui_behavioursettingspage.h:394
 msgid "Warn me when closing a playlist tab"
 msgstr "Varovat při zavření karty se seznamem skladeb"
 
@@ -5576,11 +5622,11 @@ msgstr "Stránky"
 msgid "Weeks"
 msgstr "Týdny"
 
-#: ../bin/src/ui_behavioursettingspage.h:368
+#: ../bin/src/ui_behavioursettingspage.h:401
 msgid "When Clementine starts"
 msgstr "Při spuštění Clementine"
 
-#: ../bin/src/ui_behavioursettingspage.h:427
+#: ../bin/src/ui_behavioursettingspage.h:463
 msgid "When calculating play counts, use"
 msgstr "Při počítání počtu přehrání použít"
 
@@ -5590,11 +5636,11 @@ msgid ""
 "If there are no matches then it will use the largest image in the directory."
 msgstr "Při hledání obalu alba se Clementine nejprve podívá po obrázkových souborech, jež obsahují jedno z těchto slov.\nPokud nenajde žádné, které by se shodovaly, potom použije největší obrázek v adresáři."
 
-#: ../bin/src/ui_behavioursettingspage.h:416
+#: ../bin/src/ui_behavioursettingspage.h:452
 msgid "When saving a playlist, file paths should be"
 msgstr "Při ukládání seznamu skladeb mají být cesty k souborům"
 
-#: ../bin/src/ui_behavioursettingspage.h:422
+#: ../bin/src/ui_behavioursettingspage.h:458
 msgid "When sorting artists, albums and titles"
 msgstr "Při řazení umělců, alb a názvů"
 
@@ -5610,32 +5656,32 @@ msgstr "Proč nezkusit"
 msgid "Wide band (WB)"
 msgstr "Široké pásmo"
 
-#: widgets/osd.cpp:245
+#: widgets/osd.cpp:243
 #, qt-format
 msgid "Wii Remote %1: activated"
 msgstr "Wii Remote %1: zapnuto"
 
-#: widgets/osd.cpp:257
+#: widgets/osd.cpp:255
 #, qt-format
 msgid "Wii Remote %1: connected"
 msgstr "Wii Remote %1: připojeno"
 
-#: widgets/osd.cpp:276
+#: widgets/osd.cpp:274
 #, qt-format
 msgid "Wii Remote %1: critical battery (%2%) "
 msgstr "Wii Remote %1: vážný stav baterie (%2%) "
 
-#: widgets/osd.cpp:251
+#: widgets/osd.cpp:249
 #, qt-format
 msgid "Wii Remote %1: disactived"
 msgstr "Wii Remote %1: vypnuto"
 
-#: widgets/osd.cpp:263
+#: widgets/osd.cpp:261
 #, qt-format
 msgid "Wii Remote %1: disconnected"
 msgstr "Wii Remote %1: odpojeno"
 
-#: widgets/osd.cpp:269
+#: widgets/osd.cpp:267
 #, qt-format
 msgid "Wii Remote %1: low battery (%2%)"
 msgstr "Wii Remote %1: nízká hladina baterie (%2%)"
@@ -5670,7 +5716,7 @@ msgid ""
 "well?"
 msgstr "Chcete další písně na tomto albu přesunout do Různí umělci?"
 
-#: ui/mainwindow.cpp:2722
+#: ui/mainwindow.cpp:2719
 msgid "Would you like to run a full rescan right now?"
 msgstr "Chcete spustit toto úplné nové prohledání hned teď?"
 
@@ -5678,7 +5724,7 @@ msgstr "Chcete spustit toto úplné nové prohledání hned teď?"
 msgid "Write all songs statistics into songs' files"
 msgstr "Zapsat všechny statistiky písní do souborů písní"
 
-#: ../bin/src/ui_behavioursettingspage.h:421
+#: ../bin/src/ui_behavioursettingspage.h:457
 msgid "Write metadata"
 msgstr "Zapsat popisná data"
 
@@ -5686,8 +5732,8 @@ msgstr "Zapsat popisná data"
 msgid "Wrong username or password."
 msgstr "Nesprávné uživatelské jméno nebo heslo."
 
-#: library/savedgroupingmanager.cpp:71 playlist/playlist.cpp:1390
-#: ui/organisedialog.cpp:76 ../bin/src/ui_groupbydialog.h:134
+#: library/savedgroupingmanager.cpp:71 playlist/playlist.cpp:1389
+#: ui/organisedialog.cpp:75 ../bin/src/ui_groupbydialog.h:134
 #: ../bin/src/ui_groupbydialog.h:153 ../bin/src/ui_groupbydialog.h:172
 #: ../bin/src/ui_trackselectiondialog.h:211 ../bin/src/ui_ripcddialog.h:312
 msgid "Year"
@@ -5702,7 +5748,7 @@ msgstr "Rok - Album"
 msgid "Years"
 msgstr "Roky"
 
-#: core/utilities.cpp:144
+#: core/utilities.cpp:143
 msgid "Yesterday"
 msgstr "Včera"
 
@@ -5710,7 +5756,7 @@ msgstr "Včera"
 msgid "You are about to download the following albums"
 msgstr "Chystáte se stáhnout následující alba"
 
-#: playlist/playlistlistcontainer.cpp:424
+#: playlist/playlistlistcontainer.cpp:430
 #, qt-format
 msgid ""
 "You are about to remove %1 playlists from your favorites, are you sure?"
@@ -5760,7 +5806,7 @@ msgstr "Clementine lze ovládat dálkovým ovladačem od Wii. Pro více informac
 msgid "You do not have a Spotify Premium account."
 msgstr "Nemáte účet Spotify Premium."
 
-#: internet/digitally/digitallyimportedclient.cpp:96
+#: internet/digitally/digitallyimportedclient.cpp:95
 msgid "You do not have an active subscription"
 msgstr "Nemáte aktivní předplatné"
 
@@ -5778,14 +5824,14 @@ msgstr "Byl jste odhlášen ze Spotify. zadejte, prosím, své heslo znovu."
 msgid "You love this track"
 msgstr "Tato skladba patří mezi vaše oblíbené"
 
-#: ../bin/src/ui_globalshortcutssettingspage.h:169
+#: ../bin/src/ui_globalshortcutssettingspage.h:181
 msgid ""
 "You need to launch System Preferences and allow Clementine to \"<span style"
 "=\"font-style:italic\">control your computer</span>\" to use global "
 "shortcuts in Clementine."
 msgstr "Aby bylo možné v Clementine používat globální klávesové zkratky, je nutné spustit Nastavení systému a povolit Clementine \"<span style=\" font-style:italic;\">ovládat váš počítač</span>\"."
 
-#: ../bin/src/ui_behavioursettingspage.h:367
+#: ../bin/src/ui_behavioursettingspage.h:400
 msgid "You will need to restart Clementine if you change the language."
 msgstr "Pokud změníte jazyk, budete muset Clementine spustit znovu."
 
@@ -5811,7 +5857,7 @@ msgstr "Vaše rozhlasové proudy"
 msgid "Your scrobbles: %1"
 msgstr "Váš počet přehrání: %1"
 
-#: visualisations/visualisationcontainer.cpp:159
+#: visualisations/visualisationcontainer.cpp:160
 msgid "Your system is missing OpenGL support, visualizations are unavailable."
 msgstr "Ve vašem systém chybí podpora pro OpenGL. Vizualizace jsou nedostupné."
 
@@ -5837,11 +5883,11 @@ msgstr "přidat %n písní"
 msgid "after"
 msgstr "po"
 
-#: ../bin/src/ui_searchtermwidget.h:278
+#: ../bin/src/ui_searchtermwidget.h:276
 msgid "ago"
 msgstr "před"
 
-#: ../bin/src/ui_searchtermwidget.h:277
+#: ../bin/src/ui_searchtermwidget.h:275
 msgid "and"
 msgstr "a"
 
@@ -5861,7 +5907,7 @@ msgstr "mezi"
 msgid "biggest first"
 msgstr "nejprve největší"
 
-#: playlist/playlistview.cpp:242 ui/edittagdialog.cpp:500
+#: playlist/playlistview.cpp:258 ui/edittagdialog.cpp:499
 msgid "bpm"
 msgstr "úzm"
 
@@ -5883,6 +5929,10 @@ msgstr "disk %1"
 #: smartplaylists/searchterm.cpp:249
 msgid "does not contain"
 msgstr "neobsahuje"
+
+#: ../bin/src/ui_console.h:133
+msgid "dump"
+msgstr ""
 
 #: smartplaylists/searchterm.cpp:263
 msgid "empty"
@@ -5916,7 +5966,7 @@ msgstr "Zařízení iPods a USB nyní na Windows nepracují.  Promiňte!"
 msgid "in the last"
 msgstr "za posledních"
 
-#: playlist/playlistview.cpp:246 ui/edittagdialog.cpp:502
+#: playlist/playlistview.cpp:262 ui/edittagdialog.cpp:501
 #: internet/spotify/spotifysettingspage.cpp:62
 #: internet/spotify/spotifysettingspage.cpp:63
 #: internet/spotify/spotifysettingspage.cpp:64
