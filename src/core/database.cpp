@@ -215,6 +215,7 @@ Database::Database(Application* app, QObject* parent,
       injected_database_name_(database_name),
       query_hash_(0),
       startup_schema_version_(-1) {
+  setObjectName("Database");
   {
     QMutexLocker l(&sNextConnectionIdMutex);
     connection_id_ = sNextConnectionId++;

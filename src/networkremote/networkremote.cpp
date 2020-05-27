@@ -35,7 +35,9 @@ const quint16 NetworkRemote::kDefaultServerPort = 5500;
 const char* NetworkRemote::kTranscoderSettingPostfix = "/NetworkRemote";
 
 NetworkRemote::NetworkRemote(Application* app, QObject* parent)
-    : QObject(parent), signals_connected_(false), app_(app) {}
+    : QObject(parent), signals_connected_(false), app_(app) {
+  setObjectName("Network remote");
+}
 
 NetworkRemote::~NetworkRemote() { StopServer(); }
 

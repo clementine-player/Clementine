@@ -43,7 +43,9 @@ AlbumCoverLoader::AlbumCoverLoader(QObject* parent)
       stop_requested_(false),
       next_id_(1),
       network_(new NetworkAccessManager(this)),
-      connected_spotify_(false) {}
+      connected_spotify_(false) {
+  setObjectName("Album cover loader");
+}
 
 QString AlbumCoverLoader::ImageCacheDir() {
   return Utilities::GetConfigPath(Utilities::Path_AlbumCovers);
