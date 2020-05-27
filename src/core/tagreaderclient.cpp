@@ -34,6 +34,7 @@ TagReaderClient* TagReaderClient::sInstance = nullptr;
 TagReaderClient::TagReaderClient(QObject* parent)
     : QObject(parent), worker_pool_(new WorkerPool<HandlerType>(this)) {
   sInstance = this;
+  setObjectName("Tag reader client");
 
   QSettings s;
   s.beginGroup(Player::kSettingsGroup);
