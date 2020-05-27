@@ -106,6 +106,9 @@ void Wizard::SetGenerator(GeneratorPtr gen) {
   // Set the name
   finish_page_->ui_->name->setText(gen->name());
   finish_page_->ui_->dynamic->setChecked(gen->is_dynamic());
+  if (!gen->name().isEmpty()) {
+    setWindowTitle(windowTitle() + " - " + gen->name());
+  }
 
   if (type_index_ == -1) {
     qLog(Error) << "Plugin was not found for generator type" << gen->type();
