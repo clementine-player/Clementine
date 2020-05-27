@@ -36,8 +36,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2020-05-26 18:18+0000\n"
-"Last-Translator: John Maguire <john.maguire@gmail.com>\n"
+"PO-Revision-Date: 2020-05-26 21:35+0000\n"
+"Last-Translator: Andrei Stepanov <adem4ik@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/davidsansome/clementine/language/ru/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -128,7 +128,7 @@ msgstr "%1 плейлистов (%2)"
 msgid ""
 "%1 request failed:\n"
 "%2"
-msgstr ""
+msgstr "%1 запрос не удался:\n%2"
 
 #: playlist/playlistmanager.cpp:429
 #, qt-format
@@ -423,7 +423,7 @@ msgid ""
 "selecting songs."
 msgstr "Умный плейлист — это динамический список композиций из вашей фонотеки. Существуют разные типы умных плейлистов с различными способами выбора композиций."
 
-#: smartplaylists/querywizardplugin.cpp:157
+#: smartplaylists/querywizardplugin.cpp:158
 msgid ""
 "A song will be included in the playlist if it matches these conditions."
 msgstr "Композиция будет добавлена в плейлист, если соответствует этим условиям."
@@ -1079,7 +1079,7 @@ msgstr "Клавиши"
 
 #: internet/podcasts/addpodcastdialog.cpp:97
 msgid "CBC Podcasts"
-msgstr ""
+msgstr "Подкасты CBC"
 
 #: core/song.cpp:454
 msgid "CDDA"
@@ -1167,7 +1167,7 @@ msgstr "Выбрать шрифт…"
 msgid "Choose from the list"
 msgstr "Выбор из списка"
 
-#: smartplaylists/querywizardplugin.cpp:161
+#: smartplaylists/querywizardplugin.cpp:162
 msgid "Choose how the playlist is sorted and how many songs it will contain."
 msgstr "Настройка сортировки плейлиста и количества песен в нём."
 
@@ -1337,7 +1337,7 @@ msgstr "Разделённый запятыми список префиксны�
 
 #: ../bin/src/ui_console.h:129
 msgid "Command"
-msgstr ""
+msgstr "Команда"
 
 #: playlist/playlist.cpp:1434 smartplaylists/searchterm.cpp:384
 #: ui/organisedialog.cpp:78 ../bin/src/ui_edittagdialog.h:719
@@ -1488,7 +1488,7 @@ msgstr "Не удалось определить поток аудио в теч
 
 #: internet/googledrive/googledriveservice.cpp:208
 msgid "Could not find Google Drive file."
-msgstr ""
+msgstr "Не удалось найти файл Google Drive."
 
 #: songinfo/streamdiscoverer.cpp:123
 msgid "Could not get details"
@@ -1609,7 +1609,7 @@ msgstr "Танцевальный"
 
 #: ../bin/src/ui_console.h:131
 msgid "Database"
-msgstr ""
+msgstr "База данных"
 
 #: core/database.cpp:621
 msgid ""
@@ -1976,7 +1976,7 @@ msgstr "Дабстеп"
 
 #: ../bin/src/ui_console.h:132
 msgid "Dump To Logs"
-msgstr ""
+msgstr "Выгрузить в журналы"
 
 #: ../bin/src/ui_episodeinfowidget.h:134 ../bin/src/ui_ripcddialog.h:308
 msgid "Duration"
@@ -2297,7 +2297,7 @@ msgstr "Ошибка получения подкастов"
 msgid ""
 "Failed to get channel list:\n"
 "%1"
-msgstr ""
+msgstr "Не удалось получить список каналов:\n%1"
 
 #: internet/podcasts/addpodcastbyurl.cpp:71
 #: internet/podcasts/fixedopmlpage.cpp:55
@@ -2309,7 +2309,7 @@ msgstr "Ошибка загрузки подкаста"
 msgid ""
 "Failed to parse %1 response:\n"
 "%2"
-msgstr ""
+msgstr "Не удалось обработать ответ %1:\n%2"
 
 #: internet/podcasts/podcasturlloader.cpp:177
 msgid "Failed to parse the XML for this RSS feed"
@@ -2320,7 +2320,7 @@ msgstr "Ошибка разбора XML в данной RSS подписке"
 msgid ""
 "Failed to update icecast directory:\n"
 "%1"
-msgstr ""
+msgstr "Не удалось обновить каталог icecast:\n%1"
 
 #: ui/trackselectiondialog.cpp:247
 #, qt-format
@@ -2359,7 +2359,7 @@ msgstr "Ошибка получения обложки"
 #: internet/subsonic/subsonicdynamicplaylist.cpp:100
 #: internet/subsonic/subsonicdynamicplaylist.cpp:166
 msgid "Fetching playlist items"
-msgstr ""
+msgstr "Получение элементов плейлиста"
 
 #: ../bin/src/ui_ripcddialog.h:319
 msgid "File Format"
@@ -2459,7 +2459,7 @@ msgstr "Команда «Забыть носитель», удалит носи�
 #: ../bin/src/ui_playlistcontainer.h:134
 #: ../bin/src/ui_playlistlistcontainer.h:126
 #: ../bin/src/ui_episodeinfowidget.h:131 ../bin/src/ui_podcastinfowidget.h:190
-#: ../bin/src/ui_querysearchpage.h:108 ../bin/src/ui_querysortpage.h:136
+#: ../bin/src/ui_querysearchpage.h:113 ../bin/src/ui_querysortpage.h:136
 #: ../bin/src/ui_searchpreview.h:103 ../bin/src/ui_searchtermwidget.h:274
 #: ../bin/src/ui_wizardfinishpage.h:82
 #: ../bin/src/ui_songkickconcertwidget.h:99
@@ -2491,7 +2491,7 @@ msgstr "Фреймов на буфер"
 
 #: internet/subsonic/subsonicservice.cpp:109
 msgid "Frequently Played Albums"
-msgstr ""
+msgstr "Часто прослушиваемые альбомы"
 
 #: moodbar/moodbarrenderer.cpp:173
 msgid "Frozen"
@@ -2757,7 +2757,7 @@ msgstr "Входящие"
 msgid "Include album art in the notification"
 msgstr "Показывать обложку альбома в уведомлении"
 
-#: ../bin/src/ui_querysearchpage.h:114
+#: ../bin/src/ui_querysearchpage.h:119
 msgid "Include all songs"
 msgstr "Включить все песни"
 
@@ -3231,11 +3231,11 @@ msgstr "Пометить как прослушанное"
 msgid "Mark as new"
 msgstr "Пометить как новое"
 
-#: ../bin/src/ui_querysearchpage.h:112
+#: ../bin/src/ui_querysearchpage.h:117
 msgid "Match every search term (AND)"
 msgstr "Совпадает с каждым условием поиска (И)"
 
-#: ../bin/src/ui_querysearchpage.h:113
+#: ../bin/src/ui_querysearchpage.h:118
 msgid "Match one or more search terms (OR)"
 msgstr "Совпадает с одним или несколькими условиями (ИЛИ)"
 
@@ -3245,7 +3245,7 @@ msgstr "Максимальный битрейт"
 
 #: ../bin/src/ui_behavioursettingspage.h:449
 msgid "Maximum number of child processes for tag handling (requires restart)"
-msgstr ""
+msgstr "Максимальное число дочерних процессов для обработки тегов (требуется перезапуск)"
 
 #: ripper/ripcddialog.cpp:155
 msgid "Media has changed. Reloading"
@@ -3416,7 +3416,7 @@ msgstr "Новые треки будут добавлены автоматиче
 
 #: internet/subsonic/subsonicservice.cpp:101
 msgid "Newest Albums"
-msgstr ""
+msgstr "Новые альбомы"
 
 #: library/library.cpp:94
 msgid "Newest tracks"
@@ -3536,7 +3536,7 @@ msgstr "Количество показываемых выпусков"
 
 #: ../bin/src/ui_behavioursettingspage.h:450
 msgid "Number of processes:"
-msgstr ""
+msgstr "Число процессов:"
 
 #: ui/notificationssettingspage.cpp:38
 msgid "OSD Preview"
@@ -4014,7 +4014,7 @@ msgstr "Разбросать композиции в случайном поря
 
 #: ../bin/src/ui_console.h:134
 msgid "Qt"
-msgstr ""
+msgstr "Qt"
 
 #: ../bin/src/ui_transcoderoptionsflac.h:80
 #: ../bin/src/ui_transcoderoptionsmp3.h:191
@@ -4061,11 +4061,11 @@ msgstr "Дождь"
 
 #: internet/subsonic/subsonicservice.cpp:105
 msgid "Random Albums"
-msgstr ""
+msgstr "Случайные альбомы"
 
 #: internet/subsonic/subsonicservice.cpp:125
 msgid "Random Songs"
-msgstr ""
+msgstr "Случайные песни"
 
 #: ../bin/src/ui_visualisationselector.h:111
 msgid "Random visualization"
@@ -4106,7 +4106,7 @@ msgstr "Действительно отменить?"
 
 #: internet/subsonic/subsonicservice.cpp:117
 msgid "Recently Played Albums"
-msgstr ""
+msgstr "Недавние альбомы"
 
 #: internet/subsonic/subsonicsettingspage.cpp:161
 msgid "Redirect limit exceeded, verify server configuration."
@@ -4479,11 +4479,11 @@ msgstr "Поиск на gpodder.net"
 msgid "Search iTunes"
 msgstr "Поиск в iTunes"
 
-#: ../bin/src/ui_querysearchpage.h:109
+#: ../bin/src/ui_querysearchpage.h:114
 msgid "Search mode"
 msgstr "Режим поиска"
 
-#: smartplaylists/querywizardplugin.cpp:159
+#: smartplaylists/querywizardplugin.cpp:160
 msgid "Search options"
 msgstr "Параметры поиска"
 
@@ -4491,8 +4491,8 @@ msgstr "Параметры поиска"
 msgid "Search results"
 msgstr "Результаты поиска"
 
-#: smartplaylists/querywizardplugin.cpp:155
-#: ../bin/src/ui_querysearchpage.h:116
+#: smartplaylists/querywizardplugin.cpp:156
+#: ../bin/src/ui_querysearchpage.h:121
 msgid "Search terms"
 msgstr "Условия поиска"
 
@@ -4904,7 +4904,7 @@ msgstr "Оцененные"
 
 #: internet/subsonic/subsonicservice.cpp:121
 msgid "Starred Albums"
-msgstr ""
+msgstr "Оценённые альбомы"
 
 #: ripper/ripcddialog.cpp:74
 msgid "Start ripping"
@@ -5285,7 +5285,7 @@ msgstr "Слишком много перенаправлений"
 
 #: internet/subsonic/subsonicservice.cpp:113
 msgid "Top Rated Albums"
-msgstr ""
+msgstr "Высоко оценённые альбомы"
 
 #: internet/spotify/spotifyservice.cpp:423
 msgid "Top tracks"
@@ -5947,7 +5947,7 @@ msgstr "не содержит"
 
 #: ../bin/src/ui_console.h:133
 msgid "dump"
-msgstr ""
+msgstr "выгрузка"
 
 #: smartplaylists/searchterm.cpp:263
 msgid "empty"

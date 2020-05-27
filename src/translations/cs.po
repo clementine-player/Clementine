@@ -21,8 +21,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2020-05-26 18:18+0000\n"
-"Last-Translator: John Maguire <john.maguire@gmail.com>\n"
+"PO-Revision-Date: 2020-05-26 20:38+0000\n"
+"Last-Translator: fri\n"
 "Language-Team: Czech (http://www.transifex.com/davidsansome/clementine/language/cs/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -113,7 +113,7 @@ msgstr "%1 seznamů skladeb (%2)"
 msgid ""
 "%1 request failed:\n"
 "%2"
-msgstr ""
+msgstr "%1 požadavek selhal:\n%2"
 
 #: playlist/playlistmanager.cpp:429
 #, qt-format
@@ -408,7 +408,7 @@ msgid ""
 "selecting songs."
 msgstr "Chytrý seznam skladeb je dynamický seznam písní, které pocházejí z vaší sbírky. Jsou různé druhy chytrých seznamů skladeb, jež nabízejí rozdílné způsoby výběru písní."
 
-#: smartplaylists/querywizardplugin.cpp:157
+#: smartplaylists/querywizardplugin.cpp:158
 msgid ""
 "A song will be included in the playlist if it matches these conditions."
 msgstr "Píseň bude zařazena do seznamu skladeb, pokud bude odpovídat těmto podmínkám."
@@ -1064,7 +1064,7 @@ msgstr "Tlačítka"
 
 #: internet/podcasts/addpodcastdialog.cpp:97
 msgid "CBC Podcasts"
-msgstr ""
+msgstr "Záznamy CBC"
 
 #: core/song.cpp:454
 msgid "CDDA"
@@ -1152,7 +1152,7 @@ msgstr "Vybrat písmo..."
 msgid "Choose from the list"
 msgstr "Vybrat ze seznamu"
 
-#: smartplaylists/querywizardplugin.cpp:161
+#: smartplaylists/querywizardplugin.cpp:162
 msgid "Choose how the playlist is sorted and how many songs it will contain."
 msgstr "Zvolte počet písní v seznamu skladeb a způsob jejich řazení."
 
@@ -1322,7 +1322,7 @@ msgstr "Seznam slov (předpon) oddělených čárkou, která se při řazení ma
 
 #: ../bin/src/ui_console.h:129
 msgid "Command"
-msgstr ""
+msgstr "Příkaz"
 
 #: playlist/playlist.cpp:1434 smartplaylists/searchterm.cpp:384
 #: ui/organisedialog.cpp:78 ../bin/src/ui_edittagdialog.h:719
@@ -1473,7 +1473,7 @@ msgstr "Nepodařilo se zjistit zvukový proud v %1"
 
 #: internet/googledrive/googledriveservice.cpp:208
 msgid "Could not find Google Drive file."
-msgstr ""
+msgstr "Nepodařilo se najít soubor Google Drive."
 
 #: songinfo/streamdiscoverer.cpp:123
 msgid "Could not get details"
@@ -1594,7 +1594,7 @@ msgstr "Taneční hudba"
 
 #: ../bin/src/ui_console.h:131
 msgid "Database"
-msgstr ""
+msgstr "Databáze"
 
 #: core/database.cpp:621
 msgid ""
@@ -1961,7 +1961,7 @@ msgstr "Dubstep"
 
 #: ../bin/src/ui_console.h:132
 msgid "Dump To Logs"
-msgstr ""
+msgstr "Vypsat v zápisech"
 
 #: ../bin/src/ui_episodeinfowidget.h:134 ../bin/src/ui_ripcddialog.h:308
 msgid "Duration"
@@ -2282,7 +2282,7 @@ msgstr "Nepodařilo se natáhnout zvukové záznamy (podcasty)"
 msgid ""
 "Failed to get channel list:\n"
 "%1"
-msgstr ""
+msgstr "Nepodařilo se získat seznam kanálů:\n%1"
 
 #: internet/podcasts/addpodcastbyurl.cpp:71
 #: internet/podcasts/fixedopmlpage.cpp:55
@@ -2294,7 +2294,7 @@ msgstr "Nepodařilo se nahrát zvukový záznam (podcast)"
 msgid ""
 "Failed to parse %1 response:\n"
 "%2"
-msgstr ""
+msgstr "Nepodařilo se zpracovat %1 odpověď:\n%2"
 
 #: internet/podcasts/podcasturlloader.cpp:177
 msgid "Failed to parse the XML for this RSS feed"
@@ -2305,7 +2305,7 @@ msgstr "Nepodařilo se zpracovat XML pro tento kanál RSS"
 msgid ""
 "Failed to update icecast directory:\n"
 "%1"
-msgstr ""
+msgstr "Nepodařilo se aktualizovat adresář icecast:\n%1"
 
 #: ui/trackselectiondialog.cpp:247
 #, qt-format
@@ -2344,7 +2344,7 @@ msgstr "Chyba při stahování obalu"
 #: internet/subsonic/subsonicdynamicplaylist.cpp:100
 #: internet/subsonic/subsonicdynamicplaylist.cpp:166
 msgid "Fetching playlist items"
-msgstr ""
+msgstr "Natahují se položky seznamu skladeb"
 
 #: ../bin/src/ui_ripcddialog.h:319
 msgid "File Format"
@@ -2444,7 +2444,7 @@ msgstr "Zařízení bude odstraněno z tohoto seznamu. Po opětovném připojen�
 #: ../bin/src/ui_playlistcontainer.h:134
 #: ../bin/src/ui_playlistlistcontainer.h:126
 #: ../bin/src/ui_episodeinfowidget.h:131 ../bin/src/ui_podcastinfowidget.h:190
-#: ../bin/src/ui_querysearchpage.h:108 ../bin/src/ui_querysortpage.h:136
+#: ../bin/src/ui_querysearchpage.h:113 ../bin/src/ui_querysortpage.h:136
 #: ../bin/src/ui_searchpreview.h:103 ../bin/src/ui_searchtermwidget.h:274
 #: ../bin/src/ui_wizardfinishpage.h:82
 #: ../bin/src/ui_songkickconcertwidget.h:99
@@ -2476,7 +2476,7 @@ msgstr "Snímků na vyrovnávací paměť"
 
 #: internet/subsonic/subsonicservice.cpp:109
 msgid "Frequently Played Albums"
-msgstr ""
+msgstr "Často hraná alba"
 
 #: moodbar/moodbarrenderer.cpp:173
 msgid "Frozen"
@@ -2742,7 +2742,7 @@ msgstr "Doručená pošta"
 msgid "Include album art in the notification"
 msgstr "Zahrnout obal alba do oznámení"
 
-#: ../bin/src/ui_querysearchpage.h:114
+#: ../bin/src/ui_querysearchpage.h:119
 msgid "Include all songs"
 msgstr "Zahrnout všechny písně"
 
@@ -3216,11 +3216,11 @@ msgstr "Označit jako poslechnuté"
 msgid "Mark as new"
 msgstr "Označit jako nové"
 
-#: ../bin/src/ui_querysearchpage.h:112
+#: ../bin/src/ui_querysearchpage.h:117
 msgid "Match every search term (AND)"
 msgstr "Porovnat všechny hledané výrazy (AND)"
 
-#: ../bin/src/ui_querysearchpage.h:113
+#: ../bin/src/ui_querysearchpage.h:118
 msgid "Match one or more search terms (OR)"
 msgstr "Porovnat jeden nebo více hledaných výrazů (OR)"
 
@@ -3230,7 +3230,7 @@ msgstr "Nejvyšší datový tok"
 
 #: ../bin/src/ui_behavioursettingspage.h:449
 msgid "Maximum number of child processes for tag handling (requires restart)"
-msgstr ""
+msgstr "Největší počet podprocesů pro zacházení se značkami (vyžaduje opětovné spuštění)"
 
 #: ripper/ripcddialog.cpp:155
 msgid "Media has changed. Reloading"
@@ -3401,7 +3401,7 @@ msgstr "Nové písně budou přidány automaticky."
 
 #: internet/subsonic/subsonicservice.cpp:101
 msgid "Newest Albums"
-msgstr ""
+msgstr "Nejnovější alba"
 
 #: library/library.cpp:94
 msgid "Newest tracks"
@@ -3521,7 +3521,7 @@ msgstr "Čísla dílů k ukázání"
 
 #: ../bin/src/ui_behavioursettingspage.h:450
 msgid "Number of processes:"
-msgstr ""
+msgstr "Počet procesů:"
 
 #: ui/notificationssettingspage.cpp:38
 msgid "OSD Preview"
@@ -3999,7 +3999,7 @@ msgstr "Seřadit skladby náhodně"
 
 #: ../bin/src/ui_console.h:134
 msgid "Qt"
-msgstr ""
+msgstr "Qt"
 
 #: ../bin/src/ui_transcoderoptionsflac.h:80
 #: ../bin/src/ui_transcoderoptionsmp3.h:191
@@ -4046,11 +4046,11 @@ msgstr "Déšť"
 
 #: internet/subsonic/subsonicservice.cpp:105
 msgid "Random Albums"
-msgstr ""
+msgstr "Náhodná alba"
 
 #: internet/subsonic/subsonicservice.cpp:125
 msgid "Random Songs"
-msgstr ""
+msgstr "Náhodné písně"
 
 #: ../bin/src/ui_visualisationselector.h:111
 msgid "Random visualization"
@@ -4091,7 +4091,7 @@ msgstr "Opravdu zrušit?"
 
 #: internet/subsonic/subsonicservice.cpp:117
 msgid "Recently Played Albums"
-msgstr ""
+msgstr "Nedávno hraná alba"
 
 #: internet/subsonic/subsonicsettingspage.cpp:161
 msgid "Redirect limit exceeded, verify server configuration."
@@ -4464,11 +4464,11 @@ msgstr "Hledat na gpodder.net"
 msgid "Search iTunes"
 msgstr "Hledat na iTunes"
 
-#: ../bin/src/ui_querysearchpage.h:109
+#: ../bin/src/ui_querysearchpage.h:114
 msgid "Search mode"
 msgstr "Režim vyhledávání"
 
-#: smartplaylists/querywizardplugin.cpp:159
+#: smartplaylists/querywizardplugin.cpp:160
 msgid "Search options"
 msgstr "Možnosti vyhledávání"
 
@@ -4476,8 +4476,8 @@ msgstr "Možnosti vyhledávání"
 msgid "Search results"
 msgstr "Hledat výsledky"
 
-#: smartplaylists/querywizardplugin.cpp:155
-#: ../bin/src/ui_querysearchpage.h:116
+#: smartplaylists/querywizardplugin.cpp:156
+#: ../bin/src/ui_querysearchpage.h:121
 msgid "Search terms"
 msgstr "Hledané výrazy"
 
@@ -4889,7 +4889,7 @@ msgstr "S hvězdičkou"
 
 #: internet/subsonic/subsonicservice.cpp:121
 msgid "Starred Albums"
-msgstr ""
+msgstr "Alba s hvězdičkami"
 
 #: ripper/ripcddialog.cpp:74
 msgid "Start ripping"
@@ -5270,7 +5270,7 @@ msgstr "Příliš mnoho přesměrování"
 
 #: internet/subsonic/subsonicservice.cpp:113
 msgid "Top Rated Albums"
-msgstr ""
+msgstr "Nejoceňovanější alba"
 
 #: internet/spotify/spotifyservice.cpp:423
 msgid "Top tracks"
@@ -5932,7 +5932,7 @@ msgstr "neobsahuje"
 
 #: ../bin/src/ui_console.h:133
 msgid "dump"
-msgstr ""
+msgstr "Vypsat"
 
 #: smartplaylists/searchterm.cpp:263
 msgid "empty"

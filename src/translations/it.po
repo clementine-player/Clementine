@@ -8,12 +8,12 @@
 # Saverio <saverio.brancaccio@gmail.com>, 2014-2015
 # Vincenzo Reale <vinx.reale@gmail.com>, 2011, 2012
 # Vincenzo Reale <smart2128@baslug.org>, 2010
-# Vincenzo Reale <vinx.reale@gmail.com>, 2012-2019
+# Vincenzo Reale <vinx.reale@gmail.com>, 2012-2020
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2020-05-26 18:18+0000\n"
-"Last-Translator: John Maguire <john.maguire@gmail.com>\n"
+"PO-Revision-Date: 2020-05-26 20:30+0000\n"
+"Last-Translator: Vincenzo Reale <vinx.reale@gmail.com>\n"
 "Language-Team: Italian (http://www.transifex.com/davidsansome/clementine/language/it/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -104,7 +104,7 @@ msgstr "%1 scalette (%2)"
 msgid ""
 "%1 request failed:\n"
 "%2"
-msgstr ""
+msgstr "%1 richiesta non riuscita:\n%2"
 
 #: playlist/playlistmanager.cpp:429
 #, qt-format
@@ -399,7 +399,7 @@ msgid ""
 "selecting songs."
 msgstr "Una scaletta veloce è un elenco dinamico di brani che deriva dalla tua raccolta. Ci sono diversi tipi di scaletta veloce che offrono modi diversi per selezionare un brano."
 
-#: smartplaylists/querywizardplugin.cpp:157
+#: smartplaylists/querywizardplugin.cpp:158
 msgid ""
 "A song will be included in the playlist if it matches these conditions."
 msgstr "Un brano sarà incluso nella scaletta se verifica queste condizioni."
@@ -1055,7 +1055,7 @@ msgstr "Pulsanti"
 
 #: internet/podcasts/addpodcastdialog.cpp:97
 msgid "CBC Podcasts"
-msgstr ""
+msgstr "Podcast CBC"
 
 #: core/song.cpp:454
 msgid "CDDA"
@@ -1143,7 +1143,7 @@ msgstr "Scegli carattere..."
 msgid "Choose from the list"
 msgstr "Scegli dall'elenco"
 
-#: smartplaylists/querywizardplugin.cpp:161
+#: smartplaylists/querywizardplugin.cpp:162
 msgid "Choose how the playlist is sorted and how many songs it will contain."
 msgstr "Scegli l'ordinamento della scaletta e quanti brani conterrà."
 
@@ -1313,7 +1313,7 @@ msgstr "Elenco separato da virgole di parole preefisse da ignorare in fase di or
 
 #: ../bin/src/ui_console.h:129
 msgid "Command"
-msgstr ""
+msgstr "Comando"
 
 #: playlist/playlist.cpp:1434 smartplaylists/searchterm.cpp:384
 #: ui/organisedialog.cpp:78 ../bin/src/ui_edittagdialog.h:719
@@ -1464,7 +1464,7 @@ msgstr "Impossibile rilevare un flusso audio in %1"
 
 #: internet/googledrive/googledriveservice.cpp:208
 msgid "Could not find Google Drive file."
-msgstr ""
+msgstr "Impossibile trovare il file di Google Drive."
 
 #: songinfo/streamdiscoverer.cpp:123
 msgid "Could not get details"
@@ -1585,7 +1585,7 @@ msgstr "Dance"
 
 #: ../bin/src/ui_console.h:131
 msgid "Database"
-msgstr ""
+msgstr "Database"
 
 #: core/database.cpp:621
 msgid ""
@@ -2435,7 +2435,7 @@ msgstr "L'eliminazione di un dispositivo lo rimuoverà da questo elenco e Clemen
 #: ../bin/src/ui_playlistcontainer.h:134
 #: ../bin/src/ui_playlistlistcontainer.h:126
 #: ../bin/src/ui_episodeinfowidget.h:131 ../bin/src/ui_podcastinfowidget.h:190
-#: ../bin/src/ui_querysearchpage.h:108 ../bin/src/ui_querysortpage.h:136
+#: ../bin/src/ui_querysearchpage.h:113 ../bin/src/ui_querysortpage.h:136
 #: ../bin/src/ui_searchpreview.h:103 ../bin/src/ui_searchtermwidget.h:274
 #: ../bin/src/ui_wizardfinishpage.h:82
 #: ../bin/src/ui_songkickconcertwidget.h:99
@@ -2467,7 +2467,7 @@ msgstr "Struttura per buffer"
 
 #: internet/subsonic/subsonicservice.cpp:109
 msgid "Frequently Played Albums"
-msgstr ""
+msgstr "Album riprodotti frequentemente"
 
 #: moodbar/moodbarrenderer.cpp:173
 msgid "Frozen"
@@ -2733,7 +2733,7 @@ msgstr "In arrivo"
 msgid "Include album art in the notification"
 msgstr "Includi copertina nella notifica"
 
-#: ../bin/src/ui_querysearchpage.h:114
+#: ../bin/src/ui_querysearchpage.h:119
 msgid "Include all songs"
 msgstr "Includi tutti i brani"
 
@@ -3207,11 +3207,11 @@ msgstr "Marca come ascoltata"
 msgid "Mark as new"
 msgstr "Marca come nuova"
 
-#: ../bin/src/ui_querysearchpage.h:112
+#: ../bin/src/ui_querysearchpage.h:117
 msgid "Match every search term (AND)"
 msgstr "Verifica ogni termine di ricerca (AND)"
 
-#: ../bin/src/ui_querysearchpage.h:113
+#: ../bin/src/ui_querysearchpage.h:118
 msgid "Match one or more search terms (OR)"
 msgstr "Verifica uno o più termini di ricerca (OR)"
 
@@ -3392,7 +3392,7 @@ msgstr "Le nuove tracce saranno aggiunte automaticamente."
 
 #: internet/subsonic/subsonicservice.cpp:101
 msgid "Newest Albums"
-msgstr ""
+msgstr "Album più recenti"
 
 #: library/library.cpp:94
 msgid "Newest tracks"
@@ -3512,7 +3512,7 @@ msgstr "Numero di puntate da mostrare"
 
 #: ../bin/src/ui_behavioursettingspage.h:450
 msgid "Number of processes:"
-msgstr ""
+msgstr "Numero di processi:"
 
 #: ui/notificationssettingspage.cpp:38
 msgid "OSD Preview"
@@ -3990,7 +3990,7 @@ msgstr "Metti i brani in ordine casuale"
 
 #: ../bin/src/ui_console.h:134
 msgid "Qt"
-msgstr ""
+msgstr "Qt"
 
 #: ../bin/src/ui_transcoderoptionsflac.h:80
 #: ../bin/src/ui_transcoderoptionsmp3.h:191
@@ -4037,11 +4037,11 @@ msgstr "Pioggia"
 
 #: internet/subsonic/subsonicservice.cpp:105
 msgid "Random Albums"
-msgstr ""
+msgstr "Album casuali"
 
 #: internet/subsonic/subsonicservice.cpp:125
 msgid "Random Songs"
-msgstr ""
+msgstr "Brani casuali"
 
 #: ../bin/src/ui_visualisationselector.h:111
 msgid "Random visualization"
@@ -4082,7 +4082,7 @@ msgstr "Vuoi davvero annullare?"
 
 #: internet/subsonic/subsonicservice.cpp:117
 msgid "Recently Played Albums"
-msgstr ""
+msgstr "Album riprodotti di recente"
 
 #: internet/subsonic/subsonicsettingspage.cpp:161
 msgid "Redirect limit exceeded, verify server configuration."
@@ -4455,11 +4455,11 @@ msgstr "Cerca in gpodder.net"
 msgid "Search iTunes"
 msgstr "Cerca in iTunes"
 
-#: ../bin/src/ui_querysearchpage.h:109
+#: ../bin/src/ui_querysearchpage.h:114
 msgid "Search mode"
 msgstr "Modalità di ricerca"
 
-#: smartplaylists/querywizardplugin.cpp:159
+#: smartplaylists/querywizardplugin.cpp:160
 msgid "Search options"
 msgstr "Opzioni di ricerca"
 
@@ -4467,8 +4467,8 @@ msgstr "Opzioni di ricerca"
 msgid "Search results"
 msgstr "Cerca risultati"
 
-#: smartplaylists/querywizardplugin.cpp:155
-#: ../bin/src/ui_querysearchpage.h:116
+#: smartplaylists/querywizardplugin.cpp:156
+#: ../bin/src/ui_querysearchpage.h:121
 msgid "Search terms"
 msgstr "Termini di ricerca"
 
@@ -4880,7 +4880,7 @@ msgstr "Preferiti"
 
 #: internet/subsonic/subsonicservice.cpp:121
 msgid "Starred Albums"
-msgstr ""
+msgstr "Album preferiti"
 
 #: ripper/ripcddialog.cpp:74
 msgid "Start ripping"
@@ -5261,7 +5261,7 @@ msgstr "Troppe redirezioni"
 
 #: internet/subsonic/subsonicservice.cpp:113
 msgid "Top Rated Albums"
-msgstr ""
+msgstr "Album più gettonati"
 
 #: internet/spotify/spotifyservice.cpp:423
 msgid "Top tracks"
