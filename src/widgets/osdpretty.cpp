@@ -27,6 +27,7 @@
 #include <QLayout>
 #include <QMouseEvent>
 #include <QPainter>
+#include <QPainterPath>
 #include <QScreen>
 #include <QSettings>
 #include <QTimeLine>

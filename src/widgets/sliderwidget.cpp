@@ -24,6 +24,7 @@
 #include <QBrush>
 #include <QImage>
 #include <QPainter>
+#include <QPainterPath>
 #include <QSize>
 #include <QTimer>
 #include <QStyle>
