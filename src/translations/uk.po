@@ -5,12 +5,12 @@
 # Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # Sergii Galashyn <trovich@gmail.com>, 2011-2012
-# Yuri Chornoivan <yurchor@ukr.net>, 2011-2019
+# Yuri Chornoivan <yurchor@ukr.net>, 2011-2020
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2020-05-26 18:18+0000\n"
-"Last-Translator: John Maguire <john.maguire@gmail.com>\n"
+"PO-Revision-Date: 2020-05-27 07:11+0000\n"
+"Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian (http://www.transifex.com/davidsansome/clementine/language/uk/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -61,7 +61,7 @@ msgstr "с"
 msgid " seconds"
 msgstr " секунд"
 
-#: ../bin/src/ui_querysortpage.h:143
+#: ../bin/src/ui_querysortpage.h:144
 msgid " songs"
 msgstr " композицій"
 
@@ -101,7 +101,7 @@ msgstr "%1 списків відтворення (%2)"
 msgid ""
 "%1 request failed:\n"
 "%2"
-msgstr ""
+msgstr "Помилка запиту %1:\n%2"
 
 #: playlist/playlistmanager.cpp:429
 #, qt-format
@@ -944,7 +944,7 @@ msgstr "Зображення тла"
 msgid "Background opacity"
 msgstr "Прозорість фону"
 
-#: core/database.cpp:668
+#: core/database.cpp:669
 msgid "Backing up database"
 msgstr "Створення резервної копії бази даних"
 
@@ -1052,7 +1052,7 @@ msgstr "Кнопки"
 
 #: internet/podcasts/addpodcastdialog.cpp:97
 msgid "CBC Podcasts"
-msgstr ""
+msgstr "Подкасти CBC"
 
 #: core/song.cpp:454
 msgid "CDDA"
@@ -1310,7 +1310,7 @@ msgstr "Список відокремлених комами слів-префі
 
 #: ../bin/src/ui_console.h:129
 msgid "Command"
-msgstr ""
+msgstr "Команда"
 
 #: playlist/playlist.cpp:1434 smartplaylists/searchterm.cpp:384
 #: ui/organisedialog.cpp:78 ../bin/src/ui_edittagdialog.h:719
@@ -1461,7 +1461,7 @@ msgstr "Не вдалося виявлити потоку звукових да�
 
 #: internet/googledrive/googledriveservice.cpp:208
 msgid "Could not find Google Drive file."
-msgstr ""
+msgstr "Не вдалося знайти файл на Диску Google."
 
 #: songinfo/streamdiscoverer.cpp:123
 msgid "Could not get details"
@@ -1582,9 +1582,9 @@ msgstr "Танцювальна"
 
 #: ../bin/src/ui_console.h:131
 msgid "Database"
-msgstr ""
+msgstr "База даних"
 
-#: core/database.cpp:621
+#: core/database.cpp:622
 msgid ""
 "Database corruption detected. Please read https://github.com/clementine-"
 "player/Clementine/wiki/Database-Corruption for instructions on how to "
@@ -1949,7 +1949,7 @@ msgstr "Дабстеп"
 
 #: ../bin/src/ui_console.h:132
 msgid "Dump To Logs"
-msgstr ""
+msgstr "Записати до журналу"
 
 #: ../bin/src/ui_episodeinfowidget.h:134 ../bin/src/ui_ripcddialog.h:308
 msgid "Duration"
@@ -2270,7 +2270,7 @@ msgstr "Не вдалося отримати подкасти"
 msgid ""
 "Failed to get channel list:\n"
 "%1"
-msgstr ""
+msgstr "Не вдалося отримати список каналів:\n%1"
 
 #: internet/podcasts/addpodcastbyurl.cpp:71
 #: internet/podcasts/fixedopmlpage.cpp:55
@@ -2282,7 +2282,7 @@ msgstr "Не вдалося завантажити подкаст"
 msgid ""
 "Failed to parse %1 response:\n"
 "%2"
-msgstr ""
+msgstr "Не вдалося обробити відповідь %1:\n%2"
 
 #: internet/podcasts/podcasturlloader.cpp:177
 msgid "Failed to parse the XML for this RSS feed"
@@ -2293,7 +2293,7 @@ msgstr "Не вдалося розібрати XML для цієї RSS стрі�
 msgid ""
 "Failed to update icecast directory:\n"
 "%1"
-msgstr ""
+msgstr "Не вдалося оновити каталог icecast:\n%1"
 
 #: ui/trackselectiondialog.cpp:247
 #, qt-format
@@ -2332,7 +2332,7 @@ msgstr "Не вдалося отримати обкладинку"
 #: internet/subsonic/subsonicdynamicplaylist.cpp:100
 #: internet/subsonic/subsonicdynamicplaylist.cpp:166
 msgid "Fetching playlist items"
-msgstr ""
+msgstr "Отримуємо записи списку відтворення"
 
 #: ../bin/src/ui_ripcddialog.h:319
 msgid "File Format"
@@ -2432,7 +2432,7 @@ msgstr "Забування пристрою вилучає його з цьог�
 #: ../bin/src/ui_playlistcontainer.h:134
 #: ../bin/src/ui_playlistlistcontainer.h:126
 #: ../bin/src/ui_episodeinfowidget.h:131 ../bin/src/ui_podcastinfowidget.h:190
-#: ../bin/src/ui_querysearchpage.h:113 ../bin/src/ui_querysortpage.h:136
+#: ../bin/src/ui_querysearchpage.h:113 ../bin/src/ui_querysortpage.h:137
 #: ../bin/src/ui_searchpreview.h:103 ../bin/src/ui_searchtermwidget.h:274
 #: ../bin/src/ui_wizardfinishpage.h:82
 #: ../bin/src/ui_songkickconcertwidget.h:99
@@ -2464,7 +2464,7 @@ msgstr "Кадрів на буфер"
 
 #: internet/subsonic/subsonicservice.cpp:109
 msgid "Frequently Played Albums"
-msgstr ""
+msgstr "Найчастіше відтворювані альбоми"
 
 #: moodbar/moodbarrenderer.cpp:173
 msgid "Frozen"
@@ -2779,7 +2779,7 @@ msgstr "Вставити…"
 msgid "Installed"
 msgstr "Встановлено"
 
-#: core/database.cpp:605
+#: core/database.cpp:606
 msgid "Integrity check"
 msgstr "Перевірка цілісності даних"
 
@@ -2988,7 +2988,7 @@ msgstr "Повідомлення про повторне сканування ф
 msgid "Library search"
 msgstr "Пошук у фонотеці"
 
-#: ../bin/src/ui_querysortpage.h:140
+#: ../bin/src/ui_querysortpage.h:141
 msgid "Limits"
 msgstr "Обмеження"
 
@@ -3218,7 +3218,7 @@ msgstr "Найбільша бітова швидкість"
 
 #: ../bin/src/ui_behavioursettingspage.h:449
 msgid "Maximum number of child processes for tag handling (requires restart)"
-msgstr ""
+msgstr "Максимальна кількість дочірніх процесів для обробки міток (потребує перезапуску)"
 
 #: ripper/ripcddialog.cpp:155
 msgid "Media has changed. Reloading"
@@ -3389,7 +3389,7 @@ msgstr "Нові композиції буде додано автоматичн
 
 #: internet/subsonic/subsonicservice.cpp:101
 msgid "Newest Albums"
-msgstr ""
+msgstr "Найновіші альбоми"
 
 #: library/library.cpp:94
 msgid "Newest tracks"
@@ -3509,7 +3509,7 @@ msgstr "Кількість показаних епізодів"
 
 #: ../bin/src/ui_behavioursettingspage.h:450
 msgid "Number of processes:"
-msgstr ""
+msgstr "Кількість процесів:"
 
 #: ui/notificationssettingspage.cpp:38
 msgid "OSD Preview"
@@ -3561,7 +3561,7 @@ msgstr "Підтримувати зв’язок лише з клієнтами 
 msgid "Only allow connections from the local network"
 msgstr "З’єднуватися лише у межах локальної мережі"
 
-#: ../bin/src/ui_querysortpage.h:142
+#: ../bin/src/ui_querysortpage.h:143
 msgid "Only show the first"
 msgstr "Показувати лише перший"
 
@@ -3981,13 +3981,13 @@ msgstr "Натискання кнопки пульту Wii"
 msgid "Push Wiiremote button"
 msgstr "Натиснути кнопку Wiiremote"
 
-#: ../bin/src/ui_querysortpage.h:138
+#: ../bin/src/ui_querysortpage.h:139
 msgid "Put songs in a random order"
 msgstr "Виводити композиції у випадковому порядку"
 
 #: ../bin/src/ui_console.h:134
 msgid "Qt"
-msgstr ""
+msgstr "Qt"
 
 #: ../bin/src/ui_transcoderoptionsflac.h:80
 #: ../bin/src/ui_transcoderoptionsmp3.h:191
@@ -4034,11 +4034,11 @@ msgstr "Дощ"
 
 #: internet/subsonic/subsonicservice.cpp:105
 msgid "Random Albums"
-msgstr ""
+msgstr "Випадкові альбоми"
 
 #: internet/subsonic/subsonicservice.cpp:125
 msgid "Random Songs"
-msgstr ""
+msgstr "Випадкові композиції"
 
 #: ../bin/src/ui_visualisationselector.h:111
 msgid "Random visualization"
@@ -4079,7 +4079,7 @@ msgstr "Дійсно скасувати?"
 
 #: internet/subsonic/subsonicservice.cpp:117
 msgid "Recently Played Albums"
-msgstr ""
+msgstr "Нещодавно відтворені альбоми"
 
 #: internet/subsonic/subsonicsettingspage.cpp:161
 msgid "Redirect limit exceeded, verify server configuration."
@@ -4637,7 +4637,7 @@ msgstr "Показати вище, в рядку стану"
 msgid "Show all songs"
 msgstr "Показати всі композиції"
 
-#: ../bin/src/ui_querysortpage.h:141
+#: ../bin/src/ui_querysortpage.h:142
 msgid "Show all the songs"
 msgstr "Показати всі композиції"
 
@@ -4826,11 +4826,11 @@ msgstr "Сортувати за жанром (за популярністю)"
 msgid "Sort by station name"
 msgstr "Сортувати за назвою станції"
 
-#: ../bin/src/ui_querysortpage.h:139
+#: ../bin/src/ui_querysortpage.h:140
 msgid "Sort songs by"
 msgstr "Сортувати композиції за"
 
-#: ../bin/src/ui_querysortpage.h:137
+#: ../bin/src/ui_querysortpage.h:138
 msgid "Sorting"
 msgstr "Сортування"
 
@@ -4877,7 +4877,7 @@ msgstr "Оцінені"
 
 #: internet/subsonic/subsonicservice.cpp:121
 msgid "Starred Albums"
-msgstr ""
+msgstr "Альбоми із зірками"
 
 #: ripper/ripcddialog.cpp:74
 msgid "Start ripping"
@@ -5258,7 +5258,7 @@ msgstr "Забагато перенапрямлень"
 
 #: internet/subsonic/subsonicservice.cpp:113
 msgid "Top Rated Albums"
-msgstr ""
+msgstr "Альбоми із найвищою оцінкою"
 
 #: internet/spotify/spotifyservice.cpp:423
 msgid "Top tracks"
@@ -5920,7 +5920,7 @@ msgstr "не містить"
 
 #: ../bin/src/ui_console.h:133
 msgid "dump"
-msgstr ""
+msgstr "створити дамп"
 
 #: smartplaylists/searchterm.cpp:263
 msgid "empty"

@@ -11,8 +11,8 @@
 # Ankorath <barolth@gmail.com>, 2013
 # 003fb60fe858035628926368275e5acb_85d9fc0 <c6d3cea1e89f14fe435edb6d4b10daf1_95514>, 2013
 # Benjamin Valentin <benpicco@googlemail.com>, 2019
-# burtek <inactive+burtek@transifex.com>, 2013
-# burtek <inactive+burtek@transifex.com>, 2013
+# 6c2b84485b1beaee2be17654f6d69c27_39a97c6 <cb0ab24fea6d54dcc12c5a5635a8fdea_41553>, 2013
+# 6c2b84485b1beaee2be17654f6d69c27_39a97c6 <cb0ab24fea6d54dcc12c5a5635a8fdea_41553>, 2013
 # AG_Caesar <caesar@drachenhain.net>, 2016
 # Christian Sturm <reezer@reezer.org>, 2011-2012
 # Claudius Henrichs <claudius.h@gmx.de>, 2011
@@ -20,7 +20,7 @@
 # daschuer <daschuer@gmx.de>, 2012
 # Eduard Braun <eduard.braun2@gmx.de>, 2015-2016
 # El_Zorro_Loco <the.crazy.zorro@googlemail.com>, 2011-2012
-# Ettore Atalan <atalanttore@googlemail.com>, 2014-2019
+# Ettore Atalan <atalanttore@googlemail.com>, 2014-2020
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # F M, 2019
 # geroldmittelstaedt <gerold.mittelstaedt@googlemail.com>, 2012
@@ -45,7 +45,7 @@
 # Mohamed Sakhri, 2013
 # Mosley <stefan@stefantiemann.de>, 2011
 # Paul E. <>, 2012
-# Peter B. <pb@das-werkstatt.com>, 2014-2017
+# Peter B. <pb@das-werkstatt.com>, 2014-2017,2020
 # Phillip Schichtel, 2013
 # Phillip Schichtel, 2013
 # robfloop <robertbeckmann@fastmail.fm>, 2012
@@ -64,8 +64,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2020-05-26 18:18+0000\n"
-"Last-Translator: John Maguire <john.maguire@gmail.com>\n"
+"PO-Revision-Date: 2020-05-27 20:21+0000\n"
+"Last-Translator: Ettore Atalan <atalanttore@googlemail.com>\n"
 "Language-Team: German (http://www.transifex.com/davidsansome/clementine/language/de/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -116,7 +116,7 @@ msgstr " s"
 msgid " seconds"
 msgstr " Sekunden"
 
-#: ../bin/src/ui_querysortpage.h:143
+#: ../bin/src/ui_querysortpage.h:144
 msgid " songs"
 msgstr "Titel"
 
@@ -156,7 +156,7 @@ msgstr "%1 Wiedergabelisten (%2)"
 msgid ""
 "%1 request failed:\n"
 "%2"
-msgstr ""
+msgstr "%1 Anfrage fehlgeschlagen:\n%2"
 
 #: playlist/playlistmanager.cpp:429
 #, qt-format
@@ -999,7 +999,7 @@ msgstr "Hintergrundbild"
 msgid "Background opacity"
 msgstr "Deckkraft:"
 
-#: core/database.cpp:668
+#: core/database.cpp:669
 msgid "Backing up database"
 msgstr "Die Datenbank wird gesichert"
 
@@ -1107,7 +1107,7 @@ msgstr "Tasten"
 
 #: internet/podcasts/addpodcastdialog.cpp:97
 msgid "CBC Podcasts"
-msgstr ""
+msgstr "CBC Podcasts"
 
 #: core/song.cpp:454
 msgid "CDDA"
@@ -1365,7 +1365,7 @@ msgstr "Kommagetrennte Liste von Präfixen, die beim Sortieren ignoriert werden 
 
 #: ../bin/src/ui_console.h:129
 msgid "Command"
-msgstr ""
+msgstr "Befehl"
 
 #: playlist/playlist.cpp:1434 smartplaylists/searchterm.cpp:384
 #: ui/organisedialog.cpp:78 ../bin/src/ui_edittagdialog.h:719
@@ -1516,7 +1516,7 @@ msgstr "Konnte keinen Audiostream in %1 entdecken"
 
 #: internet/googledrive/googledriveservice.cpp:208
 msgid "Could not find Google Drive file."
-msgstr ""
+msgstr "Konnte Datei auf Google Drive nicht finden."
 
 #: songinfo/streamdiscoverer.cpp:123
 msgid "Could not get details"
@@ -1637,9 +1637,9 @@ msgstr "Dance"
 
 #: ../bin/src/ui_console.h:131
 msgid "Database"
-msgstr ""
+msgstr "Datenbank"
 
-#: core/database.cpp:621
+#: core/database.cpp:622
 msgid ""
 "Database corruption detected. Please read https://github.com/clementine-"
 "player/Clementine/wiki/Database-Corruption for instructions on how to "
@@ -2387,7 +2387,7 @@ msgstr "Abrufen des Titelbildes ist fehlgeschlagen"
 #: internet/subsonic/subsonicdynamicplaylist.cpp:100
 #: internet/subsonic/subsonicdynamicplaylist.cpp:166
 msgid "Fetching playlist items"
-msgstr ""
+msgstr "Einträge der Wiedergabeliste werden abgerufen"
 
 #: ../bin/src/ui_ripcddialog.h:319
 msgid "File Format"
@@ -2487,7 +2487,7 @@ msgstr "Das Vergessen eines Geräts wird es aus dieser Liste entfernen und Cleme
 #: ../bin/src/ui_playlistcontainer.h:134
 #: ../bin/src/ui_playlistlistcontainer.h:126
 #: ../bin/src/ui_episodeinfowidget.h:131 ../bin/src/ui_podcastinfowidget.h:190
-#: ../bin/src/ui_querysearchpage.h:113 ../bin/src/ui_querysortpage.h:136
+#: ../bin/src/ui_querysearchpage.h:113 ../bin/src/ui_querysortpage.h:137
 #: ../bin/src/ui_searchpreview.h:103 ../bin/src/ui_searchtermwidget.h:274
 #: ../bin/src/ui_wizardfinishpage.h:82
 #: ../bin/src/ui_songkickconcertwidget.h:99
@@ -2519,7 +2519,7 @@ msgstr "Frames pro Puffer"
 
 #: internet/subsonic/subsonicservice.cpp:109
 msgid "Frequently Played Albums"
-msgstr ""
+msgstr "Häufig abgespielte Alben"
 
 #: moodbar/moodbarrenderer.cpp:173
 msgid "Frozen"
@@ -2834,7 +2834,7 @@ msgstr "Einfügen …"
 msgid "Installed"
 msgstr "Installiert"
 
-#: core/database.cpp:605
+#: core/database.cpp:606
 msgid "Integrity check"
 msgstr "Integritätsprüfung"
 
@@ -3043,7 +3043,7 @@ msgstr "Hinweis beim erneuten durchsuchen der Bibliothek"
 msgid "Library search"
 msgstr "Bibliothek durchsuchen"
 
-#: ../bin/src/ui_querysortpage.h:140
+#: ../bin/src/ui_querysortpage.h:141
 msgid "Limits"
 msgstr "Begrenzungen"
 
@@ -3444,7 +3444,7 @@ msgstr "Neue Musiktitel werden automatisch hinzugefügt."
 
 #: internet/subsonic/subsonicservice.cpp:101
 msgid "Newest Albums"
-msgstr ""
+msgstr "Neueste Alben"
 
 #: library/library.cpp:94
 msgid "Newest tracks"
@@ -3564,7 +3564,7 @@ msgstr "Anzahl an anzuzeigenden Episoden"
 
 #: ../bin/src/ui_behavioursettingspage.h:450
 msgid "Number of processes:"
-msgstr ""
+msgstr "Anzahl von Prozessen:"
 
 #: ui/notificationssettingspage.cpp:38
 msgid "OSD Preview"
@@ -3616,7 +3616,7 @@ msgstr "Verbindungen, nur von Programmen, aus folgenden IP-Bereichen akzeptieren
 msgid "Only allow connections from the local network"
 msgstr "Nur Verbindungen aus dem lokalen Netzwerk"
 
-#: ../bin/src/ui_querysortpage.h:142
+#: ../bin/src/ui_querysortpage.h:143
 msgid "Only show the first"
 msgstr "Nur die ersten"
 
@@ -4036,13 +4036,13 @@ msgstr "Taste auf Wii-Fernbedienung drücken"
 msgid "Push Wiiremote button"
 msgstr "Taste auf Wii-Fernbedienung drücken"
 
-#: ../bin/src/ui_querysortpage.h:138
+#: ../bin/src/ui_querysortpage.h:139
 msgid "Put songs in a random order"
 msgstr "Zufällige Titelreihenfolge"
 
 #: ../bin/src/ui_console.h:134
 msgid "Qt"
-msgstr ""
+msgstr "Qt"
 
 #: ../bin/src/ui_transcoderoptionsflac.h:80
 #: ../bin/src/ui_transcoderoptionsmp3.h:191
@@ -4089,11 +4089,11 @@ msgstr "Regen"
 
 #: internet/subsonic/subsonicservice.cpp:105
 msgid "Random Albums"
-msgstr ""
+msgstr "Zufällige Alben"
 
 #: internet/subsonic/subsonicservice.cpp:125
 msgid "Random Songs"
-msgstr ""
+msgstr "Zufällige Titel"
 
 #: ../bin/src/ui_visualisationselector.h:111
 msgid "Random visualization"
@@ -4134,7 +4134,7 @@ msgstr "Wirklich abbrechen?"
 
 #: internet/subsonic/subsonicservice.cpp:117
 msgid "Recently Played Albums"
-msgstr ""
+msgstr "Kürzlich abgespielte Alben"
 
 #: internet/subsonic/subsonicsettingspage.cpp:161
 msgid "Redirect limit exceeded, verify server configuration."
@@ -4692,7 +4692,7 @@ msgstr "Oberhalb der Statusleiste anzeigen"
 msgid "Show all songs"
 msgstr "Alle Titel anzeigen"
 
-#: ../bin/src/ui_querysortpage.h:141
+#: ../bin/src/ui_querysortpage.h:142
 msgid "Show all the songs"
 msgstr "Alle Titel anzeigen"
 
@@ -4881,11 +4881,11 @@ msgstr "Sortiert nach Genre (nach Popularität)"
 msgid "Sort by station name"
 msgstr "Sortiert nach Sendernamen"
 
-#: ../bin/src/ui_querysortpage.h:139
+#: ../bin/src/ui_querysortpage.h:140
 msgid "Sort songs by"
 msgstr "Titel sortieren nach"
 
-#: ../bin/src/ui_querysortpage.h:137
+#: ../bin/src/ui_querysortpage.h:138
 msgid "Sorting"
 msgstr "Sortierung"
 
@@ -5313,7 +5313,7 @@ msgstr "Zu viele Umleitungen"
 
 #: internet/subsonic/subsonicservice.cpp:113
 msgid "Top Rated Albums"
-msgstr ""
+msgstr "Am besten bewertete Alben"
 
 #: internet/spotify/spotifyservice.cpp:423
 msgid "Top tracks"

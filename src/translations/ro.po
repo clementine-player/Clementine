@@ -3,15 +3,17 @@
 # This file is distributed under the same license as the Clementine package.
 # 
 # Translators:
+# 8266d4ce42d3694fffc0e46575c7e44a, 2013
 # arnaudbienner <arnaud.bienner@gmail.com>, 2011
 # arnaudbienner <arnaud.bienner@gmail.com>, 2011
 # AzuraMeta <azura.meta@gmail.com>, 2011
 # AzuraMeta <azura.meta@gmail.com>, 2011
 # 8266d4ce42d3694fffc0e46575c7e44a, 2013
 # CD <cstl@vivaldi.net>, 2015-2016
-# Daniel Șerbănescu <daniel@serbanescu.dk>, 2014,2017,2019
+# Daniel Șerbănescu <daniel@serbanescu.dk>, 2014,2017,2019-2020
 # Daniel Șerbănescu <daniel@serbanescu.dk>, 2014
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
+# ilixandr <ilixandr@gmail.com>, 2014
 # ilixandr <ilixandr@gmail.com>, 2014
 # 8266d4ce42d3694fffc0e46575c7e44a, 2013
 # titus <titus0818@gmail.com>, 2014-2015
@@ -19,8 +21,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2020-05-26 18:18+0000\n"
-"Last-Translator: John Maguire <john.maguire@gmail.com>\n"
+"PO-Revision-Date: 2020-05-27 14:01+0000\n"
+"Last-Translator: Daniel Șerbănescu <daniel@serbanescu.dk>\n"
 "Language-Team: Romanian (http://www.transifex.com/davidsansome/clementine/language/ro/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -34,7 +36,7 @@ msgid ""
 "You can favorite playlists by clicking the star icon next to a playlist name\n"
 "\n"
 "Favorited playlists will be saved here"
-msgstr "\n\nPuteți adăuga listele de redare la favorite apăsând clic pe iconița stea de lângă numele listei de redare\n\nListele de redare favorite vor fi salvate aici"
+msgstr "\n\nPuteți favoriza liste de redare apăsând clic pe iconița steluță de lângă numele listei de redare\n\nListele de redare favorizate vor fi salvate aici"
 
 #: ../bin/src/ui_podcastsettingspage.h:270
 msgid " days"
@@ -71,7 +73,7 @@ msgstr " s"
 msgid " seconds"
 msgstr " secunde"
 
-#: ../bin/src/ui_querysortpage.h:143
+#: ../bin/src/ui_querysortpage.h:144
 msgid " songs"
 msgstr " melodii"
 
@@ -111,7 +113,7 @@ msgstr "%1 liste de redare (%2)"
 msgid ""
 "%1 request failed:\n"
 "%2"
-msgstr ""
+msgstr "%1 cerere eșuată:\n%2"
 
 #: playlist/playlistmanager.cpp:429
 #, qt-format
@@ -334,7 +336,7 @@ msgstr "96,000Hz"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:164
 msgid "<a href=\"http://www.di.fm/premium/\">Upgrade to Premium now</a>"
-msgstr "<a href=\"http://www.di.fm/premium/\">Treceți acum la Premium</a>"
+msgstr "<a href=\"http://www.di.fm/premium/\">Avansați la Premium</a>"
 
 #: ../bin/src/ui_librarysettingspage.h:194
 msgid ""
@@ -384,7 +386,7 @@ msgid ""
 "<p>Tokens start with %, for example: %artist %album %title </p>\n"
 "\n"
 "<p>If you surround sections of text that contain a token with curly-braces, that section will be hidden if the token is empty.</p>"
-msgstr "<p>Jetoanele încep cu%, de exemplu:% artist %album %titlu </ p>\n\n<p>Dacă încadrați secțiuni de text care conțin un jeton cu bucle-acolade, acea secțiune va fi ascunsă dacă jetonul este gol.</ p>"
+msgstr "<p>Jetoanele încep cu %, de exemplu:% artist %album %titlu </ p>\n\n<p>Dacă încadrați secțiuni de text care conțin un jeton cu bucle-acolade, acea secțiune va fi ascunsă dacă jetonul este gol.</p>"
 
 #: internet/spotify/spotifysettingspage.cpp:166
 msgid "A Spotify Premium account is required."
@@ -486,7 +488,7 @@ msgstr "Acțiune"
 
 #: wiimotedev/wiimotesettingspage.cpp:103
 msgid "Activate/Deactivate Wii Remote"
-msgstr "Activează/Deactivează Telecomanda Wii"
+msgstr "Activează/Dezactivează Telecomanda Wii"
 
 #: internet/podcasts/addpodcastdialog.cpp:66
 msgid "Add Podcast"
@@ -954,7 +956,7 @@ msgstr "Imagine de fundal"
 msgid "Background opacity"
 msgstr "Opacitate fundal"
 
-#: core/database.cpp:668
+#: core/database.cpp:669
 msgid "Backing up database"
 msgstr "Se creează copia de rezervă a bazei de date"
 
@@ -1062,7 +1064,7 @@ msgstr "Butoane"
 
 #: internet/podcasts/addpodcastdialog.cpp:97
 msgid "CBC Podcasts"
-msgstr ""
+msgstr "CBC Podcasts"
 
 #: core/song.cpp:454
 msgid "CDDA"
@@ -1219,7 +1221,7 @@ msgstr "Clementine poate reda muzica pe care ați încărcat-o în Dropbox"
 
 #: ../bin/src/ui_googledrivesettingspage.h:100
 msgid "Clementine can play music that you have uploaded to Google Drive"
-msgstr "Clementine poate reda muzica pe care ați încărcat-o în Google Drive "
+msgstr "Clementine poate reda muzica pe care ați încărcat-o în Google Drive"
 
 #: ../bin/src/ui_skydrivesettingspage.h:100
 msgid "Clementine can play music that you have uploaded to OneDrive"
@@ -1256,17 +1258,17 @@ msgstr "Clementine va găsi muzică în:"
 
 #: library/libraryview.cpp:364
 msgid "Click here to add some music"
-msgstr "Faceți clic aici pentru a adăuga muzică"
+msgstr "Apăsați clic aici pentru a adăuga muzică"
 
 #: playlist/playlisttabbar.cpp:298
 msgid ""
 "Click here to favorite this playlist so it will be saved and remain "
 "accessible through the \"Playlists\" panel on the left side bar"
-msgstr "Faceți clic aici pentru a marca această listă de redare, astfel încât să fie salvată și fie accesibilă prin panoul „Liste de redare” pe bara laterală din stânga"
+msgstr "Apăsați clic aici pentru a marca această listă de redare, astfel încât să fie salvată și fie accesibilă prin panoul „Liste de redare” pe bara laterală din stânga"
 
 #: ../bin/src/ui_trackslider.h:71
 msgid "Click to toggle between remaining time and total time"
-msgstr "Faceți clic aici pentru a comuta între timpul rămas și durata totală"
+msgstr "Apăsați clic aici pentru a comuta între timpul rămas și durata totală"
 
 #: ../bin/src/ui_lastfmsettingspage.h:133
 #: ../bin/src/ui_googledrivesettingspage.h:102
@@ -1276,7 +1278,7 @@ msgstr "Faceți clic aici pentru a comuta între timpul rămas și durata total�
 msgid ""
 "Clicking the Login button will open a web browser.  You should return to "
 "Clementine after you have logged in."
-msgstr "Făcând clic pe butonul de autentificare, se va deschide un browser. Ar trebui să reveniți la Clementine după ce v-ați autentificat."
+msgstr "Apăsând butonul de autentificare, se va deschide un navigator. Ar trebui să reveniți la Clementine după ce v-ați autentificat."
 
 #: widgets/didyoumean.cpp:37
 msgid "Close"
@@ -1320,7 +1322,7 @@ msgstr "Listă de cuvinte prefix separate prin virgulă de ignorat la sortare"
 
 #: ../bin/src/ui_console.h:129
 msgid "Command"
-msgstr ""
+msgstr "Comandă"
 
 #: playlist/playlist.cpp:1434 smartplaylists/searchterm.cpp:384
 #: ui/organisedialog.cpp:78 ../bin/src/ui_edittagdialog.h:719
@@ -1462,7 +1464,7 @@ msgstr "Nu se poate conecta la Subsonic, verificați adresa URL a serverului. Ex
 msgid ""
 "Could not create the GStreamer element \"%1\" - make sure you have all the "
 "required GStreamer plugins installed"
-msgstr "Nu se poate creea elementului GStreamer \"%1\" - asigurați-vă că aveți toate modulele GStreamer necesare  instalate"
+msgstr "Nu se poate creea elementul GStreamer \"%1\" - asigurați-vă că aveți toate modulele GStreamer necesare instalate"
 
 #: songinfo/streamdiscoverer.cpp:97
 #, qt-format
@@ -1471,7 +1473,7 @@ msgstr "Nu s-a putut detecta un flux audio în %1"
 
 #: internet/googledrive/googledriveservice.cpp:208
 msgid "Could not find Google Drive file."
-msgstr ""
+msgstr "Nu s-a putut găsi fișierul Google Drive."
 
 #: songinfo/streamdiscoverer.cpp:123
 msgid "Could not get details"
@@ -1522,7 +1524,7 @@ msgstr "Coperta încărcată automat de la %1"
 
 #: ui/edittagdialog.cpp:479
 msgid "Cover art manually unset"
-msgstr "Deselectează manual coperta"
+msgstr "Copertă deselectată manual"
 
 #: ui/edittagdialog.cpp:488
 msgid "Cover art not set"
@@ -1576,7 +1578,7 @@ msgstr "Imagine personalizată:"
 
 #: ../bin/src/ui_notificationssettingspage.h:450
 msgid "Custom message settings"
-msgstr "Setări mesaj personalizat"
+msgstr "Confgurări mesaj personalizat"
 
 #: ../bin/src/ui_notificationssettingspage.h:464
 msgid "Custom..."
@@ -1592,14 +1594,14 @@ msgstr "Dance"
 
 #: ../bin/src/ui_console.h:131
 msgid "Database"
-msgstr ""
+msgstr "Database"
 
-#: core/database.cpp:621
+#: core/database.cpp:622
 msgid ""
 "Database corruption detected. Please read https://github.com/clementine-"
 "player/Clementine/wiki/Database-Corruption for instructions on how to "
 "recover your database"
-msgstr "S-a detectat alterarea bazei de date. Citiți https://github.com/clementine-player/Clementine/wiki/Database-Corruption pentru instrucțiuni pentru recuperarea bazei de date."
+msgstr "S-a detectat alterarea bazei de date. Consultați https://github.com/clementine-player/Clementine/wiki/Database-Corruption pentru instrucțiuni despre recuperarea bazei de date."
 
 #: ../bin/src/ui_episodeinfowidget.h:133
 msgid "Date"
@@ -1959,7 +1961,7 @@ msgstr "Dubstep"
 
 #: ../bin/src/ui_console.h:132
 msgid "Dump To Logs"
-msgstr ""
+msgstr "Salvează în jurnale"
 
 #: ../bin/src/ui_episodeinfowidget.h:134 ../bin/src/ui_ripcddialog.h:308
 msgid "Duration"
@@ -2195,7 +2197,7 @@ msgstr "La fiecare oră"
 
 #: ../bin/src/ui_playbacksettingspage.h:347
 msgid "Except between tracks on the same album or in the same CUE sheet"
-msgstr "Excepție între piesle de pe același album sau în aceeași filă CUE"
+msgstr "Exceptând între piesele de pe același album sau în aceeași filă CUE"
 
 #: ../bin/src/ui_albumcoverexport.h:207
 msgid "Existing covers"
@@ -2280,7 +2282,7 @@ msgstr "A eșuat preluarea podcasturilor"
 msgid ""
 "Failed to get channel list:\n"
 "%1"
-msgstr ""
+msgstr "Eșec la obținerea listei de canale:\n%1"
 
 #: internet/podcasts/addpodcastbyurl.cpp:71
 #: internet/podcasts/fixedopmlpage.cpp:55
@@ -2292,7 +2294,7 @@ msgstr "A eșuat încărcarea podcastului"
 msgid ""
 "Failed to parse %1 response:\n"
 "%2"
-msgstr ""
+msgstr "Eșec la parsarea răspunsului %1:\n%2"
 
 #: internet/podcasts/podcasturlloader.cpp:177
 msgid "Failed to parse the XML for this RSS feed"
@@ -2303,7 +2305,7 @@ msgstr "A eșuat interpretarea XML pentru acest flux RSS"
 msgid ""
 "Failed to update icecast directory:\n"
 "%1"
-msgstr ""
+msgstr "Eșec la actualizarea directorului icecast:\n%1"
 
 #: ui/trackselectiondialog.cpp:247
 #, qt-format
@@ -2342,7 +2344,7 @@ msgstr "Eroare preluare copertă"
 #: internet/subsonic/subsonicdynamicplaylist.cpp:100
 #: internet/subsonic/subsonicdynamicplaylist.cpp:166
 msgid "Fetching playlist items"
-msgstr ""
+msgstr "Se preiau elementele listei de redare"
 
 #: ../bin/src/ui_ripcddialog.h:319
 msgid "File Format"
@@ -2442,7 +2444,7 @@ msgstr "Omiterea unui dispozitiv va determina eliminarea lui din aceasta listă,
 #: ../bin/src/ui_playlistcontainer.h:134
 #: ../bin/src/ui_playlistlistcontainer.h:126
 #: ../bin/src/ui_episodeinfowidget.h:131 ../bin/src/ui_podcastinfowidget.h:190
-#: ../bin/src/ui_querysearchpage.h:113 ../bin/src/ui_querysortpage.h:136
+#: ../bin/src/ui_querysearchpage.h:113 ../bin/src/ui_querysortpage.h:137
 #: ../bin/src/ui_searchpreview.h:103 ../bin/src/ui_searchtermwidget.h:274
 #: ../bin/src/ui_wizardfinishpage.h:82
 #: ../bin/src/ui_songkickconcertwidget.h:99
@@ -2474,7 +2476,7 @@ msgstr "Cadre pe memoria tampon"
 
 #: internet/subsonic/subsonicservice.cpp:109
 msgid "Frequently Played Albums"
-msgstr ""
+msgstr "Albume redate frecvent"
 
 #: moodbar/moodbarrenderer.cpp:173
 msgid "Frozen"
@@ -2502,7 +2504,7 @@ msgstr "General"
 
 #: ../bin/src/ui_notificationssettingspage.h:442
 msgid "General settings"
-msgstr "Setări generale"
+msgstr "Configurări generale"
 
 #: library/savedgroupingmanager.cpp:77 playlist/playlist.cpp:1393
 #: ui/organisedialog.cpp:77 ../bin/src/ui_groupbydialog.h:133
@@ -2518,7 +2520,7 @@ msgstr "Obține un URL pentru a distribui această melodie Spotify"
 
 #: internet/spotify/spotifyservice.cpp:674
 msgid "Get a URL to share this playlist"
-msgstr "Obtine un URL pentru a distribui aceasta lista de redare"
+msgstr "Obține un URL pentru a distribui aceasta lista de redare"
 
 #: internet/somafm/somafmservice.cpp:120
 #: internet/intergalacticfm/intergalacticfmservice.cpp:120
@@ -2616,7 +2618,7 @@ msgstr "Pagina HTML nu conține nici un flux RSS"
 #: internet/subsonic/subsonicsettingspage.cpp:166
 msgid ""
 "HTTP 3xx status code received without URL, verify server configuration."
-msgstr "A fost receptionat codul de stare HTTP 3xx fara URL, verificati configuratia serverului."
+msgstr "A fost recepționat codul de stare HTTP 3xx fără URL, verificați configurația serverului."
 
 #: ../bin/src/ui_networkproxysettingspage.h:162
 msgid "HTTP proxy"
@@ -2789,7 +2791,7 @@ msgstr "Inserați..."
 msgid "Installed"
 msgstr "Instalat"
 
-#: core/database.cpp:605
+#: core/database.cpp:606
 msgid "Integrity check"
 msgstr "Verificare integritate"
 
@@ -2998,7 +3000,7 @@ msgstr "Notă rescanare colecție"
 msgid "Library search"
 msgstr "Căutare în colecție"
 
-#: ../bin/src/ui_querysortpage.h:140
+#: ../bin/src/ui_querysortpage.h:141
 msgid "Limits"
 msgstr "Limite"
 
@@ -3228,7 +3230,7 @@ msgstr "Rată de biți maximă"
 
 #: ../bin/src/ui_behavioursettingspage.h:449
 msgid "Maximum number of child processes for tag handling (requires restart)"
-msgstr ""
+msgstr "Maximum number of child processes for tag handling (requires restart)"
 
 #: ripper/ripcddialog.cpp:155
 msgid "Media has changed. Reloading"
@@ -3399,7 +3401,7 @@ msgstr "Piesele noi vor fi adăugate automat."
 
 #: internet/subsonic/subsonicservice.cpp:101
 msgid "Newest Albums"
-msgstr ""
+msgstr "Cele mai noi albume"
 
 #: library/library.cpp:94
 msgid "Newest tracks"
@@ -3519,7 +3521,7 @@ msgstr "Numărul episoadelor de arătat"
 
 #: ../bin/src/ui_behavioursettingspage.h:450
 msgid "Number of processes:"
-msgstr ""
+msgstr "Numărul de procese:"
 
 #: ui/notificationssettingspage.cpp:38
 msgid "OSD Preview"
@@ -3565,13 +3567,13 @@ msgid ""
 "10.x.x.x\n"
 "172.16.0.0 - 172.31.255.255\n"
 "192.168.x.x"
-msgstr "Se acceptă conexiuni numai de la clienții din intervalele ip:\n10.x.x.x\n172.16.0.0 - 172.31.255.255\n192.168.x.x"
+msgstr "Se acceptă conexiuni numai de la clienții din intervalele IP:\n10.x.x.x\n172.16.0.0 - 172.31.255.255\n192.168.x.x"
 
 #: ../bin/src/ui_networkremotesettingspage.h:231
 msgid "Only allow connections from the local network"
 msgstr "Acceptă conexiuni numai din rețeaua locală"
 
-#: ../bin/src/ui_querysortpage.h:142
+#: ../bin/src/ui_querysortpage.h:143
 msgid "Only show the first"
 msgstr "Arată numai primul"
 
@@ -3991,13 +3993,13 @@ msgstr "Apăsați butonul telecomenzii Wii"
 msgid "Push Wiiremote button"
 msgstr "Apăsați butonul Wiiremote"
 
-#: ../bin/src/ui_querysortpage.h:138
+#: ../bin/src/ui_querysortpage.h:139
 msgid "Put songs in a random order"
 msgstr "Aranjează melodiile într-o ordine aleatoare"
 
 #: ../bin/src/ui_console.h:134
 msgid "Qt"
-msgstr ""
+msgstr "Qt"
 
 #: ../bin/src/ui_transcoderoptionsflac.h:80
 #: ../bin/src/ui_transcoderoptionsmp3.h:191
@@ -4044,11 +4046,11 @@ msgstr "Ploaie"
 
 #: internet/subsonic/subsonicservice.cpp:105
 msgid "Random Albums"
-msgstr ""
+msgstr "Albume aleatorii"
 
 #: internet/subsonic/subsonicservice.cpp:125
 msgid "Random Songs"
-msgstr ""
+msgstr "Piese aleatorii"
 
 #: ../bin/src/ui_visualisationselector.h:111
 msgid "Random visualization"
@@ -4089,7 +4091,7 @@ msgstr "Sigur anulați?"
 
 #: internet/subsonic/subsonicservice.cpp:117
 msgid "Recently Played Albums"
-msgstr ""
+msgstr "Albume redate recent"
 
 #: internet/subsonic/subsonicsettingspage.cpp:161
 msgid "Redirect limit exceeded, verify server configuration."
@@ -4647,7 +4649,7 @@ msgstr "Arată deasupra barei de stare"
 msgid "Show all songs"
 msgstr "Arată toate melodiile"
 
-#: ../bin/src/ui_querysortpage.h:141
+#: ../bin/src/ui_querysortpage.h:142
 msgid "Show all the songs"
 msgstr "Arată toate melodiile"
 
@@ -4836,11 +4838,11 @@ msgstr "Sortează după gen (după popularitate)"
 msgid "Sort by station name"
 msgstr "Sortează după numele stației"
 
-#: ../bin/src/ui_querysortpage.h:139
+#: ../bin/src/ui_querysortpage.h:140
 msgid "Sort songs by"
 msgstr "Sortează melodiile după"
 
-#: ../bin/src/ui_querysortpage.h:137
+#: ../bin/src/ui_querysortpage.h:138
 msgid "Sorting"
 msgstr "Se sortează"
 
@@ -4887,7 +4889,7 @@ msgstr "Cu steluță"
 
 #: internet/subsonic/subsonicservice.cpp:121
 msgid "Starred Albums"
-msgstr ""
+msgstr "Albume favorite"
 
 #: ripper/ripcddialog.cpp:74
 msgid "Start ripping"
@@ -5268,7 +5270,7 @@ msgstr "Prea multe redirecționări"
 
 #: internet/subsonic/subsonicservice.cpp:113
 msgid "Top Rated Albums"
-msgstr ""
+msgstr "Top Rated Albums"
 
 #: internet/spotify/spotifyservice.cpp:423
 msgid "Top tracks"
@@ -5297,7 +5299,7 @@ msgstr "Piesă"
 
 #: ../bin/src/ui_transcodedialog.h:213 ../bin/src/ui_mainwindow.h:751
 msgid "Transcode Music"
-msgstr "Transcodare muzică"
+msgstr "Transcodează muzica"
 
 #: ../bin/src/ui_transcodelogdialog.h:62
 msgid "Transcoder Log"
@@ -5930,7 +5932,7 @@ msgstr "nu conține"
 
 #: ../bin/src/ui_console.h:133
 msgid "dump"
-msgstr ""
+msgstr "dump"
 
 #: smartplaylists/searchterm.cpp:263
 msgid "empty"
