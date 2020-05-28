@@ -20,6 +20,7 @@
 
 #include <QLinearGradient>
 #include <QPainter>
+#include <QPainterPath>
 
 const int FreeSpaceBar::kBarHeight = 20;
 const int FreeSpaceBar::kBarBorderRadius = 8;
