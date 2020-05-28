@@ -1388,7 +1388,7 @@ QString Playlist::column_name(Column column) {
     case Column_Year:
       return tr("Year");
     case Column_OriginalYear:
-      return tr("Original year");
+      return tr("Year - original"); // Done like this so sorts beside "Year" when editing smart playlists
     case Column_Genre:
       return tr("Genre");
     case Column_AlbumArtist:
