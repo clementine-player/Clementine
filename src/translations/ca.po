@@ -10,14 +10,14 @@
 # Adolfo Jayme-Barrientos, 2013
 # Adolfo Jayme-Barrientos, 2014
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
-# Juanjo, 2016-2019
+# Juanjo, 2016-2020
 # davidsansome <me@davidsansome.com>, 2013
 # Roger Pueyo Centelles <transifex@rogerpueyo.com>, 2011-2014,2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2020-05-26 18:18+0000\n"
-"Last-Translator: John Maguire <john.maguire@gmail.com>\n"
+"PO-Revision-Date: 2020-05-28 19:58+0000\n"
+"Last-Translator: Adolfo Jayme-Barrientos\n"
 "Language-Team: Catalan (http://www.transifex.com/davidsansome/clementine/language/ca/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -108,7 +108,7 @@ msgstr "%1 llistes de reproducció (%2)"
 msgid ""
 "%1 request failed:\n"
 "%2"
-msgstr ""
+msgstr "La demanda %1 ha fallat:\n%2"
 
 #: playlist/playlistmanager.cpp:429
 #, qt-format
@@ -914,7 +914,7 @@ msgstr "Actualització automàtica"
 msgid "Automatically open single categories in the library tree"
 msgstr "Expandeix automàticament les categories úniques en l’arbre de la col·lecció"
 
-#: widgets/freespacebar.cpp:44
+#: widgets/freespacebar.cpp:45
 msgid "Available"
 msgstr "Disponible"
 
@@ -1059,7 +1059,7 @@ msgstr "Botons"
 
 #: internet/podcasts/addpodcastdialog.cpp:97
 msgid "CBC Podcasts"
-msgstr ""
+msgstr "Podcasts de la CBC"
 
 #: core/song.cpp:454
 msgid "CDDA"
@@ -1317,7 +1317,7 @@ msgstr "Llista separada de paraules que s'ignoraran a l'inici de cada cadena qua
 
 #: ../bin/src/ui_console.h:129
 msgid "Command"
-msgstr ""
+msgstr "Ordre"
 
 #: playlist/playlist.cpp:1434 smartplaylists/searchterm.cpp:384
 #: ui/organisedialog.cpp:78 ../bin/src/ui_edittagdialog.h:719
@@ -1468,7 +1468,7 @@ msgstr "No s'ha pogut detectar un flux d'àudio a %1"
 
 #: internet/googledrive/googledriveservice.cpp:208
 msgid "Could not find Google Drive file."
-msgstr ""
+msgstr "No s'ha trobat el fitxer del Google Drive."
 
 #: songinfo/streamdiscoverer.cpp:123
 msgid "Could not get details"
@@ -1589,7 +1589,7 @@ msgstr "Dance"
 
 #: ../bin/src/ui_console.h:131
 msgid "Database"
-msgstr ""
+msgstr "Base de dades"
 
 #: core/database.cpp:622
 msgid ""
@@ -1956,7 +1956,7 @@ msgstr "Dubstep"
 
 #: ../bin/src/ui_console.h:132
 msgid "Dump To Logs"
-msgstr ""
+msgstr "Volca-ho als registres"
 
 #: ../bin/src/ui_episodeinfowidget.h:134 ../bin/src/ui_ripcddialog.h:308
 msgid "Duration"
@@ -2277,7 +2277,7 @@ msgstr "No s'han pogut obtenir els podcasts"
 msgid ""
 "Failed to get channel list:\n"
 "%1"
-msgstr ""
+msgstr "No s'ha pogut aconseguir la llista de canals:\n%1"
 
 #: internet/podcasts/addpodcastbyurl.cpp:71
 #: internet/podcasts/fixedopmlpage.cpp:55
@@ -2289,7 +2289,7 @@ msgstr "No s'ha pogut carregar el podcast"
 msgid ""
 "Failed to parse %1 response:\n"
 "%2"
-msgstr ""
+msgstr "No s'ha pogut analitzar la resposta %1:\n%2"
 
 #: internet/podcasts/podcasturlloader.cpp:177
 msgid "Failed to parse the XML for this RSS feed"
@@ -2300,7 +2300,7 @@ msgstr "No s’ha pogut analitzar el codi XML d’aquest canal RSS"
 msgid ""
 "Failed to update icecast directory:\n"
 "%1"
-msgstr ""
+msgstr "No s'ha pogut actualitzar la carpeta de l'Icecast:\n%1"
 
 #: ui/trackselectiondialog.cpp:247
 #, qt-format
@@ -2339,7 +2339,7 @@ msgstr "S’ha produït un error en obtenir la caràtula"
 #: internet/subsonic/subsonicdynamicplaylist.cpp:100
 #: internet/subsonic/subsonicdynamicplaylist.cpp:166
 msgid "Fetching playlist items"
-msgstr ""
+msgstr "S’estan cercant els elements de la llista de reproducció"
 
 #: ../bin/src/ui_ripcddialog.h:319
 msgid "File Format"
@@ -2471,7 +2471,7 @@ msgstr "Trames per espai de memòria intermèdia"
 
 #: internet/subsonic/subsonicservice.cpp:109
 msgid "Frequently Played Albums"
-msgstr ""
+msgstr "Àlbums reproduïts freqüentment"
 
 #: moodbar/moodbarrenderer.cpp:173
 msgid "Frozen"
@@ -3225,7 +3225,7 @@ msgstr "Màxima taxa de bits"
 
 #: ../bin/src/ui_behavioursettingspage.h:449
 msgid "Maximum number of child processes for tag handling (requires restart)"
-msgstr ""
+msgstr "Nombre màxim de processos descendents per mantenir les etiquetes (cal reiniciar)"
 
 #: ripper/ripcddialog.cpp:155
 msgid "Media has changed. Reloading"
@@ -3386,7 +3386,7 @@ msgstr "Llista de reproducció nova"
 msgid "New smart playlist..."
 msgstr "Llista de reproducció intel·ligent nova…"
 
-#: widgets/freespacebar.cpp:45
+#: widgets/freespacebar.cpp:46
 msgid "New songs"
 msgstr "Cançons noves:"
 
@@ -3396,7 +3396,7 @@ msgstr "Les peces noves s’afegiran automàticament."
 
 #: internet/subsonic/subsonicservice.cpp:101
 msgid "Newest Albums"
-msgstr ""
+msgstr "Àlbums nous"
 
 #: library/library.cpp:94
 msgid "Newest tracks"
@@ -3516,7 +3516,7 @@ msgstr "Nombre d’episodis a mostrar"
 
 #: ../bin/src/ui_behavioursettingspage.h:450
 msgid "Number of processes:"
-msgstr ""
+msgstr "Nombre de processos:"
 
 #: ui/notificationssettingspage.cpp:38
 msgid "OSD Preview"
@@ -3672,9 +3672,9 @@ msgstr "Organitzant fitxers"
 msgid "Original tags"
 msgstr "Etiquetes originals"
 
-#: library/savedgroupingmanager.cpp:101 playlist/playlist.cpp:1391
-#: ui/organisedialog.cpp:76 ../bin/src/ui_groupbydialog.h:135
-#: ../bin/src/ui_groupbydialog.h:154 ../bin/src/ui_groupbydialog.h:173
+#: library/savedgroupingmanager.cpp:101 ui/organisedialog.cpp:76
+#: ../bin/src/ui_groupbydialog.h:135 ../bin/src/ui_groupbydialog.h:154
+#: ../bin/src/ui_groupbydialog.h:173
 msgid "Original year"
 msgstr "Any original"
 
@@ -3994,7 +3994,7 @@ msgstr "Posa les cançons en ordre aleatori"
 
 #: ../bin/src/ui_console.h:134
 msgid "Qt"
-msgstr ""
+msgstr "Qt"
 
 #: ../bin/src/ui_transcoderoptionsflac.h:80
 #: ../bin/src/ui_transcoderoptionsmp3.h:191
@@ -4041,11 +4041,11 @@ msgstr "Pluja"
 
 #: internet/subsonic/subsonicservice.cpp:105
 msgid "Random Albums"
-msgstr ""
+msgstr "Àlbums aleatoris"
 
 #: internet/subsonic/subsonicservice.cpp:125
 msgid "Random Songs"
-msgstr ""
+msgstr "Peces aleatòries"
 
 #: ../bin/src/ui_visualisationselector.h:111
 msgid "Random visualization"
@@ -4086,7 +4086,7 @@ msgstr "Realment voleu cancel·lar?"
 
 #: internet/subsonic/subsonicservice.cpp:117
 msgid "Recently Played Albums"
-msgstr ""
+msgstr "Àlbums reproduïts recentment"
 
 #: internet/subsonic/subsonicsettingspage.cpp:161
 msgid "Redirect limit exceeded, verify server configuration."
@@ -4884,7 +4884,7 @@ msgstr "Destacat"
 
 #: internet/subsonic/subsonicservice.cpp:121
 msgid "Starred Albums"
-msgstr ""
+msgstr "Àlbums destacats"
 
 #: ripper/ripcddialog.cpp:74
 msgid "Start ripping"
@@ -5265,7 +5265,7 @@ msgstr "Massa redireccions"
 
 #: internet/subsonic/subsonicservice.cpp:113
 msgid "Top Rated Albums"
-msgstr ""
+msgstr "Àlbums millor valorats"
 
 #: internet/spotify/spotifyservice.cpp:423
 msgid "Top tracks"
@@ -5508,7 +5508,7 @@ msgstr "Utilitza la configuració de servidor intermediari del sistema"
 msgid "Use volume normalisation"
 msgstr "Empra la normalització de volum"
 
-#: widgets/freespacebar.cpp:46
+#: widgets/freespacebar.cpp:47
 msgid "Used"
 msgstr "Usat"
 
@@ -5739,6 +5739,10 @@ msgstr "Any"
 msgid "Year - Album"
 msgstr "Any - Àlbum"
 
+#: playlist/playlist.cpp:1391
+msgid "Year - original"
+msgstr "Any original"
+
 #: smartplaylists/searchterm.cpp:425
 msgid "Years"
 msgstr "Anys"
@@ -5927,7 +5931,7 @@ msgstr "no conté"
 
 #: ../bin/src/ui_console.h:133
 msgid "dump"
-msgstr ""
+msgstr "volca"
 
 #: smartplaylists/searchterm.cpp:263
 msgid "empty"

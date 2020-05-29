@@ -43,8 +43,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2020-05-26 18:18+0000\n"
-"Last-Translator: John Maguire <john.maguire@gmail.com>\n"
+"PO-Revision-Date: 2020-05-28 19:57+0000\n"
+"Last-Translator: Adolfo Jayme-Barrientos\n"
 "Language-Team: Spanish (http://www.transifex.com/davidsansome/clementine/language/es/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -135,7 +135,7 @@ msgstr "%1 listas de reproducción (%2)"
 msgid ""
 "%1 request failed:\n"
 "%2"
-msgstr ""
+msgstr "Falló la solicitud %1:\n%2"
 
 #: playlist/playlistmanager.cpp:429
 #, qt-format
@@ -941,7 +941,7 @@ msgstr "Actualización automática"
 msgid "Automatically open single categories in the library tree"
 msgstr "Expandir automáticamente las categorías únicas en el árbol de la fonoteca"
 
-#: widgets/freespacebar.cpp:44
+#: widgets/freespacebar.cpp:45
 msgid "Available"
 msgstr "Disponible:"
 
@@ -1086,7 +1086,7 @@ msgstr "Botones"
 
 #: internet/podcasts/addpodcastdialog.cpp:97
 msgid "CBC Podcasts"
-msgstr ""
+msgstr "Pódcast de CBC"
 
 #: core/song.cpp:454
 msgid "CDDA"
@@ -1344,7 +1344,7 @@ msgstr "Lista de prefijos, separados por comas, que ignorar al ordenar"
 
 #: ../bin/src/ui_console.h:129
 msgid "Command"
-msgstr ""
+msgstr "Orden"
 
 #: playlist/playlist.cpp:1434 smartplaylists/searchterm.cpp:384
 #: ui/organisedialog.cpp:78 ../bin/src/ui_edittagdialog.h:719
@@ -1495,7 +1495,7 @@ msgstr "No se pudo detectar una transmisión de audio en %1"
 
 #: internet/googledrive/googledriveservice.cpp:208
 msgid "Could not find Google Drive file."
-msgstr ""
+msgstr "No se pudo encontrar el archivo de Google Drive."
 
 #: songinfo/streamdiscoverer.cpp:123
 msgid "Could not get details"
@@ -1616,7 +1616,7 @@ msgstr "Dance"
 
 #: ../bin/src/ui_console.h:131
 msgid "Database"
-msgstr ""
+msgstr "Base de datos"
 
 #: core/database.cpp:622
 msgid ""
@@ -1983,7 +1983,7 @@ msgstr "Dubstep"
 
 #: ../bin/src/ui_console.h:132
 msgid "Dump To Logs"
-msgstr ""
+msgstr "Volcar en registros"
 
 #: ../bin/src/ui_episodeinfowidget.h:134 ../bin/src/ui_ripcddialog.h:308
 msgid "Duration"
@@ -2304,7 +2304,7 @@ msgstr "No se pudieron obtener los pódcast"
 msgid ""
 "Failed to get channel list:\n"
 "%1"
-msgstr ""
+msgstr "No se pudo obtener la lista de canales:\n%1"
 
 #: internet/podcasts/addpodcastbyurl.cpp:71
 #: internet/podcasts/fixedopmlpage.cpp:55
@@ -2316,7 +2316,7 @@ msgstr "No se pudo cargar el pódcast"
 msgid ""
 "Failed to parse %1 response:\n"
 "%2"
-msgstr ""
+msgstr "No se pudo procesar la respuesta de %1:\n%2"
 
 #: internet/podcasts/podcasturlloader.cpp:177
 msgid "Failed to parse the XML for this RSS feed"
@@ -2327,7 +2327,7 @@ msgstr "No se pudo analizar el XML de este canal RSS"
 msgid ""
 "Failed to update icecast directory:\n"
 "%1"
-msgstr ""
+msgstr "No se pudo actualizar el directorio de Icecast:\n%1"
 
 #: ui/trackselectiondialog.cpp:247
 #, qt-format
@@ -2366,7 +2366,7 @@ msgstr "Error al obtener la carátula"
 #: internet/subsonic/subsonicdynamicplaylist.cpp:100
 #: internet/subsonic/subsonicdynamicplaylist.cpp:166
 msgid "Fetching playlist items"
-msgstr ""
+msgstr "Recuperando elementos de la lista"
 
 #: ../bin/src/ui_ripcddialog.h:319
 msgid "File Format"
@@ -2498,7 +2498,7 @@ msgstr "Cuadros por búfer"
 
 #: internet/subsonic/subsonicservice.cpp:109
 msgid "Frequently Played Albums"
-msgstr ""
+msgstr "Álbumes reproducidos frecuentemente"
 
 #: moodbar/moodbarrenderer.cpp:173
 msgid "Frozen"
@@ -3252,7 +3252,7 @@ msgstr "Tasa de bits máxima"
 
 #: ../bin/src/ui_behavioursettingspage.h:449
 msgid "Maximum number of child processes for tag handling (requires restart)"
-msgstr ""
+msgstr "Número máximo de procesos secundarios para manejo de etiquetas (necesita reinicio)"
 
 #: ripper/ripcddialog.cpp:155
 msgid "Media has changed. Reloading"
@@ -3413,7 +3413,7 @@ msgstr "Lista de reproducción nueva"
 msgid "New smart playlist..."
 msgstr "Lista de reproducción inteligente nueva…"
 
-#: widgets/freespacebar.cpp:45
+#: widgets/freespacebar.cpp:46
 msgid "New songs"
 msgstr "Canciones nuevas:"
 
@@ -3423,7 +3423,7 @@ msgstr "Las pistas nuevas se añadirán automáticamente."
 
 #: internet/subsonic/subsonicservice.cpp:101
 msgid "Newest Albums"
-msgstr ""
+msgstr "Álbumes más recientes"
 
 #: library/library.cpp:94
 msgid "Newest tracks"
@@ -3543,7 +3543,7 @@ msgstr "Cantidad de episodios que mostrar"
 
 #: ../bin/src/ui_behavioursettingspage.h:450
 msgid "Number of processes:"
-msgstr ""
+msgstr "Número de procesos:"
 
 #: ui/notificationssettingspage.cpp:38
 msgid "OSD Preview"
@@ -3699,9 +3699,9 @@ msgstr "Organizando los archivos"
 msgid "Original tags"
 msgstr "Etiquetas originales"
 
-#: library/savedgroupingmanager.cpp:101 playlist/playlist.cpp:1391
-#: ui/organisedialog.cpp:76 ../bin/src/ui_groupbydialog.h:135
-#: ../bin/src/ui_groupbydialog.h:154 ../bin/src/ui_groupbydialog.h:173
+#: library/savedgroupingmanager.cpp:101 ui/organisedialog.cpp:76
+#: ../bin/src/ui_groupbydialog.h:135 ../bin/src/ui_groupbydialog.h:154
+#: ../bin/src/ui_groupbydialog.h:173
 msgid "Original year"
 msgstr "Año original"
 
@@ -4021,7 +4021,7 @@ msgstr "Poner canciones en un orden aleatorio"
 
 #: ../bin/src/ui_console.h:134
 msgid "Qt"
-msgstr ""
+msgstr "Qt"
 
 #: ../bin/src/ui_transcoderoptionsflac.h:80
 #: ../bin/src/ui_transcoderoptionsmp3.h:191
@@ -4068,11 +4068,11 @@ msgstr "Lluvia"
 
 #: internet/subsonic/subsonicservice.cpp:105
 msgid "Random Albums"
-msgstr ""
+msgstr "Álbumes al azar"
 
 #: internet/subsonic/subsonicservice.cpp:125
 msgid "Random Songs"
-msgstr ""
+msgstr "Canciones al azar"
 
 #: ../bin/src/ui_visualisationselector.h:111
 msgid "Random visualization"
@@ -4113,7 +4113,7 @@ msgstr "¿Realmente quiere cancelar?"
 
 #: internet/subsonic/subsonicservice.cpp:117
 msgid "Recently Played Albums"
-msgstr ""
+msgstr "Álbumes reproducidos recientemente"
 
 #: internet/subsonic/subsonicsettingspage.cpp:161
 msgid "Redirect limit exceeded, verify server configuration."
@@ -4911,7 +4911,7 @@ msgstr "Destacado"
 
 #: internet/subsonic/subsonicservice.cpp:121
 msgid "Starred Albums"
-msgstr ""
+msgstr "Álbumes con estrella"
 
 #: ripper/ripcddialog.cpp:74
 msgid "Start ripping"
@@ -5292,7 +5292,7 @@ msgstr "Demasiadas redirecciones"
 
 #: internet/subsonic/subsonicservice.cpp:113
 msgid "Top Rated Albums"
-msgstr ""
+msgstr "Álbumes mejor calificados"
 
 #: internet/spotify/spotifyservice.cpp:423
 msgid "Top tracks"
@@ -5535,7 +5535,7 @@ msgstr "Utilizar la configuración de «proxy» del sistema"
 msgid "Use volume normalisation"
 msgstr "Usar normalización de volumen"
 
-#: widgets/freespacebar.cpp:46
+#: widgets/freespacebar.cpp:47
 msgid "Used"
 msgstr "En uso:"
 
@@ -5766,6 +5766,10 @@ msgstr "Año"
 msgid "Year - Album"
 msgstr "Año–álbum"
 
+#: playlist/playlist.cpp:1391
+msgid "Year - original"
+msgstr "Año original"
+
 #: smartplaylists/searchterm.cpp:425
 msgid "Years"
 msgstr "Años"
@@ -5954,7 +5958,7 @@ msgstr "no contiene"
 
 #: ../bin/src/ui_console.h:133
 msgid "dump"
-msgstr ""
+msgstr "volcar"
 
 #: smartplaylists/searchterm.cpp:263
 msgid "empty"

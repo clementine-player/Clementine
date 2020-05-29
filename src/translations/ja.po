@@ -21,7 +21,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2020-05-26 18:18+0000\n"
+"PO-Revision-Date: 2020-05-28 18:55+0000\n"
 "Last-Translator: John Maguire <john.maguire@gmail.com>\n"
 "Language-Team: Japanese (http://www.transifex.com/davidsansome/clementine/language/ja/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -919,7 +919,7 @@ msgstr "自動更新中"
 msgid "Automatically open single categories in the library tree"
 msgstr "下位カテゴリが 1 つしかないときは、ライブラリツリーを自動で開く"
 
-#: widgets/freespacebar.cpp:44
+#: widgets/freespacebar.cpp:45
 msgid "Available"
 msgstr "空き"
 
@@ -3391,7 +3391,7 @@ msgstr "新しいプレイリスト"
 msgid "New smart playlist..."
 msgstr "新しいスマートプレイリスト..."
 
-#: widgets/freespacebar.cpp:45
+#: widgets/freespacebar.cpp:46
 msgid "New songs"
 msgstr "新しい曲"
 
@@ -3677,9 +3677,9 @@ msgstr "ファイルの整理中"
 msgid "Original tags"
 msgstr "元のタグ"
 
-#: library/savedgroupingmanager.cpp:101 playlist/playlist.cpp:1391
-#: ui/organisedialog.cpp:76 ../bin/src/ui_groupbydialog.h:135
-#: ../bin/src/ui_groupbydialog.h:154 ../bin/src/ui_groupbydialog.h:173
+#: library/savedgroupingmanager.cpp:101 ui/organisedialog.cpp:76
+#: ../bin/src/ui_groupbydialog.h:135 ../bin/src/ui_groupbydialog.h:154
+#: ../bin/src/ui_groupbydialog.h:173
 msgid "Original year"
 msgstr "元の年"
 
@@ -5513,7 +5513,7 @@ msgstr "システムのプロキシ設定を使用する"
 msgid "Use volume normalisation"
 msgstr "音量の正規化を使用する"
 
-#: widgets/freespacebar.cpp:46
+#: widgets/freespacebar.cpp:47
 msgid "Used"
 msgstr "使用中"
 
@@ -5743,6 +5743,10 @@ msgstr "年"
 #: ../bin/src/ui_groupbydialog.h:155 ../bin/src/ui_groupbydialog.h:174
 msgid "Year - Album"
 msgstr "年 - アルバム"
+
+#: playlist/playlist.cpp:1391
+msgid "Year - original"
+msgstr ""
 
 #: smartplaylists/searchterm.cpp:425
 msgid "Years"

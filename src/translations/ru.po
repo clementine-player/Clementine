@@ -36,7 +36,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2020-05-26 21:35+0000\n"
+"PO-Revision-Date: 2020-05-28 21:04+0000\n"
 "Last-Translator: Andrei Stepanov <adem4ik@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/davidsansome/clementine/language/ru/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -934,7 +934,7 @@ msgstr "Автоматическое обновление"
 msgid "Automatically open single categories in the library tree"
 msgstr "Автоматически раскрывать одиночные категории в дереве фонотеки"
 
-#: widgets/freespacebar.cpp:44
+#: widgets/freespacebar.cpp:45
 msgid "Available"
 msgstr "Доступно"
 
@@ -3406,7 +3406,7 @@ msgstr "Новый плейлист"
 msgid "New smart playlist..."
 msgstr "Новый умный плейлист…"
 
-#: widgets/freespacebar.cpp:45
+#: widgets/freespacebar.cpp:46
 msgid "New songs"
 msgstr "Новые композиции"
 
@@ -3692,9 +3692,9 @@ msgstr "Упорядочивание файлов"
 msgid "Original tags"
 msgstr "Исходные теги"
 
-#: library/savedgroupingmanager.cpp:101 playlist/playlist.cpp:1391
-#: ui/organisedialog.cpp:76 ../bin/src/ui_groupbydialog.h:135
-#: ../bin/src/ui_groupbydialog.h:154 ../bin/src/ui_groupbydialog.h:173
+#: library/savedgroupingmanager.cpp:101 ui/organisedialog.cpp:76
+#: ../bin/src/ui_groupbydialog.h:135 ../bin/src/ui_groupbydialog.h:154
+#: ../bin/src/ui_groupbydialog.h:173
 msgid "Original year"
 msgstr "Год выхода оригинала"
 
@@ -5528,7 +5528,7 @@ msgstr "Использовать системные настройки прок�
 msgid "Use volume normalisation"
 msgstr "Использовать нормализацию громкости"
 
-#: widgets/freespacebar.cpp:46
+#: widgets/freespacebar.cpp:47
 msgid "Used"
 msgstr "Использовано"
 
@@ -5758,6 +5758,10 @@ msgstr "Год"
 #: ../bin/src/ui_groupbydialog.h:155 ../bin/src/ui_groupbydialog.h:174
 msgid "Year - Album"
 msgstr "Год - Альбом"
+
+#: playlist/playlist.cpp:1391
+msgid "Year - original"
+msgstr "Год оригинала"
 
 #: smartplaylists/searchterm.cpp:425
 msgid "Years"

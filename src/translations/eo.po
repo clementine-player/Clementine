@@ -11,8 +11,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2020-05-26 18:18+0000\n"
-"Last-Translator: John Maguire <john.maguire@gmail.com>\n"
+"PO-Revision-Date: 2020-05-28 21:38+0000\n"
+"Last-Translator: Adolfo Jayme-Barrientos\n"
 "Language-Team: Esperanto (http://www.transifex.com/davidsansome/clementine/language/eo/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -269,7 +269,7 @@ msgstr ""
 
 #: internet/spotify/spotifyservice.cpp:472
 msgid ", by "
-msgstr ""
+msgstr ", de"
 
 #: ui/about.cpp:89
 msgid "...and all the Amarok contributors"
@@ -474,11 +474,11 @@ msgstr "Ago"
 #: ../bin/src/ui_globalshortcutssettingspage.h:185
 msgctxt "Category label"
 msgid "Action"
-msgstr "Agado"
+msgstr "Ago"
 
 #: wiimotedev/wiimotesettingspage.cpp:103
 msgid "Activate/Deactivate Wii Remote"
-msgstr ""
+msgstr "Ŝalti/malŝalti Wii Remote-on"
 
 #: internet/podcasts/addpodcastdialog.cpp:66
 msgid "Add Podcast"
@@ -909,7 +909,7 @@ msgstr "Aŭtomata ĝisdatigado"
 msgid "Automatically open single categories in the library tree"
 msgstr ""
 
-#: widgets/freespacebar.cpp:44
+#: widgets/freespacebar.cpp:45
 msgid "Available"
 msgstr "Desponeblaj"
 
@@ -1054,7 +1054,7 @@ msgstr "Butonoj"
 
 #: internet/podcasts/addpodcastdialog.cpp:97
 msgid "CBC Podcasts"
-msgstr ""
+msgstr "CBC-podkastoj"
 
 #: core/song.cpp:454
 msgid "CDDA"
@@ -1108,19 +1108,19 @@ msgstr ""
 
 #: ../bin/src/ui_streamdetailsdialog.h:137
 msgid "Channels"
-msgstr ""
+msgstr "Kanaloj"
 
 #: ../bin/src/ui_podcastsettingspage.h:252
 msgid "Check for new episodes"
-msgstr ""
+msgstr "Kontroli ĉu estas novaj epizodoj"
 
 #: internet/googledrive/googledriveservice.cpp:225
 msgid "Check for updates"
-msgstr ""
+msgstr "Kontroli ĉu estas ĝisdatigoj"
 
 #: ui/mainwindow.cpp:829
 msgid "Check for updates..."
-msgstr ""
+msgstr "Kontroli ĉu estas ĝisdatigoj..."
 
 #: smartplaylists/wizard.cpp:83
 msgid "Choose a name for your smart playlist"
@@ -1312,7 +1312,7 @@ msgstr ""
 
 #: ../bin/src/ui_console.h:129
 msgid "Command"
-msgstr ""
+msgstr "Komando"
 
 #: playlist/playlist.cpp:1434 smartplaylists/searchterm.cpp:384
 #: ui/organisedialog.cpp:78 ../bin/src/ui_edittagdialog.h:719
@@ -1463,7 +1463,7 @@ msgstr ""
 
 #: internet/googledrive/googledriveservice.cpp:208
 msgid "Could not find Google Drive file."
-msgstr ""
+msgstr "Ne troviĝis la dosieron ĉe Google Drive."
 
 #: songinfo/streamdiscoverer.cpp:123
 msgid "Could not get details"
@@ -1584,7 +1584,7 @@ msgstr ""
 
 #: ../bin/src/ui_console.h:131
 msgid "Database"
-msgstr ""
+msgstr "Datumbazo"
 
 #: core/database.cpp:622
 msgid ""
@@ -3381,7 +3381,7 @@ msgstr "Nova ludlisto"
 msgid "New smart playlist..."
 msgstr ""
 
-#: widgets/freespacebar.cpp:45
+#: widgets/freespacebar.cpp:46
 msgid "New songs"
 msgstr "Novaj kantoj"
 
@@ -3667,9 +3667,9 @@ msgstr ""
 msgid "Original tags"
 msgstr ""
 
-#: library/savedgroupingmanager.cpp:101 playlist/playlist.cpp:1391
-#: ui/organisedialog.cpp:76 ../bin/src/ui_groupbydialog.h:135
-#: ../bin/src/ui_groupbydialog.h:154 ../bin/src/ui_groupbydialog.h:173
+#: library/savedgroupingmanager.cpp:101 ui/organisedialog.cpp:76
+#: ../bin/src/ui_groupbydialog.h:135 ../bin/src/ui_groupbydialog.h:154
+#: ../bin/src/ui_groupbydialog.h:173
 msgid "Original year"
 msgstr ""
 
@@ -3989,7 +3989,7 @@ msgstr ""
 
 #: ../bin/src/ui_console.h:134
 msgid "Qt"
-msgstr ""
+msgstr "Qt"
 
 #: ../bin/src/ui_transcoderoptionsflac.h:80
 #: ../bin/src/ui_transcoderoptionsmp3.h:191
@@ -4036,11 +4036,11 @@ msgstr "Pluvo"
 
 #: internet/subsonic/subsonicservice.cpp:105
 msgid "Random Albums"
-msgstr ""
+msgstr "Hazardaj albumoj"
 
 #: internet/subsonic/subsonicservice.cpp:125
 msgid "Random Songs"
-msgstr ""
+msgstr "Hazardaj kantoj"
 
 #: ../bin/src/ui_visualisationselector.h:111
 msgid "Random visualization"
@@ -4096,7 +4096,7 @@ msgstr ""
 #: internet/somafm/somafmservice.cpp:111
 #: internet/intergalacticfm/intergalacticfmservice.cpp:111
 msgid "Refresh channels"
-msgstr ""
+msgstr "Aktualigi kanalojn"
 
 #: internet/icecast/icecastservice.cpp:308
 msgid "Refresh station list"
@@ -5503,7 +5503,7 @@ msgstr ""
 msgid "Use volume normalisation"
 msgstr ""
 
-#: widgets/freespacebar.cpp:46
+#: widgets/freespacebar.cpp:47
 msgid "Used"
 msgstr ""
 
@@ -5649,7 +5649,7 @@ msgstr ""
 #: widgets/osd.cpp:243
 #, qt-format
 msgid "Wii Remote %1: activated"
-msgstr ""
+msgstr "Wii Remote %1: ŝaltita"
 
 #: widgets/osd.cpp:255
 #, qt-format
@@ -5733,6 +5733,10 @@ msgstr "Jaro"
 #: ../bin/src/ui_groupbydialog.h:155 ../bin/src/ui_groupbydialog.h:174
 msgid "Year - Album"
 msgstr ""
+
+#: playlist/playlist.cpp:1391
+msgid "Year - original"
+msgstr "Jaro originala"
 
 #: smartplaylists/searchterm.cpp:425
 msgid "Years"
