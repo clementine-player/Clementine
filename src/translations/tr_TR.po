@@ -8,7 +8,7 @@
 # Ahmet Sezgin Duran <marjinalist1@gmail.com>, 2013
 # Mustafa YILMAZ <apshalasha@gmail.com>, 2013
 # arnaudbienner <arnaud.bienner@gmail.com>, 2011
-# Demiray Muhterem <mdemiray@msn.com>, 2016-2019
+# Demiray Muhterem <mdemiray@msn.com>, 2016-2020
 # devingregory <devingregory@yandex.com>, 2012
 # devingregory <devingregory@yandex.com>, 2012
 # Ege Öz <ege.oz@yandex.com.tr>, 2013
@@ -43,8 +43,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2020-05-28 18:55+0000\n"
-"Last-Translator: John Maguire <john.maguire@gmail.com>\n"
+"PO-Revision-Date: 2020-05-29 15:31+0000\n"
+"Last-Translator: Demiray Muhterem <mdemiray@msn.com>\n"
 "Language-Team: Turkish (Turkey) (http://www.transifex.com/davidsansome/clementine/language/tr_TR/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -135,7 +135,7 @@ msgstr "%1 çalma listesi (%2)"
 msgid ""
 "%1 request failed:\n"
 "%2"
-msgstr ""
+msgstr "%1 istek başarısız:\n%2"
 
 #: playlist/playlistmanager.cpp:429
 #, qt-format
@@ -1086,7 +1086,7 @@ msgstr "Düğmeler"
 
 #: internet/podcasts/addpodcastdialog.cpp:97
 msgid "CBC Podcasts"
-msgstr ""
+msgstr "CBC Podcastları"
 
 #: core/song.cpp:454
 msgid "CDDA"
@@ -1344,7 +1344,7 @@ msgstr "Sıralama sırasında yoksayılacak virgülle ayrılmış önek kelimele
 
 #: ../bin/src/ui_console.h:129
 msgid "Command"
-msgstr ""
+msgstr "Komut"
 
 #: playlist/playlist.cpp:1434 smartplaylists/searchterm.cpp:384
 #: ui/organisedialog.cpp:78 ../bin/src/ui_edittagdialog.h:719
@@ -1495,7 +1495,7 @@ msgstr "%1 kaynağında ses akışı tespit edilemedi."
 
 #: internet/googledrive/googledriveservice.cpp:208
 msgid "Could not find Google Drive file."
-msgstr ""
+msgstr "Google Drive dosyası bulunamadı."
 
 #: songinfo/streamdiscoverer.cpp:123
 msgid "Could not get details"
@@ -1616,7 +1616,7 @@ msgstr "Dans"
 
 #: ../bin/src/ui_console.h:131
 msgid "Database"
-msgstr ""
+msgstr "Veritabanı"
 
 #: core/database.cpp:622
 msgid ""
@@ -1983,7 +1983,7 @@ msgstr "Dubstep"
 
 #: ../bin/src/ui_console.h:132
 msgid "Dump To Logs"
-msgstr ""
+msgstr "Günlüklere Dök"
 
 #: ../bin/src/ui_episodeinfowidget.h:134 ../bin/src/ui_ripcddialog.h:308
 msgid "Duration"
@@ -2304,7 +2304,7 @@ msgstr "Podcastların indirilmesi başarısız oldu"
 msgid ""
 "Failed to get channel list:\n"
 "%1"
-msgstr ""
+msgstr "Kanal listesi alınamadı:\n%1"
 
 #: internet/podcasts/addpodcastbyurl.cpp:71
 #: internet/podcasts/fixedopmlpage.cpp:55
@@ -2316,7 +2316,7 @@ msgstr "Podcastların yüklenmesi başarısız oldu"
 msgid ""
 "Failed to parse %1 response:\n"
 "%2"
-msgstr ""
+msgstr "%1 yanıtı ayrıştırılamadı:\n%2"
 
 #: internet/podcasts/podcasturlloader.cpp:177
 msgid "Failed to parse the XML for this RSS feed"
@@ -2327,7 +2327,7 @@ msgstr "Bu RSS beslemesinin XML ayıklaması başarısız oldu"
 msgid ""
 "Failed to update icecast directory:\n"
 "%1"
-msgstr ""
+msgstr "Icecast dizini güncellenemedi:\n%1"
 
 #: ui/trackselectiondialog.cpp:247
 #, qt-format
@@ -2366,7 +2366,7 @@ msgstr "Kapak alınırken bir hata oluştu"
 #: internet/subsonic/subsonicdynamicplaylist.cpp:100
 #: internet/subsonic/subsonicdynamicplaylist.cpp:166
 msgid "Fetching playlist items"
-msgstr ""
+msgstr "Oynatma listesi öğeleri getiriliyor"
 
 #: ../bin/src/ui_ripcddialog.h:319
 msgid "File Format"
@@ -2498,7 +2498,7 @@ msgstr "Tampon başına kare"
 
 #: internet/subsonic/subsonicservice.cpp:109
 msgid "Frequently Played Albums"
-msgstr ""
+msgstr "Sık Oynatılan Albümler"
 
 #: moodbar/moodbarrenderer.cpp:173
 msgid "Frozen"
@@ -3252,7 +3252,7 @@ msgstr "Maksimum bit oranı"
 
 #: ../bin/src/ui_behavioursettingspage.h:449
 msgid "Maximum number of child processes for tag handling (requires restart)"
-msgstr ""
+msgstr "Etiket işleme için azami alt işlem sayısı (yeniden başlatma gerekir)"
 
 #: ripper/ripcddialog.cpp:155
 msgid "Media has changed. Reloading"
@@ -3423,7 +3423,7 @@ msgstr "Yeni parçalar otomatik olarak eklenecektir."
 
 #: internet/subsonic/subsonicservice.cpp:101
 msgid "Newest Albums"
-msgstr ""
+msgstr "En Yeni Albümler"
 
 #: library/library.cpp:94
 msgid "Newest tracks"
@@ -3543,7 +3543,7 @@ msgstr "Gösterilecek bölüm sayısı"
 
 #: ../bin/src/ui_behavioursettingspage.h:450
 msgid "Number of processes:"
-msgstr ""
+msgstr "İşlem sayısı:"
 
 #: ui/notificationssettingspage.cpp:38
 msgid "OSD Preview"
@@ -4021,7 +4021,7 @@ msgstr "Şarkıları rastgele sırala"
 
 #: ../bin/src/ui_console.h:134
 msgid "Qt"
-msgstr ""
+msgstr "Qt"
 
 #: ../bin/src/ui_transcoderoptionsflac.h:80
 #: ../bin/src/ui_transcoderoptionsmp3.h:191
@@ -4068,11 +4068,11 @@ msgstr "Yağmur"
 
 #: internet/subsonic/subsonicservice.cpp:105
 msgid "Random Albums"
-msgstr ""
+msgstr "Rastgele Albümler"
 
 #: internet/subsonic/subsonicservice.cpp:125
 msgid "Random Songs"
-msgstr ""
+msgstr "Rastgele Şarkılar"
 
 #: ../bin/src/ui_visualisationselector.h:111
 msgid "Random visualization"
@@ -4113,7 +4113,7 @@ msgstr "Gerçekten iptal edeyim mi?"
 
 #: internet/subsonic/subsonicservice.cpp:117
 msgid "Recently Played Albums"
-msgstr ""
+msgstr "Son Oynatılan Albümler"
 
 #: internet/subsonic/subsonicsettingspage.cpp:161
 msgid "Redirect limit exceeded, verify server configuration."
@@ -4911,7 +4911,7 @@ msgstr "Yıldızlı"
 
 #: internet/subsonic/subsonicservice.cpp:121
 msgid "Starred Albums"
-msgstr ""
+msgstr "Yıldızlı Albümler"
 
 #: ripper/ripcddialog.cpp:74
 msgid "Start ripping"
@@ -5292,7 +5292,7 @@ msgstr "Çok fazla yeniden yönlendirme"
 
 #: internet/subsonic/subsonicservice.cpp:113
 msgid "Top Rated Albums"
-msgstr ""
+msgstr "En Çok Oylanan Albümler"
 
 #: internet/spotify/spotifyservice.cpp:423
 msgid "Top tracks"
@@ -5768,7 +5768,7 @@ msgstr "Yıl - Albüm"
 
 #: playlist/playlist.cpp:1391
 msgid "Year - original"
-msgstr ""
+msgstr "Yıl - orijinal"
 
 #: smartplaylists/searchterm.cpp:425
 msgid "Years"
@@ -5958,7 +5958,7 @@ msgstr "şunu içermiyor"
 
 #: ../bin/src/ui_console.h:133
 msgid "dump"
-msgstr ""
+msgstr "çöp"
 
 #: smartplaylists/searchterm.cpp:263
 msgid "empty"
