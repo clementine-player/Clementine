@@ -23,6 +23,7 @@
 #include "core/logging.h"
 #include "core/timeconstants.h"
 
+#include "cddadevice.h"
 #include "cddasongloader.h"
 
 CddaSongLoader::CddaSongLoader(const QUrl& url, QObject* parent)
@@ -36,11 +37,13 @@ CddaSongLoader::~CddaSongLoader() {
 }
 
 QUrl CddaSongLoader::GetUrlFromTrack(int track_number) const {
+  QString track;
   if (url_.isEmpty()) {
-    return QUrl(QString("cdda://%1a").arg(track_number));
+    track = QString("cdda://%1").arg(track_number);
   } else {
-    return QUrl(QString("cdda://%1/%2").arg(url_.path()).arg(track_number));
+    track = QString("cdda://%1/%2").arg(url_.path()).arg(track_number);
   }
+  return CddaDevice::TrackStrToUrl(track);
 }
 
 void CddaSongLoader::LoadSongs() {

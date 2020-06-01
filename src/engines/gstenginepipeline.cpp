@@ -34,6 +34,7 @@
 #include "core/mac_startup.h"
 #include "core/signalchecker.h"
 #include "core/utilities.h"
+#include "devices/cddadevice.h"
 #include "internet/core/internetmodel.h"
 #ifdef HAVE_SPOTIFY
 #  include "internet/spotify/spotifyserver.h"
@@ -203,9 +204,7 @@ GstElement* GstEnginePipeline::CreateDecodeBinFromUrl(const QUrl& url) {
 #endif
     QByteArray uri;
     if (url.scheme() == "cdda") {
-      QString str = url.toString();
-      str.remove(str.lastIndexOf(QChar('a')), 1);
-      uri = str.toUtf8();
+      uri = CddaDevice::TrackUrlToStr(url).toUtf8();
     } else {
       uri = Utilities::GetUriForGstreamer(url);
     }

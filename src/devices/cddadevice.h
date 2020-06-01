@@ -45,6 +45,17 @@ class CddaDevice : public ConnectedDevice {
 
   static QStringList url_schemes() { return QStringList() << "cdda"; }
 
+  // QUrl interprets a single number as an ip address, so the QString cdda://1
+  // would become the QUrl cdda://0.0.0.1. For this reason, we append a single
+  // character to strings when converting to URLs and strip that character
+  // when doing the reverse conversion.
+  static QUrl TrackStrToUrl(const QString& name) { return QUrl(name + "a"); }
+  static QString TrackUrlToStr(const QUrl& url) {
+    QString str = url.toString();
+    str.remove(str.lastIndexOf(QChar('a')), 1);
+    return str;
+  }
+
 signals:
   void SongsDiscovered(const SongList& songs);
 
