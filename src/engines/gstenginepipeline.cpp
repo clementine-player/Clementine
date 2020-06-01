@@ -524,20 +524,21 @@ bool GstEnginePipeline::InitFromReq(const MediaPlaybackRequest& req,
   pipeline_ = gst_pipeline_new("pipeline");
 
   current_ = req;
-  if (current_.url_.scheme() == "cdda" && !current_.url_.path().isEmpty()) {
+  QUrl url = current_.url_;
+  if (url.scheme() == "cdda" && !url.path().isEmpty()) {
     // Currently, Gstreamer can't handle input CD devices inside cdda URL. So
     // we handle them ourself: we extract the track number and re-create an
     // URL with only cdda:// + the track number (which can be handled by
     // Gstreamer). We keep the device in mind, and we will set it later using
     // SourceSetupCallback
-    QStringList path = current_.url_.path().split('/');
-    current_.url_ = QUrl(QString("cdda://%1").arg(path.takeLast()));
+    QStringList path = url.path().split('/');
+    url = QUrl(QString("cdda://%1").arg(path.takeLast()));
     source_device_ = path.join("/");
   }
   end_offset_nanosec_ = end_nanosec;
 
   // Decode bin
-  if (!ReplaceDecodeBin(current_.url_)) return false;
+  if (!ReplaceDecodeBin(url)) return false;
 
   return Init();
 }
