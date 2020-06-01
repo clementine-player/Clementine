@@ -141,6 +141,8 @@ signals:
                                   gpointer);
   static void TaskEnterCallback(GstTask*, GThread*, gpointer);
 
+  static QByteArray GstUriFromUrl(const QUrl& url);
+
   void TagMessageReceived(GstMessage*);
   void ErrorMessageReceived(GstMessage*);
   void ElementMessageReceived(GstMessage*);

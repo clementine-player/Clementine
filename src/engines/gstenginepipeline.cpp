@@ -34,11 +34,13 @@
 #include "core/mac_startup.h"
 #include "core/signalchecker.h"
 #include "core/utilities.h"
+#ifdef HAVE_AUDIOCD
 #include "devices/cddadevice.h"
+#endif
 #include "internet/core/internetmodel.h"
 #ifdef HAVE_SPOTIFY
-#  include "internet/spotify/spotifyserver.h"
-#  include "internet/spotify/spotifyservice.h"
+#include "internet/spotify/spotifyserver.h"
+#include "internet/spotify/spotifyservice.h"
 #endif
 
 const int GstEnginePipeline::kGstStateTimeoutNanosecs = 10000000;
@@ -161,6 +163,13 @@ bool GstEnginePipeline::ReplaceDecodeBin(const QUrl& url) {
   return ReplaceDecodeBin(new_bin);
 }
 
+QByteArray GstEnginePipeline::GstUriFromUrl(const QUrl& url) {
+#ifdef HAVE_AUDIOCD
+  if (url.scheme() == "cdda") return CddaDevice::TrackUrlToStr(url).toUtf8();
+#endif
+  return Utilities::GetUriForGstreamer(url);
+}
+
 GstElement* GstEnginePipeline::CreateDecodeBinFromUrl(const QUrl& url) {
   GstElement* new_bin = nullptr;
 #ifdef HAVE_SPOTIFY
@@ -202,12 +211,7 @@ GstElement* GstEnginePipeline::CreateDecodeBinFromUrl(const QUrl& url) {
         Q_ARG(QString, url.toString()), Q_ARG(quint16, port));
   } else {
 #endif
-    QByteArray uri;
-    if (url.scheme() == "cdda") {
-      uri = CddaDevice::TrackUrlToStr(url).toUtf8();
-    } else {
-      uri = Utilities::GetUriForGstreamer(url);
-    }
+    QByteArray uri = GstUriFromUrl(url);
     new_bin = engine_->CreateElement("uridecodebin");
     if (!new_bin) return nullptr;
     g_object_set(G_OBJECT(new_bin), "uri", uri.constData(), nullptr);
@@ -525,6 +529,7 @@ bool GstEnginePipeline::InitFromReq(const MediaPlaybackRequest& req,
 
   current_ = req;
   QUrl url = current_.url_;
+#ifdef HAVE_AUDIOCD
   if (url.scheme() == "cdda" && !url.path().isEmpty()) {
     // Currently, Gstreamer can't handle input CD devices inside cdda URL. So
     // we handle them ourself: we extract the track number and re-create an
@@ -535,6 +540,7 @@ bool GstEnginePipeline::InitFromReq(const MediaPlaybackRequest& req,
     url = QUrl(QString("cdda://%1").arg(path.takeLast()));
     source_device_ = path.join("/");
   }
+#endif
   end_offset_nanosec_ = end_nanosec;
 
   // Decode bin
