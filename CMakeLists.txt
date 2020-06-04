@@ -131,14 +131,14 @@ endif()
 # The current taglib in 3rdparty also has the following features used by Clementine:
 # - Audio file detection by content.
 #
-if (TAGLIB_VERSION VERSION_GREATER 1.11.1 OR WIN32)
+if (TAGLIB_VERSION VERSION_GREATER 1.11.1)
   option(USE_SYSTEM_TAGLIB "Use system taglib" ON)
 else()
   option(USE_SYSTEM_TAGLIB "Use system taglib" OFF)
 endif()
 
 if (TAGLIB_FOUND AND USE_SYSTEM_TAGLIB)
-  if (TAGLIB_VERSION VERSION_GREATER 1.11.1 OR WIN32)
+  if (TAGLIB_VERSION VERSION_GREATER 1.11.1)
     message(STATUS "Using system taglib library")
   else()
     message(WARNING "Using system taglib library. Version 1.11.1 or less has a bug corrupting Ogg files, make sure your systems version has been patched!")
@@ -158,6 +158,7 @@ else()
   set(TAGLIB_HAS_OPUS ON)
   add_subdirectory(3rdparty/utf8-cpp)
   add_subdirectory(3rdparty/taglib)
+  add_definitions(-DTAGLIB_STATIC)
 endif()
 
 if(LASTFM5_INCLUDE_DIRS AND LASTFM51_INCLUDE_DIRS)
