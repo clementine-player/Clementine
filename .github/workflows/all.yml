@@ -334,11 +334,11 @@ jobs:
         run: >
             cp
             glew32.dll
-            libcdio-16.dll
+            libcdio-19.dll
             libchromaprint.dll
-            libeay32.dll
-            libfaad.dll
-            libffi-6.dll
+            libcrypto-1_1.dll
+            libfaad-2.dll
+            libffi-7.dll
             libfftw3-3.dll
             libFLAC-8.dll
             libgcrypt-20.dll
@@ -353,7 +353,6 @@ jobs:
             libgstapp-1.0-0.dll
             libgstaudio-1.0-0.dll
             libgstbase-1.0-0.dll
-            libgstcontroller-1.0-0.dll
             libgstfft-1.0-0.dll
             libgstnet-1.0-0.dll
             libgstpbutils-1.0-0.dll
@@ -365,45 +364,45 @@ jobs:
             libgsttag-1.0-0.dll
             libgstvideo-1.0-0.dll
             libgthread-2.0-0.dll
-            libhogweed-4.dll
+            libhogweed-6.dll
             libiconv-2.dll
-            libid3tag.dll
             libintl-8.dll
             liblastfm5.dll
-            libmad.dll
             libmms-0.dll
             libmp3lame-0.dll
-            libnettle-6.dll
+            libnettle-8.dll
             libogg-0.dll
             liboil-0.3-0.dll
+            libopus-0.dll
             liborc-0.4-0.dll
             liborc-test-0.4-0.dll
             libp11-kit-0.dll
+            libpcre-1.dll
             libplist.dll
-            libpsl-5.dll
             libprotobuf-17.dll
+            libpsl-5.dll
+            libssl-1_1.dll
             libsoup-2.4-1.dll
             libspeex-1.dll
             libspotify.dll
             libsqlite3-0.dll
             libtag.dll
             libtasn1-6.dll
+            libunistring-2.dll
             libvorbis-0.dll
             libvorbisenc-2.dll
             libxml2-2.dll
+            libwavpack-1.dll
             Qt5Concurrent.dll
             Qt5Core.dll
             Qt5Gui.dll
             Qt5Network.dll
-            Qt5NetworkAuth.dll
             Qt5OpenGL.dll
             Qt5Sql.dll
             Qt5Svg.dll
             Qt5Widgets.dll
             Qt5WinExtras.dll
             Qt5Xml.dll
-            Qt5XmlPatterns.dll
-            ssleay32.dll
             zlib1.dll
             ${GITHUB_WORKSPACE}/dist/windows
       - run: mkdir dist/windows/imageformats
@@ -413,6 +412,7 @@ jobs:
           cp
           imageformats/qgif.dll
           imageformats/qjpeg.dll
+          imageformats/qsvg.dll
           ${GITHUB_WORKSPACE}/dist/windows/imageformats
       - run: mkdir dist/windows/platforms
       - name: Copy Qt platforms plugin DLLs
@@ -436,9 +436,11 @@ jobs:
         working-directory: /target/lib/gstreamer-1.0
         run: >
           cp
+          libgstaiff.dll
           libgstapetag.dll
           libgstapp.dll
           libgstasf.dll
+          libgstasfmux.dll
           libgstaudioconvert.dll
           libgstaudiofx.dll
           libgstaudioparsers.dll
@@ -447,7 +449,7 @@ jobs:
           libgstautodetect.dll
           libgstcdio.dll
           libgstcoreelements.dll
-          libgstdirectsoundsink.dll
+          libgstdirectsound.dll
           libgstequalizer.dll
           libgstfaad.dll
           libgstflac.dll
@@ -455,15 +457,20 @@ jobs:
           libgstgio.dll
           libgsticydemux.dll
           libgstid3demux.dll
+          libgstid3tag.dll
           libgstisomp4.dll
           libgstlame.dll
           libgstlibav.dll
-          libgstmad.dll
           libgstmms.dll
           libgstogg.dll
+          libgstopus.dll
+          libgstopusparse.dll
+          libgstpbtypes.dll
           libgstplayback.dll
           libgstreplaygain.dll
-          libgstsouphttpsrc.dll
+          libgstrtp.dll
+          libgstrtsp.dll
+          libgstsoup.dll
           libgstspectrum.dll
           libgstspeex.dll
           libgsttaglib.dll
@@ -472,6 +479,7 @@ jobs:
           libgstudp.dll
           libgstvolume.dll
           libgstvorbis.dll
+          libgstwavpack.dll
           libgstwavparse.dll
           ${GITHUB_WORKSPACE}/dist/windows/gstreamer-plugins
       - name: Build Windows installer
