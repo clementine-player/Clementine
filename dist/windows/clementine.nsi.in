@@ -287,7 +287,6 @@ Section "Delete old files" oldfiles
   Delete "$INSTDIR\QtSql4.dll"
   Delete "$INSTDIR\QtSvg4.dll"
   Delete "$INSTDIR\QtXml4.dll"
-  Delete "$INSTDIR\Qt5Svg.dll"
   Delete "$INSTDIR\Qt5XmlPatterns.dll"
   Delete "$INSTDIR\gstreamer-plugins\libgstdirectsoundsink.dll"
   Delete "$INSTDIR\gstreamer-plugins\libgstsouphttpsrc.dll"
@@ -374,6 +373,7 @@ Section "Clementine" Clementine
   File "Qt5Network.dll"
   File "Qt5OpenGL.dll"
   File "Qt5Sql.dll"
+  File "Qt5Svg.dll"
   File "Qt5Widgets.dll"
   File "Qt5WinExtras.dll"
   File "Qt5Xml.dll"
@@ -440,6 +440,7 @@ Section "Qt image format plugins" imageformats
 
   File "/oname=qgif.dll" "imageformats\qgif.dll"
   File "/oname=qjpeg.dll" "imageformats\qjpeg.dll"
+  File "/oname=qsvg.dll" "imageformats\qsvg.dll"
 SectionEnd
 
 Section "Qt platform plugins" platforms
@@ -1207,6 +1208,7 @@ Section "Uninstall"
   Delete "$INSTDIR\Qt5Network.dll"
   Delete "$INSTDIR\Qt5OpenGL.dll"
   Delete "$INSTDIR\Qt5Sql.dll"
+  Delete "$INSTDIR\Qt5Svg.dll"
   Delete "$INSTDIR\Qt5Widgets.dll"
   Delete "$INSTDIR\Qt5WinExtras.dll"
   Delete "$INSTDIR\Qt5Xml.dll"
@@ -1216,6 +1218,7 @@ Section "Uninstall"
   Delete "$INSTDIR\styles\qwindowsvistastyle.dll"
   Delete "$INSTDIR\imageformats\qgif.dll"
   Delete "$INSTDIR\imageformats\qjpeg.dll"
+  Delete "$INSTDIR\imageformats\qsvg.dll"
 
   Delete "$INSTDIR\gstreamer-plugins\libgstaiff.dll"
   Delete "$INSTDIR\gstreamer-plugins\libgstapetag.dll"
