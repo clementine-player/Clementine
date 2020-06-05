@@ -53,7 +53,7 @@ CREATE TABLE jamendo.songs (
 );
 
 CREATE VIRTUAL TABLE jamendo.songs_fts USING fts3(
-  ftstitle, ftsalbum, ftsartist, ftsalbumartist, ftscomposer, ftsperformer, ftsgrouping, ftsgenre, ftscomment,
+  ftstitle, ftsalbum, ftsartist, ftsalbumartist, ftscomposer, ftsperformer, ftsgrouping, ftsgenre, ftscomment, ftsyear,
   tokenize=unicode
 );
 
