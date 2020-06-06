@@ -265,6 +265,20 @@ void OrganiseDialog::UpdatePreviews() {
   format_.set_replace_spaces(ui_->replace_spaces->isChecked());
   format_.set_replace_the(ui_->replace_the->isChecked());
 
+  // If this is set to Transcode_Always, then the user has selected transcode,
+  // so we can be fairly certain that the device supports the selected format.
+  // However, if the option has not been set, and the device does not support
+  // the file's format, then Organise will try to transcode to a new format and
+  // the preview will be incorrect.
+  if (storage &&
+      storage->GetTranscodeMode() == MusicStorage::Transcode_Always) {
+    const Song::FileType format = storage->GetTranscodeFormat();
+    TranscoderPreset preset = Transcoder::PresetForFileType(format);
+    format_.add_tag_override("extension", preset.extension_);
+  } else {
+    format_.reset_tag_overrides();
+  }
+
   const bool format_valid = !has_local_destination || format_.IsValid();
 
   // Are we gonna enable the ok button?
@@ -344,6 +358,10 @@ void OrganiseDialog::accept() {
           .value<std::shared_ptr<MusicStorage>>();
 
   if (!storage) return;
+
+  // Reset the extension override if we set it. Organise should correctly set
+  // the Song object.
+  format_.reset_tag_overrides();
 
   // It deletes itself when it's finished.
   const bool copy = ui_->aftercopying->currentIndex() == 0;
