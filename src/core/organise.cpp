@@ -149,6 +149,12 @@ void Organise::ProcessSomeFiles() {
       song.set_basefilename(Utilities::FiddleFileExtension(
           song.basefilename(), task.new_extension_));
 
+      // Adjust the destination filename. Don't use the OrganiseFormat object
+      // for this since that will remove any duplicate filename adjustments
+      // made by OrganiseDialog.
+      task.song_info_.new_filename_ = Utilities::FiddleFileExtension(
+          task.song_info_.new_filename_, task.new_extension_);
+
       // Have to set this to the size of the new file or else funny stuff
       // happens
       song.set_filesize(QFileInfo(task.transcoded_filename_).size());
