@@ -48,6 +48,11 @@ class OrganiseFormat {
   void set_replace_spaces(bool v) { replace_spaces_ = v; }
   void set_replace_the(bool v) { replace_the_ = v; }
 
+  void add_tag_override(const QString& tag, const QString& v) {
+    tag_overrides_[tag] = v;
+  }
+  void reset_tag_overrides() { tag_overrides_.clear(); }
+
   bool IsValid() const;
   QString GetFilenameForSong(const Song& song) const;
 
@@ -76,6 +81,8 @@ class OrganiseFormat {
   QString ParseBlock(QString block, const Song& song,
                      bool* any_empty = nullptr) const;
   QString TagValue(const QString& tag, const Song& song) const;
+
+  QMap<QString, QString> tag_overrides_;
 
   QString format_;
   bool replace_non_ascii_;
