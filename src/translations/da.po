@@ -19,14 +19,14 @@
 # Peter Jespersen <flywheel@illogical.dk>, 2015,2017
 # Runkeldunk <generallangsohm@gmail.com>, 2012,2014
 # scootergrisen, 2017
-# scootergrisen, 2017-2019
+# scootergrisen, 2017-2020
 # Tommy Carstensen <tommy.carstensen@gmail.com>, 2012
 # Tommy Carstensen <tommy.carstensen@gmail.com>, 2012
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2020-05-28 18:55+0000\n"
-"Last-Translator: John Maguire <john.maguire@gmail.com>\n"
+"PO-Revision-Date: 2020-06-06 06:05+0000\n"
+"Last-Translator: scootergrisen\n"
 "Language-Team: Danish (http://www.transifex.com/davidsansome/clementine/language/da/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -84,7 +84,7 @@ msgstr " sange"
 #: widgets/osd.cpp:195
 #, qt-format
 msgid "%1 albums"
-msgstr "%1 album"
+msgstr "%1 albummer"
 
 #: widgets/equalizerslider.cpp:29 widgets/equalizerslider.cpp:31
 #: widgets/equalizerslider.cpp:43
@@ -117,7 +117,7 @@ msgstr "%1 afspilningslister (%2)"
 msgid ""
 "%1 request failed:\n"
 "%2"
-msgstr ""
+msgstr "%1 forespørgsel mislykkedes:\n%2"
 
 #: playlist/playlistmanager.cpp:429
 #, qt-format
@@ -410,7 +410,7 @@ msgid ""
 "A smart playlist is a dynamic list of songs that come from your library.  "
 "There are different types of smart playlist that offer different ways of "
 "selecting songs."
-msgstr "En smart afspilningsliste er en dynamisk liste af sange fra dit bibliotek. Der findes forskellige typer af smarte afspilningslister, der tilbyder forskellige måder at udvælge sange på."
+msgstr "En smart afspilningsliste er en dynamisk liste over sange fra dit bibliotek. Der findes forskellige typer af smarte afspilningslister, der tilbyder forskellige måder at udvælge sange på."
 
 #: smartplaylists/querywizardplugin.cpp:158
 msgid ""
@@ -645,7 +645,7 @@ msgstr "Tilføj til Spotify-afspilningslister"
 
 #: internet/spotify/spotifyservice.cpp:618
 msgid "Add to Spotify starred"
-msgstr "Tilføj til Spotify starred"
+msgstr "Tilføj til Spotify med stjerne"
 
 #: ui/mainwindow.cpp:1899
 msgid "Add to another playlist"
@@ -1068,7 +1068,7 @@ msgstr "Knapper"
 
 #: internet/podcasts/addpodcastdialog.cpp:97
 msgid "CBC Podcasts"
-msgstr ""
+msgstr "CBC-podcasts"
 
 #: core/song.cpp:454
 msgid "CDDA"
@@ -1318,15 +1318,15 @@ msgstr "Farver"
 
 #: core/commandlineoptions.cpp:184
 msgid "Comma separated list of class:level, level is 0-3"
-msgstr "Kommasepareret liste af klasse:niveau, niveau er 0-3"
+msgstr "Kommasepareret liste over klasse:niveau, niveau er 0-3"
 
 #: ../bin/src/ui_behavioursettingspage.h:461
 msgid "Comma separated list of prefix words to ignore when sorting"
-msgstr "Kommasepareret liste af præfiksord som skal ignoreres ved sortering"
+msgstr "Kommasepareret liste over præfiksord som skal ignoreres ved sortering"
 
 #: ../bin/src/ui_console.h:129
 msgid "Command"
-msgstr ""
+msgstr "Kommando"
 
 #: playlist/playlist.cpp:1434 smartplaylists/searchterm.cpp:384
 #: ui/organisedialog.cpp:78 ../bin/src/ui_edittagdialog.h:719
@@ -1477,7 +1477,7 @@ msgstr "Kunne ikke detektere en lydstrøm i %1"
 
 #: internet/googledrive/googledriveservice.cpp:208
 msgid "Could not find Google Drive file."
-msgstr ""
+msgstr "Kunne ikke finde Google Drive-fil."
 
 #: songinfo/streamdiscoverer.cpp:123
 msgid "Could not get details"
@@ -1598,7 +1598,7 @@ msgstr "Dance"
 
 #: ../bin/src/ui_console.h:131
 msgid "Database"
-msgstr ""
+msgstr "Database"
 
 #: core/database.cpp:622
 msgid ""
@@ -1965,7 +1965,7 @@ msgstr "Dubstep"
 
 #: ../bin/src/ui_console.h:132
 msgid "Dump To Logs"
-msgstr ""
+msgstr "Dump til logge"
 
 #: ../bin/src/ui_episodeinfowidget.h:134 ../bin/src/ui_ripcddialog.h:308
 msgid "Duration"
@@ -2286,7 +2286,7 @@ msgstr "Kunne ikke hente podcasts"
 msgid ""
 "Failed to get channel list:\n"
 "%1"
-msgstr ""
+msgstr "Kunne ikke hente kanalliste:\n%1"
 
 #: internet/podcasts/addpodcastbyurl.cpp:71
 #: internet/podcasts/fixedopmlpage.cpp:55
@@ -2298,7 +2298,7 @@ msgstr "Kunne ikke indlæse podcast"
 msgid ""
 "Failed to parse %1 response:\n"
 "%2"
-msgstr ""
+msgstr "Kunne ikke fortolke %1 svar:\n%2"
 
 #: internet/podcasts/podcasturlloader.cpp:177
 msgid "Failed to parse the XML for this RSS feed"
@@ -2309,7 +2309,7 @@ msgstr "Kunne fortolke XML til dette RSS-feed"
 msgid ""
 "Failed to update icecast directory:\n"
 "%1"
-msgstr ""
+msgstr "Kunne ikke opdatere icecast-mappe:\n%1"
 
 #: ui/trackselectiondialog.cpp:247
 #, qt-format
@@ -2348,7 +2348,7 @@ msgstr "Kunne ikke hente omslag"
 #: internet/subsonic/subsonicdynamicplaylist.cpp:100
 #: internet/subsonic/subsonicdynamicplaylist.cpp:166
 msgid "Fetching playlist items"
-msgstr ""
+msgstr "Henter afspilningslistepunkter"
 
 #: ../bin/src/ui_ripcddialog.h:319
 msgid "File Format"
@@ -2480,7 +2480,7 @@ msgstr "Billeder per buffer"
 
 #: internet/subsonic/subsonicservice.cpp:109
 msgid "Frequently Played Albums"
-msgstr ""
+msgstr "Ofte afspillede albummer"
 
 #: moodbar/moodbarrenderer.cpp:173
 msgid "Frozen"
@@ -3234,7 +3234,7 @@ msgstr "Højeste bithastighed"
 
 #: ../bin/src/ui_behavioursettingspage.h:449
 msgid "Maximum number of child processes for tag handling (requires restart)"
-msgstr ""
+msgstr "Højeste antal underprocessor til håndtering af mærker (kræver genstart)"
 
 #: ripper/ripcddialog.cpp:155
 msgid "Media has changed. Reloading"
@@ -3405,7 +3405,7 @@ msgstr "Nye spor vil automatisk blive tilføjet."
 
 #: internet/subsonic/subsonicservice.cpp:101
 msgid "Newest Albums"
-msgstr ""
+msgstr "Nyeste albummer"
 
 #: library/library.cpp:94
 msgid "Newest tracks"
@@ -3525,7 +3525,7 @@ msgstr "Antal episoder at vise"
 
 #: ../bin/src/ui_behavioursettingspage.h:450
 msgid "Number of processes:"
-msgstr ""
+msgstr "Antal processorer:"
 
 #: ui/notificationssettingspage.cpp:38
 msgid "OSD Preview"
@@ -4003,7 +4003,7 @@ msgstr "Sæt sange i tilfældig rækkefølge"
 
 #: ../bin/src/ui_console.h:134
 msgid "Qt"
-msgstr ""
+msgstr "Qt"
 
 #: ../bin/src/ui_transcoderoptionsflac.h:80
 #: ../bin/src/ui_transcoderoptionsmp3.h:191
@@ -4050,11 +4050,11 @@ msgstr "Regn"
 
 #: internet/subsonic/subsonicservice.cpp:105
 msgid "Random Albums"
-msgstr ""
+msgstr "Tilfældige albummer"
 
 #: internet/subsonic/subsonicservice.cpp:125
 msgid "Random Songs"
-msgstr ""
+msgstr "Tilfældige sange"
 
 #: ../bin/src/ui_visualisationselector.h:111
 msgid "Random visualization"
@@ -4095,7 +4095,7 @@ msgstr "Vil du virkelig afbryde?"
 
 #: internet/subsonic/subsonicservice.cpp:117
 msgid "Recently Played Albums"
-msgstr ""
+msgstr "Senest afspillede albummer"
 
 #: internet/subsonic/subsonicsettingspage.cpp:161
 msgid "Redirect limit exceeded, verify server configuration."
@@ -4889,11 +4889,11 @@ msgstr "Standard"
 
 #: internet/spotify/spotifyservice.cpp:409
 msgid "Starred"
-msgstr "Har stjerner"
+msgstr "Med stjerne"
 
 #: internet/subsonic/subsonicservice.cpp:121
 msgid "Starred Albums"
-msgstr ""
+msgstr "Albummer med stjerne"
 
 #: ripper/ripcddialog.cpp:74
 msgid "Start ripping"
@@ -5041,7 +5041,7 @@ msgstr "Synkroniser Spotify afspilningsliste"
 
 #: internet/spotify/spotifyservice.cpp:715
 msgid "Syncing Spotify starred tracks"
-msgstr "Synkroniserer stjernemarkerede spor i Spotify"
+msgstr "Synkroniserer spor med stjerne i Spotify"
 
 #: moodbar/moodbarrenderer.cpp:177
 msgid "System colors"
@@ -5274,7 +5274,7 @@ msgstr "For mange omdirigeringer"
 
 #: internet/subsonic/subsonicservice.cpp:113
 msgid "Top Rated Albums"
-msgstr ""
+msgstr "Bedt bedømte albummer"
 
 #: internet/spotify/spotifyservice.cpp:423
 msgid "Top tracks"
@@ -5750,7 +5750,7 @@ msgstr "År - Album"
 
 #: playlist/playlist.cpp:1391
 msgid "Year - original"
-msgstr ""
+msgstr "År - oprindeligt"
 
 #: smartplaylists/searchterm.cpp:425
 msgid "Years"
@@ -5940,7 +5940,7 @@ msgstr "indeholder ikke"
 
 #: ../bin/src/ui_console.h:133
 msgid "dump"
-msgstr ""
+msgstr "dump"
 
 #: smartplaylists/searchterm.cpp:263
 msgid "empty"
