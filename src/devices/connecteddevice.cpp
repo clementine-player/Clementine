@@ -44,7 +44,8 @@ ConnectedDevice::ConnectedDevice(const QUrl& url, DeviceLister* lister,
   qLog(Info) << "connected" << url << unique_id << first_time;
 
   // Create the backend in the database thread.
-  backend_.reset(new LibraryBackend(), [](QObject* obj) { delete obj; });
+  backend_.reset(new LibraryBackend(),
+                 [](QObject* obj) { obj->deleteLater(); });
   backend_->moveToThread(app_->database()->thread());
 
   connect(backend_.get(), SIGNAL(TotalSongCountUpdated(int)),
