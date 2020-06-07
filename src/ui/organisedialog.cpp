@@ -113,6 +113,13 @@ void OrganiseDialog::SetDestinationModel(QAbstractItemModel* model,
   ui_->destination->setModel(model);
 
   ui_->eject_after->setVisible(devices);
+
+  // In case this is called more than once, disconnect old model.
+  if (model_connection_) disconnect(model_connection_);
+  // If a device changes, transcoding options may have changed.
+  model_connection_ =
+      connect(model, SIGNAL(dataChanged(QModelIndex, QModelIndex)), this,
+              SLOT(DestDataChanged(QModelIndex, QModelIndex)));
 }
 
 bool OrganiseDialog::SetSongs(const SongList& songs) {
@@ -303,6 +310,16 @@ void OrganiseDialog::UpdatePreviews() {
 
   if (!resized_by_user_) {
     adjustSize();
+  }
+}
+
+void OrganiseDialog::DestDataChanged(const QModelIndex& begin,
+                                     const QModelIndex& end) {
+  const QModelIndex destination =
+      ui_->destination->model()->index(ui_->destination->currentIndex(), 0);
+  if (QItemSelection(begin, end).contains(destination)) {
+    qLog(Debug) << "Destination data changed";
+    UpdatePreviews();
   }
 }
 
