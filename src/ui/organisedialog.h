@@ -64,7 +64,7 @@ class OrganiseDialog : public QDialog {
 
   void SetCopy(bool copy);
 
-signals:
+ signals:
   void FileCopied(int);
 
  public slots:
@@ -80,6 +80,8 @@ signals:
   void InsertTag(const QString& tag);
   void UpdatePreviews();
 
+  void DestDataChanged(const QModelIndex& begin, const QModelIndex& end);
+
   void OrganiseFinished(const QStringList& files_with_errors);
 
  private:
@@ -92,6 +94,8 @@ signals:
   Ui_OrganiseDialog* ui_;
   TaskManager* task_manager_;
   LibraryBackend* backend_;
+
+  QMetaObject::Connection model_connection_;
 
   OrganiseFormat format_;
 
