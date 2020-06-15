@@ -23,8 +23,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2020-05-28 18:55+0000\n"
-"Last-Translator: John Maguire <john.maguire@gmail.com>\n"
+"PO-Revision-Date: 2020-06-14 08:29+0000\n"
+"Last-Translator: MarongHappy <daemul72@gmail.com>\n"
 "Language-Team: Korean (http://www.transifex.com/davidsansome/clementine/language/ko/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -77,7 +77,7 @@ msgstr " 초"
 
 #: ../bin/src/ui_querysortpage.h:144
 msgid " songs"
-msgstr " 음악"
+msgstr "곡"
 
 #: widgets/osd.cpp:195
 #, qt-format
@@ -115,7 +115,7 @@ msgstr "%1 재생목록 (%2)"
 msgid ""
 "%1 request failed:\n"
 "%2"
-msgstr ""
+msgstr "%1 요청실패:\n%2"
 
 #: playlist/playlistmanager.cpp:429
 #, qt-format
@@ -125,22 +125,22 @@ msgstr "다음 중 %1개 선택됨"
 #: devices/deviceview.cpp:123
 #, qt-format
 msgid "%1 song"
-msgstr "%1개 음악"
+msgstr "%1곡"
 
 #: devices/deviceview.cpp:125
 #, qt-format
 msgid "%1 songs"
-msgstr "%1개 음악"
+msgstr "%1곡"
 
 #: smartplaylists/searchpreview.cpp:123
 #, qt-format
 msgid "%1 songs found"
-msgstr "%1개 음악 찾음"
+msgstr "%1곡 발견"
 
 #: smartplaylists/searchpreview.cpp:119
 #, qt-format
 msgid "%1 songs found (showing %2)"
-msgstr "%1개 음악 찾음 (%2개 표시 중)"
+msgstr "%1곡 발견 (%2개 표시 중)"
 
 #: playlist/playlistmanager.cpp:435 playlist/queue.cpp:229
 #, qt-format
@@ -150,7 +150,7 @@ msgstr "%1개 곡"
 #: ui/albumcovermanager.cpp:475
 #, qt-format
 msgid "%1 transferred"
-msgstr "%1 이동됨"
+msgstr "%1 전송됨"
 
 #: widgets/osd.cpp:241 widgets/osd.cpp:247 widgets/osd.cpp:253
 #: widgets/osd.cpp:259 widgets/osd.cpp:265 widgets/osd.cpp:272
@@ -330,7 +330,7 @@ msgstr "48,000Hz"
 
 #: library/library.cpp:66
 msgid "50 random tracks"
-msgstr "무작위 50곡"
+msgstr "50곡 무작위 재생"
 
 #: ../bin/src/ui_playbacksettingspage.h:379
 msgid "96,000Hz"
@@ -348,7 +348,7 @@ msgid ""
 "directly into the file each time they changed.</p><p>Please note it might "
 "not work for every format and, as there is no standard for doing so, other "
 "music players might not be able to read them.</p></body></html>"
-msgstr "<html><head/><body><p>활성화하면 Clementine은 별점이나 기타 통계를 독립된 데이터베이스에만 저장하며 파일을 수정하지 않습니다.</p><p>비활성화하면 통계를 파일과 데이터베이스 모두에 저장합니다.</p><p>이 기능은 비표준이므로 모든 형식과 호환되지 않고, 다른 플레이어가 이 정보를 읽지 못할 수 있습니다.</p></body></html>"
+msgstr "<html><head/><body><p>활성화하면 클레멘타인은 별점이나 기타 통계를 독립된 데이터베이스에만 저장하며 파일을 수정하지 않습니다.</p><p>비활성화하면 통계를 파일과 데이터베이스 모두에 저장합니다.</p><p>이 기능은 비표준이므로 모든 형식과 호환되지 않고, 다른 플레이어가 이 정보를 읽지 못할 수 있습니다.</p></body></html>"
 
 #: ../bin/src/ui_libraryfilterwidget.h:104
 #, qt-format
@@ -364,7 +364,7 @@ msgid ""
 "played in the last 180 minutes.</p><p><span style=\" font-"
 "weight:600;\">Available fields: </span><span style=\" font-"
 "style:italic;\">%1</span>.</p></body></html>"
-msgstr "<html><head/><body><p>검색을 해당 필드로 제한하려면 단어 앞에 필드 이름을 붙이십시오. 예: </span>가수:</span><span style=\" font-style:italic;\">Bode</span> Bode라는 단어가 포함된 모든 아티스트에 대한 라이브러리 를 검색하고, <span style=\" font-weight:600;\">재생횟수:</span><span style=\" font-style:italic;\">&gt;=2</span> 라이브러리에서 적어도 두 번 재생된 음악을 검색하고, <span style=\" font-weight:600;\">마지막재생:</span>&lt;<span style=\" font-style:italic;\">1시간30분</span> 지난 180분 동안 재생된 음악에 대한 라이브러리를 검색합니다.</p><p><span style=\" font-weight:600;\">사용 가능한 필드: </span><span style=\" font-style:italic;\">%1</span>.</p></body></html>"
+msgstr "<html><head/><body><p>검색을 해당 필드로 제한하려면 단어 앞에 필드 이름을 붙이십시오. 예: </span>아티스트:</span><span style=\" font-style:italic;\">Bode</span>라는 단어가 포함된 모든 아티스트에 대한 라이브러리 를 검색하고, <span style=\" font-weight:600;\">재생횟수:</span><span style=\" font-style:italic;\">&gt;=2</span> 라이브러리에서 적어도 두 번 재생된 음악을 검색하고, <span style=\" font-weight:600;\">마지막재생:</span>&lt;<span style=\" font-style:italic;\">1시간30분</span> 지난 180분 동안 재생된 음악에 대한 라이브러리를 검색합니다.</p><p><span style=\" font-weight:600;\">사용 가능한 필드: </span><span style=\" font-style:italic;\">%1</span>.</p></body></html>"
 
 #: ../bin/src/ui_librarysettingspage.h:198
 msgid ""
@@ -408,12 +408,12 @@ msgid ""
 "A smart playlist is a dynamic list of songs that come from your library.  "
 "There are different types of smart playlist that offer different ways of "
 "selecting songs."
-msgstr "스마트 재생 목록은 라이브러리에서 불러온 음악의 다이나믹 목록입니다. 다른 방식으로 노래를 선택할 수 있는 스마트 재생 목록의 또 다른 형태입니다."
+msgstr "스마트 재생 목록은 라이브러리에서 불러온 음악의 동적 목록입니다. 다른 방식으로 노래를 선택할 수 있는 스마트 재생 목록의 또 다른 형태입니다."
 
 #: smartplaylists/querywizardplugin.cpp:158
 msgid ""
 "A song will be included in the playlist if it matches these conditions."
-msgstr "노래가 이러한 조건과 일치하면 재생 목록에 포함됩니다."
+msgstr "음악이 이러한 조건과 일치하면 재생 목록에 포함됩니다."
 
 #: ../bin/src/ui_behavioursettingspage.h:453
 msgid "A&utomatic"
@@ -458,7 +458,7 @@ msgstr "%1 정보"
 
 #: ../bin/src/ui_mainwindow.h:735
 msgid "About Clementine..."
-msgstr "Clementine 정보"
+msgstr "클레멘타인 정보..."
 
 #: ../bin/src/ui_mainwindow.h:762
 msgid "About Qt..."
@@ -510,7 +510,7 @@ msgstr "동작 추가"
 
 #: ../bin/src/ui_transcodedialog.h:220
 msgid "Add all tracks from a directory and all its subdirectories"
-msgstr "디렉토리와 모든 하위 디렉토리의 모든 곡을 추가합니다"
+msgstr "디렉토리의 모든 곡 및 모든 하위 디렉터리 추가"
 
 #: internet/internetradio/savedradio.cpp:114
 msgid "Add another stream..."
@@ -567,23 +567,23 @@ msgstr "검색 조건 추가"
 
 #: ../bin/src/ui_notificationssettingspage.h:385
 msgid "Add song album tag"
-msgstr "앨범 태그 추가"
+msgstr "음악 앨범 태그 추가"
 
 #: ../bin/src/ui_notificationssettingspage.h:391
 msgid "Add song albumartist tag"
-msgstr "앨범 음악가 태그 추가"
+msgstr "음악 앨범아티스트 태그 추가"
 
 #: ../bin/src/ui_notificationssettingspage.h:382
 msgid "Add song artist tag"
-msgstr "음악가 태그 추가"
+msgstr "음악 아티스트 태그 추가"
 
 #: ../bin/src/ui_notificationssettingspage.h:427
 msgid "Add song auto score"
-msgstr "자동 점수 추가"
+msgstr "음악 자동 점수 추가"
 
 #: ../bin/src/ui_notificationssettingspage.h:397
 msgid "Add song composer tag"
-msgstr "작곡가 태그 추가"
+msgstr "음악 작곡가 태그 추가"
 
 #: ../bin/src/ui_notificationssettingspage.h:406
 msgid "Add song disc tag"
@@ -591,11 +591,11 @@ msgstr "음악 디스크 태그 추가"
 
 #: ../bin/src/ui_notificationssettingspage.h:434
 msgid "Add song filename"
-msgstr "음악 파일명 추가"
+msgstr "음악 파일이름 추가"
 
 #: ../bin/src/ui_notificationssettingspage.h:412
 msgid "Add song genre tag"
-msgstr "장르 태그 추가"
+msgstr "음악 장르 태그 추가"
 
 #: ../bin/src/ui_notificationssettingspage.h:403
 msgid "Add song grouping tag"
@@ -603,27 +603,27 @@ msgstr "음악 그룹화 태그 추가"
 
 #: ../bin/src/ui_notificationssettingspage.h:415
 msgid "Add song length tag"
-msgstr "노래 길이 태그 추가"
+msgstr "음악 길이 태그 추가"
 
 #: ../bin/src/ui_notificationssettingspage.h:400
 msgid "Add song performer tag"
-msgstr "음악 연주가 태그 추가"
+msgstr "음악 연주자 태그 추가"
 
 #: ../bin/src/ui_notificationssettingspage.h:418
 msgid "Add song play count"
-msgstr "재생 횟수 추가"
+msgstr "음악 재생 횟수 추가"
 
 #: ../bin/src/ui_notificationssettingspage.h:424
 msgid "Add song rating"
-msgstr "음악 등급 추가"
+msgstr "음악 별점 추가"
 
 #: ../bin/src/ui_notificationssettingspage.h:421
 msgid "Add song skip count"
-msgstr "무시 횟수 추가"
+msgstr "음악 건너뛰기 횟수 추가"
 
 #: ../bin/src/ui_notificationssettingspage.h:388
 msgid "Add song title tag"
-msgstr "제목 태그 추가"
+msgstr "음악 제목 태그 추가"
 
 #: ../bin/src/ui_notificationssettingspage.h:409
 msgid "Add song track tag"
@@ -631,7 +631,7 @@ msgstr "음악 곡 태그 추가"
 
 #: ../bin/src/ui_notificationssettingspage.h:394
 msgid "Add song year tag"
-msgstr "연도 태그 추가"
+msgstr "음악 연도 태그 추가"
 
 #: ../bin/src/ui_mainwindow.h:738
 msgid "Add stream..."
@@ -846,17 +846,17 @@ msgstr "클리핑 방지를 위한 압축 적용"
 #: ui/equalizer.cpp:222
 #, qt-format
 msgid "Are you sure you want to delete the \"%1\" preset?"
-msgstr "\"%1\" 프리셋을 정말 지우시겠습니까?"
+msgstr "\"%1\" 프리셋을 정말 삭제하시겠습니까?"
 
 #: ui/edittagdialog.cpp:802
 msgid "Are you sure you want to reset this song's statistics?"
-msgstr "이 곡의 통계를 초기화하시겠습니까?"
+msgstr "이 음악의 통계를 재설정하시겠습니까?"
 
 #: library/librarysettingspage.cpp:155
 msgid ""
 "Are you sure you want to write song's statistics into song's file for all "
 "the songs of your library?"
-msgstr "라이브러리의 모든 곡의 해당하는 음악 파일에 음악 통계를 작성 하시겠습니까?"
+msgstr "라이브러리의 모든 음악에 대해 음악의 통계를 음악 파일에 기록하시겠습니까?"
 
 #: library/savedgroupingmanager.cpp:62 playlist/playlist.cpp:1379
 #: ui/organisedialog.cpp:65 ui/qtsystemtrayicon.cpp:249
@@ -1066,7 +1066,7 @@ msgstr "버튼"
 
 #: internet/podcasts/addpodcastdialog.cpp:97
 msgid "CBC Podcasts"
-msgstr ""
+msgstr "CBC 팟캐스트"
 
 #: core/song.cpp:454
 msgid "CDDA"
@@ -1102,7 +1102,7 @@ msgstr "순서섞기 모드 변경"
 
 #: ../bin/src/ui_behavioursettingspage.h:442
 msgid "Change the currently playing song"
-msgstr "지금 재생 중인 음악 바꾸기"
+msgstr "현재 재생 중인 음악 변경"
 
 #: core/commandlineoptions.cpp:181
 msgid "Change the language"
@@ -1110,13 +1110,13 @@ msgstr "언어 변경"
 
 #: ../bin/src/ui_playbacksettingspage.h:383
 msgid "Changes will take place when the next song starts playing"
-msgstr "변경사항은 다음곡부터 적용됩니다."
+msgstr "다음 노래가 재생을 시작하면 변경됩니다"
 
 #: ../bin/src/ui_playbacksettingspage.h:370
 msgid ""
 "Changing mono playback preference will be effective for the next playing "
 "songs"
-msgstr "모노 재생 옵션 변경은 다음곡부터 적용됩니다."
+msgstr "모노 재생 기본 설정을 변경하면 다음곡부터 적용됩니다."
 
 #: ../bin/src/ui_streamdetailsdialog.h:137
 msgid "Channels"
@@ -1156,11 +1156,11 @@ msgstr "목록에서 선택"
 
 #: smartplaylists/querywizardplugin.cpp:162
 msgid "Choose how the playlist is sorted and how many songs it will contain."
-msgstr "재생목록의 정렬 방식과 최대 곡수를 선택하세요."
+msgstr "재생 목록을 정렬하는 방법과 재생 목록에 포함할 음악 수를 선택하십시오."
 
 #: internet/podcasts/podcastsettingspage.cpp:143
 msgid "Choose podcast download directory"
-msgstr "팟케스트 다운로드 경로를 선택하세요"
+msgstr "팟캐스트 다운로드 디렉토리 선택"
 
 #: ../bin/src/ui_internetshowsettingspage.h:85
 msgid "Choose the internet services you want to show."
@@ -1169,7 +1169,7 @@ msgstr "당신이 보기 원하는 인터넷 서비스들을 선택하세요."
 #: ../bin/src/ui_songinfosettingspage.h:159
 msgid ""
 "Choose the websites you want Clementine to use when searching for lyrics."
-msgstr "Clementine이 가사를 찾기위해 이용할 사이트를 선택하세요."
+msgstr "가사를 검색할 때 클레멘타인이 사용할 웹 사이트를 선택합니다."
 
 #: ui/equalizer.cpp:112
 msgid "Classical"
@@ -1192,71 +1192,71 @@ msgstr "재생목록 비우기"
 #: visualisations/visualisationcontainer.cpp:223
 #: ../bin/src/ui_mainwindow.h:718 ../bin/src/ui_visualisationoverlay.h:182
 msgid "Clementine"
-msgstr "Clementine"
+msgstr "클레멘타인"
 
 #: ../bin/src/ui_errordialog.h:92
 msgid "Clementine Error"
-msgstr "Clementine 오류"
+msgstr "클레멘타인 오류"
 
 #: ../bin/src/ui_notificationssettingspage.h:463
 msgid "Clementine Orange"
-msgstr "Clementine 오렌지"
+msgstr "클레멘타인 오렌지"
 
 #: visualisations/visualisationcontainer.cpp:76
 #: visualisations/visualisationcontainer.cpp:159
 msgid "Clementine Visualization"
-msgstr "Clementine 시각화"
+msgstr "클레멘타인 시각화"
 
 #: ../bin/src/ui_deviceproperties.h:375
 msgid ""
 "Clementine can automatically convert the music you copy to this device into "
 "a format that it can play."
-msgstr "Clementine은 이 장치에서 복사한 곡을 재생 가능한 형식으로 자동 변환할 수 있습니다."
+msgstr "클레멘타인은 이 장치에서 복사한 곡을 재생 가능한 형식으로 자동 변환할 수 있습니다."
 
 #: ../bin/src/ui_boxsettingspage.h:100
 msgid "Clementine can play music that you have uploaded to Box"
-msgstr "Clementine은 당신이 Box에 업로드한 음악을 재생할 수 있습니다."
+msgstr "클레멘타인은 당신이 Box에 업로드한 음악을 재생할 수 있습니다."
 
 #: ../bin/src/ui_dropboxsettingspage.h:100
 msgid "Clementine can play music that you have uploaded to Dropbox"
-msgstr "Clementine은 당신이 Dropbox에 업로드한 음악을 재생할 수 있습니다."
+msgstr "클레멘타인은 당신이 Dropbox에 업로드한 음악을 재생할 수 있습니다."
 
 #: ../bin/src/ui_googledrivesettingspage.h:100
 msgid "Clementine can play music that you have uploaded to Google Drive"
-msgstr "Clementine은 당신이 Google Drive에 업로드한 음악을 재생할 수 있습니다."
+msgstr "클레멘타인은 당신이 Google Drive에 업로드한 음악을 재생할 수 있습니다."
 
 #: ../bin/src/ui_skydrivesettingspage.h:100
 msgid "Clementine can play music that you have uploaded to OneDrive"
-msgstr "클레멘타인은 당신이 One드라이브에 업로드한 음악을 재생할 수 있습니다."
+msgstr "클레멘타인은 당신이 OneDrive에 업로드한 음악을 재생할 수 있습니다."
 
 #: ../bin/src/ui_notificationssettingspage.h:436
 msgid "Clementine can show a message when the track changes."
-msgstr "Clementine은 곡이 변할 때 메시지를 표시할 수 있습니다."
+msgstr "클레멘타인은 곡이 변할 때 메시지를 표시할 수 있습니다."
 
 #: ../bin/src/ui_podcastsettingspage.h:278
 msgid ""
 "Clementine can synchronize your subscription list with your other computers "
 "and podcast applications.  <a href=\"https://gpodder.net/register/\">Create "
 "an account</a>."
-msgstr "Clementine은 당신의 다른 컴퓨터와 팟케스트 어플리케이션과 당신의 구독 목록을 동기화 할 수 있습니다. <a href=\"https://gpodder.net/register/\">계정을 만드세요</a>."
+msgstr "클레멘타인은 당신의 다른 컴퓨터와 팟케스트 어플리케이션과 당신의 구독 목록을 동기화 할 수 있습니다. <a href=\"https://gpodder.net/register/\">계정을 만드세요</a>."
 
 #: visualisations/projectmvisualisation.cpp:132
 msgid ""
 "Clementine could not load any projectM visualisations.  Check that you have "
 "installed Clementine properly."
-msgstr "Clementine이 projectM 시각화를 불러올 수 없습니다. Clementine이 제대로 설치되었는지 확인해 보세요."
+msgstr "클레멘타인이 projectM 시각화를 불러올 수 없습니다. 클레멘타인이 제대로 설치되었는지 확인하십시오."
 
 #: widgets/prettyimage.cpp:197
 msgid "Clementine image viewer"
-msgstr "Clementine 이미지 뷰어"
+msgstr "클레멘타인 이미지 뷰어"
 
 #: ../bin/src/ui_trackselectiondialog.h:205
 msgid "Clementine was unable to find results for this file"
-msgstr "Clementine은 이 파일의 결과를 검색할 수 없습니다"
+msgstr "클레멘타인은 이 파일의 결과를 검색할 수 없습니다"
 
 #: ../bin/src/ui_globalsearchview.h:209
 msgid "Clementine will find music in:"
-msgstr "Clementine이 음악을 찾을 수 있습니다."
+msgstr "클레멘타인이 음악을 찾을 수 있습니다."
 
 #: library/libraryview.cpp:364
 msgid "Click here to add some music"
@@ -1280,7 +1280,7 @@ msgstr "남은 시간과 전체 시간을 바꾸려면 클릭하세요"
 msgid ""
 "Clicking the Login button will open a web browser.  You should return to "
 "Clementine after you have logged in."
-msgstr "로그인 버튼을 클릭하면 웹 브라우저가 열립니다. 당신이 로그인을 한 후에 Clementine으로 되돌아 와야 합니다."
+msgstr "로그인 버튼을 클릭하면 웹 브라우저가 열립니다. 당신이 로그인을 한 후에 클레멘타인으로 되돌아 와야 합니다."
 
 #: widgets/didyoumean.cpp:37
 msgid "Close"
@@ -1324,7 +1324,7 @@ msgstr "정렬할 때 무시할 접두사 단어 목록 쉼표로 구분"
 
 #: ../bin/src/ui_console.h:129
 msgid "Command"
-msgstr ""
+msgstr "명령"
 
 #: playlist/playlist.cpp:1434 smartplaylists/searchterm.cpp:384
 #: ui/organisedialog.cpp:78 ../bin/src/ui_edittagdialog.h:719
@@ -1475,7 +1475,7 @@ msgstr "%1의 오디오 스트림을 감지할 수 없습니다."
 
 #: internet/googledrive/googledriveservice.cpp:208
 msgid "Could not find Google Drive file."
-msgstr ""
+msgstr "Google 드라이브 파일을 찾을 수 없습니다."
 
 #: songinfo/streamdiscoverer.cpp:123
 msgid "Could not get details"
@@ -1596,7 +1596,7 @@ msgstr "댄스"
 
 #: ../bin/src/ui_console.h:131
 msgid "Database"
-msgstr ""
+msgstr "데이터베이스"
 
 #: core/database.cpp:622
 msgid ""
@@ -1687,11 +1687,11 @@ msgstr "프리셋 삭제"
 
 #: library/libraryview.cpp:411
 msgid "Delete smart playlist"
-msgstr "스마트 재생목록 지우기"
+msgstr "스마트 재생목록 삭제"
 
 #: core/commandlineoptions.cpp:186
 msgid "Delete the currently playing song"
-msgstr "지금 재생 중인 곡 지우기"
+msgstr "현재 재생 중인 삭제 삭제"
 
 #: ../bin/src/ui_organisedialog.h:245
 msgid "Delete the original files"
@@ -1836,7 +1836,7 @@ msgid ""
 "Doing a full rescan will lose any metadata you've saved in Clementine such "
 "as cover art, play counts and ratings.  Clementine will rescan all your "
 "music in Google Drive which may take some time."
-msgstr "전체 재탐색은 앨범아트, 재생회수, 별점 등 모든 정보가 손실됩니다. Clementine은 Google Drive에 있는 모든 음악을 재탐색 할 것이며, 수분이 소요될 수 있습니다."
+msgstr "전체 재탐색은 앨범아트, 재생회수, 별점 등 모든 정보가 손실됩니다. 클레멘타인은 Google Drive에 있는 모든 음악을 재탐색 할 것이며, 수분이 소요될 수 있습니다."
 
 #: widgets/osd.cpp:304 ../bin/src/ui_playlistsequence.h:110
 msgid "Don't repeat"
@@ -1870,11 +1870,11 @@ msgstr "열려면 더블클릭하세요"
 
 #: ../bin/src/ui_behavioursettingspage.h:439
 msgid "Double clicking a song in the playlist will..."
-msgstr "음악을 더블클릭하면 재생목록으로..."
+msgstr "재생목록에서 노래를 두 번 클릭하면..."
 
 #: ../bin/src/ui_behavioursettingspage.h:425
 msgid "Double clicking a song will..."
-msgstr "노래를 더블클릭하면..."
+msgstr "음악를 두 번 클릭하면..."
 
 #: internet/podcasts/podcastservice.cpp:550
 #, c-format, qt-plural-format
@@ -1963,7 +1963,7 @@ msgstr "덥스탭"
 
 #: ../bin/src/ui_console.h:132
 msgid "Dump To Logs"
-msgstr ""
+msgstr "로그로 덤프"
 
 #: ../bin/src/ui_episodeinfowidget.h:134 ../bin/src/ui_ripcddialog.h:308
 msgid "Duration"
@@ -1971,11 +1971,11 @@ msgstr "지속"
 
 #: ../bin/src/ui_dynamicplaylistcontrols.h:108
 msgid "Dynamic mode is on"
-msgstr "다이나믹 모드가 켜졌습니다"
+msgstr "동적 모드가 켜졌습니다"
 
 #: internet/jamendo/jamendoservice.cpp:125 library/library.cpp:113
 msgid "Dynamic random mix"
-msgstr "다이나믹 랜덤 믹스"
+msgstr "동적 무작위 조합"
 
 #: library/libraryview.cpp:408
 msgid "Edit smart playlist..."
@@ -2025,11 +2025,11 @@ msgstr "이퀄라이저 사용"
 
 #: ../bin/src/ui_wiimotesettingspage.h:177
 msgid "Enable shortcuts only when Clementine is focused"
-msgstr "Clementine이 활성화 되었을 때에만 단축키 허용"
+msgstr "클레멘타인이 활성화 되었을 때에만 단축키 사용가능"
 
 #: ../bin/src/ui_behavioursettingspage.h:408
 msgid "Enable song metadata inline edition with click"
-msgstr "클릭으로 음악 메타데이터 인라인판 사용"
+msgstr "클릭으로 노래 메타데이터 인라인 버전 사용가능"
 
 #: ../bin/src/ui_globalsearchsettingspage.h:143
 msgid ""
@@ -2097,7 +2097,7 @@ msgstr "폴더의 이름 입력"
 
 #: ../bin/src/ui_networkremotesettingspage.h:238
 msgid "Enter this IP in the App to connect to Clementine."
-msgstr "Clementine에 연결하기 위한 앱에서 다음의 IP를 입력하세요."
+msgstr "클레멘타인에 연결하려면 앱에 이 IP를 입력하십시오."
 
 #: ../bin/src/ui_libraryfilterwidget.h:92
 msgid "Entire collection"
@@ -2269,7 +2269,7 @@ msgstr "CD 드라이브 읽기 실패"
 
 #: internet/podcasts/gpoddertoptagspage.cpp:73
 msgid "Failed to fetch directory"
-msgstr "폴더 가져오기 실패"
+msgstr "디렉토리 가져오기 실패"
 
 #: internet/podcasts/gpoddersearchpage.cpp:77
 #: internet/podcasts/gpoddertoptagsmodel.cpp:103
@@ -2284,7 +2284,7 @@ msgstr "팟케스트 가져오기 실패"
 msgid ""
 "Failed to get channel list:\n"
 "%1"
-msgstr ""
+msgstr "채널 목록 받기 실패:\n%1"
 
 #: internet/podcasts/addpodcastbyurl.cpp:71
 #: internet/podcasts/fixedopmlpage.cpp:55
@@ -2296,23 +2296,23 @@ msgstr "팟케스트 열기 실패"
 msgid ""
 "Failed to parse %1 response:\n"
 "%2"
-msgstr ""
+msgstr "%1 응답 구문분석 실패:\n%2"
 
 #: internet/podcasts/podcasturlloader.cpp:177
 msgid "Failed to parse the XML for this RSS feed"
-msgstr "RSS 피드를 위한 XML 파싱이 실패되었습니다."
+msgstr "이 RSS 피드에 대한 XML 구문분석 실패"
 
 #: internet/icecast/icecastservice.cpp:129
 #, qt-format
 msgid ""
 "Failed to update icecast directory:\n"
 "%1"
-msgstr ""
+msgstr "아이스캐스트 디렉토리 업데이트 실패:\n%1"
 
 #: ui/trackselectiondialog.cpp:247
 #, qt-format
 msgid "Failed to write new auto-tags to '%1'"
-msgstr "새 자동 태그를 '%1'에 쓰는데 실패하였음"
+msgstr "'%1'에 새 자동 태그 쓰기 실패"
 
 #: ../bin/src/ui_transcoderoptionsflac.h:81
 #: ../bin/src/ui_transcoderoptionsmp3.h:199
@@ -2346,7 +2346,7 @@ msgstr "커버 가져오기 오류"
 #: internet/subsonic/subsonicdynamicplaylist.cpp:100
 #: internet/subsonic/subsonicdynamicplaylist.cpp:166
 msgid "Fetching playlist items"
-msgstr ""
+msgstr "재생목록 항목 가져오는 중"
 
 #: ../bin/src/ui_ripcddialog.h:319
 msgid "File Format"
@@ -2384,7 +2384,7 @@ msgstr "파일 형태"
 
 #: ../bin/src/ui_transcodedialog.h:217
 msgid "Filename"
-msgstr "파일 "
+msgstr "파일이름"
 
 #: ui/mainwindow.cpp:271
 msgid "Files"
@@ -2396,11 +2396,11 @@ msgstr "변환할 파일들"
 
 #: smartplaylists/querywizardplugin.cpp:82
 msgid "Find songs in your library that match the criteria you specify."
-msgstr "라이브러리에서 지정한 기준과 일치하는 음악을 찾습니다."
+msgstr "지정한 조건과 일치하는 음악을 라이브러리에서 찾으십시오."
 
 #: musicbrainz/tagfetcher.cpp:58
 msgid "Fingerprinting song"
-msgstr "노래 "
+msgstr "음악 청취식별"
 
 #: smartplaylists/wizard.cpp:82
 msgid "Finish"
@@ -2435,7 +2435,7 @@ msgstr "장치를 잃어버림"
 msgid ""
 "Forgetting a device will remove it from this list and Clementine will have "
 "to rescan all the songs again next time you connect it."
-msgstr "장치를 잃어버렸을 경우 목록에서 제거하고 Clementine이 다음 연결할 때 모든 음악을 다시 스캔합니다."
+msgstr "장치를 잊어버리면 이 목록에서 제거되고 다음에 장치를 연결할 때 클레멘타인이 모든 노래를 다시 검색해야 합니다."
 
 #: ../bin/src/ui_deviceviewcontainer.h:97
 #: ../bin/src/ui_searchproviderstatuswidget.h:93
@@ -2478,7 +2478,7 @@ msgstr "프레임/"
 
 #: internet/subsonic/subsonicservice.cpp:109
 msgid "Frequently Played Albums"
-msgstr ""
+msgstr "자주 재생한 앨범"
 
 #: moodbar/moodbarrenderer.cpp:173
 msgid "Frozen"
@@ -2518,7 +2518,7 @@ msgstr "장르"
 #: internet/spotify/spotifyservice.cpp:642
 #: internet/spotify/spotifyservice.cpp:685
 msgid "Get a URL to share this Spotify song"
-msgstr "이 Spotify 음악을 공유하기 위한 URL 얻기"
+msgstr "이 Spotify 노래를 공유할 URL 받기"
 
 #: internet/spotify/spotifyservice.cpp:674
 msgid "Get a URL to share this playlist"
@@ -2561,7 +2561,7 @@ msgstr "%2 중 %1개 커버 가져옴 (%3 실패 됨)"
 
 #: ../bin/src/ui_behavioursettingspage.h:411
 msgid "Grey out non existent songs in my playlists"
-msgstr "내 재생목록에서 존재하지 않는 음악 회색화"
+msgstr "재생 목록에 존재하지 않는 곡이 회색으로 표시됨"
 
 #: ../bin/src/ui_groupbydialog.h:123
 msgid "Group Library by..."
@@ -2686,19 +2686,19 @@ msgstr "상단에 아이콘"
 
 #: musicbrainz/tagfetcher.cpp:90
 msgid "Identifying song"
-msgstr "음악을 식별하는 "
+msgstr "음악 식별하는 중"
 
 #: ../bin/src/ui_behavioursettingspage.h:406
 msgid ""
 "If activated, clicking a selected song in the playlist view will let you "
 "edit the tag value directly"
-msgstr "이 기능을 활성화 하면 재생목록에서 음악을 선택하는 것으로 음악정보를 직접 수정할 수 있습니다."
+msgstr "활성화된 경우, 재생 목록 보기에서 선택한 노래를 클릭하면 태그 값을 직접 편집할 수 있습니다"
 
 #: devices/devicemanager.cpp:518 devices/devicemanager.cpp:529
 msgid ""
 "If you continue, this device will work slowly and songs copied to it may not"
 " work."
-msgstr "계속 한다면, 이 장치는 느리고 복사된 음악들이 작동 되지 않을 수 있습니다."
+msgstr "계속 한다면, 이 장치가 느리게 작동하고 복사한 음악이 작동하지 않을 수도 있습니다."
 
 #: ../bin/src/ui_addpodcastbyurl.h:73
 msgid "If you know the URL of a podcast, enter it below and press Go."
@@ -2734,7 +2734,7 @@ msgstr "%1 주 안에"
 msgid ""
 "In dynamic mode new tracks will be chosen and added to the playlist every "
 "time a song finishes."
-msgstr "다이나믹 모드에서는 곡이 끝날 때마다 자동으로 재생목록에 곡이 추가됩니다."
+msgstr "동적 모드에서는 음악이 끝날 때마다 새로운 곡이 선택되고 재생 목록에 추가됩니다."
 
 #: internet/spotify/spotifyservice.cpp:417
 msgid "Inbox"
@@ -3232,7 +3232,7 @@ msgstr "최고 비트 전송률"
 
 #: ../bin/src/ui_behavioursettingspage.h:449
 msgid "Maximum number of child processes for tag handling (requires restart)"
-msgstr ""
+msgstr "태그 처리를 위한 최대 하위 프로세스 수(다시 시작해야 함)"
 
 #: ripper/ripcddialog.cpp:155
 msgid "Media has changed. Reloading"
@@ -3395,7 +3395,7 @@ msgstr "새 스마트 재생목록"
 
 #: widgets/freespacebar.cpp:46
 msgid "New songs"
-msgstr "새로운 음악"
+msgstr "새 음악"
 
 #: ../bin/src/ui_dynamicplaylistcontrols.h:109
 msgid "New tracks will be added automatically."
@@ -3403,7 +3403,7 @@ msgstr "새로운 음악을 자동으로 추가함"
 
 #: internet/subsonic/subsonicservice.cpp:101
 msgid "Newest Albums"
-msgstr ""
+msgstr "최신 앨범"
 
 #: library/library.cpp:94
 msgid "Newest tracks"
@@ -3454,7 +3454,7 @@ msgstr "없음"
 
 #: library/libraryview.cpp:672 ui/mainwindow.cpp:2424 ui/mainwindow.cpp:2602
 msgid "None of the selected songs were suitable for copying to a device"
-msgstr "선택된 음악들이 장치에 복사되기 적합하지 않음"
+msgstr "선택한 곡 중 장치에 복사하기에 적합한 곡이 없음"
 
 #: moodbar/moodbarrenderer.cpp:169
 msgid "Normal"
@@ -3470,7 +3470,7 @@ msgstr "기본 시간 (최소 4분 또는 절반 길이의 곡)"
 
 #: playlist/playlistsequence.cpp:203
 msgid "Not available while using a dynamic playlist"
-msgstr "다이나믹 재생목록을 사용 중일 때는 사용할 수 없습니다."
+msgstr "동적 재생목록을 사용 중일 때는 사용할 수 없습니다."
 
 #: devices/deviceview.cpp:107
 msgid "Not connected"
@@ -3523,7 +3523,7 @@ msgstr "에피소드의 수를 표시"
 
 #: ../bin/src/ui_behavioursettingspage.h:450
 msgid "Number of processes:"
-msgstr ""
+msgstr "프로세스의 수:"
 
 #: ui/notificationssettingspage.cpp:38
 msgid "OSD Preview"
@@ -3607,7 +3607,7 @@ msgstr "OPML 파일 열기"
 
 #: transcoder/transcodedialog.cpp:242
 msgid "Open a directory to import music from"
-msgstr "음악을 불러올 폴더를 선택하세요."
+msgstr "음악을 가져올 디렉토리 열기"
 
 #: ../bin/src/ui_deviceproperties.h:381
 msgid "Open device"
@@ -3848,7 +3848,7 @@ msgstr "재생목록"
 
 #: ../data/oauthsuccess.html:38
 msgid "Please close your browser and return to Clementine."
-msgstr "브라우저를 닫고 Clementine으로 돌아오세요"
+msgstr "브라우저를 닫고 클레멘타인으로 돌아가십시오."
 
 #: internet/lastfm/lastfmservice.cpp:177
 #, qt-format
@@ -3908,7 +3908,7 @@ msgstr "환경설정..."
 
 #: ../bin/src/ui_librarysettingspage.h:201
 msgid "Preferred album art filenames (comma separated)"
-msgstr "선호하는 앨범 아트 파일명 (쉼표로 구분)"
+msgstr "선호하는 앨범 아트 파일이름 (쉼표로 구분)"
 
 #: ../bin/src/ui_magnatunesettingspage.h:166
 msgid "Preferred audio format"
@@ -4001,7 +4001,7 @@ msgstr "무작위 순서로 음악 넣기"
 
 #: ../bin/src/ui_console.h:134
 msgid "Qt"
-msgstr ""
+msgstr "Qt"
 
 #: ../bin/src/ui_transcoderoptionsflac.h:80
 #: ../bin/src/ui_transcoderoptionsmp3.h:191
@@ -4048,39 +4048,39 @@ msgstr "빗소리"
 
 #: internet/subsonic/subsonicservice.cpp:105
 msgid "Random Albums"
-msgstr ""
+msgstr "앨범 무작위 재생"
 
 #: internet/subsonic/subsonicservice.cpp:125
 msgid "Random Songs"
-msgstr ""
+msgstr "음악 무작위 재생"
 
 #: ../bin/src/ui_visualisationselector.h:111
 msgid "Random visualization"
-msgstr "랜덤 시각화"
+msgstr "무작위 시각화"
 
 #: core/globalshortcuts.cpp:88
 msgid "Rate the current song 0 stars"
-msgstr "현재 음악에 별점 0점 평가"
+msgstr "현재 음악 0 별점 평가"
 
 #: core/globalshortcuts.cpp:89
 msgid "Rate the current song 1 star"
-msgstr "현재 음악에 별점 1점 평가"
+msgstr "현재 음악 1 별점 평가"
 
 #: core/globalshortcuts.cpp:90
 msgid "Rate the current song 2 stars"
-msgstr "현재 음악에 별점 2점 평가"
+msgstr "현재 음악 2 별점 평가"
 
 #: core/globalshortcuts.cpp:91
 msgid "Rate the current song 3 stars"
-msgstr "현재 음악에 별점 3점 평가"
+msgstr "현재 음악 3 별점 평가"
 
 #: core/globalshortcuts.cpp:92
 msgid "Rate the current song 4 stars"
-msgstr "현재 음악에 별점 4점 평가"
+msgstr "현재 음악 4 별점 평가"
 
 #: core/globalshortcuts.cpp:93
 msgid "Rate the current song 5 stars"
-msgstr "현재 음악에 별점 5점 평가"
+msgstr "현재 음악 5 별점 평가"
 
 #: playlist/playlist.cpp:1404 ../bin/src/ui_edittagdialog.h:712
 msgid "Rating"
@@ -4093,7 +4093,7 @@ msgstr "정말 취소 하시겠습니까?"
 
 #: internet/subsonic/subsonicservice.cpp:117
 msgid "Recently Played Albums"
-msgstr ""
+msgstr "최근에 재생한 앨범"
 
 #: internet/subsonic/subsonicsettingspage.cpp:161
 msgid "Redirect limit exceeded, verify server configuration."
@@ -4147,11 +4147,11 @@ msgstr "제거"
 
 #: ../bin/src/ui_wiimotesettingspage.h:184
 msgid "Remove action"
-msgstr "제거 행동"
+msgstr "작업 제거"
 
 #: core/globalshortcuts.cpp:85
 msgid "Remove current song from playlist"
-msgstr "재생목록에서 현재곡을 제거"
+msgstr "재생 목록에서 현재 음악 제거"
 
 #: ../bin/src/ui_mainwindow.h:768
 msgid "Remove duplicates from playlist"
@@ -4167,7 +4167,7 @@ msgstr "재생목록에서 제거"
 
 #: playlist/playlisttabbar.cpp:183
 msgid "Remove playlist"
-msgstr "재생목록 삭제"
+msgstr "재생목록 제거"
 
 #: playlist/playlistlistcontainer.cpp:429
 msgid "Remove playlists"
@@ -4245,7 +4245,7 @@ msgstr "재생 횟수 초기화"
 
 #: ../bin/src/ui_behavioursettingspage.h:423
 msgid "Restart song, then jump to previous if pressed again"
-msgstr "음악을 다시 시작한 다음 다시 누르면 이전으로 건너 뜁니다."
+msgstr "음악을 다시 시작한 다음, 다시 누르면 이전으로 이동합니다"
 
 #: core/commandlineoptions.cpp:172
 msgid ""
@@ -4262,7 +4262,7 @@ msgstr "시작할 때 재생목록 일시정지"
 
 #: ../data/oauthsuccess.html:5
 msgid "Return to Clementine"
-msgstr "Clementine으로 되돌아가기"
+msgstr "클레멘타인으로 돌아가기"
 
 #: ../bin/src/ui_equalizer.h:173
 msgid "Right"
@@ -4376,7 +4376,7 @@ msgstr "그룹화 관리자 저장됨"
 
 #: library/library.cpp:200
 msgid "Saving songs statistics into songs files"
-msgstr "음악 통계를 음악 파일 내부에 저장"
+msgstr "음악 통계를 음악 파일로 저장하기"
 
 #: ui/edittagdialog.cpp:710 ui/trackselectiondialog.cpp:255
 msgid "Saving tracks"
@@ -4649,11 +4649,11 @@ msgstr "상태 표시 줄 위에 보기"
 
 #: ui/mainwindow.cpp:650
 msgid "Show all songs"
-msgstr "모든 음악 보기"
+msgstr "모든 음악 표시"
 
 #: ../bin/src/ui_querysortpage.h:142
 msgid "Show all the songs"
-msgstr "모든 음악 보기"
+msgstr "모든 음악 표시"
 
 #: ../bin/src/ui_librarysettingspage.h:208
 msgid "Show cover art in library"
@@ -4842,7 +4842,7 @@ msgstr "방송국 이름으로 정렬"
 
 #: ../bin/src/ui_querysortpage.h:140
 msgid "Sort songs by"
-msgstr "음악 정렬"
+msgstr "음악 정렬 기준"
 
 #: ../bin/src/ui_querysortpage.h:138
 msgid "Sorting"
@@ -4879,7 +4879,7 @@ msgstr "Spotify 플러그인"
 
 #: internet/spotify/spotifyservice.cpp:841
 msgid "Spotify song's URL"
-msgstr "Spotify 음악 URL"
+msgstr "Spotify 음악의 URL"
 
 #: ../bin/src/ui_transcoderoptionsmp3.h:200
 msgid "Standard"
@@ -4891,7 +4891,7 @@ msgstr "별점"
 
 #: internet/subsonic/subsonicservice.cpp:121
 msgid "Starred Albums"
-msgstr ""
+msgstr "별표 표시된 앨범"
 
 #: ripper/ripcddialog.cpp:74
 msgid "Start ripping"
@@ -4951,7 +4951,7 @@ msgstr "현재 트랙 이후에 재생 중지"
 
 #: ../bin/src/ui_behavioursettingspage.h:410
 msgid "Stop playback if song fails to play"
-msgstr "음악 재생에 실패하면 멈추기"
+msgstr "음악이 재생되지 않을 경우 재생 중지"
 
 #: core/globalshortcuts.cpp:57
 msgid "Stop playing after current track"
@@ -5076,12 +5076,12 @@ msgstr "\"%1\" 명령이 시작 되지 않았습니다."
 
 #: ../bin/src/ui_appearancesettingspage.h:308
 msgid "The album cover of the currently playing song"
-msgstr "재생 중인 음악의 앨범 표지"
+msgstr "현재 재생 중인 음악의 앨범 표지"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:99
 #, qt-format
 msgid "The directory %1 is not valid"
-msgstr "디렉터리 %1 이 유효하지 않습니다."
+msgstr "%1 디렉토리가 유효하지 않습니다."
 
 #: songinfo/streamdiscoverer.cpp:118
 msgid "The discoverer is busy"
@@ -5109,11 +5109,11 @@ msgstr "Subsonic의 시험 기간이 끝났습니다. 라이센스 키를 얻기
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
-msgstr "아래의 새 기능이 추가되었기 때문에, 전체 라이브러리 재탐색이 필요합니다."
+msgstr "방금 업데이트한 클레멘타인 버전에는 아래 나열된 새 기능 때문에 전체 라이브러리 다시 검색이 필요함:"
 
 #: library/libraryview.cpp:585
 msgid "There are other songs in this album"
-msgstr "이 앨범과 다른 음악"
+msgstr "이 앨범에는 다른 곡들이 있습니다"
 
 #: internet/podcasts/gpoddersearchpage.cpp:78
 #: internet/podcasts/gpoddertoptagsmodel.cpp:104
@@ -5133,25 +5133,25 @@ msgstr "iTunes 스토어로부터 응답을 처리하는데 문제가 발생했�
 msgid ""
 "There were problems copying some songs.  The following files could not be "
 "copied:"
-msgstr "음악을 복사하는 도중 문제가 발생하였습니다. 복사에 실패한 파일 :"
+msgstr "일부 음악을 복사하는 동안 문제가 발생했습니다. 다음 파일을 복사할 수 없습니다:"
 
 #: ui/organiseerrordialog.cpp:63
 msgid ""
 "There were problems deleting some songs.  The following files could not be "
 "deleted:"
-msgstr "음악을 삭제하는 도중 문제가 발생하였습니다. 삭제에 실패한 파일 :"
+msgstr "일부 음악을 삭제하는 동안 문제가 발생했습니다. 다음 파일을 삭제할 수 없습니다:"
 
 #: devices/deviceview.cpp:402
 msgid ""
 "These files will be deleted from the device, are you sure you want to "
 "continue?"
-msgstr "파일들이 장치로 부터 삭제 될 것 입니다. 계속 진행 하시겠습니까?"
+msgstr "파일들이 장치로 부터 삭제될 것 입니다. 계속 진행 하시겠습니까?"
 
 #: library/libraryview.cpp:678 ui/mainwindow.cpp:2471 widgets/fileview.cpp:189
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
-msgstr "파일들이 디스크에서 완전히 제거됩니다. 계속하시겠습니까?"
+msgstr "파일들이 디스크에서 완전히 삭제됩니다. 계속하시겠습니까?"
 
 #: ../bin/src/ui_librarysettingspage.h:186
 msgid "These folders will be scanned for music to make up your library"
@@ -5189,7 +5189,7 @@ msgstr "이 환경설정들을 나중에 변경할 수 있습니다."
 msgid ""
 "This device must be connected and opened before Clementine can see what file"
 " formats it supports."
-msgstr "이 장비는 Clementine이 지원하는 포맷을 찾기 전에 Clementine에 연결해서 실행해야 합니다."
+msgstr "클레멘타인이 지원하는 파일 형식을 보려면 먼저 이 장치를 연결하고 열어야 합니다."
 
 #: ../bin/src/ui_deviceproperties.h:374
 msgid "This device supports the following file formats:"
@@ -5202,17 +5202,17 @@ msgstr "이 기기는 완벽하게 작동하지 않을 수 있음."
 #: devices/devicemanager.cpp:516
 msgid ""
 "This is an MTP device, but you compiled Clementine without libmtp support."
-msgstr "MTP 장치이지만 libmtp 지원을 하지 않도록 Clementine이 컴파일 되었습니다."
+msgstr "MTP 장치이지만 libmtp 지원을 하지 않도록 클레멘타인이 컴파일 되었습니다."
 
 #: devices/devicemanager.cpp:527
 msgid "This is an iPod, but you compiled Clementine without libgpod support."
-msgstr "iPod 장치이지만 libgpod 지원을 하지 않도록 Clementine이 컴파일 되었습니다."
+msgstr "iPod 장치이지만 libgpod 지원을 하지 않도록 클레멘타인이 컴파일 되었습니다."
 
 #: devices/devicemanager.cpp:264
 msgid ""
 "This is the first time you have connected this device.  Clementine will now "
 "scan the device to find music files - this may take some time."
-msgstr "이 장치는 처음 연결 되었습니다. Clementine은 지금 장치에서 음악 파일들을 탐색할 것 입니다. - 시간이 조금 걸릴수 도 있습니다."
+msgstr "이 장치는 처음 연결 되었습니다. 클레멘타인은 지금 장치에서 음악 파일들을 탐색할 것 입니다. - 시간이 조금 걸릴수 도 있습니다."
 
 #: playlist/playlisttabbar.cpp:197
 msgid "This option can be changed in the \"Behavior\" preferences"
@@ -5272,7 +5272,7 @@ msgstr "너무 많은 리다이렉트"
 
 #: internet/subsonic/subsonicservice.cpp:113
 msgid "Top Rated Albums"
-msgstr ""
+msgstr "최고 평점 앨범"
 
 #: internet/spotify/spotifyservice.cpp:423
 msgid "Top tracks"
@@ -5411,7 +5411,7 @@ msgstr "변경된 라이브러리 폴더 업데이트"
 
 #: ../bin/src/ui_librarysettingspage.h:190
 msgid "Update the library when Clementine starts"
-msgstr "Clementine이 시작될 때 라이브러리 업데이트"
+msgstr "클레멘타인이 시작될 때 라이브러리 업데이트"
 
 #: internet/podcasts/podcastservice.cpp:430
 msgid "Update this podcast"
@@ -5485,7 +5485,7 @@ msgstr "비트 전송률 관리 엔진 사용"
 
 #: ../bin/src/ui_wizardfinishpage.h:84
 msgid "Use dynamic mode"
-msgstr "다이나믹 모드 사용"
+msgstr "동적 모드 사용"
 
 #: ../bin/src/ui_wiimotesettingspage.h:178
 msgid "Use notifications to report Wii Remote status"
@@ -5533,7 +5533,7 @@ msgstr "사용자명"
 
 #: ../bin/src/ui_behavioursettingspage.h:412
 msgid "Using the menu to add a song will..."
-msgstr "음악 추가를 하였을 때..."
+msgstr "메뉴를 사용하여 음악을 추가하면..."
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:138
 #: ../bin/src/ui_magnatunesettingspage.h:172
@@ -5626,7 +5626,7 @@ msgstr "주"
 
 #: ../bin/src/ui_behavioursettingspage.h:401
 msgid "When Clementine starts"
-msgstr "Clementine이 시작할 때"
+msgstr "클레멘타인이 시작할 때"
 
 #: ../bin/src/ui_behavioursettingspage.h:463
 msgid "When calculating play counts, use"
@@ -5636,7 +5636,7 @@ msgstr "재생 횟수를 계산할 때"
 msgid ""
 "When looking for album art Clementine will first look for picture files that contain one of these words.\n"
 "If there are no matches then it will use the largest image in the directory."
-msgstr "앨범아트를 찾을 때, Clementine은 이 단어들이 포함된 그림파일을 먼저 찾게 됩니다.\n일치하는 항목이 없으면 디렉토리에서 가장 큰 이미지를 사용합니다."
+msgstr "앨범 아트를 찾을 때, 클레멘타인은 먼저 이러한 단어 중 하나가 포함된 사진 파일을 찾습니다\n일치하는 항목이 없으면 디렉토리에서 가장 큰 이미지를 사용합니다."
 
 #: ../bin/src/ui_behavioursettingspage.h:452
 msgid "When saving a playlist, file paths should be"
@@ -5716,7 +5716,7 @@ msgstr "커버 제외:"
 msgid ""
 "Would you like to move the other songs in this album to Various Artists as "
 "well?"
-msgstr "이 앨범의 다른 곡도 다양한 음악가로 옮기겠습니까?"
+msgstr "이번 앨범에 수록된 다른 곡들도 다양한 아티스트로 이동하시겠습니까?"
 
 #: ui/mainwindow.cpp:2719
 msgid "Would you like to run a full rescan right now?"
@@ -5724,7 +5724,7 @@ msgstr "지금 전부 다시 검색해도 좋습니까?"
 
 #: library/librarysettingspage.cpp:154
 msgid "Write all songs statistics into songs' files"
-msgstr "모든 음악에 통계를 작성"
+msgstr "모든 음악 통계를 음악 파일에 기록"
 
 #: ../bin/src/ui_behavioursettingspage.h:457
 msgid "Write metadata"
@@ -5748,7 +5748,7 @@ msgstr "년도 - 앨범"
 
 #: playlist/playlist.cpp:1391
 msgid "Year - original"
-msgstr ""
+msgstr "연도 - 원곡"
 
 #: smartplaylists/searchterm.cpp:425
 msgid "Years"
@@ -5789,13 +5789,13 @@ msgstr "로그인 되었습니다."
 
 #: ../bin/src/ui_groupbydialog.h:122
 msgid "You can change the way the songs in the library are organised."
-msgstr "라이브러리의 음악 구성 방식을 바꿀 수 있습니다."
+msgstr "라이브러리의 음악이 정리되는 방식을 변경할 수 있습니다."
 
 #: internet/magnatune/magnatunesettingspage.cpp:59
 msgid ""
 "You can listen to Magnatune songs for free without an account.  Purchasing a"
 " membership removes the messages at the end of each track."
-msgstr "계정이 없이 무료로 Magnatune의 음악을 들을 수 있습니다. 회원권을 구입하면 각 트랙의 마지막의 메시지를 지웁니다."
+msgstr "계정이 없이도 무료로 Magnatune의 음악을 들을 수 있습니다. 회원권을 구입하면 각 곡의 끝에 있는 메시지가 제거됩니다."
 
 #: ../bin/src/ui_backgroundstreamssettingspage.h:56
 msgid "You can listen to background streams at the same time as other music."
@@ -5806,7 +5806,7 @@ msgid ""
 "You can use your Wii Remote as a remote control for Clementine.  <a "
 "href=\"http://www.clementine-player.org/wiimote\">See the page on the "
 "Clementine wiki</a> for more information.\n"
-msgstr "Clementine에서 Wii 리모콘을 사용할 수 있습니다. 더 알고 싶으면 <a href=\"http://www.clementine-player.org/wiimote\">Clementine 위키의 페이지</a>를 확인 하세요.\n"
+msgstr "클레멘타인에서 Wii Remote를 사용할 수 있습니다. 자세한 내용은 <a href=\"http://www.clementine-player.org/wiimote\">클레멘타인 위키 페이지를 참조하십시오</a>.\n"
 
 #: internet/spotify/spotifysettingspage.cpp:149
 msgid "You do not have a Spotify Premium account."
@@ -5835,11 +5835,11 @@ msgid ""
 "You need to launch System Preferences and allow Clementine to \"<span style"
 "=\"font-style:italic\">control your computer</span>\" to use global "
 "shortcuts in Clementine."
-msgstr "글로벌 단축키를 사용하시려면 시스템 설정을 열어서 Clementine이 \"<span style=\"font-style:italic\">control your computer</span>\" 할 수 있도록 해야 합니다."
+msgstr "글로벌 단축키를 사용하시려면 시스템 설정을 열어서 클레멘타인이 \"<span style=\"font-style:italic\">컴퓨터 제어</span>\" 할 수 있도록 해야 합니다."
 
 #: ../bin/src/ui_behavioursettingspage.h:400
 msgid "You will need to restart Clementine if you change the language."
-msgstr "언어를 변경을 하였다면 Clementine을 재시작 해야합니다."
+msgstr "언어를 변경을 하였다면 클레멘타인을 재시작 해야합니다."
 
 #: ../bin/src/ui_networkremotesettingspage.h:240
 msgid "Your IP address:"
@@ -5938,7 +5938,7 @@ msgstr "포함 되지 않음"
 
 #: ../bin/src/ui_console.h:133
 msgid "dump"
-msgstr ""
+msgstr "덤프"
 
 #: smartplaylists/searchterm.cpp:263
 msgid "empty"
