@@ -528,6 +528,7 @@ set(HEADERS
   playlist/playlistdelegates.h
   playlist/playlistfilter.h
   playlist/playlistheader.h
+  playlist/playlistitem.h
   playlist/playlistitemmimedata.h
   playlist/playlistlistcontainer.h
   playlist/playlistlistmodel.h
