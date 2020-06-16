@@ -21,12 +21,10 @@
 #include <QSettings>
 
 LibraryPlaylistItem::LibraryPlaylistItem(const QString& type)
-    : PlaylistItem(type) {}
+    : DbPlaylistItem(type) {}
 
 LibraryPlaylistItem::LibraryPlaylistItem(const Song& song)
-    : PlaylistItem("Library"), song_(song) {}
-
-QUrl LibraryPlaylistItem::Url() const { return song_.url(); }
+    : DbPlaylistItem("Library", song) {}
 
 void LibraryPlaylistItem::Reload() {
   TagReaderClient::Instance()->ReadFileBlocking(song_.url().toLocalFile(),
@@ -38,18 +36,4 @@ bool LibraryPlaylistItem::InitFromQuery(const SqlRow& query) {
   song_.InitFromQuery(query, true);
 
   return song_.is_valid();
-}
-
-QVariant LibraryPlaylistItem::DatabaseValue(DatabaseColumn column) const {
-  switch (column) {
-    case Column_LibraryId:
-      return song_.id();
-    default:
-      return PlaylistItem::DatabaseValue(column);
-  }
-}
-
-Song LibraryPlaylistItem::Metadata() const {
-  if (HasTemporaryMetadata()) return temp_metadata_;
-  return song_;
 }

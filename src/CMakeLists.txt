@@ -221,6 +221,7 @@ set(SOURCES
   networkremote/songsender.cpp
   networkremote/zeroconf.cpp
 
+  playlist/dbplaylistitem.cpp
   playlist/dynamicplaylistcontrols.cpp
   playlist/playlist.cpp
   playlist/playlistbackend.cpp
@@ -521,6 +522,7 @@ set(HEADERS
   networkremote/remoteclient.h
   networkremote/songsender.h
 
+  playlist/dbplaylistitem.h
   playlist/dynamicplaylistcontrols.h
   playlist/playlist.h
   playlist/playlistbackend.h
