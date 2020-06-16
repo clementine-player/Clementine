@@ -1,5 +1,6 @@
 /* This file is part of Clementine.
    Copyright 2010, David Sansome <me@davidsansome.com>
+   Copyright 2020, Jim Broadus <jbroadus@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -15,21 +16,27 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef LIBRARYPLAYLISTITEM_H
-#define LIBRARYPLAYLISTITEM_H
+#ifndef DBPLAYLISTITEM_H
+#define DBPLAYLISTITEM_H
 
 #include "core/song.h"
-#include "playlist/dbplaylistitem.h"
+#include "playlist/playlistitem.h"
 
-class LibraryPlaylistItem : public DbPlaylistItem {
+class DbPlaylistItem : public PlaylistItem {
  public:
-  LibraryPlaylistItem(const QString& type);
-  LibraryPlaylistItem(const Song& song);
+  DbPlaylistItem(const QString& type);
+  DbPlaylistItem(const QString& type, const Song& song);
 
-  bool InitFromQuery(const SqlRow& query);
-  void Reload();
+  Song Metadata() const;
+  void SetMetadata(const Song& song) { song_ = song; }
 
-  bool IsLocalLibraryItem() const { return true; }
+  QUrl Url() const;
+
+ protected:
+  QVariant DatabaseValue(DatabaseColumn column) const;
+
+ protected:
+  Song song_;
 };
 
-#endif  // LIBRARYPLAYLISTITEM_H
+#endif  // DBPLAYLISTITEM_H

@@ -1,5 +1,6 @@
 /* This file is part of Clementine.
    Copyright 2010, David Sansome <me@davidsansome.com>
+   Copyright 2020, Jim Broadus <jbroadus@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -15,21 +16,27 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef LIBRARYPLAYLISTITEM_H
-#define LIBRARYPLAYLISTITEM_H
+#include "dbplaylistitem.h"
+#include "core/tagreaderclient.h"
 
-#include "core/song.h"
-#include "playlist/dbplaylistitem.h"
+DbPlaylistItem::DbPlaylistItem(const QString& type)
+    : PlaylistItem(type) {}
 
-class LibraryPlaylistItem : public DbPlaylistItem {
- public:
-  LibraryPlaylistItem(const QString& type);
-  LibraryPlaylistItem(const Song& song);
+DbPlaylistItem::DbPlaylistItem(const QString& type, const Song& song)
+    : PlaylistItem(type), song_(song) {}
 
-  bool InitFromQuery(const SqlRow& query);
-  void Reload();
+QUrl DbPlaylistItem::Url() const { return song_.url(); }
 
-  bool IsLocalLibraryItem() const { return true; }
-};
+QVariant DbPlaylistItem::DatabaseValue(DatabaseColumn column) const {
+  switch (column) {
+    case Column_LibraryId:
+      return song_.id();
+    default:
+      return PlaylistItem::DatabaseValue(column);
+  }
+}
 
-#endif  // LIBRARYPLAYLISTITEM_H
+Song DbPlaylistItem::Metadata() const {
+  if (HasTemporaryMetadata()) return temp_metadata_;
+  return song_;
+}
