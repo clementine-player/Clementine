@@ -20,16 +20,14 @@
 #ifndef INTERNET_MAGNATUNE_MAGNATUNEPLAYLISTITEM_H_
 #define INTERNET_MAGNATUNE_MAGNATUNEPLAYLISTITEM_H_
 
-#include "library/libraryplaylistitem.h"
+#include "playlist/dbplaylistitem.h"
 
-class MagnatunePlaylistItem : public LibraryPlaylistItem {
+class MagnatunePlaylistItem : public DbPlaylistItem {
  public:
   explicit MagnatunePlaylistItem(const QString& type);
   explicit MagnatunePlaylistItem(const Song& song);
 
   bool InitFromQuery(const SqlRow& query);
-
-  QUrl Url() const;
 };
 
 #endif  // INTERNET_MAGNATUNE_MAGNATUNEPLAYLISTITEM_H_
