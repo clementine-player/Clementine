@@ -20,16 +20,14 @@
 #ifndef INTERNET_JAMENDO_JAMENDOPLAYLISTITEM_H_
 #define INTERNET_JAMENDO_JAMENDOPLAYLISTITEM_H_
 
-#include "library/libraryplaylistitem.h"
+#include "playlist/dbplaylistitem.h"
 
-class JamendoPlaylistItem : public LibraryPlaylistItem {
+class JamendoPlaylistItem : public DbPlaylistItem {
  public:
   explicit JamendoPlaylistItem(const QString& type);
   explicit JamendoPlaylistItem(const Song& song);
 
   bool InitFromQuery(const SqlRow& query);
-
-  QUrl Url() const;
 };
 
 #endif  // INTERNET_JAMENDO_JAMENDOPLAYLISTITEM_H_

@@ -21,12 +21,10 @@
 #include "internet/core/internetmodel.h"
 
 MagnatunePlaylistItem::MagnatunePlaylistItem(const QString& type)
-    : LibraryPlaylistItem(type) {}
+    : DbPlaylistItem(type) {}
 
 MagnatunePlaylistItem::MagnatunePlaylistItem(const Song& song)
-    : LibraryPlaylistItem("Magnatune") {
-  song_ = song;
-}
+    : DbPlaylistItem("Magnatune", song) {}
 
 bool MagnatunePlaylistItem::InitFromQuery(const SqlRow& query) {
   // Rows from the songs tables come first
@@ -34,5 +32,3 @@ bool MagnatunePlaylistItem::InitFromQuery(const SqlRow& query) {
 
   return song_.is_valid();
 }
-
-QUrl MagnatunePlaylistItem::Url() const { return song_.url(); }
