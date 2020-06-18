@@ -13,8 +13,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2020-05-28 18:55+0000\n"
-"Last-Translator: John Maguire <john.maguire@gmail.com>\n"
+"PO-Revision-Date: 2020-06-18 00:09+0000\n"
+"Last-Translator: Ján Ďanovský <dagsoftware@yahoo.com>\n"
 "Language-Team: Slovak (http://www.transifex.com/davidsansome/clementine/language/sk/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -105,7 +105,7 @@ msgstr "%1 playlistov (%2)"
 msgid ""
 "%1 request failed:\n"
 "%2"
-msgstr ""
+msgstr "%1 požiadavka zlyhala:\n%2"
 
 #: playlist/playlistmanager.cpp:429
 #, qt-format
@@ -1056,7 +1056,7 @@ msgstr "Tlačidlá"
 
 #: internet/podcasts/addpodcastdialog.cpp:97
 msgid "CBC Podcasts"
-msgstr ""
+msgstr "Podcasty CBC"
 
 #: core/song.cpp:454
 msgid "CDDA"
@@ -1314,7 +1314,7 @@ msgstr "Zoznam slov (predpon) oddelených čiarkou, ktoré se pri zoradení maj�
 
 #: ../bin/src/ui_console.h:129
 msgid "Command"
-msgstr ""
+msgstr "Príkaz"
 
 #: playlist/playlist.cpp:1434 smartplaylists/searchterm.cpp:384
 #: ui/organisedialog.cpp:78 ../bin/src/ui_edittagdialog.h:719
@@ -1465,7 +1465,7 @@ msgstr "Nepodarilo sa rozpoznať zvukový stream v %1"
 
 #: internet/googledrive/googledriveservice.cpp:208
 msgid "Could not find Google Drive file."
-msgstr ""
+msgstr "Nepodarilo sa nájsť súbor na Google Drive."
 
 #: songinfo/streamdiscoverer.cpp:123
 msgid "Could not get details"
@@ -1586,7 +1586,7 @@ msgstr "Dance"
 
 #: ../bin/src/ui_console.h:131
 msgid "Database"
-msgstr ""
+msgstr "Databáza"
 
 #: core/database.cpp:622
 msgid ""
@@ -1953,7 +1953,7 @@ msgstr "Dubstep"
 
 #: ../bin/src/ui_console.h:132
 msgid "Dump To Logs"
-msgstr ""
+msgstr "Uložiť do výpisu"
 
 #: ../bin/src/ui_episodeinfowidget.h:134 ../bin/src/ui_ripcddialog.h:308
 msgid "Duration"
@@ -2274,7 +2274,7 @@ msgstr "Zlyhalo získanie podcastov"
 msgid ""
 "Failed to get channel list:\n"
 "%1"
-msgstr ""
+msgstr "Nepodarilo se získať zoznam kanálov:\n%1"
 
 #: internet/podcasts/addpodcastbyurl.cpp:71
 #: internet/podcasts/fixedopmlpage.cpp:55
@@ -2286,7 +2286,7 @@ msgstr "Zlyhalo načítanie podcastu"
 msgid ""
 "Failed to parse %1 response:\n"
 "%2"
-msgstr ""
+msgstr "Nepodarilo sa spracovať %1 odpoveď:\n%2"
 
 #: internet/podcasts/podcasturlloader.cpp:177
 msgid "Failed to parse the XML for this RSS feed"
@@ -2297,7 +2297,7 @@ msgstr "Zlyhalo spracovanie XML pre tento RSS kanál"
 msgid ""
 "Failed to update icecast directory:\n"
 "%1"
-msgstr ""
+msgstr "Nepodarilo sa aktualizovať priečinok icecast:\n%1"
 
 #: ui/trackselectiondialog.cpp:247
 #, qt-format
@@ -2336,7 +2336,7 @@ msgstr "Chyba pri získavaní obalu"
 #: internet/subsonic/subsonicdynamicplaylist.cpp:100
 #: internet/subsonic/subsonicdynamicplaylist.cpp:166
 msgid "Fetching playlist items"
-msgstr ""
+msgstr "Získavajú sa položky playlistu"
 
 #: ../bin/src/ui_ripcddialog.h:319
 msgid "File Format"
@@ -2468,7 +2468,7 @@ msgstr "Snímkov na buffer"
 
 #: internet/subsonic/subsonicservice.cpp:109
 msgid "Frequently Played Albums"
-msgstr ""
+msgstr "Často prehrávané albumy"
 
 #: moodbar/moodbarrenderer.cpp:173
 msgid "Frozen"
@@ -3222,7 +3222,7 @@ msgstr "Maximálny dátový tok"
 
 #: ../bin/src/ui_behavioursettingspage.h:449
 msgid "Maximum number of child processes for tag handling (requires restart)"
-msgstr ""
+msgstr "Maximálny počet podprocesov pre spracovanie tagov (vyžaduje reštart)"
 
 #: ripper/ripcddialog.cpp:155
 msgid "Media has changed. Reloading"
@@ -3393,7 +3393,7 @@ msgstr "Nové skladby budú pridané autamticky."
 
 #: internet/subsonic/subsonicservice.cpp:101
 msgid "Newest Albums"
-msgstr ""
+msgstr "Najnovšie albumy"
 
 #: library/library.cpp:94
 msgid "Newest tracks"
@@ -3513,7 +3513,7 @@ msgstr "Počet epizód na zobrazenie"
 
 #: ../bin/src/ui_behavioursettingspage.h:450
 msgid "Number of processes:"
-msgstr ""
+msgstr "Počet procesov:"
 
 #: ui/notificationssettingspage.cpp:38
 msgid "OSD Preview"
@@ -3991,7 +3991,7 @@ msgstr "Vložiť piesne v náhodnom poradí"
 
 #: ../bin/src/ui_console.h:134
 msgid "Qt"
-msgstr ""
+msgstr "Qt"
 
 #: ../bin/src/ui_transcoderoptionsflac.h:80
 #: ../bin/src/ui_transcoderoptionsmp3.h:191
@@ -4038,11 +4038,11 @@ msgstr "Dážď"
 
 #: internet/subsonic/subsonicservice.cpp:105
 msgid "Random Albums"
-msgstr ""
+msgstr "Náhodné albumy"
 
 #: internet/subsonic/subsonicservice.cpp:125
 msgid "Random Songs"
-msgstr ""
+msgstr "Náhodné piesne"
 
 #: ../bin/src/ui_visualisationselector.h:111
 msgid "Random visualization"
@@ -4083,7 +4083,7 @@ msgstr "Naozaj zrušiť?"
 
 #: internet/subsonic/subsonicservice.cpp:117
 msgid "Recently Played Albums"
-msgstr ""
+msgstr "Nedávno prehrávané albumy"
 
 #: internet/subsonic/subsonicsettingspage.cpp:161
 msgid "Redirect limit exceeded, verify server configuration."
@@ -4881,7 +4881,7 @@ msgstr "S hviezdičkou"
 
 #: internet/subsonic/subsonicservice.cpp:121
 msgid "Starred Albums"
-msgstr ""
+msgstr "Albumy s hviezdičkou"
 
 #: ripper/ripcddialog.cpp:74
 msgid "Start ripping"
@@ -5262,7 +5262,7 @@ msgstr "Príliš veľa presmerování"
 
 #: internet/subsonic/subsonicservice.cpp:113
 msgid "Top Rated Albums"
-msgstr ""
+msgstr "Najvyššie hodnotené albumy"
 
 #: internet/spotify/spotifyservice.cpp:423
 msgid "Top tracks"
@@ -5738,7 +5738,7 @@ msgstr "Rok - Album"
 
 #: playlist/playlist.cpp:1391
 msgid "Year - original"
-msgstr ""
+msgstr "Rok - pôvodný"
 
 #: smartplaylists/searchterm.cpp:425
 msgid "Years"
@@ -5928,7 +5928,7 @@ msgstr "neobsahuje"
 
 #: ../bin/src/ui_console.h:133
 msgid "dump"
-msgstr ""
+msgstr "vypísať"
 
 #: smartplaylists/searchterm.cpp:263
 msgid "empty"
