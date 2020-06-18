@@ -136,6 +136,7 @@ DeviceManager::~DeviceManager() {
   delete root_;
 }
 
+// This runs concurrently.
 void DeviceManager::LoadAllDevices() {
   Q_ASSERT(QThread::currentThread() != qApp->thread());
   DeviceDatabaseBackend::DeviceList devices = backend_->GetAllDevices();
@@ -166,8 +167,11 @@ void DeviceManager::AddDeviceFromDb(DeviceInfo* info) {
     existing->icon_ = info->icon_;
     QModelIndex idx = ItemToIndex(existing);
     if (idx.isValid()) emit dataChanged(idx, idx);
-    // Discard the info loaded from the database.
-    delete info;
+
+    // Discard the info loaded from the database. This doesn't use
+    // begin/endRemoveRows, but beginInsertRows has not yet been called to
+    // notify listeners of the existence.
+    root_->Delete(info->row);
   } else {
     qLog(Info) << "Device added from database: " << info->friendly_name_;
     beginInsertRows(ItemToIndex(root_), devices_.count(), devices_.count());
