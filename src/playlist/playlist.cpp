@@ -1084,7 +1084,7 @@ void Playlist::InsertItemsWithoutUndo(const PlaylistItemList& items, int pos,
     items_.insert(i, item);
     virtual_items_ << virtual_items_.count();
 
-    if (item->type() == "Library") {
+    if (item->IsLocalLibraryItem()) {
       int id = item->Metadata().id();
       if (id != -1) {
         library_items_by_id_.insertMulti(id, item);
@@ -1712,7 +1712,7 @@ PlaylistItemList Playlist::RemoveItemsWithoutUndo(int row, int count) {
     PlaylistItemPtr item(items_.takeAt(row));
     ret << item;
 
-    if (item->type() == "Library") {
+    if (item->IsLocalLibraryItem()) {
       int id = item->Metadata().id();
       if (id != -1) {
         library_items_by_id_.remove(id, item);
