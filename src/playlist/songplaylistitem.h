@@ -26,6 +26,8 @@ class SongPlaylistItem : public PlaylistItem {
   SongPlaylistItem(const QString& type);
   SongPlaylistItem(const Song& song);
 
+  static bool IsTypeSupported(const QString& type);
+
   // Restores a stream- or file-related playlist item using query row.
   // If it's a file related playlist item, this will restore it's CUE
   // attributes (if any) but won't parse the CUE!

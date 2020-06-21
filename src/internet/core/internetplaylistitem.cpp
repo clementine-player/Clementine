@@ -31,8 +31,10 @@
 #include "library/sqlrow.h"
 #include "playlist/playlistbackend.h"
 
+// Note that the "Radio" type is legacy and only supported for database
+// backwards compatibility, so this uses "Internet" for all types.
 InternetPlaylistItem::InternetPlaylistItem(const QString& type)
-    : PlaylistItem(type), set_service_icon_(false) {}
+    : PlaylistItem("Internet"), set_service_icon_(false) {}
 
 InternetPlaylistItem::InternetPlaylistItem(InternetService* service,
                                            const Song& metadata)
@@ -41,6 +43,12 @@ InternetPlaylistItem::InternetPlaylistItem(InternetService* service,
       set_service_icon_(false),
       metadata_(metadata) {
   InitMetadata();
+}
+
+bool InternetPlaylistItem::IsTypeSupported(const QString& type) {
+  if (type == "Radio") return true;
+  if (type == "Internet") return true;
+  return false;
 }
 
 bool InternetPlaylistItem::InitFromQuery(const SqlRow& query) {

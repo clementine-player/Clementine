@@ -27,6 +27,8 @@ class MagnatunePlaylistItem : public DbPlaylistItem {
   explicit MagnatunePlaylistItem(const QString& type);
   explicit MagnatunePlaylistItem(const Song& song);
 
+  static bool IsTypeSupported(const QString& type);
+
   bool InitFromQuery(const SqlRow& query);
 };
 

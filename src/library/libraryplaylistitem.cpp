@@ -26,6 +26,10 @@ LibraryPlaylistItem::LibraryPlaylistItem(const QString& type)
 LibraryPlaylistItem::LibraryPlaylistItem(const Song& song)
     : DbPlaylistItem("Library", song) {}
 
+bool LibraryPlaylistItem::IsTypeSupported(const QString& type) {
+  return type == "Library";
+}
+
 void LibraryPlaylistItem::Reload() {
   TagReaderClient::Instance()->ReadFileBlocking(song_.url().toLocalFile(),
                                                 &song_);

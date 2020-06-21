@@ -34,6 +34,8 @@ class InternetPlaylistItem : public PlaylistItem {
   explicit InternetPlaylistItem(const QString& type);
   InternetPlaylistItem(InternetService* service, const Song& metadata);
 
+  static bool IsTypeSupported(const QString& type);
+
   Options options() const;
 
   QList<QAction*> actions();

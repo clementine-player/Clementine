@@ -27,6 +27,8 @@ class JamendoPlaylistItem : public DbPlaylistItem {
   explicit JamendoPlaylistItem(const QString& type);
   explicit JamendoPlaylistItem(const Song& song);
 
+  static bool IsTypeSupported(const QString& type);
+
   bool InitFromQuery(const SqlRow& query);
 };
 
