@@ -25,6 +25,10 @@ JamendoPlaylistItem::JamendoPlaylistItem(const QString& type)
 JamendoPlaylistItem::JamendoPlaylistItem(const Song& song)
     : DbPlaylistItem("Jamendo", song) {}
 
+bool JamendoPlaylistItem::IsTypeSupported(const QString& type) {
+  return type == "Jamendo";
+}
+
 bool JamendoPlaylistItem::InitFromQuery(const SqlRow& query) {
   // Rows from the songs tables come first
   song_.InitFromQuery(query, true, (Song::kColumns.count() + 1) * 2);

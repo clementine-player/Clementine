@@ -26,6 +26,8 @@ class LibraryPlaylistItem : public DbPlaylistItem {
   LibraryPlaylistItem(const QString& type);
   LibraryPlaylistItem(const Song& song);
 
+  static bool IsTypeSupported(const QString& type);
+  
   bool InitFromQuery(const SqlRow& query);
   void Reload();
 

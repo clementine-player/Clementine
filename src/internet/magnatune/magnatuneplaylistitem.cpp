@@ -26,6 +26,10 @@ MagnatunePlaylistItem::MagnatunePlaylistItem(const QString& type)
 MagnatunePlaylistItem::MagnatunePlaylistItem(const Song& song)
     : DbPlaylistItem("Magnatune", song) {}
 
+bool MagnatunePlaylistItem::IsTypeSupported(const QString& type) {
+  return type == "Magnatune";
+}
+
 bool MagnatunePlaylistItem::InitFromQuery(const SqlRow& query) {
   // Rows from the songs tables come first
   song_.InitFromQuery(query, true, Song::kColumns.count() + 1);

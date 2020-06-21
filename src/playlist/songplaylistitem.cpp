@@ -30,6 +30,12 @@ SongPlaylistItem::SongPlaylistItem(const QString& type) : PlaylistItem(type) {}
 SongPlaylistItem::SongPlaylistItem(const Song& song)
     : PlaylistItem(song.is_stream() ? "Stream" : "File"), song_(song) {}
 
+bool SongPlaylistItem::IsTypeSupported(const QString& type) {
+  if (type == "Stream") return true;
+  if (type == "File") return true;
+  return false;
+}
+
 bool SongPlaylistItem::InitFromQuery(const SqlRow& query) {
   song_.InitFromQuery(query, false, (Song::kColumns.count() + 1) * 3);
 

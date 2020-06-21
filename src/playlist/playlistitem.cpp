@@ -34,12 +34,16 @@
 PlaylistItem::~PlaylistItem() {}
 
 PlaylistItem* PlaylistItem::NewFromType(const QString& type) {
-  if (type == "Library") return new LibraryPlaylistItem(type);
-  if (type == "Magnatune") return new MagnatunePlaylistItem(type);
-  if (type == "Jamendo") return new JamendoPlaylistItem(type);
-  if (type == "Stream" || type == "File") return new SongPlaylistItem(type);
-  if (type == "Internet" || type == "Radio")
-    return new InternetPlaylistItem("Internet");
+  if (LibraryPlaylistItem::IsTypeSupported(type))
+    return new LibraryPlaylistItem(type);
+  if (MagnatunePlaylistItem::IsTypeSupported(type))
+    return new MagnatunePlaylistItem(type);
+  if (JamendoPlaylistItem::IsTypeSupported(type))
+    return new JamendoPlaylistItem(type);
+  if (SongPlaylistItem::IsTypeSupported(type))
+    return new SongPlaylistItem(type);
+  if (InternetPlaylistItem::IsTypeSupported(type))
+    return new InternetPlaylistItem(type);
 
   qLog(Warning) << "Invalid PlaylistItem type:" << type;
   return nullptr;
