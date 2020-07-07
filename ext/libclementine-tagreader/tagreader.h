@@ -19,6 +19,7 @@
 #define TAGREADER_H
 
 #include <QByteArray>
+#include <QFileInfo>
 
 #include <taglib/xiphcomment.h>
 #include <memory>
@@ -96,6 +97,7 @@ class TagReader {
       const pb::tagreader::SongMetadata& song) const;
 
   void GuessArtistAndTitle(pb::tagreader::SongMetadata* song) const;
+  void GuessAlbum(const QFileInfo &info, pb::tagreader::SongMetadata* song) const;
 
   pb::tagreader::SongMetadata_Type GuessFileType(
       TagLib::FileRef* fileref) const;
