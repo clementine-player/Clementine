@@ -169,6 +169,22 @@ void TagReader::GuessArtistAndTitle(pb::tagreader::SongMetadata *song) const {
   if (!title.isEmpty()) { song->set_title(title.toUtf8().data()); }
 }
 
+void TagReader::GuessAlbum(const QFileInfo &info, pb::tagreader::SongMetadata *song) const {
+  QString album = QString::fromStdString(song->album());
+  if (!album.isEmpty()) return;
+  const QString strDir = info.absoluteDir().absolutePath();
+  if (strDir.isEmpty()) return;
+  const QFileInfo dir(strDir);
+  const QString dirBn = dir.baseName();
+  if (dirBn.isEmpty()) return;
+  album = ReplaceUnderscoresWithSpaces(dirBn);
+  album = album.trimmed();
+  if (album.isEmpty()) return;
+  const QString checkAlbum = album.toLower();
+  if (checkAlbum == "various" || checkAlbum == "downloads" || checkAlbum == "music") return;
+  song->set_album(album.toUtf8().data());
+}
+
 TagReader::TagReader()
     : factory_(new TagLibFileRefFactory),
       kEmbeddedCover("(embedded)") {}
@@ -217,6 +233,7 @@ void TagReader::ReadFile(const QString& filename,
     // Try fallback -- GME filetypes
     GME::ReadFile(info, song);
     GuessArtistAndTitle(song);
+    GuessAlbum(info, song);
     return;
   }
 
@@ -231,6 +248,7 @@ void TagReader::ReadFile(const QString& filename,
     song->set_valid(true);
   }
   GuessArtistAndTitle(song);
+  GuessAlbum(info, song);
 
   QString disc;
   QString compilation;
