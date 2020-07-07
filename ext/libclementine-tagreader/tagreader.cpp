@@ -180,8 +180,8 @@ void TagReader::GuessAlbum(const QFileInfo &info, pb::tagreader::SongMetadata *s
   album = ReplaceUnderscoresWithSpaces(dirBn);
   album = album.trimmed();
   if (album.isEmpty()) return;
-  const QString checkAlbum = album.toLower();
-  if (checkAlbum == "various" || checkAlbum == "downloads" || checkAlbum == "music") return;
+  const QString al = album.toLower();
+  if (al == "various" || al == "downloads" || al == "music") return;
   song->set_album(album.toUtf8().data());
 }
 
