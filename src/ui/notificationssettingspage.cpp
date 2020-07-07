@@ -117,9 +117,15 @@ NotificationsSettingsPage::~NotificationsSettingsPage() {
   delete ui_;
 }
 
-void NotificationsSettingsPage::showEvent(QShowEvent*) { UpdatePopupVisible(); }
+void NotificationsSettingsPage::showEvent(QShowEvent* event) {
+  SettingsPage::showEvent(event);
+  UpdatePopupVisible();
+}
 
-void NotificationsSettingsPage::hideEvent(QHideEvent*) { UpdatePopupVisible(); }
+void NotificationsSettingsPage::hideEvent(QHideEvent* event) {
+  SettingsPage::hideEvent(event);
+  UpdatePopupVisible();
+}
 
 void NotificationsSettingsPage::Load() {
   QSettings s;

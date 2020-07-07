@@ -192,7 +192,7 @@ void GlobalSearchSettingsPage::CurrentProviderChanged(QTreeWidgetItem* item) {
 }
 
 void GlobalSearchSettingsPage::showEvent(QShowEvent* e) {
-  QWidget::showEvent(e);
+  SettingsPage::showEvent(e);
 
   // Update the logged-in state of each item when we come back to this page in
   // the dialog.
