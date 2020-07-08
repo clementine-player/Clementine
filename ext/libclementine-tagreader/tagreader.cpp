@@ -174,12 +174,12 @@ void TagReader::GuessAlbum(const QFileInfo& info,
                            pb::tagreader::SongMetadata* song) const {
   QString album = QString::fromStdString(song->album());
   if (!album.isEmpty()) return;
-  const QString strDir = info.absoluteDir().absolutePath();
-  if (strDir.isEmpty()) return;
-  const QFileInfo dir(strDir);
-  const QString dirBn = dir.baseName();
-  if (dirBn.isEmpty()) return;
-  album = ReplaceUnderscoresWithSpaces(dirBn);
+  const QString str_dir = info.absoluteDir().absolutePath();
+  if (str_dir.isEmpty()) return;
+  const QFileInfo dir(str_dir);
+  const QString dir_bn = dir.baseName();
+  if (dir_bn.isEmpty()) return;
+  album = ReplaceUnderscoresWithSpaces(dir_bn);
   album = album.trimmed();
   if (album.isEmpty()) return;
   const QString al = album.toLower();
