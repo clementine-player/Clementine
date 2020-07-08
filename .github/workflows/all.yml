@@ -15,7 +15,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: clang-format
-        uses: DoozyX/clang-format-lint-action@v0.6
+        uses: clementine-player/clang-format-lint-action@master
         with:
           style: "'{BasedOnStyle: Google, DerivePointerBinding: false, Standard: Cpp11}'"
           source: ./src
