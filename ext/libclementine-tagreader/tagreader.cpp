@@ -17,15 +17,6 @@
 
 #include "tagreader.h"
 
-#include <memory>
-
-#include <QCoreApplication>
-#include <QDateTime>
-#include <QFileInfo>
-#include <QTextCodec>
-#include <QUrl>
-#include <QVector>
-
 #include <aifffile.h>
 #include <apefile.h>
 #include <asffile.h>
@@ -39,6 +30,14 @@
 #include <mpcfile.h>
 #include <mpegfile.h>
 #include <oggfile.h>
+
+#include <QCoreApplication>
+#include <QDateTime>
+#include <QFileInfo>
+#include <QTextCodec>
+#include <QUrl>
+#include <QVector>
+#include <memory>
 #ifdef TAGLIB_HAS_OPUS
 #include <opusfile.h>
 #endif
@@ -46,6 +45,7 @@
 #include <oggflacfile.h>
 #include <popularimeterframe.h>
 #include <speexfile.h>
+#include <sys/stat.h>
 #include <tag.h>
 #include <tdebuglistener.h>
 #include <textidentificationframe.h>
@@ -55,8 +55,6 @@
 #include <vorbisfile.h>
 #include <wavfile.h>
 #include <wavpackfile.h>
-
-#include <sys/stat.h>
 
 #include "core/logging.h"
 #include "core/messagehandler.h"
@@ -95,8 +93,8 @@ class TagReaderDebugListener : public TagLib::DebugListener {
     // Install handler.
     TagLib::setDebugListener(this);
   }
-  
-  virtual void printMessage(const TagLib::String &msg) override {
+
+  virtual void printMessage(const TagLib::String& msg) override {
     // Remove trailing newline.
     qLog(Debug).noquote() << TStringToQString(msg).trimmed();
   }
@@ -133,11 +131,11 @@ const char* kASF_OriginalYear_ID = "WM/OriginalReleaseYear";
 QString WithoutExtension(const QString& s) {
   if (s.isEmpty()) return s;
   const int i = s.lastIndexOf('.');
-  if (i  < 0) return s;
+  if (i < 0) return s;
   return s.left(i);
 }
 
-QString ReplaceUnderscoresWithSpaces(const QString &s) {
+QString ReplaceUnderscoresWithSpaces(const QString& s) {
   QString ret(s);
   ret.replace('_', ' ');
   return ret;
@@ -145,7 +143,7 @@ QString ReplaceUnderscoresWithSpaces(const QString &s) {
 
 }  // namespace
 
-void TagReader::GuessArtistAndTitle(pb::tagreader::SongMetadata *song) const {
+void TagReader::GuessArtistAndTitle(pb::tagreader::SongMetadata* song) const {
   QString artist = QString::fromStdString(song->artist());
   QString title = QString::fromStdString(song->title());
   const QString bn = QString::fromStdString(song->basefilename());
@@ -156,8 +154,7 @@ void TagReader::GuessArtistAndTitle(pb::tagreader::SongMetadata *song) const {
   if (rx.indexIn(bn) >= 0) {
     artist = rx.cap(1);
     title = rx.cap(2);
-  }
-  else {
+  } else {
     title = WithoutExtension(bn);
   }
 
@@ -165,11 +162,16 @@ void TagReader::GuessArtistAndTitle(pb::tagreader::SongMetadata *song) const {
   title = ReplaceUnderscoresWithSpaces(title);
   artist = artist.trimmed();
   title = title.trimmed();
-  if (!artist.isEmpty()) { song->set_artist(artist.toUtf8().data()); }
-  if (!title.isEmpty()) { song->set_title(title.toUtf8().data()); }
+  if (!artist.isEmpty()) {
+    song->set_artist(artist.toUtf8().data());
+  }
+  if (!title.isEmpty()) {
+    song->set_title(title.toUtf8().data());
+  }
 }
 
-void TagReader::GuessAlbum(const QFileInfo &info, pb::tagreader::SongMetadata *song) const {
+void TagReader::GuessAlbum(const QFileInfo& info,
+                           pb::tagreader::SongMetadata* song) const {
   QString album = QString::fromStdString(song->album());
   if (!album.isEmpty()) return;
   const QString strDir = info.absoluteDir().absolutePath();
@@ -186,8 +188,7 @@ void TagReader::GuessAlbum(const QFileInfo &info, pb::tagreader::SongMetadata *s
 }
 
 TagReader::TagReader()
-    : factory_(new TagLibFileRefFactory),
-      kEmbeddedCover("(embedded)") {}
+    : factory_(new TagLibFileRefFactory), kEmbeddedCover("(embedded)") {}
 
 void TagReader::ReadFile(const QString& filename,
                          pb::tagreader::SongMetadata* song) const {
