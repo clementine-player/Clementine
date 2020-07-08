@@ -66,8 +66,6 @@ class QtSystemTrayIcon : public SystemTrayIcon {
   QAction* action_mute_;
   QAction* action_love_;
 
-  QString pattern_;
-
   QPixmap orange_icon_;
   QPixmap grey_icon_;
 };
