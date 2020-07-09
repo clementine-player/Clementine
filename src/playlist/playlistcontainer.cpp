@@ -123,6 +123,8 @@ void PlaylistContainer::SetApplication(Application* app) {
   app_ = app;
   SetManager(app_->playlist_manager());
   ui_->playlist->SetApplication(app_);
+  // This should not be called before SetApplication.
+  view()->SetItemDelegates(manager_->library_backend());
   connect(app_, SIGNAL(SaveSettings(QSettings*)), SLOT(Save(QSettings*)));
 }
 
@@ -200,7 +202,6 @@ void PlaylistContainer::SetViewModel(Playlist* playlist) {
   // Set the view
   playlist->IgnoreSorting(true);
   view()->setModel(playlist->proxy());
-  view()->SetItemDelegates(manager_->library_backend());
   view()->SetPlaylist(playlist);
   view()->selectionModel()->select(manager_->current_selection(),
                                    QItemSelectionModel::ClearAndSelect);
