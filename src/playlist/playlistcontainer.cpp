@@ -124,7 +124,7 @@ void PlaylistContainer::SetApplication(Application* app) {
   SetManager(app_->playlist_manager());
   ui_->playlist->SetApplication(app_);
   // This should not be called before SetApplication.
-  view()->SetItemDelegates(manager_->library_backend());
+  view()->SetItemDelegates(app->library_backend());
   connect(app_, SIGNAL(SaveSettings(QSettings*)), SLOT(Save(QSettings*)));
 }
 
