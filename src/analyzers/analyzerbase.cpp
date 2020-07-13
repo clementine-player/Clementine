@@ -206,7 +206,7 @@ void Analyzer::Base::updateBandSize(const int scopeSize) {
   barkband_table_.clear();
 
   int barkband = 0;
-  for (int i = 0; i < bands_ + 1; ++i) {
+  for (int i = 0; i < bands_; ++i) {
     if (barkband < sBarkBandCount - 1 &&
         BandFrequency(i) >= sBarkBands[barkband]) {
       barkband++;
@@ -226,7 +226,7 @@ QColor Analyzer::Base::getPsychedelicColor(const Scope& scope,
   // Calculate total magnitudes for different bark bands.
   double bands[sBarkBandCount]{};
 
-  for (int i = 0; i < barkband_table_.size(); ++i) {
+  for (int i = 0; i < scope.size(); ++i) {
     bands[barkband_table_[i]] += scope[i];
   }
 
