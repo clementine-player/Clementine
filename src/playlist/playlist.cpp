@@ -525,7 +525,7 @@ int Playlist::NextVirtualIndex(int i, bool ignore_repeat_track) const {
     }
     Song this_song = item_at(virtual_items_[j])->Metadata();
     if (((last_song.is_compilation() && this_song.is_compilation()) ||
-         last_song.artist() == this_song.artist()) &&
+         last_song.effective_albumartist() == this_song.effective_albumartist()) &&
         last_song.album() == this_song.album() &&
         FilterContainsVirtualIndex(j)) {
       return j;  // Found one
