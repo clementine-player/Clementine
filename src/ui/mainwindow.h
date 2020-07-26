@@ -50,6 +50,7 @@ class DeviceManager;
 class DeviceView;
 class DeviceViewContainer;
 class EditTagDialog;
+class LoveDialog;
 class Equalizer;
 class ErrorDialog;
 class FileView;
@@ -263,6 +264,7 @@ signals:
   void ShowVisualisations();
   SettingsDialog* CreateSettingsDialog();
   EditTagDialog* CreateEditTagDialog();
+  LoveDialog* CreateLoveDialog();
   StreamDiscoverer* CreateStreamDiscoverer();
   void OpenSettingsDialog();
   void OpenSettingsDialogAtPage(SettingsDialog::Page page);
@@ -311,6 +313,7 @@ signals:
   SystemTrayIcon* tray_icon_;
   OSD* osd_;
   Lazy<EditTagDialog> edit_tag_dialog_;
+  Lazy<LoveDialog> love_dialog_;
   Lazy<About> about_dialog_;
   Lazy<StreamDiscoverer> stream_discoverer_;
 

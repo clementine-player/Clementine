@@ -337,6 +337,7 @@ set(SOURCES
   ui/console.cpp
   ui/coverfromurldialog.cpp
   ui/edittagdialog.cpp
+  ui/lovedialog.cpp
   ui/equalizer.cpp
   ui/flowlayout.cpp
   ui/globalshortcutgrabber.cpp
@@ -624,6 +625,7 @@ set(HEADERS
   ui/console.h
   ui/coverfromurldialog.h
   ui/edittagdialog.h
+  ui/lovedialog.h
   ui/equalizer.h
   ui/globalshortcutgrabber.h
   ui/globalshortcutssettingspage.h
@@ -751,6 +753,7 @@ set(UI
   ui/console.ui
   ui/coverfromurldialog.ui
   ui/edittagdialog.ui
+  ui/lovedialog.ui
   ui/equalizer.ui
   ui/globalshortcutgrabber.ui
   ui/globalshortcutssettingspage.ui

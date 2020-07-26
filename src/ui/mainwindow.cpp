@@ -105,6 +105,7 @@
 #include "ui/albumcovermanager.h"
 #include "ui/console.h"
 #include "ui/edittagdialog.h"
+#include "ui/lovedialog.h"
 #include "ui/equalizer.h"
 #include "ui/iconloader.h"
 #include "ui/organisedialog.h"
@@ -170,6 +171,7 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
       tray_icon_(tray_icon),
       osd_(osd),
       edit_tag_dialog_(std::bind(&MainWindow::CreateEditTagDialog, this)),
+      love_dialog_(std::bind(&MainWindow::CreateLoveDialog, this)),
       stream_discoverer_(std::bind(&MainWindow::CreateStreamDiscoverer, this)),
       global_shortcuts_(new GlobalShortcuts(this)),
       global_search_view_(new GlobalSearchView(app_, this)),
@@ -1169,9 +1171,11 @@ void MainWindow::MediaPlaying() {
                     PlaylistItem::SeekDisabled);
   ui_->track_slider->SetCanSeek(can_seek);
 
+  // We now always enable Love when playing since it works for local files
+  ui_->action_love->setEnabled(true);
+
 #ifdef HAVE_LIBLASTFM
   bool enable_love = app_->scrobbler()->IsScrobblingEnabled();
-  ui_->action_love->setEnabled(enable_love);
   if (tray_icon_) {
     tray_icon_->LastFMButtonLoveStateChanged(enable_love);
     tray_icon_->SetPlaying(enable_play_pause, enable_love);
@@ -1582,13 +1586,28 @@ void MainWindow::ScrobbledRadioStream() {
   ui_->action_love->setEnabled(true);
   if (tray_icon_) tray_icon_->LastFMButtonLoveStateChanged(true);
 }
+#endif
 
 void MainWindow::Love() {
-  app_->scrobbler()->Love();
-  ui_->action_love->setEnabled(false);
-  if (tray_icon_) tray_icon_->LastFMButtonLoveStateChanged(false);
+  Playlist* activePlaylist = app_->playlist_manager()->active();
+  PlaylistItemPtr item = activePlaylist->current_item();
+  if (!item) {
+    // Don't make a big deal about it
+    qLog(Warning) << "Love: nothing playing so can't love it";
+    return;
+  }
+
+  if (item->IsLocalLibraryItem()) {
+    Song song = item->Metadata();
+    love_dialog_->SetSong(song);
+    love_dialog_->show();
+  }
+  else {
+    app_->scrobbler()->Love();
+    ui_->action_love->setEnabled(false);
+    if (tray_icon_) tray_icon_->LastFMButtonLoveStateChanged(false);
+  }
 }
-#endif
 
 void MainWindow::ApplyAddBehaviour(MainWindow::AddBehaviour b,
                                    MimeData* data) const {
@@ -2669,6 +2688,13 @@ EditTagDialog* MainWindow::CreateEditTagDialog() {
   connect(edit_tag_dialog, SIGNAL(Error(QString)),
           SLOT(ShowErrorDialog(QString)));
   return edit_tag_dialog;
+}
+
+LoveDialog* MainWindow::CreateLoveDialog() {
+  LoveDialog* dialog = new LoveDialog(app_);
+  connect(dialog, SIGNAL(Error(QString)),
+          SLOT(ShowErrorDialog(QString)));
+  return dialog;
 }
 
 StreamDiscoverer* MainWindow::CreateStreamDiscoverer() {
