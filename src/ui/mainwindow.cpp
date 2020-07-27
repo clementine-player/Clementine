@@ -1589,8 +1589,8 @@ void MainWindow::ScrobbledRadioStream() {
 #endif
 
 void MainWindow::Love() {
-  Playlist* activePlaylist = app_->playlist_manager()->active();
-  PlaylistItemPtr item = activePlaylist->current_item();
+  Playlist* active_playlist = app_->playlist_manager()->active();
+  PlaylistItemPtr item = active_playlist->current_item();
   if (!item) {
     // Don't make a big deal about it
     qLog(Warning) << "Love: nothing playing so can't love it";
@@ -1598,7 +1598,8 @@ void MainWindow::Love() {
   }
 
   if (item->IsLocalLibraryItem()) {
-    Song song = item->Metadata();
+    const Song& song = item->Metadata();
+    if (!song.is_valid() || song.id() == -1) return;
     love_dialog_->SetSong(song);
     love_dialog_->show();
   }

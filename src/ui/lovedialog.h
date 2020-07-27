@@ -21,7 +21,6 @@
 #include <QDialog>
 
 #include "core/song.h"
-//#include "widgets/lineedit.h"
 
 class Application;
 class Ui_LoveDialog;
