@@ -68,12 +68,11 @@ void LoveDialog::showEvent(QShowEvent* e) {
 
 void LoveDialog::SongRated(float rating) {
   qLog(Debug) << "LoveDialog::SongRated: rating=" << rating;
-  Song* song = &song_;
-  qLog(Debug) << "LoveDialog::SongRated: isValid=" << song->is_valid() << " id=" << song->id();
-  if (!song->is_valid() || song->id() == -1) return;
+  qLog(Debug) << "LoveDialog::SongRated: isValid=" << song_.is_valid() << " id=" << song_.id();
+  if (!song_.is_valid() || song_.id() == -1) return;
 
   qLog(Debug) << "LoveDialog::SongRated: song is valid and id is good";
-  song->set_rating(rating);
-  app_->library_backend()->UpdateSongRatingAsync(song->id(), rating);
+  song_.set_rating(rating);
+  app_->library_backend()->UpdateSongRatingAsync(song_.id(), rating);
   QDialog::accept();
 }
