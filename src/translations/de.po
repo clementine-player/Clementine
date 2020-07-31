@@ -66,8 +66,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2020-07-17 00:44+0000\n"
-"Last-Translator: Tobias\n"
+"PO-Revision-Date: 2020-07-30 17:39+0000\n"
+"Last-Translator: John Maguire <john.maguire@gmail.com>\n"
 "Language-Team: German (http://www.transifex.com/davidsansome/clementine/language/de/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -563,7 +563,7 @@ msgstr "Einen weiteren Datenstrom hinzufügen …"
 msgid "Add directory..."
 msgstr "Verzeichnis hinzufügen …"
 
-#: ui/mainwindow.cpp:2098
+#: ui/mainwindow.cpp:2118
 msgid "Add file"
 msgstr "Datei hinzufügen"
 
@@ -583,7 +583,7 @@ msgstr "Datei hinzufügen …"
 msgid "Add files to transcode"
 msgstr "Dateien zum Umwandeln hinzufügen"
 
-#: transcoder/transcodedialog.cpp:308 ui/mainwindow.cpp:2125
+#: transcoder/transcodedialog.cpp:308 ui/mainwindow.cpp:2145
 #: ripper/ripcddialog.cpp:203
 msgid "Add folder"
 msgstr "Ordner hinzufügen"
@@ -688,7 +688,7 @@ msgstr "Zur Spotify-Wiedergabeliste hinzufügen"
 msgid "Add to Spotify starred"
 msgstr "Markierte Titel von Spotify hinzufügen"
 
-#: ui/mainwindow.cpp:1899
+#: ui/mainwindow.cpp:1919
 msgid "Add to another playlist"
 msgstr "Zu anderer Wiedergabeliste hinzufügen"
 
@@ -778,7 +778,7 @@ msgstr "Alben ohne Titelbilder"
 msgid "All"
 msgstr "Alle"
 
-#: ui/mainwindow.cpp:156
+#: ui/mainwindow.cpp:157
 msgid "All Files (*)"
 msgstr "Alle Dateien (*)"
 
@@ -910,7 +910,7 @@ msgstr "Sind Sie sicher, dass Sie für alle Titel Ihrer Bibliothek, die Titelsta
 msgid "Artist"
 msgstr "Interpret"
 
-#: ui/mainwindow.cpp:288
+#: ui/mainwindow.cpp:290
 msgid "Artist info"
 msgstr "Künstlerinfo"
 
@@ -1173,7 +1173,7 @@ msgstr "Nach neuen Episoden suchen"
 msgid "Check for updates"
 msgstr "Auf Aktualisierungen suchen"
 
-#: ui/mainwindow.cpp:829
+#: ui/mainwindow.cpp:831
 msgid "Check for updates..."
 msgstr "Nach Aktualisierungen suchen …"
 
@@ -1413,7 +1413,7 @@ msgstr "Subsonic wird konfiguriert …"
 msgid "Configure global search..."
 msgstr "Globale Suche konfigurieren …"
 
-#: ui/mainwindow.cpp:666
+#: ui/mainwindow.cpp:668
 msgid "Configure library..."
 msgstr "Bibliothek einrichten …"
 
@@ -1485,11 +1485,11 @@ msgid "Copy to clipboard"
 msgstr "Kopieren"
 
 #: library/libraryview.cpp:419 internet/podcasts/podcastservice.cpp:444
-#: ui/mainwindow.cpp:726 widgets/fileviewlist.cpp:44
+#: ui/mainwindow.cpp:728 widgets/fileviewlist.cpp:44
 msgid "Copy to device..."
 msgstr "Auf das Gerät kopieren …"
 
-#: devices/deviceview.cpp:225 ui/mainwindow.cpp:716
+#: devices/deviceview.cpp:225 ui/mainwindow.cpp:718
 #: widgets/fileviewlist.cpp:40
 msgid "Copy to library..."
 msgstr "Zur Bibliothek kopieren …"
@@ -1707,7 +1707,7 @@ msgid "Delete downloaded data"
 msgstr "Heruntergeladene Dateien löschen"
 
 #: devices/deviceview.cpp:401 library/libraryview.cpp:677
-#: ui/mainwindow.cpp:2470 widgets/fileview.cpp:188
+#: ui/mainwindow.cpp:2490 widgets/fileview.cpp:188
 msgid "Delete files"
 msgstr "Dateien löschen"
 
@@ -1715,7 +1715,7 @@ msgstr "Dateien löschen"
 msgid "Delete from device..."
 msgstr "Vom Gerät löschen …"
 
-#: library/libraryview.cpp:422 ui/mainwindow.cpp:729
+#: library/libraryview.cpp:422 ui/mainwindow.cpp:731
 #: widgets/fileviewlist.cpp:47
 msgid "Delete from disk..."
 msgstr "Vom Datenträger löschen …"
@@ -1748,11 +1748,11 @@ msgstr "Dateien werden gelöscht"
 msgid "Depth"
 msgstr "Tiefe"
 
-#: ui/mainwindow.cpp:1812
+#: ui/mainwindow.cpp:1832
 msgid "Dequeue selected tracks"
 msgstr "Titel aus der Warteschlange nehmen"
 
-#: ui/mainwindow.cpp:1810
+#: ui/mainwindow.cpp:1830
 msgid "Dequeue track"
 msgstr "Titel aus der Warteschlange nehmen"
 
@@ -1781,7 +1781,7 @@ msgstr "Gerätename"
 msgid "Device properties..."
 msgstr "Geräteeinstellungen …"
 
-#: ui/mainwindow.cpp:281
+#: ui/mainwindow.cpp:283
 msgid "Devices"
 msgstr "Geräte"
 
@@ -2024,7 +2024,7 @@ msgstr "Dynamischer Zufallsmix"
 msgid "Edit smart playlist..."
 msgstr "Intelligente Wiedergabeliste bearbeiten …"
 
-#: ui/mainwindow.cpp:1862
+#: ui/mainwindow.cpp:1882
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr "Schlagwort »%1« bearbeiten …"
@@ -2163,8 +2163,8 @@ msgid "Equivalent to --log-levels *:3"
 msgstr "Äquivalent zu --log-levels *:3"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:249
-#: library/libraryview.cpp:671 ui/mainwindow.cpp:2154 ui/mainwindow.cpp:2423
-#: ui/mainwindow.cpp:2601
+#: library/libraryview.cpp:671 ui/mainwindow.cpp:2174 ui/mainwindow.cpp:2443
+#: ui/mainwindow.cpp:2621
 msgid "Error"
 msgstr "Fehler"
 
@@ -2306,7 +2306,7 @@ msgstr "Überblenden"
 msgid "Fading duration"
 msgstr "Dauer:"
 
-#: ui/mainwindow.cpp:2155
+#: ui/mainwindow.cpp:2175
 msgid "Failed reading CD drive"
 msgstr "CD-Laufwerk kann nicht gelesen werden"
 
@@ -2429,7 +2429,7 @@ msgstr "Dateityp"
 msgid "Filename"
 msgstr "Dateiname"
 
-#: ui/mainwindow.cpp:271
+#: ui/mainwindow.cpp:273
 msgid "Files"
 msgstr "Dateien"
 
@@ -2840,7 +2840,7 @@ msgstr "Installiert"
 msgid "Integrity check"
 msgstr "Integritätsprüfung"
 
-#: ui/mainwindow.cpp:277
+#: ui/mainwindow.cpp:279
 msgid "Internet"
 msgstr "Internet"
 
@@ -3028,7 +3028,7 @@ msgstr "Links"
 msgid "Length"
 msgstr "Länge"
 
-#: ui/mainwindow.cpp:253 ui/mainwindow.cpp:268
+#: ui/mainwindow.cpp:255 ui/mainwindow.cpp:270
 #: ../bin/src/ui_seafilesettingspage.h:177
 msgid "Library"
 msgstr "Bibliothek"
@@ -3037,7 +3037,7 @@ msgstr "Bibliothek"
 msgid "Library advanced grouping"
 msgstr "Erweiterte Bibliothekssortierung"
 
-#: ui/mainwindow.cpp:2721
+#: ui/mainwindow.cpp:2748
 msgid "Library rescan notice"
 msgstr "Hinweis beim erneuten durchsuchen der Bibliothek"
 
@@ -3361,7 +3361,7 @@ msgstr "Einhängepunkte"
 msgid "Move down"
 msgstr "Nach unten"
 
-#: ui/mainwindow.cpp:719 widgets/fileviewlist.cpp:42
+#: ui/mainwindow.cpp:721 widgets/fileviewlist.cpp:42
 msgid "Move to library..."
 msgstr "Zur Bibliothek verschieben …"
 
@@ -3370,7 +3370,7 @@ msgstr "Zur Bibliothek verschieben …"
 msgid "Move up"
 msgstr "Nach oben"
 
-#: transcoder/transcodedialog.cpp:227 ui/mainwindow.cpp:2099
+#: transcoder/transcodedialog.cpp:227 ui/mainwindow.cpp:2119
 msgid "Music"
 msgstr "Musik"
 
@@ -3428,7 +3428,7 @@ msgstr "Nie mit der Wiedergabe beginnen"
 msgid "New folder"
 msgstr "Neuer Ordner"
 
-#: ui/mainwindow.cpp:1916 ../bin/src/ui_mainwindow.h:754
+#: ui/mainwindow.cpp:1936 ../bin/src/ui_mainwindow.h:754
 msgid "New playlist"
 msgstr "Neue Wiedergabeliste"
 
@@ -3495,7 +3495,7 @@ msgstr "Keine kurzen Blöcke"
 msgid "None"
 msgstr "Nichts"
 
-#: library/libraryview.cpp:672 ui/mainwindow.cpp:2424 ui/mainwindow.cpp:2602
+#: library/libraryview.cpp:672 ui/mainwindow.cpp:2444 ui/mainwindow.cpp:2622
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Keiner der gewählten Titel war zum Kopieren auf ein Gerät geeignet."
 
@@ -3710,7 +3710,7 @@ msgstr "Opus"
 msgid "Organise Files"
 msgstr "Dateien organisieren"
 
-#: library/libraryview.cpp:416 ui/mainwindow.cpp:722
+#: library/libraryview.cpp:416 ui/mainwindow.cpp:724
 msgid "Organise files..."
 msgstr "Dateien organisieren …"
 
@@ -3794,7 +3794,7 @@ msgstr "Party"
 msgid "Password"
 msgstr "Passwort:"
 
-#: core/globalshortcuts.cpp:52 ui/mainwindow.cpp:1162 ui/mainwindow.cpp:1707
+#: core/globalshortcuts.cpp:52 ui/mainwindow.cpp:1164 ui/mainwindow.cpp:1727
 #: ui/qtsystemtrayicon.cpp:185 wiimotedev/wiimotesettingspage.cpp:114
 msgid "Pause"
 msgstr "Pause"
@@ -3822,8 +3822,8 @@ msgstr "Pixel"
 msgid "Plain sidebar"
 msgstr "Einfache Seitenleiste"
 
-#: core/globalshortcuts.cpp:51 ui/mainwindow.cpp:683 ui/mainwindow.cpp:1126
-#: ui/mainwindow.cpp:1147 ui/mainwindow.cpp:1711 ui/qtsystemtrayicon.cpp:173
+#: core/globalshortcuts.cpp:51 ui/mainwindow.cpp:685 ui/mainwindow.cpp:1128
+#: ui/mainwindow.cpp:1149 ui/mainwindow.cpp:1731 ui/qtsystemtrayicon.cpp:173
 #: ui/qtsystemtrayicon.cpp:199 wiimotedev/wiimotesettingspage.cpp:107
 #: ../bin/src/ui_mainwindow.h:720
 msgid "Play"
@@ -3842,11 +3842,11 @@ msgstr "Wiedergeben wenn angehalten, pausieren bei Wiedergabe"
 msgid "Play if there is nothing already playing"
 msgstr "Mit der Wiedergabe beginnen, falls gerade nichts anderes abgespielt wird"
 
-#: library/libraryview.cpp:396 ui/mainwindow.cpp:1823
+#: library/libraryview.cpp:396 ui/mainwindow.cpp:1843
 msgid "Play next"
 msgstr "Nächsten Titel wiedergeben"
 
-#: ui/mainwindow.cpp:1821
+#: ui/mainwindow.cpp:1841
 msgid "Play selected tracks next"
 msgstr "Ausgewählte Titel als Nächstes wiedergeben"
 
@@ -3885,7 +3885,7 @@ msgstr "Wiedergabeliste einrichten"
 msgid "Playlist type"
 msgstr "Art der Wiedergabeliste"
 
-#: ui/mainwindow.cpp:274
+#: ui/mainwindow.cpp:276
 msgid "Playlists"
 msgstr "Wiedergabelisten"
 
@@ -4067,14 +4067,18 @@ msgstr "Gerät wird abgefragt …"
 msgid "Queue Manager"
 msgstr "Warteschlangenverwaltung"
 
-#: ui/mainwindow.cpp:1816
+#: ui/mainwindow.cpp:1836
 msgid "Queue selected tracks"
 msgstr "Titel in die Warteschlange einreihen"
 
 #: globalsearch/globalsearchview.cpp:465 library/libraryview.cpp:393
-#: ui/mainwindow.cpp:1814
+#: ui/mainwindow.cpp:1834
 msgid "Queue track"
 msgstr "Titel in die Warteschlange einreihen"
+
+#: ../bin/src/ui_lovedialog.h:115
+msgid "Quickly rate the playing track"
+msgstr ""
 
 #: ../bin/src/ui_playbacksettingspage.h:358
 msgid "Radio (equal loudness for all tracks)"
@@ -4455,7 +4459,7 @@ msgstr "Seafile"
 msgid "Search"
 msgstr "Suche"
 
-#: ui/mainwindow.cpp:265 ../bin/src/ui_globalsearchsettingspage.h:141
+#: ui/mainwindow.cpp:267 ../bin/src/ui_globalsearchsettingspage.h:141
 msgctxt "Global search settings dialog title."
 msgid "Search"
 msgstr "Suche"
@@ -4480,7 +4484,7 @@ msgstr "Subsonic durchsuchen"
 msgid "Search automatically"
 msgstr "Automatisch suchen"
 
-#: ui/mainwindow.cpp:703
+#: ui/mainwindow.cpp:705
 msgid "Search for album"
 msgstr "Nach Album suchen"
 
@@ -4493,7 +4497,7 @@ msgstr "Nach Titelbild suchen …"
 msgid "Search for anything"
 msgstr "Alle Quellen durchsuchen"
 
-#: ui/mainwindow.cpp:700
+#: ui/mainwindow.cpp:702
 msgid "Search for artist"
 msgstr "Nach Interpret suchen"
 
@@ -4610,7 +4614,7 @@ msgstr "Server-Details"
 msgid "Service offline"
 msgstr "Dienst nicht verfügbar"
 
-#: ui/mainwindow.cpp:1861
+#: ui/mainwindow.cpp:1881
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr "%1 zu »%2« einstellen …"
@@ -4690,7 +4694,7 @@ msgstr "Clementine-Bildschirmanzeige anzeigen"
 msgid "Show above status bar"
 msgstr "Oberhalb der Statusleiste anzeigen"
 
-#: ui/mainwindow.cpp:650
+#: ui/mainwindow.cpp:652
 msgid "Show all songs"
 msgstr "Alle Titel anzeigen"
 
@@ -4710,12 +4714,12 @@ msgstr "Trenner anzeigen"
 msgid "Show fullsize..."
 msgstr "In Originalgröße anzeigen …"
 
-#: library/libraryview.cpp:433 ui/mainwindow.cpp:732
+#: library/libraryview.cpp:433 ui/mainwindow.cpp:734
 #: widgets/fileviewlist.cpp:53
 msgid "Show in file browser..."
 msgstr "In Dateiverwaltung anzeigen …"
 
-#: ui/mainwindow.cpp:734
+#: ui/mainwindow.cpp:736
 msgid "Show in library..."
 msgstr "In Bibliothek anzeigen …"
 
@@ -4727,11 +4731,11 @@ msgstr "Unter »Verschiedene Interpreten« anzeigen"
 msgid "Show moodbar"
 msgstr "Stimmungsbarometer anzeigen"
 
-#: ui/mainwindow.cpp:652
+#: ui/mainwindow.cpp:654
 msgid "Show only duplicates"
 msgstr "Nur Doppelte anzeigen"
 
-#: ui/mainwindow.cpp:654
+#: ui/mainwindow.cpp:656
 msgid "Show only untagged"
 msgstr "Nur ohne Schlagworte anzeigen"
 
@@ -4823,11 +4827,11 @@ msgstr "Übersprungzähler"
 msgid "Skip forwards in playlist"
 msgstr "Nächsten Titel in der Wiedergabeliste"
 
-#: ui/mainwindow.cpp:1832
+#: ui/mainwindow.cpp:1852
 msgid "Skip selected tracks"
 msgstr "Ausgewählte Titel überspringen"
 
-#: ui/mainwindow.cpp:1830
+#: ui/mainwindow.cpp:1850
 msgid "Skip track"
 msgstr "Titel überspringen"
 
@@ -4859,7 +4863,7 @@ msgstr "Soft Rock"
 msgid "Song Information"
 msgstr "Titelinformationen"
 
-#: ui/mainwindow.cpp:285
+#: ui/mainwindow.cpp:287
 msgid "Song info"
 msgstr "Titelinfo"
 
@@ -4980,7 +4984,7 @@ msgstr "Wiedergabe nach jedem Titel anhalten"
 msgid "Stop after every track"
 msgstr "Wiedergabe nach jedem Titel anhalten"
 
-#: ui/mainwindow.cpp:687 ../bin/src/ui_mainwindow.h:724
+#: ui/mainwindow.cpp:689 ../bin/src/ui_mainwindow.h:724
 msgid "Stop after this track"
 msgstr "Wiedergabe nach diesem Titel anhalten"
 
@@ -5148,7 +5152,7 @@ msgid ""
 "license key. Visit subsonic.org for details."
 msgstr "Die Versuchsperiode für den Subsonic-Server ist abgelaufen. Bitte machen Sie eine Spende, um einen Lizenzschlüssel zu erhalten. Details finden sich auf subsonic.org."
 
-#: ui/mainwindow.cpp:2712
+#: ui/mainwindow.cpp:2739
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -5190,7 +5194,7 @@ msgid ""
 "continue?"
 msgstr "Diese Dateien werden vom Gerät gelöscht. Möchten Sie wirklich fortfahren?"
 
-#: library/libraryview.cpp:678 ui/mainwindow.cpp:2471 widgets/fileview.cpp:189
+#: library/libraryview.cpp:678 ui/mainwindow.cpp:2491 widgets/fileview.cpp:189
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -5292,7 +5296,7 @@ msgstr "Clementine-Bildschirmanzeige umschalten"
 msgid "Toggle fullscreen"
 msgstr "Vollbild an/aus"
 
-#: ui/mainwindow.cpp:1818
+#: ui/mainwindow.cpp:1838
 msgid "Toggle queue status"
 msgstr "Einreihungsstatus ändern"
 
@@ -5426,11 +5430,11 @@ msgstr "Unbekannter Fehler"
 msgid "Unset cover"
 msgstr "Titelbild entfernen"
 
-#: ui/mainwindow.cpp:1828
+#: ui/mainwindow.cpp:1848
 msgid "Unskip selected tracks"
 msgstr "Überspringen der ausgewählten Titel aufheben"
 
-#: ui/mainwindow.cpp:1826
+#: ui/mainwindow.cpp:1846
 msgid "Unskip track"
 msgstr "Titel nicht überspringen"
 
@@ -5760,7 +5764,7 @@ msgid ""
 "well?"
 msgstr "Möchten Sie die anderen Titel dieses Albums ebenfalls unter »Verschiedene Interpreten« anzeigen?"
 
-#: ui/mainwindow.cpp:2719
+#: ui/mainwindow.cpp:2746
 msgid "Would you like to run a full rescan right now?"
 msgstr "Möchten Sie jetzt Ihre Musiksammlung erneut einlesen?"
 
