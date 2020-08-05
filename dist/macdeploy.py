@@ -23,6 +23,7 @@ import subprocess
 import sys
 import traceback
 
+logging.basicConfig(level=logging.DEBUG)
 LOGGER = logging.getLogger('macdeploy')
 
 FRAMEWORK_SEARCH_PATH = [
@@ -189,6 +190,7 @@ def GetBrokenLibraries(binary):
       [OTOOL, '-L', binary], stdout=subprocess.PIPE).communicate()[0]
   broken_libs = {'frameworks': [], 'libs': []}
   for line in [x.split(' ')[0].lstrip() for x in output.split('\n')[1:]]:
+    LOGGER.debug('Processing line %s', line)
     if not line:  # skip empty lines
       continue
     if os.path.basename(binary) in line:
