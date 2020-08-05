@@ -1163,16 +1163,28 @@ void MainWindow::MediaPlaying() {
       IconLoader::Load("media-playback-pause", IconLoader::Base));
   ui_->action_play_pause->setText(tr("Pause"));
 
-  bool enable_play_pause = !(app_->player()->GetCurrentItem()->options() &
-                             PlaylistItem::PauseDisabled);
+  const PlaylistItemPtr item = app_->player()->GetCurrentItem();
+
+  bool enable_play_pause = !(item->options() & PlaylistItem::PauseDisabled);
   ui_->action_play_pause->setEnabled(enable_play_pause);
 
-  bool can_seek = !(app_->player()->GetCurrentItem()->options() &
-                    PlaylistItem::SeekDisabled);
+  bool can_seek = !(item->options() & PlaylistItem::SeekDisabled);
   ui_->track_slider->SetCanSeek(can_seek);
 
   // We now always enable Love when playing since it works for local files
   ui_->action_love->setEnabled(true);
+
+  // Set the rate/love icon
+  if (item) {
+    if (item->IsLocalLibraryItem()) {
+      ui_->action_love->setIcon(IconLoader::Load("rate-enabled",
+        IconLoader::Base));
+    }
+    else {
+      ui_->action_love->setIcon(IconLoader::Load("love",
+        IconLoader::Lastfm));
+    }
+  }
 
 #ifdef HAVE_LIBLASTFM
   bool enable_love = app_->scrobbler()->IsScrobblingEnabled();
