@@ -1164,6 +1164,10 @@ void MainWindow::MediaPlaying() {
   ui_->action_play_pause->setText(tr("Pause"));
 
   const PlaylistItemPtr item = app_->player()->GetCurrentItem();
+  if (!item) {
+    qLog(Debug) << "MediaPlaying: no current item -- not enabling buttons etc";
+    return;
+  }
 
   bool enable_play_pause = !(item->options() & PlaylistItem::PauseDisabled);
   ui_->action_play_pause->setEnabled(enable_play_pause);
@@ -1175,15 +1179,12 @@ void MainWindow::MediaPlaying() {
   ui_->action_love->setEnabled(true);
 
   // Set the rate/love icon
-  if (item) {
-    if (item->IsLocalLibraryItem()) {
-      ui_->action_love->setIcon(IconLoader::Load("rate-enabled",
-        IconLoader::Base));
-    }
-    else {
-      ui_->action_love->setIcon(IconLoader::Load("love",
-        IconLoader::Lastfm));
-    }
+  if (item->IsLocalLibraryItem()) {
+    ui_->action_love->setIcon(IconLoader::Load("rate-enabled",
+      IconLoader::Base));
+  }
+  else {
+    ui_->action_love->setIcon(IconLoader::Load("love", IconLoader::Lastfm));
   }
 
 #ifdef HAVE_LIBLASTFM
