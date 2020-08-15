@@ -1586,7 +1586,6 @@ void MainWindow::ScrobbledRadioStream() {
   ui_->action_love->setEnabled(true);
   if (tray_icon_) tray_icon_->LastFMButtonLoveStateChanged(true);
 }
-#endif
 
 void MainWindow::Love() {
   Playlist* active_playlist = app_->playlist_manager()->active();
@@ -1609,6 +1608,7 @@ void MainWindow::Love() {
     if (tray_icon_) tray_icon_->LastFMButtonLoveStateChanged(false);
   }
 }
+#endif
 
 void MainWindow::ApplyAddBehaviour(MainWindow::AddBehaviour b,
                                    MimeData* data) const {
