@@ -1171,10 +1171,9 @@ void MainWindow::MediaPlaying() {
                     PlaylistItem::SeekDisabled);
   ui_->track_slider->SetCanSeek(can_seek);
 
+#ifdef HAVE_LIBLASTFM
   // We now always enable Love when playing since it works for local files
   ui_->action_love->setEnabled(true);
-
-#ifdef HAVE_LIBLASTFM
   bool enable_love = app_->scrobbler()->IsScrobblingEnabled();
   if (tray_icon_) {
     tray_icon_->LastFMButtonLoveStateChanged(enable_love);
@@ -1586,7 +1585,6 @@ void MainWindow::ScrobbledRadioStream() {
   ui_->action_love->setEnabled(true);
   if (tray_icon_) tray_icon_->LastFMButtonLoveStateChanged(true);
 }
-#endif
 
 void MainWindow::Love() {
   Playlist* active_playlist = app_->playlist_manager()->active();
@@ -1609,6 +1607,7 @@ void MainWindow::Love() {
     if (tray_icon_) tray_icon_->LastFMButtonLoveStateChanged(false);
   }
 }
+#endif
 
 void MainWindow::ApplyAddBehaviour(MainWindow::AddBehaviour b,
                                    MimeData* data) const {
