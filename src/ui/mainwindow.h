@@ -223,9 +223,9 @@ signals:
   void SetToggleScrobblingIcon(bool value);
 #ifdef HAVE_LIBLASTFM
   void ScrobblingEnabledChanged(bool value);
-  void Love();
   void ScrobbledRadioStream();
 #endif
+  void Love();
 
   void TaskCountChanged(int count);
 
@@ -253,6 +253,7 @@ signals:
                         const QPersistentModelIndex& index);
 
   void ShowCoverManager();
+  bool IsLastFmEnabled();
 #ifdef HAVE_LIBLASTFM
   void CachedToScrobble();
   void ScrobbleError(int value);
