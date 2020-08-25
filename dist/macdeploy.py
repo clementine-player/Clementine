@@ -200,11 +200,11 @@ def GetBrokenLibraries(binary):
     elif re.match(r'Breakpad', line):
       continue  # Manually added by cmake.
     elif re.match(r'^\s*@loader_path', line):
-      # abs_path = os.path.join(
-      #   os.path.dirname(binary),
-      #   *os.path.split(line)[1:],
-      # )
-      broken_libs['libs'].append(line)
+      abs_path = os.path.join(
+        os.path.dirname(binary),
+        *os.path.split(line)[1:],
+      )
+      broken_libs['libs'].append(abs_path)
     elif re.match(r'^\s*@executable_path', line):
       # Potentially already fixed library
       relative_path = os.path.join(*line.split('/')[3:])
