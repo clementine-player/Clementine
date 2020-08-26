@@ -1169,27 +1169,31 @@ void MainWindow::MediaPlaying() {
     return;
   }
 
-  bool enable_play_pause = !(item->options() & PlaylistItem::PauseDisabled);
+  const bool enable_play_pause = !(item->options() &
+                             PlaylistItem::PauseDisabled);
   ui_->action_play_pause->setEnabled(enable_play_pause);
 
-  bool can_seek = !(item->options() & PlaylistItem::SeekDisabled);
+  const bool can_seek = !(item->options() &
+                    PlaylistItem::SeekDisabled);
   ui_->track_slider->SetCanSeek(can_seek);
 
-  // We now always enable Love when playing since it works for local files
-  ui_->action_love->setEnabled(true);
-
   // Set the rate/love icon
-  if (item->IsLocalLibraryItem()) {
+  if (IsLastFmEnabled()) {
+    ui_->action_love->setIcon(IconLoader::Load("love", IconLoader::Lastfm));
+    ui_->action_love->setEnabled(true);
+  }
+  else if (item->IsLocalLibraryItem()) {
     ui_->action_love->setIcon(IconLoader::Load("rate-enabled",
       IconLoader::Base));
+    ui_->action_love->setEnabled(true);
   }
   else {
-    ui_->action_love->setIcon(IconLoader::Load("love", IconLoader::Lastfm));
+    ui_->action_love->setEnabled(false);
   }
 
 #ifdef HAVE_LIBLASTFM
-  bool enable_love = app_->scrobbler()->IsScrobblingEnabled();
   if (tray_icon_) {
+    const bool enable_love = app_->scrobbler()->IsScrobblingEnabled();
     tray_icon_->LastFMButtonLoveStateChanged(enable_love);
     tray_icon_->SetPlaying(enable_play_pause, enable_love);
   }
@@ -1603,23 +1607,28 @@ void MainWindow::ScrobbledRadioStream() {
 
 void MainWindow::Love() {
   Playlist* active_playlist = app_->playlist_manager()->active();
-  PlaylistItemPtr item = active_playlist->current_item();
+  const PlaylistItemPtr item = active_playlist->current_item();
   if (!item) {
     // Don't make a big deal about it
     qLog(Warning) << "Love: nothing playing so can't love it";
     return;
   }
 
-  if (item->IsLocalLibraryItem()) {
+  if (IsLastFmEnabled()) {
+#ifdef HAVE_LIBLASTFM
+    app_->scrobbler()->Love();
+    ui_->action_love->setEnabled(false);
+    if (tray_icon_) tray_icon_->LastFMButtonLoveStateChanged(false);
+#endif
+  }
+  else if (item->IsLocalLibraryItem()) {
     const Song& song = item->Metadata();
     if (!song.is_valid() || song.id() == -1) return;
     love_dialog_->SetSong(song);
     love_dialog_->show();
   }
   else {
-    app_->scrobbler()->Love();
-    ui_->action_love->setEnabled(false);
-    if (tray_icon_) tray_icon_->LastFMButtonLoveStateChanged(false);
+    qLog(Warning) << "Love: unable to love or rate";
   }
 }
 
@@ -2956,11 +2965,19 @@ void MainWindow::SetToggleScrobblingIcon(bool value) {
   }
 }
 
+bool MainWindow::IsLastFmEnabled() {
+#ifdef HAVE_LIBLASTFM
+  return ui_->action_toggle_scrobbling->isVisible() &&
+    app_->scrobbler()->IsScrobblingEnabled() &&
+    app_->scrobbler()->IsAuthenticated();
+#else
+  return false;
+#endif
+}
+
 #ifdef HAVE_LIBLASTFM
 void MainWindow::CachedToScrobble() {
-  const bool last_fm_enabled = ui_->action_toggle_scrobbling->isVisible() &&
-                               app_->scrobbler()->IsScrobblingEnabled() &&
-                               app_->scrobbler()->IsAuthenticated();
+  const bool last_fm_enabled = IsLastFmEnabled();
 
   app_->playlist_manager()->active()->set_lastfm_status(
       Playlist::LastFM_Scrobbled);
