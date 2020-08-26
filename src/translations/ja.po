@@ -518,7 +518,7 @@ msgstr "別のストリームを追加..."
 msgid "Add directory..."
 msgstr "ディレクトリを追加..."
 
-#: ui/mainwindow.cpp:2118
+#: ui/mainwindow.cpp:2131
 msgid "Add file"
 msgstr "ファイルを追加"
 
@@ -538,7 +538,7 @@ msgstr "ファイルを追加..."
 msgid "Add files to transcode"
 msgstr "変換するファイルを追加"
 
-#: transcoder/transcodedialog.cpp:308 ui/mainwindow.cpp:2145
+#: transcoder/transcodedialog.cpp:308 ui/mainwindow.cpp:2158
 #: ripper/ripcddialog.cpp:203
 msgid "Add folder"
 msgstr "フォルダーを追加"
@@ -643,7 +643,7 @@ msgstr "Spotify のプレイリストに追加する"
 msgid "Add to Spotify starred"
 msgstr "Spotify の星付きトラックを追加する"
 
-#: ui/mainwindow.cpp:1919
+#: ui/mainwindow.cpp:1932
 msgid "Add to another playlist"
 msgstr "別のプレイリストに追加する"
 
@@ -1662,7 +1662,7 @@ msgid "Delete downloaded data"
 msgstr "ダウンロード済みデータを削除"
 
 #: devices/deviceview.cpp:401 library/libraryview.cpp:677
-#: ui/mainwindow.cpp:2490 widgets/fileview.cpp:188
+#: ui/mainwindow.cpp:2503 widgets/fileview.cpp:188
 msgid "Delete files"
 msgstr "ファイルの削除"
 
@@ -1703,11 +1703,11 @@ msgstr "ファイルの削除中"
 msgid "Depth"
 msgstr ""
 
-#: ui/mainwindow.cpp:1832
+#: ui/mainwindow.cpp:1845
 msgid "Dequeue selected tracks"
 msgstr "選択されたトラックをキューから削除する"
 
-#: ui/mainwindow.cpp:1830
+#: ui/mainwindow.cpp:1843
 msgid "Dequeue track"
 msgstr "トラックをキューから削除"
 
@@ -1979,7 +1979,7 @@ msgstr "ダイナミックランダムミックス"
 msgid "Edit smart playlist..."
 msgstr "スマートプレイリストの編集..."
 
-#: ui/mainwindow.cpp:1882
+#: ui/mainwindow.cpp:1895
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr "タグ「%1」を編集..."
@@ -2118,8 +2118,8 @@ msgid "Equivalent to --log-levels *:3"
 msgstr "--log-levels *:3 と同じ"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:249
-#: library/libraryview.cpp:671 ui/mainwindow.cpp:2174 ui/mainwindow.cpp:2443
-#: ui/mainwindow.cpp:2621
+#: library/libraryview.cpp:671 ui/mainwindow.cpp:2187 ui/mainwindow.cpp:2456
+#: ui/mainwindow.cpp:2634
 msgid "Error"
 msgstr "エラー"
 
@@ -2261,7 +2261,7 @@ msgstr "フェード"
 msgid "Fading duration"
 msgstr "フェードの長さ"
 
-#: ui/mainwindow.cpp:2175
+#: ui/mainwindow.cpp:2188
 msgid "Failed reading CD drive"
 msgstr "CD ドライブの読み込みが失敗しました"
 
@@ -2992,7 +2992,7 @@ msgstr "ライブラリ"
 msgid "Library advanced grouping"
 msgstr "ライブラリの高度なグループ化"
 
-#: ui/mainwindow.cpp:2748
+#: ui/mainwindow.cpp:2761
 msgid "Library rescan notice"
 msgstr "ライブラリー再スキャン通知"
 
@@ -3325,7 +3325,7 @@ msgstr "ライブラリへ移動..."
 msgid "Move up"
 msgstr "上へ移動"
 
-#: transcoder/transcodedialog.cpp:227 ui/mainwindow.cpp:2119
+#: transcoder/transcodedialog.cpp:227 ui/mainwindow.cpp:2132
 msgid "Music"
 msgstr "ミュージック"
 
@@ -3383,7 +3383,7 @@ msgstr "再生を開始しない"
 msgid "New folder"
 msgstr "新しいフォルダー"
 
-#: ui/mainwindow.cpp:1936 ../bin/src/ui_mainwindow.h:754
+#: ui/mainwindow.cpp:1949 ../bin/src/ui_mainwindow.h:754
 msgid "New playlist"
 msgstr "新しいプレイリスト"
 
@@ -3450,7 +3450,7 @@ msgstr "短いブロックなし"
 msgid "None"
 msgstr "なし"
 
-#: library/libraryview.cpp:672 ui/mainwindow.cpp:2444 ui/mainwindow.cpp:2622
+#: library/libraryview.cpp:672 ui/mainwindow.cpp:2457 ui/mainwindow.cpp:2635
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "デバイスへのコピーに適切な曲が選択されていません"
 
@@ -3749,7 +3749,7 @@ msgstr "パーティー"
 msgid "Password"
 msgstr "パスワード"
 
-#: core/globalshortcuts.cpp:52 ui/mainwindow.cpp:1164 ui/mainwindow.cpp:1727
+#: core/globalshortcuts.cpp:52 ui/mainwindow.cpp:1164 ui/mainwindow.cpp:1740
 #: ui/qtsystemtrayicon.cpp:185 wiimotedev/wiimotesettingspage.cpp:114
 msgid "Pause"
 msgstr "一時停止"
@@ -3778,7 +3778,7 @@ msgid "Plain sidebar"
 msgstr "プレーンサイドバー"
 
 #: core/globalshortcuts.cpp:51 ui/mainwindow.cpp:685 ui/mainwindow.cpp:1128
-#: ui/mainwindow.cpp:1149 ui/mainwindow.cpp:1731 ui/qtsystemtrayicon.cpp:173
+#: ui/mainwindow.cpp:1149 ui/mainwindow.cpp:1744 ui/qtsystemtrayicon.cpp:173
 #: ui/qtsystemtrayicon.cpp:199 wiimotedev/wiimotesettingspage.cpp:107
 #: ../bin/src/ui_mainwindow.h:720
 msgid "Play"
@@ -3797,11 +3797,11 @@ msgstr "停止中は再生し、再生中は一時停止します"
 msgid "Play if there is nothing already playing"
 msgstr "再生中の曲がない場合は再生する"
 
-#: library/libraryview.cpp:396 ui/mainwindow.cpp:1843
+#: library/libraryview.cpp:396 ui/mainwindow.cpp:1856
 msgid "Play next"
 msgstr ""
 
-#: ui/mainwindow.cpp:1841
+#: ui/mainwindow.cpp:1854
 msgid "Play selected tracks next"
 msgstr ""
 
@@ -4022,12 +4022,12 @@ msgstr "デバイスを照会しています..."
 msgid "Queue Manager"
 msgstr "キューマネージャー"
 
-#: ui/mainwindow.cpp:1836
+#: ui/mainwindow.cpp:1849
 msgid "Queue selected tracks"
 msgstr "選択されたトラックをキューに追加"
 
 #: globalsearch/globalsearchview.cpp:465 library/libraryview.cpp:393
-#: ui/mainwindow.cpp:1834
+#: ui/mainwindow.cpp:1847
 msgid "Queue track"
 msgstr "トラックをキューに追加"
 
@@ -4569,7 +4569,7 @@ msgstr "サーバーの詳細"
 msgid "Service offline"
 msgstr "サービスがオフラインです"
 
-#: ui/mainwindow.cpp:1881
+#: ui/mainwindow.cpp:1894
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr "%1 を「%2」に設定します..."
@@ -4782,11 +4782,11 @@ msgstr "スキップ回数"
 msgid "Skip forwards in playlist"
 msgstr "プレイリストで前にスキップ"
 
-#: ui/mainwindow.cpp:1852
+#: ui/mainwindow.cpp:1865
 msgid "Skip selected tracks"
 msgstr "選択したトラックをスキップする"
 
-#: ui/mainwindow.cpp:1850
+#: ui/mainwindow.cpp:1863
 msgid "Skip track"
 msgstr "トラックをスキップする"
 
@@ -5107,7 +5107,7 @@ msgid ""
 "license key. Visit subsonic.org for details."
 msgstr "Subsonic サーバーのお試し期間は終了しました。寄付してライセンスキーを取得してください。詳細は subsonic.org を参照してください。"
 
-#: ui/mainwindow.cpp:2739
+#: ui/mainwindow.cpp:2752
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -5149,7 +5149,7 @@ msgid ""
 "continue?"
 msgstr "これらのファイルはデバイスから削除されます。続行してもよろしいですか?"
 
-#: library/libraryview.cpp:678 ui/mainwindow.cpp:2491 widgets/fileview.cpp:189
+#: library/libraryview.cpp:678 ui/mainwindow.cpp:2504 widgets/fileview.cpp:189
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -5251,7 +5251,7 @@ msgstr "Pretty OSD の切り替え"
 msgid "Toggle fullscreen"
 msgstr "全画面表示の切り替え"
 
-#: ui/mainwindow.cpp:1838
+#: ui/mainwindow.cpp:1851
 msgid "Toggle queue status"
 msgstr "キュー状態の切り替え"
 
@@ -5385,11 +5385,11 @@ msgstr "不明なエラー"
 msgid "Unset cover"
 msgstr "カバーを未設定にする"
 
-#: ui/mainwindow.cpp:1848
+#: ui/mainwindow.cpp:1861
 msgid "Unskip selected tracks"
 msgstr "選択したトラックをスキップしない"
 
-#: ui/mainwindow.cpp:1846
+#: ui/mainwindow.cpp:1859
 msgid "Unskip track"
 msgstr "トラックをスキップしない"
 
@@ -5719,7 +5719,7 @@ msgid ""
 "well?"
 msgstr "このアルバムにある他の曲も さまざまなアーティスト に移動しますか?"
 
-#: ui/mainwindow.cpp:2746
+#: ui/mainwindow.cpp:2759
 msgid "Would you like to run a full rescan right now?"
 msgstr "全体の再スキャンを今すぐ実行しますか?"
 

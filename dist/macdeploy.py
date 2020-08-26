@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 
 #  This file is part of Clementine.
 #
@@ -165,7 +165,7 @@ class CouldNotParseFrameworkNameError(Error):
 
 
 if len(sys.argv) < 2:
-  print 'Usage: %s <bundle.app>' % sys.argv[0]
+  print('Usage: %s <bundle.app>' % sys.argv[0])
 
 bundle_dir = sys.argv[1]
 
@@ -186,7 +186,7 @@ fixed_frameworks = set()
 
 def GetBrokenLibraries(binary):
   output = subprocess.Popen(
-      [OTOOL, '-L', binary], stdout=subprocess.PIPE).communicate()[0]
+      [OTOOL, '-L', binary], stdout=subprocess.PIPE).communicate()[0].decode('utf-8')
   broken_libs = {'frameworks': [], 'libs': []}
   for line in [x.split(' ')[0].lstrip() for x in output.split('\n')[1:]]:
     if not line:  # skip empty lines
@@ -199,8 +199,13 @@ def GetBrokenLibraries(binary):
       continue  # unix style system library
     elif re.match(r'Breakpad', line):
       continue  # Manually added by cmake.
-    elif re.match(r'^\s*@executable_path', line) or re.match(
-        r'^\s*@loader_path', line):
+    elif re.match(r'^\s*@loader_path', line):
+      abs_path = os.path.join(
+        os.path.dirname(binary),
+        *os.path.split(line)[1:],
+      )
+      broken_libs['libs'].append(abs_path)
+    elif re.match(r'^\s*@executable_path', line):
       # Potentially already fixed library
       relative_path = os.path.join(*line.split('/')[3:])
       if not os.path.exists(os.path.join(frameworks_dir, relative_path)):
@@ -480,18 +485,18 @@ def main():
     FixPlugin('clementine-spotifyblob', '.')
     FixPlugin('clementine-tagreader', '.')
   except:
-    print 'Failed to find blob: %s' % traceback.format_exc()
+    print('Failed to find blob: %s' % traceback.format_exc())
 
   for plugin in QT_PLUGINS:
     FixPlugin(FindQtPlugin(plugin), os.path.dirname(plugin))
 
   if len(sys.argv) <= 2:
-    print 'Would run %d commands:' % len(commands)
+    print('Would run %d commands:' % len(commands))
     for command in commands:
-      print ' '.join(command)
+      print(' '.join(command))
 
-    print 'OK?'
-    raw_input()
+    print('OK?')
+    input()
 
   for command in commands:
     p = subprocess.Popen(command)

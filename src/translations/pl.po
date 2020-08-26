@@ -524,7 +524,7 @@ msgstr "Dodaj następny strumień..."
 msgid "Add directory..."
 msgstr "Dodaj katalog..."
 
-#: ui/mainwindow.cpp:2118
+#: ui/mainwindow.cpp:2131
 msgid "Add file"
 msgstr "Dodaj plik"
 
@@ -544,7 +544,7 @@ msgstr "Dodaj plik..."
 msgid "Add files to transcode"
 msgstr "Dodaj pliki to transkodowania"
 
-#: transcoder/transcodedialog.cpp:308 ui/mainwindow.cpp:2145
+#: transcoder/transcodedialog.cpp:308 ui/mainwindow.cpp:2158
 #: ripper/ripcddialog.cpp:203
 msgid "Add folder"
 msgstr "Dodaj katalog"
@@ -649,7 +649,7 @@ msgstr "Dodaj do playlist Spotify"
 msgid "Add to Spotify starred"
 msgstr "Dodaj do śledzonych w Spotify"
 
-#: ui/mainwindow.cpp:1919
+#: ui/mainwindow.cpp:1932
 msgid "Add to another playlist"
 msgstr "Dodaj do innej playlisty"
 
@@ -1668,7 +1668,7 @@ msgid "Delete downloaded data"
 msgstr "Usuń pobrane dane"
 
 #: devices/deviceview.cpp:401 library/libraryview.cpp:677
-#: ui/mainwindow.cpp:2490 widgets/fileview.cpp:188
+#: ui/mainwindow.cpp:2503 widgets/fileview.cpp:188
 msgid "Delete files"
 msgstr "Usuń pliki"
 
@@ -1709,11 +1709,11 @@ msgstr "Usuwanie plików"
 msgid "Depth"
 msgstr "Głębokość"
 
-#: ui/mainwindow.cpp:1832
+#: ui/mainwindow.cpp:1845
 msgid "Dequeue selected tracks"
 msgstr "Usuń ścieżki z kolejki odtwarzania"
 
-#: ui/mainwindow.cpp:1830
+#: ui/mainwindow.cpp:1843
 msgid "Dequeue track"
 msgstr "Usuń ścieżkę z kolejki odtwarzania"
 
@@ -1985,7 +1985,7 @@ msgstr "Dynamiczny, losowy miks"
 msgid "Edit smart playlist..."
 msgstr "Edytuj inteligentną playlistę..."
 
-#: ui/mainwindow.cpp:1882
+#: ui/mainwindow.cpp:1895
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr "Edytuj tag \"%1\"..."
@@ -2124,8 +2124,8 @@ msgid "Equivalent to --log-levels *:3"
 msgstr "Rownoważny --log-levels *:3"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:249
-#: library/libraryview.cpp:671 ui/mainwindow.cpp:2174 ui/mainwindow.cpp:2443
-#: ui/mainwindow.cpp:2621
+#: library/libraryview.cpp:671 ui/mainwindow.cpp:2187 ui/mainwindow.cpp:2456
+#: ui/mainwindow.cpp:2634
 msgid "Error"
 msgstr "Błąd"
 
@@ -2267,7 +2267,7 @@ msgstr "Przejście"
 msgid "Fading duration"
 msgstr "Czas przejścia"
 
-#: ui/mainwindow.cpp:2175
+#: ui/mainwindow.cpp:2188
 msgid "Failed reading CD drive"
 msgstr "Błąd odczytywania napędu CD"
 
@@ -2998,7 +2998,7 @@ msgstr "Biblioteka"
 msgid "Library advanced grouping"
 msgstr "Zaawansowanie grupowanie biblioteki"
 
-#: ui/mainwindow.cpp:2748
+#: ui/mainwindow.cpp:2761
 msgid "Library rescan notice"
 msgstr "Konieczność odświeżenia biblioteki"
 
@@ -3331,7 +3331,7 @@ msgstr "Przenieś do biblioteki..."
 msgid "Move up"
 msgstr "Przesuń w górę"
 
-#: transcoder/transcodedialog.cpp:227 ui/mainwindow.cpp:2119
+#: transcoder/transcodedialog.cpp:227 ui/mainwindow.cpp:2132
 msgid "Music"
 msgstr "Muzyka"
 
@@ -3389,7 +3389,7 @@ msgstr "Nie odtwarzaj automatycznie"
 msgid "New folder"
 msgstr "Nowy folder"
 
-#: ui/mainwindow.cpp:1936 ../bin/src/ui_mainwindow.h:754
+#: ui/mainwindow.cpp:1949 ../bin/src/ui_mainwindow.h:754
 msgid "New playlist"
 msgstr "Nowa playlista"
 
@@ -3456,7 +3456,7 @@ msgstr "Bez krótkich bloków"
 msgid "None"
 msgstr "Brak"
 
-#: library/libraryview.cpp:672 ui/mainwindow.cpp:2444 ui/mainwindow.cpp:2622
+#: library/libraryview.cpp:672 ui/mainwindow.cpp:2457 ui/mainwindow.cpp:2635
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Żaden z zaznaczonych utworów nie był odpowiedni do skopiowania na urządzenie"
 
@@ -3755,7 +3755,7 @@ msgstr "Impreza"
 msgid "Password"
 msgstr "Hasło"
 
-#: core/globalshortcuts.cpp:52 ui/mainwindow.cpp:1164 ui/mainwindow.cpp:1727
+#: core/globalshortcuts.cpp:52 ui/mainwindow.cpp:1164 ui/mainwindow.cpp:1740
 #: ui/qtsystemtrayicon.cpp:185 wiimotedev/wiimotesettingspage.cpp:114
 msgid "Pause"
 msgstr "Pauza"
@@ -3784,7 +3784,7 @@ msgid "Plain sidebar"
 msgstr "Zwykły pasek boczny"
 
 #: core/globalshortcuts.cpp:51 ui/mainwindow.cpp:685 ui/mainwindow.cpp:1128
-#: ui/mainwindow.cpp:1149 ui/mainwindow.cpp:1731 ui/qtsystemtrayicon.cpp:173
+#: ui/mainwindow.cpp:1149 ui/mainwindow.cpp:1744 ui/qtsystemtrayicon.cpp:173
 #: ui/qtsystemtrayicon.cpp:199 wiimotedev/wiimotesettingspage.cpp:107
 #: ../bin/src/ui_mainwindow.h:720
 msgid "Play"
@@ -3803,11 +3803,11 @@ msgstr "Odtwarzaj, gdy zatrzymane; zatrzymaj, gdy odtwarzane"
 msgid "Play if there is nothing already playing"
 msgstr "Odtwarzaj jeśli nic nie jest aktualnie odtwarzane"
 
-#: library/libraryview.cpp:396 ui/mainwindow.cpp:1843
+#: library/libraryview.cpp:396 ui/mainwindow.cpp:1856
 msgid "Play next"
 msgstr "Odtwórz po bieżącym utworze"
 
-#: ui/mainwindow.cpp:1841
+#: ui/mainwindow.cpp:1854
 msgid "Play selected tracks next"
 msgstr "Odtwórz zaznaczone ścieżki po bieżącym utworze"
 
@@ -4028,12 +4028,12 @@ msgstr "Odpytywanie urządzenia..."
 msgid "Queue Manager"
 msgstr "Menedżer kolejki odtwarzania"
 
-#: ui/mainwindow.cpp:1836
+#: ui/mainwindow.cpp:1849
 msgid "Queue selected tracks"
 msgstr "Kolejkuj wybrane ścieżki"
 
 #: globalsearch/globalsearchview.cpp:465 library/libraryview.cpp:393
-#: ui/mainwindow.cpp:1834
+#: ui/mainwindow.cpp:1847
 msgid "Queue track"
 msgstr "Kolejkuj ścieżkę"
 
@@ -4575,7 +4575,7 @@ msgstr "Szczegóły serwera"
 msgid "Service offline"
 msgstr "Usługa niedostępna"
 
-#: ui/mainwindow.cpp:1881
+#: ui/mainwindow.cpp:1894
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr "Ustaw %1 na \"%2\"..."
@@ -4788,11 +4788,11 @@ msgstr "Ilość przeskoczeń utworu"
 msgid "Skip forwards in playlist"
 msgstr "Przeskocz do przodu w playliście"
 
-#: ui/mainwindow.cpp:1852
+#: ui/mainwindow.cpp:1865
 msgid "Skip selected tracks"
 msgstr "Pomiń wybrane ścieżki"
 
-#: ui/mainwindow.cpp:1850
+#: ui/mainwindow.cpp:1863
 msgid "Skip track"
 msgstr "Pomiń ścieżkę"
 
@@ -5113,7 +5113,7 @@ msgid ""
 "license key. Visit subsonic.org for details."
 msgstr "Okres próbny dla serwera Subsonic wygasł. Zapłać, aby otrzymać klucz licencyjny. Szczegóły na subsonic.org."
 
-#: ui/mainwindow.cpp:2739
+#: ui/mainwindow.cpp:2752
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -5155,7 +5155,7 @@ msgid ""
 "continue?"
 msgstr "Te pliki zostaną usunięte z urządzenia. Na pewno chcesz kontynuować?"
 
-#: library/libraryview.cpp:678 ui/mainwindow.cpp:2491 widgets/fileview.cpp:189
+#: library/libraryview.cpp:678 ui/mainwindow.cpp:2504 widgets/fileview.cpp:189
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -5257,7 +5257,7 @@ msgstr "Przełącz ładne OSD"
 msgid "Toggle fullscreen"
 msgstr "Przełącz tryb pełnoekranowy"
 
-#: ui/mainwindow.cpp:1838
+#: ui/mainwindow.cpp:1851
 msgid "Toggle queue status"
 msgstr "Przełącz stan kolejki"
 
@@ -5391,11 +5391,11 @@ msgstr "Nieznany błąd"
 msgid "Unset cover"
 msgstr "Usuń okładkę"
 
-#: ui/mainwindow.cpp:1848
+#: ui/mainwindow.cpp:1861
 msgid "Unskip selected tracks"
 msgstr "Nie pomijaj wybranych ścieżek"
 
-#: ui/mainwindow.cpp:1846
+#: ui/mainwindow.cpp:1859
 msgid "Unskip track"
 msgstr "Nie pomijaj ścieżki"
 
@@ -5725,7 +5725,7 @@ msgid ""
 "well?"
 msgstr "Czy chciałbyś przenieść także inny piosenki z tego albumu do Różnych wykonawców?"
 
-#: ui/mainwindow.cpp:2746
+#: ui/mainwindow.cpp:2759
 msgid "Would you like to run a full rescan right now?"
 msgstr "Czy chcesz teraz rozpocząć odświeżanie biblioteki?"
 

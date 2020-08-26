@@ -511,7 +511,7 @@ msgstr "הוספת תזרים אחר..."
 msgid "Add directory..."
 msgstr "הוספת תיקייה..."
 
-#: ui/mainwindow.cpp:2118
+#: ui/mainwindow.cpp:2131
 msgid "Add file"
 msgstr "הוספת קובץ"
 
@@ -531,7 +531,7 @@ msgstr "הוספת קובץ..."
 msgid "Add files to transcode"
 msgstr "הוספת קובצי מוזיקה להמרה"
 
-#: transcoder/transcodedialog.cpp:308 ui/mainwindow.cpp:2145
+#: transcoder/transcodedialog.cpp:308 ui/mainwindow.cpp:2158
 #: ripper/ripcddialog.cpp:203
 msgid "Add folder"
 msgstr "הוספת תיקייה"
@@ -636,7 +636,7 @@ msgstr "הוסף לרשימת ההשמעה של Spotify"
 msgid "Add to Spotify starred"
 msgstr "הוסף למועדפים של Spotify"
 
-#: ui/mainwindow.cpp:1919
+#: ui/mainwindow.cpp:1932
 msgid "Add to another playlist"
 msgstr "הוספה לרשימת השמעה אחרת"
 
@@ -1655,7 +1655,7 @@ msgid "Delete downloaded data"
 msgstr "מחיקת מידע שהתקבל"
 
 #: devices/deviceview.cpp:401 library/libraryview.cpp:677
-#: ui/mainwindow.cpp:2490 widgets/fileview.cpp:188
+#: ui/mainwindow.cpp:2503 widgets/fileview.cpp:188
 msgid "Delete files"
 msgstr "מחיקת קבצים"
 
@@ -1696,11 +1696,11 @@ msgstr "הקבצים נמחקים"
 msgid "Depth"
 msgstr ""
 
-#: ui/mainwindow.cpp:1832
+#: ui/mainwindow.cpp:1845
 msgid "Dequeue selected tracks"
 msgstr "הסרת הרצועות הנבחרות מהתור"
 
-#: ui/mainwindow.cpp:1830
+#: ui/mainwindow.cpp:1843
 msgid "Dequeue track"
 msgstr "הסרת הרצועה מהתור"
 
@@ -1972,7 +1972,7 @@ msgstr "מיקס דינמי אקראי"
 msgid "Edit smart playlist..."
 msgstr "עריכת רשימת השמעה חכמה..."
 
-#: ui/mainwindow.cpp:1882
+#: ui/mainwindow.cpp:1895
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr ""
@@ -2111,8 +2111,8 @@ msgid "Equivalent to --log-levels *:3"
 msgstr "זהה לאפשרות--log-levels *:3"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:249
-#: library/libraryview.cpp:671 ui/mainwindow.cpp:2174 ui/mainwindow.cpp:2443
-#: ui/mainwindow.cpp:2621
+#: library/libraryview.cpp:671 ui/mainwindow.cpp:2187 ui/mainwindow.cpp:2456
+#: ui/mainwindow.cpp:2634
 msgid "Error"
 msgstr "שגיאה"
 
@@ -2254,7 +2254,7 @@ msgstr "עמעום מוזיקה"
 msgid "Fading duration"
 msgstr "משך זמן עמעום המוזיקה"
 
-#: ui/mainwindow.cpp:2175
+#: ui/mainwindow.cpp:2188
 msgid "Failed reading CD drive"
 msgstr ""
 
@@ -2985,7 +2985,7 @@ msgstr "ספרייה"
 msgid "Library advanced grouping"
 msgstr "קיבוץ מתקדם של הספרייה"
 
-#: ui/mainwindow.cpp:2748
+#: ui/mainwindow.cpp:2761
 msgid "Library rescan notice"
 msgstr "הודעה על סריקה מחודשת של הספרייה"
 
@@ -3318,7 +3318,7 @@ msgstr "העברה לספרייה..."
 msgid "Move up"
 msgstr "הזזה מעלה"
 
-#: transcoder/transcodedialog.cpp:227 ui/mainwindow.cpp:2119
+#: transcoder/transcodedialog.cpp:227 ui/mainwindow.cpp:2132
 msgid "Music"
 msgstr "מוזיקה"
 
@@ -3376,7 +3376,7 @@ msgstr "אין להתחיל להשמיע אף פעם"
 msgid "New folder"
 msgstr "תיקייה חדשה"
 
-#: ui/mainwindow.cpp:1936 ../bin/src/ui_mainwindow.h:754
+#: ui/mainwindow.cpp:1949 ../bin/src/ui_mainwindow.h:754
 msgid "New playlist"
 msgstr "רשימת השמעה חדשה"
 
@@ -3443,7 +3443,7 @@ msgstr "ללא מקטעים קצרים"
 msgid "None"
 msgstr "אין"
 
-#: library/libraryview.cpp:672 ui/mainwindow.cpp:2444 ui/mainwindow.cpp:2622
+#: library/libraryview.cpp:672 ui/mainwindow.cpp:2457 ui/mainwindow.cpp:2635
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "אף אחד מהשירים הנבחרים לא היה ראוי להעתקה להתקן"
 
@@ -3742,7 +3742,7 @@ msgstr "מסיבה"
 msgid "Password"
 msgstr "ססמה"
 
-#: core/globalshortcuts.cpp:52 ui/mainwindow.cpp:1164 ui/mainwindow.cpp:1727
+#: core/globalshortcuts.cpp:52 ui/mainwindow.cpp:1164 ui/mainwindow.cpp:1740
 #: ui/qtsystemtrayicon.cpp:185 wiimotedev/wiimotesettingspage.cpp:114
 msgid "Pause"
 msgstr "השהייה"
@@ -3771,7 +3771,7 @@ msgid "Plain sidebar"
 msgstr "סרגל צד פשוט"
 
 #: core/globalshortcuts.cpp:51 ui/mainwindow.cpp:685 ui/mainwindow.cpp:1128
-#: ui/mainwindow.cpp:1149 ui/mainwindow.cpp:1731 ui/qtsystemtrayicon.cpp:173
+#: ui/mainwindow.cpp:1149 ui/mainwindow.cpp:1744 ui/qtsystemtrayicon.cpp:173
 #: ui/qtsystemtrayicon.cpp:199 wiimotedev/wiimotesettingspage.cpp:107
 #: ../bin/src/ui_mainwindow.h:720
 msgid "Play"
@@ -3790,11 +3790,11 @@ msgstr "ניגון אם מושהה, השהייה אם מנגן"
 msgid "Play if there is nothing already playing"
 msgstr "השמעה אם אין שום שמושמע כרגע"
 
-#: library/libraryview.cpp:396 ui/mainwindow.cpp:1843
+#: library/libraryview.cpp:396 ui/mainwindow.cpp:1856
 msgid "Play next"
 msgstr ""
 
-#: ui/mainwindow.cpp:1841
+#: ui/mainwindow.cpp:1854
 msgid "Play selected tracks next"
 msgstr ""
 
@@ -4015,12 +4015,12 @@ msgstr "התקן מתושאל..."
 msgid "Queue Manager"
 msgstr "מנהל התור"
 
-#: ui/mainwindow.cpp:1836
+#: ui/mainwindow.cpp:1849
 msgid "Queue selected tracks"
 msgstr "הוספת הרצועות הנבחרות"
 
 #: globalsearch/globalsearchview.cpp:465 library/libraryview.cpp:393
-#: ui/mainwindow.cpp:1834
+#: ui/mainwindow.cpp:1847
 msgid "Queue track"
 msgstr "הוספת הרצועה לתור"
 
@@ -4562,7 +4562,7 @@ msgstr "פרטי שרת"
 msgid "Service offline"
 msgstr "שירות לא מקוון"
 
-#: ui/mainwindow.cpp:1881
+#: ui/mainwindow.cpp:1894
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr "הגדרת %1 בתור „%2“..."
@@ -4775,11 +4775,11 @@ msgstr "מונה דילוגים"
 msgid "Skip forwards in playlist"
 msgstr "דילוג קדימה ברשימת ההשמעה"
 
-#: ui/mainwindow.cpp:1852
+#: ui/mainwindow.cpp:1865
 msgid "Skip selected tracks"
 msgstr ""
 
-#: ui/mainwindow.cpp:1850
+#: ui/mainwindow.cpp:1863
 msgid "Skip track"
 msgstr ""
 
@@ -5100,7 +5100,7 @@ msgid ""
 "license key. Visit subsonic.org for details."
 msgstr "תמה תקופת הניסיון לשרת Subsonic. נא תרומתך לקבלת מפתח רישיון. לפרטים, נא לבקר ב subsonic.org "
 
-#: ui/mainwindow.cpp:2739
+#: ui/mainwindow.cpp:2752
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -5142,7 +5142,7 @@ msgid ""
 "continue?"
 msgstr "קבצים אלו ימחקו מההתקן, האם להמשיך?"
 
-#: library/libraryview.cpp:678 ui/mainwindow.cpp:2491 widgets/fileview.cpp:189
+#: library/libraryview.cpp:678 ui/mainwindow.cpp:2504 widgets/fileview.cpp:189
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -5244,7 +5244,7 @@ msgstr "החלפה ל/ממצב חיווי נאה"
 msgid "Toggle fullscreen"
 msgstr "הפעלה או כיבוי של מסך מלא"
 
-#: ui/mainwindow.cpp:1838
+#: ui/mainwindow.cpp:1851
 msgid "Toggle queue status"
 msgstr "החלף מצב התור"
 
@@ -5378,11 +5378,11 @@ msgstr "שגיאה לא ידועה"
 msgid "Unset cover"
 msgstr "הסרת עטיפה"
 
-#: ui/mainwindow.cpp:1848
+#: ui/mainwindow.cpp:1861
 msgid "Unskip selected tracks"
 msgstr ""
 
-#: ui/mainwindow.cpp:1846
+#: ui/mainwindow.cpp:1859
 msgid "Unskip track"
 msgstr ""
 
@@ -5712,7 +5712,7 @@ msgid ""
 "well?"
 msgstr "האם ברצונך להעביר גם את שאר השירים באלבום לאמנים שונים?"
 
-#: ui/mainwindow.cpp:2746
+#: ui/mainwindow.cpp:2759
 msgid "Would you like to run a full rescan right now?"
 msgstr "האם ברצונך לבצע סריקה חוזרת כעת?"
 
