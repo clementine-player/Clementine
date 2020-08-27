@@ -509,7 +509,7 @@ msgstr "Lisa veel üks raadiovoog..."
 msgid "Add directory..."
 msgstr "Lisa kaust..."
 
-#: ui/mainwindow.cpp:2131
+#: ui/mainwindow.cpp:2140
 msgid "Add file"
 msgstr "Lisa fail"
 
@@ -529,7 +529,7 @@ msgstr "Lisa fail..."
 msgid "Add files to transcode"
 msgstr "Lisa failid transkodeerimiseks"
 
-#: transcoder/transcodedialog.cpp:308 ui/mainwindow.cpp:2158
+#: transcoder/transcodedialog.cpp:308 ui/mainwindow.cpp:2167
 #: ripper/ripcddialog.cpp:203
 msgid "Add folder"
 msgstr "Lisa kaust"
@@ -634,7 +634,7 @@ msgstr "Lisa Spotify esitusloendisse"
 msgid "Add to Spotify starred"
 msgstr "Lisa Spotify tärniga lugude hulka"
 
-#: ui/mainwindow.cpp:1932
+#: ui/mainwindow.cpp:1941
 msgid "Add to another playlist"
 msgstr "Lisa teise esitusloendisse"
 
@@ -1653,7 +1653,7 @@ msgid "Delete downloaded data"
 msgstr "Kustuta allalaetud andmed"
 
 #: devices/deviceview.cpp:401 library/libraryview.cpp:677
-#: ui/mainwindow.cpp:2503 widgets/fileview.cpp:188
+#: ui/mainwindow.cpp:2512 widgets/fileview.cpp:188
 msgid "Delete files"
 msgstr "Kustuta failid"
 
@@ -1694,11 +1694,11 @@ msgstr "Failide kustutamine"
 msgid "Depth"
 msgstr "Sügavus"
 
-#: ui/mainwindow.cpp:1845
+#: ui/mainwindow.cpp:1854
 msgid "Dequeue selected tracks"
 msgstr "Eemalda valitud lood järjekorrast"
 
-#: ui/mainwindow.cpp:1843
+#: ui/mainwindow.cpp:1852
 msgid "Dequeue track"
 msgstr "Eemalda järjekorrast"
 
@@ -1970,7 +1970,7 @@ msgstr "Dünaamiline juhuslik valik"
 msgid "Edit smart playlist..."
 msgstr "Muuda nutikat esitusloendit..."
 
-#: ui/mainwindow.cpp:1895
+#: ui/mainwindow.cpp:1904
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr "Muuda silti \"%1\"..."
@@ -2109,8 +2109,8 @@ msgid "Equivalent to --log-levels *:3"
 msgstr "Võrdne käivitusvõtmega --log-levels *:3"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:249
-#: library/libraryview.cpp:671 ui/mainwindow.cpp:2187 ui/mainwindow.cpp:2456
-#: ui/mainwindow.cpp:2634
+#: library/libraryview.cpp:671 ui/mainwindow.cpp:2196 ui/mainwindow.cpp:2465
+#: ui/mainwindow.cpp:2643
 msgid "Error"
 msgstr "Viga"
 
@@ -2252,7 +2252,7 @@ msgstr "Hajumine"
 msgid "Fading duration"
 msgstr "Hajumise kestus"
 
-#: ui/mainwindow.cpp:2188
+#: ui/mainwindow.cpp:2197
 msgid "Failed reading CD drive"
 msgstr "Ei õnnestunud lugeda andmeid CD-seadmest"
 
@@ -2983,7 +2983,7 @@ msgstr "Helikogu"
 msgid "Library advanced grouping"
 msgstr "Helikogu täpsem rühmitamine"
 
-#: ui/mainwindow.cpp:2761
+#: ui/mainwindow.cpp:2770
 msgid "Library rescan notice"
 msgstr "Helikogu täisanalüüsi teade"
 
@@ -3316,7 +3316,7 @@ msgstr "Tõsta helikogusse..."
 msgid "Move up"
 msgstr "Liiguta üles"
 
-#: transcoder/transcodedialog.cpp:227 ui/mainwindow.cpp:2132
+#: transcoder/transcodedialog.cpp:227 ui/mainwindow.cpp:2141
 msgid "Music"
 msgstr "Muusika"
 
@@ -3374,7 +3374,7 @@ msgstr "Ära kunagi alusta esitust"
 msgid "New folder"
 msgstr "Uus kaust"
 
-#: ui/mainwindow.cpp:1949 ../bin/src/ui_mainwindow.h:754
+#: ui/mainwindow.cpp:1958 ../bin/src/ui_mainwindow.h:754
 msgid "New playlist"
 msgstr "Uus esitusloend"
 
@@ -3441,7 +3441,7 @@ msgstr "Ära kasuta lühikesi blokke"
 msgid "None"
 msgstr "Puudub"
 
-#: library/libraryview.cpp:672 ui/mainwindow.cpp:2457 ui/mainwindow.cpp:2635
+#: library/libraryview.cpp:672 ui/mainwindow.cpp:2466 ui/mainwindow.cpp:2644
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Valitud lood ei olnud sobilikud seadmesse kopeerimiseks"
 
@@ -3740,7 +3740,7 @@ msgstr "Pidu"
 msgid "Password"
 msgstr "Salasõna"
 
-#: core/globalshortcuts.cpp:52 ui/mainwindow.cpp:1164 ui/mainwindow.cpp:1740
+#: core/globalshortcuts.cpp:52 ui/mainwindow.cpp:1164 ui/mainwindow.cpp:1749
 #: ui/qtsystemtrayicon.cpp:185 wiimotedev/wiimotesettingspage.cpp:114
 msgid "Pause"
 msgstr "Paus"
@@ -3769,7 +3769,7 @@ msgid "Plain sidebar"
 msgstr "Täielik külgriba"
 
 #: core/globalshortcuts.cpp:51 ui/mainwindow.cpp:685 ui/mainwindow.cpp:1128
-#: ui/mainwindow.cpp:1149 ui/mainwindow.cpp:1744 ui/qtsystemtrayicon.cpp:173
+#: ui/mainwindow.cpp:1149 ui/mainwindow.cpp:1753 ui/qtsystemtrayicon.cpp:173
 #: ui/qtsystemtrayicon.cpp:199 wiimotedev/wiimotesettingspage.cpp:107
 #: ../bin/src/ui_mainwindow.h:720
 msgid "Play"
@@ -3788,11 +3788,11 @@ msgstr "Mängi, kui on peatatud, paus, kui mängitakse"
 msgid "Play if there is nothing already playing"
 msgstr "Esita, kui hetkel juba pole midagi esitamisel"
 
-#: library/libraryview.cpp:396 ui/mainwindow.cpp:1856
+#: library/libraryview.cpp:396 ui/mainwindow.cpp:1865
 msgid "Play next"
 msgstr "Esita järgmisena"
 
-#: ui/mainwindow.cpp:1854
+#: ui/mainwindow.cpp:1863
 msgid "Play selected tracks next"
 msgstr "Esita valitud lood järgmisena"
 
@@ -4013,12 +4013,12 @@ msgstr "Vaatan mis seadmes leidub"
 msgid "Queue Manager"
 msgstr "Järjekorrahaldur"
 
-#: ui/mainwindow.cpp:1849
+#: ui/mainwindow.cpp:1858
 msgid "Queue selected tracks"
 msgstr "Lisa valitud lood järjekorda"
 
 #: globalsearch/globalsearchview.cpp:465 library/libraryview.cpp:393
-#: ui/mainwindow.cpp:1847
+#: ui/mainwindow.cpp:1856
 msgid "Queue track"
 msgstr "Lisa järjekorda"
 
@@ -4560,7 +4560,7 @@ msgstr "Detailne teave serveri kohta"
 msgid "Service offline"
 msgstr "Teenus on võrguühenduseta"
 
-#: ui/mainwindow.cpp:1894
+#: ui/mainwindow.cpp:1903
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr ""
@@ -4773,11 +4773,11 @@ msgstr "Vahelejätmiskorrad"
 msgid "Skip forwards in playlist"
 msgstr "Samm lugude nimekirjas edasi"
 
-#: ui/mainwindow.cpp:1865
+#: ui/mainwindow.cpp:1874
 msgid "Skip selected tracks"
 msgstr "Jäta valituid lood vahele"
 
-#: ui/mainwindow.cpp:1863
+#: ui/mainwindow.cpp:1872
 msgid "Skip track"
 msgstr "Jäta lugu vahele"
 
@@ -5098,7 +5098,7 @@ msgid ""
 "license key. Visit subsonic.org for details."
 msgstr "Sunsonic'u serveri kasutamise prooviperiood on läbi. Litsentsivõtme saamiseks palun tee annetus. Täpsem teave leidub subsonic.org veebisaidis."
 
-#: ui/mainwindow.cpp:2752
+#: ui/mainwindow.cpp:2761
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -5140,7 +5140,7 @@ msgid ""
 "continue?"
 msgstr "Need failid kustutatakse seadmest. Kas sa kindlasti soovid jätkata?"
 
-#: library/libraryview.cpp:678 ui/mainwindow.cpp:2504 widgets/fileview.cpp:189
+#: library/libraryview.cpp:678 ui/mainwindow.cpp:2513 widgets/fileview.cpp:189
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -5242,7 +5242,7 @@ msgstr "Lülita ilus ekraanimenüü sisse või välja"
 msgid "Toggle fullscreen"
 msgstr "Lülita täisekraan sisse või välja"
 
-#: ui/mainwindow.cpp:1851
+#: ui/mainwindow.cpp:1860
 msgid "Toggle queue status"
 msgstr "Vaheta staatus esitusjärjekorras"
 
@@ -5376,11 +5376,11 @@ msgstr "Tundmatu viga"
 msgid "Unset cover"
 msgstr "Määramata kaanepilt"
 
-#: ui/mainwindow.cpp:1861
+#: ui/mainwindow.cpp:1870
 msgid "Unskip selected tracks"
 msgstr "Tühista valitud lugude vahelejätmine"
 
-#: ui/mainwindow.cpp:1859
+#: ui/mainwindow.cpp:1868
 msgid "Unskip track"
 msgstr "Tühista loo vahelejätmine"
 
@@ -5710,7 +5710,7 @@ msgid ""
 "well?"
 msgstr "Kas sa soovid ka muud selle albumi lood liigitada erinevate esitajate alla"
 
-#: ui/mainwindow.cpp:2759
+#: ui/mainwindow.cpp:2768
 msgid "Would you like to run a full rescan right now?"
 msgstr "Kas sa soovid teha uut helikogu täisanalüüsi?"
 

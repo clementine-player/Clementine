@@ -510,7 +510,7 @@ msgstr "Pridať ďalší stream..."
 msgid "Add directory..."
 msgstr "Pridať priečinok..."
 
-#: ui/mainwindow.cpp:2131
+#: ui/mainwindow.cpp:2140
 msgid "Add file"
 msgstr "Pridať súbor"
 
@@ -530,7 +530,7 @@ msgstr "Pridať súbor..."
 msgid "Add files to transcode"
 msgstr "Pridať súbory na transkódovanie"
 
-#: transcoder/transcodedialog.cpp:308 ui/mainwindow.cpp:2158
+#: transcoder/transcodedialog.cpp:308 ui/mainwindow.cpp:2167
 #: ripper/ripcddialog.cpp:203
 msgid "Add folder"
 msgstr "Pridať priečinok"
@@ -635,7 +635,7 @@ msgstr "Pridať do Spotify playlistov"
 msgid "Add to Spotify starred"
 msgstr "Pridať do S hviezdičkou na Spotify"
 
-#: ui/mainwindow.cpp:1932
+#: ui/mainwindow.cpp:1941
 msgid "Add to another playlist"
 msgstr "Pridať do iného playlistu"
 
@@ -1654,7 +1654,7 @@ msgid "Delete downloaded data"
 msgstr "Vymazať stiahnuté dáta"
 
 #: devices/deviceview.cpp:401 library/libraryview.cpp:677
-#: ui/mainwindow.cpp:2503 widgets/fileview.cpp:188
+#: ui/mainwindow.cpp:2512 widgets/fileview.cpp:188
 msgid "Delete files"
 msgstr "Vymazať súbory"
 
@@ -1695,11 +1695,11 @@ msgstr "Odstraňujú sa súbory"
 msgid "Depth"
 msgstr "Hĺbka"
 
-#: ui/mainwindow.cpp:1845
+#: ui/mainwindow.cpp:1854
 msgid "Dequeue selected tracks"
 msgstr "Vybrať z radu vybrané skladby"
 
-#: ui/mainwindow.cpp:1843
+#: ui/mainwindow.cpp:1852
 msgid "Dequeue track"
 msgstr "Vybrať z radu skladbu"
 
@@ -1971,7 +1971,7 @@ msgstr "Dynamicky náhodná zmes"
 msgid "Edit smart playlist..."
 msgstr "Upraviť inteligentný playlist..."
 
-#: ui/mainwindow.cpp:1895
+#: ui/mainwindow.cpp:1904
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr "Upraviť tag \"%1\"..."
@@ -2110,8 +2110,8 @@ msgid "Equivalent to --log-levels *:3"
 msgstr "Ekvivalent k --log-levels *:3"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:249
-#: library/libraryview.cpp:671 ui/mainwindow.cpp:2187 ui/mainwindow.cpp:2456
-#: ui/mainwindow.cpp:2634
+#: library/libraryview.cpp:671 ui/mainwindow.cpp:2196 ui/mainwindow.cpp:2465
+#: ui/mainwindow.cpp:2643
 msgid "Error"
 msgstr "Chyba"
 
@@ -2253,7 +2253,7 @@ msgstr "Zoslabovanie"
 msgid "Fading duration"
 msgstr "Trvanie zoslabovania"
 
-#: ui/mainwindow.cpp:2188
+#: ui/mainwindow.cpp:2197
 msgid "Failed reading CD drive"
 msgstr "Zlyhalo čítanie CD v mechanike"
 
@@ -2984,7 +2984,7 @@ msgstr "Zbierka"
 msgid "Library advanced grouping"
 msgstr "Pokročilé zoraďovanie zbierky"
 
-#: ui/mainwindow.cpp:2761
+#: ui/mainwindow.cpp:2770
 msgid "Library rescan notice"
 msgstr "Poznámka k preskenovaniu zbierky"
 
@@ -3317,7 +3317,7 @@ msgstr "Presunúť do zbierky..."
 msgid "Move up"
 msgstr "Posunúť vyššie"
 
-#: transcoder/transcodedialog.cpp:227 ui/mainwindow.cpp:2132
+#: transcoder/transcodedialog.cpp:227 ui/mainwindow.cpp:2141
 msgid "Music"
 msgstr "Hudba"
 
@@ -3375,7 +3375,7 @@ msgstr "Nezačne sa prehrávať"
 msgid "New folder"
 msgstr "Nový playlist"
 
-#: ui/mainwindow.cpp:1949 ../bin/src/ui_mainwindow.h:754
+#: ui/mainwindow.cpp:1958 ../bin/src/ui_mainwindow.h:754
 msgid "New playlist"
 msgstr "Nový playlist"
 
@@ -3442,7 +3442,7 @@ msgstr "Žiadne krátke bloky"
 msgid "None"
 msgstr "Nijako"
 
-#: library/libraryview.cpp:672 ui/mainwindow.cpp:2457 ui/mainwindow.cpp:2635
+#: library/libraryview.cpp:672 ui/mainwindow.cpp:2466 ui/mainwindow.cpp:2644
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Žiadna z vybratých piesní nieje vhodná na kopírovanie do zariadenia"
 
@@ -3741,7 +3741,7 @@ msgstr "Party"
 msgid "Password"
 msgstr "Heslo"
 
-#: core/globalshortcuts.cpp:52 ui/mainwindow.cpp:1164 ui/mainwindow.cpp:1740
+#: core/globalshortcuts.cpp:52 ui/mainwindow.cpp:1164 ui/mainwindow.cpp:1749
 #: ui/qtsystemtrayicon.cpp:185 wiimotedev/wiimotesettingspage.cpp:114
 msgid "Pause"
 msgstr "Pozastaviť"
@@ -3770,7 +3770,7 @@ msgid "Plain sidebar"
 msgstr "Obyčajný bočný panel"
 
 #: core/globalshortcuts.cpp:51 ui/mainwindow.cpp:685 ui/mainwindow.cpp:1128
-#: ui/mainwindow.cpp:1149 ui/mainwindow.cpp:1744 ui/qtsystemtrayicon.cpp:173
+#: ui/mainwindow.cpp:1149 ui/mainwindow.cpp:1753 ui/qtsystemtrayicon.cpp:173
 #: ui/qtsystemtrayicon.cpp:199 wiimotedev/wiimotesettingspage.cpp:107
 #: ../bin/src/ui_mainwindow.h:720
 msgid "Play"
@@ -3789,11 +3789,11 @@ msgstr "Hrať ak je zastavené, pozastaviť ak hrá"
 msgid "Play if there is nothing already playing"
 msgstr "Začne hrať, ak sa nič neprehráva"
 
-#: library/libraryview.cpp:396 ui/mainwindow.cpp:1856
+#: library/libraryview.cpp:396 ui/mainwindow.cpp:1865
 msgid "Play next"
 msgstr "Prehrať nasledujúcu"
 
-#: ui/mainwindow.cpp:1854
+#: ui/mainwindow.cpp:1863
 msgid "Play selected tracks next"
 msgstr "Prehrať vybrané skladby ako ďalšie"
 
@@ -4014,12 +4014,12 @@ msgstr "Zaraďuje sa zariadenie..."
 msgid "Queue Manager"
 msgstr "Správca poradia"
 
-#: ui/mainwindow.cpp:1849
+#: ui/mainwindow.cpp:1858
 msgid "Queue selected tracks"
 msgstr "Zaradiť vybrané skladby"
 
 #: globalsearch/globalsearchview.cpp:465 library/libraryview.cpp:393
-#: ui/mainwindow.cpp:1847
+#: ui/mainwindow.cpp:1856
 msgid "Queue track"
 msgstr "Zaradiť skladbu"
 
@@ -4561,7 +4561,7 @@ msgstr "Podrobnosti o serveri"
 msgid "Service offline"
 msgstr "Služba je offline"
 
-#: ui/mainwindow.cpp:1894
+#: ui/mainwindow.cpp:1903
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr "Nastaviť %1 do \"%2\"..."
@@ -4774,11 +4774,11 @@ msgstr "Počet preskočení"
 msgid "Skip forwards in playlist"
 msgstr "Preskočiť dopredu v playliste"
 
-#: ui/mainwindow.cpp:1865
+#: ui/mainwindow.cpp:1874
 msgid "Skip selected tracks"
 msgstr "Preskočiť vybrané skladby"
 
-#: ui/mainwindow.cpp:1863
+#: ui/mainwindow.cpp:1872
 msgid "Skip track"
 msgstr "Preskočiť skladbu"
 
@@ -5099,7 +5099,7 @@ msgid ""
 "license key. Visit subsonic.org for details."
 msgstr "Skúšobná verzia Subsonic servera uplynula. Prosím prispejte, aby ste získali licenčný kľúč. Navštívte subsonic.org pre detaily."
 
-#: ui/mainwindow.cpp:2752
+#: ui/mainwindow.cpp:2761
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -5141,7 +5141,7 @@ msgid ""
 "continue?"
 msgstr "Tieto súbory budú vymazané zo zariadenia, ste si istý, že chcete pokračovať?"
 
-#: library/libraryview.cpp:678 ui/mainwindow.cpp:2504 widgets/fileview.cpp:189
+#: library/libraryview.cpp:678 ui/mainwindow.cpp:2513 widgets/fileview.cpp:189
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -5243,7 +5243,7 @@ msgstr "Prepnúť Krásne OSD"
 msgid "Toggle fullscreen"
 msgstr "Prepnúť na celú obrazovku"
 
-#: ui/mainwindow.cpp:1851
+#: ui/mainwindow.cpp:1860
 msgid "Toggle queue status"
 msgstr "Prepínať stav radu"
 
@@ -5377,11 +5377,11 @@ msgstr "Neznáma chyba"
 msgid "Unset cover"
 msgstr "Nenastavený obal"
 
-#: ui/mainwindow.cpp:1861
+#: ui/mainwindow.cpp:1870
 msgid "Unskip selected tracks"
 msgstr "Nepreskočiť vybraté skladby"
 
-#: ui/mainwindow.cpp:1859
+#: ui/mainwindow.cpp:1868
 msgid "Unskip track"
 msgstr "Nepreskočiť skladbu"
 
@@ -5711,7 +5711,7 @@ msgid ""
 "well?"
 msgstr "Chceli by ste presunúť tiež ostatné piesne v tomto albume do rôznych interprétov?"
 
-#: ui/mainwindow.cpp:2759
+#: ui/mainwindow.cpp:2768
 msgid "Would you like to run a full rescan right now?"
 msgstr "Chcete teraz spustiť úplné preskenovanie?"
 
