@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2020-09-01 19:07+0000\n"
+"PO-Revision-Date: 2020-09-05 13:09+0000\n"
 "Last-Translator: BrLi <rainman59118@gmail.com>\n"
 "Language-Team: Chinese (Taiwan) (http://www.transifex.com/davidsansome/clementine/language/zh_TW/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -208,7 +208,7 @@ msgstr "隱藏 %1"
 
 #: playlist/playlistheader.cpp:31
 msgid "&Hide..."
-msgstr "隱藏(&H)..."
+msgstr "隱藏(&H)…"
 
 #: playlist/playlistheader.cpp:45
 msgid "&Left"
@@ -272,7 +272,7 @@ msgstr "，由"
 
 #: ui/about.cpp:89
 msgid "...and all the Amarok contributors"
-msgstr "...和所有的 Amarok 的貢獻者"
+msgstr "…和所有的 Amarok 的貢獻者"
 
 #: ../bin/src/ui_albumcovermanager.h:228 ../bin/src/ui_albumcovermanager.h:229
 msgid "0"
@@ -351,7 +351,7 @@ msgid ""
 "played in the last 180 minutes.</p><p><span style=\" font-"
 "weight:600;\">Available fields: </span><span style=\" font-"
 "style:italic;\">%1</span>.</p></body></html>"
-msgstr ""
+msgstr "<html><head/><body><p>在搜尋的詞彙前綴上領域名稱以限縮搜尋結果。例如 <span style=\" font-weight:600;\">artist:</span><span style=\" font-style:italic;\">Bode</span> 會在媒體櫃中搜尋所有演出者含有 Bode 關鍵詞的結果，<span style=\" font-weight:600;\">playcount:</span><span style=\" font-style:italic;\">&gt;=2</span> 會在媒體櫃中搜尋所有播放兩次以上的曲目，<span style=\" font-weight:600;\">lastplayed:</span>&lt;<span style=\" font-style:italic;\">1h30m</span> 會在媒體櫃中搜尋過去 180 分鐘內播放的曲目</p><p><span style=\" font-weight:600;\">可用的領域名稱：</span><span style=\" font-style:italic;\">%1</span>。</p></body></html>"
 
 #: ../bin/src/ui_librarysettingspage.h:198
 msgid ""
@@ -359,7 +359,7 @@ msgid ""
 "files tags for all your library's songs.</p><p>This is not needed if the "
 "&quot;Save ratings and statistics in file tags&quot; option has always been "
 "activated.</p></body></html>"
-msgstr "<html><head/><body><p>此舉將會將歌曲評分以及統計數據寫入音樂庫中所有的歌曲的標籤中</p><p>假如「將統計數據存入檔案標籤」選項已啟用，則不需要啟用本選項。</p></body></html>"
+msgstr "<html><head/><body><p>此舉將會將歌曲評分以及統計數據寫入媒體櫃中所有的歌曲的標籤中</p><p>假如「將統計數據存入檔案標籤」選項已啟用，則不需要啟用本選項。</p></body></html>"
 
 #: songinfo/artistbiography.cpp:277
 #, qt-format
@@ -395,7 +395,7 @@ msgid ""
 "A smart playlist is a dynamic list of songs that come from your library.  "
 "There are different types of smart playlist that offer different ways of "
 "selecting songs."
-msgstr "智慧型播放清單是一動態的歌曲清單,其歌曲來源是您的音樂庫。有不同類型的智慧型播放清單,其提供不同的選擇歌曲方式。"
+msgstr "智慧型播放清單是動態的歌曲清單，其歌曲來源是您的媒體櫃。不同類型的智慧型播放清單提供多元的歌曲選擇模式。"
 
 #: smartplaylists/querywizardplugin.cpp:158
 msgid ""
@@ -445,11 +445,11 @@ msgstr "關於 %1"
 
 #: ../bin/src/ui_mainwindow.h:735
 msgid "About Clementine..."
-msgstr "關於 Clementine..."
+msgstr "關於 Clementine…"
 
 #: ../bin/src/ui_mainwindow.h:762
 msgid "About Qt..."
-msgstr "關於 Qt..."
+msgstr "關於 Qt…"
 
 #: playlist/playlistsaveoptionsdialog.cpp:34
 #: ../bin/src/ui_behavioursettingspage.h:454
@@ -505,7 +505,7 @@ msgstr "加入其它的網路串流"
 
 #: library/librarysettingspage.cpp:67 ../bin/src/ui_transcodedialog.h:222
 msgid "Add directory..."
-msgstr "加入目錄..."
+msgstr "加入目錄…"
 
 #: ui/mainwindow.cpp:2140
 msgid "Add file"
@@ -521,7 +521,7 @@ msgstr "加入檔案以便轉碼"
 
 #: ../bin/src/ui_transcodedialog.h:218 ../bin/src/ui_mainwindow.h:737
 msgid "Add file..."
-msgstr "加入檔案..."
+msgstr "加入檔案…"
 
 #: transcoder/transcodedialog.cpp:226
 msgid "Add files to transcode"
@@ -534,11 +534,11 @@ msgstr "加入資料夾"
 
 #: ../bin/src/ui_mainwindow.h:752
 msgid "Add folder..."
-msgstr "加入資料夾..."
+msgstr "加入資料夾…"
 
 #: ../bin/src/ui_librarysettingspage.h:187
 msgid "Add new folder..."
-msgstr "新增資料夾..."
+msgstr "新增資料夾…"
 
 #: ../bin/src/ui_addpodcastdialog.h:178
 msgid "Add podcast"
@@ -546,7 +546,7 @@ msgstr "加入 Podcast"
 
 #: internet/podcasts/podcastservice.cpp:419 ../bin/src/ui_mainwindow.h:767
 msgid "Add podcast..."
-msgstr "加入 Podcast..."
+msgstr "加入 Podcast…"
 
 #: smartplaylists/searchtermwidget.cpp:385
 msgid "Add search term"
@@ -622,7 +622,7 @@ msgstr "加入歌曲年份標籤"
 
 #: ../bin/src/ui_mainwindow.h:738
 msgid "Add stream..."
-msgstr "加入網路串流..."
+msgstr "加入網路串流…"
 
 #: internet/spotify/spotifyservice.cpp:626
 msgid "Add to Spotify playlists"
@@ -672,7 +672,7 @@ msgstr "在三個月內加入"
 
 #: library/libraryfilterwidget.cpp:176
 msgid "Advanced grouping..."
-msgstr "進階歸類..."
+msgstr "進階歸類…"
 
 #: ../bin/src/ui_podcastsettingspage.h:271
 msgid "After "
@@ -680,7 +680,7 @@ msgstr ""
 
 #: ../bin/src/ui_organisedialog.h:241
 msgid "After copying..."
-msgstr "複製後 ..."
+msgstr "複製後 …"
 
 #: library/savedgroupingmanager.cpp:65 playlist/playlist.cpp:1381
 #: ui/organisedialog.cpp:64 ../bin/src/ui_groupbydialog.h:128
@@ -708,7 +708,7 @@ msgstr "專輯封面"
 
 #: internet/jamendo/jamendoservice.cpp:421
 msgid "Album info on jamendo.com..."
-msgstr " jamendo.com上的專輯資訊..."
+msgstr " jamendo.com上的專輯資訊…"
 
 #: ui/albumcovermanager.cpp:131
 msgid "Albums with covers"
@@ -843,7 +843,7 @@ msgstr "您確定要重置歌曲的統計嗎?"
 msgid ""
 "Are you sure you want to write song's statistics into song's file for all "
 "the songs of your library?"
-msgstr ""
+msgstr "確定要將歌曲統計數據寫入所有媒體櫃中的音樂檔案嗎？"
 
 #: library/savedgroupingmanager.cpp:62 playlist/playlist.cpp:1379
 #: ui/organisedialog.cpp:65 ../bin/src/ui_groupbydialog.h:129
@@ -906,7 +906,7 @@ msgstr "自動更新"
 
 #: ../bin/src/ui_librarysettingspage.h:207
 msgid "Automatically open single categories in the library tree"
-msgstr "自動開啟音樂庫中的單一類型"
+msgstr "自動開啟媒體櫃中的單一類別"
 
 #: widgets/freespacebar.cpp:45
 msgid "Available"
@@ -1029,7 +1029,7 @@ msgstr ""
 #: ../bin/src/ui_podcastsettingspage.h:266
 #: ../bin/src/ui_appearancesettingspage.h:313
 msgid "Browse..."
-msgstr "瀏覽..."
+msgstr "瀏覽…"
 
 #: ../bin/src/ui_playbacksettingspage.h:365
 msgid "Buffer duration"
@@ -1073,7 +1073,7 @@ msgstr "更換封面圖片"
 
 #: songinfo/songinfotextview.cpp:73
 msgid "Change font size..."
-msgstr "變更字型大小..."
+msgstr "變更字型大小…"
 
 #: core/globalshortcuts.cpp:75
 msgid "Change repeat mode"
@@ -1081,7 +1081,7 @@ msgstr "更改重複模式"
 
 #: ../bin/src/ui_globalshortcutssettingspage.h:190
 msgid "Change shortcut..."
-msgstr "變更快速鍵..."
+msgstr "變更快速鍵…"
 
 #: core/globalshortcuts.cpp:73
 msgid "Change shuffle mode"
@@ -1119,7 +1119,7 @@ msgstr ""
 
 #: ui/mainwindow.cpp:831
 msgid "Check for updates..."
-msgstr "檢查更新..."
+msgstr "檢查更新…"
 
 #: smartplaylists/wizard.cpp:83
 msgid "Choose a name for your smart playlist"
@@ -1131,11 +1131,11 @@ msgstr "自動選擇"
 
 #: ../bin/src/ui_notificationssettingspage.h:467
 msgid "Choose color..."
-msgstr "選擇顏色 ..."
+msgstr "選擇顏色 …"
 
 #: ../bin/src/ui_notificationssettingspage.h:468
 msgid "Choose font..."
-msgstr "選擇字體..."
+msgstr "選擇字體…"
 
 #: ../bin/src/ui_visualisationselector.h:112
 msgid "Choose from the list"
@@ -1283,11 +1283,11 @@ msgstr "關閉視覺化效果"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:313
 msgid "Closing this window will cancel the download."
-msgstr "關閉此視窗將取消下載."
+msgstr "關閉此視窗將取消下載。"
 
 #: ui/albumcovermanager.cpp:215
 msgid "Closing this window will stop searching for album covers."
-msgstr "關閉此視窗將停止搜尋專輯封面."
+msgstr "關閉此視窗將停止搜尋專輯封面。"
 
 #: ui/equalizer.cpp:114
 msgid "Club"
@@ -1324,7 +1324,7 @@ msgstr "標籤完全自動分類"
 
 #: ../bin/src/ui_mainwindow.h:765
 msgid "Complete tags automatically..."
-msgstr "標籤完全自動分類..."
+msgstr "標籤完全自動分類…"
 
 #: library/savedgroupingmanager.cpp:74 playlist/playlist.cpp:1397
 #: ui/organisedialog.cpp:68 ../bin/src/ui_groupbydialog.h:131
@@ -1335,11 +1335,11 @@ msgstr "作曲家"
 #: internet/core/searchboxwidget.cpp:45
 #, qt-format
 msgid "Configure %1..."
-msgstr "設定 %1 ..."
+msgstr "設定 %1 …"
 
 #: internet/magnatune/magnatuneservice.cpp:292
 msgid "Configure Magnatune..."
-msgstr "設定 Magnatune ..."
+msgstr "設定 Magnatune …"
 
 #: ../bin/src/ui_globalshortcutssettingspage.h:178
 msgid "Configure Shortcuts"
@@ -1347,31 +1347,31 @@ msgstr "設定快速鍵"
 
 #: internet/spotify/spotifyservice.cpp:927
 msgid "Configure Spotify..."
-msgstr "設定 Spotify..."
+msgstr "設定 Spotify…"
 
 #: internet/subsonic/subsonicservice.cpp:152
 msgid "Configure Subsonic..."
-msgstr "設定 Subsonic..."
+msgstr "設定 Subsonic…"
 
 #: globalsearch/globalsearchview.cpp:152 globalsearch/globalsearchview.cpp:481
 msgid "Configure global search..."
-msgstr "設定全域搜尋..."
+msgstr "設定全域搜尋…"
 
 #: ui/mainwindow.cpp:668
 msgid "Configure library..."
-msgstr "設定音樂庫"
+msgstr "設定媒體櫃"
 
 #: internet/podcasts/addpodcastdialog.cpp:80
 #: internet/podcasts/podcastservice.cpp:461
 msgid "Configure podcasts..."
-msgstr "設定 podcasts..."
+msgstr "設定 podcasts…"
 
 #: internet/core/cloudfileservice.cpp:107
 #: internet/digitally/digitallyimportedservicebase.cpp:184
 #: internet/googledrive/googledriveservice.cpp:235
 #: ../bin/src/ui_globalsearchsettingspage.h:146
 msgid "Configure..."
-msgstr "設定..."
+msgstr "設定…"
 
 #: ../bin/src/ui_wiimotesettingspage.h:176
 msgid "Connect Wii Remotes using active/deactive action"
@@ -1431,12 +1431,12 @@ msgstr "複製到剪貼簿"
 #: library/libraryview.cpp:419 internet/podcasts/podcastservice.cpp:444
 #: ui/mainwindow.cpp:728 widgets/fileviewlist.cpp:44
 msgid "Copy to device..."
-msgstr "複製到裝置..."
+msgstr "複製到裝置…"
 
 #: devices/deviceview.cpp:225 ui/mainwindow.cpp:718
 #: widgets/fileviewlist.cpp:40
 msgid "Copy to library..."
-msgstr "複製到音樂庫"
+msgstr "複製到媒體櫃"
 
 #: ../bin/src/ui_podcastinfowidget.h:193
 msgid "Copyright"
@@ -1571,7 +1571,7 @@ msgstr "自訂訊息設定"
 
 #: ../bin/src/ui_notificationssettingspage.h:464
 msgid "Custom..."
-msgstr "自訂..."
+msgstr "自訂…"
 
 #: devices/devicekitlister.cpp:125 devices/udisks2lister.cpp:81
 msgid "D-Bus path"
@@ -1657,12 +1657,12 @@ msgstr "刪除檔案"
 
 #: devices/deviceview.cpp:229
 msgid "Delete from device..."
-msgstr "從裝置中刪除..."
+msgstr "從裝置中刪除…"
 
 #: library/libraryview.cpp:422 ui/mainwindow.cpp:731
 #: widgets/fileviewlist.cpp:47
 msgid "Delete from disk..."
-msgstr "從硬碟中刪除 ..."
+msgstr "從硬碟中刪除 …"
 
 #: ../bin/src/ui_podcastsettingspage.h:268
 msgid "Delete played episodes"
@@ -1707,7 +1707,7 @@ msgstr "目的地"
 
 #: ../bin/src/ui_transcodedialog.h:234
 msgid "Details..."
-msgstr "詳情..."
+msgstr "詳情…"
 
 #: devices/devicekitlister.cpp:128 devices/giolister.cpp:174
 msgid "Device"
@@ -1723,7 +1723,7 @@ msgstr "裝置名稱"
 
 #: devices/deviceview.cpp:209
 msgid "Device properties..."
-msgstr "裝置屬性..."
+msgstr "裝置屬性…"
 
 #: ui/mainwindow.cpp:283
 msgid "Devices"
@@ -1799,7 +1799,7 @@ msgstr "顯示螢幕上的顯示"
 
 #: ../bin/src/ui_mainwindow.h:764
 msgid "Do a full library rescan"
-msgstr "做一個完整的音樂庫重新掃描"
+msgstr "完整的重新掃描媒體櫃"
 
 #: internet/googledrive/googledriveservice.cpp:274
 #: internet/googledrive/googledriveservice.cpp:280
@@ -1861,7 +1861,7 @@ msgstr "對播放清單中的歌曲按兩下則…"
 
 #: ../bin/src/ui_behavioursettingspage.h:425
 msgid "Double clicking a song will..."
-msgstr "對一首歌曲按兩下則..."
+msgstr "對一首歌曲按兩下則…"
 
 #: internet/podcasts/podcastservice.cpp:550
 #, c-format, qt-plural-format
@@ -1904,7 +1904,7 @@ msgstr "下載此專輯"
 
 #: internet/jamendo/jamendoservice.cpp:424
 msgid "Download this album..."
-msgstr "下載此專輯..."
+msgstr "下載此專輯…"
 
 #: internet/podcasts/podcastservice.cpp:552
 msgid "Download this episode"
@@ -1912,7 +1912,7 @@ msgstr "下載這個片斷內容"
 
 #: ../bin/src/ui_spotifysettingspage.h:214
 msgid "Download..."
-msgstr "下載..."
+msgstr "下載…"
 
 #: internet/podcasts/podcastservice.cpp:302
 #: internet/podcasts/podcastservice.cpp:342
@@ -1966,7 +1966,7 @@ msgstr "動態隨機混合"
 
 #: library/libraryview.cpp:408
 msgid "Edit smart playlist..."
-msgstr "編輯智慧型播放清單..."
+msgstr "編輯智慧型播放清單…"
 
 #: ui/mainwindow.cpp:1904
 #, qt-format
@@ -1975,7 +1975,7 @@ msgstr ""
 
 #: ../bin/src/ui_mainwindow.h:733
 msgid "Edit tag..."
-msgstr "編輯標籤 ..."
+msgstr "編輯標籤 …"
 
 #: ../bin/src/ui_edittagdialog.h:733
 msgid "Edit tags"
@@ -1988,15 +1988,15 @@ msgstr "編輯音軌資訊"
 #: library/libraryview.cpp:427 widgets/fileviewlist.cpp:51
 #: ../bin/src/ui_mainwindow.h:730
 msgid "Edit track information..."
-msgstr "編輯音軌資訊..."
+msgstr "編輯音軌資訊…"
 
 #: library/libraryview.cpp:430
 msgid "Edit tracks information..."
-msgstr "編輯音軌資訊..."
+msgstr "編輯音軌資訊…"
 
 #: internet/internetradio/savedradio.cpp:110
 msgid "Edit..."
-msgstr "編輯..."
+msgstr "編輯…"
 
 #: ../bin/src/ui_seafilesettingspage.h:171
 msgid "Email"
@@ -2324,7 +2324,7 @@ msgstr "取得完成"
 
 #: internet/subsonic/subsonicservice.cpp:299
 msgid "Fetching Subsonic library"
-msgstr ""
+msgstr "下載 Subsonic 媒體櫃中"
 
 #: ui/coverfromurldialog.cpp:70 ui/coverfromurldialog.cpp:82
 msgid "Fetching cover error"
@@ -2383,7 +2383,7 @@ msgstr "要轉碼的檔案"
 
 #: smartplaylists/querywizardplugin.cpp:82
 msgid "Find songs in your library that match the criteria you specify."
-msgstr "在您的歌曲庫裡找到符合您指定的歌曲。"
+msgstr "在媒體櫃中找到符合條件的歌曲。"
 
 #: musicbrainz/tagfetcher.cpp:58
 msgid "Fingerprinting song"
@@ -2552,7 +2552,7 @@ msgstr "反灰播放清單中不存在的歌曲"
 
 #: ../bin/src/ui_groupbydialog.h:123
 msgid "Group Library by..."
-msgstr "歸類音樂庫依..."
+msgstr "依據…歸類媒體櫃"
 
 #: globalsearch/globalsearchview.cpp:478 library/libraryfilterwidget.cpp:84
 msgid "Group by"
@@ -2745,7 +2745,7 @@ msgstr ""
 
 #: internet/subsonic/subsonicsettingspage.cpp:156
 msgid "Incomplete configuration, please ensure all fields are populated."
-msgstr ""
+msgstr "不完整的設定狀態，請確定所有的領域名稱都已經上傳。"
 
 #: core/commandlineoptions.cpp:164
 msgid "Increase the volume by 4 percent"
@@ -2774,7 +2774,7 @@ msgstr ""
 
 #: ../bin/src/ui_organisedialog.h:254
 msgid "Insert..."
-msgstr "插入..."
+msgstr "插入…"
 
 #: internet/spotify/spotifysettingspage.cpp:75
 msgid "Installed"
@@ -2872,14 +2872,14 @@ msgstr "跳轉到目前播放的曲目"
 #: wiimotedev/wiimoteshortcutgrabber.cpp:72
 #, qt-format
 msgid "Keep buttons for %1 second..."
-msgstr "按住按鈕 %1 秒..."
+msgstr "按住按鈕 %1 秒…"
 
 #: wiimotedev/wiimoteshortcutgrabber.cpp:75
 #: wiimotedev/wiimoteshortcutgrabber.cpp:117
 #: ../bin/src/ui_wiimoteshortcutgrabber.h:123
 #, qt-format
 msgid "Keep buttons for %1 seconds..."
-msgstr "按住按鈕 %1 秒..."
+msgstr "按住按鈕 %1 秒…"
 
 #: ../bin/src/ui_behavioursettingspage.h:393
 msgid "Keep running in the background when the window is closed"
@@ -2975,19 +2975,19 @@ msgstr "長度"
 #: ui/mainwindow.cpp:255 ui/mainwindow.cpp:270
 #: ../bin/src/ui_seafilesettingspage.h:177
 msgid "Library"
-msgstr "音樂庫"
+msgstr "媒體櫃"
 
 #: ../bin/src/ui_groupbydialog.h:121
 msgid "Library advanced grouping"
-msgstr "音樂庫進階的歸類"
+msgstr "進階媒體櫃歸類"
 
 #: ui/mainwindow.cpp:2770
 msgid "Library rescan notice"
-msgstr "音樂庫重新掃描提示"
+msgstr "媒體櫃重新掃描通知"
 
 #: smartplaylists/querywizardplugin.cpp:79
 msgid "Library search"
-msgstr "音樂庫搜尋"
+msgstr "媒體櫃搜尋"
 
 #: ../bin/src/ui_querysortpage.h:141
 msgid "Limits"
@@ -3007,7 +3007,7 @@ msgstr "從網址載入封面"
 
 #: ui/albumcoverchoicecontroller.cpp:70
 msgid "Load cover from URL..."
-msgstr "從網址載入封面..."
+msgstr "從網址載入封面…"
 
 #: ui/albumcoverchoicecontroller.cpp:110
 msgid "Load cover from disk"
@@ -3015,7 +3015,7 @@ msgstr "從磁碟載入封面"
 
 #: ui/albumcoverchoicecontroller.cpp:65
 msgid "Load cover from disk..."
-msgstr "從磁碟載入封面..."
+msgstr "從磁碟載入封面…"
 
 #: playlist/playlistcontainer.cpp:315
 msgid "Load playlist"
@@ -3023,7 +3023,7 @@ msgstr "載入播放清單"
 
 #: ../bin/src/ui_mainwindow.h:756
 msgid "Load playlist..."
-msgstr "載入播放清單..."
+msgstr "載入播放清單…"
 
 #: devices/mtploader.cpp:42
 msgid "Loading MTP device"
@@ -3060,7 +3060,7 @@ msgstr "載入音軌資訊"
 #: widgets/widgetfadehelper.cpp:96 ../bin/src/ui_addpodcastdialog.h:179
 #: ../bin/src/ui_searchpreview.h:105 ../bin/src/ui_organisedialog.h:261
 msgid "Loading..."
-msgstr "載入中..."
+msgstr "載入中…"
 
 #: core/commandlineoptions.cpp:177
 msgid "Loads files/URLs, replacing current playlist"
@@ -3261,7 +3261,7 @@ msgstr "樣本"
 
 #: ../bin/src/ui_librarysettingspage.h:191
 msgid "Monitor the library for changes"
-msgstr "監視音樂庫的變化"
+msgstr "監視媒體櫃的變化"
 
 #: core/song.cpp:460
 msgid "Monkey's Audio"
@@ -3307,7 +3307,7 @@ msgstr "下移"
 
 #: ui/mainwindow.cpp:721 widgets/fileviewlist.cpp:42
 msgid "Move to library..."
-msgstr "移到音樂庫..."
+msgstr "移到媒體櫃…"
 
 #: ../bin/src/ui_globalsearchsettingspage.h:144
 #: ../bin/src/ui_queuemanager.h:139 ../bin/src/ui_songinfosettingspage.h:160
@@ -3320,7 +3320,7 @@ msgstr "音樂"
 
 #: ../bin/src/ui_librarysettingspage.h:185
 msgid "Music Library"
-msgstr "音樂庫"
+msgstr "媒體櫃"
 
 #: core/globalshortcuts.cpp:65 wiimotedev/wiimotesettingspage.cpp:113
 #: ../bin/src/ui_mainwindow.h:763
@@ -3428,7 +3428,7 @@ msgstr "無長區塊"
 #: playlist/playlistcontainer.cpp:408
 msgid ""
 "No matches found.  Clear the search box to show the whole playlist again."
-msgstr "沒有找到符合的.清除搜尋框，再次顯示整個播放清單"
+msgstr "沒有找到符合的結果。請清除搜尋內容以再次顯示整個播放清單。"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:144
 msgid "No short blocks"
@@ -3582,7 +3582,7 @@ msgstr "在瀏覽器中開啟 %1"
 
 #: ../bin/src/ui_mainwindow.h:740
 msgid "Open &audio CD..."
-msgstr "開啟音樂光碟(&A)..."
+msgstr "開啟音樂光碟(&A)…"
 
 #: internet/podcasts/addpodcastdialog.cpp:249
 msgid "Open OPML file"
@@ -3602,7 +3602,7 @@ msgstr "開啟裝置"
 
 #: ../bin/src/ui_mainwindow.h:739
 msgid "Open file..."
-msgstr "開啟檔案..."
+msgstr "開啟檔案…"
 
 #: internet/googledrive/googledriveservice.cpp:221
 msgid "Open in Google Drive"
@@ -3626,7 +3626,7 @@ msgstr ""
 #: ../bin/src/ui_globalshortcutssettingspage.h:180
 #: ../bin/src/ui_globalshortcutssettingspage.h:182
 msgid "Open..."
-msgstr "開啟..."
+msgstr "開啟…"
 
 #: internet/lastfm/lastfmservice.cpp:275
 msgid "Operation failed"
@@ -3644,7 +3644,7 @@ msgstr "最佳化品質"
 #: ../bin/src/ui_networkremotesettingspage.h:251
 #: ../bin/src/ui_ripcddialog.h:321
 msgid "Options..."
-msgstr "選項..."
+msgstr "選項…"
 
 #: ../bin/src/ui_transcodersettingspage.h:180
 msgid "Opus"
@@ -3656,7 +3656,7 @@ msgstr "組織檔案"
 
 #: library/libraryview.cpp:416 ui/mainwindow.cpp:724
 msgid "Organise files..."
-msgstr "組織檔案..."
+msgstr "組織檔案…"
 
 #: core/organise.cpp:73
 msgid "Organising files"
@@ -4005,7 +4005,7 @@ msgstr "品質"
 
 #: ../bin/src/ui_deviceproperties.h:382
 msgid "Querying device..."
-msgstr "查詢裝置..."
+msgstr "查詢裝置…"
 
 #: ../bin/src/ui_queuemanager.h:137 ../bin/src/ui_mainwindow.h:761
 msgid "Queue Manager"
@@ -4178,7 +4178,7 @@ msgstr "重新命名播放清單"
 
 #: ../bin/src/ui_mainwindow.h:731
 msgid "Renumber tracks in this order..."
-msgstr "按此順序重新為歌曲編號..."
+msgstr "按此順序重新為歌曲編號…"
 
 #: playlist/playlistsequence.cpp:207 ../bin/src/ui_playlistsequence.h:121
 msgid "Repeat"
@@ -4313,7 +4313,7 @@ msgstr "取樣頻率"
 
 #: ../bin/src/ui_appearancesettingspage.h:321
 msgid "Save .mood files in your music library"
-msgstr ""
+msgstr "儲存媒體櫃中的 .mood 檔案"
 
 #: ui/albumcoverchoicecontroller.cpp:135
 msgid "Save album cover"
@@ -4321,7 +4321,7 @@ msgstr "儲存專輯封面"
 
 #: ui/albumcoverchoicecontroller.cpp:68
 msgid "Save cover to disk..."
-msgstr "儲存封面到磁碟..."
+msgstr "儲存封面到磁碟…"
 
 #: ../bin/src/ui_libraryfilterwidget.h:101
 msgid "Save current grouping"
@@ -4434,7 +4434,7 @@ msgstr ""
 
 #: ui/albumcoverchoicecontroller.cpp:73
 msgid "Search for album covers..."
-msgstr "搜尋專輯封面..."
+msgstr "搜尋專輯封面…"
 
 #: ../bin/src/ui_globalsearchview.h:207
 #: ../bin/src/ui_playlistlistcontainer.h:127
@@ -4532,7 +4532,7 @@ msgstr "選取視覺化"
 
 #: visualisations/visualisationcontainer.cpp:124
 msgid "Select visualizations..."
-msgstr "選取視覺化..."
+msgstr "選取視覺化…"
 
 #: ../bin/src/ui_transcodedialog.h:232 ../bin/src/ui_ripcddialog.h:318
 msgid "Select..."
@@ -4561,7 +4561,7 @@ msgstr "服務離線"
 #: ui/mainwindow.cpp:1903
 #, qt-format
 msgid "Set %1 to \"%2\"..."
-msgstr "設定 %1 到「%2」..."
+msgstr "設定 %1 到「%2」…"
 
 #: core/commandlineoptions.cpp:163
 msgid "Set the volume to <value> percent"
@@ -4569,7 +4569,7 @@ msgstr "設定音量到百分之<value>"
 
 #: ../bin/src/ui_mainwindow.h:732
 msgid "Set value for all selected tracks..."
-msgstr "為所有選擇的歌曲設定音量..."
+msgstr "為所有選擇的歌曲設定音量…"
 
 #: ../bin/src/ui_networkremotesettingspage.h:223
 msgid "Settings"
@@ -4648,7 +4648,7 @@ msgstr "顯示所有的歌曲"
 
 #: ../bin/src/ui_librarysettingspage.h:208
 msgid "Show cover art in library"
-msgstr "在音樂庫（側邊欄）中顯示封面圖片"
+msgstr "在媒體櫃中顯示封面圖片"
 
 #: ../bin/src/ui_librarysettingspage.h:209
 msgid "Show dividers"
@@ -4656,12 +4656,12 @@ msgstr "顯示分隔線"
 
 #: ui/albumcoverchoicecontroller.cpp:77 widgets/prettyimage.cpp:184
 msgid "Show fullsize..."
-msgstr "全螢幕..."
+msgstr "全螢幕…"
 
 #: library/libraryview.cpp:433 ui/mainwindow.cpp:734
 #: widgets/fileviewlist.cpp:53
 msgid "Show in file browser..."
-msgstr "在檔案瀏覽器顯示..."
+msgstr "在檔案瀏覽器顯示…"
 
 #: ui/mainwindow.cpp:736
 msgid "Show in library..."
@@ -4745,7 +4745,7 @@ msgstr "登出"
 
 #: ../bin/src/ui_loginstatewidget.h:171
 msgid "Signing in..."
-msgstr "登錄..."
+msgstr "登錄…"
 
 #: ../bin/src/ui_albumcoverexport.h:211
 msgid "Size"
@@ -4909,7 +4909,7 @@ msgstr "標記星號 %1"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:129
 msgid "Starting..."
-msgstr "開啟..."
+msgstr "開啟…"
 
 #: core/globalshortcuts.cpp:55 wiimotedev/wiimotesettingspage.cpp:108
 #: ../bin/src/ui_mainwindow.h:721
@@ -4918,7 +4918,7 @@ msgstr "停止"
 
 #: wiimotedev/wiimotesettingspage.cpp:121
 msgid "Stop after"
-msgstr "在...之後停止"
+msgstr "在…之後停止"
 
 #: ../bin/src/ui_playlistsequence.h:114
 msgid "Stop after each track"
@@ -5100,7 +5100,7 @@ msgstr ""
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
-msgstr "方才更新的 Clementine 因為以下新的功能，需要對音樂庫做完整的重新掃描："
+msgstr "方才更新的 Clementine 因為以下新的功能，需要對媒體櫃做完整的重新掃描："
 
 #: library/libraryview.cpp:585
 msgid "There are other songs in this album"
@@ -5146,7 +5146,7 @@ msgstr ""
 
 #: ../bin/src/ui_librarysettingspage.h:186
 msgid "These folders will be scanned for music to make up your library"
-msgstr "這些資料夾將被掃描是否有音樂檔，以建構您的音樂庫"
+msgstr "這些資料夾將被掃描是否有音樂檔，以建構您的媒體櫃"
 
 #: ../bin/src/ui_transcodersettingspage.h:173
 msgid ""
@@ -5397,11 +5397,11 @@ msgstr "更新全部的 podcasts"
 
 #: ../bin/src/ui_mainwindow.h:759
 msgid "Update changed library folders"
-msgstr "更新改變的音樂庫資料夾"
+msgstr "更新改變的媒體櫃資料夾"
 
 #: ../bin/src/ui_librarysettingspage.h:190
 msgid "Update the library when Clementine starts"
-msgstr "當啟動 Clementine 時，更新音樂庫"
+msgstr "當啟動 Clementine 時，更新媒體櫃"
 
 #: internet/podcasts/podcastservice.cpp:430
 msgid "Update this podcast"
@@ -5419,11 +5419,11 @@ msgstr "更新 %1"
 #: devices/deviceview.cpp:103
 #, qt-format
 msgid "Updating %1%..."
-msgstr "更新 %1%..."
+msgstr "更新 %1%…"
 
 #: library/librarywatcher.cpp:100
 msgid "Updating library"
-msgstr "正在更新音樂庫"
+msgstr "正在更新媒體櫃"
 
 #: core/commandlineoptions.cpp:155
 msgid "Usage"
@@ -5523,7 +5523,7 @@ msgstr "使用者名稱"
 
 #: ../bin/src/ui_behavioursettingspage.h:412
 msgid "Using the menu to add a song will..."
-msgstr "使用選單加入的歌曲將..."
+msgstr "使用選單加入的歌曲將…"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:138
 #: ../bin/src/ui_magnatunesettingspage.h:172
@@ -5779,13 +5779,13 @@ msgstr "您已登錄。"
 
 #: ../bin/src/ui_groupbydialog.h:122
 msgid "You can change the way the songs in the library are organised."
-msgstr "您可以改變音樂庫中歌曲的組織方式。"
+msgstr "您可以改變媒體櫃中歌曲的整理方法。"
 
 #: internet/magnatune/magnatunesettingspage.cpp:59
 msgid ""
 "You can listen to Magnatune songs for free without an account.  Purchasing a"
 " membership removes the messages at the end of each track."
-msgstr "您可以免費聽 Magnatune 的歌曲，而不需要一個帳戶。而當您購買成為會員時，每首歌曲後的廣告訊息將刪除."
+msgstr "您可以不註冊而免費聽 Magnatune 上的歌曲。而當您繳費成為會員後，每首歌曲末的廣告訊息將刪除。"
 
 #: ../bin/src/ui_backgroundstreamssettingspage.h:56
 msgid "You can listen to background streams at the same time as other music."
@@ -5841,7 +5841,7 @@ msgstr "您的 Magnatune 的憑證是不正確的"
 
 #: library/libraryview.cpp:358
 msgid "Your library is empty!"
-msgstr "您的音樂庫是空的！"
+msgstr "您的媒體櫃是空的！"
 
 #: globalsearch/savedradiosearchprovider.cpp:26
 #: internet/internetradio/savedradio.cpp:53
@@ -5936,7 +5936,7 @@ msgstr ""
 
 #: smartplaylists/searchterm.cpp:253
 msgid "ends with"
-msgstr "以...結尾"
+msgstr "以…結尾"
 
 #: smartplaylists/searchterm.cpp:259
 msgid "equals"
@@ -6047,7 +6047,7 @@ msgstr ""
 
 #: smartplaylists/searchterm.cpp:251
 msgid "starts with"
-msgstr "以...開始"
+msgstr "以…開始"
 
 #: playlist/playlistdelegates.cpp:180
 msgid "stop"
