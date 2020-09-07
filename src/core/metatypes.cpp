@@ -39,6 +39,7 @@
 #include "internet/podcasts/podcastepisode.h"
 #include "internet/somafm/somafmservice.h"
 #include "library/directory.h"
+#include "playlist/songtracker.h"
 #include "playlist/playlist.h"
 #include "songinfo/collapsibleinfopane.h"
 #include "ui/equalizer.h"
@@ -65,6 +66,7 @@ void RegisterMetaTypes() {
   qRegisterMetaType<Engine::State>("Engine::State");
   qRegisterMetaType<Engine::TrackChangeFlags>("Engine::TrackChangeFlags");
   qRegisterMetaType<Equalizer::Params>("Equalizer::Params");
+  qRegisterMetaType<TrackingResult>("TrackingResult");
   qRegisterMetaType<Geolocator::LatLng>("Geolocator::LatLng");
   qRegisterMetaType<GstBuffer*>("GstBuffer*");
   qRegisterMetaType<GstElement*>("GstElement*");

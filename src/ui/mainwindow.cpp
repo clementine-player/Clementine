@@ -438,6 +438,8 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
           app_->playlist_manager(), SLOT(RemoveDuplicatesCurrent()));
   connect(ui_->action_remove_unavailable, SIGNAL(triggered()),
           app_->playlist_manager(), SLOT(RemoveUnavailableCurrent()));
+  connect(ui_->action_track_songs, SIGNAL(toggled(bool)),
+          app_->playlist_manager(),  SLOT(SetSongTracking(bool)));
   connect(ui_->action_remove_from_playlist, SIGNAL(triggered()),
           SLOT(PlaylistRemoveCurrent()));
   connect(ui_->action_toggle_show_sidebar, SIGNAL(toggled(bool)),
@@ -974,6 +976,8 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
   LastFMButtonVisibilityChanged(false);
   ScrobbleButtonVisibilityChanged(false);
 #endif
+
+  ui_->action_track_songs->setChecked(app_->playlist_manager()->IsSongTracking());
 
   // Load settings
   qLog(Debug) << "Loading settings";

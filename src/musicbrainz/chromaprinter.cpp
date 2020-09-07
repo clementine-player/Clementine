@@ -28,6 +28,7 @@
 
 #include "core/logging.h"
 #include "core/signalchecker.h"
+#include "core/timeconstants.h"
 
 #ifndef u_int32_t
 typedef unsigned int u_int32_t;
@@ -35,11 +36,10 @@ typedef unsigned int u_int32_t;
 
 static const int kDecodeRate = 11025;
 static const int kDecodeChannels = 1;
-static const int kPlayLengthSecs = 30;
 static const int kTimeoutSecs = 10;
 
 Chromaprinter::Chromaprinter(const QString& filename)
-    : filename_(filename), convert_element_(nullptr) {}
+    : filename_(filename), convert_element_(nullptr), length_(-1) {}
 
 Chromaprinter::~Chromaprinter() {}
 
@@ -57,11 +57,12 @@ GstElement* Chromaprinter::CreateElement(const QString& factory_name,
   return ret;
 }
 
-QString Chromaprinter::CreateFingerprint() {
+QString Chromaprinter::CreateFingerprint(int play_length_secs, bool resample_format) {
   Q_ASSERT(QThread::currentThread() != qApp->thread());
 
   buffer_.open(QIODevice::WriteOnly);
 
+  // Create elements
   GstElement* pipeline = gst_pipeline_new("pipeline");
   GstElement* src = CreateElement("filesrc", pipeline);
   GstElement* decode = CreateElement("decodebin", pipeline);
@@ -80,12 +81,20 @@ QString Chromaprinter::CreateFingerprint() {
   gst_element_link_many(convert, resample, nullptr);
 
   // Chromaprint expects mono 16-bit ints at a sample rate of 11025Hz.
-  GstCaps* caps = gst_caps_new_simple(
-      "audio/x-raw", "format", G_TYPE_STRING, "S16LE", "channels", G_TYPE_INT,
-      kDecodeChannels, "rate", G_TYPE_INT, kDecodeRate, NULL);
+  GstStructure* caps_args = gst_structure_new(
+      "audio/x-raw",
+      "channels", G_TYPE_INT, kDecodeChannels,
+      "rate", G_TYPE_INT, kDecodeRate,
+      NULL);
+
+  if (resample_format)
+    gst_structure_set(caps_args, "format", G_TYPE_STRING, "S16LE", NULL);
+
+  GstCaps* caps = gst_caps_new_full(caps_args, NULL);
   gst_element_link_filtered(resample, sink, caps);
   gst_caps_unref(caps);
 
+  // Set callback to fill buffer
   GstAppSinkCallbacks callbacks;
   memset(&callbacks, 0, sizeof(callbacks));
   callbacks.new_sample = NewBufferCallback;
@@ -107,7 +116,7 @@ QString Chromaprinter::CreateFingerprint() {
   gst_element_get_state(pipeline, nullptr, nullptr, kTimeoutSecs * GST_SECOND);
   gst_element_seek(pipeline, 1.0, GST_FORMAT_TIME, GST_SEEK_FLAG_FLUSH,
                    GST_SEEK_TYPE_SET, 0 * GST_SECOND, GST_SEEK_TYPE_SET,
-                   kPlayLengthSecs * GST_SECOND);
+                   play_length_secs * GST_SECOND);
 
   QElapsedTimer time;
   time.start();
@@ -140,6 +149,12 @@ QString Chromaprinter::CreateFingerprint() {
   int decode_time = time.restart();
 
   buffer_.close();
+
+  // Get track length
+  // NOTE: works reliable only after playing; precision is only milliseconds
+  gint64 length_nSecs = 0;
+  gst_element_query_duration(pipeline, GST_FORMAT_TIME, &length_nSecs);
+  length_ = length_nSecs / kNsecPerMsec;
 
   // Generate fingerprint from recorded buffer data
   QByteArray data = buffer_.data();

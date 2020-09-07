@@ -519,6 +519,7 @@
     <addaction name="action_shuffle"/>
     <addaction name="action_remove_duplicates"/>
     <addaction name="action_remove_unavailable"/>
+    <addaction name="action_track_songs"/>
    </widget>
    <widget class="QMenu" name="menu_help">
     <property name="title">
@@ -943,6 +944,14 @@
    </property>
    <property name="toolTip">
     <string>Show or hide the sidebar</string>
+   </property>
+  </action>
+  <action name="action_track_songs">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Detect file name changes</string>
    </property>
   </action>
  </widget>
