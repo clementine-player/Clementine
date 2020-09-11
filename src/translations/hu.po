@@ -18,7 +18,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2020-08-17 06:30+0000\n"
+"PO-Revision-Date: 2020-09-10 11:46+0000\n"
 "Last-Translator: Balázs Meskó <meskobalazs@mailbox.org>\n"
 "Language-Team: Hungarian (http://www.transifex.com/davidsansome/clementine/language/hu/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -493,7 +493,7 @@ msgstr "Podcast hozzáadása"
 
 #: ../bin/src/ui_addstreamdialog.h:112
 msgid "Add Stream"
-msgstr "Adatfolyam hozzáadása"
+msgstr "Közvetítés hozzáadása"
 
 #: ../bin/src/ui_notificationssettingspage.h:430
 msgid "Add a new line if supported by the notification type"
@@ -509,7 +509,7 @@ msgstr "Minden szám hozzáadása a mappából és almappáiból"
 
 #: internet/internetradio/savedradio.cpp:114
 msgid "Add another stream..."
-msgstr "Új adatfolyam hozzáadása"
+msgstr "Új közvetítés hozzáadása"
 
 #: library/librarysettingspage.cpp:67 ../bin/src/ui_transcodedialog.h:222
 msgid "Add directory..."
@@ -630,7 +630,7 @@ msgstr "Szám éve címke hozzáadása"
 
 #: ../bin/src/ui_mainwindow.h:738
 msgid "Add stream..."
-msgstr "Adatfolyam hozzáadása…"
+msgstr "Közvetítés hozzáadása…"
 
 #: internet/spotify/spotifyservice.cpp:626
 msgid "Add to Spotify playlists"
@@ -939,7 +939,7 @@ msgstr "BPM"
 
 #: ../bin/src/ui_backgroundstreamssettingspage.h:55
 msgid "Background Streams"
-msgstr "Háttér-adatfolyamok"
+msgstr "Háttér-közvetítések"
 
 #: ../bin/src/ui_notificationssettingspage.h:459
 msgid "Background color"
@@ -2084,7 +2084,7 @@ msgstr "Adja meg a keresési kifejezést"
 
 #: ../bin/src/ui_addstreamdialog.h:113
 msgid "Enter the URL of an internet radio stream:"
-msgstr "Adja meg egy rádió adatfolyam URL címét:"
+msgstr "Adja meg egy rádióközvetítés URL-címét:"
 
 #: playlist/playlistlistcontainer.cpp:261
 msgid "Enter the name of the folder"
@@ -2526,7 +2526,7 @@ msgstr "Csatornák betöltése"
 
 #: internet/digitally/digitallyimportedservicebase.cpp:102
 msgid "Getting streams"
-msgstr "Adatfolyamok lekérése"
+msgstr "Kötvetítések lekérése"
 
 #: ../bin/src/ui_addstreamdialog.h:115
 msgid "Give it a name:"
@@ -3053,7 +3053,7 @@ msgstr "Számok betöltése"
 #: internet/somafm/somafmurlhandler.cpp:53
 #: internet/intergalacticfm/intergalacticfmurlhandler.cpp:56
 msgid "Loading stream"
-msgstr "Adatfolyam betöltése"
+msgstr "Közvetítés betöltése"
 
 #: playlist/songloaderinserter.cpp:134 ui/edittagdialog.cpp:251
 msgid "Loading tracks"
@@ -4115,7 +4115,7 @@ msgstr "Állomáslista frissítése"
 
 #: internet/digitally/digitallyimportedservicebase.cpp:180
 msgid "Refresh streams"
-msgstr "Adatfolyamok frissítése"
+msgstr "Közvetítések frissítése"
 
 #: ui/equalizer.cpp:146
 msgid "Reggae"
@@ -4367,7 +4367,7 @@ msgstr "Statisztikák mentése a fájl címkéibe, ha lehetséges"
 
 #: ../bin/src/ui_addstreamdialog.h:114
 msgid "Save this stream in the Internet tab"
-msgstr "Adatfolyam mentése az Internet fül alá"
+msgstr "Közvetítés mentése az Internet fül alá"
 
 #: ../bin/src/ui_savedgroupingmanager.h:101
 msgid "Saved Grouping Manager"
@@ -4967,11 +4967,11 @@ msgstr "Leállítva"
 
 #: core/song.cpp:463
 msgid "Stream"
-msgstr "Adatfolyam"
+msgstr "Közvetítés"
 
 #: ../bin/src/ui_streamdetailsdialog.h:133
 msgid "Stream Details"
-msgstr "Adatfolyam részletei"
+msgstr "Közvetítés részletei"
 
 #: internet/subsonic/subsonicsettingspage.cpp:52
 msgid ""
@@ -5558,7 +5558,7 @@ msgstr "Kiszolgáló tanúsítványának ellenőrzése"
 #: ui/about.cpp:35
 #, qt-format
 msgid "Version %1"
-msgstr "%1 Verzió"
+msgstr "%1 verzió"
 
 #: ../bin/src/ui_albumcovermanager.h:225
 msgid "View"
@@ -5566,7 +5566,7 @@ msgstr "Nézet"
 
 #: ../bin/src/ui_mainwindow.h:775
 msgid "View Stream Details"
-msgstr "Adatfolyam részleteinek megtekintése"
+msgstr "Közvetítés részleteinek megtekintése"
 
 #: ../bin/src/ui_visualisationselector.h:108
 msgid "Visualization mode"
@@ -5679,7 +5679,7 @@ msgstr "Wii távvezérlő %1: deaktiválva"
 #: widgets/osd.cpp:261
 #, qt-format
 msgid "Wii Remote %1: disconnected"
-msgstr "Wii távvezérlő %1: lekapcsolódva"
+msgstr "Wii távvezérlő %1: kapcsolat bontva"
 
 #: widgets/osd.cpp:267
 #, qt-format
@@ -5718,11 +5718,11 @@ msgstr "Szeretné a többi számot ebből az albumból áthelyezni a Vegyes elő
 
 #: ui/mainwindow.cpp:2768
 msgid "Would you like to run a full rescan right now?"
-msgstr "Akarsz futtatni egy teljes újraolvasást most?"
+msgstr "Szeretne most teljes újraolvasást végezni?"
 
 #: library/librarysettingspage.cpp:154
 msgid "Write all songs statistics into songs' files"
-msgstr "Minde szám statisztikájának mentése zenefájlokba"
+msgstr "Minden szám statisztikájának mentése a zenefájlokba"
 
 #: ../bin/src/ui_behavioursettingspage.h:457
 msgid "Write metadata"
@@ -5742,11 +5742,11 @@ msgstr "Év"
 #: library/savedgroupingmanager.cpp:68 ../bin/src/ui_groupbydialog.h:136
 #: ../bin/src/ui_groupbydialog.h:155 ../bin/src/ui_groupbydialog.h:174
 msgid "Year - Album"
-msgstr "Év - Album"
+msgstr "Év – Album"
 
 #: playlist/playlist.cpp:1391
 msgid "Year - original"
-msgstr ""
+msgstr "Év – eredeti"
 
 #: smartplaylists/searchterm.cpp:425
 msgid "Years"
@@ -5758,32 +5758,32 @@ msgstr "Tegnap"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:128
 msgid "You are about to download the following albums"
-msgstr "A következő albumokat készül letölteni"
+msgstr "A következő albumok letöltésére készül"
 
 #: playlist/playlistlistcontainer.cpp:430
 #, qt-format
 msgid ""
 "You are about to remove %1 playlists from your favorites, are you sure?"
-msgstr "Biztos, hogy törölni szeretnéd a(z) %1 lejátszólistát a kedvencek közül?"
+msgstr "Biztos, hogy törölni szeretné a(z) %1 lejátszólistát a kedvencek közül?"
 
 #: playlist/playlisttabbar.cpp:186
 msgid ""
 "You are about to remove a playlist which is not part of your favorite playlists: the playlist will be deleted (this action cannot be undone). \n"
 "Are you sure you want to continue?"
-msgstr "A lejátszólista nem tartozik a kedvencek közé, a törléssel a listát nem lehet visszaállítani.\nBiztos, hogy folytatod?"
+msgstr "Egy nem a kedvencek közé tartozó lejátszólista törlésére készül: a lejátszólista törölve lesz (a művelet nem vonható vissza).\nBiztos, hogy folytatja?"
 
 #: ../bin/src/ui_loginstatewidget.h:168
 msgid "You are not signed in."
-msgstr "Nem vagy bejelentkezve."
+msgstr "Nincs bejelentkezve."
 
 #: widgets/loginstatewidget.cpp:77
 #, qt-format
 msgid "You are signed in as %1."
-msgstr "Be vagy jelentkezve, mint %1."
+msgstr "Bejelentkezett, mint %1."
 
 #: widgets/loginstatewidget.cpp:74
 msgid "You are signed in."
-msgstr "Be vagy jelentkezve."
+msgstr "Bejelentkezett."
 
 #: ../bin/src/ui_groupbydialog.h:122
 msgid "You can change the way the songs in the library are organised."
@@ -5797,18 +5797,18 @@ msgstr "Hallgathat Magnatune számokat ingyen, előfizetés nélkül. Előfizet�
 
 #: ../bin/src/ui_backgroundstreamssettingspage.h:56
 msgid "You can listen to background streams at the same time as other music."
-msgstr "Háttér adatfolyamatokat hallgathatsz egy időben más számokkal is."
+msgstr "Közvetítéseket hallgathat a háttérben, miközben más zenét hallgat."
 
 #: ../bin/src/ui_wiimotesettingspage.h:174
 msgid ""
 "You can use your Wii Remote as a remote control for Clementine.  <a "
 "href=\"http://www.clementine-player.org/wiimote\">See the page on the "
 "Clementine wiki</a> for more information.\n"
-msgstr "A Clementine távvezérléshez használhat Wii távvezérlőt is.  Részletekért <a href=\"http://www.clementine-player.org/wiimote\">tekintse meg a Clementine wiki oldalát</a>.\n"
+msgstr "A Clementine távvezérléséhez használhat Wii távvezérlőt is. Részletekért <a href=\"http://www.clementine-player.org/wiimote\">tekintse meg a Clementine wiki oldalát</a>.\n"
 
 #: internet/spotify/spotifysettingspage.cpp:149
 msgid "You do not have a Spotify Premium account."
-msgstr "Nincs Spotify prémium fiókod."
+msgstr "Nincs Spotify prémium fiókja."
 
 #: internet/digitally/digitallyimportedclient.cpp:95
 msgid "You do not have an active subscription"
@@ -5818,56 +5818,56 @@ msgstr "Nincs aktív feliratkozása"
 msgid ""
 "You have been logged out of Spotify, please re-enter your password in the "
 "Settings dialog."
-msgstr "Kijelentkezett a Spotify-ből, kérem írja be még egyszer a jelszavát a Beállítások ablakban."
+msgstr "Kijelentkezett a Spotify-ból, írja be még egyszer a jelszavát a Beállítások párbeszédablakban."
 
 #: internet/spotify/spotifysettingspage.cpp:160
 msgid "You have been logged out of Spotify, please re-enter your password."
-msgstr "Kijelentkezett a Spotify-ből, kérem írja be még egyszer a jelszavát."
+msgstr "Kijelentkezett a Spotify-ból, írja be még egyszer a jelszavát."
 
 #: songinfo/lastfmtrackinfoprovider.cpp:85
 msgid "You love this track"
-msgstr "Kedveled ezt a számot"
+msgstr "Kedveli ezt a számot"
 
 #: ../bin/src/ui_globalshortcutssettingspage.h:181
 msgid ""
 "You need to launch System Preferences and allow Clementine to \"<span style"
 "=\"font-style:italic\">control your computer</span>\" to use global "
 "shortcuts in Clementine."
-msgstr "A Rendszerbeállításokban engedélyezned kell a \"<span style=\" font-style:italic;\">számítógép irányítása</span>\" opciót a globális billentyűparancsok használatához."
+msgstr "A Rendszerbeállításokban engedélyeznie kell a „<span style=\" font-style:italic;\">számítógép irányítása</span>” beállítást a globális billentyűparancsok használatához."
 
 #: ../bin/src/ui_behavioursettingspage.h:400
 msgid "You will need to restart Clementine if you change the language."
-msgstr "A nyelv megváltoztatásához újra kell indítania a Clementinet."
+msgstr "A nyelv megváltoztatásához újra kell indítania a Clementine-t."
 
 #: ../bin/src/ui_networkremotesettingspage.h:240
 msgid "Your IP address:"
-msgstr "IP címed:"
+msgstr "Az IP-címe:"
 
 #: internet/magnatune/magnatunesettingspage.cpp:118
 msgid "Your Magnatune credentials were incorrect"
-msgstr "A Magnatune bejelentkezési adataid nem megfelelőek"
+msgstr "A Magnatune bejelentkezési adatai nem megfelelőek"
 
 #: library/libraryview.cpp:358
 msgid "Your library is empty!"
-msgstr "Az ön zenetára üres!"
+msgstr "A zenetára üres!"
 
 #: globalsearch/savedradiosearchprovider.cpp:26
 #: internet/internetradio/savedradio.cpp:53
 msgid "Your radio streams"
-msgstr "Az ön rádió adatfolyamai"
+msgstr "A rádióközvetítései"
 
 #: songinfo/lastfmtrackinfoprovider.cpp:87
 #, qt-format
 msgid "Your scrobbles: %1"
-msgstr "Scrobblejaid: %1"
+msgstr "Scrobble-jei: %1"
 
 #: visualisations/visualisationcontainer.cpp:160
 msgid "Your system is missing OpenGL support, visualizations are unavailable."
-msgstr "Az ön rendszeréről hiányzik az OpenGL támogatás. A vizualizációk nem lesznek elérhetőek"
+msgstr "A rendszeréről hiányzik az OpenGL-támogatás, a vizualizációk nem érhetők el."
 
 #: internet/spotify/spotifysettingspage.cpp:155
 msgid "Your username or password was incorrect."
-msgstr "A felhasználóneved vagy a jelszavad hibás."
+msgstr "A felhasználóneve vagy jelszava hibás."
 
 #: smartplaylists/searchterm.cpp:396
 msgid "Z-A"
@@ -5881,7 +5881,7 @@ msgstr "Nulla"
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "add %n songs"
-msgstr "%n szám felvétele"
+msgstr "%n szám hozzáadása"
 
 #: smartplaylists/searchterm.cpp:227
 msgid "after"
@@ -5936,7 +5936,7 @@ msgstr "nem tartalmazza"
 
 #: ../bin/src/ui_console.h:133
 msgid "dump"
-msgstr ""
+msgstr "kiírás"
 
 #: smartplaylists/searchterm.cpp:263
 msgid "empty"
@@ -5989,7 +5989,7 @@ msgstr "hosszabb először"
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "move %n songs"
-msgstr "%n szám mozgatása"
+msgstr "%n szám áthelyezése"
 
 #: smartplaylists/searchterm.cpp:399
 msgid "newest first"
@@ -6025,7 +6025,7 @@ msgstr "beállítások"
 
 #: ../bin/src/ui_networkremotesettingspage.h:253
 msgid "or scan the QR code!"
-msgstr "vagy olvasd be a QR kódot!"
+msgstr "vagy olvassa le a QR-kódot!"
 
 #: widgets/didyoumean.cpp:56
 msgid "press enter"
