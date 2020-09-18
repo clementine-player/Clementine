@@ -18,10 +18,11 @@
 */
 
 #include "stylesheetloader.h"
-#include "core/logging.h"
 
-#include <QFile>
 #include <QEvent>
+#include <QFile>
+
+#include "core/logging.h"
 
 StyleSheetLoader::StyleSheetLoader(QObject* parent) : QObject(parent) {}
 

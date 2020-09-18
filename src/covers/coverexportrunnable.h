@@ -20,11 +20,11 @@
 #ifndef COVERS_COVEREXPORTRUNNABLE_H_
 #define COVERS_COVEREXPORTRUNNABLE_H_
 
-#include "core/song.h"
-#include "ui/albumcoverexport.h"
-
 #include <QObject>
 #include <QRunnable>
+
+#include "core/song.h"
+#include "ui/albumcoverexport.h"
 
 class AlbumCoverExporter;
 

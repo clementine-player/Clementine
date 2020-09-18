@@ -29,13 +29,13 @@
 #include <QWindow>
 #include <QtDebug>
 
-#include "fullscreenhypnotoad.h"
 #include "core/application.h"
 #include "core/logging.h"
 #include "covers/albumcoverloader.h"
 #include "covers/coverproviders.h"
 #include "covers/currentartloader.h"
 #include "covers/kittenloader.h"
+#include "fullscreenhypnotoad.h"
 #include "library/librarybackend.h"
 #include "networkremote/networkremote.h"
 #include "ui/albumcoverchoicecontroller.h"
@@ -285,9 +285,10 @@ void NowPlayingWidget::UpdateDetailsText() {
   }
 
   // TODO: Make this configurable
-  html += QString("<i>%1</i><br/>%2<br/>%3").arg(
-      metadata_.PrettyTitle().toHtmlEscaped(), metadata_.artist().toHtmlEscaped(),
-      metadata_.album().toHtmlEscaped());
+  html += QString("<i>%1</i><br/>%2<br/>%3")
+              .arg(metadata_.PrettyTitle().toHtmlEscaped(),
+                   metadata_.artist().toHtmlEscaped(),
+                   metadata_.album().toHtmlEscaped());
 
   html += "</p>";
   details_->setHtml(html);

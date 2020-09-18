@@ -18,15 +18,14 @@
 #ifndef OSD_H
 #define OSD_H
 
-#include <memory>
-
 #include <QDateTime>
 #include <QImage>
 #include <QObject>
+#include <memory>
 
 #include "config.h"
-#include "engines/engine_fwd.h"
 #include "core/song.h"
+#include "engines/engine_fwd.h"
 #include "playlist/playlistsequence.h"
 
 class Application;

@@ -71,12 +71,12 @@ void TagReaderWorker::MessageArrived(const pb::tagreader::Message& message) {
     const pb::tagreader::ReadCloudFileRequest& req =
         message.read_cloud_file_request();
     if (!tag_reader_.ReadCloudFile(
-             QUrl::fromEncoded(QByteArray(req.download_url().data(),
-                                          req.download_url().size())),
-             QStringFromStdString(req.title()), req.size(),
-             QStringFromStdString(req.mime_type()),
-             QStringFromStdString(req.authorisation_header()),
-             reply.mutable_read_cloud_file_response()->mutable_metadata())) {
+            QUrl::fromEncoded(QByteArray(req.download_url().data(),
+                                         req.download_url().size())),
+            QStringFromStdString(req.title()), req.size(),
+            QStringFromStdString(req.mime_type()),
+            QStringFromStdString(req.authorisation_header()),
+            reply.mutable_read_cloud_file_response()->mutable_metadata())) {
       reply.mutable_read_cloud_file_response()->clear_metadata();
     }
 #endif

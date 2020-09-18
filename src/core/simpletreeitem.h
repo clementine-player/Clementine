@@ -20,10 +20,10 @@
 #ifndef CORE_SIMPLETREEITEM_H_
 #define CORE_SIMPLETREEITEM_H_
 
-#include "simpletreemodel.h"
-
-#include <QString>
 #include <QList>
+#include <QString>
+
+#include "simpletreemodel.h"
 
 template <typename T>
 class SimpleTreeItem {

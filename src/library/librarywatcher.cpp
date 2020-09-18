@@ -17,13 +17,8 @@
 
 #include "librarywatcher.h"
 
-#include "librarybackend.h"
-#include "core/filesystemwatcherinterface.h"
-#include "core/logging.h"
-#include "core/tagreaderclient.h"
-#include "core/taskmanager.h"
-#include "core/utilities.h"
-#include "playlistparsers/cueparser.h"
+#include <fileref.h>
+#include <tag.h>
 
 #include <QDateTime>
 #include <QDirIterator>
@@ -35,8 +30,13 @@
 #include <QTimer>
 #include <QtDebug>
 
-#include <fileref.h>
-#include <tag.h>
+#include "core/filesystemwatcherinterface.h"
+#include "core/logging.h"
+#include "core/tagreaderclient.h"
+#include "core/taskmanager.h"
+#include "core/utilities.h"
+#include "librarybackend.h"
+#include "playlistparsers/cueparser.h"
 
 // This is defined by one of the windows headers that is included by taglib.
 #ifdef RemoveDirectory
@@ -44,9 +44,9 @@
 #endif
 
 namespace {
-static const char *kNoMediaFile = ".nomedia";
-static const char *kNoMusicFile   = ".nomusic";
-}
+static const char* kNoMediaFile = ".nomedia";
+static const char* kNoMusicFile = ".nomusic";
+}  // namespace
 
 static const int kUnfilteredImageLimit = 10;
 
@@ -263,7 +263,7 @@ void LibraryWatcher::ScanSubdirectory(const QString& path,
                                       ScanTransaction* t,
                                       bool force_noincremental) {
   QFileInfo path_info(path);
-  QDir      path_dir(path);
+  QDir path_dir(path);
 
   // Do not scan symlinked dirs that are already in collection
   if (path_info.isSymLink()) {
@@ -277,8 +277,7 @@ void LibraryWatcher::ScanSubdirectory(const QString& path,
   }
 
   // Do not scan directories containing a .nomedia or .nomusic file
-  if (path_dir.exists(kNoMediaFile) ||
-      path_dir.exists(kNoMusicFile)) {
+  if (path_dir.exists(kNoMediaFile) || path_dir.exists(kNoMusicFile)) {
     t->AddToProgress(1);
     return;
   }
@@ -550,7 +549,8 @@ SongList LibraryWatcher::ScanNewFile(const QString& file, const QString& path,
     // valid and we don't want invalid media getting into library!
     QString file_nfd = file.normalized(QString::NormalizationForm_D);
     for (const Song& cue_song : cue_parser_->Load(&cue, matching_cue, path)) {
-      if (cue_song.url().toLocalFile().normalized(QString::NormalizationForm_D) == file_nfd) {
+      if (cue_song.url().toLocalFile().normalized(
+              QString::NormalizationForm_D) == file_nfd) {
         if (TagReaderClient::Instance()->IsMediaFileBlocking(file)) {
           song_list << cue_song;
         }
@@ -824,9 +824,9 @@ void LibraryWatcher::ReloadSettings() {
   monitor_ = s.value("monitor", true).toBool();
 
   best_image_filters_.clear();
-  QStringList filters =
-      s.value("cover_art_patterns", QStringList() << "front"
-                                                  << "cover").toStringList();
+  QStringList filters = s.value("cover_art_patterns", QStringList() << "front"
+                                                                    << "cover")
+                            .toStringList();
   for (const QString& filter : filters) {
     QString s = filter.trimmed();
     if (!s.isEmpty()) best_image_filters_ << s;

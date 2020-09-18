@@ -18,9 +18,9 @@
 #ifndef SMARTPLAYLISTWIZARD_H
 #define SMARTPLAYLISTWIZARD_H
 
-#include "generator_fwd.h"
-
 #include <QWizard>
+
+#include "generator_fwd.h"
 
 class Application;
 class LibraryBackend;
@@ -63,6 +63,6 @@ class Wizard : public QWizard {
   QList<WizardPlugin*> plugins_;
 };
 
-}  // namespace
+}  // namespace smart_playlists
 
 #endif  // SMARTPLAYLISTWIZARD_H

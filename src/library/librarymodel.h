@@ -18,23 +18,22 @@
 #ifndef LIBRARYMODEL_H
 #define LIBRARYMODEL_H
 
-#include <memory>
-
 #include <QAbstractItemModel>
 #include <QIcon>
 #include <QNetworkDiskCache>
 #include <QThreadPool>
+#include <memory>
 
-#include "libraryitem.h"
-#include "libraryquery.h"
-#include "librarywatcher.h"
-#include "sqlrow.h"
 #include "core/simpletreemodel.h"
 #include "core/song.h"
 #include "covers/albumcoverloaderoptions.h"
 #include "engines/engine_fwd.h"
+#include "libraryitem.h"
+#include "libraryquery.h"
+#include "librarywatcher.h"
 #include "playlist/playlistmanager.h"
 #include "smartplaylists/generator_fwd.h"
+#include "sqlrow.h"
 
 class Application;
 class AlbumCoverLoader;
@@ -175,7 +174,7 @@ class LibraryModel : public SimpleTreeModel<LibraryItem> {
   static QString SortTextForNumber(int year);
   static QString SortTextForSong(const Song& song);
 
-signals:
+ signals:
   void TotalSongCountUpdated(int count);
   void GroupingChanged(const LibraryModel::Grouping& g);
 

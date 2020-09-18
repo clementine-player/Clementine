@@ -1,23 +1,24 @@
 #ifndef OUTGOINGDATACREATOR_H
 #define OUTGOINGDATACREATOR_H
 
-#include <memory>
-
-#include <QTcpSocket>
 #include <QImage>
 #include <QList>
-#include <QTimer>
 #include <QMap>
 #include <QQueue>
+#include <QTcpSocket>
+#include <QTimer>
+#include <memory>
 
-#include "core/player.h"
 #include "core/application.h"
-#include "engines/enginebase.h"
+#include "core/player.h"
 #include "engines/engine_fwd.h"
+#include "engines/enginebase.h"
 #include "globalsearch/globalsearch.h"
 #include "playlist/playlist.h"
-#include "playlist/playlistmanager.h"
 #include "playlist/playlistbackend.h"
+#include "playlist/playlistmanager.h"
+#include "remoteclient.h"
+#include "remotecontrolmessages.pb.h"
 #include "songinfo/collapsibleinfopane.h"
 #include "songinfo/songinfofetcher.h"
 #include "songinfo/songinfoprovider.h"
@@ -25,8 +26,6 @@
 #include "songinfo/ultimatelyricslyric.h"
 #include "songinfo/ultimatelyricsprovider.h"
 #include "songinfo/ultimatelyricsreader.h"
-#include "remotecontrolmessages.pb.h"
-#include "remoteclient.h"
 
 typedef QList<SongInfoProvider*> ProviderList;
 
@@ -34,10 +33,9 @@ struct GlobalSearchRequest {
   int id_;
   QString query_;
   RemoteClient* client_;
-  GlobalSearchRequest()
-    : id_(-1), client_(nullptr) {}
+  GlobalSearchRequest() : id_(-1), client_(nullptr) {}
   GlobalSearchRequest(int i, const QString& q, RemoteClient* c)
-    : id_(i), query_(q), client_(c) {}
+      : id_(i), query_(q), client_(c) {}
 };
 
 class OutgoingDataCreator : public QObject {
@@ -51,7 +49,7 @@ class OutgoingDataCreator : public QObject {
   void SetClients(QList<RemoteClient*>* clients);
 
   static void CreateSong(const Song& song, const QImage& art, const int index,
-                  pb::remote::SongMetadata* song_metadata);
+                         pb::remote::SongMetadata* song_metadata);
 
  public slots:
   void SendClementineInfo();

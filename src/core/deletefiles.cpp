@@ -20,8 +20,8 @@
 #include "deletefiles.h"
 
 #include <QStringList>
-#include <QTimer>
 #include <QThread>
+#include <QTimer>
 #include <QUrl>
 
 #include "musicstorage.h"

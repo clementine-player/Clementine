@@ -18,10 +18,10 @@
 #ifndef INTERNET_SUBSONIC_SUBSONICDYNAMICPLAYLIST_H_
 #define INTERNET_SUBSONIC_SUBSONICDYNAMICPLAYLIST_H_
 
-#include "smartplaylists/generator.h"
-
 #include <QNetworkAccessManager>
 #include <QXmlStreamReader>
+
+#include "smartplaylists/generator.h"
 
 class SubsonicService;
 
@@ -43,8 +43,8 @@ class SubsonicDynamicPlaylist : public smart_playlists::Generator {
   };
 
   enum QueryType {
-      QueryType_Album = 0,
-      QueryType_Song = 1,
+    QueryType_Album = 0,
+    QueryType_Song = 1,
   };
 
   SubsonicDynamicPlaylist();
@@ -68,8 +68,8 @@ class SubsonicDynamicPlaylist : public smart_playlists::Generator {
   static const int kDefaultOffset;
 
  private:
-  void GetAlbum(PlaylistItemList& list, QString id, QNetworkAccessManager& network,
-                const bool usesslv3);
+  void GetAlbum(PlaylistItemList& list, QString id,
+                QNetworkAccessManager& network, const bool usesslv3);
   // need our own one since we run in a different thread from service
   QNetworkReply* Send(QNetworkAccessManager& network, const QUrl& url,
                       const bool usesslv3);

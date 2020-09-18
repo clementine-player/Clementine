@@ -21,15 +21,15 @@
 #ifndef COVERS_ALBUMCOVERLOADER_H_
 #define COVERS_ALBUMCOVERLOADER_H_
 
-#include "albumcoverloaderoptions.h"
-#include "config.h"
-#include "core/song.h"
-
 #include <QImage>
 #include <QMutex>
 #include <QObject>
 #include <QQueue>
 #include <QUrl>
+
+#include "albumcoverloaderoptions.h"
+#include "config.h"
+#include "core/song.h"
 
 class NetworkAccessManager;
 class QNetworkReply;
@@ -72,7 +72,10 @@ class AlbumCoverLoader : public QObject {
 #endif
 
  protected:
-  enum State { State_TryingManual, State_TryingAuto, };
+  enum State {
+    State_TryingManual,
+    State_TryingAuto,
+  };
 
   struct Task {
     Task() : redirects(0) {}

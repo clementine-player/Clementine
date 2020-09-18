@@ -18,8 +18,8 @@
 #ifndef PARSERBASE_H
 #define PARSERBASE_H
 
-#include <QObject>
 #include <QDir>
+#include <QObject>
 
 #include "core/song.h"
 #include "playlist/playlist.h"

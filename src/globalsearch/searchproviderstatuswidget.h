@@ -27,7 +27,8 @@ class Ui_SearchProviderStatusWidget;
 class SearchProviderStatusWidget : public QWidget {
  public:
   SearchProviderStatusWidget(const QIcon& warning_icon, GlobalSearch* engine,
-                             SearchProvider* provider, QWidget* parent = nullptr);
+                             SearchProvider* provider,
+                             QWidget* parent = nullptr);
   ~SearchProviderStatusWidget();
 
   bool eventFilter(QObject* object, QEvent* event);

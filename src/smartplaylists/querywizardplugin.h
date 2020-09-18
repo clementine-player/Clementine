@@ -18,13 +18,11 @@
 #ifndef QUERYWIZARDPLUGIN_H
 #define QUERYWIZARDPLUGIN_H
 
-#include "wizardplugin.h"
-
+#include <QWizard>
 #include <memory>
 
-#include <QWizard>
-
 #include "search.h"
+#include "wizardplugin.h"
 
 class Ui_SmartPlaylistQuerySearchPage;
 class Ui_SmartPlaylistQuerySortPage;

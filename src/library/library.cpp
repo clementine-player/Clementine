@@ -68,15 +68,17 @@ Library::Library(Application* app, QObject* parent)
                         Search::Sort_Random, SearchTerm::Field_Title, 50)))
           << GeneratorPtr(new QueryGenerator(
                  QT_TRANSLATE_NOOP("Library", "Ever played"),
-                 Search(Search::Type_And, Search::TermList() << SearchTerm(
-                                              SearchTerm::Field_PlayCount,
-                                              SearchTerm::Op_GreaterThan, 0),
+                 Search(Search::Type_And,
+                        Search::TermList()
+                            << SearchTerm(SearchTerm::Field_PlayCount,
+                                          SearchTerm::Op_GreaterThan, 0),
                         Search::Sort_Random, SearchTerm::Field_Title)))
           << GeneratorPtr(new QueryGenerator(
                  QT_TRANSLATE_NOOP("Library", "Never played"),
-                 Search(Search::Type_And, Search::TermList() << SearchTerm(
-                                              SearchTerm::Field_PlayCount,
-                                              SearchTerm::Op_Equals, 0),
+                 Search(Search::Type_And,
+                        Search::TermList()
+                            << SearchTerm(SearchTerm::Field_PlayCount,
+                                          SearchTerm::Op_Equals, 0),
                         Search::Sort_Random, SearchTerm::Field_Title)))
           << GeneratorPtr(new QueryGenerator(
                  QT_TRANSLATE_NOOP("Library", "Last played"),

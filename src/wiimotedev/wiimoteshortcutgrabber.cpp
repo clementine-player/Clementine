@@ -15,10 +15,11 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "consts.h"
 #include "wiimoteshortcutgrabber.h"
-#include "ui_wiimoteshortcutgrabber.h"
+
+#include "consts.h"
 #include "ui/iconloader.h"
+#include "ui_wiimoteshortcutgrabber.h"
 
 WiimoteShortcutGrabber::WiimoteShortcutGrabber(quint32 action, quint32 device,
                                                WiimoteSettingsPage* parent)

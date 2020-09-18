@@ -18,9 +18,10 @@
 */
 
 #include "podcastinfowidget.h"
-#include "ui_podcastinfowidget.h"
+
 #include "core/application.h"
 #include "covers/albumcoverloader.h"
+#include "ui_podcastinfowidget.h"
 
 PodcastInfoWidget::PodcastInfoWidget(QWidget* parent)
     : QWidget(parent),

@@ -16,6 +16,7 @@
 */
 
 #include "savedradiosearchprovider.h"
+
 #include "core/mimedata.h"
 #include "ui/iconloader.h"
 
@@ -24,8 +25,8 @@ SavedRadioSearchProvider::SavedRadioSearchProvider(SavedRadio* service,
                                                    QObject* parent)
     : SimpleSearchProvider(app, parent), service_(service) {
   Init(tr("Your radio streams"), "savedradio",
-       IconLoader::Load("document-open-remote", IconLoader::Base), 
-                        MimeDataContainsUrlsOnly);
+       IconLoader::Load("document-open-remote", IconLoader::Base),
+       MimeDataContainsUrlsOnly);
 
   set_max_suggestion_count(3);
 

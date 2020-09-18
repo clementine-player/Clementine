@@ -23,8 +23,8 @@
 
 #include <QContextMenuEvent>
 
-#include "internet/core/internetmodel.h"
 #include "core/mergedproxymodel.h"
+#include "internet/core/internetmodel.h"
 #include "library/libraryview.h"
 
 InternetView::InternetView(QWidget* parent) : AutoExpandingTreeView(parent) {

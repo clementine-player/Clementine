@@ -19,6 +19,7 @@
 #define SRC_RIPPER_RIPPER_H_
 
 #include <cdio/cdio.h>
+
 #include <QMutex>
 #include <QObject>
 
@@ -64,7 +65,7 @@ class Ripper : public QObject {
   // Returns true if the cd media has changed.
   bool MediaChanged() const;
 
-signals:
+ signals:
   void Finished();
   void Cancelled();
   void ProgressInterval(int min, int max);

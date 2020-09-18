@@ -17,23 +17,23 @@
 
 #include "librarysettingspage.h"
 
-#include "librarybackend.h"
-#include "librarydirectorymodel.h"
-#include "librarymodel.h"
-#include "libraryview.h"
-#include "librarywatcher.h"
-#include "ui_librarysettingspage.h"
-#include "core/application.h"
-#include "core/utilities.h"
-#include "playlist/playlistdelegates.h"
-#include "ui/iconloader.h"
-#include "ui/settingsdialog.h"
-
 #include <QDir>
 #include <QFileDialog>
 #include <QMessageBox>
 #include <QSettings>
 #include <QtConcurrentRun>
+
+#include "core/application.h"
+#include "core/utilities.h"
+#include "librarybackend.h"
+#include "librarydirectorymodel.h"
+#include "librarymodel.h"
+#include "libraryview.h"
+#include "librarywatcher.h"
+#include "playlist/playlistdelegates.h"
+#include "ui/iconloader.h"
+#include "ui/settingsdialog.h"
+#include "ui_librarysettingspage.h"
 
 const char* LibrarySettingsPage::kSettingsGroup = "LibraryConfig";
 
@@ -60,10 +60,10 @@ void LibrarySettingsPage::Add() {
   QSettings settings;
   settings.beginGroup(kSettingsGroup);
 
-  QString path(
-      settings.value("last_path", Utilities::GetConfigPath(
-                                      Utilities::Path_DefaultMusicLibrary))
-          .toString());
+  QString path(settings
+                   .value("last_path", Utilities::GetConfigPath(
+                                           Utilities::Path_DefaultMusicLibrary))
+                   .toString());
   path = QFileDialog::getExistingDirectory(this, tr("Add directory..."), path);
 
   if (!path.isNull()) {
@@ -134,9 +134,9 @@ void LibrarySettingsPage::Load() {
   ui_->startup_scan->setChecked(s.value("startup_scan", true).toBool());
   ui_->monitor->setChecked(s.value("monitor", true).toBool());
 
-  QStringList filters =
-      s.value("cover_art_patterns", QStringList() << "front"
-                                                  << "cover").toStringList();
+  QStringList filters = s.value("cover_art_patterns", QStringList() << "front"
+                                                                    << "cover")
+                            .toStringList();
   ui_->cover_art_patterns->setText(filters.join(","));
 
   s.endGroup();

@@ -21,10 +21,10 @@
 #ifndef COVERS_ALBUMCOVERFETCHERSEARCH_H_
 #define COVERS_ALBUMCOVERFETCHERSEARCH_H_
 
-#include "albumcoverfetcher.h"
-
 #include <QMap>
 #include <QObject>
+
+#include "albumcoverfetcher.h"
 
 class CoverProvider;
 class CoverProviders;

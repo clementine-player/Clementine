@@ -28,10 +28,10 @@
 #include <QtDebug>
 
 #include "core/network.h"
-#include "magnatuneservice.h"
 #include "internet/core/internetmodel.h"
-#include "ui_magnatunesettingspage.h"
+#include "magnatuneservice.h"
 #include "ui/iconloader.h"
+#include "ui_magnatunesettingspage.h"
 
 MagnatuneSettingsPage::MagnatuneSettingsPage(SettingsDialog* dialog)
     : SettingsPage(dialog),
@@ -140,9 +140,9 @@ void MagnatuneSettingsPage::Load() {
   ui_->password->setText(s.value("password").toString());
   ui_->format->setCurrentIndex(
       s.value("format", MagnatuneService::Format_Ogg).toInt());
-  logged_in_ =
-      s.value("logged_in", !ui_->username->text().isEmpty() &&
-                               !ui_->password->text().isEmpty()).toBool();
+  logged_in_ = s.value("logged_in", !ui_->username->text().isEmpty() &&
+                                        !ui_->password->text().isEmpty())
+                   .toBool();
 
   UpdateLoginState();
 }

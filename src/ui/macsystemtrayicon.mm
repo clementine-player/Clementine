@@ -62,20 +62,16 @@ class MacSystemTrayIconPrivate {
     dock_menu_ = [[NSMenu alloc] initWithTitle:@"DockMenu"];
 
     QString title = QT_TR_NOOP("Now Playing");
-    NSString* t =
-        [[NSString alloc] initWithUTF8String:title.toUtf8().constData()];
-    now_playing_ =
-        [[NSMenuItem alloc] initWithTitle:t action:nullptr keyEquivalent:@""];
+    NSString* t = [[NSString alloc] initWithUTF8String:title.toUtf8().constData()];
+    now_playing_ = [[NSMenuItem alloc] initWithTitle:t action:nullptr keyEquivalent:@""];
 
-    now_playing_artist_ =
-        [[NSMenuItem alloc] initWithTitle:@"Nothing to see here"
-                                   action:nullptr
-                            keyEquivalent:@""];
+    now_playing_artist_ = [[NSMenuItem alloc] initWithTitle:@"Nothing to see here"
+                                                     action:nullptr
+                                              keyEquivalent:@""];
 
-    now_playing_title_ =
-        [[NSMenuItem alloc] initWithTitle:@"Nothing to see here"
-                                   action:nullptr
-                            keyEquivalent:@""];
+    now_playing_title_ = [[NSMenuItem alloc] initWithTitle:@"Nothing to see here"
+                                                    action:nullptr
+                                             keyEquivalent:@""];
 
     [dock_menu_ insertItem:now_playing_title_ atIndex:0];
     [dock_menu_ insertItem:now_playing_artist_ atIndex:0];
@@ -83,7 +79,7 @@ class MacSystemTrayIconPrivate {
 
     // Don't look now.
     // This must be called after our custom NSApplicationDelegate has been set.
-    [(AppDelegate*)([NSApp delegate])setDockMenu:dock_menu_];
+    [(AppDelegate*)([NSApp delegate]) setDockMenu:dock_menu_];
 
     ClearNowPlaying();
   }
@@ -91,8 +87,7 @@ class MacSystemTrayIconPrivate {
   void AddMenuItem(QAction* action) {
     // Strip accelarators from name.
     QString text = action->text().remove("&");
-    NSString* title =
-        [[NSString alloc] initWithUTF8String:text.toUtf8().constData()];
+    NSString* title = [[NSString alloc] initWithUTF8String:text.toUtf8().constData()];
     // Create an object that can receive user clicks and pass them on to the
     // QAction.
     Target* target = [[Target alloc] initWithQAction:action];
@@ -107,8 +102,7 @@ class MacSystemTrayIconPrivate {
 
   void ActionChanged(QAction* action) {
     NSMenuItem* item = actions_[action];
-    NSString* title = [[NSString alloc]
-        initWithUTF8String:action->text().toUtf8().constData()];
+    NSString* title = [[NSString alloc] initWithUTF8String:action->text().toUtf8().constData()];
     [item setTitle:title];
   }
 
@@ -120,17 +114,11 @@ class MacSystemTrayIconPrivate {
   void ShowNowPlaying(const QString& artist, const QString& title) {
     ClearNowPlaying();  // Makes sure the order is consistent.
     [now_playing_artist_
-        setTitle:[[NSString alloc]
-                     initWithUTF8String:artist.toUtf8().constData()]];
-    [now_playing_title_
-        setTitle:[[NSString alloc]
-                     initWithUTF8String:title.toUtf8().constData()]];
-    title.isEmpty() ? HideItem(now_playing_title_)
-                    : ShowItem(now_playing_title_);
-    artist.isEmpty() ? HideItem(now_playing_artist_)
-                     : ShowItem(now_playing_artist_);
-    artist.isEmpty() && title.isEmpty() ? HideItem(now_playing_)
-                                        : ShowItem(now_playing_);
+        setTitle:[[NSString alloc] initWithUTF8String:artist.toUtf8().constData()]];
+    [now_playing_title_ setTitle:[[NSString alloc] initWithUTF8String:title.toUtf8().constData()]];
+    title.isEmpty() ? HideItem(now_playing_title_) : ShowItem(now_playing_title_);
+    artist.isEmpty() ? HideItem(now_playing_artist_) : ShowItem(now_playing_artist_);
+    artist.isEmpty() && title.isEmpty() ? HideItem(now_playing_) : ShowItem(now_playing_);
   }
 
   void ClearNowPlaying() {
@@ -165,18 +153,17 @@ class MacSystemTrayIconPrivate {
 
 MacSystemTrayIcon::MacSystemTrayIcon(QObject* parent)
     : SystemTrayIcon(parent),
-      orange_icon_(QPixmap(":icon_large.png").scaled(
-          128, 128, Qt::KeepAspectRatio, Qt::SmoothTransformation)),
-      grey_icon_(QPixmap(":icon_large_grey.png").scaled(
-          128, 128, Qt::KeepAspectRatio, Qt::SmoothTransformation)) {
+      orange_icon_(QPixmap(":icon_large.png")
+                       .scaled(128, 128, Qt::KeepAspectRatio, Qt::SmoothTransformation)),
+      grey_icon_(QPixmap(":icon_large_grey.png")
+                     .scaled(128, 128, Qt::KeepAspectRatio, Qt::SmoothTransformation)) {
   QApplication::setWindowIcon(orange_icon_);
 }
 
 MacSystemTrayIcon::~MacSystemTrayIcon() {}
 
-void MacSystemTrayIcon::SetupMenu(QAction* previous, QAction* play,
-                                  QAction* stop, QAction* stop_after,
-                                  QAction* next, QAction* mute, QAction* love,
+void MacSystemTrayIcon::SetupMenu(QAction* previous, QAction* play, QAction* stop,
+                                  QAction* stop_after, QAction* next, QAction* mute, QAction* love,
                                   QAction* quit) {
   p_.reset(new MacSystemTrayIconPrivate());
   SetupMenuItem(previous);
@@ -207,7 +194,6 @@ void MacSystemTrayIcon::ActionChanged() {
 
 void MacSystemTrayIcon::ClearNowPlaying() { p_->ClearNowPlaying(); }
 
-void MacSystemTrayIcon::SetNowPlaying(const Song& song,
-                                      const QString& image_path) {
+void MacSystemTrayIcon::SetNowPlaying(const Song& song, const QString& image_path) {
   p_->ShowNowPlaying(song.artist(), song.PrettyTitle());
 }

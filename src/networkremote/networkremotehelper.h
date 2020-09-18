@@ -18,7 +18,7 @@ class NetworkRemoteHelper : public QObject {
  private slots:
   void StartServer();
 
-signals:
+ signals:
   void SetupServerSig();
   void StartServerSig();
   void ReloadSettingsSig();

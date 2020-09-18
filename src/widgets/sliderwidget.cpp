@@ -23,15 +23,15 @@
 #include <QBitmap>
 #include <QBrush>
 #include <QImage>
+#include <QMenu>
+#include <QMouseEvent>
 #include <QPainter>
 #include <QPainterPath>
 #include <QSize>
-#include <QTimer>
 #include <QStyle>
-#include <QMenu>
-#include <QWheelEvent>
-#include <QMouseEvent>
 #include <QStyleOptionSlider>
+#include <QTimer>
+#include <QWheelEvent>
 
 Amarok::Slider::Slider(Qt::Orientation orientation, QWidget* parent, uint max)
     : QSlider(orientation, parent),
@@ -162,8 +162,8 @@ namespace Amarok {
 namespace ColorScheme {
 extern QColor Background;
 extern QColor Foreground;
-}
-}
+}  // namespace ColorScheme
+}  // namespace Amarok
 
 #if 0
 /** these functions aren't required in our fixed size world,
@@ -194,7 +194,7 @@ Amarok::VolumeSlider::VolumeSlider(QWidget* parent, uint max)
     : Amarok::Slider(Qt::Horizontal, parent, max),
       m_animCount(0),
       m_animTimer(new QTimer(this)),
-      m_pixmapInset(QPixmap(drawVolumePixmap ())) {
+      m_pixmapInset(QPixmap(drawVolumePixmap())) {
   setFocusPolicy(Qt::NoFocus);
 
   // Store theme colors to check theme change at paintEvent
@@ -284,13 +284,15 @@ void Amarok::VolumeSlider::paintEvent(QPaintEvent*) {
   const int padding = 7;
   const int offset = int(double((width() - 2 * padding) * value()) / maximum());
 
-  // If theme changed since last paintEvent, redraw the volume pixmap with new theme colors 
+  // If theme changed since last paintEvent, redraw the volume pixmap with new
+  // theme colors
   if (m_previous_theme_text_color != palette().color(QPalette::WindowText)) {
     m_pixmapInset = drawVolumePixmap();
     m_previous_theme_text_color = palette().color(QPalette::WindowText);
   }
 
-  if (m_previous_theme_highlight_color != palette().color(QPalette::Highlight)) {
+  if (m_previous_theme_highlight_color !=
+      palette().color(QPalette::Highlight)) {
     drawVolumeSliderHandle();
     m_previous_theme_highlight_color = palette().color(QPalette::Highlight);
   }
@@ -330,19 +332,19 @@ void Amarok::VolumeSlider::paletteChange(const QPalette&) {
   generateGradient();
 }
 
-QPixmap Amarok::VolumeSlider::drawVolumePixmap () const {
+QPixmap Amarok::VolumeSlider::drawVolumePixmap() const {
   QPixmap pixmap(112, 36);
   pixmap.fill(Qt::transparent);
   QPainter painter(&pixmap);
-  QPen pen(palette().color(QPalette::WindowText), 0.3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
+  QPen pen(palette().color(QPalette::WindowText), 0.3, Qt::SolidLine,
+           Qt::RoundCap, Qt::RoundJoin);
   painter.setPen(pen);
-  
+
   painter.setRenderHint(QPainter::Antialiasing);
   painter.setRenderHint(QPainter::SmoothPixmapTransform);
   // Draw volume control pixmap
   QPolygon poly;
-  poly << QPoint(6, 21) << QPoint(104, 21)
-       << QPoint(104, 7) << QPoint(6, 16)
+  poly << QPoint(6, 21) << QPoint(104, 21) << QPoint(104, 7) << QPoint(6, 16)
        << QPoint(6, 21);
   QPainterPath path;
   path.addPolygon(poly);
@@ -356,18 +358,20 @@ void Amarok::VolumeSlider::drawVolumeSliderHandle() {
   QImage pixmapHandle(":volumeslider-handle.png");
   QImage pixmapHandleGlow(":/volumeslider-handle_glow.png");
 
-  QImage pixmapHandleGlow_image(pixmapHandleGlow.size(), QImage::Format_ARGB32_Premultiplied);
+  QImage pixmapHandleGlow_image(pixmapHandleGlow.size(),
+                                QImage::Format_ARGB32_Premultiplied);
   QPainter painter(&pixmapHandleGlow_image);
-  
+
   painter.setRenderHint(QPainter::Antialiasing);
   painter.setRenderHint(QPainter::SmoothPixmapTransform);
 
   // repaint volume slider handle glow image with theme highlight color
-  painter.fillRect(pixmapHandleGlow_image.rect(), QBrush(palette().color(QPalette::Highlight)));
+  painter.fillRect(pixmapHandleGlow_image.rect(),
+                   QBrush(palette().color(QPalette::Highlight)));
   painter.setCompositionMode(QPainter::CompositionMode_DestinationIn);
   painter.drawImage(0, 0, pixmapHandleGlow);
-  
-  // Overlay the volume slider handle image 
+
+  // Overlay the volume slider handle image
   painter.setCompositionMode(QPainter::CompositionMode_SourceAtop);
   painter.drawImage(0, 0, pixmapHandle);
 

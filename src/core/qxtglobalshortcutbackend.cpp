@@ -17,14 +17,15 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "globalshortcuts.h"
 #include "qxtglobalshortcutbackend.h"
-#include "qxtglobalshortcut.h"
-#include "core/logging.h"
 
 #include <QAction>
 #include <QGuiApplication>
 #include <QtDebug>
+
+#include "core/logging.h"
+#include "globalshortcuts.h"
+#include "qxtglobalshortcut.h"
 
 QxtGlobalShortcutBackend::QxtGlobalShortcutBackend(GlobalShortcuts* parent)
     : GlobalShortcutBackend(parent) {}

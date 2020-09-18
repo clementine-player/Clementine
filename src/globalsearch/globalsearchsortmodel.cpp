@@ -15,10 +15,11 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "globalsearchmodel.h"
 #include "globalsearchsortmodel.h"
-#include "searchprovider.h"
+
 #include "core/logging.h"
+#include "globalsearchmodel.h"
+#include "searchprovider.h"
 
 GlobalSearchSortModel::GlobalSearchSortModel(QObject* parent)
     : QSortFilterProxyModel(parent) {}

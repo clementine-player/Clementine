@@ -16,13 +16,6 @@
 */
 
 #include "libraryfilterwidget.h"
-#include "librarymodel.h"
-#include "libraryquery.h"
-#include "groupbydialog.h"
-#include "ui_libraryfilterwidget.h"
-#include "core/song.h"
-#include "ui/iconloader.h"
-#include "ui/settingsdialog.h"
 
 #include <QActionGroup>
 #include <QInputDialog>
@@ -31,6 +24,14 @@
 #include <QRegExp>
 #include <QSettings>
 #include <QTimer>
+
+#include "core/song.h"
+#include "groupbydialog.h"
+#include "librarymodel.h"
+#include "libraryquery.h"
+#include "ui/iconloader.h"
+#include "ui/settingsdialog.h"
+#include "ui_libraryfilterwidget.h"
 
 LibraryFilterWidget::LibraryFilterWidget(QWidget* parent)
     : QWidget(parent),
@@ -132,10 +133,10 @@ QActionGroup* LibraryFilterWidget::CreateGroupByActions(QObject* parent) {
       CreateGroupByAction(tr("Group by Artist/Album"), parent,
                           LibraryModel::Grouping(LibraryModel::GroupBy_Artist,
                                                  LibraryModel::GroupBy_Album)));
-  ret->addAction(
-      CreateGroupByAction(tr("Group by Album artist/Album"), parent,
-                          LibraryModel::Grouping(LibraryModel::GroupBy_AlbumArtist,
-                                                 LibraryModel::GroupBy_Album)));
+  ret->addAction(CreateGroupByAction(
+      tr("Group by Album artist/Album"), parent,
+      LibraryModel::Grouping(LibraryModel::GroupBy_AlbumArtist,
+                             LibraryModel::GroupBy_Album)));
   ret->addAction(CreateGroupByAction(
       tr("Group by Artist/Year - Album"), parent,
       LibraryModel::Grouping(LibraryModel::GroupBy_Artist,

@@ -16,6 +16,7 @@
 */
 
 #include "playlistundocommands.h"
+
 #include "playlist.h"
 
 namespace PlaylistUndoCommands {
@@ -110,4 +111,4 @@ ShuffleItems::ShuffleItems(Playlist* playlist,
   setText(tr("shuffle songs"));
 }
 
-}  // namespace
+}  // namespace PlaylistUndoCommands

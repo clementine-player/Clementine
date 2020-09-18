@@ -18,9 +18,9 @@
 #ifndef WIIMOTESETTINGSPAGE_H
 #define WIIMOTESETTINGSPAGE_H
 
-#include "ui/settingspage.h"
-
 #include <QSettings>
+
+#include "ui/settingspage.h"
 
 class QTreeWidgetItem;
 class Ui_WiimoteSettingsPage;
@@ -37,7 +37,7 @@ class WiimoteSettingsPage : public SettingsPage {
   QString GetReadableWiiremoteSequence(quint64 value);
   QStringList TextActions() const { return text_actions_.values(); }
 
-signals:
+ signals:
   void SetWiimotedevInterfaceActived(bool);
 
  private slots:

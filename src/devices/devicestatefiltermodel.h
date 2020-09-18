@@ -31,7 +31,7 @@ class DeviceStateFilterModel : public QSortFilterProxyModel {
 
   void setSourceModel(QAbstractItemModel* sourceModel);
 
-signals:
+ signals:
   void IsEmptyChanged(bool is_empty);
 
  protected:

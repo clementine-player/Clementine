@@ -16,13 +16,13 @@
 */
 
 #include "stretchheaderview.h"
-#include "core/logging.h"
 
 #include <QDataStream>
-
 #include <algorithm>
 #include <cmath>
 #include <numeric>
+
+#include "core/logging.h"
 
 const int StretchHeaderView::kMinimumColumnWidth = 20;
 const int StretchHeaderView::kMagicNumber = 0x502c950f;

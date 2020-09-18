@@ -17,13 +17,12 @@
 
 #include "musicbrainzclient.h"
 
-#include <algorithm>
-
 #include <QCoreApplication>
 #include <QNetworkReply>
 #include <QSet>
-#include <QXmlStreamReader>
 #include <QUrlQuery>
+#include <QXmlStreamReader>
+#include <algorithm>
 
 #include "core/closure.h"
 #include "core/logging.h"
@@ -110,9 +109,10 @@ void MusicBrainzClient::DiscIdRequestFinished(const QString& discid,
 
   if (reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt() !=
       200) {
-    qLog(Error) << "Error:"
-                << reply->attribute(QNetworkRequest::HttpStatusCodeAttribute)
-                       .toInt() << "http status code received";
+    qLog(Error)
+        << "Error:"
+        << reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt()
+        << "http status code received";
     qLog(Error) << reply->readAll();
     emit Finished(artist, album, ret);
     return;
@@ -203,9 +203,10 @@ void MusicBrainzClient::RequestFinished(QNetworkReply* reply, int id,
     }
     pending_results_[id] << PendingResults(request_number, res);
   } else {
-    qLog(Error) << "Error:"
-                << reply->attribute(QNetworkRequest::HttpStatusCodeAttribute)
-                       .toInt() << "http status code received";
+    qLog(Error)
+        << "Error:"
+        << reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt()
+        << "http status code received";
     qLog(Error) << reply->readAll();
   }
 

@@ -15,15 +15,15 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "playlistbackend.h"
 #include "songplaylistitem.h"
-#include "core/tagreaderclient.h"
 
-#include "library/sqlrow.h"
-
-#include <QtDebug>
 #include <QFile>
 #include <QSettings>
+#include <QtDebug>
+
+#include "core/tagreaderclient.h"
+#include "library/sqlrow.h"
+#include "playlistbackend.h"
 
 SongPlaylistItem::SongPlaylistItem(const QString& type) : PlaylistItem(type) {}
 

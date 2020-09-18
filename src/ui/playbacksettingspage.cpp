@@ -15,12 +15,13 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "iconloader.h"
 #include "playbacksettingspage.h"
+
+#include "engines/gstengine.h"
+#include "iconloader.h"
+#include "playlist/playlist.h"
 #include "settingsdialog.h"
 #include "ui_playbacksettingspage.h"
-#include "engines/gstengine.h"
-#include "playlist/playlist.h"
 
 PlaybackSettingsPage::PlaybackSettingsPage(SettingsDialog* dialog)
     : SettingsPage(dialog), ui_(new Ui_PlaybackSettingsPage) {

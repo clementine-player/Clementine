@@ -1,25 +1,26 @@
 /* This file is part of Clementine.
    Copyright 2014, David Sansome <me@davidsansome.com>
-   
+
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
    the Free Software Foundation, either version 3 of the License, or
    (at your option) any later version.
-   
+
    Clementine is distributed in the hope that it will be useful,
    but WITHOUT ANY WARRANTY; without even the implied warranty of
    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
    GNU General Public License for more details.
-   
+
    You should have received a copy of the GNU General Public License
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include <memory>
+#include "osxdevicefinder.h"
 
 #include <CoreAudio/AudioHardware.h>
 
-#include "osxdevicefinder.h"
+#include <memory>
+
 #include "core/logging.h"
 #include "core/scoped_cftyperef.h"
 
@@ -30,8 +31,8 @@ std::unique_ptr<T> GetProperty(const AudioDeviceID& device_id,
                                const AudioObjectPropertyAddress& address,
                                UInt32* size_bytes_out = nullptr) {
   UInt32 size_bytes = 0;
-  OSStatus status = AudioObjectGetPropertyDataSize(
-      device_id, &address, 0, NULL, &size_bytes);
+  OSStatus status =
+      AudioObjectGetPropertyDataSize(device_id, &address, 0, NULL, &size_bytes);
   if (status != kAudioHardwareNoError) {
     qLog(Warning) << "AudioObjectGetPropertyDataSize failed:" << status;
     return std::unique_ptr<T>();
@@ -39,11 +40,7 @@ std::unique_ptr<T> GetProperty(const AudioDeviceID& device_id,
 
   std::unique_ptr<T> ret(reinterpret_cast<T*>(malloc(size_bytes)));
 
-  status = AudioObjectGetPropertyData(device_id,
-                                      &address,
-                                      0,
-                                      NULL,
-                                      &size_bytes,
+  status = AudioObjectGetPropertyData(device_id, &address, 0, NULL, &size_bytes,
                                       ret.get());
   if (status != kAudioHardwareNoError) {
     qLog(Warning) << "AudioObjectGetPropertyData failed:" << status;
@@ -59,24 +56,18 @@ std::unique_ptr<T> GetProperty(const AudioDeviceID& device_id,
 
 }  // namespace
 
-
-OsxDeviceFinder::OsxDeviceFinder()
-    : DeviceFinder("osxaudiosink") {
-}
+OsxDeviceFinder::OsxDeviceFinder() : DeviceFinder("osxaudiosink") {}
 
 QList<DeviceFinder::Device> OsxDeviceFinder::ListDevices() {
   QList<Device> ret;
 
-  AudioObjectPropertyAddress address = {
-    kAudioHardwarePropertyDevices,
-    kAudioObjectPropertyScopeGlobal,
-    kAudioObjectPropertyElementMaster
-  };
+  AudioObjectPropertyAddress address = {kAudioHardwarePropertyDevices,
+                                        kAudioObjectPropertyScopeGlobal,
+                                        kAudioObjectPropertyElementMaster};
 
   UInt32 device_size_bytes = 0;
-  std::unique_ptr<AudioDeviceID> devices =
-      GetProperty<AudioDeviceID>(
-          kAudioObjectSystemObject, address, &device_size_bytes);
+  std::unique_ptr<AudioDeviceID> devices = GetProperty<AudioDeviceID>(
+      kAudioObjectSystemObject, address, &device_size_bytes);
   if (!devices.get()) {
     return ret;
   }

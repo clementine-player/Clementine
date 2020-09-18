@@ -22,12 +22,11 @@
 #ifndef CORE_ORGANISE_H_
 #define CORE_ORGANISE_H_
 
-#include <memory>
-
-#include <QFileInfo>
 #include <QBasicTimer>
+#include <QFileInfo>
 #include <QObject>
 #include <QTemporaryFile>
+#include <memory>
 
 #include "organiseformat.h"
 #include "transcoder/transcoder.h"
@@ -68,7 +67,8 @@ class Organise : public QObject {
 
  private slots:
   void ProcessSomeFiles();
-  void FileTranscoded(const QString& input, const QString& output, bool success);
+  void FileTranscoded(const QString& input, const QString& output,
+                      bool success);
 
  private:
   void SetSongProgress(float progress, bool transcoded = false);

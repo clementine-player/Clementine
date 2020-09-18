@@ -26,7 +26,7 @@ class ClickableLabel : public QLabel {
  public:
   ClickableLabel(QWidget* parent = nullptr);
 
-signals:
+ signals:
   void Clicked();
 
  protected:

@@ -18,6 +18,7 @@
 */
 
 #include "magnatuneplaylistitem.h"
+
 #include "internet/core/internetmodel.h"
 
 MagnatunePlaylistItem::MagnatunePlaylistItem(const QString& type)

@@ -15,19 +15,19 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "asxparser.h"
+#include "playlistparser.h"
+
+#include <QtDebug>
+#include <algorithm>
+
 #include "asxiniparser.h"
+#include "asxparser.h"
+#include "core/logging.h"
 #include "cueparser.h"
 #include "m3uparser.h"
-#include "playlistparser.h"
 #include "plsparser.h"
 #include "wplparser.h"
 #include "xspfparser.h"
-#include "core/logging.h"
-
-#include <algorithm>
-
-#include <QtDebug>
 
 const int PlaylistParser::kMagicSize = 512;
 

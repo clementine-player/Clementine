@@ -23,25 +23,17 @@
 
 #include "magnatuneservice.h"
 
-#include <QNetworkAccessManager>
-#include <QNetworkRequest>
-#include <QNetworkReply>
-#include <QXmlStreamReader>
-#include <QSortFilterProxyModel>
-#include <QMenu>
-#include <QDesktopServices>
 #include <QCoreApplication>
+#include <QDesktopServices>
+#include <QMenu>
+#include <QNetworkAccessManager>
+#include <QNetworkReply>
+#include <QNetworkRequest>
 #include <QSettings>
-
+#include <QSortFilterProxyModel>
+#include <QXmlStreamReader>
 #include <QtDebug>
 
-#include "qtiocompressor.h"
-
-
-#include "magnatunedownloaddialog.h"
-#include "magnatuneplaylistitem.h"
-#include "magnatuneurlhandler.h"
-#include "internet/core/internetmodel.h"
 #include "core/application.h"
 #include "core/database.h"
 #include "core/logging.h"
@@ -53,9 +45,14 @@
 #include "core/timeconstants.h"
 #include "globalsearch/globalsearch.h"
 #include "globalsearch/librarysearchprovider.h"
-#include "library/librarymodel.h"
+#include "internet/core/internetmodel.h"
 #include "library/librarybackend.h"
 #include "library/libraryfilterwidget.h"
+#include "library/librarymodel.h"
+#include "magnatunedownloaddialog.h"
+#include "magnatuneplaylistitem.h"
+#include "magnatuneurlhandler.h"
+#include "qtiocompressor.h"
 #include "ui/iconloader.h"
 #include "ui/settingsdialog.h"
 
@@ -123,7 +120,7 @@ void MagnatuneService::ReloadSettings() {
 }
 
 QStandardItem* MagnatuneService::CreateRootItem() {
-  root_ = new QStandardItem(IconLoader::Load("magnatune", IconLoader::Provider), 
+  root_ = new QStandardItem(IconLoader::Load("magnatune", IconLoader::Provider),
                             kServiceName);
   root_->setData(true, InternetModel::Role_CanLazyLoad);
   return root_;
@@ -247,7 +244,8 @@ Song MagnatuneService::ReadTrack(QXmlStreamReader& reader) {
   return song;
 }
 
-// TODO(David Sansome): Replace with readElementText(SkipChildElements) in Qt 4.6
+// TODO(David Sansome): Replace with readElementText(SkipChildElements) in
+// Qt 4.6
 QString MagnatuneService::ReadElementText(QXmlStreamReader& reader) {
   int level = 1;
   QString ret;
@@ -277,10 +275,9 @@ void MagnatuneService::EnsureMenuCreated() {
   context_menu_ = new QMenu;
 
   context_menu_->addActions(GetPlaylistActions());
-  download_ = context_menu_->addAction(IconLoader::Load("download", 
-                                       IconLoader::Base),
-                                       tr("Download this album"), this,
-                                       SLOT(Download()));
+  download_ = context_menu_->addAction(
+      IconLoader::Load("download", IconLoader::Base), tr("Download this album"),
+      this, SLOT(Download()));
   context_menu_->addSeparator();
   context_menu_->addAction(IconLoader::Load("download", IconLoader::Base),
                            tr("Open %1 in browser").arg("magnatune.com"), this,
@@ -289,8 +286,8 @@ void MagnatuneService::EnsureMenuCreated() {
                            tr("Refresh catalogue"), this,
                            SLOT(ReloadDatabase()));
   QAction* config_action = context_menu_->addAction(
-      IconLoader::Load("configure", IconLoader::Base), tr("Configure Magnatune..."), 
-      this, SLOT(ShowConfig()));
+      IconLoader::Load("configure", IconLoader::Base),
+      tr("Configure Magnatune..."), this, SLOT(ShowConfig()));
 
   library_filter_ = new LibraryFilterWidget(0);
   library_filter_->SetSettingsGroup(kSettingsGroup);

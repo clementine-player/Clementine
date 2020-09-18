@@ -27,12 +27,11 @@
 
 #include "player.h"
 
-#include <memory>
-
 #include <QSettings>
 #include <QSortFilterProxyModel>
-#include <QtDebug>
 #include <QtConcurrentRun>
+#include <QtDebug>
+#include <memory>
 
 #include "config.h"
 #include "core/application.h"
@@ -114,7 +113,8 @@ void Player::ReloadSettings() {
 
 void Player::HandleLoadResult(const UrlHandler::LoadResult& result) {
   // Might've been an async load, so check we're still on the same item
-  shared_ptr<PlaylistItem> item = app_->playlist_manager()->active()->current_item();
+  shared_ptr<PlaylistItem> item =
+      app_->playlist_manager()->active()->current_item();
   if (!item) {
     loading_async_ = QUrl();
     return;
@@ -624,7 +624,7 @@ void Player::InvalidSongRequested(const QUrl& url) {
   emit SongChangeRequestProcessed(url, false);
   // ... and now when our listeners have completed their processing of the
   // current item we can change the current item by skipping to the next song
-  
+
   QSettings s;
   s.beginGroup(kSettingsGroup);
 

@@ -15,7 +15,6 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "prettyimage.h"
 #include "prettyimageview.h"
 
 #include <QHBoxLayout>
@@ -24,6 +23,8 @@
 #include <QScrollBar>
 #include <QTimer>
 #include <QtDebug>
+
+#include "prettyimage.h"
 
 PrettyImageView::PrettyImageView(QNetworkAccessManager* network,
                                  QWidget* parent)

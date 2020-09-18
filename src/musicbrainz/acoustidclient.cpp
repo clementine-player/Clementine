@@ -17,16 +17,15 @@
 
 #include "acoustidclient.h"
 
-#include <algorithm>
-
 #include <QCoreApplication>
+#include <QJsonArray>
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QJsonParseError>
 #include <QNetworkReply>
 #include <QStringList>
 #include <QUrlQuery>
-#include <QJsonParseError>
-#include <QJsonDocument>
-#include <QJsonObject>
-#include <QJsonArray>
+#include <algorithm>
 
 #include "core/closure.h"
 #include "core/logging.h"
@@ -78,8 +77,7 @@ void AcoustidClient::CancelAll() {
 namespace {
 // Struct used when extracting results in RequestFinished
 struct IdSource {
-  IdSource(const QString& id, int source)
-    : id_(id), nb_sources_(source) {}
+  IdSource(const QString& id, int source) : id_(id), nb_sources_(source) {}
 
   bool operator<(const IdSource& other) const {
     // We want the items with more sources to be at the beginning of the list
@@ -89,7 +87,7 @@ struct IdSource {
   QString id_;
   int nb_sources_;
 };
-}
+}  // namespace
 
 void AcoustidClient::RequestFinished(QNetworkReply* reply, int request_id) {
   reply->deleteLater();
@@ -102,7 +100,8 @@ void AcoustidClient::RequestFinished(QNetworkReply* reply, int request_id) {
   }
 
   QJsonParseError error;
-  QJsonDocument json_document = QJsonDocument::fromJson(reply->readAll(), &error);
+  QJsonDocument json_document =
+      QJsonDocument::fromJson(reply->readAll(), &error);
 
   if (error.error != QJsonParseError::NoError) {
     emit Finished(request_id, QStringList());

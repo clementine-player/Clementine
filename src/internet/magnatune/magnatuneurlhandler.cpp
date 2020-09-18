@@ -17,8 +17,9 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "magnatuneservice.h"
 #include "magnatuneurlhandler.h"
+
+#include "magnatuneservice.h"
 
 MagnatuneUrlHandler::MagnatuneUrlHandler(MagnatuneService* service,
                                          QObject* parent)

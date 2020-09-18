@@ -16,14 +16,15 @@
 */
 
 #include "addstreamdialog.h"
-#include "ui_addstreamdialog.h"
-#include "internet/core/internetmodel.h"
-#include "internet/internetradio/savedradio.h"
 
+#include <QPushButton>
 #include <QSettings>
 #include <QUrl>
-#include <QPushButton>
 #include <QtDebug>
+
+#include "internet/core/internetmodel.h"
+#include "internet/internetradio/savedradio.h"
+#include "ui_addstreamdialog.h"
 
 const char* AddStreamDialog::kSettingsGroup = "AddStreamDialog";
 

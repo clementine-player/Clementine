@@ -20,9 +20,9 @@
 #ifndef AMAROKSLIDER_H
 #define AMAROKSLIDER_H
 
+#include <QList>
 #include <QPixmap>
 #include <QSlider>
-#include <QList>
 
 class QPalette;
 class QTimer;
@@ -41,7 +41,7 @@ class Slider : public QSlider {
   // current needs fine
   int value() const { return adjustValue(QSlider::value()); }
 
-signals:
+ signals:
   // we emit this when the user has specifically changed the slider
   // so connect to it if valueChanged() is too generic
   // Qt also emits valueChanged( int )
@@ -136,6 +136,6 @@ class VolumeSlider : public Slider {
 
   QList<QPixmap> m_handlePixmaps;
 };
-}
+}  // namespace Amarok
 
 #endif

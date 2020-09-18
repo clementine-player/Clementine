@@ -24,22 +24,21 @@
 #include <QTimer>
 
 #include "addpodcastbyurl.h"
+#include "core/application.h"
 #include "fixedopmlpage.h"
 #include "gpoddersearchpage.h"
 #include "gpoddertoptagspage.h"
 #include "itunessearchpage.h"
 #include "podcastbackend.h"
 #include "podcastdiscoverymodel.h"
-#include "ui_addpodcastdialog.h"
-#include "core/application.h"
 #include "ui/iconloader.h"
+#include "ui_addpodcastdialog.h"
 #include "widgets/widgetfadehelper.h"
 
 const char* AddPodcastDialog::kBbcOpmlUrl =
     "http://www.bbc.co.uk/podcasts.opml";
 
-const char* AddPodcastDialog::kCbcOpmlUrl =
-    "http://cbc.ca/podcasts.opml";
+const char* AddPodcastDialog::kCbcOpmlUrl = "http://cbc.ca/podcasts.opml";
 
 AddPodcastDialog::AddPodcastDialog(Application* app, QWidget* parent)
     : QDialog(parent),
@@ -61,30 +60,29 @@ AddPodcastDialog::AddPodcastDialog(Application* app, QWidget* parent)
           SLOT(PodcastDoubleClicked(QModelIndex)));
 
   // Create Add and Remove Podcast buttons
-  add_button_ =
-      new QPushButton(IconLoader::Load("list-add", IconLoader::Base), 
-                      tr("Add Podcast"), this);
+  add_button_ = new QPushButton(IconLoader::Load("list-add", IconLoader::Base),
+                                tr("Add Podcast"), this);
   add_button_->setEnabled(false);
   connect(add_button_, SIGNAL(clicked()), SLOT(AddPodcast()));
   ui_->button_box->addButton(add_button_, QDialogButtonBox::ActionRole);
 
   remove_button_ =
-      new QPushButton(IconLoader::Load("list-remove", IconLoader::Base), 
-                                       tr("Unsubscribe"), this);
+      new QPushButton(IconLoader::Load("list-remove", IconLoader::Base),
+                      tr("Unsubscribe"), this);
   remove_button_->setEnabled(false);
   connect(remove_button_, SIGNAL(clicked()), SLOT(RemovePodcast()));
   ui_->button_box->addButton(remove_button_, QDialogButtonBox::ActionRole);
 
-  QPushButton* settings_button = new QPushButton(
-      IconLoader::Load("configure", IconLoader::Base), 
-      tr("Configure podcasts..."), this);
+  QPushButton* settings_button =
+      new QPushButton(IconLoader::Load("configure", IconLoader::Base),
+                      tr("Configure podcasts..."), this);
   connect(settings_button, SIGNAL(clicked()), SLOT(OpenSettingsPage()));
   ui_->button_box->addButton(settings_button, QDialogButtonBox::ResetRole);
 
   // Create an Open OPML file button
-  QPushButton* open_opml_button = new QPushButton(
-      IconLoader::Load("document-open", IconLoader::Base), 
-      tr("Open OPML file..."), this);
+  QPushButton* open_opml_button =
+      new QPushButton(IconLoader::Load("document-open", IconLoader::Base),
+                      tr("Open OPML file..."), this);
   connect(open_opml_button, SIGNAL(clicked()), this, SLOT(OpenOPMLFile()));
   ui_->button_box->addButton(open_opml_button, QDialogButtonBox::ResetRole);
 
@@ -92,11 +90,11 @@ AddPodcastDialog::AddPodcastDialog(Application* app, QWidget* parent)
   by_url_page_ = new AddPodcastByUrl(app, this);
   AddPage(by_url_page_);
   AddPage(new FixedOpmlPage(QUrl(kBbcOpmlUrl), tr("BBC Podcasts"),
-                            IconLoader::Load("bbc", IconLoader::Provider), 
-                            app, this));
+                            IconLoader::Load("bbc", IconLoader::Provider), app,
+                            this));
   AddPage(new FixedOpmlPage(QUrl(kCbcOpmlUrl), tr("CBC Podcasts"),
-                            IconLoader::Load("cbc", IconLoader::Provider), 
-                            app, this));
+                            IconLoader::Load("cbc", IconLoader::Provider), app,
+                            this));
   AddPage(new GPodderTopTagsPage(app, this));
   AddPage(new GPodderSearchPage(app, this));
   AddPage(new ITunesSearchPage(app, this));

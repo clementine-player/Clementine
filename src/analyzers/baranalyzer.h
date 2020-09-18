@@ -22,7 +22,7 @@
 
 /* Original Author:  Max Howell  <max.howell@methylblue.com>  2003-2005
  * Original Author:  Mark Kretschmann  <markey@web.de>  2005
-*/
+ */
 
 #ifndef ANALYZERS_BARANALYZER_H_
 #define ANALYZERS_BARANALYZER_H_

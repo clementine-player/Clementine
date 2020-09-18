@@ -22,9 +22,8 @@
 #ifndef CORE_APPLICATION_H_
 #define CORE_APPLICATION_H_
 
-#include <memory>
-
 #include <QObject>
+#include <memory>
 
 #include "ui/settingsdialog.h"
 
@@ -115,7 +114,7 @@ class Application : public QObject {
   void ReloadSettings();
   void OpenSettingsDialogAtPage(SettingsDialog::Page page);
 
-signals:
+ signals:
   void ErrorAdded(const QString& message);
   void SettingsChanged();
   void SaveSettings(QSettings* settings);

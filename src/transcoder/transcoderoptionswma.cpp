@@ -16,9 +16,10 @@
 */
 
 #include "transcoderoptionswma.h"
-#include "ui_transcoderoptionswma.h"
 
 #include <QSettings>
+
+#include "ui_transcoderoptionswma.h"
 
 const char* TranscoderOptionsWma::kSettingsGroup = "Transcoder/ffenc_wmav2";
 

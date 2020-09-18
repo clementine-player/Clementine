@@ -18,14 +18,14 @@
 #ifndef LIBRARYWATCHER_H
 #define LIBRARYWATCHER_H
 
-#include "directory.h"
-#include "core/song.h"
-
 #include <QHash>
 #include <QMap>
 #include <QMutex>
 #include <QObject>
 #include <QStringList>
+
+#include "core/song.h"
+#include "directory.h"
 
 class QFileSystemWatcher;
 class QTimer;

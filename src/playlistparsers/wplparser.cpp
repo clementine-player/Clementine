@@ -16,10 +16,11 @@
 */
 
 #include "wplparser.h"
-#include "core/utilities.h"
-#include "version.h"
 
 #include <QXmlStreamReader>
+
+#include "core/utilities.h"
+#include "version.h"
 
 WplParser::WplParser(LibraryBackendInterface* library, QObject* parent)
     : XMLParser(library, parent) {}

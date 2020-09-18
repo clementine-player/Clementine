@@ -22,8 +22,8 @@
 #include <QFuture>
 #include <QHeaderView>
 #include <QHelpEvent>
-#include <QLinearGradient>
 #include <QLineEdit>
+#include <QLinearGradient>
 #include <QPainter>
 #include <QScrollBar>
 #include <QTextDocument>
@@ -31,13 +31,13 @@
 #include <QWhatsThis>
 #include <QtConcurrentRun>
 
-#include "queue.h"
 #include "core/logging.h"
 #include "core/player.h"
 #include "core/utilities.h"
 #include "library/librarybackend.h"
-#include "widgets/trackslider.h"
+#include "queue.h"
 #include "ui/iconloader.h"
+#include "widgets/trackslider.h"
 
 #ifdef Q_OS_DARWIN
 #include "core/mac_utilities.h"
@@ -283,8 +283,8 @@ QString DateItemDelegate::displayText(const QVariant& value,
 
   if (!ok || time == -1) return QString();
 
-  return QDateTime::fromTime_t(time)
-      .toString(QLocale::system().dateTimeFormat(QLocale::ShortFormat));
+  return QDateTime::fromTime_t(time).toString(
+      QLocale::system().dateTimeFormat(QLocale::ShortFormat));
 }
 
 QString LastPlayedItemDelegate::displayText(const QVariant& value,
@@ -321,7 +321,7 @@ void RatingItemDelegate::paint(QPainter* painter,
                                const QModelIndex& index) const {
   // Draw the background
   option.widget->style()->drawPrimitive(QStyle::PE_PanelItemViewItem, &option,
-                                       painter, option.widget);
+                                        painter, option.widget);
 
   // Don't draw anything else if the user can't set the rating of this item
   if (!index.data(Playlist::Role_CanSetRating).toBool()) return;

@@ -19,8 +19,8 @@
 #ifndef CORE_SETTINGSPROVIDER_H_
 #define CORE_SETTINGSPROVIDER_H_
 
-#include <QVariant>
 #include <QSettings>
+#include <QVariant>
 
 class SettingsProvider {
  public:

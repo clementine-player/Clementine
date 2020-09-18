@@ -25,13 +25,15 @@
 
 #ifdef HAVE_QGLWIDGET
 
-#include <cmath>
-#include <cstdlib>
-#include "glanalyzer3.h"
 #include <kdebug.h>
 #include <kstandarddirs.h>
 #include <qimage.h>
 #include <sys/time.h>
+
+#include <cmath>
+#include <cstdlib>
+
+#include "glanalyzer3.h"
 
 #ifndef HAVE_FABSF
 inline float fabsf(float f) { return f < 0.f ? -f : f; }
@@ -47,7 +49,7 @@ class Ball {
         vy(0.0),
         vz(0.0),
         mass(0.01 + drand48() / 10.0),
-        color((float[3]) { 0.0, drand48()*0.5, 0.7 + drand48() * 0.3 }) {}
+        color((float[3]){0.0, drand48() * 0.5, 0.7 + drand48() * 0.3}) {}
   float x, y, z, vx, vy, vz, mass;
   float color[3];
 
@@ -69,7 +71,7 @@ class Ball {
 class Paddle {
  public:
   explicit Paddle(float xPos)
-    : onLeft(xPos < 0), mass(1.0), X(xPos), x(xPos), vx(0.0) {}
+      : onLeft(xPos < 0), mass(1.0), X(xPos), x(xPos), vx(0.0) {}
 
   void updatePhysics(float dT) {
     x += vx * dT;                        // posision
@@ -175,7 +177,8 @@ void GLAnalyzer3::resizeGL(int w, int h) {
   // Get current timestamp.
   timeval tv;
   gettimeofday(&tv, nullptr);
-  show.timeStamp = static_cast<double>(tv.tv_sec) + static_cast<double>(tv.tv_usec) / 1000000.0;
+  show.timeStamp = static_cast<double>(tv.tv_sec) +
+                   static_cast<double>(tv.tv_usec) / 1000000.0;
 }
 
 void GLAnalyzer3::paused() { analyze(Scope()); }
@@ -184,7 +187,8 @@ void GLAnalyzer3::analyze(const Scope& s) {
   // compute the dTime since the last call
   timeval tv;
   gettimeofday(&tv, nullptr);
-  double currentTime = static_cast<double>(tv.tv_sec) + static_cast<double>(tv.tv_usec) / 1000000.0;
+  double currentTime = static_cast<double>(tv.tv_sec) +
+                       static_cast<double>(tv.tv_usec) / 1000000.0;
   show.dT = currentTime - show.timeStamp;
   show.timeStamp = currentTime;
 

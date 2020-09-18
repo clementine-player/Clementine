@@ -27,11 +27,10 @@
 #ifndef CORE_PLAYER_H_
 #define CORE_PLAYER_H_
 
-#include <memory>
-
 #include <QDateTime>
 #include <QObject>
 #include <QSettings>
+#include <memory>
 
 #include "config.h"
 #include "core/song.h"
@@ -92,7 +91,7 @@ class PlayerInterface : public QObject {
   virtual void Play() = 0;
   virtual void ShowOSD() = 0;
 
-signals:
+ signals:
   void Playing();
   void Paused();
   void Stopped();

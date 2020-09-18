@@ -16,11 +16,12 @@
 */
 
 #include "standarditemiconloader.h"
-#include "covers/albumcoverloader.h"
 
-#include <QStandardItemModel>
 #include <QSet>
 #include <QStandardItem>
+#include <QStandardItemModel>
+
+#include "covers/albumcoverloader.h"
 
 StandardItemIconLoader::StandardItemIconLoader(AlbumCoverLoader* cover_loader,
                                                QObject* parent)
@@ -60,7 +61,8 @@ void StandardItemIconLoader::LoadIcon(const Song& song,
 
 void StandardItemIconLoader::RowsAboutToBeRemoved(const QModelIndex& parent,
                                                   int begin, int end) {
-  // For QStandardItemModel, the invisible root item does not have a valid index.
+  // For QStandardItemModel, the invisible root item does not have a valid
+  // index.
   bool is_top = !parent.isValid();
 
   for (QMap<quint64, QStandardItem*>::iterator it = pending_covers_.begin();

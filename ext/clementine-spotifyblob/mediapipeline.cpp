@@ -19,10 +19,11 @@
 // compatible.
 
 #include "mediapipeline.h"
-#include "core/logging.h"
-#include "core/timeconstants.h"
 
 #include <cstring>
+
+#include "core/logging.h"
+#include "core/timeconstants.h"
 
 MediaPipeline::MediaPipeline(int port, quint64 length_msec)
     : port_(port),

@@ -16,11 +16,12 @@
 */
 
 #include "mtpconnection.h"
-#include "core/logging.h"
 
 #include <QRegExp>
-#include <QtDebug>
 #include <QUrlQuery>
+#include <QtDebug>
+
+#include "core/logging.h"
 
 MtpConnection::MtpConnection(const QUrl& url) : device_(nullptr) {
   QString hostname = url.host();

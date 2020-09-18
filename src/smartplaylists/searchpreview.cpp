@@ -16,14 +16,13 @@
 */
 
 #include "searchpreview.h"
-#include "ui_searchpreview.h"
-
-#include <memory>
 
 #include <QtConcurrentRun>
+#include <memory>
 
-#include "querygenerator.h"
 #include "playlist/playlist.h"
+#include "querygenerator.h"
+#include "ui_searchpreview.h"
 
 namespace smart_playlists {
 
@@ -127,4 +126,4 @@ void SearchPreview::SearchFinished(QFuture<PlaylistItemList> future) {
   ui_->count_label->show();
 }
 
-}  // namespace
+}  // namespace smart_playlists

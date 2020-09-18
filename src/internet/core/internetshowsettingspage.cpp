@@ -18,13 +18,13 @@
 
 #include "internetshowsettingspage.h"
 
+#include <QSettings>
+
 #include "core/application.h"
+#include "internet/core/internetmodel.h"
+#include "internet/core/internetservice.h"
 #include "ui/iconloader.h"
 #include "ui/settingsdialog.h"
-#include "internet/core/internetservice.h"
-#include "internet/core/internetmodel.h"
-
-#include <QSettings>
 
 InternetShowSettingsPage::InternetShowSettingsPage(SettingsDialog* parent)
     : SettingsPage(parent), ui_(new Ui::InternetShowSettingsPage) {
@@ -32,7 +32,8 @@ InternetShowSettingsPage::InternetShowSettingsPage(SettingsDialog* parent)
   setWindowIcon(IconLoader::Load("internet-services", IconLoader::Base));
 
   ui_->sources->header()->setSectionResizeMode(0, QHeaderView::Stretch);
-  ui_->sources->header()->setSectionResizeMode(1, QHeaderView::ResizeToContents);
+  ui_->sources->header()->setSectionResizeMode(1,
+                                               QHeaderView::ResizeToContents);
 }
 
 void InternetShowSettingsPage::Load() {

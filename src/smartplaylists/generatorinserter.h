@@ -18,11 +18,10 @@
 #ifndef PLAYLISTGENERATORINSERTER_H
 #define PLAYLISTGENERATORINSERTER_H
 
-#include "generator_fwd.h"
-
 #include <QFuture>
 #include <QObject>
 
+#include "generator_fwd.h"
 #include "playlist/playlist.h"
 
 class LibraryBackend;
@@ -63,6 +62,6 @@ class GeneratorInserter : public QObject {
   bool is_dynamic_;
 };
 
-}  // namespace
+}  // namespace smart_playlists
 
 #endif  // PLAYLISTGENERATORINSERTER_H

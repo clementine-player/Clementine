@@ -28,7 +28,6 @@
 
 #include "core/closure.h"
 #include "core/logging.h"
-
 #include "spotifymessages.pb.h"
 
 SpotifyServer::SpotifyServer(QObject* parent)

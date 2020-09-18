@@ -17,15 +17,15 @@
 
 #include "tagfetcher.h"
 
-#include "acoustidclient.h"
-#include "chromaprinter.h"
-#include "musicbrainzclient.h"
-#include "core/timeconstants.h"
-
 #include <QFuture>
 #include <QFutureWatcher>
 #include <QUrl>
 #include <QtConcurrentMap>
+
+#include "acoustidclient.h"
+#include "chromaprinter.h"
+#include "core/timeconstants.h"
+#include "musicbrainzclient.h"
 
 TagFetcher::TagFetcher(QObject* parent)
     : QObject(parent),

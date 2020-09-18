@@ -18,13 +18,12 @@
 #ifndef PLAYLISTITEM_H
 #define PLAYLISTITEM_H
 
-#include <memory>
-
 #include <QFuture>
 #include <QMap>
 #include <QMetaType>
 #include <QStandardItem>
 #include <QUrl>
+#include <memory>
 
 #include "core/song.h"
 

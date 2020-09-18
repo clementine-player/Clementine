@@ -18,9 +18,9 @@
 #ifndef MACSCREENSAVER_H
 #define MACSCREENSAVER_H
 
-#include "screensaver.h"
-
 #include <IOKit/pwr_mgt/IOPMLib.h>
+
+#include "screensaver.h"
 
 class MacScreensaver : public Screensaver {
  public:

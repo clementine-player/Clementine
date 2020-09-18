@@ -16,12 +16,13 @@
 */
 
 #include "widgetfadehelper.h"
-#include "ui/qt_blurimage.h"
 
-#include <QResizeEvent>
 #include <QPainter>
+#include <QResizeEvent>
 #include <QTimeLine>
 #include <QtDebug>
+
+#include "ui/qt_blurimage.h"
 
 const int WidgetFadeHelper::kLoadingPadding = 9;
 const int WidgetFadeHelper::kLoadingBorderRadius = 10;

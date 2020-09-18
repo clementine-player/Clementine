@@ -18,11 +18,11 @@
 #ifndef TAGFETCHER_H
 #define TAGFETCHER_H
 
-#include "musicbrainzclient.h"
-#include "core/song.h"
-
 #include <QFutureWatcher>
 #include <QObject>
+
+#include "core/song.h"
+#include "musicbrainzclient.h"
 
 class AcoustidClient;
 
@@ -40,7 +40,7 @@ class TagFetcher : public QObject {
  public slots:
   void Cancel();
 
-signals:
+ signals:
   void Progress(const Song& original_song, const QString& stage);
   void ResultAvailable(const Song& original_song,
                        const SongList& songs_guessed);

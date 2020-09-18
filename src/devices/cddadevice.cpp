@@ -15,12 +15,12 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "cddadevice.h"
+
 #include <QMutexLocker>
 
 #include "library/librarybackend.h"
 #include "library/librarymodel.h"
-
-#include "cddadevice.h"
 
 CddaDevice::CddaDevice(const QUrl& url, DeviceLister* lister,
                        const QString& unique_id, DeviceManager* manager,
@@ -28,14 +28,14 @@ CddaDevice::CddaDevice(const QUrl& url, DeviceLister* lister,
     : ConnectedDevice(url, lister, unique_id, manager, app, database_id,
                       first_time),
       cdda_song_loader_(url) {
-  connect(&cdda_song_loader_, SIGNAL(SongsLoaded(SongList)),
-      this, SLOT(SongsLoaded(SongList)));
-  connect(&cdda_song_loader_, SIGNAL(SongsDurationLoaded(SongList)),
-      this, SLOT(SongsLoaded(SongList)));
-  connect(&cdda_song_loader_, SIGNAL(SongsMetadataLoaded(SongList)),
-      this, SLOT(SongsLoaded(SongList)));
-  connect(this, SIGNAL(SongsDiscovered(SongList)),
-      model_, SLOT(SongsDiscovered(SongList)));
+  connect(&cdda_song_loader_, SIGNAL(SongsLoaded(SongList)), this,
+          SLOT(SongsLoaded(SongList)));
+  connect(&cdda_song_loader_, SIGNAL(SongsDurationLoaded(SongList)), this,
+          SLOT(SongsLoaded(SongList)));
+  connect(&cdda_song_loader_, SIGNAL(SongsMetadataLoaded(SongList)), this,
+          SLOT(SongsLoaded(SongList)));
+  connect(this, SIGNAL(SongsDiscovered(SongList)), model_,
+          SLOT(SongsDiscovered(SongList)));
 }
 
 CddaDevice::~CddaDevice() {}

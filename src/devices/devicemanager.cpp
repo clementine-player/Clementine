@@ -17,8 +17,6 @@
 
 #include "devicemanager.h"
 
-#include <memory>
-
 #include <QApplication>
 #include <QDir>
 #include <QIcon>
@@ -27,6 +25,7 @@
 #include <QPushButton>
 #include <QSortFilterProxyModel>
 #include <QUrl>
+#include <memory>
 
 #include "config.h"
 #include "core/application.h"
@@ -519,8 +518,9 @@ std::shared_ptr<ConnectedDevice> DeviceManager::Connect(DeviceInfo* info) {
               nullptr, tr("This device will not work properly"),
               tr("This is an MTP device, but you compiled Clementine without "
                  "libmtp support.") +
-                  "  " + tr("If you continue, this device will work slowly and "
-                            "songs copied to it may not work."),
+                  "  " +
+                  tr("If you continue, this device will work slowly and "
+                     "songs copied to it may not work."),
               QMessageBox::Abort, QMessageBox::Ignore) == QMessageBox::Abort)
         return ret;
     }
@@ -530,8 +530,9 @@ std::shared_ptr<ConnectedDevice> DeviceManager::Connect(DeviceInfo* info) {
               nullptr, tr("This device will not work properly"),
               tr("This is an iPod, but you compiled Clementine without libgpod "
                  "support.") +
-                  "  " + tr("If you continue, this device will work slowly and "
-                            "songs copied to it may not work."),
+                  "  " +
+                  tr("If you continue, this device will work slowly and "
+                     "songs copied to it may not work."),
               QMessageBox::Abort, QMessageBox::Ignore) == QMessageBox::Abort)
         return ret;
     }

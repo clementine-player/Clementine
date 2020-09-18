@@ -15,11 +15,12 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "libraryquery.h"
 #include "sqlrow.h"
 
 #include <QSqlQuery>
 #include <QSqlRecord>
+
+#include "libraryquery.h"
 
 SqlRow::SqlRow(const QSqlQuery& query) { Init(query); }
 

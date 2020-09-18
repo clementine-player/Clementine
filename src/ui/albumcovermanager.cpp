@@ -16,30 +16,8 @@
 */
 
 #include "albumcovermanager.h"
-#include "albumcoversearcher.h"
-#include "iconloader.h"
-#include "ui_albumcovermanager.h"
-#include "core/application.h"
-#include "core/logging.h"
-#include "core/utilities.h"
-#include "covers/albumcoverexporter.h"
-#include "covers/albumcoverfetcher.h"
-#include "covers/albumcoverloader.h"
-#include "covers/coverproviders.h"
-#include "covers/coversearchstatisticsdialog.h"
-#include "library/librarybackend.h"
-#include "library/libraryquery.h"
-#include "library/sqlrow.h"
-#include "playlist/songmimedata.h"
-#include "widgets/forcescrollperpixel.h"
-#include "ui/albumcoverchoicecontroller.h"
-#include "ui/albumcoverexport.h"
-#include "ui/iconloader.h"
-
-#include <algorithm>
 
 #include <QActionGroup>
-#include <QPushButton>
 #include <QContextMenuEvent>
 #include <QEvent>
 #include <QFileDialog>
@@ -50,9 +28,31 @@
 #include <QMessageBox>
 #include <QPainter>
 #include <QProgressBar>
+#include <QPushButton>
 #include <QSettings>
 #include <QShortcut>
 #include <QTimer>
+#include <algorithm>
+
+#include "albumcoversearcher.h"
+#include "core/application.h"
+#include "core/logging.h"
+#include "core/utilities.h"
+#include "covers/albumcoverexporter.h"
+#include "covers/albumcoverfetcher.h"
+#include "covers/albumcoverloader.h"
+#include "covers/coverproviders.h"
+#include "covers/coversearchstatisticsdialog.h"
+#include "iconloader.h"
+#include "library/librarybackend.h"
+#include "library/libraryquery.h"
+#include "library/sqlrow.h"
+#include "playlist/songmimedata.h"
+#include "ui/albumcoverchoicecontroller.h"
+#include "ui/albumcoverexport.h"
+#include "ui/iconloader.h"
+#include "ui_albumcovermanager.h"
+#include "widgets/forcescrollperpixel.h"
 
 const char* AlbumCoverManager::kSettingsGroup = "CoverManager";
 
@@ -415,8 +415,9 @@ bool AlbumCoverManager::ShouldHide(const QListWidgetItem& item,
     bool in_text = item.text().contains(s, Qt::CaseInsensitive);
     bool in_artist =
         item.data(Role_ArtistName).toString().contains(s, Qt::CaseInsensitive);
-    bool in_albumartist = item.data(Role_AlbumArtistName).toString().contains(
-        s, Qt::CaseInsensitive);
+    bool in_albumartist = item.data(Role_AlbumArtistName)
+                              .toString()
+                              .contains(s, Qt::CaseInsensitive);
     if (!in_text && !in_artist && !in_albumartist) {
       return true;
     }
@@ -471,9 +472,10 @@ void AlbumCoverManager::UpdateStatusText() {
                         .arg(fetch_statistics_.missing_images_);
 
   if (fetch_statistics_.bytes_transferred_) {
-    message += ", " +
-               tr("%1 transferred").arg(
-                   Utilities::PrettySize(fetch_statistics_.bytes_transferred_));
+    message +=
+        ", " +
+        tr("%1 transferred")
+            .arg(Utilities::PrettySize(fetch_statistics_.bytes_transferred_));
   }
 
   statusBar()->showMessage(message);

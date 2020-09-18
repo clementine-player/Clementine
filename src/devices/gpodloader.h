@@ -18,11 +18,10 @@
 #ifndef GPODLOADER_H
 #define GPODLOADER_H
 
-#include <memory>
+#include <gpod/itdb.h>
 
 #include <QObject>
-
-#include <gpod/itdb.h>
+#include <memory>
 
 #include "core/song.h"
 
@@ -45,7 +44,7 @@ class GPodLoader : public QObject {
  public slots:
   void LoadDatabase();
 
-signals:
+ signals:
   void Error(const QString& message);
   void TaskStarted(int task_id);
   void LoadFinished(Itdb_iTunesDB* db);

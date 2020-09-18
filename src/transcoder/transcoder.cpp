@@ -17,15 +17,14 @@
 
 #include "transcoder.h"
 
-#include <algorithm>
-#include <memory>
-
 #include <QCoreApplication>
 #include <QDir>
 #include <QFile>
 #include <QSettings>
 #include <QThread>
 #include <QtDebug>
+#include <algorithm>
+#include <memory>
 
 #include "core/logging.h"
 #include "core/signalchecker.h"
@@ -104,7 +103,8 @@ GstElement* Transcoder::CreateElementForMimeType(const QString& element_type,
     GstElementFactory* factory = GST_ELEMENT_FACTORY(p->data);
 
     // Is this the right type of plugin?
-    if (QString(gst_element_factory_get_klass(factory)).contains(element_type)) {
+    if (QString(gst_element_factory_get_klass(factory))
+            .contains(element_type)) {
       const GList* const templates =
           gst_element_factory_get_static_pad_templates(factory);
       for (const GList* p = templates; p; p = g_list_next(p)) {
@@ -292,9 +292,10 @@ void Transcoder::AddJob(const QString& input, const TranscoderPreset& preset,
   // Never overwrite existing files
   if (QFile::exists(job.output)) {
     for (int i = 0;; ++i) {
-      QString new_filename =
-          QString("%1.%2.%3").arg(job.output.section('.', 0, -2)).arg(i).arg(
-              preset.extension_);
+      QString new_filename = QString("%1.%2.%3")
+                                 .arg(job.output.section('.', 0, -2))
+                                 .arg(i)
+                                 .arg(preset.extension_);
       if (!QFile::exists(new_filename)) {
         job.output = new_filename;
         break;
@@ -305,7 +306,8 @@ void Transcoder::AddJob(const QString& input, const TranscoderPreset& preset,
   queued_jobs_ << job;
 }
 
-void Transcoder::AddTemporaryJob(const QString &input, const TranscoderPreset &preset) {
+void Transcoder::AddTemporaryJob(const QString& input,
+                                 const TranscoderPreset& preset) {
   Job job;
   job.input = input;
   job.output = Utilities::GetTemporaryFileName();
@@ -344,8 +346,7 @@ Transcoder::StartJobStatus Transcoder::MaybeStartNextJob() {
   return FailedToStart;
 }
 
-void Transcoder::NewPadCallback(GstElement*, GstPad* pad,
-                                gpointer data) {
+void Transcoder::NewPadCallback(GstElement*, GstPad* pad, gpointer data) {
   JobState* state = reinterpret_cast<JobState*>(data);
   GstPad* const audiopad =
       gst_element_get_static_pad(state->convert_element_, "sink");
@@ -388,8 +389,9 @@ void Transcoder::JobState::ReportError(GstMessage* msg) {
   g_error_free(error);
   free(debugs);
 
-  emit parent_->LogLine(tr("Error processing %1: %2").arg(
-      QDir::toNativeSeparators(job_.input), message));
+  emit parent_->LogLine(
+      tr("Error processing %1: %2")
+          .arg(QDir::toNativeSeparators(job_.input), message));
 }
 
 bool Transcoder::StartJob(const Job& job) {
@@ -418,13 +420,15 @@ bool Transcoder::StartJob(const Job& job) {
 
   if (!codec && !job.preset.codec_mimetype_.isEmpty()) {
     LogLine(tr("Couldn't find an encoder for %1, check you have the correct "
-               "GStreamer plugins installed").arg(job.preset.codec_mimetype_));
+               "GStreamer plugins installed")
+                .arg(job.preset.codec_mimetype_));
     return false;
   }
 
   if (!muxer && !job.preset.muxer_mimetype_.isEmpty()) {
     LogLine(tr("Couldn't find a muxer for %1, check you have the correct "
-               "GStreamer plugins installed").arg(job.preset.muxer_mimetype_));
+               "GStreamer plugins installed")
+                .arg(job.preset.muxer_mimetype_));
     return false;
   }
 
@@ -517,8 +521,9 @@ void Transcoder::Cancel() {
 
     // Remove event handlers from the gstreamer pipeline so they don't get
     // called after the pipeline is shutting down
-    gst_bus_set_sync_handler(gst_pipeline_get_bus(
-        GST_PIPELINE(state->pipeline_)), nullptr, nullptr, nullptr);
+    gst_bus_set_sync_handler(
+        gst_pipeline_get_bus(GST_PIPELINE(state->pipeline_)), nullptr, nullptr,
+        nullptr);
 
     // Stop the pipeline
     if (gst_element_set_state(state->pipeline_, GST_STATE_NULL) ==

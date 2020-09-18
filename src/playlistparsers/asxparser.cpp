@@ -16,7 +16,6 @@
 */
 
 #include "asxparser.h"
-#include "core/utilities.h"
 
 #include <QBuffer>
 #include <QDomDocument>
@@ -26,6 +25,8 @@
 #include <QUrl>
 #include <QXmlStreamReader>
 #include <QtDebug>
+
+#include "core/utilities.h"
 
 ASXParser::ASXParser(LibraryBackendInterface* library, QObject* parent)
     : XMLParser(library, parent) {}

@@ -19,13 +19,13 @@
 #ifndef COVERS_ALBUMCOVEREXPORTER_H_
 #define COVERS_ALBUMCOVEREXPORTER_H_
 
-#include "coverexportrunnable.h"
-#include "core/song.h"
-#include "ui/albumcoverexport.h"
-
 #include <QObject>
 #include <QQueue>
 #include <QTimer>
+
+#include "core/song.h"
+#include "coverexportrunnable.h"
+#include "ui/albumcoverexport.h"
 
 class QThreadPool;
 

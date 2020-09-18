@@ -46,7 +46,7 @@ class CollapsibleInfoHeader : public QWidget {
   void SetTitle(const QString& title);
   void SetIcon(const QIcon& icon);
 
-signals:
+ signals:
   void Expanded();
   void Collapsed();
   void ExpandedToggled(bool expanded);

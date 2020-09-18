@@ -17,16 +17,16 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-
 #include "networkproxyfactory.h"
-#include "core/logging.h"
+
+#include <stdlib.h>
 
 #include <QMutexLocker>
 #include <QSettings>
 #include <QStringList>
 #include <QtDebug>
 
-#include <stdlib.h>
+#include "core/logging.h"
 
 NetworkProxyFactory* NetworkProxyFactory::sInstance = nullptr;
 const char* NetworkProxyFactory::kSettingsGroup = "Proxy";

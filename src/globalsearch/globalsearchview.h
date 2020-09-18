@@ -18,12 +18,12 @@
 #ifndef GLOBALSEARCHVIEW_H
 #define GLOBALSEARCHVIEW_H
 
-#include "searchprovider.h"
-#include "library/librarymodel.h"
-#include "ui/settingsdialog.h"
-#include "playlist/playlistmanager.h"
-
 #include <QWidget>
+
+#include "library/librarymodel.h"
+#include "playlist/playlistmanager.h"
+#include "searchprovider.h"
+#include "ui/settingsdialog.h"
 
 class Application;
 class GlobalSearchModel;
@@ -65,7 +65,7 @@ class GlobalSearchView : public QWidget {
   void FocusSearchField();
   void OpenSettingsDialog();
 
-signals:
+ signals:
   void AddToPlaylist(QMimeData* data);
 
  private slots:

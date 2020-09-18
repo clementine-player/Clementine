@@ -16,14 +16,15 @@
 */
 
 #include "fileviewlist.h"
-#include "core/mimedata.h"
-#include "core/utilities.h"
-#include "ui/iconloader.h"
 
 #include <QContextMenuEvent>
 #include <QFileSystemModel>
 #include <QMenu>
 #include <QtDebug>
+
+#include "core/mimedata.h"
+#include "core/utilities.h"
+#include "ui/iconloader.h"
 
 FileViewList::FileViewList(QWidget* parent)
     : QListView(parent), menu_(new QMenu(this)) {
@@ -32,18 +33,18 @@ FileViewList::FileViewList(QWidget* parent)
                    SLOT(AddToPlaylistSlot()));
   menu_->addAction(IconLoader::Load("media-playback-start", IconLoader::Base),
                    tr("Replace current playlist"), this, SLOT(LoadSlot()));
-  menu_->addAction(IconLoader::Load("document-new", IconLoader::Base), 
-                   tr("Open in new playlist"), this, 
+  menu_->addAction(IconLoader::Load("document-new", IconLoader::Base),
+                   tr("Open in new playlist"), this,
                    SLOT(OpenInNewPlaylistSlot()));
   menu_->addSeparator();
-  menu_->addAction(IconLoader::Load("edit-copy", IconLoader::Base), 
+  menu_->addAction(IconLoader::Load("edit-copy", IconLoader::Base),
                    tr("Copy to library..."), this, SLOT(CopyToLibrarySlot()));
-  menu_->addAction(IconLoader::Load("go-jump", IconLoader::Base), 
+  menu_->addAction(IconLoader::Load("go-jump", IconLoader::Base),
                    tr("Move to library..."), this, SLOT(MoveToLibrarySlot()));
-  menu_->addAction(IconLoader::Load("multimedia-player-ipod-mini-blue", 
-                   IconLoader::Base), tr("Copy to device..."), this, 
-                   SLOT(CopyToDeviceSlot()));
-  menu_->addAction(IconLoader::Load("edit-delete", IconLoader::Base), 
+  menu_->addAction(
+      IconLoader::Load("multimedia-player-ipod-mini-blue", IconLoader::Base),
+      tr("Copy to device..."), this, SLOT(CopyToDeviceSlot()));
+  menu_->addAction(IconLoader::Load("edit-delete", IconLoader::Base),
                    tr("Delete from disk..."), this, SLOT(DeleteSlot()));
 
   menu_->addSeparator();

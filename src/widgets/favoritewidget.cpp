@@ -17,12 +17,12 @@
 
 #include "favoritewidget.h"
 
-#include <QPaintEvent>
+#include <QFontMetrics>
 #include <QMouseEvent>
+#include <QPaintEvent>
 #include <QSize>
 #include <QStyle>
 #include <QStylePainter>
-#include <QFontMetrics>
 
 #include "core/logging.h"
 #include "ui/iconloader.h"
@@ -30,9 +30,7 @@
 const int FavoriteWidget::kStarSize = 16;
 
 FavoriteWidget::FavoriteWidget(int tab_index, bool favorite, QWidget* parent)
-    : QWidget(parent),
-      tab_index_(tab_index),
-      favorite_(favorite) {
+    : QWidget(parent), tab_index_(tab_index), favorite_(favorite) {
   QIcon star_on = IconLoader::Load("star-on", IconLoader::Other);
   on_ = star_on.pixmap(star_on.availableSizes().last());
   QIcon star_off = IconLoader::Load("star-off", IconLoader::Other);

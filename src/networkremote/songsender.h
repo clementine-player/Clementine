@@ -5,9 +5,8 @@
 #include <QQueue>
 #include <QUrl>
 
-#include "remotecontrolmessages.pb.h"
-
 #include "core/song.h"
+#include "remotecontrolmessages.pb.h"
 #include "transcoder/transcoder.h"
 
 class Application;
@@ -19,7 +18,7 @@ struct DownloadItem {
   int song_no_;
   int song_count_;
   DownloadItem(Song s, int no, int count)
-    : song_(s), song_no_(no), song_count_(count) {}
+      : song_(s), song_no_(no), song_count_(count) {}
 };
 
 class SongSender : public QObject {
@@ -35,7 +34,8 @@ class SongSender : public QObject {
   void ResponseSongOffer(bool accepted);
 
  private slots:
-  void TranscodeJobComplete(const QString& input, const QString& output, bool success);
+  void TranscodeJobComplete(const QString& input, const QString& output,
+                            bool success);
   void StartTransfer();
 
  private:

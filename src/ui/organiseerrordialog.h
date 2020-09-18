@@ -31,7 +31,10 @@ class OrganiseErrorDialog : public QDialog {
   OrganiseErrorDialog(QWidget* parent = nullptr);
   ~OrganiseErrorDialog();
 
-  enum OperationType { Type_Copy, Type_Delete, };
+  enum OperationType {
+    Type_Copy,
+    Type_Delete,
+  };
 
   void Show(OperationType type, const SongList& songs_with_errors);
   void Show(OperationType type, const QStringList& files_with_errors);

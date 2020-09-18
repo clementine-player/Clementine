@@ -21,19 +21,18 @@
 
 #include "organise.h"
 
-#include <functional>
-
 #include <QDir>
 #include <QFileInfo>
-#include <QTimer>
 #include <QThread>
+#include <QTimer>
 #include <QUrl>
+#include <functional>
 
-#include "musicstorage.h"
-#include "taskmanager.h"
 #include "core/logging.h"
 #include "core/tagreaderclient.h"
 #include "core/utilities.h"
+#include "musicstorage.h"
+#include "taskmanager.h"
 
 using std::placeholders::_1;
 
@@ -43,8 +42,8 @@ const int Organise::kTranscodeProgressInterval = 500;
 Organise::Organise(TaskManager* task_manager,
                    std::shared_ptr<MusicStorage> destination,
                    const OrganiseFormat& format, bool copy, bool overwrite,
-                   bool mark_as_listened,
-                   const NewSongInfoList& songs_info, bool eject_after)
+                   bool mark_as_listened, const NewSongInfoList& songs_info,
+                   bool eject_after)
     : thread_(nullptr),
       task_manager_(task_manager),
       transcoder_(new Transcoder(this)),
@@ -203,8 +202,8 @@ void Organise::ProcessSomeFiles() {
       if (job.remove_original_) {
         // Notify other aspects of system that song has been invalidated
         QString root = destination_->LocalPath();
-        QFileInfo new_file = QFileInfo(
-             root + "/" + task.song_info_.new_filename_);
+        QFileInfo new_file =
+            QFileInfo(root + "/" + task.song_info_.new_filename_);
         emit SongPathChanged(song, new_file);
       }
       if (job.mark_as_listened_) {
@@ -288,7 +287,8 @@ void Organise::UpdateProgress() {
   task_manager_->SetTaskProgress(task_id_, progress, total);
 }
 
-void Organise::FileTranscoded(const QString& input, const QString& output, bool success) {
+void Organise::FileTranscoded(const QString& input, const QString& output,
+                              bool success) {
   qLog(Info) << "File finished" << input << success;
   transcode_progress_timer_.stop();
 

@@ -19,9 +19,9 @@
 #ifndef INTERNET_BOX_BOXSERVICE_H_
 #define INTERNET_BOX_BOXSERVICE_H_
 
-#include "internet/core/cloudfileservice.h"
-
 #include <QDateTime>
+
+#include "internet/core/cloudfileservice.h"
 
 class OAuthenticator;
 class QNetworkReply;

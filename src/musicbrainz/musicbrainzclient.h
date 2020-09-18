@@ -89,7 +89,7 @@ class MusicBrainzClient : public QObject {
   // requests.
   void CancelAll();
 
-signals:
+ signals:
   // Finished signal emitted when fechting songs tags
   void Finished(int id, const MusicBrainzClient::ResultList& result);
   // Finished signal emitted when fechting album's songs tags using DiscId
@@ -104,13 +104,9 @@ signals:
 
  private:
   // Used as parameter for UniqueResults
-  enum UniqueResultsSortOption {
-    SortResults = 0,
-    KeepOriginalOrder
-  };
+  enum UniqueResultsSortOption { SortResults = 0, KeepOriginalOrder };
 
   struct Release {
-
     enum Status {
       Status_Unknown = 0,
       Status_PseudoRelease,
@@ -157,7 +153,7 @@ signals:
 
   struct PendingResults {
     PendingResults(int sort_id, const ResultList& results)
-      : sort_id_(sort_id), results_(results) {}
+        : sort_id_(sort_id), results_(results) {}
 
     bool operator<(const PendingResults& other) const {
       return sort_id_ < other.sort_id_;
@@ -174,8 +170,7 @@ signals:
   static void ParseArtist(QXmlStreamReader* reader, QString* artist);
   static Release ParseRelease(QXmlStreamReader* reader);
   static ResultList UniqueResults(const ResultList& results,
-      UniqueResultsSortOption opt = SortResults);
-
+                                  UniqueResultsSortOption opt = SortResults);
 
  private:
   static const char* kTrackUrl;

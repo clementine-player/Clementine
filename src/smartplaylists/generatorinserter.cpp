@@ -77,4 +77,4 @@ void GeneratorInserter::Finished(QFuture<PlaylistItemList> future) {
   deleteLater();
 }
 
-}  // namespace
+}  // namespace smart_playlists

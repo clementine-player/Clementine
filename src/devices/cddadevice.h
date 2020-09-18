@@ -56,7 +56,7 @@ class CddaDevice : public ConnectedDevice {
     return str;
   }
 
-signals:
+ signals:
   void SongsDiscovered(const SongList& songs);
 
  private slots:

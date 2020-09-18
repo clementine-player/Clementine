@@ -17,9 +17,9 @@
 #ifndef WINDOWSSCREENSAVER_H
 #define WINDOWSSCREENSAVER_H
 
-#include "screensaver.h"
-
 #include <windows.h>
+
+#include "screensaver.h"
 
 class WindowsScreensaver : public Screensaver {
  public:

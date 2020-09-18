@@ -19,8 +19,8 @@
 #define DIRECTORY_H
 
 #include <QList>
-#include <QString>
 #include <QMetaType>
+#include <QString>
 
 class QSqlQuery;
 

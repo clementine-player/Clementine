@@ -20,12 +20,12 @@
 #ifndef INTERNET_PODCASTS_PODCAST_H_
 #define INTERNET_PODCASTS_PODCAST_H_
 
-#include "podcastepisode.h"
-
 #include <QSharedDataPointer>
 #include <QSqlQuery>
 #include <QUrl>
 #include <QVariantMap>
+
+#include "podcastepisode.h"
 
 namespace mygpo {
 class Podcast;

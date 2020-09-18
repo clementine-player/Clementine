@@ -20,10 +20,10 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "application.h"
+
 #include <QSettings>
 #include <QTimer>
-
-#include "application.h"
 
 #include "config.h"
 #include "core/appearance.h"
@@ -107,9 +107,9 @@ class ApplicationImpl {
           // Initialize the repository of cover providers.
           cover_providers->AddProvider(new MusicbrainzCoverProvider);
           cover_providers->AddProvider(new DiscogsCoverProvider);
-        #ifdef HAVE_LIBLASTFM
+#ifdef HAVE_LIBLASTFM
           cover_providers->AddProvider(new LastFmCoverProvider(app));
-        #endif
+#endif
           return cover_providers;
         }),
         task_manager_([=]() { return new TaskManager(app); }),

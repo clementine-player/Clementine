@@ -20,10 +20,10 @@
 #ifndef INTERNET_PODCASTS_PODCASTINFOWIDGET_H_
 #define INTERNET_PODCASTS_PODCASTINFOWIDGET_H_
 
-#include "podcast.h"
-#include "covers/albumcoverloaderoptions.h"
-
 #include <QFrame>
+
+#include "covers/albumcoverloaderoptions.h"
+#include "podcast.h"
 
 class Application;
 class Ui_PodcastInfoWidget;

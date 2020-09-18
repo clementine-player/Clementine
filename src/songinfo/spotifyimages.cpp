@@ -1,13 +1,12 @@
 #include "spotifyimages.h"
 
-#include <algorithm>
-
-#include <QPair>
 #include <QJsonArray>
 #include <QJsonDocument>
 #include <QJsonObject>
+#include <QPair>
 #include <QUrl>
 #include <QUrlQuery>
+#include <algorithm>
 
 #include "core/closure.h"
 #include "core/logging.h"
@@ -42,7 +41,8 @@ void SpotifyImages::FetchInfo(int id, const Song& metadata) {
     reply->deleteLater();
 
     QJsonParseError error;
-    QJsonDocument json_document = QJsonDocument::fromJson(reply->readAll(), &error);
+    QJsonDocument json_document =
+        QJsonDocument::fromJson(reply->readAll(), &error);
     if (error.error != QJsonParseError::NoError) {
       emit Finished(id);
       return;
@@ -50,7 +50,7 @@ void SpotifyImages::FetchInfo(int id, const Song& metadata) {
 
     QJsonArray results = json_document.array();
     QList<QPair<QUrl, QSize>> image_candidates;
-    for (const QJsonValue &v : results) {
+    for (const QJsonValue& v : results) {
       QJsonObject image = v.toObject();
       QUrl url = image["url"].toVariant().toUrl();
       int height = image["height"].toInt();

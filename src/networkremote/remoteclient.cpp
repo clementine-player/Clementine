@@ -15,13 +15,13 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "core/logging.h"
-
 #include "remoteclient.h"
-#include "networkremote.h"
 
 #include <QDataStream>
 #include <QSettings>
+
+#include "core/logging.h"
+#include "networkremote.h"
 
 RemoteClient::RemoteClient(Application* app, QTcpSocket* client)
     : app_(app),
@@ -64,7 +64,8 @@ void RemoteClient::setDownloader(bool downloader) { downloader_ = downloader; }
 void RemoteClient::IncomingData() {
   while (client_->bytesAvailable()) {
     if (!reading_protobuf_) {
-      // If we have less than 4 byte, we cannot read the length. Wait for more data
+      // If we have less than 4 byte, we cannot read the length. Wait for more
+      // data
       if (client_->bytesAvailable() < 4) {
         break;
       }

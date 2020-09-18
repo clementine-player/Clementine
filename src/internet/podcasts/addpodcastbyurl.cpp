@@ -20,14 +20,14 @@
 #include "addpodcastbyurl.h"
 
 #include <QClipboard>
-#include <QNetworkReply>
 #include <QMessageBox>
+#include <QNetworkReply>
 
+#include "core/closure.h"
 #include "podcastdiscoverymodel.h"
 #include "podcasturlloader.h"
-#include "ui_addpodcastbyurl.h"
-#include "core/closure.h"
 #include "ui/iconloader.h"
+#include "ui_addpodcastbyurl.h"
 
 AddPodcastByUrl::AddPodcastByUrl(Application* app, QWidget* parent)
     : AddPodcastPage(app, parent),

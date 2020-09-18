@@ -28,8 +28,6 @@
 
 #include <stdlib.h>
 
-#include <memory>
-
 #include <QApplication>
 #include <QDateTime>
 #include <QDesktopServices>
@@ -40,41 +38,44 @@
 #include <QMouseEvent>
 #include <QStringList>
 #include <QTcpServer>
-#include <QtDebug>
 #include <QTemporaryFile>
-#include <QtGlobal>
 #include <QUrl>
 #include <QWidget>
 #include <QXmlStreamReader>
+#include <QtDebug>
+#include <QtGlobal>
+#include <memory>
 
+#include "config.h"
 #include "core/application.h"
 #include "core/logging.h"
-#include "config.h"
 #include "timeconstants.h"
 
 #if defined(Q_OS_UNIX)
 #include <sys/statvfs.h>
 #elif defined(Q_OS_WIN32)
 #include <windows.h>
+
 #include <QProcess>
 #endif
 
 #ifdef Q_OS_LINUX
-#include <unistd.h>
 #include <sys/syscall.h>
+#include <unistd.h>
 #endif
 #ifdef Q_OS_DARWIN
 #include <sys/resource.h>
 #endif
 
 #ifdef Q_OS_DARWIN
+#include <QProcess>
+
+#include "CoreServices/CoreServices.h"
+#include "IOKit/ps/IOPSKeys.h"
+#include "IOKit/ps/IOPowerSources.h"
 #include "core/mac_startup.h"
 #include "core/mac_utilities.h"
 #include "core/scoped_cftyperef.h"
-#include "CoreServices/CoreServices.h"
-#include "IOKit/ps/IOPowerSources.h"
-#include "IOKit/ps/IOPSKeys.h"
-#include <QProcess>
 #endif
 
 namespace Utilities {

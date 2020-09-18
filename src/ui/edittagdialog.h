@@ -26,8 +26,8 @@
 #include "covers/albumcoverloaderoptions.h"
 #include "musicbrainz/tagfetcher.h"
 #include "playlist/playlistitem.h"
-#include "widgets/lineedit.h"
 #include "trackselectiondialog.h"
+#include "widgets/lineedit.h"
 
 class Application;
 class AlbumCoverChoiceController;
@@ -56,7 +56,7 @@ class EditTagDialog : public QDialog {
 
   void accept();
 
-signals:
+ signals:
   void Error(const QString& message);
 
  protected:

@@ -18,7 +18,6 @@
 */
 
 #include "internet/podcasts/podcastsettingspage.h"
-#include "ui_podcastsettingspage.h"
 
 #include <QFileDialog>
 #include <QSettings>
@@ -29,8 +28,9 @@
 #include "library/librarydirectorymodel.h"
 #include "library/librarymodel.h"
 #include "podcastdownloader.h"
-#include "ui/settingsdialog.h"
 #include "ui/iconloader.h"
+#include "ui/settingsdialog.h"
+#include "ui_podcastsettingspage.h"
 
 const char* PodcastSettingsPage::kSettingsGroup = "Podcasts";
 

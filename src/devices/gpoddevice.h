@@ -18,13 +18,13 @@
 #ifndef GPODDEVICE_H
 #define GPODDEVICE_H
 
-#include "connecteddevice.h"
-#include "core/musicstorage.h"
+#include <gpod/itdb.h>
 
 #include <QMutex>
 #include <QWaitCondition>
 
-#include <gpod/itdb.h>
+#include "connecteddevice.h"
+#include "core/musicstorage.h"
 
 class GPodLoader;
 

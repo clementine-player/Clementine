@@ -20,18 +20,17 @@
 */
 
 /* Original Author:  Max Howell  <max.howell@methylblue.com>  2003
-*/
+ */
 
 #include "analyzerbase.h"
 
+#include <QEvent>
+#include <QPaintEvent>
+#include <QPainter>
+#include <QtDebug>
 #include <algorithm>
 #include <cmath>
 #include <cstdint>
-
-#include <QEvent>
-#include <QPainter>
-#include <QPaintEvent>
-#include <QtDebug>
 
 #include "core/arraysize.h"
 

@@ -18,9 +18,9 @@
 
 #include "boxservice.h"
 
+#include <QJsonArray>
 #include <QJsonDocument>
 #include <QJsonObject>
-#include <QJsonArray>
 #include <QUrlQuery>
 
 #include "core/application.h"
@@ -53,7 +53,7 @@ static const char* kEvents = "https://api.box.com/2.0/events";
 
 BoxService::BoxService(Application* app, InternetModel* parent)
     : CloudFileService(app, parent, kServiceName, kSettingsGroup,
-                       IconLoader::Load("box", IconLoader::Provider), 
+                       IconLoader::Load("box", IconLoader::Provider),
                        SettingsDialog::Page_Box) {
   app->player()->RegisterUrlHandler(new BoxUrlHandler(this, this));
 }
@@ -126,7 +126,8 @@ void BoxService::AddAuthorizationHeader(QNetworkRequest* request) const {
 void BoxService::FetchUserInfoFinished(QNetworkReply* reply) {
   reply->deleteLater();
 
-  QJsonObject json_response = QJsonDocument::fromJson(reply->readAll()).object();
+  QJsonObject json_response =
+      QJsonDocument::fromJson(reply->readAll()).object();
 
   QString name = json_response["name"].toString();
   if (!name.isEmpty()) {
@@ -175,7 +176,8 @@ void BoxService::InitialiseEventsCursor() {
 
 void BoxService::InitialiseEventsFinished(QNetworkReply* reply) {
   reply->deleteLater();
-  QJsonObject json_response = QJsonDocument::fromJson(reply->readAll()).object();
+  QJsonObject json_response =
+      QJsonDocument::fromJson(reply->readAll()).object();
   if (json_response.contains("next_stream_position")) {
     QSettings s;
     s.beginGroup(kSettingsGroup);
@@ -193,7 +195,7 @@ void BoxService::FetchRecursiveFolderItems(const int folder_id,
          << "modified_at"
          << "name";
   QString fields_list = fields.join(",");
-  QUrlQuery url_query (url);
+  QUrlQuery url_query(url);
   url_query.addQueryItem("fields", fields_list);
   url_query.addQueryItem("limit", "1000");  // Maximum according to API docs.
   url_query.addQueryItem("offset", QString::number(offset));
@@ -210,7 +212,8 @@ void BoxService::FetchFolderItemsFinished(QNetworkReply* reply,
                                           const int folder_id) {
   reply->deleteLater();
 
-  QJsonObject json_response = QJsonDocument::fromJson(reply->readAll()).object();
+  QJsonObject json_response =
+      QJsonDocument::fromJson(reply->readAll()).object();
 
   QJsonArray entries = json_response["entries"].toArray();
   const int total_entries = json_response["total_count"].toInt();
@@ -230,7 +233,7 @@ void BoxService::FetchFolderItemsFinished(QNetworkReply* reply,
   }
 }
 
-void BoxService::MaybeAddFileEntry(const QJsonObject &entry) {
+void BoxService::MaybeAddFileEntry(const QJsonObject& entry) {
   QString mime_type = GuessMimeTypeForFile(entry["name"].toString());
   QUrl url;
   url.setScheme("box");
@@ -238,8 +241,10 @@ void BoxService::MaybeAddFileEntry(const QJsonObject &entry) {
 
   Song song;
   song.set_url(url);
-  song.set_ctime(QDateTime::fromString(entry["created_at"].toString()).toTime_t());
-  song.set_mtime(QDateTime::fromString(entry["modified_at"].toString()).toTime_t());
+  song.set_ctime(
+      QDateTime::fromString(entry["created_at"].toString()).toTime_t());
+  song.set_mtime(
+      QDateTime::fromString(entry["modified_at"].toString()).toTime_t());
   song.set_filesize(entry["size"].toInt());
   song.set_title(entry["name"].toString());
 
@@ -288,7 +293,8 @@ void BoxService::UpdateFilesFromCursor(const QString& cursor) {
 void BoxService::FetchEventsFinished(QNetworkReply* reply) {
   // TODO(John Maguire): Page through events.
   reply->deleteLater();
-  QJsonObject json_response = QJsonDocument::fromJson(reply->readAll()).object();
+  QJsonObject json_response =
+      QJsonDocument::fromJson(reply->readAll()).object();
 
   QSettings s;
   s.beginGroup(kSettingsGroup);

@@ -20,7 +20,7 @@
 #ifndef INTERNET_PODCASTS_GPODDERSYNC_H_
 #define INTERNET_PODCASTS_GPODDERSYNC_H_
 
-#include "podcastepisode.h"
+#include <ApiRequest.h>
 
 #include <QDateTime>
 #include <QObject>
@@ -29,7 +29,7 @@
 #include <QSharedPointer>
 #include <QUrl>
 
-#include <ApiRequest.h>
+#include "podcastepisode.h"
 
 class Application;
 class Podcast;

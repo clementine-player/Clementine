@@ -26,12 +26,11 @@
 
 #include "blockanalyzer.h"
 
-#include <cmath>
-
 #include <QMouseEvent>
-#include <QResizeEvent>
-#include <cstdlib>
 #include <QPainter>
+#include <QResizeEvent>
+#include <cmath>
+#include <cstdlib>
 
 const uint BlockAnalyzer::kHeight = 2;
 const uint BlockAnalyzer::kWidth = 4;

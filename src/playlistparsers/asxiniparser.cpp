@@ -16,10 +16,11 @@
 */
 
 #include "asxiniparser.h"
-#include "core/logging.h"
 
 #include <QTextStream>
 #include <QtDebug>
+
+#include "core/logging.h"
 
 AsxIniParser::AsxIniParser(LibraryBackendInterface* library, QObject* parent)
     : ParserBase(library, parent) {}

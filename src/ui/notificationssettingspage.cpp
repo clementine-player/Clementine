@@ -15,17 +15,18 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "iconloader.h"
 #include "notificationssettingspage.h"
-#include "settingsdialog.h"
-#include "ui_notificationssettingspage.h"
-#include "ui/iconloader.h"
-#include "widgets/osdpretty.h"
 
 #include <QColorDialog>
 #include <QFontDialog>
 #include <QMenu>
 #include <QToolTip>
+
+#include "iconloader.h"
+#include "settingsdialog.h"
+#include "ui/iconloader.h"
+#include "ui_notificationssettingspage.h"
+#include "widgets/osdpretty.h"
 
 NotificationsSettingsPage::NotificationsSettingsPage(SettingsDialog* dialog)
     : SettingsPage(dialog),
@@ -35,9 +36,9 @@ NotificationsSettingsPage::NotificationsSettingsPage(SettingsDialog* dialog)
   setWindowIcon(IconLoader::Load("help-hint", IconLoader::Base));
 
   QIcon nocover = IconLoader::Load("nocover", IconLoader::Other);
-  pretty_popup_->SetMessage(tr("OSD Preview"), tr("Drag to reposition"),
-                            nocover.pixmap(nocover.availableSizes().last())
-                                   .toImage());
+  pretty_popup_->SetMessage(
+      tr("OSD Preview"), tr("Drag to reposition"),
+      nocover.pixmap(nocover.availableSizes().last()).toImage());
 
   ui_->notifications_bg_preset->setItemData(0, QColor(OSDPretty::kPresetBlue),
                                             Qt::DecorationRole);
@@ -108,8 +109,10 @@ NotificationsSettingsPage::NotificationsSettingsPage(SettingsDialog* dialog)
           SLOT(PrepareNotificationPreview()));
 
   // Icons
-  ui_->notifications_exp_chooser1->setIcon(IconLoader::Load("list-add", IconLoader::Base));
-  ui_->notifications_exp_chooser2->setIcon(IconLoader::Load("list-add", IconLoader::Base));
+  ui_->notifications_exp_chooser1->setIcon(
+      IconLoader::Load("list-add", IconLoader::Base));
+  ui_->notifications_exp_chooser2->setIcon(
+      IconLoader::Load("list-add", IconLoader::Base));
 }
 
 NotificationsSettingsPage::~NotificationsSettingsPage() {
@@ -139,7 +142,7 @@ void NotificationsSettingsPage::Load() {
         ui_->notifications_native->setChecked(true);
         break;
       }
-    // Fallthrough
+      // Fallthrough
 
     case OSD::Pretty:
       ui_->notifications_pretty->setChecked(true);
@@ -150,7 +153,7 @@ void NotificationsSettingsPage::Load() {
         ui_->notifications_tray->setChecked(true);
         break;
       }
-    // Fallthrough
+      // Fallthrough
 
     case OSD::Disabled:
     default:

@@ -18,14 +18,14 @@
 #ifndef LIBRARYBACKEND_H
 #define LIBRARYBACKEND_H
 
+#include <QFileInfo>
 #include <QObject>
 #include <QSet>
 #include <QUrl>
-#include <QFileInfo>
 
+#include "core/song.h"
 #include "directory.h"
 #include "libraryquery.h"
-#include "core/song.h"
 
 class Database;
 
@@ -223,7 +223,7 @@ class LibraryBackend : public LibraryBackendInterface {
   // Tells the library model that a song path has changed
   void SongPathChanged(const Song& song, const QFileInfo& new_file);
 
-signals:
+ signals:
   void DirectoryDiscovered(const Directory& dir,
                            const SubdirectoryList& subdirs);
   void DirectoryDeleted(int dir_id);

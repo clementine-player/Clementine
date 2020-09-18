@@ -18,9 +18,8 @@
 #ifndef APPEARANCESETTINGSPAGE_H
 #define APPEARANCESETTINGSPAGE_H
 
-#include "settingspage.h"
-
 #include "playlist/playlistview.h"
+#include "settingspage.h"
 
 class QWidget;
 

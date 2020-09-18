@@ -15,6 +15,15 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "playlistmanager.h"
+
+#include <QFileDialog>
+#include <QFileInfo>
+#include <QFuture>
+#include <QMessageBox>
+#include <QtConcurrentRun>
+#include <QtDebug>
+
 #include "core/application.h"
 #include "core/logging.h"
 #include "core/player.h"
@@ -24,19 +33,11 @@
 #include "library/libraryplaylistitem.h"
 #include "playlistbackend.h"
 #include "playlistcontainer.h"
-#include "playlistmanager.h"
 #include "playlistparsers/playlistparser.h"
 #include "playlistsaveoptionsdialog.h"
 #include "playlistview.h"
 #include "queue.h"
 #include "smartplaylists/generator.h"
-
-#include <QFileDialog>
-#include <QFileInfo>
-#include <QFuture>
-#include <QMessageBox>
-#include <QtConcurrentRun>
-#include <QtDebug>
 
 using smart_playlists::GeneratorPtr;
 
@@ -185,8 +186,9 @@ void PlaylistManager::Save(int id, const QString& filename,
     // from the left side bar and the playlist isn't loaded.
     QFuture<QList<Song>> future = QtConcurrent::run(
         playlist_backend_, &PlaylistBackend::GetPlaylistSongs, id);
-    NewClosure(future, this, SLOT(ItemsLoadedForSavePlaylist(
-                                 QFuture<SongList>, QString, Playlist::Path)),
+    NewClosure(future, this,
+               SLOT(ItemsLoadedForSavePlaylist(QFuture<SongList>, QString,
+                                               Playlist::Path)),
                future, filename, path_type);
   }
 }
@@ -201,8 +203,9 @@ void PlaylistManager::SaveWithUI(int id, const QString& playlist_name) {
   QSettings settings;
   settings.beginGroup(Playlist::kSettingsGroup);
   QString filename = settings.value("last_save_playlist").toString();
-  QString extension = settings.value("last_save_extension",
-                                     parser()->default_extension()).toString();
+  QString extension =
+      settings.value("last_save_extension", parser()->default_extension())
+          .toString();
   QString filter =
       settings.value("last_save_filter", parser()->default_filter()).toString();
 

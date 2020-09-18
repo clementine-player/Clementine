@@ -17,10 +17,10 @@
 */
 
 #include "dbplaylistitem.h"
+
 #include "core/tagreaderclient.h"
 
-DbPlaylistItem::DbPlaylistItem(const QString& type)
-    : PlaylistItem(type) {}
+DbPlaylistItem::DbPlaylistItem(const QString& type) : PlaylistItem(type) {}
 
 DbPlaylistItem::DbPlaylistItem(const QString& type, const Song& song)
     : PlaylistItem(type), song_(song) {}

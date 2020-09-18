@@ -16,10 +16,11 @@
 */
 
 #include "playlistfilterparser.h"
-#include "playlist.h"
-#include "core/logging.h"
 
 #include <QAbstractItemModel>
+
+#include "core/logging.h"
+#include "playlist.h"
 
 class SearchTermComparator {
  public:

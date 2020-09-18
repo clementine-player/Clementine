@@ -16,21 +16,21 @@
 */
 
 #include "transcodedialog.h"
-#include "transcoder.h"
-#include "transcoderoptionsdialog.h"
-#include "ui_transcodedialog.h"
-#include "ui_transcodelogdialog.h"
-#include "ui/iconloader.h"
-#include "ui/mainwindow.h"
-#include "widgets/fileview.h"
 
+#include <QDateTime>
+#include <QDirIterator>
+#include <QFileDialog>
+#include <QPushButton>
+#include <QSettings>
 #include <algorithm>
 
-#include <QPushButton>
-#include <QFileDialog>
-#include <QDirIterator>
-#include <QSettings>
-#include <QDateTime>
+#include "transcoder.h"
+#include "transcoderoptionsdialog.h"
+#include "ui/iconloader.h"
+#include "ui/mainwindow.h"
+#include "ui_transcodedialog.h"
+#include "ui_transcodelogdialog.h"
+#include "widgets/fileview.h"
 
 // winspool.h defines this :(
 #ifdef AddJob
@@ -224,8 +224,9 @@ void TranscodeDialog::AllJobsComplete() { SetWorking(false); }
 void TranscodeDialog::Add() {
   QStringList filenames = QFileDialog::getOpenFileNames(
       this, tr("Add files to transcode"), last_add_dir_,
-      QString("%1 (%2);;%3").arg(tr("Music"), FileView::kFileFilter,
-                                 tr(MainWindow::kAllFilesFilterSpec)));
+      QString("%1 (%2);;%3")
+          .arg(tr("Music"), FileView::kFileFilter,
+               tr(MainWindow::kAllFilesFilterSpec)));
 
   if (filenames.isEmpty()) return;
 

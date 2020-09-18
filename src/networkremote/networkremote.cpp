@@ -18,9 +18,9 @@
 #include "networkremote.h"
 
 #include <QDataStream>
-#include <QSettings>
 #include <QHostInfo>
 #include <QNetworkProxy>
+#include <QSettings>
 #include <QTcpServer>
 
 #include "core/logging.h"

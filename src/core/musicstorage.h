@@ -20,12 +20,11 @@
 #ifndef CORE_MUSICSTORAGE_H_
 #define CORE_MUSICSTORAGE_H_
 
-#include "song.h"
-
+#include <QMetaType>
 #include <functional>
 #include <memory>
 
-#include <QMetaType>
+#include "song.h"
 
 class MusicStorage {
  public:

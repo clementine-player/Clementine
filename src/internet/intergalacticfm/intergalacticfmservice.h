@@ -22,8 +22,8 @@
 
 #include <QXmlStreamReader>
 
-#include "internet/core/internetservice.h"
 #include "core/cachedlist.h"
+#include "internet/core/internetservice.h"
 
 class IntergalacticFMUrlHandler;
 
@@ -71,7 +71,7 @@ class IntergalacticFMServiceBase : public InternetService {
   bool IsStreamListStale() const { return streams_.IsStale(); }
   StreamList Streams();
 
-signals:
+ signals:
   void StreamsChanged();
 
  private slots:

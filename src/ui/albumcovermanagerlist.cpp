@@ -17,10 +17,9 @@
 
 #include "albumcovermanagerlist.h"
 
-#include <memory>
-
 #include <QDropEvent>
 #include <QUrl>
+#include <memory>
 
 #include "albumcovermanager.h"
 #include "library/librarybackend.h"
@@ -29,8 +28,8 @@
 AlbumCoverManagerList::AlbumCoverManagerList(QWidget* parent)
     : QListWidget(parent), manager_(nullptr) {}
 
-QMimeData* AlbumCoverManagerList::mimeData(const QList<QListWidgetItem*> items)
-    const {
+QMimeData* AlbumCoverManagerList::mimeData(
+    const QList<QListWidgetItem*> items) const {
   // Get songs
   SongList songs;
   for (QListWidgetItem* item : items) {

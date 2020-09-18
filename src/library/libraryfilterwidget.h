@@ -18,10 +18,9 @@
 #ifndef LIBRARYFILTERWIDGET_H
 #define LIBRARYFILTERWIDGET_H
 
-#include <memory>
-
 #include <QMap>
 #include <QWidget>
+#include <memory>
 
 #include "librarymodel.h"
 #include "savedgroupingmanager.h"
@@ -74,7 +73,7 @@ class LibraryFilterWidget : public QWidget {
   void SetQueryMode(QueryOptions::QueryMode view);
   void FocusOnFilter(QKeyEvent* e);
 
-signals:
+ signals:
   void UpPressed();
   void DownPressed();
   void ReturnPressed();

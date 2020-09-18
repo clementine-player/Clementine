@@ -1,12 +1,12 @@
 #ifndef CORE_KGLOBALACCELGLOBALSHORTCUTBACKEND_H_
 #define CORE_KGLOBALACCELGLOBALSHORTCUTBACKEND_H_
 
+#include <QSet>
+#include <QStringList>
+
 #include "config.h"
 #include "globalshortcutbackend.h"
 #include "globalshortcuts.h"
-
-#include <QSet>
-#include <QStringList>
 
 class QAction;
 

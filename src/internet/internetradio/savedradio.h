@@ -42,7 +42,7 @@ class SavedRadio : public InternetService {
 
   struct Stream {
     explicit Stream(const QUrl& url, const QString& name = QString())
-      : url_(url), name_(name) {}
+        : url_(url), name_(name) {}
 
     // For QList::contains
     bool operator==(const Stream& other) const { return url_ == other.url_; }

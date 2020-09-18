@@ -18,9 +18,9 @@
 
 #include "seafiletree.h"
 
-#include <QStringList>
-#include <QRegExp>
 #include <QDir>
+#include <QRegExp>
+#include <QStringList>
 
 #include "core/logging.h"
 
@@ -203,7 +203,7 @@ QList<QPair<QString, SeafileTree::Entry>> SeafileTree::GetRecursiveFilesOfDir(
 
   if (item->entry().is_file()) {
     files.append(qMakePair(path, item->entry()));
-  // Get files of the dir
+    // Get files of the dir
   } else {
     for (TreeItem* child_item : item->children()) {
       if (child_item->entry().is_file()) {

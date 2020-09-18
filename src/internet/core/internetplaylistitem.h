@@ -22,10 +22,10 @@
 #ifndef INTERNET_CORE_INTERNETPLAYLISTITEM_H_
 #define INTERNET_CORE_INTERNETPLAYLISTITEM_H_
 
+#include <QUrl>
+
 #include "core/song.h"
 #include "playlist/playlistitem.h"
-
-#include <QUrl>
 
 class InternetService;
 

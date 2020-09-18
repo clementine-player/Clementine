@@ -17,20 +17,21 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "config.h"
 #include "crashreporting.h"
-#include "core/logging.h"
 
 #include <QApplication>
 #include <QDir>
 #include <QFile>
 #include <QMessageBox>
 #include <QNetworkAccessManager>
-#include <QNetworkRequest>
 #include <QNetworkReply>
+#include <QNetworkRequest>
 #include <QProgressDialog>
 #include <QUrl>
 #include <QtDebug>
+
+#include "config.h"
+#include "core/logging.h"
 
 #if defined(HAVE_BREAKPAD) and defined(Q_OS_LINUX)
 #include "client/linux/handler/exception_handler.h"
@@ -111,13 +112,14 @@ bool CrashSender::Start() {
   }
 
   // No tr() here.
-  QMessageBox prompt(QMessageBox::Critical, "Clementine has crashed!",
-                     QString(
-                         "A crash report has been created and saved to '%1'.  "
-                         "With your permission "
-                         "it can be automatically sent to our server so the "
-                         "developers can find "
-                         "out what happened.").arg(path_));
+  QMessageBox prompt(
+      QMessageBox::Critical, "Clementine has crashed!",
+      QString("A crash report has been created and saved to '%1'.  "
+              "With your permission "
+              "it can be automatically sent to our server so the "
+              "developers can find "
+              "out what happened.")
+          .arg(path_));
   prompt.addButton("Don't send", QMessageBox::RejectRole);
   prompt.addButton("Send crash report", QMessageBox::AcceptRole);
   if (prompt.exec() == QDialog::Rejected) {
@@ -195,7 +197,7 @@ void CrashSender::UploadProgress(qint64 bytes) { progress_->setValue(bytes); }
 
 namespace google_breakpad {
 class ExceptionHandler {};
-}
+}  // namespace google_breakpad
 
 CrashReporting::CrashReporting() {}
 

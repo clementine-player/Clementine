@@ -18,8 +18,8 @@
 #ifndef CHROMAPRINTER_H
 #define CHROMAPRINTER_H
 
-#include <gst/gst.h>
 #include <gst/app/gstappsink.h>
+#include <gst/gst.h>
 
 #include <QBuffer>
 #include <QString>

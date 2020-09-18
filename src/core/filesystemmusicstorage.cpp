@@ -21,12 +21,13 @@
 */
 
 #include "filesystemmusicstorage.h"
-#include "core/logging.h"
-#include "core/utilities.h"
 
 #include <QDir>
 #include <QFile>
 #include <QUrl>
+
+#include "core/logging.h"
+#include "core/utilities.h"
 
 FilesystemMusicStorage::FilesystemMusicStorage(const QString& root)
     : root_(root) {}

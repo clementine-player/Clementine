@@ -16,8 +16,6 @@
 */
 
 #include "moodbarproxystyle.h"
-#include "core/application.h"
-#include "core/logging.h"
 
 #include <QContextMenuEvent>
 #include <QEvent>
@@ -28,6 +26,9 @@
 #include <QStyleOptionComplex>
 #include <QStyleOptionSlider>
 #include <QTimeLine>
+
+#include "core/application.h"
+#include "core/logging.h"
 
 const int MoodbarProxyStyle::kMarginSize = 3;
 const int MoodbarProxyStyle::kBorderSize = 1;
@@ -166,9 +167,9 @@ void MoodbarProxyStyle::drawComplexControl(ComplexControl control,
     return;
   }
 
-  const_cast<MoodbarProxyStyle*>(this)
-      ->Render(control, qstyleoption_cast<const QStyleOptionSlider*>(option),
-               painter, widget);
+  const_cast<MoodbarProxyStyle*>(this)->Render(
+      control, qstyleoption_cast<const QStyleOptionSlider*>(option), painter,
+      widget);
 }
 
 void MoodbarProxyStyle::Render(ComplexControl control,

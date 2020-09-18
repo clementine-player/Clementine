@@ -55,7 +55,7 @@ class AcoustidClient : public QObject {
   // requests.
   void CancelAll();
 
-signals:
+ signals:
   void Finished(int id, const QStringList& mbid_list);
 
  private slots:

@@ -17,21 +17,20 @@
 
 #include "moodbarloader.h"
 
-#include <memory>
-
 #include <QCoreApplication>
 #include <QDir>
 #include <QFileInfo>
 #include <QNetworkDiskCache>
-#include <QTimer>
 #include <QThread>
+#include <QTimer>
 #include <QUrl>
+#include <memory>
 
-#include "moodbarpipeline.h"
 #include "core/application.h"
 #include "core/closure.h"
 #include "core/logging.h"
 #include "core/utilities.h"
+#include "moodbarpipeline.h"
 
 #ifdef Q_OS_WIN32
 #include <windows.h>

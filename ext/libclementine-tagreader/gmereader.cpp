@@ -1,16 +1,18 @@
-#include "core/logging.h"
-#include "core/timeconstants.h"
 #include "gmereader.h"
-#include "tagreader.h"
 
 #include <apefile.h>
 #include <tag.h>
+
 #include <QByteArray>
 #include <QChar>
 #include <QFile>
 #include <QFileInfo>
 #include <QString>
 #include <QtEndian>
+
+#include "core/logging.h"
+#include "core/timeconstants.h"
+#include "tagreader.h"
 
 bool GME::IsSupportedFormat(const QFileInfo& file_info) {
   return (file_info.completeSuffix().endsWith("spc") ||

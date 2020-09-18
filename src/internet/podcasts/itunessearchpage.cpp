@@ -19,20 +19,20 @@
 
 #include "itunessearchpage.h"
 
-#include <QMessageBox>
-#include <QNetworkReply>
-#include <QUrlQuery>
+#include <QJsonArray>
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QJsonParseError>
-#include <QJsonArray>
+#include <QMessageBox>
+#include <QNetworkReply>
+#include <QUrlQuery>
 
 #include "core/closure.h"
 #include "core/network.h"
 #include "podcast.h"
 #include "podcastdiscoverymodel.h"
-#include "ui_itunessearchpage.h"
 #include "ui/iconloader.h"
+#include "ui_itunessearchpage.h"
 
 const char* ITunesSearchPage::kUrlBase =
     "http://ax.phobos.apple.com.edgesuite.net/WebObjects/MZStoreServices.woa/"
@@ -76,7 +76,8 @@ void ITunesSearchPage::SearchFinished(QNetworkReply* reply) {
   }
 
   QJsonParseError error;
-  QJsonDocument json_document = QJsonDocument::fromJson(reply->readAll(), &error);
+  QJsonDocument json_document =
+      QJsonDocument::fromJson(reply->readAll(), &error);
 
   if (error.error != QJsonParseError::NoError) {
     QMessageBox::warning(

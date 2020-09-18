@@ -21,9 +21,9 @@
 
 #include <QMessageBox>
 
-#include "gpoddertoptagsmodel.h"
 #include "core/closure.h"
 #include "core/network.h"
+#include "gpoddertoptagsmodel.h"
 #include "ui/iconloader.h"
 
 const int GPodderTopTagsPage::kMaxTagCount = 100;

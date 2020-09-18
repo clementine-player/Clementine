@@ -37,12 +37,12 @@ class CddaSongLoader : public QObject {
  public:
   CddaSongLoader(
       // Url of the CD device. Will use the default device if empty
-      const QUrl& url = QUrl(),
-      QObject* parent = nullptr);
+      const QUrl& url = QUrl(), QObject* parent = nullptr);
   ~CddaSongLoader();
 
   // Load songs.
-  // Signals declared below will be emitted anytime new information will be available.
+  // Signals declared below will be emitted anytime new information will be
+  // available.
   void LoadSongs();
   bool HasChanged();
 
@@ -55,7 +55,7 @@ class CddaSongLoader : public QObject {
  private slots:
   void LoadAudioCDTags(const QString& musicbrainz_discid) const;
   void AudioCDTagsLoaded(const QString& artist, const QString& album,
-      const MusicBrainzClient::ResultList& results);
+                         const MusicBrainzClient::ResultList& results);
 
  private:
   QUrl GetUrlFromTrack(int track_number) const;
@@ -67,4 +67,4 @@ class CddaSongLoader : public QObject {
   QMutex mutex_load_;
 };
 
-#endif // CDDASONGLOADER_H
+#endif  // CDDASONGLOADER_H

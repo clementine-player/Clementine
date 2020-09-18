@@ -18,16 +18,16 @@
 */
 
 #include "googledrivesettingspage.h"
-#include "ui_googledrivesettingspage.h"
 
 #include <QSortFilterProxyModel>
 
+#include "core/application.h"
 #include "googledriveclient.h"
 #include "googledriveservice.h"
-#include "core/application.h"
 #include "internet/core/internetmodel.h"
-#include "ui/settingsdialog.h"
 #include "ui/iconloader.h"
+#include "ui/settingsdialog.h"
+#include "ui_googledrivesettingspage.h"
 
 GoogleDriveSettingsPage::GoogleDriveSettingsPage(SettingsDialog* parent)
     : SettingsPage(parent),

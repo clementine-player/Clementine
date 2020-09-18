@@ -1,10 +1,9 @@
 #ifndef NETWORKREMOTE_H
 #define NETWORKREMOTE_H
 
-#include <memory>
-
 #include <QList>
 #include <QObject>
+#include <memory>
 
 class Application;
 class IncomingDataParser;

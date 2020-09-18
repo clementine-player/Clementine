@@ -18,7 +18,7 @@
 #ifndef GSTENGINEPIPELINE_H
 #define GSTENGINEPIPELINE_H
 
-#include <memory>
+#include <gst/gst.h>
 
 #include <QBasicTimer>
 #include <QFuture>
@@ -27,8 +27,7 @@
 #include <QThreadPool>
 #include <QTimeLine>
 #include <QUrl>
-
-#include <gst/gst.h>
+#include <memory>
 
 #include "engine_fwd.h"
 #include "playbackrequest.h"
@@ -110,7 +109,7 @@ class GstEnginePipeline : public QObject {
  public slots:
   void SetVolumeModifier(qreal mod);
 
-signals:
+ signals:
   void EndOfStreamReached(int pipeline_id, bool has_next_track);
   void MetadataFound(int pipeline_id, const Engine::SimpleMetaBundle& bundle);
   // This indicates an error, delegated from GStreamer, in the pipeline.

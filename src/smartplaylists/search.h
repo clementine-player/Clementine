@@ -28,10 +28,18 @@ class Search {
   typedef QList<SearchTerm> TermList;
 
   // These values are persisted, so add to the end of the enum only
-  enum SearchType { Type_And = 0, Type_Or, Type_All, };
+  enum SearchType {
+    Type_And = 0,
+    Type_Or,
+    Type_All,
+  };
 
   // These values are persisted, so add to the end of the enum only
-  enum SortType { Sort_Random = 0, Sort_FieldAsc, Sort_FieldDesc, };
+  enum SortType {
+    Sort_Random = 0,
+    Sort_FieldAsc,
+    Sort_FieldDesc,
+  };
 
   Search();
   Search(SearchType type, TermList terms, SortType sort_type,
@@ -55,7 +63,7 @@ class Search {
   QString ToSql(const QString& songs_table) const;
 };
 
-}  // namespace
+}  // namespace smart_playlists
 
 QDataStream& operator<<(QDataStream& s, const smart_playlists::Search& search);
 QDataStream& operator>>(QDataStream& s, smart_playlists::Search& search);

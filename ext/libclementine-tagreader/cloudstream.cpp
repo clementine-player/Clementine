@@ -17,20 +17,20 @@
 
 #include "cloudstream.h"
 
+#include <taglib/id3v2framefactory.h>
+#include <taglib/mpegfile.h>
+
 #include <QEventLoop>
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
 #include <QNetworkRequest>
-
-#include <taglib/id3v2framefactory.h>
-#include <taglib/mpegfile.h>
 
 #include "core/logging.h"
 
 namespace {
 static const int kTaglibPrefixCacheBytes = 64 * 1024;  // Should be enough.
 static const int kTaglibSuffixCacheBytes = 8 * 1024;
-}
+}  // namespace
 
 CloudStream::CloudStream(const QUrl& url, const QString& filename,
                          const long length, const QString& auth)

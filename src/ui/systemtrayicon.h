@@ -60,7 +60,7 @@ class SystemTrayIcon : public QObject {
   virtual void LastFMButtonLoveStateChanged(bool value) {}
   virtual void MuteButtonStateChanged(bool value) {}
 
-signals:
+ signals:
   void ChangeVolume(int delta);
   void SeekForward();
   void SeekBackward();

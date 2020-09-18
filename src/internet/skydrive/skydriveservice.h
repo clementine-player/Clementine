@@ -20,9 +20,9 @@
 #ifndef INTERNET_SKYDRIVE_SKYDRIVESERVICE_H_
 #define INTERNET_SKYDRIVE_SKYDRIVESERVICE_H_
 
-#include "internet/core/cloudfileservice.h"
-
 #include <QDateTime>
+
+#include "internet/core/cloudfileservice.h"
 
 class OAuthenticator;
 class QNetworkRequest;

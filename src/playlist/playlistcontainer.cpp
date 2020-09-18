@@ -15,16 +15,7 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "core/appearance.h"
-#include "core/application.h"
-#include "core/logging.h"
-#include "core/player.h"
-#include "core/timeconstants.h"
 #include "playlistcontainer.h"
-#include "playlistmanager.h"
-#include "playlistparsers/playlistparser.h"
-#include "ui/iconloader.h"
-#include "ui_playlistcontainer.h"
 
 #include <QAction>
 #include <QFileDialog>
@@ -37,6 +28,16 @@
 #include <QTimeLine>
 #include <QTimer>
 #include <QUndoStack>
+
+#include "core/appearance.h"
+#include "core/application.h"
+#include "core/logging.h"
+#include "core/player.h"
+#include "core/timeconstants.h"
+#include "playlistmanager.h"
+#include "playlistparsers/playlistparser.h"
+#include "ui/iconloader.h"
+#include "ui_playlistcontainer.h"
 
 const char* PlaylistContainer::kSettingsGroup = "Playlist";
 const int PlaylistContainer::kFilterDelayMs = 100;
@@ -114,9 +115,7 @@ PlaylistContainer::PlaylistContainer(QWidget* parent)
   ui_->filter->installEventFilter(this);
 }
 
-PlaylistContainer::~PlaylistContainer() {
-  delete ui_;
-}
+PlaylistContainer::~PlaylistContainer() { delete ui_; }
 
 void PlaylistContainer::SetApplication(Application* app) {
   Q_ASSERT(app);
@@ -398,10 +397,9 @@ void PlaylistContainer::UpdateNoMatchesLabel() {
 
   QString text;
   if (has_rows && !has_results) {
-    if (ui_->filter->text().trimmed().compare(
-            "the answer to life the universe "
-            "and everything",
-            Qt::CaseInsensitive) == 0) {
+    if (ui_->filter->text().trimmed().compare("the answer to life the universe "
+                                              "and everything",
+                                              Qt::CaseInsensitive) == 0) {
       text = "42";
     } else {
       text = tr(

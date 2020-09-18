@@ -15,16 +15,16 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "globalsearch.h"
 #include "globalsearchsettingspage.h"
+
+#include <QSettings>
+#include <algorithm>
+
 #include "core/logging.h"
+#include "globalsearch.h"
 #include "ui/iconloader.h"
 #include "ui/settingsdialog.h"
 #include "ui_globalsearchsettingspage.h"
-
-#include <algorithm>
-
-#include <QSettings>
 
 GlobalSearchSettingsPage::GlobalSearchSettingsPage(SettingsDialog* dialog)
     : SettingsPage(dialog), ui_(new Ui::GlobalSearchSettingsPage) {
@@ -32,7 +32,8 @@ GlobalSearchSettingsPage::GlobalSearchSettingsPage(SettingsDialog* dialog)
   setWindowIcon(IconLoader::Load("search", IconLoader::Base));
 
   ui_->sources->header()->setSectionResizeMode(0, QHeaderView::Stretch);
-  ui_->sources->header()->setSectionResizeMode(1, QHeaderView::ResizeToContents);
+  ui_->sources->header()->setSectionResizeMode(1,
+                                               QHeaderView::ResizeToContents);
 
   warning_icon_ = IconLoader::Load("dialog-warning", IconLoader::Base);
 

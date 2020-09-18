@@ -44,7 +44,7 @@ class PrettyImage : public QWidget {
   QSize sizeHint() const;
   QSize image_size() const;
 
-signals:
+ signals:
   void Loaded();
 
  public slots:

@@ -24,8 +24,8 @@
 #include <QNetworkReply>
 
 #include "albumcoverfetcher.h"
-#include "coverprovider.h"
 #include "core/closure.h"
+#include "coverprovider.h"
 #include "internet/lastfm/lastfmcompat.h"
 
 LastFmCoverProvider::LastFmCoverProvider(QObject* parent)

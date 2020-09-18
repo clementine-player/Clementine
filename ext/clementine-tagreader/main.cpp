@@ -15,16 +15,16 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "tagreaderworker.h"
-#include "core/logging.h"
+#include <sys/time.h>
 
 #include <QCoreApplication>
 #include <QLocalSocket>
 #include <QSslSocket>
 #include <QStringList>
-
 #include <iostream>
-#include <sys/time.h>
+
+#include "core/logging.h"
+#include "tagreaderworker.h"
 
 int main(int argc, char** argv) {
   QCoreApplication a(argc, argv);

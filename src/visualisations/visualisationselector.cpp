@@ -15,13 +15,14 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "visualisationselector.h"
+
+#include <QPushButton>
+
 #include "config.h"
 #include "projectmpresetmodel.h"
 #include "projectmvisualisation.h"
-#include "visualisationselector.h"
 #include "ui_visualisationselector.h"
-
-#include <QPushButton>
 
 #ifdef USE_SYSTEM_PROJECTM
 #include <libprojectM/projectM.hpp>

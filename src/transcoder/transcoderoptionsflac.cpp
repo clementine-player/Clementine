@@ -16,9 +16,10 @@
 */
 
 #include "transcoderoptionsflac.h"
-#include "ui_transcoderoptionsflac.h"
 
 #include <QSettings>
+
+#include "ui_transcoderoptionsflac.h"
 
 const char* TranscoderOptionsFlac::kSettingsGroup = "Transcoder/flacenc";
 

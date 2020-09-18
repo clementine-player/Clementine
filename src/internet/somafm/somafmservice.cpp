@@ -24,13 +24,11 @@
 #include <QCoreApplication>
 #include <QDesktopServices>
 #include <QMenu>
-#include <QNetworkRequest>
 #include <QNetworkReply>
+#include <QNetworkRequest>
 #include <QXmlStreamReader>
 #include <QtDebug>
 
-#include "somafmurlhandler.h"
-#include "internet/core/internetmodel.h"
 #include "core/application.h"
 #include "core/closure.h"
 #include "core/logging.h"
@@ -40,6 +38,8 @@
 #include "core/utilities.h"
 #include "globalsearch/globalsearch.h"
 #include "globalsearch/somafmsearchprovider.h"
+#include "internet/core/internetmodel.h"
+#include "somafmurlhandler.h"
 #include "ui/iconloader.h"
 
 const int SomaFMServiceBase::kStreamsCacheDurationSecs =
@@ -103,11 +103,11 @@ void SomaFMServiceBase::ShowContextMenu(const QPoint& global_pos) {
                              this, SLOT(Homepage()));
 
     if (!donate_page_url_.isEmpty()) {
-      context_menu_->addAction(IconLoader::Load("download", IconLoader::Base), 
+      context_menu_->addAction(IconLoader::Load("download", IconLoader::Base),
                                tr("Donate"), this, SLOT(Donate()));
     }
 
-    context_menu_->addAction(IconLoader::Load("view-refresh",  IconLoader::Base),
+    context_menu_->addAction(IconLoader::Load("view-refresh", IconLoader::Base),
                              tr("Refresh channels"), this,
                              SLOT(ForceRefreshStreams()));
   }
@@ -232,9 +232,8 @@ void SomaFMServiceBase::PopulateStreams() {
   if (root_->hasChildren()) root_->removeRows(0, root_->rowCount());
 
   for (const Stream& stream : streams_) {
-    QStandardItem* item =
-        new QStandardItem(IconLoader::Load("icon_radio", IconLoader::Lastfm), 
-                          QString());
+    QStandardItem* item = new QStandardItem(
+        IconLoader::Load("icon_radio", IconLoader::Lastfm), QString());
     item->setText(stream.title_);
     item->setData(QVariant::fromValue(stream.ToSong(name_)),
                   InternetModel::Role_SongMetadata);
@@ -262,7 +261,7 @@ void SomaFMServiceBase::ReloadSettings() {
 }
 
 SomaFMService::SomaFMService(Application* app, InternetModel* parent)
-    : SomaFMServiceBase(
-          app, parent, "SomaFM", QUrl("https://somafm.com/channels.xml"),
-          QUrl("https://somafm.com"), QUrl(), IconLoader::Load("somafm", 
-          IconLoader::Provider)) {}
+    : SomaFMServiceBase(app, parent, "SomaFM",
+                        QUrl("https://somafm.com/channels.xml"),
+                        QUrl("https://somafm.com"), QUrl(),
+                        IconLoader::Load("somafm", IconLoader::Provider)) {}

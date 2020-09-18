@@ -20,9 +20,9 @@
 #ifndef INTERNET_PODCASTS_ADDPODCASTDIALOG_H_
 #define INTERNET_PODCASTS_ADDPODCASTDIALOG_H_
 
-#include "podcast.h"
-
 #include <QDialog>
+
+#include "podcast.h"
 
 class AddPodcastByUrl;
 class AddPodcastPage;

@@ -25,11 +25,10 @@
 #include <stdint.h>
 #include <sys/types.h>
 
-#include <vector>
-
 #include <QList>
 #include <QObject>
 #include <QUrl>
+#include <vector>
 
 #include "engine_fwd.h"
 #include "playbackrequest.h"
@@ -105,7 +104,7 @@ class Base : public QObject {
   }
   virtual void SetStereoBalance(float value) {}
 
-signals:
+ signals:
   // Emitted when crossfading is enabled and the track is crossfade_duration_
   // away from finishing
   void TrackAboutToEnd();
@@ -172,6 +171,6 @@ struct SimpleMetaBundle {
   QString tracknr;
 };
 
-}  // namespace
+}  // namespace Engine
 
 #endif

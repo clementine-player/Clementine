@@ -20,12 +20,12 @@
 
 #include <QSortFilterProxyModel>
 
-#include "ui_boxsettingspage.h"
 #include "core/application.h"
 #include "internet/box/boxservice.h"
 #include "internet/core/internetmodel.h"
-#include "ui/settingsdialog.h"
 #include "ui/iconloader.h"
+#include "ui/settingsdialog.h"
+#include "ui_boxsettingspage.h"
 
 BoxSettingsPage::BoxSettingsPage(SettingsDialog* parent)
     : SettingsPage(parent),

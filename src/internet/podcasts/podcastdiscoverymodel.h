@@ -20,9 +20,9 @@
 #ifndef INTERNET_PODCASTS_PODCASTDISCOVERYMODEL_H_
 #define INTERNET_PODCASTS_PODCASTDISCOVERYMODEL_H_
 
-#include "covers/albumcoverloaderoptions.h"
-
 #include <QStandardItemModel>
+
+#include "covers/albumcoverloaderoptions.h"
 
 class Application;
 class OpmlContainer;

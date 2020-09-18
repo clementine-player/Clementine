@@ -18,12 +18,11 @@
 #ifndef FILEVIEW_H
 #define FILEVIEW_H
 
-#include <memory>
-
-#include <QWidget>
+#include <QModelIndex>
 #include <QUndoCommand>
 #include <QUrl>
-#include <QModelIndex>
+#include <QWidget>
+#include <memory>
 
 #include "core/song.h"
 
@@ -50,7 +49,7 @@ class FileView : public QWidget {
   void showEvent(QShowEvent*);
   void keyPressEvent(QKeyEvent* e);
 
-signals:
+ signals:
   void PathChanged(const QString& path);
 
   void AddToPlaylist(QMimeData* data);

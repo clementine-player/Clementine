@@ -19,10 +19,10 @@
 #ifndef INTERNET_SEAFILE_SEAFILESETTINGSPAGE_H_
 #define INTERNET_SEAFILE_SEAFILESETTINGSPAGE_H_
 
-#include "ui/settingspage.h"
-
 #include <QModelIndex>
 #include <QWidget>
+
+#include "ui/settingspage.h"
 
 class Ui_SeafileSettingsPage;
 class SeafileService;

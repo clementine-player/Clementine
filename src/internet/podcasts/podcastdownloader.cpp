@@ -147,8 +147,8 @@ void PodcastDownloader::ReloadSettings() {
   download_dir_ = s.value("download_dir", DefaultDownloadDir()).toString();
 }
 
-QString PodcastDownloader::FilenameForEpisode(const QString& directory,
-                                              const PodcastEpisode& episode) const {
+QString PodcastDownloader::FilenameForEpisode(
+    const QString& directory, const PodcastEpisode& episode) const {
   const QString file_extension = QFileInfo(episode.url().path()).suffix();
   int count = 0;
 
@@ -166,8 +166,9 @@ QString PodcastDownloader::FilenameForEpisode(const QString& directory,
       filename =
           QString("%1/%2.%3").arg(directory, base_filename, file_extension);
     } else {
-      filename = QString("%1/%2 (%3).%4").arg(
-          directory, base_filename, QString::number(count), file_extension);
+      filename = QString("%1/%2 (%3).%4")
+                     .arg(directory, base_filename, QString::number(count),
+                          file_extension);
     }
 
     if (!QFile::exists(filename)) {
@@ -209,10 +210,11 @@ void PodcastDownloader::DownloadEpisode(const PodcastEpisode& episode) {
   list_tasks_ << task;
   qLog(Info) << "Downloading" << task->episode().url() << "to" << filepath;
   connect(task, SIGNAL(finished(Task*)), SLOT(ReplyFinished(Task*)));
-  connect(task, SIGNAL(ProgressChanged(const PodcastEpisode&,
-                                       PodcastDownload::State, int)),
-          SIGNAL(ProgressChanged(const PodcastEpisode&,
-                                 PodcastDownload::State, int)));
+  connect(task,
+          SIGNAL(ProgressChanged(const PodcastEpisode&, PodcastDownload::State,
+                                 int)),
+          SIGNAL(ProgressChanged(const PodcastEpisode&, PodcastDownload::State,
+                                 int)));
 }
 
 void PodcastDownloader::ReplyFinished(Task* task) {
@@ -220,8 +222,8 @@ void PodcastDownloader::ReplyFinished(Task* task) {
   delete task;
 }
 
-QString PodcastDownloader::SanitiseFilenameComponent(const QString& text)
-    const {
+QString PodcastDownloader::SanitiseFilenameComponent(
+    const QString& text) const {
   return QString(text)
       .replace(disallowed_filename_characters_, " ")
       .simplified();
@@ -239,7 +241,8 @@ void PodcastDownloader::EpisodesAdded(const PodcastEpisodeList& episodes) {
   }
 }
 
-PodcastEpisodeList PodcastDownloader::EpisodesDownloading(const PodcastEpisodeList& episodes) {
+PodcastEpisodeList PodcastDownloader::EpisodesDownloading(
+    const PodcastEpisodeList& episodes) {
   PodcastEpisodeList ret;
   for (Task* tas : list_tasks_) {
     for (PodcastEpisode episode : episodes) {

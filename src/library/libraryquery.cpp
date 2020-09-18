@@ -16,11 +16,12 @@
 */
 
 #include "libraryquery.h"
-#include "core/song.h"
 
-#include <QtDebug>
 #include <QDateTime>
 #include <QSqlError>
+#include <QtDebug>
+
+#include "core/song.h"
 
 QueryOptions::QueryOptions() : max_age_(-1), query_mode_(QueryMode_All) {}
 
@@ -220,8 +221,8 @@ void LibraryQuery::AddCompilationRequirement(bool compilation) {
   // which gives very poor performance. See
   // https://github.com/clementine-player/Clementine/pull/4285 for
   // more details.
-  where_clauses_ << QString("+effective_compilation = %1")
-                        .arg(compilation ? 1 : 0);
+  where_clauses_
+      << QString("+effective_compilation = %1").arg(compilation ? 1 : 0);
 }
 
 QSqlQuery LibraryQuery::Exec(QSqlDatabase db, const QString& songs_table,

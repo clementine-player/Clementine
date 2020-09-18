@@ -20,11 +20,10 @@
 #ifndef INTERNET_MAGNATUNE_MAGNATUNEDOWNLOADDIALOG_H_
 #define INTERNET_MAGNATUNE_MAGNATUNEDOWNLOADDIALOG_H_
 
-#include <memory>
-
 #include <QDialog>
 #include <QNetworkReply>
 #include <QStringList>
+#include <memory>
 
 #include "core/song.h"
 
@@ -38,7 +37,8 @@ class MagnatuneDownloadDialog : public QDialog {
   Q_OBJECT
 
  public:
-  explicit MagnatuneDownloadDialog(MagnatuneService* service, QWidget* parent = nullptr);
+  explicit MagnatuneDownloadDialog(MagnatuneService* service,
+                                   QWidget* parent = nullptr);
   ~MagnatuneDownloadDialog();
 
   void Show(const SongList& songs);

@@ -15,21 +15,22 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "ultimatelyricsprovider.h"
 #include "ultimatelyricsreader.h"
-#include "core/logging.h"
 
 #include <QCoreApplication>
 #include <QFile>
 #include <QXmlStreamReader>
+
+#include "core/logging.h"
+#include "ultimatelyricsprovider.h"
 
 UltimateLyricsReader::UltimateLyricsReader(QObject* parent)
     : QObject(parent), thread_(qApp->thread()) {}
 
 void UltimateLyricsReader::SetThread(QThread* thread) { thread_ = thread; }
 
-QList<SongInfoProvider*> UltimateLyricsReader::Parse(const QString& filename)
-    const {
+QList<SongInfoProvider*> UltimateLyricsReader::Parse(
+    const QString& filename) const {
   QFile file(filename);
   if (!file.open(QIODevice::ReadOnly)) {
     qLog(Warning) << "Error opening" << filename;
@@ -39,8 +40,8 @@ QList<SongInfoProvider*> UltimateLyricsReader::Parse(const QString& filename)
   return ParseDevice(&file);
 }
 
-QList<SongInfoProvider*> UltimateLyricsReader::ParseDevice(QIODevice* device)
-    const {
+QList<SongInfoProvider*> UltimateLyricsReader::ParseDevice(
+    QIODevice* device) const {
   QList<SongInfoProvider*> ret;
 
   QXmlStreamReader reader(device);
@@ -59,8 +60,8 @@ QList<SongInfoProvider*> UltimateLyricsReader::ParseDevice(QIODevice* device)
   return ret;
 }
 
-SongInfoProvider* UltimateLyricsReader::ParseProvider(QXmlStreamReader* reader)
-    const {
+SongInfoProvider* UltimateLyricsReader::ParseProvider(
+    QXmlStreamReader* reader) const {
   QXmlStreamAttributes attributes = reader->attributes();
 
   UltimateLyricsProvider* scraper = new UltimateLyricsProvider;
@@ -113,8 +114,7 @@ UltimateLyricsProvider::Rule UltimateLyricsReader::ParseRule(
                                                   QString());
         else if (attr.hasAttribute("begin"))
           ret << UltimateLyricsProvider::RuleItem(
-                     attr.value("begin").toString(),
-                     attr.value("end").toString());
+              attr.value("begin").toString(), attr.value("end").toString());
       }
       reader->skipCurrentElement();
     }
@@ -122,8 +122,8 @@ UltimateLyricsProvider::Rule UltimateLyricsReader::ParseRule(
   return ret;
 }
 
-QString UltimateLyricsReader::ParseInvalidIndicator(QXmlStreamReader* reader)
-    const {
+QString UltimateLyricsReader::ParseInvalidIndicator(
+    QXmlStreamReader* reader) const {
   QString ret = reader->attributes().value("value").toString();
   reader->skipCurrentElement();
   return ret;

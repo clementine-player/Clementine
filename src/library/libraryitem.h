@@ -18,8 +18,8 @@
 #ifndef LIBRARYITEM_H
 #define LIBRARYITEM_H
 
-#include <QString>
 #include <QList>
+#include <QString>
 
 #include "core/simpletreeitem.h"
 #include "core/song.h"

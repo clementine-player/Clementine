@@ -25,9 +25,11 @@
 
 #ifdef HAVE_QGLWIDGET
 
-#include <cmath>
-#include "glanalyzer.h"
 #include <kdebug.h>
+
+#include <cmath>
+
+#include "glanalyzer.h"
 
 GLAnalyzer::GLAnalyzer(QWidget* parent)
     : Analyzer::Base3D(parent, 15), m_oldy(32, -10.0f), m_peaks(32) {}
@@ -75,8 +77,9 @@ void GLAnalyzer::analyze(const Scope& s) {
 
     // Calculating new vertical position (y) depending on the data passed by
     // amarok
-    y = static_cast<float>(s[i + offset] * mfactor);  // This make it kinda dynamically
-                                                      // resize depending on the data
+    y = static_cast<float>(s[i + offset] *
+                           mfactor);  // This make it kinda dynamically
+                                      // resize depending on the data
 
     // Some basic bounds checking
     if (y > 30)

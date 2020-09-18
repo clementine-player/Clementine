@@ -17,14 +17,14 @@
 
 #include "chromaprinter.h"
 
+#include <chromaprint.h>
+
 #include <QCoreApplication>
 #include <QDir>
 #include <QElapsedTimer>
 #include <QEventLoop>
 #include <QThread>
 #include <QtDebug>
-
-#include <chromaprint.h>
 
 #include "core/logging.h"
 #include "core/signalchecker.h"
@@ -147,18 +147,18 @@ QString Chromaprinter::CreateFingerprint() {
   ChromaprintContext* chromaprint =
       chromaprint_new(CHROMAPRINT_ALGORITHM_DEFAULT);
   chromaprint_start(chromaprint, kDecodeRate, kDecodeChannels);
-  chromaprint_feed(chromaprint, reinterpret_cast<int16_t *>(data.data()),
+  chromaprint_feed(chromaprint, reinterpret_cast<int16_t*>(data.data()),
                    data.size() / 2);
   chromaprint_finish(chromaprint);
 
   int size = 0;
 
 #if CHROMAPRINT_VERSION_MAJOR >= 1 && CHROMAPRINT_VERSION_MINOR >= 4
-  u_int32_t *fprint = nullptr;
-  char *encoded = nullptr;
+  u_int32_t* fprint = nullptr;
+  char* encoded = nullptr;
 #else
-  void *fprint = nullptr;
-  void *encoded = nullptr;
+  void* fprint = nullptr;
+  void* encoded = nullptr;
 #endif
 
   int ret = chromaprint_get_raw_fingerprint(chromaprint, &fprint, &size);

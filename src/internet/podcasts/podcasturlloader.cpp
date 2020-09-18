@@ -22,11 +22,11 @@
 #include <QNetworkReply>
 #include <QUrlQuery>
 
-#include "podcastparser.h"
 #include "core/closure.h"
 #include "core/logging.h"
 #include "core/network.h"
 #include "core/utilities.h"
+#include "podcastparser.h"
 
 const int PodcastUrlLoader::kMaxRedirects = 5;
 

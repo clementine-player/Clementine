@@ -23,12 +23,12 @@
 #include <QTextDocument>
 #include <QUrlQuery>
 
-#include "songinfotextview.h"
-#include "ui_songkickconcertwidget.h"
 #include "core/closure.h"
 #include "core/logging.h"
 #include "core/network.h"
 #include "core/utilities.h"
+#include "songinfotextview.h"
+#include "ui_songkickconcertwidget.h"
 
 const int SongKickConcertWidget::kStaticMapWidth = 100;
 const int SongKickConcertWidget::kStaticMapHeight = 100;
@@ -58,8 +58,8 @@ void SongKickConcertWidget::ReloadSettings() {
 
 void SongKickConcertWidget::Init(const QString& title, const QString& url,
                                  const QString& date, const QString& location) {
-  ui_->title->setText(
-      QString("<a href=\"%1\">%2</a>").arg(url.toHtmlEscaped(), title.toHtmlEscaped()));
+  ui_->title->setText(QString("<a href=\"%1\">%2</a>")
+                          .arg(url.toHtmlEscaped(), title.toHtmlEscaped()));
 
   if (!location.isEmpty()) {
     ui_->location->setText(location);
@@ -105,9 +105,9 @@ void SongKickConcertWidget::SetMap(const QString& lat, const QString& lng,
   map_url_.setQuery(map_url_query);
 
   // Request the static map image
-  const QUrl url(QString(kStaticMapUrl).arg(QString::number(kStaticMapWidth),
-                                            QString::number(kStaticMapHeight),
-                                            lat, lng));
+  const QUrl url(QString(kStaticMapUrl)
+                     .arg(QString::number(kStaticMapWidth),
+                          QString::number(kStaticMapHeight), lat, lng));
   QNetworkReply* reply = network_->get(QNetworkRequest(url));
   NewClosure(reply, SIGNAL(finished()), this, SLOT(MapLoaded(QNetworkReply*)),
              reply);

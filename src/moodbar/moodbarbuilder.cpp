@@ -16,9 +16,10 @@
 */
 
 #include "moodbarbuilder.h"
-#include "core/arraysize.h"
 
 #include <cmath>
+
+#include "core/arraysize.h"
 
 namespace {
 

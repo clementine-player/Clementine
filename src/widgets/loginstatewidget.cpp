@@ -16,13 +16,14 @@
 */
 
 #include "loginstatewidget.h"
-#include "ui_loginstatewidget.h"
-#include "ui/iconloader.h"
 
 #include <QDate>
 #include <QKeyEvent>
 #include <QLineEdit>
 #include <QTimer>
+
+#include "ui/iconloader.h"
+#include "ui_loginstatewidget.h"
 
 LoginStateWidget::LoginStateWidget(QWidget* parent)
     : QWidget(parent), ui_(new Ui_LoginStateWidget), state_(LoggedOut) {
@@ -33,12 +34,12 @@ LoginStateWidget::LoginStateWidget(QWidget* parent)
   ui_->busy->hide();
 
   ui_->sign_out->setIcon(IconLoader::Load("list-remove", IconLoader::Base));
-  ui_->signed_in_icon_label->setPixmap(IconLoader::Load("dialog-ok-apply",
-                                      IconLoader::Base).pixmap(22));
-  ui_->expires_icon_label->setPixmap(IconLoader::Load("user-away",
-                                    IconLoader::Base).pixmap(22));
-  ui_->account_type_icon_label->setPixmap(IconLoader::Load("dialog-warning",
-                                    IconLoader::Base).pixmap(22));
+  ui_->signed_in_icon_label->setPixmap(
+      IconLoader::Load("dialog-ok-apply", IconLoader::Base).pixmap(22));
+  ui_->expires_icon_label->setPixmap(
+      IconLoader::Load("user-away", IconLoader::Base).pixmap(22));
+  ui_->account_type_icon_label->setPixmap(
+      IconLoader::Load("dialog-warning", IconLoader::Base).pixmap(22));
 
   QFont bold_font(font());
   bold_font.setBold(true);

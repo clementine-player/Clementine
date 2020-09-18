@@ -30,16 +30,15 @@
 #include <QtGlobal>
 #undef QT_USE_QSTRINGBUILDER
 
-#include "lastfmservice.h"
-
-#include <algorithm>
-
 #include <QCryptographicHash>
 #include <QDesktopServices>
 #include <QMenu>
 #include <QMessageBox>
 #include <QSettings>
 #include <QUrlQuery>
+#include <algorithm>
+
+#include "lastfmservice.h"
 
 #ifdef HAVE_LIBLASTFM1
 #include <lastfm5/RadioStation.h>
@@ -47,7 +46,6 @@
 #include <lastfm5/RadioStation>
 #endif
 
-#include "lastfmcompat.h"
 #include "core/application.h"
 #include "core/closure.h"
 #include "core/logging.h"
@@ -55,11 +53,12 @@
 #include "core/player.h"
 #include "core/song.h"
 #include "core/taskmanager.h"
+#include "covers/coverproviders.h"
+#include "covers/lastfmcoverprovider.h"
 #include "internet/core/internetmodel.h"
 #include "internet/core/internetplaylistitem.h"
 #include "internet/core/localredirectserver.h"
-#include "covers/coverproviders.h"
-#include "covers/lastfmcoverprovider.h"
+#include "lastfmcompat.h"
 #include "ui/iconloader.h"
 #include "ui/settingsdialog.h"
 
@@ -140,7 +139,8 @@ QByteArray SignApiRequest(QList<QPair<QString, QString>> params) {
     to_sign += p.second;
   }
   to_sign += LastFMService::kSecret;
-  return QCryptographicHash::hash(to_sign.toUtf8(), QCryptographicHash::Md5).toHex();
+  return QCryptographicHash::hash(to_sign.toUtf8(), QCryptographicHash::Md5)
+      .toHex();
 }
 }  // namespace
 
@@ -166,15 +166,21 @@ void LastFMService::Authenticate() {
     session_url_query.addQueryItem("api_key", kApiKey);
     session_url_query.addQueryItem("method", "auth.getSession");
     session_url_query.addQueryItem("token", token);
-    session_url_query.addQueryItem("api_sig", SignApiRequest(session_url_query.queryItems()));
+    session_url_query.addQueryItem(
+        "api_sig", SignApiRequest(session_url_query.queryItems()));
     session_url.setQuery(session_url_query);
 
     QNetworkReply* reply = network_->get(QNetworkRequest(session_url));
-    NewClosure(reply, SIGNAL(finished()), this, SLOT(AuthenticateReplyFinished(QNetworkReply*)), reply);
+    NewClosure(reply, SIGNAL(finished()), this,
+               SLOT(AuthenticateReplyFinished(QNetworkReply*)), reply);
   });
 
   if (!QDesktopServices::openUrl(url)) {
-    QMessageBox box(QMessageBox::NoIcon, tr("Last.fm Authentication"), tr("Please open this URL in your browser: <a href=\"%1\">%1</a>").arg(url.toString()), QMessageBox::Ok);
+    QMessageBox box(
+        QMessageBox::NoIcon, tr("Last.fm Authentication"),
+        tr("Please open this URL in your browser: <a href=\"%1\">%1</a>")
+            .arg(url.toString()),
+        QMessageBox::Ok);
     box.setTextFormat(Qt::RichText);
     qLog(Debug) << "Last.fm authentication URL: " << url.toString();
     box.exec();

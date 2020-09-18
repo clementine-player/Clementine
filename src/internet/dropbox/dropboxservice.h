@@ -19,9 +19,8 @@
 #ifndef INTERNET_DROPBOX_DROPBOXSERVICE_H_
 #define INTERNET_DROPBOX_DROPBOXSERVICE_H_
 
-#include "internet/core/cloudfileservice.h"
-
 #include "core/tagreaderclient.h"
+#include "internet/core/cloudfileservice.h"
 
 class NetworkAccessManager;
 class OAuthenticator;
@@ -40,7 +39,7 @@ class DropboxService : public CloudFileService {
 
   QUrl GetStreamingUrlFromSongId(const QUrl& url);
 
-signals:
+ signals:
   void Connected();
 
  public slots:

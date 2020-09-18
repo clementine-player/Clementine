@@ -15,14 +15,12 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "core/logging.h"
 #include "engines/pulsedevicefinder.h"
 
+#include "core/logging.h"
+
 PulseDeviceFinder::PulseDeviceFinder()
-    : DeviceFinder("pulsesink"),
-      mainloop_(nullptr),
-      context_(nullptr) {
-}
+    : DeviceFinder("pulsesink"), mainloop_(nullptr), context_(nullptr) {}
 
 bool PulseDeviceFinder::Initialise() {
   mainloop_ = pa_mainloop_new();
@@ -84,17 +82,17 @@ retry:
     }
 
     switch (pa_context_get_state(context_)) {
-    case PA_CONTEXT_READY:
-      break;
-    case PA_CONTEXT_FAILED:
-    case PA_CONTEXT_TERMINATED:
-      // Maybe pulseaudio died.  Try reconnecting.
-      if (Reconnect()) {
-        goto retry;
-      }
-      return state.devices;
-    default:
-      return state.devices;
+      case PA_CONTEXT_READY:
+        break;
+      case PA_CONTEXT_FAILED:
+      case PA_CONTEXT_TERMINATED:
+        // Maybe pulseaudio died.  Try reconnecting.
+        if (Reconnect()) {
+          goto retry;
+        }
+        return state.devices;
+      default:
+        return state.devices;
     }
 
     pa_mainloop_iterate(mainloop_, true, nullptr);
@@ -102,8 +100,7 @@ retry:
 }
 
 void PulseDeviceFinder::GetSinkInfoCallback(pa_context* c,
-                                            const pa_sink_info* info,
-                                            int eol,
+                                            const pa_sink_info* info, int eol,
                                             void* state_voidptr) {
   ListDevicesState* state = reinterpret_cast<ListDevicesState*>(state_voidptr);
 
@@ -111,8 +108,8 @@ void PulseDeviceFinder::GetSinkInfoCallback(pa_context* c,
     Device dev;
     dev.device_property_value = QString::fromUtf8(info->name);
     dev.description = QString::fromUtf8(info->description);
-    dev.icon_name = QString::fromUtf8(
-        pa_proplist_gets(info->proplist, "device.icon_name"));
+    dev.icon_name =
+        QString::fromUtf8(pa_proplist_gets(info->proplist, "device.icon_name"));
 
     state->devices.append(dev);
   }

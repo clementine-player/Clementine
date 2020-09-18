@@ -59,7 +59,7 @@ class GlobalShortcuts : public QWidget {
   void Unregister();
   void Register();
 
-signals:
+ signals:
   void Play();
   void Pause();
   void PlayPause();

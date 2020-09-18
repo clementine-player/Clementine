@@ -17,8 +17,9 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "internet/podcasts/podcastservice.h"
 #include "internet/podcasts/podcastservicemodel.h"
+
+#include "internet/podcasts/podcastservice.h"
 #include "playlist/songmimedata.h"
 
 PodcastServiceModel::PodcastServiceModel(QObject* parent)

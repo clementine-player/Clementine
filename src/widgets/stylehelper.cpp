@@ -29,14 +29,14 @@
 
 #include "stylehelper.h"
 
-#include <QtGui/QPixmapCache>
+#include <QApplication>
+#include <QStyleOption>
 #include <QWidget>
+#include <QtCore/QObject>
 #include <QtCore/QRect>
 #include <QtGui/QPainter>
-#include <QApplication>
 #include <QtGui/QPalette>
-#include <QStyleOption>
-#include <QtCore/QObject>
+#include <QtGui/QPixmapCache>
 
 // Clamps float color values within (0, 255)
 static int clamp(float x) {
@@ -164,9 +164,10 @@ void StyleHelper::drawIconWithShadow(const QIcon& icon, const QRect& rect,
                                      int radius, const QColor& color,
                                      const QPoint& offset) {
   QPixmap cache;
-  QString pixmapName =
-      QString("icon %0 %1 %2").arg(icon.cacheKey()).arg(iconMode).arg(
-          rect.height());
+  QString pixmapName = QString("icon %0 %1 %2")
+                           .arg(icon.cacheKey())
+                           .arg(iconMode)
+                           .arg(rect.height());
 
   if (!QPixmapCache::find(pixmapName, cache)) {
     QPixmap px = icon.pixmap(rect.size());

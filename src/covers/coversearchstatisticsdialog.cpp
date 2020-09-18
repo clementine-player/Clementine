@@ -18,10 +18,11 @@
 */
 
 #include "coversearchstatisticsdialog.h"
-#include "ui_coversearchstatisticsdialog.h"
-#include "core/utilities.h"
 
 #include <algorithm>
+
+#include "core/utilities.h"
+#include "ui_coversearchstatisticsdialog.h"
 
 CoverSearchStatisticsDialog::CoverSearchStatisticsDialog(QWidget* parent)
     : QDialog(parent), ui_(new Ui_CoverSearchStatisticsDialog) {

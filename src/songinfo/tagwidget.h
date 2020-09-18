@@ -18,11 +18,11 @@
 #ifndef TAGWIDGET_H
 #define TAGWIDGET_H
 
-#include "playlist/playlistitem.h"
-#include "smartplaylists/generator_fwd.h"
-
 #include <QIcon>
 #include <QWidget>
+
+#include "playlist/playlistitem.h"
+#include "smartplaylists/generator_fwd.h"
 
 class QMenu;
 class QPropertyAnimation;
@@ -46,7 +46,7 @@ class TagWidgetTag : public QWidget {
   QSize sizeHint() const;
   QString text() const { return text_; }
 
-signals:
+ signals:
   void Clicked();
 
  protected:
@@ -68,7 +68,10 @@ class TagWidget : public QWidget {
   Q_OBJECT
 
  public:
-  enum Type { Type_Tags, Type_Artists, };
+  enum Type {
+    Type_Tags,
+    Type_Artists,
+  };
 
   TagWidget(Type type, QWidget* parent = nullptr);
 
@@ -77,7 +80,7 @@ class TagWidget : public QWidget {
 
   int count() const { return tags_.count(); }
 
-signals:
+ signals:
   void AddToPlaylist(QMimeData* data);
   void DoGlobalSearch(const QString& query);
 

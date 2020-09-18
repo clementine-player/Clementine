@@ -16,11 +16,12 @@
 */
 
 #include "multiloadingindicator.h"
-#include "core/taskmanager.h"
-#include "widgets/busyindicator.h"
 
 #include <QHBoxLayout>
 #include <QPainter>
+
+#include "core/taskmanager.h"
+#include "widgets/busyindicator.h"
 
 const int MultiLoadingIndicator::kVerticalPadding = 4;
 const int MultiLoadingIndicator::kHorizontalPadding = 6;
@@ -78,8 +79,9 @@ void MultiLoadingIndicator::paintEvent(QPaintEvent*) {
 
   const QRect text_rect(
       kHorizontalPadding + spinner_->sizeHint().width() + kSpacing,
-      kVerticalPadding, width() - kHorizontalPadding * 2 -
-                            spinner_->sizeHint().width() - kSpacing,
+      kVerticalPadding,
+      width() - kHorizontalPadding * 2 - spinner_->sizeHint().width() -
+          kSpacing,
       height() - kVerticalPadding * 2);
   p.drawText(
       text_rect, Qt::TextSingleLine | Qt::AlignLeft,

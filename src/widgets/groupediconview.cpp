@@ -16,13 +16,14 @@
 */
 
 #include "groupediconview.h"
-#include "core/multisortfilterproxy.h"
 
-#include <QPainter>
 #include <QPaintEvent>
+#include <QPainter>
 #include <QScrollBar>
 #include <QSortFilterProxyModel>
 #include <QtDebug>
+
+#include "core/multisortfilterproxy.h"
 
 const int GroupedIconView::kBarThickness = 2;
 const int GroupedIconView::kBarMarginTop = 3;
@@ -86,7 +87,7 @@ void GroupedIconView::DrawHeader(QPainter* painter, const QRect& rect,
   // Draw a line underneath
   QColor line_color = palette.color(QPalette::Text);
   QLinearGradient grad_color(text_rect.bottomLeft(), text_rect.bottomRight());
-  const double fade_start_end = (text_rect.width()/3.0)/text_rect.width();
+  const double fade_start_end = (text_rect.width() / 3.0) / text_rect.width();
   line_color.setAlphaF(0.0);
   grad_color.setColorAt(0, line_color);
   line_color.setAlphaF(0.5);
@@ -113,7 +114,8 @@ void GroupedIconView::rowsInserted(const QModelIndex& parent, int start,
 }
 
 void GroupedIconView::dataChanged(const QModelIndex& topLeft,
-                                  const QModelIndex& bottomRight, const QVector<int> &) {
+                                  const QModelIndex& bottomRight,
+                                  const QVector<int>&) {
   QListView::dataChanged(topLeft, bottomRight);
   LayoutItems();
 }
@@ -306,8 +308,8 @@ void GroupedIconView::setSelection(
   selectionModel()->select(selection, command);
 }
 
-QVector<QModelIndex> GroupedIconView::IntersectingItems(const QRect& rect)
-    const {
+QVector<QModelIndex> GroupedIconView::IntersectingItems(
+    const QRect& rect) const {
   QVector<QModelIndex> ret;
 
   const int count = visual_rects_.count();

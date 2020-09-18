@@ -18,16 +18,16 @@
 */
 
 #include "digitallyimportedsettingspage.h"
-#include "ui_digitallyimportedsettingspage.h"
 
 #include <QMessageBox>
 #include <QNetworkReply>
 #include <QSettings>
 
+#include "core/closure.h"
 #include "digitallyimportedclient.h"
 #include "digitallyimportedservicebase.h"
-#include "core/closure.h"
 #include "ui/iconloader.h"
+#include "ui_digitallyimportedsettingspage.h"
 
 DigitallyImportedSettingsPage::DigitallyImportedSettingsPage(
     SettingsDialog* dialog)

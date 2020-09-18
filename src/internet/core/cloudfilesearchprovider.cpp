@@ -17,6 +17,7 @@
 */
 
 #include "internet/core/cloudfilesearchprovider.h"
+
 #include "internet/core/cloudfileservice.h"
 #include "internet/core/internetmodel.h"
 

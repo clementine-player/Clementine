@@ -18,9 +18,8 @@
 #ifndef PLAYLISTSEQUENCE_H
 #define PLAYLISTSEQUENCE_H
 
-#include <memory>
-
 #include <QWidget>
+#include <memory>
 
 #include "core/settingsprovider.h"
 
@@ -65,7 +64,7 @@ class PlaylistSequence : public QWidget {
   void CycleRepeatMode();
   void SetUsingDynamicPlaylist(bool dynamic);
 
-signals:
+ signals:
   void RepeatModeChanged(PlaylistSequence::RepeatMode mode);
   void ShuffleModeChanged(PlaylistSequence::ShuffleMode mode);
 

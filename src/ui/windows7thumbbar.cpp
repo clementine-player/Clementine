@@ -16,18 +16,19 @@
 */
 
 #include "windows7thumbbar.h"
-#include "core/logging.h"
 
 #include <QAction>
 #include <QtDebug>
 
+#include "core/logging.h"
+
 #ifdef Q_OS_WIN32
-#  ifndef _WIN32_WINNT
-#    define _WIN32_WINNT 0x0600
-#  endif
-#  include <windows.h>
-#  include <commctrl.h>
-#  include <shobjidl.h>
+#ifndef _WIN32_WINNT
+#define _WIN32_WINNT 0x0600
+#endif
+#include <commctrl.h>
+#include <shobjidl.h>
+#include <windows.h>
 #endif  // Q_OS_WIN32
 
 const int Windows7ThumbBar::kIconSize = 16;
@@ -56,7 +57,7 @@ void Windows7ThumbBar::SetActions(const QList<QAction*>& actions) {
 
 #ifdef Q_OS_WIN32
 
-extern HICON qt_pixmapToWinHICON(const QPixmap &p);
+extern HICON qt_pixmapToWinHICON(const QPixmap& p);
 
 static void SetupButton(const QAction* action, THUMBBUTTON* button) {
   if (action) {
@@ -135,8 +136,8 @@ void Windows7ThumbBar::HandleWinEvent(MSG* msg) {
     }
 
     qLog(Debug) << "Adding buttons";
-    hr = taskbar_list->ThumbBarAddButtons((HWND)widget_->winId(), actions_.count(),
-                                          buttons);
+    hr = taskbar_list->ThumbBarAddButtons((HWND)widget_->winId(),
+                                          actions_.count(), buttons);
     if (hr != S_OK) qLog(Debug) << "Failed to add buttons" << hex << DWORD(hr);
     for (int i = 0; i < actions_.count(); i++) {
       if (buttons[i].hIcon > 0) DestroyIcon(buttons[i].hIcon);

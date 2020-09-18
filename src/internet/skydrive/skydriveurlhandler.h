@@ -28,10 +28,13 @@ class SkydriveUrlHandler : public UrlHandler {
   Q_OBJECT
 
  public:
-  explicit SkydriveUrlHandler(SkydriveService* service, QObject* parent = nullptr);
+  explicit SkydriveUrlHandler(SkydriveService* service,
+                              QObject* parent = nullptr);
 
   QString scheme() const { return "skydrive"; }
-  QIcon icon() const { return IconLoader::Load("skydrive", IconLoader::Provider); }
+  QIcon icon() const {
+    return IconLoader::Load("skydrive", IconLoader::Provider);
+  }
   LoadResult StartLoading(const QUrl& url);
 
  private:

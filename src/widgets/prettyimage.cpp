@@ -190,7 +190,6 @@ void PrettyImage::contextMenuEvent(QContextMenuEvent* e) {
 }
 
 void PrettyImage::ShowFullsize() {
-
   // Create the window
   QScrollArea* pwindow = new QScrollArea;
   pwindow->setAttribute(Qt::WA_DeleteOnClose, true);

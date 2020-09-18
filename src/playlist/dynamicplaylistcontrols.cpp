@@ -16,6 +16,7 @@
 */
 
 #include "dynamicplaylistcontrols.h"
+
 #include "ui_dynamicplaylistcontrols.h"
 
 DynamicPlaylistControls::DynamicPlaylistControls(QWidget* parent)

@@ -19,10 +19,10 @@
 #ifndef INTERNET_DROPBOX_DROPBOXSETTINGSPAGE_H_
 #define INTERNET_DROPBOX_DROPBOXSETTINGSPAGE_H_
 
-#include "ui/settingspage.h"
-
 #include <QModelIndex>
 #include <QWidget>
+
+#include "ui/settingspage.h"
 
 class DropboxService;
 class Ui_DropboxSettingsPage;

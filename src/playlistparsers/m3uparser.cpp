@@ -16,13 +16,13 @@
 */
 
 #include "m3uparser.h"
-#include "core/logging.h"
-#include "core/timeconstants.h"
-
-#include "playlist/playlist.h"
 
 #include <QBuffer>
 #include <QtDebug>
+
+#include "core/logging.h"
+#include "core/timeconstants.h"
+#include "playlist/playlist.h"
 
 M3UParser::M3UParser(LibraryBackendInterface* library, QObject* parent)
     : ParserBase(library, parent) {}

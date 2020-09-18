@@ -16,14 +16,6 @@
 */
 
 #include "librarybackend.h"
-#include "libraryquery.h"
-#include "sqlrow.h"
-#include "core/application.h"
-#include "core/database.h"
-#include "core/scopedtransaction.h"
-#include "core/tagreaderclient.h"
-#include "core/utilities.h"
-#include "smartplaylists/search.h"
 
 #include <QCoreApplication>
 #include <QDateTime>
@@ -32,6 +24,15 @@
 #include <QSettings>
 #include <QVariant>
 #include <QtDebug>
+
+#include "core/application.h"
+#include "core/database.h"
+#include "core/scopedtransaction.h"
+#include "core/tagreaderclient.h"
+#include "core/utilities.h"
+#include "libraryquery.h"
+#include "smartplaylists/search.h"
+#include "sqlrow.h"
 
 const char* LibraryBackend::kSettingsGroup = "LibraryBackend";
 
@@ -117,7 +118,8 @@ void LibraryBackend::ChangeDirPath(int id, const QString& old_path,
 
   // Do the dirs table
   QSqlQuery q(db);
-  q.prepare(QString("UPDATE %1 SET path=:path WHERE ROWID=:id").arg(dirs_table_));
+  q.prepare(
+      QString("UPDATE %1 SET path=:path WHERE ROWID=:id").arg(dirs_table_));
   q.bindValue(":path", new_path);
   q.bindValue(":id", id);
   q.exec();
@@ -130,11 +132,10 @@ void LibraryBackend::ChangeDirPath(int id, const QString& old_path,
 
   // Do the subdirs table
   q = QSqlQuery(db);
-  q.prepare(QString(
-                    "UPDATE %1 SET path=:path || substr(path, %2)"
+  q.prepare(QString("UPDATE %1 SET path=:path || substr(path, %2)"
                     " WHERE directory=:id")
-                    .arg(subdirs_table_)
-                    .arg(path_len));
+                .arg(subdirs_table_)
+                .arg(path_len));
   q.bindValue(":path", new_url);
   q.bindValue(":id", id);
   q.exec();
@@ -142,11 +143,10 @@ void LibraryBackend::ChangeDirPath(int id, const QString& old_path,
 
   // Do the songs table
   q = QSqlQuery(db);
-  q.prepare(QString(
-                    "UPDATE %1 SET filename=:path || substr(filename, %2)"
+  q.prepare(QString("UPDATE %1 SET filename=:path || substr(filename, %2)"
                     " WHERE directory=:id")
-                    .arg(songs_table_)
-                    .arg(path_len));
+                .arg(songs_table_)
+                .arg(path_len));
   q.bindValue(":path", new_url);
   q.bindValue(":id", id);
   q.exec();
@@ -184,9 +184,9 @@ SubdirectoryList LibraryBackend::SubdirsInDirectory(int id) {
 
 SubdirectoryList LibraryBackend::SubdirsInDirectory(int id, QSqlDatabase& db) {
   QSqlQuery q(db);
-  q.prepare(QString(
-                  "SELECT path, mtime FROM %1"
-                  " WHERE directory = :dir").arg(subdirs_table_));
+  q.prepare(QString("SELECT path, mtime FROM %1"
+                    " WHERE directory = :dir")
+                .arg(subdirs_table_));
   q.bindValue(":dir", id);
   q.exec();
   if (db_->CheckErrors(q)) return SubdirectoryList();
@@ -209,7 +209,7 @@ void LibraryBackend::UpdateTotalSongCount() {
 
   QSqlQuery q(db);
   q.prepare(QString("SELECT COUNT(*) FROM %1 WHERE unavailable = 0")
-                  .arg(songs_table_));
+                .arg(songs_table_));
   q.exec();
   if (db_->CheckErrors(q)) return;
   if (!q.next()) return;
@@ -231,9 +231,9 @@ void LibraryBackend::AddDirectory(const QString& path) {
   QSqlDatabase db(db_->Connect());
 
   QSqlQuery q(db);
-  q.prepare(QString(
-                  "INSERT INTO %1 (path, subdirs)"
-                  " VALUES (:path, 1)").arg(dirs_table_));
+  q.prepare(QString("INSERT INTO %1 (path, subdirs)"
+                    " VALUES (:path, 1)")
+                .arg(dirs_table_));
   q.bindValue(":path", db_path);
   q.exec();
   if (db_->CheckErrors(q)) return;
@@ -256,7 +256,8 @@ void LibraryBackend::RemoveDirectory(int dir_id) {
 
   // Delete the subdirs that were in this directory
   QSqlQuery q(db);
-  q.prepare(QString("DELETE FROM %1 WHERE directory = :id").arg(subdirs_table_));
+  q.prepare(
+      QString("DELETE FROM %1 WHERE directory = :id").arg(subdirs_table_));
   q.bindValue(":id", dir_id);
   q.exec();
   if (db_->CheckErrors(q)) return;
@@ -278,9 +279,9 @@ SongList LibraryBackend::FindSongsInDirectory(int id) {
   QSqlDatabase db(db_->Connect());
 
   QSqlQuery q(db);
-  q.prepare(
-      QString("SELECT ROWID, " + Song::kColumnSpec +
-              " FROM %1 WHERE directory = :directory").arg(songs_table_));
+  q.prepare(QString("SELECT ROWID, " + Song::kColumnSpec +
+                    " FROM %1 WHERE directory = :directory")
+                .arg(songs_table_));
   q.bindValue(":directory", id);
   q.exec();
   if (db_->CheckErrors(q)) return SongList();
@@ -308,21 +309,21 @@ void LibraryBackend::AddOrUpdateSubdirs(const SubdirectoryList& subdirs) {
   QMutexLocker l(db_->Mutex());
   QSqlDatabase db(db_->Connect());
   QSqlQuery find_query(db);
-  find_query.prepare(QString(
-          "SELECT ROWID FROM %1"
-          " WHERE directory = :id AND path = :path").arg(subdirs_table_));
+  find_query.prepare(QString("SELECT ROWID FROM %1"
+                             " WHERE directory = :id AND path = :path")
+                         .arg(subdirs_table_));
   QSqlQuery add_query(db);
-  add_query.prepare(QString(
-                          "INSERT INTO %1 (directory, path, mtime)"
-                          " VALUES (:id, :path, :mtime)").arg(subdirs_table_));
+  add_query.prepare(QString("INSERT INTO %1 (directory, path, mtime)"
+                            " VALUES (:id, :path, :mtime)")
+                        .arg(subdirs_table_));
   QSqlQuery update_query(db);
-  update_query.prepare(QString(
-          "UPDATE %1 SET mtime = :mtime"
-          " WHERE directory = :id AND path = :path").arg(subdirs_table_));
+  update_query.prepare(QString("UPDATE %1 SET mtime = :mtime"
+                               " WHERE directory = :id AND path = :path")
+                           .arg(subdirs_table_));
   QSqlQuery delete_query(db);
-  delete_query.prepare(QString(
-          "DELETE FROM %1"
-          " WHERE directory = :id AND path = :path").arg(subdirs_table_));
+  delete_query.prepare(QString("DELETE FROM %1"
+                               " WHERE directory = :id AND path = :path")
+                           .arg(subdirs_table_));
 
   ScopedTransaction transaction(&db);
   for (const Subdirectory& subdir : subdirs) {
@@ -362,23 +363,29 @@ void LibraryBackend::AddOrUpdateSongs(const SongList& songs) {
   QSqlDatabase db(db_->Connect());
 
   QSqlQuery check_dir(db);
-  check_dir.prepare(QString("SELECT ROWID FROM %1 WHERE ROWID = :id").arg(dirs_table_));
+  check_dir.prepare(
+      QString("SELECT ROWID FROM %1 WHERE ROWID = :id").arg(dirs_table_));
   QSqlQuery add_song(db);
   add_song.prepare(QString("INSERT INTO %1 (" + Song::kColumnSpec +
-                             ")"
-                             " VALUES (" +
-                             Song::kBindSpec + ")").arg(songs_table_));
+                           ")"
+                           " VALUES (" +
+                           Song::kBindSpec + ")")
+                       .arg(songs_table_));
   QSqlQuery update_song(db);
-  update_song.prepare(QString("UPDATE %1 SET " + Song::kUpdateSpec +
-                                " WHERE ROWID = :id").arg(songs_table_));
+  update_song.prepare(
+      QString("UPDATE %1 SET " + Song::kUpdateSpec + " WHERE ROWID = :id")
+          .arg(songs_table_));
   QSqlQuery add_song_fts(db);
-  add_song_fts.prepare(QString("INSERT INTO %1 (ROWID, " + Song::kFtsColumnSpec +
-              ")"
-              " VALUES (:id, " +
-              Song::kFtsBindSpec + ")").arg(fts_table_));
+  add_song_fts.prepare(QString("INSERT INTO %1 (ROWID, " +
+                               Song::kFtsColumnSpec +
+                               ")"
+                               " VALUES (:id, " +
+                               Song::kFtsBindSpec + ")")
+                           .arg(fts_table_));
   QSqlQuery update_song_fts(db);
-  update_song_fts.prepare(QString("UPDATE %1 SET " + Song::kFtsUpdateSpec +
-                                    " WHERE ROWID = :id").arg(fts_table_));
+  update_song_fts.prepare(
+      QString("UPDATE %1 SET " + Song::kFtsUpdateSpec + " WHERE ROWID = :id")
+          .arg(fts_table_));
 
   ScopedTransaction transaction(&db);
 
@@ -453,7 +460,7 @@ void LibraryBackend::UpdateMTimesOnly(const SongList& songs) {
 
   QSqlQuery q(db);
   q.prepare(QString("UPDATE %1 SET mtime = :mtime WHERE ROWID = :id")
-                  .arg(songs_table_));
+                .arg(songs_table_));
 
   ScopedTransaction transaction(&db);
   for (const Song& song : songs) {
@@ -472,7 +479,8 @@ void LibraryBackend::DeleteSongs(const SongList& songs) {
   QSqlQuery remove(db);
   remove.prepare(QString("DELETE FROM %1 WHERE ROWID = :id").arg(songs_table_));
   QSqlQuery remove_fts(db);
-  remove_fts.prepare(QString("DELETE FROM %1 WHERE ROWID = :id").arg(fts_table_));
+  remove_fts.prepare(
+      QString("DELETE FROM %1 WHERE ROWID = :id").arg(fts_table_));
 
   ScopedTransaction transaction(&db);
   for (const Song& song : songs) {
@@ -498,8 +506,8 @@ void LibraryBackend::MarkSongsUnavailable(const SongList& songs,
 
   QSqlQuery remove(db);
   remove.prepare(QString("UPDATE %1 SET unavailable = %2 WHERE ROWID = :id")
-                       .arg(songs_table_)
-                       .arg(int(unavailable)));
+                     .arg(songs_table_)
+                     .arg(int(unavailable)));
 
   ScopedTransaction transaction(&db);
   for (const Song& song : songs) {
@@ -646,7 +654,7 @@ SongList LibraryBackend::GetSongsByForeignId(const QStringList& ids,
 
   QSqlQuery q(db);
   q.prepare(
-        QString(
+      QString(
           "SELECT %2.ROWID, " + Song::kColumnSpec +
           ", %2.%3"
           " FROM %2, %1"
@@ -678,8 +686,9 @@ SongList LibraryBackend::GetSongsById(const QStringList& ids,
 
   QSqlQuery q(db);
   q.prepare(QString("SELECT ROWID, " + Song::kColumnSpec +
-                      " FROM %1"
-                      " WHERE ROWID IN (%2)").arg(songs_table_, in));
+                    " FROM %1"
+                    " WHERE ROWID IN (%2)")
+                .arg(songs_table_, in));
   q.exec();
   if (db_->CheckErrors(q)) return SongList();
 
@@ -755,10 +764,9 @@ void LibraryBackend::UpdateCompilations() {
   // directory
 
   QSqlQuery q(db);
-  q.prepare(
-      QString(
-          "SELECT effective_albumartist, album, filename, sampler "
-          "FROM %1 WHERE unavailable = 0 ORDER BY album").arg(songs_table_));
+  q.prepare(QString("SELECT effective_albumartist, album, filename, sampler "
+                    "FROM %1 WHERE unavailable = 0 ORDER BY album")
+                .arg(songs_table_));
   q.exec();
   if (db_->CheckErrors(q)) return;
 
@@ -980,10 +988,9 @@ void LibraryBackend::UpdateManualAlbumArt(const QString& artist,
   }
 
   // Update the songs
-  QString sql(
-      QString(
-          "UPDATE %1 SET art_manual = :art"
-          " WHERE album = :album AND unavailable = 0").arg(songs_table_));
+  QString sql(QString("UPDATE %1 SET art_manual = :art"
+                      " WHERE album = :album AND unavailable = 0")
+                  .arg(songs_table_));
   if (!albumartist.isNull() && !albumartist.isEmpty()) {
     sql += " AND albumartist = :albumartist";
   } else if (!artist.isNull()) {
@@ -1047,7 +1054,8 @@ void LibraryBackend::ForceCompilation(const QString& album,
             "              forced_compilation_off = :forced_compilation_off,"
             "              effective_compilation = ((compilation OR sampler OR "
             ":forced_compilation_on) AND NOT :forced_compilation_off) + 0"
-            " WHERE album = :album AND unavailable = 0").arg(songs_table_));
+            " WHERE album = :album AND unavailable = 0")
+            .arg(songs_table_));
     if (!artist.isEmpty()) sql += " AND artist = :artist";
 
     QSqlQuery q(db);
@@ -1118,12 +1126,11 @@ void LibraryBackend::IncrementPlayCount(int id) {
   QSqlDatabase db(db_->Connect());
 
   QSqlQuery q(db);
-  q.prepare(QString(
-                  "UPDATE %1 SET playcount = playcount + 1,"
-                  "              lastplayed = :now,"
-                  "              score = " +
-                  QString(kNewScoreSql).arg("1.0") +
-                  " WHERE ROWID = :id").arg(songs_table_));
+  q.prepare(QString("UPDATE %1 SET playcount = playcount + 1,"
+                    "              lastplayed = :now,"
+                    "              score = " +
+                    QString(kNewScoreSql).arg("1.0") + " WHERE ROWID = :id")
+                .arg(songs_table_));
   q.bindValue(":now", QDateTime::currentDateTime().toTime_t());
   q.bindValue(":id", id);
   q.exec();
@@ -1141,11 +1148,10 @@ void LibraryBackend::IncrementSkipCount(int id, float progress) {
   QSqlDatabase db(db_->Connect());
 
   QSqlQuery q(db);
-  q.prepare(QString(
-                  "UPDATE %1 SET skipcount = skipcount + 1,"
-                  "              score = " +
-                  QString(kNewScoreSql).arg(progress) +
-                  " WHERE ROWID = :id").arg(songs_table_));
+  q.prepare(QString("UPDATE %1 SET skipcount = skipcount + 1,"
+                    "              score = " +
+                    QString(kNewScoreSql).arg(progress) + " WHERE ROWID = :id")
+                .arg(songs_table_));
   q.bindValue(":id", id);
   q.exec();
   if (db_->CheckErrors(q)) return;
@@ -1161,10 +1167,10 @@ void LibraryBackend::ResetStatistics(int id) {
   QSqlDatabase db(db_->Connect());
 
   QSqlQuery q(db);
-  q.prepare(QString(
-                  "UPDATE %1 SET playcount = 0, skipcount = 0,"
-                  "              lastplayed = -1, score = 0"
-                  " WHERE ROWID = :id").arg(songs_table_));
+  q.prepare(QString("UPDATE %1 SET playcount = 0, skipcount = 0,"
+                    "              lastplayed = -1, score = 0"
+                    " WHERE ROWID = :id")
+                .arg(songs_table_));
   q.bindValue(":id", id);
   q.exec();
   if (db_->CheckErrors(q)) return;
@@ -1194,9 +1200,9 @@ void LibraryBackend::UpdateSongsRating(const QList<int>& id_list,
   }
   QString ids = id_str_list.join(",");
   QSqlQuery q(db);
-  q.prepare(QString(
-                  "UPDATE %1 SET rating = :rating"
-                  " WHERE ROWID IN (%2)").arg(songs_table_, ids));
+  q.prepare(QString("UPDATE %1 SET rating = :rating"
+                    " WHERE ROWID IN (%2)")
+                .arg(songs_table_, ids));
   q.bindValue(":rating", rating);
   q.exec();
   if (db_->CheckErrors(q)) return;

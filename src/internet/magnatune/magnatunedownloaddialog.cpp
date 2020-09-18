@@ -19,8 +19,6 @@
 
 #include "magnatunedownloaddialog.h"
 
-#include <memory>
-
 #include <QCloseEvent>
 #include <QDir>
 #include <QFileDialog>
@@ -30,16 +28,17 @@
 #include <QNetworkRequest>
 #include <QSet>
 #include <QSettings>
-#include <QXmlStreamReader>
 #include <QUrlQuery>
+#include <QXmlStreamReader>
+#include <memory>
 
-#include "magnatuneservice.h"
-#include "internet/core/internetmodel.h"
-#include "ui_magnatunedownloaddialog.h"
 #include "core/logging.h"
 #include "core/network.h"
 #include "core/utilities.h"
+#include "internet/core/internetmodel.h"
+#include "magnatuneservice.h"
 #include "ui/iconloader.h"
+#include "ui_magnatunedownloaddialog.h"
 #include "widgets/progressitemdelegate.h"
 
 MagnatuneDownloadDialog::MagnatuneDownloadDialog(MagnatuneService* service,
@@ -153,8 +152,9 @@ void MagnatuneDownloadDialog::Error(QNetworkReply::NetworkError e) {
   QMetaEnum error_enum = QNetworkReply::staticMetaObject.enumerator(
       QNetworkReply::staticMetaObject.indexOfEnumerator("NetworkError"));
 
-  QString message = tr("Unable to download %1 (%2)").arg(url.toString()).arg(
-      error_enum.valueToKey(e));
+  QString message = tr("Unable to download %1 (%2)")
+                        .arg(url.toString())
+                        .arg(error_enum.valueToKey(e));
   ShowError(message);
 }
 

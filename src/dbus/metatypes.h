@@ -18,8 +18,8 @@
 #ifndef DBUS_METATYPES_H_
 #define DBUS_METATYPES_H_
 
-#include <QMetaType>
 #include <QDBusObjectPath>
+#include <QMetaType>
 
 Q_DECLARE_METATYPE(QList<QByteArray>)
 

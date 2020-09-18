@@ -33,7 +33,8 @@ class DigitallyImportedClient : public QObject {
   Q_OBJECT
 
  public:
-  explicit DigitallyImportedClient(const QString& service_name, QObject* parent = nullptr);
+  explicit DigitallyImportedClient(const QString& service_name,
+                                   QObject* parent = nullptr);
 
   static const char* kApiUsername;
   static const char* kApiPassword;

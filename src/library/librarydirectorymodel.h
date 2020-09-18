@@ -18,10 +18,9 @@
 #ifndef LIBRARYDIRECTORYMODEL_H
 #define LIBRARYDIRECTORYMODEL_H
 
-#include <memory>
-
 #include <QIcon>
 #include <QStandardItemModel>
+#include <memory>
 
 #include "directory.h"
 
@@ -52,7 +51,7 @@ class LibraryDirectoryModel : public QStandardItemModel {
 
   QIcon dir_icon_;
   std::shared_ptr<LibraryBackend> backend_;
-  QList<std::shared_ptr<MusicStorage> > storage_;
+  QList<std::shared_ptr<MusicStorage>> storage_;
 };
 
 #endif  // LIBRARYDIRECTORYMODEL_H

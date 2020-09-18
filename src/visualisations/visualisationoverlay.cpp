@@ -16,14 +16,15 @@
 */
 
 #include "visualisationoverlay.h"
-#include "ui_visualisationoverlay.h"
-#include "ui/iconloader.h"
 
-#include <QMouseEvent>
-#include <QtDebug>
-#include <QTimerEvent>
-#include <QTimeLine>
 #include <QGraphicsProxyWidget>
+#include <QMouseEvent>
+#include <QTimeLine>
+#include <QTimerEvent>
+#include <QtDebug>
+
+#include "ui/iconloader.h"
+#include "ui_visualisationoverlay.h"
 
 const int VisualisationOverlay::kFadeDuration = 500;
 const int VisualisationOverlay::kFadeTimeout = 5000;
@@ -47,8 +48,8 @@ VisualisationOverlay::VisualisationOverlay(QWidget* parent)
 
 VisualisationOverlay::~VisualisationOverlay() { delete ui_; }
 
-QGraphicsProxyWidget* VisualisationOverlay::title(QGraphicsProxyWidget* proxy)
-    const {
+QGraphicsProxyWidget* VisualisationOverlay::title(
+    QGraphicsProxyWidget* proxy) const {
   return proxy->createProxyForChildWidget(ui_->song_title);
 }
 

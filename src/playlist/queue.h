@@ -18,9 +18,9 @@
 #ifndef QUEUE_H
 #define QUEUE_H
 
-#include "playlist.h"
-
 #include <QAbstractProxyModel>
+
+#include "playlist.h"
 
 class Queue : public QAbstractProxyModel {
   Q_OBJECT

@@ -18,24 +18,23 @@
 // it is used by the Spotify blob which links against libspotify and is not GPL
 // compatible.
 
-#include <QtGlobal>
-
 #include <cxxabi.h>
+
+#include <QtGlobal>
 #ifdef Q_OS_UNIX
 #include <execinfo.h>
 #endif
 
-#include <iostream>
-#include <memory>
+#include <glib.h>
 
 #include <QBuffer>
 #include <QCoreApplication>
 #include <QDateTime>
 #include <QStringList>
-#include <QtMessageHandler>
 #include <QTextStream>
-
-#include <glib.h>
+#include <QtMessageHandler>
+#include <iostream>
+#include <memory>
 
 #include "logging.h"
 
@@ -117,9 +116,12 @@ class LoggedDebug : public DebugBase<LoggedDebug> {
   LoggedDebug(QtMsgType t) : DebugBase(t) { nospace() << kMessageHandlerMagic; }
 };
 
-static void MessageHandler(QtMsgType type, const QMessageLogContext &context, const QString &message) {
-  if (strncmp(kMessageHandlerMagic, message.toLocal8Bit().data(), kMessageHandlerMagicLength) == 0) {
-    fprintf(stderr, "%s\n", message.toLocal8Bit().data() + kMessageHandlerMagicLength);
+static void MessageHandler(QtMsgType type, const QMessageLogContext& context,
+                           const QString& message) {
+  if (strncmp(kMessageHandlerMagic, message.toLocal8Bit().data(),
+              kMessageHandlerMagicLength) == 0) {
+    fprintf(stderr, "%s\n",
+            message.toLocal8Bit().data() + kMessageHandlerMagicLength);
     return;
   }
 

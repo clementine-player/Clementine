@@ -15,35 +15,36 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "config.h"
-#include "dynamicplaylistcontrols.h"
-#include "playlist.h"
-#include "playlistdelegates.h"
-#include "playlistheader.h"
 #include "playlistview.h"
+
+#include <math.h>
+
+#include <QApplication>
+#include <QClipboard>
+#include <QCommonStyle>
+#include <QHeaderView>
+#include <QKeyEvent>
+#include <QMimeData>
+#include <QPainter>
+#include <QScrollBar>
+#include <QSettings>
+#include <QSortFilterProxyModel>
+#include <QTimeLine>
+#include <QTimer>
+#include <QtDebug>
+#include <algorithm>
+
+#include "config.h"
 #include "core/application.h"
 #include "core/logging.h"
 #include "core/player.h"
 #include "covers/currentartloader.h"
-#include "ui/qt_blurimage.h"
+#include "dynamicplaylistcontrols.h"
+#include "playlist.h"
+#include "playlistdelegates.h"
+#include "playlistheader.h"
 #include "ui/iconloader.h"
-
-#include <QCommonStyle>
-#include <QClipboard>
-#include <QPainter>
-#include <QHeaderView>
-#include <QSettings>
-#include <QtDebug>
-#include <QTimer>
-#include <QKeyEvent>
-#include <QApplication>
-#include <QSortFilterProxyModel>
-#include <QScrollBar>
-#include <QTimeLine>
-#include <QMimeData>
-
-#include <math.h>
-#include <algorithm>
+#include "ui/qt_blurimage.h"
 
 #ifdef HAVE_MOODBAR
 #include "moodbar/moodbaritemdelegate.h"
@@ -198,9 +199,7 @@ PlaylistView::PlaylistView(QWidget* parent)
   fade_animation_->setDirection(QTimeLine::Backward);  // 1.0 -> 0.0
 }
 
-PlaylistView::~PlaylistView() {
-  delete style_;
-}
+PlaylistView::~PlaylistView() { delete style_; }
 
 void PlaylistView::SetApplication(Application* app) {
   Q_ASSERT(app);
@@ -554,8 +553,8 @@ void PlaylistView::drawRow(QPainter* painter,
       painter->drawPixmap(opt.rect, cached_current_row_);
     } else {
       if (whole_region) {
-        const_cast<PlaylistView*>(this)
-            ->UpdateCachedCurrentRowPixmap(opt, index);
+        const_cast<PlaylistView*>(this)->UpdateCachedCurrentRowPixmap(opt,
+                                                                      index);
         painter->drawPixmap(opt.rect, cached_current_row_);
       } else {
         QTreeView::drawRow(painter, opt, index);
@@ -637,8 +636,7 @@ void PlaylistView::keyPressEvent(QKeyEvent* event) {
     event->accept();
   } else if (event->modifiers() != Qt::ControlModifier  // Ctrl+Space selects
                                                         // the item
-             &&
-             event->key() == Qt::Key_Space) {
+             && event->key() == Qt::Key_Space) {
     emit PlayPause();
     event->accept();
   } else if (event->key() == Qt::Key_Left) {
@@ -649,7 +647,7 @@ void PlaylistView::keyPressEvent(QKeyEvent* event) {
     event->accept();
   } else if (event->modifiers() ==
                  Qt::NoModifier  // No modifier keys currently pressed...
-                 // ... and key pressed is something related to text
+             // ... and key pressed is something related to text
              &&
              ((event->key() >= Qt::Key_Exclam && event->key() <= Qt::Key_Z) ||
               event->key() == Qt::Key_Backspace ||
@@ -1037,9 +1035,9 @@ void PlaylistView::paintEvent(QPaintEvent* event) {
       if (model()->rowCount() == 0)
         drop_pos = 1;
       else
-        drop_pos = 1 +
-                   visualRect(model()->index(model()->rowCount() - 1,
-                                             first_column)).bottom();
+        drop_pos = 1 + visualRect(model()->index(model()->rowCount() - 1,
+                                                 first_column))
+                           .bottom();
       break;
   }
 

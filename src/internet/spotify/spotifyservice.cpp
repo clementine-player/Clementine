@@ -35,9 +35,6 @@
 
 #include "blobversion.h"
 #include "config.h"
-#include "internet/core/internetmodel.h"
-#include "internet/core/searchboxwidget.h"
-#include "spotifyserver.h"
 #include "core/application.h"
 #include "core/database.h"
 #include "core/logging.h"
@@ -48,9 +45,12 @@
 #include "core/utilities.h"
 #include "globalsearch/globalsearch.h"
 #include "globalsearch/spotifysearchprovider.h"
+#include "internet/core/internetmodel.h"
+#include "internet/core/searchboxwidget.h"
 #include "playlist/playlist.h"
 #include "playlist/playlistcontainer.h"
 #include "playlist/playlistmanager.h"
+#include "spotifyserver.h"
 #include "ui/iconloader.h"
 #include "widgets/didyoumean.h"
 
@@ -91,8 +91,8 @@ SpotifyService::SpotifyService(Application* app, InternetModel* parent)
 // Look for one distributed alongside clementine first, then check in the
 // user's home directory for any that have been downloaded.
 #if defined(Q_OS_MACOS) && defined(USE_BUNDLE)
-  system_blob_path_ = QCoreApplication::applicationDirPath() +
-                      "/" + USE_BUNDLE_DIR + "/clementine-spotifyblob";
+  system_blob_path_ = QCoreApplication::applicationDirPath() + "/" +
+                      USE_BUNDLE_DIR + "/clementine-spotifyblob";
 #else
   system_blob_path_ = QCoreApplication::applicationDirPath() +
                       "/clementine-spotifyblob" CMAKE_EXECUTABLE_SUFFIX;

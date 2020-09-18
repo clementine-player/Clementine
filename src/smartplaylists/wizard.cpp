@@ -15,15 +15,16 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "core/logging.h"
-#include "querywizardplugin.h"
-#include "ui_wizardfinishpage.h"
 #include "wizard.h"
-#include "wizardplugin.h"
 
 #include <QLabel>
 #include <QRadioButton>
 #include <QVBoxLayout>
+
+#include "core/logging.h"
+#include "querywizardplugin.h"
+#include "ui_wizardfinishpage.h"
+#include "wizardplugin.h"
 
 namespace smart_playlists {
 
@@ -164,4 +165,4 @@ void Wizard::initializePage(int id) {
   QWizard::initializePage(id);
 }
 
-}  // namespace
+}  // namespace smart_playlists

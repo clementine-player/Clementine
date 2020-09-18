@@ -34,7 +34,7 @@ class DidYouMean : public QWidget {
   void SetCorrection(const QString& correction);
   void Show(const QString& correction);
 
-signals:
+ signals:
   void Accepted(const QString& correction);
 
  protected:

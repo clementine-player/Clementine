@@ -21,10 +21,10 @@
 #ifndef INTERNET_CORE_INTERNETMIMEDATA_H_
 #define INTERNET_CORE_INTERNETMIMEDATA_H_
 
-#include "core/mimedata.h"
-
 #include <QMimeData>
 #include <QModelIndexList>
+
+#include "core/mimedata.h"
 
 class InternetModel;
 

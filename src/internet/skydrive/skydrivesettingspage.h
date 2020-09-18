@@ -19,10 +19,10 @@
 #ifndef INTERNET_SKYDRIVE_SKYDRIVESETTINGSPAGE_H_
 #define INTERNET_SKYDRIVE_SKYDRIVESETTINGSPAGE_H_
 
-#include "ui/settingspage.h"
-
 #include <QModelIndex>
 #include <QWidget>
+
+#include "ui/settingspage.h"
 
 class SkydriveService;
 class Ui_SkydriveSettingsPage;

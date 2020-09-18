@@ -16,19 +16,20 @@
 */
 
 #include "albumcoversearcher.h"
-#include "ui_albumcoversearcher.h"
-#include "core/application.h"
-#include "core/logging.h"
-#include "core/utilities.h"
-#include "covers/albumcoverfetcher.h"
-#include "covers/albumcoverloader.h"
-#include "widgets/forcescrollperpixel.h"
-#include "widgets/groupediconview.h"
 
 #include <QKeyEvent>
 #include <QListWidgetItem>
 #include <QPainter>
 #include <QStandardItemModel>
+
+#include "core/application.h"
+#include "core/logging.h"
+#include "core/utilities.h"
+#include "covers/albumcoverfetcher.h"
+#include "covers/albumcoverloader.h"
+#include "ui_albumcoversearcher.h"
+#include "widgets/forcescrollperpixel.h"
+#include "widgets/groupediconview.h"
 
 const int SizeOverlayDelegate::kMargin = 4;
 const int SizeOverlayDelegate::kPaddingX = 3;
@@ -123,8 +124,9 @@ AlbumCoverSearcher::~AlbumCoverSearcher() { delete ui_; }
 void AlbumCoverSearcher::Init(AlbumCoverFetcher* fetcher) {
   fetcher_ = fetcher;
 
-  connect(fetcher_, SIGNAL(SearchFinished(quint64, CoverSearchResults,
-                                          CoverSearchStatistics)),
+  connect(fetcher_,
+          SIGNAL(SearchFinished(quint64, CoverSearchResults,
+                                CoverSearchStatistics)),
           SLOT(SearchFinished(quint64, CoverSearchResults)));
 }
 

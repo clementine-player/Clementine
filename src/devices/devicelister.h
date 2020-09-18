@@ -68,7 +68,7 @@ class DeviceLister : public QObject {
   virtual void UpdateDeviceFreeSpace(const QString& id) = 0;
   virtual void ShutDown() {}
 
-signals:
+ signals:
   void DeviceAdded(const QString& id);
   void DeviceRemoved(const QString& id);
   void DeviceChanged(const QString& id);

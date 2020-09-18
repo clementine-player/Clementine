@@ -20,12 +20,12 @@
 #ifndef INTERNET_PODCASTS_PODCASTEPISODE_H_
 #define INTERNET_PODCASTS_PODCASTEPISODE_H_
 
-#include "core/song.h"
-
 #include <QSharedDataPointer>
 #include <QSqlQuery>
 #include <QUrl>
 #include <QVariantMap>
+
+#include "core/song.h"
 
 class Podcast;
 

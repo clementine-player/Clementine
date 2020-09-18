@@ -17,11 +17,10 @@
 
 #include "songinfo/songinfoview.h"
 
-#include <algorithm>
-
 #include <QFuture>
 #include <QSettings>
 #include <QtConcurrentRun>
+#include <algorithm>
 
 #include "config.h"
 #include "core/closure.h"
@@ -151,7 +150,7 @@ bool CompareLyricProviders(const UltimateLyricsProvider* a,
   if (!a->is_enabled() && b->is_enabled()) return false;
   return a->relevance() > b->relevance();
 }
-}
+}  // namespace
 
 QList<const UltimateLyricsProvider*> SongInfoView::lyric_providers() const {
   QList<const UltimateLyricsProvider*> ret;

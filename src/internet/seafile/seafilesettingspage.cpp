@@ -25,12 +25,12 @@
 #include <QSettings>
 #include <QtDebug>
 
-#include "seafileservice.h"
-#include "internet/core/internetmodel.h"
 #include "core/logging.h"
 #include "core/network.h"
-#include "ui_seafilesettingspage.h"
+#include "internet/core/internetmodel.h"
+#include "seafileservice.h"
 #include "ui/iconloader.h"
+#include "ui_seafilesettingspage.h"
 
 SeafileSettingsPage::SeafileSettingsPage(SettingsDialog* dialog)
     : SettingsPage(dialog),

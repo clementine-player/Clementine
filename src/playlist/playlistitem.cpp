@@ -16,20 +16,21 @@
 */
 
 #include "playlistitem.h"
-#include "songplaylistitem.h"
-#include "core/logging.h"
-#include "core/song.h"
-#include "internet/jamendo/jamendoplaylistitem.h"
-#include "internet/jamendo/jamendoservice.h"
-#include "internet/magnatune/magnatuneplaylistitem.h"
-#include "internet/magnatune/magnatuneservice.h"
-#include "internet/core/internetplaylistitem.h"
-#include "library/library.h"
-#include "library/libraryplaylistitem.h"
 
 #include <QSqlQuery>
 #include <QtConcurrentRun>
 #include <QtDebug>
+
+#include "core/logging.h"
+#include "core/song.h"
+#include "internet/core/internetplaylistitem.h"
+#include "internet/jamendo/jamendoplaylistitem.h"
+#include "internet/jamendo/jamendoservice.h"
+#include "internet/magnatune/magnatuneplaylistitem.h"
+#include "internet/magnatune/magnatuneservice.h"
+#include "library/library.h"
+#include "library/libraryplaylistitem.h"
+#include "songplaylistitem.h"
 
 PlaylistItem::~PlaylistItem() {}
 

@@ -16,9 +16,10 @@
 */
 
 #include "transcoderoptionsvorbis.h"
-#include "ui_transcoderoptionsvorbis.h"
 
 #include <QSettings>
+
+#include "ui_transcoderoptionsvorbis.h"
 
 const char* TranscoderOptionsVorbis::kSettingsGroup = "Transcoder/vorbisenc";
 

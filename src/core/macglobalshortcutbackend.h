@@ -20,12 +20,11 @@
 #ifndef CORE_MACGLOBALSHORTCUTBACKEND_H_
 #define CORE_MACGLOBALSHORTCUTBACKEND_H_
 
+#include <QKeySequence>
+#include <QMap>
 #include <memory>
 
 #include "globalshortcutbackend.h"
-
-#include <QKeySequence>
-#include <QMap>
 
 class MacGlobalShortcutBackendPrivate;
 class QAction;

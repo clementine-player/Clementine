@@ -19,9 +19,10 @@
 
 #include "podcast.h"
 
+#include <Podcast.h>
+
 #include <QDataStream>
 #include <QDateTime>
-#include <Podcast.h>
 
 #include "core/utilities.h"
 

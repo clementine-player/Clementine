@@ -16,9 +16,10 @@
 */
 
 #include "libraryplaylistitem.h"
-#include "core/tagreaderclient.h"
 
 #include <QSettings>
+
+#include "core/tagreaderclient.h"
 
 LibraryPlaylistItem::LibraryPlaylistItem(const QString& type)
     : DbPlaylistItem(type) {}

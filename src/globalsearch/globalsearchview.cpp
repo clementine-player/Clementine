@@ -21,27 +21,26 @@
 #include <QSortFilterProxyModel>
 #include <QStandardItem>
 #include <QTimer>
-
 #include <algorithm>
 #include <functional>
 
-#include "globalsearch.h"
-#include "globalsearchitemdelegate.h"
-#include "globalsearchmodel.h"
-#include "globalsearchsortmodel.h"
-#include "searchprovider.h"
-#include "searchproviderstatuswidget.h"
-#include "suggestionwidget.h"
-#include "ui_globalsearchview.h"
 #include "core/application.h"
 #include "core/logging.h"
 #include "core/mimedata.h"
 #include "core/timeconstants.h"
+#include "globalsearch.h"
+#include "globalsearchitemdelegate.h"
+#include "globalsearchmodel.h"
+#include "globalsearchsortmodel.h"
 #include "internet/core/internetsongmimedata.h"
+#include "library/groupbydialog.h"
 #include "library/libraryfilterwidget.h"
 #include "library/librarymodel.h"
-#include "library/groupbydialog.h"
 #include "playlist/songmimedata.h"
+#include "searchprovider.h"
+#include "searchproviderstatuswidget.h"
+#include "suggestionwidget.h"
+#include "ui_globalsearchview.h"
 
 using std::placeholders::_1;
 using std::placeholders::_2;
@@ -184,7 +183,7 @@ bool CompareProvider(const QStringList& provider_order, SearchProvider* left,
   }
   return left_index < right_index;
 }
-}
+}  // namespace
 
 void GlobalSearchView::ReloadSettings() {
   const bool old_show_suggestions = show_suggestions_;

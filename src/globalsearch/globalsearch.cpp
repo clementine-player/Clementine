@@ -15,19 +15,19 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "librarysearchprovider.h"
 #include "globalsearch.h"
-#include "urlsearchprovider.h"
-#include "core/application.h"
-#include "core/logging.h"
-#include "covers/albumcoverloader.h"
 
 #include <QSettings>
 #include <QStringBuilder>
 #include <QTimerEvent>
 #include <QUrl>
-
 #include <algorithm>
+
+#include "core/application.h"
+#include "core/logging.h"
+#include "covers/albumcoverloader.h"
+#include "librarysearchprovider.h"
+#include "urlsearchprovider.h"
 
 const int GlobalSearch::kDelayedSearchTimeoutMs = 200;
 const char* GlobalSearch::kSettingsGroup = "GlobalSearch";
@@ -44,8 +44,8 @@ GlobalSearch::GlobalSearch(Application* app, QObject* parent)
 
   connect(app_->album_cover_loader(), SIGNAL(ImageLoaded(quint64, QImage)),
           SLOT(AlbumArtLoaded(quint64, QImage)));
-  connect(this, SIGNAL(SearchAsyncSig(int,QString)),
-          this, SLOT(DoSearchAsync(int,QString)));
+  connect(this, SIGNAL(SearchAsyncSig(int, QString)), this,
+          SLOT(DoSearchAsync(int, QString)));
 
   ConnectProvider(url_provider_);
 }
@@ -141,8 +141,8 @@ void GlobalSearch::timerEvent(QTimerEvent* e) {
   QObject::timerEvent(e);
 }
 
-QString GlobalSearch::PixmapCacheKey(const SearchProvider::Result& result)
-    const {
+QString GlobalSearch::PixmapCacheKey(
+    const SearchProvider::Result& result) const {
   return "globalsearch:" % QString::number(qulonglong(result.provider_)) % "," %
          result.metadata_.url().toString();
 }
@@ -318,8 +318,8 @@ bool GlobalSearch::SetProviderEnabled(const SearchProvider* const_provider,
   return true;
 }
 
-bool GlobalSearch::is_provider_enabled(const SearchProvider* const_provider)
-    const {
+bool GlobalSearch::is_provider_enabled(
+    const SearchProvider* const_provider) const {
   SearchProvider* provider = const_cast<SearchProvider*>(const_provider);
 
   if (!providers_.contains(provider)) return false;

@@ -32,12 +32,12 @@ class FavoriteWidget : public QWidget {
 
   QSize sizeHint() const;
 
-signals:
+ signals:
   void FavoriteStateChanged(int, bool);
 
  protected:
   void paintEvent(QPaintEvent* e);
-  void resizeEvent(QResizeEvent * e);
+  void resizeEvent(QResizeEvent* e);
   void mouseReleaseEvent(QMouseEvent* e);
 
  private:

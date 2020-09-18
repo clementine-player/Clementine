@@ -15,13 +15,14 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "songloaderinserter.h"
+
 #include <QtConcurrentRun>
 
-#include "playlist.h"
-#include "songloaderinserter.h"
 #include "core/logging.h"
 #include "core/songloader.h"
 #include "core/taskmanager.h"
+#include "playlist.h"
 
 SongLoaderInserter::SongLoaderInserter(TaskManager* task_manager,
                                        LibraryBackendInterface* library,
@@ -89,16 +90,18 @@ void SongLoaderInserter::LoadAudioCD(Playlist* destination, int row,
   enqueue_next_ = enqueue_next;
 
   SongLoader* loader = new SongLoader(library_, player_, this);
-  NewClosure(loader, SIGNAL(AudioCDTracksLoaded()),
-      this, SLOT(AudioCDTracksLoaded(SongLoader*)), loader);
-  connect(loader, SIGNAL(LoadAudioCDFinished(bool)), SLOT(AudioCDTagsLoaded(bool)));
+  NewClosure(loader, SIGNAL(AudioCDTracksLoaded()), this,
+             SLOT(AudioCDTracksLoaded(SongLoader*)), loader);
+  connect(loader, SIGNAL(LoadAudioCDFinished(bool)),
+          SLOT(AudioCDTagsLoaded(bool)));
   qLog(Info) << "Loading audio CD...";
   SongLoader::Result ret = loader->LoadAudioCD();
   if (ret == SongLoader::Error) {
     emit Error(tr("Error while loading audio CD"));
     delete loader;
   }
-  // Songs will be loaded later: see AudioCDTracksLoaded and AudioCDTagsLoaded slots
+  // Songs will be loaded later: see AudioCDTracksLoaded and AudioCDTagsLoaded
+  // slots
 }
 
 void SongLoaderInserter::DestinationDestroyed() { destination_ = nullptr; }

@@ -20,9 +20,8 @@
 #ifndef CORE_CRASHREPORTING_H_
 #define CORE_CRASHREPORTING_H_
 
-#include <memory>
-
 #include <QObject>
+#include <memory>
 
 class QFile;
 class QNetworkAccessManager;

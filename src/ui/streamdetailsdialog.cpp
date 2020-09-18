@@ -1,7 +1,8 @@
 #include "streamdetailsdialog.h"
-#include "ui_streamdetailsdialog.h"
 
 #include <QDialogButtonBox>
+
+#include "ui_streamdetailsdialog.h"
 
 StreamDetailsDialog::StreamDetailsDialog(QWidget* parent)
     : QDialog(parent), ui_(new Ui::StreamDetailsDialog) {

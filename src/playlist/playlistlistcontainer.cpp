@@ -15,15 +15,7 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "playlist.h"
 #include "playlistlistcontainer.h"
-#include "playlistlistmodel.h"
-#include "playlistmanager.h"
-#include "ui_playlistlistcontainer.h"
-#include "core/application.h"
-#include "core/logging.h"
-#include "core/player.h"
-#include "ui/iconloader.h"
 
 #include <QContextMenuEvent>
 #include <QInputDialog>
@@ -32,8 +24,16 @@
 #include <QPainter>
 #include <QSortFilterProxyModel>
 #include <QStandardItemModel>
-
 #include <iostream>
+
+#include "core/application.h"
+#include "core/logging.h"
+#include "core/player.h"
+#include "playlist.h"
+#include "playlistlistmodel.h"
+#include "playlistmanager.h"
+#include "ui/iconloader.h"
+#include "ui_playlistlistcontainer.h"
 
 /* This filter proxy will:
  - Accept all ancestors if at least a single child matches
@@ -60,12 +60,12 @@ class PlaylistListFilterProxyModel : public QSortFilterProxyModel {
 
   QList<QModelIndex> expandList;
 
-  void setFilterRegExp(const QRegExp & regExp) {
+  void setFilterRegExp(const QRegExp& regExp) {
     expandList.clear();
     QSortFilterProxyModel::setFilterRegExp(regExp);
   }
 
-  void refreshExpanded(QTreeView *tree) {
+  void refreshExpanded(QTreeView* tree) {
     tree->collapseAll();
     // The call to setExpanded causes expendList to be appended via
     // the filterAcceptsRow overload. Since QList's implementation is an array,
@@ -74,44 +74,44 @@ class PlaylistListFilterProxyModel : public QSortFilterProxyModel {
     // indexing is safe and efficient.
     for (int i = 0; i < expandList.count(); i++) {
       const QModelIndex& sourceIndex = expandList[i];
-      QModelIndex mappedIndex = mapFromSource( sourceIndex );
-      tree->setExpanded( mappedIndex, true );
+      QModelIndex mappedIndex = mapFromSource(sourceIndex);
+      tree->setExpanded(mappedIndex, true);
     }
   }
 
   // Depth first search of all the items
-  bool hasAcceptedChildren(int source_row, const QModelIndex &source_parent) const {
-    QModelIndex item = sourceModel()->index(source_row,0,source_parent);
+  bool hasAcceptedChildren(int source_row,
+                           const QModelIndex& source_parent) const {
+    QModelIndex item = sourceModel()->index(source_row, 0, source_parent);
     if (!item.isValid()) {
       return false;
     }
 
-    //check if there are children
+    // check if there are children
     int childCount = item.model()->rowCount(item);
-    if (childCount == 0)
-      return false;
+    if (childCount == 0) return false;
 
     for (int i = 0; i < childCount; ++i) {
-      if (filterAcceptsRowItself(i, item))
-        return true;
+      if (filterAcceptsRowItself(i, item)) return true;
 
-      if (hasAcceptedChildren(i, item))
-        return true;
+      if (hasAcceptedChildren(i, item)) return true;
     }
     return false;
   }
 
-  bool filterAcceptsRowItself(int source_row, const QModelIndex &source_parent) const {
-    bool rv = QSortFilterProxyModel::filterAcceptsRow(source_row, source_parent);
-    if(rv) {
-      if(sourceModel()->hasIndex(source_row,0,source_parent)) {
-        QModelIndex idx = sourceModel()->index(source_row,0,source_parent);
+  bool filterAcceptsRowItself(int source_row,
+                              const QModelIndex& source_parent) const {
+    bool rv =
+        QSortFilterProxyModel::filterAcceptsRow(source_row, source_parent);
+    if (rv) {
+      if (sourceModel()->hasIndex(source_row, 0, source_parent)) {
+        QModelIndex idx = sourceModel()->index(source_row, 0, source_parent);
 
         // Bit of a hack to get around the const in this function
-        auto * me = const_cast<PlaylistListFilterProxyModel*>(this);
+        auto* me = const_cast<PlaylistListFilterProxyModel*>(this);
 
         QModelIndex pidx = sourceModel()->parent(idx);
-        while(pidx.isValid()) {
+        while (pidx.isValid()) {
           me->expandList.append(pidx);
           pidx = sourceModel()->parent(pidx);
         }
@@ -120,20 +120,20 @@ class PlaylistListFilterProxyModel : public QSortFilterProxyModel {
     return rv;
   }
 
-  bool filterAcceptsRow(int source_row, const QModelIndex &source_parent) const {
+  bool filterAcceptsRow(int source_row,
+                        const QModelIndex& source_parent) const {
     if (filterAcceptsRowItself(source_row, source_parent)) {
       return true;
     }
 
-    //accept if any of the parents is accepted on it's own merits
+    // accept if any of the parents is accepted on it's own merits
     QModelIndex parent = source_parent;
     while (parent.isValid()) {
-      if (filterAcceptsRowItself(parent.row(), parent.parent()))
-        return true;
+      if (filterAcceptsRowItself(parent.row(), parent.parent())) return true;
       parent = parent.parent();
     }
 
-    //accept if any of the children is accepted on it's own merits
+    // accept if any of the children is accepted on it's own merits
     return hasAcceptedChildren(source_row, source_parent);
   }
 };
@@ -180,7 +180,8 @@ PlaylistListContainer::PlaylistListContainer(QWidget* parent)
   model_->invisibleRootItem()->setData(PlaylistListModel::Type_Folder,
                                        PlaylistListModel::Role_Type);
 
-  connect(ui_->search, SIGNAL(textChanged(QString)), SLOT(SearchTextEdited(QString)));
+  connect(ui_->search, SIGNAL(textChanged(QString)),
+          SLOT(SearchTextEdited(QString)));
 }
 
 PlaylistListContainer::~PlaylistListContainer() { delete ui_; }
@@ -195,7 +196,8 @@ void PlaylistListContainer::showEvent(QShowEvent* e) {
 
   action_new_folder_->setIcon(IconLoader::Load("folder-new", IconLoader::Base));
   action_remove_->setIcon(IconLoader::Load("edit-delete", IconLoader::Base));
-  action_save_playlist_->setIcon(IconLoader::Load("document-save", IconLoader::Base));
+  action_save_playlist_->setIcon(
+      IconLoader::Load("document-save", IconLoader::Base));
 
   model_->SetIcons(IconLoader::Load("view-media-playlist", IconLoader::Base),
                    IconLoader::Load("folder", IconLoader::Base));
@@ -252,7 +254,7 @@ void PlaylistListContainer::SetApplication(Application* app) {
   // Get all playlists, even ones that are hidden in the UI.
   for (const PlaylistBackend::Playlist& p :
        app->playlist_backend()->GetAllFavoritePlaylists()) {
-    AddPlaylist(p.id,p.name,true,&p.ui_path);
+    AddPlaylist(p.id, p.name, true, &p.ui_path);
   }
 }
 
@@ -269,7 +271,7 @@ void PlaylistListContainer::NewFolderClicked() {
 }
 
 void PlaylistListContainer::AddPlaylist(int id, const QString& name,
-                                        bool favorite, const QString *ui_path) {
+                                        bool favorite, const QString* ui_path) {
   if (!favorite) {
     return;
   }
@@ -280,7 +282,7 @@ void PlaylistListContainer::AddPlaylist(int id, const QString& name,
     return;
   }
 
-  if(ui_path == nullptr)
+  if (ui_path == nullptr)
     ui_path = &app_->playlist_manager()->playlist(id)->ui_path();
 
   QStandardItem* playlist_item = model_->NewPlaylist(name, id);
@@ -291,7 +293,6 @@ void PlaylistListContainer::AddPlaylist(int id, const QString& name,
     track_item->setDragEnabled(false);
     playlist_item->appendRow(track_item);
   }
-
 }
 
 void PlaylistListContainer::PlaylistRenamed(int id, const QString& new_name) {
@@ -367,16 +368,16 @@ void PlaylistListContainer::CurrentChanged(Playlist* new_playlist) {
 }
 
 void PlaylistListContainer::SearchTextEdited(const QString& text) {
-    QRegExp regexp(text);
-    regexp.setCaseSensitivity(Qt::CaseInsensitive);
+  QRegExp regexp(text);
+  regexp.setCaseSensitivity(Qt::CaseInsensitive);
 
-    proxy_->setFilterRegExp(regexp);
+  proxy_->setFilterRegExp(regexp);
 
-    if(regexp.isEmpty()) {
-      ui_->tree->collapseAll();
-    } else {
-      proxy_->refreshExpanded(ui_->tree);
-    }
+  if (regexp.isEmpty()) {
+    ui_->tree->collapseAll();
+  } else {
+    proxy_->refreshExpanded(ui_->tree);
+  }
 }
 
 void PlaylistListContainer::PlaylistPathChanged(int id,
@@ -428,7 +429,8 @@ void PlaylistListContainer::DeleteClicked() {
     const int button = QMessageBox::question(
         this, tr("Remove playlists"),
         tr("You are about to remove %1 playlists from your favorites, are you "
-           "sure?").arg(ids.count()),
+           "sure?")
+            .arg(ids.count()),
         QMessageBox::Yes, QMessageBox::Cancel);
 
     if (button != QMessageBox::Yes) {

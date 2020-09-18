@@ -17,10 +17,10 @@
 
 #include "playlistsaveoptionsdialog.h"
 
-#include "ui_playlistsaveoptionsdialog.h"
-#include "playlistparsers/parserbase.h"
-
 #include <QSettings>
+
+#include "playlistparsers/parserbase.h"
+#include "ui_playlistsaveoptionsdialog.h"
 
 const char* PlaylistSaveOptionsDialog::kSettingsGroup =
     "PlaylistSaveOptionsDialog";

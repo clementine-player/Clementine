@@ -17,19 +17,18 @@
 
 #include "deviceproperties.h"
 
+#include <QScrollBar>
+#include <QtConcurrentRun>
 #include <functional>
 #include <memory>
 
-#include <QScrollBar>
-#include <QtConcurrentRun>
-
 #include "connecteddevice.h"
+#include "core/utilities.h"
 #include "devicelister.h"
 #include "devicemanager.h"
-#include "ui_deviceproperties.h"
-#include "core/utilities.h"
 #include "transcoder/transcoder.h"
 #include "ui/iconloader.h"
+#include "ui_deviceproperties.h"
 
 DeviceProperties::DeviceProperties(QWidget* parent)
     : QDialog(parent),

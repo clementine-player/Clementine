@@ -15,15 +15,17 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "config.h"
 #include "screensaver.h"
 
 #include <QtGlobal>
 
+#include "config.h"
+
 #ifdef HAVE_DBUS
-#include "dbusscreensaver.h"
 #include <QDBusConnection>
 #include <QDBusConnectionInterface>
+
+#include "dbusscreensaver.h"
 #endif
 
 #ifdef Q_OS_DARWIN

@@ -18,11 +18,10 @@
 #ifndef SONGKICKCONCERTS_H
 #define SONGKICKCONCERTS_H
 
-#include "songinfoprovider.h"
-
 #include "core/network.h"
 #include "core/override.h"
 #include "internet/core/geolocator.h"
+#include "songinfoprovider.h"
 
 class QNetworkReply;
 class SongInfoTextView;

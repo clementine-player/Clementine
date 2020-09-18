@@ -16,8 +16,9 @@
 */
 
 #include "libraryviewcontainer.h"
-#include "ui_libraryviewcontainer.h"
+
 #include "globalsearch/globalsearch.h"
+#include "ui_libraryviewcontainer.h"
 
 LibraryViewContainer::LibraryViewContainer(QWidget* parent)
     : QWidget(parent), ui_(new Ui_LibraryViewContainer) {

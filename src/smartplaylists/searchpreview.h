@@ -18,11 +18,11 @@
 #ifndef SMARTPLAYLISTSEARCHPREVIEW_H
 #define SMARTPLAYLISTSEARCHPREVIEW_H
 
-#include "search.h"
-#include "smartplaylists/generator_fwd.h"
-
 #include <QFuture>
 #include <QWidget>
+
+#include "search.h"
+#include "smartplaylists/generator_fwd.h"
 
 class Application;
 class LibraryBackend;
@@ -64,6 +64,6 @@ class SearchPreview : public QWidget {
   GeneratorPtr generator_;
 };
 
-}  // namespace
+}  // namespace smart_playlists
 
 #endif  // SMARTPLAYLISTSEARCHPREVIEW_H

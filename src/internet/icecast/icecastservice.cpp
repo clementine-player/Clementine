@@ -21,14 +21,13 @@
 
 #include "internet/icecast/icecastservice.h"
 
-#include <algorithm>
-
 #include <QDesktopServices>
 #include <QMenu>
 #include <QMultiHash>
 #include <QNetworkReply>
 #include <QRegExp>
 #include <QtConcurrentRun>
+#include <algorithm>
 
 #include "core/application.h"
 #include "core/closure.h"
@@ -134,9 +133,10 @@ void IcecastService::DownloadDirectoryFinished(QNetworkReply* reply,
 
   QFuture<IcecastBackend::StationList> future =
       QtConcurrent::run(this, &IcecastService::ParseDirectory, reply);
-  NewClosure(future, this, SLOT(ParseDirectoryFinished(
-                               QFuture<IcecastBackend::StationList>, int)),
-             future, task_id);
+  NewClosure(
+      future, this,
+      SLOT(ParseDirectoryFinished(QFuture<IcecastBackend::StationList>, int)),
+      future, task_id);
 }
 
 namespace {

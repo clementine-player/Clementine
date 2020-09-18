@@ -15,16 +15,7 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "playlist.h"
-#include "playlistmanager.h"
 #include "playlisttabbar.h"
-#include "playlistview.h"
-#include "songmimedata.h"
-#include "core/logging.h"
-#include "internet/core/internetmimedata.h"
-#include "ui/iconloader.h"
-#include "widgets/renametablineedit.h"
-#include "widgets/favoritewidget.h"
 
 #include <QCheckBox>
 #include <QContextMenuEvent>
@@ -35,6 +26,16 @@
 #include <QMessageBox>
 #include <QPushButton>
 #include <QToolTip>
+
+#include "core/logging.h"
+#include "internet/core/internetmimedata.h"
+#include "playlist.h"
+#include "playlistmanager.h"
+#include "playlistview.h"
+#include "songmimedata.h"
+#include "ui/iconloader.h"
+#include "widgets/favoritewidget.h"
+#include "widgets/renametablineedit.h"
 
 const char* PlaylistTabBar::kSettingsGroup = "PlaylistTabBar";
 

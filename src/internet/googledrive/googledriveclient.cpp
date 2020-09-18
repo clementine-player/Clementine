@@ -19,17 +19,17 @@
 
 #include "googledriveclient.h"
 
-#include <QUrlQuery>
-#include <QJsonParseError>
+#include <QJsonArray>
 #include <QJsonDocument>
 #include <QJsonObject>
-#include <QJsonArray>
+#include <QJsonParseError>
 #include <QJsonValue>
+#include <QUrlQuery>
 
-#include "internet/core/oauthenticator.h"
 #include "core/closure.h"
 #include "core/logging.h"
 #include "core/network.h"
+#include "internet/core/oauthenticator.h"
 
 using namespace google_drive;
 
@@ -211,7 +211,8 @@ void Client::ListChangesFinished(ListChangesResponse* response,
 
   QJsonParseError error;
   QJsonDocument document = QJsonDocument::fromJson(reply->readAll(), &error);
-  // TODO(John Maguire): Put this on a separate thread as the response could be large.
+  // TODO(John Maguire): Put this on a separate thread as the response could be
+  // large.
   if (error.error != QJsonParseError::NoError) {
     qLog(Error) << "Failed to fetch changes" << response->cursor();
     emit response->Finished();
@@ -226,7 +227,7 @@ void Client::ListChangesFinished(ListChangesResponse* response,
   // Emit the FilesFound signal for the files in the response.
   FileList files;
   QList<QUrl> files_deleted;
-  for (const QJsonValue & v : json_result["items"].toArray()) {
+  for (const QJsonValue& v : json_result["items"].toArray()) {
     QJsonObject change = v.toObject();
     if (change["deleted"].toBool() ||
         change["file"].toObject()["labels"].toObject()["trashed"].toBool()) {

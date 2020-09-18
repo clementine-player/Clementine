@@ -17,12 +17,12 @@
 
 #include "didyoumean.h"
 
-#include "core/logging.h"
-
 #include <QEvent>
 #include <QKeyEvent>
 #include <QPainter>
 #include <QToolButton>
+
+#include "core/logging.h"
 
 const int DidYouMean::kPadding = 3;
 

@@ -21,13 +21,13 @@
 
 #include "internet/core/internetplaylistitem.h"
 
-#include <QSettings>
 #include <QApplication>
+#include <QSettings>
 #include <QtDebug>
 
-#include "internet/core/internetservice.h"
-#include "internet/core/internetmodel.h"
 #include "core/settingsprovider.h"
+#include "internet/core/internetmodel.h"
+#include "internet/core/internetservice.h"
 #include "library/sqlrow.h"
 #include "playlist/playlistbackend.h"
 

@@ -16,6 +16,7 @@
 */
 
 #include "globalsearchitemdelegate.h"
+
 #include "globalsearchview.h"
 
 GlobalSearchItemDelegate::GlobalSearchItemDelegate(GlobalSearchView* view)

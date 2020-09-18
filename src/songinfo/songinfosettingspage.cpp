@@ -15,17 +15,18 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "songinfofetcher.h"
 #include "songinfosettingspage.h"
-#include "songinfotextview.h"
-#include "songinfoview.h"
-#include "ultimatelyricsprovider.h"
-#include "ui_songinfosettingspage.h"
-#include "ui/iconloader.h"
-#include "ui/settingsdialog.h"
 
 #include <QFile>
 #include <QSettings>
+
+#include "songinfofetcher.h"
+#include "songinfotextview.h"
+#include "songinfoview.h"
+#include "ui/iconloader.h"
+#include "ui/settingsdialog.h"
+#include "ui_songinfosettingspage.h"
+#include "ultimatelyricsprovider.h"
 
 SongInfoSettingsPage::SongInfoSettingsPage(SettingsDialog* dialog)
     : SettingsPage(dialog), ui_(new Ui_SongInfoSettingsPage) {

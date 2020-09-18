@@ -18,10 +18,10 @@
 #ifndef XMLPARSER_H
 #define XMLPARSER_H
 
-#include "parserbase.h"
-
 #include <QXmlStreamReader>
 #include <QXmlStreamWriter>
+
+#include "parserbase.h"
 
 class QDomDocument;
 class QDomNode;

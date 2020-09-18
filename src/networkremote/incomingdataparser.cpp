@@ -23,9 +23,9 @@
 #include "core/timeconstants.h"
 #include "engines/enginebase.h"
 #include "internet/core/internetmodel.h"
+#include "playlist/playlist.h"
 #include "playlist/playlistmanager.h"
 #include "playlist/playlistsequence.h"
-#include "playlist/playlist.h"
 
 #ifdef HAVE_LIBLASTFM
 #include "internet/lastfm/lastfmservice.h"
@@ -180,7 +180,8 @@ void IncomingDataParser::Parse(const pb::remote::Message& msg) {
       client->song_sender()->SendSongs(msg.request_download_songs());
       break;
     case pb::remote::SONG_OFFER_RESPONSE:
-      client->song_sender()->ResponseSongOffer(msg.response_song_offer().accepted());
+      client->song_sender()->ResponseSongOffer(
+          msg.response_song_offer().accepted());
       break;
     case pb::remote::GET_LIBRARY:
       emit SendLibrary(client);
@@ -304,7 +305,8 @@ void IncomingDataParser::RemoveSongs(const pb::remote::Message& msg) {
   emit RemoveSongs(request.playlist_id(), songs);
 }
 
-void IncomingDataParser::ClientConnect(const pb::remote::Message& msg, RemoteClient* client) {
+void IncomingDataParser::ClientConnect(const pb::remote::Message& msg,
+                                       RemoteClient* client) {
   // Always sned the Clementine infos
   emit SendClementineInfo();
 
@@ -341,17 +343,17 @@ void IncomingDataParser::RateSong(const pb::remote::Message& msg) {
   emit RateCurrentSong(rating);
 }
 
-void IncomingDataParser::GlobalSearch(RemoteClient *client, const pb::remote::Message &msg) {
+void IncomingDataParser::GlobalSearch(RemoteClient* client,
+                                      const pb::remote::Message& msg) {
   emit DoGlobalSearch(QStringFromStdString(msg.request_global_search().query()),
                       client);
 }
 
-Song IncomingDataParser::CreateSongFromProtobuf(const pb::remote::SongMetadata& pb){
+Song IncomingDataParser::CreateSongFromProtobuf(
+    const pb::remote::SongMetadata& pb) {
   Song song;
-  song.Init(QStringFromStdString(pb.title()),
-            QStringFromStdString(pb.artist()),
-            QStringFromStdString(pb.album()),
-            pb.length() * kNsecPerSec);
+  song.Init(QStringFromStdString(pb.title()), QStringFromStdString(pb.artist()),
+            QStringFromStdString(pb.album()), pb.length() * kNsecPerSec);
 
   song.set_albumartist(QStringFromStdString(pb.albumartist()));
   song.set_genre(QStringFromStdString(pb.genre()));

@@ -23,12 +23,11 @@
 
 #include "rainbowanalyzer.h"
 
-#include <cmath>
-
 #include <QBrush>
 #include <QPainter>
 #include <QPen>
 #include <QTimerEvent>
+#include <cmath>
 
 #include "core/arraysize.h"
 #include "core/logging.h"

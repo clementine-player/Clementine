@@ -16,11 +16,12 @@
 */
 
 #include "urlsearchprovider.h"
-#include "core/mimedata.h"
-#include "ui/iconloader.h"
 
 #include <QIcon>
 #include <QUrl>
+
+#include "core/mimedata.h"
+#include "ui/iconloader.h"
 
 const char* UrlSearchProvider::kUrlRegex = "^[a-zA-Z][a-zA-Z0-9+-.]*://";
 

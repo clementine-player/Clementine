@@ -25,7 +25,7 @@
 namespace mygpo {
 class ApiRequest;
 class PodcastList;
-}
+}  // namespace mygpo
 
 class GPodderTopTagsModel : public PodcastDiscoveryModel {
   Q_OBJECT

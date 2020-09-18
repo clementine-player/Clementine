@@ -16,9 +16,9 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include <QKeySequence>
-
 #include <CoreFoundation/CFDictionary.h>
+
+#include <QKeySequence>
 
 #ifdef __OBJC__
 @class NSEvent;
@@ -31,4 +31,4 @@ namespace mac {
 QKeySequence KeySequenceFromNSEvent(NSEvent* event);
 void DumpDictionary(CFDictionaryRef dict);
 float GetDevicePixelRatio(QWidget* widget);
-}
+}  // namespace mac

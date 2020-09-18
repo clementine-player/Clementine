@@ -15,7 +15,6 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "config.h"
 #include "devicelister.h"
 
 #include <QDir>
@@ -23,6 +22,8 @@
 #include <QStringList>
 #include <QThread>
 #include <QtDebug>
+
+#include "config.h"
 
 #ifdef HAVE_LIBGPOD
 #include <gpod/itdb.h>
@@ -151,7 +152,7 @@ QString GetIpodModel(Itdb_IpodModel model) {
 }
 
 #endif
-}
+}  // namespace
 
 QUrl DeviceLister::MakeUrlFromLocalPath(const QString& path) const {
   if (IsIpod(path)) {

@@ -22,9 +22,9 @@
 
 #include <AppKit/NSEvent.h>
 #include <AppKit/NSWorkspace.h>
+#include <ApplicationServices/ApplicationServices.h>
 #include <Foundation/NSString.h>
 #include <IOKit/hidsystem/ev_keymap.h>
-#include <ApplicationServices/ApplicationServices.h>
 
 #include <QAction>
 #include <QList>
@@ -47,19 +47,16 @@ class MacGlobalShortcutBackendPrivate : boost::noncopyable {
       : global_monitor_(nil), local_monitor_(nil), backend_(backend) {}
 
   bool Register() {
-    global_monitor_ =
-        [NSEvent addGlobalMonitorForEventsMatchingMask:NSKeyDownMask
-                                               handler:^(NSEvent* event) {
-                                                   HandleKeyEvent(event);
-                                               }];
+    global_monitor_ = [NSEvent addGlobalMonitorForEventsMatchingMask:NSKeyDownMask
+                                                             handler:^(NSEvent* event) {
+                                                               HandleKeyEvent(event);
+                                                             }];
     local_monitor_ =
         [NSEvent addLocalMonitorForEventsMatchingMask:NSKeyDownMask
                                               handler:^(NSEvent* event) {
-                                                  // Filter event if we handle
-                                                  // it as a global shortcut.
-                                                  return HandleKeyEvent(event)
-                                                             ? nil
-                                                             : event;
+                                                // Filter event if we handle
+                                                // it as a global shortcut.
+                                                return HandleKeyEvent(event) ? nil : event;
                                               }];
     return true;
   }
@@ -81,8 +78,7 @@ class MacGlobalShortcutBackendPrivate : boost::noncopyable {
 };
 
 MacGlobalShortcutBackend::MacGlobalShortcutBackend(GlobalShortcuts* parent)
-    : GlobalShortcutBackend(parent),
-      p_(new MacGlobalShortcutBackendPrivate(this)) {}
+    : GlobalShortcutBackend(parent), p_(new MacGlobalShortcutBackendPrivate(this)) {}
 
 MacGlobalShortcutBackend::~MacGlobalShortcutBackend() {}
 
@@ -90,8 +86,7 @@ bool MacGlobalShortcutBackend::DoRegister() {
   // Always enable media keys.
   mac::SetShortcutHandler(this);
 
-  for (const GlobalShortcuts::Shortcut& shortcut :
-       manager_->shortcuts().values()) {
+  for (const GlobalShortcuts::Shortcut& shortcut : manager_->shortcuts().values()) {
     shortcuts_[shortcut.action->shortcut()] = shortcut.action;
   }
   return p_->Register();
@@ -130,21 +125,21 @@ bool MacGlobalShortcutBackend::KeyPressed(const QKeySequence& sequence) {
 
 bool MacGlobalShortcutBackend::IsAccessibilityEnabled() const {
   bool accessibilityEnabled;
-  try{
+  try {
     accessibilityEnabled = AXAPIEnabled();
-  }catch(...){
-    NSDictionary *options = @{(id)kAXTrustedCheckOptionPrompt: @YES};
+  } catch (...) {
+    NSDictionary* options = @{(id)kAXTrustedCheckOptionPrompt : @YES};
     accessibilityEnabled = AXIsProcessTrustedWithOptions((CFDictionaryRef)options);
   }
   return accessibilityEnabled;
 }
 
 void MacGlobalShortcutBackend::ShowAccessibilityDialog() {
-  NSArray* paths = NSSearchPathForDirectoriesInDomains(
-      NSPreferencePanesDirectory, NSSystemDomainMask, YES);
+  NSArray* paths =
+      NSSearchPathForDirectoriesInDomains(NSPreferencePanesDirectory, NSSystemDomainMask, YES);
   if ([paths count] == 1) {
-    SBSystemPreferencesApplication* system_prefs = [SBApplication
-        applicationWithBundleIdentifier:@"com.apple.systempreferences"];
+    SBSystemPreferencesApplication* system_prefs =
+        [SBApplication applicationWithBundleIdentifier:@"com.apple.systempreferences"];
     [system_prefs activate];
 
     SBElementArray* panes = [system_prefs panes];

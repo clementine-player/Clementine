@@ -96,7 +96,13 @@ class SearchTerm {
   };
 
   // These values are persisted, so add to the end of the enum only
-  enum DateType { Date_Hour = 0, Date_Day, Date_Week, Date_Month, Date_Year, };
+  enum DateType {
+    Date_Hour = 0,
+    Date_Day,
+    Date_Week,
+    Date_Month,
+    Date_Year,
+  };
 
   SearchTerm();
   SearchTerm(Field field, Operator op, const QVariant& value);
@@ -125,7 +131,7 @@ class SearchTerm {
 
 typedef QList<SearchTerm::Operator> OperatorList;
 
-}  // namespace
+}  // namespace smart_playlists
 
 QDataStream& operator<<(QDataStream& s,
                         const smart_playlists::SearchTerm& term);

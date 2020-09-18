@@ -18,15 +18,13 @@
 #ifndef DEVICEMANAGER_H
 #define DEVICEMANAGER_H
 
-#include "devicedatabasebackend.h"
-
-#include <memory>
-
 #include <QAbstractItemModel>
 #include <QIcon>
 #include <QThreadPool>
+#include <memory>
 
 #include "core/simpletreemodel.h"
+#include "devicedatabasebackend.h"
 #include "deviceinfo.h"
 #include "library/librarymodel.h"
 
@@ -123,13 +121,12 @@ class DeviceManager : public SimpleTreeModel<DeviceInfo> {
   void LazyPopulate(DeviceInfo* item, bool signal);
 
  private:
-
   void AddLister(DeviceLister* lister);
   template <typename T>
   void AddDeviceClass();
 
-  DeviceDatabaseBackend::Device InfoToDatabaseDevice(const DeviceInfo& info)
-      const;
+  DeviceDatabaseBackend::Device InfoToDatabaseDevice(
+      const DeviceInfo& info) const;
 
  private:
   Application* app_;

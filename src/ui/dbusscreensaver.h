@@ -18,9 +18,9 @@
 #ifndef DBUSSCREENSAVER_H
 #define DBUSSCREENSAVER_H
 
-#include "screensaver.h"
-
 #include <QString>
+
+#include "screensaver.h"
 
 class DBusScreensaver : public Screensaver {
  public:

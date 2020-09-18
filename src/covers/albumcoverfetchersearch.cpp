@@ -20,20 +20,19 @@
 
 #include "albumcoverfetchersearch.h"
 
-#include <algorithm>
-#include <cmath>
-
 #include <QMutexLocker>
 #include <QNetworkReply>
 #include <QTimer>
 #include <QtDebug>
+#include <algorithm>
+#include <cmath>
 
 #include "albumcoverfetcher.h"
-#include "coverprovider.h"
-#include "coverproviders.h"
 #include "core/closure.h"
 #include "core/logging.h"
 #include "core/network.h"
+#include "coverprovider.h"
+#include "coverproviders.h"
 
 const int AlbumCoverFetcherSearch::kSearchTimeoutMs = 10000;
 const int AlbumCoverFetcherSearch::kImageLoadTimeoutMs = 2500;
@@ -224,11 +223,13 @@ float AlbumCoverFetcherSearch::ScoreImage(const QImage& image) const {
 
   // A 500x500px image scores 1.0, bigger scores higher
   const float size_score =
-      std::sqrt(static_cast<float>(image.width() * image.height())) / kTargetSize;
+      std::sqrt(static_cast<float>(image.width() * image.height())) /
+      kTargetSize;
 
   // A 1:1 image scores 1.0, anything else scores less
-  const float aspect_score = 1.0 - static_cast<float>(image.height() - image.width()) /
-                                       std::max(image.height(), image.width());
+  const float aspect_score =
+      1.0 - static_cast<float>(image.height() - image.width()) /
+                std::max(image.height(), image.width());
 
   return size_score + aspect_score;
 }

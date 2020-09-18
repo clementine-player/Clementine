@@ -18,18 +18,16 @@
 #ifndef ORGANISEDIALOG_H
 #define ORGANISEDIALOG_H
 
-#include <memory>
-
 #include <QDialog>
 #include <QFuture>
 #include <QMap>
 #include <QUrl>
-
-#include "gtest/gtest_prod.h"
+#include <memory>
 
 #include "core/organise.h"
 #include "core/organiseformat.h"
 #include "core/song.h"
+#include "gtest/gtest_prod.h"
 #include "library/librarybackend.h"
 
 class LibraryWatcher;

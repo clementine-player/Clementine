@@ -25,11 +25,11 @@
 #include <QSettings>
 #include <QTemporaryFile>
 
-#include "internet/core/internetmodel.h"
-#include "intergalacticfmservice.h"
 #include "core/application.h"
 #include "core/logging.h"
 #include "core/taskmanager.h"
+#include "intergalacticfmservice.h"
+#include "internet/core/internetmodel.h"
 #include "playlistparsers/playlistparser.h"
 
 IntergalacticFMUrlHandler::IntergalacticFMUrlHandler(

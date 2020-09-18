@@ -16,25 +16,25 @@
 */
 
 #include "groupbydialog.h"
-#include "ui_groupbydialog.h"
 
 #include <QPushButton>
-
 #include <functional>
+
+#include "ui_groupbydialog.h"
 
 // boost::multi_index still relies on these being in the global namespace.
 using std::placeholders::_1;
 using std::placeholders::_2;
 
-#include <boost/multi_index_container.hpp>
 #include <boost/multi_index/member.hpp>
 #include <boost/multi_index/ordered_index.hpp>
+#include <boost/multi_index_container.hpp>
 
 using boost::multi_index_container;
 using boost::multi_index::indexed_by;
+using boost::multi_index::member;
 using boost::multi_index::ordered_unique;
 using boost::multi_index::tag;
-using boost::multi_index::member;
 
 namespace {
 
@@ -56,10 +56,11 @@ class GroupByDialogPrivate {
       Mapping,
       indexed_by<
           ordered_unique<tag<tag_index>,
-                         member<Mapping, int, &Mapping::combo_box_index> >,
-          ordered_unique<tag<tag_group_by>,
-                         member<Mapping, LibraryModel::GroupBy,
-                                &Mapping::group_by> > > > MappingContainer;
+                         member<Mapping, int, &Mapping::combo_box_index>>,
+          ordered_unique<
+              tag<tag_group_by>,
+              member<Mapping, LibraryModel::GroupBy, &Mapping::group_by>>>>
+      MappingContainer;
 
  public:
   MappingContainer mapping_;

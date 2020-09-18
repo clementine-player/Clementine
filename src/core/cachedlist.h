@@ -20,10 +20,9 @@
 #ifndef CORE_CACHEDLIST_H_
 #define CORE_CACHEDLIST_H_
 
-#include <algorithm>
-
 #include <QDateTime>
 #include <QSettings>
+#include <algorithm>
 
 template <typename T>
 class CachedList {

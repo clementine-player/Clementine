@@ -16,10 +16,11 @@
 */
 
 #include "lastfmtrackinfoprovider.h"
+
+#include "internet/lastfm/lastfmcompat.h"
 #include "songinfotextview.h"
 #include "songplaystats.h"
 #include "tagwidget.h"
-#include "internet/lastfm/lastfmcompat.h"
 #include "ui/iconloader.h"
 
 void LastfmTrackInfoProvider::FetchInfo(int id, const Song& metadata) {
@@ -82,7 +83,8 @@ void LastfmTrackInfoProvider::GetPlayCounts(int id, const lastfm::XmlQuery& q) {
 
   if (myplaycount != -1) {
     if (love)
-      widget->AddItem(IconLoader::Load("love", IconLoader::Lastfm), tr("You love this track"));
+      widget->AddItem(IconLoader::Load("love", IconLoader::Lastfm),
+                      tr("You love this track"));
     widget->AddItem(IconLoader::Load("icon_user", IconLoader::Lastfm),
                     tr("Your scrobbles: %1").arg(myplaycount));
   }

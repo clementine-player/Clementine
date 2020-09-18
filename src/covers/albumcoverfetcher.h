@@ -21,8 +21,6 @@
 #ifndef COVERS_ALBUMCOVERFETCHER_H_
 #define COVERS_ALBUMCOVERFETCHER_H_
 
-#include "coversearchstatistics.h"
-
 #include <QHash>
 #include <QImage>
 #include <QList>
@@ -31,6 +29,8 @@
 #include <QObject>
 #include <QQueue>
 #include <QUrl>
+
+#include "coversearchstatistics.h"
 
 class QNetworkReply;
 class QString;

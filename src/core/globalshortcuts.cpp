@@ -19,18 +19,18 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "config.h"
 #include "globalshortcuts.h"
-#include "gnomeglobalshortcutbackend.h"
-#include "kglobalaccelglobalshortcutbackend.h"
-#include "macglobalshortcutbackend.h"
-#include "qxtglobalshortcutbackend.h"
-
-#include "mac_startup.h"
 
 #include <QAction>
 #include <QShortcut>
 #include <QtDebug>
+
+#include "config.h"
+#include "gnomeglobalshortcutbackend.h"
+#include "kglobalaccelglobalshortcutbackend.h"
+#include "mac_startup.h"
+#include "macglobalshortcutbackend.h"
+#include "qxtglobalshortcutbackend.h"
 
 #ifdef HAVE_DBUS
 #include <QtDBus>

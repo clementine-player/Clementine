@@ -18,11 +18,12 @@
 */
 
 #include "multisortfilterproxy.h"
-#include "core/logging.h"
 
 #include <QDate>
 #include <QDateTime>
 #include <QTime>
+
+#include "core/logging.h"
 
 MultiSortFilterProxy::MultiSortFilterProxy(QObject* parent)
     : QSortFilterProxyModel(parent) {}

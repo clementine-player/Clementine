@@ -21,34 +21,32 @@
 
 #include "gstengine.h"
 
+#include <gst/gst.h>
+#include <gst/pbutils/pbutils.h>
 #include <math.h>
-#include <cmath>
 #include <unistd.h>
 
+#include <QCoreApplication>
+#include <QDir>
+#include <QFile>
+#include <QRegExp>
+#include <QSettings>
+#include <QTimeLine>
+#include <QTimer>
+#include <QtConcurrentRun>
+#include <cmath>
 #include <iostream>
 #include <memory>
 #include <vector>
 
-#include <QTimer>
-#include <QRegExp>
-#include <QFile>
-#include <QSettings>
-#include <QCoreApplication>
-#include <QTimeLine>
-#include <QDir>
-#include <QtConcurrentRun>
-
-#include <gst/gst.h>
-#include <gst/pbutils/pbutils.h>
-
 #include "config.h"
-#include "devicefinder.h"
-#include "gstenginepipeline.h"
 #include "core/closure.h"
 #include "core/logging.h"
 #include "core/taskmanager.h"
 #include "core/timeconstants.h"
 #include "core/utilities.h"
+#include "devicefinder.h"
+#include "gstenginepipeline.h"
 
 #ifdef HAVE_MOODBAR
 #include "gst/moodbar/plugin.h"
@@ -761,10 +759,10 @@ GstElement* GstEngine::CreateElement(const QString& factoryName,
       factoryName.toLatin1().constData(), name.toLatin1().constData());
 
   if (!element) {
-    emit Error(QString(
-                   "GStreamer could not create the element: %1.  "
-                   "Please make sure that you have installed all necessary "
-                   "GStreamer plugins (e.g. OGG and MP3)").arg(factoryName));
+    emit Error(QString("GStreamer could not create the element: %1.  "
+                       "Please make sure that you have installed all necessary "
+                       "GStreamer plugins (e.g. OGG and MP3)")
+                   .arg(factoryName));
     if (bin) gst_object_unref(GST_OBJECT(bin));
     return nullptr;
   }

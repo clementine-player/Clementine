@@ -23,8 +23,8 @@
 #ifndef ANALYZERS_ANALYZERCONTAINER_H_
 #define ANALYZERS_ANALYZERCONTAINER_H_
 
-#include <QWidget>
 #include <QMenu>
+#include <QWidget>
 
 #include "analyzerbase.h"
 #include "engines/engine_fwd.h"
@@ -40,7 +40,7 @@ class AnalyzerContainer : public QWidget {
   static const char* kSettingsGroup;
   static const char* kSettingsFramerate;
 
-signals:
+ signals:
   void WheelEvent(int delta);
 
  protected:

@@ -16,13 +16,13 @@
 */
 
 #include "about.h"
-#include "config.h"
-#include "ui_about.h"
-
-#include <algorithm>
 
 #include <QCoreApplication>
 #include <QPushButton>
+#include <algorithm>
+
+#include "config.h"
+#include "ui_about.h"
 
 const char* About::kUrl = "http://www.clementine-player.org/";
 
@@ -70,7 +70,8 @@ About::About(QWidget* parent) : QDialog(parent) {
 QString About::MakeHtml() const {
   QString ret = QString(
                     "<p><a href=\"%1\">%2</a></p>"
-                    "<p><b>%3:</b>").arg(kUrl, kUrl, tr("Authors"));
+                    "<p><b>%3:</b>")
+                    .arg(kUrl, kUrl, tr("Authors"));
 
   for (const Person& person : authors_) {
     ret += "<br />" + MakeHtml(person);

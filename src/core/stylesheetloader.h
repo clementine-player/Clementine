@@ -19,10 +19,10 @@
 #ifndef CORE_STYLESHEETLOADER_H_
 #define CORE_STYLESHEETLOADER_H_
 
-#include <QString>
-#include <QPalette>
-#include <QWidget>
 #include <QMap>
+#include <QPalette>
+#include <QString>
+#include <QWidget>
 
 class StyleSheetLoader : public QObject {
  public:

@@ -22,11 +22,10 @@
 #ifndef INTERNET_JAMENDO_JAMENDOSERVICE_H_
 #define INTERNET_JAMENDO_JAMENDOSERVICE_H_
 
-#include "internet/core/internetservice.h"
-
 #include <QXmlStreamReader>
 
 #include "core/song.h"
+#include "internet/core/internetservice.h"
 
 class LibraryBackend;
 class LibraryFilterWidget;

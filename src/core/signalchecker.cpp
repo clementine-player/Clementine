@@ -22,7 +22,7 @@
 #include "core/logging.h"
 
 gulong CheckedGConnect(gpointer source, const char* signal, GCallback callback,
-                     gpointer data, const int callback_param_count) {
+                       gpointer data, const int callback_param_count) {
   guint signal_id = 0;
   GQuark detail = 0;
 

@@ -15,12 +15,13 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "iconloader.h"
 #include "networkproxysettingspage.h"
-#include "ui_networkproxysettingspage.h"
-#include "core/networkproxyfactory.h"
 
 #include <QSettings>
+
+#include "core/networkproxyfactory.h"
+#include "iconloader.h"
+#include "ui_networkproxysettingspage.h"
 
 NetworkProxySettingsPage::NetworkProxySettingsPage(SettingsDialog* dialog)
     : SettingsPage(dialog), ui_(new Ui_NetworkProxySettingsPage) {

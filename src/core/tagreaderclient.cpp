@@ -18,7 +18,6 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "player.h"
 #include "tagreaderclient.h"
 
 #include <QCoreApplication>
@@ -27,6 +26,8 @@
 #include <QTcpServer>
 #include <QThread>
 #include <QUrl>
+
+#include "player.h"
 
 const char* TagReaderClient::kWorkerExecutableName = "clementine-tagreader";
 TagReaderClient* TagReaderClient::sInstance = nullptr;

@@ -16,19 +16,21 @@
 */
 
 #include "backgroundstreamssettingspage.h"
-#include "iconloader.h"
-#include "settingsdialog.h"
-#include "ui_backgroundstreamssettingspage.h"
-#include "core/backgroundstreams.h"
 
 #include <QCheckBox>
 #include <QGroupBox>
+
+#include "core/backgroundstreams.h"
+#include "iconloader.h"
+#include "settingsdialog.h"
+#include "ui_backgroundstreamssettingspage.h"
 
 BackgroundStreamsSettingsPage::BackgroundStreamsSettingsPage(
     SettingsDialog* dialog)
     : SettingsPage(dialog), ui_(new Ui_BackgroundStreamsSettingsPage) {
   ui_->setupUi(this);
-  setWindowIcon(IconLoader::Load("weather-showers-scattered", IconLoader::Base));
+  setWindowIcon(
+      IconLoader::Load("weather-showers-scattered", IconLoader::Base));
 
   for (const QString& name : dialog->background_streams()->streams()) {
     AddStream(name);
@@ -47,7 +49,7 @@ void BackgroundStreamsSettingsPage::AddStream(const QString& name) {
   BackgroundStreams* streams = dialog()->background_streams();
 
   QGroupBox* box = new QGroupBox(tr(name.toUtf8()));
-  QLabel *label = new QLabel(box);
+  QLabel* label = new QLabel(box);
   QSlider* slider = new QSlider(Qt::Horizontal, box);
   QCheckBox* check = new QCheckBox(box);
   QHBoxLayout* hbox_layout = new QHBoxLayout(box);
@@ -58,8 +60,8 @@ void BackgroundStreamsSettingsPage::AddStream(const QString& name) {
   QVBoxLayout* streams_layout = qobject_cast<QVBoxLayout*>(layout());
   streams_layout->insertWidget(streams_layout->count() - 1, box);
 
-  label->setPixmap(QPixmap(IconLoader::Load("audio-volume-medium", 
-                           IconLoader::Base).pixmap(32)));
+  label->setPixmap(QPixmap(
+      IconLoader::Load("audio-volume-medium", IconLoader::Base).pixmap(32)));
   slider->setProperty("stream_name", name);
   check->setProperty("stream_name", name);
 

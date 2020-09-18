@@ -15,16 +15,17 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "libraryfilterwidget.h"
-#include "librarymodel.h"
 #include "savedgroupingmanager.h"
-#include "ui_savedgroupingmanager.h"
-#include "ui/iconloader.h"
 
 #include <QKeySequence>
 #include <QList>
 #include <QSettings>
 #include <QStandardItem>
+
+#include "libraryfilterwidget.h"
+#include "librarymodel.h"
+#include "ui/iconloader.h"
+#include "ui_savedgroupingmanager.h"
 
 SavedGroupingManager::SavedGroupingManager(QWidget* parent)
     : QDialog(parent),
@@ -100,7 +101,9 @@ QString SavedGroupingManager::GroupByToString(const LibraryModel::GroupBy& g) {
     case LibraryModel::GroupBy_OriginalYear: {
       return tr("Original year");
     }
-    default: { return tr("Unknown"); }
+    default: {
+      return tr("Unknown");
+    }
   }
 }
 

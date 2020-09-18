@@ -16,10 +16,6 @@
 */
 
 #include "organisedialog.h"
-#include "ui_organisedialog.h"
-
-#include <algorithm>
-#include <memory>
 
 #include <QDir>
 #include <QFileInfo>
@@ -30,21 +26,24 @@
 #include <QSettings>
 #include <QtConcurrentRun>
 #include <QtDebug>
+#include <algorithm>
+#include <memory>
 
-#include "iconloader.h"
-#include "organiseerrordialog.h"
 #include "core/musicstorage.h"
 #include "core/organise.h"
 #include "core/tagreaderclient.h"
 #include "core/utilities.h"
+#include "iconloader.h"
 #include "library/librarybackend.h"
+#include "organiseerrordialog.h"
+#include "ui_organisedialog.h"
 
 const char* OrganiseDialog::kDefaultFormat =
     "%artist/%album{ (Disc %disc)}/{%track - }%title.%extension";
 const char* OrganiseDialog::kSettingsGroup = "OrganiseDialog";
 
-OrganiseDialog::OrganiseDialog(
-    TaskManager* task_manager, LibraryBackend* backend, QWidget* parent)
+OrganiseDialog::OrganiseDialog(TaskManager* task_manager,
+                               LibraryBackend* backend, QWidget* parent)
     : QDialog(parent),
       ui_(new Ui_OrganiseDialog),
       task_manager_(task_manager),
@@ -391,7 +390,7 @@ void OrganiseDialog::accept() {
   connect(organise, SIGNAL(FileCopied(int)), this, SIGNAL(FileCopied(int)));
   if (backend_ != nullptr) {
     connect(organise, SIGNAL(SongPathChanged(const Song&, const QFileInfo&)),
-        backend_, SLOT(SongPathChanged(const Song&, const QFileInfo&)));
+            backend_, SLOT(SongPathChanged(const Song&, const QFileInfo&)));
   }
   organise->Start();
 

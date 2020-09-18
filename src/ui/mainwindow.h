@@ -18,11 +18,10 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include <memory>
-
 #include <QMainWindow>
 #include <QSettings>
 #include <QSystemTrayIcon>
+#include <memory>
 
 #include "config.h"
 #include "core/lazy.h"
@@ -145,7 +144,7 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   void Activate();
   bool LoadUrl(const QString& url);
 
-signals:
+ signals:
   // Signals that stop playing after track was toggled.
   void StopAfterToggled(bool stop);
 

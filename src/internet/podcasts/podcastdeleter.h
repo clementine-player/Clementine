@@ -18,16 +18,16 @@
 #ifndef INTERNET_PODCASTS_PODCASTDELETER_H_
 #define INTERNET_PODCASTS_PODCASTDELETER_H_
 
-#include "core/network.h"
-#include "podcast.h"
-#include "podcastepisode.h"
-
 #include <QFile>
 #include <QList>
 #include <QObject>
 #include <QQueue>
 #include <QRegExp>
 #include <QSet>
+
+#include "core/network.h"
+#include "podcast.h"
+#include "podcastepisode.h"
 
 #ifdef Q_OS_WIN
 #include <time.h>

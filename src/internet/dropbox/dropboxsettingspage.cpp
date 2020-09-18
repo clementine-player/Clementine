@@ -17,14 +17,14 @@
 */
 
 #include "dropboxsettingspage.h"
-#include "ui_dropboxsettingspage.h"
 
 #include "core/application.h"
+#include "internet/core/internetmodel.h"
 #include "internet/core/oauthenticator.h"
 #include "internet/dropbox/dropboxservice.h"
-#include "internet/core/internetmodel.h"
-#include "ui/settingsdialog.h"
 #include "ui/iconloader.h"
+#include "ui/settingsdialog.h"
+#include "ui_dropboxsettingspage.h"
 
 namespace {
 static const char* kOAuthEndpoint =
@@ -34,7 +34,7 @@ static const char* kOAuthClientSecret = "pg7y68h5efap8r6";
 static const char* kOAuthTokenEndpoint =
     "https://api.dropboxapi.com/1/oauth2/token";
 static const char* kOAuthScope = "";
-}
+}  // namespace
 
 DropboxSettingsPage::DropboxSettingsPage(SettingsDialog* parent)
     : SettingsPage(parent),
@@ -42,7 +42,7 @@ DropboxSettingsPage::DropboxSettingsPage(SettingsDialog* parent)
       service_(dialog()->app()->internet_model()->Service<DropboxService>()) {
   ui_->setupUi(this);
   setWindowIcon(IconLoader::Load("dropbox", IconLoader::Provider));
-  
+
   ui_->login_state->AddCredentialGroup(ui_->login_container);
 
   connect(ui_->login_button, SIGNAL(clicked()), SLOT(LoginClicked()));

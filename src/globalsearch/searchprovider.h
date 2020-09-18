@@ -150,7 +150,7 @@ class SearchProvider : public QObject {
 
   static QImage ScaleAndPad(const QImage& image);
 
-signals:
+ signals:
   void ResultsAvailable(int id, const SearchProvider::ResultList& results);
   void SearchFinished(int id);
 

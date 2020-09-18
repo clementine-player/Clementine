@@ -18,12 +18,11 @@
 #ifndef MOODBARPIPELINE_H
 #define MOODBARPIPELINE_H
 
+#include <gst/app/gstappsink.h>
+#include <gst/gst.h>
+
 #include <QObject>
 #include <QUrl>
-
-#include <gst/gst.h>
-#include <gst/app/gstappsink.h>
-
 #include <memory>
 
 class MoodbarBuilder;

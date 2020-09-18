@@ -20,9 +20,9 @@
 #ifndef INTERNET_PODCASTS_FIXEDOPMLPAGE_H_
 #define INTERNET_PODCASTS_FIXEDOPMLPAGE_H_
 
-#include "addpodcastpage.h"
-
 #include <QUrl>
+
+#include "addpodcastpage.h"
 
 class PodcastUrlLoader;
 class PodcastUrlLoaderReply;

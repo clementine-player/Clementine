@@ -104,7 +104,7 @@ void PodcastDeleter::AutoDelete() {
   timeout_ms = QDateTime::currentDateTime().toMSecsSinceEpoch();
   timeout_ms -= oldest_episode_time.toMSecsSinceEpoch();
   timeout_ms = (delete_after_secs_ * kMsecPerSec) - timeout_ms;
-  qLog(Info) << "Timeout for autodelete set to:" << timeout_ms <<"ms";
+  qLog(Info) << "Timeout for autodelete set to:" << timeout_ms << "ms";
   if (timeout_ms >= 0) {
     auto_delete_timer_->setInterval(timeout_ms);
   } else {

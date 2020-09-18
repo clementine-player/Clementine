@@ -16,11 +16,12 @@
 */
 
 #include "librarydirectorymodel.h"
-#include "librarybackend.h"
+
 #include "core/application.h"
 #include "core/filesystemmusicstorage.h"
 #include "core/musicstorage.h"
 #include "core/utilities.h"
+#include "librarybackend.h"
 #include "ui/iconloader.h"
 
 LibraryDirectoryModel::LibraryDirectoryModel(
@@ -49,7 +50,7 @@ void LibraryDirectoryModel::DirectoryDiscovered(const Directory& dir) {
   item->setData(dir.id, kIdRole);
   item->setIcon(dir_icon_);
   storage_ << std::shared_ptr<MusicStorage>(
-                  new FilesystemMusicStorage(dir.path));
+      new FilesystemMusicStorage(dir.path));
   appendRow(item);
 }
 

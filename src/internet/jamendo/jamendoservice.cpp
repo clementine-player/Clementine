@@ -28,13 +28,9 @@
 #include <QMessageBox>
 #include <QNetworkReply>
 #include <QSortFilterProxyModel>
-#include <QtConcurrentRun>
 #include <QXmlStreamReader>
-#include "qtiocompressor.h"
+#include <QtConcurrentRun>
 
-#include "jamendodynamicplaylist.h"
-#include "jamendoplaylistitem.h"
-#include "internet/core/internetmodel.h"
 #include "core/application.h"
 #include "core/database.h"
 #include "core/logging.h"
@@ -45,9 +41,13 @@
 #include "core/timeconstants.h"
 #include "globalsearch/globalsearch.h"
 #include "globalsearch/librarysearchprovider.h"
+#include "internet/core/internetmodel.h"
+#include "jamendodynamicplaylist.h"
+#include "jamendoplaylistitem.h"
 #include "library/librarybackend.h"
 #include "library/libraryfilterwidget.h"
 #include "library/librarymodel.h"
+#include "qtiocompressor.h"
 #include "smartplaylists/generator.h"
 #include "smartplaylists/querygenerator.h"
 #include "ui/iconloader.h"
@@ -287,7 +287,7 @@ void JamendoService::InsertTrackIds(const TrackIdList& ids) const {
 
   QSqlQuery insert(db);
   insert.prepare(QString("INSERT INTO %1 (%2) VALUES (:id)")
-                       .arg(kTrackIdsTable, kTrackIdsColumn));
+                     .arg(kTrackIdsTable, kTrackIdsColumn));
 
   for (int id : ids) {
     insert.bindValue(":id", id);

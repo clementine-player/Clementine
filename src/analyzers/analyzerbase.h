@@ -21,7 +21,7 @@
 */
 
 /* Original Author:  Max Howell  <max.howell@methylblue.com>  2004
-*/
+ */
 
 #ifndef ANALYZERS_ANALYZERBASE_H_
 #define ANALYZERS_ANALYZERBASE_H_
@@ -32,13 +32,14 @@
 #include <sys/types.h>
 #endif
 
-#include "fht.h"
-#include "engines/engine_fwd.h"
-#include "engines/enginebase.h"
-#include <QPixmap>
 #include <QBasicTimer>
+#include <QPixmap>
 #include <QWidget>
 #include <vector>
+
+#include "engines/engine_fwd.h"
+#include "engines/enginebase.h"
+#include "fht.h"
 
 #ifdef HAVE_OPENGL
 #include <QGLWidget>

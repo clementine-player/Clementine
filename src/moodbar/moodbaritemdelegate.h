@@ -18,12 +18,12 @@
 #ifndef MOODBARITEMDELEGATE_H
 #define MOODBARITEMDELEGATE_H
 
-#include "moodbarrenderer.h"
-
 #include <QCache>
 #include <QFuture>
 #include <QItemDelegate>
 #include <QUrl>
+
+#include "moodbarrenderer.h"
 
 class Application;
 class MoodbarPipeline;

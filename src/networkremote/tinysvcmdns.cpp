@@ -68,7 +68,6 @@ TinySVCMDNS::~TinySVCMDNS() {
 
 void TinySVCMDNS::PublishInternal(const QString& domain, const QString& type,
                                   const QByteArray& name, quint16 port) {
-
   // Some pointless text, so tinymDNS publishes the service correctly.
   const char* txt[] = {"cat=nyan", nullptr};
 

@@ -21,8 +21,8 @@
 #include <QObject>
 #include <QPixmapCache>
 
-#include "searchprovider.h"
 #include "covers/albumcoverloaderoptions.h"
+#include "searchprovider.h"
 
 class AlbumCoverLoader;
 class Application;
@@ -65,7 +65,7 @@ class GlobalSearch : public QObject {
 
   void ReloadSettings();
 
-signals:
+ signals:
   void SearchAsyncSig(int id, const QString& query);
   void ResultsAvailable(int id, const SearchProvider::ResultList& results);
   void ProviderSearchFinished(int id, const SearchProvider* provider);

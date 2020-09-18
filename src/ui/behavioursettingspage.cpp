@@ -16,16 +16,16 @@
 */
 
 #include "behavioursettingspage.h"
-#include "mainwindow.h"
-#include "core/player.h"
-#include "ui_behavioursettingspage.h"
-#include "playlist/playlist.h"
-#include "playlist/playlisttabbar.h"
-
-#include <algorithm>
 
 #include <QDir>
 #include <QSystemTrayIcon>
+#include <algorithm>
+
+#include "core/player.h"
+#include "mainwindow.h"
+#include "playlist/playlist.h"
+#include "playlist/playlisttabbar.h"
+#include "ui_behavioursettingspage.h"
 
 namespace {
 bool LocaleAwareCompare(const QString& a, const QString& b) {
@@ -151,7 +151,8 @@ void BehaviourSettingsPage::Load() {
   ui_->doubleclick_playlist_addmode->setCurrentIndex(
       ui_->doubleclick_playlist_addmode->findData(
           s.value("doubleclick_playlist_addmode",
-                  MainWindow::PlaylistAddBehaviour_Play).toInt()));
+                  MainWindow::PlaylistAddBehaviour_Play)
+              .toInt()));
   ui_->menu_playmode->setCurrentIndex(ui_->menu_playmode->findData(
       s.value("menu_playmode", MainWindow::PlayBehaviour_IfStopped).toInt()));
 
@@ -250,12 +251,12 @@ void BehaviourSettingsPage::Save() {
   if (ui_->b_remember_->isChecked()) behaviour = MainWindow::Startup_Remember;
 
   MainWindow::AddBehaviour doubleclick_addmode = MainWindow::AddBehaviour(
-      ui_->doubleclick_addmode->itemData(
-                                    ui_->doubleclick_addmode->currentIndex())
+      ui_->doubleclick_addmode
+          ->itemData(ui_->doubleclick_addmode->currentIndex())
           .toInt());
   MainWindow::PlayBehaviour doubleclick_playmode = MainWindow::PlayBehaviour(
-      ui_->doubleclick_playmode->itemData(
-                                     ui_->doubleclick_playmode->currentIndex())
+      ui_->doubleclick_playmode
+          ->itemData(ui_->doubleclick_playmode->currentIndex())
           .toInt());
   MainWindow::PlaylistAddBehaviour doubleclick_playlist_addmode =
       MainWindow::PlaylistAddBehaviour(
@@ -294,8 +295,7 @@ void BehaviourSettingsPage::Save() {
   s.endGroup();
 
   s.beginGroup(Player::kSettingsGroup);
-  s.setValue("stop_play_if_fail",
-             ui_->stop_play_if_fail_->isChecked());
+  s.setValue("stop_play_if_fail", ui_->stop_play_if_fail_->isChecked());
   s.setValue("menu_previousmode", menu_previousmode);
   s.setValue("seek_step_sec", ui_->seek_step_sec->value());
   s.setValue("max_numprocs_tagclients", ui_->max_numprocs_tagclients->value());

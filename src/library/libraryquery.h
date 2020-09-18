@@ -18,10 +18,10 @@
 #ifndef LIBRARYQUERY_H
 #define LIBRARYQUERY_H
 
-#include <QString>
-#include <QVariant>
 #include <QSqlQuery>
+#include <QString>
 #include <QStringList>
+#include <QVariant>
 #include <QVariantList>
 
 class Song;

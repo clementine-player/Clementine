@@ -19,7 +19,6 @@
 */
 
 #include "spotifysettingspage.h"
-#include "ui_spotifysettingspage.h"
 
 #include <QMessageBox>
 #include <QNetworkReply>
@@ -28,11 +27,12 @@
 #include <QtDebug>
 
 #include "config.h"
+#include "core/network.h"
+#include "internet/core/internetmodel.h"
 #include "spotifymessages.pb.h"
 #include "spotifyservice.h"
-#include "internet/core/internetmodel.h"
-#include "core/network.h"
 #include "ui/iconloader.h"
+#include "ui_spotifysettingspage.h"
 
 SpotifySettingsPage::SpotifySettingsPage(SettingsDialog* dialog)
     : SettingsPage(dialog),

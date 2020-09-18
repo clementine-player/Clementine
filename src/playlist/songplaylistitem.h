@@ -18,8 +18,8 @@
 #ifndef SONGPLAYLISTITEM_H
 #define SONGPLAYLISTITEM_H
 
-#include "playlistitem.h"
 #include "core/song.h"
+#include "playlistitem.h"
 
 class SongPlaylistItem : public PlaylistItem {
  public:

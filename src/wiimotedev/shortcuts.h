@@ -18,12 +18,11 @@
 #ifndef WIIMOTEDEV_SHORTCUTS_H
 #define WIIMOTEDEV_SHORTCUTS_H
 
+#include <QWidget>
 #include <memory>
 
-#include <QWidget>
-
-#include "dbus/wiimotedev.h"
 #include "core/player.h"
+#include "dbus/wiimotedev.h"
 #include "widgets/osd.h"
 
 class QSettings;
@@ -84,7 +83,7 @@ class WiimotedevShortcuts : public QObject {
   QHash<quint64, quint32> actions_;
   QSettings settings_;
 
-signals:
+ signals:
   void WiiremoteActived(int);
   void WiiremoteDeactived(int);
   void WiiremoteConnected(int);

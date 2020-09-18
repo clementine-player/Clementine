@@ -27,9 +27,10 @@
 #ifndef ANALYZERS_GLANALYZER3_H_
 #define ANALYZERS_GLANALYZER3_H_
 
-#include "analyzerbase.h"
-#include <qstring.h>
 #include <qptrlist.h>
+#include <qstring.h>
+
+#include "analyzerbase.h"
 
 class QWidget;
 class Ball;
@@ -68,7 +69,7 @@ class GLAnalyzer3 : public Analyzer::Base3D {
   static const int NUMBER_OF_BALLS = 16;
 
   QPtrList<Ball> balls;
-  Paddle* leftPaddle, *rightPaddle;
+  Paddle *leftPaddle, *rightPaddle;
   float unitX, unitY;
   GLuint ballTexture;
   GLuint gridTexture;
