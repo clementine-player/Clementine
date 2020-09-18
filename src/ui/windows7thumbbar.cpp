@@ -26,9 +26,11 @@
 #ifndef _WIN32_WINNT
 #define _WIN32_WINNT 0x0600
 #endif
+// clang-format off
+#include <windows.h>
 #include <commctrl.h>
 #include <shobjidl.h>
-#include <windows.h>
+// clang-format on
 #endif  // Q_OS_WIN32
 
 const int Windows7ThumbBar::kIconSize = 16;
