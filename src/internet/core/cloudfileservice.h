@@ -20,13 +20,11 @@
 #ifndef INTERNET_CORE_CLOUDFILESERVICE_H_
 #define INTERNET_CORE_CLOUDFILESERVICE_H_
 
-#include "internet/core/internetservice.h"
-
+#include <QMenu>
 #include <memory>
 
-#include <QMenu>
-
 #include "core/tagreaderclient.h"
+#include "internet/core/internetservice.h"
 #include "ui/albumcovermanager.h"
 
 class UrlHandler;
@@ -52,7 +50,7 @@ class CloudFileService : public InternetService {
   virtual bool has_credentials() const = 0;
   bool is_indexing() const { return indexing_task_id_ != -1; }
 
-signals:
+ signals:
   void AllIndexingTasksFinished();
 
  public slots:

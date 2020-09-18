@@ -16,8 +16,9 @@
 */
 
 #include "transcodersettingspage.h"
-#include "ui_transcodersettingspage.h"
+
 #include "ui/iconloader.h"
+#include "ui_transcodersettingspage.h"
 
 TranscoderSettingsPage::TranscoderSettingsPage(SettingsDialog* dialog)
     : SettingsPage(dialog), ui_(new Ui_TranscoderSettingsPage) {

@@ -16,11 +16,12 @@
 */
 
 #include "plsparser.h"
-#include "core/logging.h"
-#include "core/timeconstants.h"
 
 #include <QTextStream>
 #include <QtDebug>
+
+#include "core/logging.h"
+#include "core/timeconstants.h"
 
 PLSParser::PLSParser(LibraryBackendInterface* library, QObject* parent)
     : ParserBase(library, parent) {}

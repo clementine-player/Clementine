@@ -17,9 +17,6 @@
 
 #include "librarymodel.h"
 
-#include <algorithm>
-#include <functional>
-
 #include <QFuture>
 #include <QIODevice>
 #include <QMetaEnum>
@@ -30,21 +27,23 @@
 #include <QStringList>
 #include <QUrl>
 #include <QtConcurrentRun>
+#include <algorithm>
+#include <functional>
 
-#include "librarybackend.h"
-#include "libraryitem.h"
-#include "libraryview.h"
-#include "sqlrow.h"
 #include "core/application.h"
 #include "core/database.h"
 #include "core/logging.h"
 #include "core/taskmanager.h"
 #include "core/utilities.h"
 #include "covers/albumcoverloader.h"
+#include "librarybackend.h"
+#include "libraryitem.h"
+#include "libraryview.h"
 #include "playlist/songmimedata.h"
 #include "smartplaylists/generator.h"
 #include "smartplaylists/generatormimedata.h"
 #include "smartplaylists/querygenerator.h"
+#include "sqlrow.h"
 #include "ui/iconloader.h"
 
 using std::placeholders::_1;
@@ -108,10 +107,9 @@ LibraryModel::LibraryModel(std::shared_ptr<LibraryBackend> backend,
   icon_cache_->setMaximumCacheSize(LibraryModel::kIconCacheSize);
 
   QIcon nocover = IconLoader::Load("nocover", IconLoader::Other);
-  no_cover_icon_ = nocover.pixmap(nocover.availableSizes().last()).scaled(
-                           kPrettyCoverSize, kPrettyCoverSize,
-                           Qt::KeepAspectRatio,
-                           Qt::SmoothTransformation);
+  no_cover_icon_ = nocover.pixmap(nocover.availableSizes().last())
+                       .scaled(kPrettyCoverSize, kPrettyCoverSize,
+                               Qt::KeepAspectRatio, Qt::SmoothTransformation);
 
   connect(backend_.get(), SIGNAL(SongsDiscovered(SongList)),
           SLOT(SongsDiscovered(SongList)));
@@ -388,8 +386,8 @@ QString LibraryModel::DividerDisplayText(GroupBy type,
       return QString::number(key.toInt());  // To remove leading 0s
 
     case GroupBy_None:
-      // fallthrough
-      ;
+        // fallthrough
+        ;
   }
   qLog(Error) << "Unknown GroupBy type" << type << "for divider key" << key;
   return QString();
@@ -653,8 +651,8 @@ QVariant LibraryModel::data(const LibraryItem* item, int role) const {
 
     case Role_Editable:
       if (!item->lazy_loaded) {
-        const_cast<LibraryModel*>(this)
-            ->LazyPopulate(const_cast<LibraryItem*>(item), true);
+        const_cast<LibraryModel*>(this)->LazyPopulate(
+            const_cast<LibraryItem*>(item), true);
       }
 
       if (item->type == LibraryItem::Type_Container) {

@@ -15,14 +15,7 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "globalshortcutgrabber.h"
 #include "globalshortcutssettingspage.h"
-#include "ui_globalshortcutssettingspage.h"
-#include "core/globalshortcuts.h"
-#include "core/logging.h"
-#include "core/utilities.h"
-#include "ui/iconloader.h"
-#include "ui/settingsdialog.h"
 
 #include <QAction>
 #include <QKeyEvent>
@@ -32,6 +25,14 @@
 #include <QSettings>
 #include <QShortcut>
 #include <QtDebug>
+
+#include "core/globalshortcuts.h"
+#include "core/logging.h"
+#include "core/utilities.h"
+#include "globalshortcutgrabber.h"
+#include "ui/iconloader.h"
+#include "ui/settingsdialog.h"
+#include "ui_globalshortcutssettingspage.h"
 
 GlobalShortcutsSettingsPage::GlobalShortcutsSettingsPage(SettingsDialog* dialog)
     : SettingsPage(dialog),

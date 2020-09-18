@@ -17,10 +17,11 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "subsonicurlhandler.h"
+
 #include <QUrlQuery>
 
 #include "subsonicservice.h"
-#include "subsonicurlhandler.h"
 
 SubsonicUrlHandler::SubsonicUrlHandler(SubsonicService* service,
                                        QObject* parent)

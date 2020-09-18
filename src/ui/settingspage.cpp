@@ -15,9 +15,10 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "settingsdialog.h"
 #include "settingspage.h"
+
 #include "core/logging.h"
+#include "settingsdialog.h"
 
 SettingsPage::SettingsPage(SettingsDialog* dialog)
     : QWidget(dialog), maybe_changed_(false), dialog_(dialog) {}

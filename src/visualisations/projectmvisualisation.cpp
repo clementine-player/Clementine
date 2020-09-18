@@ -15,10 +15,7 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "config.h"
-#include "projectmpresetmodel.h"
 #include "projectmvisualisation.h"
-#include "visualisationcontainer.h"
 
 #include <QCoreApplication>
 #include <QDir>
@@ -30,8 +27,12 @@
 #include <QPainter>
 #include <QSettings>
 #include <QTemporaryFile>
-#include <QtDebug>
 #include <QTimerEvent>
+#include <QtDebug>
+
+#include "config.h"
+#include "projectmpresetmodel.h"
+#include "visualisationcontainer.h"
 
 #ifdef USE_SYSTEM_PROJECTM
 #include <libprojectM/projectM.hpp>
@@ -40,8 +41,9 @@
 #endif
 
 #ifdef Q_OS_MAC
-#include "core/mac_startup.h"
 #include <OpenGL/gl.h>
+
+#include "core/mac_startup.h"
 #else
 #include <GL/gl.h>
 #endif

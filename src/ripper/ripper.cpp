@@ -24,8 +24,8 @@
 #include "core/closure.h"
 #include "core/logging.h"
 #include "core/tagreaderclient.h"
-#include "transcoder/transcoder.h"
 #include "core/utilities.h"
+#include "transcoder/transcoder.h"
 
 // winspool.h defines this :(
 #ifdef AddJob

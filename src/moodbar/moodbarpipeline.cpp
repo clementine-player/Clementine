@@ -25,9 +25,8 @@
 #include "core/signalchecker.h"
 #include "core/timeconstants.h"
 #include "core/utilities.h"
-#include "moodbar/moodbarbuilder.h"
-
 #include "gst/moodbar/gstfastspectrum.h"
+#include "moodbar/moodbarbuilder.h"
 
 bool MoodbarPipeline::sIsAvailable = false;
 const int MoodbarPipeline::kBands = 128;
@@ -108,8 +107,9 @@ void MoodbarPipeline::Start() {
   g_object_set(spectrum, "bands", kBands, nullptr);
 
   GstFastSpectrum* fast_spectrum = GST_FASTSPECTRUM(spectrum);
-  fast_spectrum->output_callback = [this](
-      double* magnitudes, int size) { builder_->AddFrame(magnitudes, size); };
+  fast_spectrum->output_callback = [this](double* magnitudes, int size) {
+    builder_->AddFrame(magnitudes, size);
+  };
 
   // Connect signals
   CHECKED_GCONNECT(decodebin, "pad-added", &NewPadCallback, this);
@@ -206,7 +206,7 @@ void MoodbarPipeline::Cleanup() {
     GstBus* bus = gst_pipeline_get_bus(GST_PIPELINE(pipeline_));
     gst_bus_set_sync_handler(bus, nullptr, nullptr, nullptr);
     gst_object_unref(bus);
-    
+
     gst_element_set_state(pipeline_, GST_STATE_NULL);
     gst_object_unref(pipeline_);
     pipeline_ = nullptr;

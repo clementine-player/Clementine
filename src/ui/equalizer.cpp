@@ -16,7 +16,6 @@
 */
 
 #include "equalizer.h"
-#include "ui_equalizer.h"
 
 #include <QInputDialog>
 #include <QMessageBox>
@@ -25,6 +24,7 @@
 #include <QtDebug>
 
 #include "ui/iconloader.h"
+#include "ui_equalizer.h"
 #include "widgets/equalizerslider.h"
 
 // We probably don't need to translate these, right?
@@ -39,7 +39,8 @@ Equalizer::Equalizer(QWidget* parent)
 
   // Icons
   ui_->preset_del->setIcon(IconLoader::Load("list-remove", IconLoader::Base));
-  ui_->preset_save->setIcon(IconLoader::Load("document-save", IconLoader::Base));
+  ui_->preset_save->setIcon(
+      IconLoader::Load("document-save", IconLoader::Base));
 
   preamp_ = AddSlider(tr("Pre-amp"));
 
@@ -165,7 +166,7 @@ void Equalizer::AddPreset(const QString& name, const Params& params) {
   if (ui_->preset->findText(name_displayed) == -1) {
     ui_->preset->addItem(name_displayed,  // name to display (translated)
                          QVariant(name)   // original name
-                         );
+    );
   }
 }
 

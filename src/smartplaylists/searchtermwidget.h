@@ -18,10 +18,10 @@
 #ifndef SMARTPLAYLISTSEARCHTERMWIDGET_H
 #define SMARTPLAYLISTSEARCHTERMWIDGET_H
 
-#include "searchterm.h"
-
 #include <QPushButton>
 #include <QWidget>
+
+#include "searchterm.h"
 
 class LibraryBackend;
 class Ui_SmartPlaylistSearchTermWidget;
@@ -32,8 +32,8 @@ namespace smart_playlists {
 
 class SearchTermWidget : public QWidget {
   Q_OBJECT
-  Q_PROPERTY(float overlay_opacity READ overlay_opacity WRITE
-                 set_overlay_opacity)
+  Q_PROPERTY(
+      float overlay_opacity READ overlay_opacity WRITE set_overlay_opacity)
 
  public:
   SearchTermWidget(LibraryBackend* library, QWidget* parent);
@@ -47,7 +47,7 @@ class SearchTermWidget : public QWidget {
   void SetTerm(const SearchTerm& term);
   SearchTerm Term() const;
 
-signals:
+ signals:
   void Clicked();
   void RemoveClicked();
 
@@ -80,6 +80,6 @@ signals:
   SearchTerm::Type current_field_type_;
 };
 
-}  // namespace
+}  // namespace smart_playlists
 
 #endif  // SMARTPLAYLISTSEARCHTERMWIDGET_H

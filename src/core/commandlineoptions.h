@@ -24,9 +24,9 @@
 #ifndef CORE_COMMANDLINEOPTIONS_H_
 #define CORE_COMMANDLINEOPTIONS_H_
 
+#include <QDataStream>
 #include <QList>
 #include <QUrl>
-#include <QDataStream>
 
 class CommandlineOptions {
   friend QDataStream& operator<<(QDataStream& s, const CommandlineOptions& a);

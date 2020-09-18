@@ -21,11 +21,11 @@
 #ifndef COVERS_LASTFMCOVERPROVIDER_H_
 #define COVERS_LASTFMCOVERPROVIDER_H_
 
-#include "albumcoverfetcher.h"
-#include "coverprovider.h"
-
 #include <QMap>
 #include <QObject>
+
+#include "albumcoverfetcher.h"
+#include "coverprovider.h"
 
 class QNetworkReply;
 

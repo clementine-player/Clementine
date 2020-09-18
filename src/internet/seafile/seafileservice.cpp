@@ -20,21 +20,20 @@
 
 #include "seafileservice.h"
 
-#include <cmath>
-
-#include <QTimer>
-#include <QUrlQuery>
+#include <QJsonArray>
 #include <QJsonDocument>
 #include <QJsonObject>
-#include <QJsonArray>
+#include <QTimer>
+#include <QUrlQuery>
+#include <cmath>
 
 #include "core/application.h"
-#include "core/taskmanager.h"
 #include "core/player.h"
+#include "core/taskmanager.h"
 #include "core/waitforsignal.h"
+#include "internet/core/oauthenticator.h"
 #include "internet/seafile/seafileurlhandler.h"
 #include "library/librarybackend.h"
-#include "internet/core/oauthenticator.h"
 #include "ui/iconloader.h"
 
 const char* SeafileService::kServiceName = "Seafile";
@@ -115,7 +114,8 @@ bool SeafileService::GetToken(const QString& mail, const QString& password,
   QNetworkRequest request(url);
   AddAuthorizationHeader(&request);
 
-  QNetworkReply* reply = network_->post(request, url_query.toString().toLatin1());
+  QNetworkReply* reply =
+      network_->post(request, url_query.toString().toLatin1());
   WaitForSignal(reply, SIGNAL(finished()));
 
   if (!CheckReply(&reply)) {
@@ -125,7 +125,8 @@ bool SeafileService::GetToken(const QString& mail, const QString& password,
 
   reply->deleteLater();
 
-  QJsonObject json_response = QJsonDocument::fromJson(reply->readAll()).object();
+  QJsonObject json_response =
+      QJsonDocument::fromJson(reply->readAll()).object();
 
   // Because the server responds "token"
   access_token_ = json_response["token"].toString().replace("\"", "");
@@ -169,7 +170,7 @@ void SeafileService::GetLibrariesFinished(QNetworkReply* reply) {
 
   QJsonArray json_repos = QJsonDocument::fromJson(data).array();
 
-  for (const QJsonValue & json_repo: json_repos) {
+  for (const QJsonValue& json_repo : json_repos) {
     QJsonObject repo = json_repo.toObject();
     QString repo_name = repo["name"].toString(),
             repo_id = repo["id"].toString();

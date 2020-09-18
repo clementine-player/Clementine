@@ -20,11 +20,11 @@
 
 #include "digitallyimportedurlhandler.h"
 
-#include "digitallyimportedservicebase.h"
-#include "internet/core/internetmodel.h"
 #include "core/application.h"
 #include "core/logging.h"
 #include "core/taskmanager.h"
+#include "digitallyimportedservicebase.h"
+#include "internet/core/internetmodel.h"
 #include "playlistparsers/playlistparser.h"
 #include "ui/iconloader.h"
 

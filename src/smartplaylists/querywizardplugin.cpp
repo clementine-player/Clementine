@@ -15,15 +15,16 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "querygenerator.h"
 #include "querywizardplugin.h"
-#include "searchtermwidget.h"
-#include "ui_querysearchpage.h"
-#include "ui_querysortpage.h"
-#include "core/logging.h"
 
 #include <QScrollBar>
 #include <QWizardPage>
+
+#include "core/logging.h"
+#include "querygenerator.h"
+#include "searchtermwidget.h"
+#include "ui_querysearchpage.h"
+#include "ui_querysortpage.h"
 
 namespace smart_playlists {
 

@@ -19,11 +19,12 @@
 // compatible.
 
 #include "messagehandler.h"
-#include "core/logging.h"
 
 #include <QAbstractSocket>
-#include <QLocalSocket>
 #include <QDataStream>
+#include <QLocalSocket>
+
+#include "core/logging.h"
 
 _MessageHandlerBase::_MessageHandlerBase(QIODevice* device, QObject* parent)
     : QObject(parent),

@@ -20,17 +20,17 @@
 #ifndef INTERNET_PODCASTS_PODCASTDOWNLOADER_H_
 #define INTERNET_PODCASTS_PODCASTDOWNLOADER_H_
 
-#include "core/network.h"
-#include "podcast.h"
-#include "podcastepisode.h"
-
-#include <memory>
 #include <QFile>
 #include <QList>
 #include <QObject>
 #include <QQueue>
 #include <QRegExp>
 #include <QSet>
+#include <memory>
+
+#include "core/network.h"
+#include "podcast.h"
+#include "podcastepisode.h"
 
 #ifdef Q_OS_WIN
 #include <time.h>
@@ -44,7 +44,7 @@ class PodcastBackend;
 class QNetworkAccessManager;
 
 namespace PodcastDownload {
-  enum State { NotDownloading, Queued, Downloading, Finished };
+enum State { NotDownloading, Queued, Downloading, Finished };
 }
 
 class Task : public QObject {

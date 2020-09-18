@@ -16,6 +16,7 @@
 */
 
 #include "digitallyimportedsearchprovider.h"
+
 #include "core/logging.h"
 
 DigitallyImportedSearchProvider::DigitallyImportedSearchProvider(

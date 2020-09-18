@@ -19,10 +19,10 @@
 #ifndef INTERNET_CORE_INTERNETSHOWSETTINGSPAGE_H_
 #define INTERNET_CORE_INTERNETSHOWSETTINGSPAGE_H_
 
+#include <QIcon>
+
 #include "ui/settingspage.h"
 #include "ui_internetshowsettingspage.h"
-
-#include <QIcon>
 
 class QTreeWidgetItem;
 class Ui_InternetShowSettingsPage;

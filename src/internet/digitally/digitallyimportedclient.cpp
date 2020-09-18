@@ -19,11 +19,11 @@
 
 #include "digitallyimportedclient.h"
 
-#include <QNetworkReply>
-#include <QNetworkRequest>
+#include <QJsonArray>
 #include <QJsonDocument>
 #include <QJsonObject>
-#include <QJsonArray>
+#include <QNetworkReply>
+#include <QNetworkRequest>
 
 #include "core/logging.h"
 #include "core/network.h"
@@ -50,11 +50,11 @@ DigitallyImportedClient::DigitallyImportedClient(const QString& service_name,
 
 void DigitallyImportedClient::SetAuthorisationHeader(
     QNetworkRequest* req) const {
-  req->setRawHeader("Authorization", "Basic " +
-                                         QString("%1:%2")
-                                             .arg(kApiUsername, kApiPassword)
-                                             .toLatin1()
-                                             .toBase64());
+  req->setRawHeader("Authorization",
+                    "Basic " + QString("%1:%2")
+                                   .arg(kApiUsername, kApiPassword)
+                                   .toLatin1()
+                                   .toBase64());
 }
 
 QNetworkReply* DigitallyImportedClient::Auth(const QString& username,
@@ -83,7 +83,8 @@ DigitallyImportedClient::AuthReply DigitallyImportedClient::ParseAuthReply(
     return ret;
   }
 
-  QJsonObject json_root_object = QJsonDocument::fromJson(reply->readAll()).object();
+  QJsonObject json_root_object =
+      QJsonDocument::fromJson(reply->readAll()).object();
 
   if (!json_root_object.contains("subscriptions")) {
     return ret;
@@ -123,13 +124,14 @@ DigitallyImportedClient::ChannelList DigitallyImportedClient::ParseChannelList(
     QNetworkReply* reply) const {
   ChannelList ret;
 
-  QJsonObject json_root_object = QJsonDocument::fromJson(reply->readAll()).object();
+  QJsonObject json_root_object =
+      QJsonDocument::fromJson(reply->readAll()).object();
 
   if (!json_root_object.contains("channel_filters")) return ret;
 
   QJsonArray json_filters = json_root_object["channel_filters"].toArray();
 
-  for (const QJsonValue & filter: json_filters) {
+  for (const QJsonValue& filter : json_filters) {
     // Find the filter called "All"
     QJsonObject json_filter = filter.toObject();
     if (json_filter["name"].toString() != "All") continue;

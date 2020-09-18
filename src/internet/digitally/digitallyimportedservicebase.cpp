@@ -20,12 +20,11 @@
 
 #include "digitallyimportedservicebase.h"
 
-#include <algorithm>
-
 #include <QDesktopServices>
 #include <QMenu>
 #include <QNetworkReply>
 #include <QSettings>
+#include <algorithm>
 
 #include "core/application.h"
 #include "core/closure.h"

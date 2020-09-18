@@ -18,10 +18,10 @@
 #ifndef GLOBALSEARCHSETTINGSPAGE_H
 #define GLOBALSEARCHSETTINGSPAGE_H
 
-#include "ui/settingspage.h"
-
 #include <QIcon>
 #include <QScopedPointer>
+
+#include "ui/settingspage.h"
 
 class GlobalSearch;
 class SearchProvider;

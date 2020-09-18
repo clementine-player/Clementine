@@ -45,6 +45,7 @@
 
 #ifdef HAVE_DBUS
 #include <QDBusMetaType>
+
 #include "core/mpris2.h"
 #include "dbus/metatypes.h"
 #endif

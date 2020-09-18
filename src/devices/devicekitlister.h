@@ -18,10 +18,9 @@
 #ifndef DEVICEKITLISTER_H
 #define DEVICEKITLISTER_H
 
-#include <memory>
-
 #include <QMutex>
 #include <QStringList>
+#include <memory>
 
 #include "devicelister.h"
 

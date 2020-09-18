@@ -42,7 +42,9 @@ class GroupedIconView : public QListView {
  public:
   GroupedIconView(QWidget* parent = nullptr);
 
-  enum Role { Role_Group = 1158300, };
+  enum Role {
+    Role_Group = 1158300,
+  };
 
   void AddSortSpec(int role, Qt::SortOrder order = Qt::AscendingOrder);
 
@@ -72,7 +74,8 @@ class GroupedIconView : public QListView {
   void resizeEvent(QResizeEvent* e);
 
   // QAbstractItemView
-  void dataChanged(const QModelIndex& topLeft, const QModelIndex& bottomRight, const QVector<int>& = QVector<int>());
+  void dataChanged(const QModelIndex& topLeft, const QModelIndex& bottomRight,
+                   const QVector<int>& = QVector<int>());
   QModelIndex indexAt(const QPoint& p) const;
   void rowsInserted(const QModelIndex& parent, int start, int end);
   void setSelection(const QRect& rect,

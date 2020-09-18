@@ -16,14 +16,15 @@
 */
 
 #include "librarysearchprovider.h"
+
+#include <QStack>
+
 #include "core/logging.h"
 #include "covers/albumcoverloader.h"
 #include "library/librarybackend.h"
 #include "library/libraryquery.h"
 #include "library/sqlrow.h"
 #include "playlist/songmimedata.h"
-
-#include <QStack>
 
 LibrarySearchProvider::LibrarySearchProvider(LibraryBackendInterface* backend,
                                              const QString& name,

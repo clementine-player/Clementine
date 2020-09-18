@@ -20,9 +20,8 @@
 #ifndef CORE_MERGEDPROXYMODEL_H_
 #define CORE_MERGEDPROXYMODEL_H_
 
-#include <memory>
-
 #include <QAbstractProxyModel>
+#include <memory>
 
 std::size_t hash_value(const QModelIndex& index);
 

@@ -19,21 +19,21 @@
 */
 
 #include "mergedproxymodel.h"
-#include "core/logging.h"
 
 #include <QStringList>
-
 #include <functional>
 #include <limits>
+
+#include "core/logging.h"
 
 // boost::multi_index still relies on these being in the global namespace.
 using std::placeholders::_1;
 using std::placeholders::_2;
 
-#include <boost/multi_index_container.hpp>
-#include <boost/multi_index/member.hpp>
 #include <boost/multi_index/hashed_index.hpp>
+#include <boost/multi_index/member.hpp>
 #include <boost/multi_index/ordered_index.hpp>
+#include <boost/multi_index_container.hpp>
 
 using boost::multi_index::hashed_unique;
 using boost::multi_index::identity;
@@ -48,8 +48,8 @@ std::size_t hash_value(const QModelIndex& index) { return qHash(index); }
 namespace {
 
 struct Mapping {
-  explicit Mapping(const QModelIndex& _source_index) :
-    source_index(_source_index) {}
+  explicit Mapping(const QModelIndex& _source_index)
+      : source_index(_source_index) {}
 
   QModelIndex source_index;
 };
@@ -65,8 +65,8 @@ class MergedProxyModelPrivate {
       Mapping*,
       indexed_by<
           hashed_unique<tag<tag_by_source>,
-                        member<Mapping, QModelIndex, &Mapping::source_index> >,
-          ordered_unique<tag<tag_by_pointer>, identity<Mapping*> > > >
+                        member<Mapping, QModelIndex, &Mapping::source_index>>,
+          ordered_unique<tag<tag_by_pointer>, identity<Mapping*>>>>
       MappingContainer;
 
  public:
@@ -264,8 +264,8 @@ void MergedProxyModel::RowsRemoved(const QModelIndex&, int, int) {
   endRemoveRows();
 }
 
-QModelIndex MergedProxyModel::mapToSource(const QModelIndex& proxy_index)
-    const {
+QModelIndex MergedProxyModel::mapToSource(
+    const QModelIndex& proxy_index) const {
   if (!proxy_index.isValid()) return QModelIndex();
 
   Mapping* mapping = static_cast<Mapping*>(proxy_index.internalPointer());
@@ -277,8 +277,8 @@ QModelIndex MergedProxyModel::mapToSource(const QModelIndex& proxy_index)
   return mapping->source_index;
 }
 
-QModelIndex MergedProxyModel::mapFromSource(const QModelIndex& source_index)
-    const {
+QModelIndex MergedProxyModel::mapFromSource(
+    const QModelIndex& source_index) const {
   if (!source_index.isValid()) return QModelIndex();
   if (source_index.model() == resetting_model_) return QModelIndex();
 
@@ -376,8 +376,8 @@ QVariant MergedProxyModel::data(const QModelIndex& proxyIndex, int role) const {
   return source_index.model()->data(source_index, role);
 }
 
-QMap<int, QVariant> MergedProxyModel::itemData(const QModelIndex& proxy_index)
-    const {
+QMap<int, QVariant> MergedProxyModel::itemData(
+    const QModelIndex& proxy_index) const {
   QModelIndex source_index = mapToSource(proxy_index);
 
   if (!source_index.isValid()) return sourceModel()->itemData(QModelIndex());
@@ -442,8 +442,8 @@ bool MergedProxyModel::dropMimeData(const QMimeData* data,
   return sourceModel()->dropMimeData(data, action, row, column, parent);
 }
 
-QModelIndex MergedProxyModel::FindSourceParent(const QModelIndex& proxy_index)
-    const {
+QModelIndex MergedProxyModel::FindSourceParent(
+    const QModelIndex& proxy_index) const {
   if (!proxy_index.isValid()) return QModelIndex();
 
   QModelIndex source_index = mapToSource(proxy_index);
@@ -468,8 +468,8 @@ void MergedProxyModel::fetchMore(const QModelIndex& parent) {
     GetModel(source_index)->fetchMore(source_index);
 }
 
-QAbstractItemModel* MergedProxyModel::GetModel(const QModelIndex& source_index)
-    const {
+QAbstractItemModel* MergedProxyModel::GetModel(
+    const QModelIndex& source_index) const {
   // This is essentially const_cast<QAbstractItemModel*>(source_index.model()),
   // but without the const_cast
   const QAbstractItemModel* const_model = source_index.model();

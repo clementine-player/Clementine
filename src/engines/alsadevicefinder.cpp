@@ -15,18 +15,18 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "alsadevicefinder.h"
+
 #include <alsa/asoundlib.h>
+#include <core/logging.h>
 #include <errno.h>
 #include <stdio.h>
-#include <boost/scope_exit.hpp>
 
 #include <QList>
 #include <QString>
 #include <QVariant>
+#include <boost/scope_exit.hpp>
 
-#include <core/logging.h>
-
-#include "alsadevicefinder.h"
 #include "devicefinder.h"
 
 AlsaDeviceFinder::AlsaDeviceFinder() : DeviceFinder("alsasink") {}

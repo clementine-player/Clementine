@@ -18,9 +18,9 @@
 #ifndef CUEPARSER_H
 #define CUEPARSER_H
 
-#include "parserbase.h"
-
 #include <QRegExp>
+
+#include "parserbase.h"
 
 // This parser will try to detect the real encoding of a .cue file but there's
 // a great chance it will fail so it's probably best to assume that the parser
@@ -43,7 +43,7 @@ class CueParser : public ParserBase {
   static const char* kGenre;
   static const char* kDate;
   static const char* kDisc;
-  
+
   CueParser(LibraryBackendInterface* library, QObject* parent = nullptr);
 
   QString name() const { return "CUE"; }
@@ -85,7 +85,8 @@ class CueParser : public ParserBase {
 
     CueEntry(QString& file, QString& index, QString& title, QString& artist,
              QString& album_artist, QString& album, QString& composer,
-             QString& album_composer, QString& genre, QString& date, QString& disc) {
+             QString& album_composer, QString& genre, QString& date,
+             QString& disc) {
       this->file = file;
       this->index = index;
       this->title = title;

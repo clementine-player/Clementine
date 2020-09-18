@@ -19,13 +19,6 @@
 
 #include "spotifyblobdownloader.h"
 
-#include "config.h"
-#include "spotifyservice.h"
-#include "core/arraysize.h"
-#include "core/logging.h"
-#include "core/network.h"
-#include "core/utilities.h"
-
 #include <QCoreApplication>
 #include <QDir>
 #include <QFile>
@@ -34,6 +27,13 @@
 #include <QNetworkReply>
 #include <QProgressDialog>
 #include <QSslKey>
+
+#include "config.h"
+#include "core/arraysize.h"
+#include "core/logging.h"
+#include "core/network.h"
+#include "core/utilities.h"
+#include "spotifyservice.h"
 
 #ifdef Q_OS_UNIX
 #include <unistd.h>
@@ -45,7 +45,7 @@
 
 // Compatibility with cryptocpp >= 6.0.0
 namespace CryptoPP {
-  typedef unsigned char byte;
+typedef unsigned char byte;
 }
 #endif  // HAVE_CRYPTOPP
 
@@ -200,8 +200,9 @@ bool SpotifyBlobDownloader::CheckSignature(
 
   try {
     CryptoPP::ByteQueue bytes;
-    bytes.Put(reinterpret_cast<const CryptoPP::byte*>(public_key_data.constData()),
-              public_key_data.size());
+    bytes.Put(
+        reinterpret_cast<const CryptoPP::byte*>(public_key_data.constData()),
+        public_key_data.size());
     bytes.MessageEnd();
 
     CryptoPP::RSA::PublicKey public_key;
@@ -214,12 +215,13 @@ bool SpotifyBlobDownloader::CheckSignature(
       QString actual_filename = signature_filename;
       actual_filename.remove(kSignatureSuffix);
 
-      const bool result = verifier.VerifyMessage(
-          reinterpret_cast<const CryptoPP::byte*>(file_data[actual_filename].constData()),
-          file_data[actual_filename].size(),
-          reinterpret_cast<const CryptoPP::byte*>(
-              file_data[signature_filename].constData()),
-          file_data[signature_filename].size());
+      const bool result =
+          verifier.VerifyMessage(reinterpret_cast<const CryptoPP::byte*>(
+                                     file_data[actual_filename].constData()),
+                                 file_data[actual_filename].size(),
+                                 reinterpret_cast<const CryptoPP::byte*>(
+                                     file_data[signature_filename].constData()),
+                                 file_data[signature_filename].size());
       qLog(Debug) << "Verifying" << actual_filename << "against"
                   << signature_filename << result;
       if (!result) {

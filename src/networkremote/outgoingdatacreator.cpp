@@ -17,19 +17,18 @@
 
 #include "outgoingdatacreator.h"
 
+#include <QSqlDatabase>
+#include <QSqlQuery>
 #include <cmath>
 
-#include "networkremote.h"
+#include "core/database.h"
 #include "core/logging.h"
 #include "core/timeconstants.h"
 #include "core/utilities.h"
 #include "globalsearch/librarysearchprovider.h"
 #include "library/librarybackend.h"
+#include "networkremote.h"
 #include "ui/iconloader.h"
-
-#include <QSqlDatabase>
-#include <QSqlQuery>
-#include "core/database.h"
 
 const quint32 OutgoingDataCreator::kFileChunkSize = 100000;  // in Bytes
 
@@ -60,7 +59,7 @@ void OutgoingDataCreator::SetClients(QList<RemoteClient*>* clients) {
   // Parse the ultimate lyrics xml file
   ultimate_reader_->SetThread(this->thread());
   ProviderList provider_list =
-    ultimate_reader_->Parse(":lyrics/ultimate_providers.xml");
+      ultimate_reader_->Parse(":lyrics/ultimate_providers.xml");
 
   // Set up the lyrics parser
   connect(fetcher_, SIGNAL(ResultReady(int, SongInfoFetcher::Result)),
@@ -382,7 +381,7 @@ void OutgoingDataCreator::CreateSong(const Song& song, const QImage& art,
         DataCommaSizeFromQString(song.art_automatic()));
     song_metadata->set_art_manual(DataCommaSizeFromQString(song.art_manual()));
     song_metadata->set_type(
-        static_cast< ::pb::remote::SongMetadata_Type>(song.filetype()));
+        static_cast<::pb::remote::SongMetadata_Type>(song.filetype()));
 
     // Append coverart
     if (!art.isNull()) {
@@ -605,9 +604,8 @@ void OutgoingDataCreator::SendLibrary(RemoteClient* client) {
   app_->database()->AttachDatabaseOnDbConnection("songs_export", adb, db);
 
   // Copy the content of the song table to this temporary database
-  QSqlQuery q(QString(
-                  "create table songs_export.songs as SELECT * FROM songs "
-                  "where unavailable = 0;"),
+  QSqlQuery q(QString("create table songs_export.songs as SELECT * FROM songs "
+                      "where unavailable = 0;"),
               db);
 
   if (app_->database()->CheckErrors(q)) return;

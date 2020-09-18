@@ -15,10 +15,10 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "osd.h"
-#include "core/logging.h"
-
 #include <QtDebug>
+
+#include "core/logging.h"
+#include "osd.h"
 
 void OSD::Init() {}
 

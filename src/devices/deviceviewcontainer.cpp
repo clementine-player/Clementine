@@ -16,8 +16,9 @@
 */
 
 #include "deviceviewcontainer.h"
-#include "ui_deviceviewcontainer.h"
+
 #include "ui/iconloader.h"
+#include "ui_deviceviewcontainer.h"
 
 DeviceViewContainer::DeviceViewContainer(QWidget* parent)
     : QWidget(parent), ui_(new Ui::DeviceViewContainer), loaded_icons_(false) {
@@ -40,10 +41,10 @@ void DeviceViewContainer::showEvent(QShowEvent* e) {
   if (!loaded_icons_) {
     loaded_icons_ = true;
 
-    ui_->close_frame_button->setIcon(IconLoader::Load("edit-delete", 
-                                                      IconLoader::Base));
-    ui_->warning_icon->setPixmap(IconLoader::Load("dialog-warning", 
-                                                  IconLoader::Base).pixmap(22));
+    ui_->close_frame_button->setIcon(
+        IconLoader::Load("edit-delete", IconLoader::Base));
+    ui_->warning_icon->setPixmap(
+        IconLoader::Load("dialog-warning", IconLoader::Base).pixmap(22));
   }
 
   QWidget::showEvent(e);

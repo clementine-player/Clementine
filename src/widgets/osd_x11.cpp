@@ -15,19 +15,18 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "osd.h"
-
-#include <memory>
-
 #include <QtDebug>
+#include <memory>
 
 #include "config.h"
 #include "core/logging.h"
+#include "osd.h"
 
 #ifdef HAVE_DBUS
-#include "dbus/notification.h"
 #include <QCoreApplication>
 #include <QTextDocument>
+
+#include "dbus/notification.h"
 
 QDBusArgument& operator<<(QDBusArgument& arg, const QImage& image) {
   if (image.isNull()) {

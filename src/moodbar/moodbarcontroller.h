@@ -32,7 +32,7 @@ class MoodbarController : public QObject {
  public:
   MoodbarController(Application* app, QObject* parent = nullptr);
 
-signals:
+ signals:
   void CurrentMoodbarDataChanged(const QByteArray& data);
 
  private slots:

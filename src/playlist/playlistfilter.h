@@ -19,11 +19,10 @@
 #define PLAYLISTFILTER_H
 
 #include <QScopedPointer>
+#include <QSet>
 #include <QSortFilterProxyModel>
 
 #include "playlist.h"
-
-#include <QSet>
 
 class FilterTree;
 

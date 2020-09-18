@@ -18,13 +18,12 @@
 #ifndef WIIMOTESHORTCUTGRABBER_H
 #define WIIMOTESHORTCUTGRABBER_H
 
-#include <memory>
-
 #include <QDialog>
 #include <QTimeLine>
+#include <memory>
 
-#include "wiimotesettingspage.h"
 #include "dbus/wiimotedev.h"
+#include "wiimotesettingspage.h"
 
 class Ui_WiimoteShortcutGrabber;
 
@@ -53,7 +52,7 @@ class WiimoteShortcutGrabber : public QDialog {
   quint64 remember_wiimote_shifts_;
   quint64 remember_nunchuk_shifts_;
 
-signals:
+ signals:
   void AddShortcut(quint64 buttons, quint32 action);
 };
 

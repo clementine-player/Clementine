@@ -90,7 +90,8 @@ void AlbumCoverFetcher::StartRequests() {
     return;
   }
 
-  while (!queued_requests_.isEmpty() && active_requests_.size() < kMaxConcurrentRequests) {
+  while (!queued_requests_.isEmpty() &&
+         active_requests_.size() < kMaxConcurrentRequests) {
     CoverSearchRequest request = queued_requests_.dequeue();
 
     // search objects are this fetcher's children so worst case scenario - they

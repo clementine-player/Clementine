@@ -17,10 +17,9 @@
 
 #include "fmpsparser.h"
 
-#include <functional>
-
 #include <QStringList>
 #include <QtDebug>
+#include <functional>
 
 using std::placeholders::_1;
 using std::placeholders::_2;

@@ -16,12 +16,13 @@
 */
 
 #include "moodbarcontroller.h"
-#include "moodbarloader.h"
-#include "moodbarpipeline.h"
+
 #include "core/application.h"
 #include "core/closure.h"
 #include "core/logging.h"
 #include "core/player.h"
+#include "moodbarloader.h"
+#include "moodbarpipeline.h"
 #include "playlist/playlistmanager.h"
 
 MoodbarController::MoodbarController(Application* app, QObject* parent)
@@ -70,7 +71,7 @@ void MoodbarController::AsyncLoadComplete(MoodbarPipeline* pipeline,
     return;
   }
   // Did we stop the song?
-  switch(app_->player()->GetState()) {
+  switch (app_->player()->GetState()) {
     case Engine::Error:
     case Engine::Empty:
     case Engine::Idle:

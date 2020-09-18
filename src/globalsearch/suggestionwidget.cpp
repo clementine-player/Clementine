@@ -16,10 +16,11 @@
 */
 
 #include "suggestionwidget.h"
-#include "ui_suggestionwidget.h"
-#include "ui/iconloader.h"
 
 #include <QMouseEvent>
+
+#include "ui/iconloader.h"
+#include "ui_suggestionwidget.h"
 
 SuggestionWidget::SuggestionWidget(const QIcon& search_icon, QWidget* parent)
     : QWidget(parent), ui_(new Ui_SuggestionWidget) {

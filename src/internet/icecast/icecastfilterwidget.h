@@ -20,9 +20,9 @@
 #ifndef INTERNET_ICECAST_ICECASTFILTERWIDGET_H_
 #define INTERNET_ICECAST_ICECASTFILTERWIDGET_H_
 
-#include "icecastmodel.h"
-
 #include <QWidget>
+
+#include "icecastmodel.h"
 
 class LineEditInterface;
 class Ui_IcecastFilterWidget;

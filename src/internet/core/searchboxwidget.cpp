@@ -19,13 +19,13 @@
 */
 
 #include "internet/core/searchboxwidget.h"
-#include "ui_searchboxwidget.h"
 
 #include <QKeyEvent>
 #include <QMenu>
 
 #include "internet/core/internetservice.h"
 #include "ui/iconloader.h"
+#include "ui_searchboxwidget.h"
 #include "widgets/didyoumean.h"
 
 SearchBoxWidget::SearchBoxWidget(InternetService* service)

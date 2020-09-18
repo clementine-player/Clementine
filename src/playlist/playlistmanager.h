@@ -111,7 +111,7 @@ class PlaylistManagerInterface : public QObject {
   virtual void PlaySmartPlaylist(smart_playlists::GeneratorPtr generator,
                                  bool as_new, bool clear) = 0;
 
-signals:
+ signals:
   void PlaylistManagerInitialized();
 
   void PlaylistAdded(int id, const QString& name, bool favorite);

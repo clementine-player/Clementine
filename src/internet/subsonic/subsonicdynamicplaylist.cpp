@@ -16,12 +16,12 @@
 */
 
 #include "subsonicdynamicplaylist.h"
-#include "subsonicservice.h"
 
 #include <QEventLoop>
 #include <QFileInfo>
 #include <QSslConfiguration>
 #include <QUrlQuery>
+#include <boost/scope_exit.hpp>
 
 #include "core/application.h"
 #include "core/logging.h"
@@ -30,8 +30,7 @@
 #include "core/timeconstants.h"
 #include "core/waitforsignal.h"
 #include "internet/core/internetplaylistitem.h"
-
-#include <boost/scope_exit.hpp>
+#include "subsonicservice.h"
 
 // 500 limit per subsonic api
 const int SubsonicDynamicPlaylist::kMaxCount = 500;
@@ -40,13 +39,12 @@ const int SubsonicDynamicPlaylist::kDefaultSongCount = 20;
 const int SubsonicDynamicPlaylist::kDefaultOffset = 0;
 
 SubsonicDynamicPlaylist::SubsonicDynamicPlaylist()
-  : type_(QueryType_Album), stat_(QueryStat_Newest), offset_(kDefaultOffset) {
+    : type_(QueryType_Album), stat_(QueryStat_Newest), offset_(kDefaultOffset) {
   service_ = InternetModel::Service<SubsonicService>();
 }
 
 SubsonicDynamicPlaylist::SubsonicDynamicPlaylist(const QString& name,
-                                                 QueryType type,
-                                                 QueryStat stat)
+                                                 QueryType type, QueryStat stat)
     : type_(type), stat_(stat), offset_(kDefaultOffset) {
   set_name(name);
   service_ = InternetModel::Service<SubsonicService>();

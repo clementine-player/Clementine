@@ -17,13 +17,14 @@
 */
 
 #include "iconloader.h"
+
+#include <QDir>
+#include <QSettings>
+#include <QtDebug>
+
 #include "core/appearance.h"
 #include "core/logging.h"
 #include "core/utilities.h"
-
-#include <QtDebug>
-#include <QDir>
-#include <QSettings>
 
 QList<int> IconLoader::sizes_;
 QString IconLoader::custom_icon_path_;
@@ -35,7 +36,10 @@ void IconLoader::Init() {
   sizes_ << 22 << 32 << 48;
   custom_icon_path_ = Utilities::GetConfigPath(Utilities::Path_Icons);
   icon_sub_path_.clear();
-  icon_sub_path_ << "/icons" << "/providers" << "/last.fm" << "";
+  icon_sub_path_ << "/icons"
+                 << "/providers"
+                 << "/last.fm"
+                 << "";
   QSettings settings;
   settings.beginGroup(Appearance::kSettingsGroup);
   use_sys_icons_ = settings.value("b_use_sys_icons", false).toBool();
@@ -58,59 +62,59 @@ QIcon IconLoader::Load(const QString& name, const IconType& icontype) {
 
   // Set the icon load location based on IConType
   switch (icontype) {
-  case Base:
-  case Provider: {
-    const QString custom_icon_location = custom_icon_path_
-        + icon_sub_path_.at(icontype);
-    if (QDir(custom_icon_location).exists()) {
-      // Try to load icons from the custom icon location initially
-      const QString locate(custom_icon_location + "/%1x%2/%3.png");
-      for (int size : sizes_) {
-        QString filename_custom(locate.arg(size).arg(size).arg(name));
+    case Base:
+    case Provider: {
+      const QString custom_icon_location =
+          custom_icon_path_ + icon_sub_path_.at(icontype);
+      if (QDir(custom_icon_location).exists()) {
+        // Try to load icons from the custom icon location initially
+        const QString locate(custom_icon_location + "/%1x%2/%3.png");
+        for (int size : sizes_) {
+          QString filename_custom(locate.arg(size).arg(size).arg(name));
 
-        if (QFile::exists(filename_custom)) ret.addFile(filename_custom,
-                                                        QSize(size, size));
+          if (QFile::exists(filename_custom))
+            ret.addFile(filename_custom, QSize(size, size));
+        }
+        if (!ret.isNull()) return ret;
       }
-      if (!ret.isNull()) return ret;
+
+      // Otherwise use our fallback theme
+      const QString path(":" + icon_sub_path_.at(icontype) + "/%1x%2/%3.png");
+      for (int size : sizes_) {
+        QString filename(path.arg(size).arg(size).arg(name));
+
+        if (QFile::exists(filename)) ret.addFile(filename, QSize(size, size));
+      }
+      break;
     }
 
-    // Otherwise use our fallback theme
-    const QString path(":" + icon_sub_path_.at(icontype) + "/%1x%2/%3.png");
-    for (int size : sizes_) {
-      QString filename(path.arg(size).arg(size).arg(name));
+    case Lastfm:
+    case Other: {
+      // lastfm icons location
+      const QString custom_fm_other_icon_location =
+          custom_icon_path_ + icon_sub_path_.at(icontype);
+      if (QDir(custom_fm_other_icon_location).exists()) {
+        // Try to load icons from the custom icon location initially
+        const QString locate_file(custom_fm_other_icon_location + "/" + name +
+                                  ".png");
 
-      if (QFile::exists(filename)) ret.addFile(filename, QSize(size, size));
-    }
-    break;
-  }
+        if (QFile::exists(locate_file)) ret.addFile(locate_file);
+        if (!ret.isNull()) return ret;
+      }
 
-  case Lastfm:
-  case Other: {
-    // lastfm icons location
-    const QString custom_fm_other_icon_location = custom_icon_path_
-        + icon_sub_path_.at(icontype);
-    if (QDir(custom_fm_other_icon_location).exists()) {
-      // Try to load icons from the custom icon location initially
-      const QString locate_file(
-          custom_fm_other_icon_location + "/" + name + ".png");
+      // Otherwise use our fallback theme
+      const QString path_file(":" + icon_sub_path_.at(icontype) + "/" + name +
+                              ".png");
 
-      if (QFile::exists(locate_file)) ret.addFile(locate_file);
-      if (!ret.isNull()) return ret;
+      if (QFile::exists(path_file)) ret.addFile(path_file);
+      break;
     }
 
-    // Otherwise use our fallback theme
-    const QString path_file(":" + icon_sub_path_.at(icontype)
-        + "/" + name + ".png");
-
-    if (QFile::exists(path_file)) ret.addFile(path_file);
-    break;
+    default:
+      // Should never be reached
+      qLog(Warning) << "Couldn't recognize IconType" << name;
   }
-
-  default:
-    // Should never be reached
-    qLog(Warning) << "Couldn't recognize IconType" << name;
-  }
-    // Load icon from system theme only if it hasn't been found
+  // Load icon from system theme only if it hasn't been found
   if (ret.isNull()) {
     ret = QIcon::fromTheme(name);
     if (!ret.isNull()) return ret;

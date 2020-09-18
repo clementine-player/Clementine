@@ -18,11 +18,10 @@
 #ifndef LIBRARY_H
 #define LIBRARY_H
 
-#include <memory>
-
 #include <QHash>
 #include <QObject>
 #include <QUrl>
+#include <memory>
 
 #include "core/song.h"
 

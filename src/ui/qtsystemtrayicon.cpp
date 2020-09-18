@@ -15,18 +15,18 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "iconloader.h"
 #include "qtsystemtrayicon.h"
 
-#include "core/song.h"
-
 #include <QCoreApplication>
-#include <QTextDocument>
-#include <QStringBuilder>
-#include <QMenu>
 #include <QFile>
+#include <QMenu>
+#include <QStringBuilder>
 #include <QSystemTrayIcon>
+#include <QTextDocument>
 #include <QWheelEvent>
+
+#include "core/song.h"
+#include "iconloader.h"
 
 QtSystemTrayIcon::QtSystemTrayIcon(QObject* parent)
     : SystemTrayIcon(parent),

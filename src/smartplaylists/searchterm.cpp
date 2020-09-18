@@ -16,9 +16,10 @@
 */
 
 #include "searchterm.h"
-#include "playlist/playlist.h"
 
 #include <QUrl>
+
+#include "playlist/playlist.h"
 
 namespace smart_playlists {
 
@@ -147,7 +148,8 @@ bool SearchTerm::is_valid() const {
 
   switch (TypeOf(field_)) {
     case Type_Text:
-      if (operator_ == SearchTerm::Op_Empty || operator_ == SearchTerm::Op_NotEmpty) {
+      if (operator_ == SearchTerm::Op_Empty ||
+          operator_ == SearchTerm::Op_NotEmpty) {
         return true;
       }
       // Empty fields should be possible.
@@ -207,16 +209,16 @@ SearchTerm::Type SearchTerm::TypeOf(Field field) {
 OperatorList SearchTerm::OperatorsForType(Type type) {
   switch (type) {
     case Type_Text:
-      return OperatorList() << Op_Contains << Op_NotContains << Op_Equals
-                            << Op_NotEquals << Op_Empty << Op_NotEmpty
-                            << Op_StartsWith << Op_EndsWith;
+      return OperatorList()
+             << Op_Contains << Op_NotContains << Op_Equals << Op_NotEquals
+             << Op_Empty << Op_NotEmpty << Op_StartsWith << Op_EndsWith;
     case Type_Date:
-      return OperatorList() << Op_Equals << Op_NotEquals << Op_GreaterThan
-                            << Op_LessThan << Op_NumericDate
-                            << Op_NumericDateNot << Op_RelativeDate;
+      return OperatorList()
+             << Op_Equals << Op_NotEquals << Op_GreaterThan << Op_LessThan
+             << Op_NumericDate << Op_NumericDateNot << Op_RelativeDate;
     default:
-      return OperatorList() << Op_Equals << Op_NotEquals << Op_GreaterThan
-                            << Op_LessThan;
+      return OperatorList()
+             << Op_Equals << Op_NotEquals << Op_GreaterThan << Op_LessThan;
   }
 }
 
@@ -427,7 +429,7 @@ QString SearchTerm::DateName(DateType date, bool forQuery) {
   return QString();
 }
 
-}  // namespace
+}  // namespace smart_playlists
 
 QDataStream& operator<<(QDataStream& s,
                         const smart_playlists::SearchTerm& term) {

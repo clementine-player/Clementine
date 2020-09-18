@@ -20,8 +20,8 @@
 #ifndef INTERNET_CORE_INTERNETVIEWCONTAINER_H_
 #define INTERNET_CORE_INTERNETVIEWCONTAINER_H_
 
-#include <QWidget>
 #include <QMap>
+#include <QWidget>
 
 class Application;
 class InternetService;

@@ -30,7 +30,9 @@ class ProjectMPresetModel : public QAbstractItemModel {
  public:
   ProjectMPresetModel(ProjectMVisualisation* vis, QObject* parent = nullptr);
 
-  enum { Role_Url = Qt::UserRole, };
+  enum {
+    Role_Url = Qt::UserRole,
+  };
 
   void MarkSelected(const QString& path, bool selected);
 

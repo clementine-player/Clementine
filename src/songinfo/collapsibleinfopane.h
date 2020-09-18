@@ -59,7 +59,7 @@ class CollapsibleInfoPane : public QWidget {
   void Expand();
   void Collapse();
 
-signals:
+ signals:
   void Toggled(bool expanded);
 
  private slots:

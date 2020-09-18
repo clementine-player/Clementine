@@ -47,4 +47,4 @@ class MoodbarBuilder {
   QList<Rgb> frames_;
 };
 
-#endif // MOODBARBUILDER_H
+#endif  // MOODBARBUILDER_H

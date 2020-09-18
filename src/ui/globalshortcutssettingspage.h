@@ -18,10 +18,9 @@
 #ifndef GLOBALSHORTCUTSSETTINGSPAGE_H
 #define GLOBALSHORTCUTSSETTINGSPAGE_H
 
-#include <memory>
-
 #include <QMap>
 #include <QSettings>
+#include <memory>
 
 #include "core/globalshortcuts.h"
 #include "ui/settingspage.h"

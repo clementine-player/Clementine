@@ -20,10 +20,10 @@
 #include "dropboxservice.h"
 
 #include <QFileInfo>
-#include <QTimer>
+#include <QJsonArray>
 #include <QJsonDocument>
 #include <QJsonObject>
-#include <QJsonArray>
+#include <QTimer>
 
 #include "core/application.h"
 #include "core/logging.h"
@@ -182,7 +182,8 @@ void DropboxService::RequestFileListFinished(QNetworkReply* reply) {
     }
   }
 
-  if (json_response.contains("has_more") && json_response["has_more"].toBool()) {
+  if (json_response.contains("has_more") &&
+      json_response["has_more"].toBool()) {
     QSettings s;
     s.beginGroup(kSettingsGroup);
     s.setValue("cursor", json_response["cursor"].toVariant());
@@ -261,8 +262,9 @@ void DropboxService::FetchContentUrlFinished(QNetworkReply* reply,
   Song song;
   song.set_url(url);
   song.set_etag(data["rev"].toString());
-  song.set_mtime(QDateTime::fromString(data["server_modified"].toString(),
-                                       Qt::ISODate).toTime_t());
+  song.set_mtime(
+      QDateTime::fromString(data["server_modified"].toString(), Qt::ISODate)
+          .toTime_t());
   song.set_title(info.fileName());
   song.set_filesize(data["size"].toInt());
   song.set_ctime(0);

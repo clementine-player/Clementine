@@ -1,15 +1,15 @@
 #ifndef MACDEVICELISTER_H
 #define MACDEVICELISTER_H
 
-#include "devicelister.h"
+#include <DiskArbitration/DADisk.h>
+#include <DiskArbitration/DADissenter.h>
+#include <IOKit/IOKitLib.h>
 
 #include <QMutex>
 #include <QSet>
 #include <QThread>
 
-#include <DiskArbitration/DADisk.h>
-#include <DiskArbitration/DADissenter.h>
-#include <IOKit/IOKitLib.h>
+#include "devicelister.h"
 
 class MacDeviceLister : public DeviceLister {
   Q_OBJECT

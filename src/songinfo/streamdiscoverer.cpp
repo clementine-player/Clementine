@@ -1,11 +1,12 @@
 #include "streamdiscoverer.h"
 
 #include <gst/pbutils/pbutils.h>
+
+#include <QEventLoop>
+
 #include "core/logging.h"
 #include "core/signalchecker.h"
 #include "core/waitforsignal.h"
-
-#include <QEventLoop>
 
 const int StreamDiscoverer::kDiscoveryTimeoutS = 10;
 

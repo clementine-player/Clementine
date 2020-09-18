@@ -69,7 +69,8 @@ QStringList IcecastBackend::GetGenresByPopularity(const QString& filter) {
                     "SELECT genre, COUNT(*) AS count FROM %1 "
                     " %2"
                     " GROUP BY genre"
-                    " ORDER BY count DESC").arg(kTableName, where);
+                    " ORDER BY count DESC")
+                    .arg(kTableName, where);
   QSqlQuery q(db);
   q.prepare(sql);
   if (!filter.isEmpty()) {
@@ -106,7 +107,8 @@ IcecastBackend::StationList IcecastBackend::GetStations(const QString& filter,
   QString sql = QString(
                     "SELECT name, url, mime_type, bitrate, channels,"
                     "       samplerate, genre"
-                    " FROM %1").arg(kTableName);
+                    " FROM %1")
+                    .arg(kTableName);
 
   if (!where_clauses.isEmpty()) {
     sql += " WHERE " + where_clauses.join(" AND ");
@@ -155,11 +157,11 @@ void IcecastBackend::ClearAndAddStations(const StationList& stations) {
     q.exec();
     if (db_->CheckErrors(q)) return;
 
-    q.prepare(QString(
-            "INSERT INTO %1 (name, url, mime_type, bitrate,"
-            "                channels, samplerate, genre)"
-            " VALUES (:name, :url, :mime_type, :bitrate,"
-            "         :channels, :samplerate, :genre)").arg(kTableName));
+    q.prepare(QString("INSERT INTO %1 (name, url, mime_type, bitrate,"
+                      "                channels, samplerate, genre)"
+                      " VALUES (:name, :url, :mime_type, :bitrate,"
+                      "         :channels, :samplerate, :genre)")
+                  .arg(kTableName));
 
     // Add these ones
     for (const Station& station : stations) {

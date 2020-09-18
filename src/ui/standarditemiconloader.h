@@ -18,10 +18,10 @@
 #ifndef STANDARDITEMICONLOADER_H
 #define STANDARDITEMICONLOADER_H
 
-#include "covers/albumcoverloaderoptions.h"
-
 #include <QMap>
 #include <QObject>
+
+#include "covers/albumcoverloaderoptions.h"
 
 class AlbumCoverLoader;
 class Song;
@@ -36,7 +36,8 @@ class StandardItemIconLoader : public QObject {
   Q_OBJECT
 
  public:
-  StandardItemIconLoader(AlbumCoverLoader* cover_loader, QObject* parent = nullptr);
+  StandardItemIconLoader(AlbumCoverLoader* cover_loader,
+                         QObject* parent = nullptr);
 
   AlbumCoverLoaderOptions* options() { return &cover_options_; }
 

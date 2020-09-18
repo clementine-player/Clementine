@@ -16,9 +16,10 @@
 */
 
 #include "transcoderoptionsmp3.h"
-#include "ui_transcoderoptionsmp3.h"
 
 #include <QSettings>
+
+#include "ui_transcoderoptionsmp3.h"
 
 const char* TranscoderOptionsMP3::kSettingsGroup = "Transcoder/lamemp3enc";
 

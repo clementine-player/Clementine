@@ -18,11 +18,10 @@
 
 #include "musicbrainzcoverprovider.h"
 
+#include <QUrlQuery>
+#include <QXmlStreamReader>
 #include <algorithm>
 #include <functional>
-
-#include <QXmlStreamReader>
-#include <QUrlQuery>
 
 #include "core/closure.h"
 #include "core/network.h"

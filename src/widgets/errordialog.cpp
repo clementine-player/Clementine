@@ -16,9 +16,10 @@
 */
 
 #include "errordialog.h"
-#include "ui_errordialog.h"
 
 #include <QStyle>
+
+#include "ui_errordialog.h"
 
 ErrorDialog::ErrorDialog(QWidget* parent)
     : QDialog(parent), ui_(new Ui_ErrorDialog) {

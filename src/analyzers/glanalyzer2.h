@@ -27,9 +27,10 @@
 #include <config.h>
 #ifdef HAVE_QGLWIDGET
 
-#include "analyzerbase.h"
-#include <qstring.h>
 #include <qptrlist.h>
+#include <qstring.h>
+
+#include "analyzerbase.h"
 
 class GLAnalyzer2 : public Analyzer::Base3D {
  public:

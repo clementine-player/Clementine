@@ -24,8 +24,8 @@
 #include <QSettings>
 
 #include "icecastmodel.h"
-#include "ui_icecastfilterwidget.h"
 #include "ui/iconloader.h"
+#include "ui_icecastfilterwidget.h"
 
 const char* IcecastFilterWidget::kSettingsGroup = "Icecast";
 

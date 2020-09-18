@@ -17,11 +17,10 @@
 
 #include "queue.h"
 
-#include <algorithm>
-
 #include <QBuffer>
 #include <QMimeData>
 #include <QtDebug>
+#include <algorithm>
 
 #include "core/utilities.h"
 

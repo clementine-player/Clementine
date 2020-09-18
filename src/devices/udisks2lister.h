@@ -18,12 +18,11 @@
 #ifndef UDISKS2LISTER_H
 #define UDISKS2LISTER_H
 
-#include <memory>
-
 #include <QDBusArgument>
 #include <QMutex>
 #include <QReadWriteLock>
 #include <QStringList>
+#include <memory>
 
 #include "dbus/metatypes.h"
 #include "devicelister.h"

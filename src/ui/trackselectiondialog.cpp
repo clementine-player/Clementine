@@ -16,7 +16,6 @@
 */
 
 #include "ui/trackselectiondialog.h"
-#include "ui_trackselectiondialog.h"
 
 #include <QFileInfo>
 #include <QPushButton>
@@ -28,6 +27,7 @@
 
 #include "core/tagreaderclient.h"
 #include "ui/iconloader.h"
+#include "ui_trackselectiondialog.h"
 
 TrackSelectionDialog::TrackSelectionDialog(QWidget* parent)
     : QDialog(parent), ui_(new Ui_TrackSelectionDialog), save_on_close_(false) {

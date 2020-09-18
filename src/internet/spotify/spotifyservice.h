@@ -22,12 +22,12 @@
 #ifndef INTERNET_SPOTIFY_SPOTIFYSERVICE_H_
 #define INTERNET_SPOTIFY_SPOTIFYSERVICE_H_
 
+#include <QProcess>
+#include <QTimer>
+
 #include "internet/core/internetmodel.h"
 #include "internet/core/internetservice.h"
 #include "spotifymessages.pb.h"
-
-#include <QProcess>
-#include <QTimer>
 
 class Playlist;
 class SearchBoxWidget;

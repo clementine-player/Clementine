@@ -17,8 +17,6 @@
 
 #include "deviceview.h"
 
-#include <memory>
-
 #include <QApplication>
 #include <QContextMenuEvent>
 #include <QMenu>
@@ -26,15 +24,16 @@
 #include <QPainter>
 #include <QPushButton>
 #include <QSortFilterProxyModel>
+#include <memory>
 
 #include "connecteddevice.h"
-#include "devicelister.h"
-#include "devicemanager.h"
-#include "deviceproperties.h"
 #include "core/application.h"
 #include "core/deletefiles.h"
 #include "core/mergedproxymodel.h"
 #include "core/mimedata.h"
+#include "devicelister.h"
+#include "devicemanager.h"
+#include "deviceproperties.h"
 #include "library/librarydirectorymodel.h"
 #include "library/librarymodel.h"
 #include "library/libraryview.h"
@@ -196,18 +195,16 @@ void DeviceView::contextMenuEvent(QContextMenuEvent* e) {
     library_menu_ = new QMenu(this);
 
     // Device menu
-    eject_action_ = device_menu_->addAction(IconLoader::Load("media-eject", 
-                                            IconLoader::Base),
-                                            tr("Safely remove device"), this,
-                                            SLOT(Unmount()));
-    forget_action_ =
-        device_menu_->addAction(IconLoader::Load("list-remove", IconLoader::Base),
-                                tr("Forget device"), this, SLOT(Forget()));
+    eject_action_ = device_menu_->addAction(
+        IconLoader::Load("media-eject", IconLoader::Base),
+        tr("Safely remove device"), this, SLOT(Unmount()));
+    forget_action_ = device_menu_->addAction(
+        IconLoader::Load("list-remove", IconLoader::Base), tr("Forget device"),
+        this, SLOT(Forget()));
     device_menu_->addSeparator();
-    properties_action_ = device_menu_->addAction(IconLoader::Load("configure", 
-                                                 IconLoader::Base),
-                                                 tr("Device properties..."),
-                                                 this, SLOT(Properties()));
+    properties_action_ = device_menu_->addAction(
+        IconLoader::Load("configure", IconLoader::Base),
+        tr("Device properties..."), this, SLOT(Properties()));
 
     // Library menu
     add_to_playlist_action_ = library_menu_->addAction(
@@ -217,17 +214,15 @@ void DeviceView::contextMenuEvent(QContextMenuEvent* e) {
         IconLoader::Load("media-playback-start", IconLoader::Base),
         tr("Replace current playlist"), this, SLOT(Load()));
     open_in_new_playlist_ = library_menu_->addAction(
-        IconLoader::Load("document-new", IconLoader::Base), 
+        IconLoader::Load("document-new", IconLoader::Base),
         tr("Open in new playlist"), this, SLOT(OpenInNewPlaylist()));
     library_menu_->addSeparator();
-    organise_action_ = library_menu_->addAction(IconLoader::Load("edit-copy", 
-                                                IconLoader::Base),
-                                                tr("Copy to library..."), this,
-                                                SLOT(Organise()));
-    delete_action_ = library_menu_->addAction(IconLoader::Load("edit-delete", 
-                                              IconLoader::Base),
-                                              tr("Delete from device..."), this,
-                                              SLOT(Delete()));
+    organise_action_ = library_menu_->addAction(
+        IconLoader::Load("edit-copy", IconLoader::Base),
+        tr("Copy to library..."), this, SLOT(Organise()));
+    delete_action_ = library_menu_->addAction(
+        IconLoader::Load("edit-delete", IconLoader::Base),
+        tr("Delete from device..."), this, SLOT(Delete()));
   }
 
   menu_index_ = currentIndex();
@@ -260,24 +255,24 @@ void DeviceView::contextMenuEvent(QContextMenuEvent* e) {
   }
 }
 
-QModelIndex DeviceView::MapToDevice(const QModelIndex& merged_model_index)
-    const {
+QModelIndex DeviceView::MapToDevice(
+    const QModelIndex& merged_model_index) const {
   QModelIndex sort_model_index = merged_model_->mapToSource(merged_model_index);
   if (sort_model_index.model() != sort_model_) return QModelIndex();
 
   return sort_model_->mapToSource(sort_model_index);
 }
 
-QModelIndex DeviceView::FindParentDevice(const QModelIndex& merged_model_index)
-    const {
+QModelIndex DeviceView::FindParentDevice(
+    const QModelIndex& merged_model_index) const {
   QModelIndex index = merged_model_->FindSourceParent(merged_model_index);
   if (index.model() != sort_model_) return QModelIndex();
 
   return sort_model_->mapToSource(index);
 }
 
-QModelIndex DeviceView::MapToLibrary(const QModelIndex& merged_model_index)
-    const {
+QModelIndex DeviceView::MapToLibrary(
+    const QModelIndex& merged_model_index) const {
   QModelIndex sort_model_index = merged_model_->mapToSource(merged_model_index);
   if (const QSortFilterProxyModel* sort_model =
           qobject_cast<const QSortFilterProxyModel*>(

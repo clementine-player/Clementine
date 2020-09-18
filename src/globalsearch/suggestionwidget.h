@@ -34,7 +34,7 @@ class SuggestionWidget : public QWidget {
  public slots:
   void SetText(const QString& text);
 
-signals:
+ signals:
   void SuggestionClicked(const QString& query);
 
  private:

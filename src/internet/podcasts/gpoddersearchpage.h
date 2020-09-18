@@ -20,9 +20,9 @@
 #ifndef INTERNET_PODCASTS_GPODDERSEARCHPAGE_H_
 #define INTERNET_PODCASTS_GPODDERSEARCHPAGE_H_
 
-#include "addpodcastpage.h"
-
 #include <ApiRequest.h>
+
+#include "addpodcastpage.h"
 
 class QNetworkAccessManager;
 

@@ -20,9 +20,9 @@
 #ifndef INTERNET_PODCASTS_GPODDERTOPTAGSPAGE_H_
 #define INTERNET_PODCASTS_GPODDERTOPTAGSPAGE_H_
 
-#include <QScopedPointer>
-
 #include <ApiRequest.h>
+
+#include <QScopedPointer>
 
 #include "addpodcastpage.h"
 

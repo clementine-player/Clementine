@@ -18,10 +18,9 @@
 #ifndef SRC_RIPPER_RIPCDDIALOG_H_
 #define SRC_RIPPER_RIPCDDIALOG_H_
 
-#include <memory>
-
 #include <QDialog>
 #include <QFile>
+#include <memory>
 
 #include "core/song.h"
 #include "core/tagreaderclient.h"

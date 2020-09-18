@@ -32,9 +32,8 @@ class Track;
 #include <QtGlobal>
 uint qHash(const lastfm::Track& track);
 
-#include "lastfmcompat.h"
-
 #include "internet/core/scrobbler.h"
+#include "lastfmcompat.h"
 
 class Application;
 class LastFMUrlHandler;
@@ -82,7 +81,7 @@ class LastFMService : public Scrobbler {
   void ShowConfig();
   void ToggleScrobbling();
 
-signals:
+ signals:
   void AuthenticationComplete(bool success);
   void ScrobblingEnabledChanged(bool value);
   void ButtonVisibilityChanged(bool value);

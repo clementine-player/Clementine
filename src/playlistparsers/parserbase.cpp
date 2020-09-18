@@ -16,13 +16,14 @@
 */
 
 #include "parserbase.h"
+
+#include <QUrl>
+
 #include "core/tagreaderclient.h"
 #include "library/librarybackend.h"
 #include "library/libraryquery.h"
 #include "library/sqlrow.h"
 #include "playlist/playlist.h"
-
-#include <QUrl>
 
 ParserBase::ParserBase(LibraryBackendInterface* library, QObject* parent)
     : QObject(parent), library_(library) {}

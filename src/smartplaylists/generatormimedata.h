@@ -20,8 +20,8 @@
 
 #include <QMimeData>
 
-#include "generator_fwd.h"
 #include "core/mimedata.h"
+#include "generator_fwd.h"
 
 namespace smart_playlists {
 
@@ -34,6 +34,6 @@ class GeneratorMimeData : public MimeData {
   GeneratorPtr generator_;
 };
 
-}  // namespace
+}  // namespace smart_playlists
 
 #endif  // GENERATORMIMEDATA_H

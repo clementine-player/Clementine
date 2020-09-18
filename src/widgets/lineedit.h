@@ -93,12 +93,10 @@ class ExtendedEditor : public LineEditInterface {
 class LineEdit : public QLineEdit, public ExtendedEditor {
   Q_OBJECT
   Q_PROPERTY(QString hint READ hint WRITE set_hint)
-  Q_PROPERTY(qreal font_point_size READ font_point_size WRITE
-                 set_font_point_size)
-  Q_PROPERTY(bool has_clear_button READ has_clear_button WRITE
-                 set_clear_button)
-  Q_PROPERTY(bool has_reset_button READ has_reset_button WRITE
-                 set_reset_button)
+  Q_PROPERTY(
+      qreal font_point_size READ font_point_size WRITE set_font_point_size)
+  Q_PROPERTY(bool has_clear_button READ has_clear_button WRITE set_clear_button)
+  Q_PROPERTY(bool has_reset_button READ has_reset_button WRITE set_reset_button)
 
  public:
   LineEdit(QWidget* parent = nullptr);
@@ -120,17 +118,15 @@ class LineEdit : public QLineEdit, public ExtendedEditor {
  private slots:
   void text_changed(const QString& text);
 
-signals:
+ signals:
   void Reset();
 };
 
 class TextEdit : public QPlainTextEdit, public ExtendedEditor {
   Q_OBJECT
   Q_PROPERTY(QString hint READ hint WRITE set_hint)
-  Q_PROPERTY(bool has_clear_button READ has_clear_button WRITE
-                 set_clear_button)
-  Q_PROPERTY(bool has_reset_button READ has_reset_button WRITE
-                 set_reset_button)
+  Q_PROPERTY(bool has_clear_button READ has_clear_button WRITE set_clear_button)
+  Q_PROPERTY(bool has_reset_button READ has_reset_button WRITE set_reset_button)
 
  public:
   TextEdit(QWidget* parent = nullptr);
@@ -145,17 +141,15 @@ class TextEdit : public QPlainTextEdit, public ExtendedEditor {
   void paintEvent(QPaintEvent*);
   void resizeEvent(QResizeEvent*);
 
-signals:
+ signals:
   void Reset();
 };
 
 class SpinBox : public QSpinBox, public ExtendedEditor {
   Q_OBJECT
   Q_PROPERTY(QString hint READ hint WRITE set_hint)
-  Q_PROPERTY(bool has_clear_button READ has_clear_button WRITE
-                 set_clear_button)
-  Q_PROPERTY(bool has_reset_button READ has_reset_button WRITE
-                 set_reset_button)
+  Q_PROPERTY(bool has_clear_button READ has_clear_button WRITE set_clear_button)
+  Q_PROPERTY(bool has_reset_button READ has_reset_button WRITE set_reset_button)
 
  public:
   SpinBox(QWidget* parent = nullptr);
@@ -174,7 +168,7 @@ class SpinBox : public QSpinBox, public ExtendedEditor {
   void paintEvent(QPaintEvent*);
   void resizeEvent(QResizeEvent*);
 
-signals:
+ signals:
   void Reset();
 };
 

@@ -15,26 +15,27 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "ui/iconloader.h"
-#include "consts.h"
-#include "shortcuts.h"
 #include "wiimotesettingspage.h"
-#include "wiimoteshortcutgrabber.h"
-#include "ui_wiimotesettingspage.h"
 
 #include <QMessageBox>
+
+#include "consts.h"
+#include "shortcuts.h"
+#include "ui/iconloader.h"
+#include "ui_wiimotesettingspage.h"
+#include "wiimoteshortcutgrabber.h"
 
 WiimoteSettingsPage::WiimoteSettingsPage(SettingsDialog* dialog)
     : SettingsPage(dialog), ui_(new Ui_WiimoteSettingsPage) {
   ui_->setupUi(this);
   ui_->list->header()->setSectionResizeMode(QHeaderView::ResizeToContents);
   setWindowIcon(IconLoader::Load("wiimotedev", IconLoader::Base));
-  ui_->wiimotedev_add_action->setIcon(IconLoader::Load("list-add",
-                                      IconLoader::Base));
-  ui_->wiimotedev_delete_action->setIcon(IconLoader::Load("list-remove",
-                                      IconLoader::Base));
-  ui_->wiimotedev_reload->setIcon(IconLoader::Load("view-refresh",
-                                      IconLoader::Base));
+  ui_->wiimotedev_add_action->setIcon(
+      IconLoader::Load("list-add", IconLoader::Base));
+  ui_->wiimotedev_delete_action->setIcon(
+      IconLoader::Load("list-remove", IconLoader::Base));
+  ui_->wiimotedev_reload->setIcon(
+      IconLoader::Load("view-refresh", IconLoader::Base));
 
   text_buttons_.insert(WIIMOTE_BTN_1, "Wii Remote 1");
   text_buttons_.insert(WIIMOTE_BTN_2, "Wii Remote 2");

@@ -20,9 +20,9 @@
 #ifndef CORE_QTFSLISTENER_H_
 #define CORE_QTFSLISTENER_H_
 
-#include "filesystemwatcherinterface.h"
-
 #include <QFileSystemWatcher>
+
+#include "filesystemwatcherinterface.h"
 
 class QtFSListener : public FileSystemWatcherInterface {
   Q_OBJECT

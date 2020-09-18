@@ -18,15 +18,15 @@
 
 /* Contacts (for explanations, congratulations, insults) :
  *  - <florian.bigard@gmail.com>
-*/
+ */
 
 #ifndef INTERNET_SEAFILE_SEAFILETREE_H_
 #define INTERNET_SEAFILE_SEAFILETREE_H_
 
-#include <QObject>
-#include <QString>
 #include <QList>
+#include <QObject>
 #include <QPair>
+#include <QString>
 
 #include "internet/core/cloudfileservice.h"
 

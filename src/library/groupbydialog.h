@@ -19,7 +19,6 @@
 #define GROUPBYDIALOG_H
 
 #include <QDialog>
-
 #include <memory>
 
 #include "librarymodel.h"
@@ -38,7 +37,7 @@ class GroupByDialog : public QDialog {
   void LibraryGroupingChanged(const LibraryModel::Grouping& g);
   void accept();
 
-signals:
+ signals:
   void Accepted(const LibraryModel::Grouping& g);
 
  private slots:

@@ -40,16 +40,15 @@
  *  - Add ssl certificate exception (for people who generate their own
  *certificate on their Seafile server
  *  - Stop Tagreader when user changes the library
-*/
+ */
 
 #ifndef INTERNET_SEAFILE_SEAFILESERVICE_H_
 #define INTERNET_SEAFILE_SEAFILESERVICE_H_
 
-#include "internet/core/cloudfileservice.h"
-
 #include <QDateTime>
 #include <QMutex>
 
+#include "internet/core/cloudfileservice.h"
 #include "seafiletree.h"
 
 class QNetworkReply;
@@ -82,7 +81,7 @@ class SeafileService : public CloudFileService {
   void ForgetCredentials();
   void ChangeLibrary(const QString& new_library);
 
-signals:
+ signals:
   void Connected();
   // QMap, key : library's id, value : library's name
   void GetLibrariesFinishedSignal(QMap<QString, QString>);

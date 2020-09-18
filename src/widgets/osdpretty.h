@@ -30,7 +30,10 @@ class OSDPretty : public QWidget {
   Q_OBJECT
 
  public:
-  enum Mode { Mode_Popup, Mode_Draggable, };
+  enum Mode {
+    Mode_Popup,
+    Mode_Draggable,
+  };
 
   OSDPretty(Mode mode, QWidget* parent = nullptr);
   ~OSDPretty();

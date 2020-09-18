@@ -20,9 +20,8 @@
 #ifndef INTERNET_MAGNATUNE_MAGNATUNESERVICE_H_
 #define INTERNET_MAGNATUNE_MAGNATUNESERVICE_H_
 
-#include <memory>
-
 #include <QXmlStreamReader>
+#include <memory>
 
 #include "internet/core/internetservice.h"
 

@@ -24,21 +24,18 @@
 #ifndef ANALYZERS_RAINBOWANALYZER_H_
 #define ANALYZERS_RAINBOWANALYZER_H_
 
-#include "analyzerbase.h"
-
 #include <QDateTime>
 #include <QPainter>
 #include <QPen>
+
+#include "analyzerbase.h"
 
 namespace Rainbow {
 class RainbowAnalyzer : public Analyzer::Base {
   Q_OBJECT
 
  public:
-  enum RainbowType {
-    Nyancat = 0,
-    Dash = 1 
-  };
+  enum RainbowType { Nyancat = 0, Dash = 1 };
 
   RainbowAnalyzer(const RainbowType& rbtype, QWidget* parent);
 
@@ -66,25 +63,25 @@ class RainbowAnalyzer : public Analyzer::Base {
   static RainbowType rainbowtype;
 
   inline QRect SourceRect(RainbowType rainbowtype) const {
-    return QRect(0, kHeight[rainbowtype] * frame_, 
-                 kWidth[rainbowtype], kHeight[rainbowtype]);
+    return QRect(0, kHeight[rainbowtype] * frame_, kWidth[rainbowtype],
+                 kHeight[rainbowtype]);
   }
 
   inline QRect SleepingSourceRect(RainbowType rainbowtype) const {
-    return QRect(0, kHeight[rainbowtype] * kFrameCount[rainbowtype], 
+    return QRect(0, kHeight[rainbowtype] * kFrameCount[rainbowtype],
                  kWidth[rainbowtype], kSleepingHeight[rainbowtype]);
   }
 
   inline QRect DestRect(RainbowType rainbowtype) const {
-    return QRect(width() - kWidth[rainbowtype], (height() - 
-                 kHeight[rainbowtype]) / 2, kWidth[rainbowtype],
+    return QRect(width() - kWidth[rainbowtype],
+                 (height() - kHeight[rainbowtype]) / 2, kWidth[rainbowtype],
                  kHeight[rainbowtype]);
   }
 
   inline QRect SleepingDestRect(RainbowType rainbowtype) const {
-    return QRect(width() - kWidth[rainbowtype], (height() - 
-                 kSleepingHeight[rainbowtype]) / 2, kWidth[rainbowtype], 
-                 kSleepingHeight[rainbowtype]);
+    return QRect(width() - kWidth[rainbowtype],
+                 (height() - kSleepingHeight[rainbowtype]) / 2,
+                 kWidth[rainbowtype], kSleepingHeight[rainbowtype]);
   }
 
  private:
@@ -102,7 +99,7 @@ class RainbowAnalyzer : public Analyzer::Base {
   // The y positions of each point on the rainbow.
   float history_[kHistorySize * kRainbowBands];
 
-  // A cache of the last frame's rainbow, 
+  // A cache of the last frame's rainbow,
   // so it can be used in the next frame.
   QPixmap buffer_[2];
   int current_buffer_;
@@ -114,7 +111,7 @@ class RainbowAnalyzer : public Analyzer::Base {
   // X spacing between each point in the polyline.
   int px_per_frame_;
 
-  // Amount the buffer_ is shifted to the left (off the edge of the widget) 
+  // Amount the buffer_ is shifted to the left (off the edge of the widget)
   // to make the rainbow extend from 0 to available_rainbow_width_.
   int x_offset_;
 
@@ -126,7 +123,7 @@ class NyanCatAnalyzer : public RainbowAnalyzer {
 
  public:
   Q_INVOKABLE NyanCatAnalyzer(QWidget* parent);
-  
+
   static const char* kName;
 };
 
@@ -138,6 +135,6 @@ class RainbowDashAnalyzer : public RainbowAnalyzer {
 
   static const char* kName;
 };
-}
+}  // namespace Rainbow
 
 #endif  // ANALYZERS_RAINBOWANALYZER_H_

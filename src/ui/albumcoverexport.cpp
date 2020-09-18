@@ -16,9 +16,10 @@
 */
 
 #include "albumcoverexport.h"
-#include "ui_albumcoverexport.h"
 
 #include <QSettings>
+
+#include "ui_albumcoverexport.h"
 
 const char* AlbumCoverExport::kSettingsGroup = "AlbumCoverExport";
 
@@ -42,8 +43,9 @@ AlbumCoverExport::DialogResult AlbumCoverExport::Exec() {
       s.value("overwrite", OverwriteMode_None).toInt() == OverwriteMode_None);
   ui_->overwriteAll->setChecked(
       s.value("overwrite", OverwriteMode_All).toInt() == OverwriteMode_All);
-  ui_->overwriteSmaller->setChecked(s.value("overwrite", OverwriteMode_Smaller)
-                                        .toInt() == OverwriteMode_Smaller);
+  ui_->overwriteSmaller->setChecked(
+      s.value("overwrite", OverwriteMode_Smaller).toInt() ==
+      OverwriteMode_Smaller);
   ui_->forceSize->setChecked(s.value("forceSize", false).toBool());
   ui_->width->setText(s.value("width", "").toString());
   ui_->height->setText(s.value("height", "").toString());

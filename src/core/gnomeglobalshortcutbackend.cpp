@@ -17,11 +17,12 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "gnomeglobalshortcutbackend.h"
+
 #include "config.h"
 #include "core/closure.h"
 #include "core/logging.h"
 #include "globalshortcuts.h"
-#include "gnomeglobalshortcutbackend.h"
 
 #ifdef HAVE_DBUS
 #include <dbus/gnomesettingsdaemon.h>
@@ -111,7 +112,7 @@ void GnomeGlobalShortcutBackend::DoUnregister() {
 #ifdef HAVE_DBUS
   // Check if the GSD service is available
   if (!QDBusConnection::sessionBus().interface()->isServiceRegistered(
-           kGsdService))
+          kGsdService))
     return;
   if (!interface_ || !is_connected_) return;
 

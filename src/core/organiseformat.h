@@ -21,8 +21,8 @@
 #define CORE_ORGANISEFORMAT_H_
 
 #include <QSyntaxHighlighter>
-#include <QValidator>
 #include <QTextEdit>
+#include <QValidator>
 
 #include "core/song.h"
 

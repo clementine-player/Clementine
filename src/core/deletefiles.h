@@ -20,9 +20,8 @@
 #ifndef CORE_DELETEFILES_H_
 #define CORE_DELETEFILES_H_
 
-#include <memory>
-
 #include <QObject>
+#include <memory>
 
 #include "song.h"
 

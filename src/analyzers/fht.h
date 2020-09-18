@@ -18,7 +18,7 @@
 */
 
 /* Original Author:  Melchior FRANZ  <mfranz@kde.org>  2004
-*/
+ */
 
 #ifndef ANALYZERS_FHT_H_
 #define ANALYZERS_FHT_H_
@@ -59,10 +59,10 @@ class FHT {
 
  public:
   /**
-  * Prepare transform for data sets with @f$2^n@f$ numbers, whereby @f$n@f$
-  * should be at least 3. Values of more than 3 need a trigonometry table.
-  * @see makeCasTable()
-  */
+   * Prepare transform for data sets with @f$2^n@f$ numbers, whereby @f$n@f$
+   * should be at least 3. Values of more than 3 need a trigonometry table.
+   * @see makeCasTable()
+   */
   FHT(int);
 
   ~FHT();

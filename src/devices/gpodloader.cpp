@@ -15,17 +15,18 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "connecteddevice.h"
 #include "gpodloader.h"
-#include "core/logging.h"
-#include "core/song.h"
-#include "core/taskmanager.h"
-#include "library/librarybackend.h"
 
 #include <gpod/itdb.h>
 
 #include <QDir>
 #include <QtDebug>
+
+#include "connecteddevice.h"
+#include "core/logging.h"
+#include "core/song.h"
+#include "core/taskmanager.h"
+#include "library/librarybackend.h"
 
 GPodLoader::GPodLoader(const QString& mount_point, TaskManager* task_manager,
                        std::shared_ptr<LibraryBackend> backend,

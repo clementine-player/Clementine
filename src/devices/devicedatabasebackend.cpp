@@ -16,12 +16,13 @@
 */
 
 #include "devicedatabasebackend.h"
-#include "core/database.h"
-#include "core/scopedtransaction.h"
 
 #include <QFile>
 #include <QSqlQuery>
 #include <QVariant>
+
+#include "core/database.h"
+#include "core/scopedtransaction.h"
 
 const int DeviceDatabaseBackend::kDeviceSchemaVersion = 0;
 
@@ -37,7 +38,8 @@ DeviceDatabaseBackend::DeviceList DeviceDatabaseBackend::GetAllDevices() {
   DeviceList ret;
 
   QSqlQuery q(db);
-  q.prepare("SELECT ROWID, unique_id, friendly_name, size, icon,"
+  q.prepare(
+      "SELECT ROWID, unique_id, friendly_name, size, icon,"
       "   transcode_mode, transcode_format"
       " FROM devices");
   q.exec();
@@ -65,7 +67,8 @@ int DeviceDatabaseBackend::AddDevice(const Device& device) {
 
   // Insert the device into the devices table
   QSqlQuery q(db);
-  q.prepare("INSERT INTO devices ("
+  q.prepare(
+      "INSERT INTO devices ("
       "   unique_id, friendly_name, size, icon,"
       "   transcode_mode, transcode_format)"
       " VALUES (:unique_id, :friendly_name, :size, :icon,"
@@ -125,7 +128,8 @@ void DeviceDatabaseBackend::SetDeviceOptions(int id,
   QSqlDatabase db(db_->Connect());
 
   QSqlQuery q(db);
-  q.prepare("UPDATE devices"
+  q.prepare(
+      "UPDATE devices"
       " SET friendly_name=:friendly_name,"
       "     icon=:icon_name,"
       "     transcode_mode=:transcode_mode,"

@@ -18,15 +18,17 @@
 #ifndef PLAYLISTUNDOCOMMANDS_H
 #define PLAYLISTUNDOCOMMANDS_H
 
-#include <QUndoCommand>
 #include <QCoreApplication>
+#include <QUndoCommand>
 
 #include "playlistitem.h"
 
 class Playlist;
 
 namespace PlaylistUndoCommands {
-enum Types { Type_RemoveItems = 0, };
+enum Types {
+  Type_RemoveItems = 0,
+};
 
 class Base : public QUndoCommand {
   Q_DECLARE_TR_FUNCTIONS(PlaylistUndoCommands)
@@ -118,6 +120,6 @@ class ShuffleItems : public ReOrderItems {
  public:
   ShuffleItems(Playlist* playlist, const PlaylistItemList& new_items);
 };
-}  // namespace
+}  // namespace PlaylistUndoCommands
 
 #endif  // PLAYLISTUNDOCOMMANDS_H

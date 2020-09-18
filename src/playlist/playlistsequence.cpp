@@ -16,14 +16,15 @@
 */
 
 #include "playlistsequence.h"
-#include "ui_playlistsequence.h"
-#include "ui/iconloader.h"
 
-#include <QMenu>
 #include <QActionGroup>
+#include <QMenu>
+#include <QPainter>
 #include <QSettings>
 #include <QtDebug>
-#include <QPainter>
+
+#include "ui/iconloader.h"
+#include "ui_playlistsequence.h"
 
 const char* PlaylistSequence::kSettingsGroup = "PlaylistSequence";
 
@@ -40,10 +41,10 @@ PlaylistSequence::PlaylistSequence(QWidget* parent, SettingsProvider* settings)
   ui_->setupUi(this);
 
   // Icons
-  ui_->repeat->setIcon(
-      AddDesaturatedIcon(IconLoader::Load("media-playlist-repeat", IconLoader::Base)));
-  ui_->shuffle->setIcon(
-      AddDesaturatedIcon(IconLoader::Load("media-playlist-shuffle", IconLoader::Base)));
+  ui_->repeat->setIcon(AddDesaturatedIcon(
+      IconLoader::Load("media-playlist-repeat", IconLoader::Base)));
+  ui_->shuffle->setIcon(AddDesaturatedIcon(
+      IconLoader::Load("media-playlist-shuffle", IconLoader::Base)));
 
   // Remove arrow indicators
   ui_->repeat->setStyleSheet("QToolButton::menu-indicator { image: none; }");

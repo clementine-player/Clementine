@@ -16,11 +16,12 @@
 */
 
 #include "freespacebar.h"
-#include "core/utilities.h"
 
 #include <QLinearGradient>
 #include <QPainter>
 #include <QPainterPath>
+
+#include "core/utilities.h"
 
 const int FreeSpaceBar::kBarHeight = 20;
 const int FreeSpaceBar::kBarBorderRadius = 8;

@@ -16,18 +16,7 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "core/application.h"
-#include "core/logging.h"
-#include "core/utilities.h"
-#include "covers/albumcoverfetcher.h"
-#include "covers/albumcoverloader.h"
-#include "covers/currentartloader.h"
-#include "library/librarybackend.h"
 #include "ui/albumcoverchoicecontroller.h"
-#include "ui/albumcovermanager.h"
-#include "ui/albumcoversearcher.h"
-#include "ui/coverfromurldialog.h"
-#include "ui/iconloader.h"
 
 #include <QAction>
 #include <QDialog>
@@ -42,6 +31,18 @@
 #include <QScreen>
 #include <QUrl>
 #include <QWindow>
+
+#include "core/application.h"
+#include "core/logging.h"
+#include "core/utilities.h"
+#include "covers/albumcoverfetcher.h"
+#include "covers/albumcoverloader.h"
+#include "covers/currentartloader.h"
+#include "library/librarybackend.h"
+#include "ui/albumcovermanager.h"
+#include "ui/albumcoversearcher.h"
+#include "ui/coverfromurldialog.h"
+#include "ui/iconloader.h"
 
 const char* AlbumCoverChoiceController::kLoadImageFileFilter = QT_TR_NOOP(
     "Images (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm)");
@@ -127,8 +128,9 @@ QString AlbumCoverChoiceController::LoadCoverFromFile(Song* song) {
 void AlbumCoverChoiceController::SaveCoverToFile(const Song& song,
                                                  const QImage& image) {
   QString initial_file_name =
-      "/" + (song.effective_album().isEmpty() ? tr("Unknown")
-                                              : song.effective_album()) +
+      "/" +
+      (song.effective_album().isEmpty() ? tr("Unknown")
+                                        : song.effective_album()) +
       ".jpg";
 
   QString save_filename = QFileDialog::getSaveFileName(

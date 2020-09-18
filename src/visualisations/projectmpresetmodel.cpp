@@ -15,8 +15,9 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "config.h"
 #include "projectmpresetmodel.h"
+
+#include "config.h"
 #include "projectmvisualisation.h"
 
 #ifdef USE_SYSTEM_PROJECTM
@@ -25,8 +26,8 @@
 #include "projectM.hpp"
 #endif
 
-#include <QtDebug>
 #include <QDir>
+#include <QtDebug>
 
 ProjectMPresetModel::ProjectMPresetModel(ProjectMVisualisation* vis,
                                          QObject* parent)

@@ -15,18 +15,18 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "queuemanager.h"
+
+#include <QKeySequence>
+#include <QShortcut>
+#include <algorithm>
+
 #include "playlist.h"
 #include "playlistdelegates.h"
 #include "playlistmanager.h"
 #include "queue.h"
-#include "queuemanager.h"
-#include "ui_queuemanager.h"
 #include "ui/iconloader.h"
-
-#include <algorithm>
-
-#include <QKeySequence>
-#include <QShortcut>
+#include "ui_queuemanager.h"
 
 QueueManager::QueueManager(QWidget* parent)
     : QDialog(parent),

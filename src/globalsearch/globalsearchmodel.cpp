@@ -15,12 +15,13 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "globalsearch.h"
 #include "globalsearchmodel.h"
-#include "core/mimedata.h"
-#include "ui/iconloader.h"
 
 #include <QSortFilterProxyModel>
+
+#include "core/mimedata.h"
+#include "globalsearch.h"
+#include "ui/iconloader.h"
 
 GlobalSearchModel::GlobalSearchModel(GlobalSearch* engine, QObject* parent)
     : QStandardItemModel(parent),
@@ -34,10 +35,10 @@ GlobalSearchModel::GlobalSearchModel(GlobalSearch* engine, QObject* parent)
   group_by_[2] = LibraryModel::GroupBy_None;
 
   QIcon nocover = IconLoader::Load("nocover", IconLoader::Other);
-  no_cover_icon_ = nocover.pixmap(nocover.availableSizes().last()).scaled(
-      LibraryModel::kPrettyCoverSize, 
-      LibraryModel::kPrettyCoverSize,
-      Qt::KeepAspectRatio, Qt::SmoothTransformation);
+  no_cover_icon_ = nocover.pixmap(nocover.availableSizes().last())
+                       .scaled(LibraryModel::kPrettyCoverSize,
+                               LibraryModel::kPrettyCoverSize,
+                               Qt::KeepAspectRatio, Qt::SmoothTransformation);
 }
 
 void GlobalSearchModel::AddResults(const SearchProvider::ResultList& results) {
@@ -305,7 +306,7 @@ void GatherResults(const QStandardItem* parent,
     GatherResults(parent->child(i), results);
   }
 }
-}
+}  // namespace
 
 void GlobalSearchModel::SetGroupBy(const LibraryModel::Grouping& grouping,
                                    bool regroup_now) {

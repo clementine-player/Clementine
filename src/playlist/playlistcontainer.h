@@ -18,8 +18,8 @@
 #ifndef PLAYLISTCONTAINER_H
 #define PLAYLISTCONTAINER_H
 
-#include <QWidget>
 #include <QSettings>
+#include <QWidget>
 
 class Ui_PlaylistContainer;
 
@@ -52,7 +52,7 @@ class PlaylistContainer : public QWidget {
 
   bool eventFilter(QObject* objectWatched, QEvent* event);
 
-signals:
+ signals:
   void TabChanged(int id);
   void Rename(int id, const QString& new_name);
 

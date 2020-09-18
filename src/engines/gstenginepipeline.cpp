@@ -15,25 +15,23 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "config.h"
-
-#include <limits>
+#include "gstenginepipeline.h"
 
 #include <QCoreApplication>
 #include <QDir>
 #include <QPair>
 #include <QRegExp>
+#include <limits>
 
 #include "bufferconsumer.h"
 #include "config.h"
-#include "gstelementdeleter.h"
-#include "gstengine.h"
-#include "gstenginepipeline.h"
 #include "core/concurrentrun.h"
 #include "core/logging.h"
 #include "core/mac_startup.h"
 #include "core/signalchecker.h"
 #include "core/utilities.h"
+#include "gstelementdeleter.h"
+#include "gstengine.h"
 #ifdef HAVE_AUDIOCD
 #include "devices/cddadevice.h"
 #endif
@@ -669,7 +667,7 @@ void GstEnginePipeline::StreamStatusMessageReceived(GstMessage* msg) {
 }
 
 void GstEnginePipeline::TaskEnterCallback(GstTask*, GThread*, gpointer) {
-// Bump the priority of the thread only on OS X
+  // Bump the priority of the thread only on OS X
 
 #ifdef Q_OS_DARWIN
   sched_param param;
@@ -743,7 +741,7 @@ QPair<QString, QString> ParseAkamaiTag(const QString& tag) {
 }
 
 bool IsAkamaiTag(const QString& tag) { return tag.contains("- text=\""); }
-}
+}  // namespace
 
 void GstEnginePipeline::TagMessageReceived(GstMessage* msg) {
   GstTagList* taglist = nullptr;
@@ -867,9 +865,10 @@ void GstEnginePipeline::NewPadCallback(GstElement*, GstPad* pad,
 
   // Add a probe to the pad so we can update last_decodebin_segment_.
   gst_pad_add_probe(
-      pad, static_cast<GstPadProbeType>(GST_PAD_PROBE_TYPE_BUFFER |
-                                        GST_PAD_PROBE_TYPE_EVENT_DOWNSTREAM |
-                                        GST_PAD_PROBE_TYPE_EVENT_FLUSH),
+      pad,
+      static_cast<GstPadProbeType>(GST_PAD_PROBE_TYPE_BUFFER |
+                                   GST_PAD_PROBE_TYPE_EVENT_DOWNSTREAM |
+                                   GST_PAD_PROBE_TYPE_EVENT_FLUSH),
       DecodebinProbe, instance, nullptr);
 
   instance->pipeline_is_connected_ = true;

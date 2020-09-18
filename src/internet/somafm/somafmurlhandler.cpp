@@ -25,12 +25,12 @@
 #include <QSettings>
 #include <QTemporaryFile>
 
-#include "internet/core/internetmodel.h"
-#include "somafmservice.h"
 #include "core/application.h"
 #include "core/logging.h"
 #include "core/taskmanager.h"
+#include "internet/core/internetmodel.h"
 #include "playlistparsers/playlistparser.h"
+#include "somafmservice.h"
 
 SomaFMUrlHandler::SomaFMUrlHandler(Application* app, SomaFMServiceBase* service,
                                    QObject* parent)

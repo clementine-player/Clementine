@@ -48,13 +48,10 @@ bool GlobalShortcutGrabber::HandleMacEvent(NSEvent* event) {
 }
 
 void GlobalShortcutGrabber::SetupMacEventHandler() {
-  id monitor =
-      [NSEvent addLocalMonitorForEventsMatchingMask:NSKeyDownMask
-                                            handler:^(NSEvent* event) {
-                                                return HandleMacEvent(event)
-                                                           ? event
-                                                           : nil;
-                                            }];
+  id monitor = [NSEvent addLocalMonitorForEventsMatchingMask:NSKeyDownMask
+                                                     handler:^(NSEvent* event) {
+                                                       return HandleMacEvent(event) ? event : nil;
+                                                     }];
   wrapper_ = new MacMonitorWrapper(monitor);
 }
 

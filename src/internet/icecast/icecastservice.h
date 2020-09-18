@@ -21,12 +21,11 @@
 #ifndef INTERNET_ICECAST_ICECASTSERVICE_H_
 #define INTERNET_ICECAST_ICECASTSERVICE_H_
 
-#include "internet/core/internetservice.h"
-
-#include <memory>
 #include <QXmlStreamReader>
+#include <memory>
 
 #include "icecastbackend.h"
+#include "internet/core/internetservice.h"
 
 class IcecastFilterWidget;
 class IcecastModel;

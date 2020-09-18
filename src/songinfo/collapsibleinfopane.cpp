@@ -15,10 +15,11 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "collapsibleinfoheader.h"
 #include "collapsibleinfopane.h"
 
 #include <QVBoxLayout>
+
+#include "collapsibleinfoheader.h"
 
 CollapsibleInfoPane::CollapsibleInfoPane(const Data& data, QWidget* parent)
     : QWidget(parent), data_(data), header_(new CollapsibleInfoHeader(this)) {

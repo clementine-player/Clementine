@@ -2,6 +2,7 @@
 #define PLAYLISTLISTMODEL_H
 
 #include <QStandardItemModel>
+
 #include "core/song.h"
 class PlaylistListModel : public QStandardItemModel {
   Q_OBJECT
@@ -48,7 +49,7 @@ class PlaylistListModel : public QStandardItemModel {
   // QStandardItemModel
   bool setData(const QModelIndex& index, const QVariant& value, int role);
 
-signals:
+ signals:
   void PlaylistPathChanged(int id, const QString& new_path);
   void PlaylistRenamed(int id, const QString& new_name);
 

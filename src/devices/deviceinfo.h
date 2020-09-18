@@ -18,12 +18,11 @@
 #ifndef DEVICEINFO_H
 #define DEVICEINFO_H
 
-#include <memory>
-
 #include <QIcon>
 #include <QList>
 #include <QString>
 #include <QVariant>
+#include <memory>
 
 #include "core/musicstorage.h"
 #include "core/simpletreeitem.h"

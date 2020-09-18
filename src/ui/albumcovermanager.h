@@ -18,15 +18,14 @@
 #ifndef ALBUMCOVERMANAGER_H
 #define ALBUMCOVERMANAGER_H
 
-#include <QMainWindow>
 #include <QIcon>
+#include <QMainWindow>
 #include <QModelIndex>
-
-#include "gtest/gtest_prod.h"
 
 #include "core/song.h"
 #include "covers/albumcoverloaderoptions.h"
 #include "covers/coversearchstatistics.h"
+#include "gtest/gtest_prod.h"
 
 class AlbumCoverChoiceController;
 class AlbumCoverExport;
@@ -67,7 +66,7 @@ class AlbumCoverManager : public QMainWindow {
   SongList GetSongsInAlbums(const QModelIndexList& indexes) const;
   SongMimeData* GetMimeDataForAlbums(const QModelIndexList& indexes) const;
 
-signals:
+ signals:
   void AddToPlaylist(QMimeData* data);
 
  protected:

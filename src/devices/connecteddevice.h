@@ -18,11 +18,10 @@
 #ifndef CONNECTEDDEVICE_H
 #define CONNECTEDDEVICE_H
 
-#include <memory>
-
 #include <QObject>
 #include <QStringList>
 #include <QUrl>
+#include <memory>
 
 #include "core/musicstorage.h"
 #include "core/song.h"
@@ -65,7 +64,7 @@ class ConnectedDevice : public QObject,
 
   virtual void Eject();
 
-signals:
+ signals:
   void TaskStarted(int id);
   void SongCountUpdated(int count);
   void ConnectFinished(const QString& id, bool success);

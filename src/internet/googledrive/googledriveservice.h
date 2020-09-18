@@ -28,7 +28,7 @@ class ConnectResponse;
 class File;
 class ListFilesResponse;
 class ListChangesResponse;
-}
+}  // namespace google_drive
 
 class GoogleDriveService : public CloudFileService {
   Q_OBJECT

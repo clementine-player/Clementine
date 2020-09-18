@@ -21,12 +21,12 @@
 #ifndef CORE_TAGREADERCLIENT_H_
 #define CORE_TAGREADERCLIENT_H_
 
-#include "song.h"
-#include "tagreadermessages.pb.h"
+#include <QStringList>
+
 #include "core/messagehandler.h"
 #include "core/workerpool.h"
-
-#include <QStringList>
+#include "song.h"
+#include "tagreadermessages.pb.h"
 
 class QLocalServer;
 class QProcess;

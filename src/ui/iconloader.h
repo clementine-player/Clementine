@@ -23,12 +23,7 @@
 
 class IconLoader {
  public:
-  enum IconType {
-    Base = 0,
-    Provider = 1,
-    Lastfm = 2,
-    Other = 3
-  };
+  enum IconType { Base = 0, Provider = 1, Lastfm = 2, Other = 3 };
 
   static void Init();
   static QIcon Load(const QString& name, const IconType& icontype);

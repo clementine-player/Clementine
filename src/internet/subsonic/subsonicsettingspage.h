@@ -20,8 +20,8 @@
 #ifndef INTERNET_SUBSONIC_SUBSONICSETTINGSPAGE_H_
 #define INTERNET_SUBSONIC_SUBSONICSETTINGSPAGE_H_
 
-#include "ui/settingspage.h"
 #include "subsonicservice.h"
+#include "ui/settingspage.h"
 
 class Ui_SubsonicSettingsPage;
 

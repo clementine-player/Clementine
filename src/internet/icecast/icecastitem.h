@@ -20,8 +20,8 @@
 #ifndef INTERNET_ICECAST_ICECASTITEM_H_
 #define INTERNET_ICECAST_ICECASTITEM_H_
 
-#include "icecastbackend.h"
 #include "core/simpletreeitem.h"
+#include "icecastbackend.h"
 
 class IcecastItem : public SimpleTreeItem<IcecastItem> {
  public:
@@ -33,9 +33,9 @@ class IcecastItem : public SimpleTreeItem<IcecastItem> {
   };
 
   explicit IcecastItem(SimpleTreeModel<IcecastItem>* model)
-    : SimpleTreeItem<IcecastItem>(Type_Root, model) {}
+      : SimpleTreeItem<IcecastItem>(Type_Root, model) {}
   explicit IcecastItem(Type type, IcecastItem* parent = nullptr)
-    : SimpleTreeItem<IcecastItem>(type, parent) {}
+      : SimpleTreeItem<IcecastItem>(type, parent) {}
 
   IcecastBackend::Station station;
 };

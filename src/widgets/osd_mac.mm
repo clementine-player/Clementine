@@ -38,10 +38,9 @@ void SendNotificationCenterMessage(NSString* title, NSString* subtitle) {
   [notification setSubtitle:subtitle];
 
   if ([[NSProcessInfo processInfo]
-          isOperatingSystemAtLeastVersion:(NSOperatingSystemVersion){
-                                              .majorVersion = 10,
-                                              .minorVersion = 9,
-                                              .patchVersion = 0}]) {
+          isOperatingSystemAtLeastVersion:(NSOperatingSystemVersion){.majorVersion = 10,
+                                                                     .minorVersion = 9,
+                                                                     .patchVersion = 0}]) {
     [notification_center removeAllDeliveredNotifications];
   }
   [notification_center deliverNotification:notification];
@@ -55,8 +54,8 @@ bool OSD::SupportsNativeNotifications() { return true; }
 
 bool OSD::SupportsTrayPopups() { return false; }
 
-void OSD::ShowMessageNative(const QString& summary, const QString& message,
-                            const QString& icon, const QImage& image) {
+void OSD::ShowMessageNative(const QString& summary, const QString& message, const QString& icon,
+                            const QImage& image) {
   Q_UNUSED(icon);
   scoped_nsobject<NSString> mac_message(
       [[NSString alloc] initWithUTF8String:message.toUtf8().constData()]);

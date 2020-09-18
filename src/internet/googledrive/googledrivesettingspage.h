@@ -20,10 +20,10 @@
 #ifndef INTERNET_GOOGLEDRIVE_GOOGLEDRIVESETTINGSPAGE_H_
 #define INTERNET_GOOGLEDRIVE_GOOGLEDRIVESETTINGSPAGE_H_
 
-#include "ui/settingspage.h"
-
 #include <QModelIndex>
 #include <QWidget>
+
+#include "ui/settingspage.h"
 
 class GoogleDriveService;
 class Ui_GoogleDriveSettingsPage;

@@ -22,11 +22,11 @@
 #ifndef INTERNET_SPOTIFY_SPOTIFYSERVER_H_
 #define INTERNET_SPOTIFY_SPOTIFYSERVER_H_
 
-#include "spotifymessages.pb.h"
-#include "core/messagehandler.h"
-
 #include <QImage>
 #include <QObject>
+
+#include "core/messagehandler.h"
+#include "spotifymessages.pb.h"
 
 class QTcpServer;
 class QTcpSocket;
@@ -67,7 +67,7 @@ class SpotifyServer : public AbstractMessageHandler<pb::spotify::Message> {
   void StartPlayback(const QString& uri, quint16 port);
   void Seek(qint64 offset_nsec);
 
-signals:
+ signals:
   void LoginCompleted(bool success, const QString& error,
                       pb::spotify::LoginResponse_Error error_code);
   void PlaylistsUpdated(const pb::spotify::Playlists& playlists);

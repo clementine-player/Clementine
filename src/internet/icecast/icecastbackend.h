@@ -20,10 +20,10 @@
 #ifndef INTERNET_ICECAST_ICECASTBACKEND_H_
 #define INTERNET_ICECAST_ICECASTBACKEND_H_
 
-#include "core/song.h"
-
 #include <QObject>
 #include <QUrl>
+
+#include "core/song.h"
 
 class Database;
 

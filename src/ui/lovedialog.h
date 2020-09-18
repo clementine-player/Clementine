@@ -39,7 +39,7 @@ class LoveDialog : public QDialog {
 
   void SetSong(const Song&);
 
-signals:
+ signals:
   void Error(const QString& message);
 
  protected:

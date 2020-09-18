@@ -19,6 +19,7 @@
 #define CORE_THREAD_H_
 
 #include <QThread>
+
 #include "core/utilities.h"
 
 // Improve QThread by adding a SetIoPriority function

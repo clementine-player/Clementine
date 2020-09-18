@@ -21,18 +21,19 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "config.h"
 #include "commandlineoptions.h"
-#include "version.h"
-#include "core/logging.h"
 
-#include <cstdlib>
 #include <getopt.h>
-#include <iostream>
 
 #include <QBuffer>
 #include <QCoreApplication>
 #include <QFileInfo>
+#include <cstdlib>
+#include <iostream>
+
+#include "config.h"
+#include "core/logging.h"
+#include "version.h"
 
 const char* CommandlineOptions::kHelpText =
     "%1: clementine [%2] [%3]\n"
@@ -143,7 +144,8 @@ bool CommandlineOptions::Parse() {
   // Parse the arguments
   bool ok = false;
   forever {
-    int c = getopt_long(argc_, argv_, "xhptusqrfv:c:alk:oyg:", kOptions, nullptr);
+    int c =
+        getopt_long(argc_, argv_, "xhptusqrfv:c:alk:oyg:", kOptions, nullptr);
 
     // End of the options
     if (c == -1) break;
@@ -182,7 +184,7 @@ bool CommandlineOptions::Parse() {
                      tr("Equivalent to --log-levels *:1"),
                      tr("Equivalent to --log-levels *:3"),
                      tr("Comma separated list of class:level, level is 0-3"))
-                .arg(tr("Print out version information"), 
+                .arg(tr("Print out version information"),
                      tr("Delete the currently playing song"));
 
         std::cout << translated_help_text.toLocal8Bit().constData();
@@ -346,7 +348,7 @@ QString CommandlineOptions::tr(const char* source_text) {
 QDataStream& operator<<(QDataStream& s, const CommandlineOptions& a) {
   s << qint32(a.player_action_) << qint32(a.url_list_action_) << a.set_volume_
     << a.volume_modifier_ << a.seek_to_ << a.seek_by_ << a.play_track_at_
-    << a.show_osd_ << a.urls_ << a.log_levels_ << a.toggle_pretty_osd_ 
+    << a.show_osd_ << a.urls_ << a.log_levels_ << a.toggle_pretty_osd_
     << a.delete_current_track_;
 
   return s;

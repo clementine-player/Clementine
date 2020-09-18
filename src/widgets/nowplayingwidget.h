@@ -18,9 +18,8 @@
 #ifndef NOWPLAYINGWIDGET_H
 #define NOWPLAYINGWIDGET_H
 
-#include <memory>
-
 #include <QWidget>
+#include <memory>
 
 #include "core/song.h"
 #include "covers/albumcoverloaderoptions.h"
@@ -67,7 +66,7 @@ class NowPlayingWidget : public QWidget {
 
   QSize sizeHint() const;
 
-signals:
+ signals:
   void ShowAboveStatusBarChanged(bool above);
 
  public slots:

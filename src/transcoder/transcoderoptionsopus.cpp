@@ -16,9 +16,10 @@
 */
 
 #include "transcoderoptionsopus.h"
-#include "ui_transcoderoptionsopus.h"
 
 #include <QSettings>
+
+#include "ui_transcoderoptionsopus.h"
 
 // TODO: Add more options than only bitrate as soon as gst doesn't crash
 // anymore while using the cbr parmameter (like cbr=false)

@@ -22,8 +22,8 @@
 
 #include <QXmlStreamReader>
 
-#include "internet/core/internetservice.h"
 #include "core/cachedlist.h"
+#include "internet/core/internetservice.h"
 
 class SomaFMUrlHandler;
 

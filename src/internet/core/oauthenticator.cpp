@@ -21,13 +21,13 @@
 #include "internet/core/oauthenticator.h"
 
 #include <QDesktopServices>
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QJsonParseError>
 #include <QSslError>
 #include <QStringList>
 #include <QUrl>
 #include <QUrlQuery>
-#include <QJsonParseError>
-#include <QJsonDocument>
-#include <QJsonObject>
 
 #include "core/closure.h"
 #include "core/logging.h"
@@ -87,7 +87,8 @@ void OAuthenticator::StartAuthorisation(const QString& oauth_endpoint,
 void OAuthenticator::RedirectArrived(LocalRedirectServer* server, QUrl url) {
   server->deleteLater();
   QUrl request_url = server->request_url();
-  RequestAccessToken(QUrlQuery(request_url).queryItemValue("code").toUtf8(), url);
+  RequestAccessToken(QUrlQuery(request_url).queryItemValue("code").toUtf8(),
+                     url);
 }
 
 QByteArray OAuthenticator::ParseHttpRequest(const QByteArray& request) const {
@@ -138,7 +139,8 @@ void OAuthenticator::FetchAccessTokenFinished(QNetworkReply* reply) {
   }
 
   QJsonParseError error;
-  QJsonDocument json_document = QJsonDocument::fromJson(reply->readAll(), &error);
+  QJsonDocument json_document =
+      QJsonDocument::fromJson(reply->readAll(), &error);
 
   if (error.error != QJsonParseError::NoError) {
     qLog(Error) << "Failed to parse oauth reply";

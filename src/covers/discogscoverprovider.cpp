@@ -16,6 +16,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "discogscoverprovider.h"
+
 #include <QByteArray>
 #include <QJsonDocument>
 #include <QJsonObject>
@@ -27,8 +29,6 @@
 #include <QStringList>
 #include <QUrlQuery>
 #include <QVariant>
-
-#include "discogscoverprovider.h"
 
 #include "core/closure.h"
 #include "core/logging.h"

@@ -16,9 +16,6 @@
 */
 
 #include "ui/edittagdialog.h"
-#include "ui_edittagdialog.h"
-
-#include <limits>
 
 #include <QDateTime>
 #include <QDir>
@@ -30,6 +27,7 @@
 #include <QShortcut>
 #include <QtConcurrentRun>
 #include <QtDebug>
+#include <limits>
 
 #include "core/application.h"
 #include "core/logging.h"
@@ -37,14 +35,15 @@
 #include "core/utilities.h"
 #include "covers/albumcoverloader.h"
 #include "covers/coverproviders.h"
-#include "library/librarybackend.h"
 #include "library/library.h"
+#include "library/librarybackend.h"
 #include "playlist/playlistdelegates.h"
 #include "ui/albumcoverchoicecontroller.h"
 #include "ui/albumcovermanager.h"
 #include "ui/coverfromurldialog.h"
 #include "ui/iconloader.h"
 #include "ui/trackselectiondialog.h"
+#include "ui_edittagdialog.h"
 
 const char* EditTagDialog::kHintText =
     QT_TR_NOOP("(different across multiple songs)");
@@ -62,10 +61,9 @@ EditTagDialog::EditTagDialog(Application* app, QWidget* parent)
       cover_art_is_set_(false),
       results_dialog_(new TrackSelectionDialog(this)) {
   QIcon nocover = IconLoader::Load("nocover", IconLoader::Other);
-  cover_options_.default_output_image_ =
-      AlbumCoverLoader::ScaleAndPad(cover_options_,
-          nocover.pixmap(nocover.availableSizes().last())
-                 .toImage());
+  cover_options_.default_output_image_ = AlbumCoverLoader::ScaleAndPad(
+      cover_options_,
+      nocover.pixmap(nocover.availableSizes().last()).toImage());
 
   connect(app_->album_cover_loader(),
           SIGNAL(ImageLoaded(quint64, QImage, QImage)),
@@ -86,8 +84,8 @@ EditTagDialog::EditTagDialog(Application* app, QWidget* parent)
   ui_->splitter->setSizes(QList<int>() << 200 << width() - 200);
   ui_->loading_label->hide();
 
-  ui_->fetch_tag->setIcon(IconLoader::Load("musicbrainz", 
-                          IconLoader::Provider));
+  ui_->fetch_tag->setIcon(
+      IconLoader::Load("musicbrainz", IconLoader::Provider));
 
   // An editable field is one that has a label as a buddy.  The label is
   // important because it gets turned bold when the field is changed.
@@ -184,16 +182,19 @@ EditTagDialog::EditTagDialog(Application* app, QWidget* parent)
   new QShortcut(QKeySequence::MoveToNextPage, next_button_, SLOT(click()));
 
   // Show the shortcuts as tooltips
-  previous_button_->setToolTip(QString("%1 (%2 / %3)").arg(
-      previous_button_->text(),
-      QKeySequence(QKeySequence::Back).toString(QKeySequence::NativeText),
-      QKeySequence(QKeySequence::MoveToPreviousPage)
-          .toString(QKeySequence::NativeText)));
-  next_button_->setToolTip(QString("%1 (%2 / %3)").arg(
-      next_button_->text(),
-      QKeySequence(QKeySequence::Forward).toString(QKeySequence::NativeText),
-      QKeySequence(QKeySequence::MoveToNextPage)
-          .toString(QKeySequence::NativeText)));
+  previous_button_->setToolTip(
+      QString("%1 (%2 / %3)")
+          .arg(previous_button_->text(),
+               QKeySequence(QKeySequence::Back)
+                   .toString(QKeySequence::NativeText),
+               QKeySequence(QKeySequence::MoveToPreviousPage)
+                   .toString(QKeySequence::NativeText)));
+  next_button_->setToolTip(QString("%1 (%2 / %3)")
+                               .arg(next_button_->text(),
+                                    QKeySequence(QKeySequence::Forward)
+                                        .toString(QKeySequence::NativeText),
+                                    QKeySequence(QKeySequence::MoveToNextPage)
+                                        .toString(QKeySequence::NativeText)));
 
   new TagCompleter(app_->library_backend(), Playlist::Column_Artist,
                    ui_->artist);
@@ -403,7 +404,8 @@ void EditTagDialog::UpdateFieldValue(const FieldData& field,
   UpdateModifiedField(field, sel);
 }
 
-void EditTagDialog::UpdateModifiedField(const FieldData& field, const QModelIndexList& sel) {
+void EditTagDialog::UpdateModifiedField(const FieldData& field,
+                                        const QModelIndexList& sel) {
   const bool modified = IsValueModified(sel, field.id_);
 
   // Update the boldness
@@ -445,7 +447,7 @@ void EditTagDialog::SelectionChanged() {
   }
 }
 
-void EditTagDialog::UpdateUI(const QModelIndexList& sel){
+void EditTagDialog::UpdateUI(const QModelIndexList& sel) {
   ignore_edits_ = true;
   for (const FieldData& field : fields_) {
     InitFieldValue(field, sel);
@@ -479,11 +481,14 @@ void EditTagDialog::UpdateSummaryTab(const Song& song) {
     summary += tr("Cover art manually unset").toHtmlEscaped();
     art_is_set = false;
   } else if (!song.art_manual().isEmpty()) {
-    summary += tr("Cover art set from %1").arg(song.art_manual()).toHtmlEscaped();
+    summary +=
+        tr("Cover art set from %1").arg(song.art_manual()).toHtmlEscaped();
   } else if (song.has_embedded_cover()) {
     summary += tr("Cover art from embedded image");
   } else if (!song.art_automatic().isEmpty()) {
-    summary += tr("Cover art loaded automatically from %1").arg(song.art_automatic()).toHtmlEscaped();
+    summary += tr("Cover art loaded automatically from %1")
+                   .arg(song.art_automatic())
+                   .toHtmlEscaped();
   } else {
     summary += tr("Cover art not set").toHtmlEscaped();
     art_is_set = false;
@@ -525,11 +530,11 @@ void EditTagDialog::UpdateStatisticsTab(const Song& song) {
   ui_->score->setText(QString::number(qMax(0, song.score())));
   ui_->rating->set_rating(song.rating());
 
-  ui_->lastplayed->setText(
-      song.lastplayed() <= 0
-          ? tr("Never")
-          : QDateTime::fromTime_t(song.lastplayed()).toString(
-                QLocale::system().dateTimeFormat(QLocale::LongFormat)));
+  ui_->lastplayed->setText(song.lastplayed() <= 0
+                               ? tr("Never")
+                               : QDateTime::fromTime_t(song.lastplayed())
+                                     .toString(QLocale::system().dateTimeFormat(
+                                         QLocale::LongFormat)));
 }
 
 void EditTagDialog::ArtLoaded(quint64 id, const QImage& scaled,

@@ -16,9 +16,10 @@
 */
 
 #include "transcoderoptionsaac.h"
-#include "ui_transcoderoptionsaac.h"
 
 #include <QSettings>
+
+#include "ui_transcoderoptionsaac.h"
 
 const char* TranscoderOptionsAAC::kSettingsGroup = "Transcoder/faac";
 

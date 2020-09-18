@@ -18,9 +18,9 @@
 #ifndef MOODBARPROXYSTYLE_H
 #define MOODBARPROXYSTYLE_H
 
-#include "moodbarrenderer.h"
-
 #include <QProxyStyle>
+
+#include "moodbarrenderer.h"
 
 class Application;
 

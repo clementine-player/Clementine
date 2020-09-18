@@ -177,7 +177,7 @@ class Mpris2 : public QObject {
   QList<MprisPlaylist> GetPlaylists(quint32 index, quint32 max_count,
                                     const QString& order, bool reverse_order);
 
-signals:
+ signals:
   // Player
   void Seeked(qlonglong position);
 

@@ -28,8 +28,8 @@
 #include <QNetworkReply>
 #include <QSortFilterProxyModel>
 #include <QSslConfiguration>
-#include <QXmlStreamReader>
 #include <QUrlQuery>
+#include <QXmlStreamReader>
 
 #include "core/application.h"
 #include "core/closure.h"
@@ -43,8 +43,8 @@
 #include "globalsearch/globalsearch.h"
 #include "globalsearch/librarysearchprovider.h"
 #include "internet/core/internetmodel.h"
-#include "internet/subsonic/subsonicurlhandler.h"
 #include "internet/subsonic/subsonicdynamicplaylist.h"
+#include "internet/subsonic/subsonicurlhandler.h"
 #include "library/librarybackend.h"
 #include "library/libraryfilterwidget.h"
 #include "smartplaylists/generator.h"
@@ -95,37 +95,32 @@ SubsonicService::SubsonicService(Application* app, InternetModel* parent)
   library_model_->set_show_various_artists(false);
   library_model_->set_show_smart_playlists(true);
   library_model_->set_default_smart_playlists(
-    LibraryModel::DefaultGenerators()
-    << (LibraryModel::GeneratorList()
-        << GeneratorPtr(new SubsonicDynamicPlaylist(
-                          tr("Newest Albums"),
-                          SubsonicDynamicPlaylist::QueryType_Album,
-                          SubsonicDynamicPlaylist::QueryStat_Newest))
-        << GeneratorPtr(new SubsonicDynamicPlaylist(
-                          tr("Random Albums"),
-                          SubsonicDynamicPlaylist::QueryType_Album,
-                          SubsonicDynamicPlaylist::QueryStat_Random))
-        << GeneratorPtr(new SubsonicDynamicPlaylist(
-                          tr("Frequently Played Albums"),
-                          SubsonicDynamicPlaylist::QueryType_Album,
-                          SubsonicDynamicPlaylist::QueryStat_Frequent))
-        << GeneratorPtr(new SubsonicDynamicPlaylist(
-                          tr("Top Rated Albums"),
-                          SubsonicDynamicPlaylist::QueryType_Album,
-                          SubsonicDynamicPlaylist::QueryStat_Highest))
-        << GeneratorPtr(new SubsonicDynamicPlaylist(
-                          tr("Recently Played Albums"),
-                          SubsonicDynamicPlaylist::QueryType_Album,
-                          SubsonicDynamicPlaylist::QueryStat_Recent))
-        << GeneratorPtr(new SubsonicDynamicPlaylist(
-                          tr("Starred Albums"),
-                          SubsonicDynamicPlaylist::QueryType_Album,
-                          SubsonicDynamicPlaylist::QueryStat_Starred))
-        << GeneratorPtr(new SubsonicDynamicPlaylist(
-                          tr("Random Songs"),
-                          SubsonicDynamicPlaylist::QueryType_Song,
-                          SubsonicDynamicPlaylist::QueryStat_Random))
-      ));
+      LibraryModel::DefaultGenerators()
+      << (LibraryModel::GeneratorList()
+          << GeneratorPtr(new SubsonicDynamicPlaylist(
+                 tr("Newest Albums"), SubsonicDynamicPlaylist::QueryType_Album,
+                 SubsonicDynamicPlaylist::QueryStat_Newest))
+          << GeneratorPtr(new SubsonicDynamicPlaylist(
+                 tr("Random Albums"), SubsonicDynamicPlaylist::QueryType_Album,
+                 SubsonicDynamicPlaylist::QueryStat_Random))
+          << GeneratorPtr(new SubsonicDynamicPlaylist(
+                 tr("Frequently Played Albums"),
+                 SubsonicDynamicPlaylist::QueryType_Album,
+                 SubsonicDynamicPlaylist::QueryStat_Frequent))
+          << GeneratorPtr(new SubsonicDynamicPlaylist(
+                 tr("Top Rated Albums"),
+                 SubsonicDynamicPlaylist::QueryType_Album,
+                 SubsonicDynamicPlaylist::QueryStat_Highest))
+          << GeneratorPtr(new SubsonicDynamicPlaylist(
+                 tr("Recently Played Albums"),
+                 SubsonicDynamicPlaylist::QueryType_Album,
+                 SubsonicDynamicPlaylist::QueryStat_Recent))
+          << GeneratorPtr(new SubsonicDynamicPlaylist(
+                 tr("Starred Albums"), SubsonicDynamicPlaylist::QueryType_Album,
+                 SubsonicDynamicPlaylist::QueryStat_Starred))
+          << GeneratorPtr(new SubsonicDynamicPlaylist(
+                 tr("Random Songs"), SubsonicDynamicPlaylist::QueryType_Song,
+                 SubsonicDynamicPlaylist::QueryStat_Random))));
 
   library_filter_ = new LibraryFilterWidget(0);
   library_filter_->SetSettingsGroup(kSettingsGroup);
@@ -149,8 +144,8 @@ SubsonicService::SubsonicService(Application* app, InternetModel* parent)
                            tr("Refresh catalogue"), this,
                            SLOT(ReloadDatabase()));
   QAction* config_action = context_menu_->addAction(
-      IconLoader::Load("configure", IconLoader::Base), tr("Configure Subsonic..."),
-      this, SLOT(ShowConfig()));
+      IconLoader::Load("configure", IconLoader::Base),
+      tr("Configure Subsonic..."), this, SLOT(ShowConfig()));
   context_menu_->addSeparator();
   context_menu_->addMenu(library_filter_->menu());
 

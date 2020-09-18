@@ -16,9 +16,10 @@
 */
 
 #include "transcoderoptionsspeex.h"
-#include "ui_transcoderoptionsspeex.h"
 
 #include <QSettings>
+
+#include "ui_transcoderoptionsspeex.h"
 
 const char* TranscoderOptionsSpeex::kSettingsGroup = "Transcoder/speexenc";
 

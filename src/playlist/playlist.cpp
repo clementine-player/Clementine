@@ -17,11 +17,6 @@
 
 #include "playlist.h"
 
-#include <algorithm>
-#include <functional>
-#include <memory>
-#include <unordered_map>
-
 #include <QApplication>
 #include <QBuffer>
 #include <QCoreApplication>
@@ -34,6 +29,10 @@
 #include <QUndoStack>
 #include <QtConcurrentRun>
 #include <QtDebug>
+#include <algorithm>
+#include <functional>
+#include <memory>
+#include <unordered_map>
 
 #include "core/application.h"
 #include "core/closure.h"
@@ -67,10 +66,10 @@
 #include "songmimedata.h"
 #include "songplaylistitem.h"
 
-using std::placeholders::_1;
-using std::placeholders::_2;
 using std::shared_ptr;
 using std::unordered_map;
+using std::placeholders::_1;
+using std::placeholders::_2;
 
 using smart_playlists::Generator;
 using smart_playlists::GeneratorInserter;
@@ -450,9 +449,10 @@ void Playlist::SongSaveComplete(TagReaderReply* reply,
       NewClosure(future, this, SLOT(ItemReloadComplete(QPersistentModelIndex)),
                  index);
     } else {
-      emit Error(tr("An error occurred writing metadata to '%1'").arg(
-          QString::fromStdString(
-              reply->request_message().save_file_request().filename())));
+      emit Error(
+          tr("An error occurred writing metadata to '%1'")
+              .arg(QString::fromStdString(
+                  reply->request_message().save_file_request().filename())));
     }
   }
   reply->deleteLater();
@@ -525,7 +525,8 @@ int Playlist::NextVirtualIndex(int i, bool ignore_repeat_track) const {
     }
     Song this_song = item_at(virtual_items_[j])->Metadata();
     if (((last_song.is_compilation() && this_song.is_compilation()) ||
-         last_song.effective_albumartist() == this_song.effective_albumartist()) &&
+         last_song.effective_albumartist() ==
+             this_song.effective_albumartist()) &&
         last_song.album() == this_song.album() &&
         FilterContainsVirtualIndex(j)) {
       return j;  // Found one
@@ -1388,7 +1389,8 @@ QString Playlist::column_name(Column column) {
     case Column_Year:
       return tr("Year");
     case Column_OriginalYear:
-      return tr("Year - original"); //: Done like this so sorts beside "Year" when editing smart playlists
+      return tr("Year - original");  //: Done like this so sorts beside "Year"
+                                     // when editing smart playlists
     case Column_Genre:
       return tr("Genre");
     case Column_AlbumArtist:
@@ -2048,7 +2050,7 @@ bool AlbumShuffleComparator(const QMap<QString, int>& album_key_positions,
   if (left_pos == right_pos) return left < right;
   return left_pos < right_pos;
 }
-}
+}  // namespace
 
 void Playlist::ReshuffleIndices() {
   if (!playlist_sequence_) {

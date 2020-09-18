@@ -19,8 +19,8 @@
 #define MOODBARRENDERER_H
 
 #include <QColor>
-#include <QPixmap>
 #include <QMetaType>
+#include <QPixmap>
 #include <QVector>
 
 class QPalette;

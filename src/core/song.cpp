@@ -28,8 +28,6 @@
 
 #include "song.h"
 
-#include <algorithm>
-
 #include <QCoreApplication>
 #include <QDir>
 #include <QFile>
@@ -41,6 +39,7 @@
 #include <QTime>
 #include <QVariant>
 #include <QtConcurrentRun>
+#include <algorithm>
 
 #ifdef HAVE_LIBLASTFM
 #include "internet/lastfm/fixlastfm.h"

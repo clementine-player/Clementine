@@ -21,9 +21,9 @@
 
 #include <QMessageBox>
 
+#include "core/closure.h"
 #include "podcastdiscoverymodel.h"
 #include "podcasturlloader.h"
-#include "core/closure.h"
 
 FixedOpmlPage::FixedOpmlPage(const QUrl& opml_url, const QString& title,
                              const QIcon& icon, Application* app,

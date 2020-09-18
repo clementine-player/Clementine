@@ -22,8 +22,6 @@
 #ifndef AMAROK_GSTENGINE_H
 #define AMAROK_GSTENGINE_H
 
-#include <memory>
-
 #include <gst/gst.h>
 
 #include <QFuture>
@@ -32,10 +30,11 @@
 #include <QString>
 #include <QStringList>
 #include <QTimerEvent>
+#include <memory>
 
 #include "bufferconsumer.h"
-#include "enginebase.h"
 #include "core/timeconstants.h"
+#include "enginebase.h"
 
 class QTimer;
 class QTimerEvent;

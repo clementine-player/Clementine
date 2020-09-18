@@ -114,7 +114,8 @@ void PodcastParser::ParseChannel(QXmlStreamReader* reader, Podcast* ret) const {
         if (name == "title") {
           ret->set_title(reader->readElementText());
         } else if (name == "link" && lower_namespace.isEmpty()) {
-          ret->set_link(QUrl::fromEncoded(reader->readElementText().toLatin1()));
+          ret->set_link(
+              QUrl::fromEncoded(reader->readElementText().toLatin1()));
         } else if (name == "description") {
           ret->set_description(reader->readElementText());
         } else if (name == "owner" && lower_namespace == kItunesNamespace) {
@@ -215,8 +216,11 @@ void PodcastParser::ParseItem(QXmlStreamReader* reader, Podcast* ret) const {
           if (!episode.publication_date().isValid()) {
             qLog(Error) << "Unable to parse date:" << date
                         << "Please submit it to "
-                        << "https://github.com/clementine-player/Clementine/issues/new?title="
-                         + QUrl::toPercentEncoding(QString("[podcast] Unable to parse date: %1").arg(date));
+                        << "https://github.com/clementine-player/Clementine/"
+                           "issues/new?title=" +
+                               QUrl::toPercentEncoding(
+                                   QString("[podcast] Unable to parse date: %1")
+                                       .arg(date));
           }
         } else if (name == "duration" && lower_namespace == kItunesNamespace) {
           // http://www.apple.com/itunes/podcasts/specs.html
@@ -229,15 +233,17 @@ void PodcastParser::ParseItem(QXmlStreamReader* reader, Podcast* ret) const {
           }
         } else if (name == "enclosure") {
           const QString type = reader->attributes().value("type").toString();
-          const QUrl url  = QUrl::fromEncoded(reader->attributes().value("url").toString().toLatin1());
+          const QUrl url = QUrl::fromEncoded(
+              reader->attributes().value("url").toString().toLatin1());
           if (type.startsWith("audio/") || type.startsWith("x-audio/")) {
             episode.set_url(url);
           }
-          // If the URL doesn't have a type, see if it's one of the obvious types
-          else if (type.isEmpty() && (
-                   url.path().endsWith(".mp3", Qt::CaseInsensitive) ||
-                   url.path().endsWith(".m4a", Qt::CaseInsensitive) ||
-                   url.path().endsWith(".wav", Qt::CaseInsensitive))) {
+          // If the URL doesn't have a type, see if it's one of the obvious
+          // types
+          else if (type.isEmpty() &&
+                   (url.path().endsWith(".mp3", Qt::CaseInsensitive) ||
+                    url.path().endsWith(".m4a", Qt::CaseInsensitive) ||
+                    url.path().endsWith(".wav", Qt::CaseInsensitive))) {
             episode.set_url(url);
           }
           Utilities::ConsumeCurrentElement(reader);

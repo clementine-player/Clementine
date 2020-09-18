@@ -29,7 +29,7 @@ class TrackSliderSlider : public QSlider {
  public:
   TrackSliderSlider(QWidget* parent = nullptr);
 
-signals:
+ signals:
   void SeekForward();
   void SeekBackward();
   void Previous();
@@ -39,7 +39,7 @@ signals:
   void mousePressEvent(QMouseEvent* e);
   void mouseReleaseEvent(QMouseEvent* e);
   void mouseMoveEvent(QMouseEvent* e);
-  void wheelEvent(QWheelEvent *e);
+  void wheelEvent(QWheelEvent* e);
   void enterEvent(QEvent*);
   void leaveEvent(QEvent*);
   void keyPressEvent(QKeyEvent* event);

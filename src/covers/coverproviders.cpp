@@ -19,9 +19,10 @@
 */
 
 #include "coverproviders.h"
+
 #include "config.h"
-#include "coverprovider.h"
 #include "core/logging.h"
+#include "coverprovider.h"
 
 CoverProviders::CoverProviders(QObject* parent) : QObject(parent) {}
 

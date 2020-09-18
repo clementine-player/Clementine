@@ -15,10 +15,11 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "wiimotedev/shortcuts.h"
+
 #include <QSettings>
 
 #include "wiimotedev/consts.h"
-#include "wiimotedev/shortcuts.h"
 
 const char* WiimotedevShortcuts::kActionsGroup = "WiimotedevActions";
 const char* WiimotedevShortcuts::kSettingsGroup = "WiimotedevSettings";
@@ -123,7 +124,6 @@ void WiimotedevShortcuts::DbusWiimoteGeneralButtons(uint id, qulonglong value) {
   if (wiimotedev_buttons_ == buttons) return;
 
   if (actions_.contains(buttons)) {
-
     if (wiimotedev_active_) {
       if (actions_.value(buttons, ActionNone) == WiimotedevActiveDeactive) {
         actived_ = !actived_;

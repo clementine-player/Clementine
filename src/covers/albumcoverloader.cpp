@@ -21,11 +21,11 @@
 
 #include "albumcoverloader.h"
 
-#include <QPainter>
-#include <QDir>
 #include <QCoreApplication>
-#include <QUrl>
+#include <QDir>
 #include <QNetworkReply>
+#include <QPainter>
+#include <QUrl>
 
 #include "config.h"
 #include "core/closure.h"
@@ -205,7 +205,8 @@ AlbumCoverLoader::TryLoadResult AlbumCoverLoader::TryLoadImage(
   }
 #endif
   else if (filename.isEmpty()) {
-    // Avoid "QFSFileEngine::open: No file name specified" messages if we know that the filename is empty
+    // Avoid "QFSFileEngine::open: No file name specified" messages if we know
+    // that the filename is empty
     return TryLoadResult(false, false, task.options.default_output_image_);
   }
 

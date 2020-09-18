@@ -18,10 +18,9 @@
 #ifndef MTPDEVICE_H
 #define MTPDEVICE_H
 
-#include <memory>
-
 #include <QMutex>
 #include <QWaitCondition>
+#include <memory>
 
 #include "connecteddevice.h"
 

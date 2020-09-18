@@ -18,9 +18,9 @@
 #ifndef XSPFPARSER_H
 #define XSPFPARSER_H
 
-#include "xmlparser.h"
-
 #include <QXmlStreamReader>
+
+#include "xmlparser.h"
 
 class QDomDocument;
 class QDomNode;

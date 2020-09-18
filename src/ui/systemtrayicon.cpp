@@ -15,8 +15,6 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "macsystemtrayicon.h"
-#include "qtsystemtrayicon.h"
 #include "systemtrayicon.h"
 
 #include <QApplication>
@@ -26,14 +24,14 @@
 #include <QWheelEvent>
 #include <QWidget>
 #include <QtDebug>
-
 #include <cmath>
 
+#include "macsystemtrayicon.h"
+#include "qtsystemtrayicon.h"
 #include "ui/iconloader.h"
 
 SystemTrayIcon::SystemTrayIcon(QObject* parent)
-    : QObject(parent),
-      percentage_(0) {
+    : QObject(parent), percentage_(0) {
   QIcon tiny_start = IconLoader::Load("tiny-start", IconLoader::Other);
   playing_icon_ = tiny_start.pixmap(tiny_start.availableSizes().last());
   QIcon tiny_pause = IconLoader::Load("tiny-pause", IconLoader::Other);

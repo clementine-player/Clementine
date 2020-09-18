@@ -15,16 +15,17 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "devicelister.h"
-#include "devicemanager.h"
 #include "filesystemdevice.h"
-#include "core/application.h"
-#include "library/librarybackend.h"
-#include "library/librarymodel.h"
-#include "library/librarywatcher.h"
 
 #include <QThread>
 #include <QtDebug>
+
+#include "core/application.h"
+#include "devicelister.h"
+#include "devicemanager.h"
+#include "library/librarybackend.h"
+#include "library/librarymodel.h"
+#include "library/librarywatcher.h"
 
 FilesystemDevice::FilesystemDevice(const QUrl& url, DeviceLister* lister,
                                    const QString& unique_id,

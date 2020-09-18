@@ -20,10 +20,10 @@
 #ifndef COVERS_KITTENLOADER_H_
 #define COVERS_KITTENLOADER_H_
 
-#include "albumcoverloader.h"
-
 #include <QQueue>
 #include <QUrl>
+
+#include "albumcoverloader.h"
 
 class QNetworkReply;
 

@@ -28,7 +28,10 @@
 #include "core/scoped_nsobject.h"
 
 MacFSListener::MacFSListener(QObject* parent)
-    : FileSystemWatcherInterface(parent), run_loop_(nullptr), stream_(nullptr), update_timer_(new QTimer(this)) {
+    : FileSystemWatcherInterface(parent),
+      run_loop_(nullptr),
+      stream_(nullptr),
+      update_timer_(new QTimer(this)) {
   update_timer_->setSingleShot(true);
   update_timer_->setInterval(2000);
   connect(update_timer_, SIGNAL(timeout()), SLOT(UpdateStream()));
@@ -36,10 +39,10 @@ MacFSListener::MacFSListener(QObject* parent)
 
 void MacFSListener::Init() { run_loop_ = CFRunLoopGetCurrent(); }
 
-void MacFSListener::EventStreamCallback(
-    ConstFSEventStreamRef stream, void* user_data, size_t num_events,
-    void* event_paths, const FSEventStreamEventFlags event_flags[],
-    const FSEventStreamEventId event_ids[]) {
+void MacFSListener::EventStreamCallback(ConstFSEventStreamRef stream, void* user_data,
+                                        size_t num_events, void* event_paths,
+                                        const FSEventStreamEventFlags event_flags[],
+                                        const FSEventStreamEventId event_ids[]) {
   MacFSListener* me = reinterpret_cast<MacFSListener*>(user_data);
   char** paths = reinterpret_cast<char**>(event_paths);
   for (int i = 0; i < num_events; ++i) {
@@ -97,10 +100,10 @@ void MacFSListener::UpdateStream() {
   context.info = this;
   CFAbsoluteTime latency = 1.0;
 
-  stream_ = FSEventStreamCreate(nullptr, &EventStreamCallback, &context,  // Copied
-                                reinterpret_cast<CFArrayRef>(array.get()),
-                                kFSEventStreamEventIdSinceNow, latency,
-                                kFSEventStreamCreateFlagNone);
+  stream_ =
+      FSEventStreamCreate(nullptr, &EventStreamCallback, &context,  // Copied
+                          reinterpret_cast<CFArrayRef>(array.get()), kFSEventStreamEventIdSinceNow,
+                          latency, kFSEventStreamCreateFlagNone);
 
   FSEventStreamScheduleWithRunLoop(stream_, run_loop_, kCFRunLoopDefaultMode);
   FSEventStreamStart(stream_);

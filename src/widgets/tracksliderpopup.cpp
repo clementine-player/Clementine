@@ -16,7 +16,6 @@
 */
 
 #include "tracksliderpopup.h"
-#include "ui/qt_blurimage.h"
 
 #include <QBitmap>
 #include <QCoreApplication>
@@ -25,6 +24,8 @@
 #include <QTimer>
 #include <QWheelEvent>
 #include <QtDebug>
+
+#include "ui/qt_blurimage.h"
 
 const int TrackSliderPopup::kTextMargin = 4;
 const int TrackSliderPopup::kPointLength = 16;

@@ -18,8 +18,9 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "icecastbackend.h"
 #include "icecastmodel.h"
+
+#include "icecastbackend.h"
 #include "playlist/songmimedata.h"
 #include "ui/iconloader.h"
 

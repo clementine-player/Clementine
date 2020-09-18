@@ -20,12 +20,12 @@
 
 #include <QSortFilterProxyModel>
 
-#include "ui_skydrivesettingspage.h"
 #include "core/application.h"
-#include "internet/skydrive/skydriveservice.h"
 #include "internet/core/internetmodel.h"
-#include "ui/settingsdialog.h"
+#include "internet/skydrive/skydriveservice.h"
 #include "ui/iconloader.h"
+#include "ui/settingsdialog.h"
+#include "ui_skydrivesettingspage.h"
 
 SkydriveSettingsPage::SkydriveSettingsPage(SettingsDialog* parent)
     : SettingsPage(parent),

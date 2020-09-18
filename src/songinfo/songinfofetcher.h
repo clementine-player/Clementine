@@ -45,7 +45,7 @@ class SongInfoFetcher : public QObject {
 
   QList<SongInfoProvider*> providers() const { return providers_; }
 
-signals:
+ signals:
   void InfoResultReady(int id, const CollapsibleInfoPane::Data& data);
   void ResultReady(int id, const SongInfoFetcher::Result& result);
 
@@ -59,7 +59,7 @@ signals:
   QList<SongInfoProvider*> providers_;
 
   QMap<int, Result> results_;
-  QMap<int, QList<SongInfoProvider*> > waiting_for_;
+  QMap<int, QList<SongInfoProvider*>> waiting_for_;
   QMap<int, QTimer*> timeout_timers_;
 
   int timeout_duration_;

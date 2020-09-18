@@ -18,6 +18,7 @@
 */
 
 #include "mpris.h"
+
 #include "mpris2.h"
 
 namespace mpris {

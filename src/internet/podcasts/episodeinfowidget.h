@@ -18,9 +18,9 @@
 #ifndef INTERNET_PODCASTS_EPISODEINFOWIDGET_H_
 #define INTERNET_PODCASTS_EPISODEINFOWIDGET_H_
 
-#include "podcastepisode.h"
-
 #include <QFrame>
+
+#include "podcastepisode.h"
 
 class Application;
 class Ui_EpisodeInfoWidget;

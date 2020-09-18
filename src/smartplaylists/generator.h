@@ -18,9 +18,9 @@
 #ifndef PLAYLISTGENERATOR_H
 #define PLAYLISTGENERATOR_H
 
-#include "playlist/playlistitem.h"
-
 #include <memory>
+
+#include "playlist/playlistitem.h"
 
 class LibraryBackend;
 
@@ -73,7 +73,7 @@ class Generator : public QObject,
 
   virtual int GetDynamicHistory() { return kDefaultDynamicHistory; }
   virtual int GetDynamicFuture() { return kDefaultDynamicFuture; }
-signals:
+ signals:
   void Error(const QString& message);
 
  protected:
@@ -83,7 +83,7 @@ signals:
   QString name_;
 };
 
-}  // namespace
+}  // namespace smart_playlists
 
 #include "generator_fwd.h"
 

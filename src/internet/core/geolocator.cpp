@@ -19,13 +19,12 @@
 
 #include "geolocator.h"
 
-#include <cmath>
-#include <limits>
-
-#include <QStringList>
-#include <QJsonParseError>
 #include <QJsonDocument>
 #include <QJsonObject>
+#include <QJsonParseError>
+#include <QStringList>
+#include <cmath>
+#include <limits>
 
 #include "core/closure.h"
 #include "core/logging.h"
@@ -99,7 +98,8 @@ void Geolocator::RequestFinished(QNetworkReply* reply) {
   }
 
   QJsonParseError error;
-  QJsonDocument json_document = QJsonDocument::fromJson(reply->readAll(), &error);
+  QJsonDocument json_document =
+      QJsonDocument::fromJson(reply->readAll(), &error);
   if (error.error != QJsonParseError::NoError) {
     emit Finished(LatLng());
     return;

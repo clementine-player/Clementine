@@ -16,10 +16,11 @@
 */
 
 #include "songinfofetcher.h"
-#include "songinfoprovider.h"
-#include "core/logging.h"
 
 #include <QTimer>
+
+#include "core/logging.h"
+#include "songinfoprovider.h"
 
 SongInfoFetcher::SongInfoFetcher(QObject* parent)
     : QObject(parent),

@@ -16,18 +16,19 @@
 */
 
 #include "tagwidget.h"
-#include "internet/lastfm/lastfmservice.h"
+
+#include <QPainter>
+#include <QPropertyAnimation>
+
 #include "internet/core/internetmimedata.h"
 #include "internet/core/internetmodel.h"
+#include "internet/lastfm/lastfmservice.h"
 #include "playlist/playlistitemmimedata.h"
 #include "smartplaylists/generator.h"
 #include "smartplaylists/generatormimedata.h"
 #include "smartplaylists/querygenerator.h"
 #include "ui/flowlayout.h"
 #include "ui/iconloader.h"
-
-#include <QPainter>
-#include <QPropertyAnimation>
 
 const int TagWidgetTag::kIconSize = 16;
 const int TagWidgetTag::kIconTextSpacing = 8;

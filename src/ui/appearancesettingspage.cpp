@@ -24,15 +24,15 @@
 #include <QSettings>
 
 #include "config.h"
-#include "iconloader.h"
-#include "mainwindow.h"
-#include "settingsdialog.h"
-#include "ui_appearancesettingspage.h"
 #include "core/appearance.h"
 #include "core/application.h"
 #include "core/logging.h"
+#include "iconloader.h"
+#include "mainwindow.h"
 #include "playlist/playlistview.h"
+#include "settingsdialog.h"
 #include "ui/albumcoverchoicecontroller.h"
+#include "ui_appearancesettingspage.h"
 
 #ifdef HAVE_MOODBAR
 #include "moodbar/moodbarrenderer.h"
@@ -109,7 +109,8 @@ void AppearanceSettingsPage::Load() {
 
   InitColorSelectorsColors();
   ui_->b_use_sys_icons->setChecked(s.value("b_use_sys_icons", false).toBool());
-  ui_->b_hide_filter_toolbar->setChecked(s.value("b_hide_filter_toolbar",false).toBool());
+  ui_->b_hide_filter_toolbar->setChecked(
+      s.value("b_hide_filter_toolbar", false).toBool());
   s.endGroup();
 
   // Playlist settings

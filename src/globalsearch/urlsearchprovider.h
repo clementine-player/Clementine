@@ -18,9 +18,9 @@
 #ifndef URLSEARCHPROVIDER_H
 #define URLSEARCHPROVIDER_H
 
-#include "searchprovider.h"
-
 #include <QRegExp>
+
+#include "searchprovider.h"
 
 class UrlSearchProvider : public SearchProvider {
  public:

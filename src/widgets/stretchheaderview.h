@@ -61,7 +61,7 @@ class StretchHeaderView : public QHeaderView {
   void ToggleStretchEnabled();
   void SetStretchEnabled(bool enabled);
 
-signals:
+ signals:
   // Emitted when the stretch mode is changed.
   void StretchEnabledChanged(bool enabled);
 

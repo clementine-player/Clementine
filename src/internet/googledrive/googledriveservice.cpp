@@ -34,16 +34,16 @@
 #include "core/mergedproxymodel.h"
 #include "core/player.h"
 #include "core/timeconstants.h"
-#include "ui/albumcovermanager.h"
 #include "globalsearch/globalsearch.h"
 #include "globalsearch/librarysearchprovider.h"
-#include "library/librarybackend.h"
-#include "library/librarymodel.h"
-#include "playlist/playlist.h"
-#include "ui/iconloader.h"
 #include "googledriveclient.h"
 #include "googledriveurlhandler.h"
 #include "internet/core/internetmodel.h"
+#include "library/librarybackend.h"
+#include "library/librarymodel.h"
+#include "playlist/playlist.h"
+#include "ui/albumcovermanager.h"
+#include "ui/iconloader.h"
 
 const char* GoogleDriveService::kServiceName = "Google Drive";
 const char* GoogleDriveService::kSettingsGroup = "GoogleDrive";
@@ -52,7 +52,7 @@ namespace {
 
 static const char* kDriveEditFileUrl = "https://docs.google.com/file/d/%1/edit";
 static const char* kServiceId = "google_drive";
-}
+}  // namespace
 
 GoogleDriveService::GoogleDriveService(Application* app, InternetModel* parent)
     : CloudFileService(app, parent, kServiceName, kServiceId,
@@ -217,22 +217,21 @@ void GoogleDriveService::ShowContextMenu(const QPoint& global_pos) {
     context_menu_.reset(new QMenu);
     context_menu_->addActions(GetPlaylistActions());
     open_in_drive_action_ = context_menu_->addAction(
-        IconLoader::Load("googledrive", IconLoader::Provider), 
+        IconLoader::Load("googledrive", IconLoader::Provider),
         tr("Open in Google Drive"), this, SLOT(OpenWithDrive()));
     context_menu_->addSeparator();
-    update_action_ = context_menu_->addAction(IconLoader::Load("view-refresh", 
-                                              IconLoader::Base),
-                                              tr("Check for updates"), this,
-                                              SLOT(CheckForUpdates()));
+    update_action_ = context_menu_->addAction(
+        IconLoader::Load("view-refresh", IconLoader::Base),
+        tr("Check for updates"), this, SLOT(CheckForUpdates()));
     full_rescan_action_ = context_menu_->addAction(
-        IconLoader::Load("view-refresh", IconLoader::Base), 
+        IconLoader::Load("view-refresh", IconLoader::Base),
         tr("Do a full rescan..."), this, SLOT(ConfirmFullRescan()));
     context_menu_->addSeparator();
-    context_menu_->addAction(IconLoader::Load("download", IconLoader::Base), 
-                             tr("Cover Manager"), this, 
+    context_menu_->addAction(IconLoader::Load("download", IconLoader::Base),
+                             tr("Cover Manager"), this,
                              SLOT(ShowCoverManager()));
-    context_menu_->addAction(IconLoader::Load("configure", IconLoader::Base), 
-                             tr("Configure..."), this, 
+    context_menu_->addAction(IconLoader::Load("configure", IconLoader::Base),
+                             tr("Configure..."), this,
                              SLOT(ShowSettingsDialog()));
   }
 

@@ -20,7 +20,6 @@
 */
 
 #include "lastfmsettingspage.h"
-#include "ui_lastfmsettingspage.h"
 
 #include <lastfm5/ws.h>
 
@@ -28,10 +27,11 @@
 #include <QMessageBox>
 #include <QSettings>
 
-#include "lastfmservice.h"
-#include "internet/core/internetmodel.h"
 #include "core/application.h"
+#include "internet/core/internetmodel.h"
+#include "lastfmservice.h"
 #include "ui/iconloader.h"
+#include "ui_lastfmsettingspage.h"
 
 LastFMSettingsPage::LastFMSettingsPage(SettingsDialog* dialog)
     : SettingsPage(dialog),

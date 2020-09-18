@@ -15,17 +15,16 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "config.h"
-
-#include <functional>
-#include <memory>
+#include "giolister.h"
 
 #include <QFile>
 #include <QStringList>
 #include <QUrlQuery>
 #include <QtDebug>
+#include <functional>
+#include <memory>
 
-#include "giolister.h"
+#include "config.h"
 #include "core/logging.h"
 #include "core/signalchecker.h"
 
@@ -35,8 +34,9 @@ using std::placeholders::_3;
 
 QString GioLister::DeviceInfo::unique_id() const {
   if (mount)
-    return QString("Gio/%1/%2/%3").arg(mount_uuid, filesystem_type).arg(
-        filesystem_size);
+    return QString("Gio/%1/%2/%3")
+        .arg(mount_uuid, filesystem_type)
+        .arg(filesystem_size);
 
   return QString("Gio/unmounted/%1").arg((qulonglong)volume.get());
 }
@@ -106,11 +106,16 @@ void GioLister::Init() {
   g_list_free(mounts);
 
   // Connect signals from the monitor
-  signals_.append(CHECKED_GCONNECT(monitor_, "volume-added", &VolumeAddedCallback, this));
-  signals_.append(CHECKED_GCONNECT(monitor_, "volume-removed", &VolumeRemovedCallback, this));
-  signals_.append(CHECKED_GCONNECT(monitor_, "mount-added", &MountAddedCallback, this));
-  signals_.append(CHECKED_GCONNECT(monitor_, "mount-changed", &MountChangedCallback, this));
-  signals_.append(CHECKED_GCONNECT(monitor_, "mount-removed", &MountRemovedCallback, this));
+  signals_.append(
+      CHECKED_GCONNECT(monitor_, "volume-added", &VolumeAddedCallback, this));
+  signals_.append(CHECKED_GCONNECT(monitor_, "volume-removed",
+                                   &VolumeRemovedCallback, this));
+  signals_.append(
+      CHECKED_GCONNECT(monitor_, "mount-added", &MountAddedCallback, this));
+  signals_.append(
+      CHECKED_GCONNECT(monitor_, "mount-changed", &MountChangedCallback, this));
+  signals_.append(
+      CHECKED_GCONNECT(monitor_, "mount-removed", &MountRemovedCallback, this));
 }
 
 GioLister::~GioLister() {
@@ -406,8 +411,9 @@ void GioLister::DeviceInfo::ReadMountInfo(GMount* mount) {
   // Query the filesystem info for size, free space, and type
   error = nullptr;
   GFileInfo* info = g_file_query_filesystem_info(
-      root, G_FILE_ATTRIBUTE_FILESYSTEM_SIZE
-      "," G_FILE_ATTRIBUTE_FILESYSTEM_FREE "," G_FILE_ATTRIBUTE_FILESYSTEM_TYPE,
+      root,
+      G_FILE_ATTRIBUTE_FILESYSTEM_SIZE "," G_FILE_ATTRIBUTE_FILESYSTEM_FREE
+                                       "," G_FILE_ATTRIBUTE_FILESYSTEM_TYPE,
       nullptr, &error);
   if (error) {
     qLog(Warning) << QString::fromLocal8Bit(error->message);

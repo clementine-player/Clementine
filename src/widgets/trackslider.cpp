@@ -15,13 +15,14 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "config.h"
 #include "trackslider.h"
-#include "ui_trackslider.h"
-#include "core/timeconstants.h"
-#include "core/utilities.h"
 
 #include <QSettings>
+
+#include "config.h"
+#include "core/timeconstants.h"
+#include "core/utilities.h"
+#include "ui_trackslider.h"
 
 #ifdef HAVE_MOODBAR
 #include "moodbar/moodbarproxystyle.h"

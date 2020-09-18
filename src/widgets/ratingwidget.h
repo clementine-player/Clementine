@@ -48,7 +48,7 @@ class RatingWidget : public QWidget {
   float rating() const { return rating_; }
   void set_rating(float rating);
 
-signals:
+ signals:
   void RatingChanged(float rating);
 
  protected:

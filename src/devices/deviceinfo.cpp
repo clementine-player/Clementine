@@ -15,24 +15,22 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "devicemanager.h"
-
-#include <memory>
+#include "deviceinfo.h"
 
 #include <QIcon>
 #include <QPixmap>
 #include <QString>
 #include <QStringList>
 #include <QVariant>
+#include <memory>
 
 #include "config.h"
 #include "core/logging.h"
 #include "core/simpletreemodel.h"
-#include "ui/iconloader.h"
-
 #include "devicedatabasebackend.h"
-#include "deviceinfo.h"
 #include "devicelister.h"
+#include "devicemanager.h"
+#include "ui/iconloader.h"
 
 DeviceDatabaseBackend::Device DeviceInfo::SaveToDb() const {
   DeviceDatabaseBackend::Device ret;

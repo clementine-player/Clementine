@@ -21,7 +21,6 @@
 #include <QDialog>
 
 #include "config.h"
-
 #include "core/song.h"
 
 class Ui_TrackSelectionDialog;
@@ -46,7 +45,7 @@ class TrackSelectionDialog : public QDialog {
   // QDialog
   void accept();
 
-signals:
+ signals:
   void Error(const QString& error);
   void SongChosen(const Song& original_song, const Song& new_metadata);
 

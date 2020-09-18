@@ -27,10 +27,13 @@ class SeafileService;
 class SeafileUrlHandler : public UrlHandler {
   Q_OBJECT
  public:
-  explicit SeafileUrlHandler(SeafileService* service, QObject* parent = nullptr);
+  explicit SeafileUrlHandler(SeafileService* service,
+                             QObject* parent = nullptr);
 
   QString scheme() const { return "seafile"; }
-  QIcon icon() const { return IconLoader::Load("seafile", IconLoader::Provider); }
+  QIcon icon() const {
+    return IconLoader::Load("seafile", IconLoader::Provider);
+  }
   LoadResult StartLoading(const QUrl& url);
 
  private:

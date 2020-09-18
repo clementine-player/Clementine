@@ -17,14 +17,13 @@
 
 #include "playlistbackend.h"
 
-#include <memory>
-#include <functional>
-
 #include <QFile>
 #include <QHash>
 #include <QMutexLocker>
 #include <QSqlQuery>
 #include <QtDebug>
+#include <functional>
+#include <memory>
 
 #include "core/application.h"
 #include "core/database.h"
@@ -37,8 +36,8 @@
 #include "playlistparsers/cueparser.h"
 #include "smartplaylists/generator.h"
 
-using std::placeholders::_1;
 using std::shared_ptr;
+using std::placeholders::_1;
 
 using smart_playlists::GeneratorPtr;
 
@@ -79,12 +78,13 @@ PlaylistBackend::PlaylistList PlaylistBackend::GetPlaylists(
   }
 
   QSqlQuery q(db);
-  q.prepare("SELECT ROWID, name, last_played, dynamic_playlist_type,"
+  q.prepare(
+      "SELECT ROWID, name, last_played, dynamic_playlist_type,"
       "       dynamic_playlist_data, dynamic_playlist_backend,"
       "       special_type, ui_path, is_favorite"
       " FROM playlists"
       " " +
-          condition + " ORDER BY ui_order");
+      condition + " ORDER BY ui_order");
   q.exec();
   if (db_->CheckErrors(q)) return ret;
 
@@ -110,7 +110,8 @@ PlaylistBackend::Playlist PlaylistBackend::GetPlaylist(int id) {
   QSqlDatabase db(db_->Connect());
 
   QSqlQuery q(db);
-  q.prepare("SELECT ROWID, name, last_played, dynamic_playlist_type,"
+  q.prepare(
+      "SELECT ROWID, name, last_played, dynamic_playlist_type,"
       "       dynamic_playlist_data, dynamic_playlist_backend,"
       "       special_type, ui_path, is_favorite"
       " FROM playlists"
@@ -294,14 +295,16 @@ void PlaylistBackend::SavePlaylist(int playlist, const PlaylistItemList& items,
   QSqlQuery clear(db);
   clear.prepare("DELETE FROM playlist_items WHERE playlist = :playlist");
   QSqlQuery insert(db);
-  insert.prepare("INSERT INTO playlist_items"
+  insert.prepare(
+      "INSERT INTO playlist_items"
       " (playlist, type, library_id, radio_service, " +
-          Song::kColumnSpec +
-          ")"
-          " VALUES (:playlist, :type, :library_id, :radio_service, " +
-          Song::kBindSpec + ")");
+      Song::kColumnSpec +
+      ")"
+      " VALUES (:playlist, :type, :library_id, :radio_service, " +
+      Song::kBindSpec + ")");
   QSqlQuery update(db);
-  update.prepare("UPDATE playlists SET "
+  update.prepare(
+      "UPDATE playlists SET "
       "   last_played=:last_played,"
       "   dynamic_playlist_type=:dynamic_type,"
       "   dynamic_playlist_data=:dynamic_data,"

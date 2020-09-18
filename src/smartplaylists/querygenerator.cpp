@@ -16,9 +16,10 @@
 */
 
 #include "querygenerator.h"
-#include "library/librarybackend.h"
 
 #include <QtDebug>
+
+#include "library/librarybackend.h"
 
 namespace smart_playlists {
 
@@ -72,8 +73,8 @@ PlaylistItemList QueryGenerator::GenerateMore(int count) {
   SongList songs = backend_->FindSongs(search_copy);
   PlaylistItemList items;
   for (const Song& song : songs) {
-    items << PlaylistItemPtr(PlaylistItem::NewFromSongsTable(
-                 backend_->songs_table(), song));
+    items << PlaylistItemPtr(
+        PlaylistItem::NewFromSongsTable(backend_->songs_table(), song));
     previous_ids_ << song.id();
 
     if (previous_ids_.count() > GetDynamicFuture() + GetDynamicHistory())
@@ -82,4 +83,4 @@ PlaylistItemList QueryGenerator::GenerateMore(int count) {
   return items;
 }
 
-}  // namespace
+}  // namespace smart_playlists

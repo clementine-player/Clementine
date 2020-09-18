@@ -20,8 +20,8 @@
 
 #include <QDialog>
 
-#include "transcoderoptionsinterface.h"
 #include "core/song.h"
+#include "transcoderoptionsinterface.h"
 
 class Ui_TranscoderOptionsDialog;
 

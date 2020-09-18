@@ -1,8 +1,9 @@
-#include "core/logging.h"
 #include "kglobalaccelglobalshortcutbackend.h"
 
 #include <QAction>
 #include <QGuiApplication>
+
+#include "core/logging.h"
 
 #ifdef HAVE_DBUS
 

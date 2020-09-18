@@ -24,8 +24,8 @@
 #define INTERNET_CORE_INTERNETSERVICE_H_
 
 #include <QAction>
-#include <QObject>
 #include <QList>
+#include <QObject>
 #include <QUrl>
 
 #include "core/lazy.h"
@@ -87,7 +87,7 @@ class InternetService : public QObject {
 
   virtual QString Icon() { return QString(); }
 
-signals:
+ signals:
   void StreamError(const QString& message);
   void StreamMetadataFound(const QUrl& original_url, const Song& song);
 

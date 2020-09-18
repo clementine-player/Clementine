@@ -15,20 +15,21 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "devicemanager.h"
 #include "gpoddevice.h"
-#include "gpodloader.h"
-#include "core/logging.h"
-#include "core/application.h"
-#include "library/librarybackend.h"
-#include "library/librarymodel.h"
+
+#include <gpod/itdb.h>
 
 #include <QDir>
 #include <QFile>
 #include <QThread>
 #include <QtDebug>
 
-#include <gpod/itdb.h>
+#include "core/application.h"
+#include "core/logging.h"
+#include "devicemanager.h"
+#include "gpodloader.h"
+#include "library/librarybackend.h"
+#include "library/librarymodel.h"
 
 GPodDevice::GPodDevice(const QUrl& url, DeviceLister* lister,
                        const QString& unique_id, DeviceManager* manager,

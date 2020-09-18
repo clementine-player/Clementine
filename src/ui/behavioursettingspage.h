@@ -18,9 +18,9 @@
 #ifndef BEHAVIOURSETTINGSPAGE_H
 #define BEHAVIOURSETTINGSPAGE_H
 
-#include "settingspage.h"
-
 #include <QMap>
+
+#include "settingspage.h"
 
 class Ui_BehaviourSettingsPage;
 

@@ -18,10 +18,11 @@
 */
 
 #include "ubuntuunityhack.h"
-#include "core/logging.h"
 
 #include <QFile>
 #include <QProcess>
+
+#include "core/logging.h"
 
 const char* UbuntuUnityHack::kGSettingsFileName = "gsettings";
 const char* UbuntuUnityHack::kUnityPanel = "com.canonical.Unity.Panel";
@@ -43,8 +44,8 @@ UbuntuUnityHack::UbuntuUnityHack(QObject* parent) : QObject(parent) {
   QProcess* get = new QProcess(this);
   connect(get, SIGNAL(finished(int)), SLOT(GetFinished(int)));
   connect(get, SIGNAL(error(QProcess::ProcessError)), SLOT(GetError()));
-  get->start(kGSettingsFileName, QStringList() << "get" << kUnityPanel
-                                               << kUnitySystrayWhitelist);
+  get->start(kGSettingsFileName,
+             QStringList() << "get" << kUnityPanel << kUnitySystrayWhitelist);
 }
 
 void UbuntuUnityHack::GetError() {
@@ -85,9 +86,9 @@ void UbuntuUnityHack::GetFinished(int exit_code) {
 
   QProcess* set = new QProcess(this);
   connect(set, SIGNAL(finished(int)), set, SLOT(deleteLater()));
-  set->start(kGSettingsFileName, QStringList() << "set" << kUnityPanel
-                                               << kUnitySystrayWhitelist
-                                               << whitelist);
+  set->start(kGSettingsFileName, QStringList()
+                                     << "set" << kUnityPanel
+                                     << kUnitySystrayWhitelist << whitelist);
 
   qLog(Info) << "Clementine has added itself to the Unity system tray"
              << "whitelist, but this won't take effect until the next time"

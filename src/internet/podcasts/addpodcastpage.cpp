@@ -18,6 +18,7 @@
 */
 
 #include "addpodcastpage.h"
+
 #include "podcastdiscoverymodel.h"
 
 AddPodcastPage::AddPodcastPage(Application* app, QWidget* parent)

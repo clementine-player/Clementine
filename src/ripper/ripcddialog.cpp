@@ -17,8 +17,6 @@
 
 #include "ripper/ripcddialog.h"
 
-#include <algorithm>
-
 #include <QCheckBox>
 #include <QCloseEvent>
 #include <QFileDialog>
@@ -27,6 +25,7 @@
 #include <QMessageBox>
 #include <QSettings>
 #include <QUrl>
+#include <algorithm>
 
 #include "config.h"
 #include "core/logging.h"
@@ -67,8 +66,8 @@ RipCDDialog::RipCDDialog(QWidget* parent)
       kCheckboxColumn, QHeaderView::ResizeToContents);
   ui_->tableWidget->horizontalHeader()->setSectionResizeMode(
       kTrackNumberColumn, QHeaderView::ResizeToContents);
-  ui_->tableWidget->horizontalHeader()->setSectionResizeMode(kTrackTitleColumn,
-                                                      QHeaderView::Stretch);
+  ui_->tableWidget->horizontalHeader()->setSectionResizeMode(
+      kTrackTitleColumn, QHeaderView::Stretch);
 
   // Add a rip button
   rip_button_ = ui_->button_box->addButton(tr("Start ripping"),

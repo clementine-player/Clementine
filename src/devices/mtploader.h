@@ -18,10 +18,9 @@
 #ifndef MTPLOADER_H
 #define MTPLOADER_H
 
-#include <memory>
-
 #include <QObject>
 #include <QUrl>
+#include <memory>
 
 class ConnectedDevice;
 class LibraryBackend;
@@ -39,7 +38,7 @@ class MtpLoader : public QObject {
  public slots:
   void LoadDatabase();
 
-signals:
+ signals:
   void Error(const QString& message);
   void TaskStarted(int task_id);
   void LoadFinished(bool success);

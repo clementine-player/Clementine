@@ -20,17 +20,13 @@
 #include "ui_podcastinfodialog.h"
 
 PodcastInfoDialog::PodcastInfoDialog(Application* app, QWidget* parent)
-    : QDialog(parent),
-      app_(app),
-      ui_(new Ui_PodcastInfoDialog) {
+    : QDialog(parent), app_(app), ui_(new Ui_PodcastInfoDialog) {
   ui_->setupUi(this);
   ui_->podcast_details->SetApplication(app);
   ui_->episode_details->SetApplication(app);
 }
 
-PodcastInfoDialog::~PodcastInfoDialog() {
-  delete ui_;
-}
+PodcastInfoDialog::~PodcastInfoDialog() { delete ui_; }
 
 void PodcastInfoDialog::ShowPodcast(const Podcast& podcast) {
   ui_->episode_info_scroll_area->hide();

@@ -15,10 +15,7 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "config.h"
 #include "osdpretty.h"
-#include "ui_osdpretty.h"
-#include "core/logging.h"
 
 #include <QApplication>
 #include <QBitmap>
@@ -34,11 +31,15 @@
 #include <QTimer>
 #include <QWindow>
 
+#include "config.h"
+#include "core/logging.h"
+#include "ui_osdpretty.h"
+
 #ifdef HAVE_X11
 #include <QX11Info>
 #endif
 #ifdef Q_OS_WIN32
-# include <QtWin>
+#include <QtWin>
 #endif
 
 #ifdef Q_OS_WIN32
@@ -264,7 +265,6 @@ void OSDPretty::paintEvent(QPaintEvent*) {
 
 void OSDPretty::SetMessage(const QString& summary, const QString& message,
                            const QImage& image) {
-
   if (!image.isNull()) {
     QImage scaled_image =
         image.scaled(kMaxIconSize, kMaxIconSize, Qt::KeepAspectRatio,
@@ -361,7 +361,6 @@ void OSDPretty::FaderFinished() {
 void OSDPretty::FaderValueChanged(qreal value) { setWindowOpacity(value); }
 
 void OSDPretty::Reposition() {
-
   // Make the OSD the proper size
   layout()->activate();
   resize(sizeHint());

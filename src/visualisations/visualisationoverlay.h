@@ -18,8 +18,8 @@
 #ifndef VISUALISATIONOVERLAY_H
 #define VISUALISATIONOVERLAY_H
 
-#include <QWidget>
 #include <QBasicTimer>
+#include <QWidget>
 
 class Ui_VisualisationOverlay;
 
@@ -44,7 +44,7 @@ class VisualisationOverlay : public QWidget {
  public slots:
   void SetVisible(bool visible);
 
-signals:
+ signals:
   void OpacityChanged(qreal value);
   void ShowPopupMenu(const QPoint& pos);
 

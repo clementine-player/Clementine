@@ -18,10 +18,10 @@
 #ifndef GLOBALSEARCHMODEL_H
 #define GLOBALSEARCHMODEL_H
 
-#include "searchprovider.h"
-#include "library/librarymodel.h"
-
 #include <QStandardItemModel>
+
+#include "library/librarymodel.h"
+#include "searchprovider.h"
 
 class GlobalSearch;
 
@@ -54,10 +54,10 @@ class GlobalSearchModel : public QStandardItemModel {
 
   void Clear();
 
-  SearchProvider::ResultList GetChildResults(const QModelIndexList& indexes)
-      const;
-  SearchProvider::ResultList GetChildResults(const QList<QStandardItem*>& items)
-      const;
+  SearchProvider::ResultList GetChildResults(
+      const QModelIndexList& indexes) const;
+  SearchProvider::ResultList GetChildResults(
+      const QList<QStandardItem*>& items) const;
 
   // QAbstractItemModel
   QMimeData* mimeData(const QModelIndexList& indexes) const;

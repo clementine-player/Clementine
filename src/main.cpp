@@ -15,29 +15,33 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include <QtGlobal>
 #include <memory>
 
-#include <QtGlobal>
-
 #ifdef Q_OS_WIN32
-#  ifndef _WIN32_WINNT
-#    define _WIN32_WINNT 0x0600
-#  endif
-#  include <windows.h>
-#  include <iostream>
+#ifndef _WIN32_WINNT
+#define _WIN32_WINNT 0x0600
+#endif
+#include <windows.h>
+
+#include <iostream>
 #endif  // Q_OS_WIN32
 
 #ifdef Q_OS_UNIX
 #include <unistd.h>
 #endif  // Q_OS_UNIX
 
+#include <glib-object.h>
+#include <glib.h>
+#include <gst/gst.h>
+
 #include <QDir>
 #include <QFont>
 #include <QLibraryInfo>
 #include <QNetworkProxyFactory>
-#include <QSslSocket>
 #include <QSqlDatabase>
 #include <QSqlQuery>
+#include <QSslSocket>
 #include <QSysInfo>
 #include <QTextCodec>
 #include <QTranslator>
@@ -59,21 +63,15 @@
 #include "core/ubuntuunityhack.h"
 #include "core/utilities.h"
 #include "engines/enginebase.h"
+#include "qtsingleapplication.h"
+#include "qtsinglecoreapplication.h"
 #include "smartplaylists/generator.h"
+#include "tagreadermessages.pb.h"
 #include "ui/iconloader.h"
 #include "ui/mainwindow.h"
 #include "ui/systemtrayicon.h"
 #include "version.h"
 #include "widgets/osd.h"
-
-#include "tagreadermessages.pb.h"
-
-#include "qtsingleapplication.h"
-#include "qtsinglecoreapplication.h"
-
-#include <glib-object.h>
-#include <glib.h>
-#include <gst/gst.h>
 
 #ifdef Q_OS_DARWIN
 #include <sys/resource.h>
@@ -87,10 +85,11 @@ class LastFMService;
 #endif
 
 #ifdef HAVE_DBUS
-#include "core/mpris.h"
-#include "core/mpris2.h"
 #include <QDBusArgument>
 #include <QImage>
+
+#include "core/mpris.h"
+#include "core/mpris2.h"
 
 QDBusArgument& operator<<(QDBusArgument& arg, const QImage& image);
 const QDBusArgument& operator>>(const QDBusArgument& arg, QImage& image);
@@ -151,10 +150,10 @@ void SetGstreamerEnvironment() {
 // On windows and mac we bundle the gstreamer plugins with clementine
 #ifdef USE_BUNDLE
 #if defined(Q_OS_DARWIN)
-  scanner_path =
-      QCoreApplication::applicationDirPath() + "/" + USE_BUNDLE_DIR + "/gst-plugin-scanner";
-  plugin_path =
-      QCoreApplication::applicationDirPath() + "/" + USE_BUNDLE_DIR + "/gstreamer";
+  scanner_path = QCoreApplication::applicationDirPath() + "/" + USE_BUNDLE_DIR +
+                 "/gst-plugin-scanner";
+  plugin_path = QCoreApplication::applicationDirPath() + "/" + USE_BUNDLE_DIR +
+                "/gstreamer";
 #elif defined(Q_OS_WIN32)
   plugin_path = QCoreApplication::applicationDirPath() + "/gstreamer-plugins";
 #endif
@@ -178,8 +177,8 @@ void SetGstreamerEnvironment() {
   }
 
 #if defined(Q_OS_DARWIN) && defined(USE_BUNDLE)
-  SetEnv("GIO_EXTRA_MODULES",
-         QCoreApplication::applicationDirPath() + "/" + USE_BUNDLE_DIR + "/gio-modules");
+  SetEnv("GIO_EXTRA_MODULES", QCoreApplication::applicationDirPath() + "/" +
+                                  USE_BUNDLE_DIR + "/gio-modules");
 #endif
 
   SetEnv("PULSE_PROP_media.role", "music");
@@ -346,9 +345,12 @@ int main(int argc, char* argv[]) {
   }
 
 #if defined(Q_OS_DARWIN) && defined(USE_BUNDLE)
-  qLog(Debug) << "Looking for resources in" + QCoreApplication::applicationDirPath() + "/" + USE_BUNDLE_DIR;
-  QCoreApplication::setLibraryPaths(
-      QStringList() << QCoreApplication::applicationDirPath() + "/" + USE_BUNDLE_DIR);
+  qLog(Debug) << "Looking for resources in" +
+                     QCoreApplication::applicationDirPath() + "/" +
+                     USE_BUNDLE_DIR;
+  QCoreApplication::setLibraryPaths(QStringList()
+                                    << QCoreApplication::applicationDirPath() +
+                                           "/" + USE_BUNDLE_DIR);
 #endif
 
   a.setQuitOnLastWindowClosed(false);

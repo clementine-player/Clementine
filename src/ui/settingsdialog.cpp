@@ -16,6 +16,7 @@
 */
 
 #include "settingsdialog.h"
+
 #include "appearancesettingspage.h"
 #include "backgroundstreamssettingspage.h"
 #include "behavioursettingspage.h"
@@ -44,10 +45,9 @@
 #include "playlist/playlistview.h"
 #include "songinfo/songinfosettingspage.h"
 #include "transcoder/transcodersettingspage.h"
+#include "ui_settingsdialog.h"
 #include "widgets/groupediconview.h"
 #include "widgets/osdpretty.h"
-
-#include "ui_settingsdialog.h"
 
 #ifdef HAVE_LIBLASTFM
 #include "internet/lastfm/lastfmsettingspage.h"

@@ -15,15 +15,7 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "config.h"
-#include "projectmvisualisation.h"
 #include "visualisationcontainer.h"
-#include "visualisationoverlay.h"
-#include "visualisationselector.h"
-#include "engines/gstengine.h"
-#include "core/logging.h"
-#include "ui/iconloader.h"
-#include "ui/screensaver.h"
 
 #include <QGLWidget>
 #include <QGraphicsProxyWidget>
@@ -34,6 +26,15 @@
 #include <QSettings>
 #include <QShortcut>
 #include <QtDebug>
+
+#include "config.h"
+#include "core/logging.h"
+#include "engines/gstengine.h"
+#include "projectmvisualisation.h"
+#include "ui/iconloader.h"
+#include "ui/screensaver.h"
+#include "visualisationoverlay.h"
+#include "visualisationselector.h"
 
 // Framerates
 const int VisualisationContainer::kLowFramerate = 15;
@@ -98,7 +99,7 @@ void VisualisationContainer::Init() {
   selector_->SetVisualisation(vis_);
 
   // Settings menu
-  menu_->addAction(IconLoader::Load("view-fullscreen", IconLoader::Base), 
+  menu_->addAction(IconLoader::Load("view-fullscreen", IconLoader::Base),
                    tr("Toggle fullscreen"), this, SLOT(ToggleFullscreen()));
 
   QMenu* fps_menu = menu_->addMenu(tr("Framerate"));

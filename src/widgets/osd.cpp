@@ -15,11 +15,12 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "osd.h"
+
 #include "config.h"
 #include "core/application.h"
 #include "core/logging.h"
 #include "covers/currentartloader.h"
-#include "osd.h"
 #include "osdpretty.h"
 #include "ui/iconloader.h"
 #include "ui/systemtrayicon.h"
@@ -29,8 +30,8 @@
 #endif
 
 #include <QCoreApplication>
-#include <QtDebug>
 #include <QSettings>
+#include <QtDebug>
 
 const char* OSD::kSettingsGroup = "OSD";
 
@@ -195,8 +196,9 @@ void OSD::MagnatuneDownloadFinished(const QStringList& albums) {
     message = tr("%1 albums").arg(albums.count());
 
   ShowMessage(tr("Magnatune download finished"), message, QString(),
-              QImage(IconLoader::Load("magnatune", 
-                     IconLoader::Provider).pixmap(16).toImage()));
+              QImage(IconLoader::Load("magnatune", IconLoader::Provider)
+                         .pixmap(16)
+                         .toImage()));
 }
 
 void OSD::ShowMessage(const QString& summary, const QString& message,

@@ -18,11 +18,10 @@
 #ifndef PLAYLISTVIEW_H
 #define PLAYLISTVIEW_H
 
-#include <memory>
-
 #include <QBasicTimer>
 #include <QProxyStyle>
 #include <QTreeView>
+#include <memory>
 
 #include "playlist.h"
 
@@ -107,7 +106,7 @@ class PlaylistView : public QTreeView {
                           const QImage& cover_art);
   void PlayerStopped();
 
-signals:
+ signals:
   void PlayItem(const QModelIndex& index);
   void PlayPause();
   void RightClicked(const QPoint& global_pos, const QModelIndex& index);

@@ -21,12 +21,13 @@
 */
 
 /* Original Author:  Mark Kretschmann  <markey@web.de>  2003
-*/
+ */
 
 #include "baranalyzer.h"
-#include <cmath>
-#include <QtDebug>
+
 #include <QPainter>
+#include <QtDebug>
+#include <cmath>
 
 using Analyzer::Scope;
 
@@ -158,12 +159,11 @@ void BarAnalyzer::analyze(QPainter& p, const Scope& s, bool new_frame) {
     // 3. fall downwards at a constant pace
 
     /*if ( change > max_up_ ) //anything too much greater than 2 gives "jitter"
-           //add some dynamics - makes the value slightly closer to what it was last time
-           y2 = ( barVector_[i] + max_up_ );
+           //add some dynamics - makes the value slightly closer to what it was
+       last time y2 = ( barVector_[i] + max_up_ );
            //y2 = ( barVector_[i] * 2 + y2 ) / 3;
-        else*/ if (change <
-                                                                                    max_down_)
-      y2 = barVector_[i] + max_down_;
+        else*/
+    if (change < max_down_) y2 = barVector_[i] + max_down_;
 
     if (static_cast<int>(y2) > roofVector_[i]) {
       roofVector_[i] = static_cast<int>(y2);

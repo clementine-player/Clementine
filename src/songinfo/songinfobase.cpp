@@ -16,7 +16,6 @@
 */
 
 #include "songinfobase.h"
-#include "core/network.h"
 
 #include <QFile>
 #include <QScrollArea>
@@ -24,6 +23,8 @@
 #include <QSpacerItem>
 #include <QTimer>
 #include <QVBoxLayout>
+
+#include "core/network.h"
 
 const char* SongInfoBase::kSettingsGroup = "SongInfo";
 

@@ -18,13 +18,13 @@
 #include "songkickconcerts.h"
 
 #include <QImage>
-#include <QVBoxLayout>
-#include <QXmlStreamWriter>
+#include <QJsonArray>
 #include <QJsonDocument>
 #include <QJsonObject>
-#include <QJsonArray>
 #include <QUrl>
 #include <QUrlQuery>
+#include <QVBoxLayout>
+#include <QXmlStreamWriter>
 
 #include "core/logging.h"
 #include "songkickconcertwidget.h"
@@ -124,7 +124,8 @@ void SongkickConcerts::CalendarRequestFinished(QNetworkReply* reply, int id) {
   }
 
   QJsonParseError error;
-  QJsonDocument json_document = QJsonDocument::fromJson(reply->readAll(), &error);
+  QJsonDocument json_document =
+      QJsonDocument::fromJson(reply->readAll(), &error);
 
   if (error.error != QJsonParseError::NoError) {
     qLog(Error) << "Error parsing Songkick calendar reply:"

@@ -21,13 +21,13 @@
 #ifndef INTERNET_PODCASTS_PODCASTSERVICE_H_
 #define INTERNET_PODCASTS_PODCASTSERVICE_H_
 
-#include "podcastdeleter.h"
-#include "podcastdownloader.h"
+#include <QScopedPointer>
+#include <memory>
+
 #include "internet/core/internetmodel.h"
 #include "internet/core/internetservice.h"
-
-#include <memory>
-#include <QScopedPointer>
+#include "podcastdeleter.h"
+#include "podcastdownloader.h"
 
 class AddPodcastDialog;
 class PodcastInfoDialog;

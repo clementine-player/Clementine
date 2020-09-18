@@ -15,13 +15,14 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "config.h"
 #include "devicekitlister.h"
-#include "filesystemdevice.h"
+
+#include "config.h"
 #include "core/logging.h"
 #include "core/utilities.h"
 #include "dbus/udisks.h"
 #include "dbus/udisksdevice.h"
+#include "filesystemdevice.h"
 
 #ifdef HAVE_LIBGPOD
 #include "gpoddevice.h"
@@ -47,7 +48,7 @@ void DeviceKitLister::Init() {
       "/org/freedesktop/UDisks", QDBusConnection::systemBus()));
 
   // Get all the devices currently attached
-  QDBusPendingReply<QList<QDBusObjectPath> > reply =
+  QDBusPendingReply<QList<QDBusObjectPath>> reply =
       interface_->EnumerateDevices();
   reply.waitForFinished();
 

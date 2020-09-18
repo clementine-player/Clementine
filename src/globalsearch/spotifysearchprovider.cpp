@@ -29,7 +29,7 @@
 namespace {
 const int kSearchSongLimit = 5;
 const int kSearchAlbumLimit = 20;
-}
+}  // namespace
 
 SpotifySearchProvider::SpotifySearchProvider(Application* app, QObject* parent)
     : SearchProvider(app, parent), server_(nullptr), service_(nullptr) {

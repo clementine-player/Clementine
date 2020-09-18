@@ -19,10 +19,10 @@
 #ifndef INTERNET_BOX_BOXSETTINGSPAGE_H_
 #define INTERNET_BOX_BOXSETTINGSPAGE_H_
 
-#include "ui/settingspage.h"
-
 #include <QModelIndex>
 #include <QWidget>
+
+#include "ui/settingspage.h"
 
 class BoxService;
 class Ui_BoxSettingsPage;

@@ -16,6 +16,7 @@
 */
 
 #include "simplesearchprovider.h"
+
 #include "core/logging.h"
 #include "playlist/songmimedata.h"
 

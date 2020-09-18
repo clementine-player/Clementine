@@ -15,14 +15,15 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "globalsearch.h"
-#include "searchprovider.h"
 #include "searchproviderstatuswidget.h"
-#include "ui_searchproviderstatuswidget.h"
-#include "core/application.h"
-#include "ui/iconloader.h"
 
 #include <QMouseEvent>
+
+#include "core/application.h"
+#include "globalsearch.h"
+#include "searchprovider.h"
+#include "ui/iconloader.h"
+#include "ui_searchproviderstatuswidget.h"
 
 SearchProviderStatusWidget::SearchProviderStatusWidget(
     const QIcon& warning_icon, GlobalSearch* engine, SearchProvider* provider,

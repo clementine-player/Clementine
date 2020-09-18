@@ -20,10 +20,10 @@
 #include <libmtp.h>
 
 #include "connecteddevice.h"
-#include "mtpconnection.h"
 #include "core/song.h"
 #include "core/taskmanager.h"
 #include "library/librarybackend.h"
+#include "mtpconnection.h"
 
 MtpLoader::MtpLoader(const QUrl& url, TaskManager* task_manager,
                      std::shared_ptr<LibraryBackend> backend,

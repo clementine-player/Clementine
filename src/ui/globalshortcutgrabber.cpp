@@ -16,10 +16,11 @@
 */
 
 #include "globalshortcutgrabber.h"
-#include "ui_globalshortcutgrabber.h"
 
-#include <QtDebug>
 #include <QKeyEvent>
+#include <QtDebug>
+
+#include "ui_globalshortcutgrabber.h"
 
 GlobalShortcutGrabber::GlobalShortcutGrabber(QWidget* parent)
     : QDialog(parent), ui_(new Ui::GlobalShortcutGrabber) {

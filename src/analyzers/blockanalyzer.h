@@ -25,8 +25,9 @@
 #ifndef ANALYZERS_BLOCKANALYZER_H_
 #define ANALYZERS_BLOCKANALYZER_H_
 
-#include "analyzerbase.h"
 #include <qcolor.h>
+
+#include "analyzerbase.h"
 
 class QResizeEvent;
 class QMouseEvent;

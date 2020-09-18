@@ -21,10 +21,10 @@
 #ifndef COVERS_COVERPROVIDER_H_
 #define COVERS_COVERPROVIDER_H_
 
+#include <QObject>
+
 #include "albumcoverfetcher.h"
 #include "coverproviders.h"
-
-#include <QObject>
 
 class QNetworkReply;
 

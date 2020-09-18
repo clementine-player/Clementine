@@ -41,15 +41,15 @@
 #import "3rdparty/SPMediaKeyTap/SPMediaKeyTap.h"
 
 #include "config.h"
+#include "core/logging.h"
+#include "core/scoped_cftyperef.h"
+#include "core/scoped_nsautorelease_pool.h"
 #include "globalshortcuts.h"
 #include "mac_delegate.h"
 #include "mac_startup.h"
 #include "mac_utilities.h"
 #include "macglobalshortcutbackend.h"
 #include "utilities.h"
-#include "core/logging.h"
-#include "core/scoped_cftyperef.h"
-#include "core/scoped_nsautorelease_pool.h"
 
 #ifdef HAVE_SPARKLE
 #import <Sparkle/SUUpdater.h>
@@ -127,16 +127,15 @@ static BreakpadRef InitBreakpad() {
 
   // Register defaults for the whitelist of apps that want to use media keys
   [[NSUserDefaults standardUserDefaults]
-      registerDefaults:
-          [NSDictionary
-              dictionaryWithObjectsAndKeys:
-                  [SPMediaKeyTap defaultMediaKeyUserBundleIdentifiers],
-                  kMediaKeyUsingBundleIdentifiersDefaultsKey, nil]];
+      registerDefaults:[NSDictionary
+                           dictionaryWithObjectsAndKeys:[SPMediaKeyTap
+                                                            defaultMediaKeyUserBundleIdentifiers],
+                                                        kMediaKeyUsingBundleIdentifiersDefaultsKey,
+                                                        nil]];
   return self;
 }
 
-- (BOOL)applicationShouldHandleReopen:(NSApplication*)app
-                    hasVisibleWindows:(BOOL)flag {
+- (BOOL)applicationShouldHandleReopen:(NSApplication*)app hasVisibleWindows:(BOOL)flag {
   if (application_handler_) {
     application_handler_->Activate();
   }
@@ -163,10 +162,9 @@ static BreakpadRef InitBreakpad() {
   key_tap_ = [[SPMediaKeyTap alloc] initWithDelegate:self];
   if ([SPMediaKeyTap usesGlobalMediaKeyTap] &&
       ![[NSProcessInfo processInfo]
-          isOperatingSystemAtLeastVersion:(NSOperatingSystemVersion){
-                                              .majorVersion = 10,
-                                              .minorVersion = 12,
-                                              .patchVersion = 0}]) {
+          isOperatingSystemAtLeastVersion:(NSOperatingSystemVersion){.majorVersion = 10,
+                                                                     .minorVersion = 12,
+                                                                     .patchVersion = 0}]) {
     [key_tap_ startWatchingMediaKeys];
   } else {
     qLog(Warning) << "Media key monitoring disabled";
@@ -185,16 +183,13 @@ static BreakpadRef InitBreakpad() {
 
 - (void)application:(NSApplication*)app openFiles:(NSArray*)filenames {
   qLog(Debug) << "Wants to open:" << filenames;
-  [filenames
-      enumerateObjectsUsingBlock:^(id object, NSUInteger idx, BOOL* stop) {
-          [self application:app openFile:(NSString*)object];
-      }];
+  [filenames enumerateObjectsUsingBlock:^(id object, NSUInteger idx, BOOL* stop) {
+    [self application:app openFile:(NSString*)object];
+  }];
 }
 
-- (void)mediaKeyTap:(SPMediaKeyTap*)keyTap
-    receivedMediaKeyEvent:(NSEvent*)event {
-  NSAssert([event type] == NSSystemDefined &&
-               [event subtype] == SPSystemDefinedEventMediaKeys,
+- (void)mediaKeyTap:(SPMediaKeyTap*)keyTap receivedMediaKeyEvent:(NSEvent*)event {
+  NSAssert([event type] == NSSystemDefined && [event subtype] == SPSystemDefinedEventMediaKeys,
            @"Unexpected NSEvent in mediaKeyTap:receivedMediaKeyEvent:");
 
   int key_code = (([event data1] & 0xFFFF0000) >> 16);
@@ -211,16 +206,14 @@ static BreakpadRef InitBreakpad() {
   }
 }
 
-- (NSApplicationTerminateReply)applicationShouldTerminate:
-                                   (NSApplication*)sender {
+- (NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication*)sender {
 #ifdef HAVE_BREAKPAD
   BreakpadRelease(breakpad_);
 #endif
   return NSTerminateNow;
 }
 
-- (BOOL)userNotificationCenter:(id)center
-     shouldPresentNotification:(id)notification {
+- (BOOL)userNotificationCenter:(id)center shouldPresentNotification:(id)notification {
   // Always show notifications, even if Clementine is in the foreground.
   return YES;
 }
@@ -257,14 +250,12 @@ static BreakpadRef InitBreakpad() {
   [delegate_ setShortcutHandler:shortcut_handler_];
   [self setDelegate:delegate_];
 
-  [[NSUserNotificationCenter defaultUserNotificationCenter]
-      setDelegate:delegate_];
+  [[NSUserNotificationCenter defaultUserNotificationCenter] setDelegate:delegate_];
 }
 
 - (void)sendEvent:(NSEvent*)event {
   // If event tap is not installed, handle events that reach the app instead
-  BOOL shouldHandleMediaKeyEventLocally =
-      ![SPMediaKeyTap usesGlobalMediaKeyTap];
+  BOOL shouldHandleMediaKeyEventLocally = ![SPMediaKeyTap usesGlobalMediaKeyTap];
 
   if (shouldHandleMediaKeyEventLocally && [event type] == NSSystemDefined &&
       [event subtype] == SPSystemDefinedEventMediaKeys) {
@@ -288,13 +279,9 @@ void MacMain() {
 #endif
 }
 
-void SetShortcutHandler(MacGlobalShortcutBackend* handler) {
-  [NSApp SetShortcutHandler:handler];
-}
+void SetShortcutHandler(MacGlobalShortcutBackend* handler) { [NSApp SetShortcutHandler:handler]; }
 
-void SetApplicationHandler(PlatformInterface* handler) {
-  [NSApp SetApplicationHandler:handler];
-}
+void SetApplicationHandler(PlatformInterface* handler) { [NSApp SetApplicationHandler:handler]; }
 
 void CheckForUpdates() {
 #ifdef HAVE_SPARKLE
@@ -303,12 +290,10 @@ void CheckForUpdates() {
 }
 
 QString GetBundlePath() {
-  ScopedCFTypeRef<CFURLRef> app_url(
-      CFBundleCopyBundleURL(CFBundleGetMainBundle()));
+  ScopedCFTypeRef<CFURLRef> app_url(CFBundleCopyBundleURL(CFBundleGetMainBundle()));
   ScopedCFTypeRef<CFStringRef> mac_path(
       CFURLCopyFileSystemPath(app_url.get(), kCFURLPOSIXPathStyle));
-  const char* path =
-      CFStringGetCStringPtr(mac_path.get(), CFStringGetSystemEncoding());
+  const char* path = CFStringGetCStringPtr(mac_path.get(), CFStringGetSystemEncoding());
   QString bundle_path = QString::fromUtf8(path);
   return bundle_path;
 }
@@ -320,8 +305,8 @@ QString GetResourcesPath() {
 
 QString GetApplicationSupportPath() {
   ScopedNSAutoreleasePool pool;
-  NSArray* paths = NSSearchPathForDirectoriesInDomains(
-      NSApplicationSupportDirectory, NSUserDomainMask, YES);
+  NSArray* paths =
+      NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES);
   QString ret;
   if ([paths count] > 0) {
     NSString* user_path = [paths objectAtIndex:0];
@@ -334,8 +319,7 @@ QString GetApplicationSupportPath() {
 
 QString GetMusicDirectory() {
   ScopedNSAutoreleasePool pool;
-  NSArray* paths = NSSearchPathForDirectoriesInDomains(NSMusicDirectory,
-                                                       NSUserDomainMask, YES);
+  NSArray* paths = NSSearchPathForDirectoriesInDomains(NSMusicDirectory, NSUserDomainMask, YES);
   QString ret;
   if ([paths count] > 0) {
     NSString* user_path = [paths objectAtIndex:0];

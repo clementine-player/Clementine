@@ -19,17 +19,17 @@
 */
 
 #include "internetviewcontainer.h"
-#include "ui_internetviewcontainer.h"
 
 #include <QMetaMethod>
 #include <QTimeLine>
 #include <QtDebug>
 
-#include "internet/core/internetmodel.h"
-#include "internet/core/internetservice.h"
 #include "core/application.h"
 #include "core/mergedproxymodel.h"
 #include "globalsearch/globalsearch.h"
+#include "internet/core/internetmodel.h"
+#include "internet/core/internetservice.h"
+#include "ui_internetviewcontainer.h"
 
 const int InternetViewContainer::kAnimationDuration = 500;
 

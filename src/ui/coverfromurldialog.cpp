@@ -16,9 +16,6 @@
 */
 
 #include "coverfromurldialog.h"
-#include "ui_coverfromurldialog.h"
-#include "core/network.h"
-#include "covers/albumcoverloader.h"
 
 #include <QApplication>
 #include <QClipboard>
@@ -26,6 +23,10 @@
 #include <QMessageBox>
 #include <QNetworkReply>
 #include <QNetworkRequest>
+
+#include "core/network.h"
+#include "covers/albumcoverloader.h"
+#include "ui_coverfromurldialog.h"
 
 CoverFromURLDialog::CoverFromURLDialog(QWidget* parent)
     : QDialog(parent),

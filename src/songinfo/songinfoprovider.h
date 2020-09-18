@@ -38,7 +38,7 @@ class SongInfoProvider : public QObject {
   bool is_enabled() const { return enabled_; }
   void set_enabled(bool enabled) { enabled_ = enabled; }
 
-signals:
+ signals:
   void ImageReady(int id, const QUrl& url);
   void InfoReady(int id, const CollapsibleInfoPane::Data& data);
   void Finished(int id);

@@ -23,15 +23,14 @@
 #ifndef CORE_UTILITIES_H_
 #define CORE_UTILITIES_H_
 
-#include <memory>
-
 #include <QColor>
+#include <QCryptographicHash>
 #include <QFile>
 #include <QLocale>
-#include <QCryptographicHash>
 #include <QSize>
 #include <QString>
 #include <QUrl>
+#include <memory>
 
 class QIODevice;
 class QMouseEvent;

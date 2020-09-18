@@ -2,13 +2,12 @@
 #define REMOTECLIENT_H
 
 #include <QAbstractSocket>
-#include <QTcpSocket>
 #include <QBuffer>
-
-#include "songsender.h"
+#include <QTcpSocket>
 
 #include "core/application.h"
 #include "remotecontrolmessages.pb.h"
+#include "songsender.h"
 
 class RemoteClient : public QObject {
   Q_OBJECT
@@ -28,7 +27,7 @@ class RemoteClient : public QObject {
  private slots:
   void IncomingData();
 
-signals:
+ signals:
   void Parse(const pb::remote::Message& msg);
 
  private:

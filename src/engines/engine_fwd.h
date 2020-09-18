@@ -33,7 +33,7 @@ enum TrackChangeType {
   SameAlbum = 0x10,
 };
 Q_DECLARE_FLAGS(TrackChangeFlags, TrackChangeType)
-}
+}  // namespace Engine
 
 typedef Engine::Base EngineBase;
 

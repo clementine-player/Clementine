@@ -21,15 +21,14 @@
 #include "jamendodynamicplaylist.h"
 
 #include <QEventLoop>
-#include <QtDebug>
 #include <QUrlQuery>
+#include <QtDebug>
 
 #include "core/logging.h"
 #include "core/network.h"
 #include "jamendoplaylistitem.h"
 #include "jamendoservice.h"
 #include "library/librarybackend.h"
-
 
 const char* JamendoDynamicPlaylist::kUrl =
     "http://api.jamendo.com/get2/id/track/plain/";
@@ -129,7 +128,7 @@ void JamendoDynamicPlaylist::Fetch() {
   // with QNetworkManager.
   QNetworkAccessManager network(this);
   QNetworkRequest req(url);
-  QNetworkReply *reply = network.get(req);
+  QNetworkReply* reply = network.get(req);
 
   // Wait for the reply
   {

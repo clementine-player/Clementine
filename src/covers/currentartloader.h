@@ -20,9 +20,8 @@
 #ifndef COVERS_CURRENTARTLOADER_H_
 #define COVERS_CURRENTARTLOADER_H_
 
-#include <memory>
-
 #include <QObject>
+#include <memory>
 
 #include "core/song.h"
 #include "covers/albumcoverloaderoptions.h"

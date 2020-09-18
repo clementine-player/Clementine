@@ -27,10 +27,13 @@ class DropboxService;
 class DropboxUrlHandler : public UrlHandler {
   Q_OBJECT
  public:
-  explicit DropboxUrlHandler(DropboxService* service, QObject* parent = nullptr);
+  explicit DropboxUrlHandler(DropboxService* service,
+                             QObject* parent = nullptr);
 
   QString scheme() const { return "dropbox"; }
-  QIcon icon() const { return IconLoader::Load("dropbox", IconLoader::Provider); }
+  QIcon icon() const {
+    return IconLoader::Load("dropbox", IconLoader::Provider);
+  }
   LoadResult StartLoading(const QUrl& url);
 
  private:

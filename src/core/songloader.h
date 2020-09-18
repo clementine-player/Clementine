@@ -23,18 +23,17 @@
 #ifndef CORE_SONGLOADER_H_
 #define CORE_SONGLOADER_H_
 
-#include <functional>
-#include <memory>
-
 #include <gst/gst.h>
 
 #include <QObject>
 #include <QThreadPool>
 #include <QUrl>
+#include <functional>
+#include <memory>
 
-#include "song.h"
 #include "core/tagreaderclient.h"
 #include "musicbrainz/musicbrainzclient.h"
+#include "song.h"
 
 class CueParser;
 class LibraryBackendInterface;
@@ -79,7 +78,7 @@ class SongLoader : public QObject {
   void LoadMetadataBlocking();
   Result LoadAudioCD();
 
-signals:
+ signals:
   void AudioCDTracksLoaded();
   void LoadAudioCDFinished(bool success);
   void LoadRemoteFinished();

@@ -16,7 +16,6 @@
 */
 
 #include "ui/lovedialog.h"
-#include "ui_lovedialog.h"
 
 #include <QLabel>
 #include <QPushButton>
@@ -25,14 +24,12 @@
 #include "core/logging.h"
 #include "core/utilities.h"
 #include "library/librarybackend.h"
+#include "ui_lovedialog.h"
 
 const char* LoveDialog::kSettingsGroup = "LoveDialog";
 
 LoveDialog::LoveDialog(Application* app, QWidget* parent)
-    : QDialog(parent),
-      ui_(new Ui_LoveDialog),
-      app_(app)
-{
+    : QDialog(parent), ui_(new Ui_LoveDialog), app_(app) {
   ui_->setupUi(this);
 
   connect(ui_->button_box, SIGNAL(clicked(QAbstractButton*)),
@@ -44,7 +41,8 @@ LoveDialog::~LoveDialog() { delete ui_; }
 
 void LoveDialog::SetSong(const Song& song) {
   song_ = song;
-  QString summary = "<b>" + song.PrettyTitleWithArtist().toHtmlEscaped() + "</b>";
+  QString summary =
+      "<b>" + song.PrettyTitleWithArtist().toHtmlEscaped() + "</b>";
   ui_->summary->setText(summary);
   ui_->rating->set_rating(song.rating());
 }
@@ -68,7 +66,8 @@ void LoveDialog::showEvent(QShowEvent* e) {
 
 void LoveDialog::SongRated(float rating) {
   qLog(Debug) << "LoveDialog::SongRated: rating=" << rating;
-  qLog(Debug) << "LoveDialog::SongRated: isValid=" << song_.is_valid() << " id=" << song_.id();
+  qLog(Debug) << "LoveDialog::SongRated: isValid=" << song_.is_valid()
+              << " id=" << song_.id();
   if (!song_.is_valid() || song_.id() == -1) return;
 
   qLog(Debug) << "LoveDialog::SongRated: song is valid and id is good";

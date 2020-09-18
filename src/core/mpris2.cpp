@@ -23,20 +23,19 @@
 
 #include "mpris2.h"
 
-#include <algorithm>
-
 #include <QApplication>
 #include <QDBusConnection>
 #include <QtConcurrentRun>
+#include <algorithm>
 
 #include "config.h"
 #include "core/application.h"
 #include "core/logging.h"
-#include "core/mpris_common.h"
 #include "core/mpris2_player.h"
 #include "core/mpris2_playlists.h"
 #include "core/mpris2_root.h"
 #include "core/mpris2_tracklist.h"
+#include "core/mpris_common.h"
 #include "core/player.h"
 #include "core/timeconstants.h"
 #include "covers/currentartloader.h"
@@ -207,8 +206,9 @@ QString Mpris2::DesktopEntryAbsolutePath() const {
   xdg_data_dirs.append("/usr/share/");
 
   for (const QString& directory : xdg_data_dirs) {
-    QString path = QString("%1/applications/%2.desktop").arg(
-        directory, QApplication::applicationName().toLower());
+    QString path =
+        QString("%1/applications/%2.desktop")
+            .arg(directory, QApplication::applicationName().toLower());
     if (QFile::exists(path)) return path;
   }
   return QString();
@@ -506,7 +506,7 @@ QDBusObjectPath MakePlaylistPath(int id) {
   return QDBusObjectPath(
       QString("/org/clementineplayer/clementine/PlaylistId/%1").arg(id));
 }
-}
+}  // namespace
 
 MaybePlaylist Mpris2::ActivePlaylist() const {
   MaybePlaylist maybe_playlist;

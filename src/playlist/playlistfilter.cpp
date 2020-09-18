@@ -16,9 +16,10 @@
 */
 
 #include "playlistfilter.h"
-#include "playlistfilterparser.h"
 
 #include <QtDebug>
+
+#include "playlistfilterparser.h"
 
 PlaylistFilter::PlaylistFilter(QObject* parent)
     : QSortFilterProxyModel(parent),

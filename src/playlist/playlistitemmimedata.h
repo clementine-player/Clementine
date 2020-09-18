@@ -18,8 +18,8 @@
 #ifndef PLAYLISTITEMMIMEDATA_H
 #define PLAYLISTITEMMIMEDATA_H
 
-#include "playlistitem.h"
 #include "core/mimedata.h"
+#include "playlistitem.h"
 
 class PlaylistItemMimeData : public MimeData {
   Q_OBJECT

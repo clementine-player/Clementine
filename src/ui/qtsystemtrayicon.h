@@ -18,10 +18,10 @@
 #ifndef QTSYSTEMTRAYICON_H
 #define QTSYSTEMTRAYICON_H
 
+#include <QSystemTrayIcon>
+
 #include "mainwindow.h"
 #include "systemtrayicon.h"
-
-#include <QSystemTrayIcon>
 
 class QtSystemTrayIcon : public SystemTrayIcon {
   Q_OBJECT

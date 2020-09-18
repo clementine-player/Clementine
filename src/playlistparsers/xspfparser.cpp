@@ -16,10 +16,6 @@
 */
 
 #include "xspfparser.h"
-#include "core/timeconstants.h"
-#include "core/utilities.h"
-
-#include "playlist/playlist.h"
 
 #include <QDomDocument>
 #include <QFile>
@@ -27,6 +23,10 @@
 #include <QRegExp>
 #include <QUrl>
 #include <QXmlStreamReader>
+
+#include "core/timeconstants.h"
+#include "core/utilities.h"
+#include "playlist/playlist.h"
 
 XSPFParser::XSPFParser(LibraryBackendInterface* library, QObject* parent)
     : XMLParser(library, parent) {}

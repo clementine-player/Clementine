@@ -15,16 +15,17 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "tracksliderpopup.h"
 #include "tracksliderslider.h"
-#include "core/timeconstants.h"
-#include "core/utilities.h"
 
 #include <QMouseEvent>
 #include <QStyle>
 #include <QStyleOptionSlider>
-#include <QtDebug>
 #include <QWheelEvent>
+#include <QtDebug>
+
+#include "core/timeconstants.h"
+#include "core/utilities.h"
+#include "tracksliderpopup.h"
 
 TrackSliderSlider::TrackSliderSlider(QWidget* parent)
     : QSlider(parent),
@@ -94,7 +95,7 @@ void TrackSliderSlider::mouseMoveEvent(QMouseEvent* e) {
       mapTo(window(), QPoint(e->x(), rect().center().y())));
 }
 
-void TrackSliderSlider::wheelEvent(QWheelEvent *e) {
+void TrackSliderSlider::wheelEvent(QWheelEvent* e) {
   if (e->delta() < 0) {
     emit SeekBackward();
   } else {

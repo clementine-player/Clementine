@@ -15,9 +15,10 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "songinfotextview.h"
 #include "taglyricsinfoprovider.h"
+
 #include "core/logging.h"
+#include "songinfotextview.h"
 
 void TagLyricsInfoProvider::FetchInfo(int id, const Song& metadata) {
   QString lyrics;

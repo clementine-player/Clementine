@@ -16,12 +16,13 @@
 */
 
 #include "generator.h"
-#include "querygenerator.h"
+
+#include <QSettings>
+
 #include "core/logging.h"
 #include "internet/jamendo/jamendodynamicplaylist.h"
 #include "internet/subsonic/subsonicdynamicplaylist.h"
-
-#include <QSettings>
+#include "querygenerator.h"
 
 namespace smart_playlists {
 
@@ -44,4 +45,4 @@ GeneratorPtr Generator::Create(const QString& type) {
   return GeneratorPtr();
 }
 
-}  // namespace
+}  // namespace smart_playlists

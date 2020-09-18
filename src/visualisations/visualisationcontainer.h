@@ -18,8 +18,8 @@
 #ifndef VISUALISATIONCONTAINER_H
 #define VISUALISATIONCONTAINER_H
 
-#include <QGraphicsView>
 #include <QBasicTimer>
+#include <QGraphicsView>
 
 #include "core/song.h"
 

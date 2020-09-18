@@ -24,14 +24,14 @@
 #ifndef CORE_DATABASE_H_
 #define CORE_DATABASE_H_
 
+#include <sqlite3.h>
+
 #include <QMap>
 #include <QMutex>
 #include <QObject>
 #include <QSqlDatabase>
 #include <QSqlError>
 #include <QStringList>
-
-#include <sqlite3.h>
 
 #include "gtest/gtest_prod.h"
 

@@ -15,16 +15,17 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "songinfotextview.h"
-#include "ultimatelyricslyric.h"
 #include "ultimatelyricsprovider.h"
-#include "core/logging.h"
-#include "core/network.h"
 
 #include <QCoreApplication>
 #include <QNetworkReply>
 #include <QTextCodec>
 #include <QThread>
+
+#include "core/logging.h"
+#include "core/network.h"
+#include "songinfotextview.h"
+#include "ultimatelyricslyric.h"
 
 const int UltimateLyricsProvider::kRedirectLimit = 5;
 

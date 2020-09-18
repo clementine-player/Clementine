@@ -18,14 +18,13 @@
 #ifndef TRANSCODER_H
 #define TRANSCODER_H
 
-#include <memory>
-
 #include <gst/gst.h>
 
-#include <QObject>
-#include <QStringList>
 #include <QEvent>
 #include <QMetaType>
+#include <QObject>
+#include <QStringList>
+#include <memory>
 
 #include "core/song.h"
 
@@ -67,7 +66,7 @@ class Transcoder : public QObject {
   void Start();
   void Cancel();
 
-signals:
+ signals:
   void JobComplete(const QString& input, const QString& output, bool success);
   void LogLine(const QString& message);
   void AllJobsComplete();

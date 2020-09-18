@@ -25,19 +25,20 @@
 
 #ifdef HAVE_LIBLASTFM1
 #include <lastfm5/Audioscrobbler.h>
-#include <lastfm5/misc.h>
 #include <lastfm5/ScrobbleCache.h>
 #include <lastfm5/ScrobblePoint.h>
 #include <lastfm5/User.h>
-#include <lastfm5/ws.h>
 #include <lastfm5/XmlQuery.h>
-#else
-#include <lastfm5/Audioscrobbler>
 #include <lastfm5/misc.h>
+#include <lastfm5/ws.h>
+#else
+#include <lastfm5/misc.h>
+#include <lastfm5/ws.h>
+
+#include <lastfm5/Audioscrobbler>
 #include <lastfm5/ScrobbleCache>
 #include <lastfm5/ScrobblePoint>
 #include <lastfm5/User>
-#include <lastfm5/ws.h>
 #include <lastfm5/XmlQuery>
 #endif
 

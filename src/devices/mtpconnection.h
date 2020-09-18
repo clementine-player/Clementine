@@ -18,9 +18,9 @@
 #ifndef MTPCONNECTION_H
 #define MTPCONNECTION_H
 
-#include <QUrl>
-
 #include <libmtp.h>
+
+#include <QUrl>
 
 class MtpConnection {
  public:

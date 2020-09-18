@@ -1,7 +1,8 @@
 #include "playlistlistmodel.h"
-#include "core/logging.h"
 
 #include <QMimeData>
+
+#include "core/logging.h"
 
 PlaylistListModel::PlaylistListModel(QObject* parent)
     : QStandardItemModel(parent), dropping_rows_(false) {
@@ -184,7 +185,8 @@ QStandardItem* PlaylistListModel::NewTrack(const Song& song) const {
   ret->setData(PlaylistListModel::Type_Track, PlaylistListModel::Role_Type);
   ret->setData(song.id(), PlaylistListModel::Role_TrackId);
   ret->setIcon(track_icon_);
-  ret->setFlags(Qt::ItemIsDragEnabled | Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+  ret->setFlags(Qt::ItemIsDragEnabled | Qt::ItemIsEnabled |
+                Qt::ItemIsSelectable);
   return ret;
 }
 

@@ -15,21 +15,22 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "searchterm.h"
 #include "searchtermwidget.h"
-#include "ui_searchtermwidget.h"
-#include "core/utilities.h"
-#include "playlist/playlist.h"
-#include "playlist/playlistdelegates.h"
-#include "ui/iconloader.h"
 
 #include <QFile>
+#include <QKeyEvent>
 #include <QMessageBox>
 #include <QPainter>
 #include <QPropertyAnimation>
 #include <QTimer>
 #include <QtDebug>
-#include <QKeyEvent>
+
+#include "core/utilities.h"
+#include "playlist/playlist.h"
+#include "playlist/playlistdelegates.h"
+#include "searchterm.h"
+#include "ui/iconloader.h"
+#include "ui_searchtermwidget.h"
 
 // Exported by QtGui
 void qt_blurImage(QPainter* p, QImage& blurImage, qreal radius, bool quality,
@@ -150,8 +151,7 @@ void SearchTermWidget::FieldChanged(int index) {
   // Show the correct value editor
   QWidget* page = nullptr;
   SearchTerm::Operator op = static_cast<SearchTerm::Operator>(
-    ui_->op->itemData(ui_->op->currentIndex()).toInt()
-  );
+      ui_->op->itemData(ui_->op->currentIndex()).toInt());
   switch (type) {
     case SearchTerm::Type_Time:
       page = ui_->page_time;
@@ -198,9 +198,8 @@ void SearchTermWidget::FieldChanged(int index) {
 void SearchTermWidget::OpChanged(int index) {
   // Determine the currently selected operator
   SearchTerm::Operator op = static_cast<SearchTerm::Operator>(
-    // This uses the operators’s index in the combobox to get its enum value
-    ui_->op->itemData(ui_->op->currentIndex()).toInt()
-  );
+      // This uses the operators’s index in the combobox to get its enum value
+      ui_->op->itemData(ui_->op->currentIndex()).toInt());
 
   // We need to change the page only in the following case
   if ((ui_->value_stack->currentWidget() == ui_->page_text) ||
@@ -213,10 +212,11 @@ void SearchTermWidget::OpChanged(int index) {
     }
     ui_->value_stack->setCurrentWidget(page);
   } else if ((ui_->value_stack->currentWidget() == ui_->page_date) ||
-      (ui_->value_stack->currentWidget() == ui_->page_date_numeric) ||
-      (ui_->value_stack->currentWidget() == ui_->page_date_relative)) {
+             (ui_->value_stack->currentWidget() == ui_->page_date_numeric) ||
+             (ui_->value_stack->currentWidget() == ui_->page_date_relative)) {
     QWidget* page = nullptr;
-    if (op == SearchTerm::Op_NumericDate || op == SearchTerm::Op_NumericDateNot) {
+    if (op == SearchTerm::Op_NumericDate ||
+        op == SearchTerm::Op_NumericDateNot) {
       page = ui_->page_date_numeric;
     } else if (op == SearchTerm::Op_RelativeDate) {
       page = ui_->page_date_relative;
@@ -455,4 +455,4 @@ void SearchTermWidget::Overlay::keyReleaseEvent(QKeyEvent* e) {
   if (e->key() == Qt::Key_Space) emit parent_->Clicked();
 }
 
-}  // namespace
+}  // namespace smart_playlists

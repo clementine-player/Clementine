@@ -18,15 +18,15 @@
 #ifndef PLAYLISTDELEGATES_H
 #define PLAYLISTDELEGATES_H
 
-#include "playlist.h"
-#include "library/library.h"
-#include "widgets/ratingwidget.h"
-
 #include <QCompleter>
 #include <QPixmapCache>
 #include <QStringListModel>
 #include <QStyledItemDelegate>
 #include <QTreeView>
+
+#include "library/library.h"
+#include "playlist.h"
+#include "widgets/ratingwidget.h"
 
 class Player;
 
@@ -64,7 +64,7 @@ class PlaylistDelegateBase : public QueuedItemDelegate {
                  const QModelIndex& index) const;
 
   QStyleOptionViewItem Adjusted(const QStyleOptionViewItem& option,
-                                  const QModelIndex& index) const;
+                                const QModelIndex& index) const;
 
   static const int kMinHeight;
 

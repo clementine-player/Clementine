@@ -18,9 +18,9 @@
 #ifndef PLAYLISTLISTCONTAINER_H
 #define PLAYLISTLISTCONTAINER_H
 
-#include "playlistbackend.h"
-
 #include <QWidget>
+
+#include "playlistbackend.h"
 
 class QMenu;
 class QSortFilterProxyModel;
@@ -59,7 +59,8 @@ class PlaylistListContainer : public QWidget {
   // From the PlaylistManager
   void PlaylistRenamed(int id, const QString& new_name);
   // Add playlist if favorite == true
-  void AddPlaylist(int id, const QString& name, bool favorite, const QString *ui_path = nullptr);
+  void AddPlaylist(int id, const QString& name, bool favorite,
+                   const QString* ui_path = nullptr);
   void RemovePlaylist(int id);
   void SavePlaylist();
   void PlaylistFavoriteStateChanged(int id, bool favorite);

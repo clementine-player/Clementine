@@ -21,10 +21,10 @@
 #include <QAbstractItemModel>
 #include <QList>
 
+#include "core/song.h"
+#include "core/tagreaderclient.h"
 #include "playlistitem.h"
 #include "playlistsequence.h"
-#include "core/tagreaderclient.h"
-#include "core/song.h"
 #include "smartplaylists/generator_fwd.h"
 
 class LibraryBackend;
@@ -46,7 +46,7 @@ class MoveItems;
 class ReOrderItems;
 class SortItems;
 class ShuffleItems;
-}
+}  // namespace PlaylistUndoCommands
 
 typedef QMap<int, Qt::Alignment> ColumnAlignmentMap;
 Q_DECLARE_METATYPE(Qt::Alignment)
@@ -357,7 +357,7 @@ class Playlist : public QAbstractListModel {
   // undoable.
   void RemoveItemsWithoutUndo(const QList<int>& indices);
 
-signals:
+ signals:
   void RestoreFinished();
   void CurrentSongChanged(const Song& metadata);
   void EditingFinished(const QModelIndex& index);

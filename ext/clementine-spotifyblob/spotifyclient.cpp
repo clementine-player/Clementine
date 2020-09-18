@@ -20,22 +20,21 @@
 
 #include "spotifyclient.h"
 
-#include <algorithm>
-#include <memory>
-
 #include <QCoreApplication>
 #include <QDir>
 #include <QHostAddress>
 #include <QTcpSocket>
 #include <QTimer>
+#include <algorithm>
+#include <memory>
 
 #include "core/arraysize.h"
 #include "core/logging.h"
 #include "core/timeconstants.h"
 #include "mediapipeline.h"
+#include "spotify_utilities.h"
 #include "spotifykey.h"
 #include "spotifymessages.pb.h"
-#include "spotify_utilities.h"
 
 const int SpotifyClient::kSpotifyImageIDSize = 20;
 const int SpotifyClient::kWaveHeaderSize = 44;
@@ -622,8 +621,8 @@ void SpotifyClient::AddTracksToPlaylist(
   }
 
   // Get the tracks we want to add
-  std::unique_ptr<sp_track* []> tracks_array(
-      new sp_track* [req.track_uri_size()]);
+  std::unique_ptr<sp_track*[]> tracks_array(
+      new sp_track*[req.track_uri_size()]);
   for (int i = 0; i < req.track_uri_size(); ++i) {
     sp_link* track_link = sp_link_create_from_string(req.track_uri(i).c_str());
     sp_track* track = sp_link_as_track(track_link);

@@ -38,7 +38,7 @@ class SongInfoTextView : public QTextBrowser {
   void ReloadSettings();
   void SetHtml(const QString& html);
 
-signals:
+ signals:
   void ShowSettingsDialog();
 
  protected:

@@ -28,10 +28,13 @@ class GoogleDriveUrlHandler : public UrlHandler {
   Q_OBJECT
 
  public:
-  explicit GoogleDriveUrlHandler(GoogleDriveService* service, QObject* parent = nullptr);
+  explicit GoogleDriveUrlHandler(GoogleDriveService* service,
+                                 QObject* parent = nullptr);
 
   QString scheme() const { return "googledrive"; }
-  QIcon icon() const { return IconLoader::Load("googledrive", IconLoader::Provider); }
+  QIcon icon() const {
+    return IconLoader::Load("googledrive", IconLoader::Provider);
+  }
   LoadResult StartLoading(const QUrl& url);
 
  private:

@@ -26,19 +26,19 @@
 #include <QSettings>
 #include <QTimer>
 
-#include "podcastbackend.h"
-#include "podcasturlloader.h"
 #include "core/application.h"
 #include "core/closure.h"
 #include "core/logging.h"
 #include "core/network.h"
 #include "core/timeconstants.h"
 #include "core/utilities.h"
+#include "podcastbackend.h"
+#include "podcasturlloader.h"
 
 const char* GPodderSync::kSettingsGroup = "Podcasts";
 const int GPodderSync::kFlushUpdateQueueDelay = 30 * kMsecPerSec;  // 30 seconds
 const int GPodderSync::kGetUpdatesInterval =
-    30 * 60 * kMsecPerSec;  // 30 minutes
+    30 * 60 * kMsecPerSec;                                  // 30 minutes
 const int GPodderSync::kRequestTimeout = 30 * kMsecPerSec;  // 30 seconds
 
 GPodderSync::GPodderSync(Application* app, QObject* parent)

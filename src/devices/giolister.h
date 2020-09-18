@@ -18,8 +18,8 @@
 #ifndef GIOLISTER_H
 #define GIOLISTER_H
 
-#include "devicelister.h"
 #include "core/scopedgobject.h"
+#include "devicelister.h"
 
 // Work around compile issue with glib >= 2.25
 #ifdef signals

@@ -22,8 +22,8 @@
 #include <QFile>
 #include <QThreadPool>
 
-#include "coverexportrunnable.h"
 #include "core/song.h"
+#include "coverexportrunnable.h"
 
 const int AlbumCoverExporter::kMaxConcurrentRequests = 3;
 

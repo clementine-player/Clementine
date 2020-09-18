@@ -41,7 +41,7 @@ class SpotifyBlobDownloader : public QObject {
 
   void Start();
 
-signals:
+ signals:
   void Finished();
 
  private slots:

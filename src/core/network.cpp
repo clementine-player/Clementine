@@ -17,7 +17,6 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "core/logging.h"
 #include "network.h"
 
 #include <QCoreApplication>
@@ -27,6 +26,7 @@
 #include <QNetworkReply>
 
 #include "core/closure.h"
+#include "core/logging.h"
 #include "utilities.h"
 
 QMutex ThreadSafeNetworkDiskCache::sMutex;

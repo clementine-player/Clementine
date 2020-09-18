@@ -18,11 +18,10 @@
 #ifndef PROJECTMVISUALISATION_H
 #define PROJECTMVISUALISATION_H
 
-#include <memory>
-
-#include <QGraphicsScene>
 #include <QBasicTimer>
+#include <QGraphicsScene>
 #include <QSet>
+#include <memory>
 
 #include "engines/bufferconsumer.h"
 
@@ -38,7 +37,10 @@ class ProjectMVisualisation : public QGraphicsScene, public BufferConsumer {
   ProjectMVisualisation(QObject* parent = nullptr);
   ~ProjectMVisualisation();
 
-  enum Mode { Random = 0, FromList = 1, };
+  enum Mode {
+    Random = 0,
+    FromList = 1,
+  };
 
   QString preset_url() const;
   ProjectMPresetModel* preset_model() const { return preset_model_; }

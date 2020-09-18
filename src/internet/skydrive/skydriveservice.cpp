@@ -19,11 +19,10 @@
 
 #include "skydriveservice.h"
 
+#include <QJsonArray>
 #include <QJsonDocument>
 #include <QJsonObject>
-#include <QJsonArray>
 #include <QUrlQuery>
-
 #include <memory>
 
 #include "core/application.h"
@@ -111,7 +110,8 @@ void SkydriveService::AddAuthorizationHeader(QNetworkRequest* request) {
 
 void SkydriveService::FetchUserInfoFinished(QNetworkReply* reply) {
   reply->deleteLater();
-  QJsonObject json_response = QJsonDocument::fromBinaryData(reply->readAll()).object();
+  QJsonObject json_response =
+      QJsonDocument::fromBinaryData(reply->readAll()).object();
 
   QString name = json_response["name"].toString();
   if (!name.isEmpty()) {
@@ -137,7 +137,8 @@ void SkydriveService::ListFiles(const QString& folder) {
 
 void SkydriveService::ListFilesFinished(QNetworkReply* reply) {
   reply->deleteLater();
-  QJsonObject json_response = QJsonDocument::fromBinaryData(reply->readAll()).object();
+  QJsonObject json_response =
+      QJsonDocument::fromBinaryData(reply->readAll()).object();
 
   QJsonArray files = json_response["data"].toArray();
   for (const QJsonValue& f : files) {
@@ -152,8 +153,10 @@ void SkydriveService::ListFilesFinished(QNetworkReply* reply) {
 
       Song song;
       song.set_url(url);
-      song.set_ctime(QDateTime::fromString(file["created_time"].toString()).toTime_t());
-      song.set_mtime(QDateTime::fromString(file["updated_time"].toString()).toTime_t());
+      song.set_ctime(
+          QDateTime::fromString(file["created_time"].toString()).toTime_t());
+      song.set_mtime(
+          QDateTime::fromString(file["updated_time"].toString()).toTime_t());
       song.set_comment(file["description"].toString());
       song.set_filesize(file["size"].toInt());
       song.set_title(file["name"].toString());
@@ -176,7 +179,8 @@ QUrl SkydriveService::GetStreamingUrlFromSongId(const QString& file_id) {
   std::unique_ptr<QNetworkReply> reply(network_->get(request));
   WaitForSignal(reply.get(), SIGNAL(finished()));
 
-  QJsonObject json_response = QJsonDocument::fromBinaryData(reply.get()->readAll()).object();
+  QJsonObject json_response =
+      QJsonDocument::fromBinaryData(reply.get()->readAll()).object();
   return QUrl(json_response["source"].toString());
 }
 

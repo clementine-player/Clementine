@@ -16,9 +16,6 @@
 */
 
 #include "networkremotesettingspage.h"
-#include "ui_networkremotesettingspage.h"
-
-#include <algorithm>
 
 #include <QDesktopServices>
 #include <QFile>
@@ -26,6 +23,7 @@
 #include <QNetworkInterface>
 #include <QSettings>
 #include <QUrl>
+#include <algorithm>
 
 #include "core/application.h"
 #include "networkremote/networkremote.h"
@@ -34,6 +32,7 @@
 #include "transcoder/transcoderoptionsdialog.h"
 #include "ui/iconloader.h"
 #include "ui/settingsdialog.h"
+#include "ui_networkremotesettingspage.h"
 
 const char* NetworkRemoteSettingsPage::kPlayStoreUrl =
     "https://play.google.com/store/apps/details?id=de.qspool.clementineremote";

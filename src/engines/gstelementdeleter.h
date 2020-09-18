@@ -18,9 +18,9 @@
 #ifndef GSTBINDELETER_H
 #define GSTBINDELETER_H
 
-#include <QObject>
-
 #include <gst/gst.h>
+
+#include <QObject>
 
 class GstElementDeleter : public QObject {
   Q_OBJECT

@@ -16,12 +16,13 @@
 */
 
 #include "playlistheader.h"
-#include "playlistview.h"
 
-#include <QtDebug>
 #include <QContextMenuEvent>
 #include <QMenu>
 #include <QSettings>
+#include <QtDebug>
+
+#include "playlistview.h"
 
 PlaylistHeader::PlaylistHeader(Qt::Orientation orientation, PlaylistView* view,
                                QWidget* parent)
@@ -31,7 +32,7 @@ PlaylistHeader::PlaylistHeader(Qt::Orientation orientation, PlaylistView* view,
   hide_action_ = menu_->addAction(tr("&Hide..."), this, SLOT(HideCurrent()));
   stretch_action_ = menu_->addAction(tr("&Stretch columns to fit window"), this,
                                      SLOT(ToggleStretchEnabled()));
-  rating_lock_ = menu_->addAction(tr("&Lock Rating"), this, 
+  rating_lock_ = menu_->addAction(tr("&Lock Rating"), this,
                                   SLOT(ToggleRatingEditStatus()));
   rating_lock_->setCheckable(true);
   QSettings s;
@@ -76,7 +77,7 @@ void PlaylistHeader::contextMenuEvent(QContextMenuEvent* e) {
     QString title(
         model()->headerData(menu_section_, Qt::Horizontal).toString());
     hide_action_->setText(tr("&Hide %1").arg(title));
-    
+
     // show rating_lock action only for ratings section
     rating_lock_->setVisible(menu_section_ == Playlist::Column_Rating);
 

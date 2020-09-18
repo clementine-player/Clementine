@@ -18,9 +18,8 @@
 #ifndef LIBRARYVIEW_H
 #define LIBRARYVIEW_H
 
-#include <memory>
-
 #include <QStyledItemDelegate>
+#include <memory>
 
 #include "core/song.h"
 #include "ui/edittagdialog.h"
@@ -79,7 +78,7 @@ class LibraryView : public AutoExpandingTreeView {
   void SaveFocus();
   void RestoreFocus();
 
-signals:
+ signals:
   void ShowConfigDialog();
 
  protected:

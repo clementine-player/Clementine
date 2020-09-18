@@ -19,9 +19,9 @@
 #ifndef COVERS_MUSICBRAINZCOVERPROVIDER_H_
 #define COVERS_MUSICBRAINZCOVERPROVIDER_H_
 
-#include "coverprovider.h"
-
 #include <QMultiMap>
+
+#include "coverprovider.h"
 
 class QNetworkAccessManager;
 class QNetworkReply;

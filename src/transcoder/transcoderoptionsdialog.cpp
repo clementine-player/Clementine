@@ -15,13 +15,14 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "transcoderoptionsaac.h"
 #include "transcoderoptionsdialog.h"
+
+#include "transcoderoptionsaac.h"
 #include "transcoderoptionsflac.h"
 #include "transcoderoptionsmp3.h"
+#include "transcoderoptionsopus.h"
 #include "transcoderoptionsspeex.h"
 #include "transcoderoptionsvorbis.h"
-#include "transcoderoptionsopus.h"
 #include "transcoderoptionswma.h"
 #include "ui_transcoderoptionsdialog.h"
 
@@ -80,7 +81,8 @@ void TranscoderOptionsDialog::accept() {
   QDialog::accept();
 }
 
-void TranscoderOptionsDialog::set_settings_postfix(const QString &settings_postfix) {
+void TranscoderOptionsDialog::set_settings_postfix(
+    const QString& settings_postfix) {
   if (options_) {
     options_->settings_postfix_ = settings_postfix;
   }

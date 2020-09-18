@@ -21,7 +21,6 @@
 #include <QUrl>
 
 #include "gtest/gtest_prod.h"
-
 #include "parserbase.h"
 
 class M3UParser : public ParserBase {

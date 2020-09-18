@@ -17,11 +17,11 @@
 
 #include "artistbiography.h"
 
-#include <QLocale>
-#include <QJsonDocument>
 #include <QJsonArray>
+#include <QJsonDocument>
 #include <QJsonObject>
 #include <QJsonValue>
+#include <QLocale>
 #include <QUrl>
 #include <QUrlQuery>
 
@@ -254,27 +254,29 @@ void ArtistBiography::FetchWikipediaArticle(int id,
 
   qLog(Debug) << "Article url:" << url;
 
-  NewClosure(reply, SIGNAL(finished()), [this, id, reply, wikipedia_url,
-             wiki_title, latch]() {
-    reply->deleteLater();
+  NewClosure(
+      reply, SIGNAL(finished()),
+      [this, id, reply, wikipedia_url, wiki_title, latch]() {
+        reply->deleteLater();
 
-    QJsonDocument json_document = QJsonDocument::fromJson(reply->readAll());
-    QJsonObject json = json_document.object();
-    QString html = ExtractExtract(json);
+        QJsonDocument json_document = QJsonDocument::fromJson(reply->readAll());
+        QJsonObject json = json_document.object();
+        QString html = ExtractExtract(json);
 
-    CollapsibleInfoPane::Data data;
-    data.id_ = wikipedia_url;
-    data.title_ = tr("Biography");
-    data.type_ = CollapsibleInfoPane::Data::Type_Biography;
-    data.icon_ = IconLoader::Load("wikipedia", IconLoader::Provider);
+        CollapsibleInfoPane::Data data;
+        data.id_ = wikipedia_url;
+        data.title_ = tr("Biography");
+        data.type_ = CollapsibleInfoPane::Data::Type_Biography;
+        data.icon_ = IconLoader::Load("wikipedia", IconLoader::Provider);
 
-    QString text;
-    text += "<p><a href=\"" + wikipedia_url + "\">" +
-        tr("Open in your browser") + "</a></p>";
+        QString text;
+        text += "<p><a href=\"" + wikipedia_url + "\">" +
+                tr("Open in your browser") + "</a></p>";
 
-    text += html;
+        text += html;
 
-    text += tr("<p>This article uses material from the Wikipedia article "
+        text +=
+            tr("<p>This article uses material from the Wikipedia article "
                "<a href=\"%1\">%2</a>, which is released under the <a "
                "href=\"https://clementine-player.org/licenses/by-sa/"
                "3.0/legalcode.txt\">Creative Commons Attribution-Share-Alike "
@@ -282,10 +284,10 @@ void ArtistBiography::FetchWikipediaArticle(int id,
                 .arg(wikipedia_url)
                 .arg(wiki_title);
 
-    SongInfoTextView* editor = new SongInfoTextView;
-    editor->SetHtml(text);
-    data.contents_ = editor;
-    emit InfoReady(id, data);
-    latch->CountDown();
-  });
+        SongInfoTextView* editor = new SongInfoTextView;
+        editor->SetHtml(text);
+        data.contents_ = editor;
+        emit InfoReady(id, data);
+        latch->CountDown();
+      });
 }

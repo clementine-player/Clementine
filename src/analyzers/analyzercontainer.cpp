@@ -21,19 +21,20 @@
 */
 
 #include "analyzercontainer.h"
-#include "baranalyzer.h"
-#include "blockanalyzer.h"
-#include "boomanalyzer.h"
-#include "sonogram.h"
-#include "rainbowanalyzer.h"
-#include "turbine.h"
-#include "core/logging.h"
 
 #include <QHBoxLayout>
 #include <QMouseEvent>
 #include <QSettings>
 #include <QTimer>
 #include <QtDebug>
+
+#include "baranalyzer.h"
+#include "blockanalyzer.h"
+#include "boomanalyzer.h"
+#include "core/logging.h"
+#include "rainbowanalyzer.h"
+#include "sonogram.h"
+#include "turbine.h"
 
 const char* AnalyzerContainer::kSettingsGroup = "Analyzer";
 const char* AnalyzerContainer::kSettingsFramerate = "framerate";
@@ -155,8 +156,7 @@ void AnalyzerContainer::TogglePsychedelicColors() {
 }
 
 void AnalyzerContainer::ChangeAnalyzer(int id) {
-  QObject* instance =
-      analyzer_types_[id]->newInstance(Q_ARG(QWidget*, this));
+  QObject* instance = analyzer_types_[id]->newInstance(Q_ARG(QWidget*, this));
 
   if (!instance) {
     qLog(Warning) << "Couldn't initialise a new"
@@ -225,7 +225,7 @@ void AnalyzerContainer::Load() {
 }
 
 void AnalyzerContainer::SaveFramerate(int framerate) {
-  // For now, framerate is common for all analyzers. 
+  // For now, framerate is common for all analyzers.
   // Maybe each analyzer should have its own framerate?
   current_framerate_ = framerate;
   QSettings s;

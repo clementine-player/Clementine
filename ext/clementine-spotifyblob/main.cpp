@@ -18,13 +18,13 @@
 // it is used by the Spotify blob which links against libspotify and is not GPL
 // compatible.
 
+#include <gst/gst.h>
+
 #include <QCoreApplication>
 #include <QStringList>
 
-#include <gst/gst.h>
-
-#include "spotifyclient.h"
 #include "core/logging.h"
+#include "spotifyclient.h"
 
 int main(int argc, char** argv) {
   QCoreApplication a(argc, argv);

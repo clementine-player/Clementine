@@ -16,19 +16,20 @@
 */
 
 #include "moodbaritemdelegate.h"
-#include "moodbarloader.h"
-#include "moodbarpipeline.h"
-#include "moodbarrenderer.h"
-#include "core/application.h"
-#include "core/closure.h"
-#include "playlist/playlist.h"
-#include "playlist/playlistview.h"
 
 #include <QApplication>
 #include <QPainter>
 #include <QSettings>
 #include <QSortFilterProxyModel>
 #include <QtConcurrentRun>
+
+#include "core/application.h"
+#include "core/closure.h"
+#include "moodbarloader.h"
+#include "moodbarpipeline.h"
+#include "moodbarrenderer.h"
+#include "playlist/playlist.h"
+#include "playlist/playlistview.h"
 
 MoodbarItemDelegate::Data::Data() : state_(State_None) {}
 
@@ -58,8 +59,8 @@ void MoodbarItemDelegate::ReloadSettings() {
 void MoodbarItemDelegate::paint(QPainter* painter,
                                 const QStyleOptionViewItem& option,
                                 const QModelIndex& index) const {
-  QPixmap pixmap = const_cast<MoodbarItemDelegate*>(this)
-                       ->PixmapForIndex(index, option.rect.size());
+  QPixmap pixmap = const_cast<MoodbarItemDelegate*>(this)->PixmapForIndex(
+      index, option.rect.size());
 
   drawBackground(painter, option, index);
 

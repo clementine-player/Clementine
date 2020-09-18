@@ -22,27 +22,26 @@
 
 #include "songloader.h"
 
-#include <algorithm>
-#include <memory>
-
 #include <QBuffer>
 #include <QDirIterator>
 #include <QFileInfo>
 #include <QTimer>
 #include <QUrl>
 #include <QtDebug>
+#include <algorithm>
+#include <memory>
 
 #include "config.h"
 #include "core/logging.h"
 #include "core/player.h"
-#include "core/utilities.h"
 #include "core/signalchecker.h"
 #include "core/song.h"
 #include "core/tagreaderclient.h"
 #include "core/timeconstants.h"
+#include "core/utilities.h"
 #include "core/waitforsignal.h"
-#include "internet/lastfm/fixlastfm.h"
 #include "internet/core/internetmodel.h"
+#include "internet/lastfm/fixlastfm.h"
 #include "internet/podcasts/podcastparser.h"
 #include "internet/podcasts/podcastservice.h"
 #include "internet/podcasts/podcasturlloader.h"
@@ -55,6 +54,7 @@
 
 #ifdef HAVE_AUDIOCD
 #include <gst/audio/gstaudiocdsrc.h>
+
 #include "devices/cddasongloader.h"
 #endif
 
@@ -404,8 +404,8 @@ SongLoader::Result SongLoader::LoadRemote() {
 
   // Create the source element automatically based on the URL
   GstElement* source = gst_element_make_from_uri(
-      GST_URI_SRC, Utilities::GetUriForGstreamer(url_).constData(),
-      nullptr, nullptr);
+      GST_URI_SRC, Utilities::GetUriForGstreamer(url_).constData(), nullptr,
+      nullptr);
   if (!source) {
     qLog(Warning) << "Couldn't create gstreamer source element for"
                   << url_.toString();

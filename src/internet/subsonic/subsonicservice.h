@@ -22,9 +22,8 @@
 #ifndef INTERNET_SUBSONIC_SUBSONICSERVICE_H_
 #define INTERNET_SUBSONIC_SUBSONICSERVICE_H_
 
-#include <memory>
-
 #include <QQueue>
+#include <memory>
 
 #include "internet/core/internetmodel.h"
 #include "internet/core/internetservice.h"
@@ -130,8 +129,7 @@ class SubsonicService : public InternetService {
   static const int kMaxRedirects;
   static const int kCoverArtSize;
 
-
-signals:
+ signals:
   void LoginStateChanged(SubsonicService::LoginState newstate);
 
  private:
@@ -192,7 +190,7 @@ class SubsonicLibraryScanner : public QObject {
   static const int kConcurrentRequests;
   static const int kCoverArtSize;
 
-signals:
+ signals:
   void ScanFinished();
 
  private slots:

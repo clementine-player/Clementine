@@ -30,7 +30,9 @@ class MagnatuneUrlHandler : public UrlHandler {
   MagnatuneUrlHandler(MagnatuneService* service, QObject* parent);
 
   QString scheme() const { return "magnatune"; }
-  QIcon icon() const { return IconLoader::Load("magnatune", IconLoader::Provider); }
+  QIcon icon() const {
+    return IconLoader::Load("magnatune", IconLoader::Provider);
+  }
   LoadResult StartLoading(const QUrl& url);
 
  private:

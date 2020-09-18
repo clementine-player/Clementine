@@ -23,15 +23,7 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "config.h"
 #include "database.h"
-#include "scopedtransaction.h"
-#include "utilities.h"
-#include "core/application.h"
-#include "core/logging.h"
-#include "core/taskmanager.h"
-
-#include <boost/scope_exit.hpp>
 
 #include <sqlite3.h>
 
@@ -41,10 +33,18 @@
 #include <QLibraryInfo>
 #include <QSqlDriver>
 #include <QSqlQuery>
-#include <QtDebug>
 #include <QThread>
 #include <QUrl>
 #include <QVariant>
+#include <QtDebug>
+#include <boost/scope_exit.hpp>
+
+#include "config.h"
+#include "core/application.h"
+#include "core/logging.h"
+#include "core/taskmanager.h"
+#include "scopedtransaction.h"
+#include "utilities.h"
 
 const char* Database::kDatabaseFilename = "clementine.db";
 const int Database::kSchemaVersion = 51;
@@ -241,8 +241,10 @@ QSqlDatabase Database::Connect() {
     }
   }
 
-  const QString connection_id = QString("%1_thread_%2").arg(connection_id_).arg(
-      reinterpret_cast<quint64>(QThread::currentThread()));
+  const QString connection_id =
+      QString("%1_thread_%2")
+          .arg(connection_id_)
+          .arg(reinterpret_cast<quint64>(QThread::currentThread()));
 
   // Try to find an existing connection for this thread
   QSqlDatabase db = QSqlDatabase::database(connection_id);
@@ -266,17 +268,20 @@ QSqlDatabase Database::Connect() {
   if (!sFTSTokenizer) StaticInit();
 
   {
-
 #ifdef SQLITE_DBCONFIG_ENABLE_FTS3_TOKENIZER
-    // In case sqlite>=3.12 is compiled without -DSQLITE_ENABLE_FTS3_TOKENIZER (generally a good idea 
-    // due to security reasons) the fts3 support should be enabled explicitly.
-    // see https://github.com/clementine-player/Clementine/issues/5297
+    // In case sqlite>=3.12 is compiled without -DSQLITE_ENABLE_FTS3_TOKENIZER
+    // (generally a good idea due to security reasons) the fts3 support should
+    // be enabled explicitly. see
+    // https://github.com/clementine-player/Clementine/issues/5297
     //
-    // See https://www.sqlite.org/fts3.html#custom_application_defined_tokenizers
+    // See
+    // https://www.sqlite.org/fts3.html#custom_application_defined_tokenizers
     QVariant v = db.driver()->handle();
     if (v.isValid() && qstrcmp(v.typeName(), "sqlite3*") == 0) {
       sqlite3* handle = *static_cast<sqlite3**>(v.data());
-      if (!handle || sqlite3_db_config(handle, SQLITE_DBCONFIG_ENABLE_FTS3_TOKENIZER, 1, nullptr) != SQLITE_OK) {
+      if (!handle ||
+          sqlite3_db_config(handle, SQLITE_DBCONFIG_ENABLE_FTS3_TOKENIZER, 1,
+                            nullptr) != SQLITE_OK) {
         qLog(Fatal) << "Failed to enable FTS3 tokenizer";
       }
     }
@@ -289,7 +294,8 @@ QSqlDatabase Database::Connect() {
         ":pointer", QByteArray(reinterpret_cast<const char*>(&sFTSTokenizer),
                                sizeof(&sFTSTokenizer)));
     if (!set_fts_tokenizer.exec()) {
-      qLog(Warning) << "Couldn't register FTS3 tokenizer : " << set_fts_tokenizer.lastError();
+      qLog(Warning) << "Couldn't register FTS3 tokenizer : "
+                    << set_fts_tokenizer.lastError();
     }
     // Implicit invocation of ~QSqlQuery() when leaving the scope
     // to release any remaining database locks!
@@ -330,9 +336,9 @@ QSqlDatabase Database::Connect() {
       continue;
     // Find out if there are any tables in this database
     QSqlQuery q(db);
-    q.prepare(QString(
-                    "SELECT ROWID FROM %1.sqlite_master"
-                    " WHERE type='table'").arg(key));
+    q.prepare(QString("SELECT ROWID FROM %1.sqlite_master"
+                      " WHERE type='table'")
+                  .arg(key));
     if (!q.exec() || !q.next()) {
       q.finish();
       ExecSchemaCommandsFromFile(db, attached_databases_[key].schema_, 0);
@@ -473,7 +479,8 @@ void Database::UrlEncodeFilenameColumn(const QString& table, QSqlDatabase& db) {
   QSqlQuery select(db);
   select.prepare(QString("SELECT ROWID, filename FROM %1").arg(table));
   QSqlQuery update(db);
-  update.prepare(QString("UPDATE %1 SET filename=:filename WHERE ROWID=:id").arg(table));
+  update.prepare(
+      QString("UPDATE %1 SET filename=:filename WHERE ROWID=:id").arg(table));
   select.exec();
   if (CheckErrors(select)) return;
   while (select.next()) {
@@ -568,9 +575,9 @@ QStringList Database::SongsTables(QSqlDatabase& db, int schema_version) const {
   // look for the tables in attached dbs
   for (const QString& key : attached_databases_.keys()) {
     QSqlQuery q(db);
-    q.prepare(QString(
-            "SELECT NAME FROM %1.sqlite_master"
-            " WHERE type='table' AND name='songs' OR name LIKE '%songs'")
+    q.prepare(
+        QString("SELECT NAME FROM %1.sqlite_master"
+                " WHERE type='table' AND name='songs' OR name LIKE '%songs'")
             .arg(key));
     if (q.exec()) {
       while (q.next()) {

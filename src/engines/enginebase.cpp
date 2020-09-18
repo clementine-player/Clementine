@@ -20,11 +20,11 @@
 // License:   See COPYING
 
 #include "enginebase.h"
-#include "core/timeconstants.h"
-
-#include <cmath>
 
 #include <QSettings>
+#include <cmath>
+
+#include "core/timeconstants.h"
 
 const char* Engine::Base::kSettingsGroup = "Player";
 

@@ -15,19 +15,20 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "core/deletefiles.h"
-#include "core/filesystemmusicstorage.h"
-#include "core/mimedata.h"
 #include "fileview.h"
-#include "ui/iconloader.h"
-#include "ui/mainwindow.h"  // for filter information
-#include "ui/organiseerrordialog.h"
-#include "ui_fileview.h"
 
 #include <QFileSystemModel>
 #include <QKeyEvent>
 #include <QMessageBox>
 #include <QScrollBar>
+
+#include "core/deletefiles.h"
+#include "core/filesystemmusicstorage.h"
+#include "core/mimedata.h"
+#include "ui/iconloader.h"
+#include "ui/mainwindow.h"  // for filter information
+#include "ui/organiseerrordialog.h"
+#include "ui_fileview.h"
 
 const char* FileView::kFileFilter =
     "*.mp3 *.ogg *.flac *.mpc *.m4a *.m4b *.aac *.wma "

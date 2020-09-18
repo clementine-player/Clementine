@@ -17,22 +17,17 @@
 
 #include "libraryview.h"
 
-#include <QPainter>
 #include <QContextMenuEvent>
 #include <QHelpEvent>
 #include <QMenu>
 #include <QMessageBox>
+#include <QPainter>
 #include <QSet>
 #include <QSettings>
 #include <QSortFilterProxyModel>
 #include <QToolTip>
 #include <QWhatsThis>
 
-#include "librarydirectorymodel.h"
-#include "libraryfilterwidget.h"
-#include "librarymodel.h"
-#include "libraryitem.h"
-#include "librarybackend.h"
 #include "core/application.h"
 #include "core/deletefiles.h"
 #include "core/logging.h"
@@ -41,6 +36,11 @@
 #include "core/utilities.h"
 #include "devices/devicemanager.h"
 #include "devices/devicestatefiltermodel.h"
+#include "librarybackend.h"
+#include "librarydirectorymodel.h"
+#include "libraryfilterwidget.h"
+#include "libraryitem.h"
+#include "librarymodel.h"
 #include "smartplaylists/wizard.h"
 #include "ui/iconloader.h"
 #include "ui/organisedialog.h"
@@ -193,10 +193,9 @@ LibraryView::~LibraryView() {}
 void LibraryView::SaveFocus() {
   QModelIndex current = currentIndex();
   QVariant type = model()->data(current, LibraryModel::Role_Type);
-  if (!type.isValid() ||
-      !(type.toInt() == LibraryItem::Type_Song ||
-        type.toInt() == LibraryItem::Type_Container ||
-        type.toInt() == LibraryItem::Type_Divider)) {
+  if (!type.isValid() || !(type.toInt() == LibraryItem::Type_Song ||
+                           type.toInt() == LibraryItem::Type_Container ||
+                           type.toInt() == LibraryItem::Type_Divider)) {
     return;
   }
 
@@ -219,10 +218,10 @@ void LibraryView::SaveFocus() {
 
     case LibraryItem::Type_Container:
     case LibraryItem::Type_Divider: {
-      QString text =
-          model()->data(current, LibraryModel::Role_Key).toString();
+      QString text = model()->data(current, LibraryModel::Role_Key).toString();
       last_selected_container_ = text;
-      last_selected_text_ = model()->data(current, LibraryModel::Role_DisplayText).toString();
+      last_selected_text_ =
+          model()->data(current, LibraryModel::Role_DisplayText).toString();
       break;
     }
 
@@ -236,9 +235,8 @@ void LibraryView::SaveFocus() {
 void LibraryView::SaveContainerPath(const QModelIndex& child) {
   QModelIndex current = model()->parent(child);
   QVariant type = model()->data(current, LibraryModel::Role_Type);
-  if (!type.isValid() ||
-      !(type.toInt() == LibraryItem::Type_Container ||
-        type.toInt() == LibraryItem::Type_Divider)) {
+  if (!type.isValid() || !(type.toInt() == LibraryItem::Type_Container ||
+                           type.toInt() == LibraryItem::Type_Divider)) {
     return;
   }
 
@@ -266,8 +264,9 @@ bool LibraryView::RestoreLevelFocus(const QModelIndex& parent) {
     switch (type.toInt()) {
       case LibraryItem::Type_Song:
         if (!last_selected_song_.url().isEmpty()) {
-          QModelIndex index = qobject_cast<QSortFilterProxyModel*>(model())
-                                  ->mapToSource(current);
+          QModelIndex index =
+              qobject_cast<QSortFilterProxyModel*>(model())->mapToSource(
+                  current);
           SongList songs = app_->library_model()->GetChildSongs(index);
           for (const Song& song : songs) {
             if (song == last_selected_song_) {
@@ -452,8 +451,9 @@ void LibraryView::contextMenuEvent(QContextMenuEvent* e) {
   context_menu_index_ = indexAt(e->pos());
   if (!context_menu_index_.isValid()) return;
 
-  context_menu_index_ = qobject_cast<QSortFilterProxyModel*>(model())
-                            ->mapToSource(context_menu_index_);
+  context_menu_index_ =
+      qobject_cast<QSortFilterProxyModel*>(model())->mapToSource(
+          context_menu_index_);
 
   QModelIndexList selected_indexes =
       qobject_cast<QSortFilterProxyModel*>(model())
@@ -659,8 +659,8 @@ SongList LibraryView::GetSelectedSongs() const {
 
 void LibraryView::Organise() {
   if (!organise_dialog_)
-    organise_dialog_.reset(new OrganiseDialog(app_->task_manager(),
-                                              app_->library_backend()));
+    organise_dialog_.reset(
+        new OrganiseDialog(app_->task_manager(), app_->library_backend()));
 
   organise_dialog_->SetDestinationModel(app_->directory_model());
   organise_dialog_->SetCopy(false);

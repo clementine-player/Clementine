@@ -23,8 +23,9 @@
  */
 
 #include "boomanalyzer.h"
-#include <cmath>
+
 #include <QPainter>
+#include <cmath>
 
 using Analyzer::Scope;
 

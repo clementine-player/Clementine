@@ -21,10 +21,10 @@
 #include <QWidget>
 
 #include "collapsibleinfopane.h"
-#include "songinfofetcher.h"
 #include "core/song.h"
 #include "playlist/playlistitem.h"
 #include "smartplaylists/generator_fwd.h"
+#include "songinfofetcher.h"
 #include "widgets/widgetfadehelper.h"
 
 class CollapsibleInfoPane;
@@ -47,7 +47,7 @@ class SongInfoBase : public QWidget {
   void SongFinished();
   virtual void ReloadSettings();
 
-signals:
+ signals:
   void ShowSettingsDialog();
   void DoGlobalSearch(const QString& query);
 

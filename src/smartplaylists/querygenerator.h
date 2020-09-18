@@ -51,6 +51,6 @@ class QueryGenerator : public Generator {
   int current_pos_;
 };
 
-}  // namespace
+}  // namespace smart_playlists
 
 #endif  // QUERYPLAYLISTGENERATOR_H

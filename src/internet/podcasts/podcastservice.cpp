@@ -26,7 +26,6 @@
 #include <QtConcurrentRun>
 
 #include "addpodcastdialog.h"
-#include "podcastinfodialog.h"
 #include "core/application.h"
 #include "core/logging.h"
 #include "core/mergedproxymodel.h"
@@ -34,12 +33,13 @@
 #include "devices/devicestatefiltermodel.h"
 #include "devices/deviceview.h"
 #include "internet/core/internetmodel.h"
+#include "internet/podcasts/podcastservicemodel.h"
 #include "library/libraryview.h"
 #include "opmlcontainer.h"
 #include "podcastbackend.h"
 #include "podcastdeleter.h"
 #include "podcastdownloader.h"
-#include "internet/podcasts/podcastservicemodel.h"
+#include "podcastinfodialog.h"
 #include "podcastupdater.h"
 #include "ui/iconloader.h"
 #include "ui/organisedialog.h"
@@ -226,7 +226,8 @@ void PodcastService::PopulatePodcastList(QStandardItem* parent) {
   // Do this here since the downloader won't be created yet in the ctor.
   connect(app_->podcast_downloader(),
           SIGNAL(ProgressChanged(PodcastEpisode, PodcastDownload::State, int)),
-          SLOT(DownloadProgressChanged(PodcastEpisode, PodcastDownload::State, int)));
+          SLOT(DownloadProgressChanged(PodcastEpisode, PodcastDownload::State,
+                                       int)));
 
   if (default_icon_.isNull()) {
     default_icon_ = IconLoader::Load("podcast", IconLoader::Provider);
@@ -345,7 +346,8 @@ void PodcastService::UpdatePodcastText(QStandardItem* item,
     case PodcastDownload::Finished:
     case PodcastDownload::NotDownloading:
       if (podcast.ImageUrlSmall().isValid()) {
-        icon_loader_->LoadIcon(podcast.ImageUrlSmall().toString(), QString(), item);
+        icon_loader_->LoadIcon(podcast.ImageUrlSmall().toString(), QString(),
+                               item);
       } else {
         item->setIcon(default_icon_);
       }
@@ -431,21 +433,18 @@ void PodcastService::ShowContextMenu(const QPoint& global_pos) {
     download_selected_action_ =
         context_menu_->addAction(IconLoader::Load("download", IconLoader::Base),
                                  "", this, SLOT(DownloadSelectedEpisode()));
-    info_selected_action_ =
-        context_menu_->addAction(IconLoader::Load("about-info",
-                                                  IconLoader::Base),
-                                 tr("Podcast information"), this,
-                                 SLOT(PodcastInfo()));
+    info_selected_action_ = context_menu_->addAction(
+        IconLoader::Load("about-info", IconLoader::Base),
+        tr("Podcast information"), this, SLOT(PodcastInfo()));
     delete_downloaded_action_ = context_menu_->addAction(
         IconLoader::Load("edit-delete", IconLoader::Base),
         tr("Delete downloaded data"), this, SLOT(DeleteDownloadedData()));
     copy_to_device_ = context_menu_->addAction(
         IconLoader::Load("multimedia-player-ipod-mini-blue", IconLoader::Base),
         tr("Copy to device..."), this, SLOT(CopyToDevice()));
-    cancel_download_ = context_menu_->addAction(IconLoader::Load("cancel",
-                                                IconLoader::Base),
-                                                tr("Cancel download"), this,
-                                                SLOT(CancelDownload()));
+    cancel_download_ = context_menu_->addAction(
+        IconLoader::Load("cancel", IconLoader::Base), tr("Cancel download"),
+        this, SLOT(CancelDownload()));
     remove_selected_action_ = context_menu_->addAction(
         IconLoader::Load("list-remove", IconLoader::Base), tr("Unsubscribe"),
         this, SLOT(RemoveSelectedPodcast()));
@@ -520,7 +519,8 @@ void PodcastService::ShowContextMenu(const QPoint& global_pos) {
 
     if (explicitly_selected_podcasts_.isEmpty()) {
       set_new_action_->setEnabled(listened);
-      set_listened_action_->setEnabled(!listened || !episode.listened_date().isValid());
+      set_listened_action_->setEnabled(!listened ||
+                                       !episode.listened_date().isValid());
     }
   } else {
     download_selected_action_->setEnabled(episodes);
@@ -734,7 +734,8 @@ void PodcastService::DownloadProgressChanged(const PodcastEpisode& episode,
                                              PodcastDownload::State state,
                                              int percent) {
   QStandardItem* item = episodes_by_database_id_[episode.database_id()];
-  QStandardItem* item2 = podcasts_by_database_id_[episode.podcast_database_id()];
+  QStandardItem* item2 =
+      podcasts_by_database_id_[episode.podcast_database_id()];
   if (!item || !item2) return;
 
   UpdateEpisodeText(item, state, percent);

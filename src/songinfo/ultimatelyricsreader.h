@@ -18,10 +18,10 @@
 #ifndef ULTIMATELYRICSREADER_H
 #define ULTIMATELYRICSREADER_H
 
-#include "ultimatelyricsprovider.h"
-
 #include <QObject>
 #include <QXmlStreamReader>
+
+#include "ultimatelyricsprovider.h"
 
 class QIODevice;
 class QThread;

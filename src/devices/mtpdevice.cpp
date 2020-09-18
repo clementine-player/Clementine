@@ -15,19 +15,20 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "devicemanager.h"
-#include "mtpconnection.h"
 #include "mtpdevice.h"
-#include "mtploader.h"
-#include "core/application.h"
-#include "core/logging.h"
-#include "library/librarybackend.h"
-#include "library/librarymodel.h"
 
 #include <libmtp.h>
 
 #include <QFile>
 #include <QThread>
+
+#include "core/application.h"
+#include "core/logging.h"
+#include "devicemanager.h"
+#include "library/librarybackend.h"
+#include "library/librarymodel.h"
+#include "mtpconnection.h"
+#include "mtploader.h"
 
 bool MtpDevice::sInitialisedLibMTP = false;
 

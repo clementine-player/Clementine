@@ -24,10 +24,10 @@
 #include <QFile>
 #include <QFileInfo>
 
-#include "podcast.h"
 #include "core/logging.h"
 #include "core/timeconstants.h"
 #include "core/utilities.h"
+#include "podcast.h"
 
 const QStringList PodcastEpisode::kColumns = QStringList() << "podcast_id"
                                                            << "title"
@@ -147,10 +147,10 @@ void PodcastEpisode::InitFromQuery(const QSqlQuery& query) {
   d->url_ = QUrl::fromEncoded(query.value(7).toByteArray());
   d->listened_ = query.value(8).toBool();
 
-  // After setting QDateTime to invalid state, it's saved into database as time_t,
-  // when this number std::numeric_limits<unsigned int>::max() (4294967295) is read back
-  // from database, it creates a valid QDateTime.
-  // So to make it behave consistently, this change is needed.
+  // After setting QDateTime to invalid state, it's saved into database as
+  // time_t, when this number std::numeric_limits<unsigned int>::max()
+  // (4294967295) is read back from database, it creates a valid QDateTime. So
+  // to make it behave consistently, this change is needed.
   if (query.value(9).toUInt() == std::numeric_limits<unsigned int>::max()) {
     d->listened_date_ = QDateTime();
   } else {

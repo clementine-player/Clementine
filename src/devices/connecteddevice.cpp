@@ -16,16 +16,17 @@
 */
 
 #include "connecteddevice.h"
-#include "devicelister.h"
-#include "devicemanager.h"
+
+#include <QtDebug>
+
 #include "core/application.h"
 #include "core/database.h"
 #include "core/logging.h"
+#include "devicelister.h"
+#include "devicemanager.h"
 #include "library/library.h"
 #include "library/librarybackend.h"
 #include "library/librarymodel.h"
-
-#include <QtDebug>
 
 ConnectedDevice::ConnectedDevice(const QUrl& url, DeviceLister* lister,
                                  const QString& unique_id,

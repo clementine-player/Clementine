@@ -19,8 +19,8 @@
 #define EQUALIZER_H
 
 #include <QDialog>
-#include <QMetaType>
 #include <QMap>
+#include <QMetaType>
 
 class EqualizerSlider;
 class Ui_Equalizer;
@@ -54,7 +54,7 @@ class Equalizer : public QDialog {
   Params current_params() const;
   float stereo_balance() const;
 
-signals:
+ signals:
   void EnabledChanged(bool enabled);
   void ParametersChanged(int preamp, const QList<int>& band_gains);
   void StereoBalanceChanged(float balance);

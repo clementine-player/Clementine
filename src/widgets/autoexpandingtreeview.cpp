@@ -16,10 +16,11 @@
 */
 
 #include "autoexpandingtreeview.h"
-#include "core/mimedata.h"
 
 #include <QMouseEvent>
 #include <QtDebug>
+
+#include "core/mimedata.h"
 
 const int AutoExpandingTreeView::kRowsToShow = 50;
 

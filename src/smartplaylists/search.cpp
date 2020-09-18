@@ -16,10 +16,11 @@
 */
 
 #include "search.h"
-#include "core/logging.h"
-#include "core/song.h"
 
 #include <QStringList>
+
+#include "core/logging.h"
+#include "core/song.h"
 
 namespace smart_playlists {
 
@@ -106,7 +107,7 @@ bool Search::operator==(const Search& other) const {
          limit_ == other.limit_;
 }
 
-}  // namespace
+}  // namespace smart_playlists
 
 QDataStream& operator<<(QDataStream& s, const smart_playlists::Search& search) {
   s << search.terms_;

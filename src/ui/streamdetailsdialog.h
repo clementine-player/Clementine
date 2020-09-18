@@ -1,9 +1,8 @@
 #ifndef STREAMDETAILSDIALOG_H
 #define STREAMDETAILSDIALOG_H
 
-#include <memory>
-
 #include <QDialog>
+#include <memory>
 
 namespace Ui {
 class StreamDetailsDialog;

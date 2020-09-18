@@ -24,10 +24,10 @@
  * Original Author:  Max Howell  <max.howell@methylblue.com>  2003
  */
 
-#include <cmath>
-#include <QPainter>
-
 #include "turbine.h"
+
+#include <QPainter>
+#include <cmath>
 
 using Analyzer::Scope;
 

@@ -18,6 +18,7 @@
 */
 
 #include "lastfmcompat.h"
+
 #include "core/logging.h"
 
 namespace lastfm {
@@ -32,9 +33,8 @@ bool ParseQuery(const QByteArray& data, XmlQuery* query,
   const bool ret = query->parse(data);
 
   if (connection_problems) {
-    *connection_problems =
-        !ret &&
-        query->parseError().enumValue() == lastfm::ws::MalformedResponse;
+    *connection_problems = !ret && query->parseError().enumValue() ==
+                                       lastfm::ws::MalformedResponse;
   }
 
   return ret;
