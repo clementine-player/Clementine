@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2020-09-12 09:26+0000\n"
+"PO-Revision-Date: 2020-09-19 18:50+0000\n"
 "Last-Translator: BrLi <rainman59118@gmail.com>\n"
 "Language-Team: Chinese (Taiwan) (http://www.transifex.com/davidsansome/clementine/language/zh_TW/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1670,7 +1670,7 @@ msgstr "刪除播放過的片斷內容"
 
 #: ui/equalizer.cpp:221 ../bin/src/ui_equalizer.h:168
 msgid "Delete preset"
-msgstr "刪除預設"
+msgstr "刪除內建值"
 
 #: library/libraryview.cpp:411
 msgid "Delete smart playlist"
@@ -2224,7 +2224,7 @@ msgstr "匯出完成"
 #: ui/albumcovermanager.cpp:812
 #, qt-format
 msgid "Exported %1 covers out of %2 (%3 skipped)"
-msgstr ""
+msgstr "從 %2 中匯出 %1 封面（略過 %3）"
 
 #: core/song.cpp:430 transcoder/transcoder.cpp:234
 #: ../bin/src/ui_magnatunedownloaddialog.h:136
@@ -2287,7 +2287,7 @@ msgstr "無法解析回應 %1：\n%2"
 
 #: internet/podcasts/podcasturlloader.cpp:177
 msgid "Failed to parse the XML for this RSS feed"
-msgstr "無法解析此 RSS feed 的 XML"
+msgstr "無法解析此 RSS 摘要的 XML"
 
 #: internet/icecast/icecastservice.cpp:129
 #, qt-format
@@ -2337,7 +2337,7 @@ msgstr "擷取播放清單項目"
 
 #: ../bin/src/ui_ripcddialog.h:319
 msgid "File Format"
-msgstr ""
+msgstr "檔案格式"
 
 #: ui/organisedialog.cpp:82
 msgid "File extension"
@@ -2399,7 +2399,7 @@ msgstr "第一層次"
 
 #: widgets/nowplayingwidget.cpp:106
 msgid "Fit cover to width"
-msgstr ""
+msgstr "讓封面圖片符合寬度"
 
 #: ../bin/src/ui_songinfosettingspage.h:155
 msgid "Font size"
@@ -2465,7 +2465,7 @@ msgstr "幀/每段緩衝"
 
 #: internet/subsonic/subsonicservice.cpp:109
 msgid "Frequently Played Albums"
-msgstr ""
+msgstr "最常播放的專輯"
 
 #: moodbar/moodbarrenderer.cpp:173
 msgid "Frozen"
@@ -2505,7 +2505,7 @@ msgstr "風格"
 #: internet/spotify/spotifyservice.cpp:642
 #: internet/spotify/spotifyservice.cpp:685
 msgid "Get a URL to share this Spotify song"
-msgstr ""
+msgstr "產生分享此 Spotify 歌曲的網址"
 
 #: internet/spotify/spotifyservice.cpp:674
 msgid "Get a URL to share this playlist"
@@ -2564,7 +2564,7 @@ msgstr "依專輯歸類"
 
 #: library/libraryfilterwidget.cpp:136
 msgid "Group by Album artist/Album"
-msgstr ""
+msgstr "依專輯演出者/專輯歸類"
 
 #: library/libraryfilterwidget.cpp:129
 msgid "Group by Artist"
@@ -2590,24 +2590,24 @@ msgstr "依風格/演出者/專輯歸類"
 #: ui/organisedialog.cpp:70 ../bin/src/ui_groupbydialog.h:141
 #: ../bin/src/ui_groupbydialog.h:160 ../bin/src/ui_groupbydialog.h:179
 msgid "Grouping"
-msgstr ""
+msgstr "群組"
 
 #: library/libraryfilterwidget.cpp:197
 msgid "Grouping Name"
-msgstr ""
+msgstr "群組名稱"
 
 #: library/libraryfilterwidget.cpp:197
 msgid "Grouping name:"
-msgstr ""
+msgstr "群組名稱："
 
 #: internet/podcasts/podcasturlloader.cpp:208
 msgid "HTML page did not contain any RSS feeds"
-msgstr ""
+msgstr "HTML 網頁不含任何 RSS 摘要"
 
 #: internet/subsonic/subsonicsettingspage.cpp:166
 msgid ""
 "HTTP 3xx status code received without URL, verify server configuration."
-msgstr ""
+msgstr "收到不含網址的 HTML 3xx 狀態碼，請再確認伺服器設定。"
 
 #: ../bin/src/ui_networkproxysettingspage.h:162
 msgid "HTTP proxy"
@@ -2645,11 +2645,11 @@ msgstr "高 (1024x1024)"
 
 #: ui/equalizer.cpp:128
 msgid "Hip Hop"
-msgstr ""
+msgstr "嘻哈"
 
 #: internet/subsonic/subsonicsettingspage.cpp:138
 msgid "Host not found, check server URL. Example: http://localhost:4040/"
-msgstr ""
+msgstr "找不到主機，請再確認伺服器網址，例如：http://localhost:4040/"
 
 #: smartplaylists/searchterm.cpp:417
 msgid "Hours"
@@ -2710,12 +2710,12 @@ msgstr "圖片(*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 #: core/utilities.cpp:156
 #, qt-format
 msgid "In %1 days"
-msgstr ""
+msgstr "再 %1 天"
 
 #: core/utilities.cpp:159
 #, qt-format
 msgid "In %1 weeks"
-msgstr ""
+msgstr "再 %1 週"
 
 #: ../bin/src/ui_wizardfinishpage.h:85
 msgid ""
@@ -2737,11 +2737,11 @@ msgstr "包括所有歌曲"
 
 #: internet/subsonic/subsonicsettingspage.cpp:110
 msgid "Incompatible Subsonic REST protocol version. Client must upgrade."
-msgstr ""
+msgstr "不相容的 Subsonic REST 埠口版本，請更新客戶端。"
 
 #: internet/subsonic/subsonicsettingspage.cpp:115
 msgid "Incompatible Subsonic REST protocol version. Server must upgrade."
-msgstr ""
+msgstr "不相容的 Subsonic REST 埠口版本，請更新伺服器端。"
 
 #: internet/subsonic/subsonicsettingspage.cpp:156
 msgid "Incomplete configuration, please ensure all fields are populated."
@@ -2749,11 +2749,11 @@ msgstr "不完整的設定狀態，請確定所有的領域名稱都已經上傳
 
 #: core/commandlineoptions.cpp:164
 msgid "Increase the volume by 4 percent"
-msgstr ""
+msgstr "增加音量4％"
 
 #: core/commandlineoptions.cpp:166
 msgid "Increase the volume by <value> percent"
-msgstr ""
+msgstr "增加音量 <value>%"
 
 #: core/globalshortcuts.cpp:63 wiimotedev/wiimotesettingspage.cpp:110
 msgid "Increase volume"
@@ -2762,7 +2762,7 @@ msgstr "提高音量"
 #: internet/core/cloudfileservice.cpp:154
 #, qt-format
 msgid "Indexing %1"
-msgstr ""
+msgstr "索引 %1"
 
 #: wiimotedev/wiimotesettingspage.cpp:139 ../bin/src/ui_deviceproperties.h:372
 msgid "Information"
@@ -2770,7 +2770,7 @@ msgstr "資訊"
 
 #: ../bin/src/ui_ripcddialog.h:300
 msgid "Input options"
-msgstr ""
+msgstr "輸入選項"
 
 #: ../bin/src/ui_organisedialog.h:254
 msgid "Insert..."
@@ -2782,7 +2782,7 @@ msgstr "已安裝"
 
 #: core/database.cpp:606
 msgid "Integrity check"
-msgstr ""
+msgstr "完整性檢查"
 
 #: ui/mainwindow.cpp:279
 msgid "Internet"
@@ -2795,7 +2795,7 @@ msgstr "網際網路服務供應商"
 #: ../bin/src/ui_internetshowsettingspage.h:83
 msgctxt "Global search settings dialog title."
 msgid "Internet services"
-msgstr ""
+msgstr "網際網路服務"
 
 #: widgets/osd.cpp:319 ../bin/src/ui_playlistsequence.h:115
 msgid "Intro tracks"
@@ -2807,7 +2807,7 @@ msgstr "無效的 API key"
 
 #: songinfo/streamdiscoverer.cpp:114
 msgid "Invalid URL"
-msgstr ""
+msgstr "無效的網址"
 
 #: internet/lastfm/lastfmservice.cpp:269
 msgid "Invalid format"
@@ -2835,7 +2835,7 @@ msgstr "無效對稱金鑰"
 
 #: ../bin/src/ui_ripcddialog.h:311
 msgid "Invert Selection"
-msgstr ""
+msgstr "反向選擇"
 
 #: internet/jamendo/jamendoservice.cpp:137
 msgid "Jamendo"
@@ -2896,7 +2896,7 @@ msgstr "小貓喵喵"
 
 #: ui/equalizer.cpp:131
 msgid "Kuduro"
-msgstr ""
+msgstr "Kuduro"
 
 #: ../bin/src/ui_behavioursettingspage.h:395
 msgid "Language"
@@ -2916,11 +2916,11 @@ msgstr "大的專輯封面"
 
 #: widgets/nowplayingwidget.cpp:100
 msgid "Large album cover (details below)"
-msgstr ""
+msgstr "大的專輯封面（底下附詳細資訊）"
 
 #: widgets/nowplayingwidget.cpp:101
 msgid "Large album cover (no details)"
-msgstr ""
+msgstr "大的專輯封面（無詳細資訊）"
 
 #: widgets/fancytabwidget.cpp:429
 msgid "Large sidebar"
@@ -2933,7 +2933,7 @@ msgstr "最近播放"
 #: playlist/playlist.cpp:1410 ../bin/src/ui_edittagdialog.h:708
 msgctxt "A playlist's tag."
 msgid "Last played"
-msgstr ""
+msgstr "最近播放"
 
 #: ../bin/src/ui_lastfmsettingspage.h:131
 msgid "Last.fm"
@@ -3092,7 +3092,7 @@ msgstr "喜愛"
 
 #: core/globalshortcuts.cpp:80
 msgid "Love (Last.fm scrobbling)"
-msgstr ""
+msgstr "喜愛 (Last.fm scrobbling)"
 
 #: analyzers/analyzercontainer.cpp:65
 #: visualisations/visualisationcontainer.cpp:106
@@ -3119,7 +3119,7 @@ msgstr "歌詞來自 %1"
 
 #: songinfo/taglyricsinfoprovider.cpp:29
 msgid "Lyrics from the tag"
-msgstr ""
+msgstr "標籤中的歌詞"
 
 #: transcoder/transcoder.cpp:236
 msgid "M4A AAC"
@@ -3170,7 +3170,7 @@ msgstr "搞定它！"
 #: ../bin/src/ui_mainwindow.h:744
 msgctxt "Label for button to enable/disable Enterprise background sound."
 msgid "Make it so!"
-msgstr ""
+msgstr "搞定它！"
 
 #: internet/spotify/spotifyservice.cpp:672
 msgid "Make playlist available offline"
@@ -3568,7 +3568,7 @@ msgstr "只顯示第一"
 
 #: ../bin/src/ui_appearancesettingspage.h:316
 msgid "Opacity"
-msgstr ""
+msgstr "透明度"
 
 #: internet/digitally/digitallyimportedservicebase.cpp:177
 #: internet/icecast/icecastservice.cpp:305
@@ -3683,7 +3683,7 @@ msgstr ""
 
 #: ../bin/src/ui_appearancesettingspage.h:323
 msgid "Other"
-msgstr ""
+msgstr "其他"
 
 #: core/commandlineoptions.cpp:179
 msgid "Other options"
@@ -3915,7 +3915,7 @@ msgstr "高級音訊類型"
 
 #: ../bin/src/ui_equalizer.h:163
 msgid "Preset:"
-msgstr "預設："
+msgstr "內建："
 
 #: ../bin/src/ui_wiimoteshortcutgrabber.h:120
 msgid "Press a button combination to use for"
@@ -4257,7 +4257,7 @@ msgstr ""
 
 #: ../bin/src/ui_equalizer.h:173
 msgid "Right"
-msgstr ""
+msgstr "右"
 
 #: ../bin/src/ui_ripcddialog.h:302
 msgid "Rip"
@@ -5483,7 +5483,7 @@ msgstr "使用訊息通知回報 Wii 遙控器的狀態"
 
 #: ../bin/src/ui_appearancesettingspage.h:324
 msgid "Use system icons"
-msgstr ""
+msgstr "使用系統內建的圖示"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:138
 msgid "Use temporal noise shaping"
