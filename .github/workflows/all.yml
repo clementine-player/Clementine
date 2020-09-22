@@ -816,8 +816,10 @@ jobs:
           protobuf
           protobuf-c
           qt
+      - name: Setup Tomahawk tap
+        run: brew tap tomahawk-player/homebrew-tomahawkqt5
       - name: Install liblastfm
-        run: brew install https://raw.githubusercontent.com/tomahawk-player/homebrew-tomahawkqt5/master/liblastfm.rb
+        run: brew install tomahawk-player/homebrew-tomahawkqt5/liblastfm
       - name: Fix liblastfm includes
         run: ln -s /usr/local/include/lastfm /usr/local/include/lastfm5
       - uses: actions/checkout@v1.2.0
