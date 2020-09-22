@@ -1459,8 +1459,10 @@ void MainWindow::StopAfterCurrent() {
 }
 
 void MainWindow::closeEvent(QCloseEvent* event) {
-  if (!tray_icon_ || !settings_.value("keeprunning", tray_icon_->IsVisible()).toBool())
-        Exit();
+  if (!tray_icon_ ||
+      !settings_.value("keeprunning", tray_icon_->IsVisible()).toBool())
+    Exit();
+
   QMainWindow::closeEvent(event);
 }
 
