@@ -1459,17 +1459,11 @@ void MainWindow::StopAfterCurrent() {
 }
 
 void MainWindow::closeEvent(QCloseEvent* event) {
-  bool keep_running(false);
-  if (tray_icon_)
-    keep_running =
-        settings_.value("keeprunning", tray_icon_->IsVisible()).toBool();
-
-  if (keep_running && event->spontaneous()) {
-    event->ignore();
-    SetHiddenInTray(true);
-  } else {
+  if (!tray_icon_ ||
+      !settings_.value("keeprunning", tray_icon_->IsVisible()).toBool())
     Exit();
-  }
+
+  QMainWindow::closeEvent(event);
 }
 
 void MainWindow::SetHiddenInTray(bool hidden) {
