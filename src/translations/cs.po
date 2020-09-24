@@ -518,7 +518,7 @@ msgstr "Přidat další proud..."
 msgid "Add directory..."
 msgstr "Přidat složku..."
 
-#: ui/mainwindow.cpp:2132
+#: ui/mainwindow.cpp:2126
 msgid "Add file"
 msgstr "Přidat soubor"
 
@@ -538,7 +538,7 @@ msgstr "Přidat soubor..."
 msgid "Add files to transcode"
 msgstr "Přidat soubory pro překódování"
 
-#: transcoder/transcodedialog.cpp:309 ui/mainwindow.cpp:2159
+#: transcoder/transcodedialog.cpp:309 ui/mainwindow.cpp:2153
 #: ripper/ripcddialog.cpp:202
 msgid "Add folder"
 msgstr "Přidat složku"
@@ -643,7 +643,7 @@ msgstr "Přidat do seznamů skladeb Spotify"
 msgid "Add to Spotify starred"
 msgstr "Přidat do Spotify s hvězdičkou"
 
-#: ui/mainwindow.cpp:1933
+#: ui/mainwindow.cpp:1927
 msgid "Add to another playlist"
 msgstr "Přidat do jiného seznamu skladeb"
 
@@ -1662,7 +1662,7 @@ msgid "Delete downloaded data"
 msgstr "Smazat stažená data"
 
 #: devices/deviceview.cpp:396 library/libraryview.cpp:677
-#: ui/mainwindow.cpp:2505 widgets/fileview.cpp:189
+#: ui/mainwindow.cpp:2499 widgets/fileview.cpp:189
 msgid "Delete files"
 msgstr "Smazat soubory"
 
@@ -1703,11 +1703,11 @@ msgstr "Probíhá mazání souborů"
 msgid "Depth"
 msgstr "Hloubka"
 
-#: ui/mainwindow.cpp:1846
+#: ui/mainwindow.cpp:1840
 msgid "Dequeue selected tracks"
 msgstr "Odstranit vybrané skladby z řady"
 
-#: ui/mainwindow.cpp:1844
+#: ui/mainwindow.cpp:1838
 msgid "Dequeue track"
 msgstr "Odstranit skladbu z řady"
 
@@ -1979,7 +1979,7 @@ msgstr "Dynamický náhodný výběr"
 msgid "Edit smart playlist..."
 msgstr "Upravit chytrý seznam skladeb..."
 
-#: ui/mainwindow.cpp:1896
+#: ui/mainwindow.cpp:1890
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr "Upravit značku \"%1\"..."
@@ -2118,8 +2118,8 @@ msgid "Equivalent to --log-levels *:3"
 msgstr "Rovnocenné s --log-levels *:3"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:249
-#: library/libraryview.cpp:671 ui/mainwindow.cpp:2188 ui/mainwindow.cpp:2458
-#: ui/mainwindow.cpp:2636
+#: library/libraryview.cpp:671 ui/mainwindow.cpp:2182 ui/mainwindow.cpp:2452
+#: ui/mainwindow.cpp:2630
 msgid "Error"
 msgstr "Chyba"
 
@@ -2261,7 +2261,7 @@ msgstr "Slábnutí"
 msgid "Fading duration"
 msgstr "Doba slábnutí"
 
-#: ui/mainwindow.cpp:2189
+#: ui/mainwindow.cpp:2183
 msgid "Failed reading CD drive"
 msgstr "Nepodařilo se číst z CD v mechanice"
 
@@ -2992,7 +2992,7 @@ msgstr "Sbírka"
 msgid "Library advanced grouping"
 msgstr "Pokročilé seskupování sbírky"
 
-#: ui/mainwindow.cpp:2762
+#: ui/mainwindow.cpp:2756
 msgid "Library rescan notice"
 msgstr "Zpráva o prohledání sbírky"
 
@@ -3325,7 +3325,7 @@ msgstr "Přesunout do sbírky..."
 msgid "Move up"
 msgstr "Posunout nahoru"
 
-#: transcoder/transcodedialog.cpp:228 ui/mainwindow.cpp:2134
+#: transcoder/transcodedialog.cpp:228 ui/mainwindow.cpp:2128
 msgid "Music"
 msgstr "Hudba"
 
@@ -3383,7 +3383,7 @@ msgstr "Nikdy nezačít přehrávání"
 msgid "New folder"
 msgstr "Nová složka"
 
-#: ui/mainwindow.cpp:1950 ../bin/src/ui_mainwindow.h:754
+#: ui/mainwindow.cpp:1944 ../bin/src/ui_mainwindow.h:754
 msgid "New playlist"
 msgstr "Nový seznam skladeb"
 
@@ -3450,7 +3450,7 @@ msgstr "Žádné krátké bloky"
 msgid "None"
 msgstr "Žádná"
 
-#: library/libraryview.cpp:672 ui/mainwindow.cpp:2459 ui/mainwindow.cpp:2637
+#: library/libraryview.cpp:672 ui/mainwindow.cpp:2453 ui/mainwindow.cpp:2631
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Žádná z vybraných písní nebyla vhodná ke zkopírování do zařízení"
 
@@ -3749,7 +3749,7 @@ msgstr "Oslava"
 msgid "Password"
 msgstr "Heslo"
 
-#: core/globalshortcuts.cpp:52 ui/mainwindow.cpp:1161 ui/mainwindow.cpp:1741
+#: core/globalshortcuts.cpp:52 ui/mainwindow.cpp:1161 ui/mainwindow.cpp:1735
 #: ui/qtsystemtrayicon.cpp:185 wiimotedev/wiimotesettingspage.cpp:115
 msgid "Pause"
 msgstr "Pozastavit"
@@ -3778,7 +3778,7 @@ msgid "Plain sidebar"
 msgstr "Prostý postranní panel"
 
 #: core/globalshortcuts.cpp:51 ui/mainwindow.cpp:684 ui/mainwindow.cpp:1125
-#: ui/mainwindow.cpp:1146 ui/mainwindow.cpp:1745 ui/qtsystemtrayicon.cpp:173
+#: ui/mainwindow.cpp:1146 ui/mainwindow.cpp:1739 ui/qtsystemtrayicon.cpp:173
 #: ui/qtsystemtrayicon.cpp:199 wiimotedev/wiimotesettingspage.cpp:108
 #: ../bin/src/ui_mainwindow.h:720
 msgid "Play"
@@ -3797,11 +3797,11 @@ msgstr "Přehrát, pokud je zastaveno, pozastavit, pokud je přehráváno"
 msgid "Play if there is nothing already playing"
 msgstr "Hrát, pokud se již něco nepřehrává"
 
-#: library/libraryview.cpp:395 ui/mainwindow.cpp:1857
+#: library/libraryview.cpp:395 ui/mainwindow.cpp:1851
 msgid "Play next"
 msgstr "Přehrát další"
 
-#: ui/mainwindow.cpp:1855
+#: ui/mainwindow.cpp:1849
 msgid "Play selected tracks next"
 msgstr "Přehrát vybrané skladby jako další"
 
@@ -4022,12 +4022,12 @@ msgstr "Dotazování se zařízení..."
 msgid "Queue Manager"
 msgstr "Správce řady"
 
-#: ui/mainwindow.cpp:1850
+#: ui/mainwindow.cpp:1844
 msgid "Queue selected tracks"
 msgstr "Přidat vybrané skladby do řady"
 
 #: globalsearch/globalsearchview.cpp:464 library/libraryview.cpp:392
-#: ui/mainwindow.cpp:1848
+#: ui/mainwindow.cpp:1842
 msgid "Queue track"
 msgstr "Přidat skladbu do řady"
 
@@ -4569,7 +4569,7 @@ msgstr "Podrobnosti o serveru"
 msgid "Service offline"
 msgstr "Služba není dostupná"
 
-#: ui/mainwindow.cpp:1895
+#: ui/mainwindow.cpp:1889
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr "Nastavit %1 na \"%2\"..."
@@ -4782,11 +4782,11 @@ msgstr "Počet přeskočení"
 msgid "Skip forwards in playlist"
 msgstr "Další skladba v seznamu skladeb"
 
-#: ui/mainwindow.cpp:1866
+#: ui/mainwindow.cpp:1860
 msgid "Skip selected tracks"
 msgstr "Přeskočit vybrané skladby"
 
-#: ui/mainwindow.cpp:1864
+#: ui/mainwindow.cpp:1858
 msgid "Skip track"
 msgstr "Přeskočit skladbu"
 
@@ -5107,7 +5107,7 @@ msgid ""
 "license key. Visit subsonic.org for details."
 msgstr "Lhůta na vyzkoušení serveru Subsonic uplynula. Dejte, prosím, dar, abyste dostali licenční klíč. Navštivte subsonic.org kvůli podrobnostem."
 
-#: ui/mainwindow.cpp:2753
+#: ui/mainwindow.cpp:2747
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -5149,7 +5149,7 @@ msgid ""
 "continue?"
 msgstr "Tyto soubory budou smazány ze zařízení. Opravdu chcete pokračovat?"
 
-#: library/libraryview.cpp:678 ui/mainwindow.cpp:2506 widgets/fileview.cpp:190
+#: library/libraryview.cpp:678 ui/mainwindow.cpp:2500 widgets/fileview.cpp:190
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -5251,7 +5251,7 @@ msgstr "Přepnout OSD"
 msgid "Toggle fullscreen"
 msgstr "Zapnout/Vypnout zobrazení na celou obrazovku"
 
-#: ui/mainwindow.cpp:1852
+#: ui/mainwindow.cpp:1846
 msgid "Toggle queue status"
 msgstr "Přepnout stav řady"
 
@@ -5385,11 +5385,11 @@ msgstr "Neznámá chyba"
 msgid "Unset cover"
 msgstr "Odebrat obal"
 
-#: ui/mainwindow.cpp:1862
+#: ui/mainwindow.cpp:1856
 msgid "Unskip selected tracks"
 msgstr "Zrušit přeskočení vybraných skladeb"
 
-#: ui/mainwindow.cpp:1860
+#: ui/mainwindow.cpp:1854
 msgid "Unskip track"
 msgstr "Zrušit přeskočení skladby"
 
@@ -5719,7 +5719,7 @@ msgid ""
 "well?"
 msgstr "Chcete další písně na tomto albu přesunout do Různí umělci?"
 
-#: ui/mainwindow.cpp:2760
+#: ui/mainwindow.cpp:2754
 msgid "Would you like to run a full rescan right now?"
 msgstr "Chcete spustit toto úplné nové prohledání hned teď?"
 

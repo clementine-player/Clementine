@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2020-09-22 17:14+0000\n"
+"PO-Revision-Date: 2020-09-23 14:27+0000\n"
 "Last-Translator: BrLi <rainman59118@gmail.com>\n"
 "Language-Team: Chinese (Taiwan) (http://www.transifex.com/davidsansome/clementine/language/zh_TW/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -507,7 +507,7 @@ msgstr "加入其它的網路串流"
 msgid "Add directory..."
 msgstr "加入目錄…"
 
-#: ui/mainwindow.cpp:2132
+#: ui/mainwindow.cpp:2126
 msgid "Add file"
 msgstr "加入檔案"
 
@@ -527,7 +527,7 @@ msgstr "加入檔案…"
 msgid "Add files to transcode"
 msgstr "加入檔案以轉碼"
 
-#: transcoder/transcodedialog.cpp:309 ui/mainwindow.cpp:2159
+#: transcoder/transcodedialog.cpp:309 ui/mainwindow.cpp:2153
 #: ripper/ripcddialog.cpp:202
 msgid "Add folder"
 msgstr "加入資料夾"
@@ -632,7 +632,7 @@ msgstr "新增至 Spotify 播放清單"
 msgid "Add to Spotify starred"
 msgstr "新增至 Spotify 打星列表"
 
-#: ui/mainwindow.cpp:1933
+#: ui/mainwindow.cpp:1927
 msgid "Add to another playlist"
 msgstr "加入到其他播放清單"
 
@@ -1651,7 +1651,7 @@ msgid "Delete downloaded data"
 msgstr "刪除下載的資料"
 
 #: devices/deviceview.cpp:396 library/libraryview.cpp:677
-#: ui/mainwindow.cpp:2505 widgets/fileview.cpp:189
+#: ui/mainwindow.cpp:2499 widgets/fileview.cpp:189
 msgid "Delete files"
 msgstr "刪除檔案"
 
@@ -1692,11 +1692,11 @@ msgstr "檔案刪除中"
 msgid "Depth"
 msgstr "深度"
 
-#: ui/mainwindow.cpp:1846
+#: ui/mainwindow.cpp:1840
 msgid "Dequeue selected tracks"
 msgstr "將選取的音軌移出佇列中"
 
-#: ui/mainwindow.cpp:1844
+#: ui/mainwindow.cpp:1838
 msgid "Dequeue track"
 msgstr "將音軌移出佇列中"
 
@@ -1968,7 +1968,7 @@ msgstr "動態隨機混合"
 msgid "Edit smart playlist..."
 msgstr "編輯智慧型播放清單…"
 
-#: ui/mainwindow.cpp:1896
+#: ui/mainwindow.cpp:1890
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr "編輯「%1」標籤…"
@@ -2107,14 +2107,14 @@ msgid "Equivalent to --log-levels *:3"
 msgstr "相當於 --log-levels *:3"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:249
-#: library/libraryview.cpp:671 ui/mainwindow.cpp:2188 ui/mainwindow.cpp:2458
-#: ui/mainwindow.cpp:2636
+#: library/libraryview.cpp:671 ui/mainwindow.cpp:2182 ui/mainwindow.cpp:2452
+#: ui/mainwindow.cpp:2630
 msgid "Error"
 msgstr "錯誤"
 
 #: ripper/ripcddialog.cpp:153
 msgid "Error Ripping CD"
-msgstr "抽取音樂光碟時出錯"
+msgstr "轉拷音樂光碟時出錯"
 
 #: devices/mtploader.cpp:56
 msgid "Error connecting MTP device"
@@ -2250,7 +2250,7 @@ msgstr "淡出"
 msgid "Fading duration"
 msgstr "淡出持續時間"
 
-#: ui/mainwindow.cpp:2189
+#: ui/mainwindow.cpp:2183
 msgid "Failed reading CD drive"
 msgstr "無法讀取 CD 光碟機"
 
@@ -2981,7 +2981,7 @@ msgstr "媒體櫃"
 msgid "Library advanced grouping"
 msgstr "進階媒體櫃歸類"
 
-#: ui/mainwindow.cpp:2762
+#: ui/mainwindow.cpp:2756
 msgid "Library rescan notice"
 msgstr "媒體櫃重新掃描通知"
 
@@ -3314,7 +3314,7 @@ msgstr "移到媒體櫃…"
 msgid "Move up"
 msgstr "上移"
 
-#: transcoder/transcodedialog.cpp:228 ui/mainwindow.cpp:2134
+#: transcoder/transcodedialog.cpp:228 ui/mainwindow.cpp:2128
 msgid "Music"
 msgstr "音樂"
 
@@ -3372,7 +3372,7 @@ msgstr "永不開始播放"
 msgid "New folder"
 msgstr "新資料夾"
 
-#: ui/mainwindow.cpp:1950 ../bin/src/ui_mainwindow.h:754
+#: ui/mainwindow.cpp:1944 ../bin/src/ui_mainwindow.h:754
 msgid "New playlist"
 msgstr "新增播放清單"
 
@@ -3439,7 +3439,7 @@ msgstr "無短區塊"
 msgid "None"
 msgstr "沒有"
 
-#: library/libraryview.cpp:672 ui/mainwindow.cpp:2459 ui/mainwindow.cpp:2637
+#: library/libraryview.cpp:672 ui/mainwindow.cpp:2453 ui/mainwindow.cpp:2631
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "所選歌曲沒有適合複製到裝置的"
 
@@ -3738,7 +3738,7 @@ msgstr "派對"
 msgid "Password"
 msgstr "密碼"
 
-#: core/globalshortcuts.cpp:52 ui/mainwindow.cpp:1161 ui/mainwindow.cpp:1741
+#: core/globalshortcuts.cpp:52 ui/mainwindow.cpp:1161 ui/mainwindow.cpp:1735
 #: ui/qtsystemtrayicon.cpp:185 wiimotedev/wiimotesettingspage.cpp:115
 msgid "Pause"
 msgstr "暫停"
@@ -3767,7 +3767,7 @@ msgid "Plain sidebar"
 msgstr "樸素的側邊欄"
 
 #: core/globalshortcuts.cpp:51 ui/mainwindow.cpp:684 ui/mainwindow.cpp:1125
-#: ui/mainwindow.cpp:1146 ui/mainwindow.cpp:1745 ui/qtsystemtrayicon.cpp:173
+#: ui/mainwindow.cpp:1146 ui/mainwindow.cpp:1739 ui/qtsystemtrayicon.cpp:173
 #: ui/qtsystemtrayicon.cpp:199 wiimotedev/wiimotesettingspage.cpp:108
 #: ../bin/src/ui_mainwindow.h:720
 msgid "Play"
@@ -3786,11 +3786,11 @@ msgstr "停止的話就開始播放，播放中的就暫停"
 msgid "Play if there is nothing already playing"
 msgstr "播放如果沒有歌曲是正在播放中"
 
-#: library/libraryview.cpp:395 ui/mainwindow.cpp:1857
+#: library/libraryview.cpp:395 ui/mainwindow.cpp:1851
 msgid "Play next"
 msgstr "播放下一首"
 
-#: ui/mainwindow.cpp:1855
+#: ui/mainwindow.cpp:1849
 msgid "Play selected tracks next"
 msgstr "下 一首播放選取的音軌"
 
@@ -4011,12 +4011,12 @@ msgstr "查詢裝置…"
 msgid "Queue Manager"
 msgstr "佇列管理員"
 
-#: ui/mainwindow.cpp:1850
+#: ui/mainwindow.cpp:1844
 msgid "Queue selected tracks"
 msgstr "將選取的歌曲加入佇列中"
 
 #: globalsearch/globalsearchview.cpp:464 library/libraryview.cpp:392
-#: ui/mainwindow.cpp:1848
+#: ui/mainwindow.cpp:1842
 msgid "Queue track"
 msgstr "將歌曲加入佇列中"
 
@@ -4261,15 +4261,15 @@ msgstr "右"
 
 #: ../bin/src/ui_ripcddialog.h:302
 msgid "Rip"
-msgstr "抽取"
+msgstr "轉拷"
 
 #: ripper/ripcddialog.cpp:106
 msgid "Rip CD"
-msgstr "抽取 CD"
+msgstr "轉拷 CD"
 
 #: ../bin/src/ui_mainwindow.h:773
 msgid "Rip audio CD"
-msgstr "抽取音樂光碟"
+msgstr "轉拷音樂光碟"
 
 #: ui/equalizer.cpp:149
 msgid "Rock"
@@ -4558,7 +4558,7 @@ msgstr "伺服器詳細內容"
 msgid "Service offline"
 msgstr "服務離線"
 
-#: ui/mainwindow.cpp:1895
+#: ui/mainwindow.cpp:1889
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr "設定 %1 到「%2」…"
@@ -4771,11 +4771,11 @@ msgstr "略過計數"
 msgid "Skip forwards in playlist"
 msgstr "跳至播放清單最後頭"
 
-#: ui/mainwindow.cpp:1866
+#: ui/mainwindow.cpp:1860
 msgid "Skip selected tracks"
 msgstr "跳過選取的曲目"
 
-#: ui/mainwindow.cpp:1864
+#: ui/mainwindow.cpp:1858
 msgid "Skip track"
 msgstr "跳過曲目"
 
@@ -4886,7 +4886,7 @@ msgstr "打星的專輯"
 
 #: ripper/ripcddialog.cpp:73
 msgid "Start ripping"
-msgstr "開始抽取"
+msgstr "開始轉拷"
 
 #: core/commandlineoptions.cpp:159
 msgid "Start the playlist currently playing"
@@ -5096,7 +5096,7 @@ msgid ""
 "license key. Visit subsonic.org for details."
 msgstr ""
 
-#: ui/mainwindow.cpp:2753
+#: ui/mainwindow.cpp:2747
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -5138,7 +5138,7 @@ msgid ""
 "continue?"
 msgstr "這些檔案將從裝置上被移除，你確定你要繼續？"
 
-#: library/libraryview.cpp:678 ui/mainwindow.cpp:2506 widgets/fileview.cpp:190
+#: library/libraryview.cpp:678 ui/mainwindow.cpp:2500 widgets/fileview.cpp:190
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -5240,7 +5240,7 @@ msgstr "拖曳漂亮的螢幕顯示"
 msgid "Toggle fullscreen"
 msgstr "切換全螢幕模式"
 
-#: ui/mainwindow.cpp:1852
+#: ui/mainwindow.cpp:1846
 msgid "Toggle queue status"
 msgstr "切換佇列狀態"
 
@@ -5374,11 +5374,11 @@ msgstr "不明的錯誤"
 msgid "Unset cover"
 msgstr "未設置封面"
 
-#: ui/mainwindow.cpp:1862
+#: ui/mainwindow.cpp:1856
 msgid "Unskip selected tracks"
 msgstr ""
 
-#: ui/mainwindow.cpp:1860
+#: ui/mainwindow.cpp:1854
 msgid "Unskip track"
 msgstr ""
 
@@ -5708,7 +5708,7 @@ msgid ""
 "well?"
 msgstr ""
 
-#: ui/mainwindow.cpp:2760
+#: ui/mainwindow.cpp:2754
 msgid "Would you like to run a full rescan right now?"
 msgstr "您想要立刻執行完整的重新掃描嗎？"
 
@@ -5855,11 +5855,11 @@ msgstr ""
 
 #: visualisations/visualisationcontainer.cpp:161
 msgid "Your system is missing OpenGL support, visualizations are unavailable."
-msgstr ""
+msgstr "您的系統不支援 OpenGL，無法使用視覺化"
 
 #: internet/spotify/spotifysettingspage.cpp:155
 msgid "Your username or password was incorrect."
-msgstr ""
+msgstr "您的使用者名稱或密碼有誤"
 
 #: smartplaylists/searchterm.cpp:398
 msgid "Z-A"
