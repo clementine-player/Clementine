@@ -740,6 +740,19 @@ jobs:
         with:
           name: release_focal_64
           path: bin/clementine_*.deb
+  
+  build_snap:
+    name: Build Snap
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
+      - uses: snapcore/action-build@v1
+        id: snapcraft
+      - uses: snapcore/action-publish@v1
+        with:
+          store_login: ${{ secrets.SNAP_STORE_LOGIN }}
+          snap: ${{ steps.snapcraft.outputs.snap }}
+          release: edge
 
   build_mac:
     name: Build Mac DMG
