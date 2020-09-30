@@ -101,6 +101,7 @@ jobs:
       - build_mingw
       - build_source
       - build_stretch_64
+      - build_snap
     steps:
       - uses: actions/checkout@v1.2.0
       - uses: actions/download-artifact@v2
@@ -753,6 +754,10 @@ jobs:
           store_login: ${{ secrets.SNAP_STORE_LOGIN }}
           snap: ${{ steps.snapcraft.outputs.snap }}
           release: edge
+      - uses: actions/upload-artifact@v2
+        with:
+          name: release_snap_64
+          path: ${{ steps.snapcraft.outputs.snap }}
 
   build_mac:
     name: Build Mac DMG
