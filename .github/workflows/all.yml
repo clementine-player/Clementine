@@ -99,9 +99,9 @@ jobs:
       - build_focal_64
       - build_mac
       - build_mingw
+      - build_snap
       - build_source
       - build_stretch_64
-      - build_snap_64
     steps:
       - uses: actions/checkout@v1.2.0
       - uses: actions/download-artifact@v2
@@ -742,11 +742,10 @@ jobs:
           name: release_focal_64
           path: bin/clementine_*.deb
   
-  build_snap_64:
+  build_snap:
     name: Build Snap
     runs-on: ubuntu-18.04
     steps:
-      - uses: actions/checkout@v2
       - uses: snapcore/action-build@v1
         id: snapcraft
       - uses: snapcore/action-publish@v1
@@ -756,7 +755,7 @@ jobs:
           release: edge
       - uses: actions/upload-artifact@v2
         with:
-          name: release_snap_64
+          name: release_snap
           path: ${{ steps.snapcraft.outputs.snap }}
 
   build_mac:
