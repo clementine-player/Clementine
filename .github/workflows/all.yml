@@ -746,6 +746,7 @@ jobs:
     name: Build Snap
     runs-on: ubuntu-18.04
     steps:
+      - uses: actions/checkout@v1.2.0
       - uses: snapcore/action-build@v1
         id: snapcraft
       - uses: snapcore/action-publish@v1
