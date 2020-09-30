@@ -94,7 +94,6 @@ jobs:
     needs:
       - build_bionic_64
       - build_buster_64
-      - build_eoan_64
       - build_fedora_31
       - build_fedora_32
       - build_focal_64
@@ -676,70 +675,6 @@ jobs:
       - uses: actions/upload-artifact@v2
         with:
           name: release_buster_64
-          path: bin/clementine_*.deb
-
-  build_eoan_64:
-    name: Build Ubuntu Eoan 64-bit deb
-    runs-on: ubuntu-18.04
-    container:
-      image: ubuntu:eoan
-    steps:
-      - name: Install dependencies
-        env:
-          DEBIAN_FRONTEND: noninteractive
-        run: >
-          apt-get update && apt-get install -y
-          cmake
-          fakeroot
-          gettext
-          git
-          libasound2-dev
-          libboost-dev
-          libboost-serialization-dev
-          libcdio-cdda2
-          libcdio-dev
-          libchromaprint-dev
-          libcrypto++-dev
-          libdbus-1-dev
-          libfftw3-dev
-          libglew1.5-dev
-          libgpod-dev
-          libgstreamer-plugins-base1.0-dev
-          libgstreamer1.0-dev
-          liblastfm5-dev
-          libmtp-dev
-          libmygpo-qt-dev
-          libplist-dev
-          libprotobuf-dev
-          libpulse-dev
-          libqca-qt5-2-dev
-          libqca-qt5-2-plugins
-          libqt5x11extras5-dev
-          libsparsehash-dev
-          libsqlite3-dev
-          libtag1-dev
-          libusbmuxd-dev
-          protobuf-compiler
-          qtbase5-dev
-          qttools5-dev-tools
-          qttools5-dev
-          ssh
-      - uses: actions/checkout@v1.2.0
-      - name: cmake
-        working-directory: bin
-        run: >
-          cmake ..
-          -DWITH_DEBIAN=ON
-          -DDEB_ARCH=amd64
-          -DDEB_DIST=eoan
-          -DFORCE_GIT_VERSION=
-          -DENABLE_SPOTIFY_BLOB=OFF
-      - name: make
-        working-directory: bin
-        run : make -j2 deb
-      - uses: actions/upload-artifact@v2
-        with:
-          name: release_eoan_64
           path: bin/clementine_*.deb
 
   build_focal_64:
