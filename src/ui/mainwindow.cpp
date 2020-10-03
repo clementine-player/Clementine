@@ -2272,10 +2272,10 @@ void MainWindow::CommandlineOptionsReceived(const CommandlineOptions& options) {
       app_->player()->Next();
       break;
     case CommandlineOptions::Player_PlayPlaylist:
-      if (options.playlist_name().isNull() || options.playlist_name().isEmpty()) {
+      if (options.playlist_name().isNull() ||
+          options.playlist_name().isEmpty()) {
         qLog(Error) << "ERROR: playlist name missing";
-      }
-      else {
+      } else {
         app_->player()->PlayPlaylist(options.playlist_name());
       }
       break;

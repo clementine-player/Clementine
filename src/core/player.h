@@ -181,7 +181,8 @@ class Player : public PlayerInterface {
   void PreviousItem(Engine::TrackChangeFlags change);
 
   void NextInternal(Engine::TrackChangeFlags);
-  void PlayPlaylistInternal(Engine::TrackChangeFlags, const QString& playlistName);
+  void PlayPlaylistInternal(Engine::TrackChangeFlags,
+                            const QString& playlistName);
 
   void ValidSongRequested(const QUrl&);
   void InvalidSongRequested(const QUrl&);
