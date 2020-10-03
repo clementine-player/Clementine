@@ -39,37 +39,38 @@ const char* CommandlineOptions::kHelpText =
     "%1: clementine [%2] [%3]\n"
     "\n"
     "%4:\n"
-    "  -p, --play                %5\n"
-    "  -t, --play-pause          %6\n"
-    "  -u, --pause               %7\n"
-    "  -s, --stop                %8\n"
-    "  -q, --stop-after-current  %9\n"
-    "  -r, --previous            %10\n"
-    "  -f, --next                %11\n"
-    "  -v, --volume <value>      %12\n"
-    "  --volume-up               %13\n"
-    "  --volume-down             %14\n"
-    "  --volume-increase-by      %15\n"
-    "  --volume-decrease-by      %16\n"
-    "  --seek-to <seconds>       %17\n"
-    "  --seek-by <seconds>       %18\n"
-    "  --restart-or-previous     %19\n"
+    "  -p, --play                  %5\n"
+    "  -t, --play-pause            %6\n"
+    "  -u, --pause                 %7\n"
+    "  -s, --stop                  %8\n"
+    "  -q, --stop-after-current    %9\n"
+    "  -r, --previous              %10\n"
+    "  -f, --next                  %11\n"
+    "  -v, --volume <value>        %12\n"
+    "  --volume-up                 %13\n"
+    "  --volume-down               %14\n"
+    "  --volume-increase-by        %15\n"
+    "  --volume-decrease-by        %16\n"
+    "  --seek-to <seconds>         %17\n"
+    "  --seek-by <seconds>         %18\n"
+    "  --restart-or-previous       %19\n"
     "\n"
     "%20:\n"
-    "  -c, --create <name>       %21\n"
-    "  -a, --append              %22\n"
-    "  -l, --load                %23\n"
-    "  -k, --play-track <n>      %24\n"
+    "  -c, --create <name>         %21\n"
+    "  -a, --append                %22\n"
+    "  -l, --load                  %23\n"
+    "  -k, --play-track <n>        %24\n"
+    "  -i, --play-playlist <name>  %25\n"
     "\n"
-    "%25:\n"
-    "  -o, --show-osd            %26\n"
-    "  -y, --toggle-pretty-osd   %27\n"
-    "  -g, --language <lang>     %28\n"
-    "      --quiet               %29\n"
-    "      --verbose             %30\n"
-    "      --log-levels <levels> %31\n"
-    "      --version             %32\n"
-    "  -x, --delete-current      %33\n";
+    "%26:\n"
+    "  -o, --show-osd              %27\n"
+    "  -y, --toggle-pretty-osd     %28\n"
+    "  -g, --language <lang>       %29\n"
+    "      --quiet                 %30\n"
+    "      --verbose               %31\n"
+    "      --log-levels <levels>   %32\n"
+    "      --version               %33\n"
+    "  -x, --delete-current        %34\n";
 
 const char* CommandlineOptions::kVersionText = "Clementine %1";
 
@@ -131,6 +132,7 @@ bool CommandlineOptions::Parse() {
       {"append", no_argument, 0, 'a'},
       {"load", no_argument, 0, 'l'},
       {"play-track", required_argument, 0, 'k'},
+      {"play-playlist", required_argument, 0, 'i'},
       {"show-osd", no_argument, 0, 'o'},
       {"toggle-pretty-osd", no_argument, 0, 'y'},
       {"language", required_argument, 0, 'g'},
@@ -145,7 +147,7 @@ bool CommandlineOptions::Parse() {
   bool ok = false;
   forever {
     int c =
-        getopt_long(argc_, argv_, "xhptusqrfv:c:alk:oyg:", kOptions, nullptr);
+        getopt_long(argc_, argv_, "xhptusqrfv:c:i:alk:oyg:", kOptions, nullptr);
 
     // End of the options
     if (c == -1) break;
@@ -177,7 +179,8 @@ bool CommandlineOptions::Parse() {
                      tr("Create a new playlist with files/URLs"),
                      tr("Append files/URLs to the playlist"),
                      tr("Loads files/URLs, replacing current playlist"),
-                     tr("Play the <n>th track in the playlist"))
+                     tr("Play the <n>th track in the playlist"),
+                     tr("Play given playlist"))
                 .arg(tr("Other options"), tr("Display the on-screen-display"),
                      tr("Toggle visibility for the pretty on-screen-display"),
                      tr("Change the language"),
@@ -211,6 +214,10 @@ bool CommandlineOptions::Parse() {
         break;
       case 'f':
         player_action_ = Player_Next;
+        break;
+      case 'i':
+        player_action_ = Player_PlayPlaylist;
+        playlist_name_ = QString(optarg);
         break;
       case 'c':
         url_list_action_ = UrlList_CreateNew;
@@ -349,7 +356,7 @@ QDataStream& operator<<(QDataStream& s, const CommandlineOptions& a) {
   s << qint32(a.player_action_) << qint32(a.url_list_action_) << a.set_volume_
     << a.volume_modifier_ << a.seek_to_ << a.seek_by_ << a.play_track_at_
     << a.show_osd_ << a.urls_ << a.log_levels_ << a.toggle_pretty_osd_
-    << a.delete_current_track_;
+    << a.delete_current_track_ << a.playlist_name_;
 
   return s;
 }
@@ -360,7 +367,7 @@ QDataStream& operator>>(QDataStream& s, CommandlineOptions& a) {
   s >> player_action >> url_list_action >> a.set_volume_ >>
       a.volume_modifier_ >> a.seek_to_ >> a.seek_by_ >> a.play_track_at_ >>
       a.show_osd_ >> a.urls_ >> a.log_levels_ >> a.toggle_pretty_osd_ >>
-      a.delete_current_track_;
+      a.delete_current_track_ >> a.playlist_name_;
   a.player_action_ = CommandlineOptions::PlayerAction(player_action);
   a.url_list_action_ = CommandlineOptions::UrlListAction(url_list_action);
 
