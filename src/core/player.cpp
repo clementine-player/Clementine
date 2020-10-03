@@ -224,6 +224,34 @@ void Player::NextItem(Engine::TrackChangeFlags change) {
   PlayAt(i, change, false);
 }
 
+void Player::PlayPlaylist(const QString& playlistName) {
+  PlayPlaylistInternal(Engine::Manual, playlistName);
+}
+
+void Player::PlayPlaylistInternal(Engine::TrackChangeFlags change,
+                                  const QString& playlistName) {
+  Playlist* playlist = NULL;
+  for (Playlist* p : app_->playlist_manager()->GetAllPlaylists()) {
+    if (playlistName == app_->playlist_manager()->GetPlaylistName(p->id())) {
+      playlist = p;
+      break;
+    }
+  }
+
+  if (playlist != NULL) {
+    app_->playlist_manager()->SetActivePlaylist(playlist->id());
+    if (playlist->rowCount() == 0) return;
+
+    int i = app_->playlist_manager()->active()->current_row();
+    if (i == -1) i = app_->playlist_manager()->active()->last_played_row();
+    if (i == -1) i = 0;
+
+    PlayAt(i, Engine::First, true);
+  } else {
+    qLog(Warning) << "Playlist '" << playlistName << "' not found.";
+  }
+}
+
 bool Player::HandleStopAfter() {
   if (app_->playlist_manager()->active()->stop_after_current()) {
     // Find what the next track would've been, and mark that one as current
