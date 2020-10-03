@@ -151,6 +151,7 @@ class Player : public PlayerInterface {
   void RestartOrPrevious();
   void Next();
   void Previous();
+  void PlayPlaylist(const QString& playlistName);
   void SetVolume(int value);
   void VolumeUp() { SetVolume(GetVolume() + 5); }
   void VolumeDown() { SetVolume(GetVolume() - 5); }
@@ -180,6 +181,7 @@ class Player : public PlayerInterface {
   void PreviousItem(Engine::TrackChangeFlags change);
 
   void NextInternal(Engine::TrackChangeFlags);
+  void PlayPlaylistInternal(Engine::TrackChangeFlags, const QString& playlistName);
 
   void ValidSongRequested(const QUrl&);
   void InvalidSongRequested(const QUrl&);

@@ -90,6 +90,17 @@ void PlaylistManager::Init(LibraryBackend* library_backend,
   emit PlaylistManagerInitialized();
 }
 
+/*
+Playlist* PlaylistManager::GetPlaylistByName(const QString& playlistName) const {
+  for (const Data& data : playlists_.values()) {
+      if (playlistName->compare(data->name) == 0) {
+          return data;
+      }
+  }
+  return NULL;
+}
+*/
+
 QList<Playlist*> PlaylistManager::GetAllPlaylists() const {
   QList<Playlist*> result;
 
