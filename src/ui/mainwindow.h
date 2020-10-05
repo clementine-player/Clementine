@@ -225,8 +225,8 @@ class MainWindow : public QMainWindow, public PlatformInterface {
 #ifdef HAVE_LIBLASTFM
   void ScrobblingEnabledChanged(bool value);
   void ScrobbledRadioStream();
-#endif
   void Love();
+#endif
 
   void TaskCountChanged(int count);
 
@@ -254,8 +254,8 @@ class MainWindow : public QMainWindow, public PlatformInterface {
                         const QPersistentModelIndex& index);
 
   void ShowCoverManager();
-  bool IsLastFmEnabled();
 #ifdef HAVE_LIBLASTFM
+  bool IsLastFmEnabled();
   void CachedToScrobble();
   void ScrobbleError(int value);
 #endif
