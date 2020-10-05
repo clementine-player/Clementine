@@ -16,6 +16,9 @@
 */
 
 #include "networkremotesettingspage.h"
+#include "ui_networkremotesettingspage.h"
+
+#include <algorithm>
 
 #include <QDesktopServices>
 #include <QFile>
@@ -23,7 +26,6 @@
 #include <QNetworkInterface>
 #include <QSettings>
 #include <QUrl>
-#include <algorithm>
 
 #include "core/application.h"
 #include "networkremote/networkremote.h"
@@ -32,7 +34,6 @@
 #include "transcoder/transcoderoptionsdialog.h"
 #include "ui/iconloader.h"
 #include "ui/settingsdialog.h"
-#include "ui_networkremotesettingspage.h"
 
 const char* NetworkRemoteSettingsPage::kPlayStoreUrl =
     "https://play.google.com/store/apps/details?id=de.qspool.clementineremote";
@@ -103,6 +104,8 @@ void NetworkRemoteSettingsPage::Load() {
     }
   }
 
+  ui_->rootFilesWidget->setPath(s.value("rootFiles", "").toString());
+
   s.endGroup();
 
   // Get local ip addresses
@@ -146,6 +149,8 @@ void NetworkRemoteSettingsPage::Save() {
   TranscoderPreset preset = ui_->format->itemData(ui_->format->currentIndex())
                                 .value<TranscoderPreset>();
   s.setValue("last_output_format", preset.codec_mimetype_);
+
+  s.setValue("rootFiles", ui_->rootFilesWidget->getPath());
 
   s.endGroup();
 

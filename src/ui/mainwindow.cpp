@@ -16,6 +16,10 @@
 */
 
 #include "mainwindow.h"
+#include "ui_mainwindow.h"
+
+#include <cmath>
+#include <memory>
 
 #include <QCloseEvent>
 #include <QDir>
@@ -33,8 +37,6 @@
 #include <QTimer>
 #include <QUndoStack>
 #include <QtDebug>
-#include <cmath>
-#include <memory>
 
 #include "core/appearance.h"
 #include "core/application.h"
@@ -89,7 +91,6 @@
 #include "playlist/queuemanager.h"
 #include "playlist/songplaylistitem.h"
 #include "playlistparsers/playlistparser.h"
-#include "ui_mainwindow.h"
 #ifdef HAVE_AUDIOCD
 #include "ripper/ripcddialog.h"
 #endif
@@ -104,9 +105,9 @@
 #include "ui/albumcovermanager.h"
 #include "ui/console.h"
 #include "ui/edittagdialog.h"
+#include "ui/lovedialog.h"
 #include "ui/equalizer.h"
 #include "ui/iconloader.h"
-#include "ui/lovedialog.h"
 #include "ui/organisedialog.h"
 #include "ui/organiseerrordialog.h"
 #include "ui/qtsystemtrayicon.h"
@@ -159,7 +160,7 @@ const char* MainWindow::kShowDebugConsoleKey = "CLEMENTINE_DEBUG_CONSOLE";
 namespace {
 const int kTrackSliderUpdateTimeMs = 500;
 const int kTrackPositionUpdateTimeMs = 1000;
-}  // namespace
+}
 
 MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
                        const CommandlineOptions& options, QWidget* parent)
@@ -203,8 +204,8 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
       }),
       equalizer_(new Equalizer),
       organise_dialog_([=]() {
-        OrganiseDialog* dialog =
-            new OrganiseDialog(app->task_manager(), app->library_backend());
+        OrganiseDialog* dialog = new OrganiseDialog(app->task_manager(),
+                                                    app->library_backend());
         dialog->SetDestinationModel(app->directory_model());
         return dialog;
       }),
@@ -931,8 +932,8 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
 
   // Load theme
   // This is tricky: we need to save the default/system palette now, before
-  // loading user preferred theme (which will override it), to be able to
-  // restore it later
+  // loading user preferred theme (which will override it), to be able to restore
+  // it later
   const_cast<QPalette&>(Appearance::kDefaultPalette) = QApplication::palette();
   app_->appearance()->LoadUserTheme();
   StyleSheetLoader* css_loader = new StyleSheetLoader(this);
@@ -1064,7 +1065,9 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
   qLog(Debug) << "Started";
 }
 
-MainWindow::~MainWindow() { delete ui_; }
+MainWindow::~MainWindow() {
+  delete ui_;
+}
 
 void MainWindow::ReloadSettings() {
 #ifndef Q_OS_DARWIN
@@ -1158,34 +1161,20 @@ void MainWindow::MediaPlaying() {
       IconLoader::Load("media-playback-pause", IconLoader::Base));
   ui_->action_play_pause->setText(tr("Pause"));
 
-  const PlaylistItemPtr item = app_->player()->GetCurrentItem();
-  if (!item) {
-    qLog(Debug) << "MediaPlaying: no current item -- not enabling buttons etc";
-    return;
-  }
-
-  const bool enable_play_pause =
-      !(item->options() & PlaylistItem::PauseDisabled);
+  bool enable_play_pause = !(app_->player()->GetCurrentItem()->options() &
+                             PlaylistItem::PauseDisabled);
   ui_->action_play_pause->setEnabled(enable_play_pause);
 
-  const bool can_seek = !(item->options() & PlaylistItem::SeekDisabled);
+  bool can_seek = !(app_->player()->GetCurrentItem()->options() &
+                    PlaylistItem::SeekDisabled);
   ui_->track_slider->SetCanSeek(can_seek);
 
-  // Set the rate/love icon
-  if (IsLastFmEnabled()) {
-    ui_->action_love->setIcon(IconLoader::Load("love", IconLoader::Lastfm));
-    ui_->action_love->setEnabled(true);
-  } else if (item->IsLocalLibraryItem()) {
-    ui_->action_love->setIcon(
-        IconLoader::Load("rate-enabled", IconLoader::Base));
-    ui_->action_love->setEnabled(true);
-  } else {
-    ui_->action_love->setEnabled(false);
-  }
+  // We now always enable Love when playing since it works for local files
+  ui_->action_love->setEnabled(true);
 
 #ifdef HAVE_LIBLASTFM
+  bool enable_love = app_->scrobbler()->IsScrobblingEnabled();
   if (tray_icon_) {
-    const bool enable_love = app_->scrobbler()->IsScrobblingEnabled();
     tray_icon_->LastFMButtonLoveStateChanged(enable_love);
     tray_icon_->SetPlaying(enable_play_pause, enable_love);
   }
@@ -1458,11 +1447,17 @@ void MainWindow::StopAfterCurrent() {
 }
 
 void MainWindow::closeEvent(QCloseEvent* event) {
-  if (!tray_icon_ ||
-      !settings_.value("keeprunning", tray_icon_->IsVisible()).toBool())
-    Exit();
+  bool keep_running(false);
+  if (tray_icon_)
+    keep_running =
+        settings_.value("keeprunning", tray_icon_->IsVisible()).toBool();
 
-  QMainWindow::closeEvent(event);
+  if (keep_running && event->spontaneous()) {
+    event->ignore();
+    SetHiddenInTray(true);
+  } else {
+    Exit();
+  }
 }
 
 void MainWindow::hideEvent(QHideEvent* event) {
@@ -1598,32 +1593,29 @@ void MainWindow::ScrobbledRadioStream() {
   ui_->action_love->setEnabled(true);
   if (tray_icon_) tray_icon_->LastFMButtonLoveStateChanged(true);
 }
-#endif
 
 void MainWindow::Love() {
   Playlist* active_playlist = app_->playlist_manager()->active();
-  const PlaylistItemPtr item = active_playlist->current_item();
+  PlaylistItemPtr item = active_playlist->current_item();
   if (!item) {
     // Don't make a big deal about it
     qLog(Warning) << "Love: nothing playing so can't love it";
     return;
   }
 
-  if (IsLastFmEnabled()) {
-#ifdef HAVE_LIBLASTFM
-    app_->scrobbler()->Love();
-    ui_->action_love->setEnabled(false);
-    if (tray_icon_) tray_icon_->LastFMButtonLoveStateChanged(false);
-#endif
-  } else if (item->IsLocalLibraryItem()) {
+  if (item->IsLocalLibraryItem()) {
     const Song& song = item->Metadata();
     if (!song.is_valid() || song.id() == -1) return;
     love_dialog_->SetSong(song);
     love_dialog_->show();
-  } else {
-    qLog(Warning) << "Love: unable to love or rate";
+  }
+  else {
+    app_->scrobbler()->Love();
+    ui_->action_love->setEnabled(false);
+    if (tray_icon_) tray_icon_->LastFMButtonLoveStateChanged(false);
   }
 }
+#endif
 
 void MainWindow::ApplyAddBehaviour(MainWindow::AddBehaviour b,
                                    MimeData* data) const {
@@ -2131,9 +2123,9 @@ void MainWindow::AddFile() {
   // Show dialog
   QStringList file_names = QFileDialog::getOpenFileNames(
       this, tr("Add file"), directory,
-      QString("%1 (%2);;%3;;%4")
-          .arg(tr("Music"), FileView::kFileFilter, parser.filters(),
-               tr(kAllFilesFilterSpec)));
+      QString("%1 (%2);;%3;;%4").arg(tr("Music"), FileView::kFileFilter,
+                                     parser.filters(),
+                                     tr(kAllFilesFilterSpec)));
   if (file_names.isEmpty()) return;
 
   // Save last used directory
@@ -2347,8 +2339,7 @@ void MainWindow::CommandlineOptionsReceived(const CommandlineOptions& options) {
 
       app_->player()->Next();
 
-      DeleteFiles* delete_files =
-          new DeleteFiles(app_->task_manager(), storage);
+      DeleteFiles* delete_files = new DeleteFiles(app_->task_manager(), storage);
       connect(delete_files, SIGNAL(Finished(SongList)),
               SLOT(DeleteFinished(SongList)));
       delete_files->Start(url);
@@ -2709,7 +2700,8 @@ EditTagDialog* MainWindow::CreateEditTagDialog() {
 
 LoveDialog* MainWindow::CreateLoveDialog() {
   LoveDialog* dialog = new LoveDialog(app_);
-  connect(dialog, SIGNAL(Error(QString)), SLOT(ShowErrorDialog(QString)));
+  connect(dialog, SIGNAL(Error(QString)),
+          SLOT(ShowErrorDialog(QString)));
   return dialog;
 }
 
@@ -2958,19 +2950,11 @@ void MainWindow::SetToggleScrobblingIcon(bool value) {
   }
 }
 
-bool MainWindow::IsLastFmEnabled() {
-#ifdef HAVE_LIBLASTFM
-  return ui_->action_toggle_scrobbling->isVisible() &&
-         app_->scrobbler()->IsScrobblingEnabled() &&
-         app_->scrobbler()->IsAuthenticated();
-#else
-  return false;
-#endif
-}
-
 #ifdef HAVE_LIBLASTFM
 void MainWindow::CachedToScrobble() {
-  const bool last_fm_enabled = IsLastFmEnabled();
+  const bool last_fm_enabled = ui_->action_toggle_scrobbling->isVisible() &&
+                               app_->scrobbler()->IsScrobblingEnabled() &&
+                               app_->scrobbler()->IsAuthenticated();
 
   app_->playlist_manager()->active()->set_lastfm_status(
       Playlist::LastFM_Scrobbled);
