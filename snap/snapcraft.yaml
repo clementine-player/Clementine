@@ -1,5 +1,6 @@
 name: clementine
-version: '1.3.1.31+git'
+#version: 'latest'
+adopt-info: clementine
 summary: modern music player
 description: |
   Clementine is a modern music player and library organizer
@@ -7,6 +8,11 @@ description: |
 grade: stable
 confinement: strict
 base: core18
+
+architectures:
+  - build-on: amd64
+  - build-on: i386
+  - build-on: arm64
 
 parts:
 
@@ -68,12 +74,18 @@ parts:
     after:
       - alsa-lib
       - desktop-qt5
+      
+    override-pull: |
+      snapcraftctl pull
+      snapcraftctl set-version "$(git describe --tags | sed 's/^v//' | cut -d "-" -f1-2)"
+      
     override-build: |
       cmake ../src -DCMAKE_INSTALL_PREFIX=/usr
       make -j $(getconf _NPROCESSORS_ONLN)
       make DESTDIR=$SNAPCRAFT_PART_INSTALL install
       sed -i 's|Icon=clementine|Icon=/usr/share/icons/hicolor/scalable/apps/clementine\.svg|' $SNAPCRAFT_PART_INSTALL/usr/share/applications/clementine.desktop
       sed -i 's|TryExec=.*|TryExec=/snap/bin/clementine|' $SNAPCRAFT_PART_INSTALL/usr/share/applications/clementine.desktop
+#      add-apt-repository ppa:rock-core/qt4 # may need this
 
     build-packages:
       - cmake
@@ -110,6 +122,7 @@ parts:
       - libglew-dev
       - libcrypto++-dev
       - libsparsehash-dev
+#      - libqt5-sqlite
 
     stage-packages:
       - libstdc++6
@@ -166,14 +179,35 @@ parts:
       - gstreamer1.0-libav
       - dbus-x11
       - projectm-data
+      - qtwayland5 # Attempt at Wayland Support
+      - libqtcore4 # Attempt to get Spotify to work
+      - glibc-source # Attempt to get Spotify to work
+      - plasma-integration
+      - kde-style-breeze
+      - qt5-gtk-platformtheme
+
+plugs:
+  gtk-3-themes:
+    interface: content
+    target: $SNAP/data-dir/themes
+    default-provider: gtk-common-themes
+  icon-themes:
+    interface: content
+    target: $SNAP/data-dir/icons
+    default-provider: gtk-common-themes
+  sound-themes:
+    interface: content
+    target: $SNAP/data-dir/sounds
+    default-provider: gtk-common-themes
 
 apps:
   clementine:
-    command: desktop-launch $SNAP/usr/bin/clementine
+    command: bin/desktop-launch $SNAP/usr/bin/clementine
     desktop: usr/share/applications/clementine.desktop
     environment:
       ALSA_CONFIG_PATH: /snap/$SNAPCRAFT_PROJECT_NAME/current/usr/share/alsa/alsa.conf
       LD_LIBRARY_PATH: $LD_LIBRARY_PATH:$SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/pulseaudio
+      DISABLE_WAYLAND: 1
     plugs:
       - home
       - udisks2
@@ -196,7 +230,7 @@ apps:
       - mpris
 
   clementine-tagreader:
-    command: clementine-tagreader
+    command: usr/bin/clementine-tagreader
     plugs:
       - network
       - network-manager-observe
