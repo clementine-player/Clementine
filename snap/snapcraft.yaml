@@ -198,6 +198,8 @@ apps:
       ALSA_CONFIG_PATH: /snap/$SNAPCRAFT_PROJECT_NAME/current/usr/share/alsa/alsa.conf
       LD_LIBRARY_PATH: $LD_LIBRARY_PATH:$SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/pulseaudio
       DISABLE_WAYLAND: 1
+      KDE_FORK_SLAVES: 1
+      PATH: "$PATH:$SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/libexec/kf5"
     plugs:
       - home
       - udisks2
@@ -218,7 +220,6 @@ apps:
       - unity7
     slots:
       - mpris
-
   clementine-tagreader:
     command: usr/bin/clementine-tagreader
     plugs:
