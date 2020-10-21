@@ -69,16 +69,14 @@ parts:
     source: .
     after:
       - alsa-lib
-      - desktop-qt5 
-    override-pull: |
-      snapcraftctl pull
-      snapcraftctl set-version "$(git describe --tags | sed 's/^v//' | cut -d "-" -f1-2)"
+      - desktop-qt5
     override-build: |
       cmake ../src -DCMAKE_INSTALL_PREFIX=/usr
       make -j $(getconf _NPROCESSORS_ONLN)
       make DESTDIR=$SNAPCRAFT_PART_INSTALL install
       sed -i 's|Icon=clementine|Icon=/usr/share/icons/hicolor/scalable/apps/clementine\.svg|' $SNAPCRAFT_PART_INSTALL/usr/share/applications/clementine.desktop
       sed -i 's|TryExec=.*|TryExec=/snap/bin/clementine|' $SNAPCRAFT_PART_INSTALL/usr/share/applications/clementine.desktop
+      snapcraftctl set-version "$(cat $SNAPCRAFT_PART_BUILD/src/version.h | grep CLEMENTINE_VERSION_DISPLAY | awk '{ print $3 }' | tr -d '"' | cut -d "-" -f1-2)"
     build-packages:
       - cmake
       - make
