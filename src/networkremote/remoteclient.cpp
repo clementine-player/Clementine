@@ -43,7 +43,7 @@ RemoteClient::RemoteClient(Application* app, QTcpSocket* client)
   use_auth_code_ = s.value("use_auth_code", false).toBool();
   auth_code_ = s.value("auth_code", 0).toInt();
   allow_downloads_ = s.value("allow_downloads", false).toBool();
-
+  remote_root_files_ = s.value("rootFiles", "").toString();
   s.endGroup();
 
   // If we don't use an auth code, we don't need to authenticate the client.
@@ -108,6 +108,7 @@ void RemoteClient::ParseMessage(const QByteArray& data) {
     qLog(Info) << "Couldn't parse data";
     return;
   }
+qLog(Debug) << "[MB_TRACE][RemoteClient::ParseMessage] Message received type: " << msg.type();
 
   if (msg.type() == pb::remote::CONNECT && use_auth_code_) {
     if (msg.request_connect().auth_code() != auth_code_) {

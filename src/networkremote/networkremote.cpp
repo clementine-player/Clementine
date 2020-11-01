@@ -171,6 +171,10 @@ void NetworkRemote::AcceptConnection() {
             SIGNAL(DoGlobalSearch(QString, RemoteClient*)),
             outgoing_data_creator_.get(),
             SLOT(DoGlobalSearch(QString, RemoteClient*)));
+
+    connect(incoming_data_parser_.get(), SIGNAL(SendListFiles(QString)),
+            outgoing_data_creator_.get(), SLOT(SendListFiles(QString)));
+
   }
 
   QTcpServer* server = qobject_cast<QTcpServer*>(sender());
@@ -212,6 +216,9 @@ void NetworkRemote::CreateRemoteClient(QTcpSocket* client_socket) {
     // Add the client to the list
     RemoteClient* client = new RemoteClient(app_, client_socket);
     clients_.push_back(client);
+
+    // Update the Remote Root Files for the latest Client
+    outgoing_data_creator_->SetRemoteRootFiles(client->remote_root_files());
 
     // Connect the signal to parse data
     connect(client, SIGNAL(Parse(pb::remote::Message)),

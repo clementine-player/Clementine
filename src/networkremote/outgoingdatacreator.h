@@ -83,6 +83,10 @@ class OutgoingDataCreator : public QObject {
   void ResultsAvailable(int id, const SearchProvider::ResultList& results);
   void SearchFinished(int id);
 
+  void SetRemoteRootFiles(const QString &remote_root_files) { remote_root_files_ = remote_root_files; }
+  void SendListFiles(QString relativePath);
+
+
  private:
   Application* app_;
   QList<RemoteClient*>* clients_;
@@ -95,6 +99,7 @@ class OutgoingDataCreator : public QObject {
   int keep_alive_timeout_;
   int last_track_position_;
   bool aww_;
+  QString remote_root_files_;
 
   std::unique_ptr<UltimateLyricsReader> ultimate_reader_;
   QMap<int, SongInfoFetcher::Result> results_;
