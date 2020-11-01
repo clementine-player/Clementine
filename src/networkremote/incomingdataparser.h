@@ -56,6 +56,8 @@ class IncomingDataParser : public QObject {
 
   void DoGlobalSearch(QString, RemoteClient*);
 
+  void SendListFiles(QString);
+
  private:
   Application* app_;
   bool close_connection_;

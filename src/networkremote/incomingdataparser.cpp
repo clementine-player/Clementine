@@ -102,6 +102,8 @@ void IncomingDataParser::Parse(const pb::remote::Message& msg) {
 
   RemoteClient* client = qobject_cast<RemoteClient*>(sender());
 
+qLog(Debug) << "[MB_TRACE][IncomingDataParser::Parse] type: " << msg.type();
+
   // Now check what's to do
   switch (msg.type()) {
     case pb::remote::CONNECT:
@@ -192,6 +194,11 @@ void IncomingDataParser::Parse(const pb::remote::Message& msg) {
     case pb::remote::GLOBAL_SEARCH:
       GlobalSearch(client, msg);
       break;
+  case pb::remote::REQUEST_FILES:
+qLog(Debug) << "[MB_TRACE] REQUEST_FILES: " << msg.request_files().relativepath().c_str();
+      emit SendListFiles(msg.request_files().relativepath().c_str());
+    break;
+
     default:
       break;
   }

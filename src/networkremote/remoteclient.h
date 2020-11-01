@@ -23,6 +23,7 @@ class RemoteClient : public QObject {
   void DisconnectClient(pb::remote::ReasonDisconnect reason);
 
   SongSender* song_sender() { return song_sender_; }
+  const QString &remote_root_files() const { return remote_root_files_; }
 
  private slots:
   void IncomingData();
@@ -49,6 +50,8 @@ class RemoteClient : public QObject {
   quint32 expected_length_;
   QBuffer buffer_;
   SongSender* song_sender_;
+
+  QString remote_root_files_;
 };
 
 #endif  // REMOTECLIENT_H
