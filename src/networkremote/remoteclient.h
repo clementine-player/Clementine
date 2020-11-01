@@ -1,8 +1,6 @@
 #ifndef REMOTECLIENT_H
 #define REMOTECLIENT_H
 
-#include <QAbstractSocket>
-#include <QBuffer>
 #include <QTcpSocket>
 
 #include "core/application.h"
@@ -48,7 +46,7 @@ class RemoteClient : public QObject {
   QTcpSocket* client_;
   bool reading_protobuf_;
   quint32 expected_length_;
-  QBuffer buffer_;
+  QByteArray buffer_;
   SongSender* song_sender_;
 
   QString remote_root_files_;
