@@ -195,8 +195,8 @@ qLog(Debug) << "[MB_TRACE][IncomingDataParser::Parse] type: " << msg.type();
       GlobalSearch(client, msg);
       break;
   case pb::remote::REQUEST_FILES:
-qLog(Debug) << "[MB_TRACE] REQUEST_FILES: " << msg.request_files().relativepath().c_str();
-      emit SendListFiles(msg.request_files().relativepath().c_str());
+qLog(Debug) << "[MB_TRACE] REQUEST_FILES: " << msg.request_list_files().relative_path().c_str();
+      emit SendListFiles(msg.request_list_files().relative_path().c_str());
     break;
 
     default:

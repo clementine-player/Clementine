@@ -87,23 +87,38 @@ enum MsgType {
 
 }
 
-message RequestFiles {
-  optional string relativePath = 1;
+message RequestListFiles {
+  optional string relative_path = 1;
 }
 
 message FileMetadata {
     optional string filename  = 1;
-    optional bool   isDir = 2;
+    optional bool   is_dir = 2;
 }
 
-// used by both Client (APPEND_FILES) and server (LIST_FILES)
-message ResponseFiles {
-  optional string relativePath = 1;
+// reply from server to LIST_FILES
+message ResponseListFiles {
+  enum Error {
+    NONE = 0;
+    ROOT_DIR_NOT_SET = 1;
+    DIR_NOT_ACCESSIBLE = 2;
+    DIR_NOT_EXIST = 3;
+    UNKNOWN = 4;
+  }
+  optional string relative_path = 1;
   repeated FileMetadata files  = 2;
 
-  optional string error = 3;
-  optional string musicExtentions = 4;
+  optional Error error = 3;
+  optional string music_extentions = 4;
 }
+
+// request to append files (APPEND_FILES)
+message RequestAppendFiles {
+  optional string relative_path = 1;
+  optional string new_playlist_name = 2;
+  repeated string files  = 3;
+}
+
 
 // Valid Engine states
 enum EngineState {
@@ -409,7 +424,8 @@ message Message {
   optional RequestDownloadSongs request_download_songs = 31;
   optional RequestRateSong request_rate_song = 35;
   optional RequestGlobalSearch request_global_search = 37;
-  optional RequestFiles request_files = 50;
+  optional RequestListFiles request_list_files = 50;
+  optional RequestAppendFiles request_append_files = 51;
 
   optional Repeat repeat = 13;
   optional Shuffle shuffle = 14;
@@ -430,5 +446,5 @@ message Message {
   optional ResponseGlobalSearch response_global_search = 38;
   optional ResponseTranscoderStatus response_transcoder_status = 39;
   optional ResponseGlobalSearchStatus response_global_search_status = 40;
-  optional ResponseFiles response_files = 51;
+  optional ResponseListFiles response_list_files = 52;
 }
