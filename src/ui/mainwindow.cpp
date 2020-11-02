@@ -797,6 +797,10 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
   connect(InternetModel::Service<SavedRadio>(), SIGNAL(ShowAddStreamDialog()),
           SLOT(AddStream()));
 
+  // Network Remote
+  connect(app->network_remote(), SIGNAL(AddToPlaylistSignal(QMimeData*)),
+          SLOT(AddToPlaylist(QMimeData*)));
+
 #ifdef Q_OS_DARWIN
   mac::SetApplicationHandler(this);
 #endif

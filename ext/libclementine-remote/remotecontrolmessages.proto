@@ -87,38 +87,6 @@ enum MsgType {
 
 }
 
-message RequestListFiles {
-  optional string relative_path = 1;
-}
-
-message FileMetadata {
-    optional string filename  = 1;
-    optional bool   is_dir = 2;
-}
-
-// reply from server to LIST_FILES
-message ResponseListFiles {
-  enum Error {
-    NONE = 0;
-    ROOT_DIR_NOT_SET = 1;
-    DIR_NOT_ACCESSIBLE = 2;
-    DIR_NOT_EXIST = 3;
-    UNKNOWN = 4;
-  }
-  optional string relative_path = 1;
-  repeated FileMetadata files  = 2;
-
-  optional Error error = 3;
-  optional string music_extentions = 4;
-}
-
-// request to append files (APPEND_FILES)
-message RequestAppendFiles {
-  optional string relative_path = 1;
-  optional string new_playlist_name = 2;
-  repeated string files  = 3;
-}
-
 
 // Valid Engine states
 enum EngineState {
@@ -405,6 +373,41 @@ message ResponseGlobalSearchStatus {
   optional string query = 2;
   optional GlobalSearchStatus status = 3;
 }
+
+
+// access the FileSystem remotely from a defined root directory
+message RequestListFiles {
+  optional string relative_path = 1;
+}
+
+message FileMetadata {
+    optional string filename  = 1;
+    optional bool   is_dir = 2;
+}
+
+message ResponseListFiles {
+  enum Error {
+    NONE = 0;
+    ROOT_DIR_NOT_SET = 1;
+    DIR_NOT_ACCESSIBLE = 2;
+    DIR_NOT_EXIST = 3;
+    UNKNOWN = 4;
+  }
+  optional string relative_path = 1;
+  repeated FileMetadata files  = 2;
+
+  optional Error error = 3;
+  optional string music_extentions = 4; // set on server
+}
+
+message RequestAppendFiles {
+  optional string relative_path = 1;
+  optional string new_playlist_name = 2;
+  repeated string files  = 3;
+  optional bool play_now = 4;
+  optional bool clear_first = 5;
+}
+
 
 // The message itself
 message Message {

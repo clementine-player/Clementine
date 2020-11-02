@@ -72,6 +72,9 @@ void NetworkRemote::SetupServer() {
           SLOT(AcceptConnection()));
   connect(server_ipv6_.get(), SIGNAL(newConnection()), this,
           SLOT(AcceptConnection()));
+
+  connect(incoming_data_parser_.get(), SIGNAL(AddToPlaylistSignal(QMimeData*)),
+          SIGNAL(AddToPlaylistSignal(QMimeData*)));
 }
 
 void NetworkRemote::StartServer() {
@@ -219,6 +222,7 @@ void NetworkRemote::CreateRemoteClient(QTcpSocket* client_socket) {
 
     // Update the Remote Root Files for the latest Client
     outgoing_data_creator_->SetRemoteRootFiles(client->remote_root_files());
+    incoming_data_parser_->SetRemoteRootFiles(client->remote_root_files());
 
     // Connect the signal to parse data
     connect(client, SIGNAL(Parse(pb::remote::Message)),

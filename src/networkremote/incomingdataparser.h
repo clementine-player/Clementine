@@ -15,6 +15,8 @@ class IncomingDataParser : public QObject {
 
   bool close_connection();
 
+  void SetRemoteRootFiles(const QString &remote_root_files) { remote_root_files_ = remote_root_files; }
+
  public slots:
   void Parse(const pb::remote::Message& msg);
   void ReloadSettings();
@@ -57,11 +59,13 @@ class IncomingDataParser : public QObject {
   void DoGlobalSearch(QString, RemoteClient*);
 
   void SendListFiles(QString);
+  void AddToPlaylistSignal(QMimeData* data);
 
  private:
   Application* app_;
   bool close_connection_;
   MainWindow::PlaylistAddBehaviour doubleclick_playlist_addmode_;
+  QString remote_root_files_;
 
   void GetPlaylistSongs(const pb::remote::Message& msg);
   void ChangeSong(const pb::remote::Message& msg);
@@ -77,6 +81,8 @@ class IncomingDataParser : public QObject {
   void GlobalSearch(RemoteClient* client, const pb::remote::Message& msg);
 
   Song CreateSongFromProtobuf(const pb::remote::SongMetadata& pb);
+
+  void AppendFilesToPlaylist(const pb::remote::Message& msg);
 };
 
 #endif  // INCOMINGDATAPARSER_H
