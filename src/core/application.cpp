@@ -69,6 +69,7 @@ bool Application::kIsPortable = false;
 const char* Application::kLegacyPortableDataDir = "data";
 const char* Application::kDefaultPortableDataDir = "clementine-data";
 const char* Application::kPortableDataDir = nullptr;
+const char* Application::kDefaultMusicExtensionsAllowedRemotely = "aac,alac,flac,m3u,m4a,mp3,ogg,wav,wmv";
 
 class ApplicationImpl {
  public:

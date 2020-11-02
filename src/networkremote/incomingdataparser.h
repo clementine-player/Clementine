@@ -15,7 +15,7 @@ class IncomingDataParser : public QObject {
 
   bool close_connection();
 
-  void SetRemoteRootFiles(const QString &remote_root_files) { remote_root_files_ = remote_root_files; }
+  void SetRemoteRootFiles(const QString &files_root_folder) { files_root_folder_ = files_root_folder; }
 
  public slots:
   void Parse(const pb::remote::Message& msg);
@@ -65,7 +65,7 @@ class IncomingDataParser : public QObject {
   Application* app_;
   bool close_connection_;
   MainWindow::PlaylistAddBehaviour doubleclick_playlist_addmode_;
-  QString remote_root_files_;
+  QString files_root_folder_;
 
   void GetPlaylistSongs(const pb::remote::Message& msg);
   void ChangeSong(const pb::remote::Message& msg);

@@ -85,10 +85,10 @@ void OutgoingDataCreator::SetClients(QList<RemoteClient*>* clients) {
 }
 
 void OutgoingDataCreator::CheckEnabledProviders() {
-  QSettings s;
-  s.beginGroup(SongInfoView::kSettingsGroup);
+    QSettings s;
+    s.beginGroup(SongInfoView::kSettingsGroup);
 
-  // Put the providers in the right order
+    // Put the providers in the right order
   QList<SongInfoProvider*> ordered_providers;
 
   QVariantList default_order;
@@ -749,18 +749,26 @@ void OutgoingDataCreator::SearchFinished(int id) {
   qLog(Debug) << "SearchFinished" << req.id_ << req.query_;
 }
 
-void OutgoingDataCreator::SendListFiles(QString relativePath)
-{
+void OutgoingDataCreator::SetMusicEextensions(const QString &music_extensions) {
+    music_extensions_.clear();
+    for (const QString &extension : music_extensions.split(",")) {
+        QString ext = extension.trimmed();
+        if (ext.size() > 0 && ext.size() < 8) // no empty string, less than 8 char
+            music_extensions_ << ext;
+    }
+}
+
+void OutgoingDataCreator::SendListFiles(QString relativePath) {
     pb::remote::Message msg;
     msg.set_type(pb::remote::LIST_FILES);
 
     pb::remote::ResponseListFiles *files =
             msg.mutable_response_list_files();
 
-    if (remote_root_files_.isEmpty())
+    if (files_root_folder_.isEmpty())
         files->set_error(pb::remote::ResponseListFiles::ROOT_DIR_NOT_SET);
     else {
-        QDir rootDir(remote_root_files_);
+        QDir rootDir(files_root_folder_);
         if (!rootDir.exists())
             files->set_error(pb::remote::ResponseListFiles::ROOT_DIR_NOT_SET);
         else if (relativePath.startsWith("..") || relativePath == "./..")
@@ -782,15 +790,12 @@ void OutgoingDataCreator::SendListFiles(QString relativePath)
                 dir.setFilter(QDir::NoDotAndDotDot|QDir::AllEntries);
                 dir.setSorting(QDir::Name|QDir::DirsFirst);
 
-// MB_TODO: get extension allowed from config!
-                QStringList extAllowed = {"mp3", "m3u", "flac"};
-
                 QFileInfoList folderFiles = dir.entryInfoList();
                 qLog(Debug) << "[MB_TRACE][SendListFiles] relative path: "
                             << relativePath << " number of files: " << folderFiles.size();
 
                 for (const QFileInfo &fi : folderFiles) {
-                    if (fi.isDir() || extAllowed.contains(fi.suffix())) {
+                    if (fi.isDir() || music_extensions_.contains(fi.suffix())) {
                         pb::remote::FileMetadata* pb_file = files->add_files();
                         pb_file->set_is_dir(fi.isDir());
                         pb_file->set_filename(fi.fileName().toStdString());
