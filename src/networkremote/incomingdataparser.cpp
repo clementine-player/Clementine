@@ -104,8 +104,6 @@ void IncomingDataParser::Parse(const pb::remote::Message& msg) {
 
   RemoteClient* client = qobject_cast<RemoteClient*>(sender());
 
-qLog(Debug) << "[MB_TRACE][IncomingDataParser::Parse] type: " << msg.type();
-
   // Now check what's to do
   switch (msg.type()) {
     case pb::remote::CONNECT:
@@ -197,12 +195,9 @@ qLog(Debug) << "[MB_TRACE][IncomingDataParser::Parse] type: " << msg.type();
       GlobalSearch(client, msg);
       break;
   case pb::remote::REQUEST_FILES:
-qLog(Debug) << "[MB_TRACE] REQUEST_FILES: " << msg.request_list_files().relative_path().c_str();
       emit SendListFiles(QString::fromStdString(msg.request_list_files().relative_path()));
     break;
   case pb::remote::APPEND_FILES:
-qLog(Debug) << "[MB_TRACE] APPEND_FILES from : " << msg.request_append_files().relative_path().c_str()
-            << ", nb: " << msg.request_append_files().files_size();
       AppendFilesToPlaylist(msg);
     break;
 
@@ -385,8 +380,7 @@ Song IncomingDataParser::CreateSongFromProtobuf(
   return song;
 }
 
-void IncomingDataParser::AppendFilesToPlaylist(const pb::remote::Message &msg)
-{
+void IncomingDataParser::AppendFilesToPlaylist(const pb::remote::Message &msg) {
     if (files_root_folder_.isEmpty()) {// should never happen...
         qLog(Warning) << "Remote root dir is not set although receiving APPEND_FILES request...";
         return;

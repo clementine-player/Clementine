@@ -147,8 +147,6 @@ SongInfoProvider* OutgoingDataCreator::ProviderByName(
 
 void OutgoingDataCreator::SendDataToClients(pb::remote::Message* msg) {
 
-qLog(Debug) << "[MB_TRACE][OutgoingDataCreator::SendDataToClients] msg type: " << msg->type();
-
   // Check if we have clients to send data to
   if (clients_->empty()) {
     return;
@@ -790,11 +788,7 @@ void OutgoingDataCreator::SendListFiles(QString relativePath) {
                 dir.setFilter(QDir::NoDotAndDotDot|QDir::AllEntries);
                 dir.setSorting(QDir::Name|QDir::DirsFirst);
 
-                QFileInfoList folderFiles = dir.entryInfoList();
-                qLog(Debug) << "[MB_TRACE][SendListFiles] relative path: "
-                            << relativePath << " number of files: " << folderFiles.size();
-
-                for (const QFileInfo &fi : folderFiles) {
+                for (const QFileInfo &fi : dir.entryInfoList()) {
                     if (fi.isDir() || music_extensions_.contains(fi.suffix())) {
                         pb::remote::FileMetadata* pb_file = files->add_files();
                         pb_file->set_is_dir(fi.isDir());
