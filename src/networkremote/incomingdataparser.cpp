@@ -387,11 +387,11 @@ Song IncomingDataParser::CreateSongFromProtobuf(
 
 void IncomingDataParser::AppendFilesToPlaylist(const pb::remote::Message &msg)
 {
-    if (remote_root_files_.isEmpty()) {// should never happen...
+    if (files_root_folder_.isEmpty()) {// should never happen...
         qLog(Warning) << "Remote root dir is not set although receiving APPEND_FILES request...";
         return;
     }
-    QDir rootDir(remote_root_files_);
+    QDir rootDir(files_root_folder_);
     if (!rootDir.exists()) {
         qLog(Warning) << "Remote root dir doesn't exist...";
         return;

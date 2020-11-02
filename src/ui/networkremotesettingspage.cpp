@@ -104,7 +104,10 @@ void NetworkRemoteSettingsPage::Load() {
     }
   }
 
-  ui_->rootFilesWidget->setPath(s.value("rootFiles", "").toString());
+  ui_->files_root_folder->setPath(s.value("files_root_folder", "").toString());
+  ui_->music_extensions->setText(s.value("music_extensions",
+                                         Application::kDefaultMusicExtensionsAllowedRemotely).toString());
+
 
   s.endGroup();
 
@@ -150,7 +153,8 @@ void NetworkRemoteSettingsPage::Save() {
                                 .value<TranscoderPreset>();
   s.setValue("last_output_format", preset.codec_mimetype_);
 
-  s.setValue("rootFiles", ui_->rootFilesWidget->getPath());
+  s.setValue("files_root_folder", ui_->files_root_folder->getPath());
+  s.setValue("music_extensions", ui_->music_extensions->text());
 
   s.endGroup();
 
