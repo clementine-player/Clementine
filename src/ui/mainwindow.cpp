@@ -1038,10 +1038,8 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
   // Force the window to show in case somehow the config has tray and window set
   // to hide
   if (hidden && (!QSystemTrayIcon::isSystemTrayAvailable() || !tray_icon_ ||
-                 !tray_icon_->IsVisible())) {
-    settings_.setValue("hidden", false);
+                 !tray_icon_->IsVisible()))
     show();
-  }
 #endif
 
   QShortcut* close_window_shortcut = new QShortcut(this);
@@ -1421,6 +1419,7 @@ void MainWindow::VolumeWheelEvent(int delta) {
 void MainWindow::ToggleShowHide() {
   if (settings_.value("hidden").toBool()) {
     show();
+    activateWindow();
     SetHiddenInTray(false);
   } else if (isActiveWindow()) {
     hide();
@@ -1461,9 +1460,17 @@ void MainWindow::closeEvent(QCloseEvent* event) {
   }
 }
 
-void MainWindow::SetHiddenInTray(bool hidden) {
-  settings_.setValue("hidden", hidden);
+void MainWindow::hideEvent(QHideEvent* event) {
+  settings_.setValue("hidden", true);
+  QMainWindow::hideEvent(event);
+}
 
+void MainWindow::showEvent(QShowEvent* event) {
+  settings_.setValue("hidden", false);
+  QMainWindow::showEvent(event);
+}
+
+void MainWindow::SetHiddenInTray(bool hidden) {
   // Some window managers don't remember maximized state between calls to
   // hide() and show(), so we have to remember it ourself.
   if (hidden) {
