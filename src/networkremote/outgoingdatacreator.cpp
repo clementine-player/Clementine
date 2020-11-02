@@ -754,16 +754,16 @@ void OutgoingDataCreator::SendListFiles(QString relativePath)
     pb::remote::Message msg;
     msg.set_type(pb::remote::LIST_FILES);
 
-    pb::remote::ResponseFiles *files =
-            msg.mutable_response_files();
+    pb::remote::ResponseListFiles *files =
+            msg.mutable_response_list_files();
 
     if (remote_root_files_.isEmpty())
-        files->set_error(tr("Root remote path not set on Server").toStdString());
+        files->set_error(pb::remote::ResponseListFiles::ROOT_DIR_NOT_SET);
     else
     {
         QDir rootDir(remote_root_files_);
         if (relativePath.startsWith("..") || relativePath == "./..")
-            files->set_error(tr("You can't browse above the root folder!").toStdString());
+            files->set_error(pb::remote::ResponseListFiles::DIR_NOT_ACCESSIBLE);
         else
         {
             if (relativePath.startsWith("/"))
@@ -771,14 +771,14 @@ void OutgoingDataCreator::SendListFiles(QString relativePath)
 
             QFileInfo fiFolder(rootDir, relativePath);
             if (!fiFolder.exists())
-                files->set_error(tr("the relative path doesn't exist").toStdString());
+                files->set_error(pb::remote::ResponseListFiles::DIR_NOT_EXIST);
             else if (!fiFolder.isDir())
-                files->set_error(tr("the relative path is not a directory").toStdString());
+                files->set_error(pb::remote::ResponseListFiles::DIR_NOT_EXIST);
             else if (rootDir.relativeFilePath(fiFolder.absoluteFilePath()).startsWith("../"))
-                files->set_error(tr("You can't browse above the root folder!").toStdString());
+                files->set_error(pb::remote::ResponseListFiles::DIR_NOT_ACCESSIBLE);
             else
             {
-                files->set_relativepath(rootDir.relativeFilePath(fiFolder.absoluteFilePath()).toStdString());
+                files->set_relative_path(rootDir.relativeFilePath(fiFolder.absoluteFilePath()).toStdString());
                 QDir dir(fiFolder.absoluteFilePath());
                 dir.setFilter(QDir::NoDotAndDotDot|QDir::AllEntries);
                 dir.setSorting(QDir::Name|QDir::DirsFirst);
@@ -795,7 +795,7 @@ void OutgoingDataCreator::SendListFiles(QString relativePath)
                     if (fi.isDir() || extAllowed.contains(fi.suffix()))
                     {
                         pb::remote::FileMetadata* pb_file = files->add_files();
-                        pb_file->set_isdir(fi.isDir());
+                        pb_file->set_is_dir(fi.isDir());
                         pb_file->set_filename(fi.fileName().toStdString());
                     }
                 }
