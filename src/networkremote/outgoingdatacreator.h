@@ -47,6 +47,7 @@ class OutgoingDataCreator : public QObject {
   static const quint32 kFileChunkSize;
 
   void SetClients(QList<RemoteClient*>* clients);
+  void SetRemoteRootFiles(const QString &remote_root_files) { remote_root_files_ = remote_root_files; }
 
   static void CreateSong(const Song& song, const QImage& art, const int index,
                          pb::remote::SongMetadata* song_metadata);
@@ -83,7 +84,6 @@ class OutgoingDataCreator : public QObject {
   void ResultsAvailable(int id, const SearchProvider::ResultList& results);
   void SearchFinished(int id);
 
-  void SetRemoteRootFiles(const QString &remote_root_files) { remote_root_files_ = remote_root_files; }
   void SendListFiles(QString relativePath);
 
 

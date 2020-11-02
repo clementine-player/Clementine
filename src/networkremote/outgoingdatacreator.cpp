@@ -17,6 +17,7 @@
 
 #include "outgoingdatacreator.h"
 
+#include <QDir>
 #include <QSqlDatabase>
 #include <QSqlQuery>
 #include <cmath>
@@ -748,7 +749,6 @@ void OutgoingDataCreator::SearchFinished(int id) {
   qLog(Debug) << "SearchFinished" << req.id_ << req.query_;
 }
 
-#include <QDir>
 void OutgoingDataCreator::SendListFiles(QString relativePath)
 {
     pb::remote::Message msg;
@@ -759,13 +759,13 @@ void OutgoingDataCreator::SendListFiles(QString relativePath)
 
     if (remote_root_files_.isEmpty())
         files->set_error(pb::remote::ResponseListFiles::ROOT_DIR_NOT_SET);
-    else
-    {
+    else {
         QDir rootDir(remote_root_files_);
-        if (relativePath.startsWith("..") || relativePath == "./..")
+        if (!rootDir.exists())
+            files->set_error(pb::remote::ResponseListFiles::ROOT_DIR_NOT_SET);
+        else if (relativePath.startsWith("..") || relativePath == "./..")
             files->set_error(pb::remote::ResponseListFiles::DIR_NOT_ACCESSIBLE);
-        else
-        {
+        else {
             if (relativePath.startsWith("/"))
                 relativePath.remove(0, 1);
 
@@ -776,24 +776,21 @@ void OutgoingDataCreator::SendListFiles(QString relativePath)
                 files->set_error(pb::remote::ResponseListFiles::DIR_NOT_EXIST);
             else if (rootDir.relativeFilePath(fiFolder.absoluteFilePath()).startsWith("../"))
                 files->set_error(pb::remote::ResponseListFiles::DIR_NOT_ACCESSIBLE);
-            else
-            {
+            else {
                 files->set_relative_path(rootDir.relativeFilePath(fiFolder.absoluteFilePath()).toStdString());
                 QDir dir(fiFolder.absoluteFilePath());
                 dir.setFilter(QDir::NoDotAndDotDot|QDir::AllEntries);
                 dir.setSorting(QDir::Name|QDir::DirsFirst);
 
-                // MB_TODO: get extension allowed from config!
+// MB_TODO: get extension allowed from config!
                 QStringList extAllowed = {"mp3", "m3u", "flac"};
 
                 QFileInfoList folderFiles = dir.entryInfoList();
                 qLog(Debug) << "[MB_TRACE][SendListFiles] relative path: "
                             << relativePath << " number of files: " << folderFiles.size();
 
-                for (const QFileInfo &fi : folderFiles)
-                {
-                    if (fi.isDir() || extAllowed.contains(fi.suffix()))
-                    {
+                for (const QFileInfo &fi : folderFiles) {
+                    if (fi.isDir() || extAllowed.contains(fi.suffix())) {
                         pb::remote::FileMetadata* pb_file = files->add_files();
                         pb_file->set_is_dir(fi.isDir());
                         pb_file->set_filename(fi.fileName().toStdString());
