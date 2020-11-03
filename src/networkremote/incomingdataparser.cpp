@@ -387,31 +387,32 @@ void IncomingDataParser::AppendFilesToPlaylist(const pb::remote::Message& msg) {
                      "APPEND_FILES request...";
     return;
   }
-  QDir rootDir(files_root_folder_);
-  if (!rootDir.exists()) {
+  QDir root_dir(files_root_folder_);
+  if (!root_dir.exists()) {
     qLog(Warning) << "Remote root dir doesn't exist...";
     return;
   }
 
-  const pb::remote::RequestAppendFiles& reqAppend = msg.request_append_files();
-  QString relativePath = QString::fromStdString(reqAppend.relative_path());
-  if (relativePath.startsWith("/")) relativePath.remove(0, 1);
+  const pb::remote::RequestAppendFiles& req_append = msg.request_append_files();
+  QString relative_path = QString::fromStdString(req_append.relative_path());
+  if (relative_path.startsWith("/")) relative_path.remove(0, 1);
 
-  QFileInfo fiFolder(rootDir, relativePath);
-  if (!fiFolder.exists())
-    qLog(Warning) << "Remote relative path " << relativePath
+  QFileInfo fi_folder(root_dir, relative_path);
+  if (!fi_folder.exists())
+    qLog(Warning) << "Remote relative path " << relative_path
                   << " doesn't exist...";
-  else if (!fiFolder.isDir())
-    qLog(Warning) << "Remote relative path " << relativePath
+  else if (!fi_folder.isDir())
+    qLog(Warning) << "Remote relative path " << relative_path
                   << " is not a directory...";
-  else if (rootDir.relativeFilePath(fiFolder.absoluteFilePath())
+  else if (root_dir.relativeFilePath(fi_folder.absoluteFilePath())
                .startsWith("../"))
-    qLog(Warning) << "Remote relative path " << relativePath
+    qLog(Warning) << "Remote relative path " << relative_path
                   << " should not be accessed...";
   else {
     QList<QUrl> urls;
-    QDir dir(fiFolder.absoluteFilePath());
-    for (auto it = reqAppend.files().cbegin(), itEnd = reqAppend.files().cend();
+    QDir dir(fi_folder.absoluteFilePath());
+    for (auto it = req_append.files().cbegin(),
+              itEnd = req_append.files().cend();
          it != itEnd; ++it) {
       QFileInfo fi(dir, it->c_str());
       if (fi.exists()) urls << QUrl::fromLocalFile(fi.canonicalFilePath());
@@ -419,15 +420,15 @@ void IncomingDataParser::AppendFilesToPlaylist(const pb::remote::Message& msg) {
     if (urls.size()) {
       MimeData* data = new MimeData;
       data->setUrls(urls);
-      if (reqAppend.has_play_now()) data->play_now_ = reqAppend.play_now();
-      if (reqAppend.has_clear_first())
-        data->clear_first_ = reqAppend.clear_first();
-      if (reqAppend.has_new_playlist_name()) {
-        QString playlistName =
-            QString::fromStdString(reqAppend.new_playlist_name());
-        if (!playlistName.isEmpty()) {
+      if (req_append.has_play_now()) data->play_now_ = req_append.play_now();
+      if (req_append.has_clear_first())
+        data->clear_first_ = req_append.clear_first();
+      if (req_append.has_new_playlist_name()) {
+        QString playlist_name =
+            QString::fromStdString(req_append.new_playlist_name());
+        if (!playlist_name.isEmpty()) {
           data->open_in_new_playlist_ = true;
-          data->name_for_new_playlist_ = playlistName;
+          data->name_for_new_playlist_ = playlist_name;
         }
       }
       emit AddToPlaylistSignal(data);
