@@ -411,10 +411,8 @@ void IncomingDataParser::AppendFilesToPlaylist(const pb::remote::Message& msg) {
   else {
     QList<QUrl> urls;
     QDir dir(fi_folder.absoluteFilePath());
-    for (auto it = req_append.files().cbegin(),
-              itEnd = req_append.files().cend();
-         it != itEnd; ++it) {
-      QFileInfo fi(dir, it->c_str());
+    for (const auto& file : req_append.files()) {
+      QFileInfo fi(dir, file.c_str());
       if (fi.exists()) urls << QUrl::fromLocalFile(fi.canonicalFilePath());
     }
     if (urls.size()) {

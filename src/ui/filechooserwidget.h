@@ -12,30 +12,30 @@ class FileChooserWidget : public QWidget {
 
  private:
   QHBoxLayout* layout_;
-  QLineEdit* pathEdit_;
+  QLineEdit* path_edit_;
   const Mode mode_;
   QString filter_;
-  QString openDirPath_;
+  QString open_dir_path_;
 
  public:
   FileChooserWidget(QWidget* parent);
-  FileChooserWidget(Mode mode, const QString& initialPath = "",
+  FileChooserWidget(Mode mode, const QString& initial_path = "",
                     QWidget* parent = nullptr);
   FileChooserWidget(Mode mode, const QString& label,
-                    const QString& initialPath = "", QWidget* parent = nullptr);
+                    const QString& initial_path = "",
+                    QWidget* parent = nullptr);
   ~FileChooserWidget() = default;
 
-  void setFileFilter(const QString& filter);
+  void SetFileFilter(const QString& filter);
 
-  void setPath(const QString& path);
-
-  QString getPath() const;
+  void SetPath(const QString& path);
+  QString Path() const;
 
  public slots:
-  void chooseFile();
+  void ChooseFile();
 
  private:
-  void _init(const QString& initialPath);
+  void Init(const QString& initialPath);
 };
 
 #endif  // FILECHOOSERWIDGET_H

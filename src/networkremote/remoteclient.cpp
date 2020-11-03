@@ -41,10 +41,11 @@ RemoteClient::RemoteClient(Application* app, QTcpSocket* client)
   auth_code_ = s.value("auth_code", 0).toInt();
   allow_downloads_ = s.value("allow_downloads", false).toBool();
   files_root_folder_ = s.value("files_root_folder", "").toString();
-  music_extensions_ = s.value("music_extensions", "").toString();
+  files_music_extensions_ =
+      s.value("files_music_extensions",
+              Application::kDefaultMusicExtensionsAllowedRemotely)
+          .toStringList();
   s.endGroup();
-  if (music_extensions_.isEmpty())
-    music_extensions_ = Application::kDefaultMusicExtensionsAllowedRemotely;
 
   // If we don't use an auth code, we don't need to authenticate the client.
   authenticated_ = !use_auth_code_;

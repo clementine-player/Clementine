@@ -220,7 +220,8 @@ void NetworkRemote::CreateRemoteClient(QTcpSocket* client_socket) {
     clients_.push_back(client);
 
     // Update the Remote Root Files for the latest Client
-    outgoing_data_creator_->SetMusicEextensions(client->music_extensions());
+    outgoing_data_creator_->SetMusicExtensions(
+        client->files_music_extensions());
     outgoing_data_creator_->SetRemoteRootFiles(client->files_root_folder());
     incoming_data_parser_->SetRemoteRootFiles(client->files_root_folder());
 
