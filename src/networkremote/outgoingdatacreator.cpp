@@ -781,6 +781,7 @@ void OutgoingDataCreator::SendListFiles(QString relative_path) {
                    .startsWith("../"))
         files->set_error(pb::remote::ResponseListFiles::DIR_NOT_ACCESSIBLE);
       else {
+        files->set_music_extensions(music_extensions_.join(",").toStdString());
         files->set_relative_path(
             root_dir.relativeFilePath(fi_folder.absoluteFilePath())
                 .toStdString());
