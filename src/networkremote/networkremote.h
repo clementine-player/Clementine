@@ -25,7 +25,7 @@ class NetworkRemote : public QObject {
   explicit NetworkRemote(Application* app, QObject* parent = nullptr);
   ~NetworkRemote();
 
-signals:
+ signals:
   void AddToPlaylistSignal(QMimeData* data);
 
  public slots:

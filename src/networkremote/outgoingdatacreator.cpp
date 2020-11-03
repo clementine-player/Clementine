@@ -85,10 +85,10 @@ void OutgoingDataCreator::SetClients(QList<RemoteClient*>* clients) {
 }
 
 void OutgoingDataCreator::CheckEnabledProviders() {
-    QSettings s;
-    s.beginGroup(SongInfoView::kSettingsGroup);
+  QSettings s;
+  s.beginGroup(SongInfoView::kSettingsGroup);
 
-    // Put the providers in the right order
+  // Put the providers in the right order
   QList<SongInfoProvider*> ordered_providers;
 
   QVariantList default_order;
@@ -146,7 +146,6 @@ SongInfoProvider* OutgoingDataCreator::ProviderByName(
 }
 
 void OutgoingDataCreator::SendDataToClients(pb::remote::Message* msg) {
-
   // Check if we have clients to send data to
   if (clients_->empty()) {
     return;
@@ -747,56 +746,57 @@ void OutgoingDataCreator::SearchFinished(int id) {
   qLog(Debug) << "SearchFinished" << req.id_ << req.query_;
 }
 
-void OutgoingDataCreator::SetMusicEextensions(const QString &music_extensions) {
-    music_extensions_.clear();
-    for (const QString &extension : music_extensions.split(",")) {
-        QString ext = extension.trimmed();
-        if (ext.size() > 0 && ext.size() < 8) // no empty string, less than 8 char
-            music_extensions_ << ext;
-    }
+void OutgoingDataCreator::SetMusicEextensions(const QString& music_extensions) {
+  music_extensions_.clear();
+  for (const QString& extension : music_extensions.split(",")) {
+    QString ext = extension.trimmed();
+    if (ext.size() > 0 && ext.size() < 8)  // no empty string, less than 8 char
+      music_extensions_ << ext;
+  }
 }
 
 void OutgoingDataCreator::SendListFiles(QString relativePath) {
-    pb::remote::Message msg;
-    msg.set_type(pb::remote::LIST_FILES);
+  pb::remote::Message msg;
+  msg.set_type(pb::remote::LIST_FILES);
 
-    pb::remote::ResponseListFiles *files =
-            msg.mutable_response_list_files();
+  pb::remote::ResponseListFiles* files = msg.mutable_response_list_files();
 
-    if (files_root_folder_.isEmpty())
-        files->set_error(pb::remote::ResponseListFiles::ROOT_DIR_NOT_SET);
+  if (files_root_folder_.isEmpty())
+    files->set_error(pb::remote::ResponseListFiles::ROOT_DIR_NOT_SET);
+  else {
+    QDir rootDir(files_root_folder_);
+    if (!rootDir.exists())
+      files->set_error(pb::remote::ResponseListFiles::ROOT_DIR_NOT_SET);
+    else if (relativePath.startsWith("..") || relativePath == "./..")
+      files->set_error(pb::remote::ResponseListFiles::DIR_NOT_ACCESSIBLE);
     else {
-        QDir rootDir(files_root_folder_);
-        if (!rootDir.exists())
-            files->set_error(pb::remote::ResponseListFiles::ROOT_DIR_NOT_SET);
-        else if (relativePath.startsWith("..") || relativePath == "./..")
-            files->set_error(pb::remote::ResponseListFiles::DIR_NOT_ACCESSIBLE);
-        else {
-            if (relativePath.startsWith("/"))
-                relativePath.remove(0, 1);
+      if (relativePath.startsWith("/")) relativePath.remove(0, 1);
 
-            QFileInfo fiFolder(rootDir, relativePath);
-            if (!fiFolder.exists())
-                files->set_error(pb::remote::ResponseListFiles::DIR_NOT_EXIST);
-            else if (!fiFolder.isDir())
-                files->set_error(pb::remote::ResponseListFiles::DIR_NOT_EXIST);
-            else if (rootDir.relativeFilePath(fiFolder.absoluteFilePath()).startsWith("../"))
-                files->set_error(pb::remote::ResponseListFiles::DIR_NOT_ACCESSIBLE);
-            else {
-                files->set_relative_path(rootDir.relativeFilePath(fiFolder.absoluteFilePath()).toStdString());
-                QDir dir(fiFolder.absoluteFilePath());
-                dir.setFilter(QDir::NoDotAndDotDot|QDir::AllEntries);
-                dir.setSorting(QDir::Name|QDir::DirsFirst);
+      QFileInfo fiFolder(rootDir, relativePath);
+      if (!fiFolder.exists())
+        files->set_error(pb::remote::ResponseListFiles::DIR_NOT_EXIST);
+      else if (!fiFolder.isDir())
+        files->set_error(pb::remote::ResponseListFiles::DIR_NOT_EXIST);
+      else if (rootDir.relativeFilePath(fiFolder.absoluteFilePath())
+                   .startsWith("../"))
+        files->set_error(pb::remote::ResponseListFiles::DIR_NOT_ACCESSIBLE);
+      else {
+        files->set_relative_path(
+            rootDir.relativeFilePath(fiFolder.absoluteFilePath())
+                .toStdString());
+        QDir dir(fiFolder.absoluteFilePath());
+        dir.setFilter(QDir::NoDotAndDotDot | QDir::AllEntries);
+        dir.setSorting(QDir::Name | QDir::DirsFirst);
 
-                for (const QFileInfo &fi : dir.entryInfoList()) {
-                    if (fi.isDir() || music_extensions_.contains(fi.suffix())) {
-                        pb::remote::FileMetadata* pb_file = files->add_files();
-                        pb_file->set_is_dir(fi.isDir());
-                        pb_file->set_filename(fi.fileName().toStdString());
-                    }
-                }
-            }
+        for (const QFileInfo& fi : dir.entryInfoList()) {
+          if (fi.isDir() || music_extensions_.contains(fi.suffix())) {
+            pb::remote::FileMetadata* pb_file = files->add_files();
+            pb_file->set_is_dir(fi.isDir());
+            pb_file->set_filename(fi.fileName().toStdString());
+          }
         }
+      }
     }
-    SendDataToClients(&msg);
+  }
+  SendDataToClients(&msg);
 }

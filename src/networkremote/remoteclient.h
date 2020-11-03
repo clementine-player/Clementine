@@ -21,8 +21,8 @@ class RemoteClient : public QObject {
   void DisconnectClient(pb::remote::ReasonDisconnect reason);
 
   SongSender* song_sender() { return song_sender_; }
-  const QString &files_root_folder() const { return files_root_folder_; }
-  const QString &music_extensions()  const { return music_extensions_; }
+  const QString& files_root_folder() const { return files_root_folder_; }
+  const QString& music_extensions() const { return music_extensions_; }
  private slots:
   void IncomingData();
 
