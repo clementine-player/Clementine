@@ -394,7 +394,7 @@ message ResponseListFiles {
   repeated FileMetadata files = 2;
 
   optional Error error = 3;
-  optional string music_extentions = 4;  // set on server
+  optional string music_extensions = 4;  // set on server
 }
 
 message RequestAppendFiles {

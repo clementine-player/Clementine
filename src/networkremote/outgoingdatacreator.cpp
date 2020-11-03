@@ -755,7 +755,7 @@ void OutgoingDataCreator::SetMusicEextensions(const QString& music_extensions) {
   }
 }
 
-void OutgoingDataCreator::SendListFiles(QString relativePath) {
+void OutgoingDataCreator::SendListFiles(QString relative_path) {
   pb::remote::Message msg;
   msg.set_type(pb::remote::LIST_FILES);
 
@@ -764,27 +764,27 @@ void OutgoingDataCreator::SendListFiles(QString relativePath) {
   if (files_root_folder_.isEmpty())
     files->set_error(pb::remote::ResponseListFiles::ROOT_DIR_NOT_SET);
   else {
-    QDir rootDir(files_root_folder_);
-    if (!rootDir.exists())
+    QDir root_dir(files_root_folder_);
+    if (!root_dir.exists())
       files->set_error(pb::remote::ResponseListFiles::ROOT_DIR_NOT_SET);
-    else if (relativePath.startsWith("..") || relativePath == "./..")
+    else if (relative_path.startsWith("..") || relative_path == "./..")
       files->set_error(pb::remote::ResponseListFiles::DIR_NOT_ACCESSIBLE);
     else {
-      if (relativePath.startsWith("/")) relativePath.remove(0, 1);
+      if (relative_path.startsWith("/")) relative_path.remove(0, 1);
 
-      QFileInfo fiFolder(rootDir, relativePath);
-      if (!fiFolder.exists())
+      QFileInfo fi_folder(root_dir, relative_path);
+      if (!fi_folder.exists())
         files->set_error(pb::remote::ResponseListFiles::DIR_NOT_EXIST);
-      else if (!fiFolder.isDir())
+      else if (!fi_folder.isDir())
         files->set_error(pb::remote::ResponseListFiles::DIR_NOT_EXIST);
-      else if (rootDir.relativeFilePath(fiFolder.absoluteFilePath())
+      else if (root_dir.relativeFilePath(fi_folder.absoluteFilePath())
                    .startsWith("../"))
         files->set_error(pb::remote::ResponseListFiles::DIR_NOT_ACCESSIBLE);
       else {
         files->set_relative_path(
-            rootDir.relativeFilePath(fiFolder.absoluteFilePath())
+            root_dir.relativeFilePath(fi_folder.absoluteFilePath())
                 .toStdString());
-        QDir dir(fiFolder.absoluteFilePath());
+        QDir dir(fi_folder.absoluteFilePath());
         dir.setFilter(QDir::NoDotAndDotDot | QDir::AllEntries);
         dir.setSorting(QDir::Name | QDir::DirsFirst);
 

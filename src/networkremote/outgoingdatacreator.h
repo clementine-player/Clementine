@@ -87,7 +87,7 @@ class OutgoingDataCreator : public QObject {
   void ResultsAvailable(int id, const SearchProvider::ResultList& results);
   void SearchFinished(int id);
 
-  void SendListFiles(QString relativePath);
+  void SendListFiles(QString relative_path);
 
  private:
   Application* app_;
