@@ -103,11 +103,12 @@ void NetworkRemoteSettingsPage::Load() {
     }
   }
 
-  ui_->files_root_folder->setPath(s.value("files_root_folder", "").toString());
-  ui_->music_extensions->setText(
-      s.value("music_extensions",
+  ui_->files_root_folder->SetPath(s.value("files_root_folder", "").toString());
+  ui_->files_music_extensions->setText(
+      s.value("files_music_extensions",
               Application::kDefaultMusicExtensionsAllowedRemotely)
-          .toString());
+          .toStringList()
+          .join(","));
 
   s.endGroup();
 
@@ -153,8 +154,16 @@ void NetworkRemoteSettingsPage::Save() {
                                 .value<TranscoderPreset>();
   s.setValue("last_output_format", preset.codec_mimetype_);
 
-  s.setValue("files_root_folder", ui_->files_root_folder->getPath());
-  s.setValue("music_extensions", ui_->music_extensions->text());
+  s.setValue("files_root_folder", ui_->files_root_folder->Path());
+
+  QStringList files_music_extensions;
+  for (const QString& extension :
+       ui_->files_music_extensions->text().split(",")) {
+    QString ext = extension.trimmed();
+    if (ext.size() > 0 && ext.size() < 8)  // no empty string, less than 8 char
+      files_music_extensions << ext;
+  }
+  s.setValue("files_music_extensions", files_music_extensions);
 
   s.endGroup();
 

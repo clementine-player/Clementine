@@ -181,6 +181,10 @@ void OutgoingDataCreator::SendClementineInfo() {
       msg.mutable_response_clementine_info();
   SetEngineState(info);
 
+  // allowed extensions for REQUEST_FILES and LIST_FILES
+  for (const QString& ext : files_music_extensions_)
+    *info->add_files_music_extensions() = ext.toStdString();
+
   QString version =
       QString("%1 %2").arg(QCoreApplication::applicationName(),
                            QCoreApplication::applicationVersion());
@@ -746,55 +750,46 @@ void OutgoingDataCreator::SearchFinished(int id) {
   qLog(Debug) << "SearchFinished" << req.id_ << req.query_;
 }
 
-void OutgoingDataCreator::SetMusicEextensions(const QString& music_extensions) {
-  music_extensions_.clear();
-  for (const QString& extension : music_extensions.split(",")) {
-    QString ext = extension.trimmed();
-    if (ext.size() > 0 && ext.size() < 8)  // no empty string, less than 8 char
-      music_extensions_ << ext;
-  }
-}
-
 void OutgoingDataCreator::SendListFiles(QString relative_path) {
   pb::remote::Message msg;
   msg.set_type(pb::remote::LIST_FILES);
-
   pb::remote::ResponseListFiles* files = msg.mutable_response_list_files();
 
-  if (files_root_folder_.isEmpty())
+  if (files_root_folder_.isEmpty()) {
     files->set_error(pb::remote::ResponseListFiles::ROOT_DIR_NOT_SET);
+    SendDataToClients(&msg);
+    return;
+  }
+
+  QDir root_dir(files_root_folder_);
+  if (!root_dir.exists())
+    files->set_error(pb::remote::ResponseListFiles::ROOT_DIR_NOT_SET);
+  else if (relative_path.startsWith("..") || relative_path == "./..")
+    files->set_error(pb::remote::ResponseListFiles::DIR_NOT_ACCESSIBLE);
   else {
-    QDir root_dir(files_root_folder_);
-    if (!root_dir.exists())
-      files->set_error(pb::remote::ResponseListFiles::ROOT_DIR_NOT_SET);
-    else if (relative_path.startsWith("..") || relative_path == "./..")
+    if (relative_path.startsWith("/")) relative_path.remove(0, 1);
+
+    QFileInfo fi_folder(root_dir, relative_path);
+    if (!fi_folder.exists())
+      files->set_error(pb::remote::ResponseListFiles::DIR_NOT_EXIST);
+    else if (!fi_folder.isDir())
+      files->set_error(pb::remote::ResponseListFiles::DIR_NOT_EXIST);
+    else if (root_dir.relativeFilePath(fi_folder.absoluteFilePath())
+                 .startsWith("../"))
       files->set_error(pb::remote::ResponseListFiles::DIR_NOT_ACCESSIBLE);
     else {
-      if (relative_path.startsWith("/")) relative_path.remove(0, 1);
+      files->set_relative_path(
+          root_dir.relativeFilePath(fi_folder.absoluteFilePath())
+              .toStdString());
+      QDir dir(fi_folder.absoluteFilePath());
+      dir.setFilter(QDir::NoDotAndDotDot | QDir::AllEntries);
+      dir.setSorting(QDir::Name | QDir::DirsFirst);
 
-      QFileInfo fi_folder(root_dir, relative_path);
-      if (!fi_folder.exists())
-        files->set_error(pb::remote::ResponseListFiles::DIR_NOT_EXIST);
-      else if (!fi_folder.isDir())
-        files->set_error(pb::remote::ResponseListFiles::DIR_NOT_EXIST);
-      else if (root_dir.relativeFilePath(fi_folder.absoluteFilePath())
-                   .startsWith("../"))
-        files->set_error(pb::remote::ResponseListFiles::DIR_NOT_ACCESSIBLE);
-      else {
-        files->set_music_extensions(music_extensions_.join(",").toStdString());
-        files->set_relative_path(
-            root_dir.relativeFilePath(fi_folder.absoluteFilePath())
-                .toStdString());
-        QDir dir(fi_folder.absoluteFilePath());
-        dir.setFilter(QDir::NoDotAndDotDot | QDir::AllEntries);
-        dir.setSorting(QDir::Name | QDir::DirsFirst);
-
-        for (const QFileInfo& fi : dir.entryInfoList()) {
-          if (fi.isDir() || music_extensions_.contains(fi.suffix())) {
-            pb::remote::FileMetadata* pb_file = files->add_files();
-            pb_file->set_is_dir(fi.isDir());
-            pb_file->set_filename(fi.fileName().toStdString());
-          }
+      for (const QFileInfo& fi : dir.entryInfoList()) {
+        if (fi.isDir() || files_music_extensions_.contains(fi.suffix())) {
+          pb::remote::FileMetadata* pb_file = files->add_files();
+          pb_file->set_is_dir(fi.isDir());
+          pb_file->set_filename(fi.fileName().toStdString());
         }
       }
     }
