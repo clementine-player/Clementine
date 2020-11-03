@@ -13,7 +13,7 @@ endif(BUILD_WERROR)
 include_directories(${CMAKE_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR} ${CMAKE_CURRENT_SOURCE_DIR})
 include_directories(../3rdparty/gmock/gtest/include)
 
-# Activate fast QString concatenation
+#Activate fast QString concatenation
 add_definitions(-DQT_USE_QSTRINGBUILDER)
 add_definitions(-DQT_NO_URL_CAST_FROM_STRING)
 add_definitions(-DBOOST_BIND_NO_PLACEHOLDERS)
@@ -790,7 +790,7 @@ set(OTHER_SOURCES)
 if (HAVE_TRANSLATIONS)
   set(LINGUAS "All" CACHE STRING "A space-seperated list of translations to compile in to Clementine, or \"None\".")
   if (LINGUAS STREQUAL "All")
-    # build LANGUAGES from all existing .po files
+#build LANGUAGES from all existing.po files
     file(GLOB pofiles translations/*.po)
     foreach(pofile ${pofiles})
       get_filename_component(lang ${pofile} NAME_WE)

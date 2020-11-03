@@ -105,9 +105,10 @@ void NetworkRemoteSettingsPage::Load() {
   }
 
   ui_->files_root_folder->setPath(s.value("files_root_folder", "").toString());
-  ui_->music_extensions->setText(s.value("music_extensions",
-                                         Application::kDefaultMusicExtensionsAllowedRemotely).toString());
-
+  ui_->music_extensions->setText(
+      s.value("music_extensions",
+              Application::kDefaultMusicExtensionsAllowedRemotely)
+          .toString());
 
   s.endGroup();
 
