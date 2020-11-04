@@ -36,6 +36,7 @@ enum MsgType {
   REMOVE_SONGS = 9;
   OPEN_PLAYLIST = 10;
   CLOSE_PLAYLIST = 11;
+  UPDATE_PLAYLIST = 60;
   GET_LYRICS = 14;
   DOWNLOAD_SONGS = 15;
   SONG_OFFER_RESPONSE = 16;
@@ -149,6 +150,7 @@ message Playlist {
   optional int32 item_count = 3;
   optional bool active = 4;
   optional bool closed = 5;
+  optional bool favorite = 6;
 }
 
 // Valid Repeatmodes
@@ -291,6 +293,11 @@ message RequestOpenPlaylist {
 message RequestClosePlaylist {
   optional int32 playlist_id = 1;
 }
+message RequestUpdatePlaylist {
+  optional int32 playlist_id = 1;
+  optional string new_playlist_name = 2;
+  optional bool favorite = 3;
+}
 
 // Message containing lyrics
 message ResponseLyrics {
@@ -422,6 +429,7 @@ message Message {
   optional RequestRemoveSongs request_remove_songs = 26;
   optional RequestOpenPlaylist request_open_playlist = 28;
   optional RequestClosePlaylist request_close_playlist = 29;
+  optional RequestUpdatePlaylist request_update_playlist = 53;
   optional RequestDownloadSongs request_download_songs = 31;
   optional RequestRateSong request_rate_song = 35;
   optional RequestGlobalSearch request_global_search = 37;
