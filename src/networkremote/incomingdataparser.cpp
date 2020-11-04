@@ -109,8 +109,6 @@ void IncomingDataParser::Parse(const pb::remote::Message& msg) {
 
   RemoteClient* client = qobject_cast<RemoteClient*>(sender());
 
-  qLog(Debug) << "[MB_TRACE][IncomingDataParser::Parse] type: " << msg.type();
-
   // Now check what's to do
   switch (msg.type()) {
     case pb::remote::CONNECT:

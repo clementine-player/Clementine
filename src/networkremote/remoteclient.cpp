@@ -108,7 +108,6 @@ void RemoteClient::ParseMessage(const QByteArray& data) {
     qLog(Info) << "Couldn't parse data";
     return;
   }
-qLog(Debug) << "[MB_TRACE][RemoteClient::ParseMessage] Message received type: " << msg.type();
 
   if (msg.type() == pb::remote::CONNECT && use_auth_code_) {
     if (msg.request_connect().auth_code() != auth_code_) {
