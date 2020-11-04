@@ -76,6 +76,8 @@ IncomingDataParser::IncomingDataParser(Application* app) : app_(app) {
           SLOT(InsertSongs(int, const SongList&, int, bool, bool)));
   connect(this, SIGNAL(RemoveSongs(int, const QList<int>&)), playlist_manager,
           SLOT(RemoveItemsWithoutUndo(int, const QList<int>&)));
+  connect(this, SIGNAL(New(const QString&)), playlist_manager,
+          SLOT(New(const QString&)));
   connect(this, SIGNAL(Open(int)), playlist_manager, SLOT(Open(int)));
   connect(this, SIGNAL(Close(int)), playlist_manager, SLOT(Close(int)));
   connect(this, SIGNAL(Rename(int, const QString&)), playlist_manager,
@@ -364,6 +366,13 @@ void IncomingDataParser::ClosePlaylist(const pb::remote::Message& msg) {
 void IncomingDataParser::UpdatePlaylist(const pb::remote::Message& msg) {
   const pb::remote::RequestUpdatePlaylist& req_update =
       msg.request_update_playlist();
+  if (req_update.has_create_new_playlist() &&
+      req_update.create_new_playlist()) {
+    emit New(req_update.has_new_playlist_name()
+                 ? req_update.new_playlist_name().c_str()
+                 : "New Playlist");
+    return;
+  }
   if (req_update.has_new_playlist_name() &&
       req_update.new_playlist_name().size())
     emit Rename(req_update.playlist_id(),
