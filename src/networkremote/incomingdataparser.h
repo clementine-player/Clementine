@@ -63,9 +63,10 @@ class IncomingDataParser : public QObject {
 
   void DoGlobalSearch(QString, RemoteClient*);
 
+  void SendSavedRadios();
   void SendListFiles(QString);
   void AddToPlaylistSignal(QMimeData* data);
-  void SendSavedRadios();
+  void SetCurrentPlaylist(int id);
 
  private:
   Application* app_;

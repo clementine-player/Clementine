@@ -461,6 +461,13 @@ void IncomingDataParser::AppendFilesToPlaylist(const pb::remote::Message& msg) {
           data->open_in_new_playlist_ = true;
           data->name_for_new_playlist_ = playlist_name;
         }
+      } else if (req_append.has_playlist_id()) {
+        // if playing we will drop the files in another playlist
+        if (app_->player()->GetState() == Engine::Playing)
+          data->playlist_id = req_append.playlist_id();
+        else
+          // as me may play the song, we change the current playlist
+          emit SetCurrentPlaylist(req_append.playlist_id());
       }
       emit AddToPlaylistSignal(data);
     }

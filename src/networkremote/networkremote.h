@@ -27,6 +27,7 @@ class NetworkRemote : public QObject {
 
  signals:
   void AddToPlaylistSignal(QMimeData* data);
+  void SetCurrentPlaylist(int id);
 
  public slots:
   void SetupServer();
