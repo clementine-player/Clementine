@@ -802,7 +802,7 @@ void OutgoingDataCreator::SendListFiles(QString relative_path) {
   SendDataToClients(&msg);
 }
 
-void OutgoingDataCreator::SendSavedRaios() {
+void OutgoingDataCreator::SendSavedRadios() {
   pb::remote::Message msg;
   msg.set_type(pb::remote::REQUEST_SAVED_RADIOS);
 

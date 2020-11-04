@@ -64,7 +64,7 @@ class IncomingDataParser : public QObject {
 
   void SendListFiles(QString);
   void AddToPlaylistSignal(QMimeData* data);
-  void SendSavedRaios();
+  void SendSavedRadios();
 
  private:
   Application* app_;

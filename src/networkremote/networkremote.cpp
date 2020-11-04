@@ -177,8 +177,8 @@ void NetworkRemote::AcceptConnection() {
 
     connect(incoming_data_parser_.get(), SIGNAL(SendListFiles(QString)),
             outgoing_data_creator_.get(), SLOT(SendListFiles(QString)));
-    connect(incoming_data_parser_.get(), SIGNAL(SendSavedRaios()),
-            outgoing_data_creator_.get(), SLOT(SendSavedRaios()));
+    connect(incoming_data_parser_.get(), SIGNAL(SendSavedRadios()),
+            outgoing_data_creator_.get(), SLOT(SendSavedRadios()));
   }
 
   QTcpServer* server = qobject_cast<QTcpServer*>(sender());
