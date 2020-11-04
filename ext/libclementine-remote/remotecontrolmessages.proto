@@ -417,6 +417,7 @@ message RequestAppendFiles {
 message Stream {
   optional string name = 1;
   optional string url = 2;
+  optional string url_logo = 3;
 }
 message ResponseSavedRadios {
   repeated Stream streams = 1;
