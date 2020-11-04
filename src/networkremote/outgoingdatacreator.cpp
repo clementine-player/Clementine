@@ -146,8 +146,8 @@ SongInfoProvider* OutgoingDataCreator::ProviderByName(
 }
 
 void OutgoingDataCreator::SendDataToClients(pb::remote::Message* msg) {
-
-qLog(Debug) << "[MB_TRACE][OutgoingDataCreator::SendDataToClients] msg type: " << msg->type();
+  qLog(Debug) << "[MB_TRACE][OutgoingDataCreator::SendDataToClients] msg type: "
+              << msg->type();
 
   // Check if we have clients to send data to
   if (clients_->empty()) {
@@ -238,6 +238,7 @@ void OutgoingDataCreator::SendAllPlaylists() {
     playlist->set_active((p.id == active_playlist));
     playlist->set_item_count(item_count);
     playlist->set_closed(!playlist_open);
+    playlist->set_favorite(p.favorite);
   }
 
   SendDataToClients(&msg);
@@ -267,6 +268,7 @@ void OutgoingDataCreator::SendAllActivePlaylists() {
     playlist->set_active((p->id() == active_playlist));
     playlist->set_item_count(p->rowCount());
     playlist->set_closed(false);
+    playlist->set_favorite(p->is_favorite());
   }
 
   SendDataToClients(&msg);
@@ -297,8 +299,9 @@ void OutgoingDataCreator::PlaylistRenamed(int id, const QString& new_name) {
 }
 
 void OutgoingDataCreator::SendFirstData(bool send_playlist_songs) {
+  Player* player = app_->player();
   // First Send the current song
-  PlaylistItemPtr item = app_->player()->GetCurrentItem();
+  PlaylistItemPtr item = player->GetCurrentItem();
   if (!item) {
     qLog(Info) << "No current item found!";
   }
@@ -306,11 +309,11 @@ void OutgoingDataCreator::SendFirstData(bool send_playlist_songs) {
   CurrentSongChanged(current_song_, current_uri_, current_image_);
 
   // then the current volume
-  VolumeChanged(app_->player()->GetVolume());
+  VolumeChanged(player->GetVolume());
 
   // Check if we need to start the track position timer
   if (!track_position_timer_->isActive() &&
-      app_->player()->engine()->state() == Engine::Playing) {
+      player->engine()->state() == Engine::Playing) {
     track_position_timer_->start(1000);
   }
 
@@ -554,11 +557,11 @@ void OutgoingDataCreator::UpdateTrackPosition() {
   pb::remote::Message msg;
   msg.set_type(pb::remote::UPDATE_TRACK_POSITION);
 
-  int position = std::floor(
-      float(app_->player()->engine()->position_nanosec()) / kNsecPerSec + 0.5);
+  qint64 position_nanosec = app_->player()->engine()->position_nanosec();
+  int position = static_cast<int>(
+      std::floor(static_cast<double>(position_nanosec) / kNsecPerSec + 0.5));
 
-  if (app_->player()->engine()->position_nanosec() >
-      current_song_.length_nanosec())
+  if (position_nanosec > current_song_.length_nanosec())
     position = last_track_position_;
 
   msg.mutable_response_update_track_position()->set_position(position);

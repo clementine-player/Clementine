@@ -38,47 +38,52 @@ IncomingDataParser::IncomingDataParser(Application* app) : app_(app) {
   ReloadSettings();
   connect(app_, SIGNAL(SettingsChanged()), SLOT(ReloadSettings()));
 
+  Player* player = app_->player();
+  PlaylistManager* playlist_manager = app_->playlist_manager();
+
   // Connect all the signals
   // due the player is in a different thread, we cannot access these functions
   // directly
-  connect(this, SIGNAL(Play()), app_->player(), SLOT(Play()));
-  connect(this, SIGNAL(PlayPause()), app_->player(), SLOT(PlayPause()));
-  connect(this, SIGNAL(Pause()), app_->player(), SLOT(Pause()));
-  connect(this, SIGNAL(Stop()), app_->player(), SLOT(Stop()));
-  connect(this, SIGNAL(StopAfterCurrent()), app_->player(),
-          SLOT(StopAfterCurrent()));
-  connect(this, SIGNAL(Next()), app_->player(), SLOT(Next()));
-  connect(this, SIGNAL(Previous()), app_->player(), SLOT(Previous()));
-  connect(this, SIGNAL(SetVolume(int)), app_->player(), SLOT(SetVolume(int)));
-  connect(this, SIGNAL(PlayAt(int, Engine::TrackChangeFlags, bool)),
-          app_->player(), SLOT(PlayAt(int, Engine::TrackChangeFlags, bool)));
-  connect(this, SIGNAL(SeekTo(int)), app_->player(), SLOT(SeekTo(int)));
-  connect(this, SIGNAL(Enque(int, int)), app_->playlist_manager(),
+  connect(this, SIGNAL(Play()), player, SLOT(Play()));
+  connect(this, SIGNAL(PlayPause()), player, SLOT(PlayPause()));
+  connect(this, SIGNAL(Pause()), player, SLOT(Pause()));
+  connect(this, SIGNAL(Stop()), player, SLOT(Stop()));
+  connect(this, SIGNAL(StopAfterCurrent()), player, SLOT(StopAfterCurrent()));
+  connect(this, SIGNAL(Next()), player, SLOT(Next()));
+  connect(this, SIGNAL(Previous()), player, SLOT(Previous()));
+  connect(this, SIGNAL(SetVolume(int)), player, SLOT(SetVolume(int)));
+  connect(this, SIGNAL(PlayAt(int, Engine::TrackChangeFlags, bool)), player,
+          SLOT(PlayAt(int, Engine::TrackChangeFlags, bool)));
+  connect(this, SIGNAL(SeekTo(int)), player, SLOT(SeekTo(int)));
+  connect(this, SIGNAL(Enque(int, int)), playlist_manager,
           SLOT(Enque(int, int)));
 
-  connect(this, SIGNAL(SetActivePlaylist(int)), app_->playlist_manager(),
+  connect(this, SIGNAL(SetActivePlaylist(int)), playlist_manager,
           SLOT(SetActivePlaylist(int)));
-  connect(this, SIGNAL(ShuffleCurrent()), app_->playlist_manager(),
+  connect(this, SIGNAL(ShuffleCurrent()), playlist_manager,
           SLOT(ShuffleCurrent()));
   connect(this, SIGNAL(SetRepeatMode(PlaylistSequence::RepeatMode)),
-          app_->playlist_manager()->sequence(),
+          playlist_manager->sequence(),
           SLOT(SetRepeatMode(PlaylistSequence::RepeatMode)));
   connect(this, SIGNAL(SetShuffleMode(PlaylistSequence::ShuffleMode)),
-          app_->playlist_manager()->sequence(),
+          playlist_manager->sequence(),
           SLOT(SetShuffleMode(PlaylistSequence::ShuffleMode)));
   connect(this, SIGNAL(InsertUrls(int, const QList<QUrl>&, int, bool, bool)),
-          app_->playlist_manager(),
+          playlist_manager,
           SLOT(InsertUrls(int, const QList<QUrl>&, int, bool, bool)));
   connect(this, SIGNAL(InsertSongs(int, const SongList&, int, bool, bool)),
-          app_->playlist_manager(),
+          playlist_manager,
           SLOT(InsertSongs(int, const SongList&, int, bool, bool)));
-  connect(this, SIGNAL(RemoveSongs(int, const QList<int>&)),
-          app_->playlist_manager(),
+  connect(this, SIGNAL(RemoveSongs(int, const QList<int>&)), playlist_manager,
           SLOT(RemoveItemsWithoutUndo(int, const QList<int>&)));
-  connect(this, SIGNAL(Open(int)), app_->playlist_manager(), SLOT(Open(int)));
-  connect(this, SIGNAL(Close(int)), app_->playlist_manager(), SLOT(Close(int)));
+  connect(this, SIGNAL(Open(int)), playlist_manager, SLOT(Open(int)));
+  connect(this, SIGNAL(Close(int)), playlist_manager, SLOT(Close(int)));
+  connect(this, SIGNAL(Rename(int, const QString&)), playlist_manager,
+          SLOT(Rename(int, const QString&)));
+  connect(this, SIGNAL(Favorite(int, bool)), playlist_manager,
+          SLOT(Favorite(int, bool)));
 
-  connect(this, SIGNAL(RateCurrentSong(double)), app_->playlist_manager(),
+  connect(this, SIGNAL(RateCurrentSong(double)), playlist_manager,
           SLOT(RateCurrentSong(double)));
 
 #ifdef HAVE_LIBLASTFM
@@ -104,7 +109,7 @@ void IncomingDataParser::Parse(const pb::remote::Message& msg) {
 
   RemoteClient* client = qobject_cast<RemoteClient*>(sender());
 
-qLog(Debug) << "[MB_TRACE][IncomingDataParser::Parse] type: " << msg.type();
+  qLog(Debug) << "[MB_TRACE][IncomingDataParser::Parse] type: " << msg.type();
 
   // Now check what's to do
   switch (msg.type()) {
@@ -170,6 +175,9 @@ qLog(Debug) << "[MB_TRACE][IncomingDataParser::Parse] type: " << msg.type();
       break;
     case pb::remote::CLOSE_PLAYLIST:
       ClosePlaylist(msg);
+      break;
+    case pb::remote::UPDATE_PLAYLIST:
+      UpdatePlaylist(msg);
       break;
     case pb::remote::LOVE:
       emit Love();
@@ -348,6 +356,17 @@ void IncomingDataParser::OpenPlaylist(const pb::remote::Message& msg) {
 
 void IncomingDataParser::ClosePlaylist(const pb::remote::Message& msg) {
   emit Close(msg.request_close_playlist().playlist_id());
+}
+
+void IncomingDataParser::UpdatePlaylist(const pb::remote::Message& msg) {
+  const pb::remote::RequestUpdatePlaylist& req_update =
+      msg.request_update_playlist();
+  if (req_update.has_new_playlist_name() &&
+      req_update.new_playlist_name().size())
+    emit Rename(req_update.playlist_id(),
+                req_update.new_playlist_name().c_str());
+  if (req_update.has_favorite())
+    emit Favorite(req_update.playlist_id(), req_update.favorite());
 }
 
 void IncomingDataParser::RateSong(const pb::remote::Message& msg) {
