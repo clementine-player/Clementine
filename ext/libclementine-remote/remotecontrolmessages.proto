@@ -297,6 +297,7 @@ message RequestUpdatePlaylist {
   optional int32 playlist_id = 1;
   optional string new_playlist_name = 2;
   optional bool favorite = 3;
+  optional bool create_new_playlist = 4;
 }
 
 // Message containing lyrics
