@@ -408,11 +408,16 @@ message ResponseListFiles {
 }
 
 message RequestAppendFiles {
-  optional string relative_path = 1;
+  // where to append the files
+  optional int32 playlist_id = 1;
+  // or we create a new playlist
   optional string new_playlist_name = 2;
-  repeated string files = 3;
-  optional bool play_now = 4;
-  optional bool clear_first = 5;
+
+  optional string relative_path = 3;
+  repeated string files = 4;
+
+  optional bool play_now = 5;
+  optional bool clear_first = 6;
 }
 
 message Stream {

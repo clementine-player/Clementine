@@ -799,6 +799,8 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
   // Network Remote
   connect(app->network_remote(), SIGNAL(AddToPlaylistSignal(QMimeData*)),
           SLOT(AddToPlaylist(QMimeData*)));
+  connect(app->network_remote(), SIGNAL(SetCurrentPlaylist(int)),
+          app_->playlist_manager(), SLOT(SetCurrentPlaylist(int)));
 
 #ifdef Q_OS_DARWIN
   mac::SetApplicationHandler(this);
@@ -1673,6 +1675,7 @@ void MainWindow::ApplyPlayBehaviour(MainWindow::PlayBehaviour b,
 void MainWindow::AddToPlaylist(QMimeData* data) {
   if (!data) return;
 
+  Playlist* playlist = nullptr;
   if (MimeData* mime_data = qobject_cast<MimeData*>(data)) {
     // Should we replace the flags with the user's preference?
     if (mime_data->override_user_settings_) {
@@ -1688,10 +1691,14 @@ void MainWindow::AddToPlaylist(QMimeData* data) {
     if (mime_data->open_in_new_playlist_) {
       app_->playlist_manager()->New(mime_data->get_name_for_new_playlist());
     }
+    // or shall we drop the songs in another playlist?
+    else if (mime_data->playlist_id != -1)
+      playlist = app_->playlist_manager()->playlist(mime_data->playlist_id);
   }
 
-  app_->playlist_manager()->current()->dropMimeData(data, Qt::CopyAction, -1, 0,
-                                                    QModelIndex());
+  if (!playlist) playlist = app_->playlist_manager()->current();
+
+  playlist->dropMimeData(data, Qt::CopyAction, -1, 0, QModelIndex());
   delete data;
 }
 
