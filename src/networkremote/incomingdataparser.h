@@ -31,6 +31,8 @@ class IncomingDataParser : public QObject {
   void SendPlaylistSongs(int id);
   void Open(int id);
   void Close(int id);
+  void Rename(int id, const QString& new_playlist_name);
+  void Favorite(int id, bool favorite);
   void GetLyrics();
   void Love();
   void Ban();
@@ -79,6 +81,7 @@ class IncomingDataParser : public QObject {
   void SendPlaylists(const pb::remote::Message& msg);
   void OpenPlaylist(const pb::remote::Message& msg);
   void ClosePlaylist(const pb::remote::Message& msg);
+  void UpdatePlaylist(const pb::remote::Message& msg);
   void RateSong(const pb::remote::Message& msg);
   void GlobalSearch(RemoteClient* client, const pb::remote::Message& msg);
 
