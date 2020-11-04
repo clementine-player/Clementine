@@ -75,6 +75,8 @@ void NetworkRemote::SetupServer() {
 
   connect(incoming_data_parser_.get(), SIGNAL(AddToPlaylistSignal(QMimeData*)),
           SIGNAL(AddToPlaylistSignal(QMimeData*)));
+  connect(incoming_data_parser_.get(), SIGNAL(SetCurrentPlaylist(int)),
+          SIGNAL(SetCurrentPlaylist(int)));
 }
 
 void NetworkRemote::StartServer() {

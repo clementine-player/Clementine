@@ -62,6 +62,7 @@ class IncomingDataParser : public QObject {
 
   void SendListFiles(QString);
   void AddToPlaylistSignal(QMimeData* data);
+  void SetCurrentPlaylist(int id);
 
  private:
   Application* app_;
