@@ -17,8 +17,8 @@
 
 #include "incomingdataparser.h"
 
-#include <algorithm>
 #include <QDir>
+#include <algorithm>
 
 #include "core/logging.h"
 #include "core/mimedata.h"
@@ -196,15 +196,13 @@ qLog(Debug) << "[MB_TRACE][IncomingDataParser::Parse] type: " << msg.type();
     case pb::remote::GLOBAL_SEARCH:
       GlobalSearch(client, msg);
       break;
-  case pb::remote::REQUEST_FILES:
-qLog(Debug) << "[MB_TRACE] REQUEST_FILES: " << msg.request_list_files().relative_path().c_str();
-      emit SendListFiles(QString::fromStdString(msg.request_list_files().relative_path()));
-    break;
-  case pb::remote::APPEND_FILES:
-qLog(Debug) << "[MB_TRACE] APPEND_FILES from : " << msg.request_append_files().relative_path().c_str()
-            << ", nb: " << msg.request_append_files().files_size();
+    case pb::remote::REQUEST_FILES:
+      emit SendListFiles(
+          QString::fromStdString(msg.request_list_files().relative_path()));
+      break;
+    case pb::remote::APPEND_FILES:
       AppendFilesToPlaylist(msg);
-    break;
+      break;
 
     default:
       break;
@@ -385,56 +383,55 @@ Song IncomingDataParser::CreateSongFromProtobuf(
   return song;
 }
 
-void IncomingDataParser::AppendFilesToPlaylist(const pb::remote::Message &msg)
-{
-    if (files_root_folder_.isEmpty()) {// should never happen...
-        qLog(Warning) << "Remote root dir is not set although receiving APPEND_FILES request...";
-        return;
-    }
-    QDir rootDir(files_root_folder_);
-    if (!rootDir.exists()) {
-        qLog(Warning) << "Remote root dir doesn't exist...";
-        return;
-    }
+void IncomingDataParser::AppendFilesToPlaylist(const pb::remote::Message& msg) {
+  if (files_root_folder_.isEmpty()) {  // should never happen...
+    qLog(Warning) << "Remote root dir is not set although receiving "
+                     "APPEND_FILES request...";
+    return;
+  }
+  QDir root_dir(files_root_folder_);
+  if (!root_dir.exists()) {
+    qLog(Warning) << "Remote root dir doesn't exist...";
+    return;
+  }
 
-    const pb::remote::RequestAppendFiles &reqAppend = msg.request_append_files();
-    QString relativePath = QString::fromStdString(reqAppend.relative_path());
-    if (relativePath.startsWith("/"))
-        relativePath.remove(0, 1);
+  const pb::remote::RequestAppendFiles& req_append = msg.request_append_files();
+  QString relative_path = QString::fromStdString(req_append.relative_path());
+  if (relative_path.startsWith("/")) relative_path.remove(0, 1);
 
-    QFileInfo fiFolder(rootDir, relativePath);
-    if (!fiFolder.exists())
-        qLog(Warning) << "Remote relative path "<< relativePath << " doesn't exist...";
-    else if (!fiFolder.isDir())
-        qLog(Warning) << "Remote relative path "<< relativePath << " is not a directory...";
-    else if (rootDir.relativeFilePath(fiFolder.absoluteFilePath()).startsWith("../"))
-        qLog(Warning) << "Remote relative path "<< relativePath << " should not be accessed...";
-    else {
-        QList<QUrl> urls;
-        QDir dir(fiFolder.absoluteFilePath());
-        for (auto it = reqAppend.files().cbegin(), itEnd = reqAppend.files().cend();
-             it != itEnd; ++it) {
-            QFileInfo fi(dir, it->c_str());
-            if (fi.exists())
-                urls << QUrl::fromLocalFile(fi.canonicalFilePath());
-        }
-        if (urls.size()) {
-            MimeData* data = new MimeData;
-            data->setUrls(urls);
-            if (reqAppend.has_play_now())
-                data->play_now_ = reqAppend.play_now();
-            if (reqAppend.has_clear_first())
-                data->clear_first_ = reqAppend.clear_first();
-            if (reqAppend.has_new_playlist_name())
-            {
-                QString playlistName = QString::fromStdString(reqAppend.new_playlist_name());
-                if (!playlistName.isEmpty())
-                {
-                    data->open_in_new_playlist_  = true;
-                    data->name_for_new_playlist_ = playlistName;
-                }
-            }
-            emit AddToPlaylistSignal(data);
-        }
+  QFileInfo fi_folder(root_dir, relative_path);
+  if (!fi_folder.exists())
+    qLog(Warning) << "Remote relative path " << relative_path
+                  << " doesn't exist...";
+  else if (!fi_folder.isDir())
+    qLog(Warning) << "Remote relative path " << relative_path
+                  << " is not a directory...";
+  else if (root_dir.relativeFilePath(fi_folder.absoluteFilePath())
+               .startsWith("../"))
+    qLog(Warning) << "Remote relative path " << relative_path
+                  << " should not be accessed...";
+  else {
+    QList<QUrl> urls;
+    QDir dir(fi_folder.absoluteFilePath());
+    for (const auto& file : req_append.files()) {
+      QFileInfo fi(dir, file.c_str());
+      if (fi.exists()) urls << QUrl::fromLocalFile(fi.canonicalFilePath());
     }
+    if (urls.size()) {
+      MimeData* data = new MimeData;
+      data->setUrls(urls);
+      if (req_append.has_play_now()) data->play_now_ = req_append.play_now();
+      if (req_append.has_clear_first())
+        data->clear_first_ = req_append.clear_first();
+      if (req_append.has_new_playlist_name()) {
+        QString playlist_name =
+            QString::fromStdString(req_append.new_playlist_name());
+        if (!playlist_name.isEmpty()) {
+          data->open_in_new_playlist_ = true;
+          data->name_for_new_playlist_ = playlist_name;
+        }
+      }
+      emit AddToPlaylistSignal(data);
+    }
+  }
 }

@@ -16,9 +16,6 @@
 */
 
 #include "networkremotesettingspage.h"
-#include "ui_networkremotesettingspage.h"
-
-#include <algorithm>
 
 #include <QDesktopServices>
 #include <QFile>
@@ -26,6 +23,7 @@
 #include <QNetworkInterface>
 #include <QSettings>
 #include <QUrl>
+#include <algorithm>
 
 #include "core/application.h"
 #include "networkremote/networkremote.h"
@@ -34,6 +32,7 @@
 #include "transcoder/transcoderoptionsdialog.h"
 #include "ui/iconloader.h"
 #include "ui/settingsdialog.h"
+#include "ui_networkremotesettingspage.h"
 
 const char* NetworkRemoteSettingsPage::kPlayStoreUrl =
     "https://play.google.com/store/apps/details?id=de.qspool.clementineremote";
@@ -104,10 +103,12 @@ void NetworkRemoteSettingsPage::Load() {
     }
   }
 
-  ui_->files_root_folder->setPath(s.value("files_root_folder", "").toString());
-  ui_->music_extensions->setText(s.value("music_extensions",
-                                         Application::kDefaultMusicExtensionsAllowedRemotely).toString());
-
+  ui_->files_root_folder->SetPath(s.value("files_root_folder", "").toString());
+  ui_->files_music_extensions->setText(
+      s.value("files_music_extensions",
+              Application::kDefaultMusicExtensionsAllowedRemotely)
+          .toStringList()
+          .join(","));
 
   s.endGroup();
 
@@ -153,8 +154,16 @@ void NetworkRemoteSettingsPage::Save() {
                                 .value<TranscoderPreset>();
   s.setValue("last_output_format", preset.codec_mimetype_);
 
-  s.setValue("files_root_folder", ui_->files_root_folder->getPath());
-  s.setValue("music_extensions", ui_->music_extensions->text());
+  s.setValue("files_root_folder", ui_->files_root_folder->Path());
+
+  QStringList files_music_extensions;
+  for (const QString& extension :
+       ui_->files_music_extensions->text().split(",")) {
+    QString ext = extension.trimmed();
+    if (ext.size() > 0 && ext.size() < 8)  // no empty string, less than 8 char
+      files_music_extensions << ext;
+  }
+  s.setValue("files_music_extensions", files_music_extensions);
 
   s.endGroup();
 

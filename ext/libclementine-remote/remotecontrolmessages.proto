@@ -15,7 +15,7 @@
    limitations under the License.
 */
 
-// Note: this file is licensed under the Apache License instead of GPL, so 
+// Note: this file is licensed under the Apache License instead of GPL, so
 // 3rd party applications or libraries can use another license besides GPL.
 
 syntax = "proto2";
@@ -84,9 +84,7 @@ enum MsgType {
   GLOBAL_SEARCH_STATUS = 56;
   // access Files from remote control
   LIST_FILES = 202;
-
 }
-
 
 // Valid Engine states
 enum EngineState {
@@ -120,8 +118,8 @@ message SongMetadata {
     STREAM = 99;
   }
 
-  optional int32 id = 1; // unique id of the song
-  optional int32 index = 2; // Index of the current row of the active playlist
+  optional int32 id = 1;     // unique id of the song
+  optional int32 index = 2;  // Index of the current row of the active playlist
   optional string title = 3;
   optional string album = 4;
   optional string artist = 5;
@@ -137,7 +135,7 @@ message SongMetadata {
   optional bool is_local = 15;
   optional string filename = 16;
   optional int32 file_size = 17;
-  optional float rating = 18; // 0 (0 stars) to 1 (5 stars)
+  optional float rating = 18;  // 0 (0 stars) to 1 (5 stars)
   optional string url = 19;
   optional string art_automatic = 20;
   optional string art_manual = 21;
@@ -207,6 +205,9 @@ message Shuffle {
 message ResponseClementineInfo {
   optional string version = 1;
   optional EngineState state = 2;
+
+  // allowed extensions for REQUEST_FILES and LIST_FILES
+  repeated string files_music_extensions = 3;
 }
 
 // The current song played
@@ -222,7 +223,7 @@ message ResponsePlaylists {
 // A list of songs in a playlist
 message ResponsePlaylistSongs {
   optional Playlist requested_playlist = 1;
-  
+
   // The songs that are in the playlist
   repeated SongMetadata songs = 2;
 }
@@ -233,7 +234,7 @@ message ResponseEngineStateChanged {
 }
 
 // Sends the current position of the track
-message ResponseUpdateTrackPosition {  
+message ResponseUpdateTrackPosition {
   optional int32 position = 1;
 }
 
@@ -269,9 +270,9 @@ message RequestInsertUrls {
   // In which playlist should the urls be inserted?
   optional int32 playlist_id = 1;
   repeated string urls = 2;
-  optional int32 position = 3 [default=-1];
-  optional bool play_now = 4 [default=false];
-  optional bool enqueue = 5 [default=false];
+  optional int32 position = 3 [default = -1];
+  optional bool play_now = 4 [default = false];
+  optional bool enqueue = 5 [default = false];
   repeated SongMetadata songs = 6;
 }
 
@@ -319,7 +320,7 @@ message ResponseSongFileChunk {
   optional int32 chunk_count = 2;
   optional int32 file_number = 3;
   optional int32 file_count = 4;
-  optional SongMetadata song_metadata = 6; // only sent with first chunk!
+  optional SongMetadata song_metadata = 6;  // only sent with first chunk!
   optional bytes data = 7;
   optional int32 size = 8;
   optional bytes file_hash = 9;
@@ -334,11 +335,11 @@ message ResponseLibraryChunk {
 }
 
 message ResponseSongOffer {
-  optional bool accepted = 1; // true = client wants to download item
+  optional bool accepted = 1;  // true = client wants to download item
 }
 
 message RequestRateSong {
-  optional float rating = 1; // 0 to 1
+  optional float rating = 1;  // 0 to 1
 }
 
 message ResponseDownloadTotalSize {
@@ -374,15 +375,14 @@ message ResponseGlobalSearchStatus {
   optional GlobalSearchStatus status = 3;
 }
 
-
 // access the FileSystem remotely from a defined root directory
 message RequestListFiles {
   optional string relative_path = 1;
 }
 
 message FileMetadata {
-    optional string filename  = 1;
-    optional bool   is_dir = 2;
+  optional string filename = 1;
+  optional bool is_dir = 2;
 }
 
 message ResponseListFiles {
@@ -394,25 +394,23 @@ message ResponseListFiles {
     UNKNOWN = 4;
   }
   optional string relative_path = 1;
-  repeated FileMetadata files  = 2;
-
+  repeated FileMetadata files = 2;
   optional Error error = 3;
-  optional string music_extentions = 4; // set on server
 }
 
 message RequestAppendFiles {
   optional string relative_path = 1;
   optional string new_playlist_name = 2;
-  repeated string files  = 3;
+  repeated string files = 3;
   optional bool play_now = 4;
   optional bool clear_first = 5;
 }
 
-
 // The message itself
 message Message {
-  optional int32 version = 1 [default=21];
-  optional MsgType type = 2 [default=UNKNOWN]; // What data is in the message?
+  optional int32 version = 1 [default = 21];
+  optional MsgType type = 2
+      [default = UNKNOWN];  // What data is in the message?
 
   optional RequestConnect request_connect = 21;
   optional RequestPlaylists request_playlists = 27;
@@ -432,7 +430,7 @@ message Message {
 
   optional Repeat repeat = 13;
   optional Shuffle shuffle = 14;
-  
+
   optional ResponseClementineInfo response_clementine_info = 15;
   optional ResponseCurrentMetadata response_current_metadata = 16;
   optional ResponsePlaylists response_playlists = 17;

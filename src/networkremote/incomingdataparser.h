@@ -15,7 +15,9 @@ class IncomingDataParser : public QObject {
 
   bool close_connection();
 
-  void SetRemoteRootFiles(const QString &files_root_folder) { files_root_folder_ = files_root_folder; }
+  void SetRemoteRootFiles(const QString& files_root_folder) {
+    files_root_folder_ = files_root_folder;
+  }
 
  public slots:
   void Parse(const pb::remote::Message& msg);

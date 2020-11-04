@@ -5,38 +5,37 @@
 class QLineEdit;
 class QHBoxLayout;
 
-class FileChooserWidget : public QWidget
-{
-    Q_OBJECT
-public:
-    enum class Mode { File, Directory };
+class FileChooserWidget : public QWidget {
+  Q_OBJECT
+ public:
+  enum class Mode { File, Directory };
 
-private:
-    QHBoxLayout *layout_;
-    QLineEdit   *pathEdit_;
-    const Mode   mode_;
-    QString      filter_;
-    QString      openDirPath_;
+ private:
+  QHBoxLayout* layout_;
+  QLineEdit* path_edit_;
+  const Mode mode_;
+  QString filter_;
+  QString open_dir_path_;
 
+ public:
+  FileChooserWidget(QWidget* parent);
+  FileChooserWidget(Mode mode, const QString& initial_path = "",
+                    QWidget* parent = nullptr);
+  FileChooserWidget(Mode mode, const QString& label,
+                    const QString& initial_path = "",
+                    QWidget* parent = nullptr);
+  ~FileChooserWidget() = default;
 
-public:
-    FileChooserWidget(QWidget *parent);
-    FileChooserWidget(Mode mode, const QString &initialPath = "", QWidget *parent = nullptr);
-    FileChooserWidget(Mode mode, const QString &label, const QString &initialPath = "", QWidget *parent = nullptr);
-    ~FileChooserWidget() = default;
+  void SetFileFilter(const QString& filter);
 
-    void setFileFilter(const QString &filter);
+  void SetPath(const QString& path);
+  QString Path() const;
 
-    void setPath(const QString &path);
+ public slots:
+  void ChooseFile();
 
-    QString getPath() const;
-
-public slots:
-    void chooseFile();
-
-private:
-    void _init(const QString &initialPath);
-
+ private:
+  void Init(const QString& initialPath);
 };
 
-#endif // FILECHOOSERWIDGET_H
+#endif  // FILECHOOSERWIDGET_H
