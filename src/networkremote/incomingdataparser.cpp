@@ -210,7 +210,7 @@ void IncomingDataParser::Parse(const pb::remote::Message& msg) {
       AppendFilesToPlaylist(msg);
       break;
     case pb::remote::REQUEST_SAVED_RADIOS:
-      emit SendSavedRaios();
+      emit SendSavedRadios();
       break;
 
     default:
