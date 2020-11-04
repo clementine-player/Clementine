@@ -47,6 +47,7 @@ enum MsgType {
   GET_LIBRARY = 18;
   RATE_SONG = 19;
   GLOBAL_SEARCH = 100;
+  REQUEST_SAVED_RADIOS = 110;
   // access Files from remote control
   REQUEST_FILES = 200;
   APPEND_FILES = 201;
@@ -413,6 +414,14 @@ message RequestAppendFiles {
   optional bool clear_first = 5;
 }
 
+message Stream {
+  optional string name = 1;
+  optional string url = 2;
+}
+message ResponseSavedRadios {
+  repeated Stream streams = 1;
+}
+
 // The message itself
 message Message {
   optional int32 version = 1 [default = 21];
@@ -456,4 +465,5 @@ message Message {
   optional ResponseTranscoderStatus response_transcoder_status = 39;
   optional ResponseGlobalSearchStatus response_global_search_status = 40;
   optional ResponseListFiles response_list_files = 52;
+  optional ResponseSavedRadios response_saved_radios = 54;
 }
