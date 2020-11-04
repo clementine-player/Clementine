@@ -89,6 +89,7 @@ class OutgoingDataCreator : public QObject {
   void SearchFinished(int id);
 
   void SendListFiles(QString relative_path);
+  void SendSavedRadios();
 
  private:
   Application* app_;

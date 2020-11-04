@@ -64,6 +64,7 @@ class IncomingDataParser : public QObject {
 
   void SendListFiles(QString);
   void AddToPlaylistSignal(QMimeData* data);
+  void SendSavedRadios();
 
  private:
   Application* app_;
@@ -84,10 +85,9 @@ class IncomingDataParser : public QObject {
   void UpdatePlaylist(const pb::remote::Message& msg);
   void RateSong(const pb::remote::Message& msg);
   void GlobalSearch(RemoteClient* client, const pb::remote::Message& msg);
+  void AppendFilesToPlaylist(const pb::remote::Message& msg);
 
   Song CreateSongFromProtobuf(const pb::remote::SongMetadata& pb);
-
-  void AppendFilesToPlaylist(const pb::remote::Message& msg);
 };
 
 #endif  // INCOMINGDATAPARSER_H

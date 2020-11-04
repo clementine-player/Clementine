@@ -79,7 +79,8 @@ void SavedRadio::LoadStreams() {
   for (int i = 0; i < count; ++i) {
     s.setArrayIndex(i);
     streams_ << Stream(QUrl(s.value("url").toString()),
-                       s.value("name").toString());
+                       s.value("name").toString(),
+                       QUrl(s.value("url_logo").toString()));
   }
   s.endArray();
 }
@@ -94,6 +95,7 @@ void SavedRadio::SaveStreams() {
     s.setArrayIndex(i);
     s.setValue("url", streams_[i].url_);
     s.setValue("name", streams_[i].name_);
+    s.setValue("url_logo", streams_[i].url_logo_);
   }
   s.endArray();
 
@@ -148,15 +150,18 @@ void SavedRadio::Edit() {
     edit_dialog_->set_save_visible(false);
   }
 
-  edit_dialog_->set_name(context_item->text());
-  edit_dialog_->set_url(context_item->data(InternetModel::Role_Url).toUrl());
-  if (edit_dialog_->exec() == QDialog::Rejected) return;
-
   int i = streams_.indexOf(
       Stream(QUrl(context_item->data(InternetModel::Role_Url).toUrl())));
   Stream* stream = &streams_[i];
+
+  edit_dialog_->set_name(context_item->text());
+  edit_dialog_->set_url(context_item->data(InternetModel::Role_Url).toUrl());
+  edit_dialog_->set_url_logo(stream->url_logo_);
+  if (edit_dialog_->exec() == QDialog::Rejected) return;
+
   stream->name_ = edit_dialog_->name();
   stream->url_ = edit_dialog_->url();
+  stream->url_logo_ = edit_dialog_->url_logo();
 
   context_item->setText(stream->name_);
   context_item->setData(stream->url_, InternetModel::Role_Url);
@@ -173,10 +178,11 @@ void SavedRadio::AddStreamToList(const Stream& stream, QStandardItem* parent) {
   parent->appendRow(s);
 }
 
-void SavedRadio::Add(const QUrl& url, const QString& name) {
+void SavedRadio::Add(const QUrl& url, const QString& name,
+                     const QUrl& url_logo) {
   if (streams_.contains(Stream(url))) return;
 
-  Stream stream(url, name);
+  Stream stream(url, name, url_logo);
   streams_ << stream;
 
   if (!root_->data(InternetModel::Role_CanLazyLoad).toBool()) {

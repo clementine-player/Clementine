@@ -41,30 +41,33 @@ AddStreamDialog::AddStreamDialog(QWidget* parent)
   ui_->save->setChecked(s.value("save", true).toBool());
   ui_->url->setText(s.value("url").toString());
   ui_->name->setText(s.value("name").toString());
+  ui_->url_logo->setText(s.value("url_logo").toString());
 }
 
 AddStreamDialog::~AddStreamDialog() { delete ui_; }
 
 QUrl AddStreamDialog::url() const { return QUrl(ui_->url->text()); }
-
 QString AddStreamDialog::name() const { return ui_->name->text(); }
+QUrl AddStreamDialog::url_logo() const { return QUrl(ui_->url_logo->text()); }
 
 void AddStreamDialog::set_name(const QString& name) {
   ui_->name->setText(name);
 }
-
 void AddStreamDialog::set_url(const QUrl& url) {
   ui_->url->setText(url.toString());
+}
+void AddStreamDialog::set_url_logo(const QUrl& url) {
+  ui_->url_logo->setText(url.toString());
 }
 
 void AddStreamDialog::set_save_visible(bool visible) {
   ui_->save->setVisible(visible);
-  if (!visible) ui_->name_container->setEnabled(true);
+  if (!visible) ui_->details_container->setEnabled(true);
 }
 
 void AddStreamDialog::accept() {
   if (ui_->save->isChecked() && saved_radio_) {
-    saved_radio_->Add(url(), name());
+    saved_radio_->Add(url(), name(), url_logo());
   }
 
   // Save settings

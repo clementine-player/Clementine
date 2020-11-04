@@ -27,6 +27,8 @@
 #include "core/timeconstants.h"
 #include "core/utilities.h"
 #include "globalsearch/librarysearchprovider.h"
+#include "internet/core/internetmodel.h"
+#include "internet/internetradio/savedradio.h"
 #include "library/librarybackend.h"
 #include "networkremote.h"
 #include "ui/iconloader.h"
@@ -798,6 +800,26 @@ void OutgoingDataCreator::SendListFiles(QString relative_path) {
           pb_file->set_filename(fi.fileName().toStdString());
         }
       }
+    }
+  }
+  SendDataToClients(&msg);
+}
+
+void OutgoingDataCreator::SendSavedRadios() {
+  pb::remote::Message msg;
+  msg.set_type(pb::remote::REQUEST_SAVED_RADIOS);
+
+  SavedRadio* radio_service = static_cast<SavedRadio*>(
+      InternetModel::ServiceByName(SavedRadio::kServiceName));
+  if (radio_service) {
+    pb::remote::ResponseSavedRadios* radios =
+        msg.mutable_response_saved_radios();
+    for (const auto& stream : radio_service->Streams()) {
+      pb::remote::Stream* pb_stream = radios->add_streams();
+      pb_stream->set_name(stream.name_.toStdString());
+      pb_stream->set_url(stream.url_.toString().toStdString());
+      if (!stream.url_logo_.isEmpty())
+        pb_stream->set_url_logo(stream.url_logo_.toString().toStdString());
     }
   }
   SendDataToClients(&msg);

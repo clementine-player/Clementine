@@ -211,6 +211,9 @@ void IncomingDataParser::Parse(const pb::remote::Message& msg) {
     case pb::remote::APPEND_FILES:
       AppendFilesToPlaylist(msg);
       break;
+    case pb::remote::REQUEST_SAVED_RADIOS:
+      emit SendSavedRadios();
+      break;
 
     default:
       break;

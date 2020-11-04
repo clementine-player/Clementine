@@ -41,14 +41,16 @@ class SavedRadio : public InternetService {
   };
 
   struct Stream {
-    explicit Stream(const QUrl& url, const QString& name = QString())
-        : url_(url), name_(name) {}
+    explicit Stream(const QUrl& url, const QString& name = QString(),
+                    const QUrl& url_logo = QUrl())
+        : url_(url), name_(name), url_logo_(url_logo) {}
 
     // For QList::contains
     bool operator==(const Stream& other) const { return url_ == other.url_; }
 
     QUrl url_;
     QString name_;
+    QUrl url_logo_;
   };
   typedef QList<Stream> StreamList;
 
@@ -60,9 +62,10 @@ class SavedRadio : public InternetService {
 
   void ShowContextMenu(const QPoint& global_pos);
 
-  void Add(const QUrl& url, const QString& name = QString());
+  void Add(const QUrl& url, const QString& name = QString(),
+           const QUrl& url_logo = QUrl());
 
-  StreamList Streams() const { return streams_; }
+  const StreamList& Streams() const { return streams_; }
 
  signals:
   void ShowAddStreamDialog();
