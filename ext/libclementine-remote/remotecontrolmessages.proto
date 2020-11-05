@@ -299,6 +299,7 @@ message RequestUpdatePlaylist {
   optional string new_playlist_name = 2;
   optional bool favorite = 3;
   optional bool create_new_playlist = 4;
+  optional bool clear_playlist = 5;
 }
 
 // Message containing lyrics
