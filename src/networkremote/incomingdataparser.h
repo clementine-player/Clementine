@@ -31,6 +31,7 @@ class IncomingDataParser : public QObject {
   void SendPlaylistSongs(int id);
   void New(const QString& new_playlist_name);
   void Open(int id);
+  void Clear(int id);
   void Close(int id);
   void Rename(int id, const QString& new_playlist_name);
   void Favorite(int id, bool favorite);

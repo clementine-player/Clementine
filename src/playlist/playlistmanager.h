@@ -190,6 +190,7 @@ class PlaylistManager : public PlaylistManagerInterface {
   void Rename(int id, const QString& new_name);
   void Favorite(int id, bool favorite);
   void Delete(int id);
+  void Clear(int id);
   bool Close(int id);
   void Open(int id);
   void ChangePlaylistOrder(const QList<int>& ids);
