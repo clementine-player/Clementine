@@ -295,6 +295,11 @@ void PlaylistManager::Favorite(int id, bool favorite) {
   emit PlaylistFavorited(id, favorite);
 }
 
+void PlaylistManager::Clear(int id) {
+  if (playlists_.count() <= 1 || !playlists_.contains(id)) return;
+  playlists_[id].p->Clear();
+}
+
 bool PlaylistManager::Close(int id) {
   // Won't allow removing the last playlist
   if (playlists_.count() <= 1 || !playlists_.contains(id)) return false;
