@@ -208,20 +208,22 @@ void OutgoingDataCreator::SetEngineState(
 
 void OutgoingDataCreator::SendAllPlaylists() {
   // Get all Playlists
-  QList<Playlist*> app_playlists = app_->playlist_manager()->GetAllPlaylists();
-  int active_playlist = app_->playlist_manager()->active_id();
+  PlaylistManager* playlist_manager = app_->playlist_manager();
+  int active_playlist = playlist_manager->active_id();
 
   // Create message
   pb::remote::Message msg;
   msg.set_type(pb::remote::PLAYLISTS);
 
   pb::remote::ResponsePlaylists* playlists = msg.mutable_response_playlists();
+  playlists->set_include_closed(true);
 
   // Get all playlists, even ones that are hidden in the UI.
   for (const PlaylistBackend::Playlist& p :
        app_->playlist_backend()->GetAllPlaylists()) {
-    bool playlist_open = app_->playlist_manager()->IsPlaylistOpen(p.id);
-    int item_count = playlist_open ? app_playlists.at(p.id)->rowCount() : 0;
+    bool playlist_open = playlist_manager->IsPlaylistOpen(p.id);
+    int item_count =
+        playlist_open ? playlist_manager->playlist(p.id)->rowCount() : 0;
 
     // Create a new playlist
     pb::remote::Playlist* playlist = playlists->add_playlist();
