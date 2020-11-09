@@ -53,6 +53,9 @@ class OutgoingDataCreator : public QObject {
   void SetMusicExtensions(const QStringList& files_music_extensions) {
     files_music_extensions_ = files_music_extensions;
   }
+  void SetAllowDownloads(bool allow_downloads) {
+    allow_downloads_ = allow_downloads;
+  }
   static void CreateSong(const Song& song, const QImage& art, const int index,
                          pb::remote::SongMetadata* song_metadata);
 
@@ -105,6 +108,7 @@ class OutgoingDataCreator : public QObject {
   bool aww_;
   QString files_root_folder_;
   QStringList files_music_extensions_;
+  bool allow_downloads_;
 
   std::unique_ptr<UltimateLyricsReader> ultimate_reader_;
   QMap<int, SongInfoFetcher::Result> results_;

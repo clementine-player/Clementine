@@ -25,6 +25,8 @@ class RemoteClient : public QObject {
   const QStringList& files_music_extensions() const {
     return files_music_extensions_;
   }
+  bool allow_downloads() const { return allow_downloads_; }
+
  private slots:
   void IncomingData();
 

@@ -211,6 +211,8 @@ message ResponseClementineInfo {
 
   // allowed extensions for REQUEST_FILES and LIST_FILES
   repeated string files_music_extensions = 3;
+
+  optional bool allow_downloads = 3;
 }
 
 // The current song played

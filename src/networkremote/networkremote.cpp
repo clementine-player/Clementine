@@ -228,6 +228,8 @@ void NetworkRemote::CreateRemoteClient(QTcpSocket* client_socket) {
         client->files_music_extensions());
     outgoing_data_creator_->SetRemoteRootFiles(client->files_root_folder());
     incoming_data_parser_->SetRemoteRootFiles(client->files_root_folder());
+    // update OutgoingDataCreator with latest allow_downloads setting
+    outgoing_data_creator_->SetAllowDownloads(client->allow_downloads());
 
     // Connect the signal to parse data
     connect(client, SIGNAL(Parse(pb::remote::Message)),
