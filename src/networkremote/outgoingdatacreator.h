@@ -47,6 +47,9 @@ class OutgoingDataCreator : public QObject {
   static const quint32 kFileChunkSize;
 
   void SetClients(QList<RemoteClient*>* clients);
+  void SetAllowDownloads(bool allow_downloads) {
+    allow_downloads_ = allow_downloads;
+  }
   void SetRemoteRootFiles(const QString& files_root_folder) {
     files_root_folder_ = files_root_folder;
   }
@@ -102,6 +105,7 @@ class OutgoingDataCreator : public QObject {
   int keep_alive_timeout_;
   int last_track_position_;
   bool aww_;
+  bool allow_downloads_;
   QString files_root_folder_;
   QStringList files_music_extensions_;
 

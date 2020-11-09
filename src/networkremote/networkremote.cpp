@@ -221,6 +221,9 @@ void NetworkRemote::CreateRemoteClient(QTcpSocket* client_socket) {
     RemoteClient* client = new RemoteClient(app_, client_socket);
     clients_.push_back(client);
 
+    // update OutgoingDataCreator with latest allow_downloads setting
+    outgoing_data_creator_->SetAllowDownloads(client->allow_downloads());
+
     // Update the Remote Root Files for the latest Client
     outgoing_data_creator_->SetMusicExtensions(
         client->files_music_extensions());
