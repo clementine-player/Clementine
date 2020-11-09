@@ -23,6 +23,7 @@ class RemoteClient : public QObject {
   void DisconnectClient(pb::remote::ReasonDisconnect reason);
 
   SongSender* song_sender() { return song_sender_; }
+  bool allow_downloads() const { return allow_downloads_; }
 
  private slots:
   void IncomingData();

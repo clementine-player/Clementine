@@ -213,6 +213,9 @@ void NetworkRemote::CreateRemoteClient(QTcpSocket* client_socket) {
     RemoteClient* client = new RemoteClient(app_, client_socket);
     clients_.push_back(client);
 
+    // update OutgoingDataCreator with latest allow_downloads setting
+    outgoing_data_creator_->SetAllowDownloads(client->allow_downloads());
+
     // Connect the signal to parse data
     connect(client, SIGNAL(Parse(pb::remote::Message)),
             incoming_data_parser_.get(), SLOT(Parse(pb::remote::Message)));

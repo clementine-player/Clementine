@@ -47,6 +47,9 @@ class OutgoingDataCreator : public QObject {
   static const quint32 kFileChunkSize;
 
   void SetClients(QList<RemoteClient*>* clients);
+  void SetAllowDownloads(bool allow_downloads) {
+    allow_downloads_ = allow_downloads;
+  }
 
   static void CreateSong(const Song& song, const QImage& art, const int index,
                          pb::remote::SongMetadata* song_metadata);
@@ -95,6 +98,7 @@ class OutgoingDataCreator : public QObject {
   int keep_alive_timeout_;
   int last_track_position_;
   bool aww_;
+  bool allow_downloads_;
 
   std::unique_ptr<UltimateLyricsReader> ultimate_reader_;
   QMap<int, SongInfoFetcher::Result> results_;
