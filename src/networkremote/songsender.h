@@ -52,7 +52,7 @@ class SongSender : public QObject {
 
   void SendSingleSong(DownloadItem download_item);
   void SendAlbum(const Song& song);
-  void SendPlaylist(int playlist_id);
+  void SendPlaylist(const pb::remote::RequestDownloadSongs& request);
   void SendUrls(const pb::remote::RequestDownloadSongs& request);
   void OfferNextSong();
   void SendTotalFileSize();

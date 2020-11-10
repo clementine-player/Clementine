@@ -326,6 +326,13 @@ message RequestDownloadSongs {
   optional DownloadItem download_item = 1;
   optional int32 playlist_id = 2;
   repeated string urls = 3;
+
+  // within a Playlist, download only requested songs
+  repeated int32 songs_ids = 4;
+
+  // download from the FileSystem remotely
+  // using the defined root directory and the urls (filenames)
+  optional string relative_path = 5;
 }
 
 message ResponseSongFileChunk {

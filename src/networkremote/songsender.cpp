@@ -87,7 +87,7 @@ void SongSender::SendSongs(const pb::remote::RequestDownloadSongs& request) {
       }
       break;
     case pb::remote::APlaylist:
-      SendPlaylist(request.playlist_id());
+      SendPlaylist(request);
       break;
     case pb::remote::Urls:
       SendUrls(request);
@@ -321,7 +321,8 @@ void SongSender::SendAlbum(const Song& song) {
   }
 }
 
-void SongSender::SendPlaylist(int playlist_id) {
+void SongSender::SendPlaylist(const pb::remote::RequestDownloadSongs& request) {
+  int playlist_id = request.playlist_id();
   Playlist* playlist = app_->playlist_manager()->playlist(playlist_id);
   if (!playlist) {
     qLog(Info) << "Could not find playlist with id = " << playlist_id;
@@ -329,17 +330,22 @@ void SongSender::SendPlaylist(int playlist_id) {
   }
   SongList song_list = playlist->GetAllSongs();
 
+  QList<int> requested_ids;
+  for (auto song_id : request.songs_ids()) requested_ids << song_id;
+
   // Count the local songs
   int count = 0;
   for (Song s : song_list) {
-    if (s.url().scheme() == "file") {
+    if (s.url().scheme() == "file" &&
+        (requested_ids.isEmpty() || requested_ids.contains(s.id()))) {
       count++;
     }
   }
 
   for (Song s : song_list) {
     // Only local files!
-    if (s.url().scheme() == "file") {
+    if (s.url().scheme() == "file" &&
+        (requested_ids.isEmpty() || requested_ids.contains(s.id()))) {
       DownloadItem item(s, song_list.indexOf(s) + 1, count);
       download_queue_.append(item);
     }
