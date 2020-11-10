@@ -762,7 +762,7 @@ void OutgoingDataCreator::SendListFiles(QString relative_path) {
   pb::remote::Message msg;
   msg.set_type(pb::remote::LIST_FILES);
   pb::remote::ResponseListFiles* files = msg.mutable_response_list_files();
-
+  // Security checks
   if (files_root_folder_.isEmpty()) {
     files->set_error(pb::remote::ResponseListFiles::ROOT_DIR_NOT_SET);
     SendDataToClients(&msg);
