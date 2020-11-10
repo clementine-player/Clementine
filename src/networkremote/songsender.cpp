@@ -18,6 +18,7 @@
 #include "songsender.h"
 
 #include <QFileInfo>
+#include <QDir>
 
 #include "core/application.h"
 #include "core/logging.h"
@@ -356,14 +357,45 @@ void SongSender::SendUrls(const pb::remote::RequestDownloadSongs& request) {
   SongList song_list;
 
   // First gather all valid songs
-  for (auto it = request.urls().begin(); it != request.urls().end(); ++it) {
-    std::string s = *it;
-    QUrl url = QUrl(QStringFromStdString(s));
+  if (request.has_relative_path()) {
+    // Security checks, cf OutgoingDataCreator::SendListFiles
+    const QString& files_root_folder = client_->files_root_folder();
+    if (files_root_folder.isEmpty()) return;
+    QDir root_dir(files_root_folder);
+    QString relative_path(request.relative_path().c_str());
+    if (!root_dir.exists() || relative_path.startsWith("..") ||
+        relative_path.startsWith("./.."))
+      return;
+    if (relative_path.startsWith("/")) relative_path.remove(0, 1);
 
-    Song song = app_->library_backend()->GetSongByUrl(url);
+    QFileInfo fi_folder(root_dir, relative_path);
+    if (!fi_folder.exists() || !fi_folder.isDir() ||
+        root_dir.relativeFilePath(fi_folder.absoluteFilePath())
+            .startsWith("../"))
+      return;
 
-    if (song.is_valid() && song.url().scheme() == "file") {
-      song_list.append(song);
+    QDir dir(fi_folder.absoluteFilePath());
+    const QStringList& files_music_extensions =
+        client_->files_music_extensions();
+    for (const std::string& s : request.urls()) {
+      QFileInfo fi(dir, s.c_str());
+      if (fi.exists() && fi.isFile() &&
+          files_music_extensions.contains(fi.suffix())) {
+        Song song;
+        song.set_basefilename(fi.fileName());
+        song.set_filesize(fi.size());
+        song.set_url(QUrl::fromLocalFile(fi.absoluteFilePath()));
+        song.set_valid(true);
+        song_list.append(song);
+      }
+    }
+  } else {
+    for (const std::string& s : request.urls()) {
+      QUrl url = QUrl(QStringFromStdString(s));
+      Song song = app_->library_backend()->GetSongByUrl(url);
+      if (song.is_valid() && song.url().scheme() == "file") {
+        song_list.append(song);
+      }
     }
   }
 

@@ -765,7 +765,7 @@ void OutgoingDataCreator::SendListFiles(QString relative_path) {
   QDir root_dir(files_root_folder_);
   if (!root_dir.exists())
     files->set_error(pb::remote::ResponseListFiles::ROOT_DIR_NOT_SET);
-  else if (relative_path.startsWith("..") || relative_path == "./..")
+  else if (relative_path.startsWith("..") || relative_path.startsWith("./.."))
     files->set_error(pb::remote::ResponseListFiles::DIR_NOT_ACCESSIBLE);
   else {
     if (relative_path.startsWith("/")) relative_path.remove(0, 1);
