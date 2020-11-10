@@ -17,8 +17,8 @@
 
 #include "songsender.h"
 
-#include <QFileInfo>
 #include <QDir>
+#include <QFileInfo>
 
 #include "core/application.h"
 #include "core/logging.h"
