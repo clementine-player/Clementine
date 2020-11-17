@@ -177,10 +177,12 @@ void NetworkRemote::AcceptConnection() {
             outgoing_data_creator_.get(),
             SLOT(DoGlobalSearch(QString, RemoteClient*)));
 
-    connect(incoming_data_parser_.get(), SIGNAL(SendListFiles(QString)),
-            outgoing_data_creator_.get(), SLOT(SendListFiles(QString)));
-    connect(incoming_data_parser_.get(), SIGNAL(SendSavedRadios()),
-            outgoing_data_creator_.get(), SLOT(SendSavedRadios()));
+    connect(incoming_data_parser_.get(),
+            SIGNAL(SendListFiles(QString, RemoteClient*)),
+            outgoing_data_creator_.get(),
+            SLOT(SendListFiles(QString, RemoteClient*)));
+    connect(incoming_data_parser_.get(), SIGNAL(SendSavedRadios(RemoteClient*)),
+            outgoing_data_creator_.get(), SLOT(SendSavedRadios(RemoteClient*)));
   }
 
   QTcpServer* server = qobject_cast<QTcpServer*>(sender());
