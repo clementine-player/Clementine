@@ -279,6 +279,8 @@ message RequestInsertUrls {
   optional bool play_now = 4 [default = false];
   optional bool enqueue = 5 [default = false];
   repeated SongMetadata songs = 6;
+  // if we wish to create a new playlist
+  optional string new_playlist_name = 7;
 }
 
 // Client want to change track

@@ -140,9 +140,9 @@ Playlist* PlaylistManager::AddPlaylist(int id, const QString& name,
   return ret;
 }
 
-void PlaylistManager::New(const QString& name, const SongList& songs,
-                          const QString& special_type) {
-  if (name.isNull()) return;
+int PlaylistManager::New(const QString& name, const SongList& songs,
+                         const QString& special_type) {
+  if (name.isNull()) return -1;
 
   int id = playlist_backend_->CreatePlaylist(name, special_type);
 
@@ -157,6 +157,8 @@ void PlaylistManager::New(const QString& name, const SongList& songs,
   if (name == tr("Playlist")) {
     Rename(id, QString("%1 %2").arg(name).arg(id));
   }
+
+  return id;
 }
 
 void PlaylistManager::Load(const QString& filename) {

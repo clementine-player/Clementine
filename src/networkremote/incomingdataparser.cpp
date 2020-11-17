@@ -209,13 +209,14 @@ void IncomingDataParser::Parse(const pb::remote::Message& msg) {
       break;
     case pb::remote::REQUEST_FILES:
       emit SendListFiles(
-          QString::fromStdString(msg.request_list_files().relative_path()));
+          QString::fromStdString(msg.request_list_files().relative_path()),
+          client);
       break;
     case pb::remote::APPEND_FILES:
       AppendFilesToPlaylist(msg);
       break;
     case pb::remote::REQUEST_SAVED_RADIOS:
-      emit SendSavedRadios();
+      emit SendSavedRadios(client);
       break;
 
     default:
@@ -293,6 +294,7 @@ void IncomingDataParser::SetShuffleMode(const pb::remote::Shuffle& shuffle) {
 
 void IncomingDataParser::InsertUrls(const pb::remote::Message& msg) {
   const pb::remote::RequestInsertUrls& request = msg.request_insert_urls();
+  int playlist_id = request.playlist_id();
 
   // Insert plain urls without metadata
   if (!request.urls().empty()) {
@@ -302,9 +304,13 @@ void IncomingDataParser::InsertUrls(const pb::remote::Message& msg) {
       urls << QUrl(QStringFromStdString(s));
     }
 
+    if (request.has_new_playlist_name())
+      playlist_id =
+          app_->playlist_manager()->New(request.new_playlist_name().c_str());
+
     // Insert the urls
-    emit InsertUrls(request.playlist_id(), urls, request.position(),
-                    request.play_now(), request.enqueue());
+    emit InsertUrls(playlist_id, urls, request.position(), request.play_now(),
+                    request.enqueue());
   }
 
   // Add songs with metadata if present
@@ -313,6 +319,13 @@ void IncomingDataParser::InsertUrls(const pb::remote::Message& msg) {
     for (int i = 0; i < request.songs().size(); i++) {
       songs << CreateSongFromProtobuf(request.songs(i));
     }
+
+    // create a new playlist if required and not already done above by
+    // InsertUrls
+    if (request.has_new_playlist_name() && playlist_id == request.playlist_id())
+      playlist_id =
+          app_->playlist_manager()->New(request.new_playlist_name().c_str());
+
     emit InsertSongs(request.playlist_id(), songs, request.position(),
                      request.play_now(), request.enqueue());
   }

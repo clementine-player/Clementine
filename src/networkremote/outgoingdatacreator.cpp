@@ -761,7 +761,8 @@ void OutgoingDataCreator::SearchFinished(int id) {
   qLog(Debug) << "SearchFinished" << req.id_ << req.query_;
 }
 
-void OutgoingDataCreator::SendListFiles(QString relative_path) {
+void OutgoingDataCreator::SendListFiles(QString relative_path,
+                                        RemoteClient* client) {
   pb::remote::Message msg;
   msg.set_type(pb::remote::LIST_FILES);
   pb::remote::ResponseListFiles* files = msg.mutable_response_list_files();
@@ -805,10 +806,10 @@ void OutgoingDataCreator::SendListFiles(QString relative_path) {
       }
     }
   }
-  SendDataToClients(&msg);
+  client->SendData(&msg);
 }
 
-void OutgoingDataCreator::SendSavedRadios() {
+void OutgoingDataCreator::SendSavedRadios(RemoteClient* client) {
   pb::remote::Message msg;
   msg.set_type(pb::remote::REQUEST_SAVED_RADIOS);
 
@@ -825,5 +826,5 @@ void OutgoingDataCreator::SendSavedRadios() {
         pb_stream->set_url_logo(stream.url_logo_.toString().toStdString());
     }
   }
-  SendDataToClients(&msg);
+  client->SendData(&msg);
 }
