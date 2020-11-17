@@ -91,8 +91,8 @@ class OutgoingDataCreator : public QObject {
   void ResultsAvailable(int id, const SearchProvider::ResultList& results);
   void SearchFinished(int id);
 
-  void SendListFiles(QString relative_path);
-  void SendSavedRadios();
+  void SendListFiles(QString relative_path, RemoteClient* client);
+  void SendSavedRadios(RemoteClient* client);
 
  private:
   Application* app_;
