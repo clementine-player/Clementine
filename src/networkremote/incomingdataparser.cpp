@@ -109,7 +109,6 @@ bool IncomingDataParser::close_connection() { return close_connection_; }
 
 void IncomingDataParser::Parse(const pb::remote::Message& msg) {
   close_connection_ = false;
-
   RemoteClient* client = qobject_cast<RemoteClient*>(sender());
 
   // Now check what's to do
