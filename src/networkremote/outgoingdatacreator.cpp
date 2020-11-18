@@ -148,9 +148,6 @@ SongInfoProvider* OutgoingDataCreator::ProviderByName(
 }
 
 void OutgoingDataCreator::SendDataToClients(pb::remote::Message* msg) {
-  qLog(Debug) << "[MB_TRACE][OutgoingDataCreator::SendDataToClients] msg type: "
-              << msg->type();
-
   // Check if we have clients to send data to
   if (clients_->empty()) {
     return;

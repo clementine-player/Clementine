@@ -109,10 +109,7 @@ bool IncomingDataParser::close_connection() { return close_connection_; }
 
 void IncomingDataParser::Parse(const pb::remote::Message& msg) {
   close_connection_ = false;
-
   RemoteClient* client = qobject_cast<RemoteClient*>(sender());
-
-  qLog(Debug) << "[MB_TRACE][IncomingDataParser::Parse] type: " << msg.type();
 
   // Now check what's to do
   switch (msg.type()) {
