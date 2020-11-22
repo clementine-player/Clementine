@@ -37,7 +37,7 @@ jobs:
           TX_TOKEN: ${{ secrets.TX_TOKEN }}
         run: tx pull --all -f --no-interactive
       - name: Setup git SSH
-        uses: webfactory/ssh-agent@v0.3.0
+        uses: webfactory/ssh-agent@v0.4.1
         with:
           ssh-private-key: ${{ secrets.TX_KEY }}
       - name: git add
