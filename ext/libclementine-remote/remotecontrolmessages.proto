@@ -209,10 +209,10 @@ message ResponseClementineInfo {
   optional string version = 1;
   optional EngineState state = 2;
 
-  // allowed extensions for REQUEST_FILES and LIST_FILES
-  repeated string files_music_extensions = 3;
-
   optional bool allow_downloads = 3;
+
+  // allowed extensions for REQUEST_FILES and LIST_FILES
+  repeated string files_music_extensions = 4;
 }
 
 // The current song played
