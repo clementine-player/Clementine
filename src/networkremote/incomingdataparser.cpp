@@ -17,9 +17,11 @@
 
 #include "incomingdataparser.h"
 
+#include <QDir>
 #include <algorithm>
 
 #include "core/logging.h"
+#include "core/mimedata.h"
 #include "core/timeconstants.h"
 #include "engines/enginebase.h"
 #include "internet/core/internetmodel.h"
@@ -36,47 +38,55 @@ IncomingDataParser::IncomingDataParser(Application* app) : app_(app) {
   ReloadSettings();
   connect(app_, SIGNAL(SettingsChanged()), SLOT(ReloadSettings()));
 
+  Player* player = app_->player();
+  PlaylistManager* playlist_manager = app_->playlist_manager();
+
   // Connect all the signals
   // due the player is in a different thread, we cannot access these functions
   // directly
-  connect(this, SIGNAL(Play()), app_->player(), SLOT(Play()));
-  connect(this, SIGNAL(PlayPause()), app_->player(), SLOT(PlayPause()));
-  connect(this, SIGNAL(Pause()), app_->player(), SLOT(Pause()));
-  connect(this, SIGNAL(Stop()), app_->player(), SLOT(Stop()));
-  connect(this, SIGNAL(StopAfterCurrent()), app_->player(),
-          SLOT(StopAfterCurrent()));
-  connect(this, SIGNAL(Next()), app_->player(), SLOT(Next()));
-  connect(this, SIGNAL(Previous()), app_->player(), SLOT(Previous()));
-  connect(this, SIGNAL(SetVolume(int)), app_->player(), SLOT(SetVolume(int)));
-  connect(this, SIGNAL(PlayAt(int, Engine::TrackChangeFlags, bool)),
-          app_->player(), SLOT(PlayAt(int, Engine::TrackChangeFlags, bool)));
-  connect(this, SIGNAL(SeekTo(int)), app_->player(), SLOT(SeekTo(int)));
-  connect(this, SIGNAL(Enque(int, int)), app_->playlist_manager(),
+  connect(this, SIGNAL(Play()), player, SLOT(Play()));
+  connect(this, SIGNAL(PlayPause()), player, SLOT(PlayPause()));
+  connect(this, SIGNAL(Pause()), player, SLOT(Pause()));
+  connect(this, SIGNAL(Stop()), player, SLOT(Stop()));
+  connect(this, SIGNAL(StopAfterCurrent()), player, SLOT(StopAfterCurrent()));
+  connect(this, SIGNAL(Next()), player, SLOT(Next()));
+  connect(this, SIGNAL(Previous()), player, SLOT(Previous()));
+  connect(this, SIGNAL(SetVolume(int)), player, SLOT(SetVolume(int)));
+  connect(this, SIGNAL(PlayAt(int, Engine::TrackChangeFlags, bool)), player,
+          SLOT(PlayAt(int, Engine::TrackChangeFlags, bool)));
+  connect(this, SIGNAL(SeekTo(int)), player, SLOT(SeekTo(int)));
+  connect(this, SIGNAL(Enque(int, int)), playlist_manager,
           SLOT(Enque(int, int)));
 
-  connect(this, SIGNAL(SetActivePlaylist(int)), app_->playlist_manager(),
+  connect(this, SIGNAL(SetActivePlaylist(int)), playlist_manager,
           SLOT(SetActivePlaylist(int)));
-  connect(this, SIGNAL(ShuffleCurrent()), app_->playlist_manager(),
+  connect(this, SIGNAL(ShuffleCurrent()), playlist_manager,
           SLOT(ShuffleCurrent()));
   connect(this, SIGNAL(SetRepeatMode(PlaylistSequence::RepeatMode)),
-          app_->playlist_manager()->sequence(),
+          playlist_manager->sequence(),
           SLOT(SetRepeatMode(PlaylistSequence::RepeatMode)));
   connect(this, SIGNAL(SetShuffleMode(PlaylistSequence::ShuffleMode)),
-          app_->playlist_manager()->sequence(),
+          playlist_manager->sequence(),
           SLOT(SetShuffleMode(PlaylistSequence::ShuffleMode)));
   connect(this, SIGNAL(InsertUrls(int, const QList<QUrl>&, int, bool, bool)),
-          app_->playlist_manager(),
+          playlist_manager,
           SLOT(InsertUrls(int, const QList<QUrl>&, int, bool, bool)));
   connect(this, SIGNAL(InsertSongs(int, const SongList&, int, bool, bool)),
-          app_->playlist_manager(),
+          playlist_manager,
           SLOT(InsertSongs(int, const SongList&, int, bool, bool)));
-  connect(this, SIGNAL(RemoveSongs(int, const QList<int>&)),
-          app_->playlist_manager(),
+  connect(this, SIGNAL(RemoveSongs(int, const QList<int>&)), playlist_manager,
           SLOT(RemoveItemsWithoutUndo(int, const QList<int>&)));
-  connect(this, SIGNAL(Open(int)), app_->playlist_manager(), SLOT(Open(int)));
-  connect(this, SIGNAL(Close(int)), app_->playlist_manager(), SLOT(Close(int)));
+  connect(this, SIGNAL(New(const QString&)), playlist_manager,
+          SLOT(New(const QString&)));
+  connect(this, SIGNAL(Open(int)), playlist_manager, SLOT(Open(int)));
+  connect(this, SIGNAL(Close(int)), playlist_manager, SLOT(Close(int)));
+  connect(this, SIGNAL(Clear(int)), playlist_manager, SLOT(Clear(int)));
+  connect(this, SIGNAL(Rename(int, const QString&)), playlist_manager,
+          SLOT(Rename(int, const QString&)));
+  connect(this, SIGNAL(Favorite(int, bool)), playlist_manager,
+          SLOT(Favorite(int, bool)));
 
-  connect(this, SIGNAL(RateCurrentSong(double)), app_->playlist_manager(),
+  connect(this, SIGNAL(RateCurrentSong(double)), playlist_manager,
           SLOT(RateCurrentSong(double)));
 
 #ifdef HAVE_LIBLASTFM
@@ -99,7 +109,6 @@ bool IncomingDataParser::close_connection() { return close_connection_; }
 
 void IncomingDataParser::Parse(const pb::remote::Message& msg) {
   close_connection_ = false;
-
   RemoteClient* client = qobject_cast<RemoteClient*>(sender());
 
   // Now check what's to do
@@ -167,6 +176,9 @@ void IncomingDataParser::Parse(const pb::remote::Message& msg) {
     case pb::remote::CLOSE_PLAYLIST:
       ClosePlaylist(msg);
       break;
+    case pb::remote::UPDATE_PLAYLIST:
+      UpdatePlaylist(msg);
+      break;
     case pb::remote::LOVE:
       emit Love();
       break;
@@ -192,6 +204,18 @@ void IncomingDataParser::Parse(const pb::remote::Message& msg) {
     case pb::remote::GLOBAL_SEARCH:
       GlobalSearch(client, msg);
       break;
+    case pb::remote::REQUEST_FILES:
+      emit SendListFiles(
+          QString::fromStdString(msg.request_list_files().relative_path()),
+          client);
+      break;
+    case pb::remote::APPEND_FILES:
+      AppendFilesToPlaylist(msg);
+      break;
+    case pb::remote::REQUEST_SAVED_RADIOS:
+      emit SendSavedRadios(client);
+      break;
+
     default:
       break;
   }
@@ -267,6 +291,7 @@ void IncomingDataParser::SetShuffleMode(const pb::remote::Shuffle& shuffle) {
 
 void IncomingDataParser::InsertUrls(const pb::remote::Message& msg) {
   const pb::remote::RequestInsertUrls& request = msg.request_insert_urls();
+  int playlist_id = request.playlist_id();
 
   // Insert plain urls without metadata
   if (!request.urls().empty()) {
@@ -276,9 +301,13 @@ void IncomingDataParser::InsertUrls(const pb::remote::Message& msg) {
       urls << QUrl(QStringFromStdString(s));
     }
 
+    if (request.has_new_playlist_name())
+      playlist_id =
+          app_->playlist_manager()->New(request.new_playlist_name().c_str());
+
     // Insert the urls
-    emit InsertUrls(request.playlist_id(), urls, request.position(),
-                    request.play_now(), request.enqueue());
+    emit InsertUrls(playlist_id, urls, request.position(), request.play_now(),
+                    request.enqueue());
   }
 
   // Add songs with metadata if present
@@ -287,6 +316,13 @@ void IncomingDataParser::InsertUrls(const pb::remote::Message& msg) {
     for (int i = 0; i < request.songs().size(); i++) {
       songs << CreateSongFromProtobuf(request.songs(i));
     }
+
+    // create a new playlist if required and not already done above by
+    // InsertUrls
+    if (request.has_new_playlist_name() && playlist_id == request.playlist_id())
+      playlist_id =
+          app_->playlist_manager()->New(request.new_playlist_name().c_str());
+
     emit InsertSongs(request.playlist_id(), songs, request.position(),
                      request.play_now(), request.enqueue());
   }
@@ -338,6 +374,28 @@ void IncomingDataParser::ClosePlaylist(const pb::remote::Message& msg) {
   emit Close(msg.request_close_playlist().playlist_id());
 }
 
+void IncomingDataParser::UpdatePlaylist(const pb::remote::Message& msg) {
+  const pb::remote::RequestUpdatePlaylist& req_update =
+      msg.request_update_playlist();
+  if (req_update.has_create_new_playlist() &&
+      req_update.create_new_playlist()) {
+    emit New(req_update.has_new_playlist_name()
+                 ? req_update.new_playlist_name().c_str()
+                 : "New Playlist");
+    return;
+  }
+  if (req_update.has_clear_playlist() && req_update.clear_playlist()) {
+    emit Clear(req_update.playlist_id());
+    return;
+  }
+  if (req_update.has_new_playlist_name() &&
+      req_update.new_playlist_name().size())
+    emit Rename(req_update.playlist_id(),
+                req_update.new_playlist_name().c_str());
+  if (req_update.has_favorite())
+    emit Favorite(req_update.playlist_id(), req_update.favorite());
+}
+
 void IncomingDataParser::RateSong(const pb::remote::Message& msg) {
   double rating = (double)msg.request_rate_song().rating();
   emit RateCurrentSong(rating);
@@ -369,4 +427,64 @@ Song IncomingDataParser::CreateSongFromProtobuf(
   song.set_filetype(static_cast<Song::FileType>(pb.type()));
 
   return song;
+}
+
+void IncomingDataParser::AppendFilesToPlaylist(const pb::remote::Message& msg) {
+  if (files_root_folder_.isEmpty()) {  // should never happen...
+    qLog(Warning) << "Remote root dir is not set although receiving "
+                     "APPEND_FILES request...";
+    return;
+  }
+  QDir root_dir(files_root_folder_);
+  if (!root_dir.exists()) {
+    qLog(Warning) << "Remote root dir doesn't exist...";
+    return;
+  }
+
+  const pb::remote::RequestAppendFiles& req_append = msg.request_append_files();
+  QString relative_path = QString::fromStdString(req_append.relative_path());
+  if (relative_path.startsWith("/")) relative_path.remove(0, 1);
+
+  QFileInfo fi_folder(root_dir, relative_path);
+  if (!fi_folder.exists())
+    qLog(Warning) << "Remote relative path " << relative_path
+                  << " doesn't exist...";
+  else if (!fi_folder.isDir())
+    qLog(Warning) << "Remote relative path " << relative_path
+                  << " is not a directory...";
+  else if (root_dir.relativeFilePath(fi_folder.absoluteFilePath())
+               .startsWith("../"))
+    qLog(Warning) << "Remote relative path " << relative_path
+                  << " should not be accessed...";
+  else {
+    QList<QUrl> urls;
+    QDir dir(fi_folder.absoluteFilePath());
+    for (const auto& file : req_append.files()) {
+      QFileInfo fi(dir, file.c_str());
+      if (fi.exists()) urls << QUrl::fromLocalFile(fi.canonicalFilePath());
+    }
+    if (urls.size()) {
+      MimeData* data = new MimeData;
+      data->setUrls(urls);
+      if (req_append.has_play_now()) data->play_now_ = req_append.play_now();
+      if (req_append.has_clear_first())
+        data->clear_first_ = req_append.clear_first();
+      if (req_append.has_new_playlist_name()) {
+        QString playlist_name =
+            QString::fromStdString(req_append.new_playlist_name());
+        if (!playlist_name.isEmpty()) {
+          data->open_in_new_playlist_ = true;
+          data->name_for_new_playlist_ = playlist_name;
+        }
+      } else if (req_append.has_playlist_id()) {
+        // if playing we will drop the files in another playlist
+        if (app_->player()->GetState() == Engine::Playing)
+          data->playlist_id = req_append.playlist_id();
+        else
+          // as me may play the song, we change the current playlist
+          emit SetCurrentPlaylist(req_append.playlist_id());
+      }
+      emit AddToPlaylistSignal(data);
+    }
+  }
 }

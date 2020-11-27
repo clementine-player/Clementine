@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>400</width>
-    <height>168</height>
+    <height>220</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -39,20 +39,30 @@
     </widget>
    </item>
    <item>
-    <widget class="QWidget" name="name_container" native="true">
-     <layout class="QHBoxLayout" name="horizontalLayout">
+    <widget class="QWidget" name="details_container" native="true">
+     <layout class="QGridLayout" name="gridLayout">
       <property name="margin">
        <number>0</number>
       </property>
-      <item>
+      <item row="0" column="0">
        <widget class="QLabel" name="label_2">
         <property name="text">
          <string>Give it a name:</string>
         </property>
        </widget>
       </item>
-      <item>
+      <item row="0" column="1">
        <widget class="QLineEdit" name="name"/>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="label_4">
+        <property name="text">
+         <string>URL of its Logo:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QLineEdit" name="url_logo"/>
       </item>
      </layout>
     </widget>
@@ -127,7 +137,7 @@
   <connection>
    <sender>save</sender>
    <signal>toggled(bool)</signal>
-   <receiver>name_container</receiver>
+   <receiver>details_container</receiver>
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">

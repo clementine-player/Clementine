@@ -73,8 +73,8 @@ class PlaylistManagerInterface : public QObject {
   virtual PlaylistContainer* playlist_container() const = 0;
 
  public slots:
-  virtual void New(const QString& name, const SongList& songs = SongList(),
-                   const QString& special_type = QString()) = 0;
+  virtual int New(const QString& name, const SongList& songs = SongList(),
+                  const QString& special_type = QString()) = 0;
   virtual void Load(const QString& filename) = 0;
   virtual void Save(int id, const QString& filename,
                     Playlist::Path path_type) = 0;
@@ -181,8 +181,8 @@ class PlaylistManager : public PlaylistManagerInterface {
   PlaylistContainer* playlist_container() const { return playlist_container_; }
 
  public slots:
-  void New(const QString& name, const SongList& songs = SongList(),
-           const QString& special_type = QString());
+  int New(const QString& name, const SongList& songs = SongList(),
+          const QString& special_type = QString());
   void Load(const QString& filename);
   void Save(int id, const QString& filename, Playlist::Path path_type);
   // Display a file dialog to let user choose a file before saving the file
@@ -190,6 +190,7 @@ class PlaylistManager : public PlaylistManagerInterface {
   void Rename(int id, const QString& new_name);
   void Favorite(int id, bool favorite);
   void Delete(int id);
+  void Clear(int id);
   bool Close(int id);
   void Open(int id);
   void ChangePlaylistOrder(const QList<int>& ids);

@@ -15,6 +15,10 @@ class IncomingDataParser : public QObject {
 
   bool close_connection();
 
+  void SetRemoteRootFiles(const QString& files_root_folder) {
+    files_root_folder_ = files_root_folder;
+  }
+
  public slots:
   void Parse(const pb::remote::Message& msg);
   void ReloadSettings();
@@ -25,8 +29,12 @@ class IncomingDataParser : public QObject {
   void SendAllPlaylists();
   void SendAllActivePlaylists();
   void SendPlaylistSongs(int id);
+  void New(const QString& new_playlist_name);
   void Open(int id);
+  void Clear(int id);
   void Close(int id);
+  void Rename(int id, const QString& new_playlist_name);
+  void Favorite(int id, bool favorite);
   void GetLyrics();
   void Love();
   void Ban();
@@ -56,10 +64,16 @@ class IncomingDataParser : public QObject {
 
   void DoGlobalSearch(QString, RemoteClient*);
 
+  void SendSavedRadios(RemoteClient* client);
+  void SendListFiles(QString, RemoteClient*);
+  void AddToPlaylistSignal(QMimeData* data);
+  void SetCurrentPlaylist(int id);
+
  private:
   Application* app_;
   bool close_connection_;
   MainWindow::PlaylistAddBehaviour doubleclick_playlist_addmode_;
+  QString files_root_folder_;
 
   void GetPlaylistSongs(const pb::remote::Message& msg);
   void ChangeSong(const pb::remote::Message& msg);
@@ -71,8 +85,10 @@ class IncomingDataParser : public QObject {
   void SendPlaylists(const pb::remote::Message& msg);
   void OpenPlaylist(const pb::remote::Message& msg);
   void ClosePlaylist(const pb::remote::Message& msg);
+  void UpdatePlaylist(const pb::remote::Message& msg);
   void RateSong(const pb::remote::Message& msg);
   void GlobalSearch(RemoteClient* client, const pb::remote::Message& msg);
+  void AppendFilesToPlaylist(const pb::remote::Message& msg);
 
   Song CreateSongFromProtobuf(const pb::remote::SongMetadata& pb);
 };

@@ -13,6 +13,7 @@ class QImage;
 class QTcpServer;
 class QTcpSocket;
 class RemoteClient;
+class QMimeData;
 
 class NetworkRemote : public QObject {
   Q_OBJECT
@@ -23,6 +24,10 @@ class NetworkRemote : public QObject {
 
   explicit NetworkRemote(Application* app, QObject* parent = nullptr);
   ~NetworkRemote();
+
+ signals:
+  void AddToPlaylistSignal(QMimeData* data);
+  void SetCurrentPlaylist(int id);
 
  public slots:
   void SetupServer();

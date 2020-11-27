@@ -28,9 +28,6 @@ RemoteClient::RemoteClient(Application* app, QTcpSocket* client)
       downloader_(false),
       client_(client),
       song_sender_(new SongSender(app, this)) {
-  // Open the buffer
-  buffer_.setData(QByteArray());
-  buffer_.open(QIODevice::ReadWrite);
   reading_protobuf_ = false;
 
   // Connect to the slot IncomingData when receiving data
@@ -43,7 +40,11 @@ RemoteClient::RemoteClient(Application* app, QTcpSocket* client)
   use_auth_code_ = s.value("use_auth_code", false).toBool();
   auth_code_ = s.value("auth_code", 0).toInt();
   allow_downloads_ = s.value("allow_downloads", false).toBool();
-
+  files_root_folder_ = s.value("files_root_folder", "").toString();
+  files_music_extensions_ =
+      s.value("files_music_extensions",
+              Application::kDefaultMusicExtensionsAllowedRemotely)
+          .toStringList();
   s.endGroup();
 
   // If we don't use an auth code, we don't need to authenticate the client.
@@ -86,17 +87,16 @@ void RemoteClient::IncomingData() {
     }
 
     // Read some of the message
-    buffer_.write(client_->read(expected_length_ - buffer_.size()));
+    buffer_.append(
+        client_->read(static_cast<qint32>(expected_length_) - buffer_.size()));
 
     // Did we get everything?
-    if (buffer_.size() == expected_length_) {
+    if (buffer_.size() == static_cast<qint32>(expected_length_)) {
       // Parse the message
-      ParseMessage(buffer_.data());
+      ParseMessage(buffer_);
 
       // Clear the buffer
-      buffer_.close();
-      buffer_.setData(QByteArray());
-      buffer_.open(QIODevice::ReadWrite);
+      buffer_.clear();
       reading_protobuf_ = false;
     }
   }

@@ -140,9 +140,9 @@ Playlist* PlaylistManager::AddPlaylist(int id, const QString& name,
   return ret;
 }
 
-void PlaylistManager::New(const QString& name, const SongList& songs,
-                          const QString& special_type) {
-  if (name.isNull()) return;
+int PlaylistManager::New(const QString& name, const SongList& songs,
+                         const QString& special_type) {
+  if (name.isNull()) return -1;
 
   int id = playlist_backend_->CreatePlaylist(name, special_type);
 
@@ -157,6 +157,8 @@ void PlaylistManager::New(const QString& name, const SongList& songs,
   if (name == tr("Playlist")) {
     Rename(id, QString("%1 %2").arg(name).arg(id));
   }
+
+  return id;
 }
 
 void PlaylistManager::Load(const QString& filename) {
@@ -293,6 +295,11 @@ void PlaylistManager::Favorite(int id, bool favorite) {
     playlist_backend_->RemovePlaylist(id);
   }
   emit PlaylistFavorited(id, favorite);
+}
+
+void PlaylistManager::Clear(int id) {
+  if (playlists_.count() <= 1 || !playlists_.contains(id)) return;
+  playlists_[id].p->Clear();
 }
 
 bool PlaylistManager::Close(int id) {
@@ -490,6 +497,7 @@ void PlaylistManager::InsertUrls(int id, const QList<QUrl>& urls, int pos,
                                  bool play_now, bool enqueue) {
   Q_ASSERT(playlists_.contains(id));
 
+  if (play_now && active_ != id) SetActivePlaylist(id);
   playlists_[id].p->InsertUrls(urls, pos, play_now, enqueue);
 }
 
@@ -497,6 +505,7 @@ void PlaylistManager::InsertSongs(int id, const SongList& songs, int pos,
                                   bool play_now, bool enqueue) {
   Q_ASSERT(playlists_.contains(id));
 
+  if (play_now && active_ != id) SetActivePlaylist(id);
   playlists_[id].p->InsertSongs(songs, pos, play_now, enqueue);
 }
 

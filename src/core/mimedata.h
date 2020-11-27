@@ -36,7 +36,8 @@ class MimeData : public QMimeData {
         enqueue_next_now_(enqueue_next_now),
         open_in_new_playlist_(open_in_new_playlist),
         name_for_new_playlist_(QString()),
-        from_doubleclick_(false) {}
+        from_doubleclick_(false),
+        playlist_id(-1) {}
 
   // If this is set then MainWindow will not touch any of the other flags.
   bool override_user_settings_;
@@ -68,6 +69,10 @@ class MimeData : public QMimeData {
   // manually in a double-click).  The MainWindow will set the above flags to
   // the defaults set by the user.
   bool from_doubleclick_;
+
+  // The Network Remote can use this MimeData to drop songs on another
+  // playlist than the one currently opened on the server
+  int playlist_id;
 
   // Returns a pretty name for a playlist containing songs described by this
   // MimeData

@@ -72,6 +72,11 @@ void NetworkRemote::SetupServer() {
           SLOT(AcceptConnection()));
   connect(server_ipv6_.get(), SIGNAL(newConnection()), this,
           SLOT(AcceptConnection()));
+
+  connect(incoming_data_parser_.get(), SIGNAL(AddToPlaylistSignal(QMimeData*)),
+          SIGNAL(AddToPlaylistSignal(QMimeData*)));
+  connect(incoming_data_parser_.get(), SIGNAL(SetCurrentPlaylist(int)),
+          SIGNAL(SetCurrentPlaylist(int)));
 }
 
 void NetworkRemote::StartServer() {
@@ -171,6 +176,13 @@ void NetworkRemote::AcceptConnection() {
             SIGNAL(DoGlobalSearch(QString, RemoteClient*)),
             outgoing_data_creator_.get(),
             SLOT(DoGlobalSearch(QString, RemoteClient*)));
+
+    connect(incoming_data_parser_.get(),
+            SIGNAL(SendListFiles(QString, RemoteClient*)),
+            outgoing_data_creator_.get(),
+            SLOT(SendListFiles(QString, RemoteClient*)));
+    connect(incoming_data_parser_.get(), SIGNAL(SendSavedRadios(RemoteClient*)),
+            outgoing_data_creator_.get(), SLOT(SendSavedRadios(RemoteClient*)));
   }
 
   QTcpServer* server = qobject_cast<QTcpServer*>(sender());
@@ -212,6 +224,14 @@ void NetworkRemote::CreateRemoteClient(QTcpSocket* client_socket) {
     // Add the client to the list
     RemoteClient* client = new RemoteClient(app_, client_socket);
     clients_.push_back(client);
+
+    // Update the Remote Root Files for the latest Client
+    outgoing_data_creator_->SetMusicExtensions(
+        client->files_music_extensions());
+    outgoing_data_creator_->SetRemoteRootFiles(client->files_root_folder());
+    incoming_data_parser_->SetRemoteRootFiles(client->files_root_folder());
+    // update OutgoingDataCreator with latest allow_downloads setting
+    outgoing_data_creator_->SetAllowDownloads(client->allow_downloads());
 
     // Connect the signal to parse data
     connect(client, SIGNAL(Parse(pb::remote::Message)),
