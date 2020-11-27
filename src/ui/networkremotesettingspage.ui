@@ -101,7 +101,7 @@
         </property>
        </widget>
       </item>
-      <item row="6" column="0">
+      <item row="9" column="0">
        <widget class="QLabel" name="label_2">
         <property name="toolTip">
          <string>Enter this IP in the App to connect to Clementine.</string>
@@ -111,7 +111,7 @@
         </property>
        </widget>
       </item>
-      <item row="6" column="1">
+      <item row="9" column="1">
        <widget class="QLabel" name="ip_address">
         <property name="text">
          <string notr="true">127.0.0.1</string>
@@ -128,7 +128,7 @@
         </property>
        </widget>
       </item>
-      <item row="4" column="0" colspan="2">
+      <item row="7" column="0" colspan="2">
        <widget class="QGroupBox" name="download_settings_container">
         <property name="enabled">
          <bool>false</bool>
@@ -170,6 +170,39 @@
           </widget>
          </item>
         </layout>
+       </widget>
+      </item>
+      <item row="5" column="0">
+       <widget class="QLabel" name="label_3">
+        <property name="toolTip">
+         <string>Root folder that will be browsable from the network remote</string>
+        </property>
+        <property name="text">
+         <string>Files root folder</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="1">
+       <widget class="FileChooserWidget" name="files_root_folder" native="true">
+        <property name="minimumSize">
+         <size>
+          <width>100</width>
+          <height>0</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item row="6" column="1">
+       <widget class="QLineEdit" name="files_music_extensions"/>
+      </item>
+      <item row="6" column="0">
+       <widget class="QLabel" name="label_4">
+        <property name="toolTip">
+         <string>coma separated list of the allowed extensions that will be visible from the network remote (ex: m3u,mp3,flac,ogg,wav)</string>
+        </property>
+        <property name="text">
+         <string>Music extensions remotely visible</string>
+        </property>
        </widget>
       </item>
      </layout>
@@ -259,6 +292,14 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>FileChooserWidget</class>
+   <extends>QWidget</extends>
+   <header location="global">ui/filechooserwidget.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <resources>
   <include location="../../data/data.qrc"/>
  </resources>

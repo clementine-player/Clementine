@@ -1,8 +1,6 @@
 #ifndef REMOTECLIENT_H
 #define REMOTECLIENT_H
 
-#include <QAbstractSocket>
-#include <QBuffer>
 #include <QTcpSocket>
 
 #include "core/application.h"
@@ -23,6 +21,11 @@ class RemoteClient : public QObject {
   void DisconnectClient(pb::remote::ReasonDisconnect reason);
 
   SongSender* song_sender() { return song_sender_; }
+  const QString& files_root_folder() const { return files_root_folder_; }
+  const QStringList& files_music_extensions() const {
+    return files_music_extensions_;
+  }
+  bool allow_downloads() const { return allow_downloads_; }
 
  private slots:
   void IncomingData();
@@ -47,8 +50,11 @@ class RemoteClient : public QObject {
   QTcpSocket* client_;
   bool reading_protobuf_;
   quint32 expected_length_;
-  QBuffer buffer_;
+  QByteArray buffer_;
   SongSender* song_sender_;
+
+  QString files_root_folder_;
+  QStringList files_music_extensions_;
 };
 
 #endif  // REMOTECLIENT_H

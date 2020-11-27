@@ -47,7 +47,15 @@ class OutgoingDataCreator : public QObject {
   static const quint32 kFileChunkSize;
 
   void SetClients(QList<RemoteClient*>* clients);
-
+  void SetRemoteRootFiles(const QString& files_root_folder) {
+    files_root_folder_ = files_root_folder;
+  }
+  void SetMusicExtensions(const QStringList& files_music_extensions) {
+    files_music_extensions_ = files_music_extensions;
+  }
+  void SetAllowDownloads(bool allow_downloads) {
+    allow_downloads_ = allow_downloads;
+  }
   static void CreateSong(const Song& song, const QImage& art, const int index,
                          pb::remote::SongMetadata* song_metadata);
 
@@ -83,6 +91,9 @@ class OutgoingDataCreator : public QObject {
   void ResultsAvailable(int id, const SearchProvider::ResultList& results);
   void SearchFinished(int id);
 
+  void SendListFiles(QString relative_path, RemoteClient* client);
+  void SendSavedRadios(RemoteClient* client);
+
  private:
   Application* app_;
   QList<RemoteClient*>* clients_;
@@ -95,6 +106,9 @@ class OutgoingDataCreator : public QObject {
   int keep_alive_timeout_;
   int last_track_position_;
   bool aww_;
+  QString files_root_folder_;
+  QStringList files_music_extensions_;
+  bool allow_downloads_;
 
   std::unique_ptr<UltimateLyricsReader> ultimate_reader_;
   QMap<int, SongInfoFetcher::Result> results_;

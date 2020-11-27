@@ -17,6 +17,7 @@
 
 #include "outgoingdatacreator.h"
 
+#include <QDir>
 #include <QSqlDatabase>
 #include <QSqlQuery>
 #include <cmath>
@@ -26,6 +27,8 @@
 #include "core/timeconstants.h"
 #include "core/utilities.h"
 #include "globalsearch/librarysearchprovider.h"
+#include "internet/core/internetmodel.h"
+#include "internet/internetradio/savedradio.h"
 #include "library/librarybackend.h"
 #include "networkremote.h"
 #include "ui/iconloader.h"
@@ -180,10 +183,15 @@ void OutgoingDataCreator::SendClementineInfo() {
       msg.mutable_response_clementine_info();
   SetEngineState(info);
 
+  // allowed extensions for REQUEST_FILES and LIST_FILES
+  for (const QString& ext : files_music_extensions_)
+    *info->add_files_music_extensions() = ext.toStdString();
+
   QString version =
       QString("%1 %2").arg(QCoreApplication::applicationName(),
                            QCoreApplication::applicationVersion());
   info->set_version(version.toLatin1());
+  info->set_allow_downloads(allow_downloads_);
   SendDataToClients(&msg);
 }
 
@@ -208,20 +216,22 @@ void OutgoingDataCreator::SetEngineState(
 
 void OutgoingDataCreator::SendAllPlaylists() {
   // Get all Playlists
-  QList<Playlist*> app_playlists = app_->playlist_manager()->GetAllPlaylists();
-  int active_playlist = app_->playlist_manager()->active_id();
+  PlaylistManager* playlist_manager = app_->playlist_manager();
+  int active_playlist = playlist_manager->active_id();
 
   // Create message
   pb::remote::Message msg;
   msg.set_type(pb::remote::PLAYLISTS);
 
   pb::remote::ResponsePlaylists* playlists = msg.mutable_response_playlists();
+  playlists->set_include_closed(true);
 
   // Get all playlists, even ones that are hidden in the UI.
   for (const PlaylistBackend::Playlist& p :
        app_->playlist_backend()->GetAllPlaylists()) {
-    bool playlist_open = app_->playlist_manager()->IsPlaylistOpen(p.id);
-    int item_count = playlist_open ? app_playlists.at(p.id)->rowCount() : 0;
+    bool playlist_open = playlist_manager->IsPlaylistOpen(p.id);
+    int item_count =
+        playlist_open ? playlist_manager->playlist(p.id)->rowCount() : 0;
 
     // Create a new playlist
     pb::remote::Playlist* playlist = playlists->add_playlist();
@@ -230,6 +240,7 @@ void OutgoingDataCreator::SendAllPlaylists() {
     playlist->set_active((p.id == active_playlist));
     playlist->set_item_count(item_count);
     playlist->set_closed(!playlist_open);
+    playlist->set_favorite(p.favorite);
   }
 
   SendDataToClients(&msg);
@@ -259,6 +270,7 @@ void OutgoingDataCreator::SendAllActivePlaylists() {
     playlist->set_active((p->id() == active_playlist));
     playlist->set_item_count(p->rowCount());
     playlist->set_closed(false);
+    playlist->set_favorite(p->is_favorite());
   }
 
   SendDataToClients(&msg);
@@ -289,8 +301,9 @@ void OutgoingDataCreator::PlaylistRenamed(int id, const QString& new_name) {
 }
 
 void OutgoingDataCreator::SendFirstData(bool send_playlist_songs) {
+  Player* player = app_->player();
   // First Send the current song
-  PlaylistItemPtr item = app_->player()->GetCurrentItem();
+  PlaylistItemPtr item = player->GetCurrentItem();
   if (!item) {
     qLog(Info) << "No current item found!";
   }
@@ -298,11 +311,11 @@ void OutgoingDataCreator::SendFirstData(bool send_playlist_songs) {
   CurrentSongChanged(current_song_, current_uri_, current_image_);
 
   // then the current volume
-  VolumeChanged(app_->player()->GetVolume());
+  VolumeChanged(player->GetVolume());
 
   // Check if we need to start the track position timer
   if (!track_position_timer_->isActive() &&
-      app_->player()->engine()->state() == Engine::Playing) {
+      player->engine()->state() == Engine::Playing) {
     track_position_timer_->start(1000);
   }
 
@@ -546,11 +559,11 @@ void OutgoingDataCreator::UpdateTrackPosition() {
   pb::remote::Message msg;
   msg.set_type(pb::remote::UPDATE_TRACK_POSITION);
 
-  int position = std::floor(
-      float(app_->player()->engine()->position_nanosec()) / kNsecPerSec + 0.5);
+  qint64 position_nanosec = app_->player()->engine()->position_nanosec();
+  int position = static_cast<int>(
+      std::floor(static_cast<double>(position_nanosec) / kNsecPerSec + 0.5));
 
-  if (app_->player()->engine()->position_nanosec() >
-      current_song_.length_nanosec())
+  if (position_nanosec > current_song_.length_nanosec())
     position = last_track_position_;
 
   msg.mutable_response_update_track_position()->set_position(position);
@@ -743,4 +756,72 @@ void OutgoingDataCreator::SearchFinished(int id) {
   req.client_->SendData(&msg);
 
   qLog(Debug) << "SearchFinished" << req.id_ << req.query_;
+}
+
+void OutgoingDataCreator::SendListFiles(QString relative_path,
+                                        RemoteClient* client) {
+  pb::remote::Message msg;
+  msg.set_type(pb::remote::LIST_FILES);
+  pb::remote::ResponseListFiles* files = msg.mutable_response_list_files();
+  // Security checks
+  if (files_root_folder_.isEmpty()) {
+    files->set_error(pb::remote::ResponseListFiles::ROOT_DIR_NOT_SET);
+    SendDataToClients(&msg);
+    return;
+  }
+
+  QDir root_dir(files_root_folder_);
+  if (!root_dir.exists())
+    files->set_error(pb::remote::ResponseListFiles::ROOT_DIR_NOT_SET);
+  else if (relative_path.startsWith("..") || relative_path.startsWith("./.."))
+    files->set_error(pb::remote::ResponseListFiles::DIR_NOT_ACCESSIBLE);
+  else {
+    if (relative_path.startsWith("/")) relative_path.remove(0, 1);
+
+    QFileInfo fi_folder(root_dir, relative_path);
+    if (!fi_folder.exists())
+      files->set_error(pb::remote::ResponseListFiles::DIR_NOT_EXIST);
+    else if (!fi_folder.isDir())
+      files->set_error(pb::remote::ResponseListFiles::DIR_NOT_EXIST);
+    else if (root_dir.relativeFilePath(fi_folder.absoluteFilePath())
+                 .startsWith("../"))
+      files->set_error(pb::remote::ResponseListFiles::DIR_NOT_ACCESSIBLE);
+    else {
+      files->set_relative_path(
+          root_dir.relativeFilePath(fi_folder.absoluteFilePath())
+              .toStdString());
+      QDir dir(fi_folder.absoluteFilePath());
+      dir.setFilter(QDir::NoDotAndDotDot | QDir::AllEntries);
+      dir.setSorting(QDir::Name | QDir::DirsFirst);
+
+      for (const QFileInfo& fi : dir.entryInfoList()) {
+        if (fi.isDir() || files_music_extensions_.contains(fi.suffix())) {
+          pb::remote::FileMetadata* pb_file = files->add_files();
+          pb_file->set_is_dir(fi.isDir());
+          pb_file->set_filename(fi.fileName().toStdString());
+        }
+      }
+    }
+  }
+  client->SendData(&msg);
+}
+
+void OutgoingDataCreator::SendSavedRadios(RemoteClient* client) {
+  pb::remote::Message msg;
+  msg.set_type(pb::remote::REQUEST_SAVED_RADIOS);
+
+  SavedRadio* radio_service = static_cast<SavedRadio*>(
+      InternetModel::ServiceByName(SavedRadio::kServiceName));
+  if (radio_service) {
+    pb::remote::ResponseSavedRadios* radios =
+        msg.mutable_response_saved_radios();
+    for (const auto& stream : radio_service->Streams()) {
+      pb::remote::Stream* pb_stream = radios->add_streams();
+      pb_stream->set_name(stream.name_.toStdString());
+      pb_stream->set_url(stream.url_.toString().toStdString());
+      if (!stream.url_logo_.isEmpty())
+        pb_stream->set_url_logo(stream.url_logo_.toString().toStdString());
+    }
+  }
+  client->SendData(&msg);
 }

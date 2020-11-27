@@ -339,6 +339,7 @@ set(SOURCES
   ui/edittagdialog.cpp
   ui/lovedialog.cpp
   ui/equalizer.cpp
+  ui/filechooserwidget.cpp
   ui/flowlayout.cpp
   ui/globalshortcutgrabber.cpp
   ui/globalshortcutssettingspage.cpp
@@ -625,6 +626,7 @@ set(HEADERS
   ui/console.h
   ui/coverfromurldialog.h
   ui/edittagdialog.h
+  ui/filechooserwidget.h
   ui/lovedialog.h
   ui/equalizer.h
   ui/globalshortcutgrabber.h

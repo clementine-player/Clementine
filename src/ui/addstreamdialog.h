@@ -33,6 +33,7 @@ class AddStreamDialog : public QDialog {
 
   void set_url(const QUrl& url);
   void set_name(const QString& name);
+  void set_url_logo(const QUrl& url);
   void set_save_visible(bool visible);
   void set_add_on_accept(SavedRadio* saved_radio) {
     saved_radio_ = saved_radio;
@@ -40,6 +41,7 @@ class AddStreamDialog : public QDialog {
 
   QUrl url() const;
   QString name() const;
+  QUrl url_logo() const;
 
   void accept();
 
