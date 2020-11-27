@@ -67,6 +67,7 @@ class GioLister : public DeviceLister {
         : drive_removable(false),
           filesystem_size(0),
           filesystem_free(0),
+          is_mountpoint(false),
           invalid_enclosing_mount(false) {}
 
     QString unique_id() const;
@@ -103,6 +104,8 @@ class GioLister : public DeviceLister {
     quint64 filesystem_size;
     quint64 filesystem_free;
     QString filesystem_type;
+
+    bool is_mountpoint;  // unix::is-mountpoint
 
     bool invalid_enclosing_mount;
   };
