@@ -44,6 +44,8 @@ QString GioLister::DeviceInfo::unique_id() const {
 bool GioLister::DeviceInfo::is_suitable() const {
   if (!volume_) return false;  // This excludes smb or ssh mounts
 
+  if (is_mountpoint) return false;  // Exclude mounts from fstab, etc
+
   if (drive_ && !drive_removable)
     return false;  // This excludes internal drives
 
@@ -254,7 +256,10 @@ void GioLister::VolumeAdded(GVolume* volume) {
 #endif
   info.ReadDriveInfo(g_volume_get_drive(volume));
   info.ReadMountInfo(g_volume_get_mount(volume));
-  if (!info.is_suitable()) return;
+  if (!info.is_suitable()) {
+    qLog(Debug) << "Skipping" << info.volume_name;
+    return;
+  }
 
   {
     QMutexLocker l(&mutex_);
@@ -289,7 +294,10 @@ void GioLister::MountAdded(GMount* mount) {
 #endif
   info.ReadMountInfo(mount);
   info.ReadDriveInfo(g_mount_get_drive(mount));
-  if (!info.is_suitable()) return;
+  if (!info.is_suitable()) {
+    qLog(Debug) << "Skipping" << info.volume_name;
+    return;
+  }
 
   QString old_id;
   {
@@ -430,19 +438,24 @@ void GioLister::DeviceInfo::ReadMountInfo(GMount* mount) {
   }
 
   // Query the file's info for a filesystem ID
-  // Only afc devices (that I know of) give reliably unique IDs
-  if (filesystem_type == "afc") {
-    error = nullptr;
-    info = g_file_query_info(root, G_FILE_ATTRIBUTE_ID_FILESYSTEM,
-                             G_FILE_QUERY_INFO_NONE, nullptr, &error);
-    if (error) {
-      qLog(Warning) << QString::fromLocal8Bit(error->message);
-      g_error_free(error);
-    } else {
+  error = nullptr;
+  info = g_file_query_info(root,
+                           G_FILE_ATTRIBUTE_ID_FILESYSTEM
+                           "," G_FILE_ATTRIBUTE_UNIX_IS_MOUNTPOINT,
+                           G_FILE_QUERY_INFO_NONE, nullptr, &error);
+  if (error) {
+    qLog(Warning) << QString::fromLocal8Bit(error->message);
+    g_error_free(error);
+  } else {
+    is_mountpoint = g_file_info_get_attribute_boolean(
+        info, G_FILE_ATTRIBUTE_UNIX_IS_MOUNTPOINT);
+
+    // Only afc devices (that I know of) give reliably unique IDs
+    if (filesystem_type == "afc") {
       mount_uuid = QString::fromUtf8(g_file_info_get_attribute_string(
           info, G_FILE_ATTRIBUTE_ID_FILESYSTEM));
-      g_object_unref(info);
     }
+    g_object_unref(info);
   }
 
   g_object_unref(root);
