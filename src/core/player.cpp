@@ -230,7 +230,7 @@ void Player::PlayPlaylist(const QString& playlistName) {
 
 void Player::PlayPlaylistInternal(Engine::TrackChangeFlags change,
                                   const QString& playlistName) {
-  Playlist* playlist = NULL;
+  Playlist* playlist = nullptr;
   for (Playlist* p : app_->playlist_manager()->GetAllPlaylists()) {
     if (playlistName == app_->playlist_manager()->GetPlaylistName(p->id())) {
       playlist = p;
@@ -238,18 +238,20 @@ void Player::PlayPlaylistInternal(Engine::TrackChangeFlags change,
     }
   }
 
-  if (playlist != NULL) {
-    app_->playlist_manager()->SetActivePlaylist(playlist->id());
-    if (playlist->rowCount() == 0) return;
-
-    int i = app_->playlist_manager()->active()->current_row();
-    if (i == -1) i = app_->playlist_manager()->active()->last_played_row();
-    if (i == -1) i = 0;
-
-    PlayAt(i, Engine::First, true);
-  } else {
+  if (playlist == NULL) {
     qLog(Warning) << "Playlist '" << playlistName << "' not found.";
+    return;
   }
+
+  app_->playlist_manager()->SetActivePlaylist(playlist->id());
+  app_->playlist_manager()->SetActiveToCurrent();
+  if (playlist->rowCount() == 0) return;
+
+  int i = app_->playlist_manager()->active()->current_row();
+  if (i == -1) i = app_->playlist_manager()->active()->last_played_row();
+  if (i == -1) i = 0;
+
+  PlayAt(i, Engine::First, true);
 }
 
 bool Player::HandleStopAfter() {
