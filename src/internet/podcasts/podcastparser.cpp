@@ -279,8 +279,14 @@ bool PodcastParser::ParseOpml(QXmlStreamReader* reader,
   ParseOutline(reader, ret);
 
   // OPML files sometimes consist of a single top level container.
-  while (ret->feeds.count() == 0 && ret->containers.count() == 1) {
-    *ret = ret->containers[0];
+  OpmlContainer* top = ret;
+  while (top->feeds.count() == 0 && top->containers.count() == 1) {
+    top = &top->containers[0];
+  }
+  if (top != ret) {
+    // Copy the sub-container to a temporary location first.
+    OpmlContainer tmp = *top;
+    *ret = tmp;
   }
 
   return true;

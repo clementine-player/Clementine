@@ -131,10 +131,12 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   void CommandlineOptionsReceived(const CommandlineOptions& options);
 
  protected:
-  void keyPressEvent(QKeyEvent* event);
+  void keyPressEvent(QKeyEvent*);
   void changeEvent(QEvent*);
   void resizeEvent(QResizeEvent*);
-  void closeEvent(QCloseEvent* event);
+  void closeEvent(QCloseEvent*);
+  void hideEvent(QHideEvent*);
+  void showEvent(QShowEvent*);
 
 #ifdef Q_OS_WIN32
   bool winEvent(MSG* message, long* result);
