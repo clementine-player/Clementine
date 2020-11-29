@@ -21,7 +21,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2020-07-30 17:39+0000\n"
+"PO-Revision-Date: 2020-11-28 20:36+0000\n"
 "Last-Translator: John Maguire <john.maguire@gmail.com>\n"
 "Language-Team: Japanese (http://www.transifex.com/davidsansome/clementine/language/ja/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -823,7 +823,7 @@ msgstr "怒り"
 msgid "Appearance"
 msgstr "外観"
 
-#: core/commandlineoptions.cpp:178
+#: core/commandlineoptions.cpp:180
 msgid "Append files/URLs to the playlist"
 msgstr "ファイル・URL をプレイリストに追加する"
 
@@ -1102,7 +1102,7 @@ msgstr "シャッフルモードの変更"
 msgid "Change the currently playing song"
 msgstr "再生中の曲を変更する"
 
-#: core/commandlineoptions.cpp:183
+#: core/commandlineoptions.cpp:186
 msgid "Change the language"
 msgstr "言語の変更"
 
@@ -1312,7 +1312,7 @@ msgstr ""
 msgid "Colors"
 msgstr "色"
 
-#: core/commandlineoptions.cpp:186
+#: core/commandlineoptions.cpp:189
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "コンマ区切りの クラス:レベル のリスト、レベルは 0-3"
 
@@ -1540,7 +1540,7 @@ msgstr "%1 からのカバーアートセット"
 msgid "Covers from %1"
 msgstr "%1 からのカバー"
 
-#: core/commandlineoptions.cpp:177
+#: core/commandlineoptions.cpp:179
 msgid "Create a new playlist with files/URLs"
 msgstr "ファイル/URL を使ってプレイリストを作成する"
 
@@ -1623,11 +1623,11 @@ msgstr "日"
 msgid "De&fault"
 msgstr "既定(&F)"
 
-#: core/commandlineoptions.cpp:167
+#: core/commandlineoptions.cpp:169
 msgid "Decrease the volume by 4 percent"
 msgstr ""
 
-#: core/commandlineoptions.cpp:169
+#: core/commandlineoptions.cpp:171
 msgid "Decrease the volume by <value> percent"
 msgstr "音量を <value> % 下げる"
 
@@ -1662,7 +1662,7 @@ msgid "Delete downloaded data"
 msgstr "ダウンロード済みデータを削除"
 
 #: devices/deviceview.cpp:396 library/libraryview.cpp:677
-#: ui/mainwindow.cpp:2506 widgets/fileview.cpp:189
+#: ui/mainwindow.cpp:2514 widgets/fileview.cpp:189
 msgid "Delete files"
 msgstr "ファイルの削除"
 
@@ -1687,7 +1687,7 @@ msgstr "プリセットの削除"
 msgid "Delete smart playlist"
 msgstr "スマートプレイリストを削除"
 
-#: core/commandlineoptions.cpp:188
+#: core/commandlineoptions.cpp:191
 msgid "Delete the currently playing song"
 msgstr ""
 
@@ -1804,7 +1804,7 @@ msgstr "不連続送信 (DTX)"
 msgid "Display options"
 msgstr "画面のオプション"
 
-#: core/commandlineoptions.cpp:181
+#: core/commandlineoptions.cpp:184
 msgid "Display the on-screen-display"
 msgstr "OSD を表示する"
 
@@ -2109,17 +2109,17 @@ msgstr ""
 msgid "Equalizer"
 msgstr "イコライザー"
 
-#: core/commandlineoptions.cpp:184
+#: core/commandlineoptions.cpp:187
 msgid "Equivalent to --log-levels *:1"
 msgstr "--log-levels *:1 と同じ"
 
-#: core/commandlineoptions.cpp:185
+#: core/commandlineoptions.cpp:188
 msgid "Equivalent to --log-levels *:3"
 msgstr "--log-levels *:3 と同じ"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:249
-#: library/libraryview.cpp:671 ui/mainwindow.cpp:2189 ui/mainwindow.cpp:2459
-#: ui/mainwindow.cpp:2637
+#: library/libraryview.cpp:671 ui/mainwindow.cpp:2189 ui/mainwindow.cpp:2467
+#: ui/mainwindow.cpp:2645
 msgid "Error"
 msgstr "エラー"
 
@@ -2758,11 +2758,11 @@ msgstr "Subsonic REST プロトコルバージョンの互換性がありませ�
 msgid "Incomplete configuration, please ensure all fields are populated."
 msgstr "設定は完了していません。すべての入力欄を埋めてください。"
 
-#: core/commandlineoptions.cpp:166
+#: core/commandlineoptions.cpp:168
 msgid "Increase the volume by 4 percent"
 msgstr ""
 
-#: core/commandlineoptions.cpp:168
+#: core/commandlineoptions.cpp:170
 msgid "Increase the volume by <value> percent"
 msgstr "音量を <value> % 上げる"
 
@@ -2992,7 +2992,7 @@ msgstr "ライブラリ"
 msgid "Library advanced grouping"
 msgstr "ライブラリの高度なグループ化"
 
-#: ui/mainwindow.cpp:2763
+#: ui/mainwindow.cpp:2771
 msgid "Library rescan notice"
 msgstr "ライブラリー再スキャン通知"
 
@@ -3073,7 +3073,7 @@ msgstr "トラック情報の読み込み中"
 msgid "Loading..."
 msgstr "読み込んでいます..."
 
-#: core/commandlineoptions.cpp:179
+#: core/commandlineoptions.cpp:181
 msgid "Loads files/URLs, replacing current playlist"
 msgstr "ファイル・URL を読み込んで、現在のプレイリストを置き換えます"
 
@@ -3450,7 +3450,7 @@ msgstr "短いブロックなし"
 msgid "None"
 msgstr "なし"
 
-#: library/libraryview.cpp:672 ui/mainwindow.cpp:2460 ui/mainwindow.cpp:2638
+#: library/libraryview.cpp:672 ui/mainwindow.cpp:2468 ui/mainwindow.cpp:2646
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "デバイスへのコピーに適切な曲が選択されていません"
 
@@ -3696,7 +3696,7 @@ msgstr "元の年タグのサポート"
 msgid "Other"
 msgstr ""
 
-#: core/commandlineoptions.cpp:181
+#: core/commandlineoptions.cpp:184
 msgid "Other options"
 msgstr "その他のオプション"
 
@@ -3754,7 +3754,7 @@ msgstr "パスワード"
 msgid "Pause"
 msgstr "一時停止"
 
-#: core/commandlineoptions.cpp:161
+#: core/commandlineoptions.cpp:163
 msgid "Pause playback"
 msgstr "再生を一時停止します"
 
@@ -3788,7 +3788,11 @@ msgstr "再生"
 msgid "Play count"
 msgstr "再生回数"
 
-#: core/commandlineoptions.cpp:160
+#: core/commandlineoptions.cpp:183
+msgid "Play given playlist"
+msgstr ""
+
+#: core/commandlineoptions.cpp:162
 msgid "Play if stopped, pause if playing"
 msgstr "停止中は再生し、再生中は一時停止します"
 
@@ -3805,7 +3809,7 @@ msgstr ""
 msgid "Play selected tracks next"
 msgstr ""
 
-#: core/commandlineoptions.cpp:180
+#: core/commandlineoptions.cpp:182
 msgid "Play the <n>th track in the playlist"
 msgstr "プレイリストの <n> 番目のトラックを再生する"
 
@@ -3817,7 +3821,7 @@ msgstr "再生・一時停止"
 msgid "Playback"
 msgstr "再生"
 
-#: core/commandlineoptions.cpp:158
+#: core/commandlineoptions.cpp:160
 msgid "Player options"
 msgstr "プレーヤーのオプション"
 
@@ -3831,7 +3835,7 @@ msgstr "プレイリスト"
 msgid "Playlist finished"
 msgstr "プレイリストが完了しました"
 
-#: core/commandlineoptions.cpp:176
+#: core/commandlineoptions.cpp:178
 #: ../bin/src/ui_playlistsaveoptionsdialog.h:94
 msgid "Playlist options"
 msgstr "プレイリストのオプション"
@@ -3964,7 +3968,7 @@ msgstr "前へ"
 msgid "Previous track"
 msgstr "前のトラック"
 
-#: core/commandlineoptions.cpp:187
+#: core/commandlineoptions.cpp:190
 msgid "Print out version information"
 msgstr "バージョン情報を出力"
 
@@ -4249,7 +4253,7 @@ msgstr "再生回数のリセット"
 msgid "Restart song, then jump to previous if pressed again"
 msgstr "曲を再スタートし、もう一度押された場合前の曲へジャンプする"
 
-#: core/commandlineoptions.cpp:174
+#: core/commandlineoptions.cpp:176
 msgid ""
 "Restart the track, or play the previous track if within 8 seconds of start."
 msgstr "トラックを再開 (開始8秒以内なら前のトラックを再生)"
@@ -4501,11 +4505,11 @@ msgstr "後方へシーク"
 msgid "Seek forward"
 msgstr "前方へシーク"
 
-#: core/commandlineoptions.cpp:172
+#: core/commandlineoptions.cpp:174
 msgid "Seek the currently playing track by a relative amount"
 msgstr "現在再生中のトラックを相対値でシークする"
 
-#: core/commandlineoptions.cpp:170
+#: core/commandlineoptions.cpp:172
 msgid "Seek the currently playing track to an absolute position"
 msgstr "現在再生中のトラックの絶対的な位置へシークする"
 
@@ -4574,7 +4578,7 @@ msgstr "サービスがオフラインです"
 msgid "Set %1 to \"%2\"..."
 msgstr "%1 を「%2」に設定します..."
 
-#: core/commandlineoptions.cpp:165
+#: core/commandlineoptions.cpp:167
 msgid "Set the volume to <value> percent"
 msgstr "音量を <value> パーセントへ設定しました"
 
@@ -4770,7 +4774,7 @@ msgstr "サイズ:"
 msgid "Ska"
 msgstr "Ska"
 
-#: core/commandlineoptions.cpp:163
+#: core/commandlineoptions.cpp:165
 msgid "Skip backwards in playlist"
 msgstr "プレイリストで後ろにスキップ"
 
@@ -4778,7 +4782,7 @@ msgstr "プレイリストで後ろにスキップ"
 msgid "Skip count"
 msgstr "スキップ回数"
 
-#: core/commandlineoptions.cpp:164
+#: core/commandlineoptions.cpp:166
 msgid "Skip forwards in playlist"
 msgstr "プレイリストで前にスキップ"
 
@@ -4899,7 +4903,7 @@ msgstr ""
 msgid "Start ripping"
 msgstr "リッピングを開始する"
 
-#: core/commandlineoptions.cpp:159
+#: core/commandlineoptions.cpp:161
 msgid "Start the playlist currently playing"
 msgstr "現在再生中のプレイリストを開始する"
 
@@ -4943,11 +4947,11 @@ msgstr "各トラック後に停止"
 msgid "Stop after this track"
 msgstr "このトラック後に停止"
 
-#: core/commandlineoptions.cpp:161
+#: core/commandlineoptions.cpp:163
 msgid "Stop playback"
 msgstr "再生の停止"
 
-#: core/commandlineoptions.cpp:162
+#: core/commandlineoptions.cpp:164
 msgid "Stop playback after current track"
 msgstr ""
 
@@ -5107,7 +5111,7 @@ msgid ""
 "license key. Visit subsonic.org for details."
 msgstr "Subsonic サーバーのお試し期間は終了しました。寄付してライセンスキーを取得してください。詳細は subsonic.org を参照してください。"
 
-#: ui/mainwindow.cpp:2754
+#: ui/mainwindow.cpp:2762
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -5149,7 +5153,7 @@ msgid ""
 "continue?"
 msgstr "これらのファイルはデバイスから削除されます。続行してもよろしいですか?"
 
-#: library/libraryview.cpp:678 ui/mainwindow.cpp:2507 widgets/fileview.cpp:190
+#: library/libraryview.cpp:678 ui/mainwindow.cpp:2515 widgets/fileview.cpp:190
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -5259,7 +5263,7 @@ msgstr "キュー状態の切り替え"
 msgid "Toggle scrobbling"
 msgstr "scrobbling の切り替え"
 
-#: core/commandlineoptions.cpp:182
+#: core/commandlineoptions.cpp:185
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "pretty OSD 表示の切り替え"
 
@@ -5341,7 +5345,7 @@ msgstr "URI"
 msgid "URL"
 msgstr "URL"
 
-#: core/commandlineoptions.cpp:157
+#: core/commandlineoptions.cpp:159
 msgid "URL(s)"
 msgstr "URL"
 
@@ -5436,7 +5440,7 @@ msgstr "更新しています %1%..."
 msgid "Updating library"
 msgstr "ライブラリの更新中"
 
-#: core/commandlineoptions.cpp:157
+#: core/commandlineoptions.cpp:159
 msgid "Usage"
 msgstr "使用量"
 
@@ -5719,7 +5723,7 @@ msgid ""
 "well?"
 msgstr "このアルバムにある他の曲も さまざまなアーティスト に移動しますか?"
 
-#: ui/mainwindow.cpp:2761
+#: ui/mainwindow.cpp:2769
 msgid "Would you like to run a full rescan right now?"
 msgstr "全体の再スキャンを今すぐ実行しますか?"
 
@@ -6022,7 +6026,7 @@ msgstr "古い順"
 msgid "on"
 msgstr "が次の日付"
 
-#: core/commandlineoptions.cpp:157
+#: core/commandlineoptions.cpp:159
 msgid "options"
 msgstr "オプション"
 
