@@ -244,7 +244,7 @@ void Player::PlayPlaylistInternal(Engine::TrackChangeFlags change,
   }
 
   app_->playlist_manager()->SetActivePlaylist(playlist->id());
-  app_->playlist_manager()->SetActiveToCurrent();
+  app_->playlist_manager()->SetCurrentPlaylist(playlist->id());
   if (playlist->rowCount() == 0) return;
 
   int i = app_->playlist_manager()->active()->current_row();
