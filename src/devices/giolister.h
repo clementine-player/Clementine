@@ -82,19 +82,19 @@ class GioLister : public DeviceLister {
     void ReadMountInfo(GMount* mount);
 
     // Only available if it's a physical drive
-    ScopedGObject<GVolume> volume;
+    ScopedGObject<GVolume> volume_;
     QString volume_name;
     QString volume_unix_device;
     QString volume_root_uri;
     QString volume_uuid;
 
     // Only available if it's a physical drive
-    ScopedGObject<GDrive> drive;
+    ScopedGObject<GDrive> drive_;
     QString drive_name;
     bool drive_removable;
 
     // Only available if it's mounted
-    ScopedGObject<GMount> mount;
+    ScopedGObject<GMount> mount_;
     QString mount_path;
     QString mount_uri;
     QString mount_name;
