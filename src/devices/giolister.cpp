@@ -520,7 +520,6 @@ void GioLister::UnmountDevice(const QString& id) {
       g_volume_eject_with_operation(
           info.volume_, G_MOUNT_UNMOUNT_NONE, nullptr, nullptr,
           (GAsyncReadyCallback)VolumeEjectFinished, nullptr);
-      g_object_unref(info.volume_);
       return;
     }
   }
