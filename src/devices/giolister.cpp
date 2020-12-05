@@ -220,7 +220,11 @@ QList<QUrl> GioLister::MakeDeviceUrls(const QString& id) {
     }
   }
 
-  ret << MakeUrlFromLocalPath(mount_point);
+  QUrl mount_point_url = MakeUrlFromLocalPath(mount_point);
+  if (mount_point_url.isValid()) {
+    ret << mount_point_url;
+  }
+
   return ret;
 }
 
