@@ -7,7 +7,7 @@
 # arnaudbienner <arnaud.bienner@gmail.com>, 2011
 # arnaudbienner <arnaud.bienner@gmail.com>, 2011
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
-# Hugo Carvalho <hugokarvalho@hotmail.com>, 2015
+# Hugo Carvalho <hugokarvalho@hotmail.com>, 2015,2020
 # João Santos <joaoopsantos@gmail.com>, 2015
 # Rui <xymarior@yandex.com>, 2019
 # Alexandro Casanova <shorterfire@gmail.com>, 2013
@@ -15,8 +15,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2020-11-28 20:36+0000\n"
-"Last-Translator: John Maguire <john.maguire@gmail.com>\n"
+"PO-Revision-Date: 2020-12-06 16:41+0000\n"
+"Last-Translator: Hugo Carvalho <hugokarvalho@hotmail.com>\n"
 "Language-Team: Portuguese (http://www.transifex.com/davidsansome/clementine/language/pt/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -30,7 +30,7 @@ msgid ""
 "You can favorite playlists by clicking the star icon next to a playlist name\n"
 "\n"
 "Favorited playlists will be saved here"
-msgstr "\n\nPode adicionar listas de reprodução favoritas, clicando na estrela existente junto ao nome da lista de reprodução.\n\nAs listas de reprodução favoritas serão guardadas aqui."
+msgstr "\n\nPode adicionar listas de reprodução favoritas, clicando na estrela existente junto ao nome da lista de reprodução.\n\nAs listas de reprodução favoritas serão guardadas aqui"
 
 #: ../bin/src/ui_podcastsettingspage.h:270
 msgid " days"
@@ -107,7 +107,7 @@ msgstr "%1 listas de reprodução (%2)"
 msgid ""
 "%1 request failed:\n"
 "%2"
-msgstr ""
+msgstr "%1 pedido falhou:\n%2"
 
 #: playlist/playlistmanager.cpp:432
 #, qt-format
@@ -204,7 +204,7 @@ msgstr "A&grupamento"
 
 #: ../bin/src/ui_mainwindow.h:783
 msgid "&Help"
-msgstr "Aj&uda"
+msgstr "&Ajuda"
 
 #: playlist/playlistheader.cpp:79
 #, qt-format
@@ -273,7 +273,7 @@ msgstr "(diferente entre as várias faixas)"
 
 #: internet/spotify/spotifyservice.cpp:472
 msgid ", by "
-msgstr ", de"
+msgstr ", de "
 
 #: ui/about.cpp:90
 msgid "...and all the Amarok contributors"
@@ -289,7 +289,7 @@ msgstr "0:00:00"
 
 #: ../bin/src/ui_appearancesettingspage.h:315
 msgid "0px"
-msgstr "0 px."
+msgstr "0 px"
 
 #: core/utilities.cpp:122
 msgid "1 day"
@@ -384,7 +384,7 @@ msgstr "<p>Os \"tokens\" iniciam com %, por exemplo: %artist %album %title </p>\
 
 #: internet/spotify/spotifysettingspage.cpp:166
 msgid "A Spotify Premium account is required."
-msgstr "Requer uma conta Spotify Premium"
+msgstr "Requer uma conta Spotify Premium."
 
 #: ../bin/src/ui_networkremotesettingspage.h:233
 msgid "A client can connect only, if the correct code was entered."
@@ -1042,7 +1042,7 @@ msgstr "Duração da memória"
 
 #: engines/gstengine.cpp:917
 msgid "Buffering"
-msgstr "A processar..."
+msgstr "A processar"
 
 #: internet/seafile/seafileservice.cpp:232
 msgid "Building Seafile index..."
@@ -1058,7 +1058,7 @@ msgstr "Botões"
 
 #: internet/podcasts/addpodcastdialog.cpp:95
 msgid "CBC Podcasts"
-msgstr ""
+msgstr "Podcasts CBC"
 
 #: core/song.cpp:453
 msgid "CDDA"
@@ -1148,7 +1148,7 @@ msgstr "Escolher da lista"
 
 #: smartplaylists/querywizardplugin.cpp:163
 msgid "Choose how the playlist is sorted and how many songs it will contain."
-msgstr "Escolha o tipo de organização da lista e o número de faixas a incluir"
+msgstr "Escolha o tipo de organização da lista e o número de faixas a incluir."
 
 #: internet/podcasts/podcastsettingspage.cpp:143
 msgid "Choose podcast download directory"
@@ -1156,12 +1156,12 @@ msgstr "Escolha o diretório para guardar os podcasts"
 
 #: ../bin/src/ui_internetshowsettingspage.h:85
 msgid "Choose the internet services you want to show."
-msgstr "Escolha os serviços web que deseja mostrar"
+msgstr "Escolha os serviços web que deseja mostrar."
 
 #: ../bin/src/ui_songinfosettingspage.h:159
 msgid ""
 "Choose the websites you want Clementine to use when searching for lyrics."
-msgstr "Escolha os sítios web em que o Clementine deve pesquisar as letras das faixas"
+msgstr "Escolha os sítios web em que o Clementine deve pesquisar as letras das faixas."
 
 #: ui/equalizer.cpp:113
 msgid "Classical"
@@ -1203,7 +1203,7 @@ msgstr "Visualização Clementine"
 msgid ""
 "Clementine can automatically convert the music you copy to this device into "
 "a format that it can play."
-msgstr "O Clementine pode converter automaticamente, num formato reconhecido pelo leitor, os ficheiros copiados para o dispositivo"
+msgstr "O Clementine pode converter automaticamente, num formato reconhecido pelo leitor, os ficheiros copiados para o dispositivo."
 
 #: ../bin/src/ui_boxsettingspage.h:100
 msgid "Clementine can play music that you have uploaded to Box"
@@ -1223,14 +1223,14 @@ msgstr "O Clementine consegue reproduzir as músicas enviadas para o OneDrive"
 
 #: ../bin/src/ui_notificationssettingspage.h:436
 msgid "Clementine can show a message when the track changes."
-msgstr "O Clementine pode mostrar uma notificação ao mudar de faixa"
+msgstr "O Clementine pode mostrar uma notificação ao mudar de faixa."
 
 #: ../bin/src/ui_podcastsettingspage.h:278
 msgid ""
 "Clementine can synchronize your subscription list with your other computers "
 "and podcast applications.  <a href=\"https://gpodder.net/register/\">Create "
 "an account</a>."
-msgstr "O Clementine pode sincronizar a lista de subscrições existentes noutro computador ou aplicações. <a href=\"https://gpodder.net/register/\">Criar uma conta</a>"
+msgstr "O Clementine pode sincronizar a lista de subscrições existentes noutro computador ou aplicações.  <a href=\"https://gpodder.net/register/\">Criar uma conta</a>."
 
 #: visualisations/projectmvisualisation.cpp:134
 msgid ""
@@ -1316,7 +1316,7 @@ msgstr "Lista de prefixos de palavras a ignorar ao organizar (separadas por vír
 
 #: ../bin/src/ui_console.h:129
 msgid "Command"
-msgstr ""
+msgstr "Comando"
 
 #: playlist/playlist.cpp:1436 smartplaylists/searchterm.cpp:386
 #: ui/organisedialog.cpp:77 ../bin/src/ui_edittagdialog.h:719
@@ -1467,7 +1467,7 @@ msgstr "Incapaz de detetar a emissão áudio em %1"
 
 #: internet/googledrive/googledriveservice.cpp:208
 msgid "Could not find Google Drive file."
-msgstr ""
+msgstr "Não foi possível encontrar o ficheiro Google Drive."
 
 #: songinfo/streamdiscoverer.cpp:124
 msgid "Could not get details"
@@ -1588,7 +1588,7 @@ msgstr "Dança"
 
 #: ../bin/src/ui_console.h:131
 msgid "Database"
-msgstr ""
+msgstr "Base de dados"
 
 #: core/database.cpp:629
 msgid ""
@@ -1955,7 +1955,7 @@ msgstr "Dub"
 
 #: ../bin/src/ui_console.h:132
 msgid "Dump To Logs"
-msgstr ""
+msgstr "Despejar para registos"
 
 #: ../bin/src/ui_episodeinfowidget.h:134 ../bin/src/ui_ripcddialog.h:308
 msgid "Duration"
@@ -2089,7 +2089,7 @@ msgstr "Introduza o nome do diretório"
 
 #: ../bin/src/ui_networkremotesettingspage.h:238
 msgid "Enter this IP in the App to connect to Clementine."
-msgstr "Introduza este IP na aplicação para se ligar ao Clementine"
+msgstr "Introduza este IP na aplicação para se ligar ao Clementine."
 
 #: ../bin/src/ui_libraryfilterwidget.h:92
 msgid "Entire collection"
@@ -2195,7 +2195,7 @@ msgstr "Exceto entre faixas do mesmo álbum ou ficheiros CUE"
 
 #: ../bin/src/ui_albumcoverexport.h:207
 msgid "Existing covers"
-msgstr "Capas existentes "
+msgstr "Capas existentes"
 
 #: ../bin/src/ui_dynamicplaylistcontrols.h:110
 msgid "Expand"
@@ -2276,7 +2276,7 @@ msgstr "Erro ao obter os podcasts"
 msgid ""
 "Failed to get channel list:\n"
 "%1"
-msgstr ""
+msgstr "Falha em obter a lista de canais:\n%1"
 
 #: internet/podcasts/addpodcastbyurl.cpp:71
 #: internet/podcasts/fixedopmlpage.cpp:55
@@ -2288,7 +2288,7 @@ msgstr "Erro ao carregar o podcast"
 msgid ""
 "Failed to parse %1 response:\n"
 "%2"
-msgstr ""
+msgstr "Falha ao analisar a resposta %1:\n%2"
 
 #: internet/podcasts/podcasturlloader.cpp:177
 msgid "Failed to parse the XML for this RSS feed"
@@ -2299,7 +2299,7 @@ msgstr "Erro ao processar o XML desta fonte RSS"
 msgid ""
 "Failed to update icecast directory:\n"
 "%1"
-msgstr ""
+msgstr "Falha ao atualizar o directório icecast:\n%1"
 
 #: ui/trackselectiondialog.cpp:247
 #, qt-format
@@ -2338,7 +2338,7 @@ msgstr "Erro ao obter a capa do álbum"
 #: internet/subsonic/subsonicdynamicplaylist.cpp:98
 #: internet/subsonic/subsonicdynamicplaylist.cpp:164
 msgid "Fetching playlist items"
-msgstr ""
+msgstr "A pesquisar itens da lista de reprodução"
 
 #: ../bin/src/ui_ripcddialog.h:319
 msgid "File Format"
@@ -2388,7 +2388,7 @@ msgstr "Ficheiros a converter"
 
 #: smartplaylists/querywizardplugin.cpp:83
 msgid "Find songs in your library that match the criteria you specify."
-msgstr "Procurar faixas da coleção que coincidem com os critérios indicados"
+msgstr "Procurar faixas da coleção que coincidem com os critérios indicados."
 
 #: musicbrainz/tagfetcher.cpp:58
 msgid "Fingerprinting song"
@@ -2412,7 +2412,7 @@ msgstr "Tamanho da letra"
 
 #: ../bin/src/ui_spotifysettingspage.h:212
 msgid "For licensing reasons Spotify support is in a separate plugin."
-msgstr "Devido à sua licença, o suplemento do Spotify é disponibilizado separadamente"
+msgstr "Devido à sua licença, o suplemento do Spotify é disponibilizado separadamente."
 
 #: ../bin/src/ui_transcoderoptionsmp3.h:203
 msgid "Force mono encoding"
@@ -2427,7 +2427,7 @@ msgstr "Ignorar dispositivo"
 msgid ""
 "Forgetting a device will remove it from this list and Clementine will have "
 "to rescan all the songs again next time you connect it."
-msgstr "Se optar por ignorar um dispositivo, este será removido da lista e na próxima vez que o ligar, o Clementine terá que procurar as faixas novamente"
+msgstr "Se optar por ignorar um dispositivo, este será removido da lista e na próxima vez que o ligar, o Clementine terá que procurar as faixas novamente."
 
 #: ../bin/src/ui_deviceviewcontainer.h:97
 #: ../bin/src/ui_searchproviderstatuswidget.h:93
@@ -2470,7 +2470,7 @@ msgstr "Imagens por memória"
 
 #: internet/subsonic/subsonicservice.cpp:107
 msgid "Frequently Played Albums"
-msgstr ""
+msgstr "Álbuns reproduzidos frequentemente"
 
 #: moodbar/moodbarrenderer.cpp:173
 msgid "Frozen"
@@ -2628,7 +2628,7 @@ msgstr "Informações do equipamento"
 
 #: ../bin/src/ui_deviceproperties.h:371
 msgid "Hardware information is only available while the device is connected."
-msgstr "As informações só estão disponíveis se o dispositivo estiver ligado"
+msgstr "As informações só estão disponíveis se o dispositivo estiver ligado."
 
 #: ../bin/src/ui_appearancesettingspage.h:325
 msgid "Hide playlist filter toolbar"
@@ -2650,7 +2650,7 @@ msgstr "Alta (1024x1024)"
 
 #: ui/equalizer.cpp:129
 msgid "Hip Hop"
-msgstr "Hip-Hop "
+msgstr "Hip-Hop"
 
 #: internet/subsonic/subsonicsettingspage.cpp:138
 msgid "Host not found, check server URL. Example: http://localhost:4040/"
@@ -2690,11 +2690,11 @@ msgstr "Se ativar esta opção, ao clicar numa faixa da lista de reprodução, p
 msgid ""
 "If you continue, this device will work slowly and songs copied to it may not"
 " work."
-msgstr "Se continuar, o dispositivo irá funcionar lentamente e as faixas copiadas poderão não funcionar"
+msgstr "Se continuar, o dispositivo irá funcionar lentamente e as faixas copiadas poderão não funcionar."
 
 #: ../bin/src/ui_addpodcastbyurl.h:73
 msgid "If you know the URL of a podcast, enter it below and press Go."
-msgstr "Se souber o URL do podcast, introduza-o em baixo e prima Procurar"
+msgstr "Se souber o URL do podcast, introduza-o em baixo e prima Procurar."
 
 #: ../bin/src/ui_organisedialog.h:255
 msgid "Ignore \"The\" in artist names"
@@ -2726,7 +2726,7 @@ msgstr "No espaço de %1 semana(s)"
 msgid ""
 "In dynamic mode new tracks will be chosen and added to the playlist every "
 "time a song finishes."
-msgstr "No modo dinâmico, as faixas são escolhidas e adicionadas à lista de reprodução assim que uma faixa termine"
+msgstr "No modo dinâmico, as faixas são escolhidas e adicionadas à lista de reprodução assim que uma faixa termine."
 
 #: internet/spotify/spotifyservice.cpp:417
 msgid "Inbox"
@@ -3224,11 +3224,11 @@ msgstr "Taxa de dados máxima"
 
 #: ../bin/src/ui_behavioursettingspage.h:449
 msgid "Maximum number of child processes for tag handling (requires restart)"
-msgstr ""
+msgstr "Número máximo de processos secundários para manipulação de etiquetas (requer reinício)"
 
 #: ripper/ripcddialog.cpp:154
 msgid "Media has changed. Reloading"
-msgstr "Multimédia alterada. A recarregar..."
+msgstr "Multimédia alterada. A recarregar"
 
 #: analyzers/analyzercontainer.cpp:67
 #: visualisations/visualisationcontainer.cpp:109
@@ -3391,11 +3391,11 @@ msgstr "Novas faixas"
 
 #: ../bin/src/ui_dynamicplaylistcontrols.h:109
 msgid "New tracks will be added automatically."
-msgstr "As novas faixas serão adicionadas automaticamente"
+msgstr "As novas faixas serão adicionadas automaticamente."
 
 #: internet/subsonic/subsonicservice.cpp:101
 msgid "Newest Albums"
-msgstr ""
+msgstr "Álbuns mais recentes"
 
 #: library/library.cpp:96
 msgid "Newest tracks"
@@ -3424,7 +3424,7 @@ msgstr "Sem imagem de fundo"
 
 #: ui/albumcovermanager.cpp:806
 msgid "No covers to export."
-msgstr "Nenhuma capa para exportar"
+msgstr "Nenhuma capa para exportar."
 
 #: ../bin/src/ui_transcoderoptionsaac.h:145
 msgid "No long blocks"
@@ -3433,7 +3433,7 @@ msgstr "Sem blocos longos"
 #: playlist/playlistcontainer.cpp:406
 msgid ""
 "No matches found.  Clear the search box to show the whole playlist again."
-msgstr "Sem ocorrências. Limpe a caixa de pesquisa para mostrar toda a lista de reprodução"
+msgstr "Sem ocorrências.  Limpe a caixa de pesquisa para mostrar toda a lista de reprodução."
 
 #: ../bin/src/ui_transcoderoptionsaac.h:144
 msgid "No short blocks"
@@ -3515,7 +3515,7 @@ msgstr "Número de episódios a mostrar"
 
 #: ../bin/src/ui_behavioursettingspage.h:450
 msgid "Number of processes:"
-msgstr ""
+msgstr "Número de processos:"
 
 #: ui/notificationssettingspage.cpp:40
 msgid "OSD Preview"
@@ -3603,7 +3603,7 @@ msgstr "Abrir um diretório para efetuar a importação"
 
 #: ../bin/src/ui_deviceproperties.h:381
 msgid "Open device"
-msgstr "Abrir dispositivo..."
+msgstr "Abrir dispositivo"
 
 #: ../bin/src/ui_mainwindow.h:739
 msgid "Open file..."
@@ -3784,7 +3784,7 @@ msgstr "Número de reproduções"
 
 #: core/commandlineoptions.cpp:183
 msgid "Play given playlist"
-msgstr ""
+msgstr "Reproduzir determinada lista de reprodução"
 
 #: core/commandlineoptions.cpp:162
 msgid "Play if stopped, pause if playing"
@@ -3844,7 +3844,7 @@ msgstr "Listas de reprodução"
 
 #: ../data/oauthsuccess.html:38
 msgid "Please close your browser and return to Clementine."
-msgstr "Feche o navegador e volte ao Clementine"
+msgstr "Feche o navegador e volte ao Clementine."
 
 #: internet/lastfm/lastfmservice.cpp:181
 #, qt-format
@@ -3997,7 +3997,7 @@ msgstr "Colocar faixas aleatoriamente"
 
 #: ../bin/src/ui_console.h:134
 msgid "Qt"
-msgstr ""
+msgstr "Qt"
 
 #: ../bin/src/ui_transcoderoptionsflac.h:80
 #: ../bin/src/ui_transcoderoptionsmp3.h:191
@@ -4031,7 +4031,7 @@ msgstr "Colocar esta faixa na fila"
 
 #: ../bin/src/ui_lovedialog.h:115
 msgid "Quickly rate the playing track"
-msgstr ""
+msgstr "Avalie rapidamente a faixa em reprodução"
 
 #: ../bin/src/ui_playbacksettingspage.h:358
 msgid "Radio (equal loudness for all tracks)"
@@ -4048,11 +4048,11 @@ msgstr "Chuva"
 
 #: internet/subsonic/subsonicservice.cpp:104
 msgid "Random Albums"
-msgstr ""
+msgstr "Álbuns aleatórios"
 
 #: internet/subsonic/subsonicservice.cpp:122
 msgid "Random Songs"
-msgstr ""
+msgstr "Músicas aleatórias"
 
 #: ../bin/src/ui_visualisationselector.h:111
 msgid "Random visualization"
@@ -4093,7 +4093,7 @@ msgstr "Realmente cancelar?"
 
 #: internet/subsonic/subsonicservice.cpp:115
 msgid "Recently Played Albums"
-msgstr ""
+msgstr "Álbuns reproduzidos recentemente"
 
 #: internet/subsonic/subsonicsettingspage.cpp:161
 msgid "Redirect limit exceeded, verify server configuration."
@@ -4250,7 +4250,7 @@ msgstr "Reiniciar a faixa atual e passar para a anterior se clicar novamente"
 #: core/commandlineoptions.cpp:176
 msgid ""
 "Restart the track, or play the previous track if within 8 seconds of start."
-msgstr "Reiniciar faixa ou reproduzir a anterior se o tempo de reprodução for inferior a 8 segundos"
+msgstr "Reiniciar faixa ou reproduzir a anterior se o tempo de reprodução for inferior a 8 segundos."
 
 #: ../bin/src/ui_organisedialog.h:257
 msgid "Restrict to ASCII characters"
@@ -4891,7 +4891,7 @@ msgstr "Com estrela"
 
 #: internet/subsonic/subsonicservice.cpp:119
 msgid "Starred Albums"
-msgstr ""
+msgstr "Álbuns favoritos"
 
 #: ripper/ripcddialog.cpp:73
 msgid "Start ripping"
@@ -5072,7 +5072,7 @@ msgstr "Obrigado a"
 #: ui/globalshortcutssettingspage.cpp:172
 #, qt-format
 msgid "The \"%1\" command could not be started."
-msgstr "O comando \"%1\" não pôde ser iniciado"
+msgstr "O comando \"%1\" não pôde ser iniciado."
 
 #: ../bin/src/ui_appearancesettingspage.h:308
 msgid "The album cover of the currently playing song"
@@ -5089,15 +5089,15 @@ msgstr "A descoberta está ocupada"
 
 #: smartplaylists/searchtermwidget.cpp:375
 msgid "The second value must be greater than the first one!"
-msgstr "O segundo valor tem que ser superior ao primeiro"
+msgstr "O segundo valor tem que ser superior ao primeiro!"
 
 #: ui/coverfromurldialog.cpp:72
 msgid "The site you requested does not exist!"
-msgstr "O sítio web indicado não existe"
+msgstr "O sítio web indicado não existe!"
 
 #: ui/coverfromurldialog.cpp:84
 msgid "The site you requested is not an image!"
-msgstr "O sítio web indicado não é uma imagem"
+msgstr "O sítio web indicado não é uma imagem!"
 
 #: internet/subsonic/subsonicsettingspage.cpp:120
 msgid ""
@@ -5161,7 +5161,7 @@ msgstr "Estes diretórios vão ser analisadas para criar a sua coleção"
 msgid ""
 "These settings are used in the \"Transcode Music\" dialog, and when "
 "converting music before copying it to a device."
-msgstr "Estas definições são utilizadas na \"Conversão de ficheiros\", no momento anterior à cópia para o dispositivo"
+msgstr "Estas definições são utilizadas na \"Conversão de ficheiros\", no momento anterior à cópia para o dispositivo."
 
 #: library/savedgroupingmanager.cpp:39
 msgid "Third Level"
@@ -5189,7 +5189,7 @@ msgstr "Pode alterar esta opção nas preferências"
 msgid ""
 "This device must be connected and opened before Clementine can see what file"
 " formats it supports."
-msgstr "Este dispositivo deve estar ligado e aberto, para que o Clementine verifique os tipos de formatos suportados"
+msgstr "Este dispositivo deve estar ligado e aberto, para que o Clementine verifique os tipos de formatos suportados."
 
 #: ../bin/src/ui_deviceproperties.h:374
 msgid "This device supports the following file formats:"
@@ -5202,11 +5202,11 @@ msgstr "O dispositivo não vai funcionar corretamente"
 #: devices/devicemanager.cpp:519
 msgid ""
 "This is an MTP device, but you compiled Clementine without libmtp support."
-msgstr "Este é um dispositivo MTP, mas o Clementine foi compilado sem suporte a libmtp"
+msgstr "Este é um dispositivo MTP, mas o Clementine foi compilado sem suporte a libmtp."
 
 #: devices/devicemanager.cpp:531
 msgid "This is an iPod, but you compiled Clementine without libgpod support."
-msgstr "Este é um dispositivo iPod, mas o Clementine foi compilado sem suporte a libgpod"
+msgstr "Este é um dispositivo iPod, mas o Clementine foi compilado sem suporte a libgpod."
 
 #: devices/devicemanager.cpp:267
 msgid ""
@@ -5271,7 +5271,7 @@ msgstr "Demasiados reencaminhamentos"
 
 #: internet/subsonic/subsonicservice.cpp:111
 msgid "Top Rated Albums"
-msgstr ""
+msgstr "Álbuns melhor avaliados"
 
 #: internet/spotify/spotifyservice.cpp:423
 msgid "Top tracks"
@@ -5670,7 +5670,7 @@ msgstr "Wii Remote %1: ligado"
 #: widgets/osd.cpp:276
 #, qt-format
 msgid "Wii Remote %1: critical battery (%2%) "
-msgstr "Wii Remote %1: bateria em estado crítico (%2%)"
+msgstr "Wii Remote %1: bateria em estado crítico (%2%) "
 
 #: widgets/osd.cpp:251
 #, qt-format
@@ -5747,7 +5747,7 @@ msgstr "Ano - Álbum"
 
 #: playlist/playlist.cpp:1392
 msgid "Year - original"
-msgstr ""
+msgstr "Ano - original"
 
 #: smartplaylists/searchterm.cpp:427
 msgid "Years"
@@ -5775,30 +5775,30 @@ msgstr "Está prestes a remover uma lista de reprodução que não faz parte das
 
 #: ../bin/src/ui_loginstatewidget.h:168
 msgid "You are not signed in."
-msgstr "Sessão não iniciada"
+msgstr "Sessão não iniciada."
 
 #: widgets/loginstatewidget.cpp:78
 #, qt-format
 msgid "You are signed in as %1."
-msgstr "Sessão iniciada como %1"
+msgstr "Sessão iniciada como %1."
 
 #: widgets/loginstatewidget.cpp:75
 msgid "You are signed in."
-msgstr "Sessão iniciada"
+msgstr "Sessão iniciada."
 
 #: ../bin/src/ui_groupbydialog.h:122
 msgid "You can change the way the songs in the library are organised."
-msgstr "Pode modificar o modo de organização das faixas na coleção"
+msgstr "Pode modificar o modo de organização das faixas na coleção."
 
 #: internet/magnatune/magnatunesettingspage.cpp:59
 msgid ""
 "You can listen to Magnatune songs for free without an account.  Purchasing a"
 " membership removes the messages at the end of each track."
-msgstr "Pode ouvir as faixa Magnatune sem possuir uma conta. Se aderir ao serviço, a mensagem no final de cada faixa será removida"
+msgstr "Pode ouvir as faixa Magnatune sem possuir uma conta.  Se aderir ao serviço, a mensagem no final de cada faixa será removida."
 
 #: ../bin/src/ui_backgroundstreamssettingspage.h:56
 msgid "You can listen to background streams at the same time as other music."
-msgstr "Pode ouvir as emissões secundárias, em simultâneo com outras faixas"
+msgstr "Pode ouvir as emissões em segundo plano, em simultâneo com outras faixas."
 
 #: ../bin/src/ui_wiimotesettingspage.h:174
 msgid ""
@@ -5809,7 +5809,7 @@ msgstr "Pode utilizar o seu Wii Remote para controlar o Clementine. Consulte o <
 
 #: internet/spotify/spotifysettingspage.cpp:149
 msgid "You do not have a Spotify Premium account."
-msgstr "Você não tem uma conta Spotify Premium"
+msgstr "Não tem uma conta Spotify Premium."
 
 #: internet/digitally/digitallyimportedclient.cpp:96
 msgid "You do not have an active subscription"
@@ -5838,7 +5838,7 @@ msgstr "Tem que abrir as preferências do sistema e permitir que o Clementine po
 
 #: ../bin/src/ui_behavioursettingspage.h:400
 msgid "You will need to restart Clementine if you change the language."
-msgstr "Se mudar o idioma, tem que reiniciar o Clementine para aplicar as alterações"
+msgstr "Se mudar o idioma, tem que reiniciar o Clementine para aplicar as alterações."
 
 #: ../bin/src/ui_networkremotesettingspage.h:240
 msgid "Your IP address:"
@@ -5864,7 +5864,7 @@ msgstr "Os seus envios: %1"
 
 #: visualisations/visualisationcontainer.cpp:161
 msgid "Your system is missing OpenGL support, visualizations are unavailable."
-msgstr "O seu sistema não possui suporte a OpenGL e as visualizações não estão disponíveis"
+msgstr "O seu sistema não possui suporte a OpenGL e as visualizações não estão disponíveis."
 
 #: internet/spotify/spotifysettingspage.cpp:155
 msgid "Your username or password was incorrect."
@@ -5937,7 +5937,7 @@ msgstr "não contém"
 
 #: ../bin/src/ui_console.h:133
 msgid "dump"
-msgstr ""
+msgstr "despejar"
 
 #: smartplaylists/searchterm.cpp:265
 msgid "empty"
@@ -5965,7 +5965,7 @@ msgstr "maior que"
 
 #: ../bin/src/ui_deviceviewcontainer.h:98
 msgid "iPods and USB devices currently don't work on Windows.  Sorry!"
-msgstr "Atualmente, os dispositivos iPod e USB não funcionam em sistemas Windows. Desculpe!"
+msgstr "Atualmente, os dispositivos iPod e USB não funcionam em sistemas Windows.  Desculpe!"
 
 #: smartplaylists/searchterm.cpp:237
 msgid "in the last"
