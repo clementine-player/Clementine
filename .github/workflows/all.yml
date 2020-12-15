@@ -96,6 +96,7 @@ jobs:
       - build_buster_64
       - build_fedora_31
       - build_fedora_32
+      - build_fedora_33
       - build_focal_64
       - build_mac
       - build_mingw
@@ -177,6 +178,76 @@ jobs:
         with:
           name: release_source
           path: bin/clementine-*.tar.xz
+
+  build_fedora_33:
+    name: Build Fedora 33 RPM
+    runs-on: ubuntu-18.04
+    container:
+      image: fedora:33
+    env:
+      RPM_BUILD_NCPUS: "2"
+    steps:
+      - name: Install dependencies
+        run: >
+          dnf install --assumeyes
+          @development-tools
+          alsa-lib-devel
+          boost-devel
+          cmake
+          cryptopp-devel
+          dbus-devel
+          desktop-file-utils
+          fftw-devel
+          gcc-c++
+          gettext
+          git
+          glew-devel
+          gstreamer1-devel
+          gstreamer1-plugins-base-devel
+          hicolor-icon-theme
+          libappstream-glib
+          libcdio-devel
+          libchromaprint-devel
+          libgpod-devel
+          liblastfm-qt5-devel
+          libmtp-devel
+          libnotify-devel
+          openssh
+          pkgconfig
+          protobuf-compiler
+          protobuf-devel
+          pulseaudio-libs-devel
+          qca-qt5-devel
+          qca-qt5-ossl
+          qt5-linguist
+          qt5-qtbase-devel
+          qt5-qtx11extras-devel
+          qt5-rpm-macros
+          rpmdevtools
+          sha2-devel
+          sparsehash-devel
+          sqlite-devel
+          taglib-devel
+          tar
+      - uses: actions/checkout@v1.2.0
+      - name: cmake
+        working-directory: bin
+        run: cmake ..
+      - name: Build source tarball
+        working-directory: bin
+        run: ../dist/maketarball.sh
+      - name: Create rpmbuild directory
+        run: mkdir -p ~/rpmbuild/SOURCES
+      - name: Move source tarball
+        working-directory: bin
+        run: mv clementine-*.tar.xz ~/rpmbuild/SOURCES
+      - name: Build RPM
+        working-directory: bin
+        run: rpmbuild -ba ../dist/clementine.spec
+      - uses: actions/upload-artifact@v2
+        with:
+          name: release_fedora_33
+          path: ~/rpmbuild/RPMS/*/clementine-*.rpm
 
   build_fedora_32:
     name: Build Fedora 32 RPM
