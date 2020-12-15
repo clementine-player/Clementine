@@ -124,7 +124,7 @@ jobs:
     name: Build source tarball
     runs-on: ubuntu-18.04
     container:
-      image: ubuntu:eoan
+      image: ubuntu:focal
     steps:
       - name: Install dependencies
         env:
