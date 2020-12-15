@@ -81,6 +81,8 @@ InternetModel::InternetModel(Application* app, QObject* parent)
   Q_ASSERT(sServices->isEmpty());
 
   merged_model_->setSourceModel(this);
+  connect(merged_model_, SIGNAL(rowsAboutToBeRemoved(QModelIndex, int, int)),
+          SLOT(RowsAboutToBeRemoved(QModelIndex, int, int)));
 
   AddService(new ClassicalRadioService(app, this));
   AddService(new DigitallyImportedService(app, this));
@@ -232,6 +234,48 @@ int InternetModel::rowCount(const QModelIndex& parent) const {
   }
 
   return QStandardItemModel::rowCount(parent);
+}
+
+void InternetModel::RowsAboutToBeRemoved(const QModelIndex& parent, int first,
+                                         int last) {
+  for (int i = first; i <= last; i++) {
+    // Assuming we're always looking at column 0
+    QModelIndex removing =
+        merged_model_->mapToSource(merged_model_->index(first, 0, parent));
+    IndexAboutToBeRemoved(removing);
+  }
+}
+
+void InternetModel::IndexAboutToBeRemoved(const QModelIndex& index) {
+  if (IsInLineage(current_index_, index)) {
+    qLog(Debug) << "Removing current index";
+    // Invalidate index
+    current_index_ = QModelIndex();
+  }
+
+  QModelIndexList::iterator iter = selected_indexes_.begin();
+  while (iter != selected_indexes_.end()) {
+    if (IsInLineage(*iter, index)) {
+      qLog(Debug) << "Removing selected item";
+      iter = selected_indexes_.erase(iter);
+    } else {
+      iter++;
+    }
+  }
+}
+
+bool InternetModel::IsInLineage(QModelIndex d, const QModelIndex& a) {
+  if (!a.isValid()) {
+    return false;
+  }
+
+  while (d.isValid()) {
+    if (d == a) {
+      return true;
+    }
+    d = d.parent();
+  }
+  return false;
 }
 
 bool InternetModel::IsPlayable(const QModelIndex& index) const {
