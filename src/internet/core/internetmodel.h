@@ -186,8 +186,14 @@ class InternetModel : public QStandardItemModel {
 
  private slots:
   void ServiceDeleted();
+  void RowsAboutToBeRemoved(const QModelIndex& parent, int first, int last);
 
  private:
+  // Index is about to be removed from the merged model
+  void IndexAboutToBeRemoved(const QModelIndex& index);
+  // Determine if d or one of its ancestors is equal to a.
+  bool IsInLineage(QModelIndex d, const QModelIndex& a);
+
   QMap<InternetService*, ServiceItem> shown_services_;
 
   static QMap<QString, InternetService*>* sServices;
