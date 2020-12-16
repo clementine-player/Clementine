@@ -446,45 +446,48 @@ void IncomingDataParser::AppendFilesToPlaylist(const pb::remote::Message& msg) {
   if (relative_path.startsWith("/")) relative_path.remove(0, 1);
 
   QFileInfo fi_folder(root_dir, relative_path);
-  if (!fi_folder.exists())
+  if (!fi_folder.exists()) {
     qLog(Warning) << "Remote relative path " << relative_path
                   << " doesn't exist...";
-  else if (!fi_folder.isDir())
+    return;
+  } else if (!fi_folder.isDir()) {
     qLog(Warning) << "Remote relative path " << relative_path
                   << " is not a directory...";
-  else if (root_dir.relativeFilePath(fi_folder.absoluteFilePath())
-               .startsWith("../"))
+    return;
+  } else if (root_dir.relativeFilePath(fi_folder.absoluteFilePath())
+                 .startsWith("../")) {
     qLog(Warning) << "Remote relative path " << relative_path
                   << " should not be accessed...";
-  else {
-    QList<QUrl> urls;
-    QDir dir(fi_folder.absoluteFilePath());
-    for (const auto& file : req_append.files()) {
-      QFileInfo fi(dir, file.c_str());
-      if (fi.exists()) urls << QUrl::fromLocalFile(fi.canonicalFilePath());
-    }
-    if (urls.size()) {
-      MimeData* data = new MimeData;
-      data->setUrls(urls);
-      if (req_append.has_play_now()) data->play_now_ = req_append.play_now();
-      if (req_append.has_clear_first())
-        data->clear_first_ = req_append.clear_first();
-      if (req_append.has_new_playlist_name()) {
-        QString playlist_name =
-            QString::fromStdString(req_append.new_playlist_name());
-        if (!playlist_name.isEmpty()) {
-          data->open_in_new_playlist_ = true;
-          data->name_for_new_playlist_ = playlist_name;
-        }
-      } else if (req_append.has_playlist_id()) {
-        // if playing we will drop the files in another playlist
-        if (app_->player()->GetState() == Engine::Playing)
-          data->playlist_id = req_append.playlist_id();
-        else
-          // as me may play the song, we change the current playlist
-          emit SetCurrentPlaylist(req_append.playlist_id());
+    return;
+  }
+
+  QList<QUrl> urls;
+  QDir dir(fi_folder.absoluteFilePath());
+  for (const auto& file : req_append.files()) {
+    QFileInfo fi(dir, file.c_str());
+    if (fi.exists()) urls << QUrl::fromLocalFile(fi.canonicalFilePath());
+  }
+  if (!urls.isEmpty()) {
+    MimeData* data = new MimeData;
+    data->setUrls(urls);
+    if (req_append.has_play_now()) data->play_now_ = req_append.play_now();
+    if (req_append.has_clear_first())
+      data->clear_first_ = req_append.clear_first();
+    if (req_append.has_new_playlist_name()) {
+      QString playlist_name =
+          QString::fromStdString(req_append.new_playlist_name());
+      if (!playlist_name.isEmpty()) {
+        data->open_in_new_playlist_ = true;
+        data->name_for_new_playlist_ = playlist_name;
       }
-      emit AddToPlaylistSignal(data);
+    } else if (req_append.has_playlist_id()) {
+      // if playing we will drop the files in another playlist
+      if (app_->player()->GetState() == Engine::Playing)
+        data->playlist_id = req_append.playlist_id();
+      else
+        // as me may play the song, we change the current playlist
+        emit SetCurrentPlaylist(req_append.playlist_id());
     }
+    emit AddToPlaylistSignal(data);
   }
 }
