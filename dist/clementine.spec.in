@@ -98,11 +98,11 @@ Features include:
 %build
 cd bin
 %{cmake} .. -DUSE_INSTALL_PREFIX=OFF -DBUNDLE_PROJECTM_PRESETS=ON -DCMAKE_POSITION_INDEPENDENT_CODE=ON
-make %{?_smp_mflags}
+%{cmake_build}
 
 %install
 cd bin
-make install DESTDIR=$RPM_BUILD_ROOT
+%{cmake_install}
 rm -f $RPM_BUILD_ROOT/usr/share/icons/ubuntu-mono-{dark,light}/apps/24/clementine-panel*.png
 
 
