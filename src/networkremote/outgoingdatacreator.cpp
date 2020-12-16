@@ -185,7 +185,7 @@ void OutgoingDataCreator::SendClementineInfo() {
 
   // allowed extensions for REQUEST_FILES and LIST_FILES
   for (const QString& ext : files_music_extensions_)
-    *info->add_files_music_extensions() = ext.toStdString();
+    info->add_files_music_extensions(ext.toStdString());
 
   QString version =
       QString("%1 %2").arg(QCoreApplication::applicationName(),
