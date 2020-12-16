@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 2.8.11)
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x -fpermissive -Wno-c++11-narrowing -U__STRICT_ANSI__")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x -fpermissive -Wno-c++11-narrowing")
 
 if(USE_SYSTEM_GMOCK)
   include_directories(${GMOCK_INCLUDE_DIRS} ${GTEST_INCLUDE_DIRS})
