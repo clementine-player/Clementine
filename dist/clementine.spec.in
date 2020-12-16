@@ -57,7 +57,7 @@ BuildRequires:  pkgconfig(libnotify)
 BuildRequires:  pkgconfig(libudf)
 
 # GStreamer codec dependencies
-Requires:       gstreamer1-plugins-ugly
+Requires:       gstreamer1-plugins-ugly-free
 
 %ifarch x86_64
 Requires:       gstreamer1(decoder-audio/x-vorbis)()(64bit)
