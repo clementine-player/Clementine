@@ -3,11 +3,9 @@ Version:        @CLEMENTINE_VERSION_RPM_V@
 Release:        @CLEMENTINE_VERSION_RPM_R@%{?dist}
 Summary:        A music player and library organiser
 
-Group:          Applications/Multimedia
 License:        GPLv3
 URL:            http://www.clementine-player.org/
 Source0:        %{name}-@CLEMENTINE_VERSION_SPARKLE@.tar.xz
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires:  cmake
 BuildRequires:  make
@@ -106,10 +104,6 @@ make %{?_smp_mflags}
 cd bin
 make install DESTDIR=$RPM_BUILD_ROOT
 rm -f $RPM_BUILD_ROOT/usr/share/icons/ubuntu-mono-{dark,light}/apps/24/clementine-panel*.png
-
-%clean
-cd bin
-make clean
 
 
 %files
