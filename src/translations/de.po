@@ -67,7 +67,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2020-11-28 20:36+0000\n"
+"PO-Revision-Date: 2020-12-17 12:36+0000\n"
 "Last-Translator: John Maguire <john.maguire@gmail.com>\n"
 "Language-Team: German (http://www.transifex.com/davidsansome/clementine/language/de/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -161,7 +161,7 @@ msgid ""
 "%2"
 msgstr "%1 Anfrage fehlgeschlagen:\n%2"
 
-#: playlist/playlistmanager.cpp:432
+#: playlist/playlistmanager.cpp:439
 #, qt-format
 msgid "%1 selected of"
 msgstr "%1 ausgewählt von"
@@ -186,7 +186,7 @@ msgstr "%1 Titel gefunden"
 msgid "%1 songs found (showing %2)"
 msgstr "%1 Titel gefunden (%2 werden angezeigt)"
 
-#: playlist/playlistmanager.cpp:438 playlist/queue.cpp:228
+#: playlist/playlistmanager.cpp:445 playlist/queue.cpp:228
 #, qt-format
 msgid "%1 tracks"
 msgstr "%1 Titel"
@@ -347,7 +347,7 @@ msgstr "0px"
 msgid "1 day"
 msgstr "1 Tag"
 
-#: playlist/playlistmanager.cpp:438 playlist/queue.cpp:228
+#: playlist/playlistmanager.cpp:445 playlist/queue.cpp:228
 msgid "1 track"
 msgstr "1 Titel"
 
@@ -438,7 +438,7 @@ msgstr "<p>Schlüsselwörter beginnen mit %, zum Beispiel: %artist %album %title
 msgid "A Spotify Premium account is required."
 msgstr "Ein Spotify-Premium-Konto ist erforderlich."
 
-#: ../bin/src/ui_networkremotesettingspage.h:233
+#: ../bin/src/ui_networkremotesettingspage.h:354
 msgid "A client can connect only, if the correct code was entered."
 msgstr "Ein Programm kann sich nur verbinden, falls der korrekte Code eingegeben wurde."
 
@@ -540,7 +540,7 @@ msgstr "Wii-Fernbedienung aktivieren/deaktivieren"
 msgid "Add Podcast"
 msgstr "Podcast hinzufügen"
 
-#: ../bin/src/ui_addstreamdialog.h:112
+#: ../bin/src/ui_addstreamdialog.h:124
 msgid "Add Stream"
 msgstr "Datenstrom hinzufügen"
 
@@ -556,7 +556,7 @@ msgstr "Aktion hinzufügen"
 msgid "Add all tracks from a directory and all its subdirectories"
 msgstr "Alle Titel aus einem Verzeichnis, inklusive Unterverzeichnisse, hinzufügen"
 
-#: internet/internetradio/savedradio.cpp:116
+#: internet/internetradio/savedradio.cpp:118
 msgid "Add another stream..."
 msgstr "Einen weiteren Datenstrom hinzufügen …"
 
@@ -564,7 +564,7 @@ msgstr "Einen weiteren Datenstrom hinzufügen …"
 msgid "Add directory..."
 msgstr "Verzeichnis hinzufügen …"
 
-#: ui/mainwindow.cpp:2133
+#: ui/mainwindow.cpp:2144
 msgid "Add file"
 msgstr "Datei hinzufügen"
 
@@ -584,7 +584,7 @@ msgstr "Datei hinzufügen …"
 msgid "Add files to transcode"
 msgstr "Dateien zum Umwandeln hinzufügen"
 
-#: transcoder/transcodedialog.cpp:309 ui/mainwindow.cpp:2160
+#: transcoder/transcodedialog.cpp:309 ui/mainwindow.cpp:2171
 #: ripper/ripcddialog.cpp:202
 msgid "Add folder"
 msgstr "Ordner hinzufügen"
@@ -689,7 +689,7 @@ msgstr "Zur Spotify-Wiedergabeliste hinzufügen"
 msgid "Add to Spotify starred"
 msgstr "Markierte Titel von Spotify hinzufügen"
 
-#: ui/mainwindow.cpp:1934
+#: ui/mainwindow.cpp:1945
 msgid "Add to another playlist"
 msgstr "Zu anderer Wiedergabeliste hinzufügen"
 
@@ -813,11 +813,11 @@ msgstr "Alle Übersetzer"
 msgid "All tracks"
 msgstr "Alle Titel"
 
-#: ../bin/src/ui_networkremotesettingspage.h:242
+#: ../bin/src/ui_networkremotesettingspage.h:363
 msgid "Allow a client to download music from this computer."
 msgstr "Programmen erlauben, Musik von diesem Rechner herunterzuladen."
 
-#: ../bin/src/ui_networkremotesettingspage.h:244
+#: ../bin/src/ui_networkremotesettingspage.h:365
 msgid "Allow downloads"
 msgstr "Herunterladen erlauben"
 
@@ -924,7 +924,7 @@ msgid "As&k when saving"
 msgstr "Beim Speichern nachfragen"
 
 #: ../bin/src/ui_transcodedialog.h:225
-#: ../bin/src/ui_networkremotesettingspage.h:250
+#: ../bin/src/ui_networkremotesettingspage.h:371
 #: ../bin/src/ui_ripcddialog.h:322
 msgid "Audio format"
 msgstr "Tonformat"
@@ -1174,7 +1174,7 @@ msgstr "Nach neuen Episoden suchen"
 msgid "Check for updates"
 msgstr "Auf Aktualisierungen suchen"
 
-#: ui/mainwindow.cpp:830
+#: ui/mainwindow.cpp:836
 msgid "Check for updates..."
 msgstr "Nach Aktualisierungen suchen …"
 
@@ -1473,11 +1473,11 @@ msgstr "Gesamte Musik umwandeln"
 msgid "Convert any music that the device can't play"
 msgstr "Musik umwandeln, die das Gerät nicht wiedergeben kann"
 
-#: ../bin/src/ui_networkremotesettingspage.h:247
+#: ../bin/src/ui_networkremotesettingspage.h:368
 msgid "Convert lossless audiofiles before sending them to the remote."
 msgstr "Tondateien verlustfrei umrechnen, bevor sie zur Fernsteuerung gesendet werden."
 
-#: ../bin/src/ui_networkremotesettingspage.h:249
+#: ../bin/src/ui_networkremotesettingspage.h:370
 msgid "Convert lossless files"
 msgstr "Verlustfreie Dateien umwandeln"
 
@@ -1529,7 +1529,7 @@ msgstr "Details konnten nicht abgerufen werden"
 msgid "Could not log in to Last.fm. Please try again."
 msgstr "Konnte bei Last.fm nicht einloggen. Bitte versuchen Sie es noch einmal."
 
-#: playlist/playlistmanager.cpp:168
+#: playlist/playlistmanager.cpp:170
 msgid "Couldn't create playlist"
 msgstr "Wiedergabeliste konnte nicht erstellt werden"
 
@@ -1708,7 +1708,7 @@ msgid "Delete downloaded data"
 msgstr "Heruntergeladene Dateien löschen"
 
 #: devices/deviceview.cpp:396 library/libraryview.cpp:677
-#: ui/mainwindow.cpp:2514 widgets/fileview.cpp:189
+#: ui/mainwindow.cpp:2525 widgets/fileview.cpp:189
 msgid "Delete files"
 msgstr "Dateien löschen"
 
@@ -1749,11 +1749,11 @@ msgstr "Dateien werden gelöscht"
 msgid "Depth"
 msgstr "Tiefe"
 
-#: ui/mainwindow.cpp:1847
+#: ui/mainwindow.cpp:1858
 msgid "Dequeue selected tracks"
 msgstr "Titel aus der Warteschlange nehmen"
 
-#: ui/mainwindow.cpp:1845
+#: ui/mainwindow.cpp:1856
 msgid "Dequeue track"
 msgstr "Titel aus der Warteschlange nehmen"
 
@@ -1947,13 +1947,17 @@ msgstr "Neue Episoden automatisch herunterladen"
 msgid "Download queued"
 msgstr "Herunterladewarteschlange"
 
-#: ../bin/src/ui_networkremotesettingspage.h:245
+#: ../bin/src/ui_networkremotesettingspage.h:366
 msgid "Download settings"
 msgstr "Herunterladeeinstellungen"
 
-#: ../bin/src/ui_networkremotesettingspage.h:252
-msgid "Download the Android app"
-msgstr "Android-App herunterladen"
+#: ../bin/src/ui_networkremotesettingspage.h:385
+msgid "Download the original Android app"
+msgstr ""
+
+#: ../bin/src/ui_networkremotesettingspage.h:381
+msgid "Download the remote for Desktops, Android and iOS"
+msgstr ""
 
 #: internet/magnatune/magnatuneservice.cpp:279
 msgid "Download this album"
@@ -2025,7 +2029,7 @@ msgstr "Dynamischer Zufallsmix"
 msgid "Edit smart playlist..."
 msgstr "Intelligente Wiedergabeliste bearbeiten …"
 
-#: ui/mainwindow.cpp:1897
+#: ui/mainwindow.cpp:1908
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr "Schlagwort »%1« bearbeiten …"
@@ -2051,7 +2055,7 @@ msgstr "Metadaten bearbeiten …"
 msgid "Edit tracks information..."
 msgstr "Metadaten bearbeiten …"
 
-#: internet/internetradio/savedradio.cpp:111
+#: internet/internetradio/savedradio.cpp:113
 msgid "Edit..."
 msgstr "Bearbeiten …"
 
@@ -2131,7 +2135,7 @@ msgstr "Geben Sie Suchbegriffe unten ein um Podcasts auf gpodder.net zu finden"
 msgid "Enter search terms here"
 msgstr "Sammlung durchsuchen"
 
-#: ../bin/src/ui_addstreamdialog.h:113
+#: ../bin/src/ui_addstreamdialog.h:125
 msgid "Enter the URL of an internet radio stream:"
 msgstr "Die Adresse eines Internetradios eingeben:"
 
@@ -2139,7 +2143,7 @@ msgstr "Die Adresse eines Internetradios eingeben:"
 msgid "Enter the name of the folder"
 msgstr "Geben Sie den Namen des Ordners ein"
 
-#: ../bin/src/ui_networkremotesettingspage.h:238
+#: ../bin/src/ui_networkremotesettingspage.h:359
 msgid "Enter this IP in the App to connect to Clementine."
 msgstr "Diese IP in der App eingeben, um mit Clementine zu verbinden."
 
@@ -2164,8 +2168,8 @@ msgid "Equivalent to --log-levels *:3"
 msgstr "Äquivalent zu --log-levels *:3"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:249
-#: library/libraryview.cpp:671 ui/mainwindow.cpp:2189 ui/mainwindow.cpp:2467
-#: ui/mainwindow.cpp:2645
+#: library/libraryview.cpp:671 ui/mainwindow.cpp:2200 ui/mainwindow.cpp:2478
+#: ui/mainwindow.cpp:2656
 msgid "Error"
 msgstr "Fehler"
 
@@ -2307,7 +2311,7 @@ msgstr "Überblenden"
 msgid "Fading duration"
 msgstr "Dauer:"
 
-#: ui/mainwindow.cpp:2190
+#: ui/mainwindow.cpp:2201
 msgid "Failed reading CD drive"
 msgstr "CD-Laufwerk kann nicht gelesen werden"
 
@@ -2433,6 +2437,10 @@ msgstr "Dateiname"
 #: ui/mainwindow.cpp:272
 msgid "Files"
 msgstr "Dateien"
+
+#: ../bin/src/ui_networkremotesettingspage.h:376
+msgid "Files root folder"
+msgstr ""
 
 #: ../bin/src/ui_transcodedialog.h:214
 msgid "Files to transcode"
@@ -2577,7 +2585,7 @@ msgstr "Kanäle laden"
 msgid "Getting streams"
 msgstr "Datenströme laden"
 
-#: ../bin/src/ui_addstreamdialog.h:115
+#: ../bin/src/ui_addstreamdialog.h:127
 msgid "Give it a name:"
 msgstr "Namen angeben:"
 
@@ -3038,7 +3046,7 @@ msgstr "Bibliothek"
 msgid "Library advanced grouping"
 msgstr "Erweiterte Bibliothekssortierung"
 
-#: ui/mainwindow.cpp:2771
+#: ui/mainwindow.cpp:2782
 msgid "Library rescan notice"
 msgstr "Hinweis beim erneuten durchsuchen der Bibliothek"
 
@@ -3371,13 +3379,17 @@ msgstr "Zur Bibliothek verschieben …"
 msgid "Move up"
 msgstr "Nach oben"
 
-#: transcoder/transcodedialog.cpp:228 ui/mainwindow.cpp:2135
+#: transcoder/transcodedialog.cpp:228 ui/mainwindow.cpp:2146
 msgid "Music"
 msgstr "Musik"
 
 #: ../bin/src/ui_librarysettingspage.h:185
 msgid "Music Library"
 msgstr "Musikbibliothek"
+
+#: ../bin/src/ui_networkremotesettingspage.h:380
+msgid "Music extensions remotely visible"
+msgstr ""
 
 #: core/globalshortcuts.cpp:65 wiimotedev/wiimotesettingspage.cpp:114
 #: ../bin/src/ui_mainwindow.h:763
@@ -3406,7 +3418,7 @@ msgstr "Schmal-Band (NB)"
 msgid "Network Proxy"
 msgstr "Netzwerkvermittlung"
 
-#: ../bin/src/ui_networkremotesettingspage.h:221
+#: ../bin/src/ui_networkremotesettingspage.h:342
 msgid "Network Remote"
 msgstr "Netzwerkfernsteuerung"
 
@@ -3429,7 +3441,7 @@ msgstr "Nie mit der Wiedergabe beginnen"
 msgid "New folder"
 msgstr "Neuer Ordner"
 
-#: ui/mainwindow.cpp:1951 ../bin/src/ui_mainwindow.h:754
+#: ui/mainwindow.cpp:1962 ../bin/src/ui_mainwindow.h:754
 msgid "New playlist"
 msgstr "Neue Wiedergabeliste"
 
@@ -3496,7 +3508,7 @@ msgstr "Keine kurzen Blöcke"
 msgid "None"
 msgstr "Nichts"
 
-#: library/libraryview.cpp:672 ui/mainwindow.cpp:2468 ui/mainwindow.cpp:2646
+#: library/libraryview.cpp:672 ui/mainwindow.cpp:2479 ui/mainwindow.cpp:2657
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Keiner der gewählten Titel war zum Kopieren auf ein Gerät geeignet."
 
@@ -3607,7 +3619,7 @@ msgstr "An"
 msgid "OneDrive"
 msgstr "OneDrive"
 
-#: ../bin/src/ui_networkremotesettingspage.h:226
+#: ../bin/src/ui_networkremotesettingspage.h:347
 msgid ""
 "Only accept connections from clients within the ip ranges:\n"
 "10.x.x.x\n"
@@ -3615,7 +3627,7 @@ msgid ""
 "192.168.x.x"
 msgstr "Verbindungen, nur von Programmen, aus folgenden IP-Bereichen akzeptieren:\n10.x.x.x\n172.16.0.0 - 172.31.255.255\n192.168.x.x"
 
-#: ../bin/src/ui_networkremotesettingspage.h:231
+#: ../bin/src/ui_networkremotesettingspage.h:352
 msgid "Only allow connections from the local network"
 msgstr "Nur Verbindungen aus dem lokalen Netzwerk"
 
@@ -3698,7 +3710,7 @@ msgid "Optimize for quality"
 msgstr "Auf Qualität optimieren"
 
 #: ../bin/src/ui_transcodedialog.h:226
-#: ../bin/src/ui_networkremotesettingspage.h:251
+#: ../bin/src/ui_networkremotesettingspage.h:372
 #: ../bin/src/ui_ripcddialog.h:321
 msgid "Options..."
 msgstr "Optionen …"
@@ -3795,7 +3807,7 @@ msgstr "Party"
 msgid "Password"
 msgstr "Passwort:"
 
-#: core/globalshortcuts.cpp:52 ui/mainwindow.cpp:1159 ui/mainwindow.cpp:1742
+#: core/globalshortcuts.cpp:52 ui/mainwindow.cpp:1165 ui/mainwindow.cpp:1753
 #: ui/qtsystemtrayicon.cpp:185 wiimotedev/wiimotesettingspage.cpp:115
 msgid "Pause"
 msgstr "Pause"
@@ -3823,8 +3835,8 @@ msgstr "Pixel"
 msgid "Plain sidebar"
 msgstr "Einfache Seitenleiste"
 
-#: core/globalshortcuts.cpp:51 ui/mainwindow.cpp:684 ui/mainwindow.cpp:1123
-#: ui/mainwindow.cpp:1144 ui/mainwindow.cpp:1746 ui/qtsystemtrayicon.cpp:173
+#: core/globalshortcuts.cpp:51 ui/mainwindow.cpp:684 ui/mainwindow.cpp:1129
+#: ui/mainwindow.cpp:1150 ui/mainwindow.cpp:1757 ui/qtsystemtrayicon.cpp:173
 #: ui/qtsystemtrayicon.cpp:199 wiimotedev/wiimotesettingspage.cpp:108
 #: ../bin/src/ui_mainwindow.h:720
 msgid "Play"
@@ -3847,11 +3859,11 @@ msgstr "Wiedergeben wenn angehalten, pausieren bei Wiedergabe"
 msgid "Play if there is nothing already playing"
 msgstr "Mit der Wiedergabe beginnen, falls gerade nichts anderes abgespielt wird"
 
-#: library/libraryview.cpp:395 ui/mainwindow.cpp:1858
+#: library/libraryview.cpp:395 ui/mainwindow.cpp:1869
 msgid "Play next"
 msgstr "Nächsten Titel wiedergeben"
 
-#: ui/mainwindow.cpp:1856
+#: ui/mainwindow.cpp:1867
 msgid "Play selected tracks next"
 msgstr "Ausgewählte Titel als Nächstes wiedergeben"
 
@@ -3873,7 +3885,7 @@ msgstr "Spielereinstellungen"
 
 #: playlist/playlistcontainer.cpp:310 playlist/playlistlistcontainer.cpp:328
 #: playlist/playlistmanager.cpp:88 playlist/playlistmanager.cpp:157
-#: playlist/playlistmanager.cpp:528 playlist/playlisttabbar.cpp:367
+#: playlist/playlistmanager.cpp:537 playlist/playlisttabbar.cpp:367
 msgid "Playlist"
 msgstr "Wiedergabeliste"
 
@@ -3931,7 +3943,7 @@ msgid "Popup duration"
 msgstr "Anzeigedauer"
 
 #: ../bin/src/ui_networkproxysettingspage.h:165
-#: ../bin/src/ui_networkremotesettingspage.h:224
+#: ../bin/src/ui_networkremotesettingspage.h:345
 msgid "Port"
 msgstr "Anschluss (Port)"
 
@@ -4072,12 +4084,12 @@ msgstr "Gerät wird abgefragt …"
 msgid "Queue Manager"
 msgstr "Warteschlangenverwaltung"
 
-#: ui/mainwindow.cpp:1851
+#: ui/mainwindow.cpp:1862
 msgid "Queue selected tracks"
 msgstr "Titel in die Warteschlange einreihen"
 
 #: globalsearch/globalsearchview.cpp:464 library/libraryview.cpp:392
-#: ui/mainwindow.cpp:1849
+#: ui/mainwindow.cpp:1860
 msgid "Queue track"
 msgstr "Titel in die Warteschlange einreihen"
 
@@ -4191,7 +4203,7 @@ msgstr "Clementine so starten, wie es beendet wurde"
 msgid "Remember my choice"
 msgstr "Meine Auswahl merken"
 
-#: internet/internetradio/savedradio.cpp:108
+#: internet/internetradio/savedradio.cpp:110
 #: ../bin/src/ui_savedgroupingmanager.h:103 ../bin/src/ui_queuemanager.h:151
 #: ../bin/src/ui_transcodedialog.h:223
 msgid "Remove"
@@ -4283,7 +4295,7 @@ msgstr "Replay Gain"
 msgid "Repopulate"
 msgstr "Neu bestücken"
 
-#: ../bin/src/ui_networkremotesettingspage.h:235
+#: ../bin/src/ui_networkremotesettingspage.h:356
 msgid "Require authentication code"
 msgstr "Legitimierungscode erzwingen"
 
@@ -4335,6 +4347,10 @@ msgstr "Audio-CD auslesen"
 #: ui/equalizer.cpp:149
 msgid "Rock"
 msgstr "Rock"
+
+#: ../bin/src/ui_networkremotesettingspage.h:374
+msgid "Root folder that will be browsable from the network remote"
+msgstr ""
 
 #: ../bin/src/ui_console.h:130
 msgid "Run"
@@ -4397,7 +4413,7 @@ msgctxt "Save playlist menu action."
 msgid "Save playlist"
 msgstr "Wiedergabeliste speichern"
 
-#: playlist/playlistmanager.cpp:236
+#: playlist/playlistmanager.cpp:238
 msgctxt "Title of the playlist save dialog."
 msgid "Save playlist"
 msgstr "Wiedergabeliste speichern"
@@ -4418,7 +4434,7 @@ msgstr "Wenn möglich, Bewertungen in Dateischlagworten speichern"
 msgid "Save statistics in file tags when possible"
 msgstr "Wenn möglich, Statistiken in Dateischlagworten speichern"
 
-#: ../bin/src/ui_addstreamdialog.h:114
+#: ../bin/src/ui_addstreamdialog.h:126
 msgid "Save this stream in the Internet tab"
 msgstr "Diesen Datenstrom im Internetreiter sichern"
 
@@ -4571,6 +4587,14 @@ msgstr "Alle auswählen"
 msgid "Select None"
 msgstr "Auswahl aufheben"
 
+#: ui/filechooserwidget.cpp:95
+msgid "Select a directory"
+msgstr ""
+
+#: ui/filechooserwidget.cpp:92
+msgid "Select a file"
+msgstr ""
+
 #: ../bin/src/ui_appearancesettingspage.h:303
 msgid "Select background color:"
 msgstr "Hintergrundfarbe:"
@@ -4619,7 +4643,7 @@ msgstr "Server-Details"
 msgid "Service offline"
 msgstr "Dienst nicht verfügbar"
 
-#: ui/mainwindow.cpp:1896
+#: ui/mainwindow.cpp:1907
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr "%1 zu »%2« einstellen …"
@@ -4632,7 +4656,7 @@ msgstr "Setze Lautstärke auf <value>%"
 msgid "Set value for all selected tracks..."
 msgstr "Wert für ausgewählte Titel einstellen …"
 
-#: ../bin/src/ui_networkremotesettingspage.h:223
+#: ../bin/src/ui_networkremotesettingspage.h:344
 msgid "Settings"
 msgstr "Einstellungen"
 
@@ -4832,11 +4856,11 @@ msgstr "Übersprungzähler"
 msgid "Skip forwards in playlist"
 msgstr "Nächsten Titel in der Wiedergabeliste"
 
-#: ui/mainwindow.cpp:1867
+#: ui/mainwindow.cpp:1878
 msgid "Skip selected tracks"
 msgstr "Ausgewählte Titel überspringen"
 
-#: ui/mainwindow.cpp:1865
+#: ui/mainwindow.cpp:1876
 msgid "Skip track"
 msgstr "Titel überspringen"
 
@@ -5157,7 +5181,7 @@ msgid ""
 "license key. Visit subsonic.org for details."
 msgstr "Die Versuchsperiode für den Subsonic-Server ist abgelaufen. Bitte machen Sie eine Spende, um einen Lizenzschlüssel zu erhalten. Details finden sich auf subsonic.org."
 
-#: ui/mainwindow.cpp:2762
+#: ui/mainwindow.cpp:2773
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -5199,7 +5223,7 @@ msgid ""
 "continue?"
 msgstr "Diese Dateien werden vom Gerät gelöscht. Möchten Sie wirklich fortfahren?"
 
-#: library/libraryview.cpp:678 ui/mainwindow.cpp:2515 widgets/fileview.cpp:190
+#: library/libraryview.cpp:678 ui/mainwindow.cpp:2526 widgets/fileview.cpp:190
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -5301,7 +5325,7 @@ msgstr "Clementine-Bildschirmanzeige umschalten"
 msgid "Toggle fullscreen"
 msgstr "Vollbild an/aus"
 
-#: ui/mainwindow.cpp:1853
+#: ui/mainwindow.cpp:1864
 msgid "Toggle queue status"
 msgstr "Einreihungsstatus ändern"
 
@@ -5391,6 +5415,10 @@ msgstr "Adresse"
 msgid "URL"
 msgstr "URL"
 
+#: ../bin/src/ui_addstreamdialog.h:128
+msgid "URL of its Logo:"
+msgstr ""
+
 #: core/commandlineoptions.cpp:159
 msgid "URL(s)"
 msgstr "Adresse(n)"
@@ -5416,7 +5444,7 @@ msgstr "Konnte %1 nicht herunterladen (%2)"
 #: core/song.cpp:466 library/librarymodel.cpp:376 library/librarymodel.cpp:381
 #: library/librarymodel.cpp:385 library/librarymodel.cpp:1185
 #: library/savedgroupingmanager.cpp:105 playlist/playlistdelegates.cpp:305
-#: playlist/playlistmanager.cpp:535 playlist/playlistmanager.cpp:536
+#: playlist/playlistmanager.cpp:544 playlist/playlistmanager.cpp:545
 #: songinfo/streamdiscoverer.cpp:88 ui/albumcoverchoicecontroller.cpp:132
 #: ui/edittagdialog.cpp:465 ui/edittagdialog.cpp:511
 msgid "Unknown"
@@ -5435,11 +5463,11 @@ msgstr "Unbekannter Fehler"
 msgid "Unset cover"
 msgstr "Titelbild entfernen"
 
-#: ui/mainwindow.cpp:1863
+#: ui/mainwindow.cpp:1874
 msgid "Unskip selected tracks"
 msgstr "Überspringen der ausgewählten Titel aufheben"
 
-#: ui/mainwindow.cpp:1861
+#: ui/mainwindow.cpp:1872
 msgid "Unskip track"
 msgstr "Titel nicht überspringen"
 
@@ -5522,7 +5550,7 @@ msgstr "Ein benutzerdefiniertes Farbschema verwenden"
 msgid "Use a custom message for notifications"
 msgstr "Einen benutzerdefinierten Text für Benachrichtigungen benutzen"
 
-#: ../bin/src/ui_networkremotesettingspage.h:222
+#: ../bin/src/ui_networkremotesettingspage.h:343
 msgid "Use a network remote control"
 msgstr "Eine Netzwerkfernsteuerung verwenden"
 
@@ -5600,7 +5628,7 @@ msgid "Variable bit rate"
 msgstr "Variable Bitrate"
 
 #: globalsearch/globalsearchmodel.cpp:110 library/librarymodel.cpp:302
-#: playlist/playlistmanager.cpp:547 ui/albumcovermanager.cpp:266
+#: playlist/playlistmanager.cpp:556 ui/albumcovermanager.cpp:266
 msgid "Various artists"
 msgstr "Verschiedene Interpreten"
 
@@ -5769,7 +5797,7 @@ msgid ""
 "well?"
 msgstr "Möchten Sie die anderen Titel dieses Albums ebenfalls unter »Verschiedene Interpreten« anzeigen?"
 
-#: ui/mainwindow.cpp:2769
+#: ui/mainwindow.cpp:2780
 msgid "Would you like to run a full rescan right now?"
 msgstr "Möchten Sie jetzt Ihre Musiksammlung erneut einlesen?"
 
@@ -5842,6 +5870,14 @@ msgstr "Sie sind angemeldet."
 msgid "You can change the way the songs in the library are organised."
 msgstr "Sie können hier einstellen, wie Ihre Bibliothek sortiert wird."
 
+#: ui/networkremotesettingspage.cpp:162
+#, qt-format
+msgid ""
+"You can find <a href=\"%1\">here on GitHub</a> the new cross platform "
+"remote.<br/>It is available on <b>Linux</b>, <b>MacOS</b> and "
+"<b>Windows</b><br/>"
+msgstr ""
+
 #: internet/magnatune/magnatunesettingspage.cpp:59
 msgid ""
 "You can listen to Magnatune songs for free without an account.  Purchasing a"
@@ -5892,7 +5928,7 @@ msgstr "Sie müssen die Systemeinstellungen öffnen und »<span style=\" font-st
 msgid "You will need to restart Clementine if you change the language."
 msgstr "Sie müssen Clementine nach dem Ändern der Sprache neu starten."
 
-#: ../bin/src/ui_networkremotesettingspage.h:240
+#: ../bin/src/ui_networkremotesettingspage.h:361
 msgid "Your IP address:"
 msgstr "Ihre IP-Adresse:"
 
@@ -5968,9 +6004,19 @@ msgstr "größte zuerst"
 msgid "bpm"
 msgstr "BPM"
 
+#: ../bin/src/ui_networkremotesettingspage.h:378
+msgid ""
+"coma separated list of the allowed extensions that will be visible from the "
+"network remote (ex: m3u,mp3,flac,ogg,wav)"
+msgstr ""
+
 #: smartplaylists/searchterm.cpp:249
 msgid "contains"
 msgstr "enthält"
+
+#: ../bin/src/ui_networkremotesettingspage.h:382
+msgid "desktop_remote"
+msgstr ""
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:221
 #: ../bin/src/ui_transcoderoptionsvorbis.h:206
@@ -6076,9 +6122,11 @@ msgstr "am"
 msgid "options"
 msgstr "Einstellungen"
 
-#: ../bin/src/ui_networkremotesettingspage.h:253
-msgid "or scan the QR code!"
-msgstr "oder den QR-Code einlesen!"
+#: ../bin/src/ui_networkremotesettingspage.h:383
+#: ../bin/src/ui_networkremotesettingspage.h:384
+#: ../bin/src/ui_networkremotesettingspage.h:386
+msgid "or scan the QR code: "
+msgstr ""
 
 #: widgets/didyoumean.cpp:56
 msgid "press enter"

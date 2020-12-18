@@ -21,7 +21,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2020-11-28 20:36+0000\n"
+"PO-Revision-Date: 2020-12-17 12:36+0000\n"
 "Last-Translator: John Maguire <john.maguire@gmail.com>\n"
 "Language-Team: Romanian (http://www.transifex.com/davidsansome/clementine/language/ro/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -115,7 +115,7 @@ msgid ""
 "%2"
 msgstr "%1 cerere eșuată:\n%2"
 
-#: playlist/playlistmanager.cpp:432
+#: playlist/playlistmanager.cpp:439
 #, qt-format
 msgid "%1 selected of"
 msgstr "%1 selectat din"
@@ -140,7 +140,7 @@ msgstr "%1 melodii găsite"
 msgid "%1 songs found (showing %2)"
 msgstr "%1 melodii găsite (se afișează %2)"
 
-#: playlist/playlistmanager.cpp:438 playlist/queue.cpp:228
+#: playlist/playlistmanager.cpp:445 playlist/queue.cpp:228
 #, qt-format
 msgid "%1 tracks"
 msgstr "%1 piese"
@@ -301,7 +301,7 @@ msgstr "0px"
 msgid "1 day"
 msgstr "1 zi"
 
-#: playlist/playlistmanager.cpp:438 playlist/queue.cpp:228
+#: playlist/playlistmanager.cpp:445 playlist/queue.cpp:228
 msgid "1 track"
 msgstr "1 piesă"
 
@@ -392,7 +392,7 @@ msgstr "<p>Jetoanele încep cu %, de exemplu:% artist %album %titlu </ p>\n\n<p>
 msgid "A Spotify Premium account is required."
 msgstr "Este necesar un cont Spotify Premium."
 
-#: ../bin/src/ui_networkremotesettingspage.h:233
+#: ../bin/src/ui_networkremotesettingspage.h:354
 msgid "A client can connect only, if the correct code was entered."
 msgstr "Se poate conecta un singur client, dacă a fost introdus codul corect."
 
@@ -494,7 +494,7 @@ msgstr "Activează/Dezactivează Telecomanda Wii"
 msgid "Add Podcast"
 msgstr "Adaugă podcast"
 
-#: ../bin/src/ui_addstreamdialog.h:112
+#: ../bin/src/ui_addstreamdialog.h:124
 msgid "Add Stream"
 msgstr "Adaugă flux"
 
@@ -510,7 +510,7 @@ msgstr "Adaugă acțiune"
 msgid "Add all tracks from a directory and all its subdirectories"
 msgstr "Adaugă toate piesele dintr-un director și din toate subdirectoarele sale"
 
-#: internet/internetradio/savedradio.cpp:116
+#: internet/internetradio/savedradio.cpp:118
 msgid "Add another stream..."
 msgstr "Adaugă alt flux..."
 
@@ -518,7 +518,7 @@ msgstr "Adaugă alt flux..."
 msgid "Add directory..."
 msgstr "Adăugare dosar..."
 
-#: ui/mainwindow.cpp:2133
+#: ui/mainwindow.cpp:2144
 msgid "Add file"
 msgstr "Adăugare fișier"
 
@@ -538,7 +538,7 @@ msgstr "Adaugă fișier..."
 msgid "Add files to transcode"
 msgstr "Adaugă fișiere pentru transcodat"
 
-#: transcoder/transcodedialog.cpp:309 ui/mainwindow.cpp:2160
+#: transcoder/transcodedialog.cpp:309 ui/mainwindow.cpp:2171
 #: ripper/ripcddialog.cpp:202
 msgid "Add folder"
 msgstr "Adăugare dosar"
@@ -643,7 +643,7 @@ msgstr "Adaugă la listele de redare Spotify"
 msgid "Add to Spotify starred"
 msgstr "Adaugă la Spotify starred"
 
-#: ui/mainwindow.cpp:1934
+#: ui/mainwindow.cpp:1945
 msgid "Add to another playlist"
 msgstr "Adaugă la altă listă de redare"
 
@@ -767,11 +767,11 @@ msgstr "Toți traducătorii"
 msgid "All tracks"
 msgstr "Toate piesele"
 
-#: ../bin/src/ui_networkremotesettingspage.h:242
+#: ../bin/src/ui_networkremotesettingspage.h:363
 msgid "Allow a client to download music from this computer."
 msgstr "Permite unui client să descarce muzică din acest computer."
 
-#: ../bin/src/ui_networkremotesettingspage.h:244
+#: ../bin/src/ui_networkremotesettingspage.h:365
 msgid "Allow downloads"
 msgstr "Permite descărcări"
 
@@ -878,7 +878,7 @@ msgid "As&k when saving"
 msgstr "Întrea&bă când se salvează"
 
 #: ../bin/src/ui_transcodedialog.h:225
-#: ../bin/src/ui_networkremotesettingspage.h:250
+#: ../bin/src/ui_networkremotesettingspage.h:371
 #: ../bin/src/ui_ripcddialog.h:322
 msgid "Audio format"
 msgstr "Format audio"
@@ -1128,7 +1128,7 @@ msgstr "Verifică după episoade noi"
 msgid "Check for updates"
 msgstr "Verifică după actualizări"
 
-#: ui/mainwindow.cpp:830
+#: ui/mainwindow.cpp:836
 msgid "Check for updates..."
 msgstr "Verifică după actualizări..."
 
@@ -1427,11 +1427,11 @@ msgstr "Convertește toată muzica"
 msgid "Convert any music that the device can't play"
 msgstr "Convertește orice muzică pe care nu o poate reda dispozitivul"
 
-#: ../bin/src/ui_networkremotesettingspage.h:247
+#: ../bin/src/ui_networkremotesettingspage.h:368
 msgid "Convert lossless audiofiles before sending them to the remote."
 msgstr "Convertește fișierele audio fără pierdere, înainte de trimiterea lor la distanță."
 
-#: ../bin/src/ui_networkremotesettingspage.h:249
+#: ../bin/src/ui_networkremotesettingspage.h:370
 msgid "Convert lossless files"
 msgstr "Convertește fișiere fără pierdere"
 
@@ -1483,7 +1483,7 @@ msgstr "Nu s-a putut obține detalii"
 msgid "Could not log in to Last.fm. Please try again."
 msgstr "Nu s.a putut autentifica la Last.fm. Încercați din nou."
 
-#: playlist/playlistmanager.cpp:168
+#: playlist/playlistmanager.cpp:170
 msgid "Couldn't create playlist"
 msgstr "Nu se poate crea lista de redare"
 
@@ -1662,7 +1662,7 @@ msgid "Delete downloaded data"
 msgstr "Șterge datele descărcate"
 
 #: devices/deviceview.cpp:396 library/libraryview.cpp:677
-#: ui/mainwindow.cpp:2514 widgets/fileview.cpp:189
+#: ui/mainwindow.cpp:2525 widgets/fileview.cpp:189
 msgid "Delete files"
 msgstr "Șterge fișiere"
 
@@ -1703,11 +1703,11 @@ msgstr "Se șterg fișierele"
 msgid "Depth"
 msgstr "Adâncime"
 
-#: ui/mainwindow.cpp:1847
+#: ui/mainwindow.cpp:1858
 msgid "Dequeue selected tracks"
 msgstr "Elimină din coadă piesele selectate"
 
-#: ui/mainwindow.cpp:1845
+#: ui/mainwindow.cpp:1856
 msgid "Dequeue track"
 msgstr "Elimină din coadă piesa"
 
@@ -1901,13 +1901,17 @@ msgstr "Descarcă automat noile episoade"
 msgid "Download queued"
 msgstr "Descarcă coada"
 
-#: ../bin/src/ui_networkremotesettingspage.h:245
+#: ../bin/src/ui_networkremotesettingspage.h:366
 msgid "Download settings"
 msgstr "Descărcare setări"
 
-#: ../bin/src/ui_networkremotesettingspage.h:252
-msgid "Download the Android app"
-msgstr "Descarcă aplicația Android"
+#: ../bin/src/ui_networkremotesettingspage.h:385
+msgid "Download the original Android app"
+msgstr ""
+
+#: ../bin/src/ui_networkremotesettingspage.h:381
+msgid "Download the remote for Desktops, Android and iOS"
+msgstr ""
 
 #: internet/magnatune/magnatuneservice.cpp:279
 msgid "Download this album"
@@ -1979,7 +1983,7 @@ msgstr "Mixare aleatoare dinamică"
 msgid "Edit smart playlist..."
 msgstr "Editare listă de redare inteligentă..."
 
-#: ui/mainwindow.cpp:1897
+#: ui/mainwindow.cpp:1908
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr "Editare eticheta \"%1\"..."
@@ -2005,7 +2009,7 @@ msgstr "Editare informație piesă..."
 msgid "Edit tracks information..."
 msgstr "Editare informație piese..."
 
-#: internet/internetradio/savedradio.cpp:111
+#: internet/internetradio/savedradio.cpp:113
 msgid "Edit..."
 msgstr "Editare..."
 
@@ -2085,7 +2089,7 @@ msgstr "Introduceți termeni de căutare mai jos pentru a găsi podcasturi pe gp
 msgid "Enter search terms here"
 msgstr "Introduceți aici termeni de căutare"
 
-#: ../bin/src/ui_addstreamdialog.h:113
+#: ../bin/src/ui_addstreamdialog.h:125
 msgid "Enter the URL of an internet radio stream:"
 msgstr "Introduceți adresa URL a unui flux radio de pe internet:"
 
@@ -2093,7 +2097,7 @@ msgstr "Introduceți adresa URL a unui flux radio de pe internet:"
 msgid "Enter the name of the folder"
 msgstr "Introduceți numele dosarului"
 
-#: ../bin/src/ui_networkremotesettingspage.h:238
+#: ../bin/src/ui_networkremotesettingspage.h:359
 msgid "Enter this IP in the App to connect to Clementine."
 msgstr "Introduceți acest IP în aplicație pentru conectarea la Clementine."
 
@@ -2118,8 +2122,8 @@ msgid "Equivalent to --log-levels *:3"
 msgstr "Echivalent cu --log-levels *:3"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:249
-#: library/libraryview.cpp:671 ui/mainwindow.cpp:2189 ui/mainwindow.cpp:2467
-#: ui/mainwindow.cpp:2645
+#: library/libraryview.cpp:671 ui/mainwindow.cpp:2200 ui/mainwindow.cpp:2478
+#: ui/mainwindow.cpp:2656
 msgid "Error"
 msgstr "Eroare"
 
@@ -2261,7 +2265,7 @@ msgstr "Se estompează"
 msgid "Fading duration"
 msgstr "Durata estompării"
 
-#: ui/mainwindow.cpp:2190
+#: ui/mainwindow.cpp:2201
 msgid "Failed reading CD drive"
 msgstr "A eșuat citirea unității CD"
 
@@ -2387,6 +2391,10 @@ msgstr "Nume fișier"
 #: ui/mainwindow.cpp:272
 msgid "Files"
 msgstr "Fișiere"
+
+#: ../bin/src/ui_networkremotesettingspage.h:376
+msgid "Files root folder"
+msgstr ""
 
 #: ../bin/src/ui_transcodedialog.h:214
 msgid "Files to transcode"
@@ -2531,7 +2539,7 @@ msgstr "Obținere canalele"
 msgid "Getting streams"
 msgstr "Obținere fluxuri"
 
-#: ../bin/src/ui_addstreamdialog.h:115
+#: ../bin/src/ui_addstreamdialog.h:127
 msgid "Give it a name:"
 msgstr "Dați-i un nume:"
 
@@ -2992,7 +3000,7 @@ msgstr "Colecție"
 msgid "Library advanced grouping"
 msgstr "Grupare avansată colecție"
 
-#: ui/mainwindow.cpp:2771
+#: ui/mainwindow.cpp:2782
 msgid "Library rescan notice"
 msgstr "Notă rescanare colecție"
 
@@ -3325,13 +3333,17 @@ msgstr "Mută în colecție..."
 msgid "Move up"
 msgstr "Mută în sus"
 
-#: transcoder/transcodedialog.cpp:228 ui/mainwindow.cpp:2135
+#: transcoder/transcodedialog.cpp:228 ui/mainwindow.cpp:2146
 msgid "Music"
 msgstr "Muzică"
 
 #: ../bin/src/ui_librarysettingspage.h:185
 msgid "Music Library"
 msgstr "Colecție de muzică"
+
+#: ../bin/src/ui_networkremotesettingspage.h:380
+msgid "Music extensions remotely visible"
+msgstr ""
 
 #: core/globalshortcuts.cpp:65 wiimotedev/wiimotesettingspage.cpp:114
 #: ../bin/src/ui_mainwindow.h:763
@@ -3360,7 +3372,7 @@ msgstr "Bandă îngustă (NB)"
 msgid "Network Proxy"
 msgstr "Proxy rețea"
 
-#: ../bin/src/ui_networkremotesettingspage.h:221
+#: ../bin/src/ui_networkremotesettingspage.h:342
 msgid "Network Remote"
 msgstr "Control la distanță prin rețea"
 
@@ -3383,7 +3395,7 @@ msgstr "Nu va începe redarea niciodată"
 msgid "New folder"
 msgstr "Dosar nou"
 
-#: ui/mainwindow.cpp:1951 ../bin/src/ui_mainwindow.h:754
+#: ui/mainwindow.cpp:1962 ../bin/src/ui_mainwindow.h:754
 msgid "New playlist"
 msgstr "Listă de redare nouă"
 
@@ -3450,7 +3462,7 @@ msgstr "Fără blocuri scurte"
 msgid "None"
 msgstr "Nimic"
 
-#: library/libraryview.cpp:672 ui/mainwindow.cpp:2468 ui/mainwindow.cpp:2646
+#: library/libraryview.cpp:672 ui/mainwindow.cpp:2479 ui/mainwindow.cpp:2657
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Niciuna dintre melodiile selectate nu este potrivită pentru copierea pe un dispozitiv"
 
@@ -3561,7 +3573,7 @@ msgstr "Pornit"
 msgid "OneDrive"
 msgstr "OneDrive"
 
-#: ../bin/src/ui_networkremotesettingspage.h:226
+#: ../bin/src/ui_networkremotesettingspage.h:347
 msgid ""
 "Only accept connections from clients within the ip ranges:\n"
 "10.x.x.x\n"
@@ -3569,7 +3581,7 @@ msgid ""
 "192.168.x.x"
 msgstr "Se acceptă conexiuni numai de la clienții din intervalele IP:\n10.x.x.x\n172.16.0.0 - 172.31.255.255\n192.168.x.x"
 
-#: ../bin/src/ui_networkremotesettingspage.h:231
+#: ../bin/src/ui_networkremotesettingspage.h:352
 msgid "Only allow connections from the local network"
 msgstr "Acceptă conexiuni numai din rețeaua locală"
 
@@ -3652,7 +3664,7 @@ msgid "Optimize for quality"
 msgstr "Optimizează pentru calitate"
 
 #: ../bin/src/ui_transcodedialog.h:226
-#: ../bin/src/ui_networkremotesettingspage.h:251
+#: ../bin/src/ui_networkremotesettingspage.h:372
 #: ../bin/src/ui_ripcddialog.h:321
 msgid "Options..."
 msgstr "Opțiuni..."
@@ -3749,7 +3761,7 @@ msgstr "Petrecere"
 msgid "Password"
 msgstr "Parolă"
 
-#: core/globalshortcuts.cpp:52 ui/mainwindow.cpp:1159 ui/mainwindow.cpp:1742
+#: core/globalshortcuts.cpp:52 ui/mainwindow.cpp:1165 ui/mainwindow.cpp:1753
 #: ui/qtsystemtrayicon.cpp:185 wiimotedev/wiimotesettingspage.cpp:115
 msgid "Pause"
 msgstr "Pauză"
@@ -3777,8 +3789,8 @@ msgstr "Pixel"
 msgid "Plain sidebar"
 msgstr "Bară laterală simplă"
 
-#: core/globalshortcuts.cpp:51 ui/mainwindow.cpp:684 ui/mainwindow.cpp:1123
-#: ui/mainwindow.cpp:1144 ui/mainwindow.cpp:1746 ui/qtsystemtrayicon.cpp:173
+#: core/globalshortcuts.cpp:51 ui/mainwindow.cpp:684 ui/mainwindow.cpp:1129
+#: ui/mainwindow.cpp:1150 ui/mainwindow.cpp:1757 ui/qtsystemtrayicon.cpp:173
 #: ui/qtsystemtrayicon.cpp:199 wiimotedev/wiimotesettingspage.cpp:108
 #: ../bin/src/ui_mainwindow.h:720
 msgid "Play"
@@ -3801,11 +3813,11 @@ msgstr "Redă dacă este oprit, întrerupe dacă se redă"
 msgid "Play if there is nothing already playing"
 msgstr "Redă numai dacă nu se redă deja ceva"
 
-#: library/libraryview.cpp:395 ui/mainwindow.cpp:1858
+#: library/libraryview.cpp:395 ui/mainwindow.cpp:1869
 msgid "Play next"
 msgstr "Redă următoarea"
 
-#: ui/mainwindow.cpp:1856
+#: ui/mainwindow.cpp:1867
 msgid "Play selected tracks next"
 msgstr "Redă piesele selectate"
 
@@ -3827,7 +3839,7 @@ msgstr "Opțiuni player"
 
 #: playlist/playlistcontainer.cpp:310 playlist/playlistlistcontainer.cpp:328
 #: playlist/playlistmanager.cpp:88 playlist/playlistmanager.cpp:157
-#: playlist/playlistmanager.cpp:528 playlist/playlisttabbar.cpp:367
+#: playlist/playlistmanager.cpp:537 playlist/playlisttabbar.cpp:367
 msgid "Playlist"
 msgstr "Listă de redare"
 
@@ -3885,7 +3897,7 @@ msgid "Popup duration"
 msgstr "Durată afișare "
 
 #: ../bin/src/ui_networkproxysettingspage.h:165
-#: ../bin/src/ui_networkremotesettingspage.h:224
+#: ../bin/src/ui_networkremotesettingspage.h:345
 msgid "Port"
 msgstr "Port"
 
@@ -4026,12 +4038,12 @@ msgstr "Se interoghează dispozitivul..."
 msgid "Queue Manager"
 msgstr "Administrator coadă"
 
-#: ui/mainwindow.cpp:1851
+#: ui/mainwindow.cpp:1862
 msgid "Queue selected tracks"
 msgstr "Adaugă în coadă piesele selectate"
 
 #: globalsearch/globalsearchview.cpp:464 library/libraryview.cpp:392
-#: ui/mainwindow.cpp:1849
+#: ui/mainwindow.cpp:1860
 msgid "Queue track"
 msgstr "Adaugă în coadă piesa"
 
@@ -4145,7 +4157,7 @@ msgstr "Ține minte de u&ltima dată"
 msgid "Remember my choice"
 msgstr "Ține minte alegerea mea"
 
-#: internet/internetradio/savedradio.cpp:108
+#: internet/internetradio/savedradio.cpp:110
 #: ../bin/src/ui_savedgroupingmanager.h:103 ../bin/src/ui_queuemanager.h:151
 #: ../bin/src/ui_transcodedialog.h:223
 msgid "Remove"
@@ -4237,7 +4249,7 @@ msgstr "Redă modul Gain"
 msgid "Repopulate"
 msgstr "Repopulează"
 
-#: ../bin/src/ui_networkremotesettingspage.h:235
+#: ../bin/src/ui_networkremotesettingspage.h:356
 msgid "Require authentication code"
 msgstr "Necesită cod de autentificare"
 
@@ -4289,6 +4301,10 @@ msgstr "Extrage CD audio"
 #: ui/equalizer.cpp:149
 msgid "Rock"
 msgstr "Rock"
+
+#: ../bin/src/ui_networkremotesettingspage.h:374
+msgid "Root folder that will be browsable from the network remote"
+msgstr ""
 
 #: ../bin/src/ui_console.h:130
 msgid "Run"
@@ -4351,7 +4367,7 @@ msgctxt "Save playlist menu action."
 msgid "Save playlist"
 msgstr "Salvează lista de redare"
 
-#: playlist/playlistmanager.cpp:236
+#: playlist/playlistmanager.cpp:238
 msgctxt "Title of the playlist save dialog."
 msgid "Save playlist"
 msgstr "Salvează lista de redare"
@@ -4372,7 +4388,7 @@ msgstr "Salvează, când este posibil, evaluările în etichetele fișierului"
 msgid "Save statistics in file tags when possible"
 msgstr "Salvează când este posibil statisticile în etichetele fișierului"
 
-#: ../bin/src/ui_addstreamdialog.h:114
+#: ../bin/src/ui_addstreamdialog.h:126
 msgid "Save this stream in the Internet tab"
 msgstr "Salvează acest flux în fila Internet"
 
@@ -4525,6 +4541,14 @@ msgstr "Selectează tot"
 msgid "Select None"
 msgstr "Nu este selectat nimic"
 
+#: ui/filechooserwidget.cpp:95
+msgid "Select a directory"
+msgstr ""
+
+#: ui/filechooserwidget.cpp:92
+msgid "Select a file"
+msgstr ""
+
 #: ../bin/src/ui_appearancesettingspage.h:303
 msgid "Select background color:"
 msgstr "Selectați culoarea de fundal:"
@@ -4573,7 +4597,7 @@ msgstr "Detalii server"
 msgid "Service offline"
 msgstr "Serviciu offline"
 
-#: ui/mainwindow.cpp:1896
+#: ui/mainwindow.cpp:1907
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr "Setează %1 la „%2”..."
@@ -4586,7 +4610,7 @@ msgstr "Stabilește volumul la <value> procent"
 msgid "Set value for all selected tracks..."
 msgstr "Stabilește valoarea pentru toate piesele selectate..."
 
-#: ../bin/src/ui_networkremotesettingspage.h:223
+#: ../bin/src/ui_networkremotesettingspage.h:344
 msgid "Settings"
 msgstr "Setări"
 
@@ -4786,11 +4810,11 @@ msgstr "Omite numărătoarea"
 msgid "Skip forwards in playlist"
 msgstr "Sari înainte în lista de redare"
 
-#: ui/mainwindow.cpp:1867
+#: ui/mainwindow.cpp:1878
 msgid "Skip selected tracks"
 msgstr "Omite piesele selectate"
 
-#: ui/mainwindow.cpp:1865
+#: ui/mainwindow.cpp:1876
 msgid "Skip track"
 msgstr "Omite piesa"
 
@@ -5111,7 +5135,7 @@ msgid ""
 "license key. Visit subsonic.org for details."
 msgstr "Perioada de încercare pentru serverul Subsonic s-a terminat. Donați pentru a obține o cheie de licență. Vizitați subsonic.org pentru detalii."
 
-#: ui/mainwindow.cpp:2762
+#: ui/mainwindow.cpp:2773
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -5153,7 +5177,7 @@ msgid ""
 "continue?"
 msgstr "Aceste fișiere vor fi șterse de pe dispozitiv, sigur doriți să continuați?"
 
-#: library/libraryview.cpp:678 ui/mainwindow.cpp:2515 widgets/fileview.cpp:190
+#: library/libraryview.cpp:678 ui/mainwindow.cpp:2526 widgets/fileview.cpp:190
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -5255,7 +5279,7 @@ msgstr "Comută OSD simpatic"
 msgid "Toggle fullscreen"
 msgstr "Comută afișare pe tot ecranul"
 
-#: ui/mainwindow.cpp:1853
+#: ui/mainwindow.cpp:1864
 msgid "Toggle queue status"
 msgstr "Comută stare coadă"
 
@@ -5345,6 +5369,10 @@ msgstr "URI"
 msgid "URL"
 msgstr "URL"
 
+#: ../bin/src/ui_addstreamdialog.h:128
+msgid "URL of its Logo:"
+msgstr ""
+
 #: core/commandlineoptions.cpp:159
 msgid "URL(s)"
 msgstr "URL(-uri)"
@@ -5370,7 +5398,7 @@ msgstr "Nu se poate descărca %1 (%2)"
 #: core/song.cpp:466 library/librarymodel.cpp:376 library/librarymodel.cpp:381
 #: library/librarymodel.cpp:385 library/librarymodel.cpp:1185
 #: library/savedgroupingmanager.cpp:105 playlist/playlistdelegates.cpp:305
-#: playlist/playlistmanager.cpp:535 playlist/playlistmanager.cpp:536
+#: playlist/playlistmanager.cpp:544 playlist/playlistmanager.cpp:545
 #: songinfo/streamdiscoverer.cpp:88 ui/albumcoverchoicecontroller.cpp:132
 #: ui/edittagdialog.cpp:465 ui/edittagdialog.cpp:511
 msgid "Unknown"
@@ -5389,11 +5417,11 @@ msgstr "Eroare necunoscută"
 msgid "Unset cover"
 msgstr "Deselectează coperta"
 
-#: ui/mainwindow.cpp:1863
+#: ui/mainwindow.cpp:1874
 msgid "Unskip selected tracks"
 msgstr "Nu omite piesele selectate"
 
-#: ui/mainwindow.cpp:1861
+#: ui/mainwindow.cpp:1872
 msgid "Unskip track"
 msgstr "Nu omite piesa"
 
@@ -5476,7 +5504,7 @@ msgstr "Utilizează un set de culori personalizat"
 msgid "Use a custom message for notifications"
 msgstr "Utilizează un mesaj personalizat pentru notificări"
 
-#: ../bin/src/ui_networkremotesettingspage.h:222
+#: ../bin/src/ui_networkremotesettingspage.h:343
 msgid "Use a network remote control"
 msgstr "Utilizează un control la distanță prin rețea"
 
@@ -5554,7 +5582,7 @@ msgid "Variable bit rate"
 msgstr "Rată de biți variabilă"
 
 #: globalsearch/globalsearchmodel.cpp:110 library/librarymodel.cpp:302
-#: playlist/playlistmanager.cpp:547 ui/albumcovermanager.cpp:266
+#: playlist/playlistmanager.cpp:556 ui/albumcovermanager.cpp:266
 msgid "Various artists"
 msgstr "Artiști diferiți"
 
@@ -5723,7 +5751,7 @@ msgid ""
 "well?"
 msgstr "Doriți să fie mutate, de asemenea, și celelalte melodii din acest album în Artiști diferiți?"
 
-#: ui/mainwindow.cpp:2769
+#: ui/mainwindow.cpp:2780
 msgid "Would you like to run a full rescan right now?"
 msgstr "Doriți să rulați o rescanare completă chiar acum?"
 
@@ -5796,6 +5824,14 @@ msgstr "Sunteți autentificat."
 msgid "You can change the way the songs in the library are organised."
 msgstr "Puteți modifica modul cum sunt organizate melodiile în colecție."
 
+#: ui/networkremotesettingspage.cpp:162
+#, qt-format
+msgid ""
+"You can find <a href=\"%1\">here on GitHub</a> the new cross platform "
+"remote.<br/>It is available on <b>Linux</b>, <b>MacOS</b> and "
+"<b>Windows</b><br/>"
+msgstr ""
+
 #: internet/magnatune/magnatunesettingspage.cpp:59
 msgid ""
 "You can listen to Magnatune songs for free without an account.  Purchasing a"
@@ -5846,7 +5882,7 @@ msgstr "Este necesar să accesați preferințele sistemului și să permiteți C
 msgid "You will need to restart Clementine if you change the language."
 msgstr "Va trebui să reporniți Clementine dacă schimbați limba."
 
-#: ../bin/src/ui_networkremotesettingspage.h:240
+#: ../bin/src/ui_networkremotesettingspage.h:361
 msgid "Your IP address:"
 msgstr "Adresa dumneavoastră IP:"
 
@@ -5922,9 +5958,19 @@ msgstr "întâi cele mai mari"
 msgid "bpm"
 msgstr "bpm"
 
+#: ../bin/src/ui_networkremotesettingspage.h:378
+msgid ""
+"coma separated list of the allowed extensions that will be visible from the "
+"network remote (ex: m3u,mp3,flac,ogg,wav)"
+msgstr ""
+
 #: smartplaylists/searchterm.cpp:249
 msgid "contains"
 msgstr "conține"
+
+#: ../bin/src/ui_networkremotesettingspage.h:382
+msgid "desktop_remote"
+msgstr ""
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:221
 #: ../bin/src/ui_transcoderoptionsvorbis.h:206
@@ -6030,9 +6076,11 @@ msgstr "pornire"
 msgid "options"
 msgstr "opțiuni"
 
-#: ../bin/src/ui_networkremotesettingspage.h:253
-msgid "or scan the QR code!"
-msgstr "sau scanați codul QR!"
+#: ../bin/src/ui_networkremotesettingspage.h:383
+#: ../bin/src/ui_networkremotesettingspage.h:384
+#: ../bin/src/ui_networkremotesettingspage.h:386
+msgid "or scan the QR code: "
+msgstr ""
 
 #: widgets/didyoumean.cpp:56
 msgid "press enter"

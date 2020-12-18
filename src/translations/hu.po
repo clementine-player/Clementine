@@ -18,7 +18,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2020-12-01 13:34+0000\n"
+"PO-Revision-Date: 2020-12-17 15:18+0000\n"
 "Last-Translator: Balázs Meskó <meskobalazs@mailbox.org>\n"
 "Language-Team: Hungarian (http://www.transifex.com/davidsansome/clementine/language/hu/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -112,7 +112,7 @@ msgid ""
 "%2"
 msgstr "%1 kérés sikertelen:\n%2"
 
-#: playlist/playlistmanager.cpp:432
+#: playlist/playlistmanager.cpp:439
 #, qt-format
 msgid "%1 selected of"
 msgstr "%1 kiválasztva"
@@ -137,7 +137,7 @@ msgstr "%1 szám megtalálva"
 msgid "%1 songs found (showing %2)"
 msgstr "%1 szám megtalálva (%2 megjelenítése)"
 
-#: playlist/playlistmanager.cpp:438 playlist/queue.cpp:228
+#: playlist/playlistmanager.cpp:445 playlist/queue.cpp:228
 #, qt-format
 msgid "%1 tracks"
 msgstr "%1 szám"
@@ -298,7 +298,7 @@ msgstr "0px"
 msgid "1 day"
 msgstr "1 nap"
 
-#: playlist/playlistmanager.cpp:438 playlist/queue.cpp:228
+#: playlist/playlistmanager.cpp:445 playlist/queue.cpp:228
 msgid "1 track"
 msgstr "1 szám"
 
@@ -389,7 +389,7 @@ msgstr "<p>A száminformációk behelyettesítéséhez a címkék % jellel kezd�
 msgid "A Spotify Premium account is required."
 msgstr "Spotify prémium fiók szükséges"
 
-#: ../bin/src/ui_networkremotesettingspage.h:233
+#: ../bin/src/ui_networkremotesettingspage.h:354
 msgid "A client can connect only, if the correct code was entered."
 msgstr "A kliens csak akkor tud csatlakozni, ha a helyes kód lett megadva."
 
@@ -491,7 +491,7 @@ msgstr "Wii Remote aktiválása/deaktiválása"
 msgid "Add Podcast"
 msgstr "Podcast hozzáadása"
 
-#: ../bin/src/ui_addstreamdialog.h:112
+#: ../bin/src/ui_addstreamdialog.h:124
 msgid "Add Stream"
 msgstr "Közvetítés hozzáadása"
 
@@ -507,7 +507,7 @@ msgstr "Művelet felvétele"
 msgid "Add all tracks from a directory and all its subdirectories"
 msgstr "Minden szám hozzáadása a mappából és almappáiból"
 
-#: internet/internetradio/savedradio.cpp:116
+#: internet/internetradio/savedradio.cpp:118
 msgid "Add another stream..."
 msgstr "Új közvetítés hozzáadása"
 
@@ -515,7 +515,7 @@ msgstr "Új közvetítés hozzáadása"
 msgid "Add directory..."
 msgstr "Mappa hozzáadása"
 
-#: ui/mainwindow.cpp:2133
+#: ui/mainwindow.cpp:2144
 msgid "Add file"
 msgstr "Új fájl"
 
@@ -535,7 +535,7 @@ msgstr "Fájl hozzáadása"
 msgid "Add files to transcode"
 msgstr "Fájlok felvétele átkódoláshoz"
 
-#: transcoder/transcodedialog.cpp:309 ui/mainwindow.cpp:2160
+#: transcoder/transcodedialog.cpp:309 ui/mainwindow.cpp:2171
 #: ripper/ripcddialog.cpp:202
 msgid "Add folder"
 msgstr "Mappa hozzáadása"
@@ -640,7 +640,7 @@ msgstr "Hozzáadás a Spotify lejátszólistához"
 msgid "Add to Spotify starred"
 msgstr "Hozzáadás a Spotify-on csillagozottakhoz"
 
-#: ui/mainwindow.cpp:1934
+#: ui/mainwindow.cpp:1945
 msgid "Add to another playlist"
 msgstr "Hozzáadás másik lejátszólistához"
 
@@ -764,11 +764,11 @@ msgstr "Minden fordító"
 msgid "All tracks"
 msgstr "Minden szám"
 
-#: ../bin/src/ui_networkremotesettingspage.h:242
+#: ../bin/src/ui_networkremotesettingspage.h:363
 msgid "Allow a client to download music from this computer."
 msgstr "A kliens tölthet le zenét erről a számítógépről"
 
-#: ../bin/src/ui_networkremotesettingspage.h:244
+#: ../bin/src/ui_networkremotesettingspage.h:365
 msgid "Allow downloads"
 msgstr "Letöltések engedélyezése"
 
@@ -875,7 +875,7 @@ msgid "As&k when saving"
 msgstr "&Kérdezzen rá mentéskor"
 
 #: ../bin/src/ui_transcodedialog.h:225
-#: ../bin/src/ui_networkremotesettingspage.h:250
+#: ../bin/src/ui_networkremotesettingspage.h:371
 #: ../bin/src/ui_ripcddialog.h:322
 msgid "Audio format"
 msgstr "Hangformátum"
@@ -1125,7 +1125,7 @@ msgstr "Új epizódok keresése"
 msgid "Check for updates"
 msgstr "Frissítések keresése"
 
-#: ui/mainwindow.cpp:830
+#: ui/mainwindow.cpp:836
 msgid "Check for updates..."
 msgstr "Frissítés keresése…"
 
@@ -1424,11 +1424,11 @@ msgstr "Minden szám átalakítása"
 msgid "Convert any music that the device can't play"
 msgstr "Az eszköz által nem támogatott számok átalakítása"
 
-#: ../bin/src/ui_networkremotesettingspage.h:247
+#: ../bin/src/ui_networkremotesettingspage.h:368
 msgid "Convert lossless audiofiles before sending them to the remote."
 msgstr "Veszteségmentes fájlok átalakítása a távoli kiszolgálóra küldés előtt."
 
-#: ../bin/src/ui_networkremotesettingspage.h:249
+#: ../bin/src/ui_networkremotesettingspage.h:370
 msgid "Convert lossless files"
 msgstr "Veszteségmentes fájlok átalakítása"
 
@@ -1480,7 +1480,7 @@ msgstr "A részletek nem kérhetők le"
 msgid "Could not log in to Last.fm. Please try again."
 msgstr "Nem sikerült bejelentkezni a Last.fm-be. Próbálja újra."
 
-#: playlist/playlistmanager.cpp:168
+#: playlist/playlistmanager.cpp:170
 msgid "Couldn't create playlist"
 msgstr "Nem lehet létrehozni a lejátszólistát"
 
@@ -1659,7 +1659,7 @@ msgid "Delete downloaded data"
 msgstr "Letöltött adatok törlése"
 
 #: devices/deviceview.cpp:396 library/libraryview.cpp:677
-#: ui/mainwindow.cpp:2514 widgets/fileview.cpp:189
+#: ui/mainwindow.cpp:2525 widgets/fileview.cpp:189
 msgid "Delete files"
 msgstr "Fájlok törlése"
 
@@ -1700,11 +1700,11 @@ msgstr "Fájlok törlése"
 msgid "Depth"
 msgstr "Mélység"
 
-#: ui/mainwindow.cpp:1847
+#: ui/mainwindow.cpp:1858
 msgid "Dequeue selected tracks"
 msgstr "Kiválasztott számok törlése a sorból"
 
-#: ui/mainwindow.cpp:1845
+#: ui/mainwindow.cpp:1856
 msgid "Dequeue track"
 msgstr "Szám törlése a sorból"
 
@@ -1898,13 +1898,17 @@ msgstr "Új epizódok automatikus letöltése"
 msgid "Download queued"
 msgstr "Letöltés sorba állítva"
 
-#: ../bin/src/ui_networkremotesettingspage.h:245
+#: ../bin/src/ui_networkremotesettingspage.h:366
 msgid "Download settings"
 msgstr "Letöltési beálíltások"
 
-#: ../bin/src/ui_networkremotesettingspage.h:252
-msgid "Download the Android app"
-msgstr "Androidos alkalmazás letöltése"
+#: ../bin/src/ui_networkremotesettingspage.h:385
+msgid "Download the original Android app"
+msgstr "Az eredeti androidos alkalmazás letöltése"
+
+#: ../bin/src/ui_networkremotesettingspage.h:381
+msgid "Download the remote for Desktops, Android and iOS"
+msgstr "A távvezérlő letöltése asztali gépre, Androidra és iOS-re"
 
 #: internet/magnatune/magnatuneservice.cpp:279
 msgid "Download this album"
@@ -1976,7 +1980,7 @@ msgstr "Dinamikus véletlenszerű mix"
 msgid "Edit smart playlist..."
 msgstr "Intelligens lejátszólista szerkesztése…"
 
-#: ui/mainwindow.cpp:1897
+#: ui/mainwindow.cpp:1908
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr "„%1” címke szerkesztése…"
@@ -2002,7 +2006,7 @@ msgstr "Száminformációk szerkesztése…"
 msgid "Edit tracks information..."
 msgstr "Száminformációk szerkesztése…"
 
-#: internet/internetradio/savedradio.cpp:111
+#: internet/internetradio/savedradio.cpp:113
 msgid "Edit..."
 msgstr "Szerkesztés…"
 
@@ -2082,7 +2086,7 @@ msgstr "Adjon meg egy keresési kifejezést podcastok kereséséhez a gpodder.ne
 msgid "Enter search terms here"
 msgstr "Adja meg a keresési kifejezést"
 
-#: ../bin/src/ui_addstreamdialog.h:113
+#: ../bin/src/ui_addstreamdialog.h:125
 msgid "Enter the URL of an internet radio stream:"
 msgstr "Adja meg egy rádióközvetítés URL-címét:"
 
@@ -2090,7 +2094,7 @@ msgstr "Adja meg egy rádióközvetítés URL-címét:"
 msgid "Enter the name of the folder"
 msgstr "Adja meg a mappa nevét"
 
-#: ../bin/src/ui_networkremotesettingspage.h:238
+#: ../bin/src/ui_networkremotesettingspage.h:359
 msgid "Enter this IP in the App to connect to Clementine."
 msgstr "Írja be ezt az IP-t az alkalmazásban a Clementine-hoz kapcsolódáshoz"
 
@@ -2115,8 +2119,8 @@ msgid "Equivalent to --log-levels *:3"
 msgstr "Megegyezik a --log-levels *:3 kapcsolóval"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:249
-#: library/libraryview.cpp:671 ui/mainwindow.cpp:2189 ui/mainwindow.cpp:2467
-#: ui/mainwindow.cpp:2645
+#: library/libraryview.cpp:671 ui/mainwindow.cpp:2200 ui/mainwindow.cpp:2478
+#: ui/mainwindow.cpp:2656
 msgid "Error"
 msgstr "Hiba"
 
@@ -2258,7 +2262,7 @@ msgstr "Elhalkulás"
 msgid "Fading duration"
 msgstr "Elhalkulás hossza"
 
-#: ui/mainwindow.cpp:2190
+#: ui/mainwindow.cpp:2201
 msgid "Failed reading CD drive"
 msgstr "Nem lehet olvasni a CD meghajtót"
 
@@ -2384,6 +2388,10 @@ msgstr "Fájlnév"
 #: ui/mainwindow.cpp:272
 msgid "Files"
 msgstr "Fájlok"
+
+#: ../bin/src/ui_networkremotesettingspage.h:376
+msgid "Files root folder"
+msgstr "Fájlok gyökérmappája"
 
 #: ../bin/src/ui_transcodedialog.h:214
 msgid "Files to transcode"
@@ -2528,7 +2536,7 @@ msgstr "Csatornák betöltése"
 msgid "Getting streams"
 msgstr "Kötvetítések lekérése"
 
-#: ../bin/src/ui_addstreamdialog.h:115
+#: ../bin/src/ui_addstreamdialog.h:127
 msgid "Give it a name:"
 msgstr "Adjon meg egy nevet:"
 
@@ -2989,7 +2997,7 @@ msgstr "Zenetár"
 msgid "Library advanced grouping"
 msgstr "Zenetár speciális csoportosítása"
 
-#: ui/mainwindow.cpp:2771
+#: ui/mainwindow.cpp:2782
 msgid "Library rescan notice"
 msgstr "Zenetár újraolvasási figyelmeztetés"
 
@@ -3322,13 +3330,17 @@ msgstr "Áthelyezés a zenetárba…"
 msgid "Move up"
 msgstr "Mozgatás felfelé"
 
-#: transcoder/transcodedialog.cpp:228 ui/mainwindow.cpp:2135
+#: transcoder/transcodedialog.cpp:228 ui/mainwindow.cpp:2146
 msgid "Music"
 msgstr "Zene"
 
 #: ../bin/src/ui_librarysettingspage.h:185
 msgid "Music Library"
 msgstr "Zenetár"
+
+#: ../bin/src/ui_networkremotesettingspage.h:380
+msgid "Music extensions remotely visible"
+msgstr "Távolról látható zenei kiterjesztések"
 
 #: core/globalshortcuts.cpp:65 wiimotedev/wiimotesettingspage.cpp:114
 #: ../bin/src/ui_mainwindow.h:763
@@ -3357,7 +3369,7 @@ msgstr "Keskenysávú (NB)"
 msgid "Network Proxy"
 msgstr "Hálózati Proxy"
 
-#: ../bin/src/ui_networkremotesettingspage.h:221
+#: ../bin/src/ui_networkremotesettingspage.h:342
 msgid "Network Remote"
 msgstr "Távoli hálózat"
 
@@ -3380,7 +3392,7 @@ msgstr "Soha ne indítsa el a lejátszást"
 msgid "New folder"
 msgstr "Új mappa"
 
-#: ui/mainwindow.cpp:1951 ../bin/src/ui_mainwindow.h:754
+#: ui/mainwindow.cpp:1962 ../bin/src/ui_mainwindow.h:754
 msgid "New playlist"
 msgstr "Új lejátszólista"
 
@@ -3447,7 +3459,7 @@ msgstr "Rövid blokkok nélkül"
 msgid "None"
 msgstr "Egyik sem"
 
-#: library/libraryview.cpp:672 ui/mainwindow.cpp:2468 ui/mainwindow.cpp:2646
+#: library/libraryview.cpp:672 ui/mainwindow.cpp:2479 ui/mainwindow.cpp:2657
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Egy kiválasztott szám sem alkalmas az eszközre való másoláshoz"
 
@@ -3558,7 +3570,7 @@ msgstr "Bekapcsolás"
 msgid "OneDrive"
 msgstr "OneDrive"
 
-#: ../bin/src/ui_networkremotesettingspage.h:226
+#: ../bin/src/ui_networkremotesettingspage.h:347
 msgid ""
 "Only accept connections from clients within the ip ranges:\n"
 "10.x.x.x\n"
@@ -3566,7 +3578,7 @@ msgid ""
 "192.168.x.x"
 msgstr "Csak a következő IP-címek közöttiek elfogadottak:\n10.x.x.x\n172.16.0.0 - 172.31.255.255\n192.168.x.x"
 
-#: ../bin/src/ui_networkremotesettingspage.h:231
+#: ../bin/src/ui_networkremotesettingspage.h:352
 msgid "Only allow connections from the local network"
 msgstr "Csak a helyi kapcsolatok engedélyezése"
 
@@ -3649,7 +3661,7 @@ msgid "Optimize for quality"
 msgstr "Optimalizálás minőségre"
 
 #: ../bin/src/ui_transcodedialog.h:226
-#: ../bin/src/ui_networkremotesettingspage.h:251
+#: ../bin/src/ui_networkremotesettingspage.h:372
 #: ../bin/src/ui_ripcddialog.h:321
 msgid "Options..."
 msgstr "Beállítások…"
@@ -3746,7 +3758,7 @@ msgstr "Party"
 msgid "Password"
 msgstr "Jelszó"
 
-#: core/globalshortcuts.cpp:52 ui/mainwindow.cpp:1159 ui/mainwindow.cpp:1742
+#: core/globalshortcuts.cpp:52 ui/mainwindow.cpp:1165 ui/mainwindow.cpp:1753
 #: ui/qtsystemtrayicon.cpp:185 wiimotedev/wiimotesettingspage.cpp:115
 msgid "Pause"
 msgstr "Szünet"
@@ -3774,8 +3786,8 @@ msgstr "Pixel"
 msgid "Plain sidebar"
 msgstr "Egyszerű oldalsáv"
 
-#: core/globalshortcuts.cpp:51 ui/mainwindow.cpp:684 ui/mainwindow.cpp:1123
-#: ui/mainwindow.cpp:1144 ui/mainwindow.cpp:1746 ui/qtsystemtrayicon.cpp:173
+#: core/globalshortcuts.cpp:51 ui/mainwindow.cpp:684 ui/mainwindow.cpp:1129
+#: ui/mainwindow.cpp:1150 ui/mainwindow.cpp:1757 ui/qtsystemtrayicon.cpp:173
 #: ui/qtsystemtrayicon.cpp:199 wiimotedev/wiimotesettingspage.cpp:108
 #: ../bin/src/ui_mainwindow.h:720
 msgid "Play"
@@ -3798,11 +3810,11 @@ msgstr "Lejátszás, ha le van állítva, különben szünet"
 msgid "Play if there is nothing already playing"
 msgstr "Lejátszás, ha nincs lejátszás folyamatban"
 
-#: library/libraryview.cpp:395 ui/mainwindow.cpp:1858
+#: library/libraryview.cpp:395 ui/mainwindow.cpp:1869
 msgid "Play next"
 msgstr "Következő lejátszása"
 
-#: ui/mainwindow.cpp:1856
+#: ui/mainwindow.cpp:1867
 msgid "Play selected tracks next"
 msgstr "A kiválasztott számok lejátszása a mostani után"
 
@@ -3824,7 +3836,7 @@ msgstr "Lejátszóbeállítások"
 
 #: playlist/playlistcontainer.cpp:310 playlist/playlistlistcontainer.cpp:328
 #: playlist/playlistmanager.cpp:88 playlist/playlistmanager.cpp:157
-#: playlist/playlistmanager.cpp:528 playlist/playlisttabbar.cpp:367
+#: playlist/playlistmanager.cpp:537 playlist/playlisttabbar.cpp:367
 msgid "Playlist"
 msgstr "Lejátszólista"
 
@@ -3882,7 +3894,7 @@ msgid "Popup duration"
 msgstr "Értesítés időtartama"
 
 #: ../bin/src/ui_networkproxysettingspage.h:165
-#: ../bin/src/ui_networkremotesettingspage.h:224
+#: ../bin/src/ui_networkremotesettingspage.h:345
 msgid "Port"
 msgstr "Port"
 
@@ -4023,12 +4035,12 @@ msgstr "Eszköz lekérdezése…"
 msgid "Queue Manager"
 msgstr "Sorkezelő"
 
-#: ui/mainwindow.cpp:1851
+#: ui/mainwindow.cpp:1862
 msgid "Queue selected tracks"
 msgstr "Sorba állítja a kiválasztott számokat"
 
 #: globalsearch/globalsearchview.cpp:464 library/libraryview.cpp:392
-#: ui/mainwindow.cpp:1849
+#: ui/mainwindow.cpp:1860
 msgid "Queue track"
 msgstr "Szám sorba állítása"
 
@@ -4142,7 +4154,7 @@ msgstr "Ahogy &legutoljára volt"
 msgid "Remember my choice"
 msgstr "Választás megjegyzése"
 
-#: internet/internetradio/savedradio.cpp:108
+#: internet/internetradio/savedradio.cpp:110
 #: ../bin/src/ui_savedgroupingmanager.h:103 ../bin/src/ui_queuemanager.h:151
 #: ../bin/src/ui_transcodedialog.h:223
 msgid "Remove"
@@ -4234,7 +4246,7 @@ msgstr "Replay Gain mód"
 msgid "Repopulate"
 msgstr "Újbóli feltöltés"
 
-#: ../bin/src/ui_networkremotesettingspage.h:235
+#: ../bin/src/ui_networkremotesettingspage.h:356
 msgid "Require authentication code"
 msgstr "Hitelesítő kód kérése"
 
@@ -4286,6 +4298,10 @@ msgstr "Zenei CD beolvasása"
 #: ui/equalizer.cpp:149
 msgid "Rock"
 msgstr "Rock"
+
+#: ../bin/src/ui_networkremotesettingspage.h:374
+msgid "Root folder that will be browsable from the network remote"
+msgstr "Gyökérmappa, amely a hálózati távvezérlőről tallózható lesz"
 
 #: ../bin/src/ui_console.h:130
 msgid "Run"
@@ -4348,7 +4364,7 @@ msgctxt "Save playlist menu action."
 msgid "Save playlist"
 msgstr "Lejátszólista mentése"
 
-#: playlist/playlistmanager.cpp:236
+#: playlist/playlistmanager.cpp:238
 msgctxt "Title of the playlist save dialog."
 msgid "Save playlist"
 msgstr "Lejátszólista mentése"
@@ -4369,7 +4385,7 @@ msgstr "Értékelés mentése a fájl címkéibe, ha lehetséges"
 msgid "Save statistics in file tags when possible"
 msgstr "Statisztikák mentése a fájl címkéibe, ha lehetséges"
 
-#: ../bin/src/ui_addstreamdialog.h:114
+#: ../bin/src/ui_addstreamdialog.h:126
 msgid "Save this stream in the Internet tab"
 msgstr "Közvetítés mentése az Internet fül alá"
 
@@ -4522,6 +4538,14 @@ msgstr "Összes kiválasztása"
 msgid "Select None"
 msgstr "Kiválasztás megszüntetése"
 
+#: ui/filechooserwidget.cpp:95
+msgid "Select a directory"
+msgstr "Könyvtár választása"
+
+#: ui/filechooserwidget.cpp:92
+msgid "Select a file"
+msgstr "Fájl választása"
+
 #: ../bin/src/ui_appearancesettingspage.h:303
 msgid "Select background color:"
 msgstr "Válasszon háttérszínt:"
@@ -4570,7 +4594,7 @@ msgstr "Kiszolgáló részletei"
 msgid "Service offline"
 msgstr "A szolgáltatás nem üzemel"
 
-#: ui/mainwindow.cpp:1896
+#: ui/mainwindow.cpp:1907
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr "%1 beállítása erre: „%2”…"
@@ -4583,7 +4607,7 @@ msgstr "Hangerő beállítása <value> százalékra"
 msgid "Set value for all selected tracks..."
 msgstr "Érték beállítása minden kiválasztott számnál…"
 
-#: ../bin/src/ui_networkremotesettingspage.h:223
+#: ../bin/src/ui_networkremotesettingspage.h:344
 msgid "Settings"
 msgstr "Beállítások"
 
@@ -4783,11 +4807,11 @@ msgstr "Kihagyások száma"
 msgid "Skip forwards in playlist"
 msgstr "Léptetés előre a lejátszólistában"
 
-#: ui/mainwindow.cpp:1867
+#: ui/mainwindow.cpp:1878
 msgid "Skip selected tracks"
 msgstr "Kiválasztott számok kihagyása"
 
-#: ui/mainwindow.cpp:1865
+#: ui/mainwindow.cpp:1876
 msgid "Skip track"
 msgstr "Szám kihagyása"
 
@@ -5108,7 +5132,7 @@ msgid ""
 "license key. Visit subsonic.org for details."
 msgstr "A Subsonic kiszolgáló próbaideje lejárt. Adományozzon, hogy licenckulcsot kapjon. A részletekért keresse fel a subsonic.org oldalt."
 
-#: ui/mainwindow.cpp:2762
+#: ui/mainwindow.cpp:2773
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -5150,7 +5174,7 @@ msgid ""
 "continue?"
 msgstr "Ezek a fájlok törölve lesznek az eszközről. Biztos benne, hogy folytatja?"
 
-#: library/libraryview.cpp:678 ui/mainwindow.cpp:2515 widgets/fileview.cpp:190
+#: library/libraryview.cpp:678 ui/mainwindow.cpp:2526 widgets/fileview.cpp:190
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -5252,7 +5276,7 @@ msgstr "Pretty OSD be/ki"
 msgid "Toggle fullscreen"
 msgstr "Teljes képernyő be/ki"
 
-#: ui/mainwindow.cpp:1853
+#: ui/mainwindow.cpp:1864
 msgid "Toggle queue status"
 msgstr "Sorállapot be/ki"
 
@@ -5342,6 +5366,10 @@ msgstr "URI"
 msgid "URL"
 msgstr "URL"
 
+#: ../bin/src/ui_addstreamdialog.h:128
+msgid "URL of its Logo:"
+msgstr "A logója URL-je:"
+
 #: core/commandlineoptions.cpp:159
 msgid "URL(s)"
 msgstr "URL(-ek)"
@@ -5367,7 +5395,7 @@ msgstr "%1 (%2) nem tölthető le"
 #: core/song.cpp:466 library/librarymodel.cpp:376 library/librarymodel.cpp:381
 #: library/librarymodel.cpp:385 library/librarymodel.cpp:1185
 #: library/savedgroupingmanager.cpp:105 playlist/playlistdelegates.cpp:305
-#: playlist/playlistmanager.cpp:535 playlist/playlistmanager.cpp:536
+#: playlist/playlistmanager.cpp:544 playlist/playlistmanager.cpp:545
 #: songinfo/streamdiscoverer.cpp:88 ui/albumcoverchoicecontroller.cpp:132
 #: ui/edittagdialog.cpp:465 ui/edittagdialog.cpp:511
 msgid "Unknown"
@@ -5386,11 +5414,11 @@ msgstr "Ismeretlen hiba"
 msgid "Unset cover"
 msgstr "Borító törlése"
 
-#: ui/mainwindow.cpp:1863
+#: ui/mainwindow.cpp:1874
 msgid "Unskip selected tracks"
 msgstr "A kiválasztott számok lejátszása"
 
-#: ui/mainwindow.cpp:1861
+#: ui/mainwindow.cpp:1872
 msgid "Unskip track"
 msgstr "Szám lejátszása"
 
@@ -5473,7 +5501,7 @@ msgstr "Saját színkészlet használata"
 msgid "Use a custom message for notifications"
 msgstr "Egyéni üzenet használata értesítésnél"
 
-#: ../bin/src/ui_networkremotesettingspage.h:222
+#: ../bin/src/ui_networkremotesettingspage.h:343
 msgid "Use a network remote control"
 msgstr "Távoli hálózati irányítás használata"
 
@@ -5551,7 +5579,7 @@ msgid "Variable bit rate"
 msgstr "Változó bitráta"
 
 #: globalsearch/globalsearchmodel.cpp:110 library/librarymodel.cpp:302
-#: playlist/playlistmanager.cpp:547 ui/albumcovermanager.cpp:266
+#: playlist/playlistmanager.cpp:556 ui/albumcovermanager.cpp:266
 msgid "Various artists"
 msgstr "Különböző előadók"
 
@@ -5720,7 +5748,7 @@ msgid ""
 "well?"
 msgstr "Szeretné a többi számot ebből az albumból áthelyezni a Vegyes előadók közé is?"
 
-#: ui/mainwindow.cpp:2769
+#: ui/mainwindow.cpp:2780
 msgid "Would you like to run a full rescan right now?"
 msgstr "Szeretne most teljes újraolvasást végezni?"
 
@@ -5793,6 +5821,14 @@ msgstr "Bejelentkezett."
 msgid "You can change the way the songs in the library are organised."
 msgstr "Megváltoztathatja a számok zenetárban való rendezésének módját."
 
+#: ui/networkremotesettingspage.cpp:162
+#, qt-format
+msgid ""
+"You can find <a href=\"%1\">here on GitHub</a> the new cross platform "
+"remote.<br/>It is available on <b>Linux</b>, <b>MacOS</b> and "
+"<b>Windows</b><br/>"
+msgstr "Az új keresztplatformos távvezérlő <a href=\"%1\">itt találja a GitHubon</a>.<br/>Elérhető <b>Linuxra</b>, <b>MacOS-re</b> és <b>Windowsra</b><br/>"
+
 #: internet/magnatune/magnatunesettingspage.cpp:59
 msgid ""
 "You can listen to Magnatune songs for free without an account.  Purchasing a"
@@ -5843,7 +5879,7 @@ msgstr "A Rendszerbeállításokban engedélyeznie kell a „<span style=\" font
 msgid "You will need to restart Clementine if you change the language."
 msgstr "A nyelv megváltoztatásához újra kell indítania a Clementine-t."
 
-#: ../bin/src/ui_networkremotesettingspage.h:240
+#: ../bin/src/ui_networkremotesettingspage.h:361
 msgid "Your IP address:"
 msgstr "Az IP-címe:"
 
@@ -5919,9 +5955,19 @@ msgstr "nagyobb először"
 msgid "bpm"
 msgstr "bpm"
 
+#: ../bin/src/ui_networkremotesettingspage.h:378
+msgid ""
+"coma separated list of the allowed extensions that will be visible from the "
+"network remote (ex: m3u,mp3,flac,ogg,wav)"
+msgstr "azon engedélyezett kiterjesztések vesszővel elválasztott listája, amelyek láthatóak lesznek a hálózati távvezérlőben (például m3u,mp3,flac,ogg,wav)"
+
 #: smartplaylists/searchterm.cpp:249
 msgid "contains"
 msgstr "tartalmazza"
+
+#: ../bin/src/ui_networkremotesettingspage.h:382
+msgid "desktop_remote"
+msgstr "asztali_távvezérlő"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:221
 #: ../bin/src/ui_transcoderoptionsvorbis.h:206
@@ -6027,9 +6073,11 @@ msgstr "ezen"
 msgid "options"
 msgstr "beállítások"
 
-#: ../bin/src/ui_networkremotesettingspage.h:253
-msgid "or scan the QR code!"
-msgstr "vagy olvassa le a QR-kódot!"
+#: ../bin/src/ui_networkremotesettingspage.h:383
+#: ../bin/src/ui_networkremotesettingspage.h:384
+#: ../bin/src/ui_networkremotesettingspage.h:386
+msgid "or scan the QR code: "
+msgstr "vagy olvassa le a QR-kódot:"
 
 #: widgets/didyoumean.cpp:56
 msgid "press enter"

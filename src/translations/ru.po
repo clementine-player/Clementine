@@ -36,7 +36,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2020-11-28 22:51+0000\n"
+"PO-Revision-Date: 2020-12-17 15:11+0000\n"
 "Last-Translator: Andrei Stepanov <adem4ik@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/davidsansome/clementine/language/ru/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -130,7 +130,7 @@ msgid ""
 "%2"
 msgstr "%1 запрос не удался:\n%2"
 
-#: playlist/playlistmanager.cpp:432
+#: playlist/playlistmanager.cpp:439
 #, qt-format
 msgid "%1 selected of"
 msgstr "выбрано %1 из"
@@ -155,7 +155,7 @@ msgstr "Найдено %1 песен"
 msgid "%1 songs found (showing %2)"
 msgstr "Найдено %1 песен (показано %2)"
 
-#: playlist/playlistmanager.cpp:438 playlist/queue.cpp:228
+#: playlist/playlistmanager.cpp:445 playlist/queue.cpp:228
 #, qt-format
 msgid "%1 tracks"
 msgstr "%1 треков"
@@ -316,7 +316,7 @@ msgstr "0px"
 msgid "1 day"
 msgstr "1 день"
 
-#: playlist/playlistmanager.cpp:438 playlist/queue.cpp:228
+#: playlist/playlistmanager.cpp:445 playlist/queue.cpp:228
 msgid "1 track"
 msgstr "1 трек"
 
@@ -407,7 +407,7 @@ msgstr "<p>Поля начинаются со знака %, например: %a
 msgid "A Spotify Premium account is required."
 msgstr "Требуется премиум аккаунт Spotify."
 
-#: ../bin/src/ui_networkremotesettingspage.h:233
+#: ../bin/src/ui_networkremotesettingspage.h:354
 msgid "A client can connect only, if the correct code was entered."
 msgstr "Клиент сможет подключиться, только если был введён правильный код."
 
@@ -509,7 +509,7 @@ msgstr "Активировать/деактивировать Wii Remote"
 msgid "Add Podcast"
 msgstr "Добавить подкаст"
 
-#: ../bin/src/ui_addstreamdialog.h:112
+#: ../bin/src/ui_addstreamdialog.h:124
 msgid "Add Stream"
 msgstr "Добавить поток"
 
@@ -525,7 +525,7 @@ msgstr "Добавить действие"
 msgid "Add all tracks from a directory and all its subdirectories"
 msgstr "Добавить все треки из папки и её подпапок"
 
-#: internet/internetradio/savedradio.cpp:116
+#: internet/internetradio/savedradio.cpp:118
 msgid "Add another stream..."
 msgstr "Добавить другой поток…"
 
@@ -533,7 +533,7 @@ msgstr "Добавить другой поток…"
 msgid "Add directory..."
 msgstr "Добавить каталог…"
 
-#: ui/mainwindow.cpp:2133
+#: ui/mainwindow.cpp:2144
 msgid "Add file"
 msgstr "Добавить файл"
 
@@ -553,7 +553,7 @@ msgstr "Добавить файл…"
 msgid "Add files to transcode"
 msgstr "Конвертировать файлы"
 
-#: transcoder/transcodedialog.cpp:309 ui/mainwindow.cpp:2160
+#: transcoder/transcodedialog.cpp:309 ui/mainwindow.cpp:2171
 #: ripper/ripcddialog.cpp:202
 msgid "Add folder"
 msgstr "Добавить папку"
@@ -658,7 +658,7 @@ msgstr "Добавить в плейлисты Spotify"
 msgid "Add to Spotify starred"
 msgstr "Добавить в оценённые Spotify"
 
-#: ui/mainwindow.cpp:1934
+#: ui/mainwindow.cpp:1945
 msgid "Add to another playlist"
 msgstr "Добавить в другой плейлист"
 
@@ -782,11 +782,11 @@ msgstr "Всех переводчиков"
 msgid "All tracks"
 msgstr "Все треки"
 
-#: ../bin/src/ui_networkremotesettingspage.h:242
+#: ../bin/src/ui_networkremotesettingspage.h:363
 msgid "Allow a client to download music from this computer."
 msgstr "Позволяет клиенту скачивать музыку с этого компьютера."
 
-#: ../bin/src/ui_networkremotesettingspage.h:244
+#: ../bin/src/ui_networkremotesettingspage.h:365
 msgid "Allow downloads"
 msgstr "Разрешить загрузки"
 
@@ -893,7 +893,7 @@ msgid "As&k when saving"
 msgstr "Сп&рашивать при сохранении"
 
 #: ../bin/src/ui_transcodedialog.h:225
-#: ../bin/src/ui_networkremotesettingspage.h:250
+#: ../bin/src/ui_networkremotesettingspage.h:371
 #: ../bin/src/ui_ripcddialog.h:322
 msgid "Audio format"
 msgstr "Формат аудио"
@@ -1143,7 +1143,7 @@ msgstr "Проверять новые выпуски"
 msgid "Check for updates"
 msgstr "Проверить обновления"
 
-#: ui/mainwindow.cpp:830
+#: ui/mainwindow.cpp:836
 msgid "Check for updates..."
 msgstr "Проверить обновления…"
 
@@ -1442,11 +1442,11 @@ msgstr "Конвертировать всю музыку"
 msgid "Convert any music that the device can't play"
 msgstr "Конвертировать всю музыку, не поддерживаемую носителем."
 
-#: ../bin/src/ui_networkremotesettingspage.h:247
+#: ../bin/src/ui_networkremotesettingspage.h:368
 msgid "Convert lossless audiofiles before sending them to the remote."
 msgstr "Конвертировать аудиофайлы, сжатые без потери качества, перед отправкой их на удалённое устройство."
 
-#: ../bin/src/ui_networkremotesettingspage.h:249
+#: ../bin/src/ui_networkremotesettingspage.h:370
 msgid "Convert lossless files"
 msgstr "Конвертировать файлы, сжатые без потери качества"
 
@@ -1498,7 +1498,7 @@ msgstr "Не удалось получить информацию"
 msgid "Could not log in to Last.fm. Please try again."
 msgstr "Не удалось войти в Last.fm. Попробуйте ещё раз."
 
-#: playlist/playlistmanager.cpp:168
+#: playlist/playlistmanager.cpp:170
 msgid "Couldn't create playlist"
 msgstr "Невозможно создать плейлист"
 
@@ -1677,7 +1677,7 @@ msgid "Delete downloaded data"
 msgstr "Удалить загруженные данные"
 
 #: devices/deviceview.cpp:396 library/libraryview.cpp:677
-#: ui/mainwindow.cpp:2514 widgets/fileview.cpp:189
+#: ui/mainwindow.cpp:2525 widgets/fileview.cpp:189
 msgid "Delete files"
 msgstr "Удалить файлы"
 
@@ -1718,11 +1718,11 @@ msgstr "Удаление файлов"
 msgid "Depth"
 msgstr "Глубина"
 
-#: ui/mainwindow.cpp:1847
+#: ui/mainwindow.cpp:1858
 msgid "Dequeue selected tracks"
 msgstr "Убрать выбранные треки из очереди"
 
-#: ui/mainwindow.cpp:1845
+#: ui/mainwindow.cpp:1856
 msgid "Dequeue track"
 msgstr "Убрать трек из очереди"
 
@@ -1916,13 +1916,17 @@ msgstr "Загружать новые выпуски автоматически"
 msgid "Download queued"
 msgstr "Загрузка добавлена в очередь"
 
-#: ../bin/src/ui_networkremotesettingspage.h:245
+#: ../bin/src/ui_networkremotesettingspage.h:366
 msgid "Download settings"
 msgstr "Настройки загрузки"
 
-#: ../bin/src/ui_networkremotesettingspage.h:252
-msgid "Download the Android app"
-msgstr "Загрузите приложение для Android"
+#: ../bin/src/ui_networkremotesettingspage.h:385
+msgid "Download the original Android app"
+msgstr "Загрузите оригинальное приложение для Android"
+
+#: ../bin/src/ui_networkremotesettingspage.h:381
+msgid "Download the remote for Desktops, Android and iOS"
+msgstr "Загрузите приложение удалённого доступа для ПК, Android и iOS"
 
 #: internet/magnatune/magnatuneservice.cpp:279
 msgid "Download this album"
@@ -1994,7 +1998,7 @@ msgstr "Случайный динамичный микс"
 msgid "Edit smart playlist..."
 msgstr "Изменить умный плейлист…"
 
-#: ui/mainwindow.cpp:1897
+#: ui/mainwindow.cpp:1908
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr "Изменить тег «%1»…"
@@ -2020,7 +2024,7 @@ msgstr "Изменить информацию о треке"
 msgid "Edit tracks information..."
 msgstr "Изменить информацию о треках"
 
-#: internet/internetradio/savedradio.cpp:111
+#: internet/internetradio/savedradio.cpp:113
 msgid "Edit..."
 msgstr "Изменить…"
 
@@ -2100,7 +2104,7 @@ msgstr "Введите ключевые слова для поиска в gpodde
 msgid "Enter search terms here"
 msgstr "Введите критерии поиска"
 
-#: ../bin/src/ui_addstreamdialog.h:113
+#: ../bin/src/ui_addstreamdialog.h:125
 msgid "Enter the URL of an internet radio stream:"
 msgstr "Введите адрес потока интернет-радио:"
 
@@ -2108,7 +2112,7 @@ msgstr "Введите адрес потока интернет-радио:"
 msgid "Enter the name of the folder"
 msgstr "Введите имя папки"
 
-#: ../bin/src/ui_networkremotesettingspage.h:238
+#: ../bin/src/ui_networkremotesettingspage.h:359
 msgid "Enter this IP in the App to connect to Clementine."
 msgstr "Введите этот IP-адрес в приложении для подключения к Clementine."
 
@@ -2133,8 +2137,8 @@ msgid "Equivalent to --log-levels *:3"
 msgstr "Аналогично --log-levels *:3"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:249
-#: library/libraryview.cpp:671 ui/mainwindow.cpp:2189 ui/mainwindow.cpp:2467
-#: ui/mainwindow.cpp:2645
+#: library/libraryview.cpp:671 ui/mainwindow.cpp:2200 ui/mainwindow.cpp:2478
+#: ui/mainwindow.cpp:2656
 msgid "Error"
 msgstr "Ошибка"
 
@@ -2276,7 +2280,7 @@ msgstr "Затухание звука"
 msgid "Fading duration"
 msgstr "Длительность затухания"
 
-#: ui/mainwindow.cpp:2190
+#: ui/mainwindow.cpp:2201
 msgid "Failed reading CD drive"
 msgstr "Не удалось прочесть CD-привод"
 
@@ -2402,6 +2406,10 @@ msgstr "Имя файла"
 #: ui/mainwindow.cpp:272
 msgid "Files"
 msgstr "Файлы"
+
+#: ../bin/src/ui_networkremotesettingspage.h:376
+msgid "Files root folder"
+msgstr "Файлы корневой папки"
 
 #: ../bin/src/ui_transcodedialog.h:214
 msgid "Files to transcode"
@@ -2546,7 +2554,7 @@ msgstr "Получение каналов"
 msgid "Getting streams"
 msgstr "Получение потоков"
 
-#: ../bin/src/ui_addstreamdialog.h:115
+#: ../bin/src/ui_addstreamdialog.h:127
 msgid "Give it a name:"
 msgstr "Название:"
 
@@ -3007,7 +3015,7 @@ msgstr "Фонотека"
 msgid "Library advanced grouping"
 msgstr "Расширенная группировка фонотеки"
 
-#: ui/mainwindow.cpp:2771
+#: ui/mainwindow.cpp:2782
 msgid "Library rescan notice"
 msgstr "Уведомление о сканировании фонотеки"
 
@@ -3340,13 +3348,17 @@ msgstr "Переместить в фонотеку…"
 msgid "Move up"
 msgstr "Переместить вверх"
 
-#: transcoder/transcodedialog.cpp:228 ui/mainwindow.cpp:2135
+#: transcoder/transcodedialog.cpp:228 ui/mainwindow.cpp:2146
 msgid "Music"
 msgstr "Музыка"
 
 #: ../bin/src/ui_librarysettingspage.h:185
 msgid "Music Library"
 msgstr "Фонотека"
+
+#: ../bin/src/ui_networkremotesettingspage.h:380
+msgid "Music extensions remotely visible"
+msgstr "Музыкальные расширения видны удалённо"
 
 #: core/globalshortcuts.cpp:65 wiimotedev/wiimotesettingspage.cpp:114
 #: ../bin/src/ui_mainwindow.h:763
@@ -3375,7 +3387,7 @@ msgstr "Узкая полоса пропускания (NB)"
 msgid "Network Proxy"
 msgstr "Прокси-сервер"
 
-#: ../bin/src/ui_networkremotesettingspage.h:221
+#: ../bin/src/ui_networkremotesettingspage.h:342
 msgid "Network Remote"
 msgstr "Удалённое управление"
 
@@ -3398,7 +3410,7 @@ msgstr "Никогда не начинать воспроизведение"
 msgid "New folder"
 msgstr "Новая папка"
 
-#: ui/mainwindow.cpp:1951 ../bin/src/ui_mainwindow.h:754
+#: ui/mainwindow.cpp:1962 ../bin/src/ui_mainwindow.h:754
 msgid "New playlist"
 msgstr "Новый плейлист"
 
@@ -3465,7 +3477,7 @@ msgstr "Без коротких блоков"
 msgid "None"
 msgstr "Ничего"
 
-#: library/libraryview.cpp:672 ui/mainwindow.cpp:2468 ui/mainwindow.cpp:2646
+#: library/libraryview.cpp:672 ui/mainwindow.cpp:2479 ui/mainwindow.cpp:2657
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Ни одна из выбранных песен не была скопирована на устройство"
 
@@ -3576,7 +3588,7 @@ msgstr "Вкл."
 msgid "OneDrive"
 msgstr "OneDrive"
 
-#: ../bin/src/ui_networkremotesettingspage.h:226
+#: ../bin/src/ui_networkremotesettingspage.h:347
 msgid ""
 "Only accept connections from clients within the ip ranges:\n"
 "10.x.x.x\n"
@@ -3584,7 +3596,7 @@ msgid ""
 "192.168.x.x"
 msgstr "Разрешать подключение с IP адресов из диапазонов:\n10.x.x.x\n172.16.0.0 - 172.31.255.255\n192.168.x.x"
 
-#: ../bin/src/ui_networkremotesettingspage.h:231
+#: ../bin/src/ui_networkremotesettingspage.h:352
 msgid "Only allow connections from the local network"
 msgstr "Разрешать соединения только из локальной сети"
 
@@ -3667,7 +3679,7 @@ msgid "Optimize for quality"
 msgstr "Оптимизировать по качеству"
 
 #: ../bin/src/ui_transcodedialog.h:226
-#: ../bin/src/ui_networkremotesettingspage.h:251
+#: ../bin/src/ui_networkremotesettingspage.h:372
 #: ../bin/src/ui_ripcddialog.h:321
 msgid "Options..."
 msgstr "Настройки…"
@@ -3764,7 +3776,7 @@ msgstr "Вечеринка"
 msgid "Password"
 msgstr "Пароль"
 
-#: core/globalshortcuts.cpp:52 ui/mainwindow.cpp:1159 ui/mainwindow.cpp:1742
+#: core/globalshortcuts.cpp:52 ui/mainwindow.cpp:1165 ui/mainwindow.cpp:1753
 #: ui/qtsystemtrayicon.cpp:185 wiimotedev/wiimotesettingspage.cpp:115
 msgid "Pause"
 msgstr "Пауза"
@@ -3792,8 +3804,8 @@ msgstr "Пиксель"
 msgid "Plain sidebar"
 msgstr "Нормальная боковая панель"
 
-#: core/globalshortcuts.cpp:51 ui/mainwindow.cpp:684 ui/mainwindow.cpp:1123
-#: ui/mainwindow.cpp:1144 ui/mainwindow.cpp:1746 ui/qtsystemtrayicon.cpp:173
+#: core/globalshortcuts.cpp:51 ui/mainwindow.cpp:684 ui/mainwindow.cpp:1129
+#: ui/mainwindow.cpp:1150 ui/mainwindow.cpp:1757 ui/qtsystemtrayicon.cpp:173
 #: ui/qtsystemtrayicon.cpp:199 wiimotedev/wiimotesettingspage.cpp:108
 #: ../bin/src/ui_mainwindow.h:720
 msgid "Play"
@@ -3816,11 +3828,11 @@ msgstr "Воспроизвести если остановлено, приост
 msgid "Play if there is nothing already playing"
 msgstr "Проиграть, если ничего не проигрывается"
 
-#: library/libraryview.cpp:395 ui/mainwindow.cpp:1858
+#: library/libraryview.cpp:395 ui/mainwindow.cpp:1869
 msgid "Play next"
 msgstr "Воспроизвести следующий"
 
-#: ui/mainwindow.cpp:1856
+#: ui/mainwindow.cpp:1867
 msgid "Play selected tracks next"
 msgstr "Проиграть выбранные треки следующими"
 
@@ -3842,7 +3854,7 @@ msgstr "Настройки проигрывателя"
 
 #: playlist/playlistcontainer.cpp:310 playlist/playlistlistcontainer.cpp:328
 #: playlist/playlistmanager.cpp:88 playlist/playlistmanager.cpp:157
-#: playlist/playlistmanager.cpp:528 playlist/playlisttabbar.cpp:367
+#: playlist/playlistmanager.cpp:537 playlist/playlisttabbar.cpp:367
 msgid "Playlist"
 msgstr "Плейлист"
 
@@ -3900,7 +3912,7 @@ msgid "Popup duration"
 msgstr "Длительность отображения"
 
 #: ../bin/src/ui_networkproxysettingspage.h:165
-#: ../bin/src/ui_networkremotesettingspage.h:224
+#: ../bin/src/ui_networkremotesettingspage.h:345
 msgid "Port"
 msgstr "Порт"
 
@@ -4041,12 +4053,12 @@ msgstr "Опрашиваем устройство…"
 msgid "Queue Manager"
 msgstr "Управление очередью"
 
-#: ui/mainwindow.cpp:1851
+#: ui/mainwindow.cpp:1862
 msgid "Queue selected tracks"
 msgstr "Выбранные треки в очередь"
 
 #: globalsearch/globalsearchview.cpp:464 library/libraryview.cpp:392
-#: ui/mainwindow.cpp:1849
+#: ui/mainwindow.cpp:1860
 msgid "Queue track"
 msgstr "Добавить трек в очередь"
 
@@ -4160,7 +4172,7 @@ msgstr "Восстановить преды&дущее состояние"
 msgid "Remember my choice"
 msgstr "Запомнить мой выбор"
 
-#: internet/internetradio/savedradio.cpp:108
+#: internet/internetradio/savedradio.cpp:110
 #: ../bin/src/ui_savedgroupingmanager.h:103 ../bin/src/ui_queuemanager.h:151
 #: ../bin/src/ui_transcodedialog.h:223
 msgid "Remove"
@@ -4252,7 +4264,7 @@ msgstr "Режим нормализации"
 msgid "Repopulate"
 msgstr "Перезаполнить"
 
-#: ../bin/src/ui_networkremotesettingspage.h:235
+#: ../bin/src/ui_networkremotesettingspage.h:356
 msgid "Require authentication code"
 msgstr "Требовать код аутентификации"
 
@@ -4304,6 +4316,10 @@ msgstr "Конвертировать аудио-диск"
 #: ui/equalizer.cpp:149
 msgid "Rock"
 msgstr "Рок"
+
+#: ../bin/src/ui_networkremotesettingspage.h:374
+msgid "Root folder that will be browsable from the network remote"
+msgstr "Корневая папка будет видна через сетевой удалённый доступ"
 
 #: ../bin/src/ui_console.h:130
 msgid "Run"
@@ -4366,7 +4382,7 @@ msgctxt "Save playlist menu action."
 msgid "Save playlist"
 msgstr "Сохранить плейлист"
 
-#: playlist/playlistmanager.cpp:236
+#: playlist/playlistmanager.cpp:238
 msgctxt "Title of the playlist save dialog."
 msgid "Save playlist"
 msgstr "Сохранить плейлист"
@@ -4387,7 +4403,7 @@ msgstr "Записывать рейтинги в теги файлов, если
 msgid "Save statistics in file tags when possible"
 msgstr "Записывать статистику в теги файлов, если возможно"
 
-#: ../bin/src/ui_addstreamdialog.h:114
+#: ../bin/src/ui_addstreamdialog.h:126
 msgid "Save this stream in the Internet tab"
 msgstr "Сохранить этот поток во вкладке Интернет"
 
@@ -4540,6 +4556,14 @@ msgstr "Выбрать все"
 msgid "Select None"
 msgstr "Отменить выбор"
 
+#: ui/filechooserwidget.cpp:95
+msgid "Select a directory"
+msgstr "Выберите каталог"
+
+#: ui/filechooserwidget.cpp:92
+msgid "Select a file"
+msgstr "Выберите файл"
+
 #: ../bin/src/ui_appearancesettingspage.h:303
 msgid "Select background color:"
 msgstr "Выбрать цвет фона:"
@@ -4588,7 +4612,7 @@ msgstr "Информация о сервере"
 msgid "Service offline"
 msgstr "Служба недоступна"
 
-#: ui/mainwindow.cpp:1896
+#: ui/mainwindow.cpp:1907
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr "Установить %1 в «%2»…"
@@ -4601,7 +4625,7 @@ msgstr "Установить громкость в <value> процентов"
 msgid "Set value for all selected tracks..."
 msgstr "Установить значение для всех выделенных треков…"
 
-#: ../bin/src/ui_networkremotesettingspage.h:223
+#: ../bin/src/ui_networkremotesettingspage.h:344
 msgid "Settings"
 msgstr "Настройки"
 
@@ -4801,11 +4825,11 @@ msgstr "Пропустить подсчёт"
 msgid "Skip forwards in playlist"
 msgstr "Переместить вперёд в плейлисте"
 
-#: ui/mainwindow.cpp:1867
+#: ui/mainwindow.cpp:1878
 msgid "Skip selected tracks"
 msgstr "Пропустить выбранные треки"
 
-#: ui/mainwindow.cpp:1865
+#: ui/mainwindow.cpp:1876
 msgid "Skip track"
 msgstr "Пропустить трек"
 
@@ -5126,7 +5150,7 @@ msgid ""
 "license key. Visit subsonic.org for details."
 msgstr "Пробный период для сервера Subsonic закончен. Пожалуйста, поддержите разработчика, чтобы получить лицензионный ключ. Посетите subsonic.org для подробной информации."
 
-#: ui/mainwindow.cpp:2762
+#: ui/mainwindow.cpp:2773
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -5168,7 +5192,7 @@ msgid ""
 "continue?"
 msgstr "Эти файлы будут удалены с устройства. Вы действительно хотите продолжить?"
 
-#: library/libraryview.cpp:678 ui/mainwindow.cpp:2515 widgets/fileview.cpp:190
+#: library/libraryview.cpp:678 ui/mainwindow.cpp:2526 widgets/fileview.cpp:190
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -5270,7 +5294,7 @@ msgstr "Включить OSD"
 msgid "Toggle fullscreen"
 msgstr "Развернуть на весь экран"
 
-#: ui/mainwindow.cpp:1853
+#: ui/mainwindow.cpp:1864
 msgid "Toggle queue status"
 msgstr "Переключить состояние очереди"
 
@@ -5360,6 +5384,10 @@ msgstr "URI"
 msgid "URL"
 msgstr "Адрес"
 
+#: ../bin/src/ui_addstreamdialog.h:128
+msgid "URL of its Logo:"
+msgstr "Адрес его логотипа:"
+
 #: core/commandlineoptions.cpp:159
 msgid "URL(s)"
 msgstr "Ссылки"
@@ -5385,7 +5413,7 @@ msgstr "Невозможно загрузить %1 (%2)"
 #: core/song.cpp:466 library/librarymodel.cpp:376 library/librarymodel.cpp:381
 #: library/librarymodel.cpp:385 library/librarymodel.cpp:1185
 #: library/savedgroupingmanager.cpp:105 playlist/playlistdelegates.cpp:305
-#: playlist/playlistmanager.cpp:535 playlist/playlistmanager.cpp:536
+#: playlist/playlistmanager.cpp:544 playlist/playlistmanager.cpp:545
 #: songinfo/streamdiscoverer.cpp:88 ui/albumcoverchoicecontroller.cpp:132
 #: ui/edittagdialog.cpp:465 ui/edittagdialog.cpp:511
 msgid "Unknown"
@@ -5404,11 +5432,11 @@ msgstr "Неизвестная ошибка"
 msgid "Unset cover"
 msgstr "Удалить обложку"
 
-#: ui/mainwindow.cpp:1863
+#: ui/mainwindow.cpp:1874
 msgid "Unskip selected tracks"
 msgstr "Не пропускать выбранные треки"
 
-#: ui/mainwindow.cpp:1861
+#: ui/mainwindow.cpp:1872
 msgid "Unskip track"
 msgstr "Не пропускать трек"
 
@@ -5491,7 +5519,7 @@ msgstr "Использовать собственный набор цветов"
 msgid "Use a custom message for notifications"
 msgstr "Использовать собственное сообщение для уведомлений"
 
-#: ../bin/src/ui_networkremotesettingspage.h:222
+#: ../bin/src/ui_networkremotesettingspage.h:343
 msgid "Use a network remote control"
 msgstr "Использовать удалённое управление по сети"
 
@@ -5569,7 +5597,7 @@ msgid "Variable bit rate"
 msgstr "Переменный битрейт"
 
 #: globalsearch/globalsearchmodel.cpp:110 library/librarymodel.cpp:302
-#: playlist/playlistmanager.cpp:547 ui/albumcovermanager.cpp:266
+#: playlist/playlistmanager.cpp:556 ui/albumcovermanager.cpp:266
 msgid "Various artists"
 msgstr "Различные исполнители"
 
@@ -5738,7 +5766,7 @@ msgid ""
 "well?"
 msgstr "Хотите ли вы переместить и другие песни из этого альбома в «Различные исполнители»?"
 
-#: ui/mainwindow.cpp:2769
+#: ui/mainwindow.cpp:2780
 msgid "Would you like to run a full rescan right now?"
 msgstr "Желаете запустить повторное сканирование?"
 
@@ -5811,6 +5839,14 @@ msgstr "Вы вошли в систему."
 msgid "You can change the way the songs in the library are organised."
 msgstr "Можно изменить способ организации композиций в фонотеке."
 
+#: ui/networkremotesettingspage.cpp:162
+#, qt-format
+msgid ""
+"You can find <a href=\"%1\">here on GitHub</a> the new cross platform "
+"remote.<br/>It is available on <b>Linux</b>, <b>MacOS</b> and "
+"<b>Windows</b><br/>"
+msgstr "Вы можете найти <a href=\"%1\">в GitHub</a> новое кроссплатформенное решение для удалённого доступа.<br/>Оно доступно для <b>Linux</b>, <b>MacOS</b> и <b>Windows</b><br/>"
+
 #: internet/magnatune/magnatunesettingspage.cpp:59
 msgid ""
 "You can listen to Magnatune songs for free without an account.  Purchasing a"
@@ -5861,7 +5897,7 @@ msgstr "Вы должны запустить «Параметры системы
 msgid "You will need to restart Clementine if you change the language."
 msgstr "Для применения языка потребуется перезапуск Clementine."
 
-#: ../bin/src/ui_networkremotesettingspage.h:240
+#: ../bin/src/ui_networkremotesettingspage.h:361
 msgid "Your IP address:"
 msgstr "Ваш IP-адрес:"
 
@@ -5937,9 +5973,19 @@ msgstr "наибольшие сначала"
 msgid "bpm"
 msgstr "bpm"
 
+#: ../bin/src/ui_networkremotesettingspage.h:378
+msgid ""
+"coma separated list of the allowed extensions that will be visible from the "
+"network remote (ex: m3u,mp3,flac,ogg,wav)"
+msgstr "разделённый запятыми список разрешённых расширений, который будет доступен через сетевой удалённый доступ (напр.: m3u,mp3,flac,ogg,wav) "
+
 #: smartplaylists/searchterm.cpp:249
 msgid "contains"
 msgstr "содержит"
+
+#: ../bin/src/ui_networkremotesettingspage.h:382
+msgid "desktop_remote"
+msgstr "desktop_remote"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:221
 #: ../bin/src/ui_transcoderoptionsvorbis.h:206
@@ -6045,9 +6091,11 @@ msgstr "на"
 msgid "options"
 msgstr "настройки"
 
-#: ../bin/src/ui_networkremotesettingspage.h:253
-msgid "or scan the QR code!"
-msgstr "или отсканируйте QR-код!"
+#: ../bin/src/ui_networkremotesettingspage.h:383
+#: ../bin/src/ui_networkremotesettingspage.h:384
+#: ../bin/src/ui_networkremotesettingspage.h:386
+msgid "or scan the QR code: "
+msgstr "или отсканируйте QR-код:"
 
 #: widgets/didyoumean.cpp:56
 msgid "press enter"

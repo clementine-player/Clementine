@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2020-11-28 20:36+0000\n"
+"PO-Revision-Date: 2020-12-17 12:36+0000\n"
 "Last-Translator: John Maguire <john.maguire@gmail.com>\n"
 "Language-Team: Basque (http://www.transifex.com/davidsansome/clementine/language/eu/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -105,7 +105,7 @@ msgid ""
 "%2"
 msgstr ""
 
-#: playlist/playlistmanager.cpp:432
+#: playlist/playlistmanager.cpp:439
 #, qt-format
 msgid "%1 selected of"
 msgstr "%1 aukeraturik"
@@ -130,7 +130,7 @@ msgstr "%1 abesti aurkiturik"
 msgid "%1 songs found (showing %2)"
 msgstr "%1 abesti aurkiturik (%2 erakusten)"
 
-#: playlist/playlistmanager.cpp:438 playlist/queue.cpp:228
+#: playlist/playlistmanager.cpp:445 playlist/queue.cpp:228
 #, qt-format
 msgid "%1 tracks"
 msgstr "%1 pista"
@@ -291,7 +291,7 @@ msgstr "0px"
 msgid "1 day"
 msgstr "Egun 1"
 
-#: playlist/playlistmanager.cpp:438 playlist/queue.cpp:228
+#: playlist/playlistmanager.cpp:445 playlist/queue.cpp:228
 msgid "1 track"
 msgstr "Pista 1"
 
@@ -382,7 +382,7 @@ msgstr "<p>Tokenak %-rekin hasten dira, adibidez: %artista %albuma %titulua</p>\
 msgid "A Spotify Premium account is required."
 msgstr "Beharrezkoa da Spotify Premium kontua izatea."
 
-#: ../bin/src/ui_networkremotesettingspage.h:233
+#: ../bin/src/ui_networkremotesettingspage.h:354
 msgid "A client can connect only, if the correct code was entered."
 msgstr ""
 
@@ -484,7 +484,7 @@ msgstr ""
 msgid "Add Podcast"
 msgstr "Podcast-a gehitu"
 
-#: ../bin/src/ui_addstreamdialog.h:112
+#: ../bin/src/ui_addstreamdialog.h:124
 msgid "Add Stream"
 msgstr "Gehitu jarioa"
 
@@ -500,7 +500,7 @@ msgstr "Gehitu ekintza"
 msgid "Add all tracks from a directory and all its subdirectories"
 msgstr ""
 
-#: internet/internetradio/savedradio.cpp:116
+#: internet/internetradio/savedradio.cpp:118
 msgid "Add another stream..."
 msgstr "Gehitu beste jario bat..."
 
@@ -508,7 +508,7 @@ msgstr "Gehitu beste jario bat..."
 msgid "Add directory..."
 msgstr "Gehitu direktorioa..."
 
-#: ui/mainwindow.cpp:2133
+#: ui/mainwindow.cpp:2144
 msgid "Add file"
 msgstr "Gehitu fitxategia"
 
@@ -528,7 +528,7 @@ msgstr "Gehitu fitxategia..."
 msgid "Add files to transcode"
 msgstr "Gehitu transkodetzeko fitxategiak"
 
-#: transcoder/transcodedialog.cpp:309 ui/mainwindow.cpp:2160
+#: transcoder/transcodedialog.cpp:309 ui/mainwindow.cpp:2171
 #: ripper/ripcddialog.cpp:202
 msgid "Add folder"
 msgstr "Gehitu karpeta"
@@ -633,7 +633,7 @@ msgstr ""
 msgid "Add to Spotify starred"
 msgstr ""
 
-#: ui/mainwindow.cpp:1934
+#: ui/mainwindow.cpp:1945
 msgid "Add to another playlist"
 msgstr "Gehitu beste erreprodukzio-zerrenda batera"
 
@@ -757,11 +757,11 @@ msgstr "Itzultzaile guztiak"
 msgid "All tracks"
 msgstr "Pista guztiak"
 
-#: ../bin/src/ui_networkremotesettingspage.h:242
+#: ../bin/src/ui_networkremotesettingspage.h:363
 msgid "Allow a client to download music from this computer."
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:244
+#: ../bin/src/ui_networkremotesettingspage.h:365
 msgid "Allow downloads"
 msgstr ""
 
@@ -868,7 +868,7 @@ msgid "As&k when saving"
 msgstr ""
 
 #: ../bin/src/ui_transcodedialog.h:225
-#: ../bin/src/ui_networkremotesettingspage.h:250
+#: ../bin/src/ui_networkremotesettingspage.h:371
 #: ../bin/src/ui_ripcddialog.h:322
 msgid "Audio format"
 msgstr "Audio formatua"
@@ -1118,7 +1118,7 @@ msgstr "Atal berriak bilatu"
 msgid "Check for updates"
 msgstr ""
 
-#: ui/mainwindow.cpp:830
+#: ui/mainwindow.cpp:836
 msgid "Check for updates..."
 msgstr "Eguneraketak bilatu..."
 
@@ -1417,11 +1417,11 @@ msgstr "Musika guztia bihurtu"
 msgid "Convert any music that the device can't play"
 msgstr "Gailuak erreproduzitu ezin dezakeen musika bihurtu"
 
-#: ../bin/src/ui_networkremotesettingspage.h:247
+#: ../bin/src/ui_networkremotesettingspage.h:368
 msgid "Convert lossless audiofiles before sending them to the remote."
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:249
+#: ../bin/src/ui_networkremotesettingspage.h:370
 msgid "Convert lossless files"
 msgstr ""
 
@@ -1473,7 +1473,7 @@ msgstr ""
 msgid "Could not log in to Last.fm. Please try again."
 msgstr ""
 
-#: playlist/playlistmanager.cpp:168
+#: playlist/playlistmanager.cpp:170
 msgid "Couldn't create playlist"
 msgstr ""
 
@@ -1652,7 +1652,7 @@ msgid "Delete downloaded data"
 msgstr "Ezabatu deskargatutako datuak"
 
 #: devices/deviceview.cpp:396 library/libraryview.cpp:677
-#: ui/mainwindow.cpp:2514 widgets/fileview.cpp:189
+#: ui/mainwindow.cpp:2525 widgets/fileview.cpp:189
 msgid "Delete files"
 msgstr "Ezabatu fitxategiak"
 
@@ -1693,11 +1693,11 @@ msgstr "Fitxategiak ezabatzen"
 msgid "Depth"
 msgstr ""
 
-#: ui/mainwindow.cpp:1847
+#: ui/mainwindow.cpp:1858
 msgid "Dequeue selected tracks"
 msgstr "Atera aukeraturiko pistak ilaratik"
 
-#: ui/mainwindow.cpp:1845
+#: ui/mainwindow.cpp:1856
 msgid "Dequeue track"
 msgstr "Atera pista ilaratik"
 
@@ -1891,12 +1891,16 @@ msgstr "Atal berriak automatikoki deskargatu"
 msgid "Download queued"
 msgstr "Deskarga zerrendaren zain"
 
-#: ../bin/src/ui_networkremotesettingspage.h:245
+#: ../bin/src/ui_networkremotesettingspage.h:366
 msgid "Download settings"
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:252
-msgid "Download the Android app"
+#: ../bin/src/ui_networkremotesettingspage.h:385
+msgid "Download the original Android app"
+msgstr ""
+
+#: ../bin/src/ui_networkremotesettingspage.h:381
+msgid "Download the remote for Desktops, Android and iOS"
 msgstr ""
 
 #: internet/magnatune/magnatuneservice.cpp:279
@@ -1969,7 +1973,7 @@ msgstr "Ausazko nahasketa dinamikoa"
 msgid "Edit smart playlist..."
 msgstr "Editatu erreprodukzio-zerrenda adimenduna..."
 
-#: ui/mainwindow.cpp:1897
+#: ui/mainwindow.cpp:1908
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr ""
@@ -1995,7 +1999,7 @@ msgstr "Editatu pistaren informazioa..."
 msgid "Edit tracks information..."
 msgstr "Editatu pisten informazioa..."
 
-#: internet/internetradio/savedradio.cpp:111
+#: internet/internetradio/savedradio.cpp:113
 msgid "Edit..."
 msgstr "Editatu..."
 
@@ -2075,7 +2079,7 @@ msgstr "Sartu bilaketa terminoak gpodder.net-en podcast-ak bilatzeko"
 msgid "Enter search terms here"
 msgstr "Sartu bilaketa-terminoak hemen"
 
-#: ../bin/src/ui_addstreamdialog.h:113
+#: ../bin/src/ui_addstreamdialog.h:125
 msgid "Enter the URL of an internet radio stream:"
 msgstr "Sartu interneteko irratiko jarioaren URLa:"
 
@@ -2083,7 +2087,7 @@ msgstr "Sartu interneteko irratiko jarioaren URLa:"
 msgid "Enter the name of the folder"
 msgstr "Sartu karpetaren izena"
 
-#: ../bin/src/ui_networkremotesettingspage.h:238
+#: ../bin/src/ui_networkremotesettingspage.h:359
 msgid "Enter this IP in the App to connect to Clementine."
 msgstr ""
 
@@ -2108,8 +2112,8 @@ msgid "Equivalent to --log-levels *:3"
 msgstr "--log-levels *:3-en baliokidea"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:249
-#: library/libraryview.cpp:671 ui/mainwindow.cpp:2189 ui/mainwindow.cpp:2467
-#: ui/mainwindow.cpp:2645
+#: library/libraryview.cpp:671 ui/mainwindow.cpp:2200 ui/mainwindow.cpp:2478
+#: ui/mainwindow.cpp:2656
 msgid "Error"
 msgstr "Errorea"
 
@@ -2251,7 +2255,7 @@ msgstr "Iraungitzea"
 msgid "Fading duration"
 msgstr "Iraungitzearen iraupena"
 
-#: ui/mainwindow.cpp:2190
+#: ui/mainwindow.cpp:2201
 msgid "Failed reading CD drive"
 msgstr ""
 
@@ -2377,6 +2381,10 @@ msgstr "Fitxategi-izena"
 #: ui/mainwindow.cpp:272
 msgid "Files"
 msgstr "Fitxategiak"
+
+#: ../bin/src/ui_networkremotesettingspage.h:376
+msgid "Files root folder"
+msgstr ""
 
 #: ../bin/src/ui_transcodedialog.h:214
 msgid "Files to transcode"
@@ -2521,7 +2529,7 @@ msgstr "Kateak eskuratzen"
 msgid "Getting streams"
 msgstr "Jarioak eskuratzen"
 
-#: ../bin/src/ui_addstreamdialog.h:115
+#: ../bin/src/ui_addstreamdialog.h:127
 msgid "Give it a name:"
 msgstr "Izendatu:"
 
@@ -2982,7 +2990,7 @@ msgstr "Bilduma"
 msgid "Library advanced grouping"
 msgstr "Bildumaren taldekatze aurreratua"
 
-#: ui/mainwindow.cpp:2771
+#: ui/mainwindow.cpp:2782
 msgid "Library rescan notice"
 msgstr "Bildumaren berreskaneoaren abisua"
 
@@ -3315,13 +3323,17 @@ msgstr "Eraman bildumara..."
 msgid "Move up"
 msgstr "Eraman gora"
 
-#: transcoder/transcodedialog.cpp:228 ui/mainwindow.cpp:2135
+#: transcoder/transcodedialog.cpp:228 ui/mainwindow.cpp:2146
 msgid "Music"
 msgstr "Musika"
 
 #: ../bin/src/ui_librarysettingspage.h:185
 msgid "Music Library"
 msgstr "Musika-bilduma"
+
+#: ../bin/src/ui_networkremotesettingspage.h:380
+msgid "Music extensions remotely visible"
+msgstr ""
 
 #: core/globalshortcuts.cpp:65 wiimotedev/wiimotesettingspage.cpp:114
 #: ../bin/src/ui_mainwindow.h:763
@@ -3350,7 +3362,7 @@ msgstr "Banda estua (NB)"
 msgid "Network Proxy"
 msgstr "Sareko proxy-a"
 
-#: ../bin/src/ui_networkremotesettingspage.h:221
+#: ../bin/src/ui_networkremotesettingspage.h:342
 msgid "Network Remote"
 msgstr "Sareko urruneko kontrola"
 
@@ -3373,7 +3385,7 @@ msgstr "Inoiz ez hasi erreproduzitzen"
 msgid "New folder"
 msgstr "Karpeta berria"
 
-#: ui/mainwindow.cpp:1951 ../bin/src/ui_mainwindow.h:754
+#: ui/mainwindow.cpp:1962 ../bin/src/ui_mainwindow.h:754
 msgid "New playlist"
 msgstr "Erreprodukzio-zerrenda berria"
 
@@ -3440,7 +3452,7 @@ msgstr "Bloke laburrik ez"
 msgid "None"
 msgstr "Bat ere ez"
 
-#: library/libraryview.cpp:672 ui/mainwindow.cpp:2468 ui/mainwindow.cpp:2646
+#: library/libraryview.cpp:672 ui/mainwindow.cpp:2479 ui/mainwindow.cpp:2657
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Aukeraturiko abestietako bat ere ez zen aproposa gailu batera kopiatzeko"
 
@@ -3551,7 +3563,7 @@ msgstr ""
 msgid "OneDrive"
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:226
+#: ../bin/src/ui_networkremotesettingspage.h:347
 msgid ""
 "Only accept connections from clients within the ip ranges:\n"
 "10.x.x.x\n"
@@ -3559,7 +3571,7 @@ msgid ""
 "192.168.x.x"
 msgstr ""
 
-#: ../bin/src/ui_networkremotesettingspage.h:231
+#: ../bin/src/ui_networkremotesettingspage.h:352
 msgid "Only allow connections from the local network"
 msgstr ""
 
@@ -3642,7 +3654,7 @@ msgid "Optimize for quality"
 msgstr "Kalitaterako optimizatu"
 
 #: ../bin/src/ui_transcodedialog.h:226
-#: ../bin/src/ui_networkremotesettingspage.h:251
+#: ../bin/src/ui_networkremotesettingspage.h:372
 #: ../bin/src/ui_ripcddialog.h:321
 msgid "Options..."
 msgstr "Aukerak..."
@@ -3739,7 +3751,7 @@ msgstr "Jaia"
 msgid "Password"
 msgstr "Pasahitza"
 
-#: core/globalshortcuts.cpp:52 ui/mainwindow.cpp:1159 ui/mainwindow.cpp:1742
+#: core/globalshortcuts.cpp:52 ui/mainwindow.cpp:1165 ui/mainwindow.cpp:1753
 #: ui/qtsystemtrayicon.cpp:185 wiimotedev/wiimotesettingspage.cpp:115
 msgid "Pause"
 msgstr "Pausarazi"
@@ -3767,8 +3779,8 @@ msgstr "Pixel"
 msgid "Plain sidebar"
 msgstr "Albo-barra sinplea"
 
-#: core/globalshortcuts.cpp:51 ui/mainwindow.cpp:684 ui/mainwindow.cpp:1123
-#: ui/mainwindow.cpp:1144 ui/mainwindow.cpp:1746 ui/qtsystemtrayicon.cpp:173
+#: core/globalshortcuts.cpp:51 ui/mainwindow.cpp:684 ui/mainwindow.cpp:1129
+#: ui/mainwindow.cpp:1150 ui/mainwindow.cpp:1757 ui/qtsystemtrayicon.cpp:173
 #: ui/qtsystemtrayicon.cpp:199 wiimotedev/wiimotesettingspage.cpp:108
 #: ../bin/src/ui_mainwindow.h:720
 msgid "Play"
@@ -3791,11 +3803,11 @@ msgstr "Erreproduzitu pausatua badago, pausarazi erreproduzitzen ari bada"
 msgid "Play if there is nothing already playing"
 msgstr "Erreproduzitu ez badago ezer aurretik erreproduzitzen"
 
-#: library/libraryview.cpp:395 ui/mainwindow.cpp:1858
+#: library/libraryview.cpp:395 ui/mainwindow.cpp:1869
 msgid "Play next"
 msgstr ""
 
-#: ui/mainwindow.cpp:1856
+#: ui/mainwindow.cpp:1867
 msgid "Play selected tracks next"
 msgstr ""
 
@@ -3817,7 +3829,7 @@ msgstr "Erreproduzitzailearen aukerak"
 
 #: playlist/playlistcontainer.cpp:310 playlist/playlistlistcontainer.cpp:328
 #: playlist/playlistmanager.cpp:88 playlist/playlistmanager.cpp:157
-#: playlist/playlistmanager.cpp:528 playlist/playlisttabbar.cpp:367
+#: playlist/playlistmanager.cpp:537 playlist/playlisttabbar.cpp:367
 msgid "Playlist"
 msgstr "Erreprodukzio-zerrenda"
 
@@ -3875,7 +3887,7 @@ msgid "Popup duration"
 msgstr "Laster-leihoaren iraupena"
 
 #: ../bin/src/ui_networkproxysettingspage.h:165
-#: ../bin/src/ui_networkremotesettingspage.h:224
+#: ../bin/src/ui_networkremotesettingspage.h:345
 msgid "Port"
 msgstr "Ataka"
 
@@ -4016,12 +4028,12 @@ msgstr "Gailua galdekatzen..."
 msgid "Queue Manager"
 msgstr "Ilara-kudeatzailea"
 
-#: ui/mainwindow.cpp:1851
+#: ui/mainwindow.cpp:1862
 msgid "Queue selected tracks"
 msgstr "Aukeraturiko pistak ilaran jarri"
 
 #: globalsearch/globalsearchview.cpp:464 library/libraryview.cpp:392
-#: ui/mainwindow.cpp:1849
+#: ui/mainwindow.cpp:1860
 msgid "Queue track"
 msgstr "Pista ilaran jarri"
 
@@ -4135,7 +4147,7 @@ msgstr ""
 msgid "Remember my choice"
 msgstr ""
 
-#: internet/internetradio/savedradio.cpp:108
+#: internet/internetradio/savedradio.cpp:110
 #: ../bin/src/ui_savedgroupingmanager.h:103 ../bin/src/ui_queuemanager.h:151
 #: ../bin/src/ui_transcodedialog.h:223
 msgid "Remove"
@@ -4227,7 +4239,7 @@ msgstr ""
 msgid "Repopulate"
 msgstr "Birpopulatu"
 
-#: ../bin/src/ui_networkremotesettingspage.h:235
+#: ../bin/src/ui_networkremotesettingspage.h:356
 msgid "Require authentication code"
 msgstr ""
 
@@ -4279,6 +4291,10 @@ msgstr ""
 #: ui/equalizer.cpp:149
 msgid "Rock"
 msgstr "Rock"
+
+#: ../bin/src/ui_networkremotesettingspage.h:374
+msgid "Root folder that will be browsable from the network remote"
+msgstr ""
 
 #: ../bin/src/ui_console.h:130
 msgid "Run"
@@ -4341,7 +4357,7 @@ msgctxt "Save playlist menu action."
 msgid "Save playlist"
 msgstr ""
 
-#: playlist/playlistmanager.cpp:236
+#: playlist/playlistmanager.cpp:238
 msgctxt "Title of the playlist save dialog."
 msgid "Save playlist"
 msgstr ""
@@ -4362,7 +4378,7 @@ msgstr ""
 msgid "Save statistics in file tags when possible"
 msgstr ""
 
-#: ../bin/src/ui_addstreamdialog.h:114
+#: ../bin/src/ui_addstreamdialog.h:126
 msgid "Save this stream in the Internet tab"
 msgstr "Gorde jario hau Internet fitxan"
 
@@ -4515,6 +4531,14 @@ msgstr "Hautatu dena"
 msgid "Select None"
 msgstr "Ez hautatu ezer"
 
+#: ui/filechooserwidget.cpp:95
+msgid "Select a directory"
+msgstr ""
+
+#: ui/filechooserwidget.cpp:92
+msgid "Select a file"
+msgstr ""
+
 #: ../bin/src/ui_appearancesettingspage.h:303
 msgid "Select background color:"
 msgstr "Hautatu atzeko planoaren kolorea:"
@@ -4563,7 +4587,7 @@ msgstr "Zerbitzariaren xehetasunak"
 msgid "Service offline"
 msgstr "Zerbitzua lineaz kanpo"
 
-#: ui/mainwindow.cpp:1896
+#: ui/mainwindow.cpp:1907
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr "Ezarri %1 \"%2\"-(e)ra..."
@@ -4576,7 +4600,7 @@ msgstr "Ezarri bolumena ehuneko <value>-ra"
 msgid "Set value for all selected tracks..."
 msgstr "Ezarri balioa aukeratutako pista guztiei..."
 
-#: ../bin/src/ui_networkremotesettingspage.h:223
+#: ../bin/src/ui_networkremotesettingspage.h:344
 msgid "Settings"
 msgstr ""
 
@@ -4776,11 +4800,11 @@ msgstr "Saltatu kontagailua"
 msgid "Skip forwards in playlist"
 msgstr "Saltatu aurrerantz erreprodukzio-zerrendan"
 
-#: ui/mainwindow.cpp:1867
+#: ui/mainwindow.cpp:1878
 msgid "Skip selected tracks"
 msgstr ""
 
-#: ui/mainwindow.cpp:1865
+#: ui/mainwindow.cpp:1876
 msgid "Skip track"
 msgstr ""
 
@@ -5101,7 +5125,7 @@ msgid ""
 "license key. Visit subsonic.org for details."
 msgstr ""
 
-#: ui/mainwindow.cpp:2762
+#: ui/mainwindow.cpp:2773
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -5143,7 +5167,7 @@ msgid ""
 "continue?"
 msgstr "Fitxategi hauek gailutik ezabatuko dira, jarraitu nahi duzu?"
 
-#: library/libraryview.cpp:678 ui/mainwindow.cpp:2515 widgets/fileview.cpp:190
+#: library/libraryview.cpp:678 ui/mainwindow.cpp:2526 widgets/fileview.cpp:190
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -5245,7 +5269,7 @@ msgstr "Txandakatu OSD itxurosoa"
 msgid "Toggle fullscreen"
 msgstr "Txandakatu pantaila-osoa"
 
-#: ui/mainwindow.cpp:1853
+#: ui/mainwindow.cpp:1864
 msgid "Toggle queue status"
 msgstr "Txandakatu ilara-egoera"
 
@@ -5335,6 +5359,10 @@ msgstr "URI"
 msgid "URL"
 msgstr ""
 
+#: ../bin/src/ui_addstreamdialog.h:128
+msgid "URL of its Logo:"
+msgstr ""
+
 #: core/commandlineoptions.cpp:159
 msgid "URL(s)"
 msgstr "URLa(k)"
@@ -5360,7 +5388,7 @@ msgstr "Ezin izan da %1 deskargatu (%2)"
 #: core/song.cpp:466 library/librarymodel.cpp:376 library/librarymodel.cpp:381
 #: library/librarymodel.cpp:385 library/librarymodel.cpp:1185
 #: library/savedgroupingmanager.cpp:105 playlist/playlistdelegates.cpp:305
-#: playlist/playlistmanager.cpp:535 playlist/playlistmanager.cpp:536
+#: playlist/playlistmanager.cpp:544 playlist/playlistmanager.cpp:545
 #: songinfo/streamdiscoverer.cpp:88 ui/albumcoverchoicecontroller.cpp:132
 #: ui/edittagdialog.cpp:465 ui/edittagdialog.cpp:511
 msgid "Unknown"
@@ -5379,11 +5407,11 @@ msgstr "Errore ezezaguna"
 msgid "Unset cover"
 msgstr "Ezarri gabeko azala"
 
-#: ui/mainwindow.cpp:1863
+#: ui/mainwindow.cpp:1874
 msgid "Unskip selected tracks"
 msgstr ""
 
-#: ui/mainwindow.cpp:1861
+#: ui/mainwindow.cpp:1872
 msgid "Unskip track"
 msgstr ""
 
@@ -5466,7 +5494,7 @@ msgstr "Erabili kolore-multzo pertsonalizatua"
 msgid "Use a custom message for notifications"
 msgstr "Erabili mezu pertsonalizatua jakinarazpenetan"
 
-#: ../bin/src/ui_networkremotesettingspage.h:222
+#: ../bin/src/ui_networkremotesettingspage.h:343
 msgid "Use a network remote control"
 msgstr ""
 
@@ -5544,7 +5572,7 @@ msgid "Variable bit rate"
 msgstr "Bit-tasa aldakorra"
 
 #: globalsearch/globalsearchmodel.cpp:110 library/librarymodel.cpp:302
-#: playlist/playlistmanager.cpp:547 ui/albumcovermanager.cpp:266
+#: playlist/playlistmanager.cpp:556 ui/albumcovermanager.cpp:266
 msgid "Various artists"
 msgstr "Hainbat artista"
 
@@ -5713,7 +5741,7 @@ msgid ""
 "well?"
 msgstr "Beste abestiak ere Hainbat artistara mugitzea nahi duzu?"
 
-#: ui/mainwindow.cpp:2769
+#: ui/mainwindow.cpp:2780
 msgid "Would you like to run a full rescan right now?"
 msgstr "Berreskaneo osoa orain egitea nahi duzu?"
 
@@ -5786,6 +5814,14 @@ msgstr "Saioa hasi duzu."
 msgid "You can change the way the songs in the library are organised."
 msgstr "Bildumako abestiak antolaturik dauden era alda dezakezu."
 
+#: ui/networkremotesettingspage.cpp:162
+#, qt-format
+msgid ""
+"You can find <a href=\"%1\">here on GitHub</a> the new cross platform "
+"remote.<br/>It is available on <b>Linux</b>, <b>MacOS</b> and "
+"<b>Windows</b><br/>"
+msgstr ""
+
 #: internet/magnatune/magnatunesettingspage.cpp:59
 msgid ""
 "You can listen to Magnatune songs for free without an account.  Purchasing a"
@@ -5836,7 +5872,7 @@ msgstr ""
 msgid "You will need to restart Clementine if you change the language."
 msgstr "Hizkuntzaz aldatuz gero, Clementine berrabiarazi behar da."
 
-#: ../bin/src/ui_networkremotesettingspage.h:240
+#: ../bin/src/ui_networkremotesettingspage.h:361
 msgid "Your IP address:"
 msgstr ""
 
@@ -5912,9 +5948,19 @@ msgstr "handienak aurretik"
 msgid "bpm"
 msgstr "bpm"
 
+#: ../bin/src/ui_networkremotesettingspage.h:378
+msgid ""
+"coma separated list of the allowed extensions that will be visible from the "
+"network remote (ex: m3u,mp3,flac,ogg,wav)"
+msgstr ""
+
 #: smartplaylists/searchterm.cpp:249
 msgid "contains"
 msgstr "honakoa du"
+
+#: ../bin/src/ui_networkremotesettingspage.h:382
+msgid "desktop_remote"
+msgstr ""
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:221
 #: ../bin/src/ui_transcoderoptionsvorbis.h:206
@@ -6020,8 +6066,10 @@ msgstr "honen barruan"
 msgid "options"
 msgstr "aukerak"
 
-#: ../bin/src/ui_networkremotesettingspage.h:253
-msgid "or scan the QR code!"
+#: ../bin/src/ui_networkremotesettingspage.h:383
+#: ../bin/src/ui_networkremotesettingspage.h:384
+#: ../bin/src/ui_networkremotesettingspage.h:386
+msgid "or scan the QR code: "
 msgstr ""
 
 #: widgets/didyoumean.cpp:56

@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2020-11-28 20:36+0000\n"
+"PO-Revision-Date: 2020-12-17 12:36+0000\n"
 "Last-Translator: John Maguire <john.maguire@gmail.com>\n"
 "Language-Team: Chinese (Taiwan) (http://www.transifex.com/davidsansome/clementine/language/zh_TW/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -104,7 +104,7 @@ msgid ""
 "%2"
 msgstr "無法溝通 %1：\n%2"
 
-#: playlist/playlistmanager.cpp:432
+#: playlist/playlistmanager.cpp:439
 #, qt-format
 msgid "%1 selected of"
 msgstr "%1 選定"
@@ -129,7 +129,7 @@ msgstr "%1 首歌曲找到"
 msgid "%1 songs found (showing %2)"
 msgstr "發現%1首歌(顯示%2)"
 
-#: playlist/playlistmanager.cpp:438 playlist/queue.cpp:228
+#: playlist/playlistmanager.cpp:445 playlist/queue.cpp:228
 #, qt-format
 msgid "%1 tracks"
 msgstr "%1  首音軌"
@@ -290,7 +290,7 @@ msgstr "0px"
 msgid "1 day"
 msgstr "1 天"
 
-#: playlist/playlistmanager.cpp:438 playlist/queue.cpp:228
+#: playlist/playlistmanager.cpp:445 playlist/queue.cpp:228
 msgid "1 track"
 msgstr "1 首音軌"
 
@@ -381,7 +381,7 @@ msgstr "<p> Tokens 由%開頭, 例如：%artist %album %title </p>\n\n<p>若您�
 msgid "A Spotify Premium account is required."
 msgstr "必須為 Spotify 的高級帳戶。"
 
-#: ../bin/src/ui_networkremotesettingspage.h:233
+#: ../bin/src/ui_networkremotesettingspage.h:354
 msgid "A client can connect only, if the correct code was entered."
 msgstr "客戶端僅在正確輸入驗證碼後才能連線"
 
@@ -483,7 +483,7 @@ msgstr "啟用/關閉 Wii 遙控器"
 msgid "Add Podcast"
 msgstr "加入 Podcast"
 
-#: ../bin/src/ui_addstreamdialog.h:112
+#: ../bin/src/ui_addstreamdialog.h:124
 msgid "Add Stream"
 msgstr "加入網路串流"
 
@@ -499,7 +499,7 @@ msgstr "加入功能"
 msgid "Add all tracks from a directory and all its subdirectories"
 msgstr "從一個目錄及其所有子目錄新增音軌"
 
-#: internet/internetradio/savedradio.cpp:116
+#: internet/internetradio/savedradio.cpp:118
 msgid "Add another stream..."
 msgstr "加入其它的網路串流"
 
@@ -507,7 +507,7 @@ msgstr "加入其它的網路串流"
 msgid "Add directory..."
 msgstr "加入目錄…"
 
-#: ui/mainwindow.cpp:2133
+#: ui/mainwindow.cpp:2144
 msgid "Add file"
 msgstr "加入檔案"
 
@@ -527,7 +527,7 @@ msgstr "加入檔案…"
 msgid "Add files to transcode"
 msgstr "加入檔案以轉碼"
 
-#: transcoder/transcodedialog.cpp:309 ui/mainwindow.cpp:2160
+#: transcoder/transcodedialog.cpp:309 ui/mainwindow.cpp:2171
 #: ripper/ripcddialog.cpp:202
 msgid "Add folder"
 msgstr "加入資料夾"
@@ -632,7 +632,7 @@ msgstr "新增至 Spotify 播放清單"
 msgid "Add to Spotify starred"
 msgstr "新增至 Spotify 打星列表"
 
-#: ui/mainwindow.cpp:1934
+#: ui/mainwindow.cpp:1945
 msgid "Add to another playlist"
 msgstr "加入到其他播放清單"
 
@@ -756,11 +756,11 @@ msgstr "所有翻譯者"
 msgid "All tracks"
 msgstr "所有音軌"
 
-#: ../bin/src/ui_networkremotesettingspage.h:242
+#: ../bin/src/ui_networkremotesettingspage.h:363
 msgid "Allow a client to download music from this computer."
 msgstr "允許客戶端自本機下載音樂"
 
-#: ../bin/src/ui_networkremotesettingspage.h:244
+#: ../bin/src/ui_networkremotesettingspage.h:365
 msgid "Allow downloads"
 msgstr "允許下載"
 
@@ -867,7 +867,7 @@ msgid "As&k when saving"
 msgstr "儲存前詢問(&K)"
 
 #: ../bin/src/ui_transcodedialog.h:225
-#: ../bin/src/ui_networkremotesettingspage.h:250
+#: ../bin/src/ui_networkremotesettingspage.h:371
 #: ../bin/src/ui_ripcddialog.h:322
 msgid "Audio format"
 msgstr "音訊格式"
@@ -1117,7 +1117,7 @@ msgstr "檢查是否有新的片斷內容"
 msgid "Check for updates"
 msgstr "檢查更新"
 
-#: ui/mainwindow.cpp:830
+#: ui/mainwindow.cpp:836
 msgid "Check for updates..."
 msgstr "檢查更新…"
 
@@ -1416,11 +1416,11 @@ msgstr "轉換所有音樂"
 msgid "Convert any music that the device can't play"
 msgstr "轉換任何裝置無法播放的音樂"
 
-#: ../bin/src/ui_networkremotesettingspage.h:247
+#: ../bin/src/ui_networkremotesettingspage.h:368
 msgid "Convert lossless audiofiles before sending them to the remote."
 msgstr "在上傳到遠端前轉換無損音樂檔。"
 
-#: ../bin/src/ui_networkremotesettingspage.h:249
+#: ../bin/src/ui_networkremotesettingspage.h:370
 msgid "Convert lossless files"
 msgstr "轉換無損檔案"
 
@@ -1472,7 +1472,7 @@ msgstr "無法取得詳細資訊"
 msgid "Could not log in to Last.fm. Please try again."
 msgstr "無法登入 Last.fm，請再試一次。"
 
-#: playlist/playlistmanager.cpp:168
+#: playlist/playlistmanager.cpp:170
 msgid "Couldn't create playlist"
 msgstr "無法建立播放清單"
 
@@ -1651,7 +1651,7 @@ msgid "Delete downloaded data"
 msgstr "刪除下載的資料"
 
 #: devices/deviceview.cpp:396 library/libraryview.cpp:677
-#: ui/mainwindow.cpp:2514 widgets/fileview.cpp:189
+#: ui/mainwindow.cpp:2525 widgets/fileview.cpp:189
 msgid "Delete files"
 msgstr "刪除檔案"
 
@@ -1692,11 +1692,11 @@ msgstr "檔案刪除中"
 msgid "Depth"
 msgstr "深度"
 
-#: ui/mainwindow.cpp:1847
+#: ui/mainwindow.cpp:1858
 msgid "Dequeue selected tracks"
 msgstr "將選取的音軌移出佇列中"
 
-#: ui/mainwindow.cpp:1845
+#: ui/mainwindow.cpp:1856
 msgid "Dequeue track"
 msgstr "將音軌移出佇列中"
 
@@ -1890,13 +1890,17 @@ msgstr "自動下載新的集數"
 msgid "Download queued"
 msgstr "下載已加入排程"
 
-#: ../bin/src/ui_networkremotesettingspage.h:245
+#: ../bin/src/ui_networkremotesettingspage.h:366
 msgid "Download settings"
 msgstr "下載設定"
 
-#: ../bin/src/ui_networkremotesettingspage.h:252
-msgid "Download the Android app"
-msgstr "下載 Andorid 軟體"
+#: ../bin/src/ui_networkremotesettingspage.h:385
+msgid "Download the original Android app"
+msgstr ""
+
+#: ../bin/src/ui_networkremotesettingspage.h:381
+msgid "Download the remote for Desktops, Android and iOS"
+msgstr ""
 
 #: internet/magnatune/magnatuneservice.cpp:279
 msgid "Download this album"
@@ -1968,7 +1972,7 @@ msgstr "動態隨機混合"
 msgid "Edit smart playlist..."
 msgstr "編輯智慧型播放清單…"
 
-#: ui/mainwindow.cpp:1897
+#: ui/mainwindow.cpp:1908
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr "編輯「%1」標籤…"
@@ -1994,7 +1998,7 @@ msgstr "編輯音軌資訊…"
 msgid "Edit tracks information..."
 msgstr "編輯音軌資訊…"
 
-#: internet/internetradio/savedradio.cpp:111
+#: internet/internetradio/savedradio.cpp:113
 msgid "Edit..."
 msgstr "編輯…"
 
@@ -2074,7 +2078,7 @@ msgstr "在 gpodder.net 上，輸入下面搜尋字詞以尋找 podcasts "
 msgid "Enter search terms here"
 msgstr "在這裡輸入搜尋字詞"
 
-#: ../bin/src/ui_addstreamdialog.h:113
+#: ../bin/src/ui_addstreamdialog.h:125
 msgid "Enter the URL of an internet radio stream:"
 msgstr "輸入網路廣播串流的網址(URL)："
 
@@ -2082,7 +2086,7 @@ msgstr "輸入網路廣播串流的網址(URL)："
 msgid "Enter the name of the folder"
 msgstr "輸入資料夾名稱"
 
-#: ../bin/src/ui_networkremotesettingspage.h:238
+#: ../bin/src/ui_networkremotesettingspage.h:359
 msgid "Enter this IP in the App to connect to Clementine."
 msgstr "輸入應用程式中的 IP 以連線至 Clementine。"
 
@@ -2107,8 +2111,8 @@ msgid "Equivalent to --log-levels *:3"
 msgstr "相當於 --log-levels *:3"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:249
-#: library/libraryview.cpp:671 ui/mainwindow.cpp:2189 ui/mainwindow.cpp:2467
-#: ui/mainwindow.cpp:2645
+#: library/libraryview.cpp:671 ui/mainwindow.cpp:2200 ui/mainwindow.cpp:2478
+#: ui/mainwindow.cpp:2656
 msgid "Error"
 msgstr "錯誤"
 
@@ -2250,7 +2254,7 @@ msgstr "淡出"
 msgid "Fading duration"
 msgstr "淡出持續時間"
 
-#: ui/mainwindow.cpp:2190
+#: ui/mainwindow.cpp:2201
 msgid "Failed reading CD drive"
 msgstr "無法讀取 CD 光碟機"
 
@@ -2376,6 +2380,10 @@ msgstr "檔名"
 #: ui/mainwindow.cpp:272
 msgid "Files"
 msgstr "檔案"
+
+#: ../bin/src/ui_networkremotesettingspage.h:376
+msgid "Files root folder"
+msgstr ""
 
 #: ../bin/src/ui_transcodedialog.h:214
 msgid "Files to transcode"
@@ -2520,7 +2528,7 @@ msgstr "取得頻道"
 msgid "Getting streams"
 msgstr "取得串流"
 
-#: ../bin/src/ui_addstreamdialog.h:115
+#: ../bin/src/ui_addstreamdialog.h:127
 msgid "Give it a name:"
 msgstr "給它一個名字："
 
@@ -2981,7 +2989,7 @@ msgstr "媒體櫃"
 msgid "Library advanced grouping"
 msgstr "進階媒體櫃歸類"
 
-#: ui/mainwindow.cpp:2771
+#: ui/mainwindow.cpp:2782
 msgid "Library rescan notice"
 msgstr "媒體櫃重新掃描通知"
 
@@ -3314,13 +3322,17 @@ msgstr "移到媒體櫃…"
 msgid "Move up"
 msgstr "上移"
 
-#: transcoder/transcodedialog.cpp:228 ui/mainwindow.cpp:2135
+#: transcoder/transcodedialog.cpp:228 ui/mainwindow.cpp:2146
 msgid "Music"
 msgstr "音樂"
 
 #: ../bin/src/ui_librarysettingspage.h:185
 msgid "Music Library"
 msgstr "媒體櫃"
+
+#: ../bin/src/ui_networkremotesettingspage.h:380
+msgid "Music extensions remotely visible"
+msgstr ""
 
 #: core/globalshortcuts.cpp:65 wiimotedev/wiimotesettingspage.cpp:114
 #: ../bin/src/ui_mainwindow.h:763
@@ -3349,7 +3361,7 @@ msgstr "窄頻 (NB)"
 msgid "Network Proxy"
 msgstr "網路代理伺服器"
 
-#: ../bin/src/ui_networkremotesettingspage.h:221
+#: ../bin/src/ui_networkremotesettingspage.h:342
 msgid "Network Remote"
 msgstr "網路遙控"
 
@@ -3372,7 +3384,7 @@ msgstr "永不開始播放"
 msgid "New folder"
 msgstr "新資料夾"
 
-#: ui/mainwindow.cpp:1951 ../bin/src/ui_mainwindow.h:754
+#: ui/mainwindow.cpp:1962 ../bin/src/ui_mainwindow.h:754
 msgid "New playlist"
 msgstr "新增播放清單"
 
@@ -3439,7 +3451,7 @@ msgstr "無短區塊"
 msgid "None"
 msgstr "沒有"
 
-#: library/libraryview.cpp:672 ui/mainwindow.cpp:2468 ui/mainwindow.cpp:2646
+#: library/libraryview.cpp:672 ui/mainwindow.cpp:2479 ui/mainwindow.cpp:2657
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "所選歌曲沒有適合複製到裝置的"
 
@@ -3550,7 +3562,7 @@ msgstr "開"
 msgid "OneDrive"
 msgstr "OneDrive"
 
-#: ../bin/src/ui_networkremotesettingspage.h:226
+#: ../bin/src/ui_networkremotesettingspage.h:347
 msgid ""
 "Only accept connections from clients within the ip ranges:\n"
 "10.x.x.x\n"
@@ -3558,7 +3570,7 @@ msgid ""
 "192.168.x.x"
 msgstr "僅允許來自以下 IP 範圍的客戶端連線：\n10.x.x.x\n172.16.0.0 - 172.31.255.255\n192.168.x.x"
 
-#: ../bin/src/ui_networkremotesettingspage.h:231
+#: ../bin/src/ui_networkremotesettingspage.h:352
 msgid "Only allow connections from the local network"
 msgstr "僅允許來自區域網路的連線"
 
@@ -3641,7 +3653,7 @@ msgid "Optimize for quality"
 msgstr "最佳化品質"
 
 #: ../bin/src/ui_transcodedialog.h:226
-#: ../bin/src/ui_networkremotesettingspage.h:251
+#: ../bin/src/ui_networkremotesettingspage.h:372
 #: ../bin/src/ui_ripcddialog.h:321
 msgid "Options..."
 msgstr "選項…"
@@ -3738,7 +3750,7 @@ msgstr "派對"
 msgid "Password"
 msgstr "密碼"
 
-#: core/globalshortcuts.cpp:52 ui/mainwindow.cpp:1159 ui/mainwindow.cpp:1742
+#: core/globalshortcuts.cpp:52 ui/mainwindow.cpp:1165 ui/mainwindow.cpp:1753
 #: ui/qtsystemtrayicon.cpp:185 wiimotedev/wiimotesettingspage.cpp:115
 msgid "Pause"
 msgstr "暫停"
@@ -3766,8 +3778,8 @@ msgstr "像素"
 msgid "Plain sidebar"
 msgstr "樸素的側邊欄"
 
-#: core/globalshortcuts.cpp:51 ui/mainwindow.cpp:684 ui/mainwindow.cpp:1123
-#: ui/mainwindow.cpp:1144 ui/mainwindow.cpp:1746 ui/qtsystemtrayicon.cpp:173
+#: core/globalshortcuts.cpp:51 ui/mainwindow.cpp:684 ui/mainwindow.cpp:1129
+#: ui/mainwindow.cpp:1150 ui/mainwindow.cpp:1757 ui/qtsystemtrayicon.cpp:173
 #: ui/qtsystemtrayicon.cpp:199 wiimotedev/wiimotesettingspage.cpp:108
 #: ../bin/src/ui_mainwindow.h:720
 msgid "Play"
@@ -3790,11 +3802,11 @@ msgstr "停止的話就開始播放，播放中的就暫停"
 msgid "Play if there is nothing already playing"
 msgstr "播放如果沒有歌曲是正在播放中"
 
-#: library/libraryview.cpp:395 ui/mainwindow.cpp:1858
+#: library/libraryview.cpp:395 ui/mainwindow.cpp:1869
 msgid "Play next"
 msgstr "播放下一首"
 
-#: ui/mainwindow.cpp:1856
+#: ui/mainwindow.cpp:1867
 msgid "Play selected tracks next"
 msgstr "下 一首播放選取的音軌"
 
@@ -3816,7 +3828,7 @@ msgstr "播放器選項"
 
 #: playlist/playlistcontainer.cpp:310 playlist/playlistlistcontainer.cpp:328
 #: playlist/playlistmanager.cpp:88 playlist/playlistmanager.cpp:157
-#: playlist/playlistmanager.cpp:528 playlist/playlisttabbar.cpp:367
+#: playlist/playlistmanager.cpp:537 playlist/playlisttabbar.cpp:367
 msgid "Playlist"
 msgstr "播放清單"
 
@@ -3874,7 +3886,7 @@ msgid "Popup duration"
 msgstr "彈出持續時間"
 
 #: ../bin/src/ui_networkproxysettingspage.h:165
-#: ../bin/src/ui_networkremotesettingspage.h:224
+#: ../bin/src/ui_networkremotesettingspage.h:345
 msgid "Port"
 msgstr "連接埠"
 
@@ -4015,12 +4027,12 @@ msgstr "查詢裝置…"
 msgid "Queue Manager"
 msgstr "佇列管理員"
 
-#: ui/mainwindow.cpp:1851
+#: ui/mainwindow.cpp:1862
 msgid "Queue selected tracks"
 msgstr "將選取的歌曲加入佇列中"
 
 #: globalsearch/globalsearchview.cpp:464 library/libraryview.cpp:392
-#: ui/mainwindow.cpp:1849
+#: ui/mainwindow.cpp:1860
 msgid "Queue track"
 msgstr "將歌曲加入佇列中"
 
@@ -4134,7 +4146,7 @@ msgstr "記住最後的播放時間(&L)"
 msgid "Remember my choice"
 msgstr "記得我的選擇"
 
-#: internet/internetradio/savedradio.cpp:108
+#: internet/internetradio/savedradio.cpp:110
 #: ../bin/src/ui_savedgroupingmanager.h:103 ../bin/src/ui_queuemanager.h:151
 #: ../bin/src/ui_transcodedialog.h:223
 msgid "Remove"
@@ -4226,7 +4238,7 @@ msgstr "播放增益模式"
 msgid "Repopulate"
 msgstr "重新填充"
 
-#: ../bin/src/ui_networkremotesettingspage.h:235
+#: ../bin/src/ui_networkremotesettingspage.h:356
 msgid "Require authentication code"
 msgstr "需要驗證碼"
 
@@ -4278,6 +4290,10 @@ msgstr "轉拷音樂光碟"
 #: ui/equalizer.cpp:149
 msgid "Rock"
 msgstr "搖滾"
+
+#: ../bin/src/ui_networkremotesettingspage.h:374
+msgid "Root folder that will be browsable from the network remote"
+msgstr ""
 
 #: ../bin/src/ui_console.h:130
 msgid "Run"
@@ -4340,7 +4356,7 @@ msgctxt "Save playlist menu action."
 msgid "Save playlist"
 msgstr "儲存播放清單"
 
-#: playlist/playlistmanager.cpp:236
+#: playlist/playlistmanager.cpp:238
 msgctxt "Title of the playlist save dialog."
 msgid "Save playlist"
 msgstr "儲存播放清單"
@@ -4361,7 +4377,7 @@ msgstr "可以的話，將評分存入檔案標籤"
 msgid "Save statistics in file tags when possible"
 msgstr "可以的話，將統計數據存入檔案標籤"
 
-#: ../bin/src/ui_addstreamdialog.h:114
+#: ../bin/src/ui_addstreamdialog.h:126
 msgid "Save this stream in the Internet tab"
 msgstr "儲存這個串流網址到「網路」這個分頁標籤"
 
@@ -4514,6 +4530,14 @@ msgstr "選擇全部"
 msgid "Select None"
 msgstr "不選取"
 
+#: ui/filechooserwidget.cpp:95
+msgid "Select a directory"
+msgstr ""
+
+#: ui/filechooserwidget.cpp:92
+msgid "Select a file"
+msgstr ""
+
 #: ../bin/src/ui_appearancesettingspage.h:303
 msgid "Select background color:"
 msgstr "選擇背景色："
@@ -4562,7 +4586,7 @@ msgstr "伺服器詳細內容"
 msgid "Service offline"
 msgstr "服務離線"
 
-#: ui/mainwindow.cpp:1896
+#: ui/mainwindow.cpp:1907
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr "設定 %1 到「%2」…"
@@ -4575,7 +4599,7 @@ msgstr "設定音量到百分之<value>"
 msgid "Set value for all selected tracks..."
 msgstr "為所有選擇的歌曲設定音量…"
 
-#: ../bin/src/ui_networkremotesettingspage.h:223
+#: ../bin/src/ui_networkremotesettingspage.h:344
 msgid "Settings"
 msgstr "設定"
 
@@ -4775,11 +4799,11 @@ msgstr "略過計數"
 msgid "Skip forwards in playlist"
 msgstr "跳至播放清單最後頭"
 
-#: ui/mainwindow.cpp:1867
+#: ui/mainwindow.cpp:1878
 msgid "Skip selected tracks"
 msgstr "跳過選取的曲目"
 
-#: ui/mainwindow.cpp:1865
+#: ui/mainwindow.cpp:1876
 msgid "Skip track"
 msgstr "跳過曲目"
 
@@ -5100,7 +5124,7 @@ msgid ""
 "license key. Visit subsonic.org for details."
 msgstr ""
 
-#: ui/mainwindow.cpp:2762
+#: ui/mainwindow.cpp:2773
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -5142,7 +5166,7 @@ msgid ""
 "continue?"
 msgstr "這些檔案將從裝置上被移除，你確定你要繼續？"
 
-#: library/libraryview.cpp:678 ui/mainwindow.cpp:2515 widgets/fileview.cpp:190
+#: library/libraryview.cpp:678 ui/mainwindow.cpp:2526 widgets/fileview.cpp:190
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -5244,7 +5268,7 @@ msgstr "拖曳漂亮的螢幕顯示"
 msgid "Toggle fullscreen"
 msgstr "切換全螢幕模式"
 
-#: ui/mainwindow.cpp:1853
+#: ui/mainwindow.cpp:1864
 msgid "Toggle queue status"
 msgstr "切換佇列狀態"
 
@@ -5334,6 +5358,10 @@ msgstr "URI"
 msgid "URL"
 msgstr "網址"
 
+#: ../bin/src/ui_addstreamdialog.h:128
+msgid "URL of its Logo:"
+msgstr ""
+
 #: core/commandlineoptions.cpp:159
 msgid "URL(s)"
 msgstr "URL(s)"
@@ -5359,7 +5387,7 @@ msgstr "無法下載 %1 (%2)"
 #: core/song.cpp:466 library/librarymodel.cpp:376 library/librarymodel.cpp:381
 #: library/librarymodel.cpp:385 library/librarymodel.cpp:1185
 #: library/savedgroupingmanager.cpp:105 playlist/playlistdelegates.cpp:305
-#: playlist/playlistmanager.cpp:535 playlist/playlistmanager.cpp:536
+#: playlist/playlistmanager.cpp:544 playlist/playlistmanager.cpp:545
 #: songinfo/streamdiscoverer.cpp:88 ui/albumcoverchoicecontroller.cpp:132
 #: ui/edittagdialog.cpp:465 ui/edittagdialog.cpp:511
 msgid "Unknown"
@@ -5378,11 +5406,11 @@ msgstr "不明的錯誤"
 msgid "Unset cover"
 msgstr "未設置封面"
 
-#: ui/mainwindow.cpp:1863
+#: ui/mainwindow.cpp:1874
 msgid "Unskip selected tracks"
 msgstr ""
 
-#: ui/mainwindow.cpp:1861
+#: ui/mainwindow.cpp:1872
 msgid "Unskip track"
 msgstr ""
 
@@ -5465,7 +5493,7 @@ msgstr "使用自訂顏色組合"
 msgid "Use a custom message for notifications"
 msgstr "在通知中使用自訂訊息"
 
-#: ../bin/src/ui_networkremotesettingspage.h:222
+#: ../bin/src/ui_networkremotesettingspage.h:343
 msgid "Use a network remote control"
 msgstr "使用網路遠端遙控"
 
@@ -5543,7 +5571,7 @@ msgid "Variable bit rate"
 msgstr "可變位元率"
 
 #: globalsearch/globalsearchmodel.cpp:110 library/librarymodel.cpp:302
-#: playlist/playlistmanager.cpp:547 ui/albumcovermanager.cpp:266
+#: playlist/playlistmanager.cpp:556 ui/albumcovermanager.cpp:266
 msgid "Various artists"
 msgstr "各種演出者"
 
@@ -5712,7 +5740,7 @@ msgid ""
 "well?"
 msgstr ""
 
-#: ui/mainwindow.cpp:2769
+#: ui/mainwindow.cpp:2780
 msgid "Would you like to run a full rescan right now?"
 msgstr "您想要立刻執行完整的重新掃描嗎？"
 
@@ -5785,6 +5813,14 @@ msgstr "您已登入。"
 msgid "You can change the way the songs in the library are organised."
 msgstr "您可以改變媒體櫃中歌曲的整理方法。"
 
+#: ui/networkremotesettingspage.cpp:162
+#, qt-format
+msgid ""
+"You can find <a href=\"%1\">here on GitHub</a> the new cross platform "
+"remote.<br/>It is available on <b>Linux</b>, <b>MacOS</b> and "
+"<b>Windows</b><br/>"
+msgstr ""
+
 #: internet/magnatune/magnatunesettingspage.cpp:59
 msgid ""
 "You can listen to Magnatune songs for free without an account.  Purchasing a"
@@ -5835,7 +5871,7 @@ msgstr ""
 msgid "You will need to restart Clementine if you change the language."
 msgstr "語言變更將在重新啟動 Clementine 後套用。"
 
-#: ../bin/src/ui_networkremotesettingspage.h:240
+#: ../bin/src/ui_networkremotesettingspage.h:361
 msgid "Your IP address:"
 msgstr "您的 IP 位址："
 
@@ -5911,9 +5947,19 @@ msgstr "最大優先"
 msgid "bpm"
 msgstr "bpm"
 
+#: ../bin/src/ui_networkremotesettingspage.h:378
+msgid ""
+"coma separated list of the allowed extensions that will be visible from the "
+"network remote (ex: m3u,mp3,flac,ogg,wav)"
+msgstr ""
+
 #: smartplaylists/searchterm.cpp:249
 msgid "contains"
 msgstr "包含"
+
+#: ../bin/src/ui_networkremotesettingspage.h:382
+msgid "desktop_remote"
+msgstr ""
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:221
 #: ../bin/src/ui_transcoderoptionsvorbis.h:206
@@ -6019,9 +6065,11 @@ msgstr "在"
 msgid "options"
 msgstr "選項"
 
-#: ../bin/src/ui_networkremotesettingspage.h:253
-msgid "or scan the QR code!"
-msgstr "或者掃描 QR 碼！"
+#: ../bin/src/ui_networkremotesettingspage.h:383
+#: ../bin/src/ui_networkremotesettingspage.h:384
+#: ../bin/src/ui_networkremotesettingspage.h:386
+msgid "or scan the QR code: "
+msgstr ""
 
 #: widgets/didyoumean.cpp:56
 msgid "press enter"

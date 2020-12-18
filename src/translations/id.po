@@ -28,7 +28,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2020-11-28 20:36+0000\n"
+"PO-Revision-Date: 2020-12-17 12:36+0000\n"
 "Last-Translator: John Maguire <john.maguire@gmail.com>\n"
 "Language-Team: Indonesian (http://www.transifex.com/davidsansome/clementine/language/id/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -122,7 +122,7 @@ msgid ""
 "%2"
 msgstr ""
 
-#: playlist/playlistmanager.cpp:432
+#: playlist/playlistmanager.cpp:439
 #, qt-format
 msgid "%1 selected of"
 msgstr "%1 terpilih dari"
@@ -147,7 +147,7 @@ msgstr "%1 lagu ditemukan"
 msgid "%1 songs found (showing %2)"
 msgstr "%1 lagu ditemukan (menampilkan %2)"
 
-#: playlist/playlistmanager.cpp:438 playlist/queue.cpp:228
+#: playlist/playlistmanager.cpp:445 playlist/queue.cpp:228
 #, qt-format
 msgid "%1 tracks"
 msgstr "%1 trek"
@@ -308,7 +308,7 @@ msgstr "0px"
 msgid "1 day"
 msgstr "1 hari"
 
-#: playlist/playlistmanager.cpp:438 playlist/queue.cpp:228
+#: playlist/playlistmanager.cpp:445 playlist/queue.cpp:228
 msgid "1 track"
 msgstr "1 trek"
 
@@ -399,7 +399,7 @@ msgstr "<p>Token dimulai dengan %, sebagai contoh: %artis %album %title </p>\n\n
 msgid "A Spotify Premium account is required."
 msgstr "Akun Premium Spotify dibutuhkan."
 
-#: ../bin/src/ui_networkremotesettingspage.h:233
+#: ../bin/src/ui_networkremotesettingspage.h:354
 msgid "A client can connect only, if the correct code was entered."
 msgstr "Aplikasi hanya dapat tersambung jika kode yang dimasukkan benar."
 
@@ -501,7 +501,7 @@ msgstr ""
 msgid "Add Podcast"
 msgstr "Tambah Podcast"
 
-#: ../bin/src/ui_addstreamdialog.h:112
+#: ../bin/src/ui_addstreamdialog.h:124
 msgid "Add Stream"
 msgstr "Tambah Strim"
 
@@ -517,7 +517,7 @@ msgstr "Tambah tidakan"
 msgid "Add all tracks from a directory and all its subdirectories"
 msgstr "Tambah semua trek dari sebuah direktori dan semua subdirektorinya"
 
-#: internet/internetradio/savedradio.cpp:116
+#: internet/internetradio/savedradio.cpp:118
 msgid "Add another stream..."
 msgstr "Tambah strim lainnya..."
 
@@ -525,7 +525,7 @@ msgstr "Tambah strim lainnya..."
 msgid "Add directory..."
 msgstr "Tambah direktori..."
 
-#: ui/mainwindow.cpp:2133
+#: ui/mainwindow.cpp:2144
 msgid "Add file"
 msgstr "Tambah berkas"
 
@@ -545,7 +545,7 @@ msgstr "Tambah berkas..."
 msgid "Add files to transcode"
 msgstr "Tambah berkas untuk ditranskode"
 
-#: transcoder/transcodedialog.cpp:309 ui/mainwindow.cpp:2160
+#: transcoder/transcodedialog.cpp:309 ui/mainwindow.cpp:2171
 #: ripper/ripcddialog.cpp:202
 msgid "Add folder"
 msgstr "Tambah folder"
@@ -650,7 +650,7 @@ msgstr "Tambahkan ke daftar-putar Spotify"
 msgid "Add to Spotify starred"
 msgstr "Tambahkan ke bintang Spotify"
 
-#: ui/mainwindow.cpp:1934
+#: ui/mainwindow.cpp:1945
 msgid "Add to another playlist"
 msgstr "Tambahkan ke daftar-putar lainnya"
 
@@ -774,11 +774,11 @@ msgstr "Semua penerjemah"
 msgid "All tracks"
 msgstr "Semua trek"
 
-#: ../bin/src/ui_networkremotesettingspage.h:242
+#: ../bin/src/ui_networkremotesettingspage.h:363
 msgid "Allow a client to download music from this computer."
 msgstr "Izinkan aplikasi untuk mengunduh musik dari komputer ini."
 
-#: ../bin/src/ui_networkremotesettingspage.h:244
+#: ../bin/src/ui_networkremotesettingspage.h:365
 msgid "Allow downloads"
 msgstr "Izinkan unduhan"
 
@@ -885,7 +885,7 @@ msgid "As&k when saving"
 msgstr ""
 
 #: ../bin/src/ui_transcodedialog.h:225
-#: ../bin/src/ui_networkremotesettingspage.h:250
+#: ../bin/src/ui_networkremotesettingspage.h:371
 #: ../bin/src/ui_ripcddialog.h:322
 msgid "Audio format"
 msgstr "Format audio"
@@ -1135,7 +1135,7 @@ msgstr "Periksa episode baru"
 msgid "Check for updates"
 msgstr "Periksa pembaruan"
 
-#: ui/mainwindow.cpp:830
+#: ui/mainwindow.cpp:836
 msgid "Check for updates..."
 msgstr "Periksa pembaruan..."
 
@@ -1434,11 +1434,11 @@ msgstr "Konversi semua musik"
 msgid "Convert any music that the device can't play"
 msgstr "Konversi semua musik yang tidak dapat diputar oleh perangkat."
 
-#: ../bin/src/ui_networkremotesettingspage.h:247
+#: ../bin/src/ui_networkremotesettingspage.h:368
 msgid "Convert lossless audiofiles before sending them to the remote."
 msgstr "Konversi berkas audio nirsusut sebelum mengirim mereka ke rajuh."
 
-#: ../bin/src/ui_networkremotesettingspage.h:249
+#: ../bin/src/ui_networkremotesettingspage.h:370
 msgid "Convert lossless files"
 msgstr "Konversi berkas nirsusut"
 
@@ -1490,7 +1490,7 @@ msgstr ""
 msgid "Could not log in to Last.fm. Please try again."
 msgstr ""
 
-#: playlist/playlistmanager.cpp:168
+#: playlist/playlistmanager.cpp:170
 msgid "Couldn't create playlist"
 msgstr "Tidak bisa membuat daftar-putar"
 
@@ -1669,7 +1669,7 @@ msgid "Delete downloaded data"
 msgstr "Hapus data yang sudah diunduh"
 
 #: devices/deviceview.cpp:396 library/libraryview.cpp:677
-#: ui/mainwindow.cpp:2514 widgets/fileview.cpp:189
+#: ui/mainwindow.cpp:2525 widgets/fileview.cpp:189
 msgid "Delete files"
 msgstr "Hapus berkas"
 
@@ -1710,11 +1710,11 @@ msgstr "Menghapus berkas"
 msgid "Depth"
 msgstr ""
 
-#: ui/mainwindow.cpp:1847
+#: ui/mainwindow.cpp:1858
 msgid "Dequeue selected tracks"
 msgstr "Buang antrean trek terpilih"
 
-#: ui/mainwindow.cpp:1845
+#: ui/mainwindow.cpp:1856
 msgid "Dequeue track"
 msgstr "Buang antrean trek"
 
@@ -1908,13 +1908,17 @@ msgstr "Unduh episode baru secara otomatis"
 msgid "Download queued"
 msgstr "Antrean unduh"
 
-#: ../bin/src/ui_networkremotesettingspage.h:245
+#: ../bin/src/ui_networkremotesettingspage.h:366
 msgid "Download settings"
 msgstr "Setelan unduhan"
 
-#: ../bin/src/ui_networkremotesettingspage.h:252
-msgid "Download the Android app"
-msgstr "Unduh apl Android"
+#: ../bin/src/ui_networkremotesettingspage.h:385
+msgid "Download the original Android app"
+msgstr ""
+
+#: ../bin/src/ui_networkremotesettingspage.h:381
+msgid "Download the remote for Desktops, Android and iOS"
+msgstr ""
 
 #: internet/magnatune/magnatuneservice.cpp:279
 msgid "Download this album"
@@ -1986,7 +1990,7 @@ msgstr "Miks acak dinamis"
 msgid "Edit smart playlist..."
 msgstr "Sunting daftar-putar cerdas..."
 
-#: ui/mainwindow.cpp:1897
+#: ui/mainwindow.cpp:1908
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr "Sunting tag \"%1\"..."
@@ -2012,7 +2016,7 @@ msgstr "Sunting informasi trek..."
 msgid "Edit tracks information..."
 msgstr "Sunting informasi trek..."
 
-#: internet/internetradio/savedradio.cpp:111
+#: internet/internetradio/savedradio.cpp:113
 msgid "Edit..."
 msgstr "Sunting..."
 
@@ -2092,7 +2096,7 @@ msgstr "Masukkan lema pencarian di bawah untuk mencari podcast di gpodder.net"
 msgid "Enter search terms here"
 msgstr "Masukkan lema pencarian di sini"
 
-#: ../bin/src/ui_addstreamdialog.h:113
+#: ../bin/src/ui_addstreamdialog.h:125
 msgid "Enter the URL of an internet radio stream:"
 msgstr "Masukkan URL strim radio internet:"
 
@@ -2100,7 +2104,7 @@ msgstr "Masukkan URL strim radio internet:"
 msgid "Enter the name of the folder"
 msgstr "Masukkan nama folder"
 
-#: ../bin/src/ui_networkremotesettingspage.h:238
+#: ../bin/src/ui_networkremotesettingspage.h:359
 msgid "Enter this IP in the App to connect to Clementine."
 msgstr "Masukan IP ini dalam Apl untuk menyambung ke Clementine."
 
@@ -2125,8 +2129,8 @@ msgid "Equivalent to --log-levels *:3"
 msgstr "Setara dengan --log-level *: 3"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:249
-#: library/libraryview.cpp:671 ui/mainwindow.cpp:2189 ui/mainwindow.cpp:2467
-#: ui/mainwindow.cpp:2645
+#: library/libraryview.cpp:671 ui/mainwindow.cpp:2200 ui/mainwindow.cpp:2478
+#: ui/mainwindow.cpp:2656
 msgid "Error"
 msgstr "Galat"
 
@@ -2268,7 +2272,7 @@ msgstr "Melesap"
 msgid "Fading duration"
 msgstr "Durasi lesap"
 
-#: ui/mainwindow.cpp:2190
+#: ui/mainwindow.cpp:2201
 msgid "Failed reading CD drive"
 msgstr "Gagal membaca penggerak CD"
 
@@ -2394,6 +2398,10 @@ msgstr "Nama berkas"
 #: ui/mainwindow.cpp:272
 msgid "Files"
 msgstr "Berkas"
+
+#: ../bin/src/ui_networkremotesettingspage.h:376
+msgid "Files root folder"
+msgstr ""
 
 #: ../bin/src/ui_transcodedialog.h:214
 msgid "Files to transcode"
@@ -2538,7 +2546,7 @@ msgstr "Mendapatkan saluran"
 msgid "Getting streams"
 msgstr "Mendapatkan strim"
 
-#: ../bin/src/ui_addstreamdialog.h:115
+#: ../bin/src/ui_addstreamdialog.h:127
 msgid "Give it a name:"
 msgstr "Berikan nama:"
 
@@ -2999,7 +3007,7 @@ msgstr "Pustaka"
 msgid "Library advanced grouping"
 msgstr "Pengelompokan pustaka lanjutan"
 
-#: ui/mainwindow.cpp:2771
+#: ui/mainwindow.cpp:2782
 msgid "Library rescan notice"
 msgstr "Pemberitahuan pemindaian ulang pustaka"
 
@@ -3332,13 +3340,17 @@ msgstr "Pindah ke pustaka..."
 msgid "Move up"
 msgstr "Pindah naik"
 
-#: transcoder/transcodedialog.cpp:228 ui/mainwindow.cpp:2135
+#: transcoder/transcodedialog.cpp:228 ui/mainwindow.cpp:2146
 msgid "Music"
 msgstr "Musik"
 
 #: ../bin/src/ui_librarysettingspage.h:185
 msgid "Music Library"
 msgstr "Pustaka Musik"
+
+#: ../bin/src/ui_networkremotesettingspage.h:380
+msgid "Music extensions remotely visible"
+msgstr ""
 
 #: core/globalshortcuts.cpp:65 wiimotedev/wiimotesettingspage.cpp:114
 #: ../bin/src/ui_mainwindow.h:763
@@ -3367,7 +3379,7 @@ msgstr "Pita sempit (NB)"
 msgid "Network Proxy"
 msgstr "Proxy Jaringan"
 
-#: ../bin/src/ui_networkremotesettingspage.h:221
+#: ../bin/src/ui_networkremotesettingspage.h:342
 msgid "Network Remote"
 msgstr "Remote Jaringan"
 
@@ -3390,7 +3402,7 @@ msgstr "Jangan mulai memutar"
 msgid "New folder"
 msgstr "Folder baru"
 
-#: ui/mainwindow.cpp:1951 ../bin/src/ui_mainwindow.h:754
+#: ui/mainwindow.cpp:1962 ../bin/src/ui_mainwindow.h:754
 msgid "New playlist"
 msgstr "Daftar-putar baru"
 
@@ -3457,7 +3469,7 @@ msgstr "Tanpa blok pendek"
 msgid "None"
 msgstr "Nihil"
 
-#: library/libraryview.cpp:672 ui/mainwindow.cpp:2468 ui/mainwindow.cpp:2646
+#: library/libraryview.cpp:672 ui/mainwindow.cpp:2479 ui/mainwindow.cpp:2657
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Tidak satu pun dari lagu yang dipilih cocok untuk disalin ke perangkat"
 
@@ -3568,7 +3580,7 @@ msgstr "Nyala"
 msgid "OneDrive"
 msgstr "OneDrive"
 
-#: ../bin/src/ui_networkremotesettingspage.h:226
+#: ../bin/src/ui_networkremotesettingspage.h:347
 msgid ""
 "Only accept connections from clients within the ip ranges:\n"
 "10.x.x.x\n"
@@ -3576,7 +3588,7 @@ msgid ""
 "192.168.x.x"
 msgstr "Hanya menerima koneksi dari klien dalam rentang ip:\n10.x.x.x\n172.16.0.0 - 172.31.255.255\n192.168.x.x"
 
-#: ../bin/src/ui_networkremotesettingspage.h:231
+#: ../bin/src/ui_networkremotesettingspage.h:352
 msgid "Only allow connections from the local network"
 msgstr "Hanya izinkan koneksi dari jaringan lokal"
 
@@ -3659,7 +3671,7 @@ msgid "Optimize for quality"
 msgstr "Optimalkan untuk kualitas"
 
 #: ../bin/src/ui_transcodedialog.h:226
-#: ../bin/src/ui_networkremotesettingspage.h:251
+#: ../bin/src/ui_networkremotesettingspage.h:372
 #: ../bin/src/ui_ripcddialog.h:321
 msgid "Options..."
 msgstr "Opsi..."
@@ -3756,7 +3768,7 @@ msgstr "Pesta"
 msgid "Password"
 msgstr "Sandi"
 
-#: core/globalshortcuts.cpp:52 ui/mainwindow.cpp:1159 ui/mainwindow.cpp:1742
+#: core/globalshortcuts.cpp:52 ui/mainwindow.cpp:1165 ui/mainwindow.cpp:1753
 #: ui/qtsystemtrayicon.cpp:185 wiimotedev/wiimotesettingspage.cpp:115
 msgid "Pause"
 msgstr "Jeda"
@@ -3784,8 +3796,8 @@ msgstr "Piksel"
 msgid "Plain sidebar"
 msgstr "Bilah sisi polos"
 
-#: core/globalshortcuts.cpp:51 ui/mainwindow.cpp:684 ui/mainwindow.cpp:1123
-#: ui/mainwindow.cpp:1144 ui/mainwindow.cpp:1746 ui/qtsystemtrayicon.cpp:173
+#: core/globalshortcuts.cpp:51 ui/mainwindow.cpp:684 ui/mainwindow.cpp:1129
+#: ui/mainwindow.cpp:1150 ui/mainwindow.cpp:1757 ui/qtsystemtrayicon.cpp:173
 #: ui/qtsystemtrayicon.cpp:199 wiimotedev/wiimotesettingspage.cpp:108
 #: ../bin/src/ui_mainwindow.h:720
 msgid "Play"
@@ -3808,11 +3820,11 @@ msgstr "Putar jika berhenti, jeda jika berputar"
 msgid "Play if there is nothing already playing"
 msgstr "Putar jika tidak ada yang sedang diputar"
 
-#: library/libraryview.cpp:395 ui/mainwindow.cpp:1858
+#: library/libraryview.cpp:395 ui/mainwindow.cpp:1869
 msgid "Play next"
 msgstr ""
 
-#: ui/mainwindow.cpp:1856
+#: ui/mainwindow.cpp:1867
 msgid "Play selected tracks next"
 msgstr ""
 
@@ -3834,7 +3846,7 @@ msgstr "Opsi pemutar"
 
 #: playlist/playlistcontainer.cpp:310 playlist/playlistlistcontainer.cpp:328
 #: playlist/playlistmanager.cpp:88 playlist/playlistmanager.cpp:157
-#: playlist/playlistmanager.cpp:528 playlist/playlisttabbar.cpp:367
+#: playlist/playlistmanager.cpp:537 playlist/playlisttabbar.cpp:367
 msgid "Playlist"
 msgstr "Daftar-putar"
 
@@ -3892,7 +3904,7 @@ msgid "Popup duration"
 msgstr "Durasi sembulan"
 
 #: ../bin/src/ui_networkproxysettingspage.h:165
-#: ../bin/src/ui_networkremotesettingspage.h:224
+#: ../bin/src/ui_networkremotesettingspage.h:345
 msgid "Port"
 msgstr "Port"
 
@@ -4033,12 +4045,12 @@ msgstr "Meminta perangkat..."
 msgid "Queue Manager"
 msgstr "Pengelola antrean"
 
-#: ui/mainwindow.cpp:1851
+#: ui/mainwindow.cpp:1862
 msgid "Queue selected tracks"
 msgstr "Antre trek terpilih"
 
 #: globalsearch/globalsearchview.cpp:464 library/libraryview.cpp:392
-#: ui/mainwindow.cpp:1849
+#: ui/mainwindow.cpp:1860
 msgid "Queue track"
 msgstr "Antre trek"
 
@@ -4152,7 +4164,7 @@ msgstr ""
 msgid "Remember my choice"
 msgstr "Ingat pilihan saya"
 
-#: internet/internetradio/savedradio.cpp:108
+#: internet/internetradio/savedradio.cpp:110
 #: ../bin/src/ui_savedgroupingmanager.h:103 ../bin/src/ui_queuemanager.h:151
 #: ../bin/src/ui_transcodedialog.h:223
 msgid "Remove"
@@ -4244,7 +4256,7 @@ msgstr "Mode Replay Gain"
 msgid "Repopulate"
 msgstr "Populasi ulang"
 
-#: ../bin/src/ui_networkremotesettingspage.h:235
+#: ../bin/src/ui_networkremotesettingspage.h:356
 msgid "Require authentication code"
 msgstr "Membutuhkan kode otentikasi"
 
@@ -4296,6 +4308,10 @@ msgstr "Rabit CD audio"
 #: ui/equalizer.cpp:149
 msgid "Rock"
 msgstr "Rock"
+
+#: ../bin/src/ui_networkremotesettingspage.h:374
+msgid "Root folder that will be browsable from the network remote"
+msgstr ""
 
 #: ../bin/src/ui_console.h:130
 msgid "Run"
@@ -4358,7 +4374,7 @@ msgctxt "Save playlist menu action."
 msgid "Save playlist"
 msgstr "Simpan daftar-putar"
 
-#: playlist/playlistmanager.cpp:236
+#: playlist/playlistmanager.cpp:238
 msgctxt "Title of the playlist save dialog."
 msgid "Save playlist"
 msgstr "Simpan daftar-putar"
@@ -4379,7 +4395,7 @@ msgstr "Simpan peringkat di dalam berkas tag jika memungkinkan"
 msgid "Save statistics in file tags when possible"
 msgstr "Simpan statistik di dalam berkas tag jika memungkinkan"
 
-#: ../bin/src/ui_addstreamdialog.h:114
+#: ../bin/src/ui_addstreamdialog.h:126
 msgid "Save this stream in the Internet tab"
 msgstr "Simpan strim ini di tab Internet"
 
@@ -4532,6 +4548,14 @@ msgstr "Pilih Semua"
 msgid "Select None"
 msgstr "Pilih Tidak Ada"
 
+#: ui/filechooserwidget.cpp:95
+msgid "Select a directory"
+msgstr ""
+
+#: ui/filechooserwidget.cpp:92
+msgid "Select a file"
+msgstr ""
+
 #: ../bin/src/ui_appearancesettingspage.h:303
 msgid "Select background color:"
 msgstr "Pilih warna latar belakang:"
@@ -4580,7 +4604,7 @@ msgstr "Detail server"
 msgid "Service offline"
 msgstr "Layanan luring"
 
-#: ui/mainwindow.cpp:1896
+#: ui/mainwindow.cpp:1907
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr "Tetapkan %1 ke \"%2\"..."
@@ -4593,7 +4617,7 @@ msgstr "Tetapkan volume ke <value> persen"
 msgid "Set value for all selected tracks..."
 msgstr "Tetapkan nilai untuk semua trek terpilih..."
 
-#: ../bin/src/ui_networkremotesettingspage.h:223
+#: ../bin/src/ui_networkremotesettingspage.h:344
 msgid "Settings"
 msgstr "Setelan"
 
@@ -4793,11 +4817,11 @@ msgstr "Lewati hitungan"
 msgid "Skip forwards in playlist"
 msgstr "Lewati maju di dalam daftar-putar"
 
-#: ui/mainwindow.cpp:1867
+#: ui/mainwindow.cpp:1878
 msgid "Skip selected tracks"
 msgstr "Lewati trek yang dipilih"
 
-#: ui/mainwindow.cpp:1865
+#: ui/mainwindow.cpp:1876
 msgid "Skip track"
 msgstr "Lewati trek"
 
@@ -5118,7 +5142,7 @@ msgid ""
 "license key. Visit subsonic.org for details."
 msgstr "Masa uji coba untuk server Subsonic telah berakhir. Mohon donasi untuk mendapatkan kunci lisensi. Kunjungi subsonic.org untuk lebih perinci."
 
-#: ui/mainwindow.cpp:2762
+#: ui/mainwindow.cpp:2773
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -5160,7 +5184,7 @@ msgid ""
 "continue?"
 msgstr "Berkas-berkas ini akan dihapus dari perangkat, apakah Anda yakin ingin melanjutkan?"
 
-#: library/libraryview.cpp:678 ui/mainwindow.cpp:2515 widgets/fileview.cpp:190
+#: library/libraryview.cpp:678 ui/mainwindow.cpp:2526 widgets/fileview.cpp:190
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -5262,7 +5286,7 @@ msgstr "Jungkit Pretty OSD"
 msgid "Toggle fullscreen"
 msgstr "Jungkit layar penuh"
 
-#: ui/mainwindow.cpp:1853
+#: ui/mainwindow.cpp:1864
 msgid "Toggle queue status"
 msgstr "Jungkit status antrean"
 
@@ -5352,6 +5376,10 @@ msgstr "URI"
 msgid "URL"
 msgstr ""
 
+#: ../bin/src/ui_addstreamdialog.h:128
+msgid "URL of its Logo:"
+msgstr ""
+
 #: core/commandlineoptions.cpp:159
 msgid "URL(s)"
 msgstr "URL"
@@ -5377,7 +5405,7 @@ msgstr "Tidak dapat mengunduh %1 (%2)"
 #: core/song.cpp:466 library/librarymodel.cpp:376 library/librarymodel.cpp:381
 #: library/librarymodel.cpp:385 library/librarymodel.cpp:1185
 #: library/savedgroupingmanager.cpp:105 playlist/playlistdelegates.cpp:305
-#: playlist/playlistmanager.cpp:535 playlist/playlistmanager.cpp:536
+#: playlist/playlistmanager.cpp:544 playlist/playlistmanager.cpp:545
 #: songinfo/streamdiscoverer.cpp:88 ui/albumcoverchoicecontroller.cpp:132
 #: ui/edittagdialog.cpp:465 ui/edittagdialog.cpp:511
 msgid "Unknown"
@@ -5396,11 +5424,11 @@ msgstr "Galat tidak diketahui"
 msgid "Unset cover"
 msgstr "Tak set sampul"
 
-#: ui/mainwindow.cpp:1863
+#: ui/mainwindow.cpp:1874
 msgid "Unskip selected tracks"
 msgstr "Taklewati trek yang dipilih"
 
-#: ui/mainwindow.cpp:1861
+#: ui/mainwindow.cpp:1872
 msgid "Unskip track"
 msgstr "Taklewati trek"
 
@@ -5483,7 +5511,7 @@ msgstr "Gunakan set warna ubahsuai"
 msgid "Use a custom message for notifications"
 msgstr "Gunakan pesan ubahsuai untuk pemberitahuan"
 
-#: ../bin/src/ui_networkremotesettingspage.h:222
+#: ../bin/src/ui_networkremotesettingspage.h:343
 msgid "Use a network remote control"
 msgstr "Gunakan pengendali jaringan rajuh"
 
@@ -5561,7 +5589,7 @@ msgid "Variable bit rate"
 msgstr "Laju bit beragam"
 
 #: globalsearch/globalsearchmodel.cpp:110 library/librarymodel.cpp:302
-#: playlist/playlistmanager.cpp:547 ui/albumcovermanager.cpp:266
+#: playlist/playlistmanager.cpp:556 ui/albumcovermanager.cpp:266
 msgid "Various artists"
 msgstr "Artis beraga"
 
@@ -5730,7 +5758,7 @@ msgid ""
 "well?"
 msgstr "Apakah Anda ingin memindahkan lagu lainnya di dalam album ini ke Artis Beragam?"
 
-#: ui/mainwindow.cpp:2769
+#: ui/mainwindow.cpp:2780
 msgid "Would you like to run a full rescan right now?"
 msgstr "Apakah Anda ingin menjalankan pemindaian ulang menyeluruh sekarang?"
 
@@ -5803,6 +5831,14 @@ msgstr "Anda sudah masuk."
 msgid "You can change the way the songs in the library are organised."
 msgstr "Anda dapat mengubah cara pengaturan lagu dalam pustaka."
 
+#: ui/networkremotesettingspage.cpp:162
+#, qt-format
+msgid ""
+"You can find <a href=\"%1\">here on GitHub</a> the new cross platform "
+"remote.<br/>It is available on <b>Linux</b>, <b>MacOS</b> and "
+"<b>Windows</b><br/>"
+msgstr ""
+
 #: internet/magnatune/magnatunesettingspage.cpp:59
 msgid ""
 "You can listen to Magnatune songs for free without an account.  Purchasing a"
@@ -5853,7 +5889,7 @@ msgstr "Anda perlu meluncurkan Preferensi Sistem dan mengizinkan Clementine untu
 msgid "You will need to restart Clementine if you change the language."
 msgstr "Anda perlu memulai ulang Clementine jika Anda mengubah bahasa."
 
-#: ../bin/src/ui_networkremotesettingspage.h:240
+#: ../bin/src/ui_networkremotesettingspage.h:361
 msgid "Your IP address:"
 msgstr "Alamat IP Anda:"
 
@@ -5929,9 +5965,19 @@ msgstr "terbesar dulu"
 msgid "bpm"
 msgstr "bpm"
 
+#: ../bin/src/ui_networkremotesettingspage.h:378
+msgid ""
+"coma separated list of the allowed extensions that will be visible from the "
+"network remote (ex: m3u,mp3,flac,ogg,wav)"
+msgstr ""
+
 #: smartplaylists/searchterm.cpp:249
 msgid "contains"
 msgstr "mengandung"
+
+#: ../bin/src/ui_networkremotesettingspage.h:382
+msgid "desktop_remote"
+msgstr ""
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:221
 #: ../bin/src/ui_transcoderoptionsvorbis.h:206
@@ -6037,9 +6083,11 @@ msgstr "pada"
 msgid "options"
 msgstr "opsi"
 
-#: ../bin/src/ui_networkremotesettingspage.h:253
-msgid "or scan the QR code!"
-msgstr "atau pindai kode QR!"
+#: ../bin/src/ui_networkremotesettingspage.h:383
+#: ../bin/src/ui_networkremotesettingspage.h:384
+#: ../bin/src/ui_networkremotesettingspage.h:386
+msgid "or scan the QR code: "
+msgstr ""
 
 #: widgets/didyoumean.cpp:56
 msgid "press enter"
