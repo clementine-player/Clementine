@@ -14,7 +14,9 @@
 # Maciej Bator, 2019
 # Marcin Lawniczak <marcin.safmb@wp.pl>, 2016
 # Marcin Wu <marcin.wu85@gmail.com>, 2018
+# MatStef132, 2020
 # f4026438bc140eb8251ee8a7e846d473, 2017
+# MatStef132, 2020
 # Michał G, 2011
 # Michał Ziąbkowski <mziab@o2.pl>, 2010
 # Michał Trzebiatowski <michtrz@gmail.com>, 2013
@@ -27,8 +29,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2020-12-17 12:36+0000\n"
-"Last-Translator: John Maguire <john.maguire@gmail.com>\n"
+"PO-Revision-Date: 2020-12-19 20:29+0000\n"
+"Last-Translator: MatStef132\n"
 "Language-Team: Polish (http://www.transifex.com/davidsansome/clementine/language/pl/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1479,7 +1481,7 @@ msgstr "Nie można wykryć strumienia audio w %1"
 
 #: internet/googledrive/googledriveservice.cpp:208
 msgid "Could not find Google Drive file."
-msgstr ""
+msgstr "Nie można znaleźć pliku Dysku Google."
 
 #: songinfo/streamdiscoverer.cpp:124
 msgid "Could not get details"
@@ -1600,7 +1602,7 @@ msgstr "Dance"
 
 #: ../bin/src/ui_console.h:131
 msgid "Database"
-msgstr ""
+msgstr "Baza Danych"
 
 #: core/database.cpp:629
 msgid ""
@@ -1913,11 +1915,11 @@ msgstr "Pobierz ustawienia"
 
 #: ../bin/src/ui_networkremotesettingspage.h:385
 msgid "Download the original Android app"
-msgstr ""
+msgstr "Pobierz oryginalną aplikację na Androida"
 
 #: ../bin/src/ui_networkremotesettingspage.h:381
 msgid "Download the remote for Desktops, Android and iOS"
-msgstr ""
+msgstr "Pobierz pilot na Komputery, Androida lub iOS"
 
 #: internet/magnatune/magnatuneservice.cpp:279
 msgid "Download this album"
@@ -2354,7 +2356,7 @@ msgstr "Błąd podczas pobierania okładki"
 #: internet/subsonic/subsonicdynamicplaylist.cpp:98
 #: internet/subsonic/subsonicdynamicplaylist.cpp:164
 msgid "Fetching playlist items"
-msgstr ""
+msgstr "Pobieranie zawartości playlisty"
 
 #: ../bin/src/ui_ripcddialog.h:319
 msgid "File Format"
@@ -2490,7 +2492,7 @@ msgstr "Klatek na bufor"
 
 #: internet/subsonic/subsonicservice.cpp:107
 msgid "Frequently Played Albums"
-msgstr ""
+msgstr "Często Odtwarzane Albumy"
 
 #: moodbar/moodbarrenderer.cpp:173
 msgid "Frozen"
@@ -3419,7 +3421,7 @@ msgstr "Nowe ścieżki będą automatycznie dodane."
 
 #: internet/subsonic/subsonicservice.cpp:101
 msgid "Newest Albums"
-msgstr ""
+msgstr "Najnowsze Albumy"
 
 #: library/library.cpp:96
 msgid "Newest tracks"
@@ -3539,7 +3541,7 @@ msgstr "Liczba wyświetlanych odcinków"
 
 #: ../bin/src/ui_behavioursettingspage.h:450
 msgid "Number of processes:"
-msgstr ""
+msgstr "Liczba procesów:"
 
 #: ui/notificationssettingspage.cpp:40
 msgid "OSD Preview"
@@ -3808,7 +3810,7 @@ msgstr "Ilość odtworzeń"
 
 #: core/commandlineoptions.cpp:183
 msgid "Play given playlist"
-msgstr ""
+msgstr "Odtwarzaj wybraną playlistę"
 
 #: core/commandlineoptions.cpp:162
 msgid "Play if stopped, pause if playing"
@@ -4021,7 +4023,7 @@ msgstr "Posortuj ścieżki w przypadkowej kolejności"
 
 #: ../bin/src/ui_console.h:134
 msgid "Qt"
-msgstr ""
+msgstr "Qt"
 
 #: ../bin/src/ui_transcoderoptionsflac.h:80
 #: ../bin/src/ui_transcoderoptionsmp3.h:191
@@ -4055,7 +4057,7 @@ msgstr "Kolejkuj ścieżkę"
 
 #: ../bin/src/ui_lovedialog.h:115
 msgid "Quickly rate the playing track"
-msgstr ""
+msgstr "Szybko oceń odtwarzaną ścieżkę"
 
 #: ../bin/src/ui_playbacksettingspage.h:358
 msgid "Radio (equal loudness for all tracks)"
@@ -4072,11 +4074,11 @@ msgstr "Deszcz"
 
 #: internet/subsonic/subsonicservice.cpp:104
 msgid "Random Albums"
-msgstr ""
+msgstr "Losowe Albumy"
 
 #: internet/subsonic/subsonicservice.cpp:122
 msgid "Random Songs"
-msgstr ""
+msgstr "Losowe Ścieżki"
 
 #: ../bin/src/ui_visualisationselector.h:111
 msgid "Random visualization"
@@ -4117,7 +4119,7 @@ msgstr "Na pewno anulować?"
 
 #: internet/subsonic/subsonicservice.cpp:115
 msgid "Recently Played Albums"
-msgstr ""
+msgstr "Ostatnio Odtwarzane Albumy"
 
 #: internet/subsonic/subsonicsettingspage.cpp:161
 msgid "Redirect limit exceeded, verify server configuration."
@@ -4549,11 +4551,11 @@ msgstr "Odznacz wszystkie"
 
 #: ui/filechooserwidget.cpp:95
 msgid "Select a directory"
-msgstr ""
+msgstr "Wybierz folder"
 
 #: ui/filechooserwidget.cpp:92
 msgid "Select a file"
-msgstr ""
+msgstr "Wybierz plik"
 
 #: ../bin/src/ui_appearancesettingspage.h:303
 msgid "Select background color:"
@@ -4927,7 +4929,7 @@ msgstr "Oznaczone gwiazdką"
 
 #: internet/subsonic/subsonicservice.cpp:119
 msgid "Starred Albums"
-msgstr ""
+msgstr "Albumy Oznaczone Gwiazdką"
 
 #: ripper/ripcddialog.cpp:73
 msgid "Start ripping"
@@ -5307,7 +5309,7 @@ msgstr "Zbyt wiele przekierowań"
 
 #: internet/subsonic/subsonicservice.cpp:111
 msgid "Top Rated Albums"
-msgstr ""
+msgstr "Najwyżej Oceniane Albumy"
 
 #: internet/spotify/spotifyservice.cpp:423
 msgid "Top tracks"
@@ -5377,7 +5379,7 @@ msgstr "URL"
 
 #: ../bin/src/ui_addstreamdialog.h:128
 msgid "URL of its Logo:"
-msgstr ""
+msgstr "URL jego Logo:"
 
 #: core/commandlineoptions.cpp:159
 msgid "URL(s)"
@@ -5700,7 +5702,7 @@ msgstr "Szerokie pasmo (WB)"
 #: widgets/osd.cpp:245
 #, qt-format
 msgid "Wii Remote %1: activated"
-msgstr ""
+msgstr "Wii Remote %1: aktywowany"
 
 #: widgets/osd.cpp:257
 #, qt-format
@@ -5787,7 +5789,7 @@ msgstr "Rok - Album"
 
 #: playlist/playlist.cpp:1392
 msgid "Year - original"
-msgstr ""
+msgstr "Rok - oryginalny"
 
 #: smartplaylists/searchterm.cpp:427
 msgid "Years"
@@ -6086,7 +6088,7 @@ msgstr "opcje"
 #: ../bin/src/ui_networkremotesettingspage.h:384
 #: ../bin/src/ui_networkremotesettingspage.h:386
 msgid "or scan the QR code: "
-msgstr ""
+msgstr "albo zeskanuj kod QR:"
 
 #: widgets/didyoumean.cpp:56
 msgid "press enter"
