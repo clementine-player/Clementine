@@ -763,7 +763,6 @@ GstElement* GstEngine::CreateElement(const QString& factoryName,
                        "Please make sure that you have installed all necessary "
                        "GStreamer plugins (e.g. OGG and MP3)")
                    .arg(factoryName));
-    if (bin) gst_object_unref(GST_OBJECT(bin));
     return nullptr;
   }
 
