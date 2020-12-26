@@ -267,6 +267,7 @@ bool GstEnginePipeline::Init() {
 
   // Audio bin
   audiobin_ = gst_bin_new("audiobin");
+  // Floating reference is transferred to pipeline
   gst_bin_add(GST_BIN(pipeline_), audiobin_);
 
   // Create the sink
