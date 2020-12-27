@@ -831,16 +831,18 @@ shared_ptr<GstEnginePipeline> GstEngine::CreatePipeline(
   shared_ptr<GstEnginePipeline> ret = CreatePipeline();
 
   if (req.url_.scheme() == "hypnotoad") {
-    ret->InitFromString(kHypnotoadPipeline);
-    return ret;
+    if (!ret->InitFromString(kHypnotoadPipeline)) {
+      qLog(Error) << "Could not initialize pipeline" << kHypnotoadPipeline;
+      ret.reset();
+    }
+  } else if (req.url_.scheme() == "enterprise") {
+    if (!ret->InitFromString(kEnterprisePipeline)) {
+      qLog(Error) << "Could not initialize pipeline" << kEnterprisePipeline;
+      ret.reset();
+    }
+  } else {
+    if (!ret->InitFromReq(req, end_nanosec)) ret.reset();
   }
-
-  if (req.url_.scheme() == "enterprise") {
-    ret->InitFromString(kEnterprisePipeline);
-    return ret;
-  }
-
-  if (!ret->InitFromReq(req, end_nanosec)) ret.reset();
 
   return ret;
 }

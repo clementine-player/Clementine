@@ -151,7 +151,7 @@ class GstEnginePipeline : public QObject {
 
   QString ParseTag(GstTagList* list, const char* tag) const;
 
-  bool Init();
+  bool InitAudioBin();
   GstElement* CreateDecodeBinFromString(const char* pipeline);
   GstElement* CreateDecodeBinFromUrl(const QUrl& url);
 
