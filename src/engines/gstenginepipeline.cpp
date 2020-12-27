@@ -244,7 +244,7 @@ GstElement* GstEnginePipeline::CreateDecodeBinFromString(const char* pipeline) {
   }
 }
 
-bool GstEnginePipeline::Init() {
+bool GstEnginePipeline::InitAudioBin() {
   // Here we create all the parts of the gstreamer pipeline - from the source
   // to the sink.  The parts of the pipeline are split up into bins:
   //   uri decode bin -> audio bin
@@ -489,8 +489,6 @@ bool GstEnginePipeline::Init() {
   bus_cb_id_ = gst_bus_add_watch(bus, BusCallback, this);
   gst_object_unref(bus);
 
-  MaybeLinkDecodeToAudio();
-
   return true;
 }
 
@@ -518,7 +516,7 @@ bool GstEnginePipeline::InitFromString(const QString& pipeline) {
     return false;
   }
 
-  if (!Init()) return false;
+  if (!InitAudioBin()) return false;
   return gst_element_link(new_bin, audiobin_);
 }
 
@@ -545,7 +543,12 @@ bool GstEnginePipeline::InitFromReq(const MediaPlaybackRequest& req,
   // Decode bin
   if (!ReplaceDecodeBin(url)) return false;
 
-  return Init();
+  if (!InitAudioBin()) return false;
+
+  // Link decoder and audio bins if decoder bin already has a src pad.
+  MaybeLinkDecodeToAudio();
+
+  return true;
 }
 
 GstEnginePipeline::~GstEnginePipeline() {
