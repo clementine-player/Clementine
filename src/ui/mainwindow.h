@@ -43,6 +43,7 @@ class Application;
 class ArtistInfoView;
 class BackgroundStreams;
 class CommandlineOptions;
+class Console;
 class CoverProviders;
 class Database;
 class DeviceManager;
@@ -268,6 +269,7 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   EditTagDialog* CreateEditTagDialog();
   LoveDialog* CreateLoveDialog();
   StreamDiscoverer* CreateStreamDiscoverer();
+  Console* CreateDebugConsole();
   void OpenSettingsDialog();
   void OpenSettingsDialogAtPage(SettingsDialog::Page page);
   void ShowSongInfoConfig();
@@ -318,6 +320,7 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   Lazy<LoveDialog> love_dialog_;
   Lazy<About> about_dialog_;
   Lazy<StreamDiscoverer> stream_discoverer_;
+  Lazy<Console> debug_console_;
 
   GlobalShortcuts* global_shortcuts_;
 

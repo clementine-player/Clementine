@@ -172,6 +172,7 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
       edit_tag_dialog_(std::bind(&MainWindow::CreateEditTagDialog, this)),
       love_dialog_(std::bind(&MainWindow::CreateLoveDialog, this)),
       stream_discoverer_(std::bind(&MainWindow::CreateStreamDiscoverer, this)),
+      debug_console_(std::bind(&MainWindow::CreateDebugConsole, this)),
       global_shortcuts_(new GlobalShortcuts(this)),
       global_search_view_(new GlobalSearchView(app_, this)),
       library_view_(new LibraryViewContainer(this)),
@@ -2740,6 +2741,8 @@ StreamDiscoverer* MainWindow::CreateStreamDiscoverer() {
   return discoverer;
 }
 
+Console* MainWindow::CreateDebugConsole() { return new Console(app_, this); }
+
 void MainWindow::ShowAboutDialog() { about_dialog_->show(); }
 
 void MainWindow::ShowTranscodeDialog() { transcode_dialog_->show(); }
@@ -3075,10 +3078,7 @@ void MainWindow::DoGlobalSearch(const QString& query) {
   global_search_view_->StartSearch(query);
 }
 
-void MainWindow::ShowConsole() {
-  Console* console = new Console(app_, this);
-  console->show();
-}
+void MainWindow::ShowConsole() { debug_console_->show(); }
 
 void MainWindow::keyPressEvent(QKeyEvent* event) {
   if (event->key() == Qt::Key_Space) {
