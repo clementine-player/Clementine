@@ -306,8 +306,7 @@ void LibraryWatcher::ScanSubdirectory(const QString& path,
 
   // First we "quickly" get a list of the files in the directory that we
   // think might be music.  While we're here, we also look for new
-  // subdirectories
-  // and possible album artwork.
+  // subdirectories and possible album artwork.
   QDirIterator it(
       path, QDir::Dirs | QDir::Files | QDir::Hidden | QDir::NoDotAndDotDot);
   while (it.hasNext()) {
@@ -317,7 +316,7 @@ void LibraryWatcher::ScanSubdirectory(const QString& path,
     QFileInfo child_info(child);
 
     if (child_info.isDir()) {
-      if (!child_info.isHidden() && !t->HasSeenSubdir(child)) {
+      if (!t->HasSeenSubdir(child)) {
         // We haven't seen this subdirectory before - add it to a list and
         // later we'll tell the backend about it and scan it.
         Subdirectory new_subdir;
@@ -332,7 +331,7 @@ void LibraryWatcher::ScanSubdirectory(const QString& path,
 
       if (sValidImages.contains(ext_part))
         album_art[dir_part] << child;
-      else if (!child_info.isHidden())
+      else
         files_on_disk << child;
     }
   }

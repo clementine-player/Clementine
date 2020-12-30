@@ -214,9 +214,10 @@ void FileView::showEvent(QShowEvent* e) {
 
   model_ = new QFileSystemModel(this);
 
+  model_->setFilter(QDir::AllDirs | QDir::Files | QDir::Hidden | QDir::NoDotAndDotDot);
   model_->setNameFilters(filter_list_);
   // if an item fails the filter, hide it
-  model_->setNameFilterDisables(false);
+  //model_->setNameFilterDisables(false);
 
   ui_->list->setModel(model_);
   ChangeFilePathWithoutUndo(QDir::homePath());
