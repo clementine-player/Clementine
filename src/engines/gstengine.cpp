@@ -143,6 +143,14 @@ GstEngine::~GstEngine() {
 }
 
 bool GstEngine::Init() {
+  // This environment variable is required for GST_DEBUG_BIN_TO_DOT_FILE macros.
+  // Gstreamer only reads it on init, so make sure it's set now.
+  QByteArray path = qgetenv("GST_DEBUG_DUMP_DOT_DIR");
+  if (path.isEmpty()) {
+    path = QDir::currentPath().toUtf8();
+    qputenv("GST_DEBUG_DUMP_DOT_DIR", path);
+  }
+
   initialising_ = QtConcurrent::run(this, &GstEngine::InitialiseGstreamer);
   return true;
 }

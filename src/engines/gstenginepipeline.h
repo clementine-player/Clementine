@@ -106,6 +106,7 @@ class GstEnginePipeline : public QObject {
 
   QString source_device() const { return source_device_; }
 
+  void DumpGraph();
  public slots:
   void SetVolumeModifier(qreal mod);
 
