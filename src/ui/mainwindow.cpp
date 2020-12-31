@@ -487,6 +487,10 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
   connect(ui_->action_view_stream_details, SIGNAL(triggered()),
           SLOT(DiscoverStreamDetails()));
 
+  // Relay this signal to the Application
+  connect(this, SIGNAL(NewDebugConsole(Console*)), app_,
+          SIGNAL(NewDebugConsole(Console*)));
+
   background_streams_->AddAction("Rain", ui_->action_rain);
   background_streams_->AddAction("Hypnotoad", ui_->action_hypnotoad);
   background_streams_->AddAction("Make it so!", ui_->action_enterprise);
@@ -2741,7 +2745,11 @@ StreamDiscoverer* MainWindow::CreateStreamDiscoverer() {
   return discoverer;
 }
 
-Console* MainWindow::CreateDebugConsole() { return new Console(app_, this); }
+Console* MainWindow::CreateDebugConsole() {
+  Console* console = new Console(app_, this);
+  emit NewDebugConsole(console);
+  return console;
+}
 
 void MainWindow::ShowAboutDialog() { about_dialog_->show(); }
 

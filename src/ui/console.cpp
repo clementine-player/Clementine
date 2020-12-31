@@ -77,3 +77,7 @@ QObject* Console::FindTopLevelObject(QString& name) {
     if (obj->objectName() == name) return obj;
   return nullptr;
 }
+
+void Console::AddPage(QWidget* page, const QString& label) {
+  ui_.tabWidget->addTab(page, label);
+}

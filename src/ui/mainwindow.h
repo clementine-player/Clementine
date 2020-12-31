@@ -152,6 +152,8 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   void StopAfterToggled(bool stop);
 
   void IntroPointReached();
+
+  void NewDebugConsole(Console* console);
  private slots:
   void FilePathChanged(const QString& path);
 
