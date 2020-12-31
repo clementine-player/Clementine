@@ -1337,7 +1337,10 @@ void GstEnginePipeline::DumpGraph() {
 #ifdef GST_DISABLE_GST_DEBUG
   qLog(Debug) << "Cannot dump graph. gstreamer debug is not enabled.";
 #else
-  qLog(Debug) << "Dumping pipeline graph";
-  GST_DEBUG_BIN_TO_DOT_FILE_WITH_TS(GST_BIN(pipeline_), GST_DEBUG_GRAPH_SHOW_ALL, "pipeline");
+  if (pipeline_) {
+    qLog(Debug) << "Dumping pipeline graph";
+    GST_DEBUG_BIN_TO_DOT_FILE_WITH_TS(GST_BIN(pipeline_),
+                                      GST_DEBUG_GRAPH_SHOW_ALL, "pipeline");
+  }
 #endif
 }

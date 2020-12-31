@@ -40,13 +40,16 @@
 #include <vector>
 
 #include "config.h"
+#include "core/application.h"
 #include "core/closure.h"
 #include "core/logging.h"
 #include "core/taskmanager.h"
 #include "core/timeconstants.h"
 #include "core/utilities.h"
 #include "devicefinder.h"
+#include "gstenginedebug.h"
 #include "gstenginepipeline.h"
+#include "ui/console.h"
 
 #ifdef HAVE_MOODBAR
 #include "gst/moodbar/plugin.h"
@@ -94,9 +97,9 @@ const char* GstEngine::kEnterprisePipeline =
     "audiotestsrc wave=5 ! "
     "audiocheblimit mode=0 cutoff=120";
 
-GstEngine::GstEngine(TaskManager* task_manager)
+GstEngine::GstEngine(Application* app)
     : Engine::Base(),
-      task_manager_(task_manager),
+      task_manager_(app->task_manager()),
       buffering_task_id_(-1),
       latest_buffer_(nullptr),
       equalizer_enabled_(false),
@@ -119,6 +122,8 @@ GstEngine::GstEngine(TaskManager* task_manager)
   seek_timer_->setSingleShot(true);
   seek_timer_->setInterval(kSeekDelayNanosec / kNsecPerMsec);
   connect(seek_timer_, SIGNAL(timeout()), SLOT(SeekNow()));
+  connect(app, SIGNAL(NewDebugConsole(Console*)), this,
+          SLOT(NewDebugConsole(Console*)));
 
   ReloadSettings();
 
@@ -978,4 +983,8 @@ GstEngine::OutputDetailsList GstEngine::GetOutputsList() const {
   }
 
   return ret;
+}
+
+void GstEngine::NewDebugConsole(Console* console) {
+  console->AddPage(new GstEngineDebug(this), "GstEngine");
 }
