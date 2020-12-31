@@ -134,6 +134,7 @@ set(SOURCES
   engines/devicefinder.cpp
   engines/enginebase.cpp
   engines/gstengine.cpp
+  engines/gstenginedebug.cpp
   engines/gstenginepipeline.cpp
   engines/gstelementdeleter.cpp
 
@@ -455,6 +456,7 @@ set(HEADERS
 
   engines/enginebase.h
   engines/gstengine.h
+  engines/gstenginedebug.h
   engines/gstenginepipeline.h
   engines/gstelementdeleter.h
 
@@ -686,6 +688,8 @@ set(UI
 
   devices/deviceproperties.ui
   devices/deviceviewcontainer.ui
+
+  engines/gstenginedebug.ui
 
   globalsearch/globalsearchsettingspage.ui
   globalsearch/globalsearchview.ui

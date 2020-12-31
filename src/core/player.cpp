@@ -56,7 +56,7 @@ Player::Player(Application* app, QObject* parent)
     : PlayerInterface(parent),
       app_(app),
       lastfm_(nullptr),
-      engine_(new GstEngine(app_->task_manager())),
+      engine_(new GstEngine(app_)),
       stream_change_type_(Engine::First),
       last_state_(Engine::Empty),
       nb_errors_received_(0),

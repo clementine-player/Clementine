@@ -39,7 +39,10 @@
 class QTimer;
 class QTimerEvent;
 
+class Application;
+class Console;
 class DeviceFinder;
+class GstEngineDebug;
 class GstEnginePipeline;
 class TaskManager;
 
@@ -57,7 +60,7 @@ class GstEngine : public Engine::Base, public BufferConsumer {
   Q_OBJECT
 
  public:
-  GstEngine(TaskManager* task_manager);
+  GstEngine(Application* app);
   ~GstEngine();
 
   struct OutputDetails {
@@ -123,9 +126,18 @@ class GstEngine : public Engine::Base, public BufferConsumer {
   GTlsDatabase* tls_database() const { return tls_database_; }
 #endif
 
+  void NewDebugConsole(Console* console);
+
  protected:
   void SetVolumeSW(uint percent);
   void timerEvent(QTimerEvent*);
+
+ private:
+  // Used for debug purposes only.
+  friend class GstEngineDebug;
+  std::shared_ptr<GstEnginePipeline> GetCurrentPipeline() {
+    return current_pipeline_;
+  }
 
  private slots:
   void EndOfStreamReached(int pipeline_id, bool has_next_track);
