@@ -12,6 +12,8 @@ class Console : public QDialog {
  public:
   Console(Application* app, QWidget* parent = nullptr);
 
+  void AddPage(QWidget* page, const QString& label);
+
  private slots:
   // Database
   void RunQuery();

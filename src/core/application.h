@@ -32,6 +32,7 @@ class QSettings;
 class AlbumCoverLoader;
 class Appearance;
 class ApplicationImpl;
+class Console;
 class CoverProviders;
 class CurrentArtLoader;
 class Database;
@@ -120,6 +121,8 @@ class Application : public QObject {
   void SettingsChanged();
   void SaveSettings(QSettings* settings);
   void SettingsDialogRequested(SettingsDialog::Page page);
+
+  void NewDebugConsole(Console* console);
 
  private slots:
   void SaveSettings_();
