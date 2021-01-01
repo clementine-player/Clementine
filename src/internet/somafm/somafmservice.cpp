@@ -171,8 +171,8 @@ void SomaFMServiceBase::ReadChannel(QXmlStreamReader& reader, StreamList* ret) {
           stream.title_ = reader.readElementText();
         } else if (reader.name() == "dj") {
           stream.dj_ = reader.readElementText();
-        } else if (reader.name() == "fastpls" &&
-                   reader.attributes().value("format") == "mp3") {
+        } else if (reader.name() == "highestpls" &&
+                   reader.attributes().value("format") == "aac") {
           QUrl url(reader.readElementText());
           url.setScheme(url_handler_->scheme());
 
