@@ -12,7 +12,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2020-12-17 12:36+0000\n"
+"PO-Revision-Date: 2021-01-01 16:40+0000\n"
 "Last-Translator: John Maguire <john.maguire@gmail.com>\n"
 "Language-Team: Lithuanian (http://www.transifex.com/davidsansome/clementine/language/lt/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -509,7 +509,7 @@ msgstr "Pridėti kitą srautą..."
 msgid "Add directory..."
 msgstr "Pridėti nuorodą..."
 
-#: ui/mainwindow.cpp:2145
+#: ui/mainwindow.cpp:2149
 msgid "Add file"
 msgstr "Pridėti  failą"
 
@@ -529,7 +529,7 @@ msgstr "Pridėti failą..."
 msgid "Add files to transcode"
 msgstr "Pridėti failus perkodavimui"
 
-#: transcoder/transcodedialog.cpp:309 ui/mainwindow.cpp:2172
+#: transcoder/transcodedialog.cpp:309 ui/mainwindow.cpp:2176
 #: ripper/ripcddialog.cpp:202
 msgid "Add folder"
 msgstr "Pridėti aplanką"
@@ -634,7 +634,7 @@ msgstr "Pridėti į Spotify grojaraščius"
 msgid "Add to Spotify starred"
 msgstr "Pridėti į Spotify pažymėtus"
 
-#: ui/mainwindow.cpp:1946
+#: ui/mainwindow.cpp:1950
 msgid "Add to another playlist"
 msgstr "Pridėti prie kito grojaraščio"
 
@@ -1037,7 +1037,7 @@ msgstr "Naršyti..."
 msgid "Buffer duration"
 msgstr "Buferio trukmė"
 
-#: engines/gstengine.cpp:918
+#: engines/gstengine.cpp:931
 msgid "Buffering"
 msgstr "Kaupiamas buferis"
 
@@ -1119,7 +1119,7 @@ msgstr "Tikrinti, ar nėra naujų epizodų"
 msgid "Check for updates"
 msgstr "Tikrinti ar yra atnaujinimų"
 
-#: ui/mainwindow.cpp:837
+#: ui/mainwindow.cpp:841
 msgid "Check for updates..."
 msgstr "Atnaujinimų tikrinimas..."
 
@@ -1127,7 +1127,7 @@ msgstr "Atnaujinimų tikrinimas..."
 msgid "Choose a name for your smart playlist"
 msgstr "Parinkite pavadinimą išmaniajam grojaraščiui"
 
-#: engines/gstengine.cpp:939
+#: engines/gstengine.cpp:952
 msgid "Choose automatically"
 msgstr "Automatiškai parinkti"
 
@@ -1359,7 +1359,7 @@ msgstr "Konfigūruoti subsonix"
 msgid "Configure global search..."
 msgstr "Nustatyti visuotinę paiešką..."
 
-#: ui/mainwindow.cpp:668
+#: ui/mainwindow.cpp:672
 msgid "Configure library..."
 msgstr "Konfigūruoti fonoteką..."
 
@@ -1431,11 +1431,11 @@ msgid "Copy to clipboard"
 msgstr "Kopijuoti į atmintinę"
 
 #: library/libraryview.cpp:418 internet/podcasts/podcastservice.cpp:444
-#: ui/mainwindow.cpp:728 widgets/fileviewlist.cpp:46
+#: ui/mainwindow.cpp:732 widgets/fileviewlist.cpp:46
 msgid "Copy to device..."
 msgstr "Kopijuoti į įrenginį..."
 
-#: devices/deviceview.cpp:222 ui/mainwindow.cpp:718
+#: devices/deviceview.cpp:222 ui/mainwindow.cpp:722
 #: widgets/fileviewlist.cpp:41
 msgid "Copy to library..."
 msgstr "Kopijuoti į fonoteką..."
@@ -1630,7 +1630,7 @@ msgstr "Sumažinti garsą"
 msgid "Default background image"
 msgstr "Numatytasis fono paveikslėlis"
 
-#: engines/gstengine.cpp:965
+#: engines/gstengine.cpp:978
 #, qt-format
 msgid "Default device on %1"
 msgstr "Numatytas įrenginys esantis %1"
@@ -1653,7 +1653,7 @@ msgid "Delete downloaded data"
 msgstr "Naikinti atsiųstus duomenis"
 
 #: devices/deviceview.cpp:396 library/libraryview.cpp:677
-#: ui/mainwindow.cpp:2526 widgets/fileview.cpp:189
+#: ui/mainwindow.cpp:2530 widgets/fileview.cpp:189
 msgid "Delete files"
 msgstr "Ištrinti failus"
 
@@ -1661,7 +1661,7 @@ msgstr "Ištrinti failus"
 msgid "Delete from device..."
 msgstr "Ištrinti iš įrenginio..."
 
-#: library/libraryview.cpp:421 ui/mainwindow.cpp:731
+#: library/libraryview.cpp:421 ui/mainwindow.cpp:735
 #: widgets/fileviewlist.cpp:48
 msgid "Delete from disk..."
 msgstr "Ištrinti iš disko..."
@@ -1694,11 +1694,11 @@ msgstr "Trinami failai"
 msgid "Depth"
 msgstr "Gylis"
 
-#: ui/mainwindow.cpp:1859
+#: ui/mainwindow.cpp:1863
 msgid "Dequeue selected tracks"
 msgstr "Iš eilės pažymėtus takelius"
 
-#: ui/mainwindow.cpp:1857
+#: ui/mainwindow.cpp:1861
 msgid "Dequeue track"
 msgstr "Iš eilės takelį"
 
@@ -1954,6 +1954,10 @@ msgstr "Dropbox"
 msgid "Dubstep"
 msgstr "Dubstep"
 
+#: ../bin/src/ui_gstenginedebug.h:68
+msgid "Dump Pipeline Graph"
+msgstr ""
+
 #: ../bin/src/ui_console.h:132
 msgid "Dump To Logs"
 msgstr "Iškloti į žurnalus"
@@ -1974,7 +1978,7 @@ msgstr "Dinaminis atsitiktinis maišymas"
 msgid "Edit smart playlist..."
 msgstr "Taisyti išmanųjį grojaraštį..."
 
-#: ui/mainwindow.cpp:1909
+#: ui/mainwindow.cpp:1913
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr "Redaguoti žymę \"%1\"..."
@@ -2113,8 +2117,8 @@ msgid "Equivalent to --log-levels *:3"
 msgstr "Tai atitinka --log-levels *:3"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:249
-#: library/libraryview.cpp:671 ui/mainwindow.cpp:2201 ui/mainwindow.cpp:2479
-#: ui/mainwindow.cpp:2657
+#: library/libraryview.cpp:671 ui/mainwindow.cpp:2205 ui/mainwindow.cpp:2483
+#: ui/mainwindow.cpp:2661
 msgid "Error"
 msgstr "Klaida"
 
@@ -2256,7 +2260,7 @@ msgstr "Pradingimas"
 msgid "Fading duration"
 msgstr "Suliejimo trukmė"
 
-#: ui/mainwindow.cpp:2202
+#: ui/mainwindow.cpp:2206
 msgid "Failed reading CD drive"
 msgstr "Nepavyko perskaityti CD disko"
 
@@ -2434,7 +2438,7 @@ msgid ""
 "to rescan all the songs again next time you connect it."
 msgstr "Pamirštant, įrenginys bus pašalintas iš šio sąrašo ir Clementine turės vėl  skenuoti visas dainas kai kitą kartą prijungsite šį įrenginį."
 
-#: ../bin/src/ui_deviceviewcontainer.h:97
+#: ../bin/src/ui_deviceviewcontainer.h:97 ../bin/src/ui_gstenginedebug.h:66
 #: ../bin/src/ui_searchproviderstatuswidget.h:93
 #: ../bin/src/ui_suggestionwidget.h:69 ../bin/src/ui_icecastfilterwidget.h:73
 #: ../bin/src/ui_internetviewcontainer.h:70 ../bin/src/ui_searchboxwidget.h:61
@@ -2991,7 +2995,7 @@ msgstr "Fonoteka"
 msgid "Library advanced grouping"
 msgstr "Sudėtingesnis fonotekos grupavimas"
 
-#: ui/mainwindow.cpp:2785
+#: ui/mainwindow.cpp:2793
 msgid "Library rescan notice"
 msgstr "Fonotekos perskenavimo žinutė"
 
@@ -3315,7 +3319,7 @@ msgstr "Prijungimo vietos"
 msgid "Move down"
 msgstr "Perkelti žemyn"
 
-#: ui/mainwindow.cpp:721 widgets/fileviewlist.cpp:43
+#: ui/mainwindow.cpp:725 widgets/fileviewlist.cpp:43
 msgid "Move to library..."
 msgstr "Perkelti į fonoteką"
 
@@ -3324,7 +3328,7 @@ msgstr "Perkelti į fonoteką"
 msgid "Move up"
 msgstr "Perkelti aukštyn"
 
-#: transcoder/transcodedialog.cpp:228 ui/mainwindow.cpp:2147
+#: transcoder/transcodedialog.cpp:228 ui/mainwindow.cpp:2151
 msgid "Music"
 msgstr "Muzika"
 
@@ -3386,7 +3390,7 @@ msgstr "Niekada nepradėti groti"
 msgid "New folder"
 msgstr "Naujas aplankas"
 
-#: ui/mainwindow.cpp:1963 ../bin/src/ui_mainwindow.h:754
+#: ui/mainwindow.cpp:1967 ../bin/src/ui_mainwindow.h:754
 msgid "New playlist"
 msgstr "Naujas grojaraštis"
 
@@ -3453,7 +3457,7 @@ msgstr "Jokių trumpų blokų"
 msgid "None"
 msgstr "Nėra"
 
-#: library/libraryview.cpp:672 ui/mainwindow.cpp:2480 ui/mainwindow.cpp:2658
+#: library/libraryview.cpp:672 ui/mainwindow.cpp:2484 ui/mainwindow.cpp:2662
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Nei viena iš pažymėtų dainų netinka kopijavimui į įrenginį"
 
@@ -3668,7 +3672,7 @@ msgstr "Opus"
 msgid "Organise Files"
 msgstr "Tvarkyti failus"
 
-#: library/libraryview.cpp:415 ui/mainwindow.cpp:724
+#: library/libraryview.cpp:415 ui/mainwindow.cpp:728
 msgid "Organise files..."
 msgstr "Tvarkyti failus..."
 
@@ -3752,7 +3756,7 @@ msgstr "Vakarėlis"
 msgid "Password"
 msgstr "Slaptažodis"
 
-#: core/globalshortcuts.cpp:52 ui/mainwindow.cpp:1166 ui/mainwindow.cpp:1754
+#: core/globalshortcuts.cpp:52 ui/mainwindow.cpp:1170 ui/mainwindow.cpp:1758
 #: ui/qtsystemtrayicon.cpp:185 wiimotedev/wiimotesettingspage.cpp:115
 msgid "Pause"
 msgstr "Pristabdyti"
@@ -3772,6 +3776,10 @@ msgstr "Pristabdyta"
 msgid "Performer"
 msgstr "Atlikėjas"
 
+#: ../bin/src/ui_gstenginedebug.h:67
+msgid "Pipeline"
+msgstr ""
+
 #: ../bin/src/ui_albumcoverexport.h:214
 msgid "Pixel"
 msgstr "Pikselis"
@@ -3780,8 +3788,8 @@ msgstr "Pikselis"
 msgid "Plain sidebar"
 msgstr "Paprasta šoninė juosta"
 
-#: core/globalshortcuts.cpp:51 ui/mainwindow.cpp:685 ui/mainwindow.cpp:1130
-#: ui/mainwindow.cpp:1151 ui/mainwindow.cpp:1758 ui/qtsystemtrayicon.cpp:173
+#: core/globalshortcuts.cpp:51 ui/mainwindow.cpp:689 ui/mainwindow.cpp:1134
+#: ui/mainwindow.cpp:1155 ui/mainwindow.cpp:1762 ui/qtsystemtrayicon.cpp:173
 #: ui/qtsystemtrayicon.cpp:199 wiimotedev/wiimotesettingspage.cpp:108
 #: ../bin/src/ui_mainwindow.h:720
 msgid "Play"
@@ -3804,11 +3812,11 @@ msgstr "Groti jei sustabdyta, Pristabdyti jei grojama"
 msgid "Play if there is nothing already playing"
 msgstr "Groti jei jau kas nors negroja"
 
-#: library/libraryview.cpp:395 ui/mainwindow.cpp:1870
+#: library/libraryview.cpp:395 ui/mainwindow.cpp:1874
 msgid "Play next"
 msgstr "Groti kitą"
 
-#: ui/mainwindow.cpp:1868
+#: ui/mainwindow.cpp:1872
 msgid "Play selected tracks next"
 msgstr "Toliau groti pasirinktus takelius"
 
@@ -4029,12 +4037,12 @@ msgstr "Pateikiama užklausa įrenginiui..."
 msgid "Queue Manager"
 msgstr "Eilės tvarkytuvė"
 
-#: ui/mainwindow.cpp:1863
+#: ui/mainwindow.cpp:1867
 msgid "Queue selected tracks"
 msgstr "į eilę pažymėtus takelius"
 
 #: globalsearch/globalsearchview.cpp:464 library/libraryview.cpp:392
-#: ui/mainwindow.cpp:1861
+#: ui/mainwindow.cpp:1865
 msgid "Queue track"
 msgstr "į eilę takelį"
 
@@ -4450,7 +4458,7 @@ msgstr "Ieškoti subsonic"
 msgid "Search automatically"
 msgstr "Ieškoti automatiškai"
 
-#: ui/mainwindow.cpp:705
+#: ui/mainwindow.cpp:709
 msgid "Search for album"
 msgstr "Ieškoti albumo"
 
@@ -4463,7 +4471,7 @@ msgstr "Ieškoti albumo viršelių..."
 msgid "Search for anything"
 msgstr "Ieškoti bet ko"
 
-#: ui/mainwindow.cpp:702
+#: ui/mainwindow.cpp:706
 msgid "Search for artist"
 msgstr "Ieškoti atlikėjo"
 
@@ -4588,7 +4596,7 @@ msgstr "Serverio detalės"
 msgid "Service offline"
 msgstr "Servisas nepasiekiamas"
 
-#: ui/mainwindow.cpp:1908
+#: ui/mainwindow.cpp:1912
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr "Nustatyti %1 į \"%2\"..."
@@ -4668,7 +4676,7 @@ msgstr "Rodyti gražų OSD"
 msgid "Show above status bar"
 msgstr "Rodyti virš būsenos juostos"
 
-#: ui/mainwindow.cpp:652
+#: ui/mainwindow.cpp:656
 msgid "Show all songs"
 msgstr "Rodyti visas dainas"
 
@@ -4688,12 +4696,12 @@ msgstr "Rodyti skirtukus"
 msgid "Show fullsize..."
 msgstr "Rodyti viso dydžio..."
 
-#: library/libraryview.cpp:432 ui/mainwindow.cpp:734
+#: library/libraryview.cpp:432 ui/mainwindow.cpp:738
 #: widgets/fileviewlist.cpp:54
 msgid "Show in file browser..."
 msgstr "Rodyti failų naršyklėje..."
 
-#: ui/mainwindow.cpp:736
+#: ui/mainwindow.cpp:740
 msgid "Show in library..."
 msgstr "Rodyti fonotekoje..."
 
@@ -4705,11 +4713,11 @@ msgstr "Rodyti įvairiuose atlikėjuose"
 msgid "Show moodbar"
 msgstr "Rodyti nuotaikos juostą"
 
-#: ui/mainwindow.cpp:654
+#: ui/mainwindow.cpp:658
 msgid "Show only duplicates"
 msgstr "Rodyti tik duplikatus"
 
-#: ui/mainwindow.cpp:656
+#: ui/mainwindow.cpp:660
 msgid "Show only untagged"
 msgstr "Rodyti tik be žymių"
 
@@ -4801,11 +4809,11 @@ msgstr "Praleisti skaičiavimą"
 msgid "Skip forwards in playlist"
 msgstr "Kitas grojaraščio kūrinys"
 
-#: ui/mainwindow.cpp:1879
+#: ui/mainwindow.cpp:1883
 msgid "Skip selected tracks"
 msgstr "Praleisti pasirinktus takelius"
 
-#: ui/mainwindow.cpp:1877
+#: ui/mainwindow.cpp:1881
 msgid "Skip track"
 msgstr "Praleisti takelį"
 
@@ -4958,7 +4966,7 @@ msgstr "Stabdyti po kiekvieno takelio"
 msgid "Stop after every track"
 msgstr "Stabdyti po kiekvieno takelio"
 
-#: ui/mainwindow.cpp:689 ../bin/src/ui_mainwindow.h:724
+#: ui/mainwindow.cpp:693 ../bin/src/ui_mainwindow.h:724
 msgid "Stop after this track"
 msgstr "Stabdyti po šio takelio"
 
@@ -5126,7 +5134,7 @@ msgid ""
 "license key. Visit subsonic.org for details."
 msgstr "Bandomasis subsonic laikotarpis baigėsi. Paaukokite ir gaukite licenciją. Norėdami sužinoti daugiau aplankykite subsonic.org."
 
-#: ui/mainwindow.cpp:2776
+#: ui/mainwindow.cpp:2784
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -5168,7 +5176,7 @@ msgid ""
 "continue?"
 msgstr "Šie failai bus ištrinti iš įrenginio, ar tikrai norite tęsti?"
 
-#: library/libraryview.cpp:678 ui/mainwindow.cpp:2527 widgets/fileview.cpp:190
+#: library/libraryview.cpp:678 ui/mainwindow.cpp:2531 widgets/fileview.cpp:190
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -5270,7 +5278,7 @@ msgstr "Išjungti gražų OSD"
 msgid "Toggle fullscreen"
 msgstr "Visame ekrane"
 
-#: ui/mainwindow.cpp:1865
+#: ui/mainwindow.cpp:1869
 msgid "Toggle queue status"
 msgstr "Perjungti eilės statusą"
 
@@ -5408,11 +5416,11 @@ msgstr "Nežinoma klaida"
 msgid "Unset cover"
 msgstr "Pašalinti viršelį"
 
-#: ui/mainwindow.cpp:1875
+#: ui/mainwindow.cpp:1879
 msgid "Unskip selected tracks"
 msgstr "Nepraleisti pasirinktų takelių"
 
-#: ui/mainwindow.cpp:1873
+#: ui/mainwindow.cpp:1877
 msgid "Unskip track"
 msgstr "Nepraleisti takelio"
 
@@ -5742,7 +5750,7 @@ msgid ""
 "well?"
 msgstr "Ar norėtumėte perkelti kitas dainas į šio atlikėjo albumą?"
 
-#: ui/mainwindow.cpp:2783
+#: ui/mainwindow.cpp:2791
 msgid "Would you like to run a full rescan right now?"
 msgstr "Ar norite paleisti pilną perskenavimą dabar?"
 

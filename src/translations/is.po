@@ -13,7 +13,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2020-12-17 12:36+0000\n"
+"PO-Revision-Date: 2021-01-01 16:40+0000\n"
 "Last-Translator: John Maguire <john.maguire@gmail.com>\n"
 "Language-Team: Icelandic (http://www.transifex.com/davidsansome/clementine/language/is/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -510,7 +510,7 @@ msgstr "Bæta við öðru streymi..."
 msgid "Add directory..."
 msgstr "Bæta við möppu..."
 
-#: ui/mainwindow.cpp:2145
+#: ui/mainwindow.cpp:2149
 msgid "Add file"
 msgstr "Bæta við skrá"
 
@@ -530,7 +530,7 @@ msgstr "Bæta við skrá..."
 msgid "Add files to transcode"
 msgstr "Bæta við skrá til að millikóða"
 
-#: transcoder/transcodedialog.cpp:309 ui/mainwindow.cpp:2172
+#: transcoder/transcodedialog.cpp:309 ui/mainwindow.cpp:2176
 #: ripper/ripcddialog.cpp:202
 msgid "Add folder"
 msgstr "Bæta við möppu"
@@ -635,7 +635,7 @@ msgstr "Bæta við Spotify-spilunarlista"
 msgid "Add to Spotify starred"
 msgstr "Bæta við Spotify-stjörnumerkt"
 
-#: ui/mainwindow.cpp:1946
+#: ui/mainwindow.cpp:1950
 msgid "Add to another playlist"
 msgstr "Bæta við öðrum spilunarlista"
 
@@ -1038,7 +1038,7 @@ msgstr "Flakka..."
 msgid "Buffer duration"
 msgstr "Tímalengd biðminnis"
 
-#: engines/gstengine.cpp:918
+#: engines/gstengine.cpp:931
 msgid "Buffering"
 msgstr "Hleð í biðminni"
 
@@ -1120,7 +1120,7 @@ msgstr "Leita að nýjum þáttum"
 msgid "Check for updates"
 msgstr "Athuga með uppfærslur"
 
-#: ui/mainwindow.cpp:837
+#: ui/mainwindow.cpp:841
 msgid "Check for updates..."
 msgstr "Athuga með uppfærslur..."
 
@@ -1128,7 +1128,7 @@ msgstr "Athuga með uppfærslur..."
 msgid "Choose a name for your smart playlist"
 msgstr "Veldu nafn á snjalla spilunarlistann"
 
-#: engines/gstengine.cpp:939
+#: engines/gstengine.cpp:952
 msgid "Choose automatically"
 msgstr "Velja sjálfvirkt"
 
@@ -1360,7 +1360,7 @@ msgstr "Stilla Subsonic..."
 msgid "Configure global search..."
 msgstr "Stilla altæka leit..."
 
-#: ui/mainwindow.cpp:668
+#: ui/mainwindow.cpp:672
 msgid "Configure library..."
 msgstr "Stilla safn..."
 
@@ -1432,11 +1432,11 @@ msgid "Copy to clipboard"
 msgstr "Afrita á klippispjald"
 
 #: library/libraryview.cpp:418 internet/podcasts/podcastservice.cpp:444
-#: ui/mainwindow.cpp:728 widgets/fileviewlist.cpp:46
+#: ui/mainwindow.cpp:732 widgets/fileviewlist.cpp:46
 msgid "Copy to device..."
 msgstr "Afrita til tæki..."
 
-#: devices/deviceview.cpp:222 ui/mainwindow.cpp:718
+#: devices/deviceview.cpp:222 ui/mainwindow.cpp:722
 #: widgets/fileviewlist.cpp:41
 msgid "Copy to library..."
 msgstr "Afrita í safn..."
@@ -1631,7 +1631,7 @@ msgstr "Minnka hljóðstyrk"
 msgid "Default background image"
 msgstr "Sjálfgefin bakgrunnsmynd"
 
-#: engines/gstengine.cpp:965
+#: engines/gstengine.cpp:978
 #, qt-format
 msgid "Default device on %1"
 msgstr "Sjálfgefið tæki á %1"
@@ -1654,7 +1654,7 @@ msgid "Delete downloaded data"
 msgstr "Eyða sóttum gögnum"
 
 #: devices/deviceview.cpp:396 library/libraryview.cpp:677
-#: ui/mainwindow.cpp:2526 widgets/fileview.cpp:189
+#: ui/mainwindow.cpp:2530 widgets/fileview.cpp:189
 msgid "Delete files"
 msgstr "Eyða skrám"
 
@@ -1662,7 +1662,7 @@ msgstr "Eyða skrám"
 msgid "Delete from device..."
 msgstr "Eyða frá tæki..."
 
-#: library/libraryview.cpp:421 ui/mainwindow.cpp:731
+#: library/libraryview.cpp:421 ui/mainwindow.cpp:735
 #: widgets/fileviewlist.cpp:48
 msgid "Delete from disk..."
 msgstr "Eyða frá diski..."
@@ -1695,11 +1695,11 @@ msgstr "Eyði gögnum"
 msgid "Depth"
 msgstr "Dýpt"
 
-#: ui/mainwindow.cpp:1859
+#: ui/mainwindow.cpp:1863
 msgid "Dequeue selected tracks"
 msgstr "Taka valin lög úr biðröð"
 
-#: ui/mainwindow.cpp:1857
+#: ui/mainwindow.cpp:1861
 msgid "Dequeue track"
 msgstr "Taka lag úr biðröð"
 
@@ -1955,6 +1955,10 @@ msgstr "Dropbox"
 msgid "Dubstep"
 msgstr "Dubstep"
 
+#: ../bin/src/ui_gstenginedebug.h:68
+msgid "Dump Pipeline Graph"
+msgstr ""
+
 #: ../bin/src/ui_console.h:132
 msgid "Dump To Logs"
 msgstr ""
@@ -1975,7 +1979,7 @@ msgstr "Breytilegt slembið mix"
 msgid "Edit smart playlist..."
 msgstr "Sýsla með snjallan spilunarlista..."
 
-#: ui/mainwindow.cpp:1909
+#: ui/mainwindow.cpp:1913
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr "Breyta merki \"%1\"..."
@@ -2114,8 +2118,8 @@ msgid "Equivalent to --log-levels *:3"
 msgstr "Samsvarar --log-levels *:3"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:249
-#: library/libraryview.cpp:671 ui/mainwindow.cpp:2201 ui/mainwindow.cpp:2479
-#: ui/mainwindow.cpp:2657
+#: library/libraryview.cpp:671 ui/mainwindow.cpp:2205 ui/mainwindow.cpp:2483
+#: ui/mainwindow.cpp:2661
 msgid "Error"
 msgstr "Villa"
 
@@ -2257,7 +2261,7 @@ msgstr "Deyfing"
 msgid "Fading duration"
 msgstr "Tímalengd dofnunar"
 
-#: ui/mainwindow.cpp:2202
+#: ui/mainwindow.cpp:2206
 msgid "Failed reading CD drive"
 msgstr "Mistókst að lesa CD-drif"
 
@@ -2435,7 +2439,7 @@ msgid ""
 "to rescan all the songs again next time you connect it."
 msgstr "Að gleyma tæki þýðir að það er tekið af þessum lista og þarf Clementine skanna öll lög á því næst þegar það er tengt."
 
-#: ../bin/src/ui_deviceviewcontainer.h:97
+#: ../bin/src/ui_deviceviewcontainer.h:97 ../bin/src/ui_gstenginedebug.h:66
 #: ../bin/src/ui_searchproviderstatuswidget.h:93
 #: ../bin/src/ui_suggestionwidget.h:69 ../bin/src/ui_icecastfilterwidget.h:73
 #: ../bin/src/ui_internetviewcontainer.h:70 ../bin/src/ui_searchboxwidget.h:61
@@ -2992,7 +2996,7 @@ msgstr "Safn"
 msgid "Library advanced grouping"
 msgstr "Þróuð flokkun safns"
 
-#: ui/mainwindow.cpp:2785
+#: ui/mainwindow.cpp:2793
 msgid "Library rescan notice"
 msgstr "Tilkynning um skönnun á tónlistarsafni"
 
@@ -3316,7 +3320,7 @@ msgstr "Tengipunktar"
 msgid "Move down"
 msgstr "Færa niður"
 
-#: ui/mainwindow.cpp:721 widgets/fileviewlist.cpp:43
+#: ui/mainwindow.cpp:725 widgets/fileviewlist.cpp:43
 msgid "Move to library..."
 msgstr "Flytja í safn..."
 
@@ -3325,7 +3329,7 @@ msgstr "Flytja í safn..."
 msgid "Move up"
 msgstr "Færa upp"
 
-#: transcoder/transcodedialog.cpp:228 ui/mainwindow.cpp:2147
+#: transcoder/transcodedialog.cpp:228 ui/mainwindow.cpp:2151
 msgid "Music"
 msgstr "Tónlist"
 
@@ -3387,7 +3391,7 @@ msgstr "Aldrei hefja spilun"
 msgid "New folder"
 msgstr "Ný mappa"
 
-#: ui/mainwindow.cpp:1963 ../bin/src/ui_mainwindow.h:754
+#: ui/mainwindow.cpp:1967 ../bin/src/ui_mainwindow.h:754
 msgid "New playlist"
 msgstr "Nýr lagalisti"
 
@@ -3454,7 +3458,7 @@ msgstr "Engar stuttar blokkir"
 msgid "None"
 msgstr "Ekkert"
 
-#: library/libraryview.cpp:672 ui/mainwindow.cpp:2480 ui/mainwindow.cpp:2658
+#: library/libraryview.cpp:672 ui/mainwindow.cpp:2484 ui/mainwindow.cpp:2662
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Ekkert af völdu lögunum henta til að afrita yfir á tæki"
 
@@ -3669,7 +3673,7 @@ msgstr "Opus"
 msgid "Organise Files"
 msgstr "Skipuleggja skrár"
 
-#: library/libraryview.cpp:415 ui/mainwindow.cpp:724
+#: library/libraryview.cpp:415 ui/mainwindow.cpp:728
 msgid "Organise files..."
 msgstr "Skipuleggja skrár..."
 
@@ -3753,7 +3757,7 @@ msgstr "Partý"
 msgid "Password"
 msgstr "Lykilorð"
 
-#: core/globalshortcuts.cpp:52 ui/mainwindow.cpp:1166 ui/mainwindow.cpp:1754
+#: core/globalshortcuts.cpp:52 ui/mainwindow.cpp:1170 ui/mainwindow.cpp:1758
 #: ui/qtsystemtrayicon.cpp:185 wiimotedev/wiimotesettingspage.cpp:115
 msgid "Pause"
 msgstr "Í bið"
@@ -3773,6 +3777,10 @@ msgstr "Í bið"
 msgid "Performer"
 msgstr "Flytjandi"
 
+#: ../bin/src/ui_gstenginedebug.h:67
+msgid "Pipeline"
+msgstr ""
+
 #: ../bin/src/ui_albumcoverexport.h:214
 msgid "Pixel"
 msgstr "Mynddíll"
@@ -3781,8 +3789,8 @@ msgstr "Mynddíll"
 msgid "Plain sidebar"
 msgstr "Einfalt hliðarspjald"
 
-#: core/globalshortcuts.cpp:51 ui/mainwindow.cpp:685 ui/mainwindow.cpp:1130
-#: ui/mainwindow.cpp:1151 ui/mainwindow.cpp:1758 ui/qtsystemtrayicon.cpp:173
+#: core/globalshortcuts.cpp:51 ui/mainwindow.cpp:689 ui/mainwindow.cpp:1134
+#: ui/mainwindow.cpp:1155 ui/mainwindow.cpp:1762 ui/qtsystemtrayicon.cpp:173
 #: ui/qtsystemtrayicon.cpp:199 wiimotedev/wiimotesettingspage.cpp:108
 #: ../bin/src/ui_mainwindow.h:720
 msgid "Play"
@@ -3805,11 +3813,11 @@ msgstr "Spila ef stöðvað, setja í hlé ef spilandi"
 msgid "Play if there is nothing already playing"
 msgstr "Spila ef ekkert er þegar í afspilun"
 
-#: library/libraryview.cpp:395 ui/mainwindow.cpp:1870
+#: library/libraryview.cpp:395 ui/mainwindow.cpp:1874
 msgid "Play next"
 msgstr "Spila næsta"
 
-#: ui/mainwindow.cpp:1868
+#: ui/mainwindow.cpp:1872
 msgid "Play selected tracks next"
 msgstr "Spila valin lög næst"
 
@@ -4030,12 +4038,12 @@ msgstr "Skoða tæki..."
 msgid "Queue Manager"
 msgstr "Biðraðastjóri"
 
-#: ui/mainwindow.cpp:1863
+#: ui/mainwindow.cpp:1867
 msgid "Queue selected tracks"
 msgstr "Setja valin lög í biðröð"
 
 #: globalsearch/globalsearchview.cpp:464 library/libraryview.cpp:392
-#: ui/mainwindow.cpp:1861
+#: ui/mainwindow.cpp:1865
 msgid "Queue track"
 msgstr "Setja í biðröð"
 
@@ -4451,7 +4459,7 @@ msgstr "Leita á Subsonic"
 msgid "Search automatically"
 msgstr "Leita sjálfvirkt"
 
-#: ui/mainwindow.cpp:705
+#: ui/mainwindow.cpp:709
 msgid "Search for album"
 msgstr "Leita að hljómplötu"
 
@@ -4464,7 +4472,7 @@ msgstr "Leita að plötuumslögum..."
 msgid "Search for anything"
 msgstr "Leita að einhverju"
 
-#: ui/mainwindow.cpp:702
+#: ui/mainwindow.cpp:706
 msgid "Search for artist"
 msgstr "Leita að flytjanda"
 
@@ -4589,7 +4597,7 @@ msgstr "Nánar um þjón "
 msgid "Service offline"
 msgstr "Þjónusta ekki á neti"
 
-#: ui/mainwindow.cpp:1908
+#: ui/mainwindow.cpp:1912
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr "Setja %1 sem \"%2\"..."
@@ -4669,7 +4677,7 @@ msgstr "Birta fegraðan OSD-stjórntexta"
 msgid "Show above status bar"
 msgstr "Birta fyrir ofan stöðustiku"
 
-#: ui/mainwindow.cpp:652
+#: ui/mainwindow.cpp:656
 msgid "Show all songs"
 msgstr "Birta öll lög"
 
@@ -4689,12 +4697,12 @@ msgstr "Sýna aðgreina"
 msgid "Show fullsize..."
 msgstr "Sýna fulla stærð..."
 
-#: library/libraryview.cpp:432 ui/mainwindow.cpp:734
+#: library/libraryview.cpp:432 ui/mainwindow.cpp:738
 #: widgets/fileviewlist.cpp:54
 msgid "Show in file browser..."
 msgstr "Sýna í skráavafra..."
 
-#: ui/mainwindow.cpp:736
+#: ui/mainwindow.cpp:740
 msgid "Show in library..."
 msgstr "Sýna í safni..."
 
@@ -4706,11 +4714,11 @@ msgstr "Birta undir ýmsum flytjendum"
 msgid "Show moodbar"
 msgstr "Birta skapbrigðastiku"
 
-#: ui/mainwindow.cpp:654
+#: ui/mainwindow.cpp:658
 msgid "Show only duplicates"
 msgstr "Aðeins birta tvítekningar"
 
-#: ui/mainwindow.cpp:656
+#: ui/mainwindow.cpp:660
 msgid "Show only untagged"
 msgstr "Aðeins birta ómerkt"
 
@@ -4802,11 +4810,11 @@ msgstr "Sleppa talningu"
 msgid "Skip forwards in playlist"
 msgstr "Fara áfram í spilunarlista"
 
-#: ui/mainwindow.cpp:1879
+#: ui/mainwindow.cpp:1883
 msgid "Skip selected tracks"
 msgstr "Sleppa völdum lögum"
 
-#: ui/mainwindow.cpp:1877
+#: ui/mainwindow.cpp:1881
 msgid "Skip track"
 msgstr "Sleppa lagi"
 
@@ -4959,7 +4967,7 @@ msgstr "Stoppa eftir hvert lag"
 msgid "Stop after every track"
 msgstr "Stoppa eftir öll lög"
 
-#: ui/mainwindow.cpp:689 ../bin/src/ui_mainwindow.h:724
+#: ui/mainwindow.cpp:693 ../bin/src/ui_mainwindow.h:724
 msgid "Stop after this track"
 msgstr "Stoppa eftir þetta lag"
 
@@ -5127,7 +5135,7 @@ msgid ""
 "license key. Visit subsonic.org for details."
 msgstr ""
 
-#: ui/mainwindow.cpp:2776
+#: ui/mainwindow.cpp:2784
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -5169,7 +5177,7 @@ msgid ""
 "continue?"
 msgstr "Þessum skrám verður eytt af tækinu, ertu viss um að þú viljir halda áfram?"
 
-#: library/libraryview.cpp:678 ui/mainwindow.cpp:2527 widgets/fileview.cpp:190
+#: library/libraryview.cpp:678 ui/mainwindow.cpp:2531 widgets/fileview.cpp:190
 msgid ""
 "These files will be permanently deleted from disk, are you sure you want to "
 "continue?"
@@ -5271,7 +5279,7 @@ msgstr "Víxla af/á fegruðum OSD-stjórntexta"
 msgid "Toggle fullscreen"
 msgstr "Víxla heilskjá"
 
-#: ui/mainwindow.cpp:1865
+#: ui/mainwindow.cpp:1869
 msgid "Toggle queue status"
 msgstr "Víxla stöðu biðraðar"
 
@@ -5409,11 +5417,11 @@ msgstr "Óþekkt villa"
 msgid "Unset cover"
 msgstr "Aftengja umslag"
 
-#: ui/mainwindow.cpp:1875
+#: ui/mainwindow.cpp:1879
 msgid "Unskip selected tracks"
 msgstr "Hætta við að sleppa völdum lögum"
 
-#: ui/mainwindow.cpp:1873
+#: ui/mainwindow.cpp:1877
 msgid "Unskip track"
 msgstr "Hætta við að sleppa lagi"
 
@@ -5743,7 +5751,7 @@ msgid ""
 "well?"
 msgstr ""
 
-#: ui/mainwindow.cpp:2783
+#: ui/mainwindow.cpp:2791
 msgid "Would you like to run a full rescan right now?"
 msgstr "Viltu láta endurskanna allt safnið núna?"
 
