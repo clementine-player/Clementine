@@ -297,6 +297,7 @@ class GstEnginePipeline : public QObject {
   GstElement* volume_;
   GstElement* audioscale_;
   GstElement* audiosink_;
+  GstElement* capsfilter_;
 
   // tee and request pads.
   GstElement* tee_;
