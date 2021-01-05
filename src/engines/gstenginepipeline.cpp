@@ -98,6 +98,7 @@ GstEnginePipeline::GstEnginePipeline(GstEngine* engine)
       volume_(nullptr),
       audioscale_(nullptr),
       audiosink_(nullptr),
+      capsfilter_(nullptr),
       tee_(nullptr),
       tee_probe_pad_(nullptr),
       tee_audio_pad_(nullptr) {
@@ -252,8 +253,8 @@ bool GstEnginePipeline::InitAudioBin() {
   // right type of source and decoder for the URI.
 
   // The audio bin gets created here and contains:
-  //   queue ! audioconvert ! <caps32>
-  //         ! ( rgvolume ! rglimiter ! audioconvert2 ) ! tee
+  //   queue ! audioconvert
+  //         ! ( rgvolume ! rglimiter ! audioconvert2 ) ! capsfilter ! tee
   // rgvolume and rglimiter are only created when replaygain is enabled.
 
   // After the tee the pipeline splits.  One split is converted to 16-bit int
@@ -321,27 +322,29 @@ bool GstEnginePipeline::InitAudioBin() {
   volume_ = engine_->CreateElement("volume", audiobin_);
   audioscale_ = engine_->CreateElement("audioresample", audiobin_);
   convert = engine_->CreateElement("audioconvert", audiobin_);
+  capsfilter_ = engine_->CreateElement("capsfilter", audiobin_);
 
   if (!queue_ || !audioconvert_ || !tee_ || !probe_queue || !probe_converter ||
       !probe_sink || !audio_queue || !equalizer_preamp_ || !equalizer_ ||
-      !stereo_panorama_ || !volume_ || !audioscale_ || !convert) {
+      !stereo_panorama_ || !volume_ || !audioscale_ || !convert ||
+      !capsfilter_) {
     qLog(Error) << "Failed to create elements";
     return false;
   }
 
   // Create the replaygain elements if it's enabled.  event_probe is the
   // audioconvert element we attach the probe to, which will change depending
-  // on whether replaygain is enabled.  convert_sink is the element after the
-  // first audioconvert, which again will change.
+  // on whether replaygain is enabled.  tee_src is the element that links to
+  // the tee.
   GstElement* event_probe = audioconvert_;
-  GstElement* convert_sink = tee_;
+  GstElement* tee_src = audioconvert_;
 
   if (rg_enabled_) {
     rgvolume_ = engine_->CreateElement("rgvolume", audiobin_);
     rglimiter_ = engine_->CreateElement("rglimiter", audiobin_);
     audioconvert2_ = engine_->CreateElement("audioconvert", audiobin_);
     event_probe = audioconvert2_;
-    convert_sink = rgvolume_;
+    tee_src = audioconvert2_;
 
     if (!rgvolume_ || !rglimiter_ || !audioconvert2_) {
       qLog(Error) << "Failed to create rg elements";
@@ -434,7 +437,7 @@ bool GstEnginePipeline::InitAudioBin() {
   g_object_set(G_OBJECT(probe_queue), "max-size-bytes", 0, nullptr);
   g_object_set(G_OBJECT(probe_queue), "max-size-time", 0, nullptr);
 
-  gst_element_link_many(queue_, audioconvert_, convert_sink, nullptr);
+  gst_element_link(queue_, audioconvert_);
 
   GstCaps* caps16 = gst_caps_new_simple("audio/x-raw", "format", G_TYPE_STRING,
                                         "S16LE", NULL);
@@ -454,8 +457,12 @@ bool GstEnginePipeline::InitAudioBin() {
 
   // Link replaygain elements if enabled.
   if (rg_enabled_) {
-    gst_element_link_many(rgvolume_, rglimiter_, audioconvert2_, tee_, nullptr);
+    gst_element_link_many(audioconvert_, rgvolume_, rglimiter_, audioconvert2_,
+                          nullptr);
   }
+
+  // Link the trunk to the tee via filter.
+  gst_element_link_many(tee_src, capsfilter_, tee_, nullptr);
 
   // Link the analyzer output of the tee
   gst_element_link(probe_queue, probe_converter);
