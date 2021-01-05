@@ -168,6 +168,9 @@ class GstEnginePipeline : public QObject {
   // a src pad immediately and we can link it after everything's created.
   void MaybeLinkDecodeToAudio();
 
+  // Helper method to retrieve the audio format from a GstCaps object.
+  static QString GetAudioFormat(GstCaps* caps);
+
  private slots:
   void FaderTimelineFinished();
 
