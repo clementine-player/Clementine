@@ -435,7 +435,11 @@ bool GstEnginePipeline::InitAudioBin() {
   g_object_set(G_OBJECT(probe_queue), "max-size-time", 0, nullptr);
 
   gst_element_link_many(queue_, audioconvert_, convert_sink, nullptr);
-  gst_element_link(probe_converter, probe_sink);
+
+  GstCaps* caps16 = gst_caps_new_simple("audio/x-raw", "format", G_TYPE_STRING,
+                                        "S16LE", NULL);
+  gst_element_link_filtered(probe_converter, probe_sink, caps16);
+  gst_caps_unref(caps16);
 
   // Link the outputs of tee to the queues on each path.
   pad = gst_element_get_static_pad(probe_queue, "sink");
@@ -453,11 +457,8 @@ bool GstEnginePipeline::InitAudioBin() {
     gst_element_link_many(rgvolume_, rglimiter_, audioconvert2_, tee_, nullptr);
   }
 
-  // Link the analyzer output of the tee and force 16 bit caps
-  GstCaps* caps16 = gst_caps_new_simple("audio/x-raw", "format", G_TYPE_STRING,
-                                        "S16LE", NULL);
-  gst_element_link_filtered(probe_queue, probe_converter, caps16);
-  gst_caps_unref(caps16);
+  // Link the analyzer output of the tee
+  gst_element_link(probe_queue, probe_converter);
 
   gst_element_link_many(audio_queue, equalizer_preamp_, equalizer_,
                         stereo_panorama_, volume_, audioscale_, convert,
