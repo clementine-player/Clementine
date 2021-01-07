@@ -27,6 +27,7 @@
 #include <memory>
 
 #include "core/song.h"
+#include "engines/gstpipelinebase.h"
 
 struct TranscoderPreset {
   TranscoderPreset() : type_(Song::Type_Unknown) {}
@@ -84,20 +85,18 @@ class Transcoder : public QObject {
 
   // State held by a job and shared across gstreamer callbacks - lives in the
   // job's thread.
-  struct JobState {
+  class JobState : public GstPipelineBase {
+   public:
     JobState(const Job& job, Transcoder* parent)
-        : job_(job),
-          parent_(parent),
-          pipeline_(nullptr),
-          convert_element_(nullptr) {}
-    ~JobState();
+        : job_(job), parent_(parent), convert_element_(nullptr) {}
 
     void PostFinished(bool success);
     void ReportError(GstMessage* msg);
 
+    GstElement* Pipeline() { return pipeline_; }
+
     Job job_;
     Transcoder* parent_;
-    GstElement* pipeline_;
     GstElement* convert_element_;
   };
 
