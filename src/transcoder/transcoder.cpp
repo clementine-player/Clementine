@@ -402,19 +402,18 @@ bool Transcoder::StartJob(const Job& job) {
   // Create the pipeline.
   // This should be a scoped_ptr, but scoped_ptr doesn't support custom
   // destructors.
-  state->pipeline_ = gst_pipeline_new("pipeline");
-  if (!state->pipeline_) return false;
+  if (!state->Init("pipeline")) return false;
 
   // Create all the elements
-  GstElement* src = CreateElement("filesrc", state->pipeline_);
-  GstElement* decode = CreateElement("decodebin", state->pipeline_);
-  GstElement* convert = CreateElement("audioconvert", state->pipeline_);
-  GstElement* resample = CreateElement("audioresample", state->pipeline_);
+  GstElement* src = CreateElement("filesrc", state->Pipeline());
+  GstElement* decode = CreateElement("decodebin", state->Pipeline());
+  GstElement* convert = CreateElement("audioconvert", state->Pipeline());
+  GstElement* resample = CreateElement("audioresample", state->Pipeline());
   GstElement* codec = CreateElementForMimeType(
-      "Codec/Encoder/Audio", job.preset.codec_mimetype_, state->pipeline_);
+      "Codec/Encoder/Audio", job.preset.codec_mimetype_, state->Pipeline());
   GstElement* muxer = CreateElementForMimeType(
-      "Codec/Muxer", job.preset.muxer_mimetype_, state->pipeline_);
-  GstElement* sink = CreateElement("filesink", state->pipeline_);
+      "Codec/Muxer", job.preset.muxer_mimetype_, state->Pipeline());
+  GstElement* sink = CreateElement("filesink", state->Pipeline());
 
   if (!src || !decode || !convert || !sink) return false;
 
@@ -449,11 +448,12 @@ bool Transcoder::StartJob(const Job& job) {
   state->convert_element_ = convert;
 
   CHECKED_GCONNECT(decode, "pad-added", &NewPadCallback, state.get());
-  gst_bus_set_sync_handler(gst_pipeline_get_bus(GST_PIPELINE(state->pipeline_)),
-                           BusCallbackSync, state.get(), nullptr);
+  gst_bus_set_sync_handler(
+      gst_pipeline_get_bus(GST_PIPELINE(state->Pipeline())), BusCallbackSync,
+      state.get(), nullptr);
 
   // Start the pipeline
-  gst_element_set_state(state->pipeline_, GST_STATE_PLAYING);
+  gst_element_set_state(state->Pipeline(), GST_STATE_PLAYING);
 
   // GStreamer now transcodes in another thread, so we can return now and do
   // something else.  Keep the JobState object around.  It'll post an event
@@ -461,13 +461,6 @@ bool Transcoder::StartJob(const Job& job) {
   current_jobs_ << state;
 
   return true;
-}
-
-Transcoder::JobState::~JobState() {
-  if (pipeline_) {
-    gst_element_set_state(pipeline_, GST_STATE_NULL);
-    gst_object_unref(pipeline_);
-  }
 }
 
 bool Transcoder::event(QEvent* e) {
@@ -492,7 +485,7 @@ bool Transcoder::event(QEvent* e) {
     // Remove event handlers from the gstreamer pipeline so they don't get
     // called after the pipeline is shutting down
     gst_bus_set_sync_handler(
-        gst_pipeline_get_bus(GST_PIPELINE(finished_event->state_->pipeline_)),
+        gst_pipeline_get_bus(GST_PIPELINE(finished_event->state_->Pipeline())),
         nullptr, nullptr, nullptr);
 
     // Remove it from the list - this will also destroy the GStreamer pipeline
@@ -522,14 +515,14 @@ void Transcoder::Cancel() {
     // Remove event handlers from the gstreamer pipeline so they don't get
     // called after the pipeline is shutting down
     gst_bus_set_sync_handler(
-        gst_pipeline_get_bus(GST_PIPELINE(state->pipeline_)), nullptr, nullptr,
+        gst_pipeline_get_bus(GST_PIPELINE(state->Pipeline())), nullptr, nullptr,
         nullptr);
 
     // Stop the pipeline
-    if (gst_element_set_state(state->pipeline_, GST_STATE_NULL) ==
+    if (gst_element_set_state(state->Pipeline(), GST_STATE_NULL) ==
         GST_STATE_CHANGE_ASYNC) {
       // Wait for it to finish stopping...
-      gst_element_get_state(state->pipeline_, nullptr, nullptr,
+      gst_element_get_state(state->Pipeline(), nullptr, nullptr,
                             GST_CLOCK_TIME_NONE);
     }
 
@@ -542,13 +535,13 @@ QMap<QString, float> Transcoder::GetProgress() const {
   QMap<QString, float> ret;
 
   for (const auto& state : current_jobs_) {
-    if (!state->pipeline_) continue;
+    if (!state->Pipeline()) continue;
 
     gint64 position = 0;
     gint64 duration = 0;
 
-    gst_element_query_position(state->pipeline_, GST_FORMAT_TIME, &position);
-    gst_element_query_duration(state->pipeline_, GST_FORMAT_TIME, &duration);
+    gst_element_query_position(state->Pipeline(), GST_FORMAT_TIME, &position);
+    gst_element_query_duration(state->Pipeline(), GST_FORMAT_TIME, &duration);
 
     ret[state->job_.input] = float(position) / duration;
   }
