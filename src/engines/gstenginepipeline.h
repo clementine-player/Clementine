@@ -18,18 +18,16 @@
 #ifndef GSTENGINEPIPELINE_H
 #define GSTENGINEPIPELINE_H
 
-#include <gst/gst.h>
-
 #include <QBasicTimer>
 #include <QFuture>
 #include <QMutex>
-#include <QObject>
 #include <QThreadPool>
 #include <QTimeLine>
 #include <QUrl>
 #include <memory>
 
 #include "engine_fwd.h"
+#include "gstpipelinebase.h"
 #include "playbackrequest.h"
 
 class GstElementDeleter;
@@ -39,7 +37,7 @@ class BufferConsumer;
 struct GstQueue;
 struct GstURIDecodeBin;
 
-class GstEnginePipeline : public QObject {
+class GstEnginePipeline : public GstPipelineBase {
   Q_OBJECT
 
  public:
@@ -106,7 +104,6 @@ class GstEnginePipeline : public QObject {
 
   QString source_device() const { return source_device_; }
 
-  void DumpGraph();
  public slots:
   void SetVolumeModifier(qreal mod);
 
@@ -280,8 +277,6 @@ class GstEnginePipeline : public QObject {
   std::unique_ptr<QTimeLine> fader_;
   QBasicTimer fader_fudge_timer_;
   bool use_fudge_timer_;
-
-  GstElement* pipeline_;
 
   // Bins
   // uridecodebin ! audiobin

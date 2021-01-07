@@ -52,7 +52,7 @@ int GstEnginePipeline::sId = 1;
 GstElementDeleter* GstEnginePipeline::sElementDeleter = nullptr;
 
 GstEnginePipeline::GstEnginePipeline(GstEngine* engine)
-    : QObject(nullptr),
+    : GstPipelineBase(),
       engine_(engine),
       id_(sId++),
       valid_(false),
@@ -85,7 +85,6 @@ GstEnginePipeline::GstEnginePipeline(GstEngine* engine)
       last_known_position_ns_(0),
       volume_percent_(100),
       volume_modifier_(1.0),
-      pipeline_(nullptr),
       uridecodebin_(nullptr),
       audiobin_(nullptr),
       queue_(nullptr),
@@ -511,7 +510,7 @@ void GstEnginePipeline::MaybeLinkDecodeToAudio() {
 }
 
 bool GstEnginePipeline::InitFromString(const QString& pipeline) {
-  pipeline_ = gst_pipeline_new("pipeline");
+  if (!Init("pipeline")) return false;
 
   GstElement* new_bin =
       CreateDecodeBinFromString(pipeline.toLatin1().constData());
@@ -530,7 +529,7 @@ bool GstEnginePipeline::InitFromString(const QString& pipeline) {
 
 bool GstEnginePipeline::InitFromReq(const MediaPlaybackRequest& req,
                                     qint64 end_nanosec) {
-  pipeline_ = gst_pipeline_new("pipeline");
+  if (!Init("pipeline")) return false;
 
   current_ = req;
   QUrl url = current_.url_;
@@ -580,8 +579,6 @@ GstEnginePipeline::~GstEnginePipeline() {
         gst_object_unref(tee_audio_pad_);
       }
     }
-
-    gst_object_unref(GST_OBJECT(pipeline_));
   }
 }
 
@@ -1383,16 +1380,4 @@ void GstEnginePipeline::SetNextReq(const MediaPlaybackRequest& req,
   next_ = req;
   next_beginning_offset_nanosec_ = beginning_nanosec;
   next_end_offset_nanosec_ = end_nanosec;
-}
-
-void GstEnginePipeline::DumpGraph() {
-#ifdef GST_DISABLE_GST_DEBUG
-  qLog(Debug) << "Cannot dump graph. gstreamer debug is not enabled.";
-#else
-  if (pipeline_) {
-    qLog(Debug) << "Dumping pipeline graph";
-    GST_DEBUG_BIN_TO_DOT_FILE_WITH_TS(GST_BIN(pipeline_),
-                                      GST_DEBUG_GRAPH_SHOW_ALL, "pipeline");
-  }
-#endif
 }
