@@ -356,6 +356,8 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
   ui_->action_jump->setIcon(IconLoader::Load("go-jump", IconLoader::Base));
   ui_->action_next_track->setIcon(
       IconLoader::Load("media-skip-forward", IconLoader::Base));
+  ui_->action_next_album->setIcon(
+      IconLoader::Load("media-skip-forward", IconLoader::Base));
   ui_->action_open_media->setIcon(
       IconLoader::Load("document-open", IconLoader::Base));
   ui_->action_open_cd->setIcon(
@@ -417,6 +419,8 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
   // Action connections
   connect(ui_->action_next_track, SIGNAL(triggered()), app_->player(),
           SLOT(Next()));
+  connect(ui_->action_next_album, SIGNAL(triggered()), app_->player(),
+          SLOT(NextAlbum()));
   connect(ui_->action_previous_track, SIGNAL(triggered()), app_->player(),
           SLOT(Previous()));
   connect(ui_->action_play_pause, SIGNAL(triggered()), app_->player(),
@@ -546,6 +550,12 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
   // Add the shuffle and repeat action groups to the menu
   ui_->action_shuffle_mode->setMenu(ui_->playlist_sequence->shuffle_menu());
   ui_->action_repeat_mode->setMenu(ui_->playlist_sequence->repeat_menu());
+
+  // Next Actions
+  QMenu* next_menu = new QMenu(this);
+  next_menu->addAction(ui_->action_next_track);
+  next_menu->addAction(ui_->action_next_album);
+  ui_->forward_button->setMenu(next_menu);
 
   // Stop actions
   QMenu* stop_menu = new QMenu(this);
@@ -971,6 +981,12 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
           SIGNAL(ShuffleModeChanged(PlaylistSequence::ShuffleMode)), osd_,
           SLOT(ShuffleModeChanged(PlaylistSequence::ShuffleMode)));
 
+  // Connect the RepeatModeChanged signal such that it will dis/enable the
+  // action_next_album on the UI
+  connect(app_->playlist_manager()->sequence(),
+          SIGNAL(RepeatModeChanged(PlaylistSequence::RepeatMode)),
+          SLOT(SetNextAlbumEnabled(PlaylistSequence::RepeatMode)));
+
 #ifdef HAVE_LIBLASTFM
   connect(app_->scrobbler(), SIGNAL(CachedToScrobble()),
           SLOT(CachedToScrobble()));
@@ -1069,6 +1085,13 @@ MainWindow::MainWindow(Application* app, SystemTrayIcon* tray_icon, OSD* osd,
   CommandlineOptionsReceived(options);
 
   if (!options.contains_play_options()) LoadPlaybackStatus();
+
+  // Set the state of action_next_album based on the repeat mode.
+  if (app_->playlist_manager()->current()->sequence()->repeat_mode() ==
+          PlaylistSequence::Repeat_Track ||
+      app_->playlist_manager()->current()->sequence()->repeat_mode() ==
+          PlaylistSequence::Repeat_Album)
+    ui_->action_next_album->setDisabled(true);
 
   initialized_ = true;
 
@@ -3094,5 +3117,18 @@ void MainWindow::keyPressEvent(QKeyEvent* event) {
     event->accept();
   } else {
     QMainWindow::keyPressEvent(event);
+  }
+}
+
+// Change the state of action_next_album based when the repeat mode is
+// changed.
+void MainWindow::SetNextAlbumEnabled(PlaylistSequence::RepeatMode mode) {
+  if (mode == PlaylistSequence::Repeat_Track ||
+      mode == PlaylistSequence::Repeat_Album) {
+    if (ui_->action_next_album->isEnabled())
+      ui_->action_next_album->setDisabled(true);
+  } else {
+    if (!ui_->action_next_album->isEnabled())
+      ui_->action_next_album->setEnabled(true);
   }
 }

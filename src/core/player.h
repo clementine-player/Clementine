@@ -72,6 +72,7 @@ class PlayerInterface : public QObject {
 
   // Skips this track.  Might load more of the current radio station.
   virtual void Next() = 0;
+  virtual void NextAlbum() = 0;
 
   virtual void Previous() = 0;
   virtual void SetVolume(int value) = 0;
@@ -150,6 +151,7 @@ class Player : public PlayerInterface {
   void PlayPause();
   void RestartOrPrevious();
   void Next();
+  void NextAlbum();
   void Previous();
   void PlayPlaylist(const QString& playlistName);
   void SetVolume(int value);
@@ -177,10 +179,10 @@ class Player : public PlayerInterface {
   void TrackEnded();
   // Play the next item on the playlist - disregarding radio stations like
   // last.fm that might have more tracks.
-  void NextItem(Engine::TrackChangeFlags change);
+  void NextItem(Engine::TrackChangeFlags change, bool next_album = false);
   void PreviousItem(Engine::TrackChangeFlags change);
 
-  void NextInternal(Engine::TrackChangeFlags);
+  void NextInternal(Engine::TrackChangeFlags, bool next_album = false);
   void PlayPlaylistInternal(Engine::TrackChangeFlags,
                             const QString& playlistName);
 

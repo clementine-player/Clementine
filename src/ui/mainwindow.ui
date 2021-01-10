@@ -199,11 +199,20 @@
                 </item>
                 <item>
                  <widget class="QToolButton" name="forward_button">
+                  <property name="minimumSize">
+                   <size>
+                    <width>42</width>
+                    <height>29</height>
+                   </size>
+                  </property>
                   <property name="iconSize">
                    <size>
                     <width>22</width>
                     <height>22</height>
                    </size>
+                  </property>
+                  <property name="popupMode">
+                   <enum>QToolButton::MenuButtonPopup</enum>
                   </property>
                   <property name="autoRaise">
                    <bool>true</bool>
@@ -477,7 +486,7 @@
      <x>0</x>
      <y>0</y>
      <width>1131</width>
-     <height>23</height>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu_music">
@@ -943,6 +952,17 @@
    </property>
    <property name="toolTip">
     <string>Show or hide the sidebar</string>
+   </property>
+  </action>
+  <action name="action_next_album">
+   <property name="text">
+    <string>Next album</string>
+   </property>
+   <property name="toolTip">
+    <string>Skip to the next album</string>
+   </property>
+   <property name="shortcut">
+    <string>F9</string>
    </property>
   </action>
  </widget>

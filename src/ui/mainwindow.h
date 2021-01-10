@@ -155,6 +155,7 @@ class MainWindow : public QMainWindow, public PlatformInterface {
 
   void NewDebugConsole(Console* console);
  private slots:
+  void SetNextAlbumEnabled(PlaylistSequence::RepeatMode mode);
   void FilePathChanged(const QString& path);
 
   void SaveSettings(QSettings* settings);
