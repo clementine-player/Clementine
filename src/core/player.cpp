@@ -170,7 +170,9 @@ void Player::HandleLoadResult(const UrlHandler::LoadResult& result) {
 
 void Player::Next() { NextInternal(Engine::Manual); }
 
-void Player::NextInternal(Engine::TrackChangeFlags change) {
+void Player::NextAlbum() { NextInternal(Engine::Manual, true); }
+
+void Player::NextInternal(Engine::TrackChangeFlags change, bool next_album) {
   if (HandleStopAfter()) return;
 
   if (app_->playlist_manager()->active()->current_item()) {
@@ -186,10 +188,10 @@ void Player::NextInternal(Engine::TrackChangeFlags change) {
     }
   }
 
-  NextItem(change);
+  NextItem(change, next_album);
 }
 
-void Player::NextItem(Engine::TrackChangeFlags change) {
+void Player::NextItem(Engine::TrackChangeFlags change, bool next_album) {
   Playlist* active_playlist = app_->playlist_manager()->active();
 
   // If we received too many errors in auto change, with repeat enabled, we stop
@@ -213,7 +215,25 @@ void Player::NextItem(Engine::TrackChangeFlags change) {
   // Manual track changes override "Repeat track"
   const bool ignore_repeat_track = change & Engine::Manual;
 
-  int i = active_playlist->next_row(ignore_repeat_track);
+  int i = active_playlist->current_row();
+  if (next_album && i != -1) {
+    if (active_playlist->sequence()->repeat_mode() !=
+        PlaylistSequence::Repeat_Track) {
+      int original_index = i;
+      QString album = active_playlist->current_item_metadata().album();
+
+      i = active_playlist->next_row(ignore_repeat_track);
+      while (i != -1 &&
+             active_playlist->item_at(i)->Metadata().album() == album &&
+             i != original_index) {
+        active_playlist->set_current_row(i, true);
+        i = active_playlist->next_row(ignore_repeat_track);
+      }
+    }
+  } else {
+    i = active_playlist->next_row(ignore_repeat_track);
+  }
+
   if (i == -1) {
     app_->playlist_manager()->active()->set_current_row(i);
     emit PlaylistFinished();
