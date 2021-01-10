@@ -436,13 +436,13 @@ void PlaylistManager::UpdateSummaryText() {
 
   QString summary;
   if (selected > 1) {
-    summary += tr("%1 selected of").arg(selected) + " ";
+    summary += tr("%L1 selected of").arg(selected) + " ";
   } else {
     nanoseconds = current()->GetTotalLength();
   }
 
   // TODO: Make the plurals translatable
-  summary += tracks == 1 ? tr("1 track") : tr("%1 tracks").arg(tracks);
+  summary += tracks == 1 ? tr("1 track") : tr("%L1 tracks").arg(tracks);
 
   if (nanoseconds)
     summary += " - [ " + Utilities::WordyTimeNanosec(nanoseconds) + " ]";
