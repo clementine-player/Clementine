@@ -23,6 +23,8 @@
 class Ui_TranscoderOptionsFlac;
 
 class TranscoderOptionsFlac : public TranscoderOptionsInterface {
+  Q_OBJECT
+
  public:
   TranscoderOptionsFlac(QWidget* parent = nullptr);
   ~TranscoderOptionsFlac();
@@ -30,7 +32,12 @@ class TranscoderOptionsFlac : public TranscoderOptionsInterface {
   void Load();
   void Save();
 
+ private slots:
+  void ValueChanged(int value);
+
  private:
+  static bool IsInStreamingSubset(int level);
+
   static const char* kSettingsGroup;
 
   Ui_TranscoderOptionsFlac* ui_;
