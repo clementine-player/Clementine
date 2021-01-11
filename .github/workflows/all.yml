@@ -817,29 +817,7 @@ jobs:
     runs-on: macos-10.15
     steps:
       - name: Install dependencies
-        run: >
-          brew install
-          boost
-          chromaprint
-          cmake
-          fftw
-          glew
-          glib
-          google-sparsehash
-          gst-libav
-          gst-plugins-bad
-          gst-plugins-base
-          gst-plugins-good
-          gst-plugins-ugly
-          gstreamer
-          pkgconfig
-          protobuf
-          protobuf-c
-          qt
-      - name: Setup Tomahawk tap
-        run: brew tap tomahawk-player/homebrew-tomahawkqt5
-      - name: Install liblastfm
-        run: brew install tomahawk-player/homebrew-tomahawkqt5/liblastfm
+        run: brew bundle
       - name: Fix liblastfm includes
         run: ln -s /usr/local/include/lastfm /usr/local/include/lastfm5
       - uses: actions/checkout@v1.2.0
