@@ -615,6 +615,7 @@ set(HEADERS
   transcoder/transcoder.h
   transcoder/transcoderoptionsdialog.h
   transcoder/transcoderoptionsmp3.h
+  transcoder/transcoderoptionsflac.h
   transcoder/transcodersettingspage.h
 
   ui/about.h

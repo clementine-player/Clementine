@@ -26,6 +26,8 @@ const char* TranscoderOptionsFlac::kSettingsGroup = "Transcoder/flacenc";
 TranscoderOptionsFlac::TranscoderOptionsFlac(QWidget* parent)
     : TranscoderOptionsInterface(parent), ui_(new Ui_TranscoderOptionsFlac) {
   ui_->setupUi(this);
+  connect(ui_->quality, SIGNAL(valueChanged(int)), this,
+          SLOT(ValueChanged(int)));
 }
 
 TranscoderOptionsFlac::~TranscoderOptionsFlac() { delete ui_; }
@@ -37,9 +39,34 @@ void TranscoderOptionsFlac::Load() {
   ui_->quality->setValue(s.value("quality", 5).toInt());
 }
 
+void TranscoderOptionsFlac::ValueChanged(int value) {
+  if (!IsInStreamingSubset(value)) {
+    ui_->info->setStyleSheet("QLabel { color : red }");
+    ui_->info->setText(
+        tr("Warning: This compression level is outside of the streamable "
+           "subset. This means that a decoder may not be able to start "
+           "playing it mid-stream. It may also affect the performance of "
+           "hardware decoders."));
+  } else {
+    ui_->info->setStyleSheet("");
+    ui_->info->setText("");
+  }
+}
+
 void TranscoderOptionsFlac::Save() {
   QSettings s;
   s.beginGroup(kSettingsGroup + settings_postfix_);
 
-  s.setValue("quality", ui_->quality->value());
+  int quality = ui_->quality->value();
+  s.setValue("quality", quality);
+
+  s.setValue("streamable-subset", IsInStreamingSubset(quality));
+}
+
+bool TranscoderOptionsFlac::IsInStreamingSubset(int level) {
+  // The gstreamer flacenc element defines its own quality settings. The
+  // highest level, 9 (aka "insane"), uses settings that are outside of the
+  // streamable subset.
+  // https://xiph.org/flac/format.html#subset
+  return (level < 9);
 }
