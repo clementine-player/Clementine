@@ -36,8 +36,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2021-01-01 20:26+0000\n"
-"Last-Translator: Andrei Stepanov <adem4ik@gmail.com>\n"
+"PO-Revision-Date: 2021-01-10 22:11+0000\n"
+"Last-Translator: John Maguire <john.maguire@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/davidsansome/clementine/language/ru/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -130,11 +130,6 @@ msgid ""
 "%2"
 msgstr "%1 запрос не удался:\n%2"
 
-#: playlist/playlistmanager.cpp:439
-#, qt-format
-msgid "%1 selected of"
-msgstr "выбрано %1 из"
-
 #: devices/deviceview.cpp:122
 #, qt-format
 msgid "%1 song"
@@ -155,7 +150,7 @@ msgstr "Найдено %1 песен"
 msgid "%1 songs found (showing %2)"
 msgstr "Найдено %1 песен (показано %2)"
 
-#: playlist/playlistmanager.cpp:445 playlist/queue.cpp:228
+#: playlist/queue.cpp:228
 #, qt-format
 msgid "%1 tracks"
 msgstr "%1 треков"
@@ -176,10 +171,20 @@ msgstr "%1: модуль Wiimotedev"
 msgid "%L1 other listeners"
 msgstr "Других слушателей: %L1"
 
+#: playlist/playlistmanager.cpp:439
+#, qt-format
+msgid "%L1 selected of"
+msgstr ""
+
 #: songinfo/lastfmtrackinfoprovider.cpp:94
 #, qt-format
 msgid "%L1 total plays"
 msgstr "Всего прослушиваний: %L1"
+
+#: playlist/playlistmanager.cpp:445
+#, qt-format
+msgid "%L1 tracks"
+msgstr ""
 
 #: ../bin/src/ui_notificationssettingspage.h:432
 msgid "%filename%"
@@ -1502,14 +1507,14 @@ msgstr "Не удалось войти в Last.fm. Попробуйте ещё �
 msgid "Couldn't create playlist"
 msgstr "Невозможно создать плейлист"
 
-#: transcoder/transcoder.cpp:429
+#: transcoder/transcoder.cpp:428
 #, qt-format
 msgid ""
 "Couldn't find a muxer for %1, check you have the correct GStreamer plugins "
 "installed"
 msgstr "Не возможно найти мультиплексор для %1. Убедитесь, что установлены необходимые модули GStreamer"
 
-#: transcoder/transcoder.cpp:422
+#: transcoder/transcoder.cpp:421
 #, qt-format
 msgid ""
 "Couldn't find an encoder for %1, check you have the correct GStreamer "

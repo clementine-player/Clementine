@@ -13,7 +13,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2021-01-01 16:40+0000\n"
+"PO-Revision-Date: 2021-01-10 22:11+0000\n"
 "Last-Translator: John Maguire <john.maguire@gmail.com>\n"
 "Language-Team: Slovenian (http://www.transifex.com/davidsansome/clementine/language/sl/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -107,11 +107,6 @@ msgid ""
 "%2"
 msgstr ""
 
-#: playlist/playlistmanager.cpp:439
-#, qt-format
-msgid "%1 selected of"
-msgstr "izbran %1 od"
-
 #: devices/deviceview.cpp:122
 #, qt-format
 msgid "%1 song"
@@ -132,7 +127,7 @@ msgstr "najdenih %1 skladb"
 msgid "%1 songs found (showing %2)"
 msgstr "najdenih %1 skladb (prikazanih %2)"
 
-#: playlist/playlistmanager.cpp:445 playlist/queue.cpp:228
+#: playlist/queue.cpp:228
 #, qt-format
 msgid "%1 tracks"
 msgstr "%1 skladb"
@@ -153,10 +148,20 @@ msgstr "%1: modul Wimotedev"
 msgid "%L1 other listeners"
 msgstr "%L1 drugih poslušalcev"
 
+#: playlist/playlistmanager.cpp:439
+#, qt-format
+msgid "%L1 selected of"
+msgstr ""
+
 #: songinfo/lastfmtrackinfoprovider.cpp:94
 #, qt-format
 msgid "%L1 total plays"
 msgstr "skupno %L1 predvajanj"
+
+#: playlist/playlistmanager.cpp:445
+#, qt-format
+msgid "%L1 tracks"
+msgstr ""
 
 #: ../bin/src/ui_notificationssettingspage.h:432
 msgid "%filename%"
@@ -1479,14 +1484,14 @@ msgstr "Ni se bilo mogoče prijaviti v Last.fm. Poskusite znova."
 msgid "Couldn't create playlist"
 msgstr "Ni bilo mogoče ustvariti seznama predvajanja"
 
-#: transcoder/transcoder.cpp:429
+#: transcoder/transcoder.cpp:428
 #, qt-format
 msgid ""
 "Couldn't find a muxer for %1, check you have the correct GStreamer plugins "
 "installed"
 msgstr "Zvijalnika za %1 ni bilo mogoče najti. Preverite, če so nameščeni pravilni vstavki GStreamer"
 
-#: transcoder/transcoder.cpp:422
+#: transcoder/transcoder.cpp:421
 #, qt-format
 msgid ""
 "Couldn't find an encoder for %1, check you have the correct GStreamer "

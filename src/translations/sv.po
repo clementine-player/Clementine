@@ -10,8 +10,8 @@
 # elfa <thomas.elfstrom@gmail.com>, 2013
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # Hoven1 <thomas.hofverberg@tavelsjo.se>, 2012
-# Jonatan Nyberg <jonatan.nyberg.karl@gmail.com>, 2017
-# Jonatan Nyberg <jonatan.nyberg.karl@gmail.com>, 2019-2021
+# Jony <jonatan.nyberg.karl@gmail.com>, 2017
+# Jony <jonatan.nyberg.karl@gmail.com>, 2019-2021
 # Kristian <kristianm24@gmail.com>, 2012-2017
 # Kristian <kristianm24@gmail.com>, 2012
 # Kristoffer Grundström <lovaren@gmail.com>, 2014,2017
@@ -31,8 +31,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2021-01-01 19:27+0000\n"
-"Last-Translator: Jonatan Nyberg <jonatan.nyberg.karl@gmail.com>\n"
+"PO-Revision-Date: 2021-01-10 22:11+0000\n"
+"Last-Translator: John Maguire <john.maguire@gmail.com>\n"
 "Language-Team: Swedish (http://www.transifex.com/davidsansome/clementine/language/sv/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -125,11 +125,6 @@ msgid ""
 "%2"
 msgstr "%1 förfrågan misslyckades:\n%2"
 
-#: playlist/playlistmanager.cpp:439
-#, qt-format
-msgid "%1 selected of"
-msgstr "%1 vald(a) av"
-
 #: devices/deviceview.cpp:122
 #, qt-format
 msgid "%1 song"
@@ -150,7 +145,7 @@ msgstr "%1 låtar hittades"
 msgid "%1 songs found (showing %2)"
 msgstr "%1 låtar hittades (visar %2)"
 
-#: playlist/playlistmanager.cpp:445 playlist/queue.cpp:228
+#: playlist/queue.cpp:228
 #, qt-format
 msgid "%1 tracks"
 msgstr "%1 spår"
@@ -171,10 +166,20 @@ msgstr "%1: Wiimotedev-modul"
 msgid "%L1 other listeners"
 msgstr "%L1 andra lyssnare"
 
+#: playlist/playlistmanager.cpp:439
+#, qt-format
+msgid "%L1 selected of"
+msgstr ""
+
 #: songinfo/lastfmtrackinfoprovider.cpp:94
 #, qt-format
 msgid "%L1 total plays"
 msgstr "%L1 totala uppspelningar"
+
+#: playlist/playlistmanager.cpp:445
+#, qt-format
+msgid "%L1 tracks"
+msgstr ""
 
 #: ../bin/src/ui_notificationssettingspage.h:432
 msgid "%filename%"
@@ -1497,14 +1502,14 @@ msgstr "Det gick inte att logga in på Last.fm. Vänligen försök igen."
 msgid "Couldn't create playlist"
 msgstr "Kunde inte skapa spellista"
 
-#: transcoder/transcoder.cpp:429
+#: transcoder/transcoder.cpp:428
 #, qt-format
 msgid ""
 "Couldn't find a muxer for %1, check you have the correct GStreamer plugins "
 "installed"
 msgstr "Kunde inte hitta en muxer för %1, kontrollera att du har de korrekta GStreamer-insticksmodulerna installerade"
 
-#: transcoder/transcoder.cpp:422
+#: transcoder/transcoder.cpp:421
 #, qt-format
 msgid ""
 "Couldn't find an encoder for %1, check you have the correct GStreamer "

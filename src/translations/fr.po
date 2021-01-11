@@ -54,7 +54,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2021-01-01 16:40+0000\n"
+"PO-Revision-Date: 2021-01-10 22:11+0000\n"
 "Last-Translator: John Maguire <john.maguire@gmail.com>\n"
 "Language-Team: French (http://www.transifex.com/davidsansome/clementine/language/fr/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -148,11 +148,6 @@ msgid ""
 "%2"
 msgstr "Requête %1  en échec :\n%2"
 
-#: playlist/playlistmanager.cpp:439
-#, qt-format
-msgid "%1 selected of"
-msgstr "%1 sélectionnés de"
-
 #: devices/deviceview.cpp:122
 #, qt-format
 msgid "%1 song"
@@ -173,7 +168,7 @@ msgstr "%1 morceaux trouvés"
 msgid "%1 songs found (showing %2)"
 msgstr "%1 morceaux trouvés (%2 affichés)"
 
-#: playlist/playlistmanager.cpp:445 playlist/queue.cpp:228
+#: playlist/queue.cpp:228
 #, qt-format
 msgid "%1 tracks"
 msgstr "%1 pistes"
@@ -194,10 +189,20 @@ msgstr "%1 : Module wiimotedev"
 msgid "%L1 other listeners"
 msgstr "%L1 autres auditeurs"
 
+#: playlist/playlistmanager.cpp:439
+#, qt-format
+msgid "%L1 selected of"
+msgstr ""
+
 #: songinfo/lastfmtrackinfoprovider.cpp:94
 #, qt-format
 msgid "%L1 total plays"
 msgstr "%L1 écoutes au total"
+
+#: playlist/playlistmanager.cpp:445
+#, qt-format
+msgid "%L1 tracks"
+msgstr ""
 
 #: ../bin/src/ui_notificationssettingspage.h:432
 msgid "%filename%"
@@ -1520,14 +1525,14 @@ msgstr "Impossible de se connecter à Last.fm. Veuillez réessayer."
 msgid "Couldn't create playlist"
 msgstr "La liste de lecture n'a pas pu être créée"
 
-#: transcoder/transcoder.cpp:429
+#: transcoder/transcoder.cpp:428
 #, qt-format
 msgid ""
 "Couldn't find a muxer for %1, check you have the correct GStreamer plugins "
 "installed"
 msgstr "Impossible de trouver un multiplexeur pour %1, vérifiez que les bons modules externes GStreamer sont installés."
 
-#: transcoder/transcoder.cpp:422
+#: transcoder/transcoder.cpp:421
 #, qt-format
 msgid ""
 "Couldn't find an encoder for %1, check you have the correct GStreamer "

@@ -21,8 +21,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2021-01-01 19:23+0000\n"
-"Last-Translator: Daniel Șerbănescu <daniel@serbanescu.dk>\n"
+"PO-Revision-Date: 2021-01-10 22:11+0000\n"
+"Last-Translator: John Maguire <john.maguire@gmail.com>\n"
 "Language-Team: Romanian (http://www.transifex.com/davidsansome/clementine/language/ro/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -115,11 +115,6 @@ msgid ""
 "%2"
 msgstr "%1 cerere eșuată:\n%2"
 
-#: playlist/playlistmanager.cpp:439
-#, qt-format
-msgid "%1 selected of"
-msgstr "%1 selectat din"
-
 #: devices/deviceview.cpp:122
 #, qt-format
 msgid "%1 song"
@@ -140,7 +135,7 @@ msgstr "%1 melodii găsite"
 msgid "%1 songs found (showing %2)"
 msgstr "%1 melodii găsite (se afișează %2)"
 
-#: playlist/playlistmanager.cpp:445 playlist/queue.cpp:228
+#: playlist/queue.cpp:228
 #, qt-format
 msgid "%1 tracks"
 msgstr "%1 piese"
@@ -161,10 +156,20 @@ msgstr "%1: modul Wiimotedev"
 msgid "%L1 other listeners"
 msgstr "%L1 alți ascultători"
 
+#: playlist/playlistmanager.cpp:439
+#, qt-format
+msgid "%L1 selected of"
+msgstr ""
+
 #: songinfo/lastfmtrackinfoprovider.cpp:94
 #, qt-format
 msgid "%L1 total plays"
 msgstr "%L1 redări în total"
+
+#: playlist/playlistmanager.cpp:445
+#, qt-format
+msgid "%L1 tracks"
+msgstr ""
 
 #: ../bin/src/ui_notificationssettingspage.h:432
 msgid "%filename%"
@@ -1487,14 +1492,14 @@ msgstr "Nu s.a putut autentifica la Last.fm. Încercați din nou."
 msgid "Couldn't create playlist"
 msgstr "Nu se poate crea lista de redare"
 
-#: transcoder/transcoder.cpp:429
+#: transcoder/transcoder.cpp:428
 #, qt-format
 msgid ""
 "Couldn't find a muxer for %1, check you have the correct GStreamer plugins "
 "installed"
 msgstr "Nu s-a putut găsi un mixer pentru %1, verificați dacă aveți instalate modulele corecte GStreamer"
 
-#: transcoder/transcoder.cpp:422
+#: transcoder/transcoder.cpp:421
 #, qt-format
 msgid ""
 "Couldn't find an encoder for %1, check you have the correct GStreamer "

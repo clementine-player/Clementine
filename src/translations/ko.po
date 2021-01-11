@@ -24,7 +24,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2021-01-01 16:40+0000\n"
+"PO-Revision-Date: 2021-01-10 22:11+0000\n"
 "Last-Translator: John Maguire <john.maguire@gmail.com>\n"
 "Language-Team: Korean (http://www.transifex.com/davidsansome/clementine/language/ko/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -118,11 +118,6 @@ msgid ""
 "%2"
 msgstr "%1 요청실패:\n%2"
 
-#: playlist/playlistmanager.cpp:439
-#, qt-format
-msgid "%1 selected of"
-msgstr "다음 중 %1개 선택됨"
-
 #: devices/deviceview.cpp:122
 #, qt-format
 msgid "%1 song"
@@ -143,7 +138,7 @@ msgstr "%1곡 발견"
 msgid "%1 songs found (showing %2)"
 msgstr "%1곡 발견 (%2개 표시 중)"
 
-#: playlist/playlistmanager.cpp:445 playlist/queue.cpp:228
+#: playlist/queue.cpp:228
 #, qt-format
 msgid "%1 tracks"
 msgstr "%1개 곡"
@@ -164,10 +159,20 @@ msgstr "%1: Wii 리모컨 모듈"
 msgid "%L1 other listeners"
 msgstr "다른 청취자 %L1명"
 
+#: playlist/playlistmanager.cpp:439
+#, qt-format
+msgid "%L1 selected of"
+msgstr ""
+
 #: songinfo/lastfmtrackinfoprovider.cpp:94
 #, qt-format
 msgid "%L1 total plays"
 msgstr "총 %L1번 재생"
+
+#: playlist/playlistmanager.cpp:445
+#, qt-format
+msgid "%L1 tracks"
+msgstr ""
 
 #: ../bin/src/ui_notificationssettingspage.h:432
 msgid "%filename%"
@@ -1490,14 +1495,14 @@ msgstr "Last.fm에 로그인 할 수 없습니다. 다시 시도하세요."
 msgid "Couldn't create playlist"
 msgstr "재생목록을 생성할수 없습니다."
 
-#: transcoder/transcoder.cpp:429
+#: transcoder/transcoder.cpp:428
 #, qt-format
 msgid ""
 "Couldn't find a muxer for %1, check you have the correct GStreamer plugins "
 "installed"
 msgstr "%1 먹서를 찾을 수 없습니다, GStreamer 플러그인이 올바르게 설치되어 있는지 확인하세요"
 
-#: transcoder/transcoder.cpp:422
+#: transcoder/transcoder.cpp:421
 #, qt-format
 msgid ""
 "Couldn't find an encoder for %1, check you have the correct GStreamer "

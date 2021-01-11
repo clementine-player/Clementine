@@ -12,7 +12,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2021-01-01 16:40+0000\n"
+"PO-Revision-Date: 2021-01-10 22:11+0000\n"
 "Last-Translator: John Maguire <john.maguire@gmail.com>\n"
 "Language-Team: Estonian (http://www.transifex.com/davidsansome/clementine/language/et/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -106,11 +106,6 @@ msgid ""
 "%2"
 msgstr "%1 päring ei õnnestunud:\n%2"
 
-#: playlist/playlistmanager.cpp:439
-#, qt-format
-msgid "%1 selected of"
-msgstr "Valitud %1  / "
-
 #: devices/deviceview.cpp:122
 #, qt-format
 msgid "%1 song"
@@ -131,7 +126,7 @@ msgstr "Leidsime %1 lugu"
 msgid "%1 songs found (showing %2)"
 msgstr "Leidsime %1 lugu (näitasime %2)"
 
-#: playlist/playlistmanager.cpp:445 playlist/queue.cpp:228
+#: playlist/queue.cpp:228
 #, qt-format
 msgid "%1 tracks"
 msgstr "%1 pala"
@@ -152,10 +147,20 @@ msgstr "%1: moodul Wiimotedev"
 msgid "%L1 other listeners"
 msgstr "%L1 muud kuulajat"
 
+#: playlist/playlistmanager.cpp:439
+#, qt-format
+msgid "%L1 selected of"
+msgstr ""
+
 #: songinfo/lastfmtrackinfoprovider.cpp:94
 #, qt-format
 msgid "%L1 total plays"
 msgstr "Kokku %L1 esituskorda"
+
+#: playlist/playlistmanager.cpp:445
+#, qt-format
+msgid "%L1 tracks"
+msgstr ""
 
 #: ../bin/src/ui_notificationssettingspage.h:432
 msgid "%filename%"
@@ -1478,14 +1483,14 @@ msgstr "Last.fm teenusesse sisselogimine ebaõnnestus. Palun proovi uuesti."
 msgid "Couldn't create playlist"
 msgstr "Ei suutnud luua esitusloendit"
 
-#: transcoder/transcoder.cpp:429
+#: transcoder/transcoder.cpp:428
 #, qt-format
 msgid ""
 "Couldn't find a muxer for %1, check you have the correct GStreamer plugins "
 "installed"
 msgstr "Ei leidnud mukserit %1 jaoks, palun kontrolli et arvutis oleks paigaldatud õiged GStreamer'i pistikprogrammid"
 
-#: transcoder/transcoder.cpp:422
+#: transcoder/transcoder.cpp:421
 #, qt-format
 msgid ""
 "Couldn't find an encoder for %1, check you have the correct GStreamer "
