@@ -44,9 +44,6 @@ class GstEnginePipeline : public GstPipelineBase {
   GstEnginePipeline(GstEngine* engine);
   ~GstEnginePipeline();
 
-  // Globally unique across all pipelines.
-  int id() const { return id_; }
-
   // Call these setters before Init
   void set_output_device(const QString& sink, const QVariant& device);
   void set_replaygain(bool enabled, int mode, float preamp, bool compression);
@@ -180,14 +177,6 @@ class GstEnginePipeline : public GstPipelineBase {
   static GstElementDeleter* sElementDeleter;
 
   GstEngine* engine_;
-
-  // Using == to compare two pipelines is a bad idea, because new ones often
-  // get created in the same address as old ones.  This ID will be unique for
-  // each pipeline.
-  // Threading warning: access to the static ID field isn't protected by a
-  // mutex because all pipeline creation is currently done in the main thread.
-  static int sId;
-  int id_;
 
   // General settings for the pipeline
   bool valid_;
