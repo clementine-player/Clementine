@@ -48,13 +48,11 @@ const int GstEnginePipeline::kEqBandCount = 10;
 const int GstEnginePipeline::kEqBandFrequencies[] = {
     60, 170, 310, 600, 1000, 3000, 6000, 12000, 14000, 16000};
 
-int GstEnginePipeline::sId = 1;
 GstElementDeleter* GstEnginePipeline::sElementDeleter = nullptr;
 
 GstEnginePipeline::GstEnginePipeline(GstEngine* engine)
     : GstPipelineBase(),
       engine_(engine),
-      id_(sId++),
       valid_(false),
       sink_(GstEngine::kAutoSink),
       segment_start_(0),

@@ -29,10 +29,20 @@ class GstPipelineBase : public QObject {
 
   virtual bool Init(const QString& name);
 
+  // Globally unique across all pipelines.
+  int id() const { return id_; }
+
   void DumpGraph();
 
  protected:
   GstElement* pipeline_;
+
+ private:
+  // Using == to compare two pipelines is a bad idea, because new ones often
+  // get created in the same address as old ones.  This ID will be unique for
+  // each pipeline.
+  static std::atomic<int> sId;
+  const int id_;
 };
 
 #endif  // GSTPIPELINEBASE_H

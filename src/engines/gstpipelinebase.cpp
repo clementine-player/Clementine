@@ -19,7 +19,10 @@
 
 #include "core/logging.h"
 
-GstPipelineBase::GstPipelineBase() : QObject(nullptr), pipeline_(nullptr) {}
+std::atomic<int> GstPipelineBase::sId(1);
+
+GstPipelineBase::GstPipelineBase()
+    : QObject(nullptr), pipeline_(nullptr), id_(sId++) {}
 
 GstPipelineBase::~GstPipelineBase() {
   if (pipeline_) {
