@@ -88,7 +88,10 @@ class Transcoder : public QObject {
   class JobState : public GstPipelineBase {
    public:
     JobState(const Job& job, Transcoder* parent)
-        : job_(job), parent_(parent), convert_element_(nullptr) {}
+        : GstPipelineBase("transcode"),
+          job_(job),
+          parent_(parent),
+          convert_element_(nullptr) {}
 
     void PostFinished(bool success);
     void ReportError(GstMessage* msg);
