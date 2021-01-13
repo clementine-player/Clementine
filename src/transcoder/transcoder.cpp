@@ -402,7 +402,7 @@ bool Transcoder::StartJob(const Job& job) {
   // Create the pipeline.
   // This should be a scoped_ptr, but scoped_ptr doesn't support custom
   // destructors.
-  if (!state->Init("pipeline")) return false;
+  if (!state->Init()) return false;
 
   // Create all the elements
   GstElement* src = CreateElement("filesrc", state->Pipeline());

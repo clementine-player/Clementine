@@ -21,8 +21,8 @@
 
 std::atomic<int> GstPipelineBase::sId(1);
 
-GstPipelineBase::GstPipelineBase()
-    : QObject(nullptr), pipeline_(nullptr), id_(sId++) {}
+GstPipelineBase::GstPipelineBase(const QString& type)
+    : QObject(nullptr), pipeline_(nullptr), type_(type), id_(sId++) {}
 
 GstPipelineBase::~GstPipelineBase() {
   if (pipeline_) {
@@ -31,7 +31,8 @@ GstPipelineBase::~GstPipelineBase() {
   }
 }
 
-bool GstPipelineBase::Init(const QString& name) {
+bool GstPipelineBase::Init() {
+  QString name = QString("%1-pipeline-%2").arg(type_).arg(id_);
   pipeline_ = gst_pipeline_new(name.toUtf8().constData());
   return pipeline_ != nullptr;
 }
