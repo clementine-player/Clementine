@@ -36,7 +36,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2021-01-11 03:28+0000\n"
+"PO-Revision-Date: 2021-01-13 00:28+0000\n"
 "Last-Translator: Andrei Stepanov <adem4ik@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/davidsansome/clementine/language/ru/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1004,7 +1004,7 @@ msgstr "Базовый тип аудио"
 msgid "Behavior"
 msgstr "Поведение"
 
-#: ../bin/src/ui_transcoderoptionsflac.h:82
+#: ../bin/src/ui_transcoderoptionsflac.h:94
 msgid "Best"
 msgstr "Лучшее"
 
@@ -2340,7 +2340,7 @@ msgstr "Не удалось обновить каталог icecast:\n%1"
 msgid "Failed to write new auto-tags to '%1'"
 msgstr "Запись новых авто-тегов в '%1' не удалась"
 
-#: ../bin/src/ui_transcoderoptionsflac.h:81
+#: ../bin/src/ui_transcoderoptionsflac.h:93
 #: ../bin/src/ui_transcoderoptionsmp3.h:199
 msgid "Fast"
 msgstr "Быстрое"
@@ -2481,7 +2481,7 @@ msgstr "Команда «Забыть носитель», удалит носи�
 #: ../bin/src/ui_wizardfinishpage.h:82
 #: ../bin/src/ui_songkickconcertwidget.h:99
 #: ../bin/src/ui_transcoderoptionsaac.h:127
-#: ../bin/src/ui_transcoderoptionsflac.h:79
+#: ../bin/src/ui_transcoderoptionsflac.h:91
 #: ../bin/src/ui_transcoderoptionsmp3.h:189
 #: ../bin/src/ui_transcoderoptionsopus.h:78
 #: ../bin/src/ui_transcoderoptionsspeex.h:215
@@ -4045,7 +4045,7 @@ msgstr "Разбросать композиции в случайном поря
 msgid "Qt"
 msgstr "Qt"
 
-#: ../bin/src/ui_transcoderoptionsflac.h:80
+#: ../bin/src/ui_transcoderoptionsflac.h:92
 #: ../bin/src/ui_transcoderoptionsmp3.h:191
 #: ../bin/src/ui_transcoderoptionsspeex.h:216
 #: ../bin/src/ui_transcoderoptionsvorbis.h:201
@@ -5668,6 +5668,13 @@ msgstr "WMA"
 #: playlist/playlisttabbar.cpp:193 ../bin/src/ui_behavioursettingspage.h:394
 msgid "Warn me when closing a playlist tab"
 msgstr "Оповещать при закрытии вкладки плейлиста"
+
+#: transcoder/transcoderoptionsflac.cpp:46
+msgid ""
+"Warning: This compression level is outside of the streamable subset. This "
+"means that a decoder may not be able to start playing it mid-stream. It may "
+"also affect the performance of hardware decoders."
+msgstr "Предупреждение: данный уровень сжатия не относится к подмножеству подходящих для трансляции. Вероятно, декодер не сможет начать воспроизведение трансляции в процессе. Это также может значительно повлиять на производительность аппаратных декодеров."
 
 #: core/song.cpp:447 transcoder/transcoder.cpp:257
 msgid "Wav"

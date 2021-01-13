@@ -18,8 +18,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2021-01-10 22:11+0000\n"
-"Last-Translator: John Maguire <john.maguire@gmail.com>\n"
+"PO-Revision-Date: 2021-01-12 15:32+0000\n"
+"Last-Translator: Balázs Meskó <meskobalazs@mailbox.org>\n"
 "Language-Team: Hungarian (http://www.transifex.com/davidsansome/clementine/language/hu/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -156,7 +156,7 @@ msgstr "%L1 további hallgató"
 #: playlist/playlistmanager.cpp:439
 #, qt-format
 msgid "%L1 selected of"
-msgstr ""
+msgstr "%L1 kiválasztva"
 
 #: songinfo/lastfmtrackinfoprovider.cpp:94
 #, qt-format
@@ -166,7 +166,7 @@ msgstr "%L1 összes lejátszás"
 #: playlist/playlistmanager.cpp:445
 #, qt-format
 msgid "%L1 tracks"
-msgstr ""
+msgstr "%L1 szám"
 
 #: ../bin/src/ui_notificationssettingspage.h:432
 msgid "%filename%"
@@ -986,7 +986,7 @@ msgstr "Alap hangtípus"
 msgid "Behavior"
 msgstr "Viselkedés"
 
-#: ../bin/src/ui_transcoderoptionsflac.h:82
+#: ../bin/src/ui_transcoderoptionsflac.h:94
 msgid "Best"
 msgstr "Legjobb"
 
@@ -2322,7 +2322,7 @@ msgstr "Az icecast könyvtár frissítése sikertelen:\n%1"
 msgid "Failed to write new auto-tags to '%1'"
 msgstr "Az új címkék ide beírása sikertelen: „%1”"
 
-#: ../bin/src/ui_transcoderoptionsflac.h:81
+#: ../bin/src/ui_transcoderoptionsflac.h:93
 #: ../bin/src/ui_transcoderoptionsmp3.h:199
 msgid "Fast"
 msgstr "Gyors"
@@ -2463,7 +2463,7 @@ msgstr "Egy eszköz elfelejtésekor a Clementine törli erről a listáról és 
 #: ../bin/src/ui_wizardfinishpage.h:82
 #: ../bin/src/ui_songkickconcertwidget.h:99
 #: ../bin/src/ui_transcoderoptionsaac.h:127
-#: ../bin/src/ui_transcoderoptionsflac.h:79
+#: ../bin/src/ui_transcoderoptionsflac.h:91
 #: ../bin/src/ui_transcoderoptionsmp3.h:189
 #: ../bin/src/ui_transcoderoptionsopus.h:78
 #: ../bin/src/ui_transcoderoptionsspeex.h:215
@@ -4027,7 +4027,7 @@ msgstr "Számok felvétele véletlenszerű rendezésben"
 msgid "Qt"
 msgstr "Qt"
 
-#: ../bin/src/ui_transcoderoptionsflac.h:80
+#: ../bin/src/ui_transcoderoptionsflac.h:92
 #: ../bin/src/ui_transcoderoptionsmp3.h:191
 #: ../bin/src/ui_transcoderoptionsspeex.h:216
 #: ../bin/src/ui_transcoderoptionsvorbis.h:201
@@ -5650,6 +5650,13 @@ msgstr "WMA"
 #: playlist/playlisttabbar.cpp:193 ../bin/src/ui_behavioursettingspage.h:394
 msgid "Warn me when closing a playlist tab"
 msgstr "Figyelmeztessen a lejátszólista bezárásakor"
+
+#: transcoder/transcoderoptionsflac.cpp:46
+msgid ""
+"Warning: This compression level is outside of the streamable subset. This "
+"means that a decoder may not be able to start playing it mid-stream. It may "
+"also affect the performance of hardware decoders."
+msgstr "Figyelem: Ez a tömörítési szint kívül esik a közvetíthető részhalmazon. Ez azt jelenti, hogy a dekódoló lehet, hogy nem lesz képes elindítani a lejátszást a közvetítés közben. A hardveres dekódolók teljesítményre is hatással lehet."
 
 #: core/song.cpp:447 transcoder/transcoder.cpp:257
 msgid "Wav"
