@@ -878,7 +878,7 @@ int GstEngine::AddBackgroundStream(shared_ptr<GstEnginePipeline> pipeline) {
   connect(pipeline.get(), SIGNAL(EndOfStreamReached(int, bool)),
           SLOT(BackgroundStreamFinished()));
 
-  const int stream_id = next_background_stream_id_++;
+  const int stream_id = pipeline->id();
   background_streams_[stream_id] = pipeline;
 
   QFuture<GstStateChangeReturn> future = pipeline->SetState(GST_STATE_PLAYING);
