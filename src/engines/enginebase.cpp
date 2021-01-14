@@ -38,7 +38,6 @@ Engine::Base::Base()
       crossfade_enabled_(true),
       autocrossfade_enabled_(false),
       crossfade_same_album_(false),
-      next_background_stream_id_(0),
       about_to_end_emitted_(false) {}
 
 Engine::Base::~Base() {}
