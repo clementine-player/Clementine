@@ -306,8 +306,7 @@ void TagReader::ReadFile(const QString& filename,
     }
 
     if (items.contains("BPM")) {
-      Decode(items["BPM"].toStringList().toString(", "), nullptr,
-             song->mutable_performer());
+      song->set_bpm(TStringToQString(items["BPM"].toString()).trimmed().toFloat());
     }
 
     if (items.contains("PERFORMER")) {
@@ -502,7 +501,12 @@ void TagReader::ReadFile(const QString& filename,
           song->set_score(score);
         }
       }
-
+      if (items.contains("tmpo")) {
+	float bpm = (float)items["tmpo"].toInt();
+	if (song->bpm() <= 0 && bpm > 0) {
+	  song->set_bpm(bpm);
+	}
+      }
       if (items.contains("\251wrt")) {
         Decode(items["\251wrt"].toStringList().toString(", "), nullptr,
                song->mutable_composer());
