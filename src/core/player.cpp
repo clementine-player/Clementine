@@ -170,9 +170,12 @@ void Player::HandleLoadResult(const UrlHandler::LoadResult& result) {
 
 void Player::Next() { NextInternal(Engine::Manual); }
 
-void Player::NextAlbum() { NextInternal(Engine::Manual, true); }
+void Player::NextAlbum() {
+  NextInternal(Engine::Manual, NextTrackOrAlbumSelected::SelectNextAlbum);
+}
 
-void Player::NextInternal(Engine::TrackChangeFlags change, bool next_album) {
+void Player::NextInternal(Engine::TrackChangeFlags change,
+                          NextTrackOrAlbumSelected NextTrackOrAlbum) {
   if (HandleStopAfter()) return;
 
   if (app_->playlist_manager()->active()->current_item()) {
@@ -188,10 +191,11 @@ void Player::NextInternal(Engine::TrackChangeFlags change, bool next_album) {
     }
   }
 
-  NextItem(change, next_album);
+  NextItem(change, NextTrackOrAlbum);
 }
 
-void Player::NextItem(Engine::TrackChangeFlags change, bool next_album) {
+void Player::NextItem(Engine::TrackChangeFlags change,
+                      NextTrackOrAlbumSelected NextTrackOrAlbum) {
   Playlist* active_playlist = app_->playlist_manager()->active();
 
   // If we received too many errors in auto change, with repeat enabled, we stop
@@ -216,7 +220,7 @@ void Player::NextItem(Engine::TrackChangeFlags change, bool next_album) {
   const bool ignore_repeat_track = change & Engine::Manual;
 
   int i = active_playlist->current_row();
-  if (next_album && i != -1) {
+  if (NextTrackOrAlbum == SelectNextAlbum && i != -1) {
     if (active_playlist->sequence()->repeat_mode() !=
         PlaylistSequence::Repeat_Track) {
       int original_index = i;
