@@ -3,15 +3,15 @@
 # This file is distributed under the same license as the Clementine package.
 # 
 # Translators:
-# Andi Chandler <andi@gowling.com>, 2015-2017,2019
+# Andi Chandler <andi@gowling.com>, 2015-2017,2019,2021
 # davidsansome <me@davidsansome.com>, 2010
 # Eilidh Martin <maxqueue93+github@gmail.com>, 2017
 # Luke Hollins <luke@farcry.ca>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2021-01-12 11:57+0000\n"
-"Last-Translator: John Maguire <john.maguire@gmail.com>\n"
+"PO-Revision-Date: 2021-01-21 13:58+0000\n"
+"Last-Translator: Andi Chandler <andi@gowling.com>\n"
 "Language-Team: English (United Kingdom) (http://www.transifex.com/davidsansome/clementine/language/en_GB/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -102,7 +102,7 @@ msgstr "%1 playlists (%2)"
 msgid ""
 "%1 request failed:\n"
 "%2"
-msgstr ""
+msgstr "%1 request failed:\n%2"
 
 #: devices/deviceview.cpp:122
 #, qt-format
@@ -148,7 +148,7 @@ msgstr "%L1 other listeners"
 #: playlist/playlistmanager.cpp:439
 #, qt-format
 msgid "%L1 selected of"
-msgstr ""
+msgstr "%L1 selected of"
 
 #: songinfo/lastfmtrackinfoprovider.cpp:94
 #, qt-format
@@ -158,7 +158,7 @@ msgstr "%L1 total plays"
 #: playlist/playlistmanager.cpp:445
 #, qt-format
 msgid "%L1 tracks"
-msgstr ""
+msgstr "%L1 tracks"
 
 #: ../bin/src/ui_notificationssettingspage.h:432
 msgid "%filename%"
@@ -1058,7 +1058,7 @@ msgstr "Buttons"
 
 #: internet/podcasts/addpodcastdialog.cpp:95
 msgid "CBC Podcasts"
-msgstr ""
+msgstr "CBC Podcasts"
 
 #: core/song.cpp:453
 msgid "CDDA"
@@ -1316,7 +1316,7 @@ msgstr "Comma separated list of prefix words to ignore when sorting"
 
 #: ../bin/src/ui_console.h:129
 msgid "Command"
-msgstr ""
+msgstr "Command"
 
 #: playlist/playlist.cpp:1436 smartplaylists/searchterm.cpp:386
 #: ui/organisedialog.cpp:77 ../bin/src/ui_edittagdialog.h:719
@@ -1467,7 +1467,7 @@ msgstr "Could not detect an audio stream in %1"
 
 #: internet/googledrive/googledriveservice.cpp:208
 msgid "Could not find Google Drive file."
-msgstr ""
+msgstr "Could not find Google Drive file."
 
 #: songinfo/streamdiscoverer.cpp:124
 msgid "Could not get details"
@@ -1588,7 +1588,7 @@ msgstr "Dance"
 
 #: ../bin/src/ui_console.h:131
 msgid "Database"
-msgstr ""
+msgstr "Database"
 
 #: core/database.cpp:629
 msgid ""
@@ -1901,11 +1901,11 @@ msgstr "Download settings"
 
 #: ../bin/src/ui_networkremotesettingspage.h:385
 msgid "Download the original Android app"
-msgstr ""
+msgstr "Download the original Android app"
 
 #: ../bin/src/ui_networkremotesettingspage.h:381
 msgid "Download the remote for Desktops, Android and iOS"
-msgstr ""
+msgstr "Download the remote for Desktops, Android and iOS"
 
 #: internet/magnatune/magnatuneservice.cpp:279
 msgid "Download this album"
@@ -1959,11 +1959,11 @@ msgstr "Dubstep"
 
 #: ../bin/src/ui_gstenginedebug.h:68
 msgid "Dump Pipeline Graph"
-msgstr ""
+msgstr "Dump Pipeline Graph"
 
 #: ../bin/src/ui_console.h:132
 msgid "Dump To Logs"
-msgstr ""
+msgstr "Dump To Logs"
 
 #: ../bin/src/ui_episodeinfowidget.h:134 ../bin/src/ui_ripcddialog.h:308
 msgid "Duration"
@@ -2284,7 +2284,7 @@ msgstr "Failed to fetch podcasts"
 msgid ""
 "Failed to get channel list:\n"
 "%1"
-msgstr ""
+msgstr "Failed to get channel list:\n%1"
 
 #: internet/podcasts/addpodcastbyurl.cpp:71
 #: internet/podcasts/fixedopmlpage.cpp:55
@@ -2296,7 +2296,7 @@ msgstr "Failed to load podcast"
 msgid ""
 "Failed to parse %1 response:\n"
 "%2"
-msgstr ""
+msgstr "Failed to parse %1 response:\n%2"
 
 #: internet/podcasts/podcasturlloader.cpp:177
 msgid "Failed to parse the XML for this RSS feed"
@@ -2307,7 +2307,7 @@ msgstr "Failed to parse the XML for this RSS feed"
 msgid ""
 "Failed to update icecast directory:\n"
 "%1"
-msgstr ""
+msgstr "Failed to update Icecast directory:\n%1"
 
 #: ui/trackselectiondialog.cpp:247
 #, qt-format
@@ -2346,7 +2346,7 @@ msgstr "Fetching cover error"
 #: internet/subsonic/subsonicdynamicplaylist.cpp:98
 #: internet/subsonic/subsonicdynamicplaylist.cpp:164
 msgid "Fetching playlist items"
-msgstr ""
+msgstr "Fetching playlist items"
 
 #: ../bin/src/ui_ripcddialog.h:319
 msgid "File Format"
@@ -2392,7 +2392,7 @@ msgstr "Files"
 
 #: ../bin/src/ui_networkremotesettingspage.h:376
 msgid "Files root folder"
-msgstr ""
+msgstr "Files root folder"
 
 #: ../bin/src/ui_transcodedialog.h:214
 msgid "Files to transcode"
@@ -2482,7 +2482,7 @@ msgstr "Frames per buffer"
 
 #: internet/subsonic/subsonicservice.cpp:107
 msgid "Frequently Played Albums"
-msgstr ""
+msgstr "Frequently Played Albums"
 
 #: moodbar/moodbarrenderer.cpp:173
 msgid "Frozen"
@@ -3236,7 +3236,7 @@ msgstr "Maximum bitrate"
 
 #: ../bin/src/ui_behavioursettingspage.h:449
 msgid "Maximum number of child processes for tag handling (requires restart)"
-msgstr ""
+msgstr "Maximum number of child processes for tag handling (requires restart)"
 
 #: ripper/ripcddialog.cpp:154
 msgid "Media has changed. Reloading"
@@ -3341,7 +3341,7 @@ msgstr "Music Library"
 
 #: ../bin/src/ui_networkremotesettingspage.h:380
 msgid "Music extensions remotely visible"
-msgstr ""
+msgstr "Music extensions remotely visible"
 
 #: core/globalshortcuts.cpp:65 wiimotedev/wiimotesettingspage.cpp:114
 #: ../bin/src/ui_mainwindow.h:763
@@ -3411,7 +3411,7 @@ msgstr "New tracks will be added automatically."
 
 #: internet/subsonic/subsonicservice.cpp:101
 msgid "Newest Albums"
-msgstr ""
+msgstr "Newest Albums"
 
 #: library/library.cpp:96
 msgid "Newest tracks"
@@ -3531,7 +3531,7 @@ msgstr "Number of episodes to show"
 
 #: ../bin/src/ui_behavioursettingspage.h:450
 msgid "Number of processes:"
-msgstr ""
+msgstr "Number of processes:"
 
 #: ui/notificationssettingspage.cpp:40
 msgid "OSD Preview"
@@ -3781,7 +3781,7 @@ msgstr "Performer"
 
 #: ../bin/src/ui_gstenginedebug.h:67
 msgid "Pipeline"
-msgstr ""
+msgstr "Pipeline"
 
 #: ../bin/src/ui_albumcoverexport.h:214
 msgid "Pixel"
@@ -3804,7 +3804,7 @@ msgstr "Play count"
 
 #: core/commandlineoptions.cpp:183
 msgid "Play given playlist"
-msgstr ""
+msgstr "Play given playlist"
 
 #: core/commandlineoptions.cpp:162
 msgid "Play if stopped, pause if playing"
@@ -4017,7 +4017,7 @@ msgstr "Put songs in a random order"
 
 #: ../bin/src/ui_console.h:134
 msgid "Qt"
-msgstr ""
+msgstr "Qt"
 
 #: ../bin/src/ui_transcoderoptionsflac.h:92
 #: ../bin/src/ui_transcoderoptionsmp3.h:191
@@ -4051,7 +4051,7 @@ msgstr "Queue track"
 
 #: ../bin/src/ui_lovedialog.h:115
 msgid "Quickly rate the playing track"
-msgstr ""
+msgstr "Quickly rate the playing track"
 
 #: ../bin/src/ui_playbacksettingspage.h:358
 msgid "Radio (equal loudness for all tracks)"
@@ -4068,11 +4068,11 @@ msgstr "Rain"
 
 #: internet/subsonic/subsonicservice.cpp:104
 msgid "Random Albums"
-msgstr ""
+msgstr "Random Albums"
 
 #: internet/subsonic/subsonicservice.cpp:122
 msgid "Random Songs"
-msgstr ""
+msgstr "Random Songs"
 
 #: ../bin/src/ui_visualisationselector.h:111
 msgid "Random visualization"
@@ -4113,7 +4113,7 @@ msgstr "Really cancel?"
 
 #: internet/subsonic/subsonicservice.cpp:115
 msgid "Recently Played Albums"
-msgstr ""
+msgstr "Recently Played Albums"
 
 #: internet/subsonic/subsonicsettingspage.cpp:161
 msgid "Redirect limit exceeded, verify server configuration."
@@ -4306,7 +4306,7 @@ msgstr "Rock"
 
 #: ../bin/src/ui_networkremotesettingspage.h:374
 msgid "Root folder that will be browsable from the network remote"
-msgstr ""
+msgstr "Root folder that will be browsable from the network remote"
 
 #: ../bin/src/ui_console.h:130
 msgid "Run"
@@ -4545,11 +4545,11 @@ msgstr "Select None"
 
 #: ui/filechooserwidget.cpp:95
 msgid "Select a directory"
-msgstr ""
+msgstr "Select a directory"
 
 #: ui/filechooserwidget.cpp:92
 msgid "Select a file"
-msgstr ""
+msgstr "Select a file"
 
 #: ../bin/src/ui_appearancesettingspage.h:303
 msgid "Select background color:"
@@ -4923,7 +4923,7 @@ msgstr "Starred"
 
 #: internet/subsonic/subsonicservice.cpp:119
 msgid "Starred Albums"
-msgstr ""
+msgstr "Starred Albums"
 
 #: ripper/ripcddialog.cpp:73
 msgid "Start ripping"
@@ -5303,7 +5303,7 @@ msgstr "Too many redirects"
 
 #: internet/subsonic/subsonicservice.cpp:111
 msgid "Top Rated Albums"
-msgstr ""
+msgstr "Top Rated Albums"
 
 #: internet/spotify/spotifyservice.cpp:423
 msgid "Top tracks"
@@ -5373,7 +5373,7 @@ msgstr "URL"
 
 #: ../bin/src/ui_addstreamdialog.h:128
 msgid "URL of its Logo:"
-msgstr ""
+msgstr "URL of its Logo:"
 
 #: core/commandlineoptions.cpp:159
 msgid "URL(s)"
@@ -5648,7 +5648,7 @@ msgid ""
 "Warning: This compression level is outside of the streamable subset. This "
 "means that a decoder may not be able to start playing it mid-stream. It may "
 "also affect the performance of hardware decoders."
-msgstr ""
+msgstr "Warning: This compression level is outside of the streamable subset. This means that a decoder may not be able to start playing it mid-stream. It may also affect the performance of hardware decoders."
 
 #: core/song.cpp:447 transcoder/transcoder.cpp:257
 msgid "Wav"
@@ -5790,7 +5790,7 @@ msgstr "Year - Album"
 
 #: playlist/playlist.cpp:1392
 msgid "Year - original"
-msgstr ""
+msgstr "Year - original"
 
 #: smartplaylists/searchterm.cpp:427
 msgid "Years"
@@ -5839,7 +5839,7 @@ msgid ""
 "You can find <a href=\"%1\">here on GitHub</a> the new cross platform "
 "remote.<br/>It is available on <b>Linux</b>, <b>MacOS</b> and "
 "<b>Windows</b><br/>"
-msgstr ""
+msgstr "You can find <a href=\"%1\">here on GitHub</a> the new cross platform remote.<br/>It is available on <b>Linux</b>, <b>MacOS</b> and <b>Windows</b><br/>"
 
 #: internet/magnatune/magnatunesettingspage.cpp:59
 msgid ""
@@ -5971,7 +5971,7 @@ msgstr "bpm"
 msgid ""
 "coma separated list of the allowed extensions that will be visible from the "
 "network remote (ex: m3u,mp3,flac,ogg,wav)"
-msgstr ""
+msgstr "coma separated list of the allowed extensions that will be visible from the network remote (ex: m3u,mp3,flac,ogg,wav)"
 
 #: smartplaylists/searchterm.cpp:249
 msgid "contains"
@@ -5979,7 +5979,7 @@ msgstr "contains"
 
 #: ../bin/src/ui_networkremotesettingspage.h:382
 msgid "desktop_remote"
-msgstr ""
+msgstr "desktop_remote"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:221
 #: ../bin/src/ui_transcoderoptionsvorbis.h:206
@@ -5998,7 +5998,7 @@ msgstr "does not contain"
 
 #: ../bin/src/ui_console.h:133
 msgid "dump"
-msgstr ""
+msgstr "dump"
 
 #: smartplaylists/searchterm.cpp:265
 msgid "empty"
@@ -6089,7 +6089,7 @@ msgstr "options"
 #: ../bin/src/ui_networkremotesettingspage.h:384
 #: ../bin/src/ui_networkremotesettingspage.h:386
 msgid "or scan the QR code: "
-msgstr ""
+msgstr "or scan the QR code: "
 
 #: widgets/didyoumean.cpp:56
 msgid "press enter"
