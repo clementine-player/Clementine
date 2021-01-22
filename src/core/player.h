@@ -128,6 +128,8 @@ class Player : public PlayerInterface {
     PreviousBehaviour_Restart = 2
   };
 
+  enum NextTrackOrAlbumSelected { SelectNextTrack, SelectNextAlbum };
+
   void Init();
 
   EngineBase* engine() const { return engine_.get(); }
@@ -179,10 +181,13 @@ class Player : public PlayerInterface {
   void TrackEnded();
   // Play the next item on the playlist - disregarding radio stations like
   // last.fm that might have more tracks.
-  void NextItem(Engine::TrackChangeFlags change, bool next_album = false);
+  void NextItem(Engine::TrackChangeFlags change,
+                NextTrackOrAlbumSelected NextTrackOrAlbum = SelectNextTrack);
   void PreviousItem(Engine::TrackChangeFlags change);
 
-  void NextInternal(Engine::TrackChangeFlags, bool next_album = false);
+  void NextInternal(
+      Engine::TrackChangeFlags,
+      NextTrackOrAlbumSelected NextTrackOrAlbum = SelectNextTrack);
   void PlayPlaylistInternal(Engine::TrackChangeFlags,
                             const QString& playlistName);
 
