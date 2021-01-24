@@ -48,3 +48,31 @@ void GstPipelineBase::DumpGraph() {
   }
 #endif
 }
+
+GstPipelineModel::GstPipelineModel(QObject* parent)
+    : QStandardItemModel(parent) {}
+
+void GstPipelineModel::AddPipeline(int id, const QString& name) {
+  QStandardItem* item = new QStandardItem();
+  item->setData(name, Qt::DisplayRole);
+  item->setData(id, Role::Role_Id);
+  item->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
+  appendRow(item);
+}
+
+void GstPipelineModel::RemovePipeline(int id) {
+  int row = FindRowById(id);
+  if (row < 0) {
+    qLog(Warning) << "Did not find pipeline" << id;
+    return;
+  }
+  removeRow(row);
+}
+
+int GstPipelineModel::FindRowById(int id) {
+  for (int i = 0; i < rowCount(); i++) {
+    if (item(i)->data(Role::Role_Id).toInt() == id) return i;
+  }
+
+  return -1;
+}

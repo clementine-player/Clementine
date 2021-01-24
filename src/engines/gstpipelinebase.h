@@ -21,6 +21,7 @@
 #include <gst/gst.h>
 
 #include <QObject>
+#include <QStandardItemModel>
 
 class GstPipelineBase : public QObject {
  public:
@@ -45,6 +46,20 @@ class GstPipelineBase : public QObject {
   // each pipeline.
   static std::atomic<int> sId;
   const int id_;
+};
+
+class GstPipelineModel : public QStandardItemModel {
+  Q_OBJECT
+
+ public:
+  explicit GstPipelineModel(QObject* parent = nullptr);
+  void AddPipeline(int id, const QString& name);
+  void RemovePipeline(int id);
+
+ private:
+  int FindRowById(int id) const;
+
+  enum Role { Role_Id = Qt::UserRole + 1 };
 };
 
 #endif  // GSTPIPELINEBASE_H
