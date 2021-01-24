@@ -63,6 +63,8 @@ class Transcoder : public QObject {
   QMap<QString, float> GetProgress() const;
   int QueuedJobsCount() const { return queued_jobs_.count(); }
 
+  GstPipelineModel* model() { return model_; }
+
  public slots:
   void Start();
   void Cancel();
@@ -97,6 +99,7 @@ class Transcoder : public QObject {
     void ReportError(GstMessage* msg);
 
     GstElement* Pipeline() { return pipeline_; }
+    QString GetDisplayName();
 
     Job job_;
     Transcoder* parent_;
@@ -143,6 +146,7 @@ class Transcoder : public QObject {
   QList<Job> queued_jobs_;
   JobStateList current_jobs_;
   QString settings_postfix_;
+  GstPipelineModel* model_;
 };
 
 #endif  // TRANSCODER_H

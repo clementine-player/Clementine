@@ -49,8 +49,8 @@ static bool ComparePresetsByName(const TranscoderPreset& left,
 TranscodeDialog::TranscodeDialog(QWidget* parent)
     : QDialog(parent),
       ui_(new Ui_TranscodeDialog),
-      log_ui_(new Ui_TranscodeLogDialog),
-      log_dialog_(new QDialog(this)),
+      details_ui_(new Ui_TranscodeLogDialog),
+      details_dialog_(new QDialog(this)),
       transcoder_(new Transcoder(this)),
       queued_(0),
       finished_success_(0),
@@ -58,10 +58,11 @@ TranscodeDialog::TranscodeDialog(QWidget* parent)
   ui_->setupUi(this);
   ui_->files->header()->setSectionResizeMode(QHeaderView::ResizeToContents);
 
-  log_ui_->setupUi(log_dialog_);
-  QPushButton* clear_button =
-      log_ui_->buttonBox->addButton(tr("Clear"), QDialogButtonBox::ResetRole);
-  connect(clear_button, SIGNAL(clicked()), log_ui_->log, SLOT(clear()));
+  details_ui_->setupUi(details_dialog_);
+  details_ui_->pipelines->setModel(transcoder_->model());
+  QPushButton* clear_button = details_ui_->buttonBox->addButton(
+      tr("Clear"), QDialogButtonBox::ResetRole);
+  connect(clear_button, SIGNAL(clicked()), details_ui_->log, SLOT(clear()));
 
   // Get presets
   QList<TranscoderPreset> presets = Transcoder::GetAllPresets();
@@ -107,7 +108,7 @@ TranscodeDialog::TranscodeDialog(QWidget* parent)
   connect(start_button_, SIGNAL(clicked()), SLOT(Start()));
   connect(cancel_button_, SIGNAL(clicked()), SLOT(Cancel()));
   connect(close_button_, SIGNAL(clicked()), SLOT(hide()));
-  connect(ui_->details, SIGNAL(clicked()), log_dialog_, SLOT(show()));
+  connect(ui_->details, SIGNAL(clicked()), details_dialog_, SLOT(show()));
   connect(ui_->options, SIGNAL(clicked()), SLOT(Options()));
   connect(ui_->select, SIGNAL(clicked()), SLOT(AddDestination()));
 
@@ -117,10 +118,7 @@ TranscodeDialog::TranscodeDialog(QWidget* parent)
   connect(transcoder_, SIGNAL(AllJobsComplete()), SLOT(AllJobsComplete()));
 }
 
-TranscodeDialog::~TranscodeDialog() {
-  delete log_ui_;
-  delete ui_;
-}
+TranscodeDialog::~TranscodeDialog() {}
 
 void TranscodeDialog::SetWorking(bool working) {
   start_button_->setVisible(!working);
@@ -278,7 +276,7 @@ void TranscodeDialog::Remove() { qDeleteAll(ui_->files->selectedItems()); }
 
 void TranscodeDialog::LogLine(const QString& message) {
   QString date(QDateTime::currentDateTime().toString(Qt::TextDate));
-  log_ui_->log->appendPlainText(QString("%1: %2").arg(date, message));
+  details_ui_->log->appendPlainText(QString("%1: %2").arg(date, message));
 }
 
 void TranscodeDialog::timerEvent(QTimerEvent* e) {

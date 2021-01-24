@@ -195,10 +195,16 @@ void Transcoder::JobState::PostFinished(bool success) {
                               new Transcoder::JobFinishedEvent(this, success));
 }
 
+QString Transcoder::JobState::GetDisplayName() {
+  return QFileInfo(job_.input).fileName() + " => " +
+         QFileInfo(job_.output).fileName();
+}
+
 Transcoder::Transcoder(QObject* parent, const QString& settings_postfix)
     : QObject(parent),
       max_threads_(QThread::idealThreadCount()),
-      settings_postfix_(settings_postfix) {
+      settings_postfix_(settings_postfix),
+      model_(new GstPipelineModel(this)) {
   if (JobFinishedEvent::sEventType == -1)
     JobFinishedEvent::sEventType = QEvent::registerEventType();
 
@@ -459,6 +465,7 @@ bool Transcoder::StartJob(const Job& job) {
   // something else.  Keep the JobState object around.  It'll post an event
   // to our event loop when it finishes.
   current_jobs_ << state;
+  model_->AddPipeline(state->id(), state->GetDisplayName());
 
   return true;
 }
@@ -489,6 +496,7 @@ bool Transcoder::event(QEvent* e) {
         nullptr, nullptr, nullptr);
 
     // Remove it from the list - this will also destroy the GStreamer pipeline
+    model_->RemovePipeline((*it)->id());
     current_jobs_.erase(it);
 
     // Emit the finished signal
@@ -527,6 +535,7 @@ void Transcoder::Cancel() {
     }
 
     // Remove the job, this destroys the GStreamer pipeline too
+    model_->RemovePipeline((*it)->id());
     it = current_jobs_.erase(it);
   }
 }

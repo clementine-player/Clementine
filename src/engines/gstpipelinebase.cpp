@@ -69,7 +69,7 @@ void GstPipelineModel::RemovePipeline(int id) {
   removeRow(row);
 }
 
-int GstPipelineModel::FindRowById(int id) {
+int GstPipelineModel::FindRowById(int id) const {
   for (int i = 0; i < rowCount(); i++) {
     if (item(i)->data(Role::Role_Id).toInt() == id) return i;
   }
