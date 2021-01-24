@@ -21,6 +21,7 @@
 #include <QBasicTimer>
 #include <QDialog>
 #include <QFileInfo>
+#include <memory>
 
 class Transcoder;
 class Ui_TranscodeDialog;
@@ -64,9 +65,9 @@ class TranscodeDialog : public QDialog {
                             const TranscoderPreset& preset) const;
 
  private:
-  Ui_TranscodeDialog* ui_;
-  Ui_TranscodeLogDialog* log_ui_;
-  QDialog* log_dialog_;
+  std::unique_ptr<Ui_TranscodeDialog> ui_;
+  std::unique_ptr<Ui_TranscodeLogDialog> details_ui_;
+  QDialog* details_dialog_;
 
   QBasicTimer progress_timer_;
 
