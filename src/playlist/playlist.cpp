@@ -98,6 +98,40 @@ const int Playlist::kUndoItemLimit = 500;
 const qint64 Playlist::kMinScrobblePointNsecs = 31ll * kNsecPerSec;
 const qint64 Playlist::kMaxScrobblePointNsecs = 240ll * kNsecPerSec;
 
+// see enum Columns, when playlist column is editable the names are
+// used as names for taglib writing
+const QStringList Playlist::kColumns = QStringList()
+  << "title"
+  << "artist"
+  << "album"
+  << "albumartist"
+  << "composer"
+  << "length"
+  << "track"
+  << "disc"
+  << "year"
+  << "genre"	
+  << "bpm"
+  << "bitrate"
+  << "samplerate"
+  << "filename"
+  << "basefilename"
+  << "filesize"
+  << "filetype"
+  << "ctime"
+  << "mtime"
+  << "rating"
+  << "playcount"
+  << "skipcount"
+  << "lastplayed"
+  << "score"
+  << "comment"
+  << "source"
+  << "mood"
+  << "performer"
+  << "grouping"
+  << "originalyear";
+
 namespace {
 QString removePrefix(const QString& a, const QStringList& prefixes) {
   for (const QString& prefix : prefixes) {
@@ -212,6 +246,7 @@ bool Playlist::column_is_editable(Playlist::Column column) {
     case Column_Disc:
     case Column_Year:
     case Column_Genre:
+    case Column_BPM:
     case Column_Score:
     case Column_Comment:
       return true;
@@ -223,8 +258,10 @@ bool Playlist::column_is_editable(Playlist::Column column) {
 
 bool Playlist::set_column_value(Song& song, Playlist::Column column,
                                 const QVariant& value) {
-  if (!song.IsEditable()) return false;
-
+  if (!song.IsEditable()) {
+    qLog(Debug) << "PlayList::set_column_value not editable: " << column;
+    return false;
+  }
   switch (column) {
     case Column_Title:
       song.set_title(value.toString());
@@ -258,6 +295,9 @@ bool Playlist::set_column_value(Song& song, Playlist::Column column,
       break;
     case Column_Genre:
       song.set_genre(value.toString());
+      break;
+    case Column_BPM:
+      song.set_bpm(value.toFloat());
       break;
     case Column_Score:
       song.set_score(value.toInt());
@@ -431,8 +471,15 @@ bool Playlist::setData(const QModelIndex& index, const QVariant& value,
     library_->AddOrUpdateSongs(SongList() << song);
     emit EditingFinished(index);
   } else {
+    qLog(Debug) << "Playlist::setData file: " << song.url().toLocalFile();
+    const QString name = Playlist::kColumns.at(index.column());    
+    qLog(Debug) << "Playlist::setData name: " << name;
+    qLog(Debug) << "Playlist::setData value: " << value;
+    
+    // Update just that tag
     TagReaderReply* reply =
-        TagReaderClient::Instance()->SaveFile(song.url().toLocalFile(), song);
+      TagReaderClient::Instance()->UpdateSongTag(song.url().toLocalFile(),
+						 name, value);
 
     NewClosure(reply, SIGNAL(Finished(bool)), this,
                SLOT(SongSaveComplete(TagReaderReply*, QPersistentModelIndex)),
@@ -444,7 +491,7 @@ bool Playlist::setData(const QModelIndex& index, const QVariant& value,
 void Playlist::SongSaveComplete(TagReaderReply* reply,
                                 const QPersistentModelIndex& index) {
   if (reply->is_successful() && index.isValid()) {
-    if (reply->message().save_file_response().success()) {
+    if (reply->message().save_song_tag_to_file_response().success()) {
       QFuture<void> future = item_at(index.row())->BackgroundReload();
       NewClosure(future, this, SLOT(ItemReloadComplete(QPersistentModelIndex)),
                  index);
@@ -452,7 +499,7 @@ void Playlist::SongSaveComplete(TagReaderReply* reply,
       emit Error(
           tr("An error occurred writing metadata to '%1'")
               .arg(QString::fromStdString(
-                  reply->request_message().save_file_request().filename())));
+                  reply->request_message().save_song_tag_to_file_request().filename())));
     }
   }
   reply->deleteLater();
