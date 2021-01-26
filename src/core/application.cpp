@@ -69,8 +69,16 @@ bool Application::kIsPortable = false;
 const char* Application::kLegacyPortableDataDir = "data";
 const char* Application::kDefaultPortableDataDir = "clementine-data";
 const char* Application::kPortableDataDir = nullptr;
+const char* Application::kDebugFeaturesKey = "CLEMENTINE_DEBUG";
 const QStringList Application::kDefaultMusicExtensionsAllowedRemotely = {
     "aac", "alac", "flac", "m3u", "m4a", "mp3", "ogg", "wav", "wmv"};
+
+// Use CLEMENTINE_DEBUG=1 to enable debug features.
+bool Application::DebugFeaturesEnabled() {
+  QString showConsole =
+      QProcessEnvironment::systemEnvironment().value(kDebugFeaturesKey, "0");
+  return (showConsole == "1");
+}
 
 class ApplicationImpl {
  public:

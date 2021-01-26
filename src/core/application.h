@@ -67,7 +67,9 @@ class Application : public QObject {
   static const char* kLegacyPortableDataDir;
   static const char* kDefaultPortableDataDir;
   static const QStringList kDefaultMusicExtensionsAllowedRemotely;
+  static const char* kDebugFeaturesKey;
   static bool IsPortable() { return kIsPortable; }
+  static bool DebugFeaturesEnabled();
 
   explicit Application(QObject* parent = nullptr);
   ~Application();

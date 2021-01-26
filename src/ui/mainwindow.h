@@ -98,7 +98,6 @@ class MainWindow : public QMainWindow, public PlatformInterface {
 
   static const char* kSettingsGroup;
   static const char* kAllFilesFilterSpec;
-  static const char* kShowDebugConsoleKey;
 
   // Don't change the values
   enum StartupBehaviour {
