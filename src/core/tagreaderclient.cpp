@@ -66,13 +66,40 @@ TagReaderReply* TagReaderClient::ReadFile(const QString& filename) {
   return worker_pool_->SendMessageWithReply(&message);
 }
 
+//TODO: remove form based metadataeditting (./src/ui/edittagdialog.cpp)
+// shall be used only for new created (e.g. ripper, podcast, ...) files
+// any other editting shall be replaced by field level changes, see below 
 TagReaderReply* TagReaderClient::SaveFile(const QString& filename,
                                           const Song& metadata) {
   pb::tagreader::Message message;
   pb::tagreader::SaveFileRequest* req = message.mutable_save_file_request();
 
+
+  qLog(Debug) << "TagReaderClient::SaveFile: " << filename;
+  
   req->set_filename(DataCommaSizeFromQString(filename));
   metadata.ToProtobuf(req->mutable_metadata());
+
+  return worker_pool_->SendMessageWithReply(&message);
+}
+
+
+// Single field update, called by  ./src/playlist/playlist.cpp
+// Mayor change necessary, aka any "save..file" members be replaced by
+// save (file, tagname, tagvalue) without sending whole song/metadata
+TagReaderReply* TagReaderClient::UpdateSongTag(const QString& filename,
+						const QString& tagname,
+						const QVariant& tagvalue) {
+  pb::tagreader::Message message;
+  pb::tagreader::SaveSongTagToFileRequest* req =
+      message.mutable_save_song_tag_to_file_request();
+
+  qLog(Debug) << "TagReaderClient::SaveSongTag: " << filename
+	      << " tag: " << tagname << " value: " << tagvalue;
+  
+  req->set_filename(DataCommaSizeFromQString(filename));
+  req->set_tagname(DataCommaSizeFromQString(tagname));
+  req->set_tagvalue(DataCommaSizeFromQString(tagvalue.toString()));
 
   return worker_pool_->SendMessageWithReply(&message);
 }
@@ -165,6 +192,8 @@ bool TagReaderClient::SaveFileBlocking(const QString& filename,
   Q_ASSERT(QThread::currentThread() != thread());
 
   bool ret = false;
+
+  qLog(Debug) << "TagReaderClient::SaveFileBlocking: " << filename;
 
   TagReaderReply* reply = SaveFile(filename, metadata);
   if (reply->WaitForFinished()) {

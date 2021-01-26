@@ -2106,7 +2106,8 @@ void MainWindow::SelectionSetValue() {
         app_->playlist_manager()->current()->proxy()->mapToSource(index);
     int row = source_index.row();
     Song song = app_->playlist_manager()->current()->item_at(row)->Metadata();
-
+    qLog(Debug) << "MainWindow: SelectionSetValue: song: " << row << " value: " <<  column_value;
+    
     if (Playlist::set_column_value(song, column, column_value)) {
       TagReaderReply* reply =
           TagReaderClient::Instance()->SaveFile(song.url().toLocalFile(), song);
@@ -2125,6 +2126,8 @@ void MainWindow::EditValue() {
   // Edit the last column that was right-clicked on.  If nothing's ever been
   // right clicked then look for the first editable column.
   int column = playlist_menu_index_.column();
+
+  qLog(Debug) << "MainWindow: EditValue: column: "  <<  column;
   if (column == -1) {
     for (int i = 0; i < ui_->playlist->view()->model()->columnCount(); ++i) {
       if (ui_->playlist->view()->isColumnHidden(i)) continue;
@@ -2133,7 +2136,7 @@ void MainWindow::EditValue() {
       break;
     }
   }
-
+  qLog(Debug) << "MainWindow: EditValue: column: "  <<  column;
   ui_->playlist->view()->edit(current.sibling(current.row(), column));
 }
 
@@ -2487,9 +2490,11 @@ void MainWindow::CopyFilesToDevice(const QList<QUrl>& urls) {
 
 void MainWindow::EditFileTags(const QList<QUrl>& urls) {
   SongList songs;
+  
   for (const QUrl& url : urls) {
     Song song;
     song.set_url(url);
+    qLog(Debug) << "MainWindow: EditFileTags: url: "  <<  url;
     song.set_valid(true);
     song.set_filetype(Song::Type_Mpeg);
     songs << song;
