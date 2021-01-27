@@ -76,3 +76,11 @@ int GstPipelineModel::FindRowById(int id) const {
 
   return -1;
 }
+
+int GstPipelineModel::GetPipelineId(const QModelIndex& index) const {
+  const QStandardItem* item = itemFromIndex(index);
+  if (item != nullptr)
+    return item->data(Role::Role_Id).toInt();
+  else
+    return -1;
+}

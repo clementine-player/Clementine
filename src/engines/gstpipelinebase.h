@@ -57,6 +57,10 @@ class GstPipelineModel : public QStandardItemModel {
   void RemovePipeline(int id);
 
  private:
+  friend class PipelineView;
+  int GetPipelineId(const QModelIndex& index) const;
+
+ private:
   int FindRowById(int id) const;
 
   enum Role { Role_Id = Qt::UserRole + 1 };
