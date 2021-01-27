@@ -138,6 +138,7 @@ set(SOURCES
   engines/gstenginepipeline.cpp
   engines/gstelementdeleter.cpp
   engines/gstpipelinebase.cpp
+  engines/pipelineview.cpp
 
   globalsearch/digitallyimportedsearchprovider.cpp
   globalsearch/globalsearch.cpp
@@ -461,6 +462,7 @@ set(HEADERS
   engines/gstenginepipeline.h
   engines/gstelementdeleter.h
   engines/gstpipelinebase.h
+  engines/pipelineview.h
 
   globalsearch/globalsearch.h
   globalsearch/globalsearchmodel.h
