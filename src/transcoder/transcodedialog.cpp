@@ -17,6 +17,7 @@
 
 #include "transcodedialog.h"
 
+#include <QAction>
 #include <QDateTime>
 #include <QDirIterator>
 #include <QFileDialog>
@@ -24,6 +25,7 @@
 #include <QSettings>
 #include <algorithm>
 
+#include "core/application.h"
 #include "transcoder.h"
 #include "transcoderoptionsdialog.h"
 #include "ui/iconloader.h"
@@ -59,10 +61,17 @@ TranscodeDialog::TranscodeDialog(QWidget* parent)
   ui_->files->header()->setSectionResizeMode(QHeaderView::ResizeToContents);
 
   details_ui_->setupUi(details_dialog_);
-  details_ui_->pipelines->setModel(transcoder_->model());
+  details_ui_->pipelines->setPipelineModel(transcoder_->model());
   QPushButton* clear_button = details_ui_->buttonBox->addButton(
       tr("Clear"), QDialogButtonBox::ResetRole);
   connect(clear_button, SIGNAL(clicked()), details_ui_->log, SLOT(clear()));
+
+  if (Application::DebugFeaturesEnabled()) {
+    QAction* dump_action = new QAction(tr("Dump Graph"));
+    details_ui_->pipelines->addAction(dump_action);
+    connect(dump_action, SIGNAL(triggered(bool)),
+            SLOT(PipelineDumpAction(bool)));
+  }
 
   // Get presets
   QList<TranscoderPreset> presets = Transcoder::GetAllPresets();
@@ -178,6 +187,12 @@ void TranscodeDialog::Start() {
 void TranscodeDialog::Cancel() {
   transcoder_->Cancel();
   SetWorking(false);
+}
+
+void TranscodeDialog::PipelineDumpAction(bool checked) {
+  for (int i : details_ui_->pipelines->GetSelectedIds()) {
+    transcoder_->DumpGraph(i);
+  }
 }
 
 void TranscodeDialog::JobComplete(const QString& input, const QString& output,

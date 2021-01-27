@@ -56,6 +56,7 @@ class TranscodeDialog : public QDialog {
   void AllJobsComplete();
   void Options();
   void AddDestination();
+  void PipelineDumpAction(bool checked);
 
  private:
   void SetWorking(bool working);

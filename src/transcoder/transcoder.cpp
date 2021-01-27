@@ -541,6 +541,15 @@ void Transcoder::Cancel() {
   }
 }
 
+void Transcoder::DumpGraph(int id) {
+  for (JobStateList::iterator it = current_jobs_.begin();
+       it != current_jobs_.end(); it++) {
+    if ((*it)->id() == id) {
+      (*it)->DumpGraph();
+    }
+  }
+}
+
 QMap<QString, float> Transcoder::GetProgress() const {
   QMap<QString, float> ret;
 
