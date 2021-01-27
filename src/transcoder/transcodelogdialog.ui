@@ -31,12 +31,15 @@
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_3">
       <item>
-       <widget class="QListView" name="pipelines">
+       <widget class="PipelineView" name="pipelines">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
+        </property>
+        <property name="contextMenuPolicy">
+         <enum>Qt::ActionsContextMenu</enum>
         </property>
        </widget>
       </item>
@@ -80,6 +83,13 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>PipelineView</class>
+   <extends>QListView</extends>
+   <header>engines/pipelineview.h</header>
+  </customwidget>
+ </customwidgets>
  <resources>
   <include location="../../data/data.qrc"/>
  </resources>
