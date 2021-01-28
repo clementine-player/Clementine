@@ -65,7 +65,6 @@ class Transcoder : public QObject {
 
   GstPipelineModel* model() { return model_; }
 
- public slots:
   void Start();
   void Cancel();
 

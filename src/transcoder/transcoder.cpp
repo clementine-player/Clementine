@@ -327,6 +327,7 @@ void Transcoder::Start() {
                    .arg(queued_jobs_.count())
                    .arg(max_threads()));
 
+  // Kick off worker threads.
   forever {
     StartJobStatus status = MaybeStartNextJob();
     if (status == AllThreadsBusy || status == NoMoreJobs) break;
