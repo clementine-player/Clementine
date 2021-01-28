@@ -135,14 +135,21 @@ void TranscodeDialog::SetWorking(bool working) {
 }
 
 void TranscodeDialog::Start() {
+  QAbstractItemModel* file_model = ui_->files->model();
+  const int count = file_model->rowCount();
+
+  if (count == 0) {
+    // Nothing to process.
+    return;
+  }
+
   SetWorking(true);
 
-  QAbstractItemModel* file_model = ui_->files->model();
   TranscoderPreset preset = ui_->format->itemData(ui_->format->currentIndex())
                                 .value<TranscoderPreset>();
 
   // Add jobs to the transcoder
-  for (int i = 0; i < file_model->rowCount(); ++i) {
+  for (int i = 0; i < count; ++i) {
     QFileInfo input_fileinfo(
         file_model->index(i, 0).data(Qt::UserRole).toString());
     QString output_filename = GetOutputFileName(input_fileinfo, preset);
@@ -151,10 +158,10 @@ void TranscodeDialog::Start() {
 
   // Set up the progressbar
   ui_->progress_bar->setValue(0);
-  ui_->progress_bar->setMaximum(file_model->rowCount() * 100);
+  ui_->progress_bar->setMaximum(count * 100);
 
   // Reset the UI
-  queued_ = file_model->rowCount();
+  queued_ = count;
   finished_success_ = 0;
   finished_failed_ = 0;
   UpdateStatusText();
