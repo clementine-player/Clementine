@@ -98,20 +98,27 @@ const int Playlist::kUndoItemLimit = 500;
 const qint64 Playlist::kMinScrobblePointNsecs = 31ll * kNsecPerSec;
 const qint64 Playlist::kMaxScrobblePointNsecs = 240ll * kNsecPerSec;
 
-// see enum Columns, when playlist column is editable the names are
-// used as names for taglib writing
+// kColumns provides names to enum Columns.
+// When the playlist column is editable those names are used as names
+// for taglib writing to file. Names are caseinsensitive and often
+// 3rdparty/taglib/.../id3v2frame translations is base for naming used.
+// When playlist enum columns is changed the list below has to be adapted
+// accordingly. Lowercase written names miss a taglib equivalent and are
+// used for internal informations.
+// When adding lines to column enumeration: Try to add mappable taglib
+// properties.
 const QStringList Playlist::kColumns = QStringList()
-  << "title"
-  << "artist"
-  << "album"
-  << "albumartist"
-  << "composer"
-  << "length"
-  << "track"
-  << "disc"
-  << "year"
-  << "genre"	
-  << "bpm"
+  << "TITLE"
+  << "ARTIST"
+  << "ALBUM"
+  << "ALBUMARTIST"
+  << "COMPOSER"
+  << "LENGTH"
+  << "TRACKNUMBER"
+  << "DISCNUMBER"
+  << "DATE"
+  << "GENRE"	
+  << "BPM"
   << "bitrate"
   << "samplerate"
   << "filename"
@@ -125,12 +132,12 @@ const QStringList Playlist::kColumns = QStringList()
   << "skipcount"
   << "lastplayed"
   << "score"
-  << "comment"
+  << "COMMENT"
   << "source"
-  << "mood"
+  << "MOOD"
   << "performer"
-  << "grouping"
-  << "originalyear";
+  << "GROUPING"
+  << "ORIGINALDATE";
 
 namespace {
 QString removePrefix(const QString& a, const QStringList& prefixes) {
