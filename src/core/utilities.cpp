@@ -443,7 +443,7 @@ void OpenInFileBrowser(const QList<QUrl>& urls) {
 #elif defined(Q_OS_WIN32)
     ShowFileInExplorer(path);
 #else
-    QDesktopServices::openUrl(QUrl::fromLocalFile(path));
+    QDesktopServices::openUrl(QUrl::fromLocalFile(directory));
 #endif
   }
 }
