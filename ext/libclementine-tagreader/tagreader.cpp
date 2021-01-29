@@ -892,6 +892,7 @@ bool TagReader::UpdateSongTag(const QString& filename,
   // according taglib tagwriter example
   // to save basic attributes see SaveFile
   
+  // no check for available ones
   TagLib::PropertyMap map = fileref->file()->properties();
 
   TagLib::String key = QStringToTaglibString(tagname);
@@ -901,6 +902,7 @@ bool TagReader::UpdateSongTag(const QString& filename,
   else
     // inserts too if not yet
     map.replace(key, QStringToTaglibString(tagvalue));
+
 
   //qLog(Debug) << TStringToQString(map.toString());
 
