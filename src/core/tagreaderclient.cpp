@@ -83,10 +83,6 @@ TagReaderReply* TagReaderClient::SaveFile(const QString& filename,
   return worker_pool_->SendMessageWithReply(&message);
 }
 
-
-// Single field update, called by  ./src/playlist/playlist.cpp
-// Mayor change necessary, aka any "save..file" members be replaced by
-// save (file, tagname, tagvalue) without sending whole song/metadata
 TagReaderReply* TagReaderClient::UpdateSongTag(const QString& filename,
 						const QString& tagname,
 						const QVariant& tagvalue) {
@@ -94,9 +90,6 @@ TagReaderReply* TagReaderClient::UpdateSongTag(const QString& filename,
   pb::tagreader::SaveSongTagToFileRequest* req =
       message.mutable_save_song_tag_to_file_request();
 
-  qLog(Debug) << "TagReaderClient::SaveSongTag: " << filename
-	      << " tag: " << tagname << " value: " << tagvalue;
-  
   req->set_filename(DataCommaSizeFromQString(filename));
   req->set_tagname(DataCommaSizeFromQString(tagname));
   req->set_tagvalue(DataCommaSizeFromQString(tagvalue.toString()));
