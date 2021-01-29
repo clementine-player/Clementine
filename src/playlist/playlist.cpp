@@ -477,11 +477,23 @@ bool Playlist::setData(const QModelIndex& index, const QVariant& value,
     library_->AddOrUpdateSongs(SongList() << song);
     emit EditingFinished(index);
   } else {
+<<<<<<< HEAD
     const QString name = Playlist::kColumns.at(index.column());
     
     // Update just that tag
     TagReaderReply* reply = TagReaderClient::Instance()->UpdateSongTag(
 	song.url().toLocalFile(), name, value);
+=======
+    qLog(Debug) << "Playlist::setData file: " << song.url().toLocalFile();
+    const QString name = Playlist::kColumns.at(index.column());    
+    qLog(Debug) << "Playlist::setData name: " << name;
+    qLog(Debug) << "Playlist::setData value: " << value;
+    
+    // Update just that tag
+    TagReaderReply* reply =
+      TagReaderClient::Instance()->UpdateSongTag(song.url().toLocalFile(),
+						 name, value);
+>>>>>>> 61799b5a312e6f1910d72f6462442ec031930cc2
 
     NewClosure(reply, SIGNAL(Finished(bool)), this,
                SLOT(SongSaveComplete(TagReaderReply*, QPersistentModelIndex)),
@@ -500,9 +512,14 @@ void Playlist::SongSaveComplete(TagReaderReply* reply,
     } else {
       emit Error(
           tr("An error occurred writing metadata to '%1'")
+<<<<<<< HEAD
               .arg(QString::fromStdString(reply->request_message()
 					  .save_song_tag_to_file_request()
 					  .filename())));
+=======
+              .arg(QString::fromStdString(
+                  reply->request_message().save_song_tag_to_file_request().filename())));
+>>>>>>> 61799b5a312e6f1910d72f6462442ec031930cc2
     }
   }
   reply->deleteLater();
