@@ -51,6 +51,10 @@
 #include <textidentificationframe.h>
 #include <trueaudiofile.h>
 #include <tstring.h>
+
+#include <tpropertymap.h>
+#include <tfile.h>
+
 #include <unsynchronizedlyricsframe.h>
 #include <vorbisfile.h>
 #include <wavfile.h>
@@ -306,8 +310,7 @@ void TagReader::ReadFile(const QString& filename,
     }
 
     if (items.contains("BPM")) {
-      Decode(items["BPM"].toStringList().toString(", "), nullptr,
-             song->mutable_performer());
+      song->set_bpm(TStringToQString(items["BPM"].toString()).trimmed().toFloat());
     }
 
     if (items.contains("PERFORMER")) {
@@ -502,7 +505,12 @@ void TagReader::ReadFile(const QString& filename,
           song->set_score(score);
         }
       }
-
+      if (items.contains("tmpo")) {
+	float bpm = (float)items["tmpo"].toInt();
+	if (song->bpm() <= 0 && bpm > 0) {
+	  song->set_bpm(bpm);
+	}
+      }
       if (items.contains("\251wrt")) {
         Decode(items["\251wrt"].toStringList().toString(", "), nullptr,
                song->mutable_composer());
@@ -772,42 +780,6 @@ void TagReader::ParseOggTag(const TagLib::Ogg::FieldListMap& map,
     Decode(map["UNSYNCEDLYRICS"].front(), codec, song->mutable_lyrics());
 }
 
-void TagReader::SetVorbisComments(
-    TagLib::Ogg::XiphComment* vorbis_comments,
-    const pb::tagreader::SongMetadata& song) const {
-  vorbis_comments->addField("COMPOSER",
-                            StdStringToTaglibString(song.composer()), true);
-  vorbis_comments->addField("PERFORMER",
-                            StdStringToTaglibString(song.performer()), true);
-  vorbis_comments->addField("CONTENT GROUP",
-                            StdStringToTaglibString(song.grouping()), true);
-  vorbis_comments->addField(
-      "BPM",
-      QStringToTaglibString(song.bpm() <= 0 - 1 ? QString()
-                                                : QString::number(song.bpm())),
-      true);
-  vorbis_comments->addField(
-      "DISCNUMBER",
-      QStringToTaglibString(song.disc() <= 0 ? QString()
-                                             : QString::number(song.disc())),
-      true);
-  vorbis_comments->addField(
-      "COMPILATION",
-      QStringToTaglibString(song.compilation() ? QString::number(1)
-                                               : QString()),
-      true);
-
-  // Try to be coherent, the two forms are used but the first one is preferred
-
-  vorbis_comments->addField("ALBUMARTIST",
-                            StdStringToTaglibString(song.albumartist()), true);
-  vorbis_comments->removeField("ALBUM ARTIST");
-
-  vorbis_comments->addField("LYRICS", StdStringToTaglibString(song.lyrics()),
-                            true);
-  vorbis_comments->removeField("UNSYNCEDLYRICS");
-}
-
 void TagReader::SetFMPSStatisticsVorbisComments(
     TagLib::Ogg::XiphComment* vorbis_comments,
     const pb::tagreader::SongMetadata& song) const {
@@ -869,111 +841,26 @@ pb::tagreader::SongMetadata_Type TagReader::GuessFileType(
 }
 
 bool TagReader::SaveFile(const QString& filename,
-                         const pb::tagreader::SongMetadata& song) const {
+	      const pb::tagreader::SongMetadata& song) const {
   if (filename.isNull()) return false;
 
-  qLog(Debug) << "Saving tags to" << filename;
-
   std::unique_ptr<TagLib::FileRef> fileref(factory_->GetFileRef(filename));
-
   if (!fileref || fileref->isNull())  // The file probably doesn't exist
     return false;
 
-  fileref->tag()->setTitle(StdStringToTaglibString(song.title()));
-  fileref->tag()->setArtist(StdStringToTaglibString(song.artist()));  // TPE1
-  fileref->tag()->setAlbum(StdStringToTaglibString(song.album()));
-  fileref->tag()->setGenre(StdStringToTaglibString(song.genre()));
-  fileref->tag()->setComment(StdStringToTaglibString(song.comment()));
-  fileref->tag()->setYear(song.year() <= 0 - 1 ? 0 : song.year());
-  fileref->tag()->setTrack(song.track() <= 0 - 1 ? 0 : song.track());
-
-  auto saveApeTag = [&](TagLib::APE::Tag* tag) {
-    tag->addValue(
-        "disc",
-        QStringToTaglibString(song.disc() <= 0 ? QString()
-                                               : QString::number(song.disc())),
-        true);
-    tag->addValue("bpm",
-                  QStringToTaglibString(song.bpm() <= 0 - 1
-                                            ? QString()
-                                            : QString::number(song.bpm())),
-                  true);
-    tag->setItem("composer",
-                 TagLib::APE::Item(
-                     "composer", TagLib::StringList(song.composer().c_str())));
-    tag->setItem("grouping",
-                 TagLib::APE::Item(
-                     "grouping", TagLib::StringList(song.grouping().c_str())));
-    tag->setItem("performer",
-                 TagLib::APE::Item("performer", TagLib::StringList(
-                                                    song.performer().c_str())));
-    tag->setItem(
-        "album artist",
-        TagLib::APE::Item("album artist",
-                          TagLib::StringList(song.albumartist().c_str())));
-    tag->setItem("lyrics",
-                 TagLib::APE::Item("lyrics", TagLib::String(song.lyrics())));
-    tag->addValue("compilation",
-                  QStringToTaglibString(song.compilation() ? QString::number(1)
-                                                           : QString()),
-                  true);
-  };
-
-  if (TagLib::MPEG::File* file =
-          dynamic_cast<TagLib::MPEG::File*>(fileref->file())) {
-    TagLib::ID3v2::Tag* tag = file->ID3v2Tag(true);
-    SetTextFrame("TPOS",
-                 song.disc() <= 0 ? QString() : QString::number(song.disc()),
-                 tag);
-    SetTextFrame("TBPM",
-                 song.bpm() <= 0 - 1 ? QString() : QString::number(song.bpm()),
-                 tag);
-    SetTextFrame("TCOM", song.composer(), tag);
-    SetTextFrame("TIT1", song.grouping(), tag);
-    SetTextFrame("TOPE", song.performer(), tag);
-    SetUnsyncLyricsFrame(song.lyrics(), tag);
-    // Skip TPE1 (which is the artist) here because we already set it
-    SetTextFrame("TPE2", song.albumartist(), tag);
-    SetTextFrame("TCMP", song.compilation() ? QString::number(1) : QString(),
-                 tag);
-  } else if (TagLib::FLAC::File* file =
-                 dynamic_cast<TagLib::FLAC::File*>(fileref->file())) {
-    TagLib::Ogg::XiphComment* tag = file->xiphComment();
-    SetVorbisComments(tag, song);
-  } else if (TagLib::MP4::File* file =
-                 dynamic_cast<TagLib::MP4::File*>(fileref->file())) {
-    TagLib::MP4::Tag* tag = file->tag();
-    tag->itemListMap()["disk"] =
-        TagLib::MP4::Item(song.disc() <= 0 - 1 ? 0 : song.disc(), 0);
-    tag->itemListMap()["tmpo"] = TagLib::StringList(
-        song.bpm() <= 0 - 1 ? "0" : TagLib::String::number(song.bpm()));
-    tag->itemListMap()["\251wrt"] = TagLib::StringList(song.composer().c_str());
-    tag->itemListMap()["\251grp"] = TagLib::StringList(song.grouping().c_str());
-    tag->itemListMap()["\251lyr"] = TagLib::StringList(song.lyrics().c_str());
-    tag->itemListMap()["aART"] = TagLib::StringList(song.albumartist().c_str());
-    tag->itemListMap()["cpil"] =
-        TagLib::StringList(song.compilation() ? "1" : "0");
-  } else if (TagLib::APE::File* file =
-                 dynamic_cast<TagLib::APE::File*>(fileref->file())) {
-    saveApeTag(file->APETag(true));
-  } else if (TagLib::MPC::File* file =
-                 dynamic_cast<TagLib::MPC::File*>(fileref->file())) {
-    saveApeTag(file->APETag(true));
-  } else if (TagLib::WavPack::File* file =
-                 dynamic_cast<TagLib::WavPack::File*>(fileref->file())) {
-    saveApeTag(file->APETag(true));
-  }
-
-  // Handle all the files which have VorbisComments (Ogg, OPUS, ...) in the same
-  // way;
-  // apart, so we keep specific behavior for some formats by adding another
-  // "else if" block above.
-  if (TagLib::Ogg::XiphComment* tag =
-          dynamic_cast<TagLib::Ogg::XiphComment*>(fileref->file()->tag())) {
-    SetVorbisComments(tag, song);
-  }
+  // only basic tags as provided by ripper
+  TagLib::Tag *t = fileref->tag();
+  t->setTitle(StdStringToTaglibString(song.title()));
+  t->setArtist(StdStringToTaglibString(song.artist()));
+  t->setAlbum(StdStringToTaglibString(song.album()));
+  t->setGenre(StdStringToTaglibString(song.genre()));
+  t->setComment(StdStringToTaglibString(song.comment()));
+  t->setYear(song.year() <= 0 - 1 ? 0 : song.year());
+  t->setTrack(song.track() <= 0 - 1 ? 0 : song.track());
+  // if more tags are required propertymap() shall be used
 
   bool ret = fileref->save();
+
 #ifdef Q_OS_LINUX
   if (ret) {
     // Linux: inotify doesn't seem to notice the change to the file unless we
@@ -981,7 +868,53 @@ bool TagReader::SaveFile(const QString& filename,
     utimensat(0, QFile::encodeName(filename).constData(), nullptr, 0);
   }
 #endif  // Q_OS_LINUX
+  
+  return ret;
+}
 
+// Replacing SaveFile for single tag editting (e.g. in playlist)
+// as full store operation (especially when file was mp4) failed
+// This code performs single tag insert/update/delete and
+// relies on taglib's PropertyMap to handle file variants.
+bool TagReader::UpdateSongTag(const QString& filename,
+			      const QString& tagname,
+			      const QString& tagvalue) const {
+
+  //qLog(Debug) << "UpdateSongTag of " << filename << " tag " << tagname << " value " << tagvalue;
+
+  if (filename.isNull()) return false;
+
+  std::unique_ptr<TagLib::FileRef> fileref(factory_->GetFileRef(filename));
+  if (!fileref || fileref->isNull())  // The file probably doesn't exist
+    return false;
+
+ 
+  // according taglib tagwriter example
+  // to save basic attributes see SaveFile
+  
+  TagLib::PropertyMap map = fileref->file()->properties();
+
+  TagLib::String key = QStringToTaglibString(tagname);
+
+  if (tagvalue.isEmpty())
+    map.erase(key);
+  else
+    // inserts too if not yet
+    map.replace(key, QStringToTaglibString(tagvalue));
+
+  //qLog(Debug) << TStringToQString(map.toString());
+
+  fileref->file()->setProperties(map);
+  bool ret = fileref->save();
+
+#ifdef Q_OS_LINUX
+  if (ret) {
+    // Linux: inotify doesn't seem to notice the change to the file unless we
+    // change the timestamps as well. (this is what touch does)
+    utimensat(0, QFile::encodeName(filename).constData(), nullptr, 0);
+  }
+#endif  // Q_OS_LINUX
+  
   return ret;
 }
 

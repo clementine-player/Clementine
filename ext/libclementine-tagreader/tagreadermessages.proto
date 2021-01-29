@@ -106,6 +106,16 @@ message ReadCloudFileResponse {
   optional SongMetadata metadata = 1;
 }
 
+message SaveSongTagToFileRequest {
+  optional string filename = 1;
+  optional string tagname = 2;
+  optional string tagvalue = 3;
+}
+
+message SaveSongTagToFileResponse {
+  optional bool success = 1;
+}
+
 message SaveSongStatisticsToFileRequest {
   optional string filename = 1;
   optional SongMetadata metadata = 2;
@@ -147,4 +157,8 @@ message Message {
   
   optional SaveSongRatingToFileRequest save_song_rating_to_file_request = 14;
   optional SaveSongRatingToFileResponse save_song_rating_to_file_response = 15;
+  optional SaveSongTagToFileRequest save_song_tag_to_file_request = 16;
+
+  optional SaveSongTagToFileResponse save_song_tag_to_file_response = 17;
+
 }

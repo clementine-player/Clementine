@@ -62,6 +62,10 @@ class TagReader {
                 const pb::tagreader::SongMetadata& song) const;
   // Returns false if something went wrong; returns true otherwise (might
   // returns true if the file exists but nothing has been written inside because
+  bool UpdateSongTag(const QString& filename,
+		     const QString& tagname,
+		     const QString& tagvalue) const;
+
   // statistics tag format is not supported for this kind of file)
   bool SaveSongStatisticsToFile(const QString& filename,
                                 const pb::tagreader::SongMetadata& song) const;

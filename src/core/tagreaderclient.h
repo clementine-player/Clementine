@@ -46,6 +46,8 @@ class TagReaderClient : public QObject {
 
   ReplyType* ReadFile(const QString& filename);
   ReplyType* SaveFile(const QString& filename, const Song& metadata);
+  ReplyType* UpdateSongTag(const QString& filename, const QString& tagname,
+			   const QVariant& tagvalue);
   ReplyType* UpdateSongStatistics(const Song& metadata);
   ReplyType* UpdateSongRating(const Song& metadata);
   ReplyType* IsMediaFile(const QString& filename);

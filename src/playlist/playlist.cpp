@@ -98,6 +98,46 @@ const int Playlist::kUndoItemLimit = 500;
 const qint64 Playlist::kMinScrobblePointNsecs = 31ll * kNsecPerSec;
 const qint64 Playlist::kMaxScrobblePointNsecs = 240ll * kNsecPerSec;
 
+// kColumns provides names to enum Columns.
+// When the playlist column is editable those names are used as names
+// for taglib writing to file. Names are caseinsensitive and often
+// 3rdparty/taglib/.../id3v2frame translations is base for naming used.
+// When playlist enum columns is changed the list below has to be adapted
+// accordingly. Lowercase written names miss a taglib equivalent and are
+// used for internal informations.
+// When adding lines to column enumeration: Try to add mappable taglib
+// properties.
+const QStringList Playlist::kColumns = QStringList() << "TITLE"
+						     << "ARTIST"
+						     << "ALBUM"
+						     << "ALBUMARTIST"
+						     << "COMPOSER"
+						     << "LENGTH"
+						     << "TRACKNUMBER"
+						     << "DISCNUMBER"
+						     << "DATE"
+						     << "GENRE"
+						     << "BPM"
+						     << "bitrate"
+						     << "samplerate"
+						     << "filename"
+						     << "basefilename"
+						     << "filesize"
+						     << "filetype"
+						     << "ctime"
+						     << "mtime"
+						     << "rating"
+						     << "playcount"
+						     << "skipcount"
+						     << "lastplayed"
+						     << "score"
+						     << "COMMENT"
+						     << "source"
+						     << "MOOD"
+						     << "performer"
+						     << "GROUPING"
+						     << "ORIGINALDATE";
+
 namespace {
 QString removePrefix(const QString& a, const QStringList& prefixes) {
   for (const QString& prefix : prefixes) {
@@ -212,6 +252,7 @@ bool Playlist::column_is_editable(Playlist::Column column) {
     case Column_Disc:
     case Column_Year:
     case Column_Genre:
+    case Column_BPM:
     case Column_Score:
     case Column_Comment:
       return true;
@@ -223,8 +264,10 @@ bool Playlist::column_is_editable(Playlist::Column column) {
 
 bool Playlist::set_column_value(Song& song, Playlist::Column column,
                                 const QVariant& value) {
-  if (!song.IsEditable()) return false;
-
+  if (!song.IsEditable()) {
+    qLog(Debug) << "PlayList::set_column_value not editable: " << column;
+    return false;
+  }
   switch (column) {
     case Column_Title:
       song.set_title(value.toString());
@@ -258,6 +301,9 @@ bool Playlist::set_column_value(Song& song, Playlist::Column column,
       break;
     case Column_Genre:
       song.set_genre(value.toString());
+      break;
+    case Column_BPM:
+      song.set_bpm(value.toFloat());
       break;
     case Column_Score:
       song.set_score(value.toInt());
@@ -431,8 +477,11 @@ bool Playlist::setData(const QModelIndex& index, const QVariant& value,
     library_->AddOrUpdateSongs(SongList() << song);
     emit EditingFinished(index);
   } else {
-    TagReaderReply* reply =
-        TagReaderClient::Instance()->SaveFile(song.url().toLocalFile(), song);
+    const QString name = Playlist::kColumns.at(index.column());
+    
+    // Update just that tag
+    TagReaderReply* reply = TagReaderClient::Instance()->UpdateSongTag(
+	song.url().toLocalFile(), name, value);
 
     NewClosure(reply, SIGNAL(Finished(bool)), this,
                SLOT(SongSaveComplete(TagReaderReply*, QPersistentModelIndex)),
@@ -444,15 +493,16 @@ bool Playlist::setData(const QModelIndex& index, const QVariant& value,
 void Playlist::SongSaveComplete(TagReaderReply* reply,
                                 const QPersistentModelIndex& index) {
   if (reply->is_successful() && index.isValid()) {
-    if (reply->message().save_file_response().success()) {
+    if (reply->message().save_song_tag_to_file_response().success()) {
       QFuture<void> future = item_at(index.row())->BackgroundReload();
       NewClosure(future, this, SLOT(ItemReloadComplete(QPersistentModelIndex)),
                  index);
     } else {
       emit Error(
           tr("An error occurred writing metadata to '%1'")
-              .arg(QString::fromStdString(
-                  reply->request_message().save_file_request().filename())));
+              .arg(QString::fromStdString(reply->request_message()
+					  .save_song_tag_to_file_request()
+					  .filename())));
     }
   }
   reply->deleteLater();
