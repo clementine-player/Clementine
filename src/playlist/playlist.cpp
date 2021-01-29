@@ -107,37 +107,36 @@ const qint64 Playlist::kMaxScrobblePointNsecs = 240ll * kNsecPerSec;
 // used for internal informations.
 // When adding lines to column enumeration: Try to add mappable taglib
 // properties.
-const QStringList Playlist::kColumns = QStringList()
-  << "TITLE"
-  << "ARTIST"
-  << "ALBUM"
-  << "ALBUMARTIST"
-  << "COMPOSER"
-  << "LENGTH"
-  << "TRACKNUMBER"
-  << "DISCNUMBER"
-  << "DATE"
-  << "GENRE"	
-  << "BPM"
-  << "bitrate"
-  << "samplerate"
-  << "filename"
-  << "basefilename"
-  << "filesize"
-  << "filetype"
-  << "ctime"
-  << "mtime"
-  << "rating"
-  << "playcount"
-  << "skipcount"
-  << "lastplayed"
-  << "score"
-  << "COMMENT"
-  << "source"
-  << "MOOD"
-  << "performer"
-  << "GROUPING"
-  << "ORIGINALDATE";
+const QStringList Playlist::kColumns = QStringList() << "TITLE"
+						     << "ARTIST"
+						     << "ALBUM"
+						     << "ALBUMARTIST"
+						     << "COMPOSER"
+						     << "LENGTH"
+						     << "TRACKNUMBER"
+						     << "DISCNUMBER"
+						     << "DATE"
+						     << "GENRE"
+						     << "BPM"
+						     << "bitrate"
+						     << "samplerate"
+						     << "filename"
+						     << "basefilename"
+						     << "filesize"
+						     << "filetype"
+						     << "ctime"
+						     << "mtime"
+						     << "rating"
+						     << "playcount"
+						     << "skipcount"
+						     << "lastplayed"
+						     << "score"
+						     << "COMMENT"
+						     << "source"
+						     << "MOOD"
+						     << "performer"
+						     << "GROUPING"
+						     << "ORIGINALDATE";
 
 namespace {
 QString removePrefix(const QString& a, const QStringList& prefixes) {
@@ -478,15 +477,11 @@ bool Playlist::setData(const QModelIndex& index, const QVariant& value,
     library_->AddOrUpdateSongs(SongList() << song);
     emit EditingFinished(index);
   } else {
-    qLog(Debug) << "Playlist::setData file: " << song.url().toLocalFile();
-    const QString name = Playlist::kColumns.at(index.column());    
-    qLog(Debug) << "Playlist::setData name: " << name;
-    qLog(Debug) << "Playlist::setData value: " << value;
+    const QString name = Playlist::kColumns.at(index.column());
     
     // Update just that tag
-    TagReaderReply* reply =
-      TagReaderClient::Instance()->UpdateSongTag(song.url().toLocalFile(),
-						 name, value);
+    TagReaderReply* reply = TagReaderClient::Instance()->UpdateSongTag(
+	song.url().toLocalFile(), name, value);
 
     NewClosure(reply, SIGNAL(Finished(bool)), this,
                SLOT(SongSaveComplete(TagReaderReply*, QPersistentModelIndex)),
@@ -505,8 +500,9 @@ void Playlist::SongSaveComplete(TagReaderReply* reply,
     } else {
       emit Error(
           tr("An error occurred writing metadata to '%1'")
-              .arg(QString::fromStdString(
-                  reply->request_message().save_song_tag_to_file_request().filename())));
+              .arg(QString::fromStdString(reply->request_message()
+					  .save_song_tag_to_file_request()
+					  .filename())));
     }
   }
   reply->deleteLater();
