@@ -66,17 +66,11 @@ TagReaderReply* TagReaderClient::ReadFile(const QString& filename) {
   return worker_pool_->SendMessageWithReply(&message);
 }
 
-//TODO: remove form based metadataeditting (./src/ui/edittagdialog.cpp)
-// shall be used only for new created (e.g. ripper, podcast, ...) files
-// any other editting shall be replaced by field level changes, see below 
 TagReaderReply* TagReaderClient::SaveFile(const QString& filename,
                                           const Song& metadata) {
   pb::tagreader::Message message;
   pb::tagreader::SaveFileRequest* req = message.mutable_save_file_request();
 
-
-  qLog(Debug) << "TagReaderClient::SaveFile: " << filename;
-  
   req->set_filename(DataCommaSizeFromQString(filename));
   metadata.ToProtobuf(req->mutable_metadata());
 
@@ -94,9 +88,6 @@ TagReaderReply* TagReaderClient::UpdateSongTag(const QString& filename,
   pb::tagreader::SaveSongTagToFileRequest* req =
       message.mutable_save_song_tag_to_file_request();
 
-  qLog(Debug) << "TagReaderClient::SaveSongTag: " << filename
-	      << " tag: " << tagname << " value: " << tagvalue;
-  
   req->set_filename(DataCommaSizeFromQString(filename));
   req->set_tagname(DataCommaSizeFromQString(tagname));
   req->set_tagvalue(DataCommaSizeFromQString(tagvalue.toString()));
