@@ -22,7 +22,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2021-01-26 23:47+0000\n"
+"PO-Revision-Date: 2021-01-29 22:42+0000\n"
 "Last-Translator: John Maguire <john.maguire@gmail.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/davidsansome/clementine/language/zh_CN/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -176,19 +176,19 @@ msgstr ""
 msgid "%filename%"
 msgstr "%f文件名%"
 
-#: transcoder/transcodedialog.cpp:214
+#: transcoder/transcodedialog.cpp:236
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n failed"
 msgstr "%n 失败"
 
-#: transcoder/transcodedialog.cpp:209
+#: transcoder/transcodedialog.cpp:231
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n finished"
 msgstr "%n 完成"
 
-#: transcoder/transcodedialog.cpp:203
+#: transcoder/transcodedialog.cpp:225
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n remaining"
@@ -540,11 +540,11 @@ msgstr "添加文件至转码器"
 msgid "Add file..."
 msgstr "添加文件..."
 
-#: transcoder/transcodedialog.cpp:224
+#: transcoder/transcodedialog.cpp:246
 msgid "Add files to transcode"
 msgstr "添加需转码文件"
 
-#: transcoder/transcodedialog.cpp:307 ui/mainwindow.cpp:2196
+#: transcoder/transcodedialog.cpp:329 ui/mainwindow.cpp:2196
 #: ripper/ripcddialog.cpp:202
 msgid "Add folder"
 msgstr "添加文件夹"
@@ -1183,7 +1183,7 @@ msgstr "古典"
 msgid "Cleaning up"
 msgstr "清理"
 
-#: transcoder/transcodedialog.cpp:64 widgets/lineedit.cpp:42
+#: transcoder/transcodedialog.cpp:66 widgets/lineedit.cpp:42
 #: ../bin/src/ui_queuemanager.h:155
 msgid "Clear"
 msgstr "清除"
@@ -1493,14 +1493,14 @@ msgstr "无法登录Last.fm.请再试一次。"
 msgid "Couldn't create playlist"
 msgstr "无法创建列表"
 
-#: transcoder/transcoder.cpp:434
+#: transcoder/transcoder.cpp:435
 #, qt-format
 msgid ""
 "Couldn't find a muxer for %1, check you have the correct GStreamer plugins "
 "installed"
 msgstr "无法为%1找到混音器，请检查是否安装了正确的Gstreamer插件"
 
-#: transcoder/transcoder.cpp:427
+#: transcoder/transcoder.cpp:428
 #, qt-format
 msgid ""
 "Couldn't find an encoder for %1, check you have the correct GStreamer "
@@ -1969,6 +1969,10 @@ msgstr "Dropbox"
 msgid "Dubstep"
 msgstr "回响贝斯"
 
+#: transcoder/transcodedialog.cpp:70
+msgid "Dump Graph"
+msgstr ""
+
 #: ../bin/src/ui_gstenginedebug.h:68
 msgid "Dump Pipeline Graph"
 msgstr ""
@@ -2168,7 +2172,7 @@ msgstr "载入 %1 出错"
 msgid "Error loading di.fm playlist"
 msgstr "读取di.fm播放列表错误"
 
-#: transcoder/transcoder.cpp:399
+#: transcoder/transcoder.cpp:400
 #, qt-format
 msgid "Error processing %1: %2"
 msgstr "处理 %1 出错：%2"
@@ -3115,7 +3119,7 @@ msgstr "登录"
 msgid "Login failed"
 msgstr "登录失败"
 
-#: ../bin/src/ui_transcodelogdialog.h:107
+#: ../bin/src/ui_transcodelogdialog.h:108
 msgid "Logs"
 msgstr ""
 
@@ -3351,7 +3355,7 @@ msgstr "移动至媒体库..."
 msgid "Move up"
 msgstr "上移"
 
-#: transcoder/transcodedialog.cpp:226 ui/mainwindow.cpp:2171
+#: transcoder/transcodedialog.cpp:248 ui/mainwindow.cpp:2171
 msgid "Music"
 msgstr "音乐"
 
@@ -3637,7 +3641,7 @@ msgstr "打开 OPML 文件"
 msgid "Open OPML file..."
 msgstr "打开 OPML 文件…"
 
-#: transcoder/transcodedialog.cpp:241
+#: transcoder/transcodedialog.cpp:263
 msgid "Open a directory to import music from"
 msgstr "打开目录导入音乐"
 
@@ -3807,7 +3811,7 @@ msgstr "表演者"
 msgid "Pipeline"
 msgstr ""
 
-#: ../bin/src/ui_transcodelogdialog.h:106
+#: ../bin/src/ui_transcodelogdialog.h:107
 msgid "Pipelines"
 msgstr ""
 
@@ -4965,7 +4969,7 @@ msgstr "开始抓轨"
 msgid "Start the playlist currently playing"
 msgstr "开始播放当前播放列表"
 
-#: transcoder/transcodedialog.cpp:93
+#: transcoder/transcodedialog.cpp:102
 msgid "Start transcoding"
 msgstr "开始转换"
 
@@ -4975,7 +4979,7 @@ msgid ""
 "list"
 msgstr "请在上方搜索栏中输入一些词条，来充实搜索结果列表"
 
-#: transcoder/transcoder.cpp:406
+#: transcoder/transcoder.cpp:407
 #, qt-format
 msgid "Starting %1"
 msgstr "正在开始 %1"
@@ -5366,7 +5370,7 @@ msgstr "曲目"
 msgid "Transcode Music"
 msgstr "音乐转码"
 
-#: ../bin/src/ui_transcodelogdialog.h:105
+#: ../bin/src/ui_transcodelogdialog.h:106
 msgid "Transcoder Details"
 msgstr ""
 

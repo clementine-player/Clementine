@@ -16,7 +16,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2021-01-26 23:47+0000\n"
+"PO-Revision-Date: 2021-01-29 22:42+0000\n"
 "Last-Translator: John Maguire <john.maguire@gmail.com>\n"
 "Language-Team: Catalan (http://www.transifex.com/davidsansome/clementine/language/ca/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -170,19 +170,19 @@ msgstr "%L1 peces"
 msgid "%filename%"
 msgstr "%filename%"
 
-#: transcoder/transcodedialog.cpp:214
+#: transcoder/transcodedialog.cpp:236
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n failed"
 msgstr "%n han fallat"
 
-#: transcoder/transcodedialog.cpp:209
+#: transcoder/transcodedialog.cpp:231
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n finished"
 msgstr "%n han acabat"
 
-#: transcoder/transcodedialog.cpp:203
+#: transcoder/transcodedialog.cpp:225
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n remaining"
@@ -534,11 +534,11 @@ msgstr "Afegeix fitxer(s) al convertidor"
 msgid "Add file..."
 msgstr "Afegeix un fitxer…"
 
-#: transcoder/transcodedialog.cpp:224
+#: transcoder/transcodedialog.cpp:246
 msgid "Add files to transcode"
 msgstr "Afegeix fitxers per convertir-los"
 
-#: transcoder/transcodedialog.cpp:307 ui/mainwindow.cpp:2196
+#: transcoder/transcodedialog.cpp:329 ui/mainwindow.cpp:2196
 #: ripper/ripcddialog.cpp:202
 msgid "Add folder"
 msgstr "Afegeix una carpeta"
@@ -1177,7 +1177,7 @@ msgstr "Clàssica"
 msgid "Cleaning up"
 msgstr "S’està netejant"
 
-#: transcoder/transcodedialog.cpp:64 widgets/lineedit.cpp:42
+#: transcoder/transcodedialog.cpp:66 widgets/lineedit.cpp:42
 #: ../bin/src/ui_queuemanager.h:155
 msgid "Clear"
 msgstr "Neteja"
@@ -1487,14 +1487,14 @@ msgstr "No s'ha pogut iniciar sessió a Last.fm. Si us plau, proveu-ho de nou."
 msgid "Couldn't create playlist"
 msgstr "No s’ha pogut crear la llista de reproducció"
 
-#: transcoder/transcoder.cpp:434
+#: transcoder/transcoder.cpp:435
 #, qt-format
 msgid ""
 "Couldn't find a muxer for %1, check you have the correct GStreamer plugins "
 "installed"
 msgstr "No s’ha pogut trobar un muxer per %1. Comproveu que teniu els connectors adequats de GStreamer instal·lats"
 
-#: transcoder/transcoder.cpp:427
+#: transcoder/transcoder.cpp:428
 #, qt-format
 msgid ""
 "Couldn't find an encoder for %1, check you have the correct GStreamer "
@@ -1963,6 +1963,10 @@ msgstr "Dropbox"
 msgid "Dubstep"
 msgstr "Dubstep"
 
+#: transcoder/transcodedialog.cpp:70
+msgid "Dump Graph"
+msgstr ""
+
 #: ../bin/src/ui_gstenginedebug.h:68
 msgid "Dump Pipeline Graph"
 msgstr "Buida el graf del pipeline"
@@ -2162,7 +2166,7 @@ msgstr "S’ha produït un error en carregar %1"
 msgid "Error loading di.fm playlist"
 msgstr "S’ha produït un error en carregar la llista de reproducció del di.fm"
 
-#: transcoder/transcoder.cpp:399
+#: transcoder/transcoder.cpp:400
 #, qt-format
 msgid "Error processing %1: %2"
 msgstr "S’ha produït un error en processar %1: %2"
@@ -2247,7 +2251,7 @@ msgstr "S’han exportat %1 caràtules de %2 (s’han omès %3)"
 
 #: ../bin/src/ui_mainwindow.h:790
 msgid "F9"
-msgstr ""
+msgstr "F9"
 
 #: core/song.cpp:429 transcoder/transcoder.cpp:240
 #: ../bin/src/ui_magnatunedownloaddialog.h:136
@@ -3109,7 +3113,7 @@ msgstr "Entra"
 msgid "Login failed"
 msgstr "Ha fallat l'inici de sessió"
 
-#: ../bin/src/ui_transcodelogdialog.h:107
+#: ../bin/src/ui_transcodelogdialog.h:108
 msgid "Logs"
 msgstr "Registres"
 
@@ -3345,7 +3349,7 @@ msgstr "Mou a la col·lecció…"
 msgid "Move up"
 msgstr "Mou cap amunt"
 
-#: transcoder/transcodedialog.cpp:226 ui/mainwindow.cpp:2171
+#: transcoder/transcodedialog.cpp:248 ui/mainwindow.cpp:2171
 msgid "Music"
 msgstr "Música"
 
@@ -3437,7 +3441,7 @@ msgstr "Següent"
 
 #: ../bin/src/ui_mainwindow.h:785
 msgid "Next album"
-msgstr ""
+msgstr "Àlbum següent"
 
 #: core/globalshortcuts.cpp:59 wiimotedev/wiimotesettingspage.cpp:105
 #: ../bin/src/ui_mainwindow.h:727
@@ -3631,7 +3635,7 @@ msgstr "Obre un fitxer OPML"
 msgid "Open OPML file..."
 msgstr "Obre un fitxer OPML…"
 
-#: transcoder/transcodedialog.cpp:241
+#: transcoder/transcodedialog.cpp:263
 msgid "Open a directory to import music from"
 msgstr "Obriu una carpeta des d’on s’importarà la música"
 
@@ -3801,7 +3805,7 @@ msgstr "Intèrpret"
 msgid "Pipeline"
 msgstr "Pipeline"
 
-#: ../bin/src/ui_transcodelogdialog.h:106
+#: ../bin/src/ui_transcodelogdialog.h:107
 msgid "Pipelines"
 msgstr "Pipelines"
 
@@ -4840,7 +4844,7 @@ msgstr "Omet les peces seleccionades"
 
 #: ../bin/src/ui_mainwindow.h:787
 msgid "Skip to the next album"
-msgstr ""
+msgstr "Passa a l'àlbum següent"
 
 #: ui/mainwindow.cpp:1901
 msgid "Skip track"
@@ -4959,7 +4963,7 @@ msgstr "Inicia la captura"
 msgid "Start the playlist currently playing"
 msgstr "Inicia la llista de reproducció que s'està reproduint"
 
-#: transcoder/transcodedialog.cpp:93
+#: transcoder/transcodedialog.cpp:102
 msgid "Start transcoding"
 msgstr "Inicia la conversió"
 
@@ -4969,7 +4973,7 @@ msgid ""
 "list"
 msgstr "Comenceu a escriure quelcom al quadre de cerca de dalt per omplir-ne la llista de resultats"
 
-#: transcoder/transcoder.cpp:406
+#: transcoder/transcoder.cpp:407
 #, qt-format
 msgid "Starting %1"
 msgstr "S’està començant %1"
@@ -5360,7 +5364,7 @@ msgstr "Peça"
 msgid "Transcode Music"
 msgstr "Converteix música"
 
-#: ../bin/src/ui_transcodelogdialog.h:105
+#: ../bin/src/ui_transcodelogdialog.h:106
 msgid "Transcoder Details"
 msgstr "Detalls del transcodificador"
 

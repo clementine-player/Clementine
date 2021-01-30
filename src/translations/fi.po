@@ -13,8 +13,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2021-01-27 10:40+0000\n"
-"Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
+"PO-Revision-Date: 2021-01-29 22:42+0000\n"
+"Last-Translator: John Maguire <john.maguire@gmail.com>\n"
 "Language-Team: Finnish (http://www.transifex.com/davidsansome/clementine/language/fi/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -167,19 +167,19 @@ msgstr "%L1 kappaletta"
 msgid "%filename%"
 msgstr "%filename%"
 
-#: transcoder/transcodedialog.cpp:214
+#: transcoder/transcodedialog.cpp:236
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n failed"
 msgstr "%n epäonnistui"
 
-#: transcoder/transcodedialog.cpp:209
+#: transcoder/transcodedialog.cpp:231
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n finished"
 msgstr "%n valmistui"
 
-#: transcoder/transcodedialog.cpp:203
+#: transcoder/transcodedialog.cpp:225
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n remaining"
@@ -531,11 +531,11 @@ msgstr "Lisää tiedosto(ja) muuntajaan"
 msgid "Add file..."
 msgstr "Lisää tiedosto..."
 
-#: transcoder/transcodedialog.cpp:224
+#: transcoder/transcodedialog.cpp:246
 msgid "Add files to transcode"
 msgstr "Lisää tiedostoja muunnettavaksi"
 
-#: transcoder/transcodedialog.cpp:307 ui/mainwindow.cpp:2196
+#: transcoder/transcodedialog.cpp:329 ui/mainwindow.cpp:2196
 #: ripper/ripcddialog.cpp:202
 msgid "Add folder"
 msgstr "Lisää kansio"
@@ -1174,7 +1174,7 @@ msgstr "Classical"
 msgid "Cleaning up"
 msgstr "Siivoaminen"
 
-#: transcoder/transcodedialog.cpp:64 widgets/lineedit.cpp:42
+#: transcoder/transcodedialog.cpp:66 widgets/lineedit.cpp:42
 #: ../bin/src/ui_queuemanager.h:155
 msgid "Clear"
 msgstr "Tyhjennä"
@@ -1484,14 +1484,14 @@ msgstr "Kirjautuminen Last.fm:ään ei onnistunut. Yritä uudelleen."
 msgid "Couldn't create playlist"
 msgstr "Soittolistan luominen epäonnistui"
 
-#: transcoder/transcoder.cpp:434
+#: transcoder/transcoder.cpp:435
 #, qt-format
 msgid ""
 "Couldn't find a muxer for %1, check you have the correct GStreamer plugins "
 "installed"
 msgstr "Ei löydetty %1 -multiplekseriä, tarkista että sinulla on oikeat GStreamer-liitännäiset asennettuna"
 
-#: transcoder/transcoder.cpp:427
+#: transcoder/transcoder.cpp:428
 #, qt-format
 msgid ""
 "Couldn't find an encoder for %1, check you have the correct GStreamer "
@@ -1960,6 +1960,10 @@ msgstr "Dropbox"
 msgid "Dubstep"
 msgstr "Dubstep"
 
+#: transcoder/transcodedialog.cpp:70
+msgid "Dump Graph"
+msgstr ""
+
 #: ../bin/src/ui_gstenginedebug.h:68
 msgid "Dump Pipeline Graph"
 msgstr "Tyhjennä putkikaavio"
@@ -2159,7 +2163,7 @@ msgstr "Virhe ladattaessa %1"
 msgid "Error loading di.fm playlist"
 msgstr "Virhe ladattaessa di.fm soittolistaa"
 
-#: transcoder/transcoder.cpp:399
+#: transcoder/transcoder.cpp:400
 #, qt-format
 msgid "Error processing %1: %2"
 msgstr "Virhe käsitellessä %1:%2"
@@ -3106,7 +3110,7 @@ msgstr "Kirjaudu sisään"
 msgid "Login failed"
 msgstr "Kirjautuminen epäonnistui"
 
-#: ../bin/src/ui_transcodelogdialog.h:107
+#: ../bin/src/ui_transcodelogdialog.h:108
 msgid "Logs"
 msgstr "Lokit"
 
@@ -3342,7 +3346,7 @@ msgstr "Siirrä kirjastoon..."
 msgid "Move up"
 msgstr "Siirrä ylös"
 
-#: transcoder/transcodedialog.cpp:226 ui/mainwindow.cpp:2171
+#: transcoder/transcodedialog.cpp:248 ui/mainwindow.cpp:2171
 msgid "Music"
 msgstr "Musiikki"
 
@@ -3628,7 +3632,7 @@ msgstr "Avaa OPML-tiedosto"
 msgid "Open OPML file..."
 msgstr "Avaa OPML-tiedosto..."
 
-#: transcoder/transcodedialog.cpp:241
+#: transcoder/transcodedialog.cpp:263
 msgid "Open a directory to import music from"
 msgstr "Avaa kansio, josta musiikki tuodaan"
 
@@ -3798,7 +3802,7 @@ msgstr "Esittäjä"
 msgid "Pipeline"
 msgstr "Putkisto"
 
-#: ../bin/src/ui_transcodelogdialog.h:106
+#: ../bin/src/ui_transcodelogdialog.h:107
 msgid "Pipelines"
 msgstr "Putkisto"
 
@@ -4956,7 +4960,7 @@ msgstr "Aloita levyn kopiointi"
 msgid "Start the playlist currently playing"
 msgstr "Käynnistä toistettava soittolista"
 
-#: transcoder/transcodedialog.cpp:93
+#: transcoder/transcodedialog.cpp:102
 msgid "Start transcoding"
 msgstr "Aloita muunnos"
 
@@ -4966,7 +4970,7 @@ msgid ""
 "list"
 msgstr "Kirjoita jotain yllä olevaan hakukenttään täyttääksesi tämän hakutuloslistan"
 
-#: transcoder/transcoder.cpp:406
+#: transcoder/transcoder.cpp:407
 #, qt-format
 msgid "Starting %1"
 msgstr "Aloittaa %1"
@@ -5357,7 +5361,7 @@ msgstr "Kappale"
 msgid "Transcode Music"
 msgstr "Muunna eri muotoon"
 
-#: ../bin/src/ui_transcodelogdialog.h:105
+#: ../bin/src/ui_transcodelogdialog.h:106
 msgid "Transcoder Details"
 msgstr "Muuntimen tiedot"
 

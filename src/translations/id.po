@@ -28,7 +28,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2021-01-26 23:47+0000\n"
+"PO-Revision-Date: 2021-01-29 22:42+0000\n"
 "Last-Translator: John Maguire <john.maguire@gmail.com>\n"
 "Language-Team: Indonesian (http://www.transifex.com/davidsansome/clementine/language/id/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -182,19 +182,19 @@ msgstr ""
 msgid "%filename%"
 msgstr "%nama berkas%"
 
-#: transcoder/transcodedialog.cpp:214
+#: transcoder/transcodedialog.cpp:236
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n failed"
 msgstr "%n gagal"
 
-#: transcoder/transcodedialog.cpp:209
+#: transcoder/transcodedialog.cpp:231
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n finished"
 msgstr "%n telah selesai"
 
-#: transcoder/transcodedialog.cpp:203
+#: transcoder/transcodedialog.cpp:225
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n remaining"
@@ -546,11 +546,11 @@ msgstr "Tambah berkas ke transkoder"
 msgid "Add file..."
 msgstr "Tambah berkas..."
 
-#: transcoder/transcodedialog.cpp:224
+#: transcoder/transcodedialog.cpp:246
 msgid "Add files to transcode"
 msgstr "Tambah berkas untuk ditranskode"
 
-#: transcoder/transcodedialog.cpp:307 ui/mainwindow.cpp:2196
+#: transcoder/transcodedialog.cpp:329 ui/mainwindow.cpp:2196
 #: ripper/ripcddialog.cpp:202
 msgid "Add folder"
 msgstr "Tambah folder"
@@ -1189,7 +1189,7 @@ msgstr "Klasik"
 msgid "Cleaning up"
 msgstr "Pembersihan"
 
-#: transcoder/transcodedialog.cpp:64 widgets/lineedit.cpp:42
+#: transcoder/transcodedialog.cpp:66 widgets/lineedit.cpp:42
 #: ../bin/src/ui_queuemanager.h:155
 msgid "Clear"
 msgstr "Bersihkan"
@@ -1499,14 +1499,14 @@ msgstr ""
 msgid "Couldn't create playlist"
 msgstr "Tidak bisa membuat daftar-putar"
 
-#: transcoder/transcoder.cpp:434
+#: transcoder/transcoder.cpp:435
 #, qt-format
 msgid ""
 "Couldn't find a muxer for %1, check you have the correct GStreamer plugins "
 "installed"
 msgstr "Tidak dapat menemukan muxer untuk %1, periksa apakah Anda memiliki plugin GStreamer yang benar terpasang"
 
-#: transcoder/transcoder.cpp:427
+#: transcoder/transcoder.cpp:428
 #, qt-format
 msgid ""
 "Couldn't find an encoder for %1, check you have the correct GStreamer "
@@ -1975,6 +1975,10 @@ msgstr "Dropbox"
 msgid "Dubstep"
 msgstr "Dubstep"
 
+#: transcoder/transcodedialog.cpp:70
+msgid "Dump Graph"
+msgstr ""
+
 #: ../bin/src/ui_gstenginedebug.h:68
 msgid "Dump Pipeline Graph"
 msgstr ""
@@ -2174,7 +2178,7 @@ msgstr "Galat memuat %1"
 msgid "Error loading di.fm playlist"
 msgstr "Galat memuat daftar-putar di.fm"
 
-#: transcoder/transcoder.cpp:399
+#: transcoder/transcoder.cpp:400
 #, qt-format
 msgid "Error processing %1: %2"
 msgstr "Galat memroses %1: %2"
@@ -3121,7 +3125,7 @@ msgstr "Masuk"
 msgid "Login failed"
 msgstr "Gagal masuk"
 
-#: ../bin/src/ui_transcodelogdialog.h:107
+#: ../bin/src/ui_transcodelogdialog.h:108
 msgid "Logs"
 msgstr ""
 
@@ -3357,7 +3361,7 @@ msgstr "Pindah ke pustaka..."
 msgid "Move up"
 msgstr "Pindah naik"
 
-#: transcoder/transcodedialog.cpp:226 ui/mainwindow.cpp:2171
+#: transcoder/transcodedialog.cpp:248 ui/mainwindow.cpp:2171
 msgid "Music"
 msgstr "Musik"
 
@@ -3643,7 +3647,7 @@ msgstr "Buka berkas OPML"
 msgid "Open OPML file..."
 msgstr "Buka berkas OPML..."
 
-#: transcoder/transcodedialog.cpp:241
+#: transcoder/transcodedialog.cpp:263
 msgid "Open a directory to import music from"
 msgstr "Buka sebuah direktori untuk mengimpor musik dari"
 
@@ -3813,7 +3817,7 @@ msgstr "Penampil"
 msgid "Pipeline"
 msgstr ""
 
-#: ../bin/src/ui_transcodelogdialog.h:106
+#: ../bin/src/ui_transcodelogdialog.h:107
 msgid "Pipelines"
 msgstr ""
 
@@ -4971,7 +4975,7 @@ msgstr "Mulai merabit"
 msgid "Start the playlist currently playing"
 msgstr "Mulai daftar-putar yang diputar saat ini"
 
-#: transcoder/transcodedialog.cpp:93
+#: transcoder/transcodedialog.cpp:102
 msgid "Start transcoding"
 msgstr "Mulai transkode"
 
@@ -4981,7 +4985,7 @@ msgid ""
 "list"
 msgstr "Mulai mengetik sesuatu di kotak pencarian di atas untuk mengisi daftar hasil pencarian ini"
 
-#: transcoder/transcoder.cpp:406
+#: transcoder/transcoder.cpp:407
 #, qt-format
 msgid "Starting %1"
 msgstr "Memulai %1"
@@ -5372,7 +5376,7 @@ msgstr "Trek"
 msgid "Transcode Music"
 msgstr "Transkode Musik"
 
-#: ../bin/src/ui_transcodelogdialog.h:105
+#: ../bin/src/ui_transcodelogdialog.h:106
 msgid "Transcoder Details"
 msgstr ""
 

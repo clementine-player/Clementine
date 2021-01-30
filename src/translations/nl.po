@@ -18,7 +18,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2021-01-26 23:47+0000\n"
+"PO-Revision-Date: 2021-01-29 22:42+0000\n"
 "Last-Translator: John Maguire <john.maguire@gmail.com>\n"
 "Language-Team: Dutch (http://www.transifex.com/davidsansome/clementine/language/nl/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -172,19 +172,19 @@ msgstr ""
 msgid "%filename%"
 msgstr "%filename%"
 
-#: transcoder/transcodedialog.cpp:214
+#: transcoder/transcodedialog.cpp:236
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n failed"
 msgstr "%n mislukt"
 
-#: transcoder/transcodedialog.cpp:209
+#: transcoder/transcodedialog.cpp:231
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n finished"
 msgstr "%n voltooid"
 
-#: transcoder/transcodedialog.cpp:203
+#: transcoder/transcodedialog.cpp:225
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n remaining"
@@ -536,11 +536,11 @@ msgstr "Bestand(en) toevoegen voor conversie."
 msgid "Add file..."
 msgstr "Bestand toevoegen…"
 
-#: transcoder/transcodedialog.cpp:224
+#: transcoder/transcodedialog.cpp:246
 msgid "Add files to transcode"
 msgstr "Te converteren bestanden toevoegen"
 
-#: transcoder/transcodedialog.cpp:307 ui/mainwindow.cpp:2196
+#: transcoder/transcodedialog.cpp:329 ui/mainwindow.cpp:2196
 #: ripper/ripcddialog.cpp:202
 msgid "Add folder"
 msgstr "Map toevoegen"
@@ -1179,7 +1179,7 @@ msgstr "Klassiek"
 msgid "Cleaning up"
 msgstr "Bezig met opschonen"
 
-#: transcoder/transcodedialog.cpp:64 widgets/lineedit.cpp:42
+#: transcoder/transcodedialog.cpp:66 widgets/lineedit.cpp:42
 #: ../bin/src/ui_queuemanager.h:155
 msgid "Clear"
 msgstr "Wissen"
@@ -1489,14 +1489,14 @@ msgstr "Kon niet inloggen bij last.fm. Probeer het nog eens."
 msgid "Couldn't create playlist"
 msgstr "Kon afspeellijst niet maken"
 
-#: transcoder/transcoder.cpp:434
+#: transcoder/transcoder.cpp:435
 #, qt-format
 msgid ""
 "Couldn't find a muxer for %1, check you have the correct GStreamer plugins "
 "installed"
 msgstr "Kan muxer voor %1 niet vinden, controleer of u de juiste GStreamer plug-ins geïnstalleerd heeft"
 
-#: transcoder/transcoder.cpp:427
+#: transcoder/transcoder.cpp:428
 #, qt-format
 msgid ""
 "Couldn't find an encoder for %1, check you have the correct GStreamer "
@@ -1965,6 +1965,10 @@ msgstr "Dropbox"
 msgid "Dubstep"
 msgstr "Dubstep"
 
+#: transcoder/transcodedialog.cpp:70
+msgid "Dump Graph"
+msgstr ""
+
 #: ../bin/src/ui_gstenginedebug.h:68
 msgid "Dump Pipeline Graph"
 msgstr ""
@@ -2164,7 +2168,7 @@ msgstr "Fout bij laden van %1"
 msgid "Error loading di.fm playlist"
 msgstr "Fout bij laden di.fm afspeellijst"
 
-#: transcoder/transcoder.cpp:399
+#: transcoder/transcoder.cpp:400
 #, qt-format
 msgid "Error processing %1: %2"
 msgstr "Fout bij verwerken van %1: %2"
@@ -3111,7 +3115,7 @@ msgstr "Inloggen"
 msgid "Login failed"
 msgstr "Inloggen mislukt"
 
-#: ../bin/src/ui_transcodelogdialog.h:107
+#: ../bin/src/ui_transcodelogdialog.h:108
 msgid "Logs"
 msgstr ""
 
@@ -3347,7 +3351,7 @@ msgstr "Naar bibliotheek verplaatsen…"
 msgid "Move up"
 msgstr "Omhoog verplaatsen"
 
-#: transcoder/transcodedialog.cpp:226 ui/mainwindow.cpp:2171
+#: transcoder/transcodedialog.cpp:248 ui/mainwindow.cpp:2171
 msgid "Music"
 msgstr "Muziek"
 
@@ -3633,7 +3637,7 @@ msgstr "OML bestand openen"
 msgid "Open OPML file..."
 msgstr "OML-bestand openen…"
 
-#: transcoder/transcodedialog.cpp:241
+#: transcoder/transcodedialog.cpp:263
 msgid "Open a directory to import music from"
 msgstr "Open een pad om muziek uit te importeren"
 
@@ -3803,7 +3807,7 @@ msgstr "Uitvoerend artiest"
 msgid "Pipeline"
 msgstr ""
 
-#: ../bin/src/ui_transcodelogdialog.h:106
+#: ../bin/src/ui_transcodelogdialog.h:107
 msgid "Pipelines"
 msgstr ""
 
@@ -4961,7 +4965,7 @@ msgstr "Begin met rippen"
 msgid "Start the playlist currently playing"
 msgstr "Momenteel spelende afspeellijst starten"
 
-#: transcoder/transcodedialog.cpp:93
+#: transcoder/transcodedialog.cpp:102
 msgid "Start transcoding"
 msgstr "Converteren starten"
 
@@ -4971,7 +4975,7 @@ msgid ""
 "list"
 msgstr "Typ iets in de bovenstaande zoekbalk om de lijst met zoekresultaten te zien"
 
-#: transcoder/transcoder.cpp:406
+#: transcoder/transcoder.cpp:407
 #, qt-format
 msgid "Starting %1"
 msgstr "%1 wordt gestart"
@@ -5362,7 +5366,7 @@ msgstr "Nummer"
 msgid "Transcode Music"
 msgstr "Muziek converteren"
 
-#: ../bin/src/ui_transcodelogdialog.h:105
+#: ../bin/src/ui_transcodelogdialog.h:106
 msgid "Transcoder Details"
 msgstr ""
 

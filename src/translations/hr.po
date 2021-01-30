@@ -12,7 +12,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2021-01-26 23:47+0000\n"
+"PO-Revision-Date: 2021-01-29 22:42+0000\n"
 "Last-Translator: John Maguire <john.maguire@gmail.com>\n"
 "Language-Team: Croatian (http://www.transifex.com/davidsansome/clementine/language/hr/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -166,19 +166,19 @@ msgstr ""
 msgid "%filename%"
 msgstr "%imefajla%"
 
-#: transcoder/transcodedialog.cpp:214
+#: transcoder/transcodedialog.cpp:236
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n failed"
 msgstr "%n nije uspjelo"
 
-#: transcoder/transcodedialog.cpp:209
+#: transcoder/transcodedialog.cpp:231
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n finished"
 msgstr "%n završeno"
 
-#: transcoder/transcodedialog.cpp:203
+#: transcoder/transcodedialog.cpp:225
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n remaining"
@@ -530,11 +530,11 @@ msgstr "Dodaj datoteku(e) u enkôder"
 msgid "Add file..."
 msgstr "Dodajte datoteku..."
 
-#: transcoder/transcodedialog.cpp:224
+#: transcoder/transcodedialog.cpp:246
 msgid "Add files to transcode"
 msgstr "Dodajte datoteku za transkôdiranje..."
 
-#: transcoder/transcodedialog.cpp:307 ui/mainwindow.cpp:2196
+#: transcoder/transcodedialog.cpp:329 ui/mainwindow.cpp:2196
 #: ripper/ripcddialog.cpp:202
 msgid "Add folder"
 msgstr "Dodajte mapu"
@@ -1173,7 +1173,7 @@ msgstr "Klasičan"
 msgid "Cleaning up"
 msgstr "Brisanje"
 
-#: transcoder/transcodedialog.cpp:64 widgets/lineedit.cpp:42
+#: transcoder/transcodedialog.cpp:66 widgets/lineedit.cpp:42
 #: ../bin/src/ui_queuemanager.h:155
 msgid "Clear"
 msgstr "Isprazni"
@@ -1483,14 +1483,14 @@ msgstr "Nemoguća prijava na Last.fm. Pokušajte ponovno."
 msgid "Couldn't create playlist"
 msgstr "Nemoguće stvaranje popisa izvođenja"
 
-#: transcoder/transcoder.cpp:434
+#: transcoder/transcoder.cpp:435
 #, qt-format
 msgid ""
 "Couldn't find a muxer for %1, check you have the correct GStreamer plugins "
 "installed"
 msgstr "Nije moguče pronaći muxer %1, provjerite imate li sve GStreamer pluginove instalirane"
 
-#: transcoder/transcoder.cpp:427
+#: transcoder/transcoder.cpp:428
 #, qt-format
 msgid ""
 "Couldn't find an encoder for %1, check you have the correct GStreamer "
@@ -1959,6 +1959,10 @@ msgstr "Dropbox"
 msgid "Dubstep"
 msgstr "Udvostručen korak"
 
+#: transcoder/transcodedialog.cpp:70
+msgid "Dump Graph"
+msgstr ""
+
 #: ../bin/src/ui_gstenginedebug.h:68
 msgid "Dump Pipeline Graph"
 msgstr ""
@@ -2158,7 +2162,7 @@ msgstr "Greška pri učitavanju %1"
 msgid "Error loading di.fm playlist"
 msgstr "Greška pri učitavanju di.fm popisa izvođenja"
 
-#: transcoder/transcoder.cpp:399
+#: transcoder/transcoder.cpp:400
 #, qt-format
 msgid "Error processing %1: %2"
 msgstr "Greška pri obradi %1: %2"
@@ -3105,7 +3109,7 @@ msgstr "Prijava"
 msgid "Login failed"
 msgstr "Neuspjela prijava"
 
-#: ../bin/src/ui_transcodelogdialog.h:107
+#: ../bin/src/ui_transcodelogdialog.h:108
 msgid "Logs"
 msgstr ""
 
@@ -3341,7 +3345,7 @@ msgstr "Premjesti u fonoteku..."
 msgid "Move up"
 msgstr "Pomakni gore"
 
-#: transcoder/transcodedialog.cpp:226 ui/mainwindow.cpp:2171
+#: transcoder/transcodedialog.cpp:248 ui/mainwindow.cpp:2171
 msgid "Music"
 msgstr "Glazba"
 
@@ -3627,7 +3631,7 @@ msgstr "Otvori OPML datoteku"
 msgid "Open OPML file..."
 msgstr "Otvori OPML datoteku..."
 
-#: transcoder/transcodedialog.cpp:241
+#: transcoder/transcodedialog.cpp:263
 msgid "Open a directory to import music from"
 msgstr "Otvori direktorij za uvoz glazbe iz"
 
@@ -3797,7 +3801,7 @@ msgstr "Izvođač"
 msgid "Pipeline"
 msgstr ""
 
-#: ../bin/src/ui_transcodelogdialog.h:106
+#: ../bin/src/ui_transcodelogdialog.h:107
 msgid "Pipelines"
 msgstr ""
 
@@ -4955,7 +4959,7 @@ msgstr "Pokreni ripanje"
 msgid "Start the playlist currently playing"
 msgstr "Pokrenite popis izvođenja koji se trenutno izvodi"
 
-#: transcoder/transcodedialog.cpp:93
+#: transcoder/transcodedialog.cpp:102
 msgid "Start transcoding"
 msgstr "Započni enkôdiranje"
 
@@ -4965,7 +4969,7 @@ msgid ""
 "list"
 msgstr "Počnite tipkati nešto iznad u okvir za pretragu da bi ispunili taj popis rezultata pretraživanja"
 
-#: transcoder/transcoder.cpp:406
+#: transcoder/transcoder.cpp:407
 #, qt-format
 msgid "Starting %1"
 msgstr "Započinjem %1"
@@ -5356,7 +5360,7 @@ msgstr "Broj"
 msgid "Transcode Music"
 msgstr "Enkôdiranje glazbe"
 
-#: ../bin/src/ui_transcodelogdialog.h:105
+#: ../bin/src/ui_transcodelogdialog.h:106
 msgid "Transcoder Details"
 msgstr ""
 

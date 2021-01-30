@@ -21,8 +21,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2021-01-27 17:20+0000\n"
-"Last-Translator: Daniel Șerbănescu <daniel@serbanescu.dk>\n"
+"PO-Revision-Date: 2021-01-29 22:42+0000\n"
+"Last-Translator: John Maguire <john.maguire@gmail.com>\n"
 "Language-Team: Romanian (http://www.transifex.com/davidsansome/clementine/language/ro/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -175,19 +175,19 @@ msgstr "%L1 piese"
 msgid "%filename%"
 msgstr "%nume fișier%"
 
-#: transcoder/transcodedialog.cpp:214
+#: transcoder/transcodedialog.cpp:236
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n failed"
 msgstr "%n eșuat"
 
-#: transcoder/transcodedialog.cpp:209
+#: transcoder/transcodedialog.cpp:231
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n finished"
 msgstr "%n finalizat"
 
-#: transcoder/transcodedialog.cpp:203
+#: transcoder/transcodedialog.cpp:225
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n remaining"
@@ -539,11 +539,11 @@ msgstr "Adaugă fișier(e) la transcodor"
 msgid "Add file..."
 msgstr "Adaugă fișier..."
 
-#: transcoder/transcodedialog.cpp:224
+#: transcoder/transcodedialog.cpp:246
 msgid "Add files to transcode"
 msgstr "Adaugă fișiere pentru transcodat"
 
-#: transcoder/transcodedialog.cpp:307 ui/mainwindow.cpp:2196
+#: transcoder/transcodedialog.cpp:329 ui/mainwindow.cpp:2196
 #: ripper/ripcddialog.cpp:202
 msgid "Add folder"
 msgstr "Adăugare dosar"
@@ -1182,7 +1182,7 @@ msgstr "Clasic"
 msgid "Cleaning up"
 msgstr "Curățare"
 
-#: transcoder/transcodedialog.cpp:64 widgets/lineedit.cpp:42
+#: transcoder/transcodedialog.cpp:66 widgets/lineedit.cpp:42
 #: ../bin/src/ui_queuemanager.h:155
 msgid "Clear"
 msgstr "Curăță"
@@ -1492,14 +1492,14 @@ msgstr "Nu s.a putut autentifica la Last.fm. Încercați din nou."
 msgid "Couldn't create playlist"
 msgstr "Nu se poate crea lista de redare"
 
-#: transcoder/transcoder.cpp:434
+#: transcoder/transcoder.cpp:435
 #, qt-format
 msgid ""
 "Couldn't find a muxer for %1, check you have the correct GStreamer plugins "
 "installed"
 msgstr "Nu s-a putut găsi un mixer pentru %1, verificați dacă aveți instalate modulele corecte GStreamer"
 
-#: transcoder/transcoder.cpp:427
+#: transcoder/transcoder.cpp:428
 #, qt-format
 msgid ""
 "Couldn't find an encoder for %1, check you have the correct GStreamer "
@@ -1968,6 +1968,10 @@ msgstr "Dropbox"
 msgid "Dubstep"
 msgstr "Dubstep"
 
+#: transcoder/transcodedialog.cpp:70
+msgid "Dump Graph"
+msgstr ""
+
 #: ../bin/src/ui_gstenginedebug.h:68
 msgid "Dump Pipeline Graph"
 msgstr ""
@@ -2167,7 +2171,7 @@ msgstr "Eroare încărcare %1"
 msgid "Error loading di.fm playlist"
 msgstr "Eroare la încărcarea listă de redare di.fm"
 
-#: transcoder/transcoder.cpp:399
+#: transcoder/transcoder.cpp:400
 #, qt-format
 msgid "Error processing %1: %2"
 msgstr "Eroare procesare %1: %2"
@@ -3114,7 +3118,7 @@ msgstr "Autentificare"
 msgid "Login failed"
 msgstr "Autentificare eșuată"
 
-#: ../bin/src/ui_transcodelogdialog.h:107
+#: ../bin/src/ui_transcodelogdialog.h:108
 msgid "Logs"
 msgstr "Înregistrări"
 
@@ -3350,7 +3354,7 @@ msgstr "Mută în colecție..."
 msgid "Move up"
 msgstr "Mută în sus"
 
-#: transcoder/transcodedialog.cpp:226 ui/mainwindow.cpp:2171
+#: transcoder/transcodedialog.cpp:248 ui/mainwindow.cpp:2171
 msgid "Music"
 msgstr "Muzică"
 
@@ -3636,7 +3640,7 @@ msgstr "Deschide fișier OPML"
 msgid "Open OPML file..."
 msgstr "Deschide fișier OPML..."
 
-#: transcoder/transcodedialog.cpp:241
+#: transcoder/transcodedialog.cpp:263
 msgid "Open a directory to import music from"
 msgstr "Deschide un director pentru a se importa muzica din el"
 
@@ -3806,7 +3810,7 @@ msgstr "Interpret"
 msgid "Pipeline"
 msgstr ""
 
-#: ../bin/src/ui_transcodelogdialog.h:106
+#: ../bin/src/ui_transcodelogdialog.h:107
 msgid "Pipelines"
 msgstr ""
 
@@ -4964,7 +4968,7 @@ msgstr "Pornire extragere"
 msgid "Start the playlist currently playing"
 msgstr "Pornește lista de redare curent redată"
 
-#: transcoder/transcodedialog.cpp:93
+#: transcoder/transcodedialog.cpp:102
 msgid "Start transcoding"
 msgstr "Pornire transcodificare"
 
@@ -4974,7 +4978,7 @@ msgid ""
 "list"
 msgstr "Tastează ceva în caseta de căutare de deasupra pentru a umple lista cu rezultate ale căutării"
 
-#: transcoder/transcoder.cpp:406
+#: transcoder/transcoder.cpp:407
 #, qt-format
 msgid "Starting %1"
 msgstr "Se pornește %1"
@@ -5365,7 +5369,7 @@ msgstr "Piesă"
 msgid "Transcode Music"
 msgstr "Transcodează muzica"
 
-#: ../bin/src/ui_transcodelogdialog.h:105
+#: ../bin/src/ui_transcodelogdialog.h:106
 msgid "Transcoder Details"
 msgstr "Detalii codor"
 

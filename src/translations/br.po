@@ -14,7 +14,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2021-01-26 23:47+0000\n"
+"PO-Revision-Date: 2021-01-29 22:42+0000\n"
 "Last-Translator: John Maguire <john.maguire@gmail.com>\n"
 "Language-Team: Breton (http://www.transifex.com/davidsansome/clementine/language/br/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -168,19 +168,19 @@ msgstr ""
 msgid "%filename%"
 msgstr "%filename%"
 
-#: transcoder/transcodedialog.cpp:214
+#: transcoder/transcodedialog.cpp:236
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n failed"
 msgstr "%n c'hwitet"
 
-#: transcoder/transcodedialog.cpp:209
+#: transcoder/transcodedialog.cpp:231
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n finished"
 msgstr "%n echuet"
 
-#: transcoder/transcodedialog.cpp:203
+#: transcoder/transcodedialog.cpp:225
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n remaining"
@@ -532,11 +532,11 @@ msgstr "Ouzhpennañ ur restr pe muioc'h d'an treuzkemmer"
 msgid "Add file..."
 msgstr "Ouzhpennañ ur restr..."
 
-#: transcoder/transcodedialog.cpp:224
+#: transcoder/transcodedialog.cpp:246
 msgid "Add files to transcode"
 msgstr "Ouzhpennañ restroù da"
 
-#: transcoder/transcodedialog.cpp:307 ui/mainwindow.cpp:2196
+#: transcoder/transcodedialog.cpp:329 ui/mainwindow.cpp:2196
 #: ripper/ripcddialog.cpp:202
 msgid "Add folder"
 msgstr "Ouzhpennañ un teuliad"
@@ -1175,7 +1175,7 @@ msgstr "Klasel"
 msgid "Cleaning up"
 msgstr "O naetaat"
 
-#: transcoder/transcodedialog.cpp:64 widgets/lineedit.cpp:42
+#: transcoder/transcodedialog.cpp:66 widgets/lineedit.cpp:42
 #: ../bin/src/ui_queuemanager.h:155
 msgid "Clear"
 msgstr "Goullonderiñ"
@@ -1485,14 +1485,14 @@ msgstr ""
 msgid "Couldn't create playlist"
 msgstr "N'eus ket bet tu krouiñ ar roll-seniñ"
 
-#: transcoder/transcoder.cpp:434
+#: transcoder/transcoder.cpp:435
 #, qt-format
 msgid ""
 "Couldn't find a muxer for %1, check you have the correct GStreamer plugins "
 "installed"
 msgstr "Dibosupl eo kavout ur multiplekser evit %1, gwiriekait ez eo staliet an enlugelladoù a-zere evit GStreamer"
 
-#: transcoder/transcoder.cpp:427
+#: transcoder/transcoder.cpp:428
 #, qt-format
 msgid ""
 "Couldn't find an encoder for %1, check you have the correct GStreamer "
@@ -1961,6 +1961,10 @@ msgstr "Dropbox"
 msgid "Dubstep"
 msgstr "Dubstep"
 
+#: transcoder/transcodedialog.cpp:70
+msgid "Dump Graph"
+msgstr ""
+
 #: ../bin/src/ui_gstenginedebug.h:68
 msgid "Dump Pipeline Graph"
 msgstr ""
@@ -2160,7 +2164,7 @@ msgstr "Ur gudenn a zo savet e-pad kargadur %1"
 msgid "Error loading di.fm playlist"
 msgstr "Kudenn o kargañ roll seniñ di.fm"
 
-#: transcoder/transcoder.cpp:399
+#: transcoder/transcoder.cpp:400
 #, qt-format
 msgid "Error processing %1: %2"
 msgstr "Ur gudenn a zo savet e-pad treterezh %1 : %2"
@@ -3107,7 +3111,7 @@ msgstr "Kennaskañ"
 msgid "Login failed"
 msgstr "C'hwitet eo bet ar c'hennaskañ"
 
-#: ../bin/src/ui_transcodelogdialog.h:107
+#: ../bin/src/ui_transcodelogdialog.h:108
 msgid "Logs"
 msgstr ""
 
@@ -3343,7 +3347,7 @@ msgstr "Dilec'hiañ davet ar sonaoueg..."
 msgid "Move up"
 msgstr "A-us"
 
-#: transcoder/transcodedialog.cpp:226 ui/mainwindow.cpp:2171
+#: transcoder/transcodedialog.cpp:248 ui/mainwindow.cpp:2171
 msgid "Music"
 msgstr "Sonerezh"
 
@@ -3629,7 +3633,7 @@ msgstr "Digeriñ ur restr OPML"
 msgid "Open OPML file..."
 msgstr "Digeriñ ur restr OPML..."
 
-#: transcoder/transcodedialog.cpp:241
+#: transcoder/transcodedialog.cpp:263
 msgid "Open a directory to import music from"
 msgstr "Digeriñ ur c'havlec'h evit enporzhiañ ar sonerezh dioutañ"
 
@@ -3799,7 +3803,7 @@ msgstr "Soner"
 msgid "Pipeline"
 msgstr ""
 
-#: ../bin/src/ui_transcodelogdialog.h:106
+#: ../bin/src/ui_transcodelogdialog.h:107
 msgid "Pipelines"
 msgstr ""
 
@@ -4957,7 +4961,7 @@ msgstr "Kregiñ gant an eztennadenn"
 msgid "Start the playlist currently playing"
 msgstr "Kregiñ ar roll seniñ"
 
-#: transcoder/transcodedialog.cpp:93
+#: transcoder/transcodedialog.cpp:102
 msgid "Start transcoding"
 msgstr "Kregin an transkodiñ"
 
@@ -4967,7 +4971,7 @@ msgid ""
 "list"
 msgstr "Krogit da skrivañ un dra bennak er boest enklask a-us evit leuniañ listenn an disoc'hoù."
 
-#: transcoder/transcoder.cpp:406
+#: transcoder/transcoder.cpp:407
 #, qt-format
 msgid "Starting %1"
 msgstr "O kregiñ %1"
@@ -5358,7 +5362,7 @@ msgstr "Roud"
 msgid "Transcode Music"
 msgstr "Treuzkodañ Sonerezh"
 
-#: ../bin/src/ui_transcodelogdialog.h:105
+#: ../bin/src/ui_transcodelogdialog.h:106
 msgid "Transcoder Details"
 msgstr ""
 

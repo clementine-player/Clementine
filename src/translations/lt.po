@@ -12,8 +12,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2021-01-27 09:21+0000\n"
-"Last-Translator: Moo\n"
+"PO-Revision-Date: 2021-01-29 22:42+0000\n"
+"Last-Translator: John Maguire <john.maguire@gmail.com>\n"
 "Language-Team: Lithuanian (http://www.transifex.com/davidsansome/clementine/language/lt/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -166,19 +166,19 @@ msgstr "%L1 takeliai"
 msgid "%filename%"
 msgstr "%failovardas%"
 
-#: transcoder/transcodedialog.cpp:214
+#: transcoder/transcodedialog.cpp:236
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n failed"
 msgstr "%n nepavyko"
 
-#: transcoder/transcodedialog.cpp:209
+#: transcoder/transcodedialog.cpp:231
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n finished"
 msgstr "%n baigta"
 
-#: transcoder/transcodedialog.cpp:203
+#: transcoder/transcodedialog.cpp:225
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n remaining"
@@ -530,11 +530,11 @@ msgstr "Pridėti failus perkodavimui"
 msgid "Add file..."
 msgstr "Pridėti failą..."
 
-#: transcoder/transcodedialog.cpp:224
+#: transcoder/transcodedialog.cpp:246
 msgid "Add files to transcode"
 msgstr "Pridėti failus perkodavimui"
 
-#: transcoder/transcodedialog.cpp:307 ui/mainwindow.cpp:2196
+#: transcoder/transcodedialog.cpp:329 ui/mainwindow.cpp:2196
 #: ripper/ripcddialog.cpp:202
 msgid "Add folder"
 msgstr "Pridėti aplanką"
@@ -1173,7 +1173,7 @@ msgstr "Klasika"
 msgid "Cleaning up"
 msgstr "Valoma"
 
-#: transcoder/transcodedialog.cpp:64 widgets/lineedit.cpp:42
+#: transcoder/transcodedialog.cpp:66 widgets/lineedit.cpp:42
 #: ../bin/src/ui_queuemanager.h:155
 msgid "Clear"
 msgstr "Išvalyti"
@@ -1483,14 +1483,14 @@ msgstr "Nepavyko prisijungti prie Last.fm. Bandykite dar kartą."
 msgid "Couldn't create playlist"
 msgstr "Nepavyko sukurti grojaraščio"
 
-#: transcoder/transcoder.cpp:434
+#: transcoder/transcoder.cpp:435
 #, qt-format
 msgid ""
 "Couldn't find a muxer for %1, check you have the correct GStreamer plugins "
 "installed"
 msgstr "Nepavyko rasti maišytuvo %1, įsitikinkite ar įdiegti visi reikalingi „GStreamer“ plėtiniai"
 
-#: transcoder/transcoder.cpp:427
+#: transcoder/transcoder.cpp:428
 #, qt-format
 msgid ""
 "Couldn't find an encoder for %1, check you have the correct GStreamer "
@@ -1959,6 +1959,10 @@ msgstr "Dropbox"
 msgid "Dubstep"
 msgstr "Dubstep"
 
+#: transcoder/transcodedialog.cpp:70
+msgid "Dump Graph"
+msgstr ""
+
 #: ../bin/src/ui_gstenginedebug.h:68
 msgid "Dump Pipeline Graph"
 msgstr ""
@@ -2158,7 +2162,7 @@ msgstr "Klaida įkeliant %1"
 msgid "Error loading di.fm playlist"
 msgstr "Klaida įkeliant di.fm grojaraštį"
 
-#: transcoder/transcoder.cpp:399
+#: transcoder/transcoder.cpp:400
 #, qt-format
 msgid "Error processing %1: %2"
 msgstr "Klaida apdorojant %1: %2"
@@ -3105,7 +3109,7 @@ msgstr "Prisijungti"
 msgid "Login failed"
 msgstr "Prisijungimas nepavyko"
 
-#: ../bin/src/ui_transcodelogdialog.h:107
+#: ../bin/src/ui_transcodelogdialog.h:108
 msgid "Logs"
 msgstr "Žurnalai"
 
@@ -3341,7 +3345,7 @@ msgstr "Perkelti į fonoteką"
 msgid "Move up"
 msgstr "Perkelti aukštyn"
 
-#: transcoder/transcodedialog.cpp:226 ui/mainwindow.cpp:2171
+#: transcoder/transcodedialog.cpp:248 ui/mainwindow.cpp:2171
 msgid "Music"
 msgstr "Muzika"
 
@@ -3627,7 +3631,7 @@ msgstr "Atverti OPML failą"
 msgid "Open OPML file..."
 msgstr "Atverti OPML failą..."
 
-#: transcoder/transcodedialog.cpp:241
+#: transcoder/transcodedialog.cpp:263
 msgid "Open a directory to import music from"
 msgstr "Atverti katalogą, iš kurio importuoti muziką"
 
@@ -3797,7 +3801,7 @@ msgstr "Atlikėjas"
 msgid "Pipeline"
 msgstr ""
 
-#: ../bin/src/ui_transcodelogdialog.h:106
+#: ../bin/src/ui_transcodelogdialog.h:107
 msgid "Pipelines"
 msgstr ""
 
@@ -4955,7 +4959,7 @@ msgstr "Pradėti perrašymą"
 msgid "Start the playlist currently playing"
 msgstr "Pradėti grajaraštį nuo dabar grojančio"
 
-#: transcoder/transcodedialog.cpp:93
+#: transcoder/transcodedialog.cpp:102
 msgid "Start transcoding"
 msgstr "Perkoduoti"
 
@@ -4965,7 +4969,7 @@ msgid ""
 "list"
 msgstr "Pradėkite rašyti paieškos laukelyje žemiau, kad užpildyti šį paieškos rezultatų sąrašą"
 
-#: transcoder/transcoder.cpp:406
+#: transcoder/transcoder.cpp:407
 #, qt-format
 msgid "Starting %1"
 msgstr "Paleidžiama %1"
@@ -5356,7 +5360,7 @@ msgstr "Takelis"
 msgid "Transcode Music"
 msgstr "Perkoduoti muziką"
 
-#: ../bin/src/ui_transcodelogdialog.h:105
+#: ../bin/src/ui_transcodelogdialog.h:106
 msgid "Transcoder Details"
 msgstr ""
 

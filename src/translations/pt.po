@@ -15,8 +15,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2021-01-27 22:19+0000\n"
-"Last-Translator: Hugo Carvalho <hugokarvalho@hotmail.com>\n"
+"PO-Revision-Date: 2021-01-29 22:42+0000\n"
+"Last-Translator: John Maguire <john.maguire@gmail.com>\n"
 "Language-Team: Portuguese (http://www.transifex.com/davidsansome/clementine/language/pt/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -169,19 +169,19 @@ msgstr "%L1 faixas"
 msgid "%filename%"
 msgstr "%filename%"
 
-#: transcoder/transcodedialog.cpp:214
+#: transcoder/transcodedialog.cpp:236
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n failed"
 msgstr "%n falha(s)"
 
-#: transcoder/transcodedialog.cpp:209
+#: transcoder/transcodedialog.cpp:231
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n finished"
 msgstr "%n concluída(s)"
 
-#: transcoder/transcodedialog.cpp:203
+#: transcoder/transcodedialog.cpp:225
 #, c-format, qt-plural-format
 msgctxt ""
 msgid "%n remaining"
@@ -533,11 +533,11 @@ msgstr "Adicionar ficheiro(s) ao conversor"
 msgid "Add file..."
 msgstr "Adicionar ficheiro..."
 
-#: transcoder/transcodedialog.cpp:224
+#: transcoder/transcodedialog.cpp:246
 msgid "Add files to transcode"
 msgstr "Adicionar ficheiros a converter"
 
-#: transcoder/transcodedialog.cpp:307 ui/mainwindow.cpp:2196
+#: transcoder/transcodedialog.cpp:329 ui/mainwindow.cpp:2196
 #: ripper/ripcddialog.cpp:202
 msgid "Add folder"
 msgstr "Adicionar diretório"
@@ -1176,7 +1176,7 @@ msgstr "Clássica"
 msgid "Cleaning up"
 msgstr "Eliminação"
 
-#: transcoder/transcodedialog.cpp:64 widgets/lineedit.cpp:42
+#: transcoder/transcodedialog.cpp:66 widgets/lineedit.cpp:42
 #: ../bin/src/ui_queuemanager.h:155
 msgid "Clear"
 msgstr "Limpar"
@@ -1486,14 +1486,14 @@ msgstr "Falha ao iniciar sessão na Last.fm. Por favor tente novamente."
 msgid "Couldn't create playlist"
 msgstr "Não foi possível criar a lista de reprodução"
 
-#: transcoder/transcoder.cpp:434
+#: transcoder/transcoder.cpp:435
 #, qt-format
 msgid ""
 "Couldn't find a muxer for %1, check you have the correct GStreamer plugins "
 "installed"
 msgstr "Incapaz de encontrar o recurso para %1, verifique se instalou os suplementos GStreamer corretos"
 
-#: transcoder/transcoder.cpp:427
+#: transcoder/transcoder.cpp:428
 #, qt-format
 msgid ""
 "Couldn't find an encoder for %1, check you have the correct GStreamer "
@@ -1962,6 +1962,10 @@ msgstr "Dropbox"
 msgid "Dubstep"
 msgstr "Dub"
 
+#: transcoder/transcodedialog.cpp:70
+msgid "Dump Graph"
+msgstr ""
+
 #: ../bin/src/ui_gstenginedebug.h:68
 msgid "Dump Pipeline Graph"
 msgstr "Gráfico de descarga do Pipeline"
@@ -2161,7 +2165,7 @@ msgstr "Erro ao carregar %1"
 msgid "Error loading di.fm playlist"
 msgstr "Erro ao carregar a lista de reprodução di.fm"
 
-#: transcoder/transcoder.cpp:399
+#: transcoder/transcoder.cpp:400
 #, qt-format
 msgid "Error processing %1: %2"
 msgstr "Erro ao processar %1: %2"
@@ -3108,7 +3112,7 @@ msgstr "Iniciar sessão"
 msgid "Login failed"
 msgstr "Falha ao iniciar sessão"
 
-#: ../bin/src/ui_transcodelogdialog.h:107
+#: ../bin/src/ui_transcodelogdialog.h:108
 msgid "Logs"
 msgstr "Registos"
 
@@ -3344,7 +3348,7 @@ msgstr "Mover para a coleção..."
 msgid "Move up"
 msgstr "Mover para cima"
 
-#: transcoder/transcodedialog.cpp:226 ui/mainwindow.cpp:2171
+#: transcoder/transcodedialog.cpp:248 ui/mainwindow.cpp:2171
 msgid "Music"
 msgstr "Música"
 
@@ -3630,7 +3634,7 @@ msgstr "Abrir um ficheiro OPML"
 msgid "Open OPML file..."
 msgstr "Abrir um ficheiro OPML..."
 
-#: transcoder/transcodedialog.cpp:241
+#: transcoder/transcodedialog.cpp:263
 msgid "Open a directory to import music from"
 msgstr "Abrir um diretório para efetuar a importação"
 
@@ -3800,7 +3804,7 @@ msgstr "Intérprete"
 msgid "Pipeline"
 msgstr "Pipeline"
 
-#: ../bin/src/ui_transcodelogdialog.h:106
+#: ../bin/src/ui_transcodelogdialog.h:107
 msgid "Pipelines"
 msgstr "Pipelines"
 
@@ -4958,7 +4962,7 @@ msgstr "Iniciar extração"
 msgid "Start the playlist currently playing"
 msgstr "Iniciar lista de reprodução atual"
 
-#: transcoder/transcodedialog.cpp:93
+#: transcoder/transcodedialog.cpp:102
 msgid "Start transcoding"
 msgstr "Iniciar conversão"
 
@@ -4968,7 +4972,7 @@ msgid ""
 "list"
 msgstr "Escreva algo na caixa de pesquisa para preencher a lista de resultados"
 
-#: transcoder/transcoder.cpp:406
+#: transcoder/transcoder.cpp:407
 #, qt-format
 msgid "Starting %1"
 msgstr "A iniciar %1"
@@ -5359,7 +5363,7 @@ msgstr "Faixa"
 msgid "Transcode Music"
 msgstr "Conversão de ficheiros"
 
-#: ../bin/src/ui_transcodelogdialog.h:105
+#: ../bin/src/ui_transcodelogdialog.h:106
 msgid "Transcoder Details"
 msgstr "Detalhes do conversor"
 
