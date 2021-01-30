@@ -48,11 +48,13 @@ void TagReaderWorker::MessageArrived(const pb::tagreader::Message& message) {
         message.save_file_request().metadata()));
   } else if (message.has_save_song_tag_to_file_request()) {
     reply.mutable_save_song_tag_to_file_response()->set_success(
-    tag_reader_.UpdateSongTag(
-    QStringFromStdString(message.save_song_tag_to_file_request().filename()),
-    QStringFromStdString(message.save_song_tag_to_file_request().tagname()),
-    QStringFromStdString(message.save_song_tag_to_file_request().tagvalue())
-    ));
+        tag_reader_.UpdateSongTag(
+            QStringFromStdString(
+                message.save_song_tag_to_file_request().filename()),
+            QStringFromStdString(
+                message.save_song_tag_to_file_request().tagname()),
+            QStringFromStdString(
+                message.save_song_tag_to_file_request().tagvalue())));
   } else if (message.has_save_song_statistics_to_file_request()) {
     reply.mutable_save_song_statistics_to_file_response()->set_success(
         tag_reader_.SaveSongStatisticsToFile(

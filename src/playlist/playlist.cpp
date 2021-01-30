@@ -108,35 +108,35 @@ const qint64 Playlist::kMaxScrobblePointNsecs = 240ll * kNsecPerSec;
 // When adding lines to column enumeration: Try to add mappable taglib
 // properties.
 const QStringList Playlist::kColumns = QStringList() << "TITLE"
-						     << "ARTIST"
-						     << "ALBUM"
-						     << "ALBUMARTIST"
-						     << "COMPOSER"
-						     << "LENGTH"
-						     << "TRACKNUMBER"
-						     << "DISCNUMBER"
-						     << "DATE"
-						     << "GENRE"
-						     << "BPM"
-						     << "bitrate"
-						     << "samplerate"
-						     << "filename"
-						     << "basefilename"
-						     << "filesize"
-						     << "filetype"
-						     << "ctime"
-						     << "mtime"
-						     << "rating"
-						     << "playcount"
-						     << "skipcount"
-						     << "lastplayed"
-						     << "score"
-						     << "COMMENT"
-						     << "source"
-						     << "MOOD"
-						     << "performer"
-						     << "GROUPING"
-						     << "ORIGINALDATE";
+                                                     << "ARTIST"
+                                                     << "ALBUM"
+                                                     << "ALBUMARTIST"
+                                                     << "COMPOSER"
+                                                     << "LENGTH"
+                                                     << "TRACKNUMBER"
+                                                     << "DISCNUMBER"
+                                                     << "DATE"
+                                                     << "GENRE"
+                                                     << "BPM"
+                                                     << "bitrate"
+                                                     << "samplerate"
+                                                     << "filename"
+                                                     << "basefilename"
+                                                     << "filesize"
+                                                     << "filetype"
+                                                     << "ctime"
+                                                     << "mtime"
+                                                     << "rating"
+                                                     << "playcount"
+                                                     << "skipcount"
+                                                     << "lastplayed"
+                                                     << "score"
+                                                     << "COMMENT"
+                                                     << "source"
+                                                     << "MOOD"
+                                                     << "performer"
+                                                     << "GROUPING"
+                                                     << "ORIGINALDATE";
 
 namespace {
 QString removePrefix(const QString& a, const QStringList& prefixes) {
@@ -478,10 +478,10 @@ bool Playlist::setData(const QModelIndex& index, const QVariant& value,
     emit EditingFinished(index);
   } else {
     const QString name = Playlist::kColumns.at(index.column());
-    
+
     // Update just that tag
     TagReaderReply* reply = TagReaderClient::Instance()->UpdateSongTag(
-	song.url().toLocalFile(), name, value);
+        song.url().toLocalFile(), name, value);
 
     NewClosure(reply, SIGNAL(Finished(bool)), this,
                SLOT(SongSaveComplete(TagReaderReply*, QPersistentModelIndex)),
@@ -501,8 +501,8 @@ void Playlist::SongSaveComplete(TagReaderReply* reply,
       emit Error(
           tr("An error occurred writing metadata to '%1'")
               .arg(QString::fromStdString(reply->request_message()
-					  .save_song_tag_to_file_request()
-					  .filename())));
+                                              .save_song_tag_to_file_request()
+                                              .filename())));
     }
   }
   reply->deleteLater();

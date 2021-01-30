@@ -49,12 +49,10 @@
 #include <tag.h>
 #include <tdebuglistener.h>
 #include <textidentificationframe.h>
+#include <tfile.h>
+#include <tpropertymap.h>
 #include <trueaudiofile.h>
 #include <tstring.h>
-
-#include <tpropertymap.h>
-#include <tfile.h>
-
 #include <unsynchronizedlyricsframe.h>
 #include <vorbisfile.h>
 #include <wavfile.h>
@@ -310,7 +308,8 @@ void TagReader::ReadFile(const QString& filename,
     }
 
     if (items.contains("BPM")) {
-      song->set_bpm(TStringToQString(items["BPM"].toString()).trimmed().toFloat());
+      song->set_bpm(
+          TStringToQString(items["BPM"].toString()).trimmed().toFloat());
     }
 
     if (items.contains("PERFORMER")) {
@@ -506,10 +505,10 @@ void TagReader::ReadFile(const QString& filename,
         }
       }
       if (items.contains("tmpo")) {
-	float bpm = (float)items["tmpo"].toInt();
-	if (song->bpm() <= 0 && bpm > 0) {
-	  song->set_bpm(bpm);
-	}
+        float bpm = (float)items["tmpo"].toInt();
+        if (song->bpm() <= 0 && bpm > 0) {
+          song->set_bpm(bpm);
+        }
       }
       if (items.contains("\251wrt")) {
         Decode(items["\251wrt"].toStringList().toString(", "), nullptr,
@@ -841,7 +840,7 @@ pb::tagreader::SongMetadata_Type TagReader::GuessFileType(
 }
 
 bool TagReader::SaveFile(const QString& filename,
-	      const pb::tagreader::SongMetadata& song) const {
+                         const pb::tagreader::SongMetadata& song) const {
   if (filename.isNull()) return false;
 
   std::unique_ptr<TagLib::FileRef> fileref(factory_->GetFileRef(filename));
@@ -849,7 +848,7 @@ bool TagReader::SaveFile(const QString& filename,
     return false;
 
   // only basic tags as provided by ripper
-  TagLib::Tag *t = fileref->tag();
+  TagLib::Tag* t = fileref->tag();
   t->setTitle(StdStringToTaglibString(song.title()));
   t->setArtist(StdStringToTaglibString(song.artist()));
   t->setAlbum(StdStringToTaglibString(song.album()));
@@ -868,7 +867,7 @@ bool TagReader::SaveFile(const QString& filename,
     utimensat(0, QFile::encodeName(filename).constData(), nullptr, 0);
   }
 #endif  // Q_OS_LINUX
-  
+
   return ret;
 }
 
@@ -876,11 +875,10 @@ bool TagReader::SaveFile(const QString& filename,
 // as full store operation (especially when file was mp4) failed
 // This code performs single tag insert/update/delete and
 // relies on taglib's PropertyMap to handle file variants.
-bool TagReader::UpdateSongTag(const QString& filename,
-			      const QString& tagname,
-			      const QString& tagvalue) const {
-
-  //qLog(Debug) << "UpdateSongTag of " << filename << " tag " << tagname << " value " << tagvalue;
+bool TagReader::UpdateSongTag(const QString& filename, const QString& tagname,
+                              const QString& tagvalue) const {
+  // qLog(Debug) << "UpdateSongTag of " << filename << " tag " << tagname << "
+  // value " << tagvalue;
 
   if (filename.isNull()) return false;
 
@@ -888,10 +886,9 @@ bool TagReader::UpdateSongTag(const QString& filename,
   if (!fileref || fileref->isNull())  // The file probably doesn't exist
     return false;
 
- 
   // according taglib tagwriter example
   // to save basic attributes see SaveFile
-  
+
   // no check for available ones
   TagLib::PropertyMap map = fileref->file()->properties();
 
@@ -903,8 +900,7 @@ bool TagReader::UpdateSongTag(const QString& filename,
     // inserts too if not yet
     map.replace(key, QStringToTaglibString(tagvalue));
 
-
-  //qLog(Debug) << TStringToQString(map.toString());
+  // qLog(Debug) << TStringToQString(map.toString());
 
   fileref->file()->setProperties(map);
   bool ret = fileref->save();
@@ -916,7 +912,7 @@ bool TagReader::UpdateSongTag(const QString& filename,
     utimensat(0, QFile::encodeName(filename).constData(), nullptr, 0);
   }
 #endif  // Q_OS_LINUX
-  
+
   return ret;
 }
 

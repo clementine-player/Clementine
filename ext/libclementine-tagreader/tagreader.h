@@ -18,10 +18,10 @@
 #ifndef TAGREADER_H
 #define TAGREADER_H
 
+#include <taglib/xiphcomment.h>
+
 #include <QByteArray>
 #include <QFileInfo>
-
-#include <taglib/xiphcomment.h>
 #include <memory>
 
 #include "config.h"
@@ -62,9 +62,8 @@ class TagReader {
                 const pb::tagreader::SongMetadata& song) const;
   // Returns false if something went wrong; returns true otherwise (might
   // returns true if the file exists but nothing has been written inside because
-  bool UpdateSongTag(const QString& filename,
-		     const QString& tagname,
-		     const QString& tagvalue) const;
+  bool UpdateSongTag(const QString& filename, const QString& tagname,
+                     const QString& tagvalue) const;
 
   // statistics tag format is not supported for this kind of file)
   bool SaveSongStatisticsToFile(const QString& filename,
@@ -101,7 +100,8 @@ class TagReader {
       const pb::tagreader::SongMetadata& song) const;
 
   void GuessArtistAndTitle(pb::tagreader::SongMetadata* song) const;
-  void GuessAlbum(const QFileInfo &info, pb::tagreader::SongMetadata* song) const;
+  void GuessAlbum(const QFileInfo& info,
+                  pb::tagreader::SongMetadata* song) const;
 
   pb::tagreader::SongMetadata_Type GuessFileType(
       TagLib::FileRef* fileref) const;
