@@ -71,6 +71,7 @@ class Transcoder : public QObject {
   void Cancel();
   void DumpGraph(int id);
 
+  static QString GetEncoderFactoryForMimeType(const QString& mime_type);
  signals:
   void JobComplete(const QString& input, const QString& output, bool success);
   void LogLine(const QString& message);
