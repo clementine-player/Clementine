@@ -7,6 +7,7 @@
 # 79353a696ad19dc202b261b3067b7640_bec941e, 2015
 # Achilleas Pipinellis, 2012-2014
 # Achilleas Pipinellis, 2014
+# alex STAMATARAS <alex.stam2000@gmail.com>, 2021
 # Antony_256 <antony256@gmail.com>, 2011-2012
 # Antony_256 <antony256@gmail.com>, 2011, 2012
 # Achilleas Pipinellis, 2013
@@ -15,7 +16,9 @@
 # Dimitrios Glentadakis <dglent@free.fr>, 2018
 # firewalker <firew4lker@gmail.com>, 2013-2015
 # firewalker <firew4lker@gmail.com>, 2011-2012
+# Nick Tsakalidis <neorisionick@greeklug.gr>, 2021
 # Nisok Kosin <nikos.efthimiou@gmail.com>, 2012
+# Savvas Adamtziloglou <savvas-gr@greeklug.gr>, 2021
 # 0cff5cc4def3d75681bb40e8e06675f5_417bc8e <8b1bef1ed20efdf0fabadfaace2f36eb_87774>, 2013
 # 0cff5cc4def3d75681bb40e8e06675f5_417bc8e <8b1bef1ed20efdf0fabadfaace2f36eb_87774>, 2013
 # Wasilis Mandratzis-Walz, 2015
@@ -26,8 +29,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2021-01-29 22:42+0000\n"
-"Last-Translator: John Maguire <john.maguire@gmail.com>\n"
+"PO-Revision-Date: 2021-01-30 17:29+0000\n"
+"Last-Translator: alex STAMATARAS <alex.stam2000@gmail.com>\n"
 "Language-Team: Greek (http://www.transifex.com/davidsansome/clementine/language/el/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -174,7 +177,7 @@ msgstr "%L1 συνολικές ακροάσεις"
 #: playlist/playlistmanager.cpp:445
 #, qt-format
 msgid "%L1 tracks"
-msgstr ""
+msgstr "%L1 κομμάτια"
 
 #: ../bin/src/ui_notificationssettingspage.h:432
 msgid "%filename%"
@@ -1917,7 +1920,7 @@ msgstr "Ρυθμίσεις λήψεων"
 
 #: ../bin/src/ui_networkremotesettingspage.h:385
 msgid "Download the original Android app"
-msgstr ""
+msgstr "Λήψη της πρωτότυπης Android εφαρμογής "
 
 #: ../bin/src/ui_networkremotesettingspage.h:381
 msgid "Download the remote for Desktops, Android and iOS"
@@ -2261,7 +2264,7 @@ msgstr "Εξαγωγή %1 εξώφυλλων από τα %2 (%3 παραλείφ
 
 #: ../bin/src/ui_mainwindow.h:790
 msgid "F9"
-msgstr ""
+msgstr "F9"
 
 #: core/song.cpp:429 transcoder/transcoder.cpp:240
 #: ../bin/src/ui_magnatunedownloaddialog.h:136
@@ -3125,7 +3128,7 @@ msgstr "Αποτυχία εισόδου"
 
 #: ../bin/src/ui_transcodelogdialog.h:108
 msgid "Logs"
-msgstr ""
+msgstr "Αρχεία καταγραφής"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:136
 msgid "Long term prediction profile (LTP)"
@@ -3451,7 +3454,7 @@ msgstr "Επόμενο"
 
 #: ../bin/src/ui_mainwindow.h:785
 msgid "Next album"
-msgstr ""
+msgstr "Επόμενο άλμπουμ"
 
 #: core/globalshortcuts.cpp:59 wiimotedev/wiimotesettingspage.cpp:105
 #: ../bin/src/ui_mainwindow.h:727
@@ -3813,11 +3816,11 @@ msgstr "Εκτελεστής"
 
 #: ../bin/src/ui_gstenginedebug.h:67
 msgid "Pipeline"
-msgstr ""
+msgstr "διοχέτευση"
 
 #: ../bin/src/ui_transcodelogdialog.h:107
 msgid "Pipelines"
-msgstr ""
+msgstr "διοχετεύσεις"
 
 #: ../bin/src/ui_albumcoverexport.h:214
 msgid "Pixel"
@@ -3840,7 +3843,7 @@ msgstr "Μετρητής εκτελέσεων"
 
 #: core/commandlineoptions.cpp:183
 msgid "Play given playlist"
-msgstr ""
+msgstr "Παίξε την δοθείσα λίστα αναπαραγωγής"
 
 #: core/commandlineoptions.cpp:162
 msgid "Play if stopped, pause if playing"
@@ -4581,11 +4584,11 @@ msgstr "Επιλογή κανενός"
 
 #: ui/filechooserwidget.cpp:95
 msgid "Select a directory"
-msgstr ""
+msgstr "Επιλέξτε ένα φάκελο"
 
 #: ui/filechooserwidget.cpp:92
 msgid "Select a file"
-msgstr ""
+msgstr "Επιλέξτε ένα αρχείο"
 
 #: ../bin/src/ui_appearancesettingspage.h:303
 msgid "Select background color:"
@@ -4854,7 +4857,7 @@ msgstr "Παράκαμψη επιλεγμένων κομματιών"
 
 #: ../bin/src/ui_mainwindow.h:787
 msgid "Skip to the next album"
-msgstr ""
+msgstr "Μετάβαση στο επόμενο άλμπουμ"
 
 #: ui/mainwindow.cpp:1901
 msgid "Skip track"
@@ -5413,7 +5416,7 @@ msgstr "URL"
 
 #: ../bin/src/ui_addstreamdialog.h:128
 msgid "URL of its Logo:"
-msgstr ""
+msgstr "Ηλεκτρονική Διεύθυνση του Λογότυπού του"
 
 #: core/commandlineoptions.cpp:159
 msgid "URL(s)"
