@@ -33,8 +33,6 @@ class TranscoderOptionsDialog : public QDialog {
                           QWidget* parent = nullptr);
   ~TranscoderOptionsDialog();
 
-  bool is_valid() const { return options_; }
-
   void accept();
 
   void set_settings_postfix(const QString& settings_postfix);
