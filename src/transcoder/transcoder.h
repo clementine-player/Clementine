@@ -29,6 +29,8 @@
 #include "core/song.h"
 #include "engines/gstpipelinebase.h"
 
+struct SuitableElement;
+
 struct TranscoderPreset {
   TranscoderPreset() : type_(Song::Type_Unknown) {}
   TranscoderPreset(Song::FileType type, const QString& name,
@@ -134,6 +136,9 @@ class Transcoder : public QObject {
                                        const QString& mime_type,
                                        GstElement* bin = nullptr);
   void SetElementProperties(const QString& name, GObject* element);
+
+  static SuitableElement FindBestElementForMimeType(const QString& element_type,
+                                                    const QString& mime_type);
 
   static void NewPadCallback(GstElement*, GstPad* pad, gpointer data);
   static GstBusSyncReply BusCallbackSync(GstBus*, GstMessage* msg,
