@@ -187,9 +187,7 @@ void RipCDDialog::Options() {
                                 .value<TranscoderPreset>();
 
   TranscoderOptionsDialog dialog(preset, this);
-  if (dialog.is_valid()) {
-    dialog.exec();
-  }
+  dialog.exec();
 }
 
 // Adds a folder to the destination box.

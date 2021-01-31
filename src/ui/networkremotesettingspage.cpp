@@ -206,7 +206,5 @@ void NetworkRemoteSettingsPage::Options() {
 
   TranscoderOptionsDialog dialog(preset, this);
   dialog.set_settings_postfix(NetworkRemote::kTranscoderSettingPostfix);
-  if (dialog.is_valid()) {
-    dialog.exec();
-  }
+  dialog.exec();
 }

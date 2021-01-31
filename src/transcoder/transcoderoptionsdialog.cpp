@@ -56,11 +56,15 @@ TranscoderOptionsDialog::TranscoderOptionsDialog(const TranscoderPreset& preset,
       options_ = new TranscoderOptionsWma(this);
       break;
     default:
+      ui_->errorMessage->setText(
+          tr("Unknown encoder type: %1").arg(preset.name_));
       break;
   }
 
   if (options_) {
-    setWindowTitle(windowTitle() + " - " + Song::TextForFiletype(preset.type_));
+    ui_->errorMessage->setVisible(false);
+    setWindowTitle(tr("Transcoding options - %1")
+                       .arg(Song::TextForFiletype(preset.type_)));
     options_->layout()->setContentsMargins(0, 0, 0, 0);
     ui_->verticalLayout->insertWidget(0, options_);
     resize(width(), minimumHeight());
