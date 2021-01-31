@@ -77,15 +77,13 @@ struct SuitableElement {
   int rank_;
 };
 
-GstElement* Transcoder::CreateElementForMimeType(const QString& element_type,
-                                                 const QString& mime_type,
-                                                 GstElement* bin) {
-  if (mime_type.isEmpty()) return nullptr;
+SuitableElement Transcoder::FindBestElementForMimeType(
+    const QString& element_type, const QString& mime_type) {
+  if (element_type.isEmpty() || mime_type.isEmpty()) return SuitableElement();
 
   // HACK: Force mp4mux because it doesn't set any useful src caps
   if (mime_type == "audio/mp4") {
-    LogLine(QString("Using '%1' (rank %2)").arg("mp4mux").arg(-1));
-    return CreateElement("mp4mux", bin);
+    return SuitableElement("mp4mux", -1);
   }
 
   // Keep track of all the suitable elements we find and figure out which
@@ -136,11 +134,21 @@ GstElement* Transcoder::CreateElementForMimeType(const QString& element_type,
   gst_plugin_feature_list_free(features);
   gst_caps_unref(target_caps);
 
-  if (suitable_elements_.isEmpty()) return nullptr;
+  if (suitable_elements_.isEmpty()) return SuitableElement();
 
   // Sort by rank
   std::sort(suitable_elements_.begin(), suitable_elements_.end());
-  const SuitableElement& best = suitable_elements_.last();
+  return suitable_elements_.last();
+}
+
+GstElement* Transcoder::CreateElementForMimeType(const QString& element_type,
+                                                 const QString& mime_type,
+                                                 GstElement* bin) {
+  SuitableElement best = FindBestElementForMimeType(element_type, mime_type);
+  if (best.name_.isEmpty()) {
+    LogLine(tr("Suitable element not found"));
+    return nullptr;
+  }
 
   LogLine(QString("Using '%1' (rank %2)").arg(best.name_).arg(best.rank_));
 
