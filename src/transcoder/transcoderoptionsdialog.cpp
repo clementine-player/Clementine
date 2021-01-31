@@ -17,6 +17,7 @@
 
 #include "transcoderoptionsdialog.h"
 
+#include "transcoder.h"
 #include "transcoderoptionsaac.h"
 #include "transcoderoptionsflac.h"
 #include "transcoderoptionsmp3.h"
@@ -26,12 +27,12 @@
 #include "transcoderoptionswma.h"
 #include "ui_transcoderoptionsdialog.h"
 
-TranscoderOptionsDialog::TranscoderOptionsDialog(Song::FileType type,
+TranscoderOptionsDialog::TranscoderOptionsDialog(const TranscoderPreset& preset,
                                                  QWidget* parent)
     : QDialog(parent), ui_(new Ui_TranscoderOptionsDialog), options_(nullptr) {
   ui_->setupUi(this);
 
-  switch (type) {
+  switch (preset.type_) {
     case Song::Type_Flac:
     case Song::Type_OggFlac:
       options_ = new TranscoderOptionsFlac(this);
@@ -59,7 +60,7 @@ TranscoderOptionsDialog::TranscoderOptionsDialog(Song::FileType type,
   }
 
   if (options_) {
-    setWindowTitle(windowTitle() + " - " + Song::TextForFiletype(type));
+    setWindowTitle(windowTitle() + " - " + Song::TextForFiletype(preset.type_));
     options_->layout()->setContentsMargins(0, 0, 0, 0);
     ui_->verticalLayout->insertWidget(0, options_);
     resize(width(), minimumHeight());

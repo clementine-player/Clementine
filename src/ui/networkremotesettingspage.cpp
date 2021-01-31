@@ -204,7 +204,7 @@ void NetworkRemoteSettingsPage::Options() {
   TranscoderPreset preset = ui_->format->itemData(ui_->format->currentIndex())
                                 .value<TranscoderPreset>();
 
-  TranscoderOptionsDialog dialog(preset.type_, this);
+  TranscoderOptionsDialog dialog(preset, this);
   dialog.set_settings_postfix(NetworkRemote::kTranscoderSettingPostfix);
   if (dialog.is_valid()) {
     dialog.exec();
