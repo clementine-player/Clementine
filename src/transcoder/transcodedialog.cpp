@@ -313,7 +313,7 @@ void TranscodeDialog::Options() {
   TranscoderPreset preset = ui_->format->itemData(ui_->format->currentIndex())
                                 .value<TranscoderPreset>();
 
-  TranscoderOptionsDialog dialog(preset.type_, this);
+  TranscoderOptionsDialog dialog(preset, this);
   if (dialog.is_valid()) {
     dialog.exec();
   }
