@@ -190,6 +190,12 @@ GstElement* Transcoder::CreateElementForMimeType(const QString& element_type,
   }
 }
 
+QString Transcoder::GetEncoderFactoryForMimeType(const QString& mime_type) {
+  SuitableElement best =
+      FindBestElementForMimeType("Codec/Encoder/Audio", mime_type);
+  return best.name_;
+}
+
 Transcoder::JobFinishedEvent::JobFinishedEvent(JobState* state, bool success)
     : QEvent(QEvent::Type(sEventType)), state_(state), success_(success) {}
 

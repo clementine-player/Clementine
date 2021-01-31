@@ -17,6 +17,8 @@
 
 #include "transcoderoptionsdialog.h"
 
+#include "core/logging.h"
+#include "core/utilities.h"
 #include "transcoder.h"
 #include "transcoderoptionsaac.h"
 #include "transcoderoptionsflac.h"
@@ -32,39 +34,44 @@ TranscoderOptionsDialog::TranscoderOptionsDialog(const TranscoderPreset& preset,
     : QDialog(parent), ui_(new Ui_TranscoderOptionsDialog), options_(nullptr) {
   ui_->setupUi(this);
 
-  switch (preset.type_) {
-    case Song::Type_Flac:
-    case Song::Type_OggFlac:
-      options_ = new TranscoderOptionsFlac(this);
-      break;
-    case Song::Type_Mp4:
-      options_ = new TranscoderOptionsAAC(this);
-      break;
-    case Song::Type_Mpeg:
-      options_ = new TranscoderOptionsMP3(this);
-      break;
-    case Song::Type_OggVorbis:
-      options_ = new TranscoderOptionsVorbis(this);
-      break;
-    case Song::Type_OggOpus:
-      options_ = new TranscoderOptionsOpus(this);
-      break;
-    case Song::Type_OggSpeex:
-      options_ = new TranscoderOptionsSpeex(this);
-      break;
-    case Song::Type_Asf:
-      options_ = new TranscoderOptionsWma(this);
-      break;
-    default:
-      ui_->errorMessage->setText(
-          tr("Unknown encoder type: %1").arg(preset.name_));
-      break;
+  QString element =
+      Transcoder::GetEncoderFactoryForMimeType(preset.codec_mimetype_);
+
+  qLog(Debug) << "Options for element" << element;
+  if (element == "flacenc") {
+    options_ = new TranscoderOptionsFlac(this);
+  } else if (element == "faac") {
+    options_ = new TranscoderOptionsAAC(this);
+  } else if (element == "lamemp3enc") {
+    options_ = new TranscoderOptionsMP3(this);
+  } else if (element == "vorbisenc") {
+    options_ = new TranscoderOptionsVorbis(this);
+  } else if (element == "opusenc") {
+    options_ = new TranscoderOptionsOpus(this);
+  } else if (element == "speexenc") {
+    options_ = new TranscoderOptionsSpeex(this);
+  } else if (element == "ffenc_wmav2") {
+    options_ = new TranscoderOptionsWma(this);
+  } else if (element.isEmpty()) {
+    ui_->errorMessage->setText(tr("Could not find a suitable encoder element "
+                                  "for <b>%1</b>.")
+                                   .arg(preset.name_));
+  } else {
+    QString url = Utilities::MakeBugReportUrl(
+        QString("transcoder settings: Unknown encoder element: ") + element);
+    ui_->errorMessage->setText(tr("No settings page available for encoder "
+                                  "element <b>%1</b>. "
+                                  "Please report this issue:<br>"
+                                  "<a href=\"%2\">%2</a>")
+                                   .arg(element)
+                                   .arg(url));
   }
 
+  setWindowTitle(tr("Transcoding options - %1").arg(preset.name_));
+
+  // Show options widget if available.
   if (options_) {
     ui_->errorMessage->setVisible(false);
-    setWindowTitle(tr("Transcoding options - %1")
-                       .arg(Song::TextForFiletype(preset.type_)));
     options_->layout()->setContentsMargins(0, 0, 0, 0);
     ui_->verticalLayout->insertWidget(0, options_);
     resize(width(), minimumHeight());
