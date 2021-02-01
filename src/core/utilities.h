@@ -166,6 +166,10 @@ QString SystemLanguageName();
 
 // Scrub messages for to remove queries, which may include auth info, from URLs.
 QString ScrubUrlQueries(const QString& str);
+
+// Return URL for user bug a user bug report.
+QString MakeBugReportUrl(const QString& title);
+
 }  // namespace Utilities
 
 class ScopedWCharArray {

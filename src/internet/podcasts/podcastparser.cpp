@@ -214,13 +214,10 @@ void PodcastParser::ParseItem(QXmlStreamReader* reader, Podcast* ret) const {
           QString date = reader->readElementText();
           episode.set_publication_date(Utilities::ParseRFC822DateTime(date));
           if (!episode.publication_date().isValid()) {
-            qLog(Error) << "Unable to parse date:" << date
-                        << "Please submit it to "
-                        << "https://github.com/clementine-player/Clementine/"
-                           "issues/new?title=" +
-                               QUrl::toPercentEncoding(
-                                   QString("[podcast] Unable to parse date: %1")
-                                       .arg(date));
+            qLog(Error)
+                << "Unable to parse date:" << date << "Please submit it to "
+                << Utilities::MakeBugReportUrl(
+                       QString("[podcast] Unable to parse date: %1").arg(date));
           }
         } else if (name == "duration" && lower_namespace == kItunesNamespace) {
           // http://www.apple.com/itunes/podcasts/specs.html
