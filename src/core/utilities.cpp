@@ -40,6 +40,7 @@
 #include <QTcpServer>
 #include <QTemporaryFile>
 #include <QUrl>
+#include <QUrlQuery>
 #include <QWidget>
 #include <QXmlStreamReader>
 #include <QtDebug>
@@ -767,6 +768,16 @@ QString ScrubUrlQueries(const QString& str) {
   QRegExp rx("((?:http|https)://\\S*\\?)\\S*");
   // QString::replace is non const, so operate on a copy.
   return QString(str).replace(rx, "\\1 (query removed)");
+}
+
+QString MakeBugReportUrl(const QString& title) {
+  // Example:
+  // https://github.com/clementine-player/Clementine/issues/new?title=New%20bug
+  QUrl url("https://github.com/clementine-player/Clementine/issues/new");
+  QUrlQuery query;
+  query.addQueryItem("title", title);
+  url.setQuery(query);
+  return url.toString(QUrl::FullyEncoded);
 }
 
 }  // namespace Utilities
