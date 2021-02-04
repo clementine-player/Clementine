@@ -319,6 +319,7 @@ set(SOURCES
   transcoder/transcoder.cpp
   transcoder/transcoderoptionsaac.cpp
   transcoder/transcoderoptionsdialog.cpp
+  transcoder/transcoderoptionserror.cpp
   transcoder/transcoderoptionsflac.cpp
   transcoder/transcoderoptionsmp3.cpp
   transcoder/transcoderoptionsopus.cpp
@@ -745,6 +746,7 @@ set(UI
   transcoder/transcodelogdialog.ui
   transcoder/transcoderoptionsaac.ui
   transcoder/transcoderoptionsdialog.ui
+  transcoder/transcoderoptionserror.ui
   transcoder/transcoderoptionsflac.ui
   transcoder/transcoderoptionsmp3.ui
   transcoder/transcoderoptionsopus.ui

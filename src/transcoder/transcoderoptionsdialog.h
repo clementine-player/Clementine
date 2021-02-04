@@ -37,6 +37,9 @@ class TranscoderOptionsDialog : public QDialog {
 
   void set_settings_postfix(const QString& settings_postfix);
 
+  static TranscoderOptionsInterface* MakeOptionsPage(const QString& mime_type,
+                                                     QWidget* parent = nullptr);
+
  protected:
   void showEvent(QShowEvent* e);
 
