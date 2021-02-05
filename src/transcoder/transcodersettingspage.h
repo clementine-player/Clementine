@@ -18,8 +18,10 @@
 #ifndef TRANSCODERSETTINGSPAGE_H
 #define TRANSCODERSETTINGSPAGE_H
 
+#include "transcoder.h"
 #include "ui/settingspage.h"
 
+class TranscoderOptionsInterface;
 class Ui_TranscoderSettingsPage;
 
 class TranscoderSettingsPage : public SettingsPage {
@@ -33,7 +35,9 @@ class TranscoderSettingsPage : public SettingsPage {
   void Save();
 
  private:
+  void AddTab(const QString& label, Transcoder::CodecType mime_type);
   Ui_TranscoderSettingsPage* ui_;
+  QList<TranscoderOptionsInterface*> options_pages_;
 };
 
 #endif  // TRANSCODERSETTINGSPAGE_H
