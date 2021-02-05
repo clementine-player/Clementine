@@ -49,10 +49,22 @@ class Transcoder : public QObject {
   Q_OBJECT
 
  public:
+  enum CodecType {
+    Codec_None = 0,
+    Codec_Flac = 1,
+    Codec_Mp4 = 2,
+    Codec_Mp3 = 3,
+    Codec_Vorbis = 4,
+    Codec_Speex = 5,
+    Codec_Opus = 6,
+    Codec_Wma = 7
+  };
+
   Transcoder(QObject* parent = nullptr, const QString& settings_postfix = "");
 
   static TranscoderPreset PresetForFileType(Song::FileType type);
   static QList<TranscoderPreset> GetAllPresets();
+  static QString MimeType(CodecType type);
   static Song::FileType PickBestFormat(QList<Song::FileType> supported);
 
   int max_threads() const { return max_threads_; }
