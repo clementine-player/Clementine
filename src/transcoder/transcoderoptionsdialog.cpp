@@ -22,6 +22,7 @@
 #include "transcoder.h"
 #include "transcoderoptionsaac.h"
 #include "transcoderoptionserror.h"
+#include "transcoderoptionsfdkaac.h"
 #include "transcoderoptionsflac.h"
 #include "transcoderoptionsmp3.h"
 #include "transcoderoptionsopus.h"
@@ -78,6 +79,8 @@ TranscoderOptionsInterface* TranscoderOptionsDialog::MakeOptionsPage(
     return new TranscoderOptionsFlac(parent);
   } else if (element == "faac") {
     return new TranscoderOptionsAAC(parent);
+  } else if (element == "fdkaacenc") {
+    return new TranscoderOptionsFDKAAC(parent);
   } else if (element == "lamemp3enc") {
     return new TranscoderOptionsMP3(parent);
   } else if (element == "vorbisenc") {
