@@ -325,6 +325,7 @@ set(SOURCES
   transcoder/transcoderoptionsmp3.cpp
   transcoder/transcoderoptionsopus.cpp
   transcoder/transcoderoptionsspeex.cpp
+  transcoder/transcoderoptionsvoaac.cpp
   transcoder/transcoderoptionsvorbis.cpp
   transcoder/transcoderoptionswma.cpp
   transcoder/transcodersettingspage.cpp
@@ -754,6 +755,7 @@ set(UI
   transcoder/transcoderoptionsmp3.ui
   transcoder/transcoderoptionsopus.ui
   transcoder/transcoderoptionsspeex.ui
+  transcoder/transcoderoptionsvoaac.ui
   transcoder/transcoderoptionsvorbis.ui
   transcoder/transcoderoptionswma.ui
   transcoder/transcodersettingspage.ui

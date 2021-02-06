@@ -27,6 +27,7 @@
 #include "transcoderoptionsmp3.h"
 #include "transcoderoptionsopus.h"
 #include "transcoderoptionsspeex.h"
+#include "transcoderoptionsvoaac.h"
 #include "transcoderoptionsvorbis.h"
 #include "transcoderoptionswma.h"
 #include "ui_transcoderoptionsdialog.h"
@@ -81,6 +82,8 @@ TranscoderOptionsInterface* TranscoderOptionsDialog::MakeOptionsPage(
     return new TranscoderOptionsAAC(parent);
   } else if (element == "fdkaacenc") {
     return new TranscoderOptionsFDKAAC(parent);
+  } else if (element == "voaacenc") {
+    return new TranscoderOptionsVOAAC(parent);
   } else if (element == "lamemp3enc") {
     return new TranscoderOptionsMP3(parent);
   } else if (element == "vorbisenc") {
