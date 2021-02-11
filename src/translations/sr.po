@@ -12,8 +12,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2021-01-29 22:42+0000\n"
-"Last-Translator: John Maguire <john.maguire@gmail.com>\n"
+"PO-Revision-Date: 2021-02-09 17:41+0000\n"
+"Last-Translator: Slobodan Simić <slsimic@gmail.com>\n"
 "Language-Team: Serbian (http://www.transifex.com/davidsansome/clementine/language/sr/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -34,10 +34,12 @@ msgid " days"
 msgstr " дана"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:129
+#: ../bin/src/ui_transcoderoptionsfdkaac.h:104
 #: ../bin/src/ui_transcoderoptionsmp3.h:194
 #: ../bin/src/ui_transcoderoptionsopus.h:80
 #: ../bin/src/ui_transcoderoptionsspeex.h:219
 #: ../bin/src/ui_transcoderoptionsspeex.h:222
+#: ../bin/src/ui_transcoderoptionsvoaac.h:83
 #: ../bin/src/ui_transcoderoptionsvorbis.h:204
 #: ../bin/src/ui_transcoderoptionsvorbis.h:207
 #: ../bin/src/ui_transcoderoptionsvorbis.h:210
@@ -79,12 +81,12 @@ msgstr "%1 албума"
 msgid "%1 dB"
 msgstr "%1 dB"
 
-#: core/utilities.cpp:122
+#: core/utilities.cpp:123
 #, qt-format
 msgid "%1 days"
 msgstr "%1 дана"
 
-#: core/utilities.cpp:145
+#: core/utilities.cpp:146
 #, qt-format
 msgid "%1 days ago"
 msgstr "пре %1 дана"
@@ -293,7 +295,7 @@ msgstr "0:00:00"
 msgid "0px"
 msgstr "0px"
 
-#: core/utilities.cpp:122
+#: core/utilities.cpp:123
 msgid "1 day"
 msgstr "1 дан"
 
@@ -417,7 +419,7 @@ msgstr "А&утоматски"
 msgid "A-Z"
 msgstr "А-Ш"
 
-#: ../bin/src/ui_transcodersettingspage.h:178
+#: transcoder/transcodersettingspage.cpp:31
 msgid "AAC"
 msgstr "ААЦ"
 
@@ -534,8 +536,8 @@ msgstr "Додај фајл..."
 msgid "Add files to transcode"
 msgstr "Додавање фајлова за прекодирање"
 
-#: transcoder/transcodedialog.cpp:329 ui/mainwindow.cpp:2196
-#: ripper/ripcddialog.cpp:202
+#: transcoder/transcodedialog.cpp:327 ui/mainwindow.cpp:2196
+#: ripper/ripcddialog.cpp:200
 msgid "Add folder"
 msgstr "Додавање фасцикле"
 
@@ -911,6 +913,10 @@ msgstr "Аутоматски"
 msgid "Automatic updating"
 msgstr "Аутоматско ажурирање"
 
+#: ../bin/src/ui_transcoderoptionsfdkaac.h:101
+msgid "Automatically determine based on sample rate."
+msgstr "Сам одреди на основу учестаности узорковања."
+
 #: ../bin/src/ui_librarysettingspage.h:207
 msgid "Automatically open single categories in the library tree"
 msgstr "Аутоматски отвори појединачне категорије у стаблу библиотеке"
@@ -996,9 +1002,11 @@ msgstr "битски проток"
 #: library/savedgroupingmanager.cpp:93 ../bin/src/ui_groupbydialog.h:138
 #: ../bin/src/ui_groupbydialog.h:157 ../bin/src/ui_groupbydialog.h:176
 #: ../bin/src/ui_transcoderoptionsaac.h:128
+#: ../bin/src/ui_transcoderoptionsfdkaac.h:100
 #: ../bin/src/ui_transcoderoptionsmp3.h:193
 #: ../bin/src/ui_transcoderoptionsopus.h:79
 #: ../bin/src/ui_transcoderoptionsspeex.h:217
+#: ../bin/src/ui_transcoderoptionsvoaac.h:82
 #: ../bin/src/ui_transcoderoptionswma.h:78
 msgid "Bitrate"
 msgstr "Битски проток"
@@ -1471,6 +1479,11 @@ msgstr "Не могу да откријем ток звука у %1"
 msgid "Could not find Google Drive file."
 msgstr "Не могу да нађем фајл Гугл диска"
 
+#: transcoder/transcoderoptionserror.cpp:35
+#, qt-format
+msgid "Could not find a suitable encoder element for <b>%1</b>."
+msgstr "Не могу да нађем прихватљив елемент кодирања за <b>%1</b>."
+
 #: songinfo/streamdiscoverer.cpp:124
 msgid "Could not get details"
 msgstr "Не могу да добавим детаље"
@@ -1483,14 +1496,14 @@ msgstr "Не могу да се пријавим на Ласт.фм. Покуш�
 msgid "Couldn't create playlist"
 msgstr "Не могу да направим листу нумера"
 
-#: transcoder/transcoder.cpp:435
+#: transcoder/transcoder.cpp:471
 #, qt-format
 msgid ""
 "Couldn't find a muxer for %1, check you have the correct GStreamer plugins "
 "installed"
 msgstr "Не могу да нађем муксер за %1, проверите да ли имате инсталиране потребне прикључке за Гстример"
 
-#: transcoder/transcoder.cpp:428
+#: transcoder/transcoder.cpp:464
 #, qt-format
 msgid ""
 "Couldn't find an encoder for %1, check you have the correct GStreamer "
@@ -1961,11 +1974,11 @@ msgstr "дабстеп"
 
 #: transcoder/transcodedialog.cpp:70
 msgid "Dump Graph"
-msgstr ""
+msgstr "Избаци график"
 
 #: ../bin/src/ui_gstenginedebug.h:68
 msgid "Dump Pipeline Graph"
-msgstr ""
+msgstr "Приказује линијски график"
 
 #: ../bin/src/ui_console.h:132
 msgid "Dump To Logs"
@@ -2162,7 +2175,7 @@ msgstr "Грешка учитавања %1"
 msgid "Error loading di.fm playlist"
 msgstr "Грешка учитавања di.fm листе нумера"
 
-#: transcoder/transcoder.cpp:400
+#: transcoder/transcoder.cpp:436
 #, qt-format
 msgid "Error processing %1: %2"
 msgstr "Грешка обраде %1: %2"
@@ -2247,12 +2260,12 @@ msgstr "Извезено %1 омота од %2 (%3 прескочено)"
 
 #: ../bin/src/ui_mainwindow.h:790
 msgid "F9"
-msgstr ""
+msgstr "F9"
 
-#: core/song.cpp:429 transcoder/transcoder.cpp:240
+#: core/song.cpp:429 transcoder/transcoder.cpp:276
+#: transcoder/transcodersettingspage.cpp:30
 #: ../bin/src/ui_magnatunedownloaddialog.h:136
 #: ../bin/src/ui_magnatunesettingspage.h:170
-#: ../bin/src/ui_transcodersettingspage.h:176
 msgid "FLAC"
 msgstr "ФЛАЦ"
 
@@ -2317,7 +2330,7 @@ msgstr "Неуспех рашчлањивања ИксМЛ-а за овај РС
 msgid ""
 "Failed to update icecast directory:\n"
 "%1"
-msgstr ""
+msgstr "Нисам могао да освежим Ајскест директоријум:\n%1"
 
 #: ui/trackselectiondialog.cpp:247
 #, qt-format
@@ -2465,10 +2478,13 @@ msgstr "Заборављањем уређаја уклонићете га са �
 #: ../bin/src/ui_wizardfinishpage.h:82
 #: ../bin/src/ui_songkickconcertwidget.h:99
 #: ../bin/src/ui_transcoderoptionsaac.h:127
+#: ../bin/src/ui_transcoderoptionserror.h:56
+#: ../bin/src/ui_transcoderoptionsfdkaac.h:99
 #: ../bin/src/ui_transcoderoptionsflac.h:91
 #: ../bin/src/ui_transcoderoptionsmp3.h:189
 #: ../bin/src/ui_transcoderoptionsopus.h:78
 #: ../bin/src/ui_transcoderoptionsspeex.h:215
+#: ../bin/src/ui_transcoderoptionsvoaac.h:81
 #: ../bin/src/ui_transcoderoptionsvorbis.h:200
 #: ../bin/src/ui_transcoderoptionswma.h:77 ../bin/src/ui_equalizerslider.h:98
 #: ../bin/src/ui_fileview.h:106 ../bin/src/ui_loginstatewidget.h:167
@@ -2734,12 +2750,12 @@ msgstr "Слике (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm
 msgid "Images (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 msgstr "Слике (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 
-#: core/utilities.cpp:157
+#: core/utilities.cpp:158
 #, qt-format
 msgid "In %1 days"
 msgstr "за %1 дана"
 
-#: core/utilities.cpp:160
+#: core/utilities.cpp:161
 #, qt-format
 msgid "In %1 weeks"
 msgstr "за %1 седмица"
@@ -3111,7 +3127,7 @@ msgstr "Пријава није успела"
 
 #: ../bin/src/ui_transcodelogdialog.h:108
 msgid "Logs"
-msgstr ""
+msgstr "Дневници"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:136
 msgid "Long term prediction profile (LTP)"
@@ -3152,12 +3168,12 @@ msgstr "Стихови са %1"
 msgid "Lyrics from the tag"
 msgstr "Стихови из ознаке"
 
-#: transcoder/transcoder.cpp:242
+#: transcoder/transcoder.cpp:278
 msgid "M4A AAC"
 msgstr "М4А ААЦ"
 
-#: core/song.cpp:435 transcoder/transcoder.cpp:245
-#: ../bin/src/ui_transcodersettingspage.h:174
+#: core/song.cpp:435 transcoder/transcoder.cpp:281
+#: transcoder/transcodersettingspage.cpp:32
 msgid "MP3"
 msgstr "MП3"
 
@@ -3437,14 +3453,14 @@ msgstr "Следећа"
 
 #: ../bin/src/ui_mainwindow.h:785
 msgid "Next album"
-msgstr ""
+msgstr "Следећи албум"
 
 #: core/globalshortcuts.cpp:59 wiimotedev/wiimotesettingspage.cpp:105
 #: ../bin/src/ui_mainwindow.h:727
 msgid "Next track"
 msgstr "Следећа нумера"
 
-#: core/utilities.cpp:158
+#: core/utilities.cpp:159
 msgid "Next week"
 msgstr "следеће седмице"
 
@@ -3468,6 +3484,17 @@ msgstr "без дугих блокова"
 msgid ""
 "No matches found.  Clear the search box to show the whole playlist again."
 msgstr "Нема поклапања.  Очистите поље претраге да бисте приказали целу листу поново."
+
+#: transcoder/transcoderoptionserror.cpp:32
+msgid "No settings available for this type."
+msgstr "Нема поставки за овај тип."
+
+#: transcoder/transcoderoptionserror.cpp:42
+#, qt-format
+msgid ""
+"No settings page available for encoder element <b>%1</b>. Please report this"
+" issue:<br><a href=\"%2\">%2</a>"
+msgstr ""
 
 #: ../bin/src/ui_transcoderoptionsaac.h:144
 msgid "No short blocks"
@@ -3563,19 +3590,19 @@ msgstr "искључено"
 msgid "Ogg FLAC"
 msgstr "ОГГ ФЛАЦ"
 
-#: transcoder/transcoder.cpp:251
+#: transcoder/transcoder.cpp:286
 msgid "Ogg Flac"
 msgstr "ОГГ ФЛАЦ"
 
-#: core/song.cpp:443 transcoder/transcoder.cpp:257
+#: core/song.cpp:443 transcoder/transcoder.cpp:292
 msgid "Ogg Opus"
 msgstr "ОГГ Опус"
 
-#: core/song.cpp:439 transcoder/transcoder.cpp:254
+#: core/song.cpp:439 transcoder/transcoder.cpp:289
 msgid "Ogg Speex"
 msgstr "ОГГ Спикс"
 
-#: core/song.cpp:441 transcoder/transcoder.cpp:248
+#: core/song.cpp:441 transcoder/transcoder.cpp:283
 #: ../bin/src/ui_magnatunedownloaddialog.h:135
 #: ../bin/src/ui_magnatunesettingspage.h:169
 msgid "Ogg Vorbis"
@@ -3685,7 +3712,7 @@ msgstr "Оптимизуј квалитет"
 msgid "Options..."
 msgstr "Опције..."
 
-#: ../bin/src/ui_transcodersettingspage.h:180
+#: transcoder/transcodersettingspage.cpp:35
 msgid "Opus"
 msgstr "Опус"
 
@@ -4039,7 +4066,7 @@ msgstr "Постави насумично"
 
 #: ../bin/src/ui_console.h:134
 msgid "Qt"
-msgstr ""
+msgstr "КуТ"
 
 #: ../bin/src/ui_transcoderoptionsflac.h:92
 #: ../bin/src/ui_transcoderoptionsmp3.h:191
@@ -4626,6 +4653,10 @@ msgstr "Сервис ван мреже"
 msgid "Set %1 to \"%2\"..."
 msgstr "Промени %1 у „%2“..."
 
+#: ../bin/src/ui_transcoderoptionsfdkaac.h:102
+msgid "Set target rate"
+msgstr ""
+
 #: core/commandlineoptions.cpp:167
 msgid "Set the volume to <value> percent"
 msgstr "Постави јачину звука на <вредност> процената"
@@ -4915,7 +4946,7 @@ msgstr "извор"
 msgid "Sources"
 msgstr "Извори"
 
-#: ../bin/src/ui_transcodersettingspage.h:177
+#: transcoder/transcodersettingspage.cpp:34
 msgid "Speex"
 msgstr "Спикс"
 
@@ -4969,7 +5000,7 @@ msgid ""
 "list"
 msgstr "Почните нешто да куцате у поље за претрагу изнад да бисте испунили овај списак резултата претраге"
 
-#: transcoder/transcoder.cpp:407
+#: transcoder/transcoder.cpp:443
 #, qt-format
 msgid "Starting %1"
 msgstr "Почињем %1"
@@ -5055,7 +5086,7 @@ msgstr "Субсоник"
 msgid "Success!"
 msgstr "Успех!"
 
-#: transcoder/transcoder.cpp:190
+#: transcoder/transcoder.cpp:204
 #, qt-format
 msgid "Successfully written %1"
 msgstr "Успешно уписано %1"
@@ -5063,6 +5094,10 @@ msgstr "Успешно уписано %1"
 #: ui/trackselectiondialog.cpp:167
 msgid "Suggested tags"
 msgstr "Предложене ознаке"
+
+#: transcoder/transcoder.cpp:149
+msgid "Suitable element not found"
+msgstr ""
 
 #: ../bin/src/ui_edittagdialog.h:718
 #: ../bin/src/ui_notificationssettingspage.h:454
@@ -5215,7 +5250,7 @@ msgstr "Ови фајлови ће бити трајно обрисани са �
 msgid "These folders will be scanned for music to make up your library"
 msgstr "Ове фасцикле ће бити скениране да би се направила библиотека"
 
-#: ../bin/src/ui_transcodersettingspage.h:173
+#: ../bin/src/ui_transcodersettingspage.h:61
 msgid ""
 "These settings are used in the \"Transcode Music\" dialog, and when "
 "converting music before copying it to a device."
@@ -5295,7 +5330,7 @@ msgstr "Временски корак"
 msgid "Title"
 msgstr "наслов"
 
-#: core/utilities.cpp:143 core/utilities.cpp:155
+#: core/utilities.cpp:144 core/utilities.cpp:156
 msgid "Today"
 msgstr "данас"
 
@@ -5319,7 +5354,7 @@ msgstr "Мењај скробловање"
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "Мењај видљивост лепог ОСД-а"
 
-#: core/utilities.cpp:156
+#: core/utilities.cpp:157
 msgid "Tomorrow"
 msgstr "сутра"
 
@@ -5362,13 +5397,13 @@ msgstr "Прекодирање музике"
 
 #: ../bin/src/ui_transcodelogdialog.h:106
 msgid "Transcoder Details"
-msgstr ""
+msgstr "Детаљи кодера"
 
-#: ../bin/src/ui_transcodersettingspage.h:172
+#: ../bin/src/ui_transcodersettingspage.h:60
 msgid "Transcoding"
 msgstr "Прекодирање"
 
-#: transcoder/transcoder.cpp:326
+#: transcoder/transcoder.cpp:362
 #, qt-format
 msgid "Transcoding %1 files using %2 threads"
 msgstr "Прекодирам %1 фајлова користећи %2 ниски"
@@ -5376,6 +5411,11 @@ msgstr "Прекодирам %1 фајлова користећи %2 ниски"
 #: ../bin/src/ui_transcoderoptionsdialog.h:53
 msgid "Transcoding options"
 msgstr "Опције прекодирања"
+
+#: transcoder/transcoderoptionsdialog.cpp:42
+#, qt-format
+msgid "Transcoding options - %1"
+msgstr "Опције кодирања - %1"
 
 #: core/song.cpp:451
 msgid "TrueAudio"
@@ -5652,7 +5692,7 @@ msgstr "Откривање гласовне активности"
 msgid "Volume %1%"
 msgstr "Јачина %1%"
 
-#: ../bin/src/ui_transcodersettingspage.h:175
+#: transcoder/transcodersettingspage.cpp:33
 msgid "Vorbis"
 msgstr "Ворбис"
 
@@ -5661,7 +5701,7 @@ msgstr "Ворбис"
 msgid "WAV"
 msgstr "ВАВ"
 
-#: ../bin/src/ui_transcodersettingspage.h:179
+#: transcoder/transcodersettingspage.cpp:36
 msgid "WMA"
 msgstr "ВМА"
 
@@ -5676,7 +5716,7 @@ msgid ""
 "also affect the performance of hardware decoders."
 msgstr ""
 
-#: core/song.cpp:447 transcoder/transcoder.cpp:263
+#: core/song.cpp:447 transcoder/transcoder.cpp:298
 msgid "Wav"
 msgstr "ВАВ"
 
@@ -5772,7 +5812,7 @@ msgstr "Виндоуз медија 40k"
 msgid "Windows Media 64k"
 msgstr "Виндоуз медија 64k"
 
-#: core/song.cpp:427 transcoder/transcoder.cpp:260
+#: core/song.cpp:427 transcoder/transcoder.cpp:295
 msgid "Windows Media audio"
 msgstr "Виндоуз медија аудио"
 
@@ -5822,7 +5862,7 @@ msgstr "Година — оригинална"
 msgid "Years"
 msgstr "година"
 
-#: core/utilities.cpp:144
+#: core/utilities.cpp:145
 msgid "Yesterday"
 msgstr "јуче"
 

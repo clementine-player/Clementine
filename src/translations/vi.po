@@ -13,7 +13,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2021-01-29 22:42+0000\n"
+"PO-Revision-Date: 2021-02-07 15:19+0000\n"
 "Last-Translator: John Maguire <john.maguire@gmail.com>\n"
 "Language-Team: Vietnamese (http://www.transifex.com/davidsansome/clementine/language/vi/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -35,10 +35,12 @@ msgid " days"
 msgstr " ngày"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:129
+#: ../bin/src/ui_transcoderoptionsfdkaac.h:104
 #: ../bin/src/ui_transcoderoptionsmp3.h:194
 #: ../bin/src/ui_transcoderoptionsopus.h:80
 #: ../bin/src/ui_transcoderoptionsspeex.h:219
 #: ../bin/src/ui_transcoderoptionsspeex.h:222
+#: ../bin/src/ui_transcoderoptionsvoaac.h:83
 #: ../bin/src/ui_transcoderoptionsvorbis.h:204
 #: ../bin/src/ui_transcoderoptionsvorbis.h:207
 #: ../bin/src/ui_transcoderoptionsvorbis.h:210
@@ -80,12 +82,12 @@ msgstr "%1 album"
 msgid "%1 dB"
 msgstr "%1 dB"
 
-#: core/utilities.cpp:122
+#: core/utilities.cpp:123
 #, qt-format
 msgid "%1 days"
 msgstr "%1 ngày"
 
-#: core/utilities.cpp:145
+#: core/utilities.cpp:146
 #, qt-format
 msgid "%1 days ago"
 msgstr "%1 ngày trước"
@@ -294,7 +296,7 @@ msgstr "0:00:00"
 msgid "0px"
 msgstr "0 điểm ảnh"
 
-#: core/utilities.cpp:122
+#: core/utilities.cpp:123
 msgid "1 day"
 msgstr "1 ngày"
 
@@ -418,7 +420,7 @@ msgstr ""
 msgid "A-Z"
 msgstr "A-Z"
 
-#: ../bin/src/ui_transcodersettingspage.h:178
+#: transcoder/transcodersettingspage.cpp:31
 msgid "AAC"
 msgstr "AAC"
 
@@ -535,8 +537,8 @@ msgstr "Thêm tập tin..."
 msgid "Add files to transcode"
 msgstr "Thêm các tập tin để chuyển mã"
 
-#: transcoder/transcodedialog.cpp:329 ui/mainwindow.cpp:2196
-#: ripper/ripcddialog.cpp:202
+#: transcoder/transcodedialog.cpp:327 ui/mainwindow.cpp:2196
+#: ripper/ripcddialog.cpp:200
 msgid "Add folder"
 msgstr "Thêm thư mục"
 
@@ -912,6 +914,10 @@ msgstr "Tự động"
 msgid "Automatic updating"
 msgstr "Tự động cập nhật"
 
+#: ../bin/src/ui_transcoderoptionsfdkaac.h:101
+msgid "Automatically determine based on sample rate."
+msgstr ""
+
 #: ../bin/src/ui_librarysettingspage.h:207
 msgid "Automatically open single categories in the library tree"
 msgstr "Tự động mở các mục đơn trong cây thư mục"
@@ -997,9 +1003,11 @@ msgstr "Bit rate"
 #: library/savedgroupingmanager.cpp:93 ../bin/src/ui_groupbydialog.h:138
 #: ../bin/src/ui_groupbydialog.h:157 ../bin/src/ui_groupbydialog.h:176
 #: ../bin/src/ui_transcoderoptionsaac.h:128
+#: ../bin/src/ui_transcoderoptionsfdkaac.h:100
 #: ../bin/src/ui_transcoderoptionsmp3.h:193
 #: ../bin/src/ui_transcoderoptionsopus.h:79
 #: ../bin/src/ui_transcoderoptionsspeex.h:217
+#: ../bin/src/ui_transcoderoptionsvoaac.h:82
 #: ../bin/src/ui_transcoderoptionswma.h:78
 msgid "Bitrate"
 msgstr "Bitrate"
@@ -1472,6 +1480,11 @@ msgstr "Không thể nhận diện luồng âm thanh trong %1"
 msgid "Could not find Google Drive file."
 msgstr ""
 
+#: transcoder/transcoderoptionserror.cpp:35
+#, qt-format
+msgid "Could not find a suitable encoder element for <b>%1</b>."
+msgstr ""
+
 #: songinfo/streamdiscoverer.cpp:124
 msgid "Could not get details"
 msgstr "Không thể lấy chi tiết"
@@ -1484,14 +1497,14 @@ msgstr "Không thể đăng nhập vào Last.fm. Hãy thử lại sau."
 msgid "Couldn't create playlist"
 msgstr "Không thể tạo danh sách"
 
-#: transcoder/transcoder.cpp:435
+#: transcoder/transcoder.cpp:471
 #, qt-format
 msgid ""
 "Couldn't find a muxer for %1, check you have the correct GStreamer plugins "
 "installed"
 msgstr "Không tìm thấy thiết bị ghép kênh cho %1, hãy chắn chắn là bạn đã cài đặt đủ các phần bổ sung của GStreamer"
 
-#: transcoder/transcoder.cpp:428
+#: transcoder/transcoder.cpp:464
 #, qt-format
 msgid ""
 "Couldn't find an encoder for %1, check you have the correct GStreamer "
@@ -2163,7 +2176,7 @@ msgstr "Lỗi nạp %1"
 msgid "Error loading di.fm playlist"
 msgstr "Lỗi khi nạp danh sách di.fm"
 
-#: transcoder/transcoder.cpp:400
+#: transcoder/transcoder.cpp:436
 #, qt-format
 msgid "Error processing %1: %2"
 msgstr "Lỗi xử lý %1: %2"
@@ -2250,10 +2263,10 @@ msgstr "Đã xuất %1 trên %2 ảnh bìa (đã bỏ qua %3)"
 msgid "F9"
 msgstr ""
 
-#: core/song.cpp:429 transcoder/transcoder.cpp:240
+#: core/song.cpp:429 transcoder/transcoder.cpp:276
+#: transcoder/transcodersettingspage.cpp:30
 #: ../bin/src/ui_magnatunedownloaddialog.h:136
 #: ../bin/src/ui_magnatunesettingspage.h:170
-#: ../bin/src/ui_transcodersettingspage.h:176
 msgid "FLAC"
 msgstr "FLAC"
 
@@ -2466,10 +2479,13 @@ msgstr "Chọn Quên thiết bị sẽ xóa tên nó khỏi danh sách này và 
 #: ../bin/src/ui_wizardfinishpage.h:82
 #: ../bin/src/ui_songkickconcertwidget.h:99
 #: ../bin/src/ui_transcoderoptionsaac.h:127
+#: ../bin/src/ui_transcoderoptionserror.h:56
+#: ../bin/src/ui_transcoderoptionsfdkaac.h:99
 #: ../bin/src/ui_transcoderoptionsflac.h:91
 #: ../bin/src/ui_transcoderoptionsmp3.h:189
 #: ../bin/src/ui_transcoderoptionsopus.h:78
 #: ../bin/src/ui_transcoderoptionsspeex.h:215
+#: ../bin/src/ui_transcoderoptionsvoaac.h:81
 #: ../bin/src/ui_transcoderoptionsvorbis.h:200
 #: ../bin/src/ui_transcoderoptionswma.h:77 ../bin/src/ui_equalizerslider.h:98
 #: ../bin/src/ui_fileview.h:106 ../bin/src/ui_loginstatewidget.h:167
@@ -2735,12 +2751,12 @@ msgstr "Hình ảnh (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xb
 msgid "Images (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 msgstr "Hình ảnh (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 
-#: core/utilities.cpp:157
+#: core/utilities.cpp:158
 #, qt-format
 msgid "In %1 days"
 msgstr "Trong %1 ngày"
 
-#: core/utilities.cpp:160
+#: core/utilities.cpp:161
 #, qt-format
 msgid "In %1 weeks"
 msgstr "Trong %1 tuần"
@@ -3153,12 +3169,12 @@ msgstr "Lời bài hát từ %1"
 msgid "Lyrics from the tag"
 msgstr "Lời bài hát từ thẻ"
 
-#: transcoder/transcoder.cpp:242
+#: transcoder/transcoder.cpp:278
 msgid "M4A AAC"
 msgstr "M4A AAC"
 
-#: core/song.cpp:435 transcoder/transcoder.cpp:245
-#: ../bin/src/ui_transcodersettingspage.h:174
+#: core/song.cpp:435 transcoder/transcoder.cpp:281
+#: transcoder/transcodersettingspage.cpp:32
 msgid "MP3"
 msgstr "MP3"
 
@@ -3445,7 +3461,7 @@ msgstr ""
 msgid "Next track"
 msgstr "Phát bài tiếp theo"
 
-#: core/utilities.cpp:158
+#: core/utilities.cpp:159
 msgid "Next week"
 msgstr "Tuần sau"
 
@@ -3469,6 +3485,17 @@ msgstr "Các khối không dài"
 msgid ""
 "No matches found.  Clear the search box to show the whole playlist again."
 msgstr "Không có kết quả nào trùng khớp. Xóa nội dung trong ô tìm kiếm để hiện danh sách trở lại."
+
+#: transcoder/transcoderoptionserror.cpp:32
+msgid "No settings available for this type."
+msgstr ""
+
+#: transcoder/transcoderoptionserror.cpp:42
+#, qt-format
+msgid ""
+"No settings page available for encoder element <b>%1</b>. Please report this"
+" issue:<br><a href=\"%2\">%2</a>"
+msgstr ""
 
 #: ../bin/src/ui_transcoderoptionsaac.h:144
 msgid "No short blocks"
@@ -3564,19 +3591,19 @@ msgstr "Tắt"
 msgid "Ogg FLAC"
 msgstr "Ogg FLAC"
 
-#: transcoder/transcoder.cpp:251
+#: transcoder/transcoder.cpp:286
 msgid "Ogg Flac"
 msgstr "Ogg Flac"
 
-#: core/song.cpp:443 transcoder/transcoder.cpp:257
+#: core/song.cpp:443 transcoder/transcoder.cpp:292
 msgid "Ogg Opus"
 msgstr "Ogg Opus"
 
-#: core/song.cpp:439 transcoder/transcoder.cpp:254
+#: core/song.cpp:439 transcoder/transcoder.cpp:289
 msgid "Ogg Speex"
 msgstr "Ogg Speex"
 
-#: core/song.cpp:441 transcoder/transcoder.cpp:248
+#: core/song.cpp:441 transcoder/transcoder.cpp:283
 #: ../bin/src/ui_magnatunedownloaddialog.h:135
 #: ../bin/src/ui_magnatunesettingspage.h:169
 msgid "Ogg Vorbis"
@@ -3686,7 +3713,7 @@ msgstr "Tối ưu cho chất lượng"
 msgid "Options..."
 msgstr "Tuỳ chọn..."
 
-#: ../bin/src/ui_transcodersettingspage.h:180
+#: transcoder/transcodersettingspage.cpp:35
 msgid "Opus"
 msgstr "Opus"
 
@@ -4627,6 +4654,10 @@ msgstr "Dịch vụ ngoại tuyến"
 msgid "Set %1 to \"%2\"..."
 msgstr "Thiết lập %1 sang \"%2\"..."
 
+#: ../bin/src/ui_transcoderoptionsfdkaac.h:102
+msgid "Set target rate"
+msgstr ""
+
 #: core/commandlineoptions.cpp:167
 msgid "Set the volume to <value> percent"
 msgstr "Đặt âm lượng ở mức <value> phần trăm"
@@ -4916,7 +4947,7 @@ msgstr "Nguồn"
 msgid "Sources"
 msgstr "Nguồn"
 
-#: ../bin/src/ui_transcodersettingspage.h:177
+#: transcoder/transcodersettingspage.cpp:34
 msgid "Speex"
 msgstr "Speex"
 
@@ -4970,7 +5001,7 @@ msgid ""
 "list"
 msgstr "Gõ gì đó vào ô tìm kiếm"
 
-#: transcoder/transcoder.cpp:407
+#: transcoder/transcoder.cpp:443
 #, qt-format
 msgid "Starting %1"
 msgstr "Bắt đầu %1"
@@ -5056,7 +5087,7 @@ msgstr "Subsonic"
 msgid "Success!"
 msgstr "Thành công!"
 
-#: transcoder/transcoder.cpp:190
+#: transcoder/transcoder.cpp:204
 #, qt-format
 msgid "Successfully written %1"
 msgstr "Đã ghi vào %1"
@@ -5064,6 +5095,10 @@ msgstr "Đã ghi vào %1"
 #: ui/trackselectiondialog.cpp:167
 msgid "Suggested tags"
 msgstr "Thẻ được đề nghị"
+
+#: transcoder/transcoder.cpp:149
+msgid "Suitable element not found"
+msgstr ""
 
 #: ../bin/src/ui_edittagdialog.h:718
 #: ../bin/src/ui_notificationssettingspage.h:454
@@ -5216,7 +5251,7 @@ msgstr "Những tập tin này sẽ bị xóa khỏi đĩa cứng vĩnh viễn, 
 msgid "These folders will be scanned for music to make up your library"
 msgstr "Các thư mục này sẽ được quét để thêm nhạc vào thư viện"
 
-#: ../bin/src/ui_transcodersettingspage.h:173
+#: ../bin/src/ui_transcodersettingspage.h:61
 msgid ""
 "These settings are used in the \"Transcode Music\" dialog, and when "
 "converting music before copying it to a device."
@@ -5296,7 +5331,7 @@ msgstr "Bước nhảy thời gian"
 msgid "Title"
 msgstr "Tựa đề"
 
-#: core/utilities.cpp:143 core/utilities.cpp:155
+#: core/utilities.cpp:144 core/utilities.cpp:156
 msgid "Today"
 msgstr "Hôm nay"
 
@@ -5320,7 +5355,7 @@ msgstr "Bật/Tắt Chuyển thông tin bài hát"
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "Bật/Tắt hiển thị của hộp thông báo"
 
-#: core/utilities.cpp:156
+#: core/utilities.cpp:157
 msgid "Tomorrow"
 msgstr "Ngày mai"
 
@@ -5365,11 +5400,11 @@ msgstr "Chuyển mã nhạc"
 msgid "Transcoder Details"
 msgstr ""
 
-#: ../bin/src/ui_transcodersettingspage.h:172
+#: ../bin/src/ui_transcodersettingspage.h:60
 msgid "Transcoding"
 msgstr "Chuyển mã"
 
-#: transcoder/transcoder.cpp:326
+#: transcoder/transcoder.cpp:362
 #, qt-format
 msgid "Transcoding %1 files using %2 threads"
 msgstr "Đang chuyển mã %1 tập tin sử dụng %2 luồng"
@@ -5377,6 +5412,11 @@ msgstr "Đang chuyển mã %1 tập tin sử dụng %2 luồng"
 #: ../bin/src/ui_transcoderoptionsdialog.h:53
 msgid "Transcoding options"
 msgstr "Tùy chỉnh chuyển mã"
+
+#: transcoder/transcoderoptionsdialog.cpp:42
+#, qt-format
+msgid "Transcoding options - %1"
+msgstr ""
 
 #: core/song.cpp:451
 msgid "TrueAudio"
@@ -5653,7 +5693,7 @@ msgstr "Nhận dạng âm thanh hoạt động"
 msgid "Volume %1%"
 msgstr "Âm lượng %1%"
 
-#: ../bin/src/ui_transcodersettingspage.h:175
+#: transcoder/transcodersettingspage.cpp:33
 msgid "Vorbis"
 msgstr "Vorbis"
 
@@ -5662,7 +5702,7 @@ msgstr "Vorbis"
 msgid "WAV"
 msgstr "WAV"
 
-#: ../bin/src/ui_transcodersettingspage.h:179
+#: transcoder/transcodersettingspage.cpp:36
 msgid "WMA"
 msgstr "WMA"
 
@@ -5677,7 +5717,7 @@ msgid ""
 "also affect the performance of hardware decoders."
 msgstr ""
 
-#: core/song.cpp:447 transcoder/transcoder.cpp:263
+#: core/song.cpp:447 transcoder/transcoder.cpp:298
 msgid "Wav"
 msgstr "Wav"
 
@@ -5773,7 +5813,7 @@ msgstr "Windows Media 40k"
 msgid "Windows Media 64k"
 msgstr "Windows Media 64k"
 
-#: core/song.cpp:427 transcoder/transcoder.cpp:260
+#: core/song.cpp:427 transcoder/transcoder.cpp:295
 msgid "Windows Media audio"
 msgstr "Âm thanh Windows Media"
 
@@ -5823,7 +5863,7 @@ msgstr ""
 msgid "Years"
 msgstr "Năm"
 
-#: core/utilities.cpp:144
+#: core/utilities.cpp:145
 msgid "Yesterday"
 msgstr "Hôm qua"
 

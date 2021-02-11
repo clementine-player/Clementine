@@ -14,7 +14,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2021-01-29 22:42+0000\n"
+"PO-Revision-Date: 2021-02-07 15:19+0000\n"
 "Last-Translator: John Maguire <john.maguire@gmail.com>\n"
 "Language-Team: Hebrew (http://www.transifex.com/davidsansome/clementine/language/he/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -36,10 +36,12 @@ msgid " days"
 msgstr "ימים"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:129
+#: ../bin/src/ui_transcoderoptionsfdkaac.h:104
 #: ../bin/src/ui_transcoderoptionsmp3.h:194
 #: ../bin/src/ui_transcoderoptionsopus.h:80
 #: ../bin/src/ui_transcoderoptionsspeex.h:219
 #: ../bin/src/ui_transcoderoptionsspeex.h:222
+#: ../bin/src/ui_transcoderoptionsvoaac.h:83
 #: ../bin/src/ui_transcoderoptionsvorbis.h:204
 #: ../bin/src/ui_transcoderoptionsvorbis.h:207
 #: ../bin/src/ui_transcoderoptionsvorbis.h:210
@@ -81,12 +83,12 @@ msgstr "%1 אלבומים"
 msgid "%1 dB"
 msgstr ""
 
-#: core/utilities.cpp:122
+#: core/utilities.cpp:123
 #, qt-format
 msgid "%1 days"
 msgstr "%1 ימים"
 
-#: core/utilities.cpp:145
+#: core/utilities.cpp:146
 #, qt-format
 msgid "%1 days ago"
 msgstr "לפני %1 ימים"
@@ -295,7 +297,7 @@ msgstr "0:00:00"
 msgid "0px"
 msgstr "0px"
 
-#: core/utilities.cpp:122
+#: core/utilities.cpp:123
 msgid "1 day"
 msgstr "יום אחד"
 
@@ -419,7 +421,7 @@ msgstr ""
 msgid "A-Z"
 msgstr "A-Z"
 
-#: ../bin/src/ui_transcodersettingspage.h:178
+#: transcoder/transcodersettingspage.cpp:31
 msgid "AAC"
 msgstr "AAC"
 
@@ -536,8 +538,8 @@ msgstr "הוספת קובץ..."
 msgid "Add files to transcode"
 msgstr "הוספת קובצי מוזיקה להמרה"
 
-#: transcoder/transcodedialog.cpp:329 ui/mainwindow.cpp:2196
-#: ripper/ripcddialog.cpp:202
+#: transcoder/transcodedialog.cpp:327 ui/mainwindow.cpp:2196
+#: ripper/ripcddialog.cpp:200
 msgid "Add folder"
 msgstr "הוספת תיקייה"
 
@@ -913,6 +915,10 @@ msgstr ""
 msgid "Automatic updating"
 msgstr "עידכונים אוטומטיים"
 
+#: ../bin/src/ui_transcoderoptionsfdkaac.h:101
+msgid "Automatically determine based on sample rate."
+msgstr ""
+
 #: ../bin/src/ui_librarysettingspage.h:207
 msgid "Automatically open single categories in the library tree"
 msgstr "פתיחה אוטומטית של קטגוריות בודדות בעץ הספרייה"
@@ -998,9 +1004,11 @@ msgstr "קצב הסיביות"
 #: library/savedgroupingmanager.cpp:93 ../bin/src/ui_groupbydialog.h:138
 #: ../bin/src/ui_groupbydialog.h:157 ../bin/src/ui_groupbydialog.h:176
 #: ../bin/src/ui_transcoderoptionsaac.h:128
+#: ../bin/src/ui_transcoderoptionsfdkaac.h:100
 #: ../bin/src/ui_transcoderoptionsmp3.h:193
 #: ../bin/src/ui_transcoderoptionsopus.h:79
 #: ../bin/src/ui_transcoderoptionsspeex.h:217
+#: ../bin/src/ui_transcoderoptionsvoaac.h:82
 #: ../bin/src/ui_transcoderoptionswma.h:78
 msgid "Bitrate"
 msgstr "קצב סיביות"
@@ -1473,6 +1481,11 @@ msgstr ""
 msgid "Could not find Google Drive file."
 msgstr ""
 
+#: transcoder/transcoderoptionserror.cpp:35
+#, qt-format
+msgid "Could not find a suitable encoder element for <b>%1</b>."
+msgstr ""
+
 #: songinfo/streamdiscoverer.cpp:124
 msgid "Could not get details"
 msgstr ""
@@ -1485,14 +1498,14 @@ msgstr ""
 msgid "Couldn't create playlist"
 msgstr ""
 
-#: transcoder/transcoder.cpp:435
+#: transcoder/transcoder.cpp:471
 #, qt-format
 msgid ""
 "Couldn't find a muxer for %1, check you have the correct GStreamer plugins "
 "installed"
 msgstr "לא ניתן למצוא מרבב עבור %1, נא לוודא שתוספי ה־GStreamer הנכונים מותקנים כראוי"
 
-#: transcoder/transcoder.cpp:428
+#: transcoder/transcoder.cpp:464
 #, qt-format
 msgid ""
 "Couldn't find an encoder for %1, check you have the correct GStreamer "
@@ -2164,7 +2177,7 @@ msgstr "שגיאה בטעינת %1"
 msgid "Error loading di.fm playlist"
 msgstr "שגיאה בטעינת רשימת ההשמעה של di.fm"
 
-#: transcoder/transcoder.cpp:400
+#: transcoder/transcoder.cpp:436
 #, qt-format
 msgid "Error processing %1: %2"
 msgstr "שגיאה בעיבוד %1: %2"
@@ -2251,10 +2264,10 @@ msgstr "ייצא %1 עטיפות מתוך %2(%3 דולגו)"
 msgid "F9"
 msgstr ""
 
-#: core/song.cpp:429 transcoder/transcoder.cpp:240
+#: core/song.cpp:429 transcoder/transcoder.cpp:276
+#: transcoder/transcodersettingspage.cpp:30
 #: ../bin/src/ui_magnatunedownloaddialog.h:136
 #: ../bin/src/ui_magnatunesettingspage.h:170
-#: ../bin/src/ui_transcodersettingspage.h:176
 msgid "FLAC"
 msgstr "FLAC"
 
@@ -2467,10 +2480,13 @@ msgstr "„התעלמות מההתקן“ יסיר את ההתקן מרשימה 
 #: ../bin/src/ui_wizardfinishpage.h:82
 #: ../bin/src/ui_songkickconcertwidget.h:99
 #: ../bin/src/ui_transcoderoptionsaac.h:127
+#: ../bin/src/ui_transcoderoptionserror.h:56
+#: ../bin/src/ui_transcoderoptionsfdkaac.h:99
 #: ../bin/src/ui_transcoderoptionsflac.h:91
 #: ../bin/src/ui_transcoderoptionsmp3.h:189
 #: ../bin/src/ui_transcoderoptionsopus.h:78
 #: ../bin/src/ui_transcoderoptionsspeex.h:215
+#: ../bin/src/ui_transcoderoptionsvoaac.h:81
 #: ../bin/src/ui_transcoderoptionsvorbis.h:200
 #: ../bin/src/ui_transcoderoptionswma.h:77 ../bin/src/ui_equalizerslider.h:98
 #: ../bin/src/ui_fileview.h:106 ../bin/src/ui_loginstatewidget.h:167
@@ -2736,12 +2752,12 @@ msgstr "קובצי תמונה (‎*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.p
 msgid "Images (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 msgstr "קובצי תמונה (‎*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 
-#: core/utilities.cpp:157
+#: core/utilities.cpp:158
 #, qt-format
 msgid "In %1 days"
 msgstr "בעוד %1 ימים"
 
-#: core/utilities.cpp:160
+#: core/utilities.cpp:161
 #, qt-format
 msgid "In %1 weeks"
 msgstr "בעוד %1 שבועות"
@@ -3154,12 +3170,12 @@ msgstr "מילות השיר מתוך %1"
 msgid "Lyrics from the tag"
 msgstr ""
 
-#: transcoder/transcoder.cpp:242
+#: transcoder/transcoder.cpp:278
 msgid "M4A AAC"
 msgstr ""
 
-#: core/song.cpp:435 transcoder/transcoder.cpp:245
-#: ../bin/src/ui_transcodersettingspage.h:174
+#: core/song.cpp:435 transcoder/transcoder.cpp:281
+#: transcoder/transcodersettingspage.cpp:32
 msgid "MP3"
 msgstr "MP3"
 
@@ -3446,7 +3462,7 @@ msgstr ""
 msgid "Next track"
 msgstr "הרצועה הבאה"
 
-#: core/utilities.cpp:158
+#: core/utilities.cpp:159
 msgid "Next week"
 msgstr "השבוע הבא"
 
@@ -3470,6 +3486,17 @@ msgstr "ללא מקטעים ארוכים"
 msgid ""
 "No matches found.  Clear the search box to show the whole playlist again."
 msgstr "לא נמצא פריט תואם. יש לנקות את תיבת החיפוש על מנת לראות את כל רשימת ההשמעה שוב."
+
+#: transcoder/transcoderoptionserror.cpp:32
+msgid "No settings available for this type."
+msgstr ""
+
+#: transcoder/transcoderoptionserror.cpp:42
+#, qt-format
+msgid ""
+"No settings page available for encoder element <b>%1</b>. Please report this"
+" issue:<br><a href=\"%2\">%2</a>"
+msgstr ""
 
 #: ../bin/src/ui_transcoderoptionsaac.h:144
 msgid "No short blocks"
@@ -3565,19 +3592,19 @@ msgstr ""
 msgid "Ogg FLAC"
 msgstr ""
 
-#: transcoder/transcoder.cpp:251
+#: transcoder/transcoder.cpp:286
 msgid "Ogg Flac"
 msgstr "Ogg Flac"
 
-#: core/song.cpp:443 transcoder/transcoder.cpp:257
+#: core/song.cpp:443 transcoder/transcoder.cpp:292
 msgid "Ogg Opus"
 msgstr ""
 
-#: core/song.cpp:439 transcoder/transcoder.cpp:254
+#: core/song.cpp:439 transcoder/transcoder.cpp:289
 msgid "Ogg Speex"
 msgstr "Ogg Speex"
 
-#: core/song.cpp:441 transcoder/transcoder.cpp:248
+#: core/song.cpp:441 transcoder/transcoder.cpp:283
 #: ../bin/src/ui_magnatunedownloaddialog.h:135
 #: ../bin/src/ui_magnatunesettingspage.h:169
 msgid "Ogg Vorbis"
@@ -3687,7 +3714,7 @@ msgstr "מיטוב לאיכות"
 msgid "Options..."
 msgstr "אפשרויות"
 
-#: ../bin/src/ui_transcodersettingspage.h:180
+#: transcoder/transcodersettingspage.cpp:35
 msgid "Opus"
 msgstr ""
 
@@ -4628,6 +4655,10 @@ msgstr "שירות לא מקוון"
 msgid "Set %1 to \"%2\"..."
 msgstr "הגדרת %1 בתור „%2“..."
 
+#: ../bin/src/ui_transcoderoptionsfdkaac.h:102
+msgid "Set target rate"
+msgstr ""
+
 #: core/commandlineoptions.cpp:167
 msgid "Set the volume to <value> percent"
 msgstr "הגדרת עצמת השמע ל־<value> אחוזים"
@@ -4917,7 +4948,7 @@ msgstr "מקור"
 msgid "Sources"
 msgstr "מקורות"
 
-#: ../bin/src/ui_transcodersettingspage.h:177
+#: transcoder/transcodersettingspage.cpp:34
 msgid "Speex"
 msgstr "Speex"
 
@@ -4971,7 +5002,7 @@ msgid ""
 "list"
 msgstr "נא להקליד משהו בתיבת החיפוש למעלה כדי למלא את רשימת תוצאות חיפוש זה"
 
-#: transcoder/transcoder.cpp:407
+#: transcoder/transcoder.cpp:443
 #, qt-format
 msgid "Starting %1"
 msgstr "התחלת המרת %1"
@@ -5057,7 +5088,7 @@ msgstr ""
 msgid "Success!"
 msgstr "הצלחה!"
 
-#: transcoder/transcoder.cpp:190
+#: transcoder/transcoder.cpp:204
 #, qt-format
 msgid "Successfully written %1"
 msgstr "נכתב בהצלחה %1"
@@ -5065,6 +5096,10 @@ msgstr "נכתב בהצלחה %1"
 #: ui/trackselectiondialog.cpp:167
 msgid "Suggested tags"
 msgstr "תגים מוצעים"
+
+#: transcoder/transcoder.cpp:149
+msgid "Suitable element not found"
+msgstr ""
 
 #: ../bin/src/ui_edittagdialog.h:718
 #: ../bin/src/ui_notificationssettingspage.h:454
@@ -5217,7 +5252,7 @@ msgstr ""
 msgid "These folders will be scanned for music to make up your library"
 msgstr "תיקיות אלו ייסרקו לאיתור מוזיקה שתרכיב את ספריית המוזיקה"
 
-#: ../bin/src/ui_transcodersettingspage.h:173
+#: ../bin/src/ui_transcodersettingspage.h:61
 msgid ""
 "These settings are used in the \"Transcode Music\" dialog, and when "
 "converting music before copying it to a device."
@@ -5297,7 +5332,7 @@ msgstr ""
 msgid "Title"
 msgstr "כותרת"
 
-#: core/utilities.cpp:143 core/utilities.cpp:155
+#: core/utilities.cpp:144 core/utilities.cpp:156
 msgid "Today"
 msgstr "היום"
 
@@ -5321,7 +5356,7 @@ msgstr "החלפה לscrobbling"
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "הפעלה או כיבוי נראות ההצגה היפה על המסך"
 
-#: core/utilities.cpp:156
+#: core/utilities.cpp:157
 msgid "Tomorrow"
 msgstr "מחר"
 
@@ -5366,11 +5401,11 @@ msgstr "ממיר קבצי המוזיקה"
 msgid "Transcoder Details"
 msgstr ""
 
-#: ../bin/src/ui_transcodersettingspage.h:172
+#: ../bin/src/ui_transcodersettingspage.h:60
 msgid "Transcoding"
 msgstr "ממיר"
 
-#: transcoder/transcoder.cpp:326
+#: transcoder/transcoder.cpp:362
 #, qt-format
 msgid "Transcoding %1 files using %2 threads"
 msgstr "התחלת המרת %1 קבצים בעזרת %2 תהליכים"
@@ -5378,6 +5413,11 @@ msgstr "התחלת המרת %1 קבצים בעזרת %2 תהליכים"
 #: ../bin/src/ui_transcoderoptionsdialog.h:53
 msgid "Transcoding options"
 msgstr "אפשרויות המרה"
+
+#: transcoder/transcoderoptionsdialog.cpp:42
+#, qt-format
+msgid "Transcoding options - %1"
+msgstr ""
 
 #: core/song.cpp:451
 msgid "TrueAudio"
@@ -5654,7 +5694,7 @@ msgstr "זיהוי פעולות קול"
 msgid "Volume %1%"
 msgstr "עצמת שמע %1%"
 
-#: ../bin/src/ui_transcodersettingspage.h:175
+#: transcoder/transcodersettingspage.cpp:33
 msgid "Vorbis"
 msgstr "Vorbis"
 
@@ -5663,7 +5703,7 @@ msgstr "Vorbis"
 msgid "WAV"
 msgstr "WAV"
 
-#: ../bin/src/ui_transcodersettingspage.h:179
+#: transcoder/transcodersettingspage.cpp:36
 msgid "WMA"
 msgstr "WMA"
 
@@ -5678,7 +5718,7 @@ msgid ""
 "also affect the performance of hardware decoders."
 msgstr ""
 
-#: core/song.cpp:447 transcoder/transcoder.cpp:263
+#: core/song.cpp:447 transcoder/transcoder.cpp:298
 msgid "Wav"
 msgstr "Wav"
 
@@ -5774,7 +5814,7 @@ msgstr "Windows Media 40k"
 msgid "Windows Media 64k"
 msgstr "Windows Media 64k"
 
-#: core/song.cpp:427 transcoder/transcoder.cpp:260
+#: core/song.cpp:427 transcoder/transcoder.cpp:295
 msgid "Windows Media audio"
 msgstr "שמע של Windows Media"
 
@@ -5824,7 +5864,7 @@ msgstr ""
 msgid "Years"
 msgstr "שנים"
 
-#: core/utilities.cpp:144
+#: core/utilities.cpp:145
 msgid "Yesterday"
 msgstr "אתמול"
 

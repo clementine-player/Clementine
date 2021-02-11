@@ -16,8 +16,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2021-01-29 22:42+0000\n"
-"Last-Translator: John Maguire <john.maguire@gmail.com>\n"
+"PO-Revision-Date: 2021-02-07 18:37+0000\n"
+"Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/davidsansome/clementine/language/ca/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -38,10 +38,12 @@ msgid " days"
 msgstr " dies"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:129
+#: ../bin/src/ui_transcoderoptionsfdkaac.h:104
 #: ../bin/src/ui_transcoderoptionsmp3.h:194
 #: ../bin/src/ui_transcoderoptionsopus.h:80
 #: ../bin/src/ui_transcoderoptionsspeex.h:219
 #: ../bin/src/ui_transcoderoptionsspeex.h:222
+#: ../bin/src/ui_transcoderoptionsvoaac.h:83
 #: ../bin/src/ui_transcoderoptionsvorbis.h:204
 #: ../bin/src/ui_transcoderoptionsvorbis.h:207
 #: ../bin/src/ui_transcoderoptionsvorbis.h:210
@@ -83,12 +85,12 @@ msgstr "%1 àlbums"
 msgid "%1 dB"
 msgstr "%1 dB"
 
-#: core/utilities.cpp:122
+#: core/utilities.cpp:123
 #, qt-format
 msgid "%1 days"
 msgstr "%1 dies"
 
-#: core/utilities.cpp:145
+#: core/utilities.cpp:146
 #, qt-format
 msgid "%1 days ago"
 msgstr "fa %1 dies"
@@ -297,7 +299,7 @@ msgstr "0:00:00"
 msgid "0px"
 msgstr "0px"
 
-#: core/utilities.cpp:122
+#: core/utilities.cpp:123
 msgid "1 day"
 msgstr "1 dia"
 
@@ -421,7 +423,7 @@ msgstr "Automàtic"
 msgid "A-Z"
 msgstr "A–Z"
 
-#: ../bin/src/ui_transcodersettingspage.h:178
+#: transcoder/transcodersettingspage.cpp:31
 msgid "AAC"
 msgstr "AAC"
 
@@ -538,8 +540,8 @@ msgstr "Afegeix un fitxer…"
 msgid "Add files to transcode"
 msgstr "Afegeix fitxers per convertir-los"
 
-#: transcoder/transcodedialog.cpp:329 ui/mainwindow.cpp:2196
-#: ripper/ripcddialog.cpp:202
+#: transcoder/transcodedialog.cpp:327 ui/mainwindow.cpp:2196
+#: ripper/ripcddialog.cpp:200
 msgid "Add folder"
 msgstr "Afegeix una carpeta"
 
@@ -915,6 +917,10 @@ msgstr "Automàtic"
 msgid "Automatic updating"
 msgstr "Actualització automàtica"
 
+#: ../bin/src/ui_transcoderoptionsfdkaac.h:101
+msgid "Automatically determine based on sample rate."
+msgstr "Determina-ho depenent de la freqüència de mostreig."
+
 #: ../bin/src/ui_librarysettingspage.h:207
 msgid "Automatically open single categories in the library tree"
 msgstr "Expandeix automàticament les categories úniques en l’arbre de la col·lecció"
@@ -1000,9 +1006,11 @@ msgstr "Taxa de bits"
 #: library/savedgroupingmanager.cpp:93 ../bin/src/ui_groupbydialog.h:138
 #: ../bin/src/ui_groupbydialog.h:157 ../bin/src/ui_groupbydialog.h:176
 #: ../bin/src/ui_transcoderoptionsaac.h:128
+#: ../bin/src/ui_transcoderoptionsfdkaac.h:100
 #: ../bin/src/ui_transcoderoptionsmp3.h:193
 #: ../bin/src/ui_transcoderoptionsopus.h:79
 #: ../bin/src/ui_transcoderoptionsspeex.h:217
+#: ../bin/src/ui_transcoderoptionsvoaac.h:82
 #: ../bin/src/ui_transcoderoptionswma.h:78
 msgid "Bitrate"
 msgstr "Taxa de bits"
@@ -1475,6 +1483,11 @@ msgstr "No s'ha pogut detectar un flux d'àudio a %1"
 msgid "Could not find Google Drive file."
 msgstr "No s'ha trobat el fitxer del Google Drive."
 
+#: transcoder/transcoderoptionserror.cpp:35
+#, qt-format
+msgid "Could not find a suitable encoder element for <b>%1</b>."
+msgstr "No s'ha pogut trobar un codificador adequat per <b>%1</b>."
+
 #: songinfo/streamdiscoverer.cpp:124
 msgid "Could not get details"
 msgstr "No s'han pogut obtenir els detalls"
@@ -1487,14 +1500,14 @@ msgstr "No s'ha pogut iniciar sessió a Last.fm. Si us plau, proveu-ho de nou."
 msgid "Couldn't create playlist"
 msgstr "No s’ha pogut crear la llista de reproducció"
 
-#: transcoder/transcoder.cpp:435
+#: transcoder/transcoder.cpp:471
 #, qt-format
 msgid ""
 "Couldn't find a muxer for %1, check you have the correct GStreamer plugins "
 "installed"
 msgstr "No s’ha pogut trobar un muxer per %1. Comproveu que teniu els connectors adequats de GStreamer instal·lats"
 
-#: transcoder/transcoder.cpp:428
+#: transcoder/transcoder.cpp:464
 #, qt-format
 msgid ""
 "Couldn't find an encoder for %1, check you have the correct GStreamer "
@@ -1965,7 +1978,7 @@ msgstr "Dubstep"
 
 #: transcoder/transcodedialog.cpp:70
 msgid "Dump Graph"
-msgstr ""
+msgstr "Buida el graf"
 
 #: ../bin/src/ui_gstenginedebug.h:68
 msgid "Dump Pipeline Graph"
@@ -2166,7 +2179,7 @@ msgstr "S’ha produït un error en carregar %1"
 msgid "Error loading di.fm playlist"
 msgstr "S’ha produït un error en carregar la llista de reproducció del di.fm"
 
-#: transcoder/transcoder.cpp:400
+#: transcoder/transcoder.cpp:436
 #, qt-format
 msgid "Error processing %1: %2"
 msgstr "S’ha produït un error en processar %1: %2"
@@ -2253,10 +2266,10 @@ msgstr "S’han exportat %1 caràtules de %2 (s’han omès %3)"
 msgid "F9"
 msgstr "F9"
 
-#: core/song.cpp:429 transcoder/transcoder.cpp:240
+#: core/song.cpp:429 transcoder/transcoder.cpp:276
+#: transcoder/transcodersettingspage.cpp:30
 #: ../bin/src/ui_magnatunedownloaddialog.h:136
 #: ../bin/src/ui_magnatunesettingspage.h:170
-#: ../bin/src/ui_transcodersettingspage.h:176
 msgid "FLAC"
 msgstr "FLAC"
 
@@ -2469,10 +2482,13 @@ msgstr "Oblidar un dispositiu l'eliminarà de la llista i Clementine haurà de t
 #: ../bin/src/ui_wizardfinishpage.h:82
 #: ../bin/src/ui_songkickconcertwidget.h:99
 #: ../bin/src/ui_transcoderoptionsaac.h:127
+#: ../bin/src/ui_transcoderoptionserror.h:56
+#: ../bin/src/ui_transcoderoptionsfdkaac.h:99
 #: ../bin/src/ui_transcoderoptionsflac.h:91
 #: ../bin/src/ui_transcoderoptionsmp3.h:189
 #: ../bin/src/ui_transcoderoptionsopus.h:78
 #: ../bin/src/ui_transcoderoptionsspeex.h:215
+#: ../bin/src/ui_transcoderoptionsvoaac.h:81
 #: ../bin/src/ui_transcoderoptionsvorbis.h:200
 #: ../bin/src/ui_transcoderoptionswma.h:77 ../bin/src/ui_equalizerslider.h:98
 #: ../bin/src/ui_fileview.h:106 ../bin/src/ui_loginstatewidget.h:167
@@ -2738,12 +2754,12 @@ msgstr "Imatges (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm)"
 msgid "Images (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 msgstr "Imatges (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 
-#: core/utilities.cpp:157
+#: core/utilities.cpp:158
 #, qt-format
 msgid "In %1 days"
 msgstr "D’aquí a %1 dies"
 
-#: core/utilities.cpp:160
+#: core/utilities.cpp:161
 #, qt-format
 msgid "In %1 weeks"
 msgstr "D’aquí a %1 setmanes"
@@ -3156,12 +3172,12 @@ msgstr "Lletres des de %1"
 msgid "Lyrics from the tag"
 msgstr "Lletra de l'etiqueta"
 
-#: transcoder/transcoder.cpp:242
+#: transcoder/transcoder.cpp:278
 msgid "M4A AAC"
 msgstr "M4A AAC"
 
-#: core/song.cpp:435 transcoder/transcoder.cpp:245
-#: ../bin/src/ui_transcodersettingspage.h:174
+#: core/song.cpp:435 transcoder/transcoder.cpp:281
+#: transcoder/transcodersettingspage.cpp:32
 msgid "MP3"
 msgstr "MP3"
 
@@ -3448,7 +3464,7 @@ msgstr "Àlbum següent"
 msgid "Next track"
 msgstr "Peça següent"
 
-#: core/utilities.cpp:158
+#: core/utilities.cpp:159
 msgid "Next week"
 msgstr "La setmana vinent"
 
@@ -3472,6 +3488,17 @@ msgstr "No utilitzis blocs llargs"
 msgid ""
 "No matches found.  Clear the search box to show the whole playlist again."
 msgstr "No s’han trobat coincidències. Netegeu el quadre de cerca per mostrar de nou la llista de reproducció completa."
+
+#: transcoder/transcoderoptionserror.cpp:32
+msgid "No settings available for this type."
+msgstr "No hi ha opcions per a aquest tipus."
+
+#: transcoder/transcoderoptionserror.cpp:42
+#, qt-format
+msgid ""
+"No settings page available for encoder element <b>%1</b>. Please report this"
+" issue:<br><a href=\"%2\">%2</a>"
+msgstr "No s'ha trobat una pàgina de configuració adequada per al codificador <b>%1</b>. Si us plau, informeu del problema: <br><a href=\"%2\">%2</a>"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:144
 msgid "No short blocks"
@@ -3567,19 +3594,19 @@ msgstr "Inactiu"
 msgid "Ogg FLAC"
 msgstr "Ogg FLAC"
 
-#: transcoder/transcoder.cpp:251
+#: transcoder/transcoder.cpp:286
 msgid "Ogg Flac"
 msgstr "Ogg Flac"
 
-#: core/song.cpp:443 transcoder/transcoder.cpp:257
+#: core/song.cpp:443 transcoder/transcoder.cpp:292
 msgid "Ogg Opus"
 msgstr "Ogg Opus"
 
-#: core/song.cpp:439 transcoder/transcoder.cpp:254
+#: core/song.cpp:439 transcoder/transcoder.cpp:289
 msgid "Ogg Speex"
 msgstr "Ogg Speex"
 
-#: core/song.cpp:441 transcoder/transcoder.cpp:248
+#: core/song.cpp:441 transcoder/transcoder.cpp:283
 #: ../bin/src/ui_magnatunedownloaddialog.h:135
 #: ../bin/src/ui_magnatunesettingspage.h:169
 msgid "Ogg Vorbis"
@@ -3689,7 +3716,7 @@ msgstr "Optimitza la qualitat"
 msgid "Options..."
 msgstr "Opcions…"
 
-#: ../bin/src/ui_transcodersettingspage.h:180
+#: transcoder/transcodersettingspage.cpp:35
 msgid "Opus"
 msgstr "Opus"
 
@@ -4630,6 +4657,10 @@ msgstr "Servei fora de línia"
 msgid "Set %1 to \"%2\"..."
 msgstr "Estableix %1 a «%2»…"
 
+#: ../bin/src/ui_transcoderoptionsfdkaac.h:102
+msgid "Set target rate"
+msgstr "Estableix la freqüència desitjada"
+
 #: core/commandlineoptions.cpp:167
 msgid "Set the volume to <value> percent"
 msgstr "Estableix el volum al <value> percent"
@@ -4919,7 +4950,7 @@ msgstr "Font"
 msgid "Sources"
 msgstr "Fonts"
 
-#: ../bin/src/ui_transcodersettingspage.h:177
+#: transcoder/transcodersettingspage.cpp:34
 msgid "Speex"
 msgstr "Speex"
 
@@ -4973,7 +5004,7 @@ msgid ""
 "list"
 msgstr "Comenceu a escriure quelcom al quadre de cerca de dalt per omplir-ne la llista de resultats"
 
-#: transcoder/transcoder.cpp:407
+#: transcoder/transcoder.cpp:443
 #, qt-format
 msgid "Starting %1"
 msgstr "S’està començant %1"
@@ -5059,7 +5090,7 @@ msgstr "Subsonic"
 msgid "Success!"
 msgstr "Correcte!"
 
-#: transcoder/transcoder.cpp:190
+#: transcoder/transcoder.cpp:204
 #, qt-format
 msgid "Successfully written %1"
 msgstr "Escrit satisfactòriament %1"
@@ -5067,6 +5098,10 @@ msgstr "Escrit satisfactòriament %1"
 #: ui/trackselectiondialog.cpp:167
 msgid "Suggested tags"
 msgstr "Etiquetes suggerides"
+
+#: transcoder/transcoder.cpp:149
+msgid "Suitable element not found"
+msgstr "No s'ha trobat cap element adequat."
 
 #: ../bin/src/ui_edittagdialog.h:718
 #: ../bin/src/ui_notificationssettingspage.h:454
@@ -5219,7 +5254,7 @@ msgstr "Se suprimiran aquests fitxers del disc permanentment. Segur que voleu co
 msgid "These folders will be scanned for music to make up your library"
 msgstr "Se cercarà música en aquestes carpetes per a confeccionar la vostra col·lecció"
 
-#: ../bin/src/ui_transcodersettingspage.h:173
+#: ../bin/src/ui_transcodersettingspage.h:61
 msgid ""
 "These settings are used in the \"Transcode Music\" dialog, and when "
 "converting music before copying it to a device."
@@ -5299,7 +5334,7 @@ msgstr "Salt en el temps"
 msgid "Title"
 msgstr "Títol"
 
-#: core/utilities.cpp:143 core/utilities.cpp:155
+#: core/utilities.cpp:144 core/utilities.cpp:156
 msgid "Today"
 msgstr "Avui"
 
@@ -5323,7 +5358,7 @@ msgstr "Commuta l’«scrobbling»"
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "Canvia la visibilitat del OSD estètic"
 
-#: core/utilities.cpp:156
+#: core/utilities.cpp:157
 msgid "Tomorrow"
 msgstr "Demà"
 
@@ -5368,11 +5403,11 @@ msgstr "Converteix música"
 msgid "Transcoder Details"
 msgstr "Detalls del transcodificador"
 
-#: ../bin/src/ui_transcodersettingspage.h:172
+#: ../bin/src/ui_transcodersettingspage.h:60
 msgid "Transcoding"
 msgstr "Conversió"
 
-#: transcoder/transcoder.cpp:326
+#: transcoder/transcoder.cpp:362
 #, qt-format
 msgid "Transcoding %1 files using %2 threads"
 msgstr "S’estan convertint %1 fitxers emprant %2 fils"
@@ -5380,6 +5415,11 @@ msgstr "S’estan convertint %1 fitxers emprant %2 fils"
 #: ../bin/src/ui_transcoderoptionsdialog.h:53
 msgid "Transcoding options"
 msgstr "Opcions de conversió"
+
+#: transcoder/transcoderoptionsdialog.cpp:42
+#, qt-format
+msgid "Transcoding options - %1"
+msgstr "Opcions de transcodificació - %1"
 
 #: core/song.cpp:451
 msgid "TrueAudio"
@@ -5656,7 +5696,7 @@ msgstr "Detecció de veu"
 msgid "Volume %1%"
 msgstr "Volumen %1%"
 
-#: ../bin/src/ui_transcodersettingspage.h:175
+#: transcoder/transcodersettingspage.cpp:33
 msgid "Vorbis"
 msgstr "Vorbis"
 
@@ -5665,7 +5705,7 @@ msgstr "Vorbis"
 msgid "WAV"
 msgstr "WAV"
 
-#: ../bin/src/ui_transcodersettingspage.h:179
+#: transcoder/transcodersettingspage.cpp:36
 msgid "WMA"
 msgstr "WMA"
 
@@ -5680,7 +5720,7 @@ msgid ""
 "also affect the performance of hardware decoders."
 msgstr "Avís: Aquest nivell de compressió està fora del subconjunt que es pot transmetre. Això vol dir que un decodificador potser no podrà reproduir-ho sense començar pel principi. També pot afectar al rendiment dels decodificadors per maquinari."
 
-#: core/song.cpp:447 transcoder/transcoder.cpp:263
+#: core/song.cpp:447 transcoder/transcoder.cpp:298
 msgid "Wav"
 msgstr "Wav"
 
@@ -5776,7 +5816,7 @@ msgstr "Windows Media 40k"
 msgid "Windows Media 64k"
 msgstr "Windows Media 64k"
 
-#: core/song.cpp:427 transcoder/transcoder.cpp:260
+#: core/song.cpp:427 transcoder/transcoder.cpp:295
 msgid "Windows Media audio"
 msgstr "Audio Windows Media"
 
@@ -5826,7 +5866,7 @@ msgstr "Any original"
 msgid "Years"
 msgstr "Anys"
 
-#: core/utilities.cpp:144
+#: core/utilities.cpp:145
 msgid "Yesterday"
 msgstr "Ahir"
 

@@ -36,7 +36,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2021-01-30 07:42+0000\n"
+"PO-Revision-Date: 2021-02-08 03:36+0000\n"
 "Last-Translator: Andrei Stepanov <adem4ik@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/davidsansome/clementine/language/ru/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -58,10 +58,12 @@ msgid " days"
 msgstr " дней"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:129
+#: ../bin/src/ui_transcoderoptionsfdkaac.h:104
 #: ../bin/src/ui_transcoderoptionsmp3.h:194
 #: ../bin/src/ui_transcoderoptionsopus.h:80
 #: ../bin/src/ui_transcoderoptionsspeex.h:219
 #: ../bin/src/ui_transcoderoptionsspeex.h:222
+#: ../bin/src/ui_transcoderoptionsvoaac.h:83
 #: ../bin/src/ui_transcoderoptionsvorbis.h:204
 #: ../bin/src/ui_transcoderoptionsvorbis.h:207
 #: ../bin/src/ui_transcoderoptionsvorbis.h:210
@@ -103,12 +105,12 @@ msgstr "%1 альбомов"
 msgid "%1 dB"
 msgstr "%1 дБ"
 
-#: core/utilities.cpp:122
+#: core/utilities.cpp:123
 #, qt-format
 msgid "%1 days"
 msgstr "%1 дней"
 
-#: core/utilities.cpp:145
+#: core/utilities.cpp:146
 #, qt-format
 msgid "%1 days ago"
 msgstr "%1 дней назад"
@@ -317,7 +319,7 @@ msgstr "0:00:00"
 msgid "0px"
 msgstr "0px"
 
-#: core/utilities.cpp:122
+#: core/utilities.cpp:123
 msgid "1 day"
 msgstr "1 день"
 
@@ -441,7 +443,7 @@ msgstr "А&втоматически"
 msgid "A-Z"
 msgstr "A-Z (А-Я)"
 
-#: ../bin/src/ui_transcodersettingspage.h:178
+#: transcoder/transcodersettingspage.cpp:31
 msgid "AAC"
 msgstr "AAC"
 
@@ -558,8 +560,8 @@ msgstr "Добавить файл…"
 msgid "Add files to transcode"
 msgstr "Конвертировать файлы"
 
-#: transcoder/transcodedialog.cpp:329 ui/mainwindow.cpp:2196
-#: ripper/ripcddialog.cpp:202
+#: transcoder/transcodedialog.cpp:327 ui/mainwindow.cpp:2196
+#: ripper/ripcddialog.cpp:200
 msgid "Add folder"
 msgstr "Добавить папку"
 
@@ -935,6 +937,10 @@ msgstr "Автоматические"
 msgid "Automatic updating"
 msgstr "Автоматическое обновление"
 
+#: ../bin/src/ui_transcoderoptionsfdkaac.h:101
+msgid "Automatically determine based on sample rate."
+msgstr "Определять автоматически на основе частоты дискретизации."
+
 #: ../bin/src/ui_librarysettingspage.h:207
 msgid "Automatically open single categories in the library tree"
 msgstr "Автоматически раскрывать одиночные категории в дереве фонотеки"
@@ -1020,9 +1026,11 @@ msgstr "Битрейт"
 #: library/savedgroupingmanager.cpp:93 ../bin/src/ui_groupbydialog.h:138
 #: ../bin/src/ui_groupbydialog.h:157 ../bin/src/ui_groupbydialog.h:176
 #: ../bin/src/ui_transcoderoptionsaac.h:128
+#: ../bin/src/ui_transcoderoptionsfdkaac.h:100
 #: ../bin/src/ui_transcoderoptionsmp3.h:193
 #: ../bin/src/ui_transcoderoptionsopus.h:79
 #: ../bin/src/ui_transcoderoptionsspeex.h:217
+#: ../bin/src/ui_transcoderoptionsvoaac.h:82
 #: ../bin/src/ui_transcoderoptionswma.h:78
 msgid "Bitrate"
 msgstr "Битрейт"
@@ -1495,6 +1503,11 @@ msgstr "Не удалось определить поток аудио в теч
 msgid "Could not find Google Drive file."
 msgstr "Не удалось найти файл Google Drive."
 
+#: transcoder/transcoderoptionserror.cpp:35
+#, qt-format
+msgid "Could not find a suitable encoder element for <b>%1</b>."
+msgstr "Не удалось найти подходящий элемент кодировщика для <b>%1</b>."
+
 #: songinfo/streamdiscoverer.cpp:124
 msgid "Could not get details"
 msgstr "Не удалось получить информацию"
@@ -1507,14 +1520,14 @@ msgstr "Не удалось войти в Last.fm. Попробуйте ещё �
 msgid "Couldn't create playlist"
 msgstr "Невозможно создать плейлист"
 
-#: transcoder/transcoder.cpp:435
+#: transcoder/transcoder.cpp:471
 #, qt-format
 msgid ""
 "Couldn't find a muxer for %1, check you have the correct GStreamer plugins "
 "installed"
 msgstr "Не возможно найти мультиплексор для %1. Убедитесь, что установлены необходимые модули GStreamer"
 
-#: transcoder/transcoder.cpp:428
+#: transcoder/transcoder.cpp:464
 #, qt-format
 msgid ""
 "Couldn't find an encoder for %1, check you have the correct GStreamer "
@@ -2186,7 +2199,7 @@ msgstr "Ошибка загрузки %1"
 msgid "Error loading di.fm playlist"
 msgstr "Ошибка при загрузке плейлиста di.fm"
 
-#: transcoder/transcoder.cpp:400
+#: transcoder/transcoder.cpp:436
 #, qt-format
 msgid "Error processing %1: %2"
 msgstr "Ошибка при обработке %1: %2"
@@ -2273,10 +2286,10 @@ msgstr "Экспортировано %1 обложек из %2 (%3 пропущ�
 msgid "F9"
 msgstr "F9"
 
-#: core/song.cpp:429 transcoder/transcoder.cpp:240
+#: core/song.cpp:429 transcoder/transcoder.cpp:276
+#: transcoder/transcodersettingspage.cpp:30
 #: ../bin/src/ui_magnatunedownloaddialog.h:136
 #: ../bin/src/ui_magnatunesettingspage.h:170
-#: ../bin/src/ui_transcodersettingspage.h:176
 msgid "FLAC"
 msgstr "FLAC"
 
@@ -2489,10 +2502,13 @@ msgstr "Команда «Забыть носитель», удалит носи�
 #: ../bin/src/ui_wizardfinishpage.h:82
 #: ../bin/src/ui_songkickconcertwidget.h:99
 #: ../bin/src/ui_transcoderoptionsaac.h:127
+#: ../bin/src/ui_transcoderoptionserror.h:56
+#: ../bin/src/ui_transcoderoptionsfdkaac.h:99
 #: ../bin/src/ui_transcoderoptionsflac.h:91
 #: ../bin/src/ui_transcoderoptionsmp3.h:189
 #: ../bin/src/ui_transcoderoptionsopus.h:78
 #: ../bin/src/ui_transcoderoptionsspeex.h:215
+#: ../bin/src/ui_transcoderoptionsvoaac.h:81
 #: ../bin/src/ui_transcoderoptionsvorbis.h:200
 #: ../bin/src/ui_transcoderoptionswma.h:77 ../bin/src/ui_equalizerslider.h:98
 #: ../bin/src/ui_fileview.h:106 ../bin/src/ui_loginstatewidget.h:167
@@ -2758,12 +2774,12 @@ msgstr "Изображения (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm
 msgid "Images (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 msgstr "Изображения (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 
-#: core/utilities.cpp:157
+#: core/utilities.cpp:158
 #, qt-format
 msgid "In %1 days"
 msgstr "В течение %1 дней"
 
-#: core/utilities.cpp:160
+#: core/utilities.cpp:161
 #, qt-format
 msgid "In %1 weeks"
 msgstr "В течение %1 недель"
@@ -3176,12 +3192,12 @@ msgstr "Текст песни из %1"
 msgid "Lyrics from the tag"
 msgstr "Текст песни из тега"
 
-#: transcoder/transcoder.cpp:242
+#: transcoder/transcoder.cpp:278
 msgid "M4A AAC"
 msgstr "MP4 AAC"
 
-#: core/song.cpp:435 transcoder/transcoder.cpp:245
-#: ../bin/src/ui_transcodersettingspage.h:174
+#: core/song.cpp:435 transcoder/transcoder.cpp:281
+#: transcoder/transcodersettingspage.cpp:32
 msgid "MP3"
 msgstr "MP3"
 
@@ -3468,7 +3484,7 @@ msgstr "Следующий альбом"
 msgid "Next track"
 msgstr "Следующий трек"
 
-#: core/utilities.cpp:158
+#: core/utilities.cpp:159
 msgid "Next week"
 msgstr "На следующей неделе"
 
@@ -3492,6 +3508,17 @@ msgstr "Без длинных блоков"
 msgid ""
 "No matches found.  Clear the search box to show the whole playlist again."
 msgstr "Совпадений не найдено. Очистите строку поиска, чтобы увидеть плейлист снова."
+
+#: transcoder/transcoderoptionserror.cpp:32
+msgid "No settings available for this type."
+msgstr "У этого типа нет доступных настроек."
+
+#: transcoder/transcoderoptionserror.cpp:42
+#, qt-format
+msgid ""
+"No settings page available for encoder element <b>%1</b>. Please report this"
+" issue:<br><a href=\"%2\">%2</a>"
+msgstr "Отсутствует доступная страница настроек для элемента кодировщик <b>%1</b>. Пожалуйста, сообщите о проблеме: <br> <a href=\"%2\">%2</a>"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:144
 msgid "No short blocks"
@@ -3587,19 +3614,19 @@ msgstr "Откл."
 msgid "Ogg FLAC"
 msgstr "Ogg FLAC"
 
-#: transcoder/transcoder.cpp:251
+#: transcoder/transcoder.cpp:286
 msgid "Ogg Flac"
 msgstr "Ogg Flac"
 
-#: core/song.cpp:443 transcoder/transcoder.cpp:257
+#: core/song.cpp:443 transcoder/transcoder.cpp:292
 msgid "Ogg Opus"
 msgstr "Ogg Opus"
 
-#: core/song.cpp:439 transcoder/transcoder.cpp:254
+#: core/song.cpp:439 transcoder/transcoder.cpp:289
 msgid "Ogg Speex"
 msgstr "Ogg Speex"
 
-#: core/song.cpp:441 transcoder/transcoder.cpp:248
+#: core/song.cpp:441 transcoder/transcoder.cpp:283
 #: ../bin/src/ui_magnatunedownloaddialog.h:135
 #: ../bin/src/ui_magnatunesettingspage.h:169
 msgid "Ogg Vorbis"
@@ -3709,7 +3736,7 @@ msgstr "Оптимизировать по качеству"
 msgid "Options..."
 msgstr "Настройки…"
 
-#: ../bin/src/ui_transcodersettingspage.h:180
+#: transcoder/transcodersettingspage.cpp:35
 msgid "Opus"
 msgstr "Opus"
 
@@ -4650,6 +4677,10 @@ msgstr "Служба недоступна"
 msgid "Set %1 to \"%2\"..."
 msgstr "Установить %1 в «%2»…"
 
+#: ../bin/src/ui_transcoderoptionsfdkaac.h:102
+msgid "Set target rate"
+msgstr "Указать целевую частоту"
+
 #: core/commandlineoptions.cpp:167
 msgid "Set the volume to <value> percent"
 msgstr "Установить громкость в <value> процентов"
@@ -4939,7 +4970,7 @@ msgstr "Источник"
 msgid "Sources"
 msgstr "Источники"
 
-#: ../bin/src/ui_transcodersettingspage.h:177
+#: transcoder/transcodersettingspage.cpp:34
 msgid "Speex"
 msgstr "Speex"
 
@@ -4993,7 +5024,7 @@ msgid ""
 "list"
 msgstr "Введите что-нибудь в поле для начала поиска"
 
-#: transcoder/transcoder.cpp:407
+#: transcoder/transcoder.cpp:443
 #, qt-format
 msgid "Starting %1"
 msgstr "Запуск %1"
@@ -5079,7 +5110,7 @@ msgstr "Subsonic"
 msgid "Success!"
 msgstr "Успешно завершено!"
 
-#: transcoder/transcoder.cpp:190
+#: transcoder/transcoder.cpp:204
 #, qt-format
 msgid "Successfully written %1"
 msgstr "Успешно записано %1"
@@ -5087,6 +5118,10 @@ msgstr "Успешно записано %1"
 #: ui/trackselectiondialog.cpp:167
 msgid "Suggested tags"
 msgstr "Предлагаемые теги"
+
+#: transcoder/transcoder.cpp:149
+msgid "Suitable element not found"
+msgstr "Подходящий элемент не найден"
 
 #: ../bin/src/ui_edittagdialog.h:718
 #: ../bin/src/ui_notificationssettingspage.h:454
@@ -5239,7 +5274,7 @@ msgstr "Эти файлы будут окончательно удалены с 
 msgid "These folders will be scanned for music to make up your library"
 msgstr "В этих каталогах будет выполнен поиск музыки при создании вашей фонотеки"
 
-#: ../bin/src/ui_transcodersettingspage.h:173
+#: ../bin/src/ui_transcodersettingspage.h:61
 msgid ""
 "These settings are used in the \"Transcode Music\" dialog, and when "
 "converting music before copying it to a device."
@@ -5319,7 +5354,7 @@ msgstr "Шаг времени"
 msgid "Title"
 msgstr "Название"
 
-#: core/utilities.cpp:143 core/utilities.cpp:155
+#: core/utilities.cpp:144 core/utilities.cpp:156
 msgid "Today"
 msgstr "Сегодня"
 
@@ -5343,7 +5378,7 @@ msgstr "Вкл./откл. скробблинг"
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "Переключить видимость OSD"
 
-#: core/utilities.cpp:156
+#: core/utilities.cpp:157
 msgid "Tomorrow"
 msgstr "Завтра"
 
@@ -5388,11 +5423,11 @@ msgstr "Конвертер музыки"
 msgid "Transcoder Details"
 msgstr "Подробности перекодирования"
 
-#: ../bin/src/ui_transcodersettingspage.h:172
+#: ../bin/src/ui_transcodersettingspage.h:60
 msgid "Transcoding"
 msgstr "Конвертер"
 
-#: transcoder/transcoder.cpp:326
+#: transcoder/transcoder.cpp:362
 #, qt-format
 msgid "Transcoding %1 files using %2 threads"
 msgstr "Конвертировано %1 файлов в %2 потока"
@@ -5400,6 +5435,11 @@ msgstr "Конвертировано %1 файлов в %2 потока"
 #: ../bin/src/ui_transcoderoptionsdialog.h:53
 msgid "Transcoding options"
 msgstr "Настройки конвертации"
+
+#: transcoder/transcoderoptionsdialog.cpp:42
+#, qt-format
+msgid "Transcoding options - %1"
+msgstr "Настройки конвертации - %1"
 
 #: core/song.cpp:451
 msgid "TrueAudio"
@@ -5676,7 +5716,7 @@ msgstr "Определение голоса"
 msgid "Volume %1%"
 msgstr "Громкость %1%"
 
-#: ../bin/src/ui_transcodersettingspage.h:175
+#: transcoder/transcodersettingspage.cpp:33
 msgid "Vorbis"
 msgstr "Vorbis"
 
@@ -5685,7 +5725,7 @@ msgstr "Vorbis"
 msgid "WAV"
 msgstr "WAV"
 
-#: ../bin/src/ui_transcodersettingspage.h:179
+#: transcoder/transcodersettingspage.cpp:36
 msgid "WMA"
 msgstr "WMA"
 
@@ -5700,7 +5740,7 @@ msgid ""
 "also affect the performance of hardware decoders."
 msgstr "Предупреждение: данный уровень сжатия не относится к подмножеству подходящих для трансляции. Вероятно, декодер не сможет начать воспроизведение трансляции в процессе. Это также может значительно повлиять на производительность аппаратных декодеров."
 
-#: core/song.cpp:447 transcoder/transcoder.cpp:263
+#: core/song.cpp:447 transcoder/transcoder.cpp:298
 msgid "Wav"
 msgstr "Wav"
 
@@ -5796,7 +5836,7 @@ msgstr "Windows Media 40 кбит/c"
 msgid "Windows Media 64k"
 msgstr "Windows Media 64 кбит/c"
 
-#: core/song.cpp:427 transcoder/transcoder.cpp:260
+#: core/song.cpp:427 transcoder/transcoder.cpp:295
 msgid "Windows Media audio"
 msgstr "Windows Media"
 
@@ -5846,7 +5886,7 @@ msgstr "Год оригинала"
 msgid "Years"
 msgstr "Годы"
 
-#: core/utilities.cpp:144
+#: core/utilities.cpp:145
 msgid "Yesterday"
 msgstr "Вчера"
 

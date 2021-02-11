@@ -8,6 +8,7 @@
 # orange2141 <ataraxia90@gmail.com>, 2014
 # 현구 임 <bradlim980@gmail.com>, 2012
 # 현구 임 <bradlim980@gmail.com>, 2012
+# Bruce Lee <daemul72@gmail.com>, 2021
 # Bruce Lee <daemul72@gmail.com>, 2020
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2011
 # 현구 임 <bradlim980@gmail.com>, 2012
@@ -24,8 +25,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2021-01-29 22:42+0000\n"
-"Last-Translator: John Maguire <john.maguire@gmail.com>\n"
+"PO-Revision-Date: 2021-02-08 15:06+0000\n"
+"Last-Translator: Bruce Lee <daemul72@gmail.com>\n"
 "Language-Team: Korean (http://www.transifex.com/davidsansome/clementine/language/ko/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -46,10 +47,12 @@ msgid " days"
 msgstr "일"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:129
+#: ../bin/src/ui_transcoderoptionsfdkaac.h:104
 #: ../bin/src/ui_transcoderoptionsmp3.h:194
 #: ../bin/src/ui_transcoderoptionsopus.h:80
 #: ../bin/src/ui_transcoderoptionsspeex.h:219
 #: ../bin/src/ui_transcoderoptionsspeex.h:222
+#: ../bin/src/ui_transcoderoptionsvoaac.h:83
 #: ../bin/src/ui_transcoderoptionsvorbis.h:204
 #: ../bin/src/ui_transcoderoptionsvorbis.h:207
 #: ../bin/src/ui_transcoderoptionsvorbis.h:210
@@ -91,12 +94,12 @@ msgstr "%1개 앨범"
 msgid "%1 dB"
 msgstr "%1 dB"
 
-#: core/utilities.cpp:122
+#: core/utilities.cpp:123
 #, qt-format
 msgid "%1 days"
 msgstr "%1일"
 
-#: core/utilities.cpp:145
+#: core/utilities.cpp:146
 #, qt-format
 msgid "%1 days ago"
 msgstr "%1일 전"
@@ -162,7 +165,7 @@ msgstr "다른 청취자 %L1명"
 #: playlist/playlistmanager.cpp:439
 #, qt-format
 msgid "%L1 selected of"
-msgstr ""
+msgstr "다음 중 %L1개 선택됨"
 
 #: songinfo/lastfmtrackinfoprovider.cpp:94
 #, qt-format
@@ -172,7 +175,7 @@ msgstr "총 %L1번 재생"
 #: playlist/playlistmanager.cpp:445
 #, qt-format
 msgid "%L1 tracks"
-msgstr ""
+msgstr "%L1곡"
 
 #: ../bin/src/ui_notificationssettingspage.h:432
 msgid "%filename%"
@@ -305,7 +308,7 @@ msgstr "0:00:00"
 msgid "0px"
 msgstr "0px"
 
-#: core/utilities.cpp:122
+#: core/utilities.cpp:123
 msgid "1 day"
 msgstr "1일"
 
@@ -429,7 +432,7 @@ msgstr "자동(&u)"
 msgid "A-Z"
 msgstr "A-Z"
 
-#: ../bin/src/ui_transcodersettingspage.h:178
+#: transcoder/transcodersettingspage.cpp:31
 msgid "AAC"
 msgstr "AAC"
 
@@ -546,8 +549,8 @@ msgstr "파일 추가..."
 msgid "Add files to transcode"
 msgstr "변환할 파일 추가"
 
-#: transcoder/transcodedialog.cpp:329 ui/mainwindow.cpp:2196
-#: ripper/ripcddialog.cpp:202
+#: transcoder/transcodedialog.cpp:327 ui/mainwindow.cpp:2196
+#: ripper/ripcddialog.cpp:200
 msgid "Add folder"
 msgstr "폴더 추가"
 
@@ -923,6 +926,10 @@ msgstr "자동"
 msgid "Automatic updating"
 msgstr "자동 업데이트"
 
+#: ../bin/src/ui_transcoderoptionsfdkaac.h:101
+msgid "Automatically determine based on sample rate."
+msgstr "샘플 속도에 따라 자동으로 결정됩니다."
+
 #: ../bin/src/ui_librarysettingspage.h:207
 msgid "Automatically open single categories in the library tree"
 msgstr "라이브러리 트리에 자동으로 하나의 카테고리로 열기"
@@ -1008,9 +1015,11 @@ msgstr "비트 전송률"
 #: library/savedgroupingmanager.cpp:93 ../bin/src/ui_groupbydialog.h:138
 #: ../bin/src/ui_groupbydialog.h:157 ../bin/src/ui_groupbydialog.h:176
 #: ../bin/src/ui_transcoderoptionsaac.h:128
+#: ../bin/src/ui_transcoderoptionsfdkaac.h:100
 #: ../bin/src/ui_transcoderoptionsmp3.h:193
 #: ../bin/src/ui_transcoderoptionsopus.h:79
 #: ../bin/src/ui_transcoderoptionsspeex.h:217
+#: ../bin/src/ui_transcoderoptionsvoaac.h:82
 #: ../bin/src/ui_transcoderoptionswma.h:78
 msgid "Bitrate"
 msgstr "비트 전송률"
@@ -1483,6 +1492,11 @@ msgstr "%1의 오디오 스트림을 감지할 수 없습니다."
 msgid "Could not find Google Drive file."
 msgstr "Google 드라이브 파일을 찾을 수 없습니다."
 
+#: transcoder/transcoderoptionserror.cpp:35
+#, qt-format
+msgid "Could not find a suitable encoder element for <b>%1</b>."
+msgstr "<b>%1</b>에 적합한 인코더 요소를 찾을 수 없습니다."
+
 #: songinfo/streamdiscoverer.cpp:124
 msgid "Could not get details"
 msgstr "상세 정보를 얻을 수 없습니다"
@@ -1495,14 +1509,14 @@ msgstr "Last.fm에 로그인 할 수 없습니다. 다시 시도하세요."
 msgid "Couldn't create playlist"
 msgstr "재생목록을 생성할수 없습니다."
 
-#: transcoder/transcoder.cpp:435
+#: transcoder/transcoder.cpp:471
 #, qt-format
 msgid ""
 "Couldn't find a muxer for %1, check you have the correct GStreamer plugins "
 "installed"
 msgstr "%1 먹서를 찾을 수 없습니다, GStreamer 플러그인이 올바르게 설치되어 있는지 확인하세요"
 
-#: transcoder/transcoder.cpp:428
+#: transcoder/transcoder.cpp:464
 #, qt-format
 msgid ""
 "Couldn't find an encoder for %1, check you have the correct GStreamer "
@@ -1973,11 +1987,11 @@ msgstr "덥스탭"
 
 #: transcoder/transcodedialog.cpp:70
 msgid "Dump Graph"
-msgstr ""
+msgstr "그래프 덤프"
 
 #: ../bin/src/ui_gstenginedebug.h:68
 msgid "Dump Pipeline Graph"
-msgstr ""
+msgstr "파이프라인 그래프 덤프"
 
 #: ../bin/src/ui_console.h:132
 msgid "Dump To Logs"
@@ -2174,7 +2188,7 @@ msgstr "%1 불러오기 오류"
 msgid "Error loading di.fm playlist"
 msgstr "dl.fm 재생목록 불러오기 오류"
 
-#: transcoder/transcoder.cpp:400
+#: transcoder/transcoder.cpp:436
 #, qt-format
 msgid "Error processing %1: %2"
 msgstr "%1: %2 처리 오류"
@@ -2259,12 +2273,12 @@ msgstr "%2개의 앨범 표지중 %1개 내보냄. (%3개 건너뜀)"
 
 #: ../bin/src/ui_mainwindow.h:790
 msgid "F9"
-msgstr ""
+msgstr "F9"
 
-#: core/song.cpp:429 transcoder/transcoder.cpp:240
+#: core/song.cpp:429 transcoder/transcoder.cpp:276
+#: transcoder/transcodersettingspage.cpp:30
 #: ../bin/src/ui_magnatunedownloaddialog.h:136
 #: ../bin/src/ui_magnatunesettingspage.h:170
-#: ../bin/src/ui_transcodersettingspage.h:176
 msgid "FLAC"
 msgstr "FLAC"
 
@@ -2477,10 +2491,13 @@ msgstr "장치를 잊어버리면 이 목록에서 제거되고 다음에 장치
 #: ../bin/src/ui_wizardfinishpage.h:82
 #: ../bin/src/ui_songkickconcertwidget.h:99
 #: ../bin/src/ui_transcoderoptionsaac.h:127
+#: ../bin/src/ui_transcoderoptionserror.h:56
+#: ../bin/src/ui_transcoderoptionsfdkaac.h:99
 #: ../bin/src/ui_transcoderoptionsflac.h:91
 #: ../bin/src/ui_transcoderoptionsmp3.h:189
 #: ../bin/src/ui_transcoderoptionsopus.h:78
 #: ../bin/src/ui_transcoderoptionsspeex.h:215
+#: ../bin/src/ui_transcoderoptionsvoaac.h:81
 #: ../bin/src/ui_transcoderoptionsvorbis.h:200
 #: ../bin/src/ui_transcoderoptionswma.h:77 ../bin/src/ui_equalizerslider.h:98
 #: ../bin/src/ui_fileview.h:106 ../bin/src/ui_loginstatewidget.h:167
@@ -2746,12 +2763,12 @@ msgstr "그림 (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm)"
 msgid "Images (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 msgstr "Images (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 
-#: core/utilities.cpp:157
+#: core/utilities.cpp:158
 #, qt-format
 msgid "In %1 days"
 msgstr "%1 일 안에 "
 
-#: core/utilities.cpp:160
+#: core/utilities.cpp:161
 #, qt-format
 msgid "In %1 weeks"
 msgstr "%1 주 안에"
@@ -3123,7 +3140,7 @@ msgstr "로그인 실패"
 
 #: ../bin/src/ui_transcodelogdialog.h:108
 msgid "Logs"
-msgstr ""
+msgstr "로그"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:136
 msgid "Long term prediction profile (LTP)"
@@ -3164,12 +3181,12 @@ msgstr "%1 의 가사"
 msgid "Lyrics from the tag"
 msgstr "태그로부터의 가사"
 
-#: transcoder/transcoder.cpp:242
+#: transcoder/transcoder.cpp:278
 msgid "M4A AAC"
 msgstr "MP4 AAC"
 
-#: core/song.cpp:435 transcoder/transcoder.cpp:245
-#: ../bin/src/ui_transcodersettingspage.h:174
+#: core/song.cpp:435 transcoder/transcoder.cpp:281
+#: transcoder/transcodersettingspage.cpp:32
 msgid "MP3"
 msgstr "MP3"
 
@@ -3449,14 +3466,14 @@ msgstr "다음"
 
 #: ../bin/src/ui_mainwindow.h:785
 msgid "Next album"
-msgstr ""
+msgstr "다음 앨범"
 
 #: core/globalshortcuts.cpp:59 wiimotedev/wiimotesettingspage.cpp:105
 #: ../bin/src/ui_mainwindow.h:727
 msgid "Next track"
 msgstr "다음 곡"
 
-#: core/utilities.cpp:158
+#: core/utilities.cpp:159
 msgid "Next week"
 msgstr "다음 주"
 
@@ -3480,6 +3497,17 @@ msgstr "긴 블록 "
 msgid ""
 "No matches found.  Clear the search box to show the whole playlist again."
 msgstr "일치하는 결과를 찾을 수 없습니다. 검색창을 비우시면 전체 재생목록을 보실 수 있습니다."
+
+#: transcoder/transcoderoptionserror.cpp:32
+msgid "No settings available for this type."
+msgstr "이 유형에 사용할 수 있는 설정이 없습니다."
+
+#: transcoder/transcoderoptionserror.cpp:42
+#, qt-format
+msgid ""
+"No settings page available for encoder element <b>%1</b>. Please report this"
+" issue:<br><a href=\"%2\">%2</a>"
+msgstr "<b>%1</b> 인코더 요소에 사용할 수 있는 설정 페이지가 없습니다. 이 문제를 보고하십시오:<br><a href=\"%2\">%2</a>"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:144
 msgid "No short blocks"
@@ -3575,19 +3603,19 @@ msgstr "꺼짐"
 msgid "Ogg FLAC"
 msgstr "Ogg FLAC"
 
-#: transcoder/transcoder.cpp:251
+#: transcoder/transcoder.cpp:286
 msgid "Ogg Flac"
 msgstr "OGG Flac"
 
-#: core/song.cpp:443 transcoder/transcoder.cpp:257
+#: core/song.cpp:443 transcoder/transcoder.cpp:292
 msgid "Ogg Opus"
 msgstr "Ogg Opus"
 
-#: core/song.cpp:439 transcoder/transcoder.cpp:254
+#: core/song.cpp:439 transcoder/transcoder.cpp:289
 msgid "Ogg Speex"
 msgstr "Ogg Speex"
 
-#: core/song.cpp:441 transcoder/transcoder.cpp:248
+#: core/song.cpp:441 transcoder/transcoder.cpp:283
 #: ../bin/src/ui_magnatunedownloaddialog.h:135
 #: ../bin/src/ui_magnatunesettingspage.h:169
 msgid "Ogg Vorbis"
@@ -3697,7 +3725,7 @@ msgstr "음질 최적화"
 msgid "Options..."
 msgstr "옵션..."
 
-#: ../bin/src/ui_transcodersettingspage.h:180
+#: transcoder/transcodersettingspage.cpp:35
 msgid "Opus"
 msgstr "Opus"
 
@@ -3811,11 +3839,11 @@ msgstr "연주가"
 
 #: ../bin/src/ui_gstenginedebug.h:67
 msgid "Pipeline"
-msgstr ""
+msgstr "파이프라인"
 
 #: ../bin/src/ui_transcodelogdialog.h:107
 msgid "Pipelines"
-msgstr ""
+msgstr "파이프라인"
 
 #: ../bin/src/ui_albumcoverexport.h:214
 msgid "Pixel"
@@ -4638,6 +4666,10 @@ msgstr "서비스 오프라인"
 msgid "Set %1 to \"%2\"..."
 msgstr "%1을 \"%2\"로 설정..."
 
+#: ../bin/src/ui_transcoderoptionsfdkaac.h:102
+msgid "Set target rate"
+msgstr "대상 전송속도 지정"
+
 #: core/commandlineoptions.cpp:167
 msgid "Set the volume to <value> percent"
 msgstr "음량을 <value> 퍼센트로 설정"
@@ -4852,7 +4884,7 @@ msgstr "선택한 곡 건너뛰기"
 
 #: ../bin/src/ui_mainwindow.h:787
 msgid "Skip to the next album"
-msgstr ""
+msgstr "다음 앨범으로 건너뛰기"
 
 #: ui/mainwindow.cpp:1901
 msgid "Skip track"
@@ -4927,7 +4959,7 @@ msgstr "출처"
 msgid "Sources"
 msgstr "출처"
 
-#: ../bin/src/ui_transcodersettingspage.h:177
+#: transcoder/transcodersettingspage.cpp:34
 msgid "Speex"
 msgstr "Speex"
 
@@ -4981,7 +5013,7 @@ msgid ""
 "list"
 msgstr "이 검색 결과 목록을 채우기 위해 위의 검색 창에 무언가를 입력하십시오."
 
-#: transcoder/transcoder.cpp:407
+#: transcoder/transcoder.cpp:443
 #, qt-format
 msgid "Starting %1"
 msgstr "%1 시작중"
@@ -5067,7 +5099,7 @@ msgstr "Subsonic"
 msgid "Success!"
 msgstr "성공!"
 
-#: transcoder/transcoder.cpp:190
+#: transcoder/transcoder.cpp:204
 #, qt-format
 msgid "Successfully written %1"
 msgstr "%1 작성 완료"
@@ -5075,6 +5107,10 @@ msgstr "%1 작성 완료"
 #: ui/trackselectiondialog.cpp:167
 msgid "Suggested tags"
 msgstr "제안된 태그"
+
+#: transcoder/transcoder.cpp:149
+msgid "Suitable element not found"
+msgstr "적합한 요소를 찾을 수 없음"
 
 #: ../bin/src/ui_edittagdialog.h:718
 #: ../bin/src/ui_notificationssettingspage.h:454
@@ -5125,7 +5161,7 @@ msgstr "태그 가져오기"
 
 #: ../bin/src/ui_transcoderoptionsvorbis.h:203
 msgid "Target bitrate"
-msgstr "목표 비트 전송률"
+msgstr "대상 비트 전송속도"
 
 #: ui/equalizer.cpp:157
 msgid "Techno"
@@ -5227,7 +5263,7 @@ msgstr "파일들이 디스크에서 완전히 삭제됩니다. 계속하시겠�
 msgid "These folders will be scanned for music to make up your library"
 msgstr "이 폴더들은 라이브러리를 생성하기 위하여 음악이 검색됩니다."
 
-#: ../bin/src/ui_transcodersettingspage.h:173
+#: ../bin/src/ui_transcodersettingspage.h:61
 msgid ""
 "These settings are used in the \"Transcode Music\" dialog, and when "
 "converting music before copying it to a device."
@@ -5307,7 +5343,7 @@ msgstr "시간 간격"
 msgid "Title"
 msgstr "제목"
 
-#: core/utilities.cpp:143 core/utilities.cpp:155
+#: core/utilities.cpp:144 core/utilities.cpp:156
 msgid "Today"
 msgstr "오늘"
 
@@ -5331,7 +5367,7 @@ msgstr "청취 기록 토글"
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "예쁜 OSD 표시를 보이기 선택"
 
-#: core/utilities.cpp:156
+#: core/utilities.cpp:157
 msgid "Tomorrow"
 msgstr "내일"
 
@@ -5374,13 +5410,13 @@ msgstr "음악 변환"
 
 #: ../bin/src/ui_transcodelogdialog.h:106
 msgid "Transcoder Details"
-msgstr ""
+msgstr "변환기 세부정보"
 
-#: ../bin/src/ui_transcodersettingspage.h:172
+#: ../bin/src/ui_transcodersettingspage.h:60
 msgid "Transcoding"
 msgstr "변환"
 
-#: transcoder/transcoder.cpp:326
+#: transcoder/transcoder.cpp:362
 #, qt-format
 msgid "Transcoding %1 files using %2 threads"
 msgstr "%2개의 쓰레드를 이용하여 %1 파일을 변환 중"
@@ -5388,6 +5424,11 @@ msgstr "%2개의 쓰레드를 이용하여 %1 파일을 변환 중"
 #: ../bin/src/ui_transcoderoptionsdialog.h:53
 msgid "Transcoding options"
 msgstr "변환 옵션"
+
+#: transcoder/transcoderoptionsdialog.cpp:42
+#, qt-format
+msgid "Transcoding options - %1"
+msgstr "변환 옵션 - %1"
 
 #: core/song.cpp:451
 msgid "TrueAudio"
@@ -5664,7 +5705,7 @@ msgstr "음성 활성도 감지"
 msgid "Volume %1%"
 msgstr "음량 %1%"
 
-#: ../bin/src/ui_transcodersettingspage.h:175
+#: transcoder/transcodersettingspage.cpp:33
 msgid "Vorbis"
 msgstr "Vorbis"
 
@@ -5673,7 +5714,7 @@ msgstr "Vorbis"
 msgid "WAV"
 msgstr "WAV"
 
-#: ../bin/src/ui_transcodersettingspage.h:179
+#: transcoder/transcodersettingspage.cpp:36
 msgid "WMA"
 msgstr "WMA"
 
@@ -5686,9 +5727,9 @@ msgid ""
 "Warning: This compression level is outside of the streamable subset. This "
 "means that a decoder may not be able to start playing it mid-stream. It may "
 "also affect the performance of hardware decoders."
-msgstr ""
+msgstr "경고: 이 압축 수준은 스트리밍 가능한 하위 집합을 벗어납니다. 이는 디코더가 스트림 중간에 재생을 시작할 수 없음을 의미합니다. 또한 하드웨어 디코더의 성능에 영향을 미칠 수 있습니다."
 
-#: core/song.cpp:447 transcoder/transcoder.cpp:263
+#: core/song.cpp:447 transcoder/transcoder.cpp:298
 msgid "Wav"
 msgstr "Wav"
 
@@ -5784,7 +5825,7 @@ msgstr "윈도우 미디어 40k"
 msgid "Windows Media 64k"
 msgstr "윈도우 미디어 64k"
 
-#: core/song.cpp:427 transcoder/transcoder.cpp:260
+#: core/song.cpp:427 transcoder/transcoder.cpp:295
 msgid "Windows Media audio"
 msgstr "윈도우 미디어 오디오"
 
@@ -5834,7 +5875,7 @@ msgstr "연도 - 원곡"
 msgid "Years"
 msgstr "년도"
 
-#: core/utilities.cpp:144
+#: core/utilities.cpp:145
 msgid "Yesterday"
 msgstr "어제"
 

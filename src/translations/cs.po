@@ -21,7 +21,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2021-01-30 08:40+0000\n"
+"PO-Revision-Date: 2021-02-07 17:48+0000\n"
 "Last-Translator: fri\n"
 "Language-Team: Czech (http://www.transifex.com/davidsansome/clementine/language/cs/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -43,10 +43,12 @@ msgid " days"
 msgstr "dnů"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:129
+#: ../bin/src/ui_transcoderoptionsfdkaac.h:104
 #: ../bin/src/ui_transcoderoptionsmp3.h:194
 #: ../bin/src/ui_transcoderoptionsopus.h:80
 #: ../bin/src/ui_transcoderoptionsspeex.h:219
 #: ../bin/src/ui_transcoderoptionsspeex.h:222
+#: ../bin/src/ui_transcoderoptionsvoaac.h:83
 #: ../bin/src/ui_transcoderoptionsvorbis.h:204
 #: ../bin/src/ui_transcoderoptionsvorbis.h:207
 #: ../bin/src/ui_transcoderoptionsvorbis.h:210
@@ -88,12 +90,12 @@ msgstr "%1 alb"
 msgid "%1 dB"
 msgstr "%1 dB"
 
-#: core/utilities.cpp:122
+#: core/utilities.cpp:123
 #, qt-format
 msgid "%1 days"
 msgstr "%1 dnů"
 
-#: core/utilities.cpp:145
+#: core/utilities.cpp:146
 #, qt-format
 msgid "%1 days ago"
 msgstr "před %1 dny"
@@ -302,7 +304,7 @@ msgstr "0:00:00"
 msgid "0px"
 msgstr "0 px"
 
-#: core/utilities.cpp:122
+#: core/utilities.cpp:123
 msgid "1 day"
 msgstr "1 den"
 
@@ -426,7 +428,7 @@ msgstr "A&utomaticky"
 msgid "A-Z"
 msgstr "A-Z"
 
-#: ../bin/src/ui_transcodersettingspage.h:178
+#: transcoder/transcodersettingspage.cpp:31
 msgid "AAC"
 msgstr "AAC"
 
@@ -543,8 +545,8 @@ msgstr "Přidat soubor..."
 msgid "Add files to transcode"
 msgstr "Přidat soubory pro překódování"
 
-#: transcoder/transcodedialog.cpp:329 ui/mainwindow.cpp:2196
-#: ripper/ripcddialog.cpp:202
+#: transcoder/transcodedialog.cpp:327 ui/mainwindow.cpp:2196
+#: ripper/ripcddialog.cpp:200
 msgid "Add folder"
 msgstr "Přidat složku"
 
@@ -920,6 +922,10 @@ msgstr "Automaticky"
 msgid "Automatic updating"
 msgstr "Automatická aktualizace"
 
+#: ../bin/src/ui_transcoderoptionsfdkaac.h:101
+msgid "Automatically determine based on sample rate."
+msgstr "Automaticky určit na základě vzorkovacího kmitočtu."
+
 #: ../bin/src/ui_librarysettingspage.h:207
 msgid "Automatically open single categories in the library tree"
 msgstr "Automaticky otevřít jednotlivé skupiny ve stromu sbírky"
@@ -1005,9 +1011,11 @@ msgstr "Datový tok"
 #: library/savedgroupingmanager.cpp:93 ../bin/src/ui_groupbydialog.h:138
 #: ../bin/src/ui_groupbydialog.h:157 ../bin/src/ui_groupbydialog.h:176
 #: ../bin/src/ui_transcoderoptionsaac.h:128
+#: ../bin/src/ui_transcoderoptionsfdkaac.h:100
 #: ../bin/src/ui_transcoderoptionsmp3.h:193
 #: ../bin/src/ui_transcoderoptionsopus.h:79
 #: ../bin/src/ui_transcoderoptionsspeex.h:217
+#: ../bin/src/ui_transcoderoptionsvoaac.h:82
 #: ../bin/src/ui_transcoderoptionswma.h:78
 msgid "Bitrate"
 msgstr "Datový tok"
@@ -1480,6 +1488,11 @@ msgstr "Nepodařilo se zjistit zvukový proud v %1"
 msgid "Could not find Google Drive file."
 msgstr "Nepodařilo se najít soubor Google Drive."
 
+#: transcoder/transcoderoptionserror.cpp:35
+#, qt-format
+msgid "Could not find a suitable encoder element for <b>%1</b>."
+msgstr "Nepodařilo se najít vhodný prvek kodéru pro <b>%1</b>."
+
 #: songinfo/streamdiscoverer.cpp:124
 msgid "Could not get details"
 msgstr "Nepodařilo se získat podrobnosti"
@@ -1492,14 +1505,14 @@ msgstr "Nepodařilo se přihlásit se k Last.fm. Zkuste to, prosím, znovu.."
 msgid "Couldn't create playlist"
 msgstr "Nepodařilo se vytvořit seznam skladeb"
 
-#: transcoder/transcoder.cpp:435
+#: transcoder/transcoder.cpp:471
 #, qt-format
 msgid ""
 "Couldn't find a muxer for %1, check you have the correct GStreamer plugins "
 "installed"
 msgstr "Nepodařilo se najít multiplexer pro \"%1\" - ujistěte se, že máte nainstalovány správné přídavné moduly GStreamer"
 
-#: transcoder/transcoder.cpp:428
+#: transcoder/transcoder.cpp:464
 #, qt-format
 msgid ""
 "Couldn't find an encoder for %1, check you have the correct GStreamer "
@@ -2171,7 +2184,7 @@ msgstr "Chyba při nahrávání %1"
 msgid "Error loading di.fm playlist"
 msgstr "Chyba při nahrávání seznamu skladeb di.fm"
 
-#: transcoder/transcoder.cpp:400
+#: transcoder/transcoder.cpp:436
 #, qt-format
 msgid "Error processing %1: %2"
 msgstr "Chyba při zpracovávání %1: %2"
@@ -2258,10 +2271,10 @@ msgstr "Uloženo %1 obalů z %2 (%3 přeskočeno)"
 msgid "F9"
 msgstr "F9"
 
-#: core/song.cpp:429 transcoder/transcoder.cpp:240
+#: core/song.cpp:429 transcoder/transcoder.cpp:276
+#: transcoder/transcodersettingspage.cpp:30
 #: ../bin/src/ui_magnatunedownloaddialog.h:136
 #: ../bin/src/ui_magnatunesettingspage.h:170
-#: ../bin/src/ui_transcodersettingspage.h:176
 msgid "FLAC"
 msgstr "FLAC"
 
@@ -2474,10 +2487,13 @@ msgstr "Zařízení bude odstraněno z tohoto seznamu. Po opětovném připojen�
 #: ../bin/src/ui_wizardfinishpage.h:82
 #: ../bin/src/ui_songkickconcertwidget.h:99
 #: ../bin/src/ui_transcoderoptionsaac.h:127
+#: ../bin/src/ui_transcoderoptionserror.h:56
+#: ../bin/src/ui_transcoderoptionsfdkaac.h:99
 #: ../bin/src/ui_transcoderoptionsflac.h:91
 #: ../bin/src/ui_transcoderoptionsmp3.h:189
 #: ../bin/src/ui_transcoderoptionsopus.h:78
 #: ../bin/src/ui_transcoderoptionsspeex.h:215
+#: ../bin/src/ui_transcoderoptionsvoaac.h:81
 #: ../bin/src/ui_transcoderoptionsvorbis.h:200
 #: ../bin/src/ui_transcoderoptionswma.h:77 ../bin/src/ui_equalizerslider.h:98
 #: ../bin/src/ui_fileview.h:106 ../bin/src/ui_loginstatewidget.h:167
@@ -2743,12 +2759,12 @@ msgstr "Obrázky (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm)"
 msgid "Images (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 msgstr "Obrázky (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 
-#: core/utilities.cpp:157
+#: core/utilities.cpp:158
 #, qt-format
 msgid "In %1 days"
 msgstr "Za %1 dny(ů)"
 
-#: core/utilities.cpp:160
+#: core/utilities.cpp:161
 #, qt-format
 msgid "In %1 weeks"
 msgstr "Za %1 týdny(ů)"
@@ -3161,12 +3177,12 @@ msgstr "Texty písní z %1"
 msgid "Lyrics from the tag"
 msgstr "Text písně ze značky"
 
-#: transcoder/transcoder.cpp:242
+#: transcoder/transcoder.cpp:278
 msgid "M4A AAC"
 msgstr "M4A AAC"
 
-#: core/song.cpp:435 transcoder/transcoder.cpp:245
-#: ../bin/src/ui_transcodersettingspage.h:174
+#: core/song.cpp:435 transcoder/transcoder.cpp:281
+#: transcoder/transcodersettingspage.cpp:32
 msgid "MP3"
 msgstr "MP3"
 
@@ -3453,7 +3469,7 @@ msgstr "Další album"
 msgid "Next track"
 msgstr "Další skladba"
 
-#: core/utilities.cpp:158
+#: core/utilities.cpp:159
 msgid "Next week"
 msgstr "Příští týden"
 
@@ -3477,6 +3493,17 @@ msgstr "Žádné dlouhé bloky"
 msgid ""
 "No matches found.  Clear the search box to show the whole playlist again."
 msgstr "Nebyly nalezeny žádné shody. Smažte obsah vyhledávacího pole, aby se znovu zobrazil celý seznam skladeb."
+
+#: transcoder/transcoderoptionserror.cpp:32
+msgid "No settings available for this type."
+msgstr "Pro tento typ nejsou dostupná žádná nastavení."
+
+#: transcoder/transcoderoptionserror.cpp:42
+#, qt-format
+msgid ""
+"No settings page available for encoder element <b>%1</b>. Please report this"
+" issue:<br><a href=\"%2\">%2</a>"
+msgstr "Pro prvek kodéru není dostupná žádná stránka s nastavením <b>%1</b>. Tento problém, prosím, nahlašte:<br><a href=\"%2\">%2</a>"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:144
 msgid "No short blocks"
@@ -3572,19 +3599,19 @@ msgstr "Vypnuto"
 msgid "Ogg FLAC"
 msgstr "Ogg FLAC"
 
-#: transcoder/transcoder.cpp:251
+#: transcoder/transcoder.cpp:286
 msgid "Ogg Flac"
 msgstr "Ogg FLAC"
 
-#: core/song.cpp:443 transcoder/transcoder.cpp:257
+#: core/song.cpp:443 transcoder/transcoder.cpp:292
 msgid "Ogg Opus"
 msgstr "Ogg Opus"
 
-#: core/song.cpp:439 transcoder/transcoder.cpp:254
+#: core/song.cpp:439 transcoder/transcoder.cpp:289
 msgid "Ogg Speex"
 msgstr "Ogg Speex"
 
-#: core/song.cpp:441 transcoder/transcoder.cpp:248
+#: core/song.cpp:441 transcoder/transcoder.cpp:283
 #: ../bin/src/ui_magnatunedownloaddialog.h:135
 #: ../bin/src/ui_magnatunesettingspage.h:169
 msgid "Ogg Vorbis"
@@ -3694,7 +3721,7 @@ msgstr "Optimalizovat s ohledem na kvalitu"
 msgid "Options..."
 msgstr "Volby..."
 
-#: ../bin/src/ui_transcodersettingspage.h:180
+#: transcoder/transcodersettingspage.cpp:35
 msgid "Opus"
 msgstr "Opus"
 
@@ -4635,6 +4662,10 @@ msgstr "Služba není dostupná"
 msgid "Set %1 to \"%2\"..."
 msgstr "Nastavit %1 na \"%2\"..."
 
+#: ../bin/src/ui_transcoderoptionsfdkaac.h:102
+msgid "Set target rate"
+msgstr "Nastavit cílový tok"
+
 #: core/commandlineoptions.cpp:167
 msgid "Set the volume to <value> percent"
 msgstr "Nastavit hlasitost na <value> procent"
@@ -4924,7 +4955,7 @@ msgstr "Zdroj"
 msgid "Sources"
 msgstr "Zdroje"
 
-#: ../bin/src/ui_transcodersettingspage.h:177
+#: transcoder/transcodersettingspage.cpp:34
 msgid "Speex"
 msgstr "Speex"
 
@@ -4978,7 +5009,7 @@ msgid ""
 "list"
 msgstr "Začněte něco psát do vyhledávacího pole výše, abyste naplnil tento seznam pro hledání výsledků."
 
-#: transcoder/transcoder.cpp:407
+#: transcoder/transcoder.cpp:443
 #, qt-format
 msgid "Starting %1"
 msgstr "Spouští se %1"
@@ -5064,7 +5095,7 @@ msgstr "Subsonic"
 msgid "Success!"
 msgstr "Úspěch"
 
-#: transcoder/transcoder.cpp:190
+#: transcoder/transcoder.cpp:204
 #, qt-format
 msgid "Successfully written %1"
 msgstr "%1 úspěšně zapsán"
@@ -5072,6 +5103,10 @@ msgstr "%1 úspěšně zapsán"
 #: ui/trackselectiondialog.cpp:167
 msgid "Suggested tags"
 msgstr "Navrhované značky"
+
+#: transcoder/transcoder.cpp:149
+msgid "Suitable element not found"
+msgstr "Vhodný prvek nenalezen"
 
 #: ../bin/src/ui_edittagdialog.h:718
 #: ../bin/src/ui_notificationssettingspage.h:454
@@ -5224,7 +5259,7 @@ msgstr "Tyto soubory budou trvale smazány z disku. Opravdu chcete pokračovat?"
 msgid "These folders will be scanned for music to make up your library"
 msgstr "Clementine bude novou hudbu pro vaši sbírku hledat v těchto složkách"
 
-#: ../bin/src/ui_transcodersettingspage.h:173
+#: ../bin/src/ui_transcodersettingspage.h:61
 msgid ""
 "These settings are used in the \"Transcode Music\" dialog, and when "
 "converting music before copying it to a device."
@@ -5304,7 +5339,7 @@ msgstr "Časový krok"
 msgid "Title"
 msgstr "Název"
 
-#: core/utilities.cpp:143 core/utilities.cpp:155
+#: core/utilities.cpp:144 core/utilities.cpp:156
 msgid "Today"
 msgstr "Dnes"
 
@@ -5328,7 +5363,7 @@ msgstr "Přepnout odesílání informací o přehrávání"
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "Přepnout viditelnost hezkých oznámení na obrazovce (OSD)"
 
-#: core/utilities.cpp:156
+#: core/utilities.cpp:157
 msgid "Tomorrow"
 msgstr "Zítra"
 
@@ -5373,11 +5408,11 @@ msgstr "Převést hudbu"
 msgid "Transcoder Details"
 msgstr "Podrobnosti převodu"
 
-#: ../bin/src/ui_transcodersettingspage.h:172
+#: ../bin/src/ui_transcodersettingspage.h:60
 msgid "Transcoding"
 msgstr "Překódování"
 
-#: transcoder/transcoder.cpp:326
+#: transcoder/transcoder.cpp:362
 #, qt-format
 msgid "Transcoding %1 files using %2 threads"
 msgstr "Převádí se %1 souborů s %2 procesy"
@@ -5385,6 +5420,11 @@ msgstr "Převádí se %1 souborů s %2 procesy"
 #: ../bin/src/ui_transcoderoptionsdialog.h:53
 msgid "Transcoding options"
 msgstr "Volby překódování"
+
+#: transcoder/transcoderoptionsdialog.cpp:42
+#, qt-format
+msgid "Transcoding options - %1"
+msgstr "Volby překódování - %1"
 
 #: core/song.cpp:451
 msgid "TrueAudio"
@@ -5661,7 +5701,7 @@ msgstr "Zjištění hlasové činnosti"
 msgid "Volume %1%"
 msgstr "Hlasitost %1 %"
 
-#: ../bin/src/ui_transcodersettingspage.h:175
+#: transcoder/transcodersettingspage.cpp:33
 msgid "Vorbis"
 msgstr "Vorbis"
 
@@ -5670,7 +5710,7 @@ msgstr "Vorbis"
 msgid "WAV"
 msgstr "WAV"
 
-#: ../bin/src/ui_transcodersettingspage.h:179
+#: transcoder/transcodersettingspage.cpp:36
 msgid "WMA"
 msgstr "WMA"
 
@@ -5685,7 +5725,7 @@ msgid ""
 "also affect the performance of hardware decoders."
 msgstr "Varování: Tato úroveň komprese je mimo vysílatelnou podmnožinu. To znamená, že dekodér nemusí být schopen začít přehrávat uprostřed proudu. Může to také ovlivnit výkon hardwarových dekodérů."
 
-#: core/song.cpp:447 transcoder/transcoder.cpp:263
+#: core/song.cpp:447 transcoder/transcoder.cpp:298
 msgid "Wav"
 msgstr "WAV"
 
@@ -5781,7 +5821,7 @@ msgstr "Windows Media 40k"
 msgid "Windows Media 64k"
 msgstr "Windows Media 64k"
 
-#: core/song.cpp:427 transcoder/transcoder.cpp:260
+#: core/song.cpp:427 transcoder/transcoder.cpp:295
 msgid "Windows Media audio"
 msgstr "Windows Media Audio"
 
@@ -5831,7 +5871,7 @@ msgstr "Rok - původní"
 msgid "Years"
 msgstr "Roky"
 
-#: core/utilities.cpp:144
+#: core/utilities.cpp:145
 msgid "Yesterday"
 msgstr "Včera"
 
