@@ -40,6 +40,7 @@
 #include "internet/jamendo/jamendoservice.h"
 #include "internet/magnatune/magnatuneservice.h"
 #include "internet/podcasts/podcastservice.h"
+#include "internet/radiobrowser/radiobrowserservice.h"
 #include "internet/somafm/somafmservice.h"
 #include "internet/subsonic/subsonicservice.h"
 #include "smartplaylists/generatormimedata.h"
@@ -96,6 +97,7 @@ InternetModel::InternetModel(Application* app, QObject* parent)
   AddService(new RadioTunesService(app, this));
   AddService(new SomaFMService(app, this));
   AddService(new IntergalacticFMService(app, this));
+  AddService(new RadioBrowserService(app, this));
 #ifdef HAVE_SPOTIFY
   AddService(new SpotifyService(app, this));
 #endif
