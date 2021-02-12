@@ -58,11 +58,6 @@ void ParserBase::LoadSong(const QString& filename_or_url, qint64 beginning,
     filename = dir.absoluteFilePath(filename);
   }
 
-  // Use the canonical path
-  if (QFile::exists(filename)) {
-    filename = QFileInfo(filename).canonicalFilePath();
-  }
-
   const QUrl url = QUrl::fromLocalFile(filename);
 
   // Search in the library
