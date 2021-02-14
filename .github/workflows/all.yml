@@ -896,6 +896,7 @@ jobs:
           Qt5LinguistTools_DIR: /usr/local/opt/qt5/lib/cmake/Qt5LinguistTools
           GST_SCANNER_PATH: /usr/local/opt/gstreamer/libexec/gstreamer-1.0/gst-plugin-scanner
           GST_PLUGIN_PATH: /usr/local/lib/gstreamer-1.0
+          DEVELOPER_DIR: /Applications/Xcode_10.3.app/Contents/Developer
         working-directory: bin
         run: >
           cmake ..
