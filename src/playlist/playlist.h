@@ -167,6 +167,8 @@ class Playlist : public QAbstractListModel {
   static const qint64 kMinScrobblePointNsecs;
   static const qint64 kMaxScrobblePointNsecs;
 
+  static const QStringList kColumns;
+
   static bool CompareItems(int column, Qt::SortOrder order, PlaylistItemPtr a,
                            PlaylistItemPtr b, const QStringList& prefixes = {});
 

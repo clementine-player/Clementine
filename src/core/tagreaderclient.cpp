@@ -77,6 +77,20 @@ TagReaderReply* TagReaderClient::SaveFile(const QString& filename,
   return worker_pool_->SendMessageWithReply(&message);
 }
 
+TagReaderReply* TagReaderClient::UpdateSongTag(const QString& filename,
+                                               const QString& tagname,
+                                               const QVariant& tagvalue) {
+  pb::tagreader::Message message;
+  pb::tagreader::SaveSongTagToFileRequest* req =
+      message.mutable_save_song_tag_to_file_request();
+
+  req->set_filename(DataCommaSizeFromQString(filename));
+  req->set_tagname(DataCommaSizeFromQString(tagname));
+  req->set_tagvalue(DataCommaSizeFromQString(tagvalue.toString()));
+
+  return worker_pool_->SendMessageWithReply(&message);
+}
+
 TagReaderReply* TagReaderClient::UpdateSongStatistics(const Song& metadata) {
   pb::tagreader::Message message;
   pb::tagreader::SaveSongStatisticsToFileRequest* req =
@@ -165,6 +179,8 @@ bool TagReaderClient::SaveFileBlocking(const QString& filename,
   Q_ASSERT(QThread::currentThread() != thread());
 
   bool ret = false;
+
+  qLog(Debug) << "TagReaderClient::SaveFileBlocking: " << filename;
 
   TagReaderReply* reply = SaveFile(filename, metadata);
   if (reply->WaitForFinished()) {
