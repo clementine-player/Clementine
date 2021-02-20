@@ -191,7 +191,7 @@ void ParseAProto() {
       "304c6f756e67652e6d786dba012a28414c42554d2920476f74616e2050726f6a65637"
       "4202d20416d6269656e74204c6f756e67652e6d786dc001c7a7efd104c801bad685e4"
       "04d001eeca32");
-  pb::tagreader::Message message;
+  cpb::tagreader::Message message;
   message.ParseFromArray(data.constData(), data.size());
 }
 

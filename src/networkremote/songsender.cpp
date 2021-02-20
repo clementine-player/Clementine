@@ -68,29 +68,29 @@ SongSender::~SongSender() {
   transcoder_->Cancel();
 }
 
-void SongSender::SendSongs(const pb::remote::RequestDownloadSongs& request) {
+void SongSender::SendSongs(const cpb::remote::RequestDownloadSongs& request) {
   Song current_song;
   if (app_->player()->GetCurrentItem()) {
     current_song = app_->player()->GetCurrentItem()->Metadata();
   }
 
   switch (request.download_item()) {
-    case pb::remote::CurrentItem: {
+    case cpb::remote::CurrentItem: {
       if (current_song.is_valid()) {
         DownloadItem item(current_song, 1, 1);
         download_queue_.append(item);
       }
       break;
     }
-    case pb::remote::ItemAlbum:
+    case cpb::remote::ItemAlbum:
       if (current_song.is_valid()) {
         SendAlbum(current_song);
       }
       break;
-    case pb::remote::APlaylist:
+    case cpb::remote::APlaylist:
       SendPlaylist(request);
       break;
-    case pb::remote::Urls:
+    case cpb::remote::Urls:
       SendUrls(request);
       break;
     default:
@@ -140,10 +140,10 @@ void SongSender::TranscodeJobComplete(const QString& input,
 
 void SongSender::SendTranscoderStatus() {
   // Send a message to the remote that we are converting files
-  pb::remote::Message msg;
-  msg.set_type(pb::remote::TRANSCODING_FILES);
+  cpb::remote::Message msg;
+  msg.set_type(cpb::remote::TRANSCODING_FILES);
 
-  pb::remote::ResponseTranscoderStatus* status =
+  cpb::remote::ResponseTranscoderStatus* status =
       msg.mutable_response_transcoder_status();
   status->set_processed(transcoder_map_.count());
   status->set_total(total_transcode_);
@@ -162,10 +162,10 @@ void SongSender::StartTransfer() {
 }
 
 void SongSender::SendTotalFileSize() {
-  pb::remote::Message msg;
-  msg.set_type(pb::remote::DOWNLOAD_TOTAL_SIZE);
+  cpb::remote::Message msg;
+  msg.set_type(cpb::remote::DOWNLOAD_TOTAL_SIZE);
 
-  pb::remote::ResponseDownloadTotalSize* response =
+  cpb::remote::ResponseDownloadTotalSize* response =
       msg.mutable_response_download_total_size();
 
   response->set_file_count(download_queue_.size());
@@ -187,16 +187,16 @@ void SongSender::SendTotalFileSize() {
 }
 
 void SongSender::OfferNextSong() {
-  pb::remote::Message msg;
+  cpb::remote::Message msg;
 
   if (download_queue_.isEmpty()) {
-    msg.set_type(pb::remote::DOWNLOAD_QUEUE_EMPTY);
+    msg.set_type(cpb::remote::DOWNLOAD_QUEUE_EMPTY);
   } else {
     // Get the item and send the single song
     DownloadItem item = download_queue_.head();
 
-    msg.set_type(pb::remote::SONG_FILE_CHUNK);
-    pb::remote::ResponseSongFileChunk* chunk =
+    msg.set_type(cpb::remote::SONG_FILE_CHUNK);
+    cpb::remote::ResponseSongFileChunk* chunk =
         msg.mutable_response_song_file_chunk();
 
     // Open the file
@@ -248,10 +248,10 @@ void SongSender::SendSingleSong(DownloadItem download_item) {
   file.open(QIODevice::ReadOnly);
 
   QByteArray data;
-  pb::remote::Message msg;
-  pb::remote::ResponseSongFileChunk* chunk =
+  cpb::remote::Message msg;
+  cpb::remote::ResponseSongFileChunk* chunk =
       msg.mutable_response_song_file_chunk();
-  msg.set_type(pb::remote::SONG_FILE_CHUNK);
+  msg.set_type(cpb::remote::SONG_FILE_CHUNK);
 
   QImage null_image;
 
@@ -276,7 +276,7 @@ void SongSender::SendSingleSong(DownloadItem download_item) {
     // what file it receives.
     if (chunk_number == 1) {
       int i = app_->playlist_manager()->active()->current_row();
-      pb::remote::SongMetadata* song_metadata =
+      cpb::remote::SongMetadata* song_metadata =
           msg.mutable_response_song_file_chunk()->mutable_song_metadata();
       OutgoingDataCreator::CreateSong(download_item.song_, null_image, i,
                                       song_metadata);
@@ -322,7 +322,8 @@ void SongSender::SendAlbum(const Song& song) {
   }
 }
 
-void SongSender::SendPlaylist(const pb::remote::RequestDownloadSongs& request) {
+void SongSender::SendPlaylist(
+    const cpb::remote::RequestDownloadSongs& request) {
   int playlist_id = request.playlist_id();
   Playlist* playlist = app_->playlist_manager()->playlist(playlist_id);
   if (!playlist) {
@@ -353,7 +354,7 @@ void SongSender::SendPlaylist(const pb::remote::RequestDownloadSongs& request) {
   }
 }
 
-void SongSender::SendUrls(const pb::remote::RequestDownloadSongs& request) {
+void SongSender::SendUrls(const cpb::remote::RequestDownloadSongs& request) {
   SongList song_list;
 
   // First gather all valid songs

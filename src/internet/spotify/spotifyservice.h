@@ -93,7 +93,7 @@ class SpotifyService : public InternetService {
   LoginState login_state() const { return login_state_; }
   bool IsLoggedIn() const { return login_state_ == LoginState_LoggedIn; }
 
-  static void SongFromProtobuf(const pb::spotify::Track& track, Song* song);
+  static void SongFromProtobuf(const cpb::spotify::Track& track, Song* song);
 
  signals:
   void BlobStateChanged();
@@ -109,9 +109,9 @@ class SpotifyService : public InternetService {
   void StartBlobProcess();
   void FillPlaylist(
       QStandardItem* item,
-      const google::protobuf::RepeatedPtrField<pb::spotify::Track>& tracks);
+      const google::protobuf::RepeatedPtrField<cpb::spotify::Track>& tracks);
   void FillPlaylist(QStandardItem* item,
-                    const pb::spotify::LoadPlaylistResponse& response);
+                    const cpb::spotify::LoadPlaylistResponse& response);
   void AddSongsToUserPlaylist(int playlist_index,
                               const QList<QUrl>& songs_urls);
   void AddSongsToStarred(const QList<QUrl>& songs_urls);
@@ -123,26 +123,26 @@ class SpotifyService : public InternetService {
   void InitSearch();
   void ClearSearchResults();
   QStandardItem* PlaylistBySpotifyIndex(int index) const;
-  bool DoPlaylistsDiffer(const pb::spotify::Playlists& response) const;
+  bool DoPlaylistsDiffer(const cpb::spotify::Playlists& response) const;
 
  private slots:
   void EnsureServerCreated(const QString& username = QString(),
                            const QString& password = QString());
   void BlobProcessError(QProcess::ProcessError error);
   void LoginCompleted(bool success, const QString& error,
-                      pb::spotify::LoginResponse_Error error_code);
+                      cpb::spotify::LoginResponse_Error error_code);
   void AddCurrentSongToUserPlaylist(QAction* action);
   void AddCurrentSongToStarredPlaylist();
   void RemoveSongsFromUserPlaylist(int playlist_index,
                                    const QList<int>& songs_indices_to_remove);
   void RemoveSongsFromStarred(const QList<int>& songs_indices_to_remove);
-  void PlaylistsUpdated(const pb::spotify::Playlists& response);
-  void InboxLoaded(const pb::spotify::LoadPlaylistResponse& response);
-  void StarredLoaded(const pb::spotify::LoadPlaylistResponse& response);
-  void UserPlaylistLoaded(const pb::spotify::LoadPlaylistResponse& response);
-  void SearchResults(const pb::spotify::SearchResponse& response);
-  void SyncPlaylistProgress(const pb::spotify::SyncPlaylistProgress& progress);
-  void ToplistLoaded(const pb::spotify::BrowseToplistResponse& response);
+  void PlaylistsUpdated(const cpb::spotify::Playlists& response);
+  void InboxLoaded(const cpb::spotify::LoadPlaylistResponse& response);
+  void StarredLoaded(const cpb::spotify::LoadPlaylistResponse& response);
+  void UserPlaylistLoaded(const cpb::spotify::LoadPlaylistResponse& response);
+  void SearchResults(const cpb::spotify::SearchResponse& response);
+  void SyncPlaylistProgress(const cpb::spotify::SyncPlaylistProgress& progress);
+  void ToplistLoaded(const cpb::spotify::BrowseToplistResponse& response);
   void GetCurrentSongUrlToShare() const;
   void GetCurrentPlaylistUrlToShare() const;
 
@@ -188,7 +188,7 @@ class SpotifyService : public InternetService {
   QMap<int, int> playlist_sync_ids_;
 
   LoginState login_state_;
-  pb::spotify::Bitrate bitrate_;
+  cpb::spotify::Bitrate bitrate_;
   bool volume_normalisation_;
 };
 

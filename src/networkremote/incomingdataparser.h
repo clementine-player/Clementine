@@ -20,7 +20,7 @@ class IncomingDataParser : public QObject {
   }
 
  public slots:
-  void Parse(const pb::remote::Message& msg);
+  void Parse(const cpb::remote::Message& msg);
   void ReloadSettings();
 
  signals:
@@ -75,22 +75,22 @@ class IncomingDataParser : public QObject {
   MainWindow::PlaylistAddBehaviour doubleclick_playlist_addmode_;
   QString files_root_folder_;
 
-  void GetPlaylistSongs(const pb::remote::Message& msg);
-  void ChangeSong(const pb::remote::Message& msg);
-  void SetRepeatMode(const pb::remote::Repeat& repeat);
-  void SetShuffleMode(const pb::remote::Shuffle& shuffle);
-  void InsertUrls(const pb::remote::Message& msg);
-  void RemoveSongs(const pb::remote::Message& msg);
-  void ClientConnect(const pb::remote::Message& msg, RemoteClient* client);
-  void SendPlaylists(const pb::remote::Message& msg);
-  void OpenPlaylist(const pb::remote::Message& msg);
-  void ClosePlaylist(const pb::remote::Message& msg);
-  void UpdatePlaylist(const pb::remote::Message& msg);
-  void RateSong(const pb::remote::Message& msg);
-  void GlobalSearch(RemoteClient* client, const pb::remote::Message& msg);
-  void AppendFilesToPlaylist(const pb::remote::Message& msg);
+  void GetPlaylistSongs(const cpb::remote::Message& msg);
+  void ChangeSong(const cpb::remote::Message& msg);
+  void SetRepeatMode(const cpb::remote::Repeat& repeat);
+  void SetShuffleMode(const cpb::remote::Shuffle& shuffle);
+  void InsertUrls(const cpb::remote::Message& msg);
+  void RemoveSongs(const cpb::remote::Message& msg);
+  void ClientConnect(const cpb::remote::Message& msg, RemoteClient* client);
+  void SendPlaylists(const cpb::remote::Message& msg);
+  void OpenPlaylist(const cpb::remote::Message& msg);
+  void ClosePlaylist(const cpb::remote::Message& msg);
+  void UpdatePlaylist(const cpb::remote::Message& msg);
+  void RateSong(const cpb::remote::Message& msg);
+  void GlobalSearch(RemoteClient* client, const cpb::remote::Message& msg);
+  void AppendFilesToPlaylist(const cpb::remote::Message& msg);
 
-  Song CreateSongFromProtobuf(const pb::remote::SongMetadata& pb);
+  Song CreateSongFromProtobuf(const cpb::remote::SongMetadata& pb);
 };
 
 #endif  // INCOMINGDATAPARSER_H

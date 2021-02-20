@@ -49,16 +49,16 @@ SpotifyServer* SpotifySearchProvider::server() {
   if (!service_->IsBlobInstalled()) return nullptr;
 
   server_ = service_->server();
-  connect(server_, SIGNAL(SearchResults(pb::spotify::SearchResponse)),
-          SLOT(SearchFinishedSlot(pb::spotify::SearchResponse)));
+  connect(server_, SIGNAL(SearchResults(cpb::spotify::SearchResponse)),
+          SLOT(SearchFinishedSlot(cpb::spotify::SearchResponse)));
   connect(server_, SIGNAL(ImageLoaded(QString, QImage)),
           SLOT(ArtLoadedSlot(QString, QImage)));
   connect(server_, SIGNAL(destroyed()), SLOT(ServerDestroyed()));
-  connect(server_, SIGNAL(StarredLoaded(pb::spotify::LoadPlaylistResponse)),
-          SLOT(SuggestionsLoaded(pb::spotify::LoadPlaylistResponse)));
+  connect(server_, SIGNAL(StarredLoaded(cpb::spotify::LoadPlaylistResponse)),
+          SLOT(SuggestionsLoaded(cpb::spotify::LoadPlaylistResponse)));
   connect(server_,
-          SIGNAL(ToplistBrowseResults(pb::spotify::BrowseToplistResponse)),
-          SLOT(SuggestionsLoaded(pb::spotify::BrowseToplistResponse)));
+          SIGNAL(ToplistBrowseResults(cpb::spotify::BrowseToplistResponse)),
+          SLOT(SuggestionsLoaded(cpb::spotify::BrowseToplistResponse)));
 
   return server_;
 }
@@ -82,7 +82,7 @@ void SpotifySearchProvider::SearchAsync(int id, const QString& query) {
 }
 
 void SpotifySearchProvider::SearchFinishedSlot(
-    const pb::spotify::SearchResponse& response) {
+    const cpb::spotify::SearchResponse& response) {
   QString query_string = QString::fromUtf8(response.request().query().c_str());
   QMap<QString, PendingState>::iterator it = queries_.find(query_string);
   if (it == queries_.end()) return;
@@ -107,7 +107,7 @@ void SpotifySearchProvider::SearchFinishedSlot(
   ResultList ret;
 
   for (int i = 0; i < response.album_size(); ++i) {
-    const pb::spotify::Album& album = response.album(i);
+    const cpb::spotify::Album& album = response.album(i);
 
     QHash<QString, int> artist_count;
     QString majority_artist;
@@ -153,7 +153,7 @@ void SpotifySearchProvider::SearchFinishedSlot(
   }
 
   for (int i = 0; i < response.result_size(); ++i) {
-    const pb::spotify::Track& track = response.result(i);
+    const cpb::spotify::Track& track = response.result(i);
 
     // Check this track/album against tracks we've already seen
     // in the album results, and skip if it's a duplicate
@@ -211,7 +211,7 @@ void SpotifySearchProvider::ShowConfig() {
 }
 
 void SpotifySearchProvider::AddSuggestionFromTrack(
-    const pb::spotify::Track& track) {
+    const cpb::spotify::Track& track) {
   if (!track.title().empty()) {
     suggestions_.insert(QString::fromUtf8(track.title().c_str()));
   }
@@ -226,7 +226,7 @@ void SpotifySearchProvider::AddSuggestionFromTrack(
 }
 
 void SpotifySearchProvider::AddSuggestionFromAlbum(
-    const pb::spotify::Album& album) {
+    const cpb::spotify::Album& album) {
   AddSuggestionFromTrack(album.metadata());
   for (int i = 0; i < album.track_size(); ++i) {
     AddSuggestionFromTrack(album.track(i));
@@ -234,14 +234,14 @@ void SpotifySearchProvider::AddSuggestionFromAlbum(
 }
 
 void SpotifySearchProvider::SuggestionsLoaded(
-    const pb::spotify::LoadPlaylistResponse& playlist) {
+    const cpb::spotify::LoadPlaylistResponse& playlist) {
   for (int i = 0; i < playlist.track_size(); ++i) {
     AddSuggestionFromTrack(playlist.track(i));
   }
 }
 
 void SpotifySearchProvider::SuggestionsLoaded(
-    const pb::spotify::BrowseToplistResponse& response) {
+    const cpb::spotify::BrowseToplistResponse& response) {
   for (int i = 0; i < response.track_size(); ++i) {
     AddSuggestionFromTrack(response.track(i));
   }

@@ -147,7 +147,7 @@ SongInfoProvider* OutgoingDataCreator::ProviderByName(
   return nullptr;
 }
 
-void OutgoingDataCreator::SendDataToClients(pb::remote::Message* msg) {
+void OutgoingDataCreator::SendDataToClients(cpb::remote::Message* msg) {
   // Check if we have clients to send data to
   if (clients_->empty()) {
     return;
@@ -175,11 +175,11 @@ void OutgoingDataCreator::SendDataToClients(pb::remote::Message* msg) {
 
 void OutgoingDataCreator::SendClementineInfo() {
   // Create the general message and set the message type
-  pb::remote::Message msg;
-  msg.set_type(pb::remote::INFO);
+  cpb::remote::Message msg;
+  msg.set_type(cpb::remote::INFO);
 
   // Now add the message specific data
-  pb::remote::ResponseClementineInfo* info =
+  cpb::remote::ResponseClementineInfo* info =
       msg.mutable_response_clementine_info();
   SetEngineState(info);
 
@@ -196,20 +196,20 @@ void OutgoingDataCreator::SendClementineInfo() {
 }
 
 void OutgoingDataCreator::SetEngineState(
-    pb::remote::ResponseClementineInfo* msg) {
+    cpb::remote::ResponseClementineInfo* msg) {
   switch (app_->player()->GetState()) {
     case Engine::Idle:
-      msg->set_state(pb::remote::Idle);
+      msg->set_state(cpb::remote::Idle);
       break;
     case Engine::Error:
     case Engine::Empty:
-      msg->set_state(pb::remote::Empty);
+      msg->set_state(cpb::remote::Empty);
       break;
     case Engine::Playing:
-      msg->set_state(pb::remote::Playing);
+      msg->set_state(cpb::remote::Playing);
       break;
     case Engine::Paused:
-      msg->set_state(pb::remote::Paused);
+      msg->set_state(cpb::remote::Paused);
       break;
   }
 }
@@ -220,10 +220,10 @@ void OutgoingDataCreator::SendAllPlaylists() {
   int active_playlist = playlist_manager->active_id();
 
   // Create message
-  pb::remote::Message msg;
-  msg.set_type(pb::remote::PLAYLISTS);
+  cpb::remote::Message msg;
+  msg.set_type(cpb::remote::PLAYLISTS);
 
-  pb::remote::ResponsePlaylists* playlists = msg.mutable_response_playlists();
+  cpb::remote::ResponsePlaylists* playlists = msg.mutable_response_playlists();
   playlists->set_include_closed(true);
 
   // Get all playlists, even ones that are hidden in the UI.
@@ -234,7 +234,7 @@ void OutgoingDataCreator::SendAllPlaylists() {
         playlist_open ? playlist_manager->playlist(p.id)->rowCount() : 0;
 
     // Create a new playlist
-    pb::remote::Playlist* playlist = playlists->add_playlist();
+    cpb::remote::Playlist* playlist = playlists->add_playlist();
     playlist->set_name(DataCommaSizeFromQString(p.name));
     playlist->set_id(p.id);
     playlist->set_active((p.id == active_playlist));
@@ -252,10 +252,10 @@ void OutgoingDataCreator::SendAllActivePlaylists() {
   int active_playlist = app_->playlist_manager()->active_id();
 
   // Create message
-  pb::remote::Message msg;
-  msg.set_type(pb::remote::PLAYLISTS);
+  cpb::remote::Message msg;
+  msg.set_type(cpb::remote::PLAYLISTS);
 
-  pb::remote::ResponsePlaylists* playlists = msg.mutable_response_playlists();
+  cpb::remote::ResponsePlaylists* playlists = msg.mutable_response_playlists();
 
   QListIterator<Playlist*> it(app_playlists);
   while (it.hasNext()) {
@@ -264,7 +264,7 @@ void OutgoingDataCreator::SendAllActivePlaylists() {
     QString playlist_name = app_->playlist_manager()->GetPlaylistName(p->id());
 
     // Create a new playlist
-    pb::remote::Playlist* playlist = playlists->add_playlist();
+    cpb::remote::Playlist* playlist = playlists->add_playlist();
     playlist->set_name(DataCommaSizeFromQString(playlist_name));
     playlist->set_id(p->id());
     playlist->set_active((p->id() == active_playlist));
@@ -281,8 +281,8 @@ void OutgoingDataCreator::ActiveChanged(Playlist* playlist) {
   SendPlaylistSongs(playlist->id());
 
   // Send the changed message after sending the playlist songs
-  pb::remote::Message msg;
-  msg.set_type(pb::remote::ACTIVE_PLAYLIST_CHANGED);
+  cpb::remote::Message msg;
+  msg.set_type(cpb::remote::ACTIVE_PLAYLIST_CHANGED);
   msg.mutable_response_active_changed()->set_id(playlist->id());
   SendDataToClients(&msg);
 }
@@ -335,8 +335,8 @@ void OutgoingDataCreator::SendFirstData(bool send_playlist_songs) {
   SendRepeatMode(app_->playlist_manager()->sequence()->repeat_mode());
 
   // We send all first data
-  pb::remote::Message msg;
-  msg.set_type(pb::remote::FIRST_DATA_SENT_COMPLETE);
+  cpb::remote::Message msg;
+  msg.set_type(cpb::remote::FIRST_DATA_SENT_COMPLETE);
   SendDataToClients(&msg);
 }
 
@@ -355,8 +355,8 @@ void OutgoingDataCreator::CurrentSongChanged(const Song& song,
 
 void OutgoingDataCreator::SendSongMetadata() {
   // Create the message
-  pb::remote::Message msg;
-  msg.set_type(pb::remote::CURRENT_METAINFO);
+  cpb::remote::Message msg;
+  msg.set_type(cpb::remote::CURRENT_METAINFO);
 
   // If there is no song, create an empty node, otherwise fill it with data
   int i = app_->playlist_manager()->active()->current_row();
@@ -368,7 +368,7 @@ void OutgoingDataCreator::SendSongMetadata() {
 
 void OutgoingDataCreator::CreateSong(const Song& song, const QImage& art,
                                      const int index,
-                                     pb::remote::SongMetadata* song_metadata) {
+                                     cpb::remote::SongMetadata* song_metadata) {
   if (song.is_valid()) {
     song_metadata->set_id(song.id());
     song_metadata->set_index(index);
@@ -394,7 +394,7 @@ void OutgoingDataCreator::CreateSong(const Song& song, const QImage& art,
         DataCommaSizeFromQString(song.art_automatic()));
     song_metadata->set_art_manual(DataCommaSizeFromQString(song.art_manual()));
     song_metadata->set_type(
-        static_cast<::pb::remote::SongMetadata_Type>(song.filetype()));
+        static_cast<::cpb::remote::SongMetadata_Type>(song.filetype()));
 
     // Append coverart
     if (!art.isNull()) {
@@ -420,8 +420,8 @@ void OutgoingDataCreator::CreateSong(const Song& song, const QImage& art,
 
 void OutgoingDataCreator::VolumeChanged(int volume) {
   // Create the message
-  pb::remote::Message msg;
-  msg.set_type(pb::remote::SET_VOLUME);
+  cpb::remote::Message msg;
+  msg.set_type(cpb::remote::SET_VOLUME);
   msg.mutable_request_set_volume()->set_volume(volume);
   SendDataToClients(&msg);
 }
@@ -435,15 +435,15 @@ void OutgoingDataCreator::SendPlaylistSongs(int id) {
   }
 
   // Create the message and the playlist
-  pb::remote::Message msg;
-  msg.set_type(pb::remote::PLAYLIST_SONGS);
+  cpb::remote::Message msg;
+  msg.set_type(cpb::remote::PLAYLIST_SONGS);
 
   // Create the Response message
-  pb::remote::ResponsePlaylistSongs* pb_response_playlist_songs =
+  cpb::remote::ResponsePlaylistSongs* pb_response_playlist_songs =
       msg.mutable_response_playlist_songs();
 
   // Create a new playlist
-  pb::remote::Playlist* pb_playlist =
+  cpb::remote::Playlist* pb_playlist =
       pb_response_playlist_songs->mutable_requested_playlist();
   pb_playlist->set_id(id);
 
@@ -454,7 +454,8 @@ void OutgoingDataCreator::SendPlaylistSongs(int id) {
   QImage null_img;
   while (it.hasNext()) {
     Song song = it.next();
-    pb::remote::SongMetadata* pb_song = pb_response_playlist_songs->add_songs();
+    cpb::remote::SongMetadata* pb_song =
+        pb_response_playlist_songs->add_songs();
     CreateSong(song, null_img, index, pb_song);
     ++index;
   }
@@ -475,23 +476,23 @@ void OutgoingDataCreator::StateChanged(Engine::State state) {
   }
   last_state_ = state;
 
-  pb::remote::Message msg;
+  cpb::remote::Message msg;
 
   switch (state) {
     case Engine::Playing:
-      msg.set_type(pb::remote::PLAY);
+      msg.set_type(cpb::remote::PLAY);
       track_position_timer_->start(1000);
       break;
     case Engine::Paused:
-      msg.set_type(pb::remote::PAUSE);
+      msg.set_type(cpb::remote::PAUSE);
       track_position_timer_->stop();
       break;
     case Engine::Empty:
-      msg.set_type(pb::remote::STOP);  // Empty is called when player stopped
+      msg.set_type(cpb::remote::STOP);  // Empty is called when player stopped
       track_position_timer_->stop();
       break;
     default:
-      msg.set_type(pb::remote::STOP);
+      msg.set_type(cpb::remote::STOP);
       track_position_timer_->stop();
       break;
   };
@@ -500,27 +501,27 @@ void OutgoingDataCreator::StateChanged(Engine::State state) {
 }
 
 void OutgoingDataCreator::SendRepeatMode(PlaylistSequence::RepeatMode mode) {
-  pb::remote::Message msg;
-  msg.set_type(pb::remote::REPEAT);
+  cpb::remote::Message msg;
+  msg.set_type(cpb::remote::REPEAT);
 
   switch (mode) {
     case PlaylistSequence::Repeat_Off:
-      msg.mutable_repeat()->set_repeat_mode(pb::remote::Repeat_Off);
+      msg.mutable_repeat()->set_repeat_mode(cpb::remote::Repeat_Off);
       break;
     case PlaylistSequence::Repeat_Track:
-      msg.mutable_repeat()->set_repeat_mode(pb::remote::Repeat_Track);
+      msg.mutable_repeat()->set_repeat_mode(cpb::remote::Repeat_Track);
       break;
     case PlaylistSequence::Repeat_Album:
-      msg.mutable_repeat()->set_repeat_mode(pb::remote::Repeat_Album);
+      msg.mutable_repeat()->set_repeat_mode(cpb::remote::Repeat_Album);
       break;
     case PlaylistSequence::Repeat_Playlist:
-      msg.mutable_repeat()->set_repeat_mode(pb::remote::Repeat_Playlist);
+      msg.mutable_repeat()->set_repeat_mode(cpb::remote::Repeat_Playlist);
       break;
     case PlaylistSequence::Repeat_OneByOne:
-      msg.mutable_repeat()->set_repeat_mode(pb::remote::Repeat_OneByOne);
+      msg.mutable_repeat()->set_repeat_mode(cpb::remote::Repeat_OneByOne);
       break;
     case PlaylistSequence::Repeat_Intro:
-      msg.mutable_repeat()->set_repeat_mode(pb::remote::Repeat_Intro);
+      msg.mutable_repeat()->set_repeat_mode(cpb::remote::Repeat_Intro);
       break;
   }
 
@@ -528,21 +529,21 @@ void OutgoingDataCreator::SendRepeatMode(PlaylistSequence::RepeatMode mode) {
 }
 
 void OutgoingDataCreator::SendShuffleMode(PlaylistSequence::ShuffleMode mode) {
-  pb::remote::Message msg;
-  msg.set_type(pb::remote::SHUFFLE);
+  cpb::remote::Message msg;
+  msg.set_type(cpb::remote::SHUFFLE);
 
   switch (mode) {
     case PlaylistSequence::Shuffle_Off:
-      msg.mutable_shuffle()->set_shuffle_mode(pb::remote::Shuffle_Off);
+      msg.mutable_shuffle()->set_shuffle_mode(cpb::remote::Shuffle_Off);
       break;
     case PlaylistSequence::Shuffle_All:
-      msg.mutable_shuffle()->set_shuffle_mode(pb::remote::Shuffle_All);
+      msg.mutable_shuffle()->set_shuffle_mode(cpb::remote::Shuffle_All);
       break;
     case PlaylistSequence::Shuffle_InsideAlbum:
-      msg.mutable_shuffle()->set_shuffle_mode(pb::remote::Shuffle_InsideAlbum);
+      msg.mutable_shuffle()->set_shuffle_mode(cpb::remote::Shuffle_InsideAlbum);
       break;
     case PlaylistSequence::Shuffle_Albums:
-      msg.mutable_shuffle()->set_shuffle_mode(pb::remote::Shuffle_Albums);
+      msg.mutable_shuffle()->set_shuffle_mode(cpb::remote::Shuffle_Albums);
       break;
   }
 
@@ -550,14 +551,14 @@ void OutgoingDataCreator::SendShuffleMode(PlaylistSequence::ShuffleMode mode) {
 }
 
 void OutgoingDataCreator::SendKeepAlive() {
-  pb::remote::Message msg;
-  msg.set_type(pb::remote::KEEP_ALIVE);
+  cpb::remote::Message msg;
+  msg.set_type(cpb::remote::KEEP_ALIVE);
   SendDataToClients(&msg);
 }
 
 void OutgoingDataCreator::UpdateTrackPosition() {
-  pb::remote::Message msg;
-  msg.set_type(pb::remote::UPDATE_TRACK_POSITION);
+  cpb::remote::Message msg;
+  msg.set_type(cpb::remote::UPDATE_TRACK_POSITION);
 
   qint64 position_nanosec = app_->player()->engine()->position_nanosec();
   int position = static_cast<int>(
@@ -574,10 +575,10 @@ void OutgoingDataCreator::UpdateTrackPosition() {
 }
 
 void OutgoingDataCreator::DisconnectAllClients() {
-  pb::remote::Message msg;
-  msg.set_type(pb::remote::DISCONNECT);
+  cpb::remote::Message msg;
+  msg.set_type(cpb::remote::DISCONNECT);
   msg.mutable_response_disconnect()->set_reason_disconnect(
-      pb::remote::Server_Shutdown);
+      cpb::remote::Server_Shutdown);
   SendDataToClients(&msg);
 }
 
@@ -585,9 +586,9 @@ void OutgoingDataCreator::GetLyrics() { fetcher_->FetchInfo(current_song_); }
 
 void OutgoingDataCreator::SendLyrics(int id,
                                      const SongInfoFetcher::Result& result) {
-  pb::remote::Message msg;
-  msg.set_type(pb::remote::LYRICS);
-  pb::remote::ResponseLyrics* response = msg.mutable_response_lyrics();
+  cpb::remote::Message msg;
+  msg.set_type(cpb::remote::LYRICS);
+  cpb::remote::ResponseLyrics* response = msg.mutable_response_lyrics();
 
   for (const CollapsibleInfoPane::Data& data : result.info_) {
     // If the size is zero, do not send the provider
@@ -595,7 +596,7 @@ void OutgoingDataCreator::SendLyrics(int id,
         qobject_cast<UltimateLyricsLyric*>(data.content_object_);
     if (editor->toPlainText().length() == 0) continue;
 
-    pb::remote::Lyric* lyric = response->mutable_lyrics()->Add();
+    cpb::remote::Lyric* lyric = response->mutable_lyrics()->Add();
 
     lyric->set_id(DataCommaSizeFromQString(data.id_));
     lyric->set_title(DataCommaSizeFromQString(data.title_));
@@ -636,10 +637,10 @@ void OutgoingDataCreator::SendLibrary(RemoteClient* client) {
   file.open(QIODevice::ReadOnly);
 
   QByteArray data;
-  pb::remote::Message msg;
-  pb::remote::ResponseLibraryChunk* chunk =
+  cpb::remote::Message msg;
+  cpb::remote::ResponseLibraryChunk* chunk =
       msg.mutable_response_library_chunk();
-  msg.set_type(pb::remote::LIBRARY_CHUNK);
+  msg.set_type(cpb::remote::LIBRARY_CHUNK);
 
   // Calculate the number of chunks
   int chunk_count = qRound((file.size() / kFileChunkSize) + 0.5);
@@ -687,14 +688,14 @@ void OutgoingDataCreator::DoGlobalSearch(const QString& query,
   global_search_result_map_.insert(id, request);
 
   // Send status message
-  pb::remote::Message msg;
-  pb::remote::ResponseGlobalSearchStatus* status =
+  cpb::remote::Message msg;
+  cpb::remote::ResponseGlobalSearchStatus* status =
       msg.mutable_response_global_search_status();
 
-  msg.set_type(pb::remote::GLOBAL_SEARCH_STATUS);
+  msg.set_type(cpb::remote::GLOBAL_SEARCH_STATUS);
   status->set_id(id);
   status->set_query(DataCommaSizeFromQString(query));
-  status->set_status(pb::remote::GlobalSearchStarted);
+  status->set_status(cpb::remote::GlobalSearchStarted);
 
   client->SendData(&msg);
 
@@ -709,11 +710,11 @@ void OutgoingDataCreator::ResultsAvailable(
   RemoteClient* client = search_request.client_;
   QImage null_img;
 
-  pb::remote::Message msg;
-  pb::remote::ResponseGlobalSearch* response =
+  cpb::remote::Message msg;
+  cpb::remote::ResponseGlobalSearch* response =
       msg.mutable_response_global_search();
 
-  msg.set_type(pb::remote::GLOBAL_SEARCH_RESULT);
+  msg.set_type(cpb::remote::GLOBAL_SEARCH_RESULT);
   response->set_id(search_request.id_);
   response->set_query(DataCommaSizeFromQString(search_request.query_));
   response->set_search_provider(
@@ -728,7 +729,7 @@ void OutgoingDataCreator::ResultsAvailable(
   response->set_search_provider_icon(byte_array.constData(), byte_array.size());
 
   for (const SearchProvider::Result& result : results) {
-    pb::remote::SongMetadata* pb_song = response->add_song_metadata();
+    cpb::remote::SongMetadata* pb_song = response->add_song_metadata();
     CreateSong(result.metadata_, null_img, 0, pb_song);
   }
 
@@ -744,14 +745,14 @@ void OutgoingDataCreator::SearchFinished(int id) {
   GlobalSearchRequest req = global_search_result_map_.take(id);
 
   // Send status message
-  pb::remote::Message msg;
-  pb::remote::ResponseGlobalSearchStatus* status =
+  cpb::remote::Message msg;
+  cpb::remote::ResponseGlobalSearchStatus* status =
       msg.mutable_response_global_search_status();
 
-  msg.set_type(pb::remote::GLOBAL_SEARCH_STATUS);
+  msg.set_type(cpb::remote::GLOBAL_SEARCH_STATUS);
   status->set_id(req.id_);
   status->set_query(DataCommaSizeFromQString(req.query_));
-  status->set_status(pb::remote::GlobalSearchFinished);
+  status->set_status(cpb::remote::GlobalSearchFinished);
 
   req.client_->SendData(&msg);
 
@@ -760,32 +761,32 @@ void OutgoingDataCreator::SearchFinished(int id) {
 
 void OutgoingDataCreator::SendListFiles(QString relative_path,
                                         RemoteClient* client) {
-  pb::remote::Message msg;
-  msg.set_type(pb::remote::LIST_FILES);
-  pb::remote::ResponseListFiles* files = msg.mutable_response_list_files();
+  cpb::remote::Message msg;
+  msg.set_type(cpb::remote::LIST_FILES);
+  cpb::remote::ResponseListFiles* files = msg.mutable_response_list_files();
   // Security checks
   if (files_root_folder_.isEmpty()) {
-    files->set_error(pb::remote::ResponseListFiles::ROOT_DIR_NOT_SET);
+    files->set_error(cpb::remote::ResponseListFiles::ROOT_DIR_NOT_SET);
     SendDataToClients(&msg);
     return;
   }
 
   QDir root_dir(files_root_folder_);
   if (!root_dir.exists())
-    files->set_error(pb::remote::ResponseListFiles::ROOT_DIR_NOT_SET);
+    files->set_error(cpb::remote::ResponseListFiles::ROOT_DIR_NOT_SET);
   else if (relative_path.startsWith("..") || relative_path.startsWith("./.."))
-    files->set_error(pb::remote::ResponseListFiles::DIR_NOT_ACCESSIBLE);
+    files->set_error(cpb::remote::ResponseListFiles::DIR_NOT_ACCESSIBLE);
   else {
     if (relative_path.startsWith("/")) relative_path.remove(0, 1);
 
     QFileInfo fi_folder(root_dir, relative_path);
     if (!fi_folder.exists())
-      files->set_error(pb::remote::ResponseListFiles::DIR_NOT_EXIST);
+      files->set_error(cpb::remote::ResponseListFiles::DIR_NOT_EXIST);
     else if (!fi_folder.isDir())
-      files->set_error(pb::remote::ResponseListFiles::DIR_NOT_EXIST);
+      files->set_error(cpb::remote::ResponseListFiles::DIR_NOT_EXIST);
     else if (root_dir.relativeFilePath(fi_folder.absoluteFilePath())
                  .startsWith("../"))
-      files->set_error(pb::remote::ResponseListFiles::DIR_NOT_ACCESSIBLE);
+      files->set_error(cpb::remote::ResponseListFiles::DIR_NOT_ACCESSIBLE);
     else {
       files->set_relative_path(
           root_dir.relativeFilePath(fi_folder.absoluteFilePath())
@@ -796,7 +797,7 @@ void OutgoingDataCreator::SendListFiles(QString relative_path,
 
       for (const QFileInfo& fi : dir.entryInfoList()) {
         if (fi.isDir() || files_music_extensions_.contains(fi.suffix())) {
-          pb::remote::FileMetadata* pb_file = files->add_files();
+          cpb::remote::FileMetadata* pb_file = files->add_files();
           pb_file->set_is_dir(fi.isDir());
           pb_file->set_filename(fi.fileName().toStdString());
         }
@@ -807,16 +808,16 @@ void OutgoingDataCreator::SendListFiles(QString relative_path,
 }
 
 void OutgoingDataCreator::SendSavedRadios(RemoteClient* client) {
-  pb::remote::Message msg;
-  msg.set_type(pb::remote::REQUEST_SAVED_RADIOS);
+  cpb::remote::Message msg;
+  msg.set_type(cpb::remote::REQUEST_SAVED_RADIOS);
 
   SavedRadio* radio_service = static_cast<SavedRadio*>(
       InternetModel::ServiceByName(SavedRadio::kServiceName));
   if (radio_service) {
-    pb::remote::ResponseSavedRadios* radios =
+    cpb::remote::ResponseSavedRadios* radios =
         msg.mutable_response_saved_radios();
     for (const auto& stream : radio_service->Streams()) {
-      pb::remote::Stream* pb_stream = radios->add_streams();
+      cpb::remote::Stream* pb_stream = radios->add_streams();
       pb_stream->set_name(stream.name_.toStdString());
       pb_stream->set_url(stream.url_.toString().toStdString());
       if (!stream.url_logo_.isEmpty())

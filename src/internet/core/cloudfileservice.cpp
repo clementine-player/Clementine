@@ -192,14 +192,14 @@ void CloudFileService::ReadTagsFinished(TagReaderClient::ReplyType* reply,
                                    indexing_task_max_);
   }
 
-  const pb::tagreader::ReadCloudFileResponse& message =
+  const cpb::tagreader::ReadCloudFileResponse& message =
       reply->message().read_cloud_file_response();
   if (!message.has_metadata() || !message.metadata().filesize()) {
     qLog(Debug) << "Failed to tag:" << metadata.url();
     return;
   }
 
-  pb::tagreader::SongMetadata metadata_pb;
+  cpb::tagreader::SongMetadata metadata_pb;
   metadata.ToProtobuf(&metadata_pb);
   metadata_pb.MergeFrom(message.metadata());
 

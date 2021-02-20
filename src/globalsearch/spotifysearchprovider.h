@@ -41,17 +41,17 @@ class SpotifySearchProvider : public SearchProvider {
 
  private slots:
   void ServerDestroyed();
-  void SearchFinishedSlot(const pb::spotify::SearchResponse& response);
+  void SearchFinishedSlot(const cpb::spotify::SearchResponse& response);
   void ArtLoadedSlot(const QString& id, const QImage& image);
-  void SuggestionsLoaded(const pb::spotify::LoadPlaylistResponse& response);
-  void SuggestionsLoaded(const pb::spotify::BrowseToplistResponse& response);
+  void SuggestionsLoaded(const cpb::spotify::LoadPlaylistResponse& response);
+  void SuggestionsLoaded(const cpb::spotify::BrowseToplistResponse& response);
 
  private:
   SpotifyServer* server();
 
   void LoadSuggestions();
-  void AddSuggestionFromTrack(const pb::spotify::Track& track);
-  void AddSuggestionFromAlbum(const pb::spotify::Album& album);
+  void AddSuggestionFromTrack(const cpb::spotify::Track& track);
+  void AddSuggestionFromAlbum(const cpb::spotify::Album& album);
 
  private:
   SpotifyServer* server_;

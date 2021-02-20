@@ -10,7 +10,7 @@ class QByteArray;
 namespace GME {
 bool IsSupportedFormat(const QFileInfo& file_info);
 void ReadFile(const QFileInfo& file_info,
-              pb::tagreader::SongMetadata* song_info);
+              cpb::tagreader::SongMetadata* song_info);
 
 namespace SPC {
 /* SPC SPEC:
@@ -42,7 +42,7 @@ enum xID6_ID { SongName = 0x01, GameName = 0x02, ArtistName = 0x03 };
 
 enum xID6_TYPE { Length = 0x0, String = 0x1, Integer = 0x4 };
 
-void Read(const QFileInfo& file_info, pb::tagreader::SongMetadata* song_info);
+void Read(const QFileInfo& file_info, cpb::tagreader::SongMetadata* song_info);
 qint16 GetNextMemAddressAlign32bit(qint16 input);
 quint64 ConvertSPCStringToNum(const QByteArray& arr);
 }  // namespace SPC
@@ -58,7 +58,7 @@ const int LOOP_SAMPLE_COUNT = 0x20;
 const int SAMPLE_TIMEBASE = 44100;
 const int GST_GME_LOOP_TIME_MS = 8000;
 
-void Read(const QFileInfo& file_info, pb::tagreader::SongMetadata* song_info);
+void Read(const QFileInfo& file_info, cpb::tagreader::SongMetadata* song_info);
 /* Takes in two QByteArrays, expected to be 4 bytes long. Desired length
  * is returned via output parameter out_length. Returns false on error. */
 bool GetPlaybackLength(const QByteArray& sample_count_bytes,

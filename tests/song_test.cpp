@@ -45,7 +45,7 @@ class SongTest : public ::testing::Test {
   static Song ReadSongFromFile(const QString& filename) {
     TagReader tag_reader;
     Song song;
-    ::pb::tagreader::SongMetadata pb_song;
+    ::cpb::tagreader::SongMetadata pb_song;
 
     // We need to init protobuf object from a Song object, to have default
     // values initialized correctly. For example, Song's rating is -1 by
@@ -59,7 +59,7 @@ class SongTest : public ::testing::Test {
 
   static void WriteSongToFile(const Song& song, const QString& filename) {
     TagReader tag_reader;
-    ::pb::tagreader::SongMetadata pb_song;
+    ::cpb::tagreader::SongMetadata pb_song;
     song.ToProtobuf(&pb_song);
     tag_reader.SaveFile(filename, pb_song);
   }
@@ -67,14 +67,14 @@ class SongTest : public ::testing::Test {
   static void WriteSongStatisticsToFile(const Song& song,
                                         const QString& filename) {
     TagReader tag_reader;
-    ::pb::tagreader::SongMetadata pb_song;
+    ::cpb::tagreader::SongMetadata pb_song;
     song.ToProtobuf(&pb_song);
     tag_reader.SaveSongStatisticsToFile(filename, pb_song);
   }
 
   static void WriteSongRatingToFile(const Song& song, const QString& filename) {
     TagReader tag_reader;
-    ::pb::tagreader::SongMetadata pb_song;
+    ::cpb::tagreader::SongMetadata pb_song;
     song.ToProtobuf(&pb_song);
     tag_reader.SaveSongRatingToFile(filename, pb_song);
   }

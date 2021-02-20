@@ -107,112 +107,112 @@ void IncomingDataParser::ReloadSettings() {
 
 bool IncomingDataParser::close_connection() { return close_connection_; }
 
-void IncomingDataParser::Parse(const pb::remote::Message& msg) {
+void IncomingDataParser::Parse(const cpb::remote::Message& msg) {
   close_connection_ = false;
   RemoteClient* client = qobject_cast<RemoteClient*>(sender());
 
   // Now check what's to do
   switch (msg.type()) {
-    case pb::remote::CONNECT:
+    case cpb::remote::CONNECT:
       ClientConnect(msg, client);
       break;
-    case pb::remote::DISCONNECT:
+    case cpb::remote::DISCONNECT:
       close_connection_ = true;
       break;
-    case pb::remote::REQUEST_PLAYLISTS:
+    case cpb::remote::REQUEST_PLAYLISTS:
       SendPlaylists(msg);
       break;
-    case pb::remote::REQUEST_PLAYLIST_SONGS:
+    case cpb::remote::REQUEST_PLAYLIST_SONGS:
       GetPlaylistSongs(msg);
       break;
-    case pb::remote::SET_VOLUME:
+    case cpb::remote::SET_VOLUME:
       emit SetVolume(msg.request_set_volume().volume());
       break;
-    case pb::remote::PLAY:
+    case cpb::remote::PLAY:
       emit Play();
       break;
-    case pb::remote::PLAYPAUSE:
+    case cpb::remote::PLAYPAUSE:
       emit PlayPause();
       break;
-    case pb::remote::PAUSE:
+    case cpb::remote::PAUSE:
       emit Pause();
       break;
-    case pb::remote::STOP:
+    case cpb::remote::STOP:
       emit Stop();
       break;
-    case pb::remote::STOP_AFTER:
+    case cpb::remote::STOP_AFTER:
       emit StopAfterCurrent();
       break;
-    case pb::remote::NEXT:
+    case cpb::remote::NEXT:
       emit Next();
       break;
-    case pb::remote::PREVIOUS:
+    case cpb::remote::PREVIOUS:
       emit Previous();
       break;
-    case pb::remote::CHANGE_SONG:
+    case cpb::remote::CHANGE_SONG:
       ChangeSong(msg);
       break;
-    case pb::remote::SHUFFLE_PLAYLIST:
+    case cpb::remote::SHUFFLE_PLAYLIST:
       emit ShuffleCurrent();
       break;
-    case pb::remote::REPEAT:
+    case cpb::remote::REPEAT:
       SetRepeatMode(msg.repeat());
       break;
-    case pb::remote::SHUFFLE:
+    case cpb::remote::SHUFFLE:
       SetShuffleMode(msg.shuffle());
       break;
-    case pb::remote::SET_TRACK_POSITION:
+    case cpb::remote::SET_TRACK_POSITION:
       emit SeekTo(msg.request_set_track_position().position());
       break;
-    case pb::remote::INSERT_URLS:
+    case cpb::remote::INSERT_URLS:
       InsertUrls(msg);
       break;
-    case pb::remote::REMOVE_SONGS:
+    case cpb::remote::REMOVE_SONGS:
       RemoveSongs(msg);
       break;
-    case pb::remote::OPEN_PLAYLIST:
+    case cpb::remote::OPEN_PLAYLIST:
       OpenPlaylist(msg);
       break;
-    case pb::remote::CLOSE_PLAYLIST:
+    case cpb::remote::CLOSE_PLAYLIST:
       ClosePlaylist(msg);
       break;
-    case pb::remote::UPDATE_PLAYLIST:
+    case cpb::remote::UPDATE_PLAYLIST:
       UpdatePlaylist(msg);
       break;
-    case pb::remote::LOVE:
+    case cpb::remote::LOVE:
       emit Love();
       break;
-    case pb::remote::BAN:
+    case cpb::remote::BAN:
       emit Ban();
       break;
-    case pb::remote::GET_LYRICS:
+    case cpb::remote::GET_LYRICS:
       emit GetLyrics();
       break;
-    case pb::remote::DOWNLOAD_SONGS:
+    case cpb::remote::DOWNLOAD_SONGS:
       client->song_sender()->SendSongs(msg.request_download_songs());
       break;
-    case pb::remote::SONG_OFFER_RESPONSE:
+    case cpb::remote::SONG_OFFER_RESPONSE:
       client->song_sender()->ResponseSongOffer(
           msg.response_song_offer().accepted());
       break;
-    case pb::remote::GET_LIBRARY:
+    case cpb::remote::GET_LIBRARY:
       emit SendLibrary(client);
       break;
-    case pb::remote::RATE_SONG:
+    case cpb::remote::RATE_SONG:
       RateSong(msg);
       break;
-    case pb::remote::GLOBAL_SEARCH:
+    case cpb::remote::GLOBAL_SEARCH:
       GlobalSearch(client, msg);
       break;
-    case pb::remote::REQUEST_FILES:
+    case cpb::remote::REQUEST_FILES:
       emit SendListFiles(
           QString::fromStdString(msg.request_list_files().relative_path()),
           client);
       break;
-    case pb::remote::APPEND_FILES:
+    case cpb::remote::APPEND_FILES:
       AppendFilesToPlaylist(msg);
       break;
-    case pb::remote::REQUEST_SAVED_RADIOS:
+    case cpb::remote::REQUEST_SAVED_RADIOS:
       emit SendSavedRadios(client);
       break;
 
@@ -221,13 +221,13 @@ void IncomingDataParser::Parse(const pb::remote::Message& msg) {
   }
 }
 
-void IncomingDataParser::GetPlaylistSongs(const pb::remote::Message& msg) {
+void IncomingDataParser::GetPlaylistSongs(const cpb::remote::Message& msg) {
   emit SendPlaylistSongs(msg.request_playlist_songs().id());
 }
 
-void IncomingDataParser::ChangeSong(const pb::remote::Message& msg) {
+void IncomingDataParser::ChangeSong(const cpb::remote::Message& msg) {
   // Get the first entry and check if there is a song
-  const pb::remote::RequestChangeSong& request = msg.request_change_song();
+  const cpb::remote::RequestChangeSong& request = msg.request_change_song();
 
   // Check if we need to change the playlist
   if (request.playlist_id() != app_->playlist_manager()->active_id()) {
@@ -251,18 +251,18 @@ void IncomingDataParser::ChangeSong(const pb::remote::Message& msg) {
   }
 }
 
-void IncomingDataParser::SetRepeatMode(const pb::remote::Repeat& repeat) {
+void IncomingDataParser::SetRepeatMode(const cpb::remote::Repeat& repeat) {
   switch (repeat.repeat_mode()) {
-    case pb::remote::Repeat_Off:
+    case cpb::remote::Repeat_Off:
       emit SetRepeatMode(PlaylistSequence::Repeat_Off);
       break;
-    case pb::remote::Repeat_Track:
+    case cpb::remote::Repeat_Track:
       emit SetRepeatMode(PlaylistSequence::Repeat_Track);
       break;
-    case pb::remote::Repeat_Album:
+    case cpb::remote::Repeat_Album:
       emit SetRepeatMode(PlaylistSequence::Repeat_Album);
       break;
-    case pb::remote::Repeat_Playlist:
+    case cpb::remote::Repeat_Playlist:
       emit SetRepeatMode(PlaylistSequence::Repeat_Playlist);
       break;
     default:
@@ -270,18 +270,18 @@ void IncomingDataParser::SetRepeatMode(const pb::remote::Repeat& repeat) {
   }
 }
 
-void IncomingDataParser::SetShuffleMode(const pb::remote::Shuffle& shuffle) {
+void IncomingDataParser::SetShuffleMode(const cpb::remote::Shuffle& shuffle) {
   switch (shuffle.shuffle_mode()) {
-    case pb::remote::Shuffle_Off:
+    case cpb::remote::Shuffle_Off:
       emit SetShuffleMode(PlaylistSequence::Shuffle_Off);
       break;
-    case pb::remote::Shuffle_All:
+    case cpb::remote::Shuffle_All:
       emit SetShuffleMode(PlaylistSequence::Shuffle_All);
       break;
-    case pb::remote::Shuffle_InsideAlbum:
+    case cpb::remote::Shuffle_InsideAlbum:
       emit SetShuffleMode(PlaylistSequence::Shuffle_InsideAlbum);
       break;
-    case pb::remote::Shuffle_Albums:
+    case cpb::remote::Shuffle_Albums:
       emit SetShuffleMode(PlaylistSequence::Shuffle_Albums);
       break;
     default:
@@ -289,8 +289,8 @@ void IncomingDataParser::SetShuffleMode(const pb::remote::Shuffle& shuffle) {
   }
 }
 
-void IncomingDataParser::InsertUrls(const pb::remote::Message& msg) {
-  const pb::remote::RequestInsertUrls& request = msg.request_insert_urls();
+void IncomingDataParser::InsertUrls(const cpb::remote::Message& msg) {
+  const cpb::remote::RequestInsertUrls& request = msg.request_insert_urls();
   int playlist_id = request.playlist_id();
 
   // Insert plain urls without metadata
@@ -328,8 +328,8 @@ void IncomingDataParser::InsertUrls(const pb::remote::Message& msg) {
   }
 }
 
-void IncomingDataParser::RemoveSongs(const pb::remote::Message& msg) {
-  const pb::remote::RequestRemoveSongs& request = msg.request_remove_songs();
+void IncomingDataParser::RemoveSongs(const cpb::remote::Message& msg) {
+  const cpb::remote::RequestRemoveSongs& request = msg.request_remove_songs();
 
   // Extract urls
   QList<int> songs;
@@ -341,7 +341,7 @@ void IncomingDataParser::RemoveSongs(const pb::remote::Message& msg) {
   emit RemoveSongs(request.playlist_id(), songs);
 }
 
-void IncomingDataParser::ClientConnect(const pb::remote::Message& msg,
+void IncomingDataParser::ClientConnect(const cpb::remote::Message& msg,
                                        RemoteClient* client) {
   // Always sned the Clementine infos
   emit SendClementineInfo();
@@ -357,7 +357,7 @@ void IncomingDataParser::ClientConnect(const pb::remote::Message& msg,
   }
 }
 
-void IncomingDataParser::SendPlaylists(const pb::remote::Message& msg) {
+void IncomingDataParser::SendPlaylists(const cpb::remote::Message& msg) {
   if (!msg.has_request_playlists() ||
       !msg.request_playlists().include_closed()) {
     emit SendAllActivePlaylists();
@@ -366,16 +366,16 @@ void IncomingDataParser::SendPlaylists(const pb::remote::Message& msg) {
   }
 }
 
-void IncomingDataParser::OpenPlaylist(const pb::remote::Message& msg) {
+void IncomingDataParser::OpenPlaylist(const cpb::remote::Message& msg) {
   emit Open(msg.request_open_playlist().playlist_id());
 }
 
-void IncomingDataParser::ClosePlaylist(const pb::remote::Message& msg) {
+void IncomingDataParser::ClosePlaylist(const cpb::remote::Message& msg) {
   emit Close(msg.request_close_playlist().playlist_id());
 }
 
-void IncomingDataParser::UpdatePlaylist(const pb::remote::Message& msg) {
-  const pb::remote::RequestUpdatePlaylist& req_update =
+void IncomingDataParser::UpdatePlaylist(const cpb::remote::Message& msg) {
+  const cpb::remote::RequestUpdatePlaylist& req_update =
       msg.request_update_playlist();
   if (req_update.has_create_new_playlist() &&
       req_update.create_new_playlist()) {
@@ -396,19 +396,19 @@ void IncomingDataParser::UpdatePlaylist(const pb::remote::Message& msg) {
     emit Favorite(req_update.playlist_id(), req_update.favorite());
 }
 
-void IncomingDataParser::RateSong(const pb::remote::Message& msg) {
+void IncomingDataParser::RateSong(const cpb::remote::Message& msg) {
   double rating = (double)msg.request_rate_song().rating();
   emit RateCurrentSong(rating);
 }
 
 void IncomingDataParser::GlobalSearch(RemoteClient* client,
-                                      const pb::remote::Message& msg) {
+                                      const cpb::remote::Message& msg) {
   emit DoGlobalSearch(QStringFromStdString(msg.request_global_search().query()),
                       client);
 }
 
 Song IncomingDataParser::CreateSongFromProtobuf(
-    const pb::remote::SongMetadata& pb) {
+    const cpb::remote::SongMetadata& pb) {
   Song song;
   song.Init(QStringFromStdString(pb.title()), QStringFromStdString(pb.artist()),
             QStringFromStdString(pb.album()), pb.length() * kNsecPerSec);
@@ -429,7 +429,8 @@ Song IncomingDataParser::CreateSongFromProtobuf(
   return song;
 }
 
-void IncomingDataParser::AppendFilesToPlaylist(const pb::remote::Message& msg) {
+void IncomingDataParser::AppendFilesToPlaylist(
+    const cpb::remote::Message& msg) {
   if (files_root_folder_.isEmpty()) {  // should never happen...
     qLog(Warning) << "Remote root dir is not set although receiving "
                      "APPEND_FILES request...";
@@ -441,7 +442,8 @@ void IncomingDataParser::AppendFilesToPlaylist(const pb::remote::Message& msg) {
     return;
   }
 
-  const pb::remote::RequestAppendFiles& req_append = msg.request_append_files();
+  const cpb::remote::RequestAppendFiles& req_append =
+      msg.request_append_files();
   QString relative_path = QString::fromStdString(req_append.relative_path());
   if (relative_path.startsWith("/")) relative_path.remove(0, 1);
 

@@ -20,7 +20,7 @@ bool GME::IsSupportedFormat(const QFileInfo& file_info) {
 }
 
 void GME::ReadFile(const QFileInfo& file_info,
-                   pb::tagreader::SongMetadata* song_info) {
+                   cpb::tagreader::SongMetadata* song_info) {
   if (file_info.completeSuffix().endsWith("spc"))
     SPC::Read(file_info, song_info);
   if (file_info.completeSuffix().endsWith("vgm"))
@@ -28,7 +28,7 @@ void GME::ReadFile(const QFileInfo& file_info,
 }
 
 void GME::SPC::Read(const QFileInfo& file_info,
-                    pb::tagreader::SongMetadata* song_info) {
+                    cpb::tagreader::SongMetadata* song_info) {
   QFile file(file_info.filePath());
   if (!file.open(QIODevice::ReadOnly)) return;
 
@@ -137,7 +137,7 @@ void GME::SPC::Read(const QFileInfo& file_info,
   }
 
   song_info->set_valid(true);
-  song_info->set_type(pb::tagreader::SongMetadata_Type_SPC);
+  song_info->set_type(cpb::tagreader::SongMetadata_Type_SPC);
 }
 
 qint16 GME::SPC::GetNextMemAddressAlign32bit(qint16 input) {
@@ -157,7 +157,7 @@ quint64 GME::SPC::ConvertSPCStringToNum(const QByteArray& arr) {
 }
 
 void GME::VGM::Read(const QFileInfo& file_info,
-                    pb::tagreader::SongMetadata* song_info) {
+                    cpb::tagreader::SongMetadata* song_info) {
   QFile file(file_info.filePath());
   if (!file.open(QIODevice::ReadOnly)) return;
 
@@ -206,7 +206,7 @@ void GME::VGM::Read(const QFileInfo& file_info,
   song_info->set_year(strings[8].left(4).toInt());
   song_info->set_length_nanosec(length * kNsecPerMsec);
   song_info->set_valid(true);
-  song_info->set_type(pb::tagreader::SongMetadata_Type_VGM);
+  song_info->set_type(cpb::tagreader::SongMetadata_Type_VGM);
 }
 
 bool GME::VGM::GetPlaybackLength(const QByteArray& sample_count_bytes,
