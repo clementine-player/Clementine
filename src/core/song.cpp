@@ -526,7 +526,7 @@ QString Song::Decode(const QString& tag, const QTextCodec* codec) {
   return codec->toUnicode(tag.toUtf8());
 }
 
-void Song::InitFromProtobuf(const pb::tagreader::SongMetadata& pb) {
+void Song::InitFromProtobuf(const cpb::tagreader::SongMetadata& pb) {
   d->init_from_file_ = true;
   d->valid_ = pb.valid();
   d->title_ = QStringFromStdString(pb.title());
@@ -575,7 +575,7 @@ void Song::InitFromProtobuf(const pb::tagreader::SongMetadata& pb) {
   InitArtManual();
 }
 
-void Song::ToProtobuf(pb::tagreader::SongMetadata* pb) const {
+void Song::ToProtobuf(cpb::tagreader::SongMetadata* pb) const {
   const QByteArray url(d->url_.toEncoded());
 
   pb->set_valid(d->valid_);
@@ -610,7 +610,7 @@ void Song::ToProtobuf(pb::tagreader::SongMetadata* pb) const {
   pb->set_filesize(d->filesize_);
   pb->set_suspicious_tags(d->suspicious_tags_);
   pb->set_art_automatic(DataCommaSizeFromQString(d->art_automatic_));
-  pb->set_type(static_cast<pb::tagreader::SongMetadata_Type>(d->filetype_));
+  pb->set_type(static_cast<cpb::tagreader::SongMetadata_Type>(d->filetype_));
 }
 
 void Song::InitFromQuery(const SqlRow& q, bool reliable_metadata, int col) {

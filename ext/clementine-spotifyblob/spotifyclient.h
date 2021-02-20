@@ -35,7 +35,7 @@ class QTimer;
 class MediaPipeline;
 class ResponseMessage;
 
-class SpotifyClient : public AbstractMessageHandler<pb::spotify::Message> {
+class SpotifyClient : public AbstractMessageHandler<cpb::spotify::Message> {
   Q_OBJECT
 
  public:
@@ -48,7 +48,7 @@ class SpotifyClient : public AbstractMessageHandler<pb::spotify::Message> {
   void Init(quint16 port);
 
  protected:
-  void MessageArrived(const pb::spotify::Message& message);
+  void MessageArrived(const cpb::spotify::Message& message);
   void DeviceClosed();
 
  private slots:
@@ -56,7 +56,7 @@ class SpotifyClient : public AbstractMessageHandler<pb::spotify::Message> {
 
  private:
   void SendLoginCompleted(bool success, const QString& error,
-                          pb::spotify::LoginResponse_Error error_code);
+                          cpb::spotify::LoginResponse_Error error_code);
   void SendPlaybackError(const QString& error);
   void SendSearchResponse(sp_search* result);
 
@@ -118,40 +118,40 @@ class SpotifyClient : public AbstractMessageHandler<pb::spotify::Message> {
       ToplistBrowseComplete(sp_toplistbrowse* result, void* userdata);
 
   // Request handlers.
-  void Login(const pb::spotify::LoginRequest& req);
-  void Search(const pb::spotify::SearchRequest& req);
-  void LoadPlaylist(const pb::spotify::LoadPlaylistRequest& req);
-  void SyncPlaylist(const pb::spotify::SyncPlaylistRequest& req);
-  void AddTracksToPlaylist(const pb::spotify::AddTracksToPlaylistRequest& req);
+  void Login(const cpb::spotify::LoginRequest& req);
+  void Search(const cpb::spotify::SearchRequest& req);
+  void LoadPlaylist(const cpb::spotify::LoadPlaylistRequest& req);
+  void SyncPlaylist(const cpb::spotify::SyncPlaylistRequest& req);
+  void AddTracksToPlaylist(const cpb::spotify::AddTracksToPlaylistRequest& req);
   void RemoveTracksFromPlaylist(
-      const pb::spotify::RemoveTracksFromPlaylistRequest& req);
-  void StartPlayback(const pb::spotify::PlaybackRequest& req);
+      const cpb::spotify::RemoveTracksFromPlaylistRequest& req);
+  void StartPlayback(const cpb::spotify::PlaybackRequest& req);
   void Seek(qint64 offset_nsec);
   void LoadImage(const QString& id_b64);
   void BrowseAlbum(const QString& uri);
-  void BrowseToplist(const pb::spotify::BrowseToplistRequest& req);
-  void SetPlaybackSettings(const pb::spotify::PlaybackSettings& req);
-  void SetPaused(const pb::spotify::PauseRequest& req);
+  void BrowseToplist(const cpb::spotify::BrowseToplistRequest& req);
+  void SetPlaybackSettings(const cpb::spotify::PlaybackSettings& req);
+  void SetPaused(const cpb::spotify::PauseRequest& req);
 
   void SendPlaylistList();
 
-  void ConvertTrack(sp_track* track, pb::spotify::Track* pb);
-  void ConvertAlbum(sp_album* album, pb::spotify::Track* pb);
-  void ConvertAlbumBrowse(sp_albumbrowse* browse, pb::spotify::Track* pb);
+  void ConvertTrack(sp_track* track, cpb::spotify::Track* pb);
+  void ConvertAlbum(sp_album* album, cpb::spotify::Track* pb);
+  void ConvertAlbumBrowse(sp_albumbrowse* browse, cpb::spotify::Track* pb);
 
   // Gets the appropriate sp_playlist* but does not load it.
-  sp_playlist* GetPlaylist(pb::spotify::PlaylistType type, int user_index);
+  sp_playlist* GetPlaylist(cpb::spotify::PlaylistType type, int user_index);
 
  private:
   struct PendingLoadPlaylist {
-    pb::spotify::LoadPlaylistRequest request_;
+    cpb::spotify::LoadPlaylistRequest request_;
     sp_playlist* playlist_;
     QList<sp_track*> tracks_;
     bool offline_sync;
   };
 
   struct PendingPlaybackRequest {
-    pb::spotify::PlaybackRequest request_;
+    cpb::spotify::PlaybackRequest request_;
     sp_link* link_;
     sp_track* track_;
 
@@ -170,7 +170,7 @@ class SpotifyClient : public AbstractMessageHandler<pb::spotify::Message> {
   void TryPlaybackAgain(const PendingPlaybackRequest& req);
   void TryImageAgain(sp_image* image);
   int GetDownloadProgress(sp_playlist* playlist);
-  void SendDownloadProgress(pb::spotify::PlaylistType type, int index,
+  void SendDownloadProgress(cpb::spotify::PlaylistType type, int index,
                             int download_progress);
 
   QByteArray api_key_;
@@ -190,9 +190,9 @@ class SpotifyClient : public AbstractMessageHandler<pb::spotify::Message> {
   QList<PendingPlaybackRequest> pending_playback_requests_;
   QList<PendingImageRequest> pending_image_requests_;
   QMap<sp_image*, int> image_callbacks_registered_;
-  QMap<sp_search*, pb::spotify::SearchRequest> pending_searches_;
+  QMap<sp_search*, cpb::spotify::SearchRequest> pending_searches_;
   QMap<sp_albumbrowse*, QString> pending_album_browses_;
-  QMap<sp_toplistbrowse*, pb::spotify::BrowseToplistRequest>
+  QMap<sp_toplistbrowse*, cpb::spotify::BrowseToplistRequest>
       pending_toplist_browses_;
 
   QMap<sp_search*, QList<sp_albumbrowse*>> pending_search_album_browses_;

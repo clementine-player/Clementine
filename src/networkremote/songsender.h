@@ -30,7 +30,7 @@ class SongSender : public QObject {
   static const quint32 kFileChunkSize;
 
  public slots:
-  void SendSongs(const pb::remote::RequestDownloadSongs& request);
+  void SendSongs(const cpb::remote::RequestDownloadSongs& request);
   void ResponseSongOffer(bool accepted);
 
  private slots:
@@ -52,8 +52,8 @@ class SongSender : public QObject {
 
   void SendSingleSong(DownloadItem download_item);
   void SendAlbum(const Song& song);
-  void SendPlaylist(const pb::remote::RequestDownloadSongs& request);
-  void SendUrls(const pb::remote::RequestDownloadSongs& request);
+  void SendPlaylist(const cpb::remote::RequestDownloadSongs& request);
+  void SendUrls(const cpb::remote::RequestDownloadSongs& request);
   void OfferNextSong();
   void SendTotalFileSize();
   void TranscodeLosslessFiles();

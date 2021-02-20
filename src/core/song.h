@@ -37,11 +37,11 @@
 #include "config.h"
 #include "engines/engine_fwd.h"
 
-namespace pb {
+namespace cpb {
 namespace tagreader {
 class SongMetadata;
 }  // namespace tagreader
-}  // namespace pb
+}  // namespace cpb
 
 class QSqlQuery;
 class QUrl;
@@ -123,7 +123,7 @@ class Song {
             qint64 length_nanosec);
   void Init(const QString& title, const QString& artist, const QString& album,
             qint64 beginning, qint64 end);
-  void InitFromProtobuf(const pb::tagreader::SongMetadata& pb);
+  void InitFromProtobuf(const cpb::tagreader::SongMetadata& pb);
   void InitFromQuery(const SqlRow& query, bool reliable_metadata, int col = 0);
   void InitFromFilePartial(
       const QString& filename);  // Just store the filename: incomplete but fast
@@ -159,7 +159,7 @@ class Song {
   void ToLastFM(lastfm::Track* track, bool prefer_album_artist) const;
 #endif
   void ToXesam(QVariantMap* map) const;
-  void ToProtobuf(pb::tagreader::SongMetadata* pb) const;
+  void ToProtobuf(cpb::tagreader::SongMetadata* pb) const;
 
   // Simple accessors
   bool is_valid() const;

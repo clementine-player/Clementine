@@ -59,9 +59,9 @@ SpotifySettingsPage::SpotifySettingsPage(SettingsDialog* dialog)
   ui_->login_state->AddCredentialField(ui_->password);
   ui_->login_state->AddCredentialGroup(ui_->account_group);
 
-  ui_->bitrate->addItem("96 " + tr("kbps"), pb::spotify::Bitrate96k);
-  ui_->bitrate->addItem("160 " + tr("kbps"), pb::spotify::Bitrate160k);
-  ui_->bitrate->addItem("320 " + tr("kbps"), pb::spotify::Bitrate320k);
+  ui_->bitrate->addItem("96 " + tr("kbps"), cpb::spotify::Bitrate96k);
+  ui_->bitrate->addItem("160 " + tr("kbps"), cpb::spotify::Bitrate160k);
+  ui_->bitrate->addItem("320 " + tr("kbps"), cpb::spotify::Bitrate320k);
 
   BlobStateChanged();
 }
@@ -108,7 +108,7 @@ void SpotifySettingsPage::Load() {
   validated_ = false;
 
   ui_->bitrate->setCurrentIndex(ui_->bitrate->findData(
-      s.value("bitrate", pb::spotify::Bitrate320k).toInt()));
+      s.value("bitrate", cpb::spotify::Bitrate320k).toInt()));
   ui_->volume_normalisation->setChecked(
       s.value("volume_normalisation", false).toBool());
 

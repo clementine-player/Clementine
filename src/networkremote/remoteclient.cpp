@@ -103,33 +103,33 @@ void RemoteClient::IncomingData() {
 }
 
 void RemoteClient::ParseMessage(const QByteArray& data) {
-  pb::remote::Message msg;
+  cpb::remote::Message msg;
   if (!msg.ParseFromArray(data.constData(), data.size())) {
     qLog(Info) << "Couldn't parse data";
     return;
   }
 
-  if (msg.type() == pb::remote::CONNECT && use_auth_code_) {
+  if (msg.type() == cpb::remote::CONNECT && use_auth_code_) {
     if (msg.request_connect().auth_code() != auth_code_) {
-      DisconnectClient(pb::remote::Wrong_Auth_Code);
+      DisconnectClient(cpb::remote::Wrong_Auth_Code);
       return;
     } else {
       authenticated_ = true;
     }
   }
 
-  if (msg.type() == pb::remote::CONNECT) {
+  if (msg.type() == cpb::remote::CONNECT) {
     setDownloader(msg.request_connect().downloader());
     qDebug() << "Downloader" << downloader_;
   }
 
   // Check if downloads are allowed
-  if (msg.type() == pb::remote::DOWNLOAD_SONGS && !allow_downloads_) {
-    DisconnectClient(pb::remote::Download_Forbidden);
+  if (msg.type() == cpb::remote::DOWNLOAD_SONGS && !allow_downloads_) {
+    DisconnectClient(cpb::remote::Download_Forbidden);
     return;
   }
 
-  if (msg.type() == pb::remote::DISCONNECT) {
+  if (msg.type() == cpb::remote::DISCONNECT) {
     client_->abort();
     qDebug() << "Client disconnected";
     return;
@@ -137,7 +137,7 @@ void RemoteClient::ParseMessage(const QByteArray& data) {
 
   // Check if the client has sent the correct auth code
   if (!authenticated_) {
-    DisconnectClient(pb::remote::Not_Authenticated);
+    DisconnectClient(cpb::remote::Not_Authenticated);
     return;
   }
 
@@ -145,9 +145,9 @@ void RemoteClient::ParseMessage(const QByteArray& data) {
   emit Parse(msg);
 }
 
-void RemoteClient::DisconnectClient(pb::remote::ReasonDisconnect reason) {
-  pb::remote::Message msg;
-  msg.set_type(pb::remote::DISCONNECT);
+void RemoteClient::DisconnectClient(cpb::remote::ReasonDisconnect reason) {
+  cpb::remote::Message msg;
+  msg.set_type(cpb::remote::DISCONNECT);
 
   msg.mutable_response_disconnect()->set_reason_disconnect(reason);
   SendDataToClient(&msg);
@@ -158,7 +158,7 @@ void RemoteClient::DisconnectClient(pb::remote::ReasonDisconnect reason) {
 }
 
 // Sends data to client without check if authenticated
-void RemoteClient::SendDataToClient(pb::remote::Message* msg) {
+void RemoteClient::SendDataToClient(cpb::remote::Message* msg) {
   // Set the default version
   msg->set_version(msg->default_instance().version());
 
@@ -185,7 +185,7 @@ void RemoteClient::SendDataToClient(pb::remote::Message* msg) {
   }
 }
 
-void RemoteClient::SendData(pb::remote::Message* msg) {
+void RemoteClient::SendData(cpb::remote::Message* msg) {
   // Check if client is authenticated before sending the data
   if (authenticated_) {
     SendDataToClient(msg);

@@ -57,7 +57,7 @@ class OutgoingDataCreator : public QObject {
     allow_downloads_ = allow_downloads;
   }
   static void CreateSong(const Song& song, const QImage& art, const int index,
-                         pb::remote::SongMetadata* song_metadata);
+                         cpb::remote::SongMetadata* song_metadata);
 
  public slots:
   void SendClementineInfo();
@@ -116,8 +116,8 @@ class OutgoingDataCreator : public QObject {
 
   QMap<int, GlobalSearchRequest> global_search_result_map_;
 
-  void SendDataToClients(pb::remote::Message* msg);
-  void SetEngineState(pb::remote::ResponseClementineInfo* msg);
+  void SendDataToClients(cpb::remote::Message* msg);
+  void SetEngineState(cpb::remote::ResponseClementineInfo* msg);
   void CheckEnabledProviders();
   SongInfoProvider* ProviderByName(const QString& name) const;
 };

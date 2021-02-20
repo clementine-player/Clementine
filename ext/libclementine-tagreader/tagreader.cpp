@@ -143,7 +143,7 @@ QString ReplaceUnderscoresWithSpaces(const QString& s) {
 
 }  // namespace
 
-void TagReader::GuessArtistAndTitle(pb::tagreader::SongMetadata* song) const {
+void TagReader::GuessArtistAndTitle(cpb::tagreader::SongMetadata* song) const {
   QString artist = QString::fromStdString(song->artist());
   QString title = QString::fromStdString(song->title());
   const QString bn = QString::fromStdString(song->basefilename());
@@ -171,7 +171,7 @@ void TagReader::GuessArtistAndTitle(pb::tagreader::SongMetadata* song) const {
 }
 
 void TagReader::GuessAlbum(const QFileInfo& info,
-                           pb::tagreader::SongMetadata* song) const {
+                           cpb::tagreader::SongMetadata* song) const {
   QString album = QString::fromStdString(song->album());
   if (!album.isEmpty()) return;
   const QString str_dir = info.absoluteDir().absolutePath();
@@ -191,7 +191,7 @@ TagReader::TagReader()
     : factory_(new TagLibFileRefFactory), kEmbeddedCover("(embedded)") {}
 
 void TagReader::ReadFile(const QString& filename,
-                         pb::tagreader::SongMetadata* song) const {
+                         cpb::tagreader::SongMetadata* song) const {
   const QByteArray url(QUrl::fromLocalFile(filename).toEncoded());
   const QFileInfo info(filename);
 
@@ -674,7 +674,7 @@ void TagReader::Decode(const QString& tag, const QTextCodec* codec,
 }
 
 void TagReader::ParseFMPSFrame(const QString& name, const QString& value,
-                               pb::tagreader::SongMetadata* song) const {
+                               cpb::tagreader::SongMetadata* song) const {
   qLog(Debug) << "Parsing FMPSFrame" << name << ", " << value;
   FMPSParser parser;
   if (!parser.Parse(value) || parser.is_empty()) return;
@@ -717,7 +717,7 @@ void TagReader::ParseFMPSFrame(const QString& name, const QString& value,
 void TagReader::ParseOggTag(const TagLib::Ogg::FieldListMap& map,
                             const QTextCodec* codec, QString* disc,
                             QString* compilation,
-                            pb::tagreader::SongMetadata* song) const {
+                            cpb::tagreader::SongMetadata* song) const {
   if (!map["COMPOSER"].isEmpty())
     Decode(map["COMPOSER"].front(), codec, song->mutable_composer());
   if (!map["PERFORMER"].isEmpty())
@@ -774,7 +774,7 @@ void TagReader::ParseOggTag(const TagLib::Ogg::FieldListMap& map,
 
 void TagReader::SetVorbisComments(
     TagLib::Ogg::XiphComment* vorbis_comments,
-    const pb::tagreader::SongMetadata& song) const {
+    const cpb::tagreader::SongMetadata& song) const {
   vorbis_comments->addField("COMPOSER",
                             StdStringToTaglibString(song.composer()), true);
   vorbis_comments->addField("PERFORMER",
@@ -810,7 +810,7 @@ void TagReader::SetVorbisComments(
 
 void TagReader::SetFMPSStatisticsVorbisComments(
     TagLib::Ogg::XiphComment* vorbis_comments,
-    const pb::tagreader::SongMetadata& song) const {
+    const cpb::tagreader::SongMetadata& song) const {
   if (song.playcount())
     vorbis_comments->addField("FMPS_PLAYCOUNT",
                               TagLib::String::number(song.playcount()), true);
@@ -822,54 +822,54 @@ void TagReader::SetFMPSStatisticsVorbisComments(
 
 void TagReader::SetFMPSRatingVorbisComments(
     TagLib::Ogg::XiphComment* vorbis_comments,
-    const pb::tagreader::SongMetadata& song) const {
+    const cpb::tagreader::SongMetadata& song) const {
   vorbis_comments->addField(
       "FMPS_RATING", QStringToTaglibString(QString::number(song.rating())),
       true);
 }
 
-pb::tagreader::SongMetadata_Type TagReader::GuessFileType(
+cpb::tagreader::SongMetadata_Type TagReader::GuessFileType(
     TagLib::FileRef* fileref) const {
 #ifdef TAGLIB_WITH_ASF
   if (dynamic_cast<TagLib::ASF::File*>(fileref->file()))
-    return pb::tagreader::SongMetadata_Type_ASF;
+    return cpb::tagreader::SongMetadata_Type_ASF;
 #endif
   if (dynamic_cast<TagLib::FLAC::File*>(fileref->file()))
-    return pb::tagreader::SongMetadata_Type_FLAC;
+    return cpb::tagreader::SongMetadata_Type_FLAC;
 #ifdef TAGLIB_WITH_MP4
   if (dynamic_cast<TagLib::MP4::File*>(fileref->file()))
-    return pb::tagreader::SongMetadata_Type_MP4;
+    return cpb::tagreader::SongMetadata_Type_MP4;
 #endif
   if (dynamic_cast<TagLib::MPC::File*>(fileref->file()))
-    return pb::tagreader::SongMetadata_Type_MPC;
+    return cpb::tagreader::SongMetadata_Type_MPC;
   if (dynamic_cast<TagLib::MPEG::File*>(fileref->file()))
-    return pb::tagreader::SongMetadata_Type_MPEG;
+    return cpb::tagreader::SongMetadata_Type_MPEG;
   if (dynamic_cast<TagLib::Ogg::FLAC::File*>(fileref->file()))
-    return pb::tagreader::SongMetadata_Type_OGGFLAC;
+    return cpb::tagreader::SongMetadata_Type_OGGFLAC;
   if (dynamic_cast<TagLib::Ogg::Speex::File*>(fileref->file()))
-    return pb::tagreader::SongMetadata_Type_OGGSPEEX;
+    return cpb::tagreader::SongMetadata_Type_OGGSPEEX;
   if (dynamic_cast<TagLib::Ogg::Vorbis::File*>(fileref->file()))
-    return pb::tagreader::SongMetadata_Type_OGGVORBIS;
+    return cpb::tagreader::SongMetadata_Type_OGGVORBIS;
 #ifdef TAGLIB_HAS_OPUS
   if (dynamic_cast<TagLib::Ogg::Opus::File*>(fileref->file()))
-    return pb::tagreader::SongMetadata_Type_OGGOPUS;
+    return cpb::tagreader::SongMetadata_Type_OGGOPUS;
 #endif
   if (dynamic_cast<TagLib::RIFF::AIFF::File*>(fileref->file()))
-    return pb::tagreader::SongMetadata_Type_AIFF;
+    return cpb::tagreader::SongMetadata_Type_AIFF;
   if (dynamic_cast<TagLib::RIFF::WAV::File*>(fileref->file()))
-    return pb::tagreader::SongMetadata_Type_WAV;
+    return cpb::tagreader::SongMetadata_Type_WAV;
   if (dynamic_cast<TagLib::TrueAudio::File*>(fileref->file()))
-    return pb::tagreader::SongMetadata_Type_TRUEAUDIO;
+    return cpb::tagreader::SongMetadata_Type_TRUEAUDIO;
   if (dynamic_cast<TagLib::WavPack::File*>(fileref->file()))
-    return pb::tagreader::SongMetadata_Type_WAVPACK;
+    return cpb::tagreader::SongMetadata_Type_WAVPACK;
   if (dynamic_cast<TagLib::APE::File*>(fileref->file()))
-    return pb::tagreader::SongMetadata_Type_APE;
+    return cpb::tagreader::SongMetadata_Type_APE;
 
-  return pb::tagreader::SongMetadata_Type_UNKNOWN;
+  return cpb::tagreader::SongMetadata_Type_UNKNOWN;
 }
 
 bool TagReader::SaveFile(const QString& filename,
-                         const pb::tagreader::SongMetadata& song) const {
+                         const cpb::tagreader::SongMetadata& song) const {
   if (filename.isNull()) return false;
 
   qLog(Debug) << "Saving tags to" << filename;
@@ -986,7 +986,7 @@ bool TagReader::SaveFile(const QString& filename,
 }
 
 bool TagReader::SaveSongStatisticsToFile(
-    const QString& filename, const pb::tagreader::SongMetadata& song) const {
+    const QString& filename, const cpb::tagreader::SongMetadata& song) const {
   if (filename.isNull()) return false;
 
   qLog(Debug) << "Saving song statistics tags to" << filename;
@@ -1083,7 +1083,7 @@ bool TagReader::SaveSongStatisticsToFile(
 }
 
 bool TagReader::SaveSongRatingToFile(
-    const QString& filename, const pb::tagreader::SongMetadata& song) const {
+    const QString& filename, const cpb::tagreader::SongMetadata& song) const {
   if (filename.isNull()) return false;
 
   qLog(Debug) << "Saving song rating tags to" << filename;
@@ -1427,7 +1427,7 @@ QByteArray TagReader::LoadEmbeddedArt(const QString& filename) const {
 bool TagReader::ReadCloudFile(const QUrl& download_url, const QString& title,
                               int size, const QString& mime_type,
                               const QString& authorisation_header,
-                              pb::tagreader::SongMetadata* song) const {
+                              cpb::tagreader::SongMetadata* song) const {
   qLog(Debug) << "Loading tags from" << title;
 
   std::unique_ptr<CloudStream> stream(
@@ -1488,7 +1488,7 @@ bool TagReader::ReadCloudFile(const QUrl& download_url, const QString& title,
       song->set_year(tag->tag()->year());
     }
 
-    song->set_type(pb::tagreader::SongMetadata_Type_STREAM);
+    song->set_type(cpb::tagreader::SongMetadata_Type_STREAM);
 
     if (tag->audioProperties()) {
       song->set_length_nanosec(tag->audioProperties()->length() * kNsecPerSec);

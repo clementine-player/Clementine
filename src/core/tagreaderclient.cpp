@@ -58,8 +58,8 @@ void TagReaderClient::WorkerFailedToStart() {
 }
 
 TagReaderReply* TagReaderClient::ReadFile(const QString& filename) {
-  pb::tagreader::Message message;
-  pb::tagreader::ReadFileRequest* req = message.mutable_read_file_request();
+  cpb::tagreader::Message message;
+  cpb::tagreader::ReadFileRequest* req = message.mutable_read_file_request();
 
   req->set_filename(DataCommaSizeFromQString(filename));
 
@@ -68,8 +68,8 @@ TagReaderReply* TagReaderClient::ReadFile(const QString& filename) {
 
 TagReaderReply* TagReaderClient::SaveFile(const QString& filename,
                                           const Song& metadata) {
-  pb::tagreader::Message message;
-  pb::tagreader::SaveFileRequest* req = message.mutable_save_file_request();
+  cpb::tagreader::Message message;
+  cpb::tagreader::SaveFileRequest* req = message.mutable_save_file_request();
 
   req->set_filename(DataCommaSizeFromQString(filename));
   metadata.ToProtobuf(req->mutable_metadata());
@@ -78,8 +78,8 @@ TagReaderReply* TagReaderClient::SaveFile(const QString& filename,
 }
 
 TagReaderReply* TagReaderClient::UpdateSongStatistics(const Song& metadata) {
-  pb::tagreader::Message message;
-  pb::tagreader::SaveSongStatisticsToFileRequest* req =
+  cpb::tagreader::Message message;
+  cpb::tagreader::SaveSongStatisticsToFileRequest* req =
       message.mutable_save_song_statistics_to_file_request();
 
   req->set_filename(DataCommaSizeFromQString(metadata.url().toLocalFile()));
@@ -96,8 +96,8 @@ void TagReaderClient::UpdateSongsStatistics(const SongList& songs) {
 }
 
 TagReaderReply* TagReaderClient::UpdateSongRating(const Song& metadata) {
-  pb::tagreader::Message message;
-  pb::tagreader::SaveSongRatingToFileRequest* req =
+  cpb::tagreader::Message message;
+  cpb::tagreader::SaveSongRatingToFileRequest* req =
       message.mutable_save_song_rating_to_file_request();
 
   req->set_filename(DataCommaSizeFromQString(metadata.url().toLocalFile()));
@@ -114,8 +114,8 @@ void TagReaderClient::UpdateSongsRating(const SongList& songs) {
 }
 
 TagReaderReply* TagReaderClient::IsMediaFile(const QString& filename) {
-  pb::tagreader::Message message;
-  pb::tagreader::IsMediaFileRequest* req =
+  cpb::tagreader::Message message;
+  cpb::tagreader::IsMediaFileRequest* req =
       message.mutable_is_media_file_request();
 
   req->set_filename(DataCommaSizeFromQString(filename));
@@ -124,8 +124,8 @@ TagReaderReply* TagReaderClient::IsMediaFile(const QString& filename) {
 }
 
 TagReaderReply* TagReaderClient::LoadEmbeddedArt(const QString& filename) {
-  pb::tagreader::Message message;
-  pb::tagreader::LoadEmbeddedArtRequest* req =
+  cpb::tagreader::Message message;
+  cpb::tagreader::LoadEmbeddedArtRequest* req =
       message.mutable_load_embedded_art_request();
 
   req->set_filename(DataCommaSizeFromQString(filename));
@@ -136,8 +136,8 @@ TagReaderReply* TagReaderClient::LoadEmbeddedArt(const QString& filename) {
 TagReaderReply* TagReaderClient::ReadCloudFile(
     const QUrl& download_url, const QString& title, int size,
     const QString& mime_type, const QString& authorisation_header) {
-  pb::tagreader::Message message;
-  pb::tagreader::ReadCloudFileRequest* req =
+  cpb::tagreader::Message message;
+  cpb::tagreader::ReadCloudFileRequest* req =
       message.mutable_read_cloud_file_request();
 
   const QString url_string = download_url.toEncoded();

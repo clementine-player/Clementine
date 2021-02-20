@@ -57,16 +57,16 @@ class TagReader {
   TagReader();
 
   void ReadFile(const QString& filename,
-                pb::tagreader::SongMetadata* song) const;
+                cpb::tagreader::SongMetadata* song) const;
   bool SaveFile(const QString& filename,
-                const pb::tagreader::SongMetadata& song) const;
+                const cpb::tagreader::SongMetadata& song) const;
   // Returns false if something went wrong; returns true otherwise (might
   // returns true if the file exists but nothing has been written inside because
   // statistics tag format is not supported for this kind of file)
   bool SaveSongStatisticsToFile(const QString& filename,
-                                const pb::tagreader::SongMetadata& song) const;
+                                const cpb::tagreader::SongMetadata& song) const;
   bool SaveSongRatingToFile(const QString& filename,
-                            const pb::tagreader::SongMetadata& song) const;
+                            const cpb::tagreader::SongMetadata& song) const;
 
   bool IsMediaFile(const QString& filename) const;
   QByteArray LoadEmbeddedArt(const QString& filename) const;
@@ -74,7 +74,7 @@ class TagReader {
 #ifdef HAVE_GOOGLE_DRIVE
   bool ReadCloudFile(const QUrl& download_url, const QString& title, int size,
                      const QString& mime_type, const QString& access_token,
-                     pb::tagreader::SongMetadata* song) const;
+                     cpb::tagreader::SongMetadata* song) const;
 #endif  // HAVE_GOOGLE_DRIVE
 
   static void Decode(const TagLib::String& tag, const QTextCodec* codec,
@@ -83,23 +83,23 @@ class TagReader {
                      std::string* output);
 
   void ParseFMPSFrame(const QString& name, const QString& value,
-                      pb::tagreader::SongMetadata* song) const;
+                      cpb::tagreader::SongMetadata* song) const;
   void ParseOggTag(const TagLib::Ogg::FieldListMap& map,
                    const QTextCodec* codec, QString* disc, QString* compilation,
-                   pb::tagreader::SongMetadata* song) const;
+                   cpb::tagreader::SongMetadata* song) const;
   void SetVorbisComments(TagLib::Ogg::XiphComment* vorbis_comments,
-                         const pb::tagreader::SongMetadata& song) const;
+                         const cpb::tagreader::SongMetadata& song) const;
   void SetFMPSStatisticsVorbisComments(
       TagLib::Ogg::XiphComment* vorbis_comments,
-      const pb::tagreader::SongMetadata& song) const;
+      const cpb::tagreader::SongMetadata& song) const;
   void SetFMPSRatingVorbisComments(
       TagLib::Ogg::XiphComment* vorbis_comments,
-      const pb::tagreader::SongMetadata& song) const;
+      const cpb::tagreader::SongMetadata& song) const;
 
-  void GuessArtistAndTitle(pb::tagreader::SongMetadata* song) const;
-  void GuessAlbum(const QFileInfo &info, pb::tagreader::SongMetadata* song) const;
+  void GuessArtistAndTitle(cpb::tagreader::SongMetadata* song) const;
+  void GuessAlbum(const QFileInfo &info, cpb::tagreader::SongMetadata* song) const;
 
-  pb::tagreader::SongMetadata_Type GuessFileType(
+  cpb::tagreader::SongMetadata_Type GuessFileType(
       TagLib::FileRef* fileref) const;
 
   void SetUserTextFrame(const QString& description, const QString& value,

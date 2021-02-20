@@ -40,7 +40,7 @@ const int SpotifyClient::kSpotifyImageIDSize = 20;
 const int SpotifyClient::kWaveHeaderSize = 44;
 
 SpotifyClient::SpotifyClient(QObject* parent)
-    : AbstractMessageHandler<pb::spotify::Message>(nullptr, parent),
+    : AbstractMessageHandler<cpb::spotify::Message>(nullptr, parent),
       api_key_(QByteArray::fromBase64(kSpotifyApiKey)),
       protocol_socket_(new QTcpSocket(this)),
       session_(nullptr),
@@ -119,8 +119,8 @@ void SpotifyClient::LoggedInCallback(sp_session* session, sp_error error) {
   SpotifyClient* me =
       reinterpret_cast<SpotifyClient*>(sp_session_userdata(session));
   const bool success = error == SP_ERROR_OK;
-  pb::spotify::LoginResponse_Error error_code =
-      pb::spotify::LoginResponse_Error_Other;
+  cpb::spotify::LoginResponse_Error error_code =
+      cpb::spotify::LoginResponse_Error_Other;
 
   if (!success) {
     qLog(Warning) << "Failed to login" << sp_error_message(error);
@@ -128,16 +128,16 @@ void SpotifyClient::LoggedInCallback(sp_session* session, sp_error error) {
 
   switch (error) {
     case SP_ERROR_BAD_USERNAME_OR_PASSWORD:
-      error_code = pb::spotify::LoginResponse_Error_BadUsernameOrPassword;
+      error_code = cpb::spotify::LoginResponse_Error_BadUsernameOrPassword;
       break;
     case SP_ERROR_USER_BANNED:
-      error_code = pb::spotify::LoginResponse_Error_UserBanned;
+      error_code = cpb::spotify::LoginResponse_Error_UserBanned;
       break;
     case SP_ERROR_USER_NEEDS_PREMIUM:
-      error_code = pb::spotify::LoginResponse_Error_UserNeedsPremium;
+      error_code = cpb::spotify::LoginResponse_Error_UserNeedsPremium;
       break;
     default:
-      error_code = pb::spotify::LoginResponse_Error_Other;
+      error_code = cpb::spotify::LoginResponse_Error_Other;
       break;
   }
 
@@ -166,7 +166,7 @@ void SpotifyClient::LogMessageCallback(sp_session* session, const char* data) {
   qLog(Debug) << "libspotify:" << QString::fromUtf8(data).trimmed();
 }
 
-void SpotifyClient::Search(const pb::spotify::SearchRequest& req) {
+void SpotifyClient::Search(const cpb::spotify::SearchRequest& req) {
   sp_search* search =
       sp_search_create(session_, req.query().c_str(), 0, req.limit(), 0,
                        req.limit_album(), 0, 0,  // artists
@@ -221,11 +221,11 @@ void SpotifyClient::SearchAlbumBrowseComplete(sp_albumbrowse* result,
 
 void SpotifyClient::SendSearchResponse(sp_search* result) {
   // Take the request out of the queue
-  pb::spotify::SearchRequest req = pending_searches_.take(result);
+  cpb::spotify::SearchRequest req = pending_searches_.take(result);
 
   // Prepare the response
-  pb::spotify::Message message;
-  pb::spotify::SearchResponse* response = message.mutable_search_response();
+  cpb::spotify::Message message;
+  cpb::spotify::SearchResponse* response = message.mutable_search_response();
 
   *response->mutable_request() = req;
 
@@ -250,7 +250,7 @@ void SpotifyClient::SendSearchResponse(sp_search* result) {
   QList<sp_albumbrowse*> browses = pending_search_album_browses_.take(result);
   for (sp_albumbrowse* browse : browses) {
     sp_album* album = sp_albumbrowse_album(browse);
-    pb::spotify::Album* msg = response->add_album();
+    cpb::spotify::Album* msg = response->add_album();
 
     ConvertAlbum(album, msg->mutable_metadata());
     ConvertAlbumBrowse(browse, msg->mutable_metadata());
@@ -272,7 +272,7 @@ void SpotifyClient::SendSearchResponse(sp_search* result) {
   sp_search_release(result);
 }
 
-void SpotifyClient::MessageArrived(const pb::spotify::Message& message) {
+void SpotifyClient::MessageArrived(const cpb::spotify::Message& message) {
   if (message.has_login_request()) {
     Login(message.login_request());
   } else if (message.has_load_playlist_request()) {
@@ -303,16 +303,16 @@ void SpotifyClient::MessageArrived(const pb::spotify::Message& message) {
 }
 
 void SpotifyClient::SetPlaybackSettings(
-    const pb::spotify::PlaybackSettings& req) {
+    const cpb::spotify::PlaybackSettings& req) {
   sp_bitrate bitrate = SP_BITRATE_320k;
   switch (req.bitrate()) {
-    case pb::spotify::Bitrate96k:
+    case cpb::spotify::Bitrate96k:
       bitrate = SP_BITRATE_96k;
       break;
-    case pb::spotify::Bitrate160k:
+    case cpb::spotify::Bitrate160k:
       bitrate = SP_BITRATE_160k;
       break;
-    case pb::spotify::Bitrate320k:
+    case cpb::spotify::Bitrate320k:
       bitrate = SP_BITRATE_320k;
       break;
   }
@@ -325,12 +325,12 @@ void SpotifyClient::SetPlaybackSettings(
   sp_session_set_volume_normalization(session_, req.volume_normalisation());
 }
 
-void SpotifyClient::Login(const pb::spotify::LoginRequest& req) {
+void SpotifyClient::Login(const cpb::spotify::LoginRequest& req) {
   sp_error error = sp_session_create(&spotify_config_, &session_);
   if (error != SP_ERROR_OK) {
     qLog(Warning) << "Failed to create session" << sp_error_message(error);
     SendLoginCompleted(false, sp_error_message(error),
-                       pb::spotify::LoginResponse_Error_Other);
+                       cpb::spotify::LoginResponse_Error_Other);
     return;
   }
 
@@ -341,7 +341,7 @@ void SpotifyClient::Login(const pb::spotify::LoginRequest& req) {
     if (error != SP_ERROR_OK) {
       qLog(Warning) << "Tried to relogin but no stored credentials";
       SendLoginCompleted(false, sp_error_message(error),
-                         pb::spotify::LoginResponse_Error_ReloginFailed);
+                         cpb::spotify::LoginResponse_Error_ReloginFailed);
     }
   } else {
     sp_session_login(session_, req.username().c_str(), req.password().c_str(),
@@ -352,10 +352,10 @@ void SpotifyClient::Login(const pb::spotify::LoginRequest& req) {
 
 void SpotifyClient::SendLoginCompleted(
     bool success, const QString& error,
-    pb::spotify::LoginResponse_Error error_code) {
-  pb::spotify::Message message;
+    cpb::spotify::LoginResponse_Error error_code) {
+  cpb::spotify::Message message;
 
-  pb::spotify::LoginResponse* response = message.mutable_login_response();
+  cpb::spotify::LoginResponse* response = message.mutable_login_response();
   response->set_success(success);
   response->set_error(DataCommaSizeFromQString(error));
 
@@ -412,8 +412,8 @@ void SpotifyClient::PlaylistRemovedCallback(sp_playlistcontainer* pc,
 }
 
 void SpotifyClient::SendPlaylistList() {
-  pb::spotify::Message message;
-  pb::spotify::Playlists* response = message.mutable_playlists_updated();
+  cpb::spotify::Message message;
+  cpb::spotify::Playlists* response = message.mutable_playlists_updated();
 
   sp_playlistcontainer* container = sp_session_playlistcontainer(session_);
   if (!container) {
@@ -441,7 +441,7 @@ void SpotifyClient::SendPlaylistList() {
       continue;
     }
 
-    pb::spotify::Playlists::Playlist* msg = response->add_playlist();
+    cpb::spotify::Playlists::Playlist* msg = response->add_playlist();
     msg->set_index(i);
     msg->set_name(sp_playlist_name(playlist));
     sp_user* playlist_owner = sp_playlist_owner(playlist);
@@ -470,19 +470,19 @@ void SpotifyClient::SendPlaylistList() {
   SendMessage(message);
 }
 
-sp_playlist* SpotifyClient::GetPlaylist(pb::spotify::PlaylistType type,
+sp_playlist* SpotifyClient::GetPlaylist(cpb::spotify::PlaylistType type,
                                         int user_index) {
   sp_playlist* playlist = nullptr;
   switch (type) {
-    case pb::spotify::Inbox:
+    case cpb::spotify::Inbox:
       playlist = sp_session_inbox_create(session_);
       break;
 
-    case pb::spotify::Starred:
+    case cpb::spotify::Starred:
       playlist = sp_session_starred_create(session_);
       break;
 
-    case pb::spotify::UserPlaylist: {
+    case cpb::spotify::UserPlaylist: {
       sp_playlistcontainer* pc = sp_session_playlistcontainer(session_);
 
       if (pc && user_index <= sp_playlistcontainer_num_playlists(pc)) {
@@ -499,7 +499,7 @@ sp_playlist* SpotifyClient::GetPlaylist(pb::spotify::PlaylistType type,
   return playlist;
 }
 
-void SpotifyClient::LoadPlaylist(const pb::spotify::LoadPlaylistRequest& req) {
+void SpotifyClient::LoadPlaylist(const cpb::spotify::LoadPlaylistRequest& req) {
   PendingLoadPlaylist pending_load;
   pending_load.request_ = req;
   pending_load.playlist_ = GetPlaylist(req.type(), req.user_playlist_index());
@@ -509,8 +509,8 @@ void SpotifyClient::LoadPlaylist(const pb::spotify::LoadPlaylistRequest& req) {
   if (!pending_load.playlist_) {
     qLog(Warning) << "Invalid playlist requested or not logged in";
 
-    pb::spotify::Message message;
-    pb::spotify::LoadPlaylistResponse* response =
+    cpb::spotify::Message message;
+    cpb::spotify::LoadPlaylistResponse* response =
         message.mutable_load_playlist_response();
     *response->mutable_request() = req;
     SendMessage(message);
@@ -524,7 +524,7 @@ void SpotifyClient::LoadPlaylist(const pb::spotify::LoadPlaylistRequest& req) {
   PlaylistStateChangedForLoadPlaylist(pending_load.playlist_, this);
 }
 
-void SpotifyClient::SyncPlaylist(const pb::spotify::SyncPlaylistRequest& req) {
+void SpotifyClient::SyncPlaylist(const cpb::spotify::SyncPlaylistRequest& req) {
   sp_playlist* playlist =
       GetPlaylist(req.request().type(), req.request().user_playlist_index());
 
@@ -577,13 +577,13 @@ void SpotifyClient::PlaylistStateChangedForLoadPlaylist(sp_playlist* pl,
   }
 
   // Everything is loaded so send the response protobuf and unref everything.
-  pb::spotify::Message message;
-  pb::spotify::LoadPlaylistResponse* response =
+  cpb::spotify::Message message;
+  cpb::spotify::LoadPlaylistResponse* response =
       message.mutable_load_playlist_response();
 
   // For some reason, we receive the starred tracks in reverse order but not
   // other playlists.
-  if (pending_load->request_.type() == pb::spotify::Starred) {
+  if (pending_load->request_.type() == cpb::spotify::Starred) {
     std::reverse(pending_load->tracks_.begin(), pending_load->tracks_.end());
   }
 
@@ -610,7 +610,7 @@ void SpotifyClient::PlaylistStateChangedForGetPlaylists(sp_playlist* pl,
 }
 
 void SpotifyClient::AddTracksToPlaylist(
-    const pb::spotify::AddTracksToPlaylistRequest& req) {
+    const cpb::spotify::AddTracksToPlaylistRequest& req) {
   // Get the playlist we want to update
   sp_playlist* playlist =
       GetPlaylist(req.playlist_type(), req.playlist_index());
@@ -649,7 +649,7 @@ void SpotifyClient::AddTracksToPlaylist(
 }
 
 void SpotifyClient::RemoveTracksFromPlaylist(
-    const pb::spotify::RemoveTracksFromPlaylistRequest& req) {
+    const cpb::spotify::RemoveTracksFromPlaylistRequest& req) {
   // Get the playlist we want to update
   sp_playlist* playlist =
       GetPlaylist(req.playlist_type(), req.playlist_index());
@@ -667,7 +667,7 @@ void SpotifyClient::RemoveTracksFromPlaylist(
 
   // WTF: sp_playlist_remove_tracks indexes start from the end for starred
   // playlist, not from the beginning like other playlists: reverse them
-  if (req.playlist_type() == pb::spotify::Starred) {
+  if (req.playlist_type() == cpb::spotify::Starred) {
     int num_tracks = sp_playlist_num_tracks(playlist);
     for (int i = 0; i < req.track_index_size(); i++) {
       tracks_indices_array[i] = num_tracks - tracks_indices_array[i] - 1;
@@ -680,7 +680,7 @@ void SpotifyClient::RemoveTracksFromPlaylist(
   }
 }
 
-void SpotifyClient::ConvertTrack(sp_track* track, pb::spotify::Track* pb) {
+void SpotifyClient::ConvertTrack(sp_track* track, cpb::spotify::Track* pb) {
   sp_album* album = sp_track_album(track);
 
   pb->set_starred(sp_track_is_starred(session_, track));
@@ -713,7 +713,7 @@ void SpotifyClient::ConvertTrack(sp_track* track, pb::spotify::Track* pb) {
   pb->set_uri(uri);
 }
 
-void SpotifyClient::ConvertAlbum(sp_album* album, pb::spotify::Track* pb) {
+void SpotifyClient::ConvertAlbum(sp_album* album, cpb::spotify::Track* pb) {
   pb->set_album(sp_album_name(album));
   pb->set_year(sp_album_year(album));
   pb->add_artist(sp_artist_name(sp_album_artist(album)));
@@ -744,7 +744,7 @@ void SpotifyClient::ConvertAlbum(sp_album* album, pb::spotify::Track* pb) {
 }
 
 void SpotifyClient::ConvertAlbumBrowse(sp_albumbrowse* browse,
-                                       pb::spotify::Track* pb) {
+                                       cpb::spotify::Track* pb) {
   pb->set_track(sp_albumbrowse_num_tracks(browse));
 }
 
@@ -853,7 +853,7 @@ void SpotifyClient::OfflineStatusUpdatedCallback(sp_session* session) {
 
     int download_progress = me->GetDownloadProgress(playlist);
     if (download_progress != -1) {
-      me->SendDownloadProgress(pb::spotify::UserPlaylist, i, download_progress);
+      me->SendDownloadProgress(cpb::spotify::UserPlaylist, i, download_progress);
     }
   }
 
@@ -862,7 +862,7 @@ void SpotifyClient::OfflineStatusUpdatedCallback(sp_session* session) {
   sp_playlist_release(inbox);
 
   if (download_progress != -1) {
-    me->SendDownloadProgress(pb::spotify::Inbox, -1, download_progress);
+    me->SendDownloadProgress(cpb::spotify::Inbox, -1, download_progress);
   }
 
   sp_playlist* starred = sp_session_starred_create(session);
@@ -870,14 +870,14 @@ void SpotifyClient::OfflineStatusUpdatedCallback(sp_session* session) {
   sp_playlist_release(starred);
 
   if (download_progress != -1) {
-    me->SendDownloadProgress(pb::spotify::Starred, -1, download_progress);
+    me->SendDownloadProgress(cpb::spotify::Starred, -1, download_progress);
   }
 }
 
-void SpotifyClient::SendDownloadProgress(pb::spotify::PlaylistType type,
+void SpotifyClient::SendDownloadProgress(cpb::spotify::PlaylistType type,
                                          int index, int download_progress) {
-  pb::spotify::Message message;
-  pb::spotify::SyncPlaylistProgress* progress =
+  cpb::spotify::Message message;
+  cpb::spotify::SyncPlaylistProgress* progress =
       message.mutable_sync_playlist_progress();
   progress->mutable_request()->set_type(type);
   if (index != -1) {
@@ -903,7 +903,7 @@ int SpotifyClient::GetDownloadProgress(sp_playlist* playlist) {
   return -1;
 }
 
-void SpotifyClient::StartPlayback(const pb::spotify::PlaybackRequest& req) {
+void SpotifyClient::StartPlayback(const cpb::spotify::PlaybackRequest& req) {
   // Get a link object from the URI
   sp_link* link = sp_link_create_from_string(req.track_uri().c_str());
   if (!link) {
@@ -970,8 +970,8 @@ void SpotifyClient::TryPlaybackAgain(const PendingPlaybackRequest& req) {
 }
 
 void SpotifyClient::SendPlaybackError(const QString& error) {
-  pb::spotify::Message message;
-  pb::spotify::PlaybackError* msg = message.mutable_playback_error();
+  cpb::spotify::Message message;
+  cpb::spotify::PlaybackError* msg = message.mutable_playback_error();
 
   msg->set_error(DataCommaSizeFromQString(error));
   SendMessage(message);
@@ -984,8 +984,8 @@ void SpotifyClient::LoadImage(const QString& id_b64) {
                   << kSpotifyImageIDSize << "bytes):" << id_b64;
 
     // Send an error response straight away
-    pb::spotify::Message message;
-    pb::spotify::ImageResponse* msg = message.mutable_image_response();
+    cpb::spotify::Message message;
+    cpb::spotify::ImageResponse* msg = message.mutable_image_response();
     msg->set_id(DataCommaSizeFromQString(id_b64));
     SendMessage(message);
     return;
@@ -1033,8 +1033,8 @@ void SpotifyClient::TryImageAgain(sp_image* image) {
   const void* data = sp_image_data(image, &size);
 
   // Send the response
-  pb::spotify::Message message;
-  pb::spotify::ImageResponse* msg = message.mutable_image_response();
+  cpb::spotify::Message message;
+  cpb::spotify::ImageResponse* msg = message.mutable_image_response();
   msg->set_id(DataCommaSizeFromQString(req->id_b64_));
   if (data && size) {
     msg->set_data(data, size);
@@ -1086,8 +1086,8 @@ void SpotifyClient::AlbumBrowseComplete(sp_albumbrowse* result,
 
   QString uri = me->pending_album_browses_.take(result);
 
-  pb::spotify::Message message;
-  pb::spotify::BrowseAlbumResponse* msg =
+  cpb::spotify::Message message;
+  cpb::spotify::BrowseAlbumResponse* msg =
       message.mutable_browse_album_response();
 
   msg->set_uri(DataCommaSizeFromQString(uri));
@@ -1102,7 +1102,7 @@ void SpotifyClient::AlbumBrowseComplete(sp_albumbrowse* result,
 }
 
 void SpotifyClient::BrowseToplist(
-    const pb::spotify::BrowseToplistRequest& req) {
+    const cpb::spotify::BrowseToplistRequest& req) {
   sp_toplistbrowse* browse = sp_toplistbrowse_create(
       session_, SP_TOPLIST_TYPE_TRACKS,  // TODO: Support albums and artists.
       SP_TOPLIST_REGION_EVERYWHERE,      // TODO: Support other regions.
@@ -1110,7 +1110,7 @@ void SpotifyClient::BrowseToplist(
   pending_toplist_browses_[browse] = req;
 }
 
-void SpotifyClient::SetPaused(const pb::spotify::PauseRequest& req) {
+void SpotifyClient::SetPaused(const cpb::spotify::PauseRequest& req) {
   sp_session_player_play(session_, !req.paused());
 }
 
@@ -1125,11 +1125,11 @@ void SpotifyClient::ToplistBrowseComplete(sp_toplistbrowse* result,
     return;
   }
 
-  const pb::spotify::BrowseToplistRequest& request =
+  const cpb::spotify::BrowseToplistRequest& request =
       me->pending_toplist_browses_.take(result);
 
-  pb::spotify::Message message;
-  pb::spotify::BrowseToplistResponse* msg =
+  cpb::spotify::Message message;
+  cpb::spotify::BrowseToplistResponse* msg =
       message.mutable_browse_toplist_response();
   msg->mutable_request()->CopyFrom(request);
 
@@ -1143,7 +1143,7 @@ void SpotifyClient::ToplistBrowseComplete(sp_toplistbrowse* result,
 }
 
 void SpotifyClient::DeviceClosed() {
-  AbstractMessageHandler<pb::spotify::Message>::DeviceClosed();
+  AbstractMessageHandler<cpb::spotify::Message>::DeviceClosed();
 
   qApp->exit();
 }

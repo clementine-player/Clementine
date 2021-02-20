@@ -25,10 +25,10 @@
 #include <QUrl>
 
 TagReaderWorker::TagReaderWorker(QIODevice* socket, QObject* parent)
-    : AbstractMessageHandler<pb::tagreader::Message>(socket, parent) {}
+    : AbstractMessageHandler<cpb::tagreader::Message>(socket, parent) {}
 
-void TagReaderWorker::MessageArrived(const pb::tagreader::Message& message) {
-  pb::tagreader::Message reply;
+void TagReaderWorker::MessageArrived(const cpb::tagreader::Message& message) {
+  cpb::tagreader::Message reply;
 
 #if 0
   // Crash every few requests
@@ -68,7 +68,7 @@ void TagReaderWorker::MessageArrived(const pb::tagreader::Message& message) {
                                                          data.size());
   } else if (message.has_read_cloud_file_request()) {
 #ifdef HAVE_GOOGLE_DRIVE
-    const pb::tagreader::ReadCloudFileRequest& req =
+    const cpb::tagreader::ReadCloudFileRequest& req =
         message.read_cloud_file_request();
     if (!tag_reader_.ReadCloudFile(
             QUrl::fromEncoded(QByteArray(req.download_url().data(),
@@ -86,7 +86,7 @@ void TagReaderWorker::MessageArrived(const pb::tagreader::Message& message) {
 }
 
 void TagReaderWorker::DeviceClosed() {
-  AbstractMessageHandler<pb::tagreader::Message>::DeviceClosed();
+  AbstractMessageHandler<cpb::tagreader::Message>::DeviceClosed();
 
   qApp->exit();
 }

@@ -14,11 +14,11 @@ class RemoteClient : public QObject {
   ~RemoteClient();
 
   // This method checks if client is authenticated before sending the data
-  void SendData(pb::remote::Message* msg);
+  void SendData(cpb::remote::Message* msg);
   QAbstractSocket::SocketState State();
   void setDownloader(bool downloader);
   bool isDownloader() { return downloader_; }
-  void DisconnectClient(pb::remote::ReasonDisconnect reason);
+  void DisconnectClient(cpb::remote::ReasonDisconnect reason);
 
   SongSender* song_sender() { return song_sender_; }
   const QString& files_root_folder() const { return files_root_folder_; }
@@ -31,13 +31,13 @@ class RemoteClient : public QObject {
   void IncomingData();
 
  signals:
-  void Parse(const pb::remote::Message& msg);
+  void Parse(const cpb::remote::Message& msg);
 
  private:
   void ParseMessage(const QByteArray& data);
 
   // Sends data to client without check if authenticated
-  void SendDataToClient(pb::remote::Message* msg);
+  void SendDataToClient(cpb::remote::Message* msg);
 
   Application* app_;
 
