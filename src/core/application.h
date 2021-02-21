@@ -55,6 +55,7 @@ class PodcastDeleter;
 class PodcastDownloader;
 class PodcastUpdater;
 class Scrobbler;
+class Splash;
 class TagReaderClient;
 class TaskManager;
 
@@ -133,6 +134,7 @@ class Application : public QObject {
  private:
   QString language_name_;
   std::unique_ptr<ApplicationImpl> p_;
+  std::unique_ptr<Splash> splash_;
   QList<QThread*> threads_;
 };
 

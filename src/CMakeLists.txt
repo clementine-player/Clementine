@@ -361,6 +361,7 @@ set(SOURCES
   ui/screensaver.cpp
   ui/settingsdialog.cpp
   ui/settingspage.cpp
+  ui/splash.cpp
   ui/standarditemiconloader.cpp
   ui/streamdetailsdialog.cpp
   ui/systemtrayicon.cpp

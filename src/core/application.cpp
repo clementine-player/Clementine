@@ -54,6 +54,7 @@
 #include "networkremote/networkremotehelper.h"
 #include "playlist/playlistbackend.h"
 #include "playlist/playlistmanager.h"
+#include "ui/splash.h"
 
 #ifdef HAVE_LIBLASTFM
 #include "covers/lastfmcoverprovider.h"
@@ -203,6 +204,12 @@ class ApplicationImpl {
 Application::Application(QObject* parent)
     : QObject(parent), p_(new ApplicationImpl(this)) {
   setObjectName("Clementine Application");
+
+  // Show the splash
+  splash_.reset(new Splash());
+  splash_->show();
+  QCoreApplication::processEvents();
+
   // This must be before library_->Init();
   // In the constructor the helper waits for the signal
   // PlaylistManagerInitialized
@@ -254,6 +261,11 @@ void Application::AddError(const QString& message) { emit ErrorAdded(message); }
 
 void Application::Starting() {
   qLog(Debug) << "Application starting";
+
+  // Hide the splash
+  if (splash_) {
+    splash_.reset();
+  }
 }
 
 QString Application::language_without_region() const {
