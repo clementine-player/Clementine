@@ -110,8 +110,11 @@ void SkydriveService::AddAuthorizationHeader(QNetworkRequest* request) {
 
 void SkydriveService::FetchUserInfoFinished(QNetworkReply* reply) {
   reply->deleteLater();
-  QJsonObject json_response =
-      QJsonDocument::fromBinaryData(reply->readAll()).object();
+
+  QJsonDocument document = ParseJsonReply(reply);
+  if (document.isNull()) return;
+
+  QJsonObject json_response = document.object();
 
   QString name = json_response["name"].toString();
   if (!name.isEmpty()) {
@@ -137,8 +140,11 @@ void SkydriveService::ListFiles(const QString& folder) {
 
 void SkydriveService::ListFilesFinished(QNetworkReply* reply) {
   reply->deleteLater();
-  QJsonObject json_response =
-      QJsonDocument::fromBinaryData(reply->readAll()).object();
+
+  QJsonDocument document = ParseJsonReply(reply);
+  if (document.isNull()) return;
+
+  QJsonObject json_response = document.object();
 
   QJsonArray files = json_response["data"].toArray();
   for (const QJsonValue& f : files) {
@@ -179,8 +185,11 @@ QUrl SkydriveService::GetStreamingUrlFromSongId(const QString& file_id) {
   std::unique_ptr<QNetworkReply> reply(network_->get(request));
   WaitForSignal(reply.get(), SIGNAL(finished()));
 
-  QJsonObject json_response =
-      QJsonDocument::fromBinaryData(reply.get()->readAll()).object();
+  QJsonDocument document = ParseJsonReply(reply.get());
+  if (document.isNull()) return QUrl();
+
+  QJsonObject json_response = document.object();
+
   return QUrl(json_response["source"].toString());
 }
 
