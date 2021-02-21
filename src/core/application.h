@@ -114,6 +114,7 @@ class Application : public QObject {
   void MoveToThread(QObject* object, QThread* thread);
 
  public slots:
+  void Starting();
   void AddError(const QString& message);
   void ReloadSettings();
   void OpenSettingsDialogAtPage(SettingsDialog::Page page);
