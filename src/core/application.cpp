@@ -252,6 +252,10 @@ void Application::MoveToThread(QObject* object, QThread* thread) {
 
 void Application::AddError(const QString& message) { emit ErrorAdded(message); }
 
+void Application::Starting() {
+  qLog(Debug) << "Application starting";
+}
+
 QString Application::language_without_region() const {
   const int underscore = language_name_.indexOf('_');
   if (underscore != -1) {

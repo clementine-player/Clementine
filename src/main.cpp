@@ -460,6 +460,10 @@ int main(int argc, char* argv[]) {
   QObject::connect(&a, SIGNAL(messageReceived(QString)), &w,
                    SLOT(CommandlineOptionsReceived(QString)));
 
+  // Use a queued connection so the invokation occurs after the application
+  // loop starts.
+  QMetaObject::invokeMethod(&app, "Starting", Qt::QueuedConnection);
+
   int ret = a.exec();
 
   return ret;
