@@ -34,6 +34,7 @@
 
 namespace {
 
+// Keep legacy name since it needs to match the database table name.
 static const char* kServiceId = "skydrive";
 
 static const char* kClientId = "905def38-34d2-4e32-8ba7-c37bcc329047";
@@ -47,8 +48,10 @@ static const char* kOAuthTokenEndpoint =
 static const char* kOAuthScope =
     "User.Read Files.Read Files.Read.All offline_access";
 
-static const char* kLiveUserInfo = "https://apis.live.net/v5.0/me";
-static const char* kSkydriveBase = "https://apis.live.net/v5.0/";
+// MS Graph API
+// https://docs.microsoft.com/en-us/graph/api/overview?view=graph-rest-1.0
+static const char* kGraphUserInfo = "https://graph.microsoft.com/v1.0/me";
+static const char* kDriveBase = "https://graph.microsoft.com/v1.0/me/drive/";
 
 }  // namespace
 
@@ -96,7 +99,11 @@ void SkydriveService::ConnectFinished(OAuthenticator* oauth) {
   access_token_ = oauth->access_token();
   expiry_time_ = oauth->expiry_time();
 
-  QUrl url(kLiveUserInfo);
+  FetchUserInfo();
+}
+
+void SkydriveService::FetchUserInfo() {
+  QUrl url(kGraphUserInfo);
   QNetworkRequest request(url);
   AddAuthorizationHeader(&request);
 
@@ -105,9 +112,12 @@ void SkydriveService::ConnectFinished(OAuthenticator* oauth) {
              SLOT(FetchUserInfoFinished(QNetworkReply*)), reply);
 }
 
+QByteArray SkydriveService::GetAuthHeader() const {
+  return QString("Bearer %1").arg(access_token_).toUtf8();
+}
+
 void SkydriveService::AddAuthorizationHeader(QNetworkRequest* request) {
-  request->setRawHeader("Authorization",
-                        QString("Bearer %1").arg(access_token_).toUtf8());
+  request->setRawHeader("Authorization", GetAuthHeader());
 }
 
 void SkydriveService::FetchUserInfoFinished(QNetworkReply* reply) {
@@ -118,7 +128,7 @@ void SkydriveService::FetchUserInfoFinished(QNetworkReply* reply) {
 
   QJsonObject json_response = document.object();
 
-  QString name = json_response["name"].toString();
+  QString name = json_response["displayName"].toString();
   if (!name.isEmpty()) {
     QSettings s;
     s.beginGroup(kSettingsGroup);
@@ -127,11 +137,11 @@ void SkydriveService::FetchUserInfoFinished(QNetworkReply* reply) {
 
   emit Connected();
 
-  ListFiles("me/skydrive");
+  ListFiles("root");
 }
 
 void SkydriveService::ListFiles(const QString& folder) {
-  QUrl url(QString(kSkydriveBase) + folder + "/files");
+  QUrl url(QString(kDriveBase) + folder + "/children");
   QNetworkRequest request(url);
   AddAuthorizationHeader(&request);
 
@@ -148,51 +158,52 @@ void SkydriveService::ListFilesFinished(QNetworkReply* reply) {
 
   QJsonObject json_response = document.object();
 
-  QJsonArray files = json_response["data"].toArray();
-  for (const QJsonValue& f : files) {
-    QJsonObject file = f.toObject();
-    if (file["type"].toString() == "folder") {
-      ListFiles(file["id"].toString());
-    } else {
-      QString mime_type = GuessMimeTypeForFile(file["name"].toString());
+  QJsonArray items = json_response["value"].toArray();
+  for (const QJsonValue& f : items) {
+    QJsonObject item = f.toObject();
+
+    const QString id = item["id"].toString();
+    const QString name = item["name"].toString();
+
+    if (item.contains("folder")) {
+      ListFiles(QString("items/%1").arg(id));
+    } else if (item.contains("file")) {
+      // The response provides a mime type, but it doesn't know about some
+      // types that we care about.
+      QString mime_type = GuessMimeTypeForFile(name);
       QUrl url;
-      url.setScheme("skydrive");
-      url.setPath("/" + file["id"].toString());
+      url.setScheme(GetScheme());
+      url.setPath("/" + id);
 
       Song song;
       song.set_url(url);
       song.set_ctime(
-          QDateTime::fromString(file["created_time"].toString()).toTime_t());
-      song.set_mtime(
-          QDateTime::fromString(file["updated_time"].toString()).toTime_t());
-      song.set_comment(file["description"].toString());
-      song.set_filesize(file["size"].toInt());
-      song.set_title(file["name"].toString());
+          QDateTime::fromString(item["createdDateTime"].toString(), Qt::ISODate)
+              .toTime_t());
+      song.set_mtime(QDateTime::fromString(
+                         item["lastModifiedDateTime"].toString(), Qt::ISODate)
+                         .toTime_t());
+      song.set_comment(item["description"].toString());
+      song.set_filesize(item["size"].toInt());
+      song.set_title(name);
 
-      QUrl download_url(file["source"].toString());
-      // HTTPS appears to be broken somehow between Qt & Skydrive downloads.
-      // Fortunately, just changing the scheme to HTTP works.
-      download_url.setScheme("http");
-      MaybeAddFileToDatabase(song, mime_type, download_url, QString());
+      QUrl download_url = ItemUrl(id, "content");
+      MaybeAddFileToDatabase(song, mime_type, download_url,
+                             QString("Bearer %1").arg(access_token_));
+    } else {
+      qLog(Debug) << "Unknown item type for" << name;
     }
   }
+}
+
+QUrl SkydriveService::ItemUrl(const QString& id, const QString& path) {
+  return QUrl(QString(kDriveBase) + "items/" + id + "/" + path);
 }
 
 QUrl SkydriveService::GetStreamingUrlFromSongId(const QString& file_id) {
   EnsureConnected();
 
-  QUrl url(QString(kSkydriveBase) + file_id);
-  QNetworkRequest request(url);
-  AddAuthorizationHeader(&request);
-  std::unique_ptr<QNetworkReply> reply(network_->get(request));
-  WaitForSignal(reply.get(), SIGNAL(finished()));
-
-  QJsonDocument document = ParseJsonReply(reply.get());
-  if (document.isNull()) return QUrl();
-
-  QJsonObject json_response = document.object();
-
-  return QUrl(json_response["source"].toString());
+  return ItemUrl(file_id, "content");
 }
 
 void SkydriveService::EnsureConnected() {

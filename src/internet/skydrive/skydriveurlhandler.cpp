@@ -27,5 +27,9 @@ SkydriveUrlHandler::SkydriveUrlHandler(SkydriveService* service,
 UrlHandler::LoadResult SkydriveUrlHandler::StartLoading(const QUrl& url) {
   QString file_id(url.path());
   QUrl real_url = service_->GetStreamingUrlFromSongId(file_id);
-  return LoadResult(url, LoadResult::TrackAvailable, real_url);
+  LoadResult res(url, LoadResult::TrackAvailable, real_url);
+  res.auth_header_ = service_->GetAuthHeader();
+  return res;
 }
+
+QString SkydriveUrlHandler::scheme() const { return service_->GetScheme(); }

@@ -40,6 +40,8 @@ class SkydriveService : public CloudFileService {
   virtual bool has_credentials() const;
   QUrl GetStreamingUrlFromSongId(const QString& song_id);
 
+  QString GetScheme() const { return "onedrive"; }
+
  public slots:
   virtual void Connect();
   void ForgetCredentials();
@@ -53,10 +55,16 @@ class SkydriveService : public CloudFileService {
   void Connected();
 
  private:
+  friend class SkydriveUrlHandler;
+  QByteArray GetAuthHeader() const;
+
+ private:
   QString refresh_token() const;
   void AddAuthorizationHeader(QNetworkRequest* request);
+  void FetchUserInfo();
   void ListFiles(const QString& folder);
   void EnsureConnected();
+  QUrl ItemUrl(const QString& id, const QString& path);
 
   QString access_token_;
   QDateTime expiry_time_;
