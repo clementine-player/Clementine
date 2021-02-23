@@ -17,6 +17,7 @@
 
 #include "errordialog.h"
 
+#include <QHideEvent>
 #include <QStyle>
 
 #include "ui_errordialog.h"
@@ -47,9 +48,11 @@ void ErrorDialog::ShowMessage(const QString& message) {
   activateWindow();
 }
 
-void ErrorDialog::hideEvent(QHideEvent*) {
-  current_messages_.clear();
-  UpdateContent();
+void ErrorDialog::hideEvent(QHideEvent* event) {
+  if (!event->spontaneous()) {
+    current_messages_.clear();
+    UpdateContent();
+  }
 }
 
 void ErrorDialog::UpdateContent() {
