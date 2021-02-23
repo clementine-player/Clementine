@@ -102,15 +102,17 @@ QByteArray OAuthenticator::ParseHttpRequest(const QByteArray& request) const {
 }
 
 void OAuthenticator::RequestAccessToken(const QByteArray& code,
-                                        const QUrl& url) {
+                                        const QUrl& redirect_url) {
   typedef QPair<QString, QString> Param;
   QList<Param> parameters;
   parameters << Param("code", code) << Param("client_id", client_id_)
-             << Param("client_secret", client_secret_)
              << Param("grant_type", "authorization_code")
              // Even though we don't use this URI anymore, it must match the
              // original one.
-             << Param("redirect_uri", url.toString());
+             << Param("redirect_uri", redirect_url.toString());
+  if (!client_secret_.isEmpty()) {
+    parameters << Param("client_secret", client_secret_);
+  }
 
   QStringList params;
   for (const Param& p : parameters) {

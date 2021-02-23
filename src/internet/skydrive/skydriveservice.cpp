@@ -36,14 +36,16 @@ namespace {
 
 static const char* kServiceId = "skydrive";
 
-static const char* kClientId = "0000000040111F16";
-static const char* kClientSecret = "w2ClguSX0jG56cBl1CeUniypTBRjXt2Z";
+static const char* kClientId = "905def38-34d2-4e32-8ba7-c37bcc329047";
+static const char* kClientSecret = "";
 
+// https://docs.microsoft.com/en-us/azure/active-directory/develop/v2-oauth2-auth-code-flow
 static const char* kOAuthEndpoint =
-    "https://login.live.com/oauth20_authorize.srf";
+    "https://login.microsoftonline.com/common/oauth2/v2.0/authorize";
 static const char* kOAuthTokenEndpoint =
-    "https://login.live.com/oauth20_token.srf";
-static const char* kOAuthScope = "wl.basic wl.skydrive wl.offline_access";
+    "https://login.microsoftonline.com/common/oauth2/v2.0/token";
+static const char* kOAuthScope =
+    "User.Read Files.Read Files.Read.All offline_access";
 
 static const char* kLiveUserInfo = "https://apis.live.net/v5.0/me";
 static const char* kSkydriveBase = "https://apis.live.net/v5.0/";
@@ -51,7 +53,7 @@ static const char* kSkydriveBase = "https://apis.live.net/v5.0/";
 }  // namespace
 
 const char* SkydriveService::kServiceName = "OneDrive";
-const char* SkydriveService::kSettingsGroup = "Skydrive";
+const char* SkydriveService::kSettingsGroup = "OneDrive";
 
 SkydriveService::SkydriveService(Application* app, InternetModel* parent)
     : CloudFileService(app, parent, kServiceName, kServiceId,
@@ -73,7 +75,7 @@ QString SkydriveService::refresh_token() const {
 
 void SkydriveService::Connect() {
   OAuthenticator* oauth = new OAuthenticator(
-      kClientId, kClientSecret, OAuthenticator::RedirectStyle::REMOTE, this);
+      kClientId, kClientSecret, OAuthenticator::RedirectStyle::LOCALHOST, this);
   if (!refresh_token().isEmpty()) {
     oauth->RefreshAuthorisation(kOAuthTokenEndpoint, refresh_token());
   } else {
