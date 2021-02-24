@@ -113,6 +113,8 @@ TagLib::ByteVector CloudStream::readBlock(ulong length) {
                        QString("bytes=%1-%2").arg(start).arg(end).toUtf8());
   request.setAttribute(QNetworkRequest::CacheLoadControlAttribute,
                        QNetworkRequest::AlwaysNetwork);
+  // TODO: Use RedirectPolicyAttribute after baseline moves to Qt 5.9.
+  request.setAttribute(QNetworkRequest::FollowRedirectsAttribute, true);
 
   QNetworkReply* reply = network_->get(request);
   connect(reply, SIGNAL(sslErrors(QList<QSslError>)),
