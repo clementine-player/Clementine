@@ -62,8 +62,7 @@ class GoogleDriveService : public CloudFileService {
   void SaveCursor(const QString& cursor);
 
   void OpenWithDrive();
-  void ConfirmFullRescan();
-  void DoFullRescan();
+  void DoFullRescan() override;
   void CheckForUpdates();
 
  private:

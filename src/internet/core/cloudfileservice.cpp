@@ -21,6 +21,8 @@
 #include "internet/core/cloudfileservice.h"
 
 #include <QMenu>
+#include <QMessageBox>
+#include <QPushButton>
 #include <QSortFilterProxyModel>
 
 #include "core/application.h"
@@ -242,4 +244,22 @@ void CloudFileService::AbortReadTagsReplies() {
   task_manager_->SetTaskFinished(indexing_task_id_);
   indexing_task_id_ = -1;
   emit AllIndexingTasksFinished();
+}
+
+void CloudFileService::FullRescanRequested() {
+  QMessageBox* message_box = new QMessageBox(
+      QMessageBox::Warning, tr("Do a full rescan"),
+      tr("Doing a full rescan will lose any metadata you've saved in "
+         "Clementine such as cover art, play counts and ratings.  Clementine "
+         "will rescan all your music in %1 which may take some "
+         "time.")
+          .arg(name()),
+      QMessageBox::NoButton);
+  QPushButton* button = message_box->addButton(tr("Do a full rescan"),
+                                               QMessageBox::DestructiveRole);
+  connect(button, SIGNAL(clicked()), SLOT(DoFullRescan()));
+
+  message_box->addButton(QMessageBox::Cancel);
+  message_box->setAttribute(Qt::WA_DeleteOnClose);
+  message_box->show();
 }
