@@ -62,12 +62,19 @@ class SkydriveService : public CloudFileService {
   QString refresh_token() const;
   void AddAuthorizationHeader(QNetworkRequest* request);
   void FetchUserInfo();
+  void ListFiles();
   void ListFiles(const QString& folder);
   void EnsureConnected();
   QUrl ItemUrl(const QString& id, const QString& path);
+  void DoFullRescan() override;
+
+  void PopulateContextMenu() override;
+  void UpdateContextMenu() override;
 
   QString access_token_;
   QDateTime expiry_time_;
+
+  QAction* full_rescan_action_;
 };
 
 #endif  // INTERNET_SKYDRIVE_SKYDRIVESERVICE_H_

@@ -30,6 +30,7 @@
 #include "core/waitforsignal.h"
 #include "internet/core/oauthenticator.h"
 #include "internet/skydrive/skydriveurlhandler.h"
+#include "library/librarybackend.h"
 #include "ui/iconloader.h"
 
 namespace {
@@ -137,8 +138,10 @@ void SkydriveService::FetchUserInfoFinished(QNetworkReply* reply) {
 
   emit Connected();
 
-  ListFiles("root");
+  ListFiles();
 }
+
+void SkydriveService::ListFiles() { ListFiles("root"); }
 
 void SkydriveService::ListFiles(const QString& folder) {
   QUrl url(QString(kDriveBase) + folder + "/children");
@@ -206,6 +209,24 @@ QUrl SkydriveService::GetStreamingUrlFromSongId(const QString& file_id) {
   return ItemUrl(file_id, "content");
 }
 
+void SkydriveService::PopulateContextMenu() {
+  context_menu_->addActions(GetPlaylistActions());
+  full_rescan_action_ = context_menu_->addAction(
+      IconLoader::Load("view-refresh", IconLoader::Base),
+      tr("Do a full rescan..."), this, SLOT(FullRescanRequested()));
+  context_menu_->addSeparator();
+  context_menu_->addAction(IconLoader::Load("download", IconLoader::Base),
+                           tr("Cover Manager"), this, SLOT(ShowCoverManager()));
+  context_menu_->addSeparator();
+  context_menu_->addAction(IconLoader::Load("configure", IconLoader::Base),
+                           tr("Configure..."), this,
+                           SLOT(ShowSettingsDialog()));
+}
+
+void SkydriveService::UpdateContextMenu() {
+  full_rescan_action_->setEnabled(!is_indexing());
+}
+
 void SkydriveService::EnsureConnected() {
   if (!access_token_.isEmpty()) {
     return;
@@ -221,4 +242,9 @@ void SkydriveService::ForgetCredentials() {
 
   s.remove("refresh_token");
   s.remove("name");
+}
+
+void SkydriveService::DoFullRescan() {
+  library_backend_->DeleteAll();
+  ListFiles();
 }
