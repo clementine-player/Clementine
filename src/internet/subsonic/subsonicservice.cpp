@@ -599,6 +599,7 @@ Song SubsonicService::ReadSong(QXmlStreamReader& reader) {
   song.set_year(reader.attributes().value("year").toString().toInt());
   song.set_genre(reader.attributes().value("genre").toString());
   qint64 length = reader.attributes().value("duration").toString().toInt();
+  QString cover_art_id = reader.attributes().value("coverArt").toString();
   length *= kNsecPerSec;
   song.set_length_nanosec(length);
   QUrl url = QUrl(QString("subsonic://"));
@@ -608,7 +609,7 @@ Song SubsonicService::ReadSong(QXmlStreamReader& reader) {
 
   QUrl cover_url = BuildRequestUrl("getCoverArt");
   QUrlQuery cover_url_query(cover_url.query());
-  cover_url_query.addQueryItem("id", id);
+  cover_url_query.addQueryItem("id", cover_art_id);
   cover_url.setQuery(cover_url_query);
   song.set_art_automatic(cover_url.toEncoded());
 
