@@ -72,6 +72,8 @@ class CloudFileService : public InternetService {
   void AddToPlaylist(QMimeData* mime);
   void ReadTagsFinished(TagReaderClient::ReplyType* reply,
                         const Song& metadata);
+  void FullRescanRequested();
+  virtual void DoFullRescan() {}
 
  protected:
   QStandardItem* root_;

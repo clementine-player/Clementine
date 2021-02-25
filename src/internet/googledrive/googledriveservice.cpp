@@ -22,8 +22,6 @@
 #include <QDesktopServices>
 #include <QEventLoop>
 #include <QMenu>
-#include <QMessageBox>
-#include <QPushButton>
 #include <QScopedPointer>
 #include <QSortFilterProxyModel>
 #include <QUrlQuery>
@@ -225,7 +223,7 @@ void GoogleDriveService::ShowContextMenu(const QPoint& global_pos) {
         tr("Check for updates"), this, SLOT(CheckForUpdates()));
     full_rescan_action_ = context_menu_->addAction(
         IconLoader::Load("view-refresh", IconLoader::Base),
-        tr("Do a full rescan..."), this, SLOT(ConfirmFullRescan()));
+        tr("Do a full rescan..."), this, SLOT(FullRescanRequested()));
     context_menu_->addSeparator();
     context_menu_->addAction(IconLoader::Load("download", IconLoader::Base),
                              tr("Cover Manager"), this,
@@ -266,23 +264,6 @@ void GoogleDriveService::OpenWithDrive() {
     QDesktopServices::openUrl(
         QUrl(QString(kDriveEditFileUrl).arg(song.url().path())));
   }
-}
-
-void GoogleDriveService::ConfirmFullRescan() {
-  QMessageBox* message_box = new QMessageBox(
-      QMessageBox::Warning, tr("Do a full rescan"),
-      tr("Doing a full rescan will lose any metadata you've saved in "
-         "Clementine such as cover art, play counts and ratings.  Clementine "
-         "will rescan all your music in Google Drive which may take some "
-         "time."),
-      QMessageBox::NoButton);
-  QPushButton* button = message_box->addButton(tr("Do a full rescan"),
-                                               QMessageBox::DestructiveRole);
-  connect(button, SIGNAL(clicked()), SLOT(DoFullRescan()));
-
-  message_box->addButton(QMessageBox::Cancel);
-  message_box->setAttribute(Qt::WA_DeleteOnClose);
-  message_box->show();
 }
 
 void GoogleDriveService::DoFullRescan() {
