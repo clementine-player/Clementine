@@ -40,7 +40,6 @@ class GoogleDriveService : public CloudFileService {
   static const char* kSettingsGroup;
 
   virtual bool has_credentials() const;
-  virtual void ShowContextMenu(const QPoint& global_pos);
 
   google_drive::Client* client() const { return client_; }
   QString refresh_token() const;
@@ -69,6 +68,9 @@ class GoogleDriveService : public CloudFileService {
   void EnsureConnected();
   void RefreshAuthorisation(const QString& refresh_token);
   void ListChanges(const QString& cursor);
+
+  void PopulateContextMenu() override;
+  void UpdateContextMenu() override;
 
   google_drive::Client* client_;
 

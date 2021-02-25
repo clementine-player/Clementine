@@ -210,29 +210,27 @@ QUrl GoogleDriveService::GetStreamingUrlFromSongId(const QString& id) {
   return QUrl(response->file().download_url());
 }
 
-void GoogleDriveService::ShowContextMenu(const QPoint& global_pos) {
-  if (!context_menu_) {
-    context_menu_.reset(new QMenu);
-    context_menu_->addActions(GetPlaylistActions());
-    open_in_drive_action_ = context_menu_->addAction(
-        IconLoader::Load("googledrive", IconLoader::Provider),
-        tr("Open in Google Drive"), this, SLOT(OpenWithDrive()));
-    context_menu_->addSeparator();
-    update_action_ = context_menu_->addAction(
-        IconLoader::Load("view-refresh", IconLoader::Base),
-        tr("Check for updates"), this, SLOT(CheckForUpdates()));
-    full_rescan_action_ = context_menu_->addAction(
-        IconLoader::Load("view-refresh", IconLoader::Base),
-        tr("Do a full rescan..."), this, SLOT(FullRescanRequested()));
-    context_menu_->addSeparator();
-    context_menu_->addAction(IconLoader::Load("download", IconLoader::Base),
-                             tr("Cover Manager"), this,
-                             SLOT(ShowCoverManager()));
-    context_menu_->addAction(IconLoader::Load("configure", IconLoader::Base),
-                             tr("Configure..."), this,
-                             SLOT(ShowSettingsDialog()));
-  }
+void GoogleDriveService::PopulateContextMenu() {
+  context_menu_->addActions(GetPlaylistActions());
+  open_in_drive_action_ = context_menu_->addAction(
+      IconLoader::Load("googledrive", IconLoader::Provider),
+      tr("Open in Google Drive"), this, SLOT(OpenWithDrive()));
+  context_menu_->addSeparator();
+  update_action_ = context_menu_->addAction(
+      IconLoader::Load("view-refresh", IconLoader::Base),
+      tr("Check for updates"), this, SLOT(CheckForUpdates()));
+  full_rescan_action_ = context_menu_->addAction(
+      IconLoader::Load("view-refresh", IconLoader::Base),
+      tr("Do a full rescan..."), this, SLOT(FullRescanRequested()));
+  context_menu_->addSeparator();
+  context_menu_->addAction(IconLoader::Load("download", IconLoader::Base),
+                           tr("Cover Manager"), this, SLOT(ShowCoverManager()));
+  context_menu_->addAction(IconLoader::Load("configure", IconLoader::Base),
+                           tr("Configure..."), this,
+                           SLOT(ShowSettingsDialog()));
+}
 
+void GoogleDriveService::UpdateContextMenu() {
   // Only show some actions if there are real songs selected
   bool songs_selected = false;
   for (const QModelIndex& index : model()->selected_indexes()) {
@@ -246,8 +244,6 @@ void GoogleDriveService::ShowContextMenu(const QPoint& global_pos) {
   open_in_drive_action_->setEnabled(songs_selected);
   update_action_->setEnabled(!is_indexing());
   full_rescan_action_->setEnabled(!is_indexing());
-
-  context_menu_->popup(global_pos);
 }
 
 void GoogleDriveService::OpenWithDrive() {
