@@ -67,6 +67,11 @@ class CloudFileService : public InternetService {
   QString GuessMimeTypeForFile(const QString& filename) const;
   void AbortReadTagsReplies();
 
+  // Called once when context menu is created
+  virtual void PopulateContextMenu();
+  // Called every time context menu is shown
+  virtual void UpdateContextMenu(){};
+
  protected slots:
   void ShowCoverManager();
   void AddToPlaylist(QMimeData* mime);
