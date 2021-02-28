@@ -8,12 +8,12 @@
 # orange2141 <ataraxia90@gmail.com>, 2014
 # 현구 임 <bradlim980@gmail.com>, 2012
 # 현구 임 <bradlim980@gmail.com>, 2012
-# Bruce Lee <daemul72@gmail.com>, 2021
-# Bruce Lee <daemul72@gmail.com>, 2020
+# JungHee Lee <daemul72@gmail.com>, 2021
+# JungHee Lee <daemul72@gmail.com>, 2020
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2011
 # 현구 임 <bradlim980@gmail.com>, 2012
 # Ji yul Kim <kjy00302@gmail.com>, 2015
-# Bruce Lee <daemul72@gmail.com>, 2020
+# JungHee Lee <daemul72@gmail.com>, 2020
 # 박정규(Jung-Kyu Park) <bagjunggyu@gmail.com>, 2016,2019
 # Jeongyong Park <kladess@gmail.com>, 2013
 # Jeongyong Park <kladess@gmail.com>, 2014-2015
@@ -25,8 +25,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2021-02-08 15:06+0000\n"
-"Last-Translator: Bruce Lee <daemul72@gmail.com>\n"
+"PO-Revision-Date: 2021-02-27 13:26+0000\n"
+"Last-Translator: John Maguire <john.maguire@gmail.com>\n"
 "Language-Team: Korean (http://www.transifex.com/davidsansome/clementine/language/ko/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1141,7 +1141,7 @@ msgstr "채널"
 msgid "Check for new episodes"
 msgstr "새로운 에피소드 확인"
 
-#: internet/googledrive/googledriveservice.cpp:225
+#: internet/googledrive/googledriveservice.cpp:221
 msgid "Check for updates"
 msgstr "업데이트 확인"
 
@@ -1394,9 +1394,10 @@ msgstr "라이브러리 설정..."
 msgid "Configure podcasts..."
 msgstr "팟케스트 설정..."
 
-#: internet/core/cloudfileservice.cpp:107
+#: internet/core/cloudfileservice.cpp:106
 #: internet/digitally/digitallyimportedservicebase.cpp:183
-#: internet/googledrive/googledriveservice.cpp:234
+#: internet/googledrive/googledriveservice.cpp:229
+#: internet/skydrive/skydriveservice.cpp:222
 #: ../bin/src/ui_globalsearchsettingspage.h:146
 msgid "Configure..."
 msgstr "설정..."
@@ -1488,7 +1489,7 @@ msgstr "GStreamer 요소 \"%1\"를 찾을 수 없습니다  - 필요한 모든 G
 msgid "Could not detect an audio stream in %1"
 msgstr "%1의 오디오 스트림을 감지할 수 없습니다."
 
-#: internet/googledrive/googledriveservice.cpp:208
+#: internet/googledrive/googledriveservice.cpp:206
 msgid "Could not find Google Drive file."
 msgstr "Google 드라이브 파일을 찾을 수 없습니다."
 
@@ -1529,7 +1530,8 @@ msgid "Couldn't open output file %1"
 msgstr "출력 파일 %1를 열 수 없습니다"
 
 #: internet/core/cloudfileservice.cpp:103
-#: internet/googledrive/googledriveservice.cpp:231
+#: internet/googledrive/googledriveservice.cpp:227
+#: internet/skydrive/skydriveservice.cpp:219
 #: ../bin/src/ui_albumcovermanager.h:220
 #: ../bin/src/ui_albumcoversearcher.h:104 ../bin/src/ui_mainwindow.h:746
 msgid "Cover Manager"
@@ -1834,12 +1836,13 @@ msgstr "OSD 표시"
 msgid "Do a full library rescan"
 msgstr "전체 라이브러리 다시 읽기"
 
-#: internet/googledrive/googledriveservice.cpp:273
-#: internet/googledrive/googledriveservice.cpp:279
+#: internet/core/cloudfileservice.cpp:255
+#: internet/core/cloudfileservice.cpp:262
 msgid "Do a full rescan"
 msgstr "전체 재탐색"
 
-#: internet/googledrive/googledriveservice.cpp:228
+#: internet/googledrive/googledriveservice.cpp:224
+#: internet/skydrive/skydriveservice.cpp:216
 msgid "Do a full rescan..."
 msgstr "전체 재탐색..."
 
@@ -1851,12 +1854,13 @@ msgstr "어떤 곡도 변환하지 않기"
 msgid "Do not overwrite"
 msgstr "덮어쓸 수 없음"
 
-#: internet/googledrive/googledriveservice.cpp:274
+#: internet/core/cloudfileservice.cpp:256
+#, qt-format
 msgid ""
 "Doing a full rescan will lose any metadata you've saved in Clementine such "
 "as cover art, play counts and ratings.  Clementine will rescan all your "
-"music in Google Drive which may take some time."
-msgstr "전체 재탐색은 앨범아트, 재생회수, 별점 등 모든 정보가 손실됩니다. 클레멘타인은 Google Drive에 있는 모든 음악을 재탐색 할 것이며, 수분이 소요될 수 있습니다."
+"music in %1 which may take some time."
+msgstr ""
 
 #: widgets/osd.cpp:306 ../bin/src/ui_playlistsequence.h:110
 msgid "Don't repeat"
@@ -2815,7 +2819,7 @@ msgstr "<value>% 단위로 음량 올리기"
 msgid "Increase volume"
 msgstr "음량 올리기"
 
-#: internet/core/cloudfileservice.cpp:154
+#: internet/core/cloudfileservice.cpp:160
 #, qt-format
 msgid "Indexing %1"
 msgstr "색인 %1"
@@ -3683,7 +3687,7 @@ msgstr "장치 열기"
 msgid "Open file..."
 msgstr "파일 열기..."
 
-#: internet/googledrive/googledriveservice.cpp:221
+#: internet/googledrive/googledriveservice.cpp:217
 msgid "Open in Google Drive"
 msgstr "Google Drive에서 열기"
 

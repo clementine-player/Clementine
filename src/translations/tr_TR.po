@@ -43,7 +43,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2021-02-07 15:19+0000\n"
+"PO-Revision-Date: 2021-02-27 13:26+0000\n"
 "Last-Translator: John Maguire <john.maguire@gmail.com>\n"
 "Language-Team: Turkish (Turkey) (http://www.transifex.com/davidsansome/clementine/language/tr_TR/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1159,7 +1159,7 @@ msgstr "Kanallar"
 msgid "Check for new episodes"
 msgstr "Yeni bölümler için kontrol et"
 
-#: internet/googledrive/googledriveservice.cpp:225
+#: internet/googledrive/googledriveservice.cpp:221
 msgid "Check for updates"
 msgstr "Güncellemeleri denetle"
 
@@ -1412,9 +1412,10 @@ msgstr "Kütüphaneyi düzenle..."
 msgid "Configure podcasts..."
 msgstr "Podcastları ayarla..."
 
-#: internet/core/cloudfileservice.cpp:107
+#: internet/core/cloudfileservice.cpp:106
 #: internet/digitally/digitallyimportedservicebase.cpp:183
-#: internet/googledrive/googledriveservice.cpp:234
+#: internet/googledrive/googledriveservice.cpp:229
+#: internet/skydrive/skydriveservice.cpp:222
 #: ../bin/src/ui_globalsearchsettingspage.h:146
 msgid "Configure..."
 msgstr "Yapılandır..."
@@ -1506,7 +1507,7 @@ msgstr "GStreamer elementi  \"%1\" oluşturulamadı - tüm Gstreamer eklentileri
 msgid "Could not detect an audio stream in %1"
 msgstr "%1 kaynağında ses akışı tespit edilemedi."
 
-#: internet/googledrive/googledriveservice.cpp:208
+#: internet/googledrive/googledriveservice.cpp:206
 msgid "Could not find Google Drive file."
 msgstr "Google Drive dosyası bulunamadı."
 
@@ -1547,7 +1548,8 @@ msgid "Couldn't open output file %1"
 msgstr "%1 çıktı dosyası açılamadı"
 
 #: internet/core/cloudfileservice.cpp:103
-#: internet/googledrive/googledriveservice.cpp:231
+#: internet/googledrive/googledriveservice.cpp:227
+#: internet/skydrive/skydriveservice.cpp:219
 #: ../bin/src/ui_albumcovermanager.h:220
 #: ../bin/src/ui_albumcoversearcher.h:104 ../bin/src/ui_mainwindow.h:746
 msgid "Cover Manager"
@@ -1852,12 +1854,13 @@ msgstr "Ekran görselini göster"
 msgid "Do a full library rescan"
 msgstr "Tüm kütüphaneyi yeniden tara"
 
-#: internet/googledrive/googledriveservice.cpp:273
-#: internet/googledrive/googledriveservice.cpp:279
+#: internet/core/cloudfileservice.cpp:255
+#: internet/core/cloudfileservice.cpp:262
 msgid "Do a full rescan"
 msgstr "Tam bir yeniden tarama yap"
 
-#: internet/googledrive/googledriveservice.cpp:228
+#: internet/googledrive/googledriveservice.cpp:224
+#: internet/skydrive/skydriveservice.cpp:216
 msgid "Do a full rescan..."
 msgstr "Tam bir yeniden tarama yap..."
 
@@ -1869,12 +1872,13 @@ msgstr "Hiç bir müziği dönüştürme"
 msgid "Do not overwrite"
 msgstr "Üzerine yazma"
 
-#: internet/googledrive/googledriveservice.cpp:274
+#: internet/core/cloudfileservice.cpp:256
+#, qt-format
 msgid ""
 "Doing a full rescan will lose any metadata you've saved in Clementine such "
 "as cover art, play counts and ratings.  Clementine will rescan all your "
-"music in Google Drive which may take some time."
-msgstr "Tam bir yeniden tarama yapmak; albüm kapağı, oynatma sayısı ve beğeniler gibi Clementine içerisindeki kayıtlı tüm üst verileri kaybettirecektir. Clementine, zaman alabilecek Google Drive içerisindeki tüm müziğinizi yeniden tarayacak."
+"music in %1 which may take some time."
+msgstr ""
 
 #: widgets/osd.cpp:306 ../bin/src/ui_playlistsequence.h:110
 msgid "Don't repeat"
@@ -2833,7 +2837,7 @@ msgstr "<value> oranında sesi artırın"
 msgid "Increase volume"
 msgstr "Sesi arttır"
 
-#: internet/core/cloudfileservice.cpp:154
+#: internet/core/cloudfileservice.cpp:160
 #, qt-format
 msgid "Indexing %1"
 msgstr "%1 İndekslendi"
@@ -3701,7 +3705,7 @@ msgstr "Aygıtı aç"
 msgid "Open file..."
 msgstr "Dosya aç..."
 
-#: internet/googledrive/googledriveservice.cpp:221
+#: internet/googledrive/googledriveservice.cpp:217
 msgid "Open in Google Drive"
 msgstr "Google Drive'da aç"
 

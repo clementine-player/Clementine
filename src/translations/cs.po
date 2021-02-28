@@ -21,7 +21,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2021-02-07 17:48+0000\n"
+"PO-Revision-Date: 2021-02-27 16:58+0000\n"
 "Last-Translator: fri\n"
 "Language-Team: Czech (http://www.transifex.com/davidsansome/clementine/language/cs/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1137,7 +1137,7 @@ msgstr "Kanály"
 msgid "Check for new episodes"
 msgstr "Podívat se po nových dílech"
 
-#: internet/googledrive/googledriveservice.cpp:225
+#: internet/googledrive/googledriveservice.cpp:221
 msgid "Check for updates"
 msgstr "Podívat se po aktualizacích"
 
@@ -1390,9 +1390,10 @@ msgstr "Nastavit sbírku..."
 msgid "Configure podcasts..."
 msgstr "Nastavit záznamy..."
 
-#: internet/core/cloudfileservice.cpp:107
+#: internet/core/cloudfileservice.cpp:106
 #: internet/digitally/digitallyimportedservicebase.cpp:183
-#: internet/googledrive/googledriveservice.cpp:234
+#: internet/googledrive/googledriveservice.cpp:229
+#: internet/skydrive/skydriveservice.cpp:222
 #: ../bin/src/ui_globalsearchsettingspage.h:146
 msgid "Configure..."
 msgstr "Nastavit..."
@@ -1484,7 +1485,7 @@ msgstr "Nepodařilo se vytvořit prvek GStreamer \"%1\" - ujistěte se, že mát
 msgid "Could not detect an audio stream in %1"
 msgstr "Nepodařilo se zjistit zvukový proud v %1"
 
-#: internet/googledrive/googledriveservice.cpp:208
+#: internet/googledrive/googledriveservice.cpp:206
 msgid "Could not find Google Drive file."
 msgstr "Nepodařilo se najít soubor Google Drive."
 
@@ -1525,7 +1526,8 @@ msgid "Couldn't open output file %1"
 msgstr "Nepodařilo se otevřít výstupní soubor %1"
 
 #: internet/core/cloudfileservice.cpp:103
-#: internet/googledrive/googledriveservice.cpp:231
+#: internet/googledrive/googledriveservice.cpp:227
+#: internet/skydrive/skydriveservice.cpp:219
 #: ../bin/src/ui_albumcovermanager.h:220
 #: ../bin/src/ui_albumcoversearcher.h:104 ../bin/src/ui_mainwindow.h:746
 msgid "Cover Manager"
@@ -1830,12 +1832,13 @@ msgstr "Zobrazovat informace na obrazovce (OSD)"
 msgid "Do a full library rescan"
 msgstr "Znovu kompletně prohledat sbírku"
 
-#: internet/googledrive/googledriveservice.cpp:273
-#: internet/googledrive/googledriveservice.cpp:279
+#: internet/core/cloudfileservice.cpp:255
+#: internet/core/cloudfileservice.cpp:262
 msgid "Do a full rescan"
 msgstr "Znovu úplně prohledat"
 
-#: internet/googledrive/googledriveservice.cpp:228
+#: internet/googledrive/googledriveservice.cpp:224
+#: internet/skydrive/skydriveservice.cpp:216
 msgid "Do a full rescan..."
 msgstr "Znovu úplně prohledat..."
 
@@ -1847,12 +1850,13 @@ msgstr "Nepřevádět žádnou hudbu"
 msgid "Do not overwrite"
 msgstr "Nepřepisovat"
 
-#: internet/googledrive/googledriveservice.cpp:274
+#: internet/core/cloudfileservice.cpp:256
+#, qt-format
 msgid ""
 "Doing a full rescan will lose any metadata you've saved in Clementine such "
 "as cover art, play counts and ratings.  Clementine will rescan all your "
-"music in Google Drive which may take some time."
-msgstr "Úplné znovuprohledání povede ke ztrátě popisných dat uložených vámi v Clementine, např. obrázků obalů, počtů přehrání skladeb a hodnocení. Clementine znovu prohledá všechnu vaši hudbu v Google Drive, což může chvíli trvat."
+"music in %1 which may take some time."
+msgstr "Úplné znovuprohledání povede ke ztrátě popisných dat uložených vámi v Clementine, např. obrázků obalů, počtů přehrání skladeb a hodnocení. Clementine znovu prohledá všechnu vaši hudbu v %1, což může chvíli trvat."
 
 #: widgets/osd.cpp:306 ../bin/src/ui_playlistsequence.h:110
 msgid "Don't repeat"
@@ -2811,7 +2815,7 @@ msgstr "Zvýšit hlasitost o <value> procent"
 msgid "Increase volume"
 msgstr "Zvýšit hlasitost"
 
-#: internet/core/cloudfileservice.cpp:154
+#: internet/core/cloudfileservice.cpp:160
 #, qt-format
 msgid "Indexing %1"
 msgstr "Rejstříkování %1"
@@ -3679,7 +3683,7 @@ msgstr "Otevřít zařízení"
 msgid "Open file..."
 msgstr "Otevřít soubor"
 
-#: internet/googledrive/googledriveservice.cpp:221
+#: internet/googledrive/googledriveservice.cpp:217
 msgid "Open in Google Drive"
 msgstr "Otevřít v Google Drive"
 

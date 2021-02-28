@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2021-02-07 15:19+0000\n"
+"PO-Revision-Date: 2021-02-27 13:26+0000\n"
 "Last-Translator: John Maguire <john.maguire@gmail.com>\n"
 "Language-Team: Belarusian (http://www.transifex.com/davidsansome/clementine/language/be/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1127,7 +1127,7 @@ msgstr ""
 msgid "Check for new episodes"
 msgstr "Праверыць новыя выпускі"
 
-#: internet/googledrive/googledriveservice.cpp:225
+#: internet/googledrive/googledriveservice.cpp:221
 msgid "Check for updates"
 msgstr ""
 
@@ -1380,9 +1380,10 @@ msgstr "Наладзіць калекцыю..."
 msgid "Configure podcasts..."
 msgstr "Наладзіць подкасты..."
 
-#: internet/core/cloudfileservice.cpp:107
+#: internet/core/cloudfileservice.cpp:106
 #: internet/digitally/digitallyimportedservicebase.cpp:183
-#: internet/googledrive/googledriveservice.cpp:234
+#: internet/googledrive/googledriveservice.cpp:229
+#: internet/skydrive/skydriveservice.cpp:222
 #: ../bin/src/ui_globalsearchsettingspage.h:146
 msgid "Configure..."
 msgstr "Наладзіць..."
@@ -1474,7 +1475,7 @@ msgstr "Немагчыма стварыць элемент GStreamer \"%1\" - п
 msgid "Could not detect an audio stream in %1"
 msgstr ""
 
-#: internet/googledrive/googledriveservice.cpp:208
+#: internet/googledrive/googledriveservice.cpp:206
 msgid "Could not find Google Drive file."
 msgstr ""
 
@@ -1515,7 +1516,8 @@ msgid "Couldn't open output file %1"
 msgstr "Немагчыма адкрыць выходны файл %1"
 
 #: internet/core/cloudfileservice.cpp:103
-#: internet/googledrive/googledriveservice.cpp:231
+#: internet/googledrive/googledriveservice.cpp:227
+#: internet/skydrive/skydriveservice.cpp:219
 #: ../bin/src/ui_albumcovermanager.h:220
 #: ../bin/src/ui_albumcoversearcher.h:104 ../bin/src/ui_mainwindow.h:746
 msgid "Cover Manager"
@@ -1820,12 +1822,13 @@ msgstr "Паказваць экраннае апавяшчэньне"
 msgid "Do a full library rescan"
 msgstr "Перасканаваць бібліятэку"
 
-#: internet/googledrive/googledriveservice.cpp:273
-#: internet/googledrive/googledriveservice.cpp:279
+#: internet/core/cloudfileservice.cpp:255
+#: internet/core/cloudfileservice.cpp:262
 msgid "Do a full rescan"
 msgstr ""
 
-#: internet/googledrive/googledriveservice.cpp:228
+#: internet/googledrive/googledriveservice.cpp:224
+#: internet/skydrive/skydriveservice.cpp:216
 msgid "Do a full rescan..."
 msgstr ""
 
@@ -1837,11 +1840,12 @@ msgstr "Не канвэртаваць ніякую музыку"
 msgid "Do not overwrite"
 msgstr "Не перазапісваць"
 
-#: internet/googledrive/googledriveservice.cpp:274
+#: internet/core/cloudfileservice.cpp:256
+#, qt-format
 msgid ""
 "Doing a full rescan will lose any metadata you've saved in Clementine such "
 "as cover art, play counts and ratings.  Clementine will rescan all your "
-"music in Google Drive which may take some time."
+"music in %1 which may take some time."
 msgstr ""
 
 #: widgets/osd.cpp:306 ../bin/src/ui_playlistsequence.h:110
@@ -2801,7 +2805,7 @@ msgstr "Павялічваць гучнасьць на <value> адсоткаў"
 msgid "Increase volume"
 msgstr "Павялічыць гучнасьць"
 
-#: internet/core/cloudfileservice.cpp:154
+#: internet/core/cloudfileservice.cpp:160
 #, qt-format
 msgid "Indexing %1"
 msgstr "Індэксуем %1"
@@ -3669,7 +3673,7 @@ msgstr "Адкрыць прыладу"
 msgid "Open file..."
 msgstr "Адкрыць файл..."
 
-#: internet/googledrive/googledriveservice.cpp:221
+#: internet/googledrive/googledriveservice.cpp:217
 msgid "Open in Google Drive"
 msgstr "Адчыніць у Google Drive"
 
