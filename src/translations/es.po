@@ -6,7 +6,7 @@
 # Coroccotta <adiazubierna@gmail.com>, 2012
 # Adolfo Jayme-Barrientos, 2014
 # Adolfo Jayme-Barrientos, 2012-2013,2018
-# Adolfo Jayme-Barrientos, 2016-2020
+# Adolfo Jayme-Barrientos, 2016-2021
 # Adolfo Jayme-Barrientos, 2015-2016
 # Adolfo Jayme-Barrientos, 2013
 # Adolfo Jayme-Barrientos, 2014
@@ -43,8 +43,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2021-02-27 13:26+0000\n"
-"Last-Translator: John Maguire <john.maguire@gmail.com>\n"
+"PO-Revision-Date: 2021-03-02 18:38+0000\n"
+"Last-Translator: Adolfo Jayme-Barrientos\n"
 "Language-Team: Spanish (http://www.transifex.com/davidsansome/clementine/language/es/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -183,7 +183,7 @@ msgstr "%L1 oyentes más"
 #: playlist/playlistmanager.cpp:439
 #, qt-format
 msgid "%L1 selected of"
-msgstr ""
+msgstr "Selección de %L1 de"
 
 #: songinfo/lastfmtrackinfoprovider.cpp:94
 #, qt-format
@@ -193,7 +193,7 @@ msgstr "%L1 reproducciones totales"
 #: playlist/playlistmanager.cpp:445
 #, qt-format
 msgid "%L1 tracks"
-msgstr ""
+msgstr "%L1 pistas"
 
 #: ../bin/src/ui_notificationssettingspage.h:432
 msgid "%filename%"
@@ -256,11 +256,11 @@ msgstr "&Izquierda"
 
 #: playlist/playlistheader.cpp:35
 msgid "&Lock Rating"
-msgstr "&Bloquear la valoración"
+msgstr "&Bloquear valoración"
 
 #: ../bin/src/ui_edittagdialog.h:732
 msgid "&Lyrics"
-msgstr "&Letras"
+msgstr "&Letra"
 
 #: ../bin/src/ui_mainwindow.h:793
 msgid "&Music"
@@ -521,11 +521,11 @@ msgstr "Activar/desactivar Wii Remote"
 
 #: internet/podcasts/addpodcastdialog.cpp:64
 msgid "Add Podcast"
-msgstr "Añadir un pódcast"
+msgstr "Añadir pódcast"
 
 #: ../bin/src/ui_addstreamdialog.h:124
 msgid "Add Stream"
-msgstr "Añadir una transmisión"
+msgstr "Añadir transmisión"
 
 #: ../bin/src/ui_notificationssettingspage.h:430
 msgid "Add a new line if supported by the notification type"
@@ -533,7 +533,7 @@ msgstr "Añadir un renglón nuevo si lo permite el tipo de notificación"
 
 #: ../bin/src/ui_wiimotesettingspage.h:183
 msgid "Add action"
-msgstr "Añadir una acción"
+msgstr "Añadir acción"
 
 #: ../bin/src/ui_transcodedialog.h:220
 msgid "Add all tracks from a directory and all its subdirectories"
@@ -545,7 +545,7 @@ msgstr "Añadir otra transmisión…"
 
 #: library/librarysettingspage.cpp:67 ../bin/src/ui_transcodedialog.h:222
 msgid "Add directory..."
-msgstr "Añadir una carpeta…"
+msgstr "Añadir directorio…"
 
 #: ui/mainwindow.cpp:2169
 msgid "Add file"
@@ -553,15 +553,15 @@ msgstr "Añadir archivo"
 
 #: ../bin/src/ui_mainwindow.h:776
 msgid "Add file to transcoder"
-msgstr "Añadir un archivo al convertidor"
+msgstr "Añadir archivo al conversor"
 
 #: ../bin/src/ui_mainwindow.h:774
 msgid "Add file(s) to transcoder"
-msgstr "Añadir archivo(s) al convertidor"
+msgstr "Añadir archivo(s) al conversor"
 
 #: ../bin/src/ui_transcodedialog.h:218 ../bin/src/ui_mainwindow.h:742
 msgid "Add file..."
-msgstr "Añadir un archivo…"
+msgstr "Añadir archivo…"
 
 #: transcoder/transcodedialog.cpp:246
 msgid "Add files to transcode"
@@ -570,11 +570,11 @@ msgstr "Añadir archivos para convertir"
 #: transcoder/transcodedialog.cpp:327 ui/mainwindow.cpp:2196
 #: ripper/ripcddialog.cpp:200
 msgid "Add folder"
-msgstr "Añadir una carpeta"
+msgstr "Añadir carpeta"
 
 #: ../bin/src/ui_mainwindow.h:757
 msgid "Add folder..."
-msgstr "Añadir una carpeta…"
+msgstr "Añadir carpeta…"
 
 #: ../bin/src/ui_librarysettingspage.h:187
 msgid "Add new folder..."
@@ -582,11 +582,11 @@ msgstr "Añadir carpeta nueva…"
 
 #: ../bin/src/ui_addpodcastdialog.h:178
 msgid "Add podcast"
-msgstr "Añadir un pódcast"
+msgstr "Añadir pódcast"
 
 #: internet/podcasts/podcastservice.cpp:421 ../bin/src/ui_mainwindow.h:772
 msgid "Add podcast..."
-msgstr "Añadir un pódcast…"
+msgstr "Añadir pódcast…"
 
 #: smartplaylists/searchtermwidget.cpp:385
 msgid "Add search term"
@@ -946,7 +946,7 @@ msgstr "Actualización automática"
 
 #: ../bin/src/ui_transcoderoptionsfdkaac.h:101
 msgid "Automatically determine based on sample rate."
-msgstr ""
+msgstr "Determinar automáticamente basándose en la tasa de muestreo."
 
 #: ../bin/src/ui_librarysettingspage.h:207
 msgid "Automatically open single categories in the library tree"
@@ -1514,7 +1514,7 @@ msgstr "No se pudo encontrar el archivo de Google Drive."
 #: transcoder/transcoderoptionserror.cpp:35
 #, qt-format
 msgid "Could not find a suitable encoder element for <b>%1</b>."
-msgstr ""
+msgstr "No se pudo encontrar un elemento codificador adecuado para <b>%1</b>."
 
 #: songinfo/streamdiscoverer.cpp:124
 msgid "Could not get details"
@@ -1540,7 +1540,7 @@ msgstr "No se pudo encontrar un muxer para %1, compruebe que tiene instalados lo
 msgid ""
 "Couldn't find an encoder for %1, check you have the correct GStreamer "
 "plugins installed"
-msgstr "No se pudo encontrar un codificador para %1, compruebe que tiene instalados los complementos de GStreamer correctos"
+msgstr "No se pudo encontrar un codificador para %1. Compruebe que tenga instalados los complementos de GStreamer correctos"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:227
 #, qt-format
@@ -1878,7 +1878,7 @@ msgid ""
 "Doing a full rescan will lose any metadata you've saved in Clementine such "
 "as cover art, play counts and ratings.  Clementine will rescan all your "
 "music in %1 which may take some time."
-msgstr ""
+msgstr "Al efectuar el análisis completo se perderán los metadatos guardados en Clementine, como las carátulas, el número de reproducciones y las valoraciones. Clementine volverá a analizar toda su música en %1, lo que puede llevar algún tiempo."
 
 #: widgets/osd.cpp:306 ../bin/src/ui_playlistsequence.h:110
 msgid "Don't repeat"
@@ -2295,7 +2295,7 @@ msgstr "Se exportaron %1 carátulas de %2 (se omitieron %3)"
 
 #: ../bin/src/ui_mainwindow.h:790
 msgid "F9"
-msgstr ""
+msgstr "F9"
 
 #: core/song.cpp:429 transcoder/transcoder.cpp:276
 #: transcoder/transcodersettingspage.cpp:30
@@ -3162,7 +3162,7 @@ msgstr "Falló el inicio de sesión"
 
 #: ../bin/src/ui_transcodelogdialog.h:108
 msgid "Logs"
-msgstr ""
+msgstr "Registros"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:136
 msgid "Long term prediction profile (LTP)"
@@ -3488,7 +3488,7 @@ msgstr "Siguiente"
 
 #: ../bin/src/ui_mainwindow.h:785
 msgid "Next album"
-msgstr ""
+msgstr "Próximo álbum"
 
 #: core/globalshortcuts.cpp:59 wiimotedev/wiimotesettingspage.cpp:105
 #: ../bin/src/ui_mainwindow.h:727
@@ -3522,14 +3522,14 @@ msgstr "No se encontraron coincidencias.  Limpie el cuadro de búsqueda para mos
 
 #: transcoder/transcoderoptionserror.cpp:32
 msgid "No settings available for this type."
-msgstr ""
+msgstr "No hay opciones disponibles para este tipo."
 
 #: transcoder/transcoderoptionserror.cpp:42
 #, qt-format
 msgid ""
 "No settings page available for encoder element <b>%1</b>. Please report this"
 " issue:<br><a href=\"%2\">%2</a>"
-msgstr ""
+msgstr "No hay ninguna página de configuración disponible para el elemento codificador <b>%1</b>. Informe de este problema:<br><a href=\"%2\">%2</a>"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:144
 msgid "No short blocks"
@@ -3861,11 +3861,11 @@ msgstr "Intérprete"
 
 #: ../bin/src/ui_gstenginedebug.h:67
 msgid "Pipeline"
-msgstr ""
+msgstr "Canalización"
 
 #: ../bin/src/ui_transcodelogdialog.h:107
 msgid "Pipelines"
-msgstr ""
+msgstr "Canalizaciones"
 
 #: ../bin/src/ui_albumcoverexport.h:214
 msgid "Pixel"
@@ -5432,7 +5432,7 @@ msgstr "Convertir música"
 
 #: ../bin/src/ui_transcodelogdialog.h:106
 msgid "Transcoder Details"
-msgstr ""
+msgstr "Detalles del conversor"
 
 #: ../bin/src/ui_transcodersettingspage.h:60
 msgid "Transcoding"
@@ -5450,7 +5450,7 @@ msgstr "Opciones de conversión"
 #: transcoder/transcoderoptionsdialog.cpp:42
 #, qt-format
 msgid "Transcoding options - %1"
-msgstr ""
+msgstr "Opciones de conversión. %1"
 
 #: core/song.cpp:451
 msgid "TrueAudio"
