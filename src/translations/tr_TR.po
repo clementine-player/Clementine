@@ -8,7 +8,7 @@
 # Ahmet Sezgin Duran <marjinalist1@gmail.com>, 2013
 # Mustafa YILMAZ <apshalasha@gmail.com>, 2013
 # arnaudbienner <arnaud.bienner@gmail.com>, 2011
-# Demiray Muhterem <mdemiray@msn.com>, 2016-2020
+# Demiray Muhterem <mdemiray@msn.com>, 2016-2021
 # devingregory <devingregory@yandex.com>, 2012
 # devingregory <devingregory@yandex.com>, 2012
 # Ege Öz <ege.oz@yandex.com.tr>, 2013
@@ -43,8 +43,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2021-02-27 13:26+0000\n"
-"Last-Translator: John Maguire <john.maguire@gmail.com>\n"
+"PO-Revision-Date: 2021-03-03 10:32+0000\n"
+"Last-Translator: Demiray Muhterem <mdemiray@msn.com>\n"
 "Language-Team: Turkish (Turkey) (http://www.transifex.com/davidsansome/clementine/language/tr_TR/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -183,7 +183,7 @@ msgstr "%L1 başka dinleyici"
 #: playlist/playlistmanager.cpp:439
 #, qt-format
 msgid "%L1 selected of"
-msgstr ""
+msgstr "%L1 tanesi seçildi "
 
 #: songinfo/lastfmtrackinfoprovider.cpp:94
 #, qt-format
@@ -193,7 +193,7 @@ msgstr "%L1 toplam çalma"
 #: playlist/playlistmanager.cpp:445
 #, qt-format
 msgid "%L1 tracks"
-msgstr ""
+msgstr "%L1 parça"
 
 #: ../bin/src/ui_notificationssettingspage.h:432
 msgid "%filename%"
@@ -946,7 +946,7 @@ msgstr "Otomatik güncelleme"
 
 #: ../bin/src/ui_transcoderoptionsfdkaac.h:101
 msgid "Automatically determine based on sample rate."
-msgstr ""
+msgstr "Örnek oranına göre otomatik olarak belirleyin."
 
 #: ../bin/src/ui_librarysettingspage.h:207
 msgid "Automatically open single categories in the library tree"
@@ -1514,7 +1514,7 @@ msgstr "Google Drive dosyası bulunamadı."
 #: transcoder/transcoderoptionserror.cpp:35
 #, qt-format
 msgid "Could not find a suitable encoder element for <b>%1</b>."
-msgstr ""
+msgstr "<b>%1</b> için uygun bir kodlayıcı öğesi bulunamadı."
 
 #: songinfo/streamdiscoverer.cpp:124
 msgid "Could not get details"
@@ -1878,7 +1878,7 @@ msgid ""
 "Doing a full rescan will lose any metadata you've saved in Clementine such "
 "as cover art, play counts and ratings.  Clementine will rescan all your "
 "music in %1 which may take some time."
-msgstr ""
+msgstr "Tam yeniden tarama yapmak, kapak resmi, oyun sayıları ve derecelendirmeler gibi Clementine kaydettiğiniz tüm meta verileri kaybedecektir. Clementine,%1 içindeki tüm müziğinizi yeniden tarayacak ve bu biraz zaman alabilir."
 
 #: widgets/osd.cpp:306 ../bin/src/ui_playlistsequence.h:110
 msgid "Don't repeat"
@@ -1951,11 +1951,11 @@ msgstr "İndirme ayarları"
 
 #: ../bin/src/ui_networkremotesettingspage.h:385
 msgid "Download the original Android app"
-msgstr ""
+msgstr "Orijinal Android uygulamasını indirin"
 
 #: ../bin/src/ui_networkremotesettingspage.h:381
 msgid "Download the remote for Desktops, Android and iOS"
-msgstr ""
+msgstr "Android ve iOS Masaüstleri için uzaktan kontrolü indirin"
 
 #: internet/magnatune/magnatuneservice.cpp:279
 msgid "Download this album"
@@ -2009,11 +2009,11 @@ msgstr "Dubstep"
 
 #: transcoder/transcodedialog.cpp:70
 msgid "Dump Graph"
-msgstr ""
+msgstr "Döküm Grafiği"
 
 #: ../bin/src/ui_gstenginedebug.h:68
 msgid "Dump Pipeline Graph"
-msgstr ""
+msgstr "Boru Hattı Grafiğini Boşalt"
 
 #: ../bin/src/ui_console.h:132
 msgid "Dump To Logs"
@@ -2295,7 +2295,7 @@ msgstr "%2 kapağın %1 tanesi aktarıldı (%3 atlandı)"
 
 #: ../bin/src/ui_mainwindow.h:790
 msgid "F9"
-msgstr ""
+msgstr "F9"
 
 #: core/song.cpp:429 transcoder/transcoder.cpp:276
 #: transcoder/transcodersettingspage.cpp:30
@@ -2450,7 +2450,7 @@ msgstr "Dosyalar"
 
 #: ../bin/src/ui_networkremotesettingspage.h:376
 msgid "Files root folder"
-msgstr ""
+msgstr "Kök dosya klasörü"
 
 #: ../bin/src/ui_transcodedialog.h:214
 msgid "Files to transcode"
@@ -3162,7 +3162,7 @@ msgstr "Giriş başarısız oldu."
 
 #: ../bin/src/ui_transcodelogdialog.h:108
 msgid "Logs"
-msgstr ""
+msgstr "Loglar"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:136
 msgid "Long term prediction profile (LTP)"
@@ -3406,7 +3406,7 @@ msgstr "Müzik Kütüphanesi"
 
 #: ../bin/src/ui_networkremotesettingspage.h:380
 msgid "Music extensions remotely visible"
-msgstr ""
+msgstr "Müzik uzantıları uzaktan görülebilir"
 
 #: core/globalshortcuts.cpp:65 wiimotedev/wiimotesettingspage.cpp:114
 #: ../bin/src/ui_mainwindow.h:768
@@ -3488,7 +3488,7 @@ msgstr "İleri"
 
 #: ../bin/src/ui_mainwindow.h:785
 msgid "Next album"
-msgstr ""
+msgstr "Sonraki albüm"
 
 #: core/globalshortcuts.cpp:59 wiimotedev/wiimotesettingspage.cpp:105
 #: ../bin/src/ui_mainwindow.h:727
@@ -3522,14 +3522,14 @@ msgstr "Eşleşen bulunmadı. Çalma listesini tekrar görmek için arama çubu�
 
 #: transcoder/transcoderoptionserror.cpp:32
 msgid "No settings available for this type."
-msgstr ""
+msgstr "Bu tür için hiçbir ayar yok."
 
 #: transcoder/transcoderoptionserror.cpp:42
 #, qt-format
 msgid ""
 "No settings page available for encoder element <b>%1</b>. Please report this"
 " issue:<br><a href=\"%2\">%2</a>"
-msgstr ""
+msgstr "Enkoder öğesi <b>%1</b> için ayar sayfası yok. Lütfen bu sorunu bildirin: <br><a href=\"%2\">%2</a>"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:144
 msgid "No short blocks"
@@ -3861,11 +3861,11 @@ msgstr "Sanatçı"
 
 #: ../bin/src/ui_gstenginedebug.h:67
 msgid "Pipeline"
-msgstr ""
+msgstr "Boru hattı"
 
 #: ../bin/src/ui_transcodelogdialog.h:107
 msgid "Pipelines"
-msgstr ""
+msgstr "Boru hattı"
 
 #: ../bin/src/ui_albumcoverexport.h:214
 msgid "Pixel"
@@ -4390,7 +4390,7 @@ msgstr "Rock"
 
 #: ../bin/src/ui_networkremotesettingspage.h:374
 msgid "Root folder that will be browsable from the network remote"
-msgstr ""
+msgstr "Uzak ağdan göz atılabilecek kök klasör"
 
 #: ../bin/src/ui_console.h:130
 msgid "Run"
@@ -4629,11 +4629,11 @@ msgstr "Hiçbirini Seçme"
 
 #: ui/filechooserwidget.cpp:95
 msgid "Select a directory"
-msgstr ""
+msgstr "Bir dizin seçin"
 
 #: ui/filechooserwidget.cpp:92
 msgid "Select a file"
-msgstr ""
+msgstr "Bir dosya seçin"
 
 #: ../bin/src/ui_appearancesettingspage.h:303
 msgid "Select background color:"
@@ -4690,7 +4690,7 @@ msgstr "%1'i \"%2\" olarak ayarla"
 
 #: ../bin/src/ui_transcoderoptionsfdkaac.h:102
 msgid "Set target rate"
-msgstr ""
+msgstr "Hedef oranı belirle"
 
 #: core/commandlineoptions.cpp:167
 msgid "Set the volume to <value> percent"
@@ -4906,7 +4906,7 @@ msgstr "Seçili parçaları atla"
 
 #: ../bin/src/ui_mainwindow.h:787
 msgid "Skip to the next album"
-msgstr ""
+msgstr "Sonraki albüme atla"
 
 #: ui/mainwindow.cpp:1901
 msgid "Skip track"
@@ -5132,7 +5132,7 @@ msgstr "Önerilen etiketler"
 
 #: transcoder/transcoder.cpp:149
 msgid "Suitable element not found"
-msgstr ""
+msgstr "Uygun öğe bulunamadı"
 
 #: ../bin/src/ui_edittagdialog.h:718
 #: ../bin/src/ui_notificationssettingspage.h:454
@@ -5432,7 +5432,7 @@ msgstr "Müzik Dönüştür"
 
 #: ../bin/src/ui_transcodelogdialog.h:106
 msgid "Transcoder Details"
-msgstr ""
+msgstr "Kod Dönüştürücü Ayrıntıları"
 
 #: ../bin/src/ui_transcodersettingspage.h:60
 msgid "Transcoding"
@@ -5450,7 +5450,7 @@ msgstr "Kod çevrimi seçenekleri"
 #: transcoder/transcoderoptionsdialog.cpp:42
 #, qt-format
 msgid "Transcoding options - %1"
-msgstr ""
+msgstr "Kod dönüştürme seçenekleri -%1"
 
 #: core/song.cpp:451
 msgid "TrueAudio"
@@ -5474,7 +5474,7 @@ msgstr "URL"
 
 #: ../bin/src/ui_addstreamdialog.h:128
 msgid "URL of its Logo:"
-msgstr ""
+msgstr "Logosunun URL'si:"
 
 #: core/commandlineoptions.cpp:159
 msgid "URL(s)"
@@ -5749,7 +5749,7 @@ msgid ""
 "Warning: This compression level is outside of the streamable subset. This "
 "means that a decoder may not be able to start playing it mid-stream. It may "
 "also affect the performance of hardware decoders."
-msgstr ""
+msgstr "Uyarı: Bu sıkıştırma düzeyi, akışa uygun alt kümenin dışında. Bu, bir kod çözücünün onu akış ortasında oynatmaya başlayamayabileceği anlamına gelir. Ayrıca donanım kod çözücülerinin performansını da etkileyebilir."
 
 #: core/song.cpp:447 transcoder/transcoder.cpp:298
 msgid "Wav"
@@ -5940,7 +5940,7 @@ msgid ""
 "You can find <a href=\"%1\">here on GitHub</a> the new cross platform "
 "remote.<br/>It is available on <b>Linux</b>, <b>MacOS</b> and "
 "<b>Windows</b><br/>"
-msgstr ""
+msgstr "Burada yeni çapraz platform uzaktan kumandasını <a href=\"%1\">GitHub'da</a> bulabilirsiniz.<br/> <b>Linux</b>, <b>MacOS</b> ve <b>Windows'ta</b> mevcuttur <br/>"
 
 #: internet/magnatune/magnatunesettingspage.cpp:59
 msgid ""
@@ -6072,7 +6072,7 @@ msgstr "bpm"
 msgid ""
 "coma separated list of the allowed extensions that will be visible from the "
 "network remote (ex: m3u,mp3,flac,ogg,wav)"
-msgstr ""
+msgstr "Uzaktan ağdan görülebilecek izin verilen uzantıların virgülle ayrılmış listesi (ör: m3u,mp3,flac,ogg,wav)"
 
 #: smartplaylists/searchterm.cpp:249
 msgid "contains"
@@ -6080,7 +6080,7 @@ msgstr "içerir"
 
 #: ../bin/src/ui_networkremotesettingspage.h:382
 msgid "desktop_remote"
-msgstr ""
+msgstr "desktop_remote"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:221
 #: ../bin/src/ui_transcoderoptionsvorbis.h:206
@@ -6190,7 +6190,7 @@ msgstr "seçenekler"
 #: ../bin/src/ui_networkremotesettingspage.h:384
 #: ../bin/src/ui_networkremotesettingspage.h:386
 msgid "or scan the QR code: "
-msgstr ""
+msgstr "veya QR kodunu tarayın:"
 
 #: widgets/didyoumean.cpp:56
 msgid "press enter"
