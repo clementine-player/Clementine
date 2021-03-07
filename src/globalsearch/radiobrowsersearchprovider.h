@@ -1,6 +1,5 @@
-
 /* This file is part of Clementine.
-   Copyright 2011, David Sansome <me@davidsansome.com>
+   Copyright 2021, Fabio Bas <ctrlaltca@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -20,23 +19,24 @@
 #define RADIOBROWSERSEARCHPROVIDER_H
 
 #include "internet/radiobrowser/radiobrowserservice.h"
-#include "simplesearchprovider.h"
+#include "searchprovider.h"
 
-class RadioBrowserSearchProvider : public SimpleSearchProvider {
+class RadioBrowserSearchProvider : public SearchProvider {
+  Q_OBJECT
+
  public:
-  RadioBrowserSearchProvider(RadioBrowserServiceBase* service,
-                                Application* app, QObject* parent);
-  // SearchProvider
+  RadioBrowserSearchProvider(Application* app, RadioBrowserService* service,
+                             QObject* parent = nullptr);
+  void SearchAsync(int id, const QString& query) override;
+  //  void ShowConfig() override;
   InternetService* internet_service() override { return service_; }
 
-  void LoadArtAsync(int id, const Result& result) override;
-
- protected:
-  void RecreateItems() override;
+ public slots:
+  void SearchFinishedSlot(int search_id,
+                          RadioBrowserService::StreamList streams);
 
  private:
-  RadioBrowserServiceBase* service_;
-  QImage icon_;
+  RadioBrowserService* service_;
 };
 
 #endif  // RADIOBROWSERSEARCHPROVIDER_H
