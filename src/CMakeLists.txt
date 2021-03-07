@@ -193,7 +193,6 @@ set(SOURCES
   internet/intergalacticfm/intergalacticfmservice.cpp
   internet/intergalacticfm/intergalacticfmurlhandler.cpp
   internet/radiobrowser/radiobrowserservice.cpp
-  internet/radiobrowser/radiobrowserurlhandler.cpp
   internet/subsonic/subsonicservice.cpp
   internet/subsonic/subsonicsettingspage.cpp
   internet/subsonic/subsonicurlhandler.cpp
@@ -478,6 +477,7 @@ set(HEADERS
   globalsearch/searchprovider.h
   globalsearch/simplesearchprovider.h
   globalsearch/suggestionwidget.h
+  globalsearch/radiobrowsersearchprovider.h
 
   internet/core/cloudfileservice.h
   internet/digitally/digitallyimportedclient.h
@@ -510,7 +510,6 @@ set(HEADERS
   internet/intergalacticfm/intergalacticfmservice.h
   internet/intergalacticfm/intergalacticfmurlhandler.h
   internet/radiobrowser/radiobrowserservice.h
-  internet/radiobrowser/radiobrowserurlhandler.h
   internet/subsonic/subsonicservice.h
   internet/subsonic/subsonicsettingspage.h
   internet/subsonic/subsonicurlhandler.h

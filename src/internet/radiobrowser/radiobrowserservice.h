@@ -1,7 +1,5 @@
 /* This file is part of Clementine.
-   Copyright 2010-2013, David Sansome <me@davidsansome.com>
-   Copyright 2010, 2014, John Maguire <john.maguire@gmail.com>
-   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
+   Copyright 2021, Fabio Bas <ctrlaltca@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -23,6 +21,7 @@
 #include <QJsonObject>
 
 #include "core/cachedlist.h"
+#include "internet/core/internetmodel.h"
 #include "internet/core/internetservice.h"
 
 class RadioBrowserUrlHandler;
@@ -31,87 +30,103 @@ class QNetworkAccessManager;
 class QNetworkReply;
 class QMenu;
 
-class RadioBrowserServiceBase : public InternetService {
+class RadioBrowserService : public InternetService {
   Q_OBJECT
 
  public:
-  RadioBrowserServiceBase(Application* app, InternetModel* parent,
-                             const QString& name, const QUrl& channel_list_url,
-                             const QUrl& homepage_url,
-                             const QUrl& donate_page_url, const QIcon& icon);
-  ~RadioBrowserServiceBase();
+  RadioBrowserService(Application* app, InternetModel* parent);
+  ~RadioBrowserService();
 
   enum ItemType {
     Type_Stream = 2000,
   };
 
+  enum Type {
+    Type_Category = InternetModel::TypeCount,
+    Type_CategoryItem,
+    Type_Top100,
+  };
+
+  enum Role {
+    Role_ListUrl = InternetModel::RoleCount,
+    Role_ItemsUrl,
+    Role_StationUuid,
+  };
+
   struct Stream {
     QString name_;
     QUrl url_;
+    QString uuid_;
 
     Song ToSong(const QString& prefix) const;
   };
+
+  struct Branch {
+    QString name;
+    QString listUrl;
+    QString itemsUrl;
+    Type type;
+  };
+
+  static QList<Branch> BranchList;
+  static QString SearchUrl;
+  static QString PlayClickUrl;
+
   typedef QList<Stream> StreamList;
 
-  static const int kStreamsCacheDurationSecs;
+  static const char* kServiceName;
 
-  const QString& url_scheme() const { return url_scheme_; }
   const QIcon& icon() const { return icon_; }
 
   QStandardItem* CreateRootItem();
-  void LazyPopulate(QStandardItem* item);
   void ShowContextMenu(const QPoint& global_pos);
 
   PlaylistItem::Options playlistitem_options() const;
-  QNetworkAccessManager* network() const { return network_; }
 
   void ReloadSettings();
-
-  bool IsStreamListStale() const { return streams_.IsStale(); }
-  StreamList Streams();
+  void Search(int search_id, const QString& query, const int limit);
+  void ItemNowPlaying(QStandardItem* item) override;
 
  signals:
-  void StreamsChanged();
+  void SearchFinished(int search_id,
+                      RadioBrowserService::StreamList streams);
 
  private slots:
-  void ForceRefreshStreams();
-  void RefreshStreams();
-  void RefreshStreamsFinished(QNetworkReply* reply, int task_id);
+  void LazyPopulate(QStandardItem* item);
+
+  void RefreshRootItem();
+  void RefreshCategory(QStandardItem* item);
+  void RefreshCategoryItem(QStandardItem* item);
+  void RefreshTop100(QStandardItem* item);
+
+  void RefreshCategoryFinished(QNetworkReply* reply, int task_id,
+                               QStandardItem* item);
+  void RefreshStreamsFinished(QNetworkReply* reply, int task_id,
+                              QStandardItem* item);
+  void SearchFinishedInternal(QNetworkReply* reply, int task_id, int search_id);
 
   void Homepage();
-  void Donate();
 
  private:
   void ReadStation(QJsonObject& value, StreamList* ret);
-  void PopulateStreams();
+  void PopulateCategory(QStandardItem* parentItem, QStringList& elements);
+  void PopulateStreams(QStandardItem* parentItem, StreamList& streams);
 
  private:
-  const QString url_scheme_;
-  RadioBrowserUrlHandler* url_handler_;
-
   QStandardItem* root_;
   QMenu* context_menu_;
 
   QNetworkAccessManager* network_;
 
-  CachedList<Stream> streams_;
-
   const QString name_;
-  const QUrl channel_list_url_;
+  const QString main_server_url_;
   const QUrl homepage_url_;
-  const QUrl donate_page_url_;
   const QIcon icon_;
-};
-
-class RadioBrowserService : public RadioBrowserServiceBase {
- public:
-  RadioBrowserService(Application* app, InternetModel* parent);
 };
 
 QDataStream& operator<<(QDataStream& out,
                         const RadioBrowserService::Stream& stream);
-QDataStream& operator>>(QDataStream& in,
-                        RadioBrowserService::Stream& stream);
+QDataStream& operator>>(QDataStream& in, RadioBrowserService::Stream& stream);
 Q_DECLARE_METATYPE(RadioBrowserService::Stream)
 
 #endif  // INTERNET_RADIOBROWSER_RADIOBROWSERSERVICE_H_

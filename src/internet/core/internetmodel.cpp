@@ -332,6 +332,11 @@ QMimeData* InternetModel::mimeData(const QModelIndexList& indexes) const {
 
   if (urls.isEmpty()) return nullptr;
 
+  for (const QModelIndex& index : new_indexes) {
+    InternetModel::ServiceForIndex(index)
+        ->ItemNowPlaying(itemFromIndex(index));
+  }
+
   InternetMimeData* data = new InternetMimeData(this);
   data->setUrls(urls);
   data->indexes = new_indexes;

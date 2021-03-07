@@ -1,9 +1,5 @@
 /* This file is part of Clementine.
-   Copyright 2010-2013, David Sansome <me@davidsansome.com>
-   Copyright 2011, Tyler Rhodes <tyler.s.rhodes@gmail.com>
-   Copyright 2011, Paweł Bara <keirangtp@gmail.com>
-   Copyright 2012, 2014, John Maguire <john.maguire@gmail.com>
-   Copyright 2014, Krzysztof Sobiecki <sobkas@gmail.com>
+   Copyright 2021, Fabio Bas <ctrlaltca@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -39,63 +35,140 @@
 #include "core/utilities.h"
 #include "globalsearch/globalsearch.h"
 #include "globalsearch/radiobrowsersearchprovider.h"
-#include "radiobrowserurlhandler.h"
-#include "internet/core/internetmodel.h"
 #include "ui/iconloader.h"
 
-const int RadioBrowserServiceBase::kStreamsCacheDurationSecs =
-    60 * 60 * 24 * 28;  // 4 weeks
-
-bool operator<(const RadioBrowserServiceBase::Stream& a,
-               const RadioBrowserServiceBase::Stream& b) {
+bool operator<(const RadioBrowserService::Stream& a,
+               const RadioBrowserService::Stream& b) {
   return a.name_.compare(b.name_, Qt::CaseInsensitive) < 0;
 }
 
-RadioBrowserServiceBase::RadioBrowserServiceBase(
-    Application* app, InternetModel* parent, const QString& name,
-    const QUrl& channel_list_url, const QUrl& homepage_url,
-    const QUrl& donate_page_url, const QIcon& icon)
-    : InternetService(name, app, parent, parent),
-      url_scheme_(name.toLower().remove(' ')),
-      url_handler_(new RadioBrowserUrlHandler(app, this, this)),
+const char* RadioBrowserService::kServiceName = "Radio-Browser.info";
+QString RadioBrowserService::SearchUrl =
+    "%1/json/stations/byname/%2?limit=%3";
+QString RadioBrowserService::PlayClickUrl = "%1/json/url/%2";
+
+QList<RadioBrowserService::Branch> RadioBrowserService::BranchList = {
+    {"By Country", "%1/json/countries",
+     "%1/json/stations/bycountryexact/%2?hidebroken=true", Type_Category},
+    {"By Language", "%1/json/languages",
+     "%1/json/stations/bylanguageexact/%2?hidebroken=true", Type_Category},
+    {"By Tag", "%1/json/tags", "%1/json/stations/bytagexact/%2?hidebroken=true",
+     Type_Category},
+    {"By Codec", "%1/json/codecs",
+     "%1/json/stations/bycodecexact/%2?hidebroken=true", Type_Category},
+    {"Top 100 Clicked", "",
+     "%1/json/stations/search?order=clickcount&reverse=true&limit=100",
+     Type_Top100},
+    {"Top 100 Voted", "",
+     "%1/json/stations/search?order=votes&reverse=true&limit=100", Type_Top100},
+    {"Top 100 Trending", "",
+     "%1/json/stations/search?order=clicktrend&reverse=true&limit=100",
+     Type_Top100}};
+
+RadioBrowserService::RadioBrowserService(Application* app,
+                                         InternetModel* parent)
+    : InternetService(kServiceName, app, parent, parent),
       root_(nullptr),
       context_menu_(nullptr),
       network_(new NetworkAccessManager(this)),
-      streams_(name, "streams", kStreamsCacheDurationSecs),
-      name_(name),
-      channel_list_url_(channel_list_url),
-      homepage_url_(homepage_url),
-      donate_page_url_(donate_page_url),
-      icon_(icon) {
+      name_(kServiceName),
+      main_server_url_(QStringLiteral("http://all.api.radio-browser.info")),
+      homepage_url_(QUrl("https://www.radio-browser.info")),
+      icon_(IconLoader::Load("radiobrowser", IconLoader::Provider)) {
   ReloadSettings();
-
-  app_->player()->RegisterUrlHandler(url_handler_);
   app_->global_search()->AddProvider(
-      new RadioBrowserSearchProvider(this, app_, this));
+      new RadioBrowserSearchProvider(app_, this, this));
 }
 
-RadioBrowserServiceBase::~RadioBrowserServiceBase() {
-  delete context_menu_;
-}
+RadioBrowserService::~RadioBrowserService() { delete context_menu_; }
 
-QStandardItem* RadioBrowserServiceBase::CreateRootItem() {
+QStandardItem* RadioBrowserService::CreateRootItem() {
   root_ = new QStandardItem(icon_, name_);
   root_->setData(true, InternetModel::Role_CanLazyLoad);
   return root_;
 }
 
-void RadioBrowserServiceBase::LazyPopulate(QStandardItem* item) {
+void RadioBrowserService::LazyPopulate(QStandardItem* item) {
   switch (item->data(InternetModel::Role_Type).toInt()) {
     case InternetModel::Type_Service:
-      RefreshStreams();
+      RefreshRootItem();
       break;
-
+    case RadioBrowserService::Type_Category:
+      RefreshCategory(item);
+      break;
+    case RadioBrowserService::Type_CategoryItem:
+      RefreshCategoryItem(item);
+      break;
+    case RadioBrowserService::Type_Top100:
+      RefreshTop100(item);
+      break;
     default:
       break;
   }
 }
 
-void RadioBrowserServiceBase::ShowContextMenu(const QPoint& global_pos) {
+void RadioBrowserService::RefreshRootItem() {
+  if (root_->hasChildren()) root_->removeRows(0, root_->rowCount());
+  for (auto branch : RadioBrowserService::BranchList) {
+    QStandardItem* item = new QStandardItem(
+        IconLoader::Load("icon_radio", IconLoader::Lastfm), QString());
+    item->setText(branch.name);
+    item->setData(branch.type, InternetModel::Role_Type);
+    item->setData(branch.listUrl, RadioBrowserService::Role_ListUrl);
+    item->setData(branch.itemsUrl, RadioBrowserService::Role_ItemsUrl);
+    item->setData(true, InternetModel::Role_CanLazyLoad);
+    root_->appendRow(item);
+  }
+}
+
+void RadioBrowserService::RefreshCategory(QStandardItem* item) {
+  QString determinedUrl = item->data(RadioBrowserService::Role_ListUrl)
+                              .toString()
+                              .arg(main_server_url_);
+  QUrl url(determinedUrl);
+
+  QNetworkReply* reply = network_->get(QNetworkRequest(url));
+  int task_id = app_->task_manager()->StartTask(tr("Getting channels"));
+
+  NewClosure(reply, SIGNAL(finished()), this,
+             SLOT(RefreshCategoryFinished(QNetworkReply*, int, QStandardItem*)),
+             reply, task_id, item);
+}
+
+void RadioBrowserService::RefreshCategoryItem(QStandardItem* item) {
+  QStandardItem* parent = item->parent();
+  QString determinedUrl = parent->data(RadioBrowserService::Role_ItemsUrl)
+                              .toString()
+                              .arg(main_server_url_, item->text());
+  QUrl url(determinedUrl);
+
+  QNetworkReply* reply = network_->get(QNetworkRequest(url));
+  int task_id = app_->task_manager()->StartTask(tr("Getting channels"));
+
+  NewClosure(reply, SIGNAL(finished()), this,
+             SLOT(RefreshStreamsFinished(QNetworkReply*, int, QStandardItem*)),
+             reply, task_id, item);
+}
+
+void RadioBrowserService::RefreshTop100(QStandardItem* item) {
+  QString determinedUrl = item->data(RadioBrowserService::Role_ItemsUrl)
+                              .toString()
+                              .arg(main_server_url_);
+  QUrl url(determinedUrl);
+
+  QNetworkReply* reply = network_->get(QNetworkRequest(url));
+  int task_id = app_->task_manager()->StartTask(tr("Getting channels"));
+
+  NewClosure(reply, SIGNAL(finished()), this,
+             SLOT(RefreshStreamsFinished(QNetworkReply*, int, QStandardItem*)),
+             reply, task_id, item);
+}
+
+void RadioBrowserService::ShowContextMenu(const QPoint& global_pos) {
+  if (!model()->current_index().isValid()) return;
+  QStandardItem* item = model()->itemFromIndex(model()->current_index());
+  if (!item) return;
+
   if (!context_menu_) {
     context_menu_ = new QMenu;
     context_menu_->addActions(GetPlaylistActions());
@@ -103,48 +176,40 @@ void RadioBrowserServiceBase::ShowContextMenu(const QPoint& global_pos) {
                              tr("Open %1 in browser").arg(homepage_url_.host()),
                              this, SLOT(Homepage()));
 
-    if (!donate_page_url_.isEmpty()) {
-      context_menu_->addAction(IconLoader::Load("download", IconLoader::Base),
-                               tr("Donate"), this, SLOT(Donate()));
-    }
-
     context_menu_->addAction(IconLoader::Load("view-refresh", IconLoader::Base),
                              tr("Refresh channels"), this,
-                             SLOT(ForceRefreshStreams()));
+                             SLOT(LazyPopulate(item)));
   }
 
   context_menu_->popup(global_pos);
 }
 
-void RadioBrowserServiceBase::ForceRefreshStreams() {
-  QNetworkReply* reply = network_->get(QNetworkRequest(channel_list_url_));
-  int task_id = app_->task_manager()->StartTask(tr("Getting channels"));
-
-  NewClosure(reply, SIGNAL(finished()), this,
-             SLOT(RefreshStreamsFinished(QNetworkReply*, int)), reply, task_id);
-}
-
-void RadioBrowserServiceBase::RefreshStreamsFinished(QNetworkReply* reply,
-                                                        int task_id) {
+void RadioBrowserService::RefreshCategoryFinished(QNetworkReply* reply,
+                                                      int task_id,
+                                                      QStandardItem* item) {
   app_->task_manager()->SetTaskFinished(task_id);
   reply->deleteLater();
+  QJsonDocument document = ParseJsonReply(reply);
 
-  if (reply->error() != QNetworkReply::NoError) {
-    app_->AddError(
-        tr("Failed to get channel list:\n%1").arg(reply->errorString()));
-    return;
+  QStringList list;
+  QJsonArray contents = document.array();
+  qLog(Debug) << "RadioBrowser station list found:" << contents.size();
+  for (const QJsonValue& c : contents) {
+    QJsonObject item = c.toObject();
+    list << item["name"].toString();
   }
+
+  PopulateCategory(item, list);
+}
+
+void RadioBrowserService::RefreshStreamsFinished(QNetworkReply* reply,
+                                                     int task_id,
+                                                     QStandardItem* item) {
+  app_->task_manager()->SetTaskFinished(task_id);
+  reply->deleteLater();
+  QJsonDocument document = ParseJsonReply(reply);
 
   StreamList list;
-
-  QJsonParseError error;
-  QJsonDocument document = QJsonDocument::fromJson(reply->readAll(), &error);
-  if (error.error != QJsonParseError::NoError) {
-    app_->AddError(
-        tr("Failed to parse channel list:\n%1").arg(error.errorString()));
-    return;
-  }
-
   QJsonArray contents = document.array();
   qLog(Debug) << "RadioBrowser station list found:" << contents.size();
   for (const QJsonValue& c : contents) {
@@ -152,25 +217,19 @@ void RadioBrowserServiceBase::RefreshStreamsFinished(QNetworkReply* reply,
     ReadStation(item, &list);
   }
 
-  streams_.Update(list);
-  streams_.Sort();
-
-  // Only update the item's children if it's already been populated
-  if (!root_->data(InternetModel::Role_CanLazyLoad).toBool()) PopulateStreams();
-
-  emit StreamsChanged();
+  PopulateStreams(item, list);
 }
 
-void RadioBrowserServiceBase::ReadStation(QJsonObject& item,
-                                             StreamList* ret) {
+void RadioBrowserService::ReadStation(QJsonObject& item, StreamList* ret) {
   Stream stream;
   stream.name_ = item["name"].toString();
+  stream.uuid_ = item["stationuuid"].toString();
   QUrl url(item["url"].toString());
   stream.url_ = url;
   ret->append(stream);
 }
 
-Song RadioBrowserServiceBase::Stream::ToSong(const QString& prefix) const {
+Song RadioBrowserService::Stream::ToSong(const QString& prefix) const {
   QString song_title = name_.trimmed();
   if (!song_title.startsWith(prefix)) {
     song_title = prefix + " " + song_title;
@@ -184,38 +243,36 @@ Song RadioBrowserServiceBase::Stream::ToSong(const QString& prefix) const {
   return ret;
 }
 
-void RadioBrowserServiceBase::Homepage() {
+void RadioBrowserService::Homepage() {
   QDesktopServices::openUrl(homepage_url_);
 }
 
-void RadioBrowserServiceBase::Donate() {
-  QDesktopServices::openUrl(donate_page_url_);
+PlaylistItem::Options RadioBrowserService::playlistitem_options() const {
+  return PlaylistItem::PauseDisabled | PlaylistItem::SeekDisabled;
 }
 
-PlaylistItem::Options RadioBrowserServiceBase::playlistitem_options() const {
-  return PlaylistItem::PauseDisabled;
-}
+void RadioBrowserService::PopulateCategory(QStandardItem* parentItem,
+                                               QStringList& elements) {
+  if (parentItem->hasChildren())
+    parentItem->removeRows(0, parentItem->rowCount());
 
-RadioBrowserServiceBase::StreamList RadioBrowserServiceBase::Streams() {
-  if (IsStreamListStale()) {
-    metaObject()->invokeMethod(this, "ForceRefreshStreams",
-                               Qt::QueuedConnection);
+  for (const QString& element : elements) {
+    QStandardItem* item = new QStandardItem(
+        IconLoader::Load("icon_radio", IconLoader::Lastfm), QString());
+    item->setText(element);
+    item->setData(RadioBrowserService::Type_CategoryItem,
+                  InternetModel::Role_Type);
+    item->setData(true, InternetModel::Role_CanLazyLoad);
+    parentItem->appendRow(item);
   }
-  return streams_;
 }
 
-void RadioBrowserServiceBase::RefreshStreams() {
-  if (IsStreamListStale()) {
-    ForceRefreshStreams();
-    return;
-  }
-  PopulateStreams();
-}
+void RadioBrowserService::PopulateStreams(QStandardItem* parentItem,
+                                              StreamList& streams) {
+  if (parentItem->hasChildren())
+    parentItem->removeRows(0, parentItem->rowCount());
 
-void RadioBrowserServiceBase::PopulateStreams() {
-  if (root_->hasChildren()) root_->removeRows(0, root_->rowCount());
-
-  for (const Stream& stream : streams_) {
+  for (const Stream& stream : streams) {
     QStandardItem* item = new QStandardItem(
         IconLoader::Load("icon_radio", IconLoader::Lastfm), QString());
     item->setText(stream.name_);
@@ -223,32 +280,73 @@ void RadioBrowserServiceBase::PopulateStreams() {
                   InternetModel::Role_SongMetadata);
     item->setData(InternetModel::PlayBehaviour_SingleItem,
                   InternetModel::Role_PlayBehaviour);
+    item->setData(stream.uuid_,
+                  RadioBrowserService::Role_StationUuid);
 
-    root_->appendRow(item);
+    parentItem->appendRow(item);
   }
 }
 
 QDataStream& operator<<(QDataStream& out,
-                        const RadioBrowserServiceBase::Stream& stream) {
+                        const RadioBrowserService::Stream& stream) {
   out << stream.name_ << stream.url_;
   return out;
 }
 
 QDataStream& operator>>(QDataStream& in,
-                        RadioBrowserServiceBase::Stream& stream) {
+                        RadioBrowserService::Stream& stream) {
   in >> stream.name_ >> stream.url_;
   return in;
 }
 
-void RadioBrowserServiceBase::ReloadSettings() {
-  streams_.Load();
-  streams_.Sort();
+void RadioBrowserService::ReloadSettings() {}
+
+void RadioBrowserService::Search(int search_id, const QString& query,
+                                     const int limit) {
+  QString determinedUrl =
+      RadioBrowserService::SearchUrl.arg(main_server_url_, query)
+          .arg(limit);
+  QUrl url(determinedUrl);
+
+  QNetworkReply* reply = network_->get(QNetworkRequest(url));
+  int task_id = app_->task_manager()->StartTask(tr("Getting channels"));
+
+  NewClosure(reply, SIGNAL(finished()), this,
+             SLOT(SearchFinishedInternal(QNetworkReply*, int, int)), reply,
+             task_id, search_id);
 }
 
-RadioBrowserService::RadioBrowserService(Application* app,
-                                               InternetModel* parent)
-    : RadioBrowserServiceBase(
-          app, parent, "Radio-Browser.info",
-          QUrl("http://all.api.radio-browser.info/json/stations"),
-          QUrl("https://www.radio-browser.info"), QUrl(),
-          IconLoader::Load("radiobrowser", IconLoader::Provider)) {}
+void RadioBrowserService::SearchFinishedInternal(QNetworkReply* reply,
+                                                     int task_id,
+                                                     int search_id) {
+  app_->task_manager()->SetTaskFinished(task_id);
+  reply->deleteLater();
+  QJsonDocument document = ParseJsonReply(reply);
+
+  StreamList list;
+  QJsonArray contents = document.array();
+  qLog(Debug) << "RadioBrowser station list found:" << contents.size();
+  for (const QJsonValue& c : contents) {
+    QJsonObject item = c.toObject();
+    ReadStation(item, &list);
+  }
+
+  emit SearchFinished(search_id, list);
+}
+
+void RadioBrowserService::ItemNowPlaying(QStandardItem* item) {
+  QString station_uuid = item->data(RadioBrowserService::Role_StationUuid).toString();
+  if(station_uuid.isEmpty())
+    return;
+
+  QString determinedUrl =
+      RadioBrowserService::PlayClickUrl.arg(main_server_url_, station_uuid);
+  QUrl url(determinedUrl);
+
+  qLog(Debug) << "RadioBrowser station played:" << determinedUrl;
+  QNetworkReply* reply = network_->get(QNetworkRequest(url));
+  connect(reply, &QNetworkReply::finished, [this, reply]()
+  {
+    reply->deleteLater();
+  });
+}

@@ -1,5 +1,5 @@
 /* This file is part of Clementine.
-   Copyright 2011, David Sansome <me@davidsansome.com>
+   Copyright 2021, Fabio Bas <ctrlaltca@gmail.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -17,36 +17,50 @@
 
 #include "radiobrowsersearchprovider.h"
 
+#include "ui/iconloader.h"
+
+namespace {
+const int kSearchStationLimit = 10;
+}  // namespace
+
 RadioBrowserSearchProvider::RadioBrowserSearchProvider(
-    RadioBrowserServiceBase* service, Application* app, QObject* parent)
-    : SimpleSearchProvider(app, parent), service_(service) {
-  Init(service->name(), service->url_scheme(), service->icon(),
-       CanGiveSuggestions);
-  set_result_limit(3);
-  set_max_suggestion_count(3);
-  icon_ = ScaleAndPad(
-      service->icon().pixmap(service->icon().availableSizes()[0]).toImage());
-
-  connect(service, SIGNAL(StreamsChanged()), SLOT(MaybeRecreateItems()));
-
-  // Load the stream list on startup only if it doesn't involve going to update
-  // info from the server.
-  if (!service_->IsStreamListStale()) RecreateItems();
+    Application* app, RadioBrowserService* service, QObject* parent)
+    : SearchProvider(app, parent), service_(service) {
+  Init(RadioBrowserService::kServiceName, "radiobrowser",
+       IconLoader::Load("radiobrowser", IconLoader::Provider),
+       WantsDelayedQueries);
+  connect(service_,
+          SIGNAL(SearchFinished(int, RadioBrowserService::StreamList)),
+          SLOT(SearchFinishedSlot(int, RadioBrowserService::StreamList)));
 }
 
-void RadioBrowserSearchProvider::LoadArtAsync(int id, const Result& result) {
-  emit ArtLoaded(id, icon_);
+void RadioBrowserSearchProvider::SearchAsync(int id, const QString& query) {
+  PendingState state;
+  state.orig_id_ = id;
+  state.tokens_ = TokenizeQuery(query);
+
+  const QString query_string = state.tokens_.join(" ");
+  service_->Search(id, query_string, kSearchStationLimit);
 }
 
-void RadioBrowserSearchProvider::RecreateItems() {
-  QList<Item> items;
+void RadioBrowserSearchProvider::SearchFinishedSlot(
+    int search_id, RadioBrowserService::StreamList streams) {
+  ResultList ret;
 
-  for (const RadioBrowserService::Stream& stream : service_->Streams()) {
-    Item item;
-    item.metadata_ = stream.ToSong(service_->name());
-    item.keyword_ = stream.name_;
-    items << item;
+  for (auto stream : streams) {
+    Result result(this);
+    result.group_automatically_ = false;
+    result.metadata_ = stream.ToSong(QString());
+    ret << result;
   }
 
-  SetItems(items);
+  emit ResultsAvailable(search_id, ret);
+  emit SearchFinished(search_id);
 }
+/*
+void RadioBrowserSearchProvider::ShowConfig() {
+  if (service_) {
+    return service_->ShowConfig();
+  }
+}
+*/
