@@ -366,14 +366,20 @@ if(HAVE_VISUALISATIONS)
   endif(USE_SYSTEM_PROJECTM)
 endif(HAVE_VISUALISATIONS)
 
-
-# Build our copy of QSqlLiteDriver.
-# We do this because we can't guarantee that the driver shipped with Qt exposes the
-# raw sqlite3_ functions required for FTS support. This way we know that those symbols
-# exist at compile-time and that our code links to the same sqlite library as the
-# Qt driver.
-add_subdirectory(3rdparty/qsqlite)
-include_directories("3rdparty/qsqlite")
+# In qt5, FTS3 is enabled by default.
+# See: https://github.com/qt/qtbase/commit/ee69c935c0f7b4ad3747e369fc18373d31e2521b
+option(USE_SYSTEM_SQLITE_DRIVER "Use Qt's sqlite driver" ON)
+if (USE_SYSTEM_SQLITE_DRIVER)
+  find_library(SQLITE_LIBRARIES sqlite3 REQUIRED)
+else (USE_SYSTEM_SQLITE_DRIVER)
+  # Build our copy of QSqlLiteDriver.
+  # We do this because we can't guarantee that the driver shipped with Qt exposes the
+  # raw sqlite3_ functions required for FTS support. This way we know that those symbols
+  # exist at compile-time and that our code links to the same sqlite library as the
+  # Qt driver.
+  add_subdirectory(3rdparty/qsqlite)
+  include_directories("3rdparty/qsqlite")
+endif (USE_SYSTEM_SQLITE_DRIVER)
 
 # When/if upstream accepts our patches then these options can be used to link
 # to system installed qtsingleapplication instead.

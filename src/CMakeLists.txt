@@ -1386,8 +1386,11 @@ else (APPLE)
   target_link_libraries(clementine_lib ${QXT_LIBRARIES})
 endif (APPLE)
 
-set(3RDPARTY_SQLITE_LIBRARY qsqlite)
-target_link_libraries(clementine_lib qsqlite)
+if (NOT USE_SYSTEM_SQLITE_DRIVER)
+  set(USE_QSQLITE_PLUGIN ON)
+  set(3RDPARTY_SQLITE_LIBRARY qsqlite)
+  target_link_libraries(clementine_lib qsqlite)
+endif (NOT USE_SYSTEM_SQLITE_DRIVER)
 
 if (WIN32)
   target_link_libraries(clementine_lib
