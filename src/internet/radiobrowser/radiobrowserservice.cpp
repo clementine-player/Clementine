@@ -226,6 +226,8 @@ void RadioBrowserService::ReadStation(QJsonObject& item, StreamList* ret) {
   stream.uuid_ = item["stationuuid"].toString();
   QUrl url(item["url"].toString());
   stream.url_ = url;
+  QUrl favicon(item["favicon"].toString());
+  stream.favicon_ = favicon;
   ret->append(stream);
 }
 
@@ -240,6 +242,7 @@ Song RadioBrowserService::Stream::ToSong(const QString& prefix) const {
   ret.set_title(song_title);
   ret.set_artist(name_);
   ret.set_url(url_);
+  ret.set_art_automatic(favicon_.toString());
   return ret;
 }
 

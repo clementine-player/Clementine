@@ -57,6 +57,7 @@ class RadioBrowserService : public InternetService {
     QString name_;
     QUrl url_;
     QString uuid_;
+    QUrl favicon_;
 
     Song ToSong(const QString& prefix) const;
   };
