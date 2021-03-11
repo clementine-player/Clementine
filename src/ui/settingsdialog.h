@@ -86,6 +86,7 @@ class SettingsDialog : public QDialog {
     Page_Seafile,
     Page_InternetShow,
     Page_AmazonCloudDrive,
+    Page_RadioBrowser,
   };
 
   enum Role { Role_IsSeparator = Qt::UserRole };

@@ -35,6 +35,7 @@
 #include "internet/digitally/digitallyimportedsettingspage.h"
 #include "internet/magnatune/magnatunesettingspage.h"
 #include "internet/podcasts/podcastsettingspage.h"
+#include "internet/radiobrowser/radiobrowsersettingspage.h"
 #include "internet/subsonic/subsonicsettingspage.h"
 #include "library/librarysettingspage.h"
 #include "mainwindow.h"
@@ -197,6 +198,7 @@ SettingsDialog::SettingsDialog(Application* app, BackgroundStreams* streams,
           providers);
   AddPage(Page_Subsonic, new SubsonicSettingsPage(this), providers);
   AddPage(Page_Podcasts, new PodcastSettingsPage(this), providers);
+  AddPage(Page_RadioBrowser, new RadioBrowserSettingsPage(this), providers);
 
   providers->sortChildren(0, Qt::AscendingOrder);
 
