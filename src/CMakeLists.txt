@@ -193,6 +193,7 @@ set(SOURCES
   internet/intergalacticfm/intergalacticfmservice.cpp
   internet/intergalacticfm/intergalacticfmurlhandler.cpp
   internet/radiobrowser/radiobrowserservice.cpp
+  internet/radiobrowser/radiobrowsersettingspage.cpp
   internet/subsonic/subsonicservice.cpp
   internet/subsonic/subsonicsettingspage.cpp
   internet/subsonic/subsonicurlhandler.cpp
@@ -510,6 +511,7 @@ set(HEADERS
   internet/intergalacticfm/intergalacticfmservice.h
   internet/intergalacticfm/intergalacticfmurlhandler.h
   internet/radiobrowser/radiobrowserservice.h
+  internet/radiobrowser/radiobrowsersettingspage.h
   internet/subsonic/subsonicservice.h
   internet/subsonic/subsonicsettingspage.h
   internet/subsonic/subsonicurlhandler.h
@@ -718,6 +720,7 @@ set(UI
   internet/magnatune/magnatunesettingspage.ui
   internet/core/searchboxwidget.ui
   internet/subsonic/subsonicsettingspage.ui
+  internet/radiobrowser/radiobrowsersettingspage.ui
 
   library/groupbydialog.ui
   library/libraryfilterwidget.ui

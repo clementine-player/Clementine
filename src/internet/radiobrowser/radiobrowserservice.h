@@ -76,6 +76,7 @@ class RadioBrowserService : public InternetService {
   typedef QList<Stream> StreamList;
 
   static const char* kServiceName;
+  static const char* kSettingsGroup;
 
   const QIcon& icon() const { return icon_; }
 
@@ -84,13 +85,14 @@ class RadioBrowserService : public InternetService {
 
   PlaylistItem::Options playlistitem_options() const;
 
-  void ReloadSettings();
   void Search(int search_id, const QString& query, const int limit);
   void ItemNowPlaying(QStandardItem* item) override;
 
  signals:
-  void SearchFinished(int search_id,
-                      RadioBrowserService::StreamList streams);
+  void SearchFinished(int search_id, RadioBrowserService::StreamList streams);
+
+ public slots:
+  void ReloadSettings();
 
  private slots:
   void LazyPopulate(QStandardItem* item);
@@ -107,11 +109,13 @@ class RadioBrowserService : public InternetService {
   void SearchFinishedInternal(QNetworkReply* reply, int task_id, int search_id);
 
   void Homepage();
+  void ShowConfig();
 
  private:
   void ReadStation(QJsonObject& value, StreamList* ret);
   void PopulateCategory(QStandardItem* parentItem, QStringList& elements);
   void PopulateStreams(QStandardItem* parentItem, StreamList& streams);
+  bool EnsureServerConfig();
 
  private:
   QStandardItem* root_;
@@ -120,7 +124,7 @@ class RadioBrowserService : public InternetService {
   QNetworkAccessManager* network_;
 
   const QString name_;
-  const QString main_server_url_;
+  QString main_server_url_;
   const QUrl homepage_url_;
   const QIcon icon_;
 };
