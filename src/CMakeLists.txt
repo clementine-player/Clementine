@@ -194,6 +194,7 @@ set(SOURCES
   internet/intergalacticfm/intergalacticfmurlhandler.cpp
   internet/radiobrowser/radiobrowserservice.cpp
   internet/radiobrowser/radiobrowsersettingspage.cpp
+  internet/radiobrowser/radiobrowserurlhandler.cpp
   internet/subsonic/subsonicservice.cpp
   internet/subsonic/subsonicsettingspage.cpp
   internet/subsonic/subsonicurlhandler.cpp
@@ -512,6 +513,7 @@ set(HEADERS
   internet/intergalacticfm/intergalacticfmurlhandler.h
   internet/radiobrowser/radiobrowserservice.h
   internet/radiobrowser/radiobrowsersettingspage.h
+  internet/radiobrowser/radiobrowserurlhandler.h
   internet/subsonic/subsonicservice.h
   internet/subsonic/subsonicsettingspage.h
   internet/subsonic/subsonicurlhandler.h

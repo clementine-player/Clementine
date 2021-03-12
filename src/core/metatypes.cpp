@@ -99,7 +99,6 @@ void RegisterMetaTypes() {
   qRegisterMetaType<SomaFMService::Stream>("SomaFMService::Stream");
   qRegisterMetaType<IntergalacticFMService::Stream>(
       "IntergalacticFMService::Stream");
-  qRegisterMetaType<RadioBrowserService::Stream>("RadioBrowserService::Stream");
   qRegisterMetaType<SongList>("SongList");
   qRegisterMetaType<Song>("Song");
   qRegisterMetaTypeStreamOperators<DigitallyImportedClient::Channel>(
@@ -110,8 +109,6 @@ void RegisterMetaTypes() {
       "SomaFMService::Stream");
   qRegisterMetaTypeStreamOperators<IntergalacticFMService::Stream>(
       "IntergalacticFMService::Stream");
-  qRegisterMetaTypeStreamOperators<RadioBrowserService::Stream>(
-      "RadioBrowserService::Stream");
   qRegisterMetaType<SubdirectoryList>("SubdirectoryList");
   qRegisterMetaType<Subdirectory>("Subdirectory");
   qRegisterMetaType<QList<QUrl>>("QList<QUrl>");

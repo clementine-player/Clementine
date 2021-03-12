@@ -29,18 +29,12 @@ RadioBrowserSearchProvider::RadioBrowserSearchProvider(
   Init(RadioBrowserService::kServiceName, "radiobrowser",
        IconLoader::Load("radiobrowser", IconLoader::Provider),
        WantsDelayedQueries);
-  connect(service_,
-          SIGNAL(SearchFinished(int, RadioBrowserService::StreamList)),
-          SLOT(SearchFinishedSlot(int, RadioBrowserService::StreamList)));
+  connect(service_, &RadioBrowserService::SearchFinished, this,
+          &RadioBrowserSearchProvider::SearchFinishedSlot);
 }
 
 void RadioBrowserSearchProvider::SearchAsync(int id, const QString& query) {
-  PendingState state;
-  state.orig_id_ = id;
-  state.tokens_ = TokenizeQuery(query);
-
-  const QString query_string = state.tokens_.join(" ");
-  service_->Search(id, query_string, kSearchStationLimit);
+  service_->Search(id, query, kSearchStationLimit);
 }
 
 void RadioBrowserSearchProvider::SearchFinishedSlot(
@@ -57,10 +51,3 @@ void RadioBrowserSearchProvider::SearchFinishedSlot(
   emit ResultsAvailable(search_id, ret);
   emit SearchFinished(search_id);
 }
-/*
-void RadioBrowserSearchProvider::ShowConfig() {
-  if (service_) {
-    return service_->ShowConfig();
-  }
-}
-*/

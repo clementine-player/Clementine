@@ -50,13 +50,11 @@ class RadioBrowserService : public InternetService {
   enum Role {
     Role_ListUrl = InternetModel::RoleCount,
     Role_ItemsUrl,
-    Role_StationUuid,
   };
 
   struct Stream {
     QString name_;
     QUrl url_;
-    QString uuid_;
     QUrl favicon_;
 
     Song ToSong(const QString& prefix) const;
@@ -77,8 +75,11 @@ class RadioBrowserService : public InternetService {
 
   static const char* kServiceName;
   static const char* kSettingsGroup;
+  static const char* kSchemeName;
 
+  const QString& url_scheme() const { return url_scheme_; }
   const QIcon& icon() const { return icon_; }
+  QNetworkAccessManager* network() const { return network_; }
 
   QStandardItem* CreateRootItem();
   void ShowContextMenu(const QPoint& global_pos);
@@ -86,10 +87,11 @@ class RadioBrowserService : public InternetService {
   PlaylistItem::Options playlistitem_options() const;
 
   void Search(int search_id, const QString& query, const int limit);
-  void ItemNowPlaying(QStandardItem* item) override;
+  void ResolveStationUrl(const QUrl& original_url);
 
  signals:
   void SearchFinished(int search_id, RadioBrowserService::StreamList streams);
+  void StationUrlResolved(const QUrl& original_url, const QUrl& url);
 
  public slots:
   void ReloadSettings();
@@ -106,6 +108,8 @@ class RadioBrowserService : public InternetService {
                                QStandardItem* item);
   void RefreshStreamsFinished(QNetworkReply* reply, int task_id,
                               QStandardItem* item);
+  void ResolveStationUrlFinished(QNetworkReply* reply, int task_id,
+                                 const QUrl& original_url);
   void SearchFinishedInternal(QNetworkReply* reply, int task_id, int search_id);
 
   void Homepage();
@@ -124,14 +128,11 @@ class RadioBrowserService : public InternetService {
   QNetworkAccessManager* network_;
 
   const QString name_;
+  const QString url_scheme_;
+  RadioBrowserUrlHandler* url_handler_;
   QString main_server_url_;
   const QUrl homepage_url_;
   const QIcon icon_;
 };
-
-QDataStream& operator<<(QDataStream& out,
-                        const RadioBrowserService::Stream& stream);
-QDataStream& operator>>(QDataStream& in, RadioBrowserService::Stream& stream);
-Q_DECLARE_METATYPE(RadioBrowserService::Stream)
 
 #endif  // INTERNET_RADIOBROWSER_RADIOBROWSERSERVICE_H_
