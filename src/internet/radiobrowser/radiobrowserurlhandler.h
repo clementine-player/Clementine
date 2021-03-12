@@ -15,27 +15,33 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef RADIOBROWSERSEARCHPROVIDER_H
-#define RADIOBROWSERSEARCHPROVIDER_H
+#ifndef INTERNET_RADIOBROWSER_RADIOBROWSERURLHANDLER_H_
+#define INTERNET_RADIOBROWSER_RADIOBROWSERURLHANDLER_H_
 
-#include "internet/radiobrowser/radiobrowserservice.h"
-#include "searchprovider.h"
+#include "core/urlhandler.h"
+#include "ui/iconloader.h"
 
-class RadioBrowserSearchProvider : public SearchProvider {
+class RadioBrowserService;
+class Application;
+
+// RadioBrowser URL handler: radiobrowser://uuid
+class RadioBrowserUrlHandler : public UrlHandler {
   Q_OBJECT
-
  public:
-  RadioBrowserSearchProvider(Application* app, RadioBrowserService* service,
-                             QObject* parent = nullptr);
-  void SearchAsync(int id, const QString& query) override;
-  InternetService* internet_service() override { return service_; }
+  RadioBrowserUrlHandler(Application* app, RadioBrowserService* service,
+                         QObject* parent);
 
- public slots:
-  void SearchFinishedSlot(int search_id,
-                          RadioBrowserService::StreamList streams);
+  QString scheme() const;
+  QIcon icon() const;
+  LoadResult StartLoading(const QUrl& url);
+
+ private slots:
+  void LoadStationFinished(const QUrl& original_url, const QUrl& url);
 
  private:
+  Application* app_;
   RadioBrowserService* service_;
+  int task_id_;
 };
 
-#endif  // RADIOBROWSERSEARCHPROVIDER_H
+#endif  // INTERNET_RADIOBROWSER_RADIOBROWSERURLHANDLER_H_

@@ -27,7 +27,6 @@
 #include <QtDebug>
 
 #include "core/application.h"
-#include "core/closure.h"
 #include "core/logging.h"
 #include "core/network.h"
 #include "core/player.h"
@@ -35,6 +34,7 @@
 #include "core/utilities.h"
 #include "globalsearch/globalsearch.h"
 #include "globalsearch/radiobrowsersearchprovider.h"
+#include "radiobrowserurlhandler.h"
 #include "ui/iconloader.h"
 
 bool operator<(const RadioBrowserService::Stream& a,
@@ -44,6 +44,7 @@ bool operator<(const RadioBrowserService::Stream& a,
 
 const char* RadioBrowserService::kServiceName = "Radio-Browser.info";
 const char* RadioBrowserService::kSettingsGroup = "RadioBrowser";
+const char* RadioBrowserService::kSchemeName = "radiobrowser";
 
 QString RadioBrowserService::SearchUrl = "%1/json/stations/byname/%2?limit=%3";
 QString RadioBrowserService::PlayClickUrl = "%1/json/url/%2";
@@ -73,8 +74,11 @@ RadioBrowserService::RadioBrowserService(Application* app,
       context_menu_(nullptr),
       network_(new NetworkAccessManager(this)),
       name_(kServiceName),
+      url_scheme_(kSchemeName),
+      url_handler_(new RadioBrowserUrlHandler(app, this, this)),
       homepage_url_(QUrl("https://www.radio-browser.info")),
       icon_(IconLoader::Load("radiobrowser", IconLoader::Provider)) {
+  app_->player()->RegisterUrlHandler(url_handler_);
   app_->global_search()->AddProvider(
       new RadioBrowserSearchProvider(app_, this, this));
 }
@@ -134,9 +138,8 @@ void RadioBrowserService::RefreshCategory(QStandardItem* item) {
   QNetworkReply* reply = network_->get(QNetworkRequest(url));
   int task_id = app_->task_manager()->StartTask(tr("Getting channels"));
 
-  NewClosure(reply, SIGNAL(finished()), this,
-             SLOT(RefreshCategoryFinished(QNetworkReply*, int, QStandardItem*)),
-             reply, task_id, item);
+  connect(reply, &QNetworkReply::finished,
+          [=] { this->RefreshCategoryFinished(reply, task_id, item); });
 }
 
 void RadioBrowserService::RefreshCategoryItem(QStandardItem* item) {
@@ -149,9 +152,8 @@ void RadioBrowserService::RefreshCategoryItem(QStandardItem* item) {
   QNetworkReply* reply = network_->get(QNetworkRequest(url));
   int task_id = app_->task_manager()->StartTask(tr("Getting channels"));
 
-  NewClosure(reply, SIGNAL(finished()), this,
-             SLOT(RefreshStreamsFinished(QNetworkReply*, int, QStandardItem*)),
-             reply, task_id, item);
+  connect(reply, &QNetworkReply::finished,
+          [=] { this->RefreshStreamsFinished(reply, task_id, item); });
 }
 
 void RadioBrowserService::RefreshTop100(QStandardItem* item) {
@@ -163,9 +165,8 @@ void RadioBrowserService::RefreshTop100(QStandardItem* item) {
   QNetworkReply* reply = network_->get(QNetworkRequest(url));
   int task_id = app_->task_manager()->StartTask(tr("Getting channels"));
 
-  NewClosure(reply, SIGNAL(finished()), this,
-             SLOT(RefreshStreamsFinished(QNetworkReply*, int, QStandardItem*)),
-             reply, task_id, item);
+  connect(reply, &QNetworkReply::finished,
+          [=] { this->RefreshStreamsFinished(reply, task_id, item); });
 }
 
 void RadioBrowserService::ShowContextMenu(const QPoint& global_pos) {
@@ -219,8 +220,8 @@ void RadioBrowserService::RefreshStreamsFinished(QNetworkReply* reply,
   QJsonArray contents = document.array();
   qLog(Debug) << "RadioBrowser station list found:" << contents.size();
   for (const QJsonValue& c : contents) {
-    QJsonObject item = c.toObject();
-    ReadStation(item, &list);
+    QJsonObject station = c.toObject();
+    ReadStation(station, &list);
   }
 
   PopulateStreams(item, list);
@@ -229,8 +230,8 @@ void RadioBrowserService::RefreshStreamsFinished(QNetworkReply* reply,
 void RadioBrowserService::ReadStation(QJsonObject& item, StreamList* ret) {
   Stream stream;
   stream.name_ = item["name"].toString();
-  stream.uuid_ = item["stationuuid"].toString();
-  QUrl url(item["url"].toString());
+  QUrl url(item["stationuuid"].toString());
+  url.setScheme(url_handler_->scheme());
   stream.url_ = url;
   QUrl favicon(item["favicon"].toString());
   stream.favicon_ = favicon;
@@ -289,21 +290,9 @@ void RadioBrowserService::PopulateStreams(QStandardItem* parentItem,
                   InternetModel::Role_SongMetadata);
     item->setData(InternetModel::PlayBehaviour_SingleItem,
                   InternetModel::Role_PlayBehaviour);
-    item->setData(stream.uuid_, RadioBrowserService::Role_StationUuid);
 
     parentItem->appendRow(item);
   }
-}
-
-QDataStream& operator<<(QDataStream& out,
-                        const RadioBrowserService::Stream& stream) {
-  out << stream.name_ << stream.url_;
-  return out;
-}
-
-QDataStream& operator>>(QDataStream& in, RadioBrowserService::Stream& stream) {
-  in >> stream.name_ >> stream.url_;
-  return in;
 }
 
 void RadioBrowserService::ReloadSettings() {
@@ -338,9 +327,8 @@ void RadioBrowserService::Search(int search_id, const QString& query,
   QNetworkReply* reply = network_->get(QNetworkRequest(url));
   int task_id = app_->task_manager()->StartTask(tr("Getting channels"));
 
-  NewClosure(reply, SIGNAL(finished()), this,
-             SLOT(SearchFinishedInternal(QNetworkReply*, int, int)), reply,
-             task_id, search_id);
+  connect(reply, &QNetworkReply::finished,
+          [=] { this->SearchFinishedInternal(reply, task_id, search_id); });
 }
 
 void RadioBrowserService::SearchFinishedInternal(QNetworkReply* reply,
@@ -360,17 +348,27 @@ void RadioBrowserService::SearchFinishedInternal(QNetworkReply* reply,
   emit SearchFinished(search_id, list);
 }
 
-void RadioBrowserService::ItemNowPlaying(QStandardItem* item) {
-  QString station_uuid =
-      item->data(RadioBrowserService::Role_StationUuid).toString();
-  if (station_uuid.isEmpty()) return;
-
-  QString determinedUrl =
-      RadioBrowserService::PlayClickUrl.arg(main_server_url_, station_uuid);
+void RadioBrowserService::ResolveStationUrl(const QUrl& original_url) {
+  QString determinedUrl = RadioBrowserService::PlayClickUrl.arg(
+      main_server_url_, original_url.path());
   QUrl url(determinedUrl);
 
-  qLog(Debug) << "RadioBrowser station played:" << determinedUrl;
   QNetworkReply* reply = network_->get(QNetworkRequest(url));
-  connect(reply, &QNetworkReply::finished,
-          [this, reply]() { reply->deleteLater(); });
+  int task_id = app_->task_manager()->StartTask(tr("Getting station"));
+
+  connect(reply, &QNetworkReply::finished, [=] {
+    this->ResolveStationUrlFinished(reply, task_id, original_url);
+  });
+}
+
+void RadioBrowserService::ResolveStationUrlFinished(QNetworkReply* reply,
+                                                    int task_id,
+                                                    const QUrl& original_url) {
+  app_->task_manager()->SetTaskFinished(task_id);
+  reply->deleteLater();
+  QJsonDocument document = ParseJsonReply(reply);
+
+  QJsonObject item = document.object();
+  QUrl url(item["url"].toString());
+  emit StationUrlResolved(original_url, url);
 }
