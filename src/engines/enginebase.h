@@ -116,11 +116,11 @@ class Base : public QObject {
   void StatusText(const QString&);
   void Error(const QString&);
 
-  // Emitted when Engine was unable to play a song with the given QUrl.
-  void InvalidSongRequested(const QUrl&);
+  // Emitted when Engine was unable to play a request.
+  void InvalidMediaRequested(const MediaPlaybackRequest&);
   // Emitted when Engine successfully started playing a song with the
-  // given QUrl.
-  void ValidSongRequested(const QUrl&);
+  // given request.
+  void ValidMediaRequested(const MediaPlaybackRequest&);
 
   void MetaData(const Engine::SimpleMetaBundle&);
 

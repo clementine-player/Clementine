@@ -70,10 +70,10 @@ Player::Player(Application* app, QObject* parent)
 
   connect(engine_.get(), SIGNAL(Error(QString)), SIGNAL(Error(QString)));
 
-  connect(engine_.get(), SIGNAL(ValidSongRequested(QUrl)),
-          SLOT(ValidSongRequested(QUrl)));
-  connect(engine_.get(), SIGNAL(InvalidSongRequested(QUrl)),
-          SLOT(InvalidSongRequested(QUrl)));
+  connect(engine_.get(), SIGNAL(ValidMediaRequested(MediaPlaybackRequest)),
+          SLOT(ValidMediaRequested(MediaPlaybackRequest)));
+  connect(engine_.get(), SIGNAL(InvalidMediaRequested(MediaPlaybackRequest)),
+          SLOT(InvalidMediaRequested(MediaPlaybackRequest)));
 }
 
 Player::~Player() {}
@@ -669,13 +669,13 @@ void Player::TrackAboutToEnd() {
 
 void Player::IntroPointReached() { NextInternal(Engine::Intro); }
 
-void Player::ValidSongRequested(const QUrl& url) {
-  emit SongChangeRequestProcessed(url, true);
+void Player::ValidMediaRequested(const MediaPlaybackRequest& req) {
+  emit SongChangeRequestProcessed(req.url_, true);
 }
 
-void Player::InvalidSongRequested(const QUrl& url) {
+void Player::InvalidMediaRequested(const MediaPlaybackRequest& req) {
   // first send the notification to others...
-  emit SongChangeRequestProcessed(url, false);
+  emit SongChangeRequestProcessed(req.url_, false);
   // ... and now when our listeners have completed their processing of the
   // current item we can change the current item by skipping to the next song
 
