@@ -388,6 +388,12 @@ int main(int argc, char* argv[]) {
   }
 #endif
 
+// Set the name of the app desktop file as per the freedesktop specifications
+// This is needed on Wayland for the main window to show the correct icon
+#if QT_VERSION >= QT_VERSION_CHECK(5, 7, 0)
+    QGuiApplication::setDesktopFileName("clementine");
+#endif
+
   // Resources
   Q_INIT_RESOURCE(data);
 #ifdef HAVE_TRANSLATIONS
