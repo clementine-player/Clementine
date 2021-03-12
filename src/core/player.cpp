@@ -146,7 +146,7 @@ void Player::HandleLoadResult(const UrlHandler::LoadResult& result) {
         item->SetTemporaryMetadata(song);
         app_->playlist_manager()->active()->InformOfCurrentSongChange();
       }
-      MediaPlaybackRequest req(result.media_url_);
+      MediaPlaybackRequest req(result.original_url_, result.media_url_);
       if (!result.auth_header_.isEmpty())
         req.headers_["Authorization"] = result.auth_header_;
       engine_->Play(req, stream_change_type_, item->Metadata().has_cue(),
@@ -643,25 +643,25 @@ void Player::TrackAboutToEnd() {
   // gap between songs.
   if (!has_next_row || !next_item) return;
 
-  QUrl url = next_item->Url();
+  MediaPlaybackRequest req(next_item->Url());
 
   // Get the actual track URL rather than the stream URL.
-  if (url_handlers_.contains(url.scheme())) {
-    UrlHandler::LoadResult result = url_handlers_[url.scheme()]->LoadNext(url);
+  UrlHandler* handler = url_handlers_.value(req.RequestUrl().scheme(), nullptr);
+  if (handler != nullptr) {
+    UrlHandler::LoadResult result = handler->LoadNext(req.RequestUrl());
     switch (result.type_) {
       case UrlHandler::LoadResult::NoMoreTracks:
         return;
 
       case UrlHandler::LoadResult::WillLoadAsynchronously:
-        loading_async_ = url;
+        loading_async_ = req.RequestUrl();
         return;
 
       case UrlHandler::LoadResult::TrackAvailable:
-        url = result.media_url_;
+        req.SetMediaUrl(result.media_url_);
         break;
     }
   }
-  MediaPlaybackRequest req(url);
   engine_->StartPreloading(req, next_item->Metadata().has_cue(),
                            next_item->Metadata().beginning_nanosec(),
                            next_item->Metadata().end_nanosec());

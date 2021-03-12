@@ -23,9 +23,17 @@
 
 class MediaPlaybackRequest {
  public:
-  MediaPlaybackRequest(const QUrl& url) : url_(url) {}
+  // For local songs and raw streams, the request and media URLs are the same.
+  MediaPlaybackRequest(const QUrl& url) : request_url_(url), url_(url) {}
+  MediaPlaybackRequest(const QUrl& request_url, const QUrl& media_url)
+      : request_url_(request_url), url_(media_url) {}
   MediaPlaybackRequest() {}
 
+  const QUrl& RequestUrl() const { return request_url_; }
+  const QUrl& MediaUrl() const { return url_; }
+  void SetMediaUrl(const QUrl& url) { url_ = url; }
+
+  QUrl request_url_;
   QUrl url_;
 
   typedef QMap<QByteArray, QByteArray> HeaderList;
