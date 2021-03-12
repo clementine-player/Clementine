@@ -670,12 +670,12 @@ void Player::TrackAboutToEnd() {
 void Player::IntroPointReached() { NextInternal(Engine::Intro); }
 
 void Player::ValidMediaRequested(const MediaPlaybackRequest& req) {
-  emit SongChangeRequestProcessed(req.url_, true);
+  emit SongChangeRequestProcessed(req.RequestUrl(), true);
 }
 
 void Player::InvalidMediaRequested(const MediaPlaybackRequest& req) {
   // first send the notification to others...
-  emit SongChangeRequestProcessed(req.url_, false);
+  emit SongChangeRequestProcessed(req.RequestUrl(), false);
   // ... and now when our listeners have completed their processing of the
   // current item we can change the current item by skipping to the next song
 
