@@ -522,8 +522,8 @@ void GstEngine::PlayDone(QFuture<GstStateChangeReturn> future,
   }
 
   emit StateChanged(Engine::Playing);
-  // we've successfully started playing a media stream with this url
-  emit ValidSongRequested(playback_req_.url_);
+  // we've successfully started playing this request
+  emit ValidMediaRequested(playback_req_);
 }
 
 void GstEngine::Stop(bool stop_after) {
@@ -727,8 +727,8 @@ void GstEngine::HandlePipelineError(int pipeline_id, const QString& message,
 
   BufferingFinished();
   emit StateChanged(Engine::Error);
-  // unable to play media stream with this url
-  emit InvalidSongRequested(playback_req_.url_);
+  // Unable to play this media request
+  emit InvalidMediaRequested(playback_req_);
 
   // TODO: the types of errors listed below won't be shown to user - they will
   // get logged and the current song will be skipped; instead of maintaining

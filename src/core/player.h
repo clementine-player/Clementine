@@ -40,6 +40,7 @@
 #include "playlist/playlistitem.h"
 
 class Application;
+class MediaPlaybackRequest;
 class Scrobbler;
 
 class PlayerInterface : public QObject {
@@ -191,8 +192,8 @@ class Player : public PlayerInterface {
   void PlayPlaylistInternal(Engine::TrackChangeFlags,
                             const QString& playlistName);
 
-  void ValidSongRequested(const QUrl&);
-  void InvalidSongRequested(const QUrl&);
+  void ValidMediaRequested(const MediaPlaybackRequest&);
+  void InvalidMediaRequested(const MediaPlaybackRequest&);
 
   void UrlHandlerDestroyed(QObject* object);
   void HandleLoadResult(const UrlHandler::LoadResult& result);
