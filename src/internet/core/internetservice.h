@@ -64,7 +64,6 @@ class InternetService : public QObject {
   virtual bool has_initial_load_settings() const { return false; }
   virtual void InitialLoadSettings() {}
   virtual void ShowContextMenu(const QPoint& global_pos) {}
-  virtual void ItemDoubleClicked(QStandardItem* item) {}
   // Create a generator for smart playlists
   virtual smart_playlists::GeneratorPtr CreateGenerator(QStandardItem* item) {
     return smart_playlists::GeneratorPtr();
