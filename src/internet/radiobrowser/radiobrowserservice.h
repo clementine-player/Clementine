@@ -76,15 +76,16 @@ class RadioBrowserService : public InternetService {
   static const char* kServiceName;
   static const char* kSettingsGroup;
   static const char* kSchemeName;
+  static const QString defaultServer;
 
   const QString& url_scheme() const { return url_scheme_; }
   const QIcon& icon() const { return icon_; }
   QNetworkAccessManager* network() const { return network_; }
 
-  QStandardItem* CreateRootItem();
-  void ShowContextMenu(const QPoint& global_pos);
+  QStandardItem* CreateRootItem() override;
+  void ShowContextMenu(const QPoint& global_pos) override;
 
-  PlaylistItem::Options playlistitem_options() const;
+  PlaylistItem::Options playlistitem_options() const override;
 
   void Search(int search_id, const QString& query, const int limit);
   void ResolveStationUrl(const QUrl& original_url);
@@ -94,10 +95,10 @@ class RadioBrowserService : public InternetService {
   void StationUrlResolved(const QUrl& original_url, const QUrl& url);
 
  public slots:
-  void ReloadSettings();
+  void ReloadSettings() override;
 
  private slots:
-  void LazyPopulate(QStandardItem* item);
+  void LazyPopulate(QStandardItem* item) override;
 
   void RefreshRootItem();
   void RefreshCategory(QStandardItem* item);
@@ -113,17 +114,23 @@ class RadioBrowserService : public InternetService {
   void SearchFinishedInternal(QNetworkReply* reply, int task_id, int search_id);
 
   void Homepage();
-  void ShowConfig();
+  void ShowConfig() override;
+  void AddToSavedRadio(bool checked);
 
  private:
   void ReadStation(QJsonObject& value, StreamList* ret);
   void PopulateCategory(QStandardItem* parentItem, QStringList& elements);
   void PopulateStreams(QStandardItem* parentItem, StreamList& streams);
   bool EnsureServerConfig();
+  QMenu* GetContextMenu(QStandardItem* item);
+  QMenu* GetStationMenu(QStandardItem* item);
+  void LastRequestFailed();
 
  private:
   QStandardItem* root_;
   QMenu* context_menu_;
+  QMenu* station_menu_;
+  QAction* add_to_saved_radio_action_;
 
   QNetworkAccessManager* network_;
 

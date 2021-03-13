@@ -24,9 +24,6 @@
 #include "ui/iconloader.h"
 #include "ui_radiobrowsersettingspage.h"
 
-const QString RadioBrowserSettingsPage::defaultServer_ =
-    QStringLiteral("http://all.api.radio-browser.info");
-
 RadioBrowserSettingsPage::RadioBrowserSettingsPage(SettingsDialog* dialog)
     : SettingsPage(dialog),
       ui_(new Ui_RadioBrowserSettingsPage),
@@ -47,7 +44,7 @@ void RadioBrowserSettingsPage::Load() {
   s.beginGroup(RadioBrowserService::kSettingsGroup);
 
   ui_->server->setText(
-      s.value("server", RadioBrowserSettingsPage::defaultServer_).toString());
+      s.value("server", RadioBrowserService::defaultServer).toString());
 }
 
 void RadioBrowserSettingsPage::Save() {
@@ -55,6 +52,7 @@ void RadioBrowserSettingsPage::Save() {
   s.beginGroup(RadioBrowserService::kSettingsGroup);
 
   s.setValue("server", ui_->server->text());
+  service_->ReloadSettings();
 }
 
 void RadioBrowserSettingsPage::ServerEditingFinished() {
@@ -69,10 +67,8 @@ void RadioBrowserSettingsPage::ServerEditingFinished() {
 
   ui_->server->setText(url.toString());
   qLog(Debug) << "URL fixed:" << input << "to" << url;
-  service_->ReloadSettings();
 }
 
 void RadioBrowserSettingsPage::RestoreDefaultServer() {
-  ui_->server->setText(RadioBrowserSettingsPage::defaultServer_);
-  service_->ReloadSettings();
+  ui_->server->setText(RadioBrowserService::defaultServer);
 }
