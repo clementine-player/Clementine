@@ -27,9 +27,6 @@ class RadioBrowserSettingsPage : public SettingsPage {
   Q_OBJECT
 
  public:
-  static const QString defaultServer_;
-
- public:
   explicit RadioBrowserSettingsPage(SettingsDialog* dialog);
   ~RadioBrowserSettingsPage();
 

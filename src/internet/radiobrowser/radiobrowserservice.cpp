@@ -34,8 +34,11 @@
 #include "core/utilities.h"
 #include "globalsearch/globalsearch.h"
 #include "globalsearch/radiobrowsersearchprovider.h"
+#include "internet/internetradio/savedradio.h"
 #include "radiobrowserurlhandler.h"
 #include "ui/iconloader.h"
+
+Q_DECLARE_METATYPE(QStandardItem*)
 
 bool operator<(const RadioBrowserService::Stream& a,
                const RadioBrowserService::Stream& b) {
@@ -45,6 +48,8 @@ bool operator<(const RadioBrowserService::Stream& a,
 const char* RadioBrowserService::kServiceName = "Radio-Browser.info";
 const char* RadioBrowserService::kSettingsGroup = "RadioBrowser";
 const char* RadioBrowserService::kSchemeName = "radiobrowser";
+const QString RadioBrowserService::defaultServer =
+    QStringLiteral("http://all.api.radio-browser.info");
 
 QString RadioBrowserService::SearchUrl = "%1/json/stations/byname/%2?limit=%3";
 QString RadioBrowserService::PlayClickUrl = "%1/json/url/%2";
@@ -72,6 +77,8 @@ RadioBrowserService::RadioBrowserService(Application* app,
     : InternetService(kServiceName, app, parent, parent),
       root_(nullptr),
       context_menu_(nullptr),
+      station_menu_(nullptr),
+      add_to_saved_radio_action_(nullptr),
       network_(new NetworkAccessManager(this)),
       name_(kServiceName),
       url_scheme_(kSchemeName),
@@ -130,6 +137,11 @@ void RadioBrowserService::RefreshRootItem() {
 }
 
 void RadioBrowserService::RefreshCategory(QStandardItem* item) {
+  if (!EnsureServerConfig()) {
+    ShowConfig();
+    return;
+  }
+
   QString determinedUrl = item->data(RadioBrowserService::Role_ListUrl)
                               .toString()
                               .arg(main_server_url_);
@@ -143,6 +155,11 @@ void RadioBrowserService::RefreshCategory(QStandardItem* item) {
 }
 
 void RadioBrowserService::RefreshCategoryItem(QStandardItem* item) {
+  if (!EnsureServerConfig()) {
+    ShowConfig();
+    return;
+  }
+
   QStandardItem* parent = item->parent();
   QString determinedUrl = parent->data(RadioBrowserService::Role_ItemsUrl)
                               .toString()
@@ -157,6 +174,11 @@ void RadioBrowserService::RefreshCategoryItem(QStandardItem* item) {
 }
 
 void RadioBrowserService::RefreshTop100(QStandardItem* item) {
+  if (!EnsureServerConfig()) {
+    ShowConfig();
+    return;
+  }
+
   QString determinedUrl = item->data(RadioBrowserService::Role_ItemsUrl)
                               .toString()
                               .arg(main_server_url_);
@@ -174,9 +196,22 @@ void RadioBrowserService::ShowContextMenu(const QPoint& global_pos) {
   QStandardItem* item = model()->itemFromIndex(model()->current_index());
   if (!item) return;
 
+  switch (item->data(InternetModel::Role_Type).toInt()) {
+    case InternetModel::Type_Service:
+      GetContextMenu(item)->popup(global_pos);
+      break;
+    case InternetModel::Type_Track:
+      GetStationMenu(item)->popup(global_pos);
+      break;
+    default:
+      break;
+  }
+}
+
+QMenu* RadioBrowserService::GetContextMenu(QStandardItem* item) {
+  Q_UNUSED(item);
   if (!context_menu_) {
     context_menu_ = new QMenu;
-    context_menu_->addActions(GetPlaylistActions());
     context_menu_->addAction(IconLoader::Load("download", IconLoader::Base),
                              tr("Open %1 in browser").arg(homepage_url_.host()),
                              this, SLOT(Homepage()));
@@ -187,8 +222,22 @@ void RadioBrowserService::ShowContextMenu(const QPoint& global_pos) {
     context_menu_->addAction(IconLoader::Load("configure", IconLoader::Base),
                              tr("Configure..."), this, SLOT(ShowConfig()));
   }
+  return context_menu_;
+}
 
-  context_menu_->popup(global_pos);
+QMenu* RadioBrowserService::GetStationMenu(QStandardItem* item) {
+  if (!station_menu_) {
+    station_menu_ = new QMenu;
+    station_menu_->addActions(GetPlaylistActions());
+    add_to_saved_radio_action_ =
+        new QAction(IconLoader::Load("document-open-remote", IconLoader::Base),
+                    tr("Add to your radio streams"), station_menu_);
+    connect(add_to_saved_radio_action_, &QAction::triggered, this,
+            &RadioBrowserService::AddToSavedRadio);
+    station_menu_->addAction(add_to_saved_radio_action_);
+  }
+  add_to_saved_radio_action_->setData(QVariant::fromValue(item));
+  return station_menu_;
 }
 
 void RadioBrowserService::RefreshCategoryFinished(QNetworkReply* reply,
@@ -197,6 +246,10 @@ void RadioBrowserService::RefreshCategoryFinished(QNetworkReply* reply,
   app_->task_manager()->SetTaskFinished(task_id);
   reply->deleteLater();
   QJsonDocument document = ParseJsonReply(reply);
+  if (document.isNull()) {
+    LastRequestFailed();
+    return;
+  }
 
   QStringList list;
   QJsonArray contents = document.array();
@@ -215,6 +268,10 @@ void RadioBrowserService::RefreshStreamsFinished(QNetworkReply* reply,
   app_->task_manager()->SetTaskFinished(task_id);
   reply->deleteLater();
   QJsonDocument document = ParseJsonReply(reply);
+  if (document.isNull()) {
+    LastRequestFailed();
+    return;
+  }
 
   StreamList list;
   QJsonArray contents = document.array();
@@ -290,6 +347,7 @@ void RadioBrowserService::PopulateStreams(QStandardItem* parentItem,
                   InternetModel::Role_SongMetadata);
     item->setData(InternetModel::PlayBehaviour_SingleItem,
                   InternetModel::Role_PlayBehaviour);
+    item->setData(InternetModel::Type_Track, InternetModel::Role_Type);
 
     parentItem->appendRow(item);
   }
@@ -299,7 +357,8 @@ void RadioBrowserService::ReloadSettings() {
   QSettings s;
   s.beginGroup(kSettingsGroup);
 
-  main_server_url_ = s.value("server").toString();
+  main_server_url_ =
+      s.value("server", RadioBrowserService::defaultServer).toString();
 
   if (root_ && root_->hasChildren()) {
     root_->removeRows(0, root_->rowCount());
@@ -313,6 +372,8 @@ bool RadioBrowserService::EnsureServerConfig() {
   else
     return true;
 }
+
+void RadioBrowserService::LastRequestFailed() { ShowConfig(); }
 
 void RadioBrowserService::ShowConfig() {
   app_->OpenSettingsDialogAtPage(SettingsDialog::Page_RadioBrowser);
@@ -371,4 +432,17 @@ void RadioBrowserService::ResolveStationUrlFinished(QNetworkReply* reply,
   QJsonObject item = document.object();
   QUrl url(item["url"].toString());
   emit StationUrlResolved(original_url, url);
+}
+
+void RadioBrowserService::AddToSavedRadio(bool checked) {
+  Q_UNUSED(checked);
+  QAction* action = qobject_cast<QAction*>(sender());
+  if (!action) return;
+
+  QStandardItem* item = action->data().value<QStandardItem*>();
+  if (!item) return;
+
+  Song station = item->data(InternetModel::Role_SongMetadata).value<Song>();
+  InternetModel::Service<SavedRadio>()->Add(station.url(), station.artist(),
+                                            QUrl(station.art_automatic()));
 }
