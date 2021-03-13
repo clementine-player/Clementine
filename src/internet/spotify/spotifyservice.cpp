@@ -850,8 +850,6 @@ void SpotifyService::GetCurrentPlaylistUrlToShare() const {
   InternetService::ShowUrlBox(tr("Spotify playlist's URL"), url);
 }
 
-void SpotifyService::ItemDoubleClicked(QStandardItem* item) {}
-
 void SpotifyService::DropMimeData(const QMimeData* data,
                                   const QModelIndex& index) {
   QModelIndex playlist_root_index = index;

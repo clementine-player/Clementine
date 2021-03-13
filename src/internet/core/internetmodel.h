@@ -113,10 +113,6 @@ class InternetModel : public QStandardItemModel {
     // This is used when dragging a playlist item for instance, to have all the
     // playlit's items info loaded in the mime data.
     PlayBehaviour_MultipleItems,
-
-    // This item might not represent a song - the service's ItemDoubleClicked()
-    // slot will get called instead to do some custom action.
-    PlayBehaviour_DoubleClickAction,
   };
 
   struct ServiceItem {

@@ -73,7 +73,6 @@ class SpotifyService : public InternetService {
   QStandardItem* CreateRootItem() override;
   void LazyPopulate(QStandardItem* parent) override;
   void ShowContextMenu(const QPoint& global_pos) override;
-  void ItemDoubleClicked(QStandardItem* item) override;
   void DropMimeData(const QMimeData* data, const QModelIndex& index) override;
   QList<QAction*> playlistitem_actions(const Song& song) override;
   PlaylistItem::Options playlistitem_options() const override;
