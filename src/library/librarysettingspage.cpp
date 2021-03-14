@@ -98,6 +98,10 @@ void LibrarySettingsPage::Save() {
   QStringList filters = filter_text.split(',', QString::SkipEmptyParts);
   s.setValue("cover_art_patterns", filters);
 
+  QString skip_extensions = ui_->skip_extensions->text();
+  QStringList extensions = skip_extensions.split(',', QString::SkipEmptyParts);
+  s.setValue("skip_file_extensions", extensions);
+
   s.endGroup();
 
   s.beginGroup(LibraryBackend::kSettingsGroup);
@@ -138,6 +142,9 @@ void LibrarySettingsPage::Load() {
                                                                     << "cover")
                             .toStringList();
   ui_->cover_art_patterns->setText(filters.join(","));
+
+  QStringList extensions = s.value("skip_file_extensions").toStringList();
+  ui_->skip_extensions->setText(extensions.join(","));
 
   s.endGroup();
 

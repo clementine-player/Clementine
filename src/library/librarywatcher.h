@@ -217,6 +217,9 @@ class LibraryWatcher : public QObject {
    */
   QStringList best_image_filters_;
 
+  // List of file extensions that should be ingored during a scan.
+  QStringList skip_file_extensions_;
+
   bool scan_on_startup_;
   bool monitor_;
 
