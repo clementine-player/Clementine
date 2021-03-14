@@ -330,10 +330,12 @@ void LibraryWatcher::ScanSubdirectory(const QString& path,
       QString ext_part(ExtensionPart(child));
       QString dir_part(DirectoryPart(child));
 
-      if (sValidImages.contains(ext_part))
-        album_art[dir_part] << child;
-      else if (!child_info.isHidden())
-        files_on_disk << child;
+      if (!skip_file_extensions_.contains(ext_part)) {
+        if (sValidImages.contains(ext_part))
+          album_art[dir_part] << child;
+        else if (!child_info.isHidden())
+          files_on_disk << child;
+      }
     }
   }
 
@@ -830,6 +832,13 @@ void LibraryWatcher::ReloadSettings() {
   for (const QString& filter : filters) {
     QString s = filter.trimmed();
     if (!s.isEmpty()) best_image_filters_ << s;
+  }
+
+  skip_file_extensions_.clear();
+  QStringList extensions = s.value("skip_file_extensions").toStringList();
+  for (const QString& extension : extensions) {
+    QString s = extension.trimmed().toLower();
+    if (!s.isEmpty()) skip_file_extensions_ << s;
   }
 
   if (!monitor_ && was_monitoring_before) {
