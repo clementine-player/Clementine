@@ -25,7 +25,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2021-03-11 03:03+0000\n"
+"PO-Revision-Date: 2021-03-14 22:18+0000\n"
 "Last-Translator: JungHee Lee <daemul72@gmail.com>\n"
 "Language-Team: Korean (http://www.transifex.com/davidsansome/clementine/language/ko/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -349,7 +349,7 @@ msgstr "96,000Hz"
 msgid "<a href=\"http://www.di.fm/premium/\">Upgrade to Premium now</a>"
 msgstr "<a href=\"http://www.di.fm/premium/\">프리미엄으로 업그레이드하기</a>"
 
-#: ../bin/src/ui_librarysettingspage.h:194
+#: ../bin/src/ui_librarysettingspage.h:206
 msgid ""
 "<html><head/><body><p>If not checked, Clementine will  try to save your "
 "ratings and other statistics only in a separate database and don't modify "
@@ -375,7 +375,7 @@ msgid ""
 "style:italic;\">%1</span>.</p></body></html>"
 msgstr "<html><head/><body><p>검색을 해당 필드로 제한하려면 단어 앞에 필드 이름을 붙이십시오. 예: </span>아티스트:</span><span style=\" font-style:italic;\">Bode</span>라는 단어가 포함된 모든 아티스트에 대한 라이브러리 를 검색하고, <span style=\" font-weight:600;\">재생횟수:</span><span style=\" font-style:italic;\">&gt;=2</span> 라이브러리에서 적어도 두 번 재생된 음악을 검색하고, <span style=\" font-weight:600;\">마지막재생:</span>&lt;<span style=\" font-style:italic;\">1시간30분</span> 지난 180분 동안 재생된 음악에 대한 라이브러리를 검색합니다.</p><p><span style=\" font-weight:600;\">사용 가능한 필드: </span><span style=\" font-style:italic;\">%1</span>.</p></body></html>"
 
-#: ../bin/src/ui_librarysettingspage.h:198
+#: ../bin/src/ui_librarysettingspage.h:210
 msgid ""
 "<html><head/><body><p>This will write songs' ratings and statistics into "
 "files tags for all your library's songs.</p><p>This is not needed if the "
@@ -558,7 +558,7 @@ msgstr "폴더 추가"
 msgid "Add folder..."
 msgstr "폴더 추가..."
 
-#: ../bin/src/ui_librarysettingspage.h:187
+#: ../bin/src/ui_librarysettingspage.h:199
 msgid "Add new folder..."
 msgstr "새로운 폴더 추가..."
 
@@ -861,7 +861,7 @@ msgstr "\"%1\" 프리셋을 정말 삭제하시겠습니까?"
 msgid "Are you sure you want to reset this song's statistics?"
 msgstr "이 음악의 통계를 재설정하시겠습니까?"
 
-#: library/librarysettingspage.cpp:155
+#: library/librarysettingspage.cpp:162
 msgid ""
 "Are you sure you want to write song's statistics into song's file for all "
 "the songs of your library?"
@@ -922,7 +922,7 @@ msgstr "자동"
 msgid "Automatic"
 msgstr "자동"
 
-#: ../bin/src/ui_librarysettingspage.h:189
+#: ../bin/src/ui_librarysettingspage.h:201
 msgid "Automatic updating"
 msgstr "자동 업데이트"
 
@@ -930,7 +930,7 @@ msgstr "자동 업데이트"
 msgid "Automatically determine based on sample rate."
 msgstr "샘플 속도에 따라 자동으로 결정됩니다."
 
-#: ../bin/src/ui_librarysettingspage.h:207
+#: ../bin/src/ui_librarysettingspage.h:220
 msgid "Automatically open single categories in the library tree"
 msgstr "라이브러리 트리에 자동으로 하나의 카테고리로 열기"
 
@@ -1824,7 +1824,7 @@ msgstr "불연속적인 전송"
 
 #: internet/icecast/icecastfilterwidget.cpp:35
 #: internet/core/searchboxwidget.cpp:34 library/libraryfilterwidget.cpp:96
-#: ../bin/src/ui_librarysettingspage.h:206
+#: ../bin/src/ui_librarysettingspage.h:219
 msgid "Display options"
 msgstr "옵션 표시"
 
@@ -3323,7 +3323,7 @@ msgstr "projectM 프리셋들이 누락되었습니다"
 msgid "Model"
 msgstr "모형"
 
-#: ../bin/src/ui_librarysettingspage.h:191
+#: ../bin/src/ui_librarysettingspage.h:203
 msgid "Monitor the library for changes"
 msgstr "라이브러리의 변화를 감지"
 
@@ -3382,7 +3382,7 @@ msgstr "위로 이동"
 msgid "Music"
 msgstr "음악"
 
-#: ../bin/src/ui_librarysettingspage.h:185
+#: ../bin/src/ui_librarysettingspage.h:197
 msgid "Music Library"
 msgstr "음악 라이브러리"
 
@@ -3988,7 +3988,7 @@ msgstr "환경설정"
 msgid "Preferences..."
 msgstr "환경설정..."
 
-#: ../bin/src/ui_librarysettingspage.h:201
+#: ../bin/src/ui_librarysettingspage.h:214
 msgid "Preferred album art filenames (comma separated)"
 msgstr "선호하는 앨범 아트 파일이름 (쉼표로 구분)"
 
@@ -4243,7 +4243,7 @@ msgstr "재생 목록에서 현재 음악 제거"
 msgid "Remove duplicates from playlist"
 msgstr "재생목록에서 중복 제거"
 
-#: ../bin/src/ui_librarysettingspage.h:188
+#: ../bin/src/ui_librarysettingspage.h:200
 msgid "Remove folder"
 msgstr "폴더 제거"
 
@@ -4448,11 +4448,11 @@ msgstr "재생목록 저장..."
 msgid "Save preset"
 msgstr "프리셋 저장"
 
-#: ../bin/src/ui_librarysettingspage.h:192
+#: ../bin/src/ui_librarysettingspage.h:204
 msgid "Save ratings in file tags when possible"
 msgstr "가능하면 파일 태그에 등급을 저장"
 
-#: ../bin/src/ui_librarysettingspage.h:196
+#: ../bin/src/ui_librarysettingspage.h:208
 msgid "Save statistics in file tags when possible"
 msgstr "가능하면 파일 태그에 통계를 저장"
 
@@ -4757,11 +4757,11 @@ msgstr "모든 음악 표시"
 msgid "Show all the songs"
 msgstr "모든 음악 표시"
 
-#: ../bin/src/ui_librarysettingspage.h:208
+#: ../bin/src/ui_librarysettingspage.h:221
 msgid "Show cover art in library"
 msgstr "라이브러리에서 커버아트 보기"
 
-#: ../bin/src/ui_librarysettingspage.h:209
+#: ../bin/src/ui_librarysettingspage.h:222
 msgid "Show dividers"
 msgstr "분할 표시"
 
@@ -4877,6 +4877,10 @@ msgstr "재생목록에서 뒤로 건너뛰기"
 #: playlist/playlist.cpp:1410 ../bin/src/ui_edittagdialog.h:706
 msgid "Skip count"
 msgstr "건너뛰기 횟수"
+
+#: ../bin/src/ui_librarysettingspage.h:213
+msgid "Skip files with these extensions (comma separated, case insensitive)"
+msgstr "이 확장자를 가진 파일 건너뛰기(쉼표로 구분, 대소문자 구분안함)"
 
 #: core/commandlineoptions.cpp:166
 msgid "Skip forwards in playlist"
@@ -5135,7 +5139,7 @@ msgstr "아주 높음 (2048x2048)"
 msgid "Supported formats"
 msgstr "지원가능한 형식"
 
-#: ../bin/src/ui_librarysettingspage.h:200
+#: ../bin/src/ui_librarysettingspage.h:212
 msgid "Synchronize statistics to files now"
 msgstr "지금 파일들의 통계들을 동기화"
 
@@ -5263,7 +5267,7 @@ msgid ""
 "continue?"
 msgstr "파일들이 디스크에서 완전히 삭제됩니다. 계속하시겠습니까?"
 
-#: ../bin/src/ui_librarysettingspage.h:186
+#: ../bin/src/ui_librarysettingspage.h:198
 msgid "These folders will be scanned for music to make up your library"
 msgstr "이 폴더들은 라이브러리를 생성하기 위하여 음악이 검색됩니다."
 
@@ -5527,7 +5531,7 @@ msgstr "모든 팟케스트 업데이트"
 msgid "Update changed library folders"
 msgstr "변경된 라이브러리 폴더 업데이트"
 
-#: ../bin/src/ui_librarysettingspage.h:190
+#: ../bin/src/ui_librarysettingspage.h:202
 msgid "Update the library when Clementine starts"
 msgstr "클레멘타인이 시작될 때 라이브러리 업데이트"
 
@@ -5757,7 +5761,7 @@ msgstr "클레멘타인이 시작할 때"
 msgid "When calculating play counts, use"
 msgstr "재생 횟수를 계산할 때"
 
-#: ../bin/src/ui_librarysettingspage.h:203
+#: ../bin/src/ui_librarysettingspage.h:216
 msgid ""
 "When looking for album art Clementine will first look for picture files that contain one of these words.\n"
 "If there are no matches then it will use the largest image in the directory."
@@ -5847,7 +5851,7 @@ msgstr "이번 앨범에 수록된 다른 곡들도 다양한 아티스트로 �
 msgid "Would you like to run a full rescan right now?"
 msgstr "지금 전부 다시 검색해도 좋습니까?"
 
-#: library/librarysettingspage.cpp:154
+#: library/librarysettingspage.cpp:161
 msgid "Write all songs statistics into songs' files"
 msgstr "모든 음악 통계를 음악 파일에 기록"
 

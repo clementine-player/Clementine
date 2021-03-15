@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2021-02-27 13:26+0000\n"
+"PO-Revision-Date: 2021-03-14 14:12+0000\n"
 "Last-Translator: John Maguire <john.maguire@gmail.com>\n"
 "Language-Team: Chinese (Taiwan) (http://www.transifex.com/davidsansome/clementine/language/zh_TW/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -334,7 +334,7 @@ msgstr "96,000Hz"
 msgid "<a href=\"http://www.di.fm/premium/\">Upgrade to Premium now</a>"
 msgstr "<a href=\"http://www.di.fm/premium/\">現在就升級至進階</a>"
 
-#: ../bin/src/ui_librarysettingspage.h:194
+#: ../bin/src/ui_librarysettingspage.h:206
 msgid ""
 "<html><head/><body><p>If not checked, Clementine will  try to save your "
 "ratings and other statistics only in a separate database and don't modify "
@@ -360,7 +360,7 @@ msgid ""
 "style:italic;\">%1</span>.</p></body></html>"
 msgstr "<html><head/><body><p>在搜尋的詞彙前綴上領域名稱以限縮搜尋結果。例如 <span style=\" font-weight:600;\">artist:</span><span style=\" font-style:italic;\">Bode</span> 會在媒體櫃中搜尋所有演出者含有 Bode 關鍵詞的結果，<span style=\" font-weight:600;\">playcount:</span><span style=\" font-style:italic;\">&gt;=2</span> 會在媒體櫃中搜尋所有播放兩次以上的曲目，<span style=\" font-weight:600;\">lastplayed:</span>&lt;<span style=\" font-style:italic;\">1h30m</span> 會在媒體櫃中搜尋過去 180 分鐘內播放的曲目</p><p><span style=\" font-weight:600;\">可用的領域名稱：</span><span style=\" font-style:italic;\">%1</span>。</p></body></html>"
 
-#: ../bin/src/ui_librarysettingspage.h:198
+#: ../bin/src/ui_librarysettingspage.h:210
 msgid ""
 "<html><head/><body><p>This will write songs' ratings and statistics into "
 "files tags for all your library's songs.</p><p>This is not needed if the "
@@ -543,7 +543,7 @@ msgstr "加入資料夾"
 msgid "Add folder..."
 msgstr "加入資料夾…"
 
-#: ../bin/src/ui_librarysettingspage.h:187
+#: ../bin/src/ui_librarysettingspage.h:199
 msgid "Add new folder..."
 msgstr "新增資料夾…"
 
@@ -846,7 +846,7 @@ msgstr "您確定您想要刪除預設的「%1」嗎?"
 msgid "Are you sure you want to reset this song's statistics?"
 msgstr "您確定要重置歌曲的統計嗎?"
 
-#: library/librarysettingspage.cpp:155
+#: library/librarysettingspage.cpp:162
 msgid ""
 "Are you sure you want to write song's statistics into song's file for all "
 "the songs of your library?"
@@ -907,7 +907,7 @@ msgstr "自動"
 msgid "Automatic"
 msgstr "自動"
 
-#: ../bin/src/ui_librarysettingspage.h:189
+#: ../bin/src/ui_librarysettingspage.h:201
 msgid "Automatic updating"
 msgstr "自動更新"
 
@@ -915,7 +915,7 @@ msgstr "自動更新"
 msgid "Automatically determine based on sample rate."
 msgstr ""
 
-#: ../bin/src/ui_librarysettingspage.h:207
+#: ../bin/src/ui_librarysettingspage.h:220
 msgid "Automatically open single categories in the library tree"
 msgstr "自動開啟媒體櫃中的單一類別"
 
@@ -1809,7 +1809,7 @@ msgstr "不連續傳送"
 
 #: internet/icecast/icecastfilterwidget.cpp:35
 #: internet/core/searchboxwidget.cpp:34 library/libraryfilterwidget.cpp:96
-#: ../bin/src/ui_librarysettingspage.h:206
+#: ../bin/src/ui_librarysettingspage.h:219
 msgid "Display options"
 msgstr "顯示選項"
 
@@ -3308,7 +3308,7 @@ msgstr "略過 projectM 預設"
 msgid "Model"
 msgstr "樣本"
 
-#: ../bin/src/ui_librarysettingspage.h:191
+#: ../bin/src/ui_librarysettingspage.h:203
 msgid "Monitor the library for changes"
 msgstr "監視媒體櫃的變化"
 
@@ -3367,7 +3367,7 @@ msgstr "上移"
 msgid "Music"
 msgstr "音樂"
 
-#: ../bin/src/ui_librarysettingspage.h:185
+#: ../bin/src/ui_librarysettingspage.h:197
 msgid "Music Library"
 msgstr "媒體櫃"
 
@@ -3973,7 +3973,7 @@ msgstr "偏好設定"
 msgid "Preferences..."
 msgstr "偏好設定…"
 
-#: ../bin/src/ui_librarysettingspage.h:201
+#: ../bin/src/ui_librarysettingspage.h:214
 msgid "Preferred album art filenames (comma separated)"
 msgstr "偏好的專輯封面檔名（以英文逗號分隔）"
 
@@ -4228,7 +4228,7 @@ msgstr "從播放清單中移除目前的歌曲"
 msgid "Remove duplicates from playlist"
 msgstr "從播放清單中移除重複的歌曲"
 
-#: ../bin/src/ui_librarysettingspage.h:188
+#: ../bin/src/ui_librarysettingspage.h:200
 msgid "Remove folder"
 msgstr "移除資料夾"
 
@@ -4433,11 +4433,11 @@ msgstr "儲存播放清單"
 msgid "Save preset"
 msgstr "儲存設定"
 
-#: ../bin/src/ui_librarysettingspage.h:192
+#: ../bin/src/ui_librarysettingspage.h:204
 msgid "Save ratings in file tags when possible"
 msgstr "可以的話，將評分存入檔案標籤"
 
-#: ../bin/src/ui_librarysettingspage.h:196
+#: ../bin/src/ui_librarysettingspage.h:208
 msgid "Save statistics in file tags when possible"
 msgstr "可以的話，將統計數據存入檔案標籤"
 
@@ -4742,11 +4742,11 @@ msgstr "顯示所有歌曲"
 msgid "Show all the songs"
 msgstr "顯示所有的歌曲"
 
-#: ../bin/src/ui_librarysettingspage.h:208
+#: ../bin/src/ui_librarysettingspage.h:221
 msgid "Show cover art in library"
 msgstr "在媒體櫃中顯示封面圖片"
 
-#: ../bin/src/ui_librarysettingspage.h:209
+#: ../bin/src/ui_librarysettingspage.h:222
 msgid "Show dividers"
 msgstr "顯示分隔線"
 
@@ -4862,6 +4862,10 @@ msgstr "跳至播放清單開頭"
 #: playlist/playlist.cpp:1410 ../bin/src/ui_edittagdialog.h:706
 msgid "Skip count"
 msgstr "略過計數"
+
+#: ../bin/src/ui_librarysettingspage.h:213
+msgid "Skip files with these extensions (comma separated, case insensitive)"
+msgstr ""
 
 #: core/commandlineoptions.cpp:166
 msgid "Skip forwards in playlist"
@@ -5120,7 +5124,7 @@ msgstr ""
 msgid "Supported formats"
 msgstr "支援的格式"
 
-#: ../bin/src/ui_librarysettingspage.h:200
+#: ../bin/src/ui_librarysettingspage.h:212
 msgid "Synchronize statistics to files now"
 msgstr "立刻同步統計數據至檔案"
 
@@ -5248,7 +5252,7 @@ msgid ""
 "continue?"
 msgstr ""
 
-#: ../bin/src/ui_librarysettingspage.h:186
+#: ../bin/src/ui_librarysettingspage.h:198
 msgid "These folders will be scanned for music to make up your library"
 msgstr "這些資料夾將被掃描是否有音樂檔，以建構您的媒體櫃"
 
@@ -5512,7 +5516,7 @@ msgstr "更新全部的 podcasts"
 msgid "Update changed library folders"
 msgstr "更新改變的媒體櫃資料夾"
 
-#: ../bin/src/ui_librarysettingspage.h:190
+#: ../bin/src/ui_librarysettingspage.h:202
 msgid "Update the library when Clementine starts"
 msgstr "當啟動 Clementine 時，更新媒體櫃"
 
@@ -5742,7 +5746,7 @@ msgstr "當 Clementine 啟動"
 msgid "When calculating play counts, use"
 msgstr "計算播放次數時，我該使用"
 
-#: ../bin/src/ui_librarysettingspage.h:203
+#: ../bin/src/ui_librarysettingspage.h:216
 msgid ""
 "When looking for album art Clementine will first look for picture files that contain one of these words.\n"
 "If there are no matches then it will use the largest image in the directory."
@@ -5832,7 +5836,7 @@ msgstr ""
 msgid "Would you like to run a full rescan right now?"
 msgstr "您想要立刻執行完整的重新掃描嗎？"
 
-#: library/librarysettingspage.cpp:154
+#: library/librarysettingspage.cpp:161
 msgid "Write all songs statistics into songs' files"
 msgstr ""
 

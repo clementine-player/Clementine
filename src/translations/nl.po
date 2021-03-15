@@ -18,7 +18,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2021-02-27 13:26+0000\n"
+"PO-Revision-Date: 2021-03-14 14:12+0000\n"
 "Last-Translator: John Maguire <john.maguire@gmail.com>\n"
 "Language-Team: Dutch (http://www.transifex.com/davidsansome/clementine/language/nl/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -342,7 +342,7 @@ msgstr "96.000Hz"
 msgid "<a href=\"http://www.di.fm/premium/\">Upgrade to Premium now</a>"
 msgstr "<a href=\"http://www.di.fm/premium/\">Nu opwaarderen naar Premium</a>"
 
-#: ../bin/src/ui_librarysettingspage.h:194
+#: ../bin/src/ui_librarysettingspage.h:206
 msgid ""
 "<html><head/><body><p>If not checked, Clementine will  try to save your "
 "ratings and other statistics only in a separate database and don't modify "
@@ -368,7 +368,7 @@ msgid ""
 "style:italic;\">%1</span>.</p></body></html>"
 msgstr "<html><head/><body><p>Zet een veldnaam voor een woord om de zoekopdracht tot dat veld te beperken, b.v. <span style=\" font-weight:600;\">artist:</span><span style=\" font-style:italic;\">Bode</span> zoekt in de bibliotheek naar alle artiesten die het woord Bode bevatten,<span style=\" font-weight:600;\">playcount:</span><span style=\" font-style:italic;\">&gt;=2</span> zoekt in de bibliotheek naar nummers die minstens twee keer zijn gespeeld, <span style=\" font-weight:600;\">lastplayed:</span>&lt; <span style=\" font-style:italic;\">1u30m</span>zoekt in de bibliotheek naar nummers die de laatste 180 minuten zijn afgespeeld.</p><p><span style=\" font-weight:600;\">Beschikbare velden:</span> <span style=\" font-style:italic;\">%1</span>.</p></body></html>"
 
-#: ../bin/src/ui_librarysettingspage.h:198
+#: ../bin/src/ui_librarysettingspage.h:210
 msgid ""
 "<html><head/><body><p>This will write songs' ratings and statistics into "
 "files tags for all your library's songs.</p><p>This is not needed if the "
@@ -551,7 +551,7 @@ msgstr "Map toevoegen"
 msgid "Add folder..."
 msgstr "Map toevoegen…"
 
-#: ../bin/src/ui_librarysettingspage.h:187
+#: ../bin/src/ui_librarysettingspage.h:199
 msgid "Add new folder..."
 msgstr "Nieuwe map toevoegen…"
 
@@ -854,7 +854,7 @@ msgstr "Weet u zeker dat u voorinstelling ‘%1’ wilt wissen?"
 msgid "Are you sure you want to reset this song's statistics?"
 msgstr "Weet u zeker dat u de statistieken van dit nummer wilt wissen?"
 
-#: library/librarysettingspage.cpp:155
+#: library/librarysettingspage.cpp:162
 msgid ""
 "Are you sure you want to write song's statistics into song's file for all "
 "the songs of your library?"
@@ -915,7 +915,7 @@ msgstr "Automatisch"
 msgid "Automatic"
 msgstr "Automatisch"
 
-#: ../bin/src/ui_librarysettingspage.h:189
+#: ../bin/src/ui_librarysettingspage.h:201
 msgid "Automatic updating"
 msgstr "Automatisch updaten"
 
@@ -923,7 +923,7 @@ msgstr "Automatisch updaten"
 msgid "Automatically determine based on sample rate."
 msgstr ""
 
-#: ../bin/src/ui_librarysettingspage.h:207
+#: ../bin/src/ui_librarysettingspage.h:220
 msgid "Automatically open single categories in the library tree"
 msgstr "Automatisch enkelvoudige categorieën in bibliotheekboom openen"
 
@@ -1817,7 +1817,7 @@ msgstr "Overdracht onderbreken"
 
 #: internet/icecast/icecastfilterwidget.cpp:35
 #: internet/core/searchboxwidget.cpp:34 library/libraryfilterwidget.cpp:96
-#: ../bin/src/ui_librarysettingspage.h:206
+#: ../bin/src/ui_librarysettingspage.h:219
 msgid "Display options"
 msgstr "Weergaveopties"
 
@@ -3316,7 +3316,7 @@ msgstr "Ontbrekende projectM voorinstellingen"
 msgid "Model"
 msgstr "Model"
 
-#: ../bin/src/ui_librarysettingspage.h:191
+#: ../bin/src/ui_librarysettingspage.h:203
 msgid "Monitor the library for changes"
 msgstr "De bibliotheek op wijzigingen blijven controleren"
 
@@ -3375,7 +3375,7 @@ msgstr "Omhoog verplaatsen"
 msgid "Music"
 msgstr "Muziek"
 
-#: ../bin/src/ui_librarysettingspage.h:185
+#: ../bin/src/ui_librarysettingspage.h:197
 msgid "Music Library"
 msgstr "Muziekbibliotheek"
 
@@ -3981,7 +3981,7 @@ msgstr "Voorkeuren"
 msgid "Preferences..."
 msgstr "Voorkeuren…"
 
-#: ../bin/src/ui_librarysettingspage.h:201
+#: ../bin/src/ui_librarysettingspage.h:214
 msgid "Preferred album art filenames (comma separated)"
 msgstr "Voorkeur voor bestandsnamen van albumhoezen (gescheiden door komma’s)"
 
@@ -4236,7 +4236,7 @@ msgstr "Verwijder huidig nummer van de afspeellijst"
 msgid "Remove duplicates from playlist"
 msgstr "Verwijder dubbelen uit afspeellijst"
 
-#: ../bin/src/ui_librarysettingspage.h:188
+#: ../bin/src/ui_librarysettingspage.h:200
 msgid "Remove folder"
 msgstr "Map verwijderen"
 
@@ -4441,11 +4441,11 @@ msgstr "Afspeellijst opslaan…"
 msgid "Save preset"
 msgstr "Voorinstelling opslaan"
 
-#: ../bin/src/ui_librarysettingspage.h:192
+#: ../bin/src/ui_librarysettingspage.h:204
 msgid "Save ratings in file tags when possible"
 msgstr "Sla waarderingen op in bestand, indien mogellijk"
 
-#: ../bin/src/ui_librarysettingspage.h:196
+#: ../bin/src/ui_librarysettingspage.h:208
 msgid "Save statistics in file tags when possible"
 msgstr "Sla statistieken op in bestand, indien mogellijk"
 
@@ -4750,11 +4750,11 @@ msgstr "Alle nummers weergeven"
 msgid "Show all the songs"
 msgstr "Alle nummers weergeven"
 
-#: ../bin/src/ui_librarysettingspage.h:208
+#: ../bin/src/ui_librarysettingspage.h:221
 msgid "Show cover art in library"
 msgstr "Albumhoezen in bibliotheek tonen"
 
-#: ../bin/src/ui_librarysettingspage.h:209
+#: ../bin/src/ui_librarysettingspage.h:222
 msgid "Show dividers"
 msgstr "Verdelers tonen"
 
@@ -4870,6 +4870,10 @@ msgstr "Terug in afspeellijst"
 #: playlist/playlist.cpp:1410 ../bin/src/ui_edittagdialog.h:706
 msgid "Skip count"
 msgstr "Aantal maal overgeslagen"
+
+#: ../bin/src/ui_librarysettingspage.h:213
+msgid "Skip files with these extensions (comma separated, case insensitive)"
+msgstr ""
 
 #: core/commandlineoptions.cpp:166
 msgid "Skip forwards in playlist"
@@ -5128,7 +5132,7 @@ msgstr "Zeer hoog (2048x2048)"
 msgid "Supported formats"
 msgstr "Ondersteunde formaten"
 
-#: ../bin/src/ui_librarysettingspage.h:200
+#: ../bin/src/ui_librarysettingspage.h:212
 msgid "Synchronize statistics to files now"
 msgstr "Nu statistieken naar bestanden synchoriseren"
 
@@ -5256,7 +5260,7 @@ msgid ""
 "continue?"
 msgstr "Deze bestanden zullen definitief van de schijf verwijderd worden, weet u zeker dat u door wil gaan?"
 
-#: ../bin/src/ui_librarysettingspage.h:186
+#: ../bin/src/ui_librarysettingspage.h:198
 msgid "These folders will be scanned for music to make up your library"
 msgstr "Deze mappen zullen op muziek doorzocht worden om uw bibliotheek te vullen"
 
@@ -5520,7 +5524,7 @@ msgstr "Vernieuw alle podcasts"
 msgid "Update changed library folders"
 msgstr "Aangepaste databasemappen updaten"
 
-#: ../bin/src/ui_librarysettingspage.h:190
+#: ../bin/src/ui_librarysettingspage.h:202
 msgid "Update the library when Clementine starts"
 msgstr "Bibliotheek bijwerken zodra Clementine gestart wordt"
 
@@ -5750,7 +5754,7 @@ msgstr "Zodra Clementine wordt gestart"
 msgid "When calculating play counts, use"
 msgstr "Bij het berekenen van het spel telt, gebruik"
 
-#: ../bin/src/ui_librarysettingspage.h:203
+#: ../bin/src/ui_librarysettingspage.h:216
 msgid ""
 "When looking for album art Clementine will first look for picture files that contain one of these words.\n"
 "If there are no matches then it will use the largest image in the directory."
@@ -5840,7 +5844,7 @@ msgstr "Wilt u de andere nummers van dit album ook verplaatsen naar Diverse Arti
 msgid "Would you like to run a full rescan right now?"
 msgstr "Wilt u op dit moment een volledige herscan laten uitvoeren?"
 
-#: library/librarysettingspage.cpp:154
+#: library/librarysettingspage.cpp:161
 msgid "Write all songs statistics into songs' files"
 msgstr "Sla alle statistieken op in muziekbestanden"
 

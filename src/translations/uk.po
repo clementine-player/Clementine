@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2021-02-27 15:34+0000\n"
+"PO-Revision-Date: 2021-03-14 15:09+0000\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian (http://www.transifex.com/davidsansome/clementine/language/uk/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -333,7 +333,7 @@ msgstr "96000 Гц"
 msgid "<a href=\"http://www.di.fm/premium/\">Upgrade to Premium now</a>"
 msgstr "<a href=\"http://www.di.fm/premium/\">Оновитися до Premium зараз</a>"
 
-#: ../bin/src/ui_librarysettingspage.h:194
+#: ../bin/src/ui_librarysettingspage.h:206
 msgid ""
 "<html><head/><body><p>If not checked, Clementine will  try to save your "
 "ratings and other statistics only in a separate database and don't modify "
@@ -359,7 +359,7 @@ msgid ""
 "style:italic;\">%1</span>.</p></body></html>"
 msgstr "<html><head/><body><p>Вкажіть перед словом назву поля, щоб обмежити пошук вмістом вказаного поля. Приклад: <span style=\" font-weight:600;\">artist:</span><span style=\" font-style:italic;\">Руслана</span> призведе до пошуку у бібліотеці усіх виконавців, записи назв яких містять слово «Руслана», <span style=\" font-weight:600;\">playcount:</span><span style=\" font-style:italic;\">&gt;=2</span> надасть вам змогу знайти усі композиції, які відтворювалися принаймні двічі, <span style=\" font-weight:600;\">lastplayed:</span>&lt;<span style=\" font-style:italic;\">1h30m</span> виконає пошук у бібліотеці композицій, які було відтворено протягом попередніх 180 хвилин.</p><p><span style=\" font-weight:600;\">Доступні поля: </span><span style=\" font-style:italic;\">%1</span>.</p></body></html>"
 
-#: ../bin/src/ui_librarysettingspage.h:198
+#: ../bin/src/ui_librarysettingspage.h:210
 msgid ""
 "<html><head/><body><p>This will write songs' ratings and statistics into "
 "files tags for all your library's songs.</p><p>This is not needed if the "
@@ -542,7 +542,7 @@ msgstr "Додати теку"
 msgid "Add folder..."
 msgstr "Додати теку…"
 
-#: ../bin/src/ui_librarysettingspage.h:187
+#: ../bin/src/ui_librarysettingspage.h:199
 msgid "Add new folder..."
 msgstr "Додати нову теку…"
 
@@ -845,7 +845,7 @@ msgstr "Ви дійсно хочете вилучити задане \"%1\"?"
 msgid "Are you sure you want to reset this song's statistics?"
 msgstr "Впевнені, що бажаєте скинути статистику цієї композиції?"
 
-#: library/librarysettingspage.cpp:155
+#: library/librarysettingspage.cpp:162
 msgid ""
 "Are you sure you want to write song's statistics into song's file for all "
 "the songs of your library?"
@@ -906,7 +906,7 @@ msgstr "Автоматично"
 msgid "Automatic"
 msgstr "Автоматично"
 
-#: ../bin/src/ui_librarysettingspage.h:189
+#: ../bin/src/ui_librarysettingspage.h:201
 msgid "Automatic updating"
 msgstr "Автоматичне оновлення"
 
@@ -914,7 +914,7 @@ msgstr "Автоматичне оновлення"
 msgid "Automatically determine based on sample rate."
 msgstr "Визначити автоматично на основі частоти дискретизації."
 
-#: ../bin/src/ui_librarysettingspage.h:207
+#: ../bin/src/ui_librarysettingspage.h:220
 msgid "Automatically open single categories in the library tree"
 msgstr "Автоматично відкривати одиночні категорії в дереві фонотеки"
 
@@ -1808,7 +1808,7 @@ msgstr "Переривчаста передача"
 
 #: internet/icecast/icecastfilterwidget.cpp:35
 #: internet/core/searchboxwidget.cpp:34 library/libraryfilterwidget.cpp:96
-#: ../bin/src/ui_librarysettingspage.h:206
+#: ../bin/src/ui_librarysettingspage.h:219
 msgid "Display options"
 msgstr "Налаштування відображення"
 
@@ -3307,7 +3307,7 @@ msgstr "Відсутні типові налаштування projectM"
 msgid "Model"
 msgstr "Модель"
 
-#: ../bin/src/ui_librarysettingspage.h:191
+#: ../bin/src/ui_librarysettingspage.h:203
 msgid "Monitor the library for changes"
 msgstr "Стежити за змінами у фонотеці"
 
@@ -3366,7 +3366,7 @@ msgstr "Перемістити вгору"
 msgid "Music"
 msgstr "Музика"
 
-#: ../bin/src/ui_librarysettingspage.h:185
+#: ../bin/src/ui_librarysettingspage.h:197
 msgid "Music Library"
 msgstr "Фонотека"
 
@@ -3972,7 +3972,7 @@ msgstr "Параметри"
 msgid "Preferences..."
 msgstr "Параметри…"
 
-#: ../bin/src/ui_librarysettingspage.h:201
+#: ../bin/src/ui_librarysettingspage.h:214
 msgid "Preferred album art filenames (comma separated)"
 msgstr "Бажані імена файлів для обкладинок, розділені комами"
 
@@ -4227,7 +4227,7 @@ msgstr "Вилучити поточну композицію зі списку �
 msgid "Remove duplicates from playlist"
 msgstr "Вилучити повтори зі списку відтворення"
 
-#: ../bin/src/ui_librarysettingspage.h:188
+#: ../bin/src/ui_librarysettingspage.h:200
 msgid "Remove folder"
 msgstr "Вилучити теку"
 
@@ -4432,11 +4432,11 @@ msgstr "Зберегти список відтворення…"
 msgid "Save preset"
 msgstr "Зберегти налаштування"
 
-#: ../bin/src/ui_librarysettingspage.h:192
+#: ../bin/src/ui_librarysettingspage.h:204
 msgid "Save ratings in file tags when possible"
 msgstr "Зберігати дані щодо оцінки у мітках файлів, якщо можна"
 
-#: ../bin/src/ui_librarysettingspage.h:196
+#: ../bin/src/ui_librarysettingspage.h:208
 msgid "Save statistics in file tags when possible"
 msgstr "Зберігати статистичні дані у мітках файлів, якщо можна"
 
@@ -4741,11 +4741,11 @@ msgstr "Показати всі композиції"
 msgid "Show all the songs"
 msgstr "Показати всі композиції"
 
-#: ../bin/src/ui_librarysettingspage.h:208
+#: ../bin/src/ui_librarysettingspage.h:221
 msgid "Show cover art in library"
 msgstr "Показувати обкладинки у фонотеці"
 
-#: ../bin/src/ui_librarysettingspage.h:209
+#: ../bin/src/ui_librarysettingspage.h:222
 msgid "Show dividers"
 msgstr "Показати розділювачі"
 
@@ -4861,6 +4861,10 @@ msgstr "Перескочити назад в списку композицій"
 #: playlist/playlist.cpp:1410 ../bin/src/ui_edittagdialog.h:706
 msgid "Skip count"
 msgstr "Кількість пропусків"
+
+#: ../bin/src/ui_librarysettingspage.h:213
+msgid "Skip files with these extensions (comma separated, case insensitive)"
+msgstr "Пропустити файли із вказаними суфіксами назв (відокремленими комами, без врахування регістру символів)"
 
 #: core/commandlineoptions.cpp:166
 msgid "Skip forwards in playlist"
@@ -5119,7 +5123,7 @@ msgstr "Надвисока (2048x2048)"
 msgid "Supported formats"
 msgstr "Підтримувані формати"
 
-#: ../bin/src/ui_librarysettingspage.h:200
+#: ../bin/src/ui_librarysettingspage.h:212
 msgid "Synchronize statistics to files now"
 msgstr "Синхронізувати статистичні дані з файлами"
 
@@ -5247,7 +5251,7 @@ msgid ""
 "continue?"
 msgstr "Ці файли буде остаточно вилучено з диска. Ви справді цього хочете?"
 
-#: ../bin/src/ui_librarysettingspage.h:186
+#: ../bin/src/ui_librarysettingspage.h:198
 msgid "These folders will be scanned for music to make up your library"
 msgstr "В цих теках виконуватиметься пошук музики для створення фонотеки"
 
@@ -5511,7 +5515,7 @@ msgstr "Оновити всі подкасти"
 msgid "Update changed library folders"
 msgstr "Оновити змінені теки у фонотеці"
 
-#: ../bin/src/ui_librarysettingspage.h:190
+#: ../bin/src/ui_librarysettingspage.h:202
 msgid "Update the library when Clementine starts"
 msgstr "Оновлювати фонотеку під час запуску Clementine"
 
@@ -5741,7 +5745,7 @@ msgstr "Під час запуску Clementine"
 msgid "When calculating play counts, use"
 msgstr "При обчисленні кількості відтворень використовувати"
 
-#: ../bin/src/ui_librarysettingspage.h:203
+#: ../bin/src/ui_librarysettingspage.h:216
 msgid ""
 "When looking for album art Clementine will first look for picture files that contain one of these words.\n"
 "If there are no matches then it will use the largest image in the directory."
@@ -5831,7 +5835,7 @@ msgstr "Хочете пересунути всі ініші композиції
 msgid "Would you like to run a full rescan right now?"
 msgstr "Бажаєте зараз виконати повторне сканування фонотеки?"
 
-#: library/librarysettingspage.cpp:154
+#: library/librarysettingspage.cpp:161
 msgid "Write all songs statistics into songs' files"
 msgstr "Записати статичні дані щодо всіх композицій до файлів композицій"
 

@@ -36,8 +36,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2021-02-28 15:33+0000\n"
-"Last-Translator: Andrei Stepanov <adem4ik@gmail.com>\n"
+"PO-Revision-Date: 2021-03-14 14:12+0000\n"
+"Last-Translator: John Maguire <john.maguire@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/davidsansome/clementine/language/ru/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -360,7 +360,7 @@ msgstr "96 000 Гц"
 msgid "<a href=\"http://www.di.fm/premium/\">Upgrade to Premium now</a>"
 msgstr "<a href=\"http://www.di.fm/premium/\">Обновить до Premium-версии</a>"
 
-#: ../bin/src/ui_librarysettingspage.h:194
+#: ../bin/src/ui_librarysettingspage.h:206
 msgid ""
 "<html><head/><body><p>If not checked, Clementine will  try to save your "
 "ratings and other statistics only in a separate database and don't modify "
@@ -386,7 +386,7 @@ msgid ""
 "style:italic;\">%1</span>.</p></body></html>"
 msgstr "<html><head/><body><p>Допишите название поля, чтобы ограничить поиск по этому полю, например <span style=\" font-weight:600;\">Артист:</span><span style=\" font-style:italic;\">Bode</span> ищет в фонотеке всех исполнителей со словом «Bode», <span style=\" font-weight:600;\">кол-во воспроизведений:</span><span style=\" font-style:italic;\">&gt;=2</span> ищет в фонотеке треки, проигранные хотя бы два раза, <span style=\" font-weight:600;\">последнее воспроизведение:</span>&lt;<span style=\" font-style:italic;\">1h30m</span>ищет в фонотеке треки, проигранные в последние 180 минут.</p><p><span style=\" font-weight:600;\">Доступные поля: </span><span style=\" font-style:italic;\">%1</span>.</p></body></html>"
 
-#: ../bin/src/ui_librarysettingspage.h:198
+#: ../bin/src/ui_librarysettingspage.h:210
 msgid ""
 "<html><head/><body><p>This will write songs' ratings and statistics into "
 "files tags for all your library's songs.</p><p>This is not needed if the "
@@ -569,7 +569,7 @@ msgstr "Добавить папку"
 msgid "Add folder..."
 msgstr "Добавить папку…"
 
-#: ../bin/src/ui_librarysettingspage.h:187
+#: ../bin/src/ui_librarysettingspage.h:199
 msgid "Add new folder..."
 msgstr "Добавить новую папку"
 
@@ -872,7 +872,7 @@ msgstr "Вы действительно хотите удалить профил
 msgid "Are you sure you want to reset this song's statistics?"
 msgstr "Вы действительно хотите сбросить статистику этой песни?"
 
-#: library/librarysettingspage.cpp:155
+#: library/librarysettingspage.cpp:162
 msgid ""
 "Are you sure you want to write song's statistics into song's file for all "
 "the songs of your library?"
@@ -933,7 +933,7 @@ msgstr "Авто"
 msgid "Automatic"
 msgstr "Автоматические"
 
-#: ../bin/src/ui_librarysettingspage.h:189
+#: ../bin/src/ui_librarysettingspage.h:201
 msgid "Automatic updating"
 msgstr "Автоматическое обновление"
 
@@ -941,7 +941,7 @@ msgstr "Автоматическое обновление"
 msgid "Automatically determine based on sample rate."
 msgstr "Определять автоматически на основе частоты дискретизации."
 
-#: ../bin/src/ui_librarysettingspage.h:207
+#: ../bin/src/ui_librarysettingspage.h:220
 msgid "Automatically open single categories in the library tree"
 msgstr "Автоматически раскрывать одиночные категории в дереве фонотеки"
 
@@ -1835,7 +1835,7 @@ msgstr "Непрерывная передача"
 
 #: internet/icecast/icecastfilterwidget.cpp:35
 #: internet/core/searchboxwidget.cpp:34 library/libraryfilterwidget.cpp:96
-#: ../bin/src/ui_librarysettingspage.h:206
+#: ../bin/src/ui_librarysettingspage.h:219
 msgid "Display options"
 msgstr "Настройки вида"
 
@@ -3334,7 +3334,7 @@ msgstr "Предустановки projectM не найдены"
 msgid "Model"
 msgstr "Модель"
 
-#: ../bin/src/ui_librarysettingspage.h:191
+#: ../bin/src/ui_librarysettingspage.h:203
 msgid "Monitor the library for changes"
 msgstr "Следить за изменениями фонотеки"
 
@@ -3393,7 +3393,7 @@ msgstr "Переместить вверх"
 msgid "Music"
 msgstr "Музыка"
 
-#: ../bin/src/ui_librarysettingspage.h:185
+#: ../bin/src/ui_librarysettingspage.h:197
 msgid "Music Library"
 msgstr "Фонотека"
 
@@ -3999,7 +3999,7 @@ msgstr "Настройки"
 msgid "Preferences..."
 msgstr "Настройки…"
 
-#: ../bin/src/ui_librarysettingspage.h:201
+#: ../bin/src/ui_librarysettingspage.h:214
 msgid "Preferred album art filenames (comma separated)"
 msgstr "Приоритетные имена файлов обложек (через запятые)"
 
@@ -4254,7 +4254,7 @@ msgstr "Удалить текущую песню из плейлиста"
 msgid "Remove duplicates from playlist"
 msgstr "Удалить повторы из плейлиста"
 
-#: ../bin/src/ui_librarysettingspage.h:188
+#: ../bin/src/ui_librarysettingspage.h:200
 msgid "Remove folder"
 msgstr "Удалить папку"
 
@@ -4459,11 +4459,11 @@ msgstr "Сохранить плейлист…"
 msgid "Save preset"
 msgstr "Сохранить профиль"
 
-#: ../bin/src/ui_librarysettingspage.h:192
+#: ../bin/src/ui_librarysettingspage.h:204
 msgid "Save ratings in file tags when possible"
 msgstr "Записывать рейтинги в теги файлов, если возможно"
 
-#: ../bin/src/ui_librarysettingspage.h:196
+#: ../bin/src/ui_librarysettingspage.h:208
 msgid "Save statistics in file tags when possible"
 msgstr "Записывать статистику в теги файлов, если возможно"
 
@@ -4768,11 +4768,11 @@ msgstr "Показать все композиции"
 msgid "Show all the songs"
 msgstr "Показать все песни"
 
-#: ../bin/src/ui_librarysettingspage.h:208
+#: ../bin/src/ui_librarysettingspage.h:221
 msgid "Show cover art in library"
 msgstr "Показывать обложки в фонотеке"
 
-#: ../bin/src/ui_librarysettingspage.h:209
+#: ../bin/src/ui_librarysettingspage.h:222
 msgid "Show dividers"
 msgstr "Показывать разделители"
 
@@ -4888,6 +4888,10 @@ msgstr "Переместить назад в плейлисте"
 #: playlist/playlist.cpp:1410 ../bin/src/ui_edittagdialog.h:706
 msgid "Skip count"
 msgstr "Количество пропусков"
+
+#: ../bin/src/ui_librarysettingspage.h:213
+msgid "Skip files with these extensions (comma separated, case insensitive)"
+msgstr ""
 
 #: core/commandlineoptions.cpp:166
 msgid "Skip forwards in playlist"
@@ -5146,7 +5150,7 @@ msgstr "Очень высокое (2048x2048)"
 msgid "Supported formats"
 msgstr "Поддерживаемые форматы"
 
-#: ../bin/src/ui_librarysettingspage.h:200
+#: ../bin/src/ui_librarysettingspage.h:212
 msgid "Synchronize statistics to files now"
 msgstr "Синхронизировать статистику в файлы"
 
@@ -5274,7 +5278,7 @@ msgid ""
 "continue?"
 msgstr "Эти файлы будут окончательно удалены с диска, Вы действительно хотите продолжить?"
 
-#: ../bin/src/ui_librarysettingspage.h:186
+#: ../bin/src/ui_librarysettingspage.h:198
 msgid "These folders will be scanned for music to make up your library"
 msgstr "В этих каталогах будет выполнен поиск музыки при создании вашей фонотеки"
 
@@ -5538,7 +5542,7 @@ msgstr "Обновить все подкасты"
 msgid "Update changed library folders"
 msgstr "Сканировать обновлённые папки"
 
-#: ../bin/src/ui_librarysettingspage.h:190
+#: ../bin/src/ui_librarysettingspage.h:202
 msgid "Update the library when Clementine starts"
 msgstr "Обновлять фонотеку при запуске Clementine"
 
@@ -5768,7 +5772,7 @@ msgstr "При запуске Clementine"
 msgid "When calculating play counts, use"
 msgstr "При подсчёте количества проигрываний использовать"
 
-#: ../bin/src/ui_librarysettingspage.h:203
+#: ../bin/src/ui_librarysettingspage.h:216
 msgid ""
 "When looking for album art Clementine will first look for picture files that contain one of these words.\n"
 "If there are no matches then it will use the largest image in the directory."
@@ -5858,7 +5862,7 @@ msgstr "Хотите ли вы переместить и другие песни
 msgid "Would you like to run a full rescan right now?"
 msgstr "Желаете запустить повторное сканирование?"
 
-#: library/librarysettingspage.cpp:154
+#: library/librarysettingspage.cpp:161
 msgid "Write all songs statistics into songs' files"
 msgstr "Записать все статистические данные в файлы композиций"
 

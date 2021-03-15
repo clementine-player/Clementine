@@ -14,7 +14,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2021-02-27 13:26+0000\n"
+"PO-Revision-Date: 2021-03-14 14:12+0000\n"
 "Last-Translator: John Maguire <john.maguire@gmail.com>\n"
 "Language-Team: Slovak (http://www.transifex.com/davidsansome/clementine/language/sk/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -338,7 +338,7 @@ msgstr "96 000 Hz"
 msgid "<a href=\"http://www.di.fm/premium/\">Upgrade to Premium now</a>"
 msgstr "<a href=\"http://www.di.fm/premium/\">Prejsť teraz na prémium verziu</a>"
 
-#: ../bin/src/ui_librarysettingspage.h:194
+#: ../bin/src/ui_librarysettingspage.h:206
 msgid ""
 "<html><head/><body><p>If not checked, Clementine will  try to save your "
 "ratings and other statistics only in a separate database and don't modify "
@@ -364,7 +364,7 @@ msgid ""
 "style:italic;\">%1</span>.</p></body></html>"
 msgstr "<html><head/><body><p>Pred hľadaný výraz napíšte typ výrazu, ktorý hľadáte, napr. <span style=\" font-weight:600;\">artist:</span><span style=\" font-style:italic;\">Spears</span> vyhľadá v zbierke všetkých interprétov, ktorí obsahujú slovo Spears, <span style=\" font-weight:600;\">playcount:</span><span style=\" font-style:italic;\">&gt;=2</span> vyhľadá v zbierke piesne prehrané aspoň dvakrát, <span style=\" font-weight:600;\">lastplayed:</span>&lt;<span style=\" font-style:italic;\">1h30m</span> vyhľadá v zbierke piesne prehrávané aspoň 180 minút.</p><p><span style=\" font-weight:600;\">Dostupné typy: </span><span style=\" font-style:italic;\">%1</span>.</p></body></html>"
 
-#: ../bin/src/ui_librarysettingspage.h:198
+#: ../bin/src/ui_librarysettingspage.h:210
 msgid ""
 "<html><head/><body><p>This will write songs' ratings and statistics into "
 "files tags for all your library's songs.</p><p>This is not needed if the "
@@ -547,7 +547,7 @@ msgstr "Pridať priečinok"
 msgid "Add folder..."
 msgstr "Pridať priečinok..."
 
-#: ../bin/src/ui_librarysettingspage.h:187
+#: ../bin/src/ui_librarysettingspage.h:199
 msgid "Add new folder..."
 msgstr "Pridať nový priečinok..."
 
@@ -850,7 +850,7 @@ msgstr "Ste si istý, že chcete vymazať predvoľbu \"%1\"?"
 msgid "Are you sure you want to reset this song's statistics?"
 msgstr "Ste si istý, že chcete zresetovať štatistiky tejto piesne?"
 
-#: library/librarysettingspage.cpp:155
+#: library/librarysettingspage.cpp:162
 msgid ""
 "Are you sure you want to write song's statistics into song's file for all "
 "the songs of your library?"
@@ -911,7 +911,7 @@ msgstr "Automaticky"
 msgid "Automatic"
 msgstr "Automaticky"
 
-#: ../bin/src/ui_librarysettingspage.h:189
+#: ../bin/src/ui_librarysettingspage.h:201
 msgid "Automatic updating"
 msgstr "Automatické aktualizovanie"
 
@@ -919,7 +919,7 @@ msgstr "Automatické aktualizovanie"
 msgid "Automatically determine based on sample rate."
 msgstr "Automaticky rozpoznať podľa vzorkovacej frekvencie."
 
-#: ../bin/src/ui_librarysettingspage.h:207
+#: ../bin/src/ui_librarysettingspage.h:220
 msgid "Automatically open single categories in the library tree"
 msgstr "Automaticky otvoriť jednotlivé kategórie v strome zbierky"
 
@@ -1813,7 +1813,7 @@ msgstr "Nesúvislý prenos"
 
 #: internet/icecast/icecastfilterwidget.cpp:35
 #: internet/core/searchboxwidget.cpp:34 library/libraryfilterwidget.cpp:96
-#: ../bin/src/ui_librarysettingspage.h:206
+#: ../bin/src/ui_librarysettingspage.h:219
 msgid "Display options"
 msgstr "Možnosti zobrazovania"
 
@@ -3312,7 +3312,7 @@ msgstr "Chýbajú projectM predvoľby"
 msgid "Model"
 msgstr "Model"
 
-#: ../bin/src/ui_librarysettingspage.h:191
+#: ../bin/src/ui_librarysettingspage.h:203
 msgid "Monitor the library for changes"
 msgstr "Sledovať zmeny v zbierke"
 
@@ -3371,7 +3371,7 @@ msgstr "Posunúť vyššie"
 msgid "Music"
 msgstr "Hudba"
 
-#: ../bin/src/ui_librarysettingspage.h:185
+#: ../bin/src/ui_librarysettingspage.h:197
 msgid "Music Library"
 msgstr "Hudobná zbierka"
 
@@ -3977,7 +3977,7 @@ msgstr "Nastavenia"
 msgid "Preferences..."
 msgstr "Nastavenia..."
 
-#: ../bin/src/ui_librarysettingspage.h:201
+#: ../bin/src/ui_librarysettingspage.h:214
 msgid "Preferred album art filenames (comma separated)"
 msgstr "Preferované názvy súborov obalov albumov (oddelené čiarkou)"
 
@@ -4232,7 +4232,7 @@ msgstr "Odstrániť aktuálnu pieseň z playlistu"
 msgid "Remove duplicates from playlist"
 msgstr "Odstrániť duplikáty z playlistu"
 
-#: ../bin/src/ui_librarysettingspage.h:188
+#: ../bin/src/ui_librarysettingspage.h:200
 msgid "Remove folder"
 msgstr "Odstrániť priečinok"
 
@@ -4437,11 +4437,11 @@ msgstr "Uložiť playlist..."
 msgid "Save preset"
 msgstr "Uložiť predvoľbu"
 
-#: ../bin/src/ui_librarysettingspage.h:192
+#: ../bin/src/ui_librarysettingspage.h:204
 msgid "Save ratings in file tags when possible"
 msgstr "Ukladať hodnotenie do tagov súboru, keď je to možné"
 
-#: ../bin/src/ui_librarysettingspage.h:196
+#: ../bin/src/ui_librarysettingspage.h:208
 msgid "Save statistics in file tags when possible"
 msgstr "Ukladať štatistiku do tagov súboru, keď je to možné"
 
@@ -4746,11 +4746,11 @@ msgstr "Zobraziť všetky piesne"
 msgid "Show all the songs"
 msgstr "Zobraziť všetky piesne"
 
-#: ../bin/src/ui_librarysettingspage.h:208
+#: ../bin/src/ui_librarysettingspage.h:221
 msgid "Show cover art in library"
 msgstr "Zobraziť obaly albumov v zbierke"
 
-#: ../bin/src/ui_librarysettingspage.h:209
+#: ../bin/src/ui_librarysettingspage.h:222
 msgid "Show dividers"
 msgstr "Zobraziť oddeľovače"
 
@@ -4866,6 +4866,10 @@ msgstr "Preskočiť dozadu v playliste"
 #: playlist/playlist.cpp:1410 ../bin/src/ui_edittagdialog.h:706
 msgid "Skip count"
 msgstr "Počet preskočení"
+
+#: ../bin/src/ui_librarysettingspage.h:213
+msgid "Skip files with these extensions (comma separated, case insensitive)"
+msgstr ""
 
 #: core/commandlineoptions.cpp:166
 msgid "Skip forwards in playlist"
@@ -5124,7 +5128,7 @@ msgstr "Super vysoká (2048x2048)"
 msgid "Supported formats"
 msgstr "Podporované formáty"
 
-#: ../bin/src/ui_librarysettingspage.h:200
+#: ../bin/src/ui_librarysettingspage.h:212
 msgid "Synchronize statistics to files now"
 msgstr "Synchronizovať štatistiky do súborov teraz"
 
@@ -5252,7 +5256,7 @@ msgid ""
 "continue?"
 msgstr "Tieto súbory budú trvalo vymazané z disku. Ste si istý, že chcete pokračovať?"
 
-#: ../bin/src/ui_librarysettingspage.h:186
+#: ../bin/src/ui_librarysettingspage.h:198
 msgid "These folders will be scanned for music to make up your library"
 msgstr "Tieto priečinky budú prehľadané pre vytvorenie vašej zbierky"
 
@@ -5516,7 +5520,7 @@ msgstr "Aktualizovať všetky podcasty"
 msgid "Update changed library folders"
 msgstr "Aktualizovať zmenené priečinky v zbierke"
 
-#: ../bin/src/ui_librarysettingspage.h:190
+#: ../bin/src/ui_librarysettingspage.h:202
 msgid "Update the library when Clementine starts"
 msgstr "Aktualizovať zbierku pri zapnutí Clementine"
 
@@ -5746,7 +5750,7 @@ msgstr "Pri zapnutí Clementine"
 msgid "When calculating play counts, use"
 msgstr "Pri počítaní počtu prehraní použiť"
 
-#: ../bin/src/ui_librarysettingspage.h:203
+#: ../bin/src/ui_librarysettingspage.h:216
 msgid ""
 "When looking for album art Clementine will first look for picture files that contain one of these words.\n"
 "If there are no matches then it will use the largest image in the directory."
@@ -5836,7 +5840,7 @@ msgstr "Chceli by ste presunúť tiež ostatné piesne v tomto albume do rôznyc
 msgid "Would you like to run a full rescan right now?"
 msgstr "Chcete teraz spustiť úplné preskenovanie?"
 
-#: library/librarysettingspage.cpp:154
+#: library/librarysettingspage.cpp:161
 msgid "Write all songs statistics into songs' files"
 msgstr "Zapísať všetky štatistiky piesní do súborov piesní"
 

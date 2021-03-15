@@ -21,7 +21,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2021-02-27 13:26+0000\n"
+"PO-Revision-Date: 2021-03-14 14:12+0000\n"
 "Last-Translator: John Maguire <john.maguire@gmail.com>\n"
 "Language-Team: Japanese (http://www.transifex.com/davidsansome/clementine/language/ja/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -345,7 +345,7 @@ msgstr "96,000Hz"
 msgid "<a href=\"http://www.di.fm/premium/\">Upgrade to Premium now</a>"
 msgstr "<a href=\"http://www.di.fm/premium/\">今すぐプレミアム版へアップグレードする</a>"
 
-#: ../bin/src/ui_librarysettingspage.h:194
+#: ../bin/src/ui_librarysettingspage.h:206
 msgid ""
 "<html><head/><body><p>If not checked, Clementine will  try to save your "
 "ratings and other statistics only in a separate database and don't modify "
@@ -371,7 +371,7 @@ msgid ""
 "style:italic;\">%1</span>.</p></body></html>"
 msgstr ""
 
-#: ../bin/src/ui_librarysettingspage.h:198
+#: ../bin/src/ui_librarysettingspage.h:210
 msgid ""
 "<html><head/><body><p>This will write songs' ratings and statistics into "
 "files tags for all your library's songs.</p><p>This is not needed if the "
@@ -554,7 +554,7 @@ msgstr "フォルダーを追加"
 msgid "Add folder..."
 msgstr "フォルダーを追加..."
 
-#: ../bin/src/ui_librarysettingspage.h:187
+#: ../bin/src/ui_librarysettingspage.h:199
 msgid "Add new folder..."
 msgstr "新しいフォルダーを追加..."
 
@@ -857,7 +857,7 @@ msgstr "プリセット「%1」を削除してもよろしいですか?"
 msgid "Are you sure you want to reset this song's statistics?"
 msgstr "この曲の統計をリセットしてもよろしいですか?"
 
-#: library/librarysettingspage.cpp:155
+#: library/librarysettingspage.cpp:162
 msgid ""
 "Are you sure you want to write song's statistics into song's file for all "
 "the songs of your library?"
@@ -918,7 +918,7 @@ msgstr "自動"
 msgid "Automatic"
 msgstr "自動"
 
-#: ../bin/src/ui_librarysettingspage.h:189
+#: ../bin/src/ui_librarysettingspage.h:201
 msgid "Automatic updating"
 msgstr "自動更新中"
 
@@ -926,7 +926,7 @@ msgstr "自動更新中"
 msgid "Automatically determine based on sample rate."
 msgstr ""
 
-#: ../bin/src/ui_librarysettingspage.h:207
+#: ../bin/src/ui_librarysettingspage.h:220
 msgid "Automatically open single categories in the library tree"
 msgstr "下位カテゴリが 1 つしかないときは、ライブラリツリーを自動で開く"
 
@@ -1820,7 +1820,7 @@ msgstr "不連続送信 (DTX)"
 
 #: internet/icecast/icecastfilterwidget.cpp:35
 #: internet/core/searchboxwidget.cpp:34 library/libraryfilterwidget.cpp:96
-#: ../bin/src/ui_librarysettingspage.h:206
+#: ../bin/src/ui_librarysettingspage.h:219
 msgid "Display options"
 msgstr "画面のオプション"
 
@@ -3319,7 +3319,7 @@ msgstr "projectM プリセットがありません"
 msgid "Model"
 msgstr "モデル"
 
-#: ../bin/src/ui_librarysettingspage.h:191
+#: ../bin/src/ui_librarysettingspage.h:203
 msgid "Monitor the library for changes"
 msgstr "ライブラリの変更を監視する"
 
@@ -3378,7 +3378,7 @@ msgstr "上へ移動"
 msgid "Music"
 msgstr "ミュージック"
 
-#: ../bin/src/ui_librarysettingspage.h:185
+#: ../bin/src/ui_librarysettingspage.h:197
 msgid "Music Library"
 msgstr "ミュージックライブラリ"
 
@@ -3984,7 +3984,7 @@ msgstr "設定"
 msgid "Preferences..."
 msgstr "設定..."
 
-#: ../bin/src/ui_librarysettingspage.h:201
+#: ../bin/src/ui_librarysettingspage.h:214
 msgid "Preferred album art filenames (comma separated)"
 msgstr "優先するアルバムアートのファイル名 (コンマ区切り)"
 
@@ -4239,7 +4239,7 @@ msgstr ""
 msgid "Remove duplicates from playlist"
 msgstr "重複するものをプレイリストから削除"
 
-#: ../bin/src/ui_librarysettingspage.h:188
+#: ../bin/src/ui_librarysettingspage.h:200
 msgid "Remove folder"
 msgstr "フォルダーの削除"
 
@@ -4444,11 +4444,11 @@ msgstr "プレイリストの保存..."
 msgid "Save preset"
 msgstr "プリセットの保存"
 
-#: ../bin/src/ui_librarysettingspage.h:192
+#: ../bin/src/ui_librarysettingspage.h:204
 msgid "Save ratings in file tags when possible"
 msgstr "可能であれば評価をファイルのタグに保存する"
 
-#: ../bin/src/ui_librarysettingspage.h:196
+#: ../bin/src/ui_librarysettingspage.h:208
 msgid "Save statistics in file tags when possible"
 msgstr "可能であれば統計情報をファイルのタグに保存する"
 
@@ -4753,11 +4753,11 @@ msgstr "すべての曲を表示する"
 msgid "Show all the songs"
 msgstr "すべての曲を表示する"
 
-#: ../bin/src/ui_librarysettingspage.h:208
+#: ../bin/src/ui_librarysettingspage.h:221
 msgid "Show cover art in library"
 msgstr "ライブラリにカバーアートを表示する"
 
-#: ../bin/src/ui_librarysettingspage.h:209
+#: ../bin/src/ui_librarysettingspage.h:222
 msgid "Show dividers"
 msgstr "区切りを表示する"
 
@@ -4873,6 +4873,10 @@ msgstr "プレイリストで後ろにスキップ"
 #: playlist/playlist.cpp:1410 ../bin/src/ui_edittagdialog.h:706
 msgid "Skip count"
 msgstr "スキップ回数"
+
+#: ../bin/src/ui_librarysettingspage.h:213
+msgid "Skip files with these extensions (comma separated, case insensitive)"
+msgstr ""
 
 #: core/commandlineoptions.cpp:166
 msgid "Skip forwards in playlist"
@@ -5131,7 +5135,7 @@ msgstr "最高 (2048x2048)"
 msgid "Supported formats"
 msgstr "サポートされている形式"
 
-#: ../bin/src/ui_librarysettingspage.h:200
+#: ../bin/src/ui_librarysettingspage.h:212
 msgid "Synchronize statistics to files now"
 msgstr "統計情報をいますぐ同期する"
 
@@ -5259,7 +5263,7 @@ msgid ""
 "continue?"
 msgstr "これらのファイルは完全にディスクから削除されます。継続しますか?"
 
-#: ../bin/src/ui_librarysettingspage.h:186
+#: ../bin/src/ui_librarysettingspage.h:198
 msgid "These folders will be scanned for music to make up your library"
 msgstr "これらのフォルダーはライブラリを作成するためにスキャンされます"
 
@@ -5523,7 +5527,7 @@ msgstr "すべてのポッドキャストを更新"
 msgid "Update changed library folders"
 msgstr "変更されたライブラリフォルダーを更新"
 
-#: ../bin/src/ui_librarysettingspage.h:190
+#: ../bin/src/ui_librarysettingspage.h:202
 msgid "Update the library when Clementine starts"
 msgstr "Clementine の起動時にライブラリを更新する"
 
@@ -5753,7 +5757,7 @@ msgstr "Clementine の起動時"
 msgid "When calculating play counts, use"
 msgstr ""
 
-#: ../bin/src/ui_librarysettingspage.h:203
+#: ../bin/src/ui_librarysettingspage.h:216
 msgid ""
 "When looking for album art Clementine will first look for picture files that contain one of these words.\n"
 "If there are no matches then it will use the largest image in the directory."
@@ -5843,7 +5847,7 @@ msgstr "このアルバムにある他の曲も さまざまなアーティス�
 msgid "Would you like to run a full rescan right now?"
 msgstr "全体の再スキャンを今すぐ実行しますか?"
 
-#: library/librarysettingspage.cpp:154
+#: library/librarysettingspage.cpp:161
 msgid "Write all songs statistics into songs' files"
 msgstr "すべての曲の統計情報を曲ファイルに書き込む"
 

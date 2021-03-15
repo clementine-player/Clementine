@@ -12,8 +12,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2021-03-08 22:12+0000\n"
-"Last-Translator: Priit Jõerüüt <transifex@joeruut.com>\n"
+"PO-Revision-Date: 2021-03-14 14:12+0000\n"
+"Last-Translator: John Maguire <john.maguire@gmail.com>\n"
 "Language-Team: Estonian (http://www.transifex.com/davidsansome/clementine/language/et/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -336,7 +336,7 @@ msgstr "96,000Hz"
 msgid "<a href=\"http://www.di.fm/premium/\">Upgrade to Premium now</a>"
 msgstr "<a href=\"http://www.di.fm/premium/\">Osta Premium-toode</a>"
 
-#: ../bin/src/ui_librarysettingspage.h:194
+#: ../bin/src/ui_librarysettingspage.h:206
 msgid ""
 "<html><head/><body><p>If not checked, Clementine will  try to save your "
 "ratings and other statistics only in a separate database and don't modify "
@@ -362,7 +362,7 @@ msgid ""
 "style:italic;\">%1</span>.</p></body></html>"
 msgstr "<html><head/><body><p>Kui soovid otsingut piirata konkreetse väljaga, siis sisesta see otsingusõna prefiksina, näiteks <span style=\" font-weight:600;\">artist:</span><span style=\" font-style:italic;\">Kuld</span> otsib muusikakogust esitajaid, kelle nimes leidub Kuld ning<span style=\" font-weight:600;\">playcount:</span><span style=\" font-style:italic;\">&gt;=2</span> otsib muusikakogust lugusid mida on esitatud vähemalt kaks korda või <span style=\" font-weight:600;\">lastplayed:</span>&lt;<span style=\" font-style:italic;\">1h30m</span> otsib lugusid, mida on esitatud viimase 180 minuti jooksul.</p><p><span style=\" font-weight:600;\">Kasutatavad väljad: </span> <span style=\" font-style:italic;\">%1</span>.</p></body></html>"
 
-#: ../bin/src/ui_librarysettingspage.h:198
+#: ../bin/src/ui_librarysettingspage.h:210
 msgid ""
 "<html><head/><body><p>This will write songs' ratings and statistics into "
 "files tags for all your library's songs.</p><p>This is not needed if the "
@@ -545,7 +545,7 @@ msgstr "Lisa kaust"
 msgid "Add folder..."
 msgstr "Lisa kaust..."
 
-#: ../bin/src/ui_librarysettingspage.h:187
+#: ../bin/src/ui_librarysettingspage.h:199
 msgid "Add new folder..."
 msgstr "Lisa uus kaust..."
 
@@ -848,7 +848,7 @@ msgstr "Kas sa kindlasti soovid kustutada \"%1\" eelseadistust?"
 msgid "Are you sure you want to reset this song's statistics?"
 msgstr "Kas sa kindlasti soovid nullida selle loo statistika?"
 
-#: library/librarysettingspage.cpp:155
+#: library/librarysettingspage.cpp:162
 msgid ""
 "Are you sure you want to write song's statistics into song's file for all "
 "the songs of your library?"
@@ -909,7 +909,7 @@ msgstr "Auto"
 msgid "Automatic"
 msgstr "Määratud automaatselt"
 
-#: ../bin/src/ui_librarysettingspage.h:189
+#: ../bin/src/ui_librarysettingspage.h:201
 msgid "Automatic updating"
 msgstr "Automaatne uuendamine"
 
@@ -917,7 +917,7 @@ msgstr "Automaatne uuendamine"
 msgid "Automatically determine based on sample rate."
 msgstr "Otsusta automaatselt diskreetimissageduse põhjal."
 
-#: ../bin/src/ui_librarysettingspage.h:207
+#: ../bin/src/ui_librarysettingspage.h:220
 msgid "Automatically open single categories in the library tree"
 msgstr "Automaatselt ava üksikkategooriad muusikakogu puus"
 
@@ -1811,7 +1811,7 @@ msgstr "Katkestustega edastamine"
 
 #: internet/icecast/icecastfilterwidget.cpp:35
 #: internet/core/searchboxwidget.cpp:34 library/libraryfilterwidget.cpp:96
-#: ../bin/src/ui_librarysettingspage.h:206
+#: ../bin/src/ui_librarysettingspage.h:219
 msgid "Display options"
 msgstr "Kuvamise valikud"
 
@@ -3310,7 +3310,7 @@ msgstr "ProjectM eelseadistused puuduvad"
 msgid "Model"
 msgstr "Mudel"
 
-#: ../bin/src/ui_librarysettingspage.h:191
+#: ../bin/src/ui_librarysettingspage.h:203
 msgid "Monitor the library for changes"
 msgstr "Jälgi muutusi helikogus"
 
@@ -3369,7 +3369,7 @@ msgstr "Liiguta üles"
 msgid "Music"
 msgstr "Muusika"
 
-#: ../bin/src/ui_librarysettingspage.h:185
+#: ../bin/src/ui_librarysettingspage.h:197
 msgid "Music Library"
 msgstr "Muusikakogu"
 
@@ -3975,7 +3975,7 @@ msgstr "Seadistused"
 msgid "Preferences..."
 msgstr "Seadistused..."
 
-#: ../bin/src/ui_librarysettingspage.h:201
+#: ../bin/src/ui_librarysettingspage.h:214
 msgid "Preferred album art filenames (comma separated)"
 msgstr "Eelistatud kaanepiltide failinimed (eralda komadega)"
 
@@ -4230,7 +4230,7 @@ msgstr "Eemalda see lugu esitusloendist"
 msgid "Remove duplicates from playlist"
 msgstr "Eemalda topeltlood esitusloendist"
 
-#: ../bin/src/ui_librarysettingspage.h:188
+#: ../bin/src/ui_librarysettingspage.h:200
 msgid "Remove folder"
 msgstr "Eemalda kaust"
 
@@ -4435,11 +4435,11 @@ msgstr "Salvesta esitusloend..."
 msgid "Save preset"
 msgstr "Eelmääratluse salvestamine"
 
-#: ../bin/src/ui_librarysettingspage.h:192
+#: ../bin/src/ui_librarysettingspage.h:204
 msgid "Save ratings in file tags when possible"
 msgstr "Kui võimalik, siis salvesta hinnangud faili siltidena"
 
-#: ../bin/src/ui_librarysettingspage.h:196
+#: ../bin/src/ui_librarysettingspage.h:208
 msgid "Save statistics in file tags when possible"
 msgstr "Kui võimalik, siis salvesta statistika faili siltidena"
 
@@ -4744,11 +4744,11 @@ msgstr "Näita kõiki lugusid"
 msgid "Show all the songs"
 msgstr "Näita kõiki lugusid"
 
-#: ../bin/src/ui_librarysettingspage.h:208
+#: ../bin/src/ui_librarysettingspage.h:221
 msgid "Show cover art in library"
 msgstr "Näita kaanepilte helikogus"
 
-#: ../bin/src/ui_librarysettingspage.h:209
+#: ../bin/src/ui_librarysettingspage.h:222
 msgid "Show dividers"
 msgstr "Näita eraldajaid"
 
@@ -4864,6 +4864,10 @@ msgstr "Samm lugude nimekirjas tagasi"
 #: playlist/playlist.cpp:1410 ../bin/src/ui_edittagdialog.h:706
 msgid "Skip count"
 msgstr "Vahelejätmiskorrad"
+
+#: ../bin/src/ui_librarysettingspage.h:213
+msgid "Skip files with these extensions (comma separated, case insensitive)"
+msgstr ""
 
 #: core/commandlineoptions.cpp:166
 msgid "Skip forwards in playlist"
@@ -5122,7 +5126,7 @@ msgstr "Ülikõrge (2048x2048)"
 msgid "Supported formats"
 msgstr "Toetatud vormingud"
 
-#: ../bin/src/ui_librarysettingspage.h:200
+#: ../bin/src/ui_librarysettingspage.h:212
 msgid "Synchronize statistics to files now"
 msgstr "Sünkroniseeri lugude statistika lugude failidesse nüüd kohe"
 
@@ -5250,7 +5254,7 @@ msgid ""
 "continue?"
 msgstr "Need failid kustutatakse kettalt jäädavalt. Kas sa kindlasti soovid jätkata?"
 
-#: ../bin/src/ui_librarysettingspage.h:186
+#: ../bin/src/ui_librarysettingspage.h:198
 msgid "These folders will be scanned for music to make up your library"
 msgstr "Nendest kaustadest otsime lugusid sinu helikogu jaoks"
 
@@ -5514,7 +5518,7 @@ msgstr "Uuenda kõiki taskuhäälinguid"
 msgid "Update changed library folders"
 msgstr "Uuenda helikogu kui kaustades on muutusi"
 
-#: ../bin/src/ui_librarysettingspage.h:190
+#: ../bin/src/ui_librarysettingspage.h:202
 msgid "Update the library when Clementine starts"
 msgstr "Clementine käivitumisel täienda helikogu"
 
@@ -5744,7 +5748,7 @@ msgstr "Clementine käivitumisel"
 msgid "When calculating play counts, use"
 msgstr "Kui arvutad esituskordi, siis kasuta"
 
-#: ../bin/src/ui_librarysettingspage.h:203
+#: ../bin/src/ui_librarysettingspage.h:216
 msgid ""
 "When looking for album art Clementine will first look for picture files that contain one of these words.\n"
 "If there are no matches then it will use the largest image in the directory."
@@ -5834,7 +5838,7 @@ msgstr "Kas sa soovid ka muud selle albumi lood liigitada erinevate esitajate al
 msgid "Would you like to run a full rescan right now?"
 msgstr "Kas sa soovid teha uut helikogu täisanalüüsi?"
 
-#: library/librarysettingspage.cpp:154
+#: library/librarysettingspage.cpp:161
 msgid "Write all songs statistics into songs' files"
 msgstr "Kirjuta lugude statistika nende failidesse"
 

@@ -12,7 +12,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2021-02-27 13:26+0000\n"
+"PO-Revision-Date: 2021-03-14 14:12+0000\n"
 "Last-Translator: John Maguire <john.maguire@gmail.com>\n"
 "Language-Team: Lithuanian (http://www.transifex.com/davidsansome/clementine/language/lt/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -336,7 +336,7 @@ msgstr "96,000Hz"
 msgid "<a href=\"http://www.di.fm/premium/\">Upgrade to Premium now</a>"
 msgstr "<a href=\"http://www.di.fm/premium/\">Naujinti į Premium dabar</a>"
 
-#: ../bin/src/ui_librarysettingspage.h:194
+#: ../bin/src/ui_librarysettingspage.h:206
 msgid ""
 "<html><head/><body><p>If not checked, Clementine will  try to save your "
 "ratings and other statistics only in a separate database and don't modify "
@@ -362,7 +362,7 @@ msgid ""
 "style:italic;\">%1</span>.</p></body></html>"
 msgstr "<html><head/><body><p>Naudokite lauko pavadinimą kaip priešdelį, norėdami apriboti paiešką to lauko reikšme, pvz., <span style=\" font-weight:600;\">artist:</span><span style=\" font-style:italic;\">Rytis</span> ieškos fonotekoje visų atlikėjų su žodžiu Rytis, <span style=\" font-weight:600;\">playcount:</span><span style=\" font-style:italic;\">&gt;=2</span> ieškos fonotekoje visų dainų, kurios buvo atkurtos bent 2 kartus, <span style=\" font-weight:600;\">lastplayed:</span>&lt;<span style=\" font-style:italic;\">1h30m</span> ieškos fonotekoje per paskutinių 180 minučių atkurtų dainų.</p><p><span style=\" font-weight:600;\">Prieinami laukai: </span><span style=\" font-style:italic;\">%1</span>.</p></body></html>"
 
-#: ../bin/src/ui_librarysettingspage.h:198
+#: ../bin/src/ui_librarysettingspage.h:210
 msgid ""
 "<html><head/><body><p>This will write songs' ratings and statistics into "
 "files tags for all your library's songs.</p><p>This is not needed if the "
@@ -545,7 +545,7 @@ msgstr "Pridėti aplanką"
 msgid "Add folder..."
 msgstr "Pridėti aplanką..."
 
-#: ../bin/src/ui_librarysettingspage.h:187
+#: ../bin/src/ui_librarysettingspage.h:199
 msgid "Add new folder..."
 msgstr "Pridėti naują aplanką..."
 
@@ -848,7 +848,7 @@ msgstr "Ar tikrai norite ištrinti \"%1\" šabloną?"
 msgid "Are you sure you want to reset this song's statistics?"
 msgstr "Ar tikrai norite atstatyti šios dainos statistiką?"
 
-#: library/librarysettingspage.cpp:155
+#: library/librarysettingspage.cpp:162
 msgid ""
 "Are you sure you want to write song's statistics into song's file for all "
 "the songs of your library?"
@@ -909,7 +909,7 @@ msgstr "Automatiškai"
 msgid "Automatic"
 msgstr "Automatiniai"
 
-#: ../bin/src/ui_librarysettingspage.h:189
+#: ../bin/src/ui_librarysettingspage.h:201
 msgid "Automatic updating"
 msgstr "Automatinis atnaujinimas"
 
@@ -917,7 +917,7 @@ msgstr "Automatinis atnaujinimas"
 msgid "Automatically determine based on sample rate."
 msgstr ""
 
-#: ../bin/src/ui_librarysettingspage.h:207
+#: ../bin/src/ui_librarysettingspage.h:220
 msgid "Automatically open single categories in the library tree"
 msgstr "Automatiškai atverti pavienias kategorijas fonotekos sąraše"
 
@@ -1811,7 +1811,7 @@ msgstr "Nevientisa transliacija"
 
 #: internet/icecast/icecastfilterwidget.cpp:35
 #: internet/core/searchboxwidget.cpp:34 library/libraryfilterwidget.cpp:96
-#: ../bin/src/ui_librarysettingspage.h:206
+#: ../bin/src/ui_librarysettingspage.h:219
 msgid "Display options"
 msgstr "Rodymo parinktys"
 
@@ -3310,7 +3310,7 @@ msgstr "Trūksta projectM šablonų"
 msgid "Model"
 msgstr "Modelis"
 
-#: ../bin/src/ui_librarysettingspage.h:191
+#: ../bin/src/ui_librarysettingspage.h:203
 msgid "Monitor the library for changes"
 msgstr "Stebėti fonoteką dėl pasikeitimų"
 
@@ -3369,7 +3369,7 @@ msgstr "Perkelti aukštyn"
 msgid "Music"
 msgstr "Muzika"
 
-#: ../bin/src/ui_librarysettingspage.h:185
+#: ../bin/src/ui_librarysettingspage.h:197
 msgid "Music Library"
 msgstr "Fonoteka"
 
@@ -3975,7 +3975,7 @@ msgstr "Nuostatos"
 msgid "Preferences..."
 msgstr "Nuostatos..."
 
-#: ../bin/src/ui_librarysettingspage.h:201
+#: ../bin/src/ui_librarysettingspage.h:214
 msgid "Preferred album art filenames (comma separated)"
 msgstr "Pageidaujamas viršelio paveikslėlio failo pavadinimas (atskirta kableliais)"
 
@@ -4230,7 +4230,7 @@ msgstr "Šalinti esamą dainą iš grojaraščio"
 msgid "Remove duplicates from playlist"
 msgstr "Pašalinti dublikatus iš grojaraščio"
 
-#: ../bin/src/ui_librarysettingspage.h:188
+#: ../bin/src/ui_librarysettingspage.h:200
 msgid "Remove folder"
 msgstr "Pašalinti aplanką"
 
@@ -4435,11 +4435,11 @@ msgstr "Įrašyti grojaraštį..."
 msgid "Save preset"
 msgstr "Įrašyti šabloną"
 
-#: ../bin/src/ui_librarysettingspage.h:192
+#: ../bin/src/ui_librarysettingspage.h:204
 msgid "Save ratings in file tags when possible"
 msgstr "Kai įmanoma, įrašyti įvertinimus į failo žymes"
 
-#: ../bin/src/ui_librarysettingspage.h:196
+#: ../bin/src/ui_librarysettingspage.h:208
 msgid "Save statistics in file tags when possible"
 msgstr "Kai įmanoma, įrašyti statistiką į failo žymes"
 
@@ -4744,11 +4744,11 @@ msgstr "Rodyti visas dainas"
 msgid "Show all the songs"
 msgstr "Rodyti visas dainas"
 
-#: ../bin/src/ui_librarysettingspage.h:208
+#: ../bin/src/ui_librarysettingspage.h:221
 msgid "Show cover art in library"
 msgstr "Rodyti albumo viršelius fonotekoje"
 
-#: ../bin/src/ui_librarysettingspage.h:209
+#: ../bin/src/ui_librarysettingspage.h:222
 msgid "Show dividers"
 msgstr "Rodyti skirtukus"
 
@@ -4864,6 +4864,10 @@ msgstr "Ankstesnis kūrinys grojaraštyje"
 #: playlist/playlist.cpp:1410 ../bin/src/ui_edittagdialog.h:706
 msgid "Skip count"
 msgstr "Praleisti skaičiavimą"
+
+#: ../bin/src/ui_librarysettingspage.h:213
+msgid "Skip files with these extensions (comma separated, case insensitive)"
+msgstr ""
 
 #: core/commandlineoptions.cpp:166
 msgid "Skip forwards in playlist"
@@ -5122,7 +5126,7 @@ msgstr "Super aukšta (2048x2048)"
 msgid "Supported formats"
 msgstr "Palaikomi formatai"
 
-#: ../bin/src/ui_librarysettingspage.h:200
+#: ../bin/src/ui_librarysettingspage.h:212
 msgid "Synchronize statistics to files now"
 msgstr "Sinchronizuoti statistiką į failus dabar"
 
@@ -5250,7 +5254,7 @@ msgid ""
 "continue?"
 msgstr "Šie failai bus ištrinti iš disko, ar tikrai norite tęsti?"
 
-#: ../bin/src/ui_librarysettingspage.h:186
+#: ../bin/src/ui_librarysettingspage.h:198
 msgid "These folders will be scanned for music to make up your library"
 msgstr "Šie aplankai bus skenuojami formuojant fonoteką"
 
@@ -5514,7 +5518,7 @@ msgstr "Atnaujinti visas tinklalaides"
 msgid "Update changed library folders"
 msgstr "Atnaujinti pakeistus fonotekos katalogus"
 
-#: ../bin/src/ui_librarysettingspage.h:190
+#: ../bin/src/ui_librarysettingspage.h:202
 msgid "Update the library when Clementine starts"
 msgstr "Atnaujinti fonoteką paleidžiant Clementine"
 
@@ -5744,7 +5748,7 @@ msgstr "Kai  Clementine paleidžiamas"
 msgid "When calculating play counts, use"
 msgstr "Apskaičiuojant perklausų skaičių, naudoti"
 
-#: ../bin/src/ui_librarysettingspage.h:203
+#: ../bin/src/ui_librarysettingspage.h:216
 msgid ""
 "When looking for album art Clementine will first look for picture files that contain one of these words.\n"
 "If there are no matches then it will use the largest image in the directory."
@@ -5834,7 +5838,7 @@ msgstr "Ar norėtumėte perkelti kitas dainas į šio atlikėjo albumą?"
 msgid "Would you like to run a full rescan right now?"
 msgstr "Ar norite paleisti pilną perskenavimą dabar?"
 
-#: library/librarysettingspage.cpp:154
+#: library/librarysettingspage.cpp:161
 msgid "Write all songs statistics into songs' files"
 msgstr "Rašyti visą dainų statistiką į dainų failus"
 
