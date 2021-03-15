@@ -19,6 +19,7 @@
 #define INTERNET_RADIOBROWSER_RADIOBROWSERSERVICE_H_
 
 #include <QJsonObject>
+#include <QMenu>
 
 #include "core/cachedlist.h"
 #include "internet/core/internetmodel.h"
@@ -28,14 +29,13 @@ class RadioBrowserUrlHandler;
 
 class QNetworkAccessManager;
 class QNetworkReply;
-class QMenu;
 
 class RadioBrowserService : public InternetService {
   Q_OBJECT
 
  public:
   RadioBrowserService(Application* app, InternetModel* parent);
-  ~RadioBrowserService();
+  ~RadioBrowserService(){};
 
   enum ItemType {
     Type_Stream = 2000,
@@ -60,26 +60,15 @@ class RadioBrowserService : public InternetService {
     Song ToSong(const QString& prefix) const;
   };
 
-  struct Branch {
-    QString name;
-    QString listUrl;
-    QString itemsUrl;
-    Type type;
-  };
-
-  static QList<Branch> BranchList;
-  static QString SearchUrl;
-  static QString PlayClickUrl;
-
   typedef QList<Stream> StreamList;
 
   static const char* kServiceName;
   static const char* kSettingsGroup;
   static const char* kSchemeName;
-  static const QString defaultServer;
+  static const char* defaultServer;
 
-  const QString& url_scheme() const { return url_scheme_; }
-  const QIcon& icon() const { return icon_; }
+  QString url_scheme() const { return kSchemeName; }
+  QIcon icon() const { return icon_; }
   QNetworkAccessManager* network() const { return network_; }
 
   QStandardItem* CreateRootItem() override;
@@ -104,38 +93,26 @@ class RadioBrowserService : public InternetService {
   void RefreshCategory(QStandardItem* item);
   void RefreshCategoryItem(QStandardItem* item);
   void RefreshTop100(QStandardItem* item);
-
-  void RefreshCategoryFinished(QNetworkReply* reply, int task_id,
-                               QStandardItem* item);
   void RefreshStreamsFinished(QNetworkReply* reply, int task_id,
                               QStandardItem* item);
-  void ResolveStationUrlFinished(QNetworkReply* reply, int task_id,
-                                 const QUrl& original_url);
-  void SearchFinishedInternal(QNetworkReply* reply, int task_id, int search_id);
-
   void Homepage();
   void ShowConfig() override;
   void AddToSavedRadio(bool checked);
 
  private:
-  void ReadStation(QJsonObject& value, StreamList* ret);
-  void PopulateCategory(QStandardItem* parentItem, QStringList& elements);
-  void PopulateStreams(QStandardItem* parentItem, StreamList& streams);
-  bool EnsureServerConfig();
   QMenu* GetContextMenu(QStandardItem* item);
   QMenu* GetStationMenu(QStandardItem* item);
+  bool EnsureServerConfig();
   void LastRequestFailed();
 
  private:
   QStandardItem* root_;
-  QMenu* context_menu_;
-  QMenu* station_menu_;
-  QAction* add_to_saved_radio_action_;
+  std::unique_ptr<QMenu> context_menu_;
+  std::unique_ptr<QMenu> station_menu_;
+  std::unique_ptr<QAction> add_to_saved_radio_action_;
 
   QNetworkAccessManager* network_;
 
-  const QString name_;
-  const QString url_scheme_;
   RadioBrowserUrlHandler* url_handler_;
   QString main_server_url_;
   const QUrl homepage_url_;
