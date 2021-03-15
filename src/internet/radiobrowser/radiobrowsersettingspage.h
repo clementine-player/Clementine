@@ -20,15 +20,14 @@
 
 #include "radiobrowserservice.h"
 #include "ui/settingspage.h"
-
-class Ui_RadioBrowserSettingsPage;
+#include "ui_radiobrowsersettingspage.h"
 
 class RadioBrowserSettingsPage : public SettingsPage {
   Q_OBJECT
 
  public:
   explicit RadioBrowserSettingsPage(SettingsDialog* dialog);
-  ~RadioBrowserSettingsPage();
+  ~RadioBrowserSettingsPage(){};
 
   void Load();
   void Save();
@@ -38,7 +37,7 @@ class RadioBrowserSettingsPage : public SettingsPage {
   void RestoreDefaultServer();
 
  private:
-  Ui_RadioBrowserSettingsPage* ui_;
+  std::unique_ptr<Ui_RadioBrowserSettingsPage> ui_;
   RadioBrowserService* service_;
 };
 

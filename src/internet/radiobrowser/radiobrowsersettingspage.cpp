@@ -22,7 +22,6 @@
 #include "core/logging.h"
 #include "internet/core/internetmodel.h"
 #include "ui/iconloader.h"
-#include "ui_radiobrowsersettingspage.h"
 
 RadioBrowserSettingsPage::RadioBrowserSettingsPage(SettingsDialog* dialog)
     : SettingsPage(dialog),
@@ -37,14 +36,13 @@ RadioBrowserSettingsPage::RadioBrowserSettingsPage(SettingsDialog* dialog)
           SLOT(RestoreDefaultServer()));
 }
 
-RadioBrowserSettingsPage::~RadioBrowserSettingsPage() { delete ui_; }
-
 void RadioBrowserSettingsPage::Load() {
   QSettings s;
   s.beginGroup(RadioBrowserService::kSettingsGroup);
 
   ui_->server->setText(
-      s.value("server", RadioBrowserService::defaultServer).toString());
+      s.value("server", QVariant(RadioBrowserService::defaultServer))
+          .toString());
 }
 
 void RadioBrowserSettingsPage::Save() {
