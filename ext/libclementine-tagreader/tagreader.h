@@ -24,7 +24,7 @@
 #include <taglib/xiphcomment.h>
 #include <memory>
 
-#include "config.h"
+#include "clementine-config.h"
 #include "tagreadermessages.pb.h"
 
 class QString;

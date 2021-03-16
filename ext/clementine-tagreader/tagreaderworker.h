@@ -18,7 +18,7 @@
 #ifndef TAGREADERWORKER_H
 #define TAGREADERWORKER_H
 
-#include "config.h"
+#include "clementine-config.h"
 #include "tagreader.h"
 #include "tagreadermessages.pb.h"
 #include "core/messagehandler.h"
