@@ -29,6 +29,7 @@
 #include <QQueue>
 #include <QThread>
 
+#include "clementine-config.h"
 #include "core/closure.h"
 #include "core/logging.h"
 
