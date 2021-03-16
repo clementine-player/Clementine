@@ -14,8 +14,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef CONFIG_H_IN
-#define CONFIG_H_IN
+#ifndef CLEMENTINE_CONFIG_H
+#define CLEMENTINE_CONFIG_H
 
 #define CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}"
 #define CMAKE_EXECUTABLE_SUFFIX "${CMAKE_EXECUTABLE_SUFFIX}"
@@ -56,4 +56,4 @@
 
 #define USE_BUNDLE_DIR "${USE_BUNDLE_DIR}"
 
-#endif  // CONFIG_H_IN
+#endif  //  CLEMENTINE_CONFIG_H

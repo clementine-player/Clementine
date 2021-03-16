@@ -192,6 +192,10 @@ add_definitions(${QT_DEFINITIONS})
 link_directories(${TAGLIB_LIBRARY_DIRS})
 link_directories(${GSTREAMER_LIBRARY_DIRS})
 
+# Top level headers and generated headers
+include_directories(${PROJECT_SOURCE_DIR}/include)
+include_directories(${PROJECT_BINARY_DIR}/include)
+
 include_directories(${Boost_INCLUDE_DIRS})
 include_directories(${TAGLIB_INCLUDE_DIRS})
 include_directories(${GSTREAMER_INCLUDE_DIRS})
@@ -474,6 +478,10 @@ endif(HAVE_SPOTIFY_BLOB)
 if(HAVE_MOODBAR)
   add_subdirectory(gst/moodbar)
 endif()
+
+# Global configuration
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/include/clementine-config.h.in
+               ${CMAKE_CURRENT_BINARY_DIR}/include/clementine-config.h)
 
 # Uninstall support
 configure_file(
