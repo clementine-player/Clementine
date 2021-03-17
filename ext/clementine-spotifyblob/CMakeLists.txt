@@ -5,7 +5,6 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 include_directories(${CMAKE_BINARY_DIR}/ext/libclementine-spotifyblob)
 include_directories(${CMAKE_SOURCE_DIR}/ext/libclementine-spotifyblob)
 include_directories(${CMAKE_SOURCE_DIR}/ext/libclementine-common)
-include_directories(${CMAKE_SOURCE_DIR}/src)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Woverloaded-virtual -Wall -Wno-sign-compare -Wno-deprecated-declarations -Wno-unused-local-typedefs -Wno-unused-private-field -Wno-unknown-warning-option")
 

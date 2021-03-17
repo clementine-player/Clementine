@@ -4,8 +4,6 @@ include_directories(${CMAKE_CURRENT_BINARY_DIR})
 include_directories(${CMAKE_SOURCE_DIR}/ext/libclementine-common)
 include_directories(${CMAKE_SOURCE_DIR}/ext/libclementine-tagreader)
 include_directories(${CMAKE_BINARY_DIR}/ext/libclementine-tagreader)
-include_directories(${CMAKE_SOURCE_DIR}/src)
-include_directories(${CMAKE_BINARY_DIR}/src)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
 
