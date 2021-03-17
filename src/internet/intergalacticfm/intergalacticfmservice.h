@@ -91,7 +91,6 @@ class IntergalacticFMServiceBase : public InternetService {
   IntergalacticFMUrlHandler* url_handler_;
 
   QStandardItem* root_;
-  QMenu* context_menu_;
 
   QNetworkAccessManager* network_;
 

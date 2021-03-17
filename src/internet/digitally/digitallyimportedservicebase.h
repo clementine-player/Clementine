@@ -101,7 +101,6 @@ class DigitallyImportedServiceBase : public InternetService {
 
   QStandardItem* root_;
 
-  std::unique_ptr<QMenu> context_menu_;
   QStandardItem* context_item_;
 
   CachedList<DigitallyImportedClient::Channel> saved_channels_;

@@ -143,7 +143,6 @@ class SubsonicService : public InternetService {
   SubsonicLibraryScanner* scanner_;
   int load_database_task_id_;
 
-  QMenu* context_menu_;
   QStandardItem* root_;
 
   std::shared_ptr<LibraryBackend> library_backend_;

@@ -81,7 +81,6 @@ const int JamendoService::kApproxDatabaseSize = 450000;
 JamendoService::JamendoService(Application* app, InternetModel* parent)
     : InternetService(kServiceName, app, parent, parent),
       network_(new NetworkAccessManager(this)),
-      context_menu_(nullptr),
       library_backend_(nullptr),
       library_filter_(nullptr),
       library_model_(nullptr),
@@ -176,7 +175,7 @@ void JamendoService::UpdateTotalSongCount(int count) {
 void JamendoService::DownloadDirectory() {
   // don't ask if we're refreshing the database
   if (total_song_count_ == 0) {
-    if (QMessageBox::question(context_menu_, tr("Jamendo database"),
+    if (QMessageBox::question(nullptr, tr("Jamendo database"),
                               tr("This action will create a database which "
                                  "could be as big as 150 MB.\n"
                                  "Do you want to continue anyway?"),
@@ -414,7 +413,7 @@ void JamendoService::ParseDirectoryFinished() {
 void JamendoService::EnsureMenuCreated() {
   if (library_filter_) return;
 
-  context_menu_ = new QMenu;
+  context_menu_.reset(new QMenu);
   context_menu_->addActions(GetPlaylistActions());
   album_info_ = context_menu_->addAction(
       IconLoader::Load("view-media-lyrics", IconLoader::Base),

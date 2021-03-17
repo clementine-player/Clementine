@@ -74,7 +74,6 @@ const char* MagnatuneService::kDownloadUrl =
 MagnatuneService::MagnatuneService(Application* app, InternetModel* parent)
     : InternetService(kServiceName, app, parent, parent),
       url_handler_(new MagnatuneUrlHandler(this, this)),
-      context_menu_(nullptr),
       root_(nullptr),
       library_backend_(nullptr),
       library_model_(nullptr),
@@ -107,7 +106,7 @@ MagnatuneService::MagnatuneService(Application* app, InternetModel* parent)
       IconLoader::Load("magnatune", IconLoader::Provider), true, app_, this));
 }
 
-MagnatuneService::~MagnatuneService() { delete context_menu_; }
+MagnatuneService::~MagnatuneService() {}
 
 void MagnatuneService::ReloadSettings() {
   QSettings s;
@@ -272,7 +271,7 @@ QString MagnatuneService::ReadElementText(QXmlStreamReader& reader) {
 void MagnatuneService::EnsureMenuCreated() {
   if (context_menu_) return;
 
-  context_menu_ = new QMenu;
+  context_menu_.reset(new QMenu);
 
   context_menu_->addActions(GetPlaylistActions());
   download_ = context_menu_->addAction(

@@ -67,7 +67,6 @@ SubsonicService::SubsonicService(Application* app, InternetModel* parent)
       url_handler_(new SubsonicUrlHandler(this, this)),
       scanner_(new SubsonicLibraryScanner(this, this)),
       load_database_task_id_(0),
-      context_menu_(nullptr),
       root_(nullptr),
       library_backend_(nullptr),
       library_model_(nullptr),
@@ -137,7 +136,7 @@ SubsonicService::SubsonicService(Application* app, InternetModel* parent)
   connect(this, SIGNAL(LoginStateChanged(SubsonicService::LoginState)),
           SLOT(OnLoginStateChanged(SubsonicService::LoginState)));
 
-  context_menu_ = new QMenu;
+  context_menu_.reset(new QMenu);
   context_menu_->addActions(GetPlaylistActions());
   context_menu_->addSeparator();
   context_menu_->addAction(IconLoader::Load("view-refresh", IconLoader::Base),

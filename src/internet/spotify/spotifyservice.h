@@ -168,7 +168,6 @@ class SpotifyService : public InternetService {
   int login_task_id_;
   QString pending_search_;
 
-  QMenu* context_menu_;
   QMenu* playlist_context_menu_;
   QMenu* song_context_menu_;
   QAction* playlist_sync_action_;

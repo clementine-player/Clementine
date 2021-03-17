@@ -37,16 +37,14 @@ const char* SavedRadio::kServiceName = "SavedRadio";
 const char* SavedRadio::kSettingsGroup = "SavedRadio";
 
 SavedRadio::SavedRadio(Application* app, InternetModel* parent)
-    : InternetService(kServiceName, app, parent, parent),
-      context_menu_(nullptr),
-      root_(nullptr) {
+    : InternetService(kServiceName, app, parent, parent), root_(nullptr) {
   LoadStreams();
 
   app_->global_search()->AddProvider(
       new SavedRadioSearchProvider(this, app_, this));
 }
 
-SavedRadio::~SavedRadio() { delete context_menu_; }
+SavedRadio::~SavedRadio() {}
 
 QStandardItem* SavedRadio::CreateRootItem() {
   root_ = new QStandardItem(
@@ -104,7 +102,7 @@ void SavedRadio::SaveStreams() {
 
 void SavedRadio::ShowContextMenu(const QPoint& global_pos) {
   if (!context_menu_) {
-    context_menu_ = new QMenu;
+    context_menu_.reset(new QMenu);
     context_menu_->addActions(GetPlaylistActions());
     remove_action_ = context_menu_->addAction(
         IconLoader::Load("list-remove", IconLoader::Base), tr("Remove"), this,

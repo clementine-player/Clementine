@@ -73,7 +73,6 @@ class IcecastService : public InternetService {
 
   QStandardItem* root_;
   NetworkAccessManager* network_;
-  QMenu* context_menu_;
 
   std::shared_ptr<IcecastBackend> backend_;
   IcecastModel* model_;

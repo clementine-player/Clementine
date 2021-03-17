@@ -146,7 +146,6 @@ class PodcastService : public InternetService {
   QStandardItemModel* model_;
   QSortFilterProxyModel* proxy_;
 
-  QMenu* context_menu_;
   QAction* update_selected_action_;
   QAction* remove_selected_action_;
   QAction* download_selected_action_;

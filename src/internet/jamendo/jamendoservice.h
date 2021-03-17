@@ -104,8 +104,6 @@ class JamendoService : public InternetService {
  private:
   NetworkAccessManager* network_;
 
-  QMenu* context_menu_;
-
   QAction* album_info_;
   QAction* download_album_;
 
