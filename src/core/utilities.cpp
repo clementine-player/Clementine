@@ -50,7 +50,7 @@
 #include "config.h"
 #include "core/application.h"
 #include "core/logging.h"
-#include "timeconstants.h"
+#include "core/timeconstants.h"
 
 #if defined(Q_OS_UNIX)
 #include <sys/statvfs.h>
