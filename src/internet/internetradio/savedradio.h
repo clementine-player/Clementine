@@ -81,7 +81,6 @@ class SavedRadio : public InternetService {
   void AddStreamToList(const Stream& stream, QStandardItem* parent);
 
  private:
-  QMenu* context_menu_;
   QStandardItem* root_;
 
   QAction* remove_action_;

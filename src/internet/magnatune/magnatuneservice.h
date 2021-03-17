@@ -109,7 +109,6 @@ class MagnatuneService : public InternetService {
  private:
   MagnatuneUrlHandler* url_handler_;
 
-  QMenu* context_menu_;
   QStandardItem* root_;
 
   QAction* download_;

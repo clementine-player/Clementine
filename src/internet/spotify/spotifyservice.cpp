@@ -76,7 +76,6 @@ SpotifyService::SpotifyService(Application* app, InternetModel* parent)
       inbox_(nullptr),
       toplist_(nullptr),
       login_task_id_(0),
-      context_menu_(nullptr),
       playlist_context_menu_(nullptr),
       song_context_menu_(nullptr),
       playlist_sync_action_(nullptr),
@@ -661,7 +660,7 @@ QWidget* SpotifyService::HeaderWidget() const {
 void SpotifyService::EnsureMenuCreated() {
   if (context_menu_) return;
 
-  context_menu_ = new QMenu;
+  context_menu_.reset(new QMenu);
   context_menu_->addAction(GetNewShowConfigAction());
 
   playlist_context_menu_ = new QMenu;

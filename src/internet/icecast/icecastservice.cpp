@@ -55,7 +55,6 @@ const char* IcecastService::kHomepage = "http://dir.xiph.org/";
 IcecastService::IcecastService(Application* app, InternetModel* parent)
     : InternetService(kServiceName, app, parent, parent),
       network_(new NetworkAccessManager(this)),
-      context_menu_(nullptr),
       backend_(new IcecastBackend),
       model_(nullptr),
       filter_(new IcecastFilterWidget(0)) {
@@ -298,7 +297,7 @@ void IcecastService::ShowContextMenu(const QPoint& global_pos) {
 void IcecastService::EnsureMenuCreated() {
   if (context_menu_) return;
 
-  context_menu_ = new QMenu;
+  context_menu_.reset(new QMenu);
 
   context_menu_->addActions(GetPlaylistActions());
   context_menu_->addAction(IconLoader::Load("download", IconLoader::Base),

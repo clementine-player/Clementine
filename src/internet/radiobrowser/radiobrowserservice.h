@@ -107,7 +107,6 @@ class RadioBrowserService : public InternetService {
 
  private:
   QStandardItem* root_;
-  std::unique_ptr<QMenu> context_menu_;
   std::unique_ptr<QMenu> station_menu_;
   std::unique_ptr<QAction> add_to_saved_radio_action_;
 

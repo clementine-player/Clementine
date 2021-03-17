@@ -25,6 +25,7 @@
 
 #include <QAction>
 #include <QList>
+#include <QMenu>
 #include <QObject>
 #include <QUrl>
 
@@ -138,6 +139,7 @@ class InternetService : public QObject {
 
  protected:
   Application* app_;
+  std::unique_ptr<QMenu> context_menu_;
 
  private:
   InternetModel* model_;

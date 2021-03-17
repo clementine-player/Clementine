@@ -60,7 +60,6 @@ SomaFMServiceBase::SomaFMServiceBase(Application* app, InternetModel* parent,
       url_scheme_(name.toLower().remove(' ')),
       url_handler_(new SomaFMUrlHandler(app, this, this)),
       root_(nullptr),
-      context_menu_(nullptr),
       network_(new NetworkAccessManager(this)),
       streams_(name, "streams", kStreamsCacheDurationSecs),
       name_(name),
@@ -75,7 +74,7 @@ SomaFMServiceBase::SomaFMServiceBase(Application* app, InternetModel* parent,
       new SomaFMSearchProvider(this, app_, this));
 }
 
-SomaFMServiceBase::~SomaFMServiceBase() { delete context_menu_; }
+SomaFMServiceBase::~SomaFMServiceBase() {}
 
 QStandardItem* SomaFMServiceBase::CreateRootItem() {
   root_ = new QStandardItem(icon_, name_);
@@ -96,7 +95,7 @@ void SomaFMServiceBase::LazyPopulate(QStandardItem* item) {
 
 void SomaFMServiceBase::ShowContextMenu(const QPoint& global_pos) {
   if (!context_menu_) {
-    context_menu_ = new QMenu;
+    context_menu_.reset(new QMenu);
     context_menu_->addActions(GetPlaylistActions());
     context_menu_->addAction(IconLoader::Load("download", IconLoader::Base),
                              tr("Open %1 in browser").arg(homepage_url_.host()),

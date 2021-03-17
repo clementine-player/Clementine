@@ -136,7 +136,6 @@ RadioBrowserService::RadioBrowserService(Application* app,
                                          InternetModel* parent)
     : InternetService(kServiceName, app, parent, parent),
       root_(nullptr),
-      context_menu_(nullptr),
       station_menu_(nullptr),
       add_to_saved_radio_action_(nullptr),
       network_(new NetworkAccessManager(this)),

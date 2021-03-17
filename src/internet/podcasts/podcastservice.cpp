@@ -66,7 +66,6 @@ PodcastService::PodcastService(Application* app, InternetModel* parent)
       backend_(app->podcast_backend()),
       model_(new PodcastServiceModel(this)),
       proxy_(new PodcastSortProxyModel(this)),
-      context_menu_(nullptr),
       root_(nullptr),
       organise_dialog_(new OrganiseDialog(app_->task_manager())) {
   icon_loader_->SetModel(model_);
@@ -416,7 +415,7 @@ QStandardItem* PodcastService::CreatePodcastEpisodeItem(
 
 void PodcastService::ShowContextMenu(const QPoint& global_pos) {
   if (!context_menu_) {
-    context_menu_ = new QMenu;
+    context_menu_.reset(new QMenu);
     context_menu_->addAction(IconLoader::Load("list-add", IconLoader::Base),
                              tr("Add podcast..."), this, SLOT(AddPodcast()));
     context_menu_->addAction(IconLoader::Load("view-refresh", IconLoader::Base),

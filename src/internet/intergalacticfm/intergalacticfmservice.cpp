@@ -58,7 +58,6 @@ IntergalacticFMServiceBase::IntergalacticFMServiceBase(
       url_scheme_(name.toLower().remove(' ')),
       url_handler_(new IntergalacticFMUrlHandler(app, this, this)),
       root_(nullptr),
-      context_menu_(nullptr),
       network_(new NetworkAccessManager(this)),
       streams_(name, "streams", kStreamsCacheDurationSecs),
       name_(name),
@@ -73,9 +72,7 @@ IntergalacticFMServiceBase::IntergalacticFMServiceBase(
       new IntergalacticFMSearchProvider(this, app_, this));
 }
 
-IntergalacticFMServiceBase::~IntergalacticFMServiceBase() {
-  delete context_menu_;
-}
+IntergalacticFMServiceBase::~IntergalacticFMServiceBase() {}
 
 QStandardItem* IntergalacticFMServiceBase::CreateRootItem() {
   root_ = new QStandardItem(icon_, name_);
@@ -96,7 +93,7 @@ void IntergalacticFMServiceBase::LazyPopulate(QStandardItem* item) {
 
 void IntergalacticFMServiceBase::ShowContextMenu(const QPoint& global_pos) {
   if (!context_menu_) {
-    context_menu_ = new QMenu;
+    context_menu_.reset(new QMenu);
     context_menu_->addActions(GetPlaylistActions());
     context_menu_->addAction(IconLoader::Load("download", IconLoader::Base),
                              tr("Open %1 in browser").arg(homepage_url_.host()),
