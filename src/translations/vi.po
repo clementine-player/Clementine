@@ -13,7 +13,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2021-03-14 14:12+0000\n"
+"PO-Revision-Date: 2021-03-16 11:15+0000\n"
 "Last-Translator: John Maguire <john.maguire@gmail.com>\n"
 "Language-Team: Vietnamese (http://www.transifex.com/davidsansome/clementine/language/vi/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -654,6 +654,10 @@ msgstr "Thêm vào danh sách"
 #: ../bin/src/ui_behavioursettingspage.h:443
 msgid "Add to the queue"
 msgstr "Thêm vào danh sách đợi"
+
+#: internet/radiobrowser/radiobrowserservice.cpp:307
+msgid "Add to your radio streams"
+msgstr ""
 
 #: ../bin/src/ui_wiimoteshortcutgrabber.h:119
 msgid "Add wiimotedev action"
@@ -1384,6 +1388,7 @@ msgstr "Cấu hình podcast..."
 
 #: internet/core/cloudfileservice.cpp:106
 #: internet/digitally/digitallyimportedservicebase.cpp:183
+#: internet/radiobrowser/radiobrowserservice.cpp:296
 #: internet/googledrive/googledriveservice.cpp:229
 #: internet/skydrive/skydriveservice.cpp:222
 #: ../bin/src/ui_globalsearchsettingspage.h:146
@@ -2535,7 +2540,7 @@ msgstr "Full Treble"
 msgid "Ge&nre"
 msgstr "&Thể loại"
 
-#: ui/settingsdialog.cpp:136
+#: ui/settingsdialog.cpp:137
 msgid "General"
 msgstr "Tổng quát"
 
@@ -2561,8 +2566,16 @@ msgstr "Lấy URL để chia sẻ danh sách này"
 
 #: internet/somafm/somafmservice.cpp:120
 #: internet/intergalacticfm/intergalacticfmservice.cpp:120
+#: internet/radiobrowser/radiobrowserservice.cpp:207
+#: internet/radiobrowser/radiobrowserservice.cpp:243
+#: internet/radiobrowser/radiobrowserservice.cpp:261
+#: internet/radiobrowser/radiobrowserservice.cpp:391
 msgid "Getting channels"
 msgstr "Đang tải các kênh"
+
+#: internet/radiobrowser/radiobrowserservice.cpp:416
+msgid "Getting station"
+msgstr ""
 
 #: internet/digitally/digitallyimportedservicebase.cpp:101
 msgid "Getting streams"
@@ -2836,7 +2849,7 @@ msgstr "Kiểm tra tính toàn vẹn"
 msgid "Internet"
 msgstr "Internet"
 
-#: ui/settingsdialog.cpp:159
+#: ui/settingsdialog.cpp:160
 msgid "Internet providers"
 msgstr "Dịch vụ"
 
@@ -3647,6 +3660,7 @@ msgstr "Độ mờ"
 #: internet/magnatune/magnatuneservice.cpp:283
 #: internet/somafm/somafmservice.cpp:102
 #: internet/intergalacticfm/intergalacticfmservice.cpp:102
+#: internet/radiobrowser/radiobrowserservice.cpp:289
 #, qt-format
 msgid "Open %1 in browser"
 msgstr "Mở %1 bằng trình duyệt"
@@ -4111,6 +4125,10 @@ msgstr ""
 msgid "Radio (equal loudness for all tracks)"
 msgstr "Phát thanh (âm thanh bằng nhau cho mọi bài hát)"
 
+#: ../bin/src/ui_radiobrowsersettingspage.h:80
+msgid "RadioBrowser"
+msgstr ""
+
 #: core/backgroundstreams.cpp:47
 msgid "Rain"
 msgstr "Rain"
@@ -4181,6 +4199,7 @@ msgstr "Cập nhật mục lục"
 
 #: internet/somafm/somafmservice.cpp:111
 #: internet/intergalacticfm/intergalacticfmservice.cpp:111
+#: internet/radiobrowser/radiobrowserservice.cpp:293
 msgid "Refresh channels"
 msgstr "Cập nhật kênh"
 
@@ -4325,6 +4344,10 @@ msgstr "Nghe lại bài hát, lùi lại bài trước nếu nhấn tiếp"
 msgid ""
 "Restart the track, or play the previous track if within 8 seconds of start."
 msgstr "Nghe lại bài hát, nếu bài đang nghe chưa được 8 giây thì phát bài trước đó."
+
+#: ../bin/src/ui_radiobrowsersettingspage.h:83
+msgid "Restore Default Server"
+msgstr ""
 
 #: ../bin/src/ui_organisedialog.h:257
 msgid "Restrict to ASCII characters"
@@ -4642,10 +4665,12 @@ msgid "Server"
 msgstr "Máy chủ"
 
 #: ../bin/src/ui_subsonicsettingspage.h:132
+#: ../bin/src/ui_radiobrowsersettingspage.h:82
 msgid "Server URL"
 msgstr "URL máy chủ"
 
 #: ../bin/src/ui_subsonicsettingspage.h:131
+#: ../bin/src/ui_radiobrowsersettingspage.h:81
 msgid "Server details"
 msgstr "Chi tiết máy chủ"
 
@@ -5629,7 +5654,7 @@ msgstr "Sử dụng cân bằng âm lượng"
 msgid "Used"
 msgstr "Đã dùng"
 
-#: ui/settingsdialog.cpp:150
+#: ui/settingsdialog.cpp:151
 msgid "User interface"
 msgstr "Giao diện người dùng"
 

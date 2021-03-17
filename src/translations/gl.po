@@ -12,7 +12,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2021-03-14 14:12+0000\n"
+"PO-Revision-Date: 2021-03-16 11:15+0000\n"
 "Last-Translator: John Maguire <john.maguire@gmail.com>\n"
 "Language-Team: Galician (http://www.transifex.com/davidsansome/clementine/language/gl/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -653,6 +653,10 @@ msgstr "Engadir á lista"
 #: ../bin/src/ui_behavioursettingspage.h:443
 msgid "Add to the queue"
 msgstr "Engadir á cola"
+
+#: internet/radiobrowser/radiobrowserservice.cpp:307
+msgid "Add to your radio streams"
+msgstr ""
 
 #: ../bin/src/ui_wiimoteshortcutgrabber.h:119
 msgid "Add wiimotedev action"
@@ -1383,6 +1387,7 @@ msgstr "Configurar os podcasts…"
 
 #: internet/core/cloudfileservice.cpp:106
 #: internet/digitally/digitallyimportedservicebase.cpp:183
+#: internet/radiobrowser/radiobrowserservice.cpp:296
 #: internet/googledrive/googledriveservice.cpp:229
 #: internet/skydrive/skydriveservice.cpp:222
 #: ../bin/src/ui_globalsearchsettingspage.h:146
@@ -2534,7 +2539,7 @@ msgstr "Full Treble"
 msgid "Ge&nre"
 msgstr ""
 
-#: ui/settingsdialog.cpp:136
+#: ui/settingsdialog.cpp:137
 msgid "General"
 msgstr "Xeral"
 
@@ -2560,8 +2565,16 @@ msgstr ""
 
 #: internet/somafm/somafmservice.cpp:120
 #: internet/intergalacticfm/intergalacticfmservice.cpp:120
+#: internet/radiobrowser/radiobrowserservice.cpp:207
+#: internet/radiobrowser/radiobrowserservice.cpp:243
+#: internet/radiobrowser/radiobrowserservice.cpp:261
+#: internet/radiobrowser/radiobrowserservice.cpp:391
 msgid "Getting channels"
 msgstr "Descargando as canles…"
+
+#: internet/radiobrowser/radiobrowserservice.cpp:416
+msgid "Getting station"
+msgstr ""
 
 #: internet/digitally/digitallyimportedservicebase.cpp:101
 msgid "Getting streams"
@@ -2835,7 +2848,7 @@ msgstr "Comprobación da integridade"
 msgid "Internet"
 msgstr "Internet"
 
-#: ui/settingsdialog.cpp:159
+#: ui/settingsdialog.cpp:160
 msgid "Internet providers"
 msgstr "Fornecedores de internet"
 
@@ -3646,6 +3659,7 @@ msgstr "Opacidade"
 #: internet/magnatune/magnatuneservice.cpp:283
 #: internet/somafm/somafmservice.cpp:102
 #: internet/intergalacticfm/intergalacticfmservice.cpp:102
+#: internet/radiobrowser/radiobrowserservice.cpp:289
 #, qt-format
 msgid "Open %1 in browser"
 msgstr "Abrir %1 no navegador"
@@ -4110,6 +4124,10 @@ msgstr ""
 msgid "Radio (equal loudness for all tracks)"
 msgstr "Radio (mesmo volume para todas as pistas)"
 
+#: ../bin/src/ui_radiobrowsersettingspage.h:80
+msgid "RadioBrowser"
+msgstr ""
+
 #: core/backgroundstreams.cpp:47
 msgid "Rain"
 msgstr "Chuvia"
@@ -4180,6 +4198,7 @@ msgstr "Actualizar o catálogo"
 
 #: internet/somafm/somafmservice.cpp:111
 #: internet/intergalacticfm/intergalacticfmservice.cpp:111
+#: internet/radiobrowser/radiobrowserservice.cpp:293
 msgid "Refresh channels"
 msgstr "Actualizar as canles"
 
@@ -4324,6 +4343,10 @@ msgstr ""
 msgid ""
 "Restart the track, or play the previous track if within 8 seconds of start."
 msgstr "Reiniciar a pista, ou cambiar a anterior se non transcorreron 8 segundos dende o inicio."
+
+#: ../bin/src/ui_radiobrowsersettingspage.h:83
+msgid "Restore Default Server"
+msgstr ""
 
 #: ../bin/src/ui_organisedialog.h:257
 msgid "Restrict to ASCII characters"
@@ -4641,10 +4664,12 @@ msgid "Server"
 msgstr ""
 
 #: ../bin/src/ui_subsonicsettingspage.h:132
+#: ../bin/src/ui_radiobrowsersettingspage.h:82
 msgid "Server URL"
 msgstr "URL do servidor"
 
 #: ../bin/src/ui_subsonicsettingspage.h:131
+#: ../bin/src/ui_radiobrowsersettingspage.h:81
 msgid "Server details"
 msgstr "Detalles do servidor"
 
@@ -5628,7 +5653,7 @@ msgstr "Empregar a normalización do volume."
 msgid "Used"
 msgstr "Empregado"
 
-#: ui/settingsdialog.cpp:150
+#: ui/settingsdialog.cpp:151
 msgid "User interface"
 msgstr "Interface de usuario"
 

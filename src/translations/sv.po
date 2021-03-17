@@ -32,8 +32,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2021-03-15 06:03+0000\n"
-"Last-Translator: Jonatan Nyberg <jonatan.nyberg.karl@gmail.com>\n"
+"PO-Revision-Date: 2021-03-16 11:15+0000\n"
+"Last-Translator: John Maguire <john.maguire@gmail.com>\n"
 "Language-Team: Swedish (http://www.transifex.com/davidsansome/clementine/language/sv/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -673,6 +673,10 @@ msgstr "Lägg till i spellista"
 #: ../bin/src/ui_behavioursettingspage.h:443
 msgid "Add to the queue"
 msgstr "Lägga till i kön"
+
+#: internet/radiobrowser/radiobrowserservice.cpp:307
+msgid "Add to your radio streams"
+msgstr ""
 
 #: ../bin/src/ui_wiimoteshortcutgrabber.h:119
 msgid "Add wiimotedev action"
@@ -1403,6 +1407,7 @@ msgstr "Konfigurera poddsändningar..."
 
 #: internet/core/cloudfileservice.cpp:106
 #: internet/digitally/digitallyimportedservicebase.cpp:183
+#: internet/radiobrowser/radiobrowserservice.cpp:296
 #: internet/googledrive/googledriveservice.cpp:229
 #: internet/skydrive/skydriveservice.cpp:222
 #: ../bin/src/ui_globalsearchsettingspage.h:146
@@ -2554,7 +2559,7 @@ msgstr "Hel diskant"
 msgid "Ge&nre"
 msgstr "Ge&nre"
 
-#: ui/settingsdialog.cpp:136
+#: ui/settingsdialog.cpp:137
 msgid "General"
 msgstr "Allmänt"
 
@@ -2580,8 +2585,16 @@ msgstr "Hämta en webbadress för att dela den här spellistan"
 
 #: internet/somafm/somafmservice.cpp:120
 #: internet/intergalacticfm/intergalacticfmservice.cpp:120
+#: internet/radiobrowser/radiobrowserservice.cpp:207
+#: internet/radiobrowser/radiobrowserservice.cpp:243
+#: internet/radiobrowser/radiobrowserservice.cpp:261
+#: internet/radiobrowser/radiobrowserservice.cpp:391
 msgid "Getting channels"
 msgstr "Hämtar kanaler"
+
+#: internet/radiobrowser/radiobrowserservice.cpp:416
+msgid "Getting station"
+msgstr ""
 
 #: internet/digitally/digitallyimportedservicebase.cpp:101
 msgid "Getting streams"
@@ -2855,7 +2868,7 @@ msgstr "Integritetskontroll"
 msgid "Internet"
 msgstr "Internet"
 
-#: ui/settingsdialog.cpp:159
+#: ui/settingsdialog.cpp:160
 msgid "Internet providers"
 msgstr "Internetoperatörer"
 
@@ -3666,6 +3679,7 @@ msgstr "Opacitet"
 #: internet/magnatune/magnatuneservice.cpp:283
 #: internet/somafm/somafmservice.cpp:102
 #: internet/intergalacticfm/intergalacticfmservice.cpp:102
+#: internet/radiobrowser/radiobrowserservice.cpp:289
 #, qt-format
 msgid "Open %1 in browser"
 msgstr "Öppna %1 i webbläsare"
@@ -4130,6 +4144,10 @@ msgstr "Betygsätt den spelande låten snabbt"
 msgid "Radio (equal loudness for all tracks)"
 msgstr "Radio (samma ljudstyrka för alla spår"
 
+#: ../bin/src/ui_radiobrowsersettingspage.h:80
+msgid "RadioBrowser"
+msgstr ""
+
 #: core/backgroundstreams.cpp:47
 msgid "Rain"
 msgstr "Regn"
@@ -4200,6 +4218,7 @@ msgstr "Uppdatera katalog"
 
 #: internet/somafm/somafmservice.cpp:111
 #: internet/intergalacticfm/intergalacticfmservice.cpp:111
+#: internet/radiobrowser/radiobrowserservice.cpp:293
 msgid "Refresh channels"
 msgstr "Uppdatera kanaler"
 
@@ -4344,6 +4363,10 @@ msgstr "Starta om låten, hoppa till föregående låt vid dubbelklickning"
 msgid ""
 "Restart the track, or play the previous track if within 8 seconds of start."
 msgstr "Starta om spåret, eller spela föregående spår om inom 8 sekunder efter start."
+
+#: ../bin/src/ui_radiobrowsersettingspage.h:83
+msgid "Restore Default Server"
+msgstr ""
 
 #: ../bin/src/ui_organisedialog.h:257
 msgid "Restrict to ASCII characters"
@@ -4661,10 +4684,12 @@ msgid "Server"
 msgstr "Server"
 
 #: ../bin/src/ui_subsonicsettingspage.h:132
+#: ../bin/src/ui_radiobrowsersettingspage.h:82
 msgid "Server URL"
 msgstr "Serverns webbadress"
 
 #: ../bin/src/ui_subsonicsettingspage.h:131
+#: ../bin/src/ui_radiobrowsersettingspage.h:81
 msgid "Server details"
 msgstr "Serverdetaljer"
 
@@ -5648,7 +5673,7 @@ msgstr "Använd ljudnormalisering"
 msgid "Used"
 msgstr "Använt"
 
-#: ui/settingsdialog.cpp:150
+#: ui/settingsdialog.cpp:151
 msgid "User interface"
 msgstr "Användargränssnitt"
 

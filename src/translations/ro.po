@@ -21,7 +21,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2021-03-14 14:12+0000\n"
+"PO-Revision-Date: 2021-03-16 11:15+0000\n"
 "Last-Translator: John Maguire <john.maguire@gmail.com>\n"
 "Language-Team: Romanian (http://www.transifex.com/davidsansome/clementine/language/ro/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -662,6 +662,10 @@ msgstr "Adaugă în lista de redare"
 #: ../bin/src/ui_behavioursettingspage.h:443
 msgid "Add to the queue"
 msgstr "Adaugă la coadă"
+
+#: internet/radiobrowser/radiobrowserservice.cpp:307
+msgid "Add to your radio streams"
+msgstr ""
 
 #: ../bin/src/ui_wiimoteshortcutgrabber.h:119
 msgid "Add wiimotedev action"
@@ -1392,6 +1396,7 @@ msgstr "Configurați podcasturi..."
 
 #: internet/core/cloudfileservice.cpp:106
 #: internet/digitally/digitallyimportedservicebase.cpp:183
+#: internet/radiobrowser/radiobrowserservice.cpp:296
 #: internet/googledrive/googledriveservice.cpp:229
 #: internet/skydrive/skydriveservice.cpp:222
 #: ../bin/src/ui_globalsearchsettingspage.h:146
@@ -2543,7 +2548,7 @@ msgstr "Înalte complet"
 msgid "Ge&nre"
 msgstr "Ge&n"
 
-#: ui/settingsdialog.cpp:136
+#: ui/settingsdialog.cpp:137
 msgid "General"
 msgstr "General"
 
@@ -2569,8 +2574,16 @@ msgstr "Obține un URL pentru a distribui aceasta lista de redare"
 
 #: internet/somafm/somafmservice.cpp:120
 #: internet/intergalacticfm/intergalacticfmservice.cpp:120
+#: internet/radiobrowser/radiobrowserservice.cpp:207
+#: internet/radiobrowser/radiobrowserservice.cpp:243
+#: internet/radiobrowser/radiobrowserservice.cpp:261
+#: internet/radiobrowser/radiobrowserservice.cpp:391
 msgid "Getting channels"
 msgstr "Obținere canalele"
+
+#: internet/radiobrowser/radiobrowserservice.cpp:416
+msgid "Getting station"
+msgstr ""
 
 #: internet/digitally/digitallyimportedservicebase.cpp:101
 msgid "Getting streams"
@@ -2844,7 +2857,7 @@ msgstr "Verificare integritate"
 msgid "Internet"
 msgstr "Internet"
 
-#: ui/settingsdialog.cpp:159
+#: ui/settingsdialog.cpp:160
 msgid "Internet providers"
 msgstr "Surse online"
 
@@ -3655,6 +3668,7 @@ msgstr "Opacitate"
 #: internet/magnatune/magnatuneservice.cpp:283
 #: internet/somafm/somafmservice.cpp:102
 #: internet/intergalacticfm/intergalacticfmservice.cpp:102
+#: internet/radiobrowser/radiobrowserservice.cpp:289
 #, qt-format
 msgid "Open %1 in browser"
 msgstr "Deschide %1 în browser"
@@ -4119,6 +4133,10 @@ msgstr "Evaluați rapid piesa în curs de redare"
 msgid "Radio (equal loudness for all tracks)"
 msgstr "Radio (egalizare loudness pentru toate piesele)"
 
+#: ../bin/src/ui_radiobrowsersettingspage.h:80
+msgid "RadioBrowser"
+msgstr ""
+
 #: core/backgroundstreams.cpp:47
 msgid "Rain"
 msgstr "Ploaie"
@@ -4189,6 +4207,7 @@ msgstr "Reîmprospătare catalog"
 
 #: internet/somafm/somafmservice.cpp:111
 #: internet/intergalacticfm/intergalacticfmservice.cpp:111
+#: internet/radiobrowser/radiobrowserservice.cpp:293
 msgid "Refresh channels"
 msgstr "Reîmprospătare canale"
 
@@ -4333,6 +4352,10 @@ msgstr "Reporni melodia, apoi se va sări la melodia anterioară dacă este apă
 msgid ""
 "Restart the track, or play the previous track if within 8 seconds of start."
 msgstr "Repornește piesa sau redă piesa precedentă după 8 secunde de la pornire"
+
+#: ../bin/src/ui_radiobrowsersettingspage.h:83
+msgid "Restore Default Server"
+msgstr ""
 
 #: ../bin/src/ui_organisedialog.h:257
 msgid "Restrict to ASCII characters"
@@ -4650,10 +4673,12 @@ msgid "Server"
 msgstr "Server"
 
 #: ../bin/src/ui_subsonicsettingspage.h:132
+#: ../bin/src/ui_radiobrowsersettingspage.h:82
 msgid "Server URL"
 msgstr "Adresă URL server"
 
 #: ../bin/src/ui_subsonicsettingspage.h:131
+#: ../bin/src/ui_radiobrowsersettingspage.h:81
 msgid "Server details"
 msgstr "Detalii server"
 
@@ -5637,7 +5662,7 @@ msgstr "Utilizează normalizarea volumului"
 msgid "Used"
 msgstr "Utilizat"
 
-#: ui/settingsdialog.cpp:150
+#: ui/settingsdialog.cpp:151
 msgid "User interface"
 msgstr "Interfață utilizator "
 

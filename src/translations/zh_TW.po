@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2021-03-14 14:12+0000\n"
+"PO-Revision-Date: 2021-03-16 11:15+0000\n"
 "Last-Translator: John Maguire <john.maguire@gmail.com>\n"
 "Language-Team: Chinese (Taiwan) (http://www.transifex.com/davidsansome/clementine/language/zh_TW/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -651,6 +651,10 @@ msgstr "加入播放清單"
 #: ../bin/src/ui_behavioursettingspage.h:443
 msgid "Add to the queue"
 msgstr "加入到佇列中"
+
+#: internet/radiobrowser/radiobrowserservice.cpp:307
+msgid "Add to your radio streams"
+msgstr ""
 
 #: ../bin/src/ui_wiimoteshortcutgrabber.h:119
 msgid "Add wiimotedev action"
@@ -1381,6 +1385,7 @@ msgstr "設定 podcasts…"
 
 #: internet/core/cloudfileservice.cpp:106
 #: internet/digitally/digitallyimportedservicebase.cpp:183
+#: internet/radiobrowser/radiobrowserservice.cpp:296
 #: internet/googledrive/googledriveservice.cpp:229
 #: internet/skydrive/skydriveservice.cpp:222
 #: ../bin/src/ui_globalsearchsettingspage.h:146
@@ -2532,7 +2537,7 @@ msgstr "全部高音"
 msgid "Ge&nre"
 msgstr "類型(&N)"
 
-#: ui/settingsdialog.cpp:136
+#: ui/settingsdialog.cpp:137
 msgid "General"
 msgstr "一般"
 
@@ -2558,8 +2563,16 @@ msgstr "產生分享此播放清單的網址"
 
 #: internet/somafm/somafmservice.cpp:120
 #: internet/intergalacticfm/intergalacticfmservice.cpp:120
+#: internet/radiobrowser/radiobrowserservice.cpp:207
+#: internet/radiobrowser/radiobrowserservice.cpp:243
+#: internet/radiobrowser/radiobrowserservice.cpp:261
+#: internet/radiobrowser/radiobrowserservice.cpp:391
 msgid "Getting channels"
 msgstr "取得頻道"
+
+#: internet/radiobrowser/radiobrowserservice.cpp:416
+msgid "Getting station"
+msgstr ""
 
 #: internet/digitally/digitallyimportedservicebase.cpp:101
 msgid "Getting streams"
@@ -2833,7 +2846,7 @@ msgstr "完整性檢查"
 msgid "Internet"
 msgstr "網路"
 
-#: ui/settingsdialog.cpp:159
+#: ui/settingsdialog.cpp:160
 msgid "Internet providers"
 msgstr "網際網路服務供應商"
 
@@ -3644,6 +3657,7 @@ msgstr "透明度"
 #: internet/magnatune/magnatuneservice.cpp:283
 #: internet/somafm/somafmservice.cpp:102
 #: internet/intergalacticfm/intergalacticfmservice.cpp:102
+#: internet/radiobrowser/radiobrowserservice.cpp:289
 #, qt-format
 msgid "Open %1 in browser"
 msgstr "在瀏覽器中開啟 %1"
@@ -4108,6 +4122,10 @@ msgstr "快速為正在播放的音軌評分"
 msgid "Radio (equal loudness for all tracks)"
 msgstr "廣播 (為所有歌曲取得相同音量)"
 
+#: ../bin/src/ui_radiobrowsersettingspage.h:80
+msgid "RadioBrowser"
+msgstr ""
+
 #: core/backgroundstreams.cpp:47
 msgid "Rain"
 msgstr "下雨"
@@ -4178,6 +4196,7 @@ msgstr "刷新目錄"
 
 #: internet/somafm/somafmservice.cpp:111
 #: internet/intergalacticfm/intergalacticfmservice.cpp:111
+#: internet/radiobrowser/radiobrowserservice.cpp:293
 msgid "Refresh channels"
 msgstr "刷新頻道"
 
@@ -4322,6 +4341,10 @@ msgstr "從頭播放歌曲，再點選的話則跳到上一首"
 msgid ""
 "Restart the track, or play the previous track if within 8 seconds of start."
 msgstr "重新播放曲目，若在開始播放 8 秒內則播放上一首"
+
+#: ../bin/src/ui_radiobrowsersettingspage.h:83
+msgid "Restore Default Server"
+msgstr ""
 
 #: ../bin/src/ui_organisedialog.h:257
 msgid "Restrict to ASCII characters"
@@ -4639,10 +4662,12 @@ msgid "Server"
 msgstr "伺服器"
 
 #: ../bin/src/ui_subsonicsettingspage.h:132
+#: ../bin/src/ui_radiobrowsersettingspage.h:82
 msgid "Server URL"
 msgstr "伺服器網址"
 
 #: ../bin/src/ui_subsonicsettingspage.h:131
+#: ../bin/src/ui_radiobrowsersettingspage.h:81
 msgid "Server details"
 msgstr "伺服器詳細內容"
 
@@ -5626,7 +5651,7 @@ msgstr "使用音量正常化"
 msgid "Used"
 msgstr "已用"
 
-#: ui/settingsdialog.cpp:150
+#: ui/settingsdialog.cpp:151
 msgid "User interface"
 msgstr "使用者介面"
 

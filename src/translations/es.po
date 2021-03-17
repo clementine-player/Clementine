@@ -43,8 +43,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2021-03-14 14:12+0000\n"
-"Last-Translator: John Maguire <john.maguire@gmail.com>\n"
+"PO-Revision-Date: 2021-03-16 20:13+0000\n"
+"Last-Translator: Adolfo Jayme-Barrientos\n"
 "Language-Team: Spanish (http://www.transifex.com/davidsansome/clementine/language/es/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -219,7 +219,7 @@ msgstr "%n pendientes"
 
 #: playlist/playlistheader.cpp:44
 msgid "&Align text"
-msgstr "&Alinear el texto"
+msgstr "&Alinear texto"
 
 #: playlist/playlistheader.cpp:47
 msgid "&Center"
@@ -662,7 +662,7 @@ msgstr "Añadir etiqueta de año a la canción"
 
 #: ../bin/src/ui_mainwindow.h:743
 msgid "Add stream..."
-msgstr "Añadir una transmisión…"
+msgstr "Añadir transmisión…"
 
 #: internet/spotify/spotifyservice.cpp:626
 msgid "Add to Spotify playlists"
@@ -684,6 +684,10 @@ msgstr "Añadir a la lista de reproducción"
 #: ../bin/src/ui_behavioursettingspage.h:443
 msgid "Add to the queue"
 msgstr "Añadir a la cola"
+
+#: internet/radiobrowser/radiobrowserservice.cpp:307
+msgid "Add to your radio streams"
+msgstr "Añadir a sus transmisiones radiales"
 
 #: ../bin/src/ui_wiimoteshortcutgrabber.h:119
 msgid "Add wiimotedev action"
@@ -744,7 +748,7 @@ msgstr "Artista del álbum"
 
 #: ../bin/src/ui_appearancesettingspage.h:310
 msgid "Album cover"
-msgstr "Carátula de álbum"
+msgstr "Cubierta de álbum"
 
 #: internet/jamendo/jamendoservice.cpp:421
 msgid "Album info on jamendo.com..."
@@ -752,11 +756,11 @@ msgstr "Información del álbum en jamendo.com…"
 
 #: ui/albumcovermanager.cpp:131
 msgid "Albums with covers"
-msgstr "Álbumes con carátulas"
+msgstr "Álbumes con cubiertas"
 
 #: ui/albumcovermanager.cpp:132
 msgid "Albums without covers"
-msgstr "Álbumes sin carátulas"
+msgstr "Álbumes sin cubiertas"
 
 #: ../bin/src/ui_podcastsettingspage.h:275
 msgid "All"
@@ -975,7 +979,7 @@ msgstr "PPM"
 
 #: ../bin/src/ui_backgroundstreamssettingspage.h:55
 msgid "Background Streams"
-msgstr "Flujos de fondo"
+msgstr "Transmisiones de fondo"
 
 #: ../bin/src/ui_notificationssettingspage.h:459
 msgid "Background color"
@@ -1115,7 +1119,7 @@ msgstr "Cancelar la descarga"
 
 #: ../bin/src/ui_edittagdialog.h:701
 msgid "Change cover art"
-msgstr "Cambiar la carátula"
+msgstr "Cambiar cubierta"
 
 #: songinfo/songinfotextview.cpp:73
 msgid "Change font size..."
@@ -1333,7 +1337,7 @@ msgstr "Si cierra esta ventana, se cancelará la descarga."
 
 #: ui/albumcovermanager.cpp:215
 msgid "Closing this window will stop searching for album covers."
-msgstr "Si cierra esta ventana, se detendrá la búsqueda de carátulas para los álbumes."
+msgstr "Si cierra esta ventana, se detendrá la búsqueda de cubiertas para los álbumes."
 
 #: ui/equalizer.cpp:115
 msgid "Club"
@@ -1414,6 +1418,7 @@ msgstr "Configurar pódcast…"
 
 #: internet/core/cloudfileservice.cpp:106
 #: internet/digitally/digitallyimportedservicebase.cpp:183
+#: internet/radiobrowser/radiobrowserservice.cpp:296
 #: internet/googledrive/googledriveservice.cpp:229
 #: internet/skydrive/skydriveservice.cpp:222
 #: ../bin/src/ui_globalsearchsettingspage.h:146
@@ -1553,34 +1558,34 @@ msgstr "No se pudo abrir el archivo de salida %1"
 #: ../bin/src/ui_albumcovermanager.h:220
 #: ../bin/src/ui_albumcoversearcher.h:104 ../bin/src/ui_mainwindow.h:746
 msgid "Cover Manager"
-msgstr "Gestor de carátulas"
+msgstr "Gestor de cubiertas"
 
 #: ui/edittagdialog.cpp:487
 msgid "Cover art from embedded image"
-msgstr "Carátula desde imagen incrustada"
+msgstr "Cubierta desde imagen incrustada"
 
 #: ui/edittagdialog.cpp:489
 #, qt-format
 msgid "Cover art loaded automatically from %1"
-msgstr "Carátula cargada automáticamente desde %1"
+msgstr "Cubierta cargada automáticamente desde %1"
 
 #: ui/edittagdialog.cpp:481
 msgid "Cover art manually unset"
-msgstr "Carátula eliminada manualmente"
+msgstr "Cubierta eliminada manualmente"
 
 #: ui/edittagdialog.cpp:493
 msgid "Cover art not set"
-msgstr "Carátula no definida"
+msgstr "Cubierta no definida"
 
 #: ui/edittagdialog.cpp:485
 #, qt-format
 msgid "Cover art set from %1"
-msgstr "Carátula definida desde %1"
+msgstr "Cubierta definida desde %1"
 
 #: covers/coversearchstatisticsdialog.cpp:62 ui/albumcoversearcher.cpp:101
 #, qt-format
 msgid "Covers from %1"
-msgstr "Carátulas de %1"
+msgstr "Cubiertas de %1"
 
 #: core/commandlineoptions.cpp:179
 msgid "Create a new playlist with files/URLs"
@@ -1878,7 +1883,7 @@ msgid ""
 "Doing a full rescan will lose any metadata you've saved in Clementine such "
 "as cover art, play counts and ratings.  Clementine will rescan all your "
 "music in %1 which may take some time."
-msgstr "Al efectuar el análisis completo se perderán los metadatos guardados en Clementine, como las carátulas, el número de reproducciones y las valoraciones. Clementine volverá a analizar toda su música en %1, lo que puede llevar algún tiempo."
+msgstr "Al efectuar el análisis completo se perderán los metadatos guardados en Clementine, como las cubiertas, el número de reproducciones y las valoraciones. Clementine volverá a analizar toda su música en %1, lo que puede llevar algún tiempo."
 
 #: widgets/osd.cpp:306 ../bin/src/ui_playlistsequence.h:110
 msgid "Don't repeat"
@@ -2009,11 +2014,11 @@ msgstr "Dubstep"
 
 #: transcoder/transcodedialog.cpp:70
 msgid "Dump Graph"
-msgstr ""
+msgstr "Volcar grafo"
 
 #: ../bin/src/ui_gstenginedebug.h:68
 msgid "Dump Pipeline Graph"
-msgstr ""
+msgstr "Volcar grafo de canalización"
 
 #: ../bin/src/ui_console.h:132
 msgid "Dump To Logs"
@@ -2113,11 +2118,11 @@ msgstr "Escriba un URL"
 
 #: ../bin/src/ui_coverfromurldialog.h:102
 msgid "Enter a URL to download a cover from the Internet:"
-msgstr "Escriba un URL para descargar una carátula de la Internet:"
+msgstr "Escriba un URL para descargar una cubierta de la Internet:"
 
 #: ../bin/src/ui_albumcoverexport.h:204
 msgid "Enter a filename for exported covers (no extension):"
-msgstr "Escriba un nombre de archivo para las carátulas exportadas (sin extensión):"
+msgstr "Escriba un nombre de archivo para las cubiertas exportadas (sin extensión):"
 
 #: playlist/playlisttabbar.cpp:148
 msgid "Enter a new name for this playlist"
@@ -2143,7 +2148,7 @@ msgstr "Escriba términos de búsqueda aquí"
 
 #: ../bin/src/ui_addstreamdialog.h:125
 msgid "Enter the URL of an internet radio stream:"
-msgstr "Escriba el URL de un flujo de radio por Internet:"
+msgstr "Escriba el URL de una transmisión radial por Internet:"
 
 #: playlist/playlistlistcontainer.cpp:263
 msgid "Enter the name of the folder"
@@ -2257,7 +2262,7 @@ msgstr "Excepto entre pistas del mismo álbum, o en la misma hoja CUE"
 
 #: ../bin/src/ui_albumcoverexport.h:207
 msgid "Existing covers"
-msgstr "Carátulas existentes"
+msgstr "Cubiertas existentes"
 
 #: ../bin/src/ui_dynamicplaylistcontrols.h:110
 msgid "Expand"
@@ -2270,19 +2275,19 @@ msgstr "Caduca el %1"
 
 #: ../bin/src/ui_albumcovermanager.h:231
 msgid "Export Covers"
-msgstr "Exportar carátulas"
+msgstr "Exportar cubiertas"
 
 #: ../bin/src/ui_albumcoverexport.h:202
 msgid "Export covers"
-msgstr "Exportar carátulas"
+msgstr "Exportar cubiertas"
 
 #: ../bin/src/ui_albumcoverexport.h:205
 msgid "Export downloaded covers"
-msgstr "Exportar carátulas descargadas"
+msgstr "Exportar cubiertas descargadas"
 
 #: ../bin/src/ui_albumcoverexport.h:206
 msgid "Export embedded covers"
-msgstr "Exportar carátulas incrustadas"
+msgstr "Exportar cubiertas incrustadas"
 
 #: ui/albumcovermanager.cpp:805 ui/albumcovermanager.cpp:829
 msgid "Export finished"
@@ -2291,7 +2296,7 @@ msgstr "Exportación finalizada"
 #: ui/albumcovermanager.cpp:814
 #, qt-format
 msgid "Exported %1 covers out of %2 (%3 skipped)"
-msgstr "Se exportaron %1 carátulas de %2 (se omitieron %3)"
+msgstr "Se exportaron %1 cubiertas de %2 (se omitieron %3)"
 
 #: ../bin/src/ui_mainwindow.h:790
 msgid "F9"
@@ -2383,7 +2388,7 @@ msgstr "Pistas favoritas"
 
 #: ../bin/src/ui_albumcovermanager.h:230
 msgid "Fetch Missing Covers"
-msgstr "Descargar las carátulas faltantes"
+msgstr "Descargar cubiertas faltantes"
 
 #: ../bin/src/ui_albumcovermanager.h:221
 msgid "Fetch automatically"
@@ -2399,7 +2404,7 @@ msgstr "Obteniendo fonoteca de Subsonic"
 
 #: ui/coverfromurldialog.cpp:71 ui/coverfromurldialog.cpp:83
 msgid "Fetching cover error"
-msgstr "Error al obtener la carátula"
+msgstr "Error al obtener la cubierta"
 
 #: internet/subsonic/subsonicdynamicplaylist.cpp:98
 #: internet/subsonic/subsonicdynamicplaylist.cpp:164
@@ -2474,7 +2479,7 @@ msgstr "Primer nivel"
 
 #: widgets/nowplayingwidget.cpp:106
 msgid "Fit cover to width"
-msgstr "Ajustar carátula a anchura"
+msgstr "Ajustar cubierta a anchura"
 
 #: ../bin/src/ui_songinfosettingspage.h:155
 msgid "Font size"
@@ -2565,7 +2570,7 @@ msgstr "Agudos completos"
 msgid "Ge&nre"
 msgstr "Gé&nero"
 
-#: ui/settingsdialog.cpp:136
+#: ui/settingsdialog.cpp:137
 msgid "General"
 msgstr "General"
 
@@ -2591,8 +2596,16 @@ msgstr "Obtener un URL para compartir esta lista de reproducción"
 
 #: internet/somafm/somafmservice.cpp:120
 #: internet/intergalacticfm/intergalacticfmservice.cpp:120
+#: internet/radiobrowser/radiobrowserservice.cpp:207
+#: internet/radiobrowser/radiobrowserservice.cpp:243
+#: internet/radiobrowser/radiobrowserservice.cpp:261
+#: internet/radiobrowser/radiobrowserservice.cpp:391
 msgid "Getting channels"
 msgstr "Obteniendo canales"
+
+#: internet/radiobrowser/radiobrowserservice.cpp:416
+msgid "Getting station"
+msgstr "Obteniendo emisora"
 
 #: internet/digitally/digitallyimportedservicebase.cpp:101
 msgid "Getting streams"
@@ -2622,7 +2635,7 @@ msgstr "Google Drive"
 #: ../bin/src/ui_coversearchstatisticsdialog.h:75
 #, qt-format
 msgid "Got %1 covers out of %2 (%3 failed)"
-msgstr "Se obtuvieron %1 carátulas de %2 (%3 fallaron)"
+msgstr "Se obtuvieron %1 cubiertas de %2 (%3 fallaron)"
 
 #: ../bin/src/ui_behavioursettingspage.h:411
 msgid "Grey out non existent songs in my playlists"
@@ -2807,7 +2820,7 @@ msgstr "Buzón de entrada"
 
 #: ../bin/src/ui_notificationssettingspage.h:449
 msgid "Include album art in the notification"
-msgstr "Incluir carátula en la notificación"
+msgstr "Incluir cubierta en la notificación"
 
 #: ../bin/src/ui_querysearchpage.h:119
 msgid "Include all songs"
@@ -2866,7 +2879,7 @@ msgstr "Comprobación de integridad"
 msgid "Internet"
 msgstr "Internet"
 
-#: ui/settingsdialog.cpp:159
+#: ui/settingsdialog.cpp:160
 msgid "Internet providers"
 msgstr "Proveedores en Internet"
 
@@ -2990,15 +3003,15 @@ msgstr "Salón grande"
 
 #: widgets/nowplayingwidget.cpp:98
 msgid "Large album cover"
-msgstr "Carátula de álbum grande"
+msgstr "Cubierta de álbum grande"
 
 #: widgets/nowplayingwidget.cpp:100
 msgid "Large album cover (details below)"
-msgstr "Carátula de álbum grande (detalles abajo)"
+msgstr "Cubierta de álbum grande (detalles abajo)"
 
 #: widgets/nowplayingwidget.cpp:101
 msgid "Large album cover (no details)"
-msgstr "Carátula de álbum grande (sin detalles)"
+msgstr "Cubierta de álbum grande (sin detalles)"
 
 #: widgets/fancytabwidget.cpp:430
 msgid "Large sidebar"
@@ -3081,19 +3094,19 @@ msgstr "Cargar"
 
 #: ../bin/src/ui_coverfromurldialog.h:101
 msgid "Load cover from URL"
-msgstr "Cargar carátula desde un URL"
+msgstr "Cargar cubierta desde URL"
 
 #: ui/albumcoverchoicecontroller.cpp:71
 msgid "Load cover from URL..."
-msgstr "Cargar carátula desde un URL…"
+msgstr "Cargar cubierta desde URL…"
 
 #: ui/albumcoverchoicecontroller.cpp:111
 msgid "Load cover from disk"
-msgstr "Cargar carátula desde el disco"
+msgstr "Cargar cubierta desde disco"
 
 #: ui/albumcoverchoicecontroller.cpp:66
 msgid "Load cover from disk..."
-msgstr "Cargar carátula desde disco…"
+msgstr "Cargar cubierta desde disco…"
 
 #: playlist/playlistcontainer.cpp:314
 msgid "Load playlist"
@@ -3123,7 +3136,7 @@ msgstr "Cargando las canciones"
 #: internet/somafm/somafmurlhandler.cpp:53
 #: internet/intergalacticfm/intergalacticfmurlhandler.cpp:56
 msgid "Loading stream"
-msgstr "Cargando el flujo"
+msgstr "Cargando transmisión"
 
 #: playlist/songloaderinserter.cpp:137 ui/edittagdialog.cpp:252
 msgid "Loading tracks"
@@ -3406,7 +3419,7 @@ msgstr "Fonoteca"
 
 #: ../bin/src/ui_networkremotesettingspage.h:380
 msgid "Music extensions remotely visible"
-msgstr ""
+msgstr "Extensiones de música visibles remotamente"
 
 #: core/globalshortcuts.cpp:65 wiimotedev/wiimotesettingspage.cpp:114
 #: ../bin/src/ui_mainwindow.h:768
@@ -3509,7 +3522,7 @@ msgstr "Sin imagen de fondo"
 
 #: ui/albumcovermanager.cpp:806
 msgid "No covers to export."
-msgstr "No hay ninguna carátula que exportar."
+msgstr "No hay ninguna cubierta que exportar."
 
 #: ../bin/src/ui_transcoderoptionsaac.h:145
 msgid "No long blocks"
@@ -3677,6 +3690,7 @@ msgstr "Opacidad"
 #: internet/magnatune/magnatuneservice.cpp:283
 #: internet/somafm/somafmservice.cpp:102
 #: internet/intergalacticfm/intergalacticfmservice.cpp:102
+#: internet/radiobrowser/radiobrowserservice.cpp:289
 #, qt-format
 msgid "Open %1 in browser"
 msgstr "Abrir %1 en el navegador"
@@ -4008,7 +4022,7 @@ msgstr "Preferencias…"
 
 #: ../bin/src/ui_librarysettingspage.h:214
 msgid "Preferred album art filenames (comma separated)"
-msgstr "Nombres de archivo preferidos para las carátulas (separados por comas)"
+msgstr "Nombres de archivo preferidos para las cubiertas (separados por comas)"
 
 #: ../bin/src/ui_magnatunesettingspage.h:166
 msgid "Preferred audio format"
@@ -4141,6 +4155,10 @@ msgstr "Valorar rápidamente la pista en reproducción"
 msgid "Radio (equal loudness for all tracks)"
 msgstr "Radio (volumen igual para todas las pistas)"
 
+#: ../bin/src/ui_radiobrowsersettingspage.h:80
+msgid "RadioBrowser"
+msgstr "RadioBrowser"
+
 #: core/backgroundstreams.cpp:47
 msgid "Rain"
 msgstr "Lluvia"
@@ -4211,12 +4229,13 @@ msgstr "Actualizar el catálogo"
 
 #: internet/somafm/somafmservice.cpp:111
 #: internet/intergalacticfm/intergalacticfmservice.cpp:111
+#: internet/radiobrowser/radiobrowserservice.cpp:293
 msgid "Refresh channels"
 msgstr "Actualizar los canales"
 
 #: internet/icecast/icecastservice.cpp:308
 msgid "Refresh station list"
-msgstr "Actualizar lista de estaciones"
+msgstr "Actualizar lista de emisoras"
 
 #: internet/digitally/digitallyimportedservicebase.cpp:179
 msgid "Refresh streams"
@@ -4356,6 +4375,10 @@ msgid ""
 "Restart the track, or play the previous track if within 8 seconds of start."
 msgstr "Reiniciar la pista, o cambiar a la anterior si no han transcurrido 8 segundos desde el inicio."
 
+#: ../bin/src/ui_radiobrowsersettingspage.h:83
+msgid "Restore Default Server"
+msgstr "Restaurar servidor predeterminado"
+
 #: ../bin/src/ui_organisedialog.h:257
 msgid "Restrict to ASCII characters"
 msgstr "Restringir a caracteres ASCII"
@@ -4390,7 +4413,7 @@ msgstr "Rock"
 
 #: ../bin/src/ui_networkremotesettingspage.h:374
 msgid "Root folder that will be browsable from the network remote"
-msgstr ""
+msgstr "Carpeta raíz que podrá explorarse desde la red remota"
 
 #: ../bin/src/ui_console.h:130
 msgid "Run"
@@ -4434,11 +4457,11 @@ msgstr "Guardar archivos .mood en la fonoteca"
 
 #: ui/albumcoverchoicecontroller.cpp:137
 msgid "Save album cover"
-msgstr "Guardar la carátula del álbum"
+msgstr "Guardar cubierta del álbum"
 
 #: ui/albumcoverchoicecontroller.cpp:69
 msgid "Save cover to disk..."
-msgstr "Guardar la carátula en el disco…"
+msgstr "Guardar cubierta en disco…"
 
 #: ../bin/src/ui_libraryfilterwidget.h:101
 msgid "Save current grouping"
@@ -4476,7 +4499,7 @@ msgstr "Guardar estadísticas en las etiquetas de los archivos si es posible"
 
 #: ../bin/src/ui_addstreamdialog.h:126
 msgid "Save this stream in the Internet tab"
-msgstr "Guardar este flujo en la pestaña de Internet"
+msgstr "Guardar esta transmisión en la pestaña Internet"
 
 #: ../bin/src/ui_savedgroupingmanager.h:101
 msgid "Saved Grouping Manager"
@@ -4527,7 +4550,7 @@ msgstr "Buscar"
 
 #: ../bin/src/ui_icecastfilterwidget.h:77
 msgid "Search Icecast stations"
-msgstr "Buscar estaciones Icecast"
+msgstr "Buscar emisoras Icecast"
 
 #: internet/jamendo/jamendoservice.cpp:437
 msgid "Search Jamendo"
@@ -4551,7 +4574,7 @@ msgstr "Buscar álbum"
 
 #: ui/albumcoverchoicecontroller.cpp:74
 msgid "Search for album covers..."
-msgstr "Buscar la carátula del álbum…"
+msgstr "Buscar cubierta del álbum…"
 
 #: ../bin/src/ui_globalsearchview.h:207
 #: ../bin/src/ui_playlistlistcontainer.h:127
@@ -4672,10 +4695,12 @@ msgid "Server"
 msgstr "Servidor"
 
 #: ../bin/src/ui_subsonicsettingspage.h:132
+#: ../bin/src/ui_radiobrowsersettingspage.h:82
 msgid "Server URL"
 msgstr "URL del servidor"
 
 #: ../bin/src/ui_subsonicsettingspage.h:131
+#: ../bin/src/ui_radiobrowsersettingspage.h:81
 msgid "Server details"
 msgstr "Detalles del servidor"
 
@@ -4777,7 +4802,7 @@ msgstr "Mostrar todas las canciones"
 
 #: ../bin/src/ui_librarysettingspage.h:221
 msgid "Show cover art in library"
-msgstr "Mostrar las carátulas en la fonoteca"
+msgstr "Mostrar cubiertas en la fonoteca"
 
 #: ../bin/src/ui_librarysettingspage.h:222
 msgid "Show dividers"
@@ -4898,7 +4923,7 @@ msgstr "N.º de omisiones"
 
 #: ../bin/src/ui_librarysettingspage.h:213
 msgid "Skip files with these extensions (comma separated, case insensitive)"
-msgstr ""
+msgstr "Omitir archivos con estas extensiones (separadas por comas, no distingue mayús./minús.)"
 
 #: core/commandlineoptions.cpp:166
 msgid "Skip forwards in playlist"
@@ -4918,7 +4943,7 @@ msgstr "Omitir pista"
 
 #: widgets/nowplayingwidget.cpp:97
 msgid "Small album cover"
-msgstr "Carátula de álbum pequeña"
+msgstr "Cubierta de álbum pequeña"
 
 #: widgets/fancytabwidget.cpp:431
 msgid "Small sidebar"
@@ -4966,7 +4991,7 @@ msgstr "Ordenar por género (popularidad)"
 
 #: ../bin/src/ui_icecastfilterwidget.h:76
 msgid "Sort by station name"
-msgstr "Ordenar por nombre de estación"
+msgstr "Ordenar por nombre de emisora"
 
 #: ../bin/src/ui_querysortpage.h:140
 msgid "Sort songs by"
@@ -5208,7 +5233,7 @@ msgstr "No se pudo iniciar la orden «%1»."
 
 #: ../bin/src/ui_appearancesettingspage.h:308
 msgid "The album cover of the currently playing song"
-msgstr "La carátula del álbum de la canción en reproducción"
+msgstr "La cubierta del álbum de la canción en reproducción"
 
 #: internet/magnatune/magnatunedownloaddialog.cpp:98
 #, qt-format
@@ -5352,7 +5377,7 @@ msgstr "Puede modificar esta opción en la pestaña «Comportamiento» en Prefer
 
 #: internet/lastfm/lastfmservice.cpp:289
 msgid "This stream is for paid subscribers only"
-msgstr "Este flujo es solo para los suscriptores de pago"
+msgstr "Esta transmisión es solo para los suscriptores de pago"
 
 #: devices/devicemanager.cpp:548
 #, qt-format
@@ -5522,7 +5547,7 @@ msgstr "Error desconocido"
 
 #: ui/albumcoverchoicecontroller.cpp:76
 msgid "Unset cover"
-msgstr "Eliminar la carátula"
+msgstr "Eliminar cubierta"
 
 #: ui/mainwindow.cpp:1899
 msgid "Unskip selected tracks"
@@ -5659,7 +5684,7 @@ msgstr "Usar normalización de volumen"
 msgid "Used"
 msgstr "En uso:"
 
-#: ui/settingsdialog.cpp:150
+#: ui/settingsdialog.cpp:151
 msgid "User interface"
 msgstr "Interfaz de usuario"
 
@@ -5753,7 +5778,7 @@ msgid ""
 "Warning: This compression level is outside of the streamable subset. This "
 "means that a decoder may not be able to start playing it mid-stream. It may "
 "also affect the performance of hardware decoders."
-msgstr ""
+msgstr "Atención: este nivel de compresión se encuentra fuera del conjunto transmitible. Esto quiere decir que algunos descodificadores podrían no ser capaces de reproducirlos luego de haber comenzado. Además, se podría afectar el rendimiento de los descodificadores por hárdwer."
 
 #: core/song.cpp:447 transcoder/transcoder.cpp:298
 msgid "Wav"
@@ -5783,7 +5808,7 @@ msgstr "Al calcular recuentos de reproducción, usar"
 msgid ""
 "When looking for album art Clementine will first look for picture files that contain one of these words.\n"
 "If there are no matches then it will use the largest image in the directory."
-msgstr "En la búsqueda de carátulas, Clementine buscará primero imágenes que contienen una de estas palabras.\nSi no hay resultados, entonces se usará la imagen más grande en la carpeta."
+msgstr "En la búsqueda de cubiertas, Clementine buscará primero imágenes que contengan una de estas palabras.\nSi no hay resultados, se utilizará la imagen más grande en la carpeta."
 
 #: ../bin/src/ui_behavioursettingspage.h:452
 msgid "When saving a playlist, file paths should be"
@@ -5857,7 +5882,7 @@ msgstr "Audio de Windows Media"
 
 #: ../bin/src/ui_albumcovermanager.h:227
 msgid "Without cover:"
-msgstr "Sin carátula:"
+msgstr "Sin cubierta:"
 
 #: library/libraryview.cpp:586
 msgid ""
@@ -5875,7 +5900,7 @@ msgstr "Escribir las estadísticas de todas las canciones en los archivos"
 
 #: ../bin/src/ui_behavioursettingspage.h:457
 msgid "Write metadata"
-msgstr "Guardar los metadatos"
+msgstr "Guardar metadatos"
 
 #: internet/subsonic/subsonicsettingspage.cpp:105
 msgid "Wrong username or password."
@@ -5954,7 +5979,7 @@ msgstr "Puede escuchar canciones de Magnatune gratis sin la necesidad de una cue
 
 #: ../bin/src/ui_backgroundstreamssettingspage.h:56
 msgid "You can listen to background streams at the same time as other music."
-msgstr "Puede escuchar flujos de fondo al mismo tiempo que a otra música."
+msgstr "Puede escuchar transmisiones en segundo plano al mismo tiempo que otra música."
 
 #: ../bin/src/ui_wiimotesettingspage.h:174
 msgid ""
@@ -6011,7 +6036,7 @@ msgstr "La fonoteca está vacía."
 #: globalsearch/savedradiosearchprovider.cpp:27
 #: internet/internetradio/savedradio.cpp:54
 msgid "Your radio streams"
-msgstr "Sus flujos de radio"
+msgstr "Sus transmisiones radiales"
 
 #: songinfo/lastfmtrackinfoprovider.cpp:89
 #, qt-format

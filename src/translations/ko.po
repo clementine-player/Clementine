@@ -25,8 +25,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2021-03-14 22:18+0000\n"
-"Last-Translator: JungHee Lee <daemul72@gmail.com>\n"
+"PO-Revision-Date: 2021-03-16 11:15+0000\n"
+"Last-Translator: John Maguire <john.maguire@gmail.com>\n"
 "Language-Team: Korean (http://www.transifex.com/davidsansome/clementine/language/ko/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -666,6 +666,10 @@ msgstr "재생목록에 추가"
 #: ../bin/src/ui_behavioursettingspage.h:443
 msgid "Add to the queue"
 msgstr "대기열에 추가"
+
+#: internet/radiobrowser/radiobrowserservice.cpp:307
+msgid "Add to your radio streams"
+msgstr ""
 
 #: ../bin/src/ui_wiimoteshortcutgrabber.h:119
 msgid "Add wiimotedev action"
@@ -1396,6 +1400,7 @@ msgstr "팟케스트 설정..."
 
 #: internet/core/cloudfileservice.cpp:106
 #: internet/digitally/digitallyimportedservicebase.cpp:183
+#: internet/radiobrowser/radiobrowserservice.cpp:296
 #: internet/googledrive/googledriveservice.cpp:229
 #: internet/skydrive/skydriveservice.cpp:222
 #: ../bin/src/ui_globalsearchsettingspage.h:146
@@ -2547,7 +2552,7 @@ msgstr "고음 강화"
 msgid "Ge&nre"
 msgstr "장르(&N)"
 
-#: ui/settingsdialog.cpp:136
+#: ui/settingsdialog.cpp:137
 msgid "General"
 msgstr "일반 "
 
@@ -2573,8 +2578,16 @@ msgstr "이 재생목록을 공유하기 위한 URL 얻기"
 
 #: internet/somafm/somafmservice.cpp:120
 #: internet/intergalacticfm/intergalacticfmservice.cpp:120
+#: internet/radiobrowser/radiobrowserservice.cpp:207
+#: internet/radiobrowser/radiobrowserservice.cpp:243
+#: internet/radiobrowser/radiobrowserservice.cpp:261
+#: internet/radiobrowser/radiobrowserservice.cpp:391
 msgid "Getting channels"
 msgstr "채널 "
+
+#: internet/radiobrowser/radiobrowserservice.cpp:416
+msgid "Getting station"
+msgstr ""
 
 #: internet/digitally/digitallyimportedservicebase.cpp:101
 msgid "Getting streams"
@@ -2848,7 +2861,7 @@ msgstr "무결성 검사"
 msgid "Internet"
 msgstr "인터넷"
 
-#: ui/settingsdialog.cpp:159
+#: ui/settingsdialog.cpp:160
 msgid "Internet providers"
 msgstr "인터넷 "
 
@@ -3659,6 +3672,7 @@ msgstr "투명도"
 #: internet/magnatune/magnatuneservice.cpp:283
 #: internet/somafm/somafmservice.cpp:102
 #: internet/intergalacticfm/intergalacticfmservice.cpp:102
+#: internet/radiobrowser/radiobrowserservice.cpp:289
 #, qt-format
 msgid "Open %1 in browser"
 msgstr "브라우저에서 %1 열기"
@@ -4123,6 +4137,10 @@ msgstr "재생중인 곡을 빠르게 평가"
 msgid "Radio (equal loudness for all tracks)"
 msgstr "라디오 (모든 곡을 같은 볼륨으로)"
 
+#: ../bin/src/ui_radiobrowsersettingspage.h:80
+msgid "RadioBrowser"
+msgstr ""
+
 #: core/backgroundstreams.cpp:47
 msgid "Rain"
 msgstr "빗소리"
@@ -4193,6 +4211,7 @@ msgstr "목록 새로고침"
 
 #: internet/somafm/somafmservice.cpp:111
 #: internet/intergalacticfm/intergalacticfmservice.cpp:111
+#: internet/radiobrowser/radiobrowserservice.cpp:293
 msgid "Refresh channels"
 msgstr "채널 새로고침"
 
@@ -4337,6 +4356,10 @@ msgstr "음악을 다시 시작한 다음, 다시 누르면 이전으로 이동�
 msgid ""
 "Restart the track, or play the previous track if within 8 seconds of start."
 msgstr "곡을 다시 시작하거나 시작 후 8초 이내에 이전 곡을 재생합니다."
+
+#: ../bin/src/ui_radiobrowsersettingspage.h:83
+msgid "Restore Default Server"
+msgstr ""
 
 #: ../bin/src/ui_organisedialog.h:257
 msgid "Restrict to ASCII characters"
@@ -4654,10 +4677,12 @@ msgid "Server"
 msgstr "서버"
 
 #: ../bin/src/ui_subsonicsettingspage.h:132
+#: ../bin/src/ui_radiobrowsersettingspage.h:82
 msgid "Server URL"
 msgstr "서버 URL"
 
 #: ../bin/src/ui_subsonicsettingspage.h:131
+#: ../bin/src/ui_radiobrowsersettingspage.h:81
 msgid "Server details"
 msgstr "서버 자세히"
 
@@ -5641,7 +5666,7 @@ msgstr "음량 표준화 사용"
 msgid "Used"
 msgstr "사용 됨"
 
-#: ui/settingsdialog.cpp:150
+#: ui/settingsdialog.cpp:151
 msgid "User interface"
 msgstr "사용자 인터페이스"
 

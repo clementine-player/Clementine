@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
-"PO-Revision-Date: 2021-03-14 14:12+0000\n"
+"PO-Revision-Date: 2021-03-16 11:15+0000\n"
 "Last-Translator: John Maguire <john.maguire@gmail.com>\n"
 "Language-Team: Kazakh (http://www.transifex.com/davidsansome/clementine/language/kk/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -647,6 +647,10 @@ msgstr ""
 #: ../bin/src/ui_behavioursettingspage.h:431
 #: ../bin/src/ui_behavioursettingspage.h:443
 msgid "Add to the queue"
+msgstr ""
+
+#: internet/radiobrowser/radiobrowserservice.cpp:307
+msgid "Add to your radio streams"
 msgstr ""
 
 #: ../bin/src/ui_wiimoteshortcutgrabber.h:119
@@ -1378,6 +1382,7 @@ msgstr ""
 
 #: internet/core/cloudfileservice.cpp:106
 #: internet/digitally/digitallyimportedservicebase.cpp:183
+#: internet/radiobrowser/radiobrowserservice.cpp:296
 #: internet/googledrive/googledriveservice.cpp:229
 #: internet/skydrive/skydriveservice.cpp:222
 #: ../bin/src/ui_globalsearchsettingspage.h:146
@@ -2529,7 +2534,7 @@ msgstr ""
 msgid "Ge&nre"
 msgstr ""
 
-#: ui/settingsdialog.cpp:136
+#: ui/settingsdialog.cpp:137
 msgid "General"
 msgstr "Жалпы"
 
@@ -2555,7 +2560,15 @@ msgstr ""
 
 #: internet/somafm/somafmservice.cpp:120
 #: internet/intergalacticfm/intergalacticfmservice.cpp:120
+#: internet/radiobrowser/radiobrowserservice.cpp:207
+#: internet/radiobrowser/radiobrowserservice.cpp:243
+#: internet/radiobrowser/radiobrowserservice.cpp:261
+#: internet/radiobrowser/radiobrowserservice.cpp:391
 msgid "Getting channels"
+msgstr ""
+
+#: internet/radiobrowser/radiobrowserservice.cpp:416
+msgid "Getting station"
 msgstr ""
 
 #: internet/digitally/digitallyimportedservicebase.cpp:101
@@ -2830,7 +2843,7 @@ msgstr ""
 msgid "Internet"
 msgstr "Интернет"
 
-#: ui/settingsdialog.cpp:159
+#: ui/settingsdialog.cpp:160
 msgid "Internet providers"
 msgstr ""
 
@@ -3641,6 +3654,7 @@ msgstr "Мөлдірсіздік"
 #: internet/magnatune/magnatuneservice.cpp:283
 #: internet/somafm/somafmservice.cpp:102
 #: internet/intergalacticfm/intergalacticfmservice.cpp:102
+#: internet/radiobrowser/radiobrowserservice.cpp:289
 #, qt-format
 msgid "Open %1 in browser"
 msgstr ""
@@ -4105,6 +4119,10 @@ msgstr ""
 msgid "Radio (equal loudness for all tracks)"
 msgstr ""
 
+#: ../bin/src/ui_radiobrowsersettingspage.h:80
+msgid "RadioBrowser"
+msgstr ""
+
 #: core/backgroundstreams.cpp:47
 msgid "Rain"
 msgstr ""
@@ -4175,6 +4193,7 @@ msgstr ""
 
 #: internet/somafm/somafmservice.cpp:111
 #: internet/intergalacticfm/intergalacticfmservice.cpp:111
+#: internet/radiobrowser/radiobrowserservice.cpp:293
 msgid "Refresh channels"
 msgstr ""
 
@@ -4318,6 +4337,10 @@ msgstr ""
 #: core/commandlineoptions.cpp:176
 msgid ""
 "Restart the track, or play the previous track if within 8 seconds of start."
+msgstr ""
+
+#: ../bin/src/ui_radiobrowsersettingspage.h:83
+msgid "Restore Default Server"
 msgstr ""
 
 #: ../bin/src/ui_organisedialog.h:257
@@ -4636,10 +4659,12 @@ msgid "Server"
 msgstr ""
 
 #: ../bin/src/ui_subsonicsettingspage.h:132
+#: ../bin/src/ui_radiobrowsersettingspage.h:82
 msgid "Server URL"
 msgstr ""
 
 #: ../bin/src/ui_subsonicsettingspage.h:131
+#: ../bin/src/ui_radiobrowsersettingspage.h:81
 msgid "Server details"
 msgstr ""
 
@@ -5623,7 +5648,7 @@ msgstr ""
 msgid "Used"
 msgstr "Қолдануда"
 
-#: ui/settingsdialog.cpp:150
+#: ui/settingsdialog.cpp:151
 msgid "User interface"
 msgstr "Пайдаланушы интерфейсі"
 
