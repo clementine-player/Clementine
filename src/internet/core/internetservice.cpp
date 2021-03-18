@@ -88,6 +88,15 @@ void InternetService::ShowUrlBox(const QString& title, const QString& url) {
   }
 }
 
+void InternetService::ShowContextMenu(const QPoint& global_pos) {
+  if (!context_menu_) {
+    context_menu_.reset(new QMenu);
+    PopulateContextMenu();
+  }
+  UpdateContextMenu();
+  context_menu_->popup(global_pos);
+}
+
 QList<QAction*> InternetService::GetPlaylistActions() {
   return QList<QAction*>() << GetAppendToPlaylistAction()
                            << GetReplacePlaylistAction()
