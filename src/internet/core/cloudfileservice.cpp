@@ -107,15 +107,6 @@ void CloudFileService::PopulateContextMenu() {
                            SLOT(ShowSettingsDialog()));
 }
 
-void CloudFileService::ShowContextMenu(const QPoint& global_pos) {
-  if (!context_menu_) {
-    context_menu_.reset(new QMenu);
-    PopulateContextMenu();
-  }
-  UpdateContextMenu();
-  context_menu_->popup(global_pos);
-}
-
 void CloudFileService::ShowCoverManager() {
   if (!cover_manager_) {
     cover_manager_.reset(new AlbumCoverManager(app_, library_backend_.get()));

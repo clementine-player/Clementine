@@ -45,7 +45,6 @@ class CloudFileService : public InternetService {
   // InternetService
   virtual QStandardItem* CreateRootItem();
   virtual void LazyPopulate(QStandardItem* item);
-  virtual void ShowContextMenu(const QPoint& point);
 
   virtual bool has_credentials() const = 0;
   bool is_indexing() const { return indexing_task_id_ != -1; }
@@ -68,9 +67,7 @@ class CloudFileService : public InternetService {
   void AbortReadTagsReplies();
 
   // Called once when context menu is created
-  virtual void PopulateContextMenu();
-  // Called every time context menu is shown
-  virtual void UpdateContextMenu(){};
+  virtual void PopulateContextMenu() override;
 
  protected slots:
   void ShowCoverManager();

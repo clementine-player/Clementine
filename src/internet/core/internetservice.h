@@ -64,7 +64,8 @@ class InternetService : public QObject {
   virtual void LazyPopulate(QStandardItem* parent) = 0;
   virtual bool has_initial_load_settings() const { return false; }
   virtual void InitialLoadSettings() {}
-  virtual void ShowContextMenu(const QPoint& global_pos) {}
+  virtual void ShowContextMenu(const QPoint& global_pos);
+
   // Create a generator for smart playlists
   virtual smart_playlists::GeneratorPtr CreateGenerator(QStandardItem* item) {
     return smart_playlists::GeneratorPtr();
@@ -103,6 +104,11 @@ class InternetService : public QObject {
   void OpenInNewPlaylist();
 
  protected:
+  // Called once when context menu is created
+  virtual void PopulateContextMenu(){};
+  // Called every time context menu is shown
+  virtual void UpdateContextMenu(){};
+
   // Returns all the playlist insertion related QActions (see below).
   QList<QAction*> GetPlaylistActions();
 
